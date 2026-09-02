@@ -1,7 +1,7 @@
 {
   "$schema": "https://openapi.vercel.sh/vercel.json",
   "git": {
-    "deploymentEnabled": false
+    "deploymentEnabled": true
   },
   "functions": {
     "api/sales-by-district.js": {
@@ -14,242 +14,1339 @@
     }
   },
   "redirects": [
-    {"source":"/index-old.html","destination":"/","permanent":true},
-    {"source":"/index_1.html","destination":"/","permanent":true},
-    {"source":"/1092chews.html","destination":"/property/","permanent":true},
-    {"source":"/1092chews-DNU.html","destination":"/property/","permanent":true},
-    {"source":"/1092-chews-DNU.html","destination":"/property/","permanent":true},
-    {"source":"/btc-old.html","destination":"/btc.html","permanent":true},
-    {"source":"/property/dashboard.html","destination":"/property/dashboard","permanent":true},
-    {"source":"/property/home.html","destination":"/property/home","permanent":true},
-    {"source":"/property/account.html","destination":"/property/account","permanent":true},
-    {"source":"/property/pro.html","destination":"/property/pro","permanent":true},
-    {"source":"/property/marker.html","destination":"/property/marker","permanent":true},
-    {"source":"/property/pulse.html","destination":"/property/pulse","permanent":true},
-    {"source":"/property/privacy.html","destination":"/property/privacy","permanent":true},
-    {"source":"/property/terms.html","destination":"/property/terms","permanent":true},
-    {"source":"/property/refunds.html","destination":"/property/refunds","permanent":true},
-    {"source":"/property/data-methodology.html","destination":"/property/data-methodology","permanent":true},
-    {"source":"/property/data-use.html","destination":"/property/data-use","permanent":true},
-    {"source":"/property/agent-desk.html","destination":"/property/agent-desk","permanent":true},
-    {"source":"/property/data-center.html","destination":"/property/data-center","permanent":true},
-    {"source":"/property/data-workbench.html","destination":"/property/data-workbench","permanent":true},
-    {"source":"/property/developer-data.html","destination":"/property/developer-data","permanent":true},
-    {"source":"/property/diagnostics.html","destination":"/property/diagnostics","permanent":true},
-    {"source":"/property/farm-builder.html","destination":"/property/farm-builder","permanent":true},
-    {"source":"/property/farm-map.html","destination":"/property/farm-map","permanent":true},
-    {"source":"/property/market-list.html","destination":"/property/market-list","permanent":true},
-    {"source":"/property/marketing-plan.html","destination":"/property/marketing-plan","permanent":true},
-    {"source":"/property/report-builder.html","destination":"/property/report-builder","permanent":true},
-    {"source":"/property/report-studio.html","destination":"/property/report-studio","permanent":true},
-    {"source":"/property/scan.html","destination":"/property/scan","permanent":true},
-    {"source":"/property/tools.html","destination":"/property/tools","permanent":true},
-    {"source":"/property/updates.html","destination":"/property/updates","permanent":true},
-    {"source":"/property/verification-diagnostics.html","destination":"/property/verification-diagnostics","permanent":true},
-    {"source":"/property/workbench.html","destination":"/property/workbench","permanent":true},
-    {"source":"/property/exempt-pilot.html","destination":"/property/exempt-pilot","permanent":true},
-    {"source":"/property/fairness.html","destination":"/property/fairness","permanent":true},
-    {"source":"/property/public-report.html","destination":"/property/public-report","permanent":true},
-    {"source":"/property/report.html","destination":"/property/report","permanent":true},
-    {"source":"/property/town-compare.html","destination":"/property/town-compare","permanent":true},
-    {"source":"/property/dashboards.html","destination":"/property/dashboards","permanent":true},
-    {"source":"/property/property-analysis.html","destination":"/property/property-analysis","permanent":true},
-    {"source":"/property/offline.html","destination":"/property/offline","permanent":true},
-    {"source":"/property/insights.html","destination":"/property/insights/","permanent":true},
-    {"source":"/property/dashboard/index.html","destination":"/property/dashboard","permanent":true},
-    {"source":"/property/home/index.html","destination":"/property/home","permanent":true},
-    {"source":"/property/account/index.html","destination":"/property/account","permanent":true},
-    {"source":"/property/pro/index.html","destination":"/property/pro","permanent":true},
-    {"source":"/property/marker/index.html","destination":"/property/marker","permanent":true},
-    {"source":"/property/pulse/index.html","destination":"/property/pulse","permanent":true},
-    {"source":"/property/privacy/index.html","destination":"/property/privacy","permanent":true},
-    {"source":"/property/terms/index.html","destination":"/property/terms","permanent":true},
-    {"source":"/property/refunds/index.html","destination":"/property/refunds","permanent":true},
-    {"source":"/property/data-methodology/index.html","destination":"/property/data-methodology","permanent":true},
-    {"source":"/property/data-use/index.html","destination":"/property/data-use","permanent":true},
-    {"source":"/property/agent-desk/index.html","destination":"/property/agent-desk","permanent":true},
-    {"source":"/property/data-center/index.html","destination":"/property/data-center","permanent":true},
-    {"source":"/property/data-workbench/index.html","destination":"/property/data-workbench","permanent":true},
-    {"source":"/property/developer-data/index.html","destination":"/property/developer-data","permanent":true},
-    {"source":"/property/diagnostics/index.html","destination":"/property/diagnostics","permanent":true},
-    {"source":"/property/farm-builder/index.html","destination":"/property/farm-builder","permanent":true},
-    {"source":"/property/farm-map/index.html","destination":"/property/farm-map","permanent":true},
-    {"source":"/property/market-list/index.html","destination":"/property/market-list","permanent":true},
-    {"source":"/property/marketing-plan/index.html","destination":"/property/marketing-plan","permanent":true},
-    {"source":"/property/report-builder/index.html","destination":"/property/report-builder","permanent":true},
-    {"source":"/property/report-studio/index.html","destination":"/property/report-studio","permanent":true},
-    {"source":"/property/scan/index.html","destination":"/property/scan","permanent":true},
-    {"source":"/property/tools/index.html","destination":"/property/tools","permanent":true},
-    {"source":"/property/updates/index.html","destination":"/property/updates","permanent":true},
-    {"source":"/property/verification-diagnostics/index.html","destination":"/property/verification-diagnostics","permanent":true},
-    {"source":"/property/workbench/index.html","destination":"/property/workbench","permanent":true},
-    {"source":"/property/exempt-pilot/index.html","destination":"/property/exempt-pilot","permanent":true},
-    {"source":"/property/fairness/index.html","destination":"/property/fairness","permanent":true},
-    {"source":"/property/public-report/index.html","destination":"/property/public-report","permanent":true},
-    {"source":"/property/report/index.html","destination":"/property/report","permanent":true},
-    {"source":"/property/town-compare/index.html","destination":"/property/town-compare","permanent":true},
-    {"source":"/property/dashboards/index.html","destination":"/property/dashboards","permanent":true},
-    {"source":"/property/property-analysis/index.html","destination":"/property/property-analysis","permanent":true},
-    {"source":"/property/offline/index.html","destination":"/property/offline","permanent":true},
-    {"source":"/property/marketing-studio.html","destination":"/property/marketing-studio","permanent":true},
-    {"source":"/property/marketing-studio-admin.html","destination":"/property/marketing-studio/admin","permanent":true},
-    {"source":"/property/marketing-studio-audience.html","destination":"/property/marketing-studio/audience","permanent":true},
-    {"source":"/property/marketing-studio-audience-review.html","destination":"/property/marketing-studio/audience-review","permanent":true},
-    {"source":"/property/marketing-studio-design.html","destination":"/property/marketing-studio/design","permanent":true},
-    {"source":"/property/marketing-studio-customize.html","destination":"/property/marketing-studio/customize","permanent":true},
-    {"source":"/property/marketing-studio-recipients.html","destination":"/property/marketing-studio/recipients","permanent":true},
-    {"source":"/property/marketing-studio-review.html","destination":"/property/marketing-studio/review","permanent":true},
-    {"source":"/property/marketing-studio/index.html","destination":"/property/marketing-studio","permanent":true},
-    {"source":"/property/marketing-studio/admin/index.html","destination":"/property/marketing-studio/admin","permanent":true},
-    {"source":"/property/marketing-studio/audience/index.html","destination":"/property/marketing-studio/audience","permanent":true},
-    {"source":"/property/marketing-studio/audience-review/index.html","destination":"/property/marketing-studio/audience-review","permanent":true},
-    {"source":"/property/marketing-studio/design/index.html","destination":"/property/marketing-studio/design","permanent":true},
-    {"source":"/property/marketing-studio/customize/index.html","destination":"/property/marketing-studio/customize","permanent":true},
-    {"source":"/property/marketing-studio/recipients/index.html","destination":"/property/marketing-studio/recipients","permanent":true},
-    {"source":"/property/marketing-studio/review/index.html","destination":"/property/marketing-studio/review","permanent":true},
-    {"source":"/property/nav.html","destination":"/property/partials/nav.html","permanent":true},
-    {"source":"/property/footer.html","destination":"/property/partials/footer.html","permanent":true},
-    {"source":"/property/compare/attom.html","destination":"/property/compare/attom","permanent":true},
-    {"source":"/property/compare/batchdata.html","destination":"/property/compare/batchdata","permanent":true},
-    {"source":"/property/compare/propertyradar.html","destination":"/property/compare/propertyradar","permanent":true},
-    {"source":"/property/compare/propertyshark.html","destination":"/property/compare/propertyshark","permanent":true},
-    {"source":"/property/compare/propstream.html","destination":"/property/compare/propstream","permanent":true},
-    {"source":"/property/compare/regrid.html","destination":"/property/compare/regrid","permanent":true},
-    {"source":"/property/compare/attom/index.html","destination":"/property/compare/attom","permanent":true},
-    {"source":"/property/compare/batchdata/index.html","destination":"/property/compare/batchdata","permanent":true},
-    {"source":"/property/compare/propertyradar/index.html","destination":"/property/compare/propertyradar","permanent":true},
-    {"source":"/property/compare/propertyshark/index.html","destination":"/property/compare/propertyshark","permanent":true},
-    {"source":"/property/compare/propstream/index.html","destination":"/property/compare/propstream","permanent":true},
-    {"source":"/property/compare/regrid/index.html","destination":"/property/compare/regrid","permanent":true},
-    {"source":"/property/towns/:path*","destination":"/towns/:path*","permanent":true},
-    {"source":"/insights.html","destination":"/property/insights/","permanent":true},
-    {"source":"/insights/:slug.html","destination":"/property/insights/:slug.html","permanent":true}
+    {
+      "source": "/index-old.html",
+      "destination": "/",
+      "permanent": true
+    },
+    {
+      "source": "/index_1.html",
+      "destination": "/",
+      "permanent": true
+    },
+    {
+      "source": "/1092chews.html",
+      "destination": "/property/",
+      "permanent": true
+    },
+    {
+      "source": "/1092chews-DNU.html",
+      "destination": "/property/",
+      "permanent": true
+    },
+    {
+      "source": "/1092-chews-DNU.html",
+      "destination": "/property/",
+      "permanent": true
+    },
+    {
+      "source": "/btc-old.html",
+      "destination": "/btc.html",
+      "permanent": true
+    },
+    {
+      "source": "/property/dashboard.html",
+      "destination": "/property/dashboard",
+      "permanent": true
+    },
+    {
+      "source": "/property/home.html",
+      "destination": "/property/home",
+      "permanent": true
+    },
+    {
+      "source": "/property/account.html",
+      "destination": "/property/account",
+      "permanent": true
+    },
+    {
+      "source": "/property/pro.html",
+      "destination": "/property/pro",
+      "permanent": true
+    },
+    {
+      "source": "/property/marker.html",
+      "destination": "/property/marker",
+      "permanent": true
+    },
+    {
+      "source": "/property/pulse.html",
+      "destination": "/property/pulse",
+      "permanent": true
+    },
+    {
+      "source": "/property/privacy.html",
+      "destination": "/property/privacy",
+      "permanent": true
+    },
+    {
+      "source": "/property/terms.html",
+      "destination": "/property/terms",
+      "permanent": true
+    },
+    {
+      "source": "/property/refunds.html",
+      "destination": "/property/refunds",
+      "permanent": true
+    },
+    {
+      "source": "/property/data-methodology.html",
+      "destination": "/property/data-methodology",
+      "permanent": true
+    },
+    {
+      "source": "/property/data-use.html",
+      "destination": "/property/data-use",
+      "permanent": true
+    },
+    {
+      "source": "/property/agent-desk.html",
+      "destination": "/property/agent-desk",
+      "permanent": true
+    },
+    {
+      "source": "/property/data-center.html",
+      "destination": "/property/data-center",
+      "permanent": true
+    },
+    {
+      "source": "/property/data-workbench.html",
+      "destination": "/property/data-workbench",
+      "permanent": true
+    },
+    {
+      "source": "/property/developer-data.html",
+      "destination": "/property/developer-data",
+      "permanent": true
+    },
+    {
+      "source": "/property/diagnostics.html",
+      "destination": "/property/diagnostics",
+      "permanent": true
+    },
+    {
+      "source": "/property/farm-builder.html",
+      "destination": "/property/farm-builder",
+      "permanent": true
+    },
+    {
+      "source": "/property/farm-map.html",
+      "destination": "/property/farm-map",
+      "permanent": true
+    },
+    {
+      "source": "/property/market-list.html",
+      "destination": "/property/market-list",
+      "permanent": true
+    },
+    {
+      "source": "/property/marketing-plan.html",
+      "destination": "/property/marketing-plan",
+      "permanent": true
+    },
+    {
+      "source": "/property/report-builder.html",
+      "destination": "/property/report-builder",
+      "permanent": true
+    },
+    {
+      "source": "/property/report-studio.html",
+      "destination": "/property/report-studio",
+      "permanent": true
+    },
+    {
+      "source": "/property/scan.html",
+      "destination": "/property/scan",
+      "permanent": true
+    },
+    {
+      "source": "/property/tools.html",
+      "destination": "/property/tools",
+      "permanent": true
+    },
+    {
+      "source": "/property/updates.html",
+      "destination": "/property/updates",
+      "permanent": true
+    },
+    {
+      "source": "/property/verification-diagnostics.html",
+      "destination": "/property/verification-diagnostics",
+      "permanent": true
+    },
+    {
+      "source": "/property/workbench.html",
+      "destination": "/property/workbench",
+      "permanent": true
+    },
+    {
+      "source": "/property/exempt-pilot.html",
+      "destination": "/property/exempt-pilot",
+      "permanent": true
+    },
+    {
+      "source": "/property/fairness.html",
+      "destination": "/property/fairness",
+      "permanent": true
+    },
+    {
+      "source": "/property/public-report.html",
+      "destination": "/property/public-report",
+      "permanent": true
+    },
+    {
+      "source": "/property/report.html",
+      "destination": "/property/report",
+      "permanent": true
+    },
+    {
+      "source": "/property/town-compare.html",
+      "destination": "/property/town-compare",
+      "permanent": true
+    },
+    {
+      "source": "/property/dashboards.html",
+      "destination": "/property/dashboards",
+      "permanent": true
+    },
+    {
+      "source": "/property/property-analysis.html",
+      "destination": "/property/property-analysis",
+      "permanent": true
+    },
+    {
+      "source": "/property/offline.html",
+      "destination": "/property/offline",
+      "permanent": true
+    },
+    {
+      "source": "/property/insights.html",
+      "destination": "/property/insights/",
+      "permanent": true
+    },
+    {
+      "source": "/property/dashboard/index.html",
+      "destination": "/property/dashboard",
+      "permanent": true
+    },
+    {
+      "source": "/property/home/index.html",
+      "destination": "/property/home",
+      "permanent": true
+    },
+    {
+      "source": "/property/account/index.html",
+      "destination": "/property/account",
+      "permanent": true
+    },
+    {
+      "source": "/property/pro/index.html",
+      "destination": "/property/pro",
+      "permanent": true
+    },
+    {
+      "source": "/property/marker/index.html",
+      "destination": "/property/marker",
+      "permanent": true
+    },
+    {
+      "source": "/property/pulse/index.html",
+      "destination": "/property/pulse",
+      "permanent": true
+    },
+    {
+      "source": "/property/privacy/index.html",
+      "destination": "/property/privacy",
+      "permanent": true
+    },
+    {
+      "source": "/property/terms/index.html",
+      "destination": "/property/terms",
+      "permanent": true
+    },
+    {
+      "source": "/property/refunds/index.html",
+      "destination": "/property/refunds",
+      "permanent": true
+    },
+    {
+      "source": "/property/data-methodology/index.html",
+      "destination": "/property/data-methodology",
+      "permanent": true
+    },
+    {
+      "source": "/property/data-use/index.html",
+      "destination": "/property/data-use",
+      "permanent": true
+    },
+    {
+      "source": "/property/agent-desk/index.html",
+      "destination": "/property/agent-desk",
+      "permanent": true
+    },
+    {
+      "source": "/property/data-center/index.html",
+      "destination": "/property/data-center",
+      "permanent": true
+    },
+    {
+      "source": "/property/data-workbench/index.html",
+      "destination": "/property/data-workbench",
+      "permanent": true
+    },
+    {
+      "source": "/property/developer-data/index.html",
+      "destination": "/property/developer-data",
+      "permanent": true
+    },
+    {
+      "source": "/property/diagnostics/index.html",
+      "destination": "/property/diagnostics",
+      "permanent": true
+    },
+    {
+      "source": "/property/farm-builder/index.html",
+      "destination": "/property/farm-builder",
+      "permanent": true
+    },
+    {
+      "source": "/property/farm-map/index.html",
+      "destination": "/property/farm-map",
+      "permanent": true
+    },
+    {
+      "source": "/property/market-list/index.html",
+      "destination": "/property/market-list",
+      "permanent": true
+    },
+    {
+      "source": "/property/marketing-plan/index.html",
+      "destination": "/property/marketing-plan",
+      "permanent": true
+    },
+    {
+      "source": "/property/report-builder/index.html",
+      "destination": "/property/report-builder",
+      "permanent": true
+    },
+    {
+      "source": "/property/report-studio/index.html",
+      "destination": "/property/report-studio",
+      "permanent": true
+    },
+    {
+      "source": "/property/scan/index.html",
+      "destination": "/property/scan",
+      "permanent": true
+    },
+    {
+      "source": "/property/tools/index.html",
+      "destination": "/property/tools",
+      "permanent": true
+    },
+    {
+      "source": "/property/updates/index.html",
+      "destination": "/property/updates",
+      "permanent": true
+    },
+    {
+      "source": "/property/verification-diagnostics/index.html",
+      "destination": "/property/verification-diagnostics",
+      "permanent": true
+    },
+    {
+      "source": "/property/workbench/index.html",
+      "destination": "/property/workbench",
+      "permanent": true
+    },
+    {
+      "source": "/property/exempt-pilot/index.html",
+      "destination": "/property/exempt-pilot",
+      "permanent": true
+    },
+    {
+      "source": "/property/fairness/index.html",
+      "destination": "/property/fairness",
+      "permanent": true
+    },
+    {
+      "source": "/property/public-report/index.html",
+      "destination": "/property/public-report",
+      "permanent": true
+    },
+    {
+      "source": "/property/report/index.html",
+      "destination": "/property/report",
+      "permanent": true
+    },
+    {
+      "source": "/property/town-compare/index.html",
+      "destination": "/property/town-compare",
+      "permanent": true
+    },
+    {
+      "source": "/property/dashboards/index.html",
+      "destination": "/property/dashboards",
+      "permanent": true
+    },
+    {
+      "source": "/property/property-analysis/index.html",
+      "destination": "/property/property-analysis",
+      "permanent": true
+    },
+    {
+      "source": "/property/offline/index.html",
+      "destination": "/property/offline",
+      "permanent": true
+    },
+    {
+      "source": "/property/marketing-studio.html",
+      "destination": "/property/marketing-studio",
+      "permanent": true
+    },
+    {
+      "source": "/property/marketing-studio-admin.html",
+      "destination": "/property/marketing-studio/admin",
+      "permanent": true
+    },
+    {
+      "source": "/property/marketing-studio-audience.html",
+      "destination": "/property/marketing-studio/audience",
+      "permanent": true
+    },
+    {
+      "source": "/property/marketing-studio-audience-review.html",
+      "destination": "/property/marketing-studio/audience-review",
+      "permanent": true
+    },
+    {
+      "source": "/property/marketing-studio-design.html",
+      "destination": "/property/marketing-studio/design",
+      "permanent": true
+    },
+    {
+      "source": "/property/marketing-studio-customize.html",
+      "destination": "/property/marketing-studio/customize",
+      "permanent": true
+    },
+    {
+      "source": "/property/marketing-studio-recipients.html",
+      "destination": "/property/marketing-studio/recipients",
+      "permanent": true
+    },
+    {
+      "source": "/property/marketing-studio-review.html",
+      "destination": "/property/marketing-studio/review",
+      "permanent": true
+    },
+    {
+      "source": "/property/marketing-studio/index.html",
+      "destination": "/property/marketing-studio",
+      "permanent": true
+    },
+    {
+      "source": "/property/marketing-studio/admin/index.html",
+      "destination": "/property/marketing-studio/admin",
+      "permanent": true
+    },
+    {
+      "source": "/property/marketing-studio/audience/index.html",
+      "destination": "/property/marketing-studio/audience",
+      "permanent": true
+    },
+    {
+      "source": "/property/marketing-studio/audience-review/index.html",
+      "destination": "/property/marketing-studio/audience-review",
+      "permanent": true
+    },
+    {
+      "source": "/property/marketing-studio/design/index.html",
+      "destination": "/property/marketing-studio/design",
+      "permanent": true
+    },
+    {
+      "source": "/property/marketing-studio/customize/index.html",
+      "destination": "/property/marketing-studio/customize",
+      "permanent": true
+    },
+    {
+      "source": "/property/marketing-studio/recipients/index.html",
+      "destination": "/property/marketing-studio/recipients",
+      "permanent": true
+    },
+    {
+      "source": "/property/marketing-studio/review/index.html",
+      "destination": "/property/marketing-studio/review",
+      "permanent": true
+    },
+    {
+      "source": "/property/nav.html",
+      "destination": "/property/partials/nav.html",
+      "permanent": true
+    },
+    {
+      "source": "/property/footer.html",
+      "destination": "/property/partials/footer.html",
+      "permanent": true
+    },
+    {
+      "source": "/property/compare/attom.html",
+      "destination": "/property/compare/attom",
+      "permanent": true
+    },
+    {
+      "source": "/property/compare/batchdata.html",
+      "destination": "/property/compare/batchdata",
+      "permanent": true
+    },
+    {
+      "source": "/property/compare/propertyradar.html",
+      "destination": "/property/compare/propertyradar",
+      "permanent": true
+    },
+    {
+      "source": "/property/compare/propertyshark.html",
+      "destination": "/property/compare/propertyshark",
+      "permanent": true
+    },
+    {
+      "source": "/property/compare/propstream.html",
+      "destination": "/property/compare/propstream",
+      "permanent": true
+    },
+    {
+      "source": "/property/compare/regrid.html",
+      "destination": "/property/compare/regrid",
+      "permanent": true
+    },
+    {
+      "source": "/property/compare/attom/index.html",
+      "destination": "/property/compare/attom",
+      "permanent": true
+    },
+    {
+      "source": "/property/compare/batchdata/index.html",
+      "destination": "/property/compare/batchdata",
+      "permanent": true
+    },
+    {
+      "source": "/property/compare/propertyradar/index.html",
+      "destination": "/property/compare/propertyradar",
+      "permanent": true
+    },
+    {
+      "source": "/property/compare/propertyshark/index.html",
+      "destination": "/property/compare/propertyshark",
+      "permanent": true
+    },
+    {
+      "source": "/property/compare/propstream/index.html",
+      "destination": "/property/compare/propstream",
+      "permanent": true
+    },
+    {
+      "source": "/property/compare/regrid/index.html",
+      "destination": "/property/compare/regrid",
+      "permanent": true
+    },
+    {
+      "source": "/property/towns/:path*",
+      "destination": "/towns/:path*",
+      "permanent": true
+    },
+    {
+      "source": "/insights.html",
+      "destination": "/property/insights/",
+      "permanent": true
+    },
+    {
+      "source": "/insights/:slug.html",
+      "destination": "/property/insights/:slug.html",
+      "permanent": true
+    }
   ],
   "rewrites": [
-    {"source":"/property/","destination":"/api/watchdog-index-entry","has":[{"type":"host","value":"www.watchdogindex.com"}]},
-    {"source":"/property/dashboard","destination":"/property/dashboard/index.html"},
-    {"source":"/property/home","destination":"/property/home/index.html"},
-    {"source":"/property/account","destination":"/property/account/index.html"},
-    {"source":"/property/pro","destination":"/property/pro/index.html"},
-    {"source":"/property/marker","destination":"/property/marker/index.html"},
-    {"source":"/property/pulse","destination":"/property/pulse/index.html"},
-    {"source":"/property/privacy","destination":"/property/privacy/index.html"},
-    {"source":"/property/terms","destination":"/property/terms/index.html"},
-    {"source":"/property/refunds","destination":"/property/refunds/index.html"},
-    {"source":"/property/data-methodology","destination":"/property/data-methodology/index.html"},
-    {"source":"/property/data-use","destination":"/property/data-use/index.html"},
-    {"source":"/property/agent-desk","destination":"/property/agent-desk/index.html"},
-    {"source":"/property/data-center","destination":"/property/data-center/index.html"},
-    {"source":"/property/data-workbench","destination":"/property/data-workbench/index.html"},
-    {"source":"/property/developer-data","destination":"/property/developer-data/index.html"},
-    {"source":"/property/diagnostics","destination":"/property/diagnostics/index.html"},
-    {"source":"/property/farm-builder","destination":"/property/farm-builder/index.html"},
-    {"source":"/property/farm-map","destination":"/property/farm-map/index.html"},
-    {"source":"/property/market-list","destination":"/property/market-list/index.html"},
-    {"source":"/property/marketing-plan","destination":"/property/marketing-plan/index.html"},
-    {"source":"/property/report-builder","destination":"/property/report-builder/index.html"},
-    {"source":"/property/report-studio","destination":"/property/report-studio/index.html"},
-    {"source":"/property/scan","destination":"/property/scan/index.html"},
-    {"source":"/property/tools","destination":"/property/tools/index.html"},
-    {"source":"/property/updates","destination":"/property/updates/index.html"},
-    {"source":"/property/verification-diagnostics","destination":"/property/verification-diagnostics/index.html"},
-    {"source":"/property/workbench","destination":"/property/workbench/index.html"},
-    {"source":"/property/exempt-pilot","destination":"/property/exempt-pilot/index.html"},
-    {"source":"/property/fairness","destination":"/property/fairness/index.html"},
-    {"source":"/property/public-report","destination":"/property/public-report/index.html"},
-    {"source":"/property/report","destination":"/property/report/index.html"},
-    {"source":"/property/town-compare","destination":"/property/town-compare/index.html"},
-    {"source":"/property/dashboards","destination":"/property/dashboards/index.html"},
-    {"source":"/property/property-analysis","destination":"/property/property-analysis/index.html"},
-    {"source":"/property/offline","destination":"/property/offline/index.html"},
-    {"source":"/property/marketing-studio","destination":"/property/marketing-studio/index.html"},
-    {"source":"/property/marketing-studio/admin","destination":"/property/marketing-studio/admin/index.html"},
-    {"source":"/property/marketing-studio/audience","destination":"/property/marketing-studio/audience/index.html"},
-    {"source":"/property/marketing-studio/audience-review","destination":"/property/marketing-studio/audience-review/index.html"},
-    {"source":"/property/marketing-studio/design","destination":"/property/marketing-studio/design/index.html"},
-    {"source":"/property/marketing-studio/customize","destination":"/property/marketing-studio/customize/index.html"},
-    {"source":"/property/marketing-studio/recipients","destination":"/property/marketing-studio/recipients/index.html"},
-    {"source":"/property/marketing-studio/review","destination":"/property/marketing-studio/review/index.html"},
-    {"source":"/property/compare/attom","destination":"/property/compare/attom/index.html"},
-    {"source":"/property/compare/batchdata","destination":"/property/compare/batchdata/index.html"},
-    {"source":"/property/compare/propertyradar","destination":"/property/compare/propertyradar/index.html"},
-    {"source":"/property/compare/propertyshark","destination":"/property/compare/propertyshark/index.html"},
-    {"source":"/property/compare/propstream","destination":"/property/compare/propstream/index.html"},
-    {"source":"/property/compare/regrid","destination":"/property/compare/regrid/index.html"},
-    {"source":"/property/insights/:slug.html","destination":"/api/insight?slug=:slug"},
-    {"source":"/property/plays/agents/:slug/","destination":"/api/play?profession=agents&slug=:slug"},
-    {"source":"/property/plays/mortgage/:slug/","destination":"/api/play?profession=mortgage&slug=:slug"},
-    {"source":"/property/plays/agents/","destination":"/api/play?profession=agents"},
-    {"source":"/property/plays/mortgage/","destination":"/api/play?profession=mortgage"},
-    {"source":"/property/plays/attorneys/","destination":"/api/play?profession=attorneys"},
-    {"source":"/property/plays/investors/","destination":"/api/play?profession=investors"},
-    {"source":"/property/glossary/:slug/","destination":"/api/glossary?slug=:slug"}
+    {
+      "source": "/property/",
+      "destination": "/api/watchdog-index-entry",
+      "has": [
+        {
+          "type": "host",
+          "value": "www.watchdogindex.com"
+        }
+      ]
+    },
+    {
+      "source": "/property/dashboard",
+      "destination": "/property/dashboard/index.html"
+    },
+    {
+      "source": "/property/home",
+      "destination": "/property/home/index.html"
+    },
+    {
+      "source": "/property/account",
+      "destination": "/property/account/index.html"
+    },
+    {
+      "source": "/property/pro",
+      "destination": "/property/pro/index.html"
+    },
+    {
+      "source": "/property/marker",
+      "destination": "/property/marker/index.html"
+    },
+    {
+      "source": "/property/pulse",
+      "destination": "/property/pulse/index.html"
+    },
+    {
+      "source": "/property/privacy",
+      "destination": "/property/privacy/index.html"
+    },
+    {
+      "source": "/property/terms",
+      "destination": "/property/terms/index.html"
+    },
+    {
+      "source": "/property/refunds",
+      "destination": "/property/refunds/index.html"
+    },
+    {
+      "source": "/property/data-methodology",
+      "destination": "/property/data-methodology/index.html"
+    },
+    {
+      "source": "/property/data-use",
+      "destination": "/property/data-use/index.html"
+    },
+    {
+      "source": "/property/agent-desk",
+      "destination": "/property/agent-desk/index.html"
+    },
+    {
+      "source": "/property/data-center",
+      "destination": "/property/data-center/index.html"
+    },
+    {
+      "source": "/property/data-workbench",
+      "destination": "/property/data-workbench/index.html"
+    },
+    {
+      "source": "/property/developer-data",
+      "destination": "/property/developer-data/index.html"
+    },
+    {
+      "source": "/property/diagnostics",
+      "destination": "/property/diagnostics/index.html"
+    },
+    {
+      "source": "/property/farm-builder",
+      "destination": "/property/farm-builder/index.html"
+    },
+    {
+      "source": "/property/farm-map",
+      "destination": "/property/farm-map/index.html"
+    },
+    {
+      "source": "/property/market-list",
+      "destination": "/property/market-list/index.html"
+    },
+    {
+      "source": "/property/marketing-plan",
+      "destination": "/property/marketing-plan/index.html"
+    },
+    {
+      "source": "/property/report-builder",
+      "destination": "/property/report-builder/index.html"
+    },
+    {
+      "source": "/property/report-studio",
+      "destination": "/property/report-studio/index.html"
+    },
+    {
+      "source": "/property/scan",
+      "destination": "/property/scan/index.html"
+    },
+    {
+      "source": "/property/tools",
+      "destination": "/property/tools/index.html"
+    },
+    {
+      "source": "/property/updates",
+      "destination": "/property/updates/index.html"
+    },
+    {
+      "source": "/property/verification-diagnostics",
+      "destination": "/property/verification-diagnostics/index.html"
+    },
+    {
+      "source": "/property/workbench",
+      "destination": "/property/workbench/index.html"
+    },
+    {
+      "source": "/property/exempt-pilot",
+      "destination": "/property/exempt-pilot/index.html"
+    },
+    {
+      "source": "/property/fairness",
+      "destination": "/property/fairness/index.html"
+    },
+    {
+      "source": "/property/public-report",
+      "destination": "/property/public-report/index.html"
+    },
+    {
+      "source": "/property/report",
+      "destination": "/property/report/index.html"
+    },
+    {
+      "source": "/property/town-compare",
+      "destination": "/property/town-compare/index.html"
+    },
+    {
+      "source": "/property/dashboards",
+      "destination": "/property/dashboards/index.html"
+    },
+    {
+      "source": "/property/property-analysis",
+      "destination": "/property/property-analysis/index.html"
+    },
+    {
+      "source": "/property/offline",
+      "destination": "/property/offline/index.html"
+    },
+    {
+      "source": "/property/marketing-studio",
+      "destination": "/property/marketing-studio/index.html"
+    },
+    {
+      "source": "/property/marketing-studio/admin",
+      "destination": "/property/marketing-studio/admin/index.html"
+    },
+    {
+      "source": "/property/marketing-studio/audience",
+      "destination": "/property/marketing-studio/audience/index.html"
+    },
+    {
+      "source": "/property/marketing-studio/audience-review",
+      "destination": "/property/marketing-studio/audience-review/index.html"
+    },
+    {
+      "source": "/property/marketing-studio/design",
+      "destination": "/property/marketing-studio/design/index.html"
+    },
+    {
+      "source": "/property/marketing-studio/customize",
+      "destination": "/property/marketing-studio/customize/index.html"
+    },
+    {
+      "source": "/property/marketing-studio/recipients",
+      "destination": "/property/marketing-studio/recipients/index.html"
+    },
+    {
+      "source": "/property/marketing-studio/review",
+      "destination": "/property/marketing-studio/review/index.html"
+    },
+    {
+      "source": "/property/compare/attom",
+      "destination": "/property/compare/attom/index.html"
+    },
+    {
+      "source": "/property/compare/batchdata",
+      "destination": "/property/compare/batchdata/index.html"
+    },
+    {
+      "source": "/property/compare/propertyradar",
+      "destination": "/property/compare/propertyradar/index.html"
+    },
+    {
+      "source": "/property/compare/propertyshark",
+      "destination": "/property/compare/propertyshark/index.html"
+    },
+    {
+      "source": "/property/compare/propstream",
+      "destination": "/property/compare/propstream/index.html"
+    },
+    {
+      "source": "/property/compare/regrid",
+      "destination": "/property/compare/regrid/index.html"
+    },
+    {
+      "source": "/property/insights/:slug.html",
+      "destination": "/api/insight?slug=:slug"
+    },
+    {
+      "source": "/property/plays/agents/:slug/",
+      "destination": "/api/play?profession=agents&slug=:slug"
+    },
+    {
+      "source": "/property/plays/mortgage/:slug/",
+      "destination": "/api/play?profession=mortgage&slug=:slug"
+    },
+    {
+      "source": "/property/plays/agents/",
+      "destination": "/api/play?profession=agents"
+    },
+    {
+      "source": "/property/plays/mortgage/",
+      "destination": "/api/play?profession=mortgage"
+    },
+    {
+      "source": "/property/plays/attorneys/",
+      "destination": "/api/play?profession=attorneys"
+    },
+    {
+      "source": "/property/plays/investors/",
+      "destination": "/api/play?profession=investors"
+    },
+    {
+      "source": "/property/glossary/:slug/",
+      "destination": "/api/glossary?slug=:slug"
+    }
   ],
   "headers": [
-    {"source":"/(.*)","headers":[
-      {"key":"X-Content-Type-Options","value":"nosniff"},
-      {"key":"X-Frame-Options","value":"SAMEORIGIN"},
-      {"key":"Referrer-Policy","value":"strict-origin-when-cross-origin"},
-      {"key":"Permissions-Policy","value":"geolocation=(self), camera=(), microphone=(self)"},
-      {"key":"Strict-Transport-Security","value":"max-age=31536000; includeSubDomains; preload"},
-      {"key":"Content-Security-Policy-Report-Only","value":"default-src 'self'; base-uri 'self'; object-src 'none'; frame-ancestors 'self'; form-action 'self' https://checkout.paddle.com; script-src 'self' 'unsafe-inline' https://cdn.jsdelivr.net https://cdnjs.cloudflare.com https://cdn.paddle.com https://cdn.emailjs.com https://www.googletagmanager.com https://www.google-analytics.com https://www.clarity.ms https://maps.googleapis.com https://maps.gstatic.com; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com https://cdnjs.cloudflare.com; font-src 'self' data: https://fonts.gstatic.com https://cdnjs.cloudflare.com; img-src 'self' data: blob: https:; connect-src 'self' https://*.supabase.co https://*.paddle.com https://api.emailjs.com https://www.google-analytics.com https://*.googleapis.com https://*.clarity.ms https://www.clarity.ms https://geo.nj.gov https://services2.arcgis.com https://services.arcgisonline.com https://server.arcgisonline.com https://*.bing.com https://c.bing.com; frame-src 'self' https://*.paddle.com https://www.google.com https://www.youtube.com; media-src 'self' blob: data:; worker-src 'self' blob:; manifest-src 'self'"}
-    ]},
-    {"source":"/property/(.*).json","headers":[{"key":"Cache-Control","value":"public, max-age=3600, s-maxage=86400, stale-while-revalidate=604800"}]},
-    {"source":"/property/css/(.*).css","headers":[{"key":"Cache-Control","value":"public, max-age=86400, s-maxage=604800, stale-while-revalidate=2592000"}]},
-    {"source":"/property/dashboard","headers":[{"key":"Cache-Control","value":"public, max-age=0, s-maxage=300, stale-while-revalidate=3600"}]},
-    {"source":"/property/home","headers":[{"key":"Cache-Control","value":"public, max-age=0, s-maxage=300, stale-while-revalidate=3600"}]},
-    {"source":"/property/account","headers":[{"key":"Cache-Control","value":"public, max-age=0, s-maxage=300, stale-while-revalidate=3600"}]},
-    {"source":"/property/pro","headers":[{"key":"Cache-Control","value":"public, max-age=0, s-maxage=300, stale-while-revalidate=3600"}]},
-    {"source":"/property/marker","headers":[{"key":"Cache-Control","value":"public, max-age=0, s-maxage=300, stale-while-revalidate=3600"}]},
-    {"source":"/property/pulse","headers":[{"key":"Cache-Control","value":"public, max-age=0, s-maxage=300, stale-while-revalidate=3600"}]},
-    {"source":"/property/privacy","headers":[{"key":"Cache-Control","value":"public, max-age=0, s-maxage=300, stale-while-revalidate=3600"}]},
-    {"source":"/property/terms","headers":[{"key":"Cache-Control","value":"public, max-age=0, s-maxage=300, stale-while-revalidate=3600"}]},
-    {"source":"/property/refunds","headers":[{"key":"Cache-Control","value":"public, max-age=0, s-maxage=300, stale-while-revalidate=3600"}]},
-    {"source":"/property/data-methodology","headers":[{"key":"Cache-Control","value":"public, max-age=0, s-maxage=300, stale-while-revalidate=3600"}]},
-    {"source":"/property/data-use","headers":[{"key":"Cache-Control","value":"public, max-age=0, s-maxage=300, stale-while-revalidate=3600"}]},
-    {"source":"/property/agent-desk","headers":[{"key":"Cache-Control","value":"public, max-age=0, s-maxage=300, stale-while-revalidate=3600"}]},
-    {"source":"/property/data-center","headers":[{"key":"Cache-Control","value":"public, max-age=0, s-maxage=300, stale-while-revalidate=3600"}]},
-    {"source":"/property/data-workbench","headers":[{"key":"Cache-Control","value":"public, max-age=0, s-maxage=300, stale-while-revalidate=3600"}]},
-    {"source":"/property/developer-data","headers":[{"key":"Cache-Control","value":"public, max-age=0, s-maxage=300, stale-while-revalidate=3600"}]},
-    {"source":"/property/diagnostics","headers":[{"key":"Cache-Control","value":"public, max-age=0, s-maxage=300, stale-while-revalidate=3600"}]},
-    {"source":"/property/farm-builder","headers":[{"key":"Cache-Control","value":"public, max-age=0, s-maxage=300, stale-while-revalidate=3600"}]},
-    {"source":"/property/farm-map","headers":[{"key":"Cache-Control","value":"public, max-age=0, s-maxage=300, stale-while-revalidate=3600"}]},
-    {"source":"/property/market-list","headers":[{"key":"Cache-Control","value":"public, max-age=0, s-maxage=300, stale-while-revalidate=3600"}]},
-    {"source":"/property/marketing-plan","headers":[{"key":"Cache-Control","value":"public, max-age=0, s-maxage=300, stale-while-revalidate=3600"}]},
-    {"source":"/property/report-builder","headers":[{"key":"Cache-Control","value":"public, max-age=0, s-maxage=300, stale-while-revalidate=3600"}]},
-    {"source":"/property/report-studio","headers":[{"key":"Cache-Control","value":"public, max-age=0, s-maxage=300, stale-while-revalidate=3600"}]},
-    {"source":"/property/scan","headers":[{"key":"Cache-Control","value":"public, max-age=0, s-maxage=300, stale-while-revalidate=3600"}]},
-    {"source":"/property/tools","headers":[{"key":"Cache-Control","value":"public, max-age=0, s-maxage=300, stale-while-revalidate=3600"}]},
-    {"source":"/property/updates","headers":[{"key":"Cache-Control","value":"public, max-age=0, s-maxage=300, stale-while-revalidate=3600"}]},
-    {"source":"/property/verification-diagnostics","headers":[{"key":"Cache-Control","value":"public, max-age=0, s-maxage=300, stale-while-revalidate=3600"}]},
-    {"source":"/property/workbench","headers":[{"key":"Cache-Control","value":"public, max-age=0, s-maxage=300, stale-while-revalidate=3600"}]},
-    {"source":"/property/exempt-pilot","headers":[{"key":"Cache-Control","value":"public, max-age=0, s-maxage=300, stale-while-revalidate=3600"}]},
-    {"source":"/property/fairness","headers":[{"key":"Cache-Control","value":"public, max-age=0, s-maxage=300, stale-while-revalidate=3600"}]},
-    {"source":"/property/public-report","headers":[{"key":"Cache-Control","value":"public, max-age=0, s-maxage=300, stale-while-revalidate=3600"}]},
-    {"source":"/property/report","headers":[{"key":"Cache-Control","value":"public, max-age=0, s-maxage=300, stale-while-revalidate=3600"}]},
-    {"source":"/property/town-compare","headers":[{"key":"Cache-Control","value":"public, max-age=0, s-maxage=300, stale-while-revalidate=3600"}]},
-    {"source":"/property/dashboards","headers":[{"key":"Cache-Control","value":"public, max-age=0, s-maxage=300, stale-while-revalidate=3600"}]},
-    {"source":"/property/property-analysis","headers":[{"key":"Cache-Control","value":"public, max-age=0, s-maxage=300, stale-while-revalidate=3600"}]},
-    {"source":"/property/offline","headers":[{"key":"Cache-Control","value":"public, max-age=0, s-maxage=300, stale-while-revalidate=3600"}]},
-    {"source":"/property/marketing-studio.html","headers":[{"key":"Cache-Control","value":"private, max-age=0, no-cache, no-store, must-revalidate"}]},
-    {"source":"/property/marketing-studio","headers":[{"key":"Cache-Control","value":"private, max-age=0, no-cache, no-store, must-revalidate"}]},
-    {"source":"/property/marketing-studio/(.*)","headers":[{"key":"Cache-Control","value":"private, max-age=0, no-cache, no-store, must-revalidate"}]},
-    {"source":"/property/compare/attom","headers":[{"key":"Cache-Control","value":"public, max-age=0, s-maxage=300, stale-while-revalidate=3600"}]},
-    {"source":"/property/compare/batchdata","headers":[{"key":"Cache-Control","value":"public, max-age=0, s-maxage=300, stale-while-revalidate=3600"}]},
-    {"source":"/property/compare/propertyradar","headers":[{"key":"Cache-Control","value":"public, max-age=0, s-maxage=300, stale-while-revalidate=3600"}]},
-    {"source":"/property/compare/propertyshark","headers":[{"key":"Cache-Control","value":"public, max-age=0, s-maxage=300, stale-while-revalidate=3600"}]},
-    {"source":"/property/compare/propstream","headers":[{"key":"Cache-Control","value":"public, max-age=0, s-maxage=300, stale-while-revalidate=3600"}]},
-    {"source":"/property/compare/regrid","headers":[{"key":"Cache-Control","value":"public, max-age=0, s-maxage=300, stale-while-revalidate=3600"}]},
-    {"source":"/property/(.*).html","headers":[{"key":"Cache-Control","value":"public, max-age=0, s-maxage=300, stale-while-revalidate=3600"}]},
-    {"source":"/property/marketing-studio-(.*).html","headers":[{"key":"Cache-Control","value":"private, max-age=0, no-cache, no-store, must-revalidate"}]},
-    {"source":"/property/css/marketing-studio-(.*).css","headers":[{"key":"Cache-Control","value":"public, max-age=0, must-revalidate"}]},
-    {"source":"/property/js/marketing-studio-(.*).js","headers":[{"key":"Cache-Control","value":"public, max-age=0, must-revalidate"}]},
-    {"source":"/btc.html","headers":[{"key":"X-Robots-Tag","value":"noindex, nofollow, noarchive"}]},
-    {"source":"/leadiq.html","headers":[{"key":"X-Robots-Tag","value":"noindex, nofollow, noarchive"}]},
-    {"source":"/qscore.html","headers":[{"key":"X-Robots-Tag","value":"noindex, nofollow, noarchive"}]},
-    {"source":"/property/insights/admin.html","headers":[{"key":"X-Robots-Tag","value":"noindex, nofollow, noarchive"}]},
-    {"source":"/property/data-workbench.html","headers":[{"key":"X-Robots-Tag","value":"noindex, nofollow, noarchive"}]},
-    {"source":"/property/data-workbench","headers":[{"key":"X-Robots-Tag","value":"noindex, nofollow, noarchive"}]},
-    {"source":"/property/growth/(.*)","headers":[{"key":"X-Robots-Tag","value":"noindex, nofollow, noarchive"}]}
+    {
+      "source": "/(.*)",
+      "headers": [
+        {
+          "key": "X-Content-Type-Options",
+          "value": "nosniff"
+        },
+        {
+          "key": "X-Frame-Options",
+          "value": "SAMEORIGIN"
+        },
+        {
+          "key": "Referrer-Policy",
+          "value": "strict-origin-when-cross-origin"
+        },
+        {
+          "key": "Permissions-Policy",
+          "value": "geolocation=(self), camera=(), microphone=(self)"
+        },
+        {
+          "key": "Strict-Transport-Security",
+          "value": "max-age=31536000; includeSubDomains; preload"
+        },
+        {
+          "key": "Content-Security-Policy-Report-Only",
+          "value": "default-src 'self'; base-uri 'self'; object-src 'none'; frame-ancestors 'self'; form-action 'self' https://checkout.paddle.com; script-src 'self' 'unsafe-inline' https://cdn.jsdelivr.net https://cdnjs.cloudflare.com https://cdn.paddle.com https://cdn.emailjs.com https://www.googletagmanager.com https://www.google-analytics.com https://www.clarity.ms https://maps.googleapis.com https://maps.gstatic.com; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com https://cdnjs.cloudflare.com; font-src 'self' data: https://fonts.gstatic.com https://cdnjs.cloudflare.com; img-src 'self' data: blob: https:; connect-src 'self' https://*.supabase.co https://*.paddle.com https://api.emailjs.com https://www.google-analytics.com https://*.googleapis.com https://*.clarity.ms https://www.clarity.ms https://geo.nj.gov https://services2.arcgis.com https://services.arcgisonline.com https://server.arcgisonline.com https://*.bing.com https://c.bing.com; frame-src 'self' https://*.paddle.com https://www.google.com https://www.youtube.com; media-src 'self' blob: data:; worker-src 'self' blob:; manifest-src 'self'"
+        }
+      ]
+    },
+    {
+      "source": "/property/(.*).json",
+      "headers": [
+        {
+          "key": "Cache-Control",
+          "value": "public, max-age=3600, s-maxage=86400, stale-while-revalidate=604800"
+        }
+      ]
+    },
+    {
+      "source": "/property/css/(.*).css",
+      "headers": [
+        {
+          "key": "Cache-Control",
+          "value": "public, max-age=86400, s-maxage=604800, stale-while-revalidate=2592000"
+        }
+      ]
+    },
+    {
+      "source": "/property/dashboard",
+      "headers": [
+        {
+          "key": "Cache-Control",
+          "value": "public, max-age=0, s-maxage=300, stale-while-revalidate=3600"
+        }
+      ]
+    },
+    {
+      "source": "/property/home",
+      "headers": [
+        {
+          "key": "Cache-Control",
+          "value": "public, max-age=0, s-maxage=300, stale-while-revalidate=3600"
+        }
+      ]
+    },
+    {
+      "source": "/property/account",
+      "headers": [
+        {
+          "key": "Cache-Control",
+          "value": "public, max-age=0, s-maxage=300, stale-while-revalidate=3600"
+        }
+      ]
+    },
+    {
+      "source": "/property/pro",
+      "headers": [
+        {
+          "key": "Cache-Control",
+          "value": "public, max-age=0, s-maxage=300, stale-while-revalidate=3600"
+        }
+      ]
+    },
+    {
+      "source": "/property/marker",
+      "headers": [
+        {
+          "key": "Cache-Control",
+          "value": "public, max-age=0, s-maxage=300, stale-while-revalidate=3600"
+        }
+      ]
+    },
+    {
+      "source": "/property/pulse",
+      "headers": [
+        {
+          "key": "Cache-Control",
+          "value": "public, max-age=0, s-maxage=300, stale-while-revalidate=3600"
+        }
+      ]
+    },
+    {
+      "source": "/property/privacy",
+      "headers": [
+        {
+          "key": "Cache-Control",
+          "value": "public, max-age=0, s-maxage=300, stale-while-revalidate=3600"
+        }
+      ]
+    },
+    {
+      "source": "/property/terms",
+      "headers": [
+        {
+          "key": "Cache-Control",
+          "value": "public, max-age=0, s-maxage=300, stale-while-revalidate=3600"
+        }
+      ]
+    },
+    {
+      "source": "/property/refunds",
+      "headers": [
+        {
+          "key": "Cache-Control",
+          "value": "public, max-age=0, s-maxage=300, stale-while-revalidate=3600"
+        }
+      ]
+    },
+    {
+      "source": "/property/data-methodology",
+      "headers": [
+        {
+          "key": "Cache-Control",
+          "value": "public, max-age=0, s-maxage=300, stale-while-revalidate=3600"
+        }
+      ]
+    },
+    {
+      "source": "/property/data-use",
+      "headers": [
+        {
+          "key": "Cache-Control",
+          "value": "public, max-age=0, s-maxage=300, stale-while-revalidate=3600"
+        }
+      ]
+    },
+    {
+      "source": "/property/agent-desk",
+      "headers": [
+        {
+          "key": "Cache-Control",
+          "value": "public, max-age=0, s-maxage=300, stale-while-revalidate=3600"
+        }
+      ]
+    },
+    {
+      "source": "/property/data-center",
+      "headers": [
+        {
+          "key": "Cache-Control",
+          "value": "public, max-age=0, s-maxage=300, stale-while-revalidate=3600"
+        }
+      ]
+    },
+    {
+      "source": "/property/data-workbench",
+      "headers": [
+        {
+          "key": "Cache-Control",
+          "value": "public, max-age=0, s-maxage=300, stale-while-revalidate=3600"
+        }
+      ]
+    },
+    {
+      "source": "/property/developer-data",
+      "headers": [
+        {
+          "key": "Cache-Control",
+          "value": "public, max-age=0, s-maxage=300, stale-while-revalidate=3600"
+        }
+      ]
+    },
+    {
+      "source": "/property/diagnostics",
+      "headers": [
+        {
+          "key": "Cache-Control",
+          "value": "public, max-age=0, s-maxage=300, stale-while-revalidate=3600"
+        }
+      ]
+    },
+    {
+      "source": "/property/farm-builder",
+      "headers": [
+        {
+          "key": "Cache-Control",
+          "value": "public, max-age=0, s-maxage=300, stale-while-revalidate=3600"
+        }
+      ]
+    },
+    {
+      "source": "/property/farm-map",
+      "headers": [
+        {
+          "key": "Cache-Control",
+          "value": "public, max-age=0, s-maxage=300, stale-while-revalidate=3600"
+        }
+      ]
+    },
+    {
+      "source": "/property/market-list",
+      "headers": [
+        {
+          "key": "Cache-Control",
+          "value": "public, max-age=0, s-maxage=300, stale-while-revalidate=3600"
+        }
+      ]
+    },
+    {
+      "source": "/property/marketing-plan",
+      "headers": [
+        {
+          "key": "Cache-Control",
+          "value": "public, max-age=0, s-maxage=300, stale-while-revalidate=3600"
+        }
+      ]
+    },
+    {
+      "source": "/property/report-builder",
+      "headers": [
+        {
+          "key": "Cache-Control",
+          "value": "public, max-age=0, s-maxage=300, stale-while-revalidate=3600"
+        }
+      ]
+    },
+    {
+      "source": "/property/report-studio",
+      "headers": [
+        {
+          "key": "Cache-Control",
+          "value": "public, max-age=0, s-maxage=300, stale-while-revalidate=3600"
+        }
+      ]
+    },
+    {
+      "source": "/property/scan",
+      "headers": [
+        {
+          "key": "Cache-Control",
+          "value": "public, max-age=0, s-maxage=300, stale-while-revalidate=3600"
+        }
+      ]
+    },
+    {
+      "source": "/property/tools",
+      "headers": [
+        {
+          "key": "Cache-Control",
+          "value": "public, max-age=0, s-maxage=300, stale-while-revalidate=3600"
+        }
+      ]
+    },
+    {
+      "source": "/property/updates",
+      "headers": [
+        {
+          "key": "Cache-Control",
+          "value": "public, max-age=0, s-maxage=300, stale-while-revalidate=3600"
+        }
+      ]
+    },
+    {
+      "source": "/property/verification-diagnostics",
+      "headers": [
+        {
+          "key": "Cache-Control",
+          "value": "public, max-age=0, s-maxage=300, stale-while-revalidate=3600"
+        }
+      ]
+    },
+    {
+      "source": "/property/workbench",
+      "headers": [
+        {
+          "key": "Cache-Control",
+          "value": "public, max-age=0, s-maxage=300, stale-while-revalidate=3600"
+        }
+      ]
+    },
+    {
+      "source": "/property/exempt-pilot",
+      "headers": [
+        {
+          "key": "Cache-Control",
+          "value": "public, max-age=0, s-maxage=300, stale-while-revalidate=3600"
+        }
+      ]
+    },
+    {
+      "source": "/property/fairness",
+      "headers": [
+        {
+          "key": "Cache-Control",
+          "value": "public, max-age=0, s-maxage=300, stale-while-revalidate=3600"
+        }
+      ]
+    },
+    {
+      "source": "/property/public-report",
+      "headers": [
+        {
+          "key": "Cache-Control",
+          "value": "public, max-age=0, s-maxage=300, stale-while-revalidate=3600"
+        }
+      ]
+    },
+    {
+      "source": "/property/report",
+      "headers": [
+        {
+          "key": "Cache-Control",
+          "value": "public, max-age=0, s-maxage=300, stale-while-revalidate=3600"
+        }
+      ]
+    },
+    {
+      "source": "/property/town-compare",
+      "headers": [
+        {
+          "key": "Cache-Control",
+          "value": "public, max-age=0, s-maxage=300, stale-while-revalidate=3600"
+        }
+      ]
+    },
+    {
+      "source": "/property/dashboards",
+      "headers": [
+        {
+          "key": "Cache-Control",
+          "value": "public, max-age=0, s-maxage=300, stale-while-revalidate=3600"
+        }
+      ]
+    },
+    {
+      "source": "/property/property-analysis",
+      "headers": [
+        {
+          "key": "Cache-Control",
+          "value": "public, max-age=0, s-maxage=300, stale-while-revalidate=3600"
+        }
+      ]
+    },
+    {
+      "source": "/property/offline",
+      "headers": [
+        {
+          "key": "Cache-Control",
+          "value": "public, max-age=0, s-maxage=300, stale-while-revalidate=3600"
+        }
+      ]
+    },
+    {
+      "source": "/property/marketing-studio.html",
+      "headers": [
+        {
+          "key": "Cache-Control",
+          "value": "private, max-age=0, no-cache, no-store, must-revalidate"
+        }
+      ]
+    },
+    {
+      "source": "/property/marketing-studio",
+      "headers": [
+        {
+          "key": "Cache-Control",
+          "value": "private, max-age=0, no-cache, no-store, must-revalidate"
+        }
+      ]
+    },
+    {
+      "source": "/property/marketing-studio/(.*)",
+      "headers": [
+        {
+          "key": "Cache-Control",
+          "value": "private, max-age=0, no-cache, no-store, must-revalidate"
+        }
+      ]
+    },
+    {
+      "source": "/property/compare/attom",
+      "headers": [
+        {
+          "key": "Cache-Control",
+          "value": "public, max-age=0, s-maxage=300, stale-while-revalidate=3600"
+        }
+      ]
+    },
+    {
+      "source": "/property/compare/batchdata",
+      "headers": [
+        {
+          "key": "Cache-Control",
+          "value": "public, max-age=0, s-maxage=300, stale-while-revalidate=3600"
+        }
+      ]
+    },
+    {
+      "source": "/property/compare/propertyradar",
+      "headers": [
+        {
+          "key": "Cache-Control",
+          "value": "public, max-age=0, s-maxage=300, stale-while-revalidate=3600"
+        }
+      ]
+    },
+    {
+      "source": "/property/compare/propertyshark",
+      "headers": [
+        {
+          "key": "Cache-Control",
+          "value": "public, max-age=0, s-maxage=300, stale-while-revalidate=3600"
+        }
+      ]
+    },
+    {
+      "source": "/property/compare/propstream",
+      "headers": [
+        {
+          "key": "Cache-Control",
+          "value": "public, max-age=0, s-maxage=300, stale-while-revalidate=3600"
+        }
+      ]
+    },
+    {
+      "source": "/property/compare/regrid",
+      "headers": [
+        {
+          "key": "Cache-Control",
+          "value": "public, max-age=0, s-maxage=300, stale-while-revalidate=3600"
+        }
+      ]
+    },
+    {
+      "source": "/property/(.*).html",
+      "headers": [
+        {
+          "key": "Cache-Control",
+          "value": "public, max-age=0, s-maxage=300, stale-while-revalidate=3600"
+        }
+      ]
+    },
+    {
+      "source": "/property/marketing-studio-(.*).html",
+      "headers": [
+        {
+          "key": "Cache-Control",
+          "value": "private, max-age=0, no-cache, no-store, must-revalidate"
+        }
+      ]
+    },
+    {
+      "source": "/property/css/marketing-studio-(.*).css",
+      "headers": [
+        {
+          "key": "Cache-Control",
+          "value": "public, max-age=0, must-revalidate"
+        }
+      ]
+    },
+    {
+      "source": "/property/js/marketing-studio-(.*).js",
+      "headers": [
+        {
+          "key": "Cache-Control",
+          "value": "public, max-age=0, must-revalidate"
+        }
+      ]
+    },
+    {
+      "source": "/btc.html",
+      "headers": [
+        {
+          "key": "X-Robots-Tag",
+          "value": "noindex, nofollow, noarchive"
+        }
+      ]
+    },
+    {
+      "source": "/leadiq.html",
+      "headers": [
+        {
+          "key": "X-Robots-Tag",
+          "value": "noindex, nofollow, noarchive"
+        }
+      ]
+    },
+    {
+      "source": "/qscore.html",
+      "headers": [
+        {
+          "key": "X-Robots-Tag",
+          "value": "noindex, nofollow, noarchive"
+        }
+      ]
+    },
+    {
+      "source": "/property/insights/admin.html",
+      "headers": [
+        {
+          "key": "X-Robots-Tag",
+          "value": "noindex, nofollow, noarchive"
+        }
+      ]
+    },
+    {
+      "source": "/property/data-workbench.html",
+      "headers": [
+        {
+          "key": "X-Robots-Tag",
+          "value": "noindex, nofollow, noarchive"
+        }
+      ]
+    },
+    {
+      "source": "/property/data-workbench",
+      "headers": [
+        {
+          "key": "X-Robots-Tag",
+          "value": "noindex, nofollow, noarchive"
+        }
+      ]
+    },
+    {
+      "source": "/property/growth/(.*)",
+      "headers": [
+        {
+          "key": "X-Robots-Tag",
+          "value": "noindex, nofollow, noarchive"
+        }
+      ]
+    }
   ]
 }
