@@ -1,0 +1,34 @@
+import assert from 'node:assert/strict';
+import { readFileSync } from 'node:fs';
+
+const lookup = readFileSync(new URL('../js/lookup.js', import.meta.url), 'utf8');
+const autocomplete = readFileSync(new URL('../js/nj-address-autocomplete.js', import.meta.url), 'utf8');
+
+assert.match(autocomplete, /fields:\['formattedAddress','addressComponents','location'\]/, 'new Places selection should request location');
+assert.match(autocomplete, /'address_components','geometry'/, 'legacy Places selection should request geometry');
+assert.match(autocomplete, /dataset\.googleLat/, 'selected Google latitude should be persisted');
+assert.match(autocomplete, /dataset\.googleLon/, 'selected Google longitude should be persisted');
+assert.match(autocomplete, /clearGoogleSelection/, 'manual input should clear stale Google coordinates');
+
+assert.match(lookup, /matched: c\.address, score: Number\(c\.score\) \|\| 0/, 'NJ geocoder confidence should be preserved');
+assert.match(lookup, /function parcelAliasCandidateMatches/, 'lookup should have a strict alias candidate gate');
+assert.match(lookup, /target\.house === candidate\.house/, 'alias candidate must keep the same house number');
+assert.match(lookup, /target\.zip === candidateZip/, 'alias candidate must keep the same ZIP');
+assert.match(lookup, /String\(a\.PCLQCODE \|\| ''\)\.trim\(\)/, 'qualified parcels must fail closed in alias mode');
+assert.match(lookup, /lookupPointDistanceMeters\(geoMeta, selectedGeo\) <= 120/, 'Google and NJ coordinates must stay tightly corroborated');
+assert.match(lookup, /sameParcel\(exact, second\)/, 'independent coordinate checks must land on the same PAMS parcel');
+assert.match(lookup, /Number\(geoMeta\.score\) >= 99/, 'manual alias resolution requires an essentially exact NJ geocode');
+assert.match(lookup, /parcelAt\(g\.lat, g\.lon, addr, g\.matched, g, googleGeo\)/, 'main lookup should pass coordinate evidence into parcel resolution');
+
+const flow = lookup.slice(lookup.indexOf('function parcelAt(lat, lon'), lookup.indexOf('function parcelAtRaw(lat, lon'));
+assert.ok(flow.indexOf('parcelNearbyByAddress') < flow.indexOf('confirmParcelAlias'), 'normal geometry address matching must run before alias acceptance');
+assert.ok(flow.indexOf('parcelByAddressRecord') < flow.indexOf('confirmParcelAlias'), 'parcel address-index matching must run before alias acceptance');
+
+// Production regression, 2026-09-02:
+// Search/listing identity: 15 Railroad Ave, Paulsboro, NJ 08066
+// NJ tax parcel identity: 0814_40_3.01 / 15 Quincy St
+function house(v) { const m = String(v).match(/^\s*(\d+[A-Z-]?)/i); return m ? m[1].toUpperCase() : ''; }
+assert.equal(house('15 Railroad Ave'), house('15 Quincy St'));
+assert.notEqual('RAILROAD', 'QUINCY');
+
+console.log('property address alias contract: ok');

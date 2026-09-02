@@ -9,7 +9,7 @@ assert.ok(source.includes('parcelCandidateMatches(feature, targets)'), 'nearby c
 assert.ok(source.includes('if (matches.length !== 1) return null;'), 'ambiguous nearby address matches must fail closed');
 assert.ok(source.includes("return 'parcel|' + lat.toFixed(6) + ',' + lon.toFixed(6)"), 'property identity cache must use precise coordinates');
 assert.ok(!source.includes("cached(geoKey(lat, lon, 'parcel')"), 'parcel identity must not use the coarse neighborhood cache key');
-assert.ok(source.includes('parcelAt(g.lat, g.lon, addr, g.matched)'), 'address lookup should pass typed and matched address context into parcel resolution');
+assert.ok(source.includes('parcelAt(g.lat, g.lon, addr, g.matched, g, googleGeo)'), 'address lookup should pass typed, matched, geocoder, and selected-coordinate evidence into parcel resolution');
 assert.ok(source.includes('if (!targets.length) return null;'), 'coordinate-only locate must not guess a nearby parcel without address evidence');
 assert.ok(source.includes('function parcelByAddressRecord(lat, lon, typed, matched)'), 'parcel resolver should have an assessor-address fallback independent of the geocoder point');
 assert.ok(source.includes("where = \"PROP_LOC LIKE '\" + safeHouse + \" %'\""), 'address-record fallback should query the assessor address index by house number');
