@@ -1,0 +1,43 @@
+name: NJW-258 qualified alias production release
+
+on:
+  push:
+    branches: [main]
+    paths:
+      - .github/workflows/njw258-qualified-alias-release.yml
+
+permissions:
+  contents: write
+
+jobs:
+  release-once:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: main
+          fetch-depth: 0
+      - name: Sync current main
+        run: |
+          git fetch origin main
+          git reset --hard origin/main
+      - name: Enable exactly one Git production deployment
+        run: |
+          python -c "from pathlib import Path; p=Path('vercel.json'); s=p.read_text(); old='\"deploymentEnabled\": false'; assert old in s; p.write_text(s.replace(old,'\"deploymentEnabled\": true',1))"
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add vercel.json
+          git commit -m "Temporarily enable one Git deployment for NJW-258 qualified alias"
+          git push origin HEAD:main
+          sleep 22
+      - name: Restore paused Git deployments
+        run: |
+          git fetch origin main
+          git reset --hard origin/main
+          python -c "from pathlib import Path; p=Path('vercel.json'); s=p.read_text(); old='\"deploymentEnabled\": true'; assert old in s; p.write_text(s.replace(old,'\"deploymentEnabled\": false',1))"
+          rm -f .github/workflows/njw258-qualified-alias-release.yml
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add vercel.json .github/workflows/njw258-qualified-alias-release.yml
+          git commit -m "Restore paused Git deployments after NJW-258 qualified alias release"
+          git push origin HEAD:main
