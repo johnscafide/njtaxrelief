@@ -6,7 +6,7 @@
 .wd-anchor-home-secure{display:flex;align-items:center;gap:7px;color:#687995;letter-spacing:.02em;text-transform:none;font-weight:700}
 .wd-anchor-home-grid{display:grid;grid-template-columns:minmax(0,1.12fr) minmax(320px,.88fr);overflow:hidden;border:1px solid #dce5f0;border-radius:26px;background:#fff;box-shadow:0 20px 55px rgba(14,43,82,.10)}
 .wd-anchor-home-benefit{padding:30px 32px 28px;position:relative}
-.wd-anchor-home-benefit:before{content:"";position:absolute;left:0;top:0;bottom:0;width:5px;background:linear-gradient(180deg,#0d3dbe,#0b8f90)}
+.wd-anchor-home-benefit:before{content:"";position:absolute;left:0;top:0;bottom:0;width:5px}
 .wd-anchor-home-hello{margin:0 0 5px;color:#637188;font-size:14px;font-weight:650}
 .wd-anchor-home-benefit h2{margin:0;color:#10284c;font:800 20px/1.25 "Plus Jakarta Sans",sans-serif;letter-spacing:-.025em}
 .wd-anchor-home-amount{display:block;margin:9px 0 6px;color:#0d3dbe;font:800 clamp(48px,7vw,72px)/.98 "Plus Jakarta Sans",sans-serif;letter-spacing:-.06em}
