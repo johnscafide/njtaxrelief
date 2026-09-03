@@ -49,7 +49,8 @@
     contactHotline: '1-888-238-1233',
     checklistFile:  'NJ_Tax_Relief_Checklist.pdf',
     stripeLink:     'https://buy.stripe.com/9B69ASdhjg442OLdoWfw400',
-    guidePrice:     '$5'
+    guidePrice:     '$5',
+    anchorApplicationUrl: 'https://www.watchdogindex.com/anchor/application/2025/'
   };
 
   // ============================================================
@@ -65,6 +66,118 @@
     const cleaned = String(value).replace(/[$,\s]/g, '');
     const n = parseFloat(cleaned);
     return isNaN(n) ? 0 : n;
+  }
+
+  // Central migration for legacy NJPropertyTaxRelief application CTAs.
+  // Keep official/status/source links intact, but route any action whose intent is
+  // to apply, file, complete or purchase PAS-1 help into Watchdog's free 2025 flow.
+  function isAnchorApplicationAction(anchor) {
+    if (!anchor || !anchor.getAttribute) return false;
+    const href = (anchor.getAttribute('href') || '').trim();
+    if (!href) return false;
+    const lowerHref = href.toLowerCase();
+
+    if (lowerHref.indexOf('book.titan.email/johnscafide/nj-pas-1-property-tax-relief') !== -1) {
+      return true;
+    }
+
+    const isNjReliefHost = lowerHref.indexOf('anchor.nj.gov') !== -1 ||
+      lowerHref.indexOf('propertytaxrelief.nj.gov') !== -1;
+    if (!isNjReliefHost) return false;
+
+    const parent = anchor.closest('p,li,div,section,article') || anchor;
+    const context = ((anchor.textContent || '') + ' ' + (parent.textContent || '')).toLowerCase();
+    const hasApplicationIntent = /\b(apply|application|file|filing|complete|start|pas-1|anc-1)\b/.test(context);
+    const clearlyOfficialOnly = /\b(check status|status tool|official resources?|official site|official source|treasury source|verify|instructions|hotline)\b/.test(context) &&
+      !/\b(apply|application|file|filing|complete|start)\b/.test(context);
+
+    return hasApplicationIntent && !clearlyOfficialOnly;
+  }
+
+  function rewriteLegacyAnchorCopy(root) {
+    root = root || document;
+
+    const replacements = [
+      [/Professional filing assistance available from John Scafide for \$20 flat fee/gi, 'Free guided 2025 application available through Watchdog'],
+      [/Professional help available for \$20/gi, 'Free guided Watchdog application available'],
+      [/John Scafide will complete your PAS-1 line by line for a flat \$20 fee\./gi, "Watchdog's free guided 2025 application walks you through the PAS-1 line by line and prepares the official form."],
+      [/John Scafide offers PAS-1 filing assistance for a \$20 flat fee/gi, 'Watchdog offers a free guided 2025 PAS-1 application online'],
+      [/I offer a \$20 flat-fee session to ensure your PAS-1 is filed perfectly\./gi, "Use Watchdog's free guided 2025 application to work through the PAS-1 question by question and prepare the official form."],
+      [/PAS-1 filing help\s*[—-]\s*\$20 flat fee/gi, 'Free guided PAS-1 application'],
+      [/PAS-1 filing help \(\$20\)/gi, 'Free guided PAS-1 application'],
+      [/Book PAS-1 Help\s*[—-]\s*\$20/gi, 'Start Free PAS-1 Application'],
+      [/Book \$20 Filing Help/gi, 'Start Free Application'],
+      [/Book My \$20 PAS-1 Help/gi, 'Start My Free Application']
+    ];
+
+    const walker = document.createTreeWalker(root, NodeFilter.SHOW_TEXT, {
+      acceptNode: function (node) {
+        if (!node || !node.nodeValue || node.nodeValue.indexOf('$20') === -1) return NodeFilter.FILTER_REJECT;
+        const parent = node.parentElement;
+        if (parent && /^(SCRIPT|STYLE|NOSCRIPT)$/.test(parent.tagName)) return NodeFilter.FILTER_REJECT;
+        return NodeFilter.FILTER_ACCEPT;
+      }
+    });
+
+    const nodes = [];
+    while (walker.nextNode()) nodes.push(walker.currentNode);
+    nodes.forEach(function (node) {
+      let text = node.nodeValue;
+      replacements.forEach(function (pair) { text = text.replace(pair[0], pair[1]); });
+      node.nodeValue = text;
+    });
+
+    document.querySelectorAll('meta[content]').forEach(function (meta) {
+      let content = meta.getAttribute('content') || '';
+      if (content.indexOf('$20') === -1) return;
+      replacements.forEach(function (pair) { content = content.replace(pair[0], pair[1]); });
+      meta.setAttribute('content', content);
+    });
+
+    document.querySelectorAll('script[type="application/ld+json"]').forEach(function (script) {
+      let text = script.textContent || '';
+      if (text.indexOf('book.titan.email/johnscafide/nj-pas-1-property-tax-relief') === -1 && text.indexOf('"price": "20.00"') === -1) return;
+      text = text
+        .replace(/https:\/\/book\.titan\.email\/johnscafide\/nj-pas-1-property-tax-relief/g, CONFIG.anchorApplicationUrl)
+        .replace(/"price"\s*:\s*"20\.00"/g, '"price": "0.00"')
+        .replace(/Step-by-step PAS-1 filing help for NJ seniors\. Covers ANCHOR, Stay NJ, and Senior Freeze in one session\./g,
+          'Free guided 2025 NJ property tax relief application through Watchdog using the official State form.');
+      script.textContent = text;
+    });
+  }
+
+  function upgradeAnchorApplicationSurface(root) {
+    root = root || document;
+    const anchors = root.querySelectorAll ? root.querySelectorAll('a[href]') : [];
+    anchors.forEach(function (anchor) {
+      if (!isAnchorApplicationAction(anchor)) return;
+      anchor.href = CONFIG.anchorApplicationUrl;
+      anchor.removeAttribute('target');
+      anchor.removeAttribute('rel');
+      anchor.dataset.watchdogAnchorApplication = '2025';
+
+      const label = (anchor.textContent || '').trim();
+      if (/book|filing help|pas-1 help|apply now|apply at|start/i.test(label)) {
+        anchor.textContent = /pas-1/i.test(label) ? 'Start Free PAS-1 Application' : 'Start Free Application';
+      } else if (/anchor\.nj\.gov|propertytaxrelief\.nj\.gov/i.test(label)) {
+        anchor.textContent = 'Watchdog guided application';
+      }
+    });
+    rewriteLegacyAnchorCopy(root);
+  }
+
+  function initAnchorApplicationRouting() {
+    upgradeAnchorApplicationSurface(document);
+    if (typeof MutationObserver === 'undefined' || !document.documentElement) return;
+    const observer = new MutationObserver(function (mutations) {
+      mutations.forEach(function (mutation) {
+        mutation.addedNodes.forEach(function (node) {
+          if (!node || node.nodeType !== 1) return;
+          upgradeAnchorApplicationSurface(node);
+        });
+      });
+    });
+    observer.observe(document.documentElement, { childList: true, subtree: true });
   }
 
   // Core send function. Accepts an optional templateId so different
@@ -128,6 +241,7 @@
   // ============================================================
   function onReady() {
     initEmailJS();
+    initAnchorApplicationRouting();
     loadNav();
     initFooter();
     initNewsStrip();
@@ -803,7 +917,7 @@
         ? 'Estimated ANCHOR Homeowner Benefit'
         : 'Estimated ANCHOR Renter Benefit';
       const seniorNote = (answers.tenure === 'own' && answers.age === 'yes')
-        ? '<li>As a senior, apply using the PAS-1 form at propertytaxrelief.nj.gov</li>' : '';
+        ? '<li>As a senior, use Watchdog\u2019s free guided 2025 application; it will route you to the PAS-1 when required.</li>' : '';
 
       let reBlock = '';
       if (reYes) {
@@ -833,10 +947,11 @@
         '<p style="font-weight:600;font-size:15px;color:var(--text);margin-bottom:10px;">' + label + '</p>' +
         '<ul class="qualify-checks"><li>Income is within program limits</li>' +
         '<li>This was your primary NJ residence on Oct 1</li>' + seniorNote + '</ul>' +
-        '<p class="result-note">Estimate only. Apply at ' +
-        '<a href="https://anchor.nj.gov" target="_blank" style="color:var(--navy);font-weight:700;">anchor.nj.gov</a>' +
-        ' \u00b7 Seniors 65+: use the ' +
-        '<a href="pas-1-guide.html" style="color:var(--navy);font-weight:700;">PAS-1</a>' +
+        '<p class="result-note">Estimate only. Continue with the ' +
+        '<a href="' + CONFIG.anchorApplicationUrl + '" style="color:var(--navy);font-weight:700;">free Watchdog guided application</a>' +
+        ' to complete the official 2025 NJ form.' +
+        ' \u00b7 Seniors 65+: review the ' +
+        '<a href="pas-1-guide.html" style="color:var(--navy);font-weight:700;">PAS-1 guide</a>' +
         '<br>Questions? <strong>1-888-238-1233</strong></p>' +
         reBlock +
         '<div style="margin-top:20px;background:var(--navy-dark);border-radius:10px;' +
@@ -867,7 +982,7 @@
         '<span style="font-size:12px;color:#8aaac8;">Instant download \u00b7 PDF \u00b7 33 pages</span>' +
         '</div></div>' +
         '<div class="result-actions" style="margin-top:18px;">' +
-        '<a href="https://anchor.nj.gov" target="_blank" class="btn-primary" style="text-decoration:none;">Apply Now</a>' +
+        '<a href="' + CONFIG.anchorApplicationUrl + '" class="btn-primary" style="text-decoration:none;">Start Free Application</a>' +
         '<button onclick="resetCalc()" style="background:none;border:1.5px solid var(--navy);' +
         'border-radius:6px;padding:10px 20px;cursor:pointer;font-size:14px;' +
         'color:var(--navy);font-weight:600;">Start Over</button>' +
