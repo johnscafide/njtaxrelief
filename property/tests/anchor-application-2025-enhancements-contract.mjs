@@ -11,15 +11,30 @@ assert.match(enhancementCopy,/Watchdog will determine whether the 2025 ANC-1 or 
 assert.match(enhancementCopy,/data-readiness/);
 assert.match(enhancementCopy,/Official PDF preview/);
 assert.match(enhancementCopy,/Property Relief Profile/);
+assert.match(enhancementCopy,/2025 NJ-1040/);
+assert.match(enhancementCopy,/Line 29/);
+assert.match(enhancementCopy,/Line 27/);
+assert.match(enhancementCopy,/12-category worksheet/);
+assert.match(enhancementCopy,/property record card/);
+assert.match(enhancementCopy,/Look up with Watchdog/);
 assert.match(enhancements,/anchor-application-2025-enhancements\.html/);
 assert.match(enhancements,/boxes\.some\(function\(box\)\{return!box\.checked;\}\)/);
 assert.match(enhancements,/WatchdogAnchorPdf2025\.generate\(collectState\(\)\)/);
 assert.match(enhancements,/URL\.createObjectURL/);
+assert.match(enhancements,/income_2024\.a/);
+assert.match(enhancements,/income_2025\.a/);
+assert.match(enhancements,/wd_anchor_2025_prefill/);
+assert.match(enhancements,/enrichLead/);
+assert.match(enhancements,/anchor-application-estimate-bridge\.js/);
 assert.doesNotMatch(enhancements,/Watchdog will determine whether/);
 assert.doesNotMatch(enhancements,/Social Security number\(s\)/);
 assert.doesNotMatch(enhancements,/localStorage/);
 assert.doesNotMatch(enhancements,/console\.(?:log|info|debug)\s*\(/);
 assert.match(guard,/anchor-application-2025-enhancements\.js/);
+assert.match(guard,/Due Date: November 2, 2026/);
+assert.match(guard,/PO Box 636/);
+assert.match(guard,/PO Box 635/);
+assert.match(guard,/not part of the official State application/);
 
 assert.match(profileVault,/create table if not exists public\.anchor_relief_profiles/);
 assert.match(profileVault,/enable row level security/);
@@ -31,4 +46,4 @@ assert.match(profileSync,/new\.answers_ciphertext_b64/);
 assert.match(profileSync,/after insert or update/);
 assert.doesNotMatch(profileSync,/ssn|social_security|gross_income/i);
 
-console.log('ANCHOR 2025 live preview and reusable profile contract passed');
+console.log('ANCHOR 2025 live preview, income, parcel, mailing label, and reusable profile contract passed');
