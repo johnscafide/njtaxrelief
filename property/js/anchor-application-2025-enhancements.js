@@ -44,7 +44,20 @@ function installPreview(){
   var source=q('#wd-pdf-preview-static'),bar=source&&q('.wd-pdf-preview-bar',source),shade=source&&q('.wd-pdf-preview-shade',source),drawer=source&&q('.wd-pdf-preview-drawer',source);if(!bar||!shade||!drawer)return;
   document.body.appendChild(bar);document.body.appendChild(shade);document.body.appendChild(drawer);
   var openButton=q('#wd-open-pdf-preview'),closeButton=q('#wd-close-pdf-preview'),title=q('#wd-pdf-bar-title'),copy=q('#wd-pdf-bar-copy');
-  function syncRoute(){var route=routeFromUi();preview.lastRoute=route;if(route){openButton.disabled=false;title.textContent=(route==='pas-1'?'PAS-1':'ANC-1')+' live preview';copy.textContent=copyText('wd-pdf-ready-copy');}else{openButton.disabled=true;title.textContent='Official PDF preview';copy.textContent=copyText('wd-pdf-waiting-copy');}return route;}
+  function syncRoute(){
+    var route=routeFromUi();
+    preview.lastRoute=route;
+    if(route){
+      openButton.disabled=false;
+      title.textContent=(route==='pas-1'?'PAS-1':'ANC-1')+' live preview';
+      copy.textContent=copyText('wd-pdf-ready-copy');
+    }else{
+      openButton.disabled=true;
+      title.textContent=copyText('wd-pdf-title-copy');
+      copy.textContent=copyText('wd-pdf-waiting-copy');
+    }
+    return route;
+  }
   function close(){preview.open=false;drawer.classList.remove('is-open');shade.classList.remove('is-open');drawer.setAttribute('aria-hidden','true');document.body.classList.remove('wd-pdf-preview-open');}
   function open(){if(!syncRoute())return;preview.open=true;drawer.classList.add('is-open');shade.classList.add('is-open');drawer.setAttribute('aria-hidden','false');document.body.classList.add('wd-pdf-preview-open');renderPreview(true);}
   openButton.addEventListener('click',open);closeButton.addEventListener('click',close);shade.addEventListener('click',close);document.addEventListener('keydown',function(ev){if(ev.key==='Escape'&&preview.open)close();});
@@ -54,7 +67,10 @@ function installPreview(){
     var route=syncRoute();if(!route)return;
     preview.busy=true;preview.queued=false;
     var loading=q('#wd-pdf-preview-loading'),frame=q('#wd-pdf-preview-frame'),meta=q('#wd-pdf-preview-meta'),heading=q('#wd-pdf-preview-title');
-    loading.classList.add('is-visible');heading.textContent='2025 '+(route==='pas-1'?'PAS-1':'ANC-1')+' preview';meta.textContent=copyText('wd-pdf-updating-copy');
+    loading.classList.add('is-visible');
+    // content-architecture: dynamic — the selected official form changes with the user's route.
+    heading.textContent='2025 '+(route==='pas-1'?'PAS-1':'ANC-1')+' preview';
+    meta.textContent=copyText('wd-pdf-updating-copy');
     try{
       var result=await window.WatchdogAnchorPdf2025.generate(collectState());
       var blob=new Blob([result.pdfBytes],{type:'application/pdf'}),url=URL.createObjectURL(blob);
