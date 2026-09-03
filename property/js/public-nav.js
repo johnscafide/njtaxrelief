@@ -107,7 +107,7 @@
     document.dispatchEvent(new CustomEvent('watchdog:public-menu-open',{detail:{menu:profile?'profile':'main'}}));
   }
 
-    function close(restoreFocus){
+  function close(restoreFocus){
     ['wd-main-sheet','wd-profile-sheet'].forEach(function(id){
       var e=q(id);if(!e)return;e.classList.remove('open');e.setAttribute('aria-hidden','true');
     });
@@ -169,6 +169,7 @@
   function loadIndexEnhancements(){
     if(!isPropertyIndex())return;
     ensureStylesheet('wd-index-runtime-polish','/property/css/index-runtime-polish.css');
+    ensureStylesheet('wd-anchor-home-funnel-style','/property/css/anchor-home-funnel.css');
     ensureIndexScorePlacementContract();
     loadScript('wd-showcase-script','/property/js/landing-showcase.js');
     loadScript('wd-farm-showcase-placement-script','/property/js/farm-showcase-placement.js');
@@ -176,6 +177,7 @@
     loadScript('wd-robust-brand-script','/property/js/robust-public-brand.js');
     loadScript('wd-nj-address-autocomplete-script','/property/js/nj-address-autocomplete.js');
     loadScript('wd-landing-county-intel-script','/property/js/landing-county-intel.js');
+    loadScript('wd-anchor-home-funnel-script','/property/js/anchor-home-funnel.js');
   }
 
   function runAddressFromQuery(){
