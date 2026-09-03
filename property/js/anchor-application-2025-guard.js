@@ -15,14 +15,15 @@
     page.drawText('WATCHDOG PRINTABLE MAILING LABEL',{x:54,y:730,size:11,font:bold,color:teal});
     page.drawText('2025 New Jersey Property Tax Relief Application',{x:54,y:700,size:22,font:bold,color:navy});
     page.drawText('Due Date: November 2, 2026',{x:54,y:668,size:13,font:bold,color:navy});
-    page.drawText('This page was added by Watchdog for mailing convenience. It is not part of the official State application.',{x:54,y:640,size:9.5,font:regular,color:gray,maxWidth:504});
-    page.drawText('Cut out the label below and affix it to your envelope.',{x:54,y:616,size:10.5,font:regular,color:gray});
-    page.drawRectangle({x:74,y:328,width:464,height:240,borderColor:navy,borderWidth:1.4,color:window.PDFLib.rgb(1,1,1)});
-    page.drawText(formType==='pas-1'?'PAS-1 MAILING LABEL':'ANC-1 MAILING LABEL',{x:104,y:532,size:9.5,font:bold,color:teal});
+    page.drawText('This page was added by Watchdog for mailing convenience.',{x:54,y:640,size:9.5,font:regular,color:gray});
+    page.drawText('It is not part of the official State application.',{x:54,y:625,size:9.5,font:regular,color:gray});
+    page.drawText('Cut out the label below and affix it to your envelope.',{x:54,y:600,size:10.5,font:regular,color:gray});
+    page.drawRectangle({x:74,y:312,width:464,height:240,borderColor:navy,borderWidth:1.4,color:window.PDFLib.rgb(1,1,1)});
+    page.drawText(formType==='pas-1'?'PAS-1 MAILING LABEL':'ANC-1 MAILING LABEL',{x:104,y:516,size:9.5,font:bold,color:teal});
     var lines=formType==='pas-1'?['NJ Division of Taxation','Revenue Processing Center','Property Tax Relief Programs','PO Box 635','Trenton, NJ 08646-0635']:['NJ Division of Taxation','Revenue Processing Center','Property Tax Relief Application','PO Box 636','Trenton, NJ 08646-0636'];
-    lines.forEach(function(line,index){page.drawText(line,{x:104,y:492-(index*31),size:index===3?18:16,font:index===3?bold:regular,color:navy});});
-    page.drawText('Send only one application per envelope.',{x:74,y:286,size:10,font:bold,color:navy});
-    page.drawText('Review, sign and date the official form in blue or black ink before mailing.',{x:74,y:265,size:10,font:regular,color:gray});
+    lines.forEach(function(line,index){page.drawText(line,{x:104,y:476-(index*31),size:index===3?18:16,font:index===3?bold:regular,color:navy});});
+    page.drawText('Send only one application per envelope.',{x:74,y:270,size:10,font:bold,color:navy});
+    page.drawText('Review, sign and date the official form in blue or black ink before mailing.',{x:74,y:249,size:10,font:regular,color:gray});
   }
   proto.save=async function(options){
     try{
@@ -65,6 +66,7 @@ new MutationObserver(skipInapplicable).observe(form,{subtree:true,attributes:tru
 setTimeout(skipInapplicable,0);
 })();
 (function loadAnchor2025Enhancements(){
+  if(typeof document.querySelector!=='function'||typeof document.createElement!=='function'||!document.body)return;
   if(document.querySelector('script[data-anchor-2025-enhancements]'))return;
   var script=document.createElement('script');
   script.src='/property/js/anchor-application-2025-enhancements.js';
