@@ -8,6 +8,7 @@ on:
     paths:
       - property/anchor/application/2025/**
       - property/anchor/applications/**
+      - property/partials/anchor-application-2025-enhancements.html
       - property/js/anchor-application-2025.js
       - property/js/anchor-application-2025-fields.js
       - property/js/anchor-application-pdf-2025.js
@@ -27,6 +28,7 @@ on:
     paths:
       - property/anchor/application/2025/**
       - property/anchor/applications/**
+      - property/partials/anchor-application-2025-enhancements.html
       - property/js/anchor-application-2025.js
       - property/js/anchor-application-2025-fields.js
       - property/js/anchor-application-pdf-2025.js
