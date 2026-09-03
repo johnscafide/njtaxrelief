@@ -4,15 +4,23 @@ on:
   push:
     branches:
       - johnvscafide/njw-303-public-launch-v2
+      - johnvscafide/njw-303-anchor-preview-profile-reuse
     paths:
       - property/anchor/application/2025/**
       - property/anchor/applications/**
+      - property/partials/anchor-application-2025-enhancements.html
       - property/js/anchor-application-2025.js
       - property/js/anchor-application-2025-fields.js
       - property/js/anchor-application-pdf-2025.js
       - property/js/anchor-application-vault.js
+      - property/js/anchor-application-2025-guard.js
+      - property/js/anchor-application-2025-enhancements.js
       - property/js/anchor-applications.js
+      - property/css/anchor-application-2025-enhancements.css
       - property/tests/anchor-application-2025-contract.mjs
+      - property/tests/anchor-application-2025-enhancements-contract.mjs
+      - supabase/migrations/20260903143000_anchor_relief_profile_vault_v1.sql
+      - supabase/migrations/20260903144500_anchor_relief_profile_source_sync_v1.sql
       - api/anchor-form-template.js
       - .github/workflows/njw303-anchor-application-ci.yml
   pull_request:
@@ -20,12 +28,19 @@ on:
     paths:
       - property/anchor/application/2025/**
       - property/anchor/applications/**
+      - property/partials/anchor-application-2025-enhancements.html
       - property/js/anchor-application-2025.js
       - property/js/anchor-application-2025-fields.js
       - property/js/anchor-application-pdf-2025.js
       - property/js/anchor-application-vault.js
+      - property/js/anchor-application-2025-guard.js
+      - property/js/anchor-application-2025-enhancements.js
       - property/js/anchor-applications.js
+      - property/css/anchor-application-2025-enhancements.css
       - property/tests/anchor-application-2025-contract.mjs
+      - property/tests/anchor-application-2025-enhancements-contract.mjs
+      - supabase/migrations/20260903143000_anchor_relief_profile_vault_v1.sql
+      - supabase/migrations/20260903144500_anchor_relief_profile_source_sync_v1.sql
       - api/anchor-form-template.js
 
 permissions:
@@ -44,6 +59,10 @@ jobs:
           node --check property/js/anchor-application-2025.js
           node --check property/js/anchor-application-pdf-2025.js
           node --check property/js/anchor-application-vault.js
+          node --check property/js/anchor-application-2025-guard.js
+          node --check property/js/anchor-application-2025-enhancements.js
           node --check property/js/anchor-applications.js
-      - name: Run privacy and routing contract
-        run: node property/tests/anchor-application-2025-contract.mjs
+      - name: Run privacy and routing contracts
+        run: |
+          node property/tests/anchor-application-2025-contract.mjs
+          node property/tests/anchor-application-2025-enhancements-contract.mjs
