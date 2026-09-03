@@ -1,7 +1,7 @@
 (function(){
 'use strict';
 
-const state={rows:[],view:[],files:[],filter:'all',search:'',headers:[],mapping:{}};
+const state={rows:[],view:[],files:[],filter:'all',search:'',headers:[],mapping:{},batchAllChannelConsent:false};
 const $=(s,r=document)=>r.querySelector(s);
 const esc=(v)=>String(v??'').replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
 const clean=(v)=>String(v??'').replace(/\uFEFF/g,'').replace(/\s+/g,' ').trim();
@@ -18,9 +18,12 @@ const ALIASES={
   zip:['zip','zipcode','postalcode','postcode','mailingzip'],
   source:['source','leadsource','contactsource'],
   tags:['tags','hashtags','tag'],
-  notes:['notes','agentnotes','comments','comment','description']
+  notes:['notes','agentnotes','comments','comment','description'],
+  emailOptIn:['optinemail','emailoptin','emailoptedin','emailconsent'],
+  callOptIn:['optincall','calloptin','phoneoptin','callconsent'],
+  smsOptIn:['optinsms','smsoptin','textoptin','textnumberoptin','smsconsent']
 };
-const BOLDTRAIL_HEADERS=['First Name','Last Name','Email','Phone','Street Address','City','State','Postal Code','Source','Status','Hashtags','Notes','Watchdog Lead ID','Program','Intent Score','Estimated Benefit','Tenure','Household Income','Address Validation Status'];
+const BOLDTRAIL_HEADERS=['First Name','Last Name','Email','Phone','Street Address','City','State','Postal Code','Source','Status','Hashtags','Notes','Watchdog Lead ID','Program','Intent Score','Estimated Benefit','Tenure','Household Income','Address Validation Status','Opt in Email','Opt in Call','Opt in SMS'];
 
 function toast(message){let t=$('#leadiq-toast');if(!t){t=document.createElement('div');t.id='leadiq-toast';t.className='li-toast';document.body.appendChild(t)}t.textContent=message;t.classList.add('show');clearTimeout(toast.timer);toast.timer=setTimeout(()=>t.classList.remove('show'),2400)}
 function csvCell(value){const s=String(value??'').replace(/\r?\n/g,' ');return `"${s.replace(/"/g,'""')}"`}
@@ -52,6 +55,14 @@ function infer(headers){
   return map;
 }
 function val(raw,field,map){return map[field]?clean(raw[map[field]]):''}
+function parseOptIn(v){
+  const s=clean(v).toLowerCase();
+  if(!s)return null;
+  if(['1','true','yes','y','on','opted in','opt-in','subscribed'].includes(s))return true;
+  if(['0','false','no','n','off','opted out','opt-out','unsubscribed'].includes(s))return false;
+  return null;
+}
+function exportOptIn(explicit){return state.batchAllChannelConsent||explicit===true?'1':'0'}
 function normalizePhone(v){const digits=clean(v).replace(/\D/g,'');const d=digits.length===11&&digits.startsWith('1')?digits.slice(1):digits;if(d.length===10)return `(${d.slice(0,3)}) ${d.slice(3,6)}-${d.slice(6)}`;return clean(v)}
 function normalizeZip(v){const m=clean(v).match(/\b(\d{5})(?:-?(\d{4}))?\b/);return m?m[1]+(m[2]?'-'+m[2]:''):clean(v)}
 function splitName(full){
@@ -68,11 +79,8 @@ function normalizeNameFields(first,last,full){
     const split=splitName(full||first);first=split.first;last=split.last;
   }else if(!first&&!last&&full){
     const split=splitName(full);first=split.first;last=split.last;
-  }else if(!first&&full){
-    first=splitName(full).first;
-  }else if(!last&&full){
-    last=splitName(full).last;
-  }
+  }else if(!first&&full){first=splitName(full).first}
+  else if(!last&&full){last=splitName(full).last}
   return {first,last,full:full||[first,last].filter(Boolean).join(' ')};
 }
 function normalizeRow(raw,map,file,index){
@@ -82,7 +90,7 @@ function normalizeRow(raw,map,file,index){
   const phone=normalizePhone(val(raw,'phone',map));
   const street=val(raw,'street',map),city=val(raw,'city',map),explicitState=val(raw,'state',map),zip=normalizeZip(val(raw,'zip',map)),hasAddress=!!(street||city||zip),stateName=(explicitState||(hasAddress?'NJ':'')).toUpperCase();
   const address=hasAddress?[street,city,stateName,zip].filter(Boolean).join(', '):'';
-  return {id:`${file}:${index}`,file,index,first,last,full,email,phone,street,city,state:stateName,zip,address,source:val(raw,'source',map)||'LeadIQ CSV',tags:val(raw,'tags',map),notes:val(raw,'notes',map),raw,duplicate:false,issues:[]};
+  return {id:`${file}:${index}`,file,index,first,last,full,email,phone,street,city,state:stateName,zip,address,source:val(raw,'source',map)||'LeadIQ CSV',tags:val(raw,'tags',map),notes:val(raw,'notes',map),emailOptIn:parseOptIn(val(raw,'emailOptIn',map)),callOptIn:parseOptIn(val(raw,'callOptIn',map)),smsOptIn:parseOptIn(val(raw,'smsOptIn',map)),raw,duplicate:false,issues:[]};
 }
 function markQuality(rows){
   const seen=new Map();
@@ -128,10 +136,12 @@ function render(){
       <div class="li-stat good"><span>Complete</span><strong>${s.complete.toLocaleString()}</strong></div>
     </div>
     <div class="li-meta"><b>${state.files.length} file${state.files.length===1?'':'s'}</b><span>·</span><span>${state.view.length.toLocaleString()} shown</span><span>·</span><div class="li-pills">${mapped||'<span class="li-pill">No standard columns recognized</span>'}</div></div>
+    <div class="li-consent"><label><input id="leadiq-batch-consent" type="checkbox" ${state.batchAllChannelConsent?'checked':''}><span><b>This batch has consent for email, calls and SMS</b><small>When checked, BoldTrail export sets all three opt-in fields to 1. Otherwise imported per-contact consent is preserved and unknown consent exports as 0.</small></span></label></div>
     <div class="li-table-wrap"><table class="li-table"><thead><tr><th>Contact</th><th>Email</th><th>Phone</th><th>Address</th><th>Source</th><th>Quality</th><th>File</th><th>Action</th></tr></thead><tbody>${state.view.slice(0,500).map((r)=>rowHtml(r)).join('')||'<tr><td colspan="8" class="li-empty">No contacts match this view.</td></tr>'}</tbody></table></div>
     <div class="li-footer"><span class="li-footer-note">Showing up to 500 rows on screen. Exports include the full filtered result. Contact info present is a data-completeness signal only, not proof of marketing consent.</span>${state.view.length>500?`<span class="li-pill">${state.view.length-500} more in export</span>`:''}</div>
     <div class="li-legacy"><div><b>Still in the old BTC toolbox</b><p>Open House, Property IQ, campaign/reachout and specialty utilities remain available while those are migrated separately.</p></div><a href="/btc-legacy.html">Open legacy tools →</a></div>`;
   host.querySelectorAll('[data-add-row]').forEach(b=>b.addEventListener('click',()=>prefillLead(b.dataset.addRow)));
+  $('#leadiq-batch-consent')?.addEventListener('change',e=>{state.batchAllChannelConsent=!!e.target.checked;toast(state.batchAllChannelConsent?'BoldTrail all-channel opt-in enabled':'Batch opt-in override cleared')});
   setButtons(true);
 }
 function rowHtml(r){
@@ -144,14 +154,14 @@ async function loadFiles(files){
   files=files.filter(f=>/\.csv$/i.test(f.name)||f.type==='text/csv');if(!files.length){toast('Choose a CSV file');return}
   const merged=[],allHeaders=new Set(),maps=[];
   for(const file of files){const parsed=parseCsv(await file.text());const map=infer(parsed.headers);parsed.headers.forEach(h=>allHeaders.add(h));maps.push(map);parsed.records.forEach((raw,i)=>merged.push(normalizeRow(raw,map,file.name,i)))}
-  state.rows=merged;state.files=files.map(f=>f.name);state.headers=Array.from(allHeaders);state.mapping=Object.assign({},...maps);state.filter='all';state.search='';markQuality(state.rows);
+  state.rows=merged;state.files=files.map(f=>f.name);state.headers=Array.from(allHeaders);state.mapping=Object.assign({},...maps);state.filter='all';state.search='';state.batchAllChannelConsent=false;markQuality(state.rows);
   const filter=$('#leadiq-filter'),search=$('#leadiq-search');if(filter)filter.value='all';if(search)search.value='';render();toast(`${state.rows.length.toLocaleString()} contacts loaded`)
 }
 function exportRows(rows,type){
   if(!rows.length){toast('No contacts in this view');return}
   let headers,data,name;
   if(type==='boldtrail'){
-    headers=BOLDTRAIL_HEADERS;data=deduped(rows).map(r=>{const names=normalizeNameFields(r.first,r.last,r.full);return [names.first,names.last,r.email,r.phone,r.street,r.city,r.state,r.zip,r.source||'LeadIQ CSV','new',r.tags,r.notes,'','','','','','','']});name='leadiq-boldtrail.csv';
+    headers=BOLDTRAIL_HEADERS;data=deduped(rows).map(r=>{const names=normalizeNameFields(r.first,r.last,r.full);return [names.first,names.last,r.email,r.phone,r.street,r.city,r.state,r.zip,r.source||'LeadIQ CSV','new',r.tags,r.notes,'','','','','','','',exportOptIn(r.emailOptIn),exportOptIn(r.callOptIn),exportOptIn(r.smsOptIn)]});name='leadiq-boldtrail.csv';
   }else{
     headers=['Full Name','First Name','Last Name','Email','Phone','Street Address','City','State','Postal Code','Source','Hashtags','Notes','Quality'];data=(type==='cleaned'?deduped(rows):rows).map(r=>[r.full,r.first,r.last,r.email,r.phone,r.street,r.city,r.state,r.zip,r.source,r.tags,r.notes,r.duplicate?'Duplicate':r.issues.join('; ')||'Ready']);name=type==='cleaned'?'leadiq-cleaned.csv':'leadiq-filtered.csv';
   }
@@ -165,7 +175,7 @@ function prefillLead(id){
   const add=$('#bo-add');if(add)add.click();else if(typeof $('#lead-dialog')?.showModal==='function')$('#lead-dialog').showModal();
   toast('Contact loaded into Add lead')
 }
-function clearAll(){state.rows=[];state.view=[];state.files=[];state.headers=[];state.mapping={};render();toast('Imported CSV cleared')}
+function clearAll(){state.rows=[];state.view=[];state.files=[];state.headers=[];state.mapping={};state.batchAllChannelConsent=false;render();toast('Imported CSV cleared')}
 function init(){
   const input=$('#leadiq-file');if(!input)return;
   const readyOption=$('#leadiq-filter option[value="ready"]');if(readyOption)readyOption.textContent='Has email or phone';
