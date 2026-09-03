@@ -18,6 +18,7 @@ on:
       - property/css/anchor-home-funnel.css
       - property/css/anchor-estimate-library.css
       - property/tests/anchor-home-funnel-contract.mjs
+      - supabase/functions/anchor-result-handoff/index.ts
       - supabase/migrations/20260903143812_anchor_account_estimates_v1.sql
       - supabase/migrations/20260903145239_anchor_account_estimates_application_fk_fix.sql
       - .github/workflows/njw302-anchor-home-funnel-ci.yml
@@ -38,6 +39,7 @@ on:
       - property/css/anchor-home-funnel.css
       - property/css/anchor-estimate-library.css
       - property/tests/anchor-home-funnel-contract.mjs
+      - supabase/functions/anchor-result-handoff/index.ts
       - supabase/migrations/20260903143812_anchor_account_estimates_v1.sql
       - supabase/migrations/20260903145239_anchor_account_estimates_application_fk_fix.sql
       - .github/workflows/njw302-anchor-home-funnel-ci.yml
