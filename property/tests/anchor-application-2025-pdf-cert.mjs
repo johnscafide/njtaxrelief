@@ -2,7 +2,7 @@ import fs from 'node:fs';
 import vm from 'node:vm';
 import crypto from 'node:crypto';
 import assert from 'node:assert/strict';
-import { PDFDocument, StandardFonts, PDFName } from 'pdf-lib';
+import { PDFDocument, StandardFonts, PDFName, rgb } from 'pdf-lib';
 
 const SOURCES = {
   'anc-1': {
@@ -31,7 +31,7 @@ const window = {};
 const sandbox = {
   window,
   document: { getElementById: () => null },
-  PDFLib: { PDFDocument, StandardFonts, PDFName },
+  PDFLib: { PDFDocument, StandardFonts, PDFName, rgb },
   Uint8Array,
   Array,
   Object,
@@ -115,7 +115,7 @@ for (const [name, state] of [['anc', anc], ['pas', pas]]) {
   const out = result.pdfBytes;
   assert.ok(out.byteLength > 10000, `${name} output unexpectedly small`);
   const doc = await PDFDocument.load(out);
-  assert.equal(doc.getPageCount(), SOURCES[expectedType].pages, `${name} page count changed`);
+  assert.equal(doc.getPageCount(), SOURCES[expectedType].pages + 1, `${name} should append one Watchdog mailing-label page`);
   assert.equal(doc.getForm().getFields().length, 0, `${name} output did not flatten AcroForm fields`);
   for (const [index, page] of doc.getPages().entries()) {
     assert.equal(page.node.has(PDFName.of('Annots')), false, `${name} page ${index + 1} retained flattened Widget annotations`);
@@ -123,4 +123,4 @@ for (const [name, state] of [['anc', anc], ['pas', pas]]) {
   fs.writeFileSync(`artifacts/njw303-pdf-cert/${name}-2025-filled.pdf`, out);
 }
 
-console.log('ANC-1 and PAS-1 pdf-lib generation, flattening, annotation cleanup, hashes, and page counts passed');
+console.log('ANC-1 and PAS-1 pdf-lib generation, flattening, mailing-label append, annotation cleanup, hashes, and page counts passed');
