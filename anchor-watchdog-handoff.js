@@ -39,7 +39,7 @@
       .then(function(body){
         var token=body&&body.result_token;if(!/^[a-f0-9]{64}$/i.test(String(token||'')))throw new Error('Secure handoff token was not created.');
         finished=true;track('anchor_watchdog_handoff_ready',{tenure:answers.tenure||'unknown',qualified:params&&params.qualified===true});
-        setTimeout(function(){location.replace('https://www.watchdogindex.com/anchor/results/#'+token);},450);
+        setTimeout(function(){location.replace('https://www.watchdogindex.com/#anchor-result='+token);},450);
       })
       .catch(function(err){staging=false;fail(err&&err.message?err.message:'Watchdog could not open the secure handoff. Your result remains available here.');});
   }
