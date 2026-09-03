@@ -43,7 +43,7 @@ assert.match(home, /location\.href='\/anchor\/application\/2025\/'/);
 
 // Cross-domain handoff uses only an opaque fragment token, never result PII in the URL.
 assert.match(handoff, /result_token/);
-assert.match(handoff, /location\.replace\('https:\/\/www\.watchdogindex\.com\/#'\+token\)/);
+assert.match(handoff, /location\.replace\('https:\/\/www\.watchdogindex\.com\/#anchor-result='\+token\)/);
 assert.doesNotMatch(handoff, /watchdogindex\.com\/anchor\/results/);
 assert.doesNotMatch(handoff, /[?&](?:email|phone|address|benefit)=/i);
 
