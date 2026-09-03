@@ -1,0 +1,67 @@
+name: NJW-302 ANCHOR homeowner funnel contract
+
+on:
+  push:
+    branches: [main]
+    paths:
+      - anchor-watchdog-handoff.js
+      - watchdog-promo.js
+      - watchdog-promo.css
+      - api/njptr-watchdog-acquisition-page.js
+      - property/js/public-nav.js
+      - property/js/anchor-home-funnel.js
+      - property/js/anchor-estimate-library.js
+      - property/js/anchor-application-estimate-bridge.js
+      - property/js/anchor-application-2025-enhancements.js
+      - property/partials/anchor-home-funnel.html
+      - property/anchor/applications/index.html
+      - property/css/anchor-home-funnel.css
+      - property/css/anchor-estimate-library.css
+      - property/tests/anchor-home-funnel-contract.mjs
+      - supabase/migrations/20260903143812_anchor_account_estimates_v1.sql
+      - supabase/migrations/20260903145239_anchor_account_estimates_application_fk_fix.sql
+      - .github/workflows/njw302-anchor-home-funnel-ci.yml
+  pull_request:
+    branches: [main]
+    paths:
+      - anchor-watchdog-handoff.js
+      - watchdog-promo.js
+      - watchdog-promo.css
+      - api/njptr-watchdog-acquisition-page.js
+      - property/js/public-nav.js
+      - property/js/anchor-home-funnel.js
+      - property/js/anchor-estimate-library.js
+      - property/js/anchor-application-estimate-bridge.js
+      - property/js/anchor-application-2025-enhancements.js
+      - property/partials/anchor-home-funnel.html
+      - property/anchor/applications/index.html
+      - property/css/anchor-home-funnel.css
+      - property/css/anchor-estimate-library.css
+      - property/tests/anchor-home-funnel-contract.mjs
+      - supabase/migrations/20260903143812_anchor_account_estimates_v1.sql
+      - supabase/migrations/20260903145239_anchor_account_estimates_application_fk_fix.sql
+      - .github/workflows/njw302-anchor-home-funnel-ci.yml
+
+permissions:
+  contents: read
+
+jobs:
+  contract:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+      - name: Check ANCHOR homeowner funnel JavaScript syntax
+        run: |
+          node --check anchor-watchdog-handoff.js
+          node --check watchdog-promo.js
+          node --check api/njptr-watchdog-acquisition-page.js
+          node --check property/js/public-nav.js
+          node --check property/js/anchor-home-funnel.js
+          node --check property/js/anchor-estimate-library.js
+          node --check property/js/anchor-application-estimate-bridge.js
+          node --check property/js/anchor-application-2025-enhancements.js
+      - name: Run ANCHOR homeowner funnel contract
+        run: node property/tests/anchor-home-funnel-contract.mjs
