@@ -73,12 +73,16 @@ function computeAnchor(raw: Record<string, unknown>) {
   const primary = answer(raw.primary, ["yes", "no"]);
   const taxes = answer(raw.taxes, ["yes", "no"]);
 
+  const complete = Boolean(
+    tenure && income && age && primary &&
+    (tenure === "rent" || taxes)
+  );
   const qualifies = Boolean(
-    tenure && income &&
-    primary !== "no" &&
+    complete &&
+    primary === "yes" &&
     income !== "high" &&
     !(tenure === "rent" && income === "mid") &&
-    !(tenure === "own" && taxes === "no")
+    (tenure !== "own" || taxes === "yes")
   );
 
   let benefit = 0;
@@ -93,6 +97,7 @@ function computeAnchor(raw: Record<string, unknown>) {
     age,
     primary,
     taxes,
+    complete,
     qualifies,
     benefit,
     eligibility_label: qualifies ? "Likely eligible based on the answers provided" : "Not currently estimated as eligible based on the answers provided",
@@ -137,6 +142,9 @@ async function stage(req: Request, body: Record<string, any>) {
 
   const answers = result.answers && typeof result.answers === "object" ? result.answers as Record<string, unknown> : {};
   const computed = computeAnchor(answers);
+  if (!computed.complete) {
+    return json(req, { error: "The verified estimator answers are incomplete. Your result remains available on the estimator page." }, 422);
+  }
   const address = str(result.address, 300);
   if (!address) return json(req, { error: "A verified New Jersey property address is required." }, 422);
 
