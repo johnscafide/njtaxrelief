@@ -106,7 +106,7 @@ function render(){
     </div>
     <div class="li-meta"><b>${state.files.length} file${state.files.length===1?'':'s'}</b><span>·</span><span>${state.view.length.toLocaleString()} shown</span><span>·</span><div class="li-pills">${mapped||'<span class="li-pill">No standard columns recognized</span>'}</div></div>
     <div class="li-table-wrap"><table class="li-table"><thead><tr><th>Contact</th><th>Email</th><th>Phone</th><th>Address</th><th>Source</th><th>Quality</th><th>File</th><th>Action</th></tr></thead><tbody>${state.view.slice(0,500).map((r)=>rowHtml(r)).join('')||'<tr><td colspan="8" class="li-empty">No contacts match this view.</td></tr>'}</tbody></table></div>
-    <div class="li-footer"><span class="li-footer-note">Showing up to 500 rows on screen. Exports include the full filtered result.</span>${state.view.length>500?`<span class="li-pill">${state.view.length-500} more in export</span>`:''}</div>
+    <div class="li-footer"><span class="li-footer-note">Showing up to 500 rows on screen. Exports include the full filtered result. Contact info present is a data-completeness signal only, not proof of marketing consent.</span>${state.view.length>500?`<span class="li-pill">${state.view.length-500} more in export</span>`:''}</div>
     <div class="li-legacy"><div><b>Still in the old BTC toolbox</b><p>Open House, Property IQ, campaign/reachout and specialty utilities remain available while those are migrated separately.</p></div><a href="/btc-legacy.html">Open legacy tools →</a></div>`;
   host.querySelectorAll('[data-add-row]').forEach(b=>b.addEventListener('click',()=>prefillLead(b.dataset.addRow)));
   setButtons(true);
@@ -146,6 +146,7 @@ function prefillLead(id){
 function clearAll(){state.rows=[];state.view=[];state.files=[];state.headers=[];state.mapping={};render();toast('Imported CSV cleared')}
 function init(){
   const input=$('#leadiq-file');if(!input)return;
+  const readyOption=$('#leadiq-filter option[value="ready"]');if(readyOption)readyOption.textContent='Has email or phone';
   input.addEventListener('change',()=>{loadFiles(Array.from(input.files||[]));input.value='' });
   $('#leadiq-filter')?.addEventListener('change',e=>{state.filter=e.target.value;render()});
   $('#leadiq-search')?.addEventListener('input',e=>{state.search=e.target.value.trim();render()});
