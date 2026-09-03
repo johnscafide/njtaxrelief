@@ -13,6 +13,7 @@
   <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@500;600;700;800&family=Source+Sans+3:wght@400;500;600;700&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="/property/css/anchor-application.css">
   <link rel="stylesheet" href="/property/css/anchor-applications.css">
+  <link rel="stylesheet" href="/property/css/anchor-estimates.css">
 </head>
 <body>
   <!-- Sensitive-flow privacy guard: watchdog-consent.js, ai-referral-analytics.js, and contact-routing-policy.js are intentionally not loaded on this page. -->
@@ -30,6 +31,11 @@
       </section>
 
       <div id="wd-library-status" class="wd-app-status" role="status" aria-live="polite"></div>
+
+      <section id="wd-estimate-library" class="wd-estimate-library" hidden aria-labelledby="wd-estimate-library-title">
+        <div class="wd-estimate-library-head"><div><p class="wd-step-kicker">SAVED BENEFIT ESTIMATES</p><h2 id="wd-estimate-library-title">My ANCHOR estimates</h2><p>Keep the estimate tied to your Watchdog account and continue into the official-form preparation flow when you are ready.</p></div></div>
+        <div id="wd-estimate-library-list" class="wd-estimate-library-list"></div>
+      </section>
 
       <section id="wd-library-auth" class="wd-library-panel">
         <div class="wd-library-panel-copy">
@@ -79,6 +85,7 @@
 
   <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2/dist/umd/supabase.js"></script>
   <script src="/property/js/supabase-runtime.js"></script>
+  <script src="/property/js/anchor-estimate-library.js"></script>
   <script src="/property/js/anchor-application-vault.js"></script>
   <script src="/property/js/anchor-applications.js"></script>
 </body>
