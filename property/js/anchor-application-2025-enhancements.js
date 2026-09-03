@@ -86,6 +86,7 @@ function installPreview(){
 }
 function loadStyles(){if(q('link[data-anchor-enhancements]'))return;var link=document.createElement('link');link.rel='stylesheet';link.href='/property/css/anchor-application-2025-enhancements.css';link.dataset.anchorEnhancements='1';document.head.appendChild(link);}
 async function loadPartial(){var response=await fetch('/property/partials/anchor-application-2025-enhancements.html',{credentials:'same-origin'});if(!response.ok)throw new Error('Anchor application enhancement partial unavailable.');var host=document.createElement('div');host.hidden=true;host.dataset.anchorEnhancementHost='1';host.innerHTML=await response.text();document.body.appendChild(host);}
-async function init(){try{loadStyles();await loadPartial();installWelcome();installPreview();}catch(_){}}
+function loadEstimateBridge(){if(q('script[data-anchor-estimate-bridge]'))return;var script=document.createElement('script');script.src='/property/js/anchor-application-estimate-bridge.js';script.async=false;script.dataset.anchorEstimateBridge='1';document.body.appendChild(script);}
+async function init(){try{loadStyles();await loadPartial();installWelcome();installPreview();loadEstimateBridge();}catch(_){loadEstimateBridge();}}
 init();
 })();
