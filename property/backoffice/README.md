@@ -1,14 +1,14 @@
 # Watchdog Backoffice — Lead Intelligence
 
-Private operations area at `/property/backoffice/` for the two household BoldTrail workflows.
+Private operations area at `/property/backoffice/` for retained Watchdog leads, CRM cleanup, address validation and BoldTrail handoffs.
 
 ## Security
 
-Backoffice lead data is no longer read directly from browser Supabase queries. The page talks to the custom-authenticated `backoffice-api` Edge Function, which uses short-lived opaque sessions and service-role database access.
+Backoffice lead data is not read directly from browser Supabase queries. The page talks to the `backoffice-api` Edge Function, which uses short-lived authenticated sessions and service-role database access.
 
-The shared Backoffice key is stored in Supabase Vault. It is never committed to GitHub or written to browser storage. Only the short-lived session token is kept in `sessionStorage`.
+The current browser UI is gated by a signed-in Watchdog developer account. Secrets used by Backoffice services remain server-side / in Supabase Vault and are not committed to GitHub.
 
-First-time shared-key setup is fail-closed and requires an already signed-in Watchdog developer session. After initialization, John and Wife can sign in with the shared key without needing separate Watchdog developer accounts. Failed logins are throttled and authentication events are audited.
+Imported LeadIQ CSV files are handled in browser memory only. They are not written to Supabase, `localStorage` or the Backoffice lead queue unless the user explicitly chooses **Add to queue** and then saves the lead through the authenticated Backoffice workflow.
 
 ## Lead workflow
 
@@ -24,19 +24,35 @@ First-time shared-key setup is fail-closed and requires an already signed-in Wat
 
 CSV export includes clear contact/address/source/status/hashtags/notes columns plus Watchdog lead context. BoldTrail's import mapper can map the desired CRM fields during upload. Exporting a lead records the handoff but does not claim that BoldTrail has successfully imported or synced it.
 
+## LeadIQ Tools
+
+`/btc.html` now routes to `/property/backoffice/#leadiq` so the previous BTC bookmark opens the integrated workflow.
+
+The LeadIQ Tools workspace currently migrates the highest-use contact-file workflow from the legacy BTC page:
+
+- Import one or multiple CSV files by picker or drag-and-drop.
+- Recognize common BoldTrail, kvCORE and generic CRM contact columns.
+- Normalize email, phone, state and ZIP values.
+- Detect duplicates using email, phone, then name/address evidence.
+- Flag missing contact information, missing addresses and malformed email/phone values.
+- Search and filter the imported contact set.
+- Export a cleaned/deduplicated CSV.
+- Export a BoldTrail-ready CSV using the same column contract as the server Backoffice exporter.
+- Prefill the secure **Add lead** form from an imported contact without silently persisting the entire CSV.
+
+Having an email address or phone number is a data-completeness signal only. It is not proof of marketing consent or permission to contact.
+
+The original BTC application remains preserved at `/btc-legacy.html` while specialty utilities such as Open House, Property IQ and remaining reachout/campaign helpers are migrated deliberately. The legacy page is not the authoritative source for retained lead records.
+
 ## Google Address Validation
 
 Open **Settings** in Backoffice and paste the Google Address Validation API key. The key is sent to the server and stored in Supabase Vault as `google_address_validation_api_key`.
 
 Manual leads with a submitted address are automatically validated when Google is connected. Existing leads can be revalidated from the lead detail panel. The submitted address remains unchanged; Google's standardized address, postal components, verdict summary and USPS DPV result are stored separately.
 
-## Shared key rotation
-
-Open **Settings** and rotate the shared Backoffice key. Rotation revokes all current Backoffice sessions immediately.
-
 ## Server components
 
-- `backoffice-api` — password/session authentication, lead reads/writes, assignment, Google validation, CSV generation, export audit and secret configuration.
+- `backoffice-api` — authenticated lead reads/writes, assignment, Google validation, CSV generation, export audit and secret configuration.
 - `backoffice-lead-ingest` — server-to-server intake scaffold for future automatic lead sources.
 - `backoffice_leads` / `backoffice_lead_events` — master lead record and audit trail.
 - `backoffice_sessions` / `backoffice_auth_events` — private access sessions and login audit.
