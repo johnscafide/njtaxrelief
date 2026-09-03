@@ -1,0 +1,82 @@
+<template id="wd-anchor-home-result-template">
+  <section id="wd-anchor-home-result" class="wd-anchor-home-result" aria-labelledby="wd-anchor-home-title">
+    <div class="wd-anchor-home-wrap">
+      <div class="wd-anchor-home-topline">
+        <span>YOUR 2025 PROPERTY TAX RELIEF</span>
+        <span class="wd-anchor-home-secure"><i class="fas fa-shield-halved" aria-hidden="true"></i> Securely continued from NJ Property Tax Relief</span>
+      </div>
+      <div class="wd-anchor-home-grid">
+        <div class="wd-anchor-home-benefit">
+          <p class="wd-anchor-home-hello" data-anchor-hello>Your estimate is ready.</p>
+          <h2 id="wd-anchor-home-title">Your estimated ANCHOR benefit</h2>
+          <strong class="wd-anchor-home-amount" data-anchor-amount>$—</strong>
+          <div class="wd-anchor-home-status" data-anchor-status>Estimate based on the answers provided.</div>
+          <div class="wd-anchor-home-address"><i class="fas fa-location-dot" aria-hidden="true"></i><span data-anchor-address>New Jersey residence</span></div>
+          <p class="wd-anchor-home-note">This is an informational estimate, not a benefit determination from the State of New Jersey. Watchdog keeps the estimate visible before asking you to create or use an account.</p>
+          <div class="wd-anchor-home-actions">
+            <button type="button" class="wd-anchor-btn primary" data-anchor-action="start"><i class="fas fa-file-pen" aria-hidden="true"></i> Save &amp; start my 2025 application</button>
+            <button type="button" class="wd-anchor-btn secondary" data-anchor-action="save"><i class="far fa-bookmark" aria-hidden="true"></i> Save estimate</button>
+            <a class="wd-anchor-link" data-anchor-property href="/"><i class="fas fa-house" aria-hidden="true"></i> View full property record</a>
+          </div>
+          <div class="wd-anchor-save-status" data-anchor-save-status role="status" aria-live="polite"></div>
+          <div data-anchor-auth-host hidden></div>
+        </div>
+        <aside class="wd-anchor-property-context" data-anchor-property-context aria-label="Watchdog property context">
+          <div class="wd-anchor-property-loading"><span class="wd-anchor-loader" aria-hidden="true"></span><strong>Matching your residence to Watchdog</strong><p>Loading assessment, tax and property-intelligence context from governed New Jersey records.</p></div>
+        </aside>
+      </div>
+    </div>
+  </section>
+</template>
+
+<section id="wd-anchor-quick" class="wd-anchor-quick" hidden aria-labelledby="wd-anchor-quick-title">
+  <div class="wd-anchor-quick-wrap">
+    <div class="wd-anchor-quick-summary">
+      <div class="wd-anchor-quick-icon" aria-hidden="true"><i class="fas fa-house-circle-check"></i></div>
+      <div class="wd-anchor-quick-copy">
+        <span>2025 NJ PROPERTY TAX RELIEF</span>
+        <h2 id="wd-anchor-quick-title">See your estimated ANCHOR benefit.</h2>
+        <p>A short Watchdog check using the same 2025 estimator rules. No account needed to see the estimate.</p>
+      </div>
+      <button type="button" class="wd-anchor-quick-toggle" data-anchor-quick-toggle aria-expanded="false">Check my estimate <i class="fas fa-chevron-down" aria-hidden="true"></i></button>
+    </div>
+
+    <form class="wd-anchor-quick-form" data-anchor-quick-form hidden>
+      <div class="wd-anchor-quick-fields">
+        <label><span>Residence</span><select name="wd_anchor_tenure" required><option value="">Choose</option><option value="own">Homeowner</option><option value="rent">Renter</option></select></label>
+        <label><span>Household income</span><select name="wd_anchor_income" required><option value="">Choose</option><option value="low">$150,000 or less</option><option value="mid">$150,001–$250,000</option><option value="high">Over $250,000</option></select></label>
+        <label><span>Age 65 or older?</span><select name="wd_anchor_age" required><option value="">Choose</option><option value="yes">Yes</option><option value="no">No</option></select></label>
+        <label><span>Primary NJ residence?</span><select name="wd_anchor_primary" required><option value="">Choose</option><option value="yes">Yes</option><option value="no">No</option></select></label>
+        <label data-anchor-tax-wrap hidden><span>Property taxes paid?</span><select name="wd_anchor_taxes"><option value="">Choose</option><option value="yes">Yes</option><option value="no">No</option></select></label>
+      </div>
+      <label class="wd-anchor-address-field"><span>New Jersey residence <small>Optional to estimate · required to save or start an application</small></span><input name="wd_anchor_address" type="text" autocomplete="street-address" placeholder="123 Main St, Town, NJ 08000"></label>
+      <div class="wd-anchor-quick-form-actions"><button type="submit" class="wd-anchor-btn primary">Show my estimate</button><span>About one minute · Free</span></div>
+      <div class="wd-anchor-quick-status" data-anchor-quick-status role="status" aria-live="polite"></div>
+    </form>
+
+    <div class="wd-anchor-quick-result" data-anchor-quick-result hidden>
+      <div><span>Estimated 2025 ANCHOR benefit</span><strong data-anchor-quick-amount>$—</strong><b data-anchor-quick-label></b><p data-anchor-quick-address></p></div>
+      <div class="wd-anchor-home-actions">
+        <button type="button" class="wd-anchor-btn primary" data-anchor-action="start">Save &amp; start my 2025 application</button>
+        <button type="button" class="wd-anchor-btn secondary" data-anchor-action="save">Save estimate</button>
+      </div>
+      <div data-anchor-auth-host hidden></div>
+    </div>
+    <p class="wd-anchor-quick-disclaimer">Watchdog is independent and is not the State of New Jersey. The State determines final eligibility and benefit amounts.</p>
+  </div>
+</section>
+
+<template id="wd-anchor-home-auth-template">
+  <div class="wd-anchor-auth-box">
+    <strong>Save this to a free Watchdog account</strong>
+    <p>We’ll email a six-digit sign-in code. No password or paid plan is required.</p>
+    <label><span>Email address</span><input type="email" data-anchor-auth-email autocomplete="email" inputmode="email" placeholder="you@example.com"></label>
+    <button type="button" class="wd-anchor-btn primary" data-anchor-auth-send>Email me a code</button>
+    <div data-anchor-auth-code-wrap hidden>
+      <label><span>6-digit code</span><input type="text" data-anchor-auth-code maxlength="6" inputmode="numeric" autocomplete="one-time-code" placeholder="000000"></label>
+      <button type="button" class="wd-anchor-btn primary" data-anchor-auth-verify>Verify &amp; continue</button>
+    </div>
+    <div data-anchor-auth-status class="wd-anchor-auth-status" role="status" aria-live="polite"></div>
+    <small>By continuing, you agree to the Watchdog <a href="/terms" target="_blank" rel="noopener">Terms of Use</a> and acknowledge the <a href="/privacy" target="_blank" rel="noopener">Privacy Policy</a>.</small>
+  </div>
+</template>
