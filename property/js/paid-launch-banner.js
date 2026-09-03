@@ -119,6 +119,7 @@
   }
 
   function ensureLaunchSurface(){
+    if(isLanding()){clearNavOffset();return;}
     ensureStylesheet();
     loadTemplates().then(function(host){
       if(!host)return;
