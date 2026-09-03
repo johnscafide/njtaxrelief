@@ -43,18 +43,41 @@ function parseCsv(text){
   return {headers,records};
 }
 function infer(headers){
-  const norm=headers.map(h=>({h,k:key(h)})),map={};
+  const norm=headers.map(h=>({h,k:key(h)})),map={},used=new Set();
   for(const [field,aliases] of Object.entries(ALIASES)){
-    const hit=norm.find(x=>aliases.includes(x.k))||norm.find(x=>aliases.some(a=>x.k.includes(a)||a.includes(x.k)));
-    if(hit)map[field]=hit.h;
+    const available=norm.filter(x=>!used.has(x.h));
+    const hit=available.find(x=>aliases.includes(x.k))||available.find(x=>aliases.some(a=>a.length>=4&&x.k.includes(a)));
+    if(hit){map[field]=hit.h;used.add(hit.h)}
   }
   return map;
 }
 function val(raw,field,map){return map[field]?clean(raw[map[field]]):''}
 function normalizePhone(v){const digits=clean(v).replace(/\D/g,'');const d=digits.length===11&&digits.startsWith('1')?digits.slice(1):digits;if(d.length===10)return `(${d.slice(0,3)}) ${d.slice(3,6)}-${d.slice(6)}`;return clean(v)}
 function normalizeZip(v){const m=clean(v).match(/\b(\d{5})(?:-?(\d{4}))?\b/);return m?m[1]+(m[2]?'-'+m[2]:''):clean(v)}
+function splitName(full){
+  const value=clean(full),p=value.split(/\s+/).filter(Boolean);
+  if(p.length<2)return {first:p[0]||'',last:''};
+  if(/\band\b/i.test(value))return {first:p.slice(0,-1).join(' '),last:p[p.length-1]};
+  return {first:p[0],last:p.slice(1).join(' ')};
+}
+function normalizeNameFields(first,last,full){
+  first=clean(first);last=clean(last);
+  const suppliedFull=clean(full);
+  full=suppliedFull||(first&&last&&key(first)===key(last)?first:[first,last].filter(Boolean).join(' '));
+  if(first&&last&&key(first)===key(last)){
+    const split=splitName(full||first);first=split.first;last=split.last;
+  }else if(!first&&!last&&full){
+    const split=splitName(full);first=split.first;last=split.last;
+  }else if(!first&&full){
+    first=splitName(full).first;
+  }else if(!last&&full){
+    last=splitName(full).last;
+  }
+  return {first,last,full:full||[first,last].filter(Boolean).join(' ')};
+}
 function normalizeRow(raw,map,file,index){
-  const first=val(raw,'first',map),last=val(raw,'last',map),full=val(raw,'full',map)||[first,last].filter(Boolean).join(' ');
+  const names=normalizeNameFields(val(raw,'first',map),val(raw,'last',map),val(raw,'full',map));
+  const {first,last,full}=names;
   const email=val(raw,'email',map).toLowerCase();
   const phone=normalizePhone(val(raw,'phone',map));
   const street=val(raw,'street',map),city=val(raw,'city',map),explicitState=val(raw,'state',map),zip=normalizeZip(val(raw,'zip',map)),hasAddress=!!(street||city||zip),stateName=(explicitState||(hasAddress?'NJ':'')).toUpperCase();
@@ -128,14 +151,13 @@ function exportRows(rows,type){
   if(!rows.length){toast('No contacts in this view');return}
   let headers,data,name;
   if(type==='boldtrail'){
-    headers=BOLDTRAIL_HEADERS;data=deduped(rows).map(r=>[r.first||splitName(r.full).first,r.last||splitName(r.full).last,r.email,r.phone,r.street,r.city,r.state,r.zip,r.source||'LeadIQ CSV','new',r.tags,r.notes,'','','','','','','']);name='leadiq-boldtrail.csv';
+    headers=BOLDTRAIL_HEADERS;data=deduped(rows).map(r=>{const names=normalizeNameFields(r.first,r.last,r.full);return [names.first,names.last,r.email,r.phone,r.street,r.city,r.state,r.zip,r.source||'LeadIQ CSV','new',r.tags,r.notes,'','','','','','','']});name='leadiq-boldtrail.csv';
   }else{
     headers=['Full Name','First Name','Last Name','Email','Phone','Street Address','City','State','Postal Code','Source','Hashtags','Notes','Quality'];data=(type==='cleaned'?deduped(rows):rows).map(r=>[r.full,r.first,r.last,r.email,r.phone,r.street,r.city,r.state,r.zip,r.source,r.tags,r.notes,r.duplicate?'Duplicate':r.issues.join('; ')||'Ready']);name=type==='cleaned'?'leadiq-cleaned.csv':'leadiq-filtered.csv';
   }
   const csv='\uFEFF'+[headers.map(csvCell).join(','),...data.map(row=>row.map(csvCell).join(','))].join('\r\n');
   const blob=new Blob([csv],{type:'text/csv;charset=utf-8'}),url=URL.createObjectURL(blob),a=document.createElement('a');a.href=url;a.download=name;document.body.appendChild(a);a.click();a.remove();setTimeout(()=>URL.revokeObjectURL(url),1000);toast(`${data.length.toLocaleString()} rows exported`)
 }
-function splitName(full){const p=clean(full).split(/\s+/).filter(Boolean);return p.length<2?{first:p[0]||'',last:''}:{first:p.slice(0,-1).join(' '),last:p[p.length-1]}}
 function prefillLead(id){
   const r=state.rows.find(x=>x.id===id),form=$('#lead-form');if(!r||!form){toast('Lead form is unavailable');return}
   const set=(name,value)=>{if(form.elements[name])form.elements[name].value=value||''};
