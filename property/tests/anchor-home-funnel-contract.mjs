@@ -7,6 +7,7 @@ const home = read('property/js/anchor-home-funnel.js');
 const partial = read('property/partials/anchor-home-funnel.html');
 const publicNav = read('property/js/public-nav.js');
 const handoff = read('anchor-watchdog-handoff.js');
+const edgeHandoff = read('supabase/functions/anchor-result-handoff/index.ts');
 const promo = read('watchdog-promo.js');
 const acquisition = read('api/njptr-watchdog-acquisition-page.js');
 const estimateLibrary = read('property/js/anchor-estimate-library.js');
@@ -45,6 +46,16 @@ assert.match(handoff, /result_token/);
 assert.match(handoff, /location\.replace\('https:\/\/www\.watchdogindex\.com\/#'\+token\)/);
 assert.doesNotMatch(handoff, /watchdogindex\.com\/anchor\/results/);
 assert.doesNotMatch(handoff, /[?&](?:email|phone|address|benefit)=/i);
+
+// Server-side handoff recomputes the estimate and fails closed on missing required answers.
+assert.match(edgeHandoff, /const complete = Boolean/);
+assert.match(edgeHandoff, /primary === "yes"/);
+assert.match(edgeHandoff, /tenure !== "own" \|\| taxes === "yes"/);
+assert.match(edgeHandoff, /if \(!computed\.complete\)/);
+assert.match(edgeHandoff, /verified estimator answers are incomplete/i);
+assert.match(edgeHandoff, /return json\(req, \{ error: .* \}, 422\)/s);
+assert.match(edgeHandoff, /result_token_hash: await sha256\(token\)/);
+assert.match(edgeHandoff, /Cache-Control": "no-store"/);
 
 // NJPTR acquisition surfaces are prominent but frequency-capped and estimator-safe.
 assert.match(promo, /FIVE_DAYS=5\*24\*60\*60\*1000/);
