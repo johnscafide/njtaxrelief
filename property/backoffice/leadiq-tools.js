@@ -57,8 +57,8 @@ function normalizeRow(raw,map,file,index){
   const first=val(raw,'first',map),last=val(raw,'last',map),full=val(raw,'full',map)||[first,last].filter(Boolean).join(' ');
   const email=val(raw,'email',map).toLowerCase();
   const phone=normalizePhone(val(raw,'phone',map));
-  const street=val(raw,'street',map),city=val(raw,'city',map),stateName=(val(raw,'state',map)||'NJ').toUpperCase(),zip=normalizeZip(val(raw,'zip',map));
-  const address=[street,city,stateName,zip].filter(Boolean).join(', ');
+  const street=val(raw,'street',map),city=val(raw,'city',map),explicitState=val(raw,'state',map),zip=normalizeZip(val(raw,'zip',map)),hasAddress=!!(street||city||zip),stateName=(explicitState||(hasAddress?'NJ':'')).toUpperCase();
+  const address=hasAddress?[street,city,stateName,zip].filter(Boolean).join(', '):'';
   return {id:`${file}:${index}`,file,index,first,last,full,email,phone,street,city,state:stateName,zip,address,source:val(raw,'source',map)||'LeadIQ CSV',tags:val(raw,'tags',map),notes:val(raw,'notes',map),raw,duplicate:false,issues:[]};
 }
 function markQuality(rows){
