@@ -41,3 +41,11 @@ function skipInapplicable(){var s=active();if(!s)return;var id=s.dataset.step;if
 new MutationObserver(skipInapplicable).observe(form,{subtree:true,attributes:true,attributeFilter:['class']});
 setTimeout(skipInapplicable,0);
 })();
+(function loadAnchor2025Enhancements(){
+  if(document.querySelector('script[data-anchor-2025-enhancements]'))return;
+  var script=document.createElement('script');
+  script.src='/property/js/anchor-application-2025-enhancements.js';
+  script.async=false;
+  script.dataset.anchor2025Enhancements='1';
+  document.body.appendChild(script);
+})();
