@@ -37,3 +37,58 @@
   <span id="wd-pdf-updated-copy">Updated just now · preview created locally in your browser</span>
   <span id="wd-pdf-error-copy">Preview could not be refreshed. Your saved application is unchanged.</span>
 </div>
+
+<template id="wd-anc-income-help-template">
+  <div class="wd-guidance-card wd-anc-income-help">
+    <span class="wd-guidance-kicker">WHERE TO FIND THIS</span>
+    <div class="wd-nj1040-line"><span>2025 NJ-1040</span><strong>Line 29</strong><b>New Jersey Gross Income</b></div>
+    <p>Enter the amount from line 29 of your 2025 NJ-1040. If spouses filed separately but maintained the same main home, use combined income. If you were below the filing threshold for the entire year, enter 0. Part-year residents must include income from all sources for the entire year.</p>
+  </div>
+</template>
+
+<template id="wd-parcel-help-template">
+  <div class="wd-guidance-card wd-parcel-help">
+    <div class="wd-guidance-head"><div><span class="wd-guidance-kicker">BLOCK &amp; LOT HELP</span><strong>Find the property identifiers on your tax record.</strong></div><span class="wd-courtesy-badge">Watchdog courtesy</span></div>
+    <div class="wd-record-card-example" aria-label="Example property record card showing where Block and Lot appear">
+      <div class="wd-record-card-top"><span>MUNICIPAL PROPERTY RECORD</span><small>Layout and card color vary by municipality</small></div>
+      <div class="wd-record-card-grid"><span>OWNER</span><b>Sample Owner</b><span>PROPERTY LOCATION</span><b>123 Sample Street</b><span class="is-highlight">BLOCK</span><b class="is-highlight">3105.62</b><span class="is-highlight">LOT</span><b class="is-highlight">14.3</b><span>QUALIFIER</span><b>C0012</b></div>
+    </div>
+    <p>The official NJ instructions say Block, Lot, and condominium Qualifier can be taken from your property tax bill or obtained from your local tax collector. Many municipalities also display them on a property record card, which may be green, white, or another format.</p>
+    <div class="wd-parcel-actions"><button type="button" id="wd-watchdog-parcel-lookup">Look up with Watchdog</button><small id="wd-watchdog-parcel-lookup-status"></small></div>
+    <div id="wd-watchdog-parcel-prefill" class="wd-watchdog-prefill" hidden><span>WATCHDOG PROPERTY MATCH</span><strong id="wd-watchdog-parcel-values"></strong><small>We filled these fields from the matched Watchdog parcel record. Review them against your municipal record before continuing.</small></div>
+  </div>
+</template>
+<span id="wd-parcel-missing-address" hidden>Enter your main home street address and city first.</span>
+<span id="wd-parcel-looking-up" hidden>Checking Watchdog property data...</span>
+<span id="wd-parcel-not-found" hidden>Watchdog could not confidently match a parcel. Use your municipal record instead.</span>
+<span id="wd-parcel-found" hidden>Watchdog found a parcel match. Review the values below.</span>
+
+<template id="wd-pas-income-calculator-template">
+  <details class="wd-pas-calculator" data-pas-calculator>
+    <summary><span><b data-calc-year></b> income calculator</span><small>Use this if you need help calculating PAS-1 line a.</small></summary>
+    <div class="wd-pas-calculator-body">
+      <div class="wd-nj1040-line compact"><span>NJ-1040 shortcut</span><strong>Line 27</strong><b>Total Income</b></div>
+      <p>If you know your NJ-1040 line 27 amount, enter it directly in the PAS-1 Total Income field below. If you do not know it or were not required to file NJ-1040, use the official 12-category worksheet here.</p>
+      <div class="wd-calc-grid">
+        <label><span>1. Wages, salaries, tips and employee compensation</span><input inputmode="decimal" data-work-line="1"></label>
+        <label><span>2. Taxable interest income</span><input inputmode="decimal" data-work-line="2"></label>
+        <label><span>3. Dividends</span><input inputmode="decimal" data-work-line="3"></label>
+        <label><span>4. Net profits from business</span><input inputmode="decimal" data-work-line="4"></label>
+        <label><span>5. Net gains/income from disposition of property</span><input inputmode="decimal" data-work-line="5"></label>
+        <label><span>6. Taxable pension, annuity and IRA distributions</span><input inputmode="decimal" data-work-line="6"></label>
+        <label><span>7. Partnership income</span><input inputmode="decimal" data-work-line="7"></label>
+        <label><span>8. S corporation income</span><input inputmode="decimal" data-work-line="8"></label>
+        <label><span>9. Rents, royalties, patents and copyrights</span><input inputmode="decimal" data-work-line="9"></label>
+        <label><span>10. Net gambling winnings</span><input inputmode="decimal" data-work-line="10"></label>
+        <label><span>11. Alimony / separate maintenance received</span><input inputmode="decimal" data-work-line="11"></label>
+        <label><span>12. Other income</span><input inputmode="decimal" data-work-line="12"></label>
+      </div>
+      <div class="wd-calc-result"><span>Worksheet total - PAS-1 line a</span><strong data-work-total>$0</strong><button type="button" data-use-work-total>Use this amount</button></div>
+      <p class="wd-calc-note">Use 0 for a category with a net loss. Do not use a loss in one category to reduce income in another category. Round worksheet items to the nearest dollar.</p>
+    </div>
+  </details>
+</template>
+
+<template id="wd-pas-total-template">
+  <div class="wd-pas-total-card" data-pas-total-card><span data-pas-total-year></span><strong data-pas-total-value>$0</strong><small>PAS-1 total annual income: line a + tax-exempt interest + qualifying Roth amounts + qualifying disability pension + Social Security.</small></div>
+</template>
