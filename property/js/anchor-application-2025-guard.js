@@ -5,10 +5,33 @@
   var proto=window.PDFLib.PDFDocument.prototype;
   if(proto.__watchdogAnchorCleanSave)return;
   var originalSave=proto.save;
+  async function appendMailingLabel(doc,formType){
+    if(!window.PDFLib.StandardFonts||!window.PDFLib.rgb)return;
+    var page=doc.addPage([612,792]);
+    var regular=await doc.embedFont(window.PDFLib.StandardFonts.Helvetica);
+    var bold=await doc.embedFont(window.PDFLib.StandardFonts.HelveticaBold);
+    var navy=window.PDFLib.rgb(.063,.161,.294),teal=window.PDFLib.rgb(.031,.498,.51),gray=window.PDFLib.rgb(.32,.39,.47),paper=window.PDFLib.rgb(.98,.975,.95);
+    page.drawRectangle({x:0,y:0,width:612,height:792,color:paper});
+    page.drawText('WATCHDOG PRINTABLE MAILING LABEL',{x:54,y:730,size:11,font:bold,color:teal});
+    page.drawText('2025 New Jersey Property Tax Relief Application',{x:54,y:700,size:22,font:bold,color:navy});
+    page.drawText('Due Date: November 2, 2026',{x:54,y:668,size:13,font:bold,color:navy});
+    page.drawText('This page was added by Watchdog for mailing convenience. It is not part of the official State application.',{x:54,y:640,size:9.5,font:regular,color:gray,maxWidth:504});
+    page.drawText('Cut out the label below and affix it to your envelope.',{x:54,y:616,size:10.5,font:regular,color:gray});
+    page.drawRectangle({x:74,y:328,width:464,height:240,borderColor:navy,borderWidth:1.4,color:window.PDFLib.rgb(1,1,1)});
+    page.drawText(formType==='pas-1'?'PAS-1 MAILING LABEL':'ANC-1 MAILING LABEL',{x:104,y:532,size:9.5,font:bold,color:teal});
+    var lines=formType==='pas-1'?['NJ Division of Taxation','Revenue Processing Center','Property Tax Relief Programs','PO Box 635','Trenton, NJ 08646-0635']:['NJ Division of Taxation','Revenue Processing Center','Property Tax Relief Application','PO Box 636','Trenton, NJ 08646-0636'];
+    lines.forEach(function(line,index){page.drawText(line,{x:104,y:492-(index*31),size:index===3?18:16,font:index===3?bold:regular,color:navy});});
+    page.drawText('Send only one application per envelope.',{x:74,y:286,size:10,font:bold,color:navy});
+    page.drawText('Review, sign and date the official form in blue or black ink before mailing.',{x:74,y:265,size:10,font:regular,color:gray});
+  }
   proto.save=async function(options){
     try{
       var fields=this.getForm().getFields();
       if(fields.length===0){
+        if(!this.__watchdogAnchorMailingLabelAdded){
+          var pageCount=this.getPageCount(),formType=pageCount===2?'anc-1':pageCount===4?'pas-1':'';
+          if(formType){Object.defineProperty(this,'__watchdogAnchorMailingLabelAdded',{value:true,configurable:false,enumerable:false,writable:false});await appendMailingLabel(this,formType);}
+        }
         var annots=window.PDFLib.PDFName.of('Annots');
         this.getPages().forEach(function(page){page.node.delete(annots)});
       }
