@@ -11,6 +11,7 @@
   <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@600;700;800&family=Source+Sans+3:wght@400;600;700&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="/property/backoffice/backoffice.css">
   <link rel="stylesheet" href="/property/backoffice/backoffice-secure.css">
+  <link rel="stylesheet" href="/property/backoffice/leadiq-tools.css">
 </head>
 <body>
   <section class="bo-auth" id="bo-auth" hidden>
@@ -40,14 +41,14 @@
   <div class="bo-app" id="bo-app" hidden>
     <aside class="bo-sidebar">
       <a class="bo-brand" href="/property/dashboard" aria-label="Watchdog dashboard"><span class="bo-mark">W</span><span><b>WATCHDOG</b><small>Backoffice</small></span></a>
-      <nav class="bo-nav" aria-label="Backoffice"><a class="active" href="#leads"><span>01</span>Lead Intelligence</a><a href="#integrations"><span>02</span>Integrations</a><a href="#activity"><span>03</span>Activity</a></nav>
+      <nav class="bo-nav" aria-label="Backoffice"><a class="active" href="#leads"><span>01</span>Lead Intelligence</a><a href="#leadiq"><span>02</span>LeadIQ Tools</a><a href="#integrations"><span>03</span>Integrations</a><a href="#activity"><span>04</span>Activity</a></nav>
       <div class="bo-sidebar-foot"><span class="bo-private-dot"></span><div><b>Private session</b><small>Signed in as <span id="bo-actor">—</span></small></div><button type="button" id="bo-logout">Lock Backoffice</button></div>
     </aside>
 
     <main class="bo-main">
       <header class="bo-topbar">
-        <div><span class="bo-kicker">OPERATIONS / LEADS</span><h1>Lead Intelligence</h1><p>One private queue for Watchdog leads, Google address validation and two BoldTrail export workflows.</p></div>
-        <div class="bo-top-actions"><button class="bo-button bo-button-quiet" id="bo-settings" type="button">Settings</button><button class="bo-button bo-button-quiet" id="bo-refresh" type="button">Refresh</button><button class="bo-button bo-button-primary" id="bo-add" type="button">+ Add lead</button></div>
+        <div><span class="bo-kicker">OPERATIONS / LEADS</span><h1>Lead Intelligence</h1><p>One private queue for Watchdog leads, CRM cleanup, Google address validation and BoldTrail export workflows.</p></div>
+        <div class="bo-top-actions"><a class="bo-button bo-button-quiet" href="#leadiq">LeadIQ Tools</a><button class="bo-button bo-button-quiet" id="bo-settings" type="button">Settings</button><button class="bo-button bo-button-quiet" id="bo-refresh" type="button">Refresh</button><button class="bo-button bo-button-primary" id="bo-add" type="button">+ Add lead</button></div>
       </header>
 
       <section class="bo-stats" aria-label="Lead summary">
@@ -88,6 +89,24 @@
         <div class="bo-detail" id="lead-detail"><div class="bo-empty-detail"><span>LEAD DETAIL</span><h2>Select a lead</h2><p>Submitted information stays separate from Google-standardized and third-party data.</p></div></div>
       </section>
 
+      <section class="li-panel" id="leadiq" aria-labelledby="leadiq-title">
+        <div class="li-head">
+          <div class="li-head-copy"><span class="li-kicker">LEADIQ / CRM TOOLBOX</span><h2 id="leadiq-title">Clean a contact file before it hits the CRM.</h2><p>This replaces the highest-use CSV analysis and conversion work from the old BTC page inside the authenticated Backoffice. Import one or more CSVs, audit quality, remove duplicates, normalize contact fields and create a BoldTrail-ready file.</p></div>
+          <span class="li-memory">Browser memory only</span>
+        </div>
+        <div class="li-toolbar">
+          <label class="li-file"><span class="li-btn primary">Choose CSV</span><input id="leadiq-file" type="file" accept=".csv,text/csv" multiple aria-label="Choose CRM CSV files"></label>
+          <button class="li-btn" id="leadiq-cleaned" type="button" disabled>Cleaned CSV</button>
+          <button class="li-btn" id="leadiq-boldtrail" type="button" disabled>BoldTrail CSV</button>
+          <button class="li-btn" id="leadiq-view-export" type="button" disabled>Export view</button>
+          <button class="li-btn" id="leadiq-clear" type="button" disabled>Clear</button>
+          <span class="li-spacer"></span>
+          <select class="li-filter" id="leadiq-filter" aria-label="Filter imported contacts"><option value="all">All contacts</option><option value="complete">Complete</option><option value="ready">Reachout ready</option><option value="duplicates">Duplicates</option><option value="missing-contact">Missing contact</option><option value="missing-address">Missing address</option></select>
+          <input class="li-search" id="leadiq-search" type="search" placeholder="Search imported contacts" aria-label="Search imported contacts">
+        </div>
+        <div class="li-stage" id="leadiq-stage" aria-live="polite"></div>
+      </section>
+
       <section class="bo-activity" id="activity">
         <div class="bo-section-head"><div><span>AUDIT</span><h2>Backoffice rules</h2></div></div>
         <div class="bo-principles"><article><b>Original stays original</b><p>Consumer-submitted contact data is preserved even when Google returns a standardized address.</p></article><article><b>Separate CRM ownership</b><p>Every lead can be unassigned, assigned to John, or assigned to Wife before export.</p></article><article><b>Export history</b><p>Each generated CSV is logged with its profile, included leads and timestamp so duplicate exports are visible.</p></article></div>
@@ -116,9 +135,11 @@
   </dialog>
 
   <div id="bo-toast" class="bo-toast" role="status" aria-live="polite"></div>
+  <div id="leadiq-toast" class="li-toast" role="status" aria-live="polite"></div>
   <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2/dist/umd/supabase.js"></script>
   <script src="/property/js/access-guard.js"></script>
   <script src="/property/backoffice/backoffice-dev-auth.js" defer></script>
   <script src="/property/backoffice/backoffice.js" defer></script>
+  <script src="/property/backoffice/leadiq-tools.js" defer></script>
 </body>
 </html>
