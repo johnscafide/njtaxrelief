@@ -24,6 +24,7 @@ const ALIASES={
   smsOptIn:['optinsms','smsoptin','textoptin','textnumberoptin','smsconsent']
 };
 const BOLDTRAIL_HEADERS=['First Name','Last Name','Email','Phone','Street Address','City','State','Postal Code','Source','Status','Hashtags','Notes','Watchdog Lead ID','Program','Intent Score','Estimated Benefit','Tenure','Household Income','Address Validation Status','Opt in Email','Opt in Call','Opt in SMS'];
+const KIT_HEADERS=['First name','Email address'];
 
 function toast(message){let t=$('#leadiq-toast');if(!t){t=document.createElement('div');t.id='leadiq-toast';t.className='li-toast';document.body.appendChild(t)}t.textContent=message;t.classList.add('show');clearTimeout(toast.timer);toast.timer=setTimeout(()=>t.classList.remove('show'),2400)}
 function csvCell(value){const s=String(value??'').replace(/\r?\n/g,' ');return `"${s.replace(/"/g,'""')}"`}
@@ -116,13 +117,26 @@ function matches(r){
   return true;
 }
 function deduped(rows){return rows.filter((r,i,a)=>!r.duplicate||a.findIndex(x=>(x.email&&x.email===r.email)||(!x.email&&x.phone&&x.phone===r.phone)||(!x.email&&!x.phone&&x.full===r.full&&x.street===r.street&&x.zip===r.zip))===i)}
+function kitRows(rows){
+  const seen=new Set(),data=[];let missing=0,invalid=0,duplicates=0;
+  for(const r of rows){
+    const email=clean(r.email).toLowerCase();
+    if(!email){missing++;continue}
+    if(!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)){invalid++;continue}
+    if(seen.has(email)){duplicates++;continue}
+    seen.add(email);
+    const names=normalizeNameFields(r.first,r.last,r.full);
+    data.push([names.first,email]);
+  }
+  return {data,missing,invalid,duplicates};
+}
 function summary(){
   const rows=state.rows,unique=deduped(rows);
   return {total:rows.length,unique:unique.length,duplicates:rows.filter(r=>r.duplicate).length,missingContact:rows.filter(r=>!r.email&&!r.phone).length,missingAddress:rows.filter(r=>!r.street).length,complete:rows.filter(isComplete).length};
 }
 function render(){
   const host=$('#leadiq-stage');if(!host)return;
-  if(!state.rows.length){host.innerHTML=`<div class="li-drop" id="leadiq-drop"><div><div class="li-drop-icon">⇧</div><h3>Drop a CRM CSV here</h3><p>Or choose one or more CSV files above. Nothing is stored after this page is closed.</p><span class="li-hint">Recognizes common BoldTrail, kvCORE and generic CRM contact columns.</span></div></div>`;bindDrop();setButtons(false);return}
+  if(!state.rows.length){host.innerHTML=`<div class="li-drop" id="leadiq-drop"><div><div class="li-drop-icon">⇧</div><h3>Drop a CRM CSV here</h3><p>Or choose one or more CSV files above. Nothing is stored after this page is closed.</p><span class="li-hint">Recognizes common BoldTrail, kvCORE and generic CRM contact columns. Kit export keeps only first name and email address.</span></div></div>`;bindDrop();setButtons(false);return}
   state.view=state.rows.filter(matches);
   const s=summary();
   const mapped=Object.entries(state.mapping).map(([field,h])=>`<span class="li-pill">${esc(field)} ← ${esc(h)}</span>`).join('');
@@ -148,7 +162,7 @@ function rowHtml(r){
   const quality=r.duplicate?'<span class="li-issue">Duplicate</span>':r.issues.length?r.issues.slice(0,2).map(i=>`<span class="li-issue">${esc(i)}</span>`).join(' '):'<span class="li-ok">Ready</span>';
   return `<tr><td><span class="li-name">${esc(r.full||'Unnamed')}</span></td><td>${r.email?esc(r.email):'<span class="li-muted">—</span>'}</td><td>${r.phone?esc(r.phone):'<span class="li-muted">—</span>'}</td><td>${r.street?`${esc(r.street)}<br><span class="li-muted">${esc([r.city,r.state,r.zip].filter(Boolean).join(', '))}</span>`:'<span class="li-muted">—</span>'}</td><td>${esc(r.source)}</td><td>${quality}</td><td>${esc(r.file)}</td><td><div class="li-row-actions"><button class="li-mini" type="button" data-add-row="${esc(r.id)}">Add to queue</button></div></td></tr>`;
 }
-function setButtons(enabled){['leadiq-cleaned','leadiq-boldtrail','leadiq-view-export','leadiq-clear'].forEach(id=>{const el=$('#'+id);if(el)el.disabled=!enabled})}
+function setButtons(enabled){['leadiq-cleaned','leadiq-boldtrail','leadiq-kit','leadiq-view-export','leadiq-clear'].forEach(id=>{const el=$('#'+id);if(el)el.disabled=!enabled})}
 function bindDrop(){const drop=$('#leadiq-drop');if(!drop)return;['dragenter','dragover'].forEach(e=>drop.addEventListener(e,ev=>{ev.preventDefault();drop.classList.add('drag')}));['dragleave','drop'].forEach(e=>drop.addEventListener(e,ev=>{ev.preventDefault();drop.classList.remove('drag')}));drop.addEventListener('drop',ev=>loadFiles(Array.from(ev.dataTransfer.files||[])))}
 async function loadFiles(files){
   files=files.filter(f=>/\.csv$/i.test(f.name)||f.type==='text/csv');if(!files.length){toast('Choose a CSV file');return}
@@ -159,14 +173,18 @@ async function loadFiles(files){
 }
 function exportRows(rows,type){
   if(!rows.length){toast('No contacts in this view');return}
-  let headers,data,name;
+  let headers,data,name,kitMeta=null;
   if(type==='boldtrail'){
     headers=BOLDTRAIL_HEADERS;data=deduped(rows).map(r=>{const names=normalizeNameFields(r.first,r.last,r.full);return [names.first,names.last,r.email,r.phone,r.street,r.city,r.state,r.zip,r.source||'LeadIQ CSV','new',r.tags,r.notes,'','','','','','','',exportOptIn(r.emailOptIn),exportOptIn(r.callOptIn),exportOptIn(r.smsOptIn)]});name='leadiq-boldtrail.csv';
+  }else if(type==='kit'){
+    kitMeta=kitRows(rows);if(!kitMeta.data.length){toast('No valid email addresses were found for Kit');return}
+    headers=KIT_HEADERS;data=kitMeta.data;name='leadiq-kit.csv';
   }else{
     headers=['Full Name','First Name','Last Name','Email','Phone','Street Address','City','State','Postal Code','Source','Hashtags','Notes','Quality'];data=(type==='cleaned'?deduped(rows):rows).map(r=>[r.full,r.first,r.last,r.email,r.phone,r.street,r.city,r.state,r.zip,r.source,r.tags,r.notes,r.duplicate?'Duplicate':r.issues.join('; ')||'Ready']);name=type==='cleaned'?'leadiq-cleaned.csv':'leadiq-filtered.csv';
   }
   const csv='\uFEFF'+[headers.map(csvCell).join(','),...data.map(row=>row.map(csvCell).join(','))].join('\r\n');
-  const blob=new Blob([csv],{type:'text/csv;charset=utf-8'}),url=URL.createObjectURL(blob),a=document.createElement('a');a.href=url;a.download=name;document.body.appendChild(a);a.click();a.remove();setTimeout(()=>URL.revokeObjectURL(url),1000);toast(`${data.length.toLocaleString()} rows exported`)
+  const blob=new Blob([csv],{type:'text/csv;charset=utf-8'}),url=URL.createObjectURL(blob),a=document.createElement('a');a.href=url;a.download=name;document.body.appendChild(a);a.click();a.remove();setTimeout(()=>URL.revokeObjectURL(url),1000);
+  if(kitMeta){const removed=kitMeta.missing+kitMeta.invalid+kitMeta.duplicates;toast(`${data.length.toLocaleString()} Kit contacts exported${removed?` · ${removed.toLocaleString()} skipped/duplicates`:''}`)}else toast(`${data.length.toLocaleString()} rows exported`)
 }
 function prefillLead(id){
   const r=state.rows.find(x=>x.id===id),form=$('#lead-form');if(!r||!form){toast('Lead form is unavailable');return}
@@ -179,11 +197,14 @@ function clearAll(){state.rows=[];state.view=[];state.files=[];state.headers=[];
 function init(){
   const input=$('#leadiq-file');if(!input)return;
   const readyOption=$('#leadiq-filter option[value="ready"]');if(readyOption)readyOption.textContent='Has email or phone';
+  const boldtrail=$('#leadiq-boldtrail');
+  if(boldtrail&&!$('#leadiq-kit')){const kit=document.createElement('button');kit.className='li-btn';kit.id='leadiq-kit';kit.type='button';kit.disabled=true;kit.textContent='Kit CSV';kit.title='Export First name and Email address only';boldtrail.insertAdjacentElement('afterend',kit)}
   input.addEventListener('change',()=>{loadFiles(Array.from(input.files||[]));input.value='' });
   $('#leadiq-filter')?.addEventListener('change',e=>{state.filter=e.target.value;render()});
   $('#leadiq-search')?.addEventListener('input',e=>{state.search=e.target.value.trim();render()});
   $('#leadiq-cleaned')?.addEventListener('click',()=>exportRows(state.rows,'cleaned'));
   $('#leadiq-boldtrail')?.addEventListener('click',()=>exportRows(state.rows,'boldtrail'));
+  $('#leadiq-kit')?.addEventListener('click',()=>exportRows(state.rows,'kit'));
   $('#leadiq-view-export')?.addEventListener('click',()=>exportRows(state.view,'view'));
   $('#leadiq-clear')?.addEventListener('click',clearAll);
   render();
