@@ -153,21 +153,31 @@
   function ensureQuick(){
     if(document.getElementById('wd-anchor-quick')||state.result)return;
     var section=q('#wd-anchor-quick',state.partial);if(!section)return;section=section.cloneNode(true);section.hidden=false;
-    var toggle=q('[data-anchor-quick-toggle]',section),form=q('[data-anchor-quick-form]',section),tenure=q('[name="wd_anchor_tenure"]',section),taxWrap=q('[data-anchor-tax-wrap]',section);
-    if(toggle)toggle.addEventListener('click',function(){var open=form.hidden;form.hidden=!open;toggle.setAttribute('aria-expanded',open?'true':'false');if(open){var first=q('select,input',form);if(first)first.focus();track('anchor_quick_estimator_open',{surface:'watchdog_home'});}});
+    var form=q('[data-anchor-quick-form]',section),tenure=q('[name="wd_anchor_tenure"]',section),taxWrap=q('[data-anchor-tax-wrap]',section),edit=q('[data-anchor-quick-edit]',section);
+    if(form)form.hidden=false;
     if(tenure)tenure.addEventListener('change',function(){taxWrap.hidden=tenure.value!=='own';var tax=q('[name="wd_anchor_taxes"]',section);if(tax&&tenure.value!=='own')tax.value='';});
     if(form)form.addEventListener('submit',function(e){e.preventDefault();runQuick(section);});
+    if(edit)edit.addEventListener('click',function(){var out=q('[data-anchor-quick-result]',section),chips=q('[data-anchor-quick-chips]',section),auth=q('[data-anchor-auth-host]',section);if(out)out.hidden=true;if(form)form.hidden=false;if(chips)chips.hidden=true;if(auth){auth.hidden=true;auth.innerHTML='';}var first=q('select,input',form);if(first)first.focus();track('anchor_quick_estimator_edit',{surface:'watchdog_home'});});
     section.addEventListener('click',function(e){var action=e.target&&e.target.closest&&e.target.closest('[data-anchor-action]');if(!action)return;e.preventDefault();if(!state.quick)return;requestAction(state.quick,section,action.dataset.anchorAction);});
-    placeQuick(section);enforcePlacement();
+    placeQuick(section);enforcePlacement();track('anchor_quick_estimator_open',{surface:'watchdog_home',presentation:'always_open'});
   }
 
   function runQuick(section){
     var values=quickValues(section),status=q('[data-anchor-quick-status]',section);
     if(!values.tenure||!values.income||!values.age||!values.primary||(values.tenure==='own'&&!values.taxes)){if(status){status.textContent='Answer the short eligibility questions first.';status.classList.add('is-error');}return;}
     if(status){status.textContent='';status.classList.remove('is-error');}
-    var result=compute(values);state.quick=result;var out=q('[data-anchor-quick-result]',section);if(!out)return;out.hidden=false;
-    q('[data-anchor-quick-amount]',out).textContent=money(result.benefit);var label=q('[data-anchor-quick-label]',out);label.textContent=result.eligibility_label;label.classList.toggle('is-review',!result.qualifies);
-    var address=q('[data-anchor-quick-address]',out);address.textContent=result.address?'For '+result.address:'Add your NJ residence above if you want to save this estimate or start the guided application.';
+    var result=compute(values);state.quick=result;var out=q('[data-anchor-quick-result]',section),form=q('[data-anchor-quick-form]',section),chips=q('[data-anchor-quick-chips]',section);if(!out)return;
+    if(form)form.hidden=true;out.hidden=false;
+    q('[data-anchor-quick-amount]',out).textContent=money(result.benefit);var label=q('[data-anchor-quick-label]',out);if(label){label.textContent=result.eligibility_label;label.classList.toggle('is-review',!result.qualifies);}
+    var address=q('[data-anchor-quick-address]',out),addressText=q('[data-anchor-quick-address-text]',out);if(address&&addressText){address.hidden=!result.address;addressText.textContent=result.address||'';}
+    if(chips){
+      var incomeCopy=result.answers.income==='low'?'Income $150K or less':result.answers.income==='mid'?'Income $150K–$250K':'Income over $250K';
+      var tenureChip=q('[data-anchor-chip-tenure]',chips),ageChip=q('[data-anchor-chip-age]',chips),incomeChip=q('[data-anchor-chip-income]',chips);
+      if(tenureChip)tenureChip.textContent=result.tenure==='own'?'Homeowner':'Renter';
+      if(ageChip)ageChip.textContent=result.answers.age==='yes'?'65 or older':'Under 65';
+      if(incomeChip)incomeChip.textContent=incomeCopy;
+      chips.hidden=false;
+    }
     track('anchor_quick_estimator_result',{qualified:result.qualifies===true,tenure:result.tenure});
   }
 
