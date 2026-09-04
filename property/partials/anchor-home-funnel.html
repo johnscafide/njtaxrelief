@@ -31,38 +31,47 @@
 
 <section id="wd-anchor-quick" class="wd-anchor-quick" hidden aria-labelledby="wd-anchor-quick-title">
   <div class="wd-anchor-quick-wrap">
-    <div class="wd-anchor-quick-summary">
-      <div class="wd-anchor-quick-icon" aria-hidden="true"><i class="fas fa-house-circle-check"></i></div>
-      <div class="wd-anchor-quick-copy">
-        <span>2025 NJ PROPERTY TAX RELIEF</span>
-        <h2 id="wd-anchor-quick-title">See your estimated ANCHOR benefit.</h2>
-        <p>A short Watchdog check using the same 2025 estimator rules. No account needed to see the estimate.</p>
+    <div class="wd-anchor-quick-shell">
+      <div class="wd-anchor-quick-intro">
+        <span class="wd-anchor-quick-eyebrow">2025 NJ PROPERTY TAX RELIEF</span>
+        <h2 id="wd-anchor-quick-title">Check your ANCHOR benefit</h2>
+        <p>Free. About a minute. No account needed to see your number.</p>
+        <div class="wd-anchor-quick-chips" data-anchor-quick-chips hidden aria-label="Answers used for this estimate">
+          <span data-anchor-chip-tenure></span>
+          <span data-anchor-chip-age></span>
+          <span data-anchor-chip-income></span>
+          <button type="button" class="wd-anchor-edit-chip" data-anchor-quick-edit>Edit answers</button>
+        </div>
       </div>
-      <button type="button" class="wd-anchor-quick-toggle" data-anchor-quick-toggle aria-expanded="false">Check my estimate <i class="fas fa-chevron-down" aria-hidden="true"></i></button>
-    </div>
 
-    <form class="wd-anchor-quick-form" data-anchor-quick-form hidden>
-      <div class="wd-anchor-quick-fields">
-        <label><span>Residence</span><select name="wd_anchor_tenure" required><option value="">Choose</option><option value="own">Homeowner</option><option value="rent">Renter</option></select></label>
-        <label><span>Household income</span><select name="wd_anchor_income" required><option value="">Choose</option><option value="low">$150,000 or less</option><option value="mid">$150,001–$250,000</option><option value="high">Over $250,000</option></select></label>
-        <label><span>Age 65 or older?</span><select name="wd_anchor_age" required><option value="">Choose</option><option value="yes">Yes</option><option value="no">No</option></select></label>
-        <label><span>Primary NJ residence?</span><select name="wd_anchor_primary" required><option value="">Choose</option><option value="yes">Yes</option><option value="no">No</option></select></label>
-        <label data-anchor-tax-wrap hidden><span>Property taxes paid?</span><select name="wd_anchor_taxes"><option value="">Choose</option><option value="yes">Yes</option><option value="no">No</option></select></label>
-      </div>
-      <label class="wd-anchor-address-field"><span>New Jersey residence <small>Optional to estimate · required to save or start an application</small></span><input name="wd_anchor_address" type="text" autocomplete="street-address" placeholder="123 Main St, Town, NJ 08000"></label>
-      <div class="wd-anchor-quick-form-actions"><button type="submit" class="wd-anchor-btn primary">Show my estimate</button><span>About one minute · Free</span></div>
-      <div class="wd-anchor-quick-status" data-anchor-quick-status role="status" aria-live="polite"></div>
-    </form>
+      <div class="wd-anchor-quick-stage">
+        <form class="wd-anchor-quick-form" data-anchor-quick-form>
+          <div class="wd-anchor-quick-fields">
+            <label><span>Residence</span><select name="wd_anchor_tenure" required><option value="">Choose</option><option value="own">Homeowner</option><option value="rent">Renter</option></select></label>
+            <label><span>Household income</span><select name="wd_anchor_income" required><option value="">Choose</option><option value="low">$150,000 or less</option><option value="mid">$150,001–$250,000</option><option value="high">Over $250,000</option></select></label>
+            <label><span>Age 65 or older?</span><select name="wd_anchor_age" required><option value="">Choose</option><option value="yes">Yes</option><option value="no">No</option></select></label>
+            <label><span>Primary NJ residence?</span><select name="wd_anchor_primary" required><option value="">Choose</option><option value="yes">Yes</option><option value="no">No</option></select></label>
+            <label data-anchor-tax-wrap hidden><span>Property taxes paid?</span><select name="wd_anchor_taxes"><option value="">Choose</option><option value="yes">Yes</option><option value="no">No</option></select></label>
+          </div>
+          <label class="wd-anchor-address-field"><span>New Jersey residence <small>Optional to estimate · required to save or start an application</small></span><input name="wd_anchor_address" type="text" autocomplete="street-address" placeholder="123 Main St, Town, NJ 08000"></label>
+          <div class="wd-anchor-quick-form-actions"><button type="submit" class="wd-anchor-btn primary">Show my estimate</button><span>About one minute · Free</span></div>
+          <div class="wd-anchor-quick-status" data-anchor-quick-status role="status" aria-live="polite"></div>
+        </form>
 
-    <div class="wd-anchor-quick-result" data-anchor-quick-result hidden>
-      <div><span>Estimated 2025 ANCHOR benefit</span><strong data-anchor-quick-amount>$—</strong><b data-anchor-quick-label></b><p data-anchor-quick-address></p></div>
-      <div class="wd-anchor-home-actions">
-        <button type="button" class="wd-anchor-btn primary" data-anchor-action="start">Save &amp; start my 2025 application</button>
-        <button type="button" class="wd-anchor-btn secondary" data-anchor-action="save">Save estimate</button>
+        <div class="wd-anchor-quick-result" data-anchor-quick-result hidden>
+          <span class="wd-anchor-quick-result-label">Your estimated 2025 ANCHOR benefit</span>
+          <strong data-anchor-quick-amount>$—</strong>
+          <b class="wd-anchor-quick-eligibility" data-anchor-quick-label></b>
+          <p class="wd-anchor-quick-address" data-anchor-quick-address hidden><i class="fas fa-location-dot" aria-hidden="true"></i><span data-anchor-quick-address-text></span></p>
+          <div class="wd-anchor-quick-result-actions">
+            <button type="button" class="wd-anchor-btn primary" data-anchor-action="start">Start my 2025 application</button>
+            <button type="button" class="wd-anchor-save-link" data-anchor-action="save"><i class="far fa-bookmark" aria-hidden="true"></i> Save estimate</button>
+          </div>
+          <div data-anchor-auth-host hidden></div>
+        </div>
       </div>
-      <div data-anchor-auth-host hidden></div>
     </div>
-    <p class="wd-anchor-quick-disclaimer">Watchdog is independent and is not the State of New Jersey. The State determines final eligibility and benefit amounts.</p>
+    <p class="wd-anchor-quick-disclaimer">Watchdog is independent and not the State of New Jersey. The State makes the final call on eligibility and amount.</p>
   </div>
 </section>
 
