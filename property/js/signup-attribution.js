@@ -12,6 +12,8 @@
   var context = null;
   var recorded = Object.create(null);
   var observer = null;
+  var authListenerAttached = false;
+  var authAttachAttempts = 0;
 
   function analyticsAllowed() {
     if (navigator.globalPrivacyControl === true || String(navigator.doNotTrack || '') === '1') return false;
@@ -175,13 +177,15 @@
 
   function linkSession(session) {
     if (!initialized || !analyticsAllowed() || !session || !session.user || !recentUser(session.user)) return Promise.resolve(false);
+    var pending = readPending();
+    if (!pending) return Promise.resolve(false);
+
     var c = ensureContext();
     var database = db();
     if (!c || !database) return Promise.resolve(false);
 
-    var pending = readPending();
-    var signupContext = pending && pending.signup_context ? pending.signup_context : inferredContext(null);
-    var provider = providerForUser(session.user, pending && pending.auth_provider);
+    var signupContext = pending.signup_context;
+    var provider = providerForUser(session.user, pending.auth_provider);
 
     return database.rpc('link_my_watchdog_signup_attribution', {
       p_visitor_id: c.visitor_id,
@@ -244,9 +248,15 @@
   }
 
   function attachAuthListener() {
+    if (authListenerAttached) return;
     var database = db();
-    if (!database || !database.auth) return;
+    if (!database || !database.auth) {
+      authAttachAttempts += 1;
+      if (authAttachAttempts <= 20) window.setTimeout(attachAuthListener, 250);
+      return;
+    }
     try {
+      authListenerAttached = true;
       database.auth.onAuthStateChange(function (event, session) {
         if (event === 'SIGNED_IN' || event === 'INITIAL_SESSION') linkSession(session);
       });
@@ -254,7 +264,9 @@
         var session = result && result.data && result.data.session;
         if (session) linkSession(session);
       }).catch(function () {});
-    } catch (_error) {}
+    } catch (_error) {
+      authListenerAttached = false;
+    }
   }
 
   function init() {
