@@ -84,6 +84,12 @@
     });
   }
 
+  function entitlementRow(result) {
+    if (!result || result.error) return {};
+    var data = result.data;
+    return (Array.isArray(data) ? data[0] : data) || {};
+  }
+
   async function init() {
     if (!window.NJPTRSupabaseRuntime) return;
     injectStyles();
@@ -99,8 +105,10 @@
     if (profileResult.error || !profileResult.data) return;
     var profile = profileResult.data;
 
-    var entitlementResult = await client.from('account_entitlements').select('plan_tier,billing_tier,subscription_status,current_period_end,cancel_at_period_end').eq('user_id', user.id).maybeSingle();
-    var entitlement = entitlementResult.data || {};
+    // Entitlements are server-owned. Browser code must use the governed RPC rather
+    // than reading account_entitlements directly (NJW-309).
+    var entitlementResult = await client.rpc('get_my_entitlement');
+    var entitlement = entitlementRow(entitlementResult);
     var canReserve = eligible(entitlement, profile.account_role);
 
     var section = document.createElement('section');

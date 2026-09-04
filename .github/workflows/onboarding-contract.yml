@@ -11,11 +11,16 @@ on:
       - 'property/css/account-profile.css'
       - 'property/js/onboarding.js'
       - 'property/js/account-profile.js'
+      - 'property/js/agent-branding-profile.js'
+      - 'property/js/agent-vanity-profile.js'
+      - 'property/js/professional-license-verification.js'
       - 'property/js/supabase-runtime.js'
       - 'property/tests/onboarding-contract.mjs'
       - 'property/tests/account-profile-contract.mjs'
+      - 'property/tests/agent-profile-entitlement-contract.mjs'
       - 'supabase/migrations/*required_watchdog_onboarding*.sql'
       - 'supabase/migrations/*account_profile_preferences*.sql'
+      - 'supabase/migrations/*agent_vanity_entitlement_boundary*.sql'
       - '.github/workflows/onboarding-contract.yml'
   workflow_dispatch:
 
@@ -32,9 +37,14 @@ jobs:
           node --check property/js/supabase-runtime.js
           node --check property/js/onboarding.js
           node --check property/js/account-profile.js
+          node --check property/js/agent-vanity-profile.js
+          node --check property/js/agent-branding-profile.js
+          node --check property/js/professional-license-verification.js
       - name: Verify required onboarding boundaries
         run: node property/tests/onboarding-contract.mjs
       - name: Verify living Account profile boundaries
         run: node property/tests/account-profile-contract.mjs
+      - name: Verify Developer plus Agent profile boundaries
+        run: node property/tests/agent-profile-entitlement-contract.mjs
       - name: Re-run canonical Supabase runtime contract
         run: node property/tests/supabase-runtime-contract.mjs
