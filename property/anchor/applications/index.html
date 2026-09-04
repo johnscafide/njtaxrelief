@@ -16,7 +16,7 @@
   <link rel="stylesheet" href="/property/css/anchor-estimates.css">
 </head>
 <body>
-  <!-- Sensitive-flow privacy guard: watchdog-consent.js, ai-referral-analytics.js, and contact-routing-policy.js are intentionally not loaded on this page. -->
+  <!-- Sensitive-flow privacy guard: broad product/referral analytics and contact routing stay off this page. The signup-attribution helper is optional-consent gated and records only anonymous auth/acquisition metadata, never Private Vault contents. -->
   <div class="wd-app-shell wd-library-shell">
     <header class="wd-app-topbar">
       <a class="wd-app-brand" href="/" aria-label="Watchdog home"><span class="wd-app-mark" aria-hidden="true">W</span><span>Watchdog</span></a>
@@ -85,6 +85,7 @@
 
   <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2/dist/umd/supabase.js"></script>
   <script src="/property/js/supabase-runtime.js"></script>
+  <script src="/property/js/signup-attribution.js"></script>
   <script src="/property/js/anchor-estimate-library.js"></script>
   <script src="/property/js/anchor-application-vault.js"></script>
   <script src="/property/js/anchor-applications.js"></script>
