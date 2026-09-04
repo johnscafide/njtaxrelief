@@ -22,6 +22,22 @@
     var n = Number(value);
     return Number.isFinite(n) && n > 0 ? '$' + Math.round(n).toLocaleString() : '';
   }
+  function titleCase(value) {
+    var raw = String(value == null ? '' : value).trim();
+    if (!raw || raw !== raw.toUpperCase()) return raw;
+    return raw.toLowerCase().replace(/\b([a-z])/g, function (m) { return m.toUpperCase(); });
+  }
+  function shortMunicipality(value) {
+    return titleCase(value).replace(/\bTownship\b/gi, 'Twp').replace(/\bBorough\b/gi, 'Boro');
+  }
+  function localityText(x) {
+    return [shortMunicipality(x && x.town), 'NJ', x && x.zip].filter(Boolean).join(' ');
+  }
+  function stateIcon(label) {
+    if (label === 'Saved') return '<i class="far fa-bookmark" aria-hidden="true"></i> ';
+    if (label === 'Recent') return '<i class="far fa-clock" aria-hidden="true"></i> ';
+    return '';
+  }
   function getClient() {
     if (client) return client;
     try {
@@ -120,7 +136,8 @@
       return JSON.parse(localStorage.getItem('watchdogRecentProperties') || '[]').slice(0, limit || 3).map(function (x) {
         return {
           pams_pin: x.pin || '', address: x.address || '', town: x.city || x.town || '', zip: x.zip || '',
-          assessed: x.assessed || '', last_year_tax: x.tax || '', year_built: x.yearBuilt || '', lat: x.lat, lon: x.lon
+          assessed: x.assessed || '', last_year_tax: x.tax || '', year_built: x.yearBuilt || '', lat: x.lat, lon: x.lon,
+          _landing_state: 'Recent'
         };
       }).filter(function (x) { return x.address; });
     } catch (_error) { return []; }
@@ -128,20 +145,22 @@
 
   function propertyCard(x, label) {
     var href = '/property/?address=' + encodeURIComponent(queryFor(x));
-    var facts = [];
-    if (money(x.assessed)) facts.push('<span>' + esc(money(x.assessed)) + ' assessed</span>');
-    if (money(x.last_year_tax)) facts.push('<span>' + esc(money(x.last_year_tax)) + ' annual tax</span>');
-    if (x.year_built) facts.push('<span>Built ' + esc(x.year_built) + '</span>');
-    return '<a class="wd-property-card" href="' + href + '">' +
+    var state = x._landing_state || label || 'Public record';
+    var assessed = money(x.assessed) || '—';
+    var annualTax = money(x.last_year_tax) || '—';
+    return '<a class="wd-property-card" href="' + href + '" data-pams-pin="' + esc(x.pams_pin || '') + '">' +
       '<div class="wd-property-photo">' + propertyPhoto(x) +
-        '<span class="wd-property-label">' + esc(label || 'Property record') + '</span>' +
+        '<span class="wd-property-label">' + stateIcon(state) + esc(state) + '</span>' +
       '</div>' +
       '<div class="wd-property-copy">' +
-        '<h3>' + esc(x.address || 'New Jersey property') + '</h3>' +
-        '<p>' + esc([x.town, 'NJ', x.zip].filter(Boolean).join(' ')) + '</p>' +
-        '<div class="wd-property-facts">' + facts.join('') + '</div>' +
-        '<b class="wd-property-open">Open property <i class="fas fa-arrow-right"></i></b>' +
+        '<h3>' + esc(titleCase(x.address || 'New Jersey property')) + '</h3>' +
+        '<p>' + esc(localityText(x)) + '</p>' +
+        '<div class="wd-property-stats">' +
+          '<div><span>Assessed value</span><strong>' + esc(assessed) + '</strong></div>' +
+          '<div><span>Annual tax</span><strong>' + esc(annualTax) + '</strong></div>' +
+        '</div>' +
       '</div>' +
+      '<div class="wd-property-footer"><b class="wd-property-open">Open property</b><i class="fas fa-arrow-right" aria-hidden="true"></i></div>' +
     '</a>';
   }
 
@@ -181,7 +200,7 @@
       topLink.innerHTML = signedIn ? 'My properties <i class="fas fa-arrow-right"></i>' : 'Browse New Jersey towns <i class="fas fa-arrow-right"></i>';
     }
     rows = (rows || []).slice(0, signedIn ? 3 : 2);
-    var html = rows.map(function (x) { return propertyCard(x, signedIn ? 'Saved or recent' : 'Public NJ record'); }).join('');
+    var html = rows.map(function (x) { return propertyCard(x, x._landing_state || (signedIn ? 'Saved' : 'Public record')); }).join('');
     if (signedIn) {
       if (!html) html = '<a class="wd-empty-card" href="#pl-addr" onclick="document.getElementById(\'pl-addr\').focus();return false;"><i class="fas fa-magnifying-glass"></i><h3>Search your first property</h3><p>Your saved and recently viewed homes will appear here.</p></a>';
     } else {
@@ -201,7 +220,7 @@
     return fetch(PARCEL + '?' + params.toString()).then(function (r) { return r.json(); }).then(function (data) {
       return (data.features || []).map(function (f) {
         var a = f.attributes || {}, c = f.centroid || {};
-        return { pams_pin: a.PAMS_PIN || '', address: a.PROP_LOC || '', town: a.MUN_NAME || '', county: a.COUNTY || '', zip: a.ZIP5 || '', assessed: a.NET_VALUE || '', last_year_tax: a.LAST_YR_TX || '', year_built: a.YR_CONSTR || '', lat: c.y, lon: c.x };
+        return { pams_pin: a.PAMS_PIN || '', address: a.PROP_LOC || '', town: a.MUN_NAME || '', county: a.COUNTY || '', zip: a.ZIP5 || '', assessed: a.NET_VALUE || '', last_year_tax: a.LAST_YR_TX || '', year_built: a.YR_CONSTR || '', lat: c.y, lon: c.x, _landing_state: 'Public record' };
       }).filter(function (x) { return x.address && validCoord(x.lat, x.lon); });
     }).catch(function () { return []; });
   }
@@ -221,7 +240,7 @@
         .select('pams_pin,address,town,county,zip,assessed,last_year_tax,lat,lon,updated_at')
         .order('updated_at', { ascending: false }).limit(3)
         .then(function (res) {
-          var rows = res && res.data && res.data.length ? res.data : localRecent(3);
+          var rows = res && res.data && res.data.length ? res.data.map(function (row) { row._landing_state = 'Saved'; return row; }) : localRecent(3);
           paintRecent(rows, true);
         }).catch(function () { paintRecent(localRecent(3), true); });
     }).catch(function () {
