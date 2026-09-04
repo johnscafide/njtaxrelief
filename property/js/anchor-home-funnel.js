@@ -150,6 +150,13 @@
 
   function quickValues(section){function value(name){var el=q('[name="'+name+'"]',section);return el?clean(el.value,300):'';}return{tenure:value('wd_anchor_tenure'),income:value('wd_anchor_income'),age:value('wd_anchor_age'),primary:value('wd_anchor_primary'),taxes:value('wd_anchor_taxes'),address:value('wd_anchor_address')};}
 
+  function showQuickForm(section,focusAddress){
+    var out=q('[data-anchor-quick-result]',section),form=q('[data-anchor-quick-form]',section),chips=q('[data-anchor-quick-chips]',section),auth=q('[data-anchor-auth-host]',section);
+    if(out)out.hidden=true;if(form)form.hidden=false;if(chips)chips.hidden=true;if(auth){auth.hidden=true;auth.innerHTML='';}
+    var target=focusAddress?q('[name="wd_anchor_address"]',form):q('select,input',form);
+    if(target){target.focus();if(focusAddress)target.scrollIntoView({behavior:'smooth',block:'center'});}
+  }
+
   function ensureQuick(){
     if(document.getElementById('wd-anchor-quick')||state.result)return;
     var section=q('#wd-anchor-quick',state.partial);if(!section)return;section=section.cloneNode(true);section.hidden=false;
@@ -157,7 +164,7 @@
     if(form)form.hidden=false;
     if(tenure)tenure.addEventListener('change',function(){taxWrap.hidden=tenure.value!=='own';var tax=q('[name="wd_anchor_taxes"]',section);if(tax&&tenure.value!=='own')tax.value='';});
     if(form)form.addEventListener('submit',function(e){e.preventDefault();runQuick(section);});
-    if(edit)edit.addEventListener('click',function(){var out=q('[data-anchor-quick-result]',section),chips=q('[data-anchor-quick-chips]',section),auth=q('[data-anchor-auth-host]',section);if(out)out.hidden=true;if(form)form.hidden=false;if(chips)chips.hidden=true;if(auth){auth.hidden=true;auth.innerHTML='';}var first=q('select,input',form);if(first)first.focus();track('anchor_quick_estimator_edit',{surface:'watchdog_home'});});
+    if(edit)edit.addEventListener('click',function(){showQuickForm(section,false);track('anchor_quick_estimator_edit',{surface:'watchdog_home'});});
     section.addEventListener('click',function(e){var action=e.target&&e.target.closest&&e.target.closest('[data-anchor-action]');if(!action)return;e.preventDefault();if(!state.quick)return;requestAction(state.quick,section,action.dataset.anchorAction);});
     placeQuick(section);enforcePlacement();track('anchor_quick_estimator_open',{surface:'watchdog_home',presentation:'always_open'});
   }
@@ -207,7 +214,10 @@
     try{var saved=model.savedEstimate||await saveEstimate(model,section);if(action==='start')startApplication(model,saved);}catch(err){if(err&&err.message==='address_required')return;var status=q('[data-anchor-save-status]',section)||q('[data-anchor-quick-status]',section);if(status){status.textContent='Watchdog could not save this estimate right now. Your result is still available on this page.';status.classList.add('is-error');}}
   }
 
-  async function requestAction(model,section,action){var user=state.user||await refreshUser();if(user){executeAction(model,section,action);return;}state.pending={model:model,section:section,action:action};renderAuth(section);}
+  async function requestAction(model,section,action){
+    if(model===state.quick&&!model.address){var status=q('[data-anchor-quick-status]',section);showQuickForm(section,true);if(status){status.textContent='Add the New Jersey residence used for this estimate before saving or starting an application.';status.classList.add('is-error');}return;}
+    var user=state.user||await refreshUser();if(user){executeAction(model,section,action);return;}state.pending={model:model,section:section,action:action};renderAuth(section);
+  }
 
   function renderAuth(section){
     var authHost=q('[data-anchor-auth-host]',section);if(!authHost)return;authHost.hidden=false;var authTemplate=q('#wd-anchor-home-auth-template',state.partial);authHost.innerHTML='';if(authTemplate&&authTemplate.content)authHost.appendChild(authTemplate.content.cloneNode(true));else{authHost.textContent='Watchdog account sign-in is temporarily unavailable.';return;}
