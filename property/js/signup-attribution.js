@@ -4,8 +4,12 @@
   if (window.WatchdogSignupAnalytics) return;
 
   var PREF_KEY = 'watchdog_cookie_preferences_v1';
-  var VISITOR_KEY = 'watchdog_signup_visitor_v1';
-  var SESSION_KEY = 'watchdog_signup_session_v1';
+  var VISITOR_KEY = 'wd_visitor_id';
+  var SESSION_KEY = 'wd_session_id';
+  var FIRST_TOUCH_KEY = 'wd_first_touch';
+  var SESSION_TOUCH_KEY = 'wd_session_touch';
+  var LEGACY_VISITOR_KEY = 'watchdog_signup_visitor_v1';
+  var LEGACY_SESSION_KEY = 'watchdog_signup_session_v1';
   var PENDING_KEY = 'watchdog_signup_pending_v1';
   var initialized = false;
   var client = null;
@@ -44,6 +48,14 @@
     try { storage.setItem(key, JSON.stringify(value)); } catch (_error) {}
   }
 
+  function readString(storage, key) {
+    try { return storage.getItem(key) || ''; } catch (_error) { return ''; }
+  }
+
+  function writeString(storage, key, value) {
+    try { storage.setItem(key, value); } catch (_error) {}
+  }
+
   function referrerHost() {
     if (!document.referrer) return '';
     try {
@@ -72,26 +84,37 @@
     if (context) return context;
     if (!window.crypto || typeof window.crypto.randomUUID !== 'function') return null;
 
-    var visitorId = '';
-    try { visitorId = localStorage.getItem(VISITOR_KEY) || ''; } catch (_error) {}
+    var visitorId = readString(localStorage, VISITOR_KEY);
     if (!uuid(visitorId)) {
-      visitorId = newUuid();
-      try { localStorage.setItem(VISITOR_KEY, visitorId); } catch (_error) {}
+      var legacyVisitor = readString(localStorage, LEGACY_VISITOR_KEY);
+      visitorId = uuid(legacyVisitor) ? legacyVisitor : newUuid();
+      writeString(localStorage, VISITOR_KEY, visitorId);
     }
 
-    var session = readJson(sessionStorage, SESSION_KEY);
-    if (!session || !uuid(session.id)) {
-      session = { id: newUuid(), touch: captureTouch(), created_at: new Date().toISOString() };
-      writeJson(sessionStorage, SESSION_KEY, session);
-    } else if (!session.touch) {
-      session.touch = captureTouch();
-      writeJson(sessionStorage, SESSION_KEY, session);
+    var sessionId = readString(sessionStorage, SESSION_KEY);
+    var legacySession = readJson(sessionStorage, LEGACY_SESSION_KEY);
+    if (!uuid(sessionId)) {
+      sessionId = legacySession && uuid(legacySession.id) ? legacySession.id : newUuid();
+      writeString(sessionStorage, SESSION_KEY, sessionId);
+    }
+
+    var firstTouch = readJson(localStorage, FIRST_TOUCH_KEY);
+    if (!firstTouch) {
+      firstTouch = captureTouch();
+      writeJson(localStorage, FIRST_TOUCH_KEY, firstTouch);
+    }
+
+    var sessionTouch = readJson(sessionStorage, SESSION_TOUCH_KEY);
+    if (!sessionTouch) {
+      sessionTouch = legacySession && legacySession.touch ? legacySession.touch : captureTouch();
+      writeJson(sessionStorage, SESSION_TOUCH_KEY, sessionTouch);
     }
 
     context = {
       visitor_id: visitorId,
-      session_id: session.id,
-      touch: session.touch || captureTouch()
+      session_id: sessionId,
+      touch: sessionTouch,
+      first_touch: firstTouch
     };
     return context;
   }
