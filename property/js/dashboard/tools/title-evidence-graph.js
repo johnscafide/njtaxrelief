@@ -135,6 +135,7 @@
   function render(r,force){
     var k=key(r),host=document.getElementById('teg-'+k);if(!host)return;
     if(typeof window.ddInspect!=='function'){host.innerHTML='<div class="teg-error">Evidence source engine is not available. Close and reopen this section.</div>';return;}
+    // content-architecture: dynamic — this loading state is shared across property surfaces and rendered only while live parcel evidence is resolving.
     host.innerHTML='<div class="teg-loading"><span class="pl-spin"></span><div><b>Connecting the evidence graph</b><small>Parcel identity · DCA permits · NJDEP constraints · source provenance</small></div></div>';
     var inspect=force&&typeof window.ddInspectFresh==='function'?window.ddInspectFresh:window.ddInspect;
     inspect(r).then(function(d){return fullPermitRows(r,d,force).then(function(permitData){host.innerHTML=build(r,d,permitData);});}).catch(function(e){console.warn('Title Evidence Graph',e);host.innerHTML='<div class="teg-error">Live evidence sources did not answer. The saved property has not been changed.</div>';});
