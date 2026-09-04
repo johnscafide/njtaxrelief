@@ -138,6 +138,7 @@
     // content-architecture: dynamic — this loading state is shared across property surfaces and rendered only while live parcel evidence is resolving.
     host.innerHTML='<div class="teg-loading"><span class="pl-spin"></span><div><b>Connecting the evidence graph</b><small>Parcel identity · DCA permits · NJDEP constraints · source provenance</small></div></div>';
     var inspect=force&&typeof window.ddInspectFresh==='function'?window.ddInspectFresh:window.ddInspect;
+    // content-architecture: dynamic — this error state renders only when live parcel evidence or the parcel-level DCA follow-up request fails.
     inspect(r).then(function(d){return fullPermitRows(r,d,force).then(function(permitData){host.innerHTML=build(r,d,permitData);});}).catch(function(e){console.warn('Title Evidence Graph',e);host.innerHTML='<div class="teg-error">Live evidence sources did not answer. The saved property has not been changed.</div>';});
   }
   // content-architecture: dynamic — this tool shell is only the mount point for parcel-specific live evidence rendered by build().
