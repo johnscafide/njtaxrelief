@@ -140,6 +140,7 @@
     var inspect=force&&typeof window.ddInspectFresh==='function'?window.ddInspectFresh:window.ddInspect;
     inspect(r).then(function(d){return fullPermitRows(r,d,force).then(function(permitData){host.innerHTML=build(r,d,permitData);});}).catch(function(e){console.warn('Title Evidence Graph',e);host.innerHTML='<div class="teg-error">Live evidence sources did not answer. The saved property has not been changed.</div>';});
   }
+  // content-architecture: dynamic — this tool shell is only the mount point for parcel-specific live evidence rendered by build().
   function tool(r){var k=key(r);records[k]=r;setTimeout(function(){render(r,false);},0);return '<section class="teg-tool"><div class="teg-intro"><span class="teg-badge">PRO+ · EVIDENCE GRAPH 3.0</span><h3>Title &amp; closing evidence graph</h3><p>One property-centered view of the public records that can change a closing conversation, including plain-language permit and certificate history before municipal follow-up.</p></div><div id="teg-'+k+'"></div></section>';}
   function refresh(k){var r=records[k];if(r)render(r,true);}
   Object.assign(window,{toolTitleEvidenceGraph:tool,tegRefresh:refresh});
