@@ -59,7 +59,7 @@
     var city=titleCase(clean(row&&row.city)||clean(row&&row.town));
     var town=shortMunicipality(row&&row.town);
     var zip=njZip(row&&row.zip)?clean(row.zip):'';
-    var line=[city,'NJ',zip].filter(Boolean).join(' ');
+    var line=city?(city+', NJ'+(zip?' '+zip:'')):('NJ'+(zip?' '+zip:''));
     if(city&&town&&norm(city)!==norm(town))line+=' · '+town;
     return line;
   }
@@ -178,7 +178,7 @@
 
   function observeGrid(grid){
     if(!grid||typeof MutationObserver==='undefined')return;
-    new MutationObserver(function(){scan();setTimeout(sync,0);}).observe(grid,{childList:true,subtree:true});
+    new MutationObserver(function(){scan();setTimeout(sync,0);}).observe(grid,{childList:true});
   }
   function boot(){
     enableMaplessMode();
