@@ -1,7 +1,7 @@
 /* Watchdog landing recent-property intelligence.
-   Adds governed Watchdog Score and ROBUST evidence to recent property cards,
-   repairs familiar mailing locality, and keeps the public index mapless while
-   preserving real property imagery underneath the intelligence overlay. */
+   Adds the canonical Watchdog Score to recent property cards, repairs familiar
+   mailing locality for signed-in rows, and keeps the public index mapless while
+   preserving real property imagery. ROBUST details remain on the property page. */
 (function(){
   'use strict';
   if(window.__WATCHDOG_LANDING_RECENT_INTELLIGENCE__)return;
@@ -16,12 +16,17 @@
   var SCORE_MARKER='watchdog.watchdog_score';
   var SCORE_MODEL='ROBUST-v1';
   var sb=null,rowsByAddress=Object.create(null),scoresByPin=Object.create(null),syncPromise=null,scanTimer=0;
-  var ORDER=[['recourse','R'],['fairness','O'],['burden','B'],['uniformity','U'],['stability','S'],['trajectory','T']];
 
   function clean(v){return String(v==null?'':v).trim();}
   function norm(v){return clean(v).toUpperCase().replace(/[^A-Z0-9]+/g,' ').replace(/\s+/g,' ').trim();}
   function esc(v){return clean(v).replace(/[&<>\"']/g,function(c){return{'&':'&amp;','<':'&lt;','>':'&gt;','\"':'&quot;',"'":'&#39;'}[c];});}
   function njZip(v){return /^0[78]\d{3}$/.test(clean(v));}
+  function titleCase(v){
+    var raw=clean(v);
+    if(!raw||raw!==raw.toUpperCase())return raw;
+    return raw.toLowerCase().replace(/\b([a-z])/g,function(m){return m.toUpperCase();});
+  }
+  function shortMunicipality(v){return titleCase(v).replace(/\bTownship\b/gi,'Twp').replace(/\bBorough\b/gi,'Boro');}
   function suspiciousLocality(row){
     var city=clean(row&&row.city),town=clean(row&&row.town);
     return !city||!njZip(row&&row.zip)||/\b(?:TWP|TOWNSHIP|BORO|BOROUGH)\b/i.test(city)||(city&&town&&norm(city)===norm(town)&&/\b(?:TWP|TOWNSHIP|BORO|BOROUGH)\b/i.test(town));
@@ -45,32 +50,18 @@
     style.textContent=[
       'html.wd-index-mapless #plm-map,html.wd-index-mapless #hd-map,html.wd-index-mapless .leaflet-container{display:none!important;visibility:hidden!important;pointer-events:none!important;max-height:0!important;overflow:hidden!important}',
       'html.wd-index-mapless #plm section:has(#plm-map),html.wd-index-mapless #plm .plm-sec:has(#plm-map),html.wd-index-mapless .hd-mapwrap:has(#hd-map){display:none!important}',
-      '#wd-consumer-recents .wd-property-photo{position:relative!important;overflow:hidden!important;background:radial-gradient(circle at 82% 16%,rgba(85,151,255,.34),transparent 34%),linear-gradient(145deg,#081d3b 0%,#123f86 54%,#2467d7 100%)!important}',
-      '#wd-consumer-recents .wd-property-photo.wd-score-visual>img{display:block!important;position:absolute!important;inset:0!important;width:100%!important;height:100%!important;object-fit:cover!important;object-position:center!important;z-index:1!important}',
-      '#wd-consumer-recents .wd-property-photo.wd-score-visual:after{content:"";position:absolute;z-index:2;inset:0;pointer-events:none;background:linear-gradient(180deg,rgba(2,15,34,.08) 0%,rgba(2,15,34,.02) 42%,rgba(2,15,34,.76) 100%)}',
-      '#wd-consumer-recents .wd-property-photo.wd-score-visual>.wd-property-placeholder{z-index:0!important}',
-      '#wd-consumer-recents .wd-property-label{z-index:6!important;background:rgba(255,255,255,.94)!important;box-shadow:0 6px 18px rgba(6,22,46,.12)}',
-      '.wd-recent-score{position:absolute;z-index:5;right:18px;top:18px;min-width:100px;height:64px;padding:9px 11px;border:1px solid rgba(255,255,255,.34);border-radius:18px;background:rgba(5,25,58,.52);box-shadow:0 12px 28px rgba(3,15,36,.24);color:#fff;display:grid;grid-template-columns:27px auto;grid-template-rows:1fr auto;column-gap:8px;align-items:center;backdrop-filter:blur(10px)}',
-      '.wd-recent-score i{grid-row:1/-1;width:27px;height:27px;border-radius:9px;display:grid;place-items:center;background:rgba(255,255,255,.14);font-size:12px}',
-      '.wd-recent-score b{align-self:end;font:900 27px/.88 "Plus Jakarta Sans",sans-serif;letter-spacing:-.055em;text-shadow:0 1px 5px rgba(0,0,0,.22)}',
-      '.wd-recent-score small{align-self:start;margin-top:4px;color:rgba(255,255,255,.76);font:850 7px/1 "Plus Jakarta Sans",sans-serif;letter-spacing:.06em;text-transform:uppercase}',
-      '.wd-recent-score.building{min-width:122px;grid-template-columns:27px 1fr}.wd-recent-score.building b{font-size:12px;line-height:1.05;letter-spacing:0}.wd-recent-score.building small{font-size:7px}',
-      '.wd-recent-robust{position:absolute;z-index:5;left:18px;right:18px;bottom:14px;display:grid;grid-template-columns:auto repeat(6,minmax(0,1fr));align-items:end;gap:7px;color:#fff;pointer-events:none;text-shadow:0 1px 5px rgba(0,0,0,.38)}',
-      '.wd-recent-robust>strong{padding:0 5px 5px 0;font:900 9px/1 "Plus Jakarta Sans",sans-serif;letter-spacing:.12em}',
-      '.wd-recent-robust span{min-width:0;text-align:center}',
-      '.wd-recent-robust span b{display:block;color:#a6fff3;font:900 9px/1 "Plus Jakarta Sans",sans-serif}',
-      '.wd-recent-robust span em{display:block;margin-top:3px;color:#fff;font:850 11px/1 "Plus Jakarta Sans",sans-serif;font-style:normal}',
-      '.wd-recent-robust.wd-recent-robust-summary{grid-template-columns:auto 1fr;align-items:center}.wd-recent-robust.wd-recent-robust-summary span{text-align:left;font:750 10px/1.2 "Plus Jakarta Sans",sans-serif;color:rgba(255,255,255,.96)}',
-      '#wd-consumer-recents .wd-property-copy>p[data-watchdog-locality]{text-transform:none!important}',
-      '@media(max-width:640px){.wd-recent-score{right:13px;top:14px;min-width:92px;height:58px;border-radius:16px;padding:8px 9px;grid-template-columns:24px auto}.wd-recent-score i{width:24px;height:24px}.wd-recent-score b{font-size:24px}.wd-recent-score.building{min-width:112px}.wd-recent-score.building b{font-size:11px}.wd-recent-robust{left:13px;right:13px;bottom:11px;gap:5px}.wd-recent-robust>strong{font-size:8px}.wd-recent-robust span b{font-size:8px}.wd-recent-robust span em{font-size:10px}}',
-      '@media(max-width:390px){.wd-recent-robust{gap:4px}.wd-recent-robust>strong{letter-spacing:.08em}.wd-recent-robust span em{font-size:9px}}'
+      '#wd-consumer-recents .wd-property-copy>p[data-watchdog-locality]{text-transform:none!important}'
     ].join('');
     document.head.appendChild(style);
   }
 
   function localityLine(row){
-    var city=clean(row&&row.city)||clean(row&&row.town),zip=njZip(row&&row.zip)?clean(row.zip):'';
-    return [city,'NJ',zip].filter(Boolean).join(' ');
+    var city=titleCase(clean(row&&row.city)||clean(row&&row.town));
+    var town=shortMunicipality(row&&row.town);
+    var zip=njZip(row&&row.zip)?clean(row.zip):'';
+    var line=[city,'NJ',zip].filter(Boolean).join(' ');
+    if(city&&town&&norm(city)!==norm(town))line+=' · '+town;
+    return line;
   }
   function geocode(row){
     if(!row||!clean(row.address))return Promise.resolve(null);
@@ -120,46 +111,41 @@
   function indexScores(ownRows,publicRows){
     scoresByPin=Object.create(null);
     (ownRows||[]).forEach(function(x){var pin=clean(x&&x.pams_pin);if(pin&&!scoresByPin[pin])scoresByPin[pin]=x;});
-    (publicRows||[]).forEach(function(x){var pin=clean(x&&x.pams_pin);if(!pin)return;if(!scoresByPin[pin])scoresByPin[pin]={pams_pin:pin,score:x.watchdog_score,evidence_coverage:null,inputs:null};});
-  }
-  function components(summary){
-    var raw=summary&&summary.inputs&&summary.inputs.components;
-    if(!raw||typeof raw!=='object')return'';
-    return ORDER.map(function(item){var d=raw[item[0]]||{},v=d.score==null?'—':Math.round(Number(d.score));return'<span title="'+esc(item[0])+'"><b>'+item[1]+'</b><em>'+esc(v)+'</em></span>';}).join('');
+    (publicRows||[]).forEach(function(x){var pin=clean(x&&x.pams_pin);if(!pin)return;if(!scoresByPin[pin])scoresByPin[pin]={pams_pin:pin,score:x.watchdog_score};});
   }
   function scoreMarkup(summary){
-    if(!summary||summary.score==null)return'<span class="wd-recent-score building"><i class="fas fa-dog"></i><b>Score building</b><small>ROBUST</small></span>';
-    var value=Math.round(Number(summary.score));
-    return'<span class="wd-recent-score" aria-label="Watchdog Score '+esc(value)+' of 100"><i class="fas fa-dog"></i><b>'+esc(value)+'</b><small>Watchdog score</small></span>';
-  }
-  function robustMarkup(summary){
-    if(!summary||summary.score==null)return'<span class="wd-recent-robust wd-recent-robust-summary"><strong>ROBUST</strong><span>Open the property to build governed evidence</span></span>';
-    var cells=components(summary);
-    if(cells)return'<span class="wd-recent-robust" aria-label="ROBUST component scores"><strong>ROBUST</strong>'+cells+'</span>';
-    var coverage=Number(summary.evidence_coverage),copy=Number.isFinite(coverage)?Math.round(coverage)+'% evidence coverage':'Governed score';
-    return'<span class="wd-recent-robust wd-recent-robust-summary"><strong>ROBUST</strong><span>'+esc(copy)+'</span></span>';
+    var value=summary&&Number(summary.score);
+    if(!Number.isFinite(value))return'<span class="wd-recent-score pending" aria-label="Watchdog Score pending"><b>--</b><small>Score<br>pending</small></span>';
+    value=Math.round(value);
+    return'<span class="wd-recent-score" aria-label="Watchdog Score '+esc(value)+' of 100"><b>'+esc(value)+'</b><small>Watchdog<br>Score</small></span>';
   }
 
   function findRow(card){
     var h=card&&card.querySelector('.wd-property-copy h3');
     return h?rowsByAddress[norm(h.textContent)]||null:null;
   }
-  function prepareRenderedPropertyImage(photo){
-    if(!photo)return;
-    photo.classList.add('wd-score-visual');
+  function publicPinsFromCards(){
+    var seen=Object.create(null),pins=[];
+    document.querySelectorAll('#wd-property-grid .wd-property-card[data-pams-pin]').forEach(function(card){
+      var pin=clean(card.dataset.pamsPin);if(pin&&!seen[pin]){seen[pin]=true;pins.push(pin);}
+    });
+    return pins;
   }
   function decorateCard(card){
     if(!card)return;
     var row=findRow(card);
     var photo=card.querySelector('.wd-property-photo');
     var copy=card.querySelector('.wd-property-copy>p');
-    if(row&&copy){var line=localityLine(row);if(line)copy.textContent=line;copy.dataset.watchdogLocality='1';if(row.town&&row.city&&norm(row.town)!==norm(row.city))copy.title='Municipality: '+clean(row.town);}
+    if(row&&copy){var line=localityLine(row);if(line)copy.textContent=line;copy.dataset.watchdogLocality='1';if(row.town&&row.city&&norm(row.town)!==norm(row.city))copy.title='Municipality: '+shortMunicipality(row.town);}
     if(!photo)return;
-    prepareRenderedPropertyImage(photo);
-    var summary=row?scoresByPin[clean(row.pams_pin)]||null:null;
+    photo.classList.remove('wd-score-visual');
+    var pin=row?clean(row.pams_pin):clean(card.dataset.pamsPin);
+    var summary=pin?scoresByPin[pin]||null:null;
     var oldScore=photo.querySelector('.wd-recent-score'),oldRobust=photo.querySelector('.wd-recent-robust');
     if(oldScore)oldScore.remove();if(oldRobust)oldRobust.remove();
-    photo.insertAdjacentHTML('beforeend',scoreMarkup(summary)+robustMarkup(summary));
+    photo.insertAdjacentHTML('beforeend',scoreMarkup(summary));
+    var footer=card.querySelector('.wd-property-open');
+    if(footer)footer.textContent=summary&&Number.isFinite(Number(summary.score))?'Open property':'Open property and build score';
   }
   function scan(){
     clearTimeout(scanTimer);scanTimer=setTimeout(function(){document.querySelectorAll('#wd-property-grid .wd-property-card').forEach(decorateCard);},10);
@@ -171,7 +157,10 @@
     if(!client){scan();setTimeout(sync,180);return Promise.resolve();}
     syncPromise=client.auth.getSession().then(function(auth){
       var session=auth&&auth.data&&auth.data.session;
-      if(!session){scan();return null;}
+      if(!session){
+        var publicPins=publicPinsFromCards();
+        return publicScores(client,publicPins).then(function(publicRows){indexScores([],publicRows);scan();return null;});
+      }
       return client.from('saved_properties')
         .select('id,pams_pin,address,city,town,county,zip,assessed,last_year_tax,lat,lon,updated_at')
         .order('updated_at',{ascending:false}).limit(3).then(function(res){
@@ -187,15 +176,19 @@
     return syncPromise;
   }
 
+  function observeGrid(grid){
+    if(!grid||typeof MutationObserver==='undefined')return;
+    new MutationObserver(function(){scan();setTimeout(sync,0);}).observe(grid,{childList:true,subtree:true});
+  }
   function boot(){
     enableMaplessMode();
     ensureStyles();
     scan();
     sync();
     var grid=document.getElementById('wd-property-grid');
-    if(grid&&typeof MutationObserver!=='undefined')new MutationObserver(function(){scan();}).observe(grid,{childList:true,subtree:true});
+    if(grid)observeGrid(grid);
     if(typeof MutationObserver!=='undefined'&&!grid){
-      var rootObserver=new MutationObserver(function(){var next=document.getElementById('wd-property-grid');if(!next)return;rootObserver.disconnect();new MutationObserver(function(){scan();}).observe(next,{childList:true,subtree:true});scan();sync();});
+      var rootObserver=new MutationObserver(function(){var next=document.getElementById('wd-property-grid');if(!next)return;rootObserver.disconnect();observeGrid(next);scan();sync();});
       rootObserver.observe(document.documentElement,{childList:true,subtree:true});
     }
     window.addEventListener('watchdog:context-refresh',sync);
