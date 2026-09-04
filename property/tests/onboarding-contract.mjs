@@ -7,9 +7,12 @@ const runtime=read('property/js/supabase-runtime.js');
 const page=read('property/onboarding/index.html');
 const onboarding=read('property/js/onboarding.js');
 const emailAuth=read('property/js/onboarding-email-auth.js');
+const signupAnalytics=read('property/js/signup-attribution.js');
 const css=read('property/css/onboarding.css');
 const migration=read('supabase/migrations/20260819150000_required_watchdog_onboarding_v1.sql');
 const contactMigration=read('supabase/migrations/20260819190000_watchdog_onboarding_contact_email_v2.sql');
+const signupMigration=read('supabase/migrations/20260904164622_watchdog_signup_attribution_analytics.sql');
+const signupHardening=read('supabase/migrations/20260904165216_watchdog_signup_attribution_reporting_hardening.sql');
 const otpTemplate=read('supabase/templates/watchdog-email-otp.html');
 
 must(runtime.includes("var onboardingPath = routePrefix + '/onboarding/';") && runtime.includes("return location.origin + onboardingPath + '?next='"),'OAuth runtime must route through the onboarding page on both Watchdog domains.');
@@ -37,9 +40,33 @@ must(emailAuth.includes('db.auth.verifyOtp'),'Email code entry must verify throu
 must(emailAuth.includes("type: 'email'"),'Email OTP verification must use the email verification type.');
 must(emailAuth.includes("autocomplete=\"one-time-code\""),'Email code input must expose one-time-code autocomplete semantics.');
 must(emailAuth.includes('window.location.reload()'),'Successful email verification must re-enter the canonical onboarding session gate.');
+must(emailAuth.includes('/property/js/signup-attribution.js'),'Onboarding auth must load the privacy-safe signup attribution helper.');
 must(!/signInWithPassword|password\s*:/i.test(emailAuth),'Email fallback must remain passwordless.');
 must(otpTemplate.includes('{{ .Token }}'),'Watchdog OTP email template must render the Supabase six-digit token.');
 must(!otpTemplate.includes('{{ .ConfirmationURL }}'),'Watchdog OTP email template must not fall back to a magic link.');
+
+must(signupAnalytics.includes('watchdog_cookie_preferences_v1'),'Signup attribution must honor Watchdog analytics consent.');
+must(signupAnalytics.includes('navigator.globalPrivacyControl'),'Signup attribution must honor Global Privacy Control.');
+must(signupAnalytics.includes('navigator.doNotTrack'),'Signup attribution must honor Do Not Track.');
+must(signupAnalytics.includes('record_watchdog_auth_funnel_event'),'Signup attribution must use the governed anonymous funnel RPC.');
+must(signupAnalytics.includes('link_my_watchdog_signup_attribution'),'Signup attribution must use the current-user-only identity bridge RPC.');
+must(signupAnalytics.includes("'anchor_application'"),'Signup attribution must distinguish ANCHOR account creation from normal Watchdog onboarding.');
+must(signupAnalytics.includes("'watchdog_onboarding'"),'Signup attribution must distinguish normal Watchdog onboarding.');
+must(signupAnalytics.includes("[data-provider]"),'Signup attribution must observe social provider choice.');
+must(signupAnalytics.includes("[data-email-start]"),'Signup attribution must observe email provider choice.');
+must(!signupAnalytics.includes('wd-library-email'),'Signup attribution must never read ANCHOR email field values.');
+must(!signupAnalytics.includes('wd-email-address'),'Signup attribution must never read onboarding email field values.');
+
+must(signupMigration.includes('watchdog_auth_funnel_events'),'Signup analytics migration must create an anonymous auth funnel store.');
+must(signupMigration.includes('watchdog_signup_attribution'),'Signup analytics migration must create the restricted signup bridge.');
+must(signupMigration.includes('enable row level security'),'Signup analytics tables must enable RLS.');
+must(signupMigration.includes('revoke all on table public.watchdog_signup_attribution from anon, authenticated'),'Direct client reads of signup attribution must remain revoked.');
+must(signupMigration.includes("v_created_at < now() - interval '2 hours'"),'Signup linkage must reject old existing accounts.');
+must(signupMigration.includes('on conflict (user_id) do nothing'),'Signup first-touch linkage must remain immutable.');
+must(signupHardening.includes('analytics_internal_accounts'),'Developer acquisition reporting must exclude internal accounts.');
+must(signupHardening.includes("'auth_provider_totals'"),'Developer acquisition reporting must include all-account auth provider totals.');
+must(signupHardening.includes("'attribution_rate'"),'Developer acquisition reporting must disclose source-attribution coverage.');
+must(signupHardening.includes('optional analytics was allowed'),'Developer reporting must label consent-gated source/funnel coverage.');
 
 must(onboarding.includes("id:'contact_email'"),'Onboarding must ask the member to confirm a contact email.');
 must(onboarding.includes("autocomplete:'email'"),'Contact email input must use email autocomplete semantics.');
