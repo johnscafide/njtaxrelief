@@ -214,9 +214,8 @@
     try{var saved=model.savedEstimate||await saveEstimate(model,section);if(action==='start')startApplication(model,saved);}catch(err){if(err&&err.message==='address_required')return;var status=q('[data-anchor-save-status]',section)||q('[data-anchor-quick-status]',section);if(status){status.textContent='Watchdog could not save this estimate right now. Your result is still available on this page.';status.classList.add('is-error');}}
   }
 
-  // content-architecture: dynamic — this validation copy appears only when a completed quick estimate lacks the address required for save/application actions.
   async function requestAction(model,section,action){
-    if(model===state.quick&&!model.address){var status=q('[data-anchor-quick-status]',section);showQuickForm(section,true);if(status){status.textContent='Add the New Jersey residence used for this estimate before saving or starting an application.';status.classList.add('is-error');}return;}
+    if(model===state.quick&&!model.address){var status=q('[data-anchor-quick-status]',section);showQuickForm(section,true);if(status){status.textContent=status.dataset.addressRequiredCopy||'';status.classList.add('is-error');}return;}
     var user=state.user||await refreshUser();if(user){executeAction(model,section,action);return;}state.pending={model:model,section:section,action:action};renderAuth(section);
   }
 
