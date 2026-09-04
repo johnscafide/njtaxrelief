@@ -10,6 +10,8 @@ on:
       - 'property/css/onboarding.css'
       - 'property/css/account-profile.css'
       - 'property/js/onboarding.js'
+      - 'property/js/onboarding-email-auth.js'
+      - 'property/js/signup-attribution.js'
       - 'property/js/account-profile.js'
       - 'property/js/agent-branding-profile.js'
       - 'property/js/agent-vanity-profile.js'
@@ -19,6 +21,7 @@ on:
       - 'property/tests/account-profile-contract.mjs'
       - 'property/tests/agent-profile-entitlement-contract.mjs'
       - 'supabase/migrations/*required_watchdog_onboarding*.sql'
+      - 'supabase/migrations/*watchdog_signup_attribution*.sql'
       - 'supabase/migrations/*account_profile_preferences*.sql'
       - 'supabase/migrations/*agent_vanity_entitlement_boundary*.sql'
       - '.github/workflows/onboarding-contract.yml'
@@ -36,6 +39,8 @@ jobs:
         run: |
           node --check property/js/supabase-runtime.js
           node --check property/js/onboarding.js
+          node --check property/js/onboarding-email-auth.js
+          node --check property/js/signup-attribution.js
           node --check property/js/account-profile.js
           node --check property/js/agent-vanity-profile.js
           node --check property/js/agent-branding-profile.js
