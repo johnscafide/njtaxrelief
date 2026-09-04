@@ -60,12 +60,33 @@
     return cache[k];
   }
   function featureRows(payload){return(payload&&payload.features||[]).map(function(f){return f.attributes||{};});}
+  function normalizePermitNumber(v){return clean(v).toUpperCase().replace(/[^A-Z0-9]/g,'');}
+  function permitLifecycleSummary(rawRows){
+    var groups=Object.create(null),order=[],unmatchableIssued=[];
+    (rawRows||[]).forEach(function(row){
+      var pn=normalizePermitNumber(row&&row.permitno),st=clean(row&&row.status).toUpperCase();
+      if(!pn){if(st==='P')unmatchableIssued.push(row);return;}
+      if(!groups[pn]){groups[pn]=[];order.push(pn);}groups[pn].push(row);
+    });
+    var lifecycles=[];
+    order.forEach(function(pn){
+      var group=groups[pn],issued=group.filter(function(row){return clean(row&&row.status).toUpperCase()==='P';}),certified=group.filter(function(row){return clean(row&&row.status).toUpperCase()==='C'&&clean(row&&row.certdate);});
+      if(!issued.length&&!certified.length)return;
+      var permitDates=group.map(function(row){return clean(row&&row.permitdate);}).filter(Boolean).sort();
+      var certDates=certified.map(function(row){return clean(row&&row.certdate);}).filter(Boolean).sort();
+      var representative=certified[certified.length-1]||issued[issued.length-1]||group[0]||{};
+      lifecycles.push({permitNumber:clean(representative.permitno)||pn,type:clean(representative.permittypedesc||representative.permittype)||'Permit activity',permitDate:permitDates[0]||'',certificateDate:certDates.length?certDates[certDates.length-1]:'',certified:certified.length>0,verification:certified.length===0&&issued.length>0});
+    });
+    lifecycles.sort(function(a,b){return clean(b.permitDate).localeCompare(clean(a.permitDate));});
+    return{lifecycles:lifecycles,verification:lifecycles.filter(function(x){return x.verification;}).length+unmatchableIssued.length,unmatchableIssued:unmatchableIssued};
+  }
   function permitHTML(p) {
-    var list=p.rows||[], open=list.filter(function(x){return clean(x.status).toUpperCase()==='P';}), certified=list.filter(function(x){return clean(x.status).toUpperCase()==='C';});
-    var tone=open.length?'review':list.length?'clear':'quiet';
-    var detail=list.slice(0,6).map(function(x){return'<li><span><b>'+safe(x.permitno||'Permit')+'</b><small>'+safe(x.permittypedesc||'Permit activity')+'</small></span><span>'+safe(x.permitstatusdesc||x.status||'')+'<small>'+date(x.certdate||x.permitdate)+'</small></span></li>';}).join('');
-    return '<article class="dd-signal '+tone+'"><div class="dd-signal-head"><i class="fas fa-helmet-safety"></i><span><b>Permit / certificate gap</b><small>NJ DCA · block + lot match</small></span><strong>'+(open.length?open.length+' review':list.length?'clear':'no records')+'</strong></div>'+
-      '<p>'+(p.unavailable?safe(p.unavailable):open.length?open.length+' state record'+(open.length===1?' is':'s are')+' still reported as Permit Issued rather than Certificate Issued. Verify locally before closing or underwriting.':list.length?'No permit-issued-only record appears in the current state feed for this block and lot.':'No matching record appears in DCA’s rolling permit feed.')+'</p>'+
+    var list=p.rows||[],summary=permitLifecycleSummary(list),verify=summary.verification;
+    var tone=verify?'review':list.length?'clear':'quiet';
+    var detail=summary.lifecycles.slice(0,6).map(function(x){var state=x.verification?'Verify municipality':'Certificate shown';var when=x.certificateDate||x.permitDate;return'<li><span><b>'+safe(x.permitNumber||'Permit')+'</b><small>'+safe(x.type||'Permit activity')+'</small></span><span>'+safe(state)+'<small>'+date(when)+'</small></span></li>';}).join('');
+    // content-architecture: dynamic — this summary is generated from live parcel-specific DCA permit lifecycle state and dates.
+    return '<article class="dd-signal '+tone+'"><div class="dd-signal-head"><i class="fas fa-helmet-safety"></i><span><b>Permit &amp; certificate review</b><small>NJ DCA · block + lot match</small></span><strong>'+(verify?verify+' verify':list.length?'state history':'no records')+'</strong></div>'+
+      '<p>'+(p.unavailable?safe(p.unavailable):verify?verify+' permit lifecycle'+(verify===1?' needs':'s need')+' municipal verification because the matching state rows do not currently show a certificate date, or cannot be safely joined by permit number. This is not a legal open-permit finding.':list.length?'No permit-number lifecycle currently lacks a certificate date in the matching state feed. Municipal records still control clearance.':'No matching record appears in DCA’s rolling permit feed; that does not prove no permit activity exists.')+'</p>'+
       (detail?'<ul class="dd-records">'+detail+'</ul>':'')+'</article>';
   }
   function envHTML(d) {
