@@ -6,6 +6,18 @@
   var PUBLISHABLE_KEY = 'sb_publishable_MYX59qCbK3d-21zDfJqkNw_fvmfnexa';
 
   if (!CANONICAL_HOSTS.has(String(location.hostname || '').toLowerCase())) return;
+
+  // The public discovery runtime is already injected across Watchdog public
+  // surfaces. Use it to bootstrap the consent-gated signup attribution helper
+  // without turning private ANCHOR answers or auth identity into product events.
+  if (!window.WatchdogSignupAnalytics && !document.querySelector('script[src="/property/js/signup-attribution.js"]')) {
+    var signupScript = document.createElement('script');
+    signupScript.src = '/property/js/signup-attribution.js';
+    signupScript.defer = true;
+    signupScript.setAttribute('data-watchdog-signup-attribution','1');
+    (document.head || document.documentElement).appendChild(signupScript);
+  }
+
   if (navigator.globalPrivacyControl === true || String(navigator.doNotTrack || '') === '1') return;
   if (!window.crypto || typeof window.crypto.randomUUID !== 'function') return;
 

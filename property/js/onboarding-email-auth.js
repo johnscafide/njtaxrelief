@@ -1,6 +1,14 @@
 (function () {
   'use strict';
 
+  if (!window.WatchdogSignupAnalytics && !document.querySelector('script[src="/property/js/signup-attribution.js"]')) {
+    var analyticsScript = document.createElement('script');
+    analyticsScript.src = '/property/js/signup-attribution.js';
+    analyticsScript.defer = true;
+    analyticsScript.setAttribute('data-watchdog-signup-attribution','1');
+    (document.head || document.documentElement).appendChild(analyticsScript);
+  }
+
   var root = document.getElementById('wd-onboarding-root');
   if (!root || !window.NJPTRSupabaseRuntime) return;
 
