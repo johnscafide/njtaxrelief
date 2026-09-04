@@ -17,7 +17,7 @@ const applicationLibrary = read('property/anchor/applications/index.html');
 const estimateMigration = read('supabase/migrations/20260903143812_anchor_account_estimates_v1.sql');
 const fkFixMigration = read('supabase/migrations/20260903145239_anchor_account_estimates_application_fk_fix.sql');
 
-// Watchdog home owns both the secure NJPTR continuation and the subtle native estimator.
+// Watchdog home owns both the secure NJPTR continuation and the native estimator.
 assert.match(publicNav, /anchor-home-funnel\.css/);
 assert.match(publicNav, /anchor-home-funnel\.js/);
 assert.match(home, /host==='watchdogindex\.com'\|\|host==='www\.watchdogindex\.com'/);
@@ -30,9 +30,13 @@ assert.match(home, /6\*60\*60\*1000/);
 assert.doesNotMatch(home, /localStorage/);
 assert.doesNotMatch(home, /console\.(?:log|info|debug)\s*\(/);
 
-// The estimate is shown before account creation; saving or application creation is optional.
-assert.match(partial, /No account needed to see the estimate/i);
+// The estimate is shown before account creation; the quick estimator stays open until a result replaces it.
+assert.match(partial, /No account needed to see your number/i);
+assert.match(partial, /data-anchor-quick-edit/);
+assert.doesNotMatch(partial, /data-anchor-quick-toggle/);
+assert.match(home, /presentation:'always_open'/);
 assert.match(partial, /Save &amp; start my 2025 application/);
+assert.match(partial, /Start my 2025 application/);
 assert.match(partial, /Save estimate/);
 assert.match(partial, /View full property record/);
 assert.match(partial, /not the State of New Jersey/i);
