@@ -6,6 +6,7 @@ on:
       - main
     paths:
       - 'property/onboarding/**'
+      - 'property/anchor/applications/**'
       - 'property/account/**'
       - 'property/css/onboarding.css'
       - 'property/css/account-profile.css'
@@ -18,6 +19,7 @@ on:
       - 'property/js/professional-license-verification.js'
       - 'property/js/supabase-runtime.js'
       - 'property/tests/onboarding-contract.mjs'
+      - 'property/tests/signup-attribution-contract.mjs'
       - 'property/tests/account-profile-contract.mjs'
       - 'property/tests/agent-profile-entitlement-contract.mjs'
       - 'supabase/migrations/*required_watchdog_onboarding*.sql'
@@ -47,6 +49,8 @@ jobs:
           node --check property/js/professional-license-verification.js
       - name: Verify required onboarding boundaries
         run: node property/tests/onboarding-contract.mjs
+      - name: Verify signup attribution boundaries
+        run: node property/tests/signup-attribution-contract.mjs
       - name: Verify living Account profile boundaries
         run: node property/tests/account-profile-contract.mjs
       - name: Verify Developer plus Agent profile boundaries
