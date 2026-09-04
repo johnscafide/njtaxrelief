@@ -15,7 +15,7 @@
 
   function key(r) { return String((r && (r.pams_pin || r.id)) || 'property').replace(/[^a-z0-9]/gi, ''); }
   function clean(v) { return String(v == null ? '' : v).trim(); }
-  function safe(v) { return clean(v).replace(/[&<>"']/g,function(c){return{'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot',"'":'&#39;'}[c];}); }
+  function safe(v) { return clean(v).replace(/[&<>"']/g,function(c){return{'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c];}); }
   function date(v) { if(!v)return 'date not reported';var d=new Date(v);return isNaN(d)?clean(v):d.toLocaleDateString('en-US',{month:'short',day:'numeric',year:'numeric'}); }
   function propertyIdentity(r) {
     var pin = clean(r.pams_pin), parts = pin.split('_');
