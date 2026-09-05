@@ -18,6 +18,7 @@
   var observer = null;
   var authListenerAttached = false;
   var authAttachAttempts = 0;
+  var authFailureInstrumentationInstalled = false;
 
   function analyticsAllowed() {
     if (navigator.globalPrivacyControl === true || String(navigator.doNotTrack || '') === '1') return false;
@@ -187,6 +188,84 @@
     return record(eventName, provider, signupContext);
   }
 
+  function failure(provider, signupContext) {
+    if (!initialized || !analyticsAllowed()) return Promise.resolve(null);
+    var pending = readPending();
+    return record(
+      'auth_failure',
+      normalizeProvider(provider) || (pending && pending.auth_provider) || 'unknown',
+      signupContext || (pending && pending.signup_context) || inferredContext(null)
+    );
+  }
+
+  function providerFromOAuthArgs(args) {
+    var request = args && args[0] || {};
+    var pending = readPending();
+    return normalizeProvider(request.provider) || (pending && pending.auth_provider) || 'unknown';
+  }
+
+  function wrapAuthMethod(auth, methodName, providerResolver) {
+    var original = auth && auth[methodName];
+    if (typeof original !== 'function' || original.__watchdogAuthFailureWrapped) return;
+    var bound = original.bind(auth);
+    var wrapped = function () {
+      var args = Array.prototype.slice.call(arguments);
+      var provider = providerResolver ? providerResolver(args) : 'email';
+      var pending = readPending();
+      var signupContext = (pending && pending.signup_context) || inferredContext(null);
+      try {
+        return Promise.resolve(bound.apply(null, args)).then(function (result) {
+          if (result && result.error) failure(provider, signupContext);
+          return result;
+        }, function (error) {
+          failure(provider, signupContext);
+          throw error;
+        });
+      } catch (error) {
+        failure(provider, signupContext);
+        throw error;
+      }
+    };
+    try { Object.defineProperty(wrapped, '__watchdogAuthFailureWrapped', { value:true }); } catch (_error) {}
+    auth[methodName] = wrapped;
+  }
+
+  function installAuthFailureInstrumentation() {
+    if (authFailureInstrumentationInstalled) return;
+    var database = db();
+    if (!database || !database.auth) return;
+    wrapAuthMethod(database.auth, 'signInWithOtp', function () { return 'email'; });
+    wrapAuthMethod(database.auth, 'verifyOtp', function () { return 'email'; });
+    wrapAuthMethod(database.auth, 'signInWithOAuth', providerFromOAuthArgs);
+    authFailureInstrumentationInstalled = true;
+  }
+
+  function hasRedirectAuthError() {
+    function has(params) {
+      return params.has('error') || params.has('error_code') || params.has('error_description');
+    }
+    try {
+      if (has(new URLSearchParams(location.search || ''))) return true;
+      var hash = String(location.hash || '').replace(/^#/, '');
+      return !!hash && has(new URLSearchParams(hash));
+    } catch (_error) {
+      return false;
+    }
+  }
+
+  function recordRedirectFailure() {
+    var pending = readPending();
+    if (!pending || !hasRedirectAuthError()) return;
+    recordOnce(
+      'redirect-failure|' + String(pending.at || ''),
+      'auth_failure',
+      pending.auth_provider || 'unknown',
+      pending.signup_context
+    ).then(function () {
+      try { sessionStorage.removeItem(PENDING_KEY); } catch (_error) {}
+    });
+  }
+
   function recentUser(user) {
     if (!user || !user.created_at) return false;
     var created = Date.parse(user.created_at);
@@ -296,6 +375,8 @@
     if (initialized || !analyticsAllowed()) return;
     initialized = true;
     ensureContext();
+    installAuthFailureInstrumentation();
+    recordRedirectFailure();
     document.addEventListener('click', onClick, true);
     scanSurfaces();
     observer = new MutationObserver(function () { window.setTimeout(scanSurfaces, 0); });
@@ -307,6 +388,7 @@
     enabled: function () { return initialized && analyticsAllowed(); },
     context: function () { return initialized ? ensureContext() : null; },
     record: record,
+    failure: failure,
     linkSession: linkSession
   });
 
