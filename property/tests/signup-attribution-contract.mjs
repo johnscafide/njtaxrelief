@@ -6,6 +6,7 @@ function must(value,message){ if(!value) throw new Error(message); }
 const runtime=read('property/js/signup-attribution.js');
 const onboardingEmail=read('property/js/onboarding-email-auth.js');
 const anchorLibrary=read('property/anchor/applications/index.html');
+const analyticsPage=read('property/analytics/index.html');
 const schema=read('supabase/migrations/20260904164622_watchdog_signup_attribution_analytics.sql');
 const reporting=read('supabase/migrations/20260904165216_watchdog_signup_attribution_reporting_hardening.sql');
 const leastPrivilege=read('supabase/migrations/20260904165518_watchdog_signup_attribution_least_privilege.sql');
@@ -23,11 +24,21 @@ must(runtime.includes("'anchor_application'"),'ANCHOR account creation must have
 must(runtime.includes("'watchdog_onboarding'"),'Normal Watchdog onboarding must have a distinct signup context.');
 must(runtime.includes('[data-provider]'),'Social provider clicks must be measured.');
 must(runtime.includes('[data-email-start]'),'Email provider selection must be measured.');
+must(runtime.includes("'auth_failure'"),'Authentication failures must be recorded without PII.');
+must(runtime.includes("'signInWithOAuth'"),'Social OAuth failures must be instrumented.');
+must(runtime.includes("'signInWithOtp'"),'Email OTP request failures must be instrumented.');
+must(runtime.includes("'verifyOtp'"),'Email OTP verification failures must be instrumented.');
+must(runtime.includes("params.has('error_code')"),'OAuth callback failures must be detected after provider redirect.');
 must(!runtime.includes('wd-library-email'),'Runtime must not read the ANCHOR email field.');
 must(!runtime.includes('wd-email-address'),'Runtime must not read the onboarding email field.');
 must(onboardingEmail.includes('/property/js/signup-attribution.js'),'Canonical onboarding must load signup attribution.');
 must(anchorLibrary.includes('/property/js/signup-attribution.js'),'ANCHOR application library must load signup attribution.');
 must(anchorLibrary.includes('never Private Vault contents'),'ANCHOR privacy boundary must stay explicit.');
+
+must(analyticsPage.includes("get_watchdog_acquisition_analytics"),'Developer Analytics must load the governed signup acquisition report.');
+must(analyticsPage.includes('id="signup-acquisition"'),'Developer Analytics must render signup acquisition.');
+must(analyticsPage.includes('id="auth-funnel"'),'Developer Analytics must render the authentication funnel.');
+must(analyticsPage.includes('Auth failures'),'Developer Analytics must surface authentication failure sessions.');
 
 must(schema.includes('alter table public.watchdog_auth_funnel_events enable row level security'),'Auth funnel table must use RLS.');
 must(schema.includes('alter table public.watchdog_signup_attribution enable row level security'),'Signup attribution table must use RLS.');
