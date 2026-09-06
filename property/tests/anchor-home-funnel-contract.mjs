@@ -68,6 +68,9 @@ assert.match(promo, /addEstimatorBrand\(\)/);
 assert.match(promo, /aria-modal/);
 assert.match(acquisition, /watchdog-promo\.js/);
 assert.match(acquisition, /anchor-watchdog-handoff\.js/);
+assert.match(acquisition, /function injectScript\(out,src\)/);
+assert.match(acquisition, /out=injectScript\(out,'\/watchdog-promo\.js'\)/);
+assert.match(acquisition, /if\(pathname==='\/anchor-estimator\.html'\) out=injectScript\(out,'\/anchor-watchdog-handoff\.js'\)/);
 assert.match(acquisition, /private, no-store, max-age=0/);
 
 // Saving is owner-only and the database—not browser JavaScript—owns the saved benefit calculation.
