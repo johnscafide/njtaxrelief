@@ -51,6 +51,14 @@ assert.match(handoff, /location\.replace\('https:\/\/www\.watchdogindex\.com\/#a
 assert.doesNotMatch(handoff, /watchdogindex\.com\/anchor\/results/);
 assert.doesNotMatch(handoff, /[?&](?:email|phone|address|benefit)=/i);
 
+// Redirect cannot depend solely on the analytics event; visible results independently trigger the secure handoff.
+assert.match(handoff, /function resultVisible\(\)/);
+assert.match(handoff, /MutationObserver/);
+assert.match(handoff, /function maybeStage\(\)/);
+assert.match(handoff, /DOMContentLoaded/);
+assert.match(handoff, /Authorization':'Bearer '\+KEY/);
+assert.match(handoff, /anchor-estimator\\\.html\\\/?\$/);
+
 // Server-side handoff recomputes the estimate and fails closed on missing required answers.
 assert.match(edgeHandoff, /const complete = Boolean/);
 assert.match(edgeHandoff, /primary === "yes"/);
