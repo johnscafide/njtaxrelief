@@ -115,13 +115,12 @@ async function stage(req: Request, body: Record<string, any>) {
   }
 
   const email = normalizeEmail(body.email);
-  const code = str(body.code, 12).replace(/\D/g, "");
   const result = body.result && typeof body.result === "object" ? body.result as Record<string, any> : {};
-  if (!email || code.length !== 6) return json(req, { error: "A verified estimator session is required." }, 400);
+  if (!email) return json(req, { error: "A verified estimator session is required." }, 400);
 
   const cutoff = new Date(Date.now() - 15 * 60_000).toISOString();
   const verified = await db.from("lead_otp")
-    .select("id,email,code_hash,verified_at,created_at")
+    .select("id,email,verified_at,created_at")
     .eq("email", email)
     .not("verified_at", "is", null)
     .gte("verified_at", cutoff)
@@ -130,7 +129,6 @@ async function stage(req: Request, body: Record<string, any>) {
   if (verified.error) throw new Error(verified.error.message);
   const otp = verified.data?.[0];
   if (!otp?.id || !otp.verified_at) return json(req, { error: "The verified estimator session expired. Your result remains available on the estimator page." }, 403);
-  if ((await sha256(code + email)) !== otp.code_hash) return json(req, { error: "The estimator verification could not be confirmed." }, 403);
 
   const hourAgo = new Date(Date.now() - 3600_000).toISOString();
   const recent = await db.from("anchor_result_sessions")
