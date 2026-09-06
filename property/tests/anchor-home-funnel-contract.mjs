@@ -51,15 +51,23 @@ assert.match(handoff, /location\.replace\('https:\/\/www\.watchdogindex\.com\/#a
 assert.doesNotMatch(handoff, /watchdogindex\.com\/anchor\/results/);
 assert.doesNotMatch(handoff, /[?&](?:email|phone|address|benefit)=/i);
 
-// Redirect cannot depend solely on the analytics event; visible results independently trigger the secure handoff.
+// Redirect cannot depend solely on the analytics event; final visible results independently trigger a bounded retryable handoff.
 assert.match(handoff, /function resultVisible\(\)/);
+assert.match(handoff, /\.est-result-qualify,\.est-no-qualify/);
 assert.match(handoff, /MutationObserver/);
 assert.match(handoff, /function maybeStage\(\)/);
+assert.match(handoff, /function scheduleRetry\(\)/);
+assert.match(handoff, /MAX_ATTEMPTS=4/);
+assert.match(handoff, /AbortController/);
 assert.match(handoff, /DOMContentLoaded/);
-assert.match(handoff, /Authorization':'Bearer '\+KEY/);
+assert.match(handoff, /window\.VERIFY_KEY/);
+assert.doesNotMatch(handoff, /value\('est-code'\)/);
 assert.ok(handoff.includes("anchor-estimator\\.html\\/?$"));
 
-// Server-side handoff recomputes the estimate and fails closed on missing required answers.
+// Server-side handoff accepts only a recent verified estimator session, recomputes the estimate, and fails closed on incomplete answers.
+assert.match(edgeHandoff, /\.not\("verified_at", "is", null\)/);
+assert.match(edgeHandoff, /\.gte\("verified_at", cutoff\)/);
+assert.match(edgeHandoff, /verification_id: otp\.id/);
 assert.match(edgeHandoff, /const complete = Boolean/);
 assert.match(edgeHandoff, /primary === "yes"/);
 assert.match(edgeHandoff, /tenure !== "own" \|\| taxes === "yes"/);
