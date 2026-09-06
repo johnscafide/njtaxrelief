@@ -12,12 +12,16 @@ const PAGE_MAP = new Map([
 
 function first(value){return Array.isArray(value)?value[0]:value;}
 function host(req){return String(req.headers['x-forwarded-host']||req.headers.host||'').split(',')[0].trim().toLowerCase().replace(/:\d+$/,'');}
+function injectScript(out,src){
+  const escaped=src.replace(/[.*+?^${}()|[\]\\]/g,'\\$&');
+  if(new RegExp('(?:src=["\\\']'+escaped+'["\\\']|'+escaped+')','i').test(out))return out;
+  return out.replace(/<\/body>/i,'<script defer src="'+src+'"></script>\n</body>');
+}
 function inject(html, pathname){
   let out=String(html||'');
   if(!/watchdog-promo\.css/i.test(out)) out=out.replace(/<\/head>/i,'  <link rel="stylesheet" href="/watchdog-promo.css">\n</head>');
-  const scripts=['<script defer src="/watchdog-promo.js"></script>'];
-  if(pathname==='/anchor-estimator.html') scripts.push('<script defer src="/anchor-watchdog-handoff.js"></script>');
-  if(!/watchdog-promo\.js/i.test(out)) out=out.replace(/<\/body>/i,scripts.join('\n')+'\n</body>');
+  out=injectScript(out,'/watchdog-promo.js');
+  if(pathname==='/anchor-estimator.html') out=injectScript(out,'/anchor-watchdog-handoff.js');
   return out;
 }
 
