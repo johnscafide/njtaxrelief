@@ -1599,6 +1599,7 @@ body.est-verify-bar-open{padding-bottom:88px;}
   // Email verification lives in a DIFFERENT Supabase project than the usage counter.
   var VERIFY_URL = 'https://uvkvaxljhhngydvlrzom.supabase.co';
   var VERIFY_KEY = 'sb_publishable_MYX59qCbK3d-21zDfJqkNw_fvmfnexa';
+  window.VERIFY_KEY = VERIFY_KEY; // exposed for anchor-watchdog-handoff.js (injected server-side on njpropertytaxrelief.com)
   var VERIFY_FN  = VERIFY_URL + '/functions/v1/verify-email';
 
   // ── TAB SWITCHER ──────────────────────────────────────────

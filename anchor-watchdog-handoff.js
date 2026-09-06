@@ -5,6 +5,10 @@
 
   var URL='https://uvkvaxljhhngydvlrzom.supabase.co/functions/v1/anchor-result-handoff';
   var LOGO='/property/branding/watchdog-logo-horizontal.svg';
+  // Publishable key for the uvkvaxljhhngydvlrzom project (same one anchor-estimator.html uses for verify-email).
+  var FALLBACK_KEY='sb_publishable_MYX59qCbK3d-21zDfJqkNw_fvmfnexa';
+  var MAX_PREREQ_WAITS=20;
+  var prereqWaits=0;
   var MAX_ATTEMPTS=4;
   var staging=false;
   var finished=false;
@@ -13,7 +17,7 @@
   var latestResultParams={};
 
   function value(id){var el=document.getElementById(id);return String(el&&el.value||'').trim();}
-  function apiKey(){return String(window.VERIFY_KEY||'').trim();}
+  function apiKey(){return String(window.VERIFY_KEY||FALLBACK_KEY||'').trim();}
   function selectedAnswers(){
     var out={};
     Array.prototype.slice.call(document.querySelectorAll('.est-choice.selected[data-key][data-val]')).forEach(function(btn){out[btn.getAttribute('data-key')]=btn.getAttribute('data-val');});
@@ -48,7 +52,11 @@
     if(staging||finished||attemptCount>=MAX_ATTEMPTS)return;
     if(!resultVisible())return;
     var email=value('est-email');var name=value('est-name');var address=value('est-address');var key=apiKey();
-    if(!email||!address||!key){scheduleRetry();return;}
+    if(!email||!address||!key){
+      prereqWaits+=1;
+      if(prereqWaits>=MAX_PREREQ_WAITS){finished=true;fail('Watchdog could not read the details needed to open your result. Your ANCHOR result remains available here.');return;}
+      scheduleRetry();return;
+    }
     staging=true;attemptCount+=1;clearFailure();overlay();
     var answers=selectedAnswers();
     var controller=typeof AbortController==='function'?new AbortController():null;
