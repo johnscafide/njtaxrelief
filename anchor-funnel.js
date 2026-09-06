@@ -25,6 +25,18 @@
   var verifiedGooglePlaceId = '';
   var submitWrapped = false;
 
+  function ensureWatchdogHandoff() {
+    if (!/\/anchor-estimator\.html\/?$/i.test(location.pathname)) return;
+    if (window.__wdAnchorHandoff || document.querySelector('script[src*="anchor-watchdog-handoff.js"]')) return;
+    var script = document.createElement('script');
+    script.src = '/anchor-watchdog-handoff.js';
+    script.async = false;
+    script.dataset.anchorHandoffBootstrap = '1';
+    (document.head || document.documentElement).appendChild(script);
+  }
+
+  ensureWatchdogHandoff();
+
   function safeParse(raw) {
     try { return raw ? JSON.parse(raw) : null; } catch (_) { return null; }
   }
