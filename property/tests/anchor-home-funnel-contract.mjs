@@ -57,7 +57,7 @@ assert.match(handoff, /MutationObserver/);
 assert.match(handoff, /function maybeStage\(\)/);
 assert.match(handoff, /DOMContentLoaded/);
 assert.match(handoff, /Authorization':'Bearer '\+KEY/);
-assert.match(handoff, /anchor-estimator\\\.html\\\/?\$/);
+assert.ok(handoff.includes("anchor-estimator\\.html\\/?$"));
 
 // Server-side handoff recomputes the estimate and fails closed on missing required answers.
 assert.match(edgeHandoff, /const complete = Boolean/);
