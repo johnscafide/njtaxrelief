@@ -7,6 +7,8 @@ const ALLOWED_ORIGINS = new Set([
   "https://www.watchdogindex.com",
 ]);
 
+const WATCHDOG_ORIGIN = "https://www.watchdogindex.com";
+
 function adminKey(): string {
   const modern = Deno.env.get("SUPABASE_SECRET_KEYS");
   if (modern) {
@@ -27,7 +29,7 @@ const db = createClient(Deno.env.get("SUPABASE_URL")!, adminKey(), {
 function cors(req: Request) {
   const origin = req.headers.get("origin") || "";
   return {
-    "Access-Control-Allow-Origin": ALLOWED_ORIGINS.has(origin) ? origin : "https://www.watchdogindex.com",
+    "Access-Control-Allow-Origin": ALLOWED_ORIGINS.has(origin) ? origin : WATCHDOG_ORIGIN,
     "Access-Control-Allow-Headers": "content-type, apikey, authorization, x-client-info",
     "Access-Control-Allow-Methods": "POST, OPTIONS",
     "Vary": "Origin",
@@ -74,8 +76,8 @@ function computeAnchor(raw: Record<string, unknown>) {
   const taxes = answer(raw.taxes, ["yes", "no"]);
 
   const complete = Boolean(
-    tenure && income && age && primary &&
-    (tenure === "rent" || taxes)
+    tenure && income && primary &&
+    (tenure === "rent" ? age : taxes)
   );
   const qualifies = Boolean(
     complete &&
@@ -100,12 +102,63 @@ function computeAnchor(raw: Record<string, unknown>) {
     complete,
     qualifies,
     benefit,
-    eligibility_label: qualifies ? "Likely eligible based on the answers provided" : "Not currently estimated as eligible based on the answers provided",
+    eligibility_label: qualifies
+      ? "Likely eligible based on the answers provided"
+      : "Not currently estimated as eligible based on the answers provided",
   };
 }
 
 function firstName(value: unknown): string {
   return str(value, 100).split(/\s+/)[0].slice(0, 60);
+}
+
+async function createWatchdogAuthHandoff(email: string, resultToken: string) {
+  const redirectTo = `${WATCHDOG_ORIGIN}/#anchor-result=${resultToken}`;
+  const generated = await db.auth.admin.generateLink({
+    type: "magiclink",
+    email,
+    options: {
+      redirectTo,
+      data: {
+        watchdog_signup_context: "anchor_estimator",
+        watchdog_account_source: "verified_anchor_estimator",
+      },
+    },
+  });
+
+  if (generated.error) {
+    throw new Error("Watchdog account handoff: " + generated.error.message);
+  }
+
+  const actionLink = str(generated.data?.properties?.action_link, 4000);
+  const userId = str(generated.data?.user?.id, 80);
+  let authUrl: URL | null = null;
+  try { authUrl = actionLink ? new URL(actionLink) : null; } catch (_) { authUrl = null; }
+  const expectedAuthHost = new URL(Deno.env.get("SUPABASE_URL")!).hostname;
+  if (!authUrl || authUrl.protocol !== "https:" || authUrl.hostname !== expectedAuthHost || authUrl.pathname !== "/auth/v1/verify") {
+    throw new Error("Watchdog account handoff link was not created.");
+  }
+  if (!userId) {
+    throw new Error("Watchdog account identity was not created.");
+  }
+
+  const now = new Date().toISOString();
+
+  const lifecycle = await db.from("watchdog_user_lifecycle").update({
+    first_signup_context: "anchor_estimator",
+    first_auth_provider: "email",
+    origin_recorded_at: now,
+    origin_source: "verified_anchor_handoff",
+    updated_at: now,
+  }).eq("user_id", userId).eq("first_signup_context", "unknown");
+  if (lifecycle.error) throw new Error("Watchdog lifecycle link: " + lifecycle.error.message);
+
+  const leadLink = await db.from("backoffice_leads").update({
+    auth_user_id: userId,
+  }).eq("source", "anchor-estimator").eq("email", email).is("auth_user_id", null);
+  if (leadLink.error) throw new Error("Watchdog lead identity link: " + leadLink.error.message);
+
+  return actionLink;
 }
 
 async function stage(req: Request, body: Record<string, any>) {
@@ -115,7 +168,9 @@ async function stage(req: Request, body: Record<string, any>) {
   }
 
   const email = normalizeEmail(body.email);
-  const result = body.result && typeof body.result === "object" ? body.result as Record<string, any> : {};
+  const result = body.result && typeof body.result === "object"
+    ? body.result as Record<string, any>
+    : {};
   if (!email) return json(req, { error: "A verified estimator session is required." }, 400);
 
   const cutoff = new Date(Date.now() - 15 * 60_000).toISOString();
@@ -128,7 +183,11 @@ async function stage(req: Request, body: Record<string, any>) {
     .limit(1);
   if (verified.error) throw new Error(verified.error.message);
   const otp = verified.data?.[0];
-  if (!otp?.id || !otp.verified_at) return json(req, { error: "The verified estimator session expired. Your result remains available on the estimator page." }, 403);
+  if (!otp?.id || !otp.verified_at) {
+    return json(req, {
+      error: "The verified estimator session expired. Your result remains available on the estimator page.",
+    }, 403);
+  }
 
   const hourAgo = new Date(Date.now() - 3600_000).toISOString();
   const recent = await db.from("anchor_result_sessions")
@@ -136,22 +195,36 @@ async function stage(req: Request, body: Record<string, any>) {
     .eq("email", email)
     .gte("created_at", hourAgo);
   if (recent.error) throw new Error(recent.error.message);
-  if ((recent.count ?? 0) >= 10) return json(req, { error: "Too many result handoffs. Please use the result already shown on the estimator page." }, 429);
+  if ((recent.count ?? 0) >= 10) {
+    return json(req, {
+      error: "Too many result handoffs. Please use the result already shown on the estimator page.",
+    }, 429);
+  }
 
-  const answers = result.answers && typeof result.answers === "object" ? result.answers as Record<string, unknown> : {};
+  const answers = result.answers && typeof result.answers === "object"
+    ? result.answers as Record<string, unknown>
+    : {};
   const computed = computeAnchor(answers);
   if (!computed.complete) {
-    return json(req, { error: "The verified estimator answers are incomplete. Your result remains available on the estimator page." }, 422);
+    return json(req, {
+      error: "The verified estimator answers are incomplete. Your result remains available on the estimator page.",
+    }, 422);
   }
+
   const address = str(result.address, 300);
-  if (!address) return json(req, { error: "A verified New Jersey property address is required." }, 422);
+  if (!address) {
+    return json(req, { error: "A verified New Jersey property address is required." }, 422);
+  }
 
   const intentScoreRaw = Number(result.intent_score);
-  const intentScore = Number.isFinite(intentScoreRaw) ? Math.max(0, Math.min(100, Math.round(intentScoreRaw))) : null;
+  const intentScore = Number.isFinite(intentScoreRaw)
+    ? Math.max(0, Math.min(100, Math.round(intentScoreRaw)))
+    : null;
   const token = randomToken();
   const expiresAt = new Date(Date.now() + 30 * 60_000).toISOString();
+
   const payload = {
-    schema_version: 1,
+    schema_version: 2,
     program: "ANCHOR",
     generated_at: new Date().toISOString(),
     first_name: firstName(result.name),
@@ -168,9 +241,12 @@ async function stage(req: Request, body: Record<string, any>) {
     },
     intent_score: intentScore,
     source: "njpropertytaxrelief-anchor-estimator",
+    account_origin: "anchor_estimator",
   };
 
-  await db.from("anchor_result_sessions").delete().lt("expires_at", new Date(Date.now() - 3600_000).toISOString());
+  await db.from("anchor_result_sessions")
+    .delete()
+    .lt("expires_at", new Date(Date.now() - 3600_000).toISOString());
 
   const inserted = await db.from("anchor_result_sessions").insert({
     email,
@@ -182,7 +258,20 @@ async function stage(req: Request, body: Record<string, any>) {
   });
   if (inserted.error) throw new Error(inserted.error.message);
 
-  return json(req, { ok: true, result_token: token, expires_at: expiresAt }, 201);
+  // A successful verified-estimator handoff now guarantees a Watchdog Auth
+  // identity and returns a one-time Supabase action link. Following that link
+  // confirms/signs in the account and lands on Watchdog with the result token.
+  // Supabase generateLink does not send a second email.
+  const authHandoffUrl = await createWatchdogAuthHandoff(email, token);
+
+  return json(req, {
+    ok: true,
+    result_token: token,
+    expires_at: expiresAt,
+    auth_handoff_url: authHandoffUrl,
+    auth_provider: "email",
+    signup_context: "anchor_estimator",
+  }, 201);
 }
 
 async function consume(req: Request, body: Record<string, any>) {
@@ -192,7 +281,10 @@ async function consume(req: Request, body: Record<string, any>) {
   }
 
   const token = str(body.result_token, 100);
-  if (!/^[a-f0-9]{64}$/i.test(token)) return json(req, { error: "This result link is invalid." }, 400);
+  if (!/^[a-f0-9]{64}$/i.test(token)) {
+    return json(req, { error: "This result link is invalid." }, 400);
+  }
+
   const tokenHash = await sha256(token);
   const selected = await db.from("anchor_result_sessions")
     .select("id,result_payload,expires_at,view_count")
@@ -201,14 +293,22 @@ async function consume(req: Request, body: Record<string, any>) {
   if (selected.error) throw new Error(selected.error.message);
   const row = selected.data;
   if (!row?.id) return json(req, { error: "This result link is no longer available." }, 404);
-  if (new Date(row.expires_at).getTime() <= Date.now()) return json(req, { error: "This secure result link expired. Run the estimator again to create a new one." }, 410);
+  if (new Date(row.expires_at).getTime() <= Date.now()) {
+    return json(req, {
+      error: "This secure result link expired. Run the estimator again to create a new one.",
+    }, 410);
+  }
 
   await db.from("anchor_result_sessions").update({
     last_viewed_at: new Date().toISOString(),
     view_count: Number(row.view_count || 0) + 1,
   }).eq("id", row.id);
 
-  return json(req, { ok: true, result: row.result_payload, expires_at: row.expires_at });
+  return json(req, {
+    ok: true,
+    result: row.result_payload,
+    expires_at: row.expires_at,
+  });
 }
 
 Deno.serve(async (req) => {
@@ -216,8 +316,11 @@ Deno.serve(async (req) => {
   if (req.method !== "POST") return json(req, { error: "POST only" }, 405);
 
   let body: Record<string, any>;
-  try { body = await req.json(); }
-  catch { return json(req, { error: "Bad request" }, 400); }
+  try {
+    body = await req.json();
+  } catch {
+    return json(req, { error: "Bad request" }, 400);
+  }
 
   try {
     if (body.action === "stage") return await stage(req, body);
