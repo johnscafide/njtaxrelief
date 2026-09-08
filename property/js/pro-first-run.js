@@ -20,9 +20,9 @@
   }
 
   var steps=[
-    {title:'Start with a municipality',body:'Choose a county, then the municipality you actually want to review. Watchdog only runs the governed scope you select; it does not silently widen the territory.',list:['County first','Municipality second','No hidden statewide bulk pull']},
-    {title:'Set the review window',body:'Use sale recency and minimum annual tax-reduction filters to narrow the queue. These controls change what is surfaced, not the underlying source facts.',list:['Verified NJ sales evidence','Current assessment context','Filters do not change the Chapter 123 math']},
-    {title:'Run the scan, then review the evidence',body:'The result is a professional triage queue, not an appeal outcome. Open the highest-value supported files first and verify the evidence before acting.',list:['Ranked for review','Evidence quality stays visible','No legal, appraisal, or tax outcome is promised']}
+    {title:'Choose a municipality',body:'Start with the county and municipality you want to review.',list:['Choose a county','Choose a municipality','Scan only that area']},
+    {title:'Set your filters',body:'Use sale recency and minimum annual tax reduction to narrow the results.',list:['Verified New Jersey sales','Current assessment context','Chapter 123 screening']},
+    {title:'Review the results',body:'Use the ranking to decide which files to open first, then verify the evidence before acting.',list:['Ranked for review','Evidence quality stays visible','No outcome is guaranteed']}
   ];
   function openTour(){
     addStyles();

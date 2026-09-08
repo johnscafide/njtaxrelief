@@ -24,7 +24,7 @@
   function money(value) { return '$' + Math.round(Number(value) || 0).toLocaleString(); }
   function pct(value, digits) {
     var number = Number(value);
-    return Number.isFinite(number) ? (number * 100).toFixed(digits == null ? 1 : digits) + '%' : '—';
+    return Number.isFinite(number) ? (number * 100).toFixed(digits == null ? 1 : digits) + '%' : 'Not available';
   }
   function toast(message) {
     var node = el('pl-toast');
@@ -147,7 +147,7 @@
       '<p>The assessment is <b>' + money(hit.over) + '</b> above the certified Chapter 123 screening threshold after this NJ-verified sale is carried to the pretax valuation date.</p>' +
       '<dl><div><dt>Verified sale</dt><dd>' + money(hit.p) + '</dd></div><div><dt>' + valuationLabel + '</dt><dd>' + money(hit.market) + '</dd></div><div><dt>Supported assessment</dt><dd>' + money(hit.fair) + '</dd></div><div><dt>Ch. 123 threshold</dt><dd>' + money(hit.limit) + '</dd></div></dl>' +
       '<ul>' + parts + '</ul><p class="sc-caution"><b>Screening signal, not certainty.</b> Condition, renovations, record errors, exemptions, later evidence and reassessment activity can change the result. Confirm the current record and comparable evidence before filing.</p>' +
-      '<p class="sc-sources">Calculated server-side from governed NJ evidence, including the certified Director/common-level range, General Tax Rate and verified-sale inputs.</p>';
+      '<p class="sc-sources">Uses the certified Director/common-level range, General Tax Rate and verified-sale inputs.</p>';
   }
 
   function reasonTip() {
@@ -240,13 +240,13 @@
   function stateMarkup(data) {
     var result = data && data.result;
     if (result === 'insufficient_sales') {
-      return '<div class="sc-none"><b>Not enough governed sale evidence</b><p>Only ' + Number(data.pool || 0) + ' eligible arm&rsquo;s-length sales remain inside the selected pretax valuation window and assessment threshold. Widen the window, lower the assessment threshold, or pick another municipality.</p></div>';
+      return '<div class="sc-none"><b>Not enough sale evidence</b><p>Only ' + Number(data.pool || 0) + ' eligible arm&rsquo;s-length sales remain within the selected valuation window and assessment threshold. Widen the window, lower the threshold, or choose another municipality.</p></div>';
     }
     if (result === 'manual_review_required') {
-      return '<div class="sc-none"><b><i class="fas fa-scale-balanced"></i> Manual review required</b><p>' + esc(data.message || 'Automated Chapter 123 screening is disabled for this municipality under the current governed evidence.') + '</p></div>';
+      return '<div class="sc-none"><b><i class="fas fa-scale-balanced"></i> Manual review required</b><p>' + esc(data.message || 'Automated Chapter 123 screening is not available for this municipality with the current evidence.') + '</p></div>';
     }
     if (result === 'certified_ratio_unavailable' || result === 'tax_rate_unavailable' || result === 'market_adjustment_unavailable') {
-      return '<div class="sc-err"><b><i class="fas fa-triangle-exclamation"></i> Governed evidence unavailable</b><p>' + esc(data.message || 'A required governed source is unavailable, so no substitute estimate was used.') + '</p></div>';
+      return '<div class="sc-err"><b><i class="fas fa-triangle-exclamation"></i> Required evidence unavailable</b><p>' + esc(data.message || 'A required source is unavailable, so Watchdog did not substitute an estimate.') + '</p></div>';
     }
     return '';
   }
@@ -260,7 +260,7 @@
     var minAssessment = assessmentNode ? Number(assessmentNode.value || 0) : 0;
     var townOption = el('sc-town').options[el('sc-town').selectedIndex];
     var townName = townOption ? townOption.textContent.replace(/\s+\(.*$/, '') : district;
-    el('sc-out').innerHTML = '<div class="sc-load"><div class="pl-spin"></div><div>Running the governed Pro+ screen for ' + esc(townName) + '...</div></div>';
+    el('sc-out').innerHTML = '<div class="sc-load"><div class="pl-spin"></div><div>Running scan for ' + esc(townName) + '...</div></div>';
 
     scanner({
       action: 'scan',
@@ -285,7 +285,7 @@
     }).catch(function (error) {
       console.error('Server scanner failed', error);
       lastRun = null;
-      el('sc-out').innerHTML = '<div class="sc-err"><b><i class="fas fa-triangle-exclamation"></i> Scanner temporarily unavailable</b><p>The governed server-side scan could not complete. Your browser did not fall back to a client-side ranking calculation. Try again in a moment or check System Status.</p><p><a href="/property/status">Open System Status</a></p></div>';
+      el('sc-out').innerHTML = '<div class="sc-err"><b><i class="fas fa-triangle-exclamation"></i> Scanner temporarily unavailable</b><p>The scan could not complete. Try again shortly or check System Status.</p><p><a href="/property/status">Open System Status</a></p></div>';
     });
   };
 
@@ -297,14 +297,14 @@
     var priority = run.hits.filter(function (hit) { return hit.opportunity && hit.opportunity.score >= 75; }).length;
     var displayHits = sortedHits();
     var coefficientCopy = uniformity && uniformity.coefficient != null
-      ? 'The town assessment-dispersion coefficient in the governed source context is <b>' + esc(uniformity.coefficient) + '</b>. '
+      ? 'The town assessment-dispersion coefficient is <b>' + esc(uniformity.coefficient) + '</b>. '
       : '';
     var appealCopy = countyAppeal && countyAppeal.latest
-      ? esc(run.county) + ' County reduced <b>' + esc(countyAppeal.latest.win_rate_filed) + '%</b> of the appeals filed in the latest loaded context.'
+      ? esc(run.county) + ' County reduced <b>' + esc(countyAppeal.latest.win_rate_filed) + '%</b> of the appeals filed in the latest loaded data.'
       : '';
     var certified = run.certified || {};
     var thresholdCopy = Number(run.minAssessment || 0) > 0
-      ? ' The working set is limited to assessments of at least <b>' + money(run.minAssessment) + '</b>.'
+      ? ' The results include assessments of at least <b>' + money(run.minAssessment) + '</b>.'
       : '';
 
     el('sc-out').innerHTML = '<div class="sc-res">' +
@@ -316,8 +316,8 @@
         var score = Number(hit.opportunity && hit.opportunity.score || 0);
         return '<tr><td><span class="sc-op op' + (score >= 75 ? 'hi' : score >= 55 ? 'md' : 'lo') + '"><b>' + score + '</b><small>' + esc(hit.opportunity && hit.opportunity.band || '') + '</small></span></td><td class="a">' + reasonMarkup(hit, index) + '</td><td class="q">' + esc(hit.b) + '/' + esc(hit.l) + '</td><td class="q">' + hit.y + '</td><td class="n">' + money(hit.p) + '</td><td class="n">' + money(hit.av) + '</td><td class="n">' + money(hit.limit) + '</td><td class="n over">' + money(hit.over) + '</td><td class="n save">' + money(hit.saving) + '</td><td><span class="gr g' + esc(hit.g && hit.g.k || '') + '" title="' + esc(hit.g && hit.g.w || '') + '">' + esc(hit.g && hit.g.k || '') + '  ' + esc(hit.g && hit.g.t || '') + '</span></td></tr>';
       }).join('') + '</tbody></table></div>' +
-      (run.hits.length > 300 ? '<p class="sc-more">Showing the top 300 in the table. The export contains all ' + run.hits.length + ' entitled result rows.</p>' : '') +
-      '<div class="sc-method"><h4>How this was calculated, and what it is not</h4><p>The Pro+ ranking is computed <b>server-side</b>. The browser sends the municipality and bounded screening options; it does not download the county sales file or calculate the opportunity score.</p><p>Each row uses a governed Class 2 residential sale that can be shown to precede the <b>' + esc(run.valuationDate || 'pretax valuation date') + '</b>. The sale is adjusted to that date at <b>' + (run.drift * 100).toFixed(1) + '% a year</b>. The Chapter 123 screen then uses the certified Director average ratio of <b>' + pct(certified.ratio != null ? certified.ratio : run.ratio, 1) + '</b> and the applicable upper common-level bound of <b>' + pct(certified.upper_applied, 1) + '</b>. Annual tax at stake uses the governed General Tax Rate of <b>' + (run.rate * 100).toFixed(3) + '%</b>' + (run.rateYear ? ' from <b>' + esc(run.rateYear) + '</b>' : '') + '.</p><p class="sc-warn"><b>This is a screening list, not a filing list.</b> It does not predict an appeal outcome or supply a filing deadline. Public records cannot see condition, renovations or other facts that can explain an assessment gap. Every row needs human review before action. It is not a consumer report and may not be used for tenant screening, employment or credit decisions.</p><p class="sc-sources">Formula: ' + esc(run.formulaVersion || 'governed server version') + '. Sale cutoff: ' + esc(run.saleCutoff || 'governed pretax cutoff') + '.</p></div></div>';
+      (run.hits.length > 300 ? '<p class="sc-more">Showing the top 300 in the table. The export contains all ' + run.hits.length + ' result rows.</p>' : '') +
+      '<div class="sc-method"><h4>How this was calculated</h4><p>Each row uses an eligible Class 2 residential sale that predates the <b>' + esc(run.valuationDate || 'pretax valuation date') + '</b>. The sale is adjusted to that date at <b>' + (run.drift * 100).toFixed(1) + '% a year</b>. The Chapter 123 screen uses the certified Director average ratio of <b>' + pct(certified.ratio != null ? certified.ratio : run.ratio, 1) + '</b> and the applicable upper common-level bound of <b>' + pct(certified.upper_applied, 1) + '</b>. Annual tax at stake uses the General Tax Rate of <b>' + (run.rate * 100).toFixed(3) + '%</b>' + (run.rateYear ? ' from <b>' + esc(run.rateYear) + '</b>' : '') + '.</p><p class="sc-warn"><b>This is a screening list, not a filing list.</b> It does not predict an appeal outcome or supply a filing deadline. Public records cannot see condition, renovations or other facts that can explain an assessment gap. Every row needs human review before action. It is not a consumer report and may not be used for tenant screening, employment or credit decisions.</p><p class="sc-sources">Formula: ' + esc(run.formulaVersion || 'current version') + '. Sale cutoff: ' + esc(run.saleCutoff || 'pretax cutoff') + '.</p></div></div>';
 
     if (typeof gtag === 'function') gtag('event', 'pro_scan', { town: run.name, hits: run.hits.length });
   }
@@ -381,7 +381,7 @@
     var win = window.open('', '_blank');
     if (!win) { toast('Allow popups to print'); return; }
     var run = lastRun;
-    win.document.write('<html><head><title>Appeal prospects, ' + esc(run.name) + '</title><style>body{font-family:system-ui,sans-serif;padding:26px;color:#10182b}h1{font-size:19px;margin:0 0 4px}.s{font-size:12px;color:#666;margin-bottom:16px}table{width:100%;border-collapse:collapse;font-size:10.5px}th{background:#14346e;color:#fff;padding:6px;text-align:left}td{padding:5px 6px;border-bottom:1px solid #ddd}tr:nth-child(even) td{background:#f7f9fc}.n{text-align:right}.f{margin-top:16px;font-size:10px;color:#666;line-height:1.6}</style></head><body><h1>Appeal prospects, ' + esc(run.name) + '</h1><div class="s">' + run.hits.length + ' properties above the governed Chapter 123 screen at the ' + esc(run.valuationDate || 'pretax valuation date') + '. Prepared ' + new Date().toLocaleDateString() + '.</div><table><thead><tr><th>Opportunity</th><th>Address</th><th>Blk/Lot</th><th>Sold</th><th class="n">Price</th><th class="n">Assessed</th><th class="n">Threshold</th><th class="n">Over</th><th class="n">Tax at stake/yr</th><th>Grade</th></tr></thead><tbody>' + run.hits.map(function (hit) { return '<tr><td>' + Number(hit.opportunity && hit.opportunity.score || 0) + '</td><td>' + esc(hit.a) + '</td><td>' + esc(hit.b) + '/' + esc(hit.l) + '</td><td>' + hit.y + '</td><td class="n">' + money(hit.p) + '</td><td class="n">' + money(hit.av) + '</td><td class="n">' + money(hit.limit) + '</td><td class="n">' + money(hit.over) + '</td><td class="n">' + money(hit.saving) + '</td><td>' + esc(hit.g && hit.g.k || '') + '</td></tr>'; }).join('') + '</tbody></table><div class="f">Screening only. Result calculated by ' + esc(run.formulaVersion || 'governed server formula') + ' using governed NJ evidence and the pretax valuation date. No filing deadline or appeal outcome is supplied. Public records cannot see condition or renovation. Not a consumer report; not for tenant screening, employment or credit decisions. Prepared via njpropertytaxrelief.com.</div></body></html>');
+    win.document.write('<html><head><title>Appeal prospects, ' + esc(run.name) + '</title><style>body{font-family:system-ui,sans-serif;padding:26px;color:#10182b}h1{font-size:19px;margin:0 0 4px}.s{font-size:12px;color:#666;margin-bottom:16px}table{width:100%;border-collapse:collapse;font-size:10.5px}th{background:#14346e;color:#fff;padding:6px;text-align:left}td{padding:5px 6px;border-bottom:1px solid #ddd}tr:nth-child(even) td{background:#f7f9fc}.n{text-align:right}.f{margin-top:16px;font-size:10px;color:#666;line-height:1.6}</style></head><body><h1>Appeal prospects, ' + esc(run.name) + '</h1><div class="s">' + run.hits.length + ' properties above the Chapter 123 screen at the ' + esc(run.valuationDate || 'pretax valuation date') + '. Prepared ' + new Date().toLocaleDateString() + '.</div><table><thead><tr><th>Opportunity</th><th>Address</th><th>Blk/Lot</th><th>Sold</th><th class="n">Price</th><th class="n">Assessed</th><th class="n">Threshold</th><th class="n">Over</th><th class="n">Tax at stake/yr</th><th>Grade</th></tr></thead><tbody>' + run.hits.map(function (hit) { return '<tr><td>' + Number(hit.opportunity && hit.opportunity.score || 0) + '</td><td>' + esc(hit.a) + '</td><td>' + esc(hit.b) + '/' + esc(hit.l) + '</td><td>' + hit.y + '</td><td class="n">' + money(hit.p) + '</td><td class="n">' + money(hit.av) + '</td><td class="n">' + money(hit.limit) + '</td><td class="n">' + money(hit.over) + '</td><td class="n">' + money(hit.saving) + '</td><td>' + esc(hit.g && hit.g.k || '') + '</td></tr>'; }).join('') + '</tbody></table><div class="f">Screening only. Uses verified New Jersey evidence and the pretax valuation date. No filing deadline or appeal outcome is supplied. Public records cannot see condition or renovation. Not a consumer report; not for tenant screening, employment or credit decisions. Prepared via njpropertytaxrelief.com.</div></body></html>');
     win.document.close();
     setTimeout(function () { win.print(); }, 400);
   };
