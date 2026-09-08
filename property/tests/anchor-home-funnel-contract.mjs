@@ -4,6 +4,7 @@ import assert from 'node:assert/strict';
 const read = (path) => fs.readFileSync(path, 'utf8');
 
 const home = read('property/js/anchor-home-funnel.js');
+const homeCss = read('property/css/anchor-home-funnel.css');
 const partial = read('property/partials/anchor-home-funnel.html');
 const publicNav = read('property/js/public-nav.js');
 const handoff = read('anchor-watchdog-handoff.js');
@@ -58,15 +59,17 @@ assert.doesNotMatch(handoff, /[?&](?:email|phone|address|benefit)=/i);
 // ANCHOR-created users can optionally add social sign-in methods to the same authenticated user.
 assert.match(home, /getUserIdentities/);
 assert.match(home, /linkIdentity/);
-assert.match(home, /key:'google'/);
-assert.match(home, /key:'facebook'/);
-assert.match(home, /key:'linkedin_oidc'/);
+assert.match(home, /'google'/);
+assert.match(home, /'facebook'/);
+assert.match(home, /'linkedin_oidc'/);
 assert.match(home, /data-anchor-link-provider/);
 assert.doesNotMatch(home, /data-provider=/);
 assert.doesNotMatch(home, /signInWithOAuth/);
-assert.match(home, /Make Watchdog easier to get back to/i);
-assert.match(home, /no second profile and no marketing opt-in/i);
-assert.match(home, /\/onboarding\/\?next=\//);
+assert.match(partial, /wd-anchor-social-link-template/);
+assert.match(partial, /Make Watchdog easier to get back to/i);
+assert.match(partial, /no second profile and no marketing opt-in/i);
+assert.match(partial, /\/onboarding\/\?next=\//);
+assert.match(homeCss, /\.wd-anchor-social\{/);
 assert.match(home, /anchor_social_link_connected/);
 assert.match(home, /anchor-social-linked/);
 
