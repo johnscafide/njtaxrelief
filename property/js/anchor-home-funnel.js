@@ -16,7 +16,8 @@
   var RESULT_SESSION='wd_anchor_home_result_v1';
   var PREFILL_SESSION='wd_anchor_2025_prefill';
   var ESTIMATE_SESSION='wd_anchor_2025_estimate_id';
-  var state={db:null,user:null,partial:null,result:null,subject:null,score:null,pending:null,quick:null,observer:null};
+  var SOCIAL_RETURN='anchor-social-linked';
+  var state={db:null,user:null,partial:null,result:null,subject:null,score:null,pending:null,quick:null,observer:null,identityBusy:false};
 
   function q(sel,root){return(root||document).querySelector(sel);}
   function qa(sel,root){return Array.prototype.slice.call((root||document).querySelectorAll(sel));}
@@ -109,6 +110,54 @@
   function consume(token){return fetch(HANDOFF,{method:'POST',headers:{'Content-Type':'application/json','apikey':KEY},body:JSON.stringify({action:'consume',result_token:token})}).then(function(r){return r.json().catch(function(){return{};}).then(function(body){if(!r.ok)throw new Error(body.error||'The secure result could not be opened.');return body;});});}
   function cloneTemplate(id){var t=q('#'+id,state.partial);if(!t||!t.content)return null;return t.content.firstElementChild.cloneNode(true);}
 
+  function ensureSocialStyles(){
+    if(document.getElementById('wd-anchor-social-style'))return;
+    var style=document.createElement('style');style.id='wd-anchor-social-style';
+    style.textContent='.wd-anchor-social{margin-top:18px;padding:16px;border:1px solid #dce5f0;border-radius:16px;background:#f8fbff}.wd-anchor-social-head{display:flex;align-items:flex-start;justify-content:space-between;gap:14px}.wd-anchor-social-kicker{display:block;color:#0d3dbe;font:800 9px/1.2 "Plus Jakarta Sans",sans-serif;letter-spacing:.09em;text-transform:uppercase}.wd-anchor-social h3{margin:4px 0 4px;color:#10284c;font:800 15px/1.3 "Plus Jakarta Sans",sans-serif}.wd-anchor-social p{margin:0;color:#66758c;font-size:11.5px;line-height:1.5}.wd-anchor-social-buttons{display:grid;grid-template-columns:minmax(0,1.35fr) repeat(2,minmax(0,1fr));gap:8px;margin-top:12px}.wd-anchor-social-btn{appearance:none;min-height:42px;border:1px solid #d6e0ec;border-radius:11px;background:#fff;color:#17355e;display:flex;align-items:center;justify-content:center;gap:8px;padding:8px 10px;font:800 11px/1.2 "Plus Jakarta Sans",sans-serif;cursor:pointer}.wd-anchor-social-btn.google{background:#10284c;color:#fff;border-color:#10284c}.wd-anchor-social-btn.is-connected{background:#edf8f3;color:#166d53;border-color:#cae8dc;cursor:default}.wd-anchor-social-btn:disabled{opacity:.72;cursor:default}.wd-anchor-social-foot{display:flex;align-items:center;justify-content:space-between;gap:12px;margin-top:10px}.wd-anchor-social-status{min-height:15px;color:#5f7088;font-size:10.5px;font-weight:700}.wd-anchor-social-status.is-error{color:#a14343}.wd-anchor-social-setup{color:#345c94;font-size:10.5px;font-weight:800;text-decoration:none;white-space:nowrap}.wd-anchor-social-setup:hover{text-decoration:underline;text-underline-offset:3px}@media(max-width:680px){.wd-anchor-social-buttons{grid-template-columns:1fr}.wd-anchor-social-foot{align-items:flex-start;flex-direction:column}}';
+    document.head.appendChild(style);
+  }
+
+  function socialProviders(){
+    var configured=window.WatchdogAuth&&window.WatchdogAuth.providers;
+    var all=[{key:'google',label:'Google',icon:'fab fa-google'},{key:'facebook',label:'Facebook',icon:'fab fa-facebook-f'},{key:'linkedin_oidc',label:'LinkedIn',icon:'fab fa-linkedin-in'}];
+    return all.filter(function(p){return !configured||!configured[p.key]||configured[p.key].enabled!==false;});
+  }
+
+  function socialReturnProvider(){try{return clean(new URLSearchParams(location.search).get(SOCIAL_RETURN),40);}catch(_){return '';}}
+  function cleanSocialReturn(){
+    try{var u=new URL(location.href);if(!u.searchParams.has(SOCIAL_RETURN))return;u.searchParams.delete(SOCIAL_RETURN);history.replaceState(null,document.title,u.pathname+(u.search||'')+(u.hash||''));}catch(_){}
+  }
+
+  async function renderSocialLinking(section){
+    if(!state.user||!section)return;
+    var db=getDb();if(!db||!db.auth||typeof db.auth.getUserIdentities!=='function'||typeof db.auth.linkIdentity!=='function')return;
+    ensureSocialStyles();
+    var benefit=q('.wd-anchor-home-benefit',section);if(!benefit)return;
+    var old=q('[data-anchor-social-link]',section);if(old)old.remove();
+    var identities=[];
+    try{var response=await db.auth.getUserIdentities();if(response.error)throw response.error;identities=response.data&&response.data.identities||[];}catch(_){return;}
+    var linked={};identities.forEach(function(identity){if(identity&&identity.provider)linked[identity.provider]=true;});
+    var providers=socialProviders();if(!providers.length)return;
+    var returned=socialReturnProvider();
+    var card=document.createElement('div');card.className='wd-anchor-social';card.setAttribute('data-anchor-social-link','');
+    var email=clean(state.user.email,254);
+    var buttons=providers.map(function(p){var connected=!!linked[p.key];return '<button type="button" class="wd-anchor-social-btn '+esc(p.key==='google'?'google':'')+(connected?' is-connected':'')+'" data-anchor-link-provider="'+esc(p.key)+'"'+(connected?' disabled':'')+'><i class="'+esc(p.icon)+'" aria-hidden="true"></i><span>'+(connected?esc(p.label)+' connected':'Add '+esc(p.label)+' sign-in')+'</span></button>';}).join('');
+    card.innerHTML='<div class="wd-anchor-social-head"><div><span class="wd-anchor-social-kicker">YOUR WATCHDOG ACCOUNT</span><h3>Make Watchdog easier to get back to</h3><p>Your email sign-in'+(email?' for <strong>'+esc(email)+'</strong>':'')+' is already active. Add a social sign-in to the same Watchdog account — no second profile and no marketing opt-in.</p></div></div><div class="wd-anchor-social-buttons">'+buttons+'</div><div class="wd-anchor-social-foot"><div class="wd-anchor-social-status" data-anchor-social-status role="status" aria-live="polite">'+(returned&&linked[returned]?'Connected. You can now use '+esc(providers.find(function(p){return p.key===returned;})&&providers.find(function(p){return p.key===returned;}).label||returned)+' to sign in next time.':'This only adds a sign-in method. Watchdog never posts to your social account.')+'</div><a class="wd-anchor-social-setup" href="/onboarding/?next=/">Personalize Watchdog →</a></div>';
+    var saveStatus=q('[data-anchor-save-status]',benefit);if(saveStatus&&saveStatus.parentNode)saveStatus.insertAdjacentElement('afterend',card);else benefit.appendChild(card);
+    track('anchor_social_link_prompt_view',{linked_count:Object.keys(linked).length});
+    qa('[data-anchor-link-provider]',card).forEach(function(button){button.addEventListener('click',async function(){
+      if(state.identityBusy)return;var provider=button.getAttribute('data-anchor-link-provider');if(!provider||linked[provider])return;
+      state.identityBusy=true;qa('[data-anchor-link-provider]',card).forEach(function(b){b.disabled=true;});var status=q('[data-anchor-social-status]',card);if(status){status.classList.remove('is-error');status.textContent='Opening secure '+(providers.find(function(p){return p.key===provider;})||{label:'social'}).label+' sign-in…';}
+      track('anchor_social_link_started',{provider:provider});
+      try{
+        var returnUrl=new URL(location.href);returnUrl.hash='';returnUrl.searchParams.set(SOCIAL_RETURN,provider);
+        var result=await db.auth.linkIdentity({provider:provider,options:{redirectTo:returnUrl.href}});if(result.error)throw result.error;
+        if(result.data&&result.data.url)location.assign(result.data.url);
+      }catch(error){state.identityBusy=false;qa('[data-anchor-link-provider]',card).forEach(function(b){var p=b.getAttribute('data-anchor-link-provider');b.disabled=!!linked[p];});if(status){status.classList.add('is-error');status.textContent=/manual|linking.*disabled/i.test(String(error&&error.message||''))?'Social sign-in linking is not enabled yet. Your email sign-in still works normally.':'We could not connect that sign-in method. Your Watchdog account and ANCHOR result are unchanged.';}track('anchor_social_link_failed',{provider:provider});}
+    });});
+    if(returned&&linked[returned]){track('anchor_social_link_connected',{provider:returned});cleanSocialReturn();}
+  }
+
   function renderHandoff(result){
     state.result=result;
     var old=document.getElementById('wd-anchor-home-result');if(old)old.remove();
@@ -120,7 +169,7 @@
     if(hello)hello.textContent=result.first_name?'Hi '+result.first_name+'. Your estimate is ready.':'Your estimate is ready.';
     if(propertyLink)propertyLink.href='/?address='+encodeURIComponent(result.address||'');
     section.addEventListener('click',function(e){var action=e.target&&e.target.closest&&e.target.closest('[data-anchor-action]');if(!action)return;e.preventDefault();requestAction(result,section,action.dataset.anchorAction);});
-    placeResult(section);enforcePlacement();track('anchor_watchdog_home_result_view',{tenure:result.tenure,qualified:result.qualifies===true});hydrateProperty(result,section);
+    placeResult(section);enforcePlacement();track('anchor_watchdog_home_result_view',{tenure:result.tenure,qualified:result.qualifies===true});hydrateProperty(result,section);renderSocialLinking(section);
   }
 
   function renderHandoffError(message){
