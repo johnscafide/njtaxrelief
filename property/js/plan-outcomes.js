@@ -30,7 +30,7 @@ function plan(v){return CATALOG[normalize(v)]||CATALOG.standard}
 function minimum(outcome){var x=OUTCOMES[outcome];return x?x.minimum:'standard'}
 function can(current,outcome){return ORDER[normalize(current)]>=ORDER[minimum(outcome)]}
 function next(current){var p=normalize(current);if(p==='standard')return'agent';if(p==='agent')return'pro';if(p==='pro')return'pro_plus';if(p==='pro_plus')return'teams';return p}
-function esc(v){return String(v==null?'':v).replace(/[&<>"']/g,function(c){return{'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot',"'":'&#39;'}[c]})}
+function esc(v){return String(v==null?'':v).replace(/[&<>"']/g,function(c){return{'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]})}
 
 function ensureCss(){var href='/property/css/plan-outcomes.css';if(document.querySelector('link[href="'+href+'"]'))return;var link=document.createElement('link');link.rel='stylesheet';link.href=href;document.head.appendChild(link)}
 function ensureProBrandCss(){var href='/property/css/watchdog-intelligence-brand.css';if(document.querySelector('link[href="'+href+'"]'))return;var link=document.createElement('link');link.rel='stylesheet';link.href=href;document.head.appendChild(link)}
@@ -42,7 +42,6 @@ function enhanceAccount(){
   var root=document.querySelector('.ac-pricing');if(!root)return;
   if(root.dataset.outcomeHeader!=='1'){
     var head=root.querySelector('.ac-pricing-header>div');
-    // content-architecture: dynamic — this shared runtime adapts plan copy to the Account surface after account.js renders the current catalog.
     if(head){var h=head.querySelector('h2'),p=head.querySelector('p');if(h)h.textContent='Choose the plan you need';if(p)p.textContent='Compare the tools included with each plan.'}
     root.dataset.outcomeHeader='1';
   }
@@ -62,7 +61,6 @@ function dashboardUpgrade(){
   card.dataset.outcomeEnhanced='1';
   var link=card.querySelector('a')||card;link.setAttribute('href','/property/pro#pricing');
   var copy=card.querySelector('.wdv2-up-copy');
-  // content-architecture: dynamic — this shared plan component updates the Dashboard card after the user-specific dashboard runtime mounts it.
   if(copy)copy.innerHTML='<span class="wdv2-up-eyebrow"><i class="fas fa-route" aria-hidden="true"></i> Professional plans</span><h3>More research tools when you need them.</h3><p><b>Agent</b> helps with client opportunities. <b>Pro</b> adds deeper property research. <b>Pro+</b> adds population and bulk workflows.</p><span class="wdv2-up-cta">Compare plans <i class="fas fa-arrow-right" aria-hidden="true"></i></span>';
   var price=card.querySelector('.wdv2-up-price');if(price)price.innerHTML='<b>From $59</b><span>Agent · monthly</span><em>Pro $129 · Pro+ $399</em>';
 }
@@ -91,7 +89,6 @@ function proPricing(){
     if(String(h.textContent||'').trim()==='Is Watchdog AI live now?'||String(h.textContent||'').trim()==='Is Watchdog Intelligence live now?'){
       var p=card.querySelector('p');
       h.textContent='Is Watchdog Intelligence live now?';
-      // content-architecture: dynamic — availability wording is applied only after the live plan/Intelligence state is rendered.
       if(p)p.textContent='Yes. Pro includes property-level Watchdog Intelligence. Pro+ adds population and scheduled Intelligence. Models still being calibrated are labeled Preview.';
       card.dataset.outcomeLive='1';
     }
@@ -155,19 +152,14 @@ function renderProShots(){
     if(s)s.textContent=copy[i][0];if(h)h.innerHTML=copy[i][1];if(p)p.textContent=copy[i][2];
   });
 
-  // content-architecture: dynamic — these shared preview panels replace legacy Pro mockups only after the Pro story runtime mounts the active product state.
   panels[0].innerHTML='<div class="wd-product-shot">'+proShotSide('properties')+'<div class="wd-shot-main">'+proShotTop('Property workspace','1092 Chews Landing Road','bookmark')+'<div class="wd-property-hero"><div class="wd-property-photo" role="img" aria-label="Representative New Jersey property image"></div><div class="wd-property-score"><small>WATCHDOG SCORE</small><div class="wd-score-line"><b>82</b><span><i class="fas fa-arrow-trend-up"></i> strong context</span></div><p>Assessment, tax, market and municipal context are shown with supporting evidence.</p><footer><span>Sources attached</span><span>Updated context</span></footer></div></div><div class="wd-property-metrics"><div><span>Assessment</span><b>$238,400</b><small>Current record</small></div><div><span>Annual tax</span><b>$8,420</b><small>Current context</small></div><div><span>Town ratio</span><b>67.8%</b><small>Equalization</small></div><div><span>Last sale</span><b>$351,000</b><small>Verified sale</small></div></div></div></div>';
 
-  // content-architecture: dynamic — this is the score-state panel of the same runtime-switched Pro preview.
   panels[1].innerHTML='<div class="wd-product-shot">'+proShotSide('properties')+'<div class="wd-shot-main">'+proShotTop('Watchdog Score','Score + ROBUST evidence','file-lines')+'<div class="wd-score-layout"><div class="wd-score-card"><div class="wd-score-orb"><b>82</b></div><strong>Watchdog Score</strong><small>Representative score view</small></div><div class="wd-robust-card"><div class="wd-robust-head"><div><span>ROBUST FRAMEWORK</span><b>One score. Six dimensions.</b></div><em>Framework weight</em></div><div class="wd-robust-bars">'+robustRows()+'</div></div></div></div></div>';
 
-  // content-architecture: dynamic — this is the watch-state panel of the runtime-switched Pro preview.
   panels[2].innerHTML='<div class="wd-product-shot">'+proShotSide('watchlist')+'<div class="wd-shot-main">'+proShotTop('Change intelligence','Your monitored properties','bell')+'<div class="wd-change-summary"><div><small>Watching</small><b>42</b></div><div><small>Changed this week</small><b>7</b></div><div><small>Needs review</small><b>3</b></div></div><div class="wd-change-feed"><div class="wd-change-item"><i class="fas fa-arrow-trend-up"></i><div><b>Assessment context changed</b><span>Washington Township · evidence refreshed</span></div><em>Review</em></div><div class="wd-change-item"><i class="fas fa-file-circle-check"></i><div><b>Recorded sale verified</b><span>Berlin Borough · SR1A source attached</span></div><em>New</em></div><div class="wd-change-item"><i class="fas fa-hammer"></i><div><b>Permit lifecycle updated</b><span>Cherry Hill · municipal context changed</span></div><em>Changed</em></div><div class="wd-change-item"><i class="fas fa-scale-balanced"></i><div><b>Appeal context strengthened</b><span>Property evidence now supports deeper review</span></div><em>Review</em></div></div></div></div>';
 
-  // content-architecture: dynamic — this is the Workbench-state panel of the runtime-switched Pro preview.
   panels[3].innerHTML='<div class="wd-product-shot">'+proShotSide('workbench')+'<div class="wd-shot-main">'+proShotTop('Professional workspace','Data Workbench','download')+'<div class="wd-workbench-tools"><span>Property</span><span>Assessment</span><span>Tax</span><span>Sales</span><span>Appeal</span><span>Permits</span><span>Flood</span><span>Signals</span></div><div class="wd-workbench-grid"><header><span>Property</span><span>Assessment</span><span>Tax</span><span>Ratio</span><span>Evidence</span><span>Signal</span></header><div><b>Sample property A</b><span>$238,400</span><span>$8,420</span><span>67.8%</span><span>Verified</span><em>Review</em></div><div><b>Sample property B</b><span>$410,200</span><span>$12,180</span><span>72.1%</span><span>Verified</span><em>Changed</em></div><div><b>Sample property C</b><span>$184,900</span><span>$6,904</span><span>61.4%</span><span>Verified</span><em>Watch</em></div><div><b>Sample property D</b><span>$595,100</span><span>$15,740</span><span>78.0%</span><span>Verified</span><em>Strong</em></div><div><b>Sample property E</b><span>$301,800</span><span>$9,310</span><span>69.6%</span><span>Verified</span><em>Review</em></div></div><div class="wd-workbench-proof"><span><i class="fas fa-link"></i> source links</span><span><i class="fas fa-circle-check"></i> confidence + missing data</span><span><i class="fas fa-lock"></i> plan tools</span></div></div></div>';
 
-  // content-architecture: dynamic — this is the Intelligence-state panel of the runtime-switched Pro preview.
   panels[4].innerHTML='<div class="wd-intel-shot"><div class="wd-intel-panel"><div class="wd-intel-panel-inner"><div class="wd-intel-head"><div><span class="wd-intel-mark"><i class="fas fa-dog"></i></span><span><b>Watchdog <span class="wd-intelligence-word">Intelligence</span></b><small>Analyst · evidence-backed</small></span></div><span class="wd-intel-live">LIVE</span></div><div class="wd-intel-question">What changed on this property, and what should I review first?</div><div class="wd-intel-answer"><b>Three changes deserve attention.</b>Assessment context moved, a verified sale was added, and the permit record changed. Review the assessment-to-market position against the new sale evidence.<div class="wd-intel-sources"><span>SR1A verified sale</span><span>Equalization context</span><span>Municipal record</span></div></div><div class="wd-intel-compose"><i class="fas fa-microphone-lines"></i><span>Ask Watchdog by voice or text…</span><button aria-label="Send"><i class="fas fa-arrow-up"></i></button></div></div></div><aside class="wd-voice-panel"><small>WATCHDOG INTELLIGENCE VOICE</small><h4>Listen to the Intelligence Brief.</h4><p>Voice uses the same answer and sources shown on screen.</p><div class="wd-voice-wave" aria-hidden="true"><i style="--h:18px"></i><i style="--h:36px"></i><i style="--h:48px"></i><i style="--h:27px"></i><i style="--h:56px"></i><i style="--h:41px"></i><i style="--h:22px"></i><i style="--h:50px"></i><i style="--h:32px"></i><i style="--h:16px"></i></div><div class="wd-voice-actions"><span><i class="fas fa-play"></i> Play brief</span><span><i class="fas fa-microphone"></i> Ask Voice</span></div></aside></div>';
 
   story.dataset.currentProductVisuals='1';
@@ -179,7 +171,6 @@ function insertRobustSection(){
   var section=document.createElement('section');
   section.className='pro-section wd-robust-section';
   section.id='wd-robust-framework';
-  // content-architecture: dynamic — this shared section is inserted only on the Pro runtime after the story component is present.
   section.innerHTML='<div class="pro-wrap wd-robust-marketing"><div class="wd-robust-copy"><span class="pro-kicker">THE METHOD UNDER THE SCORE</span><h2>The Watchdog Score is powered by <strong>ROBUST.</strong></h2><p>ROBUST shows the six dimensions behind the score so you can see what is driving the result.</p></div><div class="wd-robust-grid"><div class="wd-robust-dimension"><b>R</b><strong>Recourse</strong><span>Appeal and review pathway context.</span><em>10% weight</em></div><div class="wd-robust-dimension"><b>O</b><strong>Overassessment Position</strong><span>Assessment position against market context.</span><em>20% weight</em></div><div class="wd-robust-dimension"><b>B</b><strong>Burden</strong><span>Property-tax burden within the scoring framework.</span><em>30% weight</em></div><div class="wd-robust-dimension"><b>U</b><strong>Uniformity</strong><span>Municipal and comparative assessment consistency.</span><em>15% weight</em></div><div class="wd-robust-dimension"><b>S</b><strong>Stability</strong><span>How stable the assessment context has been over time.</span><em>15% weight</em></div><div class="wd-robust-dimension"><b>T</b><strong>Trajectory</strong><span>The direction of assessment and related property context.</span><em>10% weight</em></div></div></div>';
   story.insertAdjacentElement('afterend',section);
 }
@@ -194,7 +185,6 @@ function enhanceProCompare(){
   if(target&&!shell.querySelector('.pro-voice-row')){
     var row=document.createElement('div');
     row.className='pro-compare-row pro-voice-row';
-    // content-architecture: dynamic — this row is added only when the live plan comparison component is present.
     row.innerHTML='<div><i class="fas fa-microphone-lines"></i> Watchdog Intelligence Voice</div><div class="dim">Not included</div><div>With Intelligence</div><div>With Intelligence</div><div class="yes">Included</div>';
     target.insertAdjacentElement('beforebegin',row);
   }
