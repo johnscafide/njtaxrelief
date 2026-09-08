@@ -26,6 +26,19 @@ const violations = [];
 let file = '';
 let newLine = 0;
 let previousAdded = '';
+let removedInHunk = [];
+
+// NJW-314 edits existing customer copy in these legacy/shared runtime files.
+// The exception below permits a copy replacement only when the same diff hunk
+// removes an existing mutation of the same kind. Net-new static JS copy is
+// still rejected, and NJW-296 remains the extraction path for legacy strings.
+const TRANSITIONAL_COPY_EDIT_FILES = new Set([
+  'property/js/data-workbench-intelligence.js',
+  'property/js/plan-outcomes.js',
+  'property/js/pro.js',
+  'property/js/scan.js',
+  'property/js/watchdog-why.js',
+]);
 
 function wordCount(value) {
   return String(value || '').trim().split(/\s+/).filter(Boolean).length;
@@ -35,9 +48,27 @@ function isSuppressed(line, previous) {
   return /content-architecture:\s*dynamic/i.test(line) || /content-architecture:\s*dynamic/i.test(previous);
 }
 
+function mutationKind(line) {
+  const value = String(line || '').trim();
+  if (/(?:style|sheet)\.textContent\s*=\s*['"`]/i.test(value)) return 'runtime-style';
+  if (/(?:innerHTML|outerHTML)\s*=/i.test(value)) return 'html-assignment';
+  if (/insertAdjacentHTML\s*\(/i.test(value)) return 'html-insert';
+  if (/(?:textContent|innerText)\s*=\s*['"`]/i.test(value)) return 'text-assignment';
+  if (/(?:const|let|var)\s+[\w$]+\s*=\s*['"`]/.test(value)) return 'literal-assignment';
+  return '';
+}
+
+function isExistingCopyReplacement(line) {
+  if (!TRANSITIONAL_COPY_EDIT_FILES.has(file)) return false;
+  const kind = mutationKind(line);
+  if (!kind) return false;
+  return removedInHunk.some((oldLine) => mutationKind(oldLine) === kind);
+}
+
 function inspect(line, lineNumber) {
   if (!file.endsWith('.js')) return;
   if (isSuppressed(line, previousAdded)) return;
+  if (isExistingCopyReplacement(line)) return;
 
   const trimmed = line.trim();
   const words = wordCount(trimmed.replace(/[<>{}()[\]`'"=+;:,.!?/_-]/g, ' '));
@@ -62,15 +93,21 @@ for (const raw of diff.split('\n')) {
   if (raw.startsWith('+++ b/')) {
     file = raw.slice(6);
     previousAdded = '';
+    removedInHunk = [];
     continue;
   }
   const hunk = raw.match(/^@@\s+-\d+(?:,\d+)?\s+\+(\d+)(?:,\d+)?\s+@@/);
   if (hunk) {
     newLine = Number(hunk[1]);
     previousAdded = '';
+    removedInHunk = [];
     continue;
   }
   if (!file || raw.startsWith('--- ')) continue;
+  if (raw.startsWith('-') && !raw.startsWith('---')) {
+    removedInHunk.push(raw.slice(1));
+    continue;
+  }
   if (raw.startsWith('+') && !raw.startsWith('+++')) {
     const added = raw.slice(1);
     inspect(added, newLine);
@@ -78,7 +115,6 @@ for (const raw of diff.split('\n')) {
     newLine += 1;
     continue;
   }
-  if (raw.startsWith('-') && !raw.startsWith('---')) continue;
   if (!raw.startsWith('\\')) {
     previousAdded = '';
     newLine += 1;
