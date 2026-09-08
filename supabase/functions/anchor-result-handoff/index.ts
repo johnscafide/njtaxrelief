@@ -192,7 +192,7 @@ async function stage(req: Request, body: Record<string, any>) {
 
   const email = normalizeEmail(body.email);
   const result = body.result && typeof body.result === "object"
-    ? result = body.result as Record<string, any>
+    ? body.result as Record<string, any>
     : {};
   if (!email) return json(req, { error: "A verified estimator session is required." }, 400);
 
