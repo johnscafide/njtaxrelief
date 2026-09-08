@@ -4,7 +4,7 @@
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
   <title>Data Center | Watchdog Property Intelligence</title>
-  <meta name="description" content="Explore Watchdog's governed New Jersey property intelligence catalog, provider coverage and source freshness. Pro+ members can build, save, export and monitor custom property datasets.">
+  <meta name="description" content="Explore Watchdog's New Jersey property data catalog, coverage and source freshness. Pro+ members can build, save, export and monitor custom property datasets.">
   <meta name="robots" content="index,follow,max-image-preview:large">
   <link rel="canonical" href="https://www.watchdogindex.com/property/data-center">
   <meta name="theme-color" content="#f5f7fb">
@@ -33,9 +33,9 @@
       <div class="db-workspace">
         <div class="dcv2-page">
           <section class="dcv2-hero" aria-labelledby="dc-page-title">
-            <span class="dcv2-eyebrow"><i class="fas fa-table-cells-large"></i> Public data transparency · Pro+ workspace</span>
-            <h1 id="dc-page-title">Build, analyze and monitor governed property datasets.</h1>
-            <p>Explore the data Watchdog can actually resolve, see provider coverage and verification freshness, then use Pro+ to apply selected fields to your own saved-property workspace, export results and schedule recurring views.</p>
+            <span class="dcv2-eyebrow"><i class="fas fa-table-cells-large"></i> Data Center · Pro+ workspace</span>
+            <h1 id="dc-page-title">Build, analyze and monitor property datasets.</h1>
+            <p>Browse available data fields, check coverage and freshness, then use Pro+ to build, export and monitor datasets from your saved properties.</p>
             <div class="dcv2-hero-actions">
               <button class="dcv2-btn primary" type="button" data-dc-tab="build"><i class="fas fa-sliders"></i> Explore the field catalog</button>
               <a class="dcv2-btn secondary" href="/property/pro"><i class="fas fa-bolt"></i> Data Center with Pro+</a>
@@ -50,26 +50,26 @@
 
           <section data-dc-panel="overview">
             <div class="dcv2-kpis" aria-label="Data Center coverage summary">
-              <article class="dcv2-kpi"><b id="dc-kpi-live">—</b><strong>Live governed fields</strong><span>Fields with a production resolver capable of checking a governed source or calculation.</span></article>
-              <article class="dcv2-kpi"><b id="dc-kpi-bulk">—</b><strong>Bulk-ready fields</strong><span>Live fields designed for bounded multi-property workflows rather than one-record checks only.</span></article>
-              <article class="dcv2-kpi"><b id="dc-kpi-verified">—</b><strong>Latest provider verification</strong><span>Most recent governed verification timestamp across the current live provider contract.</span></article>
-              <article class="dcv2-kpi"><b id="dc-kpi-selected">0</b><strong>Fields in your draft</strong><span>Your browser-local field selection. Private values are not loaded until an entitled build is run.</span></article>
+              <article class="dcv2-kpi"><b id="dc-kpi-live">...</b><strong>Live fields</strong><span>Fields currently available in Watchdog.</span></article>
+              <article class="dcv2-kpi"><b id="dc-kpi-bulk">...</b><strong>Bulk-ready fields</strong><span>Fields available across multiple properties.</span></article>
+              <article class="dcv2-kpi"><b id="dc-kpi-verified">...</b><strong>Latest verification</strong><span>Most recent source check across live fields.</span></article>
+              <article class="dcv2-kpi"><b id="dc-kpi-selected">0</b><strong>Fields in your draft</strong><span>Fields currently selected for your dataset.</span></article>
             </div>
 
             <div class="dcv2-grid">
               <article class="dcv2-card">
-                <div class="dcv2-card-head"><div><h2>Coverage by intelligence family</h2><p>See where the catalog is bulk-ready, live for bounded checks, or structurally unavailable. Select a family to jump directly into the builder.</p></div></div>
+                <div class="dcv2-card-head"><div><h2>Coverage by intelligence family</h2><p>See which data families are live, bulk ready or unavailable. Select one to open it in the builder.</p></div></div>
                 <div class="dcv2-fresh-row" id="dc-coverage-health">
-                  <div class="dcv2-fresh-top"><b>Connected coverage health</b><span class="dcv2-fresh-badge"><span id="dc-coverage-live-pct">—</span>% live</span></div>
-                  <p><span id="dc-coverage-bulk-pct">—</span>% of live fields are bulk ready · <span id="dc-coverage-recent-pct">—</span>% were verified within the last 7 days.</p>
+                  <div class="dcv2-fresh-top"><b>Coverage</b><span class="dcv2-fresh-badge"><span id="dc-coverage-live-pct">...</span>% live</span></div>
+                  <p><span id="dc-coverage-bulk-pct">...</span>% of live fields are bulk ready. <span id="dc-coverage-recent-pct">...</span>% were verified within the last 7 days.</p>
                   <div class="dcv2-bar" id="dc-coverage-health-bar" aria-label="Connected field coverage">
                     <span class="dcv2-bar-bulk" id="dc-coverage-bar-bulk" style="width:0%"></span>
                     <span class="dcv2-bar-live" id="dc-coverage-bar-live" style="width:0%"></span>
                     <span class="dcv2-bar-unavailable" id="dc-coverage-bar-not-live" style="width:0%"></span>
                   </div>
                 </div>
-                <div id="dc-category-coverage" class="dcv2-coverage"><div id="dc-category-coverage-empty" class="dc-monitor-empty">Loading governed coverage…</div></div>
-                <div class="dcv2-legend"><span><i></i> Live · bounded use</span><span><i></i> Bulk ready</span><span><i></i> Structurally unavailable</span></div>
+                <div id="dc-category-coverage" class="dcv2-coverage"><div id="dc-category-coverage-empty" class="dc-monitor-empty">Loading coverage...</div></div>
+                <div class="dcv2-legend"><span><i></i> Live</span><span><i></i> Bulk ready</span><span><i></i> Unavailable</span></div>
                 <template id="dc-category-coverage-template">
                   <div class="dcv2-coverage-row">
                     <button type="button" data-dc-category-label></button>
@@ -83,24 +83,24 @@
                 </template>
               </article>
               <article class="dcv2-card">
-                <div class="dcv2-card-head"><div><h2>Source freshness</h2><p>Verification dates are shown separately from data values. A live provider does not imply every parcel has a value.</p></div></div>
+                <div class="dcv2-card-head"><div><h2>Source freshness</h2><p>See when live fields were last checked. A live source may still have no value for a specific property.</p></div></div>
                 <div id="dc-source-freshness" class="dcv2-freshness">
                   <div class="dcv2-fresh-row" id="dc-verification-recency">
-                    <div class="dcv2-fresh-top"><b>Verification recency across live fields</b><span class="dcv2-fresh-badge"><span id="dc-recency-recent-pct">—</span>% ≤ 7 days</span></div>
-                    <p><span id="dc-recency-recent">—</span> verified within 7 days · <span id="dc-recency-review">—</span> verified 8–30 days ago · <span id="dc-recency-older">—</span> older than 30 days · <span id="dc-recency-unverified">—</span> without a verification timestamp.</p>
+                    <div class="dcv2-fresh-top"><b>Verification recency</b><span class="dcv2-fresh-badge"><span id="dc-recency-recent-pct">...</span>% within 7 days</span></div>
+                    <p><span id="dc-recency-recent">...</span> within 7 days. <span id="dc-recency-review">...</span> within 8 to 30 days. <span id="dc-recency-older">...</span> older than 30 days. <span id="dc-recency-unverified">...</span> without a verification date.</p>
                     <div class="dcv2-bar" id="dc-recency-bar" aria-label="Verification recency across live fields">
                       <span class="dcv2-bar-live" id="dc-recency-bar-recent" style="width:0%"></span>
                       <span class="dcv2-bar-bulk" id="dc-recency-bar-review" style="width:0%"></span>
                       <span class="dcv2-bar-unavailable" id="dc-recency-bar-older" style="width:0%"></span>
                     </div>
                   </div>
-                  <div id="dc-source-freshness-rows" class="dcv2-freshness"><div id="dc-source-freshness-empty" class="dc-monitor-empty">Loading source freshness…</div></div>
-                  <div class="dc-footnote">Configured refresh policy reflects each field’s expected source cadence; it is separate from provider availability. Missing or out-of-window evidence remains explicit rather than being treated as current.</div>
+                  <div id="dc-source-freshness-rows" class="dcv2-freshness"><div id="dc-source-freshness-empty" class="dc-monitor-empty">Loading source freshness...</div></div>
+                  <div class="dc-footnote">Refresh timing follows the expected update cycle for each source. Missing or stale data stays labeled.</div>
                 </div>
                 <template id="dc-source-freshness-template">
                   <div class="dcv2-fresh-row">
                     <div class="dcv2-fresh-top"><b data-dc-source-name></b><span class="dcv2-fresh-badge" data-dc-source-badge></span></div>
-                    <p>Most recent governed verification: <span data-dc-source-date>—</span>. Configured refresh policy currently met by <span data-dc-source-compliant>—</span> of <span data-dc-source-total>—</span> fields.</p>
+                    <p>Last verified: <span data-dc-source-date>Not available</span>. <span data-dc-source-compliant>...</span> of <span data-dc-source-total>...</span> fields are within the expected refresh window.</p>
                   </div>
                 </template>
               </article>
@@ -108,8 +108,8 @@
 
             <div class="dcv2-usecases">
               <article class="dcv2-usecase"><i class="fas fa-magnifying-glass-chart"></i><h3>Find the signal behind the record</h3><p>Combine tax, assessment, sales, appeal, development, environmental and Watchdog-derived fields instead of reading one metric in isolation.</p></article>
-              <article class="dcv2-usecase"><i class="fas fa-chart-column"></i><h3>Turn rows into analysis</h3><p>Pro+ result sheets automatically summarize coverage, missingness, numerical ranges and categorical concentration before you export.</p></article>
-              <article class="dcv2-usecase"><i class="fas fa-clock-rotate-left"></i><h3>Save and monitor repeat work</h3><p>Persist useful field sets across devices and schedule governed recurring deliveries without exposing your private property workspace publicly.</p></article>
+              <article class="dcv2-usecase"><i class="fas fa-chart-column"></i><h3>Turn rows into analysis</h3><p>Pro+ result sheets summarize coverage, missing values, ranges and common categories before you export.</p></article>
+              <article class="dcv2-usecase"><i class="fas fa-clock-rotate-left"></i><h3>Save and monitor repeat work</h3><p>Save useful field sets across devices and schedule recurring deliveries.</p></article>
             </div>
           </section>
 
@@ -119,10 +119,10 @@
                 <div class="dc-brand">
                   <span>FIELD CATALOG</span>
                   <h2>Choose your data</h2>
-                  <p>Public browsing uses the same governed provider-status contract as the workspace. Selecting fields does not load private property values.</p>
+                  <p>Browse fields without loading your private property values.</p>
                 </div>
                 <label>Search<input id="dc-search" type="search" placeholder="assessment, flood, appeal…" autocomplete="off"></label>
-                <label>Availability<select id="dc-provider-status"><option value="live">Live providers</option><option value="partial">Partial providers</option><option value="planned">Planned roadmap</option><option value="unavailable">Structurally unavailable</option><option value="">All availability states</option></select></label>
+                <label>Availability<select id="dc-provider-status"><option value="live">Live</option><option value="partial">Partial</option><option value="planned">Planned</option><option value="unavailable">Unavailable</option><option value="">All</option></select></label>
                 <label>Profession<select id="dc-prof"><option value="">All professions</option></select></label>
                 <input id="dc-tier" type="hidden" value="pro_plus">
                 <label>Category<select id="dc-category"><option value="">All categories</option></select></label>
@@ -130,14 +130,14 @@
                 <button id="dc-clear" type="button">Clear selected fields</button>
               </aside>
               <section class="dc-main">
-                <div class="dc-build-intro"><h2>Build a governed dataset</h2><p>Browse publicly, inspect field definitions and select the columns that matter. Pro+ is checked again before any account-owned saved property is queried.</p></div>
-                <span id="dc-total" hidden>—</span><span id="dc-percent" hidden>—</span><span id="dc-progress-bar" hidden></span><div id="dc-stats" hidden></div>
+                <div class="dc-build-intro"><h2>Build a dataset</h2><p>Choose the fields you need. Sign in with Pro+ to run them against your saved properties.</p></div>
+                <span id="dc-total" hidden>...</span><span id="dc-percent" hidden>...</span><span id="dc-progress-bar" hidden></span><div id="dc-stats" hidden></div>
                 <div class="dc-selected" id="dc-selected-workspace">
                   <div><b id="dc-selected-count">0 fields selected</b><span>Columns appear in selection order</span></div>
                   <div id="dc-chips"></div>
                 </div>
                 <div class="dc-private-gate" id="dc-private-gate">
-                  <div><strong>Public catalog · private workspace</strong><p data-dc-gate-copy>Browse every governed field publicly. Sign in with Pro+ to run these fields against your saved-property workspace.</p></div>
+                  <div><strong>Public catalog, private workspace</strong><p data-dc-gate-copy>Browse all fields. Sign in with Pro+ to use them with your saved properties.</p></div>
                   <a class="dcv2-btn" data-dc-gate-action href="/property/pro">Sign in / view Pro+</a>
                 </div>
                 <div class="dc-table-wrap">
@@ -146,7 +146,7 @@
                     <tbody id="dc-rows"></tbody>
                   </table>
                 </div>
-                <div class="dc-footnote">Live means Watchdog has a governed resolver capable of checking the field; a particular property may still have no source value. Bulk ready means the provider is designed for bounded multi-property workflows. Unavailable means the connected source structurally cannot supply the field. Missing values are never invented.</div>
+                <div class="dc-footnote">Live means Watchdog can check the field, although a specific property may still have no value. Bulk ready means the field can be used across multiple properties. Unavailable means the current source does not provide the field. Missing values are never filled in with guesses.</div>
               </section>
             </div>
           </section>
@@ -155,12 +155,12 @@
             <div class="dc-saved-shell">
               <article class="dc-saved-card">
                 <h2>Saved views</h2>
-                <p>Reusable field and filter sets are private to the signed-in Pro+ account and protected by row-level security.</p>
+                <p>Saved field and filter sets are private to your Pro+ account.</p>
                 <div id="dc-saved-controls"><div class="dc-monitor-empty">Sign in with Pro+ to load saved views.</div></div>
               </article>
               <article class="dc-saved-card">
                 <h2>Monitoring &amp; deliveries</h2>
-                <p>Scheduled Data Center deliveries remain private and never expose a customer property portfolio on this public page.</p>
+                <p>Scheduled Data Center deliveries are private to your account.</p>
                 <div id="dc-monitor-list" class="dc-monitor-list"><div class="dc-monitor-empty">No delivery schedule loaded.</div></div>
               </article>
             </div>
@@ -176,12 +176,12 @@
     <h2 id="dc-drawer-title">Marker details</h2>
     <p id="dc-drawer-description"></p>
     <dl>
-      <dt>Availability</dt><dd id="dc-drawer-status">—</dd>
-      <dt>Last verified</dt><dd id="dc-drawer-verified">—</dd>
-      <dt>Coverage</dt><dd id="dc-drawer-bulk">—</dd>
-      <dt>Scope</dt><dd id="dc-drawer-scope">—</dd>
-      <dt>Origin</dt><dd id="dc-drawer-origin">—</dd>
-      <dt>Access tier</dt><dd id="dc-drawer-tier">—</dd>
+      <dt>Availability</dt><dd id="dc-drawer-status">Not available</dd>
+      <dt>Last verified</dt><dd id="dc-drawer-verified">Not available</dd>
+      <dt>Coverage</dt><dd id="dc-drawer-bulk">Not available</dd>
+      <dt>Scope</dt><dd id="dc-drawer-scope">Not available</dd>
+      <dt>Origin</dt><dd id="dc-drawer-origin">Not available</dd>
+      <dt>Access tier</dt><dd id="dc-drawer-tier">Not available</dd>
     </dl>
     <h3>Why it matters</h3><p id="dc-drawer-why"></p>
     <div class="dc-drawer-actions"><a id="dc-drawer-link" href="/property/marker">Open full field reference</a><button type="button" data-dc-drawer-close>Back to catalog</button></div>
