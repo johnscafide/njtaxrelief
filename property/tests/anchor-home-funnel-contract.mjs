@@ -45,11 +45,30 @@ assert.match(home, /verifyOtp/);
 assert.match(home, /from\('anchor_estimates'\)\.upsert/);
 assert.match(home, /location\.href='\/anchor\/application\/2025\/'/);
 
-// Cross-domain handoff uses only an opaque fragment token, never result PII in the URL.
+// Cross-domain handoff creates an authenticated Watchdog session while keeping result PII out of the URL.
 assert.match(handoff, /result_token/);
-assert.match(handoff, /location\.replace\('https:\/\/www\.watchdogindex\.com\/#anchor-result='\+token\)/);
+assert.match(handoff, /auth_handoff_url/);
+assert.match(handoff, /AUTH_HOST/);
+assert.match(handoff, /\/auth\/v1\/verify/);
+assert.match(handoff, /location\.replace\(authUrl\)/);
+assert.doesNotMatch(handoff, /location\.replace\('https:\/\/www\.watchdogindex\.com\/#anchor-result='\+token\)/);
 assert.doesNotMatch(handoff, /watchdogindex\.com\/anchor\/results/);
 assert.doesNotMatch(handoff, /[?&](?:email|phone|address|benefit)=/i);
+
+// ANCHOR-created users can optionally add social sign-in methods to the same authenticated user.
+assert.match(home, /getUserIdentities/);
+assert.match(home, /linkIdentity/);
+assert.match(home, /provider:'google'/);
+assert.match(home, /facebook/);
+assert.match(home, /linkedin_oidc/);
+assert.match(home, /data-anchor-link-provider/);
+assert.doesNotMatch(home, /data-provider=/);
+assert.doesNotMatch(home, /signInWithOAuth/);
+assert.match(home, /Make Watchdog easier to get back to/i);
+assert.match(home, /no second profile and no marketing opt-in/i);
+assert.match(home, /\/onboarding\/\?next=\//);
+assert.match(home, /anchor_social_link_connected/);
+assert.match(home, /anchor-social-linked/);
 
 // Redirect cannot depend solely on the analytics event; final visible results independently trigger a bounded retryable handoff.
 assert.match(handoff, /function resultVisible\(\)/);
