@@ -58,9 +58,9 @@ assert.doesNotMatch(handoff, /[?&](?:email|phone|address|benefit)=/i);
 // ANCHOR-created users can optionally add social sign-in methods to the same authenticated user.
 assert.match(home, /getUserIdentities/);
 assert.match(home, /linkIdentity/);
-assert.match(home, /provider:'google'/);
-assert.match(home, /facebook/);
-assert.match(home, /linkedin_oidc/);
+assert.match(home, /key:'google'/);
+assert.match(home, /key:'facebook'/);
+assert.match(home, /key:'linkedin_oidc'/);
 assert.match(home, /data-anchor-link-provider/);
 assert.doesNotMatch(home, /data-provider=/);
 assert.doesNotMatch(home, /signInWithOAuth/);
