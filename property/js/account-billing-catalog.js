@@ -39,8 +39,8 @@
       offer.classList.add('included');
       offer.setAttribute('aria-label', 'Watchdog Intelligence limited-time promotion');
       setText(label, 'WATCHDOG INTELLIGENCE · ' + String(promo.label || 'LIMITED TIME').toUpperCase());
-      setText(price, 'Included at no additional charge');
-      setText(note, 'Normally +' + money(Number(intelligence.regular_add_on_monthly || 12), false) + '/month. Included with paid memberships for a limited time.');
+      setText(price, 'Included');
+      setText(note, 'Normally +' + money(Number(intelligence.regular_add_on_monthly || 12), false) + '/month. Included for a limited time.');
       return;
     }
 
@@ -49,7 +49,7 @@
       offer.setAttribute('aria-label', 'Watchdog Intelligence add-on');
       setText(label, 'WATCHDOG INTELLIGENCE');
       setText(price, '+' + money(Number(intelligence.regular_add_on_monthly || 12), false) + '/month');
-      setText(note, 'Optional Watchdog Intelligence add-on for this plan.');
+      setText(note, 'Optional add-on.');
       return;
     }
 
@@ -57,8 +57,8 @@
       offer.classList.add('included');
       offer.setAttribute('aria-label', 'Watchdog Intelligence included');
       setText(label, 'WATCHDOG INTELLIGENCE');
-      setText(price, 'Included at no additional charge');
-      setText(note, key === 'pro_plus' ? 'Included with Pro+ as a base-plan benefit.' : 'Included with this organization plan.');
+      setText(price, 'Included');
+      setText(note, 'Included with this plan.');
     }
   }
   function applyCatalog() {
@@ -82,7 +82,7 @@
           var monthly = Number(catalog.plans[key].monthly && catalog.plans[key].monthly.amount);
           var effective = amount / 12;
           var savings = Number.isFinite(monthly) ? (monthly * 12) - amount : 0;
-          setText(note, money(effective, true) + '/mo effective' + (savings > 0 ? ' · save ' + money(savings, false) + '/yr' : ''));
+          setText(note, money(effective, true) + '/mo billed yearly' + (savings > 0 ? ' · save ' + money(savings, false) + '/yr' : ''));
         } else setText(note, 'Billed monthly');
       }
     });
