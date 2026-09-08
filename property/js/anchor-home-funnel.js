@@ -16,7 +16,8 @@
   var RESULT_SESSION='wd_anchor_home_result_v1';
   var PREFILL_SESSION='wd_anchor_2025_prefill';
   var ESTIMATE_SESSION='wd_anchor_2025_estimate_id';
-  var state={db:null,user:null,partial:null,result:null,subject:null,score:null,pending:null,quick:null,observer:null};
+  var SOCIAL_RETURN='anchor-social-linked';
+  var state={db:null,user:null,partial:null,result:null,subject:null,score:null,pending:null,quick:null,observer:null,identityBusy:false};
 
   function q(sel,root){return(root||document).querySelector(sel);}
   function qa(sel,root){return Array.prototype.slice.call((root||document).querySelectorAll(sel));}
@@ -109,6 +110,71 @@
   function consume(token){return fetch(HANDOFF,{method:'POST',headers:{'Content-Type':'application/json','apikey':KEY},body:JSON.stringify({action:'consume',result_token:token})}).then(function(r){return r.json().catch(function(){return{};}).then(function(body){if(!r.ok)throw new Error(body.error||'The secure result could not be opened.');return body;});});}
   function cloneTemplate(id){var t=q('#'+id,state.partial);if(!t||!t.content)return null;return t.content.firstElementChild.cloneNode(true);}
 
+  function socialProviderKeys(){
+    var configured=window.WatchdogAuth&&window.WatchdogAuth.providers;
+    return ['google','facebook','linkedin_oidc'].filter(function(key){return !configured||!configured[key]||configured[key].enabled!==false;});
+  }
+
+  function socialReturnProvider(){try{return clean(new URLSearchParams(location.search).get(SOCIAL_RETURN),40);}catch(_){return '';}}
+  function cleanSocialReturn(){
+    try{var u=new URL(location.href);if(!u.searchParams.has(SOCIAL_RETURN))return;u.searchParams.delete(SOCIAL_RETURN);history.replaceState(null,document.title,u.pathname+(u.search||'')+(u.hash||''));}catch(_){}
+  }
+
+  function setSocialStatus(card,mode,providerLabel){
+    var status=q('[data-anchor-social-status]',card);if(!status)return;
+    status.classList.toggle('is-error',mode==='disabled'||mode==='failed');
+    qa('[data-anchor-social-status-copy]',status).forEach(function(node){node.hidden=node.getAttribute('data-anchor-social-status-copy')!==mode;});
+    qa('[data-anchor-social-status-provider]',status).forEach(function(node){node.textContent=providerLabel||'';});
+  }
+
+  async function renderSocialLinking(section){
+    if(!state.user||!section)return;
+    var db=getDb();if(!db||!db.auth||typeof db.auth.getUserIdentities!=='function'||typeof db.auth.linkIdentity!=='function')return;
+    var benefit=q('.wd-anchor-home-benefit',section);if(!benefit)return;
+    var identities=[];
+    try{var response=await db.auth.getUserIdentities();if(response.error)throw response.error;identities=response.data&&response.data.identities||[];}catch(_){return;}
+    var linked={};identities.forEach(function(identity){if(identity&&identity.provider)linked[identity.provider]=true;});
+    var enabled=socialProviderKeys();if(!enabled.length)return;
+    var card=cloneTemplate('wd-anchor-social-link-template');if(!card)return;
+    var email=clean(state.user.email,254),emailNode=q('[data-anchor-social-email]',card),emailWrap=q('[data-anchor-social-email-wrap]',card);
+    if(email&&emailNode&&emailWrap){emailNode.textContent=email;emailWrap.hidden=false;}
+    var visibleButtons=0;
+    qa('[data-anchor-link-provider]',card).forEach(function(button){
+      var provider=button.getAttribute('data-anchor-link-provider');
+      if(enabled.indexOf(provider)<0){button.hidden=true;return;}
+      visibleButtons+=1;
+      var connected=!!linked[provider],add=q('[data-anchor-link-label]',button),done=q('[data-anchor-linked-label]',button);
+      button.disabled=connected;button.classList.toggle('is-connected',connected);
+      if(add)add.hidden=connected;if(done)done.hidden=!connected;
+    });
+    if(!visibleButtons)return;
+    var returned=socialReturnProvider();
+    if(returned&&linked[returned]){
+      var returnedButton=q('[data-anchor-link-provider="'+returned+'"]',card);
+      setSocialStatus(card,'connected',returnedButton&&returnedButton.getAttribute('data-provider-label')||returned);
+    }else setSocialStatus(card,'default','');
+    var saveStatus=q('[data-anchor-save-status]',benefit);if(saveStatus&&saveStatus.parentNode)saveStatus.insertAdjacentElement('afterend',card);else benefit.appendChild(card);
+    track('anchor_social_link_prompt_view',{linked_count:Object.keys(linked).length});
+    qa('[data-anchor-link-provider]',card).forEach(function(button){button.addEventListener('click',async function(){
+      var provider=button.getAttribute('data-anchor-link-provider');if(state.identityBusy||button.hidden||!provider||linked[provider])return;
+      var providerLabel=button.getAttribute('data-provider-label')||provider;
+      state.identityBusy=true;
+      qa('[data-anchor-link-provider]',card).forEach(function(b){if(!b.hidden)b.disabled=true;});
+      setSocialStatus(card,'opening',providerLabel);track('anchor_social_link_started',{provider:provider});
+      try{
+        var returnUrl=new URL(location.href);returnUrl.hash='';returnUrl.searchParams.set(SOCIAL_RETURN,provider);
+        var result=await db.auth.linkIdentity({provider:provider,options:{redirectTo:returnUrl.href}});if(result.error)throw result.error;
+        if(result.data&&result.data.url)location.assign(result.data.url);
+      }catch(error){
+        state.identityBusy=false;
+        qa('[data-anchor-link-provider]',card).forEach(function(b){var key=b.getAttribute('data-anchor-link-provider');if(!b.hidden)b.disabled=!!linked[key];});
+        setSocialStatus(card,/manual|linking.*disabled/i.test(String(error&&error.message||''))?'disabled':'failed','');
+        track('anchor_social_link_failed',{provider:provider});
+      }
+    });});
+    if(returned&&linked[returned]){track('anchor_social_link_connected',{provider:returned});cleanSocialReturn();}
+  }
+
   function renderHandoff(result){
     state.result=result;
     var old=document.getElementById('wd-anchor-home-result');if(old)old.remove();
@@ -120,7 +186,7 @@
     if(hello)hello.textContent=result.first_name?'Hi '+result.first_name+'. Your estimate is ready.':'Your estimate is ready.';
     if(propertyLink)propertyLink.href='/?address='+encodeURIComponent(result.address||'');
     section.addEventListener('click',function(e){var action=e.target&&e.target.closest&&e.target.closest('[data-anchor-action]');if(!action)return;e.preventDefault();requestAction(result,section,action.dataset.anchorAction);});
-    placeResult(section);enforcePlacement();track('anchor_watchdog_home_result_view',{tenure:result.tenure,qualified:result.qualifies===true});hydrateProperty(result,section);
+    placeResult(section);enforcePlacement();track('anchor_watchdog_home_result_view',{tenure:result.tenure,qualified:result.qualifies===true});hydrateProperty(result,section);renderSocialLinking(section);
   }
 
   function renderHandoffError(message){
