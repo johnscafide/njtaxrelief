@@ -10,6 +10,7 @@ const analyticsPage=read('property/analytics/index.html');
 const schema=read('supabase/migrations/20260904164622_watchdog_signup_attribution_analytics.sql');
 const reporting=read('supabase/migrations/20260904165216_watchdog_signup_attribution_reporting_hardening.sql');
 const leastPrivilege=read('supabase/migrations/20260904165518_watchdog_signup_attribution_least_privilege.sql');
+const lifecycle=read('supabase/migrations/20260908202000_watchdog_user_lifecycle.sql');
 
 must(runtime.includes('watchdog_cookie_preferences_v1'),'Signup attribution must require Watchdog analytics consent.');
 must(runtime.includes('navigator.globalPrivacyControl'),'Signup attribution must honor Global Privacy Control.');
@@ -35,6 +36,15 @@ must(onboardingEmail.includes('/property/js/signup-attribution.js'),'Canonical o
 must(anchorLibrary.includes('/property/js/signup-attribution.js'),'ANCHOR application library must load signup attribution.');
 must(anchorLibrary.includes('never Private Vault contents'),'ANCHOR privacy boundary must stay explicit.');
 
+must(runtime.includes('watchdog_signup_context'),'First-party signup context must be attached to new OTP-created auth users.');
+must(runtime.includes('record_my_watchdog_signup_origin'),'Fresh authenticated accounts must persist signup origin independently of optional analytics.');
+must(runtime.indexOf("document.addEventListener('click', onClick, true)") < runtime.indexOf('if (analyticsAllowed()) init();'),'First-party signup lifecycle capture must initialize even when analytics consent is absent.');
+must(lifecycle.includes('create table if not exists public.watchdog_user_lifecycle'),'Lifecycle migration must persist account/email lifecycle state.');
+must(lifecycle.includes('revoke all on table public.watchdog_user_lifecycle from public, anon, authenticated'),'Lifecycle email PII must never be directly browser-readable.');
+must(lifecycle.includes('record_my_watchdog_signup_origin'),'Lifecycle migration must expose a bounded authenticated first-party origin RPC.');
+must(lifecycle.includes('get_watchdog_user_lifecycle'),'Lifecycle roster must be developer-only and segmentable for future recovery/re-engagement.');
+must(lifecycle.includes("contact_permission in ('transactional_only','marketing_opt_in','unsubscribed','suppressed')"),'Lifecycle ledger must preserve contact-permission and suppression states.');
+
 must(analyticsPage.includes("get_watchdog_acquisition_analytics"),'Developer Analytics must load the governed signup acquisition report.');
 must(analyticsPage.includes('id="signup-acquisition"'),'Developer Analytics must render signup acquisition.');
 must(analyticsPage.includes('id="auth-funnel"'),'Developer Analytics must render the authentication funnel.');
@@ -52,4 +62,4 @@ must(reporting.includes('optional analytics was allowed'),'Consent-gated source/
 must(leastPrivilege.includes('revoke execute on function public.link_my_watchdog_signup_attribution(uuid,uuid,text,text) from anon'),'Anonymous users must not execute the identity-linking RPC.');
 must(leastPrivilege.includes('grant execute on function public.link_my_watchdog_signup_attribution(uuid,uuid,text,text) to authenticated'),'Only authenticated users should receive browser execute permission for identity linking.');
 
-console.log('Watchdog signup attribution contract passed.');
+console.log('Watchdog signup attribution + lifecycle contract passed.');

@@ -33,6 +33,10 @@
     }
   }
 
+  function analyticsActive() {
+    return initialized && analyticsAllowed();
+  }
+
   function uuid(value) {
     return /^[0-9a-f]{8}-[0-9a-f]{4}-[1-5][0-9a-f]{3}-[89ab][0-9a-f]{3}-[0-9a-f]{12}$/i.test(String(value || ''));
   }
@@ -134,9 +138,15 @@
     return provider;
   }
 
+  function normalizeSignupContext(value) {
+    var signupContext = String(value || '').trim().toLowerCase();
+    if (!/^[a-z0-9_.-]{1,64}$/.test(signupContext)) return '';
+    return signupContext;
+  }
+
   function rememberPending(signupContext, provider) {
     var pending = {
-      signup_context: signupContext || inferredContext(null),
+      signup_context: normalizeSignupContext(signupContext) || inferredContext(null),
       auth_provider: normalizeProvider(provider),
       at: Date.now()
     };
@@ -146,7 +156,7 @@
 
   function readPending() {
     var pending = readJson(sessionStorage, PENDING_KEY);
-    if (!pending || !pending.signup_context || Number(pending.at || 0) < Date.now() - (2 * 60 * 60 * 1000)) return null;
+    if (!pending || !normalizeSignupContext(pending.signup_context) || Number(pending.at || 0) < Date.now() - (24 * 60 * 60 * 1000)) return null;
     return pending;
   }
 
@@ -158,7 +168,7 @@
   }
 
   function record(eventName, provider, signupContext) {
-    if (!initialized || !analyticsAllowed()) return Promise.resolve(null);
+    if (!analyticsActive()) return Promise.resolve(null);
     var c = ensureContext();
     var database = db();
     if (!c || !database) return Promise.resolve(null);
@@ -181,6 +191,7 @@
   }
 
   function recordOnce(key, eventName, provider, signupContext) {
+    if (!analyticsActive()) return Promise.resolve(null);
     var c = ensureContext();
     var fingerprint = (c ? c.session_id : 'none') + '|' + key;
     if (recorded[fingerprint]) return Promise.resolve(null);
@@ -189,7 +200,7 @@
   }
 
   function failure(provider, signupContext) {
-    if (!initialized || !analyticsAllowed()) return Promise.resolve(null);
+    if (!analyticsActive()) return Promise.resolve(null);
     var pending = readPending();
     return record(
       'auth_failure',
@@ -204,12 +215,26 @@
     return normalizeProvider(request.provider) || (pending && pending.auth_provider) || 'unknown';
   }
 
+  function injectOtpLifecycleContext(args) {
+    var request = args && args[0];
+    if (!request || typeof request !== 'object') return args;
+    var pending = readPending();
+    var signupContext = normalizeSignupContext(pending && pending.signup_context) || inferredContext(null);
+    var options = Object.assign({}, request.options || {});
+    var data = Object.assign({}, options.data || {});
+    if (!normalizeSignupContext(data.watchdog_signup_context)) data.watchdog_signup_context = signupContext;
+    options.data = data;
+    args[0] = Object.assign({}, request, { options: options });
+    return args;
+  }
+
   function wrapAuthMethod(auth, methodName, providerResolver) {
     var original = auth && auth[methodName];
     if (typeof original !== 'function' || original.__watchdogAuthFailureWrapped) return;
     var bound = original.bind(auth);
     var wrapped = function () {
       var args = Array.prototype.slice.call(arguments);
+      if (methodName === 'signInWithOtp') args = injectOtpLifecycleContext(args);
       var provider = providerResolver ? providerResolver(args) : 'email';
       var pending = readPending();
       var signupContext = (pending && pending.signup_context) || inferredContext(null);
@@ -261,15 +286,13 @@
       'auth_failure',
       pending.auth_provider || 'unknown',
       pending.signup_context
-    ).then(function () {
-      try { sessionStorage.removeItem(PENDING_KEY); } catch (_error) {}
-    });
+    );
   }
 
-  function recentUser(user) {
+  function recentUserWithin(user, hours) {
     if (!user || !user.created_at) return false;
     var created = Date.parse(user.created_at);
-    return Number.isFinite(created) && Math.abs(Date.now() - created) <= (2 * 60 * 60 * 1000);
+    return Number.isFinite(created) && Math.abs(Date.now() - created) <= (hours * 60 * 60 * 1000);
   }
 
   function providerForUser(user, fallback) {
@@ -277,8 +300,21 @@
     return normalizeProvider(app.provider) || normalizeProvider(fallback) || 'unknown';
   }
 
+  function linkLifecycleSession(session) {
+    if (!session || !session.user || !recentUserWithin(session.user, 24)) return Promise.resolve(false);
+    var pending = readPending();
+    if (!pending) return Promise.resolve(false);
+    var database = db();
+    if (!database) return Promise.resolve(false);
+    return database.rpc('record_my_watchdog_signup_origin', {
+      p_signup_context: pending.signup_context
+    }).then(function (result) {
+      return !!(result && !result.error && result.data === true);
+    }).catch(function () { return false; });
+  }
+
   function linkSession(session) {
-    if (!initialized || !analyticsAllowed() || !session || !session.user || !recentUser(session.user)) return Promise.resolve(false);
+    if (!analyticsActive() || !session || !session.user || !recentUserWithin(session.user, 2)) return Promise.resolve(false);
     var pending = readPending();
     if (!pending) return Promise.resolve(false);
 
@@ -295,10 +331,17 @@
       p_signup_context: signupContext,
       p_auth_provider: provider
     }).then(function (result) {
-      if (!result || result.error || result.data !== true) return false;
-      try { sessionStorage.removeItem(PENDING_KEY); } catch (_error) {}
-      return true;
+      return !!(result && !result.error && result.data === true);
     }).catch(function () { return false; });
+  }
+
+  function linkAll(session) {
+    return Promise.all([linkLifecycleSession(session), linkSession(session)]).then(function (results) {
+      if (results[0] || results[1]) {
+        try { sessionStorage.removeItem(PENDING_KEY); } catch (_error) {}
+      }
+      return results;
+    });
   }
 
   function markSurface(target) {
@@ -307,6 +350,7 @@
   }
 
   function scanSurfaces() {
+    if (!analyticsActive()) return;
     var social = document.querySelector('.wd-auth-panel');
     if (social) markSurface(social);
     var library = document.querySelector('#wd-library-auth:not([hidden])');
@@ -316,7 +360,6 @@
   }
 
   function onClick(event) {
-    if (!initialized || !analyticsAllowed()) return;
     var target = event.target && event.target.closest ? event.target.closest('button,a') : null;
     if (!target) return;
 
@@ -325,22 +368,24 @@
       var provider = normalizeProvider(providerButton.getAttribute('data-provider'));
       var socialContext = inferredContext(providerButton);
       rememberPending(socialContext, provider);
-      recordOnce('provider|' + socialContext + '|' + provider, 'auth_provider_clicked', provider, socialContext);
+      if (analyticsActive()) recordOnce('provider|' + socialContext + '|' + provider, 'auth_provider_clicked', provider, socialContext);
       return;
     }
 
     if (target.closest('[data-email-start]')) {
       var emailContext = inferredContext(target);
       rememberPending(emailContext, 'email');
-      recordOnce('provider|' + emailContext + '|email', 'auth_provider_clicked', 'email', emailContext);
+      if (analyticsActive()) recordOnce('provider|' + emailContext + '|email', 'auth_provider_clicked', 'email', emailContext);
       return;
     }
 
     if (target.matches('[data-email-send],[data-anchor-auth-send],#wd-library-send')) {
       var codeContext = inferredContext(target);
       rememberPending(codeContext, 'email');
-      recordOnce('provider|' + codeContext + '|email', 'auth_provider_clicked', 'email', codeContext);
-      record('auth_code_requested', 'email', codeContext);
+      if (analyticsActive()) {
+        recordOnce('provider|' + codeContext + '|email', 'auth_provider_clicked', 'email', codeContext);
+        record('auth_code_requested', 'email', codeContext);
+      }
       return;
     }
 
@@ -354,17 +399,18 @@
     var database = db();
     if (!database || !database.auth) {
       authAttachAttempts += 1;
-      if (authAttachAttempts <= 20) window.setTimeout(attachAuthListener, 250);
+      if (authAttachAttempts <= 40) window.setTimeout(attachAuthListener, 250);
       return;
     }
+    installAuthFailureInstrumentation();
     try {
       authListenerAttached = true;
       database.auth.onAuthStateChange(function (event, session) {
-        if (event === 'SIGNED_IN' || event === 'INITIAL_SESSION') linkSession(session);
+        if (event === 'SIGNED_IN' || event === 'INITIAL_SESSION') linkAll(session);
       });
       database.auth.getSession().then(function (result) {
         var session = result && result.data && result.data.session;
-        if (session) linkSession(session);
+        if (session) linkAll(session);
       }).catch(function () {});
     } catch (_error) {
       authListenerAttached = false;
@@ -375,21 +421,22 @@
     if (initialized || !analyticsAllowed()) return;
     initialized = true;
     ensureContext();
-    installAuthFailureInstrumentation();
     recordRedirectFailure();
-    document.addEventListener('click', onClick, true);
     scanSurfaces();
     observer = new MutationObserver(function () { window.setTimeout(scanSurfaces, 0); });
     observer.observe(document.documentElement, { childList:true, subtree:true, attributes:true, attributeFilter:['hidden','class'] });
-    attachAuthListener();
   }
 
+  document.addEventListener('click', onClick, true);
+  attachAuthListener();
+
   window.WatchdogSignupAnalytics = Object.freeze({
-    enabled: function () { return initialized && analyticsAllowed(); },
+    enabled: function () { return analyticsActive(); },
     context: function () { return initialized ? ensureContext() : null; },
     record: record,
     failure: failure,
-    linkSession: linkSession
+    linkSession: linkSession,
+    linkLifecycleSession: linkLifecycleSession
   });
 
   if (analyticsAllowed()) init();
