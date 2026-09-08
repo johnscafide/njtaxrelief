@@ -58,7 +58,7 @@
     if(uniformity){
       var label=uniformity.querySelector('span');
       text(label,'U · Uniformity Index');
-      uniformity.setAttribute('aria-label','Open U — Uniformity Index');
+      uniformity.setAttribute('aria-label','Open U: Uniformity Index');
     }
     if(!sheet.querySelector('a[href="/property/robust/"]')){
       var section=uniformity&&uniformity.closest('.wd-public-section');
