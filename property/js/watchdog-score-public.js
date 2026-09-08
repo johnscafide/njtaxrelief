@@ -48,7 +48,7 @@
       label: meta.letter + ' · ' + meta.name,
       score: score,
       weight: meta.weight,
-      note: note || (score == null ? 'evidence not available in the canonical calculation' : 'governed ROBUST-v1 evidence')
+      note: note || (score == null ? 'Evidence not available' : 'Supporting evidence')
     };
   }
 
@@ -98,7 +98,7 @@
       if (note && typeof note === 'object') {
         if (note.reason) note = note.reason;
         else if (note.source) note = note.source;
-        else note = 'governed ROBUST-v1 evidence';
+        else note = 'Supporting evidence';
       }
       detail[key] = component(key, raw.score, note);
     });
@@ -196,7 +196,7 @@
     if (!heading || heading.textContent.trim() !== 'Watchdog Score') return;
     host.setAttribute('data-retired-score-model', 'peer-gap-v1');
     host.innerHTML = '<h3 class="plm-sec-h">O · Overassessment Position evidence</h3>' +
-      '<p class="plm-sec-s">The old peer-only score has been retired. Comparable nearby assessments may inform evidence, but they do not produce a standalone Watchdog Score. The canonical ROBUST Watchdog Score appears above as soon as the governed calculation completes.</p>';
+      '<p class="plm-sec-s">Nearby assessments can help explain this dimension. Your Watchdog Score appears above when enough ROBUST evidence is available.</p>';
   }
 
   function clearCanonicalScore() {
@@ -220,9 +220,9 @@
     host.setAttribute('data-score-model', score.modelVersion);
     host.innerHTML = '<section class="wdps" data-score-model="' + esc(score.modelVersion) + '">' +
       '<div class="wdps-head"><div><div class="wdps-k">Watchdog Score · ROBUST Framework</div><h3>' + esc(score.verdict) + '</h3>' +
-      '<p class="wdps-sub">One governed score built from six tax-position dimensions. This is not a home-quality or neighborhood desirability grade.</p></div>' +
+      '<p class="wdps-sub">One score built from six tax-position dimensions. It is not a home-quality or neighborhood grade.</p></div>' +
       '<div class="wdps-score"><div><b>' + esc(score.score) + '</b><span>/ 100</span></div></div></div>' +
-      '<div class="wdps-meta"><span>' + Math.round(score.covered * 100) + '% evidence weight</span><span>' + esc(score.confidence) + ' confidence</span><span>' + esc(score.modelVersion) + '</span></div>' +
+      '<div class="wdps-meta"><span>' + Math.round(score.covered * 100) + '% evidence</span><span>' + esc(score.confidence) + ' confidence</span><span>' + esc(score.modelVersion) + '</span></div>' +
       '<div class="wdps-grid">' + Core.ORDER.map(function (key) {
         var d = score.detail[key];
         var has = d && d.score != null;
@@ -232,7 +232,7 @@
           '<div class="wdps-n">' + (has ? esc(d.score) : '—') + '</div>' +
         '</div>';
       }).join('') + '</div>' +
-      '<div class="wdps-foot">Calculated by the governed ROBUST-v1 engine from the best current supported evidence for this parcel. Missing evidence lowers coverage and is never replaced with a parallel client-side score. <a href="/property/robust/">How the ROBUST Framework works</a>.</div></section>';
+      '<div class="wdps-foot">Built from the best current evidence available for this parcel. Missing evidence lowers coverage. <a href="/property/robust/">How the ROBUST Framework works</a>.</div></section>';
     quarantineLegacyPeerScore();
     return true;
   }
