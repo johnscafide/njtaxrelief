@@ -6,7 +6,6 @@
   var URL='https://uvkvaxljhhngydvlrzom.supabase.co/functions/v1/anchor-result-handoff';
   var AUTH_HOST='uvkvaxljhhngydvlrzom.supabase.co';
   var LOGO='/property/branding/watchdog-logo-horizontal.svg';
-  // Publishable key for the uvkvaxljhhngydvlrzom project (same one anchor-estimator.html uses for verify-email).
   var FALLBACK_KEY='sb_publishable_MYX59qCbK3d-21zDfJqkNw_fvmfnexa';
   var MAX_PREREQ_WAITS=20;
   var prereqWaits=0;
@@ -25,6 +24,22 @@
       if(u.protocol!=='https:'||u.hostname!==AUTH_HOST||u.pathname!=='/auth/v1/verify')return '';
       return u.href;
     }catch(_){return '';}
+  }
+  function injectAccountNotice(){
+    if(document.getElementById('wdx-anchor-account-notice'))return;
+    var host=document.querySelector('#est-step6 .est-lead-wrap');
+    if(!host)return;
+    if(!document.getElementById('wdx-anchor-account-notice-style')){
+      var style=document.createElement('style');
+      style.id='wdx-anchor-account-notice-style';
+      style.textContent='.wdx-anchor-account-notice{margin:14px 0 2px;padding:12px 14px;border:1px solid #dce5ee;border-radius:10px;background:#f7fafc;color:#46566a;font-size:12.5px;line-height:1.5}.wdx-anchor-account-notice strong{color:#10294b}';
+      document.head.appendChild(style);
+    }
+    var note=document.createElement('div');
+    note.id='wdx-anchor-account-notice';
+    note.className='wdx-anchor-account-notice';
+    note.innerHTML='<strong>Your free Watchdog account is included.</strong> When you verify your email, we will create or sign in a free Watchdog account for that email and open your result securely on WatchdogIndex.com. By continuing, you accept Watchdog Terms of Use and Privacy Policy. This does not subscribe you to marketing emails.';
+    host.insertAdjacentElement('afterend',note);
   }
   function selectedAnswers(){
     var out={};
@@ -90,6 +105,7 @@
   }
   function maybeStage(){if(!finished&&resultVisible())stage(latestResultParams);}
   function bindResultFallback(){
+    injectAccountNotice();
     var host=document.getElementById('est-result-content');
     if(host&&window.MutationObserver){
       new MutationObserver(function(){maybeStage();}).observe(host,{childList:true,subtree:true,characterData:true});
