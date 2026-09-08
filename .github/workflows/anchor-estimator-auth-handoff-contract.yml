@@ -1,0 +1,35 @@
+name: ANCHOR estimator Auth handoff contract
+
+on:
+  push:
+    branches:
+      - 'chatgpt/**'
+    paths:
+      - 'anchor-watchdog-handoff.js'
+      - 'supabase/functions/anchor-result-handoff/**'
+      - 'supabase/migrations/*anchor_estimator_watchdog_auth_unification*.sql'
+      - 'property/tests/anchor-estimator-auth-handoff-contract.mjs'
+      - '.github/workflows/anchor-estimator-auth-handoff-contract.yml'
+  pull_request:
+    branches:
+      - main
+    paths:
+      - 'anchor-watchdog-handoff.js'
+      - 'supabase/functions/anchor-result-handoff/**'
+      - 'supabase/migrations/*anchor_estimator_watchdog_auth_unification*.sql'
+      - 'property/tests/anchor-estimator-auth-handoff-contract.mjs'
+      - '.github/workflows/anchor-estimator-auth-handoff-contract.yml'
+  workflow_dispatch:
+
+jobs:
+  anchor-estimator-auth-handoff-contract:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+      - name: Check handoff JavaScript syntax
+        run: node --check anchor-watchdog-handoff.js
+      - name: Verify account handoff boundaries
+        run: node property/tests/anchor-estimator-auth-handoff-contract.mjs
