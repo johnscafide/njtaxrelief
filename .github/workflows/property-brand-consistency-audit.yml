@@ -6,6 +6,7 @@ on:
       - main
       - brand-consistency-audit-2026-08-20
       - brand-consistency-followup-2026-08-20
+      - brand-coverage-matrix-2026-08-20
     paths:
       - 'property/**'
       - '.github/workflows/property-brand-consistency-audit.yml'
@@ -28,10 +29,14 @@ jobs:
         run: python property/scripts/audit_brand_consistency.py --report brand-consistency-report.md --strict
       - name: Verify current app readability contract
         run: node property/tests/brand-readability-contract.mjs
-      - name: Upload brand consistency report
+      - name: Build app brand page coverage matrix
+        run: python property/scripts/audit_brand_page_coverage.py --report brand-page-coverage-report.md
+      - name: Upload brand consistency reports
         if: always()
         uses: actions/upload-artifact@v4
         with:
           name: brand-consistency-report
-          path: brand-consistency-report.md
+          path: |
+            brand-consistency-report.md
+            brand-page-coverage-report.md
           if-no-files-found: warn
