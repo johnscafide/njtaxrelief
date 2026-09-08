@@ -286,12 +286,14 @@ async function stage(req: Request, body: Record<string, any>) {
   if (inserted.error) throw new Error(inserted.error.message);
 
   let authHandoffUrl = "";
-  let authHandoffStatus = "fallback";
-  try {
-    authHandoffUrl = await createWatchdogAuthHandoff(email, token);
-    authHandoffStatus = "ready";
-  } catch (error) {
-    console.error("anchor-result-handoff auth-optional", error);
+  let authHandoffStatus = currentAccount.status === "existing" ? "existing_account" : "fallback";
+  if (currentAccount.status !== "existing") {
+    try {
+      authHandoffUrl = await createWatchdogAuthHandoff(email, token);
+      authHandoffStatus = "ready";
+    } catch (error) {
+      console.error("anchor-result-handoff auth-optional", error);
+    }
   }
 
   return json(req, {
