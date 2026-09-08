@@ -4,6 +4,7 @@
   if(window.__wdAnchorHandoff)return;window.__wdAnchorHandoff=true;
 
   var URL='https://uvkvaxljhhngydvlrzom.supabase.co/functions/v1/anchor-result-handoff';
+  var AUTH_HOST='uvkvaxljhhngydvlrzom.supabase.co';
   var LOGO='/property/branding/watchdog-logo-horizontal.svg';
   // Publishable key for the uvkvaxljhhngydvlrzom project (same one anchor-estimator.html uses for verify-email).
   var FALLBACK_KEY='sb_publishable_MYX59qCbK3d-21zDfJqkNw_fvmfnexa';
@@ -18,6 +19,13 @@
 
   function value(id){var el=document.getElementById(id);return String(el&&el.value||'').trim();}
   function apiKey(){return String(window.VERIFY_KEY||FALLBACK_KEY||'').trim();}
+  function authHandoffUrl(value){
+    try{
+      var u=new URL(String(value||''));
+      if(u.protocol!=='https:'||u.hostname!==AUTH_HOST||u.pathname!=='/auth/v1/verify')return '';
+      return u.href;
+    }catch(_){return '';}
+  }
   function selectedAnswers(){
     var out={};
     Array.prototype.slice.call(document.querySelectorAll('.est-choice.selected[data-key][data-val]')).forEach(function(btn){out[btn.getAttribute('data-key')]=btn.getAttribute('data-val');});
@@ -33,7 +41,7 @@
   function overlay(){
     var old=document.getElementById('wdx-handoff-overlay');if(old)return old;
     var el=document.createElement('div');el.id='wdx-handoff-overlay';el.className='wdx-handoff-overlay';el.setAttribute('role','status');el.setAttribute('aria-live','polite');
-    el.innerHTML='<div class="wdx-handoff-card"><div class="wdx-handoff-brand"><img src="'+LOGO+'" alt="Watchdog Property Intelligence"></div><div class="wdx-handoff-kicker">Secure ANCHOR result handoff</div><h2>Opening your result in Watchdog</h2><p>Your ANCHOR estimate is ready. We are securely carrying the verified result over and matching the residence to Watchdog property intelligence.</p><div class="wdx-handoff-steps" aria-hidden="true"><div class="wdx-handoff-step"><strong>01</strong>Verified estimate</div><div class="wdx-handoff-step"><strong>02</strong>Secure transfer</div><div class="wdx-handoff-step"><strong>03</strong>Property context</div></div><div class="wdx-handoff-bar"><span></span></div></div>';
+    el.innerHTML='<div class="wdx-handoff-card"><div class="wdx-handoff-brand"><img src="'+LOGO+'" alt="Watchdog Property Intelligence"></div><div class="wdx-handoff-kicker">Secure ANCHOR result handoff</div><h2>Opening your result in Watchdog</h2><p>Your email is verified. We are creating or signing in your free Watchdog account, carrying your ANCHOR estimate over securely, and matching the residence to Watchdog property intelligence.</p><div class="wdx-handoff-steps" aria-hidden="true"><div class="wdx-handoff-step"><strong>01</strong>Verified estimate</div><div class="wdx-handoff-step"><strong>02</strong>Watchdog account</div><div class="wdx-handoff-step"><strong>03</strong>Property context</div></div><div class="wdx-handoff-bar"><span></span></div></div>';
     document.body.appendChild(el);return el;
   }
   function clearFailure(){var n=document.getElementById('wdx-handoff-fail');if(n&&n.parentNode)n.parentNode.removeChild(n);}
@@ -65,10 +73,13 @@
       .then(function(r){return r.json().catch(function(){return {};}).then(function(body){if(!r.ok)throw new Error(body.error||'Secure handoff failed.');return body;});})
       .then(function(body){
         if(timeout)clearTimeout(timeout);
-        var token=body&&body.result_token;if(!/^[a-f0-9]{64}$/i.test(String(token||'')))throw new Error('Secure handoff token was not created.');
+        var token=body&&body.result_token;
+        if(!/^[a-f0-9]{64}$/i.test(String(token||'')))throw new Error('Secure handoff token was not created.');
+        var authUrl=authHandoffUrl(body&&body.auth_handoff_url);
+        if(!authUrl)throw new Error('Watchdog could not create the secure account sign-in. Your ANCHOR result remains available here.');
         finished=true;staging=false;if(retryTimer){clearTimeout(retryTimer);retryTimer=0;}
-        track('anchor_watchdog_handoff_ready',{tenure:answers.tenure||'unknown',qualified:params&&params.qualified===true,attempts:attemptCount});
-        setTimeout(function(){location.replace('https://www.watchdogindex.com/#anchor-result='+token);},150);
+        track('anchor_watchdog_handoff_ready',{tenure:answers.tenure||'unknown',qualified:params&&params.qualified===true,attempts:attemptCount,account_handoff:true});
+        setTimeout(function(){location.replace(authUrl);},150);
       })
       .catch(function(err){
         if(timeout)clearTimeout(timeout);
