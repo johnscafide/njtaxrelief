@@ -21,7 +21,12 @@ must(edge.includes('.not("verified_at", "is", null)'),'Account handoff must rema
 must(edge.includes('.gte("verified_at", cutoff)'),'Account handoff must require recent verification rather than an old lead record.');
 must(edge.includes('auth-optional'),'An automatic Auth failure must be isolated from the already-created result handoff.');
 
+must(client.includes("var HANDOFF_URL='https://uvkvaxljhhngydvlrzom.supabase.co/functions/v1/anchor-result-handoff'"),'Client must keep the handoff endpoint separate from the browser URL constructor.');
+must(!/\bvar\s+URL\s*=/.test(client),'Client must not shadow the browser URL constructor.');
 must(client.includes("var AUTH_HOST='uvkvaxljhhngydvlrzom.supabase.co'"),'Client must pin the accepted Auth handoff host.');
+must(client.includes("new window.URL(String(value||''))"),'Auth URL validation must explicitly use the browser URL constructor.');
+must(client.includes("new window.URL(String(value||''),WATCHDOG_ORIGIN)"),'Watchdog result URL validation must explicitly use the browser URL constructor.');
+must(client.includes('fetch(HANDOFF_URL,'),'Estimator must stage results through the dedicated handoff endpoint variable.');
 must(client.includes("u.pathname!=='/auth/v1/verify'"),'Client must accept only the Supabase Auth verification endpoint.');
 must(client.includes('body&&body.auth_handoff_url'),'Client must prefer the server-issued authenticated handoff.');
 must(client.includes('body&&body.watchdog_result_url'),'Client must accept the server-issued Watchdog result fallback.');
