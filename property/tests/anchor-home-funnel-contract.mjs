@@ -46,17 +46,21 @@ assert.match(home, /verifyOtp/);
 assert.match(home, /from\('anchor_estimates'\)\.upsert/);
 assert.match(home, /location\.href='\/anchor\/application\/2025\/'/);
 
-// Cross-domain handoff creates an authenticated Watchdog session while keeping result PII out of the URL.
+// Cross-domain handoff prefers automatic Auth but never blocks an already-staged Watchdog result.
 assert.match(handoff, /result_token/);
 assert.match(handoff, /auth_handoff_url/);
+assert.match(handoff, /watchdog_result_url/);
 assert.match(handoff, /AUTH_HOST/);
 assert.match(handoff, /\/auth\/v1\/verify/);
-assert.match(handoff, /location\.replace\(authUrl\)/);
-assert.doesNotMatch(handoff, /location\.replace\('https:\/\/www\.watchdogindex\.com\/#anchor-result='\+token\)/);
+assert.match(handoff, /var destination=authUrl\|\|resultUrl/);
+assert.match(handoff, /location\.replace\(destination\)/);
+assert.match(edgeHandoff, /auth_handoff_status/);
+assert.match(edgeHandoff, /account_status/);
+assert.match(edgeHandoff, /auth-optional/);
 assert.doesNotMatch(handoff, /watchdogindex\.com\/anchor\/results/);
 assert.doesNotMatch(handoff, /[?&](?:email|phone|address|benefit)=/i);
 
-// ANCHOR-created users can optionally add social sign-in methods to the same authenticated user.
+// Signed-in ANCHOR users see account status, useful next actions and optional social sign-in linking.
 assert.match(home, /getUserIdentities/);
 assert.match(home, /linkIdentity/);
 assert.match(home, /'google'/);
@@ -66,9 +70,9 @@ assert.match(home, /data-anchor-link-provider/);
 assert.doesNotMatch(home, /data-provider=/);
 assert.doesNotMatch(home, /signInWithOAuth/);
 assert.match(partial, /wd-anchor-social-link-template/);
-assert.match(partial, /Make Watchdog easier to get back to/i);
-assert.match(partial, /no second profile and no marketing opt-in/i);
-assert.match(partial, /\/onboarding\/\?next=\//);
+assert.match(partial, /You are signed in to Watchdog/i);
+assert.match(partial, /save this estimate, continue your ANCHOR application, revisit property records/i);
+assert.match(partial, /\/account\//);
 assert.match(homeCss, /\.wd-anchor-social\{/);
 assert.match(home, /anchor_social_link_connected/);
 assert.match(home, /anchor-social-linked/);

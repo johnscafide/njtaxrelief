@@ -112,6 +112,25 @@ function firstName(value: unknown): string {
   return str(value, 100).split(/\s+/)[0].slice(0, 60);
 }
 
+async function accountState(email: string) {
+  const lifecycle = await db.from("watchdog_user_lifecycle")
+    .select("user_id,first_auth_provider")
+    .eq("email", email)
+    .limit(1)
+    .maybeSingle();
+
+  if (lifecycle.error) {
+    console.error("anchor-result-handoff account-state", lifecycle.error);
+    return { status: "unknown", provider: "" };
+  }
+
+  if (!lifecycle.data?.user_id) return { status: "new", provider: "" };
+  return {
+    status: "existing",
+    provider: str(lifecycle.data.first_auth_provider, 40),
+  };
+}
+
 async function createWatchdogAuthHandoff(email: string, resultToken: string) {
   const redirectTo = `${WATCHDOG_ORIGIN}/#anchor-result=${resultToken}`;
   const generated = await db.auth.admin.generateLink({
@@ -151,12 +170,16 @@ async function createWatchdogAuthHandoff(email: string, resultToken: string) {
     origin_source: "verified_anchor_handoff",
     updated_at: now,
   }).eq("user_id", userId).eq("first_signup_context", "unknown");
-  if (lifecycle.error) throw new Error("Watchdog lifecycle link: " + lifecycle.error.message);
+  if (lifecycle.error) {
+    console.error("anchor-result-handoff lifecycle-link", lifecycle.error);
+  }
 
   const leadLink = await db.from("backoffice_leads").update({
     auth_user_id: userId,
   }).eq("source", "anchor-estimator").eq("email", email).is("auth_user_id", null);
-  if (leadLink.error) throw new Error("Watchdog lead identity link: " + leadLink.error.message);
+  if (leadLink.error) {
+    console.error("anchor-result-handoff lead-link", leadLink.error);
+  }
 
   return actionLink;
 }
@@ -216,15 +239,17 @@ async function stage(req: Request, body: Record<string, any>) {
     return json(req, { error: "A verified New Jersey property address is required." }, 422);
   }
 
+  const currentAccount = await accountState(email);
   const intentScoreRaw = Number(result.intent_score);
   const intentScore = Number.isFinite(intentScoreRaw)
     ? Math.max(0, Math.min(100, Math.round(intentScoreRaw)))
     : null;
   const token = randomToken();
   const expiresAt = new Date(Date.now() + 30 * 60_000).toISOString();
+  const watchdogResultUrl = `${WATCHDOG_ORIGIN}/#anchor-result=${token}`;
 
   const payload = {
-    schema_version: 2,
+    schema_version: 3,
     program: "ANCHOR",
     generated_at: new Date().toISOString(),
     first_name: firstName(result.name),
@@ -242,6 +267,8 @@ async function stage(req: Request, body: Record<string, any>) {
     intent_score: intentScore,
     source: "njpropertytaxrelief-anchor-estimator",
     account_origin: "anchor_estimator",
+    account_status: currentAccount.status,
+    account_provider: currentAccount.provider,
   };
 
   await db.from("anchor_result_sessions")
@@ -258,17 +285,25 @@ async function stage(req: Request, body: Record<string, any>) {
   });
   if (inserted.error) throw new Error(inserted.error.message);
 
-  // A successful verified-estimator handoff now guarantees a Watchdog Auth
-  // identity and returns a one-time Supabase action link. Following that link
-  // confirms/signs in the account and lands on Watchdog with the result token.
-  // Supabase generateLink does not send a second email.
-  const authHandoffUrl = await createWatchdogAuthHandoff(email, token);
+  let authHandoffUrl = "";
+  let authHandoffStatus = currentAccount.status === "existing" ? "existing_account" : "fallback";
+  if (currentAccount.status !== "existing") {
+    try {
+      authHandoffUrl = await createWatchdogAuthHandoff(email, token);
+      authHandoffStatus = "ready";
+    } catch (error) {
+      console.error("anchor-result-handoff auth-optional", error);
+    }
+  }
 
   return json(req, {
     ok: true,
     result_token: token,
     expires_at: expiresAt,
+    watchdog_result_url: watchdogResultUrl,
     auth_handoff_url: authHandoffUrl,
+    auth_handoff_status: authHandoffStatus,
+    account_status: currentAccount.status,
     auth_provider: "email",
     signup_context: "anchor_estimator",
   }, 201);

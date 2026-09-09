@@ -5,6 +5,7 @@
 
   var URL='https://uvkvaxljhhngydvlrzom.supabase.co/functions/v1/anchor-result-handoff';
   var AUTH_HOST='uvkvaxljhhngydvlrzom.supabase.co';
+  var WATCHDOG_ORIGIN='https://www.watchdogindex.com';
   var LOGO='/property/branding/watchdog-logo-horizontal.svg';
   var FALLBACK_KEY='sb_publishable_MYX59qCbK3d-21zDfJqkNw_fvmfnexa';
   var MAX_PREREQ_WAITS=20;
@@ -25,6 +26,14 @@
       return u.href;
     }catch(_){return '';}
   }
+  function watchdogResultUrl(value,token){
+    try{
+      var u=new URL(String(value||''),WATCHDOG_ORIGIN);
+      var hash=String(u.hash||'').replace(/^#/,'');
+      if(u.protocol!=='https:'||u.hostname!=='www.watchdogindex.com'||u.pathname!=='/'||hash!=='anchor-result='+String(token||''))return '';
+      return u.href;
+    }catch(_){return '';}
+  }
   function injectAccountNotice(){
     if(document.getElementById('wdx-anchor-account-notice'))return;
     var host=document.querySelector('#est-step6 .est-lead-wrap');
@@ -38,7 +47,7 @@
     var note=document.createElement('div');
     note.id='wdx-anchor-account-notice';
     note.className='wdx-anchor-account-notice';
-    note.innerHTML='<strong>Your free Watchdog account is included.</strong> When you verify your email, we will create or sign in a free Watchdog account for that email and open your result securely on WatchdogIndex.com. By continuing, you accept Watchdog Terms of Use and Privacy Policy. This does not subscribe you to marketing emails.';
+    note.innerHTML='<strong>Your free Watchdog account is included.</strong> If you already use Watchdog, we will use that account. Otherwise, we will set up a free account for your verified email. This does not subscribe you to marketing emails.';
     host.insertAdjacentElement('afterend',note);
   }
   function selectedAnswers(){
@@ -56,7 +65,7 @@
   function overlay(){
     var old=document.getElementById('wdx-handoff-overlay');if(old)return old;
     var el=document.createElement('div');el.id='wdx-handoff-overlay';el.className='wdx-handoff-overlay';el.setAttribute('role','status');el.setAttribute('aria-live','polite');
-    el.innerHTML='<div class="wdx-handoff-card"><div class="wdx-handoff-brand"><img src="'+LOGO+'" alt="Watchdog Property Intelligence"></div><div class="wdx-handoff-kicker">Secure ANCHOR result handoff</div><h2>Opening your result in Watchdog</h2><p>Your email is verified. We are creating or signing in your free Watchdog account, carrying your ANCHOR estimate over securely, and matching the residence to Watchdog property intelligence.</p><div class="wdx-handoff-steps" aria-hidden="true"><div class="wdx-handoff-step"><strong>01</strong>Verified estimate</div><div class="wdx-handoff-step"><strong>02</strong>Watchdog account</div><div class="wdx-handoff-step"><strong>03</strong>Property context</div></div><div class="wdx-handoff-bar"><span></span></div></div>';
+    el.innerHTML='<div class="wdx-handoff-card"><div class="wdx-handoff-brand"><img src="'+LOGO+'" alt="Watchdog Property Intelligence"></div><div class="wdx-handoff-kicker">Secure ANCHOR result handoff</div><h2>Opening your result in Watchdog</h2><p>Your email is verified. We are carrying your ANCHOR estimate to Watchdog and checking your account so you can keep going without starting over.</p><div class="wdx-handoff-steps" aria-hidden="true"><div class="wdx-handoff-step"><strong>01</strong>Verified estimate</div><div class="wdx-handoff-step"><strong>02</strong>Watchdog account</div><div class="wdx-handoff-step"><strong>03</strong>Property context</div></div><div class="wdx-handoff-bar"><span></span></div></div>';
     document.body.appendChild(el);return el;
   }
   function clearFailure(){var n=document.getElementById('wdx-handoff-fail');if(n&&n.parentNode)n.parentNode.removeChild(n);}
@@ -91,10 +100,12 @@
         var token=body&&body.result_token;
         if(!/^[a-f0-9]{64}$/i.test(String(token||'')))throw new Error('Secure handoff token was not created.');
         var authUrl=authHandoffUrl(body&&body.auth_handoff_url);
-        if(!authUrl)throw new Error('Watchdog could not create the secure account sign-in. Your ANCHOR result remains available here.');
+        var resultUrl=watchdogResultUrl(body&&body.watchdog_result_url,token)||watchdogResultUrl(WATCHDOG_ORIGIN+'/#anchor-result='+token,token);
+        if(!resultUrl)throw new Error('Watchdog could not open the secure result. Your ANCHOR result remains available here.');
+        var destination=authUrl||resultUrl;
         finished=true;staging=false;if(retryTimer){clearTimeout(retryTimer);retryTimer=0;}
-        track('anchor_watchdog_handoff_ready',{tenure:answers.tenure||'unknown',qualified:params&&params.qualified===true,attempts:attemptCount,account_handoff:true});
-        setTimeout(function(){location.replace(authUrl);},150);
+        track('anchor_watchdog_handoff_ready',{tenure:answers.tenure||'unknown',qualified:params&&params.qualified===true,attempts:attemptCount,account_handoff:!!authUrl,account_status:body&&body.account_status||'unknown'});
+        setTimeout(function(){location.replace(destination);},150);
       })
       .catch(function(err){
         if(timeout)clearTimeout(timeout);
