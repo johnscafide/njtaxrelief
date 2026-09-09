@@ -17,16 +17,16 @@ const overviewMigration = await read('supabase/migrations/20260829152600_public_
 // The customer-facing route is public, indexable, and no longer framed around an internal catalog goal.
 assert.match(html, /name="robots" content="index,follow,max-image-preview:large"/);
 assert.match(html, /rel="canonical" href="https:\/\/www\.watchdogindex\.com\/property\/data-center"/);
-assert.match(html, /Build, analyze and monitor governed property datasets/);
+assert.match(html, /Build, analyze and monitor property datasets/);
 assert.match(html, /Overview/);
 assert.match(html, /Build Dataset/);
 assert.match(html, /Saved Views &amp; Monitoring/);
-assert.match(html, /Live governed fields/);
+assert.match(html, /Live fields/);
 assert.match(html, /Bulk-ready fields/);
-assert.match(html, /Latest provider verification/);
-assert.match(html, /Connected coverage health/);
+assert.match(html, /Latest verification/);
+assert.match(html, /Coverage by intelligence family/);
 assert.match(html, /Verification recency across live fields/);
-assert.match(html, /Configured refresh policy reflects each field’s expected source cadence/);
+assert.match(html, /Refresh timing follows the expected update cycle for each source/);
 assert.match(html, /id="dc-category-coverage-template"/);
 assert.match(html, /id="dc-source-freshness-template"/);
 assert.doesNotMatch(html, /data-access-require="pro_plus"/);
