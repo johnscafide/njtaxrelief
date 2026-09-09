@@ -3,7 +3,7 @@
   if(!/(^|\.)njpropertytaxrelief\.com$/i.test(location.hostname)||!/anchor-estimator\.html\/?$/i.test(location.pathname))return;
   if(window.__wdAnchorHandoff)return;window.__wdAnchorHandoff=true;
 
-  var URL='https://uvkvaxljhhngydvlrzom.supabase.co/functions/v1/anchor-result-handoff';
+  var HANDOFF_URL='https://uvkvaxljhhngydvlrzom.supabase.co/functions/v1/anchor-result-handoff';
   var AUTH_HOST='uvkvaxljhhngydvlrzom.supabase.co';
   var WATCHDOG_ORIGIN='https://www.watchdogindex.com';
   var LOGO='/property/branding/watchdog-logo-horizontal.svg';
@@ -21,14 +21,14 @@
   function apiKey(){return String(window.VERIFY_KEY||FALLBACK_KEY||'').trim();}
   function authHandoffUrl(value){
     try{
-      var u=new URL(String(value||''));
+      var u=new window.URL(String(value||''));
       if(u.protocol!=='https:'||u.hostname!==AUTH_HOST||u.pathname!=='/auth/v1/verify')return '';
       return u.href;
     }catch(_){return '';}
   }
   function watchdogResultUrl(value,token){
     try{
-      var u=new URL(String(value||''),WATCHDOG_ORIGIN);
+      var u=new window.URL(String(value||''),WATCHDOG_ORIGIN);
       var hash=String(u.hash||'').replace(/^#/,'');
       if(u.protocol!=='https:'||u.hostname!=='www.watchdogindex.com'||u.pathname!=='/'||hash!=='anchor-result='+String(token||''))return '';
       return u.href;
@@ -93,7 +93,7 @@
     var answers=selectedAnswers();
     var controller=typeof AbortController==='function'?new AbortController():null;
     var timeout=controller?setTimeout(function(){controller.abort();},10000):0;
-    fetch(URL,{method:'POST',headers:{'Content-Type':'application/json','apikey':key},body:JSON.stringify({action:'stage',email:email,result:{name:name,address:address,answers:answers,intent_score:params&&params.intent_score}}),signal:controller?controller.signal:undefined})
+    fetch(HANDOFF_URL,{method:'POST',headers:{'Content-Type':'application/json','apikey':key},body:JSON.stringify({action:'stage',email:email,result:{name:name,address:address,answers:answers,intent_score:params&&params.intent_score}}),signal:controller?controller.signal:undefined})
       .then(function(r){return r.json().catch(function(){return {};}).then(function(body){if(!r.ok)throw new Error(body.error||'Secure handoff failed.');return body;});})
       .then(function(body){
         if(timeout)clearTimeout(timeout);
