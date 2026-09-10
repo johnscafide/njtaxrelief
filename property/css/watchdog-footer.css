@@ -56,7 +56,7 @@
 #wd-property-footer .wdf-legal-links{display:flex;flex-wrap:wrap;align-items:center;gap:10px 22px;margin:18px 0 0;padding:0}
 #wd-property-footer .wdf-legal-link,#wd-property-footer .wdf-bottom-link{background:transparent;border:0;color:var(--wd-teal-600);font-size:var(--type-xs);font-weight:700;text-decoration:none}
 #wd-property-footer .wdf-legal-link:hover,#wd-property-footer .wdf-legal-link:focus-visible,#wd-property-footer .wdf-bottom-link:hover,#wd-property-footer .wdf-bottom-link:focus-visible{color:var(--wd-navy-700);text-decoration:underline;text-underline-offset:3px}
-#wd-property-footer .wdf-housing{display:flex;align-items:flex-start;gap:13px;margin:21px 0 0;padding:15px 17px;border:0;border-left:4px solid var(--wd-teal-600);border-radius:var(--radius-sm);box-shadow:none;background:var(--surface-soft)}
+#wd-property-footer .wdf-housing{display:flex;align-items:flex-start;gap:13px;margin:21px 0 0;padding:15px 17px;border:0;box-shadow:none;background:var(--surface-soft)}
 #wd-property-footer .wdf-housing i{flex:0 0 25px;width:25px;margin-top:2px;color:var(--wd-teal-600);font-size:1.4375rem;text-align:center}
 #wd-property-footer .wdf-housing p{margin:0;padding:0;color:var(--ink);font:800 var(--type-xs)/1.45 var(--font-ui);text-transform:uppercase}
 #wd-property-footer .wdf-bottom{display:flex;align-items:center;justify-content:space-between;gap:30px;margin:42px 0 0;padding:22px 0 0;border:0;border-top:1px solid var(--border);background:transparent;box-shadow:none}
