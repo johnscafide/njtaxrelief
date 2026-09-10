@@ -24,16 +24,23 @@ assert(guard.includes('data-fallback'), 'Street View guard must preserve a non-G
 const freeGrid = read('property/js/free-imagery-grid-runtime.js');
 const supabaseRuntime = read('property/js/supabase-runtime.js');
 const lookupSource = read('property/js/lookup.js');
-assert(freeGrid.includes('maps.nj.gov/arcgis/rest/services/Basemap/Orthos_Natural_2020_NJ_WM/MapServer/export'),
-  'Passive grid imagery must resolve to official NJ Office of GIS imagery');
+
+assert(freeGrid.includes('maps.nj.gov/arcgis/rest/services/Basemap/LtGray_NJ_WM/MapServer/export'),
+  'Passive property visuals must resolve to the official NJ Office of GIS map basemap');
+assert(freeGrid.includes('geo.nj.gov/arcgis/rest/services/Tasks/NJ_Geocode/GeocodeServer/findAddressCandidates'),
+  'Map previews must have the official NJ address geocoder fallback for properties without stored coordinates');
+assert(freeGrid.includes('.wd-property-photo,.pr-card-media,.hd-shot,.hm-shot,.ch'),
+  'Map preview runtime must cover landing, dashboard, search, Property Home and comparison property visuals');
+assert(freeGrid.includes('wdStreetviewPin') && freeGrid.includes('wdImageryDone'),
+  'Property Home map preview must preempt both dynamic Street View and the legacy property imagery hydrator');
 assert(freeGrid.includes('DOMContentLoaded') && freeGrid.includes('reinforce') && freeGrid.includes('installHooks()'),
-  'Free imagery translator must reinforce after the Street View guard is installed');
+  'Free map runtime must reinforce after the Street View guard is installed');
 assert(supabaseRuntime.includes("document.write('<script src=\"/property/js/free-imagery-grid-runtime.js\""),
-  'Public lookup boot must synchronously make the free imagery translator available');
+  'Public lookup boot must synchronously make the free map preview runtime available');
 assert(lookupSource.includes("(a.lat != null && a.lon != null) ? (a.lat + ',' + a.lon)"),
-  'Neighborhood cards must prefer parcel coordinates so paid Street View URLs can be translated without geocoding');
+  'Neighborhood cards must prefer parcel coordinates so map previews avoid unnecessary geocoding');
 assert(lookupSource.includes('lat: c.y, lon: c.x'),
-  'Neighborhood parcel rows must retain centroid coordinates for free aerial imagery');
+  'Neighborhood parcel rows must retain centroid coordinates for map previews');
 
 const lookupPage = read('property/index.html');
 const lookupGuard = lookupPage.indexOf('/property/js/ownership-verification.js');
@@ -65,4 +72,4 @@ for (const rel of dashboardScripts) {
     `Current dashboard-loaded script must not create Static Street View requests: ${rel}`);
 }
 
-console.log(`Street View spend/fallback contract passed. Lookup grids keep free NJGIN imagery while ${dashboardScripts.length} current dashboard scripts remain free of Static Street View calls.`);
+console.log(`Property map/spend contract passed. Passive property visuals use NJ Office of GIS maps while ${dashboardScripts.length} current dashboard scripts remain free of Static Street View calls.`);
