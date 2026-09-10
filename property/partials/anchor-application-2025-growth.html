@@ -31,7 +31,7 @@
       <input id="wd-growth-optin" type="checkbox">
       <span><strong>Keep me updated.</strong> Email me occasional Watchdog property and New Jersey tax updates. I can unsubscribe anytime.</span>
     </label>
-    <button id="wd-growth-save" type="button" class="wd-btn primary">Save &amp; continue in Watchdog</button>
+    <button id="wd-growth-save" type="button" class="wd-btn primary" data-update-label="Update answer">Save &amp; continue in Watchdog</button>
     <p id="wd-growth-status" class="wd-growth-status" role="status" aria-live="polite"></p>
   </div>
 
@@ -66,6 +66,7 @@
         <button id="wd-growth-email" type="button" class="wd-btn secondary">Open email</button>
       </div>
       <p class="wd-growth-privacy">The address you type here is not uploaded to Watchdog. Your email app opens with your referral link so you stay in control of the message.</p>
+      <template id="wd-growth-referral-email-copy" data-subject="A free New Jersey property tool I thought you might like">I used Watchdog for New Jersey property information and property tax relief help. Here is my link if you want to try it: {{referral_link}}</template>
     </div>
 
     <a class="wd-growth-primary-cta" href="/" data-growth-action="continue">
