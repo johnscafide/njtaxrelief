@@ -2637,3 +2637,13 @@ footer {
         padding-left: 24px;
     }
 }
+
+/* Shared free application assistance message. */
+.wd-free-help{box-sizing:border-box;display:flex;align-items:center;gap:24px;width:min(1100px,calc(100% - 40px));margin:32px auto;padding:20px;background:#fff;border:1px solid #dce5f0;border-radius:20px;color:#103780;font-family:"Source Sans 3",system-ui,sans-serif;text-align:left}
+.wd-free-help-image{display:block;flex:0 0 220px;overflow:hidden;border-radius:12px;line-height:0}
+.wd-free-help-image img{display:block;width:100%;height:auto}
+.wd-free-help-copy{min-width:0}.wd-free-help-copy strong{display:block;font-size:clamp(20px,2.3vw,28px);line-height:1.25}.wd-free-help-copy p{margin:12px 0;color:#435570;font-size:16px;line-height:1.5}.wd-free-help-copy>a{display:inline-flex;align-items:center;min-height:44px;gap:8px;color:#103780;font-size:16px;font-weight:700;text-decoration:underline;text-underline-offset:3px}
+.wd-free-help a:focus-visible{outline:3px solid #2162ff;outline-offset:4px}
+.wd-anchor-quick-intro .wd-free-help{display:block;width:100%;max-width:400px;margin:24px 0 0;padding:0;border:0}.wd-anchor-quick-intro .wd-free-help-image{max-width:360px}.wd-anchor-quick-intro .wd-free-help-copy{padding-top:16px}.wd-anchor-quick-intro .wd-free-help-copy strong{font-size:20px}
+.est-card-wrap>.wd-free-help{width:100%;margin:0 0 24px}
+@media(max-width:600px){.wd-free-help{flex-direction:column;align-items:stretch;gap:18px;padding:16px}.wd-free-help-image{flex-basis:auto;width:100%;max-width:320px;margin:0 auto}.wd-free-help-copy strong{font-size:21px}}
