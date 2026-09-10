@@ -39,12 +39,6 @@ function installStyle(){
     '.wdfi-trust b{font-size:11.5px!important}',
     '.wdfi-trust small{margin-top:2px!important;font-size:10px!important;line-height:1.3!important}',
     '.wdfi-deeper{margin-top:9px!important;font-size:11px!important}',
-    '.wdfi-photo-fallback{padding:22px!important}',
-    '.wdfi-photo-fallback>div{max-width:360px!important}',
-    '.wdfi-photo-mark{width:62px!important;height:62px!important;margin-bottom:13px!important;border-radius:19px!important;font-size:23px!important}',
-    '.wdfi-photo-fallback h2{font-size:26px!important}',
-    '.wdfi-photo-fallback p{margin-top:9px!important;font-size:12.5px!important;line-height:1.45!important}',
-    '.wdfi-photo-cta{min-height:40px!important;margin-top:14px!important;padding:0 14px!important;border-radius:11px!important;font-size:11.5px!important}',
     'body.hm-dashboard-page .wdfi .wd-photo-add{min-height:32px!important;padding:0 10px!important;font-size:10.5px!important}',
     'body.hm-dashboard-page .wdfi .wd-image-source{padding:6px 9px!important;font-size:9.5px!important}',
     '@media(max-width:980px){body.hm-dashboard-page .wdfi .hm-hero-in{grid-template-columns:1fr!important;max-width:760px!important}body.hm-dashboard-page .wdfi .hm-id{height:auto!important;min-height:0!important;max-height:none!important;order:1}body.hm-dashboard-page .wdfi .hm-shot{height:280px!important;min-height:280px!important;max-height:280px!important;order:2}.wdfi-title p{white-space:normal!important}}',
@@ -54,6 +48,11 @@ function installStyle(){
 }
 
 var allowed=['wdfi-head','wdfi-score','wdfi-facts','wdfi-trust','wdfi-deeper'];
+function removePhotoFallback(root){
+  var scope=root||document;
+  if(!scope.querySelectorAll)return;
+  Array.prototype.slice.call(scope.querySelectorAll('.wdfi-photo-fallback')).forEach(function(node){node.remove();});
+}
 function cleanCard(){
   var card=document.querySelector('#hm-body .hm-hero.wdfi .hm-id');
   if(!card)return;
@@ -62,11 +61,21 @@ function cleanCard(){
     if(!keep)child.remove();
   });
 }
-function run(){installStyle();cleanCard();}
+function run(){installStyle();removePhotoFallback(document);cleanCard();}
 function boot(){
   run();
   var host=document.getElementById('hm-body');
-  if(host&&typeof MutationObserver!=='undefined')new MutationObserver(function(){requestAnimationFrame(run);}).observe(host,{childList:true,subtree:true});
+  if(host&&typeof MutationObserver!=='undefined')new MutationObserver(function(records){
+    for(var i=0;i<records.length;i++){
+      var nodes=records[i].addedNodes||[];
+      for(var j=0;j<nodes.length;j++){
+        var node=nodes[j];
+        if(!node||node.nodeType!==1)continue;
+        if((node.matches&&node.matches('.wdfi-photo-fallback'))||(node.querySelector&&node.querySelector('.wdfi-photo-fallback'))){removePhotoFallback(node.parentNode||host);}
+      }
+    }
+    requestAnimationFrame(run);
+  }).observe(host,{childList:true,subtree:true});
   window.addEventListener('watchdog:context-refresh',run);
 }
 if(document.readyState==='loading')document.addEventListener('DOMContentLoaded',boot,{once:true});else boot();

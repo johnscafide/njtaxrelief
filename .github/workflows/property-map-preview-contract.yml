@@ -6,8 +6,10 @@ on:
       - 'property/js/free-imagery-grid-runtime.js'
       - 'property/js/map-persistence-runtime.js'
       - 'property/js/brand-consistency-runtime.js'
+      - 'property/js/dashboard/home/home-property-first-impression-compact.js'
       - 'property/tests/streetview-cost-guard-contract.mjs'
       - 'property/tests/map-persistence-contract.mjs'
+      - 'property/tests/home-map-no-photo-fallback-contract.mjs'
       - '.github/workflows/property-map-preview-contract.yml'
   push:
     branches: [main]
@@ -15,8 +17,10 @@ on:
       - 'property/js/free-imagery-grid-runtime.js'
       - 'property/js/map-persistence-runtime.js'
       - 'property/js/brand-consistency-runtime.js'
+      - 'property/js/dashboard/home/home-property-first-impression-compact.js'
       - 'property/tests/streetview-cost-guard-contract.mjs'
       - 'property/tests/map-persistence-contract.mjs'
+      - 'property/tests/home-map-no-photo-fallback-contract.mjs'
       - '.github/workflows/property-map-preview-contract.yml'
 
 jobs:
@@ -28,8 +32,10 @@ jobs:
         with:
           node-version: 22
       - name: Verify map runtime syntax
-        run: node --check property/js/free-imagery-grid-runtime.js && node --check property/js/map-persistence-runtime.js
+        run: node --check property/js/free-imagery-grid-runtime.js && node --check property/js/map-persistence-runtime.js && node --check property/js/dashboard/home/home-property-first-impression-compact.js
       - name: Verify map and Street View spend contract
         run: node property/tests/streetview-cost-guard-contract.mjs
       - name: Verify persistent Home and lookup maps
         run: node property/tests/map-persistence-contract.mjs
+      - name: Verify Home photo fallback cannot cover map
+        run: node property/tests/home-map-no-photo-fallback-contract.mjs
