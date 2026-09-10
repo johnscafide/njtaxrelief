@@ -79,13 +79,13 @@
           <button type="button" class="wd-anchor-edit-chip" data-anchor-quick-edit>Edit answers</button>
         </div>
 <aside class="wd-free-help" aria-label="Free help with every NJ property tax relief application">
-  <a class="wd-free-help-image" href="https://watchdogindex.com/">
+  <div class="wd-free-help-image">
     <img src="/property/assets/watchdogapplication.jpg" width="1254" height="1254" loading="lazy" decoding="async" alt="Watchdog: free application help for NJ ANCHOR and NJ PAS-1">
-  </a>
+  </div>
   <div class="wd-free-help-copy">
     <strong>Help applying is FREE for ALL NJ property tax relief applications.</strong>
-    <p>ANCHOR, PAS-1, Senior Freeze and Stay NJ. No application assistance fees.</p>
-    <a href="https://watchdogindex.com/">Get free application help at Watchdog <span aria-hidden="true">→</span></a>
+    <p>ANCHOR, PAS-1, Senior Freeze and Stay NJ. Complete the estimator first, then continue into the application.</p>
+    <a href="#wd-anchor-quick" data-anchor-start-guidance="Complete the estimator below first. When your estimate appears, click Start my 2025 application." onclick="event.preventDefault();var s=this.closest('#wd-anchor-quick');var r=s&&s.querySelector('[data-anchor-quick-result]:not([hidden])');if(r){var b=r.querySelector('[data-anchor-action=&quot;start&quot;]');if(b){b.focus();b.scrollIntoView({behavior:'smooth',block:'center'});}return false;}var st=s&&s.querySelector('[data-anchor-quick-status]');if(st){st.textContent=this.getAttribute('data-anchor-start-guidance');st.classList.add('is-error');}var f=s&&s.querySelector('[data-anchor-quick-form]');if(f){f.hidden=false;f.scrollIntoView({behavior:'smooth',block:'center'});var first=f.querySelector('select,input');if(first)first.focus();}return false;">Start application <span aria-hidden="true">→</span></a>
   </div>
 </aside>
       </div>
@@ -101,7 +101,7 @@
           </div>
           <label class="wd-anchor-address-field"><span>New Jersey residence <small>Optional to estimate · required to save or start an application</small></span><input name="wd_anchor_address" type="text" autocomplete="street-address" placeholder="123 Main St, Town, NJ 08000"></label>
           <div class="wd-anchor-quick-form-actions"><button type="submit" class="wd-anchor-btn primary">Show my estimate</button><span>About one minute · Free</span></div>
-          <div class="wd-anchor-quick-status" data-anchor-quick-status data-address-required-copy="Add the New Jersey residence used for this estimate before saving or starting an application." role="status" aria-live="polite"></div>
+          <div class="wd-anchor-quick-status" data-anchor-quick-status data-address-required-copy="Add your New Jersey residence to complete the estimator for the application. Then click Start my 2025 application." role="status" aria-live="polite"></div>
         </form>
 
         <div class="wd-anchor-quick-result" data-anchor-quick-result hidden>
