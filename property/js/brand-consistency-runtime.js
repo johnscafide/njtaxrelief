@@ -9,6 +9,7 @@
   var LANDING_RECENTS='/property/js/landing-recent-intelligence.js?v=20260824a';
   var FREE_GRID_IMAGERY='/property/js/free-imagery-grid-runtime.js';
   var PROPERTY_IMAGERY='/property/js/property-imagery-runtime.js';
+  var MAP_PERSISTENCE='/property/js/map-persistence-runtime.js';
 
   /* Property Home previously emitted Google Static Street View as an inline
      background-image. Image-element guards cannot stop CSS URL fetches, so
@@ -59,6 +60,13 @@
     if(window.__WATCHDOG_PROPERTY_IMAGERY__)return;
     ensureScript(PROPERTY_IMAGERY,'watchdog-property-imagery-runtime');
   }
+  function ensureMapPersistence(){
+    if(window.__WATCHDOG_MAP_PERSISTENCE__){
+      if(window.WatchdogMapPersistence&&window.WatchdogMapPersistence.refresh)window.WatchdogMapPersistence.refresh();
+      return;
+    }
+    ensureScript(MAP_PERSISTENCE,'watchdog-map-persistence-runtime');
+  }
   function ensureLandingRecents(){
     var path=(location.pathname||'').replace(/\/+$/,'');
     var host=String(location.hostname||'').toLowerCase();
@@ -80,6 +88,7 @@
     ensureCityAddress();
     ensureFreeGridImagery();
     ensurePropertyImagery();
+    ensureMapPersistence();
     ensureLandingRecents();
     syncBrand();
     if(window.WatchdogUniversalMenu)window.WatchdogUniversalMenu.refresh();
