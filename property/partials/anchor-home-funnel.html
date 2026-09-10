@@ -1,3 +1,4 @@
+<style>.wd-anchor-quick-result[hidden]{display:none}</style>
 <template id="wd-anchor-home-result-template">
   <section id="wd-anchor-home-result" class="wd-anchor-home-result" aria-labelledby="wd-anchor-home-title">
     <div class="wd-anchor-home-wrap">
@@ -110,7 +111,7 @@
           <b class="wd-anchor-quick-eligibility" data-anchor-quick-label></b>
           <p class="wd-anchor-quick-address" data-anchor-quick-address hidden><i class="fas fa-location-dot" aria-hidden="true"></i><span data-anchor-quick-address-text></span></p>
           <div class="wd-anchor-quick-result-actions">
-            <button type="button" class="wd-anchor-btn primary" data-anchor-action="start">Start my 2025 application</button>
+            <button type="button" class="wd-anchor-btn primary" data-anchor-action="start" onclick="var s=this.closest('#wd-anchor-quick');var amount=s&&s.querySelector('[data-anchor-quick-amount]');if(!amount||amount.textContent.trim()==='$—'){event.preventDefault();event.stopPropagation();var r=s&&s.querySelector('[data-anchor-quick-result]');var f=s&&s.querySelector('[data-anchor-quick-form]');var st=s&&s.querySelector('[data-anchor-quick-status]');if(r)r.hidden=true;if(f){f.hidden=false;f.scrollIntoView({behavior:'smooth',block:'center'});var first=f.querySelector('select,input');if(first)first.focus();}if(st){st.textContent='Complete the estimator first. Then click Start my 2025 application.';st.classList.add('is-error');}return false;}">Start my 2025 application</button>
             <button type="button" class="wd-anchor-save-link" data-anchor-action="save"><i class="far fa-bookmark" aria-hidden="true"></i> Save estimate</button>
           </div>
           <div data-anchor-auth-host hidden></div>
