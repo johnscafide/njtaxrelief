@@ -1,6 +1,17 @@
 (function(){
   'use strict';
   if(!/(^|\.)njpropertytaxrelief\.com$/i.test(location.hostname)||!/anchor-estimator\.html\/?$/i.test(location.pathname))return;
+  if(document.querySelector('script[src*="anchor-address-autocomplete-fallback.js"]'))return;
+  var script=document.createElement('script');
+  script.src='/anchor-address-autocomplete-fallback.js';
+  script.defer=true;
+  script.dataset.anchorAddressFallbackBootstrap='1';
+  (document.head||document.documentElement).appendChild(script);
+})();
+
+(function(){
+  'use strict';
+  if(!/(^|\.)njpropertytaxrelief\.com$/i.test(location.hostname)||!/anchor-estimator\.html\/?$/i.test(location.pathname))return;
   if(window.__wdAnchorHandoff)return;window.__wdAnchorHandoff=true;
 
   var HANDOFF_URL='https://uvkvaxljhhngydvlrzom.supabase.co/functions/v1/anchor-result-handoff';
