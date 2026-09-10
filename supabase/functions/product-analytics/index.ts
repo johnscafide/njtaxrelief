@@ -95,5 +95,12 @@ Deno.serve(async(req)=>{
   };
   const inserted=await admin.from('watchdog_product_events').insert(row);
   if(inserted.error){console.error('product analytics insert failed',inserted.error.message);return new Response('{"error":"insert_failed"}',{status:500,headers:cors(origin)})}
+
+  // Points are server-authoritative and intentionally capped. The browser cannot write the ledger.
+  if(authUserId&&audience==='external_account'&&b.event_name==='property_lookup_started'){
+    const awarded=await admin.rpc('award_watchdog_search_point',{p_user_id:authUserId});
+    if(awarded.error)console.error('watchdog property search point award failed',awarded.error.message);
+  }
+
   return new Response('{"ok":true}',{status:202,headers:cors(origin)});
 });
