@@ -1,5 +1,6 @@
 const UPSTREAM_ORIGIN = 'https://njtaxrelief.vercel.app';
 const LEGACY_HOSTS = new Set(['njpropertytaxrelief.com','www.njpropertytaxrelief.com']);
+const WATCHDOG_MAPS_BROWSER_KEY = 'AIzaSyCZBo_mj5WXyR-Bsb5yHdekxAxauTYNmlU';
 const PAGE_MAP = new Map([
   ['/','/index.html'],
   ['/index.html','/index.html'],
@@ -17,10 +18,20 @@ function injectScript(out,src){
   if(new RegExp('(?:src=["\\\']'+escaped+'["\\\']|'+escaped+')','i').test(out))return out;
   return out.replace(/<\/body>/i,'<script defer src="'+src+'"></script>\n</body>');
 }
+function alignAnchorMapsKey(out){
+  return String(out||'').replace(
+    /(https:\/\/maps\.googleapis\.com\/maps\/api\/js\?[^"'<>]*\bkey=)[^&"'<>]+/i,
+    '$1'+WATCHDOG_MAPS_BROWSER_KEY
+  );
+}
 function inject(html, pathname){
   let out=String(html||'');
   if(!/watchdog-promo\.css/i.test(out)) out=out.replace(/<\/head>/i,'  <link rel="stylesheet" href="/watchdog-promo.css">\n</head>');
   out=injectScript(out,'/watchdog-promo.js');
+  // The legacy static estimator still carries an older browser key. Serve the
+  // same maintained, referrer-restricted Google Maps key used by Watchdog's
+  // current NJ address runtime so Places billing/API policy cannot drift.
+  if(pathname==='/anchor-estimator.html') out=alignAnchorMapsKey(out);
   if(pathname==='/anchor-estimator.html') out=injectScript(out,'/anchor-watchdog-handoff.js');
   return out;
 }
