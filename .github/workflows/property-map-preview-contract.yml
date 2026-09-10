@@ -1,0 +1,27 @@
+name: Property map preview contract
+
+on:
+  pull_request:
+    paths:
+      - 'property/js/free-imagery-grid-runtime.js'
+      - 'property/tests/streetview-cost-guard-contract.mjs'
+      - '.github/workflows/property-map-preview-contract.yml'
+  push:
+    branches: [main]
+    paths:
+      - 'property/js/free-imagery-grid-runtime.js'
+      - 'property/tests/streetview-cost-guard-contract.mjs'
+      - '.github/workflows/property-map-preview-contract.yml'
+
+jobs:
+  map-preview-contract:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+      - name: Verify map runtime syntax
+        run: node --check property/js/free-imagery-grid-runtime.js
+      - name: Verify map and Street View spend contract
+        run: node property/tests/streetview-cost-guard-contract.mjs
