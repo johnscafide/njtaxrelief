@@ -28,13 +28,11 @@ function inject(html, pathname){
   let out=String(html||'');
   if(!/watchdog-promo\.css/i.test(out)) out=out.replace(/<\/head>/i,'  <link rel="stylesheet" href="/watchdog-promo.css">\n</head>');
   out=injectScript(out,'/watchdog-promo.js');
-  if(pathname==='/anchor-estimator.html'){
-    // The legacy static estimator still carries an older browser key. Serve the
-    // same maintained, referrer-restricted Google Maps key used by Watchdog's
-    // current NJ address runtime so Places billing/API policy cannot drift.
-    out=alignAnchorMapsKey(out);
-    out=injectScript(out,'/anchor-watchdog-handoff.js');
-  }
+  // The legacy static estimator still carries an older browser key. Serve the
+  // same maintained, referrer-restricted Google Maps key used by Watchdog's
+  // current NJ address runtime so Places billing/API policy cannot drift.
+  if(pathname==='/anchor-estimator.html') out=alignAnchorMapsKey(out);
+  if(pathname==='/anchor-estimator.html') out=injectScript(out,'/anchor-watchdog-handoff.js');
   return out;
 }
 
