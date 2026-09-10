@@ -161,6 +161,8 @@
   var countyMapPromise = null;
   var requestSeq = 0;
   var searchBound = false;
+  var searchFailed = false;
+  var legacyBound = false;
   var submitGuardBound = false;
   var statusPolishBound = false;
   var sessionToken = null;
@@ -552,6 +554,66 @@
     });
   }
 
+  // If the Places API (New) call is rejected (most often the key is not
+  // enabled for "Places API (New)"), stop retrying it and fall back to the
+  // classic Google Places dropdown so the form still works.
+  function bindLegacyFallback(reason) {
+    var field = input();
+    var places = window.google && google.maps && google.maps.places;
+    if (!field || legacyBound || !places || typeof places.Autocomplete !== 'function') return false;
+    legacyBound = true;
+    searchFailed = true;
+    closeBox();
+    delete field.dataset.wdAnchorSearch;
+    field.dataset.googleAddress = '0';
+    delete field.dataset.googlePlaceId;
+
+    var style = document.createElement('style');
+    style.textContent = '.pac-container{z-index:9000!important}';
+    document.head.appendChild(style);
+
+    var ac = new places.Autocomplete(field,{
+      componentRestrictions:{country:'us'},
+      types:['address'],
+      fields:['formatted_address','place_id','address_components']
+    });
+    ac.addListener('place_changed',function () {
+      var place = ac.getPlace() || {};
+      var formatted = String(place.formatted_address || '').trim();
+      var placeId = String(place.place_id || '').trim();
+      var state = '';
+      (place.address_components || []).forEach(function (c) {
+        if ((c.types || []).indexOf('administrative_area_level_1') !== -1) state = String(c.short_name || '').toUpperCase();
+      });
+      if (!formatted || !placeId) {
+        field.dataset.googleAddress = '0';
+        delete field.dataset.googlePlaceId;
+        status('error','Select your property from the address suggestions before continuing.');
+        return;
+      }
+      if (state && state !== 'NJ') {
+        field.dataset.googleAddress = '0';
+        delete field.dataset.googlePlaceId;
+        status('error','Please choose a New Jersey property address.');
+        return;
+      }
+      field.value = formatted;
+      field.dataset.googleAddress = '1';
+      field.dataset.googlePlaceId = placeId;
+      status('valid','New Jersey property selected and verified.');
+      try {
+        field.dispatchEvent(new CustomEvent('watchdog:address-selected',{
+          bubbles:true,
+          detail:{formattedAddress:formatted,placeId:placeId,state:'NJ',source:'google_places_fallback'}
+        }));
+      } catch (_) {}
+      track('anchor_address_autocomplete_fallback_selected',{google_place_id:placeId,reason:reason || 'watchdog_search_unavailable'});
+    });
+    status('idle','Start typing, then choose your New Jersey property from the address suggestions.');
+    track('anchor_address_autocomplete_fallback_activated',{reason:reason || 'watchdog_search_unavailable'});
+    return true;
+  }
+
   function bindSearch(lib) {
     var field = input();
     var Suggestion = lib && lib.AutocompleteSuggestion;
@@ -566,6 +628,7 @@
     var timer = null;
 
     function request() {
+      if (searchFailed) return;
       var value = String(field.value || '').trim();
       if (value.length < 3) { closeBox(); return; }
       if (!sessionToken) sessionToken = new SessionToken();
@@ -594,17 +657,21 @@
         renderSearch(predictions,map,value,seq);
       }).catch(function () {
         closeBox();
-        status('error','Watchdog property search could not load. Please try again.');
+        if (!bindLegacyFallback('watchdog_search_error')) {
+          status('error','Watchdog property search could not load. Please try again.');
+        }
       });
     }
 
     field.addEventListener('input',function () {
+      if (searchFailed) return;
       field.dataset.googleAddress = '0';
       delete field.dataset.googlePlaceId;
       clearTimeout(timer);
       timer = setTimeout(request,180);
     });
     field.addEventListener('focus',function () {
+      if (searchFailed) return;
       var value = String(field.value || '').trim();
       if (value.length >= 3 && field.dataset.googleAddress !== '1') {
         clearTimeout(timer);
@@ -613,6 +680,7 @@
     });
     field.addEventListener('blur',function () { setTimeout(closeBox,170); });
     field.addEventListener('keydown',function (event) {
+      if (searchFailed) return;
       var box = document.getElementById('est-address-awd-search');
       var buttons = box ? Array.prototype.slice.call(box.querySelectorAll('.awd-search-option')) : [];
       if (!buttons.length) return;
@@ -644,11 +712,13 @@
     if (!field || !window.google || !google.maps || typeof google.maps.importLibrary !== 'function') return false;
     field.dataset.anchorPlacesBound = '1';
     google.maps.importLibrary('places').then(function (lib) {
-      if (!bindSearch(lib) && !searchBound) {
+      if (!bindSearch(lib) && !searchBound && !bindLegacyFallback('watchdog_search_not_bound')) {
         status('error','Watchdog property search could not initialize. Please refresh and try again.');
       }
     }).catch(function () {
-      status('error','Watchdog property search could not load. Please refresh and try again.');
+      if (!bindLegacyFallback('watchdog_places_import_failed')) {
+        status('error','Watchdog property search could not load. Please refresh and try again.');
+      }
     });
     return true;
   }
