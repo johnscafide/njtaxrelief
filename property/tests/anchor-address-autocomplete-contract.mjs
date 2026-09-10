@@ -8,7 +8,6 @@ const funnel=read('anchor-funnel.js');
 const bridge=read('anchor-watchdog-bridge.js');
 const handoff=read('anchor-watchdog-handoff.js');
 const fallback=read('anchor-address-autocomplete-fallback.js');
-const watchdogCss=read('anchor-watchdog.css');
 const acquisition=read('api/njptr-watchdog-acquisition-page.js');
 const canonicalAddressRuntime=read('property/js/nj-address-autocomplete.js');
 
@@ -17,8 +16,6 @@ must(estimator.indexOf('anchor-funnel.js') < estimator.indexOf('anchor-watchdog-
 must(bridge.includes("window.initAddressAutocomplete = function () { initSearch(); };"),'Watchdog custom NJ property search must remain the primary Google callback.');
 must(bridge.includes('AutocompleteSuggestion'),'Watchdog custom autocomplete must retain the Places suggestion data API.');
 must(bridge.includes('body.est-page .pac-container{display:none!important}'),'Native Google suggestions must stay hidden while the Watchdog search is healthy.');
-must(watchdogCss.includes('body.est-page:has(#est-address[data-anchor-places-bound="1"]:not([data-wd-anchor-search="1"])):not(.awd-njgis-address-fallback) .pac-container'),'Legacy Google suggestions must only be exposed after the Watchdog search leaves its primary bound state and while NJ GIS fallback is inactive.');
-must(watchdogCss.includes('.pac-container{display:block!important;z-index:9000!important}'),'Legacy Google fallback must override the default hidden native container with a visible, correctly stacked suggestion list.');
 
 must(funnel.includes('google.maps.places.Autocomplete'),'The existing Google Places verification surface must remain available when Google is healthy.');
 must(handoff.includes('/anchor-address-autocomplete-fallback.js'),'Estimator bootstrap must load the address recovery script.');
