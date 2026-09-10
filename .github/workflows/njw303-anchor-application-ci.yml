@@ -5,22 +5,30 @@ on:
     branches:
       - johnvscafide/njw-303-public-launch-v2
       - johnvscafide/njw-303-anchor-preview-profile-reuse
+      - johnvscafide/njw-322-anchor-completion-growth-loop-source-attribution-referrals
     paths:
       - property/anchor/application/2025/**
       - property/anchor/applications/**
       - property/partials/anchor-application-2025-enhancements.html
+      - property/partials/anchor-application-2025-growth.html
       - property/js/anchor-application-2025.js
       - property/js/anchor-application-2025-fields.js
       - property/js/anchor-application-pdf-2025.js
       - property/js/anchor-application-vault.js
       - property/js/anchor-application-2025-guard.js
       - property/js/anchor-application-2025-enhancements.js
+      - property/js/anchor-application-2025-growth.js
       - property/js/anchor-applications.js
       - property/css/anchor-application-2025-enhancements.css
+      - property/css/anchor-application-growth.css
       - property/tests/anchor-application-2025-contract.mjs
       - property/tests/anchor-application-2025-enhancements-contract.mjs
+      - property/tests/anchor-completion-growth-contract.mjs
       - supabase/migrations/20260903143000_anchor_relief_profile_vault_v1.sql
       - supabase/migrations/20260903144500_anchor_relief_profile_source_sync_v1.sql
+      - supabase/migrations/20260910231000_anchor_completion_growth_loop_v1.sql
+      - supabase/migrations/20260910232500_anchor_completion_contact_roster_v1.sql
+      - supabase/functions/product-analytics/index.ts
       - api/anchor-form-template.js
       - .github/workflows/njw303-anchor-application-ci.yml
   pull_request:
@@ -29,18 +37,25 @@ on:
       - property/anchor/application/2025/**
       - property/anchor/applications/**
       - property/partials/anchor-application-2025-enhancements.html
+      - property/partials/anchor-application-2025-growth.html
       - property/js/anchor-application-2025.js
       - property/js/anchor-application-2025-fields.js
       - property/js/anchor-application-pdf-2025.js
       - property/js/anchor-application-vault.js
       - property/js/anchor-application-2025-guard.js
       - property/js/anchor-application-2025-enhancements.js
+      - property/js/anchor-application-2025-growth.js
       - property/js/anchor-applications.js
       - property/css/anchor-application-2025-enhancements.css
+      - property/css/anchor-application-growth.css
       - property/tests/anchor-application-2025-contract.mjs
       - property/tests/anchor-application-2025-enhancements-contract.mjs
+      - property/tests/anchor-completion-growth-contract.mjs
       - supabase/migrations/20260903143000_anchor_relief_profile_vault_v1.sql
       - supabase/migrations/20260903144500_anchor_relief_profile_source_sync_v1.sql
+      - supabase/migrations/20260910231000_anchor_completion_growth_loop_v1.sql
+      - supabase/migrations/20260910232500_anchor_completion_contact_roster_v1.sql
+      - supabase/functions/product-analytics/index.ts
       - api/anchor-form-template.js
 
 permissions:
@@ -61,8 +76,10 @@ jobs:
           node --check property/js/anchor-application-vault.js
           node --check property/js/anchor-application-2025-guard.js
           node --check property/js/anchor-application-2025-enhancements.js
+          node --check property/js/anchor-application-2025-growth.js
           node --check property/js/anchor-applications.js
       - name: Run privacy and routing contracts
         run: |
           node property/tests/anchor-application-2025-contract.mjs
           node property/tests/anchor-application-2025-enhancements-contract.mjs
+          node property/tests/anchor-completion-growth-contract.mjs

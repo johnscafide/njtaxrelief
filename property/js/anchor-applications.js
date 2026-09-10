@@ -20,6 +20,9 @@
   }
   function rememberApp(id) { try { sessionStorage.setItem(SESSION_APP_KEY, id); } catch (_) {} }
   function clearApp() { try { sessionStorage.removeItem(SESSION_APP_KEY); } catch (_) {} }
+  async function event(id, name) {
+    try { await db.rpc('record_my_anchor_funnel_event', { p_application_id:id, p_event_name:name }); } catch (_) {}
+  }
   function formatDate(value) {
     if (!value) return 'Saved application';
     try { return new Intl.DateTimeFormat('en-US', { month:'short', day:'numeric', year:'numeric' }).format(new Date(value)); }
@@ -144,7 +147,6 @@
       var head=document.createElement('div'); head.className='wd-library-card-head';
       var text=document.createElement('div'); var h=document.createElement('h3'); h.textContent=applicantName(payload); var addr=document.createElement('p'); addr.className='wd-library-card-address'; addr.textContent=homeAddress(payload); text.appendChild(h);text.appendChild(addr);
       var badge=document.createElement('span');badge.className='wd-library-badge';badge.textContent=formLabel(payload);head.appendChild(text);head.appendChild(badge);card.appendChild(head);
-      // content-architecture: dynamic — save date and generated/draft state are rendered from the decrypted account record.
       var meta=document.createElement('div');meta.className='wd-library-meta';var saved=document.createElement('span');saved.textContent='Last saved ' + formatDate(row.updated_at);var stateEl=document.createElement('span');stateEl.textContent=row.status === 'generated' ? 'Official PDF prepared' : 'Draft';meta.appendChild(saved);meta.appendChild(stateEl);card.appendChild(meta);
       var actions=document.createElement('div');actions.className='wd-library-actions';actions.appendChild(button('Continue application','secondary','resume',row.id));if(row.status==='generated'){actions.appendChild(button('Download saved PDF','primary','download',row.id));actions.appendChild(button('Print saved PDF','secondary','print',row.id));}actions.appendChild(button('Delete','wd-library-delete','delete',row.id));card.appendChild(actions);list.appendChild(card);
     });
@@ -159,6 +161,7 @@
   }
 
   async function downloadLatest(id) {
+    event(id, 'download_clicked');
     status('Decrypting your saved PDF on this device...');
     try {
       var loaded = await loadLatestPdf(id);
@@ -168,6 +171,7 @@
   }
 
   async function printLatest(id) {
+    event(id, 'print_clicked');
     var preview = window.open('', '_blank');
     if (!preview) return status('Allow pop-ups for Watchdog so the print-ready PDF can open.', true);
     status('Decrypting your saved PDF for printing on this device...');
@@ -201,10 +205,10 @@
     q('#wd-library-unlock').addEventListener('click', unlock);
     q('#wd-library-new').addEventListener('click', startNew);
     var topNew = q('.wd-library-new-top');
-    if (topNew) topNew.addEventListener('click', function (event) { event.preventDefault(); startNew(); });
-    q('#wd-library-list').addEventListener('click', function (event) {
-      var target=event.target.closest('[data-action]'); if(!target)return; var id=target.dataset.id;
-      if(target.dataset.action==='resume'){rememberApp(id);window.location.href='/anchor/application/2025/';}
+    if (topNew) topNew.addEventListener('click', function (e) { e.preventDefault(); startNew(); });
+    q('#wd-library-list').addEventListener('click', async function (e) {
+      var target=e.target.closest('[data-action]'); if(!target)return; var id=target.dataset.id;
+      if(target.dataset.action==='resume'){rememberApp(id);await event(id,'application_reopened');window.location.href='/anchor/application/2025/';}
       else if(target.dataset.action==='download') downloadLatest(id);
       else if(target.dataset.action==='print') printLatest(id);
       else if(target.dataset.action==='delete') removeApplication(id);

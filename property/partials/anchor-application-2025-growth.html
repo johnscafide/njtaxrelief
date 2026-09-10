@@ -1,0 +1,77 @@
+<section id="wd-anchor-growth" class="wd-growth-panel" aria-label="Keep using Watchdog">
+  <div class="wd-growth-head">
+    <div>
+      <span class="wd-growth-kicker">ONE LAST QUESTION</span>
+      <h3>Where did you find Watchdog?</h3>
+      <p>This helps us understand which outreach is actually helping New Jersey residents.</p>
+    </div>
+    <div class="wd-growth-earned"><strong>+10</strong><span>points earned</span></div>
+  </div>
+
+  <div class="wd-growth-source">
+    <label for="wd-growth-source">Where did you find Watchdog? <span aria-hidden="true">*</span></label>
+    <select id="wd-growth-source" required aria-required="true">
+      <option value="">Choose one</option>
+      <option value="google_search">Google or another search engine</option>
+      <option value="facebook">Facebook</option>
+      <option value="threads">Threads</option>
+      <option value="instagram">Instagram</option>
+      <option value="tiktok">TikTok</option>
+      <option value="friend_family">Friend or family member</option>
+      <option value="real_estate_professional">Realtor or other real estate professional</option>
+      <option value="njpropertytaxrelief">NJPropertyTaxRelief.com</option>
+      <option value="email_newsletter">Email or newsletter</option>
+      <option value="other">Other</option>
+    </select>
+    <div id="wd-growth-other-wrap" hidden>
+      <label for="wd-growth-other">Tell us where</label>
+      <input id="wd-growth-other" maxlength="240" autocomplete="off" placeholder="Website, organization, person, event, etc.">
+    </div>
+    <label class="wd-growth-optin">
+      <input id="wd-growth-optin" type="checkbox">
+      <span><strong>Keep me updated.</strong> Email me occasional Watchdog property and New Jersey tax updates. I can unsubscribe anytime.</span>
+    </label>
+    <button id="wd-growth-save" type="button" class="wd-btn primary" data-update-label="Update answer">Save &amp; continue in Watchdog</button>
+    <p id="wd-growth-status" class="wd-growth-status" role="status" aria-live="polite"></p>
+  </div>
+
+  <div id="wd-growth-next" class="wd-growth-next" hidden>
+    <div class="wd-growth-points-card">
+      <div>
+        <span>YOUR WATCHDOG POINTS</span>
+        <strong id="wd-growth-points-balance">0</strong>
+        <small id="wd-growth-points-level">Scout</small>
+      </div>
+      <p id="wd-growth-points-next">Keep going to reach the next level.</p>
+    </div>
+
+    <div class="wd-growth-actions">
+      <a href="/" data-growth-action="search"><strong>Search a property</strong><span>+1 point per search, up to 5/day</span></a>
+      <a href="/" data-growth-action="save"><strong>Save your first property</strong><span>+5 points</span></a>
+      <a href="/onboarding/" data-growth-action="onboarding"><strong>Finish your Watchdog setup</strong><span>+10 points</span></a>
+      <a href="/home/" data-growth-action="alerts"><strong>Turn on property alerts</strong><span>+10 points for your first alert</span></a>
+    </div>
+
+    <div class="wd-growth-referral">
+      <span class="wd-growth-kicker">RECOMMEND WATCHDOG</span>
+      <h3>Know someone else who could use this?</h3>
+      <p>Share Watchdog with a friend. You earn <strong>5 points after they verify their Watchdog account</strong>. No points are awarded just for entering an email address.</p>
+      <div class="wd-growth-referral-link">
+        <input id="wd-growth-referral-link" readonly aria-label="Your Watchdog referral link">
+        <button id="wd-growth-copy" type="button" class="wd-btn secondary small">Copy link</button>
+      </div>
+      <label for="wd-growth-referral-email">Email it to someone</label>
+      <div class="wd-growth-referral-email">
+        <input id="wd-growth-referral-email" type="email" autocomplete="off" placeholder="friend@example.com">
+        <button id="wd-growth-email" type="button" class="wd-btn secondary">Open email</button>
+      </div>
+      <p class="wd-growth-privacy">The address you type here is not uploaded to Watchdog. Your email app opens with your referral link so you stay in control of the message.</p>
+      <template id="wd-growth-referral-email-copy" data-subject="A free New Jersey property tool I thought you might like">I used Watchdog for New Jersey property information and property tax relief help. Here is my link if you want to try it: {{referral_link}}</template>
+    </div>
+
+    <a class="wd-growth-primary-cta" href="/" data-growth-action="continue">
+      <span><strong>Keep protecting your property with Watchdog</strong><small>Search, save, monitor and understand any New Jersey property.</small></span>
+      <b aria-hidden="true">→</b>
+    </a>
+  </div>
+</section>
