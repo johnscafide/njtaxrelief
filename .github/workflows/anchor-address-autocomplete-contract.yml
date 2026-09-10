@@ -11,6 +11,7 @@ on:
       - 'api/njptr-watchdog-acquisition-page.js'
       - 'property/js/nj-address-autocomplete.js'
       - 'property/tests/anchor-address-autocomplete-contract.mjs'
+      - 'property/tests/anchor-njgis-fallback-contract.mjs'
       - '.github/workflows/anchor-address-autocomplete-contract.yml'
   push:
     branches: [main]
@@ -23,6 +24,7 @@ on:
       - 'api/njptr-watchdog-acquisition-page.js'
       - 'property/js/nj-address-autocomplete.js'
       - 'property/tests/anchor-address-autocomplete-contract.mjs'
+      - 'property/tests/anchor-njgis-fallback-contract.mjs'
       - '.github/workflows/anchor-address-autocomplete-contract.yml'
 
 jobs:
@@ -41,3 +43,5 @@ jobs:
         run: node --check api/njptr-watchdog-acquisition-page.js
       - name: Verify ANCHOR address recovery contract
         run: node property/tests/anchor-address-autocomplete-contract.mjs
+      - name: Verify NJ GIS fallback contract
+        run: node property/tests/anchor-njgis-fallback-contract.mjs
