@@ -229,6 +229,16 @@ export default async function middleware(request) {
 
   if (host !== WATCHDOG_HOST) return next();
 
+  // The ANCHOR estimator's canonical home is NJPropertyTaxRelief.com. That is
+  // the only host where the acquisition injector and the verified Watchdog
+  // result handoff run, so anyone who reaches the raw file on the Watchdog host
+  // is sent back there. The query string is kept for campaign attribution.
+  if (url.pathname === '/anchor-estimator.html' || url.pathname === '/anchor-estimator') {
+    const destination = new URL('/anchor-estimator.html', 'https://njpropertytaxrelief.com');
+    destination.search = url.search;
+    return Response.redirect(destination, 308);
+  }
+
   // WatchdogIndex has its own canonical crawl contract. Keep the legacy
   // NJPropertyTaxRelief robots/sitemaps untouched for the separate legacy site.
   if (url.pathname === INDEXNOW_KEY_PATH) {
