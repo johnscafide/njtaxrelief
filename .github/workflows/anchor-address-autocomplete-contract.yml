@@ -1,0 +1,37 @@
+name: ANCHOR address autocomplete contract
+
+on:
+  pull_request:
+    paths:
+      - 'anchor-estimator.html'
+      - 'anchor-funnel.js'
+      - 'anchor-watchdog-bridge.js'
+      - 'anchor-watchdog-handoff.js'
+      - 'anchor-address-autocomplete-fallback.js'
+      - 'property/tests/anchor-address-autocomplete-contract.mjs'
+      - '.github/workflows/anchor-address-autocomplete-contract.yml'
+  push:
+    branches: [main]
+    paths:
+      - 'anchor-estimator.html'
+      - 'anchor-funnel.js'
+      - 'anchor-watchdog-bridge.js'
+      - 'anchor-watchdog-handoff.js'
+      - 'anchor-address-autocomplete-fallback.js'
+      - 'property/tests/anchor-address-autocomplete-contract.mjs'
+      - '.github/workflows/anchor-address-autocomplete-contract.yml'
+
+jobs:
+  contract:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+      - name: Validate fallback syntax
+        run: node --check anchor-address-autocomplete-fallback.js
+      - name: Validate handoff bootstrap syntax
+        run: node --check anchor-watchdog-handoff.js
+      - name: Verify ANCHOR address recovery contract
+        run: node property/tests/anchor-address-autocomplete-contract.mjs
