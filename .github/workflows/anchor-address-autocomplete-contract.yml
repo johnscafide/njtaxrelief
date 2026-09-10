@@ -8,6 +8,8 @@ on:
       - 'anchor-watchdog-bridge.js'
       - 'anchor-watchdog-handoff.js'
       - 'anchor-address-autocomplete-fallback.js'
+      - 'api/njptr-watchdog-acquisition-page.js'
+      - 'property/js/nj-address-autocomplete.js'
       - 'property/tests/anchor-address-autocomplete-contract.mjs'
       - '.github/workflows/anchor-address-autocomplete-contract.yml'
   push:
@@ -18,6 +20,8 @@ on:
       - 'anchor-watchdog-bridge.js'
       - 'anchor-watchdog-handoff.js'
       - 'anchor-address-autocomplete-fallback.js'
+      - 'api/njptr-watchdog-acquisition-page.js'
+      - 'property/js/nj-address-autocomplete.js'
       - 'property/tests/anchor-address-autocomplete-contract.mjs'
       - '.github/workflows/anchor-address-autocomplete-contract.yml'
 
@@ -33,5 +37,7 @@ jobs:
         run: node --check anchor-address-autocomplete-fallback.js
       - name: Validate handoff bootstrap syntax
         run: node --check anchor-watchdog-handoff.js
+      - name: Validate NJPTR acquisition adapter syntax
+        run: node --check api/njptr-watchdog-acquisition-page.js
       - name: Verify ANCHOR address recovery contract
         run: node property/tests/anchor-address-autocomplete-contract.mjs
