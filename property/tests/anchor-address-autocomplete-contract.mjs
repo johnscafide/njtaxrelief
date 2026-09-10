@@ -34,7 +34,7 @@ const adapterKey=(acquisition.match(/const WATCHDOG_MAPS_BROWSER_KEY = '([^']+)'
 const canonicalKey=(canonicalAddressRuntime.match(/var GMAPS_KEY='([^']+)'/)||[])[1]||'';
 must(adapterKey && canonicalKey && adapterKey===canonicalKey,'NJPTR ANCHOR must use the same maintained Google Maps browser key as Watchdog NJ address search.');
 must(acquisition.includes('function alignAnchorMapsKey(out)'),'NJPTR acquisition adapter must normalize the legacy estimator Maps key before serving it.');
-must(acquisition.includes("if(pathname==='/anchor-estimator.html'){"),'Maps-key normalization must stay scoped to the ANCHOR estimator response.');
-must(acquisition.includes('out=alignAnchorMapsKey(out);'),'ANCHOR response must apply Maps-key normalization before handoff injection.');
+must(acquisition.includes("if(pathname==='/anchor-estimator.html') out=alignAnchorMapsKey(out);"),'Maps-key normalization must stay scoped to the ANCHOR estimator response.');
+must(acquisition.includes("if(pathname==='/anchor-estimator.html') out=injectScript(out,'/anchor-watchdog-handoff.js');"),'Existing ANCHOR handoff injection contract must remain intact.');
 
 console.log('ANCHOR address autocomplete recovery contract passed.');
