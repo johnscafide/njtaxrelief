@@ -4,13 +4,19 @@ on:
   pull_request:
     paths:
       - 'property/js/free-imagery-grid-runtime.js'
+      - 'property/js/map-persistence-runtime.js'
+      - 'property/js/brand-consistency-runtime.js'
       - 'property/tests/streetview-cost-guard-contract.mjs'
+      - 'property/tests/map-persistence-contract.mjs'
       - '.github/workflows/property-map-preview-contract.yml'
   push:
     branches: [main]
     paths:
       - 'property/js/free-imagery-grid-runtime.js'
+      - 'property/js/map-persistence-runtime.js'
+      - 'property/js/brand-consistency-runtime.js'
       - 'property/tests/streetview-cost-guard-contract.mjs'
+      - 'property/tests/map-persistence-contract.mjs'
       - '.github/workflows/property-map-preview-contract.yml'
 
 jobs:
@@ -22,6 +28,8 @@ jobs:
         with:
           node-version: 22
       - name: Verify map runtime syntax
-        run: node --check property/js/free-imagery-grid-runtime.js
+        run: node --check property/js/free-imagery-grid-runtime.js && node --check property/js/map-persistence-runtime.js
       - name: Verify map and Street View spend contract
         run: node property/tests/streetview-cost-guard-contract.mjs
+      - name: Verify persistent Home and lookup maps
+        run: node property/tests/map-persistence-contract.mjs
