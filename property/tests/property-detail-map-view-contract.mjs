@@ -11,18 +11,23 @@ const [indexHtml, legacyHtml, lookup, mapJs, mapCss] = await Promise.all([
 ]);
 
 for (const html of [indexHtml, legacyHtml]) {
-  assert.match(html, /property-detail-map-view\.css\?v=20260911a/);
-  assert.match(html, /property-detail-map-view\.js\?v=20260911a/);
+  assert.match(html, /property-detail-map-view\.css\?v=20260911b/);
+  assert.match(html, /property-detail-map-view\.js\?v=20260911b/);
   assert.doesNotMatch(html, /Have me check it properly/i);
 }
 assert.match(lookup, /Have Watchdog check the property/);
 assert.doesNotMatch(lookup, /Have me check it properly/i);
-assert.match(mapJs, /World_Imagery\/MapServer\/export/);
-assert.match(mapJs, /wd-property-map-pin/);
+assert.match(mapJs, /World_Imagery\/MapServer\/tile\/\{z\}\/\{y\}\/\{x\}/);
+assert.match(mapJs, /L\.map/);
+assert.match(mapJs, /plm-rail/);
+assert.match(mapJs, /pl-track-card/);
+assert.match(mapJs, /wd-property-leaflet-pin/);
 assert.match(mapJs, /watchdogRecentProperties/);
 assert.match(mapJs, /NJ_Geocode\/GeocodeServer\/findAddressCandidates/);
 assert.match(mapJs, /Have Watchdog check the property/);
-assert.match(mapCss, /wd-property-map-view/);
+assert.doesNotMatch(mapJs, /MapServer\/export/);
+assert.match(mapCss, /#plm-rail \.wd-property-map-view/);
+assert.match(mapCss, /wd-index-mapless #plm-rail \.wd-property-map-leaflet\.leaflet-container/);
 assert.match(mapCss, /prefers-reduced-motion/);
 assert.doesNotMatch(mapCss, /border-left/i);
 
