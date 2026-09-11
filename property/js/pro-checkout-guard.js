@@ -103,21 +103,34 @@
     if(shouldTrack)track('pro_billing_toggle',{cadence:'lifetime'});
   }
 
+  async function requireBilling(){
+    var billing=window.WatchdogBilling;
+    if(!billing||typeof billing.invoke!=='function'||typeof billing.client!=='function')throw new Error('Secure billing is unavailable. Please refresh and try again.');
+    var client=billing.client();
+    if(!client)throw new Error('Sign in service is unavailable.');
+    var sessionResult=await client.auth.getSession();
+    var session=sessionResult&&sessionResult.data&&sessionResult.data.session;
+    return{billing:billing,session:session};
+  }
+
   async function lifetimeCheckout(plan){
     if(busy||!LIFETIME[plan])return;busy=true;track('pro_lifetime_checkout_start',{plan:plan,amount_cents:LIFETIME[plan].amount});
     try{
-      var billing=window.WatchdogBilling;var client=billing&&billing.client&&billing.client();if(!client)throw new Error('Sign in service is unavailable.');
-      var sessionResult=await client.auth.getSession();var session=sessionResult&&sessionResult.data&&sessionResult.data.session;
-      if(!session){
+      var ctx=await requireBilling();
+      if(!ctx.session){
         try{sessionStorage.setItem('watchdog:lifetime:pending',plan);}catch(_){ }
         location.href='/property/dashboard?billing=signin&offer=lifetime';return;
       }
-      var result=await client.functions.invoke('create-lifetime-checkout',{body:{tier:plan}});
-      if(result.error)throw result.error;
-      if(!result.data||!result.data.url)throw new Error('Secure checkout did not return a destination.');
-      location.href=result.data.url;
+      var result=await ctx.billing.invoke('create-lifetime-checkout',{tier:plan});
+      if(!result||!result.url)throw new Error('Secure checkout did not return a destination.');
+      location.href=result.url;
     }catch(err){
-      busy=false;console.error('Lifetime checkout failed',err);toast((err&&err.message)||'Lifetime checkout could not be opened.');track('pro_lifetime_checkout_error',{plan:plan});
+      busy=false;console.error('Lifetime checkout failed',err);
+      var msg=(err&&err.message)||'Lifetime checkout could not be opened.';
+      if(err&&err.code==='LIFETIME_ACTIVE_SUBSCRIPTION')msg='This account already has recurring billing. Manage that subscription before switching to Lifetime.';
+      if(err&&err.code==='LIFETIME_ALREADY_ACTIVE')msg='Founding Lifetime is already active on this account.';
+      if(err&&err.code==='WATCHDOG_TEST_NO_REAL_SPEND')msg='This test account cannot create a real charge.';
+      toast(msg);track('pro_lifetime_checkout_error',{plan:plan,code:err&&err.code||''});
     }
   }
 
@@ -127,26 +140,15 @@
     if(state!=='lifetime-success')return;
     var sessionId=params.get('session_id');if(!sessionId){toast('Payment returned without a checkout reference. Contact Watchdog support.');return;}
     try{
-      var billing=window.WatchdogBilling;var client=billing&&billing.client&&billing.client();if(!client)throw new Error('Sign in service is unavailable.');
-      var sessionResult=await client.auth.getSession();var session=sessionResult&&sessionResult.data&&sessionResult.data.session;
-      if(!session)throw new Error('Sign in to the Watchdog account used for checkout to activate Lifetime access.');
-      var result=await client.functions.invoke('complete-lifetime-checkout',{body:{session_id:sessionId}});
-      if(result.error)throw result.error;
-      if(!result.data||!result.data.ok)throw new Error('Lifetime access could not be verified.');
-      var plan=result.data.tier==='pro_plus'?'Pro+':String(result.data.tier||'').replace(/^./,function(c){return c.toUpperCase();});
-      toast(plan+' Founding Lifetime is active. No renewal.');track('pro_lifetime_checkout_complete',{plan:result.data.tier,property_capacity:result.data.property_capacity});
+      var ctx=await requireBilling();
+      if(!ctx.session)throw new Error('Sign in to the Watchdog account used for checkout to activate Lifetime access.');
+      var result=await ctx.billing.invoke('complete-lifetime-checkout',{session_id:sessionId});
+      if(!result||!result.ok)throw new Error('Lifetime access could not be verified.');
+      var plan=result.tier==='pro_plus'?'Pro+':String(result.tier||'').replace(/^./,function(c){return c.toUpperCase();});
+      toast(plan+' Founding Lifetime is active. No renewal.');track('pro_lifetime_checkout_complete',{plan:result.tier,property_capacity:result.property_capacity});
       try{sessionStorage.removeItem('watchdog:lifetime:pending');}catch(_){ }
       cleanCheckoutQuery();
-    }catch(err){console.error('Lifetime activation failed',err);toast((err&&err.message)||'Payment was received but Lifetime access could not be verified. Contact Watchdog support.');track('pro_lifetime_activation_error',{});}
-  }
-
-  function addPointerMotion(){
-    if(window.matchMedia&&window.matchMedia('(prefers-reduced-motion: reduce)').matches)return;
-    document.querySelectorAll('.pro-price-band').forEach(function(band){
-      if(band.dataset.softMotion==='1')return;band.dataset.softMotion='1';
-      band.addEventListener('pointermove',function(ev){if(!document.getElementById('pricing')?.classList.contains('is-lifetime-mode'))return;var r=band.getBoundingClientRect(),x=(ev.clientX-r.left)/r.width-.5,y=(ev.clientY-r.top)/r.height-.5;band.style.setProperty('--wd-rotate-y',(x*1.8)+'deg');band.style.setProperty('--wd-rotate-x',(-y*1.5)+'deg');});
-      band.addEventListener('pointerleave',function(){band.style.removeProperty('--wd-rotate-x');band.style.removeProperty('--wd-rotate-y');});
-    });
+    }catch(err){console.error('Lifetime activation failed',err);toast((err&&err.message)||'Payment was received but Lifetime access could not be verified. Contact Watchdog support.');track('pro_lifetime_activation_error',{code:err&&err.code||''});}
   }
 
   function bindCadence(){
@@ -157,6 +159,6 @@
     },true);
   }
 
-  function init(){ensureCss();rewriteLaunchCopy();addLaunchBar();addLifetimeButton();setCtas('yearly');addPointerMotion();bindCadence();finalizeLifetimeReturn();}
+  function init(){ensureCss();rewriteLaunchCopy();addLaunchBar();addLifetimeButton();setCtas('yearly');bindCadence();finalizeLifetimeReturn();}
   if(document.readyState==='loading')document.addEventListener('DOMContentLoaded',function(){setTimeout(init,0);},{once:true});else setTimeout(init,0);
 })();
