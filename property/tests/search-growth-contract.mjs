@@ -80,25 +80,16 @@ assert.doesNotMatch(countyIntel, /County Watchdog intel · rotating statewide/);
 assert.doesNotMatch(countyIntel, /Explore New Jersey property-tax records by county/);
 assert.doesNotMatch(countyIntel, /Three counties are featured at a time from all 21 New Jersey counties/);
 
-// The landing-page launch message stays in normal hero flow after search so it never
-// overlays the address field. Static markup/copy lives in HTML, presentation in CSS,
-// and JavaScript owns only loading, placement, state, and analytics.
-assert.match(paidLaunch, /PARTIAL_URL='\/property\/partials\/paid-launch\.html'/);
-assert.match(paidLaunch, /CSS_URL='\/property\/css\/paid-launch\.css'/);
-assert.match(paidLaunch, /cloneTemplate\('wd-paid-launch-hero-template'\)/);
-assert.match(paidLaunch, /search\.insertAdjacentElement\('afterend',node\)/);
-assert.match(paidLaunchPartial, /id="wd-paid-launch-hero"/);
-assert.match(paidLaunchPartial, /wdpl-hero-chip/);
-assert.match(paidLaunchPartial, /Professional plans begin Sep 16/);
-assert.match(paidLaunchPartial, /Less than \$2\/day annually/);
-assert.match(paidLaunchPartial, /wdpl-get-started/);
-assert.match(paidLaunchPartial, />Get started <i class="fas fa-arrow-right"><\/i><\/a>/);
-assert.match(paidLaunchCss, /#wd-paid-launch-hero\{box-sizing:border-box;position:relative;z-index:4;width:min\(430px,100%\);margin:14px auto 0/);
-assert.match(paidLaunchCss, /@media\(max-width:768px\)[\s\S]*#wd-paid-launch-hero\{width:min\(430px,100%\);margin:12px auto 0/);
-assert.doesNotMatch(paidLaunchPartial, /wdpl-hero-grid/);
-assert.doesNotMatch(paidLaunchPartial, /wdpl-hero-stat/);
-assert.doesNotMatch(paidLaunchPartial, /wdpl-hero-link/);
-assert.doesNotMatch(paidLaunchPartial, /wdpl-hero-overlay/);
+// Paid enrollment is open. The old September 16 launch surface is permanently retired.
+// Keep a small cleanup shim for cached/legacy pages, but never recreate the banner or launch-list copy.
+assert.match(paidLaunch, /paid-launch banner retired/i);
+assert.match(paidLaunch, /function cleanup\(\)/);
+assert.match(paidLaunch, /wd-paid-launch-banner/);
+assert.match(paidLaunch, /wd-paid-launch-hero/);
+assert.doesNotMatch(paidLaunch, /PARTIAL_URL|cloneTemplate|placeBanner|placeHeroRail/);
+assert.match(paidLaunchPartial, /launch banner retired/i);
+assert.doesNotMatch(paidLaunchPartial, /September 16|Sep 16|Join the launch list|Professional plans begin/i);
+assert.doesNotMatch(paidLaunch, /September 16|Sep 16|Join the launch list|Professional plans begin/i);
 assert.doesNotMatch(paidLaunchCss, /body\.wd-consumer-mode \.pl-search-card\{position:relative;z-index:12\}/);
 
 // Mobile performance work targets the measured high-impression surfaces without removing functionality.
