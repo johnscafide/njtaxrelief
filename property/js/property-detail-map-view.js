@@ -8,10 +8,11 @@
   window.__WATCHDOG_PROPERTY_DETAIL_MAP__=true;
 
   var GEOCODER='https://geo.nj.gov/arcgis/rest/services/Tasks/NJ_Geocode/GeocodeServer/findAddressCandidates';
-  var ESRI_EXPORT='https://server.arcgisonline.com/ArcGIS/rest/services/World_Imagery/MapServer/export';
+  var ESRI_TILES='https://server.arcgisonline.com/ArcGIS/rest/services/World_Imagery/MapServer/tile/{z}/{y}/{x}';
   var requestSeq=0;
   var cache=Object.create(null);
   var scheduled=false;
+  var propertyMap=null;
 
   function clean(v){return String(v==null?'':v).replace(/\s+/g,' ').trim();}
   function esc(v){return clean(v).replace(/[&<>"']/g,function(c){return{'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c];});}
@@ -63,22 +64,47 @@
     return cache[key];
   }
 
-  function aerialUrl(lat,lon){
-    var dLat=.00205;
-    var cos=Math.max(.35,Math.cos(lat*Math.PI/180));
-    var dLon=dLat/cos;
-    var bbox=[lon-dLon,lat-dLat,lon+dLon,lat+dLat].map(function(v){return v.toFixed(6);}).join(',');
-    var p=new URLSearchParams({bbox:bbox,bboxSR:'4326',imageSR:'4326',size:'1400,520',format:'jpg',f:'image'});
-    return ESRI_EXPORT+'?'+p.toString();
-  }
-
   function mapsUrl(lat,lon,address){
     var q=address||[lat,lon].join(',');
     return'https://www.google.com/maps/search/?api=1&query='+encodeURIComponent(q+', New Jersey');
   }
 
+  function destroyMap(){
+    if(propertyMap){
+      try{propertyMap.remove();}catch(_error){}
+      propertyMap=null;
+    }
+  }
+
   function removeStale(){
+    destroyMap();
     document.querySelectorAll('#plm-photos .wd-property-map-view').forEach(function(node){node.remove();});
+  }
+
+  function initLeafletMap(node,coords,address){
+    if(!node||typeof L==='undefined')return;
+    try{
+      propertyMap=L.map(node,{
+        zoomControl:true,
+        attributionControl:false,
+        scrollWheelZoom:false,
+        doubleClickZoom:true,
+        dragging:true,
+        tap:true
+      }).setView([coords.lat,coords.lon],18);
+      L.tileLayer(ESRI_TILES,{maxZoom:20,minZoom:1}).addTo(propertyMap);
+      var icon=L.divIcon({
+        className:'wd-property-leaflet-pin-wrap',
+        html:'<span class="wd-property-leaflet-pin"><i class="fas fa-location-dot"></i></span>',
+        iconSize:[52,52],
+        iconAnchor:[26,26]
+      });
+      L.marker([coords.lat,coords.lon],{icon:icon,title:address,keyboard:false}).addTo(propertyMap);
+      requestAnimationFrame(function(){
+        if(propertyMap)try{propertyMap.invalidateSize(false);}catch(_error){}
+      });
+      setTimeout(function(){if(propertyMap)try{propertyMap.invalidateSize(false);}catch(_error){}},180);
+    }catch(_error){destroyMap();}
   }
 
   function render(ctx,coords,seq){
@@ -86,18 +112,19 @@
     removeStale();
     if(!coords)return;
     var link=mapsUrl(coords.lat,coords.lon,ctx.address);
+    var mapId='wd-property-map-'+seq;
     var card=document.createElement('section');
     card.className='wd-property-map-view';
     card.dataset.address=ctx.address;
     card.setAttribute('aria-label','Aerial map of '+ctx.address);
-    card.innerHTML='<a class="wd-property-map-canvas" href="'+esc(link)+'" target="_blank" rel="noopener" aria-label="Open '+esc(ctx.address)+' in Google Maps">'+
-      '<img src="'+esc(aerialUrl(coords.lat,coords.lon))+'" alt="Aerial map around '+esc(ctx.address)+'" loading="eager" decoding="async">'+
-      '<span class="wd-property-map-pin" aria-hidden="true"><i class="fas fa-location-dot"></i></span>'+ 
+    card.innerHTML='<div class="wd-property-map-canvas">'+
+      '<div class="wd-property-map-leaflet" id="'+mapId+'" role="img" aria-label="Interactive aerial map around '+esc(ctx.address)+'"></div>'+ 
       '<span class="wd-property-map-shade" aria-hidden="true"></span>'+ 
       '<span class="wd-property-map-label"><small>PROPERTY LOCATION</small><strong>'+esc(ctx.address)+'</strong>'+(ctx.locality?'<em>'+esc(ctx.locality)+'</em>':'')+'</span>'+ 
-      '<span class="wd-property-map-open"><i class="fas fa-arrow-up-right-from-square"></i> Open map</span>'+ 
-      '</a><div class="wd-property-map-credit">Aerial imagery · Esri World Imagery</div>';
+      '<a class="wd-property-map-open" href="'+esc(link)+'" target="_blank" rel="noopener"><i class="fas fa-arrow-up-right-from-square"></i> Open map</a>'+ 
+      '</div><div class="wd-property-map-credit">Aerial imagery · Esri World Imagery</div>';
     ctx.hero.insertAdjacentElement('afterend',card);
+    initLeafletMap(document.getElementById(mapId),coords,ctx.address);
   }
 
   function syncCopy(){
@@ -110,7 +137,7 @@
     scheduled=false;
     syncCopy();
     var ctx=addressContext();
-    if(!ctx)return;
+    if(!ctx){removeStale();return;}
     var existing=document.querySelector('#plm-photos .wd-property-map-view');
     if(existing&&existing.dataset.address===ctx.address)return;
     var seq=++requestSeq;
