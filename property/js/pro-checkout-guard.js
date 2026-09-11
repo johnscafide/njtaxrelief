@@ -28,6 +28,12 @@
     n.textContent=message;n.hidden=false;clearTimeout(window.__wdLifetimeToast);window.__wdLifetimeToast=setTimeout(function(){n.hidden=true;},8000);
   }
 
+  function cleanCheckoutQuery(){
+    try{
+      var u=new URL(location.href);u.searchParams.delete('checkout');u.searchParams.delete('session_id');history.replaceState({},'',u.pathname+(u.searchParams.toString()?'?'+u.searchParams.toString():'')+u.hash);
+    }catch(_){ }
+  }
+
   function rewriteLaunchCopy(){
     var head=document.querySelector('.pro-price-head');
     if(head){
@@ -115,6 +121,25 @@
     }
   }
 
+  async function finalizeLifetimeReturn(){
+    var params=new URLSearchParams(location.search||'');var state=params.get('checkout');
+    if(state==='lifetime-cancelled'){toast('Checkout cancelled. Nothing was charged.');cleanCheckoutQuery();return;}
+    if(state!=='lifetime-success')return;
+    var sessionId=params.get('session_id');if(!sessionId){toast('Payment returned without a checkout reference. Contact Watchdog support.');return;}
+    try{
+      var billing=window.WatchdogBilling;var client=billing&&billing.client&&billing.client();if(!client)throw new Error('Sign in service is unavailable.');
+      var sessionResult=await client.auth.getSession();var session=sessionResult&&sessionResult.data&&sessionResult.data.session;
+      if(!session)throw new Error('Sign in to the Watchdog account used for checkout to activate Lifetime access.');
+      var result=await client.functions.invoke('complete-lifetime-checkout',{body:{session_id:sessionId}});
+      if(result.error)throw result.error;
+      if(!result.data||!result.data.ok)throw new Error('Lifetime access could not be verified.');
+      var plan=result.data.tier==='pro_plus'?'Pro+':String(result.data.tier||'').replace(/^./,function(c){return c.toUpperCase();});
+      toast(plan+' Founding Lifetime is active. No renewal.');track('pro_lifetime_checkout_complete',{plan:result.data.tier,property_capacity:result.data.property_capacity});
+      try{sessionStorage.removeItem('watchdog:lifetime:pending');}catch(_){ }
+      cleanCheckoutQuery();
+    }catch(err){console.error('Lifetime activation failed',err);toast((err&&err.message)||'Payment was received but Lifetime access could not be verified. Contact Watchdog support.');track('pro_lifetime_activation_error',{});}
+  }
+
   function addPointerMotion(){
     if(window.matchMedia&&window.matchMedia('(prefers-reduced-motion: reduce)').matches)return;
     document.querySelectorAll('.pro-price-band').forEach(function(band){
@@ -132,6 +157,6 @@
     },true);
   }
 
-  function init(){ensureCss();rewriteLaunchCopy();addLaunchBar();addLifetimeButton();setCtas('yearly');addPointerMotion();bindCadence();}
+  function init(){ensureCss();rewriteLaunchCopy();addLaunchBar();addLifetimeButton();setCtas('yearly');addPointerMotion();bindCadence();finalizeLifetimeReturn();}
   if(document.readyState==='loading')document.addEventListener('DOMContentLoaded',function(){setTimeout(init,0);},{once:true});else setTimeout(init,0);
 })();
