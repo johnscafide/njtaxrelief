@@ -15,17 +15,19 @@ function ensureBefore(text, marker, addition, label, path) {
 for (const path of ['property/index.html', 'property-lookup.html']) {
   await update(path, function(text) {
     text = text.split('Have me check it properly').join('Have Watchdog check the property');
+    text = text.replace(/<link rel="stylesheet" href="\/property\/css\/property-detail-map-view\.css\?v=[^"]+">\n?/g, '');
+    text = text.replace(/<script src="\/property\/js\/property-detail-map-view\.js\?v=[^"]+"><\/script>\n?/g, '');
     text = ensureBefore(
       text,
       '</head>',
-      '  <link rel="stylesheet" href="/property/css/property-detail-map-view.css?v=20260911a">\n',
+      '  <link rel="stylesheet" href="/property/css/property-detail-map-view.css?v=20260911b">\n',
       'closing head',
       path
     );
     text = ensureBefore(
       text,
       '</body>',
-      '<script src="/property/js/property-detail-map-view.js?v=20260911a"></script>\n',
+      '<script src="/property/js/property-detail-map-view.js?v=20260911b"></script>\n',
       'closing body',
       path
     );
