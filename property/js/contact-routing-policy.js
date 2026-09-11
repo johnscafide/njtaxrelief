@@ -1,6 +1,7 @@
 /* Watchdog public contact-routing policy.
    Customer-facing contact paths are brand-first: Contact Watchdog or Account Support.
-   Direct staff email addresses, phone numbers, personal-name contact links and agent-email actions must not be exposed. */
+   Direct staff email addresses, phone numbers and personal contact destinations must not be exposed.
+   Explicit agent-match cards may show the licensed agent identity while keeping contact routing inside Watchdog. */
 (function () {
   'use strict';
   if (window.__WATCHDOG_CONTACT_ROUTING_POLICY__) return;
@@ -101,6 +102,7 @@
     nodes.forEach(function (textNode) {
       var parent = textNode.parentElement;
       if (!parent || /^(SCRIPT|STYLE|TEXTAREA|INPUT|OPTION)$/i.test(parent.tagName)) return;
+      if (parent.closest && parent.closest('.z-match-name')) return;
       var next = cleanTextValue(textNode.nodeValue);
       if (next !== textNode.nodeValue) textNode.nodeValue = next;
     });
@@ -135,6 +137,32 @@
     });
   }
 
+  function polishAgentMatches(scope) {
+    var root = scope && scope.querySelectorAll ? scope : document;
+    var alertCopy = 'Licensed New Jersey agents available to help with this property.';
+    root.querySelectorAll('.z-matches-alert span').forEach(function (span) {
+      if (String(span.textContent || '') !== alertCopy) span.textContent = alertCopy;
+    });
+    root.querySelectorAll('.z-match-card').forEach(function (card) {
+      if (card.getAttribute('data-watchdog-agent-polished') === '1') return;
+      var avatar = card.querySelector('.z-match-avatar');
+      var name = card.querySelector('.z-match-name');
+      var identity = String((avatar && avatar.getAttribute('src')) || '') + ' ' + String((name && name.textContent) || '');
+      var key = /johnprofile|john scafide/i.test(identity) ? 'john' : (/heatherheadshot|heather scafide/i.test(identity) ? 'heather' : '');
+      if (!key) return;
+      card.setAttribute('data-watchdog-agent-polished', '1');
+      if (name) name.textContent = key === 'john' ? 'John Scafide' : 'Heather Scafide';
+      var stats = card.querySelectorAll('.z-match-stat');
+      if (key === 'john') {
+        if (stats[0]) stats[0].innerHTML = '<strong>Property + tax</strong> intelligence';
+        if (stats[1]) stats[1].innerHTML = '<strong>Buyer, seller &amp; investor</strong> strategy';
+      } else {
+        if (stats[0]) stats[0].innerHTML = '<strong>Negotiation + contract</strong> guidance';
+        if (stats[1]) stats[1].innerHTML = '<strong>Buyer &amp; seller</strong> strategy';
+      }
+    });
+  }
+
   function removeDirectAgentImages(scope) {
     var root = scope && scope.querySelectorAll ? scope : document;
     root.querySelectorAll('img[src*="johnprofile"],img[src*="heatherheadshot"]').forEach(function (img) {
@@ -149,6 +177,7 @@
     cleanText(root && root.nodeType ? root : document.body);
     if (includeMetadata) cleanMetadata();
     replaceAgentRail(root);
+    polishAgentMatches(root);
     removeDirectAgentImages(root);
   }
 
