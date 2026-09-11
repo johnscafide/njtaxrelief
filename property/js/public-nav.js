@@ -168,7 +168,7 @@
   /* Keep the index surface lean: each runtime here owns one visible concern. */
   function loadIndexEnhancements(){
     if(!isPropertyIndex())return;
-    ensureStylesheet('wd-index-runtime-polish','/property/css/index-runtime-polish.css');
+    ensureStylesheet('wd-index-runtime-polish','/property/css/index-runtime-polish.css?v=20260911-hero2');
     ensureStylesheet('wd-anchor-home-funnel-style','/property/css/anchor-home-funnel.css');
     ensureIndexScorePlacementContract();
     loadScript('wd-showcase-script','/property/js/landing-showcase.js');
