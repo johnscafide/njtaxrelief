@@ -2,7 +2,12 @@ import { createClient } from '@supabase/supabase-js';
 import Stripe from 'stripe';
 
 const CANONICAL_SITE = 'https://www.watchdogindex.com';
-const ALLOWED_HOSTS = new Set(['watchdogindex.com', 'www.watchdogindex.com']);
+const PRODUCTION_HOSTS = new Set([
+  'watchdogindex.com',
+  'www.watchdogindex.com',
+  'njpropertytaxrelief.com',
+  'www.njpropertytaxrelief.com'
+]);
 const CAPACITY = { agent: 25, pro: 250, pro_plus: 2500 } as const;
 const FOUNDING = {
   agent: { amount: 149900, label: 'Agent' },
@@ -16,7 +21,8 @@ function origin(req: Request) {
   const raw = req.headers.get('origin') || '';
   try {
     const u = new URL(raw);
-    if (u.protocol === 'https:' && ALLOWED_HOSTS.has(u.hostname.toLowerCase())) return raw;
+    const host = u.hostname.toLowerCase();
+    if (PRODUCTION_HOSTS.has(host) || host === 'localhost' || host === '127.0.0.1' || host.endsWith('.vercel.app')) return raw;
   } catch (_) {}
   return CANONICAL_SITE;
 }
