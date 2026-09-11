@@ -1,19 +1,30 @@
 import { createClient } from '@supabase/supabase-js';
 import Stripe from 'stripe';
 
+const CANONICAL_SITE = 'https://www.watchdogindex.com';
+const PRODUCTION_HOSTS = new Set([
+  'watchdogindex.com',
+  'www.watchdogindex.com',
+  'njpropertytaxrelief.com',
+  'www.njpropertytaxrelief.com'
+]);
 const CAPACITY = { agent: 25, pro: 250, pro_plus: 2500 } as const;
 const FOUNDING = { agent: 149900, pro: 349900, pro_plus: 999900 } as const;
 type Tier = keyof typeof FOUNDING;
 
-function cors(req: Request) {
+function origin(req: Request) {
   const raw = req.headers.get('origin') || '';
-  let allowed = 'https://www.watchdogindex.com';
   try {
-    const host = new URL(raw).hostname.toLowerCase();
-    if (host === 'watchdogindex.com' || host === 'www.watchdogindex.com') allowed = raw;
+    const u = new URL(raw);
+    const host = u.hostname.toLowerCase();
+    if (PRODUCTION_HOSTS.has(host) || host === 'localhost' || host === '127.0.0.1' || host.endsWith('.vercel.app')) return raw;
   } catch (_) {}
+  return CANONICAL_SITE;
+}
+
+function cors(req: Request) {
   return {
-    'Access-Control-Allow-Origin': allowed,
+    'Access-Control-Allow-Origin': origin(req),
     'Access-Control-Allow-Headers': 'authorization, apikey, content-type',
     'Access-Control-Allow-Methods': 'POST, OPTIONS',
     'Vary': 'Origin'
