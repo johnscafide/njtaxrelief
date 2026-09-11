@@ -1,6 +1,7 @@
 /* Watchdog property-detail aerial map.
- * Keeps the ROBUST property hero and adds a location visual beneath it.
- * Uses saved lookup coordinates when available, otherwise NJ's public geocoder.
+ * Keeps the ROBUST property hero focused and adds a compact location card to
+ * the supporting property rail. Uses saved coordinates when available,
+ * otherwise New Jersey's public geocoder.
  */
 (function(){
   'use strict';
@@ -22,7 +23,8 @@
     var hero=document.querySelector('#plm-photos .wd-mapless-property-hero');
     var title=hero&&hero.querySelector('.wd-mapless-address');
     var detail=document.querySelector('#plm .plm-addr');
-    if(!hero||!title)return null;
+    var rail=document.getElementById('plm-rail');
+    if(!hero||!title||!rail)return null;
     var address=clean(title.textContent);
     var locality='';
     if(detail){
@@ -30,7 +32,7 @@
       locality=clean(line&&line.textContent);
     }
     if(!address)return null;
-    return{hero:hero,address:address,locality:locality};
+    return{hero:hero,rail:rail,address:address,locality:locality};
   }
 
   function recentCoordinates(address){
@@ -78,14 +80,14 @@
 
   function removeStale(){
     destroyMap();
-    document.querySelectorAll('#plm-photos .wd-property-map-view').forEach(function(node){node.remove();});
+    document.querySelectorAll('#plm .wd-property-map-view').forEach(function(node){node.remove();});
   }
 
   function initLeafletMap(node,coords,address){
     if(!node||typeof L==='undefined')return;
     try{
       propertyMap=L.map(node,{
-        zoomControl:true,
+        zoomControl:false,
         attributionControl:false,
         scrollWheelZoom:false,
         doubleClickZoom:true,
@@ -96,19 +98,17 @@
       var icon=L.divIcon({
         className:'wd-property-leaflet-pin-wrap',
         html:'<span class="wd-property-leaflet-pin"><i class="fas fa-location-dot"></i></span>',
-        iconSize:[52,52],
-        iconAnchor:[26,26]
+        iconSize:[46,46],
+        iconAnchor:[23,23]
       });
       L.marker([coords.lat,coords.lon],{icon:icon,title:address,keyboard:false}).addTo(propertyMap);
-      requestAnimationFrame(function(){
-        if(propertyMap)try{propertyMap.invalidateSize(false);}catch(_error){}
-      });
+      requestAnimationFrame(function(){if(propertyMap)try{propertyMap.invalidateSize(false);}catch(_error){}});
       setTimeout(function(){if(propertyMap)try{propertyMap.invalidateSize(false);}catch(_error){}},180);
     }catch(_error){destroyMap();}
   }
 
   function render(ctx,coords,seq){
-    if(seq!==requestSeq||!ctx.hero.isConnected)return;
+    if(seq!==requestSeq||!ctx.hero.isConnected||!ctx.rail.isConnected)return;
     removeStale();
     if(!coords)return;
     var link=mapsUrl(coords.lat,coords.lon,ctx.address);
@@ -116,14 +116,16 @@
     var card=document.createElement('section');
     card.className='wd-property-map-view';
     card.dataset.address=ctx.address;
-    card.setAttribute('aria-label','Aerial map of '+ctx.address);
-    card.innerHTML='<div class="wd-property-map-canvas">'+
-      '<div class="wd-property-map-leaflet" id="'+mapId+'" role="img" aria-label="Interactive aerial map around '+esc(ctx.address)+'"></div>'+ 
-      '<span class="wd-property-map-shade" aria-hidden="true"></span>'+ 
-      '<span class="wd-property-map-label"><small>PROPERTY LOCATION</small><strong>'+esc(ctx.address)+'</strong>'+(ctx.locality?'<em>'+esc(ctx.locality)+'</em>':'')+'</span>'+ 
-      '<a class="wd-property-map-open" href="'+esc(link)+'" target="_blank" rel="noopener"><i class="fas fa-arrow-up-right-from-square"></i> Open map</a>'+ 
-      '</div><div class="wd-property-map-credit">Aerial imagery · Esri World Imagery</div>';
-    ctx.hero.insertAdjacentElement('afterend',card);
+    card.setAttribute('aria-label','Property location for '+ctx.address);
+    card.innerHTML='<div class="wd-property-map-head">'+
+      '<div><small>PROPERTY LOCATION</small><strong>Map view</strong>'+(ctx.locality?'<span>'+esc(ctx.locality)+'</span>':'')+'</div>'+ 
+      '<a href="'+esc(link)+'" target="_blank" rel="noopener" aria-label="Open '+esc(ctx.address)+' in Google Maps"><i class="fas fa-arrow-up-right-from-square"></i> Open</a>'+ 
+      '</div>'+ 
+      '<div class="wd-property-map-canvas"><div class="wd-property-map-leaflet" id="'+mapId+'" role="img" aria-label="Interactive aerial map around '+esc(ctx.address)+'"></div></div>'+ 
+      '<div class="wd-property-map-credit">Esri World Imagery</div>';
+    var track=document.getElementById('pl-track-card');
+    if(track&&track.parentNode===ctx.rail)track.insertAdjacentElement('afterend',card);
+    else ctx.rail.prepend(card);
     initLeafletMap(document.getElementById(mapId),coords,ctx.address);
   }
 
@@ -138,7 +140,7 @@
     syncCopy();
     var ctx=addressContext();
     if(!ctx){removeStale();return;}
-    var existing=document.querySelector('#plm-photos .wd-property-map-view');
+    var existing=document.querySelector('#plm-rail .wd-property-map-view');
     if(existing&&existing.dataset.address===ctx.address)return;
     var seq=++requestSeq;
     var recent=recentCoordinates(ctx.address);
