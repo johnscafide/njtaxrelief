@@ -1,5 +1,22 @@
 (function(){
 'use strict';
+(function installPrivateCopy(){
+  function apply(){
+    var vault=document.querySelector('.wd-step[data-step="vault"] .wd-callout.privacy');
+    if(vault){
+      var vaultStrong=vault.querySelector('strong'),vaultCopy=vault.querySelector('p');
+      if(vaultStrong)vaultStrong.textContent='Private by design';
+      if(vaultCopy)vaultCopy.textContent='Your sensitive answers are encrypted on this device before they are saved. Watchdog stores only encrypted application data. Your recovery key is never stored with your account or encrypted application.';
+    }
+    var ssn=document.querySelector('.wd-step[data-step="ssn"] .wd-callout.privacy');
+    if(ssn){
+      var ssnStrong=ssn.querySelector('strong'),ssnCopy=ssn.querySelector('p');
+      if(ssnStrong)ssnStrong.textContent='Encrypted before saving';
+      if(ssnCopy)ssnCopy.textContent='Watchdog does not store a readable copy of this number. It is encrypted on this device before the application is saved.';
+    }
+  }
+  if(document.readyState==='loading')document.addEventListener('DOMContentLoaded',apply,{once:true});else apply();
+})();
 (function installPdfCleanup(){
   if(!window.PDFLib||!window.PDFLib.PDFDocument||!window.PDFLib.PDFName)return;
   var proto=window.PDFLib.PDFDocument.prototype;
