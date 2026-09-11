@@ -9,6 +9,7 @@
     "public-performance:prepare": "node scripts/apply-public-performance.mjs",
     "web-signals-growth:prepare": "node scripts/apply-web-signals-growth-ui.mjs",
     "live-soft-launch-ui:prepare": "node scripts/apply-live-soft-launch-ui.mjs",
+    "property-detail-map:prepare": "node scripts/apply-property-detail-map-ui.mjs",
     "content-glossary:generate": "node scripts/generate-content-glossary.mjs",
     "test:content-glossary": "node scripts/generate-content-glossary.mjs --check-only",
     "test:third-party": "node property/tests/third-party-foundation-contract.mjs",
@@ -21,8 +22,9 @@
     "test:pro-shared-header": "node property/tests/pro-shared-header-contract.mjs",
     "test:dashboard-visuals": "node property/tests/dashboard-visual-intelligence-contract.mjs",
     "test:live-soft-launch-ui": "node property/tests/live-soft-launch-ui-contract.mjs",
+    "test:property-detail-map": "node property/tests/property-detail-map-view-contract.mjs",
     "test:content-architecture": "node scripts/check-content-architecture.mjs",
-    "vercel-build:full": "npm run search-growth:cohort && npm run public-performance:prepare && npm run web-signals-growth:prepare && npm run live-soft-launch-ui:prepare && npm run test:third-party && npm run test:farm-map-basemap && npm run test:external-signals && npm run test:search-growth && npm run test:insight-linking && npm run test:data-center && npm run test:anchor-autocomplete && npm run test:pro-shared-header && npm run test:dashboard-visuals && npm run test:live-soft-launch-ui && npm run content-glossary:generate && npm run pagefind:index",
+    "vercel-build:full": "npm run search-growth:cohort && npm run public-performance:prepare && npm run web-signals-growth:prepare && npm run live-soft-launch-ui:prepare && npm run property-detail-map:prepare && npm run test:third-party && npm run test:farm-map-basemap && npm run test:external-signals && npm run test:search-growth && npm run test:insight-linking && npm run test:data-center && npm run test:anchor-autocomplete && npm run test:pro-shared-header && npm run test:dashboard-visuals && npm run test:live-soft-launch-ui && npm run test:property-detail-map && npm run content-glossary:generate && npm run pagefind:index",
     "vercel-build": "node scripts/vercel-build-once.mjs"
   },
   "dependencies": {
