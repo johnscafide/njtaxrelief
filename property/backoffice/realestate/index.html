@@ -1,0 +1,219 @@
+<!doctype html>
+<html lang="en" data-access-require="developer">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <meta name="robots" content="noindex,nofollow,noarchive">
+  <meta name="referrer" content="same-origin">
+  <title>Real Estate Command Center | Watchdog Backoffice</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@600;700;800&family=Source+Sans+3:wght@400;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="/property/backoffice/realestate/realestate.css">
+</head>
+<body>
+  <div class="re-app">
+    <aside class="re-sidebar">
+      <a class="re-brand" href="/property/backoffice/" aria-label="Watchdog Backoffice">
+        <span class="re-mark">W</span>
+        <span><b>WATCHDOG</b><small>Backoffice</small></span>
+      </a>
+      <nav class="re-nav" aria-label="Backoffice navigation">
+        <a href="/property/backoffice/"><span>01</span>Lead Intelligence</a>
+        <a class="active" href="/property/backoffice/realestate/"><span>02</span>Real Estate OS</a>
+        <a href="/property/developer/"><span>03</span>Developer Hub</a>
+        <a href="/property/dashboard"><span>04</span>Watchdog Dashboard</a>
+      </nav>
+      <div class="re-sidebar-foot">
+        <span class="re-private-dot"></span>
+        <div><b>Developer only</b><small>Private business workspace</small></div>
+      </div>
+    </aside>
+
+    <main class="re-main">
+      <header class="re-topbar">
+        <div>
+          <span class="re-kicker">BACKOFFICE / REAL ESTATE</span>
+          <h1>Real Estate Command Center</h1>
+          <p>Clients, lending, home search, transactions and commission pipeline in one operating view.</p>
+        </div>
+        <div class="re-actions">
+          <button class="re-button re-button-quiet" id="re-import" type="button">Restore</button>
+          <button class="re-button re-button-quiet" id="re-export" type="button">Backup</button>
+          <button class="re-button re-button-quiet" id="re-settings" type="button">Goal</button>
+          <button class="re-button re-button-primary" id="re-add-client" type="button">+ Add client</button>
+        </div>
+      </header>
+
+      <section class="re-stat-grid" aria-label="Business summary">
+        <article><span>Active clients</span><strong id="stat-active">0</strong><small id="stat-active-sub">0 need attention</small></article>
+        <article><span>Approved buying power</span><strong id="stat-approved">$0</strong><small>pre-approved active buyers</small></article>
+        <article><span>Under contract volume</span><strong id="stat-contract">$0</strong><small>contract through clear to close</small></article>
+        <article><span>Potential GCI</span><strong id="stat-potential">$0</strong><small>all open opportunities</small></article>
+        <article class="featured"><span>Weighted GCI</span><strong id="stat-weighted">$0</strong><small>stage-adjusted forecast</small></article>
+      </section>
+
+      <section class="re-command-row">
+        <div class="re-view-tabs" role="tablist" aria-label="Workspace views">
+          <button class="active" data-view="pipeline" type="button">Pipeline</button>
+          <button data-view="closings" type="button">Closings</button>
+          <button data-view="performance" type="button">Performance</button>
+        </div>
+        <div class="re-filters">
+          <label class="re-search"><span class="sr-only">Search clients</span><input id="re-search" type="search" placeholder="Search client, town, lender or next action"></label>
+          <select id="re-type-filter" aria-label="Filter client type">
+            <option value="all">All clients</option>
+            <option value="buyer">Buyers</option>
+            <option value="seller">Sellers</option>
+            <option value="investor">Investors</option>
+          </select>
+          <select id="re-attention-filter" aria-label="Filter attention status">
+            <option value="all">All status</option>
+            <option value="attention">Needs attention</option>
+            <option value="overdue">Overdue next action</option>
+            <option value="closing30">Closing in 30 days</option>
+          </select>
+        </div>
+      </section>
+
+      <section id="view-pipeline" class="re-view active" aria-label="Client pipeline">
+        <div class="re-board-shell">
+          <div class="re-board" id="re-board" aria-live="polite"></div>
+        </div>
+        <aside class="re-attention">
+          <div class="re-panel-head">
+            <div><span>DAILY FOCUS</span><h2>Attention needed</h2></div>
+            <b id="attention-count">0</b>
+          </div>
+          <div class="re-attention-list" id="re-attention-list"></div>
+        </aside>
+      </section>
+
+      <section id="view-closings" class="re-view" aria-label="Closing command center">
+        <div class="re-panel re-closing-panel">
+          <div class="re-panel-head wide">
+            <div><span>TRANSACTIONS</span><h2>Closing command center</h2><p>Contract dates, next milestones and closings in chronological order.</p></div>
+          </div>
+          <div id="re-closing-list" class="re-closing-list"></div>
+        </div>
+      </section>
+
+      <section id="view-performance" class="re-view" aria-label="Business performance">
+        <div class="re-performance-grid">
+          <article class="re-panel re-goal-panel">
+            <div class="re-panel-head wide"><div><span>ANNUAL PRODUCTION</span><h2>GCI goal</h2></div><button class="re-link-button" id="goal-edit-inline" type="button">Edit goal</button></div>
+            <div class="re-goal-amount"><strong id="goal-closed">$0</strong><span>closed of <b id="goal-target">$0</b></span></div>
+            <div class="re-progress"><i id="goal-progress"></i></div>
+            <div class="re-goal-meta"><span><b id="goal-weighted">$0</b> weighted open pipeline</span><span><b id="goal-remaining">$0</b> remaining to goal</span></div>
+          </article>
+          <article class="re-panel">
+            <div class="re-panel-head wide"><div><span>PIPELINE QUALITY</span><h2>Stage forecast</h2></div></div>
+            <div id="re-stage-forecast" class="re-metric-list"></div>
+          </article>
+          <article class="re-panel">
+            <div class="re-panel-head wide"><div><span>ACQUISITION</span><h2>Client sources</h2></div></div>
+            <div id="re-source-metrics" class="re-metric-list"></div>
+          </article>
+          <article class="re-panel">
+            <div class="re-panel-head wide"><div><span>OPERATIONS</span><h2>Activity indicators</h2></div></div>
+            <div id="re-activity-metrics" class="re-metric-list"></div>
+          </article>
+        </div>
+      </section>
+    </main>
+  </div>
+
+  <dialog id="client-dialog" class="re-dialog re-client-dialog">
+    <form id="client-form">
+      <div class="re-dialog-head">
+        <div><span>CLIENT WORKSPACE</span><h2 id="client-dialog-title">Add client</h2><p>Track the relationship, financing, search, transaction and commission forecast.</p></div>
+        <button type="button" class="re-close" data-close="client-dialog" aria-label="Close">×</button>
+      </div>
+      <input type="hidden" name="id">
+      <div class="re-form-sections">
+        <fieldset>
+          <legend>Client</legend>
+          <div class="re-form-grid">
+            <label class="wide">Client name<input name="name" required autocomplete="off" placeholder="Client or household name"></label>
+            <label>Client type<select name="type"><option value="buyer">Buyer</option><option value="seller">Seller</option><option value="investor">Investor</option></select></label>
+            <label>Pipeline stage<select name="stage" id="form-stage"></select></label>
+            <label>Email<input name="email" type="email" autocomplete="off"></label>
+            <label>Phone<input name="phone" autocomplete="off"></label>
+            <label>Lead source<input name="source" placeholder="Sphere, Watchdog, referral..."></label>
+            <label>Priority<select name="priority"><option value="normal">Normal</option><option value="high">High</option><option value="critical">Critical</option></select></label>
+          </div>
+        </fieldset>
+
+        <fieldset>
+          <legend>Financing & search</legend>
+          <div class="re-form-grid">
+            <label>Lender<input name="lender" placeholder="Lender or loan officer"></label>
+            <label>Loan type<input name="loan_type" placeholder="Conventional, FHA, cash..."></label>
+            <label>Approved amount<input name="approved_amount" type="number" min="0" step="1000" placeholder="425000"></label>
+            <label>Pre-approval expires<input name="approval_expires" type="date"></label>
+            <label>Search minimum<input name="search_min" type="number" min="0" step="1000"></label>
+            <label>Search maximum<input name="search_max" type="number" min="0" step="1000"></label>
+            <label class="wide">Target areas<input name="target_areas" placeholder="Washington Twp, Mantua, Wenonah"></label>
+            <label>Homes viewed<input name="homes_viewed" type="number" min="0" step="1"></label>
+            <label>Offers written<input name="offers_written" type="number" min="0" step="1"></label>
+          </div>
+        </fieldset>
+
+        <fieldset>
+          <legend>Transaction & commission</legend>
+          <div class="re-form-grid">
+            <label>Expected / contract price<input name="transaction_value" type="number" min="0" step="1000"></label>
+            <label>Commission rate %<input name="commission_rate" type="number" min="0" max="10" step="0.01" placeholder="2.5"></label>
+            <label>Commission flat amount<input name="commission_flat" type="number" min="0" step="100" placeholder="Optional"></label>
+            <label>Referral fee %<input name="referral_fee" type="number" min="0" max="100" step="1" placeholder="0"></label>
+            <label>Contract date<input name="contract_date" type="date"></label>
+            <label>Closing date<input name="closing_date" type="date"></label>
+            <label>Property address<input name="property_address" placeholder="Under contract / listing address"></label>
+            <label>Attorney / title<input name="attorney_title" placeholder="Attorney, title company or both"></label>
+          </div>
+        </fieldset>
+
+        <fieldset>
+          <legend>Next action</legend>
+          <div class="re-form-grid">
+            <label class="wide">Next action<input name="next_action" placeholder="Call lender, send listings, schedule showing..."></label>
+            <label>Due date<input name="next_action_due" type="date"></label>
+            <label>Last contact<input name="last_contact" type="date"></label>
+            <label class="wide">Notes<textarea name="notes" rows="4" placeholder="Client context, needs, objections, deadlines and transaction notes"></textarea></label>
+          </div>
+        </fieldset>
+      </div>
+      <div class="re-dialog-actions">
+        <button type="button" class="re-button re-button-danger" id="client-delete" hidden>Delete</button>
+        <span class="re-dialog-spacer"></span>
+        <button type="button" class="re-button re-button-quiet" data-close="client-dialog">Cancel</button>
+        <button type="submit" class="re-button re-button-primary">Save client</button>
+      </div>
+    </form>
+  </dialog>
+
+  <dialog id="goal-dialog" class="re-dialog re-small-dialog">
+    <form id="goal-form">
+      <div class="re-dialog-head">
+        <div><span>BUSINESS TARGET</span><h2>Annual GCI goal</h2><p>Used for production progress and remaining pipeline calculations.</p></div>
+        <button type="button" class="re-close" data-close="goal-dialog" aria-label="Close">×</button>
+      </div>
+      <div class="re-form-grid one">
+        <label>Annual GCI goal<input name="annual_goal" type="number" min="0" step="1000" required></label>
+        <label>Closed GCI to date<input name="closed_gci" type="number" min="0" step="100" required></label>
+      </div>
+      <div class="re-dialog-actions">
+        <button type="button" class="re-button re-button-quiet" data-close="goal-dialog">Cancel</button>
+        <button type="submit" class="re-button re-button-primary">Save goal</button>
+      </div>
+    </form>
+  </dialog>
+
+  <input id="re-import-file" type="file" accept="application/json,.json" hidden>
+  <div class="re-toast" id="re-toast" role="status" aria-live="polite"></div>
+
+  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2/dist/umd/supabase.js"></script>
+  <script src="/property/js/access-guard.js"></script>
+  <script src="/property/backoffice/realestate/realestate.js" defer></script>
+</body>
+</html>
