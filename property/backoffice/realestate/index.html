@@ -1,5 +1,5 @@
 <!doctype html>
-<html lang="en" data-access-require="developer">
+<html lang="en" class="access-pending" data-access-require="developer">
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width,initial-scale=1">
@@ -14,15 +14,15 @@
 <body>
   <div class="re-app">
     <aside class="re-sidebar">
-      <a class="re-brand" href="/property/backoffice/" aria-label="Watchdog Backoffice">
+      <a class="re-brand" href="/backoffice" aria-label="Watchdog Backoffice">
         <span class="re-mark">W</span>
         <span><b>WATCHDOG</b><small>Backoffice</small></span>
       </a>
       <nav class="re-nav" aria-label="Backoffice navigation">
-        <a href="/property/backoffice/"><span>01</span>Lead Intelligence</a>
-        <a class="active" href="/property/backoffice/realestate/"><span>02</span>Real Estate OS</a>
-        <a href="/property/developer/"><span>03</span>Developer Hub</a>
-        <a href="/property/dashboard"><span>04</span>Watchdog Dashboard</a>
+        <a href="/backoffice"><span>01</span>Lead Intelligence</a>
+        <a class="active" href="/backoffice/realestate"><span>02</span>Real Estate OS</a>
+        <a href="/developer"><span>03</span>Developer Hub</a>
+        <a href="/dashboard"><span>04</span>Watchdog Dashboard</a>
       </nav>
       <div class="re-sidebar-foot">
         <span class="re-private-dot"></span>
@@ -200,7 +200,7 @@
       </div>
       <div class="re-form-grid one">
         <label>Annual GCI goal<input name="annual_goal" type="number" min="0" step="1000" required></label>
-        <label>Closed GCI to date<input name="closed_gci" type="number" min="0" step="100" required></label>
+        <label>Closed GCI before tracked clients<input name="closed_gci" type="number" min="0" step="100" required></label>
       </div>
       <div class="re-dialog-actions">
         <button type="button" class="re-button re-button-quiet" data-close="goal-dialog">Cancel</button>
