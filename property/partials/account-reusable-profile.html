@@ -1,0 +1,35 @@
+<section id="ac-reusable-profile" class="ac-section ac-reusable-profile">
+  <header>
+    <div>
+      <span>REUSABLE DETAILS</span>
+      <h2>Name &amp; mailing details</h2>
+      <p>Keep stable details here so future Watchdog forms can start with less typing.</p>
+    </div>
+  </header>
+  <div class="ac-reusable-grid">
+    <label>Legal first name<input id="ac-r-first" autocomplete="given-name" maxlength="80"></label>
+    <label>Middle name / initial<input id="ac-r-middle" autocomplete="additional-name" maxlength="80"></label>
+    <label>Legal last name<input id="ac-r-last" autocomplete="family-name" maxlength="100"></label>
+    <label class="wide">Mailing / home address<input id="ac-r-address" autocomplete="street-address" maxlength="180"></label>
+    <label>City<input id="ac-r-city" autocomplete="address-level2" maxlength="100"></label>
+    <label>State<input id="ac-r-state" autocomplete="address-level1" maxlength="2"></label>
+    <label>ZIP code<input id="ac-r-zip" autocomplete="postal-code" maxlength="10"></label>
+    <label>NJ municipality code<input id="ac-r-municipality" inputmode="numeric" maxlength="4"></label>
+  </div>
+  <div class="ac-reusable-meta" data-reusable-meta hidden>
+    <span><i class="fas fa-circle-check"></i> <span data-reusable-source></span></span>
+    <span data-reusable-updated></span>
+  </div>
+  <div class="ac-reusable-warning"><i class="fas fa-shield-halved"></i> Only reusable account details belong here. Social Security numbers, income, disability answers, tax amounts, recovery keys and tax-year filing status stay out of your general Watchdog profile.</div>
+  <div class="ac-reusable-actions"><button type="button" id="ac-r-save"><i class="fas fa-check"></i> Save reusable details</button><span id="ac-r-note" role="status" aria-live="polite"></span></div>
+  <div hidden aria-hidden="true">
+    <span data-reusable-copy="saved">Saved. These details can be reused in future Watchdog forms.</span>
+    <span data-reusable-copy="saving">Saving…</span>
+    <span data-reusable-copy="failed">Could not save reusable details.</span>
+    <span data-reusable-copy="state_error">Enter a two-letter state code.</span>
+    <span data-reusable-copy="zip_error">Enter a valid ZIP code.</span>
+    <span data-reusable-copy="municipality_error">Municipality code must be four digits.</span>
+    <span data-reusable-copy="account_source">Saved from Account</span>
+    <span data-reusable-copy="anchor_source">Saved from your ANCHOR/PAS-1 application</span>
+  </div>
+</section>

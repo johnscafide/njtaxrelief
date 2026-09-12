@@ -53,7 +53,17 @@
     observer.observe(document.body,{childList:true,subtree:true});
   }
 
+  function loadSetupNudge(){
+    if(document.querySelector('script[data-profile-setup-nudge]'))return;
+    var script=document.createElement('script');
+    script.src='/property/js/profile-setup-nudge.js';
+    script.defer=true;
+    script.dataset.profileSetupNudge='1';
+    document.head.appendChild(script);
+  }
+
   function init(){
+    loadSetupNudge();
     fetch(PARTIAL,{cache:'default'})
       .then(function(response){if(!response.ok)throw new Error('partial');return response.text();})
       .then(mount)

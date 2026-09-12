@@ -1,0 +1,56 @@
+<div id="wd-account-identity-source" hidden>
+  <template id="wd-account-signin-security-template">
+    <section class="ac-section ac-signin-security" id="ac-signin-security">
+      <header>
+        <div>
+          <span>SIGN-IN &amp; SECURITY</span>
+          <h2>Ways to sign in</h2>
+          <p>Connect more than one sign-in method so you can get back into the same Watchdog account without creating duplicates.</p>
+        </div>
+      </header>
+      <div class="ac-signin-grid">
+        <div class="ac-signin-row" data-signin-row="email">
+          <span class="ac-signin-brand email"><i class="fas fa-envelope"></i></span>
+          <span class="ac-signin-copy"><b>Email</b><small data-signin-email></small></span>
+          <button type="button" class="ac-signin-action ghost" disabled>Connected</button>
+        </div>
+        <div class="ac-signin-row" data-signin-row="google">
+          <span class="ac-signin-brand google">G</span>
+          <span class="ac-signin-copy"><b>Google</b><small data-signin-state>Not connected</small></span>
+          <button type="button" class="ac-signin-action" data-signin-provider="google">Connect</button>
+        </div>
+        <div class="ac-signin-row" data-signin-row="facebook">
+          <span class="ac-signin-brand facebook">f</span>
+          <span class="ac-signin-copy"><b>Facebook</b><small data-signin-state>Not connected</small></span>
+          <button type="button" class="ac-signin-action" data-signin-provider="facebook">Connect</button>
+        </div>
+        <div class="ac-signin-row" data-signin-row="linkedin_oidc">
+          <span class="ac-signin-brand linkedin_oidc">in</span>
+          <span class="ac-signin-copy"><b>LinkedIn</b><small data-signin-state>Not connected</small></span>
+          <button type="button" class="ac-signin-action" data-signin-provider="linkedin_oidc">Connect</button>
+        </div>
+      </div>
+      <p class="ac-signin-note" id="ac-signin-note" role="status" aria-live="polite" data-signin-note>
+        Watchdog never posts to a connected social account. Connecting only adds another secure way to sign in.
+      </p>
+      <div hidden aria-hidden="true">
+        <span data-signin-copy="connected">Connected to this Watchdog account</span>
+        <span data-signin-copy="not_connected">Not connected</span>
+        <span data-signin-copy="connect">Connect</span>
+        <span data-signin-copy="disconnect">Disconnect</span>
+        <span data-signin-copy="default_note">Watchdog never posts to a connected social account. Connecting only adds another secure way to sign in.</span>
+        <span data-signin-copy="popup">Finish connecting in the secure window.</span>
+        <span data-signin-copy="no_change">No changes made.</span>
+        <span data-signin-copy="keep_one">Keep at least one sign-in method connected.</span>
+        <span data-signin-copy="linking_disabled">Social sign-in linking is not enabled for this provider yet.</span>
+        <span data-signin-copy="unchanged">Your account is unchanged.</span>
+      </div>
+    </section>
+  </template>
+  <template id="wd-account-setup-banner-template">
+    <section id="ac-setup-banner" class="ac-setup-banner">
+      <div><span>FINISH SETUP</span><h2>Finish setting up Watchdog</h2><p>Add your home area and a few preferences so Watchdog can organize your workspace. You can change everything later.</p></div>
+      <a data-setup-link>Continue setup <i class="fas fa-arrow-right"></i></a>
+    </section>
+  </template>
+</div>

@@ -1,0 +1,53 @@
+name: NJW-335 Account profile and sign-in contract
+
+on:
+  pull_request:
+    paths:
+      - 'property/account/index.html'
+      - 'property/css/account-member-profile.css'
+      - 'property/css/anchor-application-profile-save.css'
+      - 'property/css/profile-setup-nudge.css'
+      - 'property/js/watchdog-identity-manager.js'
+      - 'property/js/account-identities.js'
+      - 'property/js/account-reusable-profile.js'
+      - 'property/js/profile-setup-nudge.js'
+      - 'property/js/landing-anchor-jump.js'
+      - 'property/js/anchor-application-profile-sync.js'
+      - 'property/js/anchor-application-social-link.js'
+      - 'property/partials/account-identity-security.html'
+      - 'property/partials/account-reusable-profile.html'
+      - 'property/partials/profile-setup-nudge.html'
+      - 'property/partials/anchor-application-profile-save.html'
+      - 'property/tests/account-identity-manager-contract.mjs'
+      - 'property/tests/account-reusable-profile-contract.mjs'
+      - 'property/tests/anchor-reusable-profile-sync-contract.mjs'
+      - 'property/tests/profile-setup-nudge-contract.mjs'
+      - 'property/tests/onboarding-discovery-contract.mjs'
+      - 'supabase/migrations/20260912172000_watchdog_reusable_member_profile_v1.sql'
+      - '.github/workflows/njw335-account-profile-ci.yml'
+  workflow_dispatch:
+
+jobs:
+  contract:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+      - name: Check browser JavaScript syntax
+        run: |
+          node --check property/js/watchdog-identity-manager.js
+          node --check property/js/account-identities.js
+          node --check property/js/account-reusable-profile.js
+          node --check property/js/profile-setup-nudge.js
+          node --check property/js/landing-anchor-jump.js
+          node --check property/js/anchor-application-profile-sync.js
+          node --check property/js/anchor-application-social-link.js
+      - name: Run account and privacy contracts
+        run: |
+          node property/tests/account-identity-manager-contract.mjs
+          node property/tests/account-reusable-profile-contract.mjs
+          node property/tests/anchor-reusable-profile-sync-contract.mjs
+          node property/tests/profile-setup-nudge-contract.mjs
+          node property/tests/onboarding-discovery-contract.mjs
