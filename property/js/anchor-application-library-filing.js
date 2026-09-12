@@ -1,0 +1,14 @@
+(function(){
+'use strict';
+var list=document.getElementById('wd-library-list');
+if(!list||!window.WatchdogAnchorVault)return;
+var db;try{db=window.WatchdogAnchorVault.supabaseClient();}catch(_){return;}
+var busy=false,timer=null;
+function q(s,r){return(r||document).querySelector(s)}function qa(s,r){return Array.prototype.slice.call((r||document).querySelectorAll(s))}
+function fmt(value){if(!value)return'';try{return new Intl.DateTimeFormat('en-US',{month:'short',day:'numeric',year:'numeric'}).format(new Date(value+'T12:00:00'))}catch(_){return value}}
+function chip(text,filed){var s=document.createElement('span');s.className='wd-library-filing-chip'+(filed?' is-filed':'');s.textContent=text;return s}
+async function refresh(){if(busy)return;var cards=qa('.wd-library-card[data-id]',list);if(!cards.length)return;busy=true;try{var ids=cards.map(function(c){return c.dataset.id}).filter(Boolean);var states=await db.from('anchor_application_filing_state').select('application_id,filing_status,filed_on,filing_method').in('application_id',ids);var reminders=await db.from('anchor_application_reminders').select('application_id,offset_days,status,scheduled_for').in('application_id',ids);var deadlines=await db.from('anchor_program_deadlines').select('tax_year,deadline_date,source_url,active').eq('active',true).eq('tax_year',2025).limit(1);var stateMap={},remMap={};(states.data||[]).forEach(function(r){stateMap[r.application_id]=r});(reminders.data||[]).forEach(function(r){if(['scheduled','processing'].indexOf(r.status)<0)return;(remMap[r.application_id]||(remMap[r.application_id]=[])).push(r)});cards.forEach(function(card){var id=card.dataset.id,old=q('.wd-library-filing-summary',card);if(old)old.remove();var wrap=document.createElement('div');wrap.className='wd-library-filing-summary';var state=stateMap[id];if(!state||state.filing_status==='not_filed')wrap.appendChild(chip('Not filed',false));else if(state.filing_status==='ready_to_file')wrap.appendChild(chip('Ready to file',false));else if(state.filing_status==='mailed')wrap.appendChild(chip('Mailed'+(state.filed_on?' '+fmt(state.filed_on):''),true));else if(state.filing_status==='filed_other')wrap.appendChild(chip('Filed'+(state.filed_on?' '+fmt(state.filed_on):''),true));if(remMap[id]&&remMap[id].length)wrap.appendChild(chip(remMap[id].length+' reminder'+(remMap[id].length===1?'':'s')+' active',false));if(deadlines.data&&deadlines.data[0]&&(!state||['mailed','filed_other'].indexOf(state.filing_status)<0))wrap.appendChild(chip('Deadline '+fmt(deadlines.data[0].deadline_date),false));var meta=q('.wd-library-meta',card);if(meta)meta.insertAdjacentElement('afterend',wrap);else card.appendChild(wrap)})}catch(_){}finally{busy=false}}
+function queue(){clearTimeout(timer);timer=setTimeout(refresh,80)}
+new MutationObserver(queue).observe(list,{childList:true,subtree:true});
+queue();
+})();
