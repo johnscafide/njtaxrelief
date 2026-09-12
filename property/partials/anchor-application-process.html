@@ -1,0 +1,79 @@
+<div id="wd-anchor-process-ui" class="wd-anchor-process-ui">
+  <div class="wd-anchor-savebar" aria-label="Application saving controls">
+    <div><span class="wd-anchor-save-dot" aria-hidden="true"></span><strong data-anchor-save-state>Changes save automatically</strong><small data-anchor-save-time></small></div>
+    <button type="button" class="wd-anchor-save-exit" data-anchor-save-exit>Save &amp; exit</button>
+  </div>
+
+  <nav class="wd-anchor-section-nav" aria-label="Application sections">
+    <button type="button" data-anchor-jump="account">Account</button>
+    <button type="button" data-anchor-jump="profile">Eligibility</button>
+    <button type="button" data-anchor-jump="identity">Applicant</button>
+    <button type="button" data-anchor-jump="address">Property</button>
+    <button type="button" data-anchor-jump="anc-details">Income</button>
+    <button type="button" data-anchor-jump="review">Review</button>
+  </nav>
+
+  <button type="button" class="wd-anchor-help-launch" data-anchor-help-open>Need help?</button>
+  <div class="wd-anchor-help-shade" data-anchor-help-close hidden></div>
+  <aside class="wd-anchor-help-drawer" aria-hidden="true" aria-label="Application help">
+    <div class="wd-anchor-help-head"><strong>Help with this step</strong><button type="button" aria-label="Close help" data-anchor-help-close>&times;</button></div>
+    <div data-anchor-help-body><p>Choose a section in the application to see a short explanation here.</p></div>
+    <p class="wd-anchor-help-note">Watchdog explains the form, but the State of New Jersey makes the final eligibility decision.</p>
+  </aside>
+
+  <template data-anchor-help-step="profile"><h3>Why filing status and age?</h3><p>These answers help route you to the official 2025 ANC-1 or PAS-1 form. They are not used to make the State’s final eligibility decision.</p></template>
+  <template data-anchor-help-step="disability"><h3>Why disability benefits?</h3><p>The 2025 form routing rules ask about Social Security Disability and Railroad Retirement Disability benefits. Your answer can affect which official form applies.</p></template>
+  <template data-anchor-help-step="address"><h3>Why the municipality code?</h3><p>The official State form requires the four-digit county/municipality code for the New Jersey home. Watchdog can help look it up from governed property records.</p></template>
+  <template data-anchor-help-step="ssn"><h3>Why a Social Security number?</h3><p>The official State form requires it. Watchdog encrypts sensitive application answers in your Private Vault before they are saved.</p></template>
+  <template data-anchor-help-step="property"><h3>Why block and lot?</h3><p>Block, lot and qualifier identify the property on official municipal records and on the State form. Watchdog can provide a reference lookup, but you remain in control of the form values.</p></template>
+  <template data-anchor-help-step="pas-income"><h3>Why both income years?</h3><p>PAS-1 includes income questions for both years shown on the form. Enter 0 when zero is the correct amount rather than leaving a required amount blank.</p></template>
+  <template data-anchor-help-step="review"><h3>Review before filing</h3><p>Check the generated State PDF carefully. Watchdog prepares the form; it does not submit the application to New Jersey for you.</p></template>
+
+  <section class="wd-anchor-reuse" data-anchor-reuse hidden>
+    <div><strong>Reuse safe details from a prior application?</strong><p>Watchdog found an older encrypted application. You can reuse names, address, municipality code and block/lot only. Income, disability answers, filing status, Social Security numbers, tax amounts and recovery keys are never copied.</p></div>
+    <div class="wd-anchor-reuse-actions"><button type="button" data-anchor-reuse-yes>Reuse safe details</button><button type="button" data-anchor-reuse-no>Not now</button></div>
+  </section>
+
+  <template id="wd-anchor-review-audit-template">
+    <section class="wd-anchor-review-audit">
+      <div class="wd-anchor-review-head"><div><p>FINAL CHECK</p><h3>Filing readiness</h3></div><button type="button" class="wd-anchor-review-pdf" data-anchor-review-pdf>Review PDF</button></div>
+      <div class="wd-anchor-review-checks">
+        <div data-audit="applicant"><span>Applicant information</span><strong></strong></div>
+        <div data-audit="address"><span>Address</span><strong></strong></div>
+        <div data-audit="property"><span>Property information</span><strong></strong></div>
+        <div data-audit="income"><span>Income / required zeros</span><strong></strong></div>
+        <div data-audit="form"><span>Official form selected</span><strong></strong></div>
+      </div>
+    </section>
+  </template>
+
+  <template id="wd-anchor-filing-center-template">
+    <section id="wd-anchor-filing-center" class="wd-anchor-filing-center">
+      <div class="wd-anchor-filing-head"><p>FILING CENTER</p><h3>Your application is prepared. Finish the filing steps below.</h3></div>
+      <ol class="wd-anchor-filing-checklist">
+        <li><span>1</span><div><strong>Review the official PDF</strong><small>Confirm names, address, numbers and form selections before filing.</small></div><button type="button" data-filing-review>Review</button></li>
+        <li><span>2</span><div><strong>Download or print</strong><small>Keep a copy for your records.</small></div></li>
+        <li><span>3</span><div><strong>Sign where required</strong><small>Use the signature instructions printed on the official State form.</small></div></li>
+        <li><span>4</span><div><strong>File using the official instructions</strong><small>Watchdog prepares the form but does not submit it for you.</small></div></li>
+        <li><span>5</span><div><strong>Mark it filed in Watchdog</strong><small>This keeps your account record and reminders accurate.</small></div></li>
+      </ol>
+      <div class="wd-anchor-deadline" data-filing-deadline hidden><strong>Verified filing deadline</strong><span data-filing-deadline-date></span><a data-filing-deadline-source target="_blank" rel="noopener">Official NJ source</a></div>
+      <div class="wd-anchor-filing-status">
+        <strong>Filing status</strong>
+        <div class="wd-anchor-filing-buttons">
+          <button type="button" data-filing-status="ready_to_file">Ready to file</button>
+          <button type="button" data-filing-status="mailed">Mailed</button>
+          <button type="button" data-filing-status="filed_other">Filed another way</button>
+        </div>
+        <label data-filing-method-wrap hidden><span>How did you file?</span><input type="text" maxlength="80" data-filing-method placeholder="Online, in person, preparer, other"></label>
+        <p data-filing-status-copy></p>
+      </div>
+      <div class="wd-anchor-reminders">
+        <strong>Email reminders</strong><p>Use the verified State deadline. Filing the application cancels pending reminders.</p>
+        <label><input type="checkbox" data-reminder="14"> Remind me 14 days before</label>
+        <label><input type="checkbox" data-reminder="7"> Remind me 7 days before</label>
+        <small data-reminder-status></small>
+      </div>
+    </section>
+  </template>
+</div>
