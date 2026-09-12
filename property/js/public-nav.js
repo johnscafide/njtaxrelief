@@ -170,8 +170,10 @@
     if(!isPropertyIndex())return;
     ensureStylesheet('wd-index-runtime-polish','/property/css/index-runtime-polish.css?v=20260911-hero2');
     ensureStylesheet('wd-anchor-home-funnel-style','/property/css/anchor-home-funnel.css');
+    ensureStylesheet('wd-landing-anchor-jump-style','/property/css/landing-anchor-jump.css?v=20260912a');
     ensureIndexScorePlacementContract();
     loadScript('wd-showcase-script','/property/js/landing-showcase.js');
+    loadScript('wd-landing-anchor-jump-script','/property/js/landing-anchor-jump.js?v=20260912a');
     loadScript('wd-farm-showcase-placement-script','/property/js/farm-showcase-placement.js');
     loadScript('wd-public-score-on-demand-script','/property/js/public-score-on-demand.js');
     loadScript('wd-robust-brand-script','/property/js/robust-public-brand.js');
