@@ -14,5 +14,7 @@ assert.match(account,/mailing_zip/);
 assert.match(account,/municipality_code/);
 assert.match(account,/set_my_reusable_profile_v1/);
 assert.match(account,/tax-year filing status stay out of your general Watchdog profile/i);
-assert.doesNotMatch(account,/gross_income|nj_taxable_income|social_security|\.ssn|disability|birth_year/i);
+assert.match(account,/Social Security numbers, income, disability answers, tax amounts, recovery keys/i);
+assert.doesNotMatch(account,/gross_income|nj_taxable_income|social_security|\.ssn|birth_year/i);
+assert.doesNotMatch(account,/p_(?:gross_income|nj_taxable_income|filing_status|birth_year|ssn|disability)/i);
 console.log('NJW-335 Account reusable profile contract passed');
