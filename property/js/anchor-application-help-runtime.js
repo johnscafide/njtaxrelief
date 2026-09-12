@@ -1,0 +1,11 @@
+(function(){
+'use strict';
+var drawer=null,shade=null,copyHost=null,started=false;
+function q(s,r){return(r||document).querySelector(s)}
+function qa(s,r){return Array.prototype.slice.call((r||document).querySelectorAll(s))}
+function close(){if(!drawer||!shade)return;drawer.classList.remove('is-open');shade.classList.remove('is-open');drawer.setAttribute('aria-hidden','true')}
+function open(step){if(!drawer||!shade||!copyHost)return;var source=q('[data-anchor-help-step="'+step+'"]',copyHost),title=q('[data-anchor-help-title]',drawer),body=q('[data-anchor-help-body]',drawer);if(title)title.textContent=source&&source.dataset.helpTitle||'Application help';if(body){body.innerHTML='';if(source)Array.from(source.childNodes).forEach(function(n){body.appendChild(n.cloneNode(true))});else{var p=document.createElement('p');p.textContent='Review the current question and use the official State instructions if you need filing-specific guidance.';body.appendChild(p)}}drawer.classList.add('is-open');shade.classList.add('is-open');drawer.setAttribute('aria-hidden','false')}
+function mount(){if(started)return true;copyHost=q('[data-anchor-experience-copy]');if(!copyHost)return false;var template=q('#wd-anchor-help-drawer-template',copyHost);if(!template||!template.content)return false;qa('body > .wd-anchor-help-shade').forEach(function(node){node.remove()});var fragment=template.content.cloneNode(true);shade=q('.wd-anchor-help-shade',fragment);drawer=q('.wd-anchor-help-drawer',fragment);if(!shade||!drawer)return false;document.body.appendChild(fragment);shade.addEventListener('click',close);qa('[data-anchor-help-close]',drawer).forEach(function(button){button.addEventListener('click',close)});document.addEventListener('click',function(event){var trigger=event.target.closest('.wd-anchor-why,[data-anchor-help-open]');if(!trigger)return;event.preventDefault();event.stopImmediatePropagation();var step=trigger.closest('.wd-step');open(step&&step.dataset.step||window.WatchdogAnchorApplication&&window.WatchdogAnchorApplication.getCurrentStep&&window.WatchdogAnchorApplication.getCurrentStep()||'review')},true);document.addEventListener('keydown',function(event){if(event.key==='Escape')close()});started=true;return true}
+function boot(attempt){if(mount())return;if(attempt<80)setTimeout(function(){boot(attempt+1)},50)}
+boot(0);
+})();
