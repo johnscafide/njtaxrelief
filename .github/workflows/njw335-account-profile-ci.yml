@@ -18,6 +18,7 @@ on:
       - 'property/tests/account-reusable-profile-contract.mjs'
       - 'property/tests/anchor-reusable-profile-sync-contract.mjs'
       - 'property/tests/profile-setup-nudge-contract.mjs'
+      - 'property/tests/onboarding-discovery-contract.mjs'
       - 'supabase/migrations/20260912172000_watchdog_reusable_member_profile_v1.sql'
       - '.github/workflows/njw335-account-profile-ci.yml'
   workflow_dispatch:
@@ -45,3 +46,4 @@ jobs:
           node property/tests/account-reusable-profile-contract.mjs
           node property/tests/anchor-reusable-profile-sync-contract.mjs
           node property/tests/profile-setup-nudge-contract.mjs
+          node property/tests/onboarding-discovery-contract.mjs
