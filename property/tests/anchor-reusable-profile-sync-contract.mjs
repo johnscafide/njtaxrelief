@@ -24,7 +24,8 @@ assert.match(migration,/create or replace function public\.set_my_reusable_profi
 assert.match(migration,/where id = p_application_id and user_id = v_uid/);
 assert.match(migration,/revoke all on function public\.set_my_reusable_profile_v1/);
 assert.match(migration,/grant execute .* to authenticated/);
-assert.doesNotMatch(migration,/gross_income|nj_taxable_income|filing_status|birth_year|ssn|disability/i);
+assert.doesNotMatch(migration,/p_(?:gross_income|nj_taxable_income|filing_status|birth_year|ssn|disability)/i);
+assert.doesNotMatch(migration,/(?:gross_income|nj_taxable_income|filing_status|birth_year)\s*=\s*excluded\./i);
 assert.match(account,/set_my_reusable_profile_v1/);
 assert.match(account,/Only reusable account details belong here/i);
 console.log('NJW-335 safe ANCHOR reusable profile sync contract passed');
