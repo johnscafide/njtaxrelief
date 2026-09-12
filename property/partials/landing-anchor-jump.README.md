@@ -1,1 +1,0 @@
-This partial is loaded only on the canonical Watchdog homepage by `property/js/landing-anchor-jump.js`. It intentionally lives outside JavaScript so the customer-facing shortcut copy remains editable content rather than runtime-owned text.
