@@ -5,6 +5,7 @@
 
   var STYLE='/property/css/brand-consistency.css';
   var UNIVERSAL='/property/js/watchdog-universal-menu.js';
+  var ANCHOR_APPS_MENU='/property/js/anchor-applications-menu-runtime.js?v=20260912a';
   var CITY_ADDRESS='/property/js/city-address-runtime.js?v=20260823a';
   var LANDING_RECENTS='/property/js/landing-recent-intelligence.js?v=20260824a';
   var FREE_GRID_IMAGERY='/property/js/free-imagery-grid-runtime.js';
@@ -48,6 +49,10 @@
     if(window.WatchdogUniversalMenu){window.WatchdogUniversalMenu.refresh();return;}
     ensureScript(UNIVERSAL,'watchdog-universal-menu-runtime');
   }
+  function ensureAnchorApplicationsMenu(){
+    if(window.__WATCHDOG_ANCHOR_APPLICATIONS_MENU__)return;
+    ensureScript(ANCHOR_APPS_MENU,'watchdog-anchor-applications-menu-runtime');
+  }
   function ensureCityAddress(){
     if(window.__WATCHDOG_CITY_ADDRESS_RUNTIME__)return;
     ensureScript(CITY_ADDRESS,'watchdog-city-address-runtime');
@@ -85,6 +90,7 @@
   function run(){
     ensureStylesheet(STYLE);
     ensureUniversal();
+    ensureAnchorApplicationsMenu();
     ensureCityAddress();
     ensureFreeGridImagery();
     ensurePropertyImagery();
