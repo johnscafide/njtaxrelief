@@ -13,6 +13,7 @@
   <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@500;600;700;800&family=Source+Sans+3:wght@400;500;600;700&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="/property/css/anchor-application.css">
   <link rel="stylesheet" href="/property/css/anchor-applications.css">
+  <link rel="stylesheet" href="/property/css/anchor-applications-filing.css?v=20260912a">
   <link rel="stylesheet" href="/property/css/anchor-estimates.css">
 </head>
 <body>
@@ -80,6 +81,15 @@
       </section>
     </main>
 
+    <template id="wd-library-filing-row-template">
+      <div class="wd-library-filing-row">
+        <div data-library-filing-status><span>FILING STATUS</span><strong></strong></div>
+        <div data-library-filing-deadline hidden><span>STATE DEADLINE</span><strong></strong></div>
+        <div data-library-filing-reminders hidden><span>REMINDERS</span><strong></strong></div>
+      </div>
+    </template>
+    <template id="wd-library-manage-filing-template"><button type="button" class="wd-btn secondary" data-filing-manage>Manage filing</button></template>
+
     <footer class="wd-app-footer">Private Vault data is decrypted locally in your browser. Watchdog is not the State of New Jersey and does not determine eligibility.</footer>
   </div>
 
@@ -89,5 +99,6 @@
   <script src="/property/js/anchor-estimate-library.js"></script>
   <script src="/property/js/anchor-application-vault.js"></script>
   <script src="/property/js/anchor-applications.js"></script>
+  <script src="/property/js/anchor-applications-filing.js?v=20260912a"></script>
 </body>
 </html>

@@ -1,0 +1,115 @@
+<div id="wd-anchor-lifecycle-copy" hidden>
+  <template id="wd-lifecycle-toolbar-template">
+    <div class="wd-lifecycle-toolbar" aria-label="Application save controls">
+      <div class="wd-lifecycle-save-state" role="status" aria-live="polite"><span class="wd-lifecycle-save-dot" aria-hidden="true"></span><span data-lifecycle-save-copy>Not saved yet</span></div>
+      <div class="wd-lifecycle-tools">
+        <button type="button" class="wd-lifecycle-link" data-lifecycle-help>Need help?</button>
+        <button type="button" class="wd-lifecycle-save-exit" data-lifecycle-save-exit>Save &amp; Exit</button>
+      </div>
+    </div>
+  </template>
+
+  <template id="wd-lifecycle-nav-template">
+    <nav class="wd-lifecycle-nav" aria-label="Application sections">
+      <button type="button" data-lifecycle-target="account">Account</button>
+      <button type="button" data-lifecycle-target="vault">Security</button>
+      <button type="button" data-lifecycle-target="profile">Eligibility</button>
+      <button type="button" data-lifecycle-target="identity">Applicant</button>
+      <button type="button" data-lifecycle-target="address">Home</button>
+      <button type="button" data-lifecycle-target="property">Property</button>
+      <button type="button" data-lifecycle-target="review">Review</button>
+    </nav>
+  </template>
+
+  <template id="wd-lifecycle-review-template">
+    <section class="wd-review-audit" aria-labelledby="wd-review-audit-title">
+      <div class="wd-review-audit-head"><div><span>FINAL CHECK</span><h3 id="wd-review-audit-title">Ready for the official form?</h3></div><strong data-review-audit-count></strong></div>
+      <div class="wd-review-audit-list">
+        <div data-audit="identity"><span class="wd-audit-icon">✓</span><span>Applicant information</span><strong></strong></div>
+        <div data-audit="address"><span class="wd-audit-icon">✓</span><span>Address and municipality</span><strong></strong></div>
+        <div data-audit="property"><span class="wd-audit-icon">✓</span><span>Property information</span><strong></strong></div>
+        <div data-audit="income"><span class="wd-audit-icon">✓</span><span>Income information</span><strong></strong></div>
+        <div data-audit="required"><span class="wd-audit-icon">✓</span><span>Required answers</span><strong></strong></div>
+        <div data-audit="route"><span class="wd-audit-icon">✓</span><span>Official form selected</span><strong></strong></div>
+      </div>
+      <p>Watchdog checks the application for missing answers, but you are responsible for reviewing the completed State form before filing it.</p>
+    </section>
+  </template>
+
+  <template id="wd-lifecycle-filing-template">
+    <section id="wd-filing-center" class="wd-filing-center" aria-labelledby="wd-filing-center-title">
+      <div class="wd-filing-center-head">
+        <div><span class="wd-filing-kicker">FILING CENTER</span><h3 id="wd-filing-center-title">Your application is prepared. Finish the filing.</h3></div>
+        <span class="wd-filing-state-badge" data-filing-badge>Ready to file</span>
+      </div>
+      <ol class="wd-filing-checklist">
+        <li><span>1</span><div><strong>Review the official PDF</strong><small>Confirm every answer before signing.</small></div><button type="button" data-filing-review>Review PDF</button></li>
+        <li><span>2</span><div><strong>Download or print</strong><small>Keep a copy for your records.</small></div><div class="wd-filing-mini-actions"><button type="button" data-filing-download>Download</button><button type="button" data-filing-print>Print</button></div></li>
+        <li><span>3</span><div><strong>Sign and date the application</strong><small>The paper form is not complete until the required signature and date are added.</small></div></li>
+        <li><span>4</span><div><strong>File using the official NJ instructions</strong><small>Use the filing method and destination shown in the current State instructions.</small></div><a data-filing-instructions href="https://www.nj.gov/treasury/taxation/relief.shtml" target="_blank" rel="noopener">Official instructions</a></li>
+        <li><span>5</span><div><strong>Tell Watchdog when you filed</strong><small>This keeps your application record organized and stops pending reminders.</small></div></li>
+      </ol>
+
+      <div class="wd-filing-deadline" data-filing-deadline hidden>
+        <div><span>VERIFIED STATE DEADLINE</span><strong data-filing-deadline-date></strong></div>
+        <a data-filing-deadline-source target="_blank" rel="noopener">NJ Division of Taxation source</a>
+      </div>
+
+      <div class="wd-filing-status-card">
+        <label for="wd-filing-status">Filing status</label>
+        <select id="wd-filing-status" data-filing-status>
+          <option value="not_filed">Not filed yet</option>
+          <option value="ready_to_file">Ready to file</option>
+          <option value="mailed">Mailed</option>
+          <option value="filed_other">Filed another way</option>
+        </select>
+        <div class="wd-filing-detail" data-filing-detail hidden>
+          <label for="wd-filing-date">Date filed</label><input id="wd-filing-date" data-filing-date type="date">
+          <label for="wd-filing-method">How did you file?</label>
+          <select id="wd-filing-method" data-filing-method><option value="">Choose one</option><option value="mail">Mail</option><option value="online">NJ online filing</option><option value="other">Other</option></select>
+        </div>
+        <button type="button" class="wd-btn primary" data-filing-save>Save filing status</button>
+        <p class="wd-filing-status-message" data-filing-status-message role="status" aria-live="polite"></p>
+      </div>
+
+      <div class="wd-filing-reminders" data-filing-reminders>
+        <div><span>DEADLINE REMINDERS</span><strong>Want Watchdog to remind you?</strong><small>Reminder emails contain only the deadline and a link back to your application. Your application answers are never included.</small></div>
+        <label><input type="checkbox" data-reminder-days="14"> Email me 14 days before</label>
+        <label><input type="checkbox" data-reminder-days="7"> Email me 7 days before</label>
+        <p data-reminder-status role="status" aria-live="polite"></p>
+      </div>
+    </section>
+  </template>
+
+  <template id="wd-lifecycle-reuse-template">
+    <section class="wd-reuse-card" data-reuse-card hidden>
+      <span>MAKE THIS FASTER</span>
+      <h3>Reuse stable details from a saved application?</h3>
+      <p>Watchdog can reuse names, mailing address, municipality code, and block/lot from a prior encrypted application on this device. Income, disability answers, tax amounts, filing status, and other year-sensitive answers are never copied.</p>
+      <div><button type="button" class="wd-btn primary" data-reuse-apply>Reuse stable details</button><button type="button" class="wd-btn ghost" data-reuse-dismiss>Not now</button></div>
+      <p data-reuse-status role="status" aria-live="polite"></p>
+    </section>
+  </template>
+
+  <template id="wd-lifecycle-help-template">
+    <div class="wd-help-shade" data-help-shade></div>
+    <aside class="wd-help-drawer" data-help-drawer aria-hidden="true" aria-label="Application help">
+      <button type="button" class="wd-help-close" data-help-close aria-label="Close help">×</button>
+      <span>APPLICATION HELP</span><h3 data-help-title>Need help?</h3><div data-help-body></div>
+      <p class="wd-help-official">For an eligibility decision or State-specific filing question, use the current New Jersey Division of Taxation instructions.</p>
+      <a href="https://www.nj.gov/treasury/taxation/relief.shtml" target="_blank" rel="noopener">Open official NJ guidance</a>
+    </aside>
+  </template>
+
+  <div data-help-step="welcome" data-help-title="Before you start"><p>Have your 2025 NJ-1040 information, Social Security numbers, property tax information, and any prior-year information requested by PAS-1 nearby.</p></div>
+  <div data-help-step="account" data-help-title="Your Watchdog account"><p>Your free Watchdog account lets you resume the application and keep the encrypted PDF. Social sign-in is optional.</p></div>
+  <div data-help-step="vault" data-help-title="Private Vault"><p>Your recovery key decrypts the private application. Save it somewhere secure. Watchdog cannot reconstruct it for you.</p></div>
+  <div data-help-step="profile" data-help-title="Why filing status and age matter"><p>These answers help route you to the correct 2025 State form. They do not determine final eligibility.</p></div>
+  <div data-help-step="disability" data-help-title="Why disability benefits matter"><p>Receiving the listed federal disability benefits can route an applicant to PAS-1 even when the applicant is under 65.</p></div>
+  <div data-help-step="address" data-help-title="Address and municipality code"><p>The State form asks for the New Jersey main-home address and municipality code. Watchdog can help look up the code, but you should confirm it before filing.</p></div>
+  <div data-help-step="property" data-help-title="Block and lot"><p>Block, lot, and qualifier identify the property on official tax records. Watchdog can suggest the public-record match for you to review.</p></div>
+  <div data-help-step="pas-income" data-help-title="PAS-1 income"><p>PAS-1 uses the income categories requested by the State. Enter every requested amount, including zero when zero is correct.</p></div>
+  <div data-help-step="review" data-help-title="Final review"><p>Use the final check to catch missing information, then review the completed official PDF before signing and filing it.</p></div>
+  <div data-help-step="complete" data-help-title="Finish filing"><p>Generating the PDF does not file the application. Review, sign, and submit it using the current State instructions, then record the filing status here.</p></div>
+  <div data-help-step="default" data-help-title="Application help"><p>Complete the current section using the information requested on the official 2025 New Jersey form. Your answers stay in the encrypted Private Vault.</p></div>
+</div>

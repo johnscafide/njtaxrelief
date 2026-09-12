@@ -6,12 +6,14 @@ on:
       - johnvscafide/njw-303-public-launch-v2
       - johnvscafide/njw-303-anchor-preview-profile-reuse
       - johnvscafide/njw-322-anchor-completion-growth-loop-source-attribution-referrals
+      - njw-331-anchor-filing-lifecycle
     paths:
       - property/anchor/application/2025/**
       - property/anchor/applications/**
       - property/partials/anchor-application-2025-enhancements.html
       - property/partials/anchor-application-2025-growth.html
       - property/partials/anchor-application-social-link.html
+      - property/partials/anchor-application-lifecycle.html
       - property/js/anchor-application-2025.js
       - property/js/anchor-application-2025-fields.js
       - property/js/anchor-application-pdf-2025.js
@@ -20,19 +22,27 @@ on:
       - property/js/anchor-application-2025-enhancements.js
       - property/js/anchor-application-2025-growth.js
       - property/js/anchor-application-social-link.js
+      - property/js/anchor-application-lifecycle.js
       - property/js/anchor-applications.js
+      - property/js/anchor-applications-filing.js
       - property/css/anchor-application-2025-enhancements.css
       - property/css/anchor-application-growth.css
       - property/css/anchor-application-social-link.css
+      - property/css/anchor-application-lifecycle.css
+      - property/css/anchor-applications-filing.css
       - property/tests/anchor-application-2025-contract.mjs
       - property/tests/anchor-application-2025-enhancements-contract.mjs
       - property/tests/anchor-completion-growth-contract.mjs
       - property/tests/anchor-application-social-link-contract.mjs
+      - property/tests/anchor-application-lifecycle-contract.mjs
       - supabase/migrations/20260903143000_anchor_relief_profile_vault_v1.sql
       - supabase/migrations/20260903144500_anchor_relief_profile_source_sync_v1.sql
       - supabase/migrations/20260910231000_anchor_completion_growth_loop_v1.sql
       - supabase/migrations/20260910232500_anchor_completion_contact_roster_v1.sql
+      - supabase/migrations/20260912165000_anchor_filing_lifecycle_v1.sql
+      - supabase/migrations/20260912171000_anchor_filing_lifecycle_security_fix_v1.sql
       - supabase/functions/product-analytics/index.ts
+      - supabase/functions/anchor-filing-reminders/**
       - api/anchor-form-template.js
       - .github/workflows/njw303-anchor-application-ci.yml
   pull_request:
@@ -43,6 +53,7 @@ on:
       - property/partials/anchor-application-2025-enhancements.html
       - property/partials/anchor-application-2025-growth.html
       - property/partials/anchor-application-social-link.html
+      - property/partials/anchor-application-lifecycle.html
       - property/js/anchor-application-2025.js
       - property/js/anchor-application-2025-fields.js
       - property/js/anchor-application-pdf-2025.js
@@ -51,19 +62,27 @@ on:
       - property/js/anchor-application-2025-enhancements.js
       - property/js/anchor-application-2025-growth.js
       - property/js/anchor-application-social-link.js
+      - property/js/anchor-application-lifecycle.js
       - property/js/anchor-applications.js
+      - property/js/anchor-applications-filing.js
       - property/css/anchor-application-2025-enhancements.css
       - property/css/anchor-application-growth.css
       - property/css/anchor-application-social-link.css
+      - property/css/anchor-application-lifecycle.css
+      - property/css/anchor-applications-filing.css
       - property/tests/anchor-application-2025-contract.mjs
       - property/tests/anchor-application-2025-enhancements-contract.mjs
       - property/tests/anchor-completion-growth-contract.mjs
       - property/tests/anchor-application-social-link-contract.mjs
+      - property/tests/anchor-application-lifecycle-contract.mjs
       - supabase/migrations/20260903143000_anchor_relief_profile_vault_v1.sql
       - supabase/migrations/20260903144500_anchor_relief_profile_source_sync_v1.sql
       - supabase/migrations/20260910231000_anchor_completion_growth_loop_v1.sql
       - supabase/migrations/20260910232500_anchor_completion_contact_roster_v1.sql
+      - supabase/migrations/20260912165000_anchor_filing_lifecycle_v1.sql
+      - supabase/migrations/20260912171000_anchor_filing_lifecycle_security_fix_v1.sql
       - supabase/functions/product-analytics/index.ts
+      - supabase/functions/anchor-filing-reminders/**
       - api/anchor-form-template.js
 
 permissions:
@@ -86,10 +105,13 @@ jobs:
           node --check property/js/anchor-application-2025-enhancements.js
           node --check property/js/anchor-application-2025-growth.js
           node --check property/js/anchor-application-social-link.js
+          node --check property/js/anchor-application-lifecycle.js
           node --check property/js/anchor-applications.js
+          node --check property/js/anchor-applications-filing.js
       - name: Run privacy and routing contracts
         run: |
           node property/tests/anchor-application-2025-contract.mjs
           node property/tests/anchor-application-2025-enhancements-contract.mjs
           node property/tests/anchor-completion-growth-contract.mjs
           node property/tests/anchor-application-social-link-contract.mjs
+          node property/tests/anchor-application-lifecycle-contract.mjs
