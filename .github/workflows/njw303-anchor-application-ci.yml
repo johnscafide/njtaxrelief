@@ -6,12 +6,14 @@ on:
       - johnvscafide/njw-303-public-launch-v2
       - johnvscafide/njw-303-anchor-preview-profile-reuse
       - johnvscafide/njw-322-anchor-completion-growth-loop-source-attribution-referrals
+      - njw-333-anchor-filing-center
     paths:
       - property/anchor/application/2025/**
       - property/anchor/applications/**
       - property/partials/anchor-application-2025-enhancements.html
       - property/partials/anchor-application-2025-growth.html
       - property/partials/anchor-application-social-link.html
+      - property/partials/anchor-application-process.html
       - property/js/anchor-application-2025.js
       - property/js/anchor-application-2025-fields.js
       - property/js/anchor-application-pdf-2025.js
@@ -20,14 +22,18 @@ on:
       - property/js/anchor-application-2025-enhancements.js
       - property/js/anchor-application-2025-growth.js
       - property/js/anchor-application-social-link.js
+      - property/js/anchor-application-process.js
+      - property/js/anchor-application-library-filing.js
       - property/js/anchor-applications.js
       - property/css/anchor-application-2025-enhancements.css
       - property/css/anchor-application-growth.css
       - property/css/anchor-application-social-link.css
+      - property/css/anchor-application-process.css
       - property/tests/anchor-application-2025-contract.mjs
       - property/tests/anchor-application-2025-enhancements-contract.mjs
       - property/tests/anchor-completion-growth-contract.mjs
       - property/tests/anchor-application-social-link-contract.mjs
+      - property/tests/anchor-application-process-contract.mjs
       - supabase/migrations/20260903143000_anchor_relief_profile_vault_v1.sql
       - supabase/migrations/20260903144500_anchor_relief_profile_source_sync_v1.sql
       - supabase/migrations/20260910231000_anchor_completion_growth_loop_v1.sql
@@ -43,6 +49,7 @@ on:
       - property/partials/anchor-application-2025-enhancements.html
       - property/partials/anchor-application-2025-growth.html
       - property/partials/anchor-application-social-link.html
+      - property/partials/anchor-application-process.html
       - property/js/anchor-application-2025.js
       - property/js/anchor-application-2025-fields.js
       - property/js/anchor-application-pdf-2025.js
@@ -51,14 +58,18 @@ on:
       - property/js/anchor-application-2025-enhancements.js
       - property/js/anchor-application-2025-growth.js
       - property/js/anchor-application-social-link.js
+      - property/js/anchor-application-process.js
+      - property/js/anchor-application-library-filing.js
       - property/js/anchor-applications.js
       - property/css/anchor-application-2025-enhancements.css
       - property/css/anchor-application-growth.css
       - property/css/anchor-application-social-link.css
+      - property/css/anchor-application-process.css
       - property/tests/anchor-application-2025-contract.mjs
       - property/tests/anchor-application-2025-enhancements-contract.mjs
       - property/tests/anchor-completion-growth-contract.mjs
       - property/tests/anchor-application-social-link-contract.mjs
+      - property/tests/anchor-application-process-contract.mjs
       - supabase/migrations/20260903143000_anchor_relief_profile_vault_v1.sql
       - supabase/migrations/20260903144500_anchor_relief_profile_source_sync_v1.sql
       - supabase/migrations/20260910231000_anchor_completion_growth_loop_v1.sql
@@ -86,6 +97,8 @@ jobs:
           node --check property/js/anchor-application-2025-enhancements.js
           node --check property/js/anchor-application-2025-growth.js
           node --check property/js/anchor-application-social-link.js
+          node --check property/js/anchor-application-process.js
+          node --check property/js/anchor-application-library-filing.js
           node --check property/js/anchor-applications.js
       - name: Run privacy and routing contracts
         run: |
@@ -93,3 +106,4 @@ jobs:
           node property/tests/anchor-application-2025-enhancements-contract.mjs
           node property/tests/anchor-completion-growth-contract.mjs
           node property/tests/anchor-application-social-link-contract.mjs
+          node property/tests/anchor-application-process-contract.mjs
