@@ -31,7 +31,11 @@
       <input id="wd-growth-optin" type="checkbox">
       <span><strong>Keep me updated.</strong> Email me occasional Watchdog property and New Jersey tax updates. I can unsubscribe anytime.</span>
     </label>
-    <button id="wd-growth-save" type="button" class="wd-btn primary" data-update-label="Update answer">Save &amp; continue in Watchdog</button>
+    <div class="wd-growth-save-actions">
+      <button id="wd-growth-save" type="button" class="wd-btn secondary" data-update-label="Saved">Save</button>
+      <button id="wd-growth-save-continue" type="button" class="wd-btn primary">Save &amp; continue in Watchdog</button>
+    </div>
+    <a id="wd-growth-onboarding" class="wd-growth-setup-link" href="/onboarding/?source=anchor_complete" data-growth-action="onboarding"><strong>Continue your Watchdog setup</strong><span>Use Google, Facebook, LinkedIn, or your Watchdog email sign-in.</span></a>
     <p id="wd-growth-status" class="wd-growth-status" role="status" aria-live="polite"></p>
   </div>
 
@@ -48,7 +52,7 @@
     <div class="wd-growth-actions">
       <a href="/" data-growth-action="search"><strong>Search a property</strong><span>+1 point per search, up to 5/day</span></a>
       <a href="/" data-growth-action="save"><strong>Save your first property</strong><span>+5 points</span></a>
-      <a href="/onboarding/" data-growth-action="onboarding"><strong>Finish your Watchdog setup</strong><span>+10 points</span></a>
+      <a href="/onboarding/?source=anchor_complete" data-growth-action="onboarding"><strong>Finish your Watchdog setup</strong><span>+10 points</span></a>
       <a href="/home/" data-growth-action="alerts"><strong>Turn on property alerts</strong><span>+10 points for your first alert</span></a>
     </div>
 
@@ -70,7 +74,7 @@
     </div>
 
     <a class="wd-growth-primary-cta" href="/" data-growth-action="continue">
-      <span><strong>Keep protecting your property with Watchdog</strong><small>Search, save, monitor and understand any New Jersey property.</small></span>
+      <span><strong>Look up your property in Watchdog</strong><small>Open the Watchdog property card for the address in this application.</small></span>
       <b aria-hidden="true">→</b>
     </a>
   </div>
