@@ -1,0 +1,111 @@
+<div id="wd-anchor-experience-copy" hidden>
+  <template id="wd-anchor-toolbar-template">
+    <div class="wd-anchor-experience-toolbar" data-anchor-experience-toolbar>
+      <span class="wd-anchor-save-state" data-anchor-save-state aria-live="polite">Saved securely</span>
+      <button type="button" class="wd-anchor-help-link" data-anchor-help-open>Need help?</button>
+      <button type="button" class="wd-anchor-save-exit" data-anchor-save-exit>Save &amp; Exit</button>
+    </div>
+  </template>
+
+  <template id="wd-anchor-section-nav-template">
+    <nav class="wd-anchor-section-nav" aria-label="Application sections" data-anchor-section-nav></nav>
+  </template>
+
+  <template id="wd-anchor-help-drawer-template">
+    <div class="wd-anchor-help-shade" data-anchor-help-close></div>
+    <aside class="wd-anchor-help-drawer" aria-hidden="true" aria-label="Application help">
+      <div class="wd-anchor-help-head"><div><span>WATCHDOG HELP</span><h2 data-anchor-help-title>Application help</h2></div><button type="button" aria-label="Close help" data-anchor-help-close>×</button></div>
+      <div class="wd-anchor-help-body" data-anchor-help-body></div>
+      <div class="wd-anchor-help-foot"><p>Watchdog helps prepare the official State form. The New Jersey Division of Taxation makes the final eligibility and benefit decisions.</p><button type="button" class="wd-btn secondary" data-anchor-help-close>Back to application</button></div>
+    </aside>
+  </template>
+
+  <template id="wd-anchor-review-audit-template">
+    <section class="wd-anchor-review-audit" data-anchor-review-audit>
+      <div class="wd-anchor-review-audit-head"><span>PRE-FILING CHECK</span><h3>Review each section before preparing the State PDF.</h3><p>Watchdog checks the information required by this guided form. You can jump back to any section and return here when you are ready.</p></div>
+      <div class="wd-anchor-review-audit-list" data-anchor-review-audit-list></div>
+    </section>
+  </template>
+
+  <template id="wd-anchor-return-review-template">
+    <div class="wd-anchor-return-review" data-anchor-return-review hidden><span>You are editing a section from Review.</span><button type="button" class="wd-btn primary small" data-anchor-return-review-button>Return to Review</button></div>
+  </template>
+
+  <template id="wd-anchor-filing-center-template">
+    <section class="wd-anchor-filing-center" data-anchor-filing-center>
+      <div class="wd-anchor-filing-head">
+        <span>FILING CENTER</span>
+        <h2>Your State form is prepared. Finish the filing steps below.</h2>
+        <p>Watchdog prepared and saved the PDF. Watchdog has not submitted this application to the State of New Jersey.</p>
+      </div>
+      <div class="wd-anchor-deadline-alert" data-anchor-reminder-alert hidden>
+        <div><strong>Filing reminder</strong><p data-anchor-reminder-alert-copy>Your selected filing reminder is due.</p></div>
+        <button type="button" data-anchor-reminder-dismiss>Dismiss</button>
+      </div>
+      <div class="wd-anchor-filing-deadline" data-anchor-deadline hidden>
+        <div><span>OFFICIAL FILING DEADLINE</span><strong data-anchor-deadline-date></strong><small data-anchor-deadline-countdown></small></div>
+        <a data-anchor-deadline-source target="_blank" rel="noopener">Official NJ source ↗</a>
+      </div>
+      <div class="wd-anchor-filing-checklist">
+        <div><span class="wd-anchor-check-number">1</span><div><strong>Review the PDF</strong><small>Confirm names, addresses, amounts and required selections before filing.</small></div><button type="button" data-anchor-filing-action="review">Review</button></div>
+        <div><span class="wd-anchor-check-number">2</span><div><strong>Download or print</strong><small>Keep a copy for your records and print it if you are filing by mail.</small></div><div class="wd-anchor-check-actions"><button type="button" data-anchor-filing-action="download">Download</button><button type="button" data-anchor-filing-action="print">Print</button></div></div>
+        <div><span class="wd-anchor-check-number">3</span><div><strong>Sign where required</strong><small>The official PDF must be reviewed and signed where the State form requires it.</small></div></div>
+        <div><span class="wd-anchor-check-number">4</span><div><strong>File using the official instructions</strong><small>Follow the current New Jersey instructions for online or paper filing. Watchdog does not transmit the application for you.</small></div></div>
+        <div><span class="wd-anchor-check-number">5</span><div><strong>Mark your filing status</strong><small>Keep your Watchdog record current so you know what still needs to be done.</small></div></div>
+      </div>
+      <div class="wd-anchor-filing-state">
+        <label for="wd-anchor-filing-status">Filing status</label>
+        <div class="wd-anchor-filing-state-row">
+          <select id="wd-anchor-filing-status" data-anchor-filing-status>
+            <option value="not_filed">Not filed yet</option>
+            <option value="ready_to_file">Ready to file</option>
+            <option value="mailed">Mailed</option>
+            <option value="filed_another_way">Filed another way</option>
+          </select>
+          <input type="date" data-anchor-filing-date aria-label="Filing status date">
+          <button type="button" class="wd-btn primary" data-anchor-filing-save>Save status</button>
+        </div>
+        <p class="wd-anchor-filing-status-copy" data-anchor-filing-status-copy aria-live="polite"></p>
+      </div>
+      <div class="wd-anchor-reminders">
+        <div><strong>Deadline reminders</strong><p>Show me a Watchdog reminder when I return to my application or application library.</p></div>
+        <label><input type="checkbox" value="14" data-anchor-reminder-offset> 14 days before</label>
+        <label><input type="checkbox" value="7" data-anchor-reminder-offset> 7 days before</label>
+        <label><input type="checkbox" value="1" data-anchor-reminder-offset> 1 day before</label>
+        <button type="button" class="wd-btn secondary" data-anchor-reminders-save>Save reminders</button>
+        <small data-anchor-next-reminder></small>
+      </div>
+    </section>
+  </template>
+
+  <template id="wd-anchor-reuse-template">
+    <section class="wd-anchor-reuse-card" data-anchor-reuse-card hidden>
+      <div><span>RETURNING APPLICANT</span><h3>Reuse basic information from your prior application?</h3><p>Watchdog can copy your name, mailing address and property identifiers from a prior encrypted application. Income, disability answers, tax amounts and filing status are never carried forward automatically.</p></div>
+      <div class="wd-anchor-reuse-actions"><button type="button" class="wd-btn primary" data-anchor-reuse>Reuse basic information</button><button type="button" class="wd-btn ghost" data-anchor-reuse-dismiss>Not now</button></div>
+      <p data-anchor-reuse-status aria-live="polite"></p>
+    </section>
+  </template>
+
+  <div data-anchor-help-step="profile" data-help-title="Why filing status and age matter"><p>These answers help Watchdog route you to the correct 2025 State form. Age and certain disability benefits can change whether the ANC-1 or combined PAS-1 applies.</p></div>
+  <div data-anchor-help-step="disability" data-help-title="Why Watchdog asks about disability benefits"><p>The 2025 State filing route changes for certain Social Security Disability and Railroad Retirement Disability recipients. Watchdog uses these answers only to determine the correct form path.</p></div>
+  <div data-anchor-help-step="address" data-help-title="Why the address and municipality code matter"><p>The State form asks for your New Jersey main-home information and County/Municipality Code. Watchdog can help look up the code, but you remain in control of the value used on the application.</p></div>
+  <div data-anchor-help-step="ssn" data-help-title="Why the State form requires Social Security numbers"><p>The official State application requires taxpayer identification information. Watchdog keeps this answer inside your encrypted Private Vault and does not place it in filing-status, reminder, analytics or social-login records.</p></div>
+  <div data-anchor-help-step="residence" data-help-title="Why October 1 residency matters"><p>ANCHOR eligibility is tied to your New Jersey principal residence on the State program's qualifying date. This answer controls which remaining questions apply.</p></div>
+  <div data-anchor-help-step="housing" data-help-title="Why Watchdog asks whether you owned or rented"><p>Homeowners and renters can have different eligibility rules and required fields. This answer keeps the guided application focused on the sections that apply to you.</p></div>
+  <div data-anchor-help-step="property" data-help-title="Why property identifiers matter"><p>Block, lot, qualifier and property-tax information help the State match the application to the correct property. Watchdog lookup results are reference information until you choose to use them.</p></div>
+  <div data-anchor-help-step="anc-details" data-help-title="Why Watchdog asks about New Jersey gross income"><p>ANCHOR uses New Jersey gross income for eligibility. Use the amount requested by the official instructions and review it carefully before preparing the PDF.</p></div>
+  <div data-anchor-help-step="pas-history" data-help-title="Why PAS-1 asks about prior-year circumstances"><p>The combined PAS-1 covers multiple property-tax relief programs. Some programs require residency, ownership or benefit-history details beyond the current-year ANCHOR questions.</p></div>
+  <div data-anchor-help-step="pas-income" data-help-title="Why PAS-1 asks for 2024 and 2025 income"><p>The combined application uses annual income information for program eligibility. Enter every requested amount and use 0 when the correct amount is zero.</p></div>
+  <div data-anchor-help-step="schedule" data-help-title="Why an additional home schedule may appear"><p>The PAS-1 can require more information when you owned more than one home during the filing year. This section appears only when your earlier answers indicate it may apply.</p></div>
+  <div data-anchor-help-step="review" data-help-title="What to check before preparing the PDF"><p>Confirm the applicant, address, filing status, housing information, property details and income sections. Preparing the PDF saves an encrypted copy, but it does not submit the form to New Jersey.</p></div>
+
+  <span data-anchor-copy="saving">Saving…</span>
+  <span data-anchor-copy="saved">Saved securely</span>
+  <span data-anchor-copy="save_error">Save failed — keep this page open</span>
+  <span data-anchor-copy="save_exit_blocked">Finish the secure account and Private Vault steps before exiting.</span>
+  <span data-anchor-copy="status_saved">Filing status saved.</span>
+  <span data-anchor-copy="reminders_saved">Reminder preferences saved.</span>
+  <span data-anchor-copy="workflow_error">Watchdog could not update the filing record. Your encrypted application is still safe.</span>
+  <span data-anchor-copy="reuse_done">Basic information copied. Review every field before continuing.</span>
+  <span data-anchor-copy="reuse_error">Watchdog could not reuse that prior application on this device.</span>
+</div>
