@@ -6,6 +6,7 @@ const partial=read('property/partials/anchor-application-profile-save.html');
 const social=read('property/js/anchor-application-social-link.js');
 const migration=read('supabase/migrations/20260912172000_watchdog_reusable_member_profile_v1.sql');
 const account=read('property/js/account-reusable-profile.js');
+const accountPartial=read('property/partials/account-reusable-profile.html');
 
 assert.match(social,/anchor-application-profile-sync\.js/);
 assert.match(sync,/set_my_reusable_profile_v1/);
@@ -27,5 +28,5 @@ assert.match(migration,/grant execute .* to authenticated/);
 assert.doesNotMatch(migration,/p_(?:gross_income|nj_taxable_income|filing_status|birth_year|ssn|disability)/i);
 assert.doesNotMatch(migration,/(?:gross_income|nj_taxable_income|filing_status|birth_year)\s*=\s*excluded\./i);
 assert.match(account,/set_my_reusable_profile_v1/);
-assert.match(account,/Only reusable account details belong here/i);
+assert.match(accountPartial,/Only reusable account details belong here/i);
 console.log('NJW-335 safe ANCHOR reusable profile sync contract passed');
