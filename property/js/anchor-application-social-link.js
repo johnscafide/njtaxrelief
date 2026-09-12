@@ -1,5 +1,6 @@
 (function(){
 'use strict';
+if(!document.querySelector('script[data-anchor-process]')){var processScript=document.createElement('script');processScript.src='/property/js/anchor-application-process.js?v=20260912a';processScript.async=false;processScript.dataset.anchorProcess='1';document.head.appendChild(processScript)}
 var account=document.querySelector('.wd-step[data-step="account"]');
 if(!account||!window.WatchdogAnchorVault)return;
 var db;try{db=window.WatchdogAnchorVault.supabaseClient();}catch(_){return;}
