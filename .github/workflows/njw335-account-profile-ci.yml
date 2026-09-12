@@ -15,6 +15,7 @@ on:
       - 'property/js/anchor-application-social-link.js'
       - 'property/partials/anchor-application-profile-save.html'
       - 'property/tests/account-identity-manager-contract.mjs'
+      - 'property/tests/account-reusable-profile-contract.mjs'
       - 'property/tests/anchor-reusable-profile-sync-contract.mjs'
       - 'property/tests/profile-setup-nudge-contract.mjs'
       - 'supabase/migrations/20260912172000_watchdog_reusable_member_profile_v1.sql'
@@ -41,5 +42,6 @@ jobs:
       - name: Run account and privacy contracts
         run: |
           node property/tests/account-identity-manager-contract.mjs
+          node property/tests/account-reusable-profile-contract.mjs
           node property/tests/anchor-reusable-profile-sync-contract.mjs
           node property/tests/profile-setup-nudge-contract.mjs
