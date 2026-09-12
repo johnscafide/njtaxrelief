@@ -16,7 +16,7 @@ function expect(value,message){if(!value)throw new Error(message)}
 expect(page.includes('<title>Watchdog for New Jersey Real Estate Agents | Property Intelligence</title>'),'agent landing title missing');
 expect(page.includes('/property/branding/watchdog-logo-horizontal.svg'),'Watchdog logo is not the landing-page brand asset');
 expect(page.includes('property="og:image" content="https://www.watchdogindex.com/property/branding/watchdog-logo-horizontal.svg"'),'social share image must use the Watchdog logo');
-expect(page.includes('/property/for/real-estate-agents/agent-control-capture.webp'),'Agent Control product capture missing');
+expect(page.includes('/property/for/real-estate-agents/agent-control-capture.svg'),'Agent Control product capture missing');
 expect(page.includes('Representative Agent Control view'),'product capture disclosure missing');
 expect(page.includes('Agent Founding Lifetime')&&page.includes('$1,499'),'Founding Lifetime offer missing');
 expect((page.match(/data-agent-lifetime-checkout/g)||[]).length===1,'Founding Lifetime should have one primary checkout CTA');
