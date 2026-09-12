@@ -8,6 +8,12 @@
   var observer=null;
 
   function place(node){
+    var handoff=document.getElementById('wd-anchor-home-result');
+    if(handoff&&handoff.isConnected){
+      node.hidden=true;
+      return true;
+    }
+    node.hidden=false;
     var recents=document.getElementById('wd-consumer-recents');
     if(recents&&recents.parentNode){
       if(recents.previousElementSibling!==node)recents.parentNode.insertBefore(node,recents);
