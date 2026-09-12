@@ -1,0 +1,32 @@
+<div id="wd-library-filing-copy" hidden>
+  <template id="wd-library-filing-template">
+    <div class="wd-library-filing-meta" data-library-filing-meta>
+      <div><strong data-library-filing-label>Not filed yet</strong><small data-library-filing-next>Next: review and file your prepared State form.</small></div>
+      <button type="button" class="wd-library-filing-source" data-library-filing-manage>Manage filing</button>
+      <div class="wd-library-filing-manage" data-library-filing-panel hidden>
+        <label>Filing status
+          <select data-library-filing-status>
+            <option value="not_filed">Not filed yet</option>
+            <option value="ready_to_file">Ready to file</option>
+            <option value="mailed">Mailed</option>
+            <option value="filed_another_way">Filed another way</option>
+          </select>
+        </label>
+        <label>Status date <input type="date" data-library-filing-date></label>
+        <fieldset><legend>Watchdog deadline reminders</legend><label><input type="checkbox" value="14" data-library-reminder> 14 days before</label><label><input type="checkbox" value="7" data-library-reminder> 7 days before</label><label><input type="checkbox" value="1" data-library-reminder> 1 day before</label></fieldset>
+        <div class="wd-library-filing-manage-actions"><button type="button" class="wd-btn primary small" data-library-filing-save>Save</button><button type="button" class="wd-btn ghost small" data-library-filing-cancel>Cancel</button></div>
+        <small data-library-filing-message aria-live="polite"></small>
+      </div>
+    </div>
+  </template>
+  <span data-library-filing-copy="not_filed">Not filed yet</span>
+  <span data-library-filing-copy="ready_to_file">Ready to file</span>
+  <span data-library-filing-copy="mailed">Mailed</span>
+  <span data-library-filing-copy="filed_another_way">Filed another way</span>
+  <span data-library-filing-copy="next_not_filed">Next: review and file your prepared State form.</span>
+  <span data-library-filing-copy="next_ready_to_file">Next: sign and file using the official New Jersey instructions.</span>
+  <span data-library-filing-copy="next_mailed">Filing marked as mailed.</span>
+  <span data-library-filing-copy="next_filed_another_way">Filing marked as completed another way.</span>
+  <span data-library-filing-copy="saved">Filing record saved.</span>
+  <span data-library-filing-copy="error">Could not update the filing record. Your encrypted application is still safe.</span>
+</div>
