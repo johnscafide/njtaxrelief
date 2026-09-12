@@ -13,6 +13,12 @@ assert.match(social, /linkIdentity/);
 assert.doesNotMatch(social, /signInWithOAuth/);
 assert.match(social, /anchor-social-linked/);
 assert.match(social, /WatchdogAuth/);
+assert.match(social, /skipBrowserRedirect:true/);
+assert.match(social, /window\.open\('about:blank'/);
+assert.match(social, /postMessage\(\{type:'watchdog-anchor-social-link-result'/);
+assert.match(social, /window\.addEventListener\('message',handlePopupMessage\)/);
+assert.match(social, /window\.name===POPUP_NAME/);
+assert.doesNotMatch(social, /location\.assign\(/);
 assert.match(partial, /data-anchor-social-provider="google"/);
 assert.match(partial, /data-anchor-social-provider="facebook"/);
 assert.match(partial, /data-anchor-social-provider="linkedin_oidc"/);
@@ -22,4 +28,4 @@ assert.match(css, /@media\(max-width:640px\)/);
 assert.doesNotMatch(social, /ssn|social_security|gross_income|disability|recovery[_ -]?key|pdf_generated/i);
 assert.doesNotMatch(social, /gtag|clarity|analytics/i);
 
-console.log('NJW-330 ANCHOR social identity link contract passed');
+console.log('NJW-334 ANCHOR popup social identity link contract passed');
