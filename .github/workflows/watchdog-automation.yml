@@ -19,5 +19,6 @@ jobs:
             exit 0
           fi
           curl --fail-with-body --retry 3 --retry-all-errors \
+            -X POST \
             -H "x-watchdog-automation-secret: $WATCHDOG_AUTOMATION_SECRET" \
             "$WATCHDOG_AUTOMATION_URL"
