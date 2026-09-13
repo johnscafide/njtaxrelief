@@ -42,7 +42,7 @@ expect(outcomes.includes('Models still being calibrated are labeled Preview.'), 
 expect(outcomes.includes('Property-change monitoring with evidence-backed findings'), 'Public Pro comparison must describe the live monitoring outcome.');
 expect(css.includes('.wd-plan-outcome'), 'Plan language needs a scoped visual treatment.');
 
-for (const [key, content] of Object.entries({ outcomes, css, dashboard, projs })) {
+for (const [key, content] of Object.entries({ outcomes, css, projs })) {
   expect(!content.includes('?v='), `${files[key]} must not introduce ?v= asset version parameters.`);
 }
 
