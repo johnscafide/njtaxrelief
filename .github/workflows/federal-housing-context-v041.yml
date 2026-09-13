@@ -30,6 +30,8 @@ jobs:
       - name: Build and certify municipal source artifact
         run: |
           gzip -dc property/scripts/build_federal_housing_context_v041.py.gz > property/scripts/.build_federal_housing_context_v041.py
+          echo "--- builder manifest normalization excerpt ---"
+          sed -n '70,125p' property/scripts/.build_federal_housing_context_v041.py
           python property/scripts/.build_federal_housing_context_v041.py
           rm property/scripts/.build_federal_housing_context_v041.py
       - name: Commit governed artifact
