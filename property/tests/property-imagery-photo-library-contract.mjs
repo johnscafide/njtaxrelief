@@ -17,6 +17,7 @@ const brand = read('property/js/brand-consistency-runtime.js');
 const runtime = read('property/js/property-imagery-runtime.js');
 const landing = read('property/js/landing-showcase.js');
 const landingIntel = read('property/js/landing-recent-intelligence.js');
+const landingCss = read('property/css/landing-review.css');
 const api = read('api/property-imagery.js');
 const migration = read('supabase/migrations/20260824225500_property_photo_library_v1.sql');
 const governance = read('supabase/migrations/20260824225800_property_photo_library_governance_v1.sql');
@@ -68,14 +69,14 @@ assert(!landing.includes('maps.googleapis.com/maps/api/streetview'),
   'Landing property cards must never create passive Google Static Street View requests');
 assert(!landing.includes('GMAPS_KEY'),
   'Landing showcase must not carry a Google Street View key path');
-assert(landingIntel.includes('prepareRenderedPropertyImage'),
-  'Landing intelligence must decorate property imagery instead of removing it');
+assert(landingIntel.includes("card.querySelector('.wd-property-photo')") && landingIntel.includes("photo.insertAdjacentHTML('beforeend',scoreMarkup(summary))"),
+  'Landing intelligence must decorate the existing property image container instead of replacing it');
 assert(!landingIntel.includes('stripRenderedPropertyImage'),
   'Landing intelligence must not strip real property imagery');
-assert(!landingIntel.includes('querySelectorAll(\'img\').forEach'),
+assert(!landingIntel.includes("querySelectorAll('img').forEach"),
   'Landing intelligence must not delete card image elements');
-assert(landingIntel.includes('object-fit:cover'),
-  'Landing imagery must fill the score visual while retaining the intelligence overlay');
+assert(landingCss.includes('.wd-property-photo img') && landingCss.includes('object-fit:cover'),
+  'Landing imagery must fill the property-photo frame while retaining the intelligence overlay');
 
 assert(migration.includes("values ('property-photos', 'property-photos', false"),
   'Property photo bucket must be private');
