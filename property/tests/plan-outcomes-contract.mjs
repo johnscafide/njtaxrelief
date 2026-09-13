@@ -6,8 +6,7 @@ const files = {
   css: 'property/css/plan-outcomes.css',
   account: 'property/account/index.html',
   dashboard: 'property/dashboard/index.html',
-  projs: 'property/js/pro.js',
-  dashboardLegacy: 'property/js/dashboard/dashboard-v2.js'
+  projs: 'property/js/pro.js'
 };
 const read = key => fs.readFileSync(files[key], 'utf8');
 const outcomes = read('outcomes');
@@ -15,7 +14,6 @@ const css = read('css');
 const account = read('account');
 const dashboard = read('dashboard');
 const projs = read('projs');
-const dashboardLegacy = read('dashboardLegacy');
 const expect = (condition, message) => { if (!condition) throw new Error(message); };
 
 new vm.Script(outcomes, { filename: files.outcomes });
@@ -31,11 +29,10 @@ expect(outcomes.includes("property_decision:{minimum:'pro'"), 'Property-level pr
 expect(outcomes.includes("population_triage:{minimum:'pro_plus'"), 'Population/scheduled Intelligence must begin at Pro+.');
 expect(outcomes.includes("team_operations:{minimum:'teams'"), 'Organization operations must remain a Teams outcome.');
 expect(outcomes.includes('Server entitlements remain authoritative'), 'Public wording must not replace server authorization.');
-expect(outcomes.includes('From $59'), 'Dashboard professional plan card must start at the current Agent monthly price.');
-expect(outcomes.includes('Pro $129 · Pro+ $399'), 'Dashboard plan card must use the current Pro and Pro+ monthly prices.');
+expect(outcomes.includes('From $59'), 'Professional plan card must start at the current Agent monthly price.');
+expect(outcomes.includes('Pro $129 · Pro+ $399'), 'Professional plan card must use the current Pro and Pro+ monthly prices.');
 expect(!outcomes.includes('<b>$49</b>'), 'Outcome layer must not reintroduce the retired $49 price.');
-expect(dashboardLegacy.includes('<b>$49</b>'), 'Legacy dashboard still contains the stale price, so the outcome override ordering remains necessary until legacy cleanup.');
-expect(dashboard.indexOf('/property/js/dashboard/dashboard-v2.js') < dashboard.indexOf('/property/js/plan-outcomes.js'), 'Dashboard plan correction must load after the legacy Dashboard layer.');
+expect(!dashboard.includes('/property/js/dashboard/zzzdashboard-v2.js') && !dashboard.includes('/property/js/dashboard/dashboard-v2.js'), 'Current Dashboard must not load the retired legacy dashboard pricing layer.');
 expect(account.includes('/property/js/plan-outcomes.js'), 'Account must load the shared plan language layer.');
 expect(projs.includes("var src='/property/js/plan-outcomes.js'"), 'Public Pro page must load the shared plan language layer.');
 expect(outcomes.includes('Choose the plan you need'), 'Account plan comparison must use concise customer wording.');
