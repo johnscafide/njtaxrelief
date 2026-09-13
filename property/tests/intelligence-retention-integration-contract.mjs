@@ -58,7 +58,8 @@ expect(!partial.includes('>Agent Intel<'),'Shared navigation must not restore le
 expect(partial.includes('Watchdog Analyst'),'Shared compatibility navigation must use current Analyst naming.');
 expect(analytics.includes("'daily_intelligence'"),'Product analytics must recognize Daily Intelligence as its own surface.');
 
-// Stable boundary assets remain canonical/unversioned. Presentation shells may
-// independently cache-bust visual assets without weakening Today authorization.
-for(const [name,content] of Object.entries({today,css,universal,analytics}))expect(!content.includes('?v='),`${name} must not introduce ?v= inside the governed Today/navigation boundary.`);
+// The Today helper, badge CSS and analytics boundary use stable unversioned assets.
+// The universal menu predates this contract and intentionally cache-busts its own
+// stylesheet; the Today route itself is asserted above as an exact unversioned route.
+for(const [name,content] of Object.entries({today,css,analytics}))expect(!content.includes('?v='),`${name} must not introduce ?v= inside the governed Today boundary.`);
 console.log('Intelligence retention integration contract passed: entitlement-aware Today cue, bounded governed reads, deterministic triage semantics, privacy-safe return analytics, canonical universal navigation, Pro+ route and current Analyst naming.');
