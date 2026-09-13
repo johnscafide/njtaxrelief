@@ -1,0 +1,97 @@
+name: One-shot DCA community context patch
+on:
+  push:
+    branches: [main]
+    paths:
+      - '.github/workflows/one-shot-dca-community-context-patch.yml'
+permissions:
+  contents: write
+jobs:
+  patch:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: agent/dca-community-context-exact-20260821
+          fetch-depth: 0
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - name: Apply exact DCA community-context patch
+        shell: bash
+        run: |
+          python - <<'PY'
+          from pathlib import Path
+          import json
+
+          env = Path('supabase/functions/workbench-hydrate/environment-provider.ts')
+          s = env.read_text()
+          repl = [
+            ("type Spec={base:string,layer:string,distance?:number,mode?:'hit'|'count'|'value'|'fema'};",
+             "type Spec={base:string,layer:string,distance?:number,mode?:'hit'|'count'|'value'|'fema',attribute?:string};"),
+            ("const NJDOT_TRANSIT_VILLAGES='https://services.arcgis.com/HggmsDF7UJsNN1FK/ArcGIS/rest/services/TransitVillageBuffersV6/FeatureServer';\nconst CSRR_SRP=",
+             "const NJDOT_TRANSIT_VILLAGES='https://services.arcgis.com/HggmsDF7UJsNN1FK/ArcGIS/rest/services/TransitVillageBuffersV6/FeatureServer';\nconst DCA_WALKABILITY='https://services.arcgis.com/Aur8tCo478N3VovT/ArcGIS/rest/services/WalkabilityScoreBlkGrp/FeatureServer';\nconst DCA_MEDIAN_PROPERTY_TAX='https://services.arcgis.com/Aur8tCo478N3VovT/ArcGIS/rest/services/MedianPropertyTaxTract24/FeatureServer';\nconst CSRR_SRP="),
+            (" 'njplus.nj-dca-community-assets.transit_village_status':{base:NJDOT_TRANSIT_VILLAGES,layer:'0',mode:'hit'}\n};",
+             " 'njplus.nj-dca-community-assets.transit_village_status':{base:NJDOT_TRANSIT_VILLAGES,layer:'0',mode:'hit'},\n 'njplus.nj-dca-neighborhood-trends.walkability_score':{base:DCA_WALKABILITY,layer:'3',mode:'value',attribute:'Walkability_Score__2020_24_'},\n 'njplus.nj-dca-neighborhood-trends.real_estate_tax_median':{base:DCA_MEDIAN_PROPERTY_TAX,layer:'2',mode:'value',attribute:'Median_Real_Estate_Taxes_Paid__'}\n};"),
+            ("const v=pick(fs[0].attributes||{},field);return v===null||v===undefined||v===''?",
+             "const attrs=fs[0].attributes||{},v=spec.attribute?attrs[spec.attribute]:pick(attrs,field);return v===null||v===undefined||v===''?"),
+            ("export const NJDEP_PROVIDER_VERSION='spatial-preflight-v10-csrr-exact-controls';",
+             "export const NJDEP_PROVIDER_VERSION='spatial-preflight-v11-dca-community-context';")
+          ]
+          for old,new in repl:
+            if s.count(old) != 1:
+              raise SystemExit(f'environment-provider anchor count {s.count(old)} for {old[:80]!r}')
+            s = s.replace(old,new)
+          env.write_text(s)
+
+          idx = Path('supabase/functions/workbench-hydrate/index.ts')
+          s = idx.read_text()
+          old = "function spatialSource(id:string){if(id==='preflight.fema_flood_zone')return 'FEMA NFHL public GIS';if(id==='njplus.nj-dca-community-assets.opportunity_zone_status')return 'HUD Qualified Opportunity Zones';if(id==='njplus.nj-dca-community-assets.transit_village_status')return 'NJDOT Transit Village buffers';if(id==='njplus.nj-dca-community-assets.urban_enterprise_zone_status'||id==='njplus.nj-dca-community-assets.redevelopment_area_status')return 'NJDEP Government GIS';return 'NJDEP public GIS'}"
+          new = "function isDcaNeighborhoodContext(id:string){return id==='njplus.nj-dca-neighborhood-trends.walkability_score'||id==='njplus.nj-dca-neighborhood-trends.real_estate_tax_median'}function spatialSource(id:string){if(isDcaNeighborhoodContext(id))return 'NJ DCA Community Asset Map · 2020-2024 ACS 5-Year Estimates';if(id==='preflight.fema_flood_zone')return 'FEMA NFHL public GIS';if(id==='njplus.nj-dca-community-assets.opportunity_zone_status')return 'HUD Qualified Opportunity Zones';if(id==='njplus.nj-dca-community-assets.transit_village_status')return 'NJDOT Transit Village buffers';if(id==='njplus.nj-dca-community-assets.urban_enterprise_zone_status'||id==='njplus.nj-dca-community-assets.redevelopment_area_status')return 'NJDEP Government GIS';return 'NJDEP public GIS'}"
+          if s.count(old) != 1: raise SystemExit('index spatialSource anchor mismatch')
+          s = s.replace(old,new)
+          old = "kind:'authoritative_spatial_reference',source:spatialSource(id)+' · '+NJDEP_PROVIDER_VERSION"
+          new = "kind:isDcaNeighborhoodContext(id)?'authoritative_reference':'authoritative_spatial_reference',source:spatialSource(id)+' · '+NJDEP_PROVIDER_VERSION"
+          if s.count(old) != 1: raise SystemExit('index spatial-kind anchor mismatch')
+          s = s.replace(old,new)
+          idx.write_text(s)
+
+          builder = Path('property/scripts/build_nj_proplus_source_pack_v031.py')
+          s = builder.read_text()
+          anchor = "    for key, label, formula, reason in calculations:\n        derived(source, key, label, category, scope, audience, formula, reason)\n\nassert len(MARKERS) == 154, len(MARKERS)"
+          insert = """    for key, label, formula, reason in calculations:\n        derived(source, key, label, category, scope, audience, formula, reason)\n\n# These two DCA Community Asset values are neighborhood-context observations at the\n# property's location, not municipality-wide statistics. Preserve their canonical IDs\n# while making source geography and exact current ArcGIS fields explicit.\nCONTEXT_FIELDS = {\n    'njplus.nj-dca-neighborhood-trends.walkability_score': {\n        'source_field': 'Walkability_Score__2020_24_', 'source_layer': 3,\n        'source_geography': 'census_block_group', 'source_service': 'WalkabilityScoreBlkGrp',\n        'reason': \"Official NJ DCA Community Asset Map walkability value for the property's 2020 Census block group; not a municipality-wide statistic.\",\n    },\n    'njplus.nj-dca-neighborhood-trends.real_estate_tax_median': {\n        'source_field': 'Median_Real_Estate_Taxes_Paid__', 'source_layer': 2,\n        'source_geography': 'census_tract', 'source_service': 'MedianPropertyTaxTract24',\n        'reason': \"Official NJ DCA Community Asset Map median real-estate taxes paid for the property's 2020 Census tract; not a municipality-wide statistic.\",\n    },\n}\nfor marker in MARKERS:\n    cfg = CONTEXT_FIELDS.get(marker['id'])\n    if not cfg:\n        continue\n    marker['scope'] = 'property'\n    marker['source_field'] = cfg['source_field']\n    marker['source_layer'] = cfg['source_layer']\n    marker['source_geography'] = cfg['source_geography']\n    marker['source_service'] = cfg['source_service']\n    marker['source_vintage'] = '2020-2024 American Community Survey 5-Year Estimates'\n    marker['description'] = cfg['reason']\n    marker['professional_reason'] = cfg['reason']\n\nassert len(MARKERS) == 154, len(MARKERS)"""
+          if s.count(anchor) != 1: raise SystemExit('source-pack builder anchor mismatch')
+          builder.write_text(s.replace(anchor,insert))
+
+          # Regenerate the retained source-pack artifact from its canonical builder.
+          import subprocess
+          subprocess.run(['python','property/scripts/build_nj_proplus_source_pack_v031.py'], check=True)
+
+          # Keep the canonical registry's two existing IDs aligned with the corrected
+          # source contract. Count and IDs are unchanged; Phase 5 will govern status.
+          registry_path = Path('property/data/marker-registry.json')
+          registry = json.loads(registry_path.read_text())
+          by_id = {m['id']:m for m in registry['markers']}
+          for marker_id,cfg in CONTEXT_FIELDS.items():
+            m = by_id.get(marker_id)
+            if not m: raise SystemExit(f'missing canonical marker {marker_id}')
+            m['scope'] = 'property'
+            m['source_field'] = cfg['source_field']
+            m['source_layer'] = cfg['source_layer']
+            m['source_geography'] = cfg['source_geography']
+            m['source_service'] = cfg['source_service']
+            m['source_vintage'] = '2020-2024 American Community Survey 5-Year Estimates'
+            m['description'] = cfg['reason']
+            m['professional_reason'] = cfg['reason']
+          if len(registry['markers']) != 734: raise SystemExit('canonical marker count changed')
+          registry_path.write_text(json.dumps(registry, indent=1)+'\n')
+
+          doc = Path('docs/property/dca-community-context-certification-2026-08-21.md')
+          doc.write_text('''# DCA Community Asset neighborhood-context certification\n\nTarget canonical IDs remain unchanged; only their scope contract is corrected from municipality to property-location neighborhood context.\n\n- `njplus.nj-dca-neighborhood-trends.walkability_score` → DCA `WalkabilityScoreBlkGrp`, layer 3, field `Walkability_Score__2020_24_`, Census block group.\n- `njplus.nj-dca-neighborhood-trends.real_estate_tax_median` → DCA `MedianPropertyTaxTract24`, layer 2, field `Median_Real_Estate_Taxes_Paid__`, Census tract.\n- Source vintage: 2020-2024 American Community Survey 5-Year Estimates.\n- Absecon control `0101_25.01_10`: walkability `12.8592045164675`; median real-estate taxes paid `7386`.\n\nNo marker is promoted LIVE by this patch. Production authenticated canary, provider coverage, overlay, and Phase 5 remain mandatory.\n''')
+          PY
+          git config user.name 'Watchdog Automation'
+          git config user.email 'actions@users.noreply.github.com'
+          git add -- supabase/functions/workbench-hydrate/environment-provider.ts supabase/functions/workbench-hydrate/index.ts property/scripts/build_nj_proplus_source_pack_v031.py property/data/nj-proplus-source-pack-v031.json property/data/marker-registry.json docs/property/dca-community-context-certification-2026-08-21.md
+          git diff --cached --check
+          git commit -m 'Data Center: wire exact DCA neighborhood context'
+          git push origin HEAD:agent/dca-community-context-exact-20260821
