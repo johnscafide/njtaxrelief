@@ -10,7 +10,6 @@ on:
       - "property/scripts/repair_hud_chas_snapshot_v041.py"
       - "property/scripts/patch_federal_housing_hud_snapshot_v041.py"
       - "property/data/source-snapshots/hud-chas-2018-2022/**"
-      - "property/data/source-snapshots/hud-picture-2025-nj-projects.csv.gz"
       - "towns/town-manifest.json"
       - ".github/workflows/federal-housing-context-v041.yml"
   workflow_dispatch:
@@ -55,7 +54,7 @@ jobs:
             git commit -m "Repair pinned HUD CHAS snapshot transport fidelity"
             git push
           fi
-      - name: Use pinned HUD Picture source snapshot
+      - name: Harden official HUD Picture source retrieval
         run: python property/scripts/patch_federal_housing_hud_snapshot_v041.py
       - name: Build and certify municipal source artifact
         run: python property/scripts/run_federal_housing_context_v041.py
