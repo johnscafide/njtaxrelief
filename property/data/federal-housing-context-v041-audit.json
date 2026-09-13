@@ -1,0 +1,44 @@
+{
+  "canonical_municipalities": 564,
+  "chas": {
+    "available_values": 562,
+    "mapped_districts": 564,
+    "source_checked_no_value": 2,
+    "source_rows": 564
+  },
+  "checks": [
+    "canonical town manifest = 564",
+    "CHAS mapped districts = 564",
+    "ACS county-subdivision mapped districts = 564",
+    "NJOGIS boundary MUN_CODE coverage = 564",
+    "all deduplicated NJ HUD project codes assigned to one Watchdog municipality",
+    "HUD project aggregation excludes tenant-based vouchers without project locations"
+  ],
+  "commute": {
+    "available_values": 563,
+    "bulk_archive_bytes": 42112748,
+    "bulk_source_url": "https://www2.census.gov/programs-surveys/acs/replicate_estimates/2024/data/5-year/060/B08301.csv.zip",
+    "ignored_nonmunicipal_rows": 5,
+    "mapped_districts": 564,
+    "query_strategy": "official Census 2024 ACS 5-year VRE B08301 bulk file, summary level 060",
+    "source_checked_no_value": 1,
+    "source_component_rows_retained": 5690,
+    "source_geographies_retained": 569
+  },
+  "hud_projects": {
+    "dedupe_rule": "max subsidized units available per project code; prevents overlap across repeated program/sub-program rows",
+    "deduplicated_project_units_sum": 78877,
+    "duplicate_project_codes": 187,
+    "fallback_city_matches": 1,
+    "mapped_project_codes": 844,
+    "municipal_units_sum": 78877,
+    "municipalities_with_project_units": 240,
+    "raw_units_sum": 104723,
+    "semantic_limit": "Project-level public housing and multifamily assisted units only; tenant-based vouchers without a project location are excluded.",
+    "source_rows_nj": 1031,
+    "unique_project_codes": 844
+  },
+  "release": "federal-housing-context-v041-2026-09-13",
+  "schema_version": 1,
+  "status": "passed"
+}

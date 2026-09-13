@@ -1,0 +1,75 @@
+name: Build governed federal housing context
+
+on:
+  push:
+    branches:
+      - agent/federal-housing-context-20260913
+    paths:
+      - "property/scripts/build_federal_housing_context_v041.py.gz"
+      - "property/scripts/run_federal_housing_context_v041.py"
+      - "property/scripts/repair_hud_chas_snapshot_v041.py"
+      - "property/scripts/patch_federal_housing_hud_snapshot_v041.py"
+      - "property/data/source-snapshots/hud-chas-2018-2022/**"
+      - "towns/town-manifest.json"
+      - ".github/workflows/federal-housing-context-v041.yml"
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+      - name: Install source-build dependencies
+        run: python -m pip install --disable-pip-version-check pandas openpyxl requests shapely
+      - name: Materialize readable source builder
+        run: |
+          gzip -dc property/scripts/build_federal_housing_context_v041.py.gz > property/scripts/build_federal_housing_context_v041.py
+          if [ -z "$(git status --porcelain -- property/scripts/build_federal_housing_context_v041.py)" ]; then
+            echo "Readable builder already current."
+          else
+            git config user.name "watchdog-source-bot"
+            git config user.email "watchdog-source-bot@users.noreply.github.com"
+            git add property/scripts/build_federal_housing_context_v041.py
+            git commit -m "Materialize federal housing source builder"
+            git push
+          fi
+      - name: Validate pinned HUD CHAS snapshot
+        run: |
+          python property/scripts/repair_hud_chas_snapshot_v041.py
+          if [ -z "$(git status --porcelain -- property/data/source-snapshots/hud-chas-2018-2022)" ]; then
+            echo "Pinned CHAS snapshot is canonical."
+          else
+            git config user.name "watchdog-source-bot"
+            git config user.email "watchdog-source-bot@users.noreply.github.com"
+            git add property/data/source-snapshots/hud-chas-2018-2022
+            git commit -m "Repair pinned HUD CHAS snapshot transport fidelity"
+            git push
+          fi
+      - name: Harden official HUD Picture source retrieval
+        run: python property/scripts/patch_federal_housing_hud_snapshot_v041.py
+      - name: Build and certify municipal source artifact
+        run: python property/scripts/run_federal_housing_context_v041.py
+      - name: Restore materialized builder source contract
+        if: always()
+        run: git checkout -- property/scripts/build_federal_housing_context_v041.py
+      - name: Commit governed artifact
+        if: success()
+        run: |
+          if [ -z "$(git status --porcelain -- property/data/federal-housing-context-v041.json property/data/federal-housing-context-v041-audit.json)" ]; then
+            echo "No artifact changes."
+            exit 0
+          fi
+          git config user.name "watchdog-source-bot"
+          git config user.email "watchdog-source-bot@users.noreply.github.com"
+          git add property/data/federal-housing-context-v041.json property/data/federal-housing-context-v041-audit.json
+          git commit -m "Build governed federal housing context v0.41"
+          git push
