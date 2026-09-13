@@ -1,17 +1,19 @@
 #!/usr/bin/env python3
-"""Run the governed federal housing builder with collision-safe NJ normalization.
+"""Run the governed federal housing builder with reliable public-source access.
 
-This runner contains two narrow compatibility guards around the immutable v0.41
+This runner contains narrow compatibility guards around the immutable v0.41
 source builder:
 1. Preserve municipality-type tokens except duplicate terminal types such as
    ``Atlantic City city`` -> ``atlantic city`` so same-county City/Township pairs
    never collide.
 2. Read ACS 2024 5-year B08301 from the Census Bureau's official bulk Variance
    Replicate Estimate download instead of the API. The API currently returns a
-   key-required HTML page in GitHub Actions; the bulk Census file is public,
-   versioned, and avoids a runtime secret dependency.
+   key-required HTML page in GitHub Actions; the bulk Census file is public and
+   versioned.
+3. Page the official NJOGIS municipal-boundary FeatureServer. The service caps a
+   single GeoJSON query well below the 564-municipality statewide contract.
 
-Neither guard changes source semantics or manufactures missing values.
+These guards do not change source semantics or manufacture missing values.
 """
 
 from __future__ import annotations
@@ -130,8 +132,6 @@ def load_commute_bulk(key_to_district):
                     raise RuntimeError(f"Duplicate ACS B08301 order {order} for {geoid}")
                 record["values"][order] = estimate_int(row[5])
 
-    # A complete municipality row needs every governed B08301 component. Keep
-    # exact source-null estimates as source_checked_no_value rather than zero.
     records = {}
     unmatched = []
     ignored_nonmunicipal = 0
@@ -207,6 +207,76 @@ def load_commute_bulk(key_to_district):
     }
 
 
+def fetch_boundaries_paged():
+    page_size = 50
+    offset = 0
+    features = []
+    seen_signatures = set()
+    while True:
+        params = {
+            "where": "1=1",
+            "outFields": "MUN_CODE,MUN_LABEL,COUNTY,NAME",
+            "returnGeometry": "true",
+            "outSR": "4326",
+            "orderByFields": "MUN_CODE ASC",
+            "resultOffset": str(offset),
+            "resultRecordCount": str(page_size),
+            "f": "geojson",
+        }
+        response = module.requests.get(module.NJOGIS_URL, params=params, timeout=90)
+        response.raise_for_status()
+        root = response.json()
+        if root.get("error"):
+            raise RuntimeError(f"NJOGIS boundary query failed at offset {offset}: {root['error']}")
+        page = root.get("features") or []
+        if not page:
+            break
+        signature = tuple(
+            str((feature.get("properties") or {}).get("MUN_CODE") or "") for feature in page
+        )
+        if signature in seen_signatures:
+            raise RuntimeError(
+                f"NJOGIS pagination repeated a page at offset {offset}; refusing incomplete statewide coverage"
+            )
+        seen_signatures.add(signature)
+        features.extend(page)
+        offset += len(page)
+        if len(page) < page_size:
+            break
+        if offset > 1000:
+            raise RuntimeError("NJOGIS pagination exceeded the expected New Jersey municipality bound")
+
+    geometries = []
+    codes = []
+    attrs = {}
+    duplicate_codes = []
+    for feature in features:
+        properties = feature.get("properties") or {}
+        code = str(properties.get("MUN_CODE") or "").zfill(4)
+        geometry = feature.get("geometry")
+        if not module.re.fullmatch(r"\d{4}", code) or not geometry:
+            continue
+        if code in attrs:
+            duplicate_codes.append(code)
+            continue
+        geometries.append(module.shape(geometry))
+        codes.append(code)
+        attrs[code] = properties
+
+    if duplicate_codes:
+        raise RuntimeError(
+            "NJOGIS boundary pagination produced duplicate municipality codes: "
+            + ", ".join(sorted(set(duplicate_codes))[:20])
+        )
+    if len(codes) != 564:
+        raise RuntimeError(
+            f"NJOGIS paged boundary layer must expose 564 unique MUN_CODE values, got {len(codes)} "
+            f"from {len(features)} features across {len(seen_signatures)} page(s)"
+        )
+    return geometries, codes, attrs
+
+
 module.load_commute = load_commute_bulk
+module.fetch_boundaries = fetch_boundaries_paged
 
 raise SystemExit(module.main())
