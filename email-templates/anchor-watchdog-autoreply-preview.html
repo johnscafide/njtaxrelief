@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>ANCHOR Watchdog Auto-Reply Preview</title>
+<style>
+  *{box-sizing:border-box}body{margin:0;background:#e9eef2;color:#172332;font-family:Arial,Helvetica,sans-serif}.toolbar{position:sticky;top:0;z-index:20;background:#10294b;color:#fff;padding:16px 18px;box-shadow:0 8px 24px rgba(16,41,75,.16)}.toolbar-inner{max-width:980px;margin:0 auto}.title{margin:0 0 4px;font-size:18px}.sub{margin:0 0 13px;color:#c7d4e3;font-size:12px;line-height:1.45}.controls{display:grid;grid-template-columns:1fr 2fr auto;gap:9px}.controls input{width:100%;border:0;border-radius:9px;padding:11px 12px;font-size:14px}.controls button{border:0;border-radius:9px;padding:11px 15px;background:#078486;color:#fff;font-weight:800;cursor:pointer}.subject{max-width:980px;margin:16px auto 0;background:#fff;border-radius:12px;padding:13px 16px;font-size:13px;box-shadow:0 6px 18px rgba(16,41,75,.08)}.subject b{color:#10294b}.frame-wrap{max-width:980px;margin:14px auto 30px;padding:0 12px}.frame{width:100%;min-height:980px;border:0;border-radius:14px;background:#fff;box-shadow:0 14px 38px rgba(16,41,75,.12)}.err{max-width:980px;margin:18px auto;background:#fff3f3;border:1px solid #f0caca;border-radius:10px;padding:14px;color:#8b1d1d;display:none}@media(max-width:720px){.controls{grid-template-columns:1fr}.frame{min-height:1180px}.toolbar{position:relative}}
+</style>
+</head>
+<body>
+  <div class="toolbar">
+    <div class="toolbar-inner">
+      <h1 class="title">Watchdog + NJ Property Tax Relief auto-reply preview</h1>
+      <p class="sub">This is a browser-only preview of the EmailJS replacement. Change the sample recipient below to see the personalized email exactly as it will render conceptually.</p>
+      <div class="controls">
+        <input id="name" value="Alex" aria-label="Sample recipient name">
+        <input id="address" value="123 Main St, Cherry Hill, NJ 08002" aria-label="Sample property address">
+        <button id="render" type="button">Refresh preview</button>
+      </div>
+    </div>
+  </div>
+
+  <div class="subject"><b>Suggested subject:</b> <span id="subjectText"></span></div>
+  <div id="error" class="err"></div>
+  <div class="frame-wrap"><iframe id="preview" class="frame" title="Email preview"></iframe></div>
+
+<script>
+(function(){
+  'use strict';
+  var source='';
+  var frame=document.getElementById('preview');
+  var error=document.getElementById('error');
+  function esc(value){return String(value||'').replace(/[&<>"']/g,function(c){return {'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c];});}
+  function render(){
+    if(!source)return;
+    var name=(document.getElementById('name').value||'Friend').trim();
+    var address=(document.getElementById('address').value||'Your New Jersey property').trim();
+    var html=source
+      .replace(/{{name}}/g,esc(name))
+      .replace(/{{email}}/g,'alex@example.com')
+      .replace(/{{address}}/g,esc(address));
+    frame.srcdoc=html;
+    document.getElementById('subjectText').textContent='Your NJ relief estimate + Watchdog property data for '+address;
+  }
+  fetch('./anchor-watchdog-autoreply.html',{cache:'no-store'})
+    .then(function(r){if(!r.ok)throw new Error('Template returned HTTP '+r.status);return r.text();})
+    .then(function(text){source=text;render();})
+    .catch(function(err){error.style.display='block';error.textContent='Preview could not load the email source: '+err.message;});
+  document.getElementById('render').addEventListener('click',render);
+  document.getElementById('address').addEventListener('keydown',function(e){if(e.key==='Enter')render();});
+  document.getElementById('name').addEventListener('keydown',function(e){if(e.key==='Enter')render();});
+})();
+</script>
+</body>
+</html>

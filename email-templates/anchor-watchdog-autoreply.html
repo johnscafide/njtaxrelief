@@ -1,0 +1,109 @@
+<!--
+EmailJS auto-reply source of truth for template_contact.
+Suggested subject: Your NJ relief estimate + Watchdog property data for {{address}}
+Existing estimator variables used: {{name}}, {{email}}, {{address}}.
+The Watchdog link intentionally deep-links by submitted address and does not print a numeric score unless the live email pipeline is later wired to a canonical score result.
+-->
+<table role="presentation" border="0" width="100%" cellspacing="0" cellpadding="0" style="margin:0;padding:0;background:#f3f6f8;">
+  <tbody>
+    <tr>
+      <td align="center" style="padding:28px 14px;">
+        <table role="presentation" border="0" width="600" cellspacing="0" cellpadding="0" style="max-width:600px;width:100%;background:#ffffff;border-radius:18px;overflow:hidden;box-shadow:0 12px 34px rgba(16,41,75,.10);">
+          <tbody>
+            <tr>
+              <td style="background:#10294b;padding:24px 28px;">
+                <table role="presentation" border="0" width="100%" cellspacing="0" cellpadding="0">
+                  <tbody>
+                    <tr>
+                      <td valign="middle">
+                        <p style="margin:0 0 5px 0;font-family:Arial,Helvetica,sans-serif;font-size:11px;line-height:1.2;font-weight:700;letter-spacing:1.5px;text-transform:uppercase;color:#7ddbd6;">NJ Property Tax Relief</p>
+                        <p style="margin:0;font-family:Arial,Helvetica,sans-serif;font-size:27px;line-height:1.1;font-weight:800;color:#ffffff;">Watchdog</p>
+                        <p style="margin:5px 0 0 0;font-family:Arial,Helvetica,sans-serif;font-size:13px;line-height:1.4;color:#c7d4e3;">Property intelligence after your relief estimate</p>
+                      </td>
+                      <td width="54" align="right" valign="middle">
+                        <div style="width:46px;height:46px;line-height:46px;text-align:center;border-radius:13px;background:#078486;color:#ffffff;font-family:Arial,Helvetica,sans-serif;font-size:23px;font-weight:800;">W</div>
+                      </td>
+                    </tr>
+                  </tbody>
+                </table>
+              </td>
+            </tr>
+
+            <tr>
+              <td style="padding:30px 28px 8px 28px;">
+                <p style="margin:0 0 18px 0;font-family:Arial,Helvetica,sans-serif;font-size:17px;line-height:1.5;color:#172332;">Hi {{name}},</p>
+                <p style="margin:0 0 16px 0;font-family:Arial,Helvetica,sans-serif;font-size:16px;line-height:1.65;color:#344350;">Thanks for using the NJ Property Tax Relief estimator. We received your submission for <strong style="color:#10294b;">{{address}}</strong>.</p>
+                <p style="margin:0 0 22px 0;font-family:Arial,Helvetica,sans-serif;font-size:16px;line-height:1.65;color:#344350;">Your relief estimate is useful, but it is only one piece of the property picture. Watchdog can match the address you supplied against New Jersey public property records so you can see assessment data, prior-year taxes, property history, and a Watchdog Score when enough canonical ROBUST evidence is available.</p>
+              </td>
+            </tr>
+
+            <tr>
+              <td style="padding:0 28px 24px 28px;">
+                <table role="presentation" border="0" width="100%" cellspacing="0" cellpadding="0" style="background:#f2f8f7;border:1px solid #d7e8e6;border-radius:15px;">
+                  <tbody>
+                    <tr>
+                      <td style="padding:20px 20px 18px 20px;">
+                        <p style="margin:0 0 7px 0;font-family:Arial,Helvetica,sans-serif;font-size:11px;line-height:1.2;font-weight:800;letter-spacing:1.2px;text-transform:uppercase;color:#078486;">Your Watchdog property</p>
+                        <p style="margin:0 0 7px 0;font-family:Arial,Helvetica,sans-serif;font-size:18px;line-height:1.35;font-weight:800;color:#10294b;">{{address}}</p>
+                        <p style="margin:0 0 17px 0;font-family:Arial,Helvetica,sans-serif;font-size:14px;line-height:1.55;color:#52616f;">Open the property to see the latest Watchdog record available for this address. A numeric Watchdog Score is shown only when the underlying canonical evidence supports one.</p>
+                        <table role="presentation" border="0" cellspacing="0" cellpadding="0">
+                          <tbody>
+                            <tr>
+                              <td bgcolor="#078486" style="border-radius:10px;">
+                                <a href="https://www.watchdogindex.com/?address={{address}}" style="display:inline-block;padding:13px 18px;font-family:Arial,Helvetica,sans-serif;font-size:14px;line-height:1.2;font-weight:800;color:#ffffff;text-decoration:none;">Open {{address}} in Watchdog &rarr;</a>
+                              </td>
+                            </tr>
+                          </tbody>
+                        </table>
+                      </td>
+                    </tr>
+                  </tbody>
+                </table>
+              </td>
+            </tr>
+
+            <tr>
+              <td style="padding:0 28px 23px 28px;">
+                <p style="margin:0 0 8px 0;font-family:Arial,Helvetica,sans-serif;font-size:15px;line-height:1.6;font-weight:700;color:#10294b;">If you asked about your home value, selling, or buying</p>
+                <p style="margin:0;font-family:Arial,Helvetica,sans-serif;font-size:15px;line-height:1.65;color:#344350;">You do not need to send the address again. We already have the property you entered. Just reply to this email with anything else you want us to know, especially timing or what you are trying to figure out.</p>
+              </td>
+            </tr>
+
+            <tr>
+              <td style="padding:0 28px 24px 28px;">
+                <table role="presentation" border="0" width="100%" cellspacing="0" cellpadding="0" style="background:#fbfaf5;border-left:4px solid #b8972a;border-radius:10px;">
+                  <tbody>
+                    <tr>
+                      <td style="padding:16px 18px;">
+                        <p style="margin:0 0 9px 0;font-family:Arial,Helvetica,sans-serif;font-size:11px;line-height:1.2;font-weight:800;letter-spacing:1.1px;text-transform:uppercase;color:#8b711c;">Official NJ relief resources</p>
+                        <p style="margin:0 0 7px 0;font-family:Arial,Helvetica,sans-serif;font-size:14px;line-height:1.6;color:#344350;">NJ Tax Relief Hotline: <strong>1-888-238-1233</strong></p>
+                        <p style="margin:0 0 7px 0;font-family:Arial,Helvetica,sans-serif;font-size:14px;line-height:1.6;color:#344350;">Current forms, eligibility and deadlines: <a href="https://propertytaxrelief.nj.gov" style="color:#10294b;font-weight:800;text-decoration:none;">propertytaxrelief.nj.gov</a></p>
+                        <p style="margin:0;font-family:Arial,Helvetica,sans-serif;font-size:14px;line-height:1.6;color:#344350;">PAS-1 walkthrough: <a href="https://njpropertytaxrelief.com/pas-1-guide.html" style="color:#10294b;font-weight:800;text-decoration:none;">NJ Property Tax Relief guide</a></p>
+                      </td>
+                    </tr>
+                  </tbody>
+                </table>
+              </td>
+            </tr>
+
+            <tr>
+              <td style="padding:0 28px 26px 28px;">
+                <p style="margin:0 0 12px 0;font-family:Arial,Helvetica,sans-serif;font-size:15px;line-height:1.6;color:#344350;">If something is time-sensitive, you can text me directly at <a href="tel:+18564041098" style="color:#10294b;font-weight:800;text-decoration:none;">856-404-1098</a>.</p>
+                <p style="margin:0 0 5px 0;font-family:Arial,Helvetica,sans-serif;font-size:16px;line-height:1.4;font-weight:800;color:#10294b;">John Scafide</p>
+                <p style="margin:0 0 9px 0;font-family:Arial,Helvetica,sans-serif;font-size:13px;line-height:1.5;color:#667482;">The McKenty Team &middot; Opus Elite Real Estate<br>Licensed NJ Realtor &middot; Tax Preparer</p>
+                <p style="margin:0;font-family:Arial,Helvetica,sans-serif;font-size:13px;line-height:1.6;color:#667482;"><a href="mailto:john@johnscafide.com" style="color:#10294b;font-weight:700;text-decoration:none;">john@johnscafide.com</a> &nbsp;|&nbsp; <a href="https://www.johnscafide.com" style="color:#10294b;font-weight:700;text-decoration:none;">johnscafide.com</a></p>
+              </td>
+            </tr>
+
+            <tr>
+              <td style="padding:18px 28px 24px 28px;background:#f7f9fa;border-top:1px solid #e4e9ed;">
+                <p style="margin:0 0 7px 0;font-family:Arial,Helvetica,sans-serif;font-size:12px;line-height:1.55;color:#7a8791;">This is an automated confirmation so you know your estimator submission was received. A real follow-up will come from us if you requested one.</p>
+                <p style="margin:0;font-family:Arial,Helvetica,sans-serif;font-size:11px;line-height:1.55;color:#98a2aa;">Watchdog uses public and governed property data for research and context. Property records can lag real-world changes. A Watchdog Score is not an appraisal, legal conclusion, tax-appeal determination, or financial recommendation. For renters, the property record describes the residence entered and does not imply ownership.</p>
+              </td>
+            </tr>
+          </tbody>
+        </table>
+      </td>
+    </tr>
+  </tbody>
+</table>
