@@ -10,8 +10,9 @@ source builder:
    Replicate Estimate download instead of the API. The API currently returns a
    key-required HTML page in GitHub Actions; the bulk Census file is public and
    versioned.
-3. Page the official NJOGIS municipal-boundary FeatureServer. The service caps a
-   single GeoJSON query well below the 564-municipality statewide contract.
+3. Read the official NJOGIS municipal-boundary FeatureServer by requesting its
+   complete object-ID set first, then fetching those features in explicit chunks.
+   The service ignores offset pagination for GeoJSON and caps a bare query at 53.
 
 These guards do not change source semantics or manufacture missing values.
 """
@@ -102,18 +103,10 @@ def load_commute_bulk(key_to_district):
         if len(csv_names) != 1:
             raise RuntimeError(f"Expected one ACS B08301 CSV in ZIP, found {csv_names}")
         with archive.open(csv_names[0]) as raw:
-            # Census VRE files contain legacy single-byte punctuation in some
-            # geography/table-title records. Latin-1 is lossless for every byte;
-            # identifiers, names, orders and numeric estimates used here are ASCII.
             text = io.TextIOWrapper(raw, encoding="latin-1", newline="")
             reader = csv.reader(text)
-            # Census VRE documentation specifies FIRSTOBS=4. The first three
-            # physical records are table metadata; data rows then use the fixed
-            # layout: tblid, geoid, name, order, title, estimate, ...
             for line_number, row in enumerate(reader, start=1):
-                if line_number <= 3:
-                    continue
-                if len(row) < 6:
+                if line_number <= 3 or len(row) < 6:
                     continue
                 tblid, geoid, name = row[0].strip(), row[1].strip(), row[2].strip()
                 if tblid.upper() != "B08301" or not geoid.startswith("0600000US34"):
@@ -207,49 +200,52 @@ def load_commute_bulk(key_to_district):
     }
 
 
-def fetch_boundaries_paged():
-    page_size = 50
-    offset = 0
+def fetch_boundaries_by_object_ids():
+    id_response = module.requests.get(
+        module.NJOGIS_URL,
+        params={"where": "1=1", "returnIdsOnly": "true", "f": "json"},
+        timeout=90,
+    )
+    id_response.raise_for_status()
+    id_root = id_response.json()
+    if id_root.get("error"):
+        raise RuntimeError(f"NJOGIS object-ID query failed: {id_root['error']}")
+    object_ids = sorted({int(value) for value in (id_root.get("objectIds") or [])})
+    object_id_field = str(id_root.get("objectIdFieldName") or "")
+    if len(object_ids) != 564:
+        raise RuntimeError(
+            f"NJOGIS boundary service must expose 564 object IDs, got {len(object_ids)}"
+        )
+
     features = []
-    seen_signatures = set()
-    while True:
+    chunk_size = 40
+    for start in range(0, len(object_ids), chunk_size):
+        chunk = object_ids[start:start + chunk_size]
         params = {
-            "where": "1=1",
+            "objectIds": ",".join(str(value) for value in chunk),
             "outFields": "MUN_CODE,MUN_LABEL,COUNTY,NAME",
             "returnGeometry": "true",
             "outSR": "4326",
-            "orderByFields": "MUN_CODE ASC",
-            "resultOffset": str(offset),
-            "resultRecordCount": str(page_size),
             "f": "geojson",
         }
         response = module.requests.get(module.NJOGIS_URL, params=params, timeout=90)
         response.raise_for_status()
         root = response.json()
         if root.get("error"):
-            raise RuntimeError(f"NJOGIS boundary query failed at offset {offset}: {root['error']}")
-        page = root.get("features") or []
-        if not page:
-            break
-        signature = tuple(
-            str((feature.get("properties") or {}).get("MUN_CODE") or "") for feature in page
-        )
-        if signature in seen_signatures:
             raise RuntimeError(
-                f"NJOGIS pagination repeated a page at offset {offset}; refusing incomplete statewide coverage"
+                f"NJOGIS boundary feature query failed for object IDs {chunk[0]}-{chunk[-1]}: {root['error']}"
             )
-        seen_signatures.add(signature)
+        page = root.get("features") or []
+        if len(page) != len(chunk):
+            raise RuntimeError(
+                f"NJOGIS returned {len(page)} features for {len(chunk)} requested object IDs "
+                f"({chunk[0]}-{chunk[-1]}); refusing partial geography coverage"
+            )
         features.extend(page)
-        offset += len(page)
-        if len(page) < page_size:
-            break
-        if offset > 1000:
-            raise RuntimeError("NJOGIS pagination exceeded the expected New Jersey municipality bound")
 
     geometries = []
     codes = []
     attrs = {}
-    duplicate_codes = []
     for feature in features:
         properties = feature.get("properties") or {}
         code = str(properties.get("MUN_CODE") or "").zfill(4)
@@ -257,26 +253,20 @@ def fetch_boundaries_paged():
         if not module.re.fullmatch(r"\d{4}", code) or not geometry:
             continue
         if code in attrs:
-            duplicate_codes.append(code)
-            continue
+            raise RuntimeError(f"Duplicate NJOGIS municipality code returned: {code}")
         geometries.append(module.shape(geometry))
         codes.append(code)
         attrs[code] = properties
 
-    if duplicate_codes:
-        raise RuntimeError(
-            "NJOGIS boundary pagination produced duplicate municipality codes: "
-            + ", ".join(sorted(set(duplicate_codes))[:20])
-        )
     if len(codes) != 564:
         raise RuntimeError(
-            f"NJOGIS paged boundary layer must expose 564 unique MUN_CODE values, got {len(codes)} "
-            f"from {len(features)} features across {len(seen_signatures)} page(s)"
+            f"NJOGIS object-ID boundary retrieval must expose 564 unique MUN_CODE values, got {len(codes)} "
+            f"from {len(features)} features; object-id field={object_id_field or 'unknown'}"
         )
     return geometries, codes, attrs
 
 
 module.load_commute = load_commute_bulk
-module.fetch_boundaries = fetch_boundaries_paged
+module.fetch_boundaries = fetch_boundaries_by_object_ids
 
 raise SystemExit(module.main())
