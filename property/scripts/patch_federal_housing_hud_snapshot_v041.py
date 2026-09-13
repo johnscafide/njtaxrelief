@@ -27,12 +27,12 @@ if old_hud in text:
 elif new_hud not in text:
     raise RuntimeError("Expected HUD workbook loader block was not found; refusing a broad source rewrite")
 
-old_njogis = "https://services1.arcgis.com/PsDtSYIjNsyfjwcX/arcgis/rest/services/Municipal_Boundaries/FeatureServer/0/query"
-new_njogis = "https://maps.nj.gov/arcgis/rest/services/Framework/Government_Boundaries/MapServer/2/query"
+old_njogis = '''NJOGIS_URL = (\n    "https://services1.arcgis.com/PsDtSYIjNsyfjwcX/arcgis/rest/services/"\n    "Municipal_Boundaries/FeatureServer/0/query"\n)'''
+new_njogis = '''NJOGIS_URL = (\n    "https://maps.nj.gov/arcgis/rest/services/Framework/"\n    "Government_Boundaries/MapServer/2/query"\n)'''
 if old_njogis in text:
     text = text.replace(old_njogis, new_njogis, 1)
 elif new_njogis not in text:
-    raise RuntimeError("Expected NJOGIS municipality boundary URL was not found; refusing an ungoverned endpoint substitution")
+    raise RuntimeError("Expected NJOGIS municipality boundary assignment was not found; refusing an ungoverned endpoint substitution")
 
 BUILDER.write_text(text, encoding="utf-8")
 print(
