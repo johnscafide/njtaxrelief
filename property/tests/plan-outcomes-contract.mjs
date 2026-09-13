@@ -32,7 +32,7 @@ expect(outcomes.includes('Server entitlements remain authoritative'), 'Public wo
 expect(outcomes.includes('From $59'), 'Professional plan card must start at the current Agent monthly price.');
 expect(outcomes.includes('Pro $129 · Pro+ $399'), 'Professional plan card must use the current Pro and Pro+ monthly prices.');
 expect(!outcomes.includes('<b>$49</b>'), 'Outcome layer must not reintroduce the retired $49 price.');
-expect(!dashboard.includes('/property/js/dashboard/zzzdashboard-v2.js') && !dashboard.includes('/property/js/dashboard/dashboard-v2.js'), 'Current Dashboard must not load the retired legacy dashboard pricing layer.');
+expect(!dashboard.includes('/property/js/dashboard/zzzdashboard-v2.js') && !dashboard.includes('/property/js/dashboard/dashboard-v2.js'), 'Current Dashboard must not load either retired legacy dashboard pricing layer.');
 expect(account.includes('/property/js/plan-outcomes.js'), 'Account must load the shared plan language layer.');
 expect(projs.includes("var src='/property/js/plan-outcomes.js'"), 'Public Pro page must load the shared plan language layer.');
 expect(outcomes.includes('Choose the plan you need'), 'Account plan comparison must use concise customer wording.');
