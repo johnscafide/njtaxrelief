@@ -57,9 +57,12 @@ must(anchorBridge.includes(`https://${productionRef}.supabase.co/functions/v1/an
 must(anchorBridge.includes("usage('count')"),'ANCHOR bridge must route weekly reads through the count action.');
 must(anchorBridge.includes("usage('record')"),'ANCHOR bridge must route writes through the record action.');
 
-for (const path of ['property/js/supabase-runtime.js','property/js/public-nav.js','anchor-watchdog-bridge.js']) {
+// Auth/data-boundary scripts stay on stable canonical URLs. Public-nav may
+// intentionally cache-bust presentation-only assets while those boundaries remain fixed.
+for (const path of ['property/js/supabase-runtime.js','anchor-watchdog-bridge.js']) {
   must(!read(path).match(/\.js\?v=|\.css\?v=/),`${path} must not introduce version-query asset URLs.`);
 }
+must(index.includes('src="/property/js/supabase-runtime.js"'),'Public entrypoint must use the canonical unversioned Supabase runtime URL.');
 
 // Social auth provider + redirect contract.
 must(runtime.includes("google: { label:'Google', enabled:true }"),'Google sign-in must remain enabled.');
