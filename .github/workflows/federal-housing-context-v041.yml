@@ -30,7 +30,7 @@ jobs:
       - name: Materialize readable source builder
         run: |
           gzip -dc property/scripts/build_federal_housing_context_v041.py.gz > property/scripts/build_federal_housing_context_v041.py
-          if git diff --quiet -- property/scripts/build_federal_housing_context_v041.py; then
+          if [ -z "$(git status --porcelain -- property/scripts/build_federal_housing_context_v041.py)" ]; then
             echo "Readable builder already current."
           else
             git config user.name "watchdog-source-bot"
@@ -43,7 +43,7 @@ jobs:
         run: python property/scripts/build_federal_housing_context_v041.py
       - name: Commit governed artifact
         run: |
-          if git diff --quiet -- property/data/federal-housing-context-v041.json property/data/federal-housing-context-v041-audit.json; then
+          if [ -z "$(git status --porcelain -- property/data/federal-housing-context-v041.json property/data/federal-housing-context-v041-audit.json)" ]; then
             echo "No artifact changes."
             exit 0
           fi
