@@ -85,6 +85,54 @@
     outline:3px solid #2f6fed;
     outline-offset:3px;
   }
+  body[data-ms-wizard="review"] .msfr-error{
+    padding:22px 18px calc(22px + env(safe-area-inset-bottom));
+    gap:10px;
+    border-radius:18px;
+    overflow-wrap:anywhere;
+  }
+  body[data-ms-wizard="review"] .msfr-error b{
+    font:800 18px/1.25 'Plus Jakarta Sans',sans-serif;
+  }
+  body[data-ms-wizard="review"] .msfr-error span{
+    font-size:15px;
+    line-height:1.5;
+  }
+  body[data-ms-wizard="review"] .msfr-error .msfr-error-retry{
+    min-height:48px;
+    width:100%;
+    margin-top:4px;
+    font-size:15px;
+    touch-action:manipulation;
+  }
+  body[data-ms-wizard="review"] .msfr-error .msfr-error-retry:focus-visible{
+    outline:3px solid #2f6fed;
+    outline-offset:3px;
+  }
+}
+@media (max-width:620px){
+  body[data-ms-wizard="review"] .mw-stage{
+    padding-bottom:calc(96px + env(safe-area-inset-bottom));
+  }
+  body[data-ms-wizard="review"] .mw-nav{
+    z-index:60;
+    margin-inline:calc(-1 * max(12px,env(safe-area-inset-left)));
+    padding:10px max(12px,env(safe-area-inset-right)) calc(10px + env(safe-area-inset-bottom)) max(12px,env(safe-area-inset-left))!important;
+  }
+  body[data-ms-wizard="review"] .mw-nav a,
+  body[data-ms-wizard="review"] .mw-nav button{
+    min-height:48px;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    font-size:15px;
+    touch-action:manipulation;
+  }
+  body[data-ms-wizard="review"] .mw-nav a:focus-visible,
+  body[data-ms-wizard="review"] .mw-nav button:focus-visible{
+    outline:3px solid #2f6fed;
+    outline-offset:2px;
+  }
 }
 @media (max-width:420px){
   body[data-ms-wizard="review"] .msfr-art{max-height:52dvh}
