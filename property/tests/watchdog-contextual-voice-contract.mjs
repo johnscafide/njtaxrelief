@@ -1,11 +1,14 @@
 import fs from 'node:fs';
 
 const read = (path) => fs.readFileSync(path, 'utf8');
-const dashboardLoader = read('property/js/watchdog-dashboard-v2-intelligence.js');
-const dashboardVoice = read('property/js/watchdog-dashboard-voice.js');
+const dashboardPage = read('property/dashboard/index.html');
+const dashboardDrawer = read('property/js/dashboard/wd-intel.js');
+const intelligencePage = read('property/intelligence/index.html');
+const intelligenceConsole = read('property/js/intelligence-console.js');
 const todayPage = read('property/intelligence/daily/index.html');
 const todayVoice = read('property/js/watchdog-today-voice.js');
 const contextual = read('property/js/watchdog-contextual-analyst.js');
+const voiceServer = read('property/js/watchdog-intelligence-voice.js');
 const voiceBrowser = read('property/js/watchdog-intelligence-voice-browser.js');
 const narration = read('property/js/watchdog-intelligence-narration.js');
 const commandPolicy = read('property/js/watchdog-intelligence-command-policy.js');
@@ -15,16 +18,21 @@ function must(condition, message) {
   if (!condition) throw new Error(message);
 }
 
-must(dashboardLoader.includes('/property/js/access-guard.js'), 'Dashboard Voice must expose the established signed-in client contract before loading Voice.');
-must(dashboardLoader.includes('/property/js/watchdog-contextual-analyst.js'), 'Dashboard must load the shared contextual Analyst.');
-must(dashboardLoader.includes('/property/js/watchdog-intelligence-voice-browser.js'), 'Dashboard must load the browser Voice layer.');
-must(dashboardLoader.includes('/property/js/watchdog-dashboard-voice.js'), 'Dashboard must load its contextual Voice bridge.');
-must(dashboardLoader.includes('/property/css/watchdog-contextual-voice.css'), 'Dashboard must load contextual Voice styling.');
-
-must(dashboardVoice.includes('WatchdogContextIntelligence.context'), 'Dashboard Voice must inherit the governed Dashboard Intelligence context.');
-must(dashboardVoice.includes("surface:'dashboard'"), 'Dashboard Voice must identify its surface.');
-must(dashboardVoice.includes('What changed on my important properties today?'), 'Dashboard must offer the Today-style contextual prompt.');
-must(!dashboardVoice.includes('getUserMedia'), 'Dashboard bridge must not implement a second microphone stack.');
+// The 2027 Dashboard no longer mounts the retired Dashboard-v2 contextual bridge.
+// Its Intelligence drawer embeds the canonical signed-in Intelligence workspace,
+// which owns Analyst + Voice and uses saved-property context by default.
+must(dashboardPage.includes('/property/js/dashboard/wd-intel.js'), 'Dashboard must load the current Intelligence drawer.');
+must(!dashboardPage.includes('/property/js/watchdog-dashboard-v2-intelligence.js'), 'Dashboard must not restore the retired Dashboard-v2 Intelligence bridge.');
+must(dashboardDrawer.includes('/property/intelligence/?embed=1'), 'Dashboard drawer must embed the canonical Intelligence workspace.');
+must(intelligencePage.includes('data-access-require="pro"'), 'Embedded Intelligence workspace must keep its signed-in Pro access boundary.');
+must(intelligencePage.includes('/property/js/access-guard.js'), 'Intelligence workspace must load the established signed-in access contract.');
+must(intelligencePage.includes('/property/js/watchdog-contextual-analyst.js'), 'Intelligence workspace must load the shared contextual Analyst.');
+must(intelligencePage.includes('/property/js/watchdog-intelligence-voice.js'), 'Intelligence workspace must load governed Voice.');
+must(intelligencePage.includes('/property/css/watchdog-contextual-voice.css'), 'Intelligence workspace must load contextual Voice styling.');
+must(intelligenceConsole.includes("surface:'intelligence_console'"), 'Dashboard-embedded Intelligence must identify the canonical Intelligence surface.');
+must(intelligenceConsole.includes("scope_type:requestedPin?'property':'saved_properties'"), 'Dashboard-embedded Intelligence must default to saved-property context.');
+must(intelligenceConsole.includes('What changed on my important properties?'), 'Dashboard-embedded Intelligence must offer a contextual saved-property prompt.');
+must(intelligenceConsole.includes("contextLabel:requestedPin?'the selected dashboard property':'your signed-in Watchdog workspace'"), 'Embedded Intelligence must make its resolved context explicit.');
 
 must(todayPage.includes('/property/js/watchdog-contextual-analyst.js'), 'Today must load the shared contextual Analyst.');
 must(todayPage.includes('/property/js/watchdog-intelligence-voice.js'), 'Today must load the server Voice fallback.');
@@ -84,12 +92,16 @@ must(analystProxy.includes("policy.class === commandPolicy.CLASSES.approval_requ
 must(analystProxy.includes('Prepare a non-executing proposal'), 'Approval-required requests must be rewritten into a non-executing proposal.');
 must(analystProxy.includes("if (req.method !== 'POST')"), 'The Analyst transport must accept POST only.');
 
-must(voiceBrowser.includes('SpeechRecognition') || voiceBrowser.includes('webkitSpeechRecognition'), 'Existing browser Voice must remain the speech-recognition implementation.');
-must(voiceBrowser.includes('speechSynthesis'), 'Existing browser Voice must remain the narration implementation.');
-must(voiceBrowser.includes('Transcript ready. Review it, then choose Ask Watchdog.'), 'Spoken questions must remain reviewable before submission.');
-must(voiceBrowser.includes('extractBrief(message)'), 'Narration must extract the rendered governed Analyst response.');
-must(voiceBrowser.includes('contract.formatBrief(brief, format)'), 'Contextual narration must use the shared deterministic narration contract.');
-must(voiceBrowser.includes('data-dwa-narration-format'), 'Contextual narration must expose structured format selection.');
+must(voiceServer.includes('navigator.mediaDevices?.getUserMedia'), 'Canonical Intelligence Voice must retain the governed microphone implementation.');
+must(voiceServer.includes('Transcript ready. Review it, then choose Ask Watchdog.'), 'Canonical Voice transcripts must remain reviewable before submission.');
+must(voiceServer.includes('extractBrief(message)'), 'Canonical Voice narration must extract the rendered governed Analyst response.');
+must(voiceServer.includes('data-dwa-narration-format'), 'Canonical Voice narration must expose structured format selection.');
+must(voiceBrowser.includes('SpeechRecognition') || voiceBrowser.includes('webkitSpeechRecognition'), 'Today browser Voice must retain the zero-spend speech-recognition implementation.');
+must(voiceBrowser.includes('speechSynthesis'), 'Today browser Voice must retain browser narration.');
+must(voiceBrowser.includes('Transcript ready. Review it, then choose Ask Watchdog.'), 'Today spoken questions must remain reviewable before submission.');
+must(voiceBrowser.includes('extractBrief(message)'), 'Today narration must extract the rendered governed Analyst response.');
+must(voiceBrowser.includes('contract.formatBrief(brief, format)'), 'Today contextual narration must use the shared deterministic narration contract.');
+must(voiceBrowser.includes('data-dwa-narration-format'), 'Today contextual narration must expose structured format selection.');
 must(narration.includes("FORMAT_ORDER = ['quick', 'professional', 'evidence', 'changes']"), 'Voice vNext must expose four structured narration formats.');
 must(narration.includes("source: 'rendered_governed_analyst_response'"), 'Narration must remain grounded in the rendered governed response.');
 must(!narration.includes('fetch('), 'Narration formatting must not introduce a separate model/provider call.');
