@@ -1,13 +1,13 @@
 #!/usr/bin/env python3
 """Normalize the pinned HUD CHAS NJ snapshot without changing metric values.
 
-This is intentionally narrow. The originally staged chunks contained a transport
-transcription defect in several GEOID prefixes (060000US -> 0600000US) and one
-source-name typo for the Jamesburg borough row. The source CSV control row is
+This is intentionally narrow. The originally staged chunks contained transport
+transcription defects in GEOID text and one source-name typo for the Jamesburg
+borough row. The source CSV control row is
 0600000US3402334890 / Jamesburg borough, Middlesex County, New Jersey.
 
 No percentages, numerators, denominators, or geography assignments are altered.
-Unexpected malformed rows fail closed instead of being guessed.
+Unexpected malformed rows are all reported together and fail closed.
 """
 
 from __future__ import annotations
@@ -23,25 +23,47 @@ GEOID_RE = re.compile(r"^0600000US34\d{8}$")
 JAMESBURG_GEOID = "0600000US3402334890"
 JAMESBURG_NAME = "Jamesburg borough, Middlesex County, New Jersey"
 
-changed_files: list[str] = []
-seen: set[str] = set()
+loaded: list[tuple[Path, dict]] = []
+malformed: list[dict[str, str]] = []
 rows = 0
 
+# First pass only diagnoses. Do not partially rewrite the snapshot when any
+# unexpected malformed identifier remains.
 for path in sorted(SNAPSHOT.glob("part-*.json")):
     root = json.loads(path.read_text(encoding="utf-8"))
     if root.get("release") != RELEASE:
         raise RuntimeError(f"Unexpected CHAS release in {path}")
-    records = root.get("records") or {}
-    repaired: dict[str, list] = {}
-    changed = False
-    for raw_geoid, values in records.items():
+    loaded.append((path, root))
+    for raw_geoid, values in (root.get("records") or {}).items():
         rows += 1
         geoid = str(raw_geoid)
         if geoid.startswith("060000US34"):
             geoid = "0600000US34" + geoid[len("060000US34"):]
-            changed = True
         if not GEOID_RE.fullmatch(geoid):
-            raise RuntimeError(f"Unexpected malformed HUD CHAS GEOID: {raw_geoid}")
+            malformed.append({
+                "file": str(path.relative_to(ROOT)),
+                "geoid": str(raw_geoid),
+                "source_name": str((values or [""])[0]),
+                "prefix_repair_candidate": geoid,
+            })
+
+if rows != 564:
+    raise RuntimeError(f"HUD CHAS snapshot must contain 564 rows, got {rows}")
+if malformed:
+    print(json.dumps({"rows": rows, "malformed": malformed}, indent=2))
+    raise RuntimeError(f"HUD CHAS snapshot has {len(malformed)} malformed GEOID(s); see diagnostic above")
+
+changed_files: list[str] = []
+seen: set[str] = set()
+
+for path, root in loaded:
+    repaired: dict[str, list] = {}
+    changed = False
+    for raw_geoid, values in (root.get("records") or {}).items():
+        geoid = str(raw_geoid)
+        if geoid.startswith("060000US34"):
+            geoid = "0600000US34" + geoid[len("060000US34"):]
+            changed = True
         if geoid in seen or geoid in repaired:
             raise RuntimeError(f"Duplicate HUD CHAS GEOID after repair: {geoid}")
         seen.add(geoid)
@@ -58,8 +80,6 @@ for path in sorted(SNAPSHOT.glob("part-*.json")):
         path.write_text(json.dumps(root, separators=(",", ":")) + "\n", encoding="utf-8")
         changed_files.append(str(path.relative_to(ROOT)))
 
-if rows != 564:
-    raise RuntimeError(f"HUD CHAS snapshot must contain 564 rows, got {rows}")
 if len(seen) != 564:
     raise RuntimeError(f"HUD CHAS snapshot must contain 564 unique GEOIDs, got {len(seen)}")
 
