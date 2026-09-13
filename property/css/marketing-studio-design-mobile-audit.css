@@ -1,0 +1,231 @@
+@media (max-width:720px){
+  body[data-ms-wizard="design"]{
+    overflow-x:hidden;
+  }
+  body[data-ms-wizard="design"] .mw-stage{
+    padding-left:max(12px,env(safe-area-inset-left));
+    padding-right:max(12px,env(safe-area-inset-right));
+    padding-bottom:calc(34px + env(safe-area-inset-bottom));
+  }
+  body[data-ms-wizard="design"] .mw-stage-head p{
+    font-size:15px;
+    line-height:1.55;
+  }
+  body[data-ms-wizard="design"] .mw-kicker,
+  body[data-ms-wizard="design"] .ms-pcm-kicker,
+  body[data-ms-wizard="design"] .ms-pcm-design-tag,
+  body[data-ms-wizard="design"] .pcmplus-kicker,
+  body[data-ms-wizard="design"] .pcmplus-head>div>span{
+    font-size:12px!important;
+    line-height:1.35;
+    letter-spacing:.09em;
+  }
+  body[data-ms-wizard="design"] .pcmplus-tabs{
+    flex-wrap:nowrap;
+    overflow-x:auto;
+    overscroll-behavior-x:contain;
+    scroll-snap-type:x proximity;
+    -webkit-overflow-scrolling:touch;
+    padding-bottom:4px;
+  }
+  body[data-ms-wizard="design"] .pcmplus-tabs button{
+    min-height:44px;
+    padding:10px 15px;
+    font-size:14px;
+    flex:0 0 auto;
+    scroll-snap-align:start;
+    touch-action:manipulation;
+  }
+  body[data-ms-wizard="design"] .pcmplus-tabs span{
+    min-width:100%;
+    font-size:13px;
+    line-height:1.45;
+  }
+  body[data-ms-wizard="design"] #mw-pcm-slot .ms-pcm-sandbox-head h3{
+    font-size:22px;
+    line-height:1.2;
+  }
+  body[data-ms-wizard="design"] #mw-pcm-slot .ms-pcm-sandbox-head p,
+  body[data-ms-wizard="design"] #mw-pcm-slot .ms-pcm-empty,
+  body[data-ms-wizard="design"] #mw-pcm-slot .ms-pcm-error{
+    font-size:14px;
+    line-height:1.5;
+  }
+  body[data-ms-wizard="design"] #mw-pcm-slot .ms-pcm-library-tools{
+    grid-template-columns:1fr!important;
+    gap:14px;
+  }
+  body[data-ms-wizard="design"] #mw-pcm-slot .ms-pcm-library-tools span{
+    font-size:13px;
+    line-height:1.4;
+  }
+  body[data-ms-wizard="design"] #mw-pcm-slot .ms-pcm-library-tools input,
+  body[data-ms-wizard="design"] #mw-pcm-slot .ms-pcm-library-tools select{
+    min-height:48px;
+    padding:11px 13px;
+    font-size:16px;
+  }
+  body[data-ms-wizard="design"] #mw-pcm-slot .ms-pcm-section-title h4{
+    font-size:18px;
+    line-height:1.3;
+  }
+  body[data-ms-wizard="design"] #mw-pcm-slot .ms-pcm-section-title small{
+    font-size:13px;
+    line-height:1.45;
+  }
+  body[data-ms-wizard="design"] #mw-pcm-slot .ms-pcm-design-copy{
+    gap:9px;
+    padding:16px;
+  }
+  body[data-ms-wizard="design"] #mw-pcm-slot .ms-pcm-design-copy h5{
+    font-size:17px;
+    line-height:1.3;
+  }
+  body[data-ms-wizard="design"] #mw-pcm-slot .ms-pcm-design-copy small{
+    font-size:14px;
+    line-height:1.5;
+    overflow-wrap:anywhere;
+  }
+  body[data-ms-wizard="design"] #mw-pcm-slot .ms-pcm-design-actions{
+    gap:10px;
+  }
+  body[data-ms-wizard="design"] #mw-pcm-slot .ms-pcm-design-actions button,
+  body[data-ms-wizard="design"] #mw-pcm-slot .ms-pcm-design-actions a.ms-pcm-proof-link,
+  body[data-ms-wizard="design"] .msc-pcm-proof-actions a,
+  body[data-ms-wizard="design"] .msc-pcm-proof-actions button,
+  body[data-ms-wizard="design"] .msc-pcm-browse-inline{
+    min-height:48px;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    padding:11px 14px!important;
+    font-size:14px!important;
+    line-height:1.25;
+    touch-action:manipulation;
+  }
+  body[data-ms-wizard="design"] [data-mobile-design-busy="true"]{
+    opacity:.72;
+    cursor:progress;
+  }
+  body[data-ms-wizard="design"] .pcmplus-art,
+  body[data-ms-wizard="design"] .ms-pcm-design-media,
+  body[data-ms-wizard="design"] .msc-pcm-proof-preview{
+    max-height:58dvh;
+    overflow:auto;
+    overscroll-behavior:contain;
+    -webkit-overflow-scrolling:touch;
+  }
+  body[data-ms-wizard="design"] .pcmplus-art img,
+  body[data-ms-wizard="design"] .ms-pcm-design-media img,
+  body[data-ms-wizard="design"] .msc-pcm-proof-preview img{
+    display:block;
+    width:100%;
+    max-height:52dvh;
+    object-fit:contain;
+  }
+  body[data-ms-wizard="design"] .ms-design-mobile-recovery{
+    margin:24px auto;
+    max-width:520px;
+    padding:20px;
+    text-align:center;
+  }
+  body[data-ms-wizard="design"] .ms-design-mobile-recovery h2{
+    margin:0 0 8px;
+    font-size:19px;
+    line-height:1.25;
+  }
+  body[data-ms-wizard="design"] .ms-design-mobile-recovery p{
+    margin:0 0 16px;
+    font-size:15px;
+    line-height:1.5;
+  }
+  body[data-ms-wizard="design"] .ms-design-mobile-recovery button{
+    min-height:48px;
+    width:100%;
+    padding:11px 16px;
+    font-size:15px;
+    touch-action:manipulation;
+  }
+  body[data-ms-wizard="design"] .pcmplus-head p,
+  body[data-ms-wizard="design"] .pcmplus-fields>p{
+    font-size:14px;
+    line-height:1.5;
+  }
+  body[data-ms-wizard="design"] .pcmplus-head>button{
+    width:44px;
+    height:44px;
+    flex:0 0 44px;
+    touch-action:manipulation;
+  }
+  body[data-ms-wizard="design"] .pcmplus-variable-grid label{
+    font-size:13px;
+    line-height:1.4;
+  }
+  body[data-ms-wizard="design"] .pcmplus-variable-grid input[type="text"]{
+    min-height:48px;
+    height:48px;
+    font-size:16px;
+  }
+  body[data-ms-wizard="design"] .msc-pcm-proof-head span:first-child,
+  body[data-ms-wizard="design"] .msc-pcm-badge{
+    font-size:12px!important;
+    line-height:1.35;
+  }
+  body[data-ms-wizard="design"] .msc-pcm-proof-head small,
+  body[data-ms-wizard="design"] .msc-pcm-proof-state span,
+  body[data-ms-wizard="design"] .msc-pcm-proof-safety{
+    font-size:13px;
+    line-height:1.5;
+  }
+  body[data-ms-wizard="design"] .msc-pcm-proof-state b{
+    font-size:14px;
+  }
+  body[data-ms-wizard="design"] .mw-nav a,
+  body[data-ms-wizard="design"] .mw-nav button{
+    min-height:48px;
+    font-size:15px;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    touch-action:manipulation;
+  }
+  body[data-ms-wizard="design"] :is(button,a,input,select):focus-visible{
+    outline:3px solid rgba(47,111,237,.32);
+    outline-offset:2px;
+  }
+}
+@media (max-width:620px){
+  body[data-ms-wizard="design"] .mw-nav{
+    bottom:0;
+    padding:10px max(0px,env(safe-area-inset-right)) calc(10px + env(safe-area-inset-bottom)) max(0px,env(safe-area-inset-left))!important;
+    z-index:45;
+  }
+  body[data-ms-wizard="design"] .mw-stage{
+    padding-bottom:calc(96px + env(safe-area-inset-bottom));
+  }
+}
+@media (max-width:420px){
+  body[data-ms-wizard="design"] .mw-template-chooser{
+    padding:10px;
+  }
+  body[data-ms-wizard="design"] #mw-pcm-slot .ms-pcm-design-media{
+    padding:8px;
+  }
+  body[data-ms-wizard="design"] .pcmplus-inspector{
+    padding:16px;
+  }
+  body[data-ms-wizard="design"] .pcmplus-art{
+    min-height:240px;
+    padding:10px;
+  }
+  body[data-ms-wizard="design"] .pcmplus-art,
+  body[data-ms-wizard="design"] .ms-pcm-design-media,
+  body[data-ms-wizard="design"] .msc-pcm-proof-preview{
+    max-height:52dvh;
+  }
+  body[data-ms-wizard="design"] .pcmplus-art img,
+  body[data-ms-wizard="design"] .ms-pcm-design-media img,
+  body[data-ms-wizard="design"] .msc-pcm-proof-preview img{
+    max-height:46dvh;
+  }
+}
