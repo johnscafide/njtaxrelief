@@ -6,6 +6,7 @@ on:
       - agent/federal-housing-context-20260913
     paths:
       - "property/scripts/build_federal_housing_context_v041.py.gz"
+      - "property/scripts/run_federal_housing_context_v041.py"
       - "property/data/source-snapshots/hud-chas-2018-2022/**"
       - "towns/town-manifest.json"
       - ".github/workflows/federal-housing-context-v041.yml"
@@ -40,7 +41,7 @@ jobs:
             git push
           fi
       - name: Build and certify municipal source artifact
-        run: python property/scripts/build_federal_housing_context_v041.py
+        run: python property/scripts/run_federal_housing_context_v041.py
       - name: Commit governed artifact
         run: |
           if [ -z "$(git status --porcelain -- property/data/federal-housing-context-v041.json property/data/federal-housing-context-v041-audit.json)" ]; then
