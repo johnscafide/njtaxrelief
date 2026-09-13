@@ -1,0 +1,96 @@
+name: Historical COD source contract
+
+on:
+  push:
+    branches:
+      - data-center-cod-history-2016-2021-20260821
+    paths:
+      - property/scripts/build_historical_cod_2016_2017.py
+      - property/data/cod/HISTORICAL-SOURCE-MANIFEST.md
+      - .github/workflows/historical-cod-source-contract.yml
+  pull_request:
+    paths:
+      - property/scripts/build_historical_cod_2016_2017.py
+      - property/data/cod/HISTORICAL-SOURCE-MANIFEST.md
+      - .github/workflows/historical-cod-source-contract.yml
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+concurrency:
+  group: historical-cod-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  certify-2016-2017:
+    runs-on: ubuntu-latest
+    timeout-minutes: 25
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - name: Install PDF source reader
+        run: python -m pip install --disable-pip-version-check requests pdfplumber
+      - name: Build complete 564-district identity map
+        run: |
+          python - <<'PY'
+          import json
+          from pathlib import Path
+          manifest=json.load(open('towns/town-manifest.json'))
+          pages=manifest.get('pages',[])
+          assert manifest.get('total_towns')==564, manifest.get('total_towns')
+          assert len(pages)==564, len(pages)
+          districts={}
+          for row in pages:
+            code=str(row['district']).zfill(4)
+            assert len(code)==4 and code.isdigit(), code
+            assert code not in districts, code
+            districts[code]={'name':row['name'],'county':row['county']}
+          assert len(districts)==564
+          out=Path('.tmp/historical-cod-identity.json')
+          out.parent.mkdir(exist_ok=True)
+          out.write_text(json.dumps({'districts':districts},sort_keys=True),encoding='utf-8')
+          print({'districts':len(districts)})
+          PY
+      - name: Parse official county deviation PDFs
+        run: >-
+          python property/scripts/build_historical_cod_2016_2017.py
+          --uniformity .tmp/historical-cod-identity.json
+          --output property/data/cod/historical-cod-2016-2017.json
+          --diagnostic property/data/cod/historical-cod-2016-2017-diagnostic.json
+      - name: Verify exact statewide identity contract
+        run: |
+          python - <<'PY'
+          import json
+          data=json.load(open('property/data/cod/historical-cod-2016-2017.json'))
+          diag=json.load(open('property/data/cod/historical-cod-2016-2017-diagnostic.json'))
+          assert data['metric']=='segmented_class_2_cod'
+          assert data['years']==[2016,2017]
+          assert data['district_count']==564
+          assert len(data['districts'])==564
+          assert diag['status']=='pass'
+          assert diag['expected_district_years']==1128
+          assert diag['matched_district_years']==1128
+          assert not diag['unmatched']
+          assert not diag['duplicates']
+          assert not diag['missing_current_district_years']
+          assert {x['municipality'] for x in diag['legacy_only']}=={'PINE VALLEY BORO'}
+          absecon=data['districts']['0101']['series']
+          assert absecon['2016']==14.02, absecon
+          assert absecon['2017']==14.45, absecon
+          print({'districts':len(data['districts']),'absecon':absecon,'legacy_only':len(diag['legacy_only'])})
+          PY
+      - name: Commit governed historical artifact
+        if: always() && github.event_name == 'push'
+        run: |
+          git config user.name "Watchdog Source Automation"
+          git config user.email "actions@users.noreply.github.com"
+          git add -- property/data/cod/historical-cod-2016-2017.json property/data/cod/historical-cod-2016-2017-diagnostic.json || true
+          if git diff --cached --quiet; then
+            echo "No historical COD artifact changes"
+          else
+            git commit -m "[source-build] Certify 2016-2017 segmented Class 2 COD"
+            git push origin HEAD:${GITHUB_REF_NAME}
+          fi
