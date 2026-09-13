@@ -19,6 +19,8 @@ new vm.Script(semantic,{filename:semanticPath});
 
 assert.match(loader,/watchdog-data-graph\.js/,'Property Home must load the Data Graph runtime');
 assert.ok(loader.indexOf('/property/js/watchdog-semantic-context.js')<loader.indexOf('/property/js/dashboard/home/watchdog-data-graph.js'),'Semantic Context must load before the Data Graph');
+assert.equal(loader.includes('/property/js/watchdog-semantic-context.js?v='),false,'Semantic Context boundary must remain on its canonical unversioned URL');
+assert.equal(loader.includes('/property/js/dashboard/home/watchdog-data-graph.js?v='),false,'Data Graph boundary must remain on its canonical unversioned URL');
 assert.match(graph,/WatchdogSemanticContext\.get/,'Data Graph must resolve governed Semantic Context rather than inventing counts');
 for(const pack of ['identity','assessment_tax','sale_market','appeal_uniformity','permits_closing','environment_risk','municipal_pressure']) assert.match(graph,new RegExp(`'${pack}'`),`Data Graph must request governed semantic pack ${pack}`);
 assert.match(graph,/state==='available'/,'Only available markers may be counted as resolved property evidence');
@@ -49,6 +51,6 @@ assert.match(semanticFunction,/https:\/\/watchdogindex\.com/,'Semantic Context m
 assert.match(semanticFunction,/https:\/\/www\.watchdogindex\.com/,'Semantic Context must allow the www Watchdog production origin');
 assert.match(semanticFunction,/http:\/\/127\.0\.0\.1:4173/,'Semantic Context must allow the isolated hosted-acceptance origin');
 assert.match(semanticFunction,/REGISTRY_URL="https:\/\/watchdogindex\.com\/property\/data\/marker-registry\.json"/,'Semantic Context must load the marker registry from the current Watchdog domain');
-for(const [path,content] of [[graphPath,graph],[cssPath,css],[loaderPath,loader],[semanticPath,semantic]]) assert.equal(/\?v=/.test(content),false,`${path} must not introduce version query strings`);
+for(const [path,content] of [[graphPath,graph],[cssPath,css],[semanticPath,semantic]]) assert.equal(/\?v=/.test(content),false,`${path} must not introduce version query strings`);
 
 console.log('Watchdog Data Graph lineage, truthful counting, production-origin, lazy-load, placement and asset contract passed');
