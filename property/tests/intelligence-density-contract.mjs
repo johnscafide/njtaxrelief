@@ -37,7 +37,7 @@ expect(runtime.includes('if(existing){setAnalystExpanded'),'Density enhancement 
 expect(css.includes('.wdcx-root.wdcx-compact'),'Compact Context Intelligence styling must exist.');
 expect(css.includes('.wdai-compact-summary'),'Compact Property Home decision-brief styling must exist.');
 expect(css.includes('-webkit-line-clamp:2'),'Supporting recommendation prose must be visually bounded.');
-expect(css.includes('@media(max-width:760px)'),'Compact Intelligence must have a mobile layout.');
+expect(css.includes('@media(max-width:768px)'),'Compact Intelligence must have a mobile layout at the current shared breakpoint.');
 expect(homeCore.includes("import('../tools/' + name + '.js')"),'Property Home lazy tools must use stable unversioned module URLs.');
 expect(!homeCore.includes(".js?v="),'Property Home core must not restore query-versioned tool imports.');
 expect(homeCore.includes('Watchdog Analyst Intel'),'Legacy Property Home fallback must use Watchdog Analyst Intel naming.');
