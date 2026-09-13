@@ -1,0 +1,47 @@
+name: Temporary CI follow-up patch
+
+on:
+  push:
+    branches:
+      - fix/ci-current-contracts-20260913
+    paths:
+      - .github/workflows/temporary-ci-followup-patch.yml
+
+permissions:
+  contents: write
+
+jobs:
+  patch:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: fix/ci-current-contracts-20260913
+          fetch-depth: 0
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+      - name: Align onboarding mobile contract with current breakpoint
+        shell: python
+        run: |
+          from pathlib import Path
+          path = Path('property/tests/billing-catalog-contract.mjs')
+          text = path.read_text(encoding='utf-8')
+          old = "expect(onboardingPlans.includes('@media(max-width:700px)'), 'Onboarding plan selection lost its mobile layout contract.');"
+          new = "expect(onboardingPlans.includes('@media(max-width:768px)') && onboardingPlans.includes('.wd-plan-grid{grid-template-columns:1fr'), 'Onboarding plan selection lost its mobile single-column layout contract.');"
+          if old not in text:
+              raise SystemExit('Expected stale 700px onboarding contract not found')
+          path.write_text(text.replace(old, new, 1), encoding='utf-8')
+      - name: Verify affected contracts
+        run: |
+          node property/tests/plan-outcomes-contract.mjs
+          node property/tests/billing-catalog-contract.mjs
+          node property/tests/brand-readability-contract.mjs
+      - name: Commit follow-up and remove one-shot workflow
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git rm .github/workflows/temporary-ci-followup-patch.yml
+          git add property/tests/billing-catalog-contract.mjs
+          git commit -m "Align onboarding billing contract with current mobile breakpoint"
+          git push origin HEAD:fix/ci-current-contracts-20260913
