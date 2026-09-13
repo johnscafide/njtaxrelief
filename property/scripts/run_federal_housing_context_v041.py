@@ -100,7 +100,10 @@ def load_commute_bulk(key_to_district):
         if len(csv_names) != 1:
             raise RuntimeError(f"Expected one ACS B08301 CSV in ZIP, found {csv_names}")
         with archive.open(csv_names[0]) as raw:
-            text = io.TextIOWrapper(raw, encoding="utf-8-sig", newline="")
+            # Census VRE files contain legacy single-byte punctuation in some
+            # geography/table-title records. Latin-1 is lossless for every byte;
+            # identifiers, names, orders and numeric estimates used here are ASCII.
+            text = io.TextIOWrapper(raw, encoding="latin-1", newline="")
             reader = csv.reader(text)
             # Census VRE documentation specifies FIRSTOBS=4. The first three
             # physical records are table metadata; data rows then use the fixed
@@ -169,7 +172,6 @@ def load_commute_bulk(key_to_district):
             "other": None if any(parts[k] is None for k in ("taxi_ridehail", "motorcycle", "other")) else parts["taxi_ridehail"] + parts["motorcycle"] + parts["other"],
         }
         compact_pct = {k: module.pct(v, total) for k, v in compact_counts.items()}
-        # GEOID 0600000US + state(2) + county(3) + county subdivision(5)
         suffix = geoid.split("US", 1)[1] if "US" in geoid else ""
         records[district] = {
             "total_workers": total,
