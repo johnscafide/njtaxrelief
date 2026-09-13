@@ -14,6 +14,7 @@ const billingClient = read('property/js/billing-client.js');
 const migration = read('supabase/migrations/20260818213000_watchdog_full_tier_entitlement_contract.sql');
 const dataWorkbench = read('property/data-workbench/index.html');
 const dataCenter = read('property/data-center/index.html');
+const dataCenterRuntime = read('property/js/data-center-runtime-v2.js');
 
 assert(orderLiteral.test(planContext), 'plan-context.js must preserve Standard → Agent → Pro → Pro+ → Teams → Developer order.');
 assert(orderLiteral.test(accessGuard), 'access-guard.js must preserve Standard → Agent → Pro → Pro+ → Teams → Developer order.');
@@ -28,7 +29,8 @@ for (const [source, expected] of [
 }
 
 assert(/data-access-require=["']agent["']/.test(dataWorkbench), 'Data Workbench must remain Agent-or-higher.');
-assert(/data-access-require=["']pro_plus["']/.test(dataCenter), 'Data Center must remain Pro+-or-higher.');
+assert(!/data-access-require=/.test(dataCenter) && !dataCenter.includes('/property/js/access-guard.js'), 'Data Center catalog/overview must remain public.');
+assert(dataCenterRuntime.includes("required_plan: 'pro_plus'") && dataCenterRuntime.includes("from('saved_properties')") && dataCenterRuntime.includes("from('saved_data_center_views')") && dataCenterRuntime.includes("from('data_center_delivery_jobs')"), 'Data Center account-owned workspace actions must remain Pro+-or-higher.');
 
 for (const tier of ['standard', 'agent', 'pro', 'pro_plus', 'teams']) {
   assert(migration.includes(`'${tier}'::text`), `Production entitlement constraint must include ${tier}.`);
@@ -48,5 +50,5 @@ console.log(JSON.stringify({
   passed: true,
   contract: 'watchdog-commercial-tier-ladder-v1',
   tiers: ['standard', 'agent', 'pro', 'pro_plus', 'teams', 'developer'],
-  checks: 18
+  checks: 20
 }, null, 2));
