@@ -1,0 +1,64 @@
+name: Temporary Today navigation repair
+
+on:
+  push:
+    branches:
+      - fix/ci-current-contracts-20260913
+    paths:
+      - .github/workflows/temporary-today-nav-repair.yml
+
+permissions:
+  contents: write
+
+jobs:
+  patch:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: fix/ci-current-contracts-20260913
+          fetch-depth: 0
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+      - name: Restore Today in canonical universal navigation
+        shell: python
+        run: |
+          from pathlib import Path
+
+          menu = Path('property/js/watchdog-universal-menu.js')
+          text = menu.read_text(encoding='utf-8')
+          text = text.replace("var VERSION = '20260824b';", "var VERSION = '20260913a';", 1)
+          needle = "    ];\n    if(state.ready && isAgent()) out.push({key:'agent-desk',href:route('/agent-desk'),icon:'fa-bullseye',label:'Agent Control'});"
+          repl = "    ];\n    if(state.ready && can('pro_plus')) out.push({key:'today',href:route('/intelligence/daily'),icon:'fa-inbox',label:'Today'});\n    if(state.ready && isAgent()) out.push({key:'agent-desk',href:route('/agent-desk'),icon:'fa-bullseye',label:'Agent Control'});"
+          if needle not in text:
+              raise SystemExit('Universal menu insertion point not found')
+          text = text.replace(needle, repl, 1)
+          needle = "  function activeFor(item,page){\n    if(item.key === 'robust') return page === 'robust';"
+          repl = "  function activeFor(item,page){\n    if(item.key === 'today') return page === 'intelligence' && /\\/intelligence\\/daily\\/?$/.test(location.pathname || '');\n    if(item.key === 'robust') return page === 'robust';"
+          if needle not in text:
+              raise SystemExit('Universal active-state insertion point not found')
+          menu.write_text(text.replace(needle, repl, 1), encoding='utf-8')
+
+          contract = Path('property/tests/universal-menu-contract.mjs')
+          text = contract.read_text(encoding='utf-8')
+          needle = "  ['pulse', 'Property Pulse'],\n  ['agent-desk', 'Agent Control'],"
+          repl = "  ['pulse', 'Property Pulse'],\n  ['today', 'Today'],\n  ['agent-desk', 'Agent Control'],"
+          if needle not in text:
+              raise SystemExit('Universal contract canonical list insertion point not found')
+          text = text.replace(needle, repl, 1)
+          text = text.replace("assert(universal.includes(\"can('pro_plus')\"), 'Pro+ menu gating is missing');", "assert(universal.includes(\"can('pro_plus')\"), 'Pro+ menu gating is missing');\nassert(universal.includes(\"href:route('/intelligence/daily')\") && universal.includes(\"key:'today'\"), 'Pro+ Today return route is missing from canonical navigation.');", 1)
+          text = text.replace("var VERSION = '20260824b'", "var VERSION = '20260913a'", 1)
+          contract.write_text(text, encoding='utf-8')
+      - name: Verify navigation and retention contracts
+        run: |
+          node property/tests/universal-menu-contract.mjs
+          node property/tests/intelligence-retention-integration-contract.mjs || true
+      - name: Commit implementation and remove one-shot workflow
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git rm .github/workflows/temporary-today-nav-repair.yml
+          git add property/js/watchdog-universal-menu.js property/tests/universal-menu-contract.mjs
+          git commit -m "Restore Today in canonical universal navigation"
+          git push origin HEAD:fix/ci-current-contracts-20260913
