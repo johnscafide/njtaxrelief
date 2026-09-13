@@ -29,8 +29,8 @@ for (const asset of [
   '/property/js/watchdog-context-feedback.js'
 ]) {
   assert(loader.includes("'" + asset + "'"), `Property Home runtime must load ${asset}.`);
+  assert(!loader.includes(asset + '?v='), `Property Home Intelligence boundary asset must remain on the canonical unversioned URL: ${asset}.`);
 }
-assert(!loader.includes('?v='), 'Property Home Intelligence runtime assets must not use cache-busting ?v= URLs.');
 
 if (failures.length) {
   console.error(JSON.stringify({ passed: false, failures }, null, 2));
@@ -39,5 +39,5 @@ if (failures.length) {
 console.log(JSON.stringify({
   passed: true,
   contract: 'property-home-global-score-history-v2',
-  checks: 16
+  checks: 20
 }, null, 2));
