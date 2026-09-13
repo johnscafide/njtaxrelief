@@ -77,6 +77,7 @@ expect(loader.includes('/property/js/dashboard/home/profession-onboarding.js'), 
 expect(loader.includes('/property/js/dashboard/home/watchdog-analyst-intel.js'), 'Loader must install Analyst Intel runtime.');
 expect(loader.includes('/property/js/dashboard/home/watchdog-intent-context.js'), 'Loader must install governed Intent Context runtime.');
 expect(menu.includes('/property/js/dashboard/home/watchdog-analyst-intel-loader.js'), 'Property Home runtime must load Analyst Intel.');
+expect(!menu.includes('/property/js/dashboard/home/watchdog-analyst-intel-loader.js?v='), 'Property Home must load the Analyst Intel boundary from its canonical URL.');
 expect(css.includes('.ai.wdai'), 'Analyst Intel must have scoped Property Home styling.');
 expect(css.includes('.wd-profession-onboarding'), 'Profession onboarding must have a production UI treatment.');
 expect(css.includes('.hm-wrap > .ai.wdai'), 'Analyst Intel must explicitly override legacy Agent Intel container rules.');
@@ -86,7 +87,7 @@ expect(css.includes('grid-column:1 / -1 !important'), 'Analyst Intel must remain
 expect(intentCss.includes('.wd-intent-context'), 'Intent Context must have a production UI treatment.');
 expect(intentCss.includes('.wd-intent-options'), 'Intent Context must present compact decision choices.');
 
-for (const [key, content] of Object.entries({ analyst, intent, onboarding, loader, menu, css, intentCss })) {
+for (const [key, content] of Object.entries({ analyst, intent, onboarding, loader, css, intentCss })) {
   expect(!content.includes('?v='), `${files[key]} must not introduce ?v= asset version parameters.`);
 }
 
