@@ -103,7 +103,7 @@ expect(!onboarding.includes('monthly: 59'), 'Onboarding hard-coded Agent catalog
 expect(!onboarding.includes('monthly: 129'), 'Onboarding hard-coded Pro catalog pricing instead of loading it from the server catalog.');
 expect(!onboarding.includes('monthly: 399'), 'Onboarding hard-coded Pro+ catalog pricing instead of loading it from the server catalog.');
 expect(onboardingPlans.includes('grid-template-columns:repeat(3,minmax(0,1fr))'), 'Onboarding paid plan layout lost its desktop three-plan presentation.');
-expect(onboardingPlans.includes('@media(max-width:700px)'), 'Onboarding plan selection lost its mobile layout contract.');
+expect(onboardingPlans.includes('@media(max-width:768px)') && onboardingPlans.includes('.wd-plan-grid{grid-template-columns:1fr'), 'Onboarding plan selection lost its mobile single-column layout contract.');
 expect(onboardingPlans.includes('.wd-intelligence-brand-word'), 'Onboarding plan selection lost Watchdog Intelligence brand treatment.');
 
 expect(!account.includes('monthly: 29'), 'Legacy Agent $29 pricing returned to Account.');
