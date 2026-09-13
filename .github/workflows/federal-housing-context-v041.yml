@@ -7,6 +7,7 @@ on:
     paths:
       - "property/scripts/build_federal_housing_context_v041.py.gz"
       - "property/scripts/run_federal_housing_context_v041.py"
+      - "property/scripts/repair_hud_chas_snapshot_v041.py"
       - "property/data/source-snapshots/hud-chas-2018-2022/**"
       - "towns/town-manifest.json"
       - ".github/workflows/federal-housing-context-v041.yml"
@@ -38,6 +39,18 @@ jobs:
             git config user.email "watchdog-source-bot@users.noreply.github.com"
             git add property/scripts/build_federal_housing_context_v041.py
             git commit -m "Materialize federal housing source builder"
+            git push
+          fi
+      - name: Validate pinned HUD CHAS snapshot
+        run: |
+          python property/scripts/repair_hud_chas_snapshot_v041.py
+          if [ -z "$(git status --porcelain -- property/data/source-snapshots/hud-chas-2018-2022)" ]; then
+            echo "Pinned CHAS snapshot is canonical."
+          else
+            git config user.name "watchdog-source-bot"
+            git config user.email "watchdog-source-bot@users.noreply.github.com"
+            git add property/data/source-snapshots/hud-chas-2018-2022
+            git commit -m "Repair pinned HUD CHAS snapshot transport fidelity"
             git push
           fi
       - name: Build and certify municipal source artifact
