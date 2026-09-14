@@ -43,7 +43,8 @@ expect(js.includes('property.assessed'), 'selected-property assessment must use 
 expect(js.includes('property.last_year_tax'), 'selected-property tax must use live data');
 expect(js.includes('WD.S.changes'), 'recent changes must use live data');
 expect(js.includes('WD.S.scoreHistory'), 'score history must use live observations when available');
-expect(js.includes("WD.db.auth.signOut()"), 'integrated account menu must retain sign-out behavior');
+expect(js.includes("typeof WD.db === 'function' ? WD.db()"), 'integrated account menu must resolve the shared Supabase client');
+expect(js.includes("client.auth.signOut()"), 'integrated account menu must retain sign-out behavior');
 expect(!js.includes('12 Maple Ridge Drive'), 'marketing sample address must not leak into the real dashboard');
 expect(!js.includes('$1,247,000'), 'marketing sample value must not leak into the real dashboard');
 
