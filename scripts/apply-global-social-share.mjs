@@ -3,14 +3,15 @@ import { join, relative } from 'node:path';
 import { createHash } from 'node:crypto';
 
 const ROOT = process.cwd();
-const IMAGE_PATH = '/watchdog-social-share-20260913-v2.jpg';
+const IMAGE_PATH = '/watchdog-social-share-20260913-v3.jpg';
 const IMAGE_URL = `https://www.watchdogindex.com${IMAGE_PATH}`;
 const IMAGE_WIDTH = 600;
 const IMAGE_HEIGHT = 315;
 const IMAGE_SHA256 = 'ba7e1781f05840a87ea4d13a32c82622729a069c6f9bba4d663b87a8be51f01e';
 const LEGACY_IMAGE_URLS = [
   'https://www.watchdogindex.com/watchdog-social-share.jpg',
-  'https://www.watchdogindex.com/watchdog-social-share-20260913.jpg'
+  'https://www.watchdogindex.com/watchdog-social-share-20260913.jpg',
+  'https://www.watchdogindex.com/watchdog-social-share-20260913-v2.jpg'
 ];
 const IMAGE_ALT = 'Watchdog Property Intelligence across New Jersey';
 const EXCLUDED_DIRS = new Set(['.git', '.vercel', 'node_modules', 'coverage']);
@@ -51,6 +52,7 @@ async function materializeSocialImage() {
 
   const outputs = [
     IMAGE_PATH,
+    '/watchdog-social-share-20260913-v2.jpg',
     '/watchdog-social-share-20260913.jpg',
     '/watchdog-social-share.jpg'
   ];
