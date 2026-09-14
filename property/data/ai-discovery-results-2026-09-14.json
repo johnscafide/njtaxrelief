@@ -1,0 +1,118 @@
+{
+  "benchmark_date": "2026-09-14",
+  "registry_version": "2026-09-07.2",
+  "canonical_origin": "https://www.watchdogindex.com",
+  "evidence_policy": "Referral telemetry is not a citation claim. Platform citations are recorded only when directly observable in that platform or an official publisher performance report.",
+  "first_party_referrals_30d": {
+    "total": 2,
+    "sources": [
+      {
+        "source": "chatgpt",
+        "referrals": 1,
+        "landing_path": "/insights/south-jersey-housing-market-summer-2026",
+        "latest_seen": "2026-09-13T15:58:29.102322Z",
+        "evidence": {
+          "referrer_host": "chatgpt.com",
+          "utm_source": "chatgpt.com"
+        },
+        "classification": "first_party_referral_click_through_not_citation_proof"
+      },
+      {
+        "source": "claude",
+        "referrals": 1,
+        "landing_path": "/",
+        "latest_seen": "2026-09-08T19:54:19.907282Z",
+        "evidence": {
+          "referrer_host": "claude.ai"
+        },
+        "classification": "first_party_referral_click_through_not_citation_proof"
+      }
+    ]
+  },
+  "official_platform_evidence": {
+    "chatgpt": {
+      "status": "discovery_contract_current",
+      "control": "OAI-SearchBot",
+      "notes": "Official OpenAI publisher guidance continues to separate ChatGPT Search discovery from GPTBot training controls and documents utm_source=chatgpt.com for referral attribution."
+    },
+    "microsoft_copilot": {
+      "status": "official_report_available_but_watchdog_report_not_observed_in_this_run",
+      "control": "Bingbot",
+      "notes": "Bing AI Performance is the authoritative Microsoft first-party source for citation counts, cited URLs and grounding queries. No Watchdog AI Performance export or authenticated report was available in this run."
+    },
+    "google_ai": {
+      "status": "official_reporting_exists_but_watchdog_snapshot_unavailable",
+      "control": "Googlebot/Search eligibility",
+      "notes": "Google Preferred Sources remains available and can highlight selected publishers in AI Mode and AI Overviews. Watchdog search_console_snapshots currently contains zero rows, so no Google generative-AI visibility count is claimed here."
+    },
+    "perplexity": {
+      "status": "discovery_contract_current_no_direct_watchdog_referral_observed_30d",
+      "control": "PerplexityBot",
+      "notes": "Perplexity states PerplexityBot respects robots.txt and is used for search-style indexing rather than foundation-model pretraining."
+    },
+    "apple_intelligence": {
+      "status": "discovery_contract_current_no_direct_watchdog_citation_observed",
+      "control": "Applebot",
+      "notes": "Apple documents Applebot for Spotlight, Siri and Safari discovery and for up-to-date AI context; Applebot-Extended remains a separate foundation-model training control."
+    },
+    "claude": {
+      "status": "discovery_contract_current_referral_observed",
+      "control": "Claude-SearchBot and Claude-User",
+      "notes": "Anthropic documents Claude-SearchBot for search indexing and Claude-User for user-directed retrieval, separate from ClaudeBot model-development crawling. One first-party Claude referral to the canonical Watchdog homepage was observed."
+    },
+    "grok": {
+      "status": "no_verified_official_publisher_crawler_contract_found",
+      "notes": "No robots.txt policy change made."
+    },
+    "meta_ai": {
+      "status": "no_verified_official_publisher_crawler_contract_found",
+      "notes": "No robots.txt policy change made."
+    }
+  },
+  "public_web_discovery_baseline": {
+    "method": "Generic public web retrieval for the fixed high-value benchmark topics; this is not a proprietary answer-engine citation score.",
+    "watchdog_generic_topic_result_observed": false,
+    "strong_competitor_or_authority_examples": [
+      "New Jersey Division of Taxation",
+      "CivicGraph",
+      "ParGo AI",
+      "Permit Signal",
+      "PermitPro",
+      "Garden State AI",
+      "Kiplinger"
+    ],
+    "watchdog_brand_or_site_discovery_observed": true,
+    "observed_watchdog_surfaces": [
+      "https://www.watchdogindex.com/faq",
+      "https://www.watchdogindex.com/terms",
+      "https://www.watchdogindex.com/privacy"
+    ],
+    "notes": "Current public retrieval continues to show strong brand/site recognition but weak unbranded topical retrieval for the benchmark query families. Search indexes may lag current redirects and canonicalization."
+  },
+  "successful_content_pattern": {
+    "url": "https://www.watchdogindex.com/insights/south-jersey-housing-market-summer-2026",
+    "evidence": "Received an explicit ChatGPT referral on 2026-09-13.",
+    "observed_strengths": [
+      "timely New Jersey local topic",
+      "specific numeric evidence",
+      "primary and authoritative source links",
+      "Watchdog-derived local synthesis",
+      "clear article hierarchy and takeaway",
+      "canonical /insights route"
+    ],
+    "recommendation": "Use this evidence-rich local synthesis pattern for future citation-oriented Insights rather than increasing generic template page volume."
+  },
+  "measurement_gaps": [
+    "No authenticated Bing AI Performance export was available in this run.",
+    "public.search_console_snapshots has zero rows, so no Watchdog Google generative-AI performance metric is available.",
+    "No directly observable Perplexity, Apple, Grok or Meta AI Watchdog citation was available in this run."
+  ],
+  "crawler_policy_action": "none",
+  "crawler_policy_reason": "Current public discovery permissions already match verified official guidance for OpenAI, Perplexity, Apple, Bing and Anthropic while preserving private/member/developer exclusions. Grok and Meta AI remain unchanged until an official publisher crawler contract is verified.",
+  "next_focus": [
+    "Treat the ChatGPT-referred South Jersey housing Insight as a successful content-format signal and replicate its original local evidence pattern.",
+    "Restore first-party Google Search Console generative-AI measurement into Watchdog developer analytics.",
+    "Capture Bing AI Performance exports or authenticated first-party evidence before assigning Microsoft citation counts.",
+    "Continue building unbranded topical authority around Chapter 123, assessment fairness, revaluations and municipality-level source-backed intelligence."
+  ]
+}
