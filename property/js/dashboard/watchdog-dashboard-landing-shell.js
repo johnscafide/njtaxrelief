@@ -90,8 +90,9 @@
     var signout = byId('wdm-signout');
     if (signout) signout.addEventListener('click', function () {
       var WD = window.WD;
-      if (WD && WD.db && WD.db.auth && typeof WD.db.auth.signOut === 'function') {
-        WD.db.auth.signOut().finally(function () { location.assign('/'); });
+      var client = WD && typeof WD.db === 'function' ? WD.db() : null;
+      if (client && client.auth && typeof client.auth.signOut === 'function') {
+        client.auth.signOut().finally(function () { location.assign('/'); });
       } else {
         location.assign('/');
       }
