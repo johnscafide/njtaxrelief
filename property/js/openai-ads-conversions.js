@@ -1,12 +1,13 @@
 /* Watchdog OpenAI Ads conversion measurement.
    The browser Pixel ID is intentionally public configuration; the Conversions API key is server-only.
-   Until WATCHDOG_OPENAI_ADS_PIXEL_ID is configured, this runtime is a safe no-op. */
+   Until PUBLIC_PIXEL_ID (or WATCHDOG_OPENAI_ADS_PIXEL_ID) is configured, this runtime is a safe no-op. */
 (function(){
   'use strict';
   if(window.__WATCHDOG_OPENAI_ADS_RUNTIME__)return;
   window.__WATCHDOG_OPENAI_ADS_RUNTIME__=true;
 
   var SDK='https://bzrcdn.openai.com/sdk/oaiq.min.js';
+  var PUBLIC_PIXEL_ID=''; // Fill with the Ads Manager Pixel ID after provisioning. This value is not secret.
   var configuredPixelId='';
   var initialized=false;
   var sdkRequested=false;
@@ -17,7 +18,7 @@
     return id&&id.length<=128?id:'';
   }
   function pixelId(){
-    return cleanPixelId(configuredPixelId||window.WATCHDOG_OPENAI_ADS_PIXEL_ID||'');
+    return cleanPixelId(configuredPixelId||window.WATCHDOG_OPENAI_ADS_PIXEL_ID||PUBLIC_PIXEL_ID||'');
   }
   function paidSurface(){
     var path=String(location.pathname||'/').replace(/\/+$/,'')||'/';
@@ -29,6 +30,7 @@
   function queue(){
     if(typeof window.oaiq==='function')return window.oaiq;
     var q=function(){q.q=q.q||[];q.q.push(arguments);};
+    q.q=[];
     window.oaiq=q;
     return q;
   }
