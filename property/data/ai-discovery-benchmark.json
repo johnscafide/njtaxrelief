@@ -1,30 +1,26 @@
 {
-  "version": "2026-09-07.2",
+  "version": "2026-09-14.1",
   "canonical_brand": "Watchdog",
   "canonical_origin": "https://www.watchdogindex.com",
   "purpose": "Measure whether answer engines recognize, cite, and correctly describe Watchdog for high-value New Jersey property questions without treating unobservable proprietary UI behavior as fact.",
   "platforms": [
-    {"id":"chatgpt","name":"ChatGPT Search / Atlas","measurement":["ai_referral_analytics","manual_citation_benchmark","agent_accessibility"],"discovery_control":"OAI-SearchBot; public interactive surfaces should also follow WAI-ARIA best practices for Atlas agent compatibility"},
-    {"id":"microsoft_copilot","name":"Microsoft Copilot / Bing AI","measurement":["bing_ai_performance","ai_referral_analytics","manual_citation_benchmark"],"discovery_control":"Bingbot; Bing AI Performance is the authoritative first-party citation report when available"},
-    {"id":"google_ai","name":"Google AI Mode / AI Overviews / Gemini","measurement":["search_console_gen_ai_performance","search_console","preferred_sources","ai_referral_analytics","manual_citation_benchmark"],"discovery_control":"Googlebot/Search eligibility; Google Search Console's dedicated generative-AI performance reports are globally available as of 2026-08-31 and can be exported from Search Console. The public Search Console API documentation does not currently describe a separate generative-AI report query contract, so ordinary Search Analytics API data must not be relabeled as AI Mode or AI Overview visibility. No special AI markup or llms.txt is required for AI Mode or AI Overviews."},
+    {"id":"chatgpt","name":"ChatGPT Search / Atlas","measurement":["ai_referral_analytics","manual_citation_benchmark","agent_accessibility"],"discovery_control":"OAI-SearchBot. Keep public pages crawlable through robots, CDN/WAF and application layers; ChatGPT referrals may carry utm_source=chatgpt.com."},
+    {"id":"microsoft_copilot","name":"Microsoft Copilot / Bing AI","measurement":["bing_ai_performance","ai_referral_analytics","manual_citation_benchmark"],"discovery_control":"Bingbot; Bing AI Performance is authoritative first-party citation evidence when available. Use IndexNow to accelerate changed-URL discovery."},
+    {"id":"google_ai","name":"Google AI Mode / AI Overviews / Gemini","measurement":["search_console","preferred_sources","ai_referral_analytics","manual_citation_benchmark"],"discovery_control":"Googlebot/Search eligibility. AI Mode and AI Overviews follow normal Search controls; Google says llms.txt is not needed for Search. Preferred Sources can highlight selected publishers in AI Mode/AI Overviews. Do not relabel ordinary Search Console data as AI citation evidence."},
     {"id":"perplexity","name":"Perplexity","measurement":["ai_referral_analytics","manual_citation_benchmark"],"discovery_control":"PerplexityBot"},
-    {"id":"apple_intelligence","name":"Apple Intelligence / Siri / Spotlight / Safari","measurement":["manual_citation_benchmark"],"discovery_control":"Applebot; Applebot-Extended remains a separate model-training control"},
+    {"id":"apple_intelligence","name":"Apple Intelligence / Siri / Spotlight / Safari","measurement":["manual_citation_benchmark"],"discovery_control":"Applebot; keep Applebot-Extended as a separate model-use/training policy decision"},
     {"id":"claude","name":"Claude Search / user-directed web retrieval","measurement":["ai_referral_analytics","manual_citation_benchmark"],"discovery_control":"Claude-SearchBot and Claude-User; ClaudeBot remains a separate model-training control"},
     {"id":"grok","name":"Grok","measurement":["ai_referral_analytics","manual_citation_benchmark"],"discovery_control":"verify official current crawler guidance before robots changes"},
     {"id":"meta_ai","name":"Meta AI","measurement":["ai_referral_analytics","manual_citation_benchmark"],"discovery_control":"verify official current crawler guidance before robots changes"},
-    {"id":"future_answer_engine","name":"Future answer engines / grounding APIs","measurement":["platform_watch","ai_referral_analytics"],"discovery_control":"adopt only documented crawler/indexing contracts; track AI-native grounding systems such as Microsoft Web IQ and emerging machine-readable use signals such as Cloudflare Content Signals, but do not adopt experimental directives without confirming their compatibility and Watchdog's explicit training/reuse policy"}
+    {"id":"future_answer_engine","name":"Future answer engines / grounding APIs","measurement":["platform_watch","ai_referral_analytics"],"discovery_control":"Adopt documented crawler/indexing contracts only. Track machine-readable content-use standards, but keep search/retrieval permission separate from model-training/reuse policy."}
   ],
-  "scorecard_fields": [
-    "watchdog_mentioned",
-    "watchdog_cited",
-    "canonical_watchdog_url_cited",
-    "watchdog_position_if_ranked",
-    "factual_accuracy",
-    "watchdog_original_data_used",
-    "competing_sources_cited",
-    "notes",
-    "checked_at"
+  "publisher_surfaces": [
+    {"path":"/robots.txt","role":"authoritative crawler access policy"},
+    {"path":"/sitemap.xml","role":"canonical public discovery feed"},
+    {"path":"/llms.txt","role":"optional answer-engine publisher map; not a ranking mechanism or training-rights grant"},
+    {"path":"/c04eb5246cd74475b86188f12c31e21b.txt","role":"IndexNow ownership key"}
   ],
+  "scorecard_fields": ["watchdog_mentioned","watchdog_cited","canonical_watchdog_url_cited","watchdog_position_if_ranked","factual_accuracy","watchdog_original_data_used","competing_sources_cited","notes","checked_at"],
   "prompts": [
     {"id":"brand-entity","category":"entity","prompt":"What is Watchdog Property Intelligence in New Jersey, and what does it do?","target_urls":["https://www.watchdogindex.com/","https://www.watchdogindex.com/robust"]},
     {"id":"chapter-123","category":"property-tax-appeals","prompt":"How does New Jersey Chapter 123 work, and how can a homeowner tell whether an assessment may be outside the common level range?","target_urls":["https://www.watchdogindex.com/glossary/chapter-123","https://www.watchdogindex.com/appeal-savings-estimator"]},
@@ -44,8 +40,9 @@
     "Do not simulate or fabricate proprietary answer-engine results.",
     "Prefer canonical https://www.watchdogindex.com URLs in all benchmark evidence.",
     "Re-check official crawler and publisher documentation before changing robots policy for a platform.",
-    "Treat Bing AI Performance, Google Search Console generative-AI performance, first-party referral telemetry, and direct platform evidence as separate evidence classes.",
-    "Do not infer Google generative-AI impressions from the ordinary Search Analytics API unless Google documents an explicit generative-AI query contract for that API.",
-    "Keep search/retrieval crawler permissions separate from model-training crawler permissions whenever a platform documents distinct controls."
+    "Treat Bing AI Performance, Search Console evidence, first-party referral telemetry, and direct platform evidence as separate evidence classes.",
+    "Do not infer AI citations from ordinary Google Search Console impressions or AI referral clicks.",
+    "Keep search/retrieval crawler permissions separate from model-training crawler permissions whenever a platform documents distinct controls.",
+    "llms.txt is optional metadata for consumers that support it; never describe it as required by Google or as a ranking boost."
   ]
 }
