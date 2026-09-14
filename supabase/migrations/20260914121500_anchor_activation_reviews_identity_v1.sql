@@ -236,29 +236,19 @@ $$;
 revoke all on function public.record_my_anchor_funnel_event(uuid,text) from public, anon;
 grant execute on function public.record_my_anchor_funnel_event(uuid,text) to authenticated;
 
--- Activation now requires meaningful product behavior. A passive page/tool load is not activation.
+-- Activation now requires meaningful product behavior. Passive page/tool loads are excluded.
 create or replace view public.analytics_daily_funnel as
-with events as (
-  select
-    (created_at at time zone 'America/New_York')::date as event_date,
-    visitor_id,
-    session_id,
-    event_name
-  from public.watchdog_product_events
-  where audience_class = 'external'
-), daily as (
-  select
-    event_date,
-    count(distinct visitor_id) as visitors,
-    count(distinct session_id) as sessions,
-    count(distinct visitor_id) filter (where event_name in (
-      'property_lookup_succeeded','export_completed','property_saved','monitoring_enabled',
-      'intelligence_action_completed','data_center_dataset_built','data_center_export_completed'
-    )) as activated_visitors,
-    count(distinct visitor_id) filter (where event_name='upgrade_cta_clicked') as upgrade_intent_visitors,
-    count(distinct visitor_id) filter (where event_name='checkout_started') as checkout_visitors,
-    count(distinct visitor_id) filter (where event_name='subscription_confirmed') as subscription_visitors
-  from events
-  group by event_date
-)
-select * from daily order by event_date desc;
+select
+  occurred_at::date as day,
+  count(distinct visitor_id) filter (where event_name = 'page_view') as visitors,
+  count(distinct visitor_id) filter (where event_name in (
+    'property_lookup_succeeded','export_completed','property_saved','monitoring_enabled',
+    'intelligence_action_completed','data_center_dataset_built','data_center_export_completed'
+  )) as activated_visitors,
+  count(distinct visitor_id) filter (where event_name = 'upgrade_cta_clicked') as upgrade_intent,
+  count(distinct visitor_id) filter (where event_name = 'checkout_started') as checkout_starts,
+  count(distinct visitor_id) filter (where event_name = 'subscription_confirmed') as paid_conversions
+from public.watchdog_product_events
+where audience_class in ('external_visitor','external_account')
+group by occurred_at::date
+order by occurred_at::date desc;
