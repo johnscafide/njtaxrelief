@@ -54,7 +54,7 @@ must(complete, 'event.oppref = args.context.oppref', 'oppref must be forwarded u
 must(complete, 'event.user = { obref: args.context.obref }', 'obref must be forwarded unchanged when available.');
 must(complete, "opt_out: true", 'Server conversion events must opt out of future user-level personalization.');
 must(complete, 'ads_event_id: adsContext ? adsEventId : null', 'The server event ID must return to the browser for Pixel/CAPI deduplication.');
-must(complete, 'EdgeRuntime.waitUntil', 'CAPI delivery should use background execution when the Edge Runtime supports it.');
+must(complete, 'edgeRuntime.waitUntil', 'CAPI delivery should use background execution when the Edge Runtime supports it.');
 must(complete, "console.warn('OPENAI_ADS_CAPI_FAILED'", 'CAPI failures must be isolated and logged without exposing identifiers.');
 
 console.log('OpenAI Ads conversion measurement contract passed.');
