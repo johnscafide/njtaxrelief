@@ -180,6 +180,7 @@
     loadScript('wd-nj-address-autocomplete-script','/property/js/nj-address-autocomplete.js');
     loadScript('wd-landing-county-intel-script','/property/js/landing-county-intel.js');
     loadScript('wd-anchor-home-funnel-script','/property/js/anchor-home-funnel.js');
+    loadScript('wd-anchor-rating-summary-script','/property/js/anchor-rating-summary.js');
   }
 
   function runAddressFromQuery(){
