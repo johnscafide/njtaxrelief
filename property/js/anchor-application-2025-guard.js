@@ -61,6 +61,52 @@
 var form=document.getElementById('wd-anchor-form');
 if(!form)return;
 function q(s,r){return(r||document).querySelector(s)}function qa(s,r){return Array.prototype.slice.call((r||document).querySelectorAll(s))}function active(){return q('.wd-step.is-active')}function selected(path,value){var g=q('[data-choice="'+path+'"]');return !!(g&&q('[data-value="'+value+'"].is-selected',g))}function choiceAnswered(path){var g=q('[data-choice="'+path+'"]');return !!(g&&q('.is-selected',g))}function value(name){var el=q('[name="'+name+'"]');return el?String(el.value||'').trim():''}function shown(el){return !!el&&!el.closest('.is-hidden')&&!el.closest('[hidden]')}function route(){return String(q('#wd-route-badge')&&q('#wd-route-badge').textContent||'').toLowerCase().indexOf('pas-1')>=0?'pas-1':'anc-1'}function housing(){var g=q('[data-choice="residency_status"]'),b=g&&q('.is-selected',g);return b?b.dataset.value:''}function married(){var s=value('filing_status');return s==='D'||s==='F'}function message(text){var el=q('#wd-app-status');if(!el)return;el.textContent=text||'';el.className='wd-app-status'+(text?' is-visible error':'')}
+(function installAccountEmailAndRecoveryUx(){
+  var email=q('#wd-auth-email');
+  if(email){
+    email.dataset.watchdogEmailQuality='1';
+    function clearEmailWarning(){
+      email.removeAttribute('aria-invalid');
+      var host=email.parentNode;
+      if(host)qa('.watchdog-email-quality-warning',host).forEach(function(warning){warning.remove();});
+      var status=q('#wd-app-status'),copy=String(status&&status.textContent||'');
+      if(status&&/valid email|looks like a typo|did you mean/i.test(copy)){status.textContent='';status.className='wd-app-status';}
+    }
+    clearEmailWarning();
+    email.addEventListener('input',clearEmailWarning);
+    var send=q('#wd-auth-send');
+    if(send)send.addEventListener('click',function(ev){
+      var quality=window.WatchdogEmailQuality&&typeof window.WatchdogEmailQuality.check==='function'?window.WatchdogEmailQuality.check(email.value):null;
+      if(quality&&(!quality.valid||quality.suspicious)){
+        ev.preventDefault();
+        ev.stopImmediatePropagation();
+        message(quality.message||'Check your email address before we send a code.');
+      }
+    },true);
+  }
+  var copyButton=q('#wd-copy-recovery'),key=q('#wd-recovery-key');
+  if(copyButton&&key&&!q('#wd-download-recovery')){
+    var downloadButton=document.createElement('button');
+    downloadButton.id='wd-download-recovery';
+    downloadButton.type='button';
+    downloadButton.className='wd-btn secondary small';
+    downloadButton.textContent='Download recovery key';
+    copyButton.insertAdjacentElement('afterend',downloadButton);
+    downloadButton.addEventListener('click',function(){
+      var recoveryKey=String(key.textContent||'').trim();
+      if(!recoveryKey)return message('Your recovery key is not ready yet.');
+      var text=['Watchdog Private Vault Recovery Key','',recoveryKey,'','Keep this file private and somewhere you can find it later.','Watchdog cannot recover this key for you.','','Generated for the 2025 New Jersey Property Tax Relief application.'].join('\n');
+      var blob=new Blob([text],{type:'text/plain;charset=utf-8'}),url=URL.createObjectURL(blob),link=document.createElement('a');
+      link.href=url;
+      link.download='Watchdog-Private-Vault-Recovery-Key.txt';
+      document.body.appendChild(link);
+      link.click();
+      link.remove();
+      setTimeout(function(){URL.revokeObjectURL(url)},1500);
+      message('Recovery key downloaded. Keep the text file somewhere private.');
+    });
+  }
+})();
 function moneyPresent(name){var v=value(name).replace(/[$,\s]/g,'');return /^\d+(?:\.\d{1,2})?$/.test(v)}function fourDigits(name){return /^\d{4}$/.test(value(name))}function present(name){return !!value(name)}
 // content-architecture: dynamic — this validation message is selected from conditional application state, not stable page copy.
 function validateAddress(){if(selected('oct1.different','yes')&&(!present('oct1.address')||!fourDigits('oct1.municipality_code')))return 'Enter the October 1 street address and four-digit County/Municipality Code.';return''}
