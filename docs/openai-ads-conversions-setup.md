@@ -1,6 +1,6 @@
 # OpenAI Ads conversion measurement
 
-Status: prepared for Watchdog professional acquisition campaigns. The browser Pixel ID is now provisioned. Server-side CAPI remains inactive until its Supabase secrets are configured.
+Status: prepared for Watchdog professional acquisition campaigns. The browser Pixel ID is provisioned and wired. Server-side CAPI remains inactive until its Supabase secrets are configured.
 
 ## Scope
 
