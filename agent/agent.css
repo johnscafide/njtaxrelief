@@ -8,6 +8,64 @@
   .product-preview{isolation:isolate}
   .product-preview figcaption button[data-tour-open]{position:absolute;z-index:4;inset:0;height:100%;min-height:0;padding:0;border-radius:9px;background:transparent;color:transparent;font-size:0;cursor:pointer}
   .product-preview figcaption button[data-tour-open] .icon{display:none}
-  .product-preview figcaption button[data-tour-open]::after{content:'Tap to explore';position:absolute;right:10px;bottom:10px;padding:7px 10px;border-radius:999px;background:#fffffff0;color:#174f9d;font:600 10px/1 var(--sans);box-shadow:0 2px 10px #17375f22}
+  .product-preview figcaption button[data-tour-open]::after{content:'Tap to explore';position:absolute;right:10px;bottom:10px;padding:8px 11px;border-radius:999px;background:#fffffff0;color:#174f9d;font:600 12px/1 var(--sans);box-shadow:0 2px 10px #17375f22}
   .product-preview figcaption>span{position:relative;z-index:5}
+}
+
+/* Mobile readability pass: keep the desktop composition intact while bringing landing-page copy up to a comfortable phone reading size. */
+@media(max-width:960px){
+  .main-nav>a,.main-nav .nav-link,.main-nav .nav-cta{font-size:15px}
+  .resources-menu a{font-size:14px}
+
+  .hero .eyebrow,.why-copy .eyebrow,.founding-copy .eyebrow,.trust-band .eyebrow{font-size:12px;line-height:1.45;letter-spacing:1.5px}
+  .hero-description{font-size:16px;line-height:24px;max-width:430px}
+  .hero-cta{font-size:15px;line-height:20px}
+  .hero-proof{font-size:12.5px;line-height:18px;row-gap:10px}
+  .product-preview figcaption>span{font-size:11px;line-height:16px}
+
+  .trust-benefits p{font-size:14px;line-height:20px}
+  .trust-statement>p{font-size:24px;line-height:1.08}
+  .trust-statement>span{font-size:12px;line-height:17px}
+
+  .why-copy>p:not(.eyebrow){font-size:15px;line-height:23px}
+  .text-link{font-size:14px}
+  .features h3{font-size:15px;line-height:21px}
+  .features p{font-size:14px;line-height:21px;max-width:440px}
+
+  .founding-subtitle{font-size:17px;line-height:23px}
+  .founding-copy>p:last-child{font-size:15px;line-height:23px}
+  .price-card{height:340px}
+  .price>span{font-size:13px}
+  .price-card .check-list{font-size:14px;line-height:24px}
+  .price-cta{font-size:15px;line-height:20px}
+  .offer-terms{font-size:11px;line-height:16px}
+  .founding-band{min-height:650px}
+
+  .bottom-trust>p{font-size:14px;line-height:21px;max-width:390px}
+  .bottom-trust li{font-size:12px;line-height:17px}
+  .site-footer{font-size:11px;line-height:16px}
+  .site-footer a,.site-footer button{font-size:11px}
+
+  .annual-copy>p:last-child{font-size:14px;line-height:20px}
+  .annual-price h3{font-size:14px}
+  .annual-offer .check-list{font-size:12px;line-height:24px}
+  .annual-cta{font-size:15px}
+  .keep-lifetime{font-size:13px}
+  .annual-terms{font-size:10px;line-height:15px}
+
+  .tour-heading>p:last-child{font-size:14px;line-height:21px}
+  .tour-tabs button{font-size:11px}
+  .tour-image-wrap>p{font-size:10px;line-height:15px}
+  .tour-detail>p:not(.eyebrow){font-size:14px;line-height:22px}
+  .tour-detail>ul li{font-size:12px;line-height:18px}
+  .tour-detail .tour-coverage{font-size:11px!important;line-height:16px}
+}
+
+@media(max-width:370px){
+  .hero-description{font-size:15px;line-height:22px}
+  .hero-proof{font-size:12px}
+  .trust-benefits p,.features p{font-size:13px;line-height:20px}
+  .why-copy>p:not(.eyebrow),.founding-copy>p:last-child{font-size:14px;line-height:21px}
+  .price-card .check-list{font-size:13px;line-height:23px}
+  .bottom-trust li{font-size:11.5px}
 }
