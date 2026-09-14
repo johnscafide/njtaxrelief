@@ -4,8 +4,7 @@
 // narrowly-scoped ANCHOR lead capture for the Watchdog Backoffice.
 // Secrets remain server-side. Public capture requires a recently verified OTP.
 //
-// v40: CORS now echoes the caller's origin when it is on the allowlist, so the
-// estimator works from both njpropertytaxrelief.com and watchdogindex.com.
+// v41: obvious destination-domain typos are rejected before OTP creation/send.
 
 import { createClient } from "https://esm.sh/@supabase/supabase-js@2";
 
@@ -52,6 +51,51 @@ function normalizeEmail(raw: string): string | null {
   const e = (raw || "").trim().toLowerCase();
   if (e.length > 254) return null;
   return /^[^@\s]+@[^@\s.]+\.[^@\s]{2,}$/.test(e) ? e : null;
+}
+
+const COMMON_EMAIL_DOMAIN_TYPOS: Record<string, string> = {
+  "gamil.com": "gmail.com",
+  "gmial.com": "gmail.com",
+  "gmai.com": "gmail.com",
+  "gmail.co": "gmail.com",
+  "gmail.cm": "gmail.com",
+  "gmail.con": "gmail.com",
+  "gmail.cmo": "gmail.com",
+  "gmail.comm": "gmail.com",
+  "gmail.ocm": "gmail.com",
+  "hotnail.com": "hotmail.com",
+  "hotmai.com": "hotmail.com",
+  "hotmail.co": "hotmail.com",
+  "hotmail.con": "hotmail.com",
+  "outlok.com": "outlook.com",
+  "outllok.com": "outlook.com",
+  "outlook.co": "outlook.com",
+  "outlook.con": "outlook.com",
+  "yaho.com": "yahoo.com",
+  "yahoo.co": "yahoo.com",
+  "yahoo.con": "yahoo.com",
+  "icloud.co": "icloud.com",
+  "icloud.con": "icloud.com",
+  "aol.con": "aol.com",
+};
+
+function emailDestinationQuality(email: string) {
+  const [local, domainRaw] = email.split("@");
+  const domain = String(domainRaw || "").toLowerCase();
+  let suggestedDomain = COMMON_EMAIL_DOMAIN_TYPOS[domain] || "";
+  if (!suggestedDomain && domain.endsWith(".con")) {
+    suggestedDomain = domain.slice(0, -4) + ".com";
+  }
+  if (!local || !domain) return { ok: false, suggestion: "", message: "Enter a valid email address." };
+  if (suggestedDomain) {
+    const suggestion = `${local}@${suggestedDomain}`;
+    return {
+      ok: false,
+      suggestion,
+      message: `That email looks like a typo. Did you mean ${suggestion}? Please correct it before we send a code.`,
+    };
+  }
+  return { ok: true, suggestion: "", message: "" };
 }
 
 function str(value: unknown): string {
@@ -375,6 +419,15 @@ async function handle(req: Request): Promise<Response> {
 
   try {
     if (body.action === "send") {
+      const quality = emailDestinationQuality(email);
+      if (!quality.ok) {
+        return json({
+          error: quality.message,
+          code: quality.suggestion ? "email_typo" : "invalid_email",
+          suggested_email: quality.suggestion || "",
+        }, 422);
+      }
+
       const limit = await rateLimited(ip, email);
       if (limit) return json({ error: limit }, 429);
 

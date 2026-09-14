@@ -11,8 +11,9 @@ const analytics = read('supabase/functions/product-analytics/index.ts');
 
 assert.ok(growth.includes('/property/partials/anchor-application-2025-growth.html'), 'growth copy must come from the HTML partial');
 assert.ok(partial.includes('id="wd-growth-source" required'), 'source attribution must be required in the post-completion panel');
-assert.ok(partial.includes('id="wd-growth-optin" type="checkbox"'), 'marketing opt-in must be separate');
-assert.ok(!partial.includes('checked'), 'marketing opt-in must not be pre-checked');
+const optinTag = (partial.match(/<input\b[^>]*\bid="wd-growth-optin"[^>]*>/i) || [])[0] || '';
+assert.ok(optinTag && /\btype="checkbox"/i.test(optinTag), 'marketing opt-in must be separate');
+assert.ok(!/\schecked(?:\s|=|>)/i.test(optinTag), 'marketing opt-in must not be pre-checked');
 assert.ok(partial.includes('address you type here is not uploaded to Watchdog'), 'referral email privacy explanation must be visible');
 assert.ok(enhancements.includes('/property/js/anchor-application-2025-growth.js'), 'application enhancements must load the growth behavior');
 assert.ok(growth.includes("record('download_clicked')"), 'completion download clicks must be tracked');

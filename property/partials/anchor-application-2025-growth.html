@@ -1,4 +1,23 @@
 <section id="wd-anchor-growth" class="wd-growth-panel" aria-label="Keep using Watchdog">
+  <div class="wd-growth-review" aria-labelledby="wd-growth-review-title">
+    <span class="wd-growth-kicker">YOUR FEEDBACK</span>
+    <h3 id="wd-growth-review-title">Did this help you?</h3>
+    <p>Rate the free Watchdog application experience. Ratings come from people who completed an application; your email and application details are never published.</p>
+    <div class="wd-growth-stars" role="radiogroup" aria-label="Rate this application from 1 to 5 stars">
+      <button type="button" data-wd-review-rating="1" role="radio" aria-checked="false" aria-label="1 star">★</button>
+      <button type="button" data-wd-review-rating="2" role="radio" aria-checked="false" aria-label="2 stars">★</button>
+      <button type="button" data-wd-review-rating="3" role="radio" aria-checked="false" aria-label="3 stars">★</button>
+      <button type="button" data-wd-review-rating="4" role="radio" aria-checked="false" aria-label="4 stars">★</button>
+      <button type="button" data-wd-review-rating="5" role="radio" aria-checked="false" aria-label="5 stars">★</button>
+    </div>
+    <label for="wd-growth-review-comment">Anything we should know? <span>Optional</span></label>
+    <textarea id="wd-growth-review-comment" maxlength="1200" rows="3" placeholder="What worked well, or what could we improve?"></textarea>
+    <div class="wd-growth-review-actions">
+      <button id="wd-growth-review-save" type="button" class="wd-btn secondary">Submit rating</button>
+      <p id="wd-growth-review-status" role="status" aria-live="polite"></p>
+    </div>
+  </div>
+
   <div class="wd-growth-head">
     <div>
       <span class="wd-growth-kicker">ONE LAST QUESTION</span>
@@ -40,6 +59,23 @@
   </div>
 
   <div id="wd-growth-next" class="wd-growth-next" hidden>
+    <div class="wd-growth-activation" id="wd-growth-property-activation">
+      <span class="wd-growth-kicker">KEEP WATCH ON THIS PROPERTY</span>
+      <h3>Don’t make yourself search for this house again.</h3>
+      <p>Save the property from this application, then turn on monitoring for Watchdog Score, tax, assessment and deadline changes.</p>
+      <div class="wd-growth-activation-address" id="wd-growth-property-address"></div>
+      <div id="wd-growth-property-alert" class="wd-growth-property-alert" hidden>
+        <strong>THIS PROPERTY DESERVES A CLOSER LOOK</strong>
+        <p id="wd-growth-property-alert-copy"></p>
+      </div>
+      <div class="wd-growth-activation-actions">
+        <button id="wd-growth-save-property" type="button" class="wd-btn primary">Save this property</button>
+        <button id="wd-growth-enable-monitoring" type="button" class="wd-btn secondary" hidden>Turn on monitoring</button>
+        <a id="wd-growth-open-property" class="wd-btn secondary" href="/" hidden>Open property record</a>
+      </div>
+      <p id="wd-growth-property-status" class="wd-growth-status is-visible" role="status" aria-live="polite"></p>
+    </div>
+
     <div class="wd-growth-points-card">
       <div>
         <span>YOUR WATCHDOG POINTS</span>
@@ -50,10 +86,10 @@
     </div>
 
     <div class="wd-growth-actions">
-      <a href="/" data-growth-action="search"><strong>Search a property</strong><span>+1 point per search, up to 5/day</span></a>
-      <a href="/" data-growth-action="save"><strong>Save your first property</strong><span>+5 points</span></a>
+      <a href="/" data-growth-action="search"><strong>Search another property</strong><span>+1 point per search, up to 5/day</span></a>
+      <a href="#wd-growth-property-activation" data-growth-action="save"><strong>Save this property</strong><span>+5 points for your first saved property</span></a>
       <a href="/onboarding/?source=anchor_complete" data-growth-action="onboarding"><strong>Finish your Watchdog setup</strong><span>+10 points</span></a>
-      <a href="/home/" data-growth-action="alerts"><strong>Turn on property alerts</strong><span>+10 points for your first alert</span></a>
+      <a href="#wd-growth-property-activation" data-growth-action="alerts"><strong>Turn on property alerts</strong><span>+10 points for your first alert</span></a>
     </div>
 
     <div class="wd-growth-referral">
@@ -74,7 +110,7 @@
     </div>
 
     <a class="wd-growth-primary-cta" href="/" data-growth-action="continue">
-      <span><strong>Look up your property in Watchdog</strong><small>Open the Watchdog property card for the address in this application.</small></span>
+      <span><strong>Open this property in Watchdog</strong><small>See the full property record and the evidence behind its Watchdog Score.</small></span>
       <b aria-hidden="true">→</b>
     </a>
   </div>
