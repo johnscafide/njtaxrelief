@@ -12,6 +12,51 @@
 (function(){
   'use strict';
   if(!/(^|\.)njpropertytaxrelief\.com$/i.test(location.hostname)||!/anchor-estimator\.html\/?$/i.test(location.pathname))return;
+  if(window.__wdAnchorEstimatorEmailGuard)return;window.__wdAnchorEstimatorEmailGuard=true;
+  var VERIFY_URL='https://uvkvaxljhhngydvlrzom.supabase.co/functions/v1/verify-email';
+  var typos={
+    'gamil.com':'gmail.com','gmial.com':'gmail.com','gmai.com':'gmail.com','gmail.co':'gmail.com','gmail.cm':'gmail.com','gmail.con':'gmail.com','gmail.cmo':'gmail.com','gmail.comm':'gmail.com','gmail.ocm':'gmail.com',
+    'hotnail.com':'hotmail.com','hotmai.com':'hotmail.com','hotmail.co':'hotmail.com','hotmail.con':'hotmail.com','outlok.com':'outlook.com','outllok.com':'outlook.com','outlook.co':'outlook.com','outlook.con':'outlook.com',
+    'yaho.com':'yahoo.com','yahoo.co':'yahoo.com','yahoo.con':'yahoo.com','icloud.co':'icloud.com','icloud.con':'icloud.com','aol.con':'aol.com'
+  };
+  function quality(value){
+    var email=String(value||'').trim().toLowerCase();
+    if(!email||email.length>254||!/^[^\s@]+@[^\s@]+$/.test(email))return{valid:false,suspicious:false,email:email,suggestion:'',message:'Enter a valid email address.'};
+    var parts=email.split('@'),domain=parts[1]||'';
+    if(parts.length!==2||!parts[0]||!domain||domain.indexOf('.')<1||domain.indexOf('..')!==-1||!/^[a-z0-9.-]+$/.test(domain))return{valid:false,suspicious:false,email:email,suggestion:'',message:'Enter a valid email address.'};
+    var labels=domain.split('.');
+    if(labels.some(function(label){return !label||label.length>63||!/^[a-z0-9](?:[a-z0-9-]*[a-z0-9])?$/.test(label)}))return{valid:false,suspicious:false,email:email,suggestion:'',message:'Enter a valid email address.'};
+    var suggested=typos[domain]||'';if(!suggested&&/\.con$/.test(domain))suggested=domain.replace(/\.con$/,'.com');
+    if(suggested){var candidate=parts[0]+'@'+suggested;return{valid:true,suspicious:true,email:email,suggestion:candidate,message:'That email looks like a typo. Did you mean '+candidate+'? Please correct it before we send a code.'}}
+    return{valid:true,suspicious:false,email:email,suggestion:'',message:''};
+  }
+  function warning(input){
+    if(!input)return;var id='est-email-quality-warning',el=document.getElementById(id);if(!el){el=document.createElement('div');el.id=id;el.setAttribute('role','alert');el.style.cssText='display:none;margin-top:7px;padding:9px 11px;border-radius:10px;background:#fff4e5;color:#7a4312;font-weight:700;font-size:12px;line-height:1.4';input.insertAdjacentElement('afterend',el)}
+    var result=quality(input.value),show=!!String(input.value||'').trim()&&(!result.valid||result.suspicious);el.textContent=show?result.message:'';el.style.display=show?'block':'none';input.classList.toggle('anchor-field-error',show);input.setAttribute('aria-invalid',show?'true':'false');
+  }
+  function bind(){var input=document.getElementById('est-email');if(!input||input.dataset.wdEmailQuality==='1')return;input.dataset.wdEmailQuality='1';input.addEventListener('blur',function(){warning(input)});input.addEventListener('input',function(){if(input.getAttribute('aria-invalid')==='true')warning(input)})}
+  if(document.readyState==='loading')document.addEventListener('DOMContentLoaded',bind,{once:true});else bind();
+  var originalFetch=window.fetch.bind(window);
+  window.fetch=function(input,init){
+    var url=typeof input==='string'?input:(input&&input.url)||'';
+    if(String(url).indexOf(VERIFY_URL)===0&&init&&String(init.method||'GET').toUpperCase()==='POST'){
+      try{
+        var body=typeof init.body==='string'?JSON.parse(init.body):null;
+        if(body&&body.action==='send'){
+          var result=quality(body.email);
+          if(!result.valid||result.suspicious){var emailInput=document.getElementById('est-email');if(emailInput)warning(emailInput);return Promise.resolve(new Response(JSON.stringify({error:result.message,code:result.suspicious?'email_typo':'invalid_email',suggested_email:result.suggestion||''}),{status:422,headers:{'Content-Type':'application/json','Cache-Control':'no-store'}}));}
+          body.email=result.email;init=Object.assign({},init,{body:JSON.stringify(body)});
+        }
+      }catch(_){ }
+    }
+    return originalFetch(input,init);
+  };
+  window.WatchdogEstimatorEmailQuality={check:quality};
+})();
+
+(function(){
+  'use strict';
+  if(!/(^|\.)njpropertytaxrelief\.com$/i.test(location.hostname)||!/anchor-estimator\.html\/?$/i.test(location.pathname))return;
   if(window.__wdAnchorHandoff)return;window.__wdAnchorHandoff=true;
 
   var HANDOFF_URL='https://uvkvaxljhhngydvlrzom.supabase.co/functions/v1/anchor-result-handoff';
