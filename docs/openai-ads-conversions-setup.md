@@ -1,6 +1,6 @@
 # OpenAI Ads conversion measurement
 
-Status: prepared for Watchdog professional acquisition campaigns. The browser Pixel ID is provisioned and wired. Server-side CAPI remains inactive until its Supabase secrets are configured.
+Status: prepared for Watchdog professional acquisition campaigns. The browser Pixel ID is provisioned and wired. Server-side CAPI is configured through Supabase secrets and is initially intended to run with validation mode enabled.
 
 ## Scope
 
@@ -26,7 +26,7 @@ Events:
 
 OpenAI Ads measurement uses the existing Watchdog optional analytics/measurement preference. The Pixel is initialized with the saved consent state and does not emit conversion events when optional measurement is disabled. Revoking optional measurement clears Watchdog-accessible `__oppref` and `__obref` measurement cookies.
 
-Every OpenAI Ads event created by Watchdog sets `opt_out: true` so the event is excluded from future user-level personalization. The privacy policy discloses the measurement provider, attribution identifiers, purchase matching, and hashed identifiers.
+Every OpenAI Ads event created by Watchdog sets `opt_out: true` so the event is excluded from future user-level personalization. The privacy policy discloses the measurement provider and attribution identifiers.
 
 ## Browser configuration
 
@@ -50,7 +50,7 @@ Configure these secrets for `complete-lifetime-checkout`:
 
 - `OPENAI_ADS_PIXEL_ID` — set to `JbuLmCdaMe4wTASd8o5ops` so server CAPI uses the same Pixel ID as the browser runtime.
 - `OPENAI_ADS_CAPI_KEY` — server-only Conversions API key. Never commit, print, return, or expose it to browser code.
-- `OPENAI_ADS_VALIDATE_ONLY` — set to `true` for initial validation if desired, then remove or set to `false` before production measurement.
+- `OPENAI_ADS_VALIDATE_ONLY` — set to `true` for initial validation, then remove or set to `false` before production measurement.
 
 The server posts only to:
 
@@ -74,13 +74,7 @@ OpenAI CAPI failure is isolated from the purchase path. A failed or slow measure
 
 When optional measurement consent is active, the browser passes OpenAI's opaque `__oppref` and `__obref` values unchanged to the completion function. The server does not decode or transform them.
 
-The server can also include:
-
-- SHA-256 of normalized account email;
-- SHA-256 of the stable Watchdog user ID; and
-- the browser user-agent string.
-
-Raw email and raw Watchdog user ID are not sent in the CAPI event.
+For this first campaign, Watchdog intentionally does **not** send account email, Watchdog user ID, hashed account identifiers, or other account-profile fields in the OpenAI CAPI event. Matching is limited to OpenAI-provided attribution references plus the measured conversion itself. This keeps the first launch data-minimized while still preserving click/browser attribution when available.
 
 The server generates a deterministic `wd_order_<sha256>` event ID from the Stripe Checkout Session ID. That same value is returned to the browser and used as the Pixel `event_id`, so Pixel and CAPI copies of the same `order_created` conversion deduplicate.
 
@@ -96,7 +90,7 @@ Before launch:
 
 1. Confirm the browser Pixel uses `JbuLmCdaMe4wTASd8o5ops`.
 2. Configure `OPENAI_ADS_PIXEL_ID=JbuLmCdaMe4wTASd8o5ops` and the server-only `OPENAI_ADS_CAPI_KEY` in Supabase.
-3. Optionally enable `OPENAI_ADS_VALIDATE_ONLY=true` for the first controlled test.
+3. Enable `OPENAI_ADS_VALIDATE_ONLY=true` for the first controlled test.
 4. Verify a consent-denied browser sends no OpenAI measurement event.
 5. Verify consent-granted `page_viewed` and `checkout_started` in browser debug/network tooling.
 6. Complete one controlled Stripe purchase and confirm `order_created` appears in Ads Manager/validation with one deduplicated conversion.

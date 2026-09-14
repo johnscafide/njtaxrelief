@@ -96,68 +96,62 @@ async function sendOpenAIAdsOrderCreated(args: {
   eventId: string;
   tier: Tier;
   amountCents: number;
-  email: string | null;
-  userId: string;
-  userAgent: string;
 }) {
-  if (!args.context?.measurement_allowed) return;
-  const pixelId = String(Deno.env.get('OPENAI_ADS_PIXEL_ID') || '').trim();
-  const apiKey = String(Deno.env.get('OPENAI_ADS_CAPI_KEY') || '').trim();
-  if (!pixelId || !apiKey) return;
-
-  const user: Record<string, unknown> = {};
-  if (args.context.obref) user.obref = args.context.obref;
-  const normalizedEmail = String(args.email || '').trim().toLowerCase();
-  if (normalizedEmail) user.emails_sha256 = [await sha256Hex(normalizedEmail)];
-  if (args.userId.trim()) user.external_ids_sha256 = [await sha256Hex(args.userId.trim())];
-  if (args.userAgent.trim()) user.user_agent = args.userAgent.trim().slice(0, 512);
-
-  const event: Record<string, unknown> = {
-    id: args.eventId,
-    type: 'order_created',
-    timestamp_ms: Date.now(),
-    source_url: args.context.source_url,
-    action_source: 'web',
-    opt_out: true,
-    data: {
-      type: 'contents',
-      amount: args.amountCents,
-      currency: 'USD',
-      contents: [{
-        id: `watchdog_founding_lifetime_${args.tier}`,
-        name: `Watchdog ${PLAN_LABEL[args.tier]} Founding Lifetime`,
-        content_type: 'plan',
-        quantity: 1,
-        amount: args.amountCents,
-        currency: 'USD'
-      }]
-    }
-  };
-  if (args.context.oppref) event.oppref = args.context.oppref;
-  if (Object.keys(user).length) event.user = user;
-
-  const validateOnly = /^(1|true|yes)$/i.test(String(Deno.env.get('OPENAI_ADS_VALIDATE_ONLY') || ''));
-  const controller = new AbortController();
-  const timer = setTimeout(() => controller.abort(), 1500);
   try {
-    const response = await fetch(`${OPENAI_ADS_ENDPOINT}?pid=${encodeURIComponent(pixelId)}`, {
-      method: 'POST',
-      signal: controller.signal,
-      headers: {
-        'Authorization': `Bearer ${apiKey}`,
-        'Content-Type': 'application/json'
-      },
-      body: JSON.stringify({
-        validate_only: validateOnly,
-        integration_source: 'watchdog_web',
-        events: [event]
-      })
-    });
-    if (!response.ok) console.warn('OPENAI_ADS_CAPI_FAILED', { status: response.status });
+    if (!args.context?.measurement_allowed) return;
+    const pixelId = String(Deno.env.get('OPENAI_ADS_PIXEL_ID') || '').trim();
+    const apiKey = String(Deno.env.get('OPENAI_ADS_CAPI_KEY') || '').trim();
+    if (!pixelId || !apiKey) return;
+
+    const event: Record<string, unknown> = {
+      id: args.eventId,
+      type: 'order_created',
+      timestamp_ms: Date.now(),
+      source_url: args.context.source_url,
+      action_source: 'web',
+      opt_out: true,
+      data: {
+        type: 'contents',
+        amount: args.amountCents,
+        currency: 'USD',
+        contents: [{
+          id: `watchdog_founding_lifetime_${args.tier}`,
+          name: `Watchdog ${PLAN_LABEL[args.tier]} Founding Lifetime`,
+          content_type: 'plan',
+          quantity: 1,
+          amount: args.amountCents,
+          currency: 'USD'
+        }]
+      }
+    };
+    if (args.context.oppref) event.oppref = args.context.oppref;
+    if (args.context.obref) event.user = { obref: args.context.obref };
+
+    const validateOnly = /^(1|true|yes)$/i.test(String(Deno.env.get('OPENAI_ADS_VALIDATE_ONLY') || ''));
+    const controller = new AbortController();
+    const timer = setTimeout(() => controller.abort(), 1500);
+    try {
+      const response = await fetch(`${OPENAI_ADS_ENDPOINT}?pid=${encodeURIComponent(pixelId)}`, {
+        method: 'POST',
+        signal: controller.signal,
+        headers: {
+          'Authorization': `Bearer ${apiKey}`,
+          'Content-Type': 'application/json'
+        },
+        body: JSON.stringify({
+          validate_only: validateOnly,
+          integration_source: 'watchdog_web',
+          events: [event]
+        })
+      });
+      if (!response.ok) console.warn('OPENAI_ADS_CAPI_FAILED', { status: response.status });
+    } catch (error) {
+      console.warn('OPENAI_ADS_CAPI_FAILED', { reason: error instanceof Error ? error.name : 'unknown' });
+    } finally {
+      clearTimeout(timer);
+    }
   } catch (error) {
     console.warn('OPENAI_ADS_CAPI_FAILED', { reason: error instanceof Error ? error.name : 'unknown' });
-  } finally {
-    clearTimeout(timer);
   }
 }
 
@@ -290,10 +284,7 @@ Deno.serve(async (req) => {
       context: adsContext,
       eventId: adsEventId,
       tier,
-      amountCents: amountTotalCents,
-      email: user.email || null,
-      userId: user.id,
-      userAgent: String(req.headers.get('user-agent') || '')
+      amountCents: amountTotalCents
     });
     const edgeRuntime = (globalThis as any).EdgeRuntime;
     if (edgeRuntime && typeof edgeRuntime.waitUntil === 'function') edgeRuntime.waitUntil(conversion);

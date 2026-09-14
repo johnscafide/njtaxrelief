@@ -40,7 +40,7 @@ must(consent, 'Ad personalization stays off.', 'Consent UI must disclose the per
 must(privacy, 'OpenAI Ads measurement', 'Privacy policy must name the OpenAI Ads measurement provider.');
 must(privacy, '<code>oppref</code>', 'Privacy policy must disclose the OpenAI click reference.');
 must(privacy, '<code>obref</code>', 'Privacy policy must disclose the OpenAI browser reference.');
-must(privacy, 'SHA-256 hashes of the account email and internal Watchdog user ID', 'Privacy policy must disclose hashed purchase matching identifiers.');
+must(privacy, 'does not send account email, Watchdog user ID, or hashed account identifiers', 'Privacy policy must disclose the data-minimized CAPI boundary.');
 must(privacy, 'opt out of future user-level personalization', 'Privacy policy must disclose the personalization opt-out boundary.');
 
 must(complete, "Deno.env.get('OPENAI_ADS_PIXEL_ID')", 'Server CAPI must use the configured OpenAI Pixel ID secret.');
@@ -48,10 +48,10 @@ must(complete, "Deno.env.get('OPENAI_ADS_CAPI_KEY')", 'Server CAPI must use the 
 must(complete, "https://bzr.openai.com/v1/events", 'CAPI must use the official OpenAI conversion endpoint.');
 must(complete, "type: 'order_created'", 'Verified Stripe payment must map to order_created.');
 must(complete, "action_source: 'web'", 'Lifetime conversion must be identified as a web event.');
-must(complete, 'emails_sha256', 'Email matching must use SHA-256, never raw email.');
-must(complete, 'external_ids_sha256', 'Stable Watchdog user IDs must be SHA-256 hashed before CAPI matching.');
+mustNot(complete, 'emails_sha256', 'Initial CAPI launch must not send hashed account email.');
+mustNot(complete, 'external_ids_sha256', 'Initial CAPI launch must not send hashed Watchdog user IDs.');
 must(complete, 'event.oppref = args.context.oppref', 'oppref must be forwarded unchanged when available.');
-must(complete, 'user.obref = args.context.obref', 'obref must be forwarded unchanged when available.');
+must(complete, 'event.user = { obref: args.context.obref }', 'obref must be forwarded unchanged when available.');
 must(complete, "opt_out: true", 'Server conversion events must opt out of future user-level personalization.');
 must(complete, 'ads_event_id: adsContext ? adsEventId : null', 'The server event ID must return to the browser for Pixel/CAPI deduplication.');
 must(complete, 'EdgeRuntime.waitUntil', 'CAPI delivery should use background execution when the Edge Runtime supports it.');
