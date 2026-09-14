@@ -165,6 +165,7 @@ body.wdm-dashboard-shell .wdd-sponsor{border:1px solid var(--wdm-line)!important
 body.wdm-dashboard-shell .wdd-pull{right:24px!important;bottom:22px!important;border-radius:999px!important;background:#0861ff!important;box-shadow:0 8px 24px rgba(8,97,255,.25)!important;}
 body.wdm-dashboard-shell .wdd-drawer{z-index:120!important;}
 body.wdm-dashboard-shell .wdd-boot{position:relative!important;inset:auto!important;min-height:420px!important;background:transparent!important;display:grid!important;place-items:center!important;}
+body.wdm-dashboard-shell .wdd-boot[hidden]{display:none!important;}
 body.wdm-dashboard-shell .wdd-boot-card{border:1px solid var(--wdm-line)!important;box-shadow:none!important;border-radius:11px!important;}
 
 .wdm-account-menu{position:fixed;z-index:130;right:22px;top:64px;width:230px;padding:8px;background:#fff;border:1px solid var(--wdm-line);border-radius:11px;box-shadow:0 16px 40px rgba(25,55,87,.15);}
@@ -202,6 +203,7 @@ body.wdm-dashboard-shell .wdd-boot-card{border:1px solid var(--wdm-line)!importa
   body.wdm-dashboard-shell .wdd-work{grid-template-columns:1fr!important;}
 }
 @media(max-width:620px){
+  :root{--wdm-topbar:112px;}
   .wdm-topbar{height:auto;min-height:64px;flex-wrap:wrap;padding-top:9px;padding-bottom:9px;}
   .wdm-search{order:4;flex-basis:100%;max-width:none;margin:0;}
   .wdm-brand{margin-right:auto;}
