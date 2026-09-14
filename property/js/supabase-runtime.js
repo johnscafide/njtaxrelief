@@ -52,6 +52,80 @@
     providers[key] = Object.assign({}, providerDefaults[key], providerOverrides[key] || {});
   });
 
+  var emailTypos = {
+    'gamil.com':'gmail.com','gmial.com':'gmail.com','gmai.com':'gmail.com','gmail.co':'gmail.com','gmail.cm':'gmail.com','gmail.con':'gmail.com','gmail.cmo':'gmail.com','gmail.comm':'gmail.com','gmail.ocm':'gmail.com',
+    'hotnail.com':'hotmail.com','hotmai.com':'hotmail.com','hotmail.co':'hotmail.com','hotmail.con':'hotmail.com','outlok.com':'outlook.com','outllok.com':'outlook.com','outlook.co':'outlook.com','outlook.con':'outlook.com',
+    'yaho.com':'yahoo.com','yahoo.co':'yahoo.com','yahoo.con':'yahoo.com','icloud.co':'icloud.com','icloud.con':'icloud.com','aol.con':'aol.com'
+  };
+
+  function checkEmailQuality(value) {
+    var email = String(value || '').trim().toLowerCase();
+    if (!email || email.length > 254 || !/^[^\s@]+@[^\s@]+$/.test(email)) return { valid:false, suspicious:false, email:email, suggestion:'', message:'Enter a valid email address.' };
+    var parts = email.split('@');
+    if (parts.length !== 2 || !parts[0] || !parts[1] || parts[0].length > 64) return { valid:false, suspicious:false, email:email, suggestion:'', message:'Enter a valid email address.' };
+    var domain = parts[1];
+    if (domain.length > 253 || domain.indexOf('.') < 1 || domain.indexOf('..') !== -1 || !/^[a-z0-9.-]+$/.test(domain) || /(^\.|\.$|^-|-$|\.-|-\.)/.test(domain)) return { valid:false, suspicious:false, email:email, suggestion:'', message:'Enter a valid email address.' };
+    var labels = domain.split('.');
+    if (labels.some(function(label){ return !label || label.length > 63 || !/^[a-z0-9](?:[a-z0-9-]*[a-z0-9])?$/.test(label); })) return { valid:false, suspicious:false, email:email, suggestion:'', message:'Enter a valid email address.' };
+    var suggestedDomain = emailTypos[domain] || '';
+    if (!suggestedDomain && /\.con$/.test(domain)) suggestedDomain = domain.replace(/\.con$/,'.com');
+    if (suggestedDomain) {
+      var suggestion = parts[0] + '@' + suggestedDomain;
+      return { valid:true, suspicious:true, email:email, suggestion:suggestion, message:'That email looks like a typo. Did you mean ' + suggestion + '? Please correct it before we send a code.' };
+    }
+    return { valid:true, suspicious:false, email:email, suggestion:'', message:'' };
+  }
+
+  function emailQualityError(result) {
+    var error = new Error(result.message || 'Please check your email address.');
+    error.name = 'EmailQualityError';
+    error.code = result.suspicious ? 'email_typo' : 'invalid_email';
+    error.suggested_email = result.suggestion || '';
+    return error;
+  }
+
+  function warningFor(input) {
+    if (!input || !input.parentNode) return null;
+    var next = input.nextElementSibling;
+    if (next && next.classList && next.classList.contains('watchdog-email-quality-warning')) return next;
+    var warning = document.createElement('div');
+    warning.className = 'watchdog-email-quality-warning';
+    warning.setAttribute('role','alert');
+    warning.style.cssText = 'display:none;margin-top:7px;padding:9px 11px;border-radius:10px;background:#fff4e5;color:#7a4312;font:700 12px/1.4 system-ui,-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;';
+    input.insertAdjacentElement('afterend', warning);
+    return warning;
+  }
+
+  function paintEmailQuality(input) {
+    if (!input) return;
+    var result = checkEmailQuality(input.value);
+    var warning = warningFor(input);
+    var show = !!String(input.value || '').trim() && (!result.valid || result.suspicious);
+    if (warning) {
+      warning.textContent = show ? result.message : '';
+      warning.style.display = show ? 'block' : 'none';
+    }
+    if (show) input.setAttribute('aria-invalid','true');
+    else input.removeAttribute('aria-invalid');
+  }
+
+  function installEmailQualityUi() {
+    function scan(root) {
+      var scope = root && root.querySelectorAll ? root : document;
+      scope.querySelectorAll('input[type="email"],input[inputmode="email"]').forEach(function(input){
+        if (input.dataset.watchdogEmailQuality === '1') return;
+        input.dataset.watchdogEmailQuality = '1';
+        input.addEventListener('blur',function(){ paintEmailQuality(input); });
+        input.addEventListener('input',function(){ if (input.getAttribute('aria-invalid') === 'true') paintEmailQuality(input); });
+      });
+    }
+    if (document.readyState === 'loading') document.addEventListener('DOMContentLoaded',function(){ scan(document); },{once:true});
+    else scan(document);
+    if (typeof MutationObserver !== 'undefined' && document.documentElement) new MutationObserver(function(records){
+      records.forEach(function(record){ Array.prototype.forEach.call(record.addedNodes || [],function(node){ if (node && node.nodeType === 1) scan(node); }); });
+    }).observe(document.documentElement,{childList:true,subtree:true});
+  }
+
   function runtimeOptions(base) {
     var out = Object.assign({}, base || {});
     out.auth = Object.assign({}, (base && base.auth) || {}, {
@@ -137,15 +211,25 @@
   function patchOAuth(instance) {
     if (!instance || !instance.auth || instance.auth.__watchdogOnboardingWrapped) return instance;
     var originalOAuth = instance.auth.signInWithOAuth && instance.auth.signInWithOAuth.bind(instance.auth);
-    if (!originalOAuth) return instance;
-
-    instance.auth.signInWithOAuth = function (args) {
-      var request = Object.assign({}, args || {});
-      request.options = Object.assign({}, request.options || {});
-      var intendedNext = request.options.redirectTo || (location.pathname + location.search + location.hash);
-      request.options.redirectTo = onboardingRedirect(intendedNext);
-      return originalOAuth(request);
-    };
+    var originalOtp = instance.auth.signInWithOtp && instance.auth.signInWithOtp.bind(instance.auth);
+    if (originalOAuth) {
+      instance.auth.signInWithOAuth = function (args) {
+        var request = Object.assign({}, args || {});
+        request.options = Object.assign({}, request.options || {});
+        var intendedNext = request.options.redirectTo || (location.pathname + location.search + location.hash);
+        request.options.redirectTo = onboardingRedirect(intendedNext);
+        return originalOAuth(request);
+      };
+    }
+    if (originalOtp) {
+      instance.auth.signInWithOtp = function (args) {
+        var request = Object.assign({}, args || {});
+        var result = checkEmailQuality(request.email);
+        if (!result.valid || result.suspicious) return Promise.resolve({ data:{ user:null, session:null }, error:emailQualityError(result) });
+        request.email = result.email;
+        return originalOtp(request);
+      };
+    }
     try { Object.defineProperty(instance.auth, '__watchdogOnboardingWrapped', { value:true }); } catch (_error) { instance.auth.__watchdogOnboardingWrapped = true; }
     return instance;
   }
@@ -271,6 +355,8 @@
     requireOnboarding: startOnboardingGate
   });
 
+  window.WatchdogEmailQuality = Object.freeze({ check:checkEmailQuality, paint:paintEmailQuality });
+
   window.WatchdogAuth = Object.freeze({
     providers: providers,
     openSignIn: openOnboarding,
@@ -282,6 +368,7 @@
   });
 
   installLegacySignInBridge();
+  installEmailQualityUi();
   watchLegacyAuthUi();
   startOnboardingGate();
 })();
