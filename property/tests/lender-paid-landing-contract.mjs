@@ -9,6 +9,7 @@ const read=(file)=>fs.readFileSync(path.join(root,file),'utf8');
 const page=read('lender/index.html');
 const agent=read('agent/index.html');
 const sharedCss=read('agent/agent.css');
+const lenderCss=read('lender/lender.css');
 const sharedJs=read('agent/agent.js');
 const middleware=read('middleware.js');
 const billing=read('property/js/billing-client.js');
@@ -18,6 +19,7 @@ function expect(value,message){if(!value)throw new Error(message)}
 expect(page.includes('<title>Watchdog for New Jersey Lenders — Founding Lifetime</title>'),'lender landing title missing');
 expect(page.includes('<link rel="canonical" href="https://www.watchdogindex.com/lender">'),'canonical Watchdog lender route missing');
 expect(page.includes('<link rel="stylesheet" href="/agent/agent.css">'),'lender must attach the polished Agent CSS directly');
+expect(page.includes('<link rel="stylesheet" href="/lender/lender.css">'),'lender pricing refinement CSS missing');
 expect(page.includes('<script src="/agent/agent.js" defer></script>'),'lender must attach the polished Agent JS directly');
 expect(!page.includes('agent-paid-landing.css')&&!page.includes('lender-paid-landing.css'),'old paid-landing CSS must not be attached');
 expect(!page.includes('lender-paid-landing.js'),'old lender-specific landing JS must not be attached');
@@ -37,6 +39,7 @@ expect(sharedCss.includes("url('/agent/assets/hero-coast.webp')"),'shared Agent 
 expect(sharedCss.includes("url('/agent/assets/founding-coast.webp')"),'shared Agent founding coast graphic missing');
 expect(sharedJs.includes("'/agent/assets/platform-live.png'")&&sharedJs.includes("'/agent/assets/platform-illustrative.png'"),'shared Agent product-tour graphics missing');
 
+expect(page.includes('<h1 id="hero-title">Lend smarter<br><span><em>know</em> the property.</span></h1>'),'lender-specific two-word hero headline missing');
 expect(page.includes('Watchdog gives New Jersey mortgage lenders and loan officers'),'lender-specific hero copy missing');
 expect(page.includes('Built for the way<br>New Jersey lenders work.'),'lender-specific positioning missing');
 expect(page.includes('Lender Founding Lifetime'),'lender Founding Lifetime heading missing');
@@ -44,6 +47,12 @@ expect(page.includes('$3,499')&&page.includes('$9,999'),'Pro and Pro+ lifetime p
 expect(page.includes('250-property capacity')&&page.includes('2,500-property capacity'),'Pro and Pro+ capacities missing');
 expect((page.match(/data-lender-lifetime-checkout/g)||[]).length===2,'lender page must expose exactly two lifetime checkout choices');
 expect(page.includes('data-tier="pro"')&&page.includes('data-tier="pro_plus"'),'both governed lifetime tiers must be present');
+expect(page.includes('lender-proplus-card')&&page.includes('<span class="price-ribbon">Recommended</span>'),'Pro+ must be the primary recommended Lifetime card');
+expect(page.indexOf('data-tier="pro_plus"')<page.indexOf('data-tier="pro"'),'Pro+ must appear before Pro in the lender offer hierarchy');
+expect(page.includes('lender-pro-card'),'secondary Pro Lifetime box missing');
+expect(page.includes('10× Pro capacity'),'Pro+ capacity difference callout missing');
+expect(lenderCss.includes('background: #fff0a6'),'yellow plan-difference highlight missing');
+expect(lenderCss.includes('grid-template-columns: minmax(300px, 1fr) 190px'),'desktop main/secondary pricing hierarchy missing');
 expect(page.includes('Usage-based services, direct mail, third-party data and overages'),'lifetime exclusions missing');
 expect(page.includes('$1,290')&&page.includes('data-lender-annual-checkout data-tier="pro"'),'Pro annual alternative missing');
 
