@@ -2,8 +2,12 @@ import { readdir, readFile, writeFile } from 'node:fs/promises';
 import { join, relative } from 'node:path';
 
 const ROOT = process.cwd();
-const IMAGE_PATH = '/watchdog-social-share-20260913.jpg';
+const IMAGE_PATH = '/watchdog-social-share-20260913-v2.jpg';
 const IMAGE_URL = `https://www.watchdogindex.com${IMAGE_PATH}`;
+const LEGACY_IMAGE_URLS = [
+  'https://www.watchdogindex.com/watchdog-social-share.jpg',
+  'https://www.watchdogindex.com/watchdog-social-share-20260913.jpg'
+];
 const IMAGE_ALT = 'Watchdog Property Intelligence across New Jersey';
 const EXCLUDED_DIRS = new Set(['.git', '.vercel', 'node_modules', 'coverage']);
 
@@ -88,9 +92,11 @@ async function normalizeServerAdapters() {
       continue;
     }
 
-    let after = before
-      .split('https://www.watchdogindex.com/watchdog-social-share.jpg')
-      .join(IMAGE_URL)
+    let after = before;
+    for (const legacyUrl of LEGACY_IMAGE_URLS) {
+      after = after.split(legacyUrl).join(IMAGE_URL);
+    }
+    after = after
       .replace(/(<meta property=\\"og:image:width\\" content=\\")600(\\">)/g, '$11200$2')
       .replace(/(<meta property=\\"og:image:height\\" content=\\")315(\\">)/g, '$1630$2')
       .replace(/(<meta property="og:image:width" content=")600(">)/g, '$11200$2')
@@ -115,6 +121,12 @@ function assertSocialMeta(html, file) {
     if (!html.includes(marker)) {
       throw new Error(`Watchdog social share verification failed for ${relative(ROOT, file)}: missing ${marker}`);
     }
+  }
+
+  const head = html.match(/<head\b[\s\S]*?<\/head>/i)?.[0] || '';
+  const ogImageTags = head.match(/<meta\b[^>]*property\s*=\s*(["'])og:image\1[^>]*>/gi) || [];
+  if (ogImageTags.length !== 1 || !ogImageTags[0].includes(IMAGE_URL)) {
+    throw new Error(`Watchdog social share verification failed for ${relative(ROOT, file)}: expected exactly one canonical og:image.`);
   }
 }
 
