@@ -108,8 +108,12 @@ function computeAnchor(raw: Record<string, unknown>) {
   };
 }
 
+function cleanFullName(value: unknown): string {
+  return str(value, 160).replace(/\s+/g, " ").trim();
+}
+
 function firstName(value: unknown): string {
-  return str(value, 100).split(/\s+/)[0].slice(0, 60);
+  return cleanFullName(value).split(/\s+/)[0].slice(0, 60);
 }
 
 async function accountState(email: string) {
@@ -121,17 +125,26 @@ async function accountState(email: string) {
 
   if (lifecycle.error) {
     console.error("anchor-result-handoff account-state", lifecycle.error);
-    return { status: "unknown", provider: "" };
+    return { status: "unknown", provider: "", userId: "" };
   }
 
-  if (!lifecycle.data?.user_id) return { status: "new", provider: "" };
+  if (!lifecycle.data?.user_id) return { status: "new", provider: "", userId: "" };
   return {
     status: "existing",
     provider: str(lifecycle.data.first_auth_provider, 40),
+    userId: str(lifecycle.data.user_id, 80),
   };
 }
 
-async function createWatchdogAuthHandoff(email: string, resultToken: string) {
+async function syncProfileIdentity(userId: string, email: string, fullName: string) {
+  if (!userId) return;
+  const row: Record<string, unknown> = { id: userId, email };
+  if (fullName) row.full_name = fullName;
+  const saved = await db.from("profiles").upsert(row, { onConflict: "id" });
+  if (saved.error) console.error("anchor-result-handoff profile-identity", saved.error);
+}
+
+async function createWatchdogAuthHandoff(email: string, resultToken: string, fullName: string) {
   const redirectTo = `${WATCHDOG_ORIGIN}/#anchor-result=${resultToken}`;
   const generated = await db.auth.admin.generateLink({
     type: "magiclink",
@@ -141,6 +154,7 @@ async function createWatchdogAuthHandoff(email: string, resultToken: string) {
       data: {
         watchdog_signup_context: "anchor_estimator",
         watchdog_account_source: "verified_anchor_estimator",
+        full_name: fullName || undefined,
       },
     },
   });
@@ -160,6 +174,8 @@ async function createWatchdogAuthHandoff(email: string, resultToken: string) {
   if (!userId) {
     throw new Error("Watchdog account identity was not created.");
   }
+
+  await syncProfileIdentity(userId, email, fullName);
 
   const now = new Date().toISOString();
 
@@ -181,7 +197,7 @@ async function createWatchdogAuthHandoff(email: string, resultToken: string) {
     console.error("anchor-result-handoff lead-link", leadLink.error);
   }
 
-  return actionLink;
+  return { actionLink, userId };
 }
 
 async function stage(req: Request, body: Record<string, any>) {
@@ -239,7 +255,10 @@ async function stage(req: Request, body: Record<string, any>) {
     return json(req, { error: "A verified New Jersey property address is required." }, 422);
   }
 
+  const fullName = cleanFullName(result.name);
   const currentAccount = await accountState(email);
+  if (currentAccount.userId) await syncProfileIdentity(currentAccount.userId, email, fullName);
+
   const intentScoreRaw = Number(result.intent_score);
   const intentScore = Number.isFinite(intentScoreRaw)
     ? Math.max(0, Math.min(100, Math.round(intentScoreRaw)))
@@ -252,7 +271,7 @@ async function stage(req: Request, body: Record<string, any>) {
     schema_version: 3,
     program: "ANCHOR",
     generated_at: new Date().toISOString(),
-    first_name: firstName(result.name),
+    first_name: firstName(fullName),
     address,
     tenure: computed.tenure,
     benefit: computed.benefit,
@@ -289,7 +308,8 @@ async function stage(req: Request, body: Record<string, any>) {
   let authHandoffStatus = currentAccount.status === "existing" ? "existing_account" : "fallback";
   if (currentAccount.status !== "existing") {
     try {
-      authHandoffUrl = await createWatchdogAuthHandoff(email, token);
+      const handoff = await createWatchdogAuthHandoff(email, token, fullName);
+      authHandoffUrl = handoff.actionLink;
       authHandoffStatus = "ready";
     } catch (error) {
       console.error("anchor-result-handoff auth-optional", error);
