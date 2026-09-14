@@ -15,7 +15,7 @@ function mustNot(source, needle, message) {
 }
 
 must(pixel, 'https://bzrcdn.openai.com/sdk/oaiq.min.js', 'OpenAI Ads Pixel must use the official SDK origin.');
-must(pixel, "var PUBLIC_PIXEL_ID=''", 'Pixel runtime must have one explicit public configuration point.');
+must(pixel, "var PUBLIC_PIXEL_ID='JbuLmCdaMe4wTASd8o5ops'", 'Watchdog must use the provisioned OpenAI Ads Pixel ID.');
 must(pixel, "q('consent',consentGranted())", 'Pixel consent must be set before/with initialization.');
 must(pixel, "q('init',{pixelId:id})", 'Pixel must initialize with the configured Pixel ID.');
 must(pixel, "'page_viewed'", 'Paid landing pages should emit a standard page_viewed event.');
