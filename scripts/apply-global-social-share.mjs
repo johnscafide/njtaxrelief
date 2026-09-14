@@ -1,13 +1,11 @@
 import { readdir, readFile, writeFile } from 'node:fs/promises';
 import { join, relative } from 'node:path';
-import { createHash } from 'node:crypto';
 
 const ROOT = process.cwd();
 const IMAGE_PATH = '/watchdog-social-share-20260913-v3.jpg';
 const IMAGE_URL = `https://www.watchdogindex.com${IMAGE_PATH}`;
-const IMAGE_WIDTH = 600;
-const IMAGE_HEIGHT = 315;
-const IMAGE_SHA256 = 'ba7e1781f05840a87ea4d13a32c82622729a069c6f9bba4d663b87a8be51f01e';
+const IMAGE_WIDTH = 1200;
+const IMAGE_HEIGHT = 630;
 const LEGACY_IMAGE_URLS = [
   'https://www.watchdogindex.com/watchdog-social-share.jpg',
   'https://www.watchdogindex.com/watchdog-social-share-20260913.jpg',
@@ -15,13 +13,6 @@ const LEGACY_IMAGE_URLS = [
 ];
 const IMAGE_ALT = 'Watchdog Property Intelligence across New Jersey';
 const EXCLUDED_DIRS = new Set(['.git', '.vercel', 'node_modules', 'coverage']);
-const IMAGE_PART_NAMES = [
-  'part-01.txt', 'part-02.txt', 'part-03.txt', 'part-04.txt',
-  'part-05.txt', 'part-06.txt', 'part-07.txt', 'part-08.txt',
-  'part-09-00.txt', 'part-09-01.txt', 'part-09-02.txt', 'part-09-03.txt',
-  'part-10-00.txt', 'part-10-01.txt', 'part-10-02.txt', 'part-10-03.txt'
-];
-const IMAGE_PARTS = IMAGE_PART_NAMES.map((name) => join(ROOT, 'scripts', 'assets', 'og-share', name));
 
 const imageMetaPattern = /<meta\b[^>]*(?:property|name)\s*=\s*(["'])(?:og:image(?::(?:secure_url|type|width|height|alt))?|twitter:image(?::alt)?)\1[^>]*>\s*/gi;
 const twitterCardPattern = /<meta\b[^>]*name\s*=\s*(["'])twitter:card\1[^>]*>/i;
@@ -37,26 +28,12 @@ const SOCIAL_IMAGE_META = [
   `<meta name="twitter:image:alt" content="${IMAGE_ALT}">`
 ].join('\n  ');
 
-async function materializeSocialImage() {
-  const base64Parts = await Promise.all(IMAGE_PARTS.map((file) => readFile(file, 'utf8')));
-  const bytes = Buffer.from(base64Parts.join(''), 'base64');
-
-  if (bytes.length < 10000 || bytes[0] !== 0xff || bytes[1] !== 0xd8 || bytes[2] !== 0xff) {
-    throw new Error('Watchdog social share: reconstructed asset is not a valid JPEG.');
+async function validateSocialImage() {
+  const bytes = await readFile(join(ROOT, IMAGE_PATH.slice(1)));
+  const validJpeg = bytes.length > 100000 && bytes[0] === 0xff && bytes[1] === 0xd8 && bytes[bytes.length - 2] === 0xff && bytes[bytes.length - 1] === 0xd9;
+  if (!validJpeg) {
+    throw new Error(`Watchdog social share: ${IMAGE_PATH} is missing or not the full production JPEG.`);
   }
-
-  const digest = createHash('sha256').update(bytes).digest('hex');
-  if (digest !== IMAGE_SHA256) {
-    throw new Error(`Watchdog social share: reconstructed JPEG checksum mismatch (${digest}).`);
-  }
-
-  const outputs = [
-    IMAGE_PATH,
-    '/watchdog-social-share-20260913-v2.jpg',
-    '/watchdog-social-share-20260913.jpg',
-    '/watchdog-social-share.jpg'
-  ];
-  await Promise.all(outputs.map((path) => writeFile(join(ROOT, path.slice(1)), bytes)));
 }
 
 async function walk(dir, files = []) {
@@ -176,11 +153,11 @@ async function verifyStaticHtml() {
   return verified;
 }
 
-await materializeSocialImage();
+await validateSocialImage();
 const staticResult = await normalizeStaticHtml();
 const adapterChanges = await normalizeServerAdapters();
 const verified = await verifyStaticHtml();
 
 console.log(
-  `Watchdog social share: ${verified} HTML pages verified, ${staticResult.changed} updated, ${adapterChanges} server adapters normalized; JPEG checksum ${IMAGE_SHA256}.`
+  `Watchdog social share: ${verified} HTML pages verified, ${staticResult.changed} updated, ${adapterChanges} server adapters normalized; ${IMAGE_PATH} validated.`
 );
