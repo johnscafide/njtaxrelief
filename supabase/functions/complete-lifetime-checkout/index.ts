@@ -10,7 +10,16 @@ const PRODUCTION_HOSTS = new Set([
 ]);
 const CAPACITY = { agent: 25, pro: 250, pro_plus: 2500 } as const;
 const FOUNDING = { agent: 149900, pro: 349900, pro_plus: 999900 } as const;
+const PLAN_LABEL = { agent: 'Agent', pro: 'Pro', pro_plus: 'Pro+' } as const;
+const OPENAI_ADS_ENDPOINT = 'https://bzr.openai.com/v1/events';
 type Tier = keyof typeof FOUNDING;
+
+type OpenAIAdsContext = {
+  measurement_allowed: boolean;
+  oppref: string;
+  obref: string;
+  source_url: string;
+};
 
 function origin(req: Request) {
   const raw = req.headers.get('origin') || '';
@@ -43,6 +52,115 @@ function tierOf(value: unknown): Tier | null {
   return raw === 'agent' || raw === 'pro' || raw === 'pro_plus' ? raw : null;
 }
 
+function opaque(value: unknown, max = 2048) {
+  if (typeof value !== 'string' || !value.trim() || value.length > max) return '';
+  return value;
+}
+
+function safeSourceUrl(value: unknown) {
+  try {
+    const u = new URL(String(value || ''));
+    if (u.protocol !== 'https:' && u.protocol !== 'http:') throw new Error('unsupported protocol');
+    const host = u.hostname.toLowerCase();
+    if (host === 'watchdogindex.com' || host === 'www.watchdogindex.com') return `${CANONICAL_SITE}${u.pathname}`;
+    if (host === 'localhost' || host === '127.0.0.1' || host.endsWith('.vercel.app')) return `${u.origin}${u.pathname}`;
+  } catch (_) {}
+  return `${CANONICAL_SITE}/property/pro`;
+}
+
+function openAIAdsContext(value: unknown): OpenAIAdsContext | null {
+  if (!value || typeof value !== 'object') return null;
+  const raw = value as Record<string, unknown>;
+  if (raw.measurement_allowed !== true) return null;
+  return {
+    measurement_allowed: true,
+    oppref: opaque(raw.oppref),
+    obref: opaque(raw.obref),
+    source_url: safeSourceUrl(raw.source_url)
+  };
+}
+
+async function sha256Hex(value: string) {
+  const bytes = new TextEncoder().encode(value);
+  const digest = await crypto.subtle.digest('SHA-256', bytes);
+  return Array.from(new Uint8Array(digest)).map((byte) => byte.toString(16).padStart(2, '0')).join('');
+}
+
+async function openAIAdsEventId(sessionId: string) {
+  const digest = await sha256Hex(sessionId);
+  return `wd_order_${digest.slice(0, 40)}`;
+}
+
+async function sendOpenAIAdsOrderCreated(args: {
+  context: OpenAIAdsContext | null;
+  eventId: string;
+  tier: Tier;
+  amountCents: number;
+  email: string | null;
+  userId: string;
+  userAgent: string;
+}) {
+  if (!args.context?.measurement_allowed) return;
+  const pixelId = String(Deno.env.get('OPENAI_ADS_PIXEL_ID') || '').trim();
+  const apiKey = String(Deno.env.get('OPENAI_ADS_CAPI_KEY') || '').trim();
+  if (!pixelId || !apiKey) return;
+
+  const user: Record<string, unknown> = {};
+  if (args.context.obref) user.obref = args.context.obref;
+  const normalizedEmail = String(args.email || '').trim().toLowerCase();
+  if (normalizedEmail) user.emails_sha256 = [await sha256Hex(normalizedEmail)];
+  if (args.userId.trim()) user.external_ids_sha256 = [await sha256Hex(args.userId.trim())];
+  if (args.userAgent.trim()) user.user_agent = args.userAgent.trim().slice(0, 512);
+
+  const event: Record<string, unknown> = {
+    id: args.eventId,
+    type: 'order_created',
+    timestamp_ms: Date.now(),
+    source_url: args.context.source_url,
+    action_source: 'web',
+    opt_out: true,
+    data: {
+      type: 'contents',
+      amount: args.amountCents,
+      currency: 'USD',
+      contents: [{
+        id: `watchdog_founding_lifetime_${args.tier}`,
+        name: `Watchdog ${PLAN_LABEL[args.tier]} Founding Lifetime`,
+        content_type: 'plan',
+        quantity: 1,
+        amount: args.amountCents,
+        currency: 'USD'
+      }]
+    }
+  };
+  if (args.context.oppref) event.oppref = args.context.oppref;
+  if (Object.keys(user).length) event.user = user;
+
+  const validateOnly = /^(1|true|yes)$/i.test(String(Deno.env.get('OPENAI_ADS_VALIDATE_ONLY') || ''));
+  const controller = new AbortController();
+  const timer = setTimeout(() => controller.abort(), 1500);
+  try {
+    const response = await fetch(`${OPENAI_ADS_ENDPOINT}?pid=${encodeURIComponent(pixelId)}`, {
+      method: 'POST',
+      signal: controller.signal,
+      headers: {
+        'Authorization': `Bearer ${apiKey}`,
+        'Content-Type': 'application/json'
+      },
+      body: JSON.stringify({
+        validate_only: validateOnly,
+        integration_source: 'watchdog_web',
+        events: [event]
+      })
+    });
+    if (!response.ok) console.warn('OPENAI_ADS_CAPI_FAILED', { status: response.status });
+  } catch (error) {
+    console.warn('OPENAI_ADS_CAPI_FAILED', { reason: error instanceof Error ? error.name : 'unknown' });
+  } finally {
+    clearTimeout(timer);
+  }
+}
+
 Deno.serve(async (req) => {
   if (req.method === 'OPTIONS') return new Response('ok', { headers: cors(req) });
   if (req.method !== 'POST') return json(req, { error: 'Method not allowed.' }, 405);
@@ -64,6 +182,7 @@ Deno.serve(async (req) => {
   const body = await req.json().catch(() => ({}));
   const sessionId = String(body?.session_id || '').trim();
   if (!sessionId.startsWith('cs_')) return json(req, { error: 'Invalid checkout session.', code: 'INVALID_CHECKOUT_SESSION' }, 400);
+  const adsContext = openAIAdsContext(body?.openai_ads);
 
   const stripe = new Stripe(stripeKey, { apiVersion: '2026-06-24.dahlia' });
   let session: Stripe.Checkout.Session;
@@ -96,13 +215,14 @@ Deno.serve(async (req) => {
   if (prior.data && prior.data.user_id !== user.id) return json(req, { error: 'This checkout is already assigned to another account.', code: 'CHECKOUT_ACCOUNT_MISMATCH' }, 403);
 
   const now = new Date().toISOString();
+  const amountTotalCents = Number(session.amount_total || session.amount_subtotal || FOUNDING[tier]);
   const purchase = {
     checkout_session_id: session.id,
     user_id: user.id,
     payment_intent_id: paymentIntentId,
     stripe_customer_id: customerId,
     tier,
-    amount_cents: Number(session.amount_total || session.amount_subtotal || FOUNDING[tier]),
+    amount_cents: amountTotalCents,
     currency: 'usd',
     status: 'paid',
     purchased_at: prior.data ? undefined : now,
@@ -164,11 +284,29 @@ Deno.serve(async (req) => {
     });
   }
 
+  const adsEventId = await openAIAdsEventId(session.id);
+  if (adsContext) {
+    const conversion = sendOpenAIAdsOrderCreated({
+      context: adsContext,
+      eventId: adsEventId,
+      tier,
+      amountCents: amountTotalCents,
+      email: user.email || null,
+      userId: user.id,
+      userAgent: String(req.headers.get('user-agent') || '')
+    });
+    const edgeRuntime = (globalThis as any).EdgeRuntime;
+    if (edgeRuntime && typeof edgeRuntime.waitUntil === 'function') edgeRuntime.waitUntil(conversion);
+    else await conversion;
+  }
+
   return json(req, {
     ok: true,
     tier,
     billing_interval: 'lifetime',
     property_capacity: CAPACITY[tier],
-    already_activated: Boolean(prior.data)
+    already_activated: Boolean(prior.data),
+    amount_cents: amountTotalCents,
+    ads_event_id: adsContext ? adsEventId : null
   });
 });

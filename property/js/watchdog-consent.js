@@ -1,8 +1,8 @@
 /* Watchdog privacy preferences.
    Necessary storage supports authentication, security and saved preferences.
-   Google Analytics remains opt-in. Microsoft Clarity may load in cookieless
-   no-consent mode on Watchdog so installation is verifiable without setting
-   optional cookies; full Clarity analytics is enabled only after consent. */
+   Google Analytics and OpenAI Ads measurement remain opt-in. Microsoft Clarity
+   may load in cookieless no-consent mode on Watchdog so installation is verifiable
+   without setting optional cookies; full Clarity analytics is enabled only after consent. */
 (function(){
   'use strict';
   if(window.__WATCHDOG_CONSENT__) return;
@@ -128,7 +128,7 @@
     document.addEventListener('DOMContentLoaded',function(){analyticsLoadQueued=false;loadGoogle();loadClarity(true);},{once:true});
   }
   function clearAnalyticsCookies(){
-    var prefixes=['_ga','_gid','_gat','_clck','_clsk'];
+    var prefixes=['_ga','_gid','_gat','_clck','_clsk','__oppref','__obref'];
     var names=(document.cookie||'').split(';').map(function(v){return v.split('=')[0].trim();}).filter(Boolean);
     names.forEach(function(name){
       if(!prefixes.some(function(prefix){return name===prefix||name.indexOf(prefix+'_')===0;})) return;
@@ -157,7 +157,8 @@
   }
   function privacyHref(){ return '/property/privacy'; }
   function bannerMarkup(){
-    return '<div class="wd-consent-copy"><span class="wd-consent-mark" aria-hidden="true"><i class="fas fa-dog"></i></span><div><strong>Choose your cookie preferences</strong><p>Watchdog uses cookies to keep you signed in, remember preferences, and improve the experience. Optional cookies help us understand how Watchdog is used. We do not use advertising cookies. <a href="'+privacyHref()+'">Privacy Policy</a></p></div></div><div class="wd-consent-actions"><button type="button" class="wd-consent-settings" data-wd-consent-action="settings">Cookie settings</button><button type="button" class="wd-consent-secondary" data-wd-consent-action="reject">Reject optional cookies</button><button type="button" class="wd-consent-primary" data-wd-consent-action="accept">Accept all cookies</button></div>';
+    // content-architecture: dynamic — consent disclosure reflects the optional measurement providers enabled by this runtime.
+    return '<div class="wd-consent-copy"><span class="wd-consent-mark" aria-hidden="true"><i class="fas fa-dog"></i></span><div><strong>Choose your cookie preferences</strong><p>Watchdog uses cookies to keep you signed in and remember preferences. Optional measurement cookies help us understand product use and whether Watchdog ads lead to sign-ups or purchases. We do not sell personal information or enable ad personalization on Watchdog. <a href="'+privacyHref()+'">Privacy Policy</a></p></div></div><div class="wd-consent-actions"><button type="button" class="wd-consent-settings" data-wd-consent-action="settings">Cookie settings</button><button type="button" class="wd-consent-secondary" data-wd-consent-action="reject">Reject optional cookies</button><button type="button" class="wd-consent-primary" data-wd-consent-action="accept">Accept all cookies</button></div>';
   }
   function ensureBanner(){
     if(stored || document.getElementById('wd-cookie-banner')) return;
@@ -168,7 +169,8 @@
     var shade=document.getElementById('wd-consent-shade');
     if(shade) return shade;
     shade=document.createElement('div');shade.id='wd-consent-shade';shade.className='wd-consent-shade';shade.hidden=true;
-    shade.innerHTML='<section class="wd-consent-modal" role="dialog" aria-modal="true" aria-labelledby="wd-consent-title"><header><div><span class="wd-consent-kicker">WATCHDOG PRIVACY</span><h2 id="wd-consent-title">Cookie preferences</h2></div><button class="wd-consent-close" type="button" data-wd-consent-action="close" aria-label="Close cookie settings"><i class="fas fa-xmark"></i></button></header><p class="wd-consent-intro">Choose whether Watchdog may use optional cookies. Necessary cookies stay on because they support account security, sign-in and saved preferences.</p><div class="wd-consent-option"><div><b>Necessary cookies</b><span>Sign-in, security and saved preferences</span></div><span class="wd-consent-always">Always on</span></div><label class="wd-consent-option wd-consent-toggle-row" for="wd-consent-analytics"><div><b>Optional cookies</b><span>Help us understand site usage and improve Watchdog</span></div><span class="wd-consent-toggle"><input id="wd-consent-analytics" type="checkbox"><span aria-hidden="true"></span></span></label><p class="wd-consent-note">Advertising cookies and personalization stay off. Read the <a href="'+privacyHref()+'">Privacy Policy</a> for details.</p><footer><button type="button" class="wd-consent-secondary" data-wd-consent-action="reject">Reject optional cookies</button><button type="button" class="wd-consent-primary" data-wd-consent-action="save">Save preferences</button></footer></section>';
+    // content-architecture: dynamic — modal disclosure mirrors the enabled consent-gated measurement providers and their opt-out boundary.
+    shade.innerHTML='<section class="wd-consent-modal" role="dialog" aria-modal="true" aria-labelledby="wd-consent-title"><header><div><span class="wd-consent-kicker">WATCHDOG PRIVACY</span><h2 id="wd-consent-title">Cookie preferences</h2></div><button class="wd-consent-close" type="button" data-wd-consent-action="close" aria-label="Close cookie settings"><i class="fas fa-xmark"></i></button></header><p class="wd-consent-intro">Choose whether Watchdog may use optional measurement cookies. Necessary cookies stay on because they support account security, sign-in and saved preferences.</p><div class="wd-consent-option"><div><b>Necessary cookies</b><span>Sign-in, security and saved preferences</span></div><span class="wd-consent-always">Always on</span></div><label class="wd-consent-option wd-consent-toggle-row" for="wd-consent-analytics"><div><b>Optional analytics &amp; ad measurement</b><span>Site analytics and attribution for Watchdog campaigns</span></div><span class="wd-consent-toggle"><input id="wd-consent-analytics" type="checkbox"><span aria-hidden="true"></span></span></label><p class="wd-consent-note">Ad personalization stays off. OpenAI ad measurement can use a privacy-preserving click or browser reference only after you opt in. Read the <a href="'+privacyHref()+'">Privacy Policy</a> for details.</p><footer><button type="button" class="wd-consent-secondary" data-wd-consent-action="reject">Reject optional cookies</button><button type="button" class="wd-consent-primary" data-wd-consent-action="save">Save preferences</button></footer></section>';
     document.body.appendChild(shade);return shade;
   }
   function syncControls(){
