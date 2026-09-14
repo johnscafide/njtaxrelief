@@ -1,5 +1,6 @@
 /* Watchdog OpenAI Ads conversion measurement.
-   The browser Pixel ID is intentionally public configuration; the Conversions API key is server-only. */
+   The browser Pixel ID is intentionally public configuration; the Conversions API key is server-only.
+   Pixel: JbuLmCdaMe4wTASd8o5ops */
 (function(){
   'use strict';
   if(window.__WATCHDOG_OPENAI_ADS_RUNTIME__)return;
