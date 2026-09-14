@@ -1,13 +1,12 @@
 /* Watchdog OpenAI Ads conversion measurement.
-   The browser Pixel ID is intentionally public configuration; the Conversions API key is server-only.
-   Until PUBLIC_PIXEL_ID (or WATCHDOG_OPENAI_ADS_PIXEL_ID) is configured, this runtime is a safe no-op. */
+   The browser Pixel ID is intentionally public configuration; the Conversions API key is server-only. */
 (function(){
   'use strict';
   if(window.__WATCHDOG_OPENAI_ADS_RUNTIME__)return;
   window.__WATCHDOG_OPENAI_ADS_RUNTIME__=true;
 
   var SDK='https://bzrcdn.openai.com/sdk/oaiq.min.js';
-  var PUBLIC_PIXEL_ID=''; // Fill with the Ads Manager Pixel ID after provisioning. This value is not secret.
+  var PUBLIC_PIXEL_ID='JbuLmCdaMe4wTASd8o5ops';
   var configuredPixelId='';
   var initialized=false;
   var sdkRequested=false;
