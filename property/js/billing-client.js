@@ -8,7 +8,26 @@
   function cadence(v){return v==='monthly'?'monthly':'yearly'}
   function session(){var c=sb();return c?c.auth.getSession().then(function(r){return r.data&&r.data.session}):Promise.resolve(null)}
   function toast(m){var n=document.getElementById('wd-billing-toast');if(!n){n=document.createElement('div');n.id='wd-billing-toast';n.setAttribute('role','alert');Object.assign(n.style,{position:'fixed',right:'18px',bottom:'18px',zIndex:'100000',maxWidth:'460px',padding:'14px 17px',borderRadius:'12px',background:'#10294b',color:'#fff',boxShadow:'0 16px 38px rgba(8,25,48,.28)',font:'700 14px/1.45 "Source Sans 3",sans-serif'});document.body.appendChild(n)}n.textContent=m;n.hidden=false;clearTimeout(window.__wdBillingToast);window.__wdBillingToast=setTimeout(function(){n.hidden=true},9000)}
-  function invoke(name,body){return session().then(function(s){if(!s)throw Object.assign(new Error('Sign in required'),{code:'SIGN_IN_REQUIRED'});return fetch(URL+'/functions/v1/'+name,{method:'POST',headers:{Authorization:'Bearer '+s.access_token,apikey:KEY,'Content-Type':'application/json'},body:JSON.stringify(body||{})})}).then(function(r){return r.json().catch(function(){return{}}).then(function(p){if(!r.ok)throw Object.assign(new Error(p.error||'Billing request failed'),{code:p.code||'',detail:p.detail||'',status:r.status});return p})})}
+  function adsRequest(name,body){
+    var payload=Object.assign({},body||{});
+    if(name==='complete-lifetime-checkout'){
+      try{
+        var ads=window.WatchdogOpenAIAds;
+        var context=ads&&typeof ads.context==='function'?ads.context():null;
+        if(context)payload.openai_ads=context;
+      }catch(_){ }
+    }
+    return payload;
+  }
+  function adsSuccess(name,payload){
+    try{
+      var ads=window.WatchdogOpenAIAds;if(!ads)return payload;
+      if(name==='create-lifetime-checkout'&&payload&&payload.url&&typeof ads.measureCheckoutStarted==='function')ads.measureCheckoutStarted(payload.tier,payload.amount_cents);
+      if(name==='complete-lifetime-checkout'&&payload&&payload.ok&&typeof ads.measureOrderCreated==='function')ads.measureOrderCreated(payload.tier,payload.amount_cents,payload.ads_event_id);
+    }catch(_){ }
+    return payload;
+  }
+  function invoke(name,body){return session().then(function(s){if(!s)throw Object.assign(new Error('Sign in required'),{code:'SIGN_IN_REQUIRED'});return fetch(URL+'/functions/v1/'+name,{method:'POST',headers:{Authorization:'Bearer '+s.access_token,apikey:KEY,'Content-Type':'application/json'},body:JSON.stringify(adsRequest(name,body))})}).then(function(r){return r.json().catch(function(){return{}}).then(function(p){if(!r.ok)throw Object.assign(new Error(p.error||'Billing request failed'),{code:p.code||'',detail:p.detail||'',status:r.status});return adsSuccess(name,p)})})}
   function checkout(value,opts){var wanted=product(value),cad=cadence(opts&&opts.cadence);if(!wanted||busy)return Promise.resolve();if(wanted.monthlyOnly)cad='monthly';busy=true;return session().then(function(s){if(!s){try{sessionStorage.setItem('watchdog:billing:pending',JSON.stringify({tier:wanted.tier,cadence:cad}))}catch(e){}location.href='/property/dashboard?billing=signin';return null}return invoke('create-checkout-session',{plan:wanted.plan,tier:wanted.tier,cadence:cad}).then(function(p){if(!p||!p.url)throw new Error('Stripe did not return a secure checkout or billing-management URL.');location.href=p.url})}).catch(function(e){busy=false;console.error('Billing checkout failed',e);if(e.code==='SIGN_IN_REQUIRED')toast('Please sign in before choosing a plan.');else if(e.code==='BILLING_ENROLLMENT_CLOSED')toast('Paid enrollment is not open yet. Watchdog is finishing its launch checks.');else if(e.code==='BILLING_CONTROLLED_ONLY')toast('Checkout is currently limited to controlled launch accounts.');else if(e.code==='TEAMS_ENROLLMENT_CLOSED')toast('Teams enrollment is not open yet.');else if(e.code==='LEGACY_SUBSCRIPTION_MIGRATION_REQUIRED')toast('This account has legacy billing that must be migrated before starting Stripe. Contact Watchdog support so you are not charged twice.');else if(e.code==='PRICE_NOT_CONFIGURED'||e.code==='STRIPE_NOT_CONFIGURED')toast('That Stripe billing option is not configured yet. Your account was not charged.');else toast('Checkout error: '+(e&&e.message?e.message:'Unknown billing error'))})}
   function portal(){if(busy)return;busy=true;return invoke('create-portal-session').then(function(p){if(!p||!p.url)throw new Error('Billing management URL was not returned.');location.href=p.url}).catch(function(e){busy=false;toast('Billing management error: '+((e&&e.message)||'Please try again.'))})}
   // content-architecture: dynamic — this copy is selected from live authentication/billing state and is not static page content.
@@ -17,6 +36,16 @@
   function bind(){document.addEventListener('click',function(e){var c=e.target.closest('[data-billing-plan]');if(c){e.preventDefault();checkout(c.dataset.billingPlan,{cadence:c.dataset.billingCadence});return}var m=e.target.closest('[data-billing-portal]');if(m){e.preventDefault();portal()}})}
   window.WatchdogBilling={checkout:checkout,portal:portal,resume:resume,client:sb,product:product,invoke:invoke};
   if(document.readyState==='loading')document.addEventListener('DOMContentLoaded',bind,{once:true});else bind()
+})();
+(function(){
+  var p=(location.pathname||'').replace(/\/+$/,'');
+  if(['/agent','/investor','/lender','/attorney','/property/pro','/pro'].indexOf(p)<0)return;
+  function loadAds(){
+    if(window.WatchdogOpenAIAds||document.querySelector('script[src="/property/js/openai-ads-conversions.js"]'))return;
+    var ads=document.createElement('script');ads.src='/property/js/openai-ads-conversions.js';ads.async=false;ads.setAttribute('data-watchdog-openai-ads-runtime','1');(document.head||document.documentElement).appendChild(ads);
+  }
+  if(window.WatchdogConsent||document.querySelector('script[src="/property/js/watchdog-consent.js"]')){loadAds();return;}
+  var consent=document.createElement('script');consent.src='/property/js/watchdog-consent.js';consent.async=false;consent.setAttribute('data-watchdog-consent-runtime','1');consent.onload=loadAds;(document.head||document.documentElement).appendChild(consent);
 })();
 (function(){var p=(location.pathname||'').replace(/\/+$/,'');if(p==='/property/pro'||p==='/pro'){var s=document.createElement('script');s.src='/property/js/pro-use-cases.js';s.defer=true;document.head.appendChild(s)}})();
 (function(){var p=(location.pathname||'').replace(/\/+$/,'');if(p==='/property/pro'||p==='/pro'){var s=document.createElement('script');s.src='/property/js/pro-checkout-guard.js';s.defer=true;document.head.appendChild(s)}})();
