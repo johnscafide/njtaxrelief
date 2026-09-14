@@ -8,7 +8,7 @@ const ALLOWED_ORIGINS=new Set([
   'http://localhost:3000','http://localhost:5500','http://127.0.0.1:5500'
 ]);
 const EVENTS=new Set([
-  'page_view','tool_open','marker_viewed','property_lookup_started','property_lookup_succeeded',
+  'page_view','tool_open','marker_viewed','property_lookup_started','property_lookup_succeeded','property_saved','monitoring_enabled',
   'export_started','export_completed','upgrade_cta_clicked','checkout_started','subscription_confirmed',
   'intelligence_exposed','intelligence_reasoning_inspected','intelligence_action_started','intelligence_action_completed',
   'intent_question_shown','intent_question_answered','intent_question_skipped',
