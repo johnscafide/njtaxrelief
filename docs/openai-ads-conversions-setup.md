@@ -1,6 +1,6 @@
 # OpenAI Ads conversion measurement
 
-Status: prepared for Watchdog professional acquisition campaigns. This integration is intentionally inactive until the Ads Manager Pixel ID is filled and the server secrets are configured.
+Status: prepared for Watchdog professional acquisition campaigns. The browser Pixel ID is now provisioned. Server-side CAPI remains inactive until its Supabase secrets are configured.
 
 ## Scope
 
@@ -32,13 +32,13 @@ Every OpenAI Ads event created by Watchdog sets `opt_out: true` so the event is 
 
 File: `property/js/openai-ads-conversions.js`
 
-Fill the public Pixel ID after Ads Manager provisions it:
+Provisioned Ads Manager Pixel ID:
 
-```js
-var PUBLIC_PIXEL_ID='PIXEL_ID_FROM_ADS_MANAGER';
+```text
+JbuLmCdaMe4wTASd8o5ops
 ```
 
-The Pixel ID is public configuration and can safely exist in client source. Do not put the Conversions API key in browser code.
+The Pixel ID is public configuration and is intentionally present in client source. Do not put the Conversions API key in browser code.
 
 The runtime loads the official SDK from:
 
@@ -48,7 +48,7 @@ The runtime loads the official SDK from:
 
 Configure these secrets for `complete-lifetime-checkout`:
 
-- `OPENAI_ADS_PIXEL_ID` — same Pixel ID used by the browser runtime.
+- `OPENAI_ADS_PIXEL_ID` — set to `JbuLmCdaMe4wTASd8o5ops` so server CAPI uses the same Pixel ID as the browser runtime.
 - `OPENAI_ADS_CAPI_KEY` — server-only Conversions API key. Never commit, print, return, or expose it to browser code.
 - `OPENAI_ADS_VALIDATE_ONLY` — set to `true` for initial validation if desired, then remove or set to `false` before production measurement.
 
@@ -94,8 +94,8 @@ npm run test:openai-ads
 
 Before launch:
 
-1. Fill the public Pixel ID.
-2. Configure the two Supabase secrets.
+1. Confirm the browser Pixel uses `JbuLmCdaMe4wTASd8o5ops`.
+2. Configure `OPENAI_ADS_PIXEL_ID=JbuLmCdaMe4wTASd8o5ops` and the server-only `OPENAI_ADS_CAPI_KEY` in Supabase.
 3. Optionally enable `OPENAI_ADS_VALIDATE_ONLY=true` for the first controlled test.
 4. Verify a consent-denied browser sends no OpenAI measurement event.
 5. Verify consent-granted `page_viewed` and `checkout_started` in browser debug/network tooling.
