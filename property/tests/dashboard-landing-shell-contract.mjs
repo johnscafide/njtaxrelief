@@ -34,7 +34,7 @@ expect(css.includes('.wdm-property{'), 'selected-property strip styling missing'
 expect(css.includes('grid-template-columns:repeat(4,minmax(0,1fr))'), 'four-card intelligence layout missing');
 expect(css.includes('.wdm-overview-bottom{display:grid'), 'landing-style lower dashboard split missing');
 expect(css.includes('@media(max-width:900px)'), 'mobile sidebar behavior missing');
-expect(css.includes('body.wdm-dashboard-shell .wdd-boot[hidden]{display:none!important;}'), 'dashboard loader hidden-state guard missing');
+expect(css.includes('body.wdm-dashboard-shell .wdd-boot[hidden]{display:none!important}'), 'dashboard loader hidden-state guard missing');
 
 expect(js.includes('WD.filtered()'), 'redesign must read the live filtered property set');
 expect(js.includes('WD.stats()'), 'redesign must preserve live dashboard statistics');
