@@ -4,6 +4,7 @@ const read = (path) => fs.readFileSync(path, 'utf8');
 const pixel = read('property/js/openai-ads-conversions.js');
 const billing = read('property/js/billing-client.js');
 const consent = read('property/js/watchdog-consent.js');
+const privacy = read('property/privacy/index.html');
 const complete = read('supabase/functions/complete-lifetime-checkout/index.ts');
 
 function must(source, needle, message) {
@@ -14,6 +15,7 @@ function mustNot(source, needle, message) {
 }
 
 must(pixel, 'https://bzrcdn.openai.com/sdk/oaiq.min.js', 'OpenAI Ads Pixel must use the official SDK origin.');
+must(pixel, "var PUBLIC_PIXEL_ID=''", 'Pixel runtime must have one explicit public configuration point.');
 must(pixel, "q('consent',consentGranted())", 'Pixel consent must be set before/with initialization.');
 must(pixel, "q('init',{pixelId:id})", 'Pixel must initialize with the configured Pixel ID.');
 must(pixel, "'page_viewed'", 'Paid landing pages should emit a standard page_viewed event.');
@@ -34,6 +36,12 @@ must(billing, '/property/js/openai-ads-conversions.js', 'Paid checkout surfaces 
 must(consent, 'OpenAI Ads measurement remain opt-in', 'Consent documentation must explicitly keep OpenAI Ads measurement opt-in.');
 must(consent, "'__oppref','__obref'", 'Revoking optional consent must clear OpenAI measurement cookies.');
 must(consent, 'Ad personalization stays off.', 'Consent UI must disclose the personalization boundary.');
+
+must(privacy, 'OpenAI Ads measurement', 'Privacy policy must name the OpenAI Ads measurement provider.');
+must(privacy, '<code>oppref</code>', 'Privacy policy must disclose the OpenAI click reference.');
+must(privacy, '<code>obref</code>', 'Privacy policy must disclose the OpenAI browser reference.');
+must(privacy, 'SHA-256 hashes of the account email and internal Watchdog user ID', 'Privacy policy must disclose hashed purchase matching identifiers.');
+must(privacy, 'opt out of future user-level personalization', 'Privacy policy must disclose the personalization opt-out boundary.');
 
 must(complete, "Deno.env.get('OPENAI_ADS_PIXEL_ID')", 'Server CAPI must use the configured OpenAI Pixel ID secret.');
 must(complete, "Deno.env.get('OPENAI_ADS_CAPI_KEY')", 'Server CAPI must use the server-only OpenAI CAPI key.');
