@@ -4,44 +4,163 @@
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width,initial-scale=1">
   <meta name="robots" content="noindex,nofollow,noarchive">
-  <meta name="theme-color" content="#10294b">
-  <title>Watchdog Closed Beta</title>
+  <meta name="theme-color" content="#f5f7fb">
+  <title>Watchdog Pro Trial Invitation</title>
+  <link rel="icon" type="image/png" href="/favicon-96x96.png" sizes="96x96">
+  <link rel="icon" type="image/svg+xml" href="/favicon.svg">
+  <link rel="shortcut icon" href="/favicon.ico">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@600;700;800&family=Source+Sans+3:wght@400;600;700&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@600;700;800&family=Source+Sans+3:wght@400;500;600;700&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
   <style>
-    :root{--navy:#10294b;--ink:#172536;--muted:#697a8c;--paper:#f4f7f9;--card:#fff;--teal:#087f7a;--teal-soft:#e9f6f4;--line:#e3e9ee;--danger:#9f3535;--shadow:0 20px 65px rgba(16,41,75,.10)}
-    *{box-sizing:border-box}body{margin:0;background:var(--paper);color:var(--ink);font-family:"Source Sans 3",Arial,sans-serif}.shell{min-height:100vh;display:grid;place-items:center;padding:28px}.card{width:min(820px,100%);background:var(--card);border-radius:30px;padding:clamp(24px,5vw,48px);box-shadow:var(--shadow)}.brand{display:inline-flex;align-items:center;gap:10px;text-decoration:none;color:var(--navy);font:800 15px "Plus Jakarta Sans",Arial,sans-serif}.mark{width:38px;height:38px;border-radius:13px;background:var(--navy);color:#fff;display:grid;place-items:center}.kicker{display:inline-flex;align-items:center;gap:7px;margin-top:30px;background:var(--teal-soft);color:var(--teal);border-radius:999px;padding:7px 10px;font-size:11px;font-weight:800;letter-spacing:.07em;text-transform:uppercase}h1{margin:12px 0 10px;color:var(--navy);font:800 clamp(34px,6vw,57px)/1 "Plus Jakarta Sans",Arial,sans-serif;letter-spacing:-.055em}.lead{margin:0;color:var(--muted);font-size:18px;line-height:1.55;max-width:680px}.facts{display:grid;grid-template-columns:repeat(3,1fr);gap:10px;margin:28px 0}.fact{background:var(--paper);border-radius:17px;padding:16px}.fact i{color:var(--teal)}.fact b{display:block;margin:8px 0 3px;color:var(--navy);font:800 13px "Plus Jakarta Sans",Arial,sans-serif}.fact span{font-size:12.5px;color:var(--muted);line-height:1.35}.panel{background:#fbfcfd;border:1px solid var(--line);border-radius:21px;padding:20px}.panel-title{margin:0 0 4px;color:var(--navy);font:800 18px "Plus Jakarta Sans",Arial,sans-serif}.panel-copy{margin:0 0 16px;color:var(--muted);font-size:13.5px}.code-row{display:grid;grid-template-columns:minmax(0,1fr) auto;gap:10px}.code-input{width:100%;height:50px;border:1px solid var(--line);border-radius:14px;padding:0 15px;background:#fff;color:var(--ink);font:700 15px ui-monospace,SFMono-Regular,Consolas,monospace;outline:none}.code-input:focus{border-color:#9cb9b6;box-shadow:0 0 0 3px rgba(8,127,122,.08)}button{height:50px;border:0;border-radius:14px;padding:0 18px;font:800 13px "Source Sans 3",Arial,sans-serif;cursor:pointer}.primary{background:var(--navy);color:#fff}.secondary{background:var(--teal-soft);color:var(--teal)}button:disabled{opacity:.55;cursor:not-allowed}.status{min-height:22px;margin-top:13px;font-size:13px;color:var(--muted)}.status.error{color:var(--danger)}.status.success{color:var(--teal)}.terms{margin:22px 0 0;color:var(--muted);font-size:12.5px;line-height:1.5}.terms strong{color:var(--ink)}.account{margin-top:13px;display:flex;align-items:center;justify-content:space-between;gap:12px;padding:12px 14px;border-radius:14px;background:var(--paper);font-size:12.5px}.account b{color:var(--navy)}.hidden{display:none!important}@media(max-width:660px){.shell{padding:14px}.card{border-radius:24px;padding:24px 18px}.facts{grid-template-columns:1fr}.code-row{grid-template-columns:1fr}.code-row button{width:100%}.account{align-items:flex-start;flex-direction:column}}
+    :root{
+      --blue:#0d3dbe;
+      --blue-2:#176eff;
+      --navy:#082f7d;
+      --ink:#172536;
+      --muted:#66758a;
+      --paper:#f5f7fb;
+      --card:#fff;
+      --soft:#f1f5fb;
+      --line:#dfe6ef;
+      --success:#087f5b;
+      --success-soft:#ecf8f3;
+      --danger:#a33a3a;
+      --shadow:0 26px 70px rgba(21,47,92,.13);
+    }
+    *{box-sizing:border-box}
+    html,body{min-height:100%}
+    body{
+      margin:0;
+      color:var(--ink);
+      background:
+        radial-gradient(circle at 15% 10%,rgba(23,110,255,.08),transparent 30%),
+        radial-gradient(circle at 92% 88%,rgba(13,61,190,.055),transparent 30%),
+        var(--paper);
+      font-family:"Source Sans 3",Arial,sans-serif;
+      -webkit-font-smoothing:antialiased;
+    }
+    button,input{font:inherit}
+    .shell{min-height:100vh;display:grid;place-items:center;padding:38px 20px}
+    .frame{width:min(1020px,100%)}
+    .brandbar{display:flex;align-items:center;justify-content:space-between;gap:20px;margin:0 2px 18px}
+    .brand{display:inline-flex;align-items:center;text-decoration:none}
+    .brand img{display:block;width:190px;height:auto;max-width:54vw}
+    .private-badge{display:inline-flex;align-items:center;gap:7px;padding:8px 11px;border-radius:999px;background:#fff;color:#5d6d82;border:1px solid var(--line);font-size:12px;font-weight:700;box-shadow:0 6px 20px rgba(32,56,92,.05)}
+    .private-badge i{color:var(--blue)}
+    .card{background:var(--card);border:1px solid rgba(214,223,235,.92);border-radius:30px;box-shadow:var(--shadow);overflow:hidden}
+    .hero{padding:clamp(30px,5vw,58px);padding-bottom:30px}
+    .eyebrow{display:inline-flex;align-items:center;gap:7px;margin-bottom:17px;padding:7px 10px;border-radius:999px;background:#eef4ff;color:var(--blue);font-size:11px;font-weight:800;letter-spacing:.08em;text-transform:uppercase}
+    .eyebrow i{font-size:10px}
+    h1{max-width:760px;margin:0;color:var(--navy);font:800 clamp(36px,6.5vw,64px)/.98 "Plus Jakarta Sans",Arial,sans-serif;letter-spacing:-.055em}
+    .lead{max-width:720px;margin:18px 0 0;color:var(--muted);font-size:clamp(17px,2vw,20px);line-height:1.5}
+    .invite-summary{display:flex;flex-wrap:wrap;gap:10px;margin-top:25px}
+    .summary-pill{display:inline-flex;align-items:center;gap:8px;padding:10px 13px;border-radius:13px;background:var(--soft);color:#41546c;font-size:13px;font-weight:700}
+    .summary-pill i{color:var(--blue)}
+    .summary-pill.primary{background:#edf3ff;color:var(--navy)}
+    .content{display:grid;grid-template-columns:minmax(0,1.25fr) minmax(290px,.75fr);gap:0;border-top:1px solid var(--line)}
+    .activate{padding:clamp(24px,4vw,42px);border-right:1px solid var(--line)}
+    .aside{padding:clamp(24px,4vw,42px);background:#fbfcfe}
+    .section-kicker{margin:0 0 5px;color:var(--blue);font-size:11px;font-weight:800;letter-spacing:.08em;text-transform:uppercase}
+    .panel-title{margin:0;color:var(--navy);font:800 23px/1.18 "Plus Jakarta Sans",Arial,sans-serif;letter-spacing:-.025em}
+    .panel-copy{margin:9px 0 20px;color:var(--muted);font-size:14px;line-height:1.5}
+    .code-wrap{position:relative}
+    .code-label{display:block;margin:0 0 7px;color:#465b74;font-size:12px;font-weight:700}
+    .code-row{display:grid;grid-template-columns:minmax(0,1fr) auto;gap:10px}
+    .code-input{width:100%;height:54px;border:1px solid var(--line);border-radius:14px;padding:0 15px;background:#fff;color:var(--ink);font:700 14px ui-monospace,SFMono-Regular,Consolas,monospace;outline:none;letter-spacing:.015em;transition:border-color .18s,box-shadow .18s}
+    .code-input:focus{border-color:#9db9f5;box-shadow:0 0 0 4px rgba(23,110,255,.09)}
+    button{height:54px;border:0;border-radius:14px;padding:0 20px;font-weight:800;cursor:pointer;transition:transform .16s,box-shadow .16s,opacity .16s}
+    button:hover:not(:disabled){transform:translateY(-1px)}
+    .primary{background:var(--blue);color:#fff;box-shadow:0 10px 24px rgba(13,61,190,.18)}
+    .primary:hover:not(:disabled){box-shadow:0 13px 28px rgba(13,61,190,.23)}
+    .secondary{height:40px;background:#eef3fa;color:var(--navy);padding:0 13px}
+    button:disabled{opacity:.55;cursor:not-allowed}
+    .status{min-height:22px;margin-top:13px;font-size:13px;color:var(--muted)}
+    .status.error{color:var(--danger)}
+    .status.success{color:var(--success)}
+    .account{margin-top:14px;display:flex;align-items:center;justify-content:space-between;gap:12px;padding:12px 13px;border-radius:14px;background:var(--soft);font-size:12.5px}
+    .account b{color:var(--navy)}
+    .secure-note{display:flex;align-items:flex-start;gap:10px;margin-top:18px;padding:13px 14px;border-radius:14px;background:var(--success-soft);color:#3e6558;font-size:12.5px;line-height:1.45}
+    .secure-note i{margin-top:2px;color:var(--success)}
+    .aside-title{margin:0 0 17px;color:var(--navy);font:800 17px "Plus Jakarta Sans",Arial,sans-serif}
+    .benefits{display:grid;gap:16px}
+    .benefit{display:grid;grid-template-columns:34px minmax(0,1fr);gap:11px;align-items:flex-start}
+    .benefit-icon{width:34px;height:34px;border-radius:11px;background:#edf3ff;display:grid;place-items:center;color:var(--blue);font-size:13px}
+    .benefit b{display:block;margin:0 0 2px;color:#2d435f;font-size:13px}
+    .benefit span{display:block;color:var(--muted);font-size:12.5px;line-height:1.4}
+    .terms{margin:26px 0 0;padding-top:20px;border-top:1px solid var(--line);color:#7a8798;font-size:11.75px;line-height:1.5}
+    .terms strong{color:#53647a}
+    .hidden{display:none!important}
+    @media(max-width:780px){
+      .shell{padding:18px 12px}
+      .brandbar{margin:0 5px 14px}.brand img{width:160px}.private-badge span{display:none}
+      .card{border-radius:24px}
+      .hero{padding:28px 22px 24px}
+      h1{font-size:clamp(34px,10vw,48px)}
+      .content{grid-template-columns:1fr}
+      .activate{border-right:0;border-bottom:1px solid var(--line);padding:24px 22px}
+      .aside{padding:24px 22px}
+      .code-row{grid-template-columns:1fr}
+      .code-row button{width:100%}
+    }
+    @media(max-width:480px){
+      .summary-pill{width:100%;justify-content:flex-start}
+      .account{align-items:flex-start;flex-direction:column}
+      .account .secondary{width:100%}
+    }
   </style>
 </head>
 <body>
   <main class="shell">
-    <section class="card" aria-labelledby="beta-title">
-      <a class="brand" href="/" aria-label="Watchdog home"><span class="mark"><i class="fas fa-dog" aria-hidden="true"></i></span><span>Watchdog Property Intelligence</span></a>
-      <div class="kicker"><i class="fas fa-flask" aria-hidden="true"></i> Invite-only closed beta</div>
-      <h1 id="beta-title">Test the full professional product.</h1>
-      <p class="lead">A Watchdog beta invitation can unlock Agent, Pro, or Pro+ for 30 or 60 days. No credit card is required to start.</p>
-
-      <div class="facts" aria-label="Beta trial terms">
-        <div class="fact"><i class="fas fa-credit-card" aria-hidden="true"></i><b>No card to begin</b><span>Activation is $0. Stripe may ask for billing address so tax location stays accurate.</span></div>
-        <div class="fact"><i class="fas fa-calendar-xmark" aria-hidden="true"></i><b>No surprise renewal</b><span>If you never add a payment method, the trial cancels at the end and Watchdog returns to Standard.</span></div>
-        <div class="fact"><i class="fas fa-arrow-up-right-dots" aria-hidden="true"></i><b>You choose to continue</b><span>Add payment information through Watchdog Billing before the trial ends only if you want the plan to continue monthly.</span></div>
+    <div class="frame">
+      <div class="brandbar">
+        <a class="brand" href="/" aria-label="Watchdog home"><img src="/agent/assets/watchdog-logo.svg" alt="Watchdog Property Intelligence"></a>
+        <div class="private-badge"><i class="fa-solid fa-lock" aria-hidden="true"></i><span>Private invitation</span></div>
       </div>
 
-      <div class="panel">
-        <h2 class="panel-title">Redeem your invitation</h2>
-        <p class="panel-copy" id="preview">Enter the invitation exactly as provided. The server controls the plan and duration; changing the text cannot upgrade the offer.</p>
-        <div class="code-row">
-          <input class="code-input" id="code" autocomplete="off" autocapitalize="characters" spellcheck="false" placeholder="WDG-AG-30-XXXXXXXXXXXX" aria-label="Closed beta invitation code">
-          <button class="primary" id="redeem" type="button">Activate beta</button>
+      <section class="card" aria-labelledby="beta-title">
+        <div class="hero">
+          <div class="eyebrow"><i class="fa-solid fa-sparkles" aria-hidden="true"></i> Complimentary professional access</div>
+          <h1 id="beta-title">Your Watchdog trial is ready.</h1>
+          <p class="lead" id="hero-copy">Explore the professional Watchdog platform with full trial access. No credit card is required to begin.</p>
+          <div class="invite-summary" aria-label="Trial summary">
+            <div class="summary-pill primary"><i class="fa-solid fa-shield-dog" aria-hidden="true"></i><span id="plan-summary">Professional trial</span></div>
+            <div class="summary-pill"><i class="fa-regular fa-calendar" aria-hidden="true"></i><span id="days-summary">Invitation verified at activation</span></div>
+            <div class="summary-pill"><i class="fa-regular fa-credit-card" aria-hidden="true"></i><span>No card required</span></div>
+          </div>
         </div>
-        <div class="account hidden" id="account"><span>Signed in as <b id="email"></b></span><button class="secondary" id="signout" type="button">Use another account</button></div>
-        <div class="status" id="status" role="status" aria-live="polite"></div>
-      </div>
 
-      <p class="terms"><strong>Important:</strong> A beta code does not open public paid enrollment and does not bypass Watchdog access controls. Activation uses Stripe's hosted subscription flow and Watchdog's signed billing events. Normal monthly pricing applies only if you deliberately add a payment method before the trial ends.</p>
-    </section>
+        <div class="content">
+          <section class="activate" aria-labelledby="activate-title">
+            <p class="section-kicker">Activate access</p>
+            <h2 class="panel-title" id="activate-title">Create or sign in to your Watchdog account</h2>
+            <p class="panel-copy" id="preview">Your invitation code is already attached to this link. Sign in and Watchdog will securely validate the plan and trial period.</p>
+            <div class="code-wrap">
+              <label class="code-label" for="code">Invitation code</label>
+              <div class="code-row">
+                <input class="code-input" id="code" autocomplete="off" autocapitalize="characters" spellcheck="false" placeholder="WDG-PP-30-XXXXXXXXXXXX" aria-label="Watchdog trial invitation code">
+                <button class="primary" id="redeem" type="button">Activate trial</button>
+              </div>
+            </div>
+            <div class="account hidden" id="account"><span>Signed in as <b id="email"></b></span><button class="secondary" id="signout" type="button">Use another account</button></div>
+            <div class="status" id="status" role="status" aria-live="polite"></div>
+            <div class="secure-note"><i class="fa-solid fa-lock" aria-hidden="true"></i><span><strong>Secure activation.</strong> Watchdog validates the invitation server-side and uses Stripe's hosted subscription infrastructure. You will not be charged to start this trial.</span></div>
+          </section>
+
+          <aside class="aside" aria-label="Trial details">
+            <h2 class="aside-title">What to expect</h2>
+            <div class="benefits">
+              <div class="benefit"><div class="benefit-icon"><i class="fa-solid fa-bolt" aria-hidden="true"></i></div><div><b>Full trial access</b><span>Use the professional tools included in the plan attached to this invitation.</span></div></div>
+              <div class="benefit"><div class="benefit-icon"><i class="fa-solid fa-credit-card" aria-hidden="true"></i></div><div><b>$0 to start</b><span>No credit card is required to activate. Stripe may request a billing address for tax-location accuracy.</span></div></div>
+              <div class="benefit"><div class="benefit-icon"><i class="fa-solid fa-calendar-xmark" aria-hidden="true"></i></div><div><b>No surprise renewal</b><span>If you do not add a payment method, the trial ends automatically and your account returns to Standard.</span></div></div>
+              <div class="benefit"><div class="benefit-icon"><i class="fa-solid fa-arrow-up-right-dots" aria-hidden="true"></i></div><div><b>Continue only if you choose</b><span>Add billing information before the trial ends only if you want to keep the professional plan.</span></div></div>
+            </div>
+            <p class="terms"><strong>Invitation terms:</strong> Trial links are limited-use and may expire before activation. The plan and duration are controlled by Watchdog's server, not by the text shown in the browser.</p>
+          </aside>
+        </div>
+      </section>
+    </div>
   </main>
 
   <script>
@@ -64,16 +183,35 @@
     var email=document.getElementById('email');
     var signout=document.getElementById('signout');
     var preview=document.getElementById('preview');
+    var heroTitle=document.getElementById('beta-title');
+    var heroCopy=document.getElementById('hero-copy');
+    var planSummary=document.getElementById('plan-summary');
+    var daysSummary=document.getElementById('days-summary');
     var client=null;
     var session=null;
 
     function setStatus(message,type){status.textContent=message||'';status.className='status'+(type?' '+type:'');}
     function normalize(value){return String(value||'').trim().toUpperCase().replace(/\s+/g,'');}
+    function inviteDetails(code){
+      var m=normalize(code).match(/^WDG-(AG|PR|PP)-(30|60)-/);
+      if(!m)return null;
+      return {plan:m[1]==='AG'?'Agent':m[1]==='PR'?'Pro':'Pro+',days:m[2]};
+    }
     function previewCode(){
-      var code=normalize(input.value),m=code.match(/^WDG-(AG|PR|PP)-(30|60)-/);
-      if(!m){preview.textContent='Enter the invitation exactly as provided. The server controls the plan and duration; changing the text cannot upgrade the offer.';return;}
-      var plan=m[1]==='AG'?'Agent':m[1]==='PR'?'Pro':'Pro+';
-      preview.textContent='Invitation format: '+m[2]+'-day '+plan+' beta. Watchdog will verify this with the server before activation.';
+      var details=inviteDetails(input.value);
+      if(!details){
+        heroTitle.textContent='Your Watchdog trial is ready.';
+        heroCopy.textContent='Explore the professional Watchdog platform with full trial access. No credit card is required to begin.';
+        planSummary.textContent='Professional trial';
+        daysSummary.textContent='Invitation verified at activation';
+        preview.textContent='Enter the invitation exactly as provided. Watchdog will securely verify the plan and trial period.';
+        return;
+      }
+      heroTitle.textContent='Your '+details.days+'-day Watchdog '+details.plan+' trial is ready.';
+      heroCopy.textContent='You have been invited to explore Watchdog '+details.plan+' with complimentary access for '+details.days+' days. No credit card is required to begin.';
+      planSummary.textContent='Watchdog '+details.plan;
+      daysSummary.textContent=details.days+' days included';
+      preview.textContent='Your '+details.days+'-day '+details.plan+' invitation is attached. Sign in and Watchdog will securely validate it before activation.';
     }
     function savedCode(){try{return sessionStorage.getItem('watchdog_beta_code')||'';}catch(_e){return '';}}
     function saveCode(code){try{sessionStorage.setItem('watchdog_beta_code',code);}catch(_e){}}
@@ -82,7 +220,7 @@
     function getClient(){if(client)return client;if(!runtime())throw new Error('Watchdog sign-in is unavailable right now.');client=runtime().createClient();return client;}
     async function refreshSession(){
       var result=await getClient().auth.getSession();session=result&&result.data&&result.data.session||null;
-      if(session&&session.user){email.textContent=session.user.email||'your Watchdog account';account.classList.remove('hidden');redeem.textContent='Activate beta';}
+      if(session&&session.user){email.textContent=session.user.email||'your Watchdog account';account.classList.remove('hidden');redeem.textContent='Activate trial';}
       else{account.classList.add('hidden');redeem.textContent='Sign in to activate';}
     }
     async function invoke(body){
@@ -96,7 +234,7 @@
     }
     async function activate(){
       var code=normalize(input.value);
-      if(!/^WDG-(AG|PR|PP)-(30|60)-[A-Z2-9]{12}$/.test(code)){setStatus('Enter the complete beta invitation code.','error');return;}
+      if(!/^WDG-(AG|PR|PP)-(30|60)-[A-Z2-9]{12}$/.test(code)){setStatus('Enter the complete Watchdog invitation code.','error');return;}
       saveCode(code);
       await refreshSession();
       if(!session){
@@ -105,18 +243,18 @@
         else location.href='/onboarding/?next=%2Fbeta';
         return;
       }
-      redeem.disabled=true;setStatus('Checking invitation and preparing secure Stripe activation…','');
+      redeem.disabled=true;setStatus('Validating your invitation and preparing secure activation…','');
       try{
         var data=await invoke({action:'redeem_beta_trial',code:code});
         if(!data.url)throw new Error('Stripe activation link was not returned.');
-        clearCode();setStatus('Invitation accepted. Opening Stripe…','success');location.assign(data.url);
-      }catch(error){setStatus(error&&error.message||'Could not activate this beta invitation.','error');}
+        clearCode();setStatus('Invitation accepted. Opening secure activation…','success');location.assign(data.url);
+      }catch(error){setStatus(error&&error.message||'Could not activate this Watchdog trial.','error');}
       finally{redeem.disabled=false;}
     }
     input.value=savedCode();previewCode();input.addEventListener('input',function(){input.value=input.value.toUpperCase();previewCode();saveCode(normalize(input.value));});redeem.addEventListener('click',activate);
     signout.addEventListener('click',async function(){try{await getClient().auth.signOut();session=null;account.classList.add('hidden');redeem.textContent='Sign in to activate';setStatus('Signed out. The invitation remains in this browser tab.','');}catch(error){setStatus(error&&error.message||'Could not sign out.','error');}});
     refreshSession().catch(function(error){setStatus(error&&error.message||'Could not read your Watchdog session.','error');});
-    if(new URLSearchParams(location.search).get('beta')==='cancelled')setStatus('Activation was canceled. Your beta invitation was consumed when the secure Checkout session was issued. Contact Watchdog if you need a replacement invite.','');
+    if(new URLSearchParams(location.search).get('beta')==='cancelled')setStatus('Activation was canceled. Contact Watchdog if you need a replacement invitation.','');
   })();
   </script>
 </body>
