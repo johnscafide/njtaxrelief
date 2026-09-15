@@ -7,10 +7,9 @@ searches or convert a discovered portal into a clearance result.
 """
 from __future__ import annotations
 
-import argparse, concurrent.futures, datetime as dt, html.parser, json, pathlib, re
+import argparse, concurrent.futures, datetime as dt, html.parser, json, pathlib
 import urllib.parse, urllib.request
 from collections import defaultdict
-from typing import Any
 
 ROOT = pathlib.Path(__file__).resolve().parents[2]
 DEFAULT_OUT = ROOT / '.cache/transaction-sources/county-record-discovery.json'
@@ -63,11 +62,9 @@ def county_roots():
             c=county.lower()
             if c in hay and ('county' in hay or 'co.' in hay):
                 candidates.append({'county':county,'root_url':url,'directory_label':label,'directory_source':STATE_LOCAL_GOV}); break
-    # Prefer one root per county; manual fallback roots are discovery seeds only.
     by={}
-    for row in candidates:
-        by.setdefault(row['county'],row)
-    return [by.get(c,{'county':c,'root_url':f'https://www.google.com/search?q={urllib.parse.quote(c+" County NJ Clerk land records")}', 'directory_label':'unresolved','directory_source':STATE_LOCAL_GOV}) for c in COUNTIES]
+    for row in candidates: by.setdefault(row['county'],row)
+    return [by.get(c,{'county':c,'root_url':'','directory_label':'unresolved','directory_source':STATE_LOCAL_GOV}) for c in COUNTIES]
 
 def score(label,url):
     hay=(label+' '+urllib.parse.unquote(url)).lower().replace('-',' ').replace('_',' ')
@@ -81,7 +78,7 @@ def score(label,url):
 
 def crawl(row,max_pages):
     root=row['root_url']; result={**row,'checked_at':now(),'candidates':{},'errors':[],'pages_checked':0}
-    if host(root)=='www.google.com' or host(root)=='google.com':
+    if not root:
         result['status']='root_unresolved'; return result
     q=[(root,0)]; visited=set(); found=defaultdict(list)
     while q and len(visited)<max_pages:
