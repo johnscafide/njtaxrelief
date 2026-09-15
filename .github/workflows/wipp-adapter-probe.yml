@@ -1,0 +1,63 @@
+name: WIPP adapter probe
+
+on:
+  pull_request:
+    paths:
+      - '.github/workflows/wipp-adapter-probe.yml'
+      - 'supabase/functions/transaction-municipal-evidence/**'
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  probe:
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+    steps:
+      - uses: actions/checkout@v4
+      - name: Probe anonymous WIPP tax contract without logging account data
+        shell: python
+        run: |
+          import json, urllib.request, urllib.error
+          base='https://api.edmundsgovtech.cloud/wipp-core/v1'
+          tenant='0418'
+          headers={
+            'X-Wipp-Id': tenant,
+            'User-Agent':'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 Chrome/154 Safari/537.36 Watchdog-WIPP-contract/1.0',
+            'Accept':'application/json',
+          }
+          def get(path):
+            req=urllib.request.Request(base+path,headers=headers)
+            try:
+              with urllib.request.urlopen(req,timeout=20) as r:
+                raw=r.read()
+                try: data=json.loads(raw)
+                except Exception: data=None
+                return r.status,data
+            except urllib.error.HTTPError as e:
+              raw=e.read()
+              try: data=json.loads(raw)
+              except Exception: data=None
+              return e.code,data
+          status,data=get('/metadata/'+tenant)
+          print('metadata_status',status,'json',isinstance(data,dict),'keys',sorted(data.keys())[:30] if isinstance(data,dict) else [])
+          assert status==200 and isinstance(data,dict)
+          candidates=[
+            '/WippPropInfo/search?propertyLoc=Station&size=3',
+            '/wippPropInfo/search?propertyLoc=Station&size=3',
+            '/WippPropInfo/search?propLoc=Station&size=3',
+          ]
+          ok=False
+          for path in candidates:
+            status,data=get(path)
+            keys=sorted(data.keys())[:30] if isinstance(data,dict) else []
+            content_keys=[]
+            if isinstance(data,dict) and isinstance(data.get('content'),list) and data['content'] and isinstance(data['content'][0],dict):
+              content_keys=sorted(data['content'][0].keys())[:40]
+            print('candidate',path.split('?')[0],path.split('?')[1].split('&')[0],'status',status,'shape',type(data).__name__,'keys',keys,'row_keys',content_keys)
+            if status==200 and isinstance(data,dict) and isinstance(data.get('content'),list):
+              print('selected_path',path.split('?')[0],path.split('?')[1].split('&')[0],'rows',len(data['content']))
+              ok=True
+              break
+          assert ok, 'No anonymous WIPP property-tax search candidate returned a Spring page contract'
