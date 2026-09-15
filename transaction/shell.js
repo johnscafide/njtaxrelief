@@ -1,5 +1,11 @@
 (function(){
 'use strict';
+function normalizeTransactionUrl(){
+  var path=window.location.pathname.replace(/\/+$/,'');
+  if(path==='/transaction/index.html'){
+    try{window.history.replaceState(window.history.state,'','/transaction'+window.location.search+window.location.hash);}catch(e){}
+  }
+}
 function loadEvidenceAddons(){
   if(window.__WATCHDOG_TRANSACTION_EVIDENCE_ADDONS__||document.querySelector('script[data-transaction-evidence-addons]'))return;
   var addon=document.createElement('script');
@@ -38,6 +44,7 @@ function patch(){
     var account=nav.querySelector('a[href="/property/account"]');nav.insertBefore(link,account||null);
   }
 }
+normalizeTransactionUrl();
 loadPreflight();
 if(document.readyState==='loading')document.addEventListener('DOMContentLoaded',function(){setTimeout(patch,0);setTimeout(patch,250);},{once:true});else{setTimeout(patch,0);setTimeout(patch,250);}
 })();
