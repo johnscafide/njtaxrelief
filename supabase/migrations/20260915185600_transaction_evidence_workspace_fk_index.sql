@@ -1,0 +1,2 @@
+create index if not exists transaction_evidence_observations_workspace_fk_idx
+on public.transaction_evidence_observations(transaction_id, user_id);
