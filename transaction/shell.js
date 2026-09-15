@@ -1,5 +1,13 @@
 (function(){
 'use strict';
+function loadPreflight(){
+  if(document.querySelector('script[data-transaction-preflight]'))return;
+  var script=document.createElement('script');
+  script.src='/transaction/preflight.js?v=20260915b';
+  script.async=false;
+  script.dataset.transactionPreflight='true';
+  document.body.appendChild(script);
+}
 function patch(){
   var bar=document.querySelector('.wdx-pagebar');
   if(bar){
@@ -11,10 +19,10 @@ function patch(){
     if(primary){primary.href='/property/pro';primary.innerHTML='<i class="fas fa-briefcase"></i> Professional Hub';}
   }
   var nav=document.querySelector('.wd4-nav-links');
-  if(nav&&!nav.querySelector('a[href="/transaction/"]')){
-    var link=document.createElement('a');link.href='/transaction/';link.className='active';link.innerHTML='<i class="fas fa-file-signature"></i>Transactions';
+  if(nav&&!nav.querySelector('a[href="/transaction"]')){
+    var link=document.createElement('a');link.href='/transaction';link.className='active';link.innerHTML='<i class="fas fa-file-signature"></i>Transactions';
     var account=nav.querySelector('a[href="/property/account"]');nav.insertBefore(link,account||null);
   }
 }
-if(document.readyState==='loading')document.addEventListener('DOMContentLoaded',function(){setTimeout(patch,0);setTimeout(patch,250);},{once:true});else{setTimeout(patch,0);setTimeout(patch,250);}
+if(document.readyState==='loading')document.addEventListener('DOMContentLoaded',function(){loadPreflight();setTimeout(patch,0);setTimeout(patch,250);},{once:true});else{loadPreflight();setTimeout(patch,0);setTimeout(patch,250);}
 })();
