@@ -4,6 +4,7 @@ on:
   pull_request:
     paths:
       - '.github/workflows/nj-provider-census.yml'
+      - 'property/scripts/discover_all_nj_municipal_transaction_sources.py'
       - 'property/scripts/discover_municipal_transaction_sources.py'
       - 'property/scripts/discover_county_record_sources.py'
       - 'property/scripts/summarize_transaction_provider_census.py'
@@ -25,7 +26,7 @@ jobs:
           python-version: '3.12'
       - name: Crawl all 564 municipalities
         run: >-
-          python3 property/scripts/discover_municipal_transaction_sources.py
+          python3 property/scripts/discover_all_nj_municipal_transaction_sources.py
           --out "$RUNNER_TEMP/municipal.json"
           --workers 12
           --max-pages-per-site 8
