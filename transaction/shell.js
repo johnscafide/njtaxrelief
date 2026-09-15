@@ -1,15 +1,25 @@
 (function(){
 'use strict';
+function loadEvidenceAddons(){
+  if(window.__WATCHDOG_TRANSACTION_EVIDENCE_ADDONS__||document.querySelector('script[data-transaction-evidence-addons]'))return;
+  var addon=document.createElement('script');
+  addon.src='/transaction/evidence-addons.js?v=20260915a';
+  addon.async=false;
+  addon.dataset.transactionEvidenceAddons='true';
+  document.body.appendChild(addon);
+}
 function loadPreflight(){
-  if(window.__WATCHDOG_TRANSACTION_AUTO_PREFLIGHT__||document.querySelector('script[data-transaction-preflight]'))return;
+  if(window.__WATCHDOG_TRANSACTION_AUTO_PREFLIGHT__||document.querySelector('script[data-transaction-preflight]')){setTimeout(loadEvidenceAddons,0);return;}
   if(document.readyState==='loading'){
     document.write('<script data-transaction-preflight src="/transaction/preflight.js?v=20260915b"><\/script>');
+    document.write('<script data-transaction-evidence-addons src="/transaction/evidence-addons.js?v=20260915a"><\/script>');
     return;
   }
   var script=document.createElement('script');
   script.src='/transaction/preflight.js?v=20260915b';
   script.async=false;
   script.dataset.transactionPreflight='true';
+  script.addEventListener('load',loadEvidenceAddons,{once:true});
   document.body.appendChild(script);
 }
 function patch(){

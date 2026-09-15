@@ -5,10 +5,13 @@ on:
     paths:
       - '.github/workflows/transaction-free-evidence-contract.yml'
       - '.github/workflows/nj-provider-census.yml'
+      - 'transaction/evidence-addons.js'
+      - 'transaction/shell.js'
       - 'supabase/functions/transaction-energy-evidence/**'
       - 'supabase/functions/transaction-municipal-requirements/**'
       - 'supabase/functions/transaction-evidence-sweep/production-state-evidence-bootstrap.ts'
       - 'supabase/migrations/20260915214500_transaction_municipal_requirements.sql'
+      - 'supabase/migrations/20260915220500_transaction_municipal_requirement_curated_overrides.sql'
       - 'property/scripts/extract_transaction_municipal_requirements*.py'
       - 'property/scripts/publish_transaction_municipal_requirements.py'
   workflow_dispatch:
@@ -38,6 +41,8 @@ jobs:
           req=supabase/functions/transaction-municipal-requirements/index.ts
           bootstrap=supabase/functions/transaction-evidence-sweep/production-state-evidence-bootstrap.ts
           migration=supabase/migrations/20260915214500_transaction_municipal_requirements.sql
+          curated_migration=supabase/migrations/20260915220500_transaction_municipal_requirement_curated_overrides.sql
+          addon=transaction/evidence-addons.js
           grep -q 'payoff_balance_state:"customer_or_provider_authorization_required"' "$energy"
           grep -q 'account_balance_state:"customer_authorization_required"' "$energy"
           grep -q 'final_bill_clearance:false' "$energy"
@@ -51,7 +56,12 @@ jobs:
           grep -q 'transaction-municipal-requirements' "$bootstrap"
           grep -q 'transaction-cite-evidence' "$bootstrap"
           grep -q 'revoke all on table public.transaction_municipal_requirements from anon, authenticated' "$migration"
+          grep -q 'curated_override boolean not null default false' "$curated_migration"
+          grep -q 'curated_override=eq.true' property/scripts/publish_transaction_municipal_requirements.py
           grep -q 'len(municipalities) != 564 or len(rows) != 1128' property/scripts/publish_transaction_municipal_requirements.py
+          grep -q "item_key==='solar'" "$addon"
+          grep -q "electric_utility" "$addon"
+          grep -q 'transaction/evidence-addons.js' transaction/shell.js
       - name: Probe NJDEP electric and solar public-layer contracts
         shell: python
         run: |
