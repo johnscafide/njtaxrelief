@@ -5,6 +5,7 @@ import vm from 'node:vm';
 const html = fs.readFileSync('agent/contacts/index.html', 'utf8');
 const cleanRouteHtml = fs.readFileSync('property/agent/contacts/index.html', 'utf8');
 const css = fs.readFileSync('agent/contacts/contacts.css', 'utf8');
+const polishCss = fs.readFileSync('agent/contacts/contacts-polish.css', 'utf8');
 const js = fs.readFileSync('agent/contacts/contacts.js', 'utf8');
 const migration = fs.readFileSync('supabase/migrations/20260915174600_njw_346_agent_contacts_private_csv_v1.sql', 'utf8');
 
@@ -36,6 +37,16 @@ assert.doesNotMatch(js, /service_role|serviceRole/i, 'Browser code must never in
 assert.match(js, /Cell Phone 1/, 'BoldTrail-ready export must include a mobile mapping field');
 assert.match(js, /Primary Address - Street/, 'BoldTrail-ready export must carry address mapping fields');
 
+assert.match(js, /fullNameSynonyms/, 'Generic Name / Full Name headers must be detected independently from First Name');
+assert.match(js, /function splitNameText\(/, 'Agent Contacts must contain the CRM name splitter');
+assert.match(js, /parts\.shift\(\),parts\.join\(' '\)/, 'Name splitter must keep everything after the first token together as Last Name');
+assert.match(js, /@full:/, 'Full-name source columns must support a derived split mapping');
+assert.match(js, /Split into First \+ Last/, 'Import flow must offer split names');
+assert.match(js, /Keep the full name together/, 'Import flow must offer keeping names together');
+assert.match(js, /RECOMMENDED/, 'Split mode must be visually marked as recommended');
+assert.match(js, /contacts-polish\.css/, 'Runtime must load the Agent Contacts readability and visual polish stylesheet');
+assert.match(js, /Turn one name column into CRM-ready fields/, 'Mapping view must include a graphical name-cleanup explanation');
+
 assert.match(migration, /alter table public\.agent_contact_files enable row level security/i, 'RLS must be enabled');
 assert.match(migration, /revoke all on public\.agent_contact_files from anon/i, 'Anonymous table access must be revoked');
 assert.match(migration, /user_id = \(select auth\.uid\(\)\)/i, 'Metadata RLS must be user scoped');
@@ -49,5 +60,11 @@ assert.doesNotMatch(css, /--acx-bg:#0a0e17/, 'The old dark workspace theme must 
 assert.match(css, /@media\(max-width:620px\)/, 'Mobile breakpoint must be present');
 assert.match(css, /prefers-reduced-motion/, 'Reduced motion support must be present');
 assert.match(css, /min-height:44px/, 'Primary touch targets should meet the 44px target');
+
+assert.match(polishCss, /\.acx-map-item b\{font-size:14px\}/, 'Field labels must be materially larger than the original compact UI');
+assert.match(polishCss, /\.acx-map-item select,[\s\S]*font-size:14px/, 'Mapping controls must use readable desktop text');
+assert.match(polishCss, /\.acx-name-intelligence\{/, 'Mapping screen must have a branded graphical name flow');
+assert.match(polishCss, /\.acx-name-modal\{/, 'Name handling choice must have a dedicated polished dialog');
+assert.match(polishCss, /@media\(max-width:620px\)/, 'Readability polish must remain responsive on mobile');
 
 console.log('Agent Contacts contract checks passed.');
