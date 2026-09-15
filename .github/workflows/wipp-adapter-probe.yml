@@ -1,0 +1,86 @@
+name: WIPP adapter probe
+
+on:
+  pull_request:
+    paths:
+      - '.github/workflows/wipp-adapter-probe.yml'
+      - 'supabase/functions/transaction-municipal-evidence/**'
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  probe:
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+    steps:
+      - uses: actions/checkout@v4
+      - name: Probe anonymous WIPP contracts without logging account data
+        shell: python
+        run: |
+          import json, urllib.parse, urllib.request, urllib.error
+          base='https://api.edmundsgovtech.cloud/wipp-core/v1'
+          ua='Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 Chrome/154 Safari/537.36 Watchdog-WIPP-contract/1.0'
+          def get(tenant,path):
+            req=urllib.request.Request(base+path,headers={'X-Wipp-Id':tenant,'User-Agent':ua,'Accept':'application/json'})
+            try:
+              with urllib.request.urlopen(req,timeout=20) as r:
+                raw=r.read()
+                try: data=json.loads(raw)
+                except Exception: data=None
+                return r.status,data
+            except urllib.error.HTTPError as e:
+              raw=e.read()
+              try: data=json.loads(raw)
+              except Exception: data=None
+              return e.code,data
+
+          tax_tenant='0418'  # Haddon Heights public WIPP tenant; NJ municipal code 0418
+          status,meta=get(tax_tenant,'/metadata/'+tax_tenant)
+          print('tax_metadata_status',status,'keys',sorted(meta.keys())[:35] if isinstance(meta,dict) else [])
+          assert status==200 and isinstance(meta,dict)
+
+          status,page=get(tax_tenant,'/wippPropInfo/search?propertyLoc=Station&size=3')
+          rows=page.get('content',[]) if isinstance(page,dict) else []
+          print('tax_search_status',status,'rows',len(rows),'row_keys',sorted(rows[0].keys())[:50] if rows and isinstance(rows[0],dict) else [])
+          assert status==200 and rows
+          account=str(rows[0].get('accountId') or '').strip()
+          assert account
+          encoded=urllib.parse.quote(account,safe='')
+          for endpoint in ('wippTaxes','wippPropInfo'):
+            s,d=get(tax_tenant,f'/{endpoint}/{encoded}')
+            top=sorted(d.keys())[:50] if isinstance(d,dict) else []
+            prop=sorted(d.get('propertyInfo',{}).keys())[:50] if isinstance(d,dict) and isinstance(d.get('propertyInfo'),dict) else []
+            years=sorted(d.get('taxYears',{}).keys()) if isinstance(d,dict) and isinstance(d.get('taxYears'),dict) else []
+            qkeys=[]
+            if years:
+              year=d['taxYears'].get(years[-1],{})
+              njtax=year.get('NJTAX',[]) if isinstance(year,dict) else []
+              if njtax and isinstance(njtax[0],dict): qkeys=sorted(njtax[0].keys())[:80]
+            print('tax_detail',endpoint,'status',s,'top_keys',top,'property_keys',prop,'years',years[-4:],'njtax_keys',qkeys)
+
+          util_tenant='1102'  # Ewing public WIPP tenant; Township says WIPP exposes tax and sewer information
+          s,meta=get(util_tenant,'/metadata/'+util_tenant)
+          print('util_metadata_status',s,'keys',sorted(meta.keys())[:35] if isinstance(meta,dict) else [])
+          assert s==200 and isinstance(meta,dict)
+          util_rows=[]
+          for term in ('Park','Main','1'):
+            s,p=get(util_tenant,'/wippUtil/search?propertyLoc='+urllib.parse.quote(term)+'&size=3')
+            rows=p.get('content',[]) if isinstance(p,dict) else []
+            print('util_search_status',s,'term_len',len(term),'rows',len(rows),'row_keys',sorted(rows[0].keys())[:50] if rows and isinstance(rows[0],dict) else [])
+            if s==200 and rows:
+              util_rows=rows
+              break
+          assert util_rows, 'Expected at least one anonymous Ewing utility-search row'
+          util_account=str(util_rows[0].get('accountId') or '')
+          assert util_account.strip()
+          enc=urllib.parse.quote(util_account,safe='')
+          s,d=get(util_tenant,'/wippUtil/'+enc)
+          charge_types=d.get('chargeTypes',{}) if isinstance(d,dict) else {}
+          svc_keys=[]
+          if isinstance(charge_types,dict) and charge_types:
+            first=next(iter(charge_types.values()))
+            if isinstance(first,dict): svc_keys=sorted(first.keys())[:100]
+          print('util_detail_status',s,'top_keys',sorted(d.keys())[:60] if isinstance(d,dict) else [],'service_count',len(charge_types) if isinstance(charge_types,dict) else 0,'service_keys',svc_keys)
+          assert s==200 and isinstance(d,dict)
