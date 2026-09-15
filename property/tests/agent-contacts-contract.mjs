@@ -3,6 +3,7 @@ import fs from 'node:fs';
 import vm from 'node:vm';
 
 const html = fs.readFileSync('agent/contacts/index.html', 'utf8');
+const cleanRouteHtml = fs.readFileSync('property/agent/contacts/index.html', 'utf8');
 const css = fs.readFileSync('agent/contacts/contacts.css', 'utf8');
 const js = fs.readFileSync('agent/contacts/contacts.js', 'utf8');
 const migration = fs.readFileSync('supabase/migrations/20260915174600_njw_346_agent_contacts_private_csv_v1.sql', 'utf8');
@@ -16,6 +17,14 @@ assert.match(html, /read-only today/, 'UI must not falsely claim direct BoldTrai
 assert.match(html, /id="acx-history"/, 'Persistent file history UI is required');
 assert.match(html, /contacts\.css/, 'Contacts stylesheet must load');
 assert.match(html, /contacts\.js/, 'Contacts runtime must load');
+
+assert.match(cleanRouteHtml, /data-access-require="agent"/, 'Clean-route source must preserve Agent access');
+assert.match(cleanRouteHtml, /<meta name="color-scheme" content="light">/, 'Clean route must explicitly request light browser chrome');
+assert.match(cleanRouteHtml, /<meta name="theme-color" content="#f4f7fb">/, 'Clean route must use the light Watchdog theme color');
+assert.match(cleanRouteHtml, /href="\/agent\/contacts\/contacts\.css"/, 'Clean route must reuse the canonical Contacts stylesheet');
+assert.match(cleanRouteHtml, /src="\/agent\/contacts\/contacts\.js"/, 'Clean route must reuse the canonical Contacts runtime');
+assert.match(cleanRouteHtml, /href="\/agent\/contacts"[^>]+aria-current="page"/, 'Clean route navigation must point to /agent/contacts');
+assert.match(cleanRouteHtml, /id="acx-file-input"[^>]+accept="[^"]*\.csv/, 'Clean route must expose the same CSV workflow');
 
 assert.match(js, /MAX_BYTES=25\*1024\*1024/, '25 MB upload limit must remain explicit');
 assert.match(js, /MAX_ROWS=50000/, '50,000-row client safety limit must remain explicit');
@@ -33,6 +42,10 @@ assert.match(migration, /user_id = \(select auth\.uid\(\)\)/i, 'Metadata RLS mus
 assert.match(migration, /'agent-contact-files'[\s\S]*false/i, 'Storage bucket must be private');
 assert.match(migration, /\(storage\.foldername\(name\)\)\[2\]\s*=\s*\(\(select auth\.uid\(\)\)\)::text/i, 'Storage object policies must enforce user folders');
 
+assert.match(css, /color-scheme:light/, 'Agent Contacts must be light-only');
+assert.match(css, /--acx-bg:#f4f7fb/, 'Agent Contacts must use the Watchdog light workspace background');
+assert.match(css, /--acx-panel:#ffffff/, 'Agent Contacts cards must use a light surface');
+assert.doesNotMatch(css, /--acx-bg:#0a0e17/, 'The old dark workspace theme must not return');
 assert.match(css, /@media\(max-width:620px\)/, 'Mobile breakpoint must be present');
 assert.match(css, /prefers-reduced-motion/, 'Reduced motion support must be present');
 assert.match(css, /min-height:44px/, 'Primary touch targets should meet the 44px target');
