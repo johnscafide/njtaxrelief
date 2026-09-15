@@ -20,48 +20,44 @@ jobs:
         shell: python
         run: |
           import html.parser, re, urllib.parse, urllib.request
-          UA='Mozilla/5.0 Watchdog-Munidex-contract/1.1'
+          UA='Mozilla/5.0 Watchdog-Munidex-contract/1.2'
           pages=[
-            ('tax','https://tax.munidex.info/englewoodcliffs-nj-0216/'),
-            ('utility','https://tax.munidex.info/hanovertwp-nj-1412-swr/'),
+            ('tax','https://tax.munidex.info/englewoodcliffs-nj-0216/','Hudson'),
+            ('utility','https://tax.munidex.info/hanovertwp-nj-1412-swr/','Whippany'),
           ]
           class P(html.parser.HTMLParser):
             def __init__(self):
-              super().__init__(); self.forms=[]; self.cur=None; self.scripts=[]; self.inline=[]; self.in_script=False; self.buf=[]
+              super().__init__(); self.forms=[]; self.cur=None; self.links=[]; self.href=None; self.txt=[]
             def handle_starttag(self,tag,attrs):
               a=dict(attrs)
-              if tag=='form':
-                self.cur={'method':a.get('method','get').lower(),'action':a.get('action',''),'fields':[]}; self.forms.append(self.cur)
+              if tag=='form': self.cur={'method':a.get('method','get').lower(),'action':a.get('action',''),'fields':[]}; self.forms.append(self.cur)
               elif tag in ('input','select','button') and self.cur is not None:
                 name=a.get('name') or a.get('id')
                 if name: self.cur['fields'].append(name)
-              elif tag=='script':
-                if a.get('src'): self.scripts.append(a['src'])
-                else: self.in_script=True; self.buf=[]
+              elif tag=='a': self.href=a.get('href'); self.txt=[]
             def handle_data(self,data):
-              if self.in_script: self.buf.append(data)
+              if self.href is not None: self.txt.append(data)
             def handle_endtag(self,tag):
               if tag=='form': self.cur=None
-              elif tag=='script' and self.in_script:
-                self.inline.append(''.join(self.buf)); self.in_script=False; self.buf=[]
+              elif tag=='a' and self.href is not None:
+                self.links.append((' '.join(''.join(self.txt).split()),self.href)); self.href=None; self.txt=[]
           def fetch(url,max_bytes=4_000_000):
-            req=urllib.request.Request(url,headers={'User-Agent':UA,'Accept':'text/html,application/javascript,*/*;q=0.5'})
-            with urllib.request.urlopen(req,timeout=20) as r: return r.read(max_bytes).decode('utf-8','replace')
-
-          interesting=re.compile(r'validation(?:address|block|lot|name|accnum)|window\.location|location\.href|ajax|fetch\(|\.get\(|\.post\(|search|lookup|detail|property',re.I)
-          urls=re.compile(r'''["']([^"']{1,220})["']''')
-          for kind,url in pages:
-            text=fetch(url); p=P(); p.feed(text)
+            req=urllib.request.Request(url,headers={'User-Agent':UA,'Accept':'text/html,*/*;q=0.5'})
+            with urllib.request.urlopen(req,timeout=20) as r: return r.geturl(),r.read(max_bytes).decode('utf-8','replace')
+          label_re=re.compile(r'<(?:th|dt|label)[^>]*>(.*?)</(?:th|dt|label)>',re.I|re.S)
+          tag_re=re.compile(r'<[^>]+>')
+          for kind,root,term in pages:
+            final,text=fetch(root); p=P(); p.feed(text)
             print('PAGE',kind,'forms',p.forms[:12])
-            print('PAGE',kind,'scripts',p.scripts[-20:])
-            for idx,script in enumerate(p.inline):
-              if not interesting.search(script): continue
-              compact=' '.join(script.split())
-              candidates=[]
-              for value in urls.findall(script):
-                if interesting.search(value) or value.startswith(('/', '?')):
-                  candidates.append(value)
-              print('INLINE',kind,idx,'len',len(script),'url_candidates',candidates[:100])
-              for token in ('validationaddress','validationblock','validationaccnum'):
-                pos=compact.lower().find(token)
-                if pos>=0: print('INLINE_CONTEXT',kind,token,compact[max(0,pos-500):pos+1200])
+            q=root+'?'+urllib.parse.urlencode({'validationaddress':term})
+            final,result=fetch(q); rp=P(); rp.feed(result)
+            details=[urllib.parse.urljoin(root,h) for _,h in rp.links if h and '/viewdetails/' in h]
+            print('SEARCH',kind,'http_final_path',urllib.parse.urlparse(final).path,'detail_link_count',len(set(details)))
+            if details:
+              _,detail=fetch(details[0]); labels=[]
+              for raw in label_re.findall(detail):
+                label=' '.join(tag_re.sub(' ',raw).split())
+                if label and label not in labels: labels.append(label)
+              # Also report known finance-related words that appear as labels/text, never values.
+              words=[w for w in ('balance','interest','due date','last payment','tax sale','principal','quarter','year','account','block','lot','owner','property location','water','sewer','utility') if w in detail.lower()]
+              print('DETAIL',kind,'label_count',len(labels),'labels',labels[:100],'finance_words',words)
