@@ -1,7 +1,11 @@
 (function(){
 'use strict';
 function loadPreflight(){
-  if(document.querySelector('script[data-transaction-preflight]'))return;
+  if(window.__WATCHDOG_TRANSACTION_AUTO_PREFLIGHT__||document.querySelector('script[data-transaction-preflight]'))return;
+  if(document.readyState==='loading'){
+    document.write('<script data-transaction-preflight src="/transaction/preflight.js?v=20260915b"><\/script>');
+    return;
+  }
   var script=document.createElement('script');
   script.src='/transaction/preflight.js?v=20260915b';
   script.async=false;
@@ -24,5 +28,6 @@ function patch(){
     var account=nav.querySelector('a[href="/property/account"]');nav.insertBefore(link,account||null);
   }
 }
-if(document.readyState==='loading')document.addEventListener('DOMContentLoaded',function(){loadPreflight();setTimeout(patch,0);setTimeout(patch,250);},{once:true});else{loadPreflight();setTimeout(patch,0);setTimeout(patch,250);}
+loadPreflight();
+if(document.readyState==='loading')document.addEventListener('DOMContentLoaded',function(){setTimeout(patch,0);setTimeout(patch,250);},{once:true});else{setTimeout(patch,0);setTimeout(patch,250);}
 })();
