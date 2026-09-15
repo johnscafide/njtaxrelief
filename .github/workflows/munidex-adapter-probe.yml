@@ -1,0 +1,63 @@
+name: Munidex adapter probe
+
+on:
+  pull_request:
+    paths:
+      - '.github/workflows/munidex-adapter-probe.yml'
+      - 'supabase/functions/transaction-municipal-evidence/**'
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  probe:
+    runs-on: ubuntu-latest
+    timeout-minutes: 8
+    steps:
+      - uses: actions/checkout@v4
+      - name: Inspect public Munidex lookup contracts without account data
+        shell: python
+        run: |
+          import html.parser, re, urllib.parse, urllib.request
+          UA='Mozilla/5.0 Watchdog-Munidex-contract/1.2'
+          pages=[
+            ('tax','https://tax.munidex.info/englewoodcliffs-nj-0216/','Hudson'),
+            ('utility','https://tax.munidex.info/hanovertwp-nj-1412-swr/','Whippany'),
+          ]
+          class P(html.parser.HTMLParser):
+            def __init__(self):
+              super().__init__(); self.forms=[]; self.cur=None; self.links=[]; self.href=None; self.txt=[]
+            def handle_starttag(self,tag,attrs):
+              a=dict(attrs)
+              if tag=='form': self.cur={'method':a.get('method','get').lower(),'action':a.get('action',''),'fields':[]}; self.forms.append(self.cur)
+              elif tag in ('input','select','button') and self.cur is not None:
+                name=a.get('name') or a.get('id')
+                if name: self.cur['fields'].append(name)
+              elif tag=='a': self.href=a.get('href'); self.txt=[]
+            def handle_data(self,data):
+              if self.href is not None: self.txt.append(data)
+            def handle_endtag(self,tag):
+              if tag=='form': self.cur=None
+              elif tag=='a' and self.href is not None:
+                self.links.append((' '.join(''.join(self.txt).split()),self.href)); self.href=None; self.txt=[]
+          def fetch(url,max_bytes=4_000_000):
+            req=urllib.request.Request(url,headers={'User-Agent':UA,'Accept':'text/html,*/*;q=0.5'})
+            with urllib.request.urlopen(req,timeout=20) as r: return r.geturl(),r.read(max_bytes).decode('utf-8','replace')
+          label_re=re.compile(r'<(?:th|dt|label)[^>]*>(.*?)</(?:th|dt|label)>',re.I|re.S)
+          tag_re=re.compile(r'<[^>]+>')
+          for kind,root,term in pages:
+            final,text=fetch(root); p=P(); p.feed(text)
+            print('PAGE',kind,'forms',p.forms[:12])
+            q=root+'?'+urllib.parse.urlencode({'validationaddress':term})
+            final,result=fetch(q); rp=P(); rp.feed(result)
+            details=[urllib.parse.urljoin(root,h) for _,h in rp.links if h and '/viewdetails/' in h]
+            print('SEARCH',kind,'http_final_path',urllib.parse.urlparse(final).path,'detail_link_count',len(set(details)))
+            if details:
+              _,detail=fetch(details[0]); labels=[]
+              for raw in label_re.findall(detail):
+                label=' '.join(tag_re.sub(' ',raw).split())
+                if label and label not in labels: labels.append(label)
+              # Also report known finance-related words that appear as labels/text, never values.
+              words=[w for w in ('balance','interest','due date','last payment','tax sale','principal','quarter','year','account','block','lot','owner','property location','water','sewer','utility') if w in detail.lower()]
+              print('DETAIL',kind,'label_count',len(labels),'labels',labels[:100],'finance_words',words)

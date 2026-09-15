@@ -1,0 +1,74 @@
+name: NJ transaction provider census
+
+on:
+  pull_request:
+    paths:
+      - '.github/workflows/nj-provider-census.yml'
+      - 'property/scripts/discover_all_nj_municipal_transaction_sources.py'
+      - 'property/scripts/discover_municipal_transaction_sources.py'
+      - 'property/scripts/discover_county_record_sources.py'
+      - 'property/scripts/summarize_transaction_provider_census.py'
+      - 'property/scripts/publish_transaction_provider_registry.py'
+      - 'supabase/functions/transaction-municipal-evidence/**'
+      - 'supabase/functions/transaction-county-evidence/**'
+  push:
+    branches: [main]
+    paths:
+      - '.github/workflows/nj-provider-census.yml'
+      - 'property/scripts/discover_all_nj_municipal_transaction_sources.py'
+      - 'property/scripts/discover_municipal_transaction_sources.py'
+      - 'property/scripts/discover_county_record_sources.py'
+      - 'property/scripts/summarize_transaction_provider_census.py'
+      - 'property/scripts/publish_transaction_provider_registry.py'
+  schedule:
+    - cron: '41 8 * * 1'
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  census:
+    runs-on: ubuntu-latest
+    timeout-minutes: 90
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - name: Crawl all 564 municipalities
+        run: >-
+          python3 property/scripts/discover_all_nj_municipal_transaction_sources.py
+          --out "$RUNNER_TEMP/municipal.json"
+          --workers 12
+          --max-pages-per-site 8
+      - name: Crawl all 21 county record systems
+        run: >-
+          python3 property/scripts/discover_county_record_sources.py
+          --out "$RUNNER_TEMP/county.json"
+          --workers 12
+          --max-pages-per-site 18
+      - name: Print aggregate provider census
+        run: >-
+          python3 property/scripts/summarize_transaction_provider_census.py
+          --municipal "$RUNNER_TEMP/municipal.json"
+          --county "$RUNNER_TEMP/county.json"
+      - name: Publish provider routing registry
+        if: github.event_name != 'pull_request'
+        env:
+          SUPABASE_URL: https://uvkvaxljhhngydvlrzom.supabase.co
+          SUPABASE_SERVICE_ROLE_KEY: ${{ secrets.SUPABASE_SERVICE_ROLE_KEY }}
+        run: >-
+          python3 property/scripts/publish_transaction_provider_registry.py
+          --municipal "$RUNNER_TEMP/municipal.json"
+          --county "$RUNNER_TEMP/county.json"
+      - name: Upload discovery snapshots
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: nj-transaction-provider-census-${{ github.run_id }}
+          path: |
+            ${{ runner.temp }}/municipal.json
+            ${{ runner.temp }}/county.json
+          retention-days: 14
+          if-no-files-found: warn
