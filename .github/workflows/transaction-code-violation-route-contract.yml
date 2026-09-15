@@ -1,0 +1,23 @@
+name: Transaction code violation route contract
+
+on:
+  pull_request:
+    paths:
+      - 'supabase/functions/transaction-code-violation-route/**'
+      - 'supabase/functions/transaction-evidence-sweep/production-state-evidence-bootstrap.ts'
+      - 'property/tests/transaction-code-violation-route-contract.mjs'
+      - '.github/workflows/transaction-code-violation-route-contract.yml'
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  contract:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+      - run: node property/tests/transaction-code-violation-route-contract.mjs
