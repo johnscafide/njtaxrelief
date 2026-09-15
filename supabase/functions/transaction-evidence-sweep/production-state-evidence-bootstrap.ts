@@ -1,34 +1,44 @@
-// Production wrapper: run the current-state evidence provider before the certified
-// Transaction evidence sweep. Failure of the additive provider never blocks the
-// existing DCA/CO/county evidence path.
+// Production wrapper: run the certified Transaction evidence sweep first, then
+// layer annual state evidence and live municipal evidence on top. This ordering
+// prevents a weaker provider-discovery result from overwriting a successful live
+// municipal account lookup. Additive-provider failure never blocks the base sweep.
 import "jsr:@supabase/functions-js/edge-runtime.d.ts";
 
 const nativeServe = Deno.serve.bind(Deno);
+
+async function invokeProvider(slug: string, url: string, authorization: string, apiKey: string, body: string, timeoutMs: number) {
+  const controller = new AbortController();
+  const timeout = setTimeout(() => controller.abort(), timeoutMs);
+  try {
+    const response = await fetch(`${url}/functions/v1/${slug}`, {
+      method: "POST",
+      headers: { Authorization: authorization, apikey: apiKey, "Content-Type": "application/json" },
+      body,
+      signal: controller.signal,
+    });
+    if (!response.ok) console.warn(`${slug} additive provider returned HTTP ${response.status}`);
+  } catch (error) {
+    console.warn(`${slug} additive provider skipped`, error);
+  } finally {
+    clearTimeout(timeout);
+  }
+}
+
 const wrappedServe = ((first: unknown, second?: unknown) => {
   const wrap = (handler: Deno.ServeHandler): Deno.ServeHandler => async (request, info) => {
-    if (request.method === "POST") {
-      try {
-        const url = Deno.env.get("SUPABASE_URL") || "";
-        const authorization = request.headers.get("authorization") || "";
-        const apiKey = request.headers.get("apikey") || Deno.env.get("SUPABASE_ANON_KEY") || "";
-        const body = await request.clone().text();
-        if (url && authorization && body) {
-          const controller = new AbortController();
-          const timeout = setTimeout(() => controller.abort(), 15000);
-          try {
-            await fetch(`${url}/functions/v1/transaction-state-evidence`, {
-              method: "POST",
-              headers: { Authorization: authorization, apikey: apiKey, "Content-Type": "application/json" },
-              body,
-              signal: controller.signal,
-            });
-          } finally { clearTimeout(timeout); }
-        }
-      } catch (error) {
-        console.warn("transaction-state-evidence additive provider skipped", error);
+    const body = request.method === "POST" ? await request.clone().text().catch(() => "") : "";
+    const response = await handler(request, info);
+
+    if (request.method === "POST" && response.ok && body) {
+      const url = Deno.env.get("SUPABASE_URL") || "";
+      const authorization = request.headers.get("authorization") || "";
+      const apiKey = request.headers.get("apikey") || Deno.env.get("SUPABASE_ANON_KEY") || "";
+      if (url && authorization) {
+        await invokeProvider("transaction-state-evidence", url, authorization, apiKey, body, 15000);
+        await invokeProvider("transaction-municipal-evidence", url, authorization, apiKey, body, 30000);
       }
     }
-    return handler(request, info);
+    return response;
   };
   if (typeof first === "function") return nativeServe(wrap(first as Deno.ServeHandler));
   if (typeof second === "function") return nativeServe(first as Deno.ServeOptions, wrap(second as Deno.ServeHandler));
@@ -37,5 +47,6 @@ const wrappedServe = ((first: unknown, second?: unknown) => {
 
 Object.defineProperty(Deno, "serve", { configurable: true, writable: true, value: wrappedServe });
 
-// Pin the evidence sweep version that is currently deployed as v1.
+// Pin the certified prior evidence sweep source. State + live municipal evidence
+// are layered by this wrapper and do not alter the calibrated Closing Review model.
 await import("https://raw.githubusercontent.com/johnscafide/njtaxrelief/7ac96705b68b9f1f5e81e4cf138b157c00ec2505/supabase/functions/transaction-evidence-sweep/index.ts");
