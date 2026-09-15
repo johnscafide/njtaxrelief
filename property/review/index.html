@@ -1,0 +1,82 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+  <meta name="theme-color" content="#f5f5f7">
+  <meta name="robots" content="noindex,follow">
+  <meta name="description" content="Rate your Watchdog New Jersey property tax relief application experience.">
+  <link rel="canonical" href="https://www.watchdogindex.com/property/review/">
+  <title>How did we do? | Watchdog</title>
+  <link rel="icon" type="image/png" href="/favicon-96x96.png" sizes="96x96">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@500;600;700;800&family=Source+Sans+3:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="/property/css/anchor-review.css">
+</head>
+<body>
+  <main class="review-shell">
+    <a class="review-logo" href="/" aria-label="Watchdog home">
+      <img src="/property/branding/watchdog-logo-horizontal.svg" alt="Watchdog Property Intelligence">
+    </a>
+
+    <section class="review-card" aria-labelledby="review-title">
+      <div class="review-copy">
+        <p class="review-kicker">YOUR FEEDBACK</p>
+        <h1 id="review-title">How did we do?</h1>
+        <p>Thanks for using Watchdog to prepare your New Jersey property tax relief application. Your feedback helps us make the experience better for the next person.</p>
+      </div>
+
+      <div id="review-auth" class="review-auth" hidden>
+        <h2>Verify your completed application</h2>
+        <p>Sign in with the same email you used for the application. We only accept ratings from people with a completed Watchdog application.</p>
+        <label for="review-email">Email address</label>
+        <input id="review-email" type="email" autocomplete="email" inputmode="email" placeholder="you@example.com">
+        <button id="review-send-code" type="button" class="review-button">Email me a 6-digit code</button>
+        <div id="review-code-wrap" hidden>
+          <label for="review-code">6-digit code</label>
+          <input id="review-code" type="text" autocomplete="one-time-code" inputmode="numeric" maxlength="6" placeholder="000000">
+          <button id="review-verify-code" type="button" class="review-button">Verify &amp; continue</button>
+        </div>
+      </div>
+
+      <div id="review-form" hidden>
+        <div class="review-rating-block">
+          <span class="review-label">Your rating</span>
+          <div id="review-stars" class="review-stars" role="radiogroup" aria-label="Choose a rating from 1 to 5 stars">
+            <button type="button" data-rating="1" role="radio" aria-checked="false" aria-label="1 star">★</button>
+            <button type="button" data-rating="2" role="radio" aria-checked="false" aria-label="2 stars">★</button>
+            <button type="button" data-rating="3" role="radio" aria-checked="false" aria-label="3 stars">★</button>
+            <button type="button" data-rating="4" role="radio" aria-checked="false" aria-label="4 stars">★</button>
+            <button type="button" data-rating="5" role="radio" aria-checked="false" aria-label="5 stars">★</button>
+          </div>
+          <p id="review-rating-copy" class="review-rating-copy"></p>
+        </div>
+
+        <label class="review-label" for="review-comment">Anything you'd like to add? <span>Optional</span></label>
+        <textarea id="review-comment" maxlength="1200" rows="5" placeholder="Tell us what worked well or what we could improve."></textarea>
+        <p class="review-privacy">Your email and application details are never published. Written comments stay private unless Watchdog separately approves them for testimonial use.</p>
+        <button id="review-submit" type="button" class="review-button review-submit">Submit review</button>
+      </div>
+
+      <div id="review-success" class="review-success" hidden>
+        <div class="review-success-mark" aria-hidden="true">✓</div>
+        <h2>Thank you.</h2>
+        <p>Your rating has been saved.</p>
+        <a href="/" class="review-secondary-link">Return to Watchdog</a>
+      </div>
+
+      <p id="review-status" class="review-status" role="status" aria-live="polite"></p>
+    </section>
+
+    <footer class="review-footer">
+      <p>Watchdog Property Intelligence · c/o Opus Elite Real Estate · 5001 Route 42, Turnersville, NJ</p>
+      <p><a href="/property/privacy">Privacy Policy</a><span>·</span><a href="/property/terms">Terms of Use</a></p>
+    </footer>
+  </main>
+
+  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2/dist/umd/supabase.js"></script>
+  <script src="/property/js/supabase-runtime.js"></script>
+  <script src="/property/js/anchor-review.js"></script>
+</body>
+</html>
