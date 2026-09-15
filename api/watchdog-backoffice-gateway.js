@@ -16,7 +16,6 @@ function isAllowedHost(host) {
 function targetUrl(target) {
   if (target === 'login') return `${SUPABASE_FUNCTIONS}/backoffice-dev-login`;
   if (target === 'api') return `${SUPABASE_FUNCTIONS}/backoffice-api`;
-  if (target === 'reviews') return `${SUPABASE_FUNCTIONS}/backoffice-reviews`;
   return '';
 }
 
