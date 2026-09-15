@@ -185,6 +185,71 @@
   border-radius: 8px;
 }
 
+.wd-anchor-testimonials {
+  box-sizing: border-box;
+  margin: 0 28px 26px;
+  padding: 20px 22px 22px;
+  border: 1px solid #dfe6ef;
+  border-radius: 20px;
+  background: #fff;
+  box-shadow: 0 10px 30px rgba(16,43,78,.06);
+}
+
+.wd-anchor-testimonials[hidden] { display: none !important; }
+
+.wd-anchor-testimonials-head {
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: 12px;
+  margin-bottom: 14px;
+}
+
+.wd-anchor-testimonials-head span {
+  color: #8a650d;
+  font: 800 10px/1.2 "Plus Jakarta Sans", Arial, sans-serif;
+  letter-spacing: .11em;
+}
+
+.wd-anchor-testimonials-head strong {
+  color: #102b4e;
+  font: 800 17px/1.2 "Plus Jakarta Sans", Arial, sans-serif;
+}
+
+.wd-anchor-testimonials-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit,minmax(230px,1fr));
+  gap: 12px;
+}
+
+.wd-anchor-testimonial {
+  min-width: 0;
+  padding: 16px 17px;
+  border: 1px solid #e8edf3;
+  border-radius: 16px;
+  background: #f9fbfd;
+}
+
+.wd-anchor-testimonial-stars {
+  margin-bottom: 8px;
+  color: #d99b19;
+  font-size: 16px;
+  letter-spacing: 1px;
+}
+
+.wd-anchor-testimonial p {
+  margin: 0 0 10px;
+  color: #253d5b;
+  font: 600 15px/1.55 "Source Sans 3", Arial, sans-serif;
+}
+
+.wd-anchor-testimonial > span {
+  color: #64748a;
+  font: 700 11px/1.25 "Source Sans 3", Arial, sans-serif;
+  text-transform: uppercase;
+  letter-spacing: .04em;
+}
+
 @media (max-width: 640px) {
   .wd-anchor-rating-summary.is-featured {
     gap: 6px 8px;
@@ -218,6 +283,31 @@
     font-size: 19px;
   }
   .wd-anchor-quick-intro .wd-free-help.is-compact .wd-free-help-copy p {
+    font-size: 14px;
+  }
+  .wd-anchor-testimonials {
+    margin: 0 14px 18px;
+    padding: 17px 15px 16px;
+    border-radius: 17px;
+  }
+  .wd-anchor-testimonials-head {
+    display: block;
+    margin-bottom: 12px;
+  }
+  .wd-anchor-testimonials-head span {
+    display: block;
+    margin-bottom: 5px;
+  }
+  .wd-anchor-testimonials-head strong {
+    font-size: 16px;
+  }
+  .wd-anchor-testimonials-grid {
+    grid-template-columns: 1fr;
+  }
+  .wd-anchor-testimonial {
+    padding: 14px 14px 13px;
+  }
+  .wd-anchor-testimonial p {
     font-size: 14px;
   }
 }
