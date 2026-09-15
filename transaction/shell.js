@@ -6,12 +6,21 @@ function normalizeTransactionUrl(){
     try{window.history.replaceState(window.history.state,'','/transaction'+window.location.search+window.location.hash);}catch(e){}
   }
 }
+function loadMunicipalStatus(){
+  if(window.__WATCHDOG_MUNICIPAL_STATUS_WORKFLOWS__||document.querySelector('script[data-transaction-municipal-status]'))return;
+  var status=document.createElement('script');
+  status.src='/transaction/municipal-status.js?v=20260915a';
+  status.async=false;
+  status.dataset.transactionMunicipalStatus='true';
+  document.body.appendChild(status);
+}
 function loadMunicipalClearance(){
-  if(window.__WATCHDOG_MUNICIPAL_CLEARANCE_WORKFLOW__||document.querySelector('script[data-transaction-municipal-clearance]'))return;
+  if(window.__WATCHDOG_MUNICIPAL_CLEARANCE_WORKFLOW__||document.querySelector('script[data-transaction-municipal-clearance]')){setTimeout(loadMunicipalStatus,0);return;}
   var workflow=document.createElement('script');
   workflow.src='/transaction/municipal-clearance.js?v=20260915a';
   workflow.async=false;
   workflow.dataset.transactionMunicipalClearance='true';
+  workflow.addEventListener('load',loadMunicipalStatus,{once:true});
   document.body.appendChild(workflow);
 }
 function loadEvidenceAddons(){
@@ -29,6 +38,7 @@ function loadPreflight(){
     document.write('<script data-transaction-preflight src="/transaction/preflight.js?v=20260915b"><\/script>');
     document.write('<script data-transaction-evidence-addons src="/transaction/evidence-addons.js?v=20260915a"><\/script>');
     document.write('<script data-transaction-municipal-clearance src="/transaction/municipal-clearance.js?v=20260915a"><\/script>');
+    document.write('<script data-transaction-municipal-status src="/transaction/municipal-status.js?v=20260915a"><\/script>');
     return;
   }
   var script=document.createElement('script');
