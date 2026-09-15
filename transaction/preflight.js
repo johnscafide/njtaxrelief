@@ -28,6 +28,7 @@ function getClient(){if(client)return client;try{client=window.NJPTRSupabaseRunt
 function schedule(ids,delay){(ids||[]).map(clean).filter(Boolean).forEach(id=>pending.add(id));clearTimeout(timer);timer=setTimeout(flush,delay==null?900:delay)}
 function payloadOf(item){return item&&item.payload&&typeof item.payload==='object'?item.payload:{}}
 function fmtDate(v){if(!v)return'';const d=new Date(v);return Number.isFinite(d.getTime())?d.toLocaleDateString('en-US',{month:'short',day:'numeric',year:'numeric'}):String(v).slice(0,10)}
+function fmtMoney(v){const n=Number(v);return Number.isFinite(n)?n.toLocaleString('en-US',{style:'currency',currency:'USD'}):''}
 
 function stateMeta(item){
   const evidence=clean(item&&item.evidence_state),sourceType=clean(item&&item.source_type),p=payloadOf(item),records=Array.isArray(p.records)?p.records:[];
@@ -73,7 +74,14 @@ function evidenceBody(item){
     if(req.length)return `<div class="tx-evidence-box"><div class="tx-evidence-kicker">Official requirements retrieved</div>${listRows(req,5)}${req.length>5?`<details class="tx-evidence-details"><summary>Show all ${req.length} requirements</summary>${listRows(req,99)}</details>`:''}${fees.length?`<div class="tx-fee-grid">${fees.map(f=>`<span><b>${esc(f.label)}</b><em>${esc(f.amount)}</em></span>`).join('')}</div>`:''}</div>`;
   }
   if(key==='ownership_vesting'&&p.owner_name)return `<div class="tx-evidence-box">${row('Owner name on record',p.owner_name)}${row('Block / Lot',[p.block,p.lot].filter(Boolean).join(' / '))}<p>Compare this public-record name with the contract and title commitment. It is not a vesting determination.</p></div>`;
-  if(key==='property_tax_status'&&p.prior_year_tax!=null){const n=Number(p.prior_year_tax);if(Number.isFinite(n))return `<div class="tx-evidence-box">${row('Prior-year tax baseline',n.toLocaleString('en-US',{style:'currency',currency:'USD'}))}<p>Current payment/balance status still requires the collector or title/municipal search.</p></div>`}
+  if(key==='property_tax_status'){
+    const current=fmtMoney(p.current_year_tax),last=fmtMoney(p.last_year_tax!=null?p.last_year_tax:p.prior_year_tax),hasState=p.source_state==='annual_modiv_checked'||p.release_id||p.tax_account_number||p.delinquent_flag!==undefined;
+    if(hasState)return `<div class="tx-evidence-box"><div class="tx-evidence-kicker">2026 state tax-list evidence</div>${row('Tax account',p.tax_account_number)}${current?row('Current-year tax',current):''}${last?row('Prior-year tax',last):''}${row('Annual delinquency flag',p.delinquent_flag===true?'YES — MOD-IV code S':p.delinquent_flag===false?'No flag observed':'Not determined')}${p.bill_status_flag?row('Source bill-status flag',p.bill_status_flag):''}<p>${esc(p.result_semantics||item.description||'This annual tax-list source does not replace a live municipal balance or title/municipal lien search.')}</p></div>`;
+    if(p.prior_year_tax!=null&&last)return `<div class="tx-evidence-box">${row('Prior-year tax baseline',last)}<p>Current payment/balance status still requires the collector or title/municipal search.</p></div>`;
+  }
+  if(key==='tax_sale_delinquency'&&p.annual_delinquency_source_checked){
+    return `<div class="tx-evidence-box"><div class="tx-evidence-kicker">Annual delinquency evidence checked</div>${row('MOD-IV delinquency',p.delinquent_flag===true?'FLAGGED — code S':p.delinquent_flag===false?'No annual flag observed':'Not determined')}${p.delinquent_code?row('Source code',p.delinquent_code):''}${row('Tax-sale certificate',p.tax_sale_state==='not_determined'?'Not determined by this source':p.tax_sale_state)}<p>${esc(item.description||'The annual MOD-IV delinquency field is useful evidence, but tax-sale certificate status and current payoff remain separate municipal/title checks.')}</p></div>`;
+  }
   if(key==='watchdog_closing_review'&&p.top_score!=null)return `<div class="tx-evidence-box">${row('Priority score',String(Math.round(Number(p.top_score))))}${row('Model evidence coverage',`${Math.round(Number(p.evidence_coverage||0))}%`)}<p>This prioritizes follow-up; it is not title, code, tax or municipal clearance.</p></div>`;
   const d=clean(item.description);return `<p class="tx-source-copy">${esc(d||'Source result available.')}</p>`;
 }

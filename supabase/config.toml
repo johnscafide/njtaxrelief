@@ -70,6 +70,9 @@ verify_jwt = true
 [functions.transaction-evidence-sweep]
 verify_jwt = true
 
+[functions.transaction-state-evidence]
+verify_jwt = true
+
 # Privacy-minimized first-party analytics. Anonymous ingestion has a strict
 # event/property allowlist and no PII fields. The report is developer-only.
 [functions.product-analytics]

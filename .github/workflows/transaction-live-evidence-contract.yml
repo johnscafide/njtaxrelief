@@ -1,0 +1,34 @@
+name: Transaction live evidence contract
+
+on:
+  pull_request:
+    paths:
+      - 'transaction/preflight.js'
+      - 'property/scripts/build_transaction_modiv_snapshot.py'
+      - 'property/tests/transaction-live-evidence-contract.mjs'
+      - 'supabase/functions/transaction-state-evidence/**'
+      - 'supabase/functions/transaction-evidence-sweep/production-state-evidence-bootstrap.ts'
+      - 'supabase/migrations/20260915182500_transaction_live_evidence_warehouse.sql'
+      - 'supabase/config.toml'
+      - '.github/workflows/transaction-modiv-evidence.yml'
+      - '.github/workflows/transaction-live-evidence-contract.yml'
+
+permissions:
+  contents: read
+
+jobs:
+  contract:
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - name: Compile builder
+        run: python -m py_compile property/scripts/build_transaction_modiv_snapshot.py
+      - name: Run evidence contract
+        run: node property/tests/transaction-live-evidence-contract.mjs
