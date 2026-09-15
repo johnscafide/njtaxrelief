@@ -6,6 +6,7 @@ on:
       - 'property/data/transaction-acquisition-sources.json'
       - 'property/scripts/acquire_transaction_sources.py'
       - 'property/scripts/discover_municipal_transaction_sources.py'
+      - 'property/scripts/discover_county_record_sources.py'
       - 'property/docs/transaction-data-acquisition.md'
       - '.github/workflows/transaction-source-acquisition.yml'
       - '.github/workflows/transaction-data-acquisition-contract.yml'
@@ -27,6 +28,7 @@ jobs:
           python3 -m py_compile
           property/scripts/acquire_transaction_sources.py
           property/scripts/discover_municipal_transaction_sources.py
+          property/scripts/discover_county_record_sources.py
       - name: Validate source manifest
         run: |
           python3 - <<'PY'
