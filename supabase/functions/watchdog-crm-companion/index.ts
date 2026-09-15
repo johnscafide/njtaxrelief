@@ -184,6 +184,7 @@ async function buildMatch(admin,row,confidence,alternatives,directPins){
       last_sale_price:row.last_sale_price??null,
       last_sale_year:row.last_sale_year??null,
       watchdog_score:watchdogScore,
+      watchdog_score_observed_at:scoreRows?.[0]?.observed_at??null,
       last_verified:row.last_seen??null
     },
     sources:sources.slice(0,5),
