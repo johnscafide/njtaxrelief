@@ -1,0 +1,24 @@
+name: Transaction document vault contract
+
+on:
+  pull_request:
+    paths:
+      - 'supabase/migrations/20260915233600_njw_361_transaction_documents_v1.sql'
+      - 'transaction/documents.js'
+      - 'transaction/shell.js'
+      - 'property/tests/transaction-document-vault-contract.mjs'
+      - '.github/workflows/transaction-document-vault-contract.yml'
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  contract:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+      - run: node property/tests/transaction-document-vault-contract.mjs
