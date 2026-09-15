@@ -9,6 +9,7 @@ from __future__ import annotations
 import argparse
 import json
 import os
+import re
 import urllib.parse
 import urllib.request
 from datetime import datetime, timezone
@@ -17,6 +18,7 @@ from urllib.parse import urlparse
 PROJECT_URL_DEFAULT = "https://uvkvaxljhhngydvlrzom.supabase.co"
 SOCIAL_HOSTS = {"facebook.com","twitter.com","x.com","reddit.com","linkedin.com","pinterest.com","plus.google.com","web.whatsapp.com"}
 IRRELEVANT_HOSTS = {"cdn.shopify.com","propertytaxreliefapp.nj.gov","propertytaxreliefstatus.nj.gov","njpropertytaxguide.com","state.nj.us","nj.gov","tctanj.org"}
+COUNTY_NOISE = re.compile(r"military|veteran|standard[- ]form[- ]180|passport|election|voter|medical[- ]emergency|payment[- ]program[- ]for[- ]aliens|roadway[- ]capital|completed[- ]projects", re.I)
 
 
 def host(url: str) -> str:
@@ -105,6 +107,11 @@ def municipal_rows(doc: dict) -> list[dict]:
     return out
 
 
+def county_noise(item: dict) -> bool:
+    text = f"{item.get('label') or ''} {item.get('url') or ''}"
+    return bool(COUNTY_NOISE.search(text))
+
+
 def county_rows(doc: dict) -> list[dict]:
     out: list[dict] = []
     generated = doc.get("generated_at") or datetime.now(timezone.utc).isoformat()
@@ -119,6 +126,7 @@ def county_rows(doc: dict) -> list[dict]:
                 u = str(item.get("url") or "")
                 h = host(u)
                 if not u.startswith(("http://","https://")) or h in SOCIAL_HOSTS: continue
+                if county_noise(item): continue
                 if any(x in u.lower() for x in ("medicaid","vaping","sheriff-sale","subscription.aspx")): continue
                 candidates.append((family,item))
         seen: set[str] = set()
@@ -133,14 +141,14 @@ def county_rows(doc: dict) -> list[dict]:
                 "jurisdiction_type":"county","jurisdiction_key":key,"jurisdiction_name":f"{name} County","county":name,
                 "provider_key":f"county_{h.replace('.','_') or 'official'}","provider_label":str(item.get("label") or h or f"{name} County records"),"provider_url":u,
                 "evidence_families":[family],"access_mode":access,"adapter_status":"source_only","source_url":root,
-                "metadata":{"root_url":r.get("root_url"),"discovery_family":family,"status":r.get("status")},"last_verified_at":generated,"updated_at":generated,
+                "metadata":{"root_url":r.get("root_url"),"discovery_family":family,"status":r.get("status"),"search_completed":False},"last_verified_at":generated,"updated_at":generated,
             })
         if not seen:
             out.append({
                 "jurisdiction_type":"county","jurisdiction_key":key,"jurisdiction_name":f"{name} County","county":name,
                 "provider_key":"county_official_site","provider_label":f"{name} County official records source","provider_url":root,
                 "evidence_families":[],"access_mode":"official_site","adapter_status":"source_only","source_url":root,
-                "metadata":{"status":r.get("status")},"last_verified_at":generated,"updated_at":generated,
+                "metadata":{"status":r.get("status"),"search_completed":False},"last_verified_at":generated,"updated_at":generated,
             })
     return out
 
