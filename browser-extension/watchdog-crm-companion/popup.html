@@ -1,0 +1,68 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <title>Watchdog CRM Companion</title>
+  <link rel="stylesheet" href="popup.css">
+</head>
+<body>
+  <main class="wdc-shell">
+    <header class="wdc-topbar">
+      <div class="wdc-brand"><span class="wdc-mark">W</span><span><b>WATCHDOG</b><small>CRM COMPANION</small></span></div>
+      <span class="wdc-status" id="wdc-status">Checking…</span>
+    </header>
+
+    <section class="wdc-panel" id="wdc-connect" hidden>
+      <span class="wdc-kicker">WATCHDOG ACCOUNT REQUIRED</span>
+      <h1>Connect Watchdog.</h1>
+      <p>Sign in with a paid Agent, Pro, Pro+ or Teams account. Watchdog never receives your BoldTrail password or CRM cookies.</p>
+      <button class="wdc-primary" id="wdc-connect-btn" type="button">Connect Watchdog</button>
+      <button class="wdc-secondary" id="wdc-check-btn" type="button" hidden>Check connection</button>
+      <p class="wdc-help" id="wdc-connect-help">Your extension session is revocable and expires after 30 days.</p>
+    </section>
+
+    <section id="wdc-app" hidden>
+      <div class="wdc-contact" id="wdc-contact">
+        <div><span class="wdc-kicker">BOLDTRAIL CONTACT</span><h1 id="wdc-contact-title">Looking for an address…</h1></div>
+        <span class="wdc-dot" aria-hidden="true"></span>
+      </div>
+
+      <section class="wdc-state" id="wdc-state">
+        <div class="wdc-spinner" aria-hidden="true"></div>
+        <b>Reading the contact you have open</b>
+        <span>Only the visible property address is sent to Watchdog for matching.</span>
+      </section>
+
+      <section class="wdc-match" id="wdc-match" hidden>
+        <div class="wdc-match-head">
+          <div><span class="wdc-kicker">WATCHDOG VERIFIED PROPERTY</span><h2 id="wdc-address"></h2><p id="wdc-place"></p></div>
+          <span class="wdc-confidence" id="wdc-confidence"></span>
+        </div>
+        <div class="wdc-facts" id="wdc-facts"></div>
+        <details class="wdc-sources">
+          <summary>Sources &amp; verification</summary>
+          <div id="wdc-source-list"></div>
+        </details>
+        <div class="wdc-apply-head"><div><span class="wdc-kicker">ADD TO BOLDTRAIL</span><b>Choose what Watchdog can write.</b></div><button id="wdc-all" type="button">Select all</button></div>
+        <div class="wdc-fields" id="wdc-fields"></div>
+        <button class="wdc-primary" id="wdc-apply" type="button">Add selected data to BoldTrail</button>
+        <p class="wdc-help">Watchdog fills matching empty custom fields when available and adds a sourced Watchdog note. Existing non-empty CRM fields are not overwritten.</p>
+      </section>
+
+      <section class="wdc-state wdc-error" id="wdc-error" hidden>
+        <b id="wdc-error-title">Watchdog could not match this contact.</b>
+        <span id="wdc-error-copy"></span>
+        <div class="wdc-candidates" id="wdc-candidates"></div>
+        <button class="wdc-secondary" id="wdc-retry" type="button">Scan contact again</button>
+      </section>
+    </section>
+
+    <footer class="wdc-footer">
+      <span id="wdc-plan">Watchdog</span>
+      <button id="wdc-disconnect" type="button" hidden>Disconnect</button>
+    </footer>
+  </main>
+  <script src="popup.js"></script>
+</body>
+</html>

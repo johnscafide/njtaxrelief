@@ -1,0 +1,40 @@
+name: CRM Companion contract
+
+on:
+  pull_request:
+    paths:
+      - 'browser-extension/watchdog-crm-companion/**'
+      - 'agent/extension/connect/**'
+      - 'property/backoffice/crm-companion/**'
+      - 'property/tests/crm-companion-contract.mjs'
+      - 'supabase/functions/watchdog-crm-companion/**'
+      - 'supabase/functions/watchdog-crm-companion-analytics/**'
+      - 'supabase/migrations/*njw_347_extension*'
+      - 'supabase/config.toml'
+      - '.github/workflows/crm-companion-contract.yml'
+  push:
+    branches: [main]
+    paths:
+      - 'browser-extension/watchdog-crm-companion/**'
+      - 'agent/extension/connect/**'
+      - 'property/backoffice/crm-companion/**'
+      - 'property/tests/crm-companion-contract.mjs'
+      - 'supabase/functions/watchdog-crm-companion/**'
+      - 'supabase/functions/watchdog-crm-companion-analytics/**'
+      - 'supabase/migrations/*njw_347_extension*'
+      - 'supabase/config.toml'
+      - '.github/workflows/crm-companion-contract.yml'
+
+permissions:
+  contents: read
+
+jobs:
+  contract:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+      - name: Verify CRM Companion security, entitlement and privacy contracts
+        run: node property/tests/crm-companion-contract.mjs
