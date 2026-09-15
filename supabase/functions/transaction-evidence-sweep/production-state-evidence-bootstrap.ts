@@ -37,6 +37,7 @@ const wrappedServe = ((first: unknown, second?: unknown) => {
         await invokeProvider("transaction-state-evidence", url, authorization, apiKey, body, 15000);
         await invokeProvider("transaction-municipal-evidence", url, authorization, apiKey, body, 30000);
         await invokeProvider("transaction-munidex-evidence", url, authorization, apiKey, body, 30000);
+        await invokeProvider("transaction-hls-evidence", url, authorization, apiKey, body, 30000);
       }
     }
     return response;
