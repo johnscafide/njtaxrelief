@@ -31,7 +31,7 @@ assert.match(migration, /alter table public\.agent_contact_files enable row leve
 assert.match(migration, /revoke all on public\.agent_contact_files from anon/i, 'Anonymous table access must be revoked');
 assert.match(migration, /user_id = \(select auth\.uid\(\)\)/i, 'Metadata RLS must be user scoped');
 assert.match(migration, /'agent-contact-files'[\s\S]*false/i, 'Storage bucket must be private');
-assert.match(migration, /storage\.foldername\(name\)\)\[2\] = \(\(select auth\.uid\(\)\)\)::text/i, 'Storage object policies must enforce user folders');
+assert.match(migration, /\(storage\.foldername\(name\)\)\[2\]\s*=\s*\(\(select auth\.uid\(\)\)\)::text/i, 'Storage object policies must enforce user folders');
 
 assert.match(css, /@media\(max-width:620px\)/, 'Mobile breakpoint must be present');
 assert.match(css, /prefers-reduced-motion/, 'Reduced motion support must be present');
