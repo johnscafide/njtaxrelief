@@ -1,7 +1,7 @@
 {
   "manifest_version": 3,
   "name": "Watchdog CRM Companion",
-  "version": "0.1.0",
+  "version": "0.1.1",
   "description": "Bring sourced Watchdog property intelligence into the BoldTrail contact you already have open.",
   "permissions": ["storage", "activeTab"],
   "host_permissions": [
