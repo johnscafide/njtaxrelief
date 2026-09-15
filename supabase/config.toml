@@ -287,3 +287,14 @@ verify_jwt = true
 
 [functions.integration-crm-resolution-worker]
 verify_jwt = false
+
+# Watchdog CRM Companion pairs an authenticated Watchdog web session with a
+# revocable opaque extension token. Extension requests use custom token auth;
+# pair.approve separately verifies the signed-in Watchdog user before issuance.
+[functions.watchdog-crm-companion]
+verify_jwt = false
+
+# Aggregate CRM Companion adoption reporting is developer-only and requires the
+# normal Watchdog user JWT at both the gateway and function authorization layer.
+[functions.watchdog-crm-companion-analytics]
+verify_jwt = true
