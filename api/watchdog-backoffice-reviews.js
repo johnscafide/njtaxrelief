@@ -3,6 +3,7 @@ const SERVICE_KEY = process.env.SUPABASE_SERVICE_ROLE_KEY || '';
 const PUBLISHABLE_KEY = 'sb_publishable_MYX59qCbK3d-21zDfJqkNw_fvmfnexa';
 const ALLOWED_HOSTS = new Set(['www.watchdogindex.com', 'watchdogindex.com']);
 const REVIEW_SELECT = 'id,rating,review_comment,public_comment_approved,public_comment_approved_at,submitted_at,updated_at';
+const OUTREACH_SELECT = 'id,user_id,application_id,campaign_key,prepared_at,sent_at,first_opened_at,last_opened_at,open_count,first_clicked_at,last_clicked_at,click_count,last_click_rating,review_submitted_at,review_id,written_review';
 
 function requestHost(req) {
   return String(req.headers['x-forwarded-host'] || req.headers.host || '')
@@ -122,6 +123,86 @@ async function moderate(reviewId, approved) {
   return safeReview(rows[0]);
 }
 
+function outreachStatus(row) {
+  if (row && row.written_review === true) return 'written_review';
+  if (row && row.review_submitted_at) return 'rated';
+  if (row && row.first_clicked_at) return 'clicked';
+  if (row && row.first_opened_at) return 'opened';
+  if (row && row.sent_at) return 'sent';
+  return 'prepared';
+}
+
+function summarizeOutreach(rows) {
+  return {
+    prepared: rows.length,
+    sent: rows.filter((row) => row.sent_at).length,
+    opened: rows.filter((row) => row.first_opened_at).length,
+    clicked: rows.filter((row) => row.first_clicked_at).length,
+    rated: rows.filter((row) => row.review_submitted_at).length,
+    written: rows.filter((row) => row.written_review === true).length,
+  };
+}
+
+async function listOutreach() {
+  const url = new URL(`${SUPABASE_URL}/rest/v1/anchor_review_outreach`);
+  url.searchParams.set('select', OUTREACH_SELECT);
+  url.searchParams.set('order', 'prepared_at.desc');
+  url.searchParams.set('limit', '200');
+  const response = await fetch(url, { headers: serviceHeaders(), cache: 'no-store' });
+  if (!response.ok) throw new Error('Could not load review outreach analytics.');
+  const rows = await response.json();
+  const outreach = Array.isArray(rows) ? rows : [];
+  const ids = [...new Set(outreach.map((row) => row.user_id).filter(isUuid))];
+  const profiles = new Map();
+
+  if (ids.length) {
+    const profileUrl = new URL(`${SUPABASE_URL}/rest/v1/profiles`);
+    profileUrl.searchParams.set('select', 'id,email,display_name,full_name');
+    profileUrl.searchParams.set('id', `in.(${ids.join(',')})`);
+    const profileResponse = await fetch(profileUrl, { headers: serviceHeaders(), cache: 'no-store' });
+    if (profileResponse.ok) {
+      const profileRows = await profileResponse.json();
+      (Array.isArray(profileRows) ? profileRows : []).forEach((profile) => profiles.set(profile.id, profile));
+    }
+  }
+
+  return outreach.map((row) => {
+    const profile = profiles.get(row.user_id) || {};
+    return {
+      id: row.id,
+      campaign_key: row.campaign_key,
+      email: String(profile.email || ''),
+      name: String(profile.display_name || profile.full_name || ''),
+      prepared_at: row.prepared_at,
+      sent_at: row.sent_at,
+      first_opened_at: row.first_opened_at,
+      last_opened_at: row.last_opened_at,
+      open_count: Number(row.open_count || 0),
+      first_clicked_at: row.first_clicked_at,
+      last_clicked_at: row.last_clicked_at,
+      click_count: Number(row.click_count || 0),
+      last_click_rating: row.last_click_rating == null ? null : Number(row.last_click_rating),
+      review_submitted_at: row.review_submitted_at,
+      written_review: row.written_review === true,
+      status: outreachStatus(row),
+    };
+  });
+}
+
+async function markOutreachSent(ids) {
+  const valid = [...new Set((Array.isArray(ids) ? ids : []).filter(isUuid))].slice(0, 100);
+  if (!valid.length) throw new Error('No valid outreach IDs were supplied.');
+  const url = new URL(`${SUPABASE_URL}/rest/v1/anchor_review_outreach`);
+  url.searchParams.set('id', `in.(${valid.join(',')})`);
+  const response = await fetch(url, {
+    method: 'PATCH',
+    headers: serviceHeaders({ 'Content-Type': 'application/json', Prefer: 'return=minimal' }),
+    body: JSON.stringify({ sent_at: new Date().toISOString() }),
+    cache: 'no-store',
+  });
+  if (!response.ok) throw new Error('Could not mark review outreach as sent.');
+}
+
 export default async function handler(req, res) {
   res.setHeader('Cache-Control', 'private, no-store, max-age=0');
   res.setHeader('X-Robots-Tag', 'noindex, nofollow, noarchive');
@@ -149,12 +230,20 @@ export default async function handler(req, res) {
     }
 
     if (action === 'list') {
-      const [pendingCount, pending, approved] = await Promise.all([
+      const [pendingCount, pending, approved, outreach] = await Promise.all([
         countPending(),
         listReviews(false),
         listReviews(true),
+        listOutreach(),
       ]);
-      return res.status(200).json({ ok: true, pending_count: pendingCount, pending, approved });
+      return res.status(200).json({
+        ok: true,
+        pending_count: pendingCount,
+        pending,
+        approved,
+        outreach,
+        outreach_summary: summarizeOutreach(outreach),
+      });
     }
 
     if (action === 'approve' || action === 'unpublish') {
@@ -162,6 +251,12 @@ export default async function handler(req, res) {
       if (!isUuid(reviewId)) return res.status(422).json({ error: 'A valid review_id is required.' });
       const review = await moderate(reviewId, action === 'approve');
       return res.status(200).json({ ok: true, review, pending_count: await countPending() });
+    }
+
+    if (action === 'mark_outreach_sent') {
+      await markOutreachSent(body.outreach_ids);
+      const outreach = await listOutreach();
+      return res.status(200).json({ ok: true, outreach, outreach_summary: summarizeOutreach(outreach) });
     }
 
     return res.status(400).json({ error: 'Unknown action' });
