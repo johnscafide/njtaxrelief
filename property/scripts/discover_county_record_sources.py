@@ -7,23 +7,27 @@ searches or convert a discovered portal into a clearance result.
 """
 from __future__ import annotations
 
-import argparse, concurrent.futures, datetime as dt, html.parser, json, pathlib
+import argparse, concurrent.futures, datetime as dt, html.parser, json, pathlib, re
 import urllib.parse, urllib.request
 from collections import defaultdict
 
 ROOT = pathlib.Path(__file__).resolve().parents[2]
 DEFAULT_OUT = ROOT / '.cache/transaction-sources/county-record-discovery.json'
 STATE_LOCAL_GOV = 'https://www.nj.gov/nj/gov/county/localgov.shtml'
-UA = 'Watchdog-county-record-source-discovery/1.0 (+https://www.watchdogindex.com/)'
+UA = 'Watchdog-county-record-source-discovery/1.1 (+https://www.watchdogindex.com/)'
 COUNTIES = ['Atlantic','Bergen','Burlington','Camden','Cape May','Cumberland','Essex','Gloucester','Hudson','Hunterdon','Mercer','Middlesex','Monmouth','Morris','Ocean','Passaic','Salem','Somerset','Sussex','Union','Warren']
 TERMS = {
   'clerk_land_records': ('county clerk','land records','property records','recording','recorded documents'),
   'deeds_mortgages': ('deed','deeds','mortgage','mortgages','discharge','cancellation'),
   'liens': ('lien','liens','construction lien','municipal lien','federal lien'),
   'lis_pendens': ('lis pendens','lis-pendens','notice of pendency'),
-  'search_portal': ('search records','online records','property search','record search','search anywhere'),
+  'search_portal': ('search records','online records','property search','record search','search anywhere','public records search'),
   'bulk_api': ('bulk data','api','data download','subscription','premium access','commercial access'),
 }
+NEGATIVE_CONTEXT = (
+  'military discharge','military service','veteran','veterans','passport','election','voter',
+  'medical emergency','payment program for aliens','roadway capital','completed projects'
+)
 
 def now(): return dt.datetime.now(dt.timezone.utc).isoformat()
 def req(url): return urllib.request.Request(url, headers={'User-Agent':UA,'Accept':'text/html,application/xhtml+xml;q=0.9,*/*;q=0.5'})
@@ -66,14 +70,26 @@ def county_roots():
     for row in candidates: by.setdefault(row['county'],row)
     return [by.get(c,{'county':c,'root_url':'','directory_label':'unresolved','directory_source':STATE_LOCAL_GOV}) for c in COUNTIES]
 
+def normalized_hay(label,url):
+    return (label+' '+urllib.parse.unquote(url)).lower().replace('-',' ').replace('_',' ')
+
+def has_term(hay,term):
+    normalized=term.lower().replace('-',' ')
+    pattern=r'(?<![a-z0-9])'+re.escape(normalized).replace(r'\ ',r'\s+')+r'(?![a-z0-9])'
+    return re.search(pattern,hay) is not None
+
 def score(label,url):
-    hay=(label+' '+urllib.parse.unquote(url)).lower().replace('-',' ').replace('_',' ')
+    hay=normalized_hay(label,url)
+    if any(has_term(hay,term) for term in NEGATIVE_CONTEXT): return {}
+    label_hay=label.lower().replace('-',' ').replace('_',' ')
     out={}
     for family,terms in TERMS.items():
         best=0
         for term in terms:
-            if term in hay: best=max(best,6 if term in label.lower() else 4)
+            if has_term(hay,term): best=max(best,7 if has_term(label_hay,term) else 4)
         if best: out[family]=best
+    if out.get('search_portal'): out['search_portal']+=4
+    if 'public' in label_hay and 'search' in label_hay: out['search_portal']=max(out.get('search_portal',0),10)
     return out
 
 def crawl(row,max_pages):
@@ -106,7 +122,7 @@ def main():
     ap=argparse.ArgumentParser(description=__doc__); ap.add_argument('--out',type=pathlib.Path,default=DEFAULT_OUT); ap.add_argument('--workers',type=int,default=8); ap.add_argument('--max-pages-per-site',type=int,default=18); ap.add_argument('--limit',type=int)
     args=ap.parse_args(); roots=county_roots(); roots=roots[:args.limit] if args.limit else roots
     with concurrent.futures.ThreadPoolExecutor(max_workers=max(1,min(args.workers,12))) as pool: results=list(pool.map(lambda r:crawl(r,args.max_pages_per_site),roots))
-    report={'schema_version':1,'generated_at':now(),'policy':'Discovery only. Portal found != search completed; premium/auth/CAPTCHA boundaries must be honored.','counties':results,'coverage_summary':{k:sum(bool(r.get('candidates',{}).get(k)) for r in results) for k in TERMS}}
+    report={'schema_version':2,'generated_at':now(),'policy':'Discovery only. Portal found != search completed; premium/auth/CAPTCHA boundaries must be honored. Whole-term matching and negative-context filters prevent incidental words such as aliens/military discharge from becoming lien/deed sources.','counties':results,'coverage_summary':{k:sum(bool(r.get('candidates',{}).get(k)) for r in results) for k in TERMS}}
     args.out.parent.mkdir(parents=True,exist_ok=True); args.out.write_text(json.dumps(report,indent=2)+'\n',encoding='utf-8'); print(json.dumps({'counties':len(results),'output':str(args.out),'coverage':report['coverage_summary']})); return 0
 
 if __name__=='__main__': raise SystemExit(main())
