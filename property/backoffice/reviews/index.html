@@ -34,11 +34,30 @@
       <header class="br-topbar">
         <div>
           <span class="br-kicker">OPERATIONS / REVIEWS</span>
-          <h1>Application review moderation</h1>
-          <p>Approve only the written comments you want displayed publicly beneath the ANCHOR estimator. Ratings can remain part of the aggregate score without publishing a comment.</p>
+          <h1>Application reviews</h1>
+          <p>Track review outreach from email through rating, then approve only the written comments you want displayed publicly beneath the ANCHOR estimator.</p>
         </div>
         <button class="br-btn br-btn-secondary" id="br-refresh" type="button">Refresh</button>
       </header>
+
+      <section class="br-panel br-outreach-panel" aria-labelledby="br-outreach-title">
+        <div class="br-panel-head">
+          <div><span class="br-section-kicker">REVIEW OUTREACH</span><h2 id="br-outreach-title">Email funnel</h2></div>
+          <button class="br-btn br-btn-secondary" id="br-mark-sent" type="button" hidden>Mark prepared batch sent</button>
+        </div>
+        <div class="br-funnel-stats" aria-label="Review outreach funnel summary">
+          <article><span>Prepared</span><strong id="br-funnel-prepared">—</strong><small>tracking links created</small></article>
+          <article><span>Sent</span><strong id="br-funnel-sent">—</strong><small>marked delivered</small></article>
+          <article><span>Opened</span><strong id="br-funnel-opened">—</strong><small>estimated via image load</small></article>
+          <article><span>Clicked</span><strong id="br-funnel-clicked">—</strong><small>review link clicks</small></article>
+          <article><span>Rated</span><strong id="br-funnel-rated">—</strong><small>submitted ratings</small></article>
+          <article><span>Written</span><strong id="br-funnel-written">—</strong><small>written reviews</small></article>
+        </div>
+        <div class="br-outreach-note">Open counts are directional only. Apple Mail Privacy Protection and other email proxies can load tracking images without a person actually reading the message. Clicks and submitted reviews are stronger signals.</div>
+        <div id="br-outreach-list" class="br-outreach-list" aria-live="polite">
+          <div class="br-loading">Loading outreach analytics…</div>
+        </div>
+      </section>
 
       <section class="br-stats" aria-label="Review moderation summary">
         <article><span>Waiting approval</span><strong id="br-stat-pending">—</strong><small>requires your review</small></article>
