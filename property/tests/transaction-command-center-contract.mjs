@@ -6,6 +6,7 @@ const html=read('transaction/index.html');
 const js=read('transaction/transaction.js');
 const shell=read('transaction/shell.js');
 const css=read('transaction/transaction.css');
+const universalMenu=read('property/js/watchdog-universal-menu.js');
 const schema=read('supabase/migrations/20260915161000_transaction_command_center.sql');
 const indexes=read('supabase/migrations/20260915163500_transaction_command_center_fk_indexes.sql');
 
@@ -36,5 +37,7 @@ assert.match(js,/Private client input only|Private-life answers are never inferr
 assert.doesNotMatch(js,/title is clear|clear title|title cleared/i,'runtime must not claim legal title clearance');
 assert.match(css,/@media\(max-width:600px\)/,'mobile layout contract missing');
 assert.match(shell,/Transaction Command Center/,'shared-shell adapter missing transaction title');
+assert.match(universalMenu,/can\('pro_plus'\)[\s\S]{0,180}key:'transaction'/,'Transactions must be discoverable only at Pro+-or-higher in canonical navigation');
+assert.match(universalMenu,/key:'transaction',href:'\/transaction\/'/,'canonical navigation must point to the root /transaction/ workspace');
 
 console.log('Transaction Command Center contract passed.');
