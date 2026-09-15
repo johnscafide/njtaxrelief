@@ -4,7 +4,8 @@ on:
   pull_request:
     paths:
       - '.github/workflows/munidex-live-contract.yml'
-      - 'supabase/functions/transaction-municipal-evidence/**'
+      - 'supabase/functions/transaction-munidex-evidence/**'
+      - 'supabase/functions/transaction-evidence-sweep/production-state-evidence-bootstrap.ts'
   workflow_dispatch:
 
 permissions:
@@ -16,11 +17,24 @@ jobs:
     timeout-minutes: 8
     steps:
       - uses: actions/checkout@v4
+      - name: Validate implementation guardrails
+        shell: bash
+        run: |
+          set -euo pipefail
+          fn='supabase/functions/transaction-munidex-evidence/index.ts'
+          wrapper='supabase/functions/transaction-evidence-sweep/production-state-evidence-bootstrap.ts'
+          test -s "$fn"
+          grep -q 'searchaddress' "$fn"
+          grep -q 'exactMatch' "$fn"
+          grep -q 'municipal_lien_certificate:false' "$fn"
+          grep -q 'final_reading_clearance:false' "$fn"
+          grep -q 'transaction-munidex-evidence' "$wrapper"
+          ! grep -q 'captcha.*bypass\|enumerat.*account' "$fn"
       - name: Validate Munidex anonymous search + detail contract without logging account values
         shell: python
         run: |
           import html.parser,json,re,urllib.parse,urllib.request
-          UA='Mozilla/5.0 Watchdog-Munidex-contract/2.2'
+          UA='Mozilla/5.0 Watchdog-Munidex-contract/2.3'
           portals=[('tax','https://tax.munidex.info/englewoodcliffs-nj-0216/','Hudson'),('utility','https://tax.munidex.info/hanovertwp-nj-1412-swr/','Whippany')]
           def get(url,accept='text/html,*/*'):
             req=urllib.request.Request(url,headers={'User-Agent':UA,'Accept':accept})
@@ -39,11 +53,9 @@ jobs:
           def safe_cell(v):
             v=' '.join(str(v).split())
             if not v:return '<EMPTY>'
-            # preserve static labels/headers; redact anything containing digits, currency or likely names/addresses
             if re.search(r'[0-9$]',v):return '<VALUE>'
             if len(v)>80:return '<VALUE>'
-            allowed=re.fullmatch(r'[A-Za-z /:&()._-]+',v)
-            return v if allowed else '<VALUE>'
+            return v if re.fullmatch(r'[A-Za-z /:&()._-]+',v) else '<VALUE>'
           for kind,root,term in portals:
             search=root.rstrip('/')+'/searchaddress/'+urllib.parse.quote(term,safe='')
             status,_,raw=get(search,'application/json,*/*;q=0.5');rows=json.loads(raw)
@@ -53,6 +65,7 @@ jobs:
             detail=root.rstrip('/')+'/viewdetails/?'+urllib.parse.urlencode(params)
             dstatus,final,page=get(detail);assert dstatus==200 and '/viewdetails/' in urllib.parse.urlparse(final).path
             p=Tables();p.feed(page)
+            labels=[' '.join(r).lower() for r in p.rows]
+            assert any('principal' in x or 'balance' in x for x in labels)
             print('SEARCH',kind,'rows',len(rows),'keys',sorted(first.keys()))
-            print('DETAIL_ROWS',kind)
-            for r in p.rows[:120]: print([safe_cell(x) for x in r])
+            print('DETAIL_LABELS',kind,[safe_cell(r[0]) for r in p.rows[:80] if r])
