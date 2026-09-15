@@ -47,19 +47,25 @@ Deno.serve(async (req: Request) => {
     return json(req, 200, { ok: true, count: result.count || 0 });
   }
   if (action === "social_proof") {
-    const [usageResult, peopleResult, testimonialResult] = await Promise.all([
+    const [usageResult, peopleResult, preparedResult, testimonialResult] = await Promise.all([
       admin.from("anchor_calculator_uses").select("id", { count: "exact", head: true }),
       admin.from("anchor_relief_profiles").select("user_id", { count: "exact", head: true }),
+      admin
+        .from("anchor_applications")
+        .select("id", { count: "exact", head: true })
+        .eq("tax_year", 2025)
+        .eq("status", "generated"),
       admin
         .from("anchor_application_reviews")
         .select("rating,review_comment,submitted_at")
         .eq("public_comment_approved", true)
         .not("review_comment", "is", null)
         .order("submitted_at", { ascending: false })
-        .limit(3),
+        .limit(20),
     ]);
     if (usageResult.error) return json(req, 500, { error: "Could not count calculator uses" });
     if (peopleResult.error) return json(req, 500, { error: "Could not count application users" });
+    if (preparedResult.error) return json(req, 500, { error: "Could not count prepared applications" });
     if (testimonialResult.error) return json(req, 500, { error: "Could not load approved testimonials" });
     const testimonials = (testimonialResult.data || [])
       .map((row) => ({
@@ -71,6 +77,8 @@ Deno.serve(async (req: Request) => {
     return json(req, 200, {
       ok: true,
       people_count: peopleResult.count || 0,
+      prepared_application_count: preparedResult.count || 0,
+      prepared_application_count_source: "2025 generated Watchdog applications",
       total_uses: usageResult.count || 0,
       people_count_source: "one-per-user relief profile",
       testimonials,
