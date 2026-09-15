@@ -29,10 +29,20 @@ must(ui.includes('crypto.randomUUID()'),'each uploaded document must get a fresh
 must(ui.includes("`user/${u.id}/${txId}/${id}/${name}`"),'upload path must preserve user + transaction ownership');
 must(ui.includes('.createSignedUrl(path,300)'),'private document viewing must use short-lived signed URLs');
 must(!ui.includes('getPublicUrl'),'private closing documents must never use public URLs');
-must(ui.includes("independent_public_evidence:false"),'uploads must explicitly remain separate from public evidence');
-must(!ui.includes("from('transaction_items')"),'document UI must not silently update public/readiness evidence items');
-must(!ui.includes('clear_observed'),'document upload/review must never manufacture a clear public-evidence state');
+must(ui.includes("independent_public_evidence:false"),'uploads/review must explicitly remain separate from public evidence');
+must(!ui.includes('clear_observed'),'document workflow must never manufacture a clear public-evidence state');
 must(ui.includes("from('transaction_documents').delete()"),'document delete flow must remove metadata after private object removal');
 must(shell.includes('/transaction/documents.js'),'transaction shell must load the document vault module');
+
+// AI output may become a readiness follow-up only after an explicit human accept.
+must(ui.includes("c.functions.invoke('transaction-document-extract'"),'analysis must be an explicit browser action');
+must(ui.includes("review_state:decision"),'findings must persist explicit accepted/rejected review');
+must(ui.includes("category:'Documents'"),'accepted findings must create separate document checklist items');
+must(ui.includes("item_key:findingItemKey(f.id)"),'accepted findings must use isolated per-finding item keys');
+must(ui.includes("evidence_state:'verify'"),'accepted private findings must remain verify, never clear');
+must(ui.includes("source_type:'private_document'"),'accepted findings must preserve private document provenance');
+must(ui.includes("accepted_by_user:true"),'readiness follow-up must require explicit human acceptance');
+must(ui.includes("target_item_key:f.target_item_key||null"),'target public item key may be preserved only as a hint in private payload');
+must(!ui.includes(".eq('item_key',f.target_item_key"),'document review must never update an existing public item by target key');
 
 console.log('transaction document vault contract: ok');
