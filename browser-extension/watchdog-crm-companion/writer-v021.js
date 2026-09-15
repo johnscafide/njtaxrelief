@@ -33,7 +33,6 @@
   };
 
   const NOTE_LABELS=['contact notes','notes','note','comments','contact comments'];
-
   const money=(v)=>Number.isFinite(Number(v))?new Intl.NumberFormat('en-US',{style:'currency',currency:'USD',maximumFractionDigits:0}).format(Number(v)):'';
   const pct=(v)=>{const n=Number(v);if(!Number.isFinite(n))return'';const p=Math.abs(n)<1?n*100:n;return `${p.toFixed(3).replace(/\.?0+$/,'')}%`;};
   const score=(v)=>{const n=Number(v);if(!Number.isFinite(n))return'';return `${Math.round(n<=1?n*100:n)}/100`;};
@@ -41,7 +40,7 @@
 
   function valueOf(el){if(!el)return'';if('value'in el)return text(el.value);if(el.isContentEditable)return text(el.innerText);return text(el.textContent);}
   function metaOf(el){return key([el?.getAttribute?.('name'),el?.getAttribute?.('id'),el?.getAttribute?.('placeholder'),el?.getAttribute?.('aria-label'),el?.getAttribute?.('data-testid'),el?.getAttribute?.('data-cy'),el?.getAttribute?.('data-field'),el?.getAttribute?.('data-label'),el?.getAttribute?.('title'),typeof el?.className==='string'?el.className:''].filter(Boolean).join(' '));}
-  function safeControl(el){if(!el||!visible(el)||el.disabled||el.readOnly)return false;const m=metaOf(el);return !SENSITIVE_RE.test(m);}
+  function safeControl(el){if(!el||!visible(el)||el.disabled||el.readOnly)return false;return !SENSITIVE_RE.test(metaOf(el));}
   function labelText(el){
     const parts=[];
     if(el.labels)Array.from(el.labels).forEach(l=>parts.push(text(l.textContent)));
@@ -54,7 +53,7 @@
     parts.push(metaOf(el));
     return key(parts.join(' '));
   }
-  function controls(){return Array.from(document.querySelectorAll(CONTROL_SELECTOR)).filter(safeControl);}
+  function controls(scope=document){return Array.from(scope.querySelectorAll(CONTROL_SELECTOR)).filter(safeControl);}
   function tokenScore(a,b){
     const A=new Set(key(a).split(' ').filter(Boolean)),B=new Set(key(b).split(' ').filter(Boolean));
     if(!A.size||!B.size)return 0;let hit=0;for(const t of A)if(B.has(t))hit++;
@@ -65,12 +64,12 @@
     if(d.includes(a)||a.includes(d))return .9;
     return tokenScore(d,a);
   }
-  function findBestField(aliases,{notes=false}={}){
+  function findBestField(aliases,{notes=false,scope=document}={}){
     let best=null;
-    for(const el of controls()){
+    for(const el of controls(scope)){
       const descriptor=labelText(el),meta=metaOf(el);
       if(!notes&&NOTE_RE.test(descriptor+' '+meta))continue;
-      if(notes&&!NOTE_RE.test(descriptor+' '+meta)&&el.tagName!=='TEXTAREA'&&!el.isContentEditable)continue;
+      if(notes&&!NOTE_RE.test(descriptor+' '+meta))continue;
       const s=Math.max(...aliases.map(a=>aliasScore(descriptor,a)),0);
       if(s>=(notes?.42:.58)&&(!best||s>best.score))best={el,score:s,descriptor};
     }
@@ -92,24 +91,20 @@
     return f[k]===null||f[k]===undefined?'':String(f[k]);
   }
 
-  function buttonCandidates(){return Array.from(document.querySelectorAll('button,a,[role="button"]')).filter(visible);}
-  function buttonByText(pattern,scope=document){
-    const nodes=Array.from(scope.querySelectorAll?.('button,a,[role="button"]')||[]).filter(visible);
-    return nodes.find(el=>pattern.test(text(el.textContent)))||null;
-  }
+  function buttonCandidates(scope=document){return Array.from(scope.querySelectorAll('button,a,[role="button"]')).filter(visible);}
+  function buttonByText(pattern,scope=document){return buttonCandidates(scope).find(el=>pattern.test(text(el.textContent))||pattern.test(text(el.getAttribute('aria-label'))))||null;}
   async function enterEditMode(){
-    if(controls().length>=4)return false;
-    const edits=buttonCandidates().filter(el=>/^edit(?: contact)?$/i.test(text(el.textContent))||/^edit$/i.test(text(el.getAttribute('aria-label'))));
+    const edits=buttonCandidates().filter(el=>/^edit(?: contact)?$/i.test(text(el.textContent))||/^edit(?: contact)?$/i.test(text(el.getAttribute('aria-label'))));
     if(!edits.length)return false;
     edits.sort((a,b)=>{const A=a.getBoundingClientRect(),B=b.getBoundingClientRect();return A.top-B.top||A.left-B.left;});
     edits[0].click();
-    for(let i=0;i<10;i++){await wait(140);if(controls().length>=4)return true;}
+    await wait(220);
     return true;
   }
   async function saveContactEdits(anchor){
     const scope=anchor?.closest?.('[role="dialog"],form,.modal,.drawer')||document;
     const save=buttonByText(/^(save|save changes|update|done)$/i,scope)||buttonByText(/^(save|save changes|update)$/i,document);
-    if(!save)return false;save.click();await wait(180);return true;
+    if(!save)return false;save.click();await wait(240);return true;
   }
 
   function propertyUrl(f){
@@ -129,11 +124,10 @@
     lines.push(`Property: ${[f.address,f.municipality,'NJ',f.zip].filter(Boolean).join(', ')}`);
     if(f.watchdog_score!=null)lines.push(`Watchdog Score: ${score(f.watchdog_score)}`);
     lines.push(`Sourced from Watchdog: ${now.toLocaleString('en-US',{year:'numeric',month:'short',day:'numeric',hour:'numeric',minute:'2-digit'})}`);
+    if(f.watchdog_score_observed_at)lines.push(`Watchdog Score observed: ${date(f.watchdog_score_observed_at)}`);
     if(f.last_verified)lines.push(`Public-record warehouse verified: ${date(f.last_verified)}`);
     const chosen=(selected||[]).filter(k=>k!=='source_note'&&k!=='watchdog_score');
-    for(const k of chosen){
-      if(!(k in NOTE_FACTS))continue;const v=fieldValue(f,k);if(v)lines.push(`${NOTE_FACTS[k]}: ${v}`);
-    }
+    for(const k of chosen){if(!(k in NOTE_FACTS))continue;const v=fieldValue(f,k);if(v)lines.push(`${NOTE_FACTS[k]}: ${v}`);}
     if(f.block||f.lot)lines.push(`Parcel: ${[f.block,f.lot,f.qualifier].filter(Boolean).join(' / ')}`);
     lines.push(`Watchdog property: ${propertyUrl(f)}`);
     if((payload.sources||[]).length){lines.push('Sources:');(payload.sources||[]).slice(0,5).forEach(s=>lines.push(sourceLine(s)));}
@@ -142,39 +136,45 @@
     return lines.join('\n');
   }
 
-  function noteEditor(){
-    const semantic=findBestField(NOTE_LABELS,{notes:true});if(semantic)return semantic.el;
-    const textareas=controls().filter(el=>el.tagName==='TEXTAREA'||el.isContentEditable);
-    return textareas.find(el=>NOTE_RE.test(labelText(el)+' '+metaOf(el)))||textareas[0]||null;
+  function semanticNoteEditor(scope=document){const semantic=findBestField(NOTE_LABELS,{notes:true,scope});return semantic?.el||null;}
+  function genericNoteEditor(scope=document){
+    return controls(scope).find(el=>(el.tagName==='TEXTAREA'||el.isContentEditable)&&!SENSITIVE_RE.test(labelText(el)+' '+metaOf(el)))||null;
   }
   async function openNoteComposer(){
-    let editor=noteEditor();if(editor)return editor;
+    let editor=semanticNoteEditor();if(editor)return editor;
+    const before=new Set(controls().filter(el=>el.tagName==='TEXTAREA'||el.isContentEditable));
     const btn=buttonCandidates().find(el=>/^(add note|new note|create note|add a note)$/i.test(text(el.textContent))||/add note/i.test(text(el.getAttribute('aria-label'))));
-    if(!btn)return null;btn.click();
-    for(let i=0;i<12;i++){await wait(140);editor=noteEditor();if(editor)return editor;}
+    if(!btn)return null;
+    btn.click();
+    for(let i=0;i<14;i++){
+      await wait(140);
+      const dialog=Array.from(document.querySelectorAll('[role="dialog"],.modal,.drawer')).filter(visible).pop()||document;
+      editor=semanticNoteEditor(dialog);if(editor)return editor;
+      const newEditors=controls(dialog).filter(el=>(el.tagName==='TEXTAREA'||el.isContentEditable)&&!before.has(el));
+      if(newEditors.length===1)return newEditors[0];
+      if(dialog!==document){const generic=genericNoteEditor(dialog);if(generic)return generic;}
+    }
     return null;
   }
   async function persistNote(editor){
     const scope=editor?.closest?.('[role="dialog"],form,.modal,.drawer')||document;
-    const save=buttonByText(/^(add note|save note|save|create note|add)$/i,scope)||buttonByText(/^(add note|save note)$/i,document);
-    if(save){save.click();await wait(180);return true;}
-    return !!editor;
+    const save=buttonByText(/^(add note|save note|create note|save|add)$/i,scope)||buttonByText(/^(add note|save note|create note)$/i,document);
+    if(!save)return false;
+    save.click();await wait(260);return true;
   }
   async function writeNote(payload,selected){
     const editor=await openNoteComposer();if(!editor)return{ok:false,error:'note_ui_not_found'};
-    const block=noteBlock(payload,selected),current=valueOf(editor);
-    const marker=`Watchdog property: ${propertyUrl(payload.facts||{})}`;
+    const block=noteBlock(payload,selected),current=valueOf(editor),marker=`Watchdog property: ${propertyUrl(payload.facts||{})}`;
     if(current.includes(marker)&&current.includes('WATCHDOG PROPERTY INTELLIGENCE'))return{ok:true,duplicate:true};
     if(!nativeSet(editor,current?`${current}\n\n${block}`:block))return{ok:false,error:'note_write_failed'};
-    const persisted=await persistNote(editor);return{ok:persisted};
+    const persisted=await persistNote(editor);return{ok:persisted,error:persisted?'':'note_save_not_found'};
   }
 
   async function apply(payload){
     const selected=Array.isArray(payload?.selected)?payload.selected.filter(Boolean):[],f=payload?.facts||{};
     const wanted=selected.filter(k=>k!=='source_note'&&FIELD_LABELS[k]&&fieldValue(f,k));
-    const written=[],skipped=[],unmatched=[],matched_fields=[];
+    let written=[],skipped=[],unmatched=[],matched_fields=[];
 
-    let pending=[...wanted];
     function attempt(keys){
       const remain=[];
       for(const k of keys){
@@ -187,27 +187,29 @@
       return remain;
     }
 
-    pending=attempt(pending);
-    let enteredEdit=false;
-    if(pending.length){enteredEdit=await enterEditMode();if(enteredEdit)pending=attempt(pending);}
+    let pending=attempt(wanted),enteredEdit=false;
+    if(pending.length){enteredEdit=await enterEditMode();if(enteredEdit){await wait(180);pending=attempt(pending);}}
     unmatched.push(...pending);
-    if(written.length)await saveContactEdits(written[0].el);
+
+    let fieldsPersisted=false;
+    if(written.length)fieldsPersisted=await saveContactEdits(written[0].el);
+    if(written.length&&!fieldsPersisted){unmatched.push(...written.map(x=>x.key));written=[];}
 
     const needsNote=selected.includes('source_note')||unmatched.length>0||written.length===0;
-    let note={ok:false};
-    if(needsNote)note=await writeNote(payload,selected);
+    let note={ok:false};if(needsNote)note=await writeNote(payload,selected);
 
-    if(!written.length&&!note.ok)return{ok:false,error:'no_safe_write_target',skipped,unmatched,matched_fields};
+    if(!written.length&&!note.ok)return{ok:false,error:'no_safe_write_target',skipped,unmatched:[...new Set(unmatched)],matched_fields};
     return{
       ok:true,
       mode:note.ok?(written.length?'fields_and_note':'note'):'fields',
       written:written.map(x=>x.key),
       skipped,
-      unmatched,
+      unmatched:[...new Set(unmatched)],
       matched_fields,
       note_written:!!note.ok,
       note_duplicate:!!note.duplicate,
-      entered_edit:enteredEdit
+      entered_edit:enteredEdit,
+      fields_persisted:fieldsPersisted
     };
   }
 
