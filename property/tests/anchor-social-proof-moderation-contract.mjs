@@ -25,6 +25,9 @@ must(rating.includes('people used this'), 'Rating pill must render the people-us
 must(rating.includes('REFRESH_MS=60000'), 'Public social proof must refresh automatically.');
 must(rating.includes("usageRequest('record')"), 'Successful quick-estimator results must record raw usage automatically.');
 must(rating.includes('data-anchor-testimonials'), 'Approved testimonials must render below the ANCHOR disclaimer host.');
+must(rating.includes("quickObserver.observe(result,{attributes:true,attributeFilter:['hidden','class','style'],childList:true,subtree:true,characterData:true})"), 'Quick-estimator state changes must be observed only on the result region.');
+must(rating.includes('observe(document.documentElement,{childList:true,subtree:true})'), 'Global observer must be limited to DOM insertion/removal discovery.');
+must(!rating.includes('observe(document.documentElement,{childList:true,subtree:true,attributes:true'), 'Global observer must never watch all attribute changes; that can recurse on its own UI writes and freeze refresh.');
 
 must(reviewsPage.includes('data-access-require="developer"'), 'Review moderation page must be developer-only.');
 must(reviewsApi.includes('/rest/v1/rpc/is_watchdog_developer'), 'Review moderation API must independently enforce developer access.');
