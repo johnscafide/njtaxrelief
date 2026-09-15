@@ -1,6 +1,7 @@
 import fs from 'node:fs';
 
 const migration=fs.readFileSync('supabase/migrations/20260915233600_njw_361_transaction_documents_v1.sql','utf8');
+const policyFix=fs.readFileSync('supabase/migrations/20260915234000_njw_361_document_findings_policy_fix.sql','utf8');
 const ui=fs.readFileSync('transaction/documents.js','utf8');
 const shell=fs.readFileSync('transaction/shell.js','utf8');
 const must=(ok,msg)=>{if(!ok)throw new Error(msg)};
@@ -17,6 +18,9 @@ must(migration.includes("public.has_watchdog_plan('pro_plus')"),'document DB/sto
 must(migration.includes('transaction_documents_workspace_fk'),'documents must be transaction-owned by composite FK');
 must(migration.includes('transaction_document_findings_document_fk'),'findings must be tied to the owned source document');
 must(migration.includes("review_state text not null default 'proposed'"),'extracted findings must default to proposed review');
+must(policyFix.includes('d.id = transaction_document_findings.document_id'),'finding policy must bind the owned source document explicitly');
+must(policyFix.includes('d.transaction_id = transaction_document_findings.transaction_id'),'finding policy must bind document and finding to the same transaction');
+must(!policyFix.includes('d.transaction_id = d.transaction_id'),'finding transaction check must never collapse to a tautology');
 
 must(ui.includes("const BUCKET='transaction-documents'"),'browser vault must use private transaction bucket');
 must(ui.includes('MAX_BYTES=25*1024*1024'),'browser must enforce 25 MB upload limit');
