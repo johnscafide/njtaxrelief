@@ -6,12 +6,21 @@ function normalizeTransactionUrl(){
     try{window.history.replaceState(window.history.state,'','/transaction'+window.location.search+window.location.hash);}catch(e){}
   }
 }
+function loadMunicipalClearance(){
+  if(window.__WATCHDOG_MUNICIPAL_CLEARANCE_WORKFLOW__||document.querySelector('script[data-transaction-municipal-clearance]'))return;
+  var workflow=document.createElement('script');
+  workflow.src='/transaction/municipal-clearance.js?v=20260915a';
+  workflow.async=false;
+  workflow.dataset.transactionMunicipalClearance='true';
+  document.body.appendChild(workflow);
+}
 function loadEvidenceAddons(){
-  if(window.__WATCHDOG_TRANSACTION_EVIDENCE_ADDONS__||document.querySelector('script[data-transaction-evidence-addons]'))return;
+  if(window.__WATCHDOG_TRANSACTION_EVIDENCE_ADDONS__||document.querySelector('script[data-transaction-evidence-addons]')){setTimeout(loadMunicipalClearance,0);return;}
   var addon=document.createElement('script');
   addon.src='/transaction/evidence-addons.js?v=20260915a';
   addon.async=false;
   addon.dataset.transactionEvidenceAddons='true';
+  addon.addEventListener('load',loadMunicipalClearance,{once:true});
   document.body.appendChild(addon);
 }
 function loadPreflight(){
@@ -19,6 +28,7 @@ function loadPreflight(){
   if(document.readyState==='loading'){
     document.write('<script data-transaction-preflight src="/transaction/preflight.js?v=20260915b"><\/script>');
     document.write('<script data-transaction-evidence-addons src="/transaction/evidence-addons.js?v=20260915a"><\/script>');
+    document.write('<script data-transaction-municipal-clearance src="/transaction/municipal-clearance.js?v=20260915a"><\/script>');
     return;
   }
   var script=document.createElement('script');
