@@ -46,5 +46,35 @@ Deno.serve(async (req: Request) => {
     if (result.error) return json(req, 500, { error: "Could not count calculator uses" });
     return json(req, 200, { ok: true, count: result.count || 0 });
   }
+  if (action === "social_proof") {
+    const [usageResult, peopleResult, testimonialResult] = await Promise.all([
+      admin.from("anchor_calculator_uses").select("id", { count: "exact", head: true }),
+      admin.from("anchor_relief_profiles").select("user_id", { count: "exact", head: true }),
+      admin
+        .from("anchor_application_reviews")
+        .select("rating,review_comment,submitted_at")
+        .eq("public_comment_approved", true)
+        .not("review_comment", "is", null)
+        .order("submitted_at", { ascending: false })
+        .limit(3),
+    ]);
+    if (usageResult.error) return json(req, 500, { error: "Could not count calculator uses" });
+    if (peopleResult.error) return json(req, 500, { error: "Could not count application users" });
+    if (testimonialResult.error) return json(req, 500, { error: "Could not load approved testimonials" });
+    const testimonials = (testimonialResult.data || [])
+      .map((row) => ({
+        rating: Math.max(1, Math.min(5, Number(row.rating) || 0)),
+        comment: String(row.review_comment || "").trim(),
+        submitted_at: row.submitted_at || null,
+      }))
+      .filter((row) => row.comment.length > 0);
+    return json(req, 200, {
+      ok: true,
+      people_count: peopleResult.count || 0,
+      total_uses: usageResult.count || 0,
+      people_count_source: "one-per-user relief profile",
+      testimonials,
+    });
+  }
   return json(req, 400, { error: "Unknown action" });
 });
