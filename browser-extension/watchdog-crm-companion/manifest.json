@@ -17,6 +17,14 @@
       "matches": ["https://app.boldtrail.com/*"],
       "js": ["content.js"],
       "run_at": "document_idle"
+    },
+    {
+      "matches": [
+        "https://watchdogindex.com/agent/contacts/*",
+        "https://www.watchdogindex.com/agent/contacts/*"
+      ],
+      "js": ["site-bridge.js"],
+      "run_at": "document_start"
     }
   ]
 }
