@@ -1,0 +1,114 @@
+{
+  "schema_version": 1,
+  "updated_at": "2026-09-15",
+  "purpose": "Authoritative source candidates for conditional Transaction Command Center evidence. Discovery does not imply a completed search, clearance, legal conclusion, or property-specific match.",
+  "guardrails": {
+    "never_infer_private_life_event": true,
+    "never_treat_service_territory_as_account_clearance": true,
+    "never_treat_solar_presence_as_lease_ppa_or_ucc_proof": true,
+    "never_treat_environmental_proximity_as_subject_property_case": true,
+    "never_report_none_without_completed_authoritative_search": true,
+    "identity_based_searches_require_verification": true
+  },
+  "statewide_sources": [
+    {
+      "id": "njdep_well_records",
+      "label": "NJDEP Well Permits & Records",
+      "agency": "NJ Department of Environmental Protection",
+      "mode": "official_search_or_request",
+      "url": "https://dep.nj.gov/watersupply/wells/well-permits-program-information/",
+      "transaction_uses": ["private_well_presence", "well_permit", "well_record", "well_decommissioning"],
+      "semantics": "NJDEP states it maintains well permits, well records and well decommissioning reports statewide. Property documentation may require DataMiner or an Individual Well Search request. This is not septic-system clearance."
+    },
+    {
+      "id": "njdep_kcsnj_dataminer",
+      "label": "NJDEP Known Contaminated Sites / DataMiner",
+      "agency": "NJ Department of Environmental Protection",
+      "mode": "official_public_search",
+      "url": "https://dep.nj.gov/srp/kcsnj/",
+      "transaction_uses": ["site_remediation", "known_contaminated_site", "remedial_action_permit", "case_status"],
+      "semantics": "Match by subject address or Program Interest number. Preserve NJDEP active, pending and closed case semantics. Nearby sites are context only and must not be attributed to the subject parcel."
+    },
+    {
+      "id": "njdep_uhot_ust",
+      "label": "NJDEP Heating Oil Tank / UST Records",
+      "agency": "NJ Department of Environmental Protection",
+      "mode": "official_public_search",
+      "url": "https://dep.nj.gov/srp/unregulated/",
+      "transaction_uses": ["heating_oil_tank", "underground_storage_tank", "tank_remediation", "nfa_status"],
+      "semantics": "Use NJDEP UHOT/UST and Site Remediation records for subject-property evidence. An NJDEP remediation case can support follow-up but does not by itself prove a currently installed tank."
+    },
+    {
+      "id": "njdca_housing_inspection",
+      "label": "NJ DCA Bureau of Housing Inspection Service Portal",
+      "agency": "NJ Department of Community Affairs",
+      "mode": "official_public_search",
+      "url": "https://serviceportal.dca.nj.gov/",
+      "transaction_uses": ["multiple_dwelling_registration", "housing_inspection", "certificate_of_registration", "certificate_of_inspection", "housing_judgment"],
+      "semantics": "The portal exposes properties on file with Housing Inspection and may provide inspection reports, registration/inspection certificates and judgments. Local rental licensing and municipal requirements remain separate."
+    },
+    {
+      "id": "njdca_lead_safe",
+      "label": "NJ DCA Lead-Based Paint Inspection Program",
+      "agency": "NJ Department of Community Affairs",
+      "mode": "official_information_and_property_followup",
+      "url": "https://www.nj.gov/dca/codes/resources/leadpaint.shtml",
+      "transaction_uses": ["rental_lead_requirement", "lead_safe_certificate_followup", "municipal_inspection_method"],
+      "semantics": "Use for statewide program rules and municipality inspection method. A property-specific valid lead-safe certificate or exemption requires authoritative property/municipal evidence."
+    },
+    {
+      "id": "njdep_gas_utility_territory",
+      "label": "NJDEP Gas Utilities Territory Map",
+      "agency": "NJ Department of Environmental Protection",
+      "mode": "official_arcgis_service",
+      "url": "https://mapsdep.nj.gov/arcgis/rest/services/Features/Utilities/MapServer/11",
+      "transaction_uses": ["gas_utility_territory"],
+      "semantics": "Identifies likely natural-gas utility territory only. It cannot establish whether the property has service, an open account, a balance, shutoff status, or final utility clearance."
+    }
+  ],
+  "provider_families": [
+    {
+      "id": "county_surrogate",
+      "scope": "county",
+      "transaction_uses": ["estate_probate_workflow"],
+      "discovery_strategy": "Official county Surrogate source by county.",
+      "semantics": "Do not infer death, estate status or probate involvement from names or ownership changes. Use only authorized party information or an authoritative case/document match."
+    },
+    {
+      "id": "county_sheriff_foreclosure",
+      "scope": "county",
+      "transaction_uses": ["sheriff_sale", "foreclosure_followup"],
+      "discovery_strategy": "Official county Sheriff and NJ Judiciary sources by county/case.",
+      "semantics": "Require a parcel, docket or verified party match. A similarly named party is not sufficient."
+    },
+    {
+      "id": "municipal_zoning_use",
+      "scope": "municipality",
+      "transaction_uses": ["zoning_use_compliance", "planning_conditions", "variance_followup"],
+      "discovery_strategy": "Official municipal zoning/planning records and searchable board/permit systems where available.",
+      "semantics": "A zoning map classification is not proof that the present use or improvements are lawful or that all conditions were satisfied."
+    },
+    {
+      "id": "municipal_rental_registration",
+      "scope": "municipality",
+      "transaction_uses": ["rental_registration", "rental_certificate", "lead_safe_followup"],
+      "discovery_strategy": "Official municipal rental/code/housing source where applicable, reconciled with NJ DCA Housing Inspection data.",
+      "semantics": "Requirements vary by municipality and building type. Missing source coverage must remain unknown, not not-required."
+    },
+    {
+      "id": "county_local_septic",
+      "scope": "county_or_local_health",
+      "transaction_uses": ["septic_system", "septic_permit", "septic_inspection_followup"],
+      "discovery_strategy": "County/local health department or municipal health records where authoritative property-level records exist.",
+      "semantics": "No universal statewide property-level septic clearance source is assumed. Well records and septic records are separate evidence families."
+    }
+  ],
+  "existing_primary_catalog_references": [
+    "nj_ucc_bulk",
+    "nj_courts_judgments",
+    "nj_statewide_legal_notices",
+    "nj_dca_permits",
+    "nj_modiv_2026",
+    "nj_sr1a_ytd"
+  ]
+}
