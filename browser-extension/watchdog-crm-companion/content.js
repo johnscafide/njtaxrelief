@@ -32,7 +32,7 @@
   function compactLines(v){return String(v||'').split(/[\n\r]+|\s{2,}/).map(text).filter(Boolean).slice(0,20);}
   function extractStreet(v){
     const lines=compactLines(v);
-    for(const line of lines){if(looksLikeStreet(line)&&line.length<=180)return line.replace(/\s*,\s*$/,'');}
+    for(const line of lines){if(looksLikeStreet(line)&&line.length<=180&&!looksLikeCityStateZip(line))return line.replace(/\s*,\s*$/,'');}
     const flat=text(v);const match=flat.match(/\b\d{1,7}[A-Za-z]?(?:[- ]\d{1,7})?\s+[A-Za-z0-9][A-Za-z0-9.'’#&/\- ]{1,100}?(?=(?:,|\s)+(?:[A-Za-z .'-]+,?\s+)?(?:NJ|New Jersey)\b|$)/i);return match?text(match[0]):'';
   }
   function parseCombined(v){
@@ -72,6 +72,30 @@
     }
     return null;
   }
+  function contactCardAddress(){
+    if(!/^\/contacts\/\d+\/?$/i.test(location.pathname))return null;
+    const leafSelector='span,p,strong,div,a,dd,li';
+    const found=[];
+    for(const el of Array.from(document.querySelectorAll(leafSelector)).filter(visible)){
+      if(el.children.length!==0||SENSITIVE_RE.test(metaOf(el)))continue;
+      const raw=valueOf(el);if(!raw||raw.length<12||raw.length>220||!looksLikeCityStateZip(raw))continue;
+      const parsed=parseCombined(raw);if(!parsed||!parsed.zip||!parsed.state||!looksLikeStreet(parsed.address))continue;
+      const rect=el.getBoundingClientRect();
+      let score=10;
+      if(rect.left<window.innerWidth*.38)score+=6;
+      if(rect.top<window.innerHeight*.58)score+=3;
+      let cur=el;
+      for(let depth=0;cur&&depth<5;depth++,cur=cur.parentElement){
+        const local=text(cur.textContent).slice(0,900);
+        if(/\bEdit\b/.test(local))score+=4;
+        if(/\bValidated\b|\bRating\b/.test(local))score+=3;
+        if(/Listing Valuation/i.test(local))score-=5;
+      }
+      found.push({parsed,score,top:rect.top,left:rect.left});
+    }
+    found.sort((a,b)=>b.score-a.score||a.top-b.top||a.left-b.left);
+    return found[0]?.parsed||null;
+  }
   function read(labels){const el=findField(labels);const v=valueOf(el);return v||nearbyValue(labels);}
   function scanOnce(){
     let address=read(ADDRESS_LABELS),city=read(CITY_LABELS),state=read(STATE_LABELS),zip=read(ZIP_LABELS),mode='labeled_field';
@@ -80,6 +104,10 @@
     if(!address||!looksLikeStreet(address)){
       const annotated=annotatedAddress();
       if(annotated){address=annotated.address;city=city||annotated.city;state=state||annotated.state;zip=zip||annotated.zip;mode='annotated_element';}
+    }
+    if(!address||!looksLikeStreet(address)){
+      const card=contactCardAddress();
+      if(card){address=card.address;city=city||card.city;state=state||card.state;zip=zip||card.zip;mode='contact_card_text';}
     }
     address=extractStreet(address)||text(address);
     const likelyNJ=!state||/^(nj|new jersey)$/i.test(text(state))||/\b(?:NJ|New Jersey)\b/i.test([address,city,state,zip].join(' '));
