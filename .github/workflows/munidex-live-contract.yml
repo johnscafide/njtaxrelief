@@ -16,29 +16,53 @@ jobs:
     timeout-minutes: 8
     steps:
       - uses: actions/checkout@v4
-      - name: Extract Munidex public request contract without account values
+      - name: Validate Munidex anonymous search + detail contract without logging account values
         shell: python
         run: |
-          import html.parser,re,urllib.request
-          UA='Mozilla/5.0 Watchdog-Munidex-contract/2.0'
-          urls=['https://tax.munidex.info/englewoodcliffs-nj-0216/','https://tax.munidex.info/hanovertwp-nj-1412-swr/']
-          class Scripts(html.parser.HTMLParser):
-            def __init__(self): super().__init__(); self.in_script=False; self.buf=[]; self.inline=[]
+          import html.parser,json,re,urllib.parse,urllib.request
+          UA='Mozilla/5.0 Watchdog-Munidex-contract/2.1'
+          portals=[
+            ('tax','https://tax.munidex.info/englewoodcliffs-nj-0216/','Hudson'),
+            ('utility','https://tax.munidex.info/hanovertwp-nj-1412-swr/','Whippany'),
+          ]
+          def get(url,accept='text/html,*/*'):
+            req=urllib.request.Request(url,headers={'User-Agent':UA,'Accept':accept})
+            with urllib.request.urlopen(req,timeout=20) as r:return r.status,r.geturl(),r.read(4_000_000).decode('utf-8','replace')
+          class RowLabels(html.parser.HTMLParser):
+            def __init__(self):
+              super().__init__();self.in_cell=False;self.cells=[];self.cell=[];self.labels=[]
             def handle_starttag(self,tag,attrs):
-              if tag=='script' and not dict(attrs).get('src'): self.in_script=True; self.buf=[]
+              if tag in ('td','th','dt','label'):
+                self.in_cell=True;self.cell=[]
             def handle_data(self,data):
-              if self.in_script:self.buf.append(data)
+              if self.in_cell:self.cell.append(data)
             def handle_endtag(self,tag):
-              if tag=='script' and self.in_script:self.inline.append(''.join(self.buf));self.in_script=False
-          for url in urls:
-            req=urllib.request.Request(url,headers={'User-Agent':UA,'Accept':'text/html,*/*'})
-            with urllib.request.urlopen(req,timeout=20) as r:text=r.read(3000000).decode('utf-8','replace')
-            p=Scripts();p.feed(text);script='\n'.join(p.inline);compact=' '.join(script.split())
-            patterns=['XMLHttpRequest','\.open\(','validationaddress','validationblock','validationaccnum','viewdetails','window.location','responseText']
-            print('PORTAL',url)
-            for pattern in patterns:
-              for m in list(re.finditer(pattern,compact,re.I))[:8]:
-                snippet=compact[max(0,m.start()-700):m.start()+1600]
-                # redact quoted values likely to be account/name data while retaining JS structure and route literals
-                snippet=re.sub(r'([A-Za-z0-9]{10,})',lambda x:'<TOKEN>' if x.group(1).isdigit() else x.group(1),snippet)
-                print('CTX',pattern,snippet)
+              if tag in ('td','th','dt','label') and self.in_cell:
+                text=' '.join(''.join(self.cell).split())
+                if text:self.cells.append(text)
+                self.in_cell=False
+              if tag=='tr' and self.cells:
+                # The first cell is normally the field label. Never log subsequent values.
+                label=self.cells[0]
+                if len(label)<=120 and label not in self.labels:self.labels.append(label)
+                self.cells=[]
+          for kind,root,term in portals:
+            base=urllib.parse.urlparse(root).path.rstrip('/')
+            search=root.rstrip('/')+'/searchaddress/'+urllib.parse.quote(term,safe='')
+            status,_,raw=get(search,'application/json,*/*;q=0.5')
+            rows=json.loads(raw)
+            assert status==200 and isinstance(rows,list) and rows, f'{kind} search contract unavailable'
+            keys=sorted(rows[0].keys()) if isinstance(rows[0],dict) else []
+            print('SEARCH',kind,'rows',len(rows),'keys',keys)
+            first=rows[0]
+            params={'block':first.get('block',''),'lot':first.get('lot',''),'qualcode':first.get('qualcode',''),'name':first.get('name','')}
+            if kind=='utility':params['sub']=first.get('sub','')
+            detail=root.rstrip('/')+'/viewdetails/?'+urllib.parse.urlencode(params)
+            dstatus,final,html=get(detail)
+            assert dstatus==200 and '/viewdetails/' in urllib.parse.urlparse(final).path
+            parser=RowLabels();parser.feed(html)
+            finance=[x for x in parser.labels if re.search(r'account|owner|property|block|lot|tax|year|quarter|balance|principal|interest|due|payment|sale|water|sewer|utility|charge|bill',x,re.I)]
+            print('DETAIL',kind,'label_count',len(parser.labels),'finance_labels',finance[:80])
+            low=html.lower()
+            words=[w for w in ('balance','interest','due date','last payment','tax sale','principal','quarter','account','water','sewer','utility') if w in low]
+            print('DETAIL_WORDS',kind,words)
