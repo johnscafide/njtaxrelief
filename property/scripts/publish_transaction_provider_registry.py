@@ -26,15 +26,14 @@ def host(url: str) -> str:
 def normalize_provider(p: dict) -> dict:
     p = dict(p)
     h = host(str(p.get("url") or ""))
-    key = str(p.get("provider_key") or "unclassified_external")
     if "wipp" in h or "edmundsgovtech.cloud" in h or "edmundsassoc.com" in h:
         p.update(provider_key="edmunds_wipp", provider_label="Edmunds GovTech / WIPP", public_search_modes=["address","block_lot","account","owner_name"])
     elif h == "tax.munidex.info":
         p.update(provider_key="munidex", provider_label="Munidex", public_search_modes=["address","block_lot","account","owner_name"])
     elif h.endswith("cit-e.net"):
-        p.update(provider_key="cite_tax_inquiry", provider_label="CIT-E Tax / Utility Inquiry")
+        p.update(provider_key="cite_tax_inquiry", provider_label="CIT-E Tax / Utility Inquiry", public_search_modes=["block_lot","tax_account","street","utility_account","utility_street"])
     elif h == "apps.hlssystems.com":
-        p.update(provider_key="hls_systems", provider_label="HLS Systems Property Tax Inquiry")
+        p.update(provider_key="hls_systems", provider_label="HLS Systems Property Tax Inquiry", public_search_modes=["block_lot","account","property_location"])
     elif h == "webportal.municipal-software.com":
         p.update(provider_key="municipal_software", provider_label="Municipal Software Web Portal")
     elif h == "secure.municipay.com":
@@ -62,8 +61,8 @@ def relevant_external(raw: dict) -> bool:
 
 def access_for(provider_key: str, provider_url: str) -> tuple[str, str]:
     h = host(provider_url)
-    if provider_key in {"edmunds_wipp","munidex"}: return "public_anonymous_search", "live"
-    if provider_key in {"cite_tax_inquiry","hls_systems","municipal_software","municipay","edmunds_govpay"}: return "public_or_guest_portal", "adapter_pending"
+    if provider_key in {"edmunds_wipp","munidex","cite_tax_inquiry","hls_systems"}: return "public_anonymous_search", "live"
+    if provider_key in {"municipal_software","municipay","edmunds_govpay"}: return "public_or_guest_portal", "adapter_pending"
     if provider_key == "nj_tax_sale_portal" or "newjerseytaxsale.com" in h: return "public_tax_sale_portal", "adapter_pending"
     if provider_key == "official_municipal_site": return "official_site", "source_only"
     return "discovered_external", "review_required"
