@@ -119,14 +119,14 @@
   const NOTE_FACTS={
     watchdog_score:'Watchdog Score',assessed_value:'Assessment',annual_property_tax:'Annual property tax',effective_tax_rate:'Effective tax rate',land_value:'Land value',improvement_value:'Improvement value',property_class:'Property class',year_built:'Year built',dwelling_units:'Dwelling units',acres:'Acreage',building_description:'Building description',last_sale_price:'Last sale price',last_sale_year:'Last sale year',block:'Block',lot:'Lot',qualifier:'Qualifier',municipality:'Municipality',county:'County',zip:'ZIP'
   };
-  function noteBlock(payload,selected){
+  function noteBlock(payload,selected,includeAll=false){
     const f=payload.facts||{},now=new Date(),lines=['WATCHDOG PROPERTY INTELLIGENCE'];
     lines.push(`Property: ${[f.address,f.municipality,'NJ',f.zip].filter(Boolean).join(', ')}`);
     if(f.watchdog_score!=null)lines.push(`Watchdog Score: ${score(f.watchdog_score)}`);
     lines.push(`Sourced from Watchdog: ${now.toLocaleString('en-US',{year:'numeric',month:'short',day:'numeric',hour:'numeric',minute:'2-digit'})}`);
     if(f.watchdog_score_observed_at)lines.push(`Watchdog Score observed: ${date(f.watchdog_score_observed_at)}`);
     if(f.last_verified)lines.push(`Public-record warehouse verified: ${date(f.last_verified)}`);
-    const chosen=(selected||[]).filter(k=>k!=='source_note'&&k!=='watchdog_score');
+    const chosen=(includeAll?Object.keys(NOTE_FACTS):(selected||[])).filter(k=>k!=='source_note'&&k!=='watchdog_score');
     for(const k of chosen){if(!(k in NOTE_FACTS))continue;const v=fieldValue(f,k);if(v)lines.push(`${NOTE_FACTS[k]}: ${v}`);}
     if(f.block||f.lot)lines.push(`Parcel: ${[f.block,f.lot,f.qualifier].filter(Boolean).join(' / ')}`);
     lines.push(`Watchdog property: ${propertyUrl(f)}`);
@@ -162,9 +162,9 @@
     if(!save)return false;
     save.click();await wait(260);return true;
   }
-  async function writeNote(payload,selected){
+  async function writeNote(payload,selected,includeAll=false){
     const editor=await openNoteComposer();if(!editor)return{ok:false,error:'note_ui_not_found'};
-    const block=noteBlock(payload,selected),current=valueOf(editor),marker=`Watchdog property: ${propertyUrl(payload.facts||{})}`;
+    const block=noteBlock(payload,selected,includeAll),current=valueOf(editor),marker=`Watchdog property: ${propertyUrl(payload.facts||{})}`;
     if(current.includes(marker)&&current.includes('WATCHDOG PROPERTY INTELLIGENCE'))return{ok:true,duplicate:true};
     if(!nativeSet(editor,current?`${current}\n\n${block}`:block))return{ok:false,error:'note_write_failed'};
     const persisted=await persistNote(editor);return{ok:persisted,error:persisted?'':'note_save_not_found'};
@@ -196,7 +196,7 @@
     if(written.length&&!fieldsPersisted){unmatched.push(...written.map(x=>x.key));written=[];}
 
     const needsNote=selected.includes('source_note')||unmatched.length>0||written.length===0;
-    let note={ok:false};if(needsNote)note=await writeNote(payload,selected);
+    let note={ok:false};if(needsNote)note=await writeNote(payload,selected,written.length===0);
 
     if(!written.length&&!note.ok)return{ok:false,error:'no_safe_write_target',skipped,unmatched:[...new Set(unmatched)],matched_fields};
     return{
