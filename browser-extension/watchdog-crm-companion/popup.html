@@ -70,7 +70,7 @@
 
         <div class="wdc-fields" id="wdc-fields"></div>
         <button class="wdc-primary" id="wdc-apply" type="button">Add selected data to BoldTrail</button>
-        <p class="wdc-help">Watchdog fills matching empty fields when available. Selected facts can also be included in a sourced Watchdog note. Existing non-empty CRM fields are kept.</p>
+        <p class="wdc-help">Watchdog first matches safe empty BoldTrail fields. Anything without a safe field destination is preserved in a sourced Watchdog note with the score, source date and property link. Existing non-empty CRM fields are kept.</p>
       </section>
 
       <section class="wdc-state wdc-error" id="wdc-error" hidden>
@@ -90,5 +90,6 @@
     </footer>
   </main>
   <script src="popup.js"></script>
+  <script src="popup-write-v021.js"></script>
 </body>
 </html>
