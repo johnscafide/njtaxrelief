@@ -1,7 +1,6 @@
 // Production wrapper: run the certified Transaction evidence sweep first, then
-// layer annual state evidence and live municipal evidence on top. This ordering
-// prevents a weaker provider-discovery result from overwriting a successful live
-// municipal account lookup. Additive-provider failure never blocks the base sweep.
+// layer annual state evidence and live municipal/county evidence on top. This
+// ordering prevents weaker discovery results from overwriting stronger live facts.
 import "jsr:@supabase/functions-js/edge-runtime.d.ts";
 
 const nativeServe = Deno.serve.bind(Deno);
@@ -28,7 +27,6 @@ const wrappedServe = ((first: unknown, second?: unknown) => {
   const wrap = (handler: Deno.ServeHandler): Deno.ServeHandler => async (request, info) => {
     const body = request.method === "POST" ? await request.clone().text().catch(() => "") : "";
     const response = await handler(request, info);
-
     if (request.method === "POST" && response.ok && body) {
       const url = Deno.env.get("SUPABASE_URL") || "";
       const authorization = request.headers.get("authorization") || "";
@@ -38,6 +36,7 @@ const wrappedServe = ((first: unknown, second?: unknown) => {
         await invokeProvider("transaction-municipal-evidence", url, authorization, apiKey, body, 30000);
         await invokeProvider("transaction-munidex-evidence", url, authorization, apiKey, body, 30000);
         await invokeProvider("transaction-hls-evidence", url, authorization, apiKey, body, 30000);
+        await invokeProvider("transaction-county-evidence", url, authorization, apiKey, body, 15000);
       }
     }
     return response;
@@ -48,7 +47,4 @@ const wrappedServe = ((first: unknown, second?: unknown) => {
 }) as typeof Deno.serve;
 
 Object.defineProperty(Deno, "serve", { configurable: true, writable: true, value: wrappedServe });
-
-// Pin the certified prior evidence sweep source. State + live municipal evidence
-// are layered by this wrapper and do not alter the calibrated Closing Review model.
 await import("https://raw.githubusercontent.com/johnscafide/njtaxrelief/7ac96705b68b9f1f5e81e4cf138b157c00ec2505/supabase/functions/transaction-evidence-sweep/index.ts");
