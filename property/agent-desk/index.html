@@ -1,5 +1,5 @@
 <!doctype html>
-<html lang="en" data-access-require="pro">
+<html lang="en" data-access-require="agent">
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
@@ -27,10 +27,10 @@
   <main class="ac-main">
     <nav class="ac27-worknav" aria-label="Agent Control workspaces">
       <div class="ac27-tabs">
-        <a class="on" href="/property/agent-desk"><i class="fas fa-bullseye"></i> Opportunity Desk</a>
-        <a href="/property/farm-map"><i class="fas fa-map"></i> Farm Map</a>
-        <a href="/property/growth/"><i class="fas fa-arrow-trend-up"></i> Growth</a>
-        <a href="/property/farm-builder"><i class="fas fa-sliders"></i> Advanced Farm</a>
+        <a class="on" href="/agent-desk"><i class="fas fa-bullseye"></i> Opportunity Desk</a>
+        <a href="/farm-map"><i class="fas fa-map"></i> Farm Map</a>
+        <a href="/growth/"><i class="fas fa-arrow-trend-up"></i> Growth</a>
+        <a href="/farm-builder"><i class="fas fa-sliders"></i> Advanced Farm</a>
       </div>
       <div class="ac27-actions">
         <button class="ad-import-open" id="ad-import-open" type="button"><i class="fas fa-file-arrow-up"></i><span class="ac27-label">Add your sphere</span></button>
@@ -103,7 +103,7 @@
             <button data-queue="all">All</button>
           </div>
           <div class="ad-control-right">
-            <label><i class="fas fa-magnifying-glass"></i><input id="ad-search" type="search" placeholder="Search property or reason"></label>
+            <label><i class="fas fa-magnifying-glass"></i><input id="ad-search" type="search" aria-label="Search property or reason" placeholder="Search property or reason"></label>
             <select id="ad-sort" aria-label="Sort opportunities"><option value="score">Highest value</option><option value="fresh">Newest evidence</option><option value="address">Address</option></select>
           </div>
         </section>
@@ -122,7 +122,7 @@
         </div>
       </div>
 
-      <section class="ad-gate" id="ad-gate"><i class="fas fa-lock"></i><h2>Professional workspace</h2><p>Sign in with an active Agent or Pro plan to open your private Opportunity Desk.</p><a href="/property/pro#plans">Compare plans</a></section>
+      <section class="ad-gate" id="ad-gate"><i class="fas fa-lock"></i><h2>Agent workspace</h2><p>Sign in with an active Agent or Pro plan to open your private Opportunity Desk.</p><a href="/pro#plans">Compare plans</a></section>
     </div>
   </main>
 

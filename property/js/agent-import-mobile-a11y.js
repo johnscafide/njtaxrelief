@@ -1,8 +1,8 @@
 (function(){
   'use strict';
 
-  var mobileQuery = window.matchMedia('(max-width: 760px)');
-  if (!mobileQuery.matches) return;
+  // Import is a modal at every viewport, including desktop.
+
 
   var modal = document.getElementById('ad-import-modal');
   var dialog = modal && modal.querySelector('.ad-modal-card');
@@ -30,7 +30,7 @@
   }
 
   function rememberTrigger(event){
-    var trigger = event.target.closest('#ad-import-open, #ad-import-side');
+    var trigger = event.target.closest('#ad-import-open, #ad-import-side, [data-start-import]');
     if (trigger) lastTrigger = trigger;
   }
 
