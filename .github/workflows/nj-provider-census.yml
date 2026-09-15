@@ -9,7 +9,10 @@ on:
       - 'property/scripts/discover_county_record_sources.py'
       - 'property/scripts/summarize_transaction_provider_census.py'
       - 'property/scripts/publish_transaction_provider_registry.py'
+      - 'property/scripts/extract_transaction_municipal_requirements.py'
+      - 'property/scripts/publish_transaction_municipal_requirements.py'
       - 'supabase/functions/transaction-municipal-evidence/**'
+      - 'supabase/functions/transaction-municipal-requirements/**'
       - 'supabase/functions/transaction-county-evidence/**'
   push:
     branches: [main]
@@ -20,6 +23,8 @@ on:
       - 'property/scripts/discover_county_record_sources.py'
       - 'property/scripts/summarize_transaction_provider_census.py'
       - 'property/scripts/publish_transaction_provider_registry.py'
+      - 'property/scripts/extract_transaction_municipal_requirements.py'
+      - 'property/scripts/publish_transaction_municipal_requirements.py'
   schedule:
     - cron: '41 8 * * 1'
   workflow_dispatch:
@@ -30,12 +35,14 @@ permissions:
 jobs:
   census:
     runs-on: ubuntu-latest
-    timeout-minutes: 90
+    timeout-minutes: 120
     steps:
       - uses: actions/checkout@v4
       - uses: actions/setup-python@v5
         with:
           python-version: '3.12'
+      - name: Install requirement parsers
+        run: python -m pip install --disable-pip-version-check openpyxl pypdf
       - name: Crawl all 564 municipalities
         run: >-
           python3 property/scripts/discover_all_nj_municipal_transaction_sources.py
@@ -48,6 +55,11 @@ jobs:
           --out "$RUNNER_TEMP/county.json"
           --workers 12
           --max-pages-per-site 18
+      - name: Build 564-municipality CO and fire requirement registry
+        run: >-
+          python3 property/scripts/extract_transaction_municipal_requirements.py
+          --municipal "$RUNNER_TEMP/municipal.json"
+          --out "$RUNNER_TEMP/municipal-requirements.json"
       - name: Print aggregate provider census
         run: >-
           python3 property/scripts/summarize_transaction_provider_census.py
@@ -62,6 +74,14 @@ jobs:
           python3 property/scripts/publish_transaction_provider_registry.py
           --municipal "$RUNNER_TEMP/municipal.json"
           --county "$RUNNER_TEMP/county.json"
+      - name: Publish municipal CO and fire requirements
+        if: github.event_name != 'pull_request'
+        env:
+          SUPABASE_URL: https://uvkvaxljhhngydvlrzom.supabase.co
+          SUPABASE_SERVICE_ROLE_KEY: ${{ secrets.SUPABASE_SERVICE_ROLE_KEY }}
+        run: >-
+          python3 property/scripts/publish_transaction_municipal_requirements.py
+          --input "$RUNNER_TEMP/municipal-requirements.json"
       - name: Upload discovery snapshots
         if: always()
         uses: actions/upload-artifact@v4
@@ -70,5 +90,6 @@ jobs:
           path: |
             ${{ runner.temp }}/municipal.json
             ${{ runner.temp }}/county.json
+            ${{ runner.temp }}/municipal-requirements.json
           retention-days: 14
           if-no-files-found: warn
