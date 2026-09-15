@@ -1,0 +1,61 @@
+name: CIT-E live municipal evidence contract
+
+on:
+  pull_request:
+    paths:
+      - '.github/workflows/cite-live-contract.yml'
+      - 'supabase/functions/transaction-cite-evidence/**'
+      - 'supabase/functions/transaction-evidence-sweep/production-state-evidence-bootstrap.ts'
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  probe:
+    runs-on: ubuntu-latest
+    timeout-minutes: 8
+    steps:
+      - uses: actions/checkout@v4
+      - name: Inspect CIT-E public search contract without logging account data
+        shell: python
+        run: |
+          import html.parser,re,urllib.parse,urllib.request
+          UA='Mozilla/5.0 Watchdog-CITE-contract/1.0'
+          roots=[
+            'https://www.cit-e.net/parsippany-nj/cn/taxinquiry_edm/index.cfm',
+            'https://www.cit-e.net/montville-nj/cn/taxinquiry_edm/index.cfm?tpid=18157',
+          ]
+          class P(html.parser.HTMLParser):
+            def __init__(self):
+              super().__init__();self.forms=[];self.form=None;self.scripts=[];self.inscript=False;self.buf=[]
+            def handle_starttag(self,tag,attrs):
+              a=dict(attrs)
+              if tag=='form':
+                self.form={'method':a.get('method','get').lower(),'action':a.get('action',''),'name':a.get('name',''),'id':a.get('id',''),'inputs':[]};self.forms.append(self.form)
+              elif tag in ('input','select','button') and self.form is not None:
+                self.form['inputs'].append({'tag':tag,'name':a.get('name',''),'id':a.get('id',''),'type':a.get('type',''),'value':'<VALUE>' if a.get('value') else ''})
+              elif tag=='script' and not a.get('src'):
+                self.inscript=True;self.buf=[]
+            def handle_data(self,data):
+              if self.inscript:self.buf.append(data)
+            def handle_endtag(self,tag):
+              if tag=='form':self.form=None
+              elif tag=='script' and self.inscript:self.scripts.append(''.join(self.buf));self.inscript=False
+          def get(url,data=None):
+            req=urllib.request.Request(url,data=data,headers={'User-Agent':UA,'Accept':'text/html,*/*','Content-Type':'application/x-www-form-urlencoded' if data else 'text/plain'})
+            with urllib.request.urlopen(req,timeout=20) as r:return r.status,r.geturl(),r.read(4_000_000).decode('utf-8','replace')
+          for root in roots:
+            status,final,text=get(root);assert status==200
+            p=P();p.feed(text)
+            print('ROOT',urllib.parse.urlsplit(final).path)
+            for f in p.forms:
+              names=[x['name'] for x in f['inputs'] if x['name']]
+              if any(re.search(r'block|lot|street|account|qual|search|tax',n,re.I) for n in names):
+                print('FORM',f['method'],f['action'],f['name'],f['id'],'INPUTS',names)
+            script=' '.join('\n'.join(p.scripts).split())
+            for pat in (r'\.submit\(',r'\.action\s*=',r'itemSearch',r'itemDetail',r'ajax',r'xmlhttp',r'fetch\('):
+              for m in list(re.finditer(pat,script,re.I))[:6]:
+                snip=script[max(0,m.start()-500):m.start()+1200]
+                snip=re.sub(r'\b\d{5,}\b','<NUM>',snip)
+                print('SCRIPT',pat,snip)
