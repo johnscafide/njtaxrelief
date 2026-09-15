@@ -1,0 +1,173 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+  <title>Transaction Command Center | Watchdog</title>
+  <meta name="description" content="Pro+ transaction readiness, closing coordination, disclosures, assignments and Watchdog property intelligence for New Jersey real estate professionals.">
+  <meta name="robots" content="noindex,nofollow">
+  <meta name="theme-color" content="#f4f7f8">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Plus+Jakarta+Sans:wght@600;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+  <link rel="stylesheet" href="/styles.css">
+  <link rel="stylesheet" href="/property/css/shared.css">
+  <link rel="stylesheet" href="/property/css/plan-context.css">
+  <link rel="stylesheet" href="/property/css/app-shell-2027.css">
+  <link rel="stylesheet" href="/property/css/secondary-pages-2027.css">
+  <link rel="stylesheet" href="/transaction/transaction.css?v=20260915a">
+</head>
+<body data-sidebar-page="transaction" data-plan-auto="true">
+  <main class="tx-page">
+    <section class="tx-gate" id="tx-gate">
+      <div class="tx-gate-icon"><i class="fas fa-shield-halved"></i></div>
+      <span class="tx-eyebrow">PRO+ TRANSACTION INTELLIGENCE</span>
+      <h2>One place to see what can still slow down a closing.</h2>
+      <p id="tx-gate-copy">Checking your Watchdog access…</p>
+      <div class="tx-gate-actions">
+        <a href="/property/pro" class="tx-btn tx-btn-primary"><i class="fas fa-bolt"></i> View Pro+</a>
+        <a href="/property/dashboard" class="tx-btn"><i class="fas fa-table-columns"></i> Dashboard</a>
+      </div>
+    </section>
+
+    <section class="tx-app" id="tx-app" hidden>
+      <section class="tx-command-strip">
+        <div class="tx-command-copy">
+          <span class="tx-eyebrow">TRANSACTION OPERATIONS</span>
+          <h2>Closing readiness across every active deal.</h2>
+          <p>Watchdog combines your transaction checklist, client disclosures and source-aware property intelligence without treating missing data as a clean result.</p>
+        </div>
+        <div class="tx-command-actions">
+          <button class="tx-btn" type="button" data-tx-action="bulk"><i class="fas fa-layer-group"></i> Bulk add</button>
+          <button class="tx-btn tx-btn-primary" type="button" data-tx-action="add"><i class="fas fa-plus"></i> Add transaction</button>
+        </div>
+      </section>
+
+      <section class="tx-kpis" aria-label="Transaction summary">
+        <article><span class="tx-kpi-icon"><i class="fas fa-folder-open"></i></span><div><b id="tx-kpi-active">0</b><strong>Active transactions</strong><small>Open through clear to close</small></div></article>
+        <article><span class="tx-kpi-icon attention"><i class="fas fa-triangle-exclamation"></i></span><div><b id="tx-kpi-attention">0</b><strong>Need attention</strong><small>Issue or blocked state observed</small></div></article>
+        <article><span class="tx-kpi-icon soon"><i class="far fa-calendar"></i></span><div><b id="tx-kpi-soon">0</b><strong>Closing within 14 days</strong><small>Active files with a close date</small></div></article>
+        <article><span class="tx-kpi-icon ready"><i class="fas fa-circle-check"></i></span><div><b id="tx-kpi-ready">0</b><strong>No unresolved blockers</strong><small>Not a title or municipal clearance</small></div></article>
+      </section>
+
+      <div class="tx-shell">
+        <aside class="tx-portfolio" aria-label="Transactions">
+          <div class="tx-portfolio-head">
+            <div><span class="tx-eyebrow">PORTFOLIO</span><h3>Transactions</h3></div>
+            <button type="button" class="tx-icon-btn" data-tx-action="add" aria-label="Add transaction"><i class="fas fa-plus"></i></button>
+          </div>
+          <div class="tx-filter-row">
+            <label class="tx-search"><i class="fas fa-magnifying-glass"></i><input id="tx-search" type="search" placeholder="Search address, client or agent"></label>
+            <select id="tx-status-filter" aria-label="Filter transaction status">
+              <option value="active">Active</option>
+              <option value="attention">Needs attention</option>
+              <option value="closing_soon">Closing soon</option>
+              <option value="all">All</option>
+              <option value="closed">Closed</option>
+            </select>
+          </div>
+          <div class="tx-list" id="tx-list"><div class="tx-list-loading"><i class="fas fa-circle-notch fa-spin"></i> Loading transactions…</div></div>
+        </aside>
+
+        <section class="tx-workspace">
+          <div class="tx-empty" id="tx-empty">
+            <div class="tx-empty-visual"><i class="fas fa-route"></i></div>
+            <span class="tx-eyebrow">TRANSACTION READINESS</span>
+            <h2>Select a transaction or start a new one.</h2>
+            <p>Track early-warning items, ownership/title follow-up, tax and municipal checks, permits and certificates, client disclosures, lender milestones and closing assignments from one workspace.</p>
+            <div><button class="tx-btn tx-btn-primary" type="button" data-tx-action="add"><i class="fas fa-plus"></i> Add first transaction</button><button class="tx-btn" type="button" data-tx-action="bulk"><i class="fas fa-layer-group"></i> Add multiple addresses</button></div>
+          </div>
+
+          <article class="tx-detail" id="tx-detail" hidden>
+            <header class="tx-detail-head">
+              <div class="tx-property-title">
+                <div class="tx-readiness-orb" id="tx-readiness-orb"><strong id="tx-readiness-score">0</strong><span>READINESS</span></div>
+                <div><div class="tx-title-line"><h2 id="tx-detail-address">Property</h2><span class="tx-state-pill" id="tx-readiness-label">Review</span></div><p id="tx-detail-meta">New Jersey transaction</p><div class="tx-property-tags" id="tx-property-tags"></div></div>
+              </div>
+              <div class="tx-detail-actions">
+                <button class="tx-btn" type="button" id="tx-watch-btn"><i class="fas fa-radar"></i> Watch on</button>
+                <a class="tx-btn" id="tx-property-link" href="/property/" target="_blank" rel="noopener"><i class="fas fa-arrow-up-right-from-square"></i> Property record</a>
+                <button class="tx-icon-btn tx-more" type="button" data-tx-action="edit" aria-label="Edit transaction"><i class="fas fa-pen"></i></button>
+              </div>
+            </header>
+
+            <div class="tx-alert" id="tx-intel-alert">
+              <span class="tx-alert-icon"><i class="fas fa-shield-halved"></i></span>
+              <div><b id="tx-intel-title">Watchdog transaction screening</b><p id="tx-intel-copy">Resolve the address to a New Jersey parcel to connect governed Closing Review evidence.</p></div>
+              <button class="tx-btn tx-btn-small" id="tx-run-review" type="button"><i class="fas fa-magnifying-glass-chart"></i> Run review</button>
+            </div>
+
+            <nav class="tx-tabs" aria-label="Transaction workspace sections">
+              <button type="button" data-tx-tab="overview" aria-selected="true"><i class="fas fa-grid-2"></i> Overview</button>
+              <button type="button" data-tx-tab="checklist" aria-selected="false"><i class="fas fa-list-check"></i> Readiness <span id="tx-open-count">0</span></button>
+              <button type="button" data-tx-tab="disclosures" aria-selected="false"><i class="fas fa-comments"></i> Client disclosures</button>
+              <button type="button" data-tx-tab="timeline" aria-selected="false"><i class="fas fa-timeline"></i> Timeline</button>
+              <button type="button" data-tx-tab="activity" aria-selected="false"><i class="fas fa-clock-rotate-left"></i> Activity</button>
+            </nav>
+
+            <section class="tx-panel" data-tx-panel="overview">
+              <div class="tx-overview-grid">
+                <article class="tx-card tx-card-wide">
+                  <div class="tx-card-head"><div><span class="tx-eyebrow">DEAL HEALTH</span><h3>What needs attention now</h3></div><button class="tx-link-btn" type="button" data-jump-tab="checklist">Open checklist <i class="fas fa-arrow-right"></i></button></div>
+                  <div id="tx-priority-list" class="tx-priority-list"></div>
+                </article>
+                <article class="tx-card">
+                  <div class="tx-card-head"><div><span class="tx-eyebrow">CLOSING CLOCK</span><h3>Key dates</h3></div></div>
+                  <div class="tx-date-grid" id="tx-date-grid"></div>
+                </article>
+                <article class="tx-card">
+                  <div class="tx-card-head"><div><span class="tx-eyebrow">RESPONSIBILITY</span><h3>Assignments</h3></div></div>
+                  <div class="tx-assignment-summary" id="tx-assignment-summary"></div>
+                </article>
+                <article class="tx-card tx-card-wide">
+                  <div class="tx-card-head"><div><span class="tx-eyebrow">SOURCE AWARE</span><h3>Evidence coverage</h3></div><span class="tx-source-badge">Preliminary screening</span></div>
+                  <div class="tx-evidence-grid" id="tx-evidence-grid"></div>
+                  <p class="tx-footnote">“No issue observed” only describes the sources actually checked. Provider missing, unavailable, or incomplete coverage stays visible and never becomes a clean finding.</p>
+                </article>
+              </div>
+            </section>
+
+            <section class="tx-panel" data-tx-panel="checklist" hidden>
+              <div class="tx-panel-head"><div><span class="tx-eyebrow">DEAL READINESS</span><h3>Transaction checklist</h3><p>Work from the items most likely to affect timing. Assign each follow-up and preserve the evidence state separately from task completion.</p></div><div class="tx-panel-actions"><select id="tx-check-filter"><option value="open">Open / verify</option><option value="attention">Attention only</option><option value="all">All items</option><option value="resolved">Resolved</option></select><button class="tx-btn tx-btn-small" type="button" data-tx-action="add-item"><i class="fas fa-plus"></i> Add item</button></div></div>
+              <div id="tx-checklist" class="tx-checklist"></div>
+            </section>
+
+            <section class="tx-panel" data-tx-panel="disclosures" hidden>
+              <div class="tx-panel-head"><div><span class="tx-eyebrow">CLIENT INPUT</span><h3>Seller / buyer disclosures</h3><p>Capture what the client tells the team, then reconcile it with independently sourced evidence when available. Private-life answers are never inferred by Watchdog.</p></div><span class="tx-private-pill"><i class="fas fa-lock"></i> Private to your account</span></div>
+              <div id="tx-disclosures" class="tx-disclosures"></div>
+            </section>
+
+            <section class="tx-panel" data-tx-panel="timeline" hidden>
+              <div class="tx-panel-head"><div><span class="tx-eyebrow">CLOSING PATH</span><h3>Transaction timeline</h3><p>Advance the file as work is completed. Watchdog keeps unresolved follow-up visible even when the transaction stage moves forward.</p></div></div>
+              <div class="tx-stage-track" id="tx-stage-track"></div>
+            </section>
+
+            <section class="tx-panel" data-tx-panel="activity" hidden>
+              <div class="tx-panel-head"><div><span class="tx-eyebrow">AUDIT TRAIL</span><h3>Recent activity</h3><p>Changes to the transaction workspace are recorded here for continuity.</p></div></div>
+              <div class="tx-activity" id="tx-activity"></div>
+            </section>
+          </article>
+        </section>
+      </div>
+    </section>
+  </main>
+
+  <div class="tx-modal-layer" id="tx-modal-layer" hidden>
+    <div class="tx-modal-backdrop" data-tx-action="close-modal"></div>
+    <section class="tx-modal" id="tx-modal" role="dialog" aria-modal="true" aria-labelledby="tx-modal-title">
+      <button class="tx-modal-x" type="button" data-tx-action="close-modal" aria-label="Close"><i class="fas fa-xmark"></i></button>
+      <div id="tx-modal-content"></div>
+    </section>
+  </div>
+  <div class="tx-toast" id="tx-toast" role="status" aria-live="polite"></div>
+
+  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2/dist/umd/supabase.js"></script>
+  <script src="/property/js/supabase-runtime.js"></script>
+  <script src="/property/js/supabase-singleton-bridge.js"></script>
+  <script src="/property/js/plan-context.js"></script>
+  <script src="/property/js/sidemenu.js"></script>
+  <script src="/property/js/app-shell-2027.js"></script>
+  <script src="/transaction/shell.js?v=20260915a"></script>
+  <script src="/transaction/transaction.js?v=20260915a"></script>
+</body>
+</html>

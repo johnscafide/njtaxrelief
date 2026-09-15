@@ -1,0 +1,29 @@
+name: Transaction Command Center Contract
+
+on:
+  pull_request:
+    paths:
+      - 'transaction/**'
+      - 'property/tests/transaction-command-center-contract.mjs'
+      - 'supabase/migrations/20260915161000_transaction_command_center.sql'
+      - 'supabase/migrations/20260915163500_transaction_command_center_fk_indexes.sql'
+      - '.github/workflows/transaction-command-center-contract.yml'
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  contract:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+      - name: JavaScript syntax
+        run: |
+          node --check transaction/transaction.js
+          node --check transaction/shell.js
+      - name: Transaction product contract
+        run: node property/tests/transaction-command-center-contract.mjs
