@@ -1,0 +1,75 @@
+<!doctype html>
+<html lang="en" data-access-require="developer">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <meta name="robots" content="noindex,nofollow,noarchive">
+  <meta name="referrer" content="same-origin">
+  <title>Review Moderation | Watchdog Backoffice</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@600;700;800&family=Source+Sans+3:wght@400;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="/property/backoffice/reviews/reviews.css">
+</head>
+<body>
+  <div class="br-shell">
+    <aside class="br-sidebar">
+      <a class="br-brand" href="/backoffice" aria-label="Watchdog Backoffice">
+        <span class="br-mark">W</span>
+        <span><b>WATCHDOG</b><small>Backoffice</small></span>
+      </a>
+      <nav class="br-nav" aria-label="Backoffice">
+        <a href="/backoffice"><span>01</span>Lead Intelligence</a>
+        <a class="active" href="/backoffice/reviews"><span>02</span>Application Reviews <em id="br-nav-badge" hidden>0</em></a>
+        <a href="/backoffice/realestate"><span>03</span>Real Estate OS</a>
+        <a href="/developer"><span>04</span>Developer Hub</a>
+      </nav>
+      <div class="br-side-foot">
+        <span class="br-secure-dot"></span>
+        <div><b>Developer only</b><small>Review text stays private until approved</small></div>
+      </div>
+    </aside>
+
+    <main class="br-main">
+      <header class="br-topbar">
+        <div>
+          <span class="br-kicker">OPERATIONS / REVIEWS</span>
+          <h1>Application review moderation</h1>
+          <p>Approve only the written comments you want displayed publicly beneath the ANCHOR estimator. Ratings can remain part of the aggregate score without publishing a comment.</p>
+        </div>
+        <button class="br-btn br-btn-secondary" id="br-refresh" type="button">Refresh</button>
+      </header>
+
+      <section class="br-stats" aria-label="Review moderation summary">
+        <article><span>Waiting approval</span><strong id="br-stat-pending">—</strong><small>requires your review</small></article>
+        <article><span>Published</span><strong id="br-stat-approved">—</strong><small>written testimonials live</small></article>
+      </section>
+
+      <section class="br-panel" aria-labelledby="br-pending-title">
+        <div class="br-panel-head">
+          <div><span class="br-section-kicker">NEEDS YOUR REVIEW</span><h2 id="br-pending-title">Pending written reviews</h2></div>
+          <span class="br-count br-count-alert" id="br-pending-count">0</span>
+        </div>
+        <div id="br-pending-list" class="br-list" aria-live="polite">
+          <div class="br-loading">Loading reviews…</div>
+        </div>
+      </section>
+
+      <section class="br-panel" aria-labelledby="br-approved-title">
+        <div class="br-panel-head">
+          <div><span class="br-section-kicker">PUBLIC TESTIMONIALS</span><h2 id="br-approved-title">Approved reviews</h2></div>
+          <span class="br-count" id="br-approved-count">0</span>
+        </div>
+        <div id="br-approved-list" class="br-list" aria-live="polite">
+          <div class="br-loading">Loading published reviews…</div>
+        </div>
+      </section>
+    </main>
+  </div>
+
+  <div id="br-toast" class="br-toast" role="status" aria-live="polite"></div>
+  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2/dist/umd/supabase.js"></script>
+  <script src="/property/js/access-guard.js"></script>
+  <script src="/property/backoffice/reviews/reviews.js" defer></script>
+</body>
+</html>
