@@ -5,6 +5,7 @@
   <meta name="viewport" content="width=device-width,initial-scale=1">
   <title>Watchdog CRM Companion</title>
   <link rel="stylesheet" href="popup.css">
+  <link rel="stylesheet" href="popup-v02.css">
 </head>
 <body>
   <main class="wdc-shell">
@@ -45,14 +46,31 @@
           <span class="wdc-confidence" id="wdc-confidence"></span>
         </div>
         <div class="wdc-facts" id="wdc-facts"></div>
+
+        <details class="wdc-alternatives-wrap" id="wdc-alternatives-wrap" hidden>
+          <summary>Other possible matches <span id="wdc-alternatives-count"></span></summary>
+          <div class="wdc-candidates" id="wdc-alternatives"></div>
+        </details>
+
         <details class="wdc-sources">
           <summary>Sources &amp; verification</summary>
           <div id="wdc-source-list"></div>
         </details>
-        <div class="wdc-apply-head"><div><span class="wdc-kicker">ADD TO BOLDTRAIL</span><b>Choose what Watchdog can write.</b></div><button id="wdc-all" type="button">Select all</button></div>
+
+        <div class="wdc-apply-head">
+          <div><span class="wdc-kicker">AGENT DATA PICKER</span><b>Choose exactly what Watchdog can add.</b><small id="wdc-selected-count">0 selected</small></div>
+          <div class="wdc-select-actions"><button id="wdc-all" type="button">Select all</button><button id="wdc-none" type="button">Clear</button></div>
+        </div>
+
+        <div class="wdc-data-toolbar">
+          <label class="wdc-field-search"><span>Search</span><input id="wdc-field-search" type="search" placeholder="Tax, sale, acreage, county…"></label>
+          <label><span>Filter</span><select id="wdc-field-category"><option value="all">All data</option></select></label>
+          <label><span>Sort</span><select id="wdc-field-sort"><option value="recommended">Recommended</option><option value="category">Category</option><option value="alpha">A–Z</option></select></label>
+        </div>
+
         <div class="wdc-fields" id="wdc-fields"></div>
         <button class="wdc-primary" id="wdc-apply" type="button">Add selected data to BoldTrail</button>
-        <p class="wdc-help">Watchdog fills matching empty fields when available and can add a sourced research note. Existing non-empty CRM fields are kept.</p>
+        <p class="wdc-help">Watchdog fills matching empty fields when available. Selected facts can also be included in a sourced Watchdog note. Existing non-empty CRM fields are kept.</p>
       </section>
 
       <section class="wdc-state wdc-error" id="wdc-error" hidden>
