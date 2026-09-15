@@ -17,45 +17,40 @@ jobs:
     timeout-minutes: 8
     steps:
       - uses: actions/checkout@v4
-      - name: Inspect CIT-E public search contract without logging account data
+      - name: Validate CIT-E public search-to-detail contract without logging account data
         shell: python
         run: |
           import html.parser,re,urllib.parse,urllib.request
-          UA='Mozilla/5.0 Watchdog-CITE-contract/1.0'
-          roots=[
-            'https://www.cit-e.net/parsippany-nj/cn/taxinquiry_edm/index.cfm',
-            'https://www.cit-e.net/montville-nj/cn/taxinquiry_edm/index.cfm?tpid=18157',
-          ]
+          UA='Mozilla/5.0 Watchdog-CITE-contract/1.1'
+          root='https://www.cit-e.net/parsippany-nj/cn/taxinquiry_edm/index.cfm'
           class P(html.parser.HTMLParser):
-            def __init__(self):
-              super().__init__();self.forms=[];self.form=None;self.scripts=[];self.inscript=False;self.buf=[]
+            def __init__(self): super().__init__();self.forms=[];self.form=None;self.links=[]
             def handle_starttag(self,tag,attrs):
               a=dict(attrs)
-              if tag=='form':
-                self.form={'method':a.get('method','get').lower(),'action':a.get('action',''),'name':a.get('name',''),'id':a.get('id',''),'inputs':[]};self.forms.append(self.form)
-              elif tag in ('input','select','button') and self.form is not None:
-                self.form['inputs'].append({'tag':tag,'name':a.get('name',''),'id':a.get('id',''),'type':a.get('type',''),'value':'<VALUE>' if a.get('value') else ''})
-              elif tag=='script' and not a.get('src'):
-                self.inscript=True;self.buf=[]
-            def handle_data(self,data):
-              if self.inscript:self.buf.append(data)
+              if tag=='form': self.form={'method':a.get('method','get').lower(),'action':a.get('action',''),'inputs':[]};self.forms.append(self.form)
+              elif tag in ('input','select','button') and self.form is not None:self.form['inputs'].append(a)
+              elif tag=='a' and a.get('href'):self.links.append(a.get('href'))
             def handle_endtag(self,tag):
               if tag=='form':self.form=None
-              elif tag=='script' and self.inscript:self.scripts.append(''.join(self.buf));self.inscript=False
-          def get(url,data=None):
-            req=urllib.request.Request(url,data=data,headers={'User-Agent':UA,'Accept':'text/html,*/*','Content-Type':'application/x-www-form-urlencoded' if data else 'text/plain'})
+          def get(url):
+            req=urllib.request.Request(url,headers={'User-Agent':UA,'Accept':'text/html,*/*'})
             with urllib.request.urlopen(req,timeout=20) as r:return r.status,r.geturl(),r.read(4_000_000).decode('utf-8','replace')
-          for root in roots:
-            status,final,text=get(root);assert status==200
-            p=P();p.feed(text)
-            print('ROOT',urllib.parse.urlsplit(final).path)
-            for f in p.forms:
-              names=[x['name'] for x in f['inputs'] if x['name']]
-              if any(re.search(r'block|lot|street|account|qual|search|tax',n,re.I) for n in names):
-                print('FORM',f['method'],f['action'],f['name'],f['id'],'INPUTS',names)
-            script=' '.join('\n'.join(p.scripts).split())
-            for pat in (r'\.submit\(',r'\.action\s*=',r'itemSearch',r'itemDetail',r'ajax',r'xmlhttp',r'fetch\('):
-              for m in list(re.finditer(pat,script,re.I))[:6]:
-                snip=script[max(0,m.start()-500):m.start()+1200]
-                snip=re.sub(r'\b\d{5,}\b','<NUM>',snip)
-                print('SCRIPT',pat,snip)
+          status,final,page=get(root);assert status==200
+          p=P();p.feed(page)
+          blockform=next(f for f in p.forms if any(i.get('name')=='searchBlock' for i in f['inputs']))
+          vals={i.get('name'):i.get('value','') for i in blockform['inputs'] if i.get('name')}
+          tpid=vals.get('tpid','');assert tpid
+          params={'Block':'00762','SubBlock':'','Lot':'00002','SubLot':'','Qualifier':'','searchBlock':vals.get('searchBlock','Search'),'tpid':tpid}
+          search=urllib.parse.urljoin(final,blockform['action'])+'?'+urllib.parse.urlencode(params)
+          sstatus,sfinal,shtml=get(search);assert sstatus==200
+          sp=P();sp.feed(shtml)
+          detail_links=[urllib.parse.urljoin(sfinal,h) for h in sp.links if 'itemDetail.cfm' in h]
+          assert detail_links,'no CIT-E detail link returned from block/lot search'
+          # Require a unique exact block/lot result in the probe; do not log account/owner values.
+          matches=[u for u in detail_links if urllib.parse.parse_qs(urllib.parse.urlsplit(u).query).get('block',[''])[0]=='00762' and urllib.parse.parse_qs(urllib.parse.urlsplit(u).query).get('lot',[''])[0]=='00002']
+          assert matches
+          dstatus,dfinal,dhtml=get(matches[0]);assert dstatus==200 and 'itemDetail.cfm' in urllib.parse.urlsplit(dfinal).path
+          text=' '.join(re.sub(r'<[^>]+>',' ',dhtml).split()).lower()
+          required=['tax account no','block/lot/qual','lien status','tax sale','due date','balance','interest','total due','status']
+          missing=[x for x in required if x not in text];assert not missing,missing
+          print('CIT-E contract OK','form_action',blockform['action'],'tpid_present',bool(tpid),'detail_links',len(detail_links),'required_labels',required)
