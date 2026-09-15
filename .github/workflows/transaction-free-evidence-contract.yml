@@ -1,0 +1,76 @@
+name: Transaction free evidence contract
+
+on:
+  pull_request:
+    paths:
+      - '.github/workflows/transaction-free-evidence-contract.yml'
+      - '.github/workflows/nj-provider-census.yml'
+      - 'supabase/functions/transaction-energy-evidence/**'
+      - 'supabase/functions/transaction-municipal-requirements/**'
+      - 'supabase/functions/transaction-evidence-sweep/production-state-evidence-bootstrap.ts'
+      - 'supabase/migrations/20260915214500_transaction_municipal_requirements.sql'
+      - 'property/scripts/extract_transaction_municipal_requirements*.py'
+      - 'property/scripts/publish_transaction_municipal_requirements.py'
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  contract:
+    runs-on: ubuntu-latest
+    timeout-minutes: 12
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - name: Compile statewide requirement scripts
+        run: |
+          python -m py_compile \
+            property/scripts/extract_transaction_municipal_requirements.py \
+            property/scripts/extract_transaction_municipal_requirements_parallel.py \
+            property/scripts/publish_transaction_municipal_requirements.py
+      - name: Guard source semantics and privacy boundaries
+        run: |
+          set -euo pipefail
+          energy=supabase/functions/transaction-energy-evidence/index.ts
+          req=supabase/functions/transaction-municipal-requirements/index.ts
+          bootstrap=supabase/functions/transaction-evidence-sweep/production-state-evidence-bootstrap.ts
+          migration=supabase/migrations/20260915214500_transaction_municipal_requirements.sql
+          grep -q 'payoff_balance_state:"customer_or_provider_authorization_required"' "$energy"
+          grep -q 'account_balance_state:"customer_authorization_required"' "$energy"
+          grep -q 'final_bill_clearance:false' "$energy"
+          grep -q 'public sources are not complete enough to prove that no solar system exists' "$energy"
+          grep -q 'never_infer_not_required:true' "$req"
+          grep -q 'not_required_inferred:false' "$req"
+          grep -q 'transaction-energy-evidence' "$bootstrap"
+          grep -q 'transaction-municipal-requirements' "$bootstrap"
+          grep -q 'transaction-cite-evidence' "$bootstrap"
+          grep -q 'revoke all on table public.transaction_municipal_requirements from anon, authenticated' "$migration"
+          grep -q 'len(municipalities) != 564 or len(rows) != 1128' property/scripts/publish_transaction_municipal_requirements.py
+      - name: Probe NJDEP electric and solar public-layer contracts
+        shell: python
+        run: |
+          import json, urllib.parse, urllib.request
+          UA='Watchdog-free-evidence-contract/1.0 (+https://www.watchdogindex.com/)'
+          def get(url):
+            req=urllib.request.Request(url,headers={'User-Agent':UA,'Accept':'application/json'})
+            with urllib.request.urlopen(req,timeout=25) as r:
+              assert r.status==200
+              return json.loads(r.read(2_000_000).decode('utf-8'))
+          electric=get('https://mapsdep.nj.gov/arcgis/rest/services/Features/Utilities/MapServer/10?f=json')
+          solar=get('https://mapsdep.nj.gov/arcgis/rest/services/Features/Utilities/MapServer/22?f=json')
+          efields={x.get('name') for x in electric.get('fields',[])}
+          sfields={x.get('name') for x in solar.get('fields',[])}
+          assert 'NAME' in efields, efields
+          required={'PROJECTNUM','ACCT_NUM','COMPNAME','INSTALLADD','YEAR','SYSTEMSIZE','THIRDPARTY','EDC'}
+          assert required <= sfields, sorted(required-sfields)
+          print('NJDEP public layer contracts OK', 'electric_fields',len(efields),'solar_fields',len(sfields))
+      - name: Guard statewide requirements workflow
+        run: |
+          set -euo pipefail
+          wf=.github/workflows/nj-provider-census.yml
+          grep -q 'Build 564-municipality CO and fire requirement registry' "$wf"
+          grep -q 'Publish municipal CO and fire requirements' "$wf"
+          grep -q -- '--workers 14' "$wf"
