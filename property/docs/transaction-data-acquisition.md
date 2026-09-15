@@ -14,10 +14,10 @@ Watchdog's transaction evidence layer is source-first. A source URL is not a cle
 | Construction permits/certificates | NJ DCA | Paginated public Socrata API | https://data.nj.gov/resource/w9se-dmra.json |
 | Parcel identity / block / lot / assessment context | NJ Office of GIS | Query live ArcGIS service | https://www.nj.gov/njgin/edata/parcels/ |
 | Public-entity legal-notice pages | NJ Department of State | Crawl centralized directory | https://www.nj.gov/state/statewide-legal-notices-list.shtml |
-| Municipal website seed list | State of New Jersey | Crawl directory, then same-site discovery | https://www.nj.gov/nj/gov/county/localgov.shtml |
+| Municipal/county website seed list | State of New Jersey | Crawl directory, then same-site discovery | https://www.nj.gov/nj/gov/county/localgov.shtml |
 | Municipality/code lookup | State of New Jersey | Search/reference | https://www.nj.gov/nj/gov/direct/municipality.shtml |
 
-`property/scripts/acquire_transaction_sources.py` downloads the public statewide files and emits a hash/audit report. `property/scripts/discover_municipal_transaction_sources.py` inventories candidate municipal pages for CO/resale, smoke/fire, tax, tax sale, water/sewer, construction, and code enforcement. Discovery candidates must be reviewed/parsed before Watchdog claims a requirement.
+`property/scripts/acquire_transaction_sources.py` downloads the public statewide files and emits a hash/audit report. `property/scripts/discover_municipal_transaction_sources.py` inventories candidate municipal pages for CO/resale, smoke/fire, tax, tax sale, water/sewer, construction, and code enforcement. `property/scripts/discover_county_record_sources.py` inventories all 21 county roots and candidate Clerk/land-record pages for deeds, mortgages, liens, Lis Pendens, record search, and API/bulk/premium access. Discovery candidates must be reviewed/parsed before Watchdog claims a requirement or search result.
 
 ## Licensed / credentialed public-record sources
 
@@ -35,8 +35,8 @@ Solar balances and payoff/transfer obligations are generally private customer-ac
 
 Recommended UI contract:
 
-1. Select solar company.
-2. Enter provider identifier (account number, SystemID, site ID, or agreement number as appropriate).
+1. Select solar company / financier.
+2. Enter provider identifier (account number, SystemID, site ID, or agreement number as appropriate). Prefill the property ZIP when the provider uses it as a second factor.
 3. Click **Connect account**.
 4. Watchdog launches the provider-supported authorization method: OAuth, customer OTP/magic link, provider partner authorization, or secure statement upload.
 5. After authorization, Watchdog stores provider tokens server-side and transaction evidence stores only normalized results and source timestamps.
@@ -50,18 +50,18 @@ Provider starting points:
 - Tesla account: https://www.tesla.com/teslaaccount
 - Tesla solar billing support: https://www.tesla.com/support/energy/solar-panels/after-installation/billing
 - Tesla property/title support: https://www.tesla.com/support/energy/solar-panels/documents/property-title
-- Sunnova customer portal: https://account.sunnova.com/
+- Sunnova customer portal / guest pay: https://account.sunnova.com/guest-pay — current guest-pay flow accepts a System ID or Account Number plus account ZIP, making it a promising provider-specific verification path, subject to permitted automation and what the next authenticated step exposes.
 - Enphase developer API: https://developer-v4.enphase.com/ — OAuth system-owner authorization; telemetry/system data is not financing payoff data.
 
-**Account number alone is not a safe universal authentication method.** A provider may require account holder name, ZIP, one-time code, login authorization, or OAuth. Watchdog must use the provider's supported customer-consent flow rather than store customer passwords.
+**Account number alone is not a safe universal authentication method.** A provider may require account holder name, ZIP, one-time code, login authorization, or OAuth. Watchdog must use the provider's supported customer-consent flow rather than store customer passwords. The solar installer/system operator and the financing company should be modeled separately because the live payoff balance may belong to a financier rather than the equipment provider.
 
 ## Owner names — professional test policy
 
-For the current test phase, owner-name display is allowed only for professional plans: `agent`, `pro`, `pro_plus`, `teams`, and `developer`. Standard/homeowner users do not receive owner names.
+For the current test phase, owner-name display is allowed only for professional plans: `agent`, `pro`, `pro_plus`, `teams`, and `developer`. Standard/homeowner users do not receive owner names. Owner mailing address remains a separate, more sensitive field and is not automatically opened by this policy.
 
-This entitlement does not override source privacy rules. NJGIN states that owner names are redacted from its hosted parcel and tax-list downloads, services, and applications pursuant to its Daniel's Law handling. Watchdog must not reconstruct a name that the authoritative source intentionally suppresses. A lawful unredacted assessor/MOD-IV/record provider may be connected later with protected-person handling and auditability.
+Source semantics are separate from entitlement. The public 700-byte MOD-IV file layout provides parcel, tax-account, mailing-address, deed, delinquency, tax and bill-status fields, but does **not** expose a current owner-name field in that published layout. The public SR-1A sales extract does contain `GRANTOR-NAME` and `GRANTEE-NAME` together with property location, deed book/page/date and date recorded. Watchdog may show those as **recorded transfer-party evidence**, but it must not silently relabel the latest grantee as the current owner.
 
-Owner mailing address remains a separate, more sensitive field and is not automatically opened by the Agent owner-name test policy.
+NJGIN states that owner names are redacted from its hosted parcel and tax-list downloads, services, and applications pursuant to its Daniel's Law handling. Watchdog must not reconstruct a name that the publisher intentionally suppresses. A true current-owner label therefore requires a compliant assessor/tax-list/county/provider source that actually returns the name, with protected-person handling and auditability.
 
 ## Automation cadence
 
@@ -70,6 +70,7 @@ Owner mailing address remains a separate, more sensitive field and is not automa
 - daily: current public state-file acquisition;
 - weekly: complete DCA permit snapshot;
 - weekly: statewide municipal source discovery;
-- manual: all three jobs on demand.
+- weekly: all 21 county land-record source discovery;
+- manual: all acquisition/discovery jobs on demand.
 
 Raw acquisition artifacts are short-lived CI artifacts. Production ingestion should promote only validated data/revisions into the governed Watchdog warehouse with release/source metadata rather than serving arbitrary downloaded files directly.
