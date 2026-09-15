@@ -6,6 +6,7 @@ on:
       - '.github/workflows/cite-live-contract.yml'
       - 'supabase/functions/transaction-cite-evidence/**'
       - 'supabase/functions/transaction-evidence-sweep/production-state-evidence-bootstrap.ts'
+      - 'property/scripts/publish_transaction_provider_registry.py'
   workflow_dispatch:
 
 permissions:
@@ -17,11 +18,21 @@ jobs:
     timeout-minutes: 8
     steps:
       - uses: actions/checkout@v4
+      - name: Guard implementation semantics
+        run: |
+          set -euo pipefail
+          fn=supabase/functions/transaction-cite-evidence/index.ts
+          grep -q 'finditems.cfm' "$fn"
+          grep -q 'exactDetailLinks' "$fn"
+          grep -q 'municipal_lien_certificate:false' "$fn"
+          grep -q 'final_reading_clearance:false' "$fn"
+          grep -q 'transaction-cite-evidence' supabase/functions/transaction-evidence-sweep/production-state-evidence-bootstrap.ts
+          grep -q 'cite_tax_inquiry.*hls_systems' property/scripts/publish_transaction_provider_registry.py
       - name: Validate CIT-E public search-to-detail contract without logging account data
         shell: python
         run: |
           import html.parser,re,urllib.parse,urllib.request
-          UA='Mozilla/5.0 Watchdog-CITE-contract/1.1'
+          UA='Mozilla/5.0 Watchdog-CITE-contract/1.2'
           root='https://www.cit-e.net/parsippany-nj/cn/taxinquiry_edm/index.cfm'
           class P(html.parser.HTMLParser):
             def __init__(self): super().__init__();self.forms=[];self.form=None;self.links=[]
@@ -46,11 +57,10 @@ jobs:
           sp=P();sp.feed(shtml)
           detail_links=[urllib.parse.urljoin(sfinal,h) for h in sp.links if 'itemDetail.cfm' in h]
           assert detail_links,'no CIT-E detail link returned from block/lot search'
-          # Require a unique exact block/lot result in the probe; do not log account/owner values.
           matches=[u for u in detail_links if urllib.parse.parse_qs(urllib.parse.urlsplit(u).query).get('block',[''])[0]=='00762' and urllib.parse.parse_qs(urllib.parse.urlsplit(u).query).get('lot',[''])[0]=='00002']
           assert matches
           dstatus,dfinal,dhtml=get(matches[0]);assert dstatus==200 and 'itemDetail.cfm' in urllib.parse.urlsplit(dfinal).path
-          text=' '.join(re.sub(r'<[^>]+>',' ',dhtml).split()).lower()
+          body=' '.join(re.sub(r'<[^>]+>',' ',dhtml).split()).lower()
           required=['tax account no','block/lot/qual','lien status','tax sale','due date','balance','interest','total due','status']
-          missing=[x for x in required if x not in text];assert not missing,missing
+          assert not [x for x in required if x not in body]
           print('CIT-E contract OK','form_action',blockform['action'],'tpid_present',bool(tpid),'detail_links',len(detail_links),'required_labels',required)
