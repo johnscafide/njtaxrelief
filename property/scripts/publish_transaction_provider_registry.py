@@ -64,7 +64,8 @@ def relevant_external(raw: dict) -> bool:
 def access_for(provider_key: str, provider_url: str) -> tuple[str, str]:
     h = host(provider_url)
     if provider_key in {"edmunds_wipp","munidex","cite_tax_inquiry","hls_systems"}: return "public_anonymous_search", "live"
-    if provider_key in {"municipal_software","municipay","edmunds_govpay"}: return "public_or_guest_portal", "adapter_pending"
+    if provider_key == "municipal_software": return "public_or_guest_portal", "adapter_pending"
+    if provider_key in {"municipay","edmunds_govpay"}: return "public_or_guest_portal", "review_required"
     if provider_key == "nj_tax_sale_portal" or "newjerseytaxsale.com" in h: return "public_tax_sale_portal", "review_required"
     if provider_key == "official_municipal_site": return "official_site", "source_only"
     return "discovered_external", "review_required"
@@ -80,6 +81,7 @@ def municipal_rows(doc: dict) -> list[dict]:
         county = str(r.get("county") or "")
         root = str(r.get("root_url") or r.get("directory_source") or "")
         providers = [normalize_provider(p) for p in (r.get("external_providers") or []) if relevant_external(p)]
+        provider_keys = {str(p.get("provider_key") or "") for p in providers}
         seen: set[tuple[str,str]] = set()
         for p in providers:
             pkey = str(p.get("provider_key") or "unclassified_external")
@@ -88,18 +90,21 @@ def municipal_rows(doc: dict) -> list[dict]:
             if sig in seen: continue
             seen.add(sig)
             access, status = access_for(pkey,purl)
+            evidence_families=list(p.get("families") or [])
             metadata={"municipality_key":r.get("municipality_key"),"root_url":r.get("root_url"),"public_search_modes":p.get("public_search_modes") or [],"coverage":r.get("coverage") or {}}
             if pkey == "nj_tax_sale_portal":
-                metadata.update({
-                    "automation_authorized":False,
-                    "manual_search_required":True,
-                    "search_completed":False,
-                    "access_note":"Official municipal tax-sale portal identified; Watchdog has no certified machine-access contract. Use authorized manual search unless a permitted integration is established.",
-                })
+                metadata.update({"automation_authorized":False,"manual_search_required":True,"search_completed":False,"access_note":"Official municipal tax-sale portal identified; Watchdog has no certified machine-access contract. Use authorized manual search unless a permitted integration is established."})
+            elif pkey in {"municipay","edmunds_govpay"}:
+                metadata.update({"automation_authorized":False,"manual_search_required":True,"search_completed":False,"access_note":"Payment/lookup portal discovered, but no certified machine-query contract is configured. Preserve as an official manual route unless a permitted adapter is proven."})
+            elif pkey == "municipal_software":
+                metadata.update({"automation_authorized":False,"search_completed":False,"adapter_proof_required":True})
+            if pkey == "edmunds_govpay" and "edmunds_wipp" in provider_keys:
+                status="source_only";evidence_families=[]
+                metadata.update({"supplemental_payment_portal":True,"evidence_route":False,"canonical_evidence_provider":"edmunds_wipp"})
             out.append({
                 "jurisdiction_type":"municipality","jurisdiction_key":code,"jurisdiction_name":label,"county":county,
                 "provider_key":pkey,"provider_label":str(p.get("provider_label") or host(purl) or pkey),"provider_url":purl,
-                "evidence_families":list(p.get("families") or []),"access_mode":access,"adapter_status":status,
+                "evidence_families":evidence_families,"access_mode":access,"adapter_status":status,
                 "source_url":str(p.get("discovered_from") or root),"metadata":metadata,
                 "last_verified_at":generated,"updated_at":generated,
             })
