@@ -20,49 +20,39 @@ jobs:
         shell: python
         run: |
           import html.parser,json,re,urllib.parse,urllib.request
-          UA='Mozilla/5.0 Watchdog-Munidex-contract/2.1'
-          portals=[
-            ('tax','https://tax.munidex.info/englewoodcliffs-nj-0216/','Hudson'),
-            ('utility','https://tax.munidex.info/hanovertwp-nj-1412-swr/','Whippany'),
-          ]
+          UA='Mozilla/5.0 Watchdog-Munidex-contract/2.2'
+          portals=[('tax','https://tax.munidex.info/englewoodcliffs-nj-0216/','Hudson'),('utility','https://tax.munidex.info/hanovertwp-nj-1412-swr/','Whippany')]
           def get(url,accept='text/html,*/*'):
             req=urllib.request.Request(url,headers={'User-Agent':UA,'Accept':accept})
             with urllib.request.urlopen(req,timeout=20) as r:return r.status,r.geturl(),r.read(4_000_000).decode('utf-8','replace')
-          class RowLabels(html.parser.HTMLParser):
-            def __init__(self):
-              super().__init__();self.in_cell=False;self.cells=[];self.cell=[];self.labels=[]
+          class Tables(html.parser.HTMLParser):
+            def __init__(self): super().__init__();self.in_cell=False;self.cell=[];self.row=[];self.rows=[]
             def handle_starttag(self,tag,attrs):
-              if tag in ('td','th','dt','label'):
-                self.in_cell=True;self.cell=[]
+              if tag in ('td','th'): self.in_cell=True;self.cell=[]
             def handle_data(self,data):
               if self.in_cell:self.cell.append(data)
             def handle_endtag(self,tag):
-              if tag in ('td','th','dt','label') and self.in_cell:
-                text=' '.join(''.join(self.cell).split())
-                if text:self.cells.append(text)
-                self.in_cell=False
-              if tag=='tr' and self.cells:
-                # The first cell is normally the field label. Never log subsequent values.
-                label=self.cells[0]
-                if len(label)<=120 and label not in self.labels:self.labels.append(label)
-                self.cells=[]
+              if tag in ('td','th') and self.in_cell:
+                self.row.append(' '.join(''.join(self.cell).split()));self.in_cell=False
+              elif tag=='tr' and self.row:
+                self.rows.append(self.row);self.row=[]
+          def safe_cell(v):
+            v=' '.join(str(v).split())
+            if not v:return '<EMPTY>'
+            # preserve static labels/headers; redact anything containing digits, currency or likely names/addresses
+            if re.search(r'[0-9$]',v):return '<VALUE>'
+            if len(v)>80:return '<VALUE>'
+            allowed=re.fullmatch(r'[A-Za-z /:&()._-]+',v)
+            return v if allowed else '<VALUE>'
           for kind,root,term in portals:
-            base=urllib.parse.urlparse(root).path.rstrip('/')
             search=root.rstrip('/')+'/searchaddress/'+urllib.parse.quote(term,safe='')
-            status,_,raw=get(search,'application/json,*/*;q=0.5')
-            rows=json.loads(raw)
-            assert status==200 and isinstance(rows,list) and rows, f'{kind} search contract unavailable'
-            keys=sorted(rows[0].keys()) if isinstance(rows[0],dict) else []
-            print('SEARCH',kind,'rows',len(rows),'keys',keys)
-            first=rows[0]
-            params={'block':first.get('block',''),'lot':first.get('lot',''),'qualcode':first.get('qualcode',''),'name':first.get('name','')}
+            status,_,raw=get(search,'application/json,*/*;q=0.5');rows=json.loads(raw)
+            assert status==200 and isinstance(rows,list) and rows
+            first=rows[0];params={'block':first.get('block',''),'lot':first.get('lot',''),'qualcode':first.get('qualcode',''),'name':first.get('name','')}
             if kind=='utility':params['sub']=first.get('sub','')
             detail=root.rstrip('/')+'/viewdetails/?'+urllib.parse.urlencode(params)
-            dstatus,final,html=get(detail)
-            assert dstatus==200 and '/viewdetails/' in urllib.parse.urlparse(final).path
-            parser=RowLabels();parser.feed(html)
-            finance=[x for x in parser.labels if re.search(r'account|owner|property|block|lot|tax|year|quarter|balance|principal|interest|due|payment|sale|water|sewer|utility|charge|bill',x,re.I)]
-            print('DETAIL',kind,'label_count',len(parser.labels),'finance_labels',finance[:80])
-            low=html.lower()
-            words=[w for w in ('balance','interest','due date','last payment','tax sale','principal','quarter','account','water','sewer','utility') if w in low]
-            print('DETAIL_WORDS',kind,words)
+            dstatus,final,page=get(detail);assert dstatus==200 and '/viewdetails/' in urllib.parse.urlparse(final).path
+            p=Tables();p.feed(page)
+            print('SEARCH',kind,'rows',len(rows),'keys',sorted(first.keys()))
+            print('DETAIL_ROWS',kind)
+            for r in p.rows[:120]: print([safe_cell(x) for x in r])
