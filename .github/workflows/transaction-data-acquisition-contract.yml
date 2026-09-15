@@ -1,0 +1,51 @@
+name: Transaction data acquisition contract
+
+on:
+  pull_request:
+    paths:
+      - 'property/data/transaction-acquisition-sources.json'
+      - 'property/scripts/acquire_transaction_sources.py'
+      - 'property/scripts/discover_municipal_transaction_sources.py'
+      - 'property/docs/transaction-data-acquisition.md'
+      - '.github/workflows/transaction-source-acquisition.yml'
+      - '.github/workflows/transaction-data-acquisition-contract.yml'
+
+permissions:
+  contents: read
+
+jobs:
+  contract:
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - name: Compile acquisition scripts
+        run: >-
+          python3 -m py_compile
+          property/scripts/acquire_transaction_sources.py
+          property/scripts/discover_municipal_transaction_sources.py
+      - name: Validate source manifest
+        run: |
+          python3 - <<'PY'
+          import json
+          from pathlib import Path
+          p=Path('property/data/transaction-acquisition-sources.json')
+          d=json.loads(p.read_text())
+          assert d['schema_version']==1
+          ids=[x['id'] for x in d['sources']]
+          assert len(ids)==len(set(ids))
+          assert 'nj_modiv_2026' in ids
+          assert 'nj_dca_permits' in ids
+          assert 'nj_ucc_bulk' in ids
+          assert d['policy']['owner_name_visibility']==['agent','pro','pro_plus','teams','developer']
+          assert d['policy']['owner_name_standard_visible'] is False
+          PY
+      - name: Validate list mode without network
+        run: |
+          python3 property/scripts/acquire_transaction_sources.py --list > /tmp/sources.txt
+          grep -q '^nj_modiv_2026' /tmp/sources.txt
+          grep -q '^nj_ucc_bulk' /tmp/sources.txt
+          grep -q '^nj_courts_judgments' /tmp/sources.txt
