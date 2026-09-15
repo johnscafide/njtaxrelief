@@ -29,8 +29,8 @@
   display: inline-flex;
   max-width: 100%;
   gap: 8px 10px;
-  margin: 16px 0 22px;
-  padding: 10px 14px;
+  margin: 16px 0 26px;
+  padding: 11px 15px;
   border: 1px solid #ead6a9;
   border-radius: 999px;
   background: #fffaf0;
@@ -49,14 +49,122 @@
   font-size: 21px;
 }
 
+.wd-anchor-quick-intro.is-polished {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+}
+
+.wd-anchor-quick-intro.is-polished > p {
+  max-width: 590px;
+}
+
+.wd-anchor-quick-intro.is-polished .wd-anchor-quick-chips {
+  display: none !important;
+}
+
+.wd-anchor-quick-intro .wd-free-help.is-compact {
+  box-sizing: border-box;
+  display: block;
+  width: 100%;
+  max-width: 590px;
+  margin: 2px 0 0;
+  padding: 22px 24px;
+  border: 1px solid #dbe6f2;
+  border-radius: 18px;
+  background: linear-gradient(180deg,#fbfdff 0%,#f7faff 100%);
+  box-shadow: 0 10px 28px rgba(16,43,78,.055);
+  color: #102b4e;
+}
+
+.wd-anchor-quick-intro .wd-free-help.is-compact .wd-free-help-image {
+  display: none !important;
+}
+
+.wd-anchor-quick-intro .wd-free-help.is-compact .wd-free-help-copy {
+  position: relative;
+  padding-left: 42px;
+}
+
+.wd-anchor-quick-intro .wd-free-help.is-compact .wd-free-help-copy::before {
+  content: "✓";
+  position: absolute;
+  left: 0;
+  top: 1px;
+  display: grid;
+  width: 28px;
+  height: 28px;
+  place-items: center;
+  border-radius: 9px;
+  background: #eaf2ff;
+  color: #1466d8;
+  font: 800 17px/1 "Plus Jakarta Sans", Arial, sans-serif;
+}
+
+.wd-anchor-quick-intro .wd-free-help.is-compact .wd-free-help-copy strong {
+  display: block;
+  margin: 0;
+  color: #102b4e;
+  font: 800 19px/1.28 "Plus Jakarta Sans", Arial, sans-serif;
+  letter-spacing: -.25px;
+}
+
+.wd-anchor-quick-intro .wd-free-help.is-compact .wd-free-help-copy p {
+  max-width: 500px;
+  margin: 8px 0 0;
+  color: #59687a;
+  font: 500 15px/1.55 "Source Sans 3", Arial, sans-serif;
+}
+
+.wd-anchor-quick-intro .wd-free-help.is-compact .wd-free-help-copy > a {
+  display: none !important;
+}
+
+#wd-anchor-quick .wd-anchor-quick-result-actions .wd-anchor-edit-result {
+  min-height: 42px;
+  padding: 0 4px;
+  border: 0;
+  background: transparent;
+  color: #53657b;
+  font: 700 14px/1.2 "Source Sans 3", Arial, sans-serif;
+  text-decoration: underline;
+  text-decoration-thickness: 1px;
+  text-underline-offset: 4px;
+  cursor: pointer;
+}
+
+#wd-anchor-quick .wd-anchor-quick-result-actions .wd-anchor-edit-result:hover {
+  color: #103780;
+}
+
+#wd-anchor-quick .wd-anchor-quick-result-actions .wd-anchor-edit-result:focus-visible {
+  outline: 3px solid rgba(20,102,216,.28);
+  outline-offset: 3px;
+  border-radius: 8px;
+}
+
 @media (max-width: 640px) {
   .wd-anchor-rating-summary.is-featured {
     gap: 6px 8px;
-    margin: 14px 0 18px;
+    margin: 14px 0 20px;
     padding: 10px 12px;
     border-radius: 18px;
     font-size: 13px;
   }
   .wd-anchor-rating-summary.is-featured strong,
   .wd-anchor-rating-summary.is-featured .wd-anchor-rating-stars { font-size: 19px; }
+  .wd-anchor-quick-intro .wd-free-help.is-compact {
+    max-width: none;
+    padding: 18px;
+    border-radius: 16px;
+  }
+  .wd-anchor-quick-intro .wd-free-help.is-compact .wd-free-help-copy {
+    padding-left: 38px;
+  }
+  .wd-anchor-quick-intro .wd-free-help.is-compact .wd-free-help-copy strong {
+    font-size: 17px;
+  }
+  .wd-anchor-quick-intro .wd-free-help.is-compact .wd-free-help-copy p {
+    font-size: 14px;
+  }
 }
