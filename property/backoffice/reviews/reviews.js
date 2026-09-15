@@ -1,6 +1,6 @@
 (function(){
 'use strict';
-var API='/api/watchdog-backoffice-gateway?target=reviews';
+var API='/api/watchdog-backoffice-reviews';
 var REFRESH_MS=60000;
 var refreshTimer=null;
 var busy=false;
