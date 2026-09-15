@@ -11,6 +11,14 @@ import urllib.request
 PROJECT_URL_DEFAULT = "https://uvkvaxljhhngydvlrzom.supabase.co"
 
 
+def request_json(url: str, key: str):
+    req = urllib.request.Request(url, method="GET", headers={
+        "Authorization": f"Bearer {key}", "apikey": key, "Accept": "application/json",
+    })
+    with urllib.request.urlopen(req, timeout=45) as response:
+        return json.loads(response.read().decode("utf-8") or "[]")
+
+
 def main() -> int:
     ap = argparse.ArgumentParser()
     ap.add_argument("--input", required=True)
@@ -25,10 +33,16 @@ def main() -> int:
     key = os.environ.get("SUPABASE_SERVICE_ROLE_KEY") or ""
     if not key:
         raise SystemExit("SUPABASE_SERVICE_ROLE_KEY is required")
+
+    curated_url = url.rstrip("/") + "/rest/v1/transaction_municipal_requirements?select=municipality_code,requirement_key&curated_override=eq.true"
+    curated_rows = request_json(curated_url, key)
+    curated = {(str(r.get("municipality_code") or ""), str(r.get("requirement_key") or "")) for r in curated_rows}
+    publish_rows = [r for r in rows if (str(r.get("municipality_code") or ""), str(r.get("requirement_key") or "")) not in curated]
+
     conflict = urllib.parse.quote("municipality_code,requirement_key", safe=",")
     endpoint = url.rstrip("/") + "/rest/v1/transaction_municipal_requirements?on_conflict=" + conflict
-    for i in range(0, len(rows), 100):
-        body = json.dumps(rows[i:i+100], ensure_ascii=False, separators=(",", ":")).encode()
+    for i in range(0, len(publish_rows), 100):
+        body = json.dumps(publish_rows[i:i+100], ensure_ascii=False, separators=(",", ":")).encode()
         req = urllib.request.Request(endpoint, data=body, method="POST", headers={
             "Authorization": f"Bearer {key}", "apikey": key, "Content-Type": "application/json",
             "Prefer": "resolution=merge-duplicates,return=minimal",
@@ -36,7 +50,7 @@ def main() -> int:
         with urllib.request.urlopen(req, timeout=45) as response:
             if response.status not in (200, 201, 204):
                 raise RuntimeError(f"Requirements publish failed HTTP {response.status}")
-    print(json.dumps({"published": len(rows), "municipalities": len(municipalities)}))
+    print(json.dumps({"published": len(publish_rows), "curated_preserved": len(curated), "municipalities": len(municipalities)}))
     return 0
 
 
