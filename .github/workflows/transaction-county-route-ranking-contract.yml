@@ -1,0 +1,22 @@
+name: Transaction county route ranking contract
+
+on:
+  pull_request:
+    paths:
+      - 'supabase/functions/transaction-county-evidence/**'
+      - 'property/tests/transaction-county-route-ranking-contract.mjs'
+      - '.github/workflows/transaction-county-route-ranking-contract.yml'
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  contract:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+      - run: node property/tests/transaction-county-route-ranking-contract.mjs
