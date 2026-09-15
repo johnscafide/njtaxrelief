@@ -1,0 +1,198 @@
+/* NJW-348 — Agent Contacts readability, name handling, and visual polish */
+body[data-sidebar-page="agent-contacts"] .acx-page{font-size:15px}
+body[data-sidebar-page="agent-contacts"] .acx-worknav-title small{font-size:11px}
+body[data-sidebar-page="agent-contacts"] .acx-worknav-title b{font-size:16px}
+body[data-sidebar-page="agent-contacts"] .acx-worknav-links a{font-size:14px}
+body[data-sidebar-page="agent-contacts"] .acx-nav-upload,
+body[data-sidebar-page="agent-contacts"] .acx-btn{font-size:14px}
+body[data-sidebar-page="agent-contacts"] .acx-eyebrow>span,
+body[data-sidebar-page="agent-contacts"] .acx-eyebrow em{font-size:12px}
+body[data-sidebar-page="agent-contacts"] .acx-hero-copy>p{font-size:17px;line-height:1.65}
+body[data-sidebar-page="agent-contacts"] .acx-hero-file b{font-size:15px}
+body[data-sidebar-page="agent-contacts"] .acx-hero-file small{font-size:12px}
+body[data-sidebar-page="agent-contacts"] .acx-hero-file em{font-size:10px}
+body[data-sidebar-page="agent-contacts"] .acx-hero-flow{font-size:10px}
+body[data-sidebar-page="agent-contacts"] .acx-hero-targets b{font-size:14px}
+body[data-sidebar-page="agent-contacts"] .acx-hero-targets small{font-size:12px}
+body[data-sidebar-page="agent-contacts"] .acx-overview small{font-size:12px}
+body[data-sidebar-page="agent-contacts"] .acx-private-stat b{font-size:14px}
+body[data-sidebar-page="agent-contacts"] .acx-library>header span,
+body[data-sidebar-page="agent-contacts"] .acx-panel-head>div>span,
+body[data-sidebar-page="agent-contacts"] .acx-current-kicker{font-size:11px}
+body[data-sidebar-page="agent-contacts"] .acx-library>header h2{font-size:20px}
+body[data-sidebar-page="agent-contacts"] .acx-library-tabs button{font-size:13px}
+body[data-sidebar-page="agent-contacts"] .acx-history-copy b{font-size:14px}
+body[data-sidebar-page="agent-contacts"] .acx-history-copy span{font-size:12px}
+body[data-sidebar-page="agent-contacts"] .acx-history-copy small{font-size:11px}
+body[data-sidebar-page="agent-contacts"] .acx-history-empty b{font-size:14px}
+body[data-sidebar-page="agent-contacts"] .acx-history-empty span{font-size:12px}
+body[data-sidebar-page="agent-contacts"] .acx-library-note b{font-size:12px}
+body[data-sidebar-page="agent-contacts"] .acx-library-note span{font-size:11px;line-height:1.55}
+body[data-sidebar-page="agent-contacts"] .acx-drop>span{font-size:11px}
+body[data-sidebar-page="agent-contacts"] .acx-drop p{font-size:15px;line-height:1.65}
+body[data-sidebar-page="agent-contacts"] .acx-drop>small{font-size:12px}
+body[data-sidebar-page="agent-contacts"] .acx-start-grid b{font-size:14px}
+body[data-sidebar-page="agent-contacts"] .acx-start-grid span{font-size:12px;line-height:1.55}
+body[data-sidebar-page="agent-contacts"] .acx-current-file small{font-size:10px}
+body[data-sidebar-page="agent-contacts"] .acx-current-file h2{font-size:18px}
+body[data-sidebar-page="agent-contacts"] .acx-current-file p{font-size:12px}
+body[data-sidebar-page="agent-contacts"] .acx-steps button b{font-size:13px}
+body[data-sidebar-page="agent-contacts"] .acx-steps button small{font-size:11px}
+body[data-sidebar-page="agent-contacts"] .acx-steps button>span{font-size:12px}
+body[data-sidebar-page="agent-contacts"] .acx-panel-head h3{font-size:24px;line-height:1.18}
+body[data-sidebar-page="agent-contacts"] .acx-panel-head p{font-size:14px;line-height:1.6}
+body[data-sidebar-page="agent-contacts"] .acx-map-score b{font-size:22px}
+body[data-sidebar-page="agent-contacts"] .acx-map-score small{font-size:11px}
+body[data-sidebar-page="agent-contacts"] .acx-map-item b{font-size:14px}
+body[data-sidebar-page="agent-contacts"] .acx-map-item em{font-size:10px}
+body[data-sidebar-page="agent-contacts"] .acx-map-item select,
+body[data-sidebar-page="agent-contacts"] .acx-table-tools select{min-height:46px;font-size:14px}
+body[data-sidebar-page="agent-contacts"] .acx-map-item small{font-size:12px}
+body[data-sidebar-page="agent-contacts"] .acx-panel-foot>span{font-size:12px;line-height:1.45}
+body[data-sidebar-page="agent-contacts"] .acx-quality b{font-size:20px}
+body[data-sidebar-page="agent-contacts"] .acx-quality span{font-size:12px}
+body[data-sidebar-page="agent-contacts"] .acx-search{height:46px}
+body[data-sidebar-page="agent-contacts"] .acx-search input{font-size:14px}
+body[data-sidebar-page="agent-contacts"] .acx-table-tools>button{height:46px;font-size:13px}
+body[data-sidebar-page="agent-contacts"] .acx-table-tools>span{font-size:12px}
+body[data-sidebar-page="agent-contacts"] .acx-table th{font-size:11px;padding:12px 10px}
+body[data-sidebar-page="agent-contacts"] .acx-cell-input{height:40px;font-size:13px}
+body[data-sidebar-page="agent-contacts"] .acx-chip{min-height:30px;font-size:11px;padding:0 10px}
+body[data-sidebar-page="agent-contacts"] .acx-table-empty b{font-size:14px}
+body[data-sidebar-page="agent-contacts"] .acx-table-empty span{font-size:12px}
+body[data-sidebar-page="agent-contacts"] .acx-pagination button,
+body[data-sidebar-page="agent-contacts"] .acx-pagination span{font-size:12px}
+body[data-sidebar-page="agent-contacts"] .acx-export-brand em{font-size:10px}
+body[data-sidebar-page="agent-contacts"] .acx-export-card h4{font-size:21px}
+body[data-sidebar-page="agent-contacts"] .acx-export-card>p{font-size:14px;line-height:1.6}
+body[data-sidebar-page="agent-contacts"] .acx-export-preview span{font-size:11px}
+body[data-sidebar-page="agent-contacts"] .acx-export-card>small{font-size:12px}
+body[data-sidebar-page="agent-contacts"] .acx-future b{font-size:13px}
+body[data-sidebar-page="agent-contacts"] .acx-future small{font-size:12px}
+body[data-sidebar-page="agent-contacts"] .acx-future>a{font-size:12px}
+body[data-sidebar-page="agent-contacts"] .acx-guide header span{font-size:11px}
+body[data-sidebar-page="agent-contacts"] .acx-guide header h2{font-size:21px}
+body[data-sidebar-page="agent-contacts"] .acx-guide-tabs button{font-size:13px}
+body[data-sidebar-page="agent-contacts"] .acx-guide-callout b{font-size:13px}
+body[data-sidebar-page="agent-contacts"] .acx-guide-callout p span{font-size:12px}
+body[data-sidebar-page="agent-contacts"] .acx-guide li b{font-size:13px}
+body[data-sidebar-page="agent-contacts"] .acx-guide li p{font-size:12px}
+body[data-sidebar-page="agent-contacts"] .acx-guide-warning b{font-size:12px}
+body[data-sidebar-page="agent-contacts"] .acx-guide-warning span{font-size:12px}
+body[data-sidebar-page="agent-contacts"] .acx-busy b{font-size:14px}
+body[data-sidebar-page="agent-contacts"] .acx-busy small{font-size:12px}
+body[data-sidebar-page="agent-contacts"] .acx-toast{font-size:13px}
+
+/* Mapping-stage visual: raw contact -> Watchdog cleanup -> CRM */
+.acx-name-intelligence{margin:0 24px 22px;padding:20px;border:1px solid #cad9ff;border-radius:18px;background:linear-gradient(135deg,#f7faff 0%,#ffffff 56%,#f1faf6 100%);display:grid;grid-template-columns:minmax(260px,.82fr) minmax(520px,1.18fr);gap:22px;align-items:center;position:relative;overflow:hidden;box-shadow:0 10px 28px rgba(47,109,246,.055)}
+.acx-name-intelligence[hidden]{display:none}
+.acx-name-intelligence:after{content:"";position:absolute;width:260px;height:260px;border-radius:50%;right:-115px;top:-145px;background:radial-gradient(circle,rgba(47,109,246,.10),rgba(47,109,246,0) 68%);pointer-events:none}
+.acx-name-copy{position:relative;z-index:1}
+.acx-name-copy>span{display:block;color:#2f6df6;font-size:11px;font-weight:900;letter-spacing:.14em}
+.acx-name-copy h4{margin:7px 0 7px;color:#20314d;font-size:20px;line-height:1.2;letter-spacing:-.025em}
+.acx-name-copy p{margin:0;color:#65758a;font-size:13px;line-height:1.55}
+.acx-name-change{margin-top:13px;min-height:38px;border:0;background:transparent;color:#2459cc;padding:0;font-size:13px;font-weight:800;display:inline-flex;align-items:center;gap:8px}
+.acx-name-change:hover{text-decoration:underline}
+.acx-name-flow{position:relative;z-index:1;display:grid;grid-template-columns:1fr auto 1fr auto 1fr;gap:10px;align-items:center}
+.acx-name-flow>i{color:#9aabc0;font-size:13px}
+.acx-name-node{min-height:104px;border:1px solid #dce4ef;border-radius:14px;background:#fff;padding:14px;display:flex;flex-direction:column;justify-content:center;box-shadow:0 7px 20px rgba(38,56,86,.045)}
+.acx-name-node small{font-size:10px;letter-spacing:.1em;font-weight:900;color:#8390a3}
+.acx-name-node b{font-size:14px;line-height:1.35;color:#2a3a54;margin-top:7px}
+.acx-name-node.clean{border-color:#c7d8ff;background:#f7f9ff}
+.acx-name-node.clean small{color:#2f6df6}
+.acx-name-node.crm{border-color:#d4ebdf;background:#f5fbf7}
+.acx-name-node.crm small{color:#138152}
+
+/* Name-mode modal */
+.acx-name-modal{position:fixed;inset:0;z-index:12000;display:grid;place-items:center;padding:24px}
+.acx-name-modal[hidden]{display:none}
+.acx-name-backdrop{position:absolute;inset:0;border:0;background:rgba(22,36,58,.36);backdrop-filter:blur(6px)}
+.acx-name-modal>section{position:relative;width:min(760px,100%);max-height:min(90vh,860px);overflow:auto;border:1px solid #dbe3ed;border-radius:24px;background:#fff;box-shadow:0 34px 100px rgba(27,43,69,.24);padding:32px;color:#18243a}
+.acx-name-x{position:absolute;right:18px;top:18px;width:42px;height:42px;border-radius:12px;border:1px solid #dfe6ef;background:#f8fafc;color:#607087}
+.acx-name-modal-icon{width:52px;height:52px;border-radius:15px;background:#edf3ff;color:#2f6df6;display:grid;place-items:center;font-size:20px;margin-bottom:16px}
+.acx-name-modal>section>span{display:block;font-size:11px;font-weight:900;letter-spacing:.14em;color:#2f6df6}
+.acx-name-modal h2{font-size:30px;line-height:1.12;letter-spacing:-.035em;margin:7px 50px 8px 0;color:#1e2d47}
+.acx-name-modal>section>p{font-size:15px;line-height:1.6;color:#68778c;margin:0;max-width:650px}
+.acx-name-choices{display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-top:24px}
+.acx-name-choice{position:relative;border:1px solid #dfe6ef;border-radius:16px;background:#fff;color:#243550;padding:18px;text-align:left;display:grid;grid-template-columns:42px 1fr 26px;gap:13px;align-items:start;min-height:164px;transition:.16s ease}
+.acx-name-choice:hover{border-color:#b9c9dd;background:#fbfcfe}
+.acx-name-choice.selected{border-color:#79a0ff;background:#f5f8ff;box-shadow:0 0 0 3px rgba(47,109,246,.08)}
+.acx-name-choice>i{width:42px;height:42px;border-radius:12px;background:#f0f4f9;color:#6b7e97;display:grid;place-items:center;font-size:16px}
+.acx-name-choice.selected>i{background:#e8efff;color:#2f6df6}
+.acx-name-choice>div{display:grid;gap:5px}
+.acx-name-choice>div>span{font-size:10px;letter-spacing:.1em;font-weight:900;color:#8c98a9}
+.acx-name-choice.recommended>div>span{color:#148553}
+.acx-name-choice b{font-size:16px;color:#263751}
+.acx-name-choice small{font-size:12px;line-height:1.55;color:#748397}
+.acx-name-choice em{width:24px;height:24px;border-radius:50%;border:1px solid #ccd6e2;background:#fff;color:transparent;display:grid;place-items:center;font-style:normal;font-size:10px;margin-top:2px}
+.acx-name-choice.selected em{border-color:#2f6df6;background:#2f6df6;color:#fff}
+.acx-name-preview{margin-top:16px;border:1px solid #e0e7ef;border-radius:15px;background:#fbfcfe;overflow:hidden}
+.acx-name-preview>header{padding:12px 14px;border-bottom:1px solid #e7edf3;display:flex;justify-content:space-between;gap:12px;align-items:center}
+.acx-name-preview>header b{font-size:13px;color:#33465f}
+.acx-name-preview>header small{font-size:11px;color:#7b8a9f}
+#acx-name-preview-rows{display:grid}
+.acx-name-preview-row{display:grid;grid-template-columns:1.35fr auto 1fr 1fr;gap:8px;align-items:center;padding:11px 14px;border-bottom:1px solid #edf1f5}
+.acx-name-preview-row:last-child{border-bottom:0}
+.acx-name-preview-row>i{color:#a7b4c4;font-size:11px}
+.acx-name-preview-row .raw{font-size:13px;font-weight:700;color:#40516a;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.acx-name-preview-row .result{min-width:0;border:1px solid #dfe6ef;border-radius:9px;background:#fff;padding:8px 9px;font-size:12px;color:#3f5069;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.acx-name-preview-row .result b{display:block;font-size:9px;letter-spacing:.08em;text-transform:uppercase;color:#8794a6;margin-bottom:2px}
+.acx-name-preview-row .result.one{grid-column:3/5}
+.acx-name-modal footer{margin-top:20px;display:flex;justify-content:flex-end}
+.acx-name-modal footer .acx-btn{min-height:48px;font-size:14px;padding:0 18px}
+
+/* Make the existing hero more visual without stock photography. */
+body[data-sidebar-page="agent-contacts"] .acx-hero-visual:before,
+body[data-sidebar-page="agent-contacts"] .acx-hero-visual:after{content:"";position:absolute;border-radius:18px;pointer-events:none;z-index:-1}
+body[data-sidebar-page="agent-contacts"] .acx-hero-visual:before{width:180px;height:110px;right:24px;top:28px;border:1px solid rgba(47,109,246,.11);background:linear-gradient(145deg,rgba(47,109,246,.07),rgba(255,255,255,.5));transform:rotate(8deg)}
+body[data-sidebar-page="agent-contacts"] .acx-hero-visual:after{width:150px;height:90px;left:28px;bottom:24px;border:1px solid rgba(24,169,102,.10);background:linear-gradient(145deg,rgba(24,169,102,.06),rgba(255,255,255,.45));transform:rotate(-7deg)}
+
+@media(max-width:1100px){
+  .acx-name-intelligence{grid-template-columns:1fr;gap:16px}
+  .acx-name-flow{max-width:760px}
+}
+@media(max-width:860px){
+  body[data-sidebar-page="agent-contacts"] .acx-worknav-links a{font-size:13px}
+  .acx-name-intelligence{margin:0 18px 18px;padding:18px}
+  .acx-name-flow{grid-template-columns:1fr;gap:8px}
+  .acx-name-flow>i{transform:rotate(90deg);justify-self:center}
+  .acx-name-node{min-height:76px}
+  .acx-name-choices{grid-template-columns:1fr}
+  .acx-name-choice{min-height:0}
+}
+@media(max-width:620px){
+  body[data-sidebar-page="agent-contacts"] .acx-worknav-links a{font-size:12px}
+  body[data-sidebar-page="agent-contacts"] .acx-hero-copy>p{font-size:15px}
+  body[data-sidebar-page="agent-contacts"] .acx-hero-actions .acx-btn{font-size:12px}
+  body[data-sidebar-page="agent-contacts"] .acx-overview small{font-size:11px}
+  body[data-sidebar-page="agent-contacts"] .acx-private-stat b{font-size:12px}
+  body[data-sidebar-page="agent-contacts"] .acx-panel-head h3{font-size:21px}
+  body[data-sidebar-page="agent-contacts"] .acx-panel-head p{font-size:13px}
+  body[data-sidebar-page="agent-contacts"] .acx-map-item b{font-size:13px}
+  body[data-sidebar-page="agent-contacts"] .acx-map-item select,
+  body[data-sidebar-page="agent-contacts"] .acx-table-tools select{font-size:13px}
+  body[data-sidebar-page="agent-contacts"] .acx-map-item small{font-size:11px}
+  body[data-sidebar-page="agent-contacts"] .acx-start-grid span{font-size:12px}
+  body[data-sidebar-page="agent-contacts"] .acx-quality span{font-size:11px}
+  body[data-sidebar-page="agent-contacts"] .acx-cell-input{font-size:12px}
+  .acx-name-intelligence{margin:0 12px 16px;padding:16px;border-radius:15px}
+  .acx-name-copy h4{font-size:18px}
+  .acx-name-copy p{font-size:12px}
+  .acx-name-node b{font-size:13px}
+  .acx-name-modal{padding:10px}
+  .acx-name-modal>section{padding:24px 16px 18px;border-radius:18px}
+  .acx-name-x{right:12px;top:12px}
+  .acx-name-modal h2{font-size:25px;margin-right:46px}
+  .acx-name-modal>section>p{font-size:14px}
+  .acx-name-choice{grid-template-columns:38px 1fr 24px;padding:15px;gap:11px}
+  .acx-name-choice>i{width:38px;height:38px}
+  .acx-name-choice b{font-size:15px}
+  .acx-name-choice small{font-size:12px}
+  .acx-name-preview-row{grid-template-columns:1fr auto;gap:7px;padding:10px 12px}
+  .acx-name-preview-row>i{grid-column:2;grid-row:1;transform:rotate(90deg)}
+  .acx-name-preview-row .raw{grid-column:1/3}
+  .acx-name-preview-row .result{grid-column:auto}
+  .acx-name-preview-row .result.one{grid-column:1/3}
+  .acx-name-modal footer .acx-btn{width:100%}
+}
+@media(prefers-reduced-motion:reduce){.acx-name-choice{transition:none}}
