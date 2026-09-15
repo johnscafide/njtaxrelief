@@ -1,0 +1,24 @@
+name: Transaction account route contract
+
+on:
+  pull_request:
+    paths:
+      - 'supabase/functions/transaction-account-route/**'
+      - 'supabase/functions/transaction-evidence-sweep/production-state-evidence-bootstrap.ts'
+      - 'property/scripts/publish_transaction_provider_registry.py'
+      - 'property/tests/transaction-account-route-contract.mjs'
+      - '.github/workflows/transaction-account-route-contract.yml'
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  contract:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+      - run: node property/tests/transaction-account-route-contract.mjs
