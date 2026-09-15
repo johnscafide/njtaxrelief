@@ -16,32 +16,55 @@ from urllib.parse import urlparse
 
 PROJECT_URL_DEFAULT = "https://uvkvaxljhhngydvlrzom.supabase.co"
 SOCIAL_HOSTS = {"facebook.com","twitter.com","x.com","reddit.com","linkedin.com","pinterest.com","plus.google.com","web.whatsapp.com"}
-IRRELEVANT_HOSTS = {"cdn.shopify.com","propertytaxreliefapp.nj.gov","propertytaxreliefstatus.nj.gov","njpropertytaxguide.com"}
+IRRELEVANT_HOSTS = {"cdn.shopify.com","propertytaxreliefapp.nj.gov","propertytaxreliefstatus.nj.gov","njpropertytaxguide.com","state.nj.us","nj.gov","tctanj.org"}
 
 
 def host(url: str) -> str:
     return (urlparse(url).hostname or "").lower().removeprefix("www.")
 
 
-def relevant_external(p: dict) -> bool:
+def normalize_provider(p: dict) -> dict:
+    p = dict(p)
+    h = host(str(p.get("url") or ""))
+    key = str(p.get("provider_key") or "unclassified_external")
+    if "wipp" in h or "edmundsgovtech.cloud" in h or "edmundsassoc.com" in h:
+        p.update(provider_key="edmunds_wipp", provider_label="Edmunds GovTech / WIPP", public_search_modes=["address","block_lot","account","owner_name"])
+    elif h == "tax.munidex.info":
+        p.update(provider_key="munidex", provider_label="Munidex", public_search_modes=["address","block_lot","account","owner_name"])
+    elif h.endswith("cit-e.net"):
+        p.update(provider_key="cite_tax_inquiry", provider_label="CIT-E Tax / Utility Inquiry")
+    elif h == "apps.hlssystems.com":
+        p.update(provider_key="hls_systems", provider_label="HLS Systems Property Tax Inquiry")
+    elif h == "webportal.municipal-software.com":
+        p.update(provider_key="municipal_software", provider_label="Municipal Software Web Portal")
+    elif h == "secure.municipay.com":
+        p.update(provider_key="municipay", provider_label="Municipay")
+    elif h == "edmundsgovpay.com":
+        p.update(provider_key="edmunds_govpay", provider_label="Edmunds GovPay")
+    elif h.endswith("newjerseytaxsale.com"):
+        p.update(provider_key="nj_tax_sale_portal", provider_label="New Jersey Tax Sale Portal", families=["tax_sale_delinquency"])
+    return p
+
+
+def relevant_external(raw: dict) -> bool:
+    p = normalize_provider(raw)
     url = str(p.get("url") or "")
     h = host(url)
     if not url.startswith(("http://","https://")) or h in SOCIAL_HOSTS or h in IRRELEVANT_HOSTS:
         return False
     key = str(p.get("provider_key") or "")
-    if key == "munidex":
-        return h == "tax.munidex.info"
-    if key == "edmunds_wipp":
-        return "edmund" in h or h.startswith("wipp")
+    if key == "munidex": return h == "tax.munidex.info"
+    if key == "edmunds_wipp": return "edmund" in h or "wipp" in h
+    if key in {"cite_tax_inquiry","hls_systems","municipal_software","municipay","edmunds_govpay","nj_tax_sale_portal"}: return True
     families = set(p.get("families") or [])
     return bool(families & {"tax_collector","water_sewer","tax_sale_delinquency"})
 
 
 def access_for(provider_key: str, provider_url: str) -> tuple[str, str]:
     h = host(provider_url)
-    if provider_key == "edmunds_wipp": return "public_anonymous_search", "live"
-    if provider_key == "munidex": return "public_anonymous_search", "live"
-    if "newjerseytaxsale.com" in h: return "public_tax_sale_portal", "source_only"
+    if provider_key in {"edmunds_wipp","munidex"}: return "public_anonymous_search", "live"
+    if provider_key in {"cite_tax_inquiry","hls_systems","municipal_software","municipay","edmunds_govpay"}: return "public_or_guest_portal", "adapter_pending"
+    if provider_key == "nj_tax_sale_portal" or "newjerseytaxsale.com" in h: return "public_tax_sale_portal", "adapter_pending"
     if provider_key == "official_municipal_site": return "official_site", "source_only"
     return "discovered_external", "review_required"
 
@@ -55,7 +78,7 @@ def municipal_rows(doc: dict) -> list[dict]:
         label = str(r.get("municipality_label") or code)
         county = str(r.get("county") or "")
         root = str(r.get("root_url") or r.get("directory_source") or "")
-        providers = [p for p in (r.get("external_providers") or []) if relevant_external(p)]
+        providers = [normalize_provider(p) for p in (r.get("external_providers") or []) if relevant_external(p)]
         seen: set[tuple[str,str]] = set()
         for p in providers:
             pkey = str(p.get("provider_key") or "unclassified_external")
