@@ -1,8 +1,8 @@
 (function(){
   'use strict';
-  var VERSION='0.2.0';
+  var VERSION='0.2.1';
   var STORE_URL='';
-  var FILES=['manifest.json','popup.html','popup.css','popup-v02.css','popup.js','content.js','agent-intel.js','site-bridge.js','README.md'];
+  var FILES=['manifest.json','popup.html','popup.css','popup-v02.css','popup.js','popup-write-v021.js','content.js','agent-intel.js','writer-v021.js','site-bridge.js','README.md'];
   var BASE='/browser-extension/watchdog-crm-companion/';
   var ZIP_NAME='watchdog-crm-companion-v'+VERSION+'.zip';
 
