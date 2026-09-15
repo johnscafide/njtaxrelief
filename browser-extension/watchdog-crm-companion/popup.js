@@ -1,5 +1,5 @@
 const API='https://uvkvaxljhhngydvlrzom.supabase.co/functions/v1/watchdog-crm-companion';
-const VERSION='0.1.0';
+const VERSION='0.1.1';
 const CONNECT_URL='https://watchdogindex.com/agent/extension/connect/';
 const state={token:null,plan:null,contact:null,result:null,pairing:null};
 const $=(id)=>document.getElementById(id);
@@ -71,10 +71,10 @@ async function scanContact(){
   if(!tab||!/^https:\/\/app\.boldtrail\.com\//i.test(tab.url||'')){await track('boldtrail_contact_missing',{metadata:{reason:'wrong_tab'}});setError('Open a BoldTrail contact first.','CRM Companion only reads the BoldTrail tab you have open.');return;}
   try{
     const result=await send(tab.id,{type:'WATCHDOG_SCAN_CONTACT'});
-    if(!result?.ok||!result.contact?.address){await track('boldtrail_contact_missing',{metadata:{adapter:'boldtrail_dom'}});setError('No contact property address found.','Open the contact details or edit panel so the property address is visible, then scan again.');return;}
+    if(!result?.ok||!result.contact?.address){await track('boldtrail_contact_missing',{metadata:{adapter:'boldtrail_dom'}});setError('Watchdog could not read the contact address.','The address may be visible in BoldTrail but rendered in a layout this extension does not recognize yet. Nothing was sent to Watchdog.');return;}
     state.contact=result.contact;$('wdc-contact-title').textContent=result.contact.address;$('wdc-contact').querySelector('.wdc-dot').classList.add('live');
     await track('boldtrail_contact_detected',{metadata:{adapter:'boldtrail_dom'}});await lookup(result.contact);
-  }catch(_){setError('BoldTrail page is not ready.','Refresh the BoldTrail tab once after installing the extension, then try again.');}
+  }catch(_){setError('BoldTrail page is not ready.','Refresh the BoldTrail tab once after installing or reloading the extension, then try again.');}
 }
 async function lookup(contact){
   show('wdc-state',true);show('wdc-match',false);show('wdc-error',false);
@@ -82,7 +82,7 @@ async function lookup(contact){
     const result=await api('lookup',{contact});state.result=result;
     if(result.kind==='match'){renderMatch(result);return;}
     if(result.kind==='ambiguous'){setError('Watchdog found more than one possible property.','Choose the correct address below.',result.candidates||[]);return;}
-    setError('No confident Watchdog match yet.','The CRM address was not strong enough to attach public-record facts safely.',result.candidates||[]);
+    setError('No confident Watchdog match yet.','The CRM address was read, but the public-record match was not strong enough to attach facts safely.',result.candidates||[]);
   }catch(error){setError('Watchdog lookup is unavailable.',error.message==='lookup_rate_limited'?'This extension session reached its hourly lookup guard. Try again later.':'The request failed safely. Nothing was written to BoldTrail.');}
 }
 function renderCandidates(items){const host=$('wdc-candidates');host.innerHTML='';(items||[]).forEach(item=>{const b=document.createElement('button');b.className='wdc-candidate';b.type='button';const strong=document.createElement('b');strong.textContent=item.address;const sub=document.createElement('span');sub.textContent=[item.town,'NJ',item.zip].filter(Boolean).join(', ');b.append(strong,sub);b.addEventListener('click',()=>lookup({address:item.address,city:item.town,state:'NJ',zip:item.zip}));host.appendChild(b);});}
