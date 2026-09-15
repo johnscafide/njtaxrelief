@@ -1,0 +1,186 @@
+<!doctype html>
+<html lang="en" data-access-require="agent">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+  <meta name="robots" content="noindex,nofollow">
+  <meta name="theme-color" content="#0a0e17">
+  <title>Agent Contacts | Watchdog</title>
+  <link rel="icon" type="image/png" href="/favicon-96x96.png">
+  <link rel="manifest" href="/property/manifest.webmanifest">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+  <link rel="stylesheet" href="/styles.css">
+  <link rel="stylesheet" href="/property/css/shared.css">
+  <link rel="stylesheet" href="/property/css/plan-context.css">
+  <link rel="stylesheet" href="/property/css/app-shell-2027.css">
+  <link rel="stylesheet" href="/agent/contacts/contacts.css">
+</head>
+<body data-sidebar-page="agent-contacts" data-plan-auto="true">
+  <main class="acx-page" id="acx-app" aria-busy="true">
+    <nav class="acx-worknav" aria-label="Agent workspace">
+      <div class="acx-worknav-title"><span class="acx-mini-logo"><i class="fa-solid fa-address-book" aria-hidden="true"></i></span><div><small>AGENT WORKSPACE</small><b>Contacts</b></div></div>
+      <div class="acx-worknav-links">
+        <a class="active" href="/agent/contacts/" aria-current="page"><i class="fa-solid fa-address-book" aria-hidden="true"></i>Contacts</a>
+        <a href="/property/agent-desk/"><i class="fa-solid fa-bullseye" aria-hidden="true"></i>Agent Control</a>
+        <a href="/property/marketing-studio/"><i class="fa-solid fa-wand-magic-sparkles" aria-hidden="true"></i>Marketing</a>
+        <a href="/property/integrations/"><i class="fa-solid fa-plug" aria-hidden="true"></i>Integrations</a>
+      </div>
+      <button class="acx-nav-upload" id="acx-nav-upload" type="button"><i class="fa-solid fa-plus" aria-hidden="true"></i><span>New contact file</span></button>
+    </nav>
+
+    <section class="acx-hero" aria-labelledby="acx-title">
+      <div class="acx-hero-copy">
+        <div class="acx-eyebrow"><span>WATCHDOG FOR AGENTS</span><em><i class="fa-solid fa-circle-check" aria-hidden="true"></i> Included with Agent</em></div>
+        <h1 id="acx-title">Your database, cleaned up.</h1>
+        <p id="acx-greeting">Upload a contact file, fix the messy parts, and move a clean database wherever you work next.</p>
+        <div class="acx-hero-actions">
+          <button class="acx-btn acx-btn-primary" id="acx-hero-upload" type="button"><i class="fa-solid fa-arrow-up-from-bracket" aria-hidden="true"></i>Upload contacts</button>
+          <button class="acx-btn acx-btn-quiet" id="acx-open-guide" type="button"><i class="fa-regular fa-circle-question" aria-hidden="true"></i>How CRM import works</button>
+        </div>
+      </div>
+      <div class="acx-hero-visual" aria-label="Contact file workflow">
+        <div class="acx-orbit acx-orbit-one"></div><div class="acx-orbit acx-orbit-two"></div>
+        <div class="acx-hero-file"><i class="fa-solid fa-file-csv" aria-hidden="true"></i><span><b>sphere-september.csv</b><small>Private · saved to your account</small></span><em>CSV</em></div>
+        <div class="acx-hero-flow"><span>UPLOAD</span><i class="fa-solid fa-arrow-right" aria-hidden="true"></i><span>CLEAN</span><i class="fa-solid fa-arrow-right" aria-hidden="true"></i><span>EXPORT</span></div>
+        <div class="acx-hero-targets"><div><i class="fa-solid fa-b" aria-hidden="true"></i><span><b>BoldTrail</b><small>Import-ready</small></span></div><div><i class="fa-solid fa-database" aria-hidden="true"></i><span><b>Any CRM</b><small>Universal CSV</small></span></div></div>
+      </div>
+    </section>
+
+    <section class="acx-overview" aria-label="Contacts overview">
+      <article><span class="acx-stat-icon green"><i class="fa-solid fa-folder-open" aria-hidden="true"></i></span><div><b id="acx-stat-files">—</b><small>files saved</small></div></article>
+      <article><span class="acx-stat-icon blue"><i class="fa-solid fa-users" aria-hidden="true"></i></span><div><b id="acx-stat-rows">—</b><small>rows archived</small></div></article>
+      <article><span class="acx-stat-icon amber"><i class="fa-solid fa-wand-magic-sparkles" aria-hidden="true"></i></span><div><b id="acx-stat-exports">—</b><small>clean exports</small></div></article>
+      <article class="acx-private-stat"><span class="acx-stat-icon slate"><i class="fa-solid fa-shield-halved" aria-hidden="true"></i></span><div><b>Private by default</b><small>Files are account-scoped, not public</small></div></article>
+    </section>
+
+    <section class="acx-shell">
+      <aside class="acx-library" aria-labelledby="acx-library-title">
+        <header><div><span>YOUR LIBRARY</span><h2 id="acx-library-title">Contact files</h2></div><button id="acx-library-refresh" type="button" aria-label="Refresh files"><i class="fa-solid fa-rotate" aria-hidden="true"></i></button></header>
+        <div class="acx-library-tabs" role="group" aria-label="Filter file history">
+          <button class="active" type="button" data-history-filter="all">All</button>
+          <button type="button" data-history-filter="upload">Uploads</button>
+          <button type="button" data-history-filter="export">Exports</button>
+        </div>
+        <div class="acx-history" id="acx-history" aria-live="polite"><div class="acx-skeleton-list"><span></span><span></span><span></span></div></div>
+        <div class="acx-library-note"><i class="fa-solid fa-lock" aria-hidden="true"></i><p><b>Your files stay with your Watchdog account.</b><span>Come back later to reopen the exact CSV you uploaded or download an earlier export.</span></p></div>
+      </aside>
+
+      <div class="acx-workspace">
+        <section class="acx-empty-state" id="acx-empty-state">
+          <div class="acx-drop" id="acx-drop" tabindex="0" role="button" aria-label="Upload a CSV contact file">
+            <input id="acx-file-input" type="file" accept=".csv,text/csv,application/csv,application/vnd.ms-excel,text/plain" hidden>
+            <div class="acx-drop-icon"><i class="fa-solid fa-cloud-arrow-up" aria-hidden="true"></i></div>
+            <span>START A CONTACT WORKSPACE</span>
+            <h2>Drop in the CSV you already have.</h2>
+            <p>Watchdog reads it locally first, identifies common contact fields, flags obvious duplicates, and saves the original privately to your account.</p>
+            <button class="acx-btn acx-btn-primary" id="acx-browse" type="button"><i class="fa-solid fa-folder-open" aria-hidden="true"></i>Choose CSV</button>
+            <small>CSV · up to 25 MB · up to 50,000 contact rows</small>
+          </div>
+          <div class="acx-start-grid">
+            <article><i class="fa-solid fa-table-columns" aria-hidden="true"></i><div><b>Map almost any export</b><span>Watchdog recognizes common headers from spreadsheets, CRMs and address books, then lets you correct the mapping.</span></div></article>
+            <article><i class="fa-solid fa-broom" aria-hidden="true"></i><div><b>See problems before import</b><span>Catch duplicate emails or phones, incomplete rows and obvious email formatting issues before they hit your CRM.</span></div></article>
+            <article><i class="fa-solid fa-arrow-right-arrow-left" aria-hidden="true"></i><div><b>Leave with a usable file</b><span>Export a universal CSV or a BoldTrail-ready version, with a step-by-step handoff guide.</span></div></article>
+          </div>
+        </section>
+
+        <section class="acx-current" id="acx-current" hidden>
+          <header class="acx-current-head">
+            <div class="acx-current-file"><span class="acx-file-mark"><i class="fa-solid fa-file-csv" aria-hidden="true"></i></span><div><small id="acx-current-kicker">CURRENT FILE</small><h2 id="acx-current-name">contacts.csv</h2><p><span id="acx-current-meta">0 rows</span><i aria-hidden="true"></i><span id="acx-current-saved"><i class="fa-solid fa-lock" aria-hidden="true"></i> Saved privately</span></p></div></div>
+            <div class="acx-current-actions"><button class="acx-btn acx-btn-quiet" id="acx-replace" type="button"><i class="fa-solid fa-arrow-up-from-bracket" aria-hidden="true"></i>New file</button><button class="acx-btn acx-btn-primary" id="acx-jump-export" type="button"><i class="fa-solid fa-arrow-right" aria-hidden="true"></i>Export</button></div>
+          </header>
+
+          <div class="acx-steps" aria-label="Contact cleanup steps">
+            <button class="done" type="button" data-step-target="map"><span>1</span><div><b>Upload</b><small>File received</small></div><i class="fa-solid fa-check" aria-hidden="true"></i></button>
+            <button class="active" type="button" data-step-target="map"><span>2</span><div><b>Map</b><small>Match columns</small></div><i class="fa-solid fa-chevron-right" aria-hidden="true"></i></button>
+            <button type="button" data-step-target="review"><span>3</span><div><b>Review</b><small>Clean contacts</small></div><i class="fa-solid fa-chevron-right" aria-hidden="true"></i></button>
+            <button type="button" data-step-target="export"><span>4</span><div><b>Export</b><small>Move to CRM</small></div></button>
+          </div>
+
+          <section class="acx-panel" id="acx-section-map" data-section="map">
+            <div class="acx-panel-head"><div><span>FIELD MAPPING</span><h3>Tell Watchdog what each column means.</h3><p>We made a best guess from your headers. Change anything that does not look right.</p></div><div class="acx-map-score"><b id="acx-map-score">0%</b><small>core fields mapped</small></div></div>
+            <div class="acx-map-grid" id="acx-map-grid"></div>
+            <div class="acx-panel-foot"><span id="acx-map-note"><i class="fa-solid fa-circle-info" aria-hidden="true"></i> Name plus email or phone is the strongest starting point.</span><button class="acx-btn acx-btn-primary" id="acx-review-next" type="button">Review contacts <i class="fa-solid fa-arrow-right" aria-hidden="true"></i></button></div>
+          </section>
+
+          <section class="acx-panel" id="acx-section-review" data-section="review">
+            <div class="acx-panel-head review"><div><span>DATA REVIEW</span><h3>Clean the list before it leaves Watchdog.</h3><p>Edit cells in place. Removing a row only changes this working copy; your original upload remains in your library.</p></div><button class="acx-btn acx-btn-quiet" id="acx-back-map" type="button"><i class="fa-solid fa-arrow-left" aria-hidden="true"></i>Mapping</button></div>
+            <div class="acx-quality" id="acx-quality">
+              <article data-quality="ready"><i class="fa-solid fa-circle-check" aria-hidden="true"></i><div><b id="acx-q-ready">0</b><span>ready contacts</span></div></article>
+              <article data-quality="duplicates"><i class="fa-solid fa-clone" aria-hidden="true"></i><div><b id="acx-q-dupes">0</b><span>possible duplicates</span></div></article>
+              <article data-quality="email"><i class="fa-solid fa-at" aria-hidden="true"></i><div><b id="acx-q-email">0</b><span>email issues</span></div></article>
+              <article data-quality="unreachable"><i class="fa-solid fa-phone-slash" aria-hidden="true"></i><div><b id="acx-q-unreachable">0</b><span>no email or phone</span></div></article>
+            </div>
+            <div class="acx-table-tools">
+              <label class="acx-search"><i class="fa-solid fa-magnifying-glass" aria-hidden="true"></i><input id="acx-search" type="search" placeholder="Search this file" autocomplete="off"></label>
+              <select id="acx-quality-filter" aria-label="Filter contacts"><option value="all">All contacts</option><option value="ready">Ready</option><option value="duplicate">Possible duplicates</option><option value="email">Email issues</option><option value="unreachable">No email or phone</option></select>
+              <button id="acx-remove-selected" type="button" disabled><i class="fa-regular fa-trash-can" aria-hidden="true"></i>Remove selected</button>
+              <span id="acx-visible-count">0 contacts</span>
+            </div>
+            <div class="acx-table-wrap">
+              <table class="acx-table"><thead><tr><th class="check"><input id="acx-select-page" type="checkbox" aria-label="Select visible contacts"></th><th>Name</th><th>Email</th><th>Phone</th><th>Location</th><th>Tags</th><th>Status</th></tr></thead><tbody id="acx-table-body"></tbody></table>
+              <div class="acx-table-empty" id="acx-table-empty" hidden><i class="fa-solid fa-filter-circle-xmark" aria-hidden="true"></i><b>No contacts match this view.</b><span>Clear the search or change the quality filter.</span></div>
+            </div>
+            <div class="acx-pagination"><button id="acx-prev" type="button"><i class="fa-solid fa-chevron-left" aria-hidden="true"></i>Previous</button><span id="acx-page-label">Page 1 of 1</span><button id="acx-next" type="button">Next<i class="fa-solid fa-chevron-right" aria-hidden="true"></i></button></div>
+            <div class="acx-panel-foot"><span><i class="fa-solid fa-shield-halved" aria-hidden="true"></i> Contact edits stay in your browser until you create an export.</span><button class="acx-btn acx-btn-primary" id="acx-export-next" type="button">Choose export <i class="fa-solid fa-arrow-right" aria-hidden="true"></i></button></div>
+          </section>
+
+          <section class="acx-panel" id="acx-section-export" data-section="export">
+            <div class="acx-panel-head review"><div><span>EXPORT</span><h3>Put the cleaned list where you need it.</h3><p>Every CSV created here is also saved privately in your Watchdog file library.</p></div><button class="acx-btn acx-btn-quiet" id="acx-back-review" type="button"><i class="fa-solid fa-arrow-left" aria-hidden="true"></i>Review</button></div>
+            <div class="acx-export-grid">
+              <article class="acx-export-card featured">
+                <div class="acx-export-brand"><span class="acx-bt-mark">bt</span><em>RECOMMENDED FOR OPUS / BOLDTRAIL</em></div>
+                <h4>BoldTrail-ready CSV</h4>
+                <p>Formats the working list into clear real-estate CRM fields for BoldTrail’s contact import mapper: names, email, mobile, source, status, address, notes and tags.</p>
+                <div class="acx-export-preview"><span>First Name</span><span>Last Name</span><span>Email</span><span>Cell Phone 1</span><span>Source</span><span>Tags</span></div>
+                <div class="acx-export-actions"><button class="acx-btn acx-btn-primary" id="acx-export-boldtrail" type="button"><i class="fa-solid fa-download" aria-hidden="true"></i>Export for BoldTrail</button><button class="acx-btn acx-btn-quiet" type="button" data-guide-tab="boldtrail"><i class="fa-solid fa-list-check" aria-hidden="true"></i>Import steps</button></div>
+                <small><i class="fa-solid fa-circle-info" aria-hidden="true"></i> Watchdog’s existing BoldTrail Direct beta is read-only today; this free Agent workflow does not claim to push records into BoldTrail.</small>
+              </article>
+              <article class="acx-export-card">
+                <div class="acx-export-brand generic"><span><i class="fa-solid fa-database" aria-hidden="true"></i></span><em>UNIVERSAL</em></div>
+                <h4>Clean standard CSV</h4>
+                <p>Download a straightforward contact file with common headings that can be mapped into almost any database or CRM.</p>
+                <div class="acx-export-preview"><span>First Name</span><span>Last Name</span><span>Email</span><span>Phone</span><span>City</span><span>Tags</span></div>
+                <div class="acx-export-actions"><button class="acx-btn acx-btn-primary" id="acx-export-generic" type="button"><i class="fa-solid fa-download" aria-hidden="true"></i>Export clean CSV</button><button class="acx-btn acx-btn-quiet" type="button" data-guide-tab="generic"><i class="fa-solid fa-list-check" aria-hidden="true"></i>Import steps</button></div>
+                <small><i class="fa-solid fa-lock" aria-hidden="true"></i> The generated file is archived to your private Watchdog library before download when storage is available.</small>
+              </article>
+            </div>
+            <div class="acx-future"><div><i class="fa-solid fa-plug-circle-plus" aria-hidden="true"></i><span><b>More destinations are coming.</b><small>The export layer is provider-based so Follow Up Boss, Wise Agent and other CRM presets can be added without changing your source file workflow.</small></span></div><a href="/property/integrations/">Open Integration Center <i class="fa-solid fa-arrow-right" aria-hidden="true"></i></a></div>
+          </section>
+        </section>
+      </div>
+    </section>
+  </main>
+
+  <div class="acx-guide" id="acx-guide" hidden>
+    <button class="acx-guide-backdrop" type="button" data-guide-close aria-label="Close import guide"></button>
+    <aside role="dialog" aria-modal="true" aria-labelledby="acx-guide-title">
+      <header><div><span>CRM HANDOFF</span><h2 id="acx-guide-title">Import your cleaned contacts</h2></div><button type="button" data-guide-close aria-label="Close"><i class="fa-solid fa-xmark" aria-hidden="true"></i></button></header>
+      <div class="acx-guide-tabs"><button class="active" type="button" data-guide-view="boldtrail">BoldTrail</button><button type="button" data-guide-view="generic">Any CRM</button></div>
+      <div class="acx-guide-body" data-guide-panel="boldtrail">
+        <div class="acx-guide-callout"><span class="acx-bt-mark">bt</span><p><b>Use BoldTrail’s own contact import screen.</b><span>Watchdog prepares the file; BoldTrail remains the system that accepts and maps it.</span></p></div>
+        <ol><li><span>1</span><div><b>Export for BoldTrail here.</b><p>Start with a small test file if this is your first import into the account.</p></div></li><li><span>2</span><div><b>Open Contacts inside BoldTrail.</b><p>Find the bulk import / contact import workflow available to your account. Brokerage permissions can affect what an individual agent sees.</p></div></li><li><span>3</span><div><b>Upload the Watchdog CSV and confirm mapping.</b><p>Verify name, email, mobile, source, status, address, note and tag fields before continuing.</p></div></li><li><span>4</span><div><b>Check automation before you finish.</b><p>Confirm whether imported contacts will be enrolled in campaigns, assigned to an agent, or receive automated outreach.</p></div></li><li><span>5</span><div><b>Verify a few records after import.</b><p>Open several contacts in BoldTrail and confirm values landed where expected before importing another large batch.</p></div></li></ol>
+        <div class="acx-guide-warning"><i class="fa-solid fa-triangle-exclamation" aria-hidden="true"></i><p><b>Do not assume a bulk import is silent.</b><span>CRM campaigns and texting rules vary by brokerage setup. Review your account’s import options before starting outreach.</span></p></div>
+      </div>
+      <div class="acx-guide-body" data-guide-panel="generic" hidden>
+        <div class="acx-guide-callout generic"><span><i class="fa-solid fa-database" aria-hidden="true"></i></span><p><b>Most CRMs use the same handoff pattern.</b><span>Upload CSV → map headers → review duplicates → choose automation → import.</span></p></div>
+        <ol><li><span>1</span><div><b>Export a clean standard CSV.</b><p>Keep the Watchdog copy in your library as a dated backup of what you moved.</p></div></li><li><span>2</span><div><b>Find Import Contacts in your CRM.</b><p>Look under Contacts, People, Database, Leads, Settings or an Import / Migration area.</p></div></li><li><span>3</span><div><b>Map each Watchdog heading.</b><p>Unmapped fields are usually skipped. Pay special attention to email, phone, source, tags and notes.</p></div></li><li><span>4</span><div><b>Choose duplicate behavior deliberately.</b><p>If the CRM asks whether to skip, merge or overwrite existing contacts, test a few known records first.</p></div></li><li><span>5</span><div><b>Confirm consent and automations.</b><p>A contact being present in your database is not automatically permission for every marketing channel. Follow your brokerage policy and applicable law.</p></div></li></ol>
+      </div>
+    </aside>
+  </div>
+
+  <div class="acx-busy" id="acx-busy" hidden><div><span class="acx-spinner"></span><b id="acx-busy-title">Working on your file…</b><small id="acx-busy-note">Keeping the original safe.</small></div></div>
+  <div class="acx-toast" id="acx-toast" role="status" aria-live="polite" aria-atomic="true"></div>
+
+  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2/dist/umd/supabase.js"></script>
+  <script src="/property/js/supabase-runtime.js"></script>
+  <script src="/property/js/access-guard.js"></script>
+  <script src="/property/js/plan-context.js"></script>
+  <script src="/property/js/app-shell-2027.js"></script>
+  <script src="/property/js/platform-observability.js"></script>
+  <script src="/property/js/pwa.js"></script>
+  <script src="/agent/contacts/contacts.js"></script>
+</body>
+</html>

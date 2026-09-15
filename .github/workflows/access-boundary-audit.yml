@@ -5,12 +5,14 @@ on:
     branches: [main]
     paths:
       - 'api/**'
+      - 'agent/**'
       - 'property/**'
       - 'supabase/**'
       - '.github/workflows/access-boundary-audit.yml'
   pull_request:
     paths:
       - 'api/**'
+      - 'agent/**'
       - 'property/**'
       - 'supabase/**'
       - '.github/workflows/access-boundary-audit.yml'
@@ -28,6 +30,8 @@ jobs:
           python-version: '3.12'
       - name: Verify protected-route and entitlement contracts
         run: node property/scripts/audit_access_boundaries.mjs
+      - name: Verify Agent Contacts privacy and export contract
+        run: node property/tests/agent-contacts-contract.mjs
       - name: Verify full commercial entitlement ladder
         run: node property/tests/entitlement-tier-contract.mjs
       - name: Verify outcome-based plan ladder
