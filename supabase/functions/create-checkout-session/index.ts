@@ -421,8 +421,8 @@ async function readEntitlement(admin: any, userId: string) {
 }
 
 async function redeemBetaTrial(req: Request, body: any, user: any, admin: any, control: any, stripe: Stripe, site: string, isTest: boolean) {
-  if (control.mode !== 'controlled') {
-    return json(req, { error: 'Closed-beta trials are only available while Watchdog is in controlled launch.', code: 'BETA_TRIAL_UNAVAILABLE' }, 403);
+  if (control.mode === 'closed') {
+    return json(req, { error: 'Closed-beta trials are unavailable while Watchdog billing is closed.', code: 'BETA_TRIAL_UNAVAILABLE' }, 403);
   }
 
   const code = normalizeBetaCode(body?.code || body?.beta_code);
