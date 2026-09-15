@@ -5,7 +5,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
   <title>Dashboard | Watchdog Property Intelligence</title>
   <meta name="robots" content="noindex, nofollow">
-  <meta name="theme-color" content="#0e2248">
+  <meta name="theme-color" content="#f7fafe">
   <link rel="canonical" href="https://www.watchdogindex.com/dashboard">
   <link rel="icon" type="image/png" href="/favicon-96x96.png" sizes="96x96">
   <link rel="icon" type="image/svg+xml" href="/favicon.svg">
@@ -14,47 +14,104 @@
   <link rel="manifest" href="/property/manifest.webmanifest">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@600;700;800&family=Inter:wght@400;500;600;700;800&display=swap">
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.9.4/leaflet.min.css">
   <link rel="stylesheet" href="/property/css/shared/00-design-tokens.css">
-  <link rel="stylesheet" href="/property/css/app-shell-2027.css">
   <link rel="stylesheet" href="/property/css/dashboard/watchdog-dashboard.css?v=20260827a">
   <link rel="stylesheet" href="/property/css/dashboard/watchdog-dashboard-hotfix.css?v=20260827e">
   <link rel="stylesheet" href="/property/css/dashboard/watchdog-dashboard-followup.css?v=20260827a">
   <link rel="stylesheet" href="/property/css/dashboard/watchdog-dashboard-visuals.css?v=20260911a">
+  <link rel="stylesheet" href="/property/css/dashboard/watchdog-dashboard-landing-shell.css?v=20260914a">
 </head>
-<body data-sidebar-page="dashboard">
-  <div class="wdd-boot" id="wdd-boot" aria-live="polite">
-    <div class="wdd-boot-card">
-      <span class="wdd-boot-mark"><i class="fas fa-dog" aria-hidden="true"></i></span>
-      <h1>Opening your dashboard</h1>
-      <p id="wdd-boot-msg">Loading your saved properties and current scores.</p>
-      <button type="button" id="wdd-boot-retry" hidden>Reload</button>
+<body data-sidebar-page="dashboard" class="wdm-dashboard-shell">
+  <div class="wdm-shell">
+    <header class="wdm-topbar" aria-label="Watchdog dashboard header">
+      <button class="wdm-menu-toggle" id="wdm-menu-toggle" type="button" aria-label="Open navigation" aria-expanded="false">
+        <i class="fas fa-bars" aria-hidden="true"></i>
+      </button>
+      <a class="wdm-brand" href="/dashboard" aria-label="Watchdog dashboard">
+        <img src="/agent/assets/watchdog-logo.svg" width="178" height="44" alt="Watchdog Property Intelligence">
+      </a>
+      <form class="wdm-search" id="wdm-search-form" role="search">
+        <i class="fas fa-magnifying-glass" aria-hidden="true"></i>
+        <input id="wdm-search-input" type="search" autocomplete="off" placeholder="Search by address, owner, block & lot, or city..." aria-label="Search Watchdog properties">
+        <span class="wdm-search-state"><i class="fas fa-location-dot" aria-hidden="true"></i>NJ <i class="fas fa-chevron-down" aria-hidden="true"></i></span>
+      </form>
+      <div class="wdm-top-actions">
+        <a class="wdm-top-icon" href="/property/" aria-label="Property search"><i class="fas fa-location-dot" aria-hidden="true"></i></a>
+        <button class="wdm-account" id="wdm-account" type="button" aria-haspopup="menu" aria-controls="wdm-account-menu">
+          <span class="wdm-avatar" id="wdm-avatar">W</span>
+          <span class="wdm-account-copy"><b id="wdm-account-name">Watchdog</b><small id="wdm-account-plan">Member</small></span>
+          <i class="fas fa-chevron-down" aria-hidden="true"></i>
+        </button>
+      </div>
+    </header>
+
+    <div class="wdm-body">
+      <aside class="wdm-sidebar" id="wdm-sidebar" aria-label="Watchdog workspace navigation">
+        <nav class="wdm-nav-main">
+          <a class="wdm-nav-link active" href="/dashboard"><i class="fas fa-table-columns" aria-hidden="true"></i><span>Dashboard</span></a>
+          <a class="wdm-nav-link" href="/property/"><i class="fas fa-magnifying-glass" aria-hidden="true"></i><span>Property Search</span></a>
+          <a class="wdm-nav-link" href="/property/agent-desk"><i class="fas fa-bullseye" aria-hidden="true"></i><span>Opportunity Desk</span></a>
+          <a class="wdm-nav-link" href="/property/home"><i class="fas fa-house" aria-hidden="true"></i><span>My Properties</span></a>
+          <a class="wdm-nav-link" href="/property/pulse"><i class="fas fa-bell" aria-hidden="true"></i><span>Change Alerts</span></a>
+          <a class="wdm-nav-link" href="/dashboard#saved"><i class="fas fa-file-lines" aria-hidden="true"></i><span>Reports</span></a>
+          <a class="wdm-nav-link" href="/insights"><i class="fas fa-chart-column" aria-hidden="true"></i><span>Market Insights</span></a>
+          <a class="wdm-nav-link" href="/data-center"><i class="fas fa-database" aria-hidden="true"></i><span>New Jersey Data</span></a>
+        </nav>
+        <nav class="wdm-nav-foot">
+          <div class="wdm-nav-divider" aria-hidden="true"></div>
+          <a class="wdm-nav-link" href="/property/account"><i class="fas fa-gear" aria-hidden="true"></i><span>Settings</span></a>
+          <a class="wdm-nav-link" href="/faq"><i class="far fa-circle-question" aria-hidden="true"></i><span>Help</span></a>
+        </nav>
+      </aside>
+
+      <section class="wdm-stage" aria-label="Dashboard workspace">
+        <section class="wdm-overview" id="wdm-overview" hidden aria-label="Selected property overview"></section>
+
+        <div class="wdd-boot" id="wdd-boot" aria-live="polite">
+          <div class="wdd-boot-card">
+            <span class="wdd-boot-mark"><i class="fas fa-dog" aria-hidden="true"></i></span>
+            <h1>Opening your dashboard</h1>
+            <p id="wdd-boot-msg">Loading your saved properties and current scores.</p>
+            <button type="button" id="wdd-boot-retry" hidden>Reload</button>
+          </div>
+        </div>
+
+        <main class="wdd-app" id="wdd-app" hidden>
+          <section class="wdd-standing" id="wdd-standing" aria-label="Portfolio standing"></section>
+          <section class="wdd-signals" id="wdd-signals" aria-label="Key figures"></section>
+          <div class="wdd-work">
+            <section id="wdd-positions" aria-label="Your properties"></section>
+            <aside class="wdd-rail" id="wdd-rail" aria-label="Activity and partners"></aside>
+          </div>
+          <div class="wdd-newsslot"><div id="wd4-root"></div></div>
+          <section class="wdd-queue" id="wdd-queue" aria-label="Action queue"></section>
+          <footer class="wdd-foot" id="wdd-foot"></footer>
+        </main>
+      </section>
     </div>
   </div>
-  <main class="wdd-app" id="wdd-app" hidden>
-    <section class="wdd-standing" id="wdd-standing" aria-label="Portfolio standing"></section>
-    <section class="wdd-signals" id="wdd-signals" aria-label="Key figures"></section>
-    <div class="wdd-work">
-      <section id="wdd-positions" aria-label="Your properties"></section>
-      <aside class="wdd-rail" id="wdd-rail" aria-label="Activity and partners"></aside>
-    </div>
-    <div class="wdd-newsslot"><div id="wd4-root"></div></div>
-    <section class="wdd-queue" id="wdd-queue" aria-label="Action queue"></section>
-    <footer class="wdd-foot" id="wdd-foot"></footer>
-  </main>
+
+  <div class="wdm-account-menu" id="wdm-account-menu" role="menu" hidden>
+    <a href="/property/account" role="menuitem"><i class="fas fa-user-gear" aria-hidden="true"></i>Account &amp; Billing</a>
+    <a href="/property/home" role="menuitem"><i class="fas fa-house" aria-hidden="true"></i>Property Home</a>
+    <a href="/property/pro" role="menuitem"><i class="fas fa-briefcase" aria-hidden="true"></i>Professional Hub</a>
+    <div class="wdm-account-sep" aria-hidden="true"></div>
+    <button id="wdm-signout" type="button" role="menuitem"><i class="fas fa-arrow-right-from-bracket" aria-hidden="true"></i>Sign out</button>
+  </div>
+
   <button class="wdd-pull" id="wdd-pull" type="button" hidden><i class="fas fa-comment-dots" aria-hidden="true"></i>Watchdog Intelligence</button>
   <div class="wdd-drawer" id="wdd-drawer" hidden></div>
   <div class="wdd-toast" id="wdd-toast" role="status" aria-live="polite"></div>
   <noscript><div class="wdd-boot"><div class="wdd-boot-card"><h1>JavaScript is required</h1><p>The Watchdog dashboard loads your private workspace in the browser.</p></div></div></noscript>
+
   <script src="https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.9.4/leaflet.min.js" defer></script>
   <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2/dist/umd/supabase.js" defer></script>
   <script src="/property/js/supabase-runtime.js" defer></script>
   <script src="/property/js/product-analytics.js" defer></script>
   <script src="/property/js/platform-observability.js" defer></script>
-  <script src="/property/js/app-shell-2027.js" defer></script>
-  <script src="/property/js/watchdog-universal-menu.js?v=20260827d" defer></script>
   <script src="/property/js/brand-consistency-runtime.js?v=20260912a" defer></script>
   <script src="/property/js/dashboard/wd-core.js?v=20260827b" defer></script>
   <script src="/property/js/dashboard/wd-dashboard-polish.js?v=20260827e" defer></script>
@@ -65,5 +122,6 @@
   <script src="/property/js/dashboard/dashboard-nj-news.js?v=20260827a" defer></script>
   <script src="/property/js/dashboard/wd-dashboard-visual-core.js?v=20260911a" defer></script>
   <script src="/property/js/dashboard/wd-dashboard-news-visuals.js?v=20260911a" defer></script>
+  <script src="/property/js/dashboard/watchdog-dashboard-landing-shell.js?v=20260914a" defer></script>
 </body>
 </html>
