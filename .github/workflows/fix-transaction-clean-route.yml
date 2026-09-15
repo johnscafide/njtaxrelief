@@ -1,1 +1,62 @@
 name: Patch Transaction clean route
+
+on:
+  push:
+    branches:
+      - main
+    paths:
+      - .github/workflows/fix-transaction-clean-route.yml
+
+permissions:
+  contents: write
+
+jobs:
+  patch-route:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: main
+          fetch-depth: 0
+
+      - name: Add Transaction redirect and rewrite
+        run: |
+          python - <<'PY'
+          import json
+          from pathlib import Path
+
+          path = Path('vercel.json')
+          data = json.loads(path.read_text())
+
+          redirects = data.setdefault('redirects', [])
+          if not any(x.get('source') == '/transaction/index.html' for x in redirects):
+              redirects.append({
+                  'source': '/transaction/index.html',
+                  'destination': '/transaction',
+                  'permanent': True,
+              })
+
+          rewrites = data.setdefault('rewrites', [])
+          if not any(x.get('source') == '/transaction' for x in rewrites):
+              rewrites.insert(0, {
+                  'source': '/transaction',
+                  'destination': '/transaction/index.html',
+              })
+
+          path.write_text(json.dumps(data, indent=2) + '\n')
+          PY
+
+      - name: Validate Vercel config JSON
+        run: python -m json.tool vercel.json >/dev/null
+
+      - name: Commit route patch
+        run: |
+          if git diff --quiet -- vercel.json; then
+            echo 'No route changes needed.'
+            exit 0
+          fi
+          git config user.name 'github-actions[bot]'
+          git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
+          git add vercel.json
+          git commit -m 'Fix direct /transaction route'
+          git push origin HEAD:main
