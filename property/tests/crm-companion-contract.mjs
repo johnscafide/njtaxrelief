@@ -4,9 +4,11 @@ import fs from 'node:fs';
 const read = (path) => fs.readFileSync(path, 'utf8');
 const manifest = JSON.parse(read('browser-extension/watchdog-crm-companion/manifest.json'));
 const popup = read('browser-extension/watchdog-crm-companion/popup.js');
+const popupWrite = read('browser-extension/watchdog-crm-companion/popup-write-v021.js');
 const popupHtml = read('browser-extension/watchdog-crm-companion/popup.html');
 const content = read('browser-extension/watchdog-crm-companion/content.js');
 const agentIntel = read('browser-extension/watchdog-crm-companion/agent-intel.js');
+const writer = read('browser-extension/watchdog-crm-companion/writer-v021.js');
 const installer = read('agent/contacts/crm-companion-install.js');
 const connect = read('agent/extension/connect/index.html');
 const api = read('supabase/functions/watchdog-crm-companion/index.ts');
@@ -20,16 +22,16 @@ const failures = [];
 const assert = (condition, message) => { if (!condition) failures.push(message); };
 
 assert(manifest.manifest_version === 3, 'CRM Companion must remain Manifest V3.');
-assert(manifest.version === '0.2.0', 'CRM Companion release must be v0.2.0.');
+assert(manifest.version === '0.2.1', 'CRM Companion release must be v0.2.1.');
 assert(Array.isArray(manifest.permissions) && manifest.permissions.includes('storage') && manifest.permissions.includes('activeTab'), 'CRM Companion must keep its explicit storage + activeTab permission model.');
 assert(!manifest.permissions.includes('tabs') && !manifest.permissions.includes('scripting') && !manifest.permissions.includes('webRequest'), 'CRM Companion must not widen to tabs/scripting/webRequest permissions without review.');
 assert((manifest.host_permissions || []).some((x) => x === 'https://app.boldtrail.com/*'), 'BoldTrail must be the only CRM page origin in the first adapter.');
 const boldTrailScript = (manifest.content_scripts || []).find((x) => (x.matches || []).includes('https://app.boldtrail.com/*'));
 assert(!!boldTrailScript, 'BoldTrail content script contract is missing.');
-assert((boldTrailScript?.js || []).includes('content.js') && (boldTrailScript?.js || []).includes('agent-intel.js'), 'BoldTrail must load both the scanner and Agent intelligence write adapter.');
+assert((boldTrailScript?.js || []).includes('content.js') && (boldTrailScript?.js || []).includes('agent-intel.js') && (boldTrailScript?.js || []).includes('writer-v021.js'), 'BoldTrail must load scanner, Agent intelligence adapter, and v0.2.1 writer.');
 
 for (const forbidden of ['SUPABASE_SERVICE_ROLE_KEY', 'sb_secret_', 'service_role']) {
-  assert(!popup.includes(forbidden) && !content.includes(forbidden) && !agentIntel.includes(forbidden), `Browser extension must not contain ${forbidden}.`);
+  assert(!popup.includes(forbidden) && !popupWrite.includes(forbidden) && !content.includes(forbidden) && !agentIntel.includes(forbidden) && !writer.includes(forbidden), `Browser extension must not contain ${forbidden}.`);
 }
 assert(popup.includes('/agent/extension/connect/'), 'Extension must pair through the Watchdog connect page.');
 assert(popup.includes('chrome.storage.local'), 'Opaque extension session must remain local to extension storage.');
@@ -50,17 +52,24 @@ assert(api.includes('lookup_ambiguous') && api.includes('lookup_no_match'), 'Pro
 assert(api.includes('streetSimilarity') && api.includes('levenshtein'), 'v0.2 matcher must score street-name similarity rather than house-number coincidence alone.');
 assert(api.includes('candidate_id') && api.includes('alternatives'), 'v0.2 must support deterministic candidate choice and next-best alternatives.');
 assert(api.includes('property_watchdog_scores') && api.includes('watchdog_score'), 'v0.2 must expose sourced Watchdog Score when available.');
+assert(api.includes('property_id:clean(row.pams_pin') || api.includes('property_id: clean(row.pams_pin'), 'Lookup response must carry exact PAMS PIN for a governed Watchdog property link.');
 assert(api.includes('dwelling_units') && api.includes('building_description'), 'v0.2 must expose expanded Agent property facts.');
 assert(popup.includes('candidate_id:item.id') && popup.includes('renderAlternatives'), 'Popup must use deterministic ranked alternatives.');
 assert(popup.includes('fieldSearch') && popup.includes('fieldCategory') && popup.includes('fieldSort'), 'Agent data picker must support search, filter, and sort.');
-assert(popup.includes('WATCHDOG_APPLY_AGENT_INTEL') && agentIntel.includes('WATCHDOG_APPLY_AGENT_INTEL'), 'Expanded Agent write flow must require an explicit apply message.');
 assert(popupHtml.includes('wdc-field-search') && popupHtml.includes('wdc-field-category') && popupHtml.includes('wdc-field-sort'), 'Agent picker controls must be present in the popup UI.');
-assert(installer.includes("VERSION='0.2.0'") && installer.includes("'agent-intel.js'") && installer.includes("'popup-v02.css'"), 'Agent Contacts beta installer must package the complete v0.2.0 extension.');
+
+assert(popupHtml.includes('popup-write-v021.js') && popupWrite.includes('WATCHDOG_APPLY_PROPERTY_V021'), 'v0.2.1 popup must route explicit writes through the reliable write adapter.');
+assert(writer.includes('WATCHDOG_APPLY_PROPERTY_V021'), 'v0.2.1 writer must remain behind the explicit popup apply message.');
+assert(writer.includes('FIELD_LABELS') && writer.includes('aliasScore') && writer.includes('findBestField'), 'v0.2.1 must semantically match Watchdog facts to existing BoldTrail fields.');
+assert(writer.includes('if(current&&current!==value){skipped.push'), 'v0.2.1 must refuse conflicting non-empty CRM fields.');
+assert(writer.includes('enterEditMode') && writer.includes('saveContactEdits'), 'v0.2.1 must support explicit contact edit + persistence when fields are not already editable.');
+assert(writer.includes('add note') && writer.includes('persistNote') && writer.includes('WATCHDOG PROPERTY INTELLIGENCE'), 'v0.2.1 must use a sourced BoldTrail note fallback instead of failing silently.');
+assert(writer.includes('Watchdog Score:') && writer.includes('Sourced from Watchdog:') && writer.includes('Public-record warehouse verified:'), 'Fallback note must carry Watchdog Score and sourcing/verification dates.');
+assert(writer.includes('https://www.watchdogindex.com/home?pin=') && writer.includes('property_id'), 'Fallback note must deep-link to the exact Watchdog property record.');
+assert(installer.includes("VERSION='0.2.1'") && installer.includes("'writer-v021.js'") && installer.includes("'popup-write-v021.js'"), 'Agent Contacts beta installer must package the complete v0.2.1 extension.');
 
 assert(!/read\(\s*\[\s*['"](?:email|phone|name)/i.test(content), 'BoldTrail scanner must not read contact name/email/phone fields.');
-assert(!/LABELS\s*=\s*\{[^}]*\b(?:email|phone|name)\b/i.test(agentIntel), 'Agent intelligence adapter must not target CRM identity fields.');
-assert(agentIntel.includes('WATCHDOG VERIFIED PROPERTY'), 'CRM write must preserve a visibly sourced Watchdog note.');
-assert(agentIntel.includes('if(current&&current!==value){skipped.push'), 'Expanded CRM custom-field writes must refuse non-empty conflicting values.');
+assert(!/FIELD_LABELS\s*=\s*\{[^}]*\b(?:email|phone|name)\b/i.test(writer), 'v0.2.1 writer must not target CRM identity fields.');
 assert(content.includes('WATCHDOG_SCAN_CONTACT'), 'BoldTrail scanner must remain behind the explicit popup scan message.');
 
 for (const sql of [migrationPair, migrationSessions, migrationEvents]) {
@@ -76,10 +85,11 @@ if (failures.length) {
 
 console.log(JSON.stringify({
   passed: true,
-  contract: 'watchdog-crm-companion-v2',
-  checks: 42,
+  contract: 'watchdog-crm-companion-v2.1',
+  checks: 51,
   matching: 'street-dominant-ranked-candidates',
-  agent_data: 'search-filter-sort-explicit-selection',
+  writes: 'semantic-empty-fields-with-sourced-note-fallback',
+  evidence: 'watchdog-score-date-and-exact-property-link',
   privacy: 'no-contact-identity-telemetry',
   entitlement: 'agent-or-higher-paid'
 }, null, 2));
