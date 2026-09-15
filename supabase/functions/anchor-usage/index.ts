@@ -8,14 +8,22 @@ function origin(req: Request) {
   const value = req.headers.get("origin") || "";
   try {
     const host = new URL(value).hostname.toLowerCase();
-    if (host === "njpropertytaxrelief.com" || host === "www.njpropertytaxrelief.com" || host === "localhost" || host === "127.0.0.1" || host.endsWith(".vercel.app")) return value;
+    if (
+      host === "njpropertytaxrelief.com" ||
+      host === "www.njpropertytaxrelief.com" ||
+      host === "watchdogindex.com" ||
+      host === "www.watchdogindex.com" ||
+      host === "localhost" ||
+      host === "127.0.0.1" ||
+      host.endsWith(".vercel.app")
+    ) return value;
   } catch {}
-  return "https://njpropertytaxrelief.com";
+  return "https://www.watchdogindex.com";
 }
 function headers(req: Request) {
   return {
     "Access-Control-Allow-Origin": origin(req),
-    "Access-Control-Allow-Headers": "authorization, apikey, content-type",
+    "Access-Control-Allow-Headers": "authorization, apikey, content-type, x-client-info",
     "Access-Control-Allow-Methods": "POST,OPTIONS",
     "Content-Type": "application/json",
     "Cache-Control": "no-store",
@@ -72,7 +80,7 @@ Deno.serve(async (req: Request) => {
       ok: true,
       people_count: peopleResult.count || 0,
       total_uses: usageResult.count || 0,
-      people_count_source: "one-per-user relief profile",
+      people_count_source: "unique application users",
       testimonials,
     });
   }
