@@ -39,6 +39,7 @@ const wrappedServe = ((first: unknown, second?: unknown) => {
         await invokeProvider("transaction-hls-evidence", url, authorization, apiKey, body, 30000);
         await invokeProvider("transaction-cite-evidence", url, authorization, apiKey, body, 30000);
         await invokeProvider("transaction-tax-sale-route", url, authorization, apiKey, body, 15000);
+        await invokeProvider("transaction-code-violation-route", url, authorization, apiKey, body, 15000);
         await invokeProvider("transaction-energy-evidence", url, authorization, apiKey, body, 30000);
         await invokeProvider("transaction-municipal-requirements", url, authorization, apiKey, body, 30000);
         await invokeProvider("transaction-county-evidence", url, authorization, apiKey, body, 15000);
