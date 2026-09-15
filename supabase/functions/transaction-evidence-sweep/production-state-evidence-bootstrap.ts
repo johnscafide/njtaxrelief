@@ -1,6 +1,6 @@
 // Production wrapper: run the certified Transaction evidence sweep first, then
-// layer annual state evidence and live municipal/county evidence on top. This
-// ordering prevents weaker discovery results from overwriting stronger live facts.
+// layer annual state, live municipal, energy, municipal-requirement and county
+// evidence on top. Strong live observations are applied after generic discovery.
 import "jsr:@supabase/functions-js/edge-runtime.d.ts";
 
 const nativeServe = Deno.serve.bind(Deno);
@@ -37,6 +37,8 @@ const wrappedServe = ((first: unknown, second?: unknown) => {
         await invokeProvider("transaction-munidex-evidence", url, authorization, apiKey, body, 30000);
         await invokeProvider("transaction-hls-evidence", url, authorization, apiKey, body, 30000);
         await invokeProvider("transaction-cite-evidence", url, authorization, apiKey, body, 30000);
+        await invokeProvider("transaction-energy-evidence", url, authorization, apiKey, body, 30000);
+        await invokeProvider("transaction-municipal-requirements", url, authorization, apiKey, body, 30000);
         await invokeProvider("transaction-county-evidence", url, authorization, apiKey, body, 15000);
       }
     }
