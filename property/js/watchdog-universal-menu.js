@@ -5,7 +5,7 @@
   if(window.__WATCHDOG_UNIVERSAL_MENU__) return;
   window.__WATCHDOG_UNIVERSAL_MENU__ = true;
 
-  var VERSION = '20260824b';
+  var VERSION = '20260913a';
   /* CSS has a longer browser/CDN cache lifetime than this runtime. Keep a
      separate asset revision so interaction fixes can invalidate cached chrome
      immediately without coupling that cache key to the menu data contract. */
@@ -94,6 +94,7 @@
       {key:'robust',href:route('/robust/'),icon:'fa-gauge-high',label:'ROBUST Framework'},
       {key:'pulse',href:route('/pulse'),icon:'fa-wave-square',label:'Property Pulse'}
     ];
+    if(state.ready && can('pro_plus')) out.push({key:'today',href:route('/intelligence/daily'),icon:'fa-inbox',label:'Today'});
     if(state.ready && isAgent()) out.push({key:'agent-desk',href:route('/agent-desk'),icon:'fa-bullseye',label:'Agent Control'});
     if(state.ready && can('pro_plus')) out.push({key:'scan',href:route('/scan'),icon:'fa-magnifying-glass-chart',label:'Appeal Scanner'});
     if(state.ready && can('agent')) out.push({key:'data-workbench',href:route('/data-workbench'),icon:'fa-table-list',label:'Data Workbench'});
@@ -143,6 +144,7 @@
     '</a>';
   }
   function activeFor(item,page){
+    if(item.key === 'today') return page === 'intelligence' && /\/intelligence\/daily\/?$/.test(location.pathname || '');
     if(item.key === 'robust') return page === 'robust';
     return item.key === page;
   }

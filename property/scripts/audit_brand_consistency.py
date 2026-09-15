@@ -42,7 +42,7 @@ CANONICAL_NAV = [
     "Property Home",
     "Town Compare",
     "ROBUST Framework",
-    "Change Intelligence",
+    "Property Pulse",
     "Agent Control",
     "Appeal Scanner",
     "Data Workbench",

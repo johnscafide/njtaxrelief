@@ -27,15 +27,16 @@ must(runtime.includes("flowType: 'pkce'"),'Runtime must keep the shared PKCE aut
 must(runtime.includes("out.set('apikey', selected.key)"),'Runtime must rewrite legacy publishable API-key headers.');
 must(runtime.includes("out.set('authorization', 'Bearer ' + selected.key)"),'Runtime must rewrite legacy publishable bearer headers.');
 
-must(nav.includes('/property/js/supabase-runtime.js'),'Public property bootstrap must synchronously load the canonical Supabase runtime.');
+must(index.includes('/property/js/supabase-runtime.js'),'Public property entrypoint must synchronously load the canonical Supabase runtime.');
 must(!nav.includes('https://'+productionRef+'.supabase.co'),'Public nav must not duplicate production Supabase configuration.');
 must(!nav.includes('https://'+stagingRef+'.supabase.co'),'Public nav must not duplicate staging Supabase configuration.');
 must(nav.includes('opaqueCrossOrigin'),'Public bootstrap must identify opaque cross-origin script errors.');
 must(nav.includes('stopImmediatePropagation'),'Public bootstrap must stop only classified non-fatal error noise before the legacy fatal listener.');
 
+const runtimePos=index.indexOf('/property/js/supabase-runtime.js');
 const navPos=index.indexOf('/property/js/public-nav.js');
 const lookupPos=index.indexOf('/property/js/lookup.js');
-must(navPos>=0 && lookupPos>navPos,'Public nav/runtime bootstrap must execute before lookup.js.');
+must(runtimePos>=0 && navPos>runtimePos && lookupPos>navPos,'Canonical Supabase runtime and public nav must execute before lookup.js.');
 
 must(anchorMigration.includes('anchor_calculator_uses'),'Primary Supabase must own the consolidated ANCHOR usage counter.');
 must(anchorMigration.includes('revoke all on table public.anchor_calculator_uses from public, anon, authenticated'),'Raw calculator usage rows must not be client-readable/writable.');
@@ -56,9 +57,12 @@ must(anchorBridge.includes(`https://${productionRef}.supabase.co/functions/v1/an
 must(anchorBridge.includes("usage('count')"),'ANCHOR bridge must route weekly reads through the count action.');
 must(anchorBridge.includes("usage('record')"),'ANCHOR bridge must route writes through the record action.');
 
-for (const path of ['property/js/supabase-runtime.js','property/js/public-nav.js','anchor-watchdog-bridge.js']) {
+// Auth/data-boundary scripts stay on stable canonical URLs. Public-nav may
+// intentionally cache-bust presentation-only assets while those boundaries remain fixed.
+for (const path of ['property/js/supabase-runtime.js','anchor-watchdog-bridge.js']) {
   must(!read(path).match(/\.js\?v=|\.css\?v=/),`${path} must not introduce version-query asset URLs.`);
 }
+must(index.includes('src="/property/js/supabase-runtime.js"'),'Public entrypoint must use the canonical unversioned Supabase runtime URL.');
 
 // Social auth provider + redirect contract.
 must(runtime.includes("google: { label:'Google', enabled:true }"),'Google sign-in must remain enabled.');

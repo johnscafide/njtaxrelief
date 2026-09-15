@@ -8,17 +8,13 @@ const failures = [];
 const assert = (condition, message) => { if (!condition) failures.push(message); };
 
 const clientHistoryColumns = 'pams_pin,marker_id,score,observed_at,model_version';
-const dashboard = read('property/js/dashboard/dashboard-exact.js');
+const dashboardHtml = read('property/dashboard/index.html');
 const propertyDashboard = read('property/js/dashboard/home/property-dashboard.js');
 const homeBridge = read('property/js/watchdog-home-semantic-bridge.js');
 
-const dashboardQuery = dashboard.match(/from\(['"]score_observations['"]\)\.select\(['"]([^'"]+)['"]\)/);
-assert(Boolean(dashboardQuery), '2027 Dashboard must contain a score_observations select.');
-if (dashboardQuery) {
-  assert(dashboardQuery[1] === clientHistoryColumns, `2027 Dashboard score history columns must be exactly ${clientHistoryColumns}.`);
-  assert(!/observed_on|evidence_coverage|user_id/.test(dashboardQuery[1]), '2027 Dashboard must not widen the governed browser history projection with legacy/internal columns.');
-}
-assert(!/r\.observed_at\s*\|\|\s*r\.observed_on/.test(dashboard), '2027 Dashboard must use observed_at only for score history dates.');
+// The consolidated 2027 Dashboard no longer loads the retired dashboard-exact
+// reader. Govern the browser readers that still query score_observations.
+assert(!dashboardHtml.includes('dashboard-exact.js'), '2027 Dashboard must not reintroduce the retired dashboard-exact score-history reader.');
 
 const historyBlock = propertyDashboard.match(/function loadScoreHistory\(pin\) \{([\s\S]*?)\n  \}\n\n  function paidPlan/);
 assert(Boolean(historyBlock), 'Property Dashboard loadScoreHistory block must exist.');
@@ -56,5 +52,5 @@ console.log(JSON.stringify({
   contract: 'score-observations-client-history-v2',
   columns: clientHistoryColumns.split(','),
   ownership: 'supabase-rls',
-  readers: ['dashboard-exact.js', 'home/property-dashboard.js', 'watchdog-home-semantic-bridge.js']
+  readers: ['home/property-dashboard.js', 'watchdog-home-semantic-bridge.js']
 }, null, 2));
