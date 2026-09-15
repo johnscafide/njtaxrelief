@@ -28,7 +28,9 @@ for (const [source, expected] of [
 }
 
 assert(/data-access-require=["']agent["']/.test(dataWorkbench), 'Data Workbench must remain Agent-or-higher.');
-assert(/data-access-require=["']pro_plus["']/.test(dataCenter), 'Data Center must remain Pro+-or-higher.');
+// NJW-98 made the catalog public; execution and account-owned datasets stay Pro+.
+assert(!/data-access-require=/.test(dataCenter), 'Data Center catalog must remain public.');
+assert(read('property/js/data-center-runtime-v2.js').includes("required_plan: 'pro_plus'"), 'Private Data Center execution must remain Pro+-or-higher.');
 
 for (const tier of ['standard', 'agent', 'pro', 'pro_plus', 'teams']) {
   assert(migration.includes(`'${tier}'::text`), `Production entitlement constraint must include ${tier}.`);

@@ -1,7 +1,7 @@
-/* Watchdog Agent Control evidence drawer accessibility — mobile/tablet only. */
+/* Watchdog Agent Control evidence drawer keyboard accessibility at every viewport. */
 (function(){
   'use strict';
-  if(!window.matchMedia||!window.matchMedia('(max-width: 760px)').matches)return;
+
 
   var drawer=document.getElementById('ad-drawer');
   var close=document.getElementById('ad-drawer-close');
