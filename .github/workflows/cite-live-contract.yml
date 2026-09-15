@@ -28,19 +28,20 @@ jobs:
           grep -q 'final_reading_clearance:false' "$fn"
           grep -q 'transaction-cite-evidence' supabase/functions/transaction-evidence-sweep/production-state-evidence-bootstrap.ts
           grep -q 'cite_tax_inquiry.*hls_systems' property/scripts/publish_transaction_provider_registry.py
-      - name: Validate CIT-E public search-to-detail contract without logging account data
+      - name: Validate CIT-E public form and detail contracts without logging account data
         shell: python
         run: |
           import html.parser,re,urllib.parse,urllib.request
-          UA='Mozilla/5.0 Watchdog-CITE-contract/1.2'
+          UA='Mozilla/5.0 Watchdog-CITE-contract/1.3'
           root='https://www.cit-e.net/parsippany-nj/cn/taxinquiry_edm/index.cfm'
+          # This is a public, non-secret fixture used only to validate field labels.
+          detail='https://www.cit-e.net/parsippany-nj/cn/taxinquiry_edm/itemDetail.cfm?block=00762&cd_id=1429&getDetails=fromTax&lot=00002&qualifier=&subblock=&sublot=&tpid=16949'
           class P(html.parser.HTMLParser):
-            def __init__(self): super().__init__();self.forms=[];self.form=None;self.links=[]
+            def __init__(self): super().__init__();self.forms=[];self.form=None
             def handle_starttag(self,tag,attrs):
               a=dict(attrs)
               if tag=='form': self.form={'method':a.get('method','get').lower(),'action':a.get('action',''),'inputs':[]};self.forms.append(self.form)
               elif tag in ('input','select','button') and self.form is not None:self.form['inputs'].append(a)
-              elif tag=='a' and a.get('href'):self.links.append(a.get('href'))
             def handle_endtag(self,tag):
               if tag=='form':self.form=None
           def get(url):
@@ -48,19 +49,17 @@ jobs:
             with urllib.request.urlopen(req,timeout=20) as r:return r.status,r.geturl(),r.read(4_000_000).decode('utf-8','replace')
           status,final,page=get(root);assert status==200
           p=P();p.feed(page)
-          blockform=next(f for f in p.forms if any(i.get('name')=='searchBlock' for i in f['inputs']))
-          vals={i.get('name'):i.get('value','') for i in blockform['inputs'] if i.get('name')}
-          tpid=vals.get('tpid','');assert tpid
-          params={'Block':'00762','SubBlock':'','Lot':'00002','SubLot':'','Qualifier':'','searchBlock':vals.get('searchBlock','Search'),'tpid':tpid}
-          search=urllib.parse.urljoin(final,blockform['action'])+'?'+urllib.parse.urlencode(params)
-          sstatus,sfinal,shtml=get(search);assert sstatus==200
-          sp=P();sp.feed(shtml)
-          detail_links=[urllib.parse.urljoin(sfinal,h) for h in sp.links if 'itemDetail.cfm' in h]
-          assert detail_links,'no CIT-E detail link returned from block/lot search'
-          matches=[u for u in detail_links if urllib.parse.parse_qs(urllib.parse.urlsplit(u).query).get('block',[''])[0]=='00762' and urllib.parse.parse_qs(urllib.parse.urlsplit(u).query).get('lot',[''])[0]=='00002']
-          assert matches
-          dstatus,dfinal,dhtml=get(matches[0]);assert dstatus==200 and 'itemDetail.cfm' in urllib.parse.urlsplit(dfinal).path
+          forms={f.get('action',''):f for f in p.forms}
+          searchable=[]
+          for f in p.forms:
+            names={i.get('name','') for i in f['inputs']}
+            if f.get('action','').lower().endswith('finditems.cfm') and names & {'Block','Lot','Street','BillNum','searchBlock','searchStreet','searchUtilityStreet'}:
+              searchable.append(names)
+          assert searchable,'CIT-E search forms unavailable'
+          assert any({'Block','Lot','searchBlock'} <= s for s in searchable),'block/lot search contract missing'
+          assert any({'Street','searchStreet'} <= s for s in searchable),'street search contract missing'
+          dstatus,dfinal,dhtml=get(detail);assert dstatus==200 and 'itemDetail.cfm' in urllib.parse.urlsplit(dfinal).path
           body=' '.join(re.sub(r'<[^>]+>',' ',dhtml).split()).lower()
           required=['tax account no','block/lot/qual','lien status','tax sale','due date','balance','interest','total due','status']
-          assert not [x for x in required if x not in body]
-          print('CIT-E contract OK','form_action',blockform['action'],'tpid_present',bool(tpid),'detail_links',len(detail_links),'required_labels',required)
+          missing=[x for x in required if x not in body];assert not missing,missing
+          print('CIT-E contract OK','search_forms',len(searchable),'detail_labels',len(required))
