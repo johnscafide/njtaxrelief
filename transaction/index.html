@@ -18,6 +18,7 @@
   <link rel="stylesheet" href="/transaction/transaction.css?v=20260915a">
   <link rel="stylesheet" href="/transaction/evidence-first.css?v=20260916b">
   <link rel="stylesheet" href="/transaction/command-center-polish.css?v=20260916c">
+  <link rel="stylesheet" href="/transaction/add-flow-fix.css?v=20260916a">
 </head>
 <body data-sidebar-page="transaction" data-plan-auto="true">
   <main class="tx-page">
@@ -41,7 +42,7 @@
         </div>
         <div class="tx-command-actions">
           <button class="tx-btn" type="button" data-tx-action="bulk"><i class="fas fa-layer-group"></i> Bulk add</button>
-          <button class="tx-btn tx-btn-primary" type="button" data-tx-action="add"><i class="fas fa-plus"></i> Add transaction</button>
+          <button class="tx-btn tx-btn-primary" type="button" data-tx-hidden-action="add"><i class="fas fa-plus"></i> Add transaction</button>
         </div>
       </section>
 
@@ -56,7 +57,7 @@
         <aside class="tx-portfolio" aria-label="Transactions">
           <div class="tx-portfolio-head">
             <div><span class="tx-eyebrow">PORTFOLIO</span><h3>Transactions</h3></div>
-            <button type="button" class="tx-icon-btn" data-tx-action="add" aria-label="Add transaction"><i class="fas fa-plus"></i></button>
+            <button type="button" class="tx-icon-btn" data-tx-action="add" aria-label="Add transaction" title="Add transaction"><i class="fas fa-plus"></i></button>
           </div>
           <div class="tx-filter-row">
             <label class="tx-search"><i class="fas fa-magnifying-glass"></i><input id="tx-search" type="search" placeholder="Search address, client or agent"></label>
