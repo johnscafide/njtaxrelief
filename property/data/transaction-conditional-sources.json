@@ -1,5 +1,5 @@
 {
-  "schema_version": 2,
+  "schema_version": 3,
   "updated_at": "2026-09-16",
   "purpose": "Authoritative source candidates for conditional Transaction Command Center evidence. Discovery does not imply a completed search, clearance, legal conclusion, or property-specific match.",
   "guardrails": {
@@ -8,9 +8,46 @@
     "never_treat_solar_presence_as_lease_ppa_or_ucc_proof": true,
     "never_treat_environmental_proximity_as_subject_property_case": true,
     "never_report_none_without_completed_authoritative_search": true,
+    "never_infer_address_collection_day_from_municipality_only": true,
     "identity_based_searches_require_verification": true
   },
   "statewide_sources": [
+    {
+      "id": "njdep_recycle_coach",
+      "label": "NJDEP Recycle Coach",
+      "agency": "NJ Department of Environmental Protection",
+      "mode": "official_interactive_schedule",
+      "url": "https://dep.nj.gov/dshw/rhwm/recycle-coach/",
+      "transaction_uses": ["trash_schedule", "recycling_schedule", "collection_notifications", "what_goes_where", "move_in_services"],
+      "semantics": "NJDEP provides statewide Recycle Coach access for municipal trash and recycling schedules. Watchdog may identify the municipality for every resolved NJ parcel, but it must show an address-specific pickup day only when an authoritative address or route match is actually resolved."
+    },
+    {
+      "id": "njdep_recycling_coordinator_registry",
+      "label": "NJDEP County and Municipal Recycling Coordinators",
+      "agency": "NJ Department of Environmental Protection",
+      "mode": "official_public_registry",
+      "url": "https://dep.nj.gov/dshw/rhwm/recycoor/county-municipal-recycling-coordinators/",
+      "transaction_uses": ["municipal_recycling_contact", "public_works_followup", "move_in_services"],
+      "semantics": "Use the current state registry to retrieve the municipality's recycling coordinator/contact. The registry identifies the responsible local contact but does not by itself determine a household collection route."
+    },
+    {
+      "id": "njdep_csrr_exact_parcel",
+      "label": "NJDEP Site Remediation exact parcel evidence",
+      "agency": "NJ Department of Environmental Protection",
+      "mode": "official_arcgis_exact_parcel",
+      "url": "https://dep.nj.gov/srp/gis/",
+      "transaction_uses": ["site_remediation_case", "deed_notice", "classification_exception_area", "regulated_ust", "brownfield_status"],
+      "semantics": "Watchdog may attribute CSRR evidence to the subject only after exact municipality code plus block/lot matching. Nearby environmental features remain context only and are never promoted to subject-property records."
+    },
+    {
+      "id": "fema_nfhl_subject_address",
+      "label": "FEMA National Flood Hazard Layer",
+      "agency": "Federal Emergency Management Agency",
+      "mode": "official_gis_subject_address",
+      "url": "https://www.fema.gov/flood-maps/national-flood-hazard-layer",
+      "transaction_uses": ["fema_flood_zone", "special_flood_hazard_area", "flood_disclosure_support"],
+      "semantics": "Use the subject-address geocode against FEMA NFHL for mapped flood-zone evidence. This is not a lender flood determination, elevation certificate, insurance quote or guarantee of flood conditions."
+    },
     {
       "id": "njdep_flood_disclosure",
       "label": "NJDEP Flood Disclosure Law and Flood Risk Notification Tool",
@@ -104,6 +141,20 @@
     }
   ],
   "provider_families": [
+    {
+      "id": "municipal_public_works",
+      "scope": "municipality_or_route",
+      "transaction_uses": ["trash_schedule", "recycling_schedule", "bulk_pickup", "yard_waste", "special_collection", "move_in_services"],
+      "discovery_strategy": "Official municipal Public Works, sanitation, recycling or route source, with route/address resolution only when the source exposes enough information to match the subject.",
+      "semantics": "Municipality-wide service rules can be shown directly. A weekday must not be labeled as the subject property's regular pickup day unless the official route/address evidence resolves that property."
+    },
+    {
+      "id": "municipal_code_enforcement",
+      "scope": "municipality",
+      "transaction_uses": ["open_code_violations", "zoning_violations", "housing_violations", "municipal_code_followup"],
+      "discovery_strategy": "Official municipal code/housing department and parcel-search provider when one exists.",
+      "semantics": "An official department route means Watchdog is connected to the enforcing authority, not that a parcel search has been completed. Show None found only after a governed parcel-level search completed successfully."
+    },
     {
       "id": "county_surrogate",
       "scope": "county",

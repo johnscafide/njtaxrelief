@@ -6,12 +6,21 @@ function normalizeTransactionUrl(){
     try{window.history.replaceState(window.history.state,'','/transaction'+window.location.search+window.location.hash);}catch(e){}
   }
 }
+function loadEvidenceFirst(){
+  if(window.__WATCHDOG_TRANSACTION_EVIDENCE_FIRST__||document.querySelector('script[data-transaction-evidence-first]'))return;
+  var evidence=document.createElement('script');
+  evidence.src='/transaction/evidence-first.js?v=20260916b';
+  evidence.async=false;
+  evidence.dataset.transactionEvidenceFirst='true';
+  document.body.appendChild(evidence);
+}
 function loadRefinements(){
-  if(window.__WATCHDOG_TRANSACTION_REFINEMENTS__||document.querySelector('script[data-transaction-refinements]'))return;
+  if(window.__WATCHDOG_TRANSACTION_REFINEMENTS__||document.querySelector('script[data-transaction-refinements]')){setTimeout(loadEvidenceFirst,0);return;}
   var refinements=document.createElement('script');
-  refinements.src='/transaction/refinements.js?v=20260916a';
+  refinements.src='/transaction/refinements.js?v=20260916b';
   refinements.async=false;
   refinements.dataset.transactionRefinements='true';
+  refinements.addEventListener('load',loadEvidenceFirst,{once:true});
   document.body.appendChild(refinements);
 }
 function loadDocuments(){
@@ -53,16 +62,17 @@ function loadEvidenceAddons(){
 function loadPreflight(){
   if(window.__WATCHDOG_TRANSACTION_AUTO_PREFLIGHT__||document.querySelector('script[data-transaction-preflight]')){setTimeout(loadEvidenceAddons,0);return;}
   if(document.readyState==='loading'){
-    document.write('<script data-transaction-preflight src="/transaction/preflight.js?v=20260915b"><\/script>');
+    document.write('<script data-transaction-preflight src="/transaction/preflight.js?v=20260916b"><\/script>');
     document.write('<script data-transaction-evidence-addons src="/transaction/evidence-addons.js?v=20260915a"><\/script>');
     document.write('<script data-transaction-municipal-clearance src="/transaction/municipal-clearance.js?v=20260915a"><\/script>');
     document.write('<script data-transaction-municipal-status src="/transaction/municipal-status.js?v=20260915a"><\/script>');
     document.write('<script data-transaction-documents src="/transaction/documents.js?v=20260915a"><\/script>');
-    document.write('<script data-transaction-refinements src="/transaction/refinements.js?v=20260916a"><\/script>');
+    document.write('<script data-transaction-refinements src="/transaction/refinements.js?v=20260916b"><\/script>');
+    document.write('<script data-transaction-evidence-first src="/transaction/evidence-first.js?v=20260916b"><\/script>');
     return;
   }
   var script=document.createElement('script');
-  script.src='/transaction/preflight.js?v=20260915b';
+  script.src='/transaction/preflight.js?v=20260916b';
   script.async=false;
   script.dataset.transactionPreflight='true';
   script.addEventListener('load',loadEvidenceAddons,{once:true});
