@@ -563,14 +563,13 @@
       "source": "/insights/:slug.html",
       "destination": "/property/insights/:slug.html",
       "permanent": true
-    },
-    {
-      "source": "/transaction/index.html",
-      "destination": "/transaction",
-      "permanent": true
     }
   ],
   "rewrites": [
+    {
+      "source": "/transaction/",
+      "destination": "/transaction/index.html"
+    },
     {
       "source": "/transaction",
       "destination": "/transaction/index.html"
