@@ -1,0 +1,95 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <title>Watchdog CRM Companion</title>
+  <link rel="stylesheet" href="popup.css">
+  <link rel="stylesheet" href="popup-v02.css">
+</head>
+<body>
+  <main class="wdc-shell">
+    <header class="wdc-topbar">
+      <div class="wdc-brand">
+        <img src="https://www.watchdogindex.com/property/branding/watchdog-logo-horizontal-white.svg" alt="Watchdog Property Intelligence">
+        <span>CRM COMPANION</span>
+      </div>
+      <span class="wdc-status" id="wdc-status">Checking…</span>
+    </header>
+
+    <section class="wdc-panel wdc-connect-panel" id="wdc-connect" hidden>
+      <div class="wdc-product-badge">BOLDTRAIL + WATCHDOG</div>
+      <span class="wdc-kicker">WATCHDOG ACCOUNT REQUIRED</span>
+      <h1>Property intelligence, inside your CRM.</h1>
+      <p>Connect an Agent, Pro, Pro+ or Teams account. Watchdog reads only the BoldTrail contact you intentionally have open and never receives your CRM password or cookies.</p>
+      <div class="wdc-trust-row"><span>Secure pairing</span><span>Source linked</span><span>No silent overwrite</span></div>
+      <button class="wdc-primary" id="wdc-connect-btn" type="button">Connect Watchdog</button>
+      <button class="wdc-secondary" id="wdc-check-btn" type="button" hidden>Check connection</button>
+      <p class="wdc-help" id="wdc-connect-help">Your extension session is revocable and expires after 30 days.</p>
+    </section>
+
+    <section id="wdc-app" hidden>
+      <div class="wdc-contact" id="wdc-contact">
+        <div><span class="wdc-kicker">BOLDTRAIL CONTACT</span><h1 id="wdc-contact-title">Looking for an address…</h1></div>
+        <span class="wdc-dot" aria-hidden="true"></span>
+      </div>
+
+      <section class="wdc-state" id="wdc-state">
+        <div class="wdc-scanner" aria-hidden="true"><span></span></div>
+        <b>Reading the open contact</b>
+        <span>Watchdog waits for BoldTrail to finish rendering, then looks only for the visible property address.</span>
+      </section>
+
+      <section class="wdc-match" id="wdc-match" hidden>
+        <div class="wdc-match-head">
+          <div><span class="wdc-kicker">WATCHDOG VERIFIED PROPERTY</span><h2 id="wdc-address"></h2><p id="wdc-place"></p></div>
+          <span class="wdc-confidence" id="wdc-confidence"></span>
+        </div>
+        <div class="wdc-facts" id="wdc-facts"></div>
+
+        <details class="wdc-alternatives-wrap" id="wdc-alternatives-wrap" hidden>
+          <summary>Other possible matches <span id="wdc-alternatives-count"></span></summary>
+          <div class="wdc-candidates" id="wdc-alternatives"></div>
+        </details>
+
+        <details class="wdc-sources">
+          <summary>Sources &amp; verification</summary>
+          <div id="wdc-source-list"></div>
+        </details>
+
+        <div class="wdc-apply-head">
+          <div><span class="wdc-kicker">AGENT DATA PICKER</span><b>Choose exactly what Watchdog can add.</b><small id="wdc-selected-count">0 selected</small></div>
+          <div class="wdc-select-actions"><button id="wdc-all" type="button">Select all</button><button id="wdc-none" type="button">Clear</button></div>
+        </div>
+
+        <div class="wdc-data-toolbar">
+          <label class="wdc-field-search"><span>Search</span><input id="wdc-field-search" type="search" placeholder="Tax, sale, acreage, county…"></label>
+          <label><span>Filter</span><select id="wdc-field-category"><option value="all">All data</option></select></label>
+          <label><span>Sort</span><select id="wdc-field-sort"><option value="recommended">Recommended</option><option value="category">Category</option><option value="alpha">A–Z</option></select></label>
+        </div>
+
+        <div class="wdc-fields" id="wdc-fields"></div>
+        <button class="wdc-primary" id="wdc-apply" type="button">Add selected data to BoldTrail</button>
+        <p class="wdc-help">Watchdog first matches safe empty BoldTrail fields. Anything without a safe field destination is preserved in a sourced Watchdog note with the score, source date and property link. Existing non-empty CRM fields are kept.</p>
+      </section>
+
+      <section class="wdc-state wdc-error" id="wdc-error" hidden>
+        <div class="wdc-error-mark">!</div>
+        <b id="wdc-error-title">Watchdog could not match this contact.</b>
+        <span id="wdc-error-copy"></span>
+        <div class="wdc-candidates" id="wdc-candidates"></div>
+        <button class="wdc-secondary" id="wdc-retry" type="button">Scan contact again</button>
+      </section>
+    </section>
+
+    <footer class="wdc-footer">
+      <span id="wdc-plan">Watchdog</span>
+      <span class="wdc-footer-dot">•</span>
+      <span>PROPERTY INTELLIGENCE</span>
+      <button id="wdc-disconnect" type="button" hidden>Disconnect</button>
+    </footer>
+  </main>
+  <script src="popup.js"></script>
+  <script src="popup-write-v021.js"></script>
+</body>
+</html>

@@ -98,7 +98,7 @@ async function fixture(mode, width = 1440) {
         if (name !== 'get_agent_usage') throw new Error('Unexpected fixture RPC: ' + name);
         state.rpcCalls++;
         const usage = { properties: rows.agent_farm_properties.length, lists: rows.agent_dynamic_lists.length, territories: rows.agent_territories.length };
-        return { data: { plan: 'agent', usage, limits: { properties: 1000, lists: 10, territories: 10 }, remaining: { properties: 1000 - usage.properties, lists: 10 - usage.lists, territories: 10 - usage.territories } }, error: null };
+        return { data: { plan: 'agent', usage, limits: { properties: 250, lists: 10, territories: 5 }, remaining: { properties: 250 - usage.properties, lists: 10 - usage.lists, territories: 5 - usage.territories } }, error: null };
       },
       functions: { invoke: async () => ({ data: { count: 12 }, error: null }) }
     };
@@ -118,6 +118,8 @@ try {
   const page = first.page;
   await page.getByRole('heading', { name: 'Start with a property you know' }).waitFor();
   assert.equal(await page.locator('#ad-focus a[href="/"]').count(), 1);
+  assert.match(await page.locator('#ad-capacity').innerText(), /0 \/ 250/);
+  assert.doesNotMatch(await page.locator('#ad-coverage').innerText(), /1,000|Plan capacity/);
   assert.equal(await page.locator('#ad-focus a[href="/farm-map"]').count(), 1);
   const before = await page.evaluate(() => ({ rpc: agentFixture.rpcCalls, queries: agentFixture.queries }));
   await page.waitForTimeout(1200);

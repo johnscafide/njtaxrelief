@@ -1,0 +1,25 @@
+name: Transaction WIPP evidence contract
+
+on:
+  pull_request:
+    paths:
+      - 'supabase/functions/transaction-municipal-evidence/**'
+      - 'supabase/functions/transaction-evidence-sweep/production-state-evidence-bootstrap.ts'
+      - 'property/tests/transaction-wipp-evidence-contract.mjs'
+      - '.github/workflows/transaction-wipp-evidence-contract.yml'
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  contract:
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+      - name: Validate WIPP live-evidence semantics
+        run: node property/tests/transaction-wipp-evidence-contract.mjs

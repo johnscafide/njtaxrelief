@@ -1,0 +1,25 @@
+name: Transaction county route quality contracts
+
+on:
+  pull_request:
+    paths:
+      - 'supabase/functions/transaction-county-evidence/**'
+      - 'property/scripts/discover_county_record_sources.py'
+      - 'property/tests/transaction-county-route-ranking-contract.mjs'
+      - 'property/tests/transaction-county-discovery-quality-contract.mjs'
+      - '.github/workflows/transaction-county-route-ranking-contract.yml'
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  contract:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+      - run: node property/tests/transaction-county-route-ranking-contract.mjs
+      - run: node property/tests/transaction-county-discovery-quality-contract.mjs

@@ -36,6 +36,8 @@ try {
   assert(['active','trialing'].includes(entitlement.subscription_status),'Agent subscription must be active or trialing.');
   const {chromium,webkit}=await import('playwright');
   const surfaces=[
+    {name:'contacts',route:'/property/agent/contacts/',ready:'#acx-app[aria-busy="false"]',button:'#acx-open-guide',opened:'#acx-guide'},
+    {name:'transaction',route:'/transaction/',ready:'#tx-app',button:'[data-tx-action="add"]',opened:'#tx-form'},
     {name:'desk',route:'/property/agent-desk/',ready:'#ad-app',button:'#ad-list-new',opened:'#ad-list-form'},
     {name:'farm-builder',route:'/property/farm-builder/',ready:'#fb-form'},
     {name:'farm-map',route:'/property/farm-map/',ready:'#fm-map'},
@@ -64,7 +66,7 @@ try {
         await page.locator(surface.ready).waitFor({state:'visible',timeout:20000});
         assert(!/[?&]access=(signin|restricted)/.test(page.url()),'Agent was redirected by a plan gate.');
         assert.equal(new URL(page.url()).pathname.replace(/\/$/,''),surface.route.replace(/\/$/,''),'Unexpected navigation.');
-        if(surface.button){await page.locator(surface.button).click();await page.locator(surface.opened).waitFor({state:'visible'});}
+        if(surface.button){await page.locator(surface.button).first().click();await page.locator(surface.opened).waitFor({state:'visible'});}
         const width=await page.evaluate(()=>document.documentElement.scrollWidth);
         assert(width<=spec.width+1,`Horizontal overflow: ${width}/${spec.width}`);
         assert.equal(blockedRequests.length,0,'A non-staging Supabase request was attempted.');

@@ -1,0 +1,39 @@
+<!doctype html>
+<html lang="en" data-access-require="agent" class="access-pending">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+  <meta name="robots" content="noindex,nofollow">
+  <meta name="theme-color" content="#0b1b32">
+  <title>Connect CRM Companion | Watchdog</title>
+  <link rel="icon" type="image/png" href="/favicon-96x96.png">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="/agent/extension/connect/connect.css">
+</head>
+<body>
+  <main class="wcx-page">
+    <header class="wcx-brand"><img src="/property/branding/watchdog-logo-horizontal.svg" alt="Watchdog Property Intelligence"><span>CRM COMPANION</span></header>
+    <section class="wcx-card">
+      <div class="wcx-icon" aria-hidden="true">↔</div>
+      <span class="wcx-kicker">BROWSER CONNECTION</span>
+      <h1>Connect this browser to Watchdog.</h1>
+      <p>CRM Companion works beside BoldTrail. It reads only the contact page you intentionally open and sends only the visible property address to Watchdog for public-record matching.</p>
+      <div class="wcx-points">
+        <div><i>1</i><span><b>Watchdog sign-in required</b><small>Agent, Pro, Pro+ and Teams plans are eligible.</small></span></div>
+        <div><i>2</i><span><b>No BoldTrail credentials shared</b><small>Your CRM password, cookies, email and phone data stay in your browser.</small></span></div>
+        <div><i>3</i><span><b>You approve every CRM write</b><small>No background enrichment and no silent overwrites.</small></span></div>
+      </div>
+      <div class="wcx-status" id="wcx-status" role="status"><span class="wcx-spinner" aria-hidden="true"></span><div><b>Checking your Watchdog account…</b><small>This connection request expires after 10 minutes.</small></div></div>
+      <button class="wcx-primary" id="wcx-approve" type="button" disabled>Connect CRM Companion</button>
+      <p class="wcx-warning">Only continue if you opened this page from the Watchdog CRM Companion extension.</p>
+    </section>
+    <footer>Watchdog · sourced property intelligence for New Jersey professionals</footer>
+  </main>
+  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+  <script src="/property/js/supabase-runtime.js"></script>
+  <script src="/property/js/access-guard.js"></script>
+  <script src="/agent/extension/connect/connect.js"></script>
+</body>
+</html>

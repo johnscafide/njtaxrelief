@@ -1,0 +1,182 @@
+{
+  "schema_version": 1,
+  "updated_at": "2026-09-15",
+  "policy": {
+    "owner_name_visibility": ["agent", "pro", "pro_plus", "teams", "developer"],
+    "owner_name_standard_visible": false,
+    "never_infer_clear_from_missing_source": true,
+    "never_bypass_authentication_captcha_or_paid_access": true,
+    "public_source_evidence_must_preserve_source_url_and_checked_at": true
+  },
+  "sources": [
+    {
+      "id": "nj_modiv_2026",
+      "label": "2026 NJ Property Assessment List (MOD-IV)",
+      "agency": "NJ Division of Taxation",
+      "mode": "direct",
+      "url": "https://www.nj.gov/treasury/taxation/pdf/lpt/modiv-2026.zip",
+      "filename": "modiv-2026.zip",
+      "cadence": "annual",
+      "transaction_uses": ["assessment", "property_tax", "deed_reference", "tax_account", "delinquent_code", "bill_status", "property_identity"],
+      "notes": "Raw MOD-IV layout contains tax, deed, account and delinquency fields. Do not assume NJGIN owner-name availability; NJ Office of GIS redacts owner names from hosted parcel/tax-list services."
+    },
+    {
+      "id": "nj_modiv_layout",
+      "label": "MOD-IV File Layout",
+      "agency": "NJ Division of Taxation",
+      "mode": "direct",
+      "url": "https://www.nj.gov/treasury/taxation/pdf/lpt/modivlayout.pdf",
+      "filename": "modivlayout.pdf",
+      "cadence": "source_change",
+      "transaction_uses": ["schema_contract"]
+    },
+    {
+      "id": "nj_municipal_codes",
+      "label": "NJ County / Municipal Codes",
+      "agency": "NJ Division of Taxation",
+      "mode": "direct",
+      "url": "https://www.nj.gov/treasury/taxation/documents/excel/lpt/CDcodes.xlsx",
+      "filename": "CDcodes.xlsx",
+      "cadence": "source_change",
+      "transaction_uses": ["municipality_resolution", "district_code"]
+    },
+    {
+      "id": "nj_sr1a_ytd",
+      "label": "NJ SR-1A Year-to-Date Sales File",
+      "agency": "NJ Division of Taxation",
+      "mode": "discover_link",
+      "index_url": "https://www.nj.gov/treasury/taxation/lpt/statdata.shtml",
+      "link_text": "Year to Date SR1A file",
+      "filename": "sr1a-ytd",
+      "cadence": "rolling",
+      "transaction_uses": ["deed_reference", "seller_grantor", "buyer_grantee", "sale_record", "recorded_date"]
+    },
+    {
+      "id": "nj_sr1a_layout",
+      "label": "NJ SR-1A File Layout",
+      "agency": "NJ Division of Taxation",
+      "mode": "direct",
+      "url": "https://www.nj.gov/treasury/taxation/pdf/lpt/SR1Afilelayout.pdf",
+      "filename": "SR1Afilelayout.pdf",
+      "cadence": "source_change",
+      "transaction_uses": ["schema_contract"]
+    },
+    {
+      "id": "nj_dca_permits",
+      "label": "NJ DCA Construction Permit Data",
+      "agency": "NJ Department of Community Affairs",
+      "mode": "socrata",
+      "url": "https://data.nj.gov/resource/w9se-dmra.json",
+      "dataset_page": "https://data.nj.gov/w/w9se-dmra/_variation_?cur=IVqdGRZcPoR&from=root",
+      "filename": "nj-dca-permits.ndjson",
+      "page_size": 50000,
+      "cadence": "monthly",
+      "transaction_uses": ["permit_history", "certificate_lifecycle"]
+    },
+    {
+      "id": "njgin_parcels",
+      "label": "NJ Statewide Parcels / Tax List Composite",
+      "agency": "NJ Office of GIS",
+      "mode": "service",
+      "url": "https://www.nj.gov/njgin/edata/parcels/",
+      "service_url": "https://maps.nj.gov/arcgis/rest/services/Framework/Cadastral/MapServer/0/query",
+      "cadence": "rolling",
+      "transaction_uses": ["parcel_identity", "block_lot", "assessment_context", "deed_reference"],
+      "privacy_note": "Hosted NJGIN parcel and tax-list services redact owner names under Daniel's Law policy."
+    },
+    {
+      "id": "nj_statewide_legal_notices",
+      "label": "NJ Statewide Legal Notices Directory",
+      "agency": "NJ Department of State",
+      "mode": "directory",
+      "url": "https://www.nj.gov/state/statewide-legal-notices-list.shtml",
+      "filename": "statewide-legal-notices.html",
+      "cadence": "daily",
+      "transaction_uses": ["municipal_tax_sale_notice_discovery", "municipal_legal_notice_discovery"]
+    },
+    {
+      "id": "nj_municipality_directory",
+      "label": "NJ Municipality Directory",
+      "agency": "State of New Jersey",
+      "mode": "directory",
+      "url": "https://www.nj.gov/nj/gov/direct/municipality.shtml",
+      "filename": "nj-municipalities.html",
+      "cadence": "source_change",
+      "transaction_uses": ["municipality_registry_seed"]
+    },
+    {
+      "id": "nj_ucc_bulk",
+      "label": "NJ UCC Bulk Data",
+      "agency": "NJ Division of Revenue and Enterprise Services",
+      "mode": "credentialed_or_paid",
+      "url": "https://www.njportal.com/ucc/",
+      "bulk_url": "https://www.njportal.com/Ucc/SearchBulk/Search.aspx",
+      "cadence": "as_purchased",
+      "transaction_uses": ["ucc_financing", "possible_solar_financing", "secured_party", "termination_release"],
+      "notes": "Use only purchased/authorized bulk results. UCC match is debtor-based and is not automatically proof a filing encumbers the real estate."
+    },
+    {
+      "id": "nj_courts_judgments",
+      "label": "NJ Courts Judgment Lien / Electronic Access",
+      "agency": "New Jersey Judiciary",
+      "mode": "credentialed_or_paid",
+      "url": "https://www.njcourts.gov/courts/civil",
+      "guide_url": "https://www.njcourts.gov/sites/default/files/attorneys/ecourts/civil-judgement-order-docket.pdf",
+      "cadence": "daily_or_batch_contract",
+      "transaction_uses": ["judgments", "judgment_liens"],
+      "notes": "Prefer Judiciary Electronic Access Program or purchased batch reports for commercial/continuous use. Identity matching remains required."
+    }
+  ],
+  "municipal_evidence_families": [
+    "certificate_of_occupancy",
+    "resale_inspection",
+    "smoke_co_fire",
+    "property_tax_current_balance",
+    "tax_sale_delinquency",
+    "water_balance",
+    "sewer_balance",
+    "municipal_lien_clearance",
+    "open_code_violations",
+    "local_permit_clearance"
+  ],
+  "solar_providers": [
+    {
+      "id": "sunrun",
+      "label": "Sunrun",
+      "customer_portal": "https://my.sunrun.com/",
+      "transfer_portal": "https://servicetransfer.sunrun.com/signin",
+      "developer_docs": "https://docs.customer-api.sunrun.com/",
+      "account_link_strategy": "provider_authorization_or_customer_otp",
+      "public_api_scope": "telemetry/site data documented; billing balance endpoint not documented publicly",
+      "account_number_only_supported": false
+    },
+    {
+      "id": "tesla",
+      "label": "Tesla Energy / Solar",
+      "customer_portal": "https://www.tesla.com/teslaaccount",
+      "billing_help": "https://www.tesla.com/support/energy/solar-panels/after-installation/billing",
+      "property_title_help": "https://www.tesla.com/support/energy/solar-panels/documents/property-title",
+      "account_link_strategy": "customer_authenticated_account_or_provider_partnership",
+      "public_api_scope": "no public billing/payoff API identified",
+      "account_number_only_supported": false
+    },
+    {
+      "id": "sunnova",
+      "label": "Sunnova",
+      "customer_portal": "https://account.sunnova.com/",
+      "transfer_help": "https://account.sunnova.com/faq/buying-a-home-with-a-sunnova-home-solar-system",
+      "account_link_strategy": "customer_authenticated_portal_or_provider_partnership",
+      "public_api_scope": "no public billing/payoff API identified",
+      "account_number_only_supported": false,
+      "identifier_note": "Sunnova documentation references SystemID for portal registration."
+    },
+    {
+      "id": "enphase",
+      "label": "Enphase",
+      "developer_docs": "https://developer-v4.enphase.com/",
+      "account_link_strategy": "oauth_system_owner_authorization",
+      "public_api_scope": "system/production/consumption/device data; not solar financing payoff balance",
+      "account_number_only_supported": false
+    }
+  ]
+}

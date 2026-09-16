@@ -96,7 +96,7 @@
     ];
     if(state.ready && isAgent()) out.push({key:'agent-desk',href:route('/agent-desk'),icon:'fa-bullseye',label:'Agent Control'});
     if(state.ready && can('pro_plus')) out.push({key:'scan',href:route('/scan'),icon:'fa-magnifying-glass-chart',label:'Appeal Scanner'});
-    if(state.ready && can('pro_plus')) out.push({key:'transaction',href:'/transaction/',icon:'fa-file-signature',label:'Transactions'});
+    if(state.ready && can('agent')) out.push({key:'transaction',href:'/transaction/',icon:'fa-file-signature',label:'Transactions'});
     if(state.ready && can('agent')) out.push({key:'data-workbench',href:route('/data-workbench'),icon:'fa-table-list',label:'Data Workbench'});
     if(state.ready && can('pro_plus')) out.push({key:'data-center',href:route('/data-center'),icon:'fa-database',label:'Data Center'});
     out.push({key:'pro',href:route('/pro'),icon:'fa-briefcase',label:'Professional Hub'});

@@ -50,6 +50,7 @@
           <div class="ad-overview-meta"><b id="ad-total">0</b><span>active property signals</span><small id="ad-refreshed">Waiting for sources</small></div>
         </section>
 
+        <nav class="ad-companion-nav" aria-label="Agent tools"><a href="/agent/contacts">Clean and export contacts</a><a href="/transaction/">Manage transactions</a></nav>
         <section id="ad-capacity" class="ad-capacity"><p class="ad-control-loading">Loading plan capacity…</p></section>
         <section id="ad-assessment-queue" class="ad-assessment-queue" hidden></section>
         <section class="ad-focus" id="ad-focus" aria-label="Best next property conversation"></section>
@@ -115,7 +116,12 @@
             <button class="ad-load-more" id="ad-load-more" type="button" hidden><i class="fas fa-chevron-down"></i> Show 12 more</button>
           </section>
           <aside class="ad-side">
-            <section><span>YOUR WORKLOAD</span><h3>Sphere coverage</h3><div id="ad-coverage"></div><button id="ad-import-side" type="button"><i class="fas fa-plus"></i> Import or select properties</button></section>
+            <section><span>YOUR WORKLOAD</span><h3>Sphere coverage</h3><div id="ad-coverage">
+              <div class="ad-coverage-row"><span>Properties loaded</span><b data-coverage-total>—</b></div>
+              <div class="ad-coverage-row"><span>Parcel matched</span><b data-coverage-matched>—</b></div>
+              <div class="ad-coverage-row"><span>Actionable reasons</span><b data-coverage-reasons>—</b></div>
+              <div class="ad-coverage-row"><span>Updates combined</span><b data-coverage-combined>—</b></div>
+            </div><button id="ad-import-side" type="button"><i class="fas fa-plus"></i> Import or select properties</button></section>
             <section><span>WEEKLY DIGEST</span><h3>Your top ten, every Monday</h3><p>Receive only new or materially changed reasons. No owner names or contact enrichment.</p><label class="ad-switch"><input id="ad-digest" type="checkbox"><span></span> Email my weekly desk</label><small id="ad-digest-note"></small></section>
             <section class="ad-boundary"><i class="fas fa-shield-halved"></i><div><b>Relationship intelligence, not lead scoring</b><p>Watchdog ranks the usefulness of property information. It never calls someone a likely seller, distressed owner, or motivated lead.</p></div></section>
           </aside>
@@ -125,6 +131,10 @@
       <section class="ad-gate" id="ad-gate"><i class="fas fa-lock"></i><h2>Agent workspace</h2><p>Sign in with an active Agent or Pro plan to open your private Opportunity Desk.</p><a href="/pro#plans">Compare plans</a></section>
     </div>
   </main>
+
+
+  <template id="ad-first-run-template"><div class="ad-first-run"><span>YOUR FIRST WATCHDOG WORKFLOW</span><h2>Start with a property you know</h2><p>Bring the listing details from your MLS, then use Watchdog to review the property’s tax, assessment and public-record context.</p><ol><li><a href="/">Research a property</a><small>Look up an address and save it to your watchlist. It will appear here.</small></li><li><button type="button" data-start-import>Import your sphere</button><small>Add your permitted client and past-client addresses using CSV.</small></li><li><a href="/farm-map">Build a neighborhood farm</a><small>Draw an area, review the matches and add selected properties to your desk.</small></li></ol><p>Once a property is saved, open its evidence, copy a useful conversation starter and record the outcome after you follow up.</p></div></template>
+  <template id="ad-load-error-template"><i class="fas fa-triangle-exclamation"></i><h2>Your desk could not load</h2><p data-load-error></p><button type="button" id="ad-load-retry">Retry loading your desk</button></template>
 
   <div class="ad-modal" id="ad-import-modal" hidden>
     <div class="ad-modal-card" role="dialog" aria-modal="true" aria-labelledby="ad-import-title">

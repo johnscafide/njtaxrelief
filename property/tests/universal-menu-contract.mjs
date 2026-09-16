@@ -46,7 +46,7 @@ for (const [key, label] of canonical) {
 
 assert(universal.includes("can('pro_plus')"), 'Pro+ menu gating is missing');
 assert(universal.includes("can('agent')"), 'Agent+ menu gating is missing');
-assert(universal.includes("can('pro_plus')) out.push({key:'transaction',href:'/transaction/'"), 'Transactions must be a Pro+-or-higher root workspace');
+assert(universal.includes("can('agent')) out.push({key:'transaction',href:'/transaction/'"), 'Transactions must be an Agent-or-higher root workspace');
 assert(universal.includes('isAgent()'), 'Agent Control role gating is missing');
 assert(universal.includes("hostname === 'watchdogindex.com'") || universal.includes("hostname === 'www.watchdogindex.com'"), 'Clean watchdogindex.com route support is missing');
 assert(universal.includes('Edit profile &amp; role'), 'Shared profile menu is missing Edit profile & role');

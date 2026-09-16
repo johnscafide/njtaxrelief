@@ -1,0 +1,111 @@
+name: Transaction source acquisition
+
+on:
+  workflow_dispatch:
+  schedule:
+    - cron: '17 9 * * *'
+    - cron: '47 9 * * 0'
+
+permissions:
+  contents: read
+
+jobs:
+  public-state-sources:
+    if: github.event_name == 'workflow_dispatch' || github.event.schedule == '17 9 * * *'
+    runs-on: ubuntu-latest
+    timeout-minutes: 30
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - name: Acquire current public transaction sources
+        run: >-
+          python3 property/scripts/acquire_transaction_sources.py
+          --out "$RUNNER_TEMP/watchdog-transaction-sources"
+          --source nj_modiv_2026
+          --source nj_modiv_layout
+          --source nj_municipal_codes
+          --source nj_sr1a_ytd
+          --source nj_sr1a_layout
+          --source nj_statewide_legal_notices
+          --source nj_municipality_directory
+      - name: Upload acquisition package
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: transaction-state-sources-${{ github.run_id }}
+          path: ${{ runner.temp }}/watchdog-transaction-sources
+          retention-days: 14
+          if-no-files-found: warn
+
+  dca-permit-snapshot:
+    if: github.event_name == 'workflow_dispatch' || github.event.schedule == '47 9 * * 0'
+    runs-on: ubuntu-latest
+    timeout-minutes: 45
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - name: Acquire complete public DCA permit snapshot
+        run: >-
+          python3 property/scripts/acquire_transaction_sources.py
+          --out "$RUNNER_TEMP/watchdog-dca-permits"
+          --source nj_dca_permits
+      - name: Upload DCA snapshot
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: transaction-dca-permits-${{ github.run_id }}
+          path: ${{ runner.temp }}/watchdog-dca-permits
+          retention-days: 14
+          if-no-files-found: warn
+
+  municipal-source-discovery:
+    if: github.event_name == 'workflow_dispatch' || github.event.schedule == '47 9 * * 0'
+    runs-on: ubuntu-latest
+    timeout-minutes: 90
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - name: Discover CO, tax, utility, construction and code sources statewide
+        run: >-
+          python3 property/scripts/discover_municipal_transaction_sources.py
+          --out "$RUNNER_TEMP/municipal-source-discovery.json"
+          --workers 8
+          --max-pages-per-site 12
+      - name: Upload municipal discovery registry candidate set
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: transaction-municipal-sources-${{ github.run_id }}
+          path: ${{ runner.temp }}/municipal-source-discovery.json
+          retention-days: 30
+          if-no-files-found: warn
+
+  county-record-source-discovery:
+    if: github.event_name == 'workflow_dispatch' || github.event.schedule == '47 9 * * 0'
+    runs-on: ubuntu-latest
+    timeout-minutes: 45
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - name: Discover all 21 county Clerk / land-record source endpoints
+        run: >-
+          python3 property/scripts/discover_county_record_sources.py
+          --out "$RUNNER_TEMP/county-record-source-discovery.json"
+          --workers 8
+          --max-pages-per-site 18
+      - name: Upload county record source inventory
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: transaction-county-record-sources-${{ github.run_id }}
+          path: ${{ runner.temp }}/county-record-source-discovery.json
+          retention-days: 30
+          if-no-files-found: warn

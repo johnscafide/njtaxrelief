@@ -4,7 +4,7 @@
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
   <title>Transaction Command Center | Watchdog</title>
-  <meta name="description" content="Pro+ transaction readiness, closing coordination, disclosures, assignments and Watchdog property intelligence for New Jersey real estate professionals.">
+  <meta name="description" content="Agent transaction coordination with optional Pro+ evidence, closing readiness, disclosures, assignments and Watchdog property intelligence for New Jersey real estate professionals.">
   <meta name="robots" content="noindex,nofollow">
   <meta name="theme-color" content="#f4f7f8">
   <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -21,12 +21,12 @@
   <main class="tx-page">
     <section class="tx-gate" id="tx-gate">
       <div class="tx-gate-icon"><i class="fas fa-shield-halved"></i></div>
-      <span class="tx-eyebrow">PRO+ TRANSACTION INTELLIGENCE</span>
+      <span class="tx-eyebrow">AGENT TRANSACTION WORKSPACE</span>
       <h2>One place to see what can still slow down a closing.</h2>
       <p id="tx-gate-copy">Checking your Watchdog access…</p>
       <div class="tx-gate-actions">
-        <a href="/property/pro" class="tx-btn tx-btn-primary"><i class="fas fa-bolt"></i> View Pro+</a>
-        <a href="/property/dashboard" class="tx-btn"><i class="fas fa-table-columns"></i> Dashboard</a>
+        <a href="/pro" class="tx-btn tx-btn-primary"><i class="fas fa-bolt"></i> Compare plans</a>
+        <a href="/dashboard" class="tx-btn"><i class="fas fa-table-columns"></i> Dashboard</a>
       </div>
     </section>
 
@@ -35,7 +35,7 @@
         <div class="tx-command-copy">
           <span class="tx-eyebrow">TRANSACTION OPERATIONS</span>
           <h2>Closing readiness across every active deal.</h2>
-          <p>Watchdog combines your transaction checklist, client disclosures and source-aware property intelligence without treating missing data as a clean result.</p>
+          <p>Manage closing dates, private disclosures, assignments and follow-ups with Agent. Pro+ adds automated source evidence and Watchdog Closing Review.</p>
         </div>
         <div class="tx-command-actions">
           <button class="tx-btn" type="button" data-tx-action="bulk"><i class="fas fa-layer-group"></i> Bulk add</button>
@@ -78,7 +78,8 @@
             <div><button class="tx-btn tx-btn-primary" type="button" data-tx-action="add"><i class="fas fa-plus"></i> Add first transaction</button><button class="tx-btn" type="button" data-tx-action="bulk"><i class="fas fa-layer-group"></i> Add multiple addresses</button></div>
           </div>
 
-          <article class="tx-detail" id="tx-detail" hidden>
+          <section id="tx-load-error" class="tx-panel" hidden role="alert"><h2>Transaction details could not load</h2><p>Your checklist has not been verified. Retry before relying on its status.</p><button type="button" class="tx-btn" data-tx-action="retry-load">Retry transaction</button></section>
+<article class="tx-detail" id="tx-detail" hidden>
             <header class="tx-detail-head">
               <div class="tx-property-title">
                 <div class="tx-readiness-orb" id="tx-readiness-orb"><strong id="tx-readiness-score">0</strong><span>READINESS</span></div>
@@ -97,7 +98,15 @@
               <button class="tx-btn tx-btn-small" id="tx-run-review" type="button"><i class="fas fa-magnifying-glass-chart"></i> Run review</button>
             </div>
 
-            <nav class="tx-tabs" aria-label="Transaction workspace sections">
+            <section id="tx-agent-evidence" class="tx-panel tx-agent-evidence" hidden aria-labelledby="tx-agent-evidence-title">
+  <h3 id="tx-agent-evidence-title">Manual transaction workspace</h3>
+  <p>Dates, disclosures, assignments and manual follow-ups are included with Agent. Pro+ source checks are separate from your checklist progress.</p>
+  <details><summary>See Pro+ evidence options</summary>
+  <ul><li>Municipal tax balances and delinquency evidence <b>Pro+</b></li><li>Ownership, deed, judgment and lien evidence <b>Pro+</b></li><li>Permits, CO and fire certificate requirements <b>Pro+</b></li><li>Water, sewer, electric and solar source evidence <b>Pro+</b></li><li>Private closing document vault <b>Pro+</b></li><li>Automated evidence sweeps and Watchdog Closing Review <b>Pro+</b></li></ul>
+  <a class="tx-btn tx-btn-primary" href="/pro#plans">Compare Pro+ evidence</a>
+  </details>
+</section>
+<nav class="tx-tabs" aria-label="Transaction workspace sections">
               <button type="button" data-tx-tab="overview" aria-selected="true"><i class="fas fa-grid-2"></i> Overview</button>
               <button type="button" data-tx-tab="checklist" aria-selected="false"><i class="fas fa-list-check"></i> Readiness <span id="tx-open-count">0</span></button>
               <button type="button" data-tx-tab="disclosures" aria-selected="false"><i class="fas fa-comments"></i> Client disclosures</button>

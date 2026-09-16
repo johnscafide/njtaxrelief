@@ -2,7 +2,7 @@ import assert from 'node:assert/strict';
 import fs from 'node:fs';
 import vm from 'node:vm';
 
-const routes = ['agent-desk', 'farm-builder', 'farm-map', 'market-list', 'growth', 'report-studio', 'report-builder', 'marketing-studio'];
+const routes = ['agent/contacts', 'agent-desk', 'farm-builder', 'farm-map', 'market-list', 'growth', 'report-studio', 'report-builder', 'marketing-studio'];
 const guard = fs.readFileSync('property/js/access-guard.js', 'utf8');
 let checks = 0;
 for (const route of routes) {

@@ -1,10 +1,12 @@
 # Watchdog Agent launch review
 
-**Review date:** September 15, 2026
+**Review date:** September 15–16, 2026
 
 **Production:** https://www.watchdogindex.com
 
 **Source baseline:** `johnscafide/njtaxrelief` at `b3afdee633ef878297dc2d1724b5ab5ffc70d2f3`
+
+**Draft implementation:** [PR #328](https://github.com/johnscafide/njtaxrelief/pull/328). The expanded Contacts/Transaction review was reconciled through main `51a75a4169c6c8df524fccbbd9d071df152bb8a7`, including the new municipal workflow and document-vault modules. [NJW-345](https://linear.app/njwatchdog/issue/NJW-345) tracks release acceptance. Publication is authorized; production deployment is pending staging verification.
 
 **Verdict:** Substantial product built; **Agent launch is blocked**. A numerical readiness percentage would imply more verified coverage than the evidence supports.
 
@@ -15,6 +17,25 @@ A paying Agent could be denied access to the Opportunity Desk and farming pages.
 This review prepared fixes for those boundaries, repeated refresh loops, saved-action behavior, first-use guidance, modal keyboard use, missing-value presentation and the sign-in handoff. Local authorization and browser interaction tests pass. **These changes are prepared for review; production has not been changed.**
 
 The configured staging project `pxossnwmrygxlpxtstnl` returns a DNS “name does not exist” error and is absent from the connected Supabase project list. This prevents an honest claim that a real Agent can complete the authenticated workflows in the release candidate. The repository explicitly requires staging for authenticated automation.
+
+## Expanded scope: Contacts and Transaction
+
+The user added `/agent/contacts` and `/transaction/index.html` to this review and explicitly chose **Agent access to the core Transaction workspace, with upgrades disclosed for Pro+ data**.
+
+| Surface | Agent job | Candidate implementation and evidence |
+|---|---|---|
+| Contacts | Upload an existing CRM file → map names/columns → correct rows → export → reopen | Preserve an original archive, warn before discarding unexported edits, distinguish unsaved edits from archived exports, bind delayed mapping saves to the correct file, and use the shared Supabase runtime. The browser fixture verifies a corrected name survives export and reopening. |
+| Transaction core | Add a deal → record dates/client disclosures → assign manual follow-ups → track stage | Open the workspace and canonical menu to Agent and higher plans. Retain owner-scoped database checks. Keep mobile editing visible and support dialog Escape/focus restoration. |
+| Transaction Pro+ evidence | Obtain automated municipal, title/record, permit, utility/solar and Closing Review evidence | Preserve existing Pro+ source-service gates. Agent cannot directly read source-populated item rows or source-refresh activity, relabel them as manual, or enable paid monitoring. A compact expandable panel names the upgrade-only evidence. |
+| Recovery | Handle failed detail reads or writes without false success | Failed checklist reads show a retry panel instead of becoming an empty “ready” file; stale responses cannot repaint a subsequently selected deal. Failed checklist edits restore the saved UI. Empty or Agent-only checklists do not claim full readiness. |
+
+The additional migration is `20260915221914_agent_transaction_workspace_access.sql`. It is prepared and tested locally, **not applied to production**. Thirty PostgreSQL checks against the real transaction schema cover core access, protected evidence, subscription states, cross-account denial and monitoring restrictions. Browser fixtures cover Agent and Pro+ behavior, transaction creation/retry, phone editing, and Contacts export/reopen. These are controlled fixtures, not live customer acceptance.
+
+Source-populated checklist rows remain Pro+ as complete evidence records; Agent sees manual rows and the upgrade disclosure. Staging must explicitly test an account with older Pro+ evidence after downgrade, as well as a brand-new Agent, before certifying continuity of assignments and checklist history.
+
+The newly added private document vault currently requires Pro+ in both database and storage policies. The Agent workspace explicitly labels this upgrade and avoids loading its unusable upload controls. The latest browser fixtures execute the real shell and confirm the vault remains available to Pro+. Municipal workflow modules remain attached to Pro+ source evidence; their existing behavior is preserved.
+
+Public phone/desktop checks of the new URLs found no document overflow or JavaScript error on Transaction's signed-out gate. Contacts currently redirects through Dashboard to the homepage and emits “Sign in required”; the destination-preserving Dashboard fix is included in the candidate. The resulting homepage overflow remains separate from an authenticated Contacts result.
 
 ## Start with the agent's first useful result
 
@@ -66,7 +87,7 @@ Concrete MLS companion examples:
 
 | Priority | Finding | Prepared remedy and evidence |
 |---|---|---|
-| P0 | Agent is excluded from six core pages: Desk, Farm Builder, Farm Map, Market List, Growth and Report Studio | Align page requirements to Agent; 64 executions of the real access guard test allowed and denied roles/statuses |
+| P0 | Agent is excluded from six core pages: Desk, Farm Builder, Farm Map, Market List, Growth and Report Studio | Align page requirements to Agent; 72 executions of the real access guard now cover these pages and the expanded route set, including Contacts |
 | P0 | Production policies require Pro for farm properties, opportunities, territories, digest preferences and funnel events | 17 narrowly scoped `ALTER POLICY` statements retain ownership and paid-plan checks; isolated PostgreSQL reproduced the old denial and passed 71 checks after the change |
 | P1 | Monitoring panels rewrite themselves under a mutation observer | Make unchanged rendering idempotent and coalesce refreshes; isolated browser test verifies idle stability |
 | P1 | Capacity UI continually triggers new RPC requests from its own DOM changes | Refresh after completed workspace changes; verify counts settle after list creation |
@@ -76,8 +97,9 @@ Concrete MLS companion examples:
 | P1 | Signed-out protected-page visit loses its destination at the Dashboard | Send through shared safe onboarding with the original return path; VM test and phone/desktop browser preview pass |
 | P2 | Import/evidence keyboard behavior only runs at mobile widths | Apply Escape and focus restoration at desktop widths too |
 | P2 | Missing property amounts can render as zero | Preserve unknown values instead of displaying `$0` |
+| P2 | Sphere Coverage shows a fixed 1,000-property capacity although Agent has 250 | Remove the misleading duplicate; retain the separate plan-capacity panel populated by the authenticated usage RPC |
 | P2 | Farm Builder has a duplicate input/section ID | Give the financial-filter section its own ID and update its anchor |
-| P2 | Existing entitlement test contradicts the intentionally public Data Center catalog | Test the public catalog plus the retained Pro+ private-execution boundary |
+| P2 | Older CI expectations reference a retired Dashboard and stale navigation label | Test the active Dashboard renderer and canonical Property Pulse label; preserve current main's newer Pro+ Data Center route gate during reconciliation |
 
 These are source/patch findings, not claims that all production behavior is now repaired. The database migration and frontend need coordinated release and real Agent acceptance.
 
@@ -85,7 +107,7 @@ These are source/patch findings, not claims that all production behavior is now 
 
 Direct production RPC evidence confirms **250 farm properties, 10 lists, five territories, 250 rows per request, 2,000 scan candidates and weekly monitoring** for Agent.
 
-The Report Builder currently allows Agent only the homeowner tax-position one-pager. Broker listing briefs and seller net sheets require **Pro or higher**. Native BoldTrail/kvCORE is documented as Teams-gated; Zapier/API automation is documented for Pro+ and Teams. The UI must disclose these boundaries before an agent invests work in an unavailable action.
+The Report Builder currently allows Agent only the homeowner tax-position one-pager. Broker listing briefs and seller net sheets require **Pro or higher**. Contacts CSV cleanup/export is included with Agent; this does not require the separate native Teams CRM integration. Native BoldTrail/kvCORE is documented as Teams-gated; Zapier/API automation is documented for Pro+ and Teams. The UI must disclose these boundaries before an agent invests work in an unavailable action.
 
 **Product recommendation:** a listing brief and seller net sheet are ordinary agent jobs. Decide whether they belong in the Agent launch scope or should remain clearly labeled upgrades. This patch does not silently change those commercial entitlements.
 
@@ -98,8 +120,13 @@ Latest recorded Linear evidence leaves live direct-mail sending gated pending pr
 - Opened eight production routes at 390px and 1440px in Chrome. Agent landing, professional-agent page, Pro pricing and Support returned HTTP 200 without observed horizontal overflow or page JavaScript errors at those sizes.
 - Observed signed-out Dashboard and protected-tool redirects to the homepage. The resulting homepage had horizontal overflow. This is not an authenticated workspace result.
 - Verified the sign-in repair with the candidate `wd-core.js` substituted in an otherwise public browser visit: both sizes reached `/onboarding/?next=%2Fagent-desk` without signing in.
-- Passed 64 local route-authorization cases, 71 isolated PostgreSQL policy checks, shared access-boundary checks, existing Agent/control-plane contracts and the isolated Agent interaction browser suite.
+- Passed 72 local route-authorization cases, 71 Agent Desk PostgreSQL policy checks, 30 additional Transaction policy checks, existing Agent/control-plane contracts and both isolated browser interaction suites.
 - Added actual Agent staging entry/interaction acceptance that rejects Developer accounts, missing credentials and production Supabase. Startup correctly fails closed without staging credentials.
+- Published a dedicated Agent regression workflow; its initial GitHub run passed. Static first-use and load-error markup now live in HTML templates. Updated two stale CI expectations to test the active Dashboard renderer and the canonical Property Pulse navigation label.
+
+The hosted staging workflow also exposes missing dedicated Agent test credentials in its environment preflight. Restoring DNS alone will not complete acceptance; both the staging project and the test-account configuration must be available.
+
+The broader access-boundary workflow's 43 Node checks produced 30 passes and 13 failures. All 13 failures also reproduce on an untouched worktree of `53c4f0d`; several reference retired Dashboard files or older model/asset contracts. This draft does not weaken those checks. Their reconciliation and a green release pipeline remain outstanding; passing the focused Agent suites is not a claim that all repository CI is green.
 
 **Not verified:** real Agent purchase/session lifecycle, full authenticated responsive certification, production application of the migration, real property→PDF→secure-share, portal→QR→consented inquiry attribution, changed-list email delivery, persistent cross-session farms, paid fulfillment or actual-agent comparative usability.
 
@@ -116,6 +143,8 @@ The fixture screenshots use explicit test data and block external requests. The 
 | Research and client output | Feature code present; end-to-end proof outstanding | Real Agent saves property and produces a readable eligible branded PDF and secure share without private-note leakage |
 | Farming persistence | Feature code present; current Agent blocked | Create/preview/save/reopen/resume a farm; criteria, counts and selected records remain correct |
 | Daily actions | Local interaction fixes pass | Actual Agent watches, snoozes, dismisses and records outcomes that persist across sessions |
+| Contacts | Local edit/export/reopen fixtures pass | A genuine Agent uploads, archives, corrects and exports a permitted test file; reopening and CRM handoff preserve reviewed fields and recover from storage failure |
+| Transaction | Agent core and Pro+ separation prepared; local SQL/browser checks pass | Apply migration to staging; verify create/edit/stage/disclosures, Pro+ upgrade and downgrade, paid-source denial, monitoring exclusion and history continuity with real accounts |
 | Monitoring | Weekly Agent capacity confirmed | A real staged property change creates the expected notification and exact-change deep link; pause/retry works |
 | Portal and verification | Happy-path proof outstanding | Complete verification, publish allowed branding, scan QR, capture test consent and verify correct agent attribution |
 | Mobile/browser quality | Public Chrome checks + isolated fixtures pass | Critical authenticated jobs pass phone/tablet/desktop and mobile WebKit; keyboard, error, loading and empty states remain usable |

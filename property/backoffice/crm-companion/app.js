@@ -1,0 +1,24 @@
+(function(){
+  'use strict';
+  var $=function(id){return document.getElementById(id)};
+  function num(v){return new Intl.NumberFormat('en-US').format(Number(v)||0)}
+  function pct(v){return (Number(v)||0).toFixed(1)+'%'}
+  function label(v){return String(v||'unknown').replace(/_/g,' ').replace(/\b\w/g,function(c){return c.toUpperCase()})}
+  function metric(name,value,note){var el=document.createElement('article');el.className='cx-kpi';var s=document.createElement('small'),b=document.createElement('b'),e=document.createElement('em');s.textContent=name;b.textContent=value;e.textContent=note||'';el.append(s,b,e);return el}
+  function renderKpis(s){var host=$('cx-kpis');host.innerHTML='';host.append(metric('Extension opens',num(s.extension_opens),'popup sessions'),metric('Contacts detected',num(s.contacts_detected),'BoldTrail pages'),metric('Lookups',num(s.lookups_started),pct(s.lookup_success_pct)+' matched'),metric('CRM writes',num(s.writes_started),pct(s.write_success_pct)+' succeeded'),metric('Active sessions',num(s.active_sessions),'revocable devices'),metric('Sessions created',num(s.sessions_created),'within selected range'))}
+  function renderBars(rows){var host=$('cx-bars');host.innerHTML='';var max=Math.max(1,...rows.map(function(r){return Number(r.opens)||0}));rows.forEach(function(r){var wrap=document.createElement('div');wrap.className='cx-bar-wrap';var bar=document.createElement('div');bar.className='cx-bar';var val=Number(r.opens)||0;bar.style.height=Math.max(2,Math.round(180*val/max))+'px';bar.dataset.tip=(r.day||'')+': '+val+' opens';var small=document.createElement('small');var d=new Date(String(r.day)+'T12:00:00');small.textContent=isNaN(d)?'':(d.getMonth()+1)+'/'+d.getDate();wrap.append(bar,small);host.appendChild(wrap)});$('cx-range').textContent=rows.length?(rows[0].day+' → '+rows[rows.length-1].day):'No activity yet'}
+  function renderFunnel(s){var values=[['Opened',s.extension_opens],['Contact found',s.contacts_detected],['Lookup',s.lookups_started],['Matched',s.lookups_succeeded],['Write started',s.writes_started],['Write succeeded',s.writes_succeeded]],max=Math.max(1,...values.map(function(x){return Number(x[1])||0})),host=$('cx-funnel');host.innerHTML='';values.forEach(function(x){var row=document.createElement('div');row.className='cx-funnel-row';var l=document.createElement('span'),track=document.createElement('div'),fill=document.createElement('div'),b=document.createElement('b');l.textContent=x[0];track.className='cx-track';fill.className='cx-fill';fill.style.width=Math.max(1,100*(Number(x[1])||0)/max)+'%';track.appendChild(fill);b.textContent=num(x[1]);row.append(l,track,b);host.appendChild(row)})}
+  function renderList(id,obj){var host=$(id);host.innerHTML='';var entries=Object.entries(obj||{}).sort(function(a,b){return Number(b[1])-Number(a[1])});if(!entries.length){host.textContent='No activity yet.';return}entries.forEach(function(entry){var row=document.createElement('div');row.className='cx-list-row';var s=document.createElement('span'),b=document.createElement('b');s.textContent=label(entry[0]);b.textContent=num(entry[1]);row.append(s,b);host.appendChild(row)})}
+  function renderEvents(obj){var host=$('cx-events');host.innerHTML='';Object.entries(obj||{}).sort(function(a,b){return Number(b[1])-Number(a[1])}).forEach(function(entry){var el=document.createElement('div');el.className='cx-event';var s=document.createElement('span'),b=document.createElement('b');s.textContent=entry[0];b.textContent=num(entry[1]);el.append(s,b);host.appendChild(el)});if(!host.children.length)host.textContent='No events recorded yet.'}
+  async function load(){
+    $('cx-refresh').disabled=true;$('cx-note').className='cx-note';$('cx-note').textContent='Loading privacy-minimized extension telemetry…';
+    try{
+      await Promise.resolve(window.njptrAccessReady);var client=window.NJPTRAccess&&window.NJPTRAccess.client?window.NJPTRAccess.client():null;if(!client)throw new Error('Authentication unavailable');
+      var days=Number($('cx-days').value)||30;var result=await client.functions.invoke('watchdog-crm-companion-analytics',{body:{days:days}});if(result.error)throw result.error;var data=result.data||{};
+      renderKpis(data.summary||{});renderBars(data.daily||[]);renderFunnel(data.summary||{});renderList('cx-plans',data.by_plan||{});renderList('cx-versions',data.by_version||{});renderEvents(data.by_event||{});
+      $('cx-note').textContent='Analytics exclude contact names, email addresses, phone numbers, full property addresses and free-form CRM content. Updated just now.';
+    }catch(error){$('cx-note').className='cx-note error';$('cx-note').textContent='CRM Companion analytics could not be loaded: '+String(error&&error.message||'unknown error')}
+    finally{$('cx-refresh').disabled=false}
+  }
+  $('cx-refresh').addEventListener('click',load);$('cx-days').addEventListener('change',load);load();
+})();

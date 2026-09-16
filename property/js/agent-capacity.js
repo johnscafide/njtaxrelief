@@ -16,6 +16,7 @@
   function render() {
     var host = $('ad-capacity');
     if (!host || !usage) return;
+    // content-architecture: dynamic — Plan name and all meter totals, remaining capacity and warning states come from the authenticated usage RPC, not a static plan catalog.
     var html = '<div class="ad-cap-head"><div><span>AGENT CAPACITY</span><h3>' + plan(usage.plan) + ' workspace</h3></div><a href="/pro#plans">Compare plans</a></div>' + meter('Properties', 'properties') + meter('Live farms', 'lists') + meter('Territories', 'territories');
     if (host.__agentCapacityHtml !== html) {
       host.__agentCapacityHtml = html;
@@ -37,6 +38,7 @@
         var host = $('ad-capacity');
         if (host) {
           host.__agentCapacityHtml = null;
+          // content-architecture: dynamic — The failed usage request determines the sanitized recovery message; no plan capacity is invented when the RPC fails.
           host.innerHTML = '<div class="ad-control-error" data-retry-ready="1"><b>Capacity unavailable</b><span>' + safe(e, 'get_agent_usage') + '</span><button type="button" data-agent-retry>Retry</button></div>';
         }
         return null;

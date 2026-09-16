@@ -567,6 +567,14 @@
   ],
   "rewrites": [
     {
+      "source": "/transaction/",
+      "destination": "/transaction/index.html"
+    },
+    {
+      "source": "/transaction",
+      "destination": "/transaction/index.html"
+    },
+    {
       "source": "/property/",
       "destination": "/api/watchdog-index-entry",
       "has": [

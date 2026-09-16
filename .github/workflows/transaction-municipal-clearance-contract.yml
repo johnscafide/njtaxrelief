@@ -1,0 +1,24 @@
+name: Transaction municipal clearance contract
+
+on:
+  pull_request:
+    paths:
+      - 'transaction/municipal-clearance.js'
+      - 'transaction/shell.js'
+      - 'property/tests/transaction-municipal-clearance-workflow-contract.mjs'
+      - '.github/workflows/transaction-municipal-clearance-contract.yml'
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  contract:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+      - name: Verify municipal clearance workflow semantics
+        run: node property/tests/transaction-municipal-clearance-workflow-contract.mjs
