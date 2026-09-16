@@ -4,6 +4,7 @@ if(window.__WATCHDOG_TRANSACTION_AUTO_PREFLIGHT__)return;window.__WATCHDOG_TRANS
 
 const polish=document.createElement('link');polish.rel='stylesheet';polish.href='/transaction/polish.css?v=20260915c';document.head.appendChild(polish);
 
+const canUseEvidence=()=>window.WatchdogTransactionAccess?.evidence===true;
 const pending=new Set(),seen=new Set();let timer=null,client=null,flushBusy=false,renderTimer=null;
 const clean=v=>String(v||'').trim();
 const esc=v=>String(v==null?'':v).replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
@@ -25,10 +26,10 @@ const SOURCE_KEYS=[
 
 function toast(message,type){const n=document.querySelector('#tx-toast');if(!n)return;n.textContent=message;n.className='tx-toast show '+(type||'');setTimeout(()=>{if(n.textContent===message)n.className='tx-toast'},3200)}
 function getClient(){if(client)return client;try{client=window.NJPTRSupabaseRuntime&&window.NJPTRSupabaseRuntime.createClient?window.NJPTRSupabaseRuntime.createClient():null}catch(e){console.warn('Transaction preflight client unavailable',e)}return client}
-function schedule(ids,delay){(ids||[]).map(clean).filter(Boolean).forEach(id=>pending.add(id));clearTimeout(timer);timer=setTimeout(flush,delay==null?900:delay)}
+function schedule(ids,delay){if(!canUseEvidence())return;(ids||[]).map(clean).filter(Boolean).forEach(id=>pending.add(id));clearTimeout(timer);timer=setTimeout(flush,delay==null?900:delay)}
 function payloadOf(item){return item&&item.payload&&typeof item.payload==='object'?item.payload:{}}
 function fmtDate(v){if(!v)return'';const d=new Date(v);return Number.isFinite(d.getTime())?d.toLocaleDateString('en-US',{month:'short',day:'numeric',year:'numeric'}):String(v).slice(0,10)}
-function fmtMoney(v){const n=Number(v);return Number.isFinite(n)?n.toLocaleString('en-US',{style:'currency',currency:'USD'}):''}
+function fmtMoney(v){if(v==null||String(v).trim()==='')return'';const n=Number(v);return Number.isFinite(n)?n.toLocaleString('en-US',{style:'currency',currency:'USD'}):''}
 
 function stateMeta(item){
   const evidence=clean(item&&item.evidence_state),sourceType=clean(item&&item.source_type),p=payloadOf(item),records=Array.isArray(p.records)?p.records:[];
@@ -96,7 +97,7 @@ function sourceLinks(item){
   const seenUrls=new Set();return links.filter(([u])=>u&&!seenUrls.has(u)&&seenUrls.add(u)).slice(0,4).map(([u,l])=>linkHtml(u,l)).join('');
 }
 
-async function renderSourceSweep(id){
+async function renderSourceSweep(id){if(!canUseEvidence())return;
   id=clean(id);if(!id)return;const c=getClient();if(!c)return;
   clearTimeout(renderTimer);renderTimer=setTimeout(async()=>{
     try{
@@ -118,7 +119,7 @@ async function renderSourceSweep(id){
 }
 
 async function flush(){
-  if(flushBusy||!pending.size)return;const c=getClient();if(!c)return;flushBusy=true;const ids=[...pending].slice(0,50);ids.forEach(id=>pending.delete(id));
+  if(!canUseEvidence()||flushBusy||!pending.size)return;const c=getClient();if(!c)return;flushBusy=true;const ids=[...pending].slice(0,50);ids.forEach(id=>pending.delete(id));
   try{
     const r=await c.functions.invoke('transaction-evidence-sweep',{body:{transaction_ids:ids}});if(r.error)throw r.error;ids.forEach(id=>seen.add(id));
     const active=document.querySelector('.tx-list-card.active');if(active&&ids.includes(active.dataset.txId)){setTimeout(()=>active.click(),50);setTimeout(()=>renderSourceSweep(active.dataset.txId),500)}
@@ -144,6 +145,7 @@ window.fetch=async function(input,init){
 };
 
 document.addEventListener('click',function(e){
+  if(!canUseEvidence())return;
   const button=e.target&&e.target.closest&&e.target.closest('#tx-run-review');
   if(button){
     const active=document.querySelector('.tx-list-card.active'),id=active&&active.dataset.txId;if(!id)return;
@@ -157,6 +159,7 @@ document.addEventListener('click',function(e){
 },true);
 
 async function checkExisting(){
+  if(!canUseEvidence())return;
   const c=getClient();if(!c)return;try{
     const auth=await c.auth.getUser();if(!auth?.data?.user)return;
     const r=await c.from('transaction_workspaces').select('id,last_watch_at').eq('user_id',auth.data.user.id).order('created_at',{ascending:false}).limit(50);
@@ -164,5 +167,6 @@ async function checkExisting(){
     setTimeout(()=>{const active=document.querySelector('.tx-list-card.active');if(active){const id=clean(active.dataset.txId);renderSourceSweep(id);if(id&&!seen.has(id)){seen.add(id);schedule([id],600)}}},1500);
   }catch(e){console.warn('Existing transaction evidence sweep scan skipped',e)}
 }
+document.addEventListener('watchdog:transaction-access-ready',checkExisting);
 if(document.readyState==='loading')document.addEventListener('DOMContentLoaded',checkExisting,{once:true});else checkExisting();
 })();

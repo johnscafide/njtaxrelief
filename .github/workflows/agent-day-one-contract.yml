@@ -1,0 +1,58 @@
+name: Agent day-one regression checks
+on:
+  pull_request:
+    paths:
+      - 'property/agent-desk/**'
+      - 'property/agent/contacts/**'
+      - 'agent/contacts/**'
+      - 'transaction/**'
+      - 'property/farm-builder/**'
+      - 'property/farm-map/**'
+      - 'property/market-list/**'
+      - 'property/growth/**'
+      - 'property/report-studio/**'
+      - 'property/js/agent-*.js'
+      - 'property/css/agent-*.css'
+      - 'property/js/access-guard.js'
+      - 'property/js/dashboard/wd-core.js'
+      - 'property/tests/agent-*.mjs'
+      - 'property/tests/dashboard-signin-return.mjs'
+      - 'supabase/migrations/*agent_day_one_owner_access.sql'
+      - 'supabase/migrations/*agent_transaction_workspace_access.sql'
+      - '.github/workflows/agent-day-one-contract.yml'
+  workflow_dispatch:
+permissions:
+  contents: read
+jobs:
+  agent-regressions:
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    steps:
+      - uses: actions/checkout@v6
+      - uses: actions/setup-node@v6
+        with:
+          node-version: '24'
+      - name: Install isolated test dependencies
+        run: |
+          npm install --no-save --ignore-scripts playwright@1.62.0 @electric-sql/pglite@0.5.8
+          npx playwright install --with-deps chromium
+      - name: Verify Agent page access and sign-in handoff
+        run: |
+          node property/tests/agent-route-access.mjs
+          node property/tests/dashboard-signin-return.mjs
+      - name: Verify owner policies in isolated PostgreSQL
+        run: |
+          node property/tests/agent-owner-policies.mjs
+          node property/tests/agent-transaction-policies.mjs
+      - name: Verify Agent interactions with network-isolated browser fixtures
+        env:
+          AGENT_FIXTURE_EVIDENCE_DIR: agent-fixture-evidence
+        run: |
+          node property/tests/agent-desk-interactions.mjs
+          node property/tests/agent-companion-interactions.mjs
+      - uses: actions/upload-artifact@v5
+        if: always()
+        with:
+          name: agent-fixture-evidence
+          path: agent-fixture-evidence
+          if-no-files-found: warn

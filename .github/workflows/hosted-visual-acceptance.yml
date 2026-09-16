@@ -6,6 +6,7 @@ on:
       - main
     paths:
       - 'property/tests/hosted-visual-acceptance.mjs'
+      - 'property/tests/agent-day-one-acceptance.mjs'
       - 'property/tests/index-profile-webkit-acceptance.mjs'
       - 'property/tests/index-asset-diet-contract.mjs'
       - 'property/tests/ops-selfservice-acceptance.mjs'
@@ -13,6 +14,13 @@ on:
       - 'property/dashboard/**'
       - 'property/home/**'
       - 'property/agent-desk/**'
+      - 'property/agent/contacts/**'
+      - 'agent/contacts/**'
+      - 'transaction/**'
+      - 'property/farm-builder/**'
+      - 'property/farm-map/**'
+      - 'property/growth/**'
+      - 'property/report-builder/**'
       - 'property/data-workbench/**'
       - 'property/intelligence/**'
       - 'property/account/**'
@@ -52,6 +60,8 @@ jobs:
       STAGING_SUPABASE_PUBLISHABLE_KEY: ${{ secrets.STAGING_SUPABASE_PUBLISHABLE_KEY }}
       WATCHDOG_TEST_STANDARD_EMAIL: ${{ secrets.WATCHDOG_TEST_STANDARD_EMAIL }}
       WATCHDOG_TEST_STANDARD_PASSWORD: ${{ secrets.WATCHDOG_TEST_STANDARD_PASSWORD }}
+      WATCHDOG_TEST_AGENT_EMAIL: ${{ secrets.WATCHDOG_TEST_AGENT_EMAIL }}
+      WATCHDOG_TEST_AGENT_PASSWORD: ${{ secrets.WATCHDOG_TEST_AGENT_PASSWORD }}
       WATCHDOG_TEST_DEVELOPER_EMAIL: ${{ secrets.WATCHDOG_TEST_DEVELOPER_EMAIL }}
       WATCHDOG_TEST_DEVELOPER_PASSWORD: ${{ secrets.WATCHDOG_TEST_DEVELOPER_PASSWORD }}
       VISUAL_BASE_URL: http://127.0.0.1:4173
@@ -76,6 +86,8 @@ jobs:
           test -n "$STAGING_SUPABASE_PUBLISHABLE_KEY"
           test -n "$WATCHDOG_TEST_STANDARD_EMAIL"
           test -n "$WATCHDOG_TEST_STANDARD_PASSWORD"
+          test -n "$WATCHDOG_TEST_AGENT_EMAIL"
+          test -n "$WATCHDOG_TEST_AGENT_PASSWORD"
           test -n "$WATCHDOG_TEST_DEVELOPER_EMAIL"
           test -n "$WATCHDOG_TEST_DEVELOPER_PASSWORD"
 
@@ -101,7 +113,7 @@ jobs:
               raise SystemExit('Invalid staging project boundary; refusing to run.')
 
           touched = 0
-          for root in (Path('property'),):
+          for root in (Path('property'), Path('agent'), Path('transaction')):
               for file in root.rglob('*'):
                   if not file.is_file() or file.suffix.lower() not in {'.html', '.js', '.mjs'}:
                       continue
@@ -158,6 +170,9 @@ jobs:
 
       - name: Run authenticated desktop and mobile acceptance
         run: node property/tests/hosted-visual-acceptance.mjs
+
+      - name: Verify actual Agent entry and basic interactions
+        run: node property/tests/agent-day-one-acceptance.mjs
 
       - name: Run WebKit mobile Index profile acceptance
         run: node property/tests/index-profile-webkit-acceptance.mjs

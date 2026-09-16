@@ -7,6 +7,7 @@ function normalizeTransactionUrl(){
   }
 }
 function loadEvidenceFirst(){
+  if(window.WatchdogTransactionAccess?.evidence!==true)return;
   if(window.__WATCHDOG_TRANSACTION_EVIDENCE_FIRST__||document.querySelector('script[data-transaction-evidence-first]'))return;
   var evidence=document.createElement('script');
   evidence.src='/transaction/evidence-first.js?v=20260916b';
@@ -42,6 +43,7 @@ function loadMunicipalStatus(){
   document.body.appendChild(status);
 }
 function loadMunicipalClearance(){
+  if(window.WatchdogTransactionAccess?.evidence!==true)return;
   if(window.__WATCHDOG_MUNICIPAL_CLEARANCE_WORKFLOW__||document.querySelector('script[data-transaction-municipal-clearance]')){setTimeout(loadMunicipalStatus,0);return;}
   var workflow=document.createElement('script');
   workflow.src='/transaction/municipal-clearance.js?v=20260915a';
@@ -64,11 +66,6 @@ function loadPreflight(){
   if(document.readyState==='loading'){
     document.write('<script data-transaction-preflight src="/transaction/preflight.js?v=20260916b"><\/script>');
     document.write('<script data-transaction-evidence-addons src="/transaction/evidence-addons.js?v=20260915a"><\/script>');
-    document.write('<script data-transaction-municipal-clearance src="/transaction/municipal-clearance.js?v=20260915a"><\/script>');
-    document.write('<script data-transaction-municipal-status src="/transaction/municipal-status.js?v=20260915a"><\/script>');
-    document.write('<script data-transaction-documents src="/transaction/documents.js?v=20260915a"><\/script>');
-    document.write('<script data-transaction-refinements src="/transaction/refinements.js?v=20260916b"><\/script>');
-    document.write('<script data-transaction-evidence-first src="/transaction/evidence-first.js?v=20260916b"><\/script>');
     return;
   }
   var script=document.createElement('script');
@@ -82,11 +79,11 @@ function patch(){
   var bar=document.querySelector('.wdx-pagebar');
   if(bar){
     var kicker=bar.querySelector('.wdx-kicker'),h=bar.querySelector('h1'),p=bar.querySelector('p');
-    if(kicker)kicker.textContent='Pro+ transaction intelligence';
+    if(kicker)kicker.textContent='Agent transaction workspace';
     if(h)h.textContent='Transaction Command Center';
     if(p)p.textContent='Coordinate closing readiness, disclosures, assignments and source-aware Watchdog evidence across every active deal.';
     var primary=bar.querySelector('.wdx-page-actions .primary');
-    if(primary){primary.href='/property/pro';primary.innerHTML='<i class="fas fa-briefcase"></i> Professional Hub';}
+    if(primary){primary.href='/pro';primary.innerHTML='<i class="fas fa-briefcase"></i> Professional Hub';}
   }
   var nav=document.querySelector('.wd4-nav-links');
   if(nav&&!nav.querySelector('a[href="/transaction"]')){
@@ -95,6 +92,8 @@ function patch(){
   }
 }
 normalizeTransactionUrl();
+loadRefinements();
+document.addEventListener('watchdog:transaction-access-ready',loadMunicipalClearance);
 loadPreflight();
 if(document.readyState==='loading')document.addEventListener('DOMContentLoaded',function(){setTimeout(patch,0);setTimeout(patch,250);},{once:true});else{setTimeout(patch,0);setTimeout(patch,250);}
 })();

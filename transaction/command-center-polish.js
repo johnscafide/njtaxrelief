@@ -56,7 +56,8 @@ function syncReviewStamp(){
   if(!stamp||!title)return;
   var text=String(title.textContent||'');
   var match=text.match(/checked\s+(.+)$/i);
-  stamp.textContent=match?'Last checked '+match[1]:'Not checked yet';
+  var value=match?'Last checked '+match[1]:'Not checked yet';
+  if(stamp.textContent!==value)stamp.textContent=value;
 }
 
 function relabelPortfolio(){
@@ -64,8 +65,8 @@ function relabelPortfolio(){
   if(!aside)return;
   var eyebrow=aside.querySelector('.tx-portfolio-head .tx-eyebrow');
   var heading=aside.querySelector('.tx-portfolio-head h3');
-  if(eyebrow)eyebrow.textContent='TRANSACTION FILES';
-  if(heading)heading.textContent='Deal folders';
+  if(eyebrow&&eyebrow.textContent!=='TRANSACTION FILES')eyebrow.textContent='TRANSACTION FILES';
+  if(heading&&heading.textContent!=='Deal folders')heading.textContent='Deal folders';
 }
 
 function run(){

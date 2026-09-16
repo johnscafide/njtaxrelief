@@ -68,7 +68,7 @@
     var tabs=q('.aci-tabs',shell);
     if(tabs){
       var labels={health:'Health',segments:'Segments',property:'Matches',opportunities:'Opportunities',reengage:'Re-engage'};
-      qa('[data-aci-tab]',tabs).forEach(function(btn){var key=btn.getAttribute('data-aci-tab'),icon=q('i',btn);btn.innerHTML=(icon?icon.outerHTML:'')+labels[key];});
+      qa('[data-aci-tab]',tabs).forEach(function(btn){var key=btn.getAttribute('data-aci-tab'),icon=q('i',btn);setHtml(btn,(icon?icon.outerHTML:'')+labels[key]);});
     }
 
     var progress=q('#aci-progress-label',shell);

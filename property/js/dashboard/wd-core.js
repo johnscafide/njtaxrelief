@@ -127,7 +127,17 @@
     var c = db();
     if (!c) { fail('The data client could not start. Reload to try again.'); return; }
     var guard = setTimeout(function () { fail('The dashboard did not finish loading. Reload to retry, or open your account page if it keeps happening.'); }, 14000);
-    c.auth.getSession().then(function (res) { var session = res && res.data && res.data.session; if (!session || !session.user) { location.replace('/property/'); return null; } S.user = session.user; return loadData(); }).then(function (skipped) {
+    c.auth.getSession().then(function (res) {
+      var session = res && res.data && res.data.session;
+      if (!session || !session.user) {
+        clearTimeout(guard);
+        var next = new URLSearchParams(location.search).get('return') || (location.pathname + location.search + location.hash);
+        w.NJPTRSupabaseRuntime.openOnboarding(next);
+        return null;
+      }
+      S.user = session.user;
+      return loadData();
+    }).then(function (skipped) {
       if (skipped === null) return;
       clearTimeout(guard);
       var bootEl = H.el('wdd-boot'), app = H.el('wdd-app'), pull = H.el('wdd-pull');
