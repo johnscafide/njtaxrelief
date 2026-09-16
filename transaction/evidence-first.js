@@ -18,13 +18,14 @@ function payload(item){return item&&item.payload&&typeof item.payload==='object'
 function getClient(){if(client)return client;try{client=window.NJPTRSupabaseRuntime&&window.NJPTRSupabaseRuntime.createClient?window.NJPTRSupabaseRuntime.createClient():null}catch(e){console.warn('Evidence-first client unavailable',e)}return client}
 function activeId(){return clean(document.querySelector('.tx-list-card.active')?.dataset?.txId)}
 function fmtDate(v){if(!v)return'';const d=new Date(v);return Number.isFinite(d.getTime())?d.toLocaleDateString('en-US',{month:'short',day:'numeric',year:'numeric'}):clean(v)}
+function fmtMoney(v){const n=Number(v);return Number.isFinite(n)?n.toLocaleString('en-US',{style:'currency',currency:'USD'}):''}
 function link(url,label){return url?`<a class="tx-source-link" href="${esc(url)}" target="_blank" rel="noopener">${esc(label)} <i class="fas fa-arrow-up-right-from-square"></i></a>`:''}
-function fact(label,value){return value?`<div class="tx-inline-fact"><span>${esc(label)}</span><b>${esc(value)}</b></div>`:''}
+function fact(label,value){return value!==undefined&&value!==null&&value!==''?`<div class="tx-inline-fact"><span>${esc(label)}</span><b>${esc(value)}</b></div>`:''}
 function list(values){const a=(Array.isArray(values)?values:[]).filter(Boolean);return a.length?`<ul class="tx-inline-list">${a.map(x=>`<li>${esc(x)}</li>`).join('')}</ul>`:''}
 
 function addStyle(){
   if(document.querySelector('link[data-transaction-evidence-first]'))return;
-  const l=document.createElement('link');l.rel='stylesheet';l.href='/transaction/evidence-first.css?v=20260916b';l.dataset.transactionEvidenceFirst='true';document.head.appendChild(l);
+  const l=document.createElement('link');l.rel='stylesheet';l.href='/transaction/evidence-first.css?v=20260916c';l.dataset.transactionEvidenceFirst='true';document.head.appendChild(l);
 }
 function cardByTitle(re){return Array.from(document.querySelectorAll('#tx-source-sweep .tx-source-card')).find(c=>re.test(clean(c.querySelector('strong')?.textContent)))}
 function bodyHost(card){return card?.querySelector('.tx-source-provenance')||card?.querySelector('.tx-source-actions')||null}
@@ -59,6 +60,17 @@ function patchViolation(item){
   replaceCardBody(card,violationHtml(item));demoteLinks(card);
 }
 
+function taxHtml(item){
+  const p=payload(item),annual=p.annual_billed&&typeof p.annual_billed==='object'?p.annual_billed:{},pas=p.pas1_tax_info&&typeof p.pas1_tax_info==='object'?p.pas1_tax_info:{};
+  const y24=pas.tax_2024!=null?pas.tax_2024:annual['2024'],y25=pas.tax_2025!=null?pas.tax_2025:annual['2025'];
+  const live=p.municipal_live_account_checked===true||item.source_type==='live_municipal_account';
+  if(!live&&!Object.keys(annual).length)return '';
+  return `<div class="tx-evidence-box tx-evidence-first-card"><div class="tx-evidence-kicker">Live municipal tax account + PAS-1 history</div><div class="tx-inline-fact-grid">${fact('2024 tax billed',y24!=null?fmtMoney(y24):'Not returned')}${fact('2025 tax billed',y25!=null?fmtMoney(y25):'Not returned')}${fact('Open tax balance',p.live_open_balance!=null?fmtMoney(p.live_open_balance):'')}${fact('Past due',p.past_due_balance!=null?fmtMoney(p.past_due_balance):'')}${fact('Interest',p.interest_due!=null?fmtMoney(p.interest_due):'')}${fact('Last payment',p.last_payment||'')}</div><p class="tx-inline-note">${esc(p.result_semantics||item.description||'Municipal tax-account evidence retrieved.')}</p></div>`;
+}
+function patchTax(item){
+  if(!item)return;const card=cardByTitle(/property taxes/i);if(!card)return;const html=taxHtml(item);if(!html)return;const p=payload(item),attention=Number(p.past_due_balance||0)>0||p.tax_sale_flag===true||item.evidence_state==='issue_observed';setStatus(card,attention?'Tax follow-up':'Live account',attention?'attention':'checked');replaceCardBody(card,html);demoteLinks(card);
+}
+
 function serviceHtml(item){
   const p=payload(item),resolved=p.address_schedule_resolved===true,co=p.recycling_coordinator&&typeof p.recycling_coordinator==='object'?p.recycling_coordinator:{};
   const specials=Array.isArray(p.special_collections)?p.special_collections:[];
@@ -86,16 +98,16 @@ function referenceLibrary(){
 }
 async function invokeEvidence(txId){
   const c=getClient();if(!c||!txId)return;const last=invoked.get(txId)||0;if(Date.now()-last<60000)return;invoked.set(txId,Date.now());
-  const calls=['transaction-municipal-services','transaction-environmental-evidence'].map(name=>c.functions.invoke(name,{body:{transaction_ids:[txId]}}).catch(e=>({error:e})));
+  const calls=['transaction-municipal-services','transaction-environmental-evidence','property-tax-evidence'].map(name=>c.functions.invoke(name,{body:{transaction_ids:[txId]}}).catch(e=>({error:e})));
   const results=await Promise.all(calls);results.forEach((r,i)=>{if(r?.error)console.warn('Transaction evidence augmenter failed',i,r.error)});
 }
-async function loadItems(txId){const c=getClient();if(!c)return{};const r=await c.from('transaction_items').select('item_key,title,evidence_state,severity,source_type,source_label,source_url,source_checked_at,description,payload').eq('transaction_id',txId).in('item_key',['open_violations','municipal_services','environmental_controls']);if(r.error)return{};return Object.fromEntries((r.data||[]).map(x=>[x.item_key,x]))}
+async function loadItems(txId){const c=getClient();if(!c)return{};const r=await c.from('transaction_items').select('item_key,title,evidence_state,severity,source_type,source_label,source_url,source_checked_at,description,payload').eq('transaction_id',txId).in('item_key',['open_violations','property_tax_status','municipal_services','environmental_controls']);if(r.error)return{};return Object.fromEntries((r.data||[]).map(x=>[x.item_key,x]))}
 async function refresh(){
   if(busy)return;const txId=activeId(),sweep=document.getElementById('tx-source-sweep');if(!txId||!sweep)return;busy=true;
   try{
     await invokeEvidence(txId);
     const items=await loadItems(txId);
-    patchViolation(items.open_violations);patchServices(items.municipal_services);patchEnvironment(items.environmental_controls);
+    patchViolation(items.open_violations);patchTax(items.property_tax_status);patchServices(items.municipal_services);patchEnvironment(items.environmental_controls);
     document.querySelectorAll('#tx-source-sweep .tx-source-card').forEach(demoteLinks);
     const head=sweep.querySelector('.tx-source-sweep-head h3'),copy=sweep.querySelector('.tx-source-sweep-head p');if(head)head.textContent='Evidence retrieved for this property';if(copy)copy.textContent='Watchdog brings the evidence into this workspace first. A source link is secondary and does not substitute for a completed authoritative search.';
     referenceLibrary();

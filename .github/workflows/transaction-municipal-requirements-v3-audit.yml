@@ -1,0 +1,67 @@
+name: Statewide resale and CO census v3
+
+on:
+  pull_request:
+    paths:
+      - 'property/scripts/discover_municipal_transaction_sources.py'
+      - 'property/scripts/discover_all_nj_municipal_transaction_sources.py'
+      - 'property/scripts/enrich_transaction_municipal_requirements_v2.py'
+      - 'property/scripts/enrich_transaction_municipal_requirements_v3.py'
+      - '.github/workflows/transaction-municipal-requirements-v3-audit.yml'
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  census-564:
+    runs-on: ubuntu-latest
+    timeout-minutes: 110
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - name: Install parser dependencies
+        run: python -m pip install --disable-pip-version-check openpyxl pypdf
+      - name: Compile census scripts
+        run: |
+          python -m py_compile property/scripts/discover_municipal_transaction_sources.py
+          python -m py_compile property/scripts/discover_all_nj_municipal_transaction_sources.py
+          python -m py_compile property/scripts/enrich_transaction_municipal_requirements_v2.py
+          python -m py_compile property/scripts/enrich_transaction_municipal_requirements_v3.py
+      - name: Discover official sources for all 564 municipalities
+        run: >-
+          python property/scripts/discover_all_nj_municipal_transaction_sources.py
+          --out .cache/transaction-sources/municipal-discovery-v3.json
+          --workers 12
+          --max-pages-per-site 18
+      - name: Deep audit every municipality for CO, CCO, resale and transfer aliases
+        run: >-
+          python property/scripts/enrich_transaction_municipal_requirements_v3.py
+          --municipal .cache/transaction-sources/municipal-discovery-v3.json
+          --out .cache/transaction-sources/municipal-requirements-v3.json
+      - name: Verify cardinality and Winslow regression
+        run: |
+          python - <<'PY'
+          import json
+          p='.cache/transaction-sources/municipal-requirements-v3.json'
+          d=json.load(open(p,encoding='utf-8')); rows=d.get('rows') or []
+          codes={r.get('municipality_code') for r in rows}
+          assert len(rows)==1128, (len(rows), 'expected 1128 rows')
+          assert len(codes)==564, (len(codes), 'expected 564 municipalities')
+          wins=[r for r in rows if r.get('municipality_code')=='0436' and r.get('requirement_key')=='resale_cco']
+          assert len(wins)==1
+          w=wins[0]
+          assert w.get('requirement_state') in {'explicit_required','official_process_found'}, w
+          sources=' '.join(str(x.get('url') or '') for x in w.get('source_urls') or []).lower()
+          assert 'winslowtownship.com' in sources, w
+          print(json.dumps(d.get('summary'),indent=2,sort_keys=True))
+          PY
+      - uses: actions/upload-artifact@v4
+        with:
+          name: municipal-requirements-v3-statewide
+          path: |
+            .cache/transaction-sources/municipal-discovery-v3.json
+            .cache/transaction-sources/municipal-requirements-v3.json
+          retention-days: 7
