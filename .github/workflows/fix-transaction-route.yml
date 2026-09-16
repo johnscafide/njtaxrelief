@@ -1,0 +1,64 @@
+name: One-shot transaction route repair
+
+on:
+  push:
+    branches: [main]
+    paths:
+      - '.github/workflows/fix-transaction-route.yml'
+
+permissions:
+  contents: write
+
+jobs:
+  repair:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: main
+          fetch-depth: 0
+      - name: Repair Vercel transaction routing
+        run: |
+          python - <<'PY'
+          import json
+          from pathlib import Path
+
+          path = Path('vercel.json')
+          data = json.loads(path.read_text())
+
+          # A redirect from the rewrite destination back to the public route can
+          # cause an edge redirect/rewrite loop. Canonicalization is already
+          # handled client-side by transaction/shell.js.
+          data['redirects'] = [
+              r for r in data.get('redirects', [])
+              if r.get('source') != '/transaction/index.html'
+          ]
+
+          rewrites = data.setdefault('rewrites', [])
+          wanted = {
+              '/transaction': '/transaction/index.html',
+              '/transaction/': '/transaction/index.html',
+          }
+          for source, destination in wanted.items():
+              matches = [r for r in rewrites if r.get('source') == source]
+              if matches:
+                  matches[0]['destination'] = destination
+                  for duplicate in matches[1:]:
+                      rewrites.remove(duplicate)
+              else:
+                  rewrites.insert(0, {'source': source, 'destination': destination})
+
+          path.write_text(json.dumps(data, indent=2) + '\n')
+          PY
+          python -m json.tool vercel.json >/dev/null
+      - name: Commit repair
+        run: |
+          if git diff --quiet -- vercel.json; then
+            echo 'No route change needed.'
+            exit 0
+          fi
+          git config user.name 'watchdog-route-bot'
+          git config user.email 'actions@users.noreply.github.com'
+          git add vercel.json
+          git commit -m 'fix: repair transaction production routing'
+          git push origin HEAD:main
