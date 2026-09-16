@@ -38,6 +38,8 @@ jobs:
             property/scripts/extract_transaction_municipal_requirements.py \
             property/scripts/extract_transaction_municipal_requirements_parallel.py \
             property/scripts/publish_transaction_municipal_requirements.py
+          node --check transaction/refinements.js
+          node --check transaction/shell.js
       - name: Guard source semantics and privacy boundaries
         run: |
           set -euo pipefail
