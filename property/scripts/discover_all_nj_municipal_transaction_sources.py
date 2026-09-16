@@ -8,6 +8,9 @@ Greenwich, etc.) and prevents the wrong municipal website/provider from being us
 NJW-374 also broadens the resale/occupancy vocabulary because municipalities use
 many names for the same transfer workflow (CO, CCO, resale certificate, certificate
 of compliance, transfer inspection, change-of-occupancy certificate, and more).
+It additionally probes the public WIPP metadata endpoint for every canonical
+municipality code, so WIPP coverage does not depend on whether a town website
+happens to expose a crawlable outbound link.
 """
 from __future__ import annotations
 
@@ -26,7 +29,9 @@ MUNICIPAL_QUERY = (
     "MapServer/2/query?where=1%3D1&outFields=NAME%2CCOUNTY%2CMUN_CODE&"
     "returnGeometry=false&orderByFields=MUN_CODE&f=json"
 )
-UA = "Watchdog-municipal-source-discovery/2.3 (+https://www.watchdogindex.com/)"
+WIPP_METADATA = "https://api.edmundsgovtech.cloud/wipp-core/v1/metadata/{code}"
+WIPP_PORTAL = "https://wipp.edmundsgovtech.cloud/"
+UA = "Watchdog-municipal-source-discovery/2.4 (+https://www.watchdogindex.com/)"
 ANCHOR_RE = re.compile(r'<a\b[^>]*href=["\']([^"\']+)["\'][^>]*>(.*?)</a>([^<]{0,120})', re.I | re.S)
 TAG_RE = re.compile(r"<[^>]+>")
 COUNTY_HINT_RE = re.compile(r"\(([^)]+?)\s+County\)", re.I)
@@ -113,12 +118,60 @@ def canonical_rows(module) -> list[dict[str, str]]:
     return rows
 
 
+def wipp_supported(code: str) -> tuple[bool, str]:
+    if not re.fullmatch(r"\d{4}", code or ""):
+        return False, ""
+    req = urllib.request.Request(
+        WIPP_METADATA.format(code=urllib.parse.quote(code)),
+        headers={"User-Agent": UA, "Accept": "application/json", "X-Wipp-Id": code},
+    )
+    try:
+        with urllib.request.urlopen(req, timeout=7) as response:
+            if int(response.status) != 200:
+                return False, ""
+            payload = json.loads(response.read(500_000).decode("utf-8", errors="replace"))
+            label = str(payload.get("cityName") or payload.get("municipality") or "").strip()
+            return bool(payload), label
+    except Exception:
+        return False, ""
+
+
+def install_wipp_probe(module) -> None:
+    original = module.crawl_one
+    def crawl_with_wipp(row, legal_index, max_pages):
+        result = original(row, legal_index, max_pages)
+        code = str(row.get("municipality_code") or "").strip()
+        supported, provider_city = wipp_supported(code)
+        if not supported:
+            return result
+        providers = list(result.get("external_providers") or [])
+        if not any(str(p.get("provider_key") or "") == "edmunds_wipp" for p in providers):
+            providers.append({
+                "provider_key":"edmunds_wipp",
+                "provider_label":"Edmunds GovTech / WIPP",
+                "families":["tax_collector","water_sewer"],
+                "public_search_modes":["address","block_lot","account","owner_name"],
+                "adapter_status":"live",
+                "url":WIPP_PORTAL,
+                "label":"Public property tax / utility account lookup",
+                "discovered_from":WIPP_METADATA.format(code=code),
+                "metadata_probe":True,
+                "provider_municipality":provider_city or None,
+            })
+        result["external_providers"] = sorted(providers, key=lambda x:(str(x.get("provider_key") or ""),str(x.get("url") or "")))
+        result["wipp_metadata_supported"] = True
+        result["wipp_provider_municipality"] = provider_city or None
+        return result
+    module.crawl_one = crawl_with_wipp
+
+
 def main() -> int:
     module = load_discovery()
     module.MUNICIPAL_LAYER = MUNICIPAL_QUERY
     module.canonical_rows = lambda: canonical_rows(module)
     # Precise synonyms only: discovering a source is still not proof of a requirement.
     module.FAMILIES["certificate_of_occupancy"] = tuple(dict.fromkeys(EXPANDED_OCCUPANCY_TERMS))
+    install_wipp_probe(module)
     return int(module.main())
 
 
