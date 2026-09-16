@@ -25,5 +25,7 @@ jobs:
         run: |
           node --check transaction/transaction.js
           node --check transaction/shell.js
+          node --check transaction/command-center-polish.js
+          node --check transaction/evidence-first.js
       - name: Transaction product contract
         run: node property/tests/transaction-command-center-contract.mjs
