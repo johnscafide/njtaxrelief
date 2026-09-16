@@ -1,0 +1,34 @@
+name: Agent Contact Intelligence contract
+
+on:
+  pull_request:
+    paths:
+      - 'agent/contacts/**'
+      - 'supabase/functions/agent-contact-intelligence/**'
+      - 'property/tests/agent-contact-intelligence-contract.mjs'
+      - 'property/tests/agent-contacts-contract.mjs'
+      - '.github/workflows/agent-contact-intelligence.yml'
+  push:
+    branches:
+      - main
+    paths:
+      - 'agent/contacts/**'
+      - 'supabase/functions/agent-contact-intelligence/**'
+      - 'property/tests/agent-contact-intelligence-contract.mjs'
+      - 'property/tests/agent-contacts-contract.mjs'
+      - '.github/workflows/agent-contact-intelligence.yml'
+  workflow_dispatch:
+
+jobs:
+  contract:
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+      - name: Verify Agent Contact Intelligence
+        run: node property/tests/agent-contact-intelligence-contract.mjs
+      - name: Preserve Agent Contacts privacy and export contract
+        run: node property/tests/agent-contacts-contract.mjs
