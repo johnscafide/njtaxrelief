@@ -1,0 +1,32 @@
+/* NJW-376 follow-up: preserve the approved compact rail while keeping Add transaction reachable. */
+.tx-portfolio{position:relative!important}
+.tx-portfolio-head{
+  display:flex!important;
+  position:absolute!important;
+  top:10px!important;
+  right:10px!important;
+  z-index:4!important;
+  padding:0!important;
+  border:0!important;
+  background:transparent!important;
+}
+.tx-portfolio-head>div{display:none!important}
+.tx-portfolio-head .tx-icon-btn{
+  width:34px!important;
+  height:34px!important;
+  border-radius:8px!important;
+  border:1px solid var(--tx-line-app,#dce5ef)!important;
+  background:#fff!important;
+  color:var(--tx-accent-dark,#0e2248)!important;
+  box-shadow:none!important;
+}
+.tx-portfolio-head .tx-icon-btn:hover{
+  border-color:#b9cbe2!important;
+  background:#f8fbff!important;
+}
+.tx-filter-row{padding-right:50px!important}
+
+@media(max-width:900px){
+  .tx-portfolio-head{top:9px!important;right:9px!important}
+  .tx-filter-row{padding-right:49px!important}
+}
