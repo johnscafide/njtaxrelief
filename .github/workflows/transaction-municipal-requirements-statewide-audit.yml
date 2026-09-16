@@ -1,0 +1,63 @@
+name: Statewide municipal requirement audit
+
+on:
+  push:
+    branches:
+      - njw-359-statewide-municipal-requirements-v2
+    paths:
+      - 'property/scripts/enrich_transaction_municipal_requirements_v2.py'
+      - 'property/tests/transaction-municipal-requirements-v2-contract.mjs'
+      - '.github/workflows/transaction-municipal-requirements-statewide-audit.yml'
+  pull_request:
+    paths:
+      - 'property/scripts/enrich_transaction_municipal_requirements_v2.py'
+      - 'property/tests/transaction-municipal-requirements-v2-contract.mjs'
+      - '.github/workflows/transaction-municipal-requirements-statewide-audit.yml'
+  workflow_dispatch:
+
+jobs:
+  audit-564-municipalities:
+    runs-on: ubuntu-latest
+    timeout-minutes: 90
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+      - name: Install extraction dependencies
+        run: python -m pip install --disable-pip-version-check openpyxl pypdf
+      - name: Run v2 contract
+        run: node property/tests/transaction-municipal-requirements-v2-contract.mjs
+      - name: Discover official municipal sources statewide
+        run: >-
+          python property/scripts/discover_all_nj_municipal_transaction_sources.py
+          --out .cache/transaction-sources/municipal-discovery-v2.json
+          --workers 10
+          --max-pages-per-site 14
+      - name: Extract CO/CCO and smoke/fire requirements for all 564 municipalities
+        run: >-
+          python property/scripts/enrich_transaction_municipal_requirements_v2.py
+          --municipal .cache/transaction-sources/municipal-discovery-v2.json
+          --out .cache/transaction-sources/municipal-requirements-v2.json
+      - name: Verify statewide output cardinality
+        run: |
+          python - <<'PY'
+          import json
+          p='.cache/transaction-sources/municipal-requirements-v2.json'
+          d=json.load(open(p,encoding='utf-8'))
+          rows=d.get('rows') or []
+          codes={r.get('municipality_code') for r in rows}
+          assert len(rows)==1128, f'expected 1128 rows, got {len(rows)}'
+          assert len(codes)==564, f'expected 564 municipality codes, got {len(codes)}'
+          print(json.dumps(d.get('summary'),indent=2,sort_keys=True))
+          PY
+      - uses: actions/upload-artifact@v4
+        with:
+          name: municipal-requirements-v2-statewide
+          path: |
+            .cache/transaction-sources/municipal-discovery-v2.json
+            .cache/transaction-sources/municipal-requirements-v2.json
+          retention-days: 7
