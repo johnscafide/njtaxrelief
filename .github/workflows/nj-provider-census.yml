@@ -11,7 +11,11 @@ on:
       - 'property/scripts/publish_transaction_provider_registry.py'
       - 'property/scripts/extract_transaction_municipal_requirements.py'
       - 'property/scripts/extract_transaction_municipal_requirements_parallel.py'
+      - 'property/scripts/enrich_transaction_municipal_requirements_v2.py'
+      - 'property/scripts/enrich_transaction_municipal_requirements_v3.py'
       - 'property/scripts/publish_transaction_municipal_requirements.py'
+      - 'property/js/anchor-application-municipal-tax.js'
+      - 'supabase/functions/municipal-property-tax-evidence/**'
       - 'supabase/functions/transaction-municipal-evidence/**'
       - 'supabase/functions/transaction-municipal-requirements/**'
       - 'supabase/functions/transaction-county-evidence/**'
@@ -26,7 +30,11 @@ on:
       - 'property/scripts/publish_transaction_provider_registry.py'
       - 'property/scripts/extract_transaction_municipal_requirements.py'
       - 'property/scripts/extract_transaction_municipal_requirements_parallel.py'
+      - 'property/scripts/enrich_transaction_municipal_requirements_v2.py'
+      - 'property/scripts/enrich_transaction_municipal_requirements_v3.py'
       - 'property/scripts/publish_transaction_municipal_requirements.py'
+      - 'property/js/anchor-application-municipal-tax.js'
+      - 'supabase/functions/municipal-property-tax-evidence/**'
   schedule:
     - cron: '41 8 * * 1'
   workflow_dispatch:
@@ -45,24 +53,44 @@ jobs:
           python-version: '3.12'
       - name: Install requirement parsers
         run: python -m pip install --disable-pip-version-check openpyxl pypdf
+      - name: Compile statewide parsers
+        run: |
+          python -m py_compile \
+            property/scripts/discover_all_nj_municipal_transaction_sources.py \
+            property/scripts/enrich_transaction_municipal_requirements_v2.py \
+            property/scripts/enrich_transaction_municipal_requirements_v3.py
+          node --check property/js/anchor-application-municipal-tax.js
       - name: Crawl all 564 municipalities
         run: >-
           python3 property/scripts/discover_all_nj_municipal_transaction_sources.py
           --out "$RUNNER_TEMP/municipal.json"
-          --workers 12
-          --max-pages-per-site 8
+          --workers 14
+          --max-pages-per-site 18
       - name: Crawl all 21 county record systems
         run: >-
           python3 property/scripts/discover_county_record_sources.py
           --out "$RUNNER_TEMP/county.json"
-          --workers 12
+          --workers 14
           --max-pages-per-site 18
-      - name: Build 564-municipality CO and fire requirement registry
+      - name: Build 564-municipality CO and fire requirement registry (expanded resale/CCO)
         run: >-
-          python3 property/scripts/extract_transaction_municipal_requirements_parallel.py
+          python3 property/scripts/enrich_transaction_municipal_requirements_v3.py
           --municipal "$RUNNER_TEMP/municipal.json"
           --out "$RUNNER_TEMP/municipal-requirements.json"
-          --workers 14
+      - name: Verify statewide requirement cardinality
+        run: |
+          python - <<'PY'
+          import json, os
+          p=os.environ['RUNNER_TEMP']+'/municipal-requirements.json'
+          d=json.load(open(p,encoding='utf-8'))
+          rows=d.get('rows') or []
+          codes={r.get('municipality_code') for r in rows}
+          assert len(rows)==1128, (len(rows), 'expected 1128 requirement rows')
+          assert len(codes)==564, (len(codes), 'expected all 564 municipality codes')
+          winslow=[r for r in rows if r.get('municipality_code')=='0436' and r.get('requirement_key')=='resale_cco']
+          assert len(winslow)==1
+          print(json.dumps(d.get('summary'),indent=2,sort_keys=True))
+          PY
       - name: Print aggregate provider census
         run: >-
           python3 property/scripts/summarize_transaction_provider_census.py
@@ -77,7 +105,7 @@ jobs:
           python3 property/scripts/publish_transaction_provider_registry.py
           --municipal "$RUNNER_TEMP/municipal.json"
           --county "$RUNNER_TEMP/county.json"
-      - name: Publish municipal CO and fire requirements
+      - name: Publish municipal CO and fire requirements (expanded resale/CCO)
         if: github.event_name != 'pull_request'
         env:
           SUPABASE_URL: https://uvkvaxljhhngydvlrzom.supabase.co
