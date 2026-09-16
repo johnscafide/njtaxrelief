@@ -102,9 +102,22 @@ def _chapter_candidates(raw: bytes, final: str, family: str) -> list[tuple[int, 
     return out[:5]
 
 
-def ordinance_documents(url: str, family: str) -> tuple[list[dict[str, str]], list[dict[str, str]]]:
+def _fetch_ordinance_root(url: str) -> tuple[bytes, str, str, bool]:
+    """Prefer HTTPS for legacy directory links, then fall back to the recorded URL."""
+    upgraded = url
+    if url.lower().startswith("http://"):
+        upgraded = "https://" + url[7:]
+    raw, ctype, final = _fetch_raw(upgraded)
+    if raw:
+        return raw, ctype, final, upgraded != url
+    if upgraded != url:
+        raw, ctype, final = _fetch_raw(url)
+    return raw, ctype, final, False
+
+
+def ordinance_documents(url: str, family: str) -> tuple[list[dict[str, str]], list[dict[str, str]], bool]:
     """Return official landing/chapter documents, bounded to same-host relevant links."""
-    raw, ctype, final = _fetch_raw(url)
+    raw, ctype, final, upgraded = _fetch_ordinance_root(url)
     docs: list[dict[str, str]] = []
     root_text = _text_from(raw, ctype, final)
     if root_text:
@@ -118,7 +131,7 @@ def ordinance_documents(url: str, family: str) -> tuple[list[dict[str, str]], li
         source = {"label": label or "Official code detail", "url": cfinal}
         chapter_sources.append(source)
         docs.append({**source, "text": text})
-    return docs, chapter_sources
+    return docs, chapter_sources, upgraded
 
 
 def build_row(muni: dict[str, Any], family: str, ordinance_map: dict[str, list[str]], generated: str) -> dict[str, Any]:
@@ -131,15 +144,13 @@ def build_row(muni: dict[str, Any], family: str, ordinance_map: dict[str, list[s
         row["metadata"] = metadata
         return row
 
-    docs, chapter_sources = ordinance_documents(ordinance_url, family)
+    docs, chapter_sources, upgraded = ordinance_documents(ordinance_url, family)
     extra_requirements: list[str] = []
     relevant_fee_texts: list[str] = []
     family_re = base.CO_TERMS if family == "resale_cco" else base.FIRE_TERMS
     explicit_hits: list[bool] = []
     for doc in docs:
         text = doc.get("text") or ""
-        # Keep context isolated: this page must contain the requirement family before
-        # its adjacent timing/fee/inspection statements can be considered.
         reqs = v2.requirement_candidates(text, family, 20)
         extra_requirements.extend(reqs)
         if family_re.search(text):
@@ -188,6 +199,7 @@ def build_row(muni: dict[str, Any], family: str, ordinance_map: dict[str, list[s
         "extractor_version": "v3-ordinance-chapters-isolated",
         "ordinance_chapter_count": len(chapter_sources),
         "ordinance_chapters_checked": [s["url"] for s in chapter_sources],
+        "ordinance_https_upgrade_used": upgraded,
         "local_requirement_count": len(local_requirements),
         "chapter_context_isolated": True,
         "never_infer_not_required": True,
