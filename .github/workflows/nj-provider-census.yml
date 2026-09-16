@@ -72,7 +72,7 @@ jobs:
           --out "$RUNNER_TEMP/county.json"
           --workers 12
           --max-pages-per-site 18
-      - name: Build 564-municipality resale CO CCO and fire requirement registry
+      - name: Build 564-municipality CO and fire requirement registry (expanded resale/CCO)
         run: >-
           python3 property/scripts/enrich_transaction_municipal_requirements_v3.py
           --municipal "$RUNNER_TEMP/municipal.json"
@@ -105,7 +105,7 @@ jobs:
           python3 property/scripts/publish_transaction_provider_registry.py
           --municipal "$RUNNER_TEMP/municipal.json"
           --county "$RUNNER_TEMP/county.json"
-      - name: Publish municipal resale CO CCO and fire requirements
+      - name: Publish municipal CO and fire requirements (expanded resale/CCO)
         if: github.event_name != 'pull_request'
         env:
           SUPABASE_URL: https://uvkvaxljhhngydvlrzom.supabase.co
