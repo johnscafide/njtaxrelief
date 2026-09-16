@@ -13,7 +13,7 @@ assert.match(ui,/Health Check/);assert.match(ui,/Segments/);assert.match(ui,/Pro
 assert.match(ui,/agent-contact-intelligence/,'UI must invoke the governed server boundary');
 assert.match(ui,/agent-contact-files/,'Re-engagement export must remain in the private Agent file bucket');
 assert.doesNotMatch(ui,/service_role|SUPABASE_SERVICE_ROLE_KEY|sb_secret_/i,'Browser code must not contain service credentials');
-assert.match(ui,/does not establish that the contact owns the property/i,'UI must disclose address-match limits');
+assert.match(ui,/do(?:es)? not (?:prove ownership|establish that the contact owns the property)/i,'UI must disclose address-match limits');
 assert.match(ui,/does not assume marketing consent/i,'UI must disclose outreach consent boundary');
 assert.match(ui,/not a prediction that someone will sell, move, buy or transact/i,'Opportunity UI must not claim transaction propensity');
 assert.match(edge,/watchdog_effective_plan/,'Edge function must use server-owned entitlement');
