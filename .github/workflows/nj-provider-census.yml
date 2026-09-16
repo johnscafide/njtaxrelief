@@ -10,7 +10,9 @@ on:
       - 'property/scripts/summarize_transaction_provider_census.py'
       - 'property/scripts/publish_transaction_provider_registry.py'
       - 'property/scripts/extract_transaction_municipal_requirements.py'
+      - 'property/scripts/extract_transaction_municipal_requirements_v2.py'
       - 'property/scripts/extract_transaction_municipal_requirements_parallel.py'
+      - 'property/scripts/audit_transaction_municipal_requirements.py'
       - 'property/scripts/publish_transaction_municipal_requirements.py'
       - 'supabase/functions/transaction-municipal-evidence/**'
       - 'supabase/functions/transaction-municipal-requirements/**'
@@ -25,7 +27,9 @@ on:
       - 'property/scripts/summarize_transaction_provider_census.py'
       - 'property/scripts/publish_transaction_provider_registry.py'
       - 'property/scripts/extract_transaction_municipal_requirements.py'
+      - 'property/scripts/extract_transaction_municipal_requirements_v2.py'
       - 'property/scripts/extract_transaction_municipal_requirements_parallel.py'
+      - 'property/scripts/audit_transaction_municipal_requirements.py'
       - 'property/scripts/publish_transaction_municipal_requirements.py'
   schedule:
     - cron: '41 8 * * 1'
@@ -63,6 +67,11 @@ jobs:
           --municipal "$RUNNER_TEMP/municipal.json"
           --out "$RUNNER_TEMP/municipal-requirements.json"
           --workers 14
+      - name: Certify every municipality and both requirement families
+        run: >-
+          python3 property/scripts/audit_transaction_municipal_requirements.py
+          --input "$RUNNER_TEMP/municipal-requirements.json"
+          --out "$RUNNER_TEMP/municipal-requirements-audit.json"
       - name: Print aggregate provider census
         run: >-
           python3 property/scripts/summarize_transaction_provider_census.py
@@ -94,5 +103,6 @@ jobs:
             ${{ runner.temp }}/municipal.json
             ${{ runner.temp }}/county.json
             ${{ runner.temp }}/municipal-requirements.json
+            ${{ runner.temp }}/municipal-requirements-audit.json
           retention-days: 14
           if-no-files-found: warn
