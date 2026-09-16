@@ -8,6 +8,11 @@ on:
       - 'property/scripts/enrich_transaction_municipal_requirements_v2.py'
       - 'property/tests/transaction-municipal-requirements-v2-contract.mjs'
       - '.github/workflows/transaction-municipal-requirements-statewide-audit.yml'
+  pull_request:
+    paths:
+      - 'property/scripts/enrich_transaction_municipal_requirements_v2.py'
+      - 'property/tests/transaction-municipal-requirements-v2-contract.mjs'
+      - '.github/workflows/transaction-municipal-requirements-statewide-audit.yml'
   workflow_dispatch:
 
 jobs:
