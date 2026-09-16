@@ -4,6 +4,10 @@
 The canonical identity is NJ municipality code + county + municipality name. This
 avoids collapsing same-named municipalities across counties (Franklin, Washington,
 Greenwich, etc.) and prevents the wrong municipal website/provider from being used.
+
+NJW-374 also broadens the resale/occupancy vocabulary because municipalities use
+many names for the same transfer workflow (CO, CCO, resale certificate, certificate
+of compliance, transfer inspection, change-of-occupancy certificate, and more).
 """
 from __future__ import annotations
 
@@ -22,10 +26,20 @@ MUNICIPAL_QUERY = (
     "MapServer/2/query?where=1%3D1&outFields=NAME%2CCOUNTY%2CMUN_CODE&"
     "returnGeometry=false&orderByFields=MUN_CODE&f=json"
 )
-UA = "Watchdog-municipal-source-discovery/2.2 (+https://www.watchdogindex.com/)"
+UA = "Watchdog-municipal-source-discovery/2.3 (+https://www.watchdogindex.com/)"
 ANCHOR_RE = re.compile(r'<a\b[^>]*href=["\']([^"\']+)["\'][^>]*>(.*?)</a>([^<]{0,120})', re.I | re.S)
 TAG_RE = re.compile(r"<[^>]+>")
 COUNTY_HINT_RE = re.compile(r"\(([^)]+?)\s+County\)", re.I)
+EXPANDED_OCCUPANCY_TERMS = (
+    "certificate of occupancy", "continued certificate", "continued certificate of occupancy",
+    "continuing certificate of occupancy", "certificate of continued occupancy", "continued occupancy",
+    "continued occupancy certificate", "cco", "resale inspection", "resale certificate",
+    "resale occupancy certificate", "resale cco", "residential resale inspection",
+    "dwelling resale inspection", "sale inspection", "occupancy inspection", "occupancy certification",
+    "change of occupancy", "change in occupancy", "change-in-occupancy", "change of ownership inspection",
+    "certificate of compliance", "property transfer inspection", "transfer of title inspection",
+    "transfer inspection", "transfer certificate", "property transfer certificate",
+)
 
 
 def load_discovery():
@@ -78,22 +92,14 @@ def directory_candidates(module) -> list[dict[str, str]]:
         if not host or host.endswith("nj.gov"):
             continue
         hint = COUNTY_HINT_RE.search(html.unescape(tail or ""))
-        out.append({
-            "municipality_label": label,
-            "municipality_key": module.normalize_municipality(label),
-            "county_hint": (hint.group(1).strip() if hint else ""),
-            "root_url": url,
-            "host": host,
-        })
+        out.append({"municipality_label":label,"municipality_key":module.normalize_municipality(label),"county_hint":(hint.group(1).strip() if hint else ""),"root_url":url,"host":host})
     return out
 
 
 def canonical_rows(module) -> list[dict[str, str]]:
     candidates = directory_candidates(module)
     by_key: dict[str, list[dict[str, str]]] = {}
-    for row in candidates:
-        by_key.setdefault(row["municipality_key"], []).append(row)
-
+    for row in candidates: by_key.setdefault(row["municipality_key"], []).append(row)
     rows: list[dict[str, str]] = []
     for entity in canonical_entities():
         key = module.normalize_municipality(entity["municipality_label"])
@@ -103,14 +109,7 @@ def canonical_rows(module) -> list[dict[str, str]]:
         pool = county_matches or (options if len(options) == 1 else [])
         pool = sorted(pool, key=lambda r: (0 if r["root_url"].startswith("https://") else 1, len(r["root_url"])))
         chosen = pool[0] if pool else None
-        rows.append({
-            **entity,
-            "municipality_key": key,
-            "root_url": chosen["root_url"] if chosen else "",
-            "host": chosen["host"] if chosen else "",
-            "directory_source": module.LOCAL_GOV,
-            "canonical_source": MUNICIPAL_QUERY,
-        })
+        rows.append({**entity,"municipality_key":key,"root_url":chosen["root_url"] if chosen else "","host":chosen["host"] if chosen else "","directory_source":module.LOCAL_GOV,"canonical_source":MUNICIPAL_QUERY})
     return rows
 
 
@@ -118,6 +117,8 @@ def main() -> int:
     module = load_discovery()
     module.MUNICIPAL_LAYER = MUNICIPAL_QUERY
     module.canonical_rows = lambda: canonical_rows(module)
+    # Precise synonyms only: discovering a source is still not proof of a requirement.
+    module.FAMILIES["certificate_of_occupancy"] = tuple(dict.fromkeys(EXPANDED_OCCUPANCY_TERMS))
     return int(module.main())
 
 
