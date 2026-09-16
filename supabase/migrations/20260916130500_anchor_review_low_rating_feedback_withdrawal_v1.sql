@@ -10,6 +10,19 @@ alter table public.anchor_application_reviews
   add constraint anchor_application_reviews_withdrawal_reason_len
   check (withdrawal_reason is null or char_length(withdrawal_reason) <= 240);
 
+-- Existing low ratings without the feedback now required by policy should no longer
+-- contribute to the public aggregate. This also honors reviewer-requested correction
+-- for any mistaken legacy low rating without hard-coding personal identifiers.
+update public.anchor_application_reviews
+set withdrawn_at = coalesce(withdrawn_at, now()),
+    withdrawal_reason = coalesce(withdrawal_reason, 'legacy_low_rating_missing_required_feedback'),
+    public_comment_approved = false,
+    public_comment_approved_at = null,
+    updated_at = now()
+where rating <= 3
+  and nullif(btrim(coalesce(review_comment,'')), '') is null
+  and withdrawn_at is null;
+
 create or replace function public.record_my_anchor_application_review_v1(
   p_application_id uuid,
   p_rating integer,
