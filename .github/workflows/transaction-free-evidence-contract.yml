@@ -13,7 +13,9 @@ on:
       - 'supabase/migrations/20260915214500_transaction_municipal_requirements.sql'
       - 'supabase/migrations/20260915220500_transaction_municipal_requirement_curated_overrides.sql'
       - 'property/scripts/extract_transaction_municipal_requirements*.py'
+      - 'property/scripts/audit_transaction_municipal_requirements.py'
       - 'property/scripts/publish_transaction_municipal_requirements.py'
+      - 'property/tests/transaction-municipal-requirements-extractor-contract.py'
   workflow_dispatch:
 
 permissions:
@@ -32,8 +34,14 @@ jobs:
         run: |
           python -m py_compile \
             property/scripts/extract_transaction_municipal_requirements.py \
+            property/scripts/extract_transaction_municipal_requirements_v2.py \
+            property/scripts/extract_transaction_municipal_requirements_v3.py \
             property/scripts/extract_transaction_municipal_requirements_parallel.py \
-            property/scripts/publish_transaction_municipal_requirements.py
+            property/scripts/audit_transaction_municipal_requirements.py \
+            property/scripts/publish_transaction_municipal_requirements.py \
+            property/tests/transaction-municipal-requirements-extractor-contract.py
+      - name: Verify municipal extractor isolation contract
+        run: python property/tests/transaction-municipal-requirements-extractor-contract.py
       - name: Guard source semantics and privacy boundaries
         run: |
           set -euo pipefail
@@ -59,6 +67,10 @@ jobs:
           grep -q 'curated_override boolean not null default false' "$curated_migration"
           grep -q 'curated_override=eq.true' property/scripts/publish_transaction_municipal_requirements.py
           grep -q 'len(municipalities) != 564 or len(rows) != 1128' property/scripts/publish_transaction_municipal_requirements.py
+          grep -q 'ordinance_text_checked' property/scripts/extract_transaction_municipal_requirements_v2.py
+          grep -q 'ordinance_chapter_count' property/scripts/extract_transaction_municipal_requirements_v3.py
+          grep -q 'chapter_context_isolated' property/scripts/extract_transaction_municipal_requirements_v3.py
+          grep -q 'never_infer_not_required' property/scripts/extract_transaction_municipal_requirements_v3.py
           grep -q "item_key==='solar'" "$addon"
           grep -q "electric_utility" "$addon"
           grep -q 'transaction/evidence-addons.js' transaction/shell.js
@@ -85,5 +97,7 @@ jobs:
           set -euo pipefail
           wf=.github/workflows/nj-provider-census.yml
           grep -q 'Build 564-municipality CO and fire requirement registry' "$wf"
+          grep -q 'Certify every municipality and both requirement families' "$wf"
+          grep -q 'municipal-requirements-audit.json' "$wf"
           grep -q 'Publish municipal CO and fire requirements' "$wf"
           grep -q -- '--workers 14' "$wf"

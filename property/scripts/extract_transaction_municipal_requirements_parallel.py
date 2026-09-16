@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""Parallel runner for the governed municipal requirements extractor."""
+"""Parallel runner for the governed ordinance-aware municipal requirements extractor."""
 from __future__ import annotations
 
 import argparse
@@ -10,7 +10,7 @@ import pathlib
 from collections import defaultdict
 
 ROOT = pathlib.Path(__file__).resolve().parents[2]
-IMPL = ROOT / "property/scripts/extract_transaction_municipal_requirements.py"
+IMPL = ROOT / "property/scripts/extract_transaction_municipal_requirements_v4.py"
 
 
 def load_impl():
@@ -50,9 +50,18 @@ def main() -> int:
     with open(args.out, "w", encoding="utf-8") as f:
         json.dump({"generated_at": generated, "municipalities": len(codes), "rows": out}, f, indent=2, ensure_ascii=False)
     counts = defaultdict(int)
+    detail = defaultdict(int)
     for row in out:
         counts[(row["requirement_key"], row["requirement_state"])] += 1
-    print(json.dumps({"municipalities": len(codes), "rows": len(out), "states": {f"{k[0]}:{k[1]}": v for k,v in counts.items()}}, sort_keys=True))
+        local_count = int((row.get("metadata") or {}).get("local_requirement_count") or 0)
+        if local_count > 0:
+            detail[row["requirement_key"]] += 1
+    print(json.dumps({
+        "municipalities": len(codes),
+        "rows": len(out),
+        "states": {f"{k[0]}:{k[1]}": v for k,v in counts.items()},
+        "municipalities_with_local_detail": dict(detail),
+    }, sort_keys=True))
     return 0
 
 
