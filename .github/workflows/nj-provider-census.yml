@@ -64,13 +64,13 @@ jobs:
         run: >-
           python3 property/scripts/discover_all_nj_municipal_transaction_sources.py
           --out "$RUNNER_TEMP/municipal.json"
-          --workers 12
+          --workers 14
           --max-pages-per-site 18
       - name: Crawl all 21 county record systems
         run: >-
           python3 property/scripts/discover_county_record_sources.py
           --out "$RUNNER_TEMP/county.json"
-          --workers 12
+          --workers 14
           --max-pages-per-site 18
       - name: Build 564-municipality CO and fire requirement registry (expanded resale/CCO)
         run: >-
