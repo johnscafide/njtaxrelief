@@ -1,6 +1,6 @@
 {
-  "schema_version": 1,
-  "updated_at": "2026-09-15",
+  "schema_version": 2,
+  "updated_at": "2026-09-16",
   "purpose": "Authoritative source candidates for conditional Transaction Command Center evidence. Discovery does not imply a completed search, clearance, legal conclusion, or property-specific match.",
   "guardrails": {
     "never_infer_private_life_event": true,
@@ -11,6 +11,43 @@
     "identity_based_searches_require_verification": true
   },
   "statewide_sources": [
+    {
+      "id": "njdep_flood_disclosure",
+      "label": "NJDEP Flood Disclosure Law and Flood Risk Notification Tool",
+      "agency": "NJ Department of Environmental Protection",
+      "mode": "official_information_and_property_tool",
+      "url": "https://dep.nj.gov/flooddisclosure/",
+      "transaction_uses": ["seller_flood_disclosure", "fema_flood_area", "state_flood_area", "known_flood_risk"],
+      "semantics": "New Jersey requires flood-risk disclosures for real-property sales. The NJDEP tool supports the disclosure workflow but is not a title clearance, elevation certificate, insurance determination or guarantee that flooding will or will not occur."
+    },
+    {
+      "id": "njdep_private_well_testing_act",
+      "label": "NJ Private Well Testing Act",
+      "agency": "NJ Department of Environmental Protection",
+      "mode": "official_requirement_and_property_followup",
+      "url": "https://dep.nj.gov/privatewells/pwta/",
+      "transaction_uses": ["private_well_testing", "pwta_results", "pwta_contract_condition", "pwta_closing_review"],
+      "semantics": "For covered sales using a potable private well, required testing and buyer/seller review of results must be tracked before closing. PWTA is a consumer-information requirement and a result outside a drinking-water standard does not automatically prohibit a sale; local or lender requirements may add obligations."
+    },
+    {
+      "id": "epa_lead_sale_disclosure",
+      "label": "Federal Lead-Based Paint Disclosure Rule",
+      "agency": "US Environmental Protection Agency and US Department of Housing and Urban Development",
+      "mode": "official_requirement",
+      "url": "https://www.epa.gov/lead/lead-based-paint-disclosure-rule-section-1018-title-x",
+      "transaction_uses": ["pre_1978_lead_disclosure", "known_lead_records", "lead_pamphlet", "purchaser_opportunity"],
+      "semantics": "The federal disclosure rule applies to most housing built before 1978 and requires disclosure of known lead information and records. It does not establish that lead is present or absent and it is separate from New Jersey rental lead-safe inspection requirements."
+    },
+    {
+      "id": "nj_treasury_realty_transfer_git",
+      "label": "NJ Realty Transfer Fee and GIT/REP Recording Requirements",
+      "agency": "NJ Department of the Treasury, Division of Taxation",
+      "mode": "official_recording_requirements",
+      "url": "https://www.nj.gov/treasury/taxation/realty.shtml",
+      "secondary_url": "https://www.nj.gov/treasury/taxation/gitrepfaqs.shtml",
+      "transaction_uses": ["realty_transfer_fee", "rtf_affidavit", "git_rep", "deed_recording_package"],
+      "semantics": "Use current NJ Division of Taxation instructions for Realty Transfer Fee and GIT/REP documents that accompany New Jersey deed recording. Watchdog can surface the source and checklist but the closing attorney, title company and county recording office remain authoritative for the specific recording package."
+    },
     {
       "id": "njdep_well_records",
       "label": "NJDEP Well Permits & Records",
