@@ -7,6 +7,8 @@ const js=read('transaction/transaction.js');
 const shell=read('transaction/shell.js');
 const css=read('transaction/transaction.css');
 const universalMenu=read('property/js/watchdog-universal-menu.js');
+const middleware=read('middleware.js');
+const vercel=read('vercel.json');
 const schema=read('supabase/migrations/20260915161000_transaction_command_center.sql');
 const indexes=read('supabase/migrations/20260915163500_transaction_command_center_fk_indexes.sql');
 
@@ -39,5 +41,11 @@ assert.match(css,/@media\(max-width:600px\)/,'mobile layout contract missing');
 assert.match(shell,/Transaction Command Center/,'shared-shell adapter missing transaction title');
 assert.match(universalMenu,/can\('agent'\)[\s\S]{0,180}key:'transaction'/,'Transactions must be discoverable at Agent-or-higher in canonical navigation');
 assert.match(universalMenu,/key:'transaction',href:'\/transaction\/'/,'canonical navigation must point to the root /transaction/ workspace');
+
+// Production routing contract: middleware must pass Transaction through to Vercel's
+// static route before the generic root clean-page resolver can rewrite it under /property.
+assert.match(middleware,/ROOT_STATIC_PAGES[^\n]*['"]\/transaction['"]/,'middleware must allow /transaction through as a root static page');
+assert.match(vercel,/"source"\s*:\s*"\/transaction"[\s\S]{0,140}"destination"\s*:\s*"\/transaction\/index\.html"/,'Vercel must rewrite /transaction to the Transaction entry document');
+assert.match(vercel,/"source"\s*:\s*"\/transaction\/"[\s\S]{0,140}"destination"\s*:\s*"\/transaction\/index\.html"/,'Vercel must rewrite /transaction/ to the Transaction entry document');
 
 console.log('Transaction Command Center contract passed.');

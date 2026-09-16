@@ -16,6 +16,15 @@ const respond=(req:Request,status:number,body:unknown)=>new Response(JSON.string
 function normPart(v:unknown){let s=clean(v,80).toUpperCase().replace(/\s+/g,"");if(/^\d+(?:\.\d+)?$/.test(s)){s=s.replace(/^0+(?=\d)/,"");if(s.includes("."))s=s.replace(/0+$/,"").replace(/\.$/,"")}return s}
 function parcelKey(tx:Row){const b=normPart(tx.block),l=normPart(tx.lot),q=normPart(tx.qualifier);return b&&l?`${b}|${l}|${q}`:""}
 function money(v:unknown){const n=Number(v);return Number.isFinite(n)?n:null}
+function modivDeedDate(v:unknown){
+  const raw=clean(v,20);
+  if(!/^\d{6}$/.test(raw))return raw||null;
+  const mm=Number(raw.slice(0,2)),dd=Number(raw.slice(2,4)),yy=Number(raw.slice(4,6));
+  const currentYY=new Date().getUTCFullYear()%100,year=yy<=currentYY?2000+yy:1900+yy;
+  const d=new Date(Date.UTC(year,mm-1,dd));
+  if(mm<1||mm>12||dd<1||dd>31||d.getUTCFullYear()!==year||d.getUTCMonth()!==mm-1||d.getUTCDate()!==dd)return raw;
+  return `${year}-${String(mm).padStart(2,"0")}-${String(dd).padStart(2,"0")}`;
+}
 async function hash(value:unknown){const data=new TextEncoder().encode(JSON.stringify(value));const buf=await crypto.subtle.digest("SHA-256",data);return [...new Uint8Array(buf)].map(b=>b.toString(16).padStart(2,"0")).join("")}
 async function gunzipJson(blob:Blob){const ds=new DecompressionStream("gzip");const text=await new Response(blob.stream().pipeThrough(ds)).text();return JSON.parse(text)}
 
@@ -69,8 +78,9 @@ Deno.serve(async(req:Request)=>{
       await admin.from("transaction_items").update({evidence_state:delinquent?"issue_observed":"verify",severity:delinquent?"high":"review",source_type:"public_record",source_label:SOURCE_LABEL,source_url:SOURCE_URL,source_checked_at:now,description,payload:{...safeObj(saleItem.payload),tax_year:2026,delinquent_code:record.delinquent_code||null,delinquent_flag:record.delinquent_flag,release_id:release.release_id,tax_sale_state:"not_determined",annual_delinquency_source_checked:true},updated_at:now}).eq("id",saleItem.id).eq("user_id",user.id);
     }
     const deedItem=itemMap.get(`${tx.id}:deed_recording_reference`);if(deedItem&&(record.deed_book||record.deed_page||record.deed_date)){
-      const evidence={book:record.deed_book||null,page:record.deed_page||null,deed_date:record.deed_date||null,pams_pin:tx.pams_pin,block:tx.block,lot:tx.lot};
-      await admin.from("transaction_items").update({source_checked_at:now,payload:{...safeObj(deedItem.payload),deed_book:record.deed_book||safeObj(deedItem.payload).deed_book||null,deed_page:record.deed_page||safeObj(deedItem.payload).deed_page||null,deed_date:record.deed_date||safeObj(deedItem.payload).deed_date||null,evidence,transaction_modiv_release_id:release.release_id},updated_at:now}).eq("id",deedItem.id).eq("user_id",user.id);
+      const rawDeedDate=record.deed_date||null,normalizedDeedDate=modivDeedDate(rawDeedDate);
+      const evidence={book:record.deed_book||null,page:record.deed_page||null,deed_date:normalizedDeedDate,deed_date_raw:rawDeedDate,pams_pin:tx.pams_pin,block:tx.block,lot:tx.lot};
+      await admin.from("transaction_items").update({source_checked_at:now,payload:{...safeObj(deedItem.payload),deed_book:record.deed_book||safeObj(deedItem.payload).deed_book||null,deed_page:record.deed_page||safeObj(deedItem.payload).deed_page||null,deed_date:normalizedDeedDate||safeObj(deedItem.payload).deed_date||null,deed_date_raw:rawDeedDate,evidence,transaction_modiv_release_id:release.release_id,deed_date_format:"MMDDYY",deed_date_parser_version:3},updated_at:now}).eq("id",deedItem.id).eq("user_id",user.id);
     }
     await admin.from("transaction_activity").insert({transaction_id:tx.id,user_id:user.id,action:"state_evidence_refresh",message:`2026 NJ MOD-IV transaction evidence refreshed for ${clean(tx.address,240)||"property"}`,detail:{provider:SOURCE_ID,release_id:release.release_id,delinquent_flag:record.delinquent_flag,current_year_tax:currentTax,last_year_tax:lastTax}});
     results.push({transaction_id:tx.id,matched:true,delinquent_flag:record.delinquent_flag,last_year_tax:lastTax,current_year_tax:currentTax,tax_account_number:record.tax_account_number||null});

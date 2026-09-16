@@ -14,6 +14,20 @@ const webhook = read('supabase/functions/stripe-webhook/index.ts');
 const health = read('supabase/functions/get-platform-health/index.ts');
 const onboarding = read('property/js/onboarding.js');
 const onboardingPlans = read('property/css/onboarding-plans.css');
+const designTokens = read('property/css/shared/00-design-tokens.css');
+const mobileBreakpoint = designTokens.match(/--breakpoint-sm\s*:\s*(\d+)px\s*;/)?.[1];
+// Check what the mobile rule does, using the shared breakpoint instead of a retired literal.
+const mobileMedia = mobileBreakpoint && new RegExp(`@media\\s*\\(max-width:\\s*${mobileBreakpoint}px\\)\\s*\\{`).exec(onboardingPlans);
+let mobilePlanStyles = '';
+if (mobileMedia) {
+  const start = mobileMedia.index + mobileMedia[0].length;
+  let depth = 1, end = start;
+  for (; end < onboardingPlans.length && depth > 0; end++) {
+    if (onboardingPlans[end] === '{') depth++;
+    if (onboardingPlans[end] === '}') depth--;
+  }
+  if (depth === 0) mobilePlanStyles = onboardingPlans.slice(start, end - 1);
+}
 
 const expected = {
   agent: {
@@ -103,7 +117,10 @@ expect(!onboarding.includes('monthly: 59'), 'Onboarding hard-coded Agent catalog
 expect(!onboarding.includes('monthly: 129'), 'Onboarding hard-coded Pro catalog pricing instead of loading it from the server catalog.');
 expect(!onboarding.includes('monthly: 399'), 'Onboarding hard-coded Pro+ catalog pricing instead of loading it from the server catalog.');
 expect(onboardingPlans.includes('grid-template-columns:repeat(3,minmax(0,1fr))'), 'Onboarding paid plan layout lost its desktop three-plan presentation.');
-expect(onboardingPlans.includes('@media(max-width:700px)'), 'Onboarding plan selection lost its mobile layout contract.');
+expect(/^\d+$/.test(mobileBreakpoint || '') && Number(mobileBreakpoint) >= 700, 'Canonical mobile plan breakpoint no longer covers phone viewports.');
+expect(/\.wd-plan-grid\s*\{[^}]*grid-template-columns\s*:\s*1fr\s*[;}]/.test(mobilePlanStyles), 'Onboarding paid plans must stack into one column at the canonical mobile breakpoint.');
+expect(/\.wd-plan-free\s*\{[^}]*grid-template-columns\s*:\s*1fr\s*[;}]/.test(mobilePlanStyles), 'The no-card Free option must also fit a single mobile column.');
+expect(/\.wd-plan-free button\s*\{[^}]*width\s*:\s*100%\s*;[^}]*min-width\s*:\s*0\s*[;}]/.test(mobilePlanStyles), 'The mobile Free CTA must fill its column without a fixed minimum width.');
 expect(onboardingPlans.includes('.wd-intelligence-brand-word'), 'Onboarding plan selection lost Watchdog Intelligence brand treatment.');
 
 expect(!account.includes('monthly: 29'), 'Legacy Agent $29 pricing returned to Account.');

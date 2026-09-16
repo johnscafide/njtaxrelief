@@ -6,7 +6,7 @@
 
 **Source baseline:** `johnscafide/njtaxrelief` at `b3afdee633ef878297dc2d1724b5ab5ffc70d2f3`
 
-**Draft implementation:** [PR #328](https://github.com/johnscafide/njtaxrelief/pull/328). The expanded Contacts/Transaction review was reconciled through main `51a75a4169c6c8df524fccbbd9d071df152bb8a7`, including the new municipal workflow and document-vault modules. [NJW-345](https://linear.app/njwatchdog/issue/NJW-345) tracks release acceptance. Publication is authorized; production deployment is pending staging verification.
+**Implementation:** [PR #328](https://github.com/johnscafide/njtaxrelief/pull/328). Reconciled through main `22fbd2fb097676dca6ac97d09125a085ab3ffe49`, preserving the latest Contacts cleanup/intelligence and Transaction presentation/evidence updates. The owner has authorized merge and will manually deploy. [NJW-345](https://linear.app/njwatchdog/issue/NJW-345) tracks remaining acceptance. See the [deployment handoff](agent-release-handoff-2026-09-16.md); merging is not authenticated launch certification.
 
 **Verdict:** Substantial product built; **Agent launch is blocked**. A numerical readiness percentage would imply more verified coverage than the evidence supports.
 
@@ -126,7 +126,7 @@ Latest recorded Linear evidence leaves live direct-mail sending gated pending pr
 
 The hosted staging workflow also exposes missing dedicated Agent test credentials in its environment preflight. Restoring DNS alone will not complete acceptance; both the staging project and the test-account configuration must be available.
 
-The broader access-boundary workflow's 43 Node checks produced 30 passes and 13 failures. All 13 failures also reproduce on an untouched worktree of `53c4f0d`; several reference retired Dashboard files or older model/asset contracts. This draft does not weaken those checks. Their reconciliation and a green release pipeline remain outstanding; passing the focused Agent suites is not a claim that all repository CI is green.
+The earlier broader access-boundary run of 43 Node checks produced 30 passes and 13 failures. All 13 also reproduced on untouched main `53c4f0d`; several reference retired Dashboard files or older model/asset contracts. The stale billing mobile-breakpoint assertion now passes after checking the canonical breakpoint and actual single-column rules. Typography checks now resolve shared token sizes; the remaining font-spec conflict stays visible, preserving the current design. Remaining CI reconciliation is outstanding; passing the focused Agent suites is not a claim that all repository CI is green.
 
 **Not verified:** real Agent purchase/session lifecycle, full authenticated responsive certification, production application of the migration, real property→PDF→secure-share, portal→QR→consented inquiry attribution, changed-list email delivery, persistent cross-session farms, paid fulfillment or actual-agent comparative usability.
 

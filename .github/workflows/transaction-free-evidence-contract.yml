@@ -5,13 +5,23 @@ on:
     paths:
       - '.github/workflows/transaction-free-evidence-contract.yml'
       - '.github/workflows/nj-provider-census.yml'
+      - 'transaction/index.html'
       - 'transaction/evidence-addons.js'
+      - 'transaction/evidence-first.js'
+      - 'transaction/evidence-first.css'
       - 'transaction/shell.js'
+      - 'transaction/refinements.js'
+      - 'transaction/refinements.css'
+      - 'property/data/transaction-conditional-sources.json'
       - 'supabase/functions/transaction-energy-evidence/**'
+      - 'supabase/functions/transaction-environmental-evidence/**'
+      - 'supabase/functions/transaction-municipal-services/**'
       - 'supabase/functions/transaction-municipal-requirements/**'
+      - 'supabase/functions/transaction-state-evidence/**'
       - 'supabase/functions/transaction-evidence-sweep/production-state-evidence-bootstrap.ts'
       - 'supabase/migrations/20260915214500_transaction_municipal_requirements.sql'
       - 'supabase/migrations/20260915220500_transaction_municipal_requirement_curated_overrides.sql'
+      - 'supabase/migrations/20260916163000_transaction_municipal_services.sql'
       - 'property/scripts/extract_transaction_municipal_requirements*.py'
       - 'property/scripts/publish_transaction_municipal_requirements.py'
   workflow_dispatch:
@@ -28,21 +38,32 @@ jobs:
       - uses: actions/setup-python@v5
         with:
           python-version: '3.12'
-      - name: Compile statewide requirement scripts
+      - name: Compile statewide requirement scripts and Transaction JS
         run: |
           python -m py_compile \
             property/scripts/extract_transaction_municipal_requirements.py \
             property/scripts/extract_transaction_municipal_requirements_parallel.py \
             property/scripts/publish_transaction_municipal_requirements.py
+          node --check transaction/refinements.js
+          node --check transaction/evidence-first.js
+          node --check transaction/shell.js
       - name: Guard source semantics and privacy boundaries
         run: |
           set -euo pipefail
           energy=supabase/functions/transaction-energy-evidence/index.ts
+          environment=supabase/functions/transaction-environmental-evidence/index.ts
+          services=supabase/functions/transaction-municipal-services/index.ts
           req=supabase/functions/transaction-municipal-requirements/index.ts
+          state=supabase/functions/transaction-state-evidence/index.ts
           bootstrap=supabase/functions/transaction-evidence-sweep/production-state-evidence-bootstrap.ts
           migration=supabase/migrations/20260915214500_transaction_municipal_requirements.sql
           curated_migration=supabase/migrations/20260915220500_transaction_municipal_requirement_curated_overrides.sql
+          services_migration=supabase/migrations/20260916163000_transaction_municipal_services.sql
           addon=transaction/evidence-addons.js
+          refine=transaction/refinements.js
+          evidence=transaction/evidence-first.js
+          evidence_css=transaction/evidence-first.css
+          catalog=property/data/transaction-conditional-sources.json
           grep -q 'payoff_balance_state:"customer_or_provider_authorization_required"' "$energy"
           grep -q 'account_balance_state:"customer_authorization_required"' "$energy"
           grep -q 'final_bill_clearance:false' "$energy"
@@ -52,6 +73,9 @@ jobs:
           grep -q 'preserveExisting' "$req"
           grep -q 'Older hand-verified municipal evidence predates requirement_state' "$req"
           grep -q 'promotion_suppressed:preserveExisting' "$req"
+          grep -q 'deed_date_format:"MMDDYY"' "$state"
+          grep -q 'deed_date_parser_version:3' "$state"
+          grep -q 'function modivDeedDate' "$state"
           grep -q 'transaction-energy-evidence' "$bootstrap"
           grep -q 'transaction-municipal-requirements' "$bootstrap"
           grep -q 'transaction-cite-evidence' "$bootstrap"
@@ -62,6 +86,32 @@ jobs:
           grep -q "item_key==='solar'" "$addon"
           grep -q "electric_utility" "$addon"
           grep -q 'transaction/evidence-addons.js' transaction/shell.js
+          grep -q 'transaction/refinements.js' transaction/shell.js
+          grep -q 'transaction/evidence-first.js' transaction/shell.js
+          grep -q 'replace(/\\u2014/g' "$refine"
+          ! grep -q 'SOURCE_PACK' "$refine"
+          grep -q 'Official route' "$evidence"
+          grep -q 'Municipal services / move-in' "$evidence"
+          grep -q 'Environmental / deed controls' "$evidence"
+          grep -q 'Official reference library' "$evidence"
+          grep -q 'align-items:start!important' "$evidence_css"
+          grep -q 'aspect-ratio:1/1!important' "$evidence_css"
+          grep -q -- '--wd-navy-950' "$evidence_css"
+          grep -q 'address_day_resolved' "$services"
+          grep -q 'trash_day:addressResolved' "$services"
+          grep -q 'COMU_CODE' "$environment"
+          grep -q 'PARCELS LIKE' "$environment"
+          grep -q 'no_exact_srp_parcel_record' "$environment"
+          grep -q 'njdep_recycle_coach' "$services_migration"
+          grep -q 'municipal_public_works' "$services_migration"
+          grep -q 'njdep_recycle_coach' "$catalog"
+          grep -q 'njdep_recycling_coordinator_registry' "$catalog"
+          grep -q 'njdep_csrr_exact_parcel' "$catalog"
+          grep -q 'never_infer_address_collection_day_from_municipality_only' "$catalog"
+          grep -q 'njdep_flood_disclosure' "$catalog"
+          grep -q 'njdep_private_well_testing_act' "$catalog"
+          grep -q 'epa_lead_sale_disclosure' "$catalog"
+          grep -q 'nj_treasury_realty_transfer_git' "$catalog"
       - name: Probe NJDEP electric and solar public-layer contracts
         shell: python
         run: |

@@ -2,6 +2,73 @@
 .acx-crm-install{margin:0 0 10px;border:1px solid #dbe4f2;border-radius:16px;background:linear-gradient(135deg,#0d2453 0%,#123e9d 55%,#165fe4 100%);color:#fff;box-shadow:0 12px 32px rgba(18,62,157,.16);overflow:hidden;position:relative}
 .acx-crm-install:after{content:"";position:absolute;inset:auto -80px -100px auto;width:280px;height:280px;border-radius:50%;background:rgba(255,255,255,.06);pointer-events:none}
 .acx-crm-install-inner{display:grid;grid-template-columns:minmax(0,1fr) auto;gap:24px;align-items:center;padding:22px 24px;position:relative;z-index:1}
-.acx-crm-install-copy{display:flex;gap:16px;align-items:flex-start;min-width:0}.acx-crm-install-logo{width:150px;max-width:26vw;height:auto;filter:brightness(0) invert(1);flex:0 0 auto;margin-top:2px}.acx-crm-install-text{min-width:0}.acx-crm-install-kicker{font-size:9px;letter-spacing:.15em;font-weight:900;color:#bfd4ff}.acx-crm-install h3{margin:5px 0 6px;font-size:18px;letter-spacing:-.02em}.acx-crm-install p{margin:0;color:#dbe7ff;font-size:11px;line-height:1.6;max-width:760px}.acx-crm-install-actions{display:flex;align-items:center;gap:9px;flex-wrap:wrap;justify-content:flex-end}.acx-crm-install-actions button{min-height:42px;border-radius:10px;padding:0 14px;font-size:11px;font-weight:850;border:1px solid rgba(255,255,255,.24);cursor:pointer}.acx-crm-primary{background:#fff;color:#123e9d}.acx-crm-primary:hover{background:#eef4ff}.acx-crm-secondary{background:rgba(255,255,255,.08);color:#fff}.acx-crm-secondary:hover{background:rgba(255,255,255,.14)}.acx-crm-status{display:inline-flex;align-items:center;gap:6px;font-size:9px;font-weight:850;padding:6px 9px;border-radius:999px;background:rgba(255,255,255,.11);border:1px solid rgba(255,255,255,.14);white-space:nowrap}.acx-crm-status i{font-size:8px}.acx-crm-status.installed{background:rgba(22,163,74,.18);border-color:rgba(187,247,208,.2);color:#d7ffe6}
+.acx-crm-install-copy{display:flex;gap:16px;align-items:flex-start;min-width:0}.acx-crm-install-logo{width:150px;max-width:26vw;height:auto;display:block;flex:0 0 auto;margin-top:2px}.acx-crm-install-text{min-width:0}.acx-crm-install-kicker{font-size:9px;letter-spacing:.15em;font-weight:900;color:#bfd4ff}.acx-crm-install h3{margin:5px 0 6px;font-size:18px;letter-spacing:-.02em}.acx-crm-install p{margin:0;color:#dbe7ff;font-size:11px;line-height:1.6;max-width:760px}.acx-crm-install-actions{display:flex;align-items:center;gap:9px;flex-wrap:wrap;justify-content:flex-end}.acx-crm-install-actions button{min-height:42px;border-radius:10px;padding:0 14px;font-size:11px;font-weight:850;border:1px solid rgba(255,255,255,.24);cursor:pointer}.acx-crm-primary{background:#fff;color:#123e9d}.acx-crm-primary:hover{background:#eef4ff}.acx-crm-secondary{background:rgba(255,255,255,.08);color:#fff}.acx-crm-secondary:hover{background:rgba(255,255,255,.14)}.acx-crm-status{display:inline-flex;align-items:center;gap:6px;font-size:9px;font-weight:850;padding:6px 9px;border-radius:999px;background:rgba(255,255,255,.11);border:1px solid rgba(255,255,255,.14);white-space:nowrap}.acx-crm-status i{font-size:8px}.acx-crm-status.installed{background:rgba(22,163,74,.18);border-color:rgba(187,247,208,.2);color:#d7ffe6}
 .acx-crm-modal[hidden]{display:none!important}.acx-crm-modal{position:fixed;inset:0;z-index:99999;display:grid;place-items:center;padding:20px}.acx-crm-backdrop{position:absolute;inset:0;border:0;background:rgba(10,18,36,.64);backdrop-filter:blur(6px)}.acx-crm-dialog{position:relative;width:min(620px,100%);max-height:min(760px,calc(100vh - 40px));overflow:auto;background:#fff;border:1px solid #dbe4ef;border-radius:22px;box-shadow:0 30px 90px rgba(10,22,48,.28);color:#172033}.acx-crm-dialog-head{padding:22px 24px 16px;border-bottom:1px solid #e7edf5;display:flex;justify-content:space-between;gap:20px;align-items:flex-start}.acx-crm-dialog-head img{width:190px;max-width:58%;height:auto}.acx-crm-close{width:38px;height:38px;border-radius:10px;border:1px solid #dde5ef;background:#f8fafc;color:#65758b}.acx-crm-dialog-body{padding:24px}.acx-crm-dialog-body>span{font-size:9px;letter-spacing:.14em;font-weight:900;color:#2f6df6}.acx-crm-dialog-body h2{margin:7px 0 10px;font-size:28px;letter-spacing:-.035em}.acx-crm-dialog-body>p{margin:0;color:#68788e;font-size:12px;line-height:1.7}.acx-crm-steps{display:grid;gap:10px;margin:20px 0}.acx-crm-step{display:grid;grid-template-columns:32px 1fr;gap:12px;padding:14px;border:1px solid #e0e7f0;border-radius:13px;background:#fbfcfe}.acx-crm-step>span{width:32px;height:32px;border-radius:9px;display:grid;place-items:center;background:#edf3ff;color:#2459cc;font-size:11px;font-weight:900}.acx-crm-step div{display:grid;gap:3px}.acx-crm-step b{font-size:12px;color:#2d3c55}.acx-crm-step small{font-size:10px;line-height:1.55;color:#7b899d}.acx-crm-dialog-actions{display:flex;gap:8px;flex-wrap:wrap}.acx-crm-dialog-actions button{min-height:44px;border-radius:10px;padding:0 14px;border:1px solid #cad5e4;background:#fff;color:#31435c;font-size:11px;font-weight:850}.acx-crm-dialog-actions .primary{background:#2f6df6;color:#fff;border-color:#2f6df6}.acx-crm-note{margin-top:14px;padding:12px 13px;border-radius:11px;background:#f3f7ff;border:1px solid #dce7ff;color:#65758a;font-size:9px;line-height:1.6}.acx-crm-note b{color:#294575}.acx-crm-progress{display:none;margin-top:14px;font-size:10px;color:#607089}.acx-crm-progress.show{display:block}
 @media(max-width:860px){.acx-crm-install-inner{grid-template-columns:1fr}.acx-crm-install-actions{justify-content:flex-start}.acx-crm-install-copy{display:grid}.acx-crm-install-logo{width:170px;max-width:60vw}.acx-crm-install{margin-bottom:10px}}
+
+/* NJW-368 — visible roadmap destinations that are intentionally not live yet. */
+.acx-worknav-links .acx-coming-soon,
+.acx-future .acx-coming-soon{
+  position:relative!important;
+  cursor:not-allowed!important;
+  color:#9aa6b6!important;
+  filter:saturate(.35);
+  outline:none;
+}
+.acx-worknav-links .acx-coming-soon i,
+.acx-future .acx-coming-soon i{color:#a7b1bf!important;opacity:.85}
+.acx-worknav-links .acx-coming-soon:hover,
+.acx-worknav-links .acx-coming-soon:focus-visible{
+  background:#f4f6f9!important;
+  color:#8d99a9!important;
+}
+.acx-future .acx-coming-soon{
+  display:inline-flex!important;
+  align-items:center!important;
+  gap:8px!important;
+  min-height:40px!important;
+  padding:0 12px!important;
+  border:1px solid #e1e6ed!important;
+  border-radius:10px!important;
+  background:#f5f7f9!important;
+  box-shadow:none!important;
+  text-decoration:none!important;
+}
+.acx-future .acx-coming-soon:hover,
+.acx-future .acx-coming-soon:focus-visible{background:#f0f3f6!important;color:#8793a3!important}
+.acx-worknav-links .acx-coming-soon::after,
+.acx-future .acx-coming-soon::after{
+  content:attr(data-coming-soon);
+  position:absolute;
+  left:50%;
+  top:calc(100% + 8px);
+  transform:translate(-50%,-4px);
+  z-index:90;
+  padding:7px 9px;
+  border-radius:8px;
+  background:#172033;
+  color:#fff;
+  font-size:11px;
+  font-weight:750;
+  line-height:1;
+  white-space:nowrap;
+  box-shadow:0 8px 24px rgba(23,32,51,.18);
+  opacity:0;
+  visibility:hidden;
+  pointer-events:none;
+  transition:opacity .14s ease,transform .14s ease,visibility .14s ease;
+  filter:none;
+}
+.acx-future .acx-coming-soon::after{top:auto;bottom:calc(100% + 8px);transform:translate(-50%,4px)}
+.acx-worknav-links .acx-coming-soon:hover::after,
+.acx-worknav-links .acx-coming-soon:focus-visible::after,
+.acx-future .acx-coming-soon:hover::after,
+.acx-future .acx-coming-soon:focus-visible::after{
+  opacity:1;
+  visibility:visible;
+  transform:translate(-50%,0);
+}
+@media(max-width:620px){
+  .acx-worknav-links .acx-coming-soon::after{left:8px;transform:translate(0,-4px)}
+  .acx-worknav-links .acx-coming-soon:hover::after,.acx-worknav-links .acx-coming-soon:focus-visible::after{transform:translate(0,0)}
+}

@@ -53,7 +53,11 @@
           <p id="review-rating-copy" class="review-rating-copy"></p>
         </div>
 
-        <label class="review-label" for="review-comment">Anything you'd like to add? <span>Optional</span></label>
+        <div id="review-feedback-prompt" class="review-low-feedback" hidden>
+          <strong>We want to understand what went wrong.</strong>
+          <span>Please tell us what we could have done better before submitting your rating.</span>
+        </div>
+        <label id="review-comment-label" class="review-label" for="review-comment">Anything you'd like to add? <span>Optional</span></label>
         <textarea id="review-comment" maxlength="1200" rows="5" placeholder="Tell us what worked well or what we could improve."></textarea>
         <p class="review-privacy">Your email and application details are never published. Written comments stay private unless Watchdog separately approves them for testimonial use.</p>
         <button id="review-submit" type="button" class="review-button review-submit">Submit review</button>

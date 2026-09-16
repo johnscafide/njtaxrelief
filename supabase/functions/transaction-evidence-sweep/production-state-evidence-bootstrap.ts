@@ -1,8 +1,8 @@
 // Production wrapper: run the certified Transaction evidence sweep first, then
 // layer annual state, live municipal, governed manual routes, energy,
-// municipal-requirement and county evidence on top. Strong live observations are
-// applied before manual route-only providers so source discovery cannot overwrite
-// completed evidence.
+// municipal requirements, municipal services, exact environmental evidence and
+// county evidence on top. Strong live observations are applied before manual
+// route-only providers so source discovery cannot overwrite completed evidence.
 import "jsr:@supabase/functions-js/edge-runtime.d.ts";
 
 const nativeServe = Deno.serve.bind(Deno);
@@ -44,6 +44,8 @@ const wrappedServe = ((first: unknown, second?: unknown) => {
         await invokeProvider("transaction-code-violation-route", url, authorization, apiKey, body, 15000);
         await invokeProvider("transaction-energy-evidence", url, authorization, apiKey, body, 30000);
         await invokeProvider("transaction-municipal-requirements", url, authorization, apiKey, body, 30000);
+        await invokeProvider("transaction-municipal-services", url, authorization, apiKey, body, 20000);
+        await invokeProvider("transaction-environmental-evidence", url, authorization, apiKey, body, 20000);
         await invokeProvider("transaction-county-evidence", url, authorization, apiKey, body, 15000);
       }
     }

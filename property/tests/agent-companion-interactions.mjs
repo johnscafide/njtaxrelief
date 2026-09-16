@@ -13,7 +13,7 @@ async function fixture(surface,width=1440,plan='agent'){
   const context=await browser.newContext({viewport:{width,height:1000},acceptDownloads:true});
   const page=await context.newPage(),errors=[];
   page.on('pageerror',e=>errors.push(e.message));
-  const allowed=['transaction.js','shell.js','preflight.js','evidence-addons.js','municipal-clearance.js','municipal-status.js','documents.js','contacts.js','plan-context.js'];
+  const allowed=['transaction.js','shell.js','preflight.js','evidence-addons.js','municipal-clearance.js','municipal-status.js','documents.js','refinements.js','evidence-first.js','command-center-polish.js','contacts.js','crm-companion-install.js','contact-intelligence.js','simple-workflow.js','plan-context.js'];
   await page.route('**/*',async route=>{
     const url=new URL(route.request().url());
     if(url.origin!=='https://companion-fixture.test')return route.abort();

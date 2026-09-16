@@ -1,0 +1,45 @@
+/* NJW-371 transaction refinements: compact empty state using canonical Watchdog tokens. */
+.tx-shell{min-height:540px}
+.tx-empty{min-height:500px;padding:30px 40px 36px}
+.tx-empty p{max-width:760px;margin-left:auto;margin-right:auto}
+.tx-empty>div:last-child{display:flex;justify-content:center;flex-wrap:wrap;gap:10px}
+.tx-empty-visual{
+  position:relative;
+  width:188px;
+  height:94px;
+  margin-bottom:18px;
+  border:1px solid var(--border,#dfe4ea);
+  border-radius:24px;
+  background:linear-gradient(145deg,var(--info-bg,#eef5ff) 0%,var(--surface-soft,#f7f8fa) 100%);
+  overflow:hidden;
+  color:var(--wd-navy-700,#1456a0);
+  box-shadow:0 12px 28px rgba(20,32,51,.08);
+}
+.tx-empty-visual i{position:absolute;left:20px;top:20px;font-size:25px;z-index:2}
+.tx-empty-visual:before{
+  content:"";
+  position:absolute;
+  left:51px;
+  right:24px;
+  top:46px;
+  border-top:3px dashed rgba(20,86,160,.28);
+}
+.tx-empty-visual:after{
+  content:"";
+  position:absolute;
+  width:14px;
+  height:14px;
+  border-radius:50%;
+  left:58px;
+  top:39px;
+  background:#fff;
+  border:4px solid var(--wd-navy-700,#1456a0);
+  box-shadow:45px 0 0 -4px #fff,45px 0 0 0 var(--wd-navy-700,#1456a0),90px 0 0 -4px #fff,90px 0 0 0 var(--wd-navy-700,#1456a0);
+}
+.tx-empty-visual .tx-visual-label{position:absolute;right:15px;top:13px;font-size:9px;font-weight:900;letter-spacing:.08em;text-transform:uppercase;color:var(--text-muted,#5d6877);background:#fff;border:1px solid var(--border,#dfe4ea);border-radius:999px;padding:5px 8px}
+.tx-deed-date-warning{color:#806617!important}
+@media(max-width:900px){
+  .tx-shell{min-height:0}
+  .tx-empty{min-height:0;padding:26px 17px 30px}
+  .tx-empty-visual{width:172px;height:86px;margin-bottom:15px}
+}

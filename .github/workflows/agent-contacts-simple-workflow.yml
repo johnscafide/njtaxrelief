@@ -1,0 +1,29 @@
+name: Agent Contacts simplified workflow
+
+on:
+  pull_request:
+    paths:
+      - 'agent/contacts/**'
+      - 'property/tests/agent-contacts-simple-workflow-contract.mjs'
+      - '.github/workflows/agent-contacts-simple-workflow.yml'
+  push:
+    branches: [main]
+    paths:
+      - 'agent/contacts/**'
+      - 'property/tests/agent-contacts-simple-workflow-contract.mjs'
+      - '.github/workflows/agent-contacts-simple-workflow.yml'
+
+jobs:
+  contract:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+      - name: Verify simplified Agent Contacts workflow
+        run: node property/tests/agent-contacts-simple-workflow-contract.mjs
+      - name: Preserve Agent Contact Intelligence contract
+        run: node property/tests/agent-contact-intelligence-contract.mjs
+      - name: Preserve Agent Contacts privacy and export contract
+        run: node property/tests/agent-contacts-contract.mjs
