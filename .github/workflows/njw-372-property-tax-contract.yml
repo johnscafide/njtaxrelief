@@ -1,0 +1,47 @@
+name: NJW-372 property tax and resale evidence contract
+
+on:
+  pull_request:
+    paths:
+      - 'property/anchor/application/2025/index.html'
+      - 'property/js/anchor-application-tax-evidence.js'
+      - 'transaction/evidence-first.js'
+      - 'supabase/functions/property-tax-evidence/**'
+      - 'supabase/functions/transaction-evidence-sweep/production-state-evidence-bootstrap.ts'
+      - '.github/workflows/njw-372-property-tax-contract.yml'
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  contract:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+      - name: Syntax check browser integrations
+        run: |
+          node --check property/js/anchor-application-tax-evidence.js
+          node --check transaction/evidence-first.js
+      - name: Guard PAS-1 tax evidence semantics
+        run: |
+          set -euo pipefail
+          f=supabase/functions/property-tax-evidence/index.ts
+          app=property/js/anchor-application-tax-evidence.js
+          html=property/anchor/application/2025/index.html
+          tx=transaction/evidence-first.js
+          sweep=supabase/functions/transaction-evidence-sweep/production-state-evidence-bootstrap.ts
+          grep -q 'annual_billed' "$f"
+          grep -q 'property_tax_2024' "$f"
+          grep -q 'property_tax_2025' "$f"
+          grep -q 'not a municipal lien certificate' "$f"
+          grep -q 'providerIsLive' "$f"
+          grep -q 'edmunds_wipp' "$f"
+          grep -q 'Use these official tax totals' "$app"
+          grep -q 'window.confirm' "$app"
+          grep -q 'anchor-application-tax-evidence.js' "$html"
+          grep -q 'PAS-1 history' "$tx"
+          grep -q 'property-tax-evidence' "$sweep"
