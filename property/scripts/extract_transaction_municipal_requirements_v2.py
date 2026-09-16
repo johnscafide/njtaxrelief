@@ -52,20 +52,13 @@ def _normalize_key(text: str) -> str:
 def _score_line(line: str, family: str) -> int:
     family_re = base.CO_TERMS if family == "resale_cco" else base.FIRE_TERMS
     score = 0
-    if family_re.search(line):
-        score += 8
-    if base.REQUIRED_TERMS.search(line):
-        score += 5
-    if base.SALE_TERMS.search(line):
-        score += 4
-    if ACTION_TERMS.search(line):
-        score += 3
-    if base.FEE_RE.search(line):
-        score += 2
-    if re.search(r"\b(?:\d+\s+business days?|reinspection|re-inspection|valid for|expires?|open permits?|closed out)\b", line, re.I):
-        score += 3
-    if BOILERPLATE.search(line):
-        score -= 7
+    if family_re.search(line): score += 8
+    if base.REQUIRED_TERMS.search(line): score += 5
+    if base.SALE_TERMS.search(line): score += 4
+    if ACTION_TERMS.search(line): score += 3
+    if base.FEE_RE.search(line): score += 2
+    if re.search(r"\b(?:\d+\s+business days?|reinspection|re-inspection|valid for|expires?|open permits?|closed out)\b", line, re.I): score += 3
+    if BOILERPLATE.search(line): score -= 7
     return score
 
 
@@ -78,14 +71,10 @@ def requirement_candidates(text: str, family: str, limit: int = 20) -> list[str]
     chunks = re.split(r"(?<=[.!?;])\s+|\n+|\r+", text)
     candidates: list[tuple[int, int, str]] = []
     seen: set[str] = set()
-
     for idx, raw in enumerate(chunks):
         line = base.clean_text(raw, 520)
         if len(line) < 18 or not ACTION_TERMS.search(line):
             continue
-        # Primary statements mention the family directly. Secondary statements are kept
-        # only when this targeted official source contains family language somewhere and
-        # the statement itself is clearly transactional/actionable.
         primary = bool(family_re.search(line))
         secondary = has_family and bool(
             base.SALE_TERMS.search(line)
@@ -102,9 +91,6 @@ def requirement_candidates(text: str, family: str, limit: int = 20) -> list[str]
         if score < 3:
             continue
         candidates.append((-score, idx, line))
-
-    # Some municipal pages flatten forms/code into long text with few sentence breaks.
-    # Add bounded windows around family terms so actionable clauses are not lost.
     for n, match in enumerate(family_re.finditer(text)):
         start = max(0, match.start() - 220)
         end = min(len(text), match.end() + 380)
@@ -120,15 +106,12 @@ def requirement_candidates(text: str, family: str, limit: int = 20) -> list[str]
             candidates.append((-score, len(chunks) + n, line))
         if n >= 30:
             break
-
     candidates.sort(key=lambda x: (x[0], x[1]))
     return [line for _, _, line in candidates[:limit]]
 
 
 def _valid_application(url: str) -> bool:
-    if not url or not url.startswith(("http://", "https://")):
-        return False
-    return not bool(AUTH_URL.search(url))
+    return bool(url and url.startswith(("http://", "https://")) and not AUTH_URL.search(url))
 
 
 def _best_application(items: list[dict[str, Any]], current: str | None) -> str | None:
@@ -143,12 +126,9 @@ def _best_application(items: list[dict[str, Any]], current: str | None) -> str |
         if not any(k in hay for k in ("application", "form", "resale", "cco", "certificate", "occupancy")):
             continue
         score = 0
-        if url.lower().endswith(".pdf") or "documentcenter" in url.lower():
-            score += 4
-        if any(k in hay for k in ("application", "form")):
-            score += 3
-        if any(k in hay for k in ("resale", "cco", "occupancy")):
-            score += 3
+        if url.lower().endswith(".pdf") or "documentcenter" in url.lower(): score += 4
+        if any(k in hay for k in ("application", "form")): score += 3
+        if any(k in hay for k in ("resale", "cco", "occupancy")): score += 3
         ranked.append((-score, url))
     ranked.sort()
     return ranked[0][1] if ranked else None
@@ -157,7 +137,6 @@ def _best_application(items: list[dict[str, Any]], current: str | None) -> str |
 def _merge_requirements(existing: list[str], extra: list[str], family: str) -> list[str]:
     out: list[str] = []
     seen: set[str] = set()
-    # Keep statewide smoke baseline first, then prioritize local/actionable detail.
     if family == "smoke_fire_cert" and BASELINE_SMOKE in existing:
         out.append(BASELINE_SMOKE)
         seen.add(_normalize_key(BASELINE_SMOKE))
@@ -178,21 +157,19 @@ def _merge_requirements(existing: list[str], extra: list[str], family: str) -> l
 def build_row(muni: dict[str, Any], family: str, ordinance_map: dict[str, list[str]], generated: str) -> dict[str, Any]:
     row = base.build_row(muni, family, ordinance_map, generated)
     items = base.choose_urls(muni, family)
-    application = _best_application(items, row.get("application_url"))
+    original_application = str(row.get("application_url") or "")
+    application = _best_application(items, original_application or None)
     ordinance_url = str(row.get("ordinance_url") or "")
     department_url = str(row.get("department_url") or "")
 
     extra_texts: list[str] = []
     checked_sources: list[str] = []
-    # The critical v2 change: actually read the official code/ordinance URL that v1 only stored.
     if ordinance_url:
         text, final = base.source_text(ordinance_url)
         if text:
             extra_texts.append(text)
             checked_sources.append(final)
 
-    # If local detail is still thin, inspect the official department/root page too. This
-    # does not turn discovery into a requirement; promotion still requires source text.
     existing = list(row.get("requirements") or [])
     existing_local = [x for x in existing if x != BASELINE_SMOKE]
     if len(existing_local) < 2 and department_url and department_url != ordinance_url:
@@ -237,23 +214,17 @@ def build_row(muni: dict[str, Any], family: str, ordinance_map: dict[str, list[s
         "additional_source_text_retrieved": bool(extra_texts),
         "checked_requirement_sources": checked_sources[:4],
         "local_requirement_count": len(local_requirements),
-        "application_auth_page_rejected": bool(row.get("application_url") and not application),
+        "application_auth_page_rejected": bool(original_application and not _valid_application(original_application)),
         "never_infer_not_required": True,
     })
     row["metadata"] = metadata
 
-    facts = {
-        "code": row.get("municipality_code"),
-        "family": family,
-        "state": state,
-        "requirements": row["requirements"],
-        "fees": row["fees"],
-        "application": application,
-        "department": row.get("department_url"),
-        "ordinance": row.get("ordinance_url"),
-        "sources": row.get("source_urls"),
-    }
     import hashlib, json
+    facts = {
+        "code": row.get("municipality_code"), "family": family, "state": state,
+        "requirements": row["requirements"], "fees": row["fees"], "application": application,
+        "department": row.get("department_url"), "ordinance": row.get("ordinance_url"), "sources": row.get("source_urls"),
+    }
     row["source_hash"] = hashlib.sha256(json.dumps(facts, sort_keys=True, ensure_ascii=False).encode()).hexdigest()
     row["updated_at"] = generated
     return row
