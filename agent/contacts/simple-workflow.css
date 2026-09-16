@@ -1,0 +1,83 @@
+/* NJW-373 — simplified Agent Contacts first-run workflow */
+body[data-sidebar-page="agent-contacts"] .acx-panel-head p,
+body[data-sidebar-page="agent-contacts"] #acx-map-note,
+body[data-sidebar-page="agent-contacts"] .acx-library-note span,
+body[data-sidebar-page="agent-contacts"] .acx-export-card>p,
+body[data-sidebar-page="agent-contacts"] .acx-export-card>small,
+body[data-sidebar-page="agent-contacts"] .acx-future small{display:none!important}
+
+body[data-sidebar-page="agent-contacts"] .acx-panel-head{align-items:center}
+body[data-sidebar-page="agent-contacts"] .acx-panel-head h3{margin-bottom:0!important}
+body[data-sidebar-page="agent-contacts"] .acx-panel-foot{justify-content:flex-end}
+body[data-sidebar-page="agent-contacts"] .acx-steps button small{display:none}
+body[data-sidebar-page="agent-contacts"] .acx-steps button{min-height:54px}
+body[data-sidebar-page="agent-contacts"] .acx-map-item small{display:none}
+body[data-sidebar-page="agent-contacts"] .acx-map-item{padding:12px}
+body[data-sidebar-page="agent-contacts"] .acx-map-grid{gap:10px}
+body[data-sidebar-page="agent-contacts"] .acx-export-card{padding:18px}
+body[data-sidebar-page="agent-contacts"] .acx-export-preview{margin-top:8px}
+body[data-sidebar-page="agent-contacts"] .acx-future{padding:14px 16px}
+
+/* Condense the oversized name-cleanup explainer into one control row. */
+body[data-sidebar-page="agent-contacts"] .acx-name-intelligence{grid-template-columns:1fr auto!important;margin:0 24px 14px!important;padding:14px 16px!important;gap:14px!important;border-radius:14px!important;box-shadow:none!important}
+body[data-sidebar-page="agent-contacts"] .acx-name-intelligence:after,
+body[data-sidebar-page="agent-contacts"] .acx-name-flow,
+body[data-sidebar-page="agent-contacts"] .acx-name-copy>span,
+body[data-sidebar-page="agent-contacts"] .acx-name-copy p{display:none!important}
+body[data-sidebar-page="agent-contacts"] .acx-name-copy h4{font-size:16px!important;margin:0!important}
+body[data-sidebar-page="agent-contacts"] .acx-name-change{margin:0!important;min-height:36px!important;padding:0 12px!important;border:1px solid #d7e1ee!important;border-radius:9px!important;background:#fff!important;text-decoration:none!important}
+body[data-sidebar-page="agent-contacts"] .acx-name-change:hover{background:#f7f9fc!important;text-decoration:none!important}
+
+/* Once a file is open, remove landing-page clutter and focus on the task. */
+body.acx-simple-has-file[data-sidebar-page="agent-contacts"] .acx-hero,
+body.acx-simple-has-file[data-sidebar-page="agent-contacts"] .acx-overview,
+body.acx-simple-has-file[data-sidebar-page="agent-contacts"] .acx-crm-install{display:none!important}
+body.acx-simple-has-file[data-sidebar-page="agent-contacts"] .acx-page{padding-top:0}
+body.acx-simple-has-file[data-sidebar-page="agent-contacts"] .acx-shell{margin-top:12px}
+
+/* Make Analyze the unmistakable next action. */
+body[data-sidebar-page="agent-contacts"] #aci-shell{margin:0;border-left:0;border-right:0;border-radius:0;box-shadow:none}
+body[data-sidebar-page="agent-contacts"] #aci-shell.aci-simple-ready{margin:0 18px 18px;border:1px solid #b9cffd;border-radius:16px;background:linear-gradient(135deg,#f8fbff,#edf4ff);box-shadow:0 12px 30px rgba(47,109,246,.11)}
+body[data-sidebar-page="agent-contacts"] .aci-simple-ready .aci-head{padding:20px;border-bottom:0;background:transparent;align-items:center}
+body[data-sidebar-page="agent-contacts"] .aci-simple-ready .aci-head>div:first-child>span{font-size:10px}
+body[data-sidebar-page="agent-contacts"] .aci-simple-ready .aci-head h2{font-size:25px;margin:3px 0}
+body[data-sidebar-page="agent-contacts"] .aci-simple-ready .aci-head p{font-size:13px;line-height:1.5}
+body[data-sidebar-page="agent-contacts"] .aci-simple-ready .aci-head-actions{display:grid;justify-items:end;gap:7px;min-width:270px}
+body[data-sidebar-page="agent-contacts"] .aci-simple-ready .aci-file{display:none}
+body[data-sidebar-page="agent-contacts"] .aci-simple-ready #aci-analyze{min-width:270px;min-height:64px;padding:0 24px;border-radius:14px;font-size:16px;font-weight:900;justify-content:center;box-shadow:0 14px 30px rgba(47,109,246,.24)}
+body[data-sidebar-page="agent-contacts"] .aci-simple-ready .aci-tabs{display:none!important}
+body[data-sidebar-page="agent-contacts"] .aci-simple-ready .aci-body{padding:0 20px 20px;min-height:0}
+body[data-sidebar-page="agent-contacts"] .aci-simple-ready .aci-empty{min-height:0;display:flex;align-items:center;justify-content:flex-start;gap:10px;text-align:left}
+body[data-sidebar-page="agent-contacts"] .aci-simple-ready .aci-empty>i,
+body[data-sidebar-page="agent-contacts"] .aci-simple-ready .aci-empty>b,
+body[data-sidebar-page="agent-contacts"] .aci-simple-ready .aci-empty>span,
+body[data-sidebar-page="agent-contacts"] .aci-simple-ready .aci-empty>button{display:none!important}
+
+.aci-simple-steps{display:flex;align-items:center;gap:9px;flex-wrap:wrap}
+.aci-simple-steps>span{min-height:34px;padding:0 12px;border:1px solid #d5e1f6;border-radius:999px;background:#fff;color:#5b6d84;font-size:11px;font-weight:800;display:inline-flex;align-items:center;gap:7px}
+.aci-simple-steps>span b{width:20px;height:20px;border-radius:50%;display:grid;place-items:center;background:#edf2f8;color:#64758a;font-size:10px}
+.aci-simple-steps>span.active{border-color:#2f6df6;background:#2f6df6;color:#fff}
+.aci-simple-steps>span.active b{background:#fff;color:#2f6df6}
+.aci-simple-steps>i{font-size:9px;color:#9aa8ba}
+
+/* After analysis, collapse the header and let the tools become the focus. */
+body[data-sidebar-page="agent-contacts"] .aci-simple-results .aci-head{padding:15px 20px;align-items:center}
+body[data-sidebar-page="agent-contacts"] .aci-simple-results .aci-head h2{font-size:20px;margin:2px 0}
+body[data-sidebar-page="agent-contacts"] .aci-simple-results .aci-head p{font-size:12px}
+body[data-sidebar-page="agent-contacts"] .aci-simple-results .aci-head-actions{display:flex;align-items:center;gap:8px}
+body[data-sidebar-page="agent-contacts"] .aci-simple-results #aci-analyze{min-height:42px;padding:0 14px;font-size:12px;box-shadow:none}
+body[data-sidebar-page="agent-contacts"] .aci-simple-results .aci-tabs button{font-size:12px}
+body[data-sidebar-page="agent-contacts"] .aci-section-head p{display:none!important}
+
+/* CRM Companion remains available before opening a file, but with less copy. */
+body[data-sidebar-page="agent-contacts"] .acx-crm-install-text p{display:none}
+body[data-sidebar-page="agent-contacts"] .acx-crm-install-text h3{margin-bottom:0}
+
+@media(max-width:700px){
+  body[data-sidebar-page="agent-contacts"] .acx-name-intelligence{margin:0 14px 12px!important}
+  body[data-sidebar-page="agent-contacts"] #aci-shell.aci-simple-ready{margin:0 10px 14px}
+  body[data-sidebar-page="agent-contacts"] .aci-simple-ready .aci-head{display:grid;gap:14px}
+  body[data-sidebar-page="agent-contacts"] .aci-simple-ready .aci-head-actions{width:100%;min-width:0;justify-items:stretch}
+  body[data-sidebar-page="agent-contacts"] .aci-simple-ready #aci-analyze{width:100%;min-width:0}
+  .aci-simple-steps{width:100%}
+}
