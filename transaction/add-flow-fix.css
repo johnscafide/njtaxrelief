@@ -1,4 +1,4 @@
-/* NJW-376 follow-up: preserve the approved compact rail while keeping Add transaction reachable. */
+/* NJW-376 follow-up: preserve the approved compact UI while keeping core transaction actions reachable. */
 .tx-portfolio{position:relative!important}
 .tx-portfolio-head{
   display:flex!important;
@@ -26,7 +26,37 @@
 }
 .tx-filter-row{padding-right:50px!important}
 
+/* Keep the approved sparse property header, but retain one unobtrusive edit action. */
+.tx-property-title{order:1!important}
+.tx-approved-metrics{order:2!important}
+.tx-detail-actions{
+  order:3!important;
+  display:flex!important;
+  align-items:center!important;
+  flex:0 0 auto!important;
+  gap:0!important;
+  margin-left:4px!important;
+}
+.tx-detail-actions>:not(.tx-more){display:none!important}
+.tx-detail-actions .tx-more{
+  display:inline-flex!important;
+  width:32px!important;
+  height:32px!important;
+  min-width:32px!important;
+  min-height:32px!important;
+  border-radius:8px!important;
+  border:1px solid var(--tx-line-app,#dce5ef)!important;
+  background:#fff!important;
+  color:var(--tx-accent-dark,#0e2248)!important;
+  box-shadow:none!important;
+}
+.tx-detail-actions .tx-more:hover{
+  border-color:#b9cbe2!important;
+  background:#f8fbff!important;
+}
+
 @media(max-width:900px){
   .tx-portfolio-head{top:9px!important;right:9px!important}
   .tx-filter-row{padding-right:49px!important}
+  .tx-detail-actions{margin-left:0!important}
 }
