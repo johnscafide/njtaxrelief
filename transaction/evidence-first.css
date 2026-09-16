@@ -5,8 +5,8 @@
   --tx-line:var(--border,#dfe4ea);
   --tx-soft:var(--surface-soft,#f7f8fa);
   --tx-card:var(--surface,#fff);
-  --tx-teal:var(--wd-teal-600,#0f766e);
-  --tx-teal-dark:var(--wd-navy-700,#1456a0);
+  --tx-teal:var(--wd-navy-700,#1456a0);
+  --tx-teal-dark:var(--wd-navy-950,#0e2248);
   --tx-navy:var(--wd-navy-950,#0e2248);
   --tx-amber:var(--wd-gold-500,#b8972a);
   --tx-red:var(--wd-red-600,#b42318);
@@ -14,7 +14,7 @@
   --tx-shadow:0 16px 42px rgba(20,32,51,.08)
 }
 .tx-page{color:var(--tx-ink)}
-.tx-eyebrow,.tx-link-btn,.tx-source-link,.tx-evidence-details summary{color:var(--tx-teal)!important}
+.tx-eyebrow,.tx-link-btn,.tx-source-link,.tx-evidence-details summary{color:var(--wd-navy-700,#1456a0)!important}
 .tx-btn-primary{background:var(--tx-navy)!important;border-color:var(--tx-navy)!important;color:#fff!important}
 .tx-btn-primary:hover{background:var(--wd-navy-700,#1456a0)!important;border-color:var(--wd-navy-700,#1456a0)!important}
 .tx-tabs button[aria-selected="true"]{color:var(--tx-ink)!important;border-bottom-color:var(--wd-navy-700,#1456a0)!important;background:var(--info-bg,#eef5ff)!important}
