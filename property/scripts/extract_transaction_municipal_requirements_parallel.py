@@ -10,7 +10,7 @@ import pathlib
 from collections import defaultdict
 
 ROOT = pathlib.Path(__file__).resolve().parents[2]
-IMPL = ROOT / "property/scripts/extract_transaction_municipal_requirements_v2.py"
+IMPL = ROOT / "property/scripts/extract_transaction_municipal_requirements_v3.py"
 
 
 def load_impl():
