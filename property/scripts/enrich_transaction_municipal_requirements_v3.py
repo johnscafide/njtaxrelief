@@ -1,15 +1,16 @@
 #!/usr/bin/env python3
 """Statewide municipal resale/CO census v3.
 
-Runs the existing 564-municipality source discovery, then deepens only the resale/CO
+Runs the existing 564-municipality source discovery, then deepens the resale/CO
 family by reading official page body text and following construction/housing/forms
-paths up to depth 3. This catches municipal naming variants such as Resale Certificate,
+paths in parallel. This catches municipal naming variants such as Resale Certificate,
 Continued Certificate of Occupancy, Certificate of Compliance and transfer inspection.
 Missing or ambiguous evidence remains VERIFY; the script never infers not-required.
 """
 from __future__ import annotations
-import argparse, datetime as dt, hashlib, html, importlib.util, json, pathlib, re, urllib.parse
+import argparse, datetime as dt, html, importlib.util, json, pathlib, re, urllib.parse
 from collections import deque
+from concurrent.futures import ThreadPoolExecutor, as_completed
 from typing import Any
 ROOT=pathlib.Path(__file__).resolve().parents[2]
 V2=ROOT/'property/scripts/enrich_transaction_municipal_requirements_v2.py'
@@ -21,7 +22,7 @@ ALIASES=(
  'change of occupancy','change of occupancy certificate','certificate of compliance',
  'transfer certificate','property transfer inspection','sale inspection','housing resale'
 )
-NAV=('construction','building','housing','code enforcement','property maintenance','community services','permits','forms','documents','applications','resale','occupancy','certificate','inspection')
+NAV=('construction','building','housing','code enforcement','property maintenance','community services','permits','forms','documents','applications','resale','occupancy','certificate','inspection','fire prevention')
 ANCHOR=re.compile(r'<a\b[^>]*href=["\']([^"\']+)["\'][^>]*>(.*?)</a>',re.I|re.S)
 TAG=re.compile(r'<[^>]+>')
 
@@ -36,12 +37,12 @@ def same(seed,url):
  a=(urllib.parse.urlparse(seed).hostname or '').lower().removeprefix('www.');b=(urllib.parse.urlparse(url).hostname or '').lower().removeprefix('www.');return bool(a and b and (a==b or a.endswith('.'+b) or b.endswith('.'+a)))
 def fetch_html(url):
  try:
-  raw,ctype,final=base.fetch_bytes(url,timeout=18,max_bytes=3_000_000)
+  raw,ctype,final=base.fetch_bytes(url,timeout=10,max_bytes=2_000_000)
   if 'pdf' in ctype or urllib.parse.urlsplit(final).path.lower().endswith('.pdf'):return '',final
   return raw.decode('utf-8',errors='replace'),final
  except Exception:return '',url
 
-def deep_candidates(row:dict[str,Any],max_pages=55):
+def deep_candidates(row:dict[str,Any],max_pages=30):
  root=str(row.get('root_url') or '')
  if not root:return []
  q=deque([(root,0)]);seen=set();found=[];found_urls=set()
@@ -59,23 +60,27 @@ def deep_candidates(row:dict[str,Any],max_pages=55):
    hay=(label+' '+urllib.parse.unquote(target)).lower()
    if hit(hay) and target not in found_urls:
     found_urls.add(target);found.append({'label':label or 'Resale / occupancy form','url':target,'score':24,'found_by':'v3 official link alias'})
-   if depth<3 and (any(k in hay for k in NAV) or (depth==0 and len(q)<30)):
-    q.append((target,depth+1))
+   if depth<3 and any(k in hay for k in NAV):q.append((target,depth+1))
  return sorted(found,key=lambda x:(-int(x.get('score') or 0),len(x.get('url') or '')))[:14]
 
 def main():
- ap=argparse.ArgumentParser();ap.add_argument('--municipal',required=True);ap.add_argument('--out',required=True);args=ap.parse_args()
+ ap=argparse.ArgumentParser();ap.add_argument('--municipal',required=True);ap.add_argument('--out',required=True);ap.add_argument('--workers',type=int,default=18);args=ap.parse_args()
  doc=json.load(open(args.municipal,encoding='utf-8'));rows=doc.get('results') or [];codes={str(r.get('municipality_code') or '') for r in rows}
  if len(codes)!=564:raise SystemExit(f'Expected 564 municipality codes, got {len(codes)}')
- generated=dt.datetime.now(dt.timezone.utc).isoformat();obk,oun=v2.ordinance_links_county_aware(base);out=[];deep_hits=0
+ generated=dt.datetime.now(dt.timezone.utc).isoformat();obk,oun=v2.ordinance_links_county_aware(base);out=[]
+ deep_by_code={}
+ with ThreadPoolExecutor(max_workers=max(1,min(args.workers,24))) as pool:
+  jobs={pool.submit(deep_candidates,row):str(row.get('municipality_code') or '') for row in rows}
+  for fut in as_completed(jobs):
+   code=jobs[fut]
+   try:deep_by_code[code]=fut.result()
+   except Exception:deep_by_code[code]=[]
+ deep_hits=sum(bool(v) for v in deep_by_code.values())
  for muni in rows:
   clone=dict(muni);candidates={k:list(v or []) for k,v in (clone.get('candidates') or {}).items()}
-  existing=list(candidates.get('certificate_of_occupancy') or [])
-  deep=deep_candidates(clone)
-  if deep:deep_hits+=1
+  existing=list(candidates.get('certificate_of_occupancy') or []);deep=deep_by_code.get(str(muni.get('municipality_code') or ''),[])
   by={str(x.get('url') or ''):x for x in existing+deep if x.get('url')}
-  candidates['certificate_of_occupancy']=sorted(by.values(),key=lambda x:(-int(x.get('score') or 0),len(str(x.get('url') or ''))))[:16]
-  clone['candidates']=candidates
+  candidates['certificate_of_occupancy']=sorted(by.values(),key=lambda x:(-int(x.get('score') or 0),len(str(x.get('url') or ''))))[:16];clone['candidates']=candidates
   for family in ('resale_cco','smoke_fire_cert'):
    r=v2.build_row_v2(base,clone,family,obk,oun,generated);r['metadata']={**(r.get('metadata') or {}),'extractor_version':3,'deep_resale_candidate_count':len(deep),'resale_aliases_version':'v3','never_infer_not_required':True};out.append(r)
  summary={'municipalities':len(codes),'rows':len(out),'deep_resale_source_hits':deep_hits,'families':{}}
