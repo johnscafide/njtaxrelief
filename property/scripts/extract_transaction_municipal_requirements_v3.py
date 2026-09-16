@@ -3,8 +3,9 @@
 
 V2 reads each official ordinance landing URL. Many code publishers expose only a table
 of contents at that URL, so v3 follows a small set of same-host chapter links whose
-labels are directly relevant to CO/resale or smoke/fire. It never interprets absence
-of matching text as a waiver or a clean result.
+labels are directly relevant to CO/resale or smoke/fire. Requirement extraction is
+performed per source page so context from one chapter cannot make unrelated text in
+another chapter look applicable. Absence of matching text never means a waiver.
 """
 from __future__ import annotations
 
@@ -101,20 +102,23 @@ def _chapter_candidates(raw: bytes, final: str, family: str) -> list[tuple[int, 
     return out[:5]
 
 
-def ordinance_detail(url: str, family: str) -> tuple[str, list[dict[str, str]]]:
-    """Return official ordinance landing text plus up to five relevant same-host chapters."""
+def ordinance_documents(url: str, family: str) -> tuple[list[dict[str, str]], list[dict[str, str]]]:
+    """Return official landing/chapter documents, bounded to same-host relevant links."""
     raw, ctype, final = _fetch_raw(url)
+    docs: list[dict[str, str]] = []
     root_text = _text_from(raw, ctype, final)
-    texts = [root_text] if root_text else []
-    sources: list[dict[str, str]] = []
+    if root_text:
+        docs.append({"label": "Local code / ordinance source", "url": final, "text": root_text})
+    chapter_sources: list[dict[str, str]] = []
     for _, label, chapter_url in _chapter_candidates(raw, final, family):
         craw, ctype2, cfinal = _fetch_raw(chapter_url)
         text = _text_from(craw, ctype2, cfinal)
         if not text:
             continue
-        texts.append(text)
-        sources.append({"label": label or "Official code detail", "url": cfinal})
-    return " ".join(texts), sources
+        source = {"label": label or "Official code detail", "url": cfinal}
+        chapter_sources.append(source)
+        docs.append({**source, "text": text})
+    return docs, chapter_sources
 
 
 def build_row(muni: dict[str, Any], family: str, ordinance_map: dict[str, list[str]], generated: str) -> dict[str, Any]:
@@ -122,28 +126,44 @@ def build_row(muni: dict[str, Any], family: str, ordinance_map: dict[str, list[s
     ordinance_url = str(row.get("ordinance_url") or "")
     if not ordinance_url:
         metadata = dict(row.get("metadata") or {})
-        metadata["extractor_version"] = "v3-ordinance-chapters"
+        metadata["extractor_version"] = "v3-ordinance-chapters-isolated"
         metadata["ordinance_chapter_count"] = 0
         row["metadata"] = metadata
         return row
 
-    detail_text, chapter_sources = ordinance_detail(ordinance_url, family)
-    extra_requirements = v2.requirement_candidates(detail_text, family, 20)
+    docs, chapter_sources = ordinance_documents(ordinance_url, family)
+    extra_requirements: list[str] = []
+    relevant_fee_texts: list[str] = []
+    family_re = base.CO_TERMS if family == "resale_cco" else base.FIRE_TERMS
+    explicit_hits: list[bool] = []
+    for doc in docs:
+        text = doc.get("text") or ""
+        # Keep context isolated: this page must contain the requirement family before
+        # its adjacent timing/fee/inspection statements can be considered.
+        reqs = v2.requirement_candidates(text, family, 20)
+        extra_requirements.extend(reqs)
+        if family_re.search(text):
+            relevant_fee_texts.append(text)
+            explicit_hits.append(base.explicit_required(text, family))
+
     requirements = v2._merge_requirements(list(row.get("requirements") or []), extra_requirements, family)
     local_requirements = [x for x in requirements if x != v2.BASELINE_SMOKE]
 
     fees = list(row.get("fees") or [])
     fee_seen = {(str(f.get("amount") or ""), v2._normalize_key(str(f.get("label") or ""))) for f in fees if isinstance(f, dict)}
-    for fee in base.fees_from(detail_text):
-        key = (str(fee.get("amount") or ""), v2._normalize_key(str(fee.get("label") or "")))
-        if key not in fee_seen:
-            fee_seen.add(key)
-            fees.append(fee)
+    for text in relevant_fee_texts:
+        for fee in base.fees_from(text):
+            key = (str(fee.get("amount") or ""), v2._normalize_key(str(fee.get("label") or "")))
+            if key not in fee_seen:
+                fee_seen.add(key)
+                fees.append(fee)
+            if len(fees) >= 10:
+                break
         if len(fees) >= 10:
             break
 
     state = str(row.get("requirement_state") or "verify")
-    chapter_explicit = base.explicit_required(detail_text, family) if detail_text else False
+    chapter_explicit = any(explicit_hits)
     if chapter_explicit:
         state = "explicit_required"
     elif local_requirements and state in ("verify", "statewide_baseline"):
@@ -165,10 +185,11 @@ def build_row(muni: dict[str, Any], family: str, ordinance_map: dict[str, list[s
     row["source_excerpt"] = " | ".join(requirements[:5])[:1600] or None
     metadata = dict(row.get("metadata") or {})
     metadata.update({
-        "extractor_version": "v3-ordinance-chapters",
+        "extractor_version": "v3-ordinance-chapters-isolated",
         "ordinance_chapter_count": len(chapter_sources),
         "ordinance_chapters_checked": [s["url"] for s in chapter_sources],
         "local_requirement_count": len(local_requirements),
+        "chapter_context_isolated": True,
         "never_infer_not_required": True,
     })
     row["metadata"] = metadata
