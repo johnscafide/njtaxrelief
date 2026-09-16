@@ -12,8 +12,8 @@ assert.match(middleware, /SALES_API_PATH[\s\S]{0,700}AUTOMATION_UA\.test\(userAg
 assert.match(middleware, /X-Watchdog-Data-Access['"]:\s*['"]scoped-only/, 'blocked bulk paths must declare scoped-only delivery');
 assert.match(middleware, /record_public_request_security_event/, 'edge blocks must persist into the private security-event ledger');
 assert.match(middleware, /crypto\.subtle\.sign\(['"]HMAC['"]/, 'edge telemetry must pseudonymize client identity before persistence');
-assert.match(middleware, /bulk_sales_blocked[\s\S]{0,300}recordEdgeSecurityEvent\(request, ['"]bulk_sales_blocked['"]/, 'bulk-sales blocks must be persisted');
-assert.match(middleware, /automation_client_blocked[\s\S]{0,300}recordEdgeSecurityEvent\(request, ['"]automation_client_blocked['"]/, 'automation-client blocks must be persisted');
+assert.match(middleware, /bulk_sales_blocked[\s\S]{0,300}recordEdgeSecurityEvent\(request,\s*['"]bulk_sales_blocked['"]/, 'bulk-sales blocks must be persisted');
+assert.match(middleware, /automation_client_blocked[\s\S]{0,300}recordEdgeSecurityEvent\(request,\s*['"]automation_client_blocked['"]/, 'automation-client blocks must be persisted');
 assert.doesNotMatch(middleware, /console\.(?:log|info|warn|error)\([^\n]*forwarded/, 'raw forwarded client IP must not be logged by middleware');
 
 assert.match(salesApi, /createHmac\(['"]sha256['"],key\)/, 'rate limiter must pseudonymize client IP with HMAC before persistence');
