@@ -7,10 +7,39 @@
   var ZIP_NAME='watchdog-crm-companion-v'+VERSION+'.zip';
 
   function q(s,r){return (r||document).querySelector(s);}
+  function stageComingSoonLink(el,label,key){
+    if(!el)return;
+    if(label){
+      var icon=el.querySelector('i');
+      el.innerHTML=(icon?icon.outerHTML:'')+'<span>'+label+'</span>';
+    }
+    el.removeAttribute('href');
+    el.classList.add('acx-coming-soon');
+    if(key)el.setAttribute('data-agent-stage',key);
+    el.setAttribute('data-coming-soon','Coming soon for Agents');
+    el.setAttribute('aria-disabled','true');
+    el.setAttribute('role','link');
+    el.setAttribute('tabindex','0');
+    el.setAttribute('title','Coming soon for Agents');
+    if(el.getAttribute('data-coming-soon-bound')==='1')return;
+    el.setAttribute('data-coming-soon-bound','1');
+    el.addEventListener('click',function(ev){ev.preventDefault();ev.stopPropagation();});
+    el.addEventListener('keydown',function(ev){if(ev.key==='Enter'||ev.key===' '){ev.preventDefault();}});
+  }
+  function stageComingSoonLinks(){
+    var nav=q('.acx-worknav-links');
+    if(nav){
+      stageComingSoonLink(q('a[href="/agent-control"]',nav)||q('[data-agent-stage="desk"]',nav),'Agent Desk','desk');
+      stageComingSoonLink(q('a[href="/marketing-studio"]',nav)||q('[data-agent-stage="marketing"]',nav),null,'marketing');
+      stageComingSoonLink(q('a[href="/integrations"]',nav)||q('[data-agent-stage="integrations"]',nav),null,'integrations');
+    }
+    stageComingSoonLink(q('.acx-future a[href="/integrations"]')||q('.acx-future [data-agent-stage="export-integrations"]'),null,'export-integrations');
+  }
   function ensureContactsChrome(){
     document.title='CRM Contact Cleanup | Watchdog';
     var title=q('#acx-title');if(title)title.textContent='CRM Contact Cleanup';
     var workspaceTitle=q('.acx-worknav-title b');if(workspaceTitle)workspaceTitle.textContent='CRM Contact Cleanup';
+    stageComingSoonLinks();
     if(q('link[href^="/property/css/watchdog-universal-menu.css"]'))return;
     var l=document.createElement('link');l.rel='stylesheet';l.href='/property/css/watchdog-universal-menu.css?v=20260825a';l.setAttribute('data-watchdog-universal-menu-css','1');document.head.appendChild(l);
   }
