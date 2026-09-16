@@ -3,19 +3,11 @@
 if(window.__WATCHDOG_TRANSACTION_REFINEMENTS__)return;
 window.__WATCHDOG_TRANSACTION_REFINEMENTS__=true;
 
-const SOURCE_PACK=[
-  {icon:'fa-water',title:'NJ flood disclosure',scope:'Every NJ sale',copy:'Open the NJDEP flood disclosure guidance and property risk notification tool.',url:'https://dep.nj.gov/flooddisclosure/'},
-  {icon:'fa-droplet',title:'Private well testing',scope:'If drinking water uses a private well',copy:'Review Private Well Testing Act requirements, certified testing and pre-closing result review.',url:'https://dep.nj.gov/privatewells/pwta/'},
-  {icon:'fa-house-chimney',title:'Lead disclosure',scope:'Most pre-1978 housing',copy:'Use the federal lead disclosure rule, records and required buyer information before contract completion.',url:'https://www.epa.gov/lead/lead-based-paint-disclosure-rule-section-1018-title-x'},
-  {icon:'fa-file-signature',title:'NJ UCC search',scope:'Identity and lien follow-up',copy:'Access New Jersey financing statement searches, status reports and certified UCC search products.',url:'https://www.nj.gov/treasury/revenue/dcr/geninfo/uccsrch.shtml'},
-  {icon:'fa-stamp',title:'Deed recording forms',scope:'Every NJ deed recording workflow',copy:'Check current Realty Transfer Fee and GIT/REP requirements used with New Jersey deed recording.',url:'https://www.nj.gov/treasury/taxation/realty.shtml'}
-];
-
 function addStyles(){
   if(document.querySelector('link[data-transaction-refinements]'))return;
   const link=document.createElement('link');
   link.rel='stylesheet';
-  link.href='/transaction/refinements.css?v=20260916a';
+  link.href='/transaction/refinements.css?v=20260916b';
   link.dataset.transactionRefinements='true';
   document.head.appendChild(link);
 }
@@ -41,27 +33,6 @@ function enhanceEmptyVisual(){
   v.appendChild(label);
 }
 
-function sourcePackHtml(){
-  return `<section class="tx-closing-source-pack" id="tx-closing-source-pack" aria-label="Closing source pack">
-    <div class="tx-closing-source-head">
-      <div><span class="tx-eyebrow">OFFICIAL CLOSING SOURCES</span><h3>Fast checks the closing team should not miss</h3><p>These links route to authoritative government sources. They are not title, legal, lender or municipal clearances, and applicability still depends on the property and transaction.</p></div>
-      <span class="tx-closing-source-badge">Source routes</span>
-    </div>
-    <div class="tx-closing-source-grid">${SOURCE_PACK.map(s=>`<a class="tx-closing-source-card" href="${s.url}" target="_blank" rel="noopener"><i class="fas ${s.icon}"></i><strong>${s.title}</strong><span>${s.copy}</span><small>${s.scope} <i class="fas fa-arrow-up-right-from-square"></i></small></a>`).join('')}</div>
-  </section>`;
-}
-
-function injectSourcePack(){
-  if(document.getElementById('tx-closing-source-pack'))return;
-  const detail=document.getElementById('tx-detail');
-  if(!detail||detail.hidden)return;
-  const sweep=detail.querySelector('.tx-source-sweep');
-  const panels=detail.querySelector('.tx-tabs');
-  const anchor=sweep||panels;
-  if(!anchor)return;
-  anchor.insertAdjacentHTML('afterend',sourcePackHtml());
-}
-
 function repairRenderedDeedDate(){
   document.querySelectorAll('.tx-evidence-row').forEach(row=>{
     const label=row.querySelector('span'),value=row.querySelector('b');
@@ -82,7 +53,6 @@ function refresh(){
   clearTimeout(timer);
   timer=setTimeout(()=>{
     enhanceEmptyVisual();
-    injectSourcePack();
     repairRenderedDeedDate();
     replaceEmDashes(document.querySelector('.tx-page')||document.body);
   },20);
