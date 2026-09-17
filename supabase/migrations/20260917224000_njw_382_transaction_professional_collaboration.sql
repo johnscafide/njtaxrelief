@@ -66,6 +66,39 @@ alter table public.transaction_documents
 alter table public.transaction_activity
   add column if not exists actor_user_id uuid references auth.users(id) on delete set null;
 
+-- Professional uploads use shared/<owner_uid>/<transaction_id>/<member_uid>/<document_id>/<filename>.
+-- Guests never get direct bucket policies; the Edge Function issues bounded signed upload/download URLs.
+-- The transaction owner still needs normal document-vault read/delete behavior for files a collaborator supplied.
+drop policy if exists transaction_documents_storage_shared_owner_select on storage.objects;
+create policy transaction_documents_storage_shared_owner_select
+on storage.objects for select to authenticated
+using (
+  bucket_id = 'transaction-documents'
+  and (storage.foldername(name))[1] = 'shared'
+  and (storage.foldername(name))[2] = ((select auth.uid()))::text
+  and (select public.has_watchdog_plan('pro_plus'))
+  and exists (
+    select 1 from public.transaction_workspaces w
+    where w.id::text = (storage.foldername(name))[3]
+      and w.user_id = (select auth.uid())
+  )
+);
+
+drop policy if exists transaction_documents_storage_shared_owner_delete on storage.objects;
+create policy transaction_documents_storage_shared_owner_delete
+on storage.objects for delete to authenticated
+using (
+  bucket_id = 'transaction-documents'
+  and (storage.foldername(name))[1] = 'shared'
+  and (storage.foldername(name))[2] = ((select auth.uid()))::text
+  and (select public.has_watchdog_plan('pro_plus'))
+  and exists (
+    select 1 from public.transaction_workspaces w
+    where w.id::text = (storage.foldername(name))[3]
+      and w.user_id = (select auth.uid())
+  )
+);
+
 comment on table public.transaction_professional_invites is
   'Service-only transaction-scoped professional invitations. Tokens are stored only as SHA-256 hashes.';
 comment on table public.transaction_professional_memberships is
