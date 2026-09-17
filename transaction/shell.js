@@ -6,6 +6,14 @@ function normalizeTransactionUrl(){
     try{window.history.replaceState(window.history.state,'','/transaction'+window.location.search+window.location.hash);}catch(e){}
   }
 }
+function loadCompactEvidence(){
+  if(window.__WATCHDOG_TRANSACTION_COMPACT_EVIDENCE_V3__||document.querySelector('script[data-transaction-compact-evidence]'))return;
+  var compact=document.createElement('script');
+  compact.src='/transaction/evidence-compact-v3.js?v=20260917a';
+  compact.async=false;
+  compact.dataset.transactionCompactEvidence='true';
+  document.body.appendChild(compact);
+}
 function loadEvidenceFirst(){
   if(window.WatchdogTransactionAccess?.evidence!==true)return;
   if(window.__WATCHDOG_TRANSACTION_EVIDENCE_FIRST__||document.querySelector('script[data-transaction-evidence-first]'))return;
@@ -95,5 +103,5 @@ normalizeTransactionUrl();
 loadRefinements();
 document.addEventListener('watchdog:transaction-access-ready',loadMunicipalClearance);
 loadPreflight();
-if(document.readyState==='loading')document.addEventListener('DOMContentLoaded',function(){setTimeout(patch,0);setTimeout(patch,250);},{once:true});else{setTimeout(patch,0);setTimeout(patch,250);}
+if(document.readyState==='loading')document.addEventListener('DOMContentLoaded',function(){loadCompactEvidence();setTimeout(patch,0);setTimeout(patch,250);},{once:true});else{loadCompactEvidence();setTimeout(patch,0);setTimeout(patch,250);}
 })();
