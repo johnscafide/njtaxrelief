@@ -69,7 +69,7 @@ function ensureShell(){
       +'<article class="txv2-detail" id="txv2-detail" hidden>'
         +'<header class="txv2-property-head">'
           +'<div class="txv2-property-copy"><div class="txv2-title-row"><h1 id="txv2-property-title">Property</h1><span class="txv2-attention" id="txv2-attention"><i></i><span>Needs attention</span></span></div><p id="txv2-property-meta">New Jersey</p></div>'
-          +'<div class="txv2-head-actions"><div class="txv2-action-row"><button class="txv2-refresh" type="button" data-v2-action="refresh"><i class="fas fa-rotate" aria-hidden="true"></i><span>Refresh review</span></button><div class="txv2-overflow-wrap"><button class="txv2-icon-button" type="button" data-v2-action="toggle-overflow" aria-label="Transaction actions" aria-expanded="false"><i class="fas fa-ellipsis" aria-hidden="true"></i></button><div class="txv2-menu" id="txv2-overflow-menu" hidden><button type="button" data-tx-action="edit">Edit transaction</button><button type="button" data-tx-action="add">Add transaction</button></div></div></div><small id="txv2-checked">Checked —</small></div>'
+          +'<div class="txv2-head-actions"><div class="txv2-action-row"><button class="txv2-refresh txv2-strong-action" type="button" data-v2-action="refresh"><i class="fas fa-rotate" aria-hidden="true"></i><span>Refresh review</span></button><button class="txv2-add txv2-strong-action" type="button" data-tx-action="add"><i class="fas fa-plus" aria-hidden="true"></i><span>Add transaction</span></button><button class="txv2-invite" type="button" data-collab-action="open"><i class="fas fa-user-plus" aria-hidden="true"></i><span>Invite pro</span></button><div class="txv2-overflow-wrap"><button class="txv2-icon-button" type="button" data-v2-action="toggle-overflow" aria-label="Transaction actions" aria-expanded="false"><i class="fas fa-ellipsis" aria-hidden="true"></i></button><div class="txv2-menu" id="txv2-overflow-menu" hidden><button type="button" data-tx-action="edit">Edit transaction</button></div></div></div><small id="txv2-checked">Checked —</small></div>'
         +'</header>'
         +'<nav class="txv2-tabs" aria-label="Transaction workspace sections">'
           +'<button type="button" data-v2-view="overview" aria-current="page">Overview</button><button type="button" data-v2-view="evidence">Evidence</button><button type="button" data-v2-view="documents">Documents</button><button type="button" data-v2-view="timeline">Timeline</button><button type="button" data-v2-view="activity">Activity</button>'
@@ -202,7 +202,11 @@ function renderSelected(){
   renderEvidence();syncFeatureAvailability();
 }
 function syncFeatureAvailability(){
-  var premium=premiumAvailable(),refresh=$('[data-v2-action="refresh"]'),doc=$('[data-v2-action="documents"]');if(refresh)refresh.hidden=!premium;if(doc){var span=doc.querySelector('span');if(span)span.textContent=premium?'Upload document':'View Pro+ documents'}var privateCopy=$('#txv2-private-copy');if(privateCopy)privateCopy.textContent=premium?'Private to your account':'Pro+ feature';
+  var premium=premiumAvailable(),refresh=$('[data-v2-action="refresh"]'),invite=$('[data-collab-action="open"]'),doc=$('[data-v2-action="documents"]');
+  if(refresh)refresh.hidden=!premium;
+  if(invite)invite.hidden=!premium;
+  if(doc){var span=doc.querySelector('span');if(span)span.textContent=premium?'Upload document':'View Pro+ documents'}
+  var privateCopy=$('#txv2-private-copy');if(privateCopy)privateCopy.textContent=premium?'Private to your account':'Pro+ feature';
 }
 function showLoading(){var detail=$('#txv2-detail'),load=$('#txv2-loading'),error=$('#txv2-load-error'),overview=$('#txv2-overview'),secondary=$('#txv2-secondary');if(detail)detail.hidden=false;if(load)load.hidden=false;if(error)error.hidden=true;if(overview)overview.hidden=true;if(secondary)secondary.hidden=true}
 function showLoadError(){var load=$('#txv2-loading'),error=$('#txv2-load-error'),overview=$('#txv2-overview'),secondary=$('#txv2-secondary');if(load)load.hidden=true;if(error)error.hidden=false;if(overview)overview.hidden=true;if(secondary)secondary.hidden=true}
