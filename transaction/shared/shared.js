@@ -48,7 +48,7 @@ async function boot(){
       return;
     }
     var p=new URLSearchParams(location.search),token=clean(p.get('invite')),transaction=clean(p.get('transaction'));
-    if(token){try{await accept(token)}catch(e){if(e.data&&e.data.invited_email){gate('fas fa-envelope-circle-check','Use the invited email address','This link was sent to '+e.data.invited_email+'. Sign out and reopen it with that Watchdog account.','<button type="button" id="sg-signout"><i class="fas fa-arrow-right-from-bracket"></i> Sign out</button>');$('#sg-signout').onclick=async function(){await db.auth.signOut();location.reload()};return}throw e}}
+    if(token){try{await accept(token)}catch(e){if(e.data&&e.data.invited_hint){gate('fas fa-envelope-circle-check','Use the invited email address','This link was sent to '+e.data.invited_hint+'. Sign out and reopen it with that Watchdog account.','<button type="button" id="sg-signout"><i class="fas fa-arrow-right-from-bracket"></i> Sign out</button>');$('#sg-signout').onclick=async function(){await db.auth.signOut();location.reload()};return}throw e}}
     else if(transaction){txId=transaction;await load()}
     else gate('fas fa-link-slash','Invitation link required','Open the secure transaction link that your real estate professional sent you.','');
   }catch(e){gate('fas fa-triangle-exclamation','Shared transaction unavailable',e.message||'This invitation could not be verified.','')}
