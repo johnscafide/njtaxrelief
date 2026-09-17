@@ -28,7 +28,7 @@ async function fixture(surface,width=1440,plan='agent'){
     }catch{return route.abort()}
   });
   await page.addInitScript(({plan})=>{
-    const rows={transaction_workspaces:[],transaction_items:[],transaction_disclosures:[],transaction_activity:[],agent_contact_files:[],profiles:[{id:'fixture-owner',display_name:'Fixture Agent'}]};
+    const rows={transaction_workspaces:[],transaction_items:[],transaction_disclosures:[],transaction_activity:[],transaction_documents:[],agent_contact_files:[],profiles:[{id:'fixture-owner',display_name:'Fixture Agent'}]};
     const blobs=new Map();let serial=0;
     const state=window.companionFixture={rows,invocations:[],failDetails:false,failUpdates:false,failArchive:false};
     function query(table){
@@ -57,48 +57,50 @@ async function fixture(surface,width=1440,plan='agent'){
     window.supabase={createClient:()=>client};window.NJPTRSupabaseRuntime={createClient:()=>client};
   },{plan});
   await page.goto('https://companion-fixture.test'+(surface==='contacts'?'/agent/contacts':'/transaction/'));
-  if(surface==='contacts')await page.locator('#acx-app[aria-busy="false"]').waitFor();else await page.locator('#tx-app').waitFor();
+  if(surface==='contacts')await page.locator('#acx-app[aria-busy="false"]').waitFor();else{await page.locator('#tx-app').waitFor();await page.locator('#tx-v2-shell').waitFor()}
   return{page,context,errors};
+}
+async function addTransaction(page,address,clientLabel=''){
+  await page.locator('#txv2-empty [data-tx-action="add"]').click();
+  await page.locator('#tx-form input[name="address"]').fill(address);
+  if(clientLabel)await page.locator('#tx-form input[name="client_label"]').fill(clientLabel);
+  await page.locator('#tx-save').click();
+  await page.locator('#txv2-detail').waitFor();
+  await page.locator('#txv2-loading').waitFor({state:'hidden'});
 }
 try{
   for(const width of [390,1440]){
     const {page,context,errors}=await fixture('transaction',width);
-    await page.locator('[data-tx-action="add"]').first().click();
-    await page.locator('#tx-form input[name="address"]').fill('123 Fixture Street, Test Town, NJ');
-    await page.locator('#tx-form input[name="client_label"]').fill('Fixture client');
-    await page.locator('#tx-save').click();
-    await page.locator('#tx-detail').waitFor();
-    assert.equal(await page.locator('#tx-agent-evidence').isVisible(),true);
-    assert.equal(await page.locator('#tx-run-review').isVisible(),false);
-    assert.equal(await page.locator('#tx-watch-btn').isVisible(),false);
-    assert.match(await page.locator('#tx-readiness-label').innerText(),/^review$/i);
+    await addTransaction(page,'123 Fixture Street, Test Town, NJ','Fixture client');
+    assert.equal(await page.locator('[data-v2-action="refresh"]').isVisible(),false,'Agent must not expose a fake paid refresh action');
+    assert.match(await page.locator('#txv2-document-copy').innerText(),/available with Pro\+/i);
+    assert.match(await page.locator('#txv2-attention').innerText(),/review needed/i);
     await page.waitForTimeout(1700);
     assert.deepEqual(await page.evaluate(()=>companionFixture.invocations),[],'Agent must not invoke paid evidence sweeps');
     assert.equal(await page.locator('#tx-documents-card').count(),0,'Agent must see a labeled upgrade instead of an unusable Pro+ document vault');
     assert.equal(await page.evaluate(()=>!!window.__WATCHDOG_TRANSACTION_DOCUMENTS__),false);
     assert.equal(await page.evaluate(()=>companionFixture.rows.transaction_workspaces[0].watch_enabled),false);
-    await page.locator('[data-tx-action="edit"]').click();
+    await page.locator('[data-v2-action="toggle-overflow"]').click();
+    const edit=page.locator('#txv2-overflow-menu [data-tx-action="edit"]');await edit.click();
     await page.keyboard.press('Escape');
     assert.equal(await page.locator('#tx-modal-layer').isVisible(),false);
     assert.equal(await page.evaluate(()=>document.activeElement.dataset.txAction),'edit');
     await page.evaluate(()=>companionFixture.failDetails=true);
-    await page.locator('.tx-list-card').first().click();
-    await page.locator('#tx-load-error').waitFor();
-    assert.equal(await page.locator('#tx-detail').isVisible(),false,'Failed load cannot become a cleared checklist');
+    await page.locator('[data-v2-tx-id]').first().click();
+    await page.locator('#txv2-load-error').waitFor();
+    assert.equal(await page.locator('#txv2-overview').isVisible(),false,'Failed load cannot become a cleared evidence view');
     await page.evaluate(()=>companionFixture.failDetails=false);
-    await page.locator('[data-tx-action="retry-load"]').click();
-    await page.locator('#tx-detail').waitFor();
+    await page.locator('[data-v2-action="retry"]').click();
+    await page.locator('#txv2-overview').waitFor();
     assert(await page.evaluate(()=>document.documentElement.scrollWidth<=innerWidth+1),'Transaction document overflow');
     assert.deepEqual(errors,[]);
     if(out){await fs.mkdir(out,{recursive:true});await page.screenshot({path:path.join(out,`transaction-agent-${width}-FIXTURE.png`),fullPage:true})}
     await context.close();
   }
   const premium=await fixture('transaction',1440,'pro_plus');
-  await premium.page.locator('[data-tx-action="add"]').first().click();
-  await premium.page.locator('#tx-form input[name="address"]').fill('456 Premium Fixture Street, NJ');
-  await premium.page.locator('#tx-save').click();await premium.page.locator('#tx-detail').waitFor();
-  assert.equal(await premium.page.locator('#tx-agent-evidence').isVisible(),false);
-  await premium.page.locator('#tx-run-review').click();
+  await addTransaction(premium.page,'456 Premium Fixture Street, NJ');
+  assert.equal(await premium.page.locator('[data-v2-action="refresh"]').isVisible(),true);
+  await premium.page.locator('[data-v2-action="refresh"]').click();
   await premium.page.waitForFunction(()=>companionFixture.invocations.includes('transaction-evidence-sweep'));
   await premium.page.locator('#tx-documents-card').waitFor();
   assert.deepEqual(premium.errors,[]);await premium.context.close();
@@ -124,5 +126,5 @@ try{
   assert(await page.evaluate(()=>document.documentElement.scrollWidth<=innerWidth+1),'Contacts document overflow');
   if(out)await page.screenshot({path:path.join(out,'contacts-review-mobile-FIXTURE.png'),fullPage:true});
   await context.close();
-  console.log('Companion browser fixtures passed: Agent Transaction creation, premium boundaries, failed-load recovery, keyboard/mobile layout, and Contacts edit/export/reopen.');
+  console.log('Companion browser fixtures passed: Transaction v2 Agent/Premium boundaries, failed-load recovery, keyboard/mobile layout, and Contacts edit/export/reopen.');
 }finally{await browser.close()}
