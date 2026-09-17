@@ -301,3 +301,6 @@ verify_jwt = false
 # normal Watchdog user JWT at both the gateway and function authorization layer.
 [functions.watchdog-crm-companion-analytics]
 verify_jwt = true
+
+[functions.transaction-collaboration]
+verify_jwt = true

@@ -1,0 +1,55 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<title>Shared Transaction | Watchdog</title>
+<meta name="robots" content="noindex,nofollow">
+<meta name="theme-color" content="#f5f6f7">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Plus+Jakarta+Sans:wght@600;700;800&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+<link rel="stylesheet" href="/transaction/shared/shared.css?v=20260917a">
+</head>
+<body>
+<header class="sg-top"><a href="/" class="sg-brand"><img src="/agent/assets/watchdog-logo.svg" alt="Watchdog"></a><span>Shared transaction</span></header>
+<main class="sg-main">
+<section class="sg-gate" id="sg-gate"><i class="fas fa-circle-notch fa-spin"></i><h1>Opening shared transaction…</h1><p>Watchdog is verifying your transaction-specific access.</p></section>
+<section class="sg-app" id="sg-app" hidden>
+  <div class="sg-sharebar"><div><i class="fas fa-user-shield"></i><span>You are viewing one transaction shared with your Watchdog account.</span></div><a href="/pro#plans">Compare Pro &amp; Pro+</a></div>
+  <header class="sg-property">
+    <div><span class="sg-eyebrow" id="sg-role">PROFESSIONAL GUEST</span><h1 id="sg-address">Property</h1><p id="sg-meta">New Jersey</p></div>
+    <span class="sg-status" id="sg-status">Review</span>
+  </header>
+  <section class="sg-stats">
+    <article><span>Closing</span><b id="sg-closing">—</b></article>
+    <article><span>Contract date</span><b id="sg-contract">—</b></article>
+    <article><span>Stage</span><b id="sg-stage">—</b></article>
+    <article><span>Last review</span><b id="sg-reviewed">—</b></article>
+  </section>
+  <div class="sg-grid">
+    <section class="sg-panel">
+      <div class="sg-panel-head"><div><span class="sg-eyebrow">SHARED CLOSING CONTEXT</span><h2>Evidence &amp; readiness</h2></div><span class="sg-note">Client disclosures are not shared</span></div>
+      <div id="sg-items" class="sg-items"></div>
+    </section>
+    <aside class="sg-panel sg-docs">
+      <div class="sg-panel-head"><div><span class="sg-eyebrow">PRIVATE FILE EXCHANGE</span><h2>Documents</h2></div></div>
+      <form id="sg-upload" class="sg-upload">
+        <label>Document type<select name="document_type"><option value="title_commitment">Title commitment</option><option value="lender_commitment">Lender commitment</option><option value="mortgage_payoff">Mortgage payoff</option><option value="appraisal">Appraisal</option><option value="inspection_report">Inspection report</option><option value="attorney_review">Attorney review</option><option value="closing_package">Closing package</option><option value="other">Other</option></select></label>
+        <label>PDF or image<input name="file" type="file" accept="application/pdf,image/jpeg,image/png,.pdf,.jpg,.jpeg,.png" required></label>
+        <button type="submit"><i class="fas fa-cloud-arrow-up"></i> Upload document</button>
+      </form>
+      <div id="sg-doc-list" class="sg-doc-list"></div>
+      <p class="sg-fine"><i class="fas fa-lock"></i> Shared documents stay attached to this transaction. Uploading a file does not replace Watchdog public-source evidence.</p>
+    </aside>
+  </div>
+  <section class="sg-upgrade"><div><span class="sg-eyebrow">YOUR OWN WATCHDOG WORKSPACE</span><h2>Manage your own closings and property intelligence.</h2><p>This invitation does not add a paid plan to your account. Pro and Pro+ are available if you want Watchdog for your own transactions and clients.</p></div><a href="/pro#plans">See professional plans <i class="fas fa-arrow-right"></i></a></section>
+</section>
+</main>
+<div class="sg-toast" id="sg-toast" hidden></div>
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2/dist/umd/supabase.js"></script>
+<script src="/property/js/supabase-runtime.js"></script>
+<script src="/property/js/supabase-singleton-bridge.js"></script>
+<script src="/transaction/shared/shared.js?v=20260917a"></script>
+</body>
+</html>

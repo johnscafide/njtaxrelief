@@ -91,9 +91,11 @@ body[data-sidebar-page="transaction"] .tx-page{
 .txv2-attention.ready{color:#4b525d}.txv2-attention.ready i{background:#7a818c}
 .txv2-head-actions{display:flex;flex-direction:column;align-items:flex-end;gap:8px;flex:0 0 auto}
 .txv2-action-row{display:flex;align-items:center;gap:10px}
-.txv2-refresh{display:inline-flex;align-items:center;justify-content:center;gap:9px;height:40px;padding:0 16px;border:1px solid #d9dce1;border-radius:6px;background:#fff;color:var(--txv2-text);font-size:14px;line-height:20px;font-weight:500}
-.txv2-refresh:hover{background:var(--txv2-hover)}
-.txv2-refresh:disabled{opacity:.65;cursor:wait}
+.txv2-refresh,.txv2-add{display:inline-flex;align-items:center;justify-content:center;gap:9px;height:40px;padding:0 16px;border:1px solid #3e4a53;border-radius:6px;background:#3e4a53;color:#fff;font-size:14px;line-height:20px;font-weight:600;box-shadow:0 1px 2px rgba(25,31,36,.08)}
+.txv2-add{background:#29353d;border-color:#29353d}
+.txv2-refresh:hover{background:#354149;border-color:#354149}
+.txv2-add:hover{background:#202b32;border-color:#202b32}
+.txv2-refresh:disabled,.txv2-add:disabled{opacity:.65;cursor:wait}
 .txv2-icon-button{display:grid;place-items:center;width:40px;height:40px;border:0;border-radius:6px;background:#fff;color:var(--txv2-text);font-size:16px}
 .txv2-icon-button:hover{background:var(--txv2-hover)}
 .txv2-head-actions small{font-size:13px;line-height:19px;color:var(--txv2-muted);font-variant-numeric:tabular-nums}
@@ -244,7 +246,7 @@ body[data-sidebar-page="transaction"] .tx-page{
   .txv2-title-row h1{font-size:26px;line-height:34px}
   .txv2-property-copy p{font-size:14px;line-height:21px}
   .txv2-head-actions{align-items:flex-start;width:100%}
-  .txv2-action-row{width:100%}.txv2-refresh{flex:1}.txv2-head-actions small{align-self:flex-end}
+  .txv2-action-row{width:100%;flex-wrap:wrap}.txv2-refresh,.txv2-add{flex:1 1 145px}.txv2-head-actions small{align-self:flex-end}
   .txv2-tabs{gap:24px;padding:0 16px;overflow-x:auto;overflow-y:visible;scrollbar-width:none}
   .txv2-tabs::-webkit-scrollbar{display:none}
   .txv2-tabs>button,.txv2-more-wrap>button{font-size:15px}

@@ -5,6 +5,9 @@ on:
     paths:
       - 'transaction/**'
       - 'property/tests/transaction-command-center-contract.mjs'
+      - 'property/tests/transaction-collaboration-contract.mjs'
+      - 'supabase/functions/transaction-collaboration/**'
+      - 'supabase/migrations/20260917224000_njw_382_transaction_professional_collaboration.sql'
       - 'supabase/migrations/20260915161000_transaction_command_center.sql'
       - 'supabase/migrations/20260915163500_transaction_command_center_fk_indexes.sql'
       - '.github/workflows/transaction-command-center-contract.yml'
@@ -26,6 +29,10 @@ jobs:
           node --check transaction/transaction.js
           node --check transaction/shell.js
           node --check transaction/command-center-polish.js
+          node --check transaction/collaboration.js
+          node --check transaction/shared/shared.js
           node --check transaction/evidence-first.js
       - name: Transaction product contract
-        run: node property/tests/transaction-command-center-contract.mjs
+        run: |
+          node property/tests/transaction-command-center-contract.mjs
+          node property/tests/transaction-collaboration-contract.mjs
