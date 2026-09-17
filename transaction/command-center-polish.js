@@ -21,7 +21,7 @@ var EVIDENCE_GROUPS=[
 function $(s,r){return (r||document).querySelector(s)}
 function $$(s,r){return Array.prototype.slice.call((r||document).querySelectorAll(s))}
 function clean(v){return String(v==null?'':v).trim()}
-function esc(v){return String(v==null?'':v).replace(/[&<>"']/g,function(c){return {'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]})}
+function esc(v){return String(v==null?'':v).replace(/[&<>"']/g,function(c){return {'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot',"'":'&#39;'}[c]})}
 function titleCase(v){return clean(v).replace(/_/g,' ').toLowerCase().replace(/\b\w/g,function(c){return c.toUpperCase()})}
 function money(v){var n=Number(v);return Number.isFinite(n)?n.toLocaleString('en-US',{style:'currency',currency:'USD'}):''}
 function fmtDate(v){if(!v)return'—';var d=new Date(String(v).slice(0,10)+'T12:00:00');return Number.isFinite(d.getTime())?d.toLocaleDateString('en-US',{month:'short',day:'numeric',year:'numeric'}):'—'}
@@ -33,7 +33,7 @@ function isResolved(i){return i&&(['verified','resolved','waived','not_applicabl
 function isIssue(i){return i&&(i.evidence_state==='issue_observed'||['attention','blocked'].includes(i.severity))}
 function needsReview(i){return i&&!isResolved(i)&&(i.evidence_state==='provider_missing'||i.evidence_state==='verify'||i.evidence_state==='unknown'||['open','requested','received'].includes(i.state)||i.severity==='review')}
 function payload(i){return i&&i.payload&&typeof i.payload==='object'?i.payload:{}}
-function premiumAvailable(){var b=$('#tx-run-review');return !!b&&!b.hidden}
+function premiumAvailable(){return !!(window.WatchdogTransactionAccess&&window.WatchdogTransactionAccess.evidence===true)}
 
 function readiness(rows){
   var relevant=(rows||[]).filter(function(x){return x.state!=='not_applicable'&&x.evidence_state!=='not_applicable'});
@@ -155,7 +155,7 @@ async function loadSelected(id){
   var docsQuery=c.from('transaction_documents').select('id,status,created_at').eq('transaction_id',id).eq('user_id',user.id).order('created_at',{ascending:false});
   var results=await Promise.all([itemQuery,docsQuery]);if(seq!==loadSeq)return;
   var latest=await c.from('transaction_workspaces').select('*').eq('id',id).eq('user_id',user.id).maybeSingle();if(seq!==loadSeq)return;
-  if(!latest.error&&latest.data){selected=latest.data;var idx=workspaces.findIndex(function(t){return t.id===id});if(idx>=0)workspaces[idx]=latest.data}
+  if(!latest.error&&latest.data){selected=latest.data;var idx=workspaces.findIndex(function(t){return t.id===id});if(idx>=0)workspaces[idx]=latest.data;else workspaces.unshift(latest.data);renderRail()}
   if(results[0].error){console.warn('Transaction v2 items could not load',results[0].error);loading=false;showLoadError();renderHeader();renderPortfolio();return}
   if(results[1].error&&premiumAvailable())console.warn('Transaction v2 documents could not load',results[1].error);
   items=results[0].data||[];documents=results[1].error?[]:(results[1].data||[]);loading=false;hideLoadState();renderSelected();renderPortfolio();activateView(activeView,true);
