@@ -40,6 +40,11 @@ function randomToken(){
 function safeFileName(v:unknown){
   return clean(v,180).replace(/[^A-Za-z0-9._ -]/g,"_").replace(/\s+/g," ").replace(/^\.+/,"") || "document";
 }
+function emailHint(v:unknown){
+  const e=email(v),parts=e.split("@");if(parts.length!==2)return "the invited email";
+  const local=parts[0]||"",domain=parts[1]||"";
+  return (local.slice(0,1)||"*")+"***@"+domain;
+}
 async function ownerTier(admin:any,ownerId:string){
   const [{data:ent},{data:profile}] = await Promise.all([
     admin.from("account_entitlements").select("plan_tier,subscription_status").eq("user_id",ownerId).maybeSingle(),
@@ -148,7 +153,7 @@ Deno.serve(async(req:Request)=>{
     const tokenHash=await hashToken(token);
     const {data:inv}=await admin.from("transaction_professional_invites").select("*").eq("token_hash",tokenHash).maybeSingle();
     if(!inv||inv.revoked_at||new Date(inv.expires_at).getTime()<Date.now())return respond(req,410,{error:"This invitation is expired or no longer available"});
-    if(email(user.email)!==email(inv.invited_email))return respond(req,403,{error:"This invitation was sent to a different email address",invited_email:inv.invited_email});
+    if(email(user.email)!==email(inv.invited_email))return respond(req,403,{error:"This invitation was sent to a different email address",invited_hint:emailHint(inv.invited_email)});
     const tier=await ownerTier(admin,String(inv.owner_user_id));if(!tier.allowed)return respond(req,403,{error:"The transaction owner no longer has collaboration access"});
     const now=new Date().toISOString();
     const {data:m,error}=await admin.from("transaction_professional_memberships").upsert({
@@ -168,19 +173,19 @@ Deno.serve(async(req:Request)=>{
     const txId=clean(body.transaction_id,80), access=await requireShared(admin,txId,user.id);
     if((access as any).error)return respond(req,(access as any).status,{error:(access as any).error});
     const m=(access as any).membership;
-    const [wr,ir,ar,dr]=await Promise.all([
+    const [wr,ir,dr]=await Promise.all([
       admin.from("transaction_workspaces").select("*").eq("id",txId).eq("user_id",m.owner_user_id).maybeSingle(),
       admin.from("transaction_items").select("id,category,item_key,title,description,severity,state,evidence_state,assigned_role,due_date,source_type,source_label,source_url,source_checked_at,updated_at")
         .eq("transaction_id",txId).eq("user_id",m.owner_user_id).order("sort_order"),
-      admin.from("transaction_activity").select("id,action,message,created_at,actor_user_id").eq("transaction_id",txId).eq("user_id",m.owner_user_id).order("created_at",{ascending:false}).limit(50),
       admin.from("transaction_documents").select("id,document_type,document_label,original_name,mime_type,file_size,status,created_at,uploaded_by_user_id,uploaded_by_role")
         .eq("transaction_id",txId).eq("user_id",m.owner_user_id).neq("status","replaced").order("created_at",{ascending:false})
     ]);
     if(!wr.data)return respond(req,404,{error:"Shared transaction not found"});
+    const sharedItems=(ir.data||[]).filter((item:any)=>!String(item.item_key||"").startsWith("custom_")||item.assigned_role===m.role);
     return respond(req,200,{
       membership:{role:m.role,permission:m.permission},
       transaction:publicWorkspace(wr.data),
-      items:ir.data||[],activity:ar.data||[],documents:dr.data||[]
+      items:sharedItems,documents:dr.data||[]
     });
   }
 
