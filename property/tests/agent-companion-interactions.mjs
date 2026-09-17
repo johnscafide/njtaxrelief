@@ -86,6 +86,7 @@ try{
     assert.equal(await page.locator('#tx-modal-layer').isVisible(),false);
     assert.equal(await page.evaluate(()=>document.activeElement.dataset.txAction),'edit');
     await page.evaluate(()=>companionFixture.failDetails=true);
+    if(width<1100)await page.locator('[data-v2-action="open-drawer"]').click();
     await page.locator('[data-v2-tx-id]').first().click();
     await page.locator('#txv2-load-error').waitFor();
     assert.equal(await page.locator('#txv2-overview').isVisible(),false,'Failed load cannot become a cleared evidence view');
