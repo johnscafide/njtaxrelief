@@ -567,6 +567,14 @@
   ],
   "rewrites": [
     {
+      "source": "/transaction/shared/",
+      "destination": "/transaction/shared/index.html"
+    },
+    {
+      "source": "/transaction/shared",
+      "destination": "/transaction/shared/index.html"
+    },
+    {
       "source": "/transaction/",
       "destination": "/transaction/index.html"
     },
