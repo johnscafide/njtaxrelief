@@ -1,0 +1,117 @@
+/* NJW-379 follow-up: pixel-match the approved desktop transaction mockup.
+   Global Watchdog navigation remains unchanged; these rules only tune /transaction. */
+
+body[data-sidebar-page="transaction"] .wdx-topbar{
+  position:relative;
+  top:auto;
+}
+
+body[data-sidebar-page="transaction"] .txv2-shell{
+  min-height:calc(100vh - 84px);
+}
+
+body[data-sidebar-page="transaction"] .txv2-utility{
+  min-height:60px;
+}
+
+body[data-sidebar-page="transaction"] .txv2-property-head{
+  padding-top:34px;
+  padding-bottom:26px;
+}
+
+body[data-sidebar-page="transaction"] .txv2-tabs{
+  min-height:52px;
+  position:relative;
+  z-index:2;
+  box-shadow:0 4px 9px rgba(28,31,36,.10);
+}
+
+body[data-sidebar-page="transaction"] .txv2-tabs>button,
+body[data-sidebar-page="transaction"] .txv2-more-wrap>button{
+  min-height:52px;
+}
+
+body[data-sidebar-page="transaction"] .txv2-overview-grid{
+  padding-top:26px;
+}
+
+body[data-sidebar-page="transaction"] .txv2-rail{
+  padding-top:22px;
+}
+
+body[data-sidebar-page="transaction"] .txv2-property-copy p{
+  margin-top:7px;
+}
+
+body[data-sidebar-page="transaction"] .txv2-head-actions{
+  padding-top:1px;
+}
+
+body[data-sidebar-page="transaction"] .txv2-context>section{
+  padding-bottom:26px;
+  margin-bottom:26px;
+}
+
+body[data-sidebar-page="transaction"] .txv2-context-label{
+  margin-bottom:7px;
+}
+
+body[data-sidebar-page="transaction"] .txv2-close-line{
+  margin-bottom:15px;
+}
+
+body[data-sidebar-page="transaction"] .txv2-evidence-table th{
+  height:46px;
+}
+
+body[data-sidebar-page="transaction"] .txv2-evidence-table td{
+  padding-top:15px;
+  padding-bottom:15px;
+}
+
+body[data-sidebar-page="transaction"] .txv2-source-note{
+  padding-top:15px;
+}
+
+/* The skip link remains available to keyboard users without appearing in the normal visual state. */
+body[data-sidebar-page="transaction"] .txv2-skip:not(:focus-visible){
+  top:-80px;
+}
+
+@media(min-width:1600px){
+  body[data-sidebar-page="transaction"] .txv2-utility,
+  body[data-sidebar-page="transaction"] .txv2-property-head,
+  body[data-sidebar-page="transaction"] .txv2-tabs{
+    padding-left:44px;
+    padding-right:44px;
+  }
+  body[data-sidebar-page="transaction"] .txv2-overview-grid{
+    padding-top:28px;
+  }
+}
+
+@media(max-width:1099px){
+  body[data-sidebar-page="transaction"] .wdx-topbar{
+    position:sticky;
+    top:0;
+  }
+  body[data-sidebar-page="transaction"] .txv2-shell{
+    min-height:calc(100vh - 84px);
+  }
+  body[data-sidebar-page="transaction"] .txv2-property-head{
+    padding-top:24px;
+    padding-bottom:18px;
+  }
+  body[data-sidebar-page="transaction"] .txv2-tabs,
+  body[data-sidebar-page="transaction"] .txv2-tabs>button,
+  body[data-sidebar-page="transaction"] .txv2-more-wrap>button{
+    min-height:48px;
+  }
+}
+
+@media(max-width:759px){
+  body[data-sidebar-page="transaction"] .txv2-utility{min-height:54px}
+  body[data-sidebar-page="transaction"] .txv2-property-head{padding:20px 16px 16px}
+  body[data-sidebar-page="transaction"] .txv2-overview-grid{padding-top:20px}
+  body[data-sidebar-page="transaction"] .txv2-tabs{box-shadow:0 2px 7px rgba(28,31,36,.08)}
+}
