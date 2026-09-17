@@ -1,0 +1,19 @@
+/* NJW-379 state treatments layered on the approved v2 workspace. */
+.txv2-empty-add{display:inline-flex;align-items:center;justify-content:center;gap:8px;min-height:40px;margin-top:18px;padding:0 15px;border:1px solid #242529;border-radius:6px;background:#242529;color:#fff;font-size:14px;line-height:20px;font-weight:600}
+.txv2-empty-add:hover{background:#36383d}
+.txv2-loading{display:flex;align-items:center;justify-content:center;gap:10px;min-height:240px;padding:32px;color:#60636b;font-size:14px;line-height:21px}
+.txv2-loading[hidden],.txv2-load-error[hidden]{display:none!important}
+.txv2-load-error{margin:24px 28px 32px;padding:20px;border:1px solid #edc5be;border-radius:8px;background:#fff9f7;color:#242529}
+.txv2-load-error h2{margin:0 0 5px;font-size:18px;line-height:26px;font-weight:600}
+.txv2-load-error p{margin:0;color:#60636b;font-size:14px;line-height:21px}
+.txv2-load-error button{min-height:40px;margin-top:14px;padding:0 14px;border:1px solid #d7d9de;border-radius:6px;background:#fff;color:#242529;font-size:14px;line-height:20px;font-weight:500}
+.txv2-load-error button:hover{background:#f7f8fa}
+.txv2-upgrade{max-width:720px;padding:28px 0}
+.txv2-upgrade>span{display:block;margin-bottom:8px;color:#60636b;font-size:13px;line-height:18px;font-weight:500;letter-spacing:.04em}
+.txv2-upgrade h2{margin:0;color:#242529;font-size:24px;line-height:32px;font-weight:600}
+.txv2-upgrade p{max-width:620px;margin:8px 0 18px;color:#60636b;font-size:14px;line-height:21px}
+.txv2-upgrade a{display:inline-flex;align-items:center;gap:9px;min-height:40px;padding:0 14px;border:1px solid #d7d9de;border-radius:6px;background:#fff;color:#1967d2;text-decoration:none;font-size:14px;line-height:20px;font-weight:500}
+.txv2-refresh[hidden]{display:none!important}
+@media(min-width:1600px){.txv2-load-error{margin-left:44px;margin-right:44px}}
+@media(max-width:1099px){.txv2-load-error{margin-left:24px;margin-right:24px}}
+@media(max-width:759px){.txv2-load-error{margin:20px 16px 28px}.txv2-loading{min-height:180px}.txv2-upgrade{padding:20px 0}}
