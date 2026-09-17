@@ -4,7 +4,7 @@ if(window.__WATCHDOG_TRANSACTION_WORKSPACE_V2__)return;
 window.__WATCHDOG_TRANSACTION_WORKSPACE_V2__=true;
 
 var db=null,user=null,workspaces=[],selectedId='',selected=null,items=[],documents=[];
-var evidenceFilter='all',activeView='overview',loadSeq=0,refreshTimer=0,observerTimer=0,drawerRestore=null;
+var evidenceFilter='all',activeView='overview',loadSeq=0,refreshTimer=0,observerTimer=0,drawerRestore=null,loading=false;
 
 var EVIDENCE_GROUPS=[
   {key:'occupancy',label:'Occupancy / resale',itemKeys:['resale_cco','permit_certificate_lifecycle'],sourcePatterns:[/certificate of occupancy/i,/resale/i,/permit.*certificate/i,/permits.*certificates/i]},
@@ -33,6 +33,7 @@ function isResolved(i){return i&&(['verified','resolved','waived','not_applicabl
 function isIssue(i){return i&&(i.evidence_state==='issue_observed'||['attention','blocked'].includes(i.severity))}
 function needsReview(i){return i&&!isResolved(i)&&(i.evidence_state==='provider_missing'||i.evidence_state==='verify'||i.evidence_state==='unknown'||['open','requested','received'].includes(i.state)||i.severity==='review')}
 function payload(i){return i&&i.payload&&typeof i.payload==='object'?i.payload:{}}
+function premiumAvailable(){var b=$('#tx-run-review');return !!b&&!b.hidden}
 
 function readiness(rows){
   var relevant=(rows||[]).filter(function(x){return x.state!=='not_applicable'&&x.evidence_state!=='not_applicable'});
@@ -46,7 +47,6 @@ function client(){
   try{db=window.NJPTRSupabaseRuntime&&window.NJPTRSupabaseRuntime.createClient?window.NJPTRSupabaseRuntime.createClient():null}catch(e){console.warn('Transaction v2 data client unavailable',e)}
   return db;
 }
-
 function legacySelected(){var n=$('.tx-list-card.active');return clean(n&&n.dataset&&n.dataset.txId)}
 function legacyCard(id){return $('.tx-list-card[data-tx-id="'+String(id).replace(/"/g,'')+'"]')}
 function shellReady(){return $('#tx-app')&&!$('#tx-app').hidden&&client()}
@@ -65,16 +65,18 @@ function ensureShell(){
     +'</aside>'
     +'<section class="txv2-workspace" id="txv2-workspace" role="main">'
       +'<div class="txv2-utility"><div class="txv2-breadcrumb"><button class="txv2-rail-toggle" type="button" data-v2-action="open-drawer" aria-controls="txv2-rail" aria-expanded="false"><i class="fas fa-bars" aria-hidden="true"></i><span>Transactions</span></button><span class="txv2-bread-desktop">Transactions</span><i>/</i><strong>Property overview</strong></div></div>'
-      +'<div class="txv2-empty" id="txv2-empty" hidden><h1>Select a transaction</h1><p>Choose an active transaction to review its closing evidence.</p></div>'
+      +'<div class="txv2-empty" id="txv2-empty" hidden><h1 id="txv2-empty-title">Select a transaction</h1><p id="txv2-empty-copy">Choose an active transaction to review its closing evidence.</p><button class="txv2-empty-add" type="button" data-tx-action="add"><i class="fas fa-plus" aria-hidden="true"></i> Add transaction</button></div>'
       +'<article class="txv2-detail" id="txv2-detail" hidden>'
         +'<header class="txv2-property-head">'
           +'<div class="txv2-property-copy"><div class="txv2-title-row"><h1 id="txv2-property-title">Property</h1><span class="txv2-attention" id="txv2-attention"><i></i><span>Needs attention</span></span></div><p id="txv2-property-meta">New Jersey</p></div>'
-          +'<div class="txv2-head-actions"><div class="txv2-action-row"><button class="txv2-refresh" type="button" data-v2-action="refresh"><i class="fas fa-rotate" aria-hidden="true"></i><span>Refresh review</span></button><div class="txv2-overflow-wrap"><button class="txv2-icon-button" type="button" data-v2-action="toggle-overflow" aria-label="Transaction actions" aria-expanded="false"><i class="fas fa-ellipsis" aria-hidden="true"></i></button><div class="txv2-menu" id="txv2-overflow-menu" hidden><button type="button" data-v2-action="edit">Edit transaction</button><button type="button" data-v2-action="add">Add transaction</button></div></div></div><small id="txv2-checked">Checked —</small></div>'
+          +'<div class="txv2-head-actions"><div class="txv2-action-row"><button class="txv2-refresh" type="button" data-v2-action="refresh"><i class="fas fa-rotate" aria-hidden="true"></i><span>Refresh review</span></button><div class="txv2-overflow-wrap"><button class="txv2-icon-button" type="button" data-v2-action="toggle-overflow" aria-label="Transaction actions" aria-expanded="false"><i class="fas fa-ellipsis" aria-hidden="true"></i></button><div class="txv2-menu" id="txv2-overflow-menu" hidden><button type="button" data-tx-action="edit">Edit transaction</button><button type="button" data-tx-action="add">Add transaction</button></div></div></div><small id="txv2-checked">Checked —</small></div>'
         +'</header>'
         +'<nav class="txv2-tabs" aria-label="Transaction workspace sections">'
           +'<button type="button" data-v2-view="overview" aria-current="page">Overview</button><button type="button" data-v2-view="evidence">Evidence</button><button type="button" data-v2-view="documents">Documents</button><button type="button" data-v2-view="timeline">Timeline</button><button type="button" data-v2-view="activity">Activity</button>'
           +'<div class="txv2-more-wrap"><button type="button" data-v2-action="toggle-more" aria-expanded="false">More <i class="fas fa-chevron-down" aria-hidden="true"></i></button><div class="txv2-menu txv2-more-menu" id="txv2-more-menu" hidden><button type="button" data-v2-view="readiness">Readiness</button><button type="button" data-v2-view="disclosures">Client disclosures</button></div></div>'
         +'</nav>'
+        +'<section class="txv2-loading" id="txv2-loading" hidden aria-live="polite"><i class="fas fa-circle-notch fa-spin" aria-hidden="true"></i><span>Loading transaction…</span></section>'
+        +'<section class="txv2-load-error" id="txv2-load-error" hidden role="alert"><h2>Transaction details could not load</h2><p>Your evidence and readiness details have not been verified. Last-known data has not been replaced.</p><button type="button" data-v2-action="retry">Retry transaction</button></section>'
         +'<div class="txv2-view" id="txv2-overview">'
           +'<div class="txv2-overview-grid">'
             +'<section class="txv2-workarea">'
@@ -91,7 +93,7 @@ function ensureShell(){
               +'<section><h2>Readiness score</h2><div class="txv2-score"><strong id="txv2-score">—</strong><span>/ 100</span></div><div class="txv2-meter" role="meter" aria-label="Readiness score" aria-valuemin="0" aria-valuemax="100"><i id="txv2-meter-fill"></i></div><button class="txv2-link" type="button" data-v2-view="readiness">Open readiness checklist <i class="fas fa-arrow-right" aria-hidden="true"></i></button></section>'
               +'<section><h2>Assignments</h2><p class="txv2-context-sub">Open items by team</p><div id="txv2-assignments"></div></section>'
               +'<section><h2>Property details</h2><div class="txv2-context-row"><span>Municipality</span><b id="txv2-municipality">—</b></div><div class="txv2-context-row"><span>Parcel</span><b id="txv2-parcel">—</b></div></section>'
-              +'<section><div class="txv2-context-title"><h2>Documents</h2><b id="txv2-document-count">0</b></div><p class="txv2-doc-empty" id="txv2-document-copy">No documents uploaded</p><button class="txv2-upload" type="button" data-v2-view="documents"><i class="fas fa-arrow-up-from-bracket" aria-hidden="true"></i> Upload document</button><p class="txv2-private"><i class="fas fa-lock" aria-hidden="true"></i> Private to your account</p></section>'
+              +'<section><div class="txv2-context-title"><h2>Documents</h2><b id="txv2-document-count">0</b></div><p class="txv2-doc-empty" id="txv2-document-copy">No documents uploaded</p><button class="txv2-upload" type="button" data-v2-action="documents"><i class="fas fa-arrow-up-from-bracket" aria-hidden="true"></i><span>Upload document</span></button><p class="txv2-private"><i class="fas fa-lock" aria-hidden="true"></i> <span id="txv2-private-copy">Private to your account</span></p></section>'
             +'</aside>'
           +'</div>'
         +'</div>'
@@ -99,7 +101,7 @@ function ensureShell(){
         +'<div class="txv2-parking" id="txv2-parking" hidden></div>'
       +'</article>'
     +'</section>';
-  var shell=$('.tx-shell');if(shell)app.insertBefore(wrap,shell);else app.appendChild(wrap);
+  var first=app.firstElementChild;app.insertBefore(wrap,first||null);
   bindV2();
 }
 
@@ -118,17 +120,19 @@ function bindV2(){
     if(e.key==='Tab'&&document.body.classList.contains('txv2-rail-open'))trapDrawerFocus(e);
   });
   document.addEventListener('watchdog:transaction-preflight-complete',function(){setTimeout(refreshSelected,450)});
-  document.addEventListener('click',function(e){if(e.target.closest('#tx-doc-upload,[data-doc-action]'))setTimeout(refreshSelected,1200)});
+  document.addEventListener('click',function(e){if(e.target.closest('#tx-doc-upload,[data-doc-action]')){setTimeout(refreshSelected,1400);setTimeout(refreshSelected,5000)}});
 }
 
 function handleAction(action,node){
   if(action==='refresh'){runRefresh();return}
   if(action==='toggle-overflow'){toggleMenu('#txv2-overflow-menu',node);return}
   if(action==='toggle-more'){toggleMenu('#txv2-more-menu',node);return}
-  if(action==='edit'){var edit=$('.tx-detail [data-tx-action="edit"]');if(edit)edit.click();closeMenus();return}
-  if(action==='add'){var add=$('.tx-command-strip [data-tx-action="add"],.tx-portfolio [data-tx-action="add"]');if(add)add.click();closeMenus();return}
   if(action==='open-drawer'){openDrawer(node);return}
   if(action==='close-drawer'){closeDrawer();return}
+  if(action==='retry'){if(selectedId)loadSelected(selectedId);return}
+  if(action==='documents'){activateView('documents');return}
+  if(action==='clear-search'){var s=$('#txv2-search');if(s){s.value='';renderRail()}return}
+  if(action==='show-all'){evidenceFilter='all';var f=$('#txv2-evidence-filter');if(f)f.value='all';renderEvidence();return}
 }
 function toggleMenu(sel,button){var menu=$(sel);if(!menu)return;var next=menu.hidden;closeMenus();menu.hidden=!next;if(button)button.setAttribute('aria-expanded',String(next))}
 function closeMenus(){$$('.txv2-menu').forEach(function(m){m.hidden=true});$$('[data-v2-action="toggle-overflow"],[data-v2-action="toggle-more"]').forEach(function(b){b.setAttribute('aria-expanded','false')})}
@@ -141,34 +145,35 @@ async function loadAll(){
   var c=client();if(!c)return;
   var auth=await c.auth.getUser();user=auth&&auth.data&&auth.data.user;if(!user)return;
   var r=await c.from('transaction_workspaces').select('*').eq('user_id',user.id).order('closing_date',{ascending:true,nullsFirst:false}).order('created_at',{ascending:false});
-  if(r.error){console.warn('Transaction v2 workspaces could not load',r.error);return}
-  workspaces=r.data||[];selectedId=legacySelected()||selectedId||(workspaces[0]&&workspaces[0].id)||'';renderRail();renderPortfolio();if(selectedId)await loadSelected(selectedId);else renderEmpty();
+  if(r.error){console.warn('Transaction v2 workspaces could not load',r.error);renderEmpty(true);return}
+  workspaces=r.data||[];selectedId=legacySelected()||selectedId||(workspaces[0]&&workspaces[0].id)||'';renderRail();renderPortfolio();if(selectedId)await loadSelected(selectedId);else renderEmpty(false);
 }
 
 async function loadSelected(id){
-  var c=client();if(!c||!id)return;var seq=++loadSeq;selectedId=id;selected=workspaces.find(function(t){return t.id===id})||null;renderRail();
-  var queries=[
-    c.from('transaction_items').select('*').eq('transaction_id',id).eq('user_id',user.id).order('sort_order'),
-    c.from('transaction_documents').select('id,status,created_at').eq('transaction_id',id).eq('user_id',user.id).order('created_at',{ascending:false})
-  ];
-  var results=await Promise.all(queries);if(seq!==loadSeq)return;
-  if(results[0].error)console.warn('Transaction v2 items could not load',results[0].error);if(results[1].error)console.warn('Transaction v2 documents could not load',results[1].error);
-  items=results[0].data||[];documents=results[1].data||[];
-  var latest=await c.from('transaction_workspaces').select('*').eq('id',id).eq('user_id',user.id).maybeSingle();if(seq!==loadSeq)return;if(!latest.error&&latest.data){selected=latest.data;var idx=workspaces.findIndex(function(t){return t.id===id});if(idx>=0)workspaces[idx]=latest.data}
-  renderSelected();renderPortfolio();activateView(activeView,true);
+  var c=client();if(!c||!id||!user)return;var seq=++loadSeq;selectedId=id;selected=workspaces.find(function(t){return t.id===id})||null;items=[];documents=[];loading=true;renderRail();renderHeader();showLoading();
+  var itemQuery=c.from('transaction_items').select('*').eq('transaction_id',id).eq('user_id',user.id).order('sort_order');
+  var docsQuery=c.from('transaction_documents').select('id,status,created_at').eq('transaction_id',id).eq('user_id',user.id).order('created_at',{ascending:false});
+  var results=await Promise.all([itemQuery,docsQuery]);if(seq!==loadSeq)return;
+  var latest=await c.from('transaction_workspaces').select('*').eq('id',id).eq('user_id',user.id).maybeSingle();if(seq!==loadSeq)return;
+  if(!latest.error&&latest.data){selected=latest.data;var idx=workspaces.findIndex(function(t){return t.id===id});if(idx>=0)workspaces[idx]=latest.data}
+  if(results[0].error){console.warn('Transaction v2 items could not load',results[0].error);loading=false;showLoadError();renderHeader();renderPortfolio();return}
+  if(results[1].error&&premiumAvailable())console.warn('Transaction v2 documents could not load',results[1].error);
+  items=results[0].data||[];documents=results[1].error?[]:(results[1].data||[]);loading=false;hideLoadState();renderSelected();renderPortfolio();activateView(activeView,true);
 }
 function refreshSelected(){if(selectedId)loadSelected(selectedId)}
 
 function selectTransaction(id){
-  if(!id||id===selectedId){closeDrawer();return}
-  selectedId=id;renderRail();var card=legacyCard(id);if(card)card.click();loadSelected(id);closeDrawer();
+  if(!id)return;var same=id===selectedId;selectedId=id;renderRail();var card=legacyCard(id);if(card&&!same)card.click();loadSelected(id);closeDrawer();
 }
 
-function renderEmpty(){var empty=$('#txv2-empty'),detail=$('#txv2-detail');if(empty)empty.hidden=false;if(detail)detail.hidden=true}
+function renderEmpty(error){
+  var empty=$('#txv2-empty'),detail=$('#txv2-detail');if(empty)empty.hidden=false;if(detail)detail.hidden=true;
+  var title=$('#txv2-empty-title'),copy=$('#txv2-empty-copy');if(title)title.textContent=error?'Transactions could not load':'No active transactions';if(copy)copy.textContent=error?'Your transaction list is unavailable right now. Try reloading the page.':'Add a transaction to begin tracking closing evidence and readiness.';
+}
 function renderRail(){
-  var host=$('#txv2-list');if(!host)return;var q=clean($('#txv2-search')&&$('#txv2-search').value).toLowerCase();var rows=workspaces.filter(isActiveTx).filter(function(t){return !q||[t.address,t.city,t.client_label,t.agent_name,t.coordinator_name].join(' ').toLowerCase().includes(q)});
-  $('#txv2-active-count').textContent=workspaces.filter(isActiveTx).length;
-  if(!rows.length){host.innerHTML='<div class="txv2-list-empty">No transactions found<button type="button" data-v2-action="clear-search">Clear search</button></div>';var clear=host.querySelector('[data-v2-action="clear-search"]');if(clear)clear.onclick=function(){var s=$('#txv2-search');if(s){s.value='';renderRail()}};return}
+  var host=$('#txv2-list');if(!host)return;var q=clean($('#txv2-search')&&$('#txv2-search').value).toLowerCase();var active=workspaces.filter(isActiveTx),rows=active.filter(function(t){return !q||[t.address,t.city,t.client_label,t.agent_name,t.coordinator_name].join(' ').toLowerCase().includes(q)});
+  $('#txv2-active-count').textContent=active.length;
+  if(!rows.length){host.innerHTML='<div class="txv2-list-empty">'+(q?'No transactions found':'No active transactions')+(q?'<button type="button" data-v2-action="clear-search">Clear search</button>':'')+'</div>';return}
   host.innerHTML=rows.map(function(t){var sub=[t.city,t.state].filter(Boolean).join(', ');return '<button class="txv2-list-row '+(t.id===selectedId?'active':'')+'" type="button" data-v2-tx-id="'+esc(t.id)+'" '+(t.id===selectedId?'aria-current="true"':'')+'><span><strong>'+esc(t.address||'Property')+'</strong>'+(sub?'<small>'+esc(sub)+'</small>':'')+'</span></button>'}).join('');
 }
 function renderPortfolio(){
@@ -179,19 +184,29 @@ function renderPortfolio(){
   if($('#txv2-need-attention'))$('#txv2-need-attention').textContent=attention;if($('#txv2-closing-soon'))$('#txv2-closing-soon').textContent=closing;if($('#txv2-blockers'))$('#txv2-blockers').textContent=blockers;
 }
 
-function renderSelected(){
-  if(!selected){renderEmpty();return}var empty=$('#txv2-empty'),detail=$('#txv2-detail');if(empty)empty.hidden=true;if(detail)detail.hidden=false;
+function renderHeader(){
+  if(!selected)return;var empty=$('#txv2-empty'),detail=$('#txv2-detail');if(empty)empty.hidden=true;if(detail)detail.hidden=false;
   $('#txv2-property-title').textContent=selected.address||'Property';
-  $('#txv2-property-meta').textContent=[selected.city,selected.state,selected.postal_code].filter(Boolean).join(' ') + (selected.county?' · '+titleCase(selected.county)+' County':'');
+  var place=clean(selected.city)+(selected.state?', '+clean(selected.state):'')+(selected.postal_code?' '+clean(selected.postal_code):'');$('#txv2-property-meta').textContent=(place||'New Jersey')+(selected.county?' · '+titleCase(selected.county)+' County':'');
   var att=$('#txv2-attention'),state=selected.readiness_status||'review';att.className='txv2-attention '+esc(state);att.querySelector('span').textContent=state==='ready'?'No unresolved blockers':state==='blocked'?'Blocked':state==='attention'?'Needs attention':'Review needed';
   $('#txv2-checked').textContent=selected.last_watch_at?'Checked '+fmtDateTime(selected.last_watch_at):'Not checked yet';
   $('#txv2-closing-date').textContent=fmtDate(selected.closing_date);$('#txv2-stage').textContent=titleCase(selected.status||'');$('#txv2-contract-date').textContent=fmtDate(selected.contract_date);
-  var r=readiness(items),score=$('#txv2-score'),fill=$('#txv2-meter-fill'),meter=$('.txv2-meter');score.textContent=r.score==null?'—':r.score;fill.style.width=(r.score==null?0:r.score)+'%';meter.setAttribute('aria-valuenow',r.score==null?'':String(r.score));meter.setAttribute('aria-label',r.score==null?'Readiness score unavailable':'Readiness score: '+r.score+' out of 100');
   $('#txv2-municipality').textContent=humanMunicipality(selected.municipality||selected.city)||'—';$('#txv2-parcel').textContent=(selected.block&&selected.lot)?'Block '+selected.block+' · Lot '+selected.lot:'—';
-  var open=items.filter(function(i){return !isResolved(i)}),roles=['tc','title','municipality','lender'];$('#txv2-assignments').innerHTML=roles.map(function(role){var n=open.filter(function(i){return i.assigned_role===role}).length;return '<div class="txv2-context-row"><span>'+esc(roleLabel(role))+'</span><b>'+n+'</b></div>'}).join('');
-  $('#txv2-document-count').textContent=documents.length;$('#txv2-document-copy').textContent=documents.length?(documents.length+' '+(documents.length===1?'document':'documents')+' uploaded'):'No documents uploaded';
-  renderEvidence();
+  syncFeatureAvailability();
 }
+function renderSelected(){
+  if(!selected){renderEmpty(false);return}renderHeader();
+  var r=readiness(items),score=$('#txv2-score'),fill=$('#txv2-meter-fill'),meter=$('.txv2-meter');score.textContent=r.score==null?'—':r.score;fill.style.width=(r.score==null?0:r.score)+'%';if(r.score==null)meter.removeAttribute('aria-valuenow');else meter.setAttribute('aria-valuenow',String(r.score));meter.setAttribute('aria-label',r.score==null?'Readiness score unavailable':'Readiness score: '+r.score+' out of 100');
+  var open=items.filter(function(i){return !isResolved(i)}),roles=['tc','title','municipality','lender'];$('#txv2-assignments').innerHTML=roles.map(function(role){var n=open.filter(function(i){return i.assigned_role===role}).length;return '<div class="txv2-context-row"><span>'+esc(roleLabel(role))+'</span><b>'+n+'</b></div>'}).join('');
+  $('#txv2-document-count').textContent=premiumAvailable()?documents.length:'—';$('#txv2-document-copy').textContent=premiumAvailable()?(documents.length?(documents.length+' '+(documents.length===1?'document':'documents')+' uploaded'):'No documents uploaded'):'Private document vault is available with Pro+';
+  renderEvidence();syncFeatureAvailability();
+}
+function syncFeatureAvailability(){
+  var premium=premiumAvailable(),refresh=$('[data-v2-action="refresh"]'),doc=$('[data-v2-action="documents"]');if(refresh)refresh.hidden=!premium;if(doc){var span=doc.querySelector('span');if(span)span.textContent=premium?'Upload document':'View Pro+ documents'}var privateCopy=$('#txv2-private-copy');if(privateCopy)privateCopy.textContent=premium?'Private to your account':'Pro+ feature';
+}
+function showLoading(){var detail=$('#txv2-detail'),load=$('#txv2-loading'),error=$('#txv2-load-error'),overview=$('#txv2-overview'),secondary=$('#txv2-secondary');if(detail)detail.hidden=false;if(load)load.hidden=false;if(error)error.hidden=true;if(overview)overview.hidden=true;if(secondary)secondary.hidden=true}
+function showLoadError(){var load=$('#txv2-loading'),error=$('#txv2-load-error'),overview=$('#txv2-overview'),secondary=$('#txv2-secondary');if(load)load.hidden=true;if(error)error.hidden=false;if(overview)overview.hidden=true;if(secondary)secondary.hidden=true}
+function hideLoadState(){var load=$('#txv2-loading'),error=$('#txv2-load-error');if(load)load.hidden=true;if(error)error.hidden=true}
 
 function groupItems(group){return items.filter(function(i){return group.itemKeys.includes(i.item_key)})}
 function evidenceState(group,rows){
@@ -201,6 +216,7 @@ function evidenceState(group,rows){
     if(nj.search_state==='checked'&&nj.exact_parcel_match===false&&!(nj.records||[]).length)return'no_match';
   }
   if(rows.some(isIssue))return'issue';
+  if(group.key==='tax'&&rows.length)return'review';
   if(rows.some(needsReview)||rows.some(function(i){return !isResolved(i)}))return'review';
   return'none';
 }
@@ -223,7 +239,7 @@ function renderEvidence(){
   var body=$('#txv2-evidence-body'),mobile=$('#txv2-evidence-mobile');if(!body||!mobile)return;var all=evidenceRows(),visible=all.filter(function(r){if(evidenceFilter==='issues')return r.status==='issue';if(evidenceFilter==='review')return r.status==='review';if(evidenceFilter==='no_match')return r.status==='no_match';return true});
   $('#txv2-evidence-count').textContent=(visible.length===all.length?all.length+' categories':visible.length+' of '+all.length+' categories');
   var occupancy=all.find(function(r){return r.group.key==='occupancy'});$('#txv2-issue').hidden=!(occupancy&&occupancy.status==='issue');
-  if(!visible.length){body.innerHTML='<tr><td colspan="4" class="txv2-no-results">No categories match this filter. <button type="button" data-v2-action="show-all">Show all evidence</button></td></tr>';mobile.innerHTML='<div class="txv2-no-results">No categories match this filter. <button type="button" data-v2-action="show-all">Show all evidence</button></div>';$$('[data-v2-action="show-all"]').forEach(function(b){b.onclick=function(){evidenceFilter='all';$('#txv2-evidence-filter').value='all';renderEvidence()}});return}
+  if(!visible.length){body.innerHTML='<tr><td colspan="4" class="txv2-no-results">No categories match this filter. <button type="button" data-v2-action="show-all">Show all evidence</button></td></tr>';mobile.innerHTML='<div class="txv2-no-results">No categories match this filter. <button type="button" data-v2-action="show-all">Show all evidence</button></div>';return}
   body.innerHTML=visible.map(function(r){return '<tr class="'+(r.status==='issue'?'issue':'')+'"><td><button type="button" data-v2-evidence="'+r.group.key+'" aria-label="Open '+esc(r.group.label)+' evidence">'+esc(r.group.label)+'</button></td><td>'+esc(r.finding)+'</td><td>'+statusMarkup(r.status)+'</td><td><button class="txv2-row-open" type="button" data-v2-evidence="'+r.group.key+'" aria-label="Open '+esc(r.group.label)+' evidence"><i class="fas fa-chevron-right" aria-hidden="true"></i></button></td></tr>'}).join('');
   mobile.innerHTML=visible.map(function(r){return '<button class="txv2-mobile-evidence '+(r.status==='issue'?'issue':'')+'" type="button" data-v2-evidence="'+r.group.key+'"><span><strong>'+esc(r.group.label)+'</strong>'+statusMarkup(r.status)+'</span><small>'+esc(r.finding)+'</small></button>'}).join('');
 }
@@ -250,29 +266,29 @@ function findViewNode(view){
   if(view==='disclosures')return $('[data-tx-panel="disclosures"]');
   return null;
 }
+function renderPremiumUpgrade(view){var host=$('#txv2-secondary');if(!host)return;host.hidden=false;host.innerHTML='<section class="txv2-upgrade"><span>PRO+ EVIDENCE</span><h2>'+esc(view==='documents'?'Private closing documents':'Watchdog source evidence')+'</h2><p>This workspace is available with Pro+ while your Agent transaction checklist remains unchanged.</p><a href="/pro#plans">Compare Pro+ evidence <i class="fas fa-arrow-right" aria-hidden="true"></i></a></section>'}
 function activateView(view,quiet){
-  activeView=view||'overview';var overview=$('#txv2-overview'),secondary=$('#txv2-secondary');
-  $$('.txv2-tabs [data-v2-view]').forEach(function(b){var selected=b.dataset.v2View===activeView||(b.closest('.txv2-more-wrap')&&['readiness','disclosures'].includes(activeView));if(b.dataset.v2View)selected=b.dataset.v2View===activeView;b.toggleAttribute('aria-current',selected)});
-  var more=$('.txv2-more-wrap>[data-v2-action="toggle-more"]');if(more)more.classList.toggle('active',['readiness','disclosures'].includes(activeView));
+  activeView=view||'overview';if(loading)return;var overview=$('#txv2-overview'),secondary=$('#txv2-secondary');
+  $$('.txv2-tabs [data-v2-view]').forEach(function(b){b.toggleAttribute('aria-current',b.dataset.v2View===activeView)});var more=$('.txv2-more-wrap>[data-v2-action="toggle-more"]');if(more)more.classList.toggle('active',['readiness','disclosures'].includes(activeView));
   if(activeView==='overview'){parkSecondary();if(overview)overview.hidden=false;return}
-  if(overview)overview.hidden=true;var node=findViewNode(activeView);if(node){moveToSecondary(node);secondary.hidden=false}else{secondary.hidden=false;secondary.innerHTML='<div class="txv2-secondary-empty"><i class="fas fa-circle-notch fa-spin" aria-hidden="true"></i> Loading '+esc(titleCase(activeView))+'…</div>';if(!quiet)setTimeout(function(){activateView(activeView,true)},700)}
+  if(overview)overview.hidden=true;
+  if((activeView==='documents'||activeView==='evidence')&&!premiumAvailable()){parkSecondary();renderPremiumUpgrade(activeView);return}
+  var node=findViewNode(activeView);if(node){moveToSecondary(node);secondary.hidden=false}else{secondary.hidden=false;secondary.innerHTML='<div class="txv2-secondary-empty"><i class="fas fa-circle-notch fa-spin" aria-hidden="true"></i> Loading '+esc(titleCase(activeView))+'…</div>';if(!quiet)setTimeout(function(){activateView(activeView,true)},700)}
 }
 
 function runRefresh(){
-  var button=$('[data-v2-action="refresh"]'),legacy=$('#tx-run-review');if(!button||!legacy||legacy.hidden){return}
-  if(button.disabled)return;button.disabled=true;button.querySelector('span').textContent='Refreshing…';legacy.click();clearInterval(refreshTimer);var attempts=0;refreshTimer=setInterval(function(){attempts++;if(!legacy.disabled||attempts>45){clearInterval(refreshTimer);button.disabled=false;button.querySelector('span').textContent='Refresh review';refreshSelected()}},1000);
+  var button=$('[data-v2-action="refresh"]'),legacy=$('#tx-run-review');if(!button||!legacy||legacy.hidden)return;if(button.disabled)return;button.disabled=true;button.querySelector('span').textContent='Refreshing…';legacy.click();clearInterval(refreshTimer);var attempts=0;refreshTimer=setInterval(function(){attempts++;if(!legacy.disabled||attempts>45){clearInterval(refreshTimer);button.disabled=false;button.querySelector('span').textContent='Refresh review';refreshSelected()}},1000);
 }
 
-function syncLegacySelection(){var id=legacySelected();if(id&&id!==selectedId){selectedId=id;loadSelected(id)}}
-function scheduleSync(){clearTimeout(observerTimer);observerTimer=setTimeout(function(){syncLegacySelection();if(activeView!=='overview')activateView(activeView,true)},180)}
-
+function syncLegacySelection(){var id=legacySelected();if(id&&id!==selectedId){selectedId=id;loadSelected(id)}else syncFeatureAvailability()}
+function scheduleSync(){clearTimeout(observerTimer);observerTimer=setTimeout(function(){syncLegacySelection();if(activeView!=='overview'&&!loading)activateView(activeView,true)},180)}
 function startObserver(){
   var observer=new MutationObserver(function(mutations){for(var i=0;i<mutations.length;i++){var target=mutations[i].target;var el=target&&target.nodeType===1?target:target&&target.parentElement;if(el&&el.closest&&el.closest('#tx-v2-shell'))continue;scheduleSync();break}});
   observer.observe(document.body,{childList:true,subtree:true,attributes:true,attributeFilter:['class','hidden','aria-selected']});
 }
 
 async function boot(){
-  var tries=0;var timer=setInterval(async function(){tries++;if(shellReady()){clearInterval(timer);ensureShell();startObserver();await loadAll();setTimeout(function(){syncLegacySelection();activateView(activeView,true)},900)}else if(tries>80){clearInterval(timer)}},150);
+  var tries=0,timer=setInterval(async function(){tries++;if(shellReady()){clearInterval(timer);ensureShell();startObserver();await loadAll();setTimeout(function(){syncLegacySelection();if(!loading)activateView(activeView,true)},900)}else if(tries>80){clearInterval(timer)}},150);
 }
 
 if(document.readyState==='loading')document.addEventListener('DOMContentLoaded',boot,{once:true});else boot();
