@@ -6,6 +6,8 @@ const html=read('transaction/index.html');
 const js=read('transaction/transaction.js');
 const shell=read('transaction/shell.js');
 const css=read('transaction/transaction.css');
+const approved=read('transaction/command-center-polish.js');
+const approvedCss=read('transaction/command-center-polish.css');
 const universalMenu=read('property/js/watchdog-universal-menu.js');
 const middleware=read('middleware.js');
 const vercel=read('vercel.json');
@@ -41,6 +43,23 @@ assert.match(css,/@media\(max-width:600px\)/,'mobile layout contract missing');
 assert.match(shell,/Transaction Command Center/,'shared-shell adapter missing transaction title');
 assert.match(universalMenu,/can\('agent'\)[\s\S]{0,180}key:'transaction'/,'Transactions must be discoverable at Agent-or-higher in canonical navigation');
 assert.match(universalMenu,/key:'transaction',href:'\/transaction\/'/,'canonical navigation must point to the root /transaction/ workspace');
+
+// Approved v2 presentation contract. The legacy runtime remains the data/action layer;
+// this adapter is only the production presentation for /transaction.
+for(const token of ['tx-v2-shell','ACTIVE TRANSACTIONS','Evidence review','Confirm occupancy / resale requirements','Readiness score','Open readiness checklist','Property details','Upload document']){
+  assert.match(approved,new RegExp(token.replace(/[.*+?^${}()|[\]\\]/g,'\\$&')),`approved v2 workspace missing ${token}`);
+}
+for(const table of ['transaction_workspaces','transaction_items','transaction_documents']){
+  assert.match(approved,new RegExp(table),`approved v2 adapter must use ${table}`);
+}
+for(const category of ['Occupancy / resale','Property tax','Deed / recording','Municipal lien / clearance','Smoke / CO / fire','Water / sewer','Open violations','Municipal services','Environmental / deed controls']){
+  assert.match(approved,new RegExp(category.replace(/[.*+?^${}()|[\]\\]/g,'\\$&')),`approved v2 evidence category missing ${category}`);
+}
+assert.match(approvedCss,/grid-template-columns:240px minmax\(0,1fr\)/,'approved primary desktop transaction rail must be 240px');
+assert.match(approvedCss,/grid-template-columns:minmax\(0,1fr\) 320px/,'approved primary desktop context rail must be 320px');
+assert.match(approvedCss,/@media\(max-width:759px\)/,'approved mobile layout contract missing');
+assert.match(approvedCss,/body\[data-sidebar-page="transaction"\] \.wdx-pagebar\{display:none!important\}/,'old page title bar must be removed while the shared app shell remains');
+assert.doesNotMatch(approvedCss,/gradient|backdrop-filter|glass|glow/i,'approved transaction workspace must stay flat and restrained');
 
 // Production routing contract: middleware must pass Transaction through to Vercel's
 // static route before the generic root clean-page resolver can rewrite it under /property.
