@@ -1,3 +1,5 @@
+@import url('/transaction/mockup-pixel-match.css?v=20260917a');
+
 /* NJW-379 state treatments layered on the approved v2 workspace. */
 .txv2-empty-add{display:inline-flex;align-items:center;justify-content:center;gap:8px;min-height:40px;margin-top:18px;padding:0 15px;border:1px solid #242529;border-radius:6px;background:#242529;color:#fff;font-size:14px;line-height:20px;font-weight:600}
 .txv2-empty-add:hover{background:#36383d}
