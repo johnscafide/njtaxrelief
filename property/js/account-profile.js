@@ -255,6 +255,7 @@
     };
     if (!payload.goals.length) { if (note) note.textContent = 'Choose at least one goal.'; return; }
     if (!payload.property_types.length) { if (note) note.textContent = 'Choose at least one property type.'; return; }
+    // content-architecture: dynamic — this validation message is emitted only when the role-specific professional editor is active and its governed priority state is incomplete.
     if (editProfessional && !payload.professional_priorities.length) { if (note) note.textContent = 'Choose at least one professional Intelligence priority.'; return; }
 
     saving = true;
