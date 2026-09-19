@@ -148,7 +148,7 @@
           inputField('acp-zip','Main NJ ZIP',row.location_zip || '','text','08081','Sets your geographic starting point.','inputmode="numeric" maxlength="5"') +
         '</div></section>' +
         '<section class="acp-panel"><div class="acp-panel-head"><i class="fas fa-compass"></i><div><b>How you use Watchdog</b><small>Your default workspace and property focus</small></div></div><div class="acp-fields">' +
-          selectField('acp-persona','Account use',persona,[['homeowner','Homeowner'],['renter','Renter'],['professional','Professional'],['both','Personal + professional'],['investor','Investor'],['planning_to_buy','Planning to buy']]) +
+          (mode === 'homeowner' ? '<input id="acp-persona" type="hidden" value="' + esc(persona) + '"><div class="acp-profile-context"><span>PROFILE TYPE</span><b>Personal / homeowner</b><small>Professional role settings are edited separately.</small></div>' : selectField('acp-persona','Account use',persona,[['homeowner','Homeowner'],['renter','Renter'],['professional','Professional'],['both','Personal + professional'],['investor','Investor'],['planning_to_buy','Planning to buy']])) +
           '<div data-acp-housing>' + selectField('acp-home-status','Housing situation',row.home_status || '',[['','Not specified'],['own','Own my home'],['rent','Rent'],['own_and_invest','Own + invest'],['rent_and_invest','Rent + own investments'],['planning_to_buy','Planning to buy'],['other','Other']]) + '</div>' +
           selectField('acp-time','Time horizon',row.time_horizon || 'researching',[['now','Right now'],['0_3_months','Next 3 months'],['3_6_months','3–6 months'],['6_12_months','6–12 months'],['12_plus_months','More than a year'],['researching','Exploring / researching']]) +
           '<label class="acp-field acp-wide"><span>Markets, towns or counties</span><input id="acp-markets" value="' + esc(marketsText) + '" placeholder="Camden County, Gloucester County"><small>Separate multiple markets with commas.</small></label>' +
@@ -227,15 +227,18 @@
     if (!validEmail(contactEmail)) { if (note) note.textContent = 'Enter a valid contact email.'; return; }
     if (zip && !/^\d{5}$/.test(zip)) { if (note) note.textContent = 'Enter a five digit ZIP code.'; return; }
 
-    var persona = value('acp-persona');
+    var mode = profileMode();
+    var row = profile || {};
+    var persona = value('acp-persona') || row.persona || 'homeowner';
     var professional = persona === 'professional' || persona === 'both';
+    var editProfessional = mode !== 'homeowner' && professional;
     var markets = value('acp-markets').split(',').map(function(v){ return v.trim(); }).filter(Boolean).slice(0,20);
     if (!markets.length && zip) markets = [zip];
     var household = value('acp-household');
     var payload = {
       contact_email: contactEmail,
       persona: persona,
-      primary_profession: professional ? value('acp-profession') : null,
+      primary_profession: mode === 'homeowner' ? (row.primary_profession || null) : (professional ? value('acp-profession') : null),
       home_status: persona === 'professional' ? null : (value('acp-home-status') || null),
       age_band: value('acp-age') || 'prefer_not',
       household_income_band: value('acp-income') || 'prefer_not',
@@ -245,14 +248,14 @@
       goals: valuesFor('goals'),
       property_types: valuesFor('property_types'),
       time_horizon: value('acp-time') || null,
-      professional_years_band: professional ? value('acp-years') : null,
-      professional_volume_band: professional ? value('acp-volume') : null,
-      professional_priorities: professional ? valuesFor('professional_priorities') : [],
+      professional_years_band: mode === 'homeowner' ? (row.professional_years_band || null) : (professional ? value('acp-years') : null),
+      professional_volume_band: mode === 'homeowner' ? (row.professional_volume_band || null) : (professional ? value('acp-volume') : null),
+      professional_priorities: mode === 'homeowner' ? (Array.isArray(row.professional_priorities) ? row.professional_priorities : []) : (professional ? valuesFor('professional_priorities') : []),
       intelligence_personalization: !!(document.getElementById('acp-intel') && document.getElementById('acp-intel').checked)
     };
     if (!payload.goals.length) { if (note) note.textContent = 'Choose at least one goal.'; return; }
     if (!payload.property_types.length) { if (note) note.textContent = 'Choose at least one property type.'; return; }
-    if (professional && !payload.professional_priorities.length) { if (note) note.textContent = 'Choose at least one professional Intelligence priority.'; return; }
+    if (editProfessional && !payload.professional_priorities.length) { if (note) note.textContent = 'Choose at least one professional Intelligence priority.'; return; }
 
     saving = true;
     if (button) button.disabled = true;
@@ -275,6 +278,7 @@
       if (authUpdate.error) throw authUpdate.error;
       currentUser = authUpdate.data.user || currentUser;
       await loadProfile(true);
+      document.dispatchEvent(new CustomEvent('watchdog:profile-updated',{detail:{persona:payload.persona,primaryProfession:payload.primary_profession,mode:mode}}));
       var freshNote = document.getElementById('acp-note');
       if (freshNote) freshNote.textContent = 'Saved. Watchdog Intelligence has refreshed your approved context.';
     } catch (error) {
