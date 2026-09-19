@@ -1,0 +1,190 @@
+/* Watchdog dashboard visual shell modeled on the approved professional landing-page dashboard. */
+:root{
+  --wdm-ink:#070d44;
+  --wdm-body:#41527d;
+  --wdm-blue:#0861ff;
+  --wdm-line:#e6edf5;
+  --wdm-pale:#eef8ff;
+  --wdm-soft:#f6f9fc;
+  --wdm-green:#139c86;
+  --wdm-red:#df496a;
+  --wdm-sidebar:214px;
+  --wdm-topbar:72px;
+}
+html,body{min-height:100%}
+body.wdm-dashboard-shell{margin:0!important;background:#f7fafe!important;color:#243659!important;font-family:Inter,Arial,sans-serif!important;-webkit-font-smoothing:antialiased}
+body.wdm-dashboard-shell .wdx-topbar,
+body.wdm-dashboard-shell .wdx-pagebar,
+body.wdm-dashboard-shell #wd4-nav,
+body.wdm-dashboard-shell #wd6-profile,
+body.wdm-dashboard-shell #wd6-notices,
+body.wdm-dashboard-shell #wd6-shade,
+body.wdm-dashboard-shell #wd6-invite,
+body.wdm-dashboard-shell .watchdog-universal-menu,
+body.wdm-dashboard-shell [data-watchdog-universal-menu]{display:none!important}
+
+.wdm-shell{min-height:100vh;background:#f7fafe}
+.wdm-topbar{position:sticky;top:0;z-index:90;height:var(--wdm-topbar);display:flex;align-items:center;gap:20px;padding:0 22px;background:#fff;border-bottom:1px solid #eef2f7}
+.wdm-brand{width:185px;flex:0 0 185px;display:flex;align-items:center}
+.wdm-brand img{display:block;width:178px;height:auto}
+.wdm-search{flex:1;max-width:760px;height:42px;margin:0 auto;display:flex;align-items:center;gap:10px;background:#f3f6fa;border:1px solid #e8eef5;border-radius:10px;padding:0 12px;color:#76839a}
+.wdm-search i{font-size:14px;color:#687896}
+.wdm-search input{min-width:0;flex:1;border:0;outline:0;background:transparent;color:#243659;font-size:13px}
+.wdm-search input::placeholder{color:#8a95a7}
+.wdm-search-state{display:flex;align-items:center;gap:5px;color:#385479;font-size:12px;font-weight:700;white-space:nowrap}
+.wdm-search-state i{color:var(--wdm-blue)}
+.wdm-top-actions{display:flex;align-items:center;gap:13px;flex:0 0 auto}
+.wdm-top-icon{width:38px;height:38px;border:0;background:transparent;color:#415477;border-radius:10px;display:grid;place-items:center;cursor:pointer}
+.wdm-top-icon:hover{background:#f3f7fb;color:var(--wdm-blue)}
+.wdm-account{display:flex;align-items:center;gap:9px;min-width:172px;padding:5px 7px;border:0;background:transparent;color:#25365a;text-align:left;cursor:pointer;border-radius:10px}
+.wdm-account:hover{background:#f6f9fc}
+.wdm-avatar{width:38px;height:38px;border-radius:50%;background:var(--wdm-blue);color:#fff;display:grid;place-items:center;font-weight:700;font-size:13px;flex:none}
+.wdm-account-copy{min-width:0;display:block}
+.wdm-account-copy b,.wdm-account-copy small{display:block;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.wdm-account-copy b{font-size:12px;color:#1b2a4b}
+.wdm-account-copy small{font-size:12px;color:#7b879b;font-style:italic;margin-top:1px}
+.wdm-account>i{margin-left:auto;font-size:12px;color:#8995a8}
+.wdm-menu-toggle{display:none;width:38px;height:38px;border:0;border-radius:10px;background:#f3f7fb;color:#243659;cursor:pointer}
+
+.wdm-body{display:grid;grid-template-columns:var(--wdm-sidebar) minmax(0,1fr);min-height:calc(100vh - var(--wdm-topbar))}
+.wdm-sidebar{position:sticky;top:var(--wdm-topbar);height:calc(100vh - var(--wdm-topbar));align-self:start;display:flex;flex-direction:column;justify-content:space-between;background:#fff;border-right:1px solid #eef2f7;padding:12px 14px 18px;overflow:auto}
+.wdm-nav-main,.wdm-nav-foot{display:flex;flex-direction:column;gap:3px}
+.wdm-nav-link{min-height:44px;display:flex;align-items:center;gap:13px;padding:0 13px;border-radius:10px;color:#415477;font-size:12px;font-weight:600;text-decoration:none;transition:background .18s,color .18s,transform .18s}
+.wdm-nav-link i{width:18px;text-align:center;color:#526582;font-size:14px}
+.wdm-nav-link:hover{background:#f4f8fc;color:#193967;transform:translateX(1px)}
+.wdm-nav-link.active{background:#ecf5ff;color:#0054ed}
+.wdm-nav-link.active i{color:#0054ed}
+.wdm-nav-divider{height:1px;background:#eef2f7;margin:10px 8px}
+.wdm-stage{min-width:0;padding:17px 18px 42px;background:#fbfdff}
+
+/* Landing-page dashboard visual language, adapted to the live product readability floor. */
+.wdm-overview{background:#fff;border:1px solid #edf1f6;border-radius:11px;overflow:hidden;box-shadow:0 8px 28px rgba(46,108,145,.08);margin-bottom:18px}
+.wdm-property{display:flex;align-items:center;gap:18px;padding:16px 18px 15px;border-bottom:1px solid #edf1f6}
+.wdm-property-photo{width:148px;height:94px;border-radius:9px;object-fit:cover;box-shadow:0 2px 8px rgba(24,41,65,.12);flex:none;background:#edf3f7}
+.wdm-property-info{flex:1;min-width:0}
+.wdm-property-info h1{margin:0;color:#101b3d;font-size:22px;line-height:1.18;letter-spacing:-.3px;font-weight:700}
+.wdm-property-info>p{margin:4px 0 10px;color:#4f617f;font-size:13px}
+.wdm-property-type{display:inline-flex;align-items:center;min-height:25px;padding:4px 10px;background:#eef1f5;border-radius:999px;color:#60708a;font-size:12px}
+.wdm-property-facts{display:flex;gap:19px;flex-wrap:wrap;margin:11px 0 0;padding:0;list-style:none;color:#66758f;font-size:12px;font-weight:600}
+.wdm-property-side{width:165px;align-self:stretch;display:flex;flex-direction:column;align-items:stretch;justify-content:flex-start;padding-top:4px;flex:none}
+.wdm-property-action{display:flex;align-items:center;justify-content:center;min-height:38px;border:1px solid #dceaff;background:#eef6ff;border-radius:9px;color:var(--wdm-blue);font-size:12px;font-weight:700;text-decoration:none}
+.wdm-property-action:hover{background:#e4f1ff}
+.wdm-property-side small{display:block;margin:12px 4px 0;color:#929cae;font-size:12px;line-height:1.5}
+.wdm-tabs{display:flex;align-items:center;gap:3px;overflow:auto;border-bottom:1px solid #edf2f7;padding:0 13px;background:#fff;scrollbar-width:none}
+.wdm-tabs::-webkit-scrollbar{display:none}
+.wdm-tab{position:relative;flex:none;min-height:44px;padding:0 14px;border:0;background:transparent;color:#506181;font-size:12px;cursor:pointer;white-space:nowrap}
+.wdm-tab.active{color:var(--wdm-blue);font-weight:700}
+.wdm-tab.active:after{content:"";position:absolute;left:12px;right:12px;bottom:-1px;height:2px;background:#347aff;border-radius:2px 2px 0 0}
+.wdm-overview-body{padding:17px 18px 18px}
+.wdm-section-title{margin:0 0 12px;color:#132145;font-size:14px;font-weight:700}
+.wdm-metrics{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:12px}
+.wdm-metric{min-height:116px;padding:15px;border:1px solid var(--wdm-line);border-radius:9px;background:#fff}
+.wdm-metric>span{display:block;margin-bottom:8px;color:#6a7891;font-size:12px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.wdm-metric strong{display:block;color:#101a3d;font-size:23px;line-height:1.05;letter-spacing:-.4px}
+.wdm-metric small{display:block;margin-top:10px;color:#7b879b;font-size:12px;line-height:1.35}
+.wdm-metric small.good{color:var(--wdm-green);font-weight:700}
+.wdm-metric small.bad{color:var(--wdm-red);font-weight:700}
+.wdm-metric-row{display:flex;align-items:center;gap:8px;color:#12234a;font-size:12px;font-weight:700}
+.wdm-metric-row i{color:#0866ff}
+.wdm-overview-bottom{display:grid;grid-template-columns:minmax(0,1.45fr) minmax(270px,.85fr);gap:12px;margin-top:12px}
+.wdm-chart-card,.wdm-changes-card{border:1px solid var(--wdm-line);border-radius:9px;background:#fff;padding:15px;min-height:205px}
+.wdm-card-head{display:flex;align-items:center;justify-content:space-between;gap:12px;margin-bottom:10px}
+.wdm-card-head h2{margin:0;color:#162347;font-size:13px;font-weight:700}
+.wdm-card-head a{color:#216bff;font-size:12px;text-decoration:none;font-weight:600}
+.wdm-score-chart{position:relative;height:148px;padding:12px 8px 20px 38px}
+.wdm-score-chart svg{width:100%;height:100%;overflow:visible;display:block}
+.wdm-gridline{stroke:#edf3f7;stroke-width:1}
+.wdm-chart-fill{fill:url(#wdm-chart-fill)}
+.wdm-chart-line{fill:none;stroke:#148ced;stroke-width:2.2;stroke-linecap:round;stroke-linejoin:round}
+.wdm-chart-dot{fill:#fff;stroke:#198bee;stroke-width:1.5}
+.wdm-chart-note{position:absolute;left:0;bottom:0;color:#8190a5;font-size:12px}
+.wdm-change-list{display:flex;flex-direction:column}
+.wdm-change{display:flex;gap:10px;padding:10px 0;border-bottom:1px solid #eef3f8;align-items:flex-start}
+.wdm-change:last-child{border-bottom:0}
+.wdm-change-icon{width:28px;height:28px;display:grid;place-items:center;border-radius:7px;background:#eafbf6;color:#07a18b;flex:none;font-size:12px}
+.wdm-change b{display:block;color:#20304f;font-size:12px;font-weight:700;line-height:1.3}
+.wdm-change small{display:block;color:#8290a5;font-size:12px;line-height:1.45;margin-top:3px}
+.wdm-change-empty{padding:28px 6px;color:#8290a5;font-size:12px;line-height:1.5}
+
+/* Keep the existing live dashboard capability under the new overview. */
+body.wdm-dashboard-shell #wdd-standing,
+body.wdm-dashboard-shell #wdd-signals{display:none!important}
+body.wdm-dashboard-shell .wdd-app{max-width:none!important;width:100%!important;margin:0!important;padding:0!important;background:transparent!important}
+body.wdm-dashboard-shell .wdd-work{display:grid!important;grid-template-columns:minmax(0,1.55fr) minmax(285px,.75fr)!important;gap:14px!important;margin:0!important}
+body.wdm-dashboard-shell .wdd-panel,
+body.wdm-dashboard-shell .wdd-queue,
+body.wdm-dashboard-shell .wdd-newsslot>*{border:1px solid var(--wdm-line)!important;border-radius:10px!important;background:#fff!important;box-shadow:none!important}
+body.wdm-dashboard-shell .wdd-panel-head,
+body.wdm-dashboard-shell .wdd-queue-head{padding:16px 17px!important;border-bottom:1px solid #edf2f7!important}
+body.wdm-dashboard-shell .wdd-panel-head h2,
+body.wdm-dashboard-shell .wdd-queue-head h2{font-size:14px!important;color:#162347!important}
+body.wdm-dashboard-shell .wdd-panel-head p,
+body.wdm-dashboard-shell .wdd-queue-head p{font-size:12px!important;color:#8290a5!important}
+body.wdm-dashboard-shell .wdd-table{font-size:12px!important}
+body.wdm-dashboard-shell .wdd-table th{background:#fbfdff!important;color:#63728a!important;font-size:12px!important;letter-spacing:.03em!important}
+body.wdm-dashboard-shell .wdd-table td{border-color:#eef3f7!important}
+body.wdm-dashboard-shell .wdd-addr{font-size:12px!important;color:#20304f!important}
+body.wdm-dashboard-shell .wdd-addr small{font-size:12px!important;color:#8793a5!important}
+body.wdm-dashboard-shell .wdd-newsslot{margin-top:14px!important}
+body.wdm-dashboard-shell .wdd-queue{margin-top:14px!important;overflow:hidden}
+body.wdm-dashboard-shell .wdd-foot{margin-top:16px!important;color:#8692a3!important}
+body.wdm-dashboard-shell .wdd-sponsor{border:1px solid var(--wdm-line)!important;border-radius:10px!important;box-shadow:none!important}
+body.wdm-dashboard-shell .wdd-pull{right:24px!important;bottom:22px!important;border-radius:999px!important;background:#0861ff!important;box-shadow:0 8px 24px rgba(8,97,255,.25)!important}
+body.wdm-dashboard-shell .wdd-drawer{z-index:120!important}
+body.wdm-dashboard-shell .wdd-boot{position:relative!important;inset:auto!important;min-height:420px!important;background:transparent!important;display:grid!important;place-items:center!important}
+body.wdm-dashboard-shell .wdd-boot[hidden]{display:none!important}
+body.wdm-dashboard-shell .wdd-boot-card{border:1px solid var(--wdm-line)!important;box-shadow:none!important;border-radius:11px!important}
+
+.wdm-account-menu{position:fixed;z-index:130;right:22px;top:64px;width:230px;padding:8px;background:#fff;border:1px solid var(--wdm-line);border-radius:11px;box-shadow:0 16px 40px rgba(25,55,87,.15)}
+.wdm-account-menu[hidden]{display:none!important}
+.wdm-account-menu a,.wdm-account-menu button{width:100%;min-height:42px;display:flex;align-items:center;gap:10px;padding:0 11px;border:0;border-radius:8px;background:transparent;color:#334766;text-decoration:none;font-size:12px;font-weight:600;text-align:left;cursor:pointer}
+.wdm-account-menu a:hover,.wdm-account-menu button:hover{background:#f2f7fb;color:#0757c9}
+.wdm-account-menu i{width:16px;text-align:center}
+.wdm-account-menu .wdm-account-sep{height:1px;background:#edf2f7;margin:5px}
+
+@media(max-width:1120px){
+  :root{--wdm-sidebar:188px}
+  .wdm-brand{width:165px;flex-basis:165px}.wdm-brand img{width:160px}.wdm-account{min-width:150px}.wdm-search{max-width:none}
+  .wdm-metrics{grid-template-columns:repeat(2,minmax(0,1fr))}
+}
+@media(max-width:900px){
+  :root{--wdm-topbar:64px}
+  .wdm-topbar{padding:0 12px;gap:9px}
+  .wdm-menu-toggle{display:grid;place-items:center;flex:none}
+  .wdm-brand{width:auto;flex:0 0 auto}.wdm-brand img{width:142px}
+  .wdm-search{height:38px;min-width:0}
+  .wdm-search-state{display:none}
+  .wdm-top-actions{gap:4px}.wdm-top-icon{display:none}.wdm-account{min-width:0;padding:4px}.wdm-account-copy,.wdm-account>i{display:none}.wdm-avatar{width:35px;height:35px}
+  .wdm-body{display:block}
+  .wdm-sidebar{position:fixed;z-index:120;left:0;top:var(--wdm-topbar);width:min(82vw,285px);height:calc(100vh - var(--wdm-topbar));transform:translateX(-103%);transition:transform .22s ease;box-shadow:12px 0 34px rgba(18,42,72,.12)}
+  body.wdm-menu-open .wdm-sidebar{transform:none}
+  body.wdm-menu-open:after{content:"";position:fixed;z-index:110;inset:var(--wdm-topbar) 0 0;background:rgba(8,20,43,.24)}
+  .wdm-stage{padding:12px 10px 36px}
+  .wdm-property{align-items:flex-start;gap:12px;padding:13px}
+  .wdm-property-photo{width:104px;height:76px}
+  .wdm-property-info h1{font-size:18px}
+  .wdm-property-facts{gap:10px;font-size:12px}
+  .wdm-property-side{display:none}
+  .wdm-overview-body{padding:14px 12px}
+  .wdm-overview-bottom{grid-template-columns:1fr}
+  body.wdm-dashboard-shell .wdd-work{grid-template-columns:1fr!important}
+}
+@media(max-width:620px){
+  :root{--wdm-topbar:112px}
+  .wdm-topbar{height:auto;min-height:64px;flex-wrap:wrap;padding-top:9px;padding-bottom:9px}
+  .wdm-search{order:4;flex-basis:100%;max-width:none;margin:0}
+  .wdm-brand{margin-right:auto}
+  .wdm-metrics{grid-template-columns:1fr 1fr;gap:9px}
+  .wdm-metric{min-height:102px;padding:12px}
+  .wdm-metric strong{font-size:20px}
+  .wdm-property{display:grid;grid-template-columns:92px minmax(0,1fr)}
+  .wdm-property-photo{width:92px;height:72px}
+  .wdm-property-info h1{font-size:16px}
+  .wdm-property-facts{grid-column:1/-1;display:grid;grid-template-columns:1fr 1fr;margin-top:4px}
+  .wdm-tabs{padding-inline:5px}.wdm-tab{padding-inline:10px;font-size:12px}
+  .wdm-chart-card,.wdm-changes-card{min-height:180px;padding:12px}
+}
+@media(max-width:390px){
+  .wdm-brand img{width:126px}.wdm-avatar{width:33px;height:33px}
+  .wdm-metrics{grid-template-columns:1fr}
+}
