@@ -230,6 +230,7 @@
     }, 100);
   }
 
+  document.addEventListener('watchdog:profile-updated', boot);
   if (document.readyState === 'loading') document.addEventListener('DOMContentLoaded', boot, { once: true });
   else boot();
 })();
