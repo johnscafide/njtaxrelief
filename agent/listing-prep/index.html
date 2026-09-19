@@ -55,6 +55,14 @@
             <div class="ag-form-actions"><button class="ag-btn primary" id="lp-save" type="button"><i class="fa-solid fa-check"></i> Save prep pack</button><button class="ag-btn danger" id="lp-delete" type="button"><i class="fa-regular fa-trash-can"></i> Delete</button><span id="lp-save-note" class="ag-note"></span></div>
           </div>
         </section>
+        <section class="ag-card" id="lp-diligence" hidden>
+          <div class="ag-card-head"><div><span>PUBLIC DILIGENCE SNAPSHOT</span><h2>What Watchdog found before the appointment</h2></div><span class="ag-pill" id="lp-diligence-updated">Saved with prep pack</span></div>
+          <div class="ag-card-body"><div class="ag-checks">
+            <div class="ag-check"><i class="fa-solid fa-hammer"></i><div><b>Permit / certificate review</b><small id="lp-permit-status">Not checked</small></div><em id="lp-permit-tag">Review</em></div>
+            <div class="ag-check"><i class="fa-solid fa-house-circle-check"></i><div><b>Resale / CCO requirement</b><small id="lp-resale-status">Not checked</small></div><em id="lp-resale-tag">Review</em></div>
+            <div class="ag-check"><i class="fa-solid fa-fire-flame-simple"></i><div><b>Smoke / CO / fire requirement</b><small id="lp-fire-status">Not checked</small></div><em id="lp-fire-tag">Review</em></div>
+          </div><p class="ag-note" id="lp-diligence-note" style="margin:12px 0 0">Watchdog reports source evidence and requirement states. A permit candidate is not a legal finding that a permit is open, and municipal requirements should be reconfirmed for the transaction date.</p></div>
+        </section>
         <section class="ag-card" id="lp-checklist" hidden>
           <div class="ag-card-head"><div><span>APPOINTMENT CHECKLIST</span><h2>What to verify before you price or promise</h2></div></div>
           <div class="ag-card-body"><div class="ag-checks">
