@@ -3,7 +3,7 @@ const CANONICAL_ORIGIN = `https://${CANONICAL_HOST}`;
 const PRIVATE_ROUTES = [
   '/account',
   '/agent-control',
-  '/agent-desk',
+  '/agent-desk',\n  '/agent/contacts',\n  '/agent/listing-prep',\n  '/agent/buyers',\n  '/agent/open-house',\n  '/transaction',\n  '/client-room',\n  '/open-house',
   '/analytics',
   '/backoffice',
   '/compare',
