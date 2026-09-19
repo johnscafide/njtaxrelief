@@ -221,6 +221,7 @@
   }
 
   function boot() {
+    if (String(document.body && document.body.getAttribute('data-account-profile-mode') || '') !== 'professional') return;
     if (mount()) return;
     var attempts = 0;
     var timer = setInterval(function () {
