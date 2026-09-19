@@ -5,7 +5,7 @@
   <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
   <meta name="color-scheme" content="light">
   <meta name="robots" content="noindex,nofollow">
-  <meta name="theme-color" content="#f4f7fb">
+  <meta name="theme-color" content="#ffffff">
   <title>CRM Contact Cleanup | Watchdog</title>
   <link rel="icon" type="image/png" href="/favicon-96x96.png">
   <link rel="manifest" href="/property/manifest.webmanifest">
@@ -19,38 +19,38 @@
   <link rel="stylesheet" href="/property/css/app-shell-2027.css">
   <link rel="stylesheet" href="/property/css/watchdog-universal-menu.css?v=20260825a">
   <link rel="stylesheet" href="/agent/contacts/contacts.css">
+  <link rel="stylesheet" href="/agent/contacts/contacts-polish.css" data-agent-contacts-polish="1">
+  <link rel="stylesheet" href="/agent/shared/agent-workspace.css">
+  <link rel="stylesheet" href="/agent/contacts/workspace-v2.css">
 </head>
-<body data-sidebar-page="agent-contacts" data-plan-auto="true">
-  <main class="acx-page" id="acx-app" aria-busy="true">
-    <nav class="acx-worknav" aria-label="Agent workspace">
-      <div class="acx-worknav-title"><span class="acx-mini-logo"><i class="fa-solid fa-address-book" aria-hidden="true"></i></span><div><small>AGENT WORKSPACE</small><b>CRM Contact Cleanup</b></div></div>
-      <div class="acx-worknav-links">
-        <a class="active" href="/agent/contacts" aria-current="page"><i class="fa-solid fa-address-book" aria-hidden="true"></i>Contacts</a>
-        <a href="/agent-control"><i class="fa-solid fa-bullseye" aria-hidden="true"></i>Agent Control</a>
-        <a href="/transaction/"><i class="fa-solid fa-file-signature" aria-hidden="true"></i>Transactions</a>
-        <a href="/marketing-studio"><i class="fa-solid fa-wand-magic-sparkles" aria-hidden="true"></i>Marketing</a>
-        <a href="/integrations"><i class="fa-solid fa-plug" aria-hidden="true"></i>Integrations</a>
-      </div>
-      <button class="acx-nav-upload" id="acx-nav-upload" type="button"><i class="fa-solid fa-plus" aria-hidden="true"></i><span>New contact file</span></button>
-    </nav>
+<body data-sidebar-page="agent-contacts" data-plan-auto="true" data-agent-workspace="contacts">
+  <main class="acx-page awx-page" id="acx-app" aria-busy="true" data-agent-page="contacts">
+    <div class="awx-utility">
+      <div class="awx-breadcrumb"><span>Agent Workspace</span><i>/</i><strong>Contacts</strong></div>
+    </div>
 
-    <section class="acx-hero" aria-labelledby="acx-title">
-      <div class="acx-hero-copy">
-        <div class="acx-eyebrow"><span>WATCHDOG FOR AGENTS</span><em><i class="fa-solid fa-circle-check" aria-hidden="true"></i> Included with Agent</em></div>
-        <h1 id="acx-title">CRM Contact Cleanup</h1>
-        <p id="acx-greeting">Upload a contact file, fix the messy parts, and move a clean database wherever you work next.</p>
-        <div class="acx-hero-actions">
-          <button class="acx-btn acx-btn-primary" id="acx-hero-upload" type="button"><i class="fa-solid fa-arrow-up-from-bracket" aria-hidden="true"></i>Upload contacts</button>
-          <button class="acx-btn acx-btn-quiet" id="acx-open-guide" type="button"><i class="fa-regular fa-circle-question" aria-hidden="true"></i>How CRM import works</button>
+    <header class="awx-header" aria-labelledby="acx-title">
+      <div class="awx-header-copy">
+        <div class="awx-kicker"><i class="fa-solid fa-address-book" aria-hidden="true"></i> CRM &amp; SPHERE</div>
+        <div class="awx-title-row">
+          <h1 id="acx-title">CRM Contact Cleanup</h1>
+          <span class="awx-plan-pill"><i class="fa-solid fa-check" aria-hidden="true"></i> Included with Agent</span>
         </div>
+        <p id="acx-greeting">Upload a contact file, fix the messy parts, and move a clean database wherever you work next.</p>
       </div>
-      <div class="acx-hero-visual" aria-label="Contact file workflow">
-        <div class="acx-orbit acx-orbit-one"></div><div class="acx-orbit acx-orbit-two"></div>
-        <div class="acx-hero-file"><i class="fa-solid fa-file-csv" aria-hidden="true"></i><span><b>sphere-september.csv</b><small>Private · saved to your account</small></span><em>CSV</em></div>
-        <div class="acx-hero-flow"><span>UPLOAD</span><i class="fa-solid fa-arrow-right" aria-hidden="true"></i><span>CLEAN</span><i class="fa-solid fa-arrow-right" aria-hidden="true"></i><span>EXPORT</span></div>
-        <div class="acx-hero-targets"><div><i class="fa-solid fa-b" aria-hidden="true"></i><span><b>BoldTrail</b><small>Import-ready</small></span></div><div><i class="fa-solid fa-database" aria-hidden="true"></i><span><b>Any CRM</b><small>Universal CSV</small></span></div></div>
+      <div class="awx-header-actions">
+        <button class="awx-action" id="acx-open-guide" type="button"><i class="fa-regular fa-circle-question" aria-hidden="true"></i>Import guide</button>
+        <button class="awx-action awx-action-primary" id="acx-nav-upload" type="button"><i class="fa-solid fa-plus" aria-hidden="true"></i>New contact file</button>
       </div>
-    </section>
+    </header>
+
+    <nav class="awx-tabs" aria-label="Agent workspace sections">
+      <a href="/agent/contacts" aria-current="page"><i class="fa-solid fa-address-book" aria-hidden="true"></i>Contacts</a>
+      <a href="/transaction/"><i class="fa-solid fa-file-signature" aria-hidden="true"></i>Transactions</a>
+      <button type="button" data-agent-soon="Coming soon for Agents" title="Coming soon for Agents"><i class="fa-solid fa-bullseye" aria-hidden="true"></i>Agent Desk <small>Coming soon</small></button>
+      <button type="button" data-agent-soon="Coming soon for Agents" title="Coming soon for Agents"><i class="fa-solid fa-wand-magic-sparkles" aria-hidden="true"></i>Marketing <small>Coming soon</small></button>
+      <button type="button" data-agent-soon="Coming soon for Agents" title="Coming soon for Agents"><i class="fa-solid fa-plug" aria-hidden="true"></i>Integrations <small>Coming soon</small></button>
+    </nav>
 
     <section class="acx-overview" aria-label="Contacts overview">
       <article><span class="acx-stat-icon green"><i class="fa-solid fa-folder-open" aria-hidden="true"></i></span><div><b id="acx-stat-files">—</b><small>files saved</small></div></article>
@@ -150,7 +150,7 @@
                 <small><i class="fa-solid fa-lock" aria-hidden="true"></i> The generated file is archived to your private Watchdog library before download when storage is available.</small>
               </article>
             </div>
-            <div class="acx-future"><div><i class="fa-solid fa-plug-circle-plus" aria-hidden="true"></i><span><b>More destinations are coming.</b><small>The export layer is provider-based so Follow Up Boss, Wise Agent and other CRM presets can be added without changing your source file workflow.</small></span></div><a href="/integrations">Open Integration Center <i class="fa-solid fa-arrow-right" aria-hidden="true"></i></a></div>
+            <div class="acx-future"><div><i class="fa-solid fa-plug-circle-plus" aria-hidden="true"></i><span><b>More destinations are coming.</b><small>The export layer is provider-based so Follow Up Boss, Wise Agent and other CRM presets can be added without changing your source file workflow.</small></span></div><button class="acx-future-disabled" type="button" data-agent-soon="Coming soon for Agents" title="Coming soon for Agents">Integration Center · Coming soon</button></div>
           </section>
         </section>
       </div>
@@ -184,6 +184,7 @@
   <script src="/property/js/app-shell-2027.js"></script>
   <script src="/property/js/platform-observability.js"></script>
   <script src="/property/js/pwa.js"></script>
+  <script src="/agent/shared/agent-workspace.js"></script>
   <script src="/agent/contacts/contacts.js"></script>
   <script src="/agent/contacts/crm-companion-install.js"></script>
 </body>
