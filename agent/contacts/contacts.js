@@ -251,6 +251,23 @@
     q('#acx-library-refresh').addEventListener('click',async function(){try{await loadHistory();toast('File library refreshed.','success');}catch(e){toast('Could not refresh your file library.','error');}});
   }
 
+  function loadWatchdogLeads(leads){
+    leads=Array.isArray(leads)?leads:[];if(!leads.length){toast('No Watchdog leads are available yet.','warning');return}
+    if(!confirmReplacement())return;
+    var headers=['First Name','Last Name','Email','Phone','Source','Primary Address - Street','Primary Address - City','Primary Address - State/Province','Primary Address - Zip/Postal','Tags','Note'],rows=[],seenEmails=new Set(),seenPhones=new Set();
+    function push(contact){
+      var email=String(contact.email||'').trim().toLowerCase(),phone=phoneKey(contact.phone),duplicate=(email&&seenEmails.has(email))||(phone&&seenPhones.has(phone));if(duplicate)return;
+      if(email)seenEmails.add(email);if(phone)seenPhones.add(phone);
+      var names=splitNameText(contact.full_name||[contact.first_name,contact.last_name].filter(Boolean).join(' '));
+      rows.push({'First Name':contact.first_name||names[0]||'','Last Name':contact.last_name||names[1]||'','Email':contact.email||'','Phone':contact.phone||'','Source':contact.source||'Watchdog','Primary Address - Street':contact.address||'','Primary Address - City':contact.city||'','Primary Address - State/Province':contact.state||'NJ','Primary Address - Zip/Postal':contact.zip||'','Tags':contact.tags||'','Note':contact.notes||''});
+    }
+    current.contacts.forEach(function(x){push(x)});
+    leads.forEach(function(x){push({full_name:x.full_name,email:x.email,phone:x.phone,source:x.source==='open_house'?'Watchdog Open House':'Watchdog Agent Portal',address:x.address,city:x.city,state:'NJ',zip:x.zip,tags:x.source==='open_house'?'Watchdog,Open House':'Watchdog,Portal Lead',notes:'Consented Watchdog lead captured '+dateLabel(x.created_at)})});
+    var mapping={first_name:'First Name',last_name:'Last Name',email:'Email',phone:'Phone',source:'Source',address:'Primary Address - Street',city:'Primary Address - City',state:'Primary Address - State/Province',zip:'Primary Address - Zip/Postal',tags:'Tags',notes:'Note',_name_mode:'split',_name_first_source:'First Name',_name_last_source:'Last Name',_full_name:''};
+    setCurrent({id:null,original_name:'watchdog-consented-leads.csv',row_count:rows.length,stats:{working_rows:rows.length,name_mode:'split'}},headers,rows,mapping,false,false);showSection('review');markDirty();toast('Watchdog leads loaded and duplicate email/phone matches were removed. Export to save this working copy.','success');
+  }
+  window.WatchdogAgentContacts=Object.freeze({loadWatchdogLeads:loadWatchdogLeads});
+
   async function init(){
     bind();
     try{createDb();var session=await db.auth.getSession();user=session&&session.data&&session.data.session&&session.data.session.user;if(!user){q('#acx-app').setAttribute('aria-busy','false');return;}var p=await db.from('profiles').select('display_name,full_name,pro_agent,plan_tier,account_role').eq('id',user.id).maybeSingle();profile=p.data||{};personalize();await loadHistory();addShellLink();setTimeout(addShellLink,250);q('#acx-app').setAttribute('aria-busy','false');}
