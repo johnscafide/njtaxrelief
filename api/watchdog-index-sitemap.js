@@ -219,15 +219,9 @@ function renderXml(rows) {
     if (row.changefreq) parts.push(`    <changefreq>${xmlEscape(row.changefreq)}</changefreq>`);
     if (row.priority) parts.push(`    <priority>${xmlEscape(row.priority)}</priority>`);
     parts.push('  </url>');
-    return parts.join('
-');
+    return parts.join('\n');
   });
-  return `<?xml version="1.0" encoding="UTF-8"?>
-<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
-${items.join('
-')}
-</urlset>
-`;
+  return `<?xml version="1.0" encoding="UTF-8"?>\n<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">\n${items.join('\n')}\n</urlset>\n`;
 }
 
 module.exports = async function handler(req, res) {
