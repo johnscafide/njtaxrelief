@@ -1,0 +1,52 @@
+name: NJW-388 Agent workflows suite
+
+on:
+  pull_request:
+    paths:
+      - 'agent/workflows/**'
+      - 'agent/contacts/**'
+      - 'api/agent-open-house.js'
+      - 'open-house/**'
+      - 'property/agent/workflows/**'
+      - 'property/agent-desk/index.html'
+      - 'property/agent/contacts/index.html'
+      - 'property/js/agent-today.js'
+      - 'property/css/agent-today.css'
+      - 'property/js/report-builder-agent-prefill.js'
+      - 'property/report-builder/index.html'
+      - 'property/js/watchdog-universal-menu.js'
+      - 'property/partials/sidemenu.html'
+      - 'transaction/**'
+      - 'supabase/functions/transaction-collaboration/**'
+      - 'supabase/migrations/20260919104500_njw_388_agent_workflows.sql'
+      - 'middleware.js'
+      - 'vercel.json'
+      - 'property/tests/njw388-agent-workflows-contract.mjs'
+      - '.github/workflows/njw388-agent-workflows.yml'
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  contract:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+      - name: Check JavaScript syntax
+        run: |
+          node --check agent/workflows/workflows.js
+          node --check agent/contacts/contacts.js
+          node --check agent/contacts/watchdog-leads.js
+          node --check api/agent-open-house.js
+          node --check property/js/agent-today.js
+          node --check property/js/report-builder-agent-prefill.js
+          node --check property/js/watchdog-universal-menu.js
+          node --check transaction/transaction.js
+          node --check transaction/collaboration.js
+          node --check transaction/shared/shared.js
+      - name: Run Agent workflow contract
+        run: node property/tests/njw388-agent-workflows-contract.mjs

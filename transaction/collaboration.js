@@ -10,7 +10,8 @@ function clean(v){return String(v==null?'':v).trim()}
 function client(){if(db)return db;try{db=window.NJPTRSupabaseRuntime&&window.NJPTRSupabaseRuntime.createClient?window.NJPTRSupabaseRuntime.createClient():null}catch(e){}return db}
 function txId(){var v2=$('.txv2-list-row.active');if(v2&&v2.dataset.v2TxId)return clean(v2.dataset.v2TxId);var legacy=$('.tx-list-card.active');return clean(legacy&&legacy.dataset&&legacy.dataset.txId)}
 function address(){return clean($('#txv2-property-title')&&$('#txv2-property-title').textContent)||'this transaction'}
-function roleLabel(v){return ({title:'Title / settlement',lender:'Lender',tc:'Transaction coordinator',attorney:'Attorney',other:'Other professional'}[v]||v)}
+function roleLabel(v){return ({title:'Title / settlement',lender:'Lender',tc:'Transaction coordinator',attorney:'Attorney',buyer:'Buyer client',seller:'Seller client',other:'Other professional'}[v]||v)}
+function isClientRole(v){return v==='buyer'||v==='seller'}
 function date(v){if(!v)return'';var d=new Date(v);return Number.isFinite(d.getTime())?d.toLocaleDateString('en-US',{month:'short',day:'numeric',year:'numeric'}):''}
 function toast(msg){var n=$('#tx-collab-toast');if(!n)return;n.textContent=msg;n.hidden=false;clearTimeout(n._timer);n._timer=setTimeout(function(){n.hidden=true},2600)}
 async function invoke(action,body){var c=client();if(!c)throw new Error('Watchdog data service unavailable');var r=await c.functions.invoke('transaction-collaboration',{body:Object.assign({action:action},body||{})});if(r.error)throw new Error(r.error.message||'Collaboration service unavailable');if(r.data&&r.data.error)throw new Error(r.data.error);return r.data||{}}
@@ -22,21 +23,24 @@ function ensure(){
     +'<section class="tx-collab-modal" role="dialog" aria-modal="true" aria-labelledby="tx-collab-title">'
     +'<button class="tx-collab-x" type="button" data-collab-action="close" aria-label="Close"><i class="fas fa-xmark"></i></button>'
     +'<div class="tx-collab-kicker"><i class="fas fa-user-group"></i> TRANSACTION ACCESS</div>'
-    +'<h2 id="tx-collab-title">Invite a professional</h2>'
-    +'<p class="tx-collab-lead">Share <strong id="tx-collab-address">this transaction</strong> with a title rep, lender, transaction coordinator or attorney. They will not see your other transactions or client disclosures.</p>'
+    +'<h2 id="tx-collab-title">Share this transaction</h2>'
+    +'<p class="tx-collab-lead">Invite a closing professional or open a view-only Client Room for your buyer or seller. Every invitation is limited to <strong id="tx-collab-address">this transaction</strong>.</p>'
     +'<form id="tx-collab-form" class="tx-collab-form">'
     +'<label><span>Email address</span><input name="email" type="email" autocomplete="email" required placeholder="pro@company.com"></label>'
-    +'<label><span>Role</span><select name="role"><option value="title">Title / settlement</option><option value="lender">Lender</option><option value="tc">Transaction coordinator</option><option value="attorney">Attorney</option><option value="other">Other professional</option></select></label>'
-    +'<div class="tx-collab-scope"><i class="fas fa-shield-halved"></i><div><b>Only this transaction</b><span>View shared closing context and upload closing documents. Access can be revoked anytime.</span></div></div>'
+    +'<label><span>Role</span><select name="role" id="tx-collab-role"><optgroup label="Clients"><option value="buyer">Buyer client</option><option value="seller">Seller client</option></optgroup><optgroup label="Professionals"><option value="title">Title / settlement</option><option value="lender">Lender</option><option value="tc">Transaction coordinator</option><option value="attorney">Attorney</option><option value="other">Other professional</option></optgroup></select></label>'
+    +'<div class="tx-collab-scope"><i class="fas fa-shield-halved"></i><div><b id="tx-collab-scope-title">Only this transaction · Client Room</b><span id="tx-collab-scope-copy">Buyer and seller clients see only the checklist items and documents you explicitly mark as client-visible below. They cannot upload or edit transaction records.</span></div></div>'
     +'<button class="tx-collab-send" id="tx-collab-send" type="submit"><i class="fas fa-paper-plane"></i> Create invite</button>'
     +'</form>'
     +'<div class="tx-collab-created" id="tx-collab-created" hidden></div>'
     +'<div class="tx-collab-list-head"><h3>Shared access</h3><button type="button" data-collab-action="reload"><i class="fas fa-rotate"></i> Refresh</button></div>'
     +'<div id="tx-collab-list" class="tx-collab-list"><div class="tx-collab-loading"><i class="fas fa-circle-notch fa-spin"></i> Loading access…</div></div>'
-    +'<p class="tx-collab-conversion"><b>Watchdog guest access is transaction-specific.</b> Invitees can later choose Pro or Pro+ if they want their own Watchdog professional workspace.</p>'
+    +'<section class="tx-client-share"><div class="tx-collab-list-head"><h3>Client Room visibility</h3><span>Off by default</span></div><p>Choose exactly which checklist items and private documents a buyer or seller may see. Professional collaborators keep their existing transaction access.</p><div id="tx-client-share-list" class="tx-client-share-list"><div class="tx-collab-loading"><i class="fas fa-circle-notch fa-spin"></i> Loading share controls…</div></div></section>'
+    +'<p class="tx-collab-conversion"><b>Watchdog guest access is transaction-specific.</b> Client Rooms are view-only. Professional invitees can upload documents where their permission allows it.</p>'
     +'</section><div class="tx-collab-toast" id="tx-collab-toast" hidden></div>';
   document.body.appendChild(layer);
   $('#tx-collab-form',layer).addEventListener('submit',createInvite);
+  $('#tx-collab-role',layer).addEventListener('change',syncRoleScope);
+  syncRoleScope();
   return layer;
 }
 function close(){var layer=$('#tx-collab-layer');if(layer)layer.hidden=true;document.body.classList.remove('tx-collab-open')}
@@ -44,6 +48,27 @@ async function open(){
   var id=txId();if(!id){toast('Select a transaction first.');return}
   var layer=ensure();$('#tx-collab-address').textContent=address();layer.hidden=false;document.body.classList.add('tx-collab-open');
   await load();
+}
+function syncRoleScope(){var role=clean($('#tx-collab-role')&&$('#tx-collab-role').value),clientRole=isClientRole(role),title=$('#tx-collab-scope-title'),copy=$('#tx-collab-scope-copy');if(!title||!copy)return;if(clientRole){title.textContent='Only this transaction · Client Room';copy.textContent='Buyer and seller clients see only the checklist items and documents you explicitly mark as client-visible below. They cannot upload or edit transaction records.'}else{title.textContent='Professional collaborator';copy.textContent='Closing professionals can view shared closing context and upload supported closing documents. Access can be revoked at any time.'}}
+async function loadClientShare(){
+  var id=txId(),host=$('#tx-client-share-list'),c=client();if(!id||!host||!c)return;
+  host.innerHTML='<div class="tx-collab-loading"><i class="fas fa-circle-notch fa-spin"></i> Loading share controls…</div>';
+  try{
+    var results=await Promise.all([
+      c.from('transaction_items').select('id,title,category,state,client_visible').eq('transaction_id',id).order('sort_order'),
+      c.from('transaction_documents').select('id,original_name,document_type,client_visible,status').eq('transaction_id',id).neq('status','replaced').order('created_at',{ascending:false})
+    ]);
+    if(results[0].error)throw results[0].error;if(results[1].error)throw results[1].error;
+    var items=results[0].data||[],docs=results[1].data||[],html=[];
+    items.forEach(function(x){html.push('<label class="tx-client-share-row"><input type="checkbox" data-client-share-table="transaction_items" data-client-share-id="'+esc(x.id)+'" '+(x.client_visible?'checked':'')+'><span><b>'+esc(x.title)+'</b><small>Checklist · '+esc(clean(x.state).replace(/_/g,' '))+'</small></span><em>'+(x.client_visible?'Shared':'Private')+'</em></label>')});
+    docs.forEach(function(x){html.push('<label class="tx-client-share-row document"><input type="checkbox" data-client-share-table="transaction_documents" data-client-share-id="'+esc(x.id)+'" '+(x.client_visible?'checked':'')+'><span><b>'+esc(x.original_name)+'</b><small>Document · '+esc(clean(x.document_type).replace(/_/g,' '))+'</small></span><em>'+(x.client_visible?'Shared':'Private')+'</em></label>')});
+    host.innerHTML=html.length?html.join(''):'<div class="tx-collab-empty"><b>Nothing to share yet</b><span>Add checklist items or documents to this transaction first.</span></div>';
+  }catch(e){host.innerHTML='<div class="tx-collab-empty error"><b>Client Room controls could not load</b><span>'+esc(e.message||'Try again.')+'</span></div>'}
+}
+async function updateClientVisibility(node){
+  var c=client(),table=clean(node.dataset.clientShareTable),id=clean(node.dataset.clientShareId);if(!c||!id||!['transaction_items','transaction_documents'].includes(table))return;
+  node.disabled=true;var visible=!!node.checked;
+  try{var r=await c.from(table).update({client_visible:visible,updated_at:new Date().toISOString()}).eq('id',id);if(r.error)throw r.error;var em=node.closest('.tx-client-share-row')&&node.closest('.tx-client-share-row').querySelector('em');if(em)em.textContent=visible?'Shared':'Private';toast(visible?'Added to Client Room.':'Removed from Client Room.')}catch(e){node.checked=!visible;toast('Client Room visibility could not be updated.')}finally{node.disabled=false}
 }
 async function load(){
   var id=txId(),host=$('#tx-collab-list');if(!id||!host)return;
@@ -53,19 +78,20 @@ async function load(){
     var rows=[];
     members.forEach(function(m){rows.push('<div class="tx-collab-person"><span class="tx-collab-avatar"><i class="fas fa-user-check"></i></span><div><b>'+esc(m.invited_email)+'</b><small>'+esc(roleLabel(m.role))+' · Active since '+esc(date(m.joined_at))+'</small></div><button type="button" data-collab-action="revoke-member" data-id="'+esc(m.id)+'">Revoke</button></div>')});
     invites.forEach(function(i){rows.push('<div class="tx-collab-person pending"><span class="tx-collab-avatar"><i class="fas fa-envelope"></i></span><div><b>'+esc(i.invited_email)+'</b><small>'+esc(roleLabel(i.role))+' · Invite expires '+esc(date(i.expires_at))+'</small></div><button type="button" data-collab-action="revoke-invite" data-id="'+esc(i.id)+'">Cancel</button></div>')});
-    host.innerHTML=rows.length?rows.join(''):'<div class="tx-collab-empty"><i class="fas fa-user-plus"></i><b>No professionals invited yet</b><span>Create an invite above when a title rep, lender, TC or attorney needs access.</span></div>';
-  }catch(e){host.innerHTML='<div class="tx-collab-empty error"><b>Shared access could not load</b><span>'+esc(e.message)+'</span></div>'}
+    host.innerHTML=rows.length?rows.join(''):'<div class="tx-collab-empty"><i class="fas fa-user-plus"></i><b>No shared access yet</b><span>Invite a client or closing professional when someone needs transaction-specific access.</span></div>';
+    await loadClientShare();
+  }catch(e){host.innerHTML='<div class="tx-collab-empty error"><b>Shared access could not load</b><span>'+esc(e.message)+'</span></div>';await loadClientShare()}
 }
 async function createInvite(e){
   e.preventDefault();if(busy)return;var id=txId(),form=e.currentTarget,fd=new FormData(form),button=$('#tx-collab-send');if(!id)return;
   busy=true;button.disabled=true;button.innerHTML='<i class="fas fa-circle-notch fa-spin"></i> Creating';
   try{
     var data=await invoke('create_invite',{transaction_id:id,email:clean(fd.get('email')),role:clean(fd.get('role'))}),inv=data.invite||{},url=clean(data.invite_url);
-    lastInvite={url:url,email:inv.invited_email,role:inv.role};
+    lastInvite={url:url,email:inv.invited_email,role:inv.role,permission:inv.permission};
     var created=$('#tx-collab-created');created.hidden=false;created.innerHTML='<div><i class="fas fa-circle-check"></i><span><b>Invite ready</b><small>'+esc(inv.invited_email)+' · '+esc(roleLabel(inv.role))+'</small></span></div>'
       +'<label>Secure invite link<input id="tx-collab-link" readonly value="'+esc(url)+'"></label>'
       +'<div class="tx-collab-created-actions"><button type="button" data-collab-action="copy"><i class="fas fa-link"></i> Copy link</button><button type="button" data-collab-action="email"><i class="fas fa-envelope"></i> Email invite</button></div>';
-    form.reset();toast('Transaction invite created.');await load();
+    form.reset();syncRoleScope();toast('Transaction invite created.');await load();
   }catch(err){toast(err.message||'Could not create invite.')}finally{busy=false;button.disabled=false;button.innerHTML='<i class="fas fa-paper-plane"></i> Create invite'}
 }
 async function revoke(kind,id){
@@ -79,11 +105,12 @@ function copyInvite(){
 }
 function emailInvite(){
   if(!lastInvite||!lastInvite.url)return;
-  var subject='Watchdog transaction access: '+address();
-  var body='You have been invited as '+roleLabel(lastInvite.role)+' to collaborate on one transaction in Watchdog.\n\nSign in or create a free Watchdog account using this email address, then open this secure link:\n'+lastInvite.url+'\n\nYou will only have access to this transaction.';
+  var clientRole=isClientRole(lastInvite.role),subject=(clientRole?'Your Watchdog Client Room: ':'Watchdog transaction access: ')+address();
+  var body=clientRole?'Your real estate professional shared a view-only Watchdog Client Room for '+address()+'.\n\nSign in or create a free Watchdog account using this email address, then open this secure link:\n'+lastInvite.url+'\n\nOnly items and documents your professional intentionally shares will appear.':'You have been invited as '+roleLabel(lastInvite.role)+' to collaborate on one transaction in Watchdog.\n\nSign in or create a free Watchdog account using this email address, then open this secure link:\n'+lastInvite.url+'\n\nYou will only have access to this transaction.';
   location.href='mailto:'+encodeURIComponent(lastInvite.email)+'?subject='+encodeURIComponent(subject)+'&body='+encodeURIComponent(body);
 }
 
+document.addEventListener('change',function(e){var n=e.target.closest&&e.target.closest('[data-client-share-table]');if(n)updateClientVisibility(n)});
 document.addEventListener('click',function(e){
   var b=e.target.closest('[data-collab-action]');if(!b)return;
   var a=b.dataset.collabAction;
@@ -96,4 +123,5 @@ document.addEventListener('click',function(e){
   else if(a==='revoke-invite'){revoke('invite',b.dataset.id)}
 });
 document.addEventListener('keydown',function(e){if(e.key==='Escape'&&document.body.classList.contains('tx-collab-open'))close()});
+window.WatchdogTransactionCollaboration=Object.freeze({open:open,load:load});
 })();

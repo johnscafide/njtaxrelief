@@ -1,0 +1,40 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<meta name="robots" content="noindex,nofollow,noarchive">
+<meta name="theme-color" content="#102b46">
+<title>Open House | Watchdog</title>
+<link rel="icon" type="image/png" href="/favicon-96x96.png">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+<style>
+*{box-sizing:border-box}body{margin:0;background:#f3f5f6;color:#17202b;font-family:Inter,Arial,sans-serif}.oh-top{height:66px;display:flex;align-items:center;justify-content:space-between;padding:0 24px;background:#fff;border-bottom:1px solid #dde3e6}.oh-brand{display:flex;gap:9px;align-items:center;color:#102b46;font-weight:850}.oh-brand i{font-size:22px}.oh-top span{color:#6a7881;font-size:12px;font-weight:700}.oh-main{max-width:1000px;margin:0 auto;padding:34px 20px 60px}.oh-card{display:grid;grid-template-columns:minmax(0,1.1fr) minmax(320px,.75fr);overflow:hidden;border:1px solid #dce2e5;border-radius:16px;background:#fff;box-shadow:0 18px 48px rgba(16,43,70,.08)}.oh-info{padding:34px;background:#102b46;color:#fff}.oh-info>span{font-size:11px;font-weight:800;letter-spacing:.1em;opacity:.7}.oh-info h1{margin:8px 0 8px;font-size:32px;line-height:1.15}.oh-info p{margin:0;color:#c9d3db;font-size:14px;line-height:1.55}.oh-time{display:flex;gap:9px;align-items:center;margin-top:24px;padding-top:20px;border-top:1px solid rgba(255,255,255,.16);font-size:13px}.oh-agent{display:flex;gap:12px;align-items:center;margin-top:28px}.oh-agent img{width:52px;height:52px;border-radius:50%;object-fit:cover;background:#fff}.oh-agent div{display:grid;gap:3px}.oh-agent b{font-size:14px}.oh-agent small{color:#c9d3db}.oh-form-wrap{padding:32px}.oh-form-wrap>span{font-size:11px;font-weight:800;letter-spacing:.08em;color:#6b7881}.oh-form-wrap h2{margin:7px 0 6px;font-size:22px}.oh-form-wrap>p{margin:0 0 20px;color:#6a7780;font-size:12px;line-height:1.5}.oh-form{display:grid;gap:12px}.oh-form label{display:grid;gap:5px;color:#5a6871;font-size:11px;font-weight:750}.oh-form input[type=text],.oh-form input[type=email],.oh-form input[type=tel]{width:100%;height:43px;border:1px solid #cfd9dd;border-radius:8px;padding:0 11px;font-size:13px}.oh-form .check{grid-template-columns:auto 1fr;align-items:start;gap:9px;line-height:1.45}.oh-form .check input{margin-top:2px}.oh-form button{height:44px;border:0;border-radius:8px;background:#102b46;color:#fff;font-size:13px;font-weight:800}.oh-msg{min-height:22px;margin-top:10px;color:#52626c;font-size:12px}.oh-success{padding:20px;border-radius:10px;background:#eef5f0;color:#355b42}.oh-gate{min-height:420px;display:grid;place-items:center;align-content:center;text-align:center;gap:8px;color:#687781}.oh-gate i{font-size:26px}.oh-gate h1{margin:6px 0 0;color:#25313a}.oh-fine{margin-top:18px;color:#7a878f;font-size:10px;line-height:1.5;text-align:center}@media(max-width:760px){.oh-main{padding:18px 12px 40px}.oh-card{grid-template-columns:1fr}.oh-info,.oh-form-wrap{padding:24px}.oh-info h1{font-size:27px}.oh-top{height:58px;padding:0 15px}}
+</style>
+</head>
+<body>
+<header class="oh-top"><div class="oh-brand"><i class="fa-solid fa-dog"></i>Watchdog</div><span>Open House</span></header>
+<main class="oh-main">
+<section class="oh-gate" id="oh-gate"><i class="fa-solid fa-circle-notch fa-spin"></i><h1>Opening this event…</h1><p>Watchdog is checking the open-house link.</p></section>
+<section class="oh-card" id="oh-card" hidden>
+  <div class="oh-info"><span>OPEN HOUSE</span><h1 id="oh-address">Property</h1><p id="oh-place">New Jersey</p><div class="oh-time"><i class="fa-regular fa-calendar"></i><b id="oh-time">Event time</b></div><div class="oh-agent"><img id="oh-photo" alt="" hidden><div><b id="oh-agent">Real estate professional</b><small id="oh-brokerage"></small></div></div></div>
+  <div class="oh-form-wrap"><span>CHECK IN</span><h2>Thanks for stopping by.</h2><p>Share your contact information only if you want this real estate professional to follow up about this property or your real estate questions.</p>
+    <form class="oh-form" id="oh-form">
+      <label>Name<input name="full_name" type="text" maxlength="120" autocomplete="name" required></label>
+      <label>Email<input name="email" type="email" maxlength="254" autocomplete="email"></label>
+      <label>Phone<input name="phone" type="tel" maxlength="40" autocomplete="tel"></label>
+      <label hidden>Website<input name="website" type="text" tabindex="-1" autocomplete="off"></label>
+      <label class="check"><input name="contact_consent" type="checkbox" required><span>I want the hosting real estate professional to contact me using the email or phone number I provided.</span></label>
+      <button type="submit"><i class="fa-solid fa-check"></i> Check in</button>
+    </form><div class="oh-msg" id="oh-msg" aria-live="polite"></div>
+  </div>
+</section>
+<p class="oh-fine">Watchdog provides property intelligence software. Checking in does not create an agency relationship or consent to unrelated marketing.</p>
+</main>
+<script>
+(function(){'use strict';var code=new URLSearchParams(location.search).get('event')||'',gate=document.getElementById('oh-gate'),card=document.getElementById('oh-card'),form=document.getElementById('oh-form'),msg=document.getElementById('oh-msg');function fail(t){gate.innerHTML='<i class="fa-solid fa-link-slash"></i><h1>Open house unavailable</h1><p>'+String(t||'This event is no longer active.')+'</p>'}function when(v){if(!v)return'Time provided by the hosting agent';var d=new Date(v);return isNaN(d.getTime())?'Time provided by the hosting agent':d.toLocaleString(undefined,{weekday:'short',month:'short',day:'numeric',hour:'numeric',minute:'2-digit'})}fetch('/api/agent-open-house?event='+encodeURIComponent(code),{headers:{Accept:'application/json'}}).then(async function(r){var b=await r.json().catch(function(){return{}});if(!r.ok)throw new Error(b.error||'This event is unavailable.');return b}).then(function(b){var e=b.event||{},a=b.agent||{};document.getElementById('oh-address').textContent=e.address||'Open House';document.getElementById('oh-place').textContent=[e.city||e.municipality,e.county&&e.county+' County',e.postal_code].filter(Boolean).join(' · ');document.getElementById('oh-time').textContent=when(e.event_at);document.getElementById('oh-agent').textContent=a.display_name||'Real estate professional';document.getElementById('oh-brokerage').textContent=a.brokerage_name||'';if(a.headshot_url){var im=document.getElementById('oh-photo');im.src=a.headshot_url;im.alt=(a.display_name||'Agent')+' headshot';im.hidden=false}gate.hidden=true;card.hidden=false}).catch(function(e){fail(e.message)});
+form.addEventListener('submit',async function(e){e.preventDefault();msg.textContent='';var fd=new FormData(form),email=String(fd.get('email')||'').trim(),phone=String(fd.get('phone')||'').trim();if(!email&&!phone){msg.textContent='Add an email address or phone number.';return}var btn=form.querySelector('button');btn.disabled=true;try{var r=await fetch('/api/agent-open-house',{method:'POST',headers:{'Content-Type':'application/json',Accept:'application/json'},body:JSON.stringify({event:code,full_name:fd.get('full_name'),email:email,phone:phone,website:fd.get('website'),contact_consent:fd.get('contact_consent')==='on'})}),b=await r.json().catch(function(){return{}});if(!r.ok)throw new Error(b.error||'Check-in could not be saved.');form.hidden=true;msg.className='oh-msg oh-success';msg.innerHTML='<b>Checked in.</b><br>The hosting real estate professional can now follow up using the contact information you provided.'}catch(err){msg.textContent=err.message||'Check-in could not be saved.'}finally{btn.disabled=false}});
+})();
+</script>
+</body>
+</html>

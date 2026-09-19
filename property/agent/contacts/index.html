@@ -47,7 +47,7 @@
     <nav class="awx-tabs" aria-label="Agent workspace sections">
       <a href="/agent/contacts" aria-current="page"><i class="fa-solid fa-address-book" aria-hidden="true"></i>Contacts</a>
       <a href="/transaction/"><i class="fa-solid fa-file-signature" aria-hidden="true"></i>Transactions</a>
-      <button type="button" data-agent-soon="Coming soon for Agents" title="Coming soon for Agents"><i class="fa-solid fa-bullseye" aria-hidden="true"></i>Agent Desk <small>Coming soon</small></button>
+      <a href="/agent-desk"><i class="fa-solid fa-bullseye" aria-hidden="true"></i>Agent Desk</a>\n      <a href="/agent/workflows"><i class="fa-solid fa-grid-2" aria-hidden="true"></i>Workflows</a>
       <button type="button" data-agent-soon="Coming soon for Agents" title="Coming soon for Agents"><i class="fa-solid fa-wand-magic-sparkles" aria-hidden="true"></i>Marketing <small>Coming soon</small></button>
       <button type="button" data-agent-soon="Coming soon for Agents" title="Coming soon for Agents"><i class="fa-solid fa-plug" aria-hidden="true"></i>Integrations <small>Coming soon</small></button>
     </nav>
@@ -79,7 +79,7 @@
             <span>START A CONTACT WORKSPACE</span>
             <h2>Drop in the CSV you already have.</h2>
             <p>Watchdog reads it locally first, identifies common contact fields, flags obvious duplicates, and saves the original privately to your account.</p>
-            <button class="acx-btn acx-btn-primary" id="acx-browse" type="button"><i class="fa-solid fa-folder-open" aria-hidden="true"></i>Choose CSV</button>
+            <div class="acx-start-actions"><button class="acx-btn acx-btn-primary" id="acx-browse" type="button"><i class="fa-solid fa-folder-open" aria-hidden="true"></i>Choose CSV</button><button class="acx-btn acx-btn-quiet" id="acx-load-watchdog-leads" type="button"><i class="fa-solid fa-qrcode" aria-hidden="true"></i>Use Watchdog leads</button></div>
             <small>CSV · up to 25 MB · up to 50,000 contact rows</small>
           </div>
           <div class="acx-start-grid">
@@ -185,7 +185,7 @@
   <script src="/property/js/platform-observability.js"></script>
   <script src="/property/js/pwa.js"></script>
   <script src="/agent/shared/agent-workspace.js"></script>
-  <script src="/agent/contacts/contacts.js"></script>
+  <script src="/agent/contacts/contacts.js"></script>\n  <script src="/agent/contacts/watchdog-leads.js"></script>
   <script src="/agent/contacts/crm-companion-install.js"></script>
 </body>
 </html>

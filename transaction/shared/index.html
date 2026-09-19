@@ -12,11 +12,11 @@
 <link rel="stylesheet" href="/transaction/shared/shared.css?v=20260917a">
 </head>
 <body>
-<header class="sg-top"><a href="/" class="sg-brand"><img src="/agent/assets/watchdog-logo.svg" alt="Watchdog"></a><span>Shared transaction</span></header>
+<header class="sg-top"><a href="/" class="sg-brand"><img src="/agent/assets/watchdog-logo.svg" alt="Watchdog"></a><span id="sg-top-label">Shared transaction</span></header>
 <main class="sg-main">
 <section class="sg-gate" id="sg-gate"><i class="fas fa-circle-notch fa-spin"></i><h1>Opening shared transaction…</h1><p>Watchdog is verifying your transaction-specific access.</p></section>
 <section class="sg-app" id="sg-app" hidden>
-  <div class="sg-sharebar"><div><i class="fas fa-user-shield"></i><span>You are viewing one transaction shared with your Watchdog account.</span></div><a href="/pro#plans">Compare Pro &amp; Pro+</a></div>
+  <div class="sg-sharebar"><div><i class="fas fa-user-shield"></i><span id="sg-share-copy">You are viewing one transaction shared with your Watchdog account.</span></div><a id="sg-plan-link" href="/pro#plans">Compare Pro &amp; Pro+</a></div>
   <header class="sg-property">
     <div><span class="sg-eyebrow" id="sg-role">PROFESSIONAL GUEST</span><h1 id="sg-address">Property</h1><p id="sg-meta">New Jersey</p></div>
     <span class="sg-status" id="sg-status">Review</span>
@@ -29,21 +29,21 @@
   </section>
   <div class="sg-grid">
     <section class="sg-panel">
-      <div class="sg-panel-head"><div><span class="sg-eyebrow">SHARED CLOSING CONTEXT</span><h2>Evidence &amp; readiness</h2></div><span class="sg-note">Client disclosures are not shared</span></div>
+      <div class="sg-panel-head"><div><span class="sg-eyebrow" id="sg-context-label">SHARED CLOSING CONTEXT</span><h2 id="sg-context-title">Evidence &amp; readiness</h2></div><span class="sg-note" id="sg-context-note">Client disclosures are not shared</span></div>
       <div id="sg-items" class="sg-items"></div>
     </section>
     <aside class="sg-panel sg-docs">
-      <div class="sg-panel-head"><div><span class="sg-eyebrow">PRIVATE FILE EXCHANGE</span><h2>Documents</h2></div></div>
+      <div class="sg-panel-head"><div><span class="sg-eyebrow" id="sg-doc-label">PRIVATE FILE EXCHANGE</span><h2>Documents</h2></div></div>
       <form id="sg-upload" class="sg-upload">
         <label>Document type<select name="document_type"><option value="title_commitment">Title commitment</option><option value="lender_commitment">Lender commitment</option><option value="mortgage_payoff">Mortgage payoff</option><option value="appraisal">Appraisal</option><option value="inspection_report">Inspection report</option><option value="attorney_review">Attorney review</option><option value="closing_package">Closing package</option><option value="other">Other</option></select></label>
         <label>PDF or image<input name="file" type="file" accept="application/pdf,image/jpeg,image/png,.pdf,.jpg,.jpeg,.png" required></label>
         <button type="submit"><i class="fas fa-cloud-arrow-up"></i> Upload document</button>
       </form>
       <div id="sg-doc-list" class="sg-doc-list"></div>
-      <p class="sg-fine"><i class="fas fa-lock"></i> Shared documents stay attached to this transaction. Uploading a file does not replace Watchdog public-source evidence.</p>
+      <p class="sg-fine" id="sg-doc-fine"><i class="fas fa-lock"></i> Shared documents stay attached to this transaction. Uploading a file does not replace Watchdog public-source evidence.</p>
     </aside>
   </div>
-  <section class="sg-upgrade"><div><span class="sg-eyebrow">YOUR OWN WATCHDOG WORKSPACE</span><h2>Manage your own closings and property intelligence.</h2><p>This invitation does not add a paid plan to your account. Pro and Pro+ are available if you want Watchdog for your own transactions and clients.</p></div><a href="/pro#plans">See professional plans <i class="fas fa-arrow-right"></i></a></section>
+  <section class="sg-upgrade" id="sg-upgrade"><div><span class="sg-eyebrow">YOUR OWN WATCHDOG WORKSPACE</span><h2>Manage your own closings and property intelligence.</h2><p>This invitation does not add a paid plan to your account. Pro and Pro+ are available if you want Watchdog for your own transactions and clients.</p></div><a href="/pro#plans">See professional plans <i class="fas fa-arrow-right"></i></a></section>
 </section>
 </main>
 <div class="sg-toast" id="sg-toast" hidden></div>

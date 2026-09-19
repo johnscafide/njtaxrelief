@@ -567,6 +567,22 @@
   ],
   "rewrites": [
     {
+      "source": "/agent/workflows/",
+      "destination": "/property/agent/workflows/index.html"
+    },
+    {
+      "source": "/agent/workflows",
+      "destination": "/property/agent/workflows/index.html"
+    },
+    {
+      "source": "/open-house/",
+      "destination": "/open-house/index.html"
+    },
+    {
+      "source": "/open-house",
+      "destination": "/open-house/index.html"
+    },
+    {
       "source": "/account/profile/",
       "destination": "/property/account/profile/index.html"
     },
