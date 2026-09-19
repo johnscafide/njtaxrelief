@@ -6,7 +6,8 @@ const SITE = Deno.env.get("WATCHDOG_PUBLIC_SITE_URL") || "https://www.watchdogin
 const BUCKET = "transaction-documents";
 const MAX_BYTES = 26214400;
 const MIME = new Set(["application/pdf","image/jpeg","image/png"]);
-const ROLE = new Set(["title","lender","tc","attorney","other"]);
+const ROLE = new Set(["title","lender","tc","attorney","buyer","seller","other"]);
+const CLIENT_ROLE = new Set(["buyer","seller"]);
 const RANK: Record<string, number> = { standard:0, agent:1, pro:2, pro_plus:3, teams:4, developer:5 };
 const ORIGINS = new Set([
   "https://watchdogindex.com","https://www.watchdogindex.com",
@@ -97,21 +98,22 @@ Deno.serve(async(req:Request)=>{
 
   if(action==="create_invite"){
     const txId=clean(body.transaction_id,80), invited=email(body.email), role=clean(body.role,24);
-    if(!txId||!invited||!invited.includes("@")||!ROLE.has(role))return respond(req,400,{error:"transaction_id, email and professional role are required"});
+    if(!txId||!invited||!invited.includes("@")||!ROLE.has(role))return respond(req,400,{error:"transaction_id, email and shared role are required"});
     const w=await ownedWorkspace(admin,txId,user.id);if(!w)return respond(req,404,{error:"Transaction not found"});
-    const tier=await ownerTier(admin,user.id);if(!tier.allowed)return respond(req,403,{error:"Pro+ or higher is required to invite transaction professionals"});
+    const tier=await ownerTier(admin,user.id);if(!tier.allowed)return respond(req,403,{error:"Pro+ or higher is required to share a transaction"});
     await admin.from("transaction_professional_invites").update({revoked_at:new Date().toISOString(),updated_at:new Date().toISOString()})
       .eq("transaction_id",txId).eq("owner_user_id",user.id).eq("invited_email",invited).is("accepted_at",null).is("revoked_at",null);
     const token=randomToken(), tokenHash=await hashToken(token), expires=new Date(Date.now()+30*864e5).toISOString();
+    const permission=CLIENT_ROLE.has(role)?"view":"view_upload";
     const {data,error}=await admin.from("transaction_professional_invites").insert({
-      transaction_id:txId,owner_user_id:user.id,invited_email:invited,role,permission:"view_upload",
+      transaction_id:txId,owner_user_id:user.id,invited_email:invited,role,permission,
       token_hash:tokenHash,expires_at:expires
     }).select("id,transaction_id,invited_email,role,permission,expires_at,created_at").single();
     if(error)return respond(req,500,{error:"Could not create invitation"});
     const inviteUrl=SITE.replace(/\/$/,"")+"/transaction/shared/?invite="+encodeURIComponent(token);
     await admin.from("transaction_activity").insert({
-      transaction_id:txId,user_id:user.id,actor_user_id:user.id,action:"professional_invite_created",
-      message:"Invited a "+role+" professional to this transaction",detail:{invite_id:data.id,role,email_domain:invited.split("@")[1]||null}
+      transaction_id:txId,user_id:user.id,actor_user_id:user.id,action:CLIENT_ROLE.has(role)?"client_room_invite_created":"professional_invite_created",
+      message:CLIENT_ROLE.has(role)?"Created a "+role+" Client Room invitation":"Invited a "+role+" professional to this transaction",detail:{invite_id:data.id,role,permission,email_domain:invited.split("@")[1]||null}
     });
     return respond(req,200,{invite:data,invite_url:inviteUrl});
   }
@@ -163,8 +165,8 @@ Deno.serve(async(req:Request)=>{
     if(error)return respond(req,500,{error:"Could not accept invitation"});
     await admin.from("transaction_professional_invites").update({accepted_user_id:user.id,accepted_at:now,updated_at:now}).eq("id",inv.id);
     await admin.from("transaction_activity").insert({
-      transaction_id:inv.transaction_id,user_id:inv.owner_user_id,actor_user_id:user.id,action:"professional_invite_accepted",
-      message:"A "+inv.role+" professional joined this transaction",detail:{membership_id:m.id,role:inv.role}
+      transaction_id:inv.transaction_id,user_id:inv.owner_user_id,actor_user_id:user.id,action:CLIENT_ROLE.has(inv.role)?"client_room_invite_accepted":"professional_invite_accepted",
+      message:CLIENT_ROLE.has(inv.role)?"The "+inv.role+" joined the Client Room":"A "+inv.role+" professional joined this transaction",detail:{membership_id:m.id,role:inv.role,permission:inv.permission}
     });
     return respond(req,200,{transaction_id:inv.transaction_id,role:inv.role,permission:inv.permission});
   }
@@ -175,17 +177,24 @@ Deno.serve(async(req:Request)=>{
     const m=(access as any).membership;
     const [wr,ir,dr]=await Promise.all([
       admin.from("transaction_workspaces").select("*").eq("id",txId).eq("user_id",m.owner_user_id).maybeSingle(),
-      admin.from("transaction_items").select("id,category,item_key,title,description,severity,state,evidence_state,assigned_role,due_date,source_type,source_label,source_url,source_checked_at,updated_at")
+      admin.from("transaction_items").select("id,category,item_key,title,description,severity,state,evidence_state,assigned_role,due_date,source_type,source_label,source_url,source_checked_at,client_visible,updated_at")
         .eq("transaction_id",txId).eq("user_id",m.owner_user_id).order("sort_order"),
-      admin.from("transaction_documents").select("id,document_type,document_label,original_name,mime_type,file_size,status,created_at,uploaded_by_user_id,uploaded_by_role")
+      admin.from("transaction_documents").select("id,document_type,document_label,original_name,mime_type,file_size,status,client_visible,created_at,uploaded_by_user_id,uploaded_by_role")
         .eq("transaction_id",txId).eq("user_id",m.owner_user_id).neq("status","replaced").order("created_at",{ascending:false})
     ]);
     if(!wr.data)return respond(req,404,{error:"Shared transaction not found"});
-    const sharedItems=(ir.data||[]).filter((item:any)=>!String(item.item_key||"").startsWith("custom_")||item.assigned_role===m.role);
+    const isClient=CLIENT_ROLE.has(String(m.role||""));
+    const sharedItems=isClient
+      ? (ir.data||[]).filter((item:any)=>item.client_visible===true).map((item:any)=>({
+          id:item.id,category:item.category,item_key:item.item_key,title:item.title,description:item.description,
+          severity:item.severity,state:item.state,evidence_state:item.evidence_state,due_date:item.due_date,updated_at:item.updated_at
+        }))
+      : (ir.data||[]).filter((item:any)=>!String(item.item_key||"").startsWith("custom_")||item.assigned_role===m.role);
+    const sharedDocs=isClient?(dr.data||[]).filter((doc:any)=>doc.client_visible===true):(dr.data||[]);
     return respond(req,200,{
-      membership:{role:m.role,permission:m.permission},
+      membership:{role:m.role,permission:m.permission,client_room:isClient},
       transaction:publicWorkspace(wr.data),
-      items:sharedItems,documents:dr.data||[]
+      items:sharedItems,documents:sharedDocs
     });
   }
 
@@ -235,8 +244,8 @@ Deno.serve(async(req:Request)=>{
     const txId=clean(body.transaction_id,80), documentId=clean(body.document_id,80);
     const access=await requireShared(admin,txId,user.id);if((access as any).error)return respond(req,(access as any).status,{error:(access as any).error});
     const m=(access as any).membership;
-    const {data:doc}=await admin.from("transaction_documents").select("storage_path").eq("id",documentId).eq("transaction_id",txId).eq("user_id",m.owner_user_id).maybeSingle();
-    if(!doc)return respond(req,404,{error:"Document not found"});
+    const {data:doc}=await admin.from("transaction_documents").select("storage_path,client_visible").eq("id",documentId).eq("transaction_id",txId).eq("user_id",m.owner_user_id).maybeSingle();
+    if(!doc||CLIENT_ROLE.has(String(m.role||""))&&doc.client_visible!==true)return respond(req,404,{error:"Document not found"});
     const {data,error}=await admin.storage.from(BUCKET).createSignedUrl(doc.storage_path,300);
     if(error||!data?.signedUrl)return respond(req,500,{error:"Could not create private document link"});
     return respond(req,200,{url:data.signedUrl,expires_in:300});
