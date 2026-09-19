@@ -17,7 +17,7 @@ if(req.method==='GET'){
  try{
    const rows=await rest('agent_open_houses?select=id,user_id,title,address,city,municipality,county,postal_code,event_at,status,pams_pin&event_code=eq.'+encodeURIComponent(code)+'&limit=1',access.c),event=rows[0];
    if(!event)return res.status(404).json({error:'This open house is unavailable.'});
-   const profs=await rest('profiles?select=id,pro_agent,photo_url,avatar_url& id=eq.'.replace(' ','')+encodeURIComponent(event.user_id)+'&limit=1',access.c),p=profs[0]||{},brand=p.pro_agent&&typeof p.pro_agent==='object'?p.pro_agent:{};
+   const profs=await rest('profiles?select=id,pro_agent,photo_url,avatar_url&id=eq.'+encodeURIComponent(event.user_id)+'&limit=1',access.c),p=profs[0]||{},brand=p.pro_agent&&typeof p.pro_agent==='object'?p.pro_agent:{};
    return res.status(200).json({event:{id:event.id,title:event.title||'Open House',address:event.address,city:event.city,municipality:event.municipality,county:event.county,postal_code:event.postal_code,event_at:event.event_at,status:event.status},agent:{brokerage_name:brand.brokerage_name||null,business_phone:brand.business_phone||null,business_email:brand.business_email||null,photo_url:brand.headshot_url||p.photo_url||p.avatar_url||null}});
  }catch(e){console.error('open-house get',e.message);return res.status(500).json({error:'Open-house details could not load.'})}
 }
