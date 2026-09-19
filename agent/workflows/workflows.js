@@ -85,8 +85,13 @@ function renderClients(){
 async function createPack(e){e.preventDefault();var fd=new FormData(e.currentTarget),p=chosen(fd),address=clean(p.address||fd.get('address'));if(!address){toast('Choose a saved property or enter an address.');return}var s=snapshot(p),r=await db.from('agent_listing_packs').insert({user_id:user.id,address:address,city:s.city,municipality:s.town||s.municipality,county:s.county,postal_code:s.postal_code,pams_pin:s.pams_pin,client_label:clean(fd.get('client_label'))||null,notes:clean(fd.get('notes'))||null,property_snapshot:s,checklist:{}}).select().single();if(r.error){toast('Could not create listing pack.');return}packs.unshift(r.data);activePack=r.data.id;closeModal();renderPacks();toast('Listing prep pack created.')}
 async function createShortlist(e){e.preventDefault();var fd=new FormData(e.currentTarget),name=clean(fd.get('name'));if(!name)return;var r=await db.from('agent_buyer_shortlists').insert({user_id:user.id,name:name,client_label:clean(fd.get('client_label'))||null,notes:clean(fd.get('notes'))||null}).select().single();if(r.error){toast('Could not create shortlist.');return}shortlists.unshift(r.data);activeShortlist=r.data.id;closeModal();renderShortlists();toast('Buyer shortlist created.')}
 async function createOpenHouse(e){e.preventDefault();var fd=new FormData(e.currentTarget),p=chosen(fd),address=clean(p.address||fd.get('address'));if(!address){toast('Choose a property or enter an address.');return}var s=snapshot(p),event=clean(fd.get('event_at')),r=await db.from('agent_open_houses').insert({user_id:user.id,address:address,city:s.city,municipality:s.town||s.municipality,county:s.county,postal_code:s.postal_code,pams_pin:s.pams_pin,title:clean(fd.get('title'))||null,event_at:event?new Date(event).toISOString():null}).select().single();if(r.error){toast('Could not create open house.');return}openHouses.unshift(r.data);activeOpenHouse=r.data.id;closeModal();renderOpenHouses();toast('Open-house QR created.')}
+function activateView(view){
+  if(!['listing','buyer','open-house','clients'].includes(view))view='listing';
+  $('.awf-tabs button').forEach(function(b){b.classList.toggle('active',b.dataset.view===view)});
+  $('.awf-panel').forEach(function(p){p.hidden=p.dataset.panel!==view;p.classList.toggle('active',!p.hidden)});
+}
 function bind(){
-  $$('.awf-tabs button').forEach(function(b){b.addEventListener('click',function(){$$('.awf-tabs button').forEach(x=>x.classList.toggle('active',x===b));$$('.awf-panel').forEach(function(p){p.hidden=p.dataset.panel!==b.dataset.view;p.classList.toggle('active',!p.hidden)})})});
+  $('.awf-tabs button').forEach(function(b){b.addEventListener('click',function(){activateView(b.dataset.view);history.replaceState(null,'','#'+b.dataset.view)})});
   $('#awf-new-pack').onclick=function(){modal('#awf-pack-form-template');$('#awf-pack-form').addEventListener('submit',createPack)};
   $('#awf-new-shortlist').onclick=function(){modal('#awf-shortlist-form-template');$('#awf-shortlist-form').addEventListener('submit',createShortlist)};
   $('#awf-new-open-house').onclick=function(){modal('#awf-open-house-form-template');$('#awf-open-house-form').addEventListener('submit',createOpenHouse)};
@@ -94,7 +99,12 @@ function bind(){
   document.addEventListener('keydown',function(e){if(e.key==='Escape')closeModal()});
 }
 async function boot(){
-  try{var a=await db.auth.getUser();user=a.data&&a.data.user;if(!user)return;var ent=await entitlement(),eligible=ent.account_role==='developer'||(['active','trialing','past_due','cancel_scheduled'].includes(ent.subscription_status)&&['agent','pro','pro_plus','teams'].includes(String(ent.plan_tier||'').replace('pro+','pro_plus')));if(!eligible)return;$('#awf-gate').hidden=true;$('#awf-app').hidden=false;bind();await loadAll()}catch(e){console.error('Agent workflows',e);toast('Agent workflows could not load.')}
+  try{
+    var a=await db.auth.getUser();user=a.data&&a.data.user;if(!user)return;
+    var ent=await entitlement(),eligible=ent.account_role==='developer'||(['active','trialing','past_due','cancel_scheduled'].includes(ent.subscription_status)&&['agent','pro','pro_plus','teams'].includes(String(ent.plan_tier||'').replace('pro+','pro_plus')));if(!eligible)return;
+    var params=new URLSearchParams(location.search);activePack=clean(params.get('pack'));activeShortlist=clean(params.get('shortlist'));activeOpenHouse=clean(params.get('open_house'));
+    $('#awf-gate').hidden=true;$('#awf-app').hidden=false;bind();activateView(clean(location.hash).replace(/^#/,'')||'listing');await loadAll();
+  }catch(e){console.error('Agent workflows',e);toast('Agent workflows could not load.')}
 }
 if(document.readyState==='loading')document.addEventListener('DOMContentLoaded',boot,{once:true});else boot();
 })();
