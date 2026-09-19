@@ -9,6 +9,9 @@ const popupHtml = read('browser-extension/watchdog-crm-companion/popup.html');
 const content = read('browser-extension/watchdog-crm-companion/content.js');
 const agentIntel = read('browser-extension/watchdog-crm-companion/agent-intel.js');
 const writer = read('browser-extension/watchdog-crm-companion/writer-v021.js');
+const background = read('browser-extension/watchdog-crm-companion/background.js');
+const commandBar = read('browser-extension/watchdog-crm-companion/command-bar.js');
+const municipalPacket = read('browser-extension/watchdog-crm-companion/municipal-packet.js');
 const installer = read('agent/contacts/crm-companion-install.js');
 const connect = read('agent/extension/connect/index.html');
 const api = read('supabase/functions/watchdog-crm-companion/index.ts');
@@ -22,16 +25,17 @@ const failures = [];
 const assert = (condition, message) => { if (!condition) failures.push(message); };
 
 assert(manifest.manifest_version === 3, 'CRM Companion must remain Manifest V3.');
-assert(manifest.version === '0.2.1', 'CRM Companion release must be v0.2.1.');
+assert(manifest.version === '0.3.0', 'CRM Companion release must be v0.3.0.');
 assert(Array.isArray(manifest.permissions) && manifest.permissions.includes('storage') && manifest.permissions.includes('activeTab'), 'CRM Companion must keep its explicit storage + activeTab permission model.');
 assert(!manifest.permissions.includes('tabs') && !manifest.permissions.includes('scripting') && !manifest.permissions.includes('webRequest'), 'CRM Companion must not widen to tabs/scripting/webRequest permissions without review.');
 assert((manifest.host_permissions || []).some((x) => x === 'https://app.boldtrail.com/*'), 'BoldTrail must be the only CRM page origin in the first adapter.');
 const boldTrailScript = (manifest.content_scripts || []).find((x) => (x.matches || []).includes('https://app.boldtrail.com/*'));
 assert(!!boldTrailScript, 'BoldTrail content script contract is missing.');
-assert((boldTrailScript?.js || []).includes('content.js') && (boldTrailScript?.js || []).includes('agent-intel.js') && (boldTrailScript?.js || []).includes('writer-v021.js'), 'BoldTrail must load scanner, Agent intelligence adapter, and v0.2.1 writer.');
+assert((boldTrailScript?.js || []).includes('content.js') && (boldTrailScript?.js || []).includes('agent-intel.js') && (boldTrailScript?.js || []).includes('writer-v021.js') && (boldTrailScript?.js || []).includes('command-bar.js'), 'BoldTrail must load scanner, Agent intelligence adapter, safe writer, and persistent command bar.');
+assert(manifest.background?.service_worker === 'background.js', 'v0.3 must use a Manifest V3 service worker as the auth/API broker.');
 
 for (const forbidden of ['SUPABASE_SERVICE_ROLE_KEY', 'sb_secret_', 'service_role']) {
-  assert(!popup.includes(forbidden) && !popupWrite.includes(forbidden) && !content.includes(forbidden) && !agentIntel.includes(forbidden) && !writer.includes(forbidden), `Browser extension must not contain ${forbidden}.`);
+  assert(!popup.includes(forbidden) && !popupWrite.includes(forbidden) && !content.includes(forbidden) && !agentIntel.includes(forbidden) && !writer.includes(forbidden) && !background.includes(forbidden) && !commandBar.includes(forbidden) && !municipalPacket.includes(forbidden), `Browser extension must not contain ${forbidden}.`);
 }
 assert(popup.includes('/agent/extension/connect/'), 'Extension must pair through the Watchdog connect page.');
 assert(popup.includes('chrome.storage.local'), 'Opaque extension session must remain local to extension storage.');
@@ -66,11 +70,18 @@ assert(writer.includes('enterEditMode') && writer.includes('saveContactEdits'), 
 assert(writer.includes('add note') && writer.includes('persistNote') && writer.includes('WATCHDOG PROPERTY INTELLIGENCE'), 'v0.2.1 must use a sourced BoldTrail note fallback instead of failing silently.');
 assert(writer.includes('Watchdog Score:') && writer.includes('Sourced from Watchdog:') && writer.includes('Public-record warehouse verified:'), 'Fallback note must carry Watchdog Score and sourcing/verification dates.');
 assert(writer.includes('https://www.watchdogindex.com/home?pin=') && writer.includes('property_id'), 'Fallback note must deep-link to the exact Watchdog property record.');
-assert(installer.includes("VERSION='0.2.1'") && installer.includes("'writer-v021.js'") && installer.includes("'popup-write-v021.js'"), 'Agent Contacts beta installer must package the complete v0.2.1 extension.');
+assert(installer.includes("VERSION='0.3.0'") && installer.includes("'writer-v021.js'") && installer.includes("'popup-write-v021.js'") && installer.includes("'background.js'") && installer.includes("'command-bar.js'") && installer.includes("'municipal-packet.html'"), 'Agent Contacts beta installer must package the complete v0.3 extension.');
 
 assert(!/read\(\s*\[\s*['"](?:email|phone|name)/i.test(content), 'BoldTrail scanner must not read contact name/email/phone fields.');
 assert(!/FIELD_LABELS\s*=\s*\{[^}]*\b(?:email|phone|name)\b/i.test(writer), 'v0.2.1 writer must not target CRM identity fields.');
-assert(content.includes('WATCHDOG_SCAN_CONTACT'), 'BoldTrail scanner must remain behind the explicit popup scan message.');
+assert(content.includes('WATCHDOG_SCAN_CONTACT'), 'BoldTrail scanner must remain behind an explicit extension scan message.');
+assert(commandBar.includes('MutationObserver') && commandBar.includes('routeChanged') && commandBar.includes('setInterval'), 'v0.3 command bar must survive BoldTrail SPA navigation and refresh contact context.');
+assert(commandBar.includes('Alt+W') && commandBar.includes("e.altKey") && commandBar.includes("e.key.toLowerCase()==='w'"), 'v0.3 must expose the Alt+W Agent Command Bar shortcut.');
+assert(commandBar.includes("data-action=\"enrich\"") && commandBar.includes("data-action=\"town\"") && commandBar.includes("data-action=\"packet\"") && commandBar.includes("data-action=\"brief\""), 'v0.3 command bar must expose the core Agent workflows.');
+assert(commandBar.includes("WDC_SCAN_LOCAL") && commandBar.includes("ensureMatch") && commandBar.indexOf("WDC_API") > commandBar.indexOf("ensureMatch"), 'Contact route changes may scan locally, while remote Watchdog lookup remains action-driven.');
+assert(background.includes("WDC_SCAN_LOCAL") && background.includes("WATCHDOG_SCAN_CONTACT") && background.includes("WDC_APPLY_PROPERTY") && background.includes("WATCHDOG_APPLY_PROPERTY_V021"), 'Service worker must broker local scan and safe write messages.');
+assert(api.includes('municipal.preview') && api.includes('transaction_municipal_requirements') && api.includes('never_infer_not_required'), 'Extension API must expose governed municipal closing intelligence without inferring not-required from missing coverage.');
+assert(municipalPacket.includes('Print / Save PDF') && municipalPacket.includes('Missing web coverage is never treated'), 'Instant Municipal Packet must be printable and preserve the municipal verification caveat.');
 
 for (const sql of [migrationPair, migrationSessions, migrationEvents]) {
   assert(/enable row level security/i.test(sql), 'Every CRM Companion persistence table must keep RLS enabled.');
@@ -85,10 +96,12 @@ if (failures.length) {
 
 console.log(JSON.stringify({
   passed: true,
-  contract: 'watchdog-crm-companion-v2.1',
-  checks: 51,
+  contract: 'watchdog-crm-companion-v3',
+  checks: 60,
   matching: 'street-dominant-ranked-candidates',
   writes: 'semantic-empty-fields-with-sourced-note-fallback',
+  shell: 'persistent-shadow-dom-command-bar',
+  municipal: 'official-registry-preview-and-printable-packet',
   evidence: 'watchdog-score-date-and-exact-property-link',
   privacy: 'no-contact-identity-telemetry',
   entitlement: 'agent-or-higher-paid'
