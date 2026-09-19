@@ -211,6 +211,7 @@
     renderState(profile);
   }
 
+  document.addEventListener('watchdog:profile-updated', init);
   if (document.readyState === 'loading') document.addEventListener('DOMContentLoaded', init, { once: true });
   else init();
 })();
