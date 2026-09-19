@@ -236,6 +236,58 @@ async function findProperty(admin,input){
   return buildMatch(admin,best.row,best.score,alternatives,directPins);
 }
 
+
+function boundedList(value:unknown,max=30){
+  if(!Array.isArray(value))return[];
+  return value.slice(0,max).map(item=>{
+    if(typeof item==="string")return clean(item,700);
+    if(!item||typeof item!=="object"||Array.isArray(item))return clean(item,700);
+    const out:Record<string,unknown>={};
+    for(const[key,val]of Object.entries(item as Record<string,unknown>).slice(0,14)){
+      const safeKey=clean(key,80);if(!safeKey)continue;
+      if(typeof val==="string")out[safeKey]=clean(val,700);
+      else if(typeof val==="number"||typeof val==="boolean"||val===null)out[safeKey]=val;
+    }
+    return out;
+  }).filter(Boolean);
+}
+function requirementSummary(row:Record<string,any>){
+  const name=clean(row.municipality_name,120)||"Municipality",state=clean(row.requirement_state,60),key=clean(row.requirement_key,60);
+  if(key==="resale_cco"){
+    if(state==="explicit_required")return `${name} official material contains affirmative resale/occupancy requirement language. Review the checklist, fees and application links before closing.`;
+    if(state==="official_process_found")return `Watchdog found an official resale/occupancy process for ${name}. Confirm whether and how it applies to this transaction.`;
+    return `Watchdog does not have enough official text to state that a resale/occupancy certificate is or is not required in ${name}. Verify directly with the municipality.`;
+  }
+  if(state==="explicit_required")return `Official local material contains affirmative smoke/CO/fire compliance language tied to sale or change of occupancy in ${name}.`;
+  if(state==="official_process_found")return `Watchdog found an official local smoke/CO/fire process for ${name}. Confirm the applicable inspection or certificate workflow.`;
+  if(state==="statewide_baseline")return "New Jersey statewide fire-safety change-of-occupancy compliance remains a required verification point; confirm the local enforcing-agency workflow.";
+  return `Smoke/CO/fire compliance requires verification with the applicable enforcing agency in ${name}.`;
+}
+function publicRequirement(row:Record<string,any>){
+  const links:Array<{label:string,url:string}>=[],seen=new Set<string>();
+  const add=(label:string,value:unknown)=>{const url=clean(value,900);if(!/^https?:\/\//i.test(url)||seen.has(url))return;seen.add(url);links.push({label,url});};
+  add("Application",row.application_url);add("Department",row.department_url);add("Ordinance",row.ordinance_url);
+  if(Array.isArray(row.source_urls))for(const source of row.source_urls.slice(0,12)){
+    if(typeof source==="string")add("Official source",source);
+    else if(source&&typeof source==="object")add(clean((source as Record<string,unknown>).label||(source as Record<string,unknown>).title,80)||"Official source",(source as Record<string,unknown>).url);
+  }
+  return{
+    requirement_key:clean(row.requirement_key,60),requirement_state:clean(row.requirement_state,60),title:clean(row.title,180),
+    summary:requirementSummary(row),requirements:boundedList(row.requirements),fees:boundedList(row.fees),links,
+    source_excerpt:clean(row.source_excerpt,900)||null,last_verified_at:row.last_verified_at||null
+  };
+}
+async function municipalPreview(admin:any,propertyId:unknown){
+  const pin=clean(propertyId,100),code=/^\d{4}/.test(pin)?pin.slice(0,4):"";
+  if(!code)return{error:"municipality_code_missing",status:400};
+  const {data,error}=await admin.from("transaction_municipal_requirements")
+    .select("municipality_code,municipality_name,county,requirement_key,requirement_state,title,requirements,fees,application_url,department_url,ordinance_url,source_urls,source_excerpt,last_verified_at")
+    .eq("municipality_code",code).in("requirement_key",["resale_cco","smoke_fire_cert"]).order("requirement_key");
+  if(error)return{error:"municipal_requirements_unavailable",status:503};
+  const rows=(data||[]).map((row:any)=>publicRequirement(row));
+  return{ok:true,kind:"municipal_preview",municipality_code:code,municipality_name:clean(data?.[0]?.municipality_name,120),county:clean(data?.[0]?.county,80),requirements:rows,coverage:{expected_families:2,returned_families:rows.length,never_infer_not_required:true}};
+}
+
 Deno.serve(async(req)=>{
   if(req.method==="OPTIONS")return new Response("ok",{headers:cors(req)});
   if(req.method!=="POST")return reply(req,405,{error:"method_not_allowed"});
@@ -300,6 +352,11 @@ Deno.serve(async(req)=>{
     if(!EVENT_NAMES.has(eventName))return reply(req,400,{error:"invalid_event"});
     await logEvent(admin,session,eventName,{extension_version:version,match_status:clean(body.match_status,30),fields_count:body.fields_count,metadata:body.metadata});
     return reply(req,202,{ok:true});
+  }
+  if(action==="municipal.preview"){
+    const preview=await municipalPreview(admin,body.property_id);
+    if((preview as any).error)return reply(req,(preview as any).status||503,{error:(preview as any).error});
+    return reply(req,200,preview);
   }
   if(action==="lookup"){
     const since=new Date(Date.now()-60*60*1000).toISOString();
