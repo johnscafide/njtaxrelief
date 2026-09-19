@@ -3,7 +3,14 @@ const CANONICAL_ORIGIN = `https://${CANONICAL_HOST}`;
 const PRIVATE_ROUTES = [
   '/account',
   '/agent-control',
-  '/agent-desk',\n  '/agent/contacts',\n  '/agent/listing-prep',\n  '/agent/buyers',\n  '/agent/open-house',\n  '/transaction',\n  '/client-room',\n  '/open-house',
+  '/agent-desk',
+  '/agent/contacts',
+  '/agent/listing-prep',
+  '/agent/buyers',
+  '/agent/open-house',
+  '/transaction',
+  '/client-room',
+  '/open-house',
   '/analytics',
   '/backoffice',
   '/compare',
@@ -85,7 +92,8 @@ module.exports = function handler(req, res) {
     `Sitemap: ${CANONICAL_ORIGIN}/sitemap-calculators.xml`,
     `Sitemap: ${CANONICAL_ORIGIN}/sitemap-statistics.xml`,
     ''
-  ].join('\n');
+  ].join('
+');
 
   res.statusCode = 200;
   res.setHeader('Content-Type', 'text/plain; charset=utf-8');
