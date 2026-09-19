@@ -8,17 +8,23 @@ function title(v){return clean(v).replace(/_/g,' ').replace(/\b\w/g,function(c){
 function fmtDate(v){if(!v)return'—';var d=new Date(String(v).slice(0,10)+'T12:00:00');return Number.isFinite(d.getTime())?d.toLocaleDateString('en-US',{month:'short',day:'numeric',year:'numeric'}):'—'}
 function fmtDateTime(v){if(!v)return'—';var d=new Date(v);return Number.isFinite(d.getTime())?d.toLocaleString('en-US',{month:'short',day:'numeric',hour:'numeric',minute:'2-digit'}):'—'}
 function fmtSize(n){n=Number(n)||0;if(n<1024)return n+' B';if(n<1048576)return(n/1024).toFixed(1)+' KB';return(n/1048576).toFixed(1)+' MB'}
-function roleLabel(v){return ({title:'Title / settlement',lender:'Lender',tc:'Transaction coordinator',attorney:'Attorney',other:'Professional guest'}[v]||title(v))}
+function roleLabel(v){return ({title:'Title / settlement',lender:'Lender',tc:'Transaction coordinator',attorney:'Attorney',buyer:'Buyer',seller:'Seller',other:'Professional guest'}[v]||title(v))}
+function isClient(){var m=snapshot&&snapshot.membership||{};return m.client_room===true||m.role==='buyer'||m.role==='seller'}
 function toast(m){var n=$('#sg-toast');n.textContent=m;n.hidden=false;clearTimeout(n._t);n._t=setTimeout(function(){n.hidden=true},2600)}
 function gate(icon,h,p,button){var g=$('#sg-gate');g.innerHTML='<i class="'+esc(icon)+'"></i><h1>'+esc(h)+'</h1><p>'+esc(p)+'</p>'+(button||'');g.hidden=false;$('#sg-app').hidden=true}
 async function invoke(action,body){var r=await db.functions.invoke('transaction-collaboration',{body:Object.assign({action:action},body||{})});if(r.error)throw new Error(r.error.message||'Collaboration service unavailable');if(r.data&&r.data.error){var e=new Error(r.data.error);e.data=r.data;throw e}return r.data||{}}
 function evidenceStatus(i){if(i.evidence_state==='clear_observed'||['verified','resolved','waived','not_applicable'].includes(i.state))return['clear','Verified / clear'];if(i.evidence_state==='issue_observed'||['attention','blocked'].includes(i.severity))return[i.severity==='blocked'?'blocked':'attention',i.severity==='blocked'?'Blocked':'Attention'];return['review','Review']}
 function render(){
-  var t=snapshot.transaction||{},m=snapshot.membership||{};$('#sg-role').textContent=roleLabel(m.role).toUpperCase()+' · SHARED ACCESS';$('#sg-address').textContent=t.address||'Property';$('#sg-meta').textContent=[t.city,t.state,t.postal_code,t.county&&title(t.county)+' County'].filter(Boolean).join(' · ');
+  var t=snapshot.transaction||{},m=snapshot.membership||{},clientRoom=isClient();$('#sg-role').textContent=roleLabel(m.role).toUpperCase()+(clientRoom?' · CLIENT ROOM':' · SHARED ACCESS');$('#sg-address').textContent=t.address||'Property';$('#sg-meta').textContent=[t.city,t.state,t.postal_code,t.county&&title(t.county)+' County'].filter(Boolean).join(' · ');
   var st=$('#sg-status');st.textContent=t.readiness_status==='ready'?'No unresolved blockers':title(t.readiness_status||'review');st.className='sg-status '+clean(t.readiness_status);
   $('#sg-closing').textContent=fmtDate(t.closing_date);$('#sg-contract').textContent=fmtDate(t.contract_date);$('#sg-stage').textContent=title(t.status||'');$('#sg-reviewed').textContent=t.last_watch_at?fmtDateTime(t.last_watch_at):'Not checked yet';
-  var items=(snapshot.items||[]).filter(function(i){return !String(i.item_key||'').startsWith('custom_')||i.assigned_role===m.role}).slice(0,28);
-  $('#sg-items').innerHTML=items.length?items.map(function(i){var s=evidenceStatus(i);return '<div class="sg-item"><b>'+esc(i.title)+'</b><p>'+esc(i.description||i.source_label||'Verification state available in Watchdog.')+'</p><span class="sg-item-status '+esc(s[0])+'"><i></i>'+esc(s[1])+'</span></div>'}).join(''):'<div class="sg-empty">No shared evidence or readiness items are available yet.</div>';
+  var items=(snapshot.items||[]).filter(function(i){return clientRoom||!String(i.item_key||'').startsWith('custom_')||i.assigned_role===m.role}).slice(0,28);
+  $('#sg-items').innerHTML=items.length?items.map(function(i){var s=evidenceStatus(i);return '<div class="sg-item"><b>'+esc(i.title)+'</b><p>'+esc(i.description||i.source_label||(clientRoom?'Your real estate professional shared this update.':'Verification state available in Watchdog.'))+'</p><span class="sg-item-status '+esc(s[0])+'"><i></i>'+esc(s[1])+'</span></div>'}).join(''):'<div class="sg-empty">'+(clientRoom?'Your real estate professional has not shared any checklist updates yet.':'No shared evidence or readiness items are available yet.')+'</div>';
+  if(clientRoom){
+    $('#sg-top-label').textContent='Client Room';$('#sg-share-copy').textContent='This is a view-only Client Room. Your real estate professional controls which updates and documents appear here.';$('#sg-plan-link').hidden=true;
+    $('#sg-context-label').textContent='CLIENT ROOM';$('#sg-context-title').textContent='Shared milestones & updates';$('#sg-context-note').textContent='Only agent-approved items appear';
+    $('#sg-doc-label').textContent='SHARED DOCUMENTS';$('#sg-upload').hidden=true;$('#sg-doc-fine').innerHTML='<i class="fas fa-lock"></i> Only documents your real estate professional explicitly shares are visible here.';$('#sg-upgrade').hidden=true;
+  }else{$('#sg-upload').hidden=m.permission!=='view_upload'}
   renderDocs();$('#sg-gate').hidden=true;$('#sg-app').hidden=false;
 }
 function renderDocs(){var docs=snapshot.documents||[],host=$('#sg-doc-list');host.innerHTML=docs.length?docs.map(function(d){return '<div class="sg-doc" data-id="'+esc(d.id)+'"><i class="fas '+(d.mime_type==='application/pdf'?'fa-file-pdf':'fa-file-image')+'"></i><div><b>'+esc(d.original_name)+'</b><small>'+esc(title(d.document_type))+' · '+esc(fmtSize(d.file_size))+' · '+esc(fmtDate(d.created_at))+(d.uploaded_by_role?' · '+esc(roleLabel(d.uploaded_by_role)):'')+'</small></div><button type="button" data-doc-open>Open</button></div>'}).join(''):'<div class="sg-empty">No documents have been shared yet.</div>'}
@@ -43,7 +49,7 @@ async function boot(){
     var auth=await db.auth.getUser();user=auth&&auth.data&&auth.data.user;
     if(!user){
       var next=location.pathname+location.search+location.hash;
-      gate('fas fa-user-lock','Sign in to open this transaction','For security, professional access is tied to the exact email address that received the invitation.','<button type="button" id="sg-signin"><i class="fas fa-right-to-bracket"></i> Sign in or create free account</button>');
+      gate('fas fa-user-lock','Sign in to open this transaction','For security, shared access is tied to the exact email address that received the invitation.','<button type="button" id="sg-signin"><i class="fas fa-right-to-bracket"></i> Sign in or create free account</button>');
       $('#sg-signin').onclick=function(){if(window.NJPTRSupabaseRuntime&&window.NJPTRSupabaseRuntime.openOnboarding)window.NJPTRSupabaseRuntime.openOnboarding(next);else location.href='/onboarding/?next='+encodeURIComponent(next)};
       return;
     }
