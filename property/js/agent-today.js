@@ -34,6 +34,7 @@ async function load(){
     packs.slice(0,6).forEach(function(p){queue.push({weight:62,icon:'fa-sign-hanging',kind:'Listing prep',title:p.address,detail:(p.client_label?p.client_label+' · ':'')+'Prep pack still in progress',href:'/agent/workflows?pack='+encodeURIComponent(p.id)+'#listing',when:p.updated_at})});
     lists.slice(0,6).forEach(function(s){queue.push({weight:55,icon:'fa-house-circle-check',kind:'Buyer shortlist',title:s.name,detail:(s.client_label?s.client_label+' · ':'')+'Active comparison',href:'/agent/workflows?shortlist='+encodeURIComponent(s.id)+'#buyer',when:s.updated_at})});
     queue.sort(rank);render(queue.slice(0,10),{closings:txs.filter(function(t){return!['closed','canceled'].includes(t.status)}).length,leads:leads.length,packs:packs.length,shortlists:lists.length});
+  // content-architecture: dynamic — failure detail is generated from the live account-scoped queue request and must remain adjacent to the affected runtime state.
   }catch(e){var list=$('#ad-today-list');if(list)list.innerHTML='<div class="ad-today-empty"><b>Today’s queue could not load.</b><span>'+esc(e.message||'Refresh and try again.')+'</span></div>'}
 }
 function render(queue,counts){
