@@ -90,7 +90,7 @@ async function boot(){
     showApp();bind();await loadTransactions(selectId||undefined);
     var prefillAddress=clean(launch.get('prefill_address'));
     if(prefillAddress){
-      window.setTimeout(function(){openTransactionModal({address:prefillAddress,side:clean(launch.get('prefill_side'))||'buyer',client_label:clean(launch.get('prefill_client'))||''})},60);
+      window.setTimeout(function(){openTransactionModal({address:prefillAddress,side:clean(launch.get('prefill_side'))||'buyer',client_label:clean(launch.get('prefill_client'))||'',pams_pin:clean(launch.get('prefill_pams_pin'))||'',municipality:clean(launch.get('prefill_municipality'))||'',county:clean(launch.get('prefill_county'))||''})},60);
     }else if(selectId&&launch.get('client_room')==='1'){
       var attempts=0,timer=window.setInterval(function(){attempts++;if(window.WatchdogTransactionCollaboration&&typeof window.WatchdogTransactionCollaboration.open==='function'){window.clearInterval(timer);window.WatchdogTransactionCollaboration.open()}else if(attempts>30)window.clearInterval(timer)},150);
     }
