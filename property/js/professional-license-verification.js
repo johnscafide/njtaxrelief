@@ -132,10 +132,12 @@
   });
 
   function start() {
+    if (String(document.body && document.body.getAttribute('data-account-profile-mode') || '') !== 'professional') return;
     var app = document.getElementById('ac-app');
     if (!app) return;
     var observer = new MutationObserver(function () { window.setTimeout(render,0); });
     observer.observe(app,{childList:true,subtree:false,attributes:true,attributeFilter:['hidden']});
+    document.addEventListener('watchdog:profile-updated',load);
     load();
   }
 

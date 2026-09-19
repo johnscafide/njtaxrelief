@@ -221,6 +221,7 @@
   }
 
   function boot() {
+    if (String(document.body && document.body.getAttribute('data-account-profile-mode') || '') !== 'professional') return;
     if (mount()) return;
     var attempts = 0;
     var timer = setInterval(function () {
@@ -229,6 +230,7 @@
     }, 100);
   }
 
+  document.addEventListener('watchdog:profile-updated', boot);
   if (document.readyState === 'loading') document.addEventListener('DOMContentLoaded', boot, { once: true });
   else boot();
 })();

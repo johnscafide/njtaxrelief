@@ -92,12 +92,21 @@
 
   async function init() {
     if (!window.NJPTRSupabaseRuntime) return;
-    injectStyles();
+    if (String(document.body && document.body.getAttribute('data-account-profile-mode') || '') !== 'professional') return;
     var client = window.NJPTRSupabaseRuntime.createClient();
     var auth = await client.auth.getUser();
     var user = auth && auth.data && auth.data.user;
     if (!user) return;
 
+    var declaredResult = await client.from('watchdog_onboarding_profiles').select('persona,primary_profession').eq('user_id', user.id).maybeSingle();
+    var declared = declaredResult && declaredResult.data || {};
+    if (declaredResult.error || declared.primary_profession !== 'real_estate' || (declared.persona !== 'professional' && declared.persona !== 'both')) {
+      var existing = document.getElementById('ac-vanity');
+      if (existing) existing.remove();
+      return;
+    }
+
+    injectStyles();
     var app = await waitForAccount();
     if (!app || document.getElementById('ac-vanity')) return;
 
@@ -206,6 +215,7 @@
     renderState(profile);
   }
 
+  document.addEventListener('watchdog:profile-updated', init);
   if (document.readyState === 'loading') document.addEventListener('DOMContentLoaded', init, { once: true });
   else init();
 })();
