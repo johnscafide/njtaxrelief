@@ -4,12 +4,20 @@ on:
   pull_request:
     paths:
       - 'agent/contacts/**'
+      - 'agent/shared/**'
+      - 'property/agent/contacts/**'
+      - 'property/branding/LLM-BRAND-GUIDE.md'
+      - 'property/tests/agent-workspace-design-contract.mjs'
       - 'property/tests/agent-contacts-simple-workflow-contract.mjs'
       - '.github/workflows/agent-contacts-simple-workflow.yml'
   push:
     branches: [main]
     paths:
       - 'agent/contacts/**'
+      - 'agent/shared/**'
+      - 'property/agent/contacts/**'
+      - 'property/branding/LLM-BRAND-GUIDE.md'
+      - 'property/tests/agent-workspace-design-contract.mjs'
       - 'property/tests/agent-contacts-simple-workflow-contract.mjs'
       - '.github/workflows/agent-contacts-simple-workflow.yml'
 
@@ -21,6 +29,8 @@ jobs:
       - uses: actions/setup-node@v4
         with:
           node-version: 22
+      - name: Verify shared Agent Workspace design
+        run: node property/tests/agent-workspace-design-contract.mjs
       - name: Verify simplified Agent Contacts workflow
         run: node property/tests/agent-contacts-simple-workflow-contract.mjs
       - name: Preserve Agent Contact Intelligence contract
