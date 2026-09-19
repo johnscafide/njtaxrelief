@@ -100,7 +100,11 @@
 
     var declaredResult = await client.from('watchdog_onboarding_profiles').select('persona,primary_profession').eq('user_id', user.id).maybeSingle();
     var declared = declaredResult && declaredResult.data || {};
-    if (declaredResult.error || declared.primary_profession !== 'real_estate' || (declared.persona !== 'professional' && declared.persona !== 'both')) return;
+    if (declaredResult.error || declared.primary_profession !== 'real_estate' || (declared.persona !== 'professional' && declared.persona !== 'both')) {
+      var existing = document.getElementById('ac-vanity');
+      if (existing) existing.remove();
+      return;
+    }
 
     injectStyles();
     var app = await waitForAccount();
