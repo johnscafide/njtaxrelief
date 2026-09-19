@@ -40,13 +40,22 @@ assert.ok(files.shared.includes('/api/agent-property-search'),'Agent property se
 assert.doesNotMatch(files.shared,/from\(['"]property_lookups['"]\)/,'browser workflow must not query statewide property_lookups directly');
 assert.match(files.propertyApi,/has_watchdog_plan/,'property search API must verify Agent entitlement');
 assert.match(files.propertyApi,/property_lookups/,'server boundary must query the governed property cache');
+assert.match(files.propertyApi,/transaction_municipal_requirements/,'Agent property boundary must add municipal closing requirements');
+assert.match(files.propertyApi,/data\.nj\.gov\/resource\/w9se-dmra\.json/,'Agent property boundary must use NJ DCA permit lifecycle source');
+assert.match(files.propertyApi,/not a legal finding|not a legal determination/i,'permit results must preserve non-clearance semantics');
 assert.doesNotMatch(files.propertyApi,/owner_name|mailing_address/i,'property search must not expose owner/contact enrichment');
 
 assert.match(files.listing,/agent_listing_packs/,'Listing Prep must persist owner-scoped prep packs');
+assert.match(files.listing,/permit_review/,'Listing Prep must retain sourced permit review context');
+assert.match(files.listing,/municipal_requirements/,'Listing Prep must retain sourced municipal requirement context');
 assert.match(files.listing,/transaction_workspaces/,'Listing Prep must hand off to Transactions');
 assert.match(files.listing,/side:'seller'/,'Listing Prep transaction handoff must preserve seller-side context');
 assert.match(files.buyers,/agent_buyer_shortlists/,'Buyer workflow must persist shortlists');
 assert.match(files.buyers,/agent_buyer_shortlist_properties/,'Buyer workflow must persist selected properties');
+assert.match(files.buyers,/diligence_snapshot/,'Buyer shortlist must persist sourced diligence for comparison');
+assert.match(files.buyers,/Resale \/ CCO/,'Buyer comparison must include resale/CCO context');
+assert.match(files.buyers,/Smoke \/ fire/,'Buyer comparison must include smoke/fire context');
+assert.match(files.buyers,/Permit review/,'Buyer comparison must include permit review context');
 assert.match(files.buyers,/transaction_workspaces/,'Buyer workflow must hand selected property into Transactions');
 assert.match(files.buyers,/side:'buyer'/,'Buyer handoff must preserve buyer-side context');
 assert.match(files.txV2,/URLSearchParams\(location\.search\)\.get\(['"]tx['"]\)/,'Transaction workspace must honor workflow deep-link transaction id');
