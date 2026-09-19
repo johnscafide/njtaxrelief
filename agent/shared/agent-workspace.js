@@ -2,6 +2,13 @@
 'use strict';
 if(window.__WATCHDOG_AGENT_WORKSPACE__)return;
 window.__WATCHDOG_AGENT_WORKSPACE__=true;
+function keepFinalStylesLast(){
+  var final=document.querySelector('link[data-agent-workspace-final]');
+  if(!final||!document.head)return;
+  function settle(){if(document.head.lastElementChild!==final)document.head.appendChild(final)}
+  settle();
+  new MutationObserver(function(){settle()}).observe(document.head,{childList:true});
+}
 function ensureToast(){
   var el=document.querySelector('#awx-mobile-toast');
   if(el)return el;
@@ -15,6 +22,7 @@ document.addEventListener('click',function(event){
   if(!soon)return;
   event.preventDefault();event.stopPropagation();announce(soon.getAttribute('data-agent-soon')||'Coming soon for Agents');
 });
+keepFinalStylesLast();
 document.addEventListener('keydown',function(event){
   if(event.key!=='Enter'&&event.key!==' ')return;
   var soon=event.target.closest&&event.target.closest('[data-agent-soon]');
