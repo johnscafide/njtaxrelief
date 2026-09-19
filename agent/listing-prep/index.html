@@ -1,0 +1,73 @@
+<!doctype html>
+<html lang="en" data-access-require="agent">
+<head>
+<meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<meta name="robots" content="noindex,nofollow"><meta name="theme-color" content="#ffffff">
+<title>Listing Prep | Watchdog Agent Workspace</title>
+<link rel="icon" href="/favicon.ico"><link rel="manifest" href="/property/manifest.webmanifest">
+<link rel="preconnect" href="https://fonts.googleapis.com"><link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+<link rel="stylesheet" href="/styles.css"><link rel="stylesheet" href="/property/css/shared.css"><link rel="stylesheet" href="/property/css/plan-context.css"><link rel="stylesheet" href="/property/css/app-shell-2027.css">
+<link rel="stylesheet" href="/agent/shared/agent-workspace.css"><link rel="stylesheet" href="/agent/shared/workflows.css">
+</head>
+<body data-sidebar-page="agent-desk" data-plan-auto="true" data-agent-workflow="listing-prep">
+<main class="ag-page" id="lp-app">
+  <div class="ag-utility"><div class="ag-breadcrumb"><a href="/agent-desk">Agent Workspace</a><span>/</span><strong>Listing Prep</strong></div></div>
+  <header class="ag-header">
+    <div class="ag-header-copy"><div class="ag-kicker"><i class="fa-solid fa-house-chimney"></i> LISTING APPOINTMENT</div><h1>Listing Prep Pack</h1><p>Start with one New Jersey address and keep the public property facts, tax context, seller conversation notes, municipal diligence and transaction handoff together. Watchdog does not replace an MLS CMA, inspection, title work or legal advice.</p></div>
+    <div class="ag-header-actions"><button class="ag-btn primary" id="lp-new" type="button"><i class="fa-solid fa-plus"></i> New prep pack</button></div>
+  </header>
+  <nav class="ag-tabs" aria-label="Agent tools">
+    <a href="/agent-desk"><i class="fa-solid fa-bullseye"></i>Today</a><a href="/agent/listing-prep" aria-current="page"><i class="fa-solid fa-house-chimney"></i>Listing Prep</a><a href="/agent/buyers"><i class="fa-solid fa-scale-balanced"></i>Buyers</a><a href="/agent/open-house"><i class="fa-solid fa-qrcode"></i>Open House</a><a href="/agent/contacts"><i class="fa-solid fa-address-book"></i>Contacts</a><a href="/transaction/"><i class="fa-solid fa-file-signature"></i>Transactions</a>
+  </nav>
+  <section class="ag-main">
+    <div class="ag-grid">
+      <aside class="ag-rail">
+        <div class="ag-rail-head"><div><span>YOUR PREP PACKS</span><h2>Listing appointments</h2></div></div>
+        <div id="lp-list" class="ag-list"><div class="ag-empty">Loading saved prep packs…</div></div>
+      </aside>
+      <div class="ag-work">
+        <section class="ag-card" id="lp-create">
+          <div class="ag-card-head"><div><span>START HERE</span><h2>Find the property</h2></div></div>
+          <div class="ag-card-body">
+            <div class="ag-search"><input id="lp-search" type="search" placeholder="Enter a street address, e.g. 5 Glenn Ave" autocomplete="off"><button class="ag-btn primary" id="lp-search-btn" type="button"><i class="fa-solid fa-magnifying-glass"></i> Search</button></div>
+            <div id="lp-results" class="ag-results" hidden></div>
+            <form class="ag-form" id="lp-create-form" hidden>
+              <div class="wide"><span class="ag-section-kicker">SELECTED PROPERTY</span><h3 id="lp-picked-address" style="margin:4px 0 0;font-size:16px"></h3><p id="lp-picked-place" style="margin:3px 0 12px;color:#646971;font-size:12px"></p></div>
+              <label>Client / seller label<input id="lp-client" maxlength="120" placeholder="Smith listing appointment"></label>
+              <label>Appointment status<select id="lp-status"><option value="draft">Preparing</option><option value="ready">Ready for appointment</option><option value="won">Listing won</option><option value="lost">Not moving forward</option></select></label>
+              <label class="wide">Private notes<textarea id="lp-notes" maxlength="4000" placeholder="What the seller told you, questions to ask, pricing/condition notes…"></textarea></label>
+              <div class="wide ag-form-actions"><button class="ag-btn primary" type="submit"><i class="fa-solid fa-folder-plus"></i> Create prep pack</button><span id="lp-create-note" class="ag-note" aria-live="polite"></span></div>
+            </form>
+          </div>
+        </section>
+        <section class="ag-card" id="lp-detail" hidden>
+          <div class="ag-card-head"><div><span>LISTING PREP PACK</span><h2 id="lp-title">Property</h2></div><div class="ag-header-actions"><a class="ag-btn" id="lp-property-link" href="/property/"><i class="fa-solid fa-up-right-from-square"></i> Full property</a><button class="ag-btn primary" id="lp-start-tx" type="button"><i class="fa-solid fa-file-signature"></i> Start transaction</button></div></div>
+          <div class="ag-metrics">
+            <article><small>Assessment</small><b id="lp-assessed">—</b></article><article><small>Annual tax</small><b id="lp-tax">—</b></article><article><small>Last sale</small><b id="lp-sale">—</b></article><article><small>Built</small><b id="lp-built">—</b></article>
+          </div>
+          <div class="ag-card-body">
+            <div class="ag-form">
+              <label>Client / seller label<input id="lp-edit-client" maxlength="120"></label>
+              <label>Status<select id="lp-edit-status"><option value="draft">Preparing</option><option value="ready">Ready for appointment</option><option value="won">Listing won</option><option value="lost">Not moving forward</option></select></label>
+              <label class="wide">Private notes<textarea id="lp-edit-notes" maxlength="4000"></textarea></label>
+            </div>
+            <div class="ag-form-actions"><button class="ag-btn primary" id="lp-save" type="button"><i class="fa-solid fa-check"></i> Save prep pack</button><button class="ag-btn danger" id="lp-delete" type="button"><i class="fa-regular fa-trash-can"></i> Delete</button><span id="lp-save-note" class="ag-note"></span></div>
+          </div>
+        </section>
+        <section class="ag-card" id="lp-checklist" hidden>
+          <div class="ag-card-head"><div><span>APPOINTMENT CHECKLIST</span><h2>What to verify before you price or promise</h2></div></div>
+          <div class="ag-card-body"><div class="ag-checks">
+            <div class="ag-check"><i class="fa-solid fa-building-columns"></i><div><b>Tax & assessment context</b><small>Use the current Watchdog record and source dates; do not treat assessed value as market value.</small></div><em>Watchdog</em></div>
+            <div class="ag-check"><i class="fa-solid fa-hammer"></i><div><b>Permits and property changes</b><small>Open the full property workspace and review available permit/change evidence before the appointment.</small></div><em>Review</em></div>
+            <div class="ag-check"><i class="fa-solid fa-city"></i><div><b>Municipal resale / CO requirements</b><small>Confirm current municipal requirements before setting seller expectations or a closing timeline.</small></div><em>Closing</em></div>
+            <div class="ag-check"><i class="fa-solid fa-camera"></i><div><b>MLS/CMA, condition and marketing plan</b><small>Complete your brokerage pricing work, condition walk-through, photography and launch strategy outside the public-record layer.</small></div><em>Agent</em></div>
+          </div></div>
+        </section>
+      </div>
+    </div>
+  </section>
+</main>
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2/dist/umd/supabase.js"></script><script src="/property/js/supabase-runtime.js"></script><script src="/property/js/supabase-singleton-bridge.js"></script><script src="/property/js/access-guard.js"></script><script src="/property/js/plan-context.js"></script><script src="/property/js/app-shell-2027.js"></script><script src="/property/js/sidemenu.js"></script>
+<script src="/agent/shared/workflows.js"></script><script src="/agent/listing-prep/listing-prep.js"></script>
+</body></html>
