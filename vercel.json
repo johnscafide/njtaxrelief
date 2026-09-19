@@ -567,6 +567,22 @@
   ],
   "rewrites": [
     {
+      "source": "/account/profile/",
+      "destination": "/property/account/profile/index.html"
+    },
+    {
+      "source": "/account/profile",
+      "destination": "/property/account/profile/index.html"
+    },
+    {
+      "source": "/account/professional-profile/",
+      "destination": "/property/account/professional-profile/index.html"
+    },
+    {
+      "source": "/account/professional-profile",
+      "destination": "/property/account/professional-profile/index.html"
+    },
+    {
       "source": "/transaction/shared/",
       "destination": "/transaction/shared/index.html"
     },
