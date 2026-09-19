@@ -38,7 +38,7 @@ function renderPacks(){
   $('#awf-pack-count').textContent=packs.length;
   selectList($('#awf-pack-list'),packs,activePack,function(id){activePack=id;renderPacks()},function(r){return r.address},function(r){return(r.client_label? r.client_label+' · ':'')+(r.status==='ready'?'Ready':'In progress')});
   var host=$('#awf-pack-detail'),p=packs.find(function(x){return x.id===activePack});if(!p){host.className='awf-detail awf-empty';host.innerHTML='<i class="fa-solid fa-sign-hanging"></i><b>Select a listing pack</b><span>Or create one from a saved property.</span>';return}
-  host.className='awf-detail';var s=p.property_snapshot||{},checks=p.checklist||{},qs=encodeURIComponent(p.address),report='/property/report-builder/?pams_pin='+encodeURIComponent(p.pams_pin||'')+'&preset=real_estate_agent&title='+encodeURIComponent('Listing Prep · '+p.address),tx='/transaction/?prefill_address='+qs+'&prefill_side=seller&prefill_client='+encodeURIComponent(p.client_label||'');
+  host.className='awf-detail';var s=p.property_snapshot||{},checks=p.checklist||{},qs=encodeURIComponent(p.address),report='/property/report-builder/?pams_pin='+encodeURIComponent(p.pams_pin||'')+'&preset=broker_listing&title='+encodeURIComponent('Listing Prep · '+p.address),tx='/transaction/?prefill_address='+qs+'&prefill_side=seller&prefill_client='+encodeURIComponent(p.client_label||'');
   var definitions=[
     ['property_record','Property record reviewed','Assessment, taxes, parcel identity and recorded property context.','/?address='+qs],
     ['permits','Permit / construction history reviewed','Confirm open or recent permit records before the appointment.','/?address='+qs],
