@@ -1,0 +1,47 @@
+name: NJW-394 Agent workflow suite contract
+on:
+  pull_request:
+    paths:
+      - 'agent/**'
+      - 'open-house/**'
+      - 'client-room/**'
+      - 'api/agent-property-search.js'
+      - 'api/open-house.js'
+      - 'api/transaction-client-room.js'
+      - 'transaction/**'
+      - 'property/agent-desk/**'
+      - 'property/js/agent-today.js'
+      - 'property/css/agent-today.css'
+      - 'middleware.js'
+      - 'api/watchdog-index-robots.js'
+      - 'api/watchdog-index-sitemap.js'
+      - 'scripts/indexnow-submit.mjs'
+      - 'supabase/migrations/20260919180500_agent_workflow_foundations.sql'
+      - 'supabase/migrations/20260919181500_agent_workspace_client_rooms.sql'
+      - 'property/tests/agent-workflow-suite-contract.mjs'
+      - '.github/workflows/agent-workflow-suite-contract.yml'
+  workflow_dispatch:
+permissions:
+  contents: read
+jobs:
+  contract:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+      - name: Check JavaScript syntax
+        run: |
+          node --check agent/shared/workflows.js
+          node --check agent/listing-prep/listing-prep.js
+          node --check agent/buyers/buyers.js
+          node --check agent/open-house/open-house.js
+          node --check api/agent-property-search.js
+          node --check api/open-house.js
+          node --check api/transaction-client-room.js
+          node --check transaction/client-room.js
+          node --check transaction/command-center-polish.js
+          node --check property/js/agent-today.js
+      - name: Run Agent workflow contract
+        run: node property/tests/agent-workflow-suite-contract.mjs
