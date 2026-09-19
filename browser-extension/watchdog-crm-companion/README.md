@@ -1,17 +1,28 @@
 # Watchdog CRM Companion
 
-Watchdog CRM Companion is a Chromium Manifest V3 extension for the BoldTrail Platform. It brings source-linked Watchdog property facts into the BoldTrail contact the user intentionally has open.
+Watchdog CRM Companion is a Chromium Manifest V3 extension for the BoldTrail Platform. Version 0.3 adds a persistent Watchdog Agent Command Bar directly inside the BoldTrail viewport so agents no longer have to reopen the browser-action popup when navigating between contacts.
 
 ## Current scope
 
 - Chrome and Microsoft Edge from one Manifest V3 codebase.
 - BoldTrail web app at `https://app.boldtrail.com/`.
 - Watchdog sign-in and an active paid entitlement are required. Eligible tiers are Agent, Pro, Pro+, Teams and Developer.
-- The extension scans only the active BoldTrail contact page after the user opens the popup.
-- Only the visible property address, city, state and ZIP are sent to Watchdog for matching. Contact names, email addresses, phone numbers, CRM cookies and BoldTrail credentials are not sent.
+- The Agent Command Bar remains mounted across BoldTrail single-page-app navigation and refreshes its local contact context when the route changes.
+- `Alt+W` focuses the command input.
+- Quick actions: one-click Enrich, Town Closing Intelligence, Instant Municipal Packet, Listing Appointment Brief, Property and Transaction.
+- The original popup remains available as a fallback and detailed field picker.
+- Local contact detection reads only visible property address, city, state and ZIP. Contact names, email addresses, phone numbers, CRM cookies, BoldTrail credentials and free-form CRM notes are not collected.
+- A remote Watchdog property lookup is performed only after the agent runs an action. Merely navigating between BoldTrail contacts does not transmit the detected address.
 - Watchdog returns sourced New Jersey public-record facts with match confidence and source references.
-- The user explicitly selects the fields to apply. Existing non-empty CRM fields are never silently overwritten.
-- When a compatible Notes field is visible, the extension can append a `WATCHDOG VERIFIED PROPERTY` research note containing selected facts, sources and the research limitation.
+- One-click Enrich uses the v0.2.1 safe writer: compatible empty CRM fields may be populated, conflicting non-empty fields are skipped, and a sourced Watchdog note is used when direct field writing is not safe.
+- Town Closing Intelligence reads the governed `transaction_municipal_requirements` registry used by Watchdog's transaction product. Missing web coverage is never interpreted as “not required.”
+- Municipal Packet produces a printable closing-requirements summary with current Watchdog property facts, CCO/resale and smoke/fire requirement states, checklists, fees and official links.
+
+## Architecture
+
+The page-native command bar is a content script isolated inside Shadow DOM so BoldTrail CSS cannot style or remove the Watchdog UI. A Manifest V3 extension service worker owns authentication, calls the Watchdog Edge Function, opens Watchdog routes, stores the temporary municipal-packet payload, and relays explicit scan/write requests to the existing scanner and v0.2.1 writer.
+
+The bar is rendered inside the BoldTrail webpage, not inside Chrome or Edge browser chrome. Browser extensions cannot insert arbitrary page UI into the browser's own address-bar area, so Watchdog uses a fixed first-row surface at the top of the BoldTrail viewport.
 
 ## Authentication
 
@@ -27,15 +38,7 @@ The extension does not copy a Watchdog web JWT into extension storage.
 
 ## Privacy-safe analytics
 
-The extension records product-use events such as connect, open, contact detected, lookup started/succeeded/no-match/ambiguous, field previewed and CRM write started/succeeded/failed.
-
-Analytics must never contain:
-
-- contact names;
-- email addresses;
-- phone numbers;
-- full property addresses;
-- free-form CRM notes or contact-sheet content.
+The existing extension analytics remain privacy-minimized. Events must never contain contact names, email addresses, phone numbers, full property addresses or free-form CRM content.
 
 Developer aggregate analytics are available at `/property/backoffice/crm-companion/`.
 
@@ -47,7 +50,7 @@ Chrome:
 2. Enable **Developer mode**.
 3. Choose **Load unpacked**.
 4. Select this `browser-extension/watchdog-crm-companion` directory.
-5. Open or refresh BoldTrail once, open a contact, then click the Watchdog extension.
+5. Open or refresh BoldTrail. The Agent Command Bar should appear immediately and remain present as you navigate.
 
 Edge:
 
@@ -55,7 +58,7 @@ Edge:
 2. Enable **Developer mode**.
 3. Choose **Load unpacked**.
 4. Select this directory.
-5. Open or refresh BoldTrail once, open a contact, then click the Watchdog extension.
+5. Open or refresh BoldTrail.
 
 ## Release note
 
