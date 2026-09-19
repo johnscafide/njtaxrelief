@@ -47,16 +47,53 @@
     return currentUser && currentUser.user_metadata && currentUser.user_metadata.watchdog_profile || {};
   }
 
+  function profileMode() {
+    return String(document.body && document.body.getAttribute('data-account-profile-mode') || 'combined').toLowerCase();
+  }
+
+  function professionLabel(value) {
+    return ({
+      real_estate:'Real estate agent / broker',
+      mortgage_lending:'Mortgage lender / broker',
+      attorney:'Attorney',
+      appraiser:'Appraiser',
+      property_tax_professional:'Property tax professional',
+      title_closing:'Title / closing',
+      contractor:'Contractor / developer',
+      accountant:'Accountant / CPA',
+      insurance:'Insurance professional',
+      property_manager:'Property manager',
+      investor:'Real estate investor',
+      other:'Other professional'
+    })[value] || 'Not configured';
+  }
+
+  function renderHub(host, row) {
+    var profession = String(row && row.primary_profession || '');
+    var isAgent = profession === 'real_estate';
+    var professional = row && (row.persona === 'professional' || row.persona === 'both' || profession);
+    host.className = 'ac-section acp-editor acp-profile-hub';
+    host.id = 'ac-profile-editor';
+    host.innerHTML =
+      '<header class="acp-header"><div><span>PROFILE</span><h2>Choose the profile you want to edit</h2><p>Personal and professional information are kept in separate editing experiences so homeowners never see agent-only fields by mistake.</p></div><div class="acp-source"><i class="fas fa-user-shield"></i><span>Separated by role</span></div></header>' +
+      '<div class="acp-profile-route-grid">' +
+        '<a class="acp-profile-route-card" href="/account/profile"><span class="acp-route-icon"><i class="fas fa-house"></i></span><div><small>PERSONAL</small><h3>Homeowner profile</h3><p>Contact details, home area, property goals, preferences and optional household context.</p><b>Edit homeowner profile <i class="fas fa-arrow-right"></i></b></div></a>' +
+        '<a class="acp-profile-route-card professional" href="/account/professional-profile"><span class="acp-route-icon"><i class="fas fa-briefcase"></i></span><div><small>' + (isAgent ? 'AGENT' : 'PROFESSIONAL') + '</small><h3>' + (isAgent ? 'Agent profile' : 'Professional profile') + '</h3><p>' + (professional ? esc(professionLabel(profession)) + '. Manage professional workflow context' + (isAgent ? ', brokerage identity, license and Agent portal settings.' : ' and Watchdog Intelligence preferences.') : 'Set up a professional role only if you use Watchdog for your work.') + '</p><b>' + (professional ? 'Edit professional profile' : 'Set up professional profile') + ' <i class="fas fa-arrow-right"></i></b></div></a>' +
+      '</div>' +
+      (isAgent ? '<div class="acp-agent-confirmed"><i class="fas fa-circle-check"></i><span><b>Real estate agent profile enabled</b><small>Agent-only fields appear only because your user-confirmed profession is Real estate agent / broker.</small></span></div>' : '');
+  }
+
   function needsProfession() {
     var persona = document.getElementById('acp-persona');
     return persona && (persona.value === 'professional' || persona.value === 'both');
   }
 
   function syncConditionalFields() {
-    var professional = needsProfession();
+    var mode = profileMode();
+    var professional = mode === 'homeowner' ? false : needsProfession();
     document.querySelectorAll('[data-acp-professional]').forEach(function (node) { node.hidden = !professional; });
     var housing = document.querySelector('[data-acp-housing]');
-    if (housing) housing.hidden = !!(document.getElementById('acp-persona') && document.getElementById('acp-persona').value === 'professional');
+    if (housing) housing.hidden = mode === 'professional' || !!(document.getElementById('acp-persona') && document.getElementById('acp-persona').value === 'professional');
   }
 
   function completionPercent(row) {
@@ -91,6 +128,8 @@
 
   function renderEditor(host) {
     var row = profile || {};
+    var mode = profileMode();
+    if (mode === 'hub') { renderHub(host,row); refreshHero(); return; }
     var meta = metadataProfile();
     var persona = row.persona || 'homeowner';
     var email = row.contact_email || (currentUser && currentUser.email) || '';
@@ -100,7 +139,7 @@
     host.className = 'ac-section acp-editor';
     host.id = 'ac-profile-editor';
     host.innerHTML =
-      '<header class="acp-header"><div><span>ABOUT YOU</span><h2>Your Watchdog profile</h2><p>Keep the context Watchdog uses to personalize your workspace current. Property facts and paid access remain governed separately.</p></div><div class="acp-source"><i class="fas fa-user-check"></i><span>User-confirmed</span></div></header>' +
+      '<header class="acp-header"><div><span>' + (mode === 'professional' ? 'PROFESSIONAL PROFILE' : mode === 'homeowner' ? 'HOMEOWNER PROFILE' : 'ABOUT YOU') + '</span><h2>' + (mode === 'professional' ? 'Your professional profile' : mode === 'homeowner' ? 'Your homeowner profile' : 'Your Watchdog profile') + '</h2><p>' + (mode === 'professional' ? 'Set the professional role and workflow context Watchdog uses for work tools. Real-estate-agent fields only appear when you identify your profession as real estate.' : mode === 'homeowner' ? 'Keep your personal property goals, contact details and homeowner context current without professional or agent-only settings.' : 'Keep the context Watchdog uses to personalize your workspace current. Property facts and paid access remain governed separately.') + '</p></div><div class="acp-source"><i class="fas fa-user-check"></i><span>User-confirmed</span></div></header>' +
       '<div class="acp-grid">' +
         '<section class="acp-panel"><div class="acp-panel-head"><i class="fas fa-address-card"></i><div><b>Account &amp; contact</b><small>How Watchdog knows and contacts you</small></div></div><div class="acp-fields">' +
           inputField('acp-name','Preferred name',meta.preferred_name || (currentUser && currentUser.user_metadata && currentUser.user_metadata.full_name) || '','text','Your name','Display preference only.','autocomplete="name" maxlength="80"') +
@@ -131,7 +170,7 @@
         selectField('acp-household','Household size',row.household_size ? String(row.household_size) : '',[['','Prefer not to say'],['1','1'],['2','2'],['3','3'],['4','4'],['5','5'],['6','6+']]) +
       '</div></details>' +
       '<div class="acp-intel"><label><input id="acp-intel" type="checkbox"' + (row.intelligence_personalization !== false ? ' checked' : '') + '><span><b>Personalize Watchdog Intelligence with my approved profile context</b><small>Only operational context such as role, markets, goals and workflow priorities is used. This never changes source facts or plan access.</small></span></label></div>' +
-      '<div class="ac-save-row acp-save"><button id="acp-save" type="button"><i class="fas fa-check"></i> Save Watchdog profile</button><span id="acp-note" aria-live="polite"></span></div>';
+      '<div class="ac-save-row acp-save"><button id="acp-save" type="button"><i class="fas fa-check"></i> ' + (mode === 'professional' ? 'Save professional profile' : mode === 'homeowner' ? 'Save homeowner profile' : 'Save Watchdog profile') + '</button><span id="acp-note" aria-live="polite"></span></div>';
 
     var personaSelect = document.getElementById('acp-persona');
     if (personaSelect) personaSelect.addEventListener('change',syncConditionalFields);
