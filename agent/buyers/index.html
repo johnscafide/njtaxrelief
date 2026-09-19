@@ -1,0 +1,37 @@
+<!doctype html>
+<html lang="en" data-access-require="agent">
+<head>
+<meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover"><meta name="robots" content="noindex,nofollow"><meta name="theme-color" content="#ffffff">
+<title>Buyer Shortlists | Watchdog Agent Workspace</title>
+<link rel="icon" href="/favicon.ico"><link rel="manifest" href="/property/manifest.webmanifest">
+<link rel="preconnect" href="https://fonts.googleapis.com"><link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css"><link rel="stylesheet" href="/styles.css"><link rel="stylesheet" href="/property/css/shared.css"><link rel="stylesheet" href="/property/css/plan-context.css"><link rel="stylesheet" href="/property/css/app-shell-2027.css"><link rel="stylesheet" href="/agent/shared/agent-workspace.css"><link rel="stylesheet" href="/agent/shared/workflows.css">
+</head>
+<body data-sidebar-page="agent-desk" data-plan-auto="true" data-agent-workflow="buyers">
+<main class="ag-page" id="bs-app">
+<div class="ag-utility"><div class="ag-breadcrumb"><a href="/agent-desk">Agent Workspace</a><span>/</span><strong>Buyer Shortlists</strong></div></div>
+<header class="ag-header"><div class="ag-header-copy"><div class="ag-kicker"><i class="fa-solid fa-scale-balanced"></i> BUYER REPRESENTATION</div><h1>Buyer Shortlists</h1><p>Keep candidate homes together, compare public tax and assessment context, add your own notes, and move the chosen property into Watchdog Transactions without re-entering the address.</p></div><div class="ag-header-actions"><button class="ag-btn primary" id="bs-new" type="button"><i class="fa-solid fa-plus"></i> New shortlist</button></div></header>
+<nav class="ag-tabs" aria-label="Agent tools"><a href="/agent-desk"><i class="fa-solid fa-bullseye"></i>Today</a><a href="/agent/listing-prep"><i class="fa-solid fa-house-chimney"></i>Listing Prep</a><a href="/agent/buyers" aria-current="page"><i class="fa-solid fa-scale-balanced"></i>Buyers</a><a href="/agent/open-house"><i class="fa-solid fa-qrcode"></i>Open House</a><a href="/agent/contacts"><i class="fa-solid fa-address-book"></i>Contacts</a><a href="/transaction/"><i class="fa-solid fa-file-signature"></i>Transactions</a></nav>
+<section class="ag-main"><div class="ag-grid">
+<aside class="ag-rail"><div class="ag-rail-head"><div><span>YOUR BUYERS</span><h2>Shortlists</h2></div></div><div id="bs-list" class="ag-list"><div class="ag-empty">Loading shortlists…</div></div></aside>
+<div class="ag-work">
+<section class="ag-card" id="bs-create">
+<div class="ag-card-head"><div><span>NEW SHORTLIST</span><h2>Create a buyer workspace</h2></div></div>
+<div class="ag-card-body"><form class="ag-form" id="bs-create-form"><label>Shortlist name<input id="bs-name" required maxlength="100" placeholder="Voorhees buyer shortlist"></label><label>Client label<input id="bs-client" maxlength="120" placeholder="Alleu"></label><label class="wide">Private notes<textarea id="bs-notes" maxlength="4000" placeholder="Budget, must-haves, timeline, financing notes…"></textarea></label><div class="wide ag-form-actions"><button class="ag-btn primary" type="submit"><i class="fa-solid fa-folder-plus"></i> Create shortlist</button><span id="bs-create-note" class="ag-note"></span></div></form></div>
+</section>
+<section class="ag-card" id="bs-detail" hidden>
+<div class="ag-card-head"><div><span>BUYER SHORTLIST</span><h2 id="bs-title">Buyer</h2></div><div class="ag-header-actions"><button class="ag-btn" id="bs-save-meta" type="button"><i class="fa-solid fa-check"></i> Save details</button></div></div>
+<div class="ag-card-body"><div class="ag-form"><label>Shortlist name<input id="bs-edit-name" maxlength="100"></label><label>Client label<input id="bs-edit-client" maxlength="120"></label><label class="wide">Private notes<textarea id="bs-edit-notes" maxlength="4000"></textarea></label></div><div class="ag-form-actions"><span id="bs-save-note" class="ag-note"></span></div></div>
+</section>
+<section class="ag-card" id="bs-add" hidden>
+<div class="ag-card-head"><div><span>ADD A HOME</span><h2>Search Watchdog property records</h2></div></div>
+<div class="ag-card-body"><div class="ag-search"><input id="bs-search" type="search" placeholder="Enter a street address"><button class="ag-btn primary" id="bs-search-btn" type="button"><i class="fa-solid fa-magnifying-glass"></i> Search</button></div><div id="bs-results" class="ag-results" hidden></div><p class="ag-note" style="margin:10px 0 0">Public records help compare carrying-cost and diligence context. They do not replace MLS listing details, inspections, appraisals or lender qualification.</p></div>
+</section>
+<section class="ag-card" id="bs-compare-card" hidden>
+<div class="ag-card-head"><div><span>SIDE-BY-SIDE</span><h2>Buyer comparison</h2></div><span class="ag-pill" id="bs-count">0 homes</span></div>
+<div class="ag-card-body"><div id="bs-compare" class="ag-compare"></div></div>
+</section>
+</div></div></section>
+</main>
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2/dist/umd/supabase.js"></script><script src="/property/js/supabase-runtime.js"></script><script src="/property/js/supabase-singleton-bridge.js"></script><script src="/property/js/access-guard.js"></script><script src="/property/js/plan-context.js"></script><script src="/property/js/app-shell-2027.js"></script><script src="/property/js/sidemenu.js"></script><script src="/agent/shared/workflows.js"></script><script src="/agent/buyers/buyers.js"></script>
+</body></html>

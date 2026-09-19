@@ -1,0 +1,33 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover"><meta name="robots" content="noindex,nofollow,noarchive"><meta name="theme-color" content="#ffffff">
+<title>Client Room | Watchdog</title><link rel="icon" href="/favicon.ico">
+<link rel="preconnect" href="https://fonts.googleapis.com"><link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<style>
+*{box-sizing:border-box}body{margin:0;background:#f5f6f7;color:#242529;font-family:Inter,system-ui,sans-serif}.cr-top{padding:16px 20px;background:#fff;border-bottom:1px solid #e5e7ea}.cr-wrap{max-width:980px;margin:26px auto;padding:0 16px 60px}.cr-card{background:#fff;border:1px solid #e2e5e8;border-radius:12px;overflow:hidden}.cr-head{padding:24px;border-bottom:1px solid #e5e7ea}.cr-kicker{font-size:11px;font-weight:800;letter-spacing:.08em;color:#777c83}.cr-head h1{margin:6px 0 5px;font-size:28px}.cr-head p{margin:0;color:#646971}.cr-stats{display:grid;grid-template-columns:repeat(4,1fr);border-bottom:1px solid #e5e7ea}.cr-stats div{padding:15px 18px;border-right:1px solid #e5e7ea}.cr-stats div:last-child{border-right:0}.cr-stats small,.cr-stats b{display:block}.cr-stats small{color:#757a80;font-size:10px;font-weight:800;text-transform:uppercase}.cr-stats b{margin-top:4px;font-size:15px}.cr-grid{display:grid;grid-template-columns:minmax(0,1fr) 330px;gap:18px;padding:18px}.cr-panel{border:1px solid #e4e6e9;border-radius:9px;overflow:hidden}.cr-panel h2{margin:0;padding:15px 16px;border-bottom:1px solid #e4e6e9;font-size:15px}.cr-list{display:grid}.cr-row{display:grid;grid-template-columns:16px minmax(0,1fr) auto;gap:10px;align-items:start;padding:12px 15px;border-bottom:1px solid #e7e8ea}.cr-row:last-child{border-bottom:0}.cr-row i{width:10px;height:10px;margin-top:4px;border-radius:50%;background:#aeb4ba}.cr-row.done i{background:#476954}.cr-row b,.cr-row small{display:block}.cr-row b{font-size:12px}.cr-row small{margin-top:2px;color:#6b7077;font-size:11px}.cr-row em{font-style:normal;color:#777;font-size:10px;text-transform:uppercase}.cr-doc{display:flex;justify-content:space-between;gap:12px;align-items:center;padding:12px 15px;border-bottom:1px solid #e7e8ea}.cr-doc:last-child{border-bottom:0}.cr-doc b,.cr-doc small{display:block}.cr-doc b{font-size:12px}.cr-doc small{margin-top:2px;color:#6b7077;font-size:11px}.cr-doc a{padding:7px 9px;border:1px solid #d6dade;border-radius:7px;color:#30363b;text-decoration:none;font-size:11px;font-weight:700}.cr-msg{margin:0 18px 18px;padding:14px;border:1px solid #e4e6e9;border-radius:8px;background:#fafafa;color:#555d64;font-size:13px;line-height:20px}.cr-state{padding:36px;text-align:center;color:#666}@media(max-width:760px){.cr-stats{grid-template-columns:1fr 1fr}.cr-stats div:nth-child(2){border-right:0}.cr-stats div:nth-child(-n+2){border-bottom:1px solid #e5e7ea}.cr-grid{grid-template-columns:1fr}.cr-head h1{font-size:24px}}
+</style>
+</head>
+<body>
+<header class="cr-top"><b>Watchdog</b> <span style="color:#7a7f86;font-size:12px">· Client Room</span></header>
+<main class="cr-wrap">
+<section class="cr-card" id="cr-loading"><div class="cr-state">Opening your client room…</div></section>
+<section class="cr-card" id="cr-app" hidden>
+<div class="cr-head"><div class="cr-kicker">TRANSACTION UPDATE</div><h1 id="cr-address">Property</h1><p id="cr-client"></p></div>
+<div class="cr-stats"><div><small>Status</small><b id="cr-status">—</b></div><div><small>Contract date</small><b id="cr-contract">—</b></div><div><small>Closing date</small><b id="cr-closing">—</b></div><div><small>Last updated</small><b id="cr-updated">—</b></div></div>
+<p class="cr-msg" id="cr-message" hidden></p>
+<div class="cr-grid">
+<section class="cr-panel"><h2>Shared milestones</h2><div class="cr-list" id="cr-milestones"></div></section>
+<aside class="cr-panel"><h2>Shared documents</h2><div id="cr-documents"></div></aside>
+</div>
+</section>
+</main>
+<script>
+(function(){
+const token=new URLSearchParams(location.search).get('token')||'',loading=document.getElementById('cr-loading'),app=document.getElementById('cr-app');
+function fmt(v){if(!v)return'—';const d=new Date(v);return Number.isFinite(d.getTime())?d.toLocaleDateString('en-US',{month:'short',day:'numeric',year:'numeric'}):'—'}
+function fail(t){loading.innerHTML='<div class="cr-state"><b>Client room unavailable</b><p>'+t+'</p></div>'}
+fetch('/api/transaction-client-room?token='+encodeURIComponent(token),{headers:{Accept:'application/json'}}).then(async r=>({ok:r.ok,b:await r.json().catch(()=>({}))})).then(({ok,b})=>{if(!ok||!b.transaction)return fail(b.error||'This room is unavailable.');const t=b.transaction,r=b.room||{};document.getElementById('cr-address').textContent=t.address||'Property';document.getElementById('cr-client').textContent=[r.client_label,[t.city,t.state,t.postal_code].filter(Boolean).join(' ')].filter(Boolean).join(' · ');document.getElementById('cr-status').textContent=String(t.status||'review').replace(/_/g,' ');document.getElementById('cr-contract').textContent=fmt(t.contract_date);document.getElementById('cr-closing').textContent=fmt(t.closing_date);document.getElementById('cr-updated').textContent=fmt(t.updated_at);if(r.message){const m=document.getElementById('cr-message');m.textContent=r.message;m.hidden=false}const milestones=b.milestones||[],mh=document.getElementById('cr-milestones');mh.innerHTML=milestones.length?milestones.map(x=>'<div class="cr-row '+(['verified','resolved','waived'].includes(x.state)?'done':'')+'"><i></i><div><b>'+String(x.label||'Milestone').replace(/[<>]/g,'')+'</b><small>'+((x.due_date?'Due '+fmt(x.due_date):'Shared by your real estate professional'))+'</small></div><em>'+String(x.state||'open').replace(/_/g,' ')+'</em></div>').join(''):'<div class="cr-state">No milestones have been shared yet.</div>';const docs=b.documents||[],dh=document.getElementById('cr-documents');dh.innerHTML=docs.length?docs.map(d=>'<div class="cr-doc"><div><b>'+String(d.document_label||'Document').replace(/[<>]/g,'')+'</b><small>'+fmt(d.created_at)+'</small></div>'+(d.url?'<a href="'+d.url+'" target="_blank" rel="noopener">Open</a>':'')+'</div>').join(''):'<div class="cr-state">No documents have been shared yet.</div>';loading.hidden=true;app.hidden=false}).catch(()=>fail('Please check the link and try again.'));
+})();
+</script>
+</body></html>

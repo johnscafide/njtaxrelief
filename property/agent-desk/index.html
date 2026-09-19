@@ -22,6 +22,7 @@
   <link rel="stylesheet" href="/property/css/app-shell-2027.css">
   <link rel="stylesheet" href="/property/css/agent-control-2027.css">
   <link rel="stylesheet" href="/property/css/move-seats.css">
+  <link rel="stylesheet" href="/property/css/agent-today.css?v=20260919a">
 </head>
 <body data-sidebar-page="agent-desk" data-plan-auto="true">
   <main class="ac-main">
@@ -50,7 +51,18 @@
           <div class="ad-overview-meta"><b id="ad-total">0</b><span>active property signals</span><small id="ad-refreshed">Waiting for sources</small></div>
         </section>
 
-        <nav class="ad-companion-nav" aria-label="Agent tools"><a href="/agent/contacts">Clean and export contacts</a><a href="/transaction/">Manage transactions</a></nav>
+        <nav class="ad-companion-nav" aria-label="Agent tools"><a href="/agent/listing-prep">Listing Prep</a><a href="/agent/buyers">Buyer Shortlists</a><a href="/agent/open-house">Open House</a><a href="/agent/contacts">CRM Contacts</a><a href="/transaction/">Transactions</a></nav>
+        <section class="ad-today-hub" id="ad-today-hub" aria-labelledby="ad-today-title">
+          <header class="ad-today-head"><div><span>YOUR DAY</span><h2 id="ad-today-title">What needs my attention today?</h2><p>One queue across active closings, listing prep, buyers, open houses and sourced property opportunities.</p></div></header>
+          <div class="ad-today-cards">
+            <a class="ad-today-card" href="/transaction/"><small>Transactions</small><b id="ad-today-transactions">—</b><span id="ad-today-transactions-sub">Checking closing work…</span></a>
+            <a class="ad-today-card" href="/agent/listing-prep"><small>Listing Prep</small><b id="ad-today-listings">—</b><span id="ad-today-listings-sub">Checking prep packs…</span></a>
+            <a class="ad-today-card" href="/agent/buyers"><small>Buyer Shortlists</small><b id="ad-today-buyers">—</b><span id="ad-today-buyers-sub">Checking buyers…</span></a>
+            <a class="ad-today-card" href="/agent/open-house"><small>Open Houses</small><b id="ad-today-openhouses">—</b><span id="ad-today-openhouses-sub">Checking events…</span></a>
+            <a class="ad-today-card" href="#ad-focus"><small>Opportunities</small><b id="ad-today-opportunities">—</b><span id="ad-today-opportunities-sub">Checking sourced signals…</span></a>
+          </div>
+          <div class="ad-today-queue" id="ad-today-queue"><div class="ad-today-empty">Loading your daily work queue…</div></div>
+        </section>
         <section id="ad-capacity" class="ad-capacity"><p class="ad-control-loading">Loading plan capacity…</p></section>
         <section id="ad-assessment-queue" class="ad-assessment-queue" hidden></section>
         <section class="ad-focus" id="ad-focus" aria-label="Best next property conversation"></section>
@@ -159,6 +171,7 @@
   <script src="/property/js/agent-ui-safety.js"></script>
   <script src="/property/js/pwa.js"></script>
   <script src="/property/js/agent-desk.js"></script>
+  <script src="/property/js/agent-today.js?v=20260919a"></script>
   <script src="/property/js/agent-control.js"></script>
   <script src="/property/js/agent-portal-analytics.js"></script>
   <script src="/property/js/agent-list-actions.js"></script>

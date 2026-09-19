@@ -1,0 +1,44 @@
+<!doctype html>
+<html lang="en" data-access-require="agent">
+<head>
+<meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover"><meta name="robots" content="noindex,nofollow"><meta name="theme-color" content="#ffffff">
+<title>Open House | Watchdog Agent Workspace</title>
+<link rel="icon" href="/favicon.ico"><link rel="manifest" href="/property/manifest.webmanifest">
+<link rel="preconnect" href="https://fonts.googleapis.com"><link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css"><link rel="stylesheet" href="/styles.css"><link rel="stylesheet" href="/property/css/shared.css"><link rel="stylesheet" href="/property/css/plan-context.css"><link rel="stylesheet" href="/property/css/app-shell-2027.css"><link rel="stylesheet" href="/agent/shared/agent-workspace.css"><link rel="stylesheet" href="/agent/shared/workflows.css">
+</head>
+<body data-sidebar-page="agent-desk" data-plan-auto="true" data-agent-workflow="open-house">
+<main class="ag-page">
+<div class="ag-utility"><div class="ag-breadcrumb"><a href="/agent-desk">Agent Workspace</a><span>/</span><strong>Open House</strong></div></div>
+<header class="ag-header"><div class="ag-header-copy"><div class="ag-kicker"><i class="fa-solid fa-qrcode"></i> OPEN HOUSE LEADS</div><h1>Open House QR &amp; Lead Capture</h1><p>Create a property-specific check-in link, place the QR code at the door, and keep consented visitors attached to the event. Leads stay private to your Watchdog account and can be exported into the same Contact Cleanup workflow you already use for BoldTrail.</p></div><div class="ag-header-actions"><button class="ag-btn primary" id="oh-new" type="button"><i class="fa-solid fa-plus"></i> New open house</button></div></header>
+<nav class="ag-tabs" aria-label="Agent tools"><a href="/agent-desk"><i class="fa-solid fa-bullseye"></i>Today</a><a href="/agent/listing-prep"><i class="fa-solid fa-house-chimney"></i>Listing Prep</a><a href="/agent/buyers"><i class="fa-solid fa-scale-balanced"></i>Buyers</a><a href="/agent/open-house" aria-current="page"><i class="fa-solid fa-qrcode"></i>Open House</a><a href="/agent/contacts"><i class="fa-solid fa-address-book"></i>Contacts</a><a href="/transaction/"><i class="fa-solid fa-file-signature"></i>Transactions</a></nav>
+<section class="ag-main"><div class="ag-grid">
+<aside class="ag-rail"><div class="ag-rail-head"><div><span>YOUR EVENTS</span><h2>Open houses</h2></div></div><div id="oh-list" class="ag-list"><div class="ag-empty">Loading open houses…</div></div></aside>
+<div class="ag-work">
+<section class="ag-card" id="oh-create">
+<div class="ag-card-head"><div><span>CREATE EVENT</span><h2>Open-house check-in</h2></div></div>
+<div class="ag-card-body"><div class="ag-search"><input id="oh-search" type="search" placeholder="Search the property address"><button class="ag-btn" id="oh-search-btn" type="button"><i class="fa-solid fa-magnifying-glass"></i> Search</button></div><div id="oh-results" class="ag-results" hidden></div>
+<form class="ag-form" id="oh-form" style="margin-top:14px">
+<label>Event title<input id="oh-title-input" maxlength="120" placeholder="Saturday Open House"></label><label>Date &amp; time<input id="oh-event-at" type="datetime-local"></label>
+<label class="wide">Property address<input id="oh-address" required maxlength="240" placeholder="Select from Watchdog search or enter manually"></label><label>City / town<input id="oh-city" maxlength="120"></label><label>ZIP<input id="oh-zip" maxlength="10"></label>
+<label class="wide">Private event notes<textarea id="oh-notes" maxlength="3000" placeholder="Sign-in table location, follow-up plan, showing notes…"></textarea></label>
+<div class="wide ag-form-actions"><button class="ag-btn primary" type="submit"><i class="fa-solid fa-qrcode"></i> Create check-in link</button><span id="oh-create-note" class="ag-note"></span></div>
+</form></div></section>
+<section class="ag-card" id="oh-detail" hidden>
+<div class="ag-card-head"><div><span>OPEN HOUSE</span><h2 id="oh-title">Event</h2></div><span class="ag-pill green" id="oh-lead-count">0 leads</span></div>
+<div class="ag-card-body"><div class="ag-qr-layout"><div>
+<div class="ag-form"><label>Status<select id="oh-status"><option value="scheduled">Scheduled</option><option value="live">Live</option><option value="completed">Completed</option><option value="canceled">Canceled</option></select></label><label>Date &amp; time<input id="oh-edit-event-at" type="datetime-local"></label><label class="wide">Private notes<textarea id="oh-edit-notes" maxlength="3000"></textarea></label></div>
+<div class="ag-form-actions"><button class="ag-btn" id="oh-save" type="button"><i class="fa-solid fa-check"></i> Save event</button><span id="oh-save-note" class="ag-note"></span></div>
+<div class="ag-url"><input id="oh-url" readonly><button class="ag-btn" id="oh-copy" type="button"><i class="fa-solid fa-link"></i> Copy</button></div>
+<p class="ag-note" style="margin:8px 0 0">The public form requires explicit contact consent. Watchdog does not infer ownership, seller intent or relationship from a check-in.</p>
+</div><div class="ag-qr-box" id="oh-qr"></div></div></div>
+</section>
+<section class="ag-card" id="oh-leads-card" hidden>
+<div class="ag-card-head"><div><span>CONSENTED VISITORS</span><h2>Lead list</h2></div><div class="ag-header-actions"><button class="ag-btn" id="oh-export" type="button"><i class="fa-solid fa-file-csv"></i> Export CSV</button><a class="ag-btn primary" href="/agent/contacts"><i class="fa-solid fa-address-book"></i> Open Contact Cleanup</a></div></div>
+<div class="ag-table-wrap"><table class="ag-table"><thead><tr><th>Name</th><th>Contact</th><th>Property request</th><th>Captured</th><th>CRM check</th></tr></thead><tbody id="oh-leads"></tbody></table></div>
+</section>
+</div></div></section>
+</main>
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2/dist/umd/supabase.js"></script><script src="/property/js/supabase-runtime.js"></script><script src="/property/js/supabase-singleton-bridge.js"></script><script src="/property/js/access-guard.js"></script><script src="/property/js/plan-context.js"></script><script src="/property/js/app-shell-2027.js"></script><script src="/property/js/sidemenu.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/qrcodejs/1.0.0/qrcode.min.js"></script><script src="/agent/shared/workflows.js"></script><script src="/agent/open-house/open-house.js"></script>
+</body></html>

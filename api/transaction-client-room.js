@@ -1,0 +1,21 @@
+const crypto=require('crypto');
+const TOKEN_RE=/^[a-f0-9]{64}$/i;
+function backend(){const url=process.env.SUPABASE_URL||process.env.NEXT_PUBLIC_SUPABASE_URL,key=process.env.SUPABASE_SERVICE_ROLE_KEY;if(!url||!key)throw new Error('backend unavailable');return{url,key}}
+async function rest(path,c){const r=await fetch(c.url+'/rest/v1/'+path,{headers:{apikey:c.key,Authorization:'Bearer '+c.key,Accept:'application/json'}});if(!r.ok)throw new Error('rest '+r.status);return r.json()}
+async function sign(bucket,path,c){if(!bucket||!path)return null;const safePath=String(path).split('/').map(encodeURIComponent).join('/'),r=await fetch(c.url+'/storage/v1/object/sign/'+encodeURIComponent(bucket)+'/'+safePath,{method:'POST',headers:{apikey:c.key,Authorization:'Bearer '+c.key,'Content-Type':'application/json'},body:JSON.stringify({expiresIn:900})});if(!r.ok)return null;const j=await r.json();return j.signedURL?c.url+'/storage/v1'+j.signedURL:null}
+module.exports=async function handler(req,res){
+res.setHeader('Content-Type','application/json; charset=utf-8');res.setHeader('Cache-Control','no-store');res.setHeader('X-Robots-Tag','noindex, nofollow, noarchive');
+if(req.method!=='GET'){res.setHeader('Allow','GET');return res.status(405).json({error:'Method not allowed'})}
+const token=String(req.query?.token||'').trim();if(!TOKEN_RE.test(token))return res.status(400).json({error:'Invalid client-room link.'});
+const c=backend(),hash=crypto.createHash('sha256').update(token).digest('hex');
+try{
+ const rooms=await rest('transaction_client_rooms?select=id,transaction_id,owner_user_id,client_label,message,active,expires_at&token_hash=eq.'+hash+'&limit=1',c),room=rooms[0];
+ if(!room||room.active!==true||Date.parse(room.expires_at)<=Date.now())return res.status(404).json({error:'This client room is unavailable or expired.'});
+ const owners=await rest('profiles?select=id,account_role&id=eq.'+encodeURIComponent(room.owner_user_id)+'&limit=1',c),owner=owners[0]||{},ents=await rest('account_entitlements?select=subscription_status,billing_tier,plan_tier&user_id=eq.'+encodeURIComponent(room.owner_user_id)+'&limit=1',c),ent=ents[0]||{},tier=String(ent.billing_tier||ent.plan_tier||'').toLowerCase().replace('pro+','pro_plus'),ownerActive=owner.account_role==='developer'||(['active','trialing','past_due','cancel_scheduled'].includes(String(ent.subscription_status||'').toLowerCase())&&['agent','pro','pro_plus','teams'].includes(tier));if(!ownerActive)return res.status(404).json({error:'This client room is unavailable.'});const txs=await rest('transaction_workspaces?select=id,address,city,state,postal_code,municipality,county,status,contract_date,closing_date,client_label,updated_at&id=eq.'+encodeURIComponent(room.transaction_id)+'&limit=1',c),tx=txs[0];
+ if(!tx)return res.status(404).json({error:'Transaction not available.'});
+ const items=await rest('transaction_items?select=id,item_key,description,state,due_date,sort_order&transaction_id=eq.'+encodeURIComponent(room.transaction_id)+'&client_visible=eq.true&order=sort_order.asc',c);
+ const docs=await rest('transaction_documents?select=id,document_type,document_label,original_name,storage_bucket,storage_path,mime_type,file_size,created_at&transaction_id=eq.'+encodeURIComponent(room.transaction_id)+'&client_visible=eq.true&status=neq.deleted&order=created_at.desc',c);
+ const safeDocs=[];for(const d of docs.slice(0,30)){safeDocs.push({id:d.id,document_type:d.document_type,document_label:d.document_label||d.original_name||'Document',mime_type:d.mime_type,file_size:d.file_size,created_at:d.created_at,url:await sign(d.storage_bucket,d.storage_path,c)})}
+ return res.status(200).json({room:{client_label:room.client_label||tx.client_label||null,message:room.message||null,expires_at:room.expires_at},transaction:{address:tx.address,city:tx.city,state:tx.state,postal_code:tx.postal_code,municipality:tx.municipality,county:tx.county,status:tx.status,contract_date:tx.contract_date,closing_date:tx.closing_date,updated_at:tx.updated_at},milestones:items.map(i=>({id:i.id,key:i.item_key,label:String(i.description||i.item_key||'Milestone').slice(0,240),state:i.state,due_date:i.due_date})),documents:safeDocs});
+}catch(e){console.error('transaction-client-room',e.message);return res.status(500).json({error:'Client room could not load.'})}
+};
