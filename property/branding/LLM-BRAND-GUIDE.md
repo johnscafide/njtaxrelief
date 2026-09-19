@@ -186,6 +186,19 @@ Canonical signed-in app navigation labels are: Dashboard, Property Home, Town Co
 
 The shared `/property/js/sidemenu.js` intentionally no longer fetches `/property/partials/sidemenu.html`. Do not restore that fallback.
 
+### Agent Workspace rule
+
+Authenticated Agent-only tools use the shared Agent Workspace shell in `/agent/shared/`.
+
+- `/agent/shared/agent-workspace.css` owns the internal Agent utility bar, page header, Agent tabs, restrained action hierarchy, focus treatment, and mobile reflow.
+- `/agent/shared/agent-workspace.js` owns staged “Coming soon for Agents” behavior and keeps the page's final Agent presentation layer above feature modules that inject CSS dynamically.
+- `/agent/shared/page-template.html` is the starting shell for future Agent pages.
+- `/agent/contacts/` is the reference implementation.
+- Contacts and Transactions are live destinations. Agent Desk, Marketing, and Integrations remain visible but staged until explicitly released.
+- Do not create a separate marketing-style hero, gradient card wall, decorative orbit, or one-off sub-navigation for each Agent tool.
+- Agent Workspace primary workflow actions use restrained charcoal/dark fill rather than saturated blue. Blue is reserved primarily for focus, selection, and links inside the working product.
+- Page-specific rails, tables, editors, and workflows may differ, but the utility bar, title/action hierarchy, Agent tabs, flat surfaces, and mobile behavior should remain recognizably the same product.
+
 The current brand mark is a Font Awesome dog icon in a 42px rounded tile using a `#183b84` to `#2f6df6` gradient, paired with the Watchdog wordmark.
 
 ## Charts and data
