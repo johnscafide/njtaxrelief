@@ -28,7 +28,7 @@ function ensure(){
     +'<form id="tx-collab-form" class="tx-collab-form">'
     +'<label><span>Email address</span><input name="email" type="email" autocomplete="email" required placeholder="pro@company.com"></label>'
     +'<label><span>Role</span><select name="role" id="tx-collab-role"><optgroup label="Clients"><option value="buyer">Buyer client</option><option value="seller">Seller client</option></optgroup><optgroup label="Professionals"><option value="title">Title / settlement</option><option value="lender">Lender</option><option value="tc">Transaction coordinator</option><option value="attorney">Attorney</option><option value="other">Other professional</option></optgroup></select></label>'
-    +'<div class="tx-collab-scope"><i class="fas fa-shield-halved"></i><div><b id="tx-collab-scope-title">Client Room · view only</b><span id="tx-collab-scope-copy">Buyer and seller clients see only the checklist items and documents you explicitly mark as client-visible below. They cannot upload or edit transaction records.</span></div></div>'
+    +'<div class="tx-collab-scope"><i class="fas fa-shield-halved"></i><div><b id="tx-collab-scope-title">Only this transaction · Client Room</b><span id="tx-collab-scope-copy">Buyer and seller clients see only the checklist items and documents you explicitly mark as client-visible below. They cannot upload or edit transaction records.</span></div></div>'
     +'<button class="tx-collab-send" id="tx-collab-send" type="submit"><i class="fas fa-paper-plane"></i> Create invite</button>'
     +'</form>'
     +'<div class="tx-collab-created" id="tx-collab-created" hidden></div>'
@@ -49,7 +49,7 @@ async function open(){
   var layer=ensure();$('#tx-collab-address').textContent=address();layer.hidden=false;document.body.classList.add('tx-collab-open');
   await load();
 }
-function syncRoleScope(){var role=clean($('#tx-collab-role')&&$('#tx-collab-role').value),clientRole=isClientRole(role),title=$('#tx-collab-scope-title'),copy=$('#tx-collab-scope-copy');if(!title||!copy)return;if(clientRole){title.textContent='Client Room · view only';copy.textContent='Buyer and seller clients see only the checklist items and documents you explicitly mark as client-visible below. They cannot upload or edit transaction records.'}else{title.textContent='Professional collaborator';copy.textContent='Closing professionals can view shared closing context and upload supported closing documents. Access can be revoked at any time.'}}
+function syncRoleScope(){var role=clean($('#tx-collab-role')&&$('#tx-collab-role').value),clientRole=isClientRole(role),title=$('#tx-collab-scope-title'),copy=$('#tx-collab-scope-copy');if(!title||!copy)return;if(clientRole){title.textContent='Only this transaction · Client Room';copy.textContent='Buyer and seller clients see only the checklist items and documents you explicitly mark as client-visible below. They cannot upload or edit transaction records.'}else{title.textContent='Professional collaborator';copy.textContent='Closing professionals can view shared closing context and upload supported closing documents. Access can be revoked at any time.'}}
 async function loadClientShare(){
   var id=txId(),host=$('#tx-client-share-list'),c=client();if(!id||!host||!c)return;
   host.innerHTML='<div class="tx-collab-loading"><i class="fas fa-circle-notch fa-spin"></i> Loading share controls…</div>';
