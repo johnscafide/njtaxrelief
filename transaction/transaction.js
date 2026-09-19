@@ -86,7 +86,14 @@ async function boot(){
     document.body.classList.toggle('tx-agent-view',!evidenceAllowed());
     const kpis=$$('.tx-kpis article');[1,3].forEach(i=>{kpis[i].hidden=!evidenceAllowed()});
     document.dispatchEvent(new CustomEvent('watchdog:transaction-access-ready'));
-    showApp();bind();await loadTransactions();
+    var launch=new URLSearchParams(location.search),selectId=clean(launch.get('select'));
+    showApp();bind();await loadTransactions(selectId||undefined);
+    var prefillAddress=clean(launch.get('prefill_address'));
+    if(prefillAddress){
+      window.setTimeout(function(){openTransactionModal({address:prefillAddress,side:clean(launch.get('prefill_side'))||'buyer',client_label:clean(launch.get('prefill_client'))||''})},60);
+    }else if(selectId&&launch.get('client_room')==='1'){
+      var attempts=0,timer=window.setInterval(function(){attempts++;if(window.WatchdogTransactionCollaboration&&typeof window.WatchdogTransactionCollaboration.open==='function'){window.clearInterval(timer);window.WatchdogTransactionCollaboration.open()}else if(attempts>30)window.clearInterval(timer)},150);
+    }
   }catch(error){console.error(error);showGate('Watchdog could not verify your transaction workspace right now. Please refresh or return to the dashboard.')}
 }
 
