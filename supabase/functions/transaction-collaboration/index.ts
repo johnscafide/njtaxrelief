@@ -52,7 +52,8 @@ async function ownerTier(admin:any,ownerId:string){
     admin.from("profiles").select("account_role").eq("id",ownerId).maybeSingle()
   ]);
   const plan = String(profile?.account_role||"")==="developer" ? "developer" : String(ent?.plan_tier||"standard");
-  return {plan,allowed:(RANK[plan]??0)>=RANK.pro_plus};
+  const rank=RANK[plan]??0;
+  return {plan,clientAllowed:rank>=RANK.agent,professionalAllowed:rank>=RANK.pro_plus};
 }
 async function ownedWorkspace(admin:any,txId:string,ownerId:string){
   const {data}=await admin.from("transaction_workspaces").select("*").eq("id",txId).eq("user_id",ownerId).maybeSingle();
@@ -66,8 +67,8 @@ async function membership(admin:any,txId:string,memberId:string){
 async function requireShared(admin:any,txId:string,memberId:string){
   const m=await membership(admin,txId,memberId);
   if(!m)return {error:"This transaction is not shared with your account.",status:403};
-  const tier=await ownerTier(admin,String(m.owner_user_id));
-  if(!tier.allowed)return {error:"The transaction owner no longer has collaboration access.",status:403};
+  const tier=await ownerTier(admin,String(m.owner_user_id)),clientRole=CLIENT_ROLE.has(String(m.role||""));
+  if(clientRole?!tier.clientAllowed:!tier.professionalAllowed)return {error:"The transaction owner no longer has collaboration access.",status:403};
   return {membership:m,tier};
 }
 function publicWorkspace(w:Row){
@@ -100,7 +101,9 @@ Deno.serve(async(req:Request)=>{
     const txId=clean(body.transaction_id,80), invited=email(body.email), role=clean(body.role,24);
     if(!txId||!invited||!invited.includes("@")||!ROLE.has(role))return respond(req,400,{error:"transaction_id, email and shared role are required"});
     const w=await ownedWorkspace(admin,txId,user.id);if(!w)return respond(req,404,{error:"Transaction not found"});
-    const tier=await ownerTier(admin,user.id);if(!tier.allowed)return respond(req,403,{error:"Pro+ or higher is required to share a transaction"});
+    const tier=await ownerTier(admin,user.id),clientRole=CLIENT_ROLE.has(role);
+    if(clientRole&&!tier.clientAllowed)return respond(req,403,{error:"Agent or higher is required to create a Client Room"});
+    if(!clientRole&&!tier.professionalAllowed)return respond(req,403,{error:"Pro+ or higher is required to invite closing professionals"});
     await admin.from("transaction_professional_invites").update({revoked_at:new Date().toISOString(),updated_at:new Date().toISOString()})
       .eq("transaction_id",txId).eq("owner_user_id",user.id).eq("invited_email",invited).is("accepted_at",null).is("revoked_at",null);
     const token=randomToken(), tokenHash=await hashToken(token), expires=new Date(Date.now()+30*864e5).toISOString();
@@ -121,7 +124,7 @@ Deno.serve(async(req:Request)=>{
   if(action==="list_collaborators"){
     const txId=clean(body.transaction_id,80);
     const w=await ownedWorkspace(admin,txId,user.id);if(!w)return respond(req,404,{error:"Transaction not found"});
-    const tier=await ownerTier(admin,user.id);if(!tier.allowed)return respond(req,403,{error:"Pro+ or higher is required"});
+    const tier=await ownerTier(admin,user.id);if(!tier.clientAllowed)return respond(req,403,{error:"Agent or higher is required"});
     const [ir,mr]=await Promise.all([
       admin.from("transaction_professional_invites").select("id,invited_email,role,permission,expires_at,accepted_at,revoked_at,created_at")
         .eq("transaction_id",txId).eq("owner_user_id",user.id).order("created_at",{ascending:false}),
@@ -156,7 +159,8 @@ Deno.serve(async(req:Request)=>{
     const {data:inv}=await admin.from("transaction_professional_invites").select("*").eq("token_hash",tokenHash).maybeSingle();
     if(!inv||inv.revoked_at||new Date(inv.expires_at).getTime()<Date.now())return respond(req,410,{error:"This invitation is expired or no longer available"});
     if(email(user.email)!==email(inv.invited_email))return respond(req,403,{error:"This invitation was sent to a different email address",invited_hint:emailHint(inv.invited_email)});
-    const tier=await ownerTier(admin,String(inv.owner_user_id));if(!tier.allowed)return respond(req,403,{error:"The transaction owner no longer has collaboration access"});
+    const tier=await ownerTier(admin,String(inv.owner_user_id)),clientRole=CLIENT_ROLE.has(String(inv.role||""));
+    if(clientRole?!tier.clientAllowed:!tier.professionalAllowed)return respond(req,403,{error:"The transaction owner no longer has collaboration access"});
     const now=new Date().toISOString();
     const {data:m,error}=await admin.from("transaction_professional_memberships").upsert({
       transaction_id:inv.transaction_id,owner_user_id:inv.owner_user_id,member_user_id:user.id,
