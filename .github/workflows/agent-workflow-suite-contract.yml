@@ -18,6 +18,7 @@ on:
       - 'scripts/indexnow-submit.mjs'
       - 'supabase/migrations/20260919180500_agent_workflow_foundations.sql'
       - 'supabase/migrations/20260919181500_agent_workspace_client_rooms.sql'
+      - 'supabase/migrations/20260919182500_agent_buyer_diligence_snapshot.sql'
       - 'property/tests/agent-workflow-suite-contract.mjs'
       - '.github/workflows/agent-workflow-suite-contract.yml'
   workflow_dispatch:
