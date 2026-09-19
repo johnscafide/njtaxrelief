@@ -196,3 +196,4 @@ body[data-sidebar-page="agent-contacts"] .acx-hero-visual:after{width:150px;heig
   .acx-name-modal footer .acx-btn{width:100%}
 }
 @media(prefers-reduced-motion:reduce){.acx-name-choice{transition:none}}
+\n.acx-start-actions{display:flex;gap:8px;justify-content:center;flex-wrap:wrap}.acx-start-actions .acx-btn{min-width:150px}\n
