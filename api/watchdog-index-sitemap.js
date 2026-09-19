@@ -15,7 +15,14 @@ const SOURCE_SITEMAPS = [
 const PRIVATE_PREFIXES = [
   '/account',
   '/agent-control',
-  '/agent-desk',\n  '/agent/contacts',\n  '/agent/listing-prep',\n  '/agent/buyers',\n  '/agent/open-house',\n  '/transaction',\n  '/client-room',\n  '/open-house',
+  '/agent-desk',
+  '/agent/contacts',
+  '/agent/listing-prep',
+  '/agent/buyers',
+  '/agent/open-house',
+  '/transaction',
+  '/client-room',
+  '/open-house',
   '/analytics',
   '/backoffice',
   '/compare',
@@ -212,9 +219,15 @@ function renderXml(rows) {
     if (row.changefreq) parts.push(`    <changefreq>${xmlEscape(row.changefreq)}</changefreq>`);
     if (row.priority) parts.push(`    <priority>${xmlEscape(row.priority)}</priority>`);
     parts.push('  </url>');
-    return parts.join('\n');
+    return parts.join('
+');
   });
-  return `<?xml version="1.0" encoding="UTF-8"?>\n<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">\n${items.join('\n')}\n</urlset>\n`;
+  return `<?xml version="1.0" encoding="UTF-8"?>
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
+${items.join('
+')}
+</urlset>
+`;
 }
 
 module.exports = async function handler(req, res) {
