@@ -91,7 +91,7 @@ async function createInvite(e){
     var created=$('#tx-collab-created');created.hidden=false;created.innerHTML='<div><i class="fas fa-circle-check"></i><span><b>Invite ready</b><small>'+esc(inv.invited_email)+' · '+esc(roleLabel(inv.role))+'</small></span></div>'
       +'<label>Secure invite link<input id="tx-collab-link" readonly value="'+esc(url)+'"></label>'
       +'<div class="tx-collab-created-actions"><button type="button" data-collab-action="copy"><i class="fas fa-link"></i> Copy link</button><button type="button" data-collab-action="email"><i class="fas fa-envelope"></i> Email invite</button></div>';
-    form.reset();toast('Transaction invite created.');await load();
+    form.reset();syncRoleScope();toast('Transaction invite created.');await load();
   }catch(err){toast(err.message||'Could not create invite.')}finally{busy=false;button.disabled=false;button.innerHTML='<i class="fas fa-paper-plane"></i> Create invite'}
 }
 async function revoke(kind,id){
