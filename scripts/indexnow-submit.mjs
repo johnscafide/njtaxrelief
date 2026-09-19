@@ -9,7 +9,7 @@ const INDEXNOW_ENDPOINT = process.env.INDEXNOW_ENDPOINT || 'https://api.indexnow
 const PRIVATE_PREFIXES = [
   '/account',
   '/agent-control',
-  '/agent-desk',
+  '/agent-desk',\n  '/agent/contacts',\n  '/agent/listing-prep',\n  '/agent/buyers',\n  '/agent/open-house',\n  '/transaction',\n  '/client-room',\n  '/open-house',
   '/analytics',
   '/backoffice',
   '/compare',
