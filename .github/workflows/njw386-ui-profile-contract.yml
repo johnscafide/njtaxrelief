@@ -1,0 +1,43 @@
+name: NJW-386 UI and profile split contract
+
+on:
+  pull_request:
+    paths:
+      - 'property/js/pwa.js'
+      - 'transaction/index.html'
+      - 'property/account/**'
+      - 'property/js/account-profile.js'
+      - 'property/js/account-reusable-profile.js'
+      - 'property/js/agent-branding-profile.js'
+      - 'property/js/agent-vanity-profile.js'
+      - 'property/js/agent-portal-qr.js'
+      - 'property/js/professional-license-verification.js'
+      - 'property/css/account-profile.css'
+      - 'middleware.js'
+      - 'vercel.json'
+      - 'property/tests/njw386-profile-pwa-transaction-contract.mjs'
+      - '.github/workflows/njw386-ui-profile-contract.yml'
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  contract:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+      - name: Browser JavaScript syntax
+        run: |
+          node --check property/js/pwa.js
+          node --check property/js/account-profile.js
+          node --check property/js/account-reusable-profile.js
+          node --check property/js/agent-branding-profile.js
+          node --check property/js/agent-vanity-profile.js
+          node --check property/js/agent-portal-qr.js
+          node --check property/js/professional-license-verification.js
+      - name: Regression contract
+        run: node property/tests/njw386-profile-pwa-transaction-contract.mjs
