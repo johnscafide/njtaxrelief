@@ -34,9 +34,9 @@ for(const [name,source] of Object.entries({
 
 for(const page of [files.listingPage,files.buyersPage,files.openPage]){
   assert.match(page,/data-access-require="agent"/,'private Agent workflow must require Agent access');
-  assert.match(page,//property/js/access-guard.js/,'private Agent workflow must load the canonical access guard');
+  assert.ok(page.includes('/property/js/access-guard.js'),'private Agent workflow must load the canonical access guard');
 }
-assert.match(files.shared,//api/agent-property-search/,'Agent property search must use a server-authorized API boundary');
+assert.ok(files.shared.includes('/api/agent-property-search'),'Agent property search must use a server-authorized API boundary');
 assert.doesNotMatch(files.shared,/from\(['"]property_lookups['"]\)/,'browser workflow must not query statewide property_lookups directly');
 assert.match(files.propertyApi,/has_watchdog_plan/,'property search API must verify Agent entitlement');
 assert.match(files.propertyApi,/property_lookups/,'server boundary must query the governed property cache');
@@ -67,7 +67,7 @@ assert.doesNotMatch(files.clientApi,/disclosure|payload|source_url|source_label/
 assert.match(files.clientApi,/account_entitlements/,'public Client Room must stop when Agent entitlement is inactive');
 assert.match(files.clientOwner,/rotate_transaction_client_room_v1/,'owner Client Room controls must rotate secure links through governed RPC');
 assert.match(files.clientOwner,/client_visible/,'owner UI must explicitly toggle sharing flags');
-assert.match(files.txPage,//transaction/client-room\.js/,'Transaction page must load Client Room controls');
+assert.ok(files.txPage.includes('/transaction/client-room.js'),'Transaction page must load Client Room controls');
 assert.match(files.txV2,/data-client-room="open"/,'Transaction header must expose Client Room action');
 assert.match(files.clientPage,/noindex,nofollow,noarchive/,'public Client Room must be non-indexable');
 
