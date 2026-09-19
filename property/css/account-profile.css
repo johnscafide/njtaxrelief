@@ -19,3 +19,8 @@ body[data-account-profile-mode="professional"] [data-acp-housing]{display:none!i
 .ac-profile-route-back:hover{color:#1f2930}
 .ac-profile-route-shell .ac-section{margin-top:0}
 @media(max-width:720px){.acp-profile-route-grid{grid-template-columns:1fr}.ac-profile-route-shell{padding:16px 16px 40px}.acp-profile-route-card{grid-template-columns:40px minmax(0,1fr);padding:16px}.acp-route-icon{width:38px;height:38px}}
+
+.acp-profile-context{grid-column:1/-1;padding:11px 12px;border:1px solid var(--border);border-radius:8px;background:#fff}
+.acp-profile-context span{display:block;color:var(--text-muted);font-size:10px;font-weight:800;letter-spacing:.08em}
+.acp-profile-context b{display:block;margin-top:3px;color:var(--ink);font-size:13px}
+.acp-profile-context small{display:block;margin-top:3px;color:var(--text-muted);font-size:11px}
