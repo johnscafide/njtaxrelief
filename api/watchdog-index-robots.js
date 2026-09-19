@@ -92,8 +92,7 @@ module.exports = function handler(req, res) {
     `Sitemap: ${CANONICAL_ORIGIN}/sitemap-calculators.xml`,
     `Sitemap: ${CANONICAL_ORIGIN}/sitemap-statistics.xml`,
     ''
-  ].join('
-');
+  ].join('\n');
 
   res.statusCode = 200;
   res.setHeader('Content-Type', 'text/plain; charset=utf-8');
