@@ -1,9 +1,12 @@
 {
   "manifest_version": 3,
   "name": "Watchdog CRM Companion",
-  "version": "0.2.1",
-  "description": "Bring sourced Watchdog property intelligence into the BoldTrail contact you already have open.",
-  "permissions": ["storage", "activeTab"],
+  "version": "0.3.0",
+  "description": "Persistent Watchdog Agent Command Bar and sourced property intelligence inside BoldTrail.",
+  "permissions": [
+    "storage",
+    "activeTab"
+  ],
   "host_permissions": [
     "https://app.boldtrail.com/*",
     "https://uvkvaxljhhngydvlrzom.supabase.co/functions/v1/watchdog-crm-companion"
@@ -14,8 +17,15 @@
   },
   "content_scripts": [
     {
-      "matches": ["https://app.boldtrail.com/*"],
-      "js": ["content.js", "agent-intel.js", "writer-v021.js"],
+      "matches": [
+        "https://app.boldtrail.com/*"
+      ],
+      "js": [
+        "content.js",
+        "agent-intel.js",
+        "writer-v021.js",
+        "command-bar.js"
+      ],
       "run_at": "document_idle"
     },
     {
@@ -23,8 +33,13 @@
         "https://watchdogindex.com/agent/contacts/*",
         "https://www.watchdogindex.com/agent/contacts/*"
       ],
-      "js": ["site-bridge.js"],
+      "js": [
+        "site-bridge.js"
+      ],
       "run_at": "document_start"
     }
-  ]
+  ],
+  "background": {
+    "service_worker": "background.js"
+  }
 }
