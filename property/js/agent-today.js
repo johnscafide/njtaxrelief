@@ -10,6 +10,7 @@ function relativeDate(v){if(!v)return'';var d=new Date(v),now=new Date(),days=Ma
 function ensure(){
   var app=$('#ad-app');if(!app||app.hidden)return null;var current=$('#ad-today-work');if(current)return current;
   var nav=app.querySelector('.ad-companion-nav'),section=document.createElement('section');section.id='ad-today-work';section.className='ad-today-work';
+  // content-architecture: dynamic — Today is an authenticated queue assembled from live transaction, lead, listing-prep and buyer-workflow state.
   section.innerHTML='<header><div><span>TODAY</span><h2>What needs your attention?</h2><p>Client work, deadlines and new consented leads in one queue. Watchdog does not infer that a person intends to buy or sell.</p></div><a href="/agent/workflows"><i class="fas fa-grid-2"></i> Agent workflows</a></header><div class="ad-today-summary" id="ad-today-summary"></div><div class="ad-today-list" id="ad-today-list"><p class="ad-control-loading">Building today’s queue…</p></div>';
   if(nav)nav.insertAdjacentElement('afterend',section);else app.prepend(section);return section
 }
@@ -37,7 +38,9 @@ async function load(){
 }
 function render(queue,counts){
   var summary=$('#ad-today-summary'),list=$('#ad-today-list');if(!summary||!list)return;
+  // content-architecture: dynamic — summary copy is computed from the signed-in agent's current queue counts.
   summary.innerHTML='<span><b>'+counts.closings+'</b> active transactions</span><span><b>'+counts.leads+'</b> new leads · 7 days</span><span><b>'+counts.packs+'</b> listing packs in progress</span><span><b>'+counts.shortlists+'</b> buyer shortlists</span>';
+  // content-architecture: dynamic — each queue row is rendered from live, account-scoped Agent workflow data.
   list.innerHTML=queue.length?queue.map(function(x){return'<a class="ad-today-row" href="'+esc(x.href)+'"><span class="ad-today-icon"><i class="fas '+esc(x.icon)+'"></i></span><span class="ad-today-copy"><small>'+esc(x.kind)+'</small><b>'+esc(x.title)+'</b><em>'+esc(x.detail)+'</em></span><i class="fas fa-chevron-right"></i></a>'}).join(''):'<div class="ad-today-empty"><i class="fas fa-circle-check"></i><b>No urgent Agent tasks are queued.</b><span>Use Agent Workflows to start listing prep, buyer comparisons or an open house.</span></div>';
 }
 function start(){var tries=0,t=setInterval(function(){tries++;if(ensure()){clearInterval(t);load()}else if(tries>80)clearInterval(t)},150)}
