@@ -30,4 +30,6 @@ assert.ok(migration.includes('account_entitlements_trial_training_sync'),'Future
 assert.ok(migration.includes("subscription_status = 'trialing'"),'Training requirement must key off a real trialing entitlement.');
 assert.ok(middleware.includes("'/agent/training'"),'Canonical host must serve Agent Training directly instead of proxying it through the clean-page adapter.');
 assert.ok(canonicalMirror.includes('Watchdog Agent Academy'),'Canonical property mirror must contain the Agent Training page as a safe compatibility fallback.');
+assert.ok(html.includes('/agent/assets/platform-live.png')&&html.includes('Actual Watchdog screen'),'Training should use the existing real Watchdog screenshot where it accurately represents the product.');
+assert.ok(html.includes('Illustrative training view'),'Illustrative private-workspace visuals must be explicitly labeled and never presented as live screenshots.');
 console.log('trial-training-contract: ok');
