@@ -5,12 +5,14 @@ const VERCEL_AUTH_MARKERS = [
   /continue with saml sso/i,
   /continue with passkey/i,
   /_vercel\/sso/i,
-  /vercel\.com\/(?:login|sso)/i
+  /\/sso-api(?:[?"'\\s]|$)/i,
+  /vercel\.com\/(?:login|sso)/i,
+  /data-testid=["']login\//i
 ];
 const CONTACT_POLICY_SCRIPT = '<script src="/property/js/contact-routing-policy.js" data-watchdog-contact-policy-runtime="1"></script>';
 const SUPABASE_GUARD_SCRIPT = '<script src="/property/js/supabase-client-singleton-guard.js" data-watchdog-supabase-singleton-guard="1"></script>';
 const AI_REFERRAL_SCRIPT = '<script src="/property/js/ai-referral-analytics.js" data-watchdog-ai-referral-runtime="1" defer></script>';
-const AI_REFERRAL_PRIVATE_PREFIXES = ['/account','/agent-control','/agent-desk','/analytics','/backoffice','/compare','/dashboard','/data-center','/data-workbench','/developer','/developer-data','/diagnostics','/farm-builder','/growth','/home','/insights/admin','/integrations','/intelligence','/logs','/marketing-studio','/newsletter-studio','/onboarding','/report-builder','/watchlist','/whitepapers','/workbench'];
+const AI_REFERRAL_PRIVATE_PREFIXES = ['/account','/agent','/agent-control','/agent-desk','/transaction','/analytics','/backoffice','/compare','/dashboard','/data-center','/data-workbench','/developer','/developer-data','/diagnostics','/farm-builder','/growth','/home','/insights/admin','/integrations','/intelligence','/logs','/marketing-studio','/newsletter-studio','/onboarding','/report-builder','/watchlist','/whitepapers','/workbench'];
 const ENTITY_GRAPH_ID = 'watchdog-entity-graph';
 const ENTITY_GRAPH = `<script type="application/ld+json" id="${ENTITY_GRAPH_ID}">
 {
