@@ -8,6 +8,7 @@ const PRIVATE_ROUTES = [
   '/agent/listing-prep',
   '/agent/buyers',
   '/agent/open-house',
+  '/agent/training',
   '/transaction',
   '/client-room',
   '/open-house',
