@@ -10,6 +10,7 @@
   var previewHost = hostname === 'localhost' || hostname === '127.0.0.1' || /\.vercel\.app$/.test(hostname);
   var cleanWatchdogHost = hostname === 'www.watchdogindex.com' || hostname === 'watchdogindex.com';
   var dashboardPath = cleanWatchdogHost ? '/dashboard' : '/property/dashboard';
+  var trainingPath = '/agent/training/';
   var client;
 
   if (previewHost && window.supabase && typeof window.supabase.createClient === 'function' && !window.supabase.__watchdogPreviewWrapped) {
@@ -78,12 +79,34 @@
         var allowed = required === 'standard' || isDeveloper || (paidActive && order[plan] >= (order[required] == null ? 999 : order[required]));
         if (required === 'developer' && !isDeveloper) allowed = false;
         if (!allowed) { location.replace(destination('restricted')); throw new Error('Plan access required'); }
-        if (isDeveloper) {
-          window.NJPTRDeveloperConfirmed = true;
-          document.dispatchEvent(new CustomEvent('watchdog:developer-confirmed'));
+
+        function finishAccess() {
+          if (isDeveloper) {
+            window.NJPTRDeveloperConfirmed = true;
+            document.dispatchEvent(new CustomEvent('watchdog:developer-confirmed'));
+          }
+          reveal();
+          return { user: user, developer: isDeveloper, entitlement: entitlement || null, plan: plan };
         }
-        reveal();
-        return { user: user, developer: isDeveloper, entitlement: entitlement || null, plan: plan };
+
+        var pagePath = logicalPath(location.pathname).replace(/\/+$/, '');
+        if (!isDeveloper && status === 'trialing' && pagePath !== '/agent/training') {
+          return sb().rpc('get_my_agent_training_state').then(function (trainingResult) {
+            if (trainingResult.error) {
+              console.warn('[Watchdog] trial training gate unavailable:', trainingResult.error.message || trainingResult.error);
+              return finishAccess();
+            }
+            var training = Array.isArray(trainingResult.data) ? trainingResult.data[0] : trainingResult.data;
+            if (training && training.required && !training.completed) {
+              var returnTo = location.pathname + location.search + location.hash;
+              location.replace(trainingPath + '?return=' + encodeURIComponent(returnTo));
+              throw new Error('Training required');
+            }
+            return finishAccess();
+          });
+        }
+
+        return finishAccess();
       });
     }).catch(function (error) {
       if (!/required$/.test(error.message || '')) location.replace(destination('restricted'));
