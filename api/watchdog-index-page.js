@@ -3,6 +3,8 @@ const CANONICAL_ORIGIN = `https://${CANONICAL_HOST}`;
 const CONSENT_SCRIPT = '<script src="/property/js/watchdog-consent.js" data-watchdog-consent-runtime="1"></script>';
 
 const NOINDEX_PATH_PREFIXES = [
+  '/agent',
+  '/transaction',
   '/data-center',
   '/data-workbench',
   '/developer-data',
