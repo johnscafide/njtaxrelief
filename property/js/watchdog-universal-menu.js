@@ -5,7 +5,7 @@
   if(window.__WATCHDOG_UNIVERSAL_MENU__) return;
   window.__WATCHDOG_UNIVERSAL_MENU__ = true;
 
-  var VERSION = '20260915a';
+  var VERSION = '20260920a';
   /* CSS has a longer browser/CDN cache lifetime than this runtime. Keep a
      separate asset revision so interaction fixes can invalidate cached chrome
      immediately without coupling that cache key to the menu data contract. */
@@ -199,6 +199,7 @@
         '<a href="' + route('/account') + '"><i class="fas fa-user-pen"></i><span><b>Edit profile &amp; role</b><small>Profile, profession and preferences</small></span></a>' +
         '<button type="button" data-wd-universal="invite"><i class="fas fa-user-plus"></i><span><b>Invite others</b><small>Share your Watchdog referral link</small></span></button>' +
         '<a href="' + route('/account') + '"><i class="fas fa-credit-card"></i><span><b>Account &amp; billing</b><small>Plan, subscription and billing</small></span></a>' +
+        '<a href="/agent/training/"><i class="fas fa-graduation-cap"></i><span><b>Training Center</b><small>Review Agent and Pro+ workflows anytime</small></span></a>' +
         '<a href="' + route('/home') + '"><i class="fas fa-house"></i><span><b>Property Home</b><small>Your saved-home workspace</small></span></a>' +
         developerToolsHtml() +
       '</nav><button class="wd-universal-signout" type="button" data-wd-universal="signout"><i class="fas fa-arrow-right-from-bracket"></i> Sign out</button>';
