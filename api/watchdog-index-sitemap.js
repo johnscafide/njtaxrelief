@@ -20,6 +20,7 @@ const PRIVATE_PREFIXES = [
   '/agent/listing-prep',
   '/agent/buyers',
   '/agent/open-house',
+  '/agent/training',
   '/transaction',
   '/client-room',
   '/open-house',
