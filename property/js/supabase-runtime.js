@@ -37,6 +37,7 @@
   var routePrefix = cleanWatchdogHost ? '' : '/property';
   var dashboardPath = routePrefix + '/dashboard/';
   var onboardingPath = routePrefix + '/onboarding/';
+  var trainingPath = '/agent/training/';
   var selected = previewHost ? staging : production;
   var client = null;
   var providerDefaults = {
@@ -274,7 +275,7 @@
   function isProtectedMemberPath() {
     var path = logicalPath(String(location.pathname || '')).replace(/\/+$/, '');
     if (path === '/onboarding' || path.indexOf('/onboarding/') === 0) return false;
-    return /^\/(dashboard|home|account|agent-control|agent-desk|analytics|integrations|marketing-studio|pro-hub|data-center|backoffice|pulse|compare|reports|watchlist)(?:\/|$)/.test(path);
+    return /^\/(dashboard|home|account|agent-control|agent-desk|agent|transaction|analytics|integrations|marketing-studio|pro-hub|data-center|backoffice|pulse|compare|reports|watchlist)(?:\/|$)/.test(path);
   }
 
   function clearGate() {
@@ -307,7 +308,27 @@
           location.replace(onboardingRedirect(location.pathname + location.search + location.hash));
           return;
         }
-        clearGate();
+
+        var memberPath = logicalPath(String(location.pathname || '')).replace(/\/+$/, '');
+        if (memberPath === '/agent/training') {
+          clearGate();
+          return;
+        }
+
+        return guardClient.rpc('get_my_agent_training_state').then(function (trainingResult) {
+          if (trainingResult.error) {
+            console.warn('[Watchdog] trial training gate unavailable:', trainingResult.error.message || trainingResult.error);
+            clearGate();
+            return;
+          }
+          var training = Array.isArray(trainingResult.data) ? trainingResult.data[0] : trainingResult.data;
+          if (training && training.required && !training.completed) {
+            var returnTo = location.pathname + location.search + location.hash;
+            location.replace(trainingPath + '?return=' + encodeURIComponent(returnTo));
+            return;
+          }
+          clearGate();
+        });
       });
     }).catch(function (error) {
       console.warn('[Watchdog] onboarding gate check failed:', error && error.message || error);
