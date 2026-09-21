@@ -9,12 +9,14 @@
    already in memory on window.WD. Nothing here fetches, and nothing here
    invents a number:
 
-     1. Left sidebar, built from WatchdogUniversalMenu.items() so the links
-        and plan gating stay correct without being duplicated here.
-     2. Score gauge in the page header, with the real town peer median as a
+     1. Score gauge in the page header, with the real town peer median as a
         marker (WD.S.scores[pin].peer).
-     3. Gap-by-property chart from WD.gapFor(p), on a domain measured from
+     2. Gap-by-property chart from WD.gapFor(p), on a domain measured from
         the actual values rather than a fixed scale.
+
+   Navigation is intentionally not created here. The shared Watchdog header,
+   universal menu and public-nav runtime own dashboard navigation on every
+   viewport (NJW-403 / NJW-404).
 
    Deliberately NOT here: a score-over-time chart. score_observations stopped
    receiving ROBUST-v1 rows on 2026-08-21, so the series is six points ending
@@ -302,7 +304,6 @@
   /* ------------------------------------------------------------------ */
 
   function paint() {
-    try { buildSidebar(); } catch (e) { console.warn('[watchdog] spike sidebar', e); }
     try { buildGauge(); } catch (e) { console.warn('[watchdog] spike gauge', e); }
     try { buildGapChart(); } catch (e) { console.warn('[watchdog] spike gap chart', e); }
   }
