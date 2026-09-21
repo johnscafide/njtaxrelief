@@ -218,8 +218,9 @@ function start(){
     var csv=out.map(function(r){return r.map(function(v){return'"'+String(v==null?'':v).replace(/"/g,'""')+'"';}).join(',');}).join('\n'),url=URL.createObjectURL(new Blob([csv],{type:'text/csv;charset=utf-8'})),a=d.createElement('a');a.href=url;a.download='watchdog-portfolio.csv';d.body.appendChild(a);a.click();a.remove();setTimeout(function(){URL.revokeObjectURL(url);},1000);WD.toast('Exported '+WD.filtered().length+' properties');
   }
   function openMoreMenu(){
-    var trigger=d.querySelector('.wdx-menu,.wd4-menu,[data-wd-menu-toggle]');
-    if(trigger&&typeof trigger.click==='function')trigger.click();else location.href='/property/profile';
+    if(w.WatchdogPublicNav&&typeof w.WatchdogPublicNav.open==='function'){w.WatchdogPublicNav.open('main');return;}
+    var trigger=d.querySelector('#wd-menu-trigger,.wdx-menu,.wd4-menu,[data-wd-menu-toggle]');
+    if(trigger&&typeof trigger.click==='function')trigger.click();else location.href='/property/account';
   }
   function onClick(ev){
     if(!ev.target||!ev.target.closest)return;
