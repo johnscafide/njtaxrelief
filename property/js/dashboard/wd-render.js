@@ -227,7 +227,7 @@ function start(){
     if(a==='export')exportCsv();else if(a==='county')cycleCounty();else if(a==='mobile-more')openMoreMenu();else if(a==='notifications'){var n=d.querySelector('[data-wdx-notifications],#wdx-notifications,.wdx-icon');if(n&&typeof n.click==='function')n.click();}
   }
   function onSubmit(ev){
-    if(ev.target&&ev.target.id==='wdd-command'){ev.preventDefault();var input=H.el('wdd-command-input'),q=String(input&&input.value||'').trim();location.href='/property/'+(q?'?q='+encodeURIComponent(q):'');}
+    if(ev.target&&ev.target.id==='wdd-command'){ev.preventDefault();var input=H.el('wdd-command-input'),q=String(input&&input.value||'').trim();location.href='/property/'+(q?'?address='+encodeURIComponent(q):'');}
   }
   function onKeydown(ev){
     if((ev.metaKey||ev.ctrlKey)&&String(ev.key).toLowerCase()==='k'){var input=H.el('wdd-command-input');if(input){ev.preventDefault();input.focus();}}
