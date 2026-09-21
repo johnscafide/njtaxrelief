@@ -1,0 +1,42 @@
+{
+  "checked_at": "2026-09-21T13:26:51Z",
+  "registry_version": "2026-09-14.2",
+  "evidence_policy": "Only direct first-party telemetry, official platform documentation, and observable public retrieval are recorded. Public web retrieval is not labeled as a proprietary AI citation result.",
+  "first_party_ai_referral_sessions_30d": [
+    {"platform":"ChatGPT","first_seen":"2026-09-20T14:07:40Z","landing_path":"/beta","attribution":"utm_source=chatgpt.com","classification":"referral, not citation"},
+    {"platform":"ChatGPT","first_seen":"2026-09-20T14:04:30Z","landing_path":"/beta","attribution":"utm_source=chatgpt.com","classification":"referral, not citation"},
+    {"platform":"ChatGPT","first_seen":"2026-09-15T17:04:36Z","landing_path":"/beta","attribution":"utm_source=chatgpt.com","classification":"referral, not citation"},
+    {"platform":"ChatGPT","first_seen":"2026-09-15T16:04:37Z","landing_path":"/beta","attribution":"utm_source=chatgpt.com","classification":"referral, not citation"},
+    {"platform":"ChatGPT","first_seen":"2026-09-15T16:00:19Z","landing_path":"/beta","attribution":"utm_source=chatgpt.com","classification":"referral, not citation"},
+    {"platform":"Microsoft Copilot","first_seen":"2026-09-15T15:49:40Z","landing_path":"/","attribution":"referrer=copilot.microsoft.com; utm_source=copilot.com","classification":"referral, not citation"},
+    {"platform":"ChatGPT","first_seen":"2026-09-13T15:58:29Z","landing_path":"/insights/south-jersey-housing-market-summer-2026","attribution":"referrer=chatgpt.com; utm_source=chatgpt.com","classification":"referral, not citation"},
+    {"platform":"Claude","first_seen":"2026-09-08T19:54:19Z","landing_path":"/","attribution":"referrer=claude.ai","classification":"referral, not citation; two near-simultaneous sessions observed"}
+  ],
+  "public_retrieval_baseline": {
+    "brand_entity": {"watchdog_surfaced":true,"urls":["https://www.watchdogindex.com/","https://www.watchdogindex.com/faq"]},
+    "chapter_123": {"watchdog_surfaced":true,"urls":["https://www.watchdogindex.com/insights/equalization-ratios"],"note":"Watchdog surfaced for the Chapter 123/equalization topic, but not the target glossary URL in the observed result set."},
+    "assessed_vs_market": {"watchdog_surfaced":true,"urls":["https://www.watchdogindex.com/insights/equalization-ratios"]},
+    "revaluation": {"watchdog_surfaced":true,"urls":["https://www.watchdogindex.com/insights/2026-revaluation-reassessment-list"]},
+    "trust_methodology": {"watchdog_surfaced":true,"urls":["https://www.watchdogindex.com/robust/uniformity/"]},
+    "senior_relief": {"watchdog_surfaced":false,"competing_sources":["NJ Division of Taxation","Kiplinger"]},
+    "tax_bill": {"watchdog_surfaced":false},
+    "professional_tool": {"watchdog_surfaced":false},
+    "propertyshark_alternative": {"watchdog_surfaced":false},
+    "propstream_alternative": {"watchdog_surfaced":false}
+  },
+  "official_platform_changes": [
+    {"platform":"OpenAI","finding":"OAI-SearchBot remains the documented crawler for ChatGPT Search discovery. A new advertiser-specific OAI-AdsBot is documented for ChatGPT Ads landing-page validation; this does not justify changing Watchdog search crawler policy unless/when Watchdog runs ChatGPT ads."},
+    {"platform":"Google","finding":"Preferred Sources is now available in AI Mode and AI Overviews. Google also introduced a Highly Cited treatment for original/influential coverage; this strengthens the case for original, evidence-rich Watchdog reporting rather than generic GEO pages."},
+    {"platform":"Bing","finding":"AI Performance remains the authoritative first-party Microsoft surface for citation counts, cited URLs, grounding queries and trends."},
+    {"platform":"Apple","finding":"Applebot remains the search/Siri/Spotlight/Safari discovery crawler; Applebot-Extended remains a separate foundation-model training control."},
+    {"platform":"Grok","finding":"No official publisher/search crawler contract sufficient to justify a robots.txt change was found."},
+    {"platform":"Meta AI","finding":"No official publisher/search crawler contract sufficient to justify a robots.txt change was found."}
+  ],
+  "recommended_actions": [
+    "Do not change current public-search crawler permissions or model-training permissions.",
+    "Prioritize the Chapter 123 glossary/appeal cluster because Watchdog is surfacing for the concept through an Insight but not yet through the intended glossary target.",
+    "Expand evidence-rich, original NJ reporting in the pattern already surfacing for equalization ratios and revaluation/reassessment.",
+    "Treat /beta ChatGPT-tagged sessions separately from public editorial referrals when judging organic AI authority.",
+    "Use Bing AI Performance and Google Generative AI Performance exports as authoritative citation/impression evidence when account-level data is available."
+  ]
+}
