@@ -5,7 +5,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
   <title>Dashboard | Watchdog Property Intelligence</title>
   <meta name="robots" content="noindex, nofollow">
-  <meta name="theme-color" content="#0e2248">
+  <meta name="theme-color" content="#10294b">
   <link rel="canonical" href="https://www.watchdogindex.com/dashboard">
   <link rel="icon" type="image/png" href="/favicon-96x96.png" sizes="96x96">
   <link rel="icon" type="image/svg+xml" href="/favicon.svg">
@@ -23,6 +23,7 @@
   <link rel="stylesheet" href="/property/css/dashboard/watchdog-dashboard-hotfix.css?v=20260827e">
   <link rel="stylesheet" href="/property/css/dashboard/watchdog-dashboard-followup.css?v=20260827a">
   <link rel="stylesheet" href="/property/css/dashboard/watchdog-dashboard-visuals.css?v=20260911a">
+  <link rel="stylesheet" href="/property/css/dashboard/watchdog-dashboard-v3.css?v=20260921a">
 </head>
 <body data-sidebar-page="dashboard">
   <div class="wdd-boot" id="wdd-boot" aria-live="polite">
@@ -33,21 +34,56 @@
       <button type="button" id="wdd-boot-retry" hidden>Reload</button>
     </div>
   </div>
+
   <main class="wdd-app" id="wdd-app" hidden>
-    <section class="wdd-standing" id="wdd-standing" aria-label="Portfolio standing"></section>
-    <section class="wdd-signals" id="wdd-signals" aria-label="Key figures"></section>
-    <div class="wdd-work">
-      <section id="wdd-positions" aria-label="Your properties"></section>
-      <aside class="wdd-rail" id="wdd-rail" aria-label="Activity and partners"></aside>
+    <div class="wdd-shell">
+      <aside class="wdd-sidebar" aria-label="Watchdog workspace">
+        <a class="wdd-sidebar-brand" href="/property/" aria-label="Watchdog property intelligence">
+          <strong>WATCHDOG</strong>
+          <span>PROPERTY INTELLIGENCE</span>
+        </a>
+        <nav class="wdd-sidebar-nav" aria-label="Workspace navigation">
+          <a class="is-active" href="/property/dashboard"><i class="fas fa-house" aria-hidden="true"></i><span>Dashboard</span></a>
+          <a href="/property/home"><i class="far fa-building" aria-hidden="true"></i><span>Properties</span></a>
+          <a href="/property/pulse"><i class="fas fa-wave-square" aria-hidden="true"></i><span>Property Pulse</span></a>
+          <a href="/transaction/"><i class="far fa-rectangle-list" aria-hidden="true"></i><span>Transactions</span></a>
+          <a href="/agent/"><i class="far fa-id-badge" aria-hidden="true"></i><span>Agent Desk</span></a>
+          <a href="/agent/marketing/"><i class="far fa-square-check" aria-hidden="true"></i><span>Marketing</span></a>
+          <a href="/property/intelligence/"><i class="far fa-circle-dot" aria-hidden="true"></i><span>Intelligence</span></a>
+          <a href="/property/profile"><i class="fas fa-gear" aria-hidden="true"></i><span>Settings</span></a>
+        </nav>
+        <div class="wdd-sidebar-support">
+          <span class="wdd-sidebar-help"><i class="fas fa-question" aria-hidden="true"></i></span>
+          <span><b>Need help?</b><small>Support &amp; resources</small></span>
+        </div>
+      </aside>
+
+      <div class="wdd-workspace">
+        <section class="wdd-standing" id="wdd-standing" aria-label="Dashboard header"></section>
+        <section class="wdd-signals" id="wdd-signals" aria-label="Portfolio overview"></section>
+        <section class="wdd-queue" id="wdd-queue" aria-label="Action queue"></section>
+        <div class="wdd-work">
+          <section id="wdd-positions" aria-label="Your portfolio"></section>
+          <aside class="wdd-rail" id="wdd-rail" aria-label="Portfolio map, recent changes and analysis"></aside>
+        </div>
+        <div class="wdd-newsslot"><div id="wd4-root"></div></div>
+        <footer class="wdd-foot" id="wdd-foot"></footer>
+      </div>
     </div>
-    <div class="wdd-newsslot"><div id="wd4-root"></div></div>
-    <section class="wdd-queue" id="wdd-queue" aria-label="Action queue"></section>
-    <footer class="wdd-foot" id="wdd-foot"></footer>
+
+    <nav class="wdd-mobile-nav" aria-label="Dashboard mobile navigation">
+      <a class="is-active" href="/property/dashboard"><i class="fas fa-house" aria-hidden="true"></i><span>Home</span></a>
+      <a href="/property/home"><i class="far fa-building" aria-hidden="true"></i><span>Properties</span></a>
+      <a href="/property/pulse"><i class="fas fa-wave-square" aria-hidden="true"></i><span>Pulse</span></a>
+      <button type="button" data-act="mobile-more"><i class="fas fa-ellipsis" aria-hidden="true"></i><span>More</span></button>
+    </nav>
   </main>
-  <button class="wdd-pull" id="wdd-pull" type="button" hidden><i class="fas fa-comment-dots" aria-hidden="true"></i>Watchdog Intelligence</button>
+
+  <button class="wdd-pull" id="wdd-pull" type="button" hidden><i class="fas fa-comment-dots" aria-hidden="true"></i>Ask Watchdog</button>
   <div class="wdd-drawer" id="wdd-drawer" hidden></div>
   <div class="wdd-toast" id="wdd-toast" role="status" aria-live="polite"></div>
   <noscript><div class="wdd-boot"><div class="wdd-boot-card"><h1>JavaScript is required</h1><p>The Watchdog dashboard loads your private workspace in the browser.</p></div></div></noscript>
+
   <script src="https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.9.4/leaflet.min.js" defer></script>
   <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2/dist/umd/supabase.js" defer></script>
   <script src="/property/js/supabase-runtime.js" defer></script>
@@ -58,7 +94,7 @@
   <script src="/property/js/brand-consistency-runtime.js?v=20260912a" defer></script>
   <script src="/property/js/dashboard/wd-core.js?v=20260827b" defer></script>
   <script src="/property/js/dashboard/wd-dashboard-polish.js?v=20260827e" defer></script>
-  <script src="/property/js/dashboard/wd-render.js?v=20260827a" defer></script>
+  <script src="/property/js/dashboard/wd-render.js?v=20260921a" defer></script>
   <script src="/property/js/dashboard/wd-dashboard-followup.js?v=20260827a" defer></script>
   <script src="/property/js/dashboard/wd-session-data-bridge.js?v=20260827c" defer></script>
   <script src="/property/js/dashboard/wd-intel.js?v=20260827a" defer></script>
