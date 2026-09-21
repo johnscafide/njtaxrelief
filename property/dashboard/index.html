@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" data-ui="spike">
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
@@ -24,48 +24,9 @@
   <link rel="stylesheet" href="/property/css/dashboard/watchdog-dashboard-hotfix.css?v=20260827e">
   <link rel="stylesheet" href="/property/css/dashboard/watchdog-dashboard-followup.css?v=20260827a">
   <link rel="stylesheet" href="/property/css/dashboard/watchdog-dashboard-visuals.css?v=20260911a">
-  <link rel="stylesheet" id="wd-ui-v3" href="/property/css/dashboard/watchdog-dashboard-v3.css?v=20260921a">
-  <link rel="stylesheet" id="wd-ui-spike" href="/property/css/dashboard/watchdog-dashboard-spike.css?v=20260921a" disabled>
-  <!-- ===== TEMPORARY: dashboard UI switch =====================================
-       /dashboard          approved V3 layout, unchanged
-       /dashboard?ui=spike Spike skin
-       The choice sticks for the browser tab. Once a direction is picked, delete
-       this comment, the style block, the script, and whichever link lost.
-       ========================================================================= -->
-  <style>
-    .wdd-ui-flag{position:fixed;left:14px;bottom:calc(14px + env(safe-area-inset-bottom,0px));z-index:9600;
-      display:inline-flex;align-items:center;gap:8px;padding:8px 14px;border:0;border-radius:999px;
-      background:#0e2248;color:#fff;font:700 11.5px/1 "Plus Jakarta Sans",sans-serif;letter-spacing:.04em;
-      box-shadow:0 10px 26px rgba(14,34,72,.32);cursor:pointer}
-    .wdd-ui-flag:hover{background:#1456a0}
-  </style>
-  <script>
-  (function(){
-    var KEY='wd-ui', choice=null;
-    try{ choice=new URLSearchParams(location.search).get('ui'); }catch(e){}
-    if(choice){ try{ sessionStorage.setItem(KEY,choice); }catch(e){} }
-    else{ try{ choice=sessionStorage.getItem(KEY); }catch(e){} }
-    var spike = choice==='spike';
-    if(spike){
-      var v3=document.getElementById('wd-ui-v3'), sp=document.getElementById('wd-ui-spike');
-      if(v3) v3.disabled=true;
-      if(sp) sp.disabled=false;
-    }
-    document.documentElement.setAttribute('data-ui', spike?'spike':'v3');
-    document.addEventListener('DOMContentLoaded',function(){
-      var b=document.createElement('button');
-      b.type='button';
-      b.className='wdd-ui-flag';
-      b.textContent = spike ? 'UI: Spike \u00b7 switch to V3' : 'UI: V3 \u00b7 switch to Spike';
-      b.addEventListener('click',function(){
-        var u=new URL(location.href);
-        u.searchParams.set('ui', spike?'v3':'spike');
-        location.href=u.toString();
-      });
-      document.body.appendChild(b);
-    });
-  })();
-  </script>
+  <!-- NJW-404: Spike is the canonical dashboard presentation. -->
+  <link rel="stylesheet" href="/property/css/dashboard/watchdog-dashboard-spike.css?v=20260921b">
+  <link rel="stylesheet" href="/property/css/dashboard/watchdog-dashboard-spike-promoted.css?v=20260921a">
 </head>
 <body data-sidebar-page="dashboard">
   <div class="wdd-boot" id="wdd-boot" aria-live="polite">
