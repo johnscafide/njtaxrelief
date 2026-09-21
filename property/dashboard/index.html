@@ -1,94 +1,680 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" class="wds-html">
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
-  <title>Dashboard | Watchdog Property Intelligence</title>
+  <title>Dashboard Design Preview | Watchdog Property Intelligence</title>
   <meta name="robots" content="noindex, nofollow">
-  <meta name="theme-color" content="#10294b">
-  <link rel="canonical" href="https://www.watchdogindex.com/dashboard">
+  <meta name="theme-color" content="#0e2248">
   <link rel="icon" type="image/png" href="/favicon-96x96.png" sizes="96x96">
   <link rel="icon" type="image/svg+xml" href="/favicon.svg">
   <link rel="shortcut icon" href="/favicon.ico">
   <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
-  <link rel="manifest" href="/property/manifest.webmanifest">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@600;700;800&family=Inter:wght@400;500;600;700;800&display=swap">
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.9.4/leaflet.min.css">
-  <link rel="stylesheet" href="/property/css/shared/00-design-tokens.css">
-  <link rel="stylesheet" href="/property/css/app-shell-2027.css">
-  <link rel="stylesheet" href="/property/css/public-mobile-nav.css?v=20260921a">
-  <link rel="stylesheet" href="/property/css/dashboard/watchdog-dashboard.css?v=20260827a">
-  <link rel="stylesheet" href="/property/css/dashboard/watchdog-dashboard-hotfix.css?v=20260827e">
-  <link rel="stylesheet" href="/property/css/dashboard/watchdog-dashboard-followup.css?v=20260827a">
-  <link rel="stylesheet" href="/property/css/dashboard/watchdog-dashboard-visuals.css?v=20260911a">
-  <link rel="stylesheet" href="/property/css/dashboard/watchdog-dashboard-v3.css?v=20260921a">
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap">
+  <link rel="stylesheet" href="/property/css/dashboard/watchdog-dashboard-spike.css?v=20260921a">
 </head>
-<body data-sidebar-page="dashboard">
-  <div class="wdd-boot" id="wdd-boot" aria-live="polite">
-    <div class="wdd-boot-card">
-      <span class="wdd-boot-mark"><i class="fas fa-dog" aria-hidden="true"></i></span>
-      <h1>Opening your dashboard</h1>
-      <p id="wdd-boot-msg">Loading your saved properties and current scores.</p>
-      <button type="button" id="wdd-boot-retry" hidden>Reload</button>
-    </div>
-  </div>
+<body class="wds wds-body">
 
-  <main class="wdd-app" id="wdd-app" hidden>
-    <header class="wd-nav wdd-dashboard-nav" id="wd-nav">
-      <div class="wd-nav-in">
-        <a class="wd-logo" href="/property/" aria-label="Watchdog Property Intelligence home">
-          <i class="fas fa-dog" aria-hidden="true"></i><span>Watchdog</span>
-        </a>
-        <button class="wd-public-trigger wdd-dashboard-menu-trigger" id="wd-menu-trigger" type="button" onclick="WatchdogPublicNav.open('main')" aria-label="Open Watchdog menu">
-          <i class="fas fa-bars" aria-hidden="true"></i><span>Menu</span>
+<!-- icon sprite -->
+<svg width="0" height="0" style="position:absolute" aria-hidden="true" focusable="false"><defs>
+  <symbol id="i-dog" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round">
+    <path d="M10 5.2 7.4 3.1a1 1 0 0 0-1.6.8v3.4"/><path d="M14 5.2l2.6-2.1a1 1 0 0 1 1.6.8v3.4"/>
+    <path d="M5.8 7.3C5.8 11 8.6 13 12 13s6.2-2 6.2-5.7"/>
+    <path d="M6.6 12.1v5.4A3.5 3.5 0 0 0 10.1 21h3.8a3.5 3.5 0 0 0 3.5-3.5v-5.4"/>
+    <path d="M10.4 9.1h.01M13.6 9.1h.01"/>
+  </symbol>
+  <symbol id="i-grid" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+    <rect x="3" y="3" width="7.5" height="7.5" rx="2"/><rect x="13.5" y="3" width="7.5" height="7.5" rx="2"/>
+    <rect x="3" y="13.5" width="7.5" height="7.5" rx="2"/><rect x="13.5" y="13.5" width="7.5" height="7.5" rx="2"/>
+  </symbol>
+  <symbol id="i-home" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+    <path d="M3.5 10.2 12 3.6l8.5 6.6"/><path d="M5.6 11.8V20h12.8v-8.2"/><path d="M9.8 20v-5h4.4v5"/>
+  </symbol>
+  <symbol id="i-chart" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+    <path d="M4 20V4"/><path d="M4 20h16"/><path d="M8 16.5v-4"/><path d="M12.6 16.5V8"/><path d="M17.2 16.5v-6.5"/>
+  </symbol>
+  <symbol id="i-scale" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+    <path d="M12 3.4V20"/><path d="M7.6 20h8.8"/><path d="M4.2 6.4h15.6"/>
+    <path d="M4.2 6.4 1.9 12.2a2.6 2.6 0 0 0 4.6 0Z"/><path d="M19.8 6.4l-2.3 5.8a2.6 2.6 0 0 0 4.6 0Z"/>
+  </symbol>
+  <symbol id="i-doc" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+    <path d="M13.5 3.2H7a2 2 0 0 0-2 2v13.6a2 2 0 0 0 2 2h10a2 2 0 0 0 2-2V8.7Z"/>
+    <path d="M13.5 3.2v5.5H19"/><path d="M8.6 13h6.8M8.6 16.6h4.6"/>
+  </symbol>
+  <symbol id="i-bell" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+    <path d="M18 9.2a6 6 0 1 0-12 0c0 5.1-1.8 6.6-1.8 6.6h15.6S18 14.3 18 9.2"/><path d="M13.7 19.4a2 2 0 0 1-3.4 0"/>
+  </symbol>
+  <symbol id="i-map" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+    <path d="M9 4 3.6 6.1v14L9 17.9l6 2.2 5.4-2.1v-14L15 6.1Z"/><path d="M9 4v13.9M15 6.1V20"/>
+  </symbol>
+  <symbol id="i-gear" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+    <circle cx="12" cy="12" r="3.1"/>
+    <path d="M19.1 14.6a1.6 1.6 0 0 0 .32 1.77l.06.06a1.94 1.94 0 1 1-2.75 2.75l-.06-.06a1.6 1.6 0 0 0-1.77-.32 1.6 1.6 0 0 0-.97 1.47v.17a1.94 1.94 0 0 1-3.88 0v-.09a1.6 1.6 0 0 0-1.05-1.47 1.6 1.6 0 0 0-1.77.32l-.06.06a1.94 1.94 0 1 1-2.75-2.75l.06-.06a1.6 1.6 0 0 0 .32-1.77 1.6 1.6 0 0 0-1.47-.97h-.17a1.94 1.94 0 0 1 0-3.88h.09a1.6 1.6 0 0 0 1.47-1.05 1.6 1.6 0 0 0-.32-1.77l-.06-.06a1.94 1.94 0 1 1 2.75-2.75l.06.06a1.6 1.6 0 0 0 1.77.32h.08a1.6 1.6 0 0 0 .97-1.47v-.17a1.94 1.94 0 1 1 3.88 0v.09a1.6 1.6 0 0 0 .97 1.47 1.6 1.6 0 0 0 1.77-.32l.06-.06a1.94 1.94 0 1 1 2.75 2.75l-.06.06a1.6 1.6 0 0 0-.32 1.77v.08a1.6 1.6 0 0 0 1.47.97h.17a1.94 1.94 0 0 1 0 3.88h-.09a1.6 1.6 0 0 0-1.47.97"/>
+  </symbol>
+  <symbol id="i-search" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+    <circle cx="10.8" cy="10.8" r="6.8"/><path d="M20 20l-4.4-4.4"/>
+  </symbol>
+  <symbol id="i-menu" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round">
+    <path d="M4 7h16M4 12h16M4 17h16"/>
+  </symbol>
+  <symbol id="i-moon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+    <path d="M20.5 14.2A8.6 8.6 0 0 1 9.8 3.5a8.6 8.6 0 1 0 10.7 10.7"/>
+  </symbol>
+  <symbol id="i-download" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round">
+    <path d="M12 3.6v10.8"/><path d="M8 10.6 12 14.6l4-4"/><path d="M4.6 17.4v1.6a1.4 1.4 0 0 0 1.4 1.4h12a1.4 1.4 0 0 0 1.4-1.4v-1.6"/>
+  </symbol>
+  <symbol id="i-filter" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round">
+    <path d="M3.6 5.4h16.8l-6.6 7.8v5.6l-3.6 1.8v-7.4Z"/>
+  </symbol>
+  <symbol id="i-up" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round">
+    <path d="M12 19V5"/><path d="M6 11l6-6 6 6"/>
+  </symbol>
+  <symbol id="i-down" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round">
+    <path d="M12 5v14"/><path d="M6 13l6 6 6-6"/>
+  </symbol>
+  <symbol id="i-receipt" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+    <path d="M5.4 3.4v17.2l2.2-1.5 2.2 1.5 2.2-1.5 2.2 1.5 2.2-1.5 2.2 1.5V3.4Z"/><path d="M9 8.6h6M9 12.4h6"/>
+  </symbol>
+  <symbol id="i-hammer" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+    <path d="M13.6 7.4 5.2 15.8a2 2 0 0 0 2.8 2.8l8.4-8.4"/><path d="M12.2 5.9 15 3.1l5.6 5.6-2.8 2.8Z"/>
+  </symbol>
+  <symbol id="i-bolt" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+    <path d="M13.4 2.6 4.8 13.4h6.1l-1.3 8 8.6-10.8h-6.1Z"/>
+  </symbol>
+  <symbol id="i-chat" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round">
+    <path d="M20.4 12.4a7.6 7.6 0 0 1-8.2 7.6 8.6 8.6 0 0 1-3-.7L4.2 20.6l1.3-4.6a7.5 7.5 0 0 1-.9-3.6 7.6 7.6 0 0 1 7.6-7.6 7.6 7.6 0 0 1 8.2 7.6Z"/>
+  </symbol>
+</defs></svg>
+
+<div class="wds-scrim" id="wds-scrim"></div>
+
+<div class="wds-app">
+
+  <!-- ============ SIDEBAR ============ -->
+  <aside class="wds-side" id="wds-side">
+    <div class="wds-brand">
+      <span class="wds-brand-mark"><svg><use href="#i-dog"/></svg></span>
+      <span>Watchdog</span>
+    </div>
+
+    <nav>
+      <div class="wds-navcap">Workspace</div>
+      <a class="wds-navlink is-active" href="#"><svg><use href="#i-grid"/></svg>Dashboard</a>
+      <a class="wds-navlink" href="#"><svg><use href="#i-home"/></svg>My properties<span class="wds-navcount">6</span></a>
+      <a class="wds-navlink" href="#"><svg><use href="#i-search"/></svg>Property lookup</a>
+      <a class="wds-navlink" href="#"><svg><use href="#i-map"/></svg>Town intelligence</a>
+
+      <div class="wds-navcap">Analysis</div>
+      <a class="wds-navlink" href="#"><svg><use href="#i-chart"/></svg>Assessment trends</a>
+      <a class="wds-navlink" href="#"><svg><use href="#i-scale"/></svg>Appeal readiness<span class="wds-navcount">2</span></a>
+      <a class="wds-navlink" href="#"><svg><use href="#i-doc"/></svg>Evidence packets</a>
+
+      <div class="wds-navcap">Account</div>
+      <a class="wds-navlink" href="#"><svg><use href="#i-bell"/></svg>Alerts</a>
+      <a class="wds-navlink" href="#"><svg><use href="#i-gear"/></svg>Settings</a>
+    </nav>
+
+    <div class="wds-promo">
+      <h4>Agent tier</h4>
+      <p>Track up to 25 properties and pull client-ready reports under your own name.</p>
+      <button class="wds-btn wds-btn-primary wds-btn-sm" type="button">See the plan</button>
+    </div>
+  </aside>
+
+  <!-- ============ MAIN ============ -->
+  <div class="wds-main">
+
+    <header class="wds-head">
+      <button class="wds-iconbtn wds-burger" id="wds-burger" type="button" aria-label="Open navigation">
+        <svg><use href="#i-menu"/></svg>
+      </button>
+
+      <label class="wds-search" for="wds-q">
+        <svg><use href="#i-search"/></svg>
+        <input id="wds-q" type="search" placeholder="Search an address, block and lot, or town">
+      </label>
+
+      <div class="wds-headright">
+        <button class="wds-palette" id="wds-palette" type="button">Palette: Watchdog</button>
+        <span class="wds-plan"><i></i>Professional plan</span>
+        <button class="wds-iconbtn" id="wds-theme" type="button" aria-label="Toggle dark mode">
+          <svg><use href="#i-moon"/></svg>
         </button>
+        <button class="wds-iconbtn has-dot" type="button" aria-label="Alerts, 8 new">
+          <svg><use href="#i-bell"/></svg>
+        </button>
+        <span class="wds-avatar">JS</span>
       </div>
     </header>
 
-    <div class="wd-public-backdrop" id="wd-public-backdrop" onclick="WatchdogPublicNav.close()"></div>
-    <aside class="wd-public-sheet" id="wd-main-sheet" aria-hidden="true" aria-label="Watchdog navigation"></aside>
+    <main class="wds-page">
 
-    <div class="wdd-shell">
-      <div class="wdd-workspace">
-        <section class="wdd-standing" id="wdd-standing" aria-label="Dashboard header"></section>
-        <section class="wdd-signals" id="wdd-signals" aria-label="Portfolio overview"></section>
-        <section class="wdd-queue" id="wdd-queue" aria-label="Action queue"></section>
-        <div class="wdd-work">
-          <section id="wdd-positions" aria-label="Your portfolio"></section>
-          <aside class="wdd-rail" id="wdd-rail" aria-label="Portfolio map, recent changes and analysis"></aside>
+      <!-- ---- welcome ---- -->
+      <section class="wds-hero">
+        <div class="wds-herocopy">
+          <span class="wds-eyebrow"><svg><use href="#i-bolt"/></svg>Monday, September 21</span>
+          <h1>Good morning, John</h1>
+          <p><b>Two of your six saved properties</b> are assessed above what current verified sales evidence supports. Together those gaps represent about <b>$2,990 a year</b> in tax.</p>
+          <div class="wds-heroactions">
+            <button class="wds-btn wds-btn-primary" type="button"><svg><use href="#i-search"/></svg>Look up a property</button>
+            <button class="wds-btn wds-btn-ghost" type="button"><svg><use href="#i-filter"/></svg>Gloucester County</button>
+            <button class="wds-btn wds-btn-ghost" type="button"><svg><use href="#i-download"/></svg>Export CSV</button>
+          </div>
         </div>
-        <div class="wdd-newsslot"><div id="wd4-root"></div></div>
-        <footer class="wdd-foot" id="wdd-foot"></footer>
-      </div>
-    </div>
+        <div class="wds-heroart" aria-hidden="true">
+          <svg viewBox="0 0 120 120">
+            <circle cx="60" cy="60" r="55" fill="none" stroke="currentColor" stroke-opacity=".18" stroke-width="2"/>
+            <circle cx="60" cy="60" r="55" fill="none" stroke="currentColor" stroke-opacity=".55" stroke-width="3"
+                    stroke-linecap="round" stroke-dasharray="118 250" transform="rotate(-104 60 60)"/>
+            <circle cx="60" cy="60" r="43" fill="currentColor" fill-opacity=".10"/>
+            <path d="M60 22 L92 34 V60c0 20-13 31-32 38C41 91 28 80 28 60V34Z"
+                  fill="currentColor" fill-opacity=".16" stroke="currentColor" stroke-width="2.4" stroke-linejoin="round"/>
+            <path d="M45 62 60 50l15 12" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/>
+            <path d="M48.5 60.2V76h23V60.2" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/>
+          </svg>
+        </div>
+      </section>
 
-  </main>
+      <!-- ---- watchdog score ---- -->
+      <section class="wds-card wds-score">
+        <div class="wds-cardhead" style="width:100%">
+          <div>
+            <h2>Watchdog Score</h2>
+            <p>Portfolio average, updated today</p>
+          </div>
+        </div>
 
-  <button class="wdd-pull" id="wdd-pull" type="button" hidden><i class="fas fa-comment-dots" aria-hidden="true"></i>Ask Watchdog</button>
-  <div class="wdd-drawer" id="wdd-drawer" hidden></div>
-  <div class="wdd-toast" id="wdd-toast" role="status" aria-live="polite"></div>
-  <noscript><div class="wdd-boot"><div class="wdd-boot-card"><h1>JavaScript is required</h1><p>The Watchdog dashboard loads your private workspace in the browser.</p></div></div></noscript>
+        <div class="wds-gauge">
+          <svg viewBox="0 0 200 186" role="img" aria-label="Watchdog Score of 72 out of 100, rated reasonable">
+            <defs>
+              <linearGradient id="wdsGauge" x1="0" y1="1" x2="1" y2="0">
+                <stop offset="0%" stop-color="var(--sp-gauge-1)"/>
+                <stop offset="55%" stop-color="var(--sp-gauge-2)"/>
+                <stop offset="100%" stop-color="var(--sp-gauge-3)"/>
+              </linearGradient>
+            </defs>
+            <path d="M 47.7 157.3 A 74 74 0 1 1 152.3 157.3"
+                  fill="none" stroke="var(--sp-line)" stroke-width="15" stroke-linecap="round"/>
+            <path d="M 47.7 157.3 A 74 74 0 1 1 152.3 157.3"
+                  pathLength="100" stroke-dasharray="72 100"
+                  fill="none" stroke="url(#wdsGauge)" stroke-width="15" stroke-linecap="round"/>
+            <!-- county median marker, 66 of 100 on a 270 degree arc starting at 135 degrees -->
+            <circle cx="150.7" cy="51.1" r="4.5" fill="var(--sp-surface)" stroke="var(--sp-accent)" stroke-width="3"/>
+            <text class="wds-axis" x="34" y="177" text-anchor="middle">0</text>
+            <text class="wds-axis" x="166" y="177" text-anchor="middle">100</text>
+          </svg>
+          <div class="wds-gaugeval">
+            <span class="wds-gaugenum tnum">72</span>
+            <span class="wds-gaugeof">OUT OF 100</span>
+          </div>
+        </div>
 
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.9.4/leaflet.min.js" defer></script>
-  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2/dist/umd/supabase.js" defer></script>
-  <script src="/property/js/supabase-runtime.js" defer></script>
-  <script src="/property/js/product-analytics.js" defer></script>
-  <script src="/property/js/platform-observability.js" defer></script>
-  <script src="/property/js/app-shell-2027.js" defer></script>
-  <script src="/property/js/watchdog-universal-menu.js?v=20260920a" defer></script>
-  <script src="/property/js/public-nav.js?v=20260921a" defer></script>
-  <script src="/property/js/brand-consistency-runtime.js?v=20260912a" defer></script>
-  <script src="/property/js/dashboard/wd-core.js?v=20260827b" defer></script>
-  <script src="/property/js/dashboard/wd-dashboard-polish.js?v=20260827e" defer></script>
-  <script src="/property/js/dashboard/wd-render.js?v=20260921a" defer></script>
-  <script src="/property/js/dashboard/wd-dashboard-followup.js?v=20260827a" defer></script>
-  <script src="/property/js/dashboard/wd-session-data-bridge.js?v=20260827c" defer></script>
-  <script src="/property/js/dashboard/wd-intel.js?v=20260827a" defer></script>
-  <script src="/property/js/dashboard/dashboard-nj-news.js?v=20260827a" defer></script>
-  <script src="/property/js/dashboard/wd-dashboard-visual-core.js?v=20260911a" defer></script>
-  <script src="/property/js/dashboard/wd-dashboard-news-visuals.js?v=20260911a" defer></script>
+        <span class="wds-verdict"><i></i>Reasonable</span>
+        <p class="wds-scorenote">The gold mark is the Gloucester County median of 66. You are eight points above it.</p>
+      </section>
+
+      <!-- ---- stat tiles ---- -->
+      <section class="wds-tiles">
+        <article class="wds-tile t-primary">
+          <div class="wds-tiletop">
+            <span class="wds-tileico"><svg><use href="#i-home"/></svg></span>
+            <span class="wds-tilelabel">Market estimate</span>
+          </div>
+          <span class="wds-tileval tnum">$1.98M</span>
+          <div class="wds-tilefoot">
+            <span class="wds-tilesub">Across 6 properties, up 3.8% this year</span>
+            <svg class="wds-spark" viewBox="0 0 76 26" aria-hidden="true">
+              <polyline points="2,19 14,17 26,20 38,13 50,10 62,12 74,5" fill="none"
+                        stroke="var(--sp-chip-primary)" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/>
+              <circle cx="74" cy="5" r="3" fill="var(--sp-chip-primary)"/>
+            </svg>
+          </div>
+        </article>
+
+        <article class="wds-tile t-warn">
+          <div class="wds-tiletop">
+            <span class="wds-tileico"><svg><use href="#i-scale"/></svg></span>
+            <span class="wds-tilelabel">Assessed vs market</span>
+          </div>
+          <span class="wds-tileval tnum">102%</span>
+          <div class="wds-tilefoot">
+            <span class="wds-tilesub">Portfolio sits slightly over the estimate</span>
+            <svg class="wds-spark" viewBox="0 0 76 26" aria-hidden="true">
+              <polyline points="2,8 14,10 26,7 38,12 50,15 62,14 74,17" fill="none"
+                        stroke="var(--sp-chip-warn)" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/>
+              <circle cx="74" cy="17" r="3" fill="var(--sp-chip-warn)"/>
+            </svg>
+          </div>
+        </article>
+
+        <article class="wds-tile t-bad">
+          <div class="wds-tiletop">
+            <span class="wds-tileico"><svg><use href="#i-up"/></svg></span>
+            <span class="wds-tilelabel">Widest gap</span>
+          </div>
+          <span class="wds-tileval tnum">+18.4%</span>
+          <div class="wds-tilefoot">
+            <span class="wds-tilesub">1092 Chews Landing Road, Deptford</span>
+            <svg class="wds-spark" viewBox="0 0 76 26" aria-hidden="true">
+              <polyline points="2,18 14,16 26,17 38,13 50,11 62,8 74,4" fill="none"
+                        stroke="var(--sp-chip-bad)" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/>
+              <circle cx="74" cy="4" r="3" fill="var(--sp-chip-bad)"/>
+            </svg>
+          </div>
+        </article>
+
+        <article class="wds-tile t-ok">
+          <div class="wds-tiletop">
+            <span class="wds-tileico"><svg><use href="#i-receipt"/></svg></span>
+            <span class="wds-tilelabel">Represented by gaps</span>
+          </div>
+          <span class="wds-tileval tnum">$2,990</span>
+          <div class="wds-tilefoot">
+            <span class="wds-tilesub">Annual estimate, not guaranteed savings</span>
+            <svg class="wds-spark" viewBox="0 0 76 26" aria-hidden="true">
+              <polyline points="2,20 14,18 26,14 38,15 50,11 62,9 74,7" fill="none"
+                        stroke="var(--sp-chip-ok)" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/>
+              <circle cx="74" cy="7" r="3" fill="var(--sp-chip-ok)"/>
+            </svg>
+          </div>
+        </article>
+      </section>
+
+      <!-- ---- assessed vs market trend ---- -->
+      <section class="wds-card wds-s8">
+        <div class="wds-cardhead">
+          <div>
+            <h2>Assessed value against market evidence</h2>
+            <p>Portfolio totals, last 12 months</p>
+          </div>
+          <span class="wds-spacer"></span>
+          <div class="wds-tabs" role="tablist" aria-label="Chart range">
+            <button role="tab" aria-selected="false" type="button">6M</button>
+            <button role="tab" aria-selected="true" type="button">12M</button>
+            <button role="tab" aria-selected="false" type="button">All</button>
+          </div>
+        </div>
+
+        <div class="wds-legend">
+          <span><i style="background:var(--sp-series-assessed)"></i>Assessed value</span>
+          <span><i style="background:var(--sp-series-market)"></i>Verified market estimate</span>
+          <span><i style="background:var(--sp-series-gap)"></i>Gap carrying tax</span>
+        </div>
+
+        <div class="wds-chartwrap">
+          <svg viewBox="0 0 720 252" role="img"
+               aria-label="Line chart. Assessed value is flat at 2.012 million dollars all year. The verified market estimate rises from 1.905 million in October to 1.978 million in September, narrowing the gap.">
+            <defs>
+              <linearGradient id="wdsMktFill" x1="0" y1="0" x2="0" y2="1">
+                <stop offset="0%" stop-color="var(--sp-series-market)" stop-opacity=".26"/>
+                <stop offset="100%" stop-color="var(--sp-series-market)" stop-opacity="0"/>
+              </linearGradient>
+            </defs>
+
+            <g stroke="var(--sp-grid)" stroke-width="1">
+              <line x1="56" y1="29"    x2="700" y2="29"/>
+              <line x1="56" y1="74.3"  x2="700" y2="74.3"/>
+              <line x1="56" y1="119.5" x2="700" y2="119.5"/>
+              <line x1="56" y1="164.8" x2="700" y2="164.8"/>
+              <line x1="56" y1="210"   x2="700" y2="210"/>
+            </g>
+
+            <g class="wds-axis" text-anchor="end">
+              <text x="46" y="33">$2.05M</text>
+              <text x="46" y="78.3">$2.00M</text>
+              <text x="46" y="123.5">$1.95M</text>
+              <text x="46" y="168.8">$1.90M</text>
+              <text x="46" y="214">$1.85M</text>
+            </g>
+
+            <!-- the gap band: assessed sitting above market -->
+            <path fill="var(--sp-series-gap)" fill-opacity=".30"
+                  d="M56,63.4 L700,63.4 L700,94.2 L641.5,100.5 L582.9,108.7 L524.4,118.6 L465.8,105 L407.3,112.3 L348.7,122.2 L290.2,134 L231.6,145.8 L173.1,166.6 L114.5,153.9 L56,160.2 Z"/>
+
+            <path fill="url(#wdsMktFill)"
+                  d="M56,210 L56,160.2 L114.5,153.9 L173.1,166.6 L231.6,145.8 L290.2,134 L348.7,122.2 L407.3,112.3 L465.8,105 L524.4,118.6 L582.9,108.7 L641.5,100.5 L700,94.2 L700,210 Z"/>
+
+            <!-- assessed line is flat: assessments reset once a year -->
+            <line x1="56" y1="63.4" x2="700" y2="63.4" fill="none"
+                  stroke="var(--sp-series-assessed)" stroke-width="2.6" stroke-dasharray="7 5" stroke-linecap="round"/>
+
+            <polyline fill="none" stroke="var(--sp-series-market)" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"
+                      points="56,160.2 114.5,153.9 173.1,166.6 231.6,145.8 290.2,134 348.7,122.2 407.3,112.3 465.8,105 524.4,118.6 582.9,108.7 641.5,100.5 700,94.2"/>
+
+            <circle cx="700" cy="94.2" r="6.5" fill="var(--sp-series-market)" fill-opacity=".2"/>
+            <circle cx="700" cy="94.2" r="4" fill="var(--sp-series-market)" stroke="var(--sp-surface)" stroke-width="2"/>
+
+            <g class="wds-axis" text-anchor="middle">
+              <text x="56" y="230">Oct</text>
+              <text x="114.5" y="230">Nov</text>
+              <text x="173.1" y="230">Dec</text>
+              <text x="231.6" y="230">Jan</text>
+              <text x="290.2" y="230">Feb</text>
+              <text x="348.7" y="230">Mar</text>
+              <text x="407.3" y="230">Apr</text>
+              <text x="465.8" y="230">May</text>
+              <text x="524.4" y="230">Jun</text>
+              <text x="582.9" y="230">Jul</text>
+              <text x="641.5" y="230">Aug</text>
+              <text x="700" y="230" class="wds-axis is-now">Sep</text>
+            </g>
+          </svg>
+        </div>
+
+        <p class="wds-chartnote">Assessed value holds flat because assessments are set once a year. The estimate has climbed <b>3.8%</b> since October, so the shaded gap has narrowed from <b>5.6%</b> to <b>1.7%</b> without anything being filed.</p>
+      </section>
+
+      <!-- ---- gap by property ---- -->
+      <section class="wds-card wds-s4">
+        <div class="wds-cardhead">
+          <div>
+            <h2>Gap by property</h2>
+            <p>Assessed above or below market estimate</p>
+          </div>
+        </div>
+
+        <div class="wds-gapchart" role="img"
+             aria-label="Assessment gap by property. Deptford Township plus 18.4 percent, Washington Township plus 6.6, Mantua Township minus 2.0, Blackwood minus 2.2, Pitman minus 3.7, Haddon Township minus 8.9.">
+          <div>
+            <div class="wds-gaphead"><span>Deptford Township</span><b class="g-bad tnum">+18.4%</b></div>
+            <div class="wds-gaptrack"><i class="wds-gapzero"></i><i class="wds-gapfill f-bad" style="left:33.333%;width:61.333%"></i></div>
+          </div>
+          <div>
+            <div class="wds-gaphead"><span>Washington Twp</span><b class="g-warn tnum">+6.6%</b></div>
+            <div class="wds-gaptrack"><i class="wds-gapzero"></i><i class="wds-gapfill f-warn" style="left:33.333%;width:22.000%"></i></div>
+          </div>
+          <div>
+            <div class="wds-gaphead"><span>Mantua Township</span><b class="g-ok tnum">&#8722;2.0%</b></div>
+            <div class="wds-gaptrack"><i class="wds-gapzero"></i><i class="wds-gapfill f-ok" style="left:26.667%;width:6.667%"></i></div>
+          </div>
+          <div>
+            <div class="wds-gaphead"><span>Blackwood</span><b class="g-ok tnum">&#8722;2.2%</b></div>
+            <div class="wds-gaptrack"><i class="wds-gapzero"></i><i class="wds-gapfill f-ok" style="left:26.000%;width:7.333%"></i></div>
+          </div>
+          <div>
+            <div class="wds-gaphead"><span>Pitman</span><b class="g-ok tnum">&#8722;3.7%</b></div>
+            <div class="wds-gaptrack"><i class="wds-gapzero"></i><i class="wds-gapfill f-ok" style="left:21.000%;width:12.333%"></i></div>
+          </div>
+          <div>
+            <div class="wds-gaphead"><span>Haddon Township</span><b class="g-ok tnum">&#8722;8.9%</b></div>
+            <div class="wds-gaptrack"><i class="wds-gapzero"></i><i class="wds-gapfill f-ok" style="left:3.667%;width:29.667%"></i></div>
+          </div>
+          <div class="wds-gapaxis"><span>&#8722;10%</span><span class="mid">Even</span><span>+20%</span></div>
+        </div>
+
+        <p class="wds-chartnote">Only bars to the right of the line carry a case. Everything green is already assessed under the evidence.</p>
+      </section>
+
+      <!-- ---- ledger ---- -->
+      <section class="wds-card wds-s12">
+        <div class="wds-cardhead">
+          <div>
+            <h2>Your ledger</h2>
+            <p>The six properties you are actively watching</p>
+          </div>
+          <span class="wds-spacer"></span>
+          <div class="wds-tabs" role="tablist" aria-label="Ledger view">
+            <button id="wds-tab-table" role="tab" aria-selected="true" aria-controls="wds-panel-table" type="button">Table</button>
+            <button id="wds-tab-map" role="tab" aria-selected="false" aria-controls="wds-panel-map" type="button">Map</button>
+          </div>
+        </div>
+
+        <div id="wds-panel-table" role="tabpanel" aria-labelledby="wds-tab-table">
+          <div class="wds-tablewrap">
+            <table class="wds-table">
+              <thead>
+                <tr>
+                  <th>Property</th>
+                  <th class="r">Assessed</th>
+                  <th class="r">Market est.</th>
+                  <th class="r">Gap</th>
+                  <th class="r">Annual tax</th>
+                  <th class="r">Score</th>
+                </tr>
+              </thead>
+              <tbody class="tnum">
+                <tr>
+                  <td><div class="wds-addr"><span class="wds-addrico"><svg><use href="#i-home"/></svg></span>
+                    <span><b>1092 Chews Landing Rd</b><small>Deptford Township, Gloucester</small></span></div></td>
+                  <td class="r wds-money">$418,000</td>
+                  <td class="r">$353,000</td>
+                  <td class="r"><span class="wds-chip c-bad"><svg><use href="#i-up"/></svg>18.4%</span><span class="wds-sub">$2,221 a year</span></td>
+                  <td class="r wds-money">$14,283</td>
+                  <td class="r"><span class="wds-scorecell"><b>58</b><span class="wds-track"><i class="f-bad" style="width:58%"></i></span></span></td>
+                </tr>
+                <tr>
+                  <td><div class="wds-addr"><span class="wds-addrico"><svg><use href="#i-home"/></svg></span>
+                    <span><b>18 Wedgewood Drive</b><small>Washington Township, Gloucester</small></span></div></td>
+                  <td class="r wds-money">$362,500</td>
+                  <td class="r">$340,000</td>
+                  <td class="r"><span class="wds-chip c-warn"><svg><use href="#i-up"/></svg>6.6%</span><span class="wds-sub">$769 a year</span></td>
+                  <td class="r wds-money">$12,387</td>
+                  <td class="r"><span class="wds-scorecell"><b>71</b><span class="wds-track"><i class="f-warn" style="width:71%"></i></span></span></td>
+                </tr>
+                <tr>
+                  <td><div class="wds-addr"><span class="wds-addrico"><svg><use href="#i-home"/></svg></span>
+                    <span><b>640 Berlin Road</b><small>Mantua Township, Gloucester</small></span></div></td>
+                  <td class="r wds-money">$339,000</td>
+                  <td class="r">$346,000</td>
+                  <td class="r"><span class="wds-chip c-ok"><svg><use href="#i-down"/></svg>2.0%</span></td>
+                  <td class="r wds-money">$11,458</td>
+                  <td class="r"><span class="wds-scorecell"><b>74</b><span class="wds-track"><i class="f-ok" style="width:74%"></i></span></span></td>
+                </tr>
+                <tr>
+                  <td><div class="wds-addr"><span class="wds-addrico"><svg><use href="#i-home"/></svg></span>
+                    <span><b>27 Little Gloucester Rd</b><small>Blackwood, Camden</small></span></div></td>
+                  <td class="r wds-money">$311,000</td>
+                  <td class="r">$318,000</td>
+                  <td class="r"><span class="wds-chip c-ok"><svg><use href="#i-down"/></svg>2.2%</span></td>
+                  <td class="r wds-money">$11,041</td>
+                  <td class="r"><span class="wds-scorecell"><b>76</b><span class="wds-track"><i class="f-ok" style="width:76%"></i></span></span></td>
+                </tr>
+                <tr>
+                  <td><div class="wds-addr"><span class="wds-addrico"><svg><use href="#i-home"/></svg></span>
+                    <span><b>115 South Broadway</b><small>Pitman, Gloucester</small></span></div></td>
+                  <td class="r wds-money">$295,500</td>
+                  <td class="r">$307,000</td>
+                  <td class="r"><span class="wds-chip c-ok"><svg><use href="#i-down"/></svg>3.7%</span></td>
+                  <td class="r wds-money">$10,638</td>
+                  <td class="r"><span class="wds-scorecell"><b>79</b><span class="wds-track"><i class="f-ok" style="width:79%"></i></span></span></td>
+                </tr>
+                <tr>
+                  <td><div class="wds-addr"><span class="wds-addrico"><svg><use href="#i-home"/></svg></span>
+                    <span><b>9 Westmont Avenue</b><small>Haddon Township, Camden</small></span></div></td>
+                  <td class="r wds-money">$286,000</td>
+                  <td class="r">$314,000</td>
+                  <td class="r"><span class="wds-chip c-ok"><svg><use href="#i-down"/></svg>8.9%</span></td>
+                  <td class="r wds-money">$9,152</td>
+                  <td class="r"><span class="wds-scorecell"><b>82</b><span class="wds-track"><i class="f-ok" style="width:82%"></i></span></span></td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+          <p class="wds-chartnote">Totals: <b>$2.01M</b> assessed against <b>$1.98M</b> in market evidence, carrying <b>$68,959</b> a year at an average rate of <b>3.427</b> per $100 of assessed value.</p>
+        </div>
+
+        <div id="wds-panel-map" role="tabpanel" aria-labelledby="wds-tab-map" hidden>
+          <div class="wds-mapstub">
+            <div>
+              <svg><use href="#i-map"/></svg>
+              <p>Map view plots the same six properties over municipal boundaries and equalization ratios. Wired to Leaflet in the live build.</p>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- ---- what changed ---- -->
+      <aside class="wds-card wds-s4">
+        <div class="wds-cardhead">
+          <div>
+            <h2>What changed</h2>
+            <p>8 changes in the last 30 days</p>
+          </div>
+        </div>
+        <div>
+          <div class="wds-feeditem is-bad">
+            <span class="wds-feedico"><svg><use href="#i-receipt"/></svg></span>
+            <div><b>Gap widened after a new comparable</b><small>1092 Chews Landing Rd, 2 days ago</small></div>
+          </div>
+          <div class="wds-feeditem is-warn">
+            <span class="wds-feedico"><svg><use href="#i-chart"/></svg></span>
+            <div><b>Market estimate updated</b><small>18 Wedgewood Drive, 4 days ago</small></div>
+          </div>
+          <div class="wds-feeditem is-ok">
+            <span class="wds-feedico"><svg><use href="#i-home"/></svg></span>
+            <div><b>Nearby sale added to evidence</b><small>9 Westmont Avenue, 6 days ago</small></div>
+          </div>
+          <div class="wds-feeditem">
+            <span class="wds-feedico"><svg><use href="#i-hammer"/></svg></span>
+            <div><b>Permit activity detected next door</b><small>27 Little Gloucester Rd, 9 days ago</small></div>
+          </div>
+          <div class="wds-feeditem is-warn">
+            <span class="wds-feedico"><svg><use href="#i-bolt"/></svg></span>
+            <div><b>Equalization ratio moved 2.4 points</b><small>Mantua Township, 12 days ago</small></div>
+          </div>
+        </div>
+      </aside>
+
+      <!-- ---- action queue ---- -->
+      <section class="wds-card wds-s8">
+        <div class="wds-cardhead">
+          <div>
+            <h2>Action queue</h2>
+            <p>What is most worth reviewing before the April 1 appeal deadline</p>
+          </div>
+          <span class="wds-spacer"></span>
+          <button class="wds-btn wds-btn-ghost wds-btn-sm" type="button"><svg><use href="#i-doc"/></svg>Build evidence packet</button>
+        </div>
+
+        <div class="wds-queue">
+          <article class="wds-q is-bad">
+            <div class="wds-qtop"><b>1092 Chews Landing Rd</b><span class="wds-qrank">Act now</span></div>
+            <p>Assessed 18.4% above the governed market estimate, with four verified sales inside a half mile in the last nine months. Evidence coverage is strong enough to file.</p>
+            <strong class="wds-qfig tnum">$2,221<span>represented per year</span></strong>
+          </article>
+
+          <article class="wds-q">
+            <div class="wds-qtop"><b>18 Wedgewood Drive</b><span class="wds-qrank">Watch</span></div>
+            <p>The gap is smaller and the comparable set is thinner. Worth another look after the county posts its next ratio, which lands in October.</p>
+            <strong class="wds-qfig tnum">$769<span>represented per year</span></strong>
+          </article>
+
+          <article class="wds-q is-ok">
+            <div class="wds-qtop"><b>The other four</b><span class="wds-qrank">Stable</span></div>
+            <p>All four sit under the evidence range and none moved materially this month. Nothing to do here, which is the point of watching them.</p>
+            <strong class="wds-qfig tnum">4<span>properties stable</span></strong>
+          </article>
+        </div>
+      </section>
+
+      <!-- ---- intelligence wire ---- -->
+      <section class="wds-card wds-s12">
+        <div class="wds-cardhead">
+          <div>
+            <h2>NJ Intelligence Wire</h2>
+            <p>Context that can change how a number reads</p>
+          </div>
+          <span class="wds-spacer"></span>
+          <a href="#" style="font-size:12.5px;font-weight:700">View all</a>
+        </div>
+        <div class="wds-wire">
+          <article>
+            <small>Property tax</small>
+            <h3>What a moving equalization ratio does to your number</h3>
+            <p>Ratios change every year and they change what the same assessment means. Here is when Watchdog treats a shift as material.</p>
+            <a href="#">Read insight</a>
+          </article>
+          <article>
+            <small>South Jersey</small>
+            <h3>New sales evidence is reshaping local estimates</h3>
+            <p>Recent verified transactions in Gloucester and Camden are pulling several market estimates up, which narrows gaps without any filing.</p>
+            <a href="#">Read insight</a>
+          </article>
+          <article>
+            <small>Watchdog intelligence</small>
+            <h3>Three signals worth checking before an appeal</h3>
+            <p>Gap size alone is not enough. Evidence coverage, filing timing and source quality decide whether a case holds up.</p>
+            <a href="#">Read insight</a>
+          </article>
+        </div>
+      </section>
+
+      <p class="wds-foot"><b>Design preview.</b> Sample properties and figures, shown to review the layout. No account or production data is used here.</p>
+
+    </main>
+  </div>
+</div>
+
+<button class="wds-ask" type="button"><svg><use href="#i-chat"/></svg>Ask Watchdog</button>
+
+<script>
+(function(){
+  var root = document.documentElement;
+  var body = document.body;
+
+  function remember(k,v){ try{ localStorage.setItem(k,v); }catch(e){} }
+  function recall(k){ try{ return localStorage.getItem(k); }catch(e){ return null; } }
+
+  /* ---- palette: Watchdog brand by default, Spike blue for comparison ---- */
+  var palBtn = document.getElementById('wds-palette');
+  function setPalette(p){
+    if (p === 'spike') root.setAttribute('data-palette','spike');
+    else root.removeAttribute('data-palette');
+    palBtn.textContent = 'Palette: ' + (p === 'spike' ? 'Spike' : 'Watchdog');
+    remember('wds-palette', p);
+  }
+  var startPal = new URLSearchParams(location.search).get('palette') || recall('wds-palette') || 'watchdog';
+  setPalette(startPal);
+  palBtn.addEventListener('click', function(){
+    setPalette(root.getAttribute('data-palette') === 'spike' ? 'watchdog' : 'spike');
+  });
+
+  /* ---- theme ---- */
+  var saved = recall('wds-theme');
+  if (saved === 'dark' || saved === 'light') root.setAttribute('data-theme', saved);
+  document.getElementById('wds-theme').addEventListener('click', function(){
+    var dark = root.getAttribute('data-theme') === 'dark' ||
+      (!root.hasAttribute('data-theme') && window.matchMedia('(prefers-color-scheme: dark)').matches);
+    var next = dark ? 'light' : 'dark';
+    root.setAttribute('data-theme', next);
+    remember('wds-theme', next);
+  });
+
+  /* ---- mobile nav ---- */
+  document.getElementById('wds-burger').addEventListener('click', function(){ body.classList.toggle('wds-navopen'); });
+  document.getElementById('wds-scrim').addEventListener('click', function(){ body.classList.remove('wds-navopen'); });
+  document.addEventListener('keydown', function(e){ if (e.key === 'Escape') body.classList.remove('wds-navopen'); });
+
+  /* ---- ledger tabs ---- */
+  var tabTable = document.getElementById('wds-tab-table');
+  var tabMap   = document.getElementById('wds-tab-map');
+  function show(isTable){
+    tabTable.setAttribute('aria-selected', String(isTable));
+    tabMap.setAttribute('aria-selected', String(!isTable));
+    document.getElementById('wds-panel-table').hidden = !isTable;
+    document.getElementById('wds-panel-map').hidden   = isTable;
+  }
+  tabTable.addEventListener('click', function(){ show(true); });
+  tabMap.addEventListener('click',  function(){ show(false); });
+
+  /* ---- presentational tabs and nav ---- */
+  function groupToggle(nodes, attr){
+    Array.prototype.forEach.call(nodes, function(n){
+      n.addEventListener('click', function(e){
+        e.preventDefault();
+        Array.prototype.forEach.call(nodes, function(x){
+          if (attr) x.setAttribute('aria-selected','false'); else x.classList.remove('is-active');
+        });
+        if (attr) n.setAttribute('aria-selected','true'); else n.classList.add('is-active');
+        if (!attr) body.classList.remove('wds-navopen');
+      });
+    });
+  }
+  groupToggle(document.querySelectorAll('[aria-label="Chart range"] button'), true);
+  groupToggle(document.querySelectorAll('.wds-navlink'), false);
+})();
+</script>
 </body>
 </html>
