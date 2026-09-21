@@ -1,5 +1,5 @@
 {
-  "version": "2026-09-14.2",
+  "version": "2026-09-21.1",
   "canonical_brand": "Watchdog",
   "canonical_origin": "https://www.watchdogindex.com",
   "purpose": "Measure whether answer engines recognize, cite, and correctly describe Watchdog for high-value New Jersey property questions without treating unobservable proprietary UI behavior as fact.",
@@ -8,9 +8,9 @@
     {"id":"microsoft_copilot","name":"Microsoft Copilot / Bing AI","measurement":["bing_ai_performance","ai_referral_analytics","manual_citation_benchmark"],"discovery_control":"Bingbot; Bing AI Performance is authoritative first-party citation evidence when available. Use IndexNow to accelerate changed-URL discovery."},
     {"id":"google_ai","name":"Google AI Mode / AI Overviews / Gemini","measurement":["search_console_gen_ai_performance","search_console_gen_ai_inclusion_control","search_console","preferred_sources","ai_referral_analytics","manual_citation_benchmark"],"discovery_control":"Googlebot/Search eligibility plus the site-level Search Console Generative AI in Search inclusion control. As of 2026-08-31 Google says the inclusion control and dedicated generative-AI performance report are available worldwide. The inclusion control governs eligibility for links/content in AI Overviews, AI Mode and supported Discover generative-AI features; Google-Extended remains a separate model-training control. AI Mode and AI Overviews otherwise follow normal Search controls, and Google says llms.txt is not needed for Search. Preferred Sources can highlight selected publishers in AI Mode/AI Overviews. Do not relabel ordinary Search Console data as AI citation evidence, and do not guess the account-level inclusion-control state."},
     {"id":"perplexity","name":"Perplexity","measurement":["ai_referral_analytics","manual_citation_benchmark"],"discovery_control":"PerplexityBot"},
-    {"id":"apple_intelligence","name":"Apple Intelligence / Siri / Spotlight / Safari","measurement":["manual_citation_benchmark"],"discovery_control":"Applebot; keep Applebot-Extended as a separate model-use/training policy decision"},
+    {"id":"apple_intelligence","name":"Apple Intelligence / Siri AI / Spotlight / Safari","measurement":["manual_citation_benchmark"],"discovery_control":"Applebot; keep Applebot-Extended as a separate model-use/training policy decision. Siri AI began rolling out in beta in English on 2026-09-14 as part of Apple's 2027 software releases, making Apple discovery an increasingly material answer surface."},
     {"id":"claude","name":"Claude Search / user-directed web retrieval","measurement":["ai_referral_analytics","manual_citation_benchmark"],"discovery_control":"Claude-SearchBot and Claude-User; ClaudeBot remains a separate model-training control"},
-    {"id":"grok","name":"Grok","measurement":["ai_referral_analytics","manual_citation_benchmark"],"discovery_control":"verify official current crawler guidance before robots changes"},
+    {"id":"grok","name":"Grok / Grok Bot","measurement":["ai_referral_analytics","manual_citation_benchmark","platform_watch"],"discovery_control":"xAI is expanding Grok Bot agentic web/app workflows; verify an official publisher/search crawler contract before any robots change."},
     {"id":"meta_ai","name":"Meta AI","measurement":["ai_referral_analytics","manual_citation_benchmark"],"discovery_control":"verify official current crawler guidance before robots changes"},
     {"id":"future_answer_engine","name":"Future answer engines / grounding APIs","measurement":["platform_watch","ai_referral_analytics"],"discovery_control":"Adopt documented crawler/indexing contracts only. Track machine-readable content-use standards, but keep search/retrieval permission separate from model-training/reuse policy."}
   ],
