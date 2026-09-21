@@ -21,8 +21,7 @@ must(!page.includes('wdd-ui-flag') && !page.includes("sessionStorage.setItem(KEY
 must(page.includes('class="wd-nav wdd-dashboard-nav"') && page.includes('id="wd-menu-trigger"') && page.includes('id="wd-main-sheet"'), 'Dashboard must use the shared Watchdog header and left pop-out menu.');
 must(page.includes('/property/css/public-mobile-nav.css') && page.includes('/property/js/watchdog-universal-menu.js') && page.includes('/property/js/public-nav.js'), 'Dashboard must reuse the canonical shared navigation assets.');
 must(!page.includes('class="wdd-sidebar"') && !page.includes('class="wdd-mobile-nav"'), 'Dashboard markup must not ship a persistent sidebar or duplicate mobile navigation.');
-must(shellCss.includes('.wdd-side') && shellCss.includes('display:none'), 'Promoted Spike shell must suppress the experimental Spike sidebar.');
-must(shellCss.includes('.wdd-has-side .wdd-app') && shellCss.includes('display:block'), 'Promoted Spike shell must neutralize the sidebar grid when the enhancement runtime adds its class.');
+must(!spikeLayout.includes('buildSidebar();'), 'Promoted Spike runtime must not create a second dashboard navigation sidebar.');
 must(shellCss.includes('#wd-main-sheet') && shellCss.includes('z-index:9500') && shellCss.includes('#wd-public-backdrop'), 'Shared menu layer must stay above the sticky dashboard header.');
 must(page.indexOf('id="wdd-queue"') < page.indexOf('class="wdd-work"'), 'Action Queue must sit above the portfolio workspace.');
 must(render.includes('Good morning') && render.includes('wdd-command'), 'Dashboard header must render greeting and command search.');
