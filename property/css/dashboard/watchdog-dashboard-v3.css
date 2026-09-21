@@ -20,7 +20,6 @@
   --w3-shadow:0 8px 24px rgba(33,52,82,.055);
   --w3-shadow-lg:0 18px 48px rgba(22,41,72,.11);
   --w3-radius:12px;
-  --w3-sidebar:184px;
 }
 
 html,body{overflow-x:hidden}
@@ -34,7 +33,7 @@ body[data-sidebar-page="dashboard"]{
 body[data-sidebar-page="dashboard"] .wdx-topbar,
 body[data-sidebar-page="dashboard"] .wdx-pagebar{display:none!important}
 body[data-sidebar-page="dashboard"] .wdd-app{min-height:100vh;background:var(--w3-bg)}
-body[data-sidebar-page="dashboard"] .wdd-shell{display:grid;grid-template-columns:var(--w3-sidebar) minmax(0,1fr);min-height:100vh}
+body[data-sidebar-page="dashboard"] .wdd-shell{display:block;min-height:calc(100vh - 66px)}
 body[data-sidebar-page="dashboard"] .wdd-workspace{min-width:0;padding:0 18px 46px 18px}
 body[data-sidebar-page="dashboard"] .wdd-workspace>*{max-width:1500px;margin-left:auto;margin-right:auto}
 body[data-sidebar-page="dashboard"] .wdd-fig,
@@ -43,34 +42,38 @@ body[data-sidebar-page="dashboard"] .wdd-score-num,
 body[data-sidebar-page="dashboard"] .wdd-case-money,
 body[data-sidebar-page="dashboard"] .wdd-table td{font-variant-numeric:tabular-nums}
 
-/* Persistent app navigation */
-.wdd-sidebar{
-  position:sticky;top:0;height:100vh;z-index:80;
-  display:flex;flex-direction:column;min-width:0;
-  padding:25px 16px 18px;
-  color:#d7e3f8;
-  background:linear-gradient(180deg,#0f284b 0%,#102d55 54%,#0d2444 100%);
-  box-shadow:8px 0 26px rgba(16,41,75,.08);
+/* Shared Watchdog header + pop-out navigation */
+body[data-sidebar-page="dashboard"] .wdd-dashboard-nav{
+  position:sticky!important;top:0;z-index:8200;
+  background:rgba(255,255,255,.98)!important;
+  border-bottom:1px solid var(--w3-line);
+  box-shadow:0 4px 18px rgba(14,34,72,.055);
+  backdrop-filter:blur(12px);
 }
-.wdd-sidebar-brand{display:block;padding:0 7px 24px;color:#fff;text-decoration:none}
-.wdd-sidebar-brand strong{display:block;font:800 15px/1.1 "Plus Jakarta Sans",sans-serif;letter-spacing:.16em}
-.wdd-sidebar-brand span{display:block;margin-top:7px;font-size:12px;font-weight:700;letter-spacing:.16em;color:#b9cae8}
-.wdd-sidebar-nav{display:grid;gap:5px}
-.wdd-sidebar-nav a{
-  min-height:44px;display:flex;align-items:center;gap:11px;
-  padding:0 12px;border-radius:9px;color:#d3dded;text-decoration:none;
-  font-size:12px;font-weight:600;transition:background .16s ease,color .16s ease;
+body[data-sidebar-page="dashboard"] .wdd-dashboard-nav .wd-nav-in{
+  max-width:1536px!important;
+  min-height:66px;
+  padding:10px 26px!important;
+  grid-template-columns:minmax(0,1fr) auto!important;
+  gap:18px;
 }
-.wdd-sidebar-nav a i{width:17px;text-align:center;font-size:14px;color:#c8d5e9}
-.wdd-sidebar-nav a:hover{background:rgba(255,255,255,.08);color:#fff}
-.wdd-sidebar-nav a.is-active{background:#1e57ad;color:#fff;box-shadow:inset 0 0 0 1px rgba(255,255,255,.04)}
-.wdd-sidebar-nav a.is-active i{color:#fff}
-.wdd-sidebar-support{
-  margin-top:auto;display:flex;align-items:center;gap:10px;padding:12px 8px 0;
-  border-top:1px solid rgba(255,255,255,.10);color:#d7e2f4
+body[data-sidebar-page="dashboard"] .wdd-dashboard-nav .wd-logo{
+  justify-self:start!important;
+  color:var(--w3-navy)!important;
+  text-shadow:none!important;
 }
-.wdd-sidebar-help{width:28px;height:28px;border-radius:50%;display:grid;place-items:center;background:#2b5fa9;color:#fff;font-size:12px}
-.wdd-sidebar-support b,.wdd-sidebar-support small{display:block}.wdd-sidebar-support b{font-size:12px}.wdd-sidebar-support small{margin-top:2px;font-size:12px;color:#9eb2d2}
+body[data-sidebar-page="dashboard"] .wdd-dashboard-nav .wd-logo i{color:#b79b2f}
+body[data-sidebar-page="dashboard"] .wdd-dashboard-nav .wd-public-trigger{
+  justify-self:end;
+  margin-left:auto;
+  color:var(--w3-navy)!important;
+  text-shadow:none!important;
+  background:#f5f8fa!important;
+  border-color:#dbe4ea!important;
+}
+body[data-sidebar-page="dashboard"] .wdd-dashboard-nav .wd-public-trigger:hover{opacity:1;background:#edf3f7!important}
+body[data-sidebar-page="dashboard"] #wd-main-sheet{z-index:9500!important}
+body[data-sidebar-page="dashboard"] #wd-public-backdrop{z-index:9400!important}
 
 /* Compact application header */
 body[data-sidebar-page="dashboard"] .wdd-standing{
@@ -258,43 +261,29 @@ body[data-sidebar-page="dashboard"] .wdd-pull{
   height:40px;padding:0 14px;border-radius:999px;background:#173b70;font-size:12px;letter-spacing:.03em;text-transform:none
 }
 
-/* Mobile app navigation */
-.wdd-mobile-nav{display:none}
-
 /* Loading */
 body[data-sidebar-page="dashboard"] .wdd-boot{background:var(--w3-bg)}
 body[data-sidebar-page="dashboard"] .wdd-boot-card{border-color:var(--w3-line);box-shadow:var(--w3-shadow-lg)}
 
 /* Tablet */
 @media(max-width:1180px){
-  :root{--w3-sidebar:168px}
   body[data-sidebar-page="dashboard"] .wdd-signals{grid-template-columns:repeat(3,minmax(0,1fr))}
   body[data-sidebar-page="dashboard"] .wdd-signals .wdd-signal:nth-child(n){border-block-end:0}
   body[data-sidebar-page="dashboard"] .wdd-work{grid-template-columns:minmax(0,1.45fr) minmax(290px,.8fr)!important}
   body[data-sidebar-page="dashboard"] .wdd-cases{grid-template-columns:repeat(2,minmax(0,1fr))}
 }
 @media(max-width:960px){
-  body[data-sidebar-page="dashboard"] .wdd-shell{grid-template-columns:1fr}
-  .wdd-sidebar{display:none}
-  body[data-sidebar-page="dashboard"] .wdd-workspace{padding:0 12px 94px}
+  body[data-sidebar-page="dashboard"] .wdd-workspace{padding:0 12px 46px}
   body[data-sidebar-page="dashboard"] .wdd-work{grid-template-columns:1fr!important}
   body[data-sidebar-page="dashboard"] .wdd-work>#wdd-positions,body[data-sidebar-page="dashboard"] .wdd-work>.wdd-rail{grid-column:1!important}
   body[data-sidebar-page="dashboard"] .wdd-work>.wdd-rail{grid-row:2!important;grid-template-columns:repeat(2,minmax(0,1fr));align-items:start}
   .wdd-analysis-card{grid-column:1/-1}
-  .wdd-mobile-nav{
-    position:fixed;left:0;right:0;bottom:0;z-index:1400;display:grid;grid-template-columns:repeat(4,1fr);
-    min-height:68px;padding:7px max(10px,env(safe-area-inset-right)) calc(7px + env(safe-area-inset-bottom)) max(10px,env(safe-area-inset-left));
-    background:rgba(255,255,255,.97);border-top:1px solid #dfe5ed;backdrop-filter:blur(16px)
-  }
-  .wdd-mobile-nav a,.wdd-mobile-nav button{border:0;background:transparent;color:#77869a;text-decoration:none;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:4px;font-size:12px;font-weight:650}
-  .wdd-mobile-nav i{font-size:16px}.wdd-mobile-nav .is-active{color:#2563eb}
-  body[data-sidebar-page="dashboard"] .wdd-pull{bottom:78px}
 }
 
 /* Phone */
 @media(max-width:680px){
   body[data-sidebar-page="dashboard"]{font-size:14px}
-  body[data-sidebar-page="dashboard"] .wdd-workspace{padding:0 8px 88px}
+  body[data-sidebar-page="dashboard"] .wdd-workspace{padding:0 8px 46px}
   .wdd-appbar{min-height:58px;grid-template-columns:minmax(0,1fr) auto;padding:8px 4px}
   .wdd-command{min-height:38px}.wdd-command kbd{display:none}
   .wdd-account-copy,.wdd-account-bell{display:none}.wdd-account-avatar{width:34px;height:34px}
@@ -336,7 +325,7 @@ body[data-sidebar-page="dashboard"] .wdd-boot-card{border-color:var(--w3-line);b
   body[data-sidebar-page="dashboard"] .wdd-work>.wdd-rail{grid-template-columns:1fr;gap:10px}
   .wdd-analysis-card{grid-column:auto}#wdd-rail-map{height:150px}
   body[data-sidebar-page="dashboard"] .wdd-newsslot{display:none}
-  body[data-sidebar-page="dashboard"] .wdd-foot{padding:14px 4px 92px;font-size:12px}
+  body[data-sidebar-page="dashboard"] .wdd-foot{padding:14px 4px 46px;font-size:12px}
   body[data-sidebar-page="dashboard"] .wdd-pull{display:none}
 }
 @media(max-width:390px){
@@ -345,5 +334,11 @@ body[data-sidebar-page="dashboard"] .wdd-boot-card{border-color:var(--w3-line);b
   body[data-sidebar-page="dashboard"] .wdd-signal-v{font-size:17px}
 }
 @media(prefers-reduced-motion:reduce){
-  .wdd-sidebar-nav a,.wdd-case-review{transition:none}
+  .wdd-case-review{transition:none}
+}
+@media(max-width:680px){
+  body[data-sidebar-page="dashboard"] .wdd-dashboard-nav .wd-nav-in{min-height:58px;padding:7px 12px!important}
+  body[data-sidebar-page="dashboard"] .wdd-dashboard-nav .wd-logo{font-size:20px!important}
+  body[data-sidebar-page="dashboard"] .wdd-dashboard-nav .wd-public-trigger{height:44px;min-height:44px;width:44px;padding:0!important;border-radius:50%!important}
+  body[data-sidebar-page="dashboard"] .wdd-dashboard-nav .wd-public-trigger span{display:none}
 }
