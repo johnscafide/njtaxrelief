@@ -1,0 +1,44 @@
+/* ==========================================================================
+   Watchdog Dashboard — promoted Spike shell compatibility
+   NJW-404 · keeps Spike visuals while the shared Watchdog menu remains the
+   sole navigation system.
+   ========================================================================== */
+
+/* The Spike enhancement runtime still builds its score gauge and gap chart.
+   It also creates an experimental sidebar. Keep that sidebar out of the
+   presentation so it cannot compete with the canonical shared pop-out menu. */
+body[data-sidebar-page="dashboard"] .wdd-side,
+body[data-sidebar-page="dashboard"] .wdd-side-toggle{
+  display:none;
+}
+
+body[data-sidebar-page="dashboard"].wdd-has-side .wdd-app{
+  display:block;
+  grid-template-columns:none;
+  align-items:initial;
+}
+
+/* The menu sheet and its backdrop must always layer above the sticky dashboard
+   header, including mobile Safari/WebKit. */
+body[data-sidebar-page="dashboard"] #wd-main-sheet{
+  z-index:9500;
+}
+
+body[data-sidebar-page="dashboard"] #wd-public-backdrop{
+  z-index:9400;
+}
+
+/* Keep the promoted shell constrained to the viewport on phones/tablets. */
+body[data-sidebar-page="dashboard"] .wdd-app,
+body[data-sidebar-page="dashboard"] .wdd-shell,
+body[data-sidebar-page="dashboard"] .wdd-workspace{
+  max-width:100%;
+  min-width:0;
+}
+
+@media (max-width:1180px){
+  body[data-sidebar-page="dashboard"] .wdd-side,
+  body[data-sidebar-page="dashboard"] .wdd-side-toggle{
+    display:none;
+  }
+}
