@@ -46,3 +46,6 @@ jobs:
             BASE_SHA="HEAD^"
           fi
           node scripts/check-content-architecture.mjs --base "$BASE_SHA"
+
+      - name: Verify Dashboard V3 contract
+        run: node property/tests/dashboard-v3-contract.mjs
