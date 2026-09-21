@@ -1,18 +1,7 @@
 /* ==========================================================================
    Watchdog Dashboard — promoted Spike shell compatibility
-   NJW-404 · Spike visuals with the shared Watchdog menu as the sole
-   navigation system.
+   NJW-405 · the global app-shell header is the sole dashboard navigation.
    ========================================================================== */
-
-/* The menu sheet and its backdrop must always layer above the sticky dashboard
-   header, including mobile Safari/WebKit. */
-body[data-sidebar-page="dashboard"] #wd-main-sheet{
-  z-index:9500;
-}
-
-body[data-sidebar-page="dashboard"] #wd-public-backdrop{
-  z-index:9400;
-}
 
 /* Keep the promoted shell constrained to the viewport on phones/tablets. */
 body[data-sidebar-page="dashboard"] .wdd-app,
