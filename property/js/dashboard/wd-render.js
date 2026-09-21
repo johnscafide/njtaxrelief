@@ -120,7 +120,8 @@ function start(){
     }).join('');
     var body=props.length?'<div class="wdd-scrollx"><table class="wdd-table"><thead><tr>'+head+'</tr></thead><tbody>'+rows()+'</tbody></table></div>':
       '<div class="wdd-empty"><i class="fas fa-folder-open" aria-hidden="true"></i><p>No saved properties yet. Look one up and it will appear here with assessment, tax and Watchdog status.</p><a href="/property/">Look up an address</a></div>';
-    // content-architecture: dynamic — portfolio markup depends on authenticated rows, sort state, and table/map mode.\n    H.el('wdd-positions').innerHTML='<div class="wdd-panel"><div class="wdd-panel-head"><div><h2>Your Portfolio</h2><p>'+props.length+' propert'+(props.length===1?'y':'ies')+' · Sorted by '+esc(current.label.toLowerCase())+'</p></div><div class="wdd-fill"></div><div class="wdd-tabs" role="tablist"><button type="button" role="tab" data-tab="ledger" aria-selected="'+(S.tab==='ledger')+'">Table</button><button type="button" role="tab" data-tab="map" aria-selected="'+(S.tab==='map')+'">Map</button></div></div>'+
+    // content-architecture: dynamic — portfolio markup depends on authenticated rows, sort state, and table/map mode.
+    H.el('wdd-positions').innerHTML='<div class="wdd-panel"><div class="wdd-panel-head"><div><h2>Your Portfolio</h2><p>'+props.length+' propert'+(props.length===1?'y':'ies')+' · Sorted by '+esc(current.label.toLowerCase())+'</p></div><div class="wdd-fill"></div><div class="wdd-tabs" role="tablist"><button type="button" role="tab" data-tab="ledger" aria-selected="'+(S.tab==='ledger')+'">Table</button><button type="button" role="tab" data-tab="map" aria-selected="'+(S.tab==='map')+'">Map</button></div></div>'+
       (S.tab==='map'?'<div id="wdd-map"></div>':body)+'</div>';
     if(S.tab==='map')drawMap();
   }
@@ -173,7 +174,8 @@ function start(){
     var feed=recent.length?recent.map(function(r){
       var tone=feedTone(r);return '<div class="wdd-feed-item '+tone+'"><span class="wdd-feed-source '+tone+'"><i class="fas '+feedIcon(r)+'" aria-hidden="true"></i></span><div><b>'+esc(r.title||H.pretty(r.event_type))+'</b><small>'+esc(addressFor(r.pams_pin)||r.pams_pin||'Saved property')+' · '+esc(H.ago(r.occurred_at))+'</small></div></div>';
     }).join(''):'<div class="wdd-empty" style="padding:24px 14px"><p>Nothing has changed on your properties in the last 120 days.</p></div>';
-    // content-architecture: dynamic — rail modules combine live saved-property counts, map state, events, and calculated portfolio distribution.\n    H.el('wdd-rail').innerHTML=
+    // content-architecture: dynamic — rail modules combine live saved-property counts, map state, events, and calculated portfolio distribution.
+    H.el('wdd-rail').innerHTML=
       '<section class="wdd-panel wdd-portfolio-map-card"><div class="wdd-panel-head"><div><h2>Your Portfolio</h2></div><a class="wdd-panel-link" href="#" data-tab-link="map">View map →</a></div><div class="wdd-map-wrap"><div id="wdd-rail-map"></div><span class="wdd-map-stat"><i class="fas fa-location-dot"></i>'+st.count+' properties</span></div></section>'+
       '<section class="wdd-panel" id="wdd-activity"><div class="wdd-panel-head"><div><h2>Recent Changes</h2><p>'+(st.changes30?st.changes30+' in the last 30 days':'Last 120 days')+'</p></div><a class="wdd-panel-link" href="/property/pulse">View all →</a></div>'+feed+'</section>'+
       '<section class="wdd-panel wdd-analysis-card"><div class="wdd-panel-head"><div><h2>Portfolio Analysis</h2></div></div><div class="wdd-analysis-tabs"><button class="wdd-analysis-tab is-active" type="button">Assessed vs Market</button><button class="wdd-analysis-tab" type="button" disabled>Tax Distribution</button></div><div class="wdd-histogram" role="img" aria-label="Assessment gap distribution">'+railHistogram()+'</div><div class="wdd-analysis-copy">'+analysisCopy()+'</div></section>';
@@ -191,11 +193,14 @@ function start(){
   function paintQueue(){
     var list=cases(),count=list.length,head='<div class="wdd-queue-head"><div><h2>Action Queue <span class="wdd-queue-count">'+count+'</span></h2><p>Properties with the biggest review opportunities based on current governed market evidence.</p></div><a class="wdd-queue-link" href="#wdd-positions">View all →</a></div>';
     if(!WD.isPro()){
-      // content-architecture: dynamic — gated queue copy and actions depend on entitlement plus the live review-case count.\n      // content-architecture: dynamic — review cards are ranked from the authenticated portfolio and governed gap calculations.\n    H.el('wdd-queue').innerHTML=head+'<div class="wdd-gate"><h3>'+(count?'Watchdog found '+count+' propert'+(count===1?'y':'ies')+' worth reviewing':'Nothing needs review right now')+'</h3><p>The gap remains visible in your portfolio. Professional plans add the governed evidence file and decision workflow.</p><a class="wdd-gate-cta" href="/property/pro">Compare plans <i class="fas fa-arrow-right"></i></a></div>';return;
+      // content-architecture: dynamic — gated queue copy and actions depend on entitlement plus the live review-case count.
+      H.el('wdd-queue').innerHTML=head+'<div class="wdd-gate"><h3>'+(count?'Watchdog found '+count+' propert'+(count===1?'y':'ies')+' worth reviewing':'Nothing needs review right now')+'</h3><p>The gap remains visible in your portfolio. Professional plans add the governed evidence file and decision workflow.</p><a class="wdd-gate-cta" href="/property/pro">Compare plans <i class="fas fa-arrow-right"></i></a></div>';return;
     }
     if(!list.length){
+      // content-architecture: dynamic — this empty state depends on the live authenticated review queue.
       H.el('wdd-queue').innerHTML=head+'<div class="wdd-gate"><h3>Nothing to review right now</h3><p>No saved property is currently assessed above the review threshold. Watchdog keeps monitoring the evidence.</p></div>';return;
     }
+    // content-architecture: dynamic — review cards are ranked from the authenticated portfolio and governed gap calculations.
     H.el('wdd-queue').innerHTML=head+'<div class="wdd-cases">'+list.slice(0,3).map(function(c){
       return '<article class="wdd-case"><span class="wdd-case-thumb"'+thumbStyle(c.p)+'><i class="fas fa-house"></i></span><div class="wdd-case-main"><h3 class="wdd-case-title">'+esc(c.p.address||c.p.pams_pin||'Saved property')+'</h3><span class="wdd-case-place">'+esc([H.titleCase(c.p.town),H.titleCase(c.p.county)].filter(Boolean).join(', ')||'New Jersey')+'</span><span class="wdd-gap-pill">+'+c.g.pct.toFixed(1)+'% gap</span></div><div class="wdd-case-row"><span class="wdd-case-value"><b>'+(c.dollars?H.dollars(c.dollars):'—')+'</b><small>a year</small></span><a class="wdd-case-review" href="/property/report?pin='+encodeURIComponent(c.p.pams_pin||'')+'">Review</a></div></article>';
     }).join('')+'</div>';
