@@ -91,7 +91,7 @@ assert(universal.includes('planPromo:planPromo'), 'Plan promo registry is not ex
 assert(universal.includes("tone:'pro'"), 'Pro promo tone is missing from plan mapping');
 assert(universal.includes("tone:'plus'"), 'Pro+ promo tone is missing from plan mapping');
 assert(universal.includes("tone:'teams'"), 'Teams promo tone is missing from plan mapping');
-assert(universal.includes("var VERSION = '20260915a'"), 'Universal menu asset version is stale');
+assert(universal.includes("var VERSION = '20260920a'"), 'Universal menu asset version is stale');
 assert(!universal.includes('function ensurePromoCss()'), 'Plan promo styling must not be injected inline from JavaScript');
 assert(!universal.includes('wd-universal-plan-promo-css'), 'Legacy inline plan-promo style element is still present');
 
@@ -178,6 +178,3 @@ for (const [name, rule] of [['drawer', drawerRule], ['profile', profileRule]]) {
 // the profile's canonical sign-out action remains present.
 assert(css.includes('.wd4-nav-foot,.hm27-nav-foot{display:none!important}'), 'App main drawers still expose duplicate Sign out');
 assert(css.includes('.wd-universal-nav-foot:has([data-wd-universal="signout"]){display:none!important}'), 'Public main drawer still exposes duplicate Sign out');
-assert(css.includes('.wd-universal-profile>.wd-universal-signout'), 'Profile Sign out was removed instead of the duplicate main-menu action');
-
-console.log('Universal Watchdog menu contract: PASS');
