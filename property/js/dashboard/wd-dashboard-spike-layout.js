@@ -36,7 +36,7 @@
     });
   }
   function num(v) { var n = Number(v); return Number.isFinite(n) ? n : 0; }
-  function valid(v) { var n = Number(v); return Number.isFinite(n) ? n : null; }
+  function valid(v) { if (v == null || v === '') return null; var n = Number(v); return Number.isFinite(n) ? n : null; }
   function clamp(v, a, b) { return Math.max(a, Math.min(b, v)); }
 
   /* ------------------------------------------------------------------
@@ -151,7 +151,7 @@
     props.forEach(function (p) {
       var s = WD.S.scores[p.pams_pin];
       var peer = s && valid(s.peer);
-      if (peer != null) vals.push(peer);
+      if (peer != null && peer > 0) vals.push(peer);
     });
     if (!vals.length) return null;
     vals.sort(function (a, b) { return a - b; });
@@ -231,10 +231,9 @@
       '</div>' +
       '<span class="wdd-gauge-verdict ' + v.tone + '"><i></i>' + esc(v.label) + '</span>' +
       (peer != null
-        ? '<p class="wdd-gauge-note">Gold mark is the median score across your towns, ' +
-          Math.round(peer) + '. You are ' + Math.abs(score - Math.round(peer)) +
-          (score >= peer ? ' above' : ' below') + ' it.</p>'
-        : '');
+        ? '<p class="wdd-gauge-note"><span>Town median</span><b>' + Math.round(peer) + '</b><em>' +
+          Math.abs(score - Math.round(peer)) + (score >= peer ? ' points above' : ' points below') + '</em></p>'
+        : '<p class="wdd-gauge-note is-unavailable"><span>Town median</span><b>—</b><em>Building peer coverage</em></p>');
 
     intro.appendChild(node);
   }
