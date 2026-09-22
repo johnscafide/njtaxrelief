@@ -147,10 +147,13 @@
   }
 
   function peerMedian(props) {
-    var WD = w.WD, vals = [];
+    var WD = w.WD, vals = [], seen = {};
     props.forEach(function (p) {
       var s = WD.S.scores[p.pams_pin];
       var peer = s && valid(s.peer);
+      var townKey = String((s && s.town) || p.town || '').trim().toUpperCase() + '|' + String((s && s.county) || p.county || '').trim().toUpperCase();
+      if (seen[townKey]) return;
+      seen[townKey] = true;
       if (peer != null && peer > 0) vals.push(peer);
     });
     if (!vals.length) return null;
