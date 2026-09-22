@@ -547,46 +547,14 @@ document.addEventListener('mouseover',e=>{var t=e.target.closest('[data-marker-i
 (function () {
   'use strict';
 
-  var HOME_MODULE_VERSION = '20260808a';
-  var homeModulePromises = Object.create(null);
-  var homeModuleDependencies = {
-    'revaluation-radar': ['uniformity'],
-    'buyer-closing-costs': ['uniformity', 'revaluation-radar', 'town-intelligence'],
-    'tax-pressure-simulator': ['town-intelligence', 'municipal-budget-pressure'],
-    'appeal-packet': ['uniformity'],
-    'relocation': ['uniformity'],
-    'investor-screen': ['uniformity'],
-    'investor-carry-volatility': ['uniformity', 'revaluation-radar', 'municipal-budget-pressure', 'tax-trajectory', 'exempt-pilot-exposure'],
-    'appeal-evidence-strength': ['uniformity'],
-    'appeal-opportunity': ['uniformity', 'appeal-evidence-strength'],
-    'permit-lifecycle-intelligence': ['professional-due-diligence'],
-    'real-estate-intelligence': ['uniformity', 'revaluation-radar', 'municipal-budget-pressure', 'tax-trajectory'],
-    'broker-listing-brief': ['real-estate-intelligence'],
-    'collateral-escrow-stress': ['buyer-closing-costs', 'municipal-budget-pressure'],
-    'development-constraint-stack': ['professional-due-diligence'],
-    'title-evidence-graph': ['professional-due-diligence'],
-    'score-history': ['watchdog-score'],
-    'watchdog-score': ['uniformity', 'revaluation-radar'],
-    'professional-decision-signals': ['uniformity', 'revaluation-radar', 'municipal-budget-pressure', 'tax-trajectory'],
-    'improvement-ratio': ['town-profile'],
-    'property-class-mix': ['town-profile']
-  };
-
-  function loadHomeTool(name) {
-    if (!homeModulePromises[name]) {
-      homeModulePromises[name] = Promise.all((homeModuleDependencies[name] || []).map(loadHomeTool))
-        .then(function () { return import('../tools/' + name + '.js'); })
-        .then(function (module) {
-          if (name === 'uniformity') return Promise.all([loadUniformity(), loadAppeals()]).then(function () { return module; });
-          if (name === 'abatement-exposure') return loadAbatements().then(function () { return module; });
-          if (name === 'exempt-pilot-exposure') return loadExemptPilot().then(function () { return module; });
-          return module;
-        }).catch(function (error) { delete homeModulePromises[name]; throw error; });
-    }
-    return homeModulePromises[name];
-  }
-  function loadHomeTools(names) { return Promise.all(names.map(loadHomeTool)); }
+  // Property Home is intentionally a single JS bundle. Do not dynamically import
+  // dashboard tool modules here: those imports were the remaining second JS layer
+  // and caused partially styled/broken sections when a module failed.
+  var HOME_MODULE_VERSION = '20260922-single8';
+  function loadHomeTool() { return Promise.resolve(null); }
+  function loadHomeTools() { return Promise.resolve([]); }
   window.NJPropertyModules = { version: HOME_MODULE_VERSION, loadTool: loadHomeTool, loadTools: loadHomeTools };
+
 
   var LEDGER_URL = 'https://uvkvaxljhhngydvlrzom.supabase.co';
   var LEDGER_KEY = 'sb_publishable_MYX59qCbK3d-21zDfJqkNw_fvmfnexa';
@@ -2111,7 +2079,7 @@ document.addEventListener('mouseover',e=>{var t=e.target.closest('[data-marker-i
            'the improvement figure is a judgment about a structure, and judgment is what an appeal contests.',
       build: function (r) {
         var c = chapter123(r);
-        return (c && c.testable ? ch123Block(r, c) : untestableBlock(r)) + toolImprovementRatio(r);
+        return (c && c.testable ? ch123Block(r, c) : untestableBlock(r));
       },
       sum: function (r) {
         var c = chapter123(r);
@@ -2291,19 +2259,17 @@ document.addEventListener('mouseover',e=>{var t=e.target.closest('[data-marker-i
       var host = el('secb-' + k);
       if (sec && host && current) {
         host.innerHTML = '<div class="tl-note"><div class="pl-spin"></div> Loading this analysis...</div>';
-        loadHomeTools(HOME_SECTION_MODULES[k] || []).then(function () {
-          var html = '';
-          try { html = sec.build(current) || ''; }
-          catch (err) { console.error('Section build failed:', k, err); html = '<div class="tl-note">This section could not be built for this property.</div>'; }
-          host.innerHTML = html || '<div class="tl-note">Nothing to show here for this property.</div>';
-          compactHomeSection(host, k);
-          e.setAttribute('data-built', '1');
-          initTips();
-          if (el('tc-total')) window.dbCost();
-        }).catch(function (error) {
-          console.error('Section module failed:', k, error);
-          host.innerHTML = '<div class="tl-note">This analysis could not load. Close and reopen the section to try again.</div>';
-        });
+        var html = '';
+        try { html = sec.build(current) || ''; }
+        catch (err) {
+          console.error('Section build failed:', k, err);
+          html = '<div class="tl-note">This section is not available in the streamlined Property Home yet.</div>';
+        }
+        host.innerHTML = html || '<div class="tl-note">Nothing to show here for this property.</div>';
+        compactHomeSection(host, k);
+        e.setAttribute('data-built', '1');
+        initTips();
+        if (el('tc-total') && typeof window.dbCost === 'function') window.dbCost();
       }
     }
   };
