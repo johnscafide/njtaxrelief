@@ -11,9 +11,13 @@ const shellCss=read('property/css/dashboard/watchdog-dashboard-spike-promoted.cs
 const appShell=read('property/js/app-shell-2027.js');
 const render=read('property/js/dashboard/wd-render.js');
 const spikeLayout=read('property/js/dashboard/wd-dashboard-spike-layout.js');
+const visualCore=read('property/js/dashboard/wd-dashboard-visual-core.js');
+const autocomplete=read('property/js/nj-address-autocomplete.js');
 
 syntax('property/js/dashboard/wd-render.js');
 syntax('property/js/dashboard/wd-dashboard-spike-layout.js');
+syntax('property/js/dashboard/wd-dashboard-visual-core.js');
+syntax('property/js/nj-address-autocomplete.js');
 
 must(page.includes('<html lang="en" data-ui="spike">'), 'Dashboard must make Spike the canonical UI without query/session switching.');
 must(page.includes('watchdog-dashboard-spike.css') && page.includes('watchdog-dashboard-spike-promoted.css'), 'Dashboard must load the promoted Spike styles.');
@@ -29,6 +33,15 @@ must(!shellCss.includes('#wd-main-sheet') && !shellCss.includes('#wd-public-back
 must(page.indexOf('id="wdd-queue"') < page.indexOf('class="wdd-work"'), 'Action Queue must sit above the portfolio workspace.');
 must(render.includes('Good morning') && render.includes('wdd-command'), 'Dashboard header must render greeting and command search.');
 must(render.includes('Watchdog Score') && render.includes('Worth Reviewing'), 'KPI row must include approved top-level metrics.');
+must(render.includes('wdd-sponsor-signal') && render.includes('Greentree Mortgage') && render.includes('Advertisement'), 'Sixth KPI slot must be the labeled Greentree Mortgage advertisement.');
+must(!render.includes('<div class="wdd-account">') && render.includes('wdd-command-voice'), 'Dashboard command row must remove duplicate account/notification chrome and include voice search.');
+must(page.includes('/property/js/nj-address-autocomplete.js'), 'Dashboard must load the shared New Jersey address autocomplete runtime.');
+must(autocomplete.includes("bindCustom(q('wdd-command-input'),lib)") && autocomplete.includes('WatchdogNJAddressAutocompleteRefresh=boot'), 'Shared address autocomplete must bind the dynamic dashboard command input.');
+must(render.includes('wdd-row-actions') && render.includes('copy-address') && render.includes('/property/report?pin='), 'Portfolio ellipsis must expose a multi-action property menu.');
+must(shellCss.includes('.wdd-addr>span') && shellCss.includes('white-space:nowrap') && shellCss.includes('.wdd-row-actions'), 'Promoted Spike CSS must keep addresses single-line and style compact row actions.');
+must(visualCore.includes("visual='<span class=\"wdd-feed-source") && visualCore.includes("getAttribute('data-ui')!=='spike'"), 'Recent Changes must use semantic icons and must not overwrite the promoted Spike KPI row.');
+must(spikeLayout.includes("if (v == null || v === '') return null") && spikeLayout.includes('peer != null && peer > 0'), 'Score gauge must not convert missing peer medians into zero.');
+must(shellCss.includes('grid-row:1 / span 2') && shellCss.includes('.wdd-work>.wdd-adaptive'), 'Desktop workspace must keep adaptive cards directly under the portfolio while the right rail spans both rows.');
 must(render.includes('Your Portfolio') && render.includes('Recent Changes') && render.includes('Portfolio Analysis'), 'Dashboard workspace must include portfolio, change feed and analysis modules.');
 must(render.includes('wdd-case-review') && render.includes('slice(0,3)'), 'Action Queue must render compact top review cards.');
 must(render.includes('wdd-rail-map') && render.includes('L.circleMarker'), 'Right rail must render the live portfolio map.');
