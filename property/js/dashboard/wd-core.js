@@ -100,10 +100,11 @@
     }).then(function (parts) {
       if (!Array.isArray(parts)) return;
       var townPeers = {};
-      H.settled(parts[2]).forEach(function (r) { var key = String(r.town || '').trim().toUpperCase(); if (key && H.valid(r.avg_watchdog_score) != null) townPeers[key] = H.num(r.avg_watchdog_score); });
-      H.settled(parts[1]).forEach(function (r) { if (!r.pams_pin || H.valid(r.watchdog_score) == null || S.scores[r.pams_pin]) return; var townKey = String(r.town || '').trim().toUpperCase(); S.scores[r.pams_pin] = { score: H.num(r.watchdog_score), peer: townPeers[townKey] != null ? townPeers[townKey] : null, peerCount: null, town: r.town }; });
-      H.settled(parts[0]).forEach(function (r) { if (!r.pams_pin || H.valid(r.watchdog_score) == null) return; var townKey = String(r.town || '').trim().toUpperCase(); S.scores[r.pams_pin] = { score: H.num(r.watchdog_score), peer: H.valid(r.peer_median) != null ? H.num(r.peer_median) : (townPeers[townKey] != null ? townPeers[townKey] : null), peerCount: H.num(r.peer_count), town: r.town }; });
-      S.properties.forEach(function (p) { var s = S.scores[p.pams_pin], townKey = String(p.town || '').trim().toUpperCase(); if (s && s.peer == null && townPeers[townKey] != null) s.peer = townPeers[townKey]; });
+      function townPeerKey(town, county) { return String(town || '').trim().toUpperCase() + '|' + String(county || '').trim().toUpperCase(); }
+      H.settled(parts[2]).forEach(function (r) { var key = townPeerKey(r.town, r.county); if (key !== '|' && H.valid(r.avg_watchdog_score) != null) townPeers[key] = H.num(r.avg_watchdog_score); });
+      H.settled(parts[1]).forEach(function (r) { if (!r.pams_pin || H.valid(r.watchdog_score) == null || S.scores[r.pams_pin]) return; var townKey = townPeerKey(r.town, r.county); S.scores[r.pams_pin] = { score: H.num(r.watchdog_score), peer: townPeers[townKey] != null ? townPeers[townKey] : null, peerCount: null, town: r.town, county: r.county }; });
+      H.settled(parts[0]).forEach(function (r) { if (!r.pams_pin || H.valid(r.watchdog_score) == null) return; var townKey = townPeerKey(r.town, r.county); S.scores[r.pams_pin] = { score: H.num(r.watchdog_score), peer: H.valid(r.peer_median) != null ? H.num(r.peer_median) : (townPeers[townKey] != null ? townPeers[townKey] : null), peerCount: H.num(r.peer_count), town: r.town, county: r.county }; });
+      S.properties.forEach(function (p) { var s = S.scores[p.pams_pin], townKey = townPeerKey(p.town, p.county); if (s && s.peer == null && townPeers[townKey] != null) s.peer = townPeers[townKey]; });
       S.changes = H.settled(parts[3]);
       S.findings = H.settled(parts[4]);
     });

@@ -29,7 +29,7 @@ requireMatch('renders saved-property treatment', /Saved property/);
 requireMatch('renders saved-property quick shortcuts', /Saved properties/);
 requireMatch('renders recently-viewed quick shortcuts', /Recently viewed/);
 requireMatch('retains explicit Google attribution', /Powered by Google/);
-requireMatch('fetches Google place fields only after prediction selection', /selectPrediction[\s\S]*fetchFields\(\{fields:\['formattedAddress','addressComponents'\]\}\)/);
+requireMatch('fetches Google place fields only after prediction selection', /selectPrediction[\s\S]*fetchFields\(\{fields:\['formattedAddress','addressComponents'(?:,'location')?\]\}\)/);
 requireMatch('rejects a selected place outside New Jersey', /state!==['"]NJ['"]/);
 requireMatch('retains keyboard navigation', /ArrowDown[\s\S]*ArrowUp[\s\S]*Escape[\s\S]*Enter/);
 requireMatch('retains combobox semantics', /role','combobox'/);

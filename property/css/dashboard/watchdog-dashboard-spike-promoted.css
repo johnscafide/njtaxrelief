@@ -1,12 +1,423 @@
 /* ==========================================================================
-   Watchdog Dashboard — promoted Spike shell compatibility
-   NJW-405 · the global app-shell header is the sole dashboard navigation.
+   Watchdog Dashboard — promoted Spike refinements
+   NJW-407 · compact portfolio, single global header, richer actions/search,
+   clearer change icons, denser workspace and sponsor KPI.
    ========================================================================== */
 
-/* Keep the promoted shell constrained to the viewport on phones/tablets. */
 body[data-sidebar-page="dashboard"] .wdd-app,
 body[data-sidebar-page="dashboard"] .wdd-shell,
 body[data-sidebar-page="dashboard"] .wdd-workspace{
   max-width:100%;
   min-width:0;
+}
+
+body[data-sidebar-page="dashboard"] .wdd-workspace{
+  gap:14px;
+  padding-top:14px;
+}
+
+/* Center the dashboard's property command search. Account and notification
+   controls live only in the global app-shell header. */
+body[data-sidebar-page="dashboard"] .wdd-appbar{
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  min-height:66px;
+  padding:2px 0 6px;
+}
+body[data-sidebar-page="dashboard"] .wdd-command{
+  position:relative;
+  width:min(980px,100%);
+  min-height:52px;
+  padding:0 12px 0 20px;
+  gap:11px;
+  box-shadow:0 7px 24px rgba(14,34,72,.09);
+}
+body[data-sidebar-page="dashboard"] .wdd-command input{
+  font-size:14px;
+}
+body[data-sidebar-page="dashboard"] .wdd-command-voice{
+  width:34px;
+  height:34px;
+  flex:none;
+  display:grid;
+  place-items:center;
+  border:0;
+  border-radius:50%;
+  background:transparent;
+  color:var(--sp-primary);
+  cursor:pointer;
+  transition:background .18s ease,transform .15s ease,color .18s ease;
+}
+body[data-sidebar-page="dashboard"] .wdd-command-voice:hover{
+  background:var(--sp-tint-primary);
+}
+body[data-sidebar-page="dashboard"] .wdd-command-voice.is-listening{
+  background:var(--sp-tint-bad);
+  color:var(--sp-bad);
+  transform:scale(1.05);
+}
+body[data-sidebar-page="dashboard"] .wdd-command-voice.is-listening i{
+  color:inherit;
+}
+body[data-sidebar-page="dashboard"] .wdd-account{display:none}
+
+/* KPI row: fill all six desktop slots, with the sixth reserved for the
+   clearly labeled mortgage partner advertisement. */
+body[data-sidebar-page="dashboard"] .wdd-signals{
+  gap:12px;
+}
+body[data-sidebar-page="dashboard"] .wdd-sponsor-signal{
+  display:flex;
+  flex-direction:column;
+  justify-content:center;
+  min-height:150px;
+  text-decoration:none;
+  color:var(--sp-ink);
+  background:
+    radial-gradient(circle at 100% 0,rgba(184,151,42,.16),transparent 48%),
+    var(--sp-surface);
+  box-shadow:var(--sp-shadow);
+}
+body[data-sidebar-page="dashboard"] .wdd-sponsor-top{
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  gap:10px;
+  margin-bottom:8px;
+}
+body[data-sidebar-page="dashboard"] .wdd-sponsor-top img{
+  width:34px;
+  height:34px;
+  border-radius:50%;
+  object-fit:cover;
+  border:2px solid #fff;
+  box-shadow:0 2px 8px rgba(14,34,72,.12);
+}
+body[data-sidebar-page="dashboard"] .wdd-ad-label{
+  font-size:12px;
+  font-weight:850;
+  letter-spacing:.1em;
+  text-transform:uppercase;
+  color:var(--sp-muted);
+}
+body[data-sidebar-page="dashboard"] .wdd-sponsor-signal strong{
+  font:800 15px/1.2 var(--wdd-display);
+  color:var(--sp-ink);
+}
+body[data-sidebar-page="dashboard"] .wdd-sponsor-signal>span:not(.wdd-sponsor-top){
+  margin-top:5px;
+  font-size:12px;
+  line-height:1.35;
+  color:var(--sp-body);
+}
+body[data-sidebar-page="dashboard"] .wdd-sponsor-signal em{
+  margin-top:9px;
+  font-style:normal;
+  font-size:12px;
+  font-weight:750;
+  color:var(--sp-primary);
+}
+body[data-sidebar-page="dashboard"] .wdd-sponsor-signal>small{
+  margin-top:4px;
+  font-size:12px;
+  line-height:1.25;
+  color:var(--sp-muted);
+}
+
+/* Larger, more balanced score hero. */
+body[data-sidebar-page="dashboard"] .wdd-hero{
+  display:grid;
+  grid-template-columns:minmax(0,1fr) 300px;
+  align-items:center;
+  min-height:300px;
+  gap:34px;
+  padding:30px 38px;
+}
+body[data-sidebar-page="dashboard"] .wdd-heroscore{
+  width:280px;
+  justify-self:center;
+  align-self:center;
+}
+body[data-sidebar-page="dashboard"] .wdd-gauge{
+  width:230px;
+}
+body[data-sidebar-page="dashboard"] .wdd-gauge-val{
+  padding-bottom:20px;
+}
+body[data-sidebar-page="dashboard"] .wdd-gauge-val b{
+  font-size:54px;
+}
+body[data-sidebar-page="dashboard"] .wdd-gauge-val span{
+  font-size:12px;
+}
+body[data-sidebar-page="dashboard"] .wdd-gauge-verdict{
+  margin-top:-4px;
+  padding:9px 18px;
+  font-size:13px;
+}
+body[data-sidebar-page="dashboard"] .wdd-gauge-note{
+  width:100%;
+  margin:12px 0 0;
+  padding:10px 12px;
+  display:grid;
+  grid-template-columns:1fr auto;
+  align-items:center;
+  gap:2px 10px;
+  border-radius:12px;
+  background:rgba(255,255,255,.58);
+  text-align:left;
+}
+body[data-sidebar-page="dashboard"] .wdd-gauge-note span{
+  font-size:12px;
+  font-weight:800;
+  letter-spacing:.08em;
+  text-transform:uppercase;
+  color:var(--sp-muted);
+}
+body[data-sidebar-page="dashboard"] .wdd-gauge-note b{
+  grid-row:1 / span 2;
+  grid-column:2;
+  font:800 26px/1 var(--wdd-display);
+  color:var(--sp-ink);
+}
+body[data-sidebar-page="dashboard"] .wdd-gauge-note em{
+  font-size:12px;
+  font-style:normal;
+  color:var(--sp-body);
+}
+body[data-sidebar-page="dashboard"] .wdd-gauge-note.is-unavailable b{
+  color:var(--sp-muted);
+}
+
+/* Keep the visual-summary cards immediately below the portfolio instead of
+   waiting for the taller right rail to finish. */
+body[data-sidebar-page="dashboard"] .wdd-work{
+  grid-template-rows:auto auto;
+  gap:14px 18px;
+}
+body[data-sidebar-page="dashboard"] .wdd-work>#wdd-positions{
+  grid-column:1;
+  grid-row:1;
+}
+body[data-sidebar-page="dashboard"] .wdd-work>.wdd-adaptive{
+  grid-column:1;
+  grid-row:2;
+  gap:12px;
+  margin:0;
+}
+body[data-sidebar-page="dashboard"] .wdd-work>.wdd-rail{
+  grid-column:2;
+  grid-row:1 / span 2;
+  gap:14px;
+}
+body[data-sidebar-page="dashboard"] .wdd-adapt-card{
+  padding:16px 17px;
+}
+
+/* Compact portfolio ledger. Address stays on one line with smaller locality
+   directly beneath it. */
+body[data-sidebar-page="dashboard"] .wdd-panel-head{
+  padding:16px 18px 11px;
+}
+body[data-sidebar-page="dashboard"] .wdd-ledger-tools{
+  padding:4px 18px 10px;
+}
+body[data-sidebar-page="dashboard"] .wdd-table th{
+  padding:9px 16px;
+}
+body[data-sidebar-page="dashboard"] .wdd-table td{
+  padding:9px 16px;
+  font-size:12.5px;
+}
+body[data-sidebar-page="dashboard"] .wdd-property-cell{
+  grid-template-columns:34px minmax(0,1fr);
+  gap:9px;
+  min-width:220px;
+}
+body[data-sidebar-page="dashboard"] .wdd-property-thumb{
+  width:34px;
+  height:34px;
+  border-radius:10px;
+  font-size:12px;
+}
+body[data-sidebar-page="dashboard"] .wdd-addr{
+  min-width:0;
+  font-size:12.5px;
+  line-height:1.2;
+}
+body[data-sidebar-page="dashboard"] .wdd-addr>span{
+  display:block;
+  max-width:230px;
+  white-space:nowrap;
+  overflow:hidden;
+  text-overflow:ellipsis;
+}
+body[data-sidebar-page="dashboard"] .wdd-addr small{
+  margin-top:2px;
+  font-size:12px;
+  line-height:1.2;
+  white-space:nowrap;
+  overflow:hidden;
+  text-overflow:ellipsis;
+}
+body[data-sidebar-page="dashboard"] .wdd-sub{
+  margin-top:2px;
+  font-size:12px;
+}
+body[data-sidebar-page="dashboard"] .wdd-status-pill{
+  min-width:58px;
+  min-height:24px;
+  padding:0 10px;
+  font-size:12px;
+}
+body[data-sidebar-page="dashboard"] .wdd-row-menu{
+  width:28px;
+  height:28px;
+}
+body[data-sidebar-page="dashboard"] .wdd-row-actions-cell{
+  position:relative;
+}
+body[data-sidebar-page="dashboard"] .wdd-row-actions{
+  position:absolute;
+  right:12px;
+  top:calc(50% + 18px);
+  z-index:1200;
+  width:190px;
+  padding:6px;
+  border:1px solid var(--sp-line);
+  border-radius:13px;
+  background:var(--sp-surface);
+  box-shadow:var(--sp-shadow-pop);
+  text-align:left;
+}
+body[data-sidebar-page="dashboard"] .wdd-row-actions[hidden]{
+  display:none;
+}
+body[data-sidebar-page="dashboard"] .wdd-row-actions a,
+body[data-sidebar-page="dashboard"] .wdd-row-actions button{
+  width:100%;
+  min-height:34px;
+  display:grid;
+  grid-template-columns:24px minmax(0,1fr);
+  align-items:center;
+  gap:7px;
+  padding:0 9px;
+  border:0;
+  border-radius:9px;
+  background:transparent;
+  color:var(--sp-body);
+  text-decoration:none;
+  text-align:left;
+  font:650 12px/1.2 var(--wdd-body);
+  cursor:pointer;
+}
+body[data-sidebar-page="dashboard"] .wdd-row-actions a:hover,
+body[data-sidebar-page="dashboard"] .wdd-row-actions button:hover{
+  background:var(--sp-tint-primary);
+  color:var(--sp-primary);
+}
+body[data-sidebar-page="dashboard"] .wdd-row-actions i{
+  width:18px;
+  text-align:center;
+}
+body[data-sidebar-page="dashboard"] .wdd-table tbody tr:nth-last-child(-n+3) .wdd-row-actions{
+  top:auto;
+  bottom:calc(50% + 18px);
+}
+
+/* What changed uses clear semantic icons instead of miniature map tiles. */
+body[data-sidebar-page="dashboard"] .wdd-feed-item{
+  grid-template-columns:44px minmax(0,1fr);
+  gap:13px;
+  padding:12px 16px;
+}
+body[data-sidebar-page="dashboard"] .wdd-feed-source{
+  width:44px;
+  height:44px;
+  border-radius:13px;
+  font-size:16px;
+  background:var(--sp-tint-primary);
+  color:var(--sp-primary);
+}
+body[data-sidebar-page="dashboard"] .wdd-feed-item.is-bad .wdd-feed-source{
+  background:var(--sp-tint-bad);
+  color:var(--sp-bad-ink);
+}
+body[data-sidebar-page="dashboard"] .wdd-feed-item.is-warn .wdd-feed-source{
+  background:var(--sp-tint-warn);
+  color:var(--sp-warn-ink);
+}
+body[data-sidebar-page="dashboard"] .wdd-feed-item.is-ok .wdd-feed-source{
+  background:var(--sp-tint-ok);
+  color:var(--sp-ok-ink);
+}
+body[data-sidebar-page="dashboard"] .wdd-feed-item b{
+  font-size:12.5px;
+  line-height:1.35;
+}
+body[data-sidebar-page="dashboard"] .wdd-feed-item small{
+  font-size:12px;
+}
+
+@media (max-width:1400px){
+  body[data-sidebar-page="dashboard"] .wdd-signals{
+    grid-template-columns:repeat(3,minmax(0,1fr));
+  }
+}
+@media (max-width:1180px){
+  body[data-sidebar-page="dashboard"] .wdd-hero{
+    grid-template-columns:minmax(0,1fr) 260px;
+    padding:26px;
+  }
+  body[data-sidebar-page="dashboard"] .wdd-heroscore{width:250px}
+  body[data-sidebar-page="dashboard"] .wdd-gauge{width:210px}
+}
+@media (max-width:1024px){
+  body[data-sidebar-page="dashboard"] .wdd-work{
+    display:flex;
+    flex-direction:column;
+    gap:14px;
+  }
+  body[data-sidebar-page="dashboard"] .wdd-work>#wdd-positions,
+  body[data-sidebar-page="dashboard"] .wdd-work>.wdd-adaptive,
+  body[data-sidebar-page="dashboard"] .wdd-work>.wdd-rail{
+    width:100%;
+  }
+  body[data-sidebar-page="dashboard"] .wdd-work>.wdd-adaptive{
+    grid-template-columns:repeat(2,minmax(0,1fr));
+  }
+}
+@media (max-width:760px){
+  body[data-sidebar-page="dashboard"] .wdd-appbar{
+    min-height:58px;
+  }
+  body[data-sidebar-page="dashboard"] .wdd-command{
+    min-height:48px;
+    padding-left:15px;
+  }
+  body[data-sidebar-page="dashboard"] .wdd-command kbd{
+    display:none;
+  }
+  body[data-sidebar-page="dashboard"] .wdd-hero{
+    display:flex;
+    min-height:0;
+    padding:22px 20px;
+  }
+  body[data-sidebar-page="dashboard"] .wdd-heroscore{
+    width:100%;
+  }
+  body[data-sidebar-page="dashboard"] .wdd-gauge{
+    width:220px;
+  }
+  body[data-sidebar-page="dashboard"] .wdd-work>.wdd-adaptive{
+    grid-template-columns:minmax(0,1fr);
+  }
+  body[data-sidebar-page="dashboard"] .wdd-property-cell{
+    min-width:205px;
+  }
+  body[data-sidebar-page="dashboard"] .wdd-table th,
+  body[data-sidebar-page="dashboard"] .wdd-table td{
+    padding-inline:12px;
+  }
 }

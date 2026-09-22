@@ -263,6 +263,13 @@
     input.__wdPredictionIndex=-1;
   }
 
+  function pairedInput(input){
+    if(!input)return null;
+    if(input.id==='pl-addr')return q('ss-addr');
+    if(input.id==='ss-addr')return q('pl-addr');
+    return null;
+  }
+
   function syncAddress(input,formatted,placeId,coords){
     function stamp(target){
       target.value=formatted;
@@ -280,7 +287,7 @@
       target.dataset.googleAddress='1';
     }
     stamp(input);
-    var other=input.id==='pl-addr'?q('ss-addr'):q('pl-addr');
+    var other=pairedInput(input);
     if(other)stamp(other);
   }
 
@@ -288,8 +295,16 @@
     closeBox(input);
     var address=queryFor(row);
     input.value=address;
-    var other=input.id==='pl-addr'?q('ss-addr'):q('pl-addr');
+    var other=pairedInput(input);
     if(other)other.value=address;
+    if(input.id==='wdd-command-input'){
+      if(row&&row.pams_pin){
+        location.href='/property/home?pin='+encodeURIComponent(row.pams_pin);
+      }else{
+        location.href='/property/?address='+encodeURIComponent(address);
+      }
+      return;
+    }
     if(typeof window.plLookup==='function')window.setTimeout(function(){window.plLookup();},0);
   }
 
@@ -620,19 +635,22 @@
         if(lib&&lib.AutocompleteSuggestion&&lib.AutocompleteSessionToken){
           bindCustom(q('pl-addr'),lib);
           bindCustom(q('ss-addr'),lib);
+          bindCustom(q('wdd-command-input'),lib);
         }else{
           bindLegacy(q('pl-addr'));
           bindLegacy(q('ss-addr'));
+          bindLegacy(q('wdd-command-input'));
         }
-      }).catch(function(){bindLegacy(q('pl-addr'));bindLegacy(q('ss-addr'));});
+      }).catch(function(){bindLegacy(q('pl-addr'));bindLegacy(q('ss-addr'));bindLegacy(q('wdd-command-input'));});
       return;
     }
     bindLegacy(q('pl-addr'));
     bindLegacy(q('ss-addr'));
+    bindLegacy(q('wdd-command-input'));
   }
 
   function boot(){
-    if(!q('pl-addr')&&!q('ss-addr'))return;
+    if(!q('pl-addr')&&!q('ss-addr')&&!q('wdd-command-input'))return;
     ensureStyles();
     window.WatchdogNJAddressGoogleReady=initPlaces;
     if(window.google&&google.maps){initPlaces();return;}
@@ -645,6 +663,7 @@
     document.head.appendChild(script);
   }
 
+  window.WatchdogNJAddressAutocompleteRefresh=boot;
   if(document.readyState==='loading')document.addEventListener('DOMContentLoaded',boot,{once:true});
   else boot();
 })();
