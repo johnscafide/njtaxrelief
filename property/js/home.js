@@ -359,25 +359,6 @@
 })();
 
 
-/* ===== property/js/pwa.js ===== */
-(function(){
-'use strict';
-var deferredPrompt;
-function isiOS(){return /iphone|ipad|ipod/i.test(navigator.userAgent);}
-function standalone(){return window.matchMedia('(display-mode: standalone)').matches||navigator.standalone===true;}
-function note(text){var n=document.createElement('div');n.className='wd-install-note';n.innerHTML='<span><i class="fas fa-mobile-screen-button"></i><b>Add Watchdog to your Home Screen</b><small>'+text+'</small></span><button type="button" aria-label="Close">×</button>';n.querySelector('button').onclick=function(){n.remove();};document.body.appendChild(n);return n;}
-function show(){if(!isiOS()||standalone()||sessionStorage.getItem('wdInstallDismissed'))return;var n=note('In Safari, tap Share, then “Add to Home Screen.”');n.querySelector('button').onclick=function(){sessionStorage.setItem('wdInstallDismissed','1');n.remove();};}
-function loadWhyWatchdog(){var page=String(document.body&&document.body.getAttribute('data-sidebar-page')||'');if(page!=='dashboard'&&page!=='agent-desk')return;if(window.WatchdogWhy||document.getElementById('watchdog-why-script'))return;var s=document.createElement('script');s.id='watchdog-why-script';s.src='/property/js/watchdog-why.js';s.defer=true;document.head.appendChild(s);}
-function loadScript(src,key){if(document.querySelector('script['+key+']'))return;var s=document.createElement('script');s.src=src;s.defer=true;s.setAttribute(key,'true');document.body.appendChild(s);}
-function loadPropertyHomeFirstImpression(){var page=String(document.body&&document.body.getAttribute('data-sidebar-page')||'');if(page!=='home')return;/* Prevent the legacy Google Street View hero before the premium loader can request it. */window.__WATCHDOG_HOME_HERO_INTELLIGENCE__=true;loadScript('/property/js/dashboard/home/home-property-first-impression.js?v=20260827d','data-watchdog-home-first-impression');loadScript('/property/js/dashboard/home/home-property-first-impression-compact.js?v=20260827e','data-watchdog-home-first-impression-compact');}
-function loadPageEnhancements(){var page=String(document.body&&document.body.getAttribute('data-sidebar-page')||'');if(page!=='integrations')return;loadScript('/property/js/integrations-command-center.js','data-watchdog-integrations-command-center');loadScript('/property/js/integrations-recipes.js','data-watchdog-integration-recipes');loadScript('/property/js/integrations-policy-feedback.js','data-watchdog-integration-policy-feedback');loadScript('/property/js/integrations-policy-comparison.js','data-watchdog-integration-policy-comparison');}
-window.addEventListener('beforeinstallprompt',function(event){event.preventDefault();deferredPrompt=event;});
-loadPropertyHomeFirstImpression();
-loadPageEnhancements();
-window.addEventListener('load',function(){if('serviceWorker' in navigator)navigator.serviceWorker.register('/property/sw.js',{scope:'/property/'}).catch(function(){});if(isiOS())window.setTimeout(show,1300);loadPropertyHomeFirstImpression();loadWhyWatchdog();loadPageEnhancements();});
-})();
-
-
 /* ===== property/js/brand-consistency-runtime.js ===== */
 (function(){
   'use strict';
@@ -557,51 +538,6 @@ function show(target){if(!window.matchMedia('(hover:hover) and (pointer:fine)').
 function hide(t){if(active!==t)return;active=null;if(bubble)bubble.classList.remove('on');}
 function load(){return Promise.all([fetch('/property/data/marker-registry.json').then(r=>r.json()),fetch('/property/data/marker-content.json').then(r=>r.json()).catch(()=>({markers:{}}))]).then(x=>{registry=x[0];content=x[1].markers||{};window.WatchdogMarkerContent={get:rich,registry:function(){return registry;},curated:content};});}
 document.addEventListener('mouseover',e=>{var t=e.target.closest('[data-marker-id]');if(t&&active!==t)show(t)});document.addEventListener('mouseout',e=>{var t=e.target.closest('[data-marker-id]');if(t&&!t.contains(e.relatedTarget))hide(t)});document.addEventListener('focusin',e=>{var t=e.target.closest('[data-marker-id]');if(t)show(t)});document.addEventListener('focusout',e=>{var t=e.target.closest('[data-marker-id]');if(t)hide(t)});window.addEventListener('scroll',()=>{if(bubble)bubble.classList.remove('on')},{passive:true});load().catch(e=>console.warn('Marker intelligence unavailable',e));})();
-
-/* ===== property/js/platform-observability.js ===== */
-(function(){'use strict';var U='https://uvkvaxljhhngydvlrzom.supabase.co',K='sb_publishable_MYX59qCbK3d-21zDfJqkNw_fvmfnexa',R='0.49.0',seen=new Map(),MAX_SEEN=250,TTL=300000;function client(){return window.NJPTRAccess?window.NJPTRAccess.client():(window.supabase&&window.supabase.createClient(U,K,{auth:{persistSession:true,storageKey:'sb-uvkvaxljhhngydvlrzom-auth-token'}}));}function cleanSource(v){try{return String(v||'').split('/').pop().split('?')[0].slice(0,80);}catch(_){return'';}}function prune(){var now=Date.now();seen.forEach(function(t,k){if(now-t>TTL)seen.delete(k)});while(seen.size>MAX_SEEN)seen.delete(seen.keys().next().value)}function send(type,data){prune();data=data||{};var key=type+'|'+(data.message||'')+'|'+(data.source||'');if(seen.has(key))return;seen.set(key,Date.now());var c=client();if(!c)return;c.auth.getSession().then(function(r){var s=r.data&&r.data.session;if(!s)return;return fetch(U+'/functions/v1/report-platform-event',{method:'POST',headers:{Authorization:'Bearer '+s.access_token,apikey:K,'Content-Type':'application/json'},body:JSON.stringify(Object.assign({type:type,route:location.pathname,release:R,viewport:innerWidth<760?'mobile':'desktop'},data))});}).catch(function(){});}window.WatchdogObservability={report:send};document.addEventListener('watchdog:client-error',function(e){var d=e.detail||{};send('client_error',{message:String(d.message||'Client error').slice(0,240),source:cleanSource(d.scope),code:String(d.code||'').slice(0,80),reference:String(d.reference||'').slice(0,40)});});window.addEventListener('error',function(e){if(e.target&&e.target!==window){send('resource_error',{message:'Resource failed to load',source:cleanSource(e.target.src||e.target.href)});return;}send('client_error',{message:String(e.message||'Client error').slice(0,240),source:cleanSource(e.filename),line:e.lineno,column:e.colno});},true);window.addEventListener('unhandledrejection',function(e){var reason=e.reason;send('unhandled_rejection',{message:String(reason&&reason.message||reason||'Unhandled promise rejection').slice(0,240)});});window.addEventListener('load',function(){setTimeout(function(){var n=performance.getEntriesByType&&performance.getEntriesByType('navigation')[0];if(n&&n.duration>8000)send('slow_page',{message:'Page load exceeded 8 seconds',duration_ms:Math.round(n.duration)});},0);});})();
-
-/* External browser analytics are optional. The universal privacy runtime owns
-   Google Analytics + Microsoft Clarity consent and loading. Keep first-party
-   product analytics and authenticated reliability telemetry independent. */
-(function(){
-  'use strict';
-  var raw=location.pathname.replace(/\/+$/,'')||'/';
-  var path=raw.indexOf('/property/')===0?raw.slice('/property'.length):raw;
-  var enabled=path==='/dashboard'||path==='/account'||path==='/home';
-  if(!enabled)return;
-  if(window.WatchdogConsent){window.WatchdogConsent.syncAnalytics();return;}
-  if(document.querySelector('script[src="/property/js/watchdog-consent.js"]'))return;
-  var script=document.createElement('script');
-  script.src='/property/js/watchdog-consent.js';
-  script.async=false;
-  script.setAttribute('data-watchdog-consent-runtime','1');
-  document.head.appendChild(script);
-})();
-
-(function(){if(window.__wdProductAnalyticsLoader||window.WatchdogAnalytics||document.querySelector('script[src$="/property/js/product-analytics.js"]'))return;window.__wdProductAnalyticsLoader=true;var s=document.createElement('script');s.src='/property/js/product-analytics.js';s.async=true;s.setAttribute('data-watchdog-analytics','1');document.head.appendChild(s);})();
-(function(){
-  var raw=location.pathname.replace(/\/+$/,'')||'/';
-  var path=raw.indexOf('/property/')===0?raw.slice('/property'.length):raw;
-  var enabled=path==='/dashboard'||path==='/home'||path==='/agent-desk'||path==='/data-workbench';
-  if(!enabled)return;
-  function load(src,flag,attr){
-    if(window[flag])return;window[flag]=true;
-    var s=document.createElement('script');s.src=src;s.async=false;s.setAttribute(attr,'1');document.head.appendChild(s);
-  }
-  load('/property/js/watchdog-semantic-context.js','__wdSemanticContextLoader','data-watchdog-semantic-context');
-  load('/property/js/watchdog-intelligence-context.js','__wdContextIntelligenceLoader','data-watchdog-context-intelligence');
-  load('/property/js/watchdog-context-feedback.js','__wdContextFeedbackLoader','data-watchdog-context-feedback');
-  load('/property/js/watchdog-scenario.js','__wdScenarioLoader','data-watchdog-scenario');
-  load('/property/js/watchdog-semantic-alerts.js','__wdSemanticAlertsLoader','data-watchdog-semantic-alerts');
-  load('/property/js/watchdog-assessment-scenario.js','__wdAssessmentScenarioLoader','data-watchdog-assessment-scenario');
-  load('/property/js/watchdog-page-context.js','__wdPageContextLoader','data-watchdog-page-context');
-  if(path==='/dashboard')load('/property/js/watchdog-dashboard-context-bridge.js','__wdDashboardContextBridgeLoader','data-watchdog-dashboard-context');
-  if(path==='/home')load('/property/js/watchdog-home-semantic-bridge.js','__wdHomeSemanticBridgeLoader','data-watchdog-home-semantic');
-  if(path==='/agent-desk')load('/property/js/watchdog-agent-context-bridge.js','__wdAgentContextBridgeLoader','data-watchdog-agent-context');
-  if(path==='/data-workbench')load('/property/js/watchdog-analyst-scenario-bridge.js','__wdAnalystScenarioLoader','data-watchdog-analyst-scenario');
-})();
-
 
 /* ===== property/js/dashboard/home/index.js ===== */
 /* ============================================================
@@ -3687,14 +3623,7 @@ var intelligenceSurfaceCopy=/Watchdog Intelligence|WATCHDOG INTELLIGENCE|PERSONA
 var explicitSurfaceSelector='.wdai-role-prompt,.wd-intelligence-gate-card,[data-watchdog-intelligence-modal]';
 var primaryFrameSelector='.wd-home-voice-entry,.wdai-main,.wd-intelligence-gate-card,.wdai-role-prompt,[data-watchdog-intelligence-modal]';
 
-function ensureBrandStyle(){
-  if(document.querySelector('link[data-watchdog-intelligence-brand-signature]'))return;
-  var link=document.createElement('link');
-  link.rel='stylesheet';
-  link.href='/property/css/home/home-watchdog-intelligence-brand.css';
-  link.setAttribute('data-watchdog-intelligence-brand-signature','1');
-  document.head.appendChild(link);
-}
+function ensureBrandStyle(){}
 function relevant(node){
   var el=node && (node.nodeType===1?node:node.parentElement);
   if(!el)return false;
