@@ -52,6 +52,7 @@ function start(){
       '</div>'+
       '<div class="wdd-page-intro"><div><h1>'+greet+', '+esc(WD.userName())+'</h1><p>'+esc(readLine(st))+'</p></div>'+
         '<div class="wdd-page-context"><b>'+esc(dateLabel())+'</b><span>Stay informed. Act on verified changes.</span></div></div>';
+    if(typeof w.WatchdogNJAddressAutocompleteRefresh==='function')w.setTimeout(w.WatchdogNJAddressAutocompleteRefresh,0);
   }
 
   function paintSignals(){
