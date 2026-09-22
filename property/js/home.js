@@ -695,13 +695,29 @@ document.addEventListener('mouseover',e=>{var t=e.target.closest('[data-marker-i
     var m = a.length >> 1;
     return a.length % 2 ? a[m] : (a[m - 1] + a[m]) / 2;
   }
+  // Core reference helpers must live in the single Home bundle. These used to
+  // arrive from the lazy uniformity module; paintReport calls them on first paint.
+  var uniData = null, appealData = null;
+  function uniFor(r) {
+    var d = String((r && r.pams_pin) || '').slice(0, 4);
+    return (uniData && d) ? uniData[d] : null;
+  }
+  function appealFor(r) {
+    var county = String((r && r.pams_pin) || '').slice(0, 2);
+    return (appealData && appealData.counties && county) ? appealData.counties[county] : null;
+  }
+
   function loadRefData() {
     if (ratios && rates) return Promise.resolve();
     return Promise.all([
       xfetch('/equalization-ratios.json', 8000).then(function (r) { return r.json(); })
         .then(function (j) { ratios = (j && j.ratios) || {}; }).catch(function () { ratios = {}; }),
       xfetch('/tax-rates.json', 8000).then(function (r) { return r.json(); })
-        .then(function (j) { rates = (j && j.rates) || {}; }).catch(function () { rates = {}; })
+        .then(function (j) { rates = (j && j.rates) || {}; }).catch(function () { rates = {}; }),
+      xfetch('/property/uniformity.json', 8000).then(function (r) { return r.json(); })
+        .then(function (j) { uniData = (j && j.districts) || {}; }).catch(function () { uniData = {}; }),
+      xfetch('/property/appeals.json', 8000).then(function (r) { return r.json(); })
+        .then(function (j) { appealData = j || {}; }).catch(function () { appealData = {}; })
     ]);
   }
   function ratioFor(town, county) {
