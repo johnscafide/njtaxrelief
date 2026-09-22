@@ -26,7 +26,7 @@ function splitBlq(raw:unknown){const s=clean(raw,100);const parts=s.split(/[.\/-
 function portal(id:string,account:string){return `${WIPP_PORTAL}/view/wippTaxes/${encodeURIComponent(account)}?wippId=${encodeURIComponent(id)}`}
 function effective_rate_from_same_year(v:number|null){return v}
 function currentTaxSummary(annual:Row,assessed:number|null){
-  const years=Object.keys(annual).filter(y=>/^\\d{4}$/.test(y)).map(Number).sort((a,b)=>b-a);
+  const years=Object.keys(annual).filter(y=>/^\d{4}$/.test(y)).map(Number).sort((a,b)=>b-a);
   const complete=years.find(y=>{
     const x=safe(annual[String(y)]),qs=Array.isArray(x.quarters)?x.quarters:[];
     return num(x.property_tax_billed)!==null&&Number(x.property_tax_billed)>0&&new Set(qs.map((q:Row)=>Number(q.quarter)).filter(q=>q>=1&&q<=4)).size===4;
