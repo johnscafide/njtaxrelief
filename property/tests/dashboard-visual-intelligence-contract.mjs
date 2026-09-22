@@ -24,7 +24,7 @@ must(core.includes("from('profiles')") && core.includes("from('professional_pref
 must(core.includes('license_number') && core.includes('brokerage_name'), 'Agent identity must include license and brokerage when available.');
 must(core.includes('wdd-dual-bars') && core.includes('wdd-gap-track') && core.includes('wdd-ring-viz'), 'KPI row must include real visual encodings.');
 must(core.includes('wdd-adaptive') && core.includes('Portfolio readiness') && core.includes('Change velocity'), 'Dashboard must fill available space with adaptive live modules.');
-must(core.includes('basemaps.cartocdn.com') && core.includes('wdd-feed-pin'), 'Property changes must use mapped property-pin visuals.');
+must(core.includes("visual='<span class=\"wdd-feed-source") && core.includes("return'fa-hammer'") && core.includes("return'fa-droplet'") && !core.includes("visual='<span class=\"wdd-feed-map"), 'Property changes must use visible semantic event icons instead of retired mapped thumbnails.');
 must(news.includes('/api/nj-news-image?url='), 'News cards must resolve publisher hero images.');
 must(imageApi.includes("redirect:'manual'") && imageApi.includes('allowedHost(next.hostname)'), 'Article image resolver must keep redirects inside approved publishers.');
 
