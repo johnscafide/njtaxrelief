@@ -953,7 +953,7 @@ document.addEventListener('mouseover',e=>{var t=e.target.closest('[data-marker-i
   // Property Home is intentionally a single JS bundle. Do not dynamically import
   // dashboard tool modules here: those imports were the remaining second JS layer
   // and caused partially styled/broken sections when a module failed.
-  var HOME_MODULE_VERSION = '20260922-single8';
+  var HOME_MODULE_VERSION = '20260922-single11';
   function loadHomeTool() { return Promise.resolve(null); }
   function loadHomeTools() { return Promise.resolve([]); }
   window.NJPropertyModules = { version: HOME_MODULE_VERSION, loadTool: loadHomeTool, loadTools: loadHomeTools };
@@ -2304,12 +2304,15 @@ document.addEventListener('mouseover',e=>{var t=e.target.closest('[data-marker-i
     var e = municipalTaxEvidence && current && municipalTaxEvidencePin === current.pams_pin ? municipalTaxEvidence : null;
     var cur = e && e.current || null;
     var property = e && e.property || null;
+    var liveAssessed = cur && cur.assessed_value != null ? +cur.assessed_value : (cur && cur.current_assessment_snapshot != null ? +cur.current_assessment_snapshot : (property && property.total_assessed_value != null ? +property.total_assessed_value : null));
+    var liveTax = cur && cur.annual_tax != null ? +cur.annual_tax : null;
+    var liveRate = cur && cur.tax_rate != null ? +cur.tax_rate : ((liveTax != null && liveAssessed > 0) ? +(liveTax / liveAssessed * 100).toFixed(4) : null);
     return {
-      tax: cur && cur.annual_tax != null ? +cur.annual_tax : (+r.last_year_tax || null),
+      tax: liveTax != null ? liveTax : (+r.last_year_tax || null),
       taxYear: cur && cur.tax_year || r.last_year_tax_year || null,
-      assessed: property && property.total_assessed_value != null ? +property.total_assessed_value : (+r.assessed || null),
+      assessed: liveAssessed != null ? liveAssessed : (+r.assessed || null),
       assessmentYear: cur && cur.assessment_year || r.assessment_year || null,
-      rate: cur && cur.tax_rate != null ? +cur.tax_rate : null,
+      rate: liveRate,
       provider: e && e.provider_label || null,
       source: e && e.source && e.source.url || null,
       live: !!e,
@@ -2326,7 +2329,7 @@ document.addEventListener('mouseover',e=>{var t=e.target.closest('[data-marker-i
     if (t.tax != null) items.push(item(t.taxYear ? t.taxYear + ' annual tax' : 'Saved annual tax', money(t.tax), t.live ? 'Municipal bill evidence' : 'Saved state record'));
     if (t.rate != null) items.push(item(t.taxYear ? t.taxYear + ' tax rate' : 'Tax rate', t.rate.toFixed(3) + '%', 'Municipal evidence'));
     if (t.mismatch) items.push(item('Tax-year alignment', 'Protected', 'Assessment year is not inferred'));
-    return '<section class="hm-tax-timeline"><div class="hm-tax-head"><div><span class="hm-tax-kicker">TAX TIMELINE</span><h2>Current municipal tax evidence</h2><p>Observed bill, assessment and rate stay aligned by tax year. Watchdog does not mix a revaluation assessment with an older rate.</p></div>' + (t.source ? '<a href="' + esc(t.source) + '" target="_blank" rel="noopener">Official source ↗</a>' : '') + '</div><div class="hm-tax-grid">' + items.join('') + '</div>' + (t.provider ? '<p class="hm-tax-source">Source: ' + esc(t.provider) + '</p>' : '') + '</section>';
+    return '<section class="hm-tax-timeline" id="hm-current-tax-evidence"><div class="hm-tax-head"><div><span class="hm-tax-kicker">TAX TIMELINE</span><h2>Current municipal tax evidence</h2><p>Observed bill, assessment and rate stay aligned by tax year. Watchdog does not mix a revaluation assessment with an older rate.</p></div>' + (t.source ? '<a href="' + esc(t.source) + '" target="_blank" rel="noopener">Official source ↗</a>' : '') + '</div><div class="hm-tax-grid">' + items.join('') + '</div>' + (t.provider ? '<p class="hm-tax-source">Source: ' + esc(t.provider) + '</p>' : '') + '</section>';
   }
 
   window.hmSwitch = function (pin) {
@@ -2459,6 +2462,7 @@ document.addEventListener('mouseover',e=>{var t=e.target.closest('[data-marker-i
       '</div>';
 
     initTips();
+    preloadHomeSections();
   }
 
 
@@ -2650,6 +2654,37 @@ document.addEventListener('mouseover',e=>{var t=e.target.closest('[data-marker-i
     history: ['assessment-drift']
   };
 
+  function buildSectionNow(k, sec, host) {
+    if (!sec || !host || !current) return;
+    host.innerHTML = '<div class="tl-note"><div class="pl-spin"></div> Loading this analysis...</div>';
+    var html = '';
+    try { html = sec.build(current) || ''; }
+    catch (err) { console.error('Section build failed:', k, err); html = '<div class="tl-note">This analysis could not load. Watchdog kept the rest of the property report available.</div>'; }
+    host.innerHTML = html || '<div class="tl-note">Nothing to show here for this property.</div>';
+    compactHomeSection(host, k);
+    var e = el('sec-' + k); if (e) e.setAttribute('data-built', '1');
+    initTips();
+    if (el('tc-total') && typeof window.dbCost === 'function') window.dbCost();
+  }
+
+  function preloadHomeSections() {
+    var queue = SECTIONS.slice(), run = function(deadline) {
+      var budget = 3;
+      while (queue.length && budget-- > 0 && (!deadline || deadline.timeRemaining() > 3)) {
+        var sec = queue.shift(), e = el('sec-' + sec.k), host = el('secb-' + sec.k);
+        if (!e || !host || e.getAttribute('data-built')) continue;
+        if (window.NJPTRPlan && !window.NJPTRPlan.can(sec.tier || 'standard')) continue;
+        buildSectionNow(sec.k, sec, host);
+      }
+      if (queue.length) {
+        if ('requestIdleCallback' in window) requestIdleCallback(run, {timeout:500});
+        else setTimeout(function(){run(null)}, 40);
+      }
+    };
+    if ('requestIdleCallback' in window) requestIdleCallback(run, {timeout:350});
+    else setTimeout(function(){run(null)}, 60);
+  }
+
   window.hmToggle = function (k) {
     var accessSection = SECTIONS.filter(function (x) { return x.k === k; })[0];
     if (accessSection && window.NJPTRPlan && !window.NJPTRPlan.can(accessSection.tier || 'standard')) {
@@ -2663,20 +2698,7 @@ document.addEventListener('mouseover',e=>{var t=e.target.closest('[data-marker-i
     if (OPEN[k] && !e.getAttribute('data-built')) {
       var sec = SECTIONS.filter(function (x) { return x.k === k; })[0];
       var host = el('secb-' + k);
-      if (sec && host && current) {
-        host.innerHTML = '<div class="tl-note"><div class="pl-spin"></div> Loading this analysis...</div>';
-        var html = '';
-        try { html = sec.build(current) || ''; }
-        catch (err) {
-          console.error('Section build failed:', k, err);
-          html = '<div class="tl-note">This section is not available in the streamlined Property Home yet.</div>';
-        }
-        host.innerHTML = html || '<div class="tl-note">Nothing to show here for this property.</div>';
-        compactHomeSection(host, k);
-        e.setAttribute('data-built', '1');
-        initTips();
-        if (el('tc-total') && typeof window.dbCost === 'function') window.dbCost();
-      }
+      buildSectionNow(k, sec, host);
     }
   };
 
@@ -3513,7 +3535,8 @@ function taxEvidence(row){
   return taxEvidencePending[pin];
 }
 function currentTaxMarkup(e){
-  var cur=e&&e.current||{},prop=e&&e.property||{},year=cur.tax_year||'',assessment=num(prop.total_assessed_value),tax=num(cur.annual_tax),rate=num(cur.tax_rate);
+  var cur=e&&e.current||{},prop=e&&e.property||{},year=cur.tax_year||'',assessment=num(cur.assessed_value!=null?cur.assessed_value:(cur.current_assessment_snapshot!=null?cur.current_assessment_snapshot:prop.total_assessed_value)),tax=num(cur.annual_tax),rate=num(cur.tax_rate);
+  if(rate==null&&tax!=null&&assessment>0)rate=tax/assessment*100;
   if(!year&&!assessment&&!tax)return'';
   return '<div class="hm-current-tax"><div class="hm-current-tax-head"><b>Current municipal tax record</b><span>'+esc(year?year+' official':'Live municipal')+'</span></div>'+
     '<div class="hm-current-tax-grid"><div><small>Assessment</small><strong>'+esc(money(assessment))+'</strong></div><div><small>Annual tax</small><strong>'+esc(money(tax))+'</strong></div><div><small>Tax rate</small><strong>'+(rate==null?'—':esc(rate.toFixed(3)+'%'))+'</strong></div></div>'+
