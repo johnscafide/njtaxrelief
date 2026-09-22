@@ -2381,6 +2381,29 @@ document.addEventListener('mouseover',e=>{var t=e.target.closest('[data-marker-i
   }
 
 
+  // Reassessment helper is required by the first-paint Analyst Intel. It used to
+  // arrive from a lazy tool module; keep the dependency in the single Home bundle.
+  function lagClass(x, saleYear) {
+    if (!x.sf && !x.yb) return 'land';
+    if (x.yb && x.yb >= (saleYear || x.y) - 4) return 'new';
+    return 'stale';
+  }
+  function ownLag(r, ratio) {
+    if (!r || !r._lastSale || !r._lastSaleYear || !r.assessed || !ratio) return null;
+    var thisYear = new Date().getFullYear();
+    if (thisYear - r._lastSaleYear > 6) return null;
+    var implied = r.assessed / r._lastSale;
+    var expected = r._lastSale * ratio;
+    var gap = expected - r.assessed;
+    var eff = (r.last_year_tax && r.assessed) ? r.last_year_tax / r.assessed : null;
+    return {
+      sale: r._lastSale, year: r._lastSaleYear, implied: implied, expected: expected, gap: gap,
+      pct: implied / ratio, behind: implied < ratio * 0.85, ahead: implied > ratio * 1.15,
+      taxIfCaught: (gap > 0 && eff) ? gap * eff : null,
+      cls: lagClass({ sf: r._sqft, yb: r._built }, r._lastSaleYear)
+    };
+  }
+
   // The paragraph gives the shape. These are the things an agent would actually
   // say out loud, and only the ones this property earns.
   function intelPoints(r, c, u, a) {
