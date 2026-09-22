@@ -2658,19 +2658,20 @@ document.addEventListener('mouseover',e=>{var t=e.target.closest('[data-marker-i
       el('hm-loading').style.display = 'none';
       el('hm-gate').style.display = 'none';
       el('hm-main').style.display = '';
-      // Home's first paint must depend only on account/property data.
-      // Analysis tools remain lazy and isolated so a missing optional module
-      // can never blank the saved-property report.
-      Promise.all([
-        sb.from('saved_properties').select('*').order('created_at', { ascending: false }),
-        sb.from('profiles').select('*').eq('id', plUser.id).maybeSingle(),
-        sb.rpc('get_my_entitlement'),
-        loadRefData().catch(function(){ return null; }),
-        loadSR1A().catch(function(){ return null; })
-      ]).then(function (out) {
-        rows = (out[0] && out[0].data) || [];
-        profile = (out[1] && out[1].data) || {};
-        var entRows = (out[2] && out[2].data) || [], ent = Array.isArray(entRows) ? entRows[0] : entRows;
+      // Core report queries are isolated: profile/entitlement/reference failures
+      // must never blank a saved property that loaded successfully.
+      sb.from('saved_properties').select('*').order('created_at', { ascending: false }).then(function (saved) {
+        if (saved && saved.error) throw saved.error;
+        rows = (saved && saved.data) || [];
+        return Promise.allSettled([
+          sb.from('profiles').select('*').eq('id', plUser.id).maybeSingle(),
+          sb.rpc('get_my_entitlement'),
+          loadRefData(),
+          loadSR1A()
+        ]);
+      }).then(function (out) {
+        profile = (out[0].status === 'fulfilled' && out[0].value && out[0].value.data) || {};
+        var entRows = (out[1].status === 'fulfilled' && out[1].value && out[1].value.data) || [], ent = Array.isArray(entRows) ? entRows[0] : entRows;
         if (ent) profile = Object.assign({}, profile, { account_role: ent.account_role || profile.account_role, plan_tier: ent.plan_tier || profile.plan_tier, subscription_status: ent.subscription_status, current_period_end: ent.current_period_end });
         if (window.NJPTRPlan) window.NJPTRPlan.init(plUser, profile);
         var pin = qsPin();
@@ -2678,15 +2679,16 @@ document.addEventListener('mouseover',e=>{var t=e.target.closest('[data-marker-i
                   rows.filter(function (x) { return x.kind === 'home'; })[0] || rows[0];
         paintHomeChrome();
         paintReport();
-        loadMunicipalTaxEvidence(current).then(function () { paintReport(); paintHomeChrome(); });
+        if (current) {
+          loadMunicipalTaxEvidence(current).then(function () { paintReport(); paintHomeChrome(); }).catch(function(){});
+          hydrateDetails().then(function () { paintReport(); paintHomeChrome(); }).catch(function(){});
+        }
         if (location.hash.indexOf('#sec-') === 0) {
           var sectionKey = location.hash.slice(5);
           if (SECTIONS.some(function (section) { return section.k === sectionKey; })) window.hmToggle(sectionKey);
         }
-        // square footage, year built and the last verified sale come from the
-        // SR1A county file, which is too large to block the first paint on.
-        hydrateDetails().then(function () { paintReport(); paintHomeChrome(); });
-      }).catch(function (error) {
+      });
+    }).catch(function (error) {
         console.error('Property report workspace failed:', error);
         el('hm-body').innerHTML = '<div class="wrap"><div class="db-error-panel"><i class="fas fa-triangle-exclamation"></i>' +
           '<div><h3>We could not finish loading this property report.</h3><p>Your saved information has not been changed.</p>' +
