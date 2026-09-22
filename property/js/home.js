@@ -1916,11 +1916,14 @@ document.addEventListener('mouseover',e=>{var t=e.target.closest('[data-marker-i
 
   function taxTimeline(r) {
     var t = taxDisplay(r), items = [];
-    if (t.assessed != null) items.push('<div><small>' + esc(t.assessmentYear ? t.assessmentYear + ' assessment' : 'Current assessment') + '</small><b>' + money(t.assessed) + '</b><em>Official record</em></div>');
-    if (t.tax != null) items.push('<div><small>' + esc(t.taxYear ? t.taxYear + ' annual tax' : 'Saved annual tax') + '</small><b>' + money(t.tax) + '</b><em>' + esc(t.live ? 'Municipal bill evidence' : 'Saved state record') + '</em></div>');
-    if (t.rate != null) items.push('<div><small>' + esc(t.taxYear ? t.taxYear + ' tax rate' : 'Tax rate') + '</small><b>' + t.rate.toFixed(3) + '%</b><em>Municipal evidence</em></div>');
-    if (t.mismatch) items.push('<div><small>Tax-year alignment</small><b>Protected</b><em>Assessment year not inferred from current snapshot</em></div>');
-    return '<section class="hm-tax-timeline" style="margin:18px 0;padding:18px;border:1px solid #dfe6ef;border-radius:18px;background:#fff"><div style="display:flex;justify-content:space-between;gap:12px;align-items:start"><div><small style="font-weight:800;letter-spacing:.08em;color:#667085">TAX TIMELINE</small><h2 style="margin:4px 0 2px">Current municipal tax evidence</h2><p style="margin:0;color:#667085">Observed bill, assessment and rate are kept by tax year. Watchdog does not mix a revaluation assessment with an older rate.</p></div>' + (t.source ? '<a href="' + esc(t.source) + '" target="_blank" rel="noopener" style="white-space:nowrap">Official source ↗</a>' : '') + '</div><div class="hm-figs" style="margin-top:14px">' + items.join('') + '</div>' + (t.provider ? '<p style="margin:10px 0 0;color:#667085;font-size:12px">Source: ' + esc(t.provider) + '</p>' : '') + '</section>';
+    function item(label, value, note) {
+      return '<div class="hm-tax-item"><span>' + esc(label) + '</span><strong>' + esc(value) + '</strong><small>' + esc(note) + '</small></div>';
+    }
+    if (t.assessed != null) items.push(item(t.assessmentYear ? t.assessmentYear + ' assessment' : 'Current assessment', money(t.assessed), 'Official record'));
+    if (t.tax != null) items.push(item(t.taxYear ? t.taxYear + ' annual tax' : 'Saved annual tax', money(t.tax), t.live ? 'Municipal bill evidence' : 'Saved state record'));
+    if (t.rate != null) items.push(item(t.taxYear ? t.taxYear + ' tax rate' : 'Tax rate', t.rate.toFixed(3) + '%', 'Municipal evidence'));
+    if (t.mismatch) items.push(item('Tax-year alignment', 'Protected', 'Assessment year is not inferred'));
+    return '<section class="hm-tax-timeline"><div class="hm-tax-head"><div><span class="hm-tax-kicker">TAX TIMELINE</span><h2>Current municipal tax evidence</h2><p>Observed bill, assessment and rate stay aligned by tax year. Watchdog does not mix a revaluation assessment with an older rate.</p></div>' + (t.source ? '<a href="' + esc(t.source) + '" target="_blank" rel="noopener">Official source ↗</a>' : '') + '</div><div class="hm-tax-grid">' + items.join('') + '</div>' + (t.provider ? '<p class="hm-tax-source">Source: ' + esc(t.provider) + '</p>' : '') + '</section>';
   }
 
   window.hmSwitch = function (pin) {
