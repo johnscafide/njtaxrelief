@@ -1,4 +1,5 @@
 import { createClient } from '@supabase/supabase-js';
+import { corsHeaders } from '@supabase/supabase-js/cors';
 import Stripe from 'stripe';
 
 const CANONICAL_SITE = 'https://www.watchdogindex.com';
@@ -86,8 +87,8 @@ function betaPath(site: string) {
 
 function cors(req: Request) {
   return {
+    ...corsHeaders,
     'Access-Control-Allow-Origin': allowedOrigin(req),
-    'Access-Control-Allow-Headers': 'authorization, apikey, content-type',
     'Access-Control-Allow-Methods': 'POST, OPTIONS',
     'Vary': 'Origin'
   };
