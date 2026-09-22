@@ -2637,10 +2637,10 @@ document.addEventListener('mouseover',e=>{var t=e.target.closest('[data-marker-i
     });
   }
   function startHome() {
-    Promise.resolve(window.njptrSideMenuReady).then(function () {
-      if (document.readyState === 'loading') document.addEventListener('DOMContentLoaded', bootHome, { once: true });
-      else bootHome();
-    });
+    // Property Home owns its own boot. Never wait on a legacy/shared menu promise:
+    // if that promise is pending forever, the entire page remains on the loader.
+    if (document.readyState === 'loading') document.addEventListener('DOMContentLoaded', bootHome, { once: true });
+    else bootHome();
   }
   initHomeChrome();
   document.addEventListener('njptr:plan-change', function () {
