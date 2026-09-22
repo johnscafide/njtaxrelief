@@ -10,11 +10,13 @@ const css=read('property/css/dashboard/watchdog-dashboard-spike.css');
 const shellCss=read('property/css/dashboard/watchdog-dashboard-spike-promoted.css');
 const appShell=read('property/js/app-shell-2027.js');
 const render=read('property/js/dashboard/wd-render.js');
+const core=read('property/js/dashboard/wd-core.js');
 const spikeLayout=read('property/js/dashboard/wd-dashboard-spike-layout.js');
 const visualCore=read('property/js/dashboard/wd-dashboard-visual-core.js');
 const autocomplete=read('property/js/nj-address-autocomplete.js');
 
 syntax('property/js/dashboard/wd-render.js');
+syntax('property/js/dashboard/wd-core.js');
 syntax('property/js/dashboard/wd-dashboard-spike-layout.js');
 syntax('property/js/dashboard/wd-dashboard-visual-core.js');
 syntax('property/js/nj-address-autocomplete.js');
@@ -41,6 +43,8 @@ must(render.includes('wdd-row-actions') && render.includes('copy-address') && re
 must(shellCss.includes('.wdd-addr>span') && shellCss.includes('white-space:nowrap') && shellCss.includes('.wdd-row-actions'), 'Promoted Spike CSS must keep addresses single-line and style compact row actions.');
 must(visualCore.includes("visual='<span class=\"wdd-feed-source") && visualCore.includes("getAttribute('data-ui')!=='spike'"), 'Recent Changes must use semantic icons and must not overwrite the promoted Spike KPI row.');
 must(spikeLayout.includes("if (v == null || v === '') return null") && spikeLayout.includes('peer != null && peer > 0'), 'Score gauge must not convert missing peer medians into zero.');
+must(core.includes('function townPeerKey(town, county)') && core.includes("trim().toUpperCase() + '|'"), 'Town score fallback must distinguish same-named municipalities by county.');
+must(spikeLayout.includes("var WD = w.WD, vals = [], seen = {}") && spikeLayout.includes('seen[townKey]'), 'Portfolio peer benchmark must count each unique town/county once.');
 must(shellCss.includes('grid-row:1 / span 2') && shellCss.includes('.wdd-work>.wdd-adaptive'), 'Desktop workspace must keep adaptive cards directly under the portfolio while the right rail spans both rows.');
 must(render.includes('Your Portfolio') && render.includes('Recent Changes') && render.includes('Portfolio Analysis'), 'Dashboard workspace must include portfolio, change feed and analysis modules.');
 must(render.includes('wdd-case-review') && render.includes('slice(0,3)'), 'Action Queue must render compact top review cards.');
