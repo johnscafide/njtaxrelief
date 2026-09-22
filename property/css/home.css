@@ -10107,3 +10107,853 @@ body.hm-dashboard-page .sec2 .tl-btn{display:inline-flex!important;align-items:c
 
 @media(max-width:1100px){body.hm-dashboard-page .sc-cards,body.hm-dashboard-page .hm-tax-grid{grid-template-columns:repeat(2,minmax(0,1fr))!important}}
 @media(max-width:640px){body.hm-dashboard-page .sc-cards,body.hm-dashboard-page .hm-tax-grid{grid-template-columns:1fr!important}body.hm-dashboard-page .hm-tax-head{flex-direction:column!important}.hm-tax-item{min-height:88px!important}}
+
+/* ===== inlined property/css/lookup/09-search-corrections-v3.css ===== */
+/* NJW-96 correction v3 */
+
+/* Filter rail remains above map without visually crushing the results surface. */
+body.hood-on .njw-filterbar{z-index:10!important;}
+body.hood-on .hd-right{overscroll-behavior-y:auto!important;scroll-padding-bottom:0!important;padding-bottom:0!important;}
+
+/* Property-list mode has no hero behind the public nav, so use the solid treatment. */
+body.hood-on .wd-nav{
+  background:rgba(255,255,255,.98)!important;
+  backdrop-filter:blur(10px);
+  -webkit-backdrop-filter:blur(10px);
+  box-shadow:0 1px 0 rgba(14,34,72,.10),0 4px 18px rgba(14,34,72,.07)!important;
+}
+body.hood-on .wd-nav a,
+body.hood-on .wd-nav button,
+body.hood-on .wd-nav .wd-logo{
+  color:#0e2248!important;
+  text-shadow:none!important;
+}
+body.hood-on .wd-nav .wd-logo i{color:var(--gold,#b8972a)!important;}
+
+/* White heart halo, no black drop shadow. */
+#pl-hood .hd-heart{
+  text-shadow:0 0 2px rgba(255,255,255,1),0 1px 5px rgba(255,255,255,.96),0 0 10px rgba(255,255,255,.72)!important;
+  -webkit-text-stroke:1.25px rgba(255,255,255,.98)!important;
+  filter:none!important;
+}
+#pl-hood .hd-heart.on{-webkit-text-stroke:1px rgba(255,255,255,.98)!important;}
+
+/* Property cards no longer expose the unused ellipsis menu. */
+.njw-val-row{display:flex!important;align-items:center!important;gap:10px!important;position:relative!important;}
+.njw-val-row .hd-val{flex:1 1 auto!important;min-width:0!important;}
+.njw-card-menu-btn,.njw-card-menu{display:none!important;}
+
+/* Search fields keep the clean pill surface while typing, without a colored focus outline. */
+.pl-input:focus,.pl-input:focus-visible{outline:none!important;border-color:transparent!important;box-shadow:none!important;}
+.pl-input-wrap:focus-within{box-shadow:0 10px 34px rgba(14,34,72,.24),0 2px 6px rgba(14,34,72,.10)!important;}
+
+/* Range controls keep direct entry and add a dual slider. */
+.njw-dual-slider{margin:4px 0 20px;}
+.njw-slider-labels{display:flex;justify-content:space-between;margin:0 1px 8px;color:#6f7989;font-size:11px;font-weight:800;text-transform:uppercase;letter-spacing:.04em;}
+.njw-slider-track{position:relative;height:30px;}
+.njw-slider-track:before{
+  content:"";position:absolute;left:0;right:0;top:13px;height:4px;border-radius:999px;background:#dce2eb;
+}
+.njw-slider-track i{position:absolute;left:0;right:0;top:13px;height:4px;border-radius:999px;background:#10294b;pointer-events:none;}
+.njw-slider-track input[type=range]{
+  position:absolute;left:0;top:3px;width:100%;height:24px;margin:0;background:transparent;pointer-events:none;-webkit-appearance:none;appearance:none;
+}
+.njw-slider-track input[type=range]::-webkit-slider-runnable-track{height:4px;background:transparent;border:0;}
+.njw-slider-track input[type=range]::-webkit-slider-thumb{
+  -webkit-appearance:none;width:22px;height:22px;margin-top:-9px;border-radius:50%;border:2px solid #10294b;background:#fff;box-shadow:0 1px 4px rgba(16,41,75,.18);pointer-events:auto;cursor:grab;
+}
+.njw-slider-track input[type=range]::-moz-range-track{height:4px;background:transparent;border:0;}
+.njw-slider-track input[type=range]::-moz-range-thumb{
+  width:19px;height:19px;border-radius:50%;border:2px solid #10294b;background:#fff;box-shadow:0 1px 4px rgba(16,41,75,.18);pointer-events:auto;cursor:grab;
+}
+
+/* Score should look like a first-class datum while async calculation completes. */
+.njw-card-score b{min-width:40px;text-align:right!important;}
+.njw-card-score b:empty:after{content:"Calculating…";color:#7b8595;font-weight:700;}
+
+/* The illustration is the literal end of the right-hand scroll container. */
+#pl-hood .hd-right>#njw-search-art{
+  display:block!important;width:100%!important;max-width:none!important;min-height:0!important;
+  margin:30px 0 0!important;padding:24px 18px 0!important;overflow:visible!important;flex:0 0 auto!important;
+}
+#pl-hood .hd-right>#njw-search-art img{
+  display:block!important;width:100%!important;height:auto!important;max-height:none!important;object-fit:contain!important;margin:0!important;padding:0!important;
+}
+#pl-hood .hd-right>#njw-search-art:after{display:none!important;}
+
+@media(max-width:760px){
+  .njw-range-panel{width:min(94vw,430px)!important;}
+}
+
+
+/* ===== inlined property/css/search-uniformity.css ===== */
+/* Keep every public property-address lookup on the same canonical search UI. */
+body.hood-on #njw-filterbar{
+  margin-top:14px!important;
+}
+body.hood-on #njw-filterbar .njw-search-slot{
+  flex:0 1 500px;
+  min-width:260px;
+  max-width:500px;
+}
+body.hood-on #njw-filterbar .njw-search-slot .hd-searchbox[data-watchdog-search-replaced="1"]{
+  display:none!important;
+}
+body.hood-on #njw-filterbar .njw-search-slot .pl-input-wrap.njw-uniform-property-search{
+  display:flex!important;
+  width:100%;
+  max-width:none;
+  min-width:0;
+  margin:0;
+  padding:4px 5px 4px 4px!important;
+  box-shadow:0 6px 18px rgba(14,34,72,.14),0 1px 4px rgba(14,34,72,.08)!important;
+}
+body.hood-on #njw-filterbar .njw-search-slot .pl-input-wrap.njw-uniform-property-search .pl-input{
+  padding:10px 8px!important;
+  font-size:15.5px!important;
+}
+body.hood-on #njw-filterbar .njw-search-slot .pl-input-wrap.njw-uniform-property-search .pl-geo{
+  width:36px!important;
+  height:36px!important;
+  font-size:15px!important;
+}
+body.hood-on #njw-filterbar .njw-search-slot .pl-input-wrap.njw-uniform-property-search .pl-search-btn{
+  width:40px!important;
+  height:40px!important;
+  font-size:15px!important;
+}
+
+/* Results and other solid Watchdog navigation states need a visible divider. */
+.wd-nav.solid,
+body.nav-solid .wd-nav,
+body.hood-on .wd-nav{
+  border-bottom:1px solid #d9e1e8!important;
+}
+body.hood-on .wd-nav{
+  box-shadow:0 4px 18px rgba(14,34,72,.07)!important;
+}
+
+/* The public solid nav sits at z-index 6200. Property detail panels must sit
+   above it so the modal toolbar and top of the property page are never hidden. */
+.plm-backdrop{
+  z-index:7600!important;
+}
+.plm{
+  z-index:7601!important;
+}
+
+@media(max-width:1280px) and (min-width:901px){
+  body.hood-on #njw-filterbar .njw-search-slot{
+    flex-basis:440px;
+    max-width:440px;
+  }
+}
+
+@media(max-width:900px){
+  body.hood-on #njw-filterbar{
+    margin-top:8px!important;
+  }
+  body.hood-on #njw-filterbar .njw-search-slot{
+    flex:1 1 auto;
+    min-width:0;
+    max-width:none;
+  }
+}
+
+
+/* ===== inlined property/css/landing-intelligence.css ===== */
+/* NJW-239: live Watchdog Intelligence sample on the public /property landing page */
+#wd-intelligence-glance{padding:34px 34px 88px;background:#f7f8f6;color:#10294b}
+#wd-intelligence-glance *{box-sizing:border-box}
+.wdi-shell{max-width:1680px;margin:0 auto;border-radius:34px;overflow:hidden;background:#071f39;box-shadow:0 32px 80px rgba(8,31,57,.14);position:relative}
+.wdi-head{position:relative;display:grid;grid-template-columns:minmax(0,1.2fr) minmax(300px,.8fr);gap:42px;padding:52px 58px 34px;color:#fff}
+.wdi-kicker{display:flex;align-items:center;gap:10px;color:#64d2d4;text-transform:uppercase;font:800 12px/1.2 "Plus Jakarta Sans",sans-serif;letter-spacing:.11em;margin-bottom:16px}.wdi-live-dot{width:8px;height:8px;border-radius:50%;background:#64d2d4;box-shadow:0 0 0 6px rgba(100,210,212,.12)}
+.wdi-head h2{font:800 clamp(38px,4.2vw,68px)/.98 "Plus Jakarta Sans",sans-serif;letter-spacing:-.055em;margin:0;max-width:900px}.wdi-head h2 em{font-family:"Playfair Display",serif;font-weight:500;color:#d8b94d}.wdi-lead{font-size:18px;line-height:1.65;color:#c8d7e5;margin:22px 0 0;max-width:780px}
+.wdi-stamp{align-self:end;border-left:1px solid rgba(255,255,255,.16);padding-left:32px}.wdi-stamp b{display:block;color:#fff;font:800 14px "Plus Jakarta Sans",sans-serif;margin-bottom:7px}.wdi-stamp span{display:block;color:#9fb3c7;font-size:14px;line-height:1.55}.wdi-stamp a{display:inline-flex;margin-top:15px;color:#77d9da;font-weight:800;text-decoration:none;gap:8px;align-items:center}
+.wdi-primary-grid{position:relative;display:grid;grid-template-columns:1.15fr .85fr .85fr;gap:1px;background:rgba(255,255,255,.1);border-top:1px solid rgba(255,255,255,.1);border-bottom:1px solid rgba(255,255,255,.1)}
+.wdi-primary{background:#0a2946;padding:30px 34px;min-height:190px}.wdi-primary:first-child{background:linear-gradient(135deg,#0a3950,#0a2a47)}.wdi-label{display:block;color:#91a8bc;font:800 11px "Plus Jakarta Sans",sans-serif;letter-spacing:.09em;text-transform:uppercase;margin-bottom:14px}.wdi-number{display:flex;align-items:baseline;gap:10px;color:#fff}.wdi-number strong{font:800 clamp(42px,4vw,64px)/1 "Plus Jakarta Sans",sans-serif;letter-spacing:-.055em}.wdi-number small{font-size:16px;color:#a8bfd0}.wdi-primary p{color:#afc1d1;font-size:14px;line-height:1.55;margin:14px 0 0}.wdi-mini{display:flex;gap:8px;flex-wrap:wrap;margin-top:17px}.wdi-mini span{border:1px solid rgba(255,255,255,.15);border-radius:999px;padding:7px 10px;color:#cfe0ea;font-size:12px}
+.wdi-signals{padding:36px 58px 42px;background:#fff}.wdi-signals-head{display:flex;justify-content:space-between;align-items:end;gap:24px;margin-bottom:24px}.wdi-signals-head h3{font:800 clamp(25px,2.4vw,36px) "Plus Jakarta Sans",sans-serif;letter-spacing:-.035em;margin:0;color:#10294b}.wdi-signals-head p{margin:0;color:#68788b;font-size:14px;max-width:600px;text-align:right}.wdi-signal-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:16px}.wdi-signal{border:1px solid #dfe7e9;border-radius:19px;padding:22px;background:#fbfcfb}.wdi-signal-top{display:flex;justify-content:space-between;gap:18px;align-items:start}.wdi-signal b{font:800 15px "Plus Jakarta Sans",sans-serif;color:#14304d}.wdi-signal strong{font:800 27px "Plus Jakarta Sans",sans-serif;color:#078486;white-space:nowrap}.wdi-signal p{font-size:13px;line-height:1.55;color:#6c7a88;margin:10px 0 16px}.wdi-meter{height:7px;background:#e6ecee;border-radius:99px;overflow:hidden}.wdi-meter i{display:block;height:100%;width:var(--wdi-pct,0%);background:linear-gradient(90deg,#0a8c8e,#d2ad3d);border-radius:inherit}.wdi-evidence{font-size:11px;color:#87939d;margin-top:9px;display:block}
+.wdi-read{display:grid;grid-template-columns:minmax(0,1.15fr) minmax(320px,.85fr);gap:28px;padding:36px 58px 46px;background:#f2f5f3;border-top:1px solid #e0e6e4}.wdi-read-card{background:#fff;border-radius:22px;padding:28px 30px;border:1px solid #dde5e3}.wdi-read-card .wdi-label{color:#078486}.wdi-read-card h3{font:800 clamp(23px,2vw,32px)/1.15 "Plus Jakarta Sans",sans-serif;margin:0 0 12px;color:#10294b}.wdi-read-card p{color:#5d6d7b;font-size:16px;line-height:1.65;margin:0}.wdi-read-card strong{color:#10294b}.wdi-method{display:grid;gap:10px}.wdi-method div{display:grid;grid-template-columns:34px 1fr;gap:12px;align-items:start;padding:10px 0}.wdi-method i{width:32px;height:32px;border-radius:10px;background:#dff2ef;color:#078486;display:flex;align-items:center;justify-content:center}.wdi-method b{display:block;font:800 13px "Plus Jakarta Sans",sans-serif;color:#14304d}.wdi-method span{display:block;font-size:12px;line-height:1.5;color:#71808e;margin-top:3px}
+.wdi-weights{display:grid;grid-template-columns:minmax(280px,.7fr) minmax(0,1.3fr);gap:34px;padding:38px 58px 46px;background:#0a2946;border-top:1px solid rgba(255,255,255,.1);color:#fff}.wdi-weights .wdi-label{color:#65d2d4}.wdi-weights-copy h3{font:800 clamp(24px,2.2vw,34px)/1.12 "Plus Jakarta Sans",sans-serif;letter-spacing:-.035em;margin:0 0 12px}.wdi-weights-copy p{color:#acc1d2;font-size:14px;line-height:1.6;margin:0}.wdi-model{display:inline-flex;margin-top:18px;border:1px solid rgba(255,255,255,.14);border-radius:999px;padding:7px 11px;color:#c7d7e4;font-size:11px}.wdi-weight-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:13px}.wdi-weight{background:rgba(255,255,255,.055);border:1px solid rgba(255,255,255,.1);border-radius:15px;padding:15px 16px}.wdi-weight-top{display:flex;justify-content:space-between;gap:14px;align-items:center}.wdi-weight-top b{font:800 12px "Plus Jakarta Sans",sans-serif;color:#e8f1f5}.wdi-weight-top strong{font:800 16px "Plus Jakarta Sans",sans-serif;color:#d8b94d}.wdi-weight-bar{height:5px;margin-top:11px;background:rgba(255,255,255,.1);border-radius:99px;overflow:hidden}.wdi-weight-bar i{display:block;height:100%;width:var(--wdi-weight,0%);background:linear-gradient(90deg,#57c9ce,#d8b94d);border-radius:inherit}.wdi-weight-rule{grid-column:1/-1;display:grid;grid-template-columns:34px 1fr;gap:12px;align-items:center;border-radius:15px;padding:13px 15px;background:rgba(100,210,212,.08);border:1px solid rgba(100,210,212,.16)}.wdi-weight-rule i{width:32px;height:32px;border-radius:10px;display:flex;align-items:center;justify-content:center;background:rgba(100,210,212,.12);color:#6fd3d6}.wdi-weight-rule b{display:block;font:800 11px "Plus Jakarta Sans",sans-serif;color:#fff;margin-bottom:2px}.wdi-weight-rule span{font-size:11.5px;line-height:1.5;color:#b9cedc}
+.wdi-cta{display:flex;align-items:center;justify-content:space-between;gap:28px;background:linear-gradient(105deg,#078486,#0d6f78);padding:32px 58px;color:#fff}.wdi-cta h3{font:800 24px "Plus Jakarta Sans",sans-serif;margin:0 0 5px}.wdi-cta p{margin:0;color:#d5eeee;font-size:14px}.wdi-cta-actions{display:flex;gap:10px;flex-wrap:wrap;justify-content:flex-end}.wdi-btn{display:inline-flex;align-items:center;gap:9px;border-radius:12px;padding:13px 18px;font:800 13px "Plus Jakarta Sans",sans-serif;text-decoration:none;white-space:nowrap}.wdi-btn.primary{background:#fff;color:#0b6670}.wdi-btn.secondary{border:1px solid rgba(255,255,255,.35);color:#fff}
+.wdi-loading{padding:42px 58px;color:#bdd0df;font-size:15px}.wdi-loading i{margin-right:8px}
+.wdi-note{font-size:11.5px;color:#8897a4;line-height:1.55;margin-top:14px}
+/* Index visual polish: separate Insights title from its hero and center the town directory. */
+html body.wd-consumer-mode .section:has(.ins-grid) .ins-grid{margin:34px 0 0!important}
+.wd-seo-directory .wd-county{text-align:center}
+.wd-seo-directory .wd-town-links{align-items:center}
+@media(max-width:980px){.wdi-head,.wdi-read,.wdi-weights{grid-template-columns:1fr}.wdi-stamp{border-left:0;border-top:1px solid rgba(255,255,255,.15);padding:22px 0 0}.wdi-primary-grid{grid-template-columns:1fr}.wdi-signal-grid{grid-template-columns:1fr}.wdi-signals-head{align-items:start;flex-direction:column}.wdi-signals-head p{text-align:left}.wdi-cta{align-items:flex-start;flex-direction:column}.wdi-cta-actions{justify-content:flex-start}}
+@media(max-width:700px){#wd-intelligence-glance{padding:22px 14px 64px}.wdi-shell{border-radius:24px}.wdi-head,.wdi-signals,.wdi-read,.wdi-weights,.wdi-cta{padding-left:22px;padding-right:22px}.wdi-head{padding-top:34px}.wdi-primary{padding:24px 22px}.wdi-head h2{font-size:39px}.wdi-lead{font-size:16px}.wdi-weight-grid{grid-template-columns:1fr}.wdi-weight-rule{grid-column:auto}.wdi-cta-actions,.wdi-btn{width:100%}.wdi-btn{justify-content:center}html body.wd-consumer-mode .section:has(.ins-grid) .ins-grid{margin-top:24px!important}}
+
+/* ===== inlined property/css/brand-consistency.css ===== */
+/* Watchdog app brand consistency layer
+   Typography/shape authority: /property/css/shared/00-design-tokens.css
+   Identity/palette authority: /property/branding/brand-system.json
+   Scope: current product/app shells only. Public/editorial surfaces keep their documented exceptions. */
+
+@import url("/property/css/shared/00-design-tokens.css");
+@import url('https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap');
+@import url('/property/css/watchdog-brand-assets.css?v=20260825a');
+
+:root{
+  --wd-bg:#f5f7fb;
+  --wd-surface:#ffffff;
+  --wd-ink:#111d38;
+  --wd-text:#31435c;
+  --wd-muted:#748198;
+  --wd-subtle:#8794a7;
+  --wd-line:#e2e7ef;
+  --wd-soft:#edf1f6;
+  --wd-primary:#2f6df6;
+  --wd-primary-dark:#183b84;
+  --wd-primary-soft:#e9f0ff;
+  --wd-success:#18a966;
+  --wd-warning:#f5a20a;
+  --wd-danger:#e34f5f;
+  --wd-radius-xs:8px;
+  --wd-radius-sm:10px;
+  --wd-radius-md:12px;
+  --wd-radius-lg:18px;
+  --wd-shadow-soft:0 8px 24px rgba(40,55,82,.045);
+  --wd-shadow-control:0 5px 16px rgba(24,39,67,.035);
+  --wd-focus:0 0 0 3px rgba(47,109,246,.18);
+}
+
+/* Product UI typography. */
+body.wd4-mounted,
+body.hm-dashboard-page,
+body.wdx-modern{
+  font-family:var(--font-ui)!important;
+  color:var(--wd-ink);
+  background:var(--wd-bg);
+}
+
+body.wd4-mounted :is(h1,h2,h3),
+body.hm-dashboard-page :is(h1,h2,h3),
+body.wdx-modern :is(h1,h2,h3){
+  font-family:var(--font-ui);
+}
+
+body.wd4-mounted :is(button,input,select,textarea),
+body.hm-dashboard-page :is(button,input,select,textarea),
+body.wdx-modern :is(button,input,select,textarea){
+  font-family:var(--font-ui)!important;
+}
+
+/* Canonical 84px product topbar and 42px Watchdog mark. */
+.hm27-topbar{height:84px!important;background:rgba(255,255,255,.94)!important}
+.hm27-top-in{padding:0 30px!important;gap:20px!important}
+.hm27-brand-side{gap:18px!important}
+.hm27-menu{width:48px!important;height:48px!important;border-radius:var(--radius-md)!important;font-size:19px!important;box-shadow:var(--wd-shadow-control)!important}
+.hm27-brand{gap:10px!important}
+.hm27-brand-mark{width:42px!important;height:42px!important;border-radius:var(--radius-md)!important;background:linear-gradient(145deg,var(--wd-primary-dark),var(--wd-primary))!important;font-size:17px!important;box-shadow:0 8px 18px rgba(47,109,246,.20)!important}
+.hm27-brand-copy b{font:800 var(--type-xl)/1.04 var(--font-ui)!important;letter-spacing:-.04em!important}
+.hm27-brand-copy small{margin-top:3px!important;font:700 var(--type-xs)/1 var(--font-ui)!important;letter-spacing:.11em!important;color:#8692a6!important}
+.hm27-date,.hm27-weather{min-height:50px!important;height:auto!important;gap:10px!important;padding:0 15px!important}
+.hm27-date i{font-size:20px!important;color:var(--wd-primary)!important}
+.hm27-date b,.hm27-weather b{font:700 var(--type-sm)/1.15 var(--font-ui)!important}
+.hm27-date small,.hm27-weather small{font-size:var(--type-xs)!important;color:var(--wd-muted)!important}
+.hm27-weather>i:first-child{font-size:27px!important}
+.hm27-notify{width:46px!important;height:46px!important;margin-left:9px!important;font-size:16px!important}
+.hm27-profile{margin-left:2px!important;padding:4px 2px 4px 5px!important}
+.hm27-profile img,.hm27-avatar-fallback{width:38px!important;height:38px!important}
+
+/* Canonical off-canvas app navigation shared by Dashboard, Home and secondary shells. */
+.wd4-nav-panel,.hm27-nav-panel{
+  left:16px!important;
+  top:16px!important;
+  bottom:16px!important;
+  width:min(330px,calc(100vw - 32px))!important;
+  background:var(--wd-surface)!important;
+  border:1px solid var(--wd-line)!important;
+  border-radius:18px!important;
+  box-shadow:0 24px 65px rgba(18,36,63,.19)!important;
+}
+.wd4-nav-head,.hm27-nav-head{padding:16px 16px!important;border-bottom:1px solid var(--wd-line)!important}
+.wd4-nav-close,.hm27-nav-close{width:42px!important;height:42px!important;border-radius:var(--radius-md)!important;border:1px solid var(--wd-line)!important;background:#fff!important;color:var(--wd-ink)!important}
+.wd4-nav-links,.hm27-nav-links{padding:12px!important;gap:4px!important}
+.wd4-nav-links a,.hm27-nav-links a{
+  min-height:48px!important;
+  padding:0 14px!important;
+  border-radius:var(--radius-md)!important;
+  gap:13px!important;
+  color:#43536b!important;
+  font-size:var(--type-sm)!important;
+  line-height:1.25!important;
+  font-weight:700!important;
+  text-decoration:none!important;
+}
+.wd4-nav-links a i,.hm27-nav-links a i{width:24px!important;text-align:center!important;color:#8492a7!important}
+.wd4-nav-links a:hover,.hm27-nav-links a:hover{background:#f4f7fb!important;color:var(--wd-ink)!important}
+.wd4-nav-links a.active,.hm27-nav-links a.active{background:var(--wd-primary-soft)!important;color:var(--wd-primary)!important}
+.wd4-nav-links a.active i,.hm27-nav-links a.active i{color:var(--wd-primary)!important}
+.wd4-nav-foot,.hm27-nav-foot{padding:14px 16px 16px!important;border-top:1px solid var(--wd-line)!important}
+.wd4-nav-foot button,.hm27-nav-foot button{min-height:44px!important;border-radius:var(--radius-md)!important;font-size:var(--type-sm)!important;font-weight:700!important}
+
+/* Readability floor for the active Dashboard and shared product chrome. */
+.wd4-filter-select{font-size:var(--type-sm)!important;min-height:42px!important;border-radius:10px!important}
+.wd4-add-btn,.wd4-export-btn,.wd4-grid-btn{font-size:var(--type-sm)!important}
+.wd4-card-title{font-size:var(--type-sm)!important}
+.wd4-card-subtle,.wd4-kpi-status,.wd4-kpi-foot,.wd4-score-meta,
+.wd4-chart-legend,.wd4-weather-meta span,.wd4-activity-row,.wd4-summary-meta small{font-size:var(--type-xs)!important}
+.wd4-map-legend div,.wd4-map-legend b{font-size:var(--type-xs)!important;min-height:29px!important}
+.wd4-map-title{font-size:var(--type-sm)!important}
+.wd4-select-small{font-size:var(--type-xs)!important;min-height:36px!important}
+.wd4-muni-table :is(th,td){font-size:var(--type-xs)!important}
+.leaflet-control-attribution{font-size:var(--type-xs)!important}
+
+/* Readability and canonical UI font for Property Home. */
+#hm-switch{font:700 var(--type-sm) var(--font-ui)!important}
+.hm-switch-label{font:800 var(--type-xs)/1 var(--font-ui)!important}
+.hm-kind,.hm-figs dt{font-size:var(--type-xs)!important}
+.hm-wrap>.ai .ai-h span{font-size:var(--type-xs)!important}
+.hm-wrap>.sec p,.hm-wrap>.sec li{font-size:var(--type-sm)!important}
+.hm27-action,.hm-back{font-size:var(--type-sm)!important}
+
+/* Current secondary shell: consistent control size and readable chrome. */
+body.wdx-modern .wdx-btn,
+body.wdx-modern .wdx-menu,
+body.wdx-modern .wdx-icon,
+body.wdx-modern .wdx-user{min-height:42px}
+body.wdx-modern .wdx-btn{font-size:var(--type-sm)!important}
+body.wdx-modern .wdx-date span,
+body.wdx-modern .wdx-weather span{font-size:var(--type-xs)!important}
+body.wdx-modern .wdx-kicker{font-size:var(--type-xs)}
+body.wdx-modern .wdx-pagebar p{font-size:var(--type-sm);line-height:1.55}
+
+/* Dashboard-derived profile/notification chrome was historically much smaller on secondary pages.
+   Preserve compact badges/timestamps, but keep actual labels and actions readable. */
+body:is(.wd4-mounted,.wdx-modern) .wd6-pop header small{font-size:var(--type-xs)!important;line-height:1.35!important}
+body:is(.wd4-mounted,.wdx-modern) .wd6-pop header>button{font-size:var(--type-xs)!important;min-height:36px!important}
+body:is(.wd4-mounted,.wdx-modern) .wd6-pop nav b{font-size:var(--type-sm)!important;line-height:1.3!important}
+body:is(.wd4-mounted,.wdx-modern) .wd6-pop nav small{font-size:var(--type-xs)!important;line-height:1.4!important}
+body:is(.wd4-mounted,.wdx-modern) .wd6-out{font-size:var(--type-xs)!important;min-height:42px!important}
+body:is(.wd4-mounted,.wdx-modern) .wd6-note b{font-size:var(--type-xs)!important;line-height:1.35!important}
+body:is(.wd4-mounted,.wdx-modern) .wd6-note small{font-size:var(--type-xs)!important;line-height:1.4!important}
+body:is(.wd4-mounted,.wdx-modern) .wd6-note em{font-size:var(--type-xs)!important}
+body:is(.wd4-mounted,.wdx-modern) .wd6-nfoot{font-size:var(--type-xs)!important;min-height:44px!important}
+
+/* If legacy shared components surface inside a current app shell, canonical product type wins. */
+body:is(.wd4-mounted,.hm-dashboard-page,.wdx-modern) .pre-body h3{
+  font-family:var(--font-ui)!important;
+}
+
+/* Numeric data should scan like financial/product data. */
+body.wd4-mounted :is(.wd4-kpi-value,.wd4-summary strong,.wd4-muni-table td),
+body.hm-dashboard-page :is(.hm-val b,.hm-figs dd,table td),
+body.wdx-modern :is(table td,[data-value]){
+  font-variant-numeric:tabular-nums;
+}
+
+/* WCAG 2.2 AA interaction baseline. */
+body.wd4-mounted :is(a,button,input,select,textarea):focus-visible,
+body.hm-dashboard-page :is(a,button,input,select,textarea):focus-visible,
+body.wdx-modern :is(a,button,input,select,textarea):focus-visible{
+  outline:2px solid var(--wd-primary)!important;
+  outline-offset:2px!important;
+  box-shadow:var(--wd-focus)!important;
+}
+
+@media (max-width:768px){
+  .hm27-top-in{padding:0 16px!important}
+  .wd4-topbar{padding-left:16px!important;padding-right:16px!important}
+  .wd4-nav-panel,.hm27-nav-panel{left:8px!important;right:8px!important;top:8px!important;bottom:8px!important;width:auto!important;border-radius:18px!important}
+  .wd4-nav-links a,.hm27-nav-links a{min-height:52px!important;font-size:var(--type-md)!important}
+  .wd4-add-btn,.wd4-export-btn,.hm27-action{min-height:52px!important}
+  body.wdx-modern .wdx-btn{min-height:48px!important;font-size:var(--type-sm)!important}
+  body:is(.wd4-mounted,.wdx-modern) .wd6-pop nav a,
+  body:is(.wd4-mounted,.wdx-modern) .wd6-pop nav button,
+  body:is(.wd4-mounted,.wdx-modern) .wd6-note{min-height:52px!important}
+}
+
+@media (prefers-reduced-motion:reduce){
+  .wd4-nav-panel,.hm27-nav-panel,.wd4-card,.hm27-menu{transition:none!important}
+}
+
+
+/* ===== inlined property/css/home/home-watchdog-intelligence.css ===== */
+/* Property Home · Watchdog Intelligence system
+   Shared visual language for Intelligence surfaces plus the premium Explore card. */
+
+@property --wd-intelligence-angle {
+  syntax: '<angle>';
+  initial-value: 0deg;
+  inherits: false;
+}
+
+@keyframes wd-intelligence-border-rotate {
+  to { --wd-intelligence-angle: 360deg; }
+}
+
+body.hm-dashboard-page .wd-intelligence-frame {
+  --wd-intelligence-angle: 0deg;
+  border: 2px solid transparent !important;
+  background:
+    linear-gradient(#fff,#fff) padding-box,
+    conic-gradient(from var(--wd-intelligence-angle),#15b7c9 0deg,#2478ff 90deg,#7857ff 170deg,#e84bc4 260deg,#15b7c9 360deg) border-box !important;
+  animation: wd-intelligence-border-rotate 7s linear infinite;
+  box-shadow: 0 18px 48px rgba(30,57,91,.09) !important;
+}
+
+/* Voice entry: intentionally visible for every signed-in plan. Entitlement is
+   enforced when the user asks to enter Voice, not by hiding the feature. */
+body.hm-dashboard-page .wd-home-voice-entry {
+  grid-column: 1 / -1;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 22px;
+  width: 100%;
+  min-height: 102px;
+  margin: 0;
+  padding: 20px 22px;
+  border-radius: 22px;
+  color: #10294b;
+}
+body.hm-dashboard-page .wd-home-voice-copy {
+  min-width: 0;
+  display: grid;
+  gap: 3px;
+}
+body.hm-dashboard-page .wd-home-voice-kicker {
+  font: 800 11px/1.2 "Plus Jakarta Sans",sans-serif;
+  letter-spacing: .105em;
+  text-transform: uppercase;
+  color: #087f83;
+}
+body.hm-dashboard-page .wd-home-voice-title {
+  margin: 0;
+  font: 800 clamp(18px,1.55vw,25px)/1.16 "Plus Jakarta Sans",sans-serif;
+  letter-spacing: -.035em;
+  color: #10294b;
+}
+body.hm-dashboard-page .wd-home-voice-sub {
+  margin: 0;
+  max-width: 64ch;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  font: 500 clamp(12px,.95vw,15px)/1.4 "Source Sans 3",sans-serif;
+  color: #71819a;
+}
+body.hm-dashboard-page .wd-home-voice-button {
+  flex: 0 0 auto;
+  min-height: 54px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  padding: 0 24px;
+  border: 0;
+  border-radius: 15px;
+  background: #087f7d;
+  color: #fff;
+  font: 800 16px/1 "Plus Jakarta Sans",sans-serif;
+  cursor: pointer;
+  transition: transform .16s ease,box-shadow .16s ease,background .16s ease;
+  box-shadow: 0 8px 22px rgba(8,127,125,.16);
+}
+body.hm-dashboard-page .wd-home-voice-button:hover {
+  transform: translateY(-1px);
+  background: #066f6d;
+  box-shadow: 0 12px 28px rgba(8,127,125,.22);
+}
+body.hm-dashboard-page .wd-home-voice-button:focus-visible {
+  outline: 3px solid rgba(36,120,255,.24);
+  outline-offset: 3px;
+}
+body.hm-dashboard-page .wd-home-voice-button[aria-busy="true"] {
+  cursor: wait;
+  opacity: .78;
+}
+body.hm-dashboard-page .wd-home-voice-button i { font-size: 17px; }
+
+/* Watchdog Intelligence card. Keep the professional content hierarchy but give
+   the branded surface the same rotating Intelligence signature as Voice. */
+body.hm-dashboard-page .wdai-main.wd-intelligence-frame {
+  border-radius: clamp(20px,1.45vw,24px) !important;
+}
+body.hm-dashboard-page .wdai-main .wdai-title > span {
+  color: #087f83 !important;
+}
+
+/* Explore is a distinct workspace card instead of disappearing into the page. */
+body.hm-dashboard-page .hm-explore-card {
+  grid-column: 1 / -1;
+  width: 100%;
+  margin: 8px 0 0;
+  overflow: hidden;
+  border: 1px solid #dfe6ef;
+  border-radius: 24px;
+  background: #fff;
+  box-shadow: 0 15px 42px rgba(30,57,91,.065);
+}
+body.hm-dashboard-page .hm-explore-card .hm-secbar {
+  margin: 0 !important;
+  padding: 25px 28px 20px !important;
+  background: #fff !important;
+  border: 0 !important;
+  border-bottom: 1px solid #e8edf3 !important;
+}
+body.hm-dashboard-page .hm-explore-card .hm-secbar h2 {
+  margin: 0 0 4px !important;
+  font-size: clamp(22px,1.8vw,30px) !important;
+  letter-spacing: -.04em !important;
+  color: #10294b !important;
+}
+body.hm-dashboard-page .hm-explore-card .hm-secbar p {
+  margin: 0 !important;
+  color: #74839a !important;
+  font-size: 14px !important;
+}
+body.hm-dashboard-page .hm-explore-card .hm-expand-all {
+  background: #f7f9fc !important;
+  border: 1px solid #dfe6ef !important;
+  border-radius: 12px !important;
+  min-height: 44px !important;
+  padding: 0 15px !important;
+  color: #40516b !important;
+}
+body.hm-dashboard-page .hm-explore-card .sec2 {
+  margin: 0 !important;
+  border: 0 !important;
+  border-radius: 0 !important;
+  border-bottom: 1px solid #edf1f5 !important;
+  background: #fff !important;
+  box-shadow: none !important;
+}
+body.hm-dashboard-page .hm-explore-card .sec2:last-child {
+  border-bottom: 0 !important;
+}
+body.hm-dashboard-page .hm-explore-card .sec2-h {
+  min-height: 92px !important;
+  padding: 16px 24px !important;
+  background: #fff !important;
+  transition: background-color .15s ease !important;
+}
+body.hm-dashboard-page .hm-explore-card .sec2-h:hover {
+  background: #f9fbfd !important;
+}
+body.hm-dashboard-page .hm-explore-card .sec2-icon-tile {
+  box-shadow: none !important;
+}
+body.hm-dashboard-page .hm-explore-card .sec2-copy {
+  min-width: 0;
+}
+body.hm-dashboard-page .hm-explore-card .sec2-s {
+  color: #71819a !important;
+}
+body.hm-dashboard-page .hm-explore-card .sec2-b,
+body.hm-dashboard-page .hm-explore-card .sec2-body {
+  background: #fbfcfe !important;
+}
+
+/* Entitlement gate */
+body.hm-dashboard-page .wd-intelligence-gate {
+  position: fixed;
+  inset: 0;
+  z-index: 12000;
+  display: none;
+  align-items: center;
+  justify-content: center;
+  padding: 22px;
+  background: rgba(7,21,42,.62);
+  backdrop-filter: blur(6px);
+}
+body.hm-dashboard-page .wd-intelligence-gate.open { display: flex; }
+body.hm-dashboard-page .wd-intelligence-gate-card {
+  width: min(520px,100%);
+  position: relative;
+  overflow: hidden;
+  padding: 30px;
+  border: 2px solid transparent;
+  border-radius: 24px;
+  background:
+    linear-gradient(#fff,#fff) padding-box,
+    conic-gradient(from var(--wd-intelligence-angle),#15b7c9,#2478ff,#7857ff,#e84bc4,#15b7c9) border-box;
+  animation: wd-intelligence-border-rotate 7s linear infinite;
+  box-shadow: 0 30px 80px rgba(4,17,39,.3);
+}
+body.hm-dashboard-page .wd-intelligence-gate-close {
+  position: absolute;
+  top: 14px;
+  right: 14px;
+  width: 38px;
+  height: 38px;
+  border: 0;
+  border-radius: 50%;
+  background: #f1f5f8;
+  color: #40516b;
+  cursor: pointer;
+}
+body.hm-dashboard-page .wd-intelligence-gate-mark {
+  width: 52px;
+  height: 52px;
+  display: grid;
+  place-items: center;
+  margin-bottom: 18px;
+  border-radius: 15px;
+  background: #eaf8f7;
+  color: #087f7d;
+  font-size: 20px;
+}
+body.hm-dashboard-page .wd-intelligence-gate-kicker {
+  display: block;
+  margin-bottom: 7px;
+  font: 800 10px/1.2 "Plus Jakarta Sans",sans-serif;
+  letter-spacing: .11em;
+  text-transform: uppercase;
+  color: #087f83;
+}
+body.hm-dashboard-page .wd-intelligence-gate-card h2 {
+  margin: 0 38px 10px 0;
+  font: 800 25px/1.18 "Plus Jakarta Sans",sans-serif;
+  letter-spacing: -.04em;
+  color: #10294b;
+}
+body.hm-dashboard-page .wd-intelligence-gate-card p {
+  margin: 0;
+  font: 500 15px/1.55 "Source Sans 3",sans-serif;
+  color: #61728b;
+}
+body.hm-dashboard-page .wd-intelligence-gate-actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+  margin-top: 22px;
+}
+body.hm-dashboard-page .wd-intelligence-gate-actions a,
+body.hm-dashboard-page .wd-intelligence-gate-actions button {
+  min-height: 44px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0 16px;
+  border-radius: 11px;
+  font: 800 13px/1 "Plus Jakarta Sans",sans-serif;
+  text-decoration: none;
+  cursor: pointer;
+}
+body.hm-dashboard-page .wd-intelligence-gate-primary {
+  border: 0;
+  background: #10294b;
+  color: #fff;
+}
+body.hm-dashboard-page .wd-intelligence-gate-secondary {
+  border: 1px solid #dce4ee;
+  background: #fff;
+  color: #10294b;
+}
+
+@media (max-width: 760px) {
+  body.hm-dashboard-page .wd-home-voice-entry {
+    min-height: 0;
+    align-items: stretch;
+    flex-direction: column;
+    gap: 15px;
+    padding: 18px;
+    border-radius: 19px;
+  }
+  body.hm-dashboard-page .wd-home-voice-sub { white-space: normal; }
+  body.hm-dashboard-page .wd-home-voice-button { width: 100%; min-height: 50px; }
+  body.hm-dashboard-page .hm-explore-card { border-radius: 20px; }
+  body.hm-dashboard-page .hm-explore-card .hm-secbar { padding: 20px 18px 16px !important; }
+  body.hm-dashboard-page .hm-explore-card .sec2-h { min-height: 82px !important; padding: 13px 15px !important; }
+  body.hm-dashboard-page .wd-intelligence-gate-card { padding: 25px 21px; border-radius: 20px; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  body.hm-dashboard-page .wd-intelligence-frame,
+  body.hm-dashboard-page .wd-intelligence-gate-card { animation: none !important; }
+}
+
+@media print {
+  body.hm-dashboard-page .wd-home-voice-entry,
+  body.hm-dashboard-page .wd-intelligence-gate { display: none !important; }
+  body.hm-dashboard-page .wd-intelligence-frame { animation: none !important; border-color: #dce4ee !important; background: #fff !important; }
+}
+
+
+/* ===== inlined property/css/data-workbench-analyst.css ===== */
+.dwa-trigger{display:inline-flex;align-items:center;gap:8px;border:1px solid #d7e1ea!important;background:#fff!important;color:#0f172a!important;font-weight:800!important}.dwa-trigger i{color:#0c8b8d}.dwa-trigger.value i{color:#9a6700}.dwa-trigger.locked{opacity:.7}.dwa-backdrop{position:fixed;inset:0;background:rgba(15,23,42,.4);backdrop-filter:blur(3px);z-index:10020}.dwa-panel{position:fixed;top:0;right:0;z-index:10021;width:min(760px,100vw);height:100dvh;background:#f7f9fb;box-shadow:-24px 0 70px rgba(15,23,42,.2);display:flex;flex-direction:column;color:#0f172a}.dwa-head{display:flex;justify-content:space-between;gap:20px;align-items:flex-start;padding:22px 24px 18px;background:#fff;border-bottom:1px solid #e2e8f0}.dwa-head span{font:800 11px/1 "Plus Jakarta Sans",sans-serif;letter-spacing:.12em;color:#64748b}.dwa-head h2{margin:7px 0 4px;font:800 24px/1.1 "Plus Jakarta Sans",sans-serif}.dwa-head p{margin:0;color:#64748b;font-size:14px}.dwa-close{border:0;background:#eef2f6;width:40px;height:40px;border-radius:12px;cursor:pointer;color:#0f172a}.dwa-body{padding:18px 20px 28px;overflow:auto}.dwa-note{padding:11px 13px;border:1px solid #dbeafe;background:#eff6ff;border-radius:12px;color:#475569;font-size:12px;line-height:1.45}.dwa-note b{color:#0f172a}.dwa-chips{display:flex;flex-wrap:wrap;gap:8px;margin:14px 0}.dwa-chip{border:1px solid #dbe3ec;background:#fff;border-radius:999px;padding:8px 11px;color:#334155;font:800 12px "Source Sans 3",sans-serif;cursor:pointer}.dwa-chat{display:grid;gap:10px;margin:12px 0 16px}.dwa-msg{max-width:90%;padding:12px 14px;border-radius:15px;background:#fff;border:1px solid #e2e8f0;box-shadow:0 4px 14px rgba(15,23,42,.04)}.dwa-msg.user{justify-self:end;background:#102a4c;color:#fff;border-color:#102a4c}.dwa-msg.assistant{justify-self:start}.dwa-msg b{display:block;margin-bottom:6px}.dwa-msg p{margin:0;line-height:1.48}.dwa-msg ul{margin:8px 0 0;padding-left:18px}.dwa-msg li{margin:4px 0}.dwa-section{margin-top:10px;padding-top:9px;border-top:1px solid #edf1f5}.dwa-section strong{display:block;font-size:11px;text-transform:uppercase;letter-spacing:.08em;color:#64748b}.dwa-source{display:inline-flex;margin:6px 8px 0 0;color:#0b6f72;font-weight:800;text-decoration:none}.dwa-provider{margin-top:8px;color:#64748b;font-size:11px}.dwa-compose{position:sticky;bottom:-28px;background:linear-gradient(transparent,#f7f9fb 18%);padding:22px 0 0}.dwa-compose textarea{width:100%;min-height:92px;resize:vertical;border:1px solid #cbd5e1;border-radius:14px;padding:12px 13px;font:600 14px/1.45 "Source Sans 3",sans-serif;box-sizing:border-box;background:#fff}.dwa-compose-row{display:flex;justify-content:space-between;align-items:center;gap:10px;margin-top:8px}.dwa-compose-row small{color:#64748b}.dwa-send{border:0;border-radius:11px;background:#0f172a;color:#fff;padding:10px 14px;font-weight:800;cursor:pointer}.dwa-send:disabled{opacity:.55}.dwa-action-row{display:flex;flex-wrap:wrap;gap:7px;margin-top:10px}.dwa-action-row button{border:1px solid #dbe3ec;background:#fff;border-radius:9px;padding:7px 9px;font-weight:800;color:#334155;cursor:pointer}.dwa-value-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:10px;margin:14px 0}.dwa-field{display:grid;gap:5px}.dwa-field label{font-size:12px;font-weight:800;color:#475569}.dwa-field input,.dwa-field select,.dwa-outcome{width:100%;box-sizing:border-box;border:1px solid #cbd5e1;background:#fff;border-radius:10px;padding:9px 10px;color:#0f172a;font:700 13px "Source Sans 3",sans-serif}.dwa-value-live{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:9px;margin:12px 0}.dwa-value-live article{background:#fff;border:1px solid #e2e8f0;border-radius:14px;padding:12px}.dwa-value-live b{display:block;font:800 20px "Plus Jakarta Sans",sans-serif}.dwa-value-live span{display:block;color:#64748b;font-size:11px;margin-top:3px}.dwa-save{border:0;border-radius:11px;background:#0f172a;color:#fff;padding:10px 13px;font-weight:800;cursor:pointer}.dwa-profile{display:flex;justify-content:space-between;gap:12px;align-items:center;background:#fff;border:1px solid #e2e8f0;border-radius:14px;padding:13px;margin:12px 0}.dwa-profile b{display:block}.dwa-profile small{color:#64748b}.dwa-reset{border:1px solid #dbe3ec;background:#fff;border-radius:9px;padding:7px 9px;font-weight:800;color:#475569;cursor:pointer}.dwa-findings{display:grid;gap:10px;margin-top:12px}.dwa-finding{background:#fff;border:1px solid #e2e8f0;border-radius:15px;padding:13px}.dwa-finding-top{display:grid;grid-template-columns:48px minmax(0,1fr) auto;gap:10px;align-items:start}.dwa-score{width:48px;height:48px;border-radius:13px;background:#ecfdf5;color:#166534;display:grid;place-items:center;font:800 16px "Plus Jakarta Sans",sans-serif}.dwa-finding h3{margin:1px 0 4px;font:800 14px "Plus Jakarta Sans",sans-serif}.dwa-finding p{margin:0;color:#64748b;font-size:12px}.dwa-priority{font:800 12px "Plus Jakarta Sans",sans-serif;color:#0c7476;text-align:right}.dwa-scenario{display:flex;gap:12px;flex-wrap:wrap;margin-top:10px;padding-top:10px;border-top:1px solid #edf1f5}.dwa-scenario span{font-size:11px;color:#64748b}.dwa-scenario b{display:block;color:#0f172a;font-size:13px}.dwa-feedback{display:flex;flex-wrap:wrap;gap:7px;margin-top:10px}.dwa-feedback button{border:1px solid #dbe3ec;background:#fff;border-radius:9px;padding:7px 9px;font-weight:800;color:#334155;cursor:pointer}.dwa-feedback button.good{color:#166534}.dwa-feedback button.bad{color:#9a3412}.dwa-empty{padding:24px;text-align:center;background:#fff;border:1px dashed #cbd5e1;border-radius:14px;color:#64748b}.dwa-status{color:#64748b;font-size:12px;margin-top:8px}.dwa-warning{margin-top:12px;color:#92400e;font-size:12px;line-height:1.45}@media(max-width:720px){.dwa-head{padding:18px 16px}.dwa-body{padding:14px}.dwa-value-grid,.dwa-value-live{grid-template-columns:1fr}.dwa-finding-top{grid-template-columns:44px 1fr}.dwa-score{width:44px;height:44px}.dwa-priority{grid-column:2;text-align:left}.dwa-compose-row{align-items:flex-start;flex-direction:column}.dwa-send{width:100%}}
+
+
+/* ===== inlined property/css/watchdog-contextual-voice.css ===== */
+.wd-contextual-voice-entry{
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  gap:14px;
+  margin:0 0 10px;
+  padding:12px 14px;
+  border:1px solid var(--border);
+  border-radius:var(--radius-lg);
+  background:var(--surface);
+  box-shadow:var(--shadow-sm);
+}
+.wd-contextual-voice-entry>div{min-width:0}
+.wd-contextual-voice-entry span{
+  display:block;
+  color:var(--wd-teal-600);
+  font:800 var(--type-xs)/1.1 var(--font-ui);
+  letter-spacing:.1em;
+}
+.wd-contextual-voice-entry b{
+  display:block;
+  margin-top:4px;
+  color:var(--navy-dark);
+  font:800 var(--type-sm)/1.25 var(--font-ui);
+  letter-spacing:-.01em;
+}
+.wd-contextual-voice-entry small{
+  display:block;
+  margin-top:2px;
+  color:var(--text-muted);
+  font-size:var(--type-xs);
+  line-height:1.35;
+}
+.wd-contextual-voice-open,.wdi-today-voice-open{
+  flex:none;
+  display:inline-flex;
+  align-items:center;
+  justify-content:center;
+  gap:7px;
+  min-height:38px;
+  border:0;
+  border-radius:var(--radius-sm);
+  padding:0 12px;
+  background:var(--wd-teal-600);
+  color:#fff;
+  font-family:var(--font-ui);
+  font-size:var(--type-xs);
+  font-weight:800;
+  cursor:pointer;
+  transition:background .16s ease,transform .16s ease;
+}
+.wd-contextual-voice-open:hover,.wdi-today-voice-open:hover{background:#0b665f}
+.wd-contextual-voice-open:focus-visible,.wdi-today-voice-open:focus-visible{outline:3px solid rgba(15,118,110,.22);outline-offset:2px}
+.wd-contextual-voice-open span{color:inherit;font:inherit;letter-spacing:0}
+
+/* Dashboard Voice is a command, not a hero. Keep it on the same visual level
+   as the confirmed research context. */
+body[data-sidebar-page="dashboard"] .wd-contextual-voice-entry{
+  min-height:68px;
+  padding:10px 12px;
+  border-color:var(--border);
+  border-radius:var(--radius-lg);
+}
+body[data-sidebar-page="dashboard"] .wd-contextual-voice-entry small{
+  white-space:nowrap;
+  overflow:hidden;
+  text-overflow:ellipsis;
+}
+body[data-sidebar-page="dashboard"] .wd-contextual-voice-open{
+  min-height:36px;
+  white-space:nowrap;
+}
+
+.wdi-today-head .wdi-today-voice-open{margin-top:5px;background:var(--wd-teal-600);color:#fff}
+.wdi-today-actions .wdi-today-voice-item{background:#e8f7f5;color:var(--wd-teal-600)}
+.dwa-panel[data-contextual-analyst="true"] .dwa-note{border-color:#cce8e5;background:#f0fbfa}
+.dwa-panel[data-contextual-analyst="true"] .dwa-note b{color:#0f5f60}
+.dwa-panel[data-contextual-analyst="true"] .dwa-msg.assistant .dwa-section.missing strong{color:#9a6700}
+.dwa-panel[data-contextual-analyst="true"] .dwa-msg.assistant .dwa-section.caveats strong{color:#7c3f00}
+.dwa-panel[data-contextual-analyst="true"] .dwa-source{display:inline-flex;margin:6px 8px 0 0}
+
+.dwa-narration-tools{
+  display:flex;
+  align-items:center;
+  flex-wrap:wrap;
+  gap:8px;
+  margin-top:12px;
+  padding-top:10px;
+  border-top:1px solid var(--border);
+}
+.dwa-narration-label{
+  display:inline-flex;
+  align-items:center;
+  gap:7px;
+  color:var(--text-muted);
+  font-family:var(--font-ui);
+  font-size:var(--type-xs);
+  font-weight:800;
+}
+.dwa-narration-label select{
+  min-height:36px;
+  max-width:210px;
+  border:1px solid var(--border);
+  border-radius:var(--radius-sm);
+  padding:0 28px 0 9px;
+  background:var(--surface);
+  color:var(--ink);
+  font:700 var(--type-xs) var(--font-ui);
+  cursor:pointer;
+}
+.dwa-narration-tools [data-dwa-listen]{
+  min-height:36px;
+  border:0;
+  border-radius:var(--radius-sm);
+  padding:0 11px;
+  background:var(--wd-teal-600);
+  color:#fff;
+  font-family:var(--font-ui);
+  font-size:var(--type-xs);
+  font-weight:800;
+  cursor:pointer;
+}
+.dwa-narration-tools [data-dwa-listen]:disabled{opacity:.58;cursor:default}
+.dwa-narration-label select:focus-visible,.dwa-narration-tools [data-dwa-listen]:focus-visible{outline:3px solid rgba(15,118,110,.22);outline-offset:2px}
+.dwa-narration-note{color:var(--text-muted);font-family:var(--font-ui);font-size:var(--type-xs);line-height:1.3}
+
+.dwa-command-gate{
+  margin-top:8px;
+  border:1px solid var(--border);
+  border-radius:var(--radius-md);
+  padding:12px;
+  background:var(--surface-soft);
+}
+.dwa-command-gate.reversible{border-color:#b9e1dd;background:#f2fbfa}
+.dwa-command-gate.approval{border-color:#f0d7a6;background:#fff9ec}
+.dwa-command-gate.prohibited{border-color:#efc3c3;background:#fff5f5}
+.dwa-command-gate>strong{display:block;color:var(--navy-dark);font-family:var(--font-ui);font-size:var(--type-sm);line-height:1.3}
+.dwa-command-gate.prohibited>strong{color:#9f1d1d}
+.dwa-command-gate>p{margin:6px 0 0;color:#425466;font-family:var(--font-ui);font-size:var(--type-xs);line-height:1.5}
+.dwa-command-gate>small{display:block;margin-top:8px;color:var(--text-muted);font-family:var(--font-ui);font-size:var(--type-xs);line-height:1.4}
+.dwa-command-actions{display:flex;align-items:center;flex-wrap:wrap;gap:8px;margin-top:10px}
+.dwa-command-confirm,.dwa-command-cancel{
+  min-height:38px;
+  border-radius:var(--radius-sm);
+  padding:0 12px;
+  font-family:var(--font-ui);
+  font-size:var(--type-xs);
+  font-weight:800;
+  cursor:pointer;
+}
+.dwa-command-confirm{border:0;background:var(--wd-teal-600);color:#fff}
+.dwa-command-gate.approval .dwa-command-confirm{background:#8a5a00}
+.dwa-command-cancel{border:1px solid var(--border);background:var(--surface);color:#334155}
+.dwa-command-confirm:disabled,.dwa-command-cancel:disabled{opacity:.55;cursor:default}
+.dwa-command-confirm:focus-visible,.dwa-command-cancel:focus-visible{outline:3px solid rgba(15,118,110,.22);outline-offset:2px}
+.dwa-command-result{margin-top:10px;border-radius:var(--radius-sm);padding:9px 10px;font-family:var(--font-ui);font-size:var(--type-xs);line-height:1.4}
+.dwa-command-result.reversible{background:#effaf8;color:#155e59}
+.dwa-command-result.approval{background:#fff7e6;color:#7c4a03}
+
+@media(max-width:1024px){
+  body[data-sidebar-page="dashboard"] .wd-contextual-voice-entry{margin-bottom:8px}
+}
+@media(max-width:768px){
+  .wd-contextual-voice-entry{align-items:stretch;flex-direction:column;padding:12px}
+  .wd-contextual-voice-open{width:100%;min-height:44px}
+  body[data-sidebar-page="dashboard"] .wd-contextual-voice-entry small{white-space:normal}
+  .wdi-today-head .wdi-today-voice-open{justify-self:start;min-height:44px}
+  .wdi-today-actions .wdi-today-voice-item{min-height:44px}
+  .dwa-narration-tools{align-items:stretch;flex-direction:column}
+  .dwa-narration-label{align-items:flex-start;flex-direction:column;width:100%}
+  .dwa-narration-label select,.dwa-narration-tools [data-dwa-listen]{width:100%;max-width:none;min-height:44px}
+  .dwa-command-actions{align-items:stretch;flex-direction:column}
+  .dwa-command-confirm,.dwa-command-cancel{width:100%;min-height:44px}
+}
+
+
+/* ===== inlined property/css/watchdog-intelligence-voice.css ===== */
+.dwa-voice-button{display:inline-flex;align-items:center;justify-content:center;gap:7px;border:1px solid #cbd5e1;border-radius:11px;background:#fff;color:#0f172a;padding:9px 12px;font-weight:800;cursor:pointer;white-space:nowrap}.dwa-voice-button:hover{background:#f8fafc}.dwa-voice-button:disabled{opacity:.5;cursor:not-allowed}.dwa-voice-button.recording{border-color:#b91c1c;background:#fff1f2;color:#b91c1c}.dwa-voice-status{margin-top:7px;color:#64748b;font-size:11px;line-height:1.4}.dwa-voice-status[data-state="recording"]{color:#b91c1c;font-weight:700}.dwa-voice-status[data-state="ready"]{color:#0f766e;font-weight:700}.dwa-voice-status[data-state="error"]{color:#9a3412}.dwa-voice-message-tools{display:flex;align-items:center;gap:8px;flex-wrap:wrap;margin-top:10px;padding-top:9px;border-top:1px solid #edf1f5}.dwa-voice-message-tools button{display:inline-flex;align-items:center;gap:6px;border:1px solid #dbe3ec;background:#fff;border-radius:9px;padding:7px 9px;color:#334155;font-weight:800;cursor:pointer}.dwa-voice-message-tools button:disabled{opacity:.55;cursor:not-allowed}.dwa-voice-message-tools span{color:#64748b;font-size:11px}@media(max-width:720px){.dwa-compose-row{gap:8px}.dwa-voice-button{width:100%}.dwa-voice-message-tools{align-items:flex-start;flex-direction:column}}
