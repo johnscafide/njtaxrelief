@@ -32,6 +32,7 @@
     var r = rows.filter(function (row) { return String(row.pams_pin || '').replace(/[^a-z0-9]/gi, '') === pin; })[0];
     if (!r) return;
     var currentRate = +r.last_year_tax / +r.assessed;
+    if(window.WatchdogTaxYears && WatchdogTaxYears.mismatch(r)){ root.querySelector('.tp-output').innerHTML='<div><span>Projection paused</span><b>Assessment and tax years do not match</b><small>Enter or wait for a same-year published rate. Watchdog will not apply an old rate to a revalued assessment.</small></div>'; return; }
     var assessment = +r.assessed * (1 + assessmentChange / 100);
     var projected = assessment * currentRate * Math.pow(1 + rateChange / 100, years);
     var delta = projected - +r.last_year_tax;
