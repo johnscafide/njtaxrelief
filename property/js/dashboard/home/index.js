@@ -1330,6 +1330,8 @@
   // right split: a list should stay scannable and a report should go deep.
   // ══════════════════════════════════════════════
   var current = null;
+  var municipalTaxEvidence = null;
+  var municipalTaxEvidencePin = '';
 
   function isCommercialProperty(r) {
     var classification = String(r.property_class || r.prop_class || r.class_code || r.classification || '').toLowerCase();
@@ -1344,12 +1346,66 @@
     return m ? decodeURIComponent(m[1]) : null;
   }
 
+  function municipalityCodeFor(r) {
+    var pin = String(r && r.pams_pin || '').replace(/[^0-9_]/g, '');
+    var code = pin.split('_')[0] || '';
+    return /^\d{4}$/.test(code) ? code : '';
+  }
+
+  function loadMunicipalTaxEvidence(r) {
+    if (!sb || !plUser || !r || !r.pams_pin) return Promise.resolve(null);
+    var code = municipalityCodeFor(r);
+    if (!code || !r.address) return Promise.resolve(null);
+    municipalTaxEvidencePin = r.pams_pin;
+    return sb.functions.invoke('municipal-property-tax-evidence', { body: {
+      municipality_code: code, address: r.address, block: r.block || '', lot: r.lot || ''
+    }}).then(function (result) {
+      if (!current || current.pams_pin !== municipalTaxEvidencePin) return null;
+      if (result && result.error) throw result.error;
+      municipalTaxEvidence = result && result.data && result.data.status === 'exact_match' ? result.data : null;
+      return municipalTaxEvidence;
+    }).catch(function (error) {
+      console.warn('Municipal tax evidence unavailable:', error);
+      municipalTaxEvidence = null;
+      return null;
+    });
+  }
+
+  function taxDisplay(r) {
+    var e = municipalTaxEvidence && current && municipalTaxEvidencePin === current.pams_pin ? municipalTaxEvidence : null;
+    var cur = e && e.current || null;
+    var property = e && e.property || null;
+    return {
+      tax: cur && cur.annual_tax != null ? +cur.annual_tax : (+r.last_year_tax || null),
+      taxYear: cur && cur.tax_year || r.last_year_tax_year || null,
+      assessed: property && property.total_assessed_value != null ? +property.total_assessed_value : (+r.assessed || null),
+      assessmentYear: cur && cur.assessment_year || r.assessment_year || null,
+      rate: cur && cur.tax_rate != null ? +cur.tax_rate : null,
+      provider: e && e.provider_label || null,
+      source: e && e.source && e.source.url || null,
+      live: !!e,
+      mismatch: !!(cur && cur.revaluation_mismatch)
+    };
+  }
+
+  function taxTimeline(r) {
+    var t = taxDisplay(r), items = [];
+    if (t.assessed != null) items.push('<div><small>' + esc(t.assessmentYear ? t.assessmentYear + ' assessment' : 'Current assessment') + '</small><b>' + money(t.assessed) + '</b><em>Official record</em></div>');
+    if (t.tax != null) items.push('<div><small>' + esc(t.taxYear ? t.taxYear + ' annual tax' : 'Saved annual tax') + '</small><b>' + money(t.tax) + '</b><em>' + esc(t.live ? 'Municipal bill evidence' : 'Saved state record') + '</em></div>');
+    if (t.rate != null) items.push('<div><small>' + esc(t.taxYear ? t.taxYear + ' tax rate' : 'Tax rate') + '</small><b>' + t.rate.toFixed(3) + '%</b><em>Municipal evidence</em></div>');
+    if (t.mismatch) items.push('<div><small>Tax-year alignment</small><b>Protected</b><em>Assessment year not inferred from current snapshot</em></div>');
+    return '<section class="hm-tax-timeline" style="margin:18px 0;padding:18px;border:1px solid #dfe6ef;border-radius:18px;background:#fff"><div style="display:flex;justify-content:space-between;gap:12px;align-items:start"><div><small style="font-weight:800;letter-spacing:.08em;color:#667085">TAX TIMELINE</small><h2 style="margin:4px 0 2px">Current municipal tax evidence</h2><p style="margin:0;color:#667085">Observed bill, assessment and rate are kept by tax year. Watchdog does not mix a revaluation assessment with an older rate.</p></div>' + (t.source ? '<a href="' + esc(t.source) + '" target="_blank" rel="noopener" style="white-space:nowrap">Official source ↗</a>' : '') + '</div><div class="hm-figs" style="margin-top:14px">' + items.join('') + '</div>' + (t.provider ? '<p style="margin:10px 0 0;color:#667085;font-size:12px">Source: ' + esc(t.provider) + '</p>' : '') + '</section>';
+  }
+
   window.hmSwitch = function (pin) {
     history.replaceState({}, '', '/property/home?pin=' + encodeURIComponent(pin));
     current = rows.filter(function (r) { return r.pams_pin === pin; })[0] || rows[0];
+    municipalTaxEvidence = null;
+    municipalTaxEvidencePin = current && current.pams_pin || '';
     OPEN = {};
     paintReport();
     paintHomeChrome();
+    loadMunicipalTaxEvidence(current).then(function () { paintReport(); paintHomeChrome(); });
   };
 
   window.hmGlossary = function () {
@@ -1411,7 +1467,7 @@
       }).join('');
     }
 
-    var commercial = isCommercialProperty(r), c = commercial ? null : chapter123(r), u = uniFor(r), a = appealFor(r), s = commercial ? null : sr1aFor(r);
+    var commercial = isCommercialProperty(r), c = commercial ? null : chapter123(r), u = uniFor(r), a = appealFor(r), s = commercial ? null : sr1aFor(r), taxNow = taxDisplay(r);
     var loc = [r.address, r.town, 'NJ', r.zip].filter(Boolean).join(', ');
 
     el('hm-body').innerHTML =
@@ -1445,14 +1501,15 @@
           intelPoints(r, c, u, a) +
         '</section>' +
         '<div class="hm-figs">' +
-          hf('property.assessed_value', 'Assessed', money(r.assessed || 0), 'what the town says') +
-          hf('property.annual_tax', 'Annual tax', money(r.last_year_tax || 0), 'last full year') +
-          hf('watchdog.effective_tax_rate', 'Effective rate', r.effective_rate ? (+r.effective_rate).toFixed(2) + '%' : '-', 'of market value') +
+          hf('property.assessed_value', 'Assessed', money(taxNow.assessed || 0), taxNow.assessmentYear ? taxNow.assessmentYear + ' official assessment' : 'current official assessment') +
+          hf('property.annual_tax', 'Annual tax', money(taxNow.tax || 0), taxNow.taxYear ? taxNow.taxYear + ' municipal bill' : 'last saved full year') +
+          hf('watchdog.effective_tax_rate', 'Tax rate', taxNow.rate != null ? taxNow.rate.toFixed(3) + '%' : (r.effective_rate ? (+r.effective_rate).toFixed(2) + '%' : '-'), taxNow.rate != null ? 'municipal evidence' : 'saved effective rate') +
           (s ? hf('sales.ratio', 'Town ratio', (s.ratio * 100).toFixed(1) + '%', s.n + ' verified sales') : '') +
           (s && s.ppsf ? hf('sales.ppsf', 'Price per sq ft', '$' + s.ppsf, 'median here', 'hm-detail-metric') : '') +
           (s && s.medPrice ? hf('sales.median_price', 'Median sale', money(s.medPrice), 'in this town', 'hm-detail-metric') : '') +
           (u && Number.isFinite(+u.score) ? hf('watchdog.assessment_uniformity_score', 'Fairness score', (+u.score).toFixed(1) + '/100', '#' + u.stateRank + ' statewide', 'hm-detail-metric') : '') +
         '</div>' +
+        taxTimeline(r) +
 
         (commercial ? '' : scorecard(r)) +
         (typeof toolScoreHistory === 'function' ? toolScoreHistory(r) : '') +
@@ -2015,6 +2072,7 @@
                   rows.filter(function (x) { return x.kind === 'home'; })[0] || rows[0];
         paintHomeChrome();
         paintReport();
+        loadMunicipalTaxEvidence(current).then(function () { paintReport(); paintHomeChrome(); });
         if (location.hash.indexOf('#sec-') === 0) {
           var sectionKey = location.hash.slice(5);
           if (SECTIONS.some(function (section) { return section.k === sectionKey; })) window.hmToggle(sectionKey);
