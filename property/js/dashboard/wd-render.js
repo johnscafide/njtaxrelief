@@ -109,7 +109,7 @@ function start(){
         '<td class="wdd-r wdd-fig">'+(p.assessed?H.money(p.assessed):'—')+'</td>'+
         '<td class="wdd-r wdd-fig">'+(p.watchdog_value?H.money(p.watchdog_value):'—')+'</td>'+
         '<td class="wdd-r"><span class="wdd-fig'+gapTone+'">'+(g==null?'—':(g.pct>0?'+':'')+g.pct.toFixed(1)+'%')+'</span>'+(g&&g.dollars?'<span class="wdd-sub">'+esc(H.dollars(g.dollars))+'/yr</span>':'')+'</td>'+
-        '<td class="wdd-r wdd-fig">'+(p.last_year_tax?H.money(p.last_year_tax):'—')+'</td>'+
+        '<td class="wdd-r wdd-fig">'+(p.last_year_tax?H.money(p.last_year_tax):'—')+(p.last_year_tax_year?'<span class="wdd-sub">'+esc(String(p.last_year_tax_year))+(p.municipal_tax_live?' municipal':'')+'</span>':'')+'</td>'+
         '<td class="wdd-r"><span class="wdd-scorecell wdd-'+WD.categoryFor(p)+'"><b>'+(sc==null?'—':sc)+'</b></span></td>'+
         '<td><span class="wdd-status-pill '+status.cls+'">'+status.label+'</span></td>'+
         '<td class="wdd-r wdd-row-actions-cell"><button class="wdd-row-menu" type="button" aria-label="Property options" aria-expanded="false"><i class="fas fa-ellipsis"></i></button>'+
