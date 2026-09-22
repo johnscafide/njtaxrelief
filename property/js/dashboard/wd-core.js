@@ -72,6 +72,45 @@
     return { count: props.length, score: scoreVals.length ? H.avg(scoreVals) : null, peer: peerVals.length ? H.avg(peerVals) : null, value: H.sum(props.map(function (p) { return p.watchdog_value; })), assessed: H.sum(props.map(function (p) { return p.assessed; })), tax: H.sum(props.map(function (p) { return p.last_year_tax; })), over: over, atStake: atStake, warn: warn, bad: bad, changes: changes, changes30: changes.filter(function (r) { var t = new Date(r.occurred_at).getTime(); return Number.isFinite(t) && t >= cut30; }).length };
   }
 
+  function municipalityCodeFor(p) {
+    var pin = String(p && p.pams_pin || '').replace(/[^0-9_]/g, '');
+    var code = pin.split('_')[0] || '';
+    return /^\d{4}$/.test(code) ? code : '';
+  }
+
+  function applyMunicipalTaxOverlay(p, payload) {
+    if (!p || !payload || payload.status !== 'exact_match') return false;
+    var cur = payload.current || {}, prop = payload.property || {};
+    if (prop.total_assessed_value != null) p.assessed = Number(prop.total_assessed_value);
+    if (cur.annual_tax != null) p.last_year_tax = Number(cur.annual_tax);
+    if (cur.effective_rate != null) p.effective_rate = Number(cur.effective_rate);
+    p.assessment_year = cur.assessment_year || null;
+    p.last_year_tax_year = cur.tax_year || null;
+    p.municipal_tax_rate = cur.tax_rate != null ? Number(cur.tax_rate) : null;
+    p.municipal_tax_source = payload.source && payload.source.url || null;
+    p.municipal_tax_provider = payload.provider_label || null;
+    p.municipal_tax_live = true;
+    return true;
+  }
+
+  function enrichMunicipalTaxes() {
+    var c = db(), list = S.properties.slice();
+    if (!c || !list.length) return Promise.resolve();
+    var changed = false, index = 0, workers = [];
+    function one() {
+      if (index >= list.length) return Promise.resolve();
+      var p = list[index++], code = municipalityCodeFor(p);
+      if (!code || !p.address) return one();
+      return c.functions.invoke('municipal-property-tax-evidence', { body: {
+        municipality_code: code, address: p.address, block: p.block || '', lot: p.lot || ''
+      }}).then(function (res) {
+        if (res && !res.error && applyMunicipalTaxOverlay(p, res.data)) changed = true;
+      }).catch(function () {}).then(one);
+    }
+    for (var i = 0; i < Math.min(4, list.length); i++) workers.push(one());
+    return Promise.all(workers).then(function () { if (changed) WD.repaint(); });
+  }
+
   function loadData() {
     var c = db();
     return Promise.allSettled([
@@ -107,6 +146,7 @@
       S.properties.forEach(function (p) { var s = S.scores[p.pams_pin], townKey = townPeerKey(p.town, p.county); if (s && s.peer == null && townPeers[townKey] != null) s.peer = townPeers[townKey]; });
       S.changes = H.settled(parts[3]);
       S.findings = H.settled(parts[4]);
+      return enrichMunicipalTaxes();
     });
   }
 
