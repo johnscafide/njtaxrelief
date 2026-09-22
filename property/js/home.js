@@ -2623,9 +2623,10 @@ document.addEventListener('mouseover',e=>{var t=e.target.closest('[data-marker-i
           var sectionKey = location.hash.slice(5);
           if (SECTIONS.some(function (section) { return section.k === sectionKey; })) window.hmToggle(sectionKey);
         }
-      });
-    }).catch(function (error) {
+      }).catch(function (error) {
         console.error('Property report workspace failed:', error);
+        el('hm-loading').style.display = 'none';
+        el('hm-main').style.display = '';
         el('hm-body').innerHTML = '<div class="wrap"><div class="db-error-panel"><i class="fas fa-triangle-exclamation"></i>' +
           '<div><h3>We could not finish loading this property report.</h3><p>Your saved information has not been changed.</p>' +
           '<button class="db-btn" onclick="location.reload()">Try again</button></div></div></div>';
