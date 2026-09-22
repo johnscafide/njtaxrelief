@@ -13,7 +13,7 @@ const respond=(r:Request,s:number,b:unknown)=>new Response(JSON.stringify(b),{st
 const num=(v:unknown)=>{if(v===null||v===undefined||v==="")return null;const n=Number(String(v).replace(/[$,%\s,]/g,""));return Number.isFinite(n)?n:null};
 const SUFFIX:Record<string,string>={STREET:"ST",ST:"ST",ROAD:"RD",RD:"RD",AVENUE:"AVE",AVE:"AVE",COURT:"CT",CT:"CT",DRIVE:"DR",DR:"DR",LANE:"LN",LN:"LN",PLACE:"PL",PL:"PL",BOULEVARD:"BLVD",BLVD:"BLVD",TERRACE:"TER",TER:"TER",CIRCLE:"CIR",CIR:"CIR",PARKWAY:"PKWY",PKWY:"PKWY",HIGHWAY:"HWY",HWY:"HWY",TRAIL:"TRL",TRL:"TRL",WAY:"WAY"};
 function streetOnly(v:unknown){return clean(v,240).split(",")[0].trim()}
-function normStreet(v:unknown){const raw=streetOnly(v).toUpperCase().replace(/[^A-Z0-9 ]+/g," ").replace(/\s+/g," ").trim();const p=raw.split(" ").filter(Boolean);if(p.length&&SUFFIX[p.at(-1)!])p[p.length-1]=SUFFIX[p.at(-1)!];return p.join(" ")}
+function normStreet(v:unknown){const raw=streetOnly(v).toUpperCase().replace(/[^A-Z0-9 ]+/g," ").replace(/\s+/g," ").trim();const p=raw.split(" ").filter(Boolean);const dirs:Record<string,string>={NORTH:"N",SOUTH:"S",EAST:"E",WEST:"W",NORTHEAST:"NE",NORTHWEST:"NW",SOUTHEAST:"SE",SOUTHWEST:"SW"};for(let i=0;i<p.length;i++){if(dirs[p[i]])p[i]=dirs[p[i]]}for(let i=0;i<p.length;i++){if(SUFFIX[p[i]])p[i]=SUFFIX[p[i]]}if(p.length>3&&["N","S","E","W","NE","NW","SE","SW"].includes(p[1])){const d=p.splice(1,1)[0];p.push(d)}return p.join(" ")}
 function searchTerm(v:unknown){const raw=streetOnly(v).replace(/[^A-Za-z0-9 ]+/g," ").replace(/\s+/g," ").trim();const p=raw.split(" ").filter(Boolean);if(p.length>2&&SUFFIX[String(p.at(-1)).toUpperCase()])p.pop();return p.join(" ").slice(0,100)}
 function compact(v:unknown){let s=clean(v,50).toUpperCase().replace(/\s+/g,"").replace(/^0+(?=\d)/,"");if(/^\d+(?:\.\d+)?$/.test(s)&&s.includes("."))s=s.replace(/0+$/,"").replace(/\.$/,"");return s}
 function pickMatch(rows:Row[],address:string,block:string,lot:string){const wanted=normStreet(address);if(!wanted)return null;const exact=rows.filter(r=>normStreet(r.propertyLoc)===wanted);if(exact.length===1)return exact[0];if(exact.length>1&&block&&lot){const b=compact(block),l=compact(lot);const byParcel=exact.filter(r=>{const x=clean(r.blqId,140).toUpperCase().replace(/\s+/g,"");return x.includes(b)&&x.includes(l)});if(byParcel.length===1)return byParcel[0]}return null}
@@ -26,7 +26,7 @@ function splitBlq(raw:unknown){const s=clean(raw,100);const parts=s.split(/[.\/-
 function portal(id:string,account:string){return `${WIPP_PORTAL}/view/wippTaxes/${encodeURIComponent(account)}?wippId=${encodeURIComponent(id)}`}
 function effective_rate_from_same_year(v:number|null){return v}
 function currentTaxSummary(annual:Row,assessed:number|null){
-  const years=Object.keys(annual).filter(y=>/^\\d{4}$/.test(y)).map(Number).sort((a,b)=>b-a);
+  const years=Object.keys(annual).filter(y=>/^\d{4}$/.test(y)).map(Number).sort((a,b)=>b-a);
   const complete=years.find(y=>{
     const x=safe(annual[String(y)]),qs=Array.isArray(x.quarters)?x.quarters:[];
     return num(x.property_tax_billed)!==null&&Number(x.property_tax_billed)>0&&new Set(qs.map((q:Row)=>Number(q.quarter)).filter(q=>q>=1&&q<=4)).size===4;
