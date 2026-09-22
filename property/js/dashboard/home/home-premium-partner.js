@@ -9,7 +9,7 @@ var timer=0;
 
 function ensureAssets(){
   if(!document.querySelector('script[data-watchdog-home-hero-intelligence]')){
-    var hero=document.createElement('script');hero.src='/property/js/dashboard/home/home-hero-intelligence.js';hero.async=false;hero.setAttribute('data-watchdog-home-hero-intelligence','1');document.body.appendChild(hero);
+    var hero=document.createElement('script');hero.src='/property/js/dashboard/home/home-hero-intelligence.js?v=20260922c';hero.async=false;hero.setAttribute('data-watchdog-home-hero-intelligence','1');document.body.appendChild(hero);
   }
   if(!document.querySelector('link[data-watchdog-home-ad-quarter]')){
     var css=document.createElement('link');css.rel='stylesheet';css.href='/property/css/home/home-ad-quarter.css';css.setAttribute('data-watchdog-home-ad-quarter','1');document.head.appendChild(css);
