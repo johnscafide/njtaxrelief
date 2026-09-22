@@ -686,10 +686,7 @@
     if (document.getElementById(id)) { if (next) next(); return; }
     var s = document.createElement('script'); s.id = id; s.src = src; s.onload = function () { if (next) next(); }; document.body.appendChild(s);
   }
-  function loadCss(id, href) {
-    if (document.getElementById(id)) return;
-    var l=document.createElement('link');l.id=id;l.rel='stylesheet';l.href=href;document.head.appendChild(l);
-  }
+  function loadCss(id, href) { /* bundled into /property/css/home.css */ }
   function loadRuntime() {
     loadCss('njw96-search-v3-css','/property/css/lookup/09-search-corrections-v3.css');
     loadCss('watchdog-search-uniformity-css','/property/css/search-uniformity.css');
@@ -719,13 +716,7 @@
   if (path !== '/property' && path !== '/property/index.html' && !cleanWatchdogRoot) return;
 
   function bootIntelligence() {
-    if (!document.getElementById('wd-landing-intelligence-css')) {
-      var css = document.createElement('link');
-      css.id = 'wd-landing-intelligence-css';
-      css.rel = 'stylesheet';
-      css.href = '/property/css/landing-intelligence.css';
-      document.head.appendChild(css);
-    }
+    /* landing intelligence CSS is bundled into /property/css/home.css */
     if (document.getElementById('wd-landing-intelligence-loader')) return;
     var intelligence = document.createElement('script');
     intelligence.id = 'wd-landing-intelligence-loader';
@@ -813,10 +804,7 @@ window.addEventListener('load',function(){if('serviceWorker' in navigator)naviga
   }
   installStreetViewBackgroundGuard();
 
-  function ensureStylesheet(href){
-    if(document.querySelector('link[href="'+href+'"]'))return;
-    var l=document.createElement('link');l.rel='stylesheet';l.href=href;document.head.appendChild(l);
-  }
+  function ensureStylesheet(href){ /* bundled into /property/css/home.css */ }
   function ensureScript(src,id){
     if(id&&document.getElementById(id))return;
     if(document.querySelector('script[src="'+src+'"]'))return;
@@ -4189,14 +4177,7 @@ var mountTimer=0;
 var client=null;
 var depsPromise=null;
 
-function addStyle(href,key){
-  if(document.querySelector('link[data-wd-intelligence="'+key+'"]'))return;
-  var link=document.createElement('link');
-  link.rel='stylesheet';
-  link.href=href;
-  link.setAttribute('data-wd-intelligence',key);
-  document.head.appendChild(link);
-}
+function addStyle(href,key){ /* bundled into /property/css/home.css */ }
 function loadScript(src,key){
   return new Promise(function(resolve,reject){
     var found=document.querySelector('script[data-wd-intelligence="'+key+'"]');
