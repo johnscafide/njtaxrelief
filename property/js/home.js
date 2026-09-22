@@ -2658,19 +2658,19 @@ document.addEventListener('mouseover',e=>{var t=e.target.closest('[data-marker-i
       el('hm-loading').style.display = 'none';
       el('hm-gate').style.display = 'none';
       el('hm-main').style.display = '';
+      // Home's first paint must depend only on account/property data.
+      // Analysis tools remain lazy and isolated so a missing optional module
+      // can never blank the saved-property report.
       Promise.all([
-        // These three modules supply calculations used while the report is
-        // first painted. The remaining report tools stay lazy-loaded when
-        // their corresponding sections are opened.
-        loadHomeTools(['uniformity', 'town-intelligence', 'municipal-budget-pressure', 'revaluation-radar', 'reassessment-risk', 'score-history', 'real-estate-concierge']),
         sb.from('saved_properties').select('*').order('created_at', { ascending: false }),
         sb.from('profiles').select('*').eq('id', plUser.id).maybeSingle(),
         sb.rpc('get_my_entitlement'),
-        loadRefData(), loadSR1A()
+        loadRefData().catch(function(){ return null; }),
+        loadSR1A().catch(function(){ return null; })
       ]).then(function (out) {
-        rows = (out[1] && out[1].data) || [];
-        profile = (out[2] && out[2].data) || {};
-        var entRows = (out[3] && out[3].data) || [], ent = Array.isArray(entRows) ? entRows[0] : entRows;
+        rows = (out[0] && out[0].data) || [];
+        profile = (out[1] && out[1].data) || {};
+        var entRows = (out[2] && out[2].data) || [], ent = Array.isArray(entRows) ? entRows[0] : entRows;
         if (ent) profile = Object.assign({}, profile, { account_role: ent.account_role || profile.account_role, plan_tier: ent.plan_tier || profile.plan_tier, subscription_status: ent.subscription_status, current_period_end: ent.current_period_end });
         if (window.NJPTRPlan) window.NJPTRPlan.init(plUser, profile);
         var pin = qsPin();
