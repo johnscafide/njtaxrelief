@@ -2,7 +2,7 @@
 (function(w,d){
 'use strict';
 function start(){
-  var WD=w.WD;if(!WD)return;var H=WD.H,S=WD.S,esc=H.esc,map=null,railMap=null;
+  var WD=w.WD;if(!WD)return;var H=WD.H,S=WD.S,esc=H.esc,map=null,railMap=null,voiceRecognition=null;
 
   function verdict(score){
     if(score==null)return{label:'Not scored yet',tone:''};
@@ -46,10 +46,9 @@ function start(){
     H.el('wdd-standing').innerHTML=
       '<div class="wdd-appbar">'+
         '<form class="wdd-command" id="wdd-command" role="search"><i class="fas fa-magnifying-glass" aria-hidden="true"></i>'+
-          '<input id="wdd-command-input" type="search" autocomplete="off" placeholder="Search properties, addresses, counties, or run a command..." aria-label="Search Watchdog">'+
+          '<input id="wdd-command-input" data-watchdog-address-search type="search" autocomplete="off" placeholder="Search any New Jersey property address..." aria-label="Search New Jersey property addresses">'+
+          '<button class="wdd-command-voice" type="button" data-act="voice-search" aria-label="Search by voice" title="Search by voice"><i class="fas fa-microphone" aria-hidden="true"></i></button>'+
           '<kbd>⌘ K</kbd></form>'+
-        '<div class="wdd-account"><button class="wdd-account-bell" type="button" data-act="notifications" aria-label="Notifications"><i class="far fa-bell"></i></button>'+
-          '<span class="wdd-account-avatar">'+esc(initials())+'</span><span class="wdd-account-copy"><b>'+esc(WD.userName())+'</b><span>'+esc(WD.planLabel())+' plan</span></span></div>'+
       '</div>'+
       '<div class="wdd-page-intro"><div><h1>'+greet+', '+esc(WD.userName())+'</h1><p>'+esc(readLine(st))+'</p></div>'+
         '<div class="wdd-page-context"><b>'+esc(dateLabel())+'</b><span>Stay informed. Act on verified changes.</span></div></div>';
@@ -65,10 +64,15 @@ function start(){
       {k:'Annual Tax',icon:'fa-file-invoice-dollar',v:st.tax?H.money(st.tax):'—',n:avgTax?H.dollars(avgTax)+' avg per property':'No tax total yet'},
       {c:'is-review',k:'Worth Reviewing',icon:'fa-flag',v:review.toLocaleString(),n:review+' of '+st.count+' properties',t:st.bad?'bad':st.warn?'warn':'ok'}
     ];
-    H.el('wdd-signals').innerHTML=items.map(function(i){
+    var cards=items.map(function(i){
       return '<article class="wdd-signal '+(i.c||'')+'"><div class="wdd-signal-top"><div class="wdd-signal-k">'+esc(i.k)+'</div><span class="wdd-signal-icon"><i class="fas '+i.icon+'" aria-hidden="true"></i></span></div>'+
         '<div class="wdd-signal-v'+(i.t?' wdd-'+i.t:'')+'">'+(i.raw?i.v:esc(i.v))+'</div><div class="wdd-signal-n">'+esc(i.n)+'</div></article>';
     }).join('');
+    cards+='<a class="wdd-signal wdd-sponsor-signal" href="https://johnvarano.com/?utm_source=watchdog&utm_medium=internal_ad&utm_campaign=greentree_financing&utm_content=dashboard_kpi" target="_blank" rel="noopener sponsored" aria-label="Advertisement: Greentree Mortgage, John Varano">'+
+      '<div class="wdd-sponsor-top"><span class="wdd-ad-label">Advertisement</span><img src="/johnvarano.jpg" alt="" loading="lazy"></div>'+
+      '<strong>Greentree Mortgage</strong><span>Know the payment before you make the move.</span><em>John Varano · NMLS #142739 <i class="fas fa-arrow-right" aria-hidden="true"></i></em>'+
+      '<small>Separate company · Shop for any lender</small></a>';
+    H.el('wdd-signals').innerHTML=cards;
   }
 
   var COLS=[
@@ -100,14 +104,21 @@ function start(){
     return sortedProps().map(function(p){
       var g=WD.gapFor(p),s=S.scores[p.pams_pin],sc=s?Math.round(s.score):null,status=statusFor(p),gapTone=g==null?'':' wdd-'+(g.pct>=15?'bad':g.pct>=5?'warn':'ok');
       return '<tr data-pin="'+esc(p.pams_pin||'')+'">'+
-        '<td><div class="wdd-property-cell"><span class="wdd-property-thumb"'+thumbStyle(p)+'><i class="fas fa-house"></i></span><div class="wdd-addr">'+esc(p.address||p.pams_pin||'Saved property')+'<small>'+esc([H.titleCase(p.town),H.titleCase(p.county)].filter(Boolean).join(' · ')||'New Jersey')+'</small></div></div></td>'+
+        '<td><div class="wdd-property-cell"><span class="wdd-property-thumb"'+thumbStyle(p)+'><i class="fas fa-house"></i></span><div class="wdd-addr"><span>'+esc(p.address||p.pams_pin||'Saved property')+'</span><small>'+esc([H.titleCase(p.town),H.titleCase(p.county)].filter(Boolean).join(' · ')||'New Jersey')+'</small></div></div></td>'+
         '<td class="wdd-r wdd-fig">'+(p.assessed?H.money(p.assessed):'—')+'</td>'+
         '<td class="wdd-r wdd-fig">'+(p.watchdog_value?H.money(p.watchdog_value):'—')+'</td>'+
         '<td class="wdd-r"><span class="wdd-fig'+gapTone+'">'+(g==null?'—':(g.pct>0?'+':'')+g.pct.toFixed(1)+'%')+'</span>'+(g&&g.dollars?'<span class="wdd-sub">'+esc(H.dollars(g.dollars))+'/yr</span>':'')+'</td>'+
         '<td class="wdd-r wdd-fig">'+(p.last_year_tax?H.money(p.last_year_tax):'—')+'</td>'+
         '<td class="wdd-r"><span class="wdd-scorecell wdd-'+WD.categoryFor(p)+'"><b>'+(sc==null?'—':sc)+'</b></span></td>'+
         '<td><span class="wdd-status-pill '+status.cls+'">'+status.label+'</span></td>'+
-        '<td class="wdd-r"><button class="wdd-row-menu" type="button" aria-label="Open property"><i class="fas fa-ellipsis"></i></button></td>'+
+        '<td class="wdd-r wdd-row-actions-cell"><button class="wdd-row-menu" type="button" aria-label="Property options" aria-expanded="false"><i class="fas fa-ellipsis"></i></button>'+
+          '<div class="wdd-row-actions" hidden role="menu">'+
+            '<a role="menuitem" data-property-action="open" href="/property/home?pin='+encodeURIComponent(p.pams_pin||'')+'"><i class="fas fa-house"></i><span>Open property</span></a>'+
+            '<a role="menuitem" data-property-action="report" href="/property/report?pin='+encodeURIComponent(p.pams_pin||'')+'"><i class="fas fa-file-lines"></i><span>Full report</span></a>'+
+            '<a role="menuitem" data-property-action="pulse" href="/property/pulse?pin='+encodeURIComponent(p.pams_pin||'')+'"><i class="fas fa-wave-square"></i><span>View changes</span></a>'+
+            '<a role="menuitem" data-property-action="lookup" href="/property/?address='+encodeURIComponent(p.address||'')+'"><i class="fas fa-magnifying-glass"></i><span>New lookup</span></a>'+
+            '<button role="menuitem" type="button" data-property-action="copy-address" data-address="'+esc(p.address||'')+'"><i class="far fa-copy"></i><span>Copy address</span></button>'+
+          '</div></td>'+
       '</tr>';
     }).join('');
   }
@@ -222,15 +233,56 @@ function start(){
     var trigger=d.querySelector('#wd-menu-trigger,.wdx-menu,.wd4-menu,[data-wd-menu-toggle]');
     if(trigger&&typeof trigger.click==='function')trigger.click();else location.href='/property/account';
   }
+  function closePropertyMenus(except){
+    Array.prototype.slice.call(d.querySelectorAll('.wdd-row-actions')).forEach(function(menu){
+      if(menu===except)return;
+      menu.hidden=true;
+      var button=menu.parentNode&&menu.parentNode.querySelector('.wdd-row-menu');
+      if(button)button.setAttribute('aria-expanded','false');
+    });
+  }
+  function startVoiceSearch(button){
+    var Speech=w.SpeechRecognition||w.webkitSpeechRecognition;
+    if(!Speech){WD.toast('Voice search is not supported in this browser.');return;}
+    if(voiceRecognition){try{voiceRecognition.abort();}catch(_e){}voiceRecognition=null;}
+    var input=H.el('wdd-command-input'),recognition=new Speech();voiceRecognition=recognition;
+    recognition.lang='en-US';recognition.interimResults=false;recognition.maxAlternatives=1;
+    button.classList.add('is-listening');button.setAttribute('aria-label','Listening for an address');
+    recognition.onresult=function(e){
+      var transcript=e&&e.results&&e.results[0]&&e.results[0][0]&&e.results[0][0].transcript;
+      if(input&&transcript){input.value=String(transcript).trim();input.dispatchEvent(new Event('input',{bubbles:true}));input.focus();}
+    };
+    recognition.onerror=function(){WD.toast('I could not hear an address. Try again.');};
+    recognition.onend=function(){button.classList.remove('is-listening');button.setAttribute('aria-label','Search by voice');voiceRecognition=null;};
+    try{recognition.start();}catch(_err){button.classList.remove('is-listening');voiceRecognition=null;}
+  }
   function onClick(ev){
     if(!ev.target||!ev.target.closest)return;
     var mapLink=ev.target.closest('[data-tab-link="map"]');if(mapLink){ev.preventDefault();S.tab='map';paintPositions();var p=H.el('wdd-positions');if(p)p.scrollIntoView({behavior:'smooth',block:'start'});return;}
     var sortBtn=ev.target.closest('[data-sort]');if(sortBtn){var k=sortBtn.getAttribute('data-sort');if(S.sort.key===k)S.sort.dir=S.sort.dir==='asc'?'desc':'asc';else{S.sort.key=k;S.sort.dir=k==='address'?'asc':'desc';}paintPositions();return;}
     var tab=ev.target.closest('[data-tab]');if(tab){S.tab=tab.getAttribute('data-tab');paintPositions();return;}
-    var menu=ev.target.closest('.wdd-row-menu');if(menu){var mr=menu.closest('tr[data-pin]');if(mr&&mr.getAttribute('data-pin'))location.href='/property/home?pin='+encodeURIComponent(mr.getAttribute('data-pin'));return;}
+    var propertyAction=ev.target.closest('[data-property-action]');if(propertyAction){
+      ev.stopPropagation();
+      var pa=propertyAction.getAttribute('data-property-action');
+      if(pa==='copy-address'){
+        ev.preventDefault();
+        var address=propertyAction.getAttribute('data-address')||'';
+        if(address&&navigator.clipboard&&navigator.clipboard.writeText)navigator.clipboard.writeText(address).then(function(){WD.toast('Address copied');}).catch(function(){WD.toast('Could not copy address');});
+      }
+      closePropertyMenus();
+      return;
+    }
+    var menu=ev.target.closest('.wdd-row-menu');if(menu){
+      ev.preventDefault();ev.stopPropagation();
+      var actionMenu=menu.parentNode&&menu.parentNode.querySelector('.wdd-row-actions'),open=actionMenu&&actionMenu.hidden;
+      closePropertyMenus(actionMenu);
+      if(actionMenu){actionMenu.hidden=!open;menu.setAttribute('aria-expanded',open?'true':'false');}
+      return;
+    }
+    if(!ev.target.closest('.wdd-row-actions'))closePropertyMenus();
     var row=ev.target.closest('tr[data-pin]');if(row&&row.getAttribute('data-pin')){location.href='/property/home?pin='+encodeURIComponent(row.getAttribute('data-pin'));return;}
     var act=ev.target.closest('[data-act]');if(!act)return;var a=act.getAttribute('data-act');
-    if(a==='export')exportCsv();else if(a==='county')cycleCounty();else if(a==='mobile-more')openMoreMenu();else if(a==='notifications'){var n=d.querySelector('[data-wdx-notifications],#wdx-notifications,.wdx-icon');if(n&&typeof n.click==='function')n.click();}
+    if(a==='export')exportCsv();else if(a==='county')cycleCounty();else if(a==='mobile-more')openMoreMenu();else if(a==='voice-search')startVoiceSearch(act);
   }
   function onSubmit(ev){
     if(ev.target&&ev.target.id==='wdd-command'){ev.preventDefault();var input=H.el('wdd-command-input'),q=String(input&&input.value||'').trim();location.href='/property/'+(q?'?address='+encodeURIComponent(q):'');}
