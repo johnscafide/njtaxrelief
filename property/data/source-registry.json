@@ -308,6 +308,73 @@
       "live": true,
       "join": "Exact 4-digit municipality code to governed 564-municipality annual source artifact",
       "warning": "Viewer as of 2025-08-21; 2024 is the workbook-designated latest published annual data year. 2025 placeholder columns are not treated as published annual observations. Permit/development facts are not legal, zoning, code-compliance, construction-completion, appraisal, lending, insurance, eligibility, or transaction determinations."
+    },
+    {
+      "id": "nj-lpt-general-tax-rates-2025",
+      "label": "2025 General and Effective Tax Rates",
+      "agency": "NJ Division of Taxation",
+      "source_url": "https://www.nj.gov/treasury/taxation/lpt/statdata.shtml",
+      "cadence": "daily publication check",
+      "live": true,
+      "monitor_only": true,
+      "note": "2025 remains the latest statewide General Tax Rate table listed by NJ Division of Taxation as of 2026-09-22. Do not label a projected 2026 rate as published."
+    },
+    {
+      "id": "nj-lpt-chapter123-2026",
+      "label": "2026 Chapter 123 common level ranges",
+      "agency": "NJ Division of Taxation",
+      "source_url": "https://nj.gov/treasury/taxation/pdf/lpt/chap123/2026CH123.pdf",
+      "cadence": "daily publication check",
+      "live": true,
+      "monitor_only": true,
+      "note": "Certified for use in tax year 2026; amended by NJ Tax Court January 30, 2026."
+    },
+    {
+      "id": "nj-lpt-state-equalization-2026",
+      "label": "2026 State Equalization Table",
+      "agency": "NJ Division of Taxation",
+      "source_url": "https://www.nj.gov/treasury/taxation/pdf/lpt/2026StateEq.pdf",
+      "cadence": "daily publication check",
+      "live": true,
+      "monitor_only": true
+    },
+    {
+      "id": "nj-lpt-county-equalization-2026",
+      "label": "2026 County Equalization Tables",
+      "agency": "NJ Division of Taxation",
+      "source_url": "https://www.nj.gov/treasury/taxation/lpt/county_equalized.shtml",
+      "cadence": "daily publication check",
+      "live": true,
+      "monitor_only": true,
+      "note": "NJ currently exposes 2026 county equalization tables."
+    },
+    {
+      "id": "nj-lpt-modiv-2026",
+      "label": "2026 Property Assessment (MOD-IV) files",
+      "agency": "NJ Division of Taxation",
+      "source_url": "https://www.nj.gov/treasury/taxation/lpt/statdata.shtml",
+      "cadence": "daily publication check",
+      "live": true,
+      "monitor_only": true
+    },
+    {
+      "id": "nj-dca-ufb-2026",
+      "label": "2026 User-Friendly Budget Database",
+      "agency": "NJ Department of Community Affairs",
+      "source_url": "https://www.nj.gov/dca/dlgs/programs/mc_budgets.shtml",
+      "cadence": "daily publication check",
+      "live": true,
+      "monitor_only": true,
+      "note": "2026 User-Friendly Budget Database is published; use it for levy/budget context, not as a certified parcel tax rate."
+    },
+    {
+      "id": "nj-dca-fast-2026",
+      "label": "2026 FAST municipal/county budget templates and updates",
+      "agency": "NJ Department of Community Affairs",
+      "source_url": "https://www.nj.gov/dca/dlgs/Fast.shtml",
+      "cadence": "daily publication check",
+      "live": true,
+      "monitor_only": true
     }
   ],
   "sources": [
