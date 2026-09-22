@@ -8,11 +8,12 @@ if(window.__WATCHDOG_HOME_HERO_INTELLIGENCE__)return;
 window.__WATCHDOG_HOME_HERO_INTELLIGENCE__=true;
 
 var GMAPS_KEY='AIzaSyCZBo_mj5WXyR-Bsb5yHdekxAxauTYNmlU';
-var observer=null,scorePromise=null,mapsPromise=null,retryTimer=0;
+var observer=null,scorePromise=null,mapsPromise=null,retryTimer=0,taxEvidenceByPin=Object.create(null),taxEvidencePending=Object.create(null);
 
 function esc(v){return String(v==null?'':v).replace(/[&<>\"]/g,function(c){return{'&':'&amp;','<':'&lt;','>':'&gt;','\"':'&quot;'}[c]});}
 function title(v){return String(v||'').toLowerCase().replace(/\b\w/g,function(c){return c.toUpperCase();});}
 function num(v){v=Number(v);return Number.isFinite(v)?v:null;}
+function money(v){v=num(v);return v==null?'—':v.toLocaleString('en-US',{style:'currency',currency:'USD',maximumFractionDigits:0});}
 function resolvePin(){try{return new URL(location.href).searchParams.get('pin')||((document.getElementById('hm-switch')||{}).value||'');}catch(_){return((document.getElementById('hm-switch')||{}).value||'');}}
 function currentRow(){
   var rows=window.rows,pin=resolvePin();
@@ -53,6 +54,9 @@ function ensureStyles(){
     '.hm-score-empty>i{width:46px;height:46px;border-radius:15px;display:grid;place-items:center;background:#edf3ff;color:#2d6df6;font-size:18px}',
     '.hm-score-empty b{display:block;color:#10213f;font:800 17px/1.2 "Plus Jakarta Sans",sans-serif}',
     '.hm-score-empty span{display:block;margin-top:4px;color:#78889d;font-size:12px;line-height:1.45}',
+    '.hm-current-tax{margin-top:16px;padding:14px 15px;border:1px solid #d8e5f5;border-radius:16px;background:#f8fbff}',
+    '.hm-current-tax-head{display:flex;align-items:center;justify-content:space-between;gap:12px}.hm-current-tax-head b{color:#10213f;font:850 12px/1.2 "Plus Jakarta Sans",sans-serif}.hm-current-tax-head span{padding:5px 8px;border-radius:999px;background:#e6f7f3;color:#008d82;font:850 9px/1 "Plus Jakarta Sans",sans-serif;letter-spacing:.06em;text-transform:uppercase}',
+    '.hm-current-tax-grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:8px;margin-top:11px}.hm-current-tax-grid div{padding:9px 10px;border-radius:12px;background:#fff;border:1px solid #e7edf5}.hm-current-tax-grid small{display:block;color:#8290a3;font-size:9px;font-weight:800;text-transform:uppercase;letter-spacing:.04em}.hm-current-tax-grid strong{display:block;margin-top:4px;color:#10213f;font:850 16px/1.1 "Plus Jakarta Sans",sans-serif}.hm-current-tax-foot{display:flex;justify-content:space-between;gap:10px;margin-top:9px;color:#708198;font-size:10px;font-weight:650}.hm-current-tax-foot a{color:#008d82!important;font-weight:850;text-decoration:none!important}',
     '.hm-shot.wd-streetview-host{position:relative!important;overflow:hidden!important;background-image:none!important;background-color:#e9eef5!important}',
     '.hm-shot.wd-streetview-host .wd-streetview-state{position:absolute;inset:0;display:grid;place-items:center;padding:26px;text-align:center;background:linear-gradient(145deg,#eef3f8,#dde7f0);color:#53677f}',
     '.wd-streetview-state>div{max-width:340px}',
@@ -113,6 +117,30 @@ function robustCells(w){
   }).join('');
 }
 
+function muniCode(row){
+  var pin=String(row&&row.pams_pin||'').match(/^(\d{4})_/);
+  return pin?pin[1]:'';
+}
+function taxEvidence(row){
+  var pin=String(row&&row.pams_pin||'');if(!pin)return Promise.resolve(null);
+  if(Object.prototype.hasOwnProperty.call(taxEvidenceByPin,pin))return Promise.resolve(taxEvidenceByPin[pin]);
+  if(taxEvidencePending[pin])return taxEvidencePending[pin];
+  var code=muniCode(row),rt=window.NJPTRSupabaseRuntime;
+  if(!code||!row.address||!rt||typeof rt.createClient!=='function')return Promise.resolve(null);
+  var client;try{client=rt.createClient();}catch(_){return Promise.resolve(null);}
+  taxEvidencePending[pin]=client.functions.invoke('municipal-property-tax-evidence',{body:{municipality_code:code,address:row.address,block:row.block||'',lot:row.lot||''}})
+    .then(function(res){var d=res&&!res.error&&res.data&&res.data.status==='exact_match'?res.data:null;taxEvidenceByPin[pin]=d;delete taxEvidencePending[pin];return d;})
+    .catch(function(){taxEvidenceByPin[pin]=null;delete taxEvidencePending[pin];return null;});
+  return taxEvidencePending[pin];
+}
+function currentTaxMarkup(e){
+  var cur=e&&e.current||{},prop=e&&e.property||{},year=cur.tax_year||'',assessment=num(prop.total_assessed_value),tax=num(cur.annual_tax),rate=num(cur.tax_rate);
+  if(!year&&!assessment&&!tax)return'';
+  return '<div class="hm-current-tax"><div class="hm-current-tax-head"><b>Current municipal tax record</b><span>'+esc(year?year+' official':'Live municipal')+'</span></div>'+
+    '<div class="hm-current-tax-grid"><div><small>Assessment</small><strong>'+esc(money(assessment))+'</strong></div><div><small>Annual tax</small><strong>'+esc(money(tax))+'</strong></div><div><small>Tax rate</small><strong>'+(rate==null?'—':esc(rate.toFixed(3)+'%'))+'</strong></div></div>'+
+    '<div class="hm-current-tax-foot"><span>'+esc(e.provider_label||'Official municipal tax source')+'</span>'+(e.source&&e.source.url?'<a href="'+esc(e.source.url)+'" target="_blank" rel="noopener">Official source ↗</a>':'')+'</div></div>';
+}
+
 function paintScore(hero,row){
   var id=hero.querySelector('.hm-id');if(!id)return;
   var old=id.querySelector(':scope > .hm-val');
@@ -132,7 +160,7 @@ function paintScore(hero,row){
     '<div class="hm-score-badge" title="Watchdog Score '+esc(w.score)+' of 100"><i class="fas fa-dog"></i><b>'+esc(w.score)+'</b><small>/100</small></div>'+
     '<div class="hm-score-copy"><span class="hm-score-kicker">Watchdog Score</span><strong>'+esc(w.verdict||'Current property position')+'</strong><small>Powered by <b>'+esc(w.frameworkVersion||'ROBUST-v1')+'</b> · '+esc(confidence)+' confidence · '+coverage+'% evidence coverage</small></div>'+
     '</div><div class="hm-robust-mini" aria-label="ROBUST component scores">'+robustCells(w)+'</div>'+
-    '<a class="hm-score-link" href="/property/robust/">See the ROBUST framework <i class="fas fa-arrow-right"></i></a>';
+    '<a class="hm-score-link" href="/property/robust/">See the ROBUST framework <i class="fas fa-arrow-right"></i></a>'+(taxEvidenceByPin[String(row.pams_pin||'')]?currentTaxMarkup(taxEvidenceByPin[String(row.pams_pin||'')]):'');
 }
 
 function mapsReady(){return !!(window.google&&window.google.maps&&window.google.maps.StreetViewPanorama&&window.google.maps.StreetViewService);}
@@ -211,6 +239,7 @@ function enhanceHero(){
     var active=currentRow();if(!active||String(active.pams_pin||'')!==String(row.pams_pin||''))return;
     if(!document.body.contains(hero))return;
     paintScore(hero,row);
+    taxEvidence(row).then(function(){var active=currentRow();if(active&&String(active.pams_pin||'')===String(row.pams_pin||'')&&document.body.contains(hero))paintScore(hero,row);});
   });
 }
 function schedule(){clearTimeout(retryTimer);retryTimer=setTimeout(enhanceHero,40);}
