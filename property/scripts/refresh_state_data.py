@@ -88,6 +88,9 @@ def probe_live(item):
             'healthcheck_url': url,
             'http_status': status,
             'content_type': ctype,
+            'content_sha256': hashlib.sha256(body).hexdigest(),
+            'last_modified_header': response.headers.get('last-modified'),
+            'etag': response.headers.get('etag'),
             'latency_ms': int((time.monotonic() - started) * 1000),
             'semantic_error': semantic_error,
         }
@@ -137,6 +140,13 @@ def main():
     args = ap.parse_args()
 
     registry = json.loads(REGISTRY.read_text())
+    previous = {}
+    if REPORT.exists():
+        try:
+            old = json.loads(REPORT.read_text())
+            previous = {x.get('id'): x for x in old.get('datasets', [])}
+        except Exception:
+            previous = {}
     before = {}
     after = {}
     results = []
@@ -184,7 +194,7 @@ def main():
             'action': action,
             'records_or_files': count,
             'minimum': expected_minimum(item),
-            'changed': before[item['id']] != after[item['id']],
+            'changed': (before[item['id']] != after[item['id']]) or (kind == 'live_health' and bool(previous.get(item['id'], {}).get('health', {}).get('content_sha256')) and previous.get(item['id'], {}).get('health', {}).get('content_sha256') != health.get('content_sha256')),
             'last_modified': dt.datetime.fromtimestamp(latest, dt.timezone.utc).isoformat() if latest else None,
             'cadence': item['cadence'],
             'source_url': item.get('source_url'),

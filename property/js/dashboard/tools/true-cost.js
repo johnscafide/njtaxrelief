@@ -30,9 +30,32 @@
             'Talk to John Varano <i class="fas fa-arrow-right"></i></a>' +
         '</div>' +
       '</div>' +
+      futureTaxPanel(r) +
       '<div class="tl-fine">Estimate only. Not a loan offer or a commitment to lend. Greentree Mortgage, an HMA Company, ' +
       'is a separate company and is not affiliated with Opus Elite Real Estate. You are never required to use any particular lender.</div>');
   }
+  function futureTaxPanel(r) {
+    var assessed=+r.assessed||0;
+    return '<div style="margin-top:18px;padding-top:18px;border-top:1px solid #e5e7eb">' +
+      '<div style="display:flex;justify-content:space-between;gap:12px;align-items:start"><div><b>Future tax year estimator</b><div class="tl-fine">For revaluations and new assessments. It never applies an old rate to a new assessment automatically.</div></div><a href="/property/data-sources.html" style="font-size:12px">Data status</a></div>' +
+      '<div class="tc-in" style="margin-top:12px">' +
+        tcRow('New / projected assessment','ft-assessed',Math.round(assessed).toLocaleString()) +
+        tcRow('Projected general tax rate %','ft-rate','','number','0.001') +
+        tcRow('Optional levy change %','ft-levy','0','number','0.1') +
+      '</div>' +
+      '<div style="margin-top:12px"><div class="tc-big" id="ft-total">-</div><div class="tc-lbl">Projected annual property tax</div><div id="ft-note" class="tl-fine"></div></div>' +
+      '<button type="button" class="tc-btn" style="border:0;margin-top:10px" onclick="dbFutureTax()">Calculate future tax</button>' +
+      '</div>';
+  }
+  window.dbFutureTax=function(){
+    function n(id){var x=el(id);return x?(parseFloat(String(x.value).replace(/[^0-9.-]/g,''))||0):0}
+    var assessment=n('ft-assessed'),rate=n('ft-rate'),levy=n('ft-levy');
+    var projected=assessment*(rate/100)*(1+levy/100);
+    var out=el('ft-total'),note=el('ft-note');
+    if(out)out.textContent=projected>0?money(projected):'-';
+    if(note)note.textContent=rate>0?'Scenario estimate using the rate you entered. Watchdog will replace the scenario with a published rate only when NJ or the municipality publishes one.':'Enter a projected rate. The latest statewide NJ General Tax Rate table currently published is 2025; Watchdog will not invent a 2026 rate.';
+  };
+
   function tcRow(label, id, val, type, step) {
     return '<div class="tc-row"><label>' + label + '</label>' +
       '<input id="' + id + '" type="' + (type || 'text') + '"' + (step ? ' step="' + step + '"' : '') +
@@ -71,7 +94,7 @@
   // 10 · PROFESSIONAL EXPORT
   // ══════════════════════════════════════════════
 
-  Object.assign(window, { toolCost, tcRow, tcLine });
+  Object.assign(window, { toolCost, futureTaxPanel, tcRow, tcLine });
 })();
 
 export {};
