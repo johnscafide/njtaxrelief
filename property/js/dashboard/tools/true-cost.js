@@ -35,13 +35,12 @@
       'is a separate company and is not affiliated with Opus Elite Real Estate. You are never required to use any particular lender.</div>');
   }
   function futureTaxPanel(r) {
-    var assessed=+r.assessed||0, tax=+r.last_year_tax||0;
-    var implied=assessed>0&&tax>0?(tax/assessed*100):0;
+    var assessed=+r.assessed||0;
     return '<div style="margin-top:18px;padding-top:18px;border-top:1px solid #e5e7eb">' +
       '<div style="display:flex;justify-content:space-between;gap:12px;align-items:start"><div><b>Future tax year estimator</b><div class="tl-fine">For revaluations and new assessments. It never applies an old rate to a new assessment automatically.</div></div><a href="/property/data-sources.html" style="font-size:12px">Data status</a></div>' +
       '<div class="tc-in" style="margin-top:12px">' +
         tcRow('New / projected assessment','ft-assessed',Math.round(assessed).toLocaleString()) +
-        tcRow('Projected general tax rate %','ft-rate',implied?implied.toFixed(3):'','number','0.001') +
+        tcRow('Projected general tax rate %','ft-rate','','number','0.001') +
         tcRow('Optional levy change %','ft-levy','0','number','0.1') +
       '</div>' +
       '<div style="margin-top:12px"><div class="tc-big" id="ft-total">-</div><div class="tc-lbl">Projected annual property tax</div><div id="ft-note" class="tl-fine"></div></div>' +
