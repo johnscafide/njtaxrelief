@@ -1,18 +1,410 @@
 {
   "schema_version": 1,
   "timezone": "America/New_York",
-  "updated_at": "2026-08-09T18:00:00-04:00",
+  "updated_at": "2026-09-24T14:15:10.301673+00:00",
   "releases": [
-    {"version":"0.47.0","date":"2026-08-09","timestamp":"2026-08-09T18:00:00-04:00","title":"Commerce Catalog and Workspace Repair","category":"Revenue / account experience / workspace reliability","status":"Code complete; report migration and billing functions require deployment; controlled Live enrollment remains gated","summary":"Repaired the professional report preset contract without invalidating legacy reports, removed the Dashboard map from the locked Pro workspace, made Agent Intel sheets breathe correctly on desktop and mobile, and rebuilt Account & Billing around the customer-facing Free, Agent, Professional and gated Firm / API catalog. Added a yearly-first cadence with explicit monthly alternatives, four distinct Paddle Price contracts, two-month annual savings, safer plan-switch messaging, server-owned Firm gating and a documented production opening checklist. Added report-only CSP observation and strengthened shared HTML escaping. Public Live enrollment remains intentionally closed until the controlled Paddle Live lifecycle, persisted four-role acceptance and isolated restore evidence exist.","links":["/property/dashboard.html","/property/home.html","/property/account.html","/property/report-builder.html","/property/updates.html"],"files":["property/dashboard.html","property/home.html","property/account.html","property/pro.html","property/report-builder.html","property/js/dashboard/index.js","property/js/dashboard.js","property/js/dashboard/home/index.js","property/js/lookup.js","property/css/dashboard.css","property/css/dashboard/06-responsive-additions.css","property/css/mobile-app.css","property/css/account-pricing.css","property/css/report-builder-fixes.css","property/js/account.js","property/js/billing-client.js","supabase/functions/create-checkout-session/index.ts","supabase/functions/paddle-webhook/index.ts","supabase/functions/BILLING-SETUP.md","supabase/migrations/20260810031500_watchdog_v047_report_preset_compatibility.sql","property/docs/v047-commerce-workspace.md","property/tests/v046-production-readiness.mjs","property/tests/v047-commerce-workspace.mjs","vercel.json","property/data/versions.json"],"impact":{"report_presets_supported":13,"customer_facing_tiers":4,"publicly_enrollable_paid_tiers":2,"billing_cadences":2,"annual_savings_months":2,"firm_checkout_paths_open":0,"dashboard_maps_in_locked_pro_view":0,"access_boundary_checks_passed":51,"csp_observation_policies":1,"external_production_evidence_gates_remaining":3}},
-    {"version":"0.46.0","date":"2026-08-10","timestamp":"2026-08-10T02:00:00-04:00","title":"Production Foundations","category":"Data platform / professional reports / Pro+ / continuity","status":"Core database and Edge services deployed; static upload pending; three external production gates remain blocked","summary":"Worked all six active priorities without overstating launch evidence. Deployed immutable property observations, field-level sourced changes, materiality events and protected automation; delivered a Pro report builder with profession presets, immutable versions, print/PDF and expiring read-only shares; converted the Pro+ Data Center into a source-backed sheet builder with saved columns, exports and scheduled jobs; documented RPO/RTO, isolated restore and billing reconciliation; and persisted the controlled Live billing, four-role acceptance and isolated restore gates as blocked until real evidence exists.","links":["/property/report-builder.html","/property/data-center.html","/property/pulse.html","/property/verification-diagnostics.html","/property/updates.html"],"files":["property/report-builder.html","property/report.html","property/js/report-builder.js","property/css/report-builder.css","property/js/data-center.js","property/css/data-center-saved.css","property/js/access-guard.js","property/sidemenu.html","supabase/migrations/20260810013000_watchdog_v046_production_readiness.sql","supabase/migrations/20260810014500_watchdog_v046_report_policy_cleanup.sql","supabase/functions/report-share/index.ts","supabase/functions/watchdog-automation/index.ts","supabase/config.toml",".github/workflows/watchdog-automation.yml","property/docs/v046-production-readiness.md","property/docs/continuity-and-restore.md","property/tests/v046-production-readiness.mjs","property/data/versions.json"],"impact":{"active_roadmap_items_worked":6,"core_workstreams_delivered":3,"external_evidence_gates_blocked":3,"new_governed_tables":5,"new_edge_services_active":2,"data_center_live_or_partial_providers":11,"professional_report_presets":6,"automation_interval_hours":6}},
-    {"version":"0.45.0","date":"2026-08-09","timestamp":"2026-08-09T23:45:00-04:00","title":"Watchdog Control Plane","category":"SaaS platform / protected data / Agent Control","status":"Deployed to the primary Supabase project; static application upload and four-role acceptance proof remain","summary":"Delivered and deployed the largest platform-control release to date: authenticated and rate-limited municipal record delivery with per-user trace IDs; private agent territory definitions; a privacy-minimized evidence-to-appointment conversion ledger; territory inventory previews; production least-privilege cleanup for anonymous record lookup; a searchable, job-oriented shared sidebar; and a rebuilt developer release record that measures product impact rather than allowing multi-million-row ingestion metrics to distort the charts.","links":["/property/agent-desk.html","/property/updates.html","/property/account.html","/property/verification-diagnostics.html"],"files":["property/sidemenu.html","property/js/sidemenu.js","property/css/dashboard/06-responsive-additions.css","property/agent-desk.html","property/js/agent-control.js","property/js/agent-desk.js","property/css/agent-desk.css","property/updates.html","property/js/updates.js","property/css/updates.css","supabase/migrations/20260809233000_watchdog_v045_control_plane.sql","supabase/functions/municipal-data/index.ts","supabase/config.toml","property/tests/v045-control-plane.mjs","property/docs/v045-control-plane.md","property/CHANGED-FILES-v0.45.0.txt","property/data/versions.json"],"impact":{"protected_municipal_delivery_endpoints":1,"five_minute_rate_limit_tiers":4,"private_agent_control_tables":2,"agent_conversion_events":10,"territory_scope_types":3,"anonymous_record_lookup_grants":0,"stable_release_product_areas":6,"searchable_navigation_groups":3}},
-    {"version":"0.44.4","date":"2026-08-09","timestamp":"2026-08-09T16:45:00-04:00","title":"Agent Control priority desk","category":"Agent SaaS / revenue workflow UX","status":"Code complete; static deployment required","summary":"Tightened Agent Opportunity Desk around immediate, defensible value instead of record volume. The first screen now identifies the best next property conversation, explains that it is an anonymous property signal to match against the agent's own CRM, and provides direct evidence-review and property actions. Replaced six generic counters with four decision KPIs, simplified queue language and controls, reduced the workspace sidebar to the relevant Agent tools, and retained the explicit boundary that Watchdog does not identify owners or predict seller intent.","links":["/property/agent-desk.html","/property/workbench.html","/property/pro.html"],"files":["property/agent-desk.html","property/css/agent-desk.css","property/js/agent-desk.js","property/tests/agent-opportunity-desk.mjs","property/data/versions.json"],"impact":{"best_next_conversation_views":1,"decision_kpis":4,"anonymous_contact_dependencies":0,"agent_navigation_groups_visible":1,"seller_intent_claims":0,"agent_workspace_contracts_added":3}},
-    {"version":"0.44.3","date":"2026-08-09","timestamp":"2026-08-09T13:05:00-04:00","title":"Appeal Scanner saved-state and unclipped evidence","category":"Professional workflow / UX reliability","status":"Code complete; static deployment required","summary":"Made Appeal Prospect Scanner quick-add idempotent in the interface: existing Watchlist PINs load with the account, successful adds immediately become a disabled Added state, and repeat clicks are blocked while the save is pending. Replaced row-contained score explanations with a viewport-positioned evidence layer so short result lists no longer clip the sourced reasoning below the table.","links":["/property/scan.html","/property/dashboard.html"],"files":["property/scan.html","property/js/scan.js","property/css/scan.css","property/tests/appeal-scanner-ux.mjs","property/data/versions.json"],"impact":{"duplicate_quick_add_actions_prevented":1,"persistent_saved_state_checks":1,"clipped_table_tooltips":0,"scanner_ux_contracts":7}},
-    {"version":"0.44.2","date":"2026-08-09","timestamp":"2026-08-09T12:15:00-04:00","title":"Linear security sweep and Chapter 123 measurement guard","category":"Security / performance / revenue measurement","status":"Code complete; static deployment and verification Edge Function redeploy required","summary":"Worked the Linear execution queue in its prescribed order. Confirmed that the Paddle webhook authenticates the raw request before creating a service-role client or writing entitlements; kept the retired Stripe webhook out of configuration and source; removed verification-function database/runtime details from browser responses; restricted verification CORS to the Watchdog origin; added non-breaking browser security headers; preserved deferred EmailJS loading; and converted the Chapter 123 coverage fields into a CI-enforced measurement contract across lookup, dashboard and report surfaces.","links":["/property/","/property/dashboard.html","/property/home.html","/property/updates.html"],"files":["vercel.json",".github/workflows/access-boundary-audit.yml","property/tests/security-contracts.mjs","supabase/functions/request-verify-code/index.ts","property/index.html","property/data/versions.json"],"impact":{"new_security_contracts":18,"existing_access_contracts_passed":51,"chapter_123_measurement_surfaces_guarded":3,"browser_security_headers_added":5,"retired_payment_webhooks_registered":0,"raw_verification_errors_exposed":0}},
-    {"version":"0.44.1","date":"2026-08-09","timestamp":"2026-08-09T22:45:00-04:00","title":"Agent Opportunity Desk focus and property deep links","category":"Agent SaaS / workflow refinement","status":"Code complete; static upload and digest Edge Function redeploy required","summary":"Converted the Agent Opportunity Desk from a raw event feed into a focused agent worklist. Routine source-monitor refreshes are excluded, repeated events are combined by property and reason type, the default view shows one highest-value reason for each of the top ten properties, longer queues load in batches of twelve, and every matched opportunity now opens the saved property workspace directly. Properties without a material change receive a clearly labeled current-record review rather than a fabricated change signal. The weekly digest now uses the same actionable-event allowlist, sphere matching, deduplication and one-reason-per-property rules.","links":["/property/agent-desk.html","/property/home.html","/property/updates.html"],"files":["property/agent-desk.html","property/css/agent-desk.css","property/js/agent-desk.js","property/tests/agent-opportunity-desk.mjs","supabase/functions/agent-opportunity-digest/index.ts","property/data/versions.json"],"impact":{"routine_source_refreshes_in_agent_queue":0,"default_top_properties":10,"queue_batch_size":12,"duplicate_grouping_dimensions":2,"matched_property_deep_links":1,"fabricated_change_claims":0}},
-    {"version":"0.44.0","date":"2026-08-09","timestamp":"2026-08-09T21:30:00-04:00","title":"Agent Opportunity Desk","category":"Agent SaaS / sourced relationship intelligence","status":"Code complete; migration, Edge Function and static upload required","summary":"Launched a private Pro workspace that turns authoritative property changes across an agent's own sphere into ranked, explainable reasons for a useful conversation. Agents can import 1,000 CSV rows or select saved properties, inspect source/freshness/limitations and all four score components, quick-watch, snooze, dismiss, record funnel outcomes, and opt into a weekly top-ten digest. The workflow explicitly ranks property-information usefulness—not seller intent—and does not depend on owner-name or contact enrichment.","links":["/property/agent-desk.html","/property/pro.html","/property/updates.html"],"files":["property/agent-desk.html","property/css/agent-desk.css","property/js/agent-desk.js","property/sidemenu.html","property/js/sidemenu.js","property/pro.html","property/docs/agent-opportunity-desk.md","property/docs/agent-opportunity-desk-deploy.md","supabase/migrations/20260809213000_agent_opportunity_desk.sql","supabase/functions/agent-opportunity-digest/index.ts","supabase/config.toml",".github/workflows/agent-opportunity-digest.yml","property/data/saas-platform-pipeline.json","property/data/versions.json"],"impact":{"private_agent_tables":3,"supported_authoritative_reason_types":9,"score_components_exposed":4,"sphere_import_limit":1000,"outcome_funnel_stages":6,"weekly_digest_limit":10,"anonymous_owner_enrichment_dependencies":0}},
-    {"version":"0.42.0","date":"2026-08-09","timestamp":"2026-08-09T20:15:00-04:00","title":"Paid launch gates, automatic incidents and authenticated RLS proof","category":"Revenue / reliability / security","status":"Database migrations and Reliability Edge Function active; static site upload pending","summary":"Turned the top three SaaS priorities into enforceable launch controls: a developer paid-lifecycle evidence checklist, automatic privacy-minimized incident aggregation, least-privilege database grants, cleaned owner RLS policies and a four-role staging authorization test for Standard, Pro, Pro+ and Developer. Sandbox evidence remains distinct from the still-required controlled Live billing cycle.","links":["/property/verification-diagnostics.html","/property/updates.html"],"files":["supabase/migrations/20260809193000_watchdog_v042_launch_gates.sql","supabase/migrations/20260809194500_watchdog_v042_incident_signal_fix.sql","supabase/functions/get-platform-health/index.ts","property/verification-diagnostics.html","property/js/verification-diagnostics.js","property/js/platform-observability.js","property/css/verification-diagnostics.css","property/tests/authenticated-release-gate.mjs",".github/workflows/authenticated-release-gate.yml","property/docs/billing-support-runbook.md","property/docs/incident-response-runbook.md","property/docs/authenticated-release-gate.md","property/data/saas-production-readiness.json","property/data/versions.json"],"impact":{"launch_evidence_checks":9,"automatic_incident_types":4,"authenticated_test_roles":4,"legacy_owner_policies_replaced":8,"least_privilege_tables_reviewed":14}},
-    {"version":"0.41.0","date":"2026-08-09","timestamp":"2026-08-09T16:30:00-04:00","title":"Launch hardening and reliability control center","category":"SaaS operations / billing / roadmap","status":"Reliability Edge Functions active; site upload pending","summary":"Retired completed projects from the active roadmap, added an explicit Pro+ downgrade confirmation with feature-loss and proration disclosure, and built authenticated privacy-minimized client telemetry plus a developer-only reliability center for errors and slow pages.","links":["/property/account.html","/property/verification-diagnostics.html","/property/updates.html"],"files":["property/js/billing-client.js","property/css/billing-lifecycle.css","property/js/platform-observability.js","property/verification-diagnostics.html","property/js/verification-diagnostics.js","supabase/functions/report-platform-event/index.ts","supabase/functions/get-platform-health/index.ts","property/data/versions.json"],"impact":{"roadmap_items_retired":9,"billing_safety_flows":1,"authenticated_telemetry_endpoints":2,"developer_operations_views":1}},
+    {
+      "version": "data-2026-09-24",
+      "date": "2026-09-24",
+      "timestamp": "2026-09-24T14:15:10.301673+00:00",
+      "title": "Automated state-data refresh",
+      "category": "Data",
+      "status": "Completed",
+      "summary": "State-data sources refreshed; configured local coverage and live-source health evidence was regenerated.",
+      "links": [
+        "/property/updates"
+      ],
+      "files": [
+        "nj-lpt-statistical-index",
+        "construction-permits-live",
+        "underground-storage-tanks-live",
+        "tidelands-reference-live",
+        "wetlands-2012-live",
+        "njdep-geology-live",
+        "njdep-hydro-live",
+        "njdep-land-live",
+        "nj-dca-fourth-round-affordable",
+        "nj-dca-affordable-housing",
+        "nj-lpt-general-tax-rates-2025",
+        "nj-lpt-county-equalization-2026",
+        "nj-lpt-modiv-2026",
+        "nj-dca-ufb-2026",
+        "nj-dca-fast-2026"
+      ],
+      "impact": {
+        "html": 0,
+        "css": 0,
+        "javascript": 0,
+        "data": 15,
+        "navigation": 0
+      }
+    },
+    {
+      "version": "0.47.0",
+      "date": "2026-08-09",
+      "timestamp": "2026-08-09T18:00:00-04:00",
+      "title": "Commerce Catalog and Workspace Repair",
+      "category": "Revenue / account experience / workspace reliability",
+      "status": "Code complete; report migration and billing functions require deployment; controlled Live enrollment remains gated",
+      "summary": "Repaired the professional report preset contract without invalidating legacy reports, removed the Dashboard map from the locked Pro workspace, made Agent Intel sheets breathe correctly on desktop and mobile, and rebuilt Account & Billing around the customer-facing Free, Agent, Professional and gated Firm / API catalog. Added a yearly-first cadence with explicit monthly alternatives, four distinct Paddle Price contracts, two-month annual savings, safer plan-switch messaging, server-owned Firm gating and a documented production opening checklist. Added report-only CSP observation and strengthened shared HTML escaping. Public Live enrollment remains intentionally closed until the controlled Paddle Live lifecycle, persisted four-role acceptance and isolated restore evidence exist.",
+      "links": [
+        "/property/dashboard.html",
+        "/property/home.html",
+        "/property/account.html",
+        "/property/report-builder.html",
+        "/property/updates.html"
+      ],
+      "files": [
+        "property/dashboard.html",
+        "property/home.html",
+        "property/account.html",
+        "property/pro.html",
+        "property/report-builder.html",
+        "property/js/dashboard/index.js",
+        "property/js/dashboard.js",
+        "property/js/dashboard/home/index.js",
+        "property/js/lookup.js",
+        "property/css/dashboard.css",
+        "property/css/dashboard/06-responsive-additions.css",
+        "property/css/mobile-app.css",
+        "property/css/account-pricing.css",
+        "property/css/report-builder-fixes.css",
+        "property/js/account.js",
+        "property/js/billing-client.js",
+        "supabase/functions/create-checkout-session/index.ts",
+        "supabase/functions/paddle-webhook/index.ts",
+        "supabase/functions/BILLING-SETUP.md",
+        "supabase/migrations/20260810031500_watchdog_v047_report_preset_compatibility.sql",
+        "property/docs/v047-commerce-workspace.md",
+        "property/tests/v046-production-readiness.mjs",
+        "property/tests/v047-commerce-workspace.mjs",
+        "vercel.json",
+        "property/data/versions.json"
+      ],
+      "impact": {
+        "report_presets_supported": 13,
+        "customer_facing_tiers": 4,
+        "publicly_enrollable_paid_tiers": 2,
+        "billing_cadences": 2,
+        "annual_savings_months": 2,
+        "firm_checkout_paths_open": 0,
+        "dashboard_maps_in_locked_pro_view": 0,
+        "access_boundary_checks_passed": 51,
+        "csp_observation_policies": 1,
+        "external_production_evidence_gates_remaining": 3
+      }
+    },
+    {
+      "version": "0.46.0",
+      "date": "2026-08-10",
+      "timestamp": "2026-08-10T02:00:00-04:00",
+      "title": "Production Foundations",
+      "category": "Data platform / professional reports / Pro+ / continuity",
+      "status": "Core database and Edge services deployed; static upload pending; three external production gates remain blocked",
+      "summary": "Worked all six active priorities without overstating launch evidence. Deployed immutable property observations, field-level sourced changes, materiality events and protected automation; delivered a Pro report builder with profession presets, immutable versions, print/PDF and expiring read-only shares; converted the Pro+ Data Center into a source-backed sheet builder with saved columns, exports and scheduled jobs; documented RPO/RTO, isolated restore and billing reconciliation; and persisted the controlled Live billing, four-role acceptance and isolated restore gates as blocked until real evidence exists.",
+      "links": [
+        "/property/report-builder.html",
+        "/property/data-center.html",
+        "/property/pulse.html",
+        "/property/verification-diagnostics.html",
+        "/property/updates.html"
+      ],
+      "files": [
+        "property/report-builder.html",
+        "property/report.html",
+        "property/js/report-builder.js",
+        "property/css/report-builder.css",
+        "property/js/data-center.js",
+        "property/css/data-center-saved.css",
+        "property/js/access-guard.js",
+        "property/sidemenu.html",
+        "supabase/migrations/20260810013000_watchdog_v046_production_readiness.sql",
+        "supabase/migrations/20260810014500_watchdog_v046_report_policy_cleanup.sql",
+        "supabase/functions/report-share/index.ts",
+        "supabase/functions/watchdog-automation/index.ts",
+        "supabase/config.toml",
+        ".github/workflows/watchdog-automation.yml",
+        "property/docs/v046-production-readiness.md",
+        "property/docs/continuity-and-restore.md",
+        "property/tests/v046-production-readiness.mjs",
+        "property/data/versions.json"
+      ],
+      "impact": {
+        "active_roadmap_items_worked": 6,
+        "core_workstreams_delivered": 3,
+        "external_evidence_gates_blocked": 3,
+        "new_governed_tables": 5,
+        "new_edge_services_active": 2,
+        "data_center_live_or_partial_providers": 11,
+        "professional_report_presets": 6,
+        "automation_interval_hours": 6
+      }
+    },
+    {
+      "version": "0.45.0",
+      "date": "2026-08-09",
+      "timestamp": "2026-08-09T23:45:00-04:00",
+      "title": "Watchdog Control Plane",
+      "category": "SaaS platform / protected data / Agent Control",
+      "status": "Deployed to the primary Supabase project; static application upload and four-role acceptance proof remain",
+      "summary": "Delivered and deployed the largest platform-control release to date: authenticated and rate-limited municipal record delivery with per-user trace IDs; private agent territory definitions; a privacy-minimized evidence-to-appointment conversion ledger; territory inventory previews; production least-privilege cleanup for anonymous record lookup; a searchable, job-oriented shared sidebar; and a rebuilt developer release record that measures product impact rather than allowing multi-million-row ingestion metrics to distort the charts.",
+      "links": [
+        "/property/agent-desk.html",
+        "/property/updates.html",
+        "/property/account.html",
+        "/property/verification-diagnostics.html"
+      ],
+      "files": [
+        "property/sidemenu.html",
+        "property/js/sidemenu.js",
+        "property/css/dashboard/06-responsive-additions.css",
+        "property/agent-desk.html",
+        "property/js/agent-control.js",
+        "property/js/agent-desk.js",
+        "property/css/agent-desk.css",
+        "property/updates.html",
+        "property/js/updates.js",
+        "property/css/updates.css",
+        "supabase/migrations/20260809233000_watchdog_v045_control_plane.sql",
+        "supabase/functions/municipal-data/index.ts",
+        "supabase/config.toml",
+        "property/tests/v045-control-plane.mjs",
+        "property/docs/v045-control-plane.md",
+        "property/CHANGED-FILES-v0.45.0.txt",
+        "property/data/versions.json"
+      ],
+      "impact": {
+        "protected_municipal_delivery_endpoints": 1,
+        "five_minute_rate_limit_tiers": 4,
+        "private_agent_control_tables": 2,
+        "agent_conversion_events": 10,
+        "territory_scope_types": 3,
+        "anonymous_record_lookup_grants": 0,
+        "stable_release_product_areas": 6,
+        "searchable_navigation_groups": 3
+      }
+    },
+    {
+      "version": "0.44.4",
+      "date": "2026-08-09",
+      "timestamp": "2026-08-09T16:45:00-04:00",
+      "title": "Agent Control priority desk",
+      "category": "Agent SaaS / revenue workflow UX",
+      "status": "Code complete; static deployment required",
+      "summary": "Tightened Agent Opportunity Desk around immediate, defensible value instead of record volume. The first screen now identifies the best next property conversation, explains that it is an anonymous property signal to match against the agent's own CRM, and provides direct evidence-review and property actions. Replaced six generic counters with four decision KPIs, simplified queue language and controls, reduced the workspace sidebar to the relevant Agent tools, and retained the explicit boundary that Watchdog does not identify owners or predict seller intent.",
+      "links": [
+        "/property/agent-desk.html",
+        "/property/workbench.html",
+        "/property/pro.html"
+      ],
+      "files": [
+        "property/agent-desk.html",
+        "property/css/agent-desk.css",
+        "property/js/agent-desk.js",
+        "property/tests/agent-opportunity-desk.mjs",
+        "property/data/versions.json"
+      ],
+      "impact": {
+        "best_next_conversation_views": 1,
+        "decision_kpis": 4,
+        "anonymous_contact_dependencies": 0,
+        "agent_navigation_groups_visible": 1,
+        "seller_intent_claims": 0,
+        "agent_workspace_contracts_added": 3
+      }
+    },
+    {
+      "version": "0.44.3",
+      "date": "2026-08-09",
+      "timestamp": "2026-08-09T13:05:00-04:00",
+      "title": "Appeal Scanner saved-state and unclipped evidence",
+      "category": "Professional workflow / UX reliability",
+      "status": "Code complete; static deployment required",
+      "summary": "Made Appeal Prospect Scanner quick-add idempotent in the interface: existing Watchlist PINs load with the account, successful adds immediately become a disabled Added state, and repeat clicks are blocked while the save is pending. Replaced row-contained score explanations with a viewport-positioned evidence layer so short result lists no longer clip the sourced reasoning below the table.",
+      "links": [
+        "/property/scan.html",
+        "/property/dashboard.html"
+      ],
+      "files": [
+        "property/scan.html",
+        "property/js/scan.js",
+        "property/css/scan.css",
+        "property/tests/appeal-scanner-ux.mjs",
+        "property/data/versions.json"
+      ],
+      "impact": {
+        "duplicate_quick_add_actions_prevented": 1,
+        "persistent_saved_state_checks": 1,
+        "clipped_table_tooltips": 0,
+        "scanner_ux_contracts": 7
+      }
+    },
+    {
+      "version": "0.44.2",
+      "date": "2026-08-09",
+      "timestamp": "2026-08-09T12:15:00-04:00",
+      "title": "Linear security sweep and Chapter 123 measurement guard",
+      "category": "Security / performance / revenue measurement",
+      "status": "Code complete; static deployment and verification Edge Function redeploy required",
+      "summary": "Worked the Linear execution queue in its prescribed order. Confirmed that the Paddle webhook authenticates the raw request before creating a service-role client or writing entitlements; kept the retired Stripe webhook out of configuration and source; removed verification-function database/runtime details from browser responses; restricted verification CORS to the Watchdog origin; added non-breaking browser security headers; preserved deferred EmailJS loading; and converted the Chapter 123 coverage fields into a CI-enforced measurement contract across lookup, dashboard and report surfaces.",
+      "links": [
+        "/property/",
+        "/property/dashboard.html",
+        "/property/home.html",
+        "/property/updates.html"
+      ],
+      "files": [
+        "vercel.json",
+        ".github/workflows/access-boundary-audit.yml",
+        "property/tests/security-contracts.mjs",
+        "supabase/functions/request-verify-code/index.ts",
+        "property/index.html",
+        "property/data/versions.json"
+      ],
+      "impact": {
+        "new_security_contracts": 18,
+        "existing_access_contracts_passed": 51,
+        "chapter_123_measurement_surfaces_guarded": 3,
+        "browser_security_headers_added": 5,
+        "retired_payment_webhooks_registered": 0,
+        "raw_verification_errors_exposed": 0
+      }
+    },
+    {
+      "version": "0.44.1",
+      "date": "2026-08-09",
+      "timestamp": "2026-08-09T22:45:00-04:00",
+      "title": "Agent Opportunity Desk focus and property deep links",
+      "category": "Agent SaaS / workflow refinement",
+      "status": "Code complete; static upload and digest Edge Function redeploy required",
+      "summary": "Converted the Agent Opportunity Desk from a raw event feed into a focused agent worklist. Routine source-monitor refreshes are excluded, repeated events are combined by property and reason type, the default view shows one highest-value reason for each of the top ten properties, longer queues load in batches of twelve, and every matched opportunity now opens the saved property workspace directly. Properties without a material change receive a clearly labeled current-record review rather than a fabricated change signal. The weekly digest now uses the same actionable-event allowlist, sphere matching, deduplication and one-reason-per-property rules.",
+      "links": [
+        "/property/agent-desk.html",
+        "/property/home.html",
+        "/property/updates.html"
+      ],
+      "files": [
+        "property/agent-desk.html",
+        "property/css/agent-desk.css",
+        "property/js/agent-desk.js",
+        "property/tests/agent-opportunity-desk.mjs",
+        "supabase/functions/agent-opportunity-digest/index.ts",
+        "property/data/versions.json"
+      ],
+      "impact": {
+        "routine_source_refreshes_in_agent_queue": 0,
+        "default_top_properties": 10,
+        "queue_batch_size": 12,
+        "duplicate_grouping_dimensions": 2,
+        "matched_property_deep_links": 1,
+        "fabricated_change_claims": 0
+      }
+    },
+    {
+      "version": "0.44.0",
+      "date": "2026-08-09",
+      "timestamp": "2026-08-09T21:30:00-04:00",
+      "title": "Agent Opportunity Desk",
+      "category": "Agent SaaS / sourced relationship intelligence",
+      "status": "Code complete; migration, Edge Function and static upload required",
+      "summary": "Launched a private Pro workspace that turns authoritative property changes across an agent's own sphere into ranked, explainable reasons for a useful conversation. Agents can import 1,000 CSV rows or select saved properties, inspect source/freshness/limitations and all four score components, quick-watch, snooze, dismiss, record funnel outcomes, and opt into a weekly top-ten digest. The workflow explicitly ranks property-information usefulness\u2014not seller intent\u2014and does not depend on owner-name or contact enrichment.",
+      "links": [
+        "/property/agent-desk.html",
+        "/property/pro.html",
+        "/property/updates.html"
+      ],
+      "files": [
+        "property/agent-desk.html",
+        "property/css/agent-desk.css",
+        "property/js/agent-desk.js",
+        "property/sidemenu.html",
+        "property/js/sidemenu.js",
+        "property/pro.html",
+        "property/docs/agent-opportunity-desk.md",
+        "property/docs/agent-opportunity-desk-deploy.md",
+        "supabase/migrations/20260809213000_agent_opportunity_desk.sql",
+        "supabase/functions/agent-opportunity-digest/index.ts",
+        "supabase/config.toml",
+        ".github/workflows/agent-opportunity-digest.yml",
+        "property/data/saas-platform-pipeline.json",
+        "property/data/versions.json"
+      ],
+      "impact": {
+        "private_agent_tables": 3,
+        "supported_authoritative_reason_types": 9,
+        "score_components_exposed": 4,
+        "sphere_import_limit": 1000,
+        "outcome_funnel_stages": 6,
+        "weekly_digest_limit": 10,
+        "anonymous_owner_enrichment_dependencies": 0
+      }
+    },
+    {
+      "version": "0.42.0",
+      "date": "2026-08-09",
+      "timestamp": "2026-08-09T20:15:00-04:00",
+      "title": "Paid launch gates, automatic incidents and authenticated RLS proof",
+      "category": "Revenue / reliability / security",
+      "status": "Database migrations and Reliability Edge Function active; static site upload pending",
+      "summary": "Turned the top three SaaS priorities into enforceable launch controls: a developer paid-lifecycle evidence checklist, automatic privacy-minimized incident aggregation, least-privilege database grants, cleaned owner RLS policies and a four-role staging authorization test for Standard, Pro, Pro+ and Developer. Sandbox evidence remains distinct from the still-required controlled Live billing cycle.",
+      "links": [
+        "/property/verification-diagnostics.html",
+        "/property/updates.html"
+      ],
+      "files": [
+        "supabase/migrations/20260809193000_watchdog_v042_launch_gates.sql",
+        "supabase/migrations/20260809194500_watchdog_v042_incident_signal_fix.sql",
+        "supabase/functions/get-platform-health/index.ts",
+        "property/verification-diagnostics.html",
+        "property/js/verification-diagnostics.js",
+        "property/js/platform-observability.js",
+        "property/css/verification-diagnostics.css",
+        "property/tests/authenticated-release-gate.mjs",
+        ".github/workflows/authenticated-release-gate.yml",
+        "property/docs/billing-support-runbook.md",
+        "property/docs/incident-response-runbook.md",
+        "property/docs/authenticated-release-gate.md",
+        "property/data/saas-production-readiness.json",
+        "property/data/versions.json"
+      ],
+      "impact": {
+        "launch_evidence_checks": 9,
+        "automatic_incident_types": 4,
+        "authenticated_test_roles": 4,
+        "legacy_owner_policies_replaced": 8,
+        "least_privilege_tables_reviewed": 14
+      }
+    },
+    {
+      "version": "0.41.0",
+      "date": "2026-08-09",
+      "timestamp": "2026-08-09T16:30:00-04:00",
+      "title": "Launch hardening and reliability control center",
+      "category": "SaaS operations / billing / roadmap",
+      "status": "Reliability Edge Functions active; site upload pending",
+      "summary": "Retired completed projects from the active roadmap, added an explicit Pro+ downgrade confirmation with feature-loss and proration disclosure, and built authenticated privacy-minimized client telemetry plus a developer-only reliability center for errors and slow pages.",
+      "links": [
+        "/property/account.html",
+        "/property/verification-diagnostics.html",
+        "/property/updates.html"
+      ],
+      "files": [
+        "property/js/billing-client.js",
+        "property/css/billing-lifecycle.css",
+        "property/js/platform-observability.js",
+        "property/verification-diagnostics.html",
+        "property/js/verification-diagnostics.js",
+        "supabase/functions/report-platform-event/index.ts",
+        "supabase/functions/get-platform-health/index.ts",
+        "property/data/versions.json"
+      ],
+      "impact": {
+        "roadmap_items_retired": 9,
+        "billing_safety_flows": 1,
+        "authenticated_telemetry_endpoints": 2,
+        "developer_operations_views": 1
+      }
+    },
     {
       "version": "0.40.1",
       "date": "2026-08-08",
@@ -21,9 +413,34 @@
       "category": "Billing / security / launch QA",
       "status": "Sandbox Pro lifecycle and bidirectional Pro/Pro+ plan switching passed",
       "summary": "Reconciled Paddle's server-created transaction flow with Paddle.js Overlay Checkout, fixed the initial-subscription identity contract, and validated a real Sandbox Pro purchase end to end. The signed webhook maps the Paddle subscription to the authenticated Watchdog account, Pro access survives a scheduled end-of-period cancellation, reversing that cancellation restores renewal state, and the Customer Portal uses a newly generated server URL. Bidirectional plan switching also passed: Paddle retained the original subscription through Pro to Pro+ and Pro+ to Pro changes, processed each prorated adjustment, and Watchdog changed access only after the matching signed subscription.updated event. A customer-facing downgrade confirmation and retention experience remains required before public launch.",
-      "links": ["/property/pro.html", "/property/account.html", "/property/updates.html"],
-      "files": ["supabase/functions/create-checkout-session/index.ts", "supabase/functions/paddle-webhook/index.ts", "supabase/functions/BILLING-SETUP.md", "property/js/billing-client.js", "property/js/account.js", "property/pro.html", "property/account.html", "property/dashboard.html", "property/docs/paddle-billing-launch.md", "property/data/versions.json"],
-      "impact": {"billing_identity_mapping_fixes": 1, "overlay_checkout_paths": 1, "orphaned_subscription_risk_paths": 0, "validated_pro_lifecycles": 1, "validated_cancel_resume_cycles": 1, "paid_plan_switch_paths": 1, "validated_pro_plus_upgrades": 1, "validated_pro_downgrades": 1, "duplicate_subscriptions_created": 0}
+      "links": [
+        "/property/pro.html",
+        "/property/account.html",
+        "/property/updates.html"
+      ],
+      "files": [
+        "supabase/functions/create-checkout-session/index.ts",
+        "supabase/functions/paddle-webhook/index.ts",
+        "supabase/functions/BILLING-SETUP.md",
+        "property/js/billing-client.js",
+        "property/js/account.js",
+        "property/pro.html",
+        "property/account.html",
+        "property/dashboard.html",
+        "property/docs/paddle-billing-launch.md",
+        "property/data/versions.json"
+      ],
+      "impact": {
+        "billing_identity_mapping_fixes": 1,
+        "overlay_checkout_paths": 1,
+        "orphaned_subscription_risk_paths": 0,
+        "validated_pro_lifecycles": 1,
+        "validated_cancel_resume_cycles": 1,
+        "paid_plan_switch_paths": 1,
+        "validated_pro_plus_upgrades": 1,
+        "validated_pro_downgrades": 1,
+        "duplicate_subscriptions_created": 0
+      }
     },
     {
       "version": "0.40.0",
@@ -33,9 +450,40 @@
       "category": "SaaS platform / revenue / professional workflow",
       "status": "Code complete; Paddle activation and database migration require deployment",
       "summary": "Built the first provider-neutral paid control plane around Paddle with authenticated server-created transactions, temporary Customer Portal sessions, signed webhook verification, idempotent/out-of-order event handling and server-authoritative Pro/Pro+ route enforcement. Upgraded Property Pulse into Change Intelligence with date/type filtering, sourced change deltas and trusted Watchdog Score history while removing customer browser writes to score evidence. Shipped the Pro Watchdog Workbench for private property case files, notes, status, marker pins, dated snapshots, exports and activity history, and connected Evidence Graph 2.0 to the case/change workflow. Added customer-owned profession personalization that changes recommendations without changing entitlement.",
-      "links": ["/property/account.html", "/property/pulse.html", "/property/workbench.html", "/property/home.html", "/property/updates.html"],
-      "files": ["supabase/migrations/20260808143000_watchdog_v040_commerce_change_workbench.sql", "supabase/functions/create-checkout-session/index.ts", "supabase/functions/create-portal-session/index.ts", "supabase/functions/paddle-webhook/index.ts", "property/js/access-guard.js", "property/js/plan-context.js", "property/account.html", "property/js/account.js", "property/pulse.html", "property/js/pulse.js", "property/workbench.html", "property/js/workbench.js", "property/css/workbench.css", "property/js/dashboard/tools/score-history.js", "property/js/dashboard/tools/title-evidence-graph.js", "property/data/saas-production-readiness.json", "property/data/versions.json"],
-      "impact": {"new_private_workbench_tables": 2, "billing_providers_ready": 1, "trusted_history_write_paths_in_browser": 0, "change_event_types": 12, "professional_case_workflows": 8, "saas_readiness_percent": 72}
+      "links": [
+        "/property/account.html",
+        "/property/pulse.html",
+        "/property/workbench.html",
+        "/property/home.html",
+        "/property/updates.html"
+      ],
+      "files": [
+        "supabase/migrations/20260808143000_watchdog_v040_commerce_change_workbench.sql",
+        "supabase/functions/create-checkout-session/index.ts",
+        "supabase/functions/create-portal-session/index.ts",
+        "supabase/functions/paddle-webhook/index.ts",
+        "property/js/access-guard.js",
+        "property/js/plan-context.js",
+        "property/account.html",
+        "property/js/account.js",
+        "property/pulse.html",
+        "property/js/pulse.js",
+        "property/workbench.html",
+        "property/js/workbench.js",
+        "property/css/workbench.css",
+        "property/js/dashboard/tools/score-history.js",
+        "property/js/dashboard/tools/title-evidence-graph.js",
+        "property/data/saas-production-readiness.json",
+        "property/data/versions.json"
+      ],
+      "impact": {
+        "new_private_workbench_tables": 2,
+        "billing_providers_ready": 1,
+        "trusted_history_write_paths_in_browser": 0,
+        "change_event_types": 12,
+        "professional_case_workflows": 8,
+        "saas_readiness_percent": 72
+      }
     },
     {
       "version": "0.39.0",
@@ -45,9 +493,36 @@
       "category": "Professional intelligence / mobile product / authentication trust",
       "status": "Completed; branded OAuth hostname requires external paid-domain cutover",
       "summary": "Shipped the first Watchdog Evidence Graph inside the Pro+ closing workflow, connecting parcel identity, assessment/tax, sale/deed context, DCA permit/certificate status, environmental controls and land/flood jurisdiction into one sourced research view without making title-clearance claims. Rebuilt the public homepage navigation around a hamburger menu plus account/profile sheet with recent-property memory, profile/account destinations and proper signed-in state. Enlarged the mobile neighborhood search/results controls and cards, and re-spaced the Agent Intel app sheet with safer bottom clearance. Documented the exact Google/Supabase custom-domain cutover required to replace the random Supabase OAuth hostname with Watchdog-branded authentication.",
-      "links": ["/property/", "/property/home.html", "/property/updates.html"],
-      "files": ["property/index.html", "property/css/public-mobile-nav.css", "property/js/public-nav.js", "property/css/lookup/01-search-hero.css", "property/css/lookup/03-neighborhood-results.css", "property/js/lookup.js", "property/css/mobile-app.css", "property/css/dashboard.css", "property/css/dashboard/16-title-evidence-graph.css", "property/js/dashboard/home/index.js", "property/js/dashboard/tools/title-evidence-graph.js", "property/home.html", "property/docs/google-auth-branding.md", "property/data/saas-production-readiness.json", "property/data/versions.json"],
-      "impact": {"evidence_graph_nodes": 6, "live_evidence_source_families": 5, "mobile_public_menus": 2, "recent_property_memory": 1, "mobile_search_touch_target_px": 46, "saas_readiness_percent": 63}
+      "links": [
+        "/property/",
+        "/property/home.html",
+        "/property/updates.html"
+      ],
+      "files": [
+        "property/index.html",
+        "property/css/public-mobile-nav.css",
+        "property/js/public-nav.js",
+        "property/css/lookup/01-search-hero.css",
+        "property/css/lookup/03-neighborhood-results.css",
+        "property/js/lookup.js",
+        "property/css/mobile-app.css",
+        "property/css/dashboard.css",
+        "property/css/dashboard/16-title-evidence-graph.css",
+        "property/js/dashboard/home/index.js",
+        "property/js/dashboard/tools/title-evidence-graph.js",
+        "property/home.html",
+        "property/docs/google-auth-branding.md",
+        "property/data/saas-production-readiness.json",
+        "property/data/versions.json"
+      ],
+      "impact": {
+        "evidence_graph_nodes": 6,
+        "live_evidence_source_families": 5,
+        "mobile_public_menus": 2,
+        "recent_property_memory": 1,
+        "mobile_search_touch_target_px": 46,
+        "saas_readiness_percent": 63
+      }
     },
     {
       "version": "0.36.0",
@@ -139,9 +614,36 @@
       "category": "Data infrastructure / SaaS backend",
       "status": "Schema deployed; 2026 bulk load awaiting trusted DB connection",
       "summary": "Deployed Watchdog's first private historical warehouse to Supabase. Five RLS-enabled tables now version source releases, load runs, privacy-limited MOD-IV observations, data-quality results and the explicitly published release pointer; anon and authenticated roles have no warehouse table privileges. Added a streaming PostgreSQL COPY loader for the validated 3,208,097-row 2026 MOD-IV baseline plus a separate review/approve/publish command. Dataset publication cannot happen during ingestion, and publishing requires the exact reviewed release UUID to be confirmed. The local preflight passes 21/21 normalized county partitions; the actual 3.2M-row warehouse COPY remains intentionally pending until a trusted database connection is configured locally.",
-      "links": ["/property/developer-data.html", "/property/updates.html", "/property/data-center.html"],
-      "files": ["supabase/migrations/20260808005727_watchdog_private_warehouse_v1.sql", "supabase/migrations/20260808010348_watchdog_warehouse_publication_fk_indexes.sql", "property/scripts/load_modiv_warehouse.py", "property/scripts/review_warehouse_release.py", "property/docs/private-warehouse.md", "property/docs/data-factory.md", "property/scripts/data_factory_modiv.py", "property/scripts/README-data-refresh.md", "property/data/data-factory-status.json", "property/developer-data.html", "property/js/developer-data.js", "property/css/developer-data.css", "property/data/saas-production-readiness.json", "property/data/versions.json"],
-      "impact": {"private_warehouse_tables": 5, "warehouse_customer_roles_with_direct_access": 0, "validated_rows_ready_for_copy": 3208097, "county_partitions_ready": 21, "duplicate_parcel_keys": 0, "explicit_release_gates": 3, "saas_readiness_percent": 55}
+      "links": [
+        "/property/developer-data.html",
+        "/property/updates.html",
+        "/property/data-center.html"
+      ],
+      "files": [
+        "supabase/migrations/20260808005727_watchdog_private_warehouse_v1.sql",
+        "supabase/migrations/20260808010348_watchdog_warehouse_publication_fk_indexes.sql",
+        "property/scripts/load_modiv_warehouse.py",
+        "property/scripts/review_warehouse_release.py",
+        "property/docs/private-warehouse.md",
+        "property/docs/data-factory.md",
+        "property/scripts/data_factory_modiv.py",
+        "property/scripts/README-data-refresh.md",
+        "property/data/data-factory-status.json",
+        "property/developer-data.html",
+        "property/js/developer-data.js",
+        "property/css/developer-data.css",
+        "property/data/saas-production-readiness.json",
+        "property/data/versions.json"
+      ],
+      "impact": {
+        "private_warehouse_tables": 5,
+        "warehouse_customer_roles_with_direct_access": 0,
+        "validated_rows_ready_for_copy": 3208097,
+        "county_partitions_ready": 21,
+        "duplicate_parcel_keys": 0,
+        "explicit_release_gates": 3,
+        "saas_readiness_percent": 55
+      }
     },
     {
       "version": "0.33.0",
@@ -151,9 +653,36 @@
       "category": "Data infrastructure / governance",
       "status": "Validated; production publication review-gated",
       "summary": "Built the first governed statewide ingestion layer for Watchdog. The 2026 Treasury MOD-IV archive validates across all 21 county partitions with 3,208,097 source records and zero structural failures, then normalizes only approved property/tax fields into Git-ignored work products. Added a privacy-limited live connector for NJGIN's current statewide parcel service, whose validation run reports 3,478,727 parcel geometries with all 38 approved fields present and zero forbidden owner/mailing fields requested. Registered the July 2026 DCA Data Hub inventory as the acquisition map, added daily live-source contract checks, and surfaced the complete review gate in developer-only Data Operations. No validated source automatically becomes customer-facing data.",
-      "links": ["/property/developer-data.html", "/property/updates.html", "/property/data-center.html"],
-      "files": ["property/data/data-factory-sources.json", "property/data/data-factory-status.json", "property/scripts/data_factory_modiv.py", "property/scripts/data_factory_njgin.py", "property/scripts/run_data_factory.py", "property/docs/data-factory.md", ".github/workflows/data-factory-health.yml", "property/developer-data.html", "property/js/developer-data.js", "property/css/developer-data.css", "property/data/saas-production-readiness.json", "property/data/versions.json", ".gitignore"],
-      "impact": {"modiv_records_validated": 3208097, "county_partitions": 21, "structural_failures": 0, "njgin_geometry_records": 3478727, "njgin_safe_fields": 38, "forbidden_person_fields_requested": 0, "daily_live_contract": 1, "saas_readiness_percent": 53}
+      "links": [
+        "/property/developer-data.html",
+        "/property/updates.html",
+        "/property/data-center.html"
+      ],
+      "files": [
+        "property/data/data-factory-sources.json",
+        "property/data/data-factory-status.json",
+        "property/scripts/data_factory_modiv.py",
+        "property/scripts/data_factory_njgin.py",
+        "property/scripts/run_data_factory.py",
+        "property/docs/data-factory.md",
+        ".github/workflows/data-factory-health.yml",
+        "property/developer-data.html",
+        "property/js/developer-data.js",
+        "property/css/developer-data.css",
+        "property/data/saas-production-readiness.json",
+        "property/data/versions.json",
+        ".gitignore"
+      ],
+      "impact": {
+        "modiv_records_validated": 3208097,
+        "county_partitions": 21,
+        "structural_failures": 0,
+        "njgin_geometry_records": 3478727,
+        "njgin_safe_fields": 38,
+        "forbidden_person_fields_requested": 0,
+        "daily_live_contract": 1,
+        "saas_readiness_percent": 53
+      }
     },
     {
       "version": "0.32.0",
@@ -163,9 +692,31 @@
       "category": "Revenue / billing infrastructure",
       "status": "Backend deployed; Stripe account review pending",
       "summary": "Deployed the complete Stripe billing backend to Supabase: authenticated Checkout, authenticated Customer Portal and a signature-verified public Stripe webhook. Verified the existing live $49 Pro and $149 Pro+ recurring prices and registered the production webhook destination, which remains disabled until its signing secret is installed and Stripe clears the account for charges. Added the Stripe-hosted Customer Portal login to Account & Billing for active paid customers. Checkout is deny-by-default behind a server-only BILLING_CHECKOUT_ENABLED switch. Public Pro and Pro+ CTAs remain early-access until sandbox lifecycle validation and Stripe account approval are complete.",
-      "links": ["/property/pro.html", "/property/account.html", "/property/updates.html"],
-      "files": ["supabase/functions/create-checkout-session/index.ts", "supabase/functions/create-portal-session/index.ts", "supabase/functions/stripe-webhook/index.ts", "supabase/functions/BILLING-SETUP.md", "property/account.html", "property/css/account.css", "property/docs/billing-launch-status.md", "property/data/saas-production-readiness.json", "property/data/versions.json"],
-      "impact": {"edge_functions_live": 3, "live_prices_verified": 2, "production_webhook_registered": 1, "signed_billing_webhook": 1, "hosted_customer_portal": 1, "server_launch_gate": 1, "public_paid_enrollment": 0}
+      "links": [
+        "/property/pro.html",
+        "/property/account.html",
+        "/property/updates.html"
+      ],
+      "files": [
+        "supabase/functions/create-checkout-session/index.ts",
+        "supabase/functions/create-portal-session/index.ts",
+        "supabase/functions/stripe-webhook/index.ts",
+        "supabase/functions/BILLING-SETUP.md",
+        "property/account.html",
+        "property/css/account.css",
+        "property/docs/billing-launch-status.md",
+        "property/data/saas-production-readiness.json",
+        "property/data/versions.json"
+      ],
+      "impact": {
+        "edge_functions_live": 3,
+        "live_prices_verified": 2,
+        "production_webhook_registered": 1,
+        "signed_billing_webhook": 1,
+        "hosted_customer_portal": 1,
+        "server_launch_gate": 1,
+        "public_paid_enrollment": 0
+      }
     },
     {
       "version": "0.31.0",
@@ -175,9 +726,32 @@
       "category": "Pro+ data platform / source operations",
       "status": "Completed",
       "summary": "Added 154 governed Pro+ markers from eleven high-value statewide DCA and NJDEP source families: raw parcel-linked permits, development trends, new-home warranties, municipal housing profiles, affordable-housing monitoring, community assets, zoning-directory links, PILOT forecasts, MOD-IV longitudinal history, neighborhood trends and contaminated-site remediation data. The governed catalog now contains 697 markers, including 262 transparent Watchdog-derived signals. Added an incremental DCA raw-permit importer that joins official Treasury municipality code, block and lot, plus a source activation catalog that makes live-vs-catalog status explicit.",
-      "links": ["/property/data-center.html", "/property/developer-data.html", "/property/updates.html"],
-      "files": ["property/data/nj-proplus-source-pack-v031.json", "property/data/nj-proplus-source-catalog-v031.json", "property/data/marker-registry.json", "property/data/marker-refresh-policy.json", "property/data/derived-marker-formulas.json", "property/scripts/build_nj_proplus_source_pack_v031.py", "property/scripts/refresh_dca_construction_permits.py", "property/scripts/build_marker_registry.py", "property/scripts/build_marker_refresh_policy.py", "property/scripts/build_derived_marker_formulas.py", "property/data/versions.json"],
-      "impact": {"markers": 154, "public_source_markers": 110, "proprietary_markers": 44, "marker_catalog_total": 697, "source_families": 11, "parcel_linked_importer": 1}
+      "links": [
+        "/property/data-center.html",
+        "/property/developer-data.html",
+        "/property/updates.html"
+      ],
+      "files": [
+        "property/data/nj-proplus-source-pack-v031.json",
+        "property/data/nj-proplus-source-catalog-v031.json",
+        "property/data/marker-registry.json",
+        "property/data/marker-refresh-policy.json",
+        "property/data/derived-marker-formulas.json",
+        "property/scripts/build_nj_proplus_source_pack_v031.py",
+        "property/scripts/refresh_dca_construction_permits.py",
+        "property/scripts/build_marker_registry.py",
+        "property/scripts/build_marker_refresh_policy.py",
+        "property/scripts/build_derived_marker_formulas.py",
+        "property/data/versions.json"
+      ],
+      "impact": {
+        "markers": 154,
+        "public_source_markers": 110,
+        "proprietary_markers": 44,
+        "marker_catalog_total": 697,
+        "source_families": 11,
+        "parcel_linked_importer": 1
+      }
     },
     {
       "version": "0.30.0",
@@ -186,10 +760,39 @@
       "title": "Cross-professional marker expansion and mobile navigation foundation",
       "category": "Data platform / mobile product quality",
       "status": "Completed",
-      "summary": "Added 100 transparent Watchdog-derived markers—ten for each of ten professional audiences—with formula, professional reason, access tier and dependency-refresh contract. The governed marker catalog now contains 543 fields, including 218 proprietary Watchdog signals. Added a staging-only, browser-level anonymous access smoke test that refuses the production domain. Mobile navigation now uses a clean More sheet with grouped workspace, research and account destinations, large touch targets, safe-area handling, keyboard dismissal, focus visibility and reduced-motion support.",
-      "links": ["/property/dashboard.html", "/property/home.html", "/property/data-center.html", "/property/updates.html"],
-      "files": ["property/data/professional-marker-pack-v030.json", "property/data/marker-registry.json", "property/data/marker-refresh-policy.json", "property/data/derived-marker-formulas.json", "property/scripts/build_professional_marker_pack_v030.py", "property/scripts/build_marker_registry.py", "property/scripts/build_marker_refresh_policy.py", "property/scripts/build_derived_marker_formulas.py", "property/sidemenu.html", "property/js/sidemenu.js", "property/css/mobile-menu.css", "property/tests/staging-access-smoke.mjs", ".github/workflows/staging-access-smoke.yml", "property/docs/staging-smoke-tests.md", "property/data/saas-production-readiness.json", "property/data/versions.json"],
-      "impact": {"markers": 100, "professional_audiences": 10, "proprietary_markers_total": 218, "marker_catalog_total": 543, "staging_smoke_workflow": 1, "mobile_accessibility_menu": 1}
+      "summary": "Added 100 transparent Watchdog-derived markers\u2014ten for each of ten professional audiences\u2014with formula, professional reason, access tier and dependency-refresh contract. The governed marker catalog now contains 543 fields, including 218 proprietary Watchdog signals. Added a staging-only, browser-level anonymous access smoke test that refuses the production domain. Mobile navigation now uses a clean More sheet with grouped workspace, research and account destinations, large touch targets, safe-area handling, keyboard dismissal, focus visibility and reduced-motion support.",
+      "links": [
+        "/property/dashboard.html",
+        "/property/home.html",
+        "/property/data-center.html",
+        "/property/updates.html"
+      ],
+      "files": [
+        "property/data/professional-marker-pack-v030.json",
+        "property/data/marker-registry.json",
+        "property/data/marker-refresh-policy.json",
+        "property/data/derived-marker-formulas.json",
+        "property/scripts/build_professional_marker_pack_v030.py",
+        "property/scripts/build_marker_registry.py",
+        "property/scripts/build_marker_refresh_policy.py",
+        "property/scripts/build_derived_marker_formulas.py",
+        "property/sidemenu.html",
+        "property/js/sidemenu.js",
+        "property/css/mobile-menu.css",
+        "property/tests/staging-access-smoke.mjs",
+        ".github/workflows/staging-access-smoke.yml",
+        "property/docs/staging-smoke-tests.md",
+        "property/data/saas-production-readiness.json",
+        "property/data/versions.json"
+      ],
+      "impact": {
+        "markers": 100,
+        "professional_audiences": 10,
+        "proprietary_markers_total": 218,
+        "marker_catalog_total": 543,
+        "staging_smoke_workflow": 1,
+        "mobile_accessibility_menu": 1
+      }
     },
     {
       "version": "0.29.0",
@@ -199,9 +802,22 @@
       "category": "Security / reliability",
       "status": "Completed",
       "summary": "Added a source-level access-boundary contract that runs automatically on GitHub pull requests and main pushes. It checks each known signed-in and developer-only route, verifies the server-evaluated developer check and anonymous RPC revocations, confirms core entitlement/RLS primitives, and fails if a service credential appears in browser-delivered property files. The initial audit passes 38 checks. A staged live-RLS test remains the next operational gate before paid enrollment.",
-      "links": ["/property/updates.html"],
-      "files": ["property/scripts/audit_access_boundaries.mjs", ".github/workflows/access-boundary-audit.yml", "property/docs/access-boundary-audit.md", "property/data/saas-production-readiness.json", "property/data/versions.json"],
-      "impact": {"protected_route_contracts": 15, "entitlement_regression_checks": 4, "browser_secret_scan": 1, "ci_workflow": 1}
+      "links": [
+        "/property/updates.html"
+      ],
+      "files": [
+        "property/scripts/audit_access_boundaries.mjs",
+        ".github/workflows/access-boundary-audit.yml",
+        "property/docs/access-boundary-audit.md",
+        "property/data/saas-production-readiness.json",
+        "property/data/versions.json"
+      ],
+      "impact": {
+        "protected_route_contracts": 15,
+        "entitlement_regression_checks": 4,
+        "browser_secret_scan": 1,
+        "ci_workflow": 1
+      }
     },
     {
       "version": "0.28.0",
@@ -211,9 +827,32 @@
       "category": "Product polish / SaaS operations",
       "status": "Completed",
       "summary": "Turned the developer View As control into a compact phone control that opens only when needed, so it no longer blocks report or dashboard content. Pro and Developer views now label the mobile destination as Tools rather than Pro, paid property cards remove the empty upgrade action, and secondary dashboard signals are collapsed on phones until requested. Home prioritizes four primary facts and moves secondary market metrics out of the first mobile scan. Data Operations now displays a developer-only 42% production-readiness baseline and staged path to launch-grade SaaS.",
-      "links": ["/property/dashboard.html", "/property/home.html", "/property/developer-data.html", "/property/updates.html"],
-      "files": ["property/js/plan-context.js", "property/css/plan-context.css", "property/js/sidemenu.js", "property/js/dashboard/index.js", "property/js/dashboard/home/index.js", "property/css/mobile-app.css", "property/css/dashboard/05-collections.css", "property/developer-data.html", "property/js/developer-data.js", "property/css/production-readiness.css", "property/data/saas-production-readiness.json", "property/data/versions.json"],
-      "impact": {"mobile_content_obstruction_removed": 1, "role_aware_navigation": 1, "progressive_disclosure": 2, "production_readiness_control": 1}
+      "links": [
+        "/property/dashboard.html",
+        "/property/home.html",
+        "/property/developer-data.html",
+        "/property/updates.html"
+      ],
+      "files": [
+        "property/js/plan-context.js",
+        "property/css/plan-context.css",
+        "property/js/sidemenu.js",
+        "property/js/dashboard/index.js",
+        "property/js/dashboard/home/index.js",
+        "property/css/mobile-app.css",
+        "property/css/dashboard/05-collections.css",
+        "property/developer-data.html",
+        "property/js/developer-data.js",
+        "property/css/production-readiness.css",
+        "property/data/saas-production-readiness.json",
+        "property/data/versions.json"
+      ],
+      "impact": {
+        "mobile_content_obstruction_removed": 1,
+        "role_aware_navigation": 1,
+        "progressive_disclosure": 2,
+        "production_readiness_control": 1
+      }
     },
     {
       "version": "0.27.0",
@@ -223,9 +862,27 @@
       "category": "Data operations / property experience",
       "status": "Completed",
       "summary": "Connected the source-change watcher to a service-role-only Supabase ingestion function and scheduled GitHub workflow. A changed authoritative NJ source now creates a private Property Pulse review event for opted-in saved properties, without claiming a parcel changed before validation. Commercial parcels are visibly distinguished on Dashboard and Watchlist, suppress residential market-value and Chapter 123 presentation, and receive commercial-specific research language. Enlarged key mobile controls and property actions for thumb-friendly use.",
-      "links": ["/property/pulse.html", "/property/dashboard.html", "/property/home.html"],
-      "files": ["property/scripts/monitor_nj_sources.py", "supabase/functions/source-monitor-ingest/index.ts", ".github/workflows/source-monitor.yml", "property/docs/source-monitor-setup.md", "property/js/dashboard/index.js", "property/js/dashboard/home/index.js", "property/css/mobile-app.css", "property/data/versions.json"],
-      "impact": {"scheduled_source_monitor": 1, "private_event_delivery": 1, "commercial_property_context": 1, "mobile_touch_target_pass": 1}
+      "links": [
+        "/property/pulse.html",
+        "/property/dashboard.html",
+        "/property/home.html"
+      ],
+      "files": [
+        "property/scripts/monitor_nj_sources.py",
+        "supabase/functions/source-monitor-ingest/index.ts",
+        ".github/workflows/source-monitor.yml",
+        "property/docs/source-monitor-setup.md",
+        "property/js/dashboard/index.js",
+        "property/js/dashboard/home/index.js",
+        "property/css/mobile-app.css",
+        "property/data/versions.json"
+      ],
+      "impact": {
+        "scheduled_source_monitor": 1,
+        "private_event_delivery": 1,
+        "commercial_property_context": 1,
+        "mobile_touch_target_pass": 1
+      }
     },
     {
       "version": "0.26.0",
@@ -235,9 +892,34 @@
       "category": "Customer intelligence / iPhone readiness",
       "status": "Completed",
       "summary": "Added Property Pulse: an authenticated change center with per-property preferences for score, tax, assessment and deadline signals, plus a server-only event inbox designed for future source-monitor jobs and native push delivery. Added an installable PWA shell with iPhone Home Screen guidance, an offline-safe reconnect page and a service worker that deliberately never caches private property data.",
-      "links": ["/property/pulse.html", "/property/dashboard.html", "/property/home.html", "/property/account.html"],
-      "files": ["property/pulse.html", "property/css/pulse.css", "property/js/pulse.js", "property/manifest.webmanifest", "property/sw.js", "property/offline.html", "property/js/pwa.js", "property/css/mobile-app.css", "property/sidemenu.html", "property/js/sidemenu.js", "supabase/migrations/20260807173000_property_pulse_alert_preferences.sql", "property/data/versions.json"],
-      "impact": {"customer_update_center": 1, "per_property_preferences": 1, "database_tables": 2, "pwa_shell": 1, "ios_readiness": 1, "native_app_dependency": "reduced"}
+      "links": [
+        "/property/pulse.html",
+        "/property/dashboard.html",
+        "/property/home.html",
+        "/property/account.html"
+      ],
+      "files": [
+        "property/pulse.html",
+        "property/css/pulse.css",
+        "property/js/pulse.js",
+        "property/manifest.webmanifest",
+        "property/sw.js",
+        "property/offline.html",
+        "property/js/pwa.js",
+        "property/css/mobile-app.css",
+        "property/sidemenu.html",
+        "property/js/sidemenu.js",
+        "supabase/migrations/20260807173000_property_pulse_alert_preferences.sql",
+        "property/data/versions.json"
+      ],
+      "impact": {
+        "customer_update_center": 1,
+        "per_property_preferences": 1,
+        "database_tables": 2,
+        "pwa_shell": 1,
+        "ios_readiness": 1,
+        "native_app_dependency": "reduced"
+      }
     },
     {
       "version": "0.25.0",
@@ -247,9 +929,47 @@
       "category": "Data platform / professional intelligence",
       "status": "Completed",
       "summary": "Added exactly 100 governed markers: 50 authoritative NJ public-source observations across geology, hydrography, land/historic resources and municipal finance, plus 50 transparent Watchdog-derived professional signals spanning attorneys/title, lenders, real estate, investors, developers, appraisers and insurance/risk. Expanded the live NJDEP diligence query layer, added professional-purpose metadata, formula lineage, source monitoring and marker refresh contracts, and moved the governed catalog from 343 to 443 markers.",
-      "links": ["/property/data-center.html", "/property/marker.html", "/property/pro.html", "/property/home.html", "/property/updates.html"],
-      "files": ["property/data/institutional-marker-pack.json", "property/data/marker-registry.json", "property/data/marker-refresh-policy.json", "property/data/derived-marker-formulas.json", "property/data/source-registry.json", "property/data/next-100-marker-roadmap.json", "property/scripts/build_institutional_marker_pack.py", "property/scripts/build_marker_registry.py", "property/scripts/build_marker_refresh_policy.py", "property/scripts/build_derived_marker_formulas.py", "property/scripts/sync_marker_roadmap.py", "property/js/dashboard/tools/professional-due-diligence.js", "property/js/dashboard/index.js", "property/js/dashboard/home/index.js", "property/js/data-center.js", "property/js/marker-detail.js", "property/js/marker-intelligence.js", "property/js/updates.js", "property/dashboard.html", "property/home.html", "property/data-center.html", "property/marker.html", "property/css/data-center.css", "property/pro.html", "property/data/versions.json"],
-      "impact": {"markers": 100, "public_source_markers": 50, "proprietary_markers": 50, "professional_categories": 7, "live_source_families": 3}
+      "links": [
+        "/property/data-center.html",
+        "/property/marker.html",
+        "/property/pro.html",
+        "/property/home.html",
+        "/property/updates.html"
+      ],
+      "files": [
+        "property/data/institutional-marker-pack.json",
+        "property/data/marker-registry.json",
+        "property/data/marker-refresh-policy.json",
+        "property/data/derived-marker-formulas.json",
+        "property/data/source-registry.json",
+        "property/data/next-100-marker-roadmap.json",
+        "property/scripts/build_institutional_marker_pack.py",
+        "property/scripts/build_marker_registry.py",
+        "property/scripts/build_marker_refresh_policy.py",
+        "property/scripts/build_derived_marker_formulas.py",
+        "property/scripts/sync_marker_roadmap.py",
+        "property/js/dashboard/tools/professional-due-diligence.js",
+        "property/js/dashboard/index.js",
+        "property/js/dashboard/home/index.js",
+        "property/js/data-center.js",
+        "property/js/marker-detail.js",
+        "property/js/marker-intelligence.js",
+        "property/js/updates.js",
+        "property/dashboard.html",
+        "property/home.html",
+        "property/data-center.html",
+        "property/marker.html",
+        "property/css/data-center.css",
+        "property/pro.html",
+        "property/data/versions.json"
+      ],
+      "impact": {
+        "markers": 100,
+        "public_source_markers": 50,
+        "proprietary_markers": 50,
+        "professional_categories": 7,
+        "live_source_families": 3
+      }
     },
     {
       "version": "0.24.0",
@@ -258,10 +978,40 @@
       "title": "Professional workflow suite and longitudinal Watchdog Score",
       "category": "Professional intelligence / lead generation",
       "status": "Completed",
-      "summary": "Completed roadmap priorities 2–7 as integrated professional workflows: collateral/escrow stress, expanded permit lifecycle intelligence, NJDEP/NJGS development constraints, private appeal case tracking, a broker listing brief and portfolio carry-cost concentration. Added genuine dated Watchdog Score observations with up/down ticker and trend chart, plus contextual John/Heather buyer and seller strategy CTAs that keep agent branding inside real-estate guidance surfaces.",
-      "links": ["/property/dashboard.html", "/property/home.html"],
-      "files": ["property/dashboard.html", "property/home.html", "property/updates.html", "property/js/updates.js", "property/js/dashboard/index.js", "property/js/dashboard/home/index.js", "property/css/professional-workflows.css", "property/js/dashboard/tools/collateral-escrow-stress.js", "property/js/dashboard/tools/permit-lifecycle-intelligence.js", "property/js/dashboard/tools/development-constraint-stack.js", "property/js/dashboard/tools/professional-due-diligence.js", "property/js/dashboard/tools/appeal-case-workspace.js", "property/js/dashboard/tools/broker-listing-brief.js", "property/js/dashboard/tools/investor-carry-volatility.js", "property/js/dashboard/tools/real-estate-concierge.js", "property/js/dashboard/tools/score-history.js", "supabase/migrations/20260807145034_professional_workflows_score_history.sql", "supabase/migrations/20260807151500_revoke_anon_internal_entitlement_rpcs.sql", "property/data/versions.json"],
-      "impact": {"professional_tools": 6, "javascript": 10, "css": 1, "database_tables": 2, "lead_generation": 1, "longitudinal_metrics": 1}
+      "summary": "Completed roadmap priorities 2\u20137 as integrated professional workflows: collateral/escrow stress, expanded permit lifecycle intelligence, NJDEP/NJGS development constraints, private appeal case tracking, a broker listing brief and portfolio carry-cost concentration. Added genuine dated Watchdog Score observations with up/down ticker and trend chart, plus contextual John/Heather buyer and seller strategy CTAs that keep agent branding inside real-estate guidance surfaces.",
+      "links": [
+        "/property/dashboard.html",
+        "/property/home.html"
+      ],
+      "files": [
+        "property/dashboard.html",
+        "property/home.html",
+        "property/updates.html",
+        "property/js/updates.js",
+        "property/js/dashboard/index.js",
+        "property/js/dashboard/home/index.js",
+        "property/css/professional-workflows.css",
+        "property/js/dashboard/tools/collateral-escrow-stress.js",
+        "property/js/dashboard/tools/permit-lifecycle-intelligence.js",
+        "property/js/dashboard/tools/development-constraint-stack.js",
+        "property/js/dashboard/tools/professional-due-diligence.js",
+        "property/js/dashboard/tools/appeal-case-workspace.js",
+        "property/js/dashboard/tools/broker-listing-brief.js",
+        "property/js/dashboard/tools/investor-carry-volatility.js",
+        "property/js/dashboard/tools/real-estate-concierge.js",
+        "property/js/dashboard/tools/score-history.js",
+        "supabase/migrations/20260807145034_professional_workflows_score_history.sql",
+        "supabase/migrations/20260807151500_revoke_anon_internal_entitlement_rpcs.sql",
+        "property/data/versions.json"
+      ],
+      "impact": {
+        "professional_tools": 6,
+        "javascript": 10,
+        "css": 1,
+        "database_tables": 2,
+        "lead_generation": 1,
+        "longitudinal_metrics": 1
+      }
     },
     {
       "version": "0.23.0",
@@ -299,16 +1049,16 @@
         "property/verification-diagnostics.html",
         "property/diagnostics.html",
         "property/data-center.html",
-        "property/scan.html"
-        ,"property/dashboards.html"
-        ,"property/property-analysis.html"
-        ,"property/tools/appeal-potential/index.html"
-        ,"property/tools/assessment-fairness/index.html"
-        ,"property/tools/comparable-properties/index.html"
-        ,"property/tools/market-value/index.html"
-        ,"property/tools/neighborhood-comparison/index.html"
-        ,"property/data/saas-production-readiness.json"
-        ,"property/CHANGED-FILES-v0.23.0.txt"
+        "property/scan.html",
+        "property/dashboards.html",
+        "property/property-analysis.html",
+        "property/tools/appeal-potential/index.html",
+        "property/tools/assessment-fairness/index.html",
+        "property/tools/comparable-properties/index.html",
+        "property/tools/market-value/index.html",
+        "property/tools/neighborhood-comparison/index.html",
+        "property/data/saas-production-readiness.json",
+        "property/CHANGED-FILES-v0.23.0.txt"
       ],
       "impact": {
         "security": 1,
@@ -1216,9 +1966,47 @@
     }
   ],
   "active_roadmap": [
-    {"priority":0,"title":"Complete controlled production evidence","readiness":"Free, Agent, Professional and gated Firm / API catalog code is complete; four Live Price IDs, deployment and purchase/refund/failure/cancel evidence remain","effort":"Medium","category":"Revenue / backend","why":"Public enrollment stays closed until real money and recovery behavior are proven.","deliverables":["four verified Live Price IDs","controlled Live lifecycle","persisted evidence reference","support escalation proof"]},
-    {"priority":1,"title":"Run persisted four-role acceptance","readiness":"Automated role contracts exist; real Standard, Pro, Pro+ and Developer staging identities are still required","effort":"Medium","category":"Security / acceptance","why":"Plan boundaries need account-level evidence, not simulated browser state.","deliverables":["four staging identities","authorization and rate-limit run","passed release-gate record"]},
-    {"priority":2,"title":"Execute isolated continuity drill","readiness":"RPO/RTO, restore, reconciliation and communication runbooks are complete; a real isolated restore remains","effort":"Medium","category":"Operations / risk","why":"Recovery is only proven after the database, storage, billing and roles reconcile in isolation.","deliverables":["isolated restore","billing and storage reconciliation","measured RPO/RTO","reviewed drill evidence"]}
+    {
+      "priority": 0,
+      "title": "Complete controlled production evidence",
+      "readiness": "Free, Agent, Professional and gated Firm / API catalog code is complete; four Live Price IDs, deployment and purchase/refund/failure/cancel evidence remain",
+      "effort": "Medium",
+      "category": "Revenue / backend",
+      "why": "Public enrollment stays closed until real money and recovery behavior are proven.",
+      "deliverables": [
+        "four verified Live Price IDs",
+        "controlled Live lifecycle",
+        "persisted evidence reference",
+        "support escalation proof"
+      ]
+    },
+    {
+      "priority": 1,
+      "title": "Run persisted four-role acceptance",
+      "readiness": "Automated role contracts exist; real Standard, Pro, Pro+ and Developer staging identities are still required",
+      "effort": "Medium",
+      "category": "Security / acceptance",
+      "why": "Plan boundaries need account-level evidence, not simulated browser state.",
+      "deliverables": [
+        "four staging identities",
+        "authorization and rate-limit run",
+        "passed release-gate record"
+      ]
+    },
+    {
+      "priority": 2,
+      "title": "Execute isolated continuity drill",
+      "readiness": "RPO/RTO, restore, reconciliation and communication runbooks are complete; a real isolated restore remains",
+      "effort": "Medium",
+      "category": "Operations / risk",
+      "why": "Recovery is only proven after the database, storage, billing and roles reconcile in isolation.",
+      "deliverables": [
+        "isolated restore",
+        "billing and storage reconciliation",
+        "measured RPO/RTO",
+        "reviewed drill evidence"
+      ]
+    }
   ],
   "roadmap": [
     {
