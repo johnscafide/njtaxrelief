@@ -108,6 +108,7 @@
   function renderSnapshot() {
     var rail = d.getElementById('wdd-rail');
     if (!rail || !WD) return;
+    var railContent = rail;
     var counts = snapshotCounts();
     var current = rail.querySelector('#wdd-snapshot');
     var html = '<div class="wdd-snapshot-head"><div><span>PORTFOLIO SNAPSHOT</span><h3>Find what needs attention</h3></div><button type="button" data-ledger-filter="all"' + (quickFilter === 'all' ? ' disabled' : '') + '>Clear</button></div>' +
@@ -121,7 +122,7 @@
       current = d.createElement('section');
       current.id = 'wdd-snapshot';
       current.className = 'wdd-panel wdd-snapshot';
-      rail.appendChild(current);
+      railContent.appendChild(current);
     }
     current.innerHTML = html;
   }

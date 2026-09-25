@@ -124,6 +124,7 @@
   function renderUpcoming() {
     var rail = d.getElementById('wdd-rail');
     if (!rail || !WD) return;
+    var railContent = rail;
     var items = upcomingItems();
     var current = rail.querySelector('#wdd-upcoming');
     if (!current) {
@@ -132,7 +133,7 @@
       current.className = 'wdd-panel wdd-upcoming';
       var snapshot = rail.querySelector('#wdd-snapshot');
       if (snapshot) snapshot.insertAdjacentElement('afterend', current);
-      else rail.appendChild(current);
+      else railContent.appendChild(current);
     }
 
     var body = items.length

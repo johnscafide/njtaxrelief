@@ -601,7 +601,7 @@ body[data-sidebar-page="dashboard"] .wdd-work{
   padding:0;
   align-items:start;
 }
-body[data-sidebar-page="dashboard"] .wdd-work>#wdd-positions{grid-column:1;grid-row:1;min-width:0}
+body[data-sidebar-page="dashboard"] .wdd-work>.wdd-main-column{grid-column:1;grid-row:1;min-width:0}
 body[data-sidebar-page="dashboard"] .wdd-work>.wdd-rail{grid-column:2;grid-row:1}
 body[data-sidebar-page="dashboard"] .wdd-rail{display:grid;gap:20px}
 
