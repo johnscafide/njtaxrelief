@@ -48,14 +48,15 @@ async function load(){
 }
 async function request(key){
   if(busy)return;var provider=PROVIDERS.find(function(p){return p.key===key});if(!provider)return;
-  var input=document.querySelector('[data-connection-url="'+key+'"]'),url=String(input&&input.value||'').trim(),note=document.getElementById('apc-note');
+  var input=document.querySelector('[data-connection-url="'+key+'"]'),url=String(input&&input.value||'').trim(),note=document.getElementById('apc-note'),button=document.querySelector('[data-request-connection="'+key+'"]');
   if(url){try{var u=new URL(url);if(u.protocol!=='https:')throw new Error()}catch(_){if(note)note.textContent='Profile URLs must use HTTPS.';return}}
-  busy=true;if(note)note.textContent='Submitting '+provider.name+' connection request…';render();
+  busy=true;if(button)button.disabled=true;if(note)note.textContent='Submitting '+provider.name+' connection request…';
   try{
     var result=await db.rpc('request_my_professional_connection_v1',{p_provider_key:key,p_external_profile_url:url||null});if(result.error)throw result.error;
-    await load();var fresh=document.getElementById('apc-note');if(fresh)fresh.textContent=provider.name+' request received. Watchdog will only activate sync after provider authorization is available.';
-  }catch(e){if(note)note.textContent=e&&e.message||'Could not request this connection.'}
-  finally{busy=false;render()}
+    busy=false;await load();var fresh=document.getElementById('apc-note');if(fresh)fresh.textContent=provider.name+' request received. Watchdog will only activate sync after provider authorization is available.';
+  }catch(e){
+    busy=false;render();var errorNote=document.getElementById('apc-note');if(errorNote)errorNote.textContent=e&&e.message||'Could not request this connection.';
+  }
 }
 function start(){
   if(String(document.body&&document.body.getAttribute('data-account-profile-mode')||'')!=='professional')return;load();
