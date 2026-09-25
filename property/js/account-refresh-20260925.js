@@ -3,7 +3,7 @@
 if(!document.body || document.body.getAttribute('data-sidebar-page')!=='account')return;
 
 var client=null,user=null,entitlement={};
-var lifetimeMode=false,busy=false,enhanceTimer=null;
+var lifetimeMode=false,busy=false,enhanceTimer=null,activeThemeToggle=null;
 var THEMES=[
   {key:'watchdog',label:'Watchdog',kind:'color',bg:'linear-gradient(112deg,#0f274b 0%,#123d58 56%,#087f78 100%)'},
   {key:'midnight',label:'Midnight',kind:'color',bg:'linear-gradient(115deg,#07182d 0%,#152c4b 58%,#314c72 100%)'},
@@ -42,55 +42,49 @@ function applyTheme(key){
   var theme=themeByKey(key);
   hero.dataset.accountHeroTheme=theme.key;
   hero.style.setProperty('background',theme.bg,'important');
-  hero.querySelectorAll('.ac-theme-choice').forEach(function(button){
+  document.querySelectorAll('.ac-theme-choice').forEach(function(button){
     button.setAttribute('aria-pressed',button.dataset.heroTheme===theme.key?'true':'false');
   });
+  var current=document.getElementById('ac-theme-current-name');if(current)current.textContent=theme.label;
 }
 function themeButton(theme){
   var button=document.createElement('button');
-  button.type='button';button.className='ac-theme-choice';button.dataset.heroTheme=theme.key;
-  button.setAttribute('aria-label','Use '+theme.label+' profile background');
-  button.setAttribute('aria-pressed','false');
+  button.type='button';button.className='ac-theme-choice '+theme.kind;button.dataset.heroTheme=theme.key;
+  button.setAttribute('aria-label','Use '+theme.label+' profile background');button.setAttribute('aria-pressed','false');
   button.style.setProperty('--theme-preview',theme.bg);
-  button.innerHTML='<span>'+theme.label+'</span>';
+  button.innerHTML='<span class="ac-theme-preview"></span><span class="ac-theme-name">'+theme.label+'</span><i class="fas fa-check" aria-hidden="true"></i>';
   return button;
 }
+function closeThemePanel(){
+  var panel=document.getElementById('ac-theme-popover'),backdrop=document.getElementById('ac-theme-backdrop');
+  if(panel)panel.hidden=true;if(backdrop)backdrop.hidden=true;document.body.classList.remove('ac-theme-open');
+  if(activeThemeToggle){activeThemeToggle.setAttribute('aria-expanded','false');activeThemeToggle.focus();activeThemeToggle=null;}
+}
+function ensureThemePanel(){
+  var panel=document.getElementById('ac-theme-popover');if(panel)return panel;
+  var backdrop=document.createElement('div');backdrop.id='ac-theme-backdrop';backdrop.className='ac-theme-backdrop';backdrop.hidden=true;
+  panel=document.createElement('section');panel.id='ac-theme-popover';panel.className='ac-theme-popover';panel.hidden=true;panel.setAttribute('role','dialog');panel.setAttribute('aria-modal','true');panel.setAttribute('aria-labelledby','ac-theme-title');
+  panel.innerHTML='<div class="ac-theme-accent"></div><header><div><span>PROFILE CANVAS</span><h3 id="ac-theme-title">Choose your background</h3><p>Pick a Watchdog gradient or a curated photo. Changes save automatically.</p></div><button type="button" data-close-theme aria-label="Close background chooser"><i class="fas fa-xmark"></i></button></header><div class="ac-theme-current"><span><i class="fas fa-wand-magic-sparkles"></i> Current look</span><b id="ac-theme-current-name">Watchdog</b></div><section class="ac-theme-section" data-theme-kind="color"><div class="ac-theme-section-head"><div><span>COLORS &amp; GRADIENTS</span><small>Clean, graphic and fast-loading.</small></div><em>10</em></div><div class="ac-theme-grid"></div></section><section class="ac-theme-section" data-theme-kind="image"><div class="ac-theme-section-head"><div><span>CURATED PHOTOS</span><small>Homes, architecture, shore and workspace scenes.</small></div><em>5</em></div><div class="ac-theme-grid"></div></section><footer><i class="fas fa-cloud-check"></i><span>Saved to your Watchdog profile</span></footer>';
+  document.body.appendChild(backdrop);document.body.appendChild(panel);
+  THEMES.forEach(function(theme){var grid=panel.querySelector('[data-theme-kind="'+theme.kind+'"] .ac-theme-grid');if(grid)grid.appendChild(themeButton(theme));});
+  backdrop.addEventListener('click',closeThemePanel);panel.querySelector('[data-close-theme]').addEventListener('click',closeThemePanel);
+  panel.addEventListener('click',function(event){var choice=event.target.closest('[data-hero-theme]');if(!choice)return;saveTheme(choice.dataset.heroTheme);});
+  document.addEventListener('keydown',function(event){if(event.key==='Escape'&&!panel.hidden)closeThemePanel();});
+  return panel;
+}
+function openThemePanel(toggle){
+  var panel=ensureThemePanel(),backdrop=document.getElementById('ac-theme-backdrop');activeThemeToggle=toggle;
+  panel.hidden=false;if(backdrop)backdrop.hidden=false;document.body.classList.add('ac-theme-open');toggle.setAttribute('aria-expanded','true');applyTheme(currentTheme().key);
+  var close=panel.querySelector('[data-close-theme]');if(close)close.focus();
+}
 async function saveTheme(key){
-  var db=getClient();if(!db||!user)return;
-  applyTheme(key);
-  try{
-    var result=await db.auth.updateUser({data:{watchdog_account_hero_theme:key}});
-    if(result.error)throw result.error;
-    user=result.data&&result.data.user||user;
-  }catch(error){
-    toast('Background preference could not be saved.');
-  }
+  var db=getClient();if(!db||!user)return;applyTheme(key);
+  try{var result=await db.auth.updateUser({data:{watchdog_account_hero_theme:key}});if(result.error)throw result.error;user=result.data&&result.data.user||user;}
+  catch(error){toast('Background preference could not be saved.');}
 }
 function mountThemePicker(){
-  var hero=document.querySelector('.ac-profile-hero');if(!hero)return;
-  applyTheme(currentTheme().key);
-  if(hero.querySelector('.ac-hero-style-control'))return;
-  var control=document.createElement('div');control.className='ac-hero-style-control';
-  control.innerHTML='<button class="ac-hero-style-toggle" type="button" aria-expanded="false"><i class="fas fa-palette"></i> Background</button>'+
-    '<div class="ac-hero-style-panel" hidden><header><b>Profile background</b><button type="button" data-close-theme aria-label="Close"><i class="fas fa-xmark"></i></button></header>'+
-    '<div class="ac-theme-group" data-theme-kind="color"><span>Colors & gradients</span><div class="ac-theme-grid"></div></div>'+
-    '<div class="ac-theme-group" data-theme-kind="image"><span>Unsplash photos</span><div class="ac-theme-grid"></div></div></div>';
-  hero.appendChild(control);
-  THEMES.forEach(function(theme){
-    var grid=control.querySelector('[data-theme-kind="'+theme.kind+'"] .ac-theme-grid');
-    if(grid)grid.appendChild(themeButton(theme));
-  });
-  var toggle=control.querySelector('.ac-hero-style-toggle'),panel=control.querySelector('.ac-hero-style-panel');
-  function close(){panel.hidden=true;toggle.setAttribute('aria-expanded','false');}
-  toggle.addEventListener('click',function(event){event.stopPropagation();panel.hidden=!panel.hidden;toggle.setAttribute('aria-expanded',panel.hidden?'false':'true');});
-  control.querySelector('[data-close-theme]').addEventListener('click',close);
-  control.addEventListener('click',function(event){
-    var choice=event.target.closest('[data-hero-theme]');if(!choice)return;
-    saveTheme(choice.dataset.heroTheme);close();
-  });
-  document.addEventListener('click',function(event){if(!control.contains(event.target))close();});
-  document.addEventListener('keydown',function(event){if(event.key==='Escape')close();});
-  applyTheme(currentTheme().key);
+  var hero=document.querySelector('.ac-profile-hero');if(!hero)return;applyTheme(currentTheme().key);ensureThemePanel();
+  var control=hero.querySelector('.ac-hero-style-control');if(!control){control=document.createElement('div');control.className='ac-hero-style-control';control.innerHTML='<button class="ac-hero-style-toggle" type="button" aria-expanded="false"><span class="ac-style-icon"><i class="fas fa-palette"></i></span><span>Background</span><i class="fas fa-chevron-right ac-style-chevron"></i></button>';hero.appendChild(control);control.querySelector('button').addEventListener('click',function(event){event.stopPropagation();openThemePanel(event.currentTarget);});}
 }
 
 function normalizePlan(value){return String(value||'standard').toLowerCase().replace('pro+','pro_plus');}
@@ -179,6 +173,8 @@ function toast(message){
 }
 
 function fallbackCleanup(){
+  var pageTop=document.querySelector('body[data-sidebar-page="account"] .top');
+  if(pageTop){pageTop.querySelectorAll('.top-eyebrow').forEach(function(node){node.remove();});var pageTitle=pageTop.querySelector('h1');if(pageTitle&&pageTitle.parentElement){Array.prototype.slice.call(pageTitle.parentElement.children).forEach(function(node){if(node!==pageTitle&&node.tagName==='SPAN')node.remove();});}}
   var header=document.querySelector('.acp-profile-hub .acp-header');
   if(header){
     var eyebrow=header.querySelector('div>span');if(eyebrow&&eyebrow.textContent.trim()==='PROFILE')eyebrow.remove();
@@ -213,6 +209,8 @@ async function loadState(){
 function scheduleEnhance(){clearTimeout(enhanceTimer);enhanceTimer=setTimeout(enhance,20);}
 document.addEventListener('watchdog:account-rendered',function(){lifetimeMode=false;document.body.classList.remove('ac-lifetime-mode');loadState();});
 document.addEventListener('click',function(event){
+  var copyId=event.target.closest('[data-copy-account-id]');
+  if(copyId){event.preventDefault();var id=copyId.dataset.copyAccountId||'';var done=function(){var icon=copyId.querySelector('i');if(icon){icon.className='fas fa-check';setTimeout(function(){icon.className='fas fa-copy';},1200);}};if(navigator.clipboard&&navigator.clipboard.writeText)navigator.clipboard.writeText(id).then(done).catch(function(){toast('Account ID could not be copied.');});else{var ta=document.createElement('textarea');ta.value=id;ta.style.position='fixed';ta.style.opacity='0';document.body.appendChild(ta);ta.select();try{document.execCommand('copy');done();}catch(_){toast('Account ID could not be copied.');}ta.remove();}return;}
   var lifetime=event.target.closest('[data-account-lifetime]');
   if(lifetime){event.preventDefault();event.stopPropagation();setLifetimeMode();return;}
   var checkout=event.target.closest('[data-account-lifetime-plan]');
