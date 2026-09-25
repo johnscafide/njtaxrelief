@@ -105,38 +105,45 @@ as $$
 declare
   v_key text;
 begin
-  if new.verification_status = 'pending'
-     and (tg_op = 'INSERT' or old.submitted_at is distinct from new.submitted_at or old.verification_status is distinct from new.verification_status) then
-    v_key := 'realtor_submission:' || new.user_id::text || ':' || extract(epoch from new.submitted_at)::bigint::text;
-
-    insert into public.professional_review_events(
-      user_id, entity_type, entity_key, event_type, details
-    ) values (
-      new.user_id,
-      'realtor_verification',
-      new.user_id::text,
-      'realtor_verification.submitted',
-      jsonb_build_object(
-        'nar_member_id', new.nar_member_id,
-        'local_association', new.local_association,
-        'submitted_at', new.submitted_at
-      )
-    );
-
-    insert into public.professional_notification_outbox(
-      user_id, event_type, idempotency_key, payload
-    ) values (
-      new.user_id,
-      'realtor_verification.submitted',
-      v_key,
-      jsonb_build_object(
-        'nar_member_id', new.nar_member_id,
-        'local_association', new.local_association,
-        'submitted_at', new.submitted_at
-      )
-    )
-    on conflict (idempotency_key) do nothing;
+  if new.verification_status <> 'pending' then
+    return new;
   end if;
+
+  if tg_op = 'UPDATE'
+     and old.submitted_at is not distinct from new.submitted_at
+     and old.verification_status is not distinct from new.verification_status then
+    return new;
+  end if;
+
+  v_key := 'realtor_submission:' || new.user_id::text || ':' || extract(epoch from new.submitted_at)::bigint::text;
+
+  insert into public.professional_review_events(
+    user_id, entity_type, entity_key, event_type, details
+  ) values (
+    new.user_id,
+    'realtor_verification',
+    new.user_id::text,
+    'realtor_verification.submitted',
+    jsonb_build_object(
+      'nar_member_id', new.nar_member_id,
+      'local_association', new.local_association,
+      'submitted_at', new.submitted_at
+    )
+  );
+
+  insert into public.professional_notification_outbox(
+    user_id, event_type, idempotency_key, payload
+  ) values (
+    new.user_id,
+    'realtor_verification.submitted',
+    v_key,
+    jsonb_build_object(
+      'nar_member_id', new.nar_member_id,
+      'local_association', new.local_association,
+      'submitted_at', new.submitted_at
+    )
+  )
+  on conflict (idempotency_key) do nothing;
 
   return new;
 end;
