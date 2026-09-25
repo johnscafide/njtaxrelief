@@ -211,3 +211,122 @@ body.ac-lifetime-mode #membership-options .ac-price-card[data-plan="teams"]{opac
   body[data-sidebar-page="account"] .ac-self-service .ac-self-grid{grid-template-columns:1fr!important}
   .ac-theme-grid{grid-template-columns:repeat(3,minmax(0,1fr))}
 }
+
+
+/* NJW-417 · second-pass account polish */
+body[data-sidebar-page="account"] .top .top-eyebrow,
+body[data-sidebar-page="account"] .top .who>div:last-child>h1~span{display:none!important}
+body[data-sidebar-page="account"] .ac-page-top{padding-top:6px!important;padding-bottom:8px!important}
+body[data-sidebar-page="account"] .ac-page-top .who>div:last-child{display:block!important}
+
+body[data-sidebar-page="account"] .ac-avatar-edit{
+  width:44px!important;height:44px!important;min-width:44px!important;min-height:44px!important;max-width:44px!important;max-height:44px!important;
+  padding:0!important;aspect-ratio:1/1!important;display:grid!important;place-items:center!important;border-radius:50%!important;line-height:1!important
+}
+body[data-sidebar-page="account"] .ac-avatar-edit i{margin:0!important}
+
+body[data-sidebar-page="account"] .ac-hero-style-toggle{
+  min-height:46px;padding:5px 10px 5px 6px;border:1px solid rgba(255,255,255,.28);
+  background:rgba(8,29,51,.48);box-shadow:0 8px 24px rgba(4,19,35,.16);font-size:12px
+}
+body[data-sidebar-page="account"] .ac-style-icon{width:34px;height:34px;border-radius:50%;display:grid;place-items:center;background:rgba(255,255,255,.13)}
+body[data-sidebar-page="account"] .ac-style-chevron{font-size:9px;opacity:.7;margin-left:2px}
+
+.ac-theme-backdrop{position:fixed;inset:0;z-index:100004;background:rgba(7,20,36,.52);backdrop-filter:blur(9px);animation:acFadeIn .16s ease}
+.ac-theme-backdrop[hidden]{display:none!important}
+.ac-theme-popover{
+  position:fixed;left:50%;top:50%;z-index:100005;width:min(760px,calc(100vw - 42px));max-height:min(720px,calc(100vh - 56px));
+  transform:translate(-50%,-50%);overflow:auto;padding:0 24px 18px;border:1px solid rgba(16,41,75,.12);border-radius:28px;background:#fff;
+  color:#10294b;box-shadow:0 34px 100px rgba(7,24,43,.34);animation:acPanelIn .19s ease
+}
+.ac-theme-popover[hidden]{display:none!important}
+.ac-theme-popover .ac-theme-accent{height:7px;margin:0 -24px 20px;background:linear-gradient(90deg,#0d294e,#0c8f89,#48a8e8,#7156c7)}
+.ac-theme-popover>header{display:flex;align-items:flex-start;justify-content:space-between;gap:20px;margin:0!important;padding:0!important;border:0!important}
+.ac-theme-popover>header>div>span{display:block;color:#0a8b86;font-size:10px;font-weight:900;letter-spacing:.15em}
+.ac-theme-popover>header h3{margin:5px 0 5px;font:850 27px/1.1 var(--font-ui,"Plus Jakarta Sans"),sans-serif;letter-spacing:-.035em}
+.ac-theme-popover>header p{margin:0;color:#718095;font-size:13px;line-height:1.45}
+.ac-theme-popover>header>button{width:42px;height:42px;flex:0 0 42px;border:0;border-radius:13px;background:#edf2f6;color:#24415f;cursor:pointer;font-size:16px}
+.ac-theme-current{display:flex;align-items:center;justify-content:space-between;gap:12px;margin:17px 0 18px;padding:11px 13px;border:1px solid #dfe8ef;border-radius:13px;background:#f8fafc}
+.ac-theme-current span{display:flex;align-items:center;gap:8px;color:#65788e;font-size:11px;font-weight:800}
+.ac-theme-current span i{color:#0b8d87}.ac-theme-current b{font-size:12px}
+.ac-theme-section+.ac-theme-section{margin-top:20px}
+.ac-theme-section-head{display:flex;align-items:flex-end;justify-content:space-between;gap:12px;margin-bottom:10px}
+.ac-theme-section-head span{display:block;color:#526a84;font-size:11px;font-weight:900;letter-spacing:.12em}
+.ac-theme-section-head small{display:block;margin-top:3px;color:#93a0af;font-size:10px}
+.ac-theme-section-head em{display:grid;place-items:center;min-width:28px;height:24px;padding:0 7px;border-radius:999px;background:#edf4f8;color:#49647e;font-size:10px;font-style:normal;font-weight:900}
+.ac-theme-popover .ac-theme-grid{display:grid;grid-template-columns:repeat(5,minmax(0,1fr));gap:10px}
+.ac-theme-popover .ac-theme-choice{
+  position:relative;display:grid;grid-template-rows:auto auto;gap:6px;aspect-ratio:auto;min-width:0;padding:0;border:2px solid transparent;border-radius:15px;background:none!important;
+  box-shadow:none;cursor:pointer;text-align:left
+}
+.ac-theme-popover .ac-theme-choice .ac-theme-preview{
+  display:block;width:100%;aspect-ratio:1.45/1;border-radius:12px;background:var(--theme-preview);background-size:cover;background-position:center;
+  border:1px solid rgba(13,41,72,.10);box-shadow:0 5px 13px rgba(20,43,69,.08);transition:transform .16s ease,box-shadow .16s ease
+}
+.ac-theme-popover .ac-theme-choice.image .ac-theme-preview{aspect-ratio:1.28/1}
+.ac-theme-popover .ac-theme-choice .ac-theme-name{position:static;padding:0 2px;background:none;color:#314a65;font-size:10px;font-weight:800;line-height:1.2;text-align:left}
+.ac-theme-popover .ac-theme-choice>i{position:absolute;right:7px;top:7px;width:24px;height:24px;border-radius:50%;display:none;place-items:center;background:#0b8b85;color:#fff;font-size:10px;box-shadow:0 4px 12px rgba(6,77,74,.28)}
+.ac-theme-popover .ac-theme-choice:hover .ac-theme-preview{transform:translateY(-2px);box-shadow:0 9px 20px rgba(20,43,69,.13)}
+.ac-theme-popover .ac-theme-choice[aria-pressed="true"]{border-color:transparent;box-shadow:none}
+.ac-theme-popover .ac-theme-choice[aria-pressed="true"] .ac-theme-preview{outline:3px solid rgba(11,139,133,.22);border-color:#0b8b85}
+.ac-theme-popover .ac-theme-choice[aria-pressed="true"]>i{display:grid}
+.ac-theme-popover>footer{display:flex;align-items:center;justify-content:center;gap:8px;margin-top:20px;padding-top:15px;border-top:1px solid #edf1f4;color:#718095;font-size:10px;font-weight:700}
+.ac-theme-popover>footer i{color:#0b8b85}
+body.ac-theme-open{overflow:hidden}
+@keyframes acFadeIn{from{opacity:0}to{opacity:1}}@keyframes acPanelIn{from{opacity:0;transform:translate(-50%,-47%) scale(.985)}to{opacity:1;transform:translate(-50%,-50%) scale(1)}}
+
+body[data-sidebar-page="account"] .acp-profile-route-card{
+  min-height:252px!important;padding:28px!important;border:0!important;color:#fff!important;background-size:cover!important;background-position:center!important;
+  box-shadow:0 14px 34px rgba(18,43,70,.15)!important;isolation:isolate
+}
+body[data-sidebar-page="account"] .acp-profile-route-card.personal{
+  background-image:linear-gradient(90deg,rgba(8,31,58,.94) 0%,rgba(14,50,78,.82) 48%,rgba(14,50,78,.34) 100%),url("https://images.unsplash.com/photo-1600585154340-be6161a56a0c?auto=format&fit=crop&w=1400&q=80")!important
+}
+body[data-sidebar-page="account"] .acp-profile-route-card.professional{
+  background-image:linear-gradient(90deg,rgba(4,52,61,.95) 0%,rgba(5,89,91,.82) 48%,rgba(7,82,87,.36) 100%),url("https://images.unsplash.com/photo-1497366811353-6870744d04b2?auto=format&fit=crop&w=1400&q=80")!important
+}
+body[data-sidebar-page="account"] .acp-profile-route-card::after{display:none!important}
+body[data-sidebar-page="account"] .acp-profile-route-card>*{position:relative;z-index:2}
+body[data-sidebar-page="account"] .acp-profile-route-card small,
+body[data-sidebar-page="account"] .acp-profile-route-card h3,
+body[data-sidebar-page="account"] .acp-profile-route-card p,
+body[data-sidebar-page="account"] .acp-profile-route-card b{color:#fff!important}
+body[data-sidebar-page="account"] .acp-profile-route-card p{max-width:600px;color:rgba(255,255,255,.82)!important;text-shadow:0 1px 2px rgba(0,0,0,.15)}
+body[data-sidebar-page="account"] .acp-profile-route-card .acp-route-icon{background:rgba(255,255,255,.16)!important;color:#fff!important;border:1px solid rgba(255,255,255,.20);backdrop-filter:blur(9px)}
+body[data-sidebar-page="account"] .acp-profile-route-card b{display:inline-flex;align-items:center;gap:8px;margin-top:12px;padding:9px 12px;border-radius:999px;background:rgba(255,255,255,.14);backdrop-filter:blur(8px)}
+body[data-sidebar-page="account"] .acp-profile-route-card:hover{transform:translateY(-3px)!important;box-shadow:0 18px 42px rgba(18,43,70,.22)!important}
+
+.ac-provider-logo{width:118px;height:48px;flex:0 0 118px;display:grid;place-items:center;padding:7px 9px;border:1px solid #dde5ed;border-radius:12px;background:#fff;box-shadow:0 5px 13px rgba(22,52,83,.06)}
+.ac-provider-logo img{display:block;max-width:100%;max-height:32px;width:auto;height:auto}
+.ac-provider-logo.ac-provider-kit{background:#47aef0;border-color:#47aef0}
+.ac-provider-logo.ac-provider-kit img{max-height:29px}
+body[data-sidebar-page="account"] .ac-connection-head{align-items:center!important}
+
+body[data-sidebar-page="account"] .ac-account-summary{position:relative;overflow:hidden;background:linear-gradient(145deg,#fbfdff 0%,#f1f6fb 100%)!important}
+body[data-sidebar-page="account"] .ac-account-summary::after{content:"";position:absolute;right:-72px;top:-82px;width:190px;height:190px;border-radius:50%;background:radial-gradient(circle,rgba(45,113,240,.10),rgba(45,113,240,0) 70%);pointer-events:none}
+body[data-sidebar-page="account"] .ac-account-summary-head{position:relative;z-index:1}
+body[data-sidebar-page="account"] .ac-account-overview{position:relative;z-index:1;margin-top:16px!important}
+body[data-sidebar-page="account"] .ac-account-primary{display:flex;align-items:center;gap:12px;padding:15px;border:1px solid #dce6ef;border-radius:14px;background:#fff}
+body[data-sidebar-page="account"] .ac-account-primary>i{width:38px;height:38px;display:grid;place-items:center;flex:0 0 38px;border-radius:11px;background:#e8f7f5;color:#078c88}
+body[data-sidebar-page="account"] .ac-account-primary span{min-width:0}
+body[data-sidebar-page="account"] .ac-account-primary b{display:block;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+body[data-sidebar-page="account"] .ac-account-detail-grid{display:grid;grid-template-columns:1fr 1fr;gap:9px;margin-top:9px}
+body[data-sidebar-page="account"] .ac-account-detail-grid>div{display:flex;align-items:center;gap:10px;min-width:0;padding:12px;border:1px solid #e0e8ef;border-radius:13px;background:rgba(255,255,255,.72)}
+body[data-sidebar-page="account"] .ac-account-detail-grid>div>i{width:30px;height:30px;display:grid;place-items:center;flex:0 0 30px;border-radius:9px;background:#edf3fb;color:#336fe0;font-size:12px}
+body[data-sidebar-page="account"] .ac-account-detail-grid span{min-width:0}
+body[data-sidebar-page="account"] .ac-account-detail-grid small{display:block;color:#7c8da1;font-size:9px;font-weight:900;letter-spacing:.09em}
+body[data-sidebar-page="account"] .ac-account-detail-grid b{display:block;margin-top:2px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;color:#17314f;font-size:11px}
+body[data-sidebar-page="account"] .ac-account-id{display:flex!important;align-items:center;gap:6px}
+body[data-sidebar-page="account"] .ac-account-id code{font:800 11px/1 var(--font-ui,"Plus Jakarta Sans"),sans-serif;color:#17314f}
+body[data-sidebar-page="account"] .ac-account-id button{width:27px;height:27px;border:0;border-radius:8px;background:#eaf0f6;color:#375672;cursor:pointer}
+
+@media(max-width:760px){
+  .ac-theme-popover{left:0;top:auto;bottom:0;width:100%;max-height:88vh;transform:none;border-radius:24px 24px 0 0;padding:0 18px 18px}
+  .ac-theme-popover .ac-theme-accent{margin:0 -18px 17px;border-radius:24px 24px 0 0}
+  .ac-theme-popover>header h3{font-size:23px}
+  .ac-theme-popover .ac-theme-grid{grid-template-columns:repeat(3,minmax(0,1fr));gap:10px}
+  @keyframes acPanelIn{from{opacity:0;transform:translateY(18px)}to{opacity:1;transform:translateY(0)}}
+  body[data-sidebar-page="account"] .acp-profile-route-card{min-height:230px!important;padding:22px!important}
+  body[data-sidebar-page="account"] .ac-account-detail-grid{grid-template-columns:1fr}
+  .ac-provider-logo{width:100px;flex-basis:100px;height:44px}
+}
