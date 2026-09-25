@@ -4,18 +4,23 @@
 if(!window.NJPTRSupabaseRuntime)return;
 var db=window.NJPTRSupabaseRuntime.createClient(),user=null,row=null,saving=false,brandBusy=false,licenseBusy=false;
 var PRESETS=[
- {name:'Opus Elite Real Estate',url:'https://www.opuselitere.com/',primary:'#00778B',secondary:'#E35205',accent:'#222222'},
- {name:'Keller Williams',url:'https://www.kw.com/'},{name:'RE/MAX',url:'https://www.remax.com/'},
- {name:'Coldwell Banker',url:'https://www.coldwellbanker.com/'},{name:'Compass',url:'https://www.compass.com/'},
- {name:'eXp Realty',url:'https://www.exprealty.com/'},{name:'Weichert',url:'https://www.weichert.com/'},
- {name:'Century 21',url:'https://www.century21.com/'},{name:'Berkshire Hathaway HomeServices',url:'https://www.bhhs.com/'},
- {name:"Sotheby's International Realty",url:'https://www.sothebysrealty.com/'}
+ {name:'Opus Elite Real Estate',url:'https://opusagent.com/',primary:'#00778B',secondary:'#E35205',accent:'#222222',logo:'https://www.google.com/s2/favicons?domain=opusagent.com&sz=256'},
+ {name:'Keller Williams',url:'https://kw.com/',primary:'#B40101',secondary:'#F4F4F4',accent:'#333333',logo:'https://www.google.com/s2/favicons?domain=kw.com&sz=256'},
+ {name:'RE/MAX',url:'https://www.remax.com/usa/en',primary:'#003DA5',secondary:'#DC1C2E',accent:'#172B4D',logo:'https://www.google.com/s2/favicons?domain=remax.com&sz=256'},
+ {name:'Coldwell Banker',url:'https://www.coldwellbanker.com/',primary:'#012169',secondary:'#FFFFFF',accent:'#0C2340',logo:'https://www.google.com/s2/favicons?domain=coldwellbanker.com&sz=256'},
+ {name:'Compass',url:'https://www.compass.com/',primary:'#000000',secondary:'#FFFFFF',accent:'#545454',logo:'https://www.google.com/s2/favicons?domain=compass.com&sz=256'},
+ {name:'eXp Realty',url:'https://www.exprealty.com/',primary:'#0A4B78',secondary:'#F58220',accent:'#183244',logo:'https://www.google.com/s2/favicons?domain=exprealty.com&sz=256'},
+ {name:'Weichert',url:'https://www.weichert.com/',primary:'#FFCB05',secondary:'#000000',accent:'#58595B',logo:'https://www.google.com/s2/favicons?domain=weichert.com&sz=256'},
+ {name:'Century 21',url:'https://www.century21.com/',primary:'#BEAF87',secondary:'#000000',accent:'#6B604F',logo:'https://www.google.com/s2/favicons?domain=century21.com&sz=256'},
+ {name:'Berkshire Hathaway HomeServices',url:'https://www.bhhs.com/',primary:'#552448',secondary:'#E6E1DF',accent:'#222222',logo:'https://www.google.com/s2/favicons?domain=bhhs.com&sz=256'},
+ {name:"Sotheby's International Realty",url:'https://www.sothebysrealty.com/',primary:'#002349',secondary:'#A7A9AC',accent:'#111111',logo:'https://www.google.com/s2/favicons?domain=sothebysrealty.com&sz=256'}
 ];
 function esc(v){return String(v==null?'':v).replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]))}
 function val(id){var n=document.getElementById(id);return n?String(n.value||'').trim():''}
 function validUrl(v){if(!v)return true;try{var u=new URL(v);return u.protocol==='https:'}catch(_){return false}}
 function validEmail(v){return !v||/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(v)}
 function presetByName(name){var x=String(name||'').toLowerCase();return PRESETS.find(p=>x.includes(p.name.toLowerCase())||p.name.toLowerCase().includes(x))}
+function lastName(value){var parts=String(value||'').trim().split(/\s+/).filter(Boolean);return parts.length?parts[parts.length-1]:''}
 async function authHeaders(){var s=await db.auth.getSession(),t=s&&s.data&&s.data.session&&s.data.session.access_token;if(!t)throw new Error('Sign in again to continue.');return{Authorization:'Bearer '+t,Accept:'application/json'}}
 function color(v,fallback){return /^#[0-9a-f]{6}$/i.test(String(v||''))?String(v).toUpperCase():fallback}
 function applyBrandPreview(data){
@@ -34,7 +39,7 @@ function mount(){
  if(document.getElementById('ac-agent-branding'))return;
  var app=document.getElementById('ac-app');if(!app||app.hidden||!row)return;
  var after=document.getElementById('ac-profile-editor')||app.lastElementChild,b=row.pro_agent&&typeof row.pro_agent==='object'?row.pro_agent:{},preset=presetByName(b.brokerage_name);
- var primary=color(b.brokerage_primary_color,preset&&preset.primary||'#10294B'),secondary=color(b.brokerage_secondary_color,preset&&preset.secondary||'#0B8B85'),accent=color(b.brokerage_accent_color,preset&&preset.accent||'#1F2937'),website=b.brokerage_website||preset&&preset.url||'';
+ var primary=color(b.brokerage_primary_color,preset&&preset.primary||'#10294B'),secondary=color(b.brokerage_secondary_color,preset&&preset.secondary||'#0B8B85'),accent=color(b.brokerage_accent_color,preset&&preset.accent||'#1F2937'),website=b.brokerage_website||preset&&preset.url||'',defaultLicenseSearch=lastName(row.display_name||row.full_name||'');
  var section=document.createElement('section');section.id='ac-agent-branding';section.className='ac-section acp-editor acb-editor';
  section.innerHTML=
  '<header class="acp-header acb-header"><div><h2>Agent branding</h2><p>Set the brokerage identity Watchdog uses on reports and agent-facing experiences.</p></div><div class="acp-source"><i class="fa-regular fa-circle-check"></i><span>User-confirmed</span></div></header>'+
@@ -51,7 +56,7 @@ function mount(){
     '<label><span>Business phone</span><input id="acb-phone" maxlength="40" value="'+esc(b.business_phone||row.phone||'')+'" placeholder="(555) 555-5555"></label>'+
     '<label><span>Business email</span><input id="acb-email" type="email" maxlength="254" value="'+esc(b.business_email||row.email||'')+'" placeholder="agent@example.com"></label>'+
    '</div>'+
-   '<div class="acb-license-search" id="acb-license-search" hidden><div><input id="acb-license-query" value="'+esc(row.display_name||row.full_name||'')+'" placeholder="Search NJREC by name or license #"><button type="button" id="acb-license-go">Search NJREC</button></div><div id="acb-license-results"></div><small>Official NJDOBI public license search. Select a result to fill the field.</small></div>'+
+   '<div class="acb-license-search" id="acb-license-search" hidden><div><input id="acb-license-query" value="'+esc(defaultLicenseSearch)+'" placeholder="Last name (recommended) or NJ license #"><button type="button" id="acb-license-go">Search NJREC</button></div><div id="acb-license-results"></div><small>Search by last name for the most reliable match. This uses the official NJDOBI Real Estate Commission public license search. Select the correct result to fill your license number.</small></div>'+
   '</section>'+
   '<section class="acb-panel acb-imagery">'+
    '<div class="acb-panel-title"><div><i class="fa-regular fa-images"></i><span><b>Report imagery</b><small>Preview and override the imagery used on professional reports.</small></span></div></div>'+
@@ -75,7 +80,7 @@ function bind(){
  document.getElementById('acb-analyze').addEventListener('click',discoverBrand);
  document.getElementById('acb-find-license').addEventListener('click',()=>{var x=document.getElementById('acb-license-search');x.hidden=!x.hidden;if(!x.hidden)document.getElementById('acb-license-query').focus()});
  document.getElementById('acb-license-go').addEventListener('click',lookupLicense);
- document.getElementById('acb-broker-preset').addEventListener('change',function(){if(this.value==='other'){document.getElementById('acb-website').focus();return}if(this.value){document.getElementById('acb-website').value=this.value;var p=PRESETS.find(x=>x.url===this.value);if(p){document.getElementById('acb-brokerage').value=p.name;if(p.primary)applyBrandPreview({brokerage_name:p.name,website:p.url,primary_color:p.primary,secondary_color:p.secondary,accent_color:p.accent})}discoverBrand()}});
+ document.getElementById('acb-broker-preset').addEventListener('change',function(){if(this.value==='other'){document.getElementById('acb-website').focus();return}if(this.value){document.getElementById('acb-website').value=this.value;var p=PRESETS.find(x=>x.url===this.value);if(p){document.getElementById('acb-brokerage').value=p.name;if(p.logo)document.getElementById('acb-logo').value=p.logo;if(p.primary)applyBrandPreview({brokerage_name:p.name,website:p.url,logo_url:p.logo,primary_color:p.primary,secondary_color:p.secondary,accent_color:p.accent})}discoverBrand()}});
  ['acb-brokerage','acb-website','acb-logo','acb-headshot','acb-primary','acb-secondary','acb-accent'].forEach(id=>document.getElementById(id).addEventListener('input',refreshMedia));
 }
 async function discoverBrand(){
@@ -84,7 +89,7 @@ async function discoverBrand(){
  try{var headers=await authHeaders(),r=await fetch('/api/brokerage-brand-discovery?url='+encodeURIComponent(website),{headers}),data=await r.json();if(!r.ok)throw new Error(data.error||'Could not analyze website.');
   document.getElementById('acb-website').value=data.website||website;document.getElementById('acb-brokerage').value=data.brokerage_name||val('acb-brokerage');
   if(data.logo_url)document.getElementById('acb-logo').value=data.logo_url;
-  applyBrandPreview(data);refreshMedia();note.textContent='Brand found. Review the logo and colors, then save when they look right.';
+  applyBrandPreview(data);refreshMedia();note.textContent=data.warning||'Brand found. Review the logo and colors, then save when they look right.';
  }catch(e){note.textContent=e.message||'Could not analyze that brokerage website.'}finally{brandBusy=false;document.getElementById('acb-analyze').disabled=false}
 }
 async function lookupLicense(){
@@ -93,7 +98,7 @@ async function lookupLicense(){
  try{var headers=await authHeaders(),isNum=/^\d{5,}$/.test(q.replace(/\D/g,'')),url='/api/njrec-license-search?'+(isNum?'license='+encodeURIComponent(q.replace(/\D/g,'')):'name='+encodeURIComponent(q)),r=await fetch(url,{headers}),data=await r.json();if(!r.ok)throw new Error(data.error||'License search failed.');
   if(!data.results||!data.results.length){host.innerHTML='<p>No matching NJREC licensees found.</p>';return}
   host.innerHTML=data.results.map((x,i)=>'<button type="button" data-license-index="'+i+'"><b>'+esc(x.name)+'</b><span>NJ #'+esc(x.license_number)+' · '+esc(x.license_type)+' · '+esc(x.status)+'</span><small>'+esc(x.business||'')+'</small></button>').join('');
-  host.querySelectorAll('[data-license-index]').forEach(btn=>btn.addEventListener('click',function(){var x=data.results[Number(this.dataset.licenseIndex)];document.getElementById('acb-license').value=x.license_number||'';if(!val('acb-brokerage')&&x.business)document.getElementById('acb-brokerage').value=x.business.split(/\d/)[0].trim();host.innerHTML='<p class="success">Selected '+esc(x.name)+' · NJ #'+esc(x.license_number)+'</p>';refreshMedia()}));
+  host.querySelectorAll('[data-license-index]').forEach(btn=>btn.addEventListener('click',function(){var x=data.results[Number(this.dataset.licenseIndex)];document.getElementById('acb-license').value=x.license_number||'';var verifyInput=document.getElementById('ac-license-number');if(verifyInput)verifyInput.value=x.license_number||'';if(!val('acb-brokerage')&&x.business)document.getElementById('acb-brokerage').value=x.business.split(/\d/)[0].trim();host.innerHTML='<p class="success">Selected '+esc(x.name)+' · NJ #'+esc(x.license_number)+'</p>';document.dispatchEvent(new CustomEvent('watchdog:njrec-license-selected',{detail:{license_number:x.license_number||'',licensee_name:x.name||'',status:x.status||''}}));refreshMedia()}));
  }catch(e){host.innerHTML='<p>'+esc(e.message||'NJREC lookup is unavailable right now.')+'</p>'}finally{licenseBusy=false}
 }
 async function save(){
