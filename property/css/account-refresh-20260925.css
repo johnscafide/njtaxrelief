@@ -689,3 +689,47 @@ body[data-sidebar-page="account"] .ac-danger-actions{
   .ac-theme-popover .ac-theme-section[data-theme-kind="image"] .ac-theme-grid{grid-template-columns:repeat(3,minmax(0,1fr))!important}
   .ac-theme-live-banner{min-height:82px!important}
 }
+
+
+/* NJW-426 · verified professional badge + brokerage identity */
+body[data-sidebar-page="account"] .ac-hero-name-row{
+  display:flex;align-items:center;gap:9px;min-width:0;flex-wrap:wrap
+}
+body[data-sidebar-page="account"] .ac-hero-name-row h1{margin:7px 0 7px!important}
+body[data-sidebar-page="account"] .ac-pro-badge{
+  display:inline-flex;align-items:center;gap:5px;min-height:24px;padding:0 8px;border-radius:999px;
+  border:1px solid rgba(255,255,255,.28);font:850 9px/1 var(--font-ui,"Plus Jakarta Sans"),sans-serif;
+  letter-spacing:.025em;white-space:nowrap;backdrop-filter:blur(8px)
+}
+body[data-sidebar-page="account"] .ac-pro-badge.agent{
+  background:rgba(12,139,133,.20);color:#bcfff8;border-color:rgba(131,226,220,.38)
+}
+body[data-sidebar-page="account"] .ac-pro-badge.realtor{
+  background:rgba(255,255,255,.94);color:#10294b;border-color:rgba(255,255,255,.72);
+  box-shadow:0 4px 14px rgba(6,23,41,.14)
+}
+body[data-sidebar-page="account"] .ac-pro-badge.realtor i{color:#0b8b85}
+body[data-sidebar-page="account"] .ac-hero-broker{
+  --broker-primary:#0b8b85;--broker-secondary:#83e2dc;
+  display:inline-flex;align-items:center;gap:8px;max-width:min(430px,100%);margin-top:9px;padding:6px 9px 6px 7px;
+  border:1px solid rgba(255,255,255,.16);border-left:3px solid var(--broker-secondary);
+  border-radius:9px;background:rgba(5,27,47,.24);backdrop-filter:blur(9px)
+}
+body[data-sidebar-page="account"] .ac-hero-broker-logo{
+  width:27px;height:27px;flex:0 0 27px;display:grid;place-items:center;overflow:hidden;padding:2px;
+  border-radius:7px;background:rgba(255,255,255,.94)
+}
+body[data-sidebar-page="account"] .ac-hero-broker-logo img{width:100%;height:100%;object-fit:contain}
+body[data-sidebar-page="account"] .ac-hero-broker-logo.fallback{color:var(--broker-primary);font-size:11px}
+body[data-sidebar-page="account"] .ac-hero-broker>span:last-child{min-width:0}
+body[data-sidebar-page="account"] .ac-hero-broker small{
+  display:block;color:rgba(255,255,255,.58)!important;font-size:7px!important;font-weight:900!important;letter-spacing:.12em!important
+}
+body[data-sidebar-page="account"] .ac-hero-broker b{
+  display:block;margin-top:1px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;color:#fff;font-size:10px;line-height:1.2
+}
+@media(max-width:760px){
+  body[data-sidebar-page="account"] .ac-hero-name-row{gap:7px}
+  body[data-sidebar-page="account"] .ac-pro-badge{min-height:22px;font-size:8px}
+  body[data-sidebar-page="account"] .ac-hero-broker{max-width:100%}
+}
