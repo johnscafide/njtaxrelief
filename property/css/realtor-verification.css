@@ -27,3 +27,5 @@
 .acr-verified-card>i{width:34px;height:34px;display:grid;place-items:center;border-radius:50%;background:#0b8b85;color:#fff}
 .acr-verified-card span,.acr-verified-card b,.acr-verified-card small{display:block}.acr-verified-card span{color:#0b8178;font-size:8px;font-weight:900;letter-spacing:.1em}.acr-verified-card b{margin-top:2px;color:#17314e;font-size:12px}.acr-verified-card small{margin-top:2px;color:#6f807f;font-size:8px}
 @media(max-width:900px){.acr-grid{grid-template-columns:1fr}.acr-fields{grid-template-columns:1fr}.acr-fields .wide{grid-column:auto}}
+
+.acr-status.needs-info{border-color:#d8d0f2!important;background:#f7f4ff!important;color:#674ea7!important}
