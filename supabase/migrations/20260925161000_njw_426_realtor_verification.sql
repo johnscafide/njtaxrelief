@@ -232,3 +232,83 @@ comment on table public.professional_realtor_verifications is
   'NAR REALTOR® membership verification. User-submitted membership details remain unverified until reviewed by Watchdog/NAR-backed process.';
 comment on function public.review_realtor_verification_v1(uuid,text,text,text,text,timestamptz) is
   'Service-role-only REALTOR verification review. This trust signal does not alter subscription entitlements.';
+
+
+-- NJW-426 compatibility: NJDOBI currently returns statuses such as
+-- "ACTIVELY LICENSED". Keep the service-owned NJ license verifier aligned
+-- with the official wording.
+create or replace function public.verify_professional_license_official_v2(
+  p_user_id uuid,
+  p_license_number text,
+  p_licensee_name text,
+  p_source_status text
+)
+returns table(
+  verification_status text,
+  verified_professional boolean,
+  verification_due_at timestamptz,
+  licensee_name text
+)
+language plpgsql
+security definer
+set search_path = public, pg_temp
+as $$
+declare
+  v_license text := upper(regexp_replace(coalesce(p_license_number,''), '[[:space:]]', '', 'g'));
+  v_name text := nullif(left(btrim(coalesce(p_licensee_name,'')),160),'');
+  v_status text := lower(btrim(coalesce(p_source_status,'')));
+  v_profession text;
+  v_now timestamptz := now();
+  v_due timestamptz := now() + interval '1 year';
+  v_source text := 'https://www.nj.gov/dobi/division_rec/licensing/online_Instructions/licSearch.html';
+begin
+  if p_user_id is null then raise exception 'User is required'; end if;
+  if v_license !~ '^[A-Z]{0,3}-?[0-9]{5,10}[A-Z]?$' then
+    raise exception 'Invalid NJ real-estate license number';
+  end if;
+  if v_name is null then raise exception 'Official licensee name is required'; end if;
+  if v_status !~ '^(active([[:space:]]|$)|actively[[:space:]]+licensed([[:space:]]|$))' then
+    raise exception 'Official NJDOBI license status is not active';
+  end if;
+
+  select primary_profession into v_profession
+  from public.watchdog_onboarding_profiles
+  where user_id = p_user_id
+  limit 1;
+
+  if v_profession is distinct from 'real_estate' then
+    raise exception 'Real-estate professional profile required';
+  end if;
+
+  insert into public.professional_license_verifications (
+    user_id, license_number, verification_status, verified_professional,
+    licensee_name, license_expiration_date, verified_at, verification_due_at,
+    submitted_at, reviewed_at, reviewer_id, review_note, source_url, updated_at
+  ) values (
+    p_user_id, v_license, 'verified', true,
+    v_name, null, v_now, v_due,
+    v_now, v_now, null,
+    'Automatically matched to an active record in the official NJDOBI Real Estate Licensee Search.',
+    v_source, v_now
+  )
+  on conflict (user_id) do update set
+    license_number = excluded.license_number,
+    verification_status = 'verified',
+    verified_professional = true,
+    licensee_name = excluded.licensee_name,
+    license_expiration_date = null,
+    verified_at = v_now,
+    verification_due_at = v_due,
+    submitted_at = v_now,
+    reviewed_at = v_now,
+    reviewer_id = null,
+    review_note = excluded.review_note,
+    source_url = v_source,
+    updated_at = v_now;
+
+  return query select 'verified'::text, true, v_due, v_name;
+end;
+$$;
+
+revoke all on function public.verify_professional_license_official_v2(uuid,text,text,text) from public, anon, authenticated;
+grant execute on function public.verify_professional_license_official_v2(uuid,text,text,text) to service_role;
