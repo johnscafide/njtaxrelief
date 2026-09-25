@@ -2,15 +2,9 @@
 (function(w,d){
 'use strict';
 function start(){
-  var WD=w.WD;if(!WD)return;var H=WD.H,S=WD.S,esc=H.esc,map=null,railMap=null,voiceRecognition=null,analysisTab='assessed',fallbackVariant=Math.floor(Math.random()*4)+1;
+  var WD=w.WD;if(!WD)return;var H=WD.H,S=WD.S,esc=H.esc,map=null,railMap=null,voiceRecognition=null,analysisTab='assessed';
 
-  function verdict(score){
-    if(score==null)return{label:'Not scored yet',tone:''};
-    if(score>=80)return{label:'Strong position',tone:'ok'};
-    if(score>=65)return{label:'Reasonable',tone:'ok'};
-    if(score>=50)return{label:'Typical for New Jersey',tone:'warn'};
-    return{label:'Worth a review',tone:'bad'};
-  }
+  function verdict(score){return WD.verdict(score);}
   function initials(){
     var name=WD.userName()||'W',parts=String(name).trim().split(/\s+/);
     return parts.slice(0,2).map(function(p){return p.charAt(0).toUpperCase();}).join('')||'W';
@@ -36,25 +30,85 @@ function start(){
     if((g&&g.pct>=5)||cat==='warn')return{label:'Watch',cls:'is-watch'};
     return{label:'Good',cls:'is-good'};
   }
-  function readLine(st){
-    if(!st.count)return'Add a property to start building your Watchdog portfolio.';
-    if(st.over>0)return st.over+' of '+st.count+' saved properties '+(st.over===1?'is':'are')+' currently worth a closer look.';
-    return'Your saved properties are being monitored for meaningful changes.';
+
+  // Appeal calendar. Mirrors appeal-deadline-rules.json (alternate_calendar_counties
+  // and baseline_month_day). The renderer never fetches, so the two baselines live
+  // here. Per that file's display_policy we show the statutory baseline only, never
+  // a countdown, and always tell the member to verify against their notice.
+  var APPEAL_ALT_COUNTIES=['BURLINGTON','GLOUCESTER','MONMOUTH'];
+  function countyKey(c){return String(c||'').trim().toUpperCase().replace(/\s+COUNTY$/,'');}
+  function nextBaseline(month,day){var now=new Date(),y=now.getFullYear();if(now>new Date(y,month-1,day,23,59,59))y+=1;return new Date(y,month-1,day);}
+  function shortDate(dt){try{return dt.toLocaleDateString('en-US',{month:'short',day:'numeric',year:'numeric'});}catch(_e){return'';}}
+  function appealBaseline(props){
+    var alt=false,trad=false;
+    props.forEach(function(p){var k=countyKey(p.county);if(!k)return;if(APPEAL_ALT_COUNTIES.indexOf(k)>-1)alt=true;else trad=true;});
+    var dates=[];if(alt)dates.push(shortDate(nextBaseline(1,15)));if(trad)dates.push(shortDate(nextBaseline(4,1)));
+    return dates.filter(Boolean).length?{dates:dates,mixed:alt&&trad}:null;
+  }
+
+  function heroState(st){
+    if(!st.count)return'empty';
+    if(st.over>0)return'review';
+    var measured=WD.filtered().some(function(p){return WD.gapFor(p)!=null;});
+    return measured?'clear':'watch';
+  }
+  function heroInsight(st,state){
+    var noun=function(n){return n===1?'property':'properties';};
+    if(state==='empty')return'<span class="wdd-h27-flag">Get started</span> Add a New Jersey property and Watchdog starts checking its assessment against the market evidence.';
+    if(state==='watch')return'<span class="wdd-h27-flag">Monitoring</span> Your '+st.count+' saved '+noun(st.count)+' '+(st.count===1?'is':'are')+' being watched for meaningful changes.';
+    if(state==='clear')return'<span class="wdd-h27-flag">All clear</span> '+(st.count===1?'Your saved property sits':'All '+st.count+' saved properties sit')+' at or under the market evidence.';
+    return'<span class="wdd-h27-flag">'+st.over+' of '+st.count+' '+noun(st.count)+'</span> '+(st.over===1?'is':'are')+' assessed above the market evidence'+
+      (st.atStake>=1?', with about <span class="wdd-h27-amt">'+esc(H.dollars(st.atStake))+' a year</span> at stake.':'.');
+  }
+  function heroActions(st,state){
+    var arrow='<i class="fas fa-arrow-right" aria-hidden="true"></i>';
+    if(state==='empty')return'<button class="wdd-h27-btn is-primary" type="button" data-act="focus-search">Add your first property'+arrow+'</button>';
+    if(state==='review'){
+      var top=cases()[0],pin=top&&top.p&&top.p.pams_pin,direct=WD.isPro()&&pin;
+      var href=direct?'/property/report?pin='+encodeURIComponent(pin):'#wdd-queue';
+      var label=direct?(st.over===1?'Review the property':'Review the top property'):(st.over===1?'See the flagged property':'See flagged properties');
+      return'<a class="wdd-h27-btn is-primary" href="'+esc(href)+'">'+label+arrow+'</a>'+
+        '<a class="wdd-h27-btn is-ghost" href="#wdd-positions"><i class="fas fa-table-cells-large" aria-hidden="true"></i>Open portfolio</a>';
+    }
+    return'<a class="wdd-h27-btn is-primary" href="#wdd-positions">Open portfolio'+arrow+'</a>'+
+      '<a class="wdd-h27-btn is-ghost" href="#wdd-activity"><i class="fas fa-wave-square" aria-hidden="true"></i>Recent changes</a>';
+  }
+  function heroSince(st){
+    if(!st.count)return'';
+    var bits=[],base=appealBaseline(WD.filtered());
+    bits.push('<li><i class="fas fa-wave-square" aria-hidden="true"></i><span><b>'+st.changes30+'</b> '+(st.changes30===1?'change':'changes')+' in the last 30 days</span></li>');
+    if(base)bits.push('<li><i class="fas fa-calendar-day" aria-hidden="true"></i><span>Next appeal baseline <b>'+base.dates.map(esc).join('</b> or <b>')+'</b>'+(base.mixed?' by county':'')+' · verify on your assessment notice</span></li>');
+    return'<ul class="wdd-h27-since">'+bits.join('')+'</ul>';
   }
 
   function paintStanding(){
-    var st=WD.stats(),hour=new Date().getHours(),greet=hour<12?'Good morning':hour<18?'Good afternoon':'Good evening',photo=safePhotoUrl(WD.userPhoto()),art=photo?'<div class="wdd-intro-art is-photo" aria-hidden="true"><div class="wdd-intro-palette palette-'+fallbackVariant+'"></div><img src="'+esc(photo)+'" alt=""></div>':'<div class="wdd-intro-art is-fallback" aria-hidden="true"><div class="wdd-intro-palette palette-'+fallbackVariant+'"></div></div>';
-    H.el('wdd-standing').innerHTML=
+    var st=WD.stats(),state=heroState(st),hour=new Date().getHours(),greet=hour<12?'Good morning':hour<18?'Good afternoon':'Good evening',photo=safePhotoUrl(WD.userPhoto());
+    var art='<div class="wdd-h27-avatar'+(photo?' is-photo':'')+'" aria-hidden="true"><span>'+esc(initials())+'</span>'+(photo?'<img src="'+esc(photo)+'" alt="" decoding="async">':'')+'</div>';
+    var host=H.el('wdd-standing');
+    // Keep the score panel node across repaints so its arc animates from the
+    // previous value instead of flashing empty and redrawing from zero.
+    var keep=host.querySelector('.wdd-h27-score');if(keep)keep.remove();
+    host.innerHTML=
       '<div class="wdd-appbar">'+
         '<form class="wdd-command" id="wdd-command" role="search"><i class="fas fa-magnifying-glass" aria-hidden="true"></i>'+
           '<input id="wdd-command-input" data-watchdog-address-search type="search" autocomplete="off" placeholder="Search any New Jersey property address..." aria-label="Search New Jersey property addresses">'+
           '<button class="wdd-command-voice" type="button" data-act="voice-search" aria-label="Search by voice" title="Search by voice"><i class="fas fa-microphone" aria-hidden="true"></i></button>'+
           '<kbd>⌘ K</kbd></form>'+
       '</div>'+
-      '<div class="wdd-page-intro">'+art+'<div class="wdd-page-intro-copy"><h1>'+greet+', '+esc(WD.userName())+'</h1><p>'+esc(readLine(st))+'</p></div>'+
-        '<div class="wdd-page-context"><b>'+esc(dateLabel())+'</b><span>Stay informed. Act on verified changes.</span></div></div>';
-    var photoNode=d.querySelector('.wdd-intro-art img');
-    if(photoNode)photoNode.addEventListener('error',function(){photoNode.hidden=true;photoNode.parentElement.classList.remove('is-photo');photoNode.parentElement.classList.add('is-fallback');},{once:true});
+      '<div class="wdd-h27" id="wdd-hero" data-state="'+state+'">'+
+        '<div class="wdd-h27-main">'+
+          '<div class="wdd-h27-who">'+art+'<div class="wdd-h27-who-text">'+
+            '<div class="wdd-h27-eyebrow"><b>'+esc(dateLabel())+'</b><span>'+(st.count?st.count.toLocaleString()+' '+(st.count===1?'property':'properties')+' watched':'No properties yet')+'</span></div>'+
+            '<h1>'+greet+', '+esc(WD.userName())+'</h1></div></div>'+
+          '<p class="wdd-h27-insight">'+heroInsight(st,state)+'</p>'+
+          '<div class="wdd-h27-actions">'+heroActions(st,state)+'</div>'+
+          heroSince(st)+
+        '</div>'+
+        '<div class="wdd-h27-slot" id="wdd-hero-score"></div>'+
+      '</div>';
+    if(keep)H.el('wdd-hero-score').appendChild(keep);
+    var photoNode=host.querySelector('.wdd-h27-avatar img');
+    if(photoNode)photoNode.addEventListener('error',function(){photoNode.remove();var box=host.querySelector('.wdd-h27-avatar');if(box)box.classList.remove('is-photo');},{once:true});
     if(typeof w.WatchdogNJAddressAutocompleteRefresh==='function')w.setTimeout(w.WatchdogNJAddressAutocompleteRefresh,0);
   }
 
@@ -294,7 +348,7 @@ function start(){
     if(!ev.target.closest('.wdd-row-actions'))closePropertyMenus();
     var row=ev.target.closest('tr[data-pin]');if(row&&row.getAttribute('data-pin')){location.href='/property/home?pin='+encodeURIComponent(row.getAttribute('data-pin'));return;}
     var act=ev.target.closest('[data-act]');if(!act)return;var a=act.getAttribute('data-act');
-    if(a==='export')exportCsv();else if(a==='county')cycleCounty();else if(a==='mobile-more')openMoreMenu();else if(a==='voice-search')startVoiceSearch(act);
+    if(a==='export')exportCsv();else if(a==='county')cycleCounty();else if(a==='mobile-more')openMoreMenu();else if(a==='voice-search')startVoiceSearch(act);else if(a==='focus-search'){var fi=H.el('wdd-command-input');if(fi){fi.focus();fi.scrollIntoView({behavior:'smooth',block:'center'});}}
   }
   function onSubmit(ev){
     if(ev.target&&ev.target.id==='wdd-command'){ev.preventDefault();var input=H.el('wdd-command-input'),q=String(input&&input.value||'').trim();location.href='/property/'+(q?'?address='+encodeURIComponent(q):'');}

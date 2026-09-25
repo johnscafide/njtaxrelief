@@ -64,6 +64,17 @@
     return { pct: (assessed / value - 1) * 100, over: over, dollars: rate != null && rate > 0 ? (over * rate) / 100 : null };
   }
   function categoryFor(p) { var g = gapFor(p), s = S.scores[p.pams_pin]; if (g && g.pct >= 15) return 'bad'; if (g && g.pct >= 5) return 'warn'; if (s && s.score != null && s.score < 45) return 'bad'; if (s && s.score != null && s.score < 65) return 'warn'; return 'ok'; }
+  // One score verdict for the whole dashboard. The KPI card, the hero score
+  // panel and anything else that labels a Watchdog Score should call this so
+  // the same number never reads two different ways.
+  function verdict(score) {
+    if (score == null || !Number.isFinite(Number(score))) return { label: 'Not scored yet', tone: '' };
+    score = Number(score);
+    if (score >= 80) return { label: 'Strong position', tone: 'ok' };
+    if (score >= 65) return { label: 'Reasonable', tone: 'ok' };
+    if (score >= 50) return { label: 'Typical for New Jersey', tone: 'warn' };
+    return { label: 'Worth a review', tone: 'bad' };
+  }
   function filtered() { if (S.county === 'ALL') return S.properties.slice(); return S.properties.filter(function (p) { return String(p.county || '').toUpperCase() === S.county; }); }
   function stats() {
     var props = filtered(), pins = new Set(props.map(function (p) { return p.pams_pin; }).filter(Boolean)), changes = S.changes.filter(function (r) { return pins.has(r.pams_pin); }), cut30 = Date.now() - 30 * 86400000;
@@ -155,7 +166,7 @@
 
   var listeners = [];
   var WD = {
-    H: H, S: S, RANK: RANK, db: db, stats: stats, filtered: filtered, gapFor: gapFor, categoryFor: categoryFor,
+    H: H, S: S, RANK: RANK, db: db, stats: stats, filtered: filtered, gapFor: gapFor, categoryFor: categoryFor, verdict: verdict,
     isPro: function () { return RANK[S.plan] >= RANK.pro; },
     counties: function () { return H.unique(S.properties.map(function (p) { return String(p.county || '').trim().toUpperCase(); })).sort(); },
     userName: function () { var m = (S.user && S.user.user_metadata) || {}, p = S.profile || {}, n = p.display_name || p.full_name || m.full_name || m.name || (S.user && S.user.email) || 'there'; return String(n).split(/\s+/)[0]; },

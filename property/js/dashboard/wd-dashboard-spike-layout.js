@@ -135,11 +135,13 @@
   }
 
   /* ------------------------------------------------------------------
-     2. SCORE GAUGE
-     270 degree arc, opening at the bottom, starting at 135 degrees.
+     2. SCORE PANEL (hero, right side)
+     270 degree arc, opening at the bottom, starting at 135 degrees. The
+     panel node is created once and then updated in place, so the arc and
+     the number animate from the last value on every repaint.
      ------------------------------------------------------------------ */
 
-  var CX = 100, CY = 105, R = 74, START = 135, SWEEP = 270;
+  var CX = 70, CY = 70, R = 56, START = 135, SWEEP = 270;
 
   function onArc(fraction) {
     var rad = (START + clamp(fraction, 0, 1) * SWEEP) * Math.PI / 180;
@@ -163,104 +165,105 @@
   }
 
   function verdict(score) {
-    if (score == null) return { label: 'Not scored yet', tone: '' };
-    if (score >= 80) return { label: 'Strong', tone: 'wdd-ok' };
-    if (score >= 60) return { label: 'Typical for New Jersey', tone: 'wdd-ok' };
-    if (score >= 40) return { label: 'Worth a look', tone: 'wdd-warn' };
-    return { label: 'Needs review', tone: 'wdd-bad' };
+    var WD = w.WD;
+    if (WD && typeof WD.verdict === 'function') return WD.verdict(score);
+    return score == null ? { label: 'Not scored yet', tone: '' } : { label: 'Scored', tone: '' };
+  }
+
+  var popoverOK = typeof HTMLElement !== 'undefined' && Object.prototype.hasOwnProperty.call(HTMLElement.prototype, 'popover');
+
+  function scorePanel() {
+    var node = d.createElement('section');
+    node.className = 'wdd-h27-score';
+    node.setAttribute('aria-labelledby', 'wdd-h27-score-title');
+    node.innerHTML =
+      '<div class="wdd-h27-score-head"><h2 id="wdd-h27-score-title">Watchdog Score</h2>' +
+        (popoverOK ? '<button class="wdd-h27-info" type="button" popovertarget="wdd-h27-score-pop" aria-label="How to read the Watchdog Score">' +
+          '<i class="fas fa-question" aria-hidden="true"></i></button>' : '') +
+      '</div>' +
+      '<div class="wdd-h27-ring" role="img">' +
+        '<svg viewBox="0 0 140 140" aria-hidden="true" focusable="false">' +
+          '<defs><linearGradient id="wddH27Arc" x1="0" y1="1" x2="1" y2="0">' +
+            '<stop offset="0" class="wdd-h27-stop-a"></stop><stop offset="1" class="wdd-h27-stop-b"></stop>' +
+          '</linearGradient></defs>' +
+          '<circle class="wdd-h27-track" cx="70" cy="70" r="56" pathLength="100" stroke-dasharray="75 100" transform="rotate(135 70 70)"></circle>' +
+          '<circle class="wdd-h27-arc" cx="70" cy="70" r="56" pathLength="100" stroke-dasharray="0 100" transform="rotate(135 70 70)"></circle>' +
+          '<circle class="wdd-h27-mark" cx="70" cy="14" r="5.5"></circle>' +
+          '<text class="wdd-h27-end" x="30" y="129" text-anchor="middle">0</text>' +
+          '<text class="wdd-h27-end" x="110" y="129" text-anchor="middle">100</text>' +
+        '</svg>' +
+        '<div class="wdd-h27-num" aria-hidden="true"><b class="is-empty"></b><small>out of 100</small></div>' +
+      '</div>' +
+      '<div class="wdd-h27-facts">' +
+        '<span class="wdd-h27-verdict"></span>' +
+        '<div class="wdd-h27-peer"><div class="wdd-h27-peer-row"><span>Town median</span><b></b></div><p class="wdd-h27-delta"></p></div>' +
+      '</div>' +
+      (popoverOK ? '<div class="wdd-h27-pop" id="wdd-h27-score-pop" popover>' +
+        '<h3>How to read this</h3>' +
+        '<p>The Watchdog Score, powered by the ROBUST Framework, is a 0 to 100 view of a property\'s current tax position. Higher is better.</p>' +
+        '<p>The big number is the average across the properties you watch. The gold ring marks the median score for the towns those properties are in.</p>' +
+      '</div>' : '');
+    return node;
   }
 
   function buildGauge() {
     var WD = w.WD;
-    var intro = q('.wdd-page-intro');
-    if (!WD || !intro) return;
-
-    intro.classList.add('wdd-hero');
+    var slot = q('#wdd-hero-score');
+    if (!WD || !slot) return;
 
     var st = WD.stats();
     var score = st.score == null ? null : Math.round(st.score);
-    if (score == null) return;
-
-    var props = WD.filtered();
-    var peer = peerMedian(props);
+    var peer = score == null ? null : peerMedian(WD.filtered());
     var v = verdict(score);
 
-    var old = q('.wdd-heroscore', intro);
-    if (old) old.remove();
+    var panel = q('.wdd-h27-score', slot);
+    var fresh = !panel;
+    if (fresh) { panel = scorePanel(); slot.appendChild(panel); }
 
-    // the context block carries the date; keep that as an eyebrow rather than
-    // hiding the information along with the layout it came in
-    var ctx = q('.wdd-page-context', intro);
-    if (ctx && !q('.wdd-hero-eyebrow', intro)) {
-      var dateText = (q('b', ctx) || {}).textContent || '';
-      var head = q('h1', intro);
-      if (dateText && head) {
-        var eyebrow = d.createElement('span');
-        eyebrow.className = 'wdd-hero-eyebrow';
-        eyebrow.textContent = dateText;
-        head.insertAdjacentElement('beforebegin', eyebrow);
-      }
+    panel.setAttribute('data-tone', v.tone || 'none');
+    q('.wdd-h27-verdict', panel).textContent = v.label;
+    q('.wdd-h27-ring', panel).setAttribute('aria-label', score == null ? 'No Watchdog Score yet'
+      : 'Watchdog Score ' + score + ' out of 100' + (peer != null ? ', town median ' + Math.round(peer) : ''));
+
+    var num = q('.wdd-h27-num b', panel);
+    var arc = q('.wdd-h27-arc', panel);
+    var mark = q('.wdd-h27-mark', panel);
+    function paintValue() {
+      num.classList.toggle('is-empty', score == null);
+      num.style.setProperty('--wdd-n', score == null ? 0 : score);
+      // set as inline style (not only the attribute) so CSS transitions run
+      arc.style.strokeDasharray = ((score || 0) * SWEEP / 360).toFixed(2) + ' 100';
     }
-    if (ctx) ctx.hidden = true;
-
-    var marker = '';
     if (peer != null) {
       var pt = onArc(peer / 100);
-      marker = '<circle cx="' + pt.x.toFixed(1) + '" cy="' + pt.y.toFixed(1) + '" r="4.5" ' +
-        'fill="var(--sp-surface)" stroke="var(--sp-gold)" stroke-width="3"></circle>';
+      mark.setAttribute('cx', pt.x.toFixed(2));
+      mark.setAttribute('cy', pt.y.toFixed(2));
     }
+    mark.style.display = peer != null ? '' : 'none';
+    // first paint: start from zero so the arc sweeps in once
+    if (fresh) requestAnimationFrame(function () { requestAnimationFrame(paintValue); });
+    else paintValue();
 
-    var node = d.createElement('div');
-    node.className = 'wdd-heroscore';
-    node.innerHTML =
-      '<div class="wdd-gauge">' +
-        '<svg viewBox="0 0 200 186" role="img" aria-label="Watchdog Score ' + score + ' out of 100' +
-          (peer != null ? ', town median ' + Math.round(peer) : '') + '">' +
-          '<defs><linearGradient id="wddGaugeGrad" x1="0" y1="1" x2="1" y2="0">' +
-            '<stop offset="0%" stop-color="var(--sp-deep)"></stop>' +
-            '<stop offset="55%" stop-color="var(--sp-primary)"></stop>' +
-            '<stop offset="100%" stop-color="var(--sp-ok)"></stop>' +
-          '</linearGradient></defs>' +
-          '<path d="M 47.7 157.3 A 74 74 0 1 1 152.3 157.3" fill="none" ' +
-            'stroke="var(--sp-line)" stroke-width="15" stroke-linecap="round"></path>' +
-          '<path d="M 47.7 157.3 A 74 74 0 1 1 152.3 157.3" pathLength="100" ' +
-            'stroke-dasharray="' + score + ' 100" fill="none" ' +
-            'stroke="url(#wddGaugeGrad)" stroke-width="15" stroke-linecap="round"></path>' +
-          marker +
-          '<text class="wdd-gauge-end" x="34" y="177" text-anchor="middle">0</text>' +
-          '<text class="wdd-gauge-end" x="166" y="177" text-anchor="middle">100</text>' +
-        '</svg>' +
-        '<div class="wdd-gauge-val"><b>' + score + '</b><span>OUT OF 100</span></div>' +
-      '</div>' +
-      '<span class="wdd-gauge-verdict ' + v.tone + '"><i></i>' + esc(v.label) + '</span>' +
-      (peer != null
-        ? '<p class="wdd-gauge-note"><span>Town median</span><b>' + Math.round(peer) + '</b><em>' +
-          Math.abs(score - Math.round(peer)) + (score >= peer ? ' points above' : ' points below') + '</em></p>'
-        : '<p class="wdd-gauge-note is-unavailable"><span>Town median</span><b>—</b><em>Building peer coverage</em></p>');
-
-    intro.appendChild(node);
-
-    // Keep the greeting copy, the member's photo, and the score in separate
-    // visual zones. The older absolute photo treatment sat behind the gauge
-    // and made the right side of the hero feel washed out.
-    var heroLayout = q('.wdd-hero-layout', intro);
-    if (!heroLayout) {
-      heroLayout = d.createElement('div');
-      heroLayout.className = 'wdd-hero-layout';
-      intro.appendChild(heroLayout);
+    var peerBox = q('.wdd-h27-peer', panel), delta = q('.wdd-h27-delta', panel);
+    if (score == null) {
+      peerBox.hidden = false;
+      q('.wdd-h27-peer-row', panel).hidden = true;
+      delta.removeAttribute('data-dir');
+      delta.textContent = 'Your score appears once a saved property is scored.';
+    } else if (peer != null) {
+      var diff = score - Math.round(peer);
+      peerBox.hidden = false;
+      q('.wdd-h27-peer-row', panel).hidden = false;
+      q('.wdd-h27-peer-row b', panel).textContent = Math.round(peer);
+      delta.setAttribute('data-dir', diff > 0 ? 'up' : diff < 0 ? 'down' : 'even');
+      delta.innerHTML = diff === 0 ? 'Right at the median for your towns.'
+        : '<strong>' + Math.abs(diff) + (Math.abs(diff) === 1 ? ' point ' : ' points ') + (diff > 0 ? 'above' : 'below') + '</strong> the median for your towns.';
+    } else {
+      peerBox.hidden = false;
+      q('.wdd-h27-peer-row', panel).hidden = true;
+      delta.removeAttribute('data-dir');
+      delta.textContent = 'Town comparison appears once peer coverage is built.';
     }
-    var identity = q('.wdd-hero-identity', heroLayout);
-    if (!identity) {
-      identity = d.createElement('div');
-      identity.className = 'wdd-hero-identity';
-      heroLayout.appendChild(identity);
-    }
-    [q('.wdd-page-intro-copy', intro), q('.wdd-intro-art', intro)].forEach(function (part) {
-      if (part) identity.appendChild(part);
-    });
-    [identity, node].forEach(function (part) {
-      if (part) heroLayout.appendChild(part);
-    });
   }
 
   /* ------------------------------------------------------------------
