@@ -590,3 +590,102 @@ body[data-sidebar-page="account"] .ac-retention-note{font-size:9px!important;mar
   .ac-theme-popover>footer.ac-theme-actions>span{grid-column:1/-1;grid-row:1}
   body[data-sidebar-page="account"] .ac-danger-actions{grid-template-columns:1fr!important}
 }
+
+
+/* NJW-420 · narrower account controls + all presets visible */
+body[data-sidebar-page="account"] .ac-self-service .ac-self-grid,
+body[data-sidebar-page="account"] .ac-self-service .ac-danger-zone,
+body[data-sidebar-page="account"] .ac-self-service .ac-self-note{
+  width:min(1120px,100%)!important;
+  margin-left:0!important;
+  margin-right:auto!important;
+}
+body[data-sidebar-page="account"] .ac-self-service .ac-self-grid{
+  grid-template-columns:repeat(2,minmax(0,1fr))!important;
+}
+body[data-sidebar-page="account"] .ac-self-service .ac-self-action{
+  min-height:48px!important;
+}
+body[data-sidebar-page="account"] .ac-danger-actions{
+  grid-template-columns:repeat(2,minmax(0,1fr))!important;
+}
+
+.ac-theme-popover{
+  width:min(720px,calc(100vw - 36px))!important;
+  max-height:min(760px,calc(100vh - 34px))!important;
+  padding:18px 20px 14px!important;
+}
+.ac-theme-popover>header{margin-bottom:10px!important;padding-bottom:10px!important}
+.ac-theme-popover>header h3{font-size:22px!important}
+.ac-theme-live{margin-bottom:10px!important}
+.ac-theme-live-head{margin-bottom:6px!important}
+.ac-theme-live-banner{min-height:88px!important;padding:11px 13px!important}
+.ac-theme-live-avatar{width:40px!important;height:40px!important}
+.ac-theme-live-copy>span{font-size:8px!important}
+.ac-theme-live-copy strong{font-size:16px!important}
+.ac-theme-live-copy small{font-size:8px!important}
+.ac-theme-live-badge{padding:5px 7px!important;font-size:8px!important}
+
+.ac-theme-groups{display:grid;gap:11px}
+.ac-theme-popover .ac-theme-section{
+  display:block!important;
+  margin:0!important;
+  padding:0!important;
+}
+.ac-theme-section-title{
+  display:flex;align-items:center;justify-content:space-between;gap:10px;
+  margin:0 0 6px;padding:0 1px;color:#43586f
+}
+.ac-theme-section-title b{
+  font:850 10px/1 var(--font-ui,"Plus Jakarta Sans"),sans-serif;
+  letter-spacing:.02em
+}
+.ac-theme-section-title span{
+  display:grid;place-items:center;min-width:20px;height:17px;padding:0 5px;
+  border-radius:999px;background:#eef3f5;color:#6b7b8d;font-size:8px;font-weight:900
+}
+.ac-theme-popover .ac-theme-section[data-theme-kind="color"] .ac-theme-grid{
+  grid-template-columns:repeat(5,minmax(0,1fr))!important;gap:7px!important
+}
+.ac-theme-popover .ac-theme-section[data-theme-kind="image"] .ac-theme-grid{
+  grid-template-columns:repeat(5,minmax(0,1fr))!important;gap:7px!important
+}
+.ac-theme-popover .ac-theme-choice{gap:3px!important;padding:0!important}
+.ac-theme-popover .ac-theme-choice .ac-theme-preview{
+  aspect-ratio:1.9/1!important;
+  border-radius:6px!important;
+}
+.ac-theme-popover .ac-theme-choice.image .ac-theme-preview{
+  aspect-ratio:1.45/1!important;
+}
+.ac-theme-popover .ac-theme-choice .ac-theme-name{
+  font-size:7px!important;
+  line-height:1.05!important;
+}
+.ac-theme-popover .ac-theme-choice>i{
+  right:4px!important;top:4px!important;width:18px!important;height:18px!important;font-size:8px!important
+}
+.ac-theme-popover>footer.ac-theme-actions{
+  position:sticky!important;
+  bottom:-14px!important;
+  z-index:4!important;
+  margin-top:11px!important;
+  padding:10px 0 2px!important;
+  background:#fff!important;
+  box-shadow:0 -8px 14px rgba(255,255,255,.96)!important;
+}
+.ac-theme-popover>footer.ac-theme-actions button{min-height:32px!important}
+.ac-theme-popover>footer.ac-theme-actions>span{font-size:8px!important}
+
+@media(max-width:1180px){
+  body[data-sidebar-page="account"] .ac-self-service .ac-self-grid,
+  body[data-sidebar-page="account"] .ac-self-service .ac-danger-zone,
+  body[data-sidebar-page="account"] .ac-self-service .ac-self-note{width:100%!important}
+}
+@media(max-width:760px){
+  body[data-sidebar-page="account"] .ac-self-service .ac-self-grid{grid-template-columns:1fr!important}
+  .ac-theme-popover{width:100%!important;max-height:92vh!important;padding:15px!important}
+  .ac-theme-popover .ac-theme-section[data-theme-kind="color"] .ac-theme-grid,
+  .ac-theme-popover .ac-theme-section[data-theme-kind="image"] .ac-theme-grid{grid-template-columns:repeat(3,minmax(0,1fr))!important}
+  .ac-theme-live-banner{min-height:82px!important}
+}
