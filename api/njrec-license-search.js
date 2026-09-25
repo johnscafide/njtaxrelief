@@ -24,7 +24,7 @@ module.exports=async function handler(req,res){
   if(req.method!=='GET'){res.setHeader('Allow','GET');return res.status(405).json({error:'Method not allowed'})}
   try{await requireUser(req)}catch(e){return res.status(e.status||401).json({error:e.message||'Authentication required.'})}
   const name=clean(req.query&&req.query.name,120),ref=clean(req.query&&req.query.license,30).replace(/[^0-9]/g,'');
-  if(!name&&!ref)return res.status(400).json({error:'Enter a name or NJ license reference number.'});
+  if(!name&&!ref)return res.status(400).json({error:'Enter a last name (recommended) or NJ license reference number.'});
   const url=new URL('https://www-dobi.nj.gov/DOBI_LicSearch/recLicenseeSearchServlet');
   url.searchParams.set('BookMark','recSearch.jsp');url.searchParams.set('Division','R');url.searchParams.set('LicenseStatus','');url.searchParams.set('LicenseType','');
   url.searchParams.set('LicenseeName',name);url.searchParams.set('LicenseeRefNum',ref);
