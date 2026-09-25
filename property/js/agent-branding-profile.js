@@ -40,6 +40,7 @@ function mount(){
  var app=document.getElementById('ac-app');if(!app||app.hidden||!row)return;
  var after=document.getElementById('ac-profile-editor')||app.lastElementChild,b=row.pro_agent&&typeof row.pro_agent==='object'?row.pro_agent:{},preset=presetByName(b.brokerage_name);
  var primary=color(b.brokerage_primary_color,preset&&preset.primary||'#10294B'),secondary=color(b.brokerage_secondary_color,preset&&preset.secondary||'#0B8B85'),accent=color(b.brokerage_accent_color,preset&&preset.accent||'#1F2937'),website=b.brokerage_website||preset&&preset.url||'',defaultLicenseSearch=lastName(row.display_name||row.full_name||'');
+ if(preset&&preset.name==='Opus Elite Real Estate'&&/opuselite(?:re|nj|realestate)\.com/i.test(website))website=preset.url;
  var section=document.createElement('section');section.id='ac-agent-branding';section.className='ac-section acp-editor acb-editor';
  section.innerHTML=
  '<header class="acp-header acb-header"><div><h2>Agent branding</h2><p>Set the brokerage identity Watchdog uses on reports and agent-facing experiences.</p></div><div class="acp-source"><i class="fa-regular fa-circle-check"></i><span>User-confirmed</span></div></header>'+
