@@ -712,8 +712,7 @@ body[data-sidebar-page="account"] .ac-pro-badge.realtor i{color:#0b8b85}
 body[data-sidebar-page="account"] .ac-hero-broker{
   --broker-primary:#0b8b85;--broker-secondary:#83e2dc;
   display:inline-flex;align-items:center;gap:8px;max-width:min(430px,100%);margin-top:9px;padding:6px 9px 6px 7px;
-  border:1px solid rgba(255,255,255,.16);border-left:3px solid var(--broker-secondary);
-  border-radius:9px;background:rgba(5,27,47,.24);backdrop-filter:blur(9px)
+  border:1px solid rgba(255,255,255,.16);border-radius:9px;background:rgba(5,27,47,.24);backdrop-filter:blur(9px)
 }
 body[data-sidebar-page="account"] .ac-hero-broker-logo{
   width:27px;height:27px;flex:0 0 27px;display:grid;place-items:center;overflow:hidden;padding:2px;
