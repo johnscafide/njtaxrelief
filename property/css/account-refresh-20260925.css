@@ -200,7 +200,7 @@ body.ac-lifetime-mode #membership-options .ac-price-card[data-plan="teams"]{opac
   body[data-sidebar-page="account"] .ac-hero-stats span{font-size:9px!important}
   body[data-sidebar-page="account"] .ac-completion{grid-column:1/-1!important;width:100%!important;max-width:none!important;margin-top:0!important}
   body[data-sidebar-page="account"] .ac-completion>b{font-size:34px!important}
-  .ac-hero-style-control{position:static;grid-column:1/-1;order:5;margin-top:-2px}
+  .ac-hero-style-control{position:relative;right:auto;top:auto;grid-column:1/-1;order:5;margin-top:-2px}
   .ac-hero-style-toggle{min-height:36px}
   .ac-hero-style-panel{left:0;right:auto;top:44px;width:min(360px,calc(100vw - 52px))}
   .ac-theme-grid{grid-template-columns:repeat(5,minmax(42px,1fr))}
