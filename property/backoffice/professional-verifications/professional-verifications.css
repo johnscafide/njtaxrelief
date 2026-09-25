@@ -17,3 +17,5 @@
 @media(max-width:1050px){.pv-stats{grid-template-columns:repeat(2,minmax(0,1fr))}.pv-facts{grid-template-columns:repeat(2,minmax(0,1fr))}.pv-review-controls{grid-template-columns:1fr 1fr}.pv-actions{grid-column:1/-1;justify-content:flex-start}}
 @media(max-width:850px){.pv-shell{grid-template-columns:1fr}.pv-sidebar{position:relative;height:auto;padding:15px}.pv-brand{padding-bottom:12px}.pv-nav{grid-template-columns:repeat(2,minmax(0,1fr))}.pv-side-foot{display:none}.pv-main{padding:22px 15px 42px}.pv-topbar{align-items:flex-start}.pv-connection{grid-template-columns:1fr}.pv-actions{justify-content:flex-start}}
 @media(max-width:600px){.pv-topbar{display:block}.pv-topbar button{width:100%;margin-top:12px}.pv-stats{grid-template-columns:1fr 1fr}.pv-facts{grid-template-columns:1fr}.pv-review-controls{grid-template-columns:1fr}.pv-nav{grid-template-columns:1fr}.pv-history{grid-template-columns:1fr}}
+.pv-history-side{display:flex;align-items:center;justify-content:flex-end;gap:8px}.pv-history-side>span{white-space:nowrap}
+@media(max-width:600px){.pv-history-side{justify-content:flex-start;flex-wrap:wrap}}
