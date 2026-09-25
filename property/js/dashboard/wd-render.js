@@ -54,7 +54,7 @@ function start(){
       '<div class="wdd-page-intro">'+art+'<div class="wdd-page-intro-copy"><h1>'+greet+', '+esc(WD.userName())+'</h1><p>'+esc(readLine(st))+'</p></div>'+
         '<div class="wdd-page-context"><b>'+esc(dateLabel())+'</b><span>Stay informed. Act on verified changes.</span></div></div>';
     var photoNode=d.querySelector('.wdd-intro-art img');
-    if(photoNode)photoNode.addEventListener('error',function(){photoNode.hidden=true;photoNode.parentElement.classList.add('is-fallback');},{once:true});
+    if(photoNode)photoNode.addEventListener('error',function(){photoNode.hidden=true;photoNode.parentElement.classList.remove('is-photo');photoNode.parentElement.classList.add('is-fallback');},{once:true});
     if(typeof w.WatchdogNJAddressAutocompleteRefresh==='function')w.setTimeout(w.WatchdogNJAddressAutocompleteRefresh,0);
   }
 
@@ -72,10 +72,10 @@ function start(){
       return '<article class="wdd-signal '+(i.c||'')+'"><div class="wdd-signal-top"><div class="wdd-signal-k">'+esc(i.k)+'</div><span class="wdd-signal-icon"><i class="fas '+i.icon+'" aria-hidden="true"></i></span></div>'+
         '<div class="wdd-signal-v'+(i.t?' wdd-'+i.t:'')+'">'+(i.raw?i.v:esc(i.v))+'</div><div class="wdd-signal-n">'+esc(i.n)+'</div></article>';
     }).join('');
-    cards+='<a class="wdd-signal wdd-sponsor-signal" href="https://johnvarano.com/?utm_source=watchdog&utm_medium=internal_ad&utm_campaign=greentree_financing&utm_content=dashboard_kpi" target="_blank" rel="noopener sponsored" aria-label="Advertisement: Greentree Mortgage, John Varano">'+
+    cards+='<a class="wdd-signal wdd-sponsor-signal" href="https://johnvarano.com/?utm_source=watchdog&utm_medium=internal_ad&utm_campaign=greentree_financing&utm_content=dashboard_kpi" target="_blank" rel="noopener sponsored" aria-label="Advertisement: Greentree Mortgage. Explore purchase, refinance, and home equity options with John Varano, NMLS 142739.">'+
       '<div class="wdd-sponsor-top"><span class="wdd-ad-label">Advertisement</span><img src="/johnvarano.jpg" alt="" loading="lazy"></div>'+
-      '<strong>Greentree Mortgage</strong><span>Know the payment before you make the move.</span><em>John Varano · NMLS #142739 <i class="fas fa-arrow-right" aria-hidden="true"></i></em>'+
-      '<small>Separate company · Shop for any lender</small></a>';
+      '<strong>Greentree Mortgage</strong><span>Know the full monthly number before you start making offers. Get a quick estimate for purchase, refinance, or home equity options.</span><em>John Varano · NMLS #142739</em>'+
+      '<span class="wdd-sponsor-cta">Start a quick estimate <i class="fas fa-arrow-right" aria-hidden="true"></i></span></a>';
     H.el('wdd-signals').innerHTML=cards;
   }
 

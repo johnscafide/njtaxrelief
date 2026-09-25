@@ -239,6 +239,28 @@
         : '<p class="wdd-gauge-note is-unavailable"><span>Town median</span><b>—</b><em>Building peer coverage</em></p>');
 
     intro.appendChild(node);
+
+    // Keep the greeting copy, the member's photo, and the score in separate
+    // visual zones. The older absolute photo treatment sat behind the gauge
+    // and made the right side of the hero feel washed out.
+    var heroLayout = q('.wdd-hero-layout', intro);
+    if (!heroLayout) {
+      heroLayout = d.createElement('div');
+      heroLayout.className = 'wdd-hero-layout';
+      intro.appendChild(heroLayout);
+    }
+    var identity = q('.wdd-hero-identity', heroLayout);
+    if (!identity) {
+      identity = d.createElement('div');
+      identity.className = 'wdd-hero-identity';
+      heroLayout.appendChild(identity);
+    }
+    [q('.wdd-page-intro-copy', intro), q('.wdd-intro-art', intro)].forEach(function (part) {
+      if (part) identity.appendChild(part);
+    });
+    [identity, node].forEach(function (part) {
+      if (part) heroLayout.appendChild(part);
+    });
   }
 
   /* ------------------------------------------------------------------
