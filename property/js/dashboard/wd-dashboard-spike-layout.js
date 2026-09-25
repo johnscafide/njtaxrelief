@@ -249,7 +249,7 @@
 
   function buildGapChart() {
     var WD = w.WD;
-    var rail = q('.wdd-rail');
+    var rail = q('.wdd-rail-scroll') || q('.wdd-rail-sticky') || q('.wdd-rail');
     if (!WD || !rail) return;
 
     var rows = WD.filtered().map(function (p) {

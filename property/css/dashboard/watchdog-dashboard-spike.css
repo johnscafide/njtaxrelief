@@ -107,7 +107,7 @@ body[data-sidebar-page="dashboard"]{
    2. SHELL
    -------------------------------------------------------------------------- */
 
-html,body{overflow-x:hidden}
+html,body{overflow-x:clip}
 body[data-sidebar-page="dashboard"] .wdd-app{min-height:100vh;background:var(--sp-ground)}
 body[data-sidebar-page="dashboard"] .wdd-shell{display:block}
 body[data-sidebar-page="dashboard"] .wdd-workspace{

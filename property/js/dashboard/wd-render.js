@@ -2,7 +2,7 @@
 (function(w,d){
 'use strict';
 function start(){
-  var WD=w.WD;if(!WD)return;var H=WD.H,S=WD.S,esc=H.esc,map=null,railMap=null,voiceRecognition=null;
+  var WD=w.WD;if(!WD)return;var H=WD.H,S=WD.S,esc=H.esc,map=null,railMap=null,voiceRecognition=null,analysisTab='assessed',fallbackVariant=Math.floor(Math.random()*4)+1;
 
   function verdict(score){
     if(score==null)return{label:'Not scored yet',tone:''};
@@ -20,6 +20,7 @@ function start(){
     catch(_e){return '';}
   }
   function safeCssUrl(url){return String(url||'').replace(/[\\"')]/g,'');}
+  function safePhotoUrl(url){try{var parsed=new URL(String(url||''),location.origin);return parsed.protocol==='https:'?parsed.href:'';}catch(_e){return'';}}
   function tileUrl(p,z){
     var lat=H.valid(p&&p.lat),lon=H.valid(p&&p.lon);if(lat==null||lon==null)return'';
     z=z||15;var n=Math.pow(2,z),x=Math.floor((lon+180)/360*n),rad=lat*Math.PI/180;
@@ -42,7 +43,7 @@ function start(){
   }
 
   function paintStanding(){
-    var st=WD.stats(),hour=new Date().getHours(),greet=hour<12?'Good morning':hour<18?'Good afternoon':'Good evening';
+    var st=WD.stats(),hour=new Date().getHours(),greet=hour<12?'Good morning':hour<18?'Good afternoon':'Good evening',photo=safePhotoUrl(WD.userPhoto()),art=photo?'<div class="wdd-intro-art is-photo" aria-hidden="true"><div class="wdd-intro-palette palette-'+fallbackVariant+'"></div><img src="'+esc(photo)+'" alt=""></div>':'<div class="wdd-intro-art is-fallback" aria-hidden="true"><div class="wdd-intro-palette palette-'+fallbackVariant+'"></div></div>';
     H.el('wdd-standing').innerHTML=
       '<div class="wdd-appbar">'+
         '<form class="wdd-command" id="wdd-command" role="search"><i class="fas fa-magnifying-glass" aria-hidden="true"></i>'+
@@ -50,8 +51,10 @@ function start(){
           '<button class="wdd-command-voice" type="button" data-act="voice-search" aria-label="Search by voice" title="Search by voice"><i class="fas fa-microphone" aria-hidden="true"></i></button>'+
           '<kbd>⌘ K</kbd></form>'+
       '</div>'+
-      '<div class="wdd-page-intro"><div><h1>'+greet+', '+esc(WD.userName())+'</h1><p>'+esc(readLine(st))+'</p></div>'+
+      '<div class="wdd-page-intro">'+art+'<div class="wdd-page-intro-copy"><h1>'+greet+', '+esc(WD.userName())+'</h1><p>'+esc(readLine(st))+'</p></div>'+
         '<div class="wdd-page-context"><b>'+esc(dateLabel())+'</b><span>Stay informed. Act on verified changes.</span></div></div>';
+    var photoNode=d.querySelector('.wdd-intro-art img');
+    if(photoNode)photoNode.addEventListener('error',function(){photoNode.hidden=true;photoNode.parentElement.classList.add('is-fallback');},{once:true});
     if(typeof w.WatchdogNJAddressAutocompleteRefresh==='function')w.setTimeout(w.WatchdogNJAddressAutocompleteRefresh,0);
   }
 
@@ -168,6 +171,13 @@ function start(){
     var pct=(st.assessed/st.value-1)*100,dir=pct>0?'above':'below';
     return 'Your portfolio is <b>'+Math.abs(pct).toFixed(0)+'% '+dir+' market</b> on aggregate'+(st.atStake?', representing '+H.dollars(st.atStake)+' a year across flagged gaps.':'.');
   }
+  function taxDistribution(){
+    var bands=[{label:'Under $5k',min:0,max:5000,count:0},{label:'$5k–$10k',min:5000,max:10000,count:0},{label:'$10k–$20k',min:10000,max:20000,count:0},{label:'$20k+',min:20000,max:Infinity,count:0}],taxes=WD.filtered().map(function(p){return H.valid(p.last_year_tax);}).filter(function(v){return v!=null&&v>0;}),total=H.sum(taxes),max=1;
+    taxes.forEach(function(value){for(var i=0;i<bands.length;i++){if(value>=bands[i].min&&value<bands[i].max){bands[i].count++;break;}}});
+    bands.forEach(function(b){max=Math.max(max,b.count);});
+    if(!taxes.length)return'<div class="wdd-analysis-empty">Tax distribution will appear when annual tax data is available for your saved properties.</div>';
+    return'<div class="wdd-tax-distribution" role="img" aria-label="Annual tax distribution across '+taxes.length+' properties">'+bands.map(function(b){var height=Math.max(5,Math.round((b.count/max)*100));return'<div class="wdd-tax-band"><div class="wdd-tax-bar-wrap"><i class="wdd-tax-bar" style="height:'+height+'%"></i></div><b>'+b.count+'</b><span>'+b.label+'</span></div>';}).join('')+'</div><div class="wdd-analysis-copy">Annual taxes total <b>'+esc(H.dollars(total))+'</b> across '+taxes.length+' properties with tax data.</div>';
+  }
   function drawRailMap(){
     if(!w.L)return;var node=H.el('wdd-rail-map');if(!node)return;if(railMap){railMap.remove();railMap=null;}
     railMap=w.L.map(node,{scrollWheelZoom:false,dragging:false,zoomControl:false,attributionControl:false,doubleClickZoom:false,boxZoom:false,keyboard:false,touchZoom:false}).setView([40.06,-74.5],8);
@@ -188,9 +198,10 @@ function start(){
     }).join(''):'<div class="wdd-empty" style="padding:24px 14px"><p>Nothing has changed on your properties in the last 120 days.</p></div>';
     // content-architecture: dynamic — rail modules combine live saved-property counts, map state, events, and calculated portfolio distribution.
     H.el('wdd-rail').innerHTML=
+      '<div class="wdd-rail-sticky"><div class="wdd-rail-scroll">'+
       '<section class="wdd-panel wdd-portfolio-map-card"><div class="wdd-panel-head"><div><h2>Your Portfolio</h2></div><a class="wdd-panel-link" href="#" data-tab-link="map">View map →</a></div><div class="wdd-map-wrap"><div id="wdd-rail-map"></div><span class="wdd-map-stat"><i class="fas fa-location-dot"></i>'+st.count+' properties</span></div></section>'+
       '<section class="wdd-panel" id="wdd-activity"><div class="wdd-panel-head"><div><h2>Recent Changes</h2><p>'+(st.changes30?st.changes30+' in the last 30 days':'Last 120 days')+'</p></div><a class="wdd-panel-link" href="/property/pulse">View all →</a></div>'+feed+'</section>'+
-      '<section class="wdd-panel wdd-analysis-card"><div class="wdd-panel-head"><div><h2>Portfolio Analysis</h2></div></div><div class="wdd-analysis-tabs"><button class="wdd-analysis-tab is-active" type="button">Assessed vs Market</button><button class="wdd-analysis-tab" type="button" disabled>Tax Distribution</button></div><div class="wdd-histogram" role="img" aria-label="Assessment gap distribution">'+railHistogram()+'</div><div class="wdd-analysis-copy">'+analysisCopy()+'</div></section>';
+      '<section class="wdd-panel wdd-analysis-card"><div class="wdd-panel-head"><div><h2>Portfolio Analysis</h2></div></div><div class="wdd-analysis-tabs" role="tablist" aria-label="Portfolio analysis views"><button class="wdd-analysis-tab" id="wdd-analysis-tab-assessed" role="tab" aria-controls="wdd-analysis-assessed" aria-selected="'+(analysisTab==='assessed')+'" data-analysis-tab="assessed" type="button">Assessed vs Market</button><button class="wdd-analysis-tab" id="wdd-analysis-tab-tax" role="tab" aria-controls="wdd-analysis-tax" aria-selected="'+(analysisTab==='tax')+'" data-analysis-tab="tax" type="button">Tax Distribution</button></div><div class="wdd-analysis-panel" id="wdd-analysis-assessed" role="tabpanel" aria-labelledby="wdd-analysis-tab-assessed"'+(analysisTab==='assessed'?'':' hidden')+'><div class="wdd-histogram" role="img" aria-label="Assessment gap distribution">'+railHistogram()+'</div><div class="wdd-analysis-copy">'+analysisCopy()+'</div></div><div class="wdd-analysis-panel" id="wdd-analysis-tax" role="tabpanel" aria-labelledby="wdd-analysis-tab-tax"'+(analysisTab==='tax'?'':' hidden')+'>'+taxDistribution()+'</div></section></div></div>';
     drawRailMap();
   }
 
@@ -259,6 +270,7 @@ function start(){
   }
   function onClick(ev){
     if(!ev.target||!ev.target.closest)return;
+    var analysisButton=ev.target.closest('[data-analysis-tab]');if(analysisButton){analysisTab=analysisButton.getAttribute('data-analysis-tab')==='tax'?'tax':'assessed';var tabs=d.querySelectorAll('[data-analysis-tab]');Array.prototype.forEach.call(tabs,function(button){button.setAttribute('aria-selected',button===analysisButton?'true':'false');});var panels=d.querySelectorAll('.wdd-analysis-panel');Array.prototype.forEach.call(panels,function(panel){panel.hidden=panel.id!==(analysisTab==='tax'?'wdd-analysis-tax':'wdd-analysis-assessed');});return;}
     var mapLink=ev.target.closest('[data-tab-link="map"]');if(mapLink){ev.preventDefault();S.tab='map';paintPositions();var p=H.el('wdd-positions');if(p)p.scrollIntoView({behavior:'smooth',block:'start'});return;}
     var sortBtn=ev.target.closest('[data-sort]');if(sortBtn){var k=sortBtn.getAttribute('data-sort');if(S.sort.key===k)S.sort.dir=S.sort.dir==='asc'?'desc':'asc';else{S.sort.key=k;S.sort.dir=k==='address'?'asc':'desc';}paintPositions();return;}
     var tab=ev.target.closest('[data-tab]');if(tab){S.tab=tab.getAttribute('data-tab');paintPositions();return;}
