@@ -1,0 +1,45 @@
+/* NJW-423 · professional agent branding */
+body[data-account-profile-mode="professional"] .ac-profile-route-shell{max-width:1240px}
+body[data-account-profile-mode="professional"] .acb-editor{padding:24px!important}
+.acb-header{align-items:center!important}
+.acb-header>div>h2{margin:0;color:#10294b;font-size:26px;letter-spacing:-.03em}
+.acb-header>div>p{margin:6px 0 0;color:#758398;font-size:13px}
+.acb-grid{display:grid;grid-template-columns:minmax(0,1.05fr) minmax(0,.95fr);gap:14px;margin-top:18px}
+.acb-panel{overflow:hidden;border:1px solid #dfe6ec;border-radius:12px;background:#f8fafb}
+.acb-brand-preview{position:relative;display:grid;grid-template-columns:auto minmax(0,1fr) auto;gap:14px;align-items:center;min-height:124px;padding:20px;background:linear-gradient(125deg,var(--broker-primary),color-mix(in srgb,var(--broker-primary) 78%,var(--broker-accent)));color:#fff}
+.acb-brand-preview::after{content:"";position:absolute;inset:auto 0 0;height:5px;background:linear-gradient(90deg,var(--broker-secondary),var(--broker-secondary) 42%,var(--broker-accent) 42%)}
+.acb-brand-mark{width:72px;height:72px;display:grid;place-items:center;padding:9px;border-radius:12px;background:rgba(255,255,255,.94);box-shadow:0 9px 28px rgba(5,24,40,.18)}
+.acb-brand-mark img{max-width:100%;max-height:100%;object-fit:contain}.acb-brand-mark span{color:var(--broker-primary);font-size:30px;font-weight:900}
+.acb-brand-preview small{display:block;color:rgba(255,255,255,.72);font-size:9px;font-weight:900;letter-spacing:.13em}
+.acb-brand-preview h3{margin:5px 0 3px;color:#fff;font-size:23px;line-height:1.1;letter-spacing:-.03em}
+.acb-brand-preview p{margin:0;color:rgba(255,255,255,.76);font-size:10px}
+.acb-swatches{display:flex;gap:5px;align-self:flex-start}.acb-swatches i{width:17px;height:17px;border:2px solid rgba(255,255,255,.7);border-radius:50%;box-shadow:0 2px 5px rgba(0,0,0,.18)}
+.acb-discovery{padding:16px 16px 10px;border-bottom:1px solid #e4e9ee;background:#fff}
+.acb-discovery>label>span,.acb-fields label>span{display:block;margin-bottom:6px;color:#53647a;font-size:10px;font-weight:850}
+.acb-discovery select,.acb-discovery input,.acb-fields input,.acb-fields textarea{width:100%;border:1px solid #d9e1e8;border-radius:7px;background:#fff;color:#10294b;font:700 12px/1.2 var(--font-ui,"Plus Jakarta Sans"),sans-serif}
+.acb-discovery select,.acb-discovery input,.acb-fields input{height:40px;padding:0 10px}
+.acb-discovery select{margin-bottom:10px}
+.acb-website>div{display:grid;grid-template-columns:minmax(0,1fr) auto;gap:7px}
+.acb-website button,.acb-inline button,.acb-license-search button{min-height:40px;border:1px solid #0c8d87;border-radius:7px;background:#0c8d87;color:#fff;padding:0 12px;font:800 10px/1 var(--font-ui,"Plus Jakarta Sans"),sans-serif;cursor:pointer}
+.acb-discovery>small{display:block;margin-top:8px;color:#7e8c9d;font-size:9px;line-height:1.4}
+.acb-fields{display:grid;grid-template-columns:1fr 1fr;gap:12px;padding:16px}
+.acb-inline{display:grid;grid-template-columns:minmax(0,1fr) auto;gap:7px}
+.acb-inline button{background:#fff;color:#0b817c}
+.acb-license-search{margin:0 16px 16px;padding:10px;border:1px solid #dbe3e9;border-radius:7px;background:#fff}
+.acb-license-search>div:first-child{display:grid;grid-template-columns:minmax(0,1fr) auto;gap:7px}.acb-license-search input{height:38px;border:1px solid #d9e1e8;border-radius:6px;padding:0 9px}
+#acb-license-results{display:grid;gap:5px;margin-top:8px}
+#acb-license-results>button{display:grid;gap:2px;text-align:left;padding:8px 9px;border:1px solid #e1e7ec;border-radius:6px;background:#fbfcfd;color:#17324c;cursor:pointer}
+#acb-license-results>button:hover{border-color:#8fc8c1;background:#f6fbfa}
+#acb-license-results b{font-size:10px}#acb-license-results span,#acb-license-results small{font-size:8px;color:#738196}
+#acb-license-results p{margin:6px 0;color:#6f7d8d;font-size:9px}.success{color:#0a7d6f!important}
+.acb-panel-title{padding:16px 16px 0}.acb-panel-title>div{display:flex;align-items:center;gap:9px}.acb-panel-title i{width:30px;height:30px;display:grid;place-items:center;border-radius:7px;background:#e8f7f4;color:#0b8b85}.acb-panel-title b,.acb-panel-title small{display:block}.acb-panel-title b{font-size:13px;color:#17314e}.acb-panel-title small{margin-top:2px;font-size:9px;color:#7c8b9d}
+.acb-media-preview{display:grid;grid-template-columns:1fr 1fr;gap:9px;padding:14px 16px 0}
+.acb-media-preview>div>span{display:block;margin-bottom:5px;color:#738196;font-size:8px;font-weight:900;letter-spacing:.1em}
+.acb-media-preview figure{height:92px;margin:0;display:grid;place-items:center;overflow:hidden;border:1px solid #e0e6eb;border-radius:8px;background:#fff;color:#a1acb8;font-size:20px}
+.acb-media-preview img{width:100%;height:100%;object-fit:contain;padding:8px}.acb-media-preview>div:first-child img{object-fit:cover;padding:0}
+.acb-imagery .acb-fields{padding-top:14px}
+.acb-wide{grid-column:1/-1}.acb-fields textarea{min-height:92px;padding:10px;resize:vertical;line-height:1.4}.acb-fields label small{display:block;margin-top:5px;color:#7f8d9d;font-size:9px;line-height:1.4}
+.acb-colors{grid-column:1/-1;display:grid;grid-template-columns:repeat(3,1fr);gap:8px}.acb-colors label{display:grid;grid-template-columns:1fr auto;align-items:center;padding:7px 8px;border:1px solid #e0e6eb;border-radius:7px;background:#fff}.acb-colors label>span{margin:0}.acb-colors input[type=color]{width:28px;height:28px;padding:0;border:0;background:transparent}
+.acb-save{display:flex;align-items:center;gap:12px;margin-top:14px}.acb-save button{min-height:42px;border:0;border-radius:7px;background:#0b8b85;color:#fff;padding:0 16px;font-weight:850}.acb-save span{color:#68798c;font-size:10px}
+@media(max-width:900px){.acb-grid{grid-template-columns:1fr}.acb-brand-preview{min-height:110px}.acb-fields{grid-template-columns:1fr}.acb-wide,.acb-colors{grid-column:auto}}
+@media(max-width:560px){.acb-editor{padding:16px!important}.acb-brand-preview{grid-template-columns:auto minmax(0,1fr);padding:16px}.acb-swatches{grid-column:1/-1}.acb-brand-mark{width:58px;height:58px}.acb-brand-preview h3{font-size:19px}.acb-website>div,.acb-inline,.acb-license-search>div:first-child{grid-template-columns:1fr}.acb-media-preview{grid-template-columns:1fr}.acb-colors{grid-template-columns:1fr}}
