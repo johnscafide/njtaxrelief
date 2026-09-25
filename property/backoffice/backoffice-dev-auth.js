@@ -3,6 +3,7 @@
 const SESSION_API='/api/watchdog-backoffice-gateway?target=login';
 const BACKOFFICE_API='/api/watchdog-backoffice-gateway?target=api';
 const REVIEWS_API='/api/watchdog-backoffice-reviews';
+const PROFESSIONAL_API='/api/watchdog-backoffice-professional';
 const LEGACY_BACKOFFICE_API='https://uvkvaxljhhngydvlrzom.supabase.co/functions/v1/backoffice-api';
 const SESSION_KEY='watchdog-backoffice-session';
 const $=(s,r=document)=>r.querySelector(s);
@@ -71,6 +72,47 @@ function ensureReviewNav(){
   return link.querySelector('[data-review-badge]');
 }
 
+function ensureProfessionalNav(){
+  const nav=$('.bo-nav');
+  if(!nav)return null;
+  let link=nav.querySelector('[data-backoffice-professional-link]');
+  if(!link){
+    link=document.createElement('a');
+    link.href='/backoffice/professional-verifications';
+    link.setAttribute('data-backoffice-professional-link','1');
+    link.innerHTML='<span>06</span>Professional Reviews <em class="bo-review-badge" data-professional-badge hidden>0</em>';
+    const realestate=Array.from(nav.querySelectorAll('a')).find(a=>String(a.getAttribute('href')||'').indexOf('/backoffice/realestate')===0);
+    if(realestate){
+      const number=realestate.querySelector('span');
+      if(number)number.textContent='07';
+      nav.insertBefore(link,realestate);
+    }else nav.appendChild(link);
+  }
+  return link.querySelector('[data-professional-badge]');
+}
+
+async function refreshProfessionalBadge(){
+  const badge=ensureProfessionalNav();
+  if(!badge)return;
+  const accessToken=await developerToken();
+  if(!accessToken){badge.hidden=true;return;}
+  try{
+    const res=await fetch(PROFESSIONAL_API,{
+      method:'POST',
+      cache:'no-store',
+      headers:{'Content-Type':'application/json','Authorization':'Bearer '+accessToken},
+      body:JSON.stringify({action:'count'})
+    });
+    const data=await res.json().catch(()=>({}));
+    if(!res.ok)throw new Error(data.error||'Professional review count unavailable');
+    const count=Math.max(0,Number(data.pending_count)||0);
+    badge.textContent=count.toLocaleString();
+    badge.hidden=count<1;
+  }catch{
+    badge.hidden=true;
+  }
+}
+
 async function refreshReviewBadge(){
   const badge=ensureReviewNav();
   if(!badge)return;
@@ -95,7 +137,7 @@ async function refreshReviewBadge(){
 
 function scheduleReviewBadge(){
   clearInterval(reviewTimer);
-  reviewTimer=setInterval(refreshReviewBadge,60000);
+  reviewTimer=setInterval(function(){refreshReviewBadge();refreshProfessionalBadge();},60000);
 }
 
 async function sessionStillWorks(sessionToken){
@@ -148,9 +190,11 @@ async function install(){
   if(rotate)rotate.hidden=true;
   paint('Opening Backoffice…');
   ensureReviewNav();
+  ensureProfessionalNav();
   refreshReviewBadge();
+  refreshProfessionalBadge();
   scheduleReviewBadge();
-  document.addEventListener('visibilitychange',()=>{if(!document.hidden)refreshReviewBadge()});
+  document.addEventListener('visibilitychange',()=>{if(!document.hidden){refreshReviewBadge();refreshProfessionalBadge();}});
 
   const existing=sessionStorage.getItem(SESSION_KEY)||'';
   if(await sessionStillWorks(existing)){

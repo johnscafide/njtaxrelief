@@ -66,3 +66,31 @@ The existing `backoffice-lead-ingest` function remains fail-closed until its int
 ## Provider policy
 
 TruePeopleSearch scraping is intentionally not implemented. If identity enrichment is added, use an authorized provider with a stable API. Enriched contact data is supporting intelligence and is not treated as proof of marketing consent.
+
+
+## Professional Reviews
+
+Developer-only professional identity operations are available at `/backoffice/professional-verifications`.
+
+The Professional Reviews inbox is the authoritative queue for:
+
+- pending REALTOR® membership submissions;
+- requests for additional verification information;
+- verified / rejected / expired REALTOR® decisions;
+- Bright MLS, other RESO MLS, and Realtor.com connection requests.
+
+REALTOR® approval is separate from New Jersey license verification and from Watchdog plan entitlements. A normal user can submit membership details and read their own result, but cannot grant themselves a REALTOR® badge. Verification decisions use the service-role-only review function and create an audit event.
+
+New REALTOR® submissions also create a server-owned notification-outbox record. The authenticated `professional-review-notify` Edge Function can send a convenience email through the existing EmailJS account. Email is not required for the queue to work; failed or unconfigured email delivery remains visible in the Professional Reviews inbox.
+
+See `property/docs/professional-review-notifications.md` for EmailJS template setup.
+
+## Professional provider connections
+
+The professional-profile connection cards are intentionally request-first:
+
+- **Bright MLS** — preferred first MLS integration for Watchdog's New Jersey agent workflow.
+- **Other RESO MLS** — foundation for authorized RESO Web API/member integrations.
+- **Realtor.com** — agents may link a public profile, but Watchdog does not scrape ratings or reviews.
+
+A request does not mean an integration is connected. Only server-owned provider onboarding may move a connection to `connected`. Backoffice can mark a request ready for provider setup or close it; it cannot fabricate a connected state. Live profile/review synchronization remains disabled until the applicable provider grants Watchdog authorized API/partner access.

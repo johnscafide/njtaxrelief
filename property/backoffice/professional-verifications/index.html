@@ -1,0 +1,63 @@
+<!doctype html>
+<html lang="en" data-access-require="developer">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <meta name="robots" content="noindex,nofollow,noarchive">
+  <meta name="referrer" content="same-origin">
+  <title>Professional Reviews | Watchdog Backoffice</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@600;700;800&family=Source+Sans+3:wght@400;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="/property/backoffice/professional-verifications/professional-verifications.css?v=20260925a">
+</head>
+<body>
+  <div class="pv-shell">
+    <aside class="pv-sidebar">
+      <a class="pv-brand" href="/backoffice"><span class="pv-mark">W</span><span><b>WATCHDOG</b><small>Backoffice</small></span></a>
+      <nav class="pv-nav">
+        <a href="/backoffice"><span>01</span>Lead Intelligence</a>
+        <a href="/backoffice/reviews"><span>02</span>Application Reviews</a>
+        <a class="active" href="/backoffice/professional-verifications"><span>03</span>Professional Reviews <em id="pv-nav-badge" hidden>0</em></a>
+        <a href="/backoffice/realestate"><span>04</span>Real Estate OS</a>
+      </nav>
+      <div class="pv-side-foot"><span></span><div><b>Developer only</b><small>Professional verification decisions are audited.</small></div></div>
+    </aside>
+
+    <main class="pv-main">
+      <header class="pv-topbar">
+        <div><span>PROFESSIONAL IDENTITY</span><h1>Professional Reviews</h1><p>Review REALTOR® membership submissions and provider-connection requests without changing plan entitlements.</p></div>
+        <button id="pv-refresh" type="button">Refresh</button>
+      </header>
+
+      <section class="pv-stats">
+        <article><span>REALTOR® reviews</span><strong id="pv-stat-realtor">—</strong><small>waiting for a decision</small></article>
+        <article><span>Needs information</span><strong id="pv-stat-info">—</strong><small>returned to registrants</small></article>
+        <article><span>Verified 30 days</span><strong id="pv-stat-verified">—</strong><small>recent approvals</small></article>
+        <article><span>Connection requests</span><strong id="pv-stat-connections">—</strong><small>MLS / Realtor.com</small></article>
+      </section>
+
+      <section class="pv-panel">
+        <header><div><span>NEEDS YOUR REVIEW</span><h2>REALTOR® verification queue</h2></div><b id="pv-realtor-count">0</b></header>
+        <div id="pv-realtor-list" class="pv-list"><div class="pv-loading">Loading professional reviews…</div></div>
+      </section>
+
+      <section class="pv-panel">
+        <header><div><span>PROVIDER ACCESS</span><h2>Professional connection requests</h2></div><b id="pv-connection-count">0</b></header>
+        <div class="pv-provider-note">A request is not a live integration. Marking a request “Ready for setup” only records that provider authorization/onboarding can proceed. Watchdog does not scrape Realtor.com reviews.</div>
+        <div id="pv-connection-list" class="pv-list"><div class="pv-loading">Loading connection requests…</div></div>
+      </section>
+
+      <section class="pv-panel">
+        <header><div><span>RECENT DECISIONS</span><h2>REALTOR® verification history</h2></div></header>
+        <div id="pv-history-list" class="pv-list"><div class="pv-loading">Loading recent decisions…</div></div>
+      </section>
+    </main>
+  </div>
+
+  <div id="pv-toast" class="pv-toast" role="status" aria-live="polite"></div>
+  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2/dist/umd/supabase.js"></script>
+  <script src="/property/js/access-guard.js"></script>
+  <script src="/property/backoffice/professional-verifications/professional-verifications.js?v=20260925a" defer></script>
+</body>
+</html>

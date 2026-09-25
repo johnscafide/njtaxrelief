@@ -567,6 +567,14 @@
   ],
   "rewrites": [
     {
+      "source": "/backoffice/professional-verifications/",
+      "destination": "/property/backoffice/professional-verifications/index.html"
+    },
+    {
+      "source": "/backoffice/professional-verifications",
+      "destination": "/property/backoffice/professional-verifications/index.html"
+    },
+    {
       "source": "/account/profile/",
       "destination": "/property/account/profile/index.html"
     },
