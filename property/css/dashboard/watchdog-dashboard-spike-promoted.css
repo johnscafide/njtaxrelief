@@ -558,6 +558,146 @@ body[data-sidebar-page="dashboard"] .wdd-tax-bar-wrap{display:flex;align-items:f
 body[data-sidebar-page="dashboard"] .wdd-tax-bar{display:block;width:100%;min-height:3px;border-radius:5px 5px 0 0;background:linear-gradient(180deg,#6890eb,var(--sp-primary))}
 body[data-sidebar-page="dashboard"] .wdd-analysis-empty{padding:22px 18px;color:var(--sp-muted);font-size:12px;line-height:1.5}
 
+/* A composed greeting: readable copy, a real photo panel, and a dedicated
+   score zone. The photo no longer fades across the gauge or text. */
+body[data-sidebar-page="dashboard"] .wdd-page-intro.wdd-hero{
+  display:block;
+  min-height:0;
+  padding:18px 22px;
+  background:linear-gradient(115deg,#fff 0%,#f8faff 72%,#eef4fb 100%);
+}
+body[data-sidebar-page="dashboard"] .wdd-hero-layout{
+  display:grid;
+  grid-template-columns:minmax(0,1fr) 196px;
+  align-items:center;
+  gap:28px;
+  min-height:184px;
+}
+body[data-sidebar-page="dashboard"] .wdd-hero-identity{
+  display:grid;
+  grid-template-columns:minmax(0,480px) 204px;
+  align-items:center;
+  gap:20px;
+  width:min(100%,704px);
+  max-width:704px;
+  min-width:0;
+}
+body[data-sidebar-page="dashboard"] .wdd-hero-identity>.wdd-page-intro-copy{
+  max-width:480px;
+  min-width:0;
+  z-index:auto;
+}
+body[data-sidebar-page="dashboard"] .wdd-hero-identity>.wdd-intro-art{
+  position:relative;
+  inset:auto;
+  width:100%;
+  max-width:none;
+  height:156px;
+  transform:none;
+  opacity:1;
+  isolation:isolate;
+  border:1px solid rgba(255,255,255,.9);
+  border-radius:18px;
+  background:#e9eff7;
+  box-shadow:0 12px 28px rgba(24,48,83,.14),0 2px 5px rgba(24,48,83,.08);
+  mask-image:none;
+  -webkit-mask-image:none;
+}
+body[data-sidebar-page="dashboard"] .wdd-hero-layout>.wdd-intro-art::after{
+  position:absolute;
+  z-index:1;
+  inset:0;
+  border-radius:inherit;
+  content:"";
+  pointer-events:none;
+  background:linear-gradient(145deg,rgba(14,34,72,.04),transparent 50%,rgba(14,34,72,.16));
+}
+body[data-sidebar-page="dashboard"] .wdd-hero-layout .wdd-intro-palette,
+body[data-sidebar-page="dashboard"] .wdd-hero-layout .wdd-intro-art img{
+  position:absolute;
+  inset:0;
+  width:100%;
+  height:100%;
+  border-radius:inherit;
+}
+body[data-sidebar-page="dashboard"] .wdd-hero-layout .wdd-intro-art img{
+  z-index:0;
+  object-fit:cover;
+  object-position:center 38%;
+  opacity:1;
+  mix-blend-mode:normal;
+  filter:saturate(1.04) contrast(1.02);
+}
+body[data-sidebar-page="dashboard"] .wdd-hero-layout .wdd-intro-art.is-photo .wdd-intro-palette{display:none}
+body[data-sidebar-page="dashboard"] .wdd-hero-layout .wdd-intro-art.is-fallback .wdd-intro-palette{
+  opacity:1;
+  background:radial-gradient(ellipse at 75% 22%,rgba(247,178,91,.95),transparent 34%),radial-gradient(ellipse at 24% 78%,rgba(52,173,162,.95),transparent 42%),radial-gradient(ellipse at 92% 84%,rgba(210,91,131,.86),transparent 38%),linear-gradient(135deg,#395f9c,#7c63b2);
+}
+body[data-sidebar-page="dashboard"] .wdd-hero-layout>.wdd-heroscore{
+  grid-column:2;
+  grid-row:1;
+  width:196px;
+  justify-self:end;
+  align-self:center;
+}
+body[data-sidebar-page="dashboard"] .wdd-hero-layout .wdd-gauge{width:162px}
+body[data-sidebar-page="dashboard"] .wdd-hero-layout .wdd-gauge-val b{font-size:42px}
+body[data-sidebar-page="dashboard"] .wdd-hero-layout .wdd-gauge-verdict{margin-top:1px}
+
+/* Distinguish the sponsor action from the identity line and keep it legible
+   as a real next step inside the full-card link. */
+body[data-sidebar-page="dashboard"] .wdd-sponsor-signal>span:not(.wdd-sponsor-top){
+  margin-top:7px;
+  font-size:12px;
+  line-height:1.4;
+}
+body[data-sidebar-page="dashboard"] .wdd-sponsor-signal em{margin-top:8px}
+body[data-sidebar-page="dashboard"] .wdd-sponsor-signal .wdd-sponsor-cta{
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  gap:8px;
+  margin-top:10px;
+  padding-top:9px;
+  border-top:1px solid rgba(16,41,75,.1);
+  color:var(--sp-primary);
+  font-size:12px;
+  font-weight:800;
+}
+body[data-sidebar-page="dashboard"] .wdd-sponsor-signal .wdd-sponsor-cta i{transition:transform .18s ease}
+body[data-sidebar-page="dashboard"] .wdd-sponsor-signal:hover .wdd-sponsor-cta i{transform:translateX(3px)}
+body[data-sidebar-page="dashboard"] .wdd-sponsor-signal:focus-visible{outline:3px solid #2f6df6;outline-offset:3px}
+
+/* Separate the ledger from its summary row so the sections remain distinct. */
+body[data-sidebar-page="dashboard"] #wdd-adaptive{margin-top:18px}
+
+@media (max-width:1180px){
+  body[data-sidebar-page="dashboard"] .wdd-hero-layout{grid-template-columns:minmax(0,1fr) 176px;gap:18px;min-height:170px}
+  body[data-sidebar-page="dashboard"] .wdd-hero-identity{grid-template-columns:minmax(0,1fr) 168px;gap:14px;width:100%;max-width:760px}
+  body[data-sidebar-page="dashboard"] .wdd-hero-identity>.wdd-intro-art{height:138px}
+  body[data-sidebar-page="dashboard"] .wdd-hero-layout>.wdd-heroscore{width:176px}
+  body[data-sidebar-page="dashboard"] .wdd-hero-layout .wdd-gauge{width:148px}
+}
+@media (max-width:760px){
+  body[data-sidebar-page="dashboard"] .wdd-page-intro.wdd-hero{padding:16px}
+  body[data-sidebar-page="dashboard"] .wdd-hero-layout{grid-template-columns:minmax(0,1fr);gap:12px;min-height:0}
+  body[data-sidebar-page="dashboard"] .wdd-hero-identity{grid-template-columns:minmax(0,1fr) 92px;gap:12px;max-width:none}
+  body[data-sidebar-page="dashboard"] .wdd-hero-identity>.wdd-page-intro-copy{max-width:none;align-self:center}
+  body[data-sidebar-page="dashboard"] .wdd-hero-layout .wdd-hero-eyebrow{margin-bottom:6px;font-size:10px}
+  body[data-sidebar-page="dashboard"] .wdd-hero-layout .wdd-page-intro-copy h1{font-size:clamp(20px,5.5vw,25px);line-height:1.16}
+  body[data-sidebar-page="dashboard"] .wdd-hero-layout .wdd-page-intro-copy p{font-size:12px;line-height:1.4}
+  body[data-sidebar-page="dashboard"] .wdd-hero-identity>.wdd-intro-art{width:92px;height:92px;border-radius:16px}
+  body[data-sidebar-page="dashboard"] .wdd-hero-layout>.wdd-heroscore{grid-column:1/-1;grid-row:2;display:grid;grid-template-columns:116px minmax(0,1fr);justify-items:start;align-items:center;gap:10px;width:100%;padding-top:10px;border-top:1px solid rgba(16,41,75,.09)}
+  body[data-sidebar-page="dashboard"] .wdd-hero-layout .wdd-gauge{grid-column:1;grid-row:1/3;width:116px}
+  body[data-sidebar-page="dashboard"] .wdd-hero-layout .wdd-gauge-val b{font-size:34px}
+  body[data-sidebar-page="dashboard"] .wdd-hero-layout .wdd-gauge-val span{font-size:9px}
+  body[data-sidebar-page="dashboard"] .wdd-hero-layout .wdd-gauge-verdict{grid-column:2;grid-row:1;justify-self:start;margin:0;font-size:11px}
+  body[data-sidebar-page="dashboard"] .wdd-hero-layout .wdd-gauge-note{grid-column:2;grid-row:2;display:grid;grid-template-columns:1fr auto;gap:0 8px;width:100%;margin:4px 0 0;padding:0;border:0;text-align:left}
+  body[data-sidebar-page="dashboard"] .wdd-hero-layout .wdd-gauge-note span{grid-column:1;font-size:10px}
+  body[data-sidebar-page="dashboard"] .wdd-hero-layout .wdd-gauge-note b{grid-column:2;grid-row:1/3;font-size:22px}
+  body[data-sidebar-page="dashboard"] .wdd-hero-layout .wdd-gauge-note em{grid-column:1;font-size:10px}
+}
+
 @media (max-width:1024px){
   body[data-sidebar-page="dashboard"] .wdd-work>.wdd-rail{position:static;top:auto;max-height:none;overflow:visible}
   body[data-sidebar-page="dashboard"] .wdd-work>.wdd-main-column>*{box-sizing:border-box;width:100%;max-width:100%;min-width:0}
