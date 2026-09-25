@@ -11,7 +11,7 @@ async function requireUser(req){
   return r.json();
 }
 const KNOWN=[
- {name:'Opus Elite Real Estate',website:'https://opusagent.com/',hosts:['opusagent.com'],primary:'#00778B',secondary:'#E35205',accent:'#222222'},
+ {name:'Opus Elite Real Estate',website:'https://opusagent.com/',hosts:['opusagent.com','opuselitere.com','opuselitenj.com','opuseliterealestate.com'],primary:'#00778B',secondary:'#E35205',accent:'#222222'},
  {name:'Keller Williams',website:'https://kw.com/',hosts:['kw.com'],primary:'#B40101',secondary:'#F4F4F4',accent:'#333333'},
  {name:'RE/MAX',website:'https://www.remax.com/usa/en',hosts:['remax.com'],primary:'#003DA5',secondary:'#DC1C2E',accent:'#172B4D'},
  {name:'Coldwell Banker',website:'https://www.coldwellbanker.com/',hosts:['coldwellbanker.com'],primary:'#012169',secondary:'#FFFFFF',accent:'#0C2340'},
