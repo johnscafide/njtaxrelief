@@ -7,6 +7,7 @@
   var entitlement = {};
   var billingCadence = 'yearly';
   var counts = { properties: 0, cases: 0 };
+  var professional = { agent:{}, license:null, realtor:null };
   var $ = function (id) { return document.getElementById(id); };
 
   var plans = {
@@ -70,6 +71,45 @@
       (url ? '<img src="' + esc(url) + '" alt="Profile photo">' : esc(initial)) +
       '</div><button class="ac-avatar-edit" id="ac-avatar-edit" type="button" aria-label="Change profile photo"><i class="fas fa-camera"></i></button></div>';
   }
+  function safeHex(value, fallback) {
+    return /^#[0-9a-f]{6}$/i.test(String(value || '')) ? String(value).toUpperCase() : fallback;
+  }
+  function realtorIsCurrent() {
+    var r = professional.realtor;
+    if (!r || !r.verified_realtor || r.verification_status !== 'verified') return false;
+    if (!r.verification_due_at) return true;
+    var due = new Date(r.verification_due_at);
+    return Number.isFinite(due.getTime()) && due.getTime() > Date.now();
+  }
+  function professionalBadgeMarkup() {
+    if (realtorIsCurrent()) {
+      return '<span class="ac-pro-badge realtor" title="Verified REALTOR® membership"><i class="fas fa-certificate"></i> REALTOR®</span>';
+    }
+    if (professional.license && professional.license.verified_professional) {
+      return '<span class="ac-pro-badge agent" title="Verified New Jersey real-estate license"><i class="fas fa-circle-check"></i> Licensed Agent</span>';
+    }
+    return '';
+  }
+  function brokerLogo(agent) {
+    agent = agent || {};
+    var name = String(agent.brokerage_name || '');
+    var website = String(agent.brokerage_website || '');
+    if (/opus elite/i.test(name) || /opusagent\.com/i.test(website)) {
+      return 'https://www.watchdogindex.com/property/assets/brokerages/opus-elite-logo.png';
+    }
+    return String(agent.brokerage_logo_url || '');
+  }
+  function brokerageMarkup() {
+    var agent = professional.agent || {};
+    var name = String(agent.brokerage_name || '').trim();
+    if (!name) return '';
+    var logo = brokerLogo(agent);
+    var primary = safeHex(agent.brokerage_primary_color, '#0B8B85');
+    var secondary = safeHex(agent.brokerage_secondary_color, '#83E2DC');
+    return '<div class="ac-hero-broker" style="--broker-primary:' + esc(primary) + ';--broker-secondary:' + esc(secondary) + '">' +
+      (logo ? '<span class="ac-hero-broker-logo"><img src="' + esc(logo) + '" alt=""></span>' : '<span class="ac-hero-broker-logo fallback"><i class="fas fa-building"></i></span>') +
+      '<span><small>BROKERAGE</small><b>' + esc(name) + '</b></span></div>';
+  }
   function select(id, label, options, value) {
     return '<label>' + esc(label) + '<select id="' + id + '">' + options.map(function (option) {
       return '<option value="' + esc(option[0]) + '"' + (option[0] === value ? ' selected' : '') + '>' + esc(option[1]) + '</option>';
@@ -131,7 +171,7 @@
     $('ac-app').innerHTML =
       (success ? '<div class="ac-success"><i class="fas fa-circle-check"></i><div><b>Checkout complete.</b><span>Your plan will update shortly.</span></div></div>' : '') +
       (pending ? '<div class="ac-success pending"><i class="fas fa-clock"></i><div><b>Plan change requested.</b><span>Your account will update shortly.</span></div></div>' : '') +
-      '<section class="ac-profile-hero">' + avatarMarkup(data) + '<div class="ac-hero-copy"><span>PROFILE &amp; SETTINGS</span><h1>' + esc(data.preferred_name || user.user_metadata.full_name || 'Your Watchdog profile') + '</h1><p>' + esc(user.email || '') + ' · ' + planLabel(plan) + ' member</p><div class="ac-hero-stats"><div><i class="fas fa-house"></i><b>' + counts.properties + '</b><span>Saved</span></div><div><i class="fas fa-folder-tree"></i><b>' + counts.cases + '</b><span>Cases</span></div><div><i class="fas fa-calendar"></i><b>' + date(user.created_at) + '</b><span>Member since</span></div></div></div>' +
+      '<section class="ac-profile-hero">' + avatarMarkup(data) + '<div class="ac-hero-copy"><span>PROFILE &amp; SETTINGS</span><div class="ac-hero-name-row"><h1>' + esc(data.preferred_name || user.user_metadata.full_name || 'Your Watchdog profile') + '</h1>' + professionalBadgeMarkup() + '</div><p>' + esc(user.email || '') + ' · ' + planLabel(plan) + ' member</p>' + brokerageMarkup() + '<div class="ac-hero-stats"><div><i class="fas fa-house"></i><b>' + counts.properties + '</b><span>Saved</span></div><div><i class="fas fa-folder-tree"></i><b>' + counts.cases + '</b><span>Cases</span></div><div><i class="fas fa-calendar"></i><b>' + date(user.created_at) + '</b><span>Member since</span></div></div></div>' +
       '<div class="ac-completion"><b>' + percent + '%</b><span>Profile complete</span><i><em style="width:' + percent + '%"></em></i></div></section>' +
       '<section class="ac-section"><header><div><span>PERSONALIZATION</span><h2>Make Watchdog more relevant</h2><p>Set your preferences for a more relevant workspace.</p></div></header>' +
       '<details open><summary><i class="fas fa-user"></i><span><b>Profile details</b><small>Name, contact and home area</small></span><i class="fas fa-chevron-down"></i></summary><div class="ac-form-grid"><label>Preferred name<input id="ac-name" value="' + esc(data.preferred_name || '') + '" autocomplete="name"></label><label>Phone<input id="ac-phone" value="' + esc(data.phone || '') + '" autocomplete="tel"></label><label>Home ZIP<input id="ac-zip" value="' + esc(data.home_zip || '') + '" inputmode="numeric" maxlength="10"></label><label>Counties or towns<input id="ac-counties" value="' + esc(data.counties || '') + '" placeholder="Camden, Gloucester…"></label></div></details>' +
@@ -201,12 +241,24 @@
       var results = await Promise.allSettled([
         client.rpc('get_my_entitlement'),
         client.from('saved_properties').select('id', { count:'exact', head:true }).eq('user_id', user.id),
-        client.from('professional_cases').select('id', { count:'exact', head:true }).eq('user_id', user.id)
+        client.from('professional_cases').select('id', { count:'exact', head:true }).eq('user_id', user.id),
+        client.from('profiles').select('pro_agent').eq('id', user.id).maybeSingle(),
+        client.rpc('my_professional_license_verification_v1'),
+        client.rpc('my_realtor_verification_v1')
       ]);
       var ent = results[0].status === 'fulfilled' ? results[0].value.data : null;
       entitlement = (Array.isArray(ent) ? ent[0] : ent) || {};
       counts.properties = results[1].status === 'fulfilled' ? Number(results[1].value.count || 0) : 0;
       counts.cases = results[2].status === 'fulfilled' ? Number(results[2].value.count || 0) : 0;
+      if (results[3].status === 'fulfilled' && results[3].value && !results[3].value.error) professional.agent = results[3].value.data && results[3].value.data.pro_agent || {};
+      if (results[4].status === 'fulfilled' && results[4].value && !results[4].value.error) {
+        var licenseData = results[4].value.data;
+        professional.license = Array.isArray(licenseData) ? licenseData[0] || null : licenseData || null;
+      }
+      if (results[5].status === 'fulfilled' && results[5].value && !results[5].value.error) {
+        var realtorData = results[5].value.data;
+        professional.realtor = Array.isArray(realtorData) ? realtorData[0] || null : realtorData || null;
+      }
       render();
     } catch (error) {
       console.error('[Account] load failed', error);
