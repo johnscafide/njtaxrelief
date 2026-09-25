@@ -52,12 +52,12 @@ must(render.includes('wdd-rail-map') && render.includes('L.circleMarker'), 'Righ
 must(core.includes("from('profiles').select('display_name,full_name,photo_url,avatar_url').eq('id', S.user.id).maybeSingle()") && core.includes('userPhoto: function'), 'Dashboard must load the signed-in user photo from their profile with auth metadata fallbacks.');
 must(render.includes('wdd-intro-art is-photo') && render.includes('palette-\'+fallbackVariant') && render.includes('safePhotoUrl'), 'Greeting must safely show the uploaded profile photo or a colorful fallback.');
 must(render.includes('data-analysis-tab="assessed"') && render.includes('data-analysis-tab="tax"') && render.includes('function taxDistribution()') && !render.includes('Tax Distribution</button>\' disabled'), 'Both portfolio analysis tabs must be enabled and show distinct data.');
-must(shellCss.includes('.wdd-work>.wdd-rail{\n  position:sticky') && shellCss.includes('position:static;max-height:none;overflow:visible'), 'The desktop right rail must stick while scrolling and return to page flow on smaller screens.');
+must(render.includes('class="wdd-rail-sticky"') && shellCss.includes('.wdd-rail-sticky{') && shellCss.includes('position:sticky') && shellCss.includes('wdd-rail-sticky{position:static'), 'The desktop right rail must stick while scrolling and return to page flow on smaller screens.');
 must(shellCss.includes('.wdd-command:focus-within') && shellCss.includes('border-color:transparent') && shellCss.includes('.wdd-signal.is-score .wdd-signal-v{'), 'Search focus must stay free of a focus border and the Watchdog score number must align as one metric.');
 must(spikeLayout.includes('buildGauge') && spikeLayout.includes('buildGapChart'), 'Promoted Spike must preserve its score gauge and gap-by-property enhancements.');
 must(css.includes('.wdd-command'), 'Spike CSS must style the dashboard command bar.');
 must(/@media \(max-width:760px\)/.test(css), 'Promoted Spike must retain its phone/tablet breakpoint.');
-must(css.includes('overflow-x:hidden'), 'Promoted Spike must prevent horizontal page drift.');
+must(css.includes('overflow-x:clip') && shellCss.includes('overflow-y:visible!important'), 'Promoted Spike must prevent horizontal page drift without blocking sticky positioning.');
 must(page.includes('/property/manifest.webmanifest'), 'Dashboard must keep a valid manifest link.');
 
 console.log('Dashboard promoted Spike contract passed.');

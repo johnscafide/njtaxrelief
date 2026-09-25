@@ -437,7 +437,7 @@ body[data-sidebar-page="dashboard"] .wdd-command:focus-within{
 body[data-sidebar-page="dashboard"] .wdd-command input,
 body[data-sidebar-page="dashboard"] .wdd-command input:focus,
 body[data-sidebar-page="dashboard"] .wdd-command input:focus-visible{
-  outline:0;
+  outline:none!important;
   border:0;
   box-shadow:none;
 }
@@ -503,10 +503,22 @@ body[data-sidebar-page="dashboard"] .wdd-signal.is-score .wdd-signal-v{
   white-space:nowrap;
 }
 body[data-sidebar-page="dashboard"] .wdd-signal.is-score .wdd-signal-v small{font-size:13px;line-height:1}
-body[data-sidebar-page="dashboard"] .wdd-work>.wdd-rail{
+body.wdx-modern[data-sidebar-page="dashboard"]{
+  overflow-x:clip!important;
+  overflow-y:visible!important;
+}
+body[data-sidebar-page="dashboard"] .wdd-rail-sticky{
   position:sticky;
   top:16px;
   align-self:start;
+  display:grid;
+  align-content:start;
+  max-height:calc(100vh - 32px);
+}
+body[data-sidebar-page="dashboard"] .wdd-rail-scroll{
+  display:grid;
+  align-content:start;
+  gap:14px;
   max-height:calc(100vh - 32px);
   overflow-y:auto;
   overscroll-behavior:contain;
@@ -529,7 +541,8 @@ body[data-sidebar-page="dashboard"] .wdd-tax-bar{display:block;width:100%;min-he
 body[data-sidebar-page="dashboard"] .wdd-analysis-empty{padding:22px 18px;color:var(--sp-muted);font-size:12px;line-height:1.5}
 
 @media (max-width:1024px){
-  body[data-sidebar-page="dashboard"] .wdd-work>.wdd-rail{position:static;max-height:none;overflow:visible}
+  body[data-sidebar-page="dashboard"] .wdd-rail-sticky{position:static;max-height:none}
+  body[data-sidebar-page="dashboard"] .wdd-rail-scroll{max-height:none;overflow:visible}
 }
 @media (max-width:760px){
   body[data-sidebar-page="dashboard"] .wdd-appbar{margin-bottom:10px}
