@@ -45,7 +45,7 @@ module.exports=async function handler(req,res){
     if(!profiles[0]||profiles[0].primary_profession!=='real_estate')return res.status(403).json({error:'Real-estate professional profile required.'});
     const results=await officialSearch(ref),match=results.find(x=>digits(x.license_number)===ref);
     if(!match)return res.status(422).json({error:'No exact NJDOBI record matched this number. Use the license finder above and search by last name, then select the correct record.'});
-    if(!/^active(?:\s|$)/i.test(String(match.status||'').trim()))return res.status(422).json({error:'NJDOBI found this license, but its status is '+(match.status||'not active')+'.',record:match});
+    if(!/^(?:active(?:\s|$)|actively\s+licensed(?:\s|$))/i.test(String(match.status||'').trim()))return res.status(422).json({error:'NJDOBI found this license, but its status is '+(match.status||'not active')+'.',record:match});
     const verified=await rpc('verify_professional_license_official_v2',{p_user_id:auth.user.id,p_license_number:ref,p_licensee_name:match.name,p_source_status:match.status},auth.config);
     return res.status(200).json({verified:true,record:match,verification:Array.isArray(verified)?verified[0]||null:verified,source:'New Jersey Department of Banking and Insurance Real Estate Commission'});
   }catch(e){

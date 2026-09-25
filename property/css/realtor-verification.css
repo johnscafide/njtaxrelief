@@ -1,0 +1,29 @@
+/* NJW-426 · REALTOR® verification */
+.acr-editor{padding:24px!important}
+.acr-header{align-items:center!important}
+.acr-status{border:1px solid #dce5eb!important;background:#f7fafb!important}
+.acr-status.verified{border-color:#bfe2db!important;background:#effaf7!important;color:#087b70!important}
+.acr-status.pending{border-color:#ead9a6!important;background:#fff9ea!important;color:#7a5b14!important}
+.acr-status.rejected,.acr-status.expired{border-color:#edc8cf!important;background:#fff6f7!important;color:#a13246!important}
+.acr-grid{display:grid;grid-template-columns:minmax(0,1.05fr) minmax(320px,.95fr);gap:14px;margin-top:18px}
+.acr-panel{border:1px solid #dfe6ec;border-radius:12px;background:#f8fafb;padding:16px}
+.acr-panel-head{display:flex;align-items:center;gap:10px;margin-bottom:15px}
+.acr-panel-head>i{width:32px;height:32px;display:grid;place-items:center;border-radius:7px;background:#e9f6f3;color:#0b8b85}
+.acr-panel-head b,.acr-panel-head small{display:block}.acr-panel-head b{color:#17314e;font-size:13px}.acr-panel-head small{margin-top:2px;color:#7d8b9b;font-size:9px}
+.acr-fields{display:grid;grid-template-columns:1fr 1fr;gap:12px}
+.acr-fields label>span{display:block;margin-bottom:6px;color:#53647a;font-size:10px;font-weight:850}
+.acr-fields label em{color:#94a0ad;font-style:normal;font-weight:700}
+.acr-fields input,.acr-fields textarea{width:100%;border:1px solid #d9e1e8;border-radius:7px;background:#fff;color:#10294b;font:700 12px/1.35 var(--font-ui,"Plus Jakarta Sans"),sans-serif}
+.acr-fields input{height:40px;padding:0 10px}.acr-fields textarea{padding:10px;resize:vertical}
+.acr-fields .wide{grid-column:1/-1}
+.acr-submit{display:flex;align-items:center;gap:10px;margin-top:14px;padding-top:13px;border-top:1px solid #e5eaee}
+.acr-submit button{min-height:40px;padding:0 14px;border:0;border-radius:7px;background:#0b8b85;color:#fff;font-weight:850;cursor:pointer}
+.acr-submit span{color:#6e7d8e;font-size:9px}
+.acr-explain>p{margin:0 0 14px;color:#65768a;font-size:11px;line-height:1.55}
+.acr-nar-note{padding:12px;border:1px solid #dfe6ec;border-radius:8px;background:#fff}
+.acr-nar-note b{color:#17314e;font-size:10px}.acr-nar-note p{margin:5px 0 0;color:#758398;font-size:9px;line-height:1.5}
+.acr-links{display:flex;gap:8px;flex-wrap:wrap;margin-top:12px}.acr-links a{display:inline-flex;align-items:center;gap:6px;color:#0b7f79;font-size:9px;font-weight:800;text-decoration:none}
+.acr-verified-card{display:flex;gap:10px;align-items:center;margin-bottom:12px;padding:12px;border:1px solid #bfe2db;border-radius:8px;background:#effaf7}
+.acr-verified-card>i{width:34px;height:34px;display:grid;place-items:center;border-radius:50%;background:#0b8b85;color:#fff}
+.acr-verified-card span,.acr-verified-card b,.acr-verified-card small{display:block}.acr-verified-card span{color:#0b8178;font-size:8px;font-weight:900;letter-spacing:.1em}.acr-verified-card b{margin-top:2px;color:#17314e;font-size:12px}.acr-verified-card small{margin-top:2px;color:#6f807f;font-size:8px}
+@media(max-width:900px){.acr-grid{grid-template-columns:1fr}.acr-fields{grid-template-columns:1fr}.acr-fields .wide{grid-column:auto}}

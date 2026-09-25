@@ -11,7 +11,7 @@ async function requireUser(req){
   return r.json();
 }
 const KNOWN=[
- {name:'Opus Elite Real Estate',website:'https://opusagent.com/',hosts:['opusagent.com','opuselitere.com','opuselitenj.com','opuseliterealestate.com'],primary:'#00778B',secondary:'#E35205',accent:'#222222'},
+ {name:'Opus Elite Real Estate',website:'https://opusagent.com/',hosts:['opusagent.com','opuselitere.com','opuselitenj.com','opuseliterealestate.com'],primary:'#00778B',secondary:'#E35205',accent:'#222222',logo:'https://www.watchdogindex.com/property/assets/brokerages/opus-elite-logo.png'},
  {name:'Keller Williams',website:'https://kw.com/',hosts:['kw.com'],primary:'#B40101',secondary:'#F4F4F4',accent:'#333333'},
  {name:'RE/MAX',website:'https://www.remax.com/usa/en',hosts:['remax.com'],primary:'#003DA5',secondary:'#DC1C2E',accent:'#172B4D'},
  {name:'Coldwell Banker',website:'https://www.coldwellbanker.com/',hosts:['coldwellbanker.com'],primary:'#012169',secondary:'#FFFFFF',accent:'#0C2340'},
@@ -27,7 +27,7 @@ function knownFor(input){const h=hostOf(input);return KNOWN.find(b=>b.hosts.some
 function favicon(host){return 'https://www.google.com/s2/favicons?domain='+encodeURIComponent(host)+'&sz=256'}
 function knownPayload(item){
   const host=hostOf(item.website);
-  return {website:item.website,brokerage_name:item.name,logo_url:favicon(host),logo_candidates:[favicon(host)],colors:[item.primary,item.secondary,item.accent],primary_color:item.primary,secondary_color:item.secondary,accent_color:item.accent,source:'curated_registry',warning:null};
+  const logo=item.logo||favicon(host);return {website:item.website,brokerage_name:item.name,logo_url:logo,logo_candidates:[logo],colors:[item.primary,item.secondary,item.accent],primary_color:item.primary,secondary_color:item.secondary,accent_color:item.accent,source:'curated_registry',warning:null};
 }
 function isPrivateIp(ip){
   if(net.isIP(ip)===4){const p=ip.split('.').map(Number);return p[0]===10||p[0]===127||p[0]===0||(p[0]===169&&p[1]===254)||(p[0]===172&&p[1]>=16&&p[1]<=31)||(p[0]===192&&p[1]===168)}

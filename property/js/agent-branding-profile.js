@@ -4,7 +4,7 @@
 if(!window.NJPTRSupabaseRuntime)return;
 var db=window.NJPTRSupabaseRuntime.createClient(),user=null,row=null,saving=false,brandBusy=false,licenseBusy=false;
 var PRESETS=[
- {name:'Opus Elite Real Estate',url:'https://opusagent.com/',primary:'#00778B',secondary:'#E35205',accent:'#222222',logo:'https://www.google.com/s2/favicons?domain=opusagent.com&sz=256'},
+ {name:'Opus Elite Real Estate',url:'https://opusagent.com/',primary:'#00778B',secondary:'#E35205',accent:'#222222',logo:'https://www.watchdogindex.com/property/assets/brokerages/opus-elite-logo.png'},
  {name:'Keller Williams',url:'https://kw.com/',primary:'#B40101',secondary:'#F4F4F4',accent:'#333333',logo:'https://www.google.com/s2/favicons?domain=kw.com&sz=256'},
  {name:'RE/MAX',url:'https://www.remax.com/usa/en',primary:'#003DA5',secondary:'#DC1C2E',accent:'#172B4D',logo:'https://www.google.com/s2/favicons?domain=remax.com&sz=256'},
  {name:'Coldwell Banker',url:'https://www.coldwellbanker.com/',primary:'#012169',secondary:'#FFFFFF',accent:'#0C2340',logo:'https://www.google.com/s2/favicons?domain=coldwellbanker.com&sz=256'},
@@ -39,15 +39,16 @@ function mount(){
  if(document.getElementById('ac-agent-branding'))return;
  var app=document.getElementById('ac-app');if(!app||app.hidden||!row)return;
  var after=document.getElementById('ac-profile-editor')||app.lastElementChild,b=row.pro_agent&&typeof row.pro_agent==='object'?row.pro_agent:{},preset=presetByName(b.brokerage_name);
- var primary=color(b.brokerage_primary_color,preset&&preset.primary||'#10294B'),secondary=color(b.brokerage_secondary_color,preset&&preset.secondary||'#0B8B85'),accent=color(b.brokerage_accent_color,preset&&preset.accent||'#1F2937'),website=b.brokerage_website||preset&&preset.url||'',defaultLicenseSearch=lastName(row.display_name||row.full_name||'');
+ var primary=color(b.brokerage_primary_color,preset&&preset.primary||'#10294B'),secondary=color(b.brokerage_secondary_color,preset&&preset.secondary||'#0B8B85'),accent=color(b.brokerage_accent_color,preset&&preset.accent||'#1F2937'),website=b.brokerage_website||preset&&preset.url||'',defaultLicenseSearch=lastName(row.display_name||row.full_name||''),savedLogo=b.brokerage_logo_url||'';
  if(preset&&preset.name==='Opus Elite Real Estate'&&/opuselite(?:re|nj|realestate)\.com/i.test(website))website=preset.url;
+ if(preset&&preset.name==='Opus Elite Real Estate'&&(!savedLogo||/google\.com\/s2\/favicons/i.test(savedLogo)))savedLogo=preset.logo;
  var section=document.createElement('section');section.id='ac-agent-branding';section.className='ac-section acp-editor acb-editor';
  section.innerHTML=
  '<header class="acp-header acb-header"><div><h2>Agent branding</h2><p>Set the brokerage identity Watchdog uses on reports and agent-facing experiences.</p></div><div class="acp-source"><i class="fa-regular fa-circle-check"></i><span>User-confirmed</span></div></header>'+
  '<div class="acb-grid">'+
   '<section class="acb-panel acb-business">'+
    '<div class="acb-brand-preview" id="acb-brand-preview" style="--broker-primary:'+primary+';--broker-secondary:'+secondary+';--broker-accent:'+accent+'">'+
-    '<div class="acb-brand-mark"><img id="acb-preview-logo" '+(b.brokerage_logo_url?'src="'+esc(b.brokerage_logo_url)+'"':'')+' alt="" '+(b.brokerage_logo_url?'':'hidden')+'><span id="acb-preview-fallback" '+(b.brokerage_logo_url?'hidden':'')+'>'+esc((b.brokerage_name||'B').charAt(0).toUpperCase())+'</span></div>'+
+    '<div class="acb-brand-mark"><img id="acb-preview-logo" '+(savedLogo?'src="'+esc(savedLogo)+'"':'')+' alt="" '+(savedLogo?'':'hidden')+'><span id="acb-preview-fallback" '+(savedLogo?'hidden':'')+'>'+esc((b.brokerage_name||'B').charAt(0).toUpperCase())+'</span></div>'+
     '<div><small>BROKERAGE</small><h3 id="acb-preview-name">'+esc(b.brokerage_name||'Your brokerage')+'</h3><p id="acb-preview-site">'+esc(website?new URL(website).hostname.replace(/^www\./,''):'Professional brand')+'</p></div>'+
     '<div class="acb-swatches"><i id="acb-brand-swatch-1" style="background:'+primary+'"></i><i id="acb-brand-swatch-2" style="background:'+secondary+'"></i><i id="acb-brand-swatch-3" style="background:'+accent+'"></i></div>'+
    '</div>'+
@@ -61,15 +62,15 @@ function mount(){
   '</section>'+
   '<section class="acb-panel acb-imagery">'+
    '<div class="acb-panel-title"><div><i class="fa-regular fa-images"></i><span><b>Report imagery</b><small>Preview and override the imagery used on professional reports.</small></span></div></div>'+
-   '<div class="acb-media-preview"><div><span>HEADSHOT</span><figure id="acb-headshot-preview">'+(b.headshot_url||row.photo_url||row.avatar_url?'<img src="'+esc(b.headshot_url||row.photo_url||row.avatar_url)+'" alt="">':'<i class="fa-regular fa-user"></i>')+'</figure></div><div><span>BROKERAGE LOGO</span><figure id="acb-logo-preview">'+(b.brokerage_logo_url?'<img src="'+esc(b.brokerage_logo_url)+'" alt="">':'<i class="fa-regular fa-image"></i>')+'</figure></div></div>'+
-   '<div class="acb-fields"><label><span>Headshot URL</span><input id="acb-headshot" maxlength="600" value="'+esc(b.headshot_url||row.photo_url||row.avatar_url||'')+'" placeholder="https://…"></label><label><span>Brokerage logo URL</span><input id="acb-logo" maxlength="600" value="'+esc(b.brokerage_logo_url||'')+'" placeholder="Detected automatically or paste URL"></label>'+
+   '<div class="acb-media-preview"><div><span>HEADSHOT</span><figure id="acb-headshot-preview">'+(b.headshot_url||row.photo_url||row.avatar_url?'<img src="'+esc(b.headshot_url||row.photo_url||row.avatar_url)+'" alt="">':'<i class="fa-regular fa-user"></i>')+'</figure></div><div><span>BROKERAGE LOGO</span><figure id="acb-logo-preview">'+(savedLogo?'<img src="'+esc(savedLogo)+'" alt="">':'<i class="fa-regular fa-image"></i>')+'</figure></div></div>'+
+   '<div class="acb-fields"><label><span>Headshot URL</span><input id="acb-headshot" maxlength="600" value="'+esc(b.headshot_url||row.photo_url||row.avatar_url||'')+'" placeholder="https://…"></label><label><span>Brokerage logo URL</span><input id="acb-logo" maxlength="600" value="'+esc(savedLogo)+'" placeholder="Detected automatically or paste URL"></label>'+
     '<div class="acb-colors"><label><span>Primary</span><input id="acb-primary" type="color" value="'+primary+'"></label><label><span>Secondary</span><input id="acb-secondary" type="color" value="'+secondary+'"></label><label><span>Accent</span><input id="acb-accent" type="color" value="'+accent+'"></label></div>'+
     '<label class="acb-wide"><span>Brokerage-required disclosure</span><textarea id="acb-disclosure" maxlength="1000" rows="4" placeholder="Optional disclosure text required by your brokerage">'+esc(b.brokerage_disclosure||b.disclosure||'')+'</textarea><small>Only add language your brokerage actually requires. Watchdog does not invent disclosure text.</small></label></div>'+
   '</section>'+
  '</div>'+
  '<div class="ac-save-row acp-save acb-save"><button id="acb-save" type="button"><i class="fas fa-check"></i> Save agent branding</button><span id="acb-note" aria-live="polite"></span></div>';
  if(after&&after.parentNode)after.parentNode.insertBefore(section,after.nextSibling);else app.appendChild(section);
- bind();applyBrandPreview({brokerage_name:b.brokerage_name,website,logo_url:b.brokerage_logo_url,primary_color:primary,secondary_color:secondary,accent_color:accent});
+ bind();applyBrandPreview({brokerage_name:b.brokerage_name,website,logo_url:savedLogo,primary_color:primary,secondary_color:secondary,accent_color:accent});
 }
 function refreshMedia(){
  var h=val('acb-headshot'),l=val('acb-logo');
