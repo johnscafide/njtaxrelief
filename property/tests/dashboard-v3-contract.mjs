@@ -49,6 +49,11 @@ must(shellCss.includes('grid-row:1 / span 2') && shellCss.includes('.wdd-work>.w
 must(render.includes('Your Portfolio') && render.includes('Recent Changes') && render.includes('Portfolio Analysis'), 'Dashboard workspace must include portfolio, change feed and analysis modules.');
 must(render.includes('wdd-case-review') && render.includes('slice(0,3)'), 'Action Queue must render compact top review cards.');
 must(render.includes('wdd-rail-map') && render.includes('L.circleMarker'), 'Right rail must render the live portfolio map.');
+must(core.includes("from('profiles').select('display_name,full_name,photo_url,avatar_url').eq('id', S.user.id).maybeSingle()") && core.includes('userPhoto: function'), 'Dashboard must load the signed-in user photo from their profile with auth metadata fallbacks.');
+must(render.includes('wdd-intro-art is-photo') && render.includes('palette-\'+fallbackVariant') && render.includes('safePhotoUrl'), 'Greeting must safely show the uploaded profile photo or a colorful fallback.');
+must(render.includes('data-analysis-tab="assessed"') && render.includes('data-analysis-tab="tax"') && render.includes('function taxDistribution()') && !render.includes('Tax Distribution</button>\' disabled'), 'Both portfolio analysis tabs must be enabled and show distinct data.');
+must(shellCss.includes('.wdd-work>.wdd-rail{\n  position:sticky') && shellCss.includes('position:static;max-height:none;overflow:visible'), 'The desktop right rail must stick while scrolling and return to page flow on smaller screens.');
+must(shellCss.includes('.wdd-command:focus-within') && shellCss.includes('border-color:transparent') && shellCss.includes('.wdd-signal.is-score .wdd-signal-v{'), 'Search focus must stay free of a focus border and the Watchdog score number must align as one metric.');
 must(spikeLayout.includes('buildGauge') && spikeLayout.includes('buildGapChart'), 'Promoted Spike must preserve its score gauge and gap-by-property enhancements.');
 must(css.includes('.wdd-command'), 'Spike CSS must style the dashboard command bar.');
 must(/@media \(max-width:760px\)/.test(css), 'Promoted Spike must retain its phone/tablet breakpoint.');

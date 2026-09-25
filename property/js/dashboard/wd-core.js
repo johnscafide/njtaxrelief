@@ -45,7 +45,7 @@
     one: function (p) { if (!p || p.status !== 'fulfilled' || !p.value) return null; var v = p.value.data; return Array.isArray(v) ? (v[0] || null) : (v || null); }
   };
 
-  var S = { user: null, plan: 'free', entitlement: null, properties: [], scores: {}, changes: [], findings: [], county: 'ALL', tab: 'ledger', sort: { key: 'gap', dir: 'desc' } };
+  var S = { user: null, profile: null, plan: 'free', entitlement: null, properties: [], scores: {}, changes: [], findings: [], county: 'ALL', tab: 'ledger', sort: { key: 'gap', dir: 'desc' } };
   var RANK = { standard: 0, agent: 1, pro: 2, pro_plus: 3, teams: 4, developer: 5 };
   function normPlan(v) { var k = String(v || '').toLowerCase().replace(/\+/g, '_plus').replace(/[^a-z_]/g, ''); if (k === 'free' || k === '') k = 'standard'; return RANK[k] == null ? 'standard' : k; }
 
@@ -116,13 +116,16 @@
     return Promise.allSettled([
       c.rpc('get_my_entitlement'),
       c.rpc('is_watchdog_developer'),
-      c.from('saved_properties').select('*').order('created_at', { ascending: false })
+      c.from('saved_properties').select('*').order('created_at', { ascending: false }),
+      c.from('profiles').select('display_name,full_name,photo_url,avatar_url').eq('id', S.user.id).maybeSingle()
     ]).then(function (a) {
       var ent = H.one(a[0]);
       var dev = a[1].status === 'fulfilled' && a[1].value && a[1].value.data === true;
       var saved = a[2];
+      var profile = a[3];
       if (!saved || saved.status !== 'fulfilled') throw (saved && saved.reason) || new Error('Saved properties request failed');
       if (!saved.value || saved.value.error) throw (saved.value && saved.value.error) || new Error('Saved properties request failed');
+      S.profile = profile && profile.status === 'fulfilled' && profile.value && !profile.value.error ? profile.value.data : null;
       S.entitlement = ent || null;
       S.plan = dev ? 'developer' : normPlan(ent && (ent.plan_tier || ent.plan));
       S.properties = Array.isArray(saved.value.data) ? saved.value.data : [];
@@ -155,7 +158,8 @@
     H: H, S: S, RANK: RANK, db: db, stats: stats, filtered: filtered, gapFor: gapFor, categoryFor: categoryFor,
     isPro: function () { return RANK[S.plan] >= RANK.pro; },
     counties: function () { return H.unique(S.properties.map(function (p) { return String(p.county || '').trim().toUpperCase(); })).sort(); },
-    userName: function () { var m = (S.user && S.user.user_metadata) || {}, n = m.full_name || m.name || (S.user && S.user.email) || 'there'; return String(n).split(/\s+/)[0]; },
+    userName: function () { var m = (S.user && S.user.user_metadata) || {}, p = S.profile || {}, n = p.display_name || p.full_name || m.full_name || m.name || (S.user && S.user.email) || 'there'; return String(n).split(/\s+/)[0]; },
+    userPhoto: function () { var m = (S.user && S.user.user_metadata) || {}, p = S.profile || {}; return p.photo_url || p.avatar_url || m.avatar_url || m.picture || ''; },
     planLabel: function () { return S.plan === 'developer' ? 'Developer' : S.plan === 'standard' ? 'Free' : S.plan.replace('_plus', '+').replace(/\b\w/g, function (c) { return c.toUpperCase(); }); },
     onRepaint: function (fn) { listeners.push(fn); },
     repaint: function () { listeners.forEach(function (fn) { try { fn(); } catch (e) { console.warn(e); } }); },
