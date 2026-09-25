@@ -1,0 +1,43 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <meta name="robots" content="noindex, nofollow">
+  <meta name="theme-color" content="#10294b">
+  <title>Dashboard Preview | Watchdog</title>
+  <link rel="icon" href="/favicon.svg" type="image/svg+xml">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=Inter:wght@400;500;600;700;800&display=swap">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+  <link rel="stylesheet" href="/preview/assets/watchdog-preview.css">
+</head>
+<body data-preview-page="dashboard">
+  <div id="wdp-chrome"></div>
+
+  <main class="wdp-main">
+    <section class="wdp-loading-wrap" id="wdp-loading" aria-live="polite">
+      <div class="wdp-loading-card"><div class="wdp-spinner" aria-hidden="true"></div><b>Loading governed property data</b><p>Watchdog is matching your saved properties to current source records.</p></div>
+    </section>
+    <section class="wdp-state-panel" id="wdp-gate" hidden>
+      <span class="wdp-eyebrow">WATCHDOG WORKSPACE</span><h1>Sign in to preview your data.</h1><p class="wdp-page-intro">This preview reads only the properties saved to your account and asks Watchdog’s governed data service for property facts.</p><button class="wdp-button" type="button" data-wdp-signin>Sign in</button>
+    </section>
+    <section class="wdp-state-panel" id="wdp-error" role="alert" hidden>
+      <span class="wdp-eyebrow">DATA SERVICE</span><h1>Property data is unavailable.</h1><p class="wdp-page-intro" id="wdp-error-message"></p><button class="wdp-button" type="button" id="wdp-retry">Try again</button>
+    </section>
+    <div id="wdp-content" hidden>
+      <header class="wdp-heading" id="wdp-heading"></header>
+      <section class="wdp-kpis" id="wdp-kpis" aria-label="Portfolio summary"></section>
+      <section class="wdp-property-list" id="wdp-properties" aria-label="Saved property data"></section>
+      <section class="wdp-governance" id="wdp-governance" aria-label="Data rules"></section>
+    </div>
+    <footer class="wdp-footer">Watchdog preview · Existing Dashboard and Home remain unchanged.</footer>
+  </main>
+
+  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2/dist/umd/supabase.js" defer></script>
+  <script src="/property/js/supabase-runtime.js" defer></script>
+  <script src="/preview/assets/watchdog-preview-data.js" defer></script>
+  <script src="/preview/assets/watchdog-preview-design.js" defer></script>
+</body>
+</html>
