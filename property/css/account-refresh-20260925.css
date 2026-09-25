@@ -330,3 +330,126 @@ body[data-sidebar-page="account"] .ac-account-id button{width:27px;height:27px;b
   body[data-sidebar-page="account"] .ac-account-detail-grid{grid-template-columns:1fr}
   .ac-provider-logo{width:100px;flex-basis:100px;height:44px}
 }
+
+
+/* NJW-418 · approved profile preview + compact account controls */
+body[data-sidebar-page="account"] .acp-profile-route-card.professional{
+  background-image:
+    linear-gradient(90deg,rgba(3,49,59,.96) 0%,rgba(4,70,77,.88) 42%,rgba(6,45,57,.34) 72%,rgba(6,36,48,.12) 100%),
+    url("https://images.unsplash.com/photo-1758518730151-cf64fddb4f0a?auto=format&fit=crop&w=1800&q=84")!important;
+  background-position:center 45%!important;
+}
+body[data-sidebar-page="account"] .acp-profile-route-card.professional .acp-route-icon{
+  width:58px!important;height:58px!important;flex:0 0 58px!important;border-radius:14px!important;
+  background:rgba(226,255,250,.90)!important;color:#087b77!important;border:1px solid rgba(255,255,255,.62)!important;
+  box-shadow:0 8px 24px rgba(4,37,47,.18)!important
+}
+body[data-sidebar-page="account"] .acp-profile-route-card.professional .acp-route-icon i{font-size:21px!important}
+
+.ac-theme-popover{
+  width:min(820px,calc(100vw - 42px))!important;
+  max-height:min(760px,calc(100vh - 48px))!important;
+  padding:0 24px 18px!important;
+}
+.ac-theme-popover>header{padding-bottom:16px!important;border-bottom:1px solid #edf1f4!important}
+.ac-theme-popover>header p{max-width:520px}
+.ac-theme-live{margin:16px 0 14px}
+.ac-theme-live-head{display:flex;align-items:center;justify-content:space-between;gap:14px;margin-bottom:8px}
+.ac-theme-live-head b{font-size:12px;color:#183553}
+.ac-theme-live-head span{color:#8a98a8;font-size:10px}
+.ac-theme-live-banner{
+  display:grid;grid-template-columns:auto minmax(0,1fr) auto;align-items:center;gap:12px;min-height:126px;
+  padding:18px 18px;border-radius:14px;background:linear-gradient(112deg,#0f274b,#123d58 56%,#087f78);
+  background-size:cover!important;background-position:center!important;box-shadow:inset 0 0 0 1px rgba(255,255,255,.12),0 10px 24px rgba(16,38,61,.12);
+  overflow:hidden
+}
+.ac-theme-live-avatar{
+  width:54px;height:54px;border-radius:50%;display:grid;place-items:center;overflow:hidden;
+  border:2px solid rgba(255,255,255,.78);background:rgba(255,255,255,.15);color:#fff;font-size:18px;font-weight:900
+}
+.ac-theme-live-avatar img{width:100%;height:100%;object-fit:cover;display:block}
+.ac-theme-live-copy{min-width:0}
+.ac-theme-live-copy>span{display:block;color:#74ddd5;font-size:9px;font-weight:900;letter-spacing:.12em}
+.ac-theme-live-copy strong{display:block;margin-top:4px;color:#fff;font-size:20px;line-height:1.1;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.ac-theme-live-copy small{display:block;margin-top:5px;color:rgba(255,255,255,.80);font-size:10px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.ac-theme-live-badge{display:flex;align-items:center;gap:6px;padding:7px 9px;border:1px solid rgba(255,255,255,.18);border-radius:999px;background:rgba(5,28,48,.32);color:#fff;font-size:9px;font-weight:800;backdrop-filter:blur(8px)}
+.ac-theme-live-badge i{color:#79e5dd}
+
+.ac-theme-tabs{display:flex;align-items:center;gap:4px;margin:0 0 12px;border-bottom:1px solid #e9eef2}
+.ac-theme-tabs button{
+  position:relative;display:flex;align-items:center;gap:6px;padding:9px 10px 10px;border:0;background:transparent;color:#728196;
+  font:800 11px/1 var(--font-ui,"Plus Jakarta Sans"),sans-serif;cursor:pointer
+}
+.ac-theme-tabs button em{display:grid;place-items:center;min-width:20px;height:18px;padding:0 5px;border-radius:999px;background:#eef3f6;color:#607184;font-size:9px;font-style:normal}
+.ac-theme-tabs button[aria-selected="true"]{color:#0b817c}
+.ac-theme-tabs button[aria-selected="true"]::after{content:"";position:absolute;left:8px;right:8px;bottom:-1px;height:2px;background:#0b8b85}
+.ac-theme-section[hidden]{display:none!important}
+.ac-theme-popover .ac-theme-section{margin:0!important}
+.ac-theme-popover .ac-theme-grid{grid-template-columns:repeat(5,minmax(0,1fr))!important;gap:9px!important}
+.ac-theme-popover .ac-theme-choice{padding:0 0 3px!important}
+.ac-theme-popover .ac-theme-choice .ac-theme-preview{aspect-ratio:1.55/1!important;border-radius:9px!important}
+.ac-theme-popover .ac-theme-choice.image .ac-theme-preview{aspect-ratio:1.34/1!important}
+.ac-theme-popover .ac-theme-choice .ac-theme-name{font-size:9px!important;color:#52657b!important}
+.ac-theme-popover .ac-theme-choice>i{right:5px!important;top:5px!important;width:22px!important;height:22px!important}
+
+.ac-theme-actions{
+  display:grid!important;grid-template-columns:auto minmax(0,1fr) auto;align-items:center;gap:12px;
+  margin-top:16px!important;padding-top:15px!important;border-top:1px solid #edf1f4!important
+}
+.ac-theme-actions>span{display:flex;align-items:center;justify-content:center;gap:7px;color:#8a98a8;font-size:10px}
+.ac-theme-actions>span i{color:#0b8b85}
+.ac-theme-actions button{
+  min-height:38px;padding:0 14px;border-radius:7px;border:1px solid #d8e0e7;background:#fff;color:#29435e;
+  font:800 11px/1 var(--font-ui,"Plus Jakarta Sans"),sans-serif;cursor:pointer
+}
+.ac-theme-actions button.primary{border-color:#0b8b85;background:#0b8b85;color:#fff}
+.ac-theme-actions button.primary:hover{background:#087a75}
+.ac-theme-actions button.secondary:hover{background:#f5f8fa}
+.ac-theme-actions button:disabled{opacity:.55;cursor:wait}
+
+/* Supabase-inspired utility action matrix: compact, square-edged, information dense */
+body[data-sidebar-page="account"] .ac-self-service .ac-self-grid{
+  display:grid!important;grid-template-columns:repeat(3,minmax(0,1fr))!important;gap:1px!important;
+  padding:1px!important;border:0!important;border-radius:7px!important;overflow:hidden!important;background:#dfe5ea!important
+}
+body[data-sidebar-page="account"] .ac-self-service .ac-self-action{
+  position:relative!important;min-height:66px!important;padding:10px 34px 10px 11px!important;margin:0!important;
+  border:0!important;border-radius:0!important;background:#fff!important;box-shadow:none!important;
+  transition:background .14s ease,color .14s ease!important
+}
+body[data-sidebar-page="account"] .ac-self-service .ac-self-action:hover{background:#f7faf9!important}
+body[data-sidebar-page="account"] .ac-self-service .ac-self-action>i{
+  width:28px!important;height:28px!important;flex:0 0 28px!important;border-radius:5px!important;
+  background:#ecf8f5!important;color:#148274!important;font-size:11px!important
+}
+body[data-sidebar-page="account"] .ac-self-service .ac-self-action span{min-width:0!important}
+body[data-sidebar-page="account"] .ac-self-service .ac-self-action b{
+  font-size:11px!important;line-height:1.2!important;color:#17324c!important
+}
+body[data-sidebar-page="account"] .ac-self-service .ac-self-action small{
+  margin-top:2px!important;font-size:9px!important;line-height:1.25!important;color:#7f8e9f!important;
+  white-space:nowrap!important;overflow:hidden!important;text-overflow:ellipsis!important
+}
+body[data-sidebar-page="account"] .ac-self-service .ac-self-action::after{
+  content:"›";position:absolute;right:12px;top:50%;transform:translateY(-52%);color:#9aa8b6;font-size:18px;font-weight:500
+}
+body[data-sidebar-page="account"] .ac-self-service .ac-self-action:hover::after{color:#348f82}
+body[data-sidebar-page="account"] .ac-self-service>header{margin-bottom:10px!important}
+body[data-sidebar-page="account"] .ac-self-service>header h2{font-size:24px!important}
+body[data-sidebar-page="account"] .ac-danger-zone{margin-top:18px!important}
+
+@media(max-width:900px){
+  body[data-sidebar-page="account"] .ac-self-service .ac-self-grid{grid-template-columns:repeat(2,minmax(0,1fr))!important}
+}
+@media(max-width:760px){
+  .ac-theme-popover{width:100%!important;max-height:92vh!important;padding:0 16px 16px!important}
+  .ac-theme-live-banner{grid-template-columns:auto minmax(0,1fr)!important;min-height:118px;padding:14px!important}
+  .ac-theme-live-badge{display:none!important}
+  .ac-theme-popover .ac-theme-grid{grid-template-columns:repeat(3,minmax(0,1fr))!important}
+  .ac-theme-actions{grid-template-columns:1fr 1fr!important}
+  .ac-theme-actions>span{grid-column:1/-1;grid-row:1}
+  .ac-theme-actions button.secondary{grid-column:1}.ac-theme-actions button.primary{grid-column:2}
+}
+@media(max-width:520px){
+  body[data-sidebar-page="account"] .ac-self-service .ac-self-grid{grid-template-columns:1fr!important}
+}
