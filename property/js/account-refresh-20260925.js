@@ -222,7 +222,7 @@ document.addEventListener('click',function(event){
 
 function start(){
   var app=document.getElementById('ac-app');
-  if(app){var observer=new MutationObserver(scheduleEnhance);observer.observe(app,{childList:true,subtree:true});}
+  if(app){var observer=new MutationObserver(scheduleEnhance);observer.observe(app,{childList:true,subtree:false});}
   loadState();scheduleEnhance();
 }
 if(document.readyState==='loading')document.addEventListener('DOMContentLoaded',start,{once:true});else start();
