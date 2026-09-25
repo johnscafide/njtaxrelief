@@ -3,7 +3,7 @@
 if(!document.body || document.body.getAttribute('data-sidebar-page')!=='account')return;
 
 var client=null,user=null,entitlement={};
-var lifetimeMode=false,busy=false,enhanceTimer=null,activeThemeToggle=null;
+var lifetimeMode=false,busy=false,enhanceTimer=null,activeThemeToggle=null,pendingThemeKey=null,pendingThemeOriginalKey=null,activeThemeKind='color';
 var THEMES=[
   {key:'watchdog',label:'Watchdog',kind:'color',bg:'linear-gradient(112deg,#0f274b 0%,#123d58 56%,#087f78 100%)'},
   {key:'midnight',label:'Midnight',kind:'color',bg:'linear-gradient(115deg,#07182d 0%,#152c4b 58%,#314c72 100%)'},
@@ -42,49 +42,110 @@ function applyTheme(key){
   var theme=themeByKey(key);
   hero.dataset.accountHeroTheme=theme.key;
   hero.style.setProperty('background',theme.bg,'important');
-  document.querySelectorAll('.ac-theme-choice').forEach(function(button){
-    button.setAttribute('aria-pressed',button.dataset.heroTheme===theme.key?'true':'false');
-  });
-  var current=document.getElementById('ac-theme-current-name');if(current)current.textContent=theme.label;
 }
 function themeButton(theme){
   var button=document.createElement('button');
   button.type='button';button.className='ac-theme-choice '+theme.kind;button.dataset.heroTheme=theme.key;
-  button.setAttribute('aria-label','Use '+theme.label+' profile background');button.setAttribute('aria-pressed','false');
+  button.setAttribute('aria-label','Preview '+theme.label+' profile background');button.setAttribute('aria-pressed','false');
   button.style.setProperty('--theme-preview',theme.bg);
   button.innerHTML='<span class="ac-theme-preview"></span><span class="ac-theme-name">'+theme.label+'</span><i class="fas fa-check" aria-hidden="true"></i>';
   return button;
 }
+function setThemeTab(kind){
+  activeThemeKind=kind==='image'?'image':'color';
+  var panel=document.getElementById('ac-theme-popover');if(!panel)return;
+  panel.querySelectorAll('[data-theme-tab]').forEach(function(button){
+    var on=button.dataset.themeTab===activeThemeKind;
+    button.setAttribute('aria-selected',on?'true':'false');
+    button.setAttribute('tabindex',on?'0':'-1');
+  });
+  panel.querySelectorAll('.ac-theme-section[data-theme-kind]').forEach(function(section){
+    section.hidden=section.dataset.themeKind!==activeThemeKind;
+  });
+}
+function syncThemePreviewIdentity(){
+  var panel=document.getElementById('ac-theme-popover'),hero=document.querySelector('.ac-profile-hero');if(!panel||!hero)return;
+  var sourceName=hero.querySelector('.ac-hero-copy h1'),sourceSub=hero.querySelector('.ac-hero-copy>p'),sourceAvatar=hero.querySelector('.ac-avatar');
+  var name=panel.querySelector('#ac-theme-preview-name'),sub=panel.querySelector('#ac-theme-preview-sub'),avatar=panel.querySelector('#ac-theme-preview-avatar');
+  if(name)name.textContent=sourceName?sourceName.textContent:'Your Watchdog profile';
+  if(sub)sub.textContent=sourceSub?sourceSub.textContent:'Watchdog member';
+  if(avatar){
+    avatar.replaceChildren();
+    var image=sourceAvatar&&sourceAvatar.querySelector('img');
+    if(image){var clone=document.createElement('img');clone.src=image.src;clone.alt='';avatar.appendChild(clone);}
+    else{avatar.textContent=(sourceName&&sourceName.textContent?sourceName.textContent:'W').trim().charAt(0).toUpperCase()||'W';}
+  }
+}
+function updateThemePreview(key){
+  var theme=themeByKey(key),panel=document.getElementById('ac-theme-popover');pendingThemeKey=theme.key;
+  if(!panel)return;
+  var banner=panel.querySelector('#ac-theme-preview-banner');if(banner)banner.style.setProperty('background',theme.bg,'important');
+  panel.querySelectorAll('.ac-theme-choice').forEach(function(button){
+    button.setAttribute('aria-pressed',button.dataset.heroTheme===theme.key?'true':'false');
+  });
+  var selected=panel.querySelector('#ac-theme-selected-name');if(selected)selected.textContent=theme.label;
+  var apply=panel.querySelector('[data-apply-theme]');if(apply){apply.disabled=false;apply.textContent=theme.key===pendingThemeOriginalKey?'Keep this background':'Apply background';}
+}
 function closeThemePanel(){
   var panel=document.getElementById('ac-theme-popover'),backdrop=document.getElementById('ac-theme-backdrop');
   if(panel)panel.hidden=true;if(backdrop)backdrop.hidden=true;document.body.classList.remove('ac-theme-open');
+  pendingThemeKey=null;pendingThemeOriginalKey=null;
   if(activeThemeToggle){activeThemeToggle.setAttribute('aria-expanded','false');activeThemeToggle.focus();activeThemeToggle=null;}
 }
 function ensureThemePanel(){
   var panel=document.getElementById('ac-theme-popover');if(panel)return panel;
   var backdrop=document.createElement('div');backdrop.id='ac-theme-backdrop';backdrop.className='ac-theme-backdrop';backdrop.hidden=true;
   panel=document.createElement('section');panel.id='ac-theme-popover';panel.className='ac-theme-popover';panel.hidden=true;panel.setAttribute('role','dialog');panel.setAttribute('aria-modal','true');panel.setAttribute('aria-labelledby','ac-theme-title');
-  panel.innerHTML='<div class="ac-theme-accent"></div><header><div><span>PROFILE CANVAS</span><h3 id="ac-theme-title">Choose your background</h3><p>Pick a Watchdog gradient or a curated photo. Changes save automatically.</p></div><button type="button" data-close-theme aria-label="Close background chooser"><i class="fas fa-xmark"></i></button></header><div class="ac-theme-current"><span><i class="fas fa-wand-magic-sparkles"></i> Current look</span><b id="ac-theme-current-name">Watchdog</b></div><section class="ac-theme-section" data-theme-kind="color"><div class="ac-theme-section-head"><div><span>COLORS &amp; GRADIENTS</span><small>Clean, graphic and fast-loading.</small></div><em>10</em></div><div class="ac-theme-grid"></div></section><section class="ac-theme-section" data-theme-kind="image"><div class="ac-theme-section-head"><div><span>CURATED PHOTOS</span><small>Homes, architecture, shore and workspace scenes.</small></div><em>5</em></div><div class="ac-theme-grid"></div></section><footer><i class="fas fa-cloud-check"></i><span>Saved to your Watchdog profile</span></footer>';
+  panel.innerHTML='<div class="ac-theme-accent"></div>'+
+    '<header><div><span>PROFILE CANVAS</span><h3 id="ac-theme-title">Choose your background</h3><p>Preview a Watchdog gradient or curated photo before you apply it.</p></div><button type="button" data-close-theme aria-label="Close background chooser"><i class="fas fa-xmark"></i></button></header>'+
+    '<section class="ac-theme-live"><div class="ac-theme-live-head"><b>Live preview</b><span>This is how your profile hero will look.</span></div><div class="ac-theme-live-banner" id="ac-theme-preview-banner"><div class="ac-theme-live-avatar" id="ac-theme-preview-avatar">W</div><div class="ac-theme-live-copy"><span>PROFILE &amp; SETTINGS</span><strong id="ac-theme-preview-name">Your Watchdog profile</strong><small id="ac-theme-preview-sub">Watchdog member</small></div><div class="ac-theme-live-badge"><i class="fas fa-eye"></i><span id="ac-theme-selected-name">Watchdog</span></div></div></section>'+
+    '<nav class="ac-theme-tabs" role="tablist" aria-label="Background types"><button type="button" role="tab" data-theme-tab="color" aria-selected="true">Gradients <em>10</em></button><button type="button" role="tab" data-theme-tab="image" aria-selected="false" tabindex="-1">Photos <em>5</em></button></nav>'+
+    '<section class="ac-theme-section" data-theme-kind="color"><div class="ac-theme-grid"></div></section>'+
+    '<section class="ac-theme-section" data-theme-kind="image" hidden><div class="ac-theme-grid"></div></section>'+
+    '<footer class="ac-theme-actions"><button type="button" class="secondary" data-cancel-theme>Cancel</button><span><i class="fas fa-cloud"></i> Saved only when you apply</span><button type="button" class="primary" data-apply-theme>Apply background</button></footer>';
   document.body.appendChild(backdrop);document.body.appendChild(panel);
   THEMES.forEach(function(theme){var grid=panel.querySelector('[data-theme-kind="'+theme.kind+'"] .ac-theme-grid');if(grid)grid.appendChild(themeButton(theme));});
   backdrop.addEventListener('click',closeThemePanel);panel.querySelector('[data-close-theme]').addEventListener('click',closeThemePanel);
-  panel.addEventListener('click',function(event){var choice=event.target.closest('[data-hero-theme]');if(!choice)return;saveTheme(choice.dataset.heroTheme);});
+  panel.addEventListener('click',function(event){
+    var choice=event.target.closest('[data-hero-theme]');if(choice){updateThemePreview(choice.dataset.heroTheme);return;}
+    var tab=event.target.closest('[data-theme-tab]');if(tab){setThemeTab(tab.dataset.themeTab);return;}
+    if(event.target.closest('[data-cancel-theme]')){closeThemePanel();return;}
+    if(event.target.closest('[data-apply-theme]')){saveTheme(pendingThemeKey||pendingThemeOriginalKey);return;}
+  });
   document.addEventListener('keydown',function(event){if(event.key==='Escape'&&!panel.hidden)closeThemePanel();});
   return panel;
 }
 function openThemePanel(toggle){
-  var panel=ensureThemePanel(),backdrop=document.getElementById('ac-theme-backdrop');activeThemeToggle=toggle;
-  panel.hidden=false;if(backdrop)backdrop.hidden=false;document.body.classList.add('ac-theme-open');toggle.setAttribute('aria-expanded','true');applyTheme(currentTheme().key);
+  var panel=ensureThemePanel(),backdrop=document.getElementById('ac-theme-backdrop'),saved=currentTheme();
+  activeThemeToggle=toggle;pendingThemeOriginalKey=saved.key;pendingThemeKey=saved.key;
+  panel.hidden=false;if(backdrop)backdrop.hidden=false;document.body.classList.add('ac-theme-open');toggle.setAttribute('aria-expanded','true');
+  syncThemePreviewIdentity();setThemeTab(saved.kind);updateThemePreview(saved.key);
   var close=panel.querySelector('[data-close-theme]');if(close)close.focus();
 }
 async function saveTheme(key){
-  var db=getClient();if(!db||!user)return;applyTheme(key);
-  try{var result=await db.auth.updateUser({data:{watchdog_account_hero_theme:key}});if(result.error)throw result.error;user=result.data&&result.data.user||user;}
-  catch(error){toast('Background preference could not be saved.');}
+  var db=getClient(),theme=themeByKey(key),panel=document.getElementById('ac-theme-popover'),apply=panel&&panel.querySelector('[data-apply-theme]');
+  if(!db||!user||!theme)return;
+  var oldText=apply?apply.textContent:'Apply background';
+  if(apply){apply.disabled=true;apply.textContent='Saving…';}
+  try{
+    var result=await db.auth.updateUser({data:{watchdog_account_hero_theme:theme.key}});
+    if(result.error)throw result.error;
+    user=result.data&&result.data.user||user;applyTheme(theme.key);pendingThemeOriginalKey=theme.key;
+    toast('Profile background updated.');closeThemePanel();
+  }catch(error){
+    toast('Background preference could not be saved.');
+    if(apply){apply.disabled=false;apply.textContent=oldText;}
+  }
 }
 function mountThemePicker(){
   var hero=document.querySelector('.ac-profile-hero');if(!hero)return;applyTheme(currentTheme().key);ensureThemePanel();
-  var control=hero.querySelector('.ac-hero-style-control');if(!control){control=document.createElement('div');control.className='ac-hero-style-control';control.innerHTML='<button class="ac-hero-style-toggle" type="button" aria-expanded="false"><span class="ac-style-icon"><i class="fas fa-palette"></i></span><span>Background</span><i class="fas fa-chevron-right ac-style-chevron"></i></button>';hero.appendChild(control);control.querySelector('button').addEventListener('click',function(event){event.stopPropagation();openThemePanel(event.currentTarget);});}
+  var control=hero.querySelector('.ac-hero-style-control');
+  if(!control){
+    control=document.createElement('div');control.className='ac-hero-style-control';
+    control.innerHTML='<button class="ac-hero-style-toggle" type="button" aria-expanded="false"><span class="ac-style-icon"><i class="fas fa-palette"></i></span><span>Background</span><i class="fas fa-chevron-right ac-style-chevron"></i></button>';
+    hero.appendChild(control);
+    control.querySelector('button').addEventListener('click',function(event){event.stopPropagation();openThemePanel(event.currentTarget);});
+  }
 }
 
 function normalizePlan(value){return String(value||'standard').toLowerCase().replace('pro+','pro_plus');}
