@@ -14,6 +14,7 @@ function currentVerified(row){
 function status(row){
   if(currentVerified(row))return{label:'REALTOR® verified',className:'verified',icon:'fa-certificate',note:'Watchdog has reviewed this REALTOR® membership claim.'};
   if(row&&row.verification_status==='pending')return{label:'Review pending',className:'pending',icon:'fa-clock',note:'Your REALTOR® membership details are waiting for manual review.'};
+  if(row&&row.verification_status==='needs_info')return{label:'More information needed',className:'needs-info',icon:'fa-circle-question',note:row.review_note||'Watchdog needs additional information before this membership can be verified.'};
   if(row&&row.verification_status==='rejected')return{label:'Needs correction',className:'rejected',icon:'fa-triangle-exclamation',note:row.review_note||'The submitted membership details could not be verified.'};
   if(row&&row.verification_status==='expired')return{label:'Re-verification due',className:'expired',icon:'fa-rotate',note:'Submit your current NAR membership details again.'};
   return{label:'Not submitted',className:'none',icon:'fa-certificate',note:'Submit your NAR Member ID and local association for Watchdog review.'};
@@ -74,6 +75,7 @@ async function submit(){
   try{
     var result=await db.rpc('submit_my_realtor_verification_v1',{p_nar_member_id:member,p_local_association:association||null,p_proof_url:proof||null,p_user_note:note||null});
     if(result.error)throw result.error;
+    try{await db.functions.invoke('professional-review-notify',{body:{event:'realtor_verification.submitted'}})}catch(_){}
     await load();var fresh=document.getElementById('acr-note');if(fresh)fresh.textContent='Submitted. Watchdog will grant the REALTOR® badge only after review.';
   }catch(e){if(message)message.textContent=e&&e.message||'Could not submit REALTOR® verification.'}
   finally{busy=false;var freshButton=document.getElementById('acr-submit');if(freshButton)freshButton.disabled=false}
