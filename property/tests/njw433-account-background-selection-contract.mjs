@@ -15,7 +15,7 @@ must(refresh.includes('saveTheme(panel.dataset.pendingTheme||pendingThemeKey||pe
 must(css.includes('.acx-card{')&&css.includes('pointer-events:auto!important'),'Theme card interaction surface is not explicitly enabled.');
 must(css.includes('.acx-card-preview{')&&css.includes('pointer-events:none'),'Theme preview visual can intercept the card click.');
 must(css.includes('.acx-card-name{')&&css.includes('pointer-events:none'),'Theme card label can intercept the card click.');
-must(page.includes('account-customizer-20260926.css?v=20260926c'),'Fixed customizer CSS cache key missing.');
-must(page.includes('account-refresh-20260925.js?v=20260926c'),'Fixed customizer JS cache key missing.');
+must(page.includes('account-customizer-20260926.css?v=20260926d'),'Fixed customizer CSS cache key missing.');
+must(page.includes('account-refresh-20260925.js?v=20260926d'),'Fixed customizer JS cache key missing.');
 
 console.log('NJW-433 Account background selection interaction contract passed');
