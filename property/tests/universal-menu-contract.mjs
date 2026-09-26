@@ -26,6 +26,7 @@ new Function(todayNav);
 const canonical = [
   ['dashboard', 'Dashboard'],
   ['home', 'Property Home'],
+  ['anchor', 'ANCHOR Applications'],
   ['town-compare', 'Town Compare'],
   ['robust', 'ROBUST Framework'],
   ['pulse', 'Property Pulse'],
@@ -91,7 +92,7 @@ assert(universal.includes('planPromo:planPromo'), 'Plan promo registry is not ex
 assert(universal.includes("tone:'pro'"), 'Pro promo tone is missing from plan mapping');
 assert(universal.includes("tone:'plus'"), 'Pro+ promo tone is missing from plan mapping');
 assert(universal.includes("tone:'teams'"), 'Teams promo tone is missing from plan mapping');
-assert(universal.includes("var VERSION = '20260920a'"), 'Universal menu asset version is stale');
+assert(universal.includes("var VERSION = '20260926a'"), 'Universal menu asset version is stale');
 assert(!universal.includes('function ensurePromoCss()'), 'Plan promo styling must not be injected inline from JavaScript');
 assert(!universal.includes('wd-universal-plan-promo-css'), 'Legacy inline plan-promo style element is still present');
 
@@ -131,7 +132,8 @@ assert(brandRuntime.includes('/property/js/watchdog-universal-menu.js'), 'App br
 assert(!brandRuntime.includes("var items=["), 'Brand runtime has reintroduced a second hardcoded navigation model');
 
 assert(dashboard.includes('/property/js/brand-consistency-runtime.js'), 'Dashboard is not connected to shared menu runtime');
-assert(home.includes('/property/js/brand-consistency-runtime.js'), 'Property Home is not connected to shared menu runtime');
+// Property Home ships the brand/menu runtime bundled inside /property/js/home.js.
+assert(home.includes('/property/js/home.js') && read('property/js/home.js').includes('/property/js/watchdog-universal-menu.js'), 'Property Home is not connected to shared menu runtime');
 assert(sidemenu.includes('loadBrandConsistency'), 'Secondary-page shell is not connected to shared menu runtime');
 
 // Property Home used to fetch entitlement state and overwrite .hm27-nav-links with
@@ -178,3 +180,31 @@ for (const [name, rule] of [['drawer', drawerRule], ['profile', profileRule]]) {
 // the profile's canonical sign-out action remains present.
 assert(css.includes('.wd4-nav-foot,.hm27-nav-foot{display:none!important}'), 'App main drawers still expose duplicate Sign out');
 assert(css.includes('.wd-universal-nav-foot:has([data-wd-universal="signout"]){display:none!important}'), 'Public main drawer still exposes duplicate Sign out');
+// ONE drawer everywhere. The universal runtime renders the drawer itself (the
+// same one the property index uses) and every page opens it; no page may ship
+// its own drawer or its own hardcoded link list.
+const appShell = read('property/js/app-shell-2027.js');
+const homeRuntime = read('property/js/home.js');
+const homeSource = read('property/js/dashboard/home/home-2027.js');
+const homeLiveFix = read('property/js/dashboard/home/home-live-fix-20260824.js');
+const anchorMenu = read('property/js/anchor-applications-menu-runtime.js');
+const sharedHeader = read('property/partials/nav.html');
+assert(universal.includes('function ensureDrawer()'), 'Universal menu must mount the shared drawer on pages that lack it');
+assert(universal.includes('open:openMenu') && universal.includes('close:closePublic'), 'Universal menu must expose open()/close() for page menu buttons');
+assert(universal.includes("action === 'open-menu'"), 'Universal menu must support data-wd-universal="open-menu" triggers');
+assert(!universal.includes('.wd4-nav-links') && !universal.includes('.hm27-nav-links'), 'Universal menu is still patching legacy per-page drawers');
+assert(!appShell.includes('wd4-nav'), 'App shell reintroduced its own drawer');
+assert(appShell.includes('m.open()') && appShell.includes('ensureUniversalMenu()'), 'App shell menu button must open the shared drawer');
+assert(!home.includes('hm27-nav'), 'Property Home reintroduced its own drawer markup');
+for (const [name, src] of [['home.js', homeRuntime], ['home-2027.js', homeSource], ['home-live-fix', homeLiveFix]]) {
+  assert(!src.includes("getElementById('hm27-nav')") && !src.includes("q('#hm27-nav')"), `${name} still opens the removed Property Home drawer`);
+}
+assert(!anchorMenu.includes('forEach(insertNav)'), 'ANCHOR runtime must not append a second ANCHOR link to the canonical menu');
+assert(!fs.existsSync('property/js/public-data-center-link.js'), 'Data Center link must come from the canonical list, not a patch script');
+assert(sharedHeader.includes('data-wd-universal="open-menu"'), 'Shared header fragment must open the shared drawer');
+assert(!sharedHeader.includes('wdn-mobile-panel') && !sharedHeader.includes('wdn-mega'), 'Shared header fragment reintroduced its own menu');
+for (const page of ['property/index.html', 'property/faq/index.html', 'property/insights/index.html', 'property/teams/index.html', 'property/data-methodology/index.html']) {
+  const drawer = read(page).match(/<aside[^>]*id="wd-main-sheet"[^>]*>([\s\S]*?)<\/aside>/);
+  assert(drawer, `${page} is missing the shared drawer mount`);
+  assert(!drawer[1].includes('<a'), `${page} hardcodes its own menu links instead of using the shared drawer`);
+}

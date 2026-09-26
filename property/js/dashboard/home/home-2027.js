@@ -60,8 +60,9 @@ function avatarUrl(){var m=user&&user.user_metadata||{};return profile.avatar_ur
 function paintAvatar(){var host=document.getElementById('hm27-avatar');if(!host)return;var url=avatarUrl();host.innerHTML=url?'<img src="'+esc(url)+'" alt="">':'<span class="hm27-avatar-fallback">'+esc(firstName().charAt(0).toUpperCase())+'</span>';}
 function planLabel(){var p=String(profile.plan_tier||profile.plan||'standard').toLowerCase().replace('_plus','+');if(profile.account_role==='developer')return'Developer';return p==='standard'?'Standard':p.replace(/\b\w/g,function(c){return c.toUpperCase();});}
 
-function nav(){return document.getElementById('hm27-nav');}
-function navOpen(open){var n=nav();if(!n)return;n.classList.toggle('open',!!open);n.setAttribute('aria-hidden',open?'false':'true');document.body.classList.toggle('hm-nav-open',!!open);}
+/* Main navigation is the one shared Watchdog drawer from watchdog-universal-menu.js. */
+function nav(){return document.getElementById('wd-main-sheet');}
+function navOpen(open){var m=window.WatchdogUniversalMenu;if(!m)return;if(open)m.open();else m.close();}
 window.hmToggleSidebar=function(){var n=nav();navOpen(!(n&&n.classList.contains('open')));};
 
 function ensurePopovers(){
@@ -125,10 +126,10 @@ function bind(){
   var profileBtn=document.getElementById('hm27-profile');if(profileBtn)profileBtn.addEventListener('click',function(e){e.preventDefault();e.stopPropagation();togglePop('hm27-profile-pop');});
   var notify=document.getElementById('hm27-notify');if(notify)notify.addEventListener('click',function(e){e.preventDefault();e.stopPropagation();paintNotifications();togglePop('hm27-notice-pop');});
   document.addEventListener('click',function(ev){
-    var action=ev.target.closest&&ev.target.closest('[data-hm27]');if(action){var a=action.dataset.hm27;if(a==='nav-close')navOpen(false);else if(a==='read-all')setReadAt();else if(a==='invite')shareInvite();else if(a==='signout')db.auth.signOut().then(function(){location.href='/property/';});ev.preventDefault();return;}
+    var action=ev.target.closest&&ev.target.closest('[data-hm27]');if(action){var a=action.dataset.hm27;if(a==='read-all')setReadAt();else if(a==='invite')shareInvite();else if(a==='signout')db.auth.signOut().then(function(){location.href='/property/';});ev.preventDefault();return;}
     if(!ev.target.closest('.hm27-pop')&&!ev.target.closest('#hm27-profile')&&!ev.target.closest('#hm27-notify'))closePops();
   });
-  document.addEventListener('keydown',function(ev){if(ev.key==='Escape'){closePops();navOpen(false);}});
+  document.addEventListener('keydown',function(ev){if(ev.key==='Escape'){closePops();}});
   document.addEventListener('change',function(ev){if(ev.target&&ev.target.id==='hm-switch'){setTimeout(refreshContext,120);}});
 }
 

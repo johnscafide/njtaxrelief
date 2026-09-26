@@ -26,7 +26,7 @@ must(page.includes('watchdog-dashboard-spike.css') && page.includes('watchdog-da
 must(!page.includes('watchdog-dashboard-v3.css') && !page.includes('wd-ui-v3'), 'Dashboard must not load the retired V3 presentation.');
 must(!page.includes('wdd-ui-flag') && !page.includes("sessionStorage.setItem(KEY") && !page.includes("searchParams.set('ui'"), 'Temporary V3/Spike chooser must be removed.');
 must(page.includes('/property/css/app-shell-2027.css') && page.includes('/property/js/app-shell-2027.js'), 'Dashboard must load the global application shell.');
-must(appShell.includes("header.className='wdx-topbar'") && appShell.includes('id="wdx-menu"') && appShell.includes('dashboardNavMarkup()'), 'Global app shell must own the visible dashboard header and hamburger navigation.');
+must(appShell.includes("header.className='wdx-topbar'") && appShell.includes('id="wdx-menu"') && appShell.includes('ensureUniversalMenu()') && !appShell.includes('dashboardNavMarkup'), 'Global app shell must own the visible dashboard header and hamburger navigation.');
 must(!page.includes('wdd-dashboard-nav') && !page.includes('id="wd-menu-trigger"') && !page.includes('id="wd-main-sheet"') && !page.includes('id="wd-public-backdrop"'), 'Dashboard must not render a second local navigation/header system.');
 must(!page.includes('/property/css/public-mobile-nav.css') && !page.includes('/property/js/watchdog-universal-menu.js') && !page.includes('/property/js/public-nav.js'), 'Dashboard must not load the retired secondary navigation assets.');
 must(!page.includes('class="wdd-sidebar"') && !page.includes('class="wdd-mobile-nav"'), 'Dashboard markup must not ship another persistent sidebar or duplicate mobile navigation.');
