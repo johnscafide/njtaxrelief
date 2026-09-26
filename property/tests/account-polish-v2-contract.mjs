@@ -15,7 +15,7 @@ expect(css.includes('h1~span{display:none!important}'),'account heading subtitle
 expect(css.includes('width:44px!important;height:44px!important'),'camera button fixed circle dimensions missing');
 expect(refresh.includes("panel.id='ac-theme-popover'"),'fixed premium theme popover missing');
 expect((refresh.match(/kind:'color'/g)||[]).length===10,'expected ten color themes');
-expect((refresh.match(/kind:'image'/g)||[]).length===5,'expected five photo themes');
+expect((refresh.match(/kind:'image'/g)||[]).length===10,'expected ten photo themes');
 expect(css.includes('acp-profile-route-card.personal')&&css.includes('photo-1600585154340'),'personal photo card missing');
 expect(css.includes('acp-profile-route-card.professional')&&css.includes('photo-1497366811353'),'professional photo card missing');
 expect(account.includes('ac-account-signins')&&account.includes('data-copy-account-id'),'expanded account details missing');
