@@ -8,8 +8,8 @@ const refresh=read('property/js/account-refresh-20260925.js');
 const customizer=read('property/css/account-customizer-20260926.css');
 const api=read('api/watchdog-backoffice-professional.js');
 
-must(page.includes('account-customizer-20260926.css?v=20260926b'),'Isolated customizer stylesheet is not loaded after legacy Account CSS.');
-must(page.includes('account-refresh-20260925.js?v=20260926b'),'Account customizer runtime cache key not bumped.');
+must(page.includes('account-customizer-20260926.css?v=20260926c'),'Isolated customizer stylesheet is not loaded after legacy Account CSS.');
+must(page.includes('account-refresh-20260925.js?v=20260926c'),'Account customizer runtime cache key not bumped.');
 must(refresh.includes("panel.className='acx-picker'"),'Customizer still uses legacy popup class.');
 must(refresh.includes("backdrop.className='acx-backdrop'"),'Customizer backdrop is not isolated.');
 must(refresh.includes("button.className='acx-card '"),'Customizer cards still use legacy card class.');
