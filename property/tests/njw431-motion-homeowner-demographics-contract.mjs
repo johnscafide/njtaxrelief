@@ -49,8 +49,8 @@ must(!intel.includes("'residence_tenure_band'"),'Residence tenure must not be co
 must(!intel.includes("'primary_residence'"),'Primary residence flag must not be copied to Intelligence assumptions.');
 
 must(accountPage.includes('account-refresh-20260925.css?v=20260926a'),'Account customizer CSS cache version missing.');
-must(accountPage.includes('account-refresh-20260925.js?v=20260926b'),'Account customizer JS cache version missing.');
-must(accountPage.includes('account-customizer-20260926.css?v=20260926b'),'Account isolated customizer CSS cache version missing.');
+must(accountPage.includes('account-refresh-20260925.js?v=20260926c'),'Account customizer JS cache version missing.');
+must(accountPage.includes('account-customizer-20260926.css?v=20260926c'),'Account isolated customizer CSS cache version missing.');
 must(accountPage.includes('account-profile.js?v=20260926a'),'Shared profile JS cache version missing.');
 must(homeownerPage.includes('account-profile.js?v=20260926a'),'Homeowner profile JS cache version missing.');
 must(homeownerPage.includes('account-profile.css?v=20260926a'),'Homeowner profile CSS cache version missing.');
