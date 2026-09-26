@@ -33,7 +33,7 @@ must(profile.includes('household_composition'),'Household composition field miss
 must(profile.includes('residence_tenure_band'),'Residence tenure field missing.');
 must(profile.includes('primary_residence'),'Primary residence field missing.');
 must(profileCss.includes('.acp-demographics'),'Homeowner demographic styling missing.');
-must(reusable.includes('Household income, age and other demographics belong in the private homeowner context'),'Reusable/private data boundary copy missing.');
+must(reusable.includes('Household income, age and other demographics belong in the private homeowner context section'),'Reusable/private data boundary copy missing.');
 must(reusableJs.includes('account-reusable-profile.html?v=20260926a'),'Reusable homeowner partial cache-bust missing.');
 
 must(migration.includes('add column if not exists household_composition text'),'Household composition column migration missing.');
