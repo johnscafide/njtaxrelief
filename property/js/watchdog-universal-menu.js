@@ -1,15 +1,20 @@
 /* Watchdog universal navigation + profile menu.
-   One canonical source for destinations, entitlement gating and account menu copy. */
+   One canonical source for destinations, entitlement gating, account menu copy
+   AND the main navigation drawer itself. Every Watchdog page that shows a menu
+   uses the drawer rendered here (the same one the property index uses), so a
+   change to items() or publicDrawerHtml() updates the menu on every page.
+   Pages open it with WatchdogUniversalMenu.open() or any element carrying
+   data-wd-universal="open-menu". */
 (function(){
   'use strict';
   if(window.__WATCHDOG_UNIVERSAL_MENU__) return;
   window.__WATCHDOG_UNIVERSAL_MENU__ = true;
 
-  var VERSION = '20260920a';
+  var VERSION = '20260926a';
   /* CSS has a longer browser/CDN cache lifetime than this runtime. Keep a
      separate asset revision so interaction fixes can invalidate cached chrome
      immediately without coupling that cache key to the menu data contract. */
-  var CSS_VERSION = '20260825a';
+  var CSS_VERSION = '20260926a';
   var URL = 'https://uvkvaxljhhngydvlrzom.supabase.co';
   var KEY = 'sb_publishable_MYX59qCbK3d-21zDfJqkNw_fvmfnexa';
   var hostname = String(location.hostname || '').toLowerCase();
@@ -20,6 +25,7 @@
   var queued = false;
   var authAttempts = 0;
   var observed = typeof WeakSet === 'function' ? new WeakSet() : null;
+  var lastFocus = null;
 
   function route(path){
     path = String(path || '/');
@@ -90,6 +96,7 @@
     var out = [
       {key:'dashboard',href:route('/dashboard'),icon:'fa-table-columns',label:'Dashboard'},
       {key:'home',href:route('/home'),icon:'fa-house',label:'Property Home'},
+      {key:'anchor',href:route('/anchor/applications/'),icon:'fa-file-circle-check',label:'ANCHOR Applications'},
       {key:'town-compare',href:route('/town-compare'),icon:'fa-code-compare',label:'Town Compare'},
       {key:'robust',href:route('/robust/'),icon:'fa-gauge-high',label:'ROBUST Framework'},
       {key:'pulse',href:route('/pulse'),icon:'fa-wave-square',label:'Property Pulse'}
@@ -98,7 +105,9 @@
     if(state.ready && can('pro_plus')) out.push({key:'scan',href:route('/scan'),icon:'fa-magnifying-glass-chart',label:'Appeal Scanner'});
     if(state.ready && can('agent')) out.push({key:'transaction',href:'/transaction/',icon:'fa-file-signature',label:'Transactions'});
     if(state.ready && can('agent')) out.push({key:'data-workbench',href:route('/data-workbench'),icon:'fa-table-list',label:'Data Workbench'});
-    if(state.ready && can('pro_plus')) out.push({key:'data-center',href:route('/data-center'),icon:'fa-database',label:'Data Center'});
+    /* NJW-98: the public Data Center transparency surface is discoverable for
+       every visitor. Private execution stays enforced inside Data Center. */
+    out.push({key:'data-center',href:route('/data-center'),icon:'fa-database',label:'Data Center'});
     out.push({key:'pro',href:route('/pro'),icon:'fa-briefcase',label:'Professional Hub'});
     out.push({key:'account',href:route('/account'),icon:'fa-user-gear',label:'Account'});
     return out;
@@ -157,19 +166,35 @@
     return '<a class="wd-universal-brand" href="' + route('/dashboard') + '"><span class="wd-universal-brand-mark"><i class="fas fa-dog"></i></span><span class="wd-universal-brand-copy"><strong>Watchdog</strong><small>PROPERTY INTELLIGENCE</small></span></a>';
   }
 
-  function patchAppNav(){
-    document.querySelectorAll('.wd4-nav-links,.hm27-nav-links').forEach(function(nav){
-      var html = navLinksHtml();
-      if(nav.innerHTML !== html){ nav.innerHTML = html; nav.dataset.wdUniversal = VERSION; }
-    });
-  }
   function publicDrawerHtml(){
     var footer = state.user ? '' : '<div class="wd-universal-nav-foot"><button type="button" data-wd-universal="signin"><i class="fas fa-right-to-bracket"></i><span>Sign in</span></button></div>';
     return '<div class="wd-universal-nav-head">' + brandHtml() + '<button class="wd-public-close wd-universal-close" type="button" data-wd-universal="close" aria-label="Close navigation"><i class="fas fa-xmark"></i></button></div>' +
       '<nav class="wd-universal-nav-links" aria-label="Watchdog navigation">' + navLinksHtml() + '</nav>' + footer;
   }
-    function patchPublicDrawer(){
+  /* Pages that do not ship the public header markup still get the exact same
+     drawer: mount the backdrop + sheet once, at the end of <body>. */
+  function ensureDrawer(){
+    if(!document.body) return null;
+    var back = document.getElementById('wd-public-backdrop');
+    if(!back){
+      back = document.createElement('div');
+      back.id = 'wd-public-backdrop';
+      back.className = 'wd-public-backdrop';
+      document.body.appendChild(back);
+    }
     var sheet = document.getElementById('wd-main-sheet');
+    if(!sheet){
+      sheet = document.createElement('aside');
+      sheet.id = 'wd-main-sheet';
+      sheet.className = 'wd-public-sheet';
+      sheet.setAttribute('aria-hidden','true');
+      sheet.setAttribute('aria-label','Watchdog navigation');
+      document.body.appendChild(sheet);
+    }
+    return sheet;
+  }
+  function patchPublicDrawer(){
+    var sheet = ensureDrawer();
     if(!sheet) return;
     sheet.classList.add('wd-universal-public-nav');
     /* Never rewrite the drawer while it is open. Replacing innerHTML mid-tap
@@ -267,10 +292,43 @@
       window.WatchdogPublicNav.close();
       return;
     }
-    ['wd-main-sheet','wd-profile-sheet'].forEach(function(id){ var x = document.getElementById(id); if(x) x.classList.remove('open'); });
+    var wasOpen = false;
+    ['wd-main-sheet','wd-profile-sheet'].forEach(function(id){
+      var x = document.getElementById(id);
+      if(!x) return;
+      if(x.classList.contains('open')) wasOpen = true;
+      x.classList.remove('open');
+      x.setAttribute('aria-hidden','true');
+    });
     var b = document.getElementById('wd-public-backdrop');
     if(b) b.classList.remove('open');
-    document.body.classList.remove('wd-public-menu-open');
+    if(document.body) document.body.classList.remove('wd-public-menu-open','wd-profile-menu-open');
+    if(wasOpen && lastFocus && lastFocus.focus) lastFocus.focus();
+    lastFocus = null;
+    /* Rendering is skipped while the drawer is open; catch up now. */
+    queue();
+  }
+  /* Open the one shared Watchdog drawer. Public pages delegate to
+     WatchdogPublicNav (it also owns the public profile sheet); every other page
+     uses this built-in controller so no page needs its own drawer. */
+  function openMenu(){
+    var sheet = ensureDrawer();
+    if(!sheet) return;
+    if(window.WatchdogPublicNav && typeof window.WatchdogPublicNav.open === 'function'){
+      window.WatchdogPublicNav.open('main');
+      return;
+    }
+    if(!sheet.classList.contains('open')) patchPublicDrawer();
+    document.dispatchEvent(new CustomEvent('watchdog:menu-before-open'));
+    lastFocus = document.activeElement;
+    sheet.classList.add('open');
+    sheet.setAttribute('aria-hidden','false');
+    var back = document.getElementById('wd-public-backdrop');
+    if(back) back.classList.add('open');
+    document.body.classList.add('wd-public-menu-open');
+    var c = sheet.querySelector('[data-wd-universal="close"]');
+    if(c && c.focus) requestAnimationFrame(function(){ c.focus(); });
+    document.dispatchEvent(new CustomEvent('watchdog:public-menu-open',{detail:{menu:'main'}}));
   }
   function signIn(){
     closePublic();
@@ -317,10 +375,8 @@
   }
     function attachTargetObservers(){
     ['wd6-profile','hm27-profile-pop'].forEach(function(id){ watchTarget(document.getElementById(id)); });
-    document.querySelectorAll('.wd4-nav-links,.hm27-nav-links').forEach(watchTarget);
   }
   function refresh(){
-    patchAppNav();
     patchPublicDrawer();
     patchProfiles();
     patchProfileTriggers();
@@ -357,7 +413,7 @@
     }).catch(function(){ state.ready = true; queue(); });
   }
   function mutationMayContainChrome(records){
-    var selector = '#wd-main-sheet,#wd-profile-content,#wd6-profile,#hm27-profile-pop,.wd4-nav-links,.hm27-nav-links';
+    var selector = '#wd-main-sheet,#wd-profile-content,#wd6-profile,#hm27-profile-pop';
     for(var i=0;i<records.length;i++){
       var added = records[i].addedNodes || [];
       for(var j=0;j<added.length;j++){
@@ -373,7 +429,8 @@
     var control = ev.target && ev.target.closest && ev.target.closest('[data-wd-universal]');
     if(!control) return;
     var action = control.getAttribute('data-wd-universal');
-    if(action === 'close'){ ev.preventDefault(); closePublic(); }
+    if(action === 'open-menu'){ ev.preventDefault(); ev.stopPropagation(); openMenu(); }
+    else if(action === 'close'){ ev.preventDefault(); closePublic(); }
     else if(action === 'signin'){ ev.preventDefault(); signIn(); }
     else if(action === 'signout'){ ev.preventDefault(); signOut(); }
     else if(action === 'invite'){ ev.preventDefault(); showInvite(); }
@@ -381,8 +438,17 @@
     else if(action === 'copy'){ ev.preventDefault(); copyInvite(); }
     else if(action === 'share'){ ev.preventDefault(); shareInvite(); }
   },true);
-  document.addEventListener('click',function(ev){ if(ev.target && ev.target.id === 'wd-universal-invite-shade') closeInvite(); });
-  document.addEventListener('keydown',function(ev){ if(ev.key === 'Escape') closeInvite(); });
+  document.addEventListener('click',function(ev){
+    if(!ev.target) return;
+    if(ev.target.id === 'wd-universal-invite-shade') closeInvite();
+    else if(ev.target.id === 'wd-public-backdrop' && !window.WatchdogPublicNav) closePublic();
+  });
+  document.addEventListener('keydown',function(ev){
+    if(ev.key !== 'Escape') return;
+    closeInvite();
+    var sheet = document.getElementById('wd-main-sheet');
+    if(sheet && sheet.classList.contains('open') && !window.WatchdogPublicNav) closePublic();
+  });
   document.addEventListener('njptr:plan-change',loadAuth);
   document.addEventListener('watchdog:developer-confirmed',loadAuth);
 
@@ -401,6 +467,8 @@
     developerItems:developerItems,
     planPromo:planPromo,
     refresh:queue,
+    open:openMenu,
+    close:closePublic,
     setUser:setUser,
     route:route,
     state:function(){ return state; },

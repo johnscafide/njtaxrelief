@@ -1,6 +1,7 @@
 /* Universal Watchdog navigation and profile chrome.
-   This file is the final visual authority for index, Dashboard, Property Home
-   and supported app-shell menu chrome. */
+   This file is the final visual authority for the one shared Watchdog drawer
+   (rendered by watchdog-universal-menu.js on index, Dashboard, Property Home,
+   app-shell pages and the shared header fragment) plus the profile menus. */
 :root{
   --wdum-ink:#111d38;
   --wdum-muted:#748198;
@@ -46,6 +47,31 @@
 .wd-universal-brand-copy small,
 .wd4-nav-head .wd4-brand-copy small,
 .hm27-nav-head .hm27-brand-copy small{font:800 8px/1 var(--wdum-font)!important;color:#8692a6!important;letter-spacing:.11em!important;margin-top:4px!important;white-space:nowrap!important}
+
+/* ---------- one shared drawer on every page ----------
+   watchdog-universal-menu.js mounts #wd-public-backdrop + #wd-main-sheet on any
+   page that does not already ship them, so these base rules must not depend on
+   public-mobile-nav.css being present. */
+.wd-public-backdrop{position:fixed;inset:0;background:rgba(5,18,34,.54);opacity:0;pointer-events:none;transition:opacity .2s ease}
+.wd-public-backdrop.open{opacity:1;pointer-events:auto}
+body.wd-public-menu-open{overflow:hidden}
+html body .wd-universal-nav-head .wd-universal-brand{
+  display:block!important;
+  position:relative!important;
+  width:218px!important;
+  min-width:0!important;
+  max-width:calc(100% - 54px)!important;
+  flex:0 1 218px!important;
+  height:51px!important;
+  background-image:url('/property/branding/watchdog-logo-horizontal.svg')!important;
+  background-position:left center!important;
+  background-repeat:no-repeat!important;
+  background-size:contain!important;
+}
+html body .wd-universal-nav-head .wd-universal-brand>span{
+  position:absolute!important;width:1px!important;height:1px!important;padding:0!important;margin:-1px!important;
+  overflow:hidden!important;clip:rect(0,0,0,0)!important;white-space:nowrap!important;border:0!important;
+}
 
 /* ---------- one drawer geometry ---------- */
 .wd-public-sheet.wd-universal-public-nav{

@@ -55,10 +55,6 @@
     if(actions){
       actions.innerHTML='<a class="wdx-btn" href="/property/dashboard"><i class="fas fa-table-columns"></i> Dashboard</a><a class="wdx-btn primary" href="/property/farm-map"><i class="fas fa-map"></i> Farm Map</a>';
     }
-    var nav=document.getElementById('wd4-nav');
-    if(nav){
-      nav.querySelectorAll('.wd4-nav-links a').forEach(function(a){a.classList.toggle('active',a.getAttribute('href')==='/property/agent-desk');});
-    }
     if(window.WatchdogBrandConsistency&&typeof window.WatchdogBrandConsistency.sync==='function')window.WatchdogBrandConsistency.sync();
     return true;
   }

@@ -230,8 +230,7 @@
   function init(){
     suppressLegacyIndexUi();
     ensureUniversalMenu();
-    loadScript('wd-anchor-applications-menu-script','/property/js/anchor-applications-menu-runtime.js?v=20260912a');
-    loadScript('wd-public-data-center-link-script','/property/js/public-data-center-link.js');
+    loadScript('wd-anchor-applications-menu-script','/property/js/anchor-applications-menu-runtime.js?v=20260926a');
     ensureMenuInteractionContract();
     bindMenuInteractionContract();
     scopeVerifiedSales();

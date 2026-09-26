@@ -1,0 +1,12 @@
+{
+  "checkedAt": "2026-09-26T02:47:14.585Z",
+  "scope": "actual-agent-entry-and-basic-interaction",
+  "passed": false,
+  "checks": [
+    {
+      "stage": "acceptance",
+      "passed": false,
+      "failure": "Dedicated staging Agent credentials and Supabase configuration are required."
+    }
+  ]
+}

@@ -236,203 +236,6 @@
     }
 
     /* ==========================================================
-       DESKTOP LINKS
-       ========================================================== */
-
-    #wd-property-nav .wdn-desktop-links {
-        align-items: center;
-        background: #fff;
-        border: 0;
-        box-shadow: none;
-        display: flex;
-        flex-direction: row;
-        gap: 3px;
-        justify-content: flex-end;
-        margin: 0;
-        padding: 0;
-        white-space: nowrap;
-    }
-
-    #wd-property-nav .wdn-link {
-        align-items: center;
-        background: transparent;
-        border: 0;
-        border-radius: 5px;
-        box-shadow: none;
-        color: var(--wdn-text);
-        display: inline-flex;
-        font-family: "Source Sans 3", Arial, sans-serif;
-        font-size: 14px;
-        font-weight: 700;
-        gap: 7px;
-        line-height: 1.2;
-        margin: 0;
-        min-height: 42px;
-        padding: 10px 10px;
-        text-decoration: none;
-        text-transform: none;
-        transform: none;
-        transition:
-            background-color 0.18s ease,
-            color 0.18s ease;
-    }
-
-    #wd-property-nav .wdn-link:hover,
-    #wd-property-nav .wdn-link:focus-visible {
-        background: #f0f5f5;
-        color: var(--wdn-teal);
-        text-decoration: none;
-        transform: none;
-    }
-
-    #wd-property-nav .wdn-link i {
-        color: #2c5894;
-        font-size: 14px;
-        margin: 0;
-    }
-
-    #wd-property-nav .wdn-pro-link {
-        color: #8b7012;
-    }
-
-    #wd-property-nav .wdn-pro-link i {
-        color: var(--wdn-gold);
-    }
-
-    /* ==========================================================
-       EXPLORE DROPDOWN
-       ========================================================== */
-
-    #wd-property-nav .wdn-dropdown {
-        background: transparent;
-        display: block;
-        margin: 0;
-        padding: 0;
-        position: relative;
-    }
-
-    #wd-property-nav .wdn-dropdown-trigger {
-        cursor: pointer;
-    }
-
-    #wd-property-nav .wdn-dropdown-trigger .wdn-chevron {
-        color: #77828d;
-        font-size: 10px;
-        margin-left: 2px;
-        transition: transform 0.18s ease;
-    }
-
-    #wd-property-nav .wdn-dropdown.wdn-open
-        .wdn-dropdown-trigger
-        .wdn-chevron {
-        transform: rotate(180deg);
-    }
-
-    #wd-property-nav .wdn-mega {
-        background: #fff;
-        border: 1px solid var(--wdn-border);
-        border-radius: 8px;
-        box-shadow: 0 18px 48px rgba(16, 41, 75, 0.17);
-        display: none;
-        padding: 27px;
-        position: absolute;
-        right: -240px;
-        top: calc(100% + 11px);
-        width: min(720px, calc(100vw - 40px));
-        z-index: 5010;
-    }
-
-    #wd-property-nav .wdn-dropdown.wdn-open .wdn-mega {
-        display: block;
-    }
-
-    #wd-property-nav .wdn-mega::before {
-        background: #fff;
-        border-left: 1px solid var(--wdn-border);
-        border-top: 1px solid var(--wdn-border);
-        content: "";
-        height: 13px;
-        position: absolute;
-        right: 278px;
-        top: -7px;
-        transform: rotate(45deg);
-        width: 13px;
-    }
-
-    #wd-property-nav .wdn-mega-grid {
-        background: transparent;
-        display: grid;
-        gap: 30px;
-        grid-template-columns: repeat(3, minmax(150px, 1fr));
-        margin: 0;
-        padding: 0;
-    }
-
-    #wd-property-nav .wdn-mega-column {
-        background: transparent;
-        border: 0;
-        box-shadow: none;
-        display: flex;
-        flex-direction: column;
-        margin: 0;
-        padding: 0;
-    }
-
-    #wd-property-nav .wdn-mega-heading {
-        color: var(--wdn-muted);
-        font-family: "Plus Jakarta Sans", Arial, sans-serif;
-        font-size: 11px;
-        font-weight: 800;
-        letter-spacing: 1px;
-        margin: 0 0 13px;
-        padding: 0;
-        text-transform: uppercase;
-    }
-
-    #wd-property-nav .wdn-mega-link {
-        align-items: center;
-        background: transparent;
-        border: 0;
-        border-radius: 4px;
-        color: var(--wdn-navy);
-        display: flex;
-        font-family: "Source Sans 3", Arial, sans-serif;
-        font-size: 14px;
-        font-weight: 600;
-        gap: 8px;
-        line-height: 1.3;
-        margin: 0 0 3px;
-        padding: 8px;
-        text-decoration: none;
-        transform: none;
-        transition:
-            background-color 0.18s ease,
-            color 0.18s ease;
-    }
-
-    #wd-property-nav .wdn-mega-link:hover,
-    #wd-property-nav .wdn-mega-link:focus-visible {
-        background: #eef6f5;
-        color: var(--wdn-teal);
-        text-decoration: none;
-        transform: none;
-    }
-
-    #wd-property-nav .wdn-mega-link i {
-        color: var(--wdn-teal);
-        flex: 0 0 16px;
-        font-size: 13px;
-        text-align: center;
-        width: 16px;
-    }
-
-    #wd-property-nav .wdn-mega-featured {
-        background: #eef7f6;
-        color: var(--wdn-teal);
-        font-weight: 700;
-    }
-
-    /* ==========================================================
        MOBILE BUTTON
        ========================================================== */
 
@@ -467,84 +270,19 @@
         margin: 0;
     }
 
-    /* ==========================================================
-       MOBILE PANEL
-       ========================================================== */
-
-    #wd-property-nav .wdn-mobile-panel {
-        background: #fff;
-        border: 0;
-        border-top: 1px solid var(--wdn-border);
-        box-shadow: 0 16px 30px rgba(16, 41, 75, 0.12);
-        display: none;
-        left: 0;
-        max-height: calc(100vh - 76px);
-        overflow-y: auto;
-        padding: 22px;
-        position: absolute;
-        right: 0;
-        top: 100%;
-        width: 100%;
+    #wd-property-nav .wdn-menu-button {
+        display: inline-flex;
+        flex: 0 0 auto;
+        gap: 8px;
+        min-height: 44px;
+        height: 44px;
+        padding: 0 14px;
+        width: auto;
+        font: 700 14px/1 "Source Sans 3", Arial, sans-serif;
     }
 
-    #wd-property-nav .wdn-mobile-panel.wdn-mobile-open {
-        display: block;
-    }
-
-    #wd-property-nav .wdn-mobile-group {
-        background: transparent;
-        border-bottom: 1px solid var(--wdn-border);
-        display: flex;
-        flex-direction: column;
-        margin: 0 0 18px;
-        padding: 0 0 14px;
-    }
-
-    #wd-property-nav .wdn-mobile-group:last-child {
-        border-bottom: 0;
-        margin-bottom: 0;
-        padding-bottom: 0;
-    }
-
-    #wd-property-nav .wdn-mobile-heading {
-        color: var(--wdn-muted);
-        font-family: "Plus Jakarta Sans", Arial, sans-serif;
-        font-size: 11px;
-        font-weight: 800;
-        letter-spacing: 1px;
-        margin: 0 0 8px;
-        padding: 0;
-        text-transform: uppercase;
-    }
-
-    #wd-property-nav .wdn-mobile-link {
-        align-items: center;
-        background: transparent;
-        border: 0;
-        border-radius: 5px;
-        color: var(--wdn-navy);
-        display: flex;
-        font-size: 15px;
-        font-weight: 700;
-        gap: 11px;
-        margin: 0;
-        padding: 11px 8px;
-        text-decoration: none;
-    }
-
-    #wd-property-nav .wdn-mobile-link:hover,
-    #wd-property-nav .wdn-mobile-link:focus-visible {
-        background: #eef6f5;
-        color: var(--wdn-teal);
-        text-decoration: none;
-    }
-
-    #wd-property-nav .wdn-mobile-link i {
-        color: var(--wdn-teal);
-        flex: 0 0 18px;
-        font-size: 14px;
-        text-align: center;
-        width: 18px;
+    #wd-property-nav .wdn-menu-label {
+        color: inherit;
     }
 
     /* ==========================================================
@@ -559,14 +297,6 @@
             padding-right: 20px;
         }
 
-        #wd-property-nav .wdn-link {
-            padding-left: 7px;
-            padding-right: 7px;
-        }
-
-        #wd-property-nav .wdn-link-text-optional {
-            display: none;
-        }
     }
 
     @media (max-width: 980px) {
@@ -574,12 +304,13 @@
             grid-template-columns: auto minmax(180px, 1fr) auto;
         }
 
-        #wd-property-nav .wdn-desktop-links {
+        #wd-property-nav .wdn-menu-label {
             display: none;
         }
 
-        #wd-property-nav .wdn-mobile-button {
-            display: inline-flex;
+        #wd-property-nav .wdn-menu-button {
+            padding: 0;
+            width: 44px;
         }
     }
 
@@ -623,15 +354,15 @@
         }
 
         #wd-property-nav .wdn-mobile-button {
-            flex-basis: 40px;
-            height: 40px;
-            width: 40px;
+            flex-basis: 44px;
+            height: 44px;
+            width: 44px;
         }
     }
 
     @media (max-width: 400px) {
         #wd-property-nav .wdn-inner {
-            grid-template-columns: 38px minmax(0, 1fr) 40px;
+            grid-template-columns: 38px minmax(0, 1fr) 44px;
         }
 
         #wd-property-nav .wdn-address::placeholder {
@@ -693,339 +424,18 @@
             </button>
         </div>
 
-        <!-- DESKTOP LINKS -->
-        <div
-            class="wdn-desktop-links"
-            role="navigation"
-            aria-label="Property tools"
-        >
-            <div class="wdn-dropdown" id="wdn-dropdown">
-                <button
-                    type="button"
-                    class="wdn-link wdn-dropdown-trigger"
-                    id="wdn-dropdown-trigger"
-                    aria-expanded="false"
-                    aria-controls="wdn-mega-menu"
-                    onclick="wdnToggleDropdown(event)"
-                >
-                    <i class="fas fa-grid-2" aria-hidden="true"></i>
-
-                    <span class="wdn-link-text-optional">Explore</span>
-
-                    <i
-                        class="fas fa-chevron-down wdn-chevron"
-                        aria-hidden="true"
-                    ></i>
-                </button>
-
-                <div
-                    class="wdn-mega"
-                    id="wdn-mega-menu"
-                    role="menu"
-                >
-                    <div class="wdn-mega-grid">
-
-                        <!-- TAX RELIEF -->
-                        <div class="wdn-mega-column">
-                            <h2 class="wdn-mega-heading">Tax Relief</h2>
-
-                            <a
-                                href="/anchor-estimator.html"
-                                class="wdn-mega-link wdn-mega-featured"
-                            >
-                                <i
-                                    class="fas fa-calculator"
-                                    aria-hidden="true"
-                                ></i>
-                                Benefit Calculator
-                            </a>
-
-                            <a
-                                href="/anchor-program.html"
-                                class="wdn-mega-link"
-                            >
-                                ANCHOR Program
-                            </a>
-
-                            <a
-                                href="/senior-programs.html"
-                                class="wdn-mega-link"
-                            >
-                                Stay NJ &amp; Senior Freeze
-                            </a>
-
-                            <a
-                                href="/veterans-benefits.html"
-                                class="wdn-mega-link"
-                            >
-                                Veterans Benefits
-                            </a>
-
-                            <a
-                                href="/pas-1-guide.html"
-                                class="wdn-mega-link"
-                            >
-                                PAS-1 Filing Guide
-                            </a>
-
-                            <a
-                                href="/property-tax-appeal.html"
-                                class="wdn-mega-link"
-                            >
-                                Property Tax Appeals
-                            </a>
-                        </div>
-
-                        <!-- PROPERTY TOOLS -->
-                        <div class="wdn-mega-column">
-                            <h2 class="wdn-mega-heading">
-                                Property Tools
-                            </h2>
-
-                            <a
-                                href="/property/"
-                                class="wdn-mega-link wdn-mega-featured"
-                            >
-                                <i
-                                    class="fas fa-magnifying-glass"
-                                    aria-hidden="true"
-                                ></i>
-                                Property Lookup
-                            </a>
-
-                            <a
-                                href="/home-value.html"
-                                class="wdn-mega-link"
-                            >
-                                Home Value Estimator
-                            </a>
-
-                            <a
-                                href="/mortgage-calculator.html"
-                                class="wdn-mega-link"
-                            >
-                                Mortgage Calculator
-                            </a>
-
-                            <a
-                                href="/home-improvement-abatement.html"
-                                class="wdn-mega-link"
-                            >
-                                Renovation Savings
-                            </a>
-
-                            <a
-                                href="/search-homes.html"
-                                class="wdn-mega-link"
-                            >
-                                Search Homes
-                            </a>
-
-                            <a
-                                href="/resources.html"
-                                class="wdn-mega-link"
-                            >
-                                Resources &amp; Terminology
-                            </a>
-                        </div>
-
-                        <!-- SOUTH JERSEY -->
-                        <div class="wdn-mega-column">
-                            <h2 class="wdn-mega-heading">South Jersey</h2>
-
-                            <a
-                                href="/camden-county.html"
-                                class="wdn-mega-link"
-                            >
-                                Camden County
-                            </a>
-
-                            <a
-                                href="/gloucester-county.html"
-                                class="wdn-mega-link"
-                            >
-                                Gloucester County
-                            </a>
-
-                            <a
-                                href="/burlington-county.html"
-                                class="wdn-mega-link"
-                            >
-                                Burlington County
-                            </a>
-
-                            <a
-                                href="/towns/atlantic/index.html"
-                                class="wdn-mega-link"
-                            >
-                                Atlantic County
-                            </a>
-
-                            <a
-                                href="/towns/salem/index.html"
-                                class="wdn-mega-link"
-                            >
-                                Salem County
-                            </a>
-
-                            <a
-                                href="/insights.html"
-                                class="wdn-mega-link"
-                            >
-                                Watchdog Insights
-                            </a>
-                        </div>
-
-                    </div>
-                </div>
-            </div>
-
-            <a href="/property/dashboard" class="wdn-link">
-                <i class="fas fa-table-columns" aria-hidden="true"></i>
-                <span>My Properties</span>
-            </a>
-
-            <a
-                href="/property/dashboard#wishlist"
-                class="wdn-link"
-            >
-                <i class="fas fa-heart" aria-hidden="true"></i>
-                <span class="wdn-link-text-optional">Wishlist</span>
-            </a>
-
-            <a
-                href="/property/dashboard#saved"
-                class="wdn-link"
-            >
-                <i class="fas fa-bookmark" aria-hidden="true"></i>
-                <span class="wdn-link-text-optional">Saved</span>
-            </a>
-
-            <a
-                href="/property/pro"
-                class="wdn-link wdn-pro-link"
-            >
-                <i class="fas fa-briefcase" aria-hidden="true"></i>
-                <span>Pro Hub</span>
-            </a>
-        </div>
-
-        <!-- MOBILE MENU BUTTON -->
+        <!-- MENU: opens the one shared Watchdog drawer (watchdog-universal-menu.js),
+             the same menu used on the property index, Dashboard and Property Home. -->
         <button
             type="button"
-            class="wdn-mobile-button"
+            class="wdn-mobile-button wdn-menu-button"
             id="wdn-mobile-button"
-            onclick="wdnToggleMobile()"
-            aria-expanded="false"
-            aria-controls="wdn-mobile-panel"
-            aria-label="Open navigation menu"
+            data-wd-universal="open-menu"
+            aria-label="Open Watchdog menu"
         >
             <i class="fas fa-bars" aria-hidden="true"></i>
+            <span class="wdn-menu-label">Menu</span>
         </button>
-
-    </div>
-
-    <!-- MOBILE MENU -->
-    <div class="wdn-mobile-panel" id="wdn-mobile-panel">
-
-        <div class="wdn-mobile-group">
-            <h2 class="wdn-mobile-heading">My Watchdog</h2>
-
-            <a
-                href="/property/dashboard"
-                class="wdn-mobile-link"
-            >
-                <i class="fas fa-table-columns" aria-hidden="true"></i>
-                My Properties
-            </a>
-
-            <a
-                href="/property/dashboard#wishlist"
-                class="wdn-mobile-link"
-            >
-                <i class="fas fa-heart" aria-hidden="true"></i>
-                Wishlist
-            </a>
-
-            <a
-                href="/property/dashboard#saved"
-                class="wdn-mobile-link"
-            >
-                <i class="fas fa-bookmark" aria-hidden="true"></i>
-                Saved Properties
-            </a>
-
-            <a href="/property/pro" class="wdn-mobile-link">
-                <i class="fas fa-briefcase" aria-hidden="true"></i>
-                Pro Hub
-            </a>
-        </div>
-
-        <div class="wdn-mobile-group">
-            <h2 class="wdn-mobile-heading">Tax Relief</h2>
-
-            <a
-                href="/anchor-estimator.html"
-                class="wdn-mobile-link"
-            >
-                <i class="fas fa-calculator" aria-hidden="true"></i>
-                Free Benefit Calculator
-            </a>
-
-            <a
-                href="/anchor-program.html"
-                class="wdn-mobile-link"
-            >
-                <i class="fas fa-house" aria-hidden="true"></i>
-                ANCHOR Program
-            </a>
-
-            <a
-                href="/senior-programs.html"
-                class="wdn-mobile-link"
-            >
-                <i class="fas fa-person-cane" aria-hidden="true"></i>
-                Stay NJ &amp; Senior Freeze
-            </a>
-
-            <a
-                href="/property-tax-appeal.html"
-                class="wdn-mobile-link"
-            >
-                <i class="fas fa-scale-balanced" aria-hidden="true"></i>
-                Property Tax Appeals
-            </a>
-        </div>
-
-        <div class="wdn-mobile-group">
-            <h2 class="wdn-mobile-heading">Resources</h2>
-
-            <a href="/insights.html" class="wdn-mobile-link">
-                <i class="fas fa-newspaper" aria-hidden="true"></i>
-                Watchdog Insights
-            </a>
-
-            <a href="/resources.html" class="wdn-mobile-link">
-                <i class="fas fa-book-open" aria-hidden="true"></i>
-                Resources &amp; Terminology
-            </a>
-
-            <a href="/home-value.html" class="wdn-mobile-link">
-                <i class="fas fa-chart-line" aria-hidden="true"></i>
-                Home Value Estimator
-            </a>
-
-            <a href="/search-homes.html" class="wdn-mobile-link">
-                <i class="fas fa-key" aria-hidden="true"></i>
-                Search Homes
-            </a>
-
-            <a href="/#contact" class="wdn-mobile-link">
-                <i class="fas fa-envelope" aria-hidden="true"></i>
-                Talk to an Expert
-            </a>
-        </div>
-
     </div>
 </div>
 
@@ -1081,159 +491,18 @@
     }
 
     /*
-     * Desktop mega menu.
+     * The menu button opens the shared Watchdog drawer. Load its runtime once
+     * (it also works when this fragment is inserted without running scripts,
+     * as long as the host page loads watchdog-universal-menu.js itself).
      */
-    function wdnToggleDropdown(event) {
-        if (event) {
-            event.stopPropagation();
-        }
-
-        var dropdown =
-            document.getElementById("wdn-dropdown");
-
-        var trigger =
-            document.getElementById("wdn-dropdown-trigger");
-
-        if (!dropdown || !trigger) {
+    (function () {
+        var src = "/property/js/watchdog-universal-menu.js";
+        if (window.WatchdogUniversalMenu || document.querySelector('script[src^="' + src + '"]')) {
             return;
         }
-
-        var isOpen =
-            dropdown.classList.toggle("wdn-open");
-
-        trigger.setAttribute(
-            "aria-expanded",
-            isOpen ? "true" : "false"
-        );
-    }
-
-    function wdnCloseDropdown() {
-        var dropdown =
-            document.getElementById("wdn-dropdown");
-
-        var trigger =
-            document.getElementById("wdn-dropdown-trigger");
-
-        if (dropdown) {
-            dropdown.classList.remove("wdn-open");
-        }
-
-        if (trigger) {
-            trigger.setAttribute("aria-expanded", "false");
-        }
-    }
-
-    /*
-     * Mobile navigation.
-     */
-    function wdnToggleMobile() {
-        var panel =
-            document.getElementById("wdn-mobile-panel");
-
-        var button =
-            document.getElementById("wdn-mobile-button");
-
-        if (!panel || !button) {
-            return;
-        }
-
-        var isOpen =
-            panel.classList.toggle("wdn-mobile-open");
-
-        button.setAttribute(
-            "aria-expanded",
-            isOpen ? "true" : "false"
-        );
-
-        button.setAttribute(
-            "aria-label",
-            isOpen
-                ? "Close navigation menu"
-                : "Open navigation menu"
-        );
-
-        button.innerHTML = isOpen
-            ? '<i class="fas fa-xmark" aria-hidden="true"></i>'
-            : '<i class="fas fa-bars" aria-hidden="true"></i>';
-
-        if (isOpen) {
-            wdnCloseDropdown();
-        }
-    }
-
-    function wdnCloseMobile() {
-        var panel =
-            document.getElementById("wdn-mobile-panel");
-
-        var button =
-            document.getElementById("wdn-mobile-button");
-
-        if (panel) {
-            panel.classList.remove("wdn-mobile-open");
-        }
-
-        if (button) {
-            button.setAttribute("aria-expanded", "false");
-            button.setAttribute(
-                "aria-label",
-                "Open navigation menu"
-            );
-
-            button.innerHTML =
-                '<i class="fas fa-bars" aria-hidden="true"></i>';
-        }
-    }
-
-    /*
-     * Close open menus when clicking elsewhere.
-     */
-    document.addEventListener("click", function (event) {
-        var navigation =
-            document.getElementById("wd-property-nav");
-
-        var dropdown =
-            document.getElementById("wdn-dropdown");
-
-        if (
-            dropdown &&
-            !dropdown.contains(event.target)
-        ) {
-            wdnCloseDropdown();
-        }
-
-        if (
-            navigation &&
-            !navigation.contains(event.target)
-        ) {
-            wdnCloseMobile();
-        }
-    });
-
-    /*
-     * Keyboard support.
-     */
-    document.addEventListener("keydown", function (event) {
-        if (event.key === "Escape") {
-            wdnCloseDropdown();
-            wdnCloseMobile();
-        }
-    });
-
-    /*
-     * Close the mobile panel after selecting a link.
-     */
-    document
-        .querySelectorAll("#wdn-mobile-panel a")
-        .forEach(function (link) {
-            link.addEventListener("click", wdnCloseMobile);
-        });
-
-    /*
-     * Reset mobile state when resizing to desktop.
-     */
-    window.addEventListener("resize", function () {
-        if (window.innerWidth > 980) {
-            wdnCloseMobile();
-        }
-    });
+        var script = document.createElement("script");
+        script.src = src;
+        script.defer = true;
+        document.head.appendChild(script);
+    })();
 </script>

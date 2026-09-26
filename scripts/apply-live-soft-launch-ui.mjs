@@ -14,11 +14,6 @@ async function transform(path, edits) {
 
 await transform('property/js/app-shell-2027.js', [
   {
-    label: 'drawer brand home link',
-    from: 'function dashboardBrand(){return\'<a class="wd4-brand" href="/property/dashboard">',
-    to: 'function dashboardBrand(){return\'<a class="wd4-brand" href="/property/" aria-label="Watchdog property lookup">'
-  },
-  {
     label: 'topbar brand home link',
     from: '<a class="wdx-brand" href="/property/dashboard">',
     to: '<a class="wdx-brand" href="/property/" aria-label="Watchdog property lookup">'

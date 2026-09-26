@@ -773,7 +773,7 @@ window.addEventListener('load',function(){if('serviceWorker' in navigator)naviga
 
   var STYLE='/property/css/brand-consistency.css';
   var UNIVERSAL='/property/js/watchdog-universal-menu.js';
-  var ANCHOR_APPS_MENU='/property/js/anchor-applications-menu-runtime.js?v=20260912a';
+  var ANCHOR_APPS_MENU='/property/js/anchor-applications-menu-runtime.js?v=20260926a';
   var CITY_ADDRESS='/property/js/city-address-runtime.js?v=20260823a';
   var LANDING_RECENTS='/property/js/landing-recent-intelligence.js?v=20260824a';
   var FREE_GRID_IMAGERY='/property/js/free-imagery-grid-runtime.js';
@@ -3161,8 +3161,9 @@ function avatarUrl(){var m=user&&user.user_metadata||{};return profile.avatar_ur
 function paintAvatar(){var host=document.getElementById('hm27-avatar');if(!host)return;var url=avatarUrl();host.innerHTML=url?'<img src="'+esc(url)+'" alt="">':'<span class="hm27-avatar-fallback">'+esc(firstName().charAt(0).toUpperCase())+'</span>';}
 function planLabel(){var p=String(profile.plan_tier||profile.plan||'standard').toLowerCase().replace('_plus','+');if(profile.account_role==='developer')return'Developer';return p==='standard'?'Standard':p.replace(/\b\w/g,function(c){return c.toUpperCase();});}
 
-function nav(){return document.getElementById('hm27-nav');}
-function navOpen(open){var n=nav();if(!n)return;n.classList.toggle('open',!!open);n.setAttribute('aria-hidden',open?'false':'true');document.body.classList.toggle('hm-nav-open',!!open);}
+/* Main navigation is the one shared Watchdog drawer from watchdog-universal-menu.js. */
+function nav(){return document.getElementById('wd-main-sheet');}
+function navOpen(open){var m=window.WatchdogUniversalMenu;if(!m)return;if(open)m.open();else m.close();}
 window.hmToggleSidebar=function(){var n=nav();navOpen(!(n&&n.classList.contains('open')));};
 
 function ensurePopovers(){
@@ -3226,10 +3227,10 @@ function bind(){
   var profileBtn=document.getElementById('hm27-profile');if(profileBtn)profileBtn.addEventListener('click',function(e){e.preventDefault();e.stopPropagation();togglePop('hm27-profile-pop');});
   var notify=document.getElementById('hm27-notify');if(notify)notify.addEventListener('click',function(e){e.preventDefault();e.stopPropagation();paintNotifications();togglePop('hm27-notice-pop');});
   document.addEventListener('click',function(ev){
-    var action=ev.target.closest&&ev.target.closest('[data-hm27]');if(action){var a=action.dataset.hm27;if(a==='nav-close')navOpen(false);else if(a==='read-all')setReadAt();else if(a==='invite')shareInvite();else if(a==='signout')db.auth.signOut().then(function(){location.href='/property/';});ev.preventDefault();return;}
+    var action=ev.target.closest&&ev.target.closest('[data-hm27]');if(action){var a=action.dataset.hm27;if(a==='read-all')setReadAt();else if(a==='invite')shareInvite();else if(a==='signout')db.auth.signOut().then(function(){location.href='/property/';});ev.preventDefault();return;}
     if(!ev.target.closest('.hm27-pop')&&!ev.target.closest('#hm27-profile')&&!ev.target.closest('#hm27-notify'))closePops();
   });
-  document.addEventListener('keydown',function(ev){if(ev.key==='Escape'){closePops();navOpen(false);}});
+  document.addEventListener('keydown',function(ev){if(ev.key==='Escape'){closePops();}});
   document.addEventListener('change',function(ev){if(ev.target&&ev.target.id==='hm-switch'){setTimeout(refreshContext,120);}});
 }
 
@@ -3259,7 +3260,7 @@ if(document.readyState==='loading')document.addEventListener('DOMContentLoaded',
       .then(function(){return loadScript('/property/js/dashboard/home/home-property-visual-guarantee.js?v=20260827b');})
       .catch(function(error){console.warn('Watchdog Home property visual unavailable:',error&&error.message||error);});
   }
-  function loadLiveFix(){return loadScript('/property/js/dashboard/home/home-live-fix-20260824.js?v=20260824d').catch(function(error){console.warn('Watchdog Home live fix unavailable:',error&&error.message||error);});}
+  function loadLiveFix(){return loadScript('/property/js/dashboard/home/home-live-fix-20260824.js?v=20260926a').catch(function(error){console.warn('Watchdog Home live fix unavailable:',error&&error.message||error);});}
   function loadUntestableSupport(){return loadScript('/property/js/dashboard/home/untestable-support.js?v=20260828a').catch(function(error){console.warn('Watchdog Home support guidance unavailable:',error&&error.message||error);});}
   function loadIntelligenceRuntime(){var assets=['/property/js/watchdog-intelligence-context.js','/property/js/watchdog-semantic-context.js','/property/js/watchdog-page-context.js','/property/js/watchdog-home-semantic-bridge.js','/property/js/watchdog-context-feedback.js','/property/js/dashboard/home/watchdog-analyst-intel-loader.js','/property/js/watchdog-intelligence-density.js','/property/js/dashboard/home/watchdog-data-graph.js','/property/js/watchdog-today-nav.js'];return assets.reduce(function(chain,src){return chain.then(function(){return loadScript(src);});},Promise.resolve()).catch(function(error){console.warn('Watchdog Home Intelligence runtime unavailable:',error&&error.message||error);});}
   function refreshUniversalMenu(){if(window.WatchdogUniversalMenu&&typeof window.WatchdogUniversalMenu.refresh==='function')window.WatchdogUniversalMenu.refresh();}

@@ -5,7 +5,7 @@
 
   var STYLE='/property/css/brand-consistency.css';
   var UNIVERSAL='/property/js/watchdog-universal-menu.js';
-  var ANCHOR_APPS_MENU='/property/js/anchor-applications-menu-runtime.js?v=20260912a';
+  var ANCHOR_APPS_MENU='/property/js/anchor-applications-menu-runtime.js?v=20260926a';
   var CITY_ADDRESS='/property/js/city-address-runtime.js?v=20260823a';
   var LANDING_RECENTS='/property/js/landing-recent-intelligence.js?v=20260824a';
   var FREE_GRID_IMAGERY='/property/js/free-imagery-grid-runtime.js';

@@ -19,9 +19,9 @@ assert.match(pro, /data-billing-plan="pro_plus"/);
 assert.match(pro, /Paid enrollment is open for Agent, Pro and Pro\+/);
 assert.match(pro, /pro-soft-launch\.css/);
 
-assert.match(appShell, /class="wd4-brand" href="\/property\/" aria-label="Watchdog property lookup"/);
 assert.match(appShell, /class="wdx-brand" href="\/property\/" aria-label="Watchdog property lookup"/);
-assert.doesNotMatch(appShell, /class="wd4-brand" href="\/property\/dashboard"/);
+// The app shell no longer renders its own drawer; the shared universal drawer owns navigation.
+assert.doesNotMatch(appShell, /wd4-nav|wd4-brand/);
 assert.match(sideMenu, /class="db-side-brand" href="\/property\/" aria-label="Watchdog property lookup"/);
 assert.match(sideMenu, /class="wd-mobile-menu-brand" href="\/property\/" aria-label="Watchdog property lookup"/);
 
