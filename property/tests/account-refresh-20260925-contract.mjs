@@ -25,8 +25,8 @@ expect(selfService.includes('ac-provider-boldtrail')&&selfService.includes('ac-p
 const colorCount=(refresh.match(/kind:'color'/g)||[]).length;
 const imageCount=(refresh.match(/kind:'image'/g)||[]).length;
 expect(colorCount===10,'expected 10 color/gradient hero themes');
-expect(imageCount===5,'expected 5 image hero themes');
-expect((refresh.match(/images\.unsplash\.com/g)||[]).length===5,'Unsplash image presets missing');
+expect(imageCount===10,'expected 10 image hero themes');
+expect((refresh.match(/images\.unsplash\.com/g)||[]).length===10,'Unsplash image presets missing');
 expect(refresh.includes("watchdog_account_hero_theme"),'hero theme persistence missing');
 expect(refresh.includes("agent:{label:'Agent',value:'$1,499'"),'Agent Lifetime price missing');
 expect(refresh.includes("pro:{label:'Pro',value:'$3,499'"),'Pro Lifetime price missing');
