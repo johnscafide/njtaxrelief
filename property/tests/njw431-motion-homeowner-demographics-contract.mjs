@@ -5,6 +5,7 @@ function must(v,m){if(!v)throw new Error(m)}
 
 const refresh=read('property/js/account-refresh-20260925.js');
 const refreshCss=read('property/css/account-refresh-20260925.css');
+const customizerCss=read('property/css/account-customizer-20260926.css');
 const accountPage=read('property/account/index.html');
 const homeownerPage=read('property/account/profile/index.html');
 const profile=read('property/js/account-profile.js');
@@ -21,9 +22,9 @@ must(refresh.includes("node.style.removeProperty('background')"),'Motion theme d
 must(refresh.includes("node.dataset.motionTheme=theme.key"),'Motion theme data attribute persistence missing.');
 must(refreshCss.includes('[data-motion-theme="aurora-motion"]')&&refreshCss.includes('background:'),'Motion theme CSS background missing.');
 must(refreshCss.includes('@keyframes acMotionAurora')&&refreshCss.includes('@keyframes acMotionSpectrum'),'Motion keyframes missing.');
-must(refreshCss.includes('position:static!important')&&refreshCss.includes('.ac-theme-browser'),'Customizer browser flow reset missing.');
+must(refresh.includes("panel.className='acx-picker'")&&customizerCss.includes('.acx-browser'),'Isolated customizer browser missing.');
 must(refreshCss.includes('box-shadow:none!important'),'Avatar glow removal missing.');
-must(refreshCss.includes('linear-gradient(135deg,var(--broker-secondary,#f15a24),var(--broker-primary,#0b8b85)) border-box'),'Brokerage color reversal on hover missing.');
+must(customizerCss.includes('@keyframes acBrokerRingSpin'),'Brokerage hover rotation missing.');
 
 must(profile.includes('await Promise.resolve(window.njptrAccessReady)'),'Homeowner profile does not wait for protected-route auth.');
 must(profile.includes('db.auth.onAuthStateChange'),'Homeowner profile does not retry after auth restoration.');
@@ -48,7 +49,8 @@ must(!intel.includes("'residence_tenure_band'"),'Residence tenure must not be co
 must(!intel.includes("'primary_residence'"),'Primary residence flag must not be copied to Intelligence assumptions.');
 
 must(accountPage.includes('account-refresh-20260925.css?v=20260926a'),'Account customizer CSS cache version missing.');
-must(accountPage.includes('account-refresh-20260925.js?v=20260926a'),'Account customizer JS cache version missing.');
+must(accountPage.includes('account-refresh-20260925.js?v=20260926b'),'Account customizer JS cache version missing.');
+must(accountPage.includes('account-customizer-20260926.css?v=20260926b'),'Account isolated customizer CSS cache version missing.');
 must(accountPage.includes('account-profile.js?v=20260926a'),'Shared profile JS cache version missing.');
 must(homeownerPage.includes('account-profile.js?v=20260926a'),'Homeowner profile JS cache version missing.');
 must(homeownerPage.includes('account-profile.css?v=20260926a'),'Homeowner profile CSS cache version missing.');

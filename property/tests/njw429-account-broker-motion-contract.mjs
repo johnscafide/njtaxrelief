@@ -6,6 +6,7 @@ function must(v,m){if(!v)throw new Error(m)}
 const account=read('property/js/account.js');
 const refresh=read('property/js/account-refresh-20260925.js');
 const css=read('property/css/account-refresh-20260925.css');
+const customizerCss=read('property/css/account-customizer-20260926.css');
 const page=read('property/account/index.html');
 
 must(account.includes('function brokerageBrand()'),'Brokerage avatar brand resolver missing.');
@@ -33,7 +34,8 @@ must(refresh.includes('applyThemeVisual'),'Motion/static theme visual helper mis
 must(!refresh.includes('PROFILE &amp; SETTINGS'),'Preview still contains removed eyebrow text.');
 
 must(css.includes('.ac-avatar-wrap.has-broker-brand .ac-avatar'),'Brokerage color ring styling missing.');
-must(css.includes('linear-gradient(135deg,var(--broker-secondary,#f15a24),var(--broker-primary,#0b8b85)) border-box'),'Brokerage hover ring does not reverse colors.');
+must(customizerCss.includes('@keyframes acBrokerRingSpin'),'Brokerage hover ring animation missing.');
+must(customizerCss.includes('animation:acBrokerRingSpin 1.35s linear infinite!important'),'Brokerage ring must rotate continuously only on hover.');
 must(css.includes('.ac-pro-badge.social-verify'),'Social verification styling missing.');
 must(css.includes('.ac-hero-style-toggle')&&css.includes('background:transparent!important'),'Customize text-control styling missing.');
 must(css.includes('@keyframes acMotionAurora'),'Aurora animation missing.');
@@ -46,6 +48,7 @@ must(refresh.includes('id="ac-theme-browser-grid"')&&refresh.includes('renderThe
 
 must(page.includes('account.js?v=20260925c'),'Account hero JS cache version missing.');
 must(page.includes('account-refresh-20260925.css?v=20260926a'),'Account motion CSS cache version missing.');
-must(page.includes('account-refresh-20260925.js?v=20260926a'),'Account customizer JS cache version missing.');
+must(page.includes('account-refresh-20260925.js?v=20260926b'),'Account customizer JS cache version missing.');
+must(page.includes('account-customizer-20260926.css?v=20260926b'),'Isolated Account customizer CSS missing.');
 
 console.log('NJW-429 brokerage avatar and motion background contract passed');

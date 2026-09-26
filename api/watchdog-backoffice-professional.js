@@ -35,17 +35,22 @@ async function insert(table,body){
   const r=await fetch(SUPABASE_URL+'/rest/v1/'+table,{method:'POST',headers:serviceHeaders({'Content-Type':'application/json',Prefer:'return=minimal'}),body:JSON.stringify(body),cache:'no-store'});
   if(!r.ok)throw new Error('Could not write audit event.');
 }
-async function headCount(table,filters){
-  const u=new URL(SUPABASE_URL+'/rest/v1/'+table);u.searchParams.set('select','id');
+async function headCount(table,filters,countColumn){
+  const u=new URL(SUPABASE_URL+'/rest/v1/'+table);
+  u.searchParams.set('select',countColumn||'*');
   Object.entries(filters||{}).forEach(([k,v])=>u.searchParams.set(k,String(v)));
   const r=await fetch(u,{method:'HEAD',headers:serviceHeaders({Prefer:'count=exact',Range:'0-0'}),cache:'no-store'});
-  if(!r.ok&&r.status!==206)throw new Error('Could not count '+table+'.');
-  const total=Number(String(r.headers.get('content-range')||'').split('/')[1]);return Number.isFinite(total)?total:0;
+  if(!r.ok){
+    const hint='status '+r.status+(countColumn?' · '+countColumn:'');
+    throw new Error('Could not count '+table+' ('+hint+').');
+  }
+  const total=Number(String(r.headers.get('content-range')||'').split('/')[1]);
+  return Number.isFinite(total)?total:0;
 }
 async function counts(){
   const [realtor,connections]=await Promise.all([
-    headCount('professional_realtor_verifications',{verification_status:'eq.pending'}),
-    headCount('professional_provider_connections',{connection_status:'eq.requested'})
+    headCount('professional_realtor_verifications',{verification_status:'eq.pending'},'user_id'),
+    headCount('professional_provider_connections',{connection_status:'eq.requested'},'id')
   ]);
   return{pending_realtor_count:realtor,connection_request_count:connections,pending_count:realtor+connections};
 }
