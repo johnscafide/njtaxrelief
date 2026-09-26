@@ -140,9 +140,9 @@
     var logo = brokerLogo(agent);
     var primary = safeHex(agent.brokerage_primary_color, '#0B8B85');
     var secondary = safeHex(agent.brokerage_secondary_color, '#83E2DC');
-    return '<div class="ac-hero-broker" style="--broker-primary:' + esc(primary) + ';--broker-secondary:' + esc(secondary) + '">' +
+    return '<span class="ac-hero-broker" style="--broker-primary:' + esc(primary) + ';--broker-secondary:' + esc(secondary) + '" title="Brokerage: ' + esc(name) + '">' +
       (logo ? '<span class="ac-hero-broker-logo"><img src="' + esc(logo) + '" alt=""></span>' : '<span class="ac-hero-broker-logo fallback"><i class="fas fa-building"></i></span>') +
-      '<span><small>BROKERAGE</small><b>' + esc(name) + '</b></span></div>';
+      '<b>' + esc(name) + '</b></span>';
   }
   function select(id, label, options, value) {
     return '<label>' + esc(label) + '<select id="' + id + '">' + options.map(function (option) {
