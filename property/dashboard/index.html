@@ -19,25 +19,100 @@
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.9.4/leaflet.min.css">
   <link rel="stylesheet" href="/property/css/shared/00-design-tokens.css">
   <link rel="stylesheet" href="/property/css/app-shell-2027.css">
-  <link rel="stylesheet" href="/property/css/dashboard/watchdog-dashboard.css?v=20260827a">
+  <link rel="stylesheet" href="/property/css/dashboard/watchdog-dashboard.css?v=20260926b">
   <link rel="stylesheet" href="/property/css/dashboard/watchdog-dashboard-hotfix.css?v=20260827e">
   <link rel="stylesheet" href="/property/css/dashboard/watchdog-dashboard-followup.css?v=20260827a">
   <link rel="stylesheet" href="/property/css/dashboard/watchdog-dashboard-visuals.css?v=20260911a">
   <!-- NJW-404: Spike is the canonical dashboard presentation. -->
   <link rel="stylesheet" href="/property/css/dashboard/watchdog-dashboard-spike.css?v=20260921b">
-  <link rel="stylesheet" href="/property/css/dashboard/watchdog-dashboard-spike-promoted.css?v=20260921a">
+  <link rel="stylesheet" href="/property/css/dashboard/watchdog-dashboard-spike-promoted.css?v=20260926b">
   <!-- Dashboard hero (greeting, next action, score panel). Loaded last. -->
   <link rel="stylesheet" href="/property/css/dashboard/watchdog-dashboard-hero-2027.css?v=20260925a">
 </head>
 <body data-sidebar-page="dashboard">
-  <div class="wdd-boot" id="wdd-boot" aria-live="polite">
+  <div class="wdd-boot" id="wdd-boot">
     <div class="wdd-boot-card">
-      <span class="wdd-boot-mark"><i class="fas fa-dog" aria-hidden="true"></i></span>
+      <div class="wdd-boot-scene" aria-hidden="true">
+        <span class="wdd-boot-track"><span class="wdd-boot-track-light"></span></span>
+        <span class="wdd-boot-dog" id="wdd-boot-dog"><span class="wdd-boot-dog-frame"></span></span>
+      </div>
       <h1>Opening your dashboard</h1>
-      <p id="wdd-boot-msg">Loading your saved properties and current scores.</p>
+      <p id="wdd-boot-msg" role="status" aria-live="polite">Loading your saved properties and current scores.</p>
       <button type="button" id="wdd-boot-retry" hidden>Reload</button>
     </div>
   </div>
+
+  <script>
+    (function () {
+      var boot = document.getElementById('wdd-boot');
+      var retry = document.getElementById('wdd-boot-retry');
+      if (!boot || !retry) return;
+      var started = performance.now();
+      var pausedDuration = 0;
+      var glanceStartedAt = 0;
+      var failed = !retry.hidden;
+      var motion = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)');
+      var glanceTimer;
+      function setGlance() {
+        if (failed || boot.hidden || (motion && motion.matches)) return;
+        glanceStartedAt = performance.now();
+        boot.classList.add('is-glancing');
+        window.setTimeout(function () {
+          boot.classList.remove('is-glancing');
+          pausedDuration += performance.now() - glanceStartedAt;
+          scheduleGlance(false);
+        }, 760);
+      }
+      function scheduleGlance(nextCycle) {
+        if (glanceTimer) window.clearTimeout(glanceTimer);
+        if (failed || boot.hidden || (motion && motion.matches)) return;
+        var wait = 0;
+        if (nextCycle) wait = nextCycle;
+        else {
+          var elapsed = performance.now() - started - pausedDuration;
+          var remainder = ((elapsed % 7600) + 7600) % 7600;
+          wait = remainder < 3750 ? 3750 - remainder : 7600 - remainder + 3750;
+        }
+        glanceTimer = window.setTimeout(setGlance, wait);
+      }
+      function startGlanceCycle() {
+        if (glanceTimer) window.clearTimeout(glanceTimer);
+        scheduleGlance(false);
+      }
+      function onMotionChange() {
+        if (motion && !motion.matches) {
+          started = performance.now();
+          pausedDuration = 0;
+          boot.classList.remove('is-glancing');
+        }
+        startGlanceCycle();
+      }
+      function markFailed() {
+        failed = !retry.hidden;
+        if (failed) boot.classList.add('is-failed');
+        else boot.classList.remove('is-failed');
+      }
+      if (window.MutationObserver) {
+        new MutationObserver(markFailed).observe(retry, { attributes: true, attributeFilter: ['hidden'] });
+      }
+      if (motion && motion.addEventListener) motion.addEventListener('change', onMotionChange);
+      else if (motion && motion.addListener) motion.addListener(onMotionChange);
+      startGlanceCycle();
+      document.addEventListener('wd:ready', function () {
+        var elapsed = performance.now() - started;
+        markFailed();
+        if (glanceTimer) window.clearTimeout(glanceTimer);
+        boot.classList.remove('is-glancing');
+        if (!failed && elapsed < 2400 && !(motion && motion.matches)) {
+          boot.hidden = false;
+          boot.classList.add('is-completing');
+          window.setTimeout(function () { boot.hidden = true; boot.classList.remove('is-completing'); }, 260);
+        } else {
+          boot.hidden = true;
+        }
+      }, { once: true });
+    })();
+  </script>
 
   <main class="wdd-app" id="wdd-app" hidden>
     <div class="wdd-shell">
@@ -74,7 +149,7 @@
   <script src="/property/js/tax-year-intelligence.js" defer></script>
   <script src="/property/js/dashboard/wd-core.js?v=20260925a" defer></script>
   <script src="/property/js/dashboard/wd-dashboard-polish.js?v=20260827e" defer></script>
-  <script src="/property/js/dashboard/wd-render.js?v=20260925a" defer></script>
+  <script src="/property/js/dashboard/wd-render.js?v=20260926b" defer></script>
   <script src="/property/js/dashboard/wd-dashboard-followup.js?v=20260827a" defer></script>
   <script src="/property/js/dashboard/wd-session-data-bridge.js?v=20260827c" defer></script>
   <script src="/property/js/dashboard/wd-intel.js?v=20260827a" defer></script>
