@@ -37,9 +37,12 @@ body[data-sidebar-page="dashboard"] .wdd-boot-card{width:min(460px,100%);padding
 body[data-sidebar-page="dashboard"] .wdd-boot-scene{position:relative;width:min(360px,100%);height:132px;margin:0 auto 10px;overflow:hidden}
 body[data-sidebar-page="dashboard"] .wdd-boot-track{position:absolute;left:5%;right:5%;bottom:18px;height:8px;overflow:hidden;border-radius:8px;background:#e3ebf6;box-shadow:inset 0 1px 2px rgba(19,42,79,.08)}
 body[data-sidebar-page="dashboard"] .wdd-boot-track-light{position:absolute;inset:0 auto 0 0;width:24%;border-radius:inherit;background:linear-gradient(90deg,rgba(47,109,246,.12),rgba(47,109,246,.62),rgba(47,109,246,.12));animation:wdd-boot-sweep 1.6s ease-in-out infinite}
-body[data-sidebar-page="dashboard"] .wdd-boot-dog{position:absolute;left:0;bottom:12px;width:120px;height:100px;background-image:url('/agent/assets/watchdog-beagle-walk.webp');background-repeat:no-repeat;background-size:200% 200%;background-position:0 0;filter:drop-shadow(0 5px 5px rgba(22,46,79,.12));animation:wdd-beagle-route 7.6s linear infinite,wdd-beagle-legs .42s steps(1,end) infinite}
-body[data-sidebar-page="dashboard"] .wdd-boot.is-glancing .wdd-boot-dog{animation-play-state:paused;background-position:100% 100%!important}
-body[data-sidebar-page="dashboard"] .wdd-boot.is-failed .wdd-boot-dog{animation-play-state:paused;background-position:100% 100%!important}
+body[data-sidebar-page="dashboard"] .wdd-boot-dog{position:absolute;left:0;bottom:12px;width:120px;height:100px;filter:drop-shadow(0 5px 5px rgba(22,46,79,.12));animation:wdd-beagle-route 7.6s linear infinite}
+body[data-sidebar-page="dashboard"] .wdd-boot-dog-frame{display:block;width:100%;height:100%;background-image:url('/agent/assets/watchdog-beagle-walk.webp');background-repeat:no-repeat;background-size:200% 200%;background-position:0 0;animation:wdd-beagle-legs .42s steps(1,end) infinite}
+body[data-sidebar-page="dashboard"] .wdd-boot.is-glancing .wdd-boot-dog{animation-play-state:paused}
+body[data-sidebar-page="dashboard"] .wdd-boot.is-glancing .wdd-boot-dog-frame{animation:none;background-position:100% 100%}
+body[data-sidebar-page="dashboard"] .wdd-boot.is-failed .wdd-boot-dog{animation-play-state:paused}
+body[data-sidebar-page="dashboard"] .wdd-boot.is-failed .wdd-boot-dog-frame{animation:none;background-position:100% 100%}
 body[data-sidebar-page="dashboard"] .wdd-boot.is-completing{inset:auto 0 0;z-index:999;display:block;height:72px;min-height:0;padding:0;background:transparent;pointer-events:none}
 body[data-sidebar-page="dashboard"] .wdd-boot.is-completing .wdd-boot-card{width:min(460px,100%);height:72px;margin:0 auto;padding:0;border:0;background:transparent;box-shadow:none}
 body[data-sidebar-page="dashboard"] .wdd-boot.is-completing .wdd-boot-card h1,
@@ -47,10 +50,11 @@ body[data-sidebar-page="dashboard"] .wdd-boot.is-completing .wdd-boot-card p,
 body[data-sidebar-page="dashboard"] .wdd-boot.is-completing #wdd-boot-retry{display:none}
 body[data-sidebar-page="dashboard"] .wdd-boot.is-completing .wdd-boot-scene{width:100%;height:72px;margin:0 auto}
 body[data-sidebar-page="dashboard"] .wdd-boot.is-completing .wdd-boot-track{bottom:5px}
-body[data-sidebar-page="dashboard"] .wdd-boot.is-completing .wdd-boot-dog{bottom:0;width:80px;height:67px;background-position:0 0;animation:wdd-beagle-finish .26s linear forwards,wdd-beagle-run-legs .13s steps(1,end) infinite}
+body[data-sidebar-page="dashboard"] .wdd-boot.is-completing .wdd-boot-dog{bottom:0;width:80px;height:67px;animation:wdd-beagle-finish .26s linear forwards}
+body[data-sidebar-page="dashboard"] .wdd-boot.is-completing .wdd-boot-dog-frame{animation:wdd-beagle-run-legs .13s steps(1,end) infinite}
 @keyframes wdd-boot-sweep{0%{transform:translateX(-105%)}100%{transform:translateX(430%)}}
 @keyframes wdd-beagle-legs{0%,100%{background-position:0 0}50%{background-position:100% 0}}
 @keyframes wdd-beagle-run-legs{0%,100%{background-position:0 0}50%{background-position:100% 0}}
 @keyframes wdd-beagle-route{0%{left:0}42%{left:calc(50% - 60px)}52%{left:calc(50% - 60px)}100%{left:calc(100% - 120px)}}
 @keyframes wdd-beagle-finish{from{left:0}to{left:calc(100% - 80px)}}
-@media(prefers-reduced-motion:reduce){body[data-sidebar-page="dashboard"] .wdd-boot-track-light{animation:none;left:38%;width:24%;opacity:.65}body[data-sidebar-page="dashboard"] .wdd-boot-dog{left:calc(50% - 60px);animation:none;background-position:0 0}body[data-sidebar-page="dashboard"] .wdd-boot.is-glancing .wdd-boot-dog{background-position:100% 100%!important}body[data-sidebar-page="dashboard"] .wdd-boot.is-completing{display:none}}
+@media(prefers-reduced-motion:reduce){body[data-sidebar-page="dashboard"] .wdd-boot-track-light{animation:none;left:38%;width:24%;opacity:.65}body[data-sidebar-page="dashboard"] .wdd-boot-dog{left:calc(50% - 60px);animation:none}body[data-sidebar-page="dashboard"] .wdd-boot-dog-frame{animation:none;background-position:0 0}body[data-sidebar-page="dashboard"] .wdd-boot.is-glancing .wdd-boot-dog-frame{background-position:100% 100%}body[data-sidebar-page="dashboard"] .wdd-boot.is-completing{display:none}}
