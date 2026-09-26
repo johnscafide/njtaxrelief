@@ -73,6 +73,11 @@ function themeButton(theme){
     var preview=button.querySelector('.acx-card-preview');
     if(preview)preview.dataset.motionTheme=theme.key;
   }
+  button.addEventListener('click',function(event){
+    event.preventDefault();
+    event.stopPropagation();
+    updateThemePreview(theme.key);
+  });
   return button;
 }
 function syncThemePreviewIdentity(){
@@ -93,6 +98,7 @@ function syncThemePreviewIdentity(){
 function updateThemePreview(key){
   var theme=themeByKey(key),panel=document.getElementById('ac-theme-popover');pendingThemeKey=theme.key;
   if(!panel)return;
+  panel.dataset.pendingTheme=theme.key;
   var banner=panel.querySelector('#ac-theme-preview-banner');if(banner)applyThemeVisual(banner,theme);
   panel.querySelectorAll('.acx-card').forEach(function(button){
     button.setAttribute('aria-pressed',button.dataset.heroTheme===theme.key?'true':'false');
@@ -121,7 +127,7 @@ function setThemeTab(panel,kind){
 function closeThemePanel(){
   var panel=document.getElementById('ac-theme-popover'),backdrop=document.getElementById('ac-theme-backdrop');
   if(panel)panel.hidden=true;if(backdrop)backdrop.hidden=true;document.body.classList.remove('ac-theme-open');
-  pendingThemeKey=null;pendingThemeOriginalKey=null;
+  pendingThemeKey=null;pendingThemeOriginalKey=null;if(panel)delete panel.dataset.pendingTheme;
   if(activeThemeToggle){activeThemeToggle.setAttribute('aria-expanded','false');activeThemeToggle.focus();activeThemeToggle=null;}
 }
 function ensureThemePanel(){
@@ -140,7 +146,7 @@ function ensureThemePanel(){
     var tab=event.target.closest('[data-theme-tab]');if(tab){setThemeTab(panel,tab.dataset.themeTab);return;}
     var choice=event.target.closest('[data-hero-theme]');if(choice){updateThemePreview(choice.dataset.heroTheme);return;}
     if(event.target.closest('[data-cancel-theme]')){closeThemePanel();return;}
-    if(event.target.closest('[data-apply-theme]')){saveTheme(pendingThemeKey||pendingThemeOriginalKey);return;}
+    if(event.target.closest('[data-apply-theme]')){saveTheme(panel.dataset.pendingTheme||pendingThemeKey||pendingThemeOriginalKey);return;}
   });
   document.addEventListener('keydown',function(event){if(event.key==='Escape'&&!panel.hidden)closeThemePanel();});
   return panel;
