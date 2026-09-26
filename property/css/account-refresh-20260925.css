@@ -732,3 +732,102 @@ body[data-sidebar-page="account"] .ac-hero-broker b{
   body[data-sidebar-page="account"] .ac-pro-badge{min-height:22px;font-size:8px}
   body[data-sidebar-page="account"] .ac-hero-broker{max-width:100%}
 }
+
+
+/* NJW-428 · account identity + Sync Accounts polish */
+body[data-sidebar-page="account"] .ac-page-top{
+  border:0!important;border-bottom:0!important;box-shadow:none!important;background:transparent!important;
+  padding-top:20px!important;padding-bottom:12px!important
+}
+body[data-sidebar-page="account"] .ac-page-top .top-in,
+body[data-sidebar-page="account"] .ac-page-top .who{
+  border:0!important;border-bottom:0!important;box-shadow:none!important
+}
+body[data-sidebar-page="account"] .ac-page-top .top-eyebrow,
+body[data-sidebar-page="account"] .ac-page-top .who>div:last-child>span,
+body[data-sidebar-page="account"] .ac-page-top .who>div:last-child>p,
+body[data-sidebar-page="account"] .ac-page-top .who>div:last-child>small{
+  display:none!important
+}
+body[data-sidebar-page="account"] .ac-page-top h1{
+  margin:0!important;font-size:clamp(34px,4vw,58px)!important;line-height:1!important;letter-spacing:-.045em!important
+}
+
+/* Keep verified identity, verification badge and brokerage on one clean identity line. */
+body[data-sidebar-page="account"] .ac-hero-name-row{
+  display:flex!important;align-items:center!important;gap:8px!important;flex-wrap:wrap!important;
+  margin:5px 0 5px!important
+}
+body[data-sidebar-page="account"] .ac-hero-name-row h1{margin:0!important}
+body[data-sidebar-page="account"] .ac-pro-badge{
+  min-height:23px!important;padding:0 8px!important;border-radius:999px!important;font-size:8px!important
+}
+body[data-sidebar-page="account"] .ac-hero-broker{
+  display:inline-flex!important;align-items:center!important;gap:6px!important;max-width:260px!important;
+  min-height:28px!important;margin:0!important;padding:3px 8px 3px 4px!important;
+  border:1px solid rgba(255,255,255,.18)!important;border-radius:999px!important;
+  background:rgba(5,27,47,.25)!important;backdrop-filter:blur(9px)!important;
+  color:#fff!important;vertical-align:middle!important
+}
+body[data-sidebar-page="account"] .ac-hero-broker-logo{
+  width:21px!important;height:21px!important;min-width:21px!important;flex:0 0 21px!important;padding:2px!important;
+  border-radius:50%!important;background:rgba(255,255,255,.96)!important
+}
+body[data-sidebar-page="account"] .ac-hero-broker-logo img{width:100%!important;height:100%!important;object-fit:contain!important}
+body[data-sidebar-page="account"] .ac-hero-broker b{
+  display:block!important;min-width:0!important;overflow:hidden!important;text-overflow:ellipsis!important;white-space:nowrap!important;
+  color:#fff!important;font-size:9px!important;line-height:1!important;letter-spacing:.01em!important
+}
+body[data-sidebar-page="account"] .ac-hero-broker small{display:none!important}
+
+/* Profile routing no longer needs a role-separation callout. */
+body[data-sidebar-page="account"] .acp-profile-hub .acp-header{
+  grid-template-columns:1fr!important
+}
+body[data-sidebar-page="account"] .acp-profile-hub .acp-source{display:none!important}
+
+/* Sync Accounts gets a concise, image-led section header. */
+body[data-sidebar-page="account"] .ac-connections{
+  overflow:hidden!important;padding:0!important;border-radius:18px!important
+}
+body[data-sidebar-page="account"] .ac-connections .ac-sync-header{
+  position:relative!important;isolation:isolate!important;display:flex!important;align-items:center!important;justify-content:space-between!important;
+  min-height:132px!important;margin:0!important;padding:24px 28px!important;border:0!important;
+  background:
+    linear-gradient(90deg,rgba(8,28,50,.92) 0%,rgba(8,39,58,.78) 48%,rgba(10,72,74,.46) 100%),
+    url("https://images.unsplash.com/photo-1497366811353-6870744d04b2?auto=format&fit=crop&w=1800&q=84") center 53%/cover no-repeat!important
+}
+body[data-sidebar-page="account"] .ac-connections .ac-sync-header::after{
+  content:"";position:absolute;inset:0;z-index:-1;
+  background:linear-gradient(180deg,rgba(255,255,255,.02),rgba(3,20,36,.12));pointer-events:none
+}
+body[data-sidebar-page="account"] .ac-connections .ac-sync-header h2{
+  margin:0!important;color:#fff!important;font-size:clamp(28px,3vw,40px)!important;line-height:1!important;letter-spacing:-.035em!important;
+  text-shadow:0 2px 18px rgba(0,0,0,.2)
+}
+body[data-sidebar-page="account"] .ac-connections .ac-sync-header>div>span,
+body[data-sidebar-page="account"] .ac-connections .ac-sync-header>div>p{display:none!important}
+body[data-sidebar-page="account"] .ac-connections .ac-connection-center{
+  display:inline-flex!important;align-items:center!important;gap:7px!important;min-height:38px!important;padding:0 12px!important;
+  border:1px solid rgba(255,255,255,.26)!important;border-radius:8px!important;background:rgba(255,255,255,.90)!important;
+  color:#0b5960!important;font-size:10px!important;font-weight:850!important;box-shadow:0 8px 24px rgba(4,24,42,.13)!important;
+  backdrop-filter:blur(8px)!important
+}
+body[data-sidebar-page="account"] .ac-connections .ac-connection-grid{
+  margin:0!important;padding:18px!important;background:#fff!important
+}
+body[data-sidebar-page="account"] .ac-connections .ac-connection-foot{display:none!important}
+
+@media(max-width:760px){
+  body[data-sidebar-page="account"] .ac-page-top{padding-top:14px!important;padding-bottom:9px!important}
+  body[data-sidebar-page="account"] .ac-page-top h1{font-size:34px!important}
+  body[data-sidebar-page="account"] .ac-hero-name-row{align-items:flex-start!important;gap:6px!important}
+  body[data-sidebar-page="account"] .ac-hero-name-row h1{flex-basis:100%!important;font-size:26px!important}
+  body[data-sidebar-page="account"] .ac-hero-broker{max-width:220px!important}
+  body[data-sidebar-page="account"] .ac-connections .ac-sync-header{
+    min-height:112px!important;padding:18px!important;align-items:flex-start!important;gap:12px!important;flex-direction:column!important;
+    background-position:center!important
+  }
+  body[data-sidebar-page="account"] .ac-connections .ac-sync-header h2{font-size:29px!important}
+  body[data-sidebar-page="account"] .ac-connections .ac-connection-grid{padding:12px!important}
+}

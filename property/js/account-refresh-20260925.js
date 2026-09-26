@@ -220,7 +220,7 @@ function toast(message){
 
 function fallbackCleanup(){
   var pageTop=document.querySelector('body[data-sidebar-page="account"] .top');
-  if(pageTop){pageTop.querySelectorAll('.top-eyebrow').forEach(function(node){node.remove();});var pageTitle=pageTop.querySelector('h1');if(pageTitle&&pageTitle.parentElement){Array.prototype.slice.call(pageTitle.parentElement.children).forEach(function(node){if(node!==pageTitle&&node.tagName==='SPAN')node.remove();});}}
+  if(pageTop){pageTop.querySelectorAll('.top-eyebrow').forEach(function(node){node.remove();});var pageTitle=pageTop.querySelector('h1');if(pageTitle&&pageTitle.parentElement){Array.prototype.slice.call(pageTitle.parentElement.children).forEach(function(node){if(node!==pageTitle&&['SPAN','P','SMALL'].indexOf(node.tagName)>=0)node.remove();});}}
   var header=document.querySelector('.acp-profile-hub .acp-header');
   if(header){
     var eyebrow=header.querySelector('div>span');if(eyebrow&&eyebrow.textContent.trim()==='PROFILE')eyebrow.remove();
