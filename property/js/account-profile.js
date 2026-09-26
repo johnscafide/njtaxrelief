@@ -126,6 +126,24 @@
     if (bar) bar.style.width = pct + '%';
   }
 
+  function householdContextMarkup(mode,row) {
+    var fields =
+      selectField('acp-age','Age range',row.age_band || 'prefer_not',[['18_24','18–24'],['25_34','25–34'],['35_44','35–44'],['45_54','45–54'],['55_64','55–64'],['65_74','65–74'],['75_plus','75+'],['prefer_not','Prefer not to say']]) +
+      selectField('acp-income','Household income range',row.household_income_band || 'prefer_not',[['under_50k','Under $50k'],['50_99k','$50k–$99k'],['100_149k','$100k–$149k'],['150_249k','$150k–$249k'],['250k_plus','$250k+'],['prefer_not','Prefer not to say']]) +
+      selectField('acp-household','Household size',row.household_size ? String(row.household_size) : '',[['','Prefer not to say'],['1','1'],['2','2'],['3','3'],['4','4'],['5','5'],['6','6+']]) +
+      selectField('acp-composition','Household composition',row.household_composition || 'prefer_not',[['single','Living alone'],['couple','Couple / two-adult household'],['family_children','Family with children'],['multigenerational','Multigenerational household'],['roommates','Roommates / shared household'],['other','Other'],['prefer_not','Prefer not to say']]) +
+      selectField('acp-tenure','Time at current residence',row.residence_tenure_band || 'prefer_not',[['under_1','Less than 1 year'],['1_3','1–3 years'],['4_7','4–7 years'],['8_15','8–15 years'],['16_plus','16+ years'],['prefer_not','Prefer not to say']]) +
+      selectField('acp-primary-residence','Primary residence',row.primary_residence === true ? 'yes' : row.primary_residence === false ? 'no' : '',[['','Prefer not to say'],['yes','Yes — this is my primary residence'],['no','No — this is not my primary residence']]);
+
+    var note = '<div class="acp-private-note"><i class="fas fa-shield-halved"></i><p>These optional household details stay in your private first-party profile. Watchdog does not copy income, age, household composition or residence history into professional Intelligence or housing-targeting assumptions.</p></div>';
+
+    if (mode === 'homeowner') {
+      return '<section class="acp-panel acp-demographics"><div class="acp-panel-head"><i class="fas fa-people-roof"></i><div><b>Household &amp; demographic context</b><small>Optional details that help keep your homeowner profile complete</small></div></div>' + note + '<div class="acp-fields">' + fields + '</div></section>';
+    }
+
+    return '<details class="acp-private"><summary><div><i class="fas fa-lock"></i><span><b>Private household context</b><small>Optional-to-disclose household and residence details</small></span></div><i class="fas fa-chevron-down"></i></summary>' + note + '<div class="acp-fields">' + fields + '</div></details>';
+  }
+
   function renderEditor(host) {
     var row = profile || {};
     var mode = profileMode();
@@ -164,11 +182,7 @@
         selectField('acp-volume','Monthly workflow volume',row.professional_volume_band || 'not_applicable',[['under_5','Under 5'],['5_14','5–14'],['15_29','15–29'],['30_59','30–59'],['60_plus','60+'],['not_applicable','Not measured this way']]) +
         '<div class="acp-field acp-wide"><span>Where should Intelligence help first?</span>' + chips('professional_priorities',row.professional_priorities || [],[['lead_prioritization','Prioritize opportunities'],['client_briefs','Build client briefs'],['property_change','Catch property changes'],['tax_assessment','Assessment / tax analysis'],['listing_prep','Listing preparation'],['buyer_diligence','Buyer due diligence'],['portfolio_monitoring','Portfolio monitoring'],['workflow_automation','Reduce repetitive research']]) + '</div>' +
       '</div></section>' +
-      '<details class="acp-private"><summary><div><i class="fas fa-lock"></i><span><b>Private household context</b><small>Optional-to-disclose ranges from onboarding</small></span></div><i class="fas fa-chevron-down"></i></summary><div class="acp-private-note"><i class="fas fa-shield-halved"></i><p>Age, income and household size stay in your first-party profile. Watchdog does not copy these fields into housing-targeting or professional Intelligence assumptions.</p></div><div class="acp-fields">' +
-        selectField('acp-age','Age range',row.age_band || 'prefer_not',[['18_24','18–24'],['25_34','25–34'],['35_44','35–44'],['45_54','45–54'],['55_64','55–64'],['65_74','65–74'],['75_plus','75+'],['prefer_not','Prefer not to say']]) +
-        selectField('acp-income','Household income range',row.household_income_band || 'prefer_not',[['under_50k','Under $50k'],['50_99k','$50k–$99k'],['100_149k','$100k–$149k'],['150_249k','$150k–$249k'],['250k_plus','$250k+'],['prefer_not','Prefer not to say']]) +
-        selectField('acp-household','Household size',row.household_size ? String(row.household_size) : '',[['','Prefer not to say'],['1','1'],['2','2'],['3','3'],['4','4'],['5','5'],['6','6+']]) +
-      '</div></details>' +
+      householdContextMarkup(mode,row) +
       '<div class="acp-intel"><label><input id="acp-intel" type="checkbox"' + (row.intelligence_personalization !== false ? ' checked' : '') + '><span><b>Personalize Watchdog Intelligence with my approved profile context</b><small>Only operational context such as role, markets, goals and workflow priorities is used. This never changes source facts or plan access.</small></span></label></div>' +
       '<div class="ac-save-row acp-save"><button id="acp-save" type="button"><i class="fas fa-check"></i> ' + (mode === 'professional' ? 'Save professional profile' : mode === 'homeowner' ? 'Save homeowner profile' : 'Save Watchdog profile') + '</button><span id="acp-note" aria-live="polite"></span></div>';
 
@@ -235,6 +249,7 @@
     var markets = value('acp-markets').split(',').map(function(v){ return v.trim(); }).filter(Boolean).slice(0,20);
     if (!markets.length && zip) markets = [zip];
     var household = value('acp-household');
+    var primaryResidence = value('acp-primary-residence');
     var payload = {
       contact_email: contactEmail,
       persona: persona,
@@ -243,6 +258,9 @@
       age_band: value('acp-age') || 'prefer_not',
       household_income_band: value('acp-income') || 'prefer_not',
       household_size: household ? Number(household) : null,
+      household_composition: value('acp-composition') || 'prefer_not',
+      residence_tenure_band: value('acp-tenure') || 'prefer_not',
+      primary_residence: primaryResidence === '' ? null : primaryResidence === 'yes',
       location_zip: zip || null,
       markets: markets,
       goals: valuesFor('goals'),
@@ -298,7 +316,7 @@
       currentUser = sessionResult && sessionResult.data && sessionResult.data.session && sessionResult.data.session.user;
       if (!currentUser) return;
       var result = await db.from('watchdog_onboarding_profiles')
-        .select('contact_email,contact_email_confirmed_at,persona,primary_profession,home_status,age_band,household_income_band,household_size,location_zip,markets,goals,property_types,time_horizon,professional_years_band,professional_volume_band,professional_priorities,intelligence_personalization,grandfathered,updated_at')
+        .select('contact_email,contact_email_confirmed_at,persona,primary_profession,home_status,age_band,household_income_band,household_size,household_composition,residence_tenure_band,primary_residence,location_zip,markets,goals,property_types,time_horizon,professional_years_band,professional_volume_band,professional_priorities,intelligence_personalization,grandfathered,updated_at')
         .eq('user_id',currentUser.id)
         .maybeSingle();
       if (result.error) throw result.error;
@@ -315,7 +333,7 @@
     }
   }
 
-  function start() {
+  async function start() {
     var app = document.getElementById('ac-app');
     if (!app) return;
     observer = new MutationObserver(function () {
@@ -323,9 +341,19 @@
     });
     observer.observe(app,{ childList:true,subtree:false });
     mount();
-    loadProfile(false);
+    try {
+      if (window.njptrAccessReady) await Promise.resolve(window.njptrAccessReady);
+    } catch (_) {}
+    await loadProfile(false);
+    if (db && db.auth && typeof db.auth.onAuthStateChange === 'function') {
+      db.auth.onAuthStateChange(function (event,session) {
+        if (session && session.user && (event === 'SIGNED_IN' || event === 'INITIAL_SESSION' || event === 'TOKEN_REFRESHED')) {
+          window.setTimeout(function(){ loadProfile(true); },0);
+        }
+      });
+    }
   }
 
-  if (document.readyState === 'loading') document.addEventListener('DOMContentLoaded',start,{once:true});
+  if (document.readyState === 'loading') document.addEventListener('DOMContentLoaded',function(){ start(); },{once:true});
   else start();
 })();
