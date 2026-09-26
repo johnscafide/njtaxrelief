@@ -1,6 +1,8 @@
 /* Watchdog Agent Control evidence drawer keyboard accessibility at every viewport. */
 (function(){
   'use strict';
+  if(window.__WD_AGENT_EVIDENCE_A11Y__)return;
+  window.__WD_AGENT_EVIDENCE_A11Y__=true;
 
 
   var drawer=document.getElementById('ad-drawer');

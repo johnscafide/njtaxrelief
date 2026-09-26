@@ -11,7 +11,7 @@ on:
       - 'transaction/**'
       - 'property/agent-desk/**'
       - 'property/js/agent-today.js'
-      - 'property/css/agent-today.css'
+      - 'property/css/agent-desk.css'
       - 'middleware.js'
       - 'api/watchdog-index-robots.js'
       - 'api/watchdog-index-sitemap.js'

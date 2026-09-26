@@ -1,5 +1,5 @@
 <!doctype html>
-<html lang="en" data-access-require="pro">
+<html lang="en" class="aw27-page" data-access-require="pro">
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width,initial-scale=1">
@@ -10,14 +10,14 @@
   <link rel="stylesheet" href="/property/css/shared.css">
   <link rel="stylesheet" href="/property/css/dashboard.css">
   <link rel="stylesheet" href="/property/css/plan-context.css">
-  <link rel="stylesheet" href="/property/growth/growth.css">
+  <link rel="stylesheet" href="/property/css/shared/00-design-tokens.css"><link rel="stylesheet" href="/property/css/app-shell-2027.css"><link rel="stylesheet" href="/property/css/agent-workspace.css?v=20260926a"><link rel="stylesheet" href="/property/growth/growth.css?v=20260926a">
   <style>
     .rr-wrap{display:grid;gap:18px}.rr-hero{display:grid;grid-template-columns:minmax(0,1fr) auto;gap:20px;align-items:end}.rr-hero h1{margin:6px 0 8px}.rr-hero p{max-width:940px;margin:0}.rr-badge,.rr-tier{display:inline-flex;align-items:center;gap:7px;padding:7px 10px;border-radius:999px;font-weight:800}.rr-badge{background:var(--surface-subtle,#eef5ff);white-space:nowrap}.rr-notice{display:flex;gap:12px;align-items:flex-start;padding:14px 16px;border-radius:var(--radius-lg,16px);background:var(--surface-subtle,#f7f9fc)}.rr-controls{display:grid;grid-template-columns:1.2fr 1fr 1fr 1.35fr auto;gap:10px;align-items:end}.rr-field{display:grid;gap:6px}.rr-field span{font-size:var(--type-xs,12px);font-weight:800;letter-spacing:.04em;text-transform:uppercase}.rr-field input,.rr-field select{width:100%;min-height:44px;border:1px solid var(--border-subtle,#d7dee8);border-radius:var(--radius-md,12px);background:#fff;padding:0 12px;font:inherit}.rr-export{min-height:44px;border:0;border-radius:var(--radius-md,12px);padding:0 15px;font:inherit;font-weight:800;cursor:pointer}.rr-stats{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:12px}.rr-stat{padding:15px 16px;border-radius:var(--radius-lg,16px);background:#fff;box-shadow:var(--shadow-sm,0 8px 24px rgba(20,34,54,.06))}.rr-stat b{display:block;font-size:24px}.rr-stat span{display:block;margin-top:5px;font-size:var(--type-sm,14px)}.rr-table-shell{overflow:auto;border-radius:var(--radius-lg,18px);background:#fff;box-shadow:var(--shadow-sm,0 8px 26px rgba(20,34,54,.07))}.rr-table{width:100%;border-collapse:collapse;min-width:1220px}.rr-table th,.rr-table td{padding:12px 13px;text-align:left;border-bottom:1px solid #edf0f4;vertical-align:top}.rr-table th{position:sticky;top:0;z-index:1;background:#f7f9fc;font-size:var(--type-xs,12px);text-transform:uppercase;letter-spacing:.04em}.rr-town{font-weight:800}.rr-sub,.rr-reason{display:block;margin-top:3px;font-size:var(--type-xs,12px);color:#657386}.rr-tier.known{background:#e9f8ef}.rr-tier.high{background:#fff0ed}.rr-tier.elevated{background:#fff7df}.rr-tier.watch{background:#eef5ff}.rr-tier.lower{background:#f0f3f7}.rr-score{font-weight:900}.rr-sources{display:grid;gap:12px;padding:18px;border-radius:var(--radius-lg,18px);background:#fff}.rr-source-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:12px}.rr-source{padding:14px;border-radius:var(--radius-md,14px);background:#f7f9fc}.rr-source b{display:block}.rr-source p,.rr-fine{font-size:var(--type-sm,14px)}.rr-error,.rr-empty{padding:24px;text-align:center}.rr-error{background:#fff3f3;font-weight:700}.rr-model{padding:16px 18px;border-radius:var(--radius-lg,16px);background:#fff}.rr-model ul{margin:8px 0 0;padding-left:20px}.rr-model li{margin:5px 0}
     @media(max-width:1024px){.rr-controls{grid-template-columns:repeat(2,minmax(0,1fr))}.rr-export{width:100%}.rr-stats{grid-template-columns:repeat(2,minmax(0,1fr))}}
     @media(max-width:768px){.rr-hero,.rr-controls,.rr-stats,.rr-source-grid{grid-template-columns:1fr}.rr-badge{white-space:normal}.rr-table-shell{margin-inline:-4px}}
   </style>
 </head>
-<body data-sidebar-page="growth" data-plan-auto="true">
+<body data-sidebar-page="growth" data-plan-auto="true"><nav class="aw27-bar" id="agent-workspace-nav" data-active="growth" aria-label="Agent Control workspaces"><div class="aw27-actions"></div></nav>
 <main><div class="db-shell"><div id="property-side-menu"></div><div class="db-workspace rr-wrap">
   <header class="gc-top rr-hero">
     <div><a href="/property/growth/">← Growth Center</a><span>NJ-ONLY PLAY · MUNICIPAL RESEARCH</span><h1>Revaluation Early Warning</h1><p>Rank municipalities for the next two assessment cycles using certified ratio pressure, verified-sale drift, assessment dispersion, ratio-history direction and municipal budget pressure. Known 2026 approved revaluations/reassessments are separated from the forecast.</p></div>
@@ -49,7 +49,7 @@
 </div></div></main>
 <div id="pl-toast" class="pl-toast"></div>
 <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2/dist/umd/supabase.js"></script>
-<script src="/property/js/access-guard.js"></script><script src="/property/js/plan-context.js"></script><script src="/property/js/sidemenu.js"></script>
+<script src="/property/js/access-guard.js"></script><script src="/property/js/plan-context.js"></script><script src="/property/js/app-shell-2027.js"></script><script src="/property/js/agent-workspace.js?v=20260926a"></script>
 <script>
 (function(){'use strict';
   var allRows=[],visibleRows=[],$=function(id){return document.getElementById(id)};

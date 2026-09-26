@@ -24,12 +24,9 @@ HISTORICAL_DRIFT = {"#b8972e", "#b9952f", "#e7c46a"}
 GOLD_DECLARATION = re.compile(r"--gold\s*:\s*([^;\n}]+)", re.IGNORECASE)
 HEX = re.compile(r"#[0-9a-fA-F]{6}")
 LEGACY_PAGE_TOKEN = re.compile(r"--(?:ad|fb|do)-[a-z0-9-]+", re.IGNORECASE)
-LEGACY_PAGE_TOKEN_ALLOWLIST = {
-    pathlib.Path("property/css/agent-control-2027.css"),
-    pathlib.Path("property/css/agent-control-readability.css"),
-    pathlib.Path("property/css/agent-control-mobile-audit.css"),
-    pathlib.Path("property/css/agent-desk.css"),
-}
+# Agent Control retired its --ad-* namespace in the 2026-09 workspace rebuild
+# (agent-workspace.css + agent-desk.css); nothing is baselined any more.
+LEGACY_PAGE_TOKEN_ALLOWLIST: set[pathlib.Path] = set()
 MIGRATED_CANONICAL_FILES = {
     pathlib.Path("property/css/watchdog-footer.css"): {
         "required": {
@@ -52,27 +49,39 @@ MIGRATED_CANONICAL_FILES = {
             "font-size:9px",
         },
     },
-    pathlib.Path("property/css/agent-hardening.css"): {
+    pathlib.Path("property/css/agent-workspace.css"): {
         "required": {
-            "var(--type-xs)",
-            "var(--type-xl)",
-            "var(--font-ui)",
-            "var(--radius-sm)",
-            "var(--radius-md)",
-            "var(--radius-lg)",
-            "var(--radius-pill)",
-            "var(--wd-navy-950)",
+            "--aw-xs:var(--type-xs",
+            "--aw-sm:var(--type-sm",
+            "--aw-md:var(--type-md",
+            ":focus-visible",
+            "prefers-reduced-motion",
             "@media(max-width:768px)",
         },
         "forbidden": {
             "Source Sans 3",
-            "--fs-",
-            "var(--navy-dark)",
-            "border-radius:9px",
-            "border-radius:12px",
-            "border-radius:13px",
-            "border-radius:18px",
-            "border-radius:20px",
+            "--ad-",
+            "--fb-",
+            "@media(max-width:760px)",
+            "@media(max-width:420px)",
+        },
+    },
+    pathlib.Path("property/css/agent-desk.css"): {
+        "required": {
+            "var(--aw-xs)",
+            "var(--aw-sm)",
+            "var(--aw-md)",
+            "min-height:48px",
+            "@media(max-width:1024px)",
+            "@media(max-width:768px)",
+        },
+        "forbidden": {
+            "Source Sans 3",
+            "--ad-",
+            "@media(max-width:760px)",
+            "@media(max-width:980px)",
+            "font-size:10px",
+            "font-size:11px",
         },
     },
     pathlib.Path("property/css/account-pricing.css"): {

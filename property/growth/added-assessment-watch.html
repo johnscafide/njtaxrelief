@@ -1,5 +1,5 @@
 <!doctype html>
-<html lang="en" data-access-require="pro">
+<html lang="en" class="aw27-page" data-access-require="pro">
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width,initial-scale=1">
@@ -10,14 +10,14 @@
   <link rel="stylesheet" href="/property/css/shared.css">
   <link rel="stylesheet" href="/property/css/dashboard.css">
   <link rel="stylesheet" href="/property/css/plan-context.css">
-  <link rel="stylesheet" href="/property/growth/growth.css">
+  <link rel="stylesheet" href="/property/css/shared/00-design-tokens.css"><link rel="stylesheet" href="/property/css/app-shell-2027.css"><link rel="stylesheet" href="/property/css/agent-workspace.css?v=20260926a"><link rel="stylesheet" href="/property/growth/growth.css?v=20260926a">
   <style>
     .aa-wrap{display:grid;gap:18px}.aa-hero{display:grid;grid-template-columns:minmax(0,1fr) auto;gap:20px;align-items:end}.aa-hero h1{margin:6px 0 8px}.aa-hero p{max-width:930px;margin:0}.aa-badge{display:inline-flex;align-items:center;gap:7px;padding:7px 10px;border-radius:999px;background:var(--surface-subtle,#eef5ff);font-weight:800}.aa-notice,.aa-panel,.aa-sources{padding:16px 18px;border-radius:var(--radius-lg,18px);background:#fff;box-shadow:var(--shadow-sm,0 8px 26px rgba(20,34,54,.07))}.aa-notice{display:flex;gap:12px;align-items:flex-start;background:var(--surface-subtle,#f7f9fc)}.aa-controls{display:grid;grid-template-columns:1fr 1fr 1fr auto;gap:10px;align-items:end}.aa-field{display:grid;gap:6px}.aa-field span{font-size:var(--type-xs,12px);font-weight:800;letter-spacing:.04em;text-transform:uppercase}.aa-field input,.aa-field select{min-height:44px;border:1px solid var(--border-subtle,#d7dee8);border-radius:var(--radius-md,12px);background:#fff;padding:0 12px;font:inherit}.aa-btn{min-height:44px;border:0;border-radius:var(--radius-md,12px);padding:0 15px;font:inherit;font-weight:800;cursor:pointer}.aa-btn.primary{background:#0b65d8;color:#fff}.aa-btn.secondary{background:#eef3f8;color:#10233f}.aa-stats{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:12px}.aa-stat{padding:15px 16px;border-radius:var(--radius-lg,16px);background:#fff;box-shadow:var(--shadow-sm,0 8px 24px rgba(20,34,54,.06))}.aa-stat b{display:block;font-size:24px}.aa-stat span{display:block;margin-top:5px;font-size:var(--type-sm,14px)}.aa-table-shell{overflow:auto;border-radius:var(--radius-lg,18px);background:#fff;box-shadow:var(--shadow-sm,0 8px 26px rgba(20,34,54,.07))}.aa-table{width:100%;border-collapse:collapse;min-width:980px}.aa-table th,.aa-table td{padding:12px 13px;text-align:left;border-bottom:1px solid #edf0f4;vertical-align:top}.aa-table th{background:#f7f9fc;font-size:var(--type-xs,12px);text-transform:uppercase;letter-spacing:.04em}.aa-table td.num,.aa-table th.num{text-align:right}.aa-address{font-weight:800}.aa-sub{display:block;margin-top:3px;color:#657386;font-size:var(--type-xs,12px)}.aa-empty,.aa-error{padding:28px;text-align:center}.aa-error{background:#fff3f3;font-weight:700}.aa-sources{display:grid;gap:12px}.aa-source-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:12px}.aa-source{padding:14px;border-radius:var(--radius-md,14px);background:#f7f9fc}.aa-source b{display:block}.aa-source p,.aa-fine{font-size:var(--type-sm,14px);line-height:1.5}.aa-actions{display:flex;gap:10px;flex-wrap:wrap}.aa-link{display:inline-flex;align-items:center;gap:7px;text-decoration:none}
     @media(max-width:1024px){.aa-controls{grid-template-columns:repeat(2,minmax(0,1fr))}.aa-stats{grid-template-columns:repeat(2,minmax(0,1fr))}}
     @media(max-width:768px){.aa-hero,.aa-controls,.aa-stats,.aa-source-grid{grid-template-columns:1fr}.aa-badge{justify-self:start}}
   </style>
 </head>
-<body data-sidebar-page="growth" data-plan-auto="true">
+<body data-sidebar-page="growth" data-plan-auto="true"><nav class="aw27-bar" id="agent-workspace-nav" data-active="growth" aria-label="Agent Control workspaces"><div class="aw27-actions"></div></nav>
 <main><div class="db-shell"><div id="property-side-menu"></div><div class="db-workspace aa-wrap">
   <header class="gc-top aa-hero">
     <div><a href="/property/growth/">← Growth Center</a><span>NJ-ONLY PLAY · VERIFIED SALES RESEARCH</span><h1>Added Assessment Watch</h1><p>Surface recent Class 2 sales that look like new construction still assessed near bare-land levels. This reuses Watchdog's existing sale-to-assessment lag classification and keeps new construction separate from stale assessments and land sales.</p></div>
@@ -48,7 +48,7 @@
 </div></div></main>
 <div id="pl-toast" class="pl-toast"></div>
 <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2/dist/umd/supabase.js"></script>
-<script src="/property/js/access-guard.js"></script><script src="/property/js/plan-context.js"></script><script src="/property/js/sidemenu.js"></script>
+<script src="/property/js/access-guard.js"></script><script src="/property/js/plan-context.js"></script><script src="/property/js/app-shell-2027.js"></script><script src="/property/js/agent-workspace.js?v=20260926a"></script>
 <script>
 (function(){'use strict';
   var rows=[],$=function(id){return document.getElementById(id)},money=function(n){return new Intl.NumberFormat('en-US',{style:'currency',currency:'USD',maximumFractionDigits:0}).format(n)};

@@ -1,5 +1,11 @@
 #!/usr/bin/env python3
-"""Regression guard for the final Agent Control mobile typography/token layer."""
+"""Regression guard for the Agent Control workspace typography/token layer.
+
+Agent Control (Opportunity Desk, Farm Map, Growth, Advanced Farm) shares one
+chrome stylesheet (agent-workspace.css) and the Opportunity Desk has one content
+stylesheet (agent-desk.css). Both must stay on the canonical 768px breakpoint,
+the shared rem type scale and the 12px text / 48px mobile-control floor.
+"""
 from __future__ import annotations
 
 import pathlib
@@ -7,63 +13,68 @@ import re
 import sys
 
 ROOT = pathlib.Path(__file__).resolve().parents[2]
-TARGET = ROOT / "property" / "css" / "agent-control-mobile-final.css"
-
-REQUIRED = {
-    '@import url("/property/css/shared/00-design-tokens.css");',
-    "@media (max-width:768px)",
-    "@media (max-width:480px)",
-    "var(--type-xs)",
-    "var(--type-sm)",
-    "var(--type-md)",
-    "var(--type-lg)",
-    "var(--type-xl)",
-    "var(--radius-md)",
+TARGETS = {
+    ROOT / "property" / "css" / "agent-workspace.css": {
+        "required": {
+            "--aw-xs:var(--type-xs",
+            "--aw-sm:var(--type-sm",
+            "--aw-md:var(--type-md",
+            "@media(max-width:768px)",
+            "min-height:44px",
+        },
+    },
+    ROOT / "property" / "css" / "agent-desk.css": {
+        "required": {
+            "@media(max-width:768px)",
+            "var(--aw-xs)",
+            "var(--aw-sm)",
+            "var(--aw-md)",
+            "min-height:48px",
+        },
+    },
 }
 FORBIDDEN = {
-    "@media (max-width:760px)",
-    "@media (max-width:420px)",
+    "@media(max-width:760px)",
+    "@media(max-width:420px)",
     "Source Sans 3",
 }
-
-RAW_FONT_PX = re.compile(r"font-size\s*:\s*\d+(?:\.\d+)?px", re.IGNORECASE)
-RAW_RADIUS_PX = re.compile(r"border-radius\s*:\s*\d+(?:\.\d+)?px", re.IGNORECASE)
+RETIRED = [
+    "agent-control-mobile-final.css",
+    "agent-control-mobile-audit.css",
+    "agent-control-readability.css",
+    "agent-control-2027.css",
+]
+RAW_FONT_PX = re.compile(r"font-size\s*:\s*(\d+(?:\.\d+)?)px", re.IGNORECASE)
+FONT_SHORTHAND_PX = re.compile(r"font\s*:[^;{}]*?\s(\d+(?:\.\d+)?)px", re.IGNORECASE)
 
 
 def main() -> int:
-    if not TARGET.exists():
-        print(f"Agent Control mobile token contract failed: missing {TARGET.relative_to(ROOT)}")
-        return 1
-
-    text = TARGET.read_text(encoding="utf-8")
     failures: list[str] = []
-
-    for value in sorted(REQUIRED):
-        if value not in text:
-            failures.append(f"missing required canonical token contract: {value}")
-
-    for value in sorted(FORBIDDEN):
-        if value.lower() in text.lower():
-            failures.append(f"retired Agent Control mobile value returned: {value}")
-
-    raw_font = sorted(set(RAW_FONT_PX.findall(text)))
-    if raw_font:
-        failures.append(f"raw px font-size declarations are forbidden: {', '.join(raw_font)}")
-
-    raw_radius = sorted(set(RAW_RADIUS_PX.findall(text)))
-    if raw_radius:
-        failures.append(f"raw px border-radius declarations are forbidden: {', '.join(raw_radius)}")
+    for path, contract in TARGETS.items():
+        rel = path.relative_to(ROOT)
+        if not path.exists():
+            failures.append(f"{rel}: required Agent Control stylesheet is missing")
+            continue
+        text = path.read_text(encoding="utf-8")
+        for token in sorted(contract["required"]):
+            if token not in text:
+                failures.append(f"{rel}: missing {token!r}")
+        for token in sorted(FORBIDDEN):
+            if token.lower() in text.lower():
+                failures.append(f"{rel}: forbids {token!r}")
+        tiny = [v for v in RAW_FONT_PX.findall(text) + FONT_SHORTHAND_PX.findall(text) if float(v) < 12]
+        if tiny:
+            failures.append(f"{rel}: text below the 12px readability floor: {', '.join(sorted(set(tiny)))}px")
+    for name in RETIRED:
+        if (ROOT / "property" / "css" / name).exists():
+            failures.append(f"property/css/{name}: retired Agent Control overlay must not return")
 
     if failures:
-        print("Agent Control mobile token contract failed:")
+        print("Agent Control token contract failed:")
         for failure in failures:
             print(f" - {failure}")
         return 1
-
-    print(
-        "Agent Control mobile token contract passed: final layer uses the canonical "
-        "768/480 breakpoints, shared rem typography, and shared radius tokens."
-    )
+    print("Agent Control token contract passed: shared workspace chrome and Opportunity Desk use the canonical 768px breakpoint, shared rem type scale and 12px text floor; retired overlays are gone.")
     return 0
 
 
