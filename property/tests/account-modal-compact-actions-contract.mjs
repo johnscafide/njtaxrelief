@@ -5,7 +5,7 @@ const page=read('property/account/index.html');
 const profile=read('property/js/account-profile.js');
 const refresh=read('property/js/account-refresh-20260925.js');
 const css=read('property/css/account-refresh-20260925.css');
-expect(page.includes('20260925d'),'cache version d missing');
+expect(page.includes('20260926a'),'current Account cache version missing');
 expect(!refresh.includes('PROFILE CANVAS'),'Profile Canvas label returned');
 expect(!refresh.includes('Preview a Watchdog gradient or curated photo before you apply it.'),'modal helper copy returned');
 expect(!refresh.includes('ac-theme-accent"></div>'),'modal top accent returned');

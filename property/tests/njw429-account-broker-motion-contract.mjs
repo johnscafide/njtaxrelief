@@ -33,7 +33,7 @@ must(refresh.includes('applyThemeVisual'),'Motion/static theme visual helper mis
 must(!refresh.includes('PROFILE &amp; SETTINGS'),'Preview still contains removed eyebrow text.');
 
 must(css.includes('.ac-avatar-wrap.has-broker-brand .ac-avatar'),'Brokerage color ring styling missing.');
-must(css.includes('0 0 22px var(--broker-primary'),'Brokerage hover glow missing.');
+must(css.includes('linear-gradient(135deg,var(--broker-secondary,#f15a24),var(--broker-primary,#0b8b85)) border-box'),'Brokerage hover ring does not reverse colors.');
 must(css.includes('.ac-pro-badge.social-verify'),'Social verification styling missing.');
 must(css.includes('.ac-hero-style-toggle')&&css.includes('background:transparent!important'),'Customize text-control styling missing.');
 must(css.includes('@keyframes acMotionAurora'),'Aurora animation missing.');
@@ -42,10 +42,10 @@ must(css.includes('@keyframes acMotionTidal'),'Tidal animation missing.');
 must(css.includes('@keyframes acMotionSpectrum'),'Spectrum animation missing.');
 must(css.includes('@keyframes acMotionOrbit'),'Orbit animation missing.');
 must(css.includes('@media(prefers-reduced-motion:reduce)'),'Reduced-motion fallback missing.');
-must(css.includes('.ac-theme-section[hidden]{display:none!important}'),'Theme tabs do not reliably hide inactive categories.');
+must(refresh.includes('id="ac-theme-browser-grid"')&&refresh.includes('renderThemeGrid'),'Single-grid theme browser missing.');
 
 must(page.includes('account.js?v=20260925c'),'Account hero JS cache version missing.');
-must(page.includes('account-refresh-20260925.css?v=20260925i'),'Account motion CSS cache version missing.');
-must(page.includes('account-refresh-20260925.js?v=20260925g'),'Account customizer JS cache version missing.');
+must(page.includes('account-refresh-20260925.css?v=20260926a'),'Account motion CSS cache version missing.');
+must(page.includes('account-refresh-20260925.js?v=20260926a'),'Account customizer JS cache version missing.');
 
 console.log('NJW-429 brokerage avatar and motion background contract passed');

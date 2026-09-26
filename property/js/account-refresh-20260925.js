@@ -20,6 +20,11 @@ var THEMES=[
   {key:'shore',label:'Shore',kind:'image',bg:"linear-gradient(90deg,rgba(6,31,56,.88),rgba(6,31,56,.42)),url('https://images.unsplash.com/photo-1507525428034-b723cf961d3e?auto=format&fit=crop&w=2000&q=82') center/cover"},
   {key:'neighborhood',label:'Neighborhood',kind:'image',bg:"linear-gradient(90deg,rgba(7,27,51,.89),rgba(7,27,51,.46)),url('https://images.unsplash.com/photo-1564013799919-ab600027ffc6?auto=format&fit=crop&w=2000&q=82') center/cover"},
   {key:'workspace',label:'Workspace',kind:'image',bg:"linear-gradient(90deg,rgba(7,27,51,.90),rgba(7,27,51,.48)),url('https://images.unsplash.com/photo-1497366811353-6870744d04b2?auto=format&fit=crop&w=2000&q=82') center/cover"},
+  {key:'city-lights',label:'City lights',kind:'image',bg:"linear-gradient(90deg,rgba(7,27,51,.90),rgba(7,27,51,.42)),url('https://images.unsplash.com/photo-1514924013411-cbf25faa35bb?auto=format&fit=crop&w=2000&q=82') center/cover"},
+  {key:'glass-towers',label:'Glass towers',kind:'image',bg:"linear-gradient(90deg,rgba(7,27,51,.90),rgba(7,27,51,.40)),url('https://images.unsplash.com/photo-1487958449943-2429e8be8625?auto=format&fit=crop&w=2000&q=82') center/cover"},
+  {key:'front-door',label:'Front door',kind:'image',bg:"linear-gradient(90deg,rgba(7,27,51,.90),rgba(7,27,51,.45)),url('https://images.unsplash.com/photo-1600566753190-17f0baa2a6c3?auto=format&fit=crop&w=2000&q=82') center/cover"},
+  {key:'skyline',label:'Skyline',kind:'image',bg:"linear-gradient(90deg,rgba(7,27,51,.91),rgba(7,27,51,.40)),url('https://images.unsplash.com/photo-1477959858617-67f85cf4f1df?auto=format&fit=crop&w=2000&q=82') center/cover"},
+  {key:'blue-hour-home',label:'Blue hour',kind:'image',bg:"linear-gradient(90deg,rgba(7,27,51,.90),rgba(7,27,51,.42)),url('https://images.unsplash.com/photo-1600047509807-ba8f99d2cdde?auto=format&fit=crop&w=2000&q=82') center/cover"},
   {key:'aurora-motion',label:'Aurora',kind:'motion',bg:'radial-gradient(circle at 15% 35%,rgba(74,232,215,.72),transparent 34%),radial-gradient(circle at 78% 38%,rgba(91,116,255,.60),transparent 36%),linear-gradient(120deg,#07172c,#103d55 48%,#073c43)'},
   {key:'signal-grid',label:'Signal Grid',kind:'motion',bg:'linear-gradient(rgba(92,233,219,.12) 1px,transparent 1px),linear-gradient(90deg,rgba(92,233,219,.12) 1px,transparent 1px),radial-gradient(circle at 72% 45%,rgba(36,181,197,.42),transparent 30%),linear-gradient(120deg,#07192d,#0b3045)'},
   {key:'tidal-motion',label:'Tidal',kind:'motion',bg:'radial-gradient(ellipse at 20% 110%,rgba(44,205,194,.58),transparent 42%),radial-gradient(ellipse at 82% -5%,rgba(57,118,239,.54),transparent 40%),linear-gradient(120deg,#071b31,#0e4251 58%,#0b293d)'},
@@ -44,9 +49,13 @@ function currentTheme(){
 }
 function applyThemeVisual(node,theme){
   if(!node||!theme)return;
-  node.style.setProperty('background',theme.bg,'important');
-  if(theme.kind==='motion')node.dataset.motionTheme=theme.key;
-  else delete node.dataset.motionTheme;
+  if(theme.kind==='motion'){
+    node.style.removeProperty('background');
+    node.dataset.motionTheme=theme.key;
+  }else{
+    delete node.dataset.motionTheme;
+    node.style.setProperty('background',theme.bg,'important');
+  }
 }
 function applyTheme(key){
   var hero=document.querySelector('.ac-profile-hero');if(!hero)return;
@@ -88,12 +97,22 @@ function updateThemePreview(key){
   var selected=panel.querySelector('#ac-theme-selected-name');if(selected)selected.textContent=theme.label;
   var apply=panel.querySelector('[data-apply-theme]');if(apply){apply.disabled=false;apply.textContent=theme.key===pendingThemeOriginalKey?'Keep this background':'Apply background';}
 }
+function renderThemeGrid(panel,kind){
+  if(!panel)return;
+  var grid=panel.querySelector('#ac-theme-browser-grid');if(!grid)return;
+  grid.replaceChildren();
+  THEMES.filter(function(theme){return theme.kind===kind;}).forEach(function(theme){grid.appendChild(themeButton(theme));});
+}
 function setThemeTab(panel,kind){
   if(!panel)return;
-  ['color','image','motion'].forEach(function(value){
-    var tab=panel.querySelector('[data-theme-tab="'+value+'"]'),section=panel.querySelector('[data-theme-kind="'+value+'"]');
-    if(tab)tab.setAttribute('aria-selected',value===kind?'true':'false');
-    if(section)section.hidden=value!==kind;
+  if(['color','image','motion'].indexOf(kind)<0)kind='color';
+  panel.dataset.themeTab=kind;
+  panel.querySelectorAll('[data-theme-tab]').forEach(function(tab){
+    tab.setAttribute('aria-selected',tab.dataset.themeTab===kind?'true':'false');
+  });
+  renderThemeGrid(panel,kind);
+  panel.querySelectorAll('.ac-theme-choice').forEach(function(button){
+    button.setAttribute('aria-pressed',button.dataset.heroTheme===pendingThemeKey?'true':'false');
   });
 }
 function closeThemePanel(){
@@ -108,13 +127,11 @@ function ensureThemePanel(){
   panel=document.createElement('section');panel.id='ac-theme-popover';panel.className='ac-theme-popover';panel.hidden=true;panel.setAttribute('role','dialog');panel.setAttribute('aria-modal','true');panel.setAttribute('aria-labelledby','ac-theme-title');
   panel.innerHTML='<header><div><h3 id="ac-theme-title">Choose your background</h3></div><button type="button" data-close-theme aria-label="Close background chooser"><i class="fas fa-xmark"></i></button></header>'+
     '<section class="ac-theme-live"><div class="ac-theme-live-head"><b>Live preview</b><span>This is how your profile hero will look.</span></div><div class="ac-theme-live-banner" id="ac-theme-preview-banner"><div class="ac-theme-live-avatar" id="ac-theme-preview-avatar">W</div><div class="ac-theme-live-copy"><div class="ac-theme-live-name-row"><strong id="ac-theme-preview-name">Your Watchdog profile</strong><span class="ac-theme-live-verified" id="ac-theme-preview-verified" hidden><i class="fas fa-circle-check"></i></span></div><small id="ac-theme-preview-sub">Watchdog member</small></div><div class="ac-theme-live-badge"><i class="fas fa-eye"></i><span id="ac-theme-selected-name">Watchdog</span></div></div></section>'+
-    '<nav class="ac-theme-tabs" aria-label="Background categories"><button type="button" data-theme-tab="color" aria-selected="true">Gradients <em>10</em></button><button type="button" data-theme-tab="image" aria-selected="false">Photos <em>5</em></button><button type="button" data-theme-tab="motion" aria-selected="false">Motion <em>5</em></button></nav>'+
-    '<div class="ac-theme-groups"><section class="ac-theme-section" data-theme-kind="color"><div class="ac-theme-grid"></div></section>'+
-    '<section class="ac-theme-section" data-theme-kind="image" hidden><div class="ac-theme-grid"></div></section>'+
-    '<section class="ac-theme-section" data-theme-kind="motion" hidden><div class="ac-theme-grid"></div></section></div>'+
+    '<nav class="ac-theme-tabs" aria-label="Background categories"><button type="button" data-theme-tab="color" aria-selected="true">Gradients <em>'+THEMES.filter(function(t){return t.kind==='color';}).length+'</em></button><button type="button" data-theme-tab="image" aria-selected="false">Photos <em>'+THEMES.filter(function(t){return t.kind==='image';}).length+'</em></button><button type="button" data-theme-tab="motion" aria-selected="false">Motion <em>'+THEMES.filter(function(t){return t.kind==='motion';}).length+'</em></button></nav>'+
+    '<div class="ac-theme-browser"><div class="ac-theme-grid" id="ac-theme-browser-grid"></div></div>'+
     '<footer class="ac-theme-actions"><button type="button" class="secondary" data-cancel-theme>Cancel</button><span><i class="fas fa-cloud"></i> Saved only when you apply</span><button type="button" class="primary" data-apply-theme>Apply background</button></footer>';
   document.body.appendChild(backdrop);document.body.appendChild(panel);
-  THEMES.forEach(function(theme){var grid=panel.querySelector('[data-theme-kind="'+theme.kind+'"] .ac-theme-grid');if(grid)grid.appendChild(themeButton(theme));});
+  renderThemeGrid(panel,'color');
   backdrop.addEventListener('click',closeThemePanel);panel.querySelector('[data-close-theme]').addEventListener('click',closeThemePanel);
   panel.addEventListener('click',function(event){
     var tab=event.target.closest('[data-theme-tab]');if(tab){setThemeTab(panel,tab.dataset.themeTab);return;}

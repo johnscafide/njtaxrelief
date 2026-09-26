@@ -1229,3 +1229,137 @@ body[data-sidebar-page="account"] .ac-avatar-wrap.has-broker-brand:hover .ac-ava
   }
   .ac-theme-popover>footer.ac-theme-actions>span{display:none!important}
 }
+
+
+/* NJW-431 · stable customizer flow, persistent motion themes, reversible brokerage ring */
+.ac-theme-popover{
+  width:min(1180px,calc(100vw - 48px))!important;
+  max-width:1180px!important;
+  height:auto!important;
+  max-height:calc(100vh - 36px)!important;
+  overflow-x:hidden!important;
+  overflow-y:auto!important;
+}
+.ac-theme-popover>header,
+.ac-theme-popover nav.ac-theme-tabs,
+.ac-theme-popover .ac-theme-browser,
+.ac-theme-popover>footer.ac-theme-actions{
+  position:static!important;
+  transform:none!important;
+}
+.ac-theme-popover nav.ac-theme-tabs{
+  z-index:auto!important;
+  display:flex!important;
+  width:100%!important;
+  min-height:44px!important;
+  margin:0 0 16px!important;
+  padding:0!important;
+  background:#fff!important;
+}
+.ac-theme-popover .ac-theme-browser{
+  display:block!important;
+  width:100%!important;
+  min-height:0!important;
+  margin:0!important;
+  padding:0!important;
+  overflow:visible!important;
+}
+.ac-theme-popover .ac-theme-browser .ac-theme-grid{
+  position:static!important;
+  display:grid!important;
+  grid-template-columns:repeat(5,minmax(0,1fr))!important;
+  gap:14px!important;
+  width:100%!important;
+  margin:0!important;
+  padding:0!important;
+  transform:none!important;
+}
+.ac-theme-popover .ac-theme-browser .ac-theme-choice{
+  position:relative!important;
+  min-width:0!important;
+  margin:0!important;
+  transform:none!important;
+}
+.ac-theme-popover .ac-theme-browser .ac-theme-choice:hover{
+  transform:none!important;
+}
+.ac-theme-popover>footer.ac-theme-actions{
+  bottom:auto!important;
+  z-index:auto!important;
+  margin:20px 0 0!important;
+  padding:15px 0 0!important;
+  background:#fff!important;
+  box-shadow:none!important;
+}
+
+/* Motion themes own their full background in CSS so background-position can animate after save/reload. */
+[data-motion-theme="aurora-motion"]{
+  background:
+    radial-gradient(circle at 15% 35%,rgba(74,232,215,.72),transparent 34%),
+    radial-gradient(circle at 78% 38%,rgba(91,116,255,.60),transparent 36%),
+    linear-gradient(120deg,#07172c,#103d55 48%,#073c43)!important;
+}
+[data-motion-theme="signal-grid"]{
+  background:
+    linear-gradient(rgba(92,233,219,.12) 1px,transparent 1px),
+    linear-gradient(90deg,rgba(92,233,219,.12) 1px,transparent 1px),
+    radial-gradient(circle at 72% 45%,rgba(36,181,197,.42),transparent 30%),
+    linear-gradient(120deg,#07192d,#0b3045)!important;
+}
+[data-motion-theme="tidal-motion"]{
+  background:
+    radial-gradient(ellipse at 20% 110%,rgba(44,205,194,.58),transparent 42%),
+    radial-gradient(ellipse at 82% -5%,rgba(57,118,239,.54),transparent 40%),
+    linear-gradient(120deg,#071b31,#0e4251 58%,#0b293d)!important;
+}
+[data-motion-theme="spectrum-motion"]{
+  background:linear-gradient(120deg,#091b35 0%,#0c6d78 20%,#5a48a8 42%,#c84f86 60%,#1ba7a1 80%,#0a2440 100%)!important;
+}
+[data-motion-theme="orbit-motion"]{
+  background:
+    radial-gradient(circle at 50% 50%,transparent 0 18%,rgba(116,231,218,.22) 19% 20%,transparent 21% 31%,rgba(105,141,255,.18) 32% 33%,transparent 34%),
+    radial-gradient(circle at 15% 20%,rgba(79,221,213,.50),transparent 24%),
+    linear-gradient(135deg,#07182c,#132a4c 54%,#0b4f54)!important;
+}
+
+/* No glow: reverse brokerage primary/secondary colors on hover. */
+body[data-sidebar-page="account"] .ac-avatar-wrap.has-broker-brand .ac-avatar{
+  border-width:5px!important;
+  box-shadow:none!important;
+  background:
+    linear-gradient(#fff,#fff) padding-box,
+    linear-gradient(135deg,var(--broker-primary,#0b8b85),var(--broker-secondary,#f15a24)) border-box!important;
+  transition:background .18s ease,transform .18s ease!important;
+}
+body[data-sidebar-page="account"] .ac-avatar-wrap.has-broker-brand:hover .ac-avatar{
+  box-shadow:none!important;
+  filter:none!important;
+  transform:none!important;
+  background:
+    linear-gradient(#fff,#fff) padding-box,
+    linear-gradient(135deg,var(--broker-secondary,#f15a24),var(--broker-primary,#0b8b85)) border-box!important;
+}
+.ac-theme-live-avatar.has-broker-brand{
+  box-shadow:none!important;
+}
+
+@media(max-width:1020px){
+  .ac-theme-popover .ac-theme-browser .ac-theme-grid{
+    grid-template-columns:repeat(4,minmax(0,1fr))!important;
+    gap:11px!important;
+  }
+}
+@media(max-width:760px){
+  .ac-theme-popover{
+    width:calc(100vw - 18px)!important;
+    max-height:calc(100vh - 18px)!important;
+  }
+  .ac-theme-popover .ac-theme-browser .ac-theme-grid{
+    grid-template-columns:repeat(2,minmax(0,1fr))!important;
+    gap:10px!important;
+  }
+  .ac-theme-popover>footer.ac-theme-actions{
+    grid-template-columns:auto 1fr!important;
+  }
+  .ac-theme-popover>footer.ac-theme-actions>span{display:none!important}
+}
