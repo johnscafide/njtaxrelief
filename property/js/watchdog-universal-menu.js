@@ -452,8 +452,19 @@
   document.addEventListener('njptr:plan-change',loadAuth);
   document.addEventListener('watchdog:developer-confirmed',loadAuth);
 
+  /* Pages the clean-route adapter does not serve (direct /property/ URLs and
+     root static pages) still get the developer-only site editor loader. */
+  function ensureSiteEditorLoader(){
+    if(window.__WD_SITE_EDITOR_LOADER__ || document.querySelector('script[src*="site-editor-loader.js"]')) return;
+    var script = document.createElement('script');
+    script.src = '/property/js/site-editor-loader.js';
+    script.defer = true;
+    (document.head || document.documentElement).appendChild(script);
+  }
+
   function boot(){
     ensureCss();
+    ensureSiteEditorLoader();
     queue();
     loadAuth();
     if(typeof MutationObserver !== 'undefined' && document.body){
