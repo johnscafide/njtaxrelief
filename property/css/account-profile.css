@@ -24,3 +24,32 @@ body[data-account-profile-mode="professional"] [data-acp-housing]{display:none!i
 .acp-profile-context span{display:block;color:var(--text-muted);font-size:10px;font-weight:800;letter-spacing:.08em}
 .acp-profile-context b{display:block;margin-top:3px;color:var(--ink);font-size:13px}
 .acp-profile-context small{display:block;margin-top:3px;color:var(--text-muted);font-size:11px}
+
+
+/* NJW-431 · homeowner demographic context */
+body[data-account-profile-mode="homeowner"] .acp-demographics{
+  background:linear-gradient(135deg,#f6fbfb 0%,#f7f9fc 100%);
+  border:1px solid rgba(8,127,130,.12);
+}
+body[data-account-profile-mode="homeowner"] .acp-demographics .acp-panel-head>i{
+  background:#e6f6f4;
+  color:#087f82;
+}
+body[data-account-profile-mode="homeowner"] .acp-demographics .acp-private-note{
+  margin:0 0 16px;
+  border:1px solid rgba(16,41,75,.06);
+  background:#fff;
+}
+body[data-account-profile-mode="homeowner"] .acp-demographics .acp-fields{
+  grid-template-columns:repeat(3,minmax(0,1fr));
+}
+@media(max-width:1024px){
+  body[data-account-profile-mode="homeowner"] .acp-demographics .acp-fields{
+    grid-template-columns:repeat(2,minmax(0,1fr));
+  }
+}
+@media(max-width:680px){
+  body[data-account-profile-mode="homeowner"] .acp-demographics .acp-fields{
+    grid-template-columns:1fr;
+  }
+}
