@@ -64,12 +64,33 @@
     var m = user && user.user_metadata || {};
     return m.avatar_url || m.picture || '';
   }
+  function brokerageBrand() {
+    var agent = professional.agent || {};
+    var logo = brokerLogo(agent);
+    var name = String(agent.brokerage_name || '').trim();
+    var website = String(agent.brokerage_website || '').trim();
+    var branded = Boolean(name || website || logo);
+    return {
+      branded:branded,
+      name:name,
+      logo:logo,
+      primary:safeHex(agent.brokerage_primary_color, '#0B8B85'),
+      secondary:safeHex(agent.brokerage_secondary_color, '#F15A24')
+    };
+  }
   function avatarMarkup(data) {
     var url = avatarUrl();
     var initial = (data.preferred_name || (user && user.user_metadata && user.user_metadata.full_name) || (user && user.email) || 'W').charAt(0).toUpperCase();
-    return '<div class="ac-avatar-wrap"><div class="ac-avatar" id="ac-profile-avatar">' +
+    var brand = brokerageBrand();
+    var classes = 'ac-avatar-wrap' + (brand.branded ? ' has-broker-brand' : '');
+    var style = brand.branded ? ' style="--broker-primary:' + esc(brand.primary) + ';--broker-secondary:' + esc(brand.secondary) + '"' : '';
+    var editIcon = brand.logo
+      ? '<img class="ac-avatar-broker-logo" src="' + esc(brand.logo) + '" alt="">'
+      : '<i class="fas fa-camera"></i>';
+    var editTitle = brand.name ? 'Change profile photo · ' + brand.name : 'Change profile photo';
+    return '<div class="' + classes + '"' + style + '><div class="ac-avatar" id="ac-profile-avatar">' +
       (url ? '<img src="' + esc(url) + '" alt="Profile photo">' : esc(initial)) +
-      '</div><button class="ac-avatar-edit" id="ac-avatar-edit" type="button" aria-label="Change profile photo"><i class="fas fa-camera"></i></button></div>';
+      '</div><button class="ac-avatar-edit" id="ac-avatar-edit" type="button" aria-label="' + esc(editTitle) + '" title="' + esc(editTitle) + '">' + editIcon + '</button></div>';
   }
   function safeHex(value, fallback) {
     return /^#[0-9a-f]{6}$/i.test(String(value || '')) ? String(value).toUpperCase() : fallback;
@@ -81,14 +102,15 @@
     var due = new Date(r.verification_due_at);
     return Number.isFinite(due.getTime()) && due.getTime() > Date.now();
   }
-  function professionalBadgeMarkup() {
-    if (realtorIsCurrent()) {
-      return '<span class="ac-pro-badge realtor" title="Verified REALTOR® membership"><i class="fas fa-certificate"></i> REALTOR®</span>';
-    }
-    if (professional.license && professional.license.verified_professional) {
-      return '<span class="ac-pro-badge agent" title="Verified New Jersey real-estate license"><i class="fas fa-circle-check"></i> Licensed Agent</span>';
-    }
+  function professionalVerificationTitle() {
+    if (realtorIsCurrent()) return 'Verified REALTOR®';
+    if (professional.license && professional.license.verified_professional) return 'Verified Licensed Agent';
     return '';
+  }
+  function professionalBadgeMarkup() {
+    var label = professionalVerificationTitle();
+    if (!label) return '';
+    return '<span class="ac-pro-badge social-verify' + (realtorIsCurrent() ? ' realtor' : ' agent') + '" title="' + esc(label) + '" aria-label="' + esc(label) + '"><i class="fas fa-circle-check" aria-hidden="true"></i></span>';
   }
   function titleNamePart(value) {
     value = String(value || '').trim();
@@ -205,7 +227,7 @@
     $('ac-app').innerHTML =
       (success ? '<div class="ac-success"><i class="fas fa-circle-check"></i><div><b>Checkout complete.</b><span>Your plan will update shortly.</span></div></div>' : '') +
       (pending ? '<div class="ac-success pending"><i class="fas fa-clock"></i><div><b>Plan change requested.</b><span>Your account will update shortly.</span></div></div>' : '') +
-      '<section class="ac-profile-hero">' + avatarMarkup(data) + '<div class="ac-hero-copy"><span>PROFILE &amp; SETTINGS</span><div class="ac-hero-name-row"><h1>' + esc(heroDisplayName(data)) + '</h1>' + professionalBadgeMarkup() + brokerageMarkup() + '</div><p>' + esc(user.email || '') + ' · ' + planLabel(plan) + ' member</p><div class="ac-hero-stats"><div><i class="fas fa-house"></i><b>' + counts.properties + '</b><span>Saved</span></div><div><i class="fas fa-folder-tree"></i><b>' + counts.cases + '</b><span>Cases</span></div><div><i class="fas fa-calendar"></i><b>' + date(user.created_at) + '</b><span>Member since</span></div></div></div>' +
+      '<section class="ac-profile-hero">' + avatarMarkup(data) + '<div class="ac-hero-copy"><div class="ac-hero-name-row"><h1' + (professionalVerificationTitle() ? ' title="' + esc(professionalVerificationTitle()) + '"' : '') + '>' + esc(heroDisplayName(data)) + '</h1>' + professionalBadgeMarkup() + '</div><p>' + esc(user.email || '') + ' · ' + planLabel(plan) + ' member</p><div class="ac-hero-stats"><div><i class="fas fa-house"></i><b>' + counts.properties + '</b><span>Saved</span></div><div><i class="fas fa-folder-tree"></i><b>' + counts.cases + '</b><span>Cases</span></div><div><i class="fas fa-calendar"></i><b>' + date(user.created_at) + '</b><span>Member since</span></div></div></div>' +
       '<div class="ac-completion"><b>' + percent + '%</b><span>Profile complete</span><i><em style="width:' + percent + '%"></em></i></div></section>' +
       '<section class="ac-section"><header><div><span>PERSONALIZATION</span><h2>Make Watchdog more relevant</h2><p>Set your preferences for a more relevant workspace.</p></div></header>' +
       '<details open><summary><i class="fas fa-user"></i><span><b>Profile details</b><small>Name, contact and home area</small></span><i class="fas fa-chevron-down"></i></summary><div class="ac-form-grid"><label>Preferred name<input id="ac-name" value="' + esc(data.preferred_name || '') + '" autocomplete="name"></label><label>Phone<input id="ac-phone" value="' + esc(data.phone || '') + '" autocomplete="tel"></label><label>Home ZIP<input id="ac-zip" value="' + esc(data.home_zip || '') + '" inputmode="numeric" maxlength="10"></label><label>Counties or towns<input id="ac-counties" value="' + esc(data.counties || '') + '" placeholder="Camden, Gloucester…"></label></div></details>' +
