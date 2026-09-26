@@ -93,8 +93,8 @@
   function titleNamePart(value) {
     value = String(value || '').trim();
     if (!value) return '';
-    if (/^(jr|sr|ii|iii|iv|v)$/i.test(value.replace(/\./g,''))) return value.replace(/\./g,'').toUpperCase();
     if (/^[a-z]$/i.test(value.replace(/\./g,''))) return value.replace(/\./g,'').toUpperCase() + '.';
+    if (/^(jr|sr|ii|iii|iv|v)$/i.test(value.replace(/\./g,''))) return value.replace(/\./g,'').toUpperCase();
     return value.toLowerCase().replace(/(^|[-'’])([a-z])/g,function(_,lead,letter){return lead + letter.toUpperCase();});
   }
   function formatOfficialLicenseName(raw) {
