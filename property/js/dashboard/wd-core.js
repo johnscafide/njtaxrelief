@@ -1,6 +1,7 @@
 /* ==========================================================================
    wd-core.js — the only place that talks to Supabase or holds state.
-   Fires 'wd:ready' when the data is in. No observers, no polling.
+   Fires 'wd:ready' as soon as saved properties are in; secondary data fills
+   in after first paint. No observers, no polling.
    Weather, notifications and the account menu belong to app-shell-2027.js.
    ========================================================================== */
 (function (w, d) {
@@ -125,36 +126,48 @@
     return Promise.all(workers).then(function () { if (changed) WD.repaint(); });
   }
 
-  function loadData() {
-    var c = db();
-    return Promise.allSettled([
-      c.rpc('get_my_entitlement'),
-      c.rpc('is_watchdog_developer'),
-      c.from('saved_properties').select('*').order('created_at', { ascending: false }),
-      c.from('profiles').select('display_name,full_name,photo_url,avatar_url').eq('id', S.user.id).maybeSingle()
-    ]).then(function (a) {
-      var ent = H.one(a[0]);
-      var dev = a[1].status === 'fulfilled' && a[1].value && a[1].value.data === true;
-      var saved = a[2];
-      var profile = a[3];
-      if (!saved || saved.status !== 'fulfilled') throw (saved && saved.reason) || new Error('Saved properties request failed');
-      if (!saved.value || saved.value.error) throw (saved.value && saved.value.error) || new Error('Saved properties request failed');
-      S.profile = profile && profile.status === 'fulfilled' && profile.value && !profile.value.error ? profile.value.data : null;
-      S.entitlement = ent || null;
-      S.plan = dev ? 'developer' : normPlan(ent && (ent.plan_tier || ent.plan));
-      S.properties = Array.isArray(saved.value.data) ? saved.value.data : [];
-      var pins = H.unique(S.properties.map(function (p) { return p.pams_pin; }));
-      if (!pins.length) return [];
-      var towns = H.unique(S.properties.map(function (p) { return p.town; }));
-      return Promise.allSettled([
-        c.from('public_watchdog_score_cache').select('pams_pin,watchdog_score,town,county,peer_count,peer_median,computed_at').in('pams_pin', pins),
-        c.from('property_watchdog_scores').select('pams_pin,watchdog_score,town,county,observed_on,observed_at').in('pams_pin', pins).order('observed_at', { ascending: false }).limit(1000),
-        towns.length ? c.from('town_watchdog_scores').select('town,county,avg_watchdog_score,scored_properties,score_as_of').in('town', towns) : Promise.resolve({ data: [], error: null }),
-        c.from('property_update_events').select('pams_pin,event_type,severity,title,summary,marker_id,delta_numeric,occurred_at,read_at').in('pams_pin', pins).gte('occurred_at', H.daysAgoIso(120)).order('occurred_at', { ascending: false }).limit(400),
-        c.from('intelligence_findings').select('pams_pin,property_address,opportunity_type,score,confidence,evidence_coverage,why_now,recommended_actions,created_at').in('pams_pin', pins).order('created_at', { ascending: false }).limit(200)
-      ]);
-    }).then(function (parts) {
-      if (!Array.isArray(parts)) return;
+  function runOptional(work, onValue) {
+    try {
+      Promise.resolve(work()).then(function (value) {
+        if (typeof onValue === 'function') onValue(value);
+      }).catch(function () {});
+    } catch (error) {}
+  }
+
+  function loadAccountContext(c) {
+    runOptional(function () { return c.rpc('get_my_entitlement'); }, function (res) {
+      if (!res || res.error) return;
+      var ent = H.one({ status: 'fulfilled', value: res });
+      if (!ent) return;
+      S.entitlement = ent;
+      S.plan = normPlan(ent.plan_tier || ent.plan);
+      WD.repaint();
+    });
+    runOptional(function () { return c.rpc('is_watchdog_developer'); }, function (res) {
+      if (res && !res.error && res.data === true) {
+        S.plan = 'developer';
+        WD.repaint();
+      }
+    });
+    runOptional(function () {
+      return c.from('profiles').select('display_name,full_name,photo_url,avatar_url').eq('id', S.user.id).maybeSingle();
+    }, function (res) {
+      if (res && !res.error) {
+        S.profile = res.data || null;
+        WD.repaint();
+      }
+    });
+  }
+
+  function loadSupplementalData(c, pins, towns) {
+    if (!pins.length) return;
+    Promise.allSettled([
+      c.from('public_watchdog_score_cache').select('pams_pin,watchdog_score,town,county,peer_count,peer_median,computed_at').in('pams_pin', pins),
+      c.from('property_watchdog_scores').select('pams_pin,watchdog_score,town,county,observed_on,observed_at').in('pams_pin', pins).order('observed_at', { ascending: false }).limit(1000),
+      towns.length ? c.from('town_watchdog_scores').select('town,county,avg_watchdog_score,scored_properties,score_as_of').in('town', towns) : Promise.resolve({ data: [], error: null }),
+      c.from('property_update_events').select('pams_pin,event_type,severity,title,summary,marker_id,delta_numeric,occurred_at,read_at').in('pams_pin', pins).gte('occurred_at', H.daysAgoIso(120)).order('occurred_at', { ascending: false }).limit(400),
+      c.from('intelligence_findings').select('pams_pin,property_address,opportunity_type,score,confidence,evidence_coverage,why_now,recommended_actions,created_at').in('pams_pin', pins).order('created_at', { ascending: false }).limit(200)
+    ]).then(function (parts) {
       var townPeers = {};
       function townPeerKey(town, county) { return String(town || '').trim().toUpperCase() + '|' + String(county || '').trim().toUpperCase(); }
       H.settled(parts[2]).forEach(function (r) { var key = townPeerKey(r.town, r.county); if (key !== '|' && H.valid(r.avg_watchdog_score) != null) townPeers[key] = H.num(r.avg_watchdog_score); });
@@ -163,7 +176,19 @@
       S.properties.forEach(function (p) { var s = S.scores[p.pams_pin], townKey = townPeerKey(p.town, p.county); if (s && s.peer == null && townPeers[townKey] != null) s.peer = townPeers[townKey]; });
       S.changes = H.settled(parts[3]);
       S.findings = H.settled(parts[4]);
-      return enrichMunicipalTaxes();
+      WD.repaint();
+    }).catch(function (error) { console.warn('Watchdog supplemental dashboard data failed:', error); });
+  }
+
+  function loadData() {
+    var c = db();
+    loadAccountContext(c);
+    return c.from('saved_properties').select('*').order('created_at', { ascending: false }).then(function (saved) {
+      if (!saved || saved.error) throw (saved && saved.error) || new Error('Saved properties request failed');
+      S.properties = Array.isArray(saved.data) ? saved.data : [];
+      var pins = H.unique(S.properties.map(function (p) { return p.pams_pin; }));
+      var towns = H.unique(S.properties.map(function (p) { return p.town; }));
+      loadSupplementalData(c, pins, towns);
     });
   }
 
@@ -202,7 +227,11 @@
       var bootEl = H.el('wdd-boot'), app = H.el('wdd-app'), pull = H.el('wdd-pull');
       if (bootEl) bootEl.hidden = true; if (app) app.hidden = false; if (pull) pull.hidden = false;
       d.dispatchEvent(new CustomEvent('wd:ready'));
+      var enrich = function () { enrichMunicipalTaxes().catch(function (error) { console.warn('Municipal tax enrichment failed:', error); }); };
+      if (typeof w.requestIdleCallback === 'function') w.requestIdleCallback(enrich, { timeout: 2500 });
+      else w.setTimeout(enrich, 900);
     }).catch(function (err) { clearTimeout(guard); console.warn('Watchdog dashboard load failed:', err); fail('We could not load your workspace. Reload to retry.'); });
   }
   if (d.readyState === 'loading') d.addEventListener('DOMContentLoaded', boot, { once: true }); else boot();
 })(window, document);
+
