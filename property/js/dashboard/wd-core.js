@@ -135,16 +135,18 @@
   }
 
   function loadAccountContext(c) {
+    var developerAccess = false;
     runOptional(function () { return c.rpc('get_my_entitlement'); }, function (res) {
       if (!res || res.error) return;
       var ent = H.one({ status: 'fulfilled', value: res });
       if (!ent) return;
       S.entitlement = ent;
-      S.plan = normPlan(ent.plan_tier || ent.plan);
+      if (!developerAccess) S.plan = normPlan(ent.plan_tier || ent.plan);
       WD.repaint();
     });
     runOptional(function () { return c.rpc('is_watchdog_developer'); }, function (res) {
       if (res && !res.error && res.data === true) {
+        developerAccess = true;
         S.plan = 'developer';
         WD.repaint();
       }
