@@ -1,5 +1,5 @@
 <!doctype html>
-<html lang="en" data-access-require="pro">
+<html lang="en" class="aw27-page" data-access-require="pro">
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width,initial-scale=1">
@@ -10,13 +10,13 @@
   <link rel="stylesheet" href="/property/css/shared.css">
   <link rel="stylesheet" href="/property/css/dashboard.css">
   <link rel="stylesheet" href="/property/css/plan-context.css">
-  <link rel="stylesheet" href="/property/growth/growth.css">
+  <link rel="stylesheet" href="/property/css/shared/00-design-tokens.css"><link rel="stylesheet" href="/property/css/app-shell-2027.css"><link rel="stylesheet" href="/property/css/agent-workspace.css?v=20260926a"><link rel="stylesheet" href="/property/growth/growth.css?v=20260926a">
   <style>
     .sb-wrap{display:grid;gap:18px}.sb-hero{display:grid;grid-template-columns:minmax(0,1fr) auto;gap:20px;align-items:end}.sb-hero h1{margin:6px 0 8px}.sb-hero p{max-width:880px;margin:0}.sb-badge{display:inline-flex;align-items:center;gap:7px;padding:7px 10px;border-radius:999px;background:var(--surface-subtle,#eef5ff);font-weight:800}.sb-notice,.sb-card,.sb-result,.sb-sources{border-radius:var(--radius-lg,18px);background:#fff;box-shadow:var(--shadow-sm,0 8px 26px rgba(20,34,54,.07))}.sb-notice{display:flex;gap:12px;align-items:flex-start;padding:15px 17px;background:var(--surface-subtle,#f7f9fc)}.sb-grid{display:grid;grid-template-columns:minmax(0,1.1fr) minmax(340px,.9fr);gap:18px;align-items:start}.sb-card,.sb-result,.sb-sources{padding:18px}.sb-card h2,.sb-result h2,.sb-sources h2{margin:0 0 6px}.sb-fields{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:12px;margin-top:14px}.sb-field{display:grid;gap:6px}.sb-field.wide{grid-column:1/-1}.sb-field span{font-size:var(--type-xs,12px);font-weight:800;letter-spacing:.04em;text-transform:uppercase}.sb-field input,.sb-field select{width:100%;min-height:44px;border:1px solid var(--border-subtle,#d7dee8);border-radius:var(--radius-md,12px);background:#fff;padding:0 12px;font:inherit}.sb-actions{display:flex;flex-wrap:wrap;gap:9px;margin-top:16px}.sb-btn{min-height:44px;border:0;border-radius:var(--radius-md,12px);padding:0 15px;font:inherit;font-weight:800;cursor:pointer}.sb-btn.primary{background:#0b65d8;color:#fff}.sb-btn.secondary{background:#eef3f8}.sb-summary{display:grid;gap:10px;margin-top:13px}.sb-line{display:grid;grid-template-columns:minmax(0,1fr) auto;gap:16px;align-items:start;padding:13px 14px;border-radius:14px;background:#f7f9fc}.sb-line b{display:block}.sb-line small{display:block;margin-top:4px;color:#657386;line-height:1.4}.sb-state{font-weight:900;text-align:right}.sb-state.yes{color:#157248}.sb-state.maybe{color:#996100}.sb-state.no{color:#a23b2c}.sb-priority{padding:15px;border-radius:15px;background:#eef5ff}.sb-priority strong{display:block;font-size:20px}.sb-fine{font-size:var(--type-sm,14px);color:#657386;line-height:1.5}.sb-source-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:12px;margin-top:12px}.sb-source{padding:14px;border-radius:14px;background:#f7f9fc}.sb-source b{display:block}.sb-source p{margin:5px 0 0;font-size:14px;line-height:1.45}.sb-source a{font-weight:800}.sb-empty{padding:18px;border-radius:14px;background:#f7f9fc;color:#657386}.sb-lock{display:flex;gap:9px;align-items:flex-start;margin-top:13px;padding:12px 13px;border-radius:14px;background:#f7f9fc;font-size:14px;line-height:1.45}
     @media(max-width:900px){.sb-hero,.sb-grid{grid-template-columns:1fr}.sb-badge{justify-self:start}}@media(max-width:640px){.sb-fields,.sb-source-grid{grid-template-columns:1fr}.sb-field.wide{grid-column:auto}.sb-line{grid-template-columns:1fr}.sb-state{text-align:left}}
   </style>
 </head>
-<body data-sidebar-page="growth" data-plan-auto="true">
+<body data-sidebar-page="growth" data-plan-auto="true"><nav class="aw27-bar" id="agent-workspace-nav" data-active="growth" aria-label="Agent Control workspaces"><div class="aw27-actions"></div></nav>
 <main><div class="db-shell"><div id="property-side-menu"></div><div class="db-workspace sb-wrap">
   <header class="gc-top sb-hero">
     <div><a href="/property/growth/">← Growth Center</a><span>NJ-ONLY PLAY · HOUSEHOLD-PROVIDED FACTS</span><h1>Senior Benefit Review</h1><p>Prepare a factual PAS-1 review for a household you already know. Watchdog screens current New Jersey rules and puts the Senior Freeze base year first without inferring age, disability, income, ownership, or eligibility from property records.</p></div>
@@ -56,7 +56,7 @@
 </div></div></main>
 <div id="pl-toast" class="pl-toast"></div>
 <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2/dist/umd/supabase.js"></script>
-<script src="/property/js/access-guard.js"></script><script src="/property/js/plan-context.js"></script><script src="/property/js/sidemenu.js"></script>
+<script src="/property/js/access-guard.js"></script><script src="/property/js/plan-context.js"></script><script src="/property/js/app-shell-2027.js"></script><script src="/property/js/agent-workspace.js?v=20260926a"></script>
 <script>
 (function(){'use strict';
   var $=function(id){return document.getElementById(id)},lastSummary='';

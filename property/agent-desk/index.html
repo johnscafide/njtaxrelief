@@ -1,183 +1,200 @@
 <!doctype html>
-<html lang="en" data-access-require="agent">
+<html lang="en" class="aw27-page" data-access-require="agent">
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
   <meta name="robots" content="noindex,nofollow">
   <meta name="theme-color" content="#f5f7fb">
-  <title>Agent Control | Watchdog Property Intelligence</title>
+  <title>Opportunity Desk | Watchdog Agent Control</title>
   <link rel="manifest" href="/property/manifest.webmanifest">
   <link rel="icon" type="image/png" href="/favicon-96x96.png">
   <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Plus+Jakarta+Sans:wght@500;600;700;800&family=Source+Sans+3:wght@400;600;700;800&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Plus+Jakarta+Sans:wght@600;700;800&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
-  <link rel="stylesheet" href="/styles.css">
-  <link rel="stylesheet" href="/property/css/shared.css">
-  <link rel="stylesheet" href="/property/css/dashboard.css">
-  <link rel="stylesheet" href="/property/css/mobile-app.css">
-  <link rel="stylesheet" href="/property/css/plan-context.css">
-  <link rel="stylesheet" href="/property/css/agent-desk.css">
-  <link rel="stylesheet" href="/property/css/agent-discover.css">
-  <link rel="stylesheet" href="/property/css/agent-hardening.css">
+  <link rel="stylesheet" href="/property/css/shared/00-design-tokens.css">
   <link rel="stylesheet" href="/property/css/app-shell-2027.css">
-  <link rel="stylesheet" href="/property/css/agent-control-2027.css">
-  <link rel="stylesheet" href="/property/css/move-seats.css">
-  <link rel="stylesheet" href="/property/css/agent-today.css?v=20260919a">
+  <link rel="stylesheet" href="/property/css/agent-workspace.css?v=20260926a">
+  <link rel="stylesheet" href="/property/css/agent-desk.css?v=20260926a">
 </head>
 <body data-sidebar-page="agent-desk" data-plan-auto="true">
-  <main class="ac-main">
-    <nav class="ac27-worknav" aria-label="Agent Control workspaces">
-      <div class="ac27-tabs">
-        <a class="on" href="/agent-desk"><i class="fas fa-bullseye"></i> Opportunity Desk</a>
-        <a href="/farm-map"><i class="fas fa-map"></i> Farm Map</a>
-        <a href="/growth/"><i class="fas fa-arrow-trend-up"></i> Growth</a>
-        <a href="/farm-builder"><i class="fas fa-sliders"></i> Advanced Farm</a>
-      </div>
-      <div class="ac27-actions">
-        <button class="ad-import-open" id="ad-import-open" type="button"><i class="fas fa-file-arrow-up"></i><span class="ac27-label">Add your sphere</span></button>
-        <button class="ac27-icon" id="ac-fullscreen" type="button" title="Fullscreen" aria-label="Fullscreen"><i class="fas fa-expand"></i></button>
-        <button class="ac27-icon" id="ac-close" type="button" title="Close Agent Control" aria-label="Close Agent Control"><i class="fas fa-xmark"></i></button>
-      </div>
-    </nav>
+  <nav class="aw27-bar" id="agent-workspace-nav" data-active="desk" aria-label="Agent Control workspaces">
+    <div class="aw27-actions">
+      <button class="aw27-primary ad-import-open" id="ad-import-open" type="button"><i class="fas fa-file-arrow-up" aria-hidden="true"></i><span>Add your sphere</span></button>
+    </div>
+  </nav>
 
-    <div class="db-workspace">
-      <div class="ad-shell" id="ad-app" hidden>
-        <section class="ad-overview">
-          <div>
-            <span>AGENT CONTROL</span>
-            <h2>Today’s property opportunities</h2>
-            <p>A focused, evidence-backed worklist from properties you already know. Watchdog supplies the reason, not a person’s identity or a prediction that they will sell.</p>
-          </div>
-          <div class="ad-overview-meta"><b id="ad-total">0</b><span>active property signals</span><small id="ad-refreshed">Waiting for sources</small></div>
-        </section>
+  <main class="ad27" id="ad-main">
+    <div class="ad-shell" id="ad-app" hidden>
+      <header class="aw27-head ad27-head">
+        <div>
+          <h1>Opportunity Desk</h1>
+          <p>Sourced public-record reasons to contact properties in your sphere. <span id="ad-refreshed">Waiting for sources</span></p>
+        </div>
+      </header>
 
-        <nav class="ad-companion-nav" aria-label="Agent tools"><a href="/agent/listing-prep">Listing Prep</a><a href="/agent/buyers">Buyer Shortlists</a><a href="/agent/open-house">Open House</a><a href="/agent/contacts">CRM Contacts</a><a href="/transaction/">Transactions</a></nav>
-        <section class="ad-today-hub" id="ad-today-hub" aria-labelledby="ad-today-title">
-          <header class="ad-today-head"><div><span>YOUR DAY</span><h2 id="ad-today-title">What needs my attention today?</h2><p>One queue across active closings, listing prep, buyers, open houses and sourced property opportunities.</p></div></header>
-          <div class="ad-today-cards">
-            <a class="ad-today-card" href="/transaction/"><small>Transactions</small><b id="ad-today-transactions">—</b><span id="ad-today-transactions-sub">Checking closing work…</span></a>
-            <a class="ad-today-card" href="/agent/listing-prep"><small>Listing Prep</small><b id="ad-today-listings">—</b><span id="ad-today-listings-sub">Checking prep packs…</span></a>
-            <a class="ad-today-card" href="/agent/buyers"><small>Buyer Shortlists</small><b id="ad-today-buyers">—</b><span id="ad-today-buyers-sub">Checking buyers…</span></a>
-            <a class="ad-today-card" href="/agent/open-house"><small>Open Houses</small><b id="ad-today-openhouses">—</b><span id="ad-today-openhouses-sub">Checking events…</span></a>
-            <a class="ad-today-card" href="#ad-focus"><small>Opportunities</small><b id="ad-today-opportunities">—</b><span id="ad-today-opportunities-sub">Checking sourced signals…</span></a>
-          </div>
-          <div class="ad-today-queue" id="ad-today-queue"><div class="ad-today-empty">Loading your daily work queue…</div></div>
-        </section>
-        <section id="ad-capacity" class="ad-capacity"><p class="ad-control-loading">Loading plan capacity…</p></section>
-        <section id="ad-assessment-queue" class="ad-assessment-queue" hidden></section>
-        <section class="ad-focus" id="ad-focus" aria-label="Best next property conversation"></section>
-        <section class="ad-stats" id="ad-stats" aria-label="Agent outcome analytics"></section>
+      <!-- One-line summary: every number an agent checks first. -->
+      <section class="ad27-kpis" aria-label="Desk summary">
+        <div class="ad27-kpi"><small>Active signals</small><b id="ad-total">0</b></div>
+        <div class="ad27-kpi-group" id="ad-stats" aria-label="Agent outcome analytics"></div>
+      </section>
 
-        <section class="ad-discover" aria-label="Dynamic prospect lists">
-          <header>
-            <div><span>DISCOVER · NEW</span><h2>Build a live market list</h2><p>Save a territory search, open the actual matched properties, and move selected records into your Opportunity Desk or a Growth campaign.</p></div>
-            <button id="ad-list-new" type="button"><i class="fas fa-plus"></i> New list</button>
-          </header>
-          <div class="ad-quick-plays">
-            <button data-play="residential"><i class="fas fa-house"></i><b>Residential farm</b><small>Residential parcels in a target market</small></button>
-            <button data-play="commercial"><i class="fas fa-building"></i><b>Commercial watch</b><small>Commercial property inventory</small></button>
-            <button data-play="all"><i class="fas fa-layer-group"></i><b>Market inventory</b><small>All supported parcels in a territory</small></button>
-          </div>
-          <div id="ad-dynamic-lists" class="ad-dynamic-lists"><p class="ad-control-loading">Loading your lists…</p></div>
-          <form id="ad-list-form" class="ad-list-form" hidden>
-            <label>List name<input id="ad-list-name" required maxlength="80" placeholder="Cherry Hill residential farm"></label>
-            <label>Geography<select id="ad-list-scope"><option value="municipality">Municipality</option><option value="county">County</option><option value="zip">ZIP code</option></select></label>
-            <label>Market<input id="ad-list-value" required maxlength="80" placeholder="Cherry Hill Twp"></label>
-            <label>Property class<select id="ad-list-class"><option value="">All supported</option><option value="2">Residential</option><option value="4A,4B,4C">Commercial</option><option value="1">Vacant land</option></select></label>
-            <button type="submit">Save & check list</button><button type="button" id="ad-list-cancel">Cancel</button>
-          </form>
-        </section>
-
-        <section class="ad-control-plane" aria-label="Territory and conversion intelligence">
-          <article class="ad-territory-panel">
-            <header><div><span>TERRITORY INTELLIGENCE</span><h2>Where your sphere needs attention</h2></div><button id="ad-territory-new" type="button"><i class="fas fa-plus"></i> Territory</button></header>
-            <div id="ad-territory-list"><p class="ad-control-loading">Loading territory coverage…</p></div>
-            <form id="ad-territory-form" hidden>
-              <label>Name<input id="ad-territory-label" required maxlength="80" placeholder="Camden County sphere"></label>
-              <label>Scope<select id="ad-territory-type"><option value="municipality">Municipality</option><option value="county">County</option><option value="zip">ZIP code</option></select></label>
-              <label>Value<input id="ad-territory-value" required maxlength="80" placeholder="Cherry Hill Twp"></label>
-              <button type="submit">Save territory</button><button type="button" id="ad-territory-cancel">Cancel</button>
-            </form>
-          </article>
-          <article class="ad-funnel-panel">
-            <header><div><span>VALUE CREATED</span><h2>From evidence to appointment</h2></div><select id="ad-funnel-window" aria-label="Analytics period"><option value="30">30 days</option><option value="90">90 days</option><option value="365">12 months</option></select></header>
-            <div class="ad-portal-analytics" id="ad-portal-analytics" aria-label="Agent portal traffic and lead analytics"><p class="ad-control-loading">Loading portal analytics…</p></div>
-            <div class="ad-funnel" id="ad-funnel"><p class="ad-control-loading">Loading outcome analytics…</p></div>
-            <p class="ad-funnel-note">Watchdog measures your recorded workflow, not a person’s likelihood to sell. Portal metrics count bounded visits and explicit contact-consent submissions only.</p>
-          </article>
-        </section>
-
-        <section class="ad-controls">
-          <div class="ad-tabs" id="ad-tabs">
-            <button class="on" data-queue="top"><i class="fas fa-sparkles"></i> Priority</button>
-            <button data-queue="now">Act now <b id="ad-now-count">0</b></button>
-            <button data-queue="week">This week <b id="ad-week-count">0</b></button>
-            <button data-queue="watch">Watching <b id="ad-watch-count">0</b></button>
-            <button data-queue="all">All</button>
-          </div>
-          <div class="ad-control-right">
-            <label><i class="fas fa-magnifying-glass"></i><input id="ad-search" type="search" aria-label="Search property or reason" placeholder="Search property or reason"></label>
-            <select id="ad-sort" aria-label="Sort opportunities"><option value="score">Highest value</option><option value="fresh">Newest evidence</option><option value="address">Address</option></select>
-          </div>
-        </section>
-
-        <div class="ad-layout">
-          <section>
-            <div class="ad-list-head"><div><span>FOCUSED WORKLIST</span><h2 id="ad-queue-title">Your top opportunities</h2></div><small id="ad-result-count"></small></div>
-            <div class="ad-list" id="ad-list" aria-live="polite"></div>
-            <button class="ad-load-more" id="ad-load-more" type="button" hidden><i class="fas fa-chevron-down"></i> Show 12 more</button>
+      <div class="ad27-grid">
+        <div class="ad27-main">
+          <section class="ad27-card ad-today-hub" id="ad-today-hub" aria-labelledby="ad-today-title">
+            <header class="ad27-card-head">
+              <h2 id="ad-today-title"><i class="fas fa-calendar-day" aria-hidden="true"></i> Today</h2>
+              <small>Closings, listing prep and open houses that need you</small>
+            </header>
+            <div class="ad-today-queue" id="ad-today-queue"><div class="ad-today-empty">Loading today’s work…</div></div>
           </section>
-          <aside class="ad-side">
-            <section><span>YOUR WORKLOAD</span><h3>Sphere coverage</h3><div id="ad-coverage">
+
+          <section id="ad-assessment-queue" class="ad27-card ad-assessment-queue" hidden></section>
+          <section class="ad-focus" id="ad-focus" aria-label="Getting started" hidden></section>
+
+          <section class="ad27-card ad27-worklist" aria-labelledby="ad-queue-title">
+            <header class="ad27-card-head ad-list-head">
+              <h2 id="ad-queue-title">Your priority worklist</h2>
+              <small id="ad-result-count"></small>
+            </header>
+            <div class="ad-controls">
+              <div class="ad-tabs" id="ad-tabs" role="tablist" aria-label="Worklist queue">
+                <button class="on" type="button" data-queue="top">Priority</button>
+                <button type="button" data-queue="now">Act now <b id="ad-now-count">0</b></button>
+                <button type="button" data-queue="week">This week <b id="ad-week-count">0</b></button>
+                <button type="button" data-queue="watch">Watching <b id="ad-watch-count">0</b></button>
+                <button type="button" data-queue="all">All</button>
+              </div>
+              <div class="ad-control-right">
+                <label class="ad-search"><i class="fas fa-magnifying-glass" aria-hidden="true"></i><input id="ad-search" type="search" aria-label="Search property or reason" placeholder="Search address or reason"></label>
+                <select id="ad-sort" aria-label="Sort opportunities"><option value="score">Highest value</option><option value="fresh">Newest evidence</option><option value="address">Address</option></select>
+              </div>
+            </div>
+            <div class="ad-list" id="ad-list" aria-live="polite"></div>
+            <button class="ad-load-more" id="ad-load-more" type="button" hidden><i class="fas fa-chevron-down" aria-hidden="true"></i> Show 12 more</button>
+          </section>
+        </div>
+
+        <aside class="ad27-rail" aria-label="Workspace">
+          <section class="ad27-card" aria-labelledby="ad-sphere-title">
+            <header class="ad27-card-head"><h2 id="ad-sphere-title">Your sphere</h2></header>
+            <div id="ad-coverage" class="ad27-rows">
               <div class="ad-coverage-row"><span>Properties loaded</span><b data-coverage-total>—</b></div>
               <div class="ad-coverage-row"><span>Parcel matched</span><b data-coverage-matched>—</b></div>
               <div class="ad-coverage-row"><span>Actionable reasons</span><b data-coverage-reasons>—</b></div>
               <div class="ad-coverage-row"><span>Updates combined</span><b data-coverage-combined>—</b></div>
-            </div><button id="ad-import-side" type="button"><i class="fas fa-plus"></i> Import or select properties</button></section>
-            <section><span>WEEKLY DIGEST</span><h3>Your top ten, every Monday</h3><p>Receive only new or materially changed reasons. No owner names or contact enrichment.</p><label class="ad-switch"><input id="ad-digest" type="checkbox"><span></span> Email my weekly desk</label><small id="ad-digest-note"></small></section>
-            <section class="ad-boundary"><i class="fas fa-shield-halved"></i><div><b>Relationship intelligence, not lead scoring</b><p>Watchdog ranks the usefulness of property information. It never calls someone a likely seller, distressed owner, or motivated lead.</p></div></section>
-          </aside>
-        </div>
+            </div>
+            <button id="ad-import-side" class="ad27-btn" type="button"><i class="fas fa-plus" aria-hidden="true"></i> Import or select properties</button>
+          </section>
+
+          <section id="ad-capacity" class="ad27-card ad-capacity"><p class="ad-control-loading">Loading plan capacity…</p></section>
+
+          <section class="ad27-card" aria-labelledby="ad-workflows-title">
+            <header class="ad27-card-head"><h2 id="ad-workflows-title">Workflows</h2></header>
+            <nav class="ad27-links" aria-label="Agent workflows">
+              <a href="/transaction/"><i class="fas fa-file-signature" aria-hidden="true"></i><span>Transactions<small id="ad-today-transactions-sub">Checking closings…</small></span><b id="ad-today-transactions">—</b></a>
+              <a href="/agent/listing-prep"><i class="fas fa-house-chimney" aria-hidden="true"></i><span>Listing Prep<small id="ad-today-listings-sub">Checking prep packs…</small></span><b id="ad-today-listings">—</b></a>
+              <a href="/agent/buyers"><i class="fas fa-people-roof" aria-hidden="true"></i><span>Buyer Shortlists<small id="ad-today-buyers-sub">Checking buyers…</small></span><b id="ad-today-buyers">—</b></a>
+              <a href="/agent/open-house"><i class="fas fa-qrcode" aria-hidden="true"></i><span>Open Houses<small id="ad-today-openhouses-sub">Checking events…</small></span><b id="ad-today-openhouses">—</b></a>
+              <a href="/agent/contacts"><i class="fas fa-address-book" aria-hidden="true"></i><span>CRM Contacts<small>Your permitted contacts</small></span><i class="fas fa-chevron-right" aria-hidden="true"></i></a>
+            </nav>
+          </section>
+
+          <section class="ad27-card" aria-labelledby="ad-digest-title">
+            <header class="ad27-card-head"><h2 id="ad-digest-title">Weekly digest</h2></header>
+            <label class="ad-switch"><input id="ad-digest" type="checkbox"><span aria-hidden="true"></span> Email my top ten every Monday</label>
+            <small class="ad27-note" id="ad-digest-note"></small>
+          </section>
+        </aside>
       </div>
 
-      <section class="ad-gate" id="ad-gate"><i class="fas fa-lock"></i><h2>Agent workspace</h2><p>Sign in with an active Agent or Pro plan to open your private Opportunity Desk.</p><a href="/pro#plans">Compare plans</a></section>
+      <div class="ad27-split">
+        <section class="ad27-card ad-discover" aria-labelledby="ad-lists-title">
+          <header class="ad27-card-head">
+            <h2 id="ad-lists-title">Live market lists</h2>
+            <button id="ad-list-new" class="ad27-btn" type="button"><i class="fas fa-plus" aria-hidden="true"></i> New list</button>
+          </header>
+          <div class="ad-quick-plays" aria-label="Start a list from a template">
+            <button type="button" data-play="residential"><i class="fas fa-house" aria-hidden="true"></i> Residential farm</button>
+            <button type="button" data-play="commercial"><i class="fas fa-building" aria-hidden="true"></i> Commercial watch</button>
+            <button type="button" data-play="all"><i class="fas fa-layer-group" aria-hidden="true"></i> Market inventory</button>
+          </div>
+          <form id="ad-list-form" class="ad27-form" hidden>
+            <label>List name<input id="ad-list-name" required maxlength="80" placeholder="Cherry Hill residential farm"></label>
+            <label>Geography<select id="ad-list-scope"><option value="municipality">Municipality</option><option value="county">County</option><option value="zip">ZIP code</option></select></label>
+            <label>Market<input id="ad-list-value" required maxlength="80" placeholder="Cherry Hill Twp"></label>
+            <label>Property class<select id="ad-list-class"><option value="">All supported</option><option value="2">Residential</option><option value="4A,4B,4C">Commercial</option><option value="1">Vacant land</option></select></label>
+            <div class="ad27-form-actions"><button type="submit" class="ad27-btn primary">Save &amp; check list</button><button type="button" class="ad27-btn" id="ad-list-cancel">Cancel</button></div>
+          </form>
+          <div id="ad-dynamic-lists" class="ad-dynamic-lists"><p class="ad-control-loading">Loading your lists…</p></div>
+        </section>
+
+        <section class="ad27-card ad-territory-panel" aria-labelledby="ad-territory-title">
+          <header class="ad27-card-head">
+            <h2 id="ad-territory-title">Territories</h2>
+            <button id="ad-territory-new" class="ad27-btn" type="button"><i class="fas fa-plus" aria-hidden="true"></i> Territory</button>
+          </header>
+          <form id="ad-territory-form" class="ad27-form" hidden>
+            <label>Name<input id="ad-territory-label" required maxlength="80" placeholder="Camden County sphere"></label>
+            <label>Scope<select id="ad-territory-type"><option value="municipality">Municipality</option><option value="county">County</option><option value="zip">ZIP code</option></select></label>
+            <label>Value<input id="ad-territory-value" required maxlength="80" placeholder="Cherry Hill Twp"></label>
+            <div class="ad27-form-actions"><button type="submit" class="ad27-btn primary">Save territory</button><button type="button" class="ad27-btn" id="ad-territory-cancel">Cancel</button></div>
+          </form>
+          <div id="ad-territory-list"><p class="ad-control-loading">Loading territory coverage…</p></div>
+        </section>
+      </div>
+
+      <section class="ad27-card ad-funnel-panel" aria-labelledby="ad-funnel-title">
+        <header class="ad27-card-head">
+          <h2 id="ad-funnel-title">Results</h2>
+          <select id="ad-funnel-window" aria-label="Results period"><option value="30">Last 30 days</option><option value="90">Last 90 days</option><option value="365">Last 12 months</option></select>
+        </header>
+        <div class="ad27-results">
+          <div class="ad-funnel" id="ad-funnel"><p class="ad-control-loading">Loading outcome analytics…</p></div>
+          <div class="ad27-portal"><h3>Your agent portal</h3><div class="ad-portal-analytics" id="ad-portal-analytics" aria-label="Agent portal traffic and lead analytics"><p class="ad-control-loading">Loading portal analytics…</p></div></div>
+        </div>
+        <p class="ad27-note ad-funnel-note"><i class="fas fa-shield-halved" aria-hidden="true"></i> Watchdog ranks how useful property information is and measures your recorded workflow. It never labels anyone a likely seller, distressed owner or motivated lead.</p>
+      </section>
     </div>
+
+    <section class="ad-gate" id="ad-gate" aria-live="polite"><i class="fas fa-circle-notch fa-spin" aria-hidden="true"></i><p>Loading your Opportunity Desk…</p></section>
   </main>
 
-
-  <template id="ad-first-run-template"><div class="ad-first-run"><span>YOUR FIRST WATCHDOG WORKFLOW</span><h2>Start with a property you know</h2><p>Bring the listing details from your MLS, then use Watchdog to review the property’s tax, assessment and public-record context.</p><ol><li><a href="/">Research a property</a><small>Look up an address and save it to your watchlist. It will appear here.</small></li><li><button type="button" data-start-import>Import your sphere</button><small>Add your permitted client and past-client addresses using CSV.</small></li><li><a href="/farm-map">Build a neighborhood farm</a><small>Draw an area, review the matches and add selected properties to your desk.</small></li></ol><p>Once a property is saved, open its evidence, copy a useful conversation starter and record the outcome after you follow up.</p></div></template>
-  <template id="ad-load-error-template"><i class="fas fa-triangle-exclamation"></i><h2>Your desk could not load</h2><p data-load-error></p><button type="button" id="ad-load-retry">Retry loading your desk</button></template>
+  <template id="ad-first-run-template"><div class="ad-first-run"><span class="aw27-eyebrow">Get started</span><h2>Start with a property you know</h2><p>Bring the listing details from your MLS, then use Watchdog to review the property’s tax, assessment and public-record context.</p><ol><li><a href="/">Research a property</a><small>Look up an address and save it to your watchlist. It will appear here.</small></li><li><button type="button" data-start-import>Import your sphere</button><small>Add your permitted client and past-client addresses using CSV.</small></li><li><a href="/farm-map">Build a neighborhood farm</a><small>Draw an area, review the matches and add selected properties to your desk.</small></li></ol></div></template>
+  <template id="ad-intel-review-template"><section class="ad-evidence-section ad-intel-review"><h3>Watchdog <span class="wd-intelligence-brand-word">Intelligence</span> review</h3><p>Run the assessment review model on this parcel to see its source facts, calculations and missing evidence.</p><button type="button" class="ad27-btn" data-why-review><i class="fas fa-magnifying-glass-chart" aria-hidden="true"></i> Run review</button></section></template>
+  <template id="ad-load-error-template"><i class="fas fa-triangle-exclamation" aria-hidden="true"></i><h2>Your desk could not load</h2><p data-load-error></p><button type="button" id="ad-load-retry">Retry loading your desk</button></template>
 
   <div class="ad-modal" id="ad-import-modal" hidden>
     <div class="ad-modal-card" role="dialog" aria-modal="true" aria-labelledby="ad-import-title">
-      <button class="ad-modal-x" id="ad-import-close" type="button" aria-label="Close"><i class="fas fa-xmark"></i></button>
-      <span>PRIVATE SPHERE</span><h2 id="ad-import-title">Add properties you may lawfully contact</h2><p>Select saved properties or paste up to 1,000 CSV rows. Contact reference is your internal ID, not a person lookup.</p>
-      <div class="ad-import-tabs"><button class="on" data-import-view="saved">Saved properties</button><button data-import-view="csv">CSV import</button></div>
+      <button class="ad-modal-x" id="ad-import-close" type="button" aria-label="Close"><i class="fas fa-xmark" aria-hidden="true"></i></button>
+      <span class="aw27-eyebrow">Private sphere</span><h2 id="ad-import-title">Add properties you may lawfully contact</h2><p>Select saved properties or paste up to 1,000 CSV rows. Contact reference is your internal ID, not a person lookup.</p>
+      <div class="ad-import-tabs"><button class="on" type="button" data-import-view="saved">Saved properties</button><button type="button" data-import-view="csv">CSV import</button></div>
       <div id="ad-import-saved"><div class="ad-saved-tools"><label><input id="ad-select-all" type="checkbox"> Select all</label><small id="ad-saved-count"></small></div><div class="ad-saved-list" id="ad-saved-list"></div></div>
       <div id="ad-import-csv" hidden><p class="ad-csv-format"><b>Columns:</b> address, municipality, county, pams_pin, contact_ref, relationship</p><textarea id="ad-csv" rows="10" placeholder="address,municipality,county,pams_pin,contact_ref,relationship&#10;123 Main St,Woodbury Heights,Gloucester,0823_40.10_5,CRM-104,past_client"></textarea><small>Allowed relationships: past_client, sphere, claimed_home, watchlist, farm.</small></div>
       <button class="ad-import-submit" id="ad-import-submit" type="button">Add selected properties</button><p class="ad-import-status" id="ad-import-status" aria-live="polite"></p>
     </div>
   </div>
 
-  <div class="ad-drawer" id="ad-drawer" hidden><button class="ad-drawer-backdrop" type="button" aria-label="Close evidence"></button><aside role="dialog" aria-modal="true" aria-labelledby="ad-drawer-title"><button id="ad-drawer-close" type="button" aria-label="Close"><i class="fas fa-xmark"></i></button><div id="ad-drawer-content"></div></aside></div>
+  <div class="ad-drawer" id="ad-drawer" hidden><button class="ad-drawer-backdrop" type="button" aria-label="Close evidence"></button><aside role="dialog" aria-modal="true" aria-labelledby="ad-drawer-title"><button id="ad-drawer-close" type="button" aria-label="Close"><i class="fas fa-xmark" aria-hidden="true"></i></button><div id="ad-drawer-content"></div></aside></div>
   <div id="pl-toast" class="pl-toast" role="status" aria-live="polite" aria-atomic="true"></div>
 
   <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2/dist/umd/supabase.js"></script>
   <script src="/property/js/access-guard.js"></script>
   <script src="/property/js/plan-context.js"></script>
   <script src="/property/js/app-shell-2027.js"></script>
-  <script src="/property/js/agent-control-shell-2027.js"></script>
+  <script src="/property/js/agent-workspace.js?v=20260926a"></script>
   <script src="/property/js/platform-observability.js"></script>
   <script src="/property/js/agent-ui-safety.js"></script>
   <script src="/property/js/pwa.js"></script>
-  <script src="/property/js/agent-desk.js"></script>
-  <script src="/property/js/agent-today.js?v=20260919a"></script>
-  <script src="/property/js/agent-control.js"></script>
-  <script src="/property/js/agent-portal-analytics.js"></script>
+  <script src="/property/js/agent-desk.js?v=20260926a"></script>
+  <script src="/property/js/agent-today.js?v=20260926a"></script>
+  <script src="/property/js/agent-control.js?v=20260926a"></script>
+  <script src="/property/js/agent-portal-analytics.js?v=20260926a"></script>
   <script src="/property/js/agent-list-actions.js"></script>
-  <script src="/property/js/agent-capacity.js"></script>
-  <script src="/property/js/agent-desk-safety.js"></script>
-  <script src="/property/js/agent-assessment-desk.js"></script>
-  <script src="/property/js/move-seats.js"></script>
+  <script src="/property/js/agent-capacity.js?v=20260926a"></script>
+  <script src="/property/js/agent-desk-safety.js?v=20260926a"></script>
+  <script src="/property/js/agent-assessment-desk.js?v=20260926a"></script>
+  <script src="/property/js/move-seats.js?v=20260926a"></script>
+  <script src="/property/js/agent-import-mobile-a11y.js"></script>
+  <script src="/property/js/agent-control-evidence-mobile.js"></script>
 </body>
 </html>

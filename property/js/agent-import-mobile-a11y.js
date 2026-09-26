@@ -1,5 +1,7 @@
 (function(){
   'use strict';
+  if(window.__WD_AGENT_IMPORT_A11Y__)return;
+  window.__WD_AGENT_IMPORT_A11Y__=true;
 
   // Import is a modal at every viewport, including desktop.
 

@@ -11,13 +11,13 @@
   function meter(label, key) {
     var u = n(usage.usage && usage.usage[key]), m = n(usage.limits && usage.limits[key]);
     var left = Math.max(0, m - u), p = pct(u, m), state = p >= 100 ? ' hard' : p >= 80 ? ' warn' : '';
-    return '<div class="ad-cap-row' + state + '"><div><b>' + label + '</b><span>' + u.toLocaleString() + ' / ' + m.toLocaleString() + '</span></div><i><em style="width:' + p + '%"></em></i><small>' + (left ? left.toLocaleString() + ' remaining' : 'Limit reached') + '</small></div>';
+    return '<div class="ad-cap-row' + state + '" title="' + (left ? left.toLocaleString() + ' remaining' : 'Limit reached') + '"><div><b>' + label + '</b><span>' + u.toLocaleString() + ' / ' + m.toLocaleString() + '</span></div><i><em style="width:' + p + '%"></em></i></div>';
   }
   function render() {
     var host = $('ad-capacity');
     if (!host || !usage) return;
-    // content-architecture: dynamic — Plan name and all meter totals, remaining capacity and warning states come from the authenticated usage RPC, not a static plan catalog.
-    var html = '<div class="ad-cap-head"><div><span>AGENT CAPACITY</span><h3>' + plan(usage.plan) + ' workspace</h3></div><a href="/pro#plans">Compare plans</a></div>' + meter('Properties', 'properties') + meter('Live farms', 'lists') + meter('Territories', 'territories');
+    // content-architecture: dynamic — Plan name, every meter total and each warning state come from the authenticated get_agent_usage RPC, not a static plan catalog.
+    var html = '<header class="ad27-card-head"><h2>' + plan(usage.plan) + ' plan capacity</h2><a href="/pro#plans">Compare plans</a></header>' + meter('Properties', 'properties') + meter('Live lists', 'lists') + meter('Territories', 'territories');
     if (host.__agentCapacityHtml !== html) {
       host.__agentCapacityHtml = html;
       host.innerHTML = html;

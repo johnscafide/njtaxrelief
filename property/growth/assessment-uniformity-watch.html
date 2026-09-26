@@ -1,5 +1,5 @@
 <!doctype html>
-<html lang="en" data-access-require="pro">
+<html lang="en" class="aw27-page" data-access-require="pro">
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width,initial-scale=1">
@@ -10,14 +10,14 @@
   <link rel="stylesheet" href="/property/css/shared.css">
   <link rel="stylesheet" href="/property/css/dashboard.css">
   <link rel="stylesheet" href="/property/css/plan-context.css">
-  <link rel="stylesheet" href="/property/growth/growth.css">
+  <link rel="stylesheet" href="/property/css/shared/00-design-tokens.css"><link rel="stylesheet" href="/property/css/app-shell-2027.css"><link rel="stylesheet" href="/property/css/agent-workspace.css?v=20260926a"><link rel="stylesheet" href="/property/growth/growth.css?v=20260926a">
   <style>
     .uw-wrap{display:grid;gap:18px}.uw-hero{display:grid;grid-template-columns:minmax(0,1fr) auto;gap:20px;align-items:end}.uw-hero h1{margin:6px 0 8px}.uw-hero p{max-width:940px;margin:0}.uw-badge,.uw-band{display:inline-flex;align-items:center;gap:7px;padding:7px 10px;border-radius:999px;font-weight:800}.uw-badge{background:var(--surface-subtle,#eef5ff);white-space:nowrap}.uw-notice{display:flex;gap:12px;align-items:flex-start;padding:14px 16px;border-radius:var(--radius-lg,16px);background:var(--surface-subtle,#f7f9fc)}.uw-controls{display:grid;grid-template-columns:1.25fr 1fr 1fr 1.25fr auto;gap:10px;align-items:end}.uw-field{display:grid;gap:6px}.uw-field span{font-size:var(--type-xs,12px);font-weight:800;letter-spacing:.04em;text-transform:uppercase}.uw-field input,.uw-field select{width:100%;min-height:44px;border:1px solid var(--border-subtle,#d7dee8);border-radius:var(--radius-md,12px);background:#fff;padding:0 12px;font:inherit}.uw-export{min-height:44px;border:0;border-radius:var(--radius-md,12px);padding:0 15px;font:inherit;font-weight:800;cursor:pointer}.uw-stats{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:12px}.uw-stat{padding:15px 16px;border-radius:var(--radius-lg,16px);background:#fff;box-shadow:var(--shadow-sm,0 8px 24px rgba(20,34,54,.06))}.uw-stat b{display:block;font-size:24px}.uw-stat span{display:block;margin-top:5px;font-size:var(--type-sm,14px)}.uw-table-shell{overflow:auto;border-radius:var(--radius-lg,18px);background:#fff;box-shadow:var(--shadow-sm,0 8px 26px rgba(20,34,54,.07))}.uw-table{width:100%;border-collapse:collapse;min-width:1170px}.uw-table th,.uw-table td{padding:12px 13px;text-align:left;border-bottom:1px solid #edf0f4;vertical-align:top}.uw-table th{position:sticky;top:0;z-index:1;background:#f7f9fc;font-size:var(--type-xs,12px);text-transform:uppercase;letter-spacing:.04em}.uw-town{font-weight:800}.uw-sub,.uw-note{display:block;margin-top:3px;font-size:var(--type-xs,12px);color:#657386}.uw-band.good{background:#e9f8ef}.uw-band.fair{background:#fff7df}.uw-band.poor{background:#fff0ed}.uw-band.other{background:#eef2f7}.uw-score{font-weight:900}.uw-cod.alert{font-weight:900}.uw-sources{display:grid;gap:12px;padding:18px;border-radius:var(--radius-lg,18px);background:#fff}.uw-source-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:12px}.uw-source{padding:14px;border-radius:var(--radius-md,14px);background:#f7f9fc}.uw-source b{display:block}.uw-source p,.uw-fine{font-size:var(--type-sm,14px)}.uw-error,.uw-empty{padding:24px;text-align:center}.uw-error{background:#fff3f3;font-weight:700}.uw-model{padding:16px 18px;border-radius:var(--radius-lg,16px);background:#fff}.uw-model ul{margin:8px 0 0;padding-left:20px}.uw-model li{margin:5px 0}
     @media(max-width:1024px){.uw-controls{grid-template-columns:repeat(2,minmax(0,1fr))}.uw-export{width:100%}.uw-stats{grid-template-columns:repeat(2,minmax(0,1fr))}}
     @media(max-width:768px){.uw-hero,.uw-controls,.uw-stats,.uw-source-grid{grid-template-columns:1fr}.uw-badge{white-space:normal}.uw-table-shell{margin-inline:-4px}}
   </style>
 </head>
-<body data-sidebar-page="growth" data-plan-auto="true">
+<body data-sidebar-page="growth" data-plan-auto="true"><nav class="aw27-bar" id="agent-workspace-nav" data-active="growth" aria-label="Agent Control workspaces"><div class="aw27-actions"></div></nav>
 <main><div class="db-shell"><div id="property-side-menu"></div><div class="db-workspace uw-wrap">
   <header class="gc-top uw-hero">
     <div><a href="/property/growth/">← Growth Center</a><span>NJ-ONLY PLAY · ASSESSMENT EVIDENCE</span><h1>Assessment Uniformity Watch</h1><p>Compare New Jersey municipal assessment-roll consistency using the Division of Taxation's property assessment uniformity measures. Start with the municipalities showing wider residential dispersion, then review the underlying property facts before deciding whether any parcel deserves appeal analysis.</p></div>
@@ -47,7 +47,7 @@
 </div></div></main>
 <div id="pl-toast" class="pl-toast"></div>
 <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2/dist/umd/supabase.js"></script>
-<script src="/property/js/access-guard.js"></script><script src="/property/js/plan-context.js"></script><script src="/property/js/sidemenu.js"></script>
+<script src="/property/js/access-guard.js"></script><script src="/property/js/plan-context.js"></script><script src="/property/js/app-shell-2027.js"></script><script src="/property/js/agent-workspace.js?v=20260926a"></script>
 <script>
 (function(){'use strict';
   var allRows=[],visibleRows=[],$=function(id){return document.getElementById(id)};

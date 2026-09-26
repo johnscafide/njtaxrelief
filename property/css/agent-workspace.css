@@ -1,0 +1,121 @@
+/* Watchdog Agent Control workspace chrome.
+   Shared by every Agent Control page (Opportunity Desk, Farm Map, Growth,
+   Advanced Farm, Farm database). Owns: tokens, the compact app topbar, the
+   workspace tab bar rendered by /property/js/agent-workspace.js, and the
+   shared type/controls baseline. Page content styles live in each page's own
+   stylesheet. Readability floor: 12px text, 42px desktop / 48px mobile controls. */
+
+:root{
+  --aw-ink:#111d38;
+  --aw-text:#26364f;
+  --aw-muted:#627089;
+  --aw-line:#e2e7ef;
+  --aw-line-strong:#cfd8e4;
+  --aw-soft:#f3f6fa;
+  --aw-bg:#f5f7fb;
+  --aw-card:#fff;
+  --aw-blue:#2f6df6;
+  --aw-blue-ink:#1f4fbf;
+  --aw-blue-soft:#eaf1ff;
+  --aw-navy:#10294b;
+  --aw-green:#11804f;
+  --aw-green-soft:#e7f6ee;
+  --aw-amber:#9a5b00;
+  --aw-amber-soft:#fff4dc;
+  --aw-red:#c62f40;
+  --aw-red-soft:#fdecee;
+  --aw-radius:12px;
+  --aw-radius-sm:9px;
+  --aw-shadow:0 1px 2px rgba(17,29,56,.04),0 6px 18px rgba(17,29,56,.04);
+  --aw-font:Inter,system-ui,-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;
+  --aw-head:"Plus Jakarta Sans",Inter,system-ui,sans-serif;
+  --aw-xs:var(--type-xs,.75rem);
+  --aw-sm:var(--type-sm,.875rem);
+  --aw-md:var(--type-md,1rem);
+  --aw-top:64px;
+  --aw-bar:56px;
+  --aw-chrome:calc(var(--aw-top) + var(--aw-bar));
+}
+
+/* ---------- baseline ---------- */
+html.aw27-page body{margin:0;background:var(--aw-bg);color:var(--aw-text);font-family:var(--aw-font);font-size:var(--aw-sm);line-height:1.45;-webkit-font-smoothing:antialiased}
+html.aw27-page *,html.aw27-page *::before,html.aw27-page *::after{box-sizing:border-box}
+html.aw27-page h1,html.aw27-page h2,html.aw27-page h3{font-family:var(--aw-head);color:var(--aw-ink);letter-spacing:-.01em}
+html.aw27-page button,html.aw27-page input,html.aw27-page select,html.aw27-page textarea{font-family:var(--aw-font)}
+html.aw27-page :focus-visible{outline:2px solid var(--aw-blue);outline-offset:2px}
+
+/* ---------- compact app topbar (app-shell-2027) on workspace pages ---------- */
+body.wdx-agent-workspace .wdx-topbar{height:var(--aw-top);padding:0 20px}
+body.wdx-agent-workspace .wdx-menu{width:42px;height:42px}
+body.wdx-agent-workspace .wdx-brand-mark{width:38px;height:38px}
+
+/* ---------- workspace tab bar ---------- */
+.aw27-bar{
+  position:sticky;top:var(--aw-top);z-index:450;
+  display:flex;align-items:center;justify-content:space-between;gap:12px;
+  min-height:var(--aw-bar);padding:8px 20px;
+  background:#fff;border-bottom:1px solid var(--aw-line);
+  box-shadow:0 6px 16px rgba(17,29,56,.035);
+  font-family:var(--aw-font);
+}
+.aw27-tabs{display:flex;align-items:center;gap:4px;min-width:0;overflow-x:auto;scrollbar-width:none;-ms-overflow-style:none}
+.aw27-tabs::-webkit-scrollbar{display:none}
+.aw27-tab{
+  display:inline-flex;align-items:center;gap:8px;flex:0 0 auto;
+  min-height:42px;padding:0 14px;border-radius:10px;
+  color:#4a5b74;font:600 var(--aw-sm)/1 var(--aw-font);text-decoration:none;white-space:nowrap;
+}
+.aw27-tab:hover{background:var(--aw-soft);color:var(--aw-ink)}
+.aw27-tab.on{background:var(--aw-blue-soft);color:var(--aw-blue-ink)}
+.aw27-tab i{font-size:14px;width:16px;text-align:center}
+.aw27-actions{display:flex;align-items:center;gap:8px;flex:0 0 auto}
+.aw27-primary,.aw27-secondary{
+  display:inline-flex;align-items:center;justify-content:center;gap:8px;
+  min-height:42px;padding:0 16px;border-radius:10px;
+  font:700 var(--aw-sm)/1 var(--aw-font);text-decoration:none;white-space:nowrap;cursor:pointer;
+}
+.aw27-primary{border:1px solid var(--aw-blue);background:var(--aw-blue);color:#fff;box-shadow:0 6px 14px rgba(47,109,246,.18)}
+.aw27-primary:hover{background:#2560e0}
+.aw27-secondary{border:1px solid var(--aw-line-strong);background:#fff;color:var(--aw-ink)}
+.aw27-secondary:hover{background:var(--aw-soft)}
+.aw27-secondary.disabled{opacity:.5}
+.aw27-icon{
+  display:inline-grid;place-items:center;width:42px;height:42px;
+  border:1px solid var(--aw-line);border-radius:10px;background:#fff;color:#4a5b74;cursor:pointer;
+}
+.aw27-icon:hover{background:var(--aw-soft);color:var(--aw-ink)}
+
+/* ---------- shared page heading ---------- */
+.aw27-head{display:flex;align-items:flex-end;justify-content:space-between;gap:16px;flex-wrap:wrap;margin:0 0 16px}
+.aw27-head h1{margin:0;font-size:clamp(1.35rem,2vw,1.6rem);font-weight:800;line-height:1.15}
+.aw27-head p{margin:4px 0 0;color:var(--aw-muted);font-size:var(--aw-sm);max-width:760px}
+.aw27-eyebrow{display:block;margin:0 0 4px;color:var(--aw-muted);font:700 var(--aw-xs)/1.2 var(--aw-font);letter-spacing:.08em;text-transform:uppercase}
+
+/* Numbers line up in every table, meter and KPI. */
+html.aw27-page b,html.aw27-page .aw27-num{font-variant-numeric:tabular-nums}
+
+@media(max-width:768px){
+  :root{--aw-top:60px}
+  body.wdx-agent-workspace .wdx-topbar{height:var(--aw-top);padding:0 12px}
+  .aw27-bar{padding:6px 10px;gap:6px}
+  .aw27-tab{min-height:44px;padding:0 12px}
+  /* Phones: inactive tabs are icon-only (labels stay for screen readers); the active tab keeps its label. */
+  .aw27-tab:not(.on){width:44px;padding:0;justify-content:center}
+  .aw27-tab:not(.on) span{position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0,0,0,0);white-space:nowrap}
+  .aw27-primary{min-height:44px;width:44px;padding:0}
+  .aw27-secondary{min-height:44px;width:44px;padding:0}
+  .aw27-primary span,.aw27-secondary span{position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0,0,0,0);white-space:nowrap}
+  /* Fullscreen/close are desktop window controls; phones use the menu and back. */
+  .aw27-icon[data-aw27]{display:none}
+}
+@media(prefers-reduced-motion:reduce){html.aw27-page *{scroll-behavior:auto!important;transition:none!important}}
+@media print{.aw27-bar,.wdx-topbar{display:none!important}}
+
+/* ---------- shared feedback ---------- */
+.pl-toast{display:none;position:fixed;left:50%;bottom:24px;transform:translateX(-50%);z-index:9999;max-width:min(560px,calc(100vw - 28px));padding:12px 16px;border-radius:10px;background:var(--aw-navy);color:#fff;box-shadow:0 14px 40px rgba(15,43,74,.28);font:600 var(--aw-sm)/1.4 var(--aw-font)}
+
+/* ---------- Watchdog Intelligence word signature (agent workspace pages) ----------
+   Only the word "Intelligence" gets the spectrum text; never a pill or frame. */
+html.aw27-page .wd-intelligence-brand-word{display:inline;margin:0;padding:0;border:0;border-radius:0;box-shadow:none;color:transparent;-webkit-text-fill-color:transparent;background:linear-gradient(90deg,#0aaeb8 0%,#2478ff 34%,#7857ff 67%,#e84bc4 100%);-webkit-background-clip:text;background-clip:text;font:inherit}
+@media print{html.aw27-page .wd-intelligence-brand-word{color:#087f83;-webkit-text-fill-color:#087f83;background:none}}
+@media(forced-colors:active){html.aw27-page .wd-intelligence-brand-word{color:CanvasText;-webkit-text-fill-color:CanvasText;background:none}}

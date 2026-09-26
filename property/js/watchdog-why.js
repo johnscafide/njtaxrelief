@@ -186,30 +186,11 @@ function installDashboard(){
   });
 }
 
-function installAgentControl(){
-  document.querySelectorAll('.ad-card').forEach(card=>{
-    const actions=card.querySelector('.ad-card-actions');
-    if(!actions||actions.querySelector('[data-watchdog-why]'))return;
-    const link=card.querySelector('.ad-address-link');
-    const address=String(link?.textContent||'').replace(/\s*→\s*$/,'').trim();
-    const pin=pinFromHref(link?.getAttribute('href')||'');
-    if(!address&&!pin)return;
-    actions.appendChild(triggerHtml(address,pin,'agent-control','Why Watchdog flagged this','wdwhy-agent-trigger'));
-  });
-  const focus=$('#ad-focus');
-  const focusActions=focus?.querySelector('.ad-focus-actions');
-  if(focusActions&&!focusActions.querySelector('[data-watchdog-why]')){
-    const link=focus.querySelector('.ad-focus-main a');
-    const address=String(link?.textContent||'').split(' · ')[0].trim();
-    const pin=pinFromHref(link?.getAttribute('href')||'');
-    if(address||pin)focusActions.appendChild(triggerHtml(address,pin,'agent-control-focus','Why Watchdog?','wdwhy-agent-trigger'));
-  }
-}
-
+/* Agent Control opens this review from inside its Evidence drawer (agent-desk.js)
+   instead of adding a second button to every worklist row. */
 function installSurfaceButtons(){
   const page=String(document.body?.dataset?.sidebarPage||'');
   if(page==='dashboard')installDashboard();
-  if(page==='agent-desk')installAgentControl();
 }
 
 function scheduleInstall(){
