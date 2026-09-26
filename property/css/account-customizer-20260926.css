@@ -236,6 +236,9 @@
 .acx-card{
   appearance:none;
   position:relative;
+  z-index:1;
+  pointer-events:auto!important;
+  touch-action:manipulation;
   display:grid;
   grid-template-rows:auto auto;
   gap:8px;
@@ -252,6 +255,7 @@
 }
 .acx-card-preview{
   position:relative;
+  pointer-events:none;
   inset:auto;
   display:block;
   width:100%;
@@ -271,6 +275,7 @@
 .acx-card.motion .acx-card-preview{aspect-ratio:1.45/1}
 .acx-card-name{
   position:static;
+  pointer-events:none;
   inset:auto;
   display:block;
   min-width:0;
@@ -287,6 +292,7 @@
 }
 .acx-card>i{
   position:absolute;
+  pointer-events:none;
   right:8px;
   top:8px;
   width:24px;
