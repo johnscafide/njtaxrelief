@@ -150,7 +150,7 @@
         </header>
         <div class="ad27-results">
           <div class="ad-funnel" id="ad-funnel"><p class="ad-control-loading">Loading outcome analytics…</p></div>
-          <div class="ad-portal-analytics" id="ad-portal-analytics" aria-label="Agent portal traffic and lead analytics"><p class="ad-control-loading">Loading portal analytics…</p></div>
+          <div class="ad27-portal"><h3>Your agent portal</h3><div class="ad-portal-analytics" id="ad-portal-analytics" aria-label="Agent portal traffic and lead analytics"><p class="ad-control-loading">Loading portal analytics…</p></div></div>
         </div>
         <p class="ad27-note ad-funnel-note"><i class="fas fa-shield-halved" aria-hidden="true"></i> Watchdog ranks how useful property information is and measures your recorded workflow. It never labels anyone a likely seller, distressed owner or motivated lead.</p>
       </section>
@@ -160,6 +160,7 @@
   </main>
 
   <template id="ad-first-run-template"><div class="ad-first-run"><span class="aw27-eyebrow">Get started</span><h2>Start with a property you know</h2><p>Bring the listing details from your MLS, then use Watchdog to review the property’s tax, assessment and public-record context.</p><ol><li><a href="/">Research a property</a><small>Look up an address and save it to your watchlist. It will appear here.</small></li><li><button type="button" data-start-import>Import your sphere</button><small>Add your permitted client and past-client addresses using CSV.</small></li><li><a href="/farm-map">Build a neighborhood farm</a><small>Draw an area, review the matches and add selected properties to your desk.</small></li></ol></div></template>
+  <template id="ad-intel-review-template"><section class="ad-evidence-section ad-intel-review"><h3>Watchdog <span class="wd-intelligence-brand-word">Intelligence</span> review</h3><p>Run the assessment review model on this parcel to see its source facts, calculations and missing evidence.</p><button type="button" class="ad27-btn" data-why-review><i class="fas fa-magnifying-glass-chart" aria-hidden="true"></i> Run review</button></section></template>
   <template id="ad-load-error-template"><i class="fas fa-triangle-exclamation" aria-hidden="true"></i><h2>Your desk could not load</h2><p data-load-error></p><button type="button" id="ad-load-retry">Retry loading your desk</button></template>
 
   <div class="ad-modal" id="ad-import-modal" hidden>

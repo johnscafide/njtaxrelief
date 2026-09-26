@@ -16,7 +16,7 @@
   function render() {
     var host = $('ad-capacity');
     if (!host || !usage) return;
-    // content-architecture: dynamic — Plan name and all meter totals, remaining capacity and warning states come from the authenticated usage RPC, not a static plan catalog.
+    // content-architecture: dynamic — Plan name, every meter total and each warning state come from the authenticated get_agent_usage RPC, not a static plan catalog.
     var html = '<header class="ad27-card-head"><h2>' + plan(usage.plan) + ' plan capacity</h2><a href="/pro#plans">Compare plans</a></header>' + meter('Properties', 'properties') + meter('Live lists', 'lists') + meter('Territories', 'territories');
     if (host.__agentCapacityHtml !== html) {
       host.__agentCapacityHtml = html;

@@ -249,8 +249,9 @@
 .ad-funnel-stage>i>em{display:block;height:100%;background:var(--aw-green);border-radius:inherit}
 .ad-funnel-stage:first-child>i>em{background:var(--aw-blue)}
 .ad-funnel-stage small{color:var(--aw-muted);font-size:var(--aw-xs)}
-.ad-portal-analytics{display:grid;gap:0;padding:12px;border:1px solid var(--aw-line);border-radius:var(--aw-radius-sm);background:var(--aw-soft)}
-.ad-portal-analytics h3{margin:0 0 6px;font-size:var(--aw-sm)}
+.ad27-portal{padding:12px;border:1px solid var(--aw-line);border-radius:var(--aw-radius-sm);background:var(--aw-soft)}
+.ad27-portal h3{margin:0 0 6px;font-size:var(--aw-sm)}
+.ad-portal-analytics{display:grid;gap:0}
 .ad-portal-metric{display:flex;justify-content:space-between;gap:10px;padding:7px 0;border-bottom:1px solid var(--aw-line);font-size:var(--aw-sm)}
 .ad-portal-metric:last-child{border-bottom:0}
 .ad-portal-metric span{color:var(--aw-muted)}

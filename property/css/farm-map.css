@@ -5,3 +5,7 @@ html.aw27-page body.fm-page{height:100dvh;overflow:hidden}
 /* Phones use map-only field mode (farm-map.js hides the panel): the map fills the screen under the workspace bar. */
 @media(max-width:800px){html.aw27-page .fm-shell{height:calc(100dvh - var(--aw-chrome,116px));min-height:0}html.aw27-page .fm-map-wrap{height:100%;min-height:0}}
 html.aw27-page .fm-panel h1{font-size:1.5rem;line-height:1.15}
+/* Field-mode card (styles injected by farm-map.js): workspace font and the 12px readability floor. */
+html.aw27-page .fm-field-toolbar button,html.aw27-page .fm-field-card{font-family:var(--aw-font,Inter,system-ui,sans-serif)}
+html.aw27-page .fm-field-eyebrow{font-size:12px;font-family:var(--aw-font,Inter,system-ui,sans-serif)}
+html.aw27-page .fm-field-grid span{font-size:12px}
