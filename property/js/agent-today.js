@@ -16,6 +16,7 @@ function days(v){var d=dt(v);if(!d)return null;return Math.ceil((d-Date.now())/8
 function card(id,count,sub){var n=$('#ad-today-'+id);if(n)n.textContent=String(count);var s=$('#ad-today-'+id+'-sub');if(s)s.textContent=sub;}
 // content-architecture: dynamic — Each task row is built from one flagged transaction, open house or listing-prep record; the empty/recovery line reflects the live query result.
 function task(t){return'<a class="ad-today-task" href="'+esc(t.href)+'"><i class="fas '+esc(t.icon)+'" aria-hidden="true"></i><span><b>'+esc(t.title)+'</b><small>'+esc(t.sub)+'</small></span><em>'+esc(t.tag)+'</em></a>';}
+// content-architecture: dynamic — Status line whose text is chosen by the live query outcome (nothing flagged vs. request failed).
 function empty(text){queue.innerHTML='<div class="ad-today-empty"><i class="fas fa-circle-check" aria-hidden="true"></i> '+esc(text)+'</div>';}
 
 function render(tx,lp,buyers,oh){

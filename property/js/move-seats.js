@@ -12,7 +12,7 @@
   // content-architecture: dynamic — The seat summary RPC and issued-seat rows decide which variant renders (one-line note when the plan has no seats, otherwise meter, form and per-client rows).
   function render(){if(!root)return;var total=Number(summary&&summary.seats_total||0);
     root.classList.add('ad27-card');
-    /* Plans without Move seats get one quiet line instead of a full panel. */
+    // content-architecture: dynamic — Plans whose seat summary is zero (and no issued seats) get one quiet line instead of the full panel.
     if(!total&&!rows.length){root.innerHTML='<header class="ad27-card-head"><h2>Client Move seats</h2></header><p class="ad27-note">Give clients 90 days of Watchdog with eligible professional plans. <a href="/pro#plans">Compare plans</a></p>';return;}
     root.innerHTML='<header class="ad27-card-head"><h2>Client Move seats</h2></header>'+meter()+
       (total?'<form class="ad-move-form" id="ad-move-form"><input id="ad-move-email" type="email" required autocomplete="email" placeholder="client@example.com" aria-label="Client email"><button type="submit" class="ad27-btn primary">Issue seat</button></form>':'')+
