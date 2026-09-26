@@ -100,18 +100,18 @@
   function formatOfficialLicenseName(raw) {
     var name = String(raw || '').replace(/\s+/g,' ').trim();
     if (!name) return '';
-    var suffix = '';
-    name = name.replace(/\s+(JR\.?|SR\.?|II|III|IV|V)$/i,function(_,value){suffix=titleNamePart(value);return '';}).trim();
-    var first='',middle='',last='';
+    var first='',middle='',last='',suffix='';
     if (name.indexOf(',') >= 0) {
       var comma = name.split(',');
       last = titleNamePart(comma.shift());
       var given = comma.join(' ').trim().split(/\s+/).filter(Boolean);
+      if (given.length > 1 && /^(JR\.?|SR\.?|II|III|IV)$/i.test(given[given.length - 1])) suffix = titleNamePart(given.pop());
       first = titleNamePart(given.shift() || '');
       if (given.length) middle = titleNamePart(String(given[0] || '').charAt(0));
     } else {
       var parts = name.split(/\s+/).filter(Boolean);
       if (parts.length === 1) return titleNamePart(parts[0]);
+      if (parts.length > 2 && /^(JR\.?|SR\.?|II|III|IV)$/i.test(parts[parts.length - 1])) suffix = titleNamePart(parts.pop());
       first = titleNamePart(parts.shift());
       last = titleNamePart(parts.pop());
       if (parts.length) middle = titleNamePart(String(parts[0] || '').charAt(0));
