@@ -142,6 +142,18 @@ function ensureThemePanel(){
   document.body.appendChild(backdrop);document.body.appendChild(panel);
   renderThemeGrid(panel,'color');
   backdrop.addEventListener('click',closeThemePanel);panel.querySelector('[data-close-theme]').addEventListener('click',closeThemePanel);
+  var applyButton=panel.querySelector('[data-apply-theme]');
+  if(applyButton)applyButton.addEventListener('click',function(event){
+    event.preventDefault();
+    event.stopPropagation();
+    saveTheme(panel.dataset.pendingTheme||pendingThemeKey||pendingThemeOriginalKey);
+  });
+  var cancelButton=panel.querySelector('[data-cancel-theme]');
+  if(cancelButton)cancelButton.addEventListener('click',function(event){
+    event.preventDefault();
+    event.stopPropagation();
+    closeThemePanel();
+  });
   panel.addEventListener('click',function(event){
     var tab=event.target.closest('[data-theme-tab]');if(tab){setThemeTab(panel,tab.dataset.themeTab);return;}
     var choice=event.target.closest('[data-hero-theme]');if(choice){updateThemePreview(choice.dataset.heroTheme);return;}
@@ -160,16 +172,30 @@ function openThemePanel(toggle){
 }
 async function saveTheme(key){
   var db=getClient(),theme=themeByKey(key),panel=document.getElementById('ac-theme-popover'),apply=panel&&panel.querySelector('[data-apply-theme]');
-  if(!db||!user||!theme)return;
   var oldText=apply?apply.textContent:'Apply background';
+  if(!db||!theme){
+    toast('Background preference could not be saved. Please refresh and try again.');
+    return;
+  }
   if(apply){apply.disabled=true;apply.textContent='Saving…';}
   try{
+    if(!user){
+      var authResult=await db.auth.getUser();
+      if(authResult&&authResult.error)throw authResult.error;
+      user=authResult&&authResult.data&&authResult.data.user||null;
+    }
+    if(!user)throw new Error('Your sign-in session is not ready. Please refresh and sign in again.');
     var result=await db.auth.updateUser({data:{watchdog_account_hero_theme:theme.key}});
     if(result.error)throw result.error;
-    user=result.data&&result.data.user||user;applyTheme(theme.key);pendingThemeOriginalKey=theme.key;
-    toast('Profile background updated.');closeThemePanel();
+    user=result.data&&result.data.user||user;
+    applyTheme(theme.key);
+    pendingThemeOriginalKey=theme.key;
+    if(panel)panel.dataset.pendingTheme=theme.key;
+    toast('Profile background updated.');
+    closeThemePanel();
   }catch(error){
-    toast('Background preference could not be saved.');
+    var message=String(error&&error.message||'Background preference could not be saved.');
+    toast(message.indexOf('session')>=0?message:'Background preference could not be saved. '+message);
     if(apply){apply.disabled=false;apply.textContent=oldText;}
   }
 }

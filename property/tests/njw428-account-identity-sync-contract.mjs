@@ -34,6 +34,6 @@ must(page.includes('account.js?v=20260925c'),'Account identity JS cache version 
 must(page.includes('account-profile.js?v=20260926a'),'Profile chooser JS cache version missing.');
 must(page.includes('account-self-service.js?v=20260925b'),'Sync Accounts JS cache version missing.');
 must(page.includes('account-refresh-20260925.css?v=20260926a'),'Account polish CSS cache version missing.');
-must(page.includes('account-refresh-20260925.js?v=20260926c'),'Account runtime cache version missing.');
+must(page.includes('account-refresh-20260925.js?v=20260926d'),'Account runtime cache version missing.');
 
 console.log('NJW-428 account identity and Sync Accounts contract passed');
