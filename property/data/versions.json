@@ -1,8 +1,44 @@
 {
   "schema_version": 1,
   "timezone": "America/New_York",
-  "updated_at": "2026-09-25T14:38:25.508599+00:00",
+  "updated_at": "2026-09-26T13:46:31.016370+00:00",
   "releases": [
+    {
+      "version": "data-2026-09-26",
+      "date": "2026-09-26",
+      "timestamp": "2026-09-26T13:46:31.016370+00:00",
+      "title": "Automated state-data refresh",
+      "category": "Data",
+      "status": "Completed",
+      "summary": "State-data sources refreshed; configured local coverage and live-source health evidence was regenerated.",
+      "links": [
+        "/property/updates"
+      ],
+      "files": [
+        "nj-lpt-statistical-index",
+        "construction-permits-live",
+        "underground-storage-tanks-live",
+        "tidelands-reference-live",
+        "wetlands-2012-live",
+        "njdep-geology-live",
+        "njdep-hydro-live",
+        "njdep-land-live",
+        "nj-dca-fourth-round-affordable",
+        "nj-dca-affordable-housing",
+        "nj-lpt-general-tax-rates-2025",
+        "nj-lpt-county-equalization-2026",
+        "nj-lpt-modiv-2026",
+        "nj-dca-ufb-2026",
+        "nj-dca-fast-2026"
+      ],
+      "impact": {
+        "html": 0,
+        "css": 0,
+        "javascript": 0,
+        "data": 15,
+        "navigation": 0
+      }
+    },
     {
       "version": "data-2026-09-25",
       "date": "2026-09-25",
