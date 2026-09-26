@@ -256,4 +256,3 @@ body[data-sidebar-page="dashboard"] .wdd-calendar-note{margin:0;padding:9px 16px
 @media(prefers-reduced-motion:reduce){
   body[data-sidebar-page="dashboard"] .wdd-property-list .wdd-table tbody tr{transition:none}
 }
-

@@ -206,4 +206,3 @@
   }
   if (d.readyState === 'loading') d.addEventListener('DOMContentLoaded', boot, { once: true }); else boot();
 })(window, document);
-
