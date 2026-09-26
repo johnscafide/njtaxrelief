@@ -141,8 +141,8 @@ body[data-sidebar-page="dashboard"] .wdd-h27-alert span{
   position:absolute;
   top:-3px;
   right:-5px;
-  min-width:19px;
-  height:19px;
+  min-width:20px;
+  height:20px;
   padding:0 4px;
   border:1px solid var(--sp-surface);
   border-radius:var(--sp-r-pill);
@@ -150,7 +150,7 @@ body[data-sidebar-page="dashboard"] .wdd-h27-alert span{
   place-items:center;
   background:var(--sp-tint-bad);
   color:var(--sp-bad-ink);
-  font:800 10px/1 var(--wdd-body,Inter,system-ui,sans-serif);
+  font:800 12px/1 var(--wdd-body,Inter,system-ui,sans-serif);
   font-variant-numeric:tabular-nums;
 }
 
