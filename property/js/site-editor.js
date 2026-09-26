@@ -519,6 +519,7 @@
     '.brand{display:flex;align-items:center;gap:8px;padding:0 6px;font-size:14px;font-weight:700;white-space:nowrap}',
     '.dot{width:10px;height:10px;border-radius:50%;background:#38bdf8;flex:none}',
     '.bar.editing .dot{background:#f59e0b}',
+    '.mini-dot{display:inline-block;margin-right:8px;vertical-align:middle}',
     '.status{font-size:13px;color:#c7d4e6;padding:0 4px;max-width:340px;line-height:1.35}',
     'button{font:inherit;font-size:14px;font-weight:600;min-height:44px;min-width:44px;padding:0 14px;border-radius:11px;border:1px solid rgba(255,255,255,.18);background:rgba(255,255,255,.08);color:#fff;cursor:pointer}',
     'button:hover{background:rgba(255,255,255,.16)}',
@@ -615,7 +616,8 @@
     closeMenu();
     if(minimized() && !state.editing){
       ui.bar.className = 'mini';
-      ui.bar.innerHTML = '<button type="button" data-act="restore" aria-label="Open site editor"><span class="dot" style="display:inline-block;margin-right:8px"></span>Edit</button>';
+      // content-architecture: dynamic — developer-only editor chrome inside its own shadow root, re-rendered from editor state (minimized, editing, busy, draft count); never shown to customers.
+      ui.bar.innerHTML = '<button type="button" data-act="restore" aria-label="Open site editor"><span class="dot mini-dot"></span>Edit</button>';
       return;
     }
     var files = state.session && state.session.pending ? state.session.pending.files.length : 0;
