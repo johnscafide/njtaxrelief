@@ -317,7 +317,7 @@
 
         return guardClient.rpc('get_my_agent_training_state').then(function (trainingResult) {
           if (trainingResult.error) {
-            console.warn('[Watchdog] trial training gate unavailable:', trainingResult.error.message || trainingResult.error);
+            console.warn('[Watchdog] professional training gate unavailable:', trainingResult.error.message || trainingResult.error);
             clearGate();
             return;
           }
