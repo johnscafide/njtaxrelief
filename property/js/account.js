@@ -90,6 +90,40 @@
     }
     return '';
   }
+  function titleNamePart(value) {
+    value = String(value || '').trim();
+    if (!value) return '';
+    if (/^(jr|sr|ii|iii|iv|v)$/i.test(value.replace(/\./g,''))) return value.replace(/\./g,'').toUpperCase();
+    if (/^[a-z]$/i.test(value.replace(/\./g,''))) return value.replace(/\./g,'').toUpperCase() + '.';
+    return value.toLowerCase().replace(/(^|[-'’])([a-z])/g,function(_,lead,letter){return lead + letter.toUpperCase();});
+  }
+  function formatOfficialLicenseName(raw) {
+    var name = String(raw || '').replace(/\s+/g,' ').trim();
+    if (!name) return '';
+    var suffix = '';
+    name = name.replace(/\s+(JR\.?|SR\.?|II|III|IV|V)$/i,function(_,value){suffix=titleNamePart(value);return '';}).trim();
+    var first='',middle='',last='';
+    if (name.indexOf(',') >= 0) {
+      var comma = name.split(',');
+      last = titleNamePart(comma.shift());
+      var given = comma.join(' ').trim().split(/\s+/).filter(Boolean);
+      first = titleNamePart(given.shift() || '');
+      if (given.length) middle = titleNamePart(String(given[0] || '').charAt(0));
+    } else {
+      var parts = name.split(/\s+/).filter(Boolean);
+      if (parts.length === 1) return titleNamePart(parts[0]);
+      first = titleNamePart(parts.shift());
+      last = titleNamePart(parts.pop());
+      if (parts.length) middle = titleNamePart(String(parts[0] || '').charAt(0));
+    }
+    return [first,middle,last,suffix].filter(Boolean).join(' ');
+  }
+  function heroDisplayName(data) {
+    if (professional.license && professional.license.verified_professional && professional.license.licensee_name) {
+      return formatOfficialLicenseName(professional.license.licensee_name);
+    }
+    return String(data.preferred_name || (user && user.user_metadata && user.user_metadata.full_name) || 'Your Watchdog profile');
+  }
   function brokerLogo(agent) {
     agent = agent || {};
     var name = String(agent.brokerage_name || '');
@@ -171,7 +205,7 @@
     $('ac-app').innerHTML =
       (success ? '<div class="ac-success"><i class="fas fa-circle-check"></i><div><b>Checkout complete.</b><span>Your plan will update shortly.</span></div></div>' : '') +
       (pending ? '<div class="ac-success pending"><i class="fas fa-clock"></i><div><b>Plan change requested.</b><span>Your account will update shortly.</span></div></div>' : '') +
-      '<section class="ac-profile-hero">' + avatarMarkup(data) + '<div class="ac-hero-copy"><span>PROFILE &amp; SETTINGS</span><div class="ac-hero-name-row"><h1>' + esc(data.preferred_name || user.user_metadata.full_name || 'Your Watchdog profile') + '</h1>' + professionalBadgeMarkup() + '</div><p>' + esc(user.email || '') + ' · ' + planLabel(plan) + ' member</p>' + brokerageMarkup() + '<div class="ac-hero-stats"><div><i class="fas fa-house"></i><b>' + counts.properties + '</b><span>Saved</span></div><div><i class="fas fa-folder-tree"></i><b>' + counts.cases + '</b><span>Cases</span></div><div><i class="fas fa-calendar"></i><b>' + date(user.created_at) + '</b><span>Member since</span></div></div></div>' +
+      '<section class="ac-profile-hero">' + avatarMarkup(data) + '<div class="ac-hero-copy"><span>PROFILE &amp; SETTINGS</span><div class="ac-hero-name-row"><h1>' + esc(heroDisplayName(data)) + '</h1>' + professionalBadgeMarkup() + brokerageMarkup() + '</div><p>' + esc(user.email || '') + ' · ' + planLabel(plan) + ' member</p><div class="ac-hero-stats"><div><i class="fas fa-house"></i><b>' + counts.properties + '</b><span>Saved</span></div><div><i class="fas fa-folder-tree"></i><b>' + counts.cases + '</b><span>Cases</span></div><div><i class="fas fa-calendar"></i><b>' + date(user.created_at) + '</b><span>Member since</span></div></div></div>' +
       '<div class="ac-completion"><b>' + percent + '%</b><span>Profile complete</span><i><em style="width:' + percent + '%"></em></i></div></section>' +
       '<section class="ac-section"><header><div><span>PERSONALIZATION</span><h2>Make Watchdog more relevant</h2><p>Set your preferences for a more relevant workspace.</p></div></header>' +
       '<details open><summary><i class="fas fa-user"></i><span><b>Profile details</b><small>Name, contact and home area</small></span><i class="fas fa-chevron-down"></i></summary><div class="ac-form-grid"><label>Preferred name<input id="ac-name" value="' + esc(data.preferred_name || '') + '" autocomplete="name"></label><label>Phone<input id="ac-phone" value="' + esc(data.phone || '') + '" autocomplete="tel"></label><label>Home ZIP<input id="ac-zip" value="' + esc(data.home_zip || '') + '" inputmode="numeric" maxlength="10"></label><label>Counties or towns<input id="ac-counties" value="' + esc(data.counties || '') + '" placeholder="Camden, Gloucester…"></label></div></details>' +
