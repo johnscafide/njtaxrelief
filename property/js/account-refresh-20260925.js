@@ -65,11 +65,14 @@ function applyTheme(key){
 }
 function themeButton(theme){
   var button=document.createElement('button');
-  button.type='button';button.className='ac-theme-choice '+theme.kind;button.dataset.heroTheme=theme.key;
-  if(theme.kind==='motion')button.dataset.motionTheme=theme.key;
+  button.type='button';button.className='acx-card '+theme.kind;button.dataset.heroTheme=theme.key;
   button.setAttribute('aria-label','Preview '+theme.label+' profile background');button.setAttribute('aria-pressed','false');
   button.style.setProperty('--theme-preview',theme.bg);
-  button.innerHTML='<span class="ac-theme-preview"></span><span class="ac-theme-name">'+theme.label+'</span><i class="fas fa-check" aria-hidden="true"></i>';
+  button.innerHTML='<span class="acx-card-preview"></span><span class="acx-card-name">'+theme.label+'</span><i class="fas fa-check" aria-hidden="true"></i>';
+  if(theme.kind==='motion'){
+    var preview=button.querySelector('.acx-card-preview');
+    if(preview)preview.dataset.motionTheme=theme.key;
+  }
   return button;
 }
 function syncThemePreviewIdentity(){
@@ -91,7 +94,7 @@ function updateThemePreview(key){
   var theme=themeByKey(key),panel=document.getElementById('ac-theme-popover');pendingThemeKey=theme.key;
   if(!panel)return;
   var banner=panel.querySelector('#ac-theme-preview-banner');if(banner)applyThemeVisual(banner,theme);
-  panel.querySelectorAll('.ac-theme-choice').forEach(function(button){
+  panel.querySelectorAll('.acx-card').forEach(function(button){
     button.setAttribute('aria-pressed',button.dataset.heroTheme===theme.key?'true':'false');
   });
   var selected=panel.querySelector('#ac-theme-selected-name');if(selected)selected.textContent=theme.label;
@@ -111,7 +114,7 @@ function setThemeTab(panel,kind){
     tab.setAttribute('aria-selected',tab.dataset.themeTab===kind?'true':'false');
   });
   renderThemeGrid(panel,kind);
-  panel.querySelectorAll('.ac-theme-choice').forEach(function(button){
+  panel.querySelectorAll('.acx-card').forEach(function(button){
     button.setAttribute('aria-pressed',button.dataset.heroTheme===pendingThemeKey?'true':'false');
   });
 }
@@ -123,13 +126,13 @@ function closeThemePanel(){
 }
 function ensureThemePanel(){
   var panel=document.getElementById('ac-theme-popover');if(panel)return panel;
-  var backdrop=document.createElement('div');backdrop.id='ac-theme-backdrop';backdrop.className='ac-theme-backdrop';backdrop.hidden=true;
-  panel=document.createElement('section');panel.id='ac-theme-popover';panel.className='ac-theme-popover';panel.hidden=true;panel.setAttribute('role','dialog');panel.setAttribute('aria-modal','true');panel.setAttribute('aria-labelledby','ac-theme-title');
-  panel.innerHTML='<header><div><h3 id="ac-theme-title">Choose your background</h3></div><button type="button" data-close-theme aria-label="Close background chooser"><i class="fas fa-xmark"></i></button></header>'+
-    '<section class="ac-theme-live"><div class="ac-theme-live-head"><b>Live preview</b><span>This is how your profile hero will look.</span></div><div class="ac-theme-live-banner" id="ac-theme-preview-banner"><div class="ac-theme-live-avatar" id="ac-theme-preview-avatar">W</div><div class="ac-theme-live-copy"><div class="ac-theme-live-name-row"><strong id="ac-theme-preview-name">Your Watchdog profile</strong><span class="ac-theme-live-verified" id="ac-theme-preview-verified" hidden><i class="fas fa-circle-check"></i></span></div><small id="ac-theme-preview-sub">Watchdog member</small></div><div class="ac-theme-live-badge"><i class="fas fa-eye"></i><span id="ac-theme-selected-name">Watchdog</span></div></div></section>'+
-    '<nav class="ac-theme-tabs" aria-label="Background categories"><button type="button" data-theme-tab="color" aria-selected="true">Gradients <em>'+THEMES.filter(function(t){return t.kind==='color';}).length+'</em></button><button type="button" data-theme-tab="image" aria-selected="false">Photos <em>'+THEMES.filter(function(t){return t.kind==='image';}).length+'</em></button><button type="button" data-theme-tab="motion" aria-selected="false">Motion <em>'+THEMES.filter(function(t){return t.kind==='motion';}).length+'</em></button></nav>'+
-    '<div class="ac-theme-browser"><div class="ac-theme-grid" id="ac-theme-browser-grid"></div></div>'+
-    '<footer class="ac-theme-actions"><button type="button" class="secondary" data-cancel-theme>Cancel</button><span><i class="fas fa-cloud"></i> Saved only when you apply</span><button type="button" class="primary" data-apply-theme>Apply background</button></footer>';
+  var backdrop=document.createElement('div');backdrop.id='ac-theme-backdrop';backdrop.className='acx-backdrop';backdrop.hidden=true;
+  panel=document.createElement('section');panel.id='ac-theme-popover';panel.className='acx-picker';panel.hidden=true;panel.setAttribute('role','dialog');panel.setAttribute('aria-modal','true');panel.setAttribute('aria-labelledby','ac-theme-title');
+  panel.innerHTML='<header class="acx-head"><div><h3 id="ac-theme-title">Choose your background</h3></div><button type="button" data-close-theme aria-label="Close background chooser"><i class="fas fa-xmark"></i></button></header>'+
+    '<section class="acx-live"><div class="acx-live-head"><b>Live preview</b><span>This is how your profile hero will look.</span></div><div class="acx-live-banner" id="ac-theme-preview-banner"><div class="acx-preview-avatar" id="ac-theme-preview-avatar">W</div><div class="acx-live-copy"><div class="acx-live-name-row"><strong id="ac-theme-preview-name">Your Watchdog profile</strong><span class="acx-live-verified" id="ac-theme-preview-verified" hidden><i class="fas fa-circle-check"></i></span></div><small id="ac-theme-preview-sub">Watchdog member</small></div><div class="acx-live-badge"><i class="fas fa-eye"></i><span id="ac-theme-selected-name">Watchdog</span></div></div></section>'+
+    '<nav class="acx-tabs" aria-label="Background categories"><button type="button" data-theme-tab="color" aria-selected="true">Gradients <em>'+THEMES.filter(function(t){return t.kind==='color';}).length+'</em></button><button type="button" data-theme-tab="image" aria-selected="false">Photos <em>'+THEMES.filter(function(t){return t.kind==='image';}).length+'</em></button><button type="button" data-theme-tab="motion" aria-selected="false">Motion <em>'+THEMES.filter(function(t){return t.kind==='motion';}).length+'</em></button></nav>'+
+    '<div class="acx-browser"><div class="acx-grid" id="ac-theme-browser-grid"></div></div>'+
+    '<footer class="acx-actions"><button type="button" class="secondary" data-cancel-theme>Cancel</button><span><i class="fas fa-cloud"></i> Saved only when you apply</span><button type="button" class="primary" data-apply-theme>Apply background</button></footer>';
   document.body.appendChild(backdrop);document.body.appendChild(panel);
   renderThemeGrid(panel,'color');
   backdrop.addEventListener('click',closeThemePanel);panel.querySelector('[data-close-theme]').addEventListener('click',closeThemePanel);
