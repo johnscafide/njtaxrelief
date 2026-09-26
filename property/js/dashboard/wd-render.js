@@ -3,18 +3,16 @@
 'use strict';
 function start(){
   var WD=w.WD;if(!WD)return;var H=WD.H,S=WD.S,esc=H.esc,map=null,railMap=null,voiceRecognition=null,analysisTab='assessed',selectedGapBin=-1;
+  var selectedPropertyPin='',mobileDrawerOpenerPin='',inspectorDismissed=false;
 
-  function verdict(score){return WD.verdict(score);}
-  function initials(){
-    var name=WD.userName()||'W',parts=String(name).trim().split(/\s+/);
-    return parts.slice(0,2).map(function(p){return p.charAt(0).toUpperCase();}).join('')||'W';
-  }
-  function dateLabel(){
-    try{return new Date().toLocaleDateString('en-US',{weekday:'short',month:'short',day:'numeric'});}
-    catch(_e){return '';}
+  function greeting(){
+    var phrases=['Be informed','Stay ahead','See the full picture',"Know what's changing",'Make informed moves','Lead with clarity','Decide with confidence'];
+    var today=new Date(),dayKey=today.getFullYear()*372+today.getMonth()*31+today.getDate(),phrase=phrases[((dayKey%phrases.length)+phrases.length)%phrases.length];
+    var name=String(WD.userName()||'').trim().split(/\s+/)[0]||'';
+    if(!name||name==='there'||name.indexOf('@')>-1) return phrase;
+    return phrase+', '+name;
   }
   function safeCssUrl(url){return String(url||'').replace(/[\\"')]/g,'');}
-  function safePhotoUrl(url){try{var parsed=new URL(String(url||''),location.origin);return parsed.protocol==='https:'?parsed.href:'';}catch(_e){return'';}}
   function tileUrl(p,z){
     var lat=H.valid(p&&p.lat),lon=H.valid(p&&p.lon);if(lat==null||lon==null)return'';
     z=z||15;var n=Math.pow(2,z),x=Math.floor((lon+180)/360*n),rad=lat*Math.PI/180;
@@ -67,8 +65,7 @@ function start(){
   }
 
   function paintStanding(){
-    var st=WD.stats(),state=heroState(st),hour=new Date().getHours(),greet=hour<12?'Good morning':hour<18?'Good afternoon':'Good evening',photo=safePhotoUrl(WD.userPhoto());
-    var art='<div class="wdd-h27-avatar'+(photo?' is-photo':'')+'" aria-hidden="true"><span>'+esc(initials())+'</span>'+(photo?'<img src="'+esc(photo)+'" alt="" decoding="async">':'')+'</div>';
+    var st=WD.stats(),state=heroState(st);
     var host=H.el('wdd-standing');
     // Keep the score panel node across repaints so its arc animates from the
     // previous value instead of flashing empty and redrawing from zero.
@@ -82,25 +79,22 @@ function start(){
       '</div>'+
       '<div class="wdd-h27" id="wdd-hero" data-state="'+state+'">'+
         '<div class="wdd-h27-main">'+
-          '<div class="wdd-h27-who">'+art+'<div class="wdd-h27-who-text">'+
-            '<div class="wdd-h27-eyebrow"><b>'+esc(dateLabel())+'</b><span>'+(st.count?st.count.toLocaleString()+' '+(st.count===1?'property':'properties')+' watched':'No properties yet')+'</span></div>'+
-            '<h1>'+greet+', '+esc(WD.userName())+'</h1></div></div>'+
+          '<div class="wdd-h27-who"><div class="wdd-h27-who-text">'+
+            '<div class="wdd-h27-eyebrow"><span>'+(st.count?st.count.toLocaleString()+' '+(st.count===1?'property':'properties')+' watched':'No properties yet')+'</span></div>'+
+            '<h1>'+esc(greeting())+'</h1></div></div>'+
           heroOverMarketAlert(st)+
           heroSince(st)+
         '</div>'+
         '<div class="wdd-h27-slot" id="wdd-hero-score"></div>'+
       '</div>';
     if(keep)H.el('wdd-hero-score').appendChild(keep);
-    var photoNode=host.querySelector('.wdd-h27-avatar img');
-    if(photoNode)photoNode.addEventListener('error',function(){photoNode.remove();var box=host.querySelector('.wdd-h27-avatar');if(box)box.classList.remove('is-photo');},{once:true});
     if(typeof w.WatchdogNJAddressAutocompleteRefresh==='function')w.setTimeout(w.WatchdogNJAddressAutocompleteRefresh,0);
   }
 
   function paintSignals(){
-    var st=WD.stats(),score=st.score==null?null:Math.round(st.score),v=verdict(score),review=st.warn+st.bad;
+    var st=WD.stats(),review=st.warn+st.bad;
     var avgTax=st.count&&st.tax?st.tax/st.count:0;
     var items=[
-      {c:'is-score',k:'Watchdog Score',icon:'fa-chart-simple',v:score==null?'—':score+' <small>/ 100</small>',n:v.label,t:v.tone,raw:true},
       {k:'Properties',icon:'fa-house',v:st.count.toLocaleString(),n:'Saved properties'},
       {k:'Market Estimate',icon:'fa-coins',v:st.value?H.money(st.value):'—',n:st.value?'Current governed estimate':'Needs market evidence'},
       {k:'Annual Tax',icon:'fa-file-invoice-dollar',v:st.tax?H.money(st.tax):'—',n:avgTax?H.dollars(avgTax)+' avg per property':'No tax total yet'},
@@ -145,14 +139,15 @@ function start(){
   function rows(){
     return sortedProps().map(function(p){
       var g=WD.gapFor(p),s=S.scores[p.pams_pin],sc=s?Math.round(s.score):null,status=statusFor(p),gapTone=g==null?'':' wdd-'+(g.pct>=15?'bad':g.pct>=5?'warn':'ok');
-      return '<tr data-pin="'+esc(p.pams_pin||'')+'">'+
-        '<td><div class="wdd-property-cell"><span class="wdd-property-thumb"'+thumbStyle(p)+'><i class="fas fa-house"></i></span><div class="wdd-addr"><span>'+esc(p.address||p.pams_pin||'Saved property')+'</span><small>'+esc([H.titleCase(p.town),H.titleCase(p.county)].filter(Boolean).join(' · ')||'New Jersey')+'</small></div></div></td>'+
-        '<td class="wdd-r wdd-fig">'+(p.assessed?H.money(p.assessed):'—')+'</td>'+
-        '<td class="wdd-r wdd-fig">'+(p.watchdog_value?H.money(p.watchdog_value):'—')+'</td>'+
-        '<td class="wdd-r"><span class="wdd-fig'+gapTone+'">'+(g==null?'—':(g.pct>0?'+':'')+g.pct.toFixed(1)+'%')+'</span>'+(g&&g.dollars?'<span class="wdd-sub">'+esc(H.dollars(g.dollars))+'/yr</span>':'')+'</td>'+
-        '<td class="wdd-r wdd-fig">'+(p.last_year_tax?H.money(p.last_year_tax):'—')+(p.last_year_tax_year?'<span class="wdd-sub">'+esc(String(p.last_year_tax_year))+(p.municipal_tax_live?' municipal':'')+'</span>':'')+'</td>'+
-        '<td class="wdd-r"><span class="wdd-scorecell wdd-'+WD.categoryFor(p)+'"><b>'+(sc==null?'—':sc)+'</b></span></td>'+
-        '<td><span class="wdd-status-pill '+status.cls+'">'+status.label+'</span></td>'+
+      var pin=String(p.pams_pin||''),selected=pin===selectedPropertyPin;
+      return '<tr data-pin="'+esc(pin)+'" class="'+(selected?'is-selected':'')+'">'+
+        '<td><div class="wdd-property-cell"><span class="wdd-property-thumb"'+thumbStyle(p)+' aria-hidden="true"><i class="fas fa-house"></i></span><button class="wdd-select-property" type="button" data-select-pin="'+esc(pin)+'" aria-current="'+(selected?'true':'false')+'"><span>'+esc(p.address||p.pams_pin||'Saved property')+'</span><small>'+esc([H.titleCase(p.town),H.titleCase(p.county)].filter(Boolean).join(' · ')||'New Jersey')+'</small></button></div></td>'+
+        '<td class="wdd-r wdd-fig" data-label="Assessed">'+(p.assessed?H.money(p.assessed):'—')+'</td>'+
+        '<td class="wdd-r wdd-fig" data-label="Market est.">'+(p.watchdog_value?H.money(p.watchdog_value):'—')+'</td>'+
+        '<td class="wdd-r" data-label="Gap"><span class="wdd-fig'+gapTone+'">'+(g==null?'—':(g.pct>0?'+':'')+g.pct.toFixed(1)+'%')+'</span>'+(g&&g.dollars?'<span class="wdd-sub">'+esc(H.dollars(g.dollars))+'/yr</span>':'')+'</td>'+
+        '<td class="wdd-r wdd-fig" data-label="Annual tax">'+(p.last_year_tax?H.money(p.last_year_tax):'—')+(p.last_year_tax_year?'<span class="wdd-sub">'+esc(String(p.last_year_tax_year))+(p.municipal_tax_live?' municipal':'')+'</span>':'')+'</td>'+
+        '<td class="wdd-r" data-label="Score"><span class="wdd-scorecell wdd-'+WD.categoryFor(p)+'"><b>'+(sc==null?'—':sc)+'</b></span></td>'+
+        '<td data-label="Status"><span class="wdd-status-pill '+status.cls+'">'+status.label+'</span></td>'+
         '<td class="wdd-r wdd-row-actions-cell"><button class="wdd-row-menu" type="button" aria-label="Property options" aria-expanded="false"><i class="fas fa-ellipsis"></i></button>'+
           '<div class="wdd-row-actions" hidden role="menu">'+
             '<a role="menuitem" data-property-action="open" href="/property/home?pin='+encodeURIComponent(p.pams_pin||'')+'"><i class="fas fa-house"></i><span>Open property</span></a>'+
@@ -164,8 +159,51 @@ function start(){
       '</tr>';
     }).join('');
   }
+  function inspectorContent(p,suffix){
+    if(!p)return '<div class="wdd-property-inspector-empty"><i class="fas fa-house" aria-hidden="true"></i><p>Select a property to see its quick details.</p></div>';
+    var place=[H.titleCase(p.town),H.titleCase(p.county)].filter(Boolean).join(', ');
+    var taxYear=p.last_year_tax_year||null;
+    var open='/property/home?pin='+encodeURIComponent(p.pams_pin||'');
+    return '<div class="wdd-inspector-heading"><div><p class="wdd-inspector-kicker">Property snapshot</p><h3 id="wdd-property-detail-title-'+suffix+'">'+esc(p.address||p.pams_pin||'Saved property')+'</h3><p class="wdd-inspector-place">'+esc(place||'New Jersey')+(p.pams_pin?' · PIN '+esc(p.pams_pin):'')+'</p></div>'+(suffix==='desktop'?'<button class="wdd-inspector-close" type="button" data-inspector-close aria-label="Close property details"><i class="fas fa-xmark" aria-hidden="true"></i></button>':'')+'</div>'+
+      '<dl class="wdd-inspector-values"><div><dt>Assessed value'+(p.assessment_year?' · '+esc(String(p.assessment_year)):'')+'</dt><dd>'+(p.assessed?esc(H.money(p.assessed)):'Not available')+'</dd></div><div><dt>Market estimate</dt><dd>'+(p.watchdog_value?esc(H.money(p.watchdog_value)):'Not available')+'</dd></div><div><dt>Annual tax'+(taxYear?' · '+esc(String(taxYear)):'')+'</dt><dd>'+(p.last_year_tax?esc(H.money(p.last_year_tax)):'Not available')+'</dd></div></dl>'+
+      taxHistoryContent(p)+
+      '<section class="wdd-inspector-section"><h4>Owner</h4><p>Owner details are not available in this dashboard.</p></section>'+
+      '<section class="wdd-inspector-section"><h4>Connections &amp; activity</h4><p>CRM/BoldTrail links and property activity are not available in this dashboard.</p></section>'+
+      '<a class="wdd-inspector-open" href="'+open+'">Open property <i class="fas fa-arrow-up-right-from-square" aria-hidden="true"></i></a>';
+  }
+  function externalHttpsUrl(value){try{var parsed=new URL(String(value||''),location.origin);return parsed.protocol==='https:'?parsed.href:'';}catch(_e){return'';}}
+  function taxHistoryContent(p){
+    var annual=p.municipal_tax_live===true&&p.municipal_tax_annual&&typeof p.municipal_tax_annual==='object'?p.municipal_tax_annual:null;
+    var years=annual?Object.keys(annual).filter(function(year){return /^\d{4}$/.test(year);}).sort(function(a,b){return Number(b)-Number(a);}):[];
+    if(!p.municipal_tax_live)return '<section class="wdd-inspector-section wdd-tax-history"><h4>Annual tax history</h4><p>Not available in this dashboard because no exact municipal match is loaded.</p></section>';
+    if(!years.length)return '<section class="wdd-inspector-section wdd-tax-history"><h4>Annual tax history</h4><p>No annual tax rows were returned for this exact municipal match.</p>'+taxSourceNote(p)+'</section>';
+    function hasNumber(value){return value!==null&&value!==undefined&&value!==''&&Number.isFinite(Number(value));}
+    function taxMoney(value){return hasNumber(value)?Number(value).toLocaleString('en-US',{style:'currency',currency:'USD',minimumFractionDigits:2,maximumFractionDigits:2}):'—';}
+    var rows=years.map(function(year){var row=annual[year]||{};var rate=hasNumber(row.tax_rate)?Number(row.tax_rate).toLocaleString('en-US',{maximumFractionDigits:4})+'%':'—';return '<tr><th scope="row">'+esc(year)+'</th><td>'+esc(taxMoney(row.property_tax_billed))+'</td><td>'+esc(rate)+'</td><td>'+(hasNumber(row.total_assessed_value)?esc(H.money(row.total_assessed_value)):'—')+'</td></tr>';}).join('');
+    return '<section class="wdd-inspector-section wdd-tax-history"><h4>Annual tax history</h4><div class="wdd-tax-history-scroll"><table aria-label="Annual municipal property tax evidence"><thead><tr><th scope="col">Year</th><th scope="col">Billed</th><th scope="col">Rate</th><th scope="col">Assessment</th></tr></thead><tbody>'+rows+'</tbody></table></div>'+taxSourceNote(p)+'</section>';
+  }
+  function taxSourceNote(p){
+    var href=externalHttpsUrl(p.municipal_tax_source),provider=String(p.municipal_tax_provider||'Municipal tax evidence'),semantics=String(p.municipal_tax_semantics||'Exact municipal address match.');
+    var checked='';
+    if(p.municipal_tax_checked_at){var date=new Date(p.municipal_tax_checked_at);if(Number.isFinite(date.getTime()))checked=' Checked '+date.toLocaleDateString('en-US',{month:'short',day:'numeric',year:'numeric'})+'.';}
+    return '<p class="wdd-tax-history-source">Source: '+(href?'<a href="'+esc(href)+'" target="_blank" rel="noopener">'+esc(provider)+'</a>':esc(provider))+'. '+esc(semantics)+esc(checked)+'</p>';
+  }
+  function selectedProperty(props){
+    if(!props.length){selectedPropertyPin='';return null;}
+    if(inspectorDismissed&&!selectedPropertyPin)return null;
+    var found=props.find(function(p){return String(p.pams_pin||'')===selectedPropertyPin;});
+    if(!found){found=props[0];selectedPropertyPin=String(found.pams_pin||'');}
+    return found;
+  }
+  function propertyInspector(p){
+    return '<aside class="wdd-property-inspector" aria-label="Selected property details">'+inspectorContent(p,'desktop')+'</aside>'+
+      '<dialog class="wdd-property-dialog" id="wdd-property-dialog" aria-label="Property details">'+
+        '<div class="wdd-property-dialog-head"><span>Property details</span><button class="wdd-inspector-close" type="button" data-dialog-close aria-label="Close property details"><i class="fas fa-xmark" aria-hidden="true"></i></button></div>'+
+        '<div class="wdd-property-dialog-content">'+inspectorContent(p,'mobile')+'</div>'+
+      '</dialog>';
+  }
   function paintPositions(){
-    var props=WD.filtered(),current=COLS.filter(function(c){return c.key===S.sort.key;})[0]||COLS[0];
+    var props=WD.filtered(),selected=selectedProperty(props),current=COLS.filter(function(c){return c.key===S.sort.key;})[0]||COLS[0];
     var head=COLS.map(function(c){
       if(!c.key)return '<th'+(c.r?' class="wdd-r"':'')+'>'+esc(c.label)+'</th>';
       var arrow=S.sort.key===c.key?(S.sort.dir==='asc'?' ↑':' ↓'):'';
@@ -175,8 +213,18 @@ function start(){
       '<div class="wdd-empty"><i class="fas fa-folder-open" aria-hidden="true"></i><p>No saved properties yet. Look one up and it will appear here with assessment, tax and Watchdog status.</p><a href="/property/">Look up an address</a></div>';
     // content-architecture: dynamic — portfolio markup depends on authenticated rows, sort state, and table/map mode.
     H.el('wdd-positions').innerHTML='<div class="wdd-panel"><div class="wdd-panel-head"><div><h2>Your Portfolio</h2><p>'+props.length+' propert'+(props.length===1?'y':'ies')+' · Sorted by '+esc(current.label.toLowerCase())+'</p></div><div class="wdd-fill"></div><div class="wdd-tabs" role="tablist"><button type="button" role="tab" data-tab="ledger" aria-selected="'+(S.tab==='ledger')+'">Table</button><button type="button" role="tab" data-tab="map" aria-selected="'+(S.tab==='map')+'">Map</button></div></div>'+
-      (S.tab==='map'?'<div id="wdd-map"></div>':body)+'</div>';
+      (S.tab==='map'?'<div id="wdd-map"></div>':'<div class="wdd-properties-layout"><div class="wdd-property-list">'+body+'</div>'+propertyInspector(selected)+'</div>')+'</div>';
+    bindPropertyDialog();
     if(S.tab==='map')drawMap();
+  }
+  function bindPropertyDialog(){
+    var dialog=H.el('wdd-property-dialog');if(!dialog)return;
+    var close=dialog.querySelector('[data-dialog-close]');
+    if(close)close.addEventListener('click',function(){dialog.close();});
+    dialog.addEventListener('close',function(){
+      var pin=mobileDrawerOpenerPin||selectedPropertyPin;mobileDrawerOpenerPin='';
+      if(pin)w.setTimeout(function(){var trigger=d.querySelector('[data-select-pin="'+String(pin).replace(/["\\]/g,'\\$&')+'"]');if(trigger)trigger.focus();},0);
+    },{once:true});
   }
   function drawMap(){
     if(!w.L)return;var node=H.el('wdd-map');if(!node)return;if(map){map.remove();map=null;}
@@ -254,7 +302,29 @@ function start(){
       '<section class="wdd-panel wdd-portfolio-map-card"><div class="wdd-panel-head"><div><h2>Your Portfolio</h2></div><a class="wdd-panel-link" href="#" data-tab-link="map">View map →</a></div><div class="wdd-map-wrap"><div id="wdd-rail-map"></div><span class="wdd-map-stat"><i class="fas fa-location-dot"></i>'+st.count+' properties</span></div></section>'+
       '<section class="wdd-panel" id="wdd-activity"><div class="wdd-panel-head"><div><h2>Recent Changes</h2><p>'+(st.changes30?st.changes30+' in the last 30 days':'Last 120 days')+'</p></div><a class="wdd-panel-link" href="/property/pulse">View all →</a></div>'+feed+'</section>'+
       '<section class="wdd-panel wdd-analysis-card" id="wdd-analysis-card"><div class="wdd-panel-head"><div><h2 id="wdd-analysis-heading" tabindex="-1">Portfolio Analysis</h2></div></div><div class="wdd-analysis-tabs" role="tablist" aria-label="Portfolio analysis views"><button class="wdd-analysis-tab" id="wdd-analysis-tab-assessed" role="tab" aria-controls="wdd-analysis-assessed" aria-selected="'+(analysisTab==='assessed')+'" data-analysis-tab="assessed" type="button">Assessed vs Market</button><button class="wdd-analysis-tab" id="wdd-analysis-tab-tax" role="tab" aria-controls="wdd-analysis-tax" aria-selected="'+(analysisTab==='tax')+'" data-analysis-tab="tax" type="button">Tax Distribution</button></div><div class="wdd-analysis-panel" id="wdd-analysis-assessed" role="tabpanel" aria-labelledby="wdd-analysis-tab-assessed"'+(analysisTab==='assessed'?'':' hidden')+'>'+railHistogram()+'<div class="wdd-analysis-copy">'+analysisCopy()+'</div></div><div class="wdd-analysis-panel" id="wdd-analysis-tax" role="tabpanel" aria-labelledby="wdd-analysis-tab-tax"'+(analysisTab==='tax'?'':' hidden')+'>'+taxDistribution()+'</div></section>';
+    H.el('wdd-rail').insertAdjacentHTML('beforeend',appealCalendar(WD.filtered()));
     drawRailMap();
+  }
+  function appealCalendar(props){
+    var alt=false,trad=false;
+    props.forEach(function(p){var key=countyKey(p.county);if(!key)return;if(APPEAL_ALT_COUNTIES.indexOf(key)>-1)alt=true;else trad=true;});
+    var items=[];
+    if(alt)items.push({date:nextBaseline(1,15),area:'Burlington, Gloucester & Monmouth counties'});
+    if(trad)items.push({date:nextBaseline(4,1),area:'Other known counties'});
+    items.sort(function(a,b){return a.date-b.date;});
+    var focusDate=items.length?items[0].date:new Date(),year=focusDate.getFullYear(),month=focusDate.getMonth(),first=new Date(year,month,1),daysInMonth=new Date(year,month+1,0).getDate(),offset=first.getDay(),cellCount=Math.ceil((offset+daysInMonth)/7)*7;
+    var weekdays=['Sun','Mon','Tue','Wed','Thu','Fri','Sat'].map(function(day){return '<span>'+day+'</span>';}).join('');
+    var cells=[];
+    for(var cell=0;cell<cellCount;cell++){
+      var day=cell-offset+1;
+      if(day<1||day>daysInMonth){cells.push('<span class="is-outside" aria-hidden="true"></span>');continue;}
+      var markers=items.filter(function(item){return item.date.getFullYear()===year&&item.date.getMonth()===month&&item.date.getDate()===day;});
+      var title=markers.length?'County baseline '+new Date(year,month,day).toLocaleDateString('en-US',{month:'long',day:'numeric',year:'numeric'})+' · '+markers.map(function(item){return item.area;}).join('; '):'';
+      cells.push('<span class="wdd-calendar-day'+(markers.length?' is-baseline':'')+'"'+(title?' role="img" aria-label="'+esc(title)+'" title="'+esc(title)+'"':'')+'><time datetime="'+year+'-'+String(month+1).padStart(2,'0')+'-'+String(day).padStart(2,'0')+'">'+day+'</time></span>');
+    }
+    var monthLabel=focusDate.toLocaleDateString('en-US',{month:'long',year:'numeric'});
+    var content=items.length?items.map(function(item){var dt=item.date;return '<li><time datetime="'+dt.getFullYear()+'-'+String(dt.getMonth()+1).padStart(2,'0')+'-'+String(dt.getDate()).padStart(2,'0')+'"><b>'+esc(dt.toLocaleDateString('en-US',{month:'short'}))+'</b><strong>'+dt.getDate()+'</strong></time><span><b>County baseline</b><small>'+esc(item.area)+' · '+dt.getFullYear()+'</small></span></li>';}).join(''):'<li class="wdd-calendar-empty">County baseline dates appear when a county is available for a saved property.</li>';
+    return '<section class="wdd-panel wdd-appeal-calendar" aria-labelledby="wdd-appeal-calendar-title"><div class="wdd-panel-head"><div><h2 id="wdd-appeal-calendar-title">Appeal calendar</h2><p>County baselines for your portfolio</p></div><i class="fas fa-calendar-days" aria-hidden="true"></i></div><div class="wdd-calendar-month"><div class="wdd-calendar-month-title">'+esc(monthLabel)+'</div><div class="wdd-calendar-grid" role="group" aria-label="'+esc(monthLabel)+(items.length?'; county baseline dates shown':'')+'"><div class="wdd-calendar-weekdays">'+weekdays+'</div><div class="wdd-calendar-days">'+cells.join('')+'</div></div><div class="wdd-calendar-legend"><span aria-hidden="true"></span>County baseline</div></div><ul>'+content+'</ul><p class="wdd-calendar-note">These are county baselines, not parcel-specific deadlines. Verify your deadline on the assessment notice.</p></section>';
   }
 
   function cases(){
@@ -322,6 +392,18 @@ function start(){
   }
   function onClick(ev){
     if(!ev.target||!ev.target.closest)return;
+    var inspectorClose=ev.target.closest('[data-inspector-close]');if(inspectorClose){selectedPropertyPin='';inspectorDismissed=true;paintPositions();return;}
+    var selectButton=ev.target.closest('[data-select-pin]');
+    if(selectButton){
+      selectedPropertyPin=selectButton.getAttribute('data-select-pin')||'';
+      inspectorDismissed=false;
+      var openOnMobile=w.matchMedia&&w.matchMedia('(max-width: 760px)').matches;
+      mobileDrawerOpenerPin=openOnMobile?selectedPropertyPin:'';
+      paintPositions();
+      if(openOnMobile){var dialog=H.el('wdd-property-dialog');if(dialog&&typeof dialog.showModal==='function')dialog.showModal();else if(dialog)dialog.setAttribute('open','');}
+      else{var focusedButton=d.querySelector('[data-select-pin="'+String(selectedPropertyPin).replace(/["\\]/g,'\\$&')+'"]');if(focusedButton)focusedButton.focus({preventScroll:true});}
+      return;
+    }
     var gapBin=ev.target.closest('[data-gap-bin]');if(gapBin){selectedGapBin=Number(gapBin.getAttribute('data-gap-bin'));var gapDetail=H.el('wdd-gap-detail');if(gapDetail)gapDetail.textContent=gapBin.getAttribute('data-gap-detail')||'';Array.prototype.forEach.call(d.querySelectorAll('[data-gap-bin]'),function(button){var selected=Number(button.getAttribute('data-gap-bin'))===selectedGapBin;button.classList.toggle('is-selected',selected);button.setAttribute('aria-pressed',selected?'true':'false');});return;}
     var alert=ev.target.closest('[data-act="show-overmarket-evidence"]');if(alert){analysisTab='assessed';var assessedTab=H.el('wdd-analysis-tab-assessed');Array.prototype.forEach.call(d.querySelectorAll('[data-analysis-tab]'),function(button){button.setAttribute('aria-selected',button===assessedTab?'true':'false');});Array.prototype.forEach.call(d.querySelectorAll('.wdd-analysis-panel'),function(panel){panel.hidden=panel.id!=='wdd-analysis-assessed';});var heading=H.el('wdd-analysis-heading'),card=H.el('wdd-analysis-card'),behavior=w.matchMedia&&!w.matchMedia('(prefers-reduced-motion: reduce)').matches?'smooth':'auto';if(heading)heading.focus({preventScroll:true});if(card)card.scrollIntoView({behavior:behavior,block:'start'});return;}
     var analysisButton=ev.target.closest('[data-analysis-tab]');if(analysisButton){analysisTab=analysisButton.getAttribute('data-analysis-tab')==='tax'?'tax':'assessed';var tabs=d.querySelectorAll('[data-analysis-tab]');Array.prototype.forEach.call(tabs,function(button){button.setAttribute('aria-selected',button===analysisButton?'true':'false');});var panels=d.querySelectorAll('.wdd-analysis-panel');Array.prototype.forEach.call(panels,function(panel){panel.hidden=panel.id!==(analysisTab==='tax'?'wdd-analysis-tax':'wdd-analysis-assessed');});return;}
@@ -347,7 +429,15 @@ function start(){
       return;
     }
     if(!ev.target.closest('.wdd-row-actions'))closePropertyMenus();
-    var row=ev.target.closest('tr[data-pin]');if(row&&row.getAttribute('data-pin')){location.href='/property/home?pin='+encodeURIComponent(row.getAttribute('data-pin'));return;}
+    var row=ev.target.closest('tr[data-pin]');if(row&&row.getAttribute('data-pin')){
+      selectedPropertyPin=row.getAttribute('data-pin');
+      inspectorDismissed=false;
+      var mobile=w.matchMedia&&w.matchMedia('(max-width: 760px)').matches;
+      mobileDrawerOpenerPin=mobile?selectedPropertyPin:'';
+      paintPositions();
+      if(mobile){var propertyDialog=H.el('wdd-property-dialog');if(propertyDialog&&typeof propertyDialog.showModal==='function')propertyDialog.showModal();else if(propertyDialog)propertyDialog.setAttribute('open','');}
+      return;
+    }
     var act=ev.target.closest('[data-act]');if(!act)return;var a=act.getAttribute('data-act');
     if(a==='export')exportCsv();else if(a==='county')cycleCounty();else if(a==='mobile-more')openMoreMenu();else if(a==='voice-search')startVoiceSearch(act);else if(a==='focus-search'){var fi=H.el('wdd-command-input');if(fi){fi.focus();fi.scrollIntoView({behavior:'smooth',block:'center'});}}
   }
@@ -360,6 +450,10 @@ function start(){
     var detail=H.el('wdd-gap-detail');if(detail)detail.textContent=button.getAttribute('data-gap-detail')||'';
   }
   function onKeydown(ev){
+    if(ev.key==='Escape'){
+      var dialog=H.el('wdd-property-dialog');if(dialog&&dialog.open)return;
+      if(selectedPropertyPin){selectedPropertyPin='';inspectorDismissed=true;paintPositions();return;}
+    }
     if((ev.metaKey||ev.ctrlKey)&&String(ev.key).toLowerCase()==='k'){var input=H.el('wdd-command-input');if(input){ev.preventDefault();input.focus();}}
   }
   function paintAll(){paintStanding();paintSignals();paintQueue();paintPositions();paintRail();paintFoot();}
