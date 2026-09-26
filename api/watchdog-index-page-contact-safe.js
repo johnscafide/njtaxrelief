@@ -11,6 +11,7 @@ const VERCEL_AUTH_MARKERS = [
 ];
 const CONTACT_POLICY_SCRIPT = '<script src="/property/js/contact-routing-policy.js" data-watchdog-contact-policy-runtime="1"></script>';
 const SUPABASE_GUARD_SCRIPT = '<script src="/property/js/supabase-client-singleton-guard.js" data-watchdog-supabase-singleton-guard="1"></script>';
+const SITE_EDITOR_LOADER_SCRIPT = '<script src="/property/js/site-editor-loader.js" data-watchdog-site-editor-loader="1" defer></script>';
 const AI_REFERRAL_SCRIPT = '<script src="/property/js/ai-referral-analytics.js" data-watchdog-ai-referral-runtime="1" defer></script>';
 const AI_REFERRAL_PRIVATE_PREFIXES = ['/account','/agent','/agent-control','/agent-desk','/transaction','/analytics','/backoffice','/compare','/dashboard','/data-center','/data-workbench','/developer','/developer-data','/diagnostics','/farm-builder','/growth','/home','/insights/admin','/integrations','/intelligence','/logs','/marketing-studio','/newsletter-studio','/onboarding','/report-builder','/watchlist','/whitepapers','/workbench'];
 const ENTITY_GRAPH_ID = 'watchdog-entity-graph';
@@ -200,6 +201,14 @@ function sanitizeContactHtml(input, publicPath) {
   return html;
 }
 
+/* Developer-only site editor. The loader makes no request for signed-out
+   visitors and only fetches the editor after a server-side developer check. */
+function installSiteEditorLoader(input) {
+  const html = String(input || '');
+  if (/site-editor-loader\.js/i.test(html) || !/<\/body>/i.test(html)) return html;
+  return html.replace(/<\/body>/i, `${SITE_EDITOR_LOADER_SCRIPT}\n</body>`);
+}
+
 function copySafeHeaders(upstream, res, publicPath) {
   const contentType = upstream.headers.get('content-type');
   const cacheControl = upstream.headers.get('cache-control');
@@ -264,6 +273,7 @@ module.exports = async function handler(req, res) {
     safeBody = installCanonicalManifestPath(safeBody);
     safeBody = installSupabaseSingletonGuard(safeBody);
     safeBody = applyCanonicalRuntimeDiet(safeBody, publicPath);
+    safeBody = installSiteEditorLoader(safeBody);
     if (publicPath === '/') {
       safeBody = installEntityGraph(safeBody);
       safeBody = installRootSocialMetadata(safeBody);
