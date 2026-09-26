@@ -98,8 +98,11 @@
     p.assessment_year = cur.assessment_year || null;
     p.last_year_tax_year = cur.tax_year || null;
     p.municipal_tax_rate = cur.tax_rate != null ? Number(cur.tax_rate) : null;
+    p.municipal_tax_annual = payload.annual && typeof payload.annual === 'object' && !Array.isArray(payload.annual) ? payload.annual : null;
     p.municipal_tax_source = payload.source && payload.source.url || null;
+    p.municipal_tax_semantics = payload.source && payload.source.semantics || null;
     p.municipal_tax_provider = payload.provider_label || null;
+    p.municipal_tax_checked_at = payload.checked_at || null;
     p.municipal_tax_live = true;
     return true;
   }
@@ -203,3 +206,4 @@
   }
   if (d.readyState === 'loading') d.addEventListener('DOMContentLoaded', boot, { once: true }); else boot();
 })(window, document);
+
