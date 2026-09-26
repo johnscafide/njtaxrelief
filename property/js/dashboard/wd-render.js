@@ -2,7 +2,7 @@
 (function(w,d){
 'use strict';
 function start(){
-  var WD=w.WD;if(!WD)return;var H=WD.H,S=WD.S,esc=H.esc,map=null,railMap=null,voiceRecognition=null,analysisTab='assessed';
+  var WD=w.WD;if(!WD)return;var H=WD.H,S=WD.S,esc=H.esc,map=null,railMap=null,voiceRecognition=null,analysisTab='assessed',selectedGapBin=-1;
 
   function verdict(score){return WD.verdict(score);}
   function initials(){
@@ -215,10 +215,24 @@ function start(){
 
   function railHistogram(){
     var vals=WD.filtered().map(WD.gapFor).filter(Boolean).map(function(g){return Math.max(-30,Math.min(30,g.pct));});
+    if(!vals.length)return'<div class="wdd-gap-empty" role="status">No assessed-to-market comparisons are available for this filtered selection.</div>';
     var bins=[0,0,0,0,0,0,0,0,0,0,0,0],step=5;
     vals.forEach(function(v){var idx=Math.min(bins.length-1,Math.max(0,Math.floor((v+30)/step)));bins[idx]+=1;});
     var max=Math.max.apply(null,bins.concat([1]));
-    return bins.map(function(v,i){var h=16+(v/max)*70;return '<i class="'+(i===6?'is-you':'')+'" style="--h:'+h.toFixed(0)+'%"></i>';}).join('');
+    var below=bins.slice(0,5).reduce(function(sum,count){return sum+count;},0),near=bins[5]+bins[6],above=bins.slice(7).reduce(function(sum,count){return sum+count;},0);
+    function bound(value){return value===0?'0%':(value<0?'−':'+')+Math.abs(value)+'%';}
+    var bars=bins.map(function(v,i){
+      var low=-30+i*step,high=low+step,group=i<5?'below':(i>6?'above':'near');
+      var range=i===0?'Below −25%, including values at or below −30% (left edge clipped)':(i===bins.length-1?'+25% and above, including values at or above +30% (right edge clipped)':bound(low)+' to under '+bound(high));
+      var groupText=group==='below'?'assessed below market by more than 5%':(group==='above'?'assessed above market by at least 5%':'between −5% and under +5% of market');
+      var detail=range+': '+v+' '+(v===1?'property':'properties')+'; '+groupText+'.';
+      var h=Math.max(8,(v/max)*76);
+      var mobileRange=i===0?'Below −25% (clipped at −30%)':(i===bins.length-1?'+25% and above (clipped at +30%)':bound(low)+' to under '+bound(high));
+      var barLength=((v/max)*100).toFixed(0);
+      return '<button class="wdd-gap-bin is-'+group+(selectedGapBin===i?' is-selected':'')+'" type="button" data-gap-bin="'+i+'" data-gap-detail="'+detail+'" title="'+detail+'" aria-label="'+detail.replace(/"/g,'&quot;')+'" aria-pressed="'+(selectedGapBin===i?'true':'false')+'"><span class="wdd-gap-range-label">'+mobileRange+'</span><span class="wdd-gap-count">'+v+'</span><span class="wdd-gap-bar" style="--bar-height:'+h.toFixed(0)+'%;--bar-length:'+barLength+'%"></span></button>';
+    }).join('');
+    var total=below+near+above;
+    return '<div class="wdd-gap-chart" role="group" aria-labelledby="wdd-gap-heading"><p class="wdd-gap-caption" id="wdd-gap-heading">Properties by assessed-to-market difference <span>· '+total+' with comparable data</span></p><div class="wdd-gap-legend" aria-label="Chart groups"><span class="is-below">Below market &lt;−5% <b>'+below+'</b></span><span class="is-near">−5% to under +5% <b>'+near+'</b></span><span class="is-above">Above market ≥+5% <b>'+above+'</b></span></div><div class="wdd-gap-plot"><span class="wdd-gap-zero-line" aria-hidden="true"></span><span class="wdd-gap-zero-badge" aria-hidden="true">0% market</span><div class="wdd-gap-bars">'+bars+'</div></div><div class="wdd-gap-axis" aria-hidden="true"><span>−30%</span><span>−20%</span><span>−10%</span><span>0%</span><span>+10%</span><span>+20%</span><span>+30%</span></div><p class="wdd-gap-bin-detail" id="wdd-gap-detail">End bins group values below −25% and at or above +25%; values beyond the ±30% scale stay in those bins. Choose a bar to see its count and range.</p></div>';
   }
   function analysisCopy(){
     var st=WD.stats();if(!st.assessed||!st.value)return'Add market evidence to compare your portfolio against current value.';
@@ -247,6 +261,7 @@ function start(){
   }
   function paintRail(){
     var st=WD.stats(),recent=st.changes.slice(0,4);
+    selectedGapBin=-1;
     var feed=recent.length?recent.map(function(r){
       var tone=feedTone(r);return '<div class="wdd-feed-item '+tone+'"><span class="wdd-feed-source '+tone+'"><i class="fas '+feedIcon(r)+'" aria-hidden="true"></i></span><div><b>'+esc(r.title||H.pretty(r.event_type))+'</b><small>'+esc(addressFor(r.pams_pin)||r.pams_pin||'Saved property')+' · '+esc(H.ago(r.occurred_at))+'</small></div></div>';
     }).join(''):'<div class="wdd-empty" style="padding:24px 14px"><p>Nothing has changed on your properties in the last 120 days.</p></div>';
@@ -254,7 +269,7 @@ function start(){
     H.el('wdd-rail').innerHTML=
       '<section class="wdd-panel wdd-portfolio-map-card"><div class="wdd-panel-head"><div><h2>Your Portfolio</h2></div><a class="wdd-panel-link" href="#" data-tab-link="map">View map →</a></div><div class="wdd-map-wrap"><div id="wdd-rail-map"></div><span class="wdd-map-stat"><i class="fas fa-location-dot"></i>'+st.count+' properties</span></div></section>'+
       '<section class="wdd-panel" id="wdd-activity"><div class="wdd-panel-head"><div><h2>Recent Changes</h2><p>'+(st.changes30?st.changes30+' in the last 30 days':'Last 120 days')+'</p></div><a class="wdd-panel-link" href="/property/pulse">View all →</a></div>'+feed+'</section>'+
-      '<section class="wdd-panel wdd-analysis-card"><div class="wdd-panel-head"><div><h2>Portfolio Analysis</h2></div></div><div class="wdd-analysis-tabs" role="tablist" aria-label="Portfolio analysis views"><button class="wdd-analysis-tab" id="wdd-analysis-tab-assessed" role="tab" aria-controls="wdd-analysis-assessed" aria-selected="'+(analysisTab==='assessed')+'" data-analysis-tab="assessed" type="button">Assessed vs Market</button><button class="wdd-analysis-tab" id="wdd-analysis-tab-tax" role="tab" aria-controls="wdd-analysis-tax" aria-selected="'+(analysisTab==='tax')+'" data-analysis-tab="tax" type="button">Tax Distribution</button></div><div class="wdd-analysis-panel" id="wdd-analysis-assessed" role="tabpanel" aria-labelledby="wdd-analysis-tab-assessed"'+(analysisTab==='assessed'?'':' hidden')+'><div class="wdd-histogram" role="img" aria-label="Assessment gap distribution">'+railHistogram()+'</div><div class="wdd-analysis-copy">'+analysisCopy()+'</div></div><div class="wdd-analysis-panel" id="wdd-analysis-tax" role="tabpanel" aria-labelledby="wdd-analysis-tab-tax"'+(analysisTab==='tax'?'':' hidden')+'>'+taxDistribution()+'</div></section>';
+      '<section class="wdd-panel wdd-analysis-card"><div class="wdd-panel-head"><div><h2>Portfolio Analysis</h2></div></div><div class="wdd-analysis-tabs" role="tablist" aria-label="Portfolio analysis views"><button class="wdd-analysis-tab" id="wdd-analysis-tab-assessed" role="tab" aria-controls="wdd-analysis-assessed" aria-selected="'+(analysisTab==='assessed')+'" data-analysis-tab="assessed" type="button">Assessed vs Market</button><button class="wdd-analysis-tab" id="wdd-analysis-tab-tax" role="tab" aria-controls="wdd-analysis-tax" aria-selected="'+(analysisTab==='tax')+'" data-analysis-tab="tax" type="button">Tax Distribution</button></div><div class="wdd-analysis-panel" id="wdd-analysis-assessed" role="tabpanel" aria-labelledby="wdd-analysis-tab-assessed"'+(analysisTab==='assessed'?'':' hidden')+'>'+railHistogram()+'<div class="wdd-analysis-copy">'+analysisCopy()+'</div></div><div class="wdd-analysis-panel" id="wdd-analysis-tax" role="tabpanel" aria-labelledby="wdd-analysis-tab-tax"'+(analysisTab==='tax'?'':' hidden')+'>'+taxDistribution()+'</div></section>';
     drawRailMap();
   }
 
@@ -323,6 +338,7 @@ function start(){
   }
   function onClick(ev){
     if(!ev.target||!ev.target.closest)return;
+    var gapBin=ev.target.closest('[data-gap-bin]');if(gapBin){selectedGapBin=Number(gapBin.getAttribute('data-gap-bin'));var gapDetail=H.el('wdd-gap-detail');if(gapDetail)gapDetail.textContent=gapBin.getAttribute('data-gap-detail')||'';Array.prototype.forEach.call(d.querySelectorAll('[data-gap-bin]'),function(button){var selected=Number(button.getAttribute('data-gap-bin'))===selectedGapBin;button.classList.toggle('is-selected',selected);button.setAttribute('aria-pressed',selected?'true':'false');});return;}
     var analysisButton=ev.target.closest('[data-analysis-tab]');if(analysisButton){analysisTab=analysisButton.getAttribute('data-analysis-tab')==='tax'?'tax':'assessed';var tabs=d.querySelectorAll('[data-analysis-tab]');Array.prototype.forEach.call(tabs,function(button){button.setAttribute('aria-selected',button===analysisButton?'true':'false');});var panels=d.querySelectorAll('.wdd-analysis-panel');Array.prototype.forEach.call(panels,function(panel){panel.hidden=panel.id!==(analysisTab==='tax'?'wdd-analysis-tax':'wdd-analysis-assessed');});return;}
     var mapLink=ev.target.closest('[data-tab-link="map"]');if(mapLink){ev.preventDefault();S.tab='map';paintPositions();var p=H.el('wdd-positions');if(p)p.scrollIntoView({behavior:'smooth',block:'start'});return;}
     var sortBtn=ev.target.closest('[data-sort]');if(sortBtn){var k=sortBtn.getAttribute('data-sort');if(S.sort.key===k)S.sort.dir=S.sort.dir==='asc'?'desc':'asc';else{S.sort.key=k;S.sort.dir=k==='address'?'asc':'desc';}paintPositions();return;}
@@ -353,11 +369,16 @@ function start(){
   function onSubmit(ev){
     if(ev.target&&ev.target.id==='wdd-command'){ev.preventDefault();var input=H.el('wdd-command-input'),q=String(input&&input.value||'').trim();location.href='/property/'+(q?'?address='+encodeURIComponent(q):'');}
   }
+  function onGapExplore(ev){
+    if(!ev.target||!ev.target.closest)return;
+    var button=ev.target.closest('[data-gap-bin]');if(!button)return;
+    var detail=H.el('wdd-gap-detail');if(detail)detail.textContent=button.getAttribute('data-gap-detail')||'';
+  }
   function onKeydown(ev){
     if((ev.metaKey||ev.ctrlKey)&&String(ev.key).toLowerCase()==='k'){var input=H.el('wdd-command-input');if(input){ev.preventDefault();input.focus();}}
   }
   function paintAll(){paintStanding();paintSignals();paintQueue();paintPositions();paintRail();paintFoot();}
-  d.addEventListener('click',onClick);d.addEventListener('submit',onSubmit);d.addEventListener('keydown',onKeydown);WD.onRepaint(paintAll);paintAll();
+  d.addEventListener('click',onClick);d.addEventListener('focusin',onGapExplore);d.addEventListener('pointerover',onGapExplore);d.addEventListener('submit',onSubmit);d.addEventListener('keydown',onKeydown);WD.onRepaint(paintAll);paintAll();
 }
 if(w.WD&&w.WD.S&&w.WD.S.user)start();else d.addEventListener('wd:ready',start,{once:true});
 })(window,document);
