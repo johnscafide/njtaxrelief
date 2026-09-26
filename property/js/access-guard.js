@@ -90,10 +90,10 @@
         }
 
         var pagePath = logicalPath(location.pathname).replace(/\/+$/, '');
-        if (!isDeveloper && status === 'trialing' && pagePath !== '/agent/training') {
+        if (pagePath !== '/agent/training') {
           return sb().rpc('get_my_agent_training_state').then(function (trainingResult) {
             if (trainingResult.error) {
-              console.warn('[Watchdog] trial training gate unavailable:', trainingResult.error.message || trainingResult.error);
+              console.warn('[Watchdog] professional training gate unavailable:', trainingResult.error.message || trainingResult.error);
               return finishAccess();
             }
             var training = Array.isArray(trainingResult.data) ? trainingResult.data[0] : trainingResult.data;
