@@ -58,11 +58,24 @@
     }
     paint();show(nextOf(module));
   }
+  async function ensureRoadmapReviewed(){
+    if(!ack.checked||!user||completed.indexOf('roadmap')>=0)return true;
+    var c=sb();if(!c)return false;
+    setStatus('Saving final lesson…');
+    var res=await c.rpc('update_my_agent_training_progress',{p_module:'roadmap',p_reviewed:true});
+    if(res.error){setStatus(res.error.message||'Could not save the final lesson.','error');return false}
+    var row=Array.isArray(res.data)?res.data[0]:res.data;
+    completed=row&&Array.isArray(row.completed_modules)?row.completed_modules:completed;
+    paint();
+    return completed.indexOf('roadmap')>=0;
+  }
   async function finish(){
     if(!user){var c=sb();if(c&&window.WatchdogAuth)window.WatchdogAuth.openSignIn('/agent/training/?return='+encodeURIComponent(returnTarget()));else location.href='/onboarding/?next='+encodeURIComponent(location.pathname+location.search);return}
     if(!ack.checked)return;
-    completeBtn.disabled=true;setStatus('Saving training completion…');
+    completeBtn.disabled=true;
     try{
+      if(!(await ensureRoadmapReviewed())){completeBtn.disabled=false;return}
+      setStatus('Saving training completion…');
       var res=await sb().rpc('complete_my_agent_training',{p_acknowledged:true});
       if(res.error)throw res.error;
       if(!state)state={};state.completed=true;setStatus('Training complete. Opening Watchdog…','success');
@@ -90,6 +103,9 @@
   resume.addEventListener('click',function(){var first=MODULES.find(function(m){return completed.indexOf(m)<0})||'welcome';show(first)});
   if(shotDialog)shotDialog.addEventListener('click',function(e){if(e.target===shotDialog)closeShot()});
   document.addEventListener('keydown',function(e){if(e.key==='Escape')closeShot()});
-  ack.addEventListener('change',paint);completeBtn.addEventListener('click',finish);
+  ack.addEventListener('change',function(){
+    if(!ack.checked){paint();return}
+    ensureRoadmapReviewed().catch(function(e){setStatus(e&&e.message||'Could not save the final lesson.','error');paint()});
+  });completeBtn.addEventListener('click',finish);
   show('welcome',false);refresh().catch(function(e){console.warn('[Watchdog training]',e&&e.message||e);paint()});
 })();
