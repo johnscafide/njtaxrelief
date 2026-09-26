@@ -13,6 +13,10 @@ must(page.includes('account-refresh-20260925.js?v=20260926c'),'Account customize
 must(refresh.includes("panel.className='acx-picker'"),'Customizer still uses legacy popup class.');
 must(refresh.includes("backdrop.className='acx-backdrop'"),'Customizer backdrop is not isolated.');
 must(refresh.includes("button.className='acx-card '"),'Customizer cards still use legacy card class.');
+must(refresh.includes("button.addEventListener('click',function(event)")&&refresh.includes('updateThemePreview(theme.key)'),'Theme cards need a direct click handler.');
+must(refresh.includes('panel.dataset.pendingTheme=theme.key'),'Pending background choice is not persisted on the modal.');
+must(refresh.includes('saveTheme(panel.dataset.pendingTheme||pendingThemeKey||pendingThemeOriginalKey)'),'Apply action is not bound to the clicked background.');
+must(customizer.includes('pointer-events:auto!important')&&customizer.includes('touch-action:manipulation'),'Theme card interaction surface is not hardened.');
 must(refresh.includes('class="acx-tabs"'),'Customizer tabs are not isolated.');
 must(refresh.includes('class="acx-grid" id="ac-theme-browser-grid"'),'Customizer grid is not isolated.');
 must(customizer.includes('.acx-card-preview{')&&customizer.includes('position:relative'),'Theme preview tiles are not in normal document flow.');
