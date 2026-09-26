@@ -19,7 +19,12 @@ var THEMES=[
   {key:'architecture',label:'Architecture',kind:'image',bg:"linear-gradient(90deg,rgba(7,27,51,.88),rgba(7,27,51,.44)),url('https://images.unsplash.com/photo-1486406146926-c627a92ad1ab?auto=format&fit=crop&w=2000&q=82') center/cover"},
   {key:'shore',label:'Shore',kind:'image',bg:"linear-gradient(90deg,rgba(6,31,56,.88),rgba(6,31,56,.42)),url('https://images.unsplash.com/photo-1507525428034-b723cf961d3e?auto=format&fit=crop&w=2000&q=82') center/cover"},
   {key:'neighborhood',label:'Neighborhood',kind:'image',bg:"linear-gradient(90deg,rgba(7,27,51,.89),rgba(7,27,51,.46)),url('https://images.unsplash.com/photo-1564013799919-ab600027ffc6?auto=format&fit=crop&w=2000&q=82') center/cover"},
-  {key:'workspace',label:'Workspace',kind:'image',bg:"linear-gradient(90deg,rgba(7,27,51,.90),rgba(7,27,51,.48)),url('https://images.unsplash.com/photo-1497366811353-6870744d04b2?auto=format&fit=crop&w=2000&q=82') center/cover"}
+  {key:'workspace',label:'Workspace',kind:'image',bg:"linear-gradient(90deg,rgba(7,27,51,.90),rgba(7,27,51,.48)),url('https://images.unsplash.com/photo-1497366811353-6870744d04b2?auto=format&fit=crop&w=2000&q=82') center/cover"},
+  {key:'aurora-motion',label:'Aurora',kind:'motion',bg:'radial-gradient(circle at 15% 35%,rgba(74,232,215,.72),transparent 34%),radial-gradient(circle at 78% 38%,rgba(91,116,255,.60),transparent 36%),linear-gradient(120deg,#07172c,#103d55 48%,#073c43)'},
+  {key:'signal-grid',label:'Signal Grid',kind:'motion',bg:'linear-gradient(rgba(92,233,219,.12) 1px,transparent 1px),linear-gradient(90deg,rgba(92,233,219,.12) 1px,transparent 1px),radial-gradient(circle at 72% 45%,rgba(36,181,197,.42),transparent 30%),linear-gradient(120deg,#07192d,#0b3045)'},
+  {key:'tidal-motion',label:'Tidal',kind:'motion',bg:'radial-gradient(ellipse at 20% 110%,rgba(44,205,194,.58),transparent 42%),radial-gradient(ellipse at 82% -5%,rgba(57,118,239,.54),transparent 40%),linear-gradient(120deg,#071b31,#0e4251 58%,#0b293d)'},
+  {key:'spectrum-motion',label:'Spectrum',kind:'motion',bg:'linear-gradient(120deg,#091b35 0%,#0c6d78 20%,#5a48a8 42%,#c84f86 60%,#1ba7a1 80%,#0a2440 100%)'},
+  {key:'orbit-motion',label:'Orbit',kind:'motion',bg:'radial-gradient(circle at 50% 50%,transparent 0 18%,rgba(116,231,218,.22) 19% 20%,transparent 21% 31%,rgba(105,141,255,.18) 32% 33%,transparent 34%),radial-gradient(circle at 15% 20%,rgba(79,221,213,.50),transparent 24%),linear-gradient(135deg,#07182c,#132a4c 54%,#0b4f54)'}
 ];
 var LIFETIME={
   agent:{label:'Agent',value:'$1,499',amount:149900},
@@ -37,15 +42,22 @@ function currentTheme(){
   var meta=user&&user.user_metadata||{};
   return themeByKey(meta.watchdog_account_hero_theme||'watchdog');
 }
+function applyThemeVisual(node,theme){
+  if(!node||!theme)return;
+  node.style.setProperty('background',theme.bg,'important');
+  if(theme.kind==='motion')node.dataset.motionTheme=theme.key;
+  else delete node.dataset.motionTheme;
+}
 function applyTheme(key){
   var hero=document.querySelector('.ac-profile-hero');if(!hero)return;
   var theme=themeByKey(key);
   hero.dataset.accountHeroTheme=theme.key;
-  hero.style.setProperty('background',theme.bg,'important');
+  applyThemeVisual(hero,theme);
 }
 function themeButton(theme){
   var button=document.createElement('button');
   button.type='button';button.className='ac-theme-choice '+theme.kind;button.dataset.heroTheme=theme.key;
+  if(theme.kind==='motion')button.dataset.motionTheme=theme.key;
   button.setAttribute('aria-label','Preview '+theme.label+' profile background');button.setAttribute('aria-pressed','false');
   button.style.setProperty('--theme-preview',theme.bg);
   button.innerHTML='<span class="ac-theme-preview"></span><span class="ac-theme-name">'+theme.label+'</span><i class="fas fa-check" aria-hidden="true"></i>';
@@ -53,12 +65,14 @@ function themeButton(theme){
 }
 function syncThemePreviewIdentity(){
   var panel=document.getElementById('ac-theme-popover'),hero=document.querySelector('.ac-profile-hero');if(!panel||!hero)return;
-  var sourceName=hero.querySelector('.ac-hero-copy h1'),sourceSub=hero.querySelector('.ac-hero-copy>p'),sourceAvatar=hero.querySelector('.ac-avatar');
-  var name=panel.querySelector('#ac-theme-preview-name'),sub=panel.querySelector('#ac-theme-preview-sub'),avatar=panel.querySelector('#ac-theme-preview-avatar');
-  if(name)name.textContent=sourceName?sourceName.textContent:'Your Watchdog profile';
+  var sourceName=hero.querySelector('.ac-hero-copy h1'),sourceSub=hero.querySelector('.ac-hero-copy>p'),sourceAvatar=hero.querySelector('.ac-avatar'),sourceWrap=hero.querySelector('.ac-avatar-wrap'),sourceVerify=hero.querySelector('.ac-pro-badge');
+  var name=panel.querySelector('#ac-theme-preview-name'),sub=panel.querySelector('#ac-theme-preview-sub'),avatar=panel.querySelector('#ac-theme-preview-avatar'),verify=panel.querySelector('#ac-theme-preview-verified');
+  if(name){name.textContent=sourceName?sourceName.textContent:'Your Watchdog profile';name.title=sourceName&&sourceName.title||'';}
   if(sub)sub.textContent=sourceSub?sourceSub.textContent:'Watchdog member';
+  if(verify){verify.hidden=!sourceVerify;verify.title=sourceVerify&&sourceVerify.title||'';}
   if(avatar){
-    avatar.replaceChildren();
+    avatar.replaceChildren();avatar.classList.toggle('has-broker-brand',!!(sourceWrap&&sourceWrap.classList.contains('has-broker-brand')));
+    if(sourceWrap){avatar.style.setProperty('--broker-primary',sourceWrap.style.getPropertyValue('--broker-primary')||'#0B8B85');avatar.style.setProperty('--broker-secondary',sourceWrap.style.getPropertyValue('--broker-secondary')||'#F15A24');}
     var image=sourceAvatar&&sourceAvatar.querySelector('img');
     if(image){var clone=document.createElement('img');clone.src=image.src;clone.alt='';avatar.appendChild(clone);}
     else{avatar.textContent=(sourceName&&sourceName.textContent?sourceName.textContent:'W').trim().charAt(0).toUpperCase()||'W';}
@@ -67,12 +81,20 @@ function syncThemePreviewIdentity(){
 function updateThemePreview(key){
   var theme=themeByKey(key),panel=document.getElementById('ac-theme-popover');pendingThemeKey=theme.key;
   if(!panel)return;
-  var banner=panel.querySelector('#ac-theme-preview-banner');if(banner)banner.style.setProperty('background',theme.bg,'important');
+  var banner=panel.querySelector('#ac-theme-preview-banner');if(banner)applyThemeVisual(banner,theme);
   panel.querySelectorAll('.ac-theme-choice').forEach(function(button){
     button.setAttribute('aria-pressed',button.dataset.heroTheme===theme.key?'true':'false');
   });
   var selected=panel.querySelector('#ac-theme-selected-name');if(selected)selected.textContent=theme.label;
   var apply=panel.querySelector('[data-apply-theme]');if(apply){apply.disabled=false;apply.textContent=theme.key===pendingThemeOriginalKey?'Keep this background':'Apply background';}
+}
+function setThemeTab(panel,kind){
+  if(!panel)return;
+  ['color','image','motion'].forEach(function(value){
+    var tab=panel.querySelector('[data-theme-tab="'+value+'"]'),section=panel.querySelector('[data-theme-kind="'+value+'"]');
+    if(tab)tab.setAttribute('aria-selected',value===kind?'true':'false');
+    if(section)section.hidden=value!==kind;
+  });
 }
 function closeThemePanel(){
   var panel=document.getElementById('ac-theme-popover'),backdrop=document.getElementById('ac-theme-backdrop');
@@ -85,14 +107,17 @@ function ensureThemePanel(){
   var backdrop=document.createElement('div');backdrop.id='ac-theme-backdrop';backdrop.className='ac-theme-backdrop';backdrop.hidden=true;
   panel=document.createElement('section');panel.id='ac-theme-popover';panel.className='ac-theme-popover';panel.hidden=true;panel.setAttribute('role','dialog');panel.setAttribute('aria-modal','true');panel.setAttribute('aria-labelledby','ac-theme-title');
   panel.innerHTML='<header><div><h3 id="ac-theme-title">Choose your background</h3></div><button type="button" data-close-theme aria-label="Close background chooser"><i class="fas fa-xmark"></i></button></header>'+
-    '<section class="ac-theme-live"><div class="ac-theme-live-head"><b>Live preview</b><span>This is how your profile hero will look.</span></div><div class="ac-theme-live-banner" id="ac-theme-preview-banner"><div class="ac-theme-live-avatar" id="ac-theme-preview-avatar">W</div><div class="ac-theme-live-copy"><span>PROFILE &amp; SETTINGS</span><strong id="ac-theme-preview-name">Your Watchdog profile</strong><small id="ac-theme-preview-sub">Watchdog member</small></div><div class="ac-theme-live-badge"><i class="fas fa-eye"></i><span id="ac-theme-selected-name">Watchdog</span></div></div></section>'+
-    '<div class="ac-theme-groups"><section class="ac-theme-section" data-theme-kind="color"><div class="ac-theme-section-title"><b>Gradients</b><span>10</span></div><div class="ac-theme-grid"></div></section>'+
-    '<section class="ac-theme-section" data-theme-kind="image"><div class="ac-theme-section-title"><b>Photos</b><span>5</span></div><div class="ac-theme-grid"></div></section></div>'+
+    '<section class="ac-theme-live"><div class="ac-theme-live-head"><b>Live preview</b><span>This is how your profile hero will look.</span></div><div class="ac-theme-live-banner" id="ac-theme-preview-banner"><div class="ac-theme-live-avatar" id="ac-theme-preview-avatar">W</div><div class="ac-theme-live-copy"><div class="ac-theme-live-name-row"><strong id="ac-theme-preview-name">Your Watchdog profile</strong><span class="ac-theme-live-verified" id="ac-theme-preview-verified" hidden><i class="fas fa-circle-check"></i></span></div><small id="ac-theme-preview-sub">Watchdog member</small></div><div class="ac-theme-live-badge"><i class="fas fa-eye"></i><span id="ac-theme-selected-name">Watchdog</span></div></div></section>'+
+    '<nav class="ac-theme-tabs" aria-label="Background categories"><button type="button" data-theme-tab="color" aria-selected="true">Gradients <em>10</em></button><button type="button" data-theme-tab="image" aria-selected="false">Photos <em>5</em></button><button type="button" data-theme-tab="motion" aria-selected="false">Motion <em>5</em></button></nav>'+
+    '<div class="ac-theme-groups"><section class="ac-theme-section" data-theme-kind="color"><div class="ac-theme-grid"></div></section>'+
+    '<section class="ac-theme-section" data-theme-kind="image" hidden><div class="ac-theme-grid"></div></section>'+
+    '<section class="ac-theme-section" data-theme-kind="motion" hidden><div class="ac-theme-grid"></div></section></div>'+
     '<footer class="ac-theme-actions"><button type="button" class="secondary" data-cancel-theme>Cancel</button><span><i class="fas fa-cloud"></i> Saved only when you apply</span><button type="button" class="primary" data-apply-theme>Apply background</button></footer>';
   document.body.appendChild(backdrop);document.body.appendChild(panel);
   THEMES.forEach(function(theme){var grid=panel.querySelector('[data-theme-kind="'+theme.kind+'"] .ac-theme-grid');if(grid)grid.appendChild(themeButton(theme));});
   backdrop.addEventListener('click',closeThemePanel);panel.querySelector('[data-close-theme]').addEventListener('click',closeThemePanel);
   panel.addEventListener('click',function(event){
+    var tab=event.target.closest('[data-theme-tab]');if(tab){setThemeTab(panel,tab.dataset.themeTab);return;}
     var choice=event.target.closest('[data-hero-theme]');if(choice){updateThemePreview(choice.dataset.heroTheme);return;}
     if(event.target.closest('[data-cancel-theme]')){closeThemePanel();return;}
     if(event.target.closest('[data-apply-theme]')){saveTheme(pendingThemeKey||pendingThemeOriginalKey);return;}
@@ -104,7 +129,7 @@ function openThemePanel(toggle){
   var panel=ensureThemePanel(),backdrop=document.getElementById('ac-theme-backdrop'),saved=currentTheme();
   activeThemeToggle=toggle;pendingThemeOriginalKey=saved.key;pendingThemeKey=saved.key;
   panel.hidden=false;if(backdrop)backdrop.hidden=false;document.body.classList.add('ac-theme-open');toggle.setAttribute('aria-expanded','true');
-  syncThemePreviewIdentity();updateThemePreview(saved.key);
+  syncThemePreviewIdentity();setThemeTab(panel,saved.kind);updateThemePreview(saved.key);
   var close=panel.querySelector('[data-close-theme]');if(close)close.focus();
 }
 async function saveTheme(key){
@@ -127,7 +152,7 @@ function mountThemePicker(){
   var control=hero.querySelector('.ac-hero-style-control');
   if(!control){
     control=document.createElement('div');control.className='ac-hero-style-control';
-    control.innerHTML='<button class="ac-hero-style-toggle" type="button" aria-expanded="false"><span class="ac-style-icon"><i class="fas fa-palette"></i></span><span>Background</span><i class="fas fa-chevron-right ac-style-chevron"></i></button>';
+    control.innerHTML='<button class="ac-hero-style-toggle" type="button" aria-expanded="false"><i class="fas fa-wand-magic-sparkles" aria-hidden="true"></i><span>Customize</span></button>';
     hero.appendChild(control);
     control.querySelector('button').addEventListener('click',function(event){event.stopPropagation();openThemePanel(event.currentTarget);});
   }
