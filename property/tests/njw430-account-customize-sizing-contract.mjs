@@ -18,6 +18,6 @@ must(css.includes('grid-template-columns:repeat(2,minmax(0,1fr))'),'Mobile Custo
 must(css.includes('border:5px solid transparent!important'),'Brokerage avatar ring is not thick enough.');
 must(css.includes('.acx-preview-avatar.has-broker-brand')&&css.includes('border:4px solid transparent'),'Live preview brokerage ring is not strengthened.');
 must(refresh.includes('data-theme-tab="color"')&&refresh.includes('data-theme-tab="image"')&&refresh.includes('data-theme-tab="motion"'),'Gradient/Photo/Motion tabs are not mounted.');
-must(page.includes('account-customizer-20260926.css?v=20260926b'),'Account customizer CSS cache version missing.');
+must(page.includes('account-customizer-20260926.css?v=20260926c'),'Account customizer CSS cache version missing.');
 
 console.log('NJW-430 Customize modal sizing contract passed');
