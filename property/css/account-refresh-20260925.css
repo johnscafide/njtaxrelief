@@ -831,3 +831,188 @@ body[data-sidebar-page="account"] .ac-connections .ac-connection-foot{display:no
   body[data-sidebar-page="account"] .ac-connections .ac-sync-header h2{font-size:29px!important}
   body[data-sidebar-page="account"] .ac-connections .ac-connection-grid{padding:12px!important}
 }
+
+
+/* NJW-429 · brokerage avatar identity + social verification + motion canvases */
+body[data-sidebar-page="account"] .ac-hero-copy>span{display:none!important}
+
+/* Brokerage branding lives on the profile image instead of a separate hero tag. */
+body[data-sidebar-page="account"] .ac-hero-broker{display:none!important}
+body[data-sidebar-page="account"] .ac-avatar-wrap{position:relative!important}
+body[data-sidebar-page="account"] .ac-avatar-wrap.has-broker-brand .ac-avatar{
+  border:3px solid transparent!important;
+  background:
+    linear-gradient(#fff,#fff) padding-box,
+    linear-gradient(135deg,var(--broker-primary,#0b8b85),var(--broker-secondary,#f15a24)) border-box!important;
+  transition:box-shadow .18s ease,filter .18s ease,transform .18s ease!important
+}
+body[data-sidebar-page="account"] .ac-avatar-wrap.has-broker-brand:hover .ac-avatar{
+  box-shadow:
+    0 10px 28px rgba(6,24,45,.25),
+    0 0 0 3px rgba(255,255,255,.10),
+    0 0 22px var(--broker-primary,#0b8b85),
+    0 0 34px var(--broker-secondary,#f15a24)!important;
+  filter:saturate(1.06)!important;
+  transform:translateY(-1px)
+}
+body[data-sidebar-page="account"] .ac-avatar-wrap.has-broker-brand .ac-avatar-edit{
+  overflow:hidden!important;
+  border:2px solid transparent!important;
+  background:
+    linear-gradient(#fff,#fff) padding-box,
+    linear-gradient(135deg,var(--broker-primary,#0b8b85),var(--broker-secondary,#f15a24)) border-box!important;
+  box-shadow:0 8px 20px rgba(5,24,43,.24)!important;
+  transition:transform .16s ease,box-shadow .16s ease!important
+}
+body[data-sidebar-page="account"] .ac-avatar-wrap.has-broker-brand .ac-avatar-edit:hover{
+  transform:translateY(-1px) scale(1.04)!important;
+  box-shadow:0 8px 22px rgba(5,24,43,.28),0 0 16px var(--broker-secondary,#f15a24)!important
+}
+body[data-sidebar-page="account"] .ac-avatar-broker-logo{
+  display:block!important;width:29px!important;height:29px!important;max-width:72%!important;max-height:72%!important;
+  object-fit:contain!important;border-radius:0!important
+}
+
+/* Social-style verification mark: icon only, status on hover/focus via native title. */
+body[data-sidebar-page="account"] .ac-pro-badge.social-verify{
+  display:inline-grid!important;place-items:center!important;width:21px!important;height:21px!important;min-width:21px!important;min-height:21px!important;
+  padding:0!important;margin:0!important;border:0!important;border-radius:50%!important;background:transparent!important;
+  box-shadow:none!important;backdrop-filter:none!important;color:#72e6dd!important;font-size:17px!important;line-height:1!important;
+  cursor:help!important;filter:drop-shadow(0 2px 5px rgba(4,33,55,.30))
+}
+body[data-sidebar-page="account"] .ac-pro-badge.social-verify.realtor{color:#fff!important}
+body[data-sidebar-page="account"] .ac-pro-badge.social-verify i{margin:0!important}
+body[data-sidebar-page="account"] .ac-hero-name-row h1[title]{cursor:help}
+
+/* "Customize" is a small text affordance, not another bubble. */
+body[data-sidebar-page="account"] .ac-hero-style-control{right:26px!important;top:24px!important}
+body[data-sidebar-page="account"] .ac-hero-style-toggle{
+  min-height:0!important;padding:5px 2px!important;border:0!important;border-radius:0!important;
+  background:transparent!important;box-shadow:none!important;backdrop-filter:none!important;
+  color:rgba(255,255,255,.94)!important;font:900 10px/1 var(--font-ui,"Plus Jakarta Sans"),sans-serif!important;
+  letter-spacing:.08em!important;text-transform:uppercase!important;text-shadow:0 2px 10px rgba(3,21,37,.42)!important;
+  transition:color .15s ease,transform .15s ease!important
+}
+body[data-sidebar-page="account"] .ac-hero-style-toggle:hover{
+  background:transparent!important;color:#8ce7df!important;transform:translateY(-1px)!important
+}
+body[data-sidebar-page="account"] .ac-hero-style-toggle>i{font-size:10px!important;color:#8ce7df!important}
+body[data-sidebar-page="account"] .ac-style-icon,
+body[data-sidebar-page="account"] .ac-style-chevron{display:none!important}
+
+/* The modal now uses one clean category at a time. */
+.ac-theme-popover .ac-theme-section[hidden]{display:none!important}
+.ac-theme-popover .ac-theme-groups{display:block!important;min-height:112px!important}
+.ac-theme-popover .ac-theme-section{margin:0!important;padding:0!important}
+.ac-theme-popover nav.ac-theme-tabs{margin-bottom:12px!important}
+.ac-theme-popover nav.ac-theme-tabs button[data-theme-tab="motion"]::before{
+  content:"";width:6px;height:6px;border-radius:50%;background:#19a99f;box-shadow:0 0 9px rgba(25,169,159,.65)
+}
+.ac-theme-popover .ac-theme-section[data-theme-kind="color"] .ac-theme-grid,
+.ac-theme-popover .ac-theme-section[data-theme-kind="image"] .ac-theme-grid,
+.ac-theme-popover .ac-theme-section[data-theme-kind="motion"] .ac-theme-grid{
+  grid-template-columns:repeat(5,minmax(0,1fr))!important;gap:8px!important
+}
+.ac-theme-popover .ac-theme-choice.motion .ac-theme-preview{
+  aspect-ratio:1.45/1!important;overflow:hidden!important
+}
+.ac-theme-live-name-row{display:flex;align-items:center;gap:6px;min-width:0}
+.ac-theme-live-name-row strong{min-width:0}
+.ac-theme-live-verified{
+  display:grid;place-items:center;flex:0 0 auto;color:#76e9df;font-size:13px;filter:drop-shadow(0 2px 4px rgba(4,31,51,.32))
+}
+.ac-theme-live-verified[hidden]{display:none!important}
+.ac-theme-live-avatar.has-broker-brand{
+  border:2px solid transparent!important;
+  background:
+    linear-gradient(rgba(255,255,255,.10),rgba(255,255,255,.10)) padding-box,
+    linear-gradient(135deg,var(--broker-primary,#0b8b85),var(--broker-secondary,#f15a24)) border-box!important;
+  box-shadow:0 0 14px var(--broker-primary,#0b8b85)!important
+}
+
+/* Five CSS-motion canvases. They persist as ordinary theme keys, no video asset required. */
+[data-motion-theme="aurora-motion"]{
+  background-size:180% 180%,190% 190%,140% 140%!important;
+  animation:acMotionAurora 12s ease-in-out infinite alternate!important
+}
+[data-motion-theme="signal-grid"]{
+  background-size:28px 28px,28px 28px,180% 180%,cover!important;
+  animation:acMotionGrid 11s linear infinite!important
+}
+[data-motion-theme="tidal-motion"]{
+  background-size:190% 190%,190% 190%,cover!important;
+  animation:acMotionTidal 14s ease-in-out infinite alternate!important
+}
+[data-motion-theme="spectrum-motion"]{
+  background-size:320% 320%!important;
+  animation:acMotionSpectrum 13s ease-in-out infinite!important
+}
+[data-motion-theme="orbit-motion"]{
+  background-size:170% 170%,190% 190%,cover!important;
+  animation:acMotionOrbit 16s ease-in-out infinite alternate!important
+}
+.ac-theme-choice[data-motion-theme="aurora-motion"] .ac-theme-preview{
+  background-size:180% 180%,190% 190%,140% 140%!important;
+  animation:acMotionAurora 7s ease-in-out infinite alternate!important
+}
+.ac-theme-choice[data-motion-theme="signal-grid"] .ac-theme-preview{
+  background-size:20px 20px,20px 20px,180% 180%,cover!important;
+  animation:acMotionGridSmall 6s linear infinite!important
+}
+.ac-theme-choice[data-motion-theme="tidal-motion"] .ac-theme-preview{
+  background-size:190% 190%,190% 190%,cover!important;
+  animation:acMotionTidal 8s ease-in-out infinite alternate!important
+}
+.ac-theme-choice[data-motion-theme="spectrum-motion"] .ac-theme-preview{
+  background-size:320% 320%!important;
+  animation:acMotionSpectrum 7s ease-in-out infinite!important
+}
+.ac-theme-choice[data-motion-theme="orbit-motion"] .ac-theme-preview{
+  background-size:170% 170%,190% 190%,cover!important;
+  animation:acMotionOrbit 9s ease-in-out infinite alternate!important
+}
+@keyframes acMotionAurora{
+  0%{background-position:0% 35%,100% 25%,20% 50%}
+  50%{background-position:58% 62%,42% 58%,70% 45%}
+  100%{background-position:100% 28%,5% 72%,35% 58%}
+}
+@keyframes acMotionGrid{
+  0%{background-position:0 0,0 0,10% 50%,0 0}
+  100%{background-position:28px 28px,28px 28px,90% 50%,0 0}
+}
+@keyframes acMotionGridSmall{
+  0%{background-position:0 0,0 0,10% 50%,0 0}
+  100%{background-position:20px 20px,20px 20px,90% 50%,0 0}
+}
+@keyframes acMotionTidal{
+  0%{background-position:0% 100%,100% 0%,50% 50%}
+  50%{background-position:45% 65%,55% 35%,50% 50%}
+  100%{background-position:100% 85%,0% 18%,50% 50%}
+}
+@keyframes acMotionSpectrum{
+  0%{background-position:0% 50%}
+  50%{background-position:100% 50%}
+  100%{background-position:0% 50%}
+}
+@keyframes acMotionOrbit{
+  0%{background-position:35% 45%,5% 15%,50% 50%}
+  50%{background-position:65% 55%,95% 65%,50% 50%}
+  100%{background-position:45% 30%,20% 90%,50% 50%}
+}
+@media(prefers-reduced-motion:reduce){
+  [data-motion-theme],
+  .ac-theme-choice[data-motion-theme] .ac-theme-preview{animation:none!important}
+}
+@media(max-width:760px){
+  body[data-sidebar-page="account"] .ac-hero-style-control{right:18px!important;top:15px!important}
+  body[data-sidebar-page="account"] .ac-hero-style-toggle{font-size:9px!important}
+  .ac-theme-popover .ac-theme-section[data-theme-kind="color"] .ac-theme-grid,
+  .ac-theme-popover .ac-theme-section[data-theme-kind="image"] .ac-theme-grid,
+  .ac-theme-popover .ac-theme-section[data-theme-kind="motion"] .ac-theme-grid{
+    grid-template-columns:repeat(3,minmax(0,1fr))!important
+  }
+}
+
+body[data-sidebar-page="account"] .ac-avatar-change-broker-logo{
+  width:17px!important;height:17px!important;object-fit:contain!important;border-radius:0!important;vertical-align:middle!important
+}

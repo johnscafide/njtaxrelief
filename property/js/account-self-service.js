@@ -38,7 +38,9 @@
     if (!wrap) return;
     var tools = document.createElement('div');
     tools.className = 'ac-avatar-tools';
-    tools.innerHTML = '<input id="ac-avatar-file" type="file" accept="image/jpeg,image/png,image/webp" hidden><button type="button" id="ac-avatar-change"><i class="fas fa-camera"></i> Change photo</button><button type="button" class="ghost" id="ac-avatar-remove"><i class="fas fa-trash"></i> Remove</button><small id="ac-avatar-note" aria-live="polite"></small>';
+    var brokerMark = hero.querySelector('.ac-avatar-broker-logo');
+    var changeIcon = brokerMark ? '<img class="ac-avatar-change-broker-logo" src="' + esc(brokerMark.src) + '" alt="">' : '<i class="fas fa-camera"></i>';
+    tools.innerHTML = '<input id="ac-avatar-file" type="file" accept="image/jpeg,image/png,image/webp" hidden><button type="button" id="ac-avatar-change">' + changeIcon + ' Change photo</button><button type="button" class="ghost" id="ac-avatar-remove"><i class="fas fa-trash"></i> Remove</button><small id="ac-avatar-note" aria-live="polite"></small>';
     wrap.insertAdjacentElement('afterend', tools);
     var edit = document.getElementById('ac-avatar-edit');
     var change = document.getElementById('ac-avatar-change');

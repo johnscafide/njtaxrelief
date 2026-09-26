@@ -14,7 +14,7 @@ must(account.includes('function formatOfficialLicenseName'),'Official NJ license
 must(account.includes('professional.license.licensee_name'),'Verified licensee name is not used by the hero.');
 must(account.includes('professional.license.verified_professional'),'Verified professional guard missing.');
 must(account.includes("titleNamePart(String(given[0] || '').charAt(0))"),'Middle name is not normalized to an initial.');
-must(account.includes("professionalBadgeMarkup() + brokerageMarkup()"),'Brokerage is not inline with the hero verification identity.');
+must(account.includes('brokerageBrand()')&&account.includes('has-broker-brand'),'Brokerage branding is not attached to the profile avatar.');
 must(account.includes('REALTOR®')&&account.includes('Licensed Agent'),'Professional badge hierarchy missing.');
 must(account.indexOf('REALTOR®')<account.indexOf('Licensed Agent'),'REALTOR® badge must supersede the licensed-agent badge.');
 
@@ -26,14 +26,14 @@ must(!self.includes('Provider connections are private to this Watchdog account')
 
 must(css.includes('.ac-sync-header'),'Sync Accounts image header styling missing.');
 must(css.includes('photo-1497366811353-6870744d04b2'),'Sync Accounts curated workspace image missing.');
-must(css.includes('.ac-hero-broker'),'Inline brokerage styling missing.');
+must(css.includes('.ac-avatar-wrap.has-broker-brand'),'Brokerage avatar styling missing.');
 must(css.includes('.ac-page-top .top-eyebrow'),'Account header eyebrow cleanup missing.');
 must(refresh.includes("['SPAN','P','SMALL']"),'Runtime header filler cleanup missing.');
 
-must(page.includes('account.js?v=20260925b'),'Account identity JS cache version missing.');
+must(page.includes('account.js?v=20260925c'),'Account identity JS cache version missing.');
 must(page.includes('account-profile.js?v=20260925a'),'Profile chooser JS cache version missing.');
-must(page.includes('account-self-service.js?v=20260925a'),'Sync Accounts JS cache version missing.');
-must(page.includes('account-refresh-20260925.css?v=20260925g'),'Account polish CSS cache version missing.');
-must(page.includes('account-refresh-20260925.js?v=20260925f'),'Account runtime cache version missing.');
+must(page.includes('account-self-service.js?v=20260925b'),'Sync Accounts JS cache version missing.');
+must(page.includes('account-refresh-20260925.css?v=20260925h'),'Account polish CSS cache version missing.');
+must(page.includes('account-refresh-20260925.js?v=20260925g'),'Account runtime cache version missing.');
 
 console.log('NJW-428 account identity and Sync Accounts contract passed');

@@ -20,10 +20,10 @@ expect(account.includes('professionalBadgeMarkup'),'Account professional badge r
 expect(account.includes('REALTOR®')&&account.includes('Licensed Agent'),'Professional badge labels missing');
 expect(account.indexOf('REALTOR®')<account.indexOf('Licensed Agent'),'REALTOR badge must supersede Licensed Agent');
 expect(account.includes("client.rpc('my_realtor_verification_v1')"),'Account does not load REALTOR verification');
-expect(account.includes('ac-hero-broker'),'Brokerage hero chip missing');
-expect(refresh.includes('.ac-pro-badge.realtor')&&refresh.includes('.ac-hero-broker'),'Professional hero styling missing');
-expect(accountPage.includes('account.js?v=20260925b'),'Account JS cache key missing');
-expect(accountPage.includes('account-refresh-20260925.css?v=20260925g'),'Account CSS cache key missing');
+expect(account.includes('has-broker-brand')&&account.includes('ac-avatar-broker-logo'),'Brokerage avatar identity missing');
+expect(refresh.includes('.ac-pro-badge.social-verify')&&refresh.includes('.ac-avatar-wrap.has-broker-brand'),'Professional hero styling missing');
+expect(accountPage.includes('account.js?v=20260925c'),'Account JS cache key missing');
+expect(accountPage.includes('account-refresh-20260925.css?v=20260925h'),'Account CSS cache key missing');
 expect(professionalPage.includes('realtor-verification.css?v=20260925a'),'REALTOR CSS not loaded');
 expect(professionalPage.includes('realtor-verification.js?v=20260925a'),'REALTOR JS not loaded');
 expect(realtor.includes("db.rpc('submit_my_realtor_verification_v1'"),'REALTOR submit RPC missing');
