@@ -9,7 +9,7 @@ const css=read('property/css/account-refresh-20260925.css');
 const page=read('property/account/index.html');
 
 must(account.includes('function brokerageBrand()'),'Brokerage avatar brand resolver missing.');
-must(account.includes('ac-avatar-broker-logo'),'Brokerage logo is not used on the profile-photo edit control.');
+must(account.includes('ac-avatar-broker-logo'),'Brokerage logo is not used on the profile-photo edit control.');\nmust(read('property/js/account-self-service.js').includes('ac-avatar-change-broker-logo'),'Brokerage logo is not reused on the Change photo action.');
 must(account.includes('has-broker-brand'),'Brokerage-branded avatar state missing.');
 must(!account.includes('function brokerageMarkup()'),'Obsolete brokerage hero pill renderer still exists.');
 must(!account.includes('PROFILE &amp; SETTINGS'),'Profile & Settings eyebrow still exists in hero markup.');
