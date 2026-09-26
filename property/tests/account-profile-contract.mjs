@@ -10,12 +10,12 @@ const migration=read('supabase/migrations/20260819191500_account_profile_prefere
 
 must(page.includes('/property/js/account-profile.js'),'Account must load the living profile controller.');
 must(page.includes('/property/css/account-profile.css'),'Account must load the living profile visual layer.');
-must(!page.match(/account-profile\.(js|css)\?v=/),'Profile assets must not use version query suffixes.');
+must(page.includes('account-profile.js?v=20260926a')&&page.includes('account-profile.css?v=20260926a'),'Profile asset cache versions missing.');
 must(controller.includes("from('watchdog_onboarding_profiles')"),'Account profile must read the governed onboarding/profile record.');
 must(controller.includes("update_my_watchdog_profile_v1"),'Account profile edits must use the governed update RPC.');
 must(controller.includes('contact_email'),'Contact email must be editable in Account.');
 must(controller.includes('professional_priorities'),'Professional Intelligence priorities must be editable.');
-must(controller.includes('household_income_band'),'Private household context must remain user-editable.');
+must(controller.includes('household_income_band')&&controller.includes('household_composition')&&controller.includes('residence_tenure_band')&&controller.includes('primary_residence'),'Expanded private household context must remain user-editable.');
 must(controller.includes('Marketing permission is always separate') || controller.includes('marketing consent'),'Contact email copy must keep marketing consent separate.');
 must(css.includes('.acp-editor'),'Living profile must have a dedicated visual layer.');
 
