@@ -1012,3 +1012,7 @@ body[data-sidebar-page="account"] .ac-style-chevron{display:none!important}
     grid-template-columns:repeat(3,minmax(0,1fr))!important
   }
 }
+
+body[data-sidebar-page="account"] .ac-avatar-change-broker-logo{
+  width:17px!important;height:17px!important;object-fit:contain!important;border-radius:0!important;vertical-align:middle!important
+}
