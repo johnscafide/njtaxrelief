@@ -1,6 +1,6 @@
 /* ==========================================================================
    watchdog-dashboard-hero-2027.css
-   Dashboard hero: greeting, the one thing to act on, and the Watchdog Score.
+   Dashboard hero: a quiet greeting, portfolio alert, and the Watchdog Score.
 
    Markup comes from paintStanding() in js/dashboard/wd-render.js (left side)
    and buildGauge() in js/dashboard/wd-dashboard-spike-layout.js (score panel).
@@ -41,32 +41,10 @@ body[data-sidebar-page="dashboard"]{
 
 body[data-sidebar-page="dashboard"] .wdd-h27{
   container:wdd-hero / inline-size;
-  position:relative;
-  isolation:isolate;
-  overflow:hidden;
   margin-top:4px;
-  padding:clamp(16px,2.2cqi,26px);
-  border:1px solid rgba(202,215,234,.72);
-  border-radius:var(--sp-r-card);
-  background:var(--sp-surface);
-  box-shadow:var(--sp-shadow);
   display:grid;
   grid-template-columns:minmax(0,1fr);
   gap:18px;
-}
-/* faint parcel grid in the top-left corner, fading out toward the copy */
-body[data-sidebar-page="dashboard"] .wdd-h27::before{
-  content:"";
-  position:absolute;
-  inset:0 40% 25% 0;
-  z-index:-1;
-  pointer-events:none;
-  background-image:
-    linear-gradient(var(--sp-line-soft) 1px,transparent 1px),
-    linear-gradient(90deg,var(--sp-line-soft) 1px,transparent 1px);
-  background-size:28px 28px;
-  -webkit-mask-image:radial-gradient(120% 100% at 0 0,#000 0,transparent 70%);
-  mask-image:radial-gradient(120% 100% at 0 0,#000 0,transparent 70%);
 }
 /* The hero lays out by the width of its own section, not the window, so it
    behaves the same beside a sidebar, in a split screen, or full width. */
@@ -84,7 +62,7 @@ body[data-sidebar-page="dashboard"] .wdd-standing{container:wdd-standing / inlin
 body[data-sidebar-page="dashboard"] .wdd-h27-main{
   display:grid;
   align-content:center;
-  gap:16px;
+  gap:14px;
   min-width:0;
 }
 body[data-sidebar-page="dashboard"] .wdd-h27-who{
@@ -137,65 +115,44 @@ body[data-sidebar-page="dashboard"] .wdd-h27 h1{
   overflow-wrap:anywhere;
 }
 
-body[data-sidebar-page="dashboard"] .wdd-h27-insight{
-  margin:0;
-  max-width:46ch;
-  font:600 clamp(16px,2cqi,20px)/1.45 var(--wdd-display,"Plus Jakarta Sans",system-ui,sans-serif);
-  letter-spacing:-.01em;
-  color:var(--sp-ink);
-  text-wrap:pretty;
-}
-body[data-sidebar-page="dashboard"] .wdd-h27-amt{color:var(--sp-bad-ink);white-space:nowrap}
-body[data-sidebar-page="dashboard"] .wdd-h27-flag{
-  display:inline-flex;
-  align-items:center;
-  gap:7px;
-  margin-right:3px;
-  padding:2px 11px 2px 9px;
-  border-radius:var(--sp-r-pill);
-  font:700 .8em/1.55 var(--wdd-body,Inter,system-ui,sans-serif);
-  vertical-align:.08em;
-  white-space:nowrap;
-  background:var(--sp-tint-bad);
-  color:var(--sp-bad-ink);
-}
-body[data-sidebar-page="dashboard"] .wdd-h27-flag::before{
-  content:"";
-  width:7px;
-  height:7px;
-  border-radius:50%;
-  background:currentColor;
-  box-shadow:0 0 0 3px color-mix(in oklab,currentColor 22%,transparent);
-}
-body[data-sidebar-page="dashboard"] .wdd-h27[data-state="clear"] .wdd-h27-flag{background:var(--sp-tint-ok);color:var(--sp-ok-ink)}
-body[data-sidebar-page="dashboard"] .wdd-h27[data-state="watch"] .wdd-h27-flag,
-body[data-sidebar-page="dashboard"] .wdd-h27[data-state="empty"] .wdd-h27-flag{background:var(--sp-tint-primary);color:var(--sp-primary)}
-
-body[data-sidebar-page="dashboard"] .wdd-h27-actions{display:flex;flex-wrap:wrap;gap:10px;align-items:center}
-body[data-sidebar-page="dashboard"] .wdd-h27-btn{
+body[data-sidebar-page="dashboard"] .wdd-h27-alert{
   display:inline-flex;
   align-items:center;
   justify-content:center;
-  gap:9px;
+  position:relative;
+  width:44px;
   min-height:44px;
-  padding:0 18px;
-  border:1px solid transparent;
-  border-radius:12px;
-  font:700 14px/1 var(--wdd-body,Inter,system-ui,sans-serif);
-  text-decoration:none;
+  padding:0;
+  border:1px solid var(--sp-line);
+  border-radius:50%;
+  background:transparent;
+  color:var(--sp-bad-ink);
+  font:600 16px/1 var(--wdd-body,Inter,system-ui,sans-serif);
   cursor:pointer;
-  transition:transform .15s ease,background-color .15s ease,box-shadow .15s ease;
+  transition:color .15s ease,border-color .15s ease,background-color .15s ease;
 }
-body[data-sidebar-page="dashboard"] .wdd-h27-btn i{font-size:13px}
-body[data-sidebar-page="dashboard"] .wdd-h27-btn.is-primary{
-  background:var(--sp-primary);
-  color:#fff;
-  box-shadow:0 8px 18px -10px color-mix(in oklab,var(--sp-primary) 85%,transparent);
+body[data-sidebar-page="dashboard"] .wdd-h27-alert:hover{
+  border-color:color-mix(in oklab,var(--sp-bad-ink) 38%,var(--sp-line));
+  background:var(--sp-tint-bad);
 }
-body[data-sidebar-page="dashboard"] .wdd-h27-btn.is-primary:hover{background:var(--sp-primary-lift);transform:translateY(-1px)}
-body[data-sidebar-page="dashboard"] .wdd-h27-btn.is-ghost{background:var(--sp-surface);color:var(--sp-ink);border-color:var(--sp-line)}
-body[data-sidebar-page="dashboard"] .wdd-h27-btn.is-ghost:hover{background:var(--sp-surface-2)}
-body[data-sidebar-page="dashboard"] .wdd-h27-btn:focus-visible{outline:2px solid var(--sp-primary);outline-offset:3px}
+body[data-sidebar-page="dashboard"] .wdd-h27-alert:focus-visible{outline:2px solid var(--sp-primary);outline-offset:3px}
+body[data-sidebar-page="dashboard"] .wdd-h27-alert i{font-size:15px}
+body[data-sidebar-page="dashboard"] .wdd-h27-alert span{
+  position:absolute;
+  top:-3px;
+  right:-5px;
+  min-width:20px;
+  height:20px;
+  padding:0 4px;
+  border:1px solid var(--sp-surface);
+  border-radius:var(--sp-r-pill);
+  display:grid;
+  place-items:center;
+  background:var(--sp-tint-bad);
+  color:var(--sp-bad-ink);
+  font:800 12px/1 var(--wdd-body,Inter,system-ui,sans-serif);
+  font-variant-numeric:tabular-nums;
+}
 
 body[data-sidebar-page="dashboard"] .wdd-h27-since{
   list-style:none;
@@ -415,7 +372,6 @@ body[data-sidebar-page="dashboard"] .wdd-h27-pop p+p{margin-top:6px}
 @container wdd-hero (max-width:459px){
   body[data-sidebar-page="dashboard"] .wdd-h27-avatar{--size:52px;font-size:18px}
   body[data-sidebar-page="dashboard"] .wdd-h27 h1{font-size:24px}
-  body[data-sidebar-page="dashboard"] .wdd-h27-actions{display:grid;grid-template-columns:minmax(0,1fr)}
   body[data-sidebar-page="dashboard"] .wdd-h27-score{grid-template-columns:104px minmax(0,1fr);padding:14px 16px 16px;gap:10px 14px}
   body[data-sidebar-page="dashboard"] .wdd-h27-ring{width:104px}
   body[data-sidebar-page="dashboard"] .wdd-h27-num b{font-size:34px}
@@ -425,7 +381,8 @@ body[data-sidebar-page="dashboard"] .wdd-h27-pop p+p{margin-top:6px}
 @media (prefers-reduced-motion:reduce){
   body[data-sidebar-page="dashboard"] .wdd-h27-arc,
   body[data-sidebar-page="dashboard"] .wdd-h27-num b,
-  body[data-sidebar-page="dashboard"] .wdd-h27-btn,
+  body[data-sidebar-page="dashboard"] .wdd-h27-alert,
   body[data-sidebar-page="dashboard"] .wdd-h27-since li,
   body[data-sidebar-page="dashboard"] .wdd-h27-pop{transition:none}
 }
+

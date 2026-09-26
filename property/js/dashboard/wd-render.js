@@ -52,26 +52,11 @@ function start(){
     var measured=WD.filtered().some(function(p){return WD.gapFor(p)!=null;});
     return measured?'clear':'watch';
   }
-  function heroInsight(st,state){
-    var noun=function(n){return n===1?'property':'properties';};
-    if(state==='empty')return'<span class="wdd-h27-flag">Get started</span> Add a New Jersey property and Watchdog starts checking its assessment against the market evidence.';
-    if(state==='watch')return'<span class="wdd-h27-flag">Monitoring</span> Your '+st.count+' saved '+noun(st.count)+' '+(st.count===1?'is':'are')+' being watched for meaningful changes.';
-    if(state==='clear')return'<span class="wdd-h27-flag">All clear</span> '+(st.count===1?'Your saved property sits':'All '+st.count+' saved properties sit')+' at or under the market evidence.';
-    return'<span class="wdd-h27-flag">'+st.over+' of '+st.count+' '+noun(st.count)+'</span> '+(st.over===1?'is':'are')+' assessed above the market evidence'+
-      (st.atStake>=1?', with about <span class="wdd-h27-amt">'+esc(H.dollars(st.atStake))+' a year</span> at stake.':'.');
-  }
-  function heroActions(st,state){
-    var arrow='<i class="fas fa-arrow-right" aria-hidden="true"></i>';
-    if(state==='empty')return'<button class="wdd-h27-btn is-primary" type="button" data-act="focus-search">Add your first property'+arrow+'</button>';
-    if(state==='review'){
-      var top=cases()[0],pin=top&&top.p&&top.p.pams_pin,direct=WD.isPro()&&pin;
-      var href=direct?'/property/report?pin='+encodeURIComponent(pin):'#wdd-queue';
-      var label=direct?(st.over===1?'Review the property':'Review the top property'):(st.over===1?'See the flagged property':'See flagged properties');
-      return'<a class="wdd-h27-btn is-primary" href="'+esc(href)+'">'+label+arrow+'</a>'+
-        '<a class="wdd-h27-btn is-ghost" href="#wdd-positions"><i class="fas fa-table-cells-large" aria-hidden="true"></i>Open portfolio</a>';
-    }
-    return'<a class="wdd-h27-btn is-primary" href="#wdd-positions">Open portfolio'+arrow+'</a>'+
-      '<a class="wdd-h27-btn is-ghost" href="#wdd-activity"><i class="fas fa-wave-square" aria-hidden="true"></i>Recent changes</a>';
+  function heroOverMarketAlert(st){
+    if(!st.over)return'';
+    var noun=st.over===1?'property is':'properties are';
+    var description=st.over+' '+noun+' assessed at least 5% above market evidence';
+    return'<button class="wdd-h27-alert" type="button" data-act="show-overmarket-evidence" title="'+esc(description)+'" aria-label="'+esc(description+'. Show assessed versus market evidence')+'"><i class="fas fa-bell" aria-hidden="true"></i><span>'+st.over.toLocaleString()+'</span></button>';
   }
   function heroSince(st){
     if(!st.count)return'';
@@ -100,8 +85,7 @@ function start(){
           '<div class="wdd-h27-who">'+art+'<div class="wdd-h27-who-text">'+
             '<div class="wdd-h27-eyebrow"><b>'+esc(dateLabel())+'</b><span>'+(st.count?st.count.toLocaleString()+' '+(st.count===1?'property':'properties')+' watched':'No properties yet')+'</span></div>'+
             '<h1>'+greet+', '+esc(WD.userName())+'</h1></div></div>'+
-          '<p class="wdd-h27-insight">'+heroInsight(st,state)+'</p>'+
-          '<div class="wdd-h27-actions">'+heroActions(st,state)+'</div>'+
+          heroOverMarketAlert(st)+
           heroSince(st)+
         '</div>'+
         '<div class="wdd-h27-slot" id="wdd-hero-score"></div>'+
@@ -269,7 +253,7 @@ function start(){
     H.el('wdd-rail').innerHTML=
       '<section class="wdd-panel wdd-portfolio-map-card"><div class="wdd-panel-head"><div><h2>Your Portfolio</h2></div><a class="wdd-panel-link" href="#" data-tab-link="map">View map →</a></div><div class="wdd-map-wrap"><div id="wdd-rail-map"></div><span class="wdd-map-stat"><i class="fas fa-location-dot"></i>'+st.count+' properties</span></div></section>'+
       '<section class="wdd-panel" id="wdd-activity"><div class="wdd-panel-head"><div><h2>Recent Changes</h2><p>'+(st.changes30?st.changes30+' in the last 30 days':'Last 120 days')+'</p></div><a class="wdd-panel-link" href="/property/pulse">View all →</a></div>'+feed+'</section>'+
-      '<section class="wdd-panel wdd-analysis-card"><div class="wdd-panel-head"><div><h2>Portfolio Analysis</h2></div></div><div class="wdd-analysis-tabs" role="tablist" aria-label="Portfolio analysis views"><button class="wdd-analysis-tab" id="wdd-analysis-tab-assessed" role="tab" aria-controls="wdd-analysis-assessed" aria-selected="'+(analysisTab==='assessed')+'" data-analysis-tab="assessed" type="button">Assessed vs Market</button><button class="wdd-analysis-tab" id="wdd-analysis-tab-tax" role="tab" aria-controls="wdd-analysis-tax" aria-selected="'+(analysisTab==='tax')+'" data-analysis-tab="tax" type="button">Tax Distribution</button></div><div class="wdd-analysis-panel" id="wdd-analysis-assessed" role="tabpanel" aria-labelledby="wdd-analysis-tab-assessed"'+(analysisTab==='assessed'?'':' hidden')+'>'+railHistogram()+'<div class="wdd-analysis-copy">'+analysisCopy()+'</div></div><div class="wdd-analysis-panel" id="wdd-analysis-tax" role="tabpanel" aria-labelledby="wdd-analysis-tab-tax"'+(analysisTab==='tax'?'':' hidden')+'>'+taxDistribution()+'</div></section>';
+      '<section class="wdd-panel wdd-analysis-card" id="wdd-analysis-card"><div class="wdd-panel-head"><div><h2 id="wdd-analysis-heading" tabindex="-1">Portfolio Analysis</h2></div></div><div class="wdd-analysis-tabs" role="tablist" aria-label="Portfolio analysis views"><button class="wdd-analysis-tab" id="wdd-analysis-tab-assessed" role="tab" aria-controls="wdd-analysis-assessed" aria-selected="'+(analysisTab==='assessed')+'" data-analysis-tab="assessed" type="button">Assessed vs Market</button><button class="wdd-analysis-tab" id="wdd-analysis-tab-tax" role="tab" aria-controls="wdd-analysis-tax" aria-selected="'+(analysisTab==='tax')+'" data-analysis-tab="tax" type="button">Tax Distribution</button></div><div class="wdd-analysis-panel" id="wdd-analysis-assessed" role="tabpanel" aria-labelledby="wdd-analysis-tab-assessed"'+(analysisTab==='assessed'?'':' hidden')+'>'+railHistogram()+'<div class="wdd-analysis-copy">'+analysisCopy()+'</div></div><div class="wdd-analysis-panel" id="wdd-analysis-tax" role="tabpanel" aria-labelledby="wdd-analysis-tab-tax"'+(analysisTab==='tax'?'':' hidden')+'>'+taxDistribution()+'</div></section>';
     drawRailMap();
   }
 
@@ -339,6 +323,7 @@ function start(){
   function onClick(ev){
     if(!ev.target||!ev.target.closest)return;
     var gapBin=ev.target.closest('[data-gap-bin]');if(gapBin){selectedGapBin=Number(gapBin.getAttribute('data-gap-bin'));var gapDetail=H.el('wdd-gap-detail');if(gapDetail)gapDetail.textContent=gapBin.getAttribute('data-gap-detail')||'';Array.prototype.forEach.call(d.querySelectorAll('[data-gap-bin]'),function(button){var selected=Number(button.getAttribute('data-gap-bin'))===selectedGapBin;button.classList.toggle('is-selected',selected);button.setAttribute('aria-pressed',selected?'true':'false');});return;}
+    var alert=ev.target.closest('[data-act="show-overmarket-evidence"]');if(alert){analysisTab='assessed';var assessedTab=H.el('wdd-analysis-tab-assessed');Array.prototype.forEach.call(d.querySelectorAll('[data-analysis-tab]'),function(button){button.setAttribute('aria-selected',button===assessedTab?'true':'false');});Array.prototype.forEach.call(d.querySelectorAll('.wdd-analysis-panel'),function(panel){panel.hidden=panel.id!=='wdd-analysis-assessed';});var heading=H.el('wdd-analysis-heading'),card=H.el('wdd-analysis-card'),behavior=w.matchMedia&&!w.matchMedia('(prefers-reduced-motion: reduce)').matches?'smooth':'auto';if(heading)heading.focus({preventScroll:true});if(card)card.scrollIntoView({behavior:behavior,block:'start'});return;}
     var analysisButton=ev.target.closest('[data-analysis-tab]');if(analysisButton){analysisTab=analysisButton.getAttribute('data-analysis-tab')==='tax'?'tax':'assessed';var tabs=d.querySelectorAll('[data-analysis-tab]');Array.prototype.forEach.call(tabs,function(button){button.setAttribute('aria-selected',button===analysisButton?'true':'false');});var panels=d.querySelectorAll('.wdd-analysis-panel');Array.prototype.forEach.call(panels,function(panel){panel.hidden=panel.id!==(analysisTab==='tax'?'wdd-analysis-tax':'wdd-analysis-assessed');});return;}
     var mapLink=ev.target.closest('[data-tab-link="map"]');if(mapLink){ev.preventDefault();S.tab='map';paintPositions();var p=H.el('wdd-positions');if(p)p.scrollIntoView({behavior:'smooth',block:'start'});return;}
     var sortBtn=ev.target.closest('[data-sort]');if(sortBtn){var k=sortBtn.getAttribute('data-sort');if(S.sort.key===k)S.sort.dir=S.sort.dir==='asc'?'desc':'asc';else{S.sort.key=k;S.sort.dir=k==='address'?'asc':'desc';}paintPositions();return;}
@@ -382,3 +367,4 @@ function start(){
 }
 if(w.WD&&w.WD.S&&w.WD.S.user)start();else d.addEventListener('wd:ready',start,{once:true});
 })(window,document);
+
