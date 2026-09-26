@@ -33,8 +33,8 @@ must(!page.includes('class="wdd-sidebar"') && !page.includes('class="wdd-mobile-
 must(!spikeLayout.includes('buildSidebar();'), 'Promoted Spike runtime must not create a second dashboard navigation sidebar.');
 must(!shellCss.includes('#wd-main-sheet') && !shellCss.includes('#wd-public-backdrop'), 'Promoted Spike shell must not retain styling for the removed secondary menu.');
 must(page.indexOf('id="wdd-queue"') < page.indexOf('class="wdd-work"'), 'Action Queue must sit above the portfolio workspace.');
-must(render.includes('Good morning') && render.includes('wdd-command'), 'Dashboard header must render greeting and command search.');
-must(render.includes('Watchdog Score') && render.includes('Worth Reviewing'), 'KPI row must include approved top-level metrics.');
+must(render.includes("var phrases=['Be informed'") && render.includes('wdd-command'), 'Dashboard header must render the rotating professional greeting and command search.');
+must(spikeLayout.includes('Watchdog Score') && render.includes('Worth Reviewing') && !render.includes("k:'Watchdog Score'"), 'The single right-side score panel and Worth Reviewing metric must remain; the KPI row must not duplicate the score.');
 must(render.includes('wdd-sponsor-signal') && render.includes('Greentree Mortgage') && render.includes('Advertisement'), 'Sixth KPI slot must be the labeled Greentree Mortgage advertisement.');
 must(!render.includes('<div class="wdd-account">') && render.includes('wdd-command-voice'), 'Dashboard command row must remove duplicate account/notification chrome and include voice search.');
 must(page.includes('/property/js/nj-address-autocomplete.js'), 'Dashboard must load the shared New Jersey address autocomplete runtime.');
@@ -50,9 +50,9 @@ must(render.includes('Your Portfolio') && render.includes('Recent Changes') && r
 must(render.includes('wdd-case-review') && render.includes('slice(0,3)'), 'Action Queue must render compact top review cards.');
 must(render.includes('wdd-rail-map') && render.includes('L.circleMarker'), 'Right rail must render the live portfolio map.');
 must(core.includes("from('profiles').select('display_name,full_name,photo_url,avatar_url').eq('id', S.user.id).maybeSingle()") && core.includes('userPhoto: function'), 'Dashboard must load the signed-in user photo from their profile with auth metadata fallbacks.');
-must(render.includes('wdd-h27-avatar') && render.includes('safePhotoUrl') && render.includes('esc(initials())') && render.includes("addEventListener('error'"), 'Greeting must safely show the uploaded profile photo or an initials fallback.');
+must(render.includes("var phrases=['Be informed'") && !render.includes('wdd-h27-avatar') && !render.includes('SAT, SEP'), 'Dashboard greeting must use the daily professional phrase without a redundant profile photo or date.');
 must(page.includes('watchdog-dashboard-hero-2027.css') && page.indexOf('watchdog-dashboard-hero-2027.css') > page.indexOf('watchdog-dashboard-spike-promoted.css'), 'Dashboard must load the hero stylesheet after the promoted Spike styles.');
-must(core.includes('function verdict(score)') && core.includes('verdict: verdict') && render.includes('return WD.verdict(score)') && spikeLayout.includes('WD.verdict(score)'), 'KPI card and hero score panel must share one Watchdog Score verdict.');
+must(core.includes('function verdict(score)') && core.includes('verdict: verdict') && spikeLayout.includes("if (WD && typeof WD.verdict === 'function') return WD.verdict(score);"), 'The single Watchdog Score panel must use the shared score verdict.');
 must(render.includes('APPEAL_ALT_COUNTIES') && render.includes("'BURLINGTON','GLOUCESTER','MONMOUTH'") && !/days (left|remaining)/i.test(render), 'Hero appeal note must follow appeal-deadline-rules.json: county-aware baseline, no countdown.');
 must(render.includes('data-analysis-tab="assessed"') && render.includes('data-analysis-tab="tax"') && render.includes('function taxDistribution()') && !render.includes('Tax Distribution</button>\' disabled'), 'Both portfolio analysis tabs must be enabled and show distinct data.');
 must(!render.includes('wdd-rail-sticky') && shellCss.includes('.wdd-work>.wdd-rail') && shellCss.includes('position:sticky') && shellCss.includes('max-height:calc(100vh - 32px)') && shellCss.includes('overflow-y:auto') && shellCss.includes('position:static'), 'The outer right rail must own sticky positioning and scrolling, then return to page flow on smaller screens.');
