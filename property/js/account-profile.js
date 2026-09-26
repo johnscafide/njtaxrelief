@@ -75,7 +75,7 @@
     host.className = 'ac-section acp-editor acp-profile-hub';
     host.id = 'ac-profile-editor';
     host.innerHTML =
-      '<header class="acp-header acp-header-clean"><div><h2>Choose the profile you want to edit</h2></div><div class="acp-source"><i class="fas fa-user-shield"></i><span>Separated by role</span></div></header>' +
+      '<header class="acp-header acp-header-clean"><div><h2>Choose the profile you want to edit</h2></div></header>' +
       '<div class="acp-profile-route-grid">' +
         '<a class="acp-profile-route-card personal" href="/account/profile"><span class="acp-route-icon compact"><i class="fa-regular fa-user"></i></span><div><small>PERSONAL</small><h3>Homeowner profile</h3><p>Contact details, home area, property goals, preferences and optional household context.</p><b>Edit homeowner profile <i class="fas fa-arrow-right"></i></b></div></a>' +
         '<a class="acp-profile-route-card professional" href="/account/professional-profile"><span class="acp-route-icon compact"><i class="fa-regular fa-address-card"></i></span><div><small>' + (isAgent ? 'AGENT' : 'PROFESSIONAL') + '</small><h3>' + (isAgent ? 'Agent profile' : 'Professional profile') + '</h3><p>' + (professional ? esc(professionLabel(profession)) + '. Manage professional workflow context' + (isAgent ? ', brokerage identity, license and Agent portal settings.' : ' and Watchdog Intelligence preferences.') : 'Set up a professional role only if you use Watchdog for your work.') + '</p><b>' + (professional ? 'Edit professional profile' : 'Set up professional profile') + ' <i class="fas fa-arrow-right"></i></b></div></a>' +
