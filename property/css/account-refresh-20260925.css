@@ -840,7 +840,7 @@ body[data-sidebar-page="account"] .ac-hero-copy>span{display:none!important}
 body[data-sidebar-page="account"] .ac-hero-broker{display:none!important}
 body[data-sidebar-page="account"] .ac-avatar-wrap{position:relative!important}
 body[data-sidebar-page="account"] .ac-avatar-wrap.has-broker-brand .ac-avatar{
-  border:3px solid transparent!important;
+  border:5px solid transparent!important;
   background:
     linear-gradient(#fff,#fff) padding-box,
     linear-gradient(135deg,var(--broker-primary,#0b8b85),var(--broker-secondary,#f15a24)) border-box!important;
@@ -923,7 +923,7 @@ body[data-sidebar-page="account"] .ac-style-chevron{display:none!important}
 }
 .ac-theme-live-verified[hidden]{display:none!important}
 .ac-theme-live-avatar.has-broker-brand{
-  border:2px solid transparent!important;
+  border:4px solid transparent!important;
   background:
     linear-gradient(rgba(255,255,255,.10),rgba(255,255,255,.10)) padding-box,
     linear-gradient(135deg,var(--broker-primary,#0b8b85),var(--broker-secondary,#f15a24)) border-box!important;
@@ -1015,4 +1015,217 @@ body[data-sidebar-page="account"] .ac-style-chevron{display:none!important}
 
 body[data-sidebar-page="account"] .ac-avatar-change-broker-logo{
   width:17px!important;height:17px!important;object-fit:contain!important;border-radius:0!important;vertical-align:middle!important
+}
+
+
+/* NJW-430 · larger Customize canvas + reliable tab/grid layout */
+.ac-theme-popover{
+  width:min(1180px,calc(100vw - 56px))!important;
+  max-width:1180px!important;
+  max-height:calc(100vh - 32px)!important;
+  overflow-x:hidden!important;
+  overflow-y:auto!important;
+  scrollbar-gutter:stable!important;
+  padding:24px 28px 22px!important;
+  border-radius:26px!important;
+}
+.ac-theme-popover>header{
+  position:relative!important;
+  z-index:8!important;
+  align-items:center!important;
+  margin:0 0 16px!important;
+  padding:0 0 16px!important;
+  background:#fff!important;
+}
+.ac-theme-popover>header h3{
+  margin:0!important;
+  font-size:30px!important;
+  line-height:1.08!important;
+}
+.ac-theme-popover>header>button{
+  width:46px!important;
+  height:46px!important;
+  flex-basis:46px!important;
+}
+.ac-theme-live{
+  margin:0 0 16px!important;
+}
+.ac-theme-live-head{
+  margin-bottom:9px!important;
+}
+.ac-theme-live-head b{font-size:13px!important}
+.ac-theme-live-head span{font-size:11px!important}
+.ac-theme-live-banner{
+  min-height:132px!important;
+  padding:18px 20px!important;
+  border-radius:14px!important;
+}
+.ac-theme-live-avatar{
+  width:58px!important;
+  height:58px!important;
+}
+.ac-theme-live-copy strong{font-size:21px!important}
+.ac-theme-live-copy small{font-size:10px!important}
+.ac-theme-live-badge{
+  padding:7px 10px!important;
+  font-size:9px!important;
+}
+
+/* Tabs must always sit above the chooser grid and remain readable. */
+.ac-theme-popover nav.ac-theme-tabs{
+  position:relative!important;
+  z-index:8!important;
+  display:flex!important;
+  align-items:center!important;
+  gap:6px!important;
+  margin:0 0 16px!important;
+  padding:0!important;
+  min-height:42px!important;
+  border-bottom:1px solid #e5ebf0!important;
+  background:#fff!important;
+}
+.ac-theme-popover nav.ac-theme-tabs button{
+  min-height:42px!important;
+  padding:0 13px!important;
+  font-size:12px!important;
+}
+.ac-theme-popover nav.ac-theme-tabs button em{
+  min-width:22px!important;
+  height:20px!important;
+  font-size:9px!important;
+}
+
+/* Only the active category renders. This intentionally overrides older compact rules. */
+.ac-theme-popover .ac-theme-groups{
+  display:block!important;
+  min-height:200px!important;
+  overflow:visible!important;
+}
+.ac-theme-popover .ac-theme-section{
+  margin:0!important;
+  padding:0!important;
+}
+.ac-theme-popover .ac-theme-section[hidden]{
+  display:none!important;
+}
+.ac-theme-popover .ac-theme-section:not([hidden]){
+  display:block!important;
+}
+.ac-theme-popover .ac-theme-section[data-theme-kind="color"] .ac-theme-grid,
+.ac-theme-popover .ac-theme-section[data-theme-kind="image"] .ac-theme-grid,
+.ac-theme-popover .ac-theme-section[data-theme-kind="motion"] .ac-theme-grid{
+  display:grid!important;
+  grid-template-columns:repeat(5,minmax(0,1fr))!important;
+  gap:14px!important;
+}
+.ac-theme-popover .ac-theme-choice{
+  gap:7px!important;
+  padding:0 0 4px!important;
+}
+.ac-theme-popover .ac-theme-choice .ac-theme-preview{
+  aspect-ratio:1.55/1!important;
+  border-radius:10px!important;
+}
+.ac-theme-popover .ac-theme-choice.image .ac-theme-preview,
+.ac-theme-popover .ac-theme-choice.motion .ac-theme-preview{
+  aspect-ratio:1.45/1!important;
+}
+.ac-theme-popover .ac-theme-choice .ac-theme-name{
+  display:block!important;
+  padding:0 2px!important;
+  font-size:10px!important;
+  line-height:1.2!important;
+  color:#40566e!important;
+  white-space:nowrap!important;
+  overflow:hidden!important;
+  text-overflow:ellipsis!important;
+}
+.ac-theme-popover .ac-theme-choice>i{
+  right:7px!important;
+  top:7px!important;
+  width:23px!important;
+  height:23px!important;
+  font-size:9px!important;
+}
+
+/* Keep actions available without stealing usable chooser space. */
+.ac-theme-popover>footer.ac-theme-actions{
+  position:sticky!important;
+  bottom:-22px!important;
+  z-index:10!important;
+  grid-template-columns:auto minmax(0,1fr) auto!important;
+  margin:20px -2px 0!important;
+  padding:14px 2px 2px!important;
+  background:linear-gradient(180deg,rgba(255,255,255,.94),#fff 24%)!important;
+  box-shadow:0 -12px 22px rgba(255,255,255,.98)!important;
+}
+.ac-theme-popover>footer.ac-theme-actions button{
+  min-height:40px!important;
+  padding:0 16px!important;
+}
+.ac-theme-popover>footer.ac-theme-actions>span{
+  font-size:9px!important;
+}
+
+/* Brokerage colors should read clearly even before hover. */
+body[data-sidebar-page="account"] .ac-avatar-wrap.has-broker-brand .ac-avatar{
+  border-width:5px!important;
+}
+body[data-sidebar-page="account"] .ac-avatar-wrap.has-broker-brand:hover .ac-avatar{
+  box-shadow:
+    0 10px 28px rgba(6,24,45,.25),
+    0 0 0 2px rgba(255,255,255,.12),
+    0 0 24px var(--broker-primary,#0b8b85),
+    0 0 38px var(--broker-secondary,#f15a24)!important;
+}
+.ac-theme-live-avatar.has-broker-brand{
+  border-width:4px!important;
+}
+
+@media(max-width:1020px){
+  .ac-theme-popover{
+    width:min(920px,calc(100vw - 32px))!important;
+    padding:22px!important;
+  }
+  .ac-theme-popover .ac-theme-section[data-theme-kind="color"] .ac-theme-grid,
+  .ac-theme-popover .ac-theme-section[data-theme-kind="image"] .ac-theme-grid,
+  .ac-theme-popover .ac-theme-section[data-theme-kind="motion"] .ac-theme-grid{
+    grid-template-columns:repeat(4,minmax(0,1fr))!important;
+    gap:11px!important;
+  }
+}
+@media(max-width:760px){
+  .ac-theme-popover{
+    width:calc(100vw - 18px)!important;
+    max-height:calc(100vh - 18px)!important;
+    padding:16px!important;
+    border-radius:20px!important;
+  }
+  .ac-theme-popover>header h3{font-size:24px!important}
+  .ac-theme-live-head span{display:none!important}
+  .ac-theme-live-banner{
+    min-height:96px!important;
+    padding:12px!important;
+  }
+  .ac-theme-live-avatar{width:44px!important;height:44px!important}
+  .ac-theme-live-copy strong{font-size:17px!important}
+  .ac-theme-live-badge{display:none!important}
+  .ac-theme-popover nav.ac-theme-tabs{
+    overflow-x:auto!important;
+    scrollbar-width:none!important;
+  }
+  .ac-theme-popover nav.ac-theme-tabs::-webkit-scrollbar{display:none}
+  .ac-theme-popover nav.ac-theme-tabs button{flex:0 0 auto!important}
+  .ac-theme-popover .ac-theme-groups{min-height:230px!important}
+  .ac-theme-popover .ac-theme-section[data-theme-kind="color"] .ac-theme-grid,
+  .ac-theme-popover .ac-theme-section[data-theme-kind="image"] .ac-theme-grid,
+  .ac-theme-popover .ac-theme-section[data-theme-kind="motion"] .ac-theme-grid{
+    grid-template-columns:repeat(2,minmax(0,1fr))!important;
+    gap:10px!important;
+  }
+  .ac-theme-popover>footer.ac-theme-actions{
+    grid-template-columns:auto 1fr!important;
+    bottom:-16px!important;
+  }
+  .ac-theme-popover>footer.ac-theme-actions>span{display:none!important}
 }

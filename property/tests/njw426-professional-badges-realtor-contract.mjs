@@ -23,7 +23,7 @@ expect(account.includes("client.rpc('my_realtor_verification_v1')"),'Account doe
 expect(account.includes('has-broker-brand')&&account.includes('ac-avatar-broker-logo'),'Brokerage avatar identity missing');
 expect(refresh.includes('.ac-pro-badge.social-verify')&&refresh.includes('.ac-avatar-wrap.has-broker-brand'),'Professional hero styling missing');
 expect(accountPage.includes('account.js?v=20260925c'),'Account JS cache key missing');
-expect(accountPage.includes('account-refresh-20260925.css?v=20260925h'),'Account CSS cache key missing');
+expect(accountPage.includes('account-refresh-20260925.css?v=20260925i'),'Account CSS cache key missing');
 expect(professionalPage.includes('realtor-verification.css?v=20260925a'),'REALTOR CSS not loaded');
 expect(professionalPage.includes('realtor-verification.js?v=20260925a'),'REALTOR JS not loaded');
 expect(realtor.includes("db.rpc('submit_my_realtor_verification_v1'"),'REALTOR submit RPC missing');

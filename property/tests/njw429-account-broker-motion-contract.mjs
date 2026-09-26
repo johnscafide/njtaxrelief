@@ -45,7 +45,7 @@ must(css.includes('@media(prefers-reduced-motion:reduce)'),'Reduced-motion fallb
 must(css.includes('.ac-theme-section[hidden]{display:none!important}'),'Theme tabs do not reliably hide inactive categories.');
 
 must(page.includes('account.js?v=20260925c'),'Account hero JS cache version missing.');
-must(page.includes('account-refresh-20260925.css?v=20260925h'),'Account motion CSS cache version missing.');
+must(page.includes('account-refresh-20260925.css?v=20260925i'),'Account motion CSS cache version missing.');
 must(page.includes('account-refresh-20260925.js?v=20260925g'),'Account customizer JS cache version missing.');
 
 console.log('NJW-429 brokerage avatar and motion background contract passed');
