@@ -20,7 +20,7 @@
     'farm-map':['/farm-map','/property/farm-map/','Farm map','farm'],
     'farm-builder':['/farm-builder','/property/farm-builder/','Farm by filters','farm'],
     'market-list':['/market-list','/property/market-list/','Farm list','farm'],
-    'mailers':['/marketing-studio','/property/marketing-studio/','Mailers & postcards','marketing'],
+    'mailers':['/marketing-studio/postcards','/property/marketing-studio/postcards/','Mailers & postcards','marketing'],
     'broadcasts':['/newsletter-studio','/property/newsletter-studio/','Email updates','marketing'],
     'report-studio':['/report-studio','/property/report-studio/','Farm reports','marketing'],
     'report-builder':['/report-builder','/property/report-builder/','Client reports','marketing'],

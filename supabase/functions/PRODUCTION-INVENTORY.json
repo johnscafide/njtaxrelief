@@ -112,16 +112,16 @@
       "tracking": "source_snapshot"
     },
     "marketing-campaign-checkout": {
-      "version": 26,
-      "sha256": "1bf1fab7cd0bbdbd241c6718cd6b144eb866bb7527dfdcd2a42a33c8dba3976f",
+      "version": 28,
+      "sha256": "1f2161b51d8044cd01340cc1851466bc4373a82cd89c06a744f3d77678649316",
       "verify_jwt": true,
       "tracking": "source_snapshot"
     },
     "marketing-direct-mail-fulfill": {
-      "version": 21,
-      "sha256": "eda5919c2c4ba2598b5b73a1f0928c5f9a443e4bf2edeaebe55413d87995371e",
+      "version": 22,
+      "sha256": "d66b392a7c0991b913ceb6b532c46d5eceba9eafec65d9ac36c28b642934e640",
       "verify_jwt": true,
-      "tracking": "fingerprint_only"
+      "tracking": "source_snapshot"
     },
     "marketing-direct-mail-launch": {
       "version": 23,
@@ -184,10 +184,10 @@
       "tracking": "source_snapshot"
     },
     "pcm-webhook": {
-      "version": 20,
-      "sha256": "3e3e6a177d676d6b03528a73d48ba105b9e0f01785df9437377742bbe0c25362",
+      "version": 21,
+      "sha256": "8eccfaefdfdd1cc24336d0eaaba3443b3911b3c28189743ee0442a81b270ceac",
       "verify_jwt": false,
-      "tracking": "fingerprint_only"
+      "tracking": "source_snapshot"
     },
     "product-analytics": {
       "version": 30,
@@ -517,6 +517,12 @@
       "version": 5,
       "sha256": "d233fe1ca629e40ede3a6bffc2bb6406b416632212c61d7c36ab70c6c1cabe07",
       "verify_jwt": false,
+      "tracking": "source_snapshot"
+    },
+    "pcm-postcard-studio": {
+      "version": 1,
+      "sha256": "644a4b3146b4a272f118f1964ea2e7f2be221e8437b0f26b03d1af9bf36a6383",
+      "verify_jwt": true,
       "tracking": "source_snapshot"
     }
   }

@@ -1,4 +1,5 @@
 import { createClient } from 'npm:@supabase/supabase-js@2.95.0';
+import { childRef, pcmConfigured, pcmRequest } from '../_shared/pcm-v3.ts';
 
 const SUPABASE_URL = Deno.env.get('SUPABASE_URL')!;
 const SERVICE_ROLE = Deno.env.get('SUPABASE_SERVICE_ROLE_KEY')!;
@@ -57,58 +58,56 @@ function normalizedProvidedSignature(raw: string) {
   return raw.trim().replace(/^sha256=/i, '');
 }
 
+// PCM v3 webhook security (PCM docs + support email): headers pcmi-timestamp and
+// pcmi-signature; signature = HMAC-SHA256 of "{pcmi-timestamp}.{raw body}" keyed
+// with the subscription's Signature Secret from the PCM portal. The docs do not
+// name the encoding, so hex and base64 are both accepted unless a format is pinned.
+const SIGNATURE_FORMATS = ['hmac-sha256-hex', 'hmac-sha256-base64'];
+
 function contract() {
+  const format = clean(Deno.env.get('PCM_WEBHOOK_SIGNATURE_FORMAT') || '', 60).toLowerCase();
   return {
     secret: Deno.env.get('PCM_WEBHOOK_SIGNATURE_SECRET') || '',
-    header: clean(Deno.env.get('PCM_WEBHOOK_SIGNATURE_HEADER') || '', 100).toLowerCase(),
-    format: clean(Deno.env.get('PCM_WEBHOOK_SIGNATURE_FORMAT') || '', 60).toLowerCase(),
+    header: clean(Deno.env.get('PCM_WEBHOOK_SIGNATURE_HEADER') || 'pcmi-signature', 100).toLowerCase(),
+    timestampHeader: 'pcmi-timestamp',
+    formats: SIGNATURE_FORMATS.includes(format) ? [format] : SIGNATURE_FORMATS,
   };
+}
+
+// PCM sends PascalCase keys ({Event, Data:{Status, BatchID}}); older docs used
+// camelCase. Read keys case-insensitively so both shapes resolve.
+function get(obj: any, key: string) {
+  if (!obj || typeof obj !== 'object') return undefined;
+  if (key in obj) return obj[key];
+  const lower = key.toLowerCase();
+  const found = Object.keys(obj).find((k) => k.toLowerCase() === lower);
+  return found === undefined ? undefined : obj[found];
+}
+
+function dataOf(payload: any) {
+  const data = get(payload, 'data');
+  return data && typeof data === 'object' ? data : payload;
 }
 
 function first(obj: any, keys: string[]) {
   for (const key of keys) {
-    const value = obj?.[key];
+    const value = get(obj, key);
     if (value !== undefined && value !== null && clean(value, 300)) return clean(value, 300);
   }
   return '';
 }
 
 function eventType(payload: any) {
-  return clean(
-    payload?.eventType ??
-      payload?.event_type ??
-      payload?.webhookType ??
-      payload?.webhook_type ??
-      payload?.type ??
-      payload?.event ??
-      payload?.name ??
-      'pcm.webhook',
-    160,
-  );
+  return first(payload, ['event', 'eventType', 'event_type', 'webhookType', 'webhook_type', 'type', 'name']) || 'pcm.webhook';
 }
 
 function providerStatus(payload: any) {
-  const source = payload?.data && typeof payload.data === 'object' ? payload.data : payload;
-  return clean(
-    source?.status ??
-      source?.mailTrackingStatus ??
-      source?.mail_tracking_status ??
-      source?.trackingStatus ??
-      source?.tracking_status ??
-      payload?.status,
-    120,
-  );
+  return first(dataOf(payload), ['status', 'mailTrackingStatus', 'mail_tracking_status', 'trackingStatus', 'tracking_status']) ||
+    first(payload, ['status']);
 }
 
 function providerEventKey(payload: any, rawHash: string) {
-  const providerId = clean(
-    payload?.eventId ??
-      payload?.event_id ??
-      payload?.webhookId ??
-      payload?.webhook_id ??
-      payload?.id,
-    100,
-  );
+  const providerId = first(payload, ['eventId', 'event_id', 'webhookId', 'webhook_id', 'id']).slice(0, 100);
   // PCM can resend the same order/recipient webhook as tracking status changes.
   // Include the exact raw-body hash so a true replay is idempotent while a new
   // status payload is still processed even if PCM reuses an event identifier.
@@ -116,12 +115,12 @@ function providerEventKey(payload: any, rawHash: string) {
 }
 
 function ids(payload: any) {
-  const source = payload?.data && typeof payload.data === 'object' ? payload.data : payload;
+  const source = dataOf(payload);
   return {
     order: first(source, ['orderID', 'orderId', 'order_id', 'order']),
     batch: first(source, ['batchID', 'batchId', 'batch_id', 'batch']),
     external: first(source, ['extRefNbr', 'externalReference', 'external_reference', 'externalRef', 'reference']),
-    recipient: first(source, ['recipientID', 'recipientId', 'recipient_id', 'recipientExtRefNbr', 'recipient_ext_ref_nbr', 'recipientReference', 'recipient_reference']),
+    recipient: first(source, ['recipientRecordID', 'recipientID', 'recipientId', 'recipient_id', 'recipientExtRefNbr', 'recipient_ext_ref_nbr', 'recipientReference', 'recipient_reference']),
   };
 }
 
@@ -134,11 +133,15 @@ function recipientEventKind(type: string) {
 }
 
 function mappedOrderStatus(payload: any, type: string) {
-  const raw = [type, providerStatus(payload), payload?.event, payload?.type]
+  const raw = [type, providerStatus(payload)]
     .map((value) => clean(value, 120).toLowerCase())
     .join(' ');
 
   if (/cancel/.test(raw)) return 'canceled';
+  // Pending/Failed Payment are billing holds on the PCM account, not a failed
+  // print job. PCM auto-cancels unpaid batches later (BatchCanceled).
+  if (/payment/.test(raw)) return 'pending';
+  if (/undeliverable/.test(raw)) return 'failed';
   if (/fail|error|reject/.test(raw)) return 'failed';
   if (/\bpending\b/.test(raw)) return 'pending';
   if (/\bprocessing\b|\bprocess\b|print|production/.test(raw)) return 'processing';
@@ -156,22 +159,56 @@ function recipientMarketingEvent(kind: string) {
   return 'direct_mail.recipient_event';
 }
 
+// PCM does not print or bill invalid/undeliverable addresses. Once a batch is past
+// address validation, count them and credit the agent what they paid for those
+// cards. Credits are issued as a delta per batch, so repeats never double-credit.
+async function creditUndeliverable(admin: any, job: any) {
+  const batch = clean(job.response_summary?.batch_id, 60);
+  if (!batch || job.response_summary?.api_version !== 'v3' || !pcmConfigured('live')) return null;
+  const child = childRef(job.user_id);
+  let undeliverable = 0;
+  for (let page = 1, pages = 1; page <= pages && page <= 60; page += 1) {
+    const { data } = await pcmRequest('live', child, 'GET', `/batch/${encodeURIComponent(batch)}/recipients?page=${page}&perPage=100`);
+    const rows = Array.isArray(data?.results) ? data.results : [];
+    undeliverable += rows.filter((r: any) => r?.undeliverable === true).length;
+    pages = Math.max(1, Number(data?.totalPages || data?.pagination?.totalPages || 1));
+  }
+  if (!undeliverable) return { undeliverable: 0, credited: 0 };
+  const prior = await admin.from('marketing_mail_credits').select('quantity').eq('provider_job_id', job.id);
+  const already = (prior.data || []).reduce((sum: number, row: any) => sum + Number(row.quantity || 0), 0);
+  const delta = undeliverable - already;
+  if (delta <= 0) return { undeliverable, credited: 0 };
+  const quote = job.quote_id
+    ? (await admin.from('marketing_price_quotes').select('pricing_detail').eq('id', job.quote_id).maybeSingle()).data
+    : null;
+  const unit = Math.max(0, Math.trunc(Number(quote?.pricing_detail?.retail_unit_cents || 0)));
+  if (!unit) return { undeliverable, credited: 0 };
+  const issued = await admin.rpc('marketing_mail_credit_issue', {
+    p_user_id: job.user_id,
+    p_campaign_id: job.campaign_id,
+    p_provider_job_id: job.id,
+    p_source_reference: `pcm:batch:${batch}:undeliverable:${undeliverable}`,
+    p_quantity: delta,
+    p_amount_cents: delta * unit,
+    p_reason: 'undeliverable_address',
+  });
+  if (issued.error) throw issued.error;
+  return { undeliverable, credited: delta * unit };
+}
+
 Deno.serve(async (req) => {
   if (req.method === 'GET') {
     const current = contract();
     return json(200, {
       provider: 'pcm',
       receiver: 'ready',
-      signature_contract_ready: Boolean(
-        current.secret &&
-          current.header &&
-          ['hmac-sha256-hex', 'hmac-sha256-base64'].includes(current.format),
-      ),
-      signature_header_configured: Boolean(current.header),
-      signature_format: current.format || null,
+      signature_contract_ready: Boolean(current.secret),
+      signature_header: current.header,
+      timestamp_header: current.timestampHeader,
+      signature_formats: current.formats,
       processing_mode: 'verified_inbox_with_recipient_safe_reconciliation',
       vendor_contract: {
-        aggregate_order_statuses: ['pending', 'processing', 'mailing', 'delivered'],
+        aggregate_order_statuses: ['pending', 'pending payment', 'failed payment', 'processing', 'mailing', 'delivered', 'undeliverable', 'batch canceled'],
         recipient_tracking_statuses: ['returned', 'delivered', 'redirected', 'en route'],
         retry_schedule_minutes: [1, 5, 10],
         exact_payload_duplicates_acknowledged: true,
@@ -183,11 +220,7 @@ Deno.serve(async (req) => {
   if (req.method !== 'POST') return json(405, { error: 'Method not allowed' });
 
   const current = contract();
-  if (
-    !current.secret ||
-    !current.header ||
-    !['hmac-sha256-hex', 'hmac-sha256-base64'].includes(current.format)
-  ) {
+  if (!current.secret) {
     return json(503, {
       error: 'PCM webhook signature contract is not configured yet',
       code: 'PCM_WEBHOOK_SIGNATURE_CONTRACT_PENDING',
@@ -205,10 +238,21 @@ Deno.serve(async (req) => {
   const raw = await req.text();
   if (!raw) return json(400, { error: 'Empty webhook body' });
 
-  const mac = await hmacSha256(current.secret, raw);
-  const expected = current.format === 'hmac-sha256-base64' ? bytesToBase64(mac) : bytesToHex(mac);
+  const timestamp = (req.headers.get(current.timestampHeader) || '').trim();
   const provided = normalizedProvidedSignature(providedRaw);
-  if (!constantTimeEqual(expected, provided)) {
+  // Documented form is "{timestamp}.{body}". The body-only form is accepted as a
+  // fallback in case PCM omits the timestamp header; both need the shared secret.
+  const signedInputs = timestamp ? [`${timestamp}.${raw}`, raw] : [raw];
+  let verified = false;
+  for (const input of signedInputs) {
+    const mac = await hmacSha256(current.secret, input);
+    for (const format of current.formats) {
+      const expected = format === 'hmac-sha256-base64' ? bytesToBase64(mac) : bytesToHex(mac);
+      const candidate = format === 'hmac-sha256-hex' ? provided.toLowerCase() : provided;
+      if (constantTimeEqual(expected, candidate)) verified = true;
+    }
+  }
+  if (!verified) {
     return json(401, {
       error: 'Invalid PCM webhook signature',
       code: 'PCM_WEBHOOK_SIGNATURE_INVALID',
@@ -281,7 +325,7 @@ Deno.serve(async (req) => {
   if (providerIds.order || providerIds.batch) {
     const jobs = await admin
       .from('marketing_provider_jobs')
-      .select('id,user_id,campaign_id,provider_job_id,status,response_summary')
+      .select('id,user_id,campaign_id,quote_id,provider_job_id,status,response_summary')
       .eq('provider_key', 'pcm')
       .order('created_at', { ascending: false })
       .limit(250);
@@ -373,6 +417,17 @@ Deno.serve(async (req) => {
     if (final) update.completed_at = now;
 
     await admin.from('marketing_provider_jobs').update(update).eq('id', matched.id);
+
+    if (['processing', 'mailed', 'delivered', 'failed'].includes(aggregateStatus)) {
+      try {
+        const credit = await creditUndeliverable(admin, { ...matched, response_summary: update.response_summary });
+        if (credit) update.response_summary.undeliverable_reconciliation = { ...credit, checked_at: now };
+        if (credit) await admin.from('marketing_provider_jobs').update({ response_summary: update.response_summary }).eq('id', matched.id);
+      } catch (error) {
+        // Never make PCM retry a status webhook because the credit lookup failed.
+        console.error('PCM_UNDELIVERABLE_CREDIT_ERROR', error instanceof Error ? error.message : error);
+      }
+    }
 
     const campaignStatus = aggregateStatus === 'failed'
       ? 'launch_failed'
