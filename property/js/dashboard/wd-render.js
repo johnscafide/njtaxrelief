@@ -71,17 +71,13 @@ function start(){
   }
 
   /* -------------------------------------------------------------- cards -- */
+  // Background art: shield (score), house (changes), magnifier (status), map pin (value).
   var DECO={
-    clover:'<svg class="wdd-deco wdd-deco--clover" viewBox="0 0 100 100" aria-hidden="true" focusable="false"><circle cx="50" cy="27" r="23"/><circle cx="73" cy="50" r="23"/><circle cx="50" cy="73" r="23"/><circle cx="27" cy="50" r="23"/><rect x="27" y="27" width="46" height="46"/></svg>',
-    paw:'<svg class="wdd-deco wdd-deco--paw" viewBox="0 0 100 100" aria-hidden="true" focusable="false"><ellipse cx="50" cy="66" rx="24" ry="20"/><ellipse cx="22" cy="42" rx="10" ry="13" transform="rotate(-18 22 42)"/><ellipse cx="40" cy="24" rx="10" ry="13" transform="rotate(-6 40 24)"/><ellipse cx="61" cy="24" rx="10" ry="13" transform="rotate(6 61 24)"/><ellipse cx="79" cy="42" rx="10" ry="13" transform="rotate(18 79 42)"/></svg>',
-    funnel:'<svg class="wdd-deco wdd-deco--funnel" viewBox="0 0 100 90" aria-hidden="true" focusable="false"><path d="M10 10H90L50 84Z" stroke-linejoin="round" stroke-width="12"/></svg>',
-    burst:''
+    shield:'<svg class="wdd-deco wdd-deco--shield" viewBox="0 0 100 116" aria-hidden="true" focusable="false"><path d="M50 2 94 18v34c0 30-19 52-44 62C25 104 6 82 6 52V18Z" stroke="none"/><path d="m30 58 14 14 28-30" fill="none" stroke-width="7" stroke-linecap="round" stroke-linejoin="round"/></svg>',
+    house:'<svg class="wdd-deco wdd-deco--house" viewBox="0 0 100 92" aria-hidden="true" focusable="false"><path d="M50 4 96 42h-12v46H62V62H38v26H16V42H4Z"/></svg>',
+    magnifier:'<svg class="wdd-deco wdd-deco--magnifier" viewBox="0 0 100 100" aria-hidden="true" focusable="false"><circle cx="42" cy="42" r="28" stroke-width="14"/><path d="m64 64 26 26" stroke-width="16" stroke-linecap="round"/></svg>',
+    pin:'<svg class="wdd-deco wdd-deco--pin" viewBox="0 0 80 100" aria-hidden="true" focusable="false"><path d="M40 2C19 2 4 17 4 37c0 26 36 61 36 61s36-35 36-61C76 17 61 2 40 2Z"/><circle cx="40" cy="37" r="13"/></svg>'
   };
-  (function(){
-    var pts=[],n=9,cx=50,cy=50;
-    for(var i=0;i<n*2;i++){var r=i%2?26:48,a=Math.PI*i/n-Math.PI/2;pts.push((cx+r*Math.cos(a)).toFixed(1)+','+(cy+r*Math.sin(a)).toFixed(1));}
-    DECO.burst='<svg class="wdd-deco wdd-deco--burst" viewBox="0 0 100 100" aria-hidden="true" focusable="false"><polygon points="'+pts.join(' ')+'" stroke-linejoin="round" stroke-width="6"/></svg>';
-  })();
 
   function stat(value,unit,caption,lead){
     return '<div class="wdd-stat'+(lead?' is-lead':'')+'"><b>'+value+(unit?'<small>'+unit+'</small>':'')+'</b><span>'+caption+'</span></div>';
@@ -96,7 +92,7 @@ function start(){
       return '<button type="button" class="wdd-bar'+(sc==null?' is-empty':'')+(sel?' is-selected':'')+'" data-select-pin="'+esc(pin)+'" aria-label="'+esc(label)+'" title="'+esc(label)+'" aria-pressed="'+(sel?'true':'false')+'"><i style="height:'+(sc==null?34:Math.max(6,Math.min(100,sc)))+'%"></i></button>';
     }).join('')+(peer!=null&&shown.length?'<span class="wdd-peer-line" style="bottom:'+Math.max(4,Math.min(96,peer))+'%" aria-hidden="true"><span>Town median '+peer+'</span></span>':'')+'</div>';
     var verdict=WD.verdict(avg);
-    return '<article class="wdd-card wdd-card--score">'+DECO.clover+
+    return '<article class="wdd-card wdd-card--score">'+DECO.shield+
       '<div class="wdd-card-head"><h2>Watchdog Score:</h2><a class="wdd-card-info" href="'+esc(route('/data-methodology'))+'#robust" aria-label="How the Watchdog Score works" title="The Watchdog Score, powered by the ROBUST Framework."><i class="fas fa-info" aria-hidden="true"></i></a></div>'+
       '<div class="wdd-stats">'+
         stat(avg==null?'—':String(avg),avg==null?'':'/100','Your average',true)+
@@ -148,7 +144,7 @@ function start(){
       // Keep the peak's date visible even when it falls between the axis ticks.
       var slot=Math.round(peak/4);axis[Math.max(0,Math.min(4,slot))]='<b>'+esc(shortDate(weeks[peak].from+DAY))+'</b>';
     }
-    return '<article class="wdd-card wdd-card--changes">'+DECO.paw+
+    return '<article class="wdd-card wdd-card--changes">'+DECO.house+
       '<div class="wdd-card-head"><h2>Changes:</h2><a class="wdd-card-link" href="'+esc(route('/pulse'))+'">Show all <i class="fas fa-arrow-right" aria-hidden="true"></i></a></div>'+
       '<div class="wdd-stats">'+
         stat(String(st.changes30),'','Last 30 days',true)+
@@ -161,7 +157,7 @@ function start(){
   }
   function statusCard(props){
     var c=counts(props);
-    return '<article class="wdd-card wdd-card--status">'+DECO.funnel+
+    return '<article class="wdd-card wdd-card--status">'+DECO.magnifier+
       '<div class="wdd-card-head"><h2>By status:</h2></div>'+
       '<div class="wdd-stats">'+stat(String(c.good),'','Looks fair',true)+stat(String(c.watch),'','Watch')+stat(String(c.review),'','Review')+'</div>'+
       (c.none?'<p class="wdd-card-note">'+c.none+' '+plural(c.none,'property is','properties are')+' not rated yet.</p>':'')+
@@ -169,7 +165,7 @@ function start(){
   }
   function valueCard(){
     var st=WD.stats();
-    return '<article class="wdd-card wdd-card--value">'+DECO.burst+
+    return '<article class="wdd-card wdd-card--value">'+DECO.pin+
       '<div class="wdd-card-head"><h2>Portfolio value:</h2></div>'+
       '<div class="wdd-stats">'+
         stat(st.value?esc(H.money(st.value)):'—','','Market est.',true)+
