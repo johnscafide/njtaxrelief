@@ -12,6 +12,9 @@ import json
 import math
 from datetime import datetime
 from pathlib import Path
+import sys
+sys.path.insert(0, str(Path(__file__).resolve().parent))
+from nj_district_codes import pams_from_state, pams_from_state_or_none  # state code -> PIN district code
 from zoneinfo import ZoneInfo
 
 import numpy as np
@@ -54,7 +57,8 @@ def municipality_rows(path: Path):
     codes = pd.to_numeric(frame["MuniCode"], errors="coerce")
     frame = frame[codes.notna()].copy()
     frame["district"] = codes[codes.notna()].astype(int).astype(str).str.zfill(4)
-    frame = frame[~frame["district"].str.endswith("00")]
+    frame = frame[~frame["district"].str.endswith("00")].copy()
+    frame["district"] = frame["district"].map(pams_from_state)
     return frame.set_index("district", drop=False)
 
 
@@ -107,7 +111,7 @@ def read_ufb(path: Path):
         values["structural_imbalance"] = structural
         values["structural_imbalance_share"] = structural / current if current else None
         values["collection_weakness"] = max(0, 1 - values["collection_rate"]) if values["collection_rate"] is not None else None
-        out[district] = values
+        out[pams_from_state(district)] = values
     return out
 
 

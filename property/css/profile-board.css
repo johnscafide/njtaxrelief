@@ -53,6 +53,14 @@ html body[data-account-profile-mode] #ac-app .acp-source span{white-space:nowrap
 html body[data-account-profile-mode] #ac-app :is(.acp-panel,.acr-panel)>p,html body[data-account-profile-mode] #ac-app .acp-panel .acp-field p{color:var(--ab-muted)!important;font-size:14px!important;line-height:1.55!important}
 html body[data-account-profile-mode] #ac-app .acp-panel a{color:var(--ab-blue)!important;font-weight:700}
 
+/* Agent portal address: one bordered field with the fixed prefix inside it */
+html body[data-account-profile-mode] #ac-app .ac-vanity-grid label{display:block;margin-bottom:6px;color:var(--ab-ink)!important;font:600 13px/1.3 var(--ab-display)!important}
+html body[data-account-profile-mode] #ac-app .ac-vanity-field{display:flex!important;align-items:center;min-height:46px;overflow:hidden;border:1px solid var(--ab-line)!important;border-radius:12px!important;background:#fff!important;box-shadow:none!important}
+html body[data-account-profile-mode] #ac-app .ac-vanity-field:focus-within{outline:3px solid rgba(47,109,246,.35);outline-offset:1px;border-color:var(--ab-blue-bright)!important}
+html body[data-account-profile-mode] #ac-app .ac-vanity-field span{flex:none;padding-left:14px;color:var(--ab-muted);font:500 15px var(--ab-display)}
+html body[data-account-profile-mode] #ac-app .ac-vanity-field input:not([type=checkbox]):not([type=radio]):not([type=color]){flex:1;min-width:0;min-height:44px;padding-left:2px!important;border:0!important;border-radius:0!important;background:transparent!important}
+html body[data-account-profile-mode] #ac-app .ac-vanity-field input:focus-visible{outline:0!important}
+
 /* Choice chips: the hidden checkbox must not take layout width */
 html body[data-account-profile-mode] #ac-app .acp-chips label{position:relative}
 html body[data-account-profile-mode] #ac-app .acp-chips input{position:absolute!important;inset:0!important;width:1px!important;height:1px!important;margin:0!important;opacity:0!important}
@@ -92,6 +100,11 @@ html body[data-account-profile-mode] #ac-app .api-link input{width:100%;font-siz
 html body[data-account-profile-mode] #ac-app .api-actions{display:flex;flex-wrap:wrap;gap:10px}
 html body[data-account-profile-mode] #ac-app .api-note{color:var(--ab-muted);font-size:12px;line-height:1.45}
 
+@media (max-width:768px){
+  html body[data-account-profile-mode] #ac-app .ac-vanity-field{flex-direction:column;align-items:stretch}
+  html body[data-account-profile-mode] #ac-app .ac-vanity-field span{padding:11px 14px 0;font-size:14px}
+  html body[data-account-profile-mode] #ac-app .ac-vanity-field input:not([type=checkbox]):not([type=radio]):not([type=color]){min-height:38px;padding:2px 14px 10px!important}
+}
 @media (max-width:860px){
   html body[data-account-profile-mode] #ac-app .api-invite{grid-template-columns:minmax(0,1fr);gap:18px}
   html body[data-account-profile-mode] #ac-app .api-copy{padding-bottom:0}

@@ -4961,23 +4961,6 @@
     },
     "1209": {
       "district": "1209",
-      "name": "Old Bridge Township",
-      "county": "Middlesex",
-      "reporting_status": "reported",
-      "identity_methods": [
-        "dca_muni_code",
-        "taxation_muni_code"
-      ],
-      "project_records": 23,
-      "affordable_units_total": 208,
-      "affordable_units_rental": 174,
-      "affordable_units_for_sale": 17,
-      "low_income_households": 2,
-      "moderate_income_households": 34,
-      "affordable_trust_fund_balance": 2129726.47
-    },
-    "1210": {
-      "district": "1210",
       "name": "Metuchen Borough",
       "county": "Middlesex",
       "reporting_status": "reported",
@@ -4993,8 +4976,8 @@
       "moderate_income_households": 0,
       "affordable_trust_fund_balance": 860338.05
     },
-    "1211": {
-      "district": "1211",
+    "1210": {
+      "district": "1210",
       "name": "Middlesex Borough",
       "county": "Middlesex",
       "reporting_status": "reported",
@@ -5010,8 +4993,8 @@
       "moderate_income_households": 0,
       "affordable_trust_fund_balance": 0
     },
-    "1212": {
-      "district": "1212",
+    "1211": {
+      "district": "1211",
       "name": "Milltown Borough",
       "county": "Middlesex",
       "reporting_status": "reported",
@@ -5027,8 +5010,8 @@
       "moderate_income_households": 235,
       "affordable_trust_fund_balance": 0
     },
-    "1213": {
-      "district": "1213",
+    "1212": {
+      "district": "1212",
       "name": "Monroe Township",
       "county": "Middlesex",
       "reporting_status": "reported",
@@ -5044,8 +5027,8 @@
       "moderate_income_households": 154,
       "affordable_trust_fund_balance": 12440421.65
     },
-    "1214": {
-      "district": "1214",
+    "1213": {
+      "district": "1213",
       "name": "New Brunswick City",
       "county": "Middlesex",
       "reporting_status": "reported",
@@ -5061,8 +5044,8 @@
       "moderate_income_households": 298,
       "affordable_trust_fund_balance": 0
     },
-    "1215": {
-      "district": "1215",
+    "1214": {
+      "district": "1214",
       "name": "North Brunswick Township",
       "county": "Middlesex",
       "reporting_status": "reported",
@@ -5077,6 +5060,23 @@
       "low_income_households": 12,
       "moderate_income_households": 84,
       "affordable_trust_fund_balance": 1385571.75
+    },
+    "1215": {
+      "district": "1215",
+      "name": "Old Bridge Township",
+      "county": "Middlesex",
+      "reporting_status": "reported",
+      "identity_methods": [
+        "dca_muni_code",
+        "taxation_muni_code"
+      ],
+      "project_records": 23,
+      "affordable_units_total": 208,
+      "affordable_units_rental": 174,
+      "affordable_units_for_sale": 17,
+      "low_income_households": 2,
+      "moderate_income_households": 34,
+      "affordable_trust_fund_balance": 2129726.47
     },
     "1216": {
       "district": "1216",
@@ -5238,469 +5238,6 @@
     },
     "1301": {
       "district": "1301",
-      "name": "Allenhurst Borough",
-      "county": "Monmouth",
-      "reporting_status": "reported",
-      "identity_methods": [
-        "dca_muni_code",
-        "taxation_muni_code"
-      ],
-      "project_records": 17,
-      "affordable_units_total": 266,
-      "affordable_units_rental": 241,
-      "affordable_units_for_sale": 14,
-      "low_income_households": 52,
-      "moderate_income_households": 125,
-      "affordable_trust_fund_balance": 4823
-    },
-    "1302": {
-      "district": "1302",
-      "name": "Allentown Borough",
-      "county": "Monmouth",
-      "reporting_status": "reported",
-      "identity_methods": [
-        "dca_muni_code",
-        "taxation_muni_code"
-      ],
-      "project_records": 3,
-      "affordable_units_total": 3,
-      "affordable_units_rental": 2,
-      "affordable_units_for_sale": 0,
-      "low_income_households": 0,
-      "moderate_income_households": 0,
-      "affordable_trust_fund_balance": 0
-    },
-    "1303": {
-      "district": "1303",
-      "name": "Asbury Park City",
-      "county": "Monmouth",
-      "reporting_status": "reported",
-      "identity_methods": [
-        "dca_muni_code",
-        "taxation_muni_code"
-      ],
-      "project_records": 2,
-      "affordable_units_total": 0,
-      "affordable_units_rental": 0,
-      "affordable_units_for_sale": 0,
-      "low_income_households": 0,
-      "moderate_income_households": 0,
-      "affordable_trust_fund_balance": 403671.23
-    },
-    "1304": {
-      "district": "1304",
-      "name": "Atlantic Highlands Borough",
-      "county": "Monmouth",
-      "reporting_status": "reported",
-      "identity_methods": [
-        "dca_muni_code",
-        "taxation_muni_code"
-      ],
-      "project_records": 10,
-      "affordable_units_total": 333,
-      "affordable_units_rental": 86,
-      "affordable_units_for_sale": 163,
-      "low_income_households": 17,
-      "moderate_income_households": 148,
-      "affordable_trust_fund_balance": 230419
-    },
-    "1305": {
-      "district": "1305",
-      "name": "Avon-by-the-Sea Borough",
-      "county": "Monmouth",
-      "reporting_status": "reported",
-      "identity_methods": [
-        "dca_muni_code",
-        "taxation_muni_code"
-      ],
-      "project_records": 22,
-      "affordable_units_total": 85,
-      "affordable_units_rental": 78,
-      "affordable_units_for_sale": 2,
-      "low_income_households": 0,
-      "moderate_income_households": 9,
-      "affordable_trust_fund_balance": 36027.97
-    },
-    "1306": {
-      "district": "1306",
-      "name": "Belmar Borough",
-      "county": "Monmouth",
-      "reporting_status": "reported",
-      "identity_methods": [
-        "dca_muni_code",
-        "taxation_muni_code"
-      ],
-      "project_records": 4,
-      "affordable_units_total": 5,
-      "affordable_units_rental": 3,
-      "affordable_units_for_sale": 0,
-      "low_income_households": 0,
-      "moderate_income_households": 3,
-      "affordable_trust_fund_balance": 0
-    },
-    "1307": {
-      "district": "1307",
-      "name": "Bradley Beach Borough",
-      "county": "Monmouth",
-      "reporting_status": "reported",
-      "identity_methods": [
-        "dca_muni_code",
-        "taxation_muni_code"
-      ],
-      "project_records": 7,
-      "affordable_units_total": 52,
-      "affordable_units_rental": 0,
-      "affordable_units_for_sale": 43,
-      "low_income_households": 0,
-      "moderate_income_households": 12,
-      "affordable_trust_fund_balance": 0
-    },
-    "1308": {
-      "district": "1308",
-      "name": "Brielle Borough",
-      "county": "Monmouth",
-      "reporting_status": "reported",
-      "identity_methods": [
-        "dca_muni_code",
-        "taxation_muni_code"
-      ],
-      "project_records": 1,
-      "affordable_units_total": 100,
-      "affordable_units_rental": 5,
-      "affordable_units_for_sale": 0,
-      "low_income_households": 0,
-      "moderate_income_households": 0,
-      "affordable_trust_fund_balance": 0
-    },
-    "1309": {
-      "district": "1309",
-      "name": "Colts Neck Township",
-      "county": "Monmouth",
-      "reporting_status": "reported",
-      "identity_methods": [
-        "dca_muni_code"
-      ],
-      "project_records": 0,
-      "affordable_trust_fund_balance": 1544199.01
-    },
-    "1310": {
-      "district": "1310",
-      "name": "Deal Borough",
-      "county": "Monmouth",
-      "reporting_status": "reported",
-      "identity_methods": [
-        "dca_muni_code",
-        "taxation_muni_code"
-      ],
-      "project_records": 7,
-      "affordable_units_total": 96,
-      "affordable_units_rental": 22,
-      "affordable_units_for_sale": 73,
-      "low_income_households": 0,
-      "moderate_income_households": 46,
-      "affordable_trust_fund_balance": 0
-    },
-    "1311": {
-      "district": "1311",
-      "name": "Eatontown Borough",
-      "county": "Monmouth",
-      "reporting_status": "reported",
-      "identity_methods": [
-        "dca_muni_code"
-      ],
-      "project_records": 0,
-      "affordable_trust_fund_balance": 3657145.78
-    },
-    "1312": {
-      "district": "1312",
-      "name": "Englishtown Borough",
-      "county": "Monmouth",
-      "reporting_status": "reported",
-      "identity_methods": [
-        "dca_muni_code",
-        "taxation_muni_code"
-      ],
-      "project_records": 30,
-      "affordable_units_total": 416,
-      "affordable_units_rental": 357,
-      "affordable_units_for_sale": 23,
-      "low_income_households": 198,
-      "moderate_income_households": 18,
-      "affordable_trust_fund_balance": 155.95
-    },
-    "1313": {
-      "district": "1313",
-      "name": "Fair Haven Borough",
-      "county": "Monmouth",
-      "reporting_status": "reported",
-      "identity_methods": [
-        "dca_muni_code",
-        "taxation_muni_code"
-      ],
-      "project_records": 6,
-      "affordable_units_total": 0,
-      "affordable_units_rental": 0,
-      "affordable_units_for_sale": 0,
-      "low_income_households": 0,
-      "moderate_income_households": 0,
-      "affordable_trust_fund_balance": 1118434.78
-    },
-    "1314": {
-      "district": "1314",
-      "name": "Farmingdale Borough",
-      "county": "Monmouth",
-      "reporting_status": "reported",
-      "identity_methods": [
-        "dca_muni_code",
-        "taxation_muni_code"
-      ],
-      "project_records": 3,
-      "affordable_units_total": 3,
-      "affordable_units_rental": 2,
-      "affordable_units_for_sale": 0,
-      "low_income_households": 0,
-      "moderate_income_households": 0,
-      "affordable_trust_fund_balance": 97796.47
-    },
-    "1315": {
-      "district": "1315",
-      "name": "Freehold Borough",
-      "county": "Monmouth",
-      "reporting_status": "reported",
-      "identity_methods": [
-        "dca_muni_code",
-        "taxation_muni_code"
-      ],
-      "project_records": 7,
-      "affordable_units_total": 1,
-      "affordable_units_rental": 1,
-      "affordable_units_for_sale": 0,
-      "low_income_households": 0,
-      "moderate_income_households": 1,
-      "affordable_trust_fund_balance": 0
-    },
-    "1316": {
-      "district": "1316",
-      "name": "Freehold Township",
-      "county": "Monmouth",
-      "reporting_status": "reported",
-      "identity_methods": [
-        "dca_muni_code",
-        "taxation_muni_code"
-      ],
-      "project_records": 27,
-      "affordable_units_total": 308,
-      "affordable_units_rental": 18,
-      "affordable_units_for_sale": 203,
-      "low_income_households": 14,
-      "moderate_income_households": 89,
-      "affordable_trust_fund_balance": 2742458.32
-    },
-    "1317": {
-      "district": "1317",
-      "name": "Highlands Borough",
-      "county": "Monmouth",
-      "reporting_status": "reported",
-      "identity_methods": [
-        "dca_muni_code",
-        "taxation_muni_code"
-      ],
-      "project_records": 67,
-      "affordable_units_total": 580,
-      "affordable_units_rental": 280,
-      "affordable_units_for_sale": 285,
-      "low_income_households": 29,
-      "moderate_income_households": 185,
-      "affordable_trust_fund_balance": 0
-    },
-    "1318": {
-      "district": "1318",
-      "name": "Holmdel Township",
-      "county": "Monmouth",
-      "reporting_status": "reported",
-      "identity_methods": [
-        "dca_muni_code",
-        "taxation_muni_code"
-      ],
-      "project_records": 5,
-      "affordable_units_total": 172,
-      "affordable_units_rental": 159,
-      "affordable_units_for_sale": 6,
-      "low_income_households": 1,
-      "moderate_income_households": 15,
-      "affordable_trust_fund_balance": 7280204.3
-    },
-    "1319": {
-      "district": "1319",
-      "name": "Howell Township",
-      "county": "Monmouth",
-      "reporting_status": "reported",
-      "identity_methods": [
-        "dca_muni_code",
-        "taxation_muni_code"
-      ],
-      "project_records": 4,
-      "affordable_units_total": 58,
-      "affordable_units_rental": 11,
-      "affordable_units_for_sale": 47,
-      "low_income_households": 2,
-      "moderate_income_households": 17,
-      "affordable_trust_fund_balance": 10672687.44
-    },
-    "1320": {
-      "district": "1320",
-      "name": "Interlaken Borough",
-      "county": "Monmouth",
-      "reporting_status": "reported",
-      "identity_methods": [
-        "dca_muni_code",
-        "taxation_muni_code"
-      ],
-      "project_records": 27,
-      "affordable_units_total": 360,
-      "affordable_units_rental": 194,
-      "affordable_units_for_sale": 118,
-      "low_income_households": 2,
-      "moderate_income_households": 158,
-      "affordable_trust_fund_balance": 0
-    },
-    "1321": {
-      "district": "1321",
-      "name": "Keansburg Borough",
-      "county": "Monmouth",
-      "reporting_status": "reported",
-      "identity_methods": [
-        "dca_muni_code",
-        "taxation_muni_code"
-      ],
-      "project_records": 57,
-      "affordable_units_total": 692,
-      "affordable_units_rental": 546,
-      "affordable_units_for_sale": 146,
-      "low_income_households": 40,
-      "moderate_income_households": 155,
-      "affordable_trust_fund_balance": 0
-    },
-    "1322": {
-      "district": "1322",
-      "name": "Keyport Borough",
-      "county": "Monmouth",
-      "reporting_status": "reported",
-      "identity_methods": [
-        "dca_muni_code"
-      ],
-      "project_records": 0,
-      "affordable_trust_fund_balance": 0
-    },
-    "1323": {
-      "district": "1323",
-      "name": "Little Silver Borough",
-      "county": "Monmouth",
-      "reporting_status": "reported",
-      "identity_methods": [
-        "dca_muni_code",
-        "taxation_muni_code"
-      ],
-      "project_records": 3,
-      "affordable_units_total": 418,
-      "affordable_units_rental": 5,
-      "affordable_units_for_sale": 282,
-      "low_income_households": 39,
-      "moderate_income_households": 195,
-      "affordable_trust_fund_balance": 528035.28
-    },
-    "1324": {
-      "district": "1324",
-      "name": "Loch Arbour Village",
-      "county": "Monmouth",
-      "reporting_status": "reported",
-      "identity_methods": [
-        "dca_muni_code"
-      ],
-      "project_records": 0,
-      "affordable_trust_fund_balance": 0
-    },
-    "1325": {
-      "district": "1325",
-      "name": "Long Branch City",
-      "county": "Monmouth",
-      "reporting_status": "reported",
-      "identity_methods": [
-        "dca_muni_code",
-        "taxation_muni_code"
-      ],
-      "project_records": 7,
-      "affordable_units_total": 8,
-      "affordable_units_rental": 0,
-      "affordable_units_for_sale": 8,
-      "low_income_households": 0,
-      "moderate_income_households": 5,
-      "affordable_trust_fund_balance": 0
-    },
-    "1326": {
-      "district": "1326",
-      "name": "Manalapan Township",
-      "county": "Monmouth",
-      "reporting_status": "reported",
-      "identity_methods": [
-        "dca_muni_code"
-      ],
-      "project_records": 0,
-      "affordable_trust_fund_balance": 2704846.98
-    },
-    "1327": {
-      "district": "1327",
-      "name": "Manasquan Borough",
-      "county": "Monmouth",
-      "reporting_status": "reported",
-      "identity_methods": [
-        "dca_muni_code",
-        "taxation_muni_code"
-      ],
-      "project_records": 22,
-      "affordable_units_total": 384,
-      "affordable_units_rental": 61,
-      "affordable_units_for_sale": 222,
-      "low_income_households": 22,
-      "moderate_income_households": 104,
-      "affordable_trust_fund_balance": 1010771.87
-    },
-    "1328": {
-      "district": "1328",
-      "name": "Marlboro Township",
-      "county": "Monmouth",
-      "reporting_status": "reported",
-      "identity_methods": [
-        "dca_muni_code",
-        "taxation_muni_code"
-      ],
-      "project_records": 30,
-      "affordable_units_total": 508,
-      "affordable_units_rental": 226,
-      "affordable_units_for_sale": 1,
-      "low_income_households": 14,
-      "moderate_income_households": 17,
-      "affordable_trust_fund_balance": 1643932.43
-    },
-    "1329": {
-      "district": "1329",
-      "name": "Matawan Borough",
-      "county": "Monmouth",
-      "reporting_status": "reported",
-      "identity_methods": [
-        "dca_muni_code",
-        "taxation_muni_code"
-      ],
-      "project_records": 8,
-      "affordable_units_total": 20,
-      "affordable_units_rental": 8,
-      "affordable_units_for_sale": 12,
-      "low_income_households": 1,
-      "moderate_income_households": 5,
-      "affordable_trust_fund_balance": 0
-    },
-    "1330": {
-      "district": "1330",
       "name": "Aberdeen Township",
       "county": "Monmouth",
       "reporting_status": "reported",
@@ -5716,8 +5253,488 @@
       "moderate_income_households": 188,
       "affordable_trust_fund_balance": 1862898.74
     },
+    "1302": {
+      "district": "1302",
+      "name": "Allenhurst Borough",
+      "county": "Monmouth",
+      "reporting_status": "reported",
+      "identity_methods": [
+        "dca_muni_code",
+        "taxation_muni_code"
+      ],
+      "project_records": 17,
+      "affordable_units_total": 266,
+      "affordable_units_rental": 241,
+      "affordable_units_for_sale": 14,
+      "low_income_households": 52,
+      "moderate_income_households": 125,
+      "affordable_trust_fund_balance": 4823
+    },
+    "1303": {
+      "district": "1303",
+      "name": "Allentown Borough",
+      "county": "Monmouth",
+      "reporting_status": "reported",
+      "identity_methods": [
+        "dca_muni_code",
+        "taxation_muni_code"
+      ],
+      "project_records": 3,
+      "affordable_units_total": 3,
+      "affordable_units_rental": 2,
+      "affordable_units_for_sale": 0,
+      "low_income_households": 0,
+      "moderate_income_households": 0,
+      "affordable_trust_fund_balance": 0
+    },
+    "1304": {
+      "district": "1304",
+      "name": "Asbury Park City",
+      "county": "Monmouth",
+      "reporting_status": "reported",
+      "identity_methods": [
+        "dca_muni_code",
+        "taxation_muni_code"
+      ],
+      "project_records": 2,
+      "affordable_units_total": 0,
+      "affordable_units_rental": 0,
+      "affordable_units_for_sale": 0,
+      "low_income_households": 0,
+      "moderate_income_households": 0,
+      "affordable_trust_fund_balance": 403671.23
+    },
+    "1305": {
+      "district": "1305",
+      "name": "Atlantic Highlands Borough",
+      "county": "Monmouth",
+      "reporting_status": "reported",
+      "identity_methods": [
+        "dca_muni_code",
+        "taxation_muni_code"
+      ],
+      "project_records": 10,
+      "affordable_units_total": 333,
+      "affordable_units_rental": 86,
+      "affordable_units_for_sale": 163,
+      "low_income_households": 17,
+      "moderate_income_households": 148,
+      "affordable_trust_fund_balance": 230419
+    },
+    "1306": {
+      "district": "1306",
+      "name": "Avon-by-the-Sea Borough",
+      "county": "Monmouth",
+      "reporting_status": "reported",
+      "identity_methods": [
+        "dca_muni_code",
+        "taxation_muni_code"
+      ],
+      "project_records": 22,
+      "affordable_units_total": 85,
+      "affordable_units_rental": 78,
+      "affordable_units_for_sale": 2,
+      "low_income_households": 0,
+      "moderate_income_households": 9,
+      "affordable_trust_fund_balance": 36027.97
+    },
+    "1307": {
+      "district": "1307",
+      "name": "Belmar Borough",
+      "county": "Monmouth",
+      "reporting_status": "reported",
+      "identity_methods": [
+        "dca_muni_code",
+        "taxation_muni_code"
+      ],
+      "project_records": 4,
+      "affordable_units_total": 5,
+      "affordable_units_rental": 3,
+      "affordable_units_for_sale": 0,
+      "low_income_households": 0,
+      "moderate_income_households": 3,
+      "affordable_trust_fund_balance": 0
+    },
+    "1308": {
+      "district": "1308",
+      "name": "Bradley Beach Borough",
+      "county": "Monmouth",
+      "reporting_status": "reported",
+      "identity_methods": [
+        "dca_muni_code",
+        "taxation_muni_code"
+      ],
+      "project_records": 7,
+      "affordable_units_total": 52,
+      "affordable_units_rental": 0,
+      "affordable_units_for_sale": 43,
+      "low_income_households": 0,
+      "moderate_income_households": 12,
+      "affordable_trust_fund_balance": 0
+    },
+    "1309": {
+      "district": "1309",
+      "name": "Brielle Borough",
+      "county": "Monmouth",
+      "reporting_status": "reported",
+      "identity_methods": [
+        "dca_muni_code",
+        "taxation_muni_code"
+      ],
+      "project_records": 1,
+      "affordable_units_total": 100,
+      "affordable_units_rental": 5,
+      "affordable_units_for_sale": 0,
+      "low_income_households": 0,
+      "moderate_income_households": 0,
+      "affordable_trust_fund_balance": 0
+    },
+    "1310": {
+      "district": "1310",
+      "name": "Colts Neck Township",
+      "county": "Monmouth",
+      "reporting_status": "reported",
+      "identity_methods": [
+        "dca_muni_code"
+      ],
+      "project_records": 0,
+      "affordable_trust_fund_balance": 1544199.01
+    },
+    "1311": {
+      "district": "1311",
+      "name": "Deal Borough",
+      "county": "Monmouth",
+      "reporting_status": "reported",
+      "identity_methods": [
+        "dca_muni_code",
+        "taxation_muni_code"
+      ],
+      "project_records": 7,
+      "affordable_units_total": 96,
+      "affordable_units_rental": 22,
+      "affordable_units_for_sale": 73,
+      "low_income_households": 0,
+      "moderate_income_households": 46,
+      "affordable_trust_fund_balance": 0
+    },
+    "1312": {
+      "district": "1312",
+      "name": "Eatontown Borough",
+      "county": "Monmouth",
+      "reporting_status": "reported",
+      "identity_methods": [
+        "dca_muni_code"
+      ],
+      "project_records": 0,
+      "affordable_trust_fund_balance": 3657145.78
+    },
+    "1313": {
+      "district": "1313",
+      "name": "Englishtown Borough",
+      "county": "Monmouth",
+      "reporting_status": "reported",
+      "identity_methods": [
+        "dca_muni_code",
+        "taxation_muni_code"
+      ],
+      "project_records": 30,
+      "affordable_units_total": 416,
+      "affordable_units_rental": 357,
+      "affordable_units_for_sale": 23,
+      "low_income_households": 198,
+      "moderate_income_households": 18,
+      "affordable_trust_fund_balance": 155.95
+    },
+    "1314": {
+      "district": "1314",
+      "name": "Fair Haven Borough",
+      "county": "Monmouth",
+      "reporting_status": "reported",
+      "identity_methods": [
+        "dca_muni_code",
+        "taxation_muni_code"
+      ],
+      "project_records": 6,
+      "affordable_units_total": 0,
+      "affordable_units_rental": 0,
+      "affordable_units_for_sale": 0,
+      "low_income_households": 0,
+      "moderate_income_households": 0,
+      "affordable_trust_fund_balance": 1118434.78
+    },
+    "1315": {
+      "district": "1315",
+      "name": "Farmingdale Borough",
+      "county": "Monmouth",
+      "reporting_status": "reported",
+      "identity_methods": [
+        "dca_muni_code",
+        "taxation_muni_code"
+      ],
+      "project_records": 3,
+      "affordable_units_total": 3,
+      "affordable_units_rental": 2,
+      "affordable_units_for_sale": 0,
+      "low_income_households": 0,
+      "moderate_income_households": 0,
+      "affordable_trust_fund_balance": 97796.47
+    },
+    "1316": {
+      "district": "1316",
+      "name": "Freehold Borough",
+      "county": "Monmouth",
+      "reporting_status": "reported",
+      "identity_methods": [
+        "dca_muni_code",
+        "taxation_muni_code"
+      ],
+      "project_records": 7,
+      "affordable_units_total": 1,
+      "affordable_units_rental": 1,
+      "affordable_units_for_sale": 0,
+      "low_income_households": 0,
+      "moderate_income_households": 1,
+      "affordable_trust_fund_balance": 0
+    },
+    "1317": {
+      "district": "1317",
+      "name": "Freehold Township",
+      "county": "Monmouth",
+      "reporting_status": "reported",
+      "identity_methods": [
+        "dca_muni_code",
+        "taxation_muni_code"
+      ],
+      "project_records": 27,
+      "affordable_units_total": 308,
+      "affordable_units_rental": 18,
+      "affordable_units_for_sale": 203,
+      "low_income_households": 14,
+      "moderate_income_households": 89,
+      "affordable_trust_fund_balance": 2742458.32
+    },
+    "1318": {
+      "district": "1318",
+      "name": "Hazlet Township",
+      "county": "Monmouth",
+      "reporting_status": "reported",
+      "identity_methods": [
+        "dca_muni_code",
+        "taxation_muni_code"
+      ],
+      "project_records": 32,
+      "affordable_units_total": 277,
+      "affordable_units_rental": 46,
+      "affordable_units_for_sale": 0,
+      "low_income_households": 4,
+      "moderate_income_households": 71,
+      "affordable_trust_fund_balance": 0
+    },
+    "1319": {
+      "district": "1319",
+      "name": "Highlands Borough",
+      "county": "Monmouth",
+      "reporting_status": "reported",
+      "identity_methods": [
+        "dca_muni_code",
+        "taxation_muni_code"
+      ],
+      "project_records": 67,
+      "affordable_units_total": 580,
+      "affordable_units_rental": 280,
+      "affordable_units_for_sale": 285,
+      "low_income_households": 29,
+      "moderate_income_households": 185,
+      "affordable_trust_fund_balance": 0
+    },
+    "1320": {
+      "district": "1320",
+      "name": "Holmdel Township",
+      "county": "Monmouth",
+      "reporting_status": "reported",
+      "identity_methods": [
+        "dca_muni_code",
+        "taxation_muni_code"
+      ],
+      "project_records": 5,
+      "affordable_units_total": 172,
+      "affordable_units_rental": 159,
+      "affordable_units_for_sale": 6,
+      "low_income_households": 1,
+      "moderate_income_households": 15,
+      "affordable_trust_fund_balance": 7280204.3
+    },
+    "1321": {
+      "district": "1321",
+      "name": "Howell Township",
+      "county": "Monmouth",
+      "reporting_status": "reported",
+      "identity_methods": [
+        "dca_muni_code",
+        "taxation_muni_code"
+      ],
+      "project_records": 4,
+      "affordable_units_total": 58,
+      "affordable_units_rental": 11,
+      "affordable_units_for_sale": 47,
+      "low_income_households": 2,
+      "moderate_income_households": 17,
+      "affordable_trust_fund_balance": 10672687.44
+    },
+    "1322": {
+      "district": "1322",
+      "name": "Interlaken Borough",
+      "county": "Monmouth",
+      "reporting_status": "reported",
+      "identity_methods": [
+        "dca_muni_code",
+        "taxation_muni_code"
+      ],
+      "project_records": 27,
+      "affordable_units_total": 360,
+      "affordable_units_rental": 194,
+      "affordable_units_for_sale": 118,
+      "low_income_households": 2,
+      "moderate_income_households": 158,
+      "affordable_trust_fund_balance": 0
+    },
+    "1323": {
+      "district": "1323",
+      "name": "Keansburg Borough",
+      "county": "Monmouth",
+      "reporting_status": "reported",
+      "identity_methods": [
+        "dca_muni_code",
+        "taxation_muni_code"
+      ],
+      "project_records": 57,
+      "affordable_units_total": 692,
+      "affordable_units_rental": 546,
+      "affordable_units_for_sale": 146,
+      "low_income_households": 40,
+      "moderate_income_households": 155,
+      "affordable_trust_fund_balance": 0
+    },
+    "1324": {
+      "district": "1324",
+      "name": "Keyport Borough",
+      "county": "Monmouth",
+      "reporting_status": "reported",
+      "identity_methods": [
+        "dca_muni_code"
+      ],
+      "project_records": 0,
+      "affordable_trust_fund_balance": 0
+    },
+    "1325": {
+      "district": "1325",
+      "name": "Little Silver Borough",
+      "county": "Monmouth",
+      "reporting_status": "reported",
+      "identity_methods": [
+        "dca_muni_code",
+        "taxation_muni_code"
+      ],
+      "project_records": 3,
+      "affordable_units_total": 418,
+      "affordable_units_rental": 5,
+      "affordable_units_for_sale": 282,
+      "low_income_households": 39,
+      "moderate_income_households": 195,
+      "affordable_trust_fund_balance": 528035.28
+    },
+    "1326": {
+      "district": "1326",
+      "name": "Loch Arbour Village",
+      "county": "Monmouth",
+      "reporting_status": "reported",
+      "identity_methods": [
+        "dca_muni_code"
+      ],
+      "project_records": 0,
+      "affordable_trust_fund_balance": 0
+    },
+    "1327": {
+      "district": "1327",
+      "name": "Long Branch City",
+      "county": "Monmouth",
+      "reporting_status": "reported",
+      "identity_methods": [
+        "dca_muni_code",
+        "taxation_muni_code"
+      ],
+      "project_records": 7,
+      "affordable_units_total": 8,
+      "affordable_units_rental": 0,
+      "affordable_units_for_sale": 8,
+      "low_income_households": 0,
+      "moderate_income_households": 5,
+      "affordable_trust_fund_balance": 0
+    },
+    "1328": {
+      "district": "1328",
+      "name": "Manalapan Township",
+      "county": "Monmouth",
+      "reporting_status": "reported",
+      "identity_methods": [
+        "dca_muni_code"
+      ],
+      "project_records": 0,
+      "affordable_trust_fund_balance": 2704846.98
+    },
+    "1329": {
+      "district": "1329",
+      "name": "Manasquan Borough",
+      "county": "Monmouth",
+      "reporting_status": "reported",
+      "identity_methods": [
+        "dca_muni_code",
+        "taxation_muni_code"
+      ],
+      "project_records": 22,
+      "affordable_units_total": 384,
+      "affordable_units_rental": 61,
+      "affordable_units_for_sale": 222,
+      "low_income_households": 22,
+      "moderate_income_households": 104,
+      "affordable_trust_fund_balance": 1010771.87
+    },
+    "1330": {
+      "district": "1330",
+      "name": "Marlboro Township",
+      "county": "Monmouth",
+      "reporting_status": "reported",
+      "identity_methods": [
+        "dca_muni_code",
+        "taxation_muni_code"
+      ],
+      "project_records": 30,
+      "affordable_units_total": 508,
+      "affordable_units_rental": 226,
+      "affordable_units_for_sale": 1,
+      "low_income_households": 14,
+      "moderate_income_households": 17,
+      "affordable_trust_fund_balance": 1643932.43
+    },
     "1331": {
       "district": "1331",
+      "name": "Matawan Borough",
+      "county": "Monmouth",
+      "reporting_status": "reported",
+      "identity_methods": [
+        "dca_muni_code",
+        "taxation_muni_code"
+      ],
+      "project_records": 8,
+      "affordable_units_total": 20,
+      "affordable_units_rental": 8,
+      "affordable_units_for_sale": 12,
+      "low_income_households": 1,
+      "moderate_income_households": 5,
+      "affordable_trust_fund_balance": 0
+    },
+    "1332": {
+      "district": "1332",
       "name": "Middletown Township",
       "county": "Monmouth",
       "reporting_status": "reported",
@@ -5727,8 +5744,8 @@
       "project_records": 0,
       "affordable_trust_fund_balance": 893441.51
     },
-    "1332": {
-      "district": "1332",
+    "1333": {
+      "district": "1333",
       "name": "Millstone Township",
       "county": "Monmouth",
       "reporting_status": "reported",
@@ -5744,8 +5761,8 @@
       "moderate_income_households": 30,
       "affordable_trust_fund_balance": 123166.09
     },
-    "1333": {
-      "district": "1333",
+    "1334": {
+      "district": "1334",
       "name": "Monmouth Beach Borough",
       "county": "Monmouth",
       "reporting_status": "reported",
@@ -5761,8 +5778,8 @@
       "moderate_income_households": 1,
       "affordable_trust_fund_balance": 134262
     },
-    "1334": {
-      "district": "1334",
+    "1335": {
+      "district": "1335",
       "name": "Neptune Township",
       "county": "Monmouth",
       "reporting_status": "reported",
@@ -5778,8 +5795,8 @@
       "moderate_income_households": 1,
       "affordable_trust_fund_balance": 235622.4
     },
-    "1335": {
-      "district": "1335",
+    "1336": {
+      "district": "1336",
       "name": "Neptune City Borough",
       "county": "Monmouth",
       "reporting_status": "reported",
@@ -5794,23 +5811,6 @@
       "low_income_households": 0,
       "moderate_income_households": 125,
       "affordable_trust_fund_balance": 0
-    },
-    "1336": {
-      "district": "1336",
-      "name": "Tinton Falls Borough",
-      "county": "Monmouth",
-      "reporting_status": "reported",
-      "identity_methods": [
-        "dca_muni_code",
-        "taxation_muni_code"
-      ],
-      "project_records": 2,
-      "affordable_units_total": 0,
-      "affordable_units_rental": 0,
-      "affordable_units_for_sale": 0,
-      "low_income_households": 0,
-      "moderate_income_households": 0,
-      "affordable_trust_fund_balance": 3316807.56
     },
     "1337": {
       "district": "1337",
@@ -5848,23 +5848,6 @@
     },
     "1339": {
       "district": "1339",
-      "name": "Hazlet Township",
-      "county": "Monmouth",
-      "reporting_status": "reported",
-      "identity_methods": [
-        "dca_muni_code",
-        "taxation_muni_code"
-      ],
-      "project_records": 32,
-      "affordable_units_total": 277,
-      "affordable_units_rental": 46,
-      "affordable_units_for_sale": 0,
-      "low_income_households": 4,
-      "moderate_income_households": 71,
-      "affordable_trust_fund_balance": 0
-    },
-    "1340": {
-      "district": "1340",
       "name": "Red Bank Borough",
       "county": "Monmouth",
       "reporting_status": "reported",
@@ -5880,8 +5863,8 @@
       "moderate_income_households": 0,
       "affordable_trust_fund_balance": 299148.72
     },
-    "1341": {
-      "district": "1341",
+    "1340": {
+      "district": "1340",
       "name": "Roosevelt Borough",
       "county": "Monmouth",
       "reporting_status": "reported",
@@ -5897,8 +5880,8 @@
       "moderate_income_households": 5,
       "affordable_trust_fund_balance": 0
     },
-    "1342": {
-      "district": "1342",
+    "1341": {
+      "district": "1341",
       "name": "Rumson Borough",
       "county": "Monmouth",
       "reporting_status": "reported",
@@ -5914,8 +5897,8 @@
       "moderate_income_households": 2,
       "affordable_trust_fund_balance": 3870299.81
     },
-    "1343": {
-      "district": "1343",
+    "1342": {
+      "district": "1342",
       "name": "Sea Bright Borough",
       "county": "Monmouth",
       "reporting_status": "reported",
@@ -5931,8 +5914,8 @@
       "moderate_income_households": 0,
       "affordable_trust_fund_balance": 0
     },
-    "1344": {
-      "district": "1344",
+    "1343": {
+      "district": "1343",
       "name": "Sea Girt Borough",
       "county": "Monmouth",
       "reporting_status": "reported",
@@ -5948,8 +5931,8 @@
       "moderate_income_households": 0,
       "affordable_trust_fund_balance": 27477.01
     },
-    "1345": {
-      "district": "1345",
+    "1344": {
+      "district": "1344",
       "name": "Shrewsbury Borough",
       "county": "Monmouth",
       "reporting_status": "reported",
@@ -5959,8 +5942,8 @@
       "project_records": 0,
       "affordable_trust_fund_balance": 85674.91
     },
-    "1346": {
-      "district": "1346",
+    "1345": {
+      "district": "1345",
       "name": "Shrewsbury Township",
       "county": "Monmouth",
       "reporting_status": "reported",
@@ -5970,8 +5953,8 @@
       "project_records": 0,
       "affordable_trust_fund_balance": 0
     },
-    "1347": {
-      "district": "1347",
+    "1346": {
+      "district": "1346",
       "name": "Lake Como Borough",
       "county": "Monmouth",
       "reporting_status": "reported",
@@ -5987,8 +5970,8 @@
       "moderate_income_households": 0,
       "affordable_trust_fund_balance": 0
     },
-    "1348": {
-      "district": "1348",
+    "1347": {
+      "district": "1347",
       "name": "Spring Lake Borough",
       "county": "Monmouth",
       "reporting_status": "reported",
@@ -6004,8 +5987,8 @@
       "moderate_income_households": 0,
       "affordable_trust_fund_balance": 4222612.59
     },
-    "1349": {
-      "district": "1349",
+    "1348": {
+      "district": "1348",
       "name": "Spring Lake Heights Borough",
       "county": "Monmouth",
       "reporting_status": "reported",
@@ -6020,6 +6003,23 @@
       "low_income_households": 5,
       "moderate_income_households": 140,
       "affordable_trust_fund_balance": 0
+    },
+    "1349": {
+      "district": "1349",
+      "name": "Tinton Falls Borough",
+      "county": "Monmouth",
+      "reporting_status": "reported",
+      "identity_methods": [
+        "dca_muni_code",
+        "taxation_muni_code"
+      ],
+      "project_records": 2,
+      "affordable_units_total": 0,
+      "affordable_units_rental": 0,
+      "affordable_units_for_sale": 0,
+      "low_income_households": 0,
+      "moderate_income_households": 0,
+      "affordable_trust_fund_balance": 3316807.56
     },
     "1350": {
       "district": "1350",
@@ -6748,6 +6748,23 @@
     },
     "1501": {
       "district": "1501",
+      "name": "Barnegat Township",
+      "county": "Ocean",
+      "reporting_status": "reported",
+      "identity_methods": [
+        "dca_muni_code",
+        "taxation_muni_code"
+      ],
+      "project_records": 9,
+      "affordable_units_total": 0,
+      "affordable_units_rental": 0,
+      "affordable_units_for_sale": 0,
+      "low_income_households": 0,
+      "moderate_income_households": 0,
+      "affordable_trust_fund_balance": 780537.42
+    },
+    "1502": {
+      "district": "1502",
       "name": "Barnegat Light Borough",
       "county": "Ocean",
       "reporting_status": "reported",
@@ -6763,8 +6780,8 @@
       "moderate_income_households": 0,
       "affordable_trust_fund_balance": 0
     },
-    "1502": {
-      "district": "1502",
+    "1503": {
+      "district": "1503",
       "name": "Bay Head Borough",
       "county": "Ocean",
       "reporting_status": "reported",
@@ -6774,8 +6791,8 @@
       "project_records": 0,
       "affordable_trust_fund_balance": 292667.6
     },
-    "1503": {
-      "district": "1503",
+    "1504": {
+      "district": "1504",
       "name": "Beach Haven Borough",
       "county": "Ocean",
       "reporting_status": "reported",
@@ -6791,8 +6808,8 @@
       "moderate_income_households": 0,
       "affordable_trust_fund_balance": 503755.44
     },
-    "1504": {
-      "district": "1504",
+    "1505": {
+      "district": "1505",
       "name": "Beachwood Borough",
       "county": "Ocean",
       "reporting_status": "reported",
@@ -6808,8 +6825,8 @@
       "moderate_income_households": 2,
       "affordable_trust_fund_balance": 570687.9
     },
-    "1505": {
-      "district": "1505",
+    "1506": {
+      "district": "1506",
       "name": "Berkeley Township",
       "county": "Ocean",
       "reporting_status": "reported",
@@ -6819,8 +6836,8 @@
       "project_records": 0,
       "affordable_trust_fund_balance": 1030157.91
     },
-    "1506": {
-      "district": "1506",
+    "1507": {
+      "district": "1507",
       "name": "Brick Township",
       "county": "Ocean",
       "reporting_status": "reported",
@@ -6836,8 +6853,8 @@
       "moderate_income_households": 71,
       "affordable_trust_fund_balance": 2534369.15
     },
-    "1507": {
-      "district": "1507",
+    "1508": {
+      "district": "1508",
       "name": "Toms River Township",
       "county": "Ocean",
       "reporting_status": "reported",
@@ -6853,8 +6870,8 @@
       "moderate_income_households": 40,
       "affordable_trust_fund_balance": 9442421.6
     },
-    "1508": {
-      "district": "1508",
+    "1509": {
+      "district": "1509",
       "name": "Eagleswood Township",
       "county": "Ocean",
       "reporting_status": "reported",
@@ -6870,8 +6887,8 @@
       "moderate_income_households": 107,
       "affordable_trust_fund_balance": 0
     },
-    "1509": {
-      "district": "1509",
+    "1510": {
+      "district": "1510",
       "name": "Harvey Cedars Borough",
       "county": "Ocean",
       "reporting_status": "reported",
@@ -6887,8 +6904,8 @@
       "moderate_income_households": 0,
       "affordable_trust_fund_balance": 0
     },
-    "1510": {
-      "district": "1510",
+    "1511": {
+      "district": "1511",
       "name": "Island Heights Borough",
       "county": "Ocean",
       "reporting_status": "reported",
@@ -6898,8 +6915,8 @@
       "project_records": 0,
       "affordable_trust_fund_balance": 0
     },
-    "1511": {
-      "district": "1511",
+    "1512": {
+      "district": "1512",
       "name": "Jackson Township",
       "county": "Ocean",
       "reporting_status": "reported",
@@ -6909,8 +6926,8 @@
       "project_records": 0,
       "affordable_trust_fund_balance": 7885018.59
     },
-    "1512": {
-      "district": "1512",
+    "1513": {
+      "district": "1513",
       "name": "Lacey Township",
       "county": "Ocean",
       "reporting_status": "reported",
@@ -6926,8 +6943,8 @@
       "moderate_income_households": 33,
       "affordable_trust_fund_balance": 594732.99
     },
-    "1513": {
-      "district": "1513",
+    "1514": {
+      "district": "1514",
       "name": "Lakehurst Borough",
       "county": "Ocean",
       "reporting_status": "reported",
@@ -6943,20 +6960,9 @@
       "moderate_income_households": 0,
       "affordable_trust_fund_balance": 71469.3
     },
-    "1514": {
-      "district": "1514",
-      "name": "Lakewood Township",
-      "county": "Ocean",
-      "reporting_status": "reported",
-      "identity_methods": [
-        "dca_muni_code"
-      ],
-      "project_records": 0,
-      "affordable_trust_fund_balance": 0
-    },
     "1515": {
       "district": "1515",
-      "name": "Lavallette Borough",
+      "name": "Lakewood Township",
       "county": "Ocean",
       "reporting_status": "reported",
       "identity_methods": [
@@ -6967,6 +6973,17 @@
     },
     "1516": {
       "district": "1516",
+      "name": "Lavallette Borough",
+      "county": "Ocean",
+      "reporting_status": "reported",
+      "identity_methods": [
+        "dca_muni_code"
+      ],
+      "project_records": 0,
+      "affordable_trust_fund_balance": 0
+    },
+    "1517": {
+      "district": "1517",
       "name": "Little Egg Harbor Township",
       "county": "Ocean",
       "reporting_status": "reported",
@@ -6976,8 +6993,8 @@
       "project_records": 0,
       "affordable_trust_fund_balance": 435101.99
     },
-    "1517": {
-      "district": "1517",
+    "1518": {
+      "district": "1518",
       "name": "Long Beach Township",
       "county": "Ocean",
       "reporting_status": "reported",
@@ -6993,8 +7010,8 @@
       "moderate_income_households": 0,
       "affordable_trust_fund_balance": 0
     },
-    "1518": {
-      "district": "1518",
+    "1519": {
+      "district": "1519",
       "name": "Manchester Township",
       "county": "Ocean",
       "reporting_status": "reported",
@@ -7004,8 +7021,8 @@
       "project_records": 0,
       "affordable_trust_fund_balance": 1000753.21
     },
-    "1519": {
-      "district": "1519",
+    "1520": {
+      "district": "1520",
       "name": "Mantoloking Borough",
       "county": "Ocean",
       "reporting_status": "reported",
@@ -7021,8 +7038,8 @@
       "moderate_income_households": 0,
       "affordable_trust_fund_balance": 0
     },
-    "1520": {
-      "district": "1520",
+    "1521": {
+      "district": "1521",
       "name": "Ocean Township",
       "county": "Ocean",
       "reporting_status": "reported",
@@ -7038,8 +7055,8 @@
       "moderate_income_households": 0,
       "affordable_trust_fund_balance": 1064022.04
     },
-    "1521": {
-      "district": "1521",
+    "1522": {
+      "district": "1522",
       "name": "Ocean Gate Borough",
       "county": "Ocean",
       "reporting_status": "reported",
@@ -7055,8 +7072,8 @@
       "moderate_income_households": 42,
       "affordable_trust_fund_balance": 0
     },
-    "1522": {
-      "district": "1522",
+    "1523": {
+      "district": "1523",
       "name": "Pine Beach Borough",
       "county": "Ocean",
       "reporting_status": "reported",
@@ -7066,8 +7083,8 @@
       "project_records": 0,
       "affordable_trust_fund_balance": 42343.79
     },
-    "1523": {
-      "district": "1523",
+    "1524": {
+      "district": "1524",
       "name": "Plumsted Township",
       "county": "Ocean",
       "reporting_status": "reported",
@@ -7083,8 +7100,8 @@
       "moderate_income_households": 0,
       "affordable_trust_fund_balance": 0
     },
-    "1524": {
-      "district": "1524",
+    "1525": {
+      "district": "1525",
       "name": "Point Pleasant Borough",
       "county": "Ocean",
       "reporting_status": "reported",
@@ -7094,8 +7111,8 @@
       "project_records": 0,
       "affordable_trust_fund_balance": 67075.03
     },
-    "1525": {
-      "district": "1525",
+    "1526": {
+      "district": "1526",
       "name": "Point Pleasant Beach Borough",
       "county": "Ocean",
       "reporting_status": "reported",
@@ -7111,8 +7128,8 @@
       "moderate_income_households": 0,
       "affordable_trust_fund_balance": 0
     },
-    "1526": {
-      "district": "1526",
+    "1527": {
+      "district": "1527",
       "name": "Seaside Heights Borough",
       "county": "Ocean",
       "reporting_status": "reported",
@@ -7128,20 +7145,9 @@
       "moderate_income_households": 0,
       "affordable_trust_fund_balance": 0
     },
-    "1527": {
-      "district": "1527",
-      "name": "Seaside Park Borough",
-      "county": "Ocean",
-      "reporting_status": "reported",
-      "identity_methods": [
-        "dca_muni_code"
-      ],
-      "project_records": 0,
-      "affordable_trust_fund_balance": 0
-    },
     "1528": {
       "district": "1528",
-      "name": "Ship Bottom Borough",
+      "name": "Seaside Park Borough",
       "county": "Ocean",
       "reporting_status": "reported",
       "identity_methods": [
@@ -7152,7 +7158,7 @@
     },
     "1529": {
       "district": "1529",
-      "name": "South Toms River Borough",
+      "name": "Ship Bottom Borough",
       "county": "Ocean",
       "reporting_status": "reported",
       "identity_methods": [
@@ -7163,6 +7169,17 @@
     },
     "1530": {
       "district": "1530",
+      "name": "South Toms River Borough",
+      "county": "Ocean",
+      "reporting_status": "reported",
+      "identity_methods": [
+        "dca_muni_code"
+      ],
+      "project_records": 0,
+      "affordable_trust_fund_balance": 0
+    },
+    "1531": {
+      "district": "1531",
       "name": "Stafford Township",
       "county": "Ocean",
       "reporting_status": "reported",
@@ -7172,8 +7189,8 @@
       "project_records": 0,
       "affordable_trust_fund_balance": 381606.46
     },
-    "1531": {
-      "district": "1531",
+    "1532": {
+      "district": "1532",
       "name": "Surf City Borough",
       "county": "Ocean",
       "reporting_status": "reported",
@@ -7189,8 +7206,8 @@
       "moderate_income_households": 93,
       "affordable_trust_fund_balance": 0
     },
-    "1532": {
-      "district": "1532",
+    "1533": {
+      "district": "1533",
       "name": "Tuckerton Borough",
       "county": "Ocean",
       "reporting_status": "reported",
@@ -7199,23 +7216,6 @@
       ],
       "project_records": 0,
       "affordable_trust_fund_balance": 4.06
-    },
-    "1533": {
-      "district": "1533",
-      "name": "Barnegat Township",
-      "county": "Ocean",
-      "reporting_status": "reported",
-      "identity_methods": [
-        "dca_muni_code",
-        "taxation_muni_code"
-      ],
-      "project_records": 9,
-      "affordable_units_total": 0,
-      "affordable_units_rental": 0,
-      "affordable_units_for_sale": 0,
-      "low_income_households": 0,
-      "moderate_income_households": 0,
-      "affordable_trust_fund_balance": 780537.42
     },
     "1601": {
       "district": "1601",
@@ -7502,6 +7502,23 @@
     },
     "1702": {
       "district": "1702",
+      "name": "Carneys Point Township",
+      "county": "Salem",
+      "reporting_status": "reported",
+      "identity_methods": [
+        "dca_muni_code",
+        "taxation_muni_code"
+      ],
+      "project_records": 4,
+      "affordable_units_total": 11,
+      "affordable_units_rental": 0,
+      "affordable_units_for_sale": 6,
+      "low_income_households": 0,
+      "moderate_income_households": 0,
+      "affordable_trust_fund_balance": 29841388.54
+    },
+    "1703": {
+      "district": "1703",
       "name": "Elmer Borough",
       "county": "Salem",
       "reporting_status": "reported",
@@ -7517,20 +7534,9 @@
       "moderate_income_households": 18,
       "affordable_trust_fund_balance": 0
     },
-    "1703": {
-      "district": "1703",
-      "name": "Elsinboro Township",
-      "county": "Salem",
-      "reporting_status": "reported",
-      "identity_methods": [
-        "dca_muni_code"
-      ],
-      "project_records": 0,
-      "affordable_trust_fund_balance": 0
-    },
     "1704": {
       "district": "1704",
-      "name": "Lower Alloways Creek Township",
+      "name": "Elsinboro Township",
       "county": "Salem",
       "reporting_status": "reported",
       "identity_methods": [
@@ -7541,7 +7547,7 @@
     },
     "1705": {
       "district": "1705",
-      "name": "Mannington Township",
+      "name": "Lower Alloways Creek Township",
       "county": "Salem",
       "reporting_status": "reported",
       "identity_methods": [
@@ -7552,6 +7558,17 @@
     },
     "1706": {
       "district": "1706",
+      "name": "Mannington Township",
+      "county": "Salem",
+      "reporting_status": "reported",
+      "identity_methods": [
+        "dca_muni_code"
+      ],
+      "project_records": 0,
+      "affordable_trust_fund_balance": 0
+    },
+    "1707": {
+      "district": "1707",
       "name": "Oldmans Township",
       "county": "Salem",
       "reporting_status": "reported",
@@ -7561,8 +7578,8 @@
       "project_records": 0,
       "affordable_trust_fund_balance": 898661.48
     },
-    "1707": {
-      "district": "1707",
+    "1708": {
+      "district": "1708",
       "name": "Penns Grove Borough",
       "county": "Salem",
       "reporting_status": "reported",
@@ -7578,8 +7595,8 @@
       "moderate_income_households": 0,
       "affordable_trust_fund_balance": 0
     },
-    "1708": {
-      "district": "1708",
+    "1709": {
+      "district": "1709",
       "name": "Pennsville Township",
       "county": "Salem",
       "reporting_status": "reported",
@@ -7589,8 +7606,8 @@
       "project_records": 0,
       "affordable_trust_fund_balance": 1937275.82
     },
-    "1709": {
-      "district": "1709",
+    "1710": {
+      "district": "1710",
       "name": "Pilesgrove Township",
       "county": "Salem",
       "reporting_status": "reported",
@@ -7606,8 +7623,8 @@
       "moderate_income_households": 88,
       "affordable_trust_fund_balance": 2147417.19
     },
-    "1710": {
-      "district": "1710",
+    "1711": {
+      "district": "1711",
       "name": "Pittsgrove Township",
       "county": "Salem",
       "reporting_status": "reported",
@@ -7623,8 +7640,8 @@
       "moderate_income_households": 5,
       "affordable_trust_fund_balance": 554677.49
     },
-    "1711": {
-      "district": "1711",
+    "1712": {
+      "district": "1712",
       "name": "Quinton Township",
       "county": "Salem",
       "reporting_status": "reported",
@@ -7640,8 +7657,8 @@
       "moderate_income_households": 16,
       "affordable_trust_fund_balance": 0
     },
-    "1712": {
-      "district": "1712",
+    "1713": {
+      "district": "1713",
       "name": "Salem City",
       "county": "Salem",
       "reporting_status": "reported",
@@ -7650,23 +7667,6 @@
       ],
       "project_records": 0,
       "affordable_trust_fund_balance": 0
-    },
-    "1713": {
-      "district": "1713",
-      "name": "Carneys Point Township",
-      "county": "Salem",
-      "reporting_status": "reported",
-      "identity_methods": [
-        "dca_muni_code",
-        "taxation_muni_code"
-      ],
-      "project_records": 4,
-      "affordable_units_total": 11,
-      "affordable_units_rental": 0,
-      "affordable_units_for_sale": 6,
-      "low_income_households": 0,
-      "moderate_income_households": 0,
-      "affordable_trust_fund_balance": 29841388.54
     },
     "1714": {
       "district": "1714",
@@ -9174,5 +9174,6 @@
       "moderate_income_households": 0,
       "affordable_trust_fund_balance": 87397.6
     }
-  }
+  },
+  "district_key": "modiv_pams"
 }

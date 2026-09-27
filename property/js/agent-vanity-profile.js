@@ -3,10 +3,12 @@
 
   var RESERVED = new Set([
     'admin','api','app','auth','billing','dashboard','developer','help','login','logout','pricing','property','signup','support','watchdog','www',
-    'fuck','shit','bitch','cunt','dick','pussy','asshole'
+    'fuck','shit','bitch','cunt','dick','pussy','asshole',
+    // Real or planned /agent/* pages; keep in sync with AGENT_RESERVED_SEGMENTS in middleware.js.
+    'agent','agents','analytics','assets','buyers','client-room','clients','contacts','desk','edit','extension','farm-map','index','leads','listing-prep','new','onboarding','open-house','portal','reports','settings','shared','sphere','team','teams','today','training','workspace'
   ]);
   var SLUG_RE = /^[a-z0-9](?:[a-z0-9-]{1,38}[a-z0-9])?$/;
-  var PORTAL_ROOT = 'https://www.watchdogindex.com/property/agent/';
+  var PORTAL_ROOT = 'https://www.watchdogindex.com/agent/';
 
   function normalize(value) {
     return String(value || '')
@@ -124,7 +126,7 @@
     section.id = 'ac-vanity';
     section.className = 'ac-section ac-vanity';
     section.innerHTML = '<header><div><span>AGENT PORTAL</span><h2>Reserve your Watchdog address</h2><p>Your vanity address is protected by your Agent-or-higher entitlement and remains reserved through the paid term plus the existing grace period after cancellation.</p></div></header>' +
-      '<div class="ac-vanity-grid"><div><label for="ac-vanity-input">Portal address</label><div class="ac-vanity-field"><span>watchdogindex.com/property/agent/</span><input id="ac-vanity-input" maxlength="40" autocomplete="off" spellcheck="false" aria-describedby="ac-vanity-note"></div>' +
+      '<div class="ac-vanity-grid"><div><label for="ac-vanity-input">Portal address</label><div class="ac-vanity-field"><span>watchdogindex.com/agent/</span><input id="ac-vanity-input" maxlength="40" autocomplete="off" spellcheck="false" aria-describedby="ac-vanity-note"></div>' +
       '<div class="ac-vanity-actions"><button class="ac-vanity-save" id="ac-vanity-save" type="button">Reserve address</button><button class="ac-vanity-clear" id="ac-vanity-clear" type="button">Release address</button></div><small class="ac-vanity-note" id="ac-vanity-note" aria-live="polite"></small></div>' +
       '<aside class="ac-vanity-preview"><span>Public portal URL</span><b id="ac-vanity-url">Not reserved yet</b><small id="ac-vanity-help">Your active Agent+ portal displays approved professional branding above Watchdog’s governed public NJ property lookup, with consent-based lead capture, QR assets and portal analytics.</small><div class="ac-vanity-status" id="ac-vanity-status"></div></aside></div>';
 

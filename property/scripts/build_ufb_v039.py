@@ -8,6 +8,9 @@ from __future__ import annotations
 import argparse, hashlib, json, re, zipfile
 from collections import defaultdict
 from pathlib import Path
+import sys as _sys
+_sys.path.insert(0, str(Path(__file__).resolve().parent))
+from nj_district_codes import pams_from_state, pams_from_state_or_none  # state code -> PIN district code
 import xml.etree.ElementTree as ET
 
 EXPECTED_SHA256 = "79a59be4c4ab2669d60ebb8072aab5a5775df7025e66cb95a887e1c39ed8ccaa"
@@ -299,6 +302,7 @@ def main():
     counties = defaultdict(dict)
     no_ufb = sig_missing = 0
     for rn, code, name, county, no_flag, sig_flag in muni_rows:
+        code = pams_from_state(code)
         no = bool(no_flag); sig = bool(sig_flag)
         no_ufb += int(no); sig_missing += int(sig)
         values = [clean(rows[rn].get(f["column"])) for f in fields]

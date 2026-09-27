@@ -15,6 +15,9 @@ import json
 import math
 from datetime import datetime, timezone
 from pathlib import Path
+import sys as _sys
+_sys.path.insert(0, str(Path(__file__).resolve().parent))
+from nj_district_codes import pams_from_state, pams_from_state_or_none  # state code -> PIN district code
 
 import openpyxl
 import xlrd
@@ -44,6 +47,7 @@ def load_abstract(path):
         code = str(row[0]).strip()
         if not (len(code) == 4 and code.isdigit()):
             continue
+        code = pams_from_state(code)
         result[code] = {
             "code": code,
             "name": str(row[1]).strip(),
@@ -66,6 +70,7 @@ def load_pilots(path):
         code = str(row[0] or "").strip()
         if not (len(code) == 4 and code.isdigit()):
             continue
+        code = pams_from_state(code)
         result[code] = {
             "code": code,
             "name": str(row[1] or "").strip(),

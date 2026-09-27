@@ -23,6 +23,9 @@ import re
 from collections import Counter, defaultdict
 from datetime import date, datetime, timezone
 from pathlib import Path
+import sys as _sys
+_sys.path.insert(0, str(Path(__file__).resolve().parent))
+from nj_district_codes import pams_from_state, pams_from_state_or_none  # state code -> PIN district code
 
 from openpyxl import load_workbook
 
@@ -76,7 +79,7 @@ def municipal_code(value: object) -> str | None:
     digits = re.sub(r"\D", "", str(value))
     if not digits or len(digits) > 4:
         return None
-    return digits.zfill(4)
+    return pams_from_state_or_none(digits.zfill(4))
 
 
 def iso_date(value: object) -> str | None:
