@@ -275,7 +275,7 @@ def main() -> int:
     for rel in sorted(playfair_app_files):
         if rel == "property/css/shared/03-dashboard-components.css" and preapproval_override:
             continue
-        findings.append(Finding("warning", rel, "Playfair Display can render in an app/data surface; product UI should use Plus Jakarta Sans + Inter."))
+        findings.append(Finding("warning", rel, "Playfair Display can render in an app/data surface; product UI should use Plus Jakarta Sans."))
 
     for rel in sorted(set(bad_brand_files)):
         findings.append(Finding("warning", rel, "Non-canonical Watchdog casing found (WatchDog/Watch Dog)."))
@@ -285,8 +285,8 @@ def main() -> int:
         typography = brand.get("typography", {}).get("canonical_product", {})
         if typography.get("display", {}).get("family") != "Plus Jakarta Sans":
             findings.append(Finding("critical", relative(BRAND_JSON), "Canonical display font is not Plus Jakarta Sans."))
-        if typography.get("body_ui", {}).get("family") != "Inter":
-            findings.append(Finding("critical", relative(BRAND_JSON), "Canonical body/UI font is not Inter."))
+        if typography.get("body_ui", {}).get("family") != "Plus Jakarta Sans":
+            findings.append(Finding("critical", relative(BRAND_JSON), "Canonical body/UI font is not Plus Jakarta Sans."))
     except AttributeError:
         findings.append(Finding("critical", relative(BRAND_JSON), "Typography contract is malformed."))
 

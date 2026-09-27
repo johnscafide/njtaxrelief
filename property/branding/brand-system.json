@@ -3,9 +3,9 @@
     "name": "Watchdog Brand System",
     "brand": "Watchdog",
     "product_descriptor": "Property Intelligence",
-    "version": "1.1.0",
+    "version": "1.2.0",
     "status": "authoritative",
-    "updated": "2026-08-20",
+    "updated": "2026-09-27",
     "owner": "Watchdog product team",
     "route": "/property/branding/",
     "audience": ["developer", "designer", "graphic-artist", "copywriter", "agency", "llm"],
@@ -43,7 +43,7 @@
     "gradient": ["#183b84", "#2f6df6"],
     "wordmark": {
       "text": "Watchdog",
-      "font_family": "Inter",
+      "font_family": "Plus Jakarta Sans",
       "font_weight": 800,
       "desktop_size_px": 21,
       "letter_spacing_em": -0.04
@@ -65,7 +65,7 @@
   "typography": {
     "canonical_product": {
       "display": {"family": "Plus Jakarta Sans", "fallback": "sans-serif", "weights": [600, 700, 800]},
-      "body_ui": {"family": "Inter", "fallback": "system-ui, -apple-system, BlinkMacSystemFont, Segoe UI, sans-serif", "weights": [400, 500, 600, 700, 800]}
+      "body_ui": {"family": "Plus Jakarta Sans", "fallback": "Arial, sans-serif", "weights": [400, 500, 600, 700, 800]}
     },
     "editorial_exceptions": {
       "Source Sans 3": "Allowed on existing public long-form or lookup experiences while those surfaces are maintained.",

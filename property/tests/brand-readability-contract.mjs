@@ -57,7 +57,7 @@ const checks = [
   ['Agent Control mobile form controls avoid browser zoom', agentDesk.includes('min-height:48px') && agentDesk.includes('font-size:var(--aw-md)') && tokenPixels('--type-md') >= 16],
   ['Agent Control numeric data uses tabular numerals', agentWorkspace.includes('font-variant-numeric:tabular-nums')],
   ['Agent Control stylesheets have no raw sub-12px text', sub12PixelType(agentWorkspace).length === 0 && sub12PixelType(agentDesk).length === 0 && sub12PixelType(agentHub).length === 0],
-  ['brand spec version advanced', brand.metadata?.version === '1.1.0' && brand.metadata?.updated === '2026-08-20'],
+  ['brand spec version advanced', brand.metadata?.version === '1.2.0' && brand.metadata?.updated === '2026-09-27'],
   ['brand spec names consistency CSS', brand.implementation?.canonical_shared_reference === '/property/css/brand-consistency.css'],
   ['brand spec names consistency runtime', brand.implementation?.brand_runtime === '/property/js/brand-consistency-runtime.js'],
   ['brand spec names current nav loader', brand.implementation?.sidebar === '/property/js/sidemenu.js'],
