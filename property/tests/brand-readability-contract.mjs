@@ -11,6 +11,7 @@ const agentDeskHtml = read('property/agent-desk/index.html');
 const agentWorkspace = read('property/css/agent-workspace.css');
 const agentWorkspaceJs = read('property/js/agent-workspace.js');
 const agentDesk = read('property/css/agent-desk.css');
+const agentHub = read('property/css/agent-hub.css');
 const brandCenter = read('property/branding/brand-center.js');
 const llmGuide = read('property/branding/LLM-BRAND-GUIDE.md');
 const brand = JSON.parse(read('property/branding/brand-system.json'));
@@ -49,13 +50,13 @@ const checks = [
   ['canonical navigation includes ROBUST Framework', universalMenu.includes("label:'ROBUST Framework'")],
   ['canonical navigation includes Professional Hub', universalMenu.includes("label:'Professional Hub'")],
   ['Agent Control loads the shared workspace chrome and one desk stylesheet', agentDeskHtml.includes('/property/css/agent-workspace.css') && agentDeskHtml.includes('/property/css/agent-desk.css') && !/agent-control-(?:2027|readability|mobile)/.test(agentDeskHtml)],
-  ['Agent Control tabs come from the shared workspace runtime', agentDeskHtml.includes('/property/js/agent-workspace.js') && agentWorkspaceJs.includes("label:'Opportunity Desk'") && agentWorkspaceJs.includes("label:'Advanced Farm'")],
+  ['Agent Control tabs come from the shared workspace runtime', agentDeskHtml.includes('/property/js/agent-workspace.js') && agentWorkspaceJs.includes("label:'Agent Desk'") && agentWorkspaceJs.includes("label:'Advanced Farm'")],
   ['Agent Control uses the app shell (universal menu)', agentDeskHtml.includes('/property/js/app-shell-2027.js')],
   ['Agent Control type scale maps to canonical tokens', agentWorkspace.includes('--aw-xs:var(--type-xs') && agentWorkspace.includes('--aw-sm:var(--type-sm') && agentWorkspace.includes('--aw-md:var(--type-md') && tokenPixels('--type-xs') >= 12],
   ['Agent Control desktop controls use readable floor', agentWorkspace.includes('min-height:42px') && agentDesk.includes('min-height:42px') && tokenPixels('--type-sm') >= 13],
   ['Agent Control mobile form controls avoid browser zoom', agentDesk.includes('min-height:48px') && agentDesk.includes('font-size:var(--aw-md)') && tokenPixels('--type-md') >= 16],
   ['Agent Control numeric data uses tabular numerals', agentWorkspace.includes('font-variant-numeric:tabular-nums')],
-  ['Agent Control stylesheets have no raw sub-12px text', sub12PixelType(agentWorkspace).length === 0 && sub12PixelType(agentDesk).length === 0],
+  ['Agent Control stylesheets have no raw sub-12px text', sub12PixelType(agentWorkspace).length === 0 && sub12PixelType(agentDesk).length === 0 && sub12PixelType(agentHub).length === 0],
   ['brand spec version advanced', brand.metadata?.version === '1.1.0' && brand.metadata?.updated === '2026-08-20'],
   ['brand spec names consistency CSS', brand.implementation?.canonical_shared_reference === '/property/css/brand-consistency.css'],
   ['brand spec names consistency runtime', brand.implementation?.brand_runtime === '/property/js/brand-consistency-runtime.js'],

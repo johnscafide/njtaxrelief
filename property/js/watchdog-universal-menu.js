@@ -101,7 +101,7 @@
       {key:'robust',href:route('/robust/'),icon:'fa-gauge-high',label:'ROBUST Framework'},
       {key:'pulse',href:route('/pulse'),icon:'fa-wave-square',label:'Property Pulse'}
     ];
-    if(state.ready && isAgent()) out.push({key:'agent-desk',href:route('/agent-desk'),icon:'fa-bullseye',label:'Agent Control'});
+    if(state.ready && isAgent()) out.push({key:'agent-desk',href:route('/agent-desk'),icon:'fa-briefcase',label:'Agent Desk'});
     if(state.ready && can('pro_plus')) out.push({key:'scan',href:route('/scan'),icon:'fa-magnifying-glass-chart',label:'Appeal Scanner'});
     if(state.ready && can('agent')) out.push({key:'transaction',href:'/transaction/',icon:'fa-file-signature',label:'Transactions'});
     if(state.ready && can('agent')) out.push({key:'data-workbench',href:route('/data-workbench'),icon:'fa-table-list',label:'Data Workbench'});

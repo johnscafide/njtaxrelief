@@ -127,7 +127,7 @@ try {
   await page.evaluate(() => { for (let i = 0; i < 10; i++) document.body.append(document.createElement('span')); });
   await page.waitForTimeout(400);
   assert.equal(await page.evaluate(() => agentFixture.rpcCalls), before.rpc, 'Unrelated DOM changes must not trigger quota queries');
-  const firstImport = page.locator('[data-start-import]');
+  const firstImport = page.locator('#ad-focus [data-start-import]');
   await firstImport.click();
   await page.waitForFunction(() => document.activeElement?.id === 'ad-import-close');
   await page.keyboard.press('Escape');

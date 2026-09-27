@@ -5,7 +5,7 @@
   <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
   <meta name="robots" content="noindex,nofollow">
   <meta name="theme-color" content="#f5f7fb">
-  <title>Opportunity Desk | Watchdog Agent Control</title>
+  <title>Agent Desk | Watchdog</title>
   <link rel="manifest" href="/property/manifest.webmanifest">
   <link rel="icon" type="image/png" href="/favicon-96x96.png">
   <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -14,32 +14,52 @@
   <link rel="stylesheet" href="/property/css/shared/00-design-tokens.css">
   <link rel="stylesheet" href="/property/css/app-shell-2027.css">
   <link rel="stylesheet" href="/property/css/agent-workspace.css?v=20260926a">
-  <link rel="stylesheet" href="/property/css/agent-desk.css?v=20260926a">
+  <link rel="stylesheet" href="/property/css/agent-desk.css?v=20260927a">
+  <link rel="stylesheet" href="/property/css/agent-hub.css?v=20260927a">
 </head>
-<body data-sidebar-page="agent-desk" data-plan-auto="true">
-  <nav class="aw27-bar" id="agent-workspace-nav" data-active="desk" aria-label="Agent Control workspaces">
-    <div class="aw27-actions">
-      <button class="aw27-primary ad-import-open" id="ad-import-open" type="button"><i class="fas fa-file-arrow-up" aria-hidden="true"></i><span>Add your sphere</span></button>
-    </div>
-  </nav>
-
-  <main class="ad27" id="ad-main">
-    <div class="ad-shell" id="ad-app" hidden>
-      <header class="aw27-head ad27-head">
-        <div>
-          <h1>Opportunity Desk</h1>
-          <p>Sourced public-record reasons to contact properties in your sphere. <span id="ad-refreshed">Waiting for sources</span></p>
+<body data-sidebar-page="agent-desk" data-plan-auto="true" class="adh-page wdx-agent-workspace">
+  <main class="ad27 adh" id="ad-main">
+    <div class="ad-shell adh-app" id="ad-app" hidden>
+      <!-- One app for agents: six sections, and every tool opens inside the desk. agent-hub.js adds the section switching; without it every section shows in order. -->
+      <nav class="adh-rail" id="adh-rail" aria-label="Agent Desk sections">
+        <div class="adh-rail-brand"><span class="adh-mark" aria-hidden="true"><i class="fas fa-briefcase"></i></span><span><b>Agent Desk</b><small>Everything for your business</small></span></div>
+        <div class="adh-nav-list">
+          <a class="adh-nav" href="#home" data-adh-nav="home"><i class="fas fa-house" aria-hidden="true"></i><span>Home</span></a>
+          <a class="adh-nav" href="#clients" data-adh-nav="clients"><i class="fas fa-user-group" aria-hidden="true"></i><span>Clients</span></a>
+          <a class="adh-nav" href="#farm" data-adh-nav="farm"><i class="fas fa-map-location-dot" aria-hidden="true"></i><span>Farm</span></a>
+          <a class="adh-nav" href="#marketing" data-adh-nav="marketing"><i class="fas fa-bullhorn" aria-hidden="true"></i><span>Marketing</span></a>
+          <a class="adh-nav" href="#research" data-adh-nav="research"><i class="fas fa-magnifying-glass" aria-hidden="true"></i><span>Research</span></a>
+          <a class="adh-nav" href="#deals" data-adh-nav="deals"><i class="fas fa-file-signature" aria-hidden="true"></i><span>Deals</span></a>
         </div>
-      </header>
+        <div class="adh-rail-foot">
+          <button class="adh-rail-add ad-import-open" id="ad-import-open" type="button"><i class="fas fa-user-plus" aria-hidden="true"></i><span>Add clients</span></button>
+          <a class="adh-rail-link" href="/agent/training" data-adh-tool="training"><i class="fas fa-graduation-cap" aria-hidden="true"></i><span>Training &amp; how-tos</span></a>
+        </div>
+      </nav>
 
-      <!-- One-line summary: every number an agent checks first. -->
-      <section class="ad27-kpis" aria-label="Desk summary">
-        <div class="ad27-kpi"><small>Active signals</small><b id="ad-total">0</b></div>
-        <div class="ad27-kpi-group" id="ad-stats" aria-label="Agent outcome analytics"></div>
-      </section>
+      <div class="adh-stage">
+        <!-- HOME -->
+        <section class="adh-view" id="adh-home" data-adh-view="home" aria-labelledby="adh-home-title">
+          <header class="adh-head">
+            <div>
+              <p class="adh-eyebrow" id="adh-date">Agent Desk</p>
+              <h1 id="adh-home-title">Welcome back</h1>
+              <p class="adh-lede">Here is what needs you today. <span id="ad-refreshed">Waiting for sources</span></p>
+            </div>
+          </header>
 
-      <div class="ad27-grid">
-        <div class="ad27-main">
+          <div class="adh-quick" aria-label="Quick start">
+            <button class="adh-quick-btn" type="button" data-start-import><span class="adh-quick-ic tone-sky"><i class="fas fa-user-plus" aria-hidden="true"></i></span><b>Add clients</b><small>Bring in your past clients and sphere</small></button>
+            <a class="adh-quick-btn" href="/farm-map" data-adh-tool="farm-map"><span class="adh-quick-ic tone-teal"><i class="fas fa-draw-polygon" aria-hidden="true"></i></span><b>Draw a farm</b><small>Pick a neighborhood on the map</small></a>
+            <a class="adh-quick-btn" href="/marketing-studio" data-adh-tool="mailers"><span class="adh-quick-ic tone-sand"><i class="fas fa-envelope-open-text" aria-hidden="true"></i></span><b>Send a mailer</b><small>Postcards and letters to your farm</small></a>
+            <a class="adh-quick-btn" href="/transaction/" data-adh-tool="transactions"><span class="adh-quick-ic tone-navy"><i class="fas fa-file-signature" aria-hidden="true"></i></span><b>Start a deal</b><small>Track a contract to closing</small></a>
+          </div>
+
+          <section class="ad27-kpis" aria-label="Desk summary">
+            <div class="ad27-kpi"><small>Active signals</small><b id="ad-total">0</b></div>
+            <div class="ad27-kpi-group" id="ad-stats" aria-label="Agent outcome analytics"></div>
+          </section>
+
           <section class="ad27-card ad-today-hub" id="ad-today-hub" aria-labelledby="ad-today-title">
             <header class="ad27-card-head">
               <h2 id="ad-today-title"><i class="fas fa-calendar-day" aria-hidden="true"></i> Today</h2>
@@ -53,9 +73,10 @@
 
           <section class="ad27-card ad27-worklist" aria-labelledby="ad-queue-title">
             <header class="ad27-card-head ad-list-head">
-              <h2 id="ad-queue-title">Your priority worklist</h2>
+              <h2 id="ad-queue-title">Who to reach out to</h2>
               <small id="ad-result-count"></small>
             </header>
+            <p class="adh-help">Homes in your sphere and farm with a fresh public-record reason to check in, like a new assessment or a permit. Best ones first.</p>
             <div class="ad-controls">
               <div class="ad-tabs" id="ad-tabs" role="tablist" aria-label="Worklist queue">
                 <button class="on" type="button" data-queue="top">Priority</button>
@@ -72,91 +93,160 @@
             <div class="ad-list" id="ad-list" aria-live="polite"></div>
             <button class="ad-load-more" id="ad-load-more" type="button" hidden><i class="fas fa-chevron-down" aria-hidden="true"></i> Show 12 more</button>
           </section>
-        </div>
 
-        <aside class="ad27-rail" aria-label="Workspace">
-          <section class="ad27-card" aria-labelledby="ad-sphere-title">
-            <header class="ad27-card-head"><h2 id="ad-sphere-title">Your sphere</h2></header>
-            <div id="ad-coverage" class="ad27-rows">
-              <div class="ad-coverage-row"><span>Properties loaded</span><b data-coverage-total>—</b></div>
-              <div class="ad-coverage-row"><span>Parcel matched</span><b data-coverage-matched>—</b></div>
-              <div class="ad-coverage-row"><span>Actionable reasons</span><b data-coverage-reasons>—</b></div>
-              <div class="ad-coverage-row"><span>Updates combined</span><b data-coverage-combined>—</b></div>
-            </div>
-            <button id="ad-import-side" class="ad27-btn" type="button"><i class="fas fa-plus" aria-hidden="true"></i> Import or select properties</button>
-          </section>
-
-          <section id="ad-capacity" class="ad27-card ad-capacity"><p class="ad-control-loading">Loading plan capacity…</p></section>
-
-          <section class="ad27-card" aria-labelledby="ad-workflows-title">
-            <header class="ad27-card-head"><h2 id="ad-workflows-title">Workflows</h2></header>
-            <nav class="ad27-links" aria-label="Agent workflows">
-              <a href="/transaction/"><i class="fas fa-file-signature" aria-hidden="true"></i><span>Transactions<small id="ad-today-transactions-sub">Checking closings…</small></span><b id="ad-today-transactions">—</b></a>
-              <a href="/agent/listing-prep"><i class="fas fa-house-chimney" aria-hidden="true"></i><span>Listing Prep<small id="ad-today-listings-sub">Checking prep packs…</small></span><b id="ad-today-listings">—</b></a>
-              <a href="/agent/buyers"><i class="fas fa-people-roof" aria-hidden="true"></i><span>Buyer Shortlists<small id="ad-today-buyers-sub">Checking buyers…</small></span><b id="ad-today-buyers">—</b></a>
-              <a href="/agent/open-house"><i class="fas fa-qrcode" aria-hidden="true"></i><span>Open Houses<small id="ad-today-openhouses-sub">Checking events…</small></span><b id="ad-today-openhouses">—</b></a>
-              <a href="/agent/contacts"><i class="fas fa-address-book" aria-hidden="true"></i><span>CRM Contacts<small>Your permitted contacts</small></span><i class="fas fa-chevron-right" aria-hidden="true"></i></a>
-            </nav>
-          </section>
-
-          <section class="ad27-card" aria-labelledby="ad-digest-title">
-            <header class="ad27-card-head"><h2 id="ad-digest-title">Weekly digest</h2></header>
-            <label class="ad-switch"><input id="ad-digest" type="checkbox"><span aria-hidden="true"></span> Email my top ten every Monday</label>
+          <section class="ad27-card adh-digest" aria-labelledby="ad-digest-title">
+            <header class="ad27-card-head"><h2 id="ad-digest-title">Monday email</h2></header>
+            <label class="ad-switch"><input id="ad-digest" type="checkbox"><span aria-hidden="true"></span> Email me my top ten every Monday</label>
             <small class="ad27-note" id="ad-digest-note"></small>
           </section>
-        </aside>
-      </div>
+          <p class="adh-footnote"><i class="fas fa-graduation-cap" aria-hidden="true"></i> New to the desk? <a href="/agent/training" data-adh-tool="training">Watch the short how-tos</a>.</p>
+        </section>
 
-      <div class="ad27-split">
-        <section class="ad27-card ad-discover" aria-labelledby="ad-lists-title">
-          <header class="ad27-card-head">
-            <h2 id="ad-lists-title">Live market lists</h2>
-            <button id="ad-list-new" class="ad27-btn" type="button"><i class="fas fa-plus" aria-hidden="true"></i> New list</button>
-          </header>
-          <div class="ad-quick-plays" aria-label="Start a list from a template">
-            <button type="button" data-play="residential"><i class="fas fa-house" aria-hidden="true"></i> Residential farm</button>
-            <button type="button" data-play="commercial"><i class="fas fa-building" aria-hidden="true"></i> Commercial watch</button>
-            <button type="button" data-play="all"><i class="fas fa-layer-group" aria-hidden="true"></i> Market inventory</button>
+        <!-- CLIENTS -->
+        <section class="adh-view" id="adh-clients" data-adh-view="clients" aria-labelledby="adh-clients-title">
+          <header class="adh-head"><div><p class="adh-eyebrow">Clients</p><h1 id="adh-clients-title">Your people and their homes</h1><p class="adh-lede">Add past clients and your sphere once. Watchdog watches their homes and tells you when there is a reason to reach out.</p></div></header>
+          <div class="adh-tools">
+            <a class="adh-tool" href="/agent/contacts" data-adh-tool="contacts"><span class="adh-tool-ic tone-sky"><i class="fas fa-address-book" aria-hidden="true"></i></span><span class="adh-tool-copy"><b>Contacts</b><small>Import your CRM list, clean it up and match each person to their home.</small></span><span class="adh-tool-go"><span>Open</span> <i class="fas fa-arrow-right" aria-hidden="true"></i></span></a>
+            <button class="adh-tool" type="button" data-start-import><span class="adh-tool-ic tone-teal"><i class="fas fa-file-arrow-up" aria-hidden="true"></i></span><span class="adh-tool-copy"><b>Add homes to watch</b><small>Pick saved properties or paste a spreadsheet of addresses.</small></span><span class="adh-tool-go"><span>Add</span> <i class="fas fa-plus" aria-hidden="true"></i></span></button>
           </div>
-          <form id="ad-list-form" class="ad27-form" hidden>
-            <label>List name<input id="ad-list-name" required maxlength="80" placeholder="Cherry Hill residential farm"></label>
-            <label>Geography<select id="ad-list-scope"><option value="municipality">Municipality</option><option value="county">County</option><option value="zip">ZIP code</option></select></label>
-            <label>Market<input id="ad-list-value" required maxlength="80" placeholder="Cherry Hill Twp"></label>
-            <label>Property class<select id="ad-list-class"><option value="">All supported</option><option value="2">Residential</option><option value="4A,4B,4C">Commercial</option><option value="1">Vacant land</option></select></label>
-            <div class="ad27-form-actions"><button type="submit" class="ad27-btn primary">Save &amp; check list</button><button type="button" class="ad27-btn" id="ad-list-cancel">Cancel</button></div>
-          </form>
-          <div id="ad-dynamic-lists" class="ad-dynamic-lists"><p class="ad-control-loading">Loading your lists…</p></div>
+          <div class="adh-cols">
+            <section class="ad27-card" aria-labelledby="ad-sphere-title">
+              <header class="ad27-card-head"><h2 id="ad-sphere-title">Your sphere</h2></header>
+              <div id="ad-coverage" class="ad27-rows">
+                <div class="ad-coverage-row"><span>Properties loaded</span><b data-coverage-total>—</b></div>
+                <div class="ad-coverage-row"><span>Parcel matched</span><b data-coverage-matched>—</b></div>
+                <div class="ad-coverage-row"><span>Actionable reasons</span><b data-coverage-reasons>—</b></div>
+                <div class="ad-coverage-row"><span>Updates combined</span><b data-coverage-combined>—</b></div>
+              </div>
+              <button id="ad-import-side" class="ad27-btn" type="button"><i class="fas fa-plus" aria-hidden="true"></i> Import or select properties</button>
+            </section>
+            <section id="ad-capacity" class="ad27-card ad-capacity"><p class="ad-control-loading">Loading plan capacity…</p></section>
+          </div>
         </section>
 
-        <section class="ad27-card ad-territory-panel" aria-labelledby="ad-territory-title">
-          <header class="ad27-card-head">
-            <h2 id="ad-territory-title">Territories</h2>
-            <button id="ad-territory-new" class="ad27-btn" type="button"><i class="fas fa-plus" aria-hidden="true"></i> Territory</button>
+        <!-- FARM -->
+        <section class="adh-view" id="adh-farm" data-adh-view="farm" aria-labelledby="adh-farm-title">
+          <header class="adh-head"><div><p class="adh-eyebrow">Farm</p><h1 id="adh-farm-title">Own a neighborhood</h1><p class="adh-lede">Choose the area you want to be known in. Watchdog keeps the list of homes fresh and flags changes worth a note.</p></div></header>
+          <div class="adh-tools">
+            <a class="adh-tool" href="/farm-map" data-adh-tool="farm-map"><span class="adh-tool-ic tone-teal"><i class="fas fa-map" aria-hidden="true"></i></span><span class="adh-tool-copy"><b>Farm map</b><small>Draw an area on the map and see every home inside it.</small></span><span class="adh-tool-go"><span>Open</span> <i class="fas fa-arrow-right" aria-hidden="true"></i></span></a>
+            <a class="adh-tool" href="/farm-builder" data-adh-tool="farm-builder"><span class="adh-tool-ic tone-sky"><i class="fas fa-sliders" aria-hidden="true"></i></span><span class="adh-tool-copy"><b>Farm by filters</b><small>Build a farm by town, home type, value and more.</small></span><span class="adh-tool-go"><span>Open</span> <i class="fas fa-arrow-right" aria-hidden="true"></i></span></a>
+          </div>
+          <div class="ad27-split">
+            <section class="ad27-card ad-discover" aria-labelledby="ad-lists-title">
+              <header class="ad27-card-head">
+                <h2 id="ad-lists-title">Your farm lists</h2>
+                <button id="ad-list-new" class="ad27-btn" type="button"><i class="fas fa-plus" aria-hidden="true"></i> New list</button>
+              </header>
+              <div class="ad-quick-plays" aria-label="Start a list from a template">
+                <button type="button" data-play="residential"><i class="fas fa-house" aria-hidden="true"></i> Residential farm</button>
+                <button type="button" data-play="commercial"><i class="fas fa-building" aria-hidden="true"></i> Commercial watch</button>
+                <button type="button" data-play="all"><i class="fas fa-layer-group" aria-hidden="true"></i> Market inventory</button>
+              </div>
+              <form id="ad-list-form" class="ad27-form" hidden>
+                <label>List name<input id="ad-list-name" required maxlength="80" placeholder="Cherry Hill residential farm"></label>
+                <label>Geography<select id="ad-list-scope"><option value="municipality">Municipality</option><option value="county">County</option><option value="zip">ZIP code</option></select></label>
+                <label>Market<input id="ad-list-value" required maxlength="80" placeholder="Cherry Hill Twp"></label>
+                <label>Property class<select id="ad-list-class"><option value="">All supported</option><option value="2">Residential</option><option value="4A,4B,4C">Commercial</option><option value="1">Vacant land</option></select></label>
+                <div class="ad27-form-actions"><button type="submit" class="ad27-btn primary">Save &amp; check list</button><button type="button" class="ad27-btn" id="ad-list-cancel">Cancel</button></div>
+              </form>
+              <div id="ad-dynamic-lists" class="ad-dynamic-lists"><p class="ad-control-loading">Loading your lists…</p></div>
+            </section>
+
+            <section class="ad27-card ad-territory-panel" aria-labelledby="ad-territory-title">
+              <header class="ad27-card-head">
+                <h2 id="ad-territory-title">Territories</h2>
+                <button id="ad-territory-new" class="ad27-btn" type="button"><i class="fas fa-plus" aria-hidden="true"></i> Territory</button>
+              </header>
+              <form id="ad-territory-form" class="ad27-form" hidden>
+                <label>Name<input id="ad-territory-label" required maxlength="80" placeholder="Camden County sphere"></label>
+                <label>Scope<select id="ad-territory-type"><option value="municipality">Municipality</option><option value="county">County</option><option value="zip">ZIP code</option></select></label>
+                <label>Value<input id="ad-territory-value" required maxlength="80" placeholder="Cherry Hill Twp"></label>
+                <div class="ad27-form-actions"><button type="submit" class="ad27-btn primary">Save territory</button><button type="button" class="ad27-btn" id="ad-territory-cancel">Cancel</button></div>
+              </form>
+              <div id="ad-territory-list"><p class="ad-control-loading">Loading territory coverage…</p></div>
+            </section>
+          </div>
+        </section>
+
+        <!-- MARKETING -->
+        <section class="adh-view" id="adh-marketing" data-adh-view="marketing" aria-labelledby="adh-marketing-title">
+          <header class="adh-head"><div><p class="adh-eyebrow">Marketing</p><h1 id="adh-marketing-title">Stay top of mind</h1><p class="adh-lede">Mail, email and reports built from real property data, plus your own agent page. See what is working at the bottom.</p></div></header>
+          <div class="adh-tools">
+            <a class="adh-tool" href="/marketing-studio" data-adh-tool="mailers"><span class="adh-tool-ic tone-sand"><i class="fas fa-envelope-open-text" aria-hidden="true"></i></span><span class="adh-tool-copy"><b>Mailers &amp; postcards</b><small>Pick an audience, design a piece and send it by mail.</small></span><span class="adh-tool-go"><span>Open</span> <i class="fas fa-arrow-right" aria-hidden="true"></i></span></a>
+            <a class="adh-tool" href="/newsletter-studio" data-adh-tool="broadcasts"><span class="adh-tool-ic tone-sky"><i class="fas fa-paper-plane" aria-hidden="true"></i></span><span class="adh-tool-copy"><b>Email updates</b><small>Send a market update email to your list.</small></span><span class="adh-tool-go"><span>Open</span> <i class="fas fa-arrow-right" aria-hidden="true"></i></span></a>
+            <a class="adh-tool" href="#farm" data-adh-nav="farm"><span class="adh-tool-ic tone-teal"><i class="fas fa-chart-column" aria-hidden="true"></i></span><span class="adh-tool-copy"><b>Farm reports</b><small>Open one of your farm lists and choose Reports to make a neighborhood report.</small></span><span class="adh-tool-go"><span>Farm lists</span> <i class="fas fa-arrow-right" aria-hidden="true"></i></span></a>
+            <a class="adh-tool" href="/report-builder" data-adh-tool="report-builder"><span class="adh-tool-ic tone-navy"><i class="fas fa-file-lines" aria-hidden="true"></i></span><span class="adh-tool-copy"><b>Client reports</b><small>A branded, sourced report on one home for a client.</small></span><span class="adh-tool-go"><span>Open</span> <i class="fas fa-arrow-right" aria-hidden="true"></i></span></a>
+            <a class="adh-tool" href="/marketing-plan" data-adh-tool="marketing-plan"><span class="adh-tool-ic tone-sand"><i class="fas fa-calendar-check" aria-hidden="true"></i></span><span class="adh-tool-copy"><b>Marketing plan</b><small>A simple month-by-month plan for your farm.</small></span><span class="adh-tool-go"><span>Open</span> <i class="fas fa-arrow-right" aria-hidden="true"></i></span></a>
+            <a class="adh-tool" href="/growth/" data-adh-tool="growth"><span class="adh-tool-ic tone-sky"><i class="fas fa-arrow-trend-up" aria-hidden="true"></i></span><span class="adh-tool-copy"><b>Playbooks</b><small>Step-by-step workflows other agents use.</small></span><span class="adh-tool-go"><span>Open</span> <i class="fas fa-arrow-right" aria-hidden="true"></i></span></a>
+          </div>
+          <section class="ad27-card adh-portal" id="adh-portal" aria-labelledby="adh-portal-title">
+            <header class="ad27-card-head"><h2 id="adh-portal-title"><i class="fas fa-id-badge" aria-hidden="true"></i> Your agent page</h2></header>
+            <div id="adh-portal-body"><p class="ad-control-loading">Checking your page address…</p></div>
+          </section>
+          <section class="ad27-card ad-funnel-panel" aria-labelledby="ad-funnel-title">
+            <header class="ad27-card-head">
+              <h2 id="ad-funnel-title">Is it working?</h2>
+              <select id="ad-funnel-window" aria-label="Results period"><option value="30">Last 30 days</option><option value="90">Last 90 days</option><option value="365">Last 12 months</option></select>
+            </header>
+            <div class="ad27-results">
+              <div class="ad-funnel" id="ad-funnel"><p class="ad-control-loading">Loading outcome analytics…</p></div>
+              <div class="ad27-portal"><h3>Agent page visits</h3><div class="ad-portal-analytics" id="ad-portal-analytics" aria-label="Agent portal traffic and lead analytics"><p class="ad-control-loading">Loading portal analytics…</p></div></div>
+            </div>
+            <p class="ad27-note ad-funnel-note"><i class="fas fa-shield-halved" aria-hidden="true"></i> Watchdog ranks how useful property information is and measures your recorded workflow. It never labels anyone a likely seller, distressed owner or motivated lead.</p>
+          </section>
+        </section>
+
+        <!-- RESEARCH -->
+        <section class="adh-view" id="adh-research" data-adh-view="research" aria-labelledby="adh-research-title">
+          <header class="adh-head"><div><p class="adh-eyebrow">Research</p><h1 id="adh-research-title">Know the home before you call</h1><p class="adh-lede">Taxes, assessments, fairness and town data for any New Jersey property, with the source for every number.</p></div></header>
+          <div class="adh-tools">
+            <a class="adh-tool" href="/" data-adh-tool="lookup"><span class="adh-tool-ic tone-navy"><i class="fas fa-magnifying-glass-location" aria-hidden="true"></i></span><span class="adh-tool-copy"><b>Look up a property</b><small>Search any NJ address for taxes, assessment and the Watchdog Score.</small></span><span class="adh-tool-go"><span>Open</span> <i class="fas fa-arrow-right" aria-hidden="true"></i></span></a>
+            <a class="adh-tool" href="/scan" data-adh-tool="scan"><span class="adh-tool-ic tone-sand"><i class="fas fa-scale-balanced" aria-hidden="true"></i></span><span class="adh-tool-copy"><b>Appeal scanner</b><small>Find homes in a town that look over-assessed.</small></span><span class="adh-tool-go"><span>Open</span> <i class="fas fa-arrow-right" aria-hidden="true"></i></span></a>
+            <a class="adh-tool" href="/town-compare" data-adh-tool="town-compare"><span class="adh-tool-ic tone-teal"><i class="fas fa-city" aria-hidden="true"></i></span><span class="adh-tool-copy"><b>Compare towns</b><small>Taxes, fairness and budget pressure side by side.</small></span><span class="adh-tool-go"><span>Open</span> <i class="fas fa-arrow-right" aria-hidden="true"></i></span></a>
+            <a class="adh-tool" href="/data-center" data-adh-tool="data-center"><span class="adh-tool-ic tone-sky"><i class="fas fa-database" aria-hidden="true"></i></span><span class="adh-tool-copy"><b>Data center</b><small>Statewide tables, revaluations and sources.</small></span><span class="adh-tool-go"><span>Open</span> <i class="fas fa-arrow-right" aria-hidden="true"></i></span></a>
+          </div>
+        </section>
+
+        <!-- DEALS -->
+        <section class="adh-view" id="adh-deals" data-adh-view="deals" aria-labelledby="adh-deals-title">
+          <header class="adh-head"><div><p class="adh-eyebrow">Deals</p><h1 id="adh-deals-title">From listing to closing</h1><p class="adh-lede">Prep listings, work with buyers, run open houses and track every deal to the closing table.</p></div></header>
+          <nav class="adh-tools" aria-label="Deal tools">
+            <a class="adh-tool" href="/transaction/" data-adh-tool="transactions"><span class="adh-tool-ic tone-navy"><i class="fas fa-file-signature" aria-hidden="true"></i></span><span class="adh-tool-copy"><b>Transactions</b><small id="ad-today-transactions-sub">Checking closings…</small></span><b class="adh-tool-count" id="ad-today-transactions">—</b></a>
+            <a class="adh-tool" href="/agent/listing-prep" data-adh-tool="listing-prep"><span class="adh-tool-ic tone-sand"><i class="fas fa-house-chimney" aria-hidden="true"></i></span><span class="adh-tool-copy"><b>Listing prep</b><small id="ad-today-listings-sub">Checking prep packs…</small></span><b class="adh-tool-count" id="ad-today-listings">—</b></a>
+            <a class="adh-tool" href="/agent/buyers" data-adh-tool="buyers"><span class="adh-tool-ic tone-sky"><i class="fas fa-people-roof" aria-hidden="true"></i></span><span class="adh-tool-copy"><b>Buyer shortlists</b><small id="ad-today-buyers-sub">Checking buyers…</small></span><b class="adh-tool-count" id="ad-today-buyers">—</b></a>
+            <a class="adh-tool" href="/agent/open-house" data-adh-tool="open-house"><span class="adh-tool-ic tone-teal"><i class="fas fa-qrcode" aria-hidden="true"></i></span><span class="adh-tool-copy"><b>Open houses</b><small id="ad-today-openhouses-sub">Checking events…</small></span><b class="adh-tool-count" id="ad-today-openhouses">—</b></a>
+          </nav>
+          <section class="ad27-card adh-deals-soon" aria-labelledby="adh-deals-soon-title">
+            <header class="ad27-card-head"><h2 id="adh-deals-soon-title"><i class="fas fa-calendar-day" aria-hidden="true"></i> Coming up</h2><small>Closings, listing prep and open houses in the next two weeks</small></header>
+            <div class="ad-today-queue" id="adh-deals-queue"><div class="ad-today-empty">Loading…</div></div>
+          </section>
+        </section>
+
+        <!-- Tools open here, inside the desk. -->
+        <section class="adh-frame" id="adh-frame" hidden aria-labelledby="adh-frame-title">
+          <header class="adh-frame-bar">
+            <button class="adh-frame-back" id="adh-frame-back" type="button"><i class="fas fa-arrow-left" aria-hidden="true"></i><span id="adh-frame-back-label">Back</span></button>
+            <h2 id="adh-frame-title">Tool</h2>
+            <a class="adh-frame-out" id="adh-frame-out" href="/" target="_blank" rel="noopener" aria-label="Open in a new tab" title="Open in a new tab"><i class="fas fa-up-right-from-square" aria-hidden="true"></i></a>
           </header>
-          <form id="ad-territory-form" class="ad27-form" hidden>
-            <label>Name<input id="ad-territory-label" required maxlength="80" placeholder="Camden County sphere"></label>
-            <label>Scope<select id="ad-territory-type"><option value="municipality">Municipality</option><option value="county">County</option><option value="zip">ZIP code</option></select></label>
-            <label>Value<input id="ad-territory-value" required maxlength="80" placeholder="Cherry Hill Twp"></label>
-            <div class="ad27-form-actions"><button type="submit" class="ad27-btn primary">Save territory</button><button type="button" class="ad27-btn" id="ad-territory-cancel">Cancel</button></div>
-          </form>
-          <div id="ad-territory-list"><p class="ad-control-loading">Loading territory coverage…</p></div>
+          <div class="adh-frame-body">
+            <div class="adh-frame-loading" id="adh-frame-loading" aria-hidden="true"><i class="fas fa-circle-notch fa-spin"></i></div>
+            <iframe id="adh-iframe" title="Agent tool" src="about:blank"></iframe>
+          </div>
         </section>
       </div>
 
-      <section class="ad27-card ad-funnel-panel" aria-labelledby="ad-funnel-title">
-        <header class="ad27-card-head">
-          <h2 id="ad-funnel-title">Results</h2>
-          <select id="ad-funnel-window" aria-label="Results period"><option value="30">Last 30 days</option><option value="90">Last 90 days</option><option value="365">Last 12 months</option></select>
-        </header>
-        <div class="ad27-results">
-          <div class="ad-funnel" id="ad-funnel"><p class="ad-control-loading">Loading outcome analytics…</p></div>
-          <div class="ad27-portal"><h3>Your agent portal</h3><div class="ad-portal-analytics" id="ad-portal-analytics" aria-label="Agent portal traffic and lead analytics"><p class="ad-control-loading">Loading portal analytics…</p></div></div>
-        </div>
-        <p class="ad27-note ad-funnel-note"><i class="fas fa-shield-halved" aria-hidden="true"></i> Watchdog ranks how useful property information is and measures your recorded workflow. It never labels anyone a likely seller, distressed owner or motivated lead.</p>
-      </section>
+      <nav class="adh-tabbar" aria-label="Agent Desk sections">
+        <a href="#home" data-adh-nav="home"><i class="fas fa-house" aria-hidden="true"></i><span>Home</span></a>
+        <a href="#clients" data-adh-nav="clients"><i class="fas fa-user-group" aria-hidden="true"></i><span>Clients</span></a>
+        <a href="#farm" data-adh-nav="farm"><i class="fas fa-map-location-dot" aria-hidden="true"></i><span>Farm</span></a>
+        <a href="#marketing" data-adh-nav="marketing"><i class="fas fa-bullhorn" aria-hidden="true"></i><span>Market</span></a>
+        <a href="#research" data-adh-nav="research"><i class="fas fa-magnifying-glass" aria-hidden="true"></i><span>Research</span></a>
+        <a href="#deals" data-adh-nav="deals"><i class="fas fa-file-signature" aria-hidden="true"></i><span>Deals</span></a>
+      </nav>
     </div>
 
-    <section class="ad-gate" id="ad-gate" aria-live="polite"><i class="fas fa-circle-notch fa-spin" aria-hidden="true"></i><p>Loading your Opportunity Desk…</p></section>
+    <section class="ad-gate" id="ad-gate" aria-live="polite"><i class="fas fa-circle-notch fa-spin" aria-hidden="true"></i><p>Loading your Agent Desk…</p></section>
   </main>
 
   <template id="ad-first-run-template"><div class="ad-first-run"><span class="aw27-eyebrow">Get started</span><h2>Start with a property you know</h2><p>Bring the listing details from your MLS, then use Watchdog to review the property’s tax, assessment and public-record context.</p><ol><li><a href="/">Research a property</a><small>Look up an address and save it to your watchlist. It will appear here.</small></li><li><button type="button" data-start-import>Import your sphere</button><small>Add your permitted client and past-client addresses using CSV.</small></li><li><a href="/farm-map">Build a neighborhood farm</a><small>Draw an area, review the matches and add selected properties to your desk.</small></li></ol></div></template>
@@ -196,5 +286,6 @@
   <script src="/property/js/move-seats.js?v=20260926a"></script>
   <script src="/property/js/agent-import-mobile-a11y.js"></script>
   <script src="/property/js/agent-control-evidence-mobile.js"></script>
+  <script src="/property/js/agent-hub.js?v=20260927a"></script>
 </body>
 </html>
