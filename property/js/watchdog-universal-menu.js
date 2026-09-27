@@ -285,6 +285,37 @@
       return state.referral;
     }).catch(function(){ return null; });
   }
+  /* Invite credit that does not depend on analytics cookies. When someone
+     arrives through a member invite link we keep only the invite code (no
+     visitor or session tracking), and once they sign in with a brand-new
+     account the server credits the inviter. */
+  var INVITE_KEY = 'wd_invite_code_v1';
+  function captureInvite(){
+    try{
+      var q = new URLSearchParams(location.search || '');
+      var code = q.get('invite') || '';
+      if(!code && String(q.get('utm_source') || '').toLowerCase() === 'watchdog_referral' && String(q.get('utm_medium') || '').toLowerCase() === 'member') code = q.get('utm_campaign') || '';
+      code = String(code).toUpperCase().replace(/[^A-Z0-9]/g,'');
+      if(!/^[A-Z0-9]{10,16}$/.test(code)) return;
+      if(localStorage.getItem(INVITE_KEY)) return; /* first invite wins */
+      localStorage.setItem(INVITE_KEY,JSON.stringify({code:code,at:Date.now()}));
+    }catch(_){}
+  }
+  function claimInvite(){
+    if(!db || !state.user || typeof db.rpc !== 'function') return;
+    var saved = null;
+    try{ saved = JSON.parse(localStorage.getItem(INVITE_KEY) || 'null'); }catch(_){}
+    if(!saved || !saved.code) return;
+    var drop = function(){ try{ localStorage.removeItem(INVITE_KEY); }catch(_){} };
+    if(Date.now() - Number(saved.at || 0) > 30 * 86400000){ drop(); return; }
+    var created = Date.parse(state.user.created_at || '');
+    /* Existing accounts cannot be credited; forget the code. */
+    if(Number.isFinite(created) && Date.now() - created > 14 * 86400000){ drop(); return; }
+    Promise.resolve(db.rpc('claim_my_watchdog_referral',{p_code:saved.code})).then(function(r){
+      if(r && !r.error) drop();
+    }).catch(function(){});
+  }
+
   function showInvite(){
     if(!state.user){ signIn(); return; }
     loadReferral().then(function(d){ renderInvite(d); });
@@ -421,6 +452,7 @@
       var session = r && r.data && r.data.session;
       state.user = session && session.user || state.user || null;
       if(!state.user){ state.ready = true; queue(); return null; }
+      claimInvite();
       return Promise.allSettled([
         db.from('profiles').select('display_name,full_name,avatar_url,role,roles,pro_agent,plan,plan_tier,account_role').eq('id',state.user.id).maybeSingle(),
         db.rpc('get_my_entitlement')
@@ -484,6 +516,7 @@
   }
 
   function boot(){
+    captureInvite();
     ensureCss();
     ensureSiteEditorLoader();
     queue();
