@@ -34,7 +34,7 @@
   function portalUrl() {
     var el = document.getElementById('ac-vanity-url');
     var value = el ? String(el.textContent || '').trim() : '';
-    return /^https:\/\/www\.watchdogindex\.com\/property\/agent\//.test(value) ? value : '';
+    return /^https:\/\/www\.watchdogindex\.com\/agent\/[a-z0-9-]+$/.test(value) ? value : '';
   }
 
   function safeSlug(url) {

@@ -8,7 +8,11 @@ const RESERVED_ROOT_PREFIXES = ['/api', '/towns', '/.well-known', '/_vercel'];
 const STATIC_FILE = /\.[A-Za-z0-9]{1,10}$/;
 const TYPED_SITEMAP_FILE = /^\/sitemap-[a-z0-9-]+\.xml$/i;
 const BULK_SALES_FILE = /^\/property\/sales-[a-z-]+\.json$/i;
-const AGENT_PORTAL_PATH = /^\/property\/agent\/([a-z0-9](?:[a-z0-9-]{1,38}[a-z0-9]))\/?$/i;
+const AGENT_PORTAL_PATH = /^\/agent\/([a-z0-9](?:[a-z0-9-]{1,38}[a-z0-9]))\/?$/i;
+const LEGACY_AGENT_PORTAL_PATH = /^\/property\/agent\/([a-z0-9](?:[a-z0-9-]{1,38}[a-z0-9]))\/?$/i;
+// Agent portal addresses are /agent/<slug>. These names are real /agent/* pages or kept
+// for future ones, so they never resolve to a portal (also blocked when reserving a slug).
+const AGENT_RESERVED_SEGMENTS = new Set(['agent','agents','analytics','assets','buyers','client-room','clients','contacts','desk','edit','extension','farm-map','index','leads','listing-prep','new','onboarding','open-house','portal','reports','settings','shared','sphere','team','teams','today','training','workspace']);
 const SALES_API_PATH = '/api/sales-by-district';
 const AUTOMATION_UA = /\b(?:curl|wget|python-requests|scrapy|go-http-client|libwww-perl|httpclient)\b/i;
 const ROOT_STATIC_PAGES = new Set(['/move', '/contact', '/search', '/agent', '/lender', '/attorney', '/investor', '/developer/communications', '/transaction', '/transaction/shared', '/account/profile', '/account/professional-profile', '/agent/listing-prep', '/agent/buyers', '/agent/open-house', '/agent/training', '/open-house', '/client-room', '/preview', '/preview/home']);
@@ -47,7 +51,8 @@ if(LEGACY_PUBLIC_REDIRECTS.has(url.pathname))return redirectCanonical(request,ur
 if(url.pathname==='/property'||url.pathname==='/property/')return redirectCanonical(request,url,'/');
 const publicPath=cleanPublicPath(url.pathname);
 if(ROOT_STATIC_PAGES.has(publicPath))return next();
-const agentPortalMatch=url.pathname.match(AGENT_PORTAL_PATH);if(agentPortalMatch){const destination=new URL('/property/agent/index.html',request.url);destination.searchParams.set('slug',agentPortalMatch[1].toLowerCase());return rewrite(destination);}
+const legacyPortalMatch=url.pathname.match(LEGACY_AGENT_PORTAL_PATH);if(legacyPortalMatch&&!AGENT_RESERVED_SEGMENTS.has(legacyPortalMatch[1].toLowerCase()))return redirectCanonical(request,url,`/agent/${legacyPortalMatch[1].toLowerCase()}`);
+const agentPortalMatch=url.pathname.match(AGENT_PORTAL_PATH);if(agentPortalMatch&&!AGENT_RESERVED_SEGMENTS.has(agentPortalMatch[1].toLowerCase())){const destination=new URL('/property/agent/index.html',request.url);destination.searchParams.set('slug',agentPortalMatch[1].toLowerCase());return rewrite(destination);}
 if(url.pathname.startsWith('/property/'))return next();
 if(isReservedRootPath(url.pathname)||STATIC_FILE.test(url.pathname))return next();
 return rewriteCleanPage(request,publicPath);}
