@@ -3,8 +3,9 @@
    Real estate agents see "Invite fellow co-op agents"; every other declared
    professional sees "Invite your professional sphere". Watchdog never sends
    anything here: the member copies their own invite and shares it by email,
-   text or social media. The code and link match the shared invite modal
-   (watchdog-invite.js), so referrals attribute the same way. */
+   text or social media. The link is the tracked member referral link
+   (get_or_create_my_watchdog_referral_code), the same one every invite surface
+   uses, so a new account that arrives through it is credited to the inviter. */
 (function () {
   'use strict';
   if (!window.NJPTRSupabaseRuntime) return;
@@ -17,10 +18,32 @@
     });
   }
 
-  function inviteFor(user) {
-    var code = 'WD-' + String(user.id).replace(/-/g, '').slice(0, 10).toUpperCase();
-    var prefix = String(window.NJPTRSupabaseRuntime.routePrefix || '');
-    return { code: code, link: location.origin + prefix + '/?ref=' + encodeURIComponent(code) };
+  var REFERRAL_ROOT = 'https://www.watchdogindex.com/?utm_source=watchdog_referral&utm_medium=member&utm_campaign=';
+
+  async function inviteFor() {
+    var result = await db.rpc('get_or_create_my_watchdog_referral_code');
+    if (result.error || !result.data) throw result.error || new Error('Referral code unavailable');
+    var code = String(result.data);
+    return { code: code, link: REFERRAL_ROOT + encodeURIComponent(code) };
+  }
+
+  async function joinedFor(user) {
+    var result = await db.from('watchdog_referral_conversions')
+      .select('verified_at')
+      .eq('inviter_user_id', user.id)
+      .order('verified_at', { ascending: false })
+      .limit(200);
+    if (result.error) return null;
+    var rows = Array.isArray(result.data) ? result.data : [];
+    return { count: rows.length, latest: rows[0] && rows[0].verified_at || null };
+  }
+
+  function joinedLine(joined) {
+    if (!joined) return '';
+    if (!joined.count) return 'Nobody has joined with your invite yet. When someone creates an account from your link, it shows up here.';
+    var when = '';
+    try { when = joined.latest ? new Date(joined.latest).toLocaleDateString('en-US', { month: 'short', day: 'numeric', year: 'numeric' }) : ''; } catch (_) {}
+    return joined.count + (joined.count === 1 ? ' person has' : ' people have') + ' joined with your invite' + (when ? ', most recently ' + when : '') + '.';
   }
 
   function copy(profile, invite) {
@@ -64,8 +87,9 @@
         '<label class="api-link"><span>Your invite link</span><input id="api-link" readonly value="' + esc(state.invite.link) + '"></label>' +
         '<div class="api-actions">' +
           '<button type="button" class="api-primary" data-api-copy="message"><i class="far fa-copy" aria-hidden="true"></i><span>Copy invite</span></button>' +
-          '<button type="button" data-api-copy="code"><i class="fas fa-hashtag" aria-hidden="true"></i><span>Copy code only</span></button>' +
+          '<button type="button" data-api-copy="link"><i class="fas fa-link" aria-hidden="true"></i><span>Copy link only</span></button>' +
         '</div>' +
+        (state.joined ? '<div class="api-joined' + (state.joined.count ? ' has-joins' : '') + '"><b>' + state.joined.count + '</b><span>' + esc(joinedLine(state.joined)) + '</span></div>' : '') +
         '<small class="api-note" id="api-note" aria-live="polite">"Copy invite" copies a short message with your link and code, ready to paste.</small>' +
       '</div>';
     app.appendChild(section);
@@ -92,10 +116,10 @@
     var button = event.target && event.target.closest ? event.target.closest('[data-api-copy]') : null;
     if (!button || !state) return;
     var kind = button.getAttribute('data-api-copy');
-    var value = kind === 'code' ? state.invite.code : copy(state.profession, state.invite).message;
+    var value = kind === 'link' ? state.invite.link : copy(state.profession, state.invite).message;
     var note = document.getElementById('api-note');
     writeClipboard(value).then(function () {
-      if (note) note.textContent = kind === 'code' ? 'Invite code copied.' : 'Invite copied. Paste it into an email, text or post.';
+      if (note) note.textContent = kind === 'link' ? 'Invite link copied.' : 'Invite copied. Paste it into an email, text or post.';
       var label = button.querySelector('span');
       var original = label ? label.textContent : '';
       if (label) label.textContent = 'Copied';
@@ -117,7 +141,8 @@
       var row = result.data || {};
       var professional = (row.persona === 'professional' || row.persona === 'both') && !!row.primary_profession;
       if (!professional) { state = null; remove(); return; }
-      state = { profession: row.primary_profession, invite: inviteFor(user) };
+      var results = await Promise.all([inviteFor(), joinedFor(user)]);
+      state = { profession: row.primary_profession, invite: results[0], joined: results[1] };
       render();
     } catch (error) {
       console.warn('professional invite', error);

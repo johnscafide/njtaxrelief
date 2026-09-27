@@ -44,10 +44,21 @@
     }).catch(function () { return null; });
   }
 
-  function inviteData(currentUser) {
-    var code = 'WD-' + String(currentUser.id).replace(/-/g, '').slice(0, 10).toUpperCase();
-    var link = location.origin + '/property/?ref=' + encodeURIComponent(code);
-    return { code: code, link: link };
+  // Tracked member referral link. The signup attribution trigger credits the
+  // inviter when a new account's first visit carries these tags.
+  var REFERRAL_ROOT = 'https://www.watchdogindex.com/?utm_source=watchdog_referral&utm_medium=member&utm_campaign=';
+  var referral = null;
+
+  function inviteData() {
+    if (referral) return Promise.resolve(referral);
+    var c = client();
+    if (!c) return Promise.resolve(null);
+    return Promise.resolve(c.rpc('get_or_create_my_watchdog_referral_code')).then(function (result) {
+      if (!result || result.error || !result.data) return null;
+      var code = String(result.data);
+      referral = { code: code, link: REFERRAL_ROOT + encodeURIComponent(code) };
+      return referral;
+    }).catch(function () { return null; });
   }
 
   function ensureShell() {
@@ -74,9 +85,15 @@
     return modal;
   }
 
-  function render(currentUser) {
+  function render(data) {
     var modal = ensureShell();
-    var data = inviteData(currentUser);
+    if (!data) {
+      modal.innerHTML =
+        '<button class="wd-invite-close" type="button" data-watchdog-invite-action="close" aria-label="Close invite dialog"><i class="fas fa-xmark" aria-hidden="true"></i></button>' +
+        '<div class="wd-invite-hero"><small>INVITE TO WATCHDOG</small><h2 id="wd-invite-title">Your invite link is not available right now.</h2><p>Please try again in a moment.</p></div>';
+      modal.dataset.inviteLink = '';
+      return;
+    }
     var subject = 'Try Watchdog Property Intelligence';
     var body = 'I thought you might find Watchdog useful: ' + data.link;
 
@@ -105,8 +122,11 @@
   function open() {
     lastFocus = document.activeElement;
     getUser().then(function (currentUser) {
-      if (!currentUser) return;
-      render(currentUser);
+      if (!currentUser) return undefined; // signed out: do nothing
+      return inviteData();
+    }).then(function (data) {
+      if (data === undefined) return;
+      render(data);
       var modal = document.getElementById('wd-invite-modal');
       var shade = document.getElementById('wd-invite-shade');
       if (modal) modal.classList.add('open');

@@ -73,8 +73,8 @@ html body[data-account-profile-mode] #ac-app :is(.acp-save button,#acb-save,#acb
 html body[data-account-profile-mode] #ac-app :is(.acp-save button,#acb-save,#acb-analyze,#acb-license-go,.acr-submit button,.apc-actions button,.ac-vanity-save,.api-primary,#ac-license-submit,#acr-submit) i{color:inherit!important}
 html body[data-account-profile-mode] #ac-app :is(.acp-save button,#acb-save,#acb-analyze,#acb-license-go,.acr-submit button,.apc-actions button,.ac-vanity-save,.api-primary,#ac-license-submit,#acr-submit):hover{background:var(--ab-blue)!important;border-color:var(--ab-blue)!important}
 html body[data-account-profile-mode] #ac-app :is(button,a):disabled{opacity:.55;cursor:not-allowed}
-html body[data-account-profile-mode] #ac-app :is(#acb-find-license,.ac-vanity-clear,[data-api-copy=code],.ac-qr-actions button,.ac-qr-actions a){display:inline-flex!important;align-items:center;justify-content:center;gap:8px;min-height:44px!important;padding:0 18px!important;border:1px solid var(--ab-line)!important;border-radius:999px!important;background:#fff!important;color:var(--ab-ink)!important;font:600 14px var(--ab-display)!important;box-shadow:none!important}
-html body[data-account-profile-mode] #ac-app :is(#acb-find-license,.ac-vanity-clear,[data-api-copy=code],.ac-qr-actions button,.ac-qr-actions a):hover{border-color:#cfc8ba!important}
+html body[data-account-profile-mode] #ac-app :is(#acb-find-license,.ac-vanity-clear,[data-api-copy=link],.ac-qr-actions button,.ac-qr-actions a){display:inline-flex!important;align-items:center;justify-content:center;gap:8px;min-height:44px!important;padding:0 18px!important;border:1px solid var(--ab-line)!important;border-radius:999px!important;background:#fff!important;color:var(--ab-ink)!important;font:600 14px var(--ab-display)!important;box-shadow:none!important}
+html body[data-account-profile-mode] #ac-app :is(#acb-find-license,.ac-vanity-clear,[data-api-copy=link],.ac-qr-actions button,.ac-qr-actions a):hover{border-color:#cfc8ba!important}
 html body[data-account-profile-mode] #ac-app :is(button,a):focus-visible{outline:3px solid var(--ab-blue-bright)!important;outline-offset:2px}
 html body[data-account-profile-mode] #ac-app .ac-save-row{margin-top:18px!important;padding-top:18px!important;border-top:1px solid var(--ab-line)!important;background:transparent!important}
 html body[data-account-profile-mode] #ac-app .acp-intel input[type=checkbox]{accent-color:var(--ab-navy)}
@@ -98,6 +98,10 @@ html body[data-account-profile-mode] #ac-app .api-code b{color:var(--ab-ink);fon
 html body[data-account-profile-mode] #ac-app .api-link{display:grid;gap:6px}
 html body[data-account-profile-mode] #ac-app .api-link input{width:100%;font-size:14px!important;background:var(--ab-surface)!important}
 html body[data-account-profile-mode] #ac-app .api-actions{display:flex;flex-wrap:wrap;gap:10px}
+html body[data-account-profile-mode] #ac-app .api-joined{display:flex;align-items:center;gap:12px;padding:12px 14px;border-radius:14px;background:var(--ab-surface);border:1px solid var(--ab-line)}
+html body[data-account-profile-mode] #ac-app .api-joined b{flex:none;display:grid;place-items:center;min-width:40px;height:40px;padding:0 8px;border-radius:12px;background:#fff;color:var(--ab-ink);font:800 18px var(--ab-display);border:1px solid var(--ab-line)}
+html body[data-account-profile-mode] #ac-app .api-joined.has-joins b{background:var(--ab-navy);border-color:var(--ab-navy);color:#fff}
+html body[data-account-profile-mode] #ac-app .api-joined span{color:var(--ab-ink);font-size:13px;line-height:1.45}
 html body[data-account-profile-mode] #ac-app .api-note{color:var(--ab-muted);font-size:12px;line-height:1.45}
 
 @media (max-width:768px){

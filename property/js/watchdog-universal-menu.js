@@ -271,13 +271,32 @@
     if(!modal){ modal = document.createElement('section'); modal.id = 'wd-universal-invite'; modal.className = 'wd-universal-invite'; document.body.appendChild(modal); }
     return {shade:shade,modal:modal};
   }
-  function inviteLink(){
-    var code = state.user ? 'WD-' + String(state.user.id).replace(/-/g,'').slice(0,10).toUpperCase() : 'WATCHDOG';
-    return {code:code,link:location.origin + route('/') + '?ref=' + encodeURIComponent(code)};
+  // Tracked member referral link: the signup attribution trigger credits the inviter
+  // when a new account's first visit carries these tags. Same format everywhere.
+  var REFERRAL_ROOT = 'https://www.watchdogindex.com/?utm_source=watchdog_referral&utm_medium=member&utm_campaign=';
+  function inviteLink(){ return state.referral || null; }
+  function loadReferral(){
+    if(state.referral) return Promise.resolve(state.referral);
+    if(!db || typeof db.rpc !== 'function') return Promise.resolve(null);
+    return Promise.resolve(db.rpc('get_or_create_my_watchdog_referral_code')).then(function(r){
+      if(!r || r.error || !r.data) return null;
+      var code = String(r.data);
+      state.referral = {code:code,link:REFERRAL_ROOT + encodeURIComponent(code)};
+      return state.referral;
+    }).catch(function(){ return null; });
   }
   function showInvite(){
     if(!state.user){ signIn(); return; }
-    var nodes = ensureInvite(), d = inviteLink();
+    loadReferral().then(function(d){ renderInvite(d); });
+  }
+  function renderInvite(d){
+    var nodes = ensureInvite();
+    if(!d){
+      nodes.modal.innerHTML = '<button class="wd-universal-invite-x" type="button" data-wd-universal="invite-close" aria-label="Close invite"><i class="fas fa-xmark"></i></button><small>INVITE TO WATCHDOG</small><h2>Your invite link is not available right now.</h2><p>Please try again in a moment.</p>';
+      nodes.shade.classList.add('open');
+      nodes.modal.classList.add('open');
+      return;
+    }
     nodes.modal.innerHTML = '<button class="wd-universal-invite-x" type="button" data-wd-universal="invite-close" aria-label="Close invite"><i class="fas fa-xmark"></i></button><small>INVITE TO WATCHDOG</small><h2>Share better property intelligence.</h2><p>Send your personal Watchdog invite link to a friend, client or colleague.</p><label>Your invite link</label><div><input id="wd-universal-ref" readonly value="' + esc(d.link) + '"><button type="button" data-wd-universal="copy"><i class="far fa-copy"></i> Copy</button></div><footer><a href="mailto:?subject=' + encodeURIComponent('Try Watchdog Property Intelligence') + '&body=' + encodeURIComponent('I thought you might find Watchdog useful: ' + d.link) + '"><i class="fas fa-envelope"></i>Email invite</a><button type="button" data-wd-universal="share"><i class="fas fa-share-nodes"></i> Share</button></footer><em>Invite code: ' + esc(d.code) + '</em>';
     nodes.shade.classList.add('open');
     nodes.modal.classList.add('open');
@@ -346,11 +365,13 @@
   }
   function copyInvite(){
     var d = inviteLink(), input = document.getElementById('wd-universal-ref');
+    if(!d) return;
     if(navigator.clipboard && navigator.clipboard.writeText) navigator.clipboard.writeText(d.link).then(function(){ if(input) input.select(); }).catch(function(){});
     else if(input){ input.focus(); input.select(); try{ document.execCommand('copy'); }catch(_){} }
   }
   function shareInvite(){
     var d = inviteLink();
+    if(!d) return;
     if(navigator.share) navigator.share({title:'Watchdog Property Intelligence',text:'Take a look at Watchdog Property Intelligence.',url:d.link}).catch(function(){});
     else copyInvite();
   }
