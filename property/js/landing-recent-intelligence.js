@@ -15,7 +15,7 @@
   var GEOCODER='https://geo.nj.gov/arcgis/rest/services/Tasks/NJ_Geocode/GeocodeServer/findAddressCandidates';
   var SCORE_MARKER='watchdog.watchdog_score';
   var SCORE_MODEL='ROBUST-v1';
-  var sb=null,rowsByAddress=Object.create(null),scoresByPin=Object.create(null),syncPromise=null,scanTimer=0;
+  var sb=null,rowsByAddress=Object.create(null),scoresByPin=Object.create(null),photosByPin=Object.create(null),syncPromise=null,scanTimer=0;
 
   function clean(v){return String(v==null?'':v).trim();}
   function norm(v){return clean(v).toUpperCase().replace(/[^A-Z0-9]+/g,' ').replace(/\s+/g,' ').trim();}
@@ -50,7 +50,8 @@
     style.textContent=[
       'html.wd-index-mapless #plm-map,html.wd-index-mapless #hd-map,html.wd-index-mapless .leaflet-container{display:none!important;visibility:hidden!important;pointer-events:none!important;max-height:0!important;overflow:hidden!important}',
       'html.wd-index-mapless #plm section:has(#plm-map),html.wd-index-mapless #plm .plm-sec:has(#plm-map),html.wd-index-mapless .hd-mapwrap:has(#hd-map){display:none!important}',
-      '#wd-consumer-recents .wd-property-copy>p[data-watchdog-locality]{text-transform:none!important}'
+      '#wd-consumer-recents .wd-property-copy>p[data-watchdog-locality]{text-transform:none!important}',
+      '.wd-property-photo{position:relative}.wd-property-photo>img.wd-recent-owner-photo{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;z-index:1;border-radius:inherit}.wd-property-photo>.wd-recent-score{z-index:2}'
     ].join('');
     document.head.appendChild(style);
   }
@@ -108,6 +109,22 @@
     if(!client||!pins.length)return Promise.resolve([]);
     return client.rpc('get_public_property_watchdog_scores',{p_pins:pins}).then(function(res){return res&&Array.isArray(res.data)?res.data:[];}).catch(function(){return[];});
   }
+  // Owner-uploaded photos only: the same private bucket and signed URLs Property Home uses.
+  // No scraped listing photos and no paid Street View calls.
+  function ownerPhotos(client,userId,pins){
+    photosByPin=Object.create(null);
+    if(!client||!userId||!pins.length)return Promise.resolve();
+    return client.from('property_photos').select('pams_pin,storage_path,is_primary,created_at')
+      .eq('user_id',userId).in('pams_pin',pins)
+      .order('is_primary',{ascending:false}).order('created_at',{ascending:false}).limit(pins.length*4)
+      .then(function(res){
+        var best=Object.create(null);
+        (res&&Array.isArray(res.data)?res.data:[]).forEach(function(x){var pin=clean(x&&x.pams_pin);if(pin&&x.storage_path&&!best[pin])best[pin]=x.storage_path;});
+        return Promise.all(Object.keys(best).map(function(pin){
+          return client.storage.from('property-photos').createSignedUrl(best[pin],3600).then(function(r){var u=r&&r.data&&r.data.signedUrl;if(u)photosByPin[pin]=u;}).catch(function(){});
+        }));
+      }).catch(function(){});
+  }
   function indexScores(ownRows,publicRows){
     scoresByPin=Object.create(null);
     (ownRows||[]).forEach(function(x){var pin=clean(x&&x.pams_pin);if(pin&&!scoresByPin[pin])scoresByPin[pin]=x;});
@@ -143,6 +160,15 @@
     var summary=pin?scoresByPin[pin]||null:null;
     var oldScore=photo.querySelector('.wd-recent-score'),oldRobust=photo.querySelector('.wd-recent-robust');
     if(oldScore)oldScore.remove();if(oldRobust)oldRobust.remove();
+    var ownerUrl=pin?photosByPin[pin]:'',oldOwner=photo.querySelector('img.wd-recent-owner-photo');
+    if(ownerUrl){
+      if(!oldOwner||oldOwner.getAttribute('src')!==ownerUrl){
+        if(oldOwner)oldOwner.remove();
+        var img=document.createElement('img');img.className='wd-recent-owner-photo';img.alt='Your photo of this property';img.loading='lazy';img.decoding='async';img.src=ownerUrl;
+        img.onerror=function(){img.remove();};
+        photo.insertBefore(img,photo.firstChild);
+      }
+    }else if(oldOwner)oldOwner.remove();
     photo.insertAdjacentHTML('beforeend',scoreMarkup(summary));
     var footer=card.querySelector('.wd-property-open');
     if(footer)footer.textContent=summary&&Number.isFinite(Number(summary.score))?'Open property':'Open property and build score';
@@ -158,6 +184,7 @@
     syncPromise=client.auth.getSession().then(function(auth){
       var session=auth&&auth.data&&auth.data.session;
       if(!session){
+        photosByPin=Object.create(null);
         var publicPins=publicPinsFromCards();
         return publicScores(client,publicPins).then(function(publicRows){indexScores([],publicRows);scan();return null;});
       }
@@ -169,7 +196,8 @@
             rowsByAddress=Object.create(null);
             repaired.forEach(function(row){if(row&&row.address)rowsByAddress[norm(row.address)]=row;});
             var pins=repaired.map(function(row){return clean(row.pams_pin);}).filter(Boolean);
-            return Promise.all([latestScoreRows(client,pins),publicScores(client,pins)]).then(function(parts){indexScores(parts[0],parts[1]);scan();return repaired;});
+            var userId=session.user&&session.user.id;
+            return Promise.all([latestScoreRows(client,pins),publicScores(client,pins),ownerPhotos(client,userId,pins)]).then(function(parts){indexScores(parts[0],parts[1]);scan();return repaired;});
           });
         });
     }).catch(function(){scan();return null;}).finally(function(){syncPromise=null;});

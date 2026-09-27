@@ -416,3 +416,149 @@ html body .wd-universal-nav-head .wd-universal-brand>span{
   .wd-public-sheet.wd-universal-public-nav,.wd4-nav-panel,.hm27-nav-panel,.wd-public-sheet.right.wd-universal-public-profile,.wd-universal-invite,.wd-universal-invite-shade,.wd-universal-profile>nav>a.wd-universal-plan-promo{transition:none!important}
   .wd-universal-profile>nav>a.wd-universal-plan-promo:hover{transform:none!important}
 }
+/* ======================================================================
+   Board design pass (2026-09-27)
+   Drawer: "My home / My work" lens so homeowners only see tools they can
+   use, with a one-line plain-English hint under every destination.
+   Profile: navy identity card, sky icon tiles, warm hover. Shared by the
+   public, Dashboard, Property Home and app-shell profile menus.
+   ====================================================================== */
+:root{
+  --wdum-navy:#0e2248;
+  --wdum-navy-ink:#14213d;
+  --wdum-board-blue:#1456a0;
+  --wdum-sky:#e3edfb;
+  --wdum-sky-line:#b9d0f2;
+  --wdum-sand:#f6efd9;
+  --wdum-sand-ink:#7a5d0c;
+  --wdum-gold:#b8972a;
+  --wdum-warm:#f3f1ec;
+  --wdum-warm-line:#e3dfd6;
+  --wdum-head:"Plus Jakarta Sans",Inter,system-ui,sans-serif;
+}
+
+/* ---------- lens switch ---------- */
+.wd-universal-lens{
+  position:relative;display:grid;grid-template-columns:1fr 1fr;gap:0;
+  margin:0 0 14px;padding:4px;border-radius:14px;background:var(--wdum-warm);
+  border:1px solid var(--wdum-warm-line);flex:0 0 auto;
+}
+.wd-universal-lens-thumb{
+  position:absolute;top:4px;bottom:4px;left:4px;width:calc(50% - 4px);
+  border-radius:11px;background:var(--wdum-navy);box-shadow:0 6px 16px rgba(14,34,72,.22);
+  transition:transform .26s cubic-bezier(.2,.8,.2,1);pointer-events:none;
+}
+.wd-universal-lens[data-lens="work"] .wd-universal-lens-thumb{transform:translateX(100%)}
+.wd-universal-lens button{
+  position:relative;z-index:1;display:flex;align-items:center;justify-content:center;gap:8px;
+  min-height:44px;border:0;background:transparent;border-radius:11px;cursor:pointer;
+  color:#4d5a70;font:800 14px/1 var(--wdum-head);letter-spacing:-.01em;transition:color .2s;
+  touch-action:manipulation;
+}
+.wd-universal-lens button i{font-size:14px}
+.wd-universal-lens button[aria-selected="true"]{color:#fff}
+.wd-universal-lens button:focus-visible{outline:3px solid var(--wdum-sky-line);outline-offset:1px}
+
+/* ---------- lens filtering ---------- */
+.wd-universal-nav-links[data-lens="home"] .wd-universal-lens-work,
+.wd-universal-nav-links[data-lens="work"] .wd-universal-lens-home{display:none!important}
+
+.wd-universal-lens-eyebrow{
+  margin:2px 4px 4px!important;padding:0!important;color:#7a8497!important;
+  font:800 12px/1.2 var(--wdum-head)!important;letter-spacing:.08em!important;text-transform:uppercase!important;
+}
+
+/* ---------- destination rows with hints ---------- */
+.wd-universal-nav-links a.wd-universal-link{
+  display:grid!important;grid-template-columns:38px minmax(0,1fr) auto!important;
+  align-items:center!important;gap:12px!important;min-height:56px!important;
+  padding:8px 10px!important;border-radius:13px!important;color:var(--wdum-navy-ink)!important;
+}
+.wd-universal-nav-links a.wd-universal-link>i{
+  width:38px!important;height:38px!important;flex:none!important;border-radius:11px!important;
+  display:grid!important;place-items:center!important;font-size:15px!important;
+  background:var(--wdum-sky)!important;color:var(--wdum-board-blue)!important;
+}
+.wd-universal-nav-links a.wd-universal-lens-work>i{background:var(--wdum-sand)!important;color:var(--wdum-sand-ink)!important}
+.wd-universal-nav-links a.wd-universal-link>span{display:grid!important;gap:2px!important;min-width:0!important;font:800 14px/1.2 var(--wdum-head)!important;letter-spacing:-.01em!important}
+.wd-universal-nav-links a.wd-universal-link>span>small{
+  font:600 12px/1.3 var(--wdum-font)!important;color:#6b768a!important;letter-spacing:0!important;
+  white-space:nowrap!important;overflow:hidden!important;text-overflow:ellipsis!important;
+}
+.wd-universal-nav-links a.wd-universal-link:hover{background:var(--wdum-warm)!important;color:var(--wdum-navy-ink)!important}
+.wd-universal-nav-links a.wd-universal-link.active{background:var(--wdum-sky)!important;color:var(--wdum-navy)!important;box-shadow:inset 0 0 0 1px var(--wdum-sky-line)!important}
+.wd-universal-nav-links a.wd-universal-link.active>i{background:var(--wdum-navy)!important;color:#fff!important}
+.wd-universal-nav-links a.wd-universal-link:focus-visible{outline:3px solid var(--wdum-sky-line)!important;outline-offset:1px!important}
+
+/* Tools that need a higher plan: visible to pros for discovery, clearly marked. */
+.wd-universal-nav-links a.wd-universal-locked>span{color:#4d5a70!important}
+.wd-universal-nav-links a.wd-universal-locked>i{background:#f1f0ec!important;color:#8a8f99!important}
+.wd-universal-nav-links a.wd-universal-locked>em{
+  font:800 12px/1 var(--wdum-head)!important;font-style:normal!important;color:var(--wdum-sand-ink)!important;
+  background:var(--wdum-sand)!important;border-radius:999px!important;padding:6px 9px!important;white-space:nowrap!important;
+}
+
+/* "Agent or pro?" nudge at the end of the home lens. */
+.wd-universal-lens-hint{
+  display:grid!important;grid-template-columns:38px minmax(0,1fr) 16px!important;align-items:center!important;gap:12px!important;
+  width:100%!important;min-height:58px!important;margin:8px 0 2px!important;padding:9px 12px 9px 10px!important;
+  border:1px dashed var(--wdum-warm-line)!important;border-radius:13px!important;background:#fbfaf7!important;
+  text-align:left!important;cursor:pointer!important;color:var(--wdum-navy-ink)!important;font-family:var(--wdum-font)!important;
+}
+.wd-universal-lens-hint>i:first-child{width:38px;height:38px;border-radius:11px;display:grid;place-items:center;background:var(--wdum-sand);color:var(--wdum-sand-ink);font-size:15px}
+.wd-universal-lens-hint>i:last-child{color:#8a93a3;font-size:13px}
+.wd-universal-lens-hint>span{display:grid;gap:2px;min-width:0}
+.wd-universal-lens-hint b{font:800 14px/1.2 var(--wdum-head)}
+.wd-universal-lens-hint small{font:600 12px/1.3 var(--wdum-font);color:#6b768a}
+.wd-universal-lens-hint:hover{background:var(--wdum-warm)!important}
+.wd-universal-nav-rule{height:1px;background:var(--wdum-warm-line);margin:8px 6px}
+
+/* ---------- profile menu, board look ---------- */
+.wd-public-sheet.right.wd-universal-public-profile,
+#wd6-profile.wd-universal-profile,.hm27-pop.wd-universal-profile{
+  border-radius:20px!important;border-color:var(--wdum-warm-line)!important;background:#fff!important;
+  box-shadow:0 26px 70px rgba(14,34,72,.2)!important;
+}
+.wd-universal-profile>header{
+  display:grid!important;grid-template-columns:48px minmax(0,1fr) auto!important;align-items:center!important;gap:12px!important;
+  margin:10px 10px 4px!important;padding:14px!important;border:0!important;border-radius:16px!important;
+  background:var(--wdum-navy)!important;min-height:0!important;color:#fff!important;
+}
+.wd-universal-profile>header:not(:has(.wd-universal-face)){grid-template-columns:minmax(0,1fr) auto!important}
+.wd-public-sheet .wd-universal-profile>header{padding-right:14px!important;margin-right:54px!important}
+.wd-universal-profile .wd-universal-face{
+  width:48px;height:48px;border-radius:50%;object-fit:cover;display:grid;place-items:center;
+  background:var(--wdum-gold);color:var(--wdum-navy);font:800 19px/1 var(--wdum-head);font-style:normal;
+  box-shadow:0 0 0 3px rgba(255,255,255,.14);
+}
+.wd-universal-profile>header b{font:800 15px/1.2 var(--wdum-head)!important;color:#fff!important}
+.wd-universal-profile>header small{font:600 12px/1.3 var(--wdum-font)!important;color:rgba(255,255,255,.72)!important}
+.wd-universal-profile>header>i{
+  font:800 12px/1 var(--wdum-head)!important;font-style:normal!important;color:var(--wdum-navy)!important;
+  background:#f1e3b3!important;border-radius:999px!important;padding:7px 10px!important;
+}
+.wd-universal-profile-close{top:18px!important;right:14px!important;background:var(--wdum-warm)!important;color:#4d5a70!important;width:40px!important;height:40px!important}
+.wd-universal-profile>nav{padding:6px 10px 8px!important}
+.wd-universal-profile>nav a,.wd-universal-profile>nav button{min-height:56px!important;border-radius:13px!important;gap:12px!important;grid-template-columns:38px minmax(0,1fr)!important}
+.wd-universal-profile>nav a:hover,.wd-universal-profile>nav button:hover{background:var(--wdum-warm)!important}
+.wd-universal-profile>nav>a>i,.wd-universal-profile>nav>button>i{width:38px!important;height:38px!important;border-radius:11px!important;background:var(--wdum-sky)!important;color:var(--wdum-board-blue)!important;font-size:14px!important}
+.wd-universal-profile>nav b{font:800 14px/1.2 var(--wdum-head)!important;color:var(--wdum-navy-ink)!important}
+.wd-universal-profile>nav small{font:600 12px/1.3 var(--wdum-font)!important;color:#6b768a!important}
+.wd-universal-profile>nav>a.wd-universal-plan-promo{margin:6px 0 10px!important;border-radius:16px!important}
+.wd-universal-profile>nav>a.wd-universal-plan-promo-pro{background:linear-gradient(135deg,#0e2248 0%,#1456a0 100%)!important}
+.wd-universal-profile>.wd-universal-signout{
+  width:calc(100% - 20px)!important;margin:2px 10px 12px!important;min-height:46px!important;border:1px solid var(--wdum-warm-line)!important;
+  background:#fbfaf7!important;border-radius:13px!important;color:#4d5a70!important;font:800 13px/1 var(--wdum-head)!important;
+  display:flex!important;align-items:center!important;justify-content:center!important;gap:8px!important;text-align:center!important;
+}
+.wd-universal-profile>.wd-universal-signout:hover{background:#fdf1f1!important;border-color:#f3c9cb!important;color:#b3363d!important}
+
+@media(max-width:760px){
+  .wd-universal-nav-links a.wd-universal-link{min-height:58px!important}
+  .wd-universal-profile>header{margin:8px 8px 4px!important}
+}
+@media(prefers-reduced-motion:reduce){
+  .wd-universal-lens-thumb,.wd-universal-lens button{transition:none!important}
+}
+/* Rows sit at the top of the drawer instead of stretching to fill it. */
+.wd-universal-nav-links{align-content:start!important;grid-auto-rows:max-content!important}

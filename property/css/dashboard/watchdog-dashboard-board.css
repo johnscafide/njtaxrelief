@@ -290,6 +290,19 @@ body:has(#wdd-boot:not([hidden])) .wd-public-backdrop:not(.open){transition:none
 .wdd-toast{position:fixed;left:50%;bottom:28px;z-index:1900;max-width:calc(100vw - 32px);padding:12px 18px;border-radius:999px;background:#16140f;color:#fff;font:600 14px Inter,sans-serif;opacity:0;transform:translate(-50%,10px);pointer-events:none;transition:opacity .18s ease,transform .18s ease}
 .wdd-toast.is-on{opacity:1;transform:translate(-50%,0)}
 
+/* Color bridge: the selected row flows across the gap into the details card
+   (same sky tint), with soft inner corners where it meets the card. The JS
+   only adds .has-bridge on the two-column layout when the row sits beside
+   the card. */
+.wdd-lower.has-bridge .wdd-detail{position:relative;z-index:1}
+.wdd-lower.has-bridge .wdd-row.is-selected{position:relative;border-top-right-radius:0;border-bottom-right-radius:0;transition:none}
+.wdd-lower.has-bridge .wdd-row.is-selected::after{content:"";position:absolute;top:0;bottom:0;left:100%;width:calc(22px + var(--b-radius));background:var(--b-sky);pointer-events:none}
+.wdd-lower.has-bridge .wdd-row.is-selected::before{content:"";position:absolute;top:-10px;bottom:-10px;left:calc(100% + 12px);width:10px;pointer-events:none;
+  background:var(--wdd-fillet-top,none) top left/10px 10px no-repeat,var(--wdd-fillet-bottom,none) bottom left/10px 10px no-repeat}
+.wdd-lower.bridge-top{--wdd-fillet-top:radial-gradient(circle at 0 0,transparent 9.5px,var(--b-sky) 10px)}
+.wdd-lower.bridge-bottom{--wdd-fillet-bottom:radial-gradient(circle at 0 100%,transparent 9.5px,var(--b-sky) 10px)}
+@media print{.wdd-lower.has-bridge .wdd-row.is-selected::before,.wdd-lower.has-bridge .wdd-row.is-selected::after{display:none}}
+
 /* --------------------------------------------------------------------------
    Responsive
    -------------------------------------------------------------------------- */

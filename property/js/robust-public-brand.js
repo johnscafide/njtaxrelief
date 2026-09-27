@@ -39,7 +39,7 @@
   function loadLandingRecentIntelligence(){
     if(!isPropertyLanding())return;
     if(window.__WATCHDOG_LANDING_RECENT_INTELLIGENCE__)return;
-    loadScript('watchdog-landing-recent-intelligence','/property/js/landing-recent-intelligence.js?v=20260825-mapless1');
+    loadScript('watchdog-landing-recent-intelligence','/property/js/landing-recent-intelligence.js?v=20260927a');
   }
 
   function loadLookupSummaryEnhancements(){
