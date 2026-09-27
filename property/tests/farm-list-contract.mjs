@@ -14,7 +14,8 @@ assert.match(html, /id="ml-print-root"/, 'label print root is a direct page chil
 assert.ok(html.indexOf('market-list.css') > html.indexOf('agent-workspace.css'), 'farm styles load after the shared workspace sheet');
 
 // Watchdog Intelligence: canonical name, spectrum word, rotating outer surface with reduced motion.
-assert.match(js, /Watchdog <span class="wd-intelligence-brand-word">Intelligence<\/span>/);
+assert.match(html, /Watchdog <span class="wd-intelligence-brand-word">Intelligence<\/span> for this farm/);
+assert.match(html, /<template id="ml-page">/, 'static page markup lives in HTML, not JavaScript');
 assert.match(js, /WatchdogContextualAnalyst\.open\(/);
 assert.doesNotMatch(js, /Watchdog Intel\b|Analyst Intel/);
 assert.match(css, /\.ml-card\.ml-intel\{[^}]*conic-gradient/);
@@ -22,7 +23,7 @@ assert.match(css, /prefers-reduced-motion:reduce\)\{\.ml-card\.ml-intel\{animati
 
 // CRM sync and other databases.
 assert.match(js, /functions\.invoke\('farm-workspace'/);
-assert.match(js, /route\('\/integrations'\)/);
+assert.match(html, /data-route="\/integrations"/);
 assert.match(js, /function importCsv\(/);
 assert.match(js, /Emails and phone numbers in the file are ignored/);
 assert.doesNotMatch(js, /pickCol\(heads,\[\/\^\(e-?mail|pickCol\(heads,\[\/\^\(phone/, 'the CSV matcher never reads email or phone columns');
