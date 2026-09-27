@@ -16,6 +16,9 @@ import re
 import zipfile
 from collections import defaultdict
 from pathlib import Path
+import sys as _sys
+_sys.path.insert(0, str(Path(__file__).resolve().parent))
+from nj_district_codes import pams_from_state, pams_from_state_or_none  # state code -> PIN district code
 
 ROOT = Path(__file__).resolve().parents[1]
 V039_SCRIPT = ROOT / "scripts" / "build_ufb_v039.py"
@@ -71,7 +74,7 @@ def municipality_rows(rows):
     for rn, vals in rows.items():
         code = vals.get(1)
         if isinstance(code, str) and re.fullmatch(r"\d{4}", code):
-            out[code] = rn
+            out[pams_from_state(code)] = rn
     return out
 
 

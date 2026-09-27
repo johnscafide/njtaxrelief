@@ -17,6 +17,9 @@ import xml.etree.ElementTree as ET
 from collections import Counter
 from datetime import datetime, timedelta, timezone
 from pathlib import Path
+import sys as _sys
+_sys.path.insert(0, str(Path(__file__).resolve().parent))
+from nj_district_codes import pams_from_state  # state/DCA code -> PIN district code
 
 NS='http://schemas.openxmlformats.org/spreadsheetml/2006/main'
 SOURCE_PAGE='https://www.nj.gov/dca/dlps/hss/MuniStatusReporting.shtml'
@@ -172,6 +175,7 @@ def build(source:Path):
         if rn<=ph:continue
         code=clean(row.get(pc['dca_code']))
         if not re.fullmatch(r'\d{4}',code):continue
+        code=pams_from_state(code)
         project_count+=1;project_munis.add(code)
         rec=municipalities.setdefault(code,{'district':code,'municipality':clean(row.get(pc['municipality'])) or None,'county':clean(row.get(pc['county'])) or None})
         rec['reported_affordable_project_count']=rec.get('reported_affordable_project_count',0)+1
@@ -191,6 +195,7 @@ def build(source:Path):
         if rn<=th:continue
         code=clean(row.get(tc['dca_code']))
         if not re.fullmatch(r'\d{4}',code):continue
+        code=pams_from_state(code)
         trust_count+=1;trust_munis.add(code)
         rec=municipalities.setdefault(code,{'district':code,'municipality':clean(row.get(tc['municipality'])) or None,'county':clean(row.get(tc['county'])) or None})
         for field in TRUST_NUMERIC:

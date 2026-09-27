@@ -93,8 +93,14 @@ for (const raw of lines) {
   });
 }
 
+// The PDF text sometimes drops a leading county word ("Cape May Point" prints as
+// "Point") or bleeds a neighbouring row into a name. The code is reliable, so the
+// display name comes from the governed district crosswalk when it has the code.
+const CROSSWALK = JSON.parse(fs.readFileSync(path.join(__dirname, '../data/nj-district-crosswalk.json'), 'utf8')).districts;
+const shortName = name => name.replace(/ Township$/, ' Twp').replace(/ Borough$/, ' Boro');
+
 const municipalities = [...records.values()]
-  .map(record => ({...record, history: record.history.sort((a,b) => a.year-b.year)}))
+  .map(record => ({...record, municipality: CROSSWALK[record.code] ? shortName(CROSSWALK[record.code].name) : record.municipality, history: record.history.sort((a,b) => a.year-b.year)}))
   .sort((a,b) => a.code.localeCompare(b.code));
 
 if (municipalities.length !== 564) {

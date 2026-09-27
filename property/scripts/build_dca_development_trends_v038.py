@@ -18,6 +18,9 @@ import json
 from collections import Counter
 from datetime import datetime, timezone
 from pathlib import Path
+import sys as _sys
+_sys.path.insert(0, str(Path(__file__).resolve().parent))
+from nj_district_codes import pams_from_state, pams_from_state_or_none  # state code -> PIN district code
 from typing import Any
 from pyxlsb import open_workbook
 
@@ -81,7 +84,7 @@ def normalized_municode(code: str) -> str | None:
     code = code.zfill(4)
     if code in {"1109", "0429", "2118", "9999"}: return None
     if code == "1110": return "1114"
-    return code if len(code) == 4 and code.isdigit() else None
+    return pams_from_state(code) if len(code) == 4 and code.isdigit() else None
 
 def build(source: Path) -> tuple[dict[str, Any], dict[str, Any], str]:
     raw = source.read_bytes(); source_sha = hashlib.sha256(raw).hexdigest()

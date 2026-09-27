@@ -22,6 +22,9 @@ import sys
 from collections import defaultdict
 from datetime import datetime
 from pathlib import Path
+import sys as _sys
+_sys.path.insert(0, str(Path(__file__).resolve().parent))
+from nj_district_codes import pams_from_state, pams_from_state_or_none  # state code -> PIN district code
 from zoneinfo import ZoneInfo
 
 import pandas as pd
@@ -202,7 +205,7 @@ def number(value):
 def resolve_district(row, col_map, valid_districts, by_pair, unique_by_name, ambiguous_names):
     for field, method in (("taxation_muni_code", "taxation_muni_code"), ("dca_muni_code", "dca_muni_code")):
         if field in col_map:
-            code = municipal_code(row[col_map[field]])
+            code = pams_from_state_or_none(municipal_code(row[col_map[field]]))
             if code and code in valid_districts:
                 return code, method
 
