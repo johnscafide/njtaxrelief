@@ -57,8 +57,10 @@ Stripe's fee (about 2.9% + 30¢ per checkout) comes out of that margin.
 1. In portal.pcmintegrations.com → For Developers → Webhooks → New Subscription, point each
    event at `https://uvkvaxljhhngydvlrzom.supabase.co/functions/v1/pcm-webhook`
    (Environment: Sandbox first, then Production).
-2. Copy the subscription's **Signature Secret** into Supabase Edge Function secrets as
-   `PCM_WEBHOOK_SIGNATURE_SECRET`. Use the portal's "Test webhook" to confirm a 200.
+2. PCM gives every subscription its own **Signature Secret**. Copy all of them into one
+   Supabase Edge Function secret named `PCM_WEBHOOK_SIGNATURE_SECRET`, separated by commas
+   (for example `secret1,secret2,secret3`). A delivery is accepted if it matches any of them.
+   Use the portal's "Test webhook" to confirm it is accepted (not a 401).
 3. Add a payment method in the PCM portal (orders wait in Pending Payment without one).
 4. Run a sandbox order end to end with a Watchdog test account.
 5. Only then set `PCM_LIVE_LAUNCH_ENABLED=true` and `MARKETING_BILLING_ENABLED=true`.

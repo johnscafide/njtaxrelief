@@ -53,6 +53,8 @@ assert.match(webhook, /'pcmi-signature'/);
 assert.match(webhook, /timestampHeader: 'pcmi-timestamp'/);
 assert.match(webhook, /`\$\{timestamp\}\.\$\{raw\}`/);
 assert.match(webhook, /constantTimeEqual\(expected, candidate\)/);
+assert.match(webhook, /split\(\/\[\\s,;\]\+\/\)/, 'one secret per PCM subscription: the env var holds a list');
+assert.match(webhook, /for \(const secret of current\.secrets\)/);
 assert.match(webhook, /pcm:batch:\$\{batch\}:undeliverable:\$\{undeliverable\}/, 'undeliverable credits are keyed per batch count so retries never double-credit');
 
 // Fulfillment: v3 order endpoint, live kill switch kept, service-role only, credits redeemed after submit.

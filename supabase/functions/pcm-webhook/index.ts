@@ -62,12 +62,15 @@ function normalizedProvidedSignature(raw: string) {
 // pcmi-signature; signature = HMAC-SHA256 of "{pcmi-timestamp}.{raw body}" keyed
 // with the subscription's Signature Secret from the PCM portal. The docs do not
 // name the encoding, so hex and base64 are both accepted unless a format is pinned.
+// PCM issues a separate secret per subscription (one subscription per event), so
+// PCM_WEBHOOK_SIGNATURE_SECRET holds all of them, separated by commas, spaces or
+// new lines. A delivery is valid if it matches any one of them.
 const SIGNATURE_FORMATS = ['hmac-sha256-hex', 'hmac-sha256-base64'];
 
 function contract() {
   const format = clean(Deno.env.get('PCM_WEBHOOK_SIGNATURE_FORMAT') || '', 60).toLowerCase();
   return {
-    secret: Deno.env.get('PCM_WEBHOOK_SIGNATURE_SECRET') || '',
+    secrets: String(Deno.env.get('PCM_WEBHOOK_SIGNATURE_SECRET') || '').split(/[\s,;]+/).filter(Boolean),
     header: clean(Deno.env.get('PCM_WEBHOOK_SIGNATURE_HEADER') || 'pcmi-signature', 100).toLowerCase(),
     timestampHeader: 'pcmi-timestamp',
     formats: SIGNATURE_FORMATS.includes(format) ? [format] : SIGNATURE_FORMATS,
@@ -202,7 +205,8 @@ Deno.serve(async (req) => {
     return json(200, {
       provider: 'pcm',
       receiver: 'ready',
-      signature_contract_ready: Boolean(current.secret),
+      signature_contract_ready: current.secrets.length > 0,
+      signature_secret_count: current.secrets.length,
       signature_header: current.header,
       timestamp_header: current.timestampHeader,
       signature_formats: current.formats,
@@ -220,7 +224,7 @@ Deno.serve(async (req) => {
   if (req.method !== 'POST') return json(405, { error: 'Method not allowed' });
 
   const current = contract();
-  if (!current.secret) {
+  if (!current.secrets.length) {
     return json(503, {
       error: 'PCM webhook signature contract is not configured yet',
       code: 'PCM_WEBHOOK_SIGNATURE_CONTRACT_PENDING',
@@ -244,12 +248,14 @@ Deno.serve(async (req) => {
   // fallback in case PCM omits the timestamp header; both need the shared secret.
   const signedInputs = timestamp ? [`${timestamp}.${raw}`, raw] : [raw];
   let verified = false;
-  for (const input of signedInputs) {
-    const mac = await hmacSha256(current.secret, input);
-    for (const format of current.formats) {
-      const expected = format === 'hmac-sha256-base64' ? bytesToBase64(mac) : bytesToHex(mac);
-      const candidate = format === 'hmac-sha256-hex' ? provided.toLowerCase() : provided;
-      if (constantTimeEqual(expected, candidate)) verified = true;
+  for (const secret of current.secrets) {
+    for (const input of signedInputs) {
+      const mac = await hmacSha256(secret, input);
+      for (const format of current.formats) {
+        const expected = format === 'hmac-sha256-base64' ? bytesToBase64(mac) : bytesToHex(mac);
+        const candidate = format === 'hmac-sha256-hex' ? provided.toLowerCase() : provided;
+        if (constantTimeEqual(expected, candidate)) verified = true;
+      }
     }
   }
   if (!verified) {
