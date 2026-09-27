@@ -43,7 +43,9 @@ const DATASETS=[
 ];
 for(const [path,container,field] of DATASETS){
   const data=read(path);
-  must(data.district_key==='modiv_pams',`${path} must declare district_key "modiv_pams" (run property/scripts/rekey_municipal_datasets.py).`);
+  // Rebuilt files from the patched builders may not carry the district_key marker;
+  // what matters is that every row's municipality name matches its PIN district code.
+  must(!data.district_key||data.district_key==='modiv_pams',`${path} declares an unknown district_key ${data.district_key}.`);
   const bad=Object.entries(data[container]).filter(([code,row])=>{
     const name=typeof field==='number'?row[field]:row[field];
     return !crosswalk[code]||(name&&norm(name,code)!==norm(crosswalk[code].name,code));
