@@ -216,11 +216,89 @@
     if(navigator.clipboard&&navigator.clipboard.writeText)navigator.clipboard.writeText(text).then(done,function(){window.prompt('Copy your link',text);});
     else window.prompt('Copy your link',text);
   });
+  /* Live numbers on the tool cards, so agents can see the desk is working for them. */
+  function stat(key,text){app.querySelectorAll('[data-adh-stat="'+key+'"]').forEach(function(el){el.textContent=text;});}
+  function plural(n,one,many){return n.toLocaleString()+' '+(n===1?one:many);}
+  function count(q){return Promise.resolve(q).then(function(r){return r&&!r.error&&typeof r.count==='number'?r.count:null;},function(){return null;});}
+  function loadStats(db,uid){
+    Promise.all([
+      count(db.from('agent_farm_properties').select('id',{count:'exact',head:true}).eq('user_id',uid).eq('relationship','farm')),
+      count(db.from('agent_farm_properties').select('id',{count:'exact',head:true}).eq('user_id',uid)),
+      count(db.from('agent_dynamic_lists').select('id',{count:'exact',head:true}).eq('user_id',uid)),
+      count(db.from('marketing_campaigns').select('id',{count:'exact',head:true}).eq('user_id',uid))
+    ]).then(function(n){
+      if(n[0]!==null)stat('farm',n[0]?plural(n[0],'home in your farm','homes in your farm'):'No farm yet. Start here.');
+      if(n[1]!==null)stat('watched',n[1]?plural(n[1],'home watched','homes watched'):'Nothing watched yet');
+      if(n[2]!==null)stat('lists',n[2]?plural(n[2],'saved list','saved lists'):'No saved lists yet');
+      if(n[3]!==null)stat('campaigns',n[3]?plural(n[3],'campaign','campaigns'):'No mailers yet');
+    });
+  }
+
+  /* A short first-visit tour. Shown once per browser; "Show me around" replays it. */
+  var TOUR_KEY='wd_agent_desk_tour_v1';
+  var TOUR=[
+    {target:function(){return window.matchMedia('(max-width:900px)').matches?app.querySelector('.adh-tabbar'):app.querySelector('.adh-nav-list');},title:'Everything is in this menu',text:'Home, Clients, Farm, Marketing, Research and Deals. Every tool opens right here, so you never have to hunt for another page.'},
+    {target:function(){return app.querySelector('.adh-quick');},title:'Not sure where to start?',text:'These four buttons cover the jobs agents do most: add clients, draw a farm, send a mailer and start a deal.'},
+    {target:function(){return document.getElementById('ad-today-hub');},title:'Today',text:'Closings, listing prep and open houses that need you soon show up here automatically.'},
+    {target:function(){return app.querySelector('.ad27-worklist');},title:'Who to reach out to',text:'Homes in your sphere and farm with a fresh public-record reason to check in. Tap Evidence to see the proof before you call.'},
+    {target:null,title:'That is it',text:'When a tool opens, the Back button at the top brings you right back. You can replay this tour any time from "Show me around".'}
+  ];
+  var tourEl=null,tourStep=0,tourTarget=null,tourReturn=null;
+  function seen(){try{return localStorage.getItem(TOUR_KEY)==='1';}catch(_){return true;}}
+  function markSeen(){try{localStorage.setItem(TOUR_KEY,'1');}catch(_){}}
+  function clearTarget(){if(tourTarget){tourTarget.classList.remove('adh-coach-target');tourTarget=null;}}
+  function endTour(){clearTarget();if(tourEl){tourEl.remove();tourEl=null;}markSeen();document.removeEventListener('keydown',tourKeys,true);if(tourReturn&&tourReturn.focus)try{tourReturn.focus({preventScroll:true});}catch(_){}}
+  function tourKeys(e){if(e.key==='Escape'){e.preventDefault();endTour();}}
+  function place(card,target){
+    card.style.top='';card.style.left='';card.classList.toggle('adh-coach-center',!target);
+    if(!target||window.matchMedia('(max-width:900px)').matches)return;
+    var r=target.getBoundingClientRect(),cw=card.offsetWidth,ch=card.offsetHeight,vw=innerWidth,vh=innerHeight;
+    var left=r.right+16+cw<=vw-12?r.right+16:Math.max(12,Math.min(r.left,vw-cw-12));
+    var top=r.right+16+cw<=vw-12?Math.max(76,Math.min(r.top,vh-ch-12)):(r.bottom+12+ch<=vh-12?r.bottom+12:Math.max(76,r.top-ch-12));
+    card.style.left=Math.round(left)+'px';card.style.top=Math.round(top)+'px';
+  }
+  function showStep(i){
+    tourStep=i;var step=TOUR[i];clearTarget();
+    var target=step.target&&step.target();if(target&&!target.getClientRects().length)target=null;
+    if(target){tourTarget=target;target.classList.add('adh-coach-target');try{target.scrollIntoView({block:'center',behavior:'auto'});}catch(_){}}
+    var last=i===TOUR.length-1;
+    tourEl.querySelector('.adh-coach-count').textContent=(i+1)+' of '+TOUR.length;
+    tourEl.querySelector('#adh-coach-title').textContent=step.title;
+    tourEl.querySelector('.adh-coach-text').textContent=step.text;
+    tourEl.querySelector('[data-coach="back"]').hidden=i===0;
+    var next=tourEl.querySelector('[data-coach="next"]');next.textContent=last?'Got it':'Next';
+    place(tourEl.querySelector('.adh-coach-card'),target);
+    try{next.focus({preventScroll:true});}catch(_){next.focus();}
+  }
+  function startTour(){
+    if(tourEl)return;
+    if(current.tool||current.section!=='home')go('home');
+    tourReturn=document.activeElement;
+    tourEl=document.createElement('div');tourEl.className='adh-coach';
+    tourEl.innerHTML='<div class="adh-coach-shade" aria-hidden="true"></div><div class="adh-coach-card" role="dialog" aria-modal="true" aria-labelledby="adh-coach-title"><span class="adh-coach-count"></span><h2 id="adh-coach-title"></h2><p class="adh-coach-text"></p><div class="adh-coach-actions"><button type="button" class="adh-coach-skip" data-coach="skip">Skip tour</button><span><button type="button" class="ad27-btn" data-coach="back">Back</button><button type="button" class="ad27-btn primary" data-coach="next">Next</button></span></div></div>';
+    document.body.appendChild(tourEl);
+    tourEl.addEventListener('click',function(e){var b=e.target.closest('[data-coach]');if(!b)return;var a=b.dataset.coach;if(a==='skip')endTour();else if(a==='back')showStep(Math.max(0,tourStep-1));else if(tourStep>=TOUR.length-1)endTour();else showStep(tourStep+1);});
+    document.addEventListener('keydown',tourKeys,true);
+    showStep(0);
+  }
+  document.addEventListener('click',function(e){var b=e.target.closest&&e.target.closest('[data-adh-tour]');if(b){e.preventDefault();startTour();}});
+  window.addEventListener('resize',function(){if(tourEl)place(tourEl.querySelector('.adh-coach-card'),tourTarget);});
+  function maybeAutoTour(){
+    if(seen()||app.hidden||current.tool||current.section!=='home')return false;
+    setTimeout(function(){if(!seen()&&!tourEl&&!app.hidden&&current.section==='home'&&!current.tool)startTour();},900);
+    return true;
+  }
+  if(!maybeAutoTour()&&!seen()&&window.MutationObserver){
+    var shown=new MutationObserver(function(){if(!app.hidden){shown.disconnect();maybeAutoTour();}});
+    shown.observe(app,{attributes:true,attributeFilter:['hidden']});
+  }
+
   greet('');
   Promise.resolve(window.njptrAccessReady).then(function(ctx){
     var db=window.NJPTRAccess&&window.NJPTRAccess.client?window.NJPTRAccess.client():null;
     var user=ctx&&ctx.user;if(!db||!user){portal(null);return;}
     var meta=user.user_metadata||{};greet(meta.full_name||meta.name||'');
+    loadStats(db,user.id);
     return db.from('profiles').select('display_name,full_name,vanity_slug').eq('id',user.id).maybeSingle().then(function(r){
       var p=r&&!r.error&&r.data||{};
       greet(p.full_name||p.display_name||meta.full_name||'');

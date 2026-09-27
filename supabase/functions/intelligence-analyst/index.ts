@@ -4,7 +4,7 @@ import { createClient } from "npm:@supabase/supabase-js@2.95.0";
 const ANALYST_VERSION="watchdog-analyst-v6-addon-entitlement";
 const TOOL_VERSION="watchdog-analyst-tools-v4-conflict-history";
 const INTELLIGENCE_ADDON_FEATURE="watchdog_intelligence";
-const ORIGINS=new Set(["https://njpropertytaxrelief.com","https://www.njpropertytaxrelief.com","http://localhost:3000","http://127.0.0.1:3000"]);
+const ORIGINS=new Set(["https://njpropertytaxrelief.com","https://www.njpropertytaxrelief.com","https://watchdogindex.com","https://www.watchdogindex.com","http://localhost:3000","http://127.0.0.1:3000"]);
 const PLAN_RANK:Record<string,number>={standard:0,agent:1,pro:2,pro_plus:3,teams:4,developer:5};
 const DAILY_LIMIT:Record<string,number>={agent:75,pro:75,pro_plus:300,teams:1500,developer:10000};
 const ACTIONS=new Set(["create_case","create_report","watch_property"]);

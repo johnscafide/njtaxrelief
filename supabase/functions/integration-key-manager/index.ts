@@ -3,7 +3,7 @@ import { createClient } from "npm:@supabase/supabase-js@2.95.0";
 
 type Obj=Record<string,any>;
 const ALLOWED_PLANS=new Set(["pro_plus","teams","developer"]);
-const ORIGINS=new Set(["https://njpropertytaxrelief.com","https://www.njpropertytaxrelief.com","http://localhost:3000","http://127.0.0.1:3000"]);
+const ORIGINS=new Set(["https://njpropertytaxrelief.com","https://www.njpropertytaxrelief.com","https://watchdogindex.com","https://www.watchdogindex.com","http://localhost:3000","http://127.0.0.1:3000"]);
 const ALLOWED_SCOPES=new Set(["zapier.auth","triggers.manage","property.read","watchlist.write","crm.context.write","intelligence.read","intelligence.run"]);
 const DEFAULT_SCOPES=["zapier.auth","triggers.manage","property.read","watchlist.write","crm.context.write","intelligence.read","intelligence.run"];
 function namedEnv(jsonName:string,legacyName:string){const raw=Deno.env.get(jsonName)||"";if(raw){try{const x=JSON.parse(raw);if(x?.default)return String(x.default)}catch{}}return Deno.env.get(legacyName)||"";}

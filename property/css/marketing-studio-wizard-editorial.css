@@ -62,3 +62,12 @@ body[data-ms-wizard="recipients"] .ms3-search input{font-size:14px!important;pad
 body[data-ms-wizard="review"] .mw-content h2,body[data-ms-wizard="review"] .mw-content h3{font-size:22px}
 @media(max-width:980px){body[data-ms-wizard] .mw-stage-head>div:first-child{display:block}body[data-ms-wizard] .mw-stage-head h1{display:inline-block;margin:8px 0 10px!important}body[data-ms-wizard="audience"] #ms-discovery .msd-search{grid-template-columns:1fr 150px!important;gap:18px!important}body[data-ms-wizard="audience"] #ms-discovery .msd-search .ms-primary{grid-column:1/-1!important;width:100%!important}}
 @media(max-width:620px){body[data-ms-wizard] .mw-stage-head p{font-size:16px}body[data-ms-wizard] .mw-stage-head h1:after{width:96px;height:4px}body[data-ms-wizard="audience"] #ms-discovery{min-height:0!important}body[data-ms-wizard="audience"] #ms-discovery .msd-head{padding:28px 22px 18px!important}body[data-ms-wizard="audience"] #ms-discovery .msd-search{grid-template-columns:1fr!important}body[data-ms-wizard="audience"] #ms-discovery .msd-search input,body[data-ms-wizard="audience"] #ms-discovery .msd-search select{font-size:18px!important}body[data-ms-wizard="audience"] #ms-discovery .msd-results{padding:10px 22px 28px!important}body[data-ms-wizard="customize"] .ms3-inspector input,body[data-ms-wizard="customize"] .ms3-inspector textarea,body[data-ms-wizard="customize"] .ms3-inspector select{font-size:15px!important}}
+
+/* The audience search row wraps instead of overflowing: the town field takes the
+   free space, and the Find audience button drops to its own line when the column
+   is too narrow for all three (for example inside Agent Desk or on a small laptop). */
+body[data-ms-wizard="audience"] #ms-discovery .msd-search{display:flex!important;flex-wrap:wrap!important;align-items:flex-end!important}
+body[data-ms-wizard="audience"] #ms-discovery .msd-search>label:first-child{flex:1 1 300px!important;min-width:0!important}
+body[data-ms-wizard="audience"] #ms-discovery .msd-search>label:nth-of-type(2){flex:0 1 170px!important;min-width:130px!important}
+body[data-ms-wizard="audience"] #ms-discovery .msd-search>.ms-primary{flex:0 0 auto!important;white-space:nowrap!important}
+@media(max-width:700px){body[data-ms-wizard="audience"] #ms-discovery .msd-search>.ms-primary{flex:1 1 100%!important}}

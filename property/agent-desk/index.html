@@ -15,7 +15,7 @@
   <link rel="stylesheet" href="/property/css/app-shell-2027.css">
   <link rel="stylesheet" href="/property/css/agent-workspace.css?v=20260926a">
   <link rel="stylesheet" href="/property/css/agent-desk.css?v=20260927a">
-  <link rel="stylesheet" href="/property/css/agent-hub.css?v=20260927a">
+  <link rel="stylesheet" href="/property/css/agent-hub.css?v=20260927b">
 </head>
 <body data-sidebar-page="agent-desk" data-plan-auto="true" class="adh-page wdx-agent-workspace">
   <main class="ad27 adh" id="ad-main">
@@ -33,6 +33,7 @@
         </div>
         <div class="adh-rail-foot">
           <button class="adh-rail-add ad-import-open" id="ad-import-open" type="button"><i class="fas fa-user-plus" aria-hidden="true"></i><span>Add clients</span></button>
+          <button class="adh-rail-link" type="button" data-adh-tour><i class="fas fa-circle-play" aria-hidden="true"></i><span>Show me around</span></button>
           <a class="adh-rail-link" href="/agent/training" data-adh-tool="training"><i class="fas fa-graduation-cap" aria-hidden="true"></i><span>Training &amp; how-tos</span></a>
         </div>
       </nav>
@@ -99,7 +100,7 @@
             <label class="ad-switch"><input id="ad-digest" type="checkbox"><span aria-hidden="true"></span> Email me my top ten every Monday</label>
             <small class="ad27-note" id="ad-digest-note"></small>
           </section>
-          <p class="adh-footnote"><i class="fas fa-graduation-cap" aria-hidden="true"></i> New to the desk? <a href="/agent/training" data-adh-tool="training">Watch the short how-tos</a>.</p>
+          <p class="adh-footnote"><i class="fas fa-graduation-cap" aria-hidden="true"></i> New to the desk? <button type="button" class="adh-linkbtn" data-adh-tour>Take the 1-minute tour</button> or <a href="/agent/training" data-adh-tool="training">watch the how-tos</a>.</p>
         </section>
 
         <!-- CLIENTS -->
@@ -107,7 +108,7 @@
           <header class="adh-head"><div><p class="adh-eyebrow">Clients</p><h1 id="adh-clients-title">Your people and their homes</h1><p class="adh-lede">Add past clients and your sphere once. Watchdog watches their homes and tells you when there is a reason to reach out.</p></div></header>
           <div class="adh-tools">
             <a class="adh-tool" href="/agent/contacts" data-adh-tool="contacts"><span class="adh-tool-ic tone-sky"><i class="fas fa-address-book" aria-hidden="true"></i></span><span class="adh-tool-copy"><b>Contacts</b><small>Import your CRM list, clean it up and match each person to their home.</small></span><span class="adh-tool-go"><span>Open</span> <i class="fas fa-arrow-right" aria-hidden="true"></i></span></a>
-            <button class="adh-tool" type="button" data-start-import><span class="adh-tool-ic tone-teal"><i class="fas fa-file-arrow-up" aria-hidden="true"></i></span><span class="adh-tool-copy"><b>Add homes to watch</b><small>Pick saved properties or paste a spreadsheet of addresses.</small></span><span class="adh-tool-go"><span>Add</span> <i class="fas fa-plus" aria-hidden="true"></i></span></button>
+            <button class="adh-tool" type="button" data-start-import><span class="adh-tool-ic tone-teal"><i class="fas fa-file-arrow-up" aria-hidden="true"></i></span><span class="adh-tool-copy"><b>Add homes to watch</b><small>Pick saved properties or paste a spreadsheet of addresses.</small><em class="adh-tool-stat" data-adh-stat="watched"></em></span><span class="adh-tool-go"><span>Add</span> <i class="fas fa-plus" aria-hidden="true"></i></span></button>
           </div>
           <div class="adh-cols">
             <section class="ad27-card" aria-labelledby="ad-sphere-title">
@@ -128,8 +129,8 @@
         <section class="adh-view" id="adh-farm" data-adh-view="farm" aria-labelledby="adh-farm-title">
           <header class="adh-head"><div><p class="adh-eyebrow">Farm</p><h1 id="adh-farm-title">Own a neighborhood</h1><p class="adh-lede">Choose the area you want to be known in. Watchdog keeps the list of homes fresh and flags changes worth a note.</p></div></header>
           <div class="adh-tools">
-            <a class="adh-tool" href="/farm-map" data-adh-tool="farm-map"><span class="adh-tool-ic tone-teal"><i class="fas fa-map" aria-hidden="true"></i></span><span class="adh-tool-copy"><b>Farm map</b><small>Draw an area on the map and see every home inside it.</small></span><span class="adh-tool-go"><span>Open</span> <i class="fas fa-arrow-right" aria-hidden="true"></i></span></a>
-            <a class="adh-tool" href="/farm-builder" data-adh-tool="farm-builder"><span class="adh-tool-ic tone-sky"><i class="fas fa-sliders" aria-hidden="true"></i></span><span class="adh-tool-copy"><b>Farm by filters</b><small>Build a farm by town, home type, value and more.</small></span><span class="adh-tool-go"><span>Open</span> <i class="fas fa-arrow-right" aria-hidden="true"></i></span></a>
+            <a class="adh-tool" href="/farm-map" data-adh-tool="farm-map"><span class="adh-tool-ic tone-teal"><i class="fas fa-map" aria-hidden="true"></i></span><span class="adh-tool-copy"><b>Farm map</b><small>Draw an area on the map and see every home inside it.</small><em class="adh-tool-stat" data-adh-stat="farm"></em></span><span class="adh-tool-go"><span>Open</span> <i class="fas fa-arrow-right" aria-hidden="true"></i></span></a>
+            <a class="adh-tool" href="/farm-builder" data-adh-tool="farm-builder"><span class="adh-tool-ic tone-sky"><i class="fas fa-sliders" aria-hidden="true"></i></span><span class="adh-tool-copy"><b>Farm by filters</b><small>Build a farm by town, home type, value and more.</small><em class="adh-tool-stat" data-adh-stat="lists"></em></span><span class="adh-tool-go"><span>Open</span> <i class="fas fa-arrow-right" aria-hidden="true"></i></span></a>
           </div>
           <div class="ad27-split">
             <section class="ad27-card ad-discover" aria-labelledby="ad-lists-title">
@@ -172,7 +173,7 @@
         <section class="adh-view" id="adh-marketing" data-adh-view="marketing" aria-labelledby="adh-marketing-title">
           <header class="adh-head"><div><p class="adh-eyebrow">Marketing</p><h1 id="adh-marketing-title">Stay top of mind</h1><p class="adh-lede">Mail, email and reports built from real property data, plus your own agent page. See what is working at the bottom.</p></div></header>
           <div class="adh-tools">
-            <a class="adh-tool" href="/marketing-studio" data-adh-tool="mailers"><span class="adh-tool-ic tone-sand"><i class="fas fa-envelope-open-text" aria-hidden="true"></i></span><span class="adh-tool-copy"><b>Mailers &amp; postcards</b><small>Pick an audience, design a piece and send it by mail.</small></span><span class="adh-tool-go"><span>Open</span> <i class="fas fa-arrow-right" aria-hidden="true"></i></span></a>
+            <a class="adh-tool" href="/marketing-studio" data-adh-tool="mailers"><span class="adh-tool-ic tone-sand"><i class="fas fa-envelope-open-text" aria-hidden="true"></i></span><span class="adh-tool-copy"><b>Mailers &amp; postcards</b><small>Pick an audience, design a piece and send it by mail.</small><em class="adh-tool-stat" data-adh-stat="campaigns"></em></span><span class="adh-tool-go"><span>Open</span> <i class="fas fa-arrow-right" aria-hidden="true"></i></span></a>
             <a class="adh-tool" href="/newsletter-studio" data-adh-tool="broadcasts"><span class="adh-tool-ic tone-sky"><i class="fas fa-paper-plane" aria-hidden="true"></i></span><span class="adh-tool-copy"><b>Email updates</b><small>Send a market update email to your list.</small></span><span class="adh-tool-go"><span>Open</span> <i class="fas fa-arrow-right" aria-hidden="true"></i></span></a>
             <a class="adh-tool" href="#farm" data-adh-nav="farm"><span class="adh-tool-ic tone-teal"><i class="fas fa-chart-column" aria-hidden="true"></i></span><span class="adh-tool-copy"><b>Farm reports</b><small>Open one of your farm lists and choose Reports to make a neighborhood report.</small></span><span class="adh-tool-go"><span>Farm lists</span> <i class="fas fa-arrow-right" aria-hidden="true"></i></span></a>
             <a class="adh-tool" href="/report-builder" data-adh-tool="report-builder"><span class="adh-tool-ic tone-navy"><i class="fas fa-file-lines" aria-hidden="true"></i></span><span class="adh-tool-copy"><b>Client reports</b><small>A branded, sourced report on one home for a client.</small></span><span class="adh-tool-go"><span>Open</span> <i class="fas fa-arrow-right" aria-hidden="true"></i></span></a>
@@ -286,6 +287,6 @@
   <script src="/property/js/move-seats.js?v=20260926a"></script>
   <script src="/property/js/agent-import-mobile-a11y.js"></script>
   <script src="/property/js/agent-control-evidence-mobile.js"></script>
-  <script src="/property/js/agent-hub.js?v=20260927a"></script>
+  <script src="/property/js/agent-hub.js?v=20260927b"></script>
 </body>
 </html>

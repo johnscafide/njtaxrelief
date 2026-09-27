@@ -8,7 +8,7 @@ const DAILY_LIMIT:Record<string,number>={pro:75,pro_plus:300,teams:1500,develope
 type O=Record<string,any>;
 const clean=(v:unknown,n=1800)=>String(v??"").replace(/[<>]/g,"").trim().slice(0,n);
 const env=(j:string,l:string)=>{const raw=Deno.env.get(j)||"";if(raw){try{const x=JSON.parse(raw);if(x?.default)return String(x.default)}catch{}}return Deno.env.get(l)||""};
-function origin(req:Request){const o=req.headers.get("origin")||"";if(["https://njpropertytaxrelief.com","https://www.njpropertytaxrelief.com","http://localhost:3000","http://127.0.0.1:3000"].includes(o))return o;if(/^https:\/\/njtaxrelief(?:-git)?-[a-z0-9-]+-johnscafides-projects\.vercel\.app$/i.test(o))return o;return"https://njpropertytaxrelief.com"}
+function origin(req:Request){const o=req.headers.get("origin")||"";if(["https://njpropertytaxrelief.com","https://www.njpropertytaxrelief.com","https://watchdogindex.com","https://www.watchdogindex.com","http://localhost:3000","http://127.0.0.1:3000"].includes(o))return o;if(/^https:\/\/njtaxrelief(?:-git)?-[a-z0-9-]+-johnscafides-projects\.vercel\.app$/i.test(o))return o;return"https://njpropertytaxrelief.com"}
 const cors=(r:Request)=>({"Access-Control-Allow-Origin":origin(r),"Access-Control-Allow-Headers":"authorization, x-client-info, apikey, content-type","Access-Control-Allow-Methods":"POST, OPTIONS","Vary":"Origin"});
 const out=(r:Request,s:number,p:unknown)=>new Response(JSON.stringify(p),{status:s,headers:{...cors(r),"Content-Type":"application/json","Cache-Control":"private, no-store"}});
 function usd(v:unknown){const n=Number(v);return Number.isFinite(n)?n.toLocaleString("en-US",{style:"currency",currency:"USD",minimumFractionDigits:2,maximumFractionDigits:2}):"not available"}

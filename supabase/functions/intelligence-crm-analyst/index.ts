@@ -5,7 +5,7 @@ type Obj=Record<string,any>;
 const VERSION="watchdog-crm-analyst-v2";
 const TOOL_VERSION="watchdog-crm-tools-v1";
 const PLANS=new Set(["pro_plus","teams","developer"]);
-const ORIGINS=new Set(["https://njpropertytaxrelief.com","https://www.njpropertytaxrelief.com","http://localhost:3000","http://127.0.0.1:3000"]);
+const ORIGINS=new Set(["https://njpropertytaxrelief.com","https://www.njpropertytaxrelief.com","https://watchdogindex.com","https://www.watchdogindex.com","http://localhost:3000","http://127.0.0.1:3000"]);
 function clean(v:unknown,max=1000){return String(v??"").replace(/[<>]/g,"").trim().slice(0,max);}
 function planName(v:unknown){return clean(v,30).toLowerCase().replace("pro+","pro_plus")||"standard";}
 function namedEnv(jsonName:string,legacyName:string){const raw=Deno.env.get(jsonName)||"";if(raw){try{const x=JSON.parse(raw);if(x?.default)return String(x.default)}catch{}}return Deno.env.get(legacyName)||"";}

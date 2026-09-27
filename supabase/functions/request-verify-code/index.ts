@@ -1,13 +1,15 @@
 import { createClient } from 'https://esm.sh/@supabase/supabase-js@2';
 
-const allowedOrigin = Deno.env.get('ALLOWED_ORIGIN') || 'https://njpropertytaxrelief.com';
-const cors = {
-  'Access-Control-Allow-Origin': allowedOrigin,
-  'Access-Control-Allow-Headers': 'authorization, x-client-info, apikey, content-type'
+const defaultOrigin = Deno.env.get('ALLOWED_ORIGIN') || 'https://njpropertytaxrelief.com';
+const ORIGINS = new Set([defaultOrigin, 'https://njpropertytaxrelief.com', 'https://www.njpropertytaxrelief.com', 'https://watchdogindex.com', 'https://www.watchdogindex.com']);
+const corsFor = (req: Request) => {
+  const origin = req.headers.get('origin') || '';
+  return {
+    'Access-Control-Allow-Origin': ORIGINS.has(origin) ? origin : defaultOrigin,
+    'Access-Control-Allow-Headers': 'authorization, x-client-info, apikey, content-type',
+    'Vary': 'Origin'
+  };
 };
-const json = (body: unknown, status = 200) => new Response(JSON.stringify(body), {
-  status, headers: { ...cors, 'Content-Type': 'application/json' }
-});
 const clean = (value: unknown, max = 100) => String(value || '').trim().slice(0, max);
 async function sha(value: string) {
   const bytes = await crypto.subtle.digest('SHA-256', new TextEncoder().encode(value));
@@ -15,6 +17,10 @@ async function sha(value: string) {
 }
 
 Deno.serve(async req => {
+  const cors = corsFor(req);
+  const json = (body: unknown, status = 200) => new Response(JSON.stringify(body), {
+    status, headers: { ...cors, 'Content-Type': 'application/json' }
+  });
   if (req.method === 'OPTIONS') return new Response('ok', { headers: cors });
   const emailPrivateKey = Deno.env.get('EMAILJS_PRIVATE_KEY') || '';
   const emailPublicKey = Deno.env.get('EMAILJS_PUBLIC_KEY') || 'u262kw5AoJcBI342V';

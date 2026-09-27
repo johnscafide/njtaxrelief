@@ -4,7 +4,7 @@ import { createClient } from "npm:@supabase/supabase-js@2.95.0";
 const ENGINE = "watchdog-calibration-admin-v2-negative-insufficient";
 const ORIGINS = new Set([
   "https://njpropertytaxrelief.com",
-  "https://www.njpropertytaxrelief.com",
+  "https://www.njpropertytaxrelief.com", "https://watchdogindex.com", "https://www.watchdogindex.com",
   "http://localhost:3000",
   "http://127.0.0.1:3000",
 ]);

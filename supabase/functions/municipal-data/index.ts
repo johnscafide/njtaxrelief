@@ -2,7 +2,7 @@ import { createClient } from 'https://esm.sh/@supabase/supabase-js@2';
 
 const allowedOrigins = new Set([
   'https://njpropertytaxrelief.com',
-  'https://www.njpropertytaxrelief.com'
+  'https://www.njpropertytaxrelief.com', 'https://watchdogindex.com', 'https://www.watchdogindex.com'
 ]);
 
 function cors(req: Request) {

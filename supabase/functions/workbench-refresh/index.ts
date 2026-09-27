@@ -1,5 +1,5 @@
 import { createClient } from 'npm:@supabase/supabase-js@2.95.0';
-const ORIGINS=new Set(['https://njpropertytaxrelief.com','https://www.njpropertytaxrelief.com']);
+const ORIGINS=new Set(['https://njpropertytaxrelief.com','https://www.njpropertytaxrelief.com','https://watchdogindex.com','https://www.watchdogindex.com']);
 const CANONICAL_SCORE='watchdog.watchdog_score';
 const LEGACY_SCORE_ALIAS='watchdog.score';
 const SCORE_MODEL='ROBUST-v1';

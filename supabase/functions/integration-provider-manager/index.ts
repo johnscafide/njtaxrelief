@@ -3,7 +3,7 @@ import { createClient } from "npm:@supabase/supabase-js@2.95.0";
 
 type Obj = Record<string, any>;
 const ALLOWED_PLANS = new Set(["teams", "developer"]);
-const ORIGINS = new Set(["https://njpropertytaxrelief.com","https://www.njpropertytaxrelief.com","http://localhost:3000","http://127.0.0.1:3000"]);
+const ORIGINS = new Set(["https://njpropertytaxrelief.com","https://www.njpropertytaxrelief.com","https://watchdogindex.com","https://www.watchdogindex.com","http://localhost:3000","http://127.0.0.1:3000"]);
 const BOLDTRAIL_CONTACTS = "https://api.kvcore.com/v2/public/contacts";
 const DIRECT_SCOPES = ["crm.contacts.read"];
 function namedEnv(jsonName:string,legacyName:string){const raw=Deno.env.get(jsonName)||"";if(raw){try{const x=JSON.parse(raw);if(x?.default)return String(x.default)}catch{}}return Deno.env.get(legacyName)||"";}

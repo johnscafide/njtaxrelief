@@ -1,7 +1,7 @@
 import { createClient } from 'https://esm.sh/@supabase/supabase-js@2';
 
 const REG='https://njpropertytaxrelief.com/property/data/marker-registry.json';
-const ORIGINS=new Set(['https://njpropertytaxrelief.com','https://www.njpropertytaxrelief.com']);
+const ORIGINS=new Set(['https://njpropertytaxrelief.com','https://www.njpropertytaxrelief.com','https://watchdogindex.com','https://www.watchdogindex.com']);
 const FAMILY:any={
   'nj-parcels-modiv':{key:'nj_parcels_modiv_family',kind:'authoritative_source',status:'live',source:'NJOGIS Parcels / MOD-IV Composite'},
   'nj-sr1a':{key:'nj_sr1a_family',kind:'authoritative_reference',status:'live',source:'NJ Division of Taxation SR-1A verified sales'},

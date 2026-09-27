@@ -1,7 +1,7 @@
 import { createClient } from 'npm:@supabase/supabase-js@2.95.0';
 const URL=Deno.env.get('SUPABASE_URL')!,ANON=Deno.env.get('SUPABASE_ANON_KEY')!,SERVICE=Deno.env.get('SUPABASE_SERVICE_ROLE_KEY')!;
 const PCM='https://v3.pcmintegrations.com';
-const ORIGINS=new Set(['https://njpropertytaxrelief.com','https://www.njpropertytaxrelief.com']);
+const ORIGINS=new Set(['https://njpropertytaxrelief.com','https://www.njpropertytaxrelief.com','https://watchdogindex.com','https://www.watchdogindex.com']);
 const MAX=5000;
 function cors(req:Request){const o=req.headers.get('origin')||'';return{'Access-Control-Allow-Origin':ORIGINS.has(o)?o:'https://njpropertytaxrelief.com','Access-Control-Allow-Headers':'authorization, apikey, content-type, x-client-info','Access-Control-Allow-Methods':'POST, OPTIONS','Cache-Control':'private, no-store','Vary':'Origin'}}
 function reply(req:Request,status:number,body:unknown){return new Response(JSON.stringify(body),{status,headers:{...cors(req),'Content-Type':'application/json; charset=utf-8'}})}

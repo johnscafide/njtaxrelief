@@ -41,4 +41,13 @@ assert.match(css, /prefers-reduced-motion:reduce/, 'Agent hub must respect reduc
 assert.match(css, /env\(safe-area-inset-bottom\)/, 'Phone tab bar must respect the home indicator');
 assert.doesNotMatch(html, /<a [^>]*href="\/property\//, 'Agent Desk links must use clean public paths');
 
+// First-visit tour (replayable), live card numbers, and Intelligence mounted inside Home.
+assert.match(js, /wd_agent_desk_tour_v1/, 'Agent Desk must offer a first-visit tour');
+assert.ok(html.includes('data-adh-tour'), 'Agent Desk must let agents replay the tour');
+assert.match(js, /localStorage\.getItem\(TOUR_KEY\)/, 'The tour must remember it was seen');
+assert.match(js, /catch\(_\)\{return true;\}/, 'Blocked storage must not trap agents in the tour');
+for (const key of ['farm', 'lists', 'watched', 'campaigns']) assert.ok(html.includes(`data-adh-stat="${key}"`), `Card is missing its live ${key} number`);
+assert.match(read('property/js/watchdog-intelligence-context.js'), /getElementById\('adh-home'\)/, 'Watchdog Intelligence must mount inside the Home section, not the app grid');
+assert.match(css, /\.adh-ready \.adh-rail\{grid-column:1;grid-row:1 \/ span 50\}/, 'The rail must keep its column when another script injects content');
+
 console.log(`Agent hub contract passed (${Object.keys(tools).length} tools, 6 sections).`);

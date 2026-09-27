@@ -5,7 +5,7 @@ const RATIO_URL = "https://njpropertytaxrelief.com/property/sr1a-ratios.json";
 const PAGE_SIZE = 500;
 const CANONICAL_SCORE = "watchdog.watchdog_score";
 const SCORE_MODEL = "ROBUST-v1";
-const allowedOrigins = new Set(["https://njpropertytaxrelief.com","https://www.njpropertytaxrelief.com"]);
+const allowedOrigins = new Set(["https://njpropertytaxrelief.com","https://www.njpropertytaxrelief.com","https://watchdogindex.com","https://www.watchdogindex.com"]);
 
 function cors(req: Request) { const o=req.headers.get("origin")||""; return {"Access-Control-Allow-Origin":allowedOrigins.has(o)?o:"https://njpropertytaxrelief.com","Access-Control-Allow-Headers":"authorization, x-client-info, apikey, content-type","Access-Control-Allow-Methods":"POST, OPTIONS","Vary":"Origin"}; }
 function reply(req: Request,status:number,payload:unknown){return new Response(JSON.stringify(payload),{status,headers:{...cors(req),"Content-Type":"application/json; charset=utf-8","Cache-Control":"private, no-store"}})}
