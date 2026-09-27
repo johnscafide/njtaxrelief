@@ -42,7 +42,7 @@ The default visual language is:
 - deep navy ink
 - Watchdog blue as the main action color
 - restrained semantic green / amber / red
-- Plus Jakarta Sans for display and Inter for product UI/body text
+- Plus Jakarta Sans for display and product UI/body text
 - subtle borders and shadows rather than heavy card chrome
 - rounded geometry, generally 8–18px
 - strong information hierarchy and generous whitespace

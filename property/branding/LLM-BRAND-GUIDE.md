@@ -13,7 +13,7 @@ The product should feel precise, modern, calm, trustworthy, and useful. It shoul
 1. Show useful property information before the sales pitch.
 2. Prefer clarity and hierarchy over visual decoration.
 3. Use the existing Watchdog blue/navy system. Do not invent a new accent palette.
-4. Use Plus Jakarta Sans for display and Inter for product UI/body text on new product surfaces.
+4. Use Plus Jakarta Sans for display and for product UI/body text on new product surfaces.
 5. Keep cards quiet: white surfaces, restrained borders/shadows, 10–18px radii, generous spacing.
 6. Avoid excessive gradients, glowing backgrounds, glassmorphism, pill spam, colored side stripes, and decorative outlines.
 7. Do not use an icon beside every line of copy.
@@ -98,7 +98,7 @@ Semantic colors are not decorative colors. Red, amber, and green need actual mea
 ### New product UI
 
 - Display/headings: **Plus Jakarta Sans**, 600–800
-- Body/UI: **Inter**, 400–800
+- Body/UI: **Plus Jakarta Sans**, 400–800
 
 ### Existing exceptions
 
