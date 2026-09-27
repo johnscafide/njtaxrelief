@@ -10,10 +10,10 @@
       "tracking": "source_snapshot"
     },
     "backoffice-api": {
-      "version": 8,
-      "sha256": "4fdc44e39b035995ed0a029bf43c1a1ec89e1de744095e4e8d48453def3c6e3a",
+      "version": 23,
+      "sha256": "d99ba50255c1d885b759295c269b0722ff95b2db8b7ec335ee1006dd88944776",
       "verify_jwt": false,
-      "tracking": "fingerprint_only"
+      "tracking": "source_snapshot"
     },
     "backoffice-dev-login": {
       "version": 5,
@@ -100,14 +100,14 @@
       "tracking": "fingerprint_only"
     },
     "marketing-audience-map": {
-      "version": 7,
-      "sha256": "79086be8bbb35f27cd2045edc0d9b551a609693b3fc94640c70009ba53240011",
+      "version": 21,
+      "sha256": "82f4b91db8838b64b475d32175043bb328c0d095404e48e40165c29f787efae8",
       "verify_jwt": true,
-      "tracking": "fingerprint_only"
+      "tracking": "source_snapshot"
     },
     "marketing-campaign-checkout": {
-      "version": 11,
-      "sha256": "34a6222741063cb5b3260a15aa87384fe0b64a02946cb2dc4dc6f2b79e996739",
+      "version": 26,
+      "sha256": "1bf1fab7cd0bbdbd241c6718cd6b144eb866bb7527dfdcd2a42a33c8dba3976f",
       "verify_jwt": true,
       "tracking": "source_snapshot"
     },
@@ -136,10 +136,10 @@
       "tracking": "source_snapshot"
     },
     "materialize-dynamic-list": {
-      "version": 6,
-      "sha256": "158d039fdf7ab51bfcad7e3e65e4c29e8014300c3361a3688195d9cb7ae79bf2",
+      "version": 21,
+      "sha256": "3da736eb454d0949d59a4594d539836e26c4ab5c463332b3ab1f3a8b49dfa658",
       "verify_jwt": true,
-      "tracking": "fingerprint_only"
+      "tracking": "source_snapshot"
     },
     "municipal-data": {
       "version": 31,
@@ -384,6 +384,96 @@
     "intelligence-closing-run-preview": {
       "version": 13,
       "sha256": "21eb86b9068d1291c3d68ceeeabb6f5a62defcfd888c7bbcf19cc45fd13cec9a",
+      "verify_jwt": true,
+      "tracking": "source_snapshot"
+    },
+    "intelligence-change-run-preview": {
+      "version": 13,
+      "sha256": "aa592afce9a781dcb42fb071951745d5517df9c3822b13c8febfccd8fff9c0d4",
+      "verify_jwt": true,
+      "tracking": "source_snapshot"
+    },
+    "intelligence-analyst-scenario": {
+      "version": 14,
+      "sha256": "e88396293d6ec75368928da6677deac5714ed06993e85b14c798f71670d36b70",
+      "verify_jwt": true,
+      "tracking": "source_snapshot"
+    },
+    "intelligence-workbench-view-preview": {
+      "version": 14,
+      "sha256": "8dd80f93bbc5251e93d12d332a24ce06de7db9546d8e96f888a6222bb5f85d8b",
+      "verify_jwt": true,
+      "tracking": "source_snapshot"
+    },
+    "intelligence-team-job-submit": {
+      "version": 13,
+      "sha256": "a85e1c4ac75ae166347db0c8de3c8b67cdb62356be71ffe0635a844bbb3249f5",
+      "verify_jwt": true,
+      "tracking": "source_snapshot"
+    },
+    "integration-crm-resolver": {
+      "version": 14,
+      "sha256": "5e111adc72a73833fd76d7af871eebe82cf2f2a1eaedfabfbaf06b66bde2606a",
+      "verify_jwt": true,
+      "tracking": "source_snapshot"
+    },
+    "intelligence-job-submit": {
+      "version": 13,
+      "sha256": "3d37ba17b99c8fe8862381a1457fc18499a42810ccd6f28ffd14935492469967",
+      "verify_jwt": true,
+      "tracking": "source_snapshot"
+    },
+    "intelligence-assessment-run-preview": {
+      "version": 14,
+      "sha256": "f235de0aa63e8c516a55cab52b51ee2fde89065ed98dd4c4b4267409051b59c0",
+      "verify_jwt": true,
+      "tracking": "source_snapshot"
+    },
+    "integration-provider-manager": {
+      "version": 12,
+      "sha256": "f1e27409705f2e21905d607368afeeb068d5d0561e378eb3088b829a2a573a40",
+      "verify_jwt": true,
+      "tracking": "source_snapshot"
+    },
+    "intelligence-run-preview": {
+      "version": 13,
+      "sha256": "991636f38c6836f9585c9a5c29813dc88b4455cc0662596570db4076bf9c758c",
+      "verify_jwt": true,
+      "tracking": "source_snapshot"
+    },
+    "intelligence-calibration-admin": {
+      "version": 13,
+      "sha256": "f1aa2d8cfed13f2a25b3f1da3458d6a77acb5d9d9360e88fc40b02847be0019f",
+      "verify_jwt": true,
+      "tracking": "source_snapshot"
+    },
+    "intelligence-model-shadow-evaluate": {
+      "version": 14,
+      "sha256": "fc048b9ca098df69d2f688b467f7955ac91874605da3e82cc6763e3333eafbaf",
+      "verify_jwt": true,
+      "tracking": "source_snapshot"
+    },
+    "intelligence-model-repair-readiness": {
+      "version": 15,
+      "sha256": "5b20ea9f8b8137dc907b5cfb1170a650e8e1dcb636cd37d1a0c00bb88f023fee",
+      "verify_jwt": true,
+      "tracking": "source_snapshot"
+    },
+    "intelligence-score-preview": {
+      "version": 13,
+      "sha256": "e4048f31c7018b77bf2a9071440bab67fc9bb850a4096e42383d3f9b915b3c93",
+      "verify_jwt": true,
+      "tracking": "source_snapshot"
+    },
+    "integration-gateway": {
+      "version": 12,
+      "sha256": "b018d2f57aa1bb4b92cf11ed4efd6523bb01a7544948aa83578478545995d147",
+      "verify_jwt": true,
+      "tracking": "source_snapshot"
+    },
+    "intelligence-analyst": {
+      "version": 14,
+      "sha256": "e0ccf9d648cdf1ba542e1cbc07a3c3e1af849ffbdd7f1b76b796b0cfc3144e9f",
       "verify_jwt": true,
       "tracking": "source_snapshot"
     }
