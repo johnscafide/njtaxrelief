@@ -1,0 +1,93 @@
+/* ==========================================================================
+   Data Center and Data Workbench in the Watchdog board design.
+   Presentation only: the data scripts render every value, field and row.
+   Watchdog Intelligence triggers keep their own brand treatment.
+   ========================================================================== */
+html body:is([data-sidebar-page="data-center"],[data-sidebar-page="data-workbench"]){
+  --xb-bg:#f3f1ec;--xb-surface:#fbfaf7;--xb-line:#e3dfd6;--xb-ink:#0e2248;--xb-muted:#5d6877;
+  --xb-navy:#0e2248;--xb-blue:#1456a0;--xb-blue-bright:#2f6df6;--xb-gold:#b8972a;
+  --xb-sky:#e3edfb;--xb-sky-deep:#b9d0f2;--xb-teal:#dff1ec;--xb-teal-deep:#9fd3c5;--xb-sand:#f6efd9;--xb-sand-deep:#e4cf8e;
+  --xb-display:"Plus Jakarta Sans",Inter,system-ui,sans-serif;
+}
+html body:is([data-sidebar-page="data-center"],[data-sidebar-page="data-workbench"]),
+html body:is([data-sidebar-page="data-center"],[data-sidebar-page="data-workbench"]) .db-workspace{background:var(--xb-bg)!important}
+html body:is([data-sidebar-page="data-center"],[data-sidebar-page="data-workbench"]) .wdx-topbar{background:rgba(251,250,247,.94)!important}
+html body:is([data-sidebar-page="data-center"],[data-sidebar-page="data-workbench"]) .wdx-btn{border-radius:999px!important}
+html body:is([data-sidebar-page="data-center"],[data-sidebar-page="data-workbench"]) .wdx-btn.primary{background:var(--xb-navy)!important;border-color:var(--xb-navy)!important}
+
+/* ---------------- Data Center ---------------- */
+html body[data-sidebar-page="data-center"] .dcv2-page{word-spacing:.04em}
+html body[data-sidebar-page="data-center"] .dcv2-hero{position:relative;overflow:hidden;border-radius:24px!important;background:var(--xb-navy)!important;box-shadow:none!important}
+html body[data-sidebar-page="data-center"] .dcv2-hero::after{content:"";position:absolute;top:auto!important;left:auto!important;right:48px;bottom:-40px;width:220px;height:256px;opacity:.5;pointer-events:none;background:no-repeat center/contain url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 116'%3E%3Cpath fill='%231456a0' d='M50 2 94 18v34c0 30-19 52-44 62C25 104 6 82 6 52V18Z'/%3E%3C/svg%3E")}
+html body[data-sidebar-page="data-center"] .dcv2-hero>*{position:relative;z-index:1}
+html body[data-sidebar-page="data-center"] .dcv2-hero::before{display:none!important}
+html body[data-sidebar-page="data-center"] .dcv2-hero-actions :is(a,button){border-radius:999px!important}
+
+html body[data-sidebar-page="data-center"] .dcv2-tabs{gap:6px!important;padding:6px!important;border:0!important;border-radius:999px!important;background:#fff!important;box-shadow:none!important;width:fit-content;max-width:100%;overflow-x:auto}
+html body[data-sidebar-page="data-center"] .dcv2-tab{min-height:42px!important;padding:0 18px!important;border:0!important;border-radius:999px!important;background:transparent!important;color:var(--xb-ink)!important;font:600 14px var(--xb-display)!important;white-space:nowrap}
+html body[data-sidebar-page="data-center"] .dcv2-tab[aria-selected="true"]{background:var(--xb-navy)!important;color:#fff!important}
+
+/* The four summary numbers become the board's colored cards */
+html body[data-sidebar-page="data-center"] .dcv2-kpis{gap:16px!important}
+html body[data-sidebar-page="data-center"] .dcv2-kpi{position:relative;overflow:hidden;min-height:150px;border:0!important;border-radius:24px!important;box-shadow:none!important;color:var(--xb-ink)!important}
+html body[data-sidebar-page="data-center"] .dcv2-kpi>*{position:relative;z-index:1}
+html body[data-sidebar-page="data-center"] .dcv2-kpi::after{content:"";position:absolute;z-index:0;right:14px;top:14px;width:72px;height:72px;pointer-events:none;background:no-repeat center/contain}
+html body[data-sidebar-page="data-center"] .dcv2-kpi:nth-child(1){background:var(--xb-navy)!important;color:#fff!important}
+html body[data-sidebar-page="data-center"] .dcv2-kpi:nth-child(1) :is(b,strong,span){color:#fff!important}
+html body[data-sidebar-page="data-center"] .dcv2-kpi:nth-child(1)::after{right:-20px;top:16px;width:92px;height:106px;opacity:.55;background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 116'%3E%3Cpath fill='%231456a0' d='M50 2 94 18v34c0 30-19 52-44 62C25 104 6 82 6 52V18Z'/%3E%3C/svg%3E")}
+html body[data-sidebar-page="data-center"] .dcv2-kpi:nth-child(2){background:var(--xb-sky)!important}
+html body[data-sidebar-page="data-center"] .dcv2-kpi:nth-child(2)::after{background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 92'%3E%3Cpath fill='%23b9d0f2' d='M50 4 96 42h-12v46H62V62H38v26H16V42H4Z'/%3E%3C/svg%3E")}
+html body[data-sidebar-page="data-center"] .dcv2-kpi:nth-child(3){background:var(--xb-teal)!important}
+html body[data-sidebar-page="data-center"] .dcv2-kpi:nth-child(3)::after{background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Ccircle cx='42' cy='42' r='28' fill='none' stroke='%239fd3c5' stroke-width='14'/%3E%3Cpath stroke='%239fd3c5' stroke-width='16' stroke-linecap='round' d='M63 63 92 92'/%3E%3C/svg%3E")}
+html body[data-sidebar-page="data-center"] .dcv2-kpi:nth-child(4){background:var(--xb-sand)!important}
+html body[data-sidebar-page="data-center"] .dcv2-kpi:nth-child(4)::after{width:58px;height:72px;background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 80 100'%3E%3Cpath fill='%23e4cf8e' d='M40 2C19 2 4 17 4 37c0 26 36 61 36 61s36-35 36-61C76 17 61 2 40 2Z'/%3E%3Ccircle cx='40' cy='37' r='13' fill='%23f6efd9'/%3E%3C/svg%3E")}
+html body[data-sidebar-page="data-center"] .dcv2-kpi b{display:inline-block;max-width:calc(100% - 70px);padding-bottom:6px;border-bottom:2px solid currentColor;font:700 28px/1.15 var(--xb-display)!important;letter-spacing:-.02em}
+html body[data-sidebar-page="data-center"] .dcv2-kpi:nth-child(1) b{border-color:var(--xb-gold)}
+html body[data-sidebar-page="data-center"] .dcv2-kpi strong{font-size:13px!important;font-weight:700!important;letter-spacing:.04em;text-transform:uppercase;opacity:.8}
+html body[data-sidebar-page="data-center"] .dcv2-kpi:not(:nth-child(1)) :is(b,strong,span){color:var(--xb-ink)!important}
+html body[data-sidebar-page="data-center"] .dcv2-kpi span{font-size:14px!important;opacity:.82}
+
+html body[data-sidebar-page="data-center"] :is(.dcv2-card,.dcv2-usecase){border:0!important;border-radius:24px!important;background:#fff!important;box-shadow:none!important}
+html body[data-sidebar-page="data-center"] .dcv2-card-head h2{color:var(--xb-ink)!important;font:700 22px/1.2 var(--xb-display)!important;letter-spacing:-.015em!important}
+html body[data-sidebar-page="data-center"] .dcv2-fresh-row{border:1px solid var(--xb-line)!important;border-radius:18px!important;background:var(--xb-surface)!important}
+html body[data-sidebar-page="data-center"] .dcv2-fresh-badge{border-radius:999px!important}
+html body[data-sidebar-page="data-center"] .dcv2-bar{border-radius:999px!important;background:#eeeae2!important;overflow:hidden}
+html body[data-sidebar-page="data-center"] .dcv2-usecase i{display:grid!important;place-items:center;width:42px;height:42px;border-radius:14px!important;background:var(--xb-sky)!important;color:var(--xb-blue)!important}
+html body[data-sidebar-page="data-center"] :is(button,a):focus-visible{outline:3px solid var(--xb-blue-bright)!important;outline-offset:2px}
+
+/* ---------------- Data Workbench ---------------- */
+html body[data-sidebar-page="data-workbench"] #dw-app{border:0!important;border-radius:24px!important;box-shadow:none!important;overflow:hidden;background:#fff!important}
+html body[data-sidebar-page="data-workbench"] #dw-app .dw-side{background:var(--xb-surface)!important;border-color:var(--xb-line)!important}
+html body[data-sidebar-page="data-workbench"] #dw-app .dw-side h2{color:var(--xb-ink)!important;font:700 22px/1.2 var(--xb-display)!important}
+html body[data-sidebar-page="data-workbench"] #dw-app :is(.dw-source-list,.dw-view-list)>button{border:0!important;border-radius:14px!important;background:transparent!important;color:var(--xb-ink)!important;font-weight:600!important}
+html body[data-sidebar-page="data-workbench"] #dw-app :is(.dw-source-list,.dw-view-list)>button:hover{background:#fff!important}
+html body[data-sidebar-page="data-workbench"] #dw-app .dw-source-list>button.on{background:var(--xb-navy)!important;color:#fff!important}
+html body[data-sidebar-page="data-workbench"] #dw-app .dw-source-list>button.on i{color:#fff!important}
+html body[data-sidebar-page="data-workbench"] #dw-app .dw-toolbar{gap:8px!important;border-color:var(--xb-line)!important}
+html body[data-sidebar-page="data-workbench"] #dw-app .dw-toolbar :is(button,select,input){border-radius:999px!important;border-color:var(--xb-line)!important;box-shadow:none!important}
+html body[data-sidebar-page="data-workbench"] #dw-app .dw-toolbar :is(button:not(.dwi-trigger):not(.dwa-trigger):not(.primary),select,input){background:#fff!important;color:var(--xb-ink)!important}
+html body[data-sidebar-page="data-workbench"] #dw-app .dw-toolbar input{padding-left:16px!important}
+html body[data-sidebar-page="data-workbench"] #dw-app #dw-refresh.primary{background:var(--xb-navy)!important;border-color:var(--xb-navy)!important;color:#fff!important}
+html body[data-sidebar-page="data-workbench"] #dw-app #dw-refresh.primary:hover{background:var(--xb-blue)!important}
+html body[data-sidebar-page="data-workbench"] #dw-app .dw-summary{background:var(--xb-sky)!important;border-color:var(--xb-line)!important;color:var(--xb-ink)!important}
+html body[data-sidebar-page="data-workbench"] #dw-app .dw-grid thead th{background:var(--xb-surface)!important;color:var(--xb-muted)!important;border-color:var(--xb-line)!important}
+html body[data-sidebar-page="data-workbench"] #dw-app .dw-grid td{border-color:#efebe4!important;color:var(--xb-ink)}
+html body[data-sidebar-page="data-workbench"] #dw-app .dw-grid tbody tr:hover td{background:var(--xb-surface)!important}
+html body[data-sidebar-page="data-workbench"] #dw-app .dw-grid input[type=checkbox]{accent-color:var(--xb-navy)}
+html body[data-sidebar-page="data-workbench"] #dw-app .dw-load-more{border-radius:999px!important;border-color:var(--xb-line)!important;color:var(--xb-ink)!important}
+html body[data-sidebar-page="data-workbench"] #dw-app .dw-actionbar{background:var(--xb-surface)!important;border-color:var(--xb-line)!important}
+html body[data-sidebar-page="data-workbench"] #dw-app .dw-actionbar button{border-radius:999px!important;border-color:var(--xb-line)!important;background:#fff!important;color:var(--xb-ink)!important}
+html body[data-sidebar-page="data-workbench"] #dw-app #dw-export{background:var(--xb-navy)!important;border-color:var(--xb-navy)!important;color:#fff!important}
+html body[data-sidebar-page="data-workbench"] #dw-app :is(button,a,input,select):focus-visible{outline:3px solid var(--xb-blue-bright)!important;outline-offset:2px}
+
+@media (max-width:1100px){html body[data-sidebar-page="data-center"] .dcv2-kpis{grid-template-columns:repeat(2,minmax(0,1fr))!important}}
+@media (max-width:640px){
+  html body[data-sidebar-page="data-center"] .dcv2-kpis{grid-template-columns:minmax(0,1fr)!important;gap:12px!important}
+  html body[data-sidebar-page="data-center"] .dcv2-kpi{min-height:0}
+  html body[data-sidebar-page="data-center"] .dcv2-hero::after{right:-40px;width:150px;height:175px}
+  html body[data-sidebar-page="data-center"] .dcv2-tabs{width:auto}
+}
+@media print{
+  html body[data-sidebar-page="data-center"] :is(.dcv2-hero,.dcv2-kpi){background:#fff!important;color:#000!important;border:1px solid #bbb!important}
+  html body[data-sidebar-page="data-center"] :is(.dcv2-hero,.dcv2-kpi)::after{display:none}
+}
