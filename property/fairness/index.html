@@ -17,10 +17,22 @@
 <link rel="stylesheet" href="/property/css/shared.css?v=20260805b">
 <link rel="stylesheet" href="/property/css/dashboard.css?v=20260805i">
 <link rel="stylesheet" href="/property/css/fairness.css?v=20260805b">
+<link rel="stylesheet" href="/property/css/app-shell-2027.css">
+<link rel="stylesheet" href="/property/css/secondary-pages-2027.css">
+<link rel="stylesheet" href="/property/css/fairness-board.css?v=20260927a">
 <script async src="https://www.googletagmanager.com/gtag/js?id=G-ENP9182L0J"></script>
 <script>window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments);}gtag('js',new Date());gtag('config','G-ENP9182L0J');</script>
+  <meta name="twitter:card" content="summary_large_image">
+  <meta property="og:image" content="https://www.watchdogindex.com/watchdog-social-share-20260913-v3.jpg">
+  <meta property="og:image:secure_url" content="https://www.watchdogindex.com/watchdog-social-share-20260913-v3.jpg">
+  <meta property="og:image:type" content="image/jpeg">
+  <meta property="og:image:width" content="1200">
+  <meta property="og:image:height" content="630">
+  <meta property="og:image:alt" content="Watchdog Property Intelligence across New Jersey">
+  <meta name="twitter:image" content="https://www.watchdogindex.com/watchdog-social-share-20260913-v3.jpg">
+  <meta name="twitter:image:alt" content="Watchdog Property Intelligence across New Jersey">
 </head>
-<body data-sidebar-page="robust">
+<body data-sidebar-page="fairness">
 <div class="pl-toast" id="pl-toast"></div>
 
 <main id="fi-main">
@@ -53,6 +65,8 @@
             <p>Built from the Coefficient of Deviation published by the Division of Taxation and cross-checked against the state's verified arm's-length sales. This is municipal system context, not a finding about any one parcel.</p>
           </div>
         </div>
+
+        <section class="fb-cards" id="fb-cards" aria-label="Statewide uniformity summary"></section>
 
         <div class="fi-controls">
           <input id="fi-search" type="text" placeholder="Search a town...">
@@ -106,7 +120,9 @@
   </div>
 </main>
 
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2/dist/umd/supabase.js"></script>
 <script src="/property/js/sidemenu.js?v=20260809f"></script>
+<script src="/property/js/app-shell-2027.js"></script>
 <script type="module">
 import '/property/js/dashboard/tools/town-intelligence.js?v=20260805a';
 import '/property/js/dashboard/tools/municipal-budget-pressure.js?v=20260805a';
@@ -114,6 +130,7 @@ import '/property/js/dashboard/tools/municipal-budget-pressure.js?v=20260805a';
   'use strict';
   var rows = [];
   var sortKey = 'score', sortDir = -1;
+  var bandFilter = '';
 
   function bandFor(score) {
     return score >= 70 ? 'excellent' : score >= 50 ? 'good' : score >= 30 ? 'fair' : 'poor';
@@ -150,6 +167,7 @@ import '/property/js/dashboard/tools/municipal-budget-pressure.js?v=20260805a';
 
     document.getElementById('fi-loading').style.display = 'none';
     document.getElementById('fi-table-wrap').style.display = 'block';
+    renderCards();
     render();
     var requested = new URLSearchParams(location.search).get('district');
     if (requested && townIntelFor(requested)) openTown(requested, false);
@@ -178,12 +196,56 @@ import '/property/js/dashboard/tools/municipal-budget-pressure.js?v=20260805a';
     host.scrollIntoView({ behavior: 'smooth', block: 'start' });
   }
 
+  var DECO = {
+    shield: '<svg class="fb-deco fb-deco--shield" viewBox="0 0 100 116" aria-hidden="true"><path d="M50 2 94 18v34c0 30-19 52-44 62C25 104 6 82 6 52V18Z"/></svg>',
+    house: '<svg class="fb-deco fb-deco--house" viewBox="0 0 100 92" aria-hidden="true"><path d="M50 4 96 42h-12v46H62V62H38v26H16V42H4Z"/></svg>',
+    magnifier: '<svg class="fb-deco fb-deco--magnifier" viewBox="0 0 100 100" aria-hidden="true"><circle cx="42" cy="42" r="28" stroke-width="14"/><path d="M63 63 92 92" stroke-width="16" stroke-linecap="round"/></svg>',
+    pin: '<svg class="fb-deco fb-deco--pin" viewBox="0 0 80 100" aria-hidden="true"><path d="M40 2C19 2 4 17 4 37c0 26 36 61 36 61s36-35 36-61C76 17 61 2 40 2Z"/><circle cx="40" cy="37" r="13"/></svg>'
+  };
+
+  function renderCards() {
+    var host = document.getElementById('fb-cards');
+    if (!host || !rows.length) return;
+    var scores = rows.map(function (r) { return r.score; }).filter(function (v) { return v != null; }).sort(function (a, b) { return a - b; });
+    var mid = Math.floor(scores.length / 2);
+    var median = scores.length % 2 ? scores[mid] : (scores[mid - 1] + scores[mid]) / 2;
+    var top = rows.slice().sort(function (a, b) { return b.score - a.score; })[0];
+    var count = function (band) { return rows.filter(function (r) { return r.band === band; }).length; };
+    host.innerHTML =
+      '<button type="button" class="fb-card fb-card--navy" data-fb-open="' + esc(top.district) + '">' + DECO.shield +
+        '<span class="fb-l">Most consistent town</span><b>' + esc(top.name) + '</b>' +
+        '<span class="fb-v">Score ' + top.score + ' · ' + esc(titleCase(top.county)) + ' County</span><span class="fb-go">Open town report&nbsp;<i class="fas fa-arrow-right" aria-hidden="true"></i></span></button>' +
+      '<div class="fb-card fb-card--sky">' + DECO.house +
+        '<span class="fb-l">Statewide median</span><b>' + (Math.round(median * 10) / 10) + '</b>' +
+        '<span class="fb-v">Half of the ' + rows.length + ' rated towns score above this.</span></div>' +
+      '<button type="button" class="fb-card fb-card--teal" data-fb-band="excellent" aria-pressed="false">' + DECO.magnifier +
+        '<span class="fb-l">Very consistent</span><b>' + count('excellent') + ' towns</b>' +
+        '<span class="fb-v">Score 70 or higher.</span><span class="fb-go" data-fb-go>Show only these</span></button>' +
+      '<button type="button" class="fb-card fb-card--sand" data-fb-band="poor" aria-pressed="false">' + DECO.pin +
+        '<span class="fb-l">Variable</span><b>' + count('poor') + ' towns</b>' +
+        '<span class="fb-v">Score under 30.</span><span class="fb-go" data-fb-go>Show only these</span></button>';
+    host.querySelector('[data-fb-open]').addEventListener('click', function () { openTown(this.getAttribute('data-fb-open')); });
+    host.querySelectorAll('[data-fb-band]').forEach(function (card) {
+      card.addEventListener('click', function () {
+        var band = card.getAttribute('data-fb-band');
+        bandFilter = bandFilter === band ? '' : band;
+        host.querySelectorAll('[data-fb-band]').forEach(function (other) {
+          var on = other.getAttribute('data-fb-band') === bandFilter;
+          other.setAttribute('aria-pressed', on ? 'true' : 'false');
+          other.querySelector('[data-fb-go]').textContent = on ? 'Show all towns' : 'Show only these';
+        });
+        render();
+      });
+    });
+  }
+
   function render() {
     var q = document.getElementById('fi-search').value.trim().toUpperCase();
     var county = document.getElementById('fi-county').value;
 
     var filtered = rows.filter(function (r) {
       if (county && r.county !== county) return false;
+      if (bandFilter && r.band !== bandFilter) return false;
       if (q && r.name.toUpperCase().indexOf(q) === -1) return false;
       return true;
     });

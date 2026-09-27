@@ -14,7 +14,7 @@
   function showPrompt(button){
     var shell=document.createElement('div');
     shell.id='wd-license-onboarding-prompt';
-    shell.innerHTML='<p class="wd-onboarding-step">PROFESSIONAL VERIFICATION</p><h2>What is your NJ real-estate license number?</h2><p class="wd-onboarding-note">Watchdog verifies professional identity against the New Jersey Division of Consumer Affairs. This does not change your plan or unlock owner/contact data.</p><div class="wd-onboarding-field"><input id="wd-license-onboarding-input" class="wd-onboarding-input" type="text" inputmode="text" maxlength="14" autocomplete="off" placeholder="0562117" value="'+esc(captured)+'"></div><p class="wd-onboarding-note"><a href="https://www.njconsumeraffairs.gov/Pages/verification.aspx" target="_blank" rel="noopener noreferrer">Official NJ DCA license verification</a></p><div id="wd-license-onboarding-error" class="wd-onboarding-error"></div><div class="wd-onboarding-actions"><button type="button" class="wd-onboarding-back" id="wd-license-onboarding-back">Back</button><button type="button" class="wd-onboarding-next" id="wd-license-onboarding-continue" disabled>Continue</button></div>';
+    shell.innerHTML='<p class="wd-onboarding-step">PROFESSIONAL VERIFICATION</p><h2>What is your New Jersey Real Estate License number?</h2><p class="wd-onboarding-note">Watchdog verifies professional identity against the New Jersey Division of Consumer Affairs. This does not change your plan or unlock owner/contact data.</p><div class="wd-onboarding-field"><input id="wd-license-onboarding-input" class="wd-onboarding-input" type="text" inputmode="text" maxlength="14" autocomplete="off" placeholder="0562117" value="'+esc(captured)+'"></div><p class="wd-onboarding-note"><a href="https://www.njconsumeraffairs.gov/Pages/verification.aspx" target="_blank" rel="noopener noreferrer">Official NJ DCA license verification</a></p><div id="wd-license-onboarding-error" class="wd-onboarding-error"></div><div class="wd-onboarding-actions"><button type="button" class="wd-onboarding-back" id="wd-license-onboarding-back">Back</button><button type="button" class="wd-onboarding-next" id="wd-license-onboarding-continue" disabled>Continue</button></div>';
     var prior=Array.from(root.childNodes);
     root.innerHTML='';
     root.appendChild(shell);
@@ -25,7 +25,7 @@
     document.getElementById('wd-license-onboarding-back').addEventListener('click',function(){root.innerHTML='';prior.forEach(function(n){root.appendChild(n);});});
     next.addEventListener('click',function(){
       captured=normalize(input.value);
-      if(!valid(captured)){document.getElementById('wd-license-onboarding-error').textContent='Enter a valid NJ real-estate license number.';return;}
+      if(!valid(captured)){document.getElementById('wd-license-onboarding-error').textContent='Enter a valid New Jersey Real Estate License number.';return;}
       root.innerHTML='';prior.forEach(function(n){root.appendChild(n);});
       bypass=true;
       button.click();

@@ -153,7 +153,7 @@
     '</a>';
   }
   function activeFor(item,page){
-    if(item.key === 'robust') return page === 'robust';
+    if(item.key === 'robust') return page === 'robust' || page === 'fairness';
     return item.key === page;
   }
   function navLinksHtml(){

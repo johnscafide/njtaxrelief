@@ -33,5 +33,5 @@ must(verifyApi.includes("No exact NJDOBI record matched this number"),'Exact rec
 must(migration.includes("grant execute on function public.verify_professional_license_official_v2(uuid,text,text,text) to service_role"),'Official verification RPC must be service-role only.');
 must(migration.includes("where user_id = v_uid\n  limit 1"),'Manual fallback must not require completed onboarding state.');
 must(page.includes('agent-branding-profile.js?v=20260925b'),'Branding cache version missing.');
-must(page.includes('professional-license-verification.js?v=20260925b'),'Verification cache version missing.');
+must(page.includes('professional-license-verification.js?v=20260927a'),'Verification cache version missing.');
 console.log('NJW-424 brokerage and professional verification contract passed');

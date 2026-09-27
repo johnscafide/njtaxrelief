@@ -1,0 +1,112 @@
+/* ==========================================================================
+   Homeowner and Professional Profile pages in the Watchdog board design.
+   Loads after account-board.css (which supplies the --ab-* palette, warm page
+   and flat white sections). Presentation only: the profile, branding, license,
+   REALTOR, connections, invite and portal scripts render every value.
+   ========================================================================== */
+html body[data-account-profile-mode] .top{display:none!important}
+html body[data-account-profile-mode] #ac-app{word-spacing:.05em;font-family:var(--ab-display)}
+html body[data-account-profile-mode] #ac-app>.ac-section{padding:30px!important;margin-bottom:18px!important;background:#fff!important}
+
+/* Back link */
+html body[data-account-profile-mode] .ac-profile-route-back{display:inline-flex!important;align-items:center;gap:8px;min-height:40px;padding:0 16px!important;border:1px solid var(--ab-line)!important;border-radius:999px!important;background:#fff!important;color:var(--ab-ink)!important;font:600 13px var(--ab-display)!important;text-decoration:none!important}
+html body[data-account-profile-mode] .ac-profile-route-back:hover{border-color:#cfc8ba!important}
+
+/* Section headers */
+html body[data-account-profile-mode] #ac-app .acp-header{margin-bottom:20px!important;padding:0!important;border:0!important;background:transparent!important}
+html body[data-account-profile-mode] #ac-app .acp-header>div>span{display:block;margin-bottom:6px;color:var(--ab-muted)!important;font:700 12px/1.2 var(--ab-display)!important;letter-spacing:.07em!important}
+html body[data-account-profile-mode] #ac-app .acp-header h2{margin:0 0 6px!important;color:var(--ab-ink)!important;font:700 26px/1.2 var(--ab-display)!important;letter-spacing:-.02em!important}
+html body[data-account-profile-mode] #ac-app .acp-header p{max-width:760px;color:var(--ab-muted)!important;font-size:15px!important;line-height:1.5!important}
+html body[data-account-profile-mode] #ac-app .acp-source{flex:none;min-height:32px;padding:0 12px!important;border:0!important;border-radius:999px!important;background:var(--ab-sky)!important;color:var(--ab-blue)!important;font-size:12px!important;font-weight:700!important;letter-spacing:.02em!important;text-transform:none!important}
+html body[data-account-profile-mode] #ac-app .acp-source :is(i,span){color:inherit!important;font-size:12px!important;letter-spacing:inherit!important;text-transform:none!important}
+
+/* Inner panels: warm surface, soft line, no shadows */
+html body[data-account-profile-mode] #ac-app :is(.acp-panel,.acp-choice-panel,.acp-intel,.acp-private,.acb-panel,.acr-panel,.apc-card,.ac-vanity-preview){border:1px solid var(--ab-line)!important;border-radius:20px!important;background:var(--ab-surface)!important;box-shadow:none!important}
+html body[data-account-profile-mode] #ac-app :is(.acp-private-note,.apc-notice,.acr-nar-note,.acp-profile-context){border:1px solid var(--ab-line)!important;border-radius:14px!important;background:#fff!important;box-shadow:none!important}
+html body[data-account-profile-mode] #ac-app :is(.acp-panel-head,.acr-panel-head)>i,
+html body[data-account-profile-mode] #ac-app .acb-panel-title i,
+html body[data-account-profile-mode] #ac-app .apc-icon{display:grid!important;place-items:center;width:40px!important;height:40px!important;flex:none;border:0!important;border-radius:12px!important;background:var(--ab-sky)!important;color:var(--ab-blue)!important;font-size:16px!important}
+html body[data-account-profile-mode] #ac-app .apc-icon i{background:transparent!important;color:inherit!important}
+html body[data-account-profile-mode] #ac-app :is(.acp-panel-head,.acr-panel-head) b,
+html body[data-account-profile-mode] #ac-app .acb-panel-title b,
+html body[data-account-profile-mode] #ac-app .apc-card h3{color:var(--ab-ink)!important;font:700 16px/1.3 var(--ab-display)!important}
+html body[data-account-profile-mode] #ac-app :is(.acp-panel-head,.acr-panel-head) small,
+html body[data-account-profile-mode] #ac-app .acb-panel-title small{color:var(--ab-muted)!important;font-size:13px!important}
+
+/* Fields */
+html body[data-account-profile-mode] #ac-app :is(label,.acp-field)>span,
+html body[data-account-profile-mode] #ac-app .acp-choice-group>span,
+html body[data-account-profile-mode] #ac-app .acb-media-preview span{color:var(--ab-ink)!important;font:600 13px/1.3 var(--ab-display)!important;letter-spacing:0!important;text-transform:none!important}
+html body[data-account-profile-mode] #ac-app :is(input:not([type=checkbox]):not([type=radio]):not([type=color]),select,textarea){box-sizing:border-box;min-height:46px;padding:10px 14px!important;border:1px solid var(--ab-line)!important;border-radius:12px!important;background:#fff!important;color:var(--ab-ink)!important;font:500 15px/1.35 var(--ab-display)!important;box-shadow:none!important}
+html body[data-account-profile-mode] #ac-app textarea{min-height:96px}
+html body[data-account-profile-mode] #ac-app :is(input,select,textarea):focus-visible{outline:3px solid rgba(47,109,246,.35)!important;outline-offset:1px;border-color:var(--ab-blue-bright)!important}
+html body[data-account-profile-mode] #ac-app :is(input,textarea)::placeholder{color:#8a93a0}
+html body[data-account-profile-mode] #ac-app input[type=color]{border:1px solid var(--ab-line)!important;border-radius:10px!important}
+html body[data-account-profile-mode] #ac-app .acp-field small,
+html body[data-account-profile-mode] #ac-app .apc-fields,
+html body[data-account-profile-mode] #ac-app :is(.acb-panel,.acr-panel,.apc-card) small{font-size:12px!important;line-height:1.45!important;color:var(--ab-muted)!important}
+html body[data-account-profile-mode] #ac-app .apc-card p{font-size:13px!important;line-height:1.5!important;color:var(--ab-muted)!important}
+html body[data-account-profile-mode] #ac-app .apc-card-top em{border-radius:999px!important;font-size:12px!important;font-style:normal}
+html body[data-account-profile-mode] #ac-app .acp-source,
+html body[data-account-profile-mode] #ac-app .acp-source span{white-space:nowrap}
+
+html body[data-account-profile-mode] #ac-app :is(.acp-panel,.acr-panel)>p,html body[data-account-profile-mode] #ac-app .acp-panel .acp-field p{color:var(--ab-muted)!important;font-size:14px!important;line-height:1.55!important}
+html body[data-account-profile-mode] #ac-app .acp-panel a{color:var(--ab-blue)!important;font-weight:700}
+
+/* Choice chips: the hidden checkbox must not take layout width */
+html body[data-account-profile-mode] #ac-app .acp-chips label{position:relative}
+html body[data-account-profile-mode] #ac-app .acp-chips input{position:absolute!important;inset:0!important;width:1px!important;height:1px!important;margin:0!important;opacity:0!important}
+html body[data-account-profile-mode] #ac-app .acp-chips span{min-height:38px;display:inline-flex!important;align-items:center;padding:0 14px!important;border:1px solid var(--ab-line)!important;border-radius:999px!important;background:#fff!important;color:var(--ab-ink)!important;font:600 13px var(--ab-display)!important}
+html body[data-account-profile-mode] #ac-app .acp-chips input:checked+span{background:var(--ab-navy)!important;border-color:var(--ab-navy)!important;color:#fff!important}
+html body[data-account-profile-mode] #ac-app .acp-chips input:focus-visible+span{outline:3px solid var(--ab-blue-bright);outline-offset:2px}
+
+/* Buttons: one primary look (navy pill) and one secondary look (white pill) */
+html body[data-account-profile-mode] #ac-app :is(.acp-save button,#acb-save,#acb-analyze,#acb-license-go,.acr-submit button,.apc-actions button,.ac-vanity-save,.api-primary,#ac-license-submit,#acr-submit){display:inline-flex!important;align-items:center;justify-content:center;gap:8px;min-height:44px!important;padding:0 20px!important;border:1px solid var(--ab-navy)!important;border-radius:999px!important;background:var(--ab-navy)!important;color:#fff!important;font:700 14px var(--ab-display)!important;box-shadow:none!important;text-transform:none!important;letter-spacing:0!important}
+html body[data-account-profile-mode] #ac-app :is(.acp-save button,#acb-save,#acb-analyze,#acb-license-go,.acr-submit button,.apc-actions button,.ac-vanity-save,.api-primary,#ac-license-submit,#acr-submit) i{color:inherit!important}
+html body[data-account-profile-mode] #ac-app :is(.acp-save button,#acb-save,#acb-analyze,#acb-license-go,.acr-submit button,.apc-actions button,.ac-vanity-save,.api-primary,#ac-license-submit,#acr-submit):hover{background:var(--ab-blue)!important;border-color:var(--ab-blue)!important}
+html body[data-account-profile-mode] #ac-app :is(button,a):disabled{opacity:.55;cursor:not-allowed}
+html body[data-account-profile-mode] #ac-app :is(#acb-find-license,.ac-vanity-clear,[data-api-copy=code],.ac-qr-actions button,.ac-qr-actions a){display:inline-flex!important;align-items:center;justify-content:center;gap:8px;min-height:44px!important;padding:0 18px!important;border:1px solid var(--ab-line)!important;border-radius:999px!important;background:#fff!important;color:var(--ab-ink)!important;font:600 14px var(--ab-display)!important;box-shadow:none!important}
+html body[data-account-profile-mode] #ac-app :is(#acb-find-license,.ac-vanity-clear,[data-api-copy=code],.ac-qr-actions button,.ac-qr-actions a):hover{border-color:#cfc8ba!important}
+html body[data-account-profile-mode] #ac-app :is(button,a):focus-visible{outline:3px solid var(--ab-blue-bright)!important;outline-offset:2px}
+html body[data-account-profile-mode] #ac-app .ac-save-row{margin-top:18px!important;padding-top:18px!important;border-top:1px solid var(--ab-line)!important;background:transparent!important}
+html body[data-account-profile-mode] #ac-app .acp-intel input[type=checkbox]{accent-color:var(--ab-navy)}
+html body[data-account-profile-mode] #ac-app .apc-foot a,
+html body[data-account-profile-mode] #ac-app .acr-links a{color:var(--ab-blue)!important;font-weight:700!important;font-size:13px!important}
+
+/* Invite fellow co-op agents / professional sphere */
+html body[data-account-profile-mode] #ac-app .api-invite{position:relative;overflow:hidden;display:grid!important;grid-template-columns:minmax(0,1fr) minmax(0,1.1fr);gap:28px;align-items:center;background:var(--ab-sky)!important}
+html body[data-account-profile-mode] #ac-app .api-invite.is-agent{background:var(--ab-teal)!important}
+html body[data-account-profile-mode] #ac-app .api-invite::after{content:"";position:absolute;left:26px;bottom:-6px;width:124px;height:93px;pointer-events:none;background:no-repeat center/contain url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 120 90'%3E%3Cg fill='%23b9d0f2'%3E%3Ccircle cx='38' cy='26' r='16'/%3E%3Ccircle cx='84' cy='30' r='13'/%3E%3Cpath d='M8 86c0-20 13-34 30-34s30 14 30 34Z'/%3E%3Cpath d='M62 86c2-17 11-28 22-28s21 11 23 28Z'/%3E%3C/g%3E%3C/svg%3E")}
+html body[data-account-profile-mode] #ac-app .api-invite.is-agent::after{background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 120 90'%3E%3Cg fill='%239fd3c5'%3E%3Ccircle cx='38' cy='26' r='16'/%3E%3Ccircle cx='84' cy='30' r='13'/%3E%3Cpath d='M8 86c0-20 13-34 30-34s30 14 30 34Z'/%3E%3Cpath d='M62 86c2-17 11-28 22-28s21 11 23 28Z'/%3E%3C/g%3E%3C/svg%3E")}
+html body[data-account-profile-mode] #ac-app .api-invite>*{position:relative;z-index:1}
+html body[data-account-profile-mode] #ac-app .api-copy{padding-bottom:70px}
+html body[data-account-profile-mode] #ac-app .api-eyebrow{display:block;margin-bottom:6px;color:rgba(14,34,72,.7);font:700 12px/1.2 var(--ab-display);letter-spacing:.07em}
+html body[data-account-profile-mode] #ac-app .api-copy h2{margin:0 0 8px;color:var(--ab-ink);font:700 26px/1.2 var(--ab-display);letter-spacing:-.02em}
+html body[data-account-profile-mode] #ac-app .api-copy p{margin:0;max-width:440px;color:rgba(14,34,72,.78);font-size:15px;line-height:1.5}
+html body[data-account-profile-mode] #ac-app .api-share{display:grid;gap:12px;padding:20px;border-radius:20px;background:#fff}
+html body[data-account-profile-mode] #ac-app .api-code{display:flex;align-items:baseline;justify-content:space-between;gap:12px;padding-bottom:12px;border-bottom:1px solid var(--ab-line)}
+html body[data-account-profile-mode] #ac-app .api-code small{color:var(--ab-muted);font-size:13px;font-weight:600}
+html body[data-account-profile-mode] #ac-app .api-code b{color:var(--ab-ink);font:700 22px/1.2 ui-monospace,SFMono-Regular,Menlo,Consolas,monospace;letter-spacing:.04em;overflow-wrap:anywhere}
+html body[data-account-profile-mode] #ac-app .api-link{display:grid;gap:6px}
+html body[data-account-profile-mode] #ac-app .api-link input{width:100%;font-size:14px!important;background:var(--ab-surface)!important}
+html body[data-account-profile-mode] #ac-app .api-actions{display:flex;flex-wrap:wrap;gap:10px}
+html body[data-account-profile-mode] #ac-app .api-note{color:var(--ab-muted);font-size:12px;line-height:1.45}
+
+@media (max-width:860px){
+  html body[data-account-profile-mode] #ac-app .api-invite{grid-template-columns:minmax(0,1fr);gap:18px}
+  html body[data-account-profile-mode] #ac-app .api-copy{padding-bottom:0}
+  html body[data-account-profile-mode] #ac-app .api-invite::after{left:auto;right:-14px;top:12px;bottom:auto;width:110px;height:90px;opacity:.8}
+  html body[data-account-profile-mode] #ac-app .api-copy{padding-right:80px}
+}
+@media (max-width:640px){
+  html body[data-account-profile-mode] #ac-app>.ac-section{padding:20px 16px!important;border-radius:20px!important}
+  html body[data-account-profile-mode] #ac-app .acp-header{flex-direction:column;gap:10px}
+  html body[data-account-profile-mode] #ac-app .acp-header h2,
+  html body[data-account-profile-mode] #ac-app .api-copy h2{font-size:22px!important}
+  html body[data-account-profile-mode] #ac-app .api-actions>*{flex:1 1 100%}
+  html body[data-account-profile-mode] #ac-app .api-code{flex-direction:column;gap:4px}
+}
+@media print{
+  html body[data-account-profile-mode] #ac-app .api-invite::after{display:none}
+  html body[data-account-profile-mode] #ac-app .api-invite{background:#fff!important;border:1px solid #bbb!important}
+}
