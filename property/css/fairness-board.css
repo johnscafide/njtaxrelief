@@ -1,0 +1,92 @@
+/* ==========================================================================
+   Fairness (Uniformity Index) in the Watchdog board design. The page script
+   renders every number; the summary cards only count rows it already loaded.
+   ========================================================================== */
+html body[data-sidebar-page="fairness"]{
+  --fb-bg:#f3f1ec;--fb-surface:#fbfaf7;--fb-line:#e3dfd6;--fb-ink:#0e2248;--fb-muted:#5d6877;
+  --fb-navy:#0e2248;--fb-blue:#1456a0;--fb-blue-bright:#2f6df6;--fb-gold:#b8972a;
+  --fb-sky:#e3edfb;--fb-sky-deep:#b9d0f2;--fb-teal:#dff1ec;--fb-teal-deep:#9fd3c5;--fb-sand:#f6efd9;--fb-sand-deep:#e4cf8e;
+  --fb-display:"Plus Jakarta Sans",Inter,system-ui,sans-serif;
+}
+html body[data-sidebar-page="fairness"],
+html body[data-sidebar-page="fairness"] .db-workspace,
+html body[data-sidebar-page="fairness"] #fi-main{background:var(--fb-bg)!important}
+html body[data-sidebar-page="fairness"] .wdx-topbar{background:rgba(251,250,247,.94)!important}
+html body[data-sidebar-page="fairness"] .wdx-btn{border-radius:999px!important}
+html body[data-sidebar-page="fairness"] .wdx-btn.primary{background:var(--fb-navy)!important;border-color:var(--fb-navy)!important}
+html body[data-sidebar-page="fairness"] #fi-main .wrap{word-spacing:.05em;font-family:var(--fb-display)}
+
+/* Summary cards */
+html body[data-sidebar-page="fairness"] #fi-main .fb-cards{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:16px;margin:0 0 16px}
+html body[data-sidebar-page="fairness"] #fi-main .fb-cards:empty{display:none}
+html body[data-sidebar-page="fairness"] #fi-main .fb-card{position:relative;isolation:isolate;overflow:hidden;display:flex;flex-direction:column;align-items:flex-start;gap:4px;min-height:176px;margin:0;padding:22px;border:0;border-radius:24px;color:var(--fb-ink);font:inherit;text-align:left}
+html body[data-sidebar-page="fairness"] #fi-main button.fb-card{cursor:pointer}
+html body[data-sidebar-page="fairness"] #fi-main button.fb-card:hover{box-shadow:0 10px 26px rgba(14,34,72,.10)}
+html body[data-sidebar-page="fairness"] #fi-main .fb-card:focus-visible{outline:3px solid var(--fb-blue-bright);outline-offset:3px}
+html body[data-sidebar-page="fairness"] #fi-main .fb-card>*{position:relative;z-index:1}
+html body[data-sidebar-page="fairness"] #fi-main .fb-card--navy{background:var(--fb-navy);color:#fff}
+html body[data-sidebar-page="fairness"] #fi-main .fb-card--sky{background:var(--fb-sky)}
+html body[data-sidebar-page="fairness"] #fi-main .fb-card--teal{background:var(--fb-teal)}
+html body[data-sidebar-page="fairness"] #fi-main .fb-card--sand{background:var(--fb-sand)}
+html body[data-sidebar-page="fairness"] #fi-main .fb-card[aria-pressed="true"]{box-shadow:inset 0 0 0 2px var(--fb-navy)}
+html body[data-sidebar-page="fairness"] #fi-main .fb-l{font-size:12px;font-weight:700;letter-spacing:.05em;text-transform:uppercase;opacity:.78}
+html body[data-sidebar-page="fairness"] #fi-main .fb-card b{max-width:calc(100% - 40px);margin:2px 0 6px;padding-bottom:6px;border-bottom:2px solid currentColor;font:700 26px/1.15 var(--fb-display);letter-spacing:-.02em}
+html body[data-sidebar-page="fairness"] #fi-main .fb-card--navy b{border-color:var(--fb-gold)}
+html body[data-sidebar-page="fairness"] #fi-main .fb-v{font-size:14px;line-height:1.45;opacity:.86}
+html body[data-sidebar-page="fairness"] #fi-main .fb-go{margin-top:auto;padding-top:10px;font-size:13px;font-weight:700}
+html body[data-sidebar-page="fairness"] #fi-main .fb-deco{position:absolute;z-index:0;pointer-events:none}
+html body[data-sidebar-page="fairness"] #fi-main .fb-deco--shield{right:-24px;top:18px;width:100px;fill:var(--fb-blue);opacity:.55}
+html body[data-sidebar-page="fairness"] #fi-main .fb-deco--house{right:14px;top:16px;width:74px;fill:var(--fb-sky-deep)}
+html body[data-sidebar-page="fairness"] #fi-main .fb-deco--magnifier{right:12px;top:14px;width:78px;fill:none;stroke:var(--fb-teal-deep)}
+html body[data-sidebar-page="fairness"] #fi-main .fb-deco--pin{right:16px;top:12px;width:64px;fill:var(--fb-sand-deep)}
+html body[data-sidebar-page="fairness"] #fi-main .fb-deco--pin circle{fill:var(--fb-sand)}
+
+/* Search and filters */
+html body[data-sidebar-page="fairness"] #fi-main .fi-controls{border:0!important;border-radius:24px!important;background:#fff!important;box-shadow:none!important}
+html body[data-sidebar-page="fairness"] #fi-main .fi-controls :is(input,select){min-height:46px;border:1px solid var(--fb-line)!important;border-radius:999px!important;background:var(--fb-surface)!important;color:var(--fb-ink)!important;padding-left:18px!important;font:500 15px var(--fb-display)!important;box-shadow:none!important}
+html body[data-sidebar-page="fairness"] #fi-main .fi-count{color:var(--fb-muted)!important;font-size:13px!important;font-weight:600}
+
+/* Ranking table */
+html body[data-sidebar-page="fairness"] #fi-main #fi-table-wrap{border:0!important;border-radius:24px!important;background:#fff!important;box-shadow:none!important;overflow:auto}
+html body[data-sidebar-page="fairness"] #fi-main .fi-table thead th{background:var(--fb-surface)!important;color:var(--fb-muted)!important;border-color:var(--fb-line)!important;font-size:12px!important}
+html body[data-sidebar-page="fairness"] #fi-main .fi-table td{border-color:#efebe4!important;color:var(--fb-ink)}
+html body[data-sidebar-page="fairness"] #fi-main .fi-table tbody tr{cursor:pointer}
+html body[data-sidebar-page="fairness"] #fi-main .fi-table tbody tr:hover td{background:var(--fb-surface)!important}
+html body[data-sidebar-page="fairness"] #fi-main .fi-table tbody tr:focus-visible{outline:3px solid var(--fb-blue-bright);outline-offset:-3px}
+html body[data-sidebar-page="fairness"] #fi-main .fi-town b{color:var(--fb-ink)!important;font-size:14px}
+html body[data-sidebar-page="fairness"] #fi-main .fi-town span{color:var(--fb-muted)!important;font-size:13px}
+html body[data-sidebar-page="fairness"] #fi-main .fi-score{color:var(--fb-ink)!important;font:800 18px var(--fb-display)!important}
+html body[data-sidebar-page="fairness"] #fi-main .fi-badge{display:inline-flex;align-items:center;min-height:26px;padding:0 12px!important;border:0!important;border-radius:999px!important;font-size:12px!important;font-weight:700!important;color:var(--fb-ink)!important}
+html body[data-sidebar-page="fairness"] #fi-main .fi-badge.excellent{background:var(--fb-teal)!important}
+html body[data-sidebar-page="fairness"] #fi-main .fi-badge.good{background:var(--fb-sky)!important}
+html body[data-sidebar-page="fairness"] #fi-main .fi-badge.fair{background:var(--fb-sand)!important}
+html body[data-sidebar-page="fairness"] #fi-main .fi-badge.poor{background:#f7e2df!important;color:#8a2c22!important}
+
+/* Town report opened from the table */
+html body[data-sidebar-page="fairness"] #fi-main .fi-detail{display:grid;gap:12px;margin-bottom:18px}
+html body[data-sidebar-page="fairness"] #fi-main .fi-detail .ti-report{border:0!important;border-radius:24px!important;box-shadow:none!important;overflow:hidden!important;background:#fff!important}
+html body[data-sidebar-page="fairness"] #fi-main .fi-detail .ti-report-head{background:var(--fb-navy)!important;color:#fff!important;border:0!important}
+html body[data-sidebar-page="fairness"] #fi-main .fi-detail .ti-score{background:rgba(255,255,255,.1)!important;border-color:rgba(255,255,255,.2)!important}
+html body[data-sidebar-page="fairness"] #fi-main .fi-detail .ti-links a{font-weight:700!important}
+html body[data-sidebar-page="fairness"] #fi-main .fi-detail .bp-mini{border:0!important;border-radius:24px!important;background:#fff!important;margin-top:0!important;overflow:hidden}
+html body[data-sidebar-page="fairness"] #fi-main .fi-copy{justify-self:start;display:inline-flex;align-items:center;gap:8px;min-height:44px;padding:0 18px!important;border:1px solid var(--fb-line)!important;border-radius:999px!important;background:#fff!important;color:var(--fb-ink)!important;font:600 14px var(--fb-display)!important;box-shadow:none!important}
+
+/* Method note and calls to action */
+html body[data-sidebar-page="fairness"] #fi-main .wrap>.sec{border:0!important;border-radius:24px!important;background:#fff!important;box-shadow:none!important}
+html body[data-sidebar-page="fairness"] #fi-main .wrap>.sec>h4{border-color:var(--fb-line)!important;color:var(--fb-ink)!important}
+html body[data-sidebar-page="fairness"] #fi-main .wrap>.sec :is(.tl-p,.tl-note,.tl-fine){max-width:820px;color:var(--fb-muted)!important}
+html body[data-sidebar-page="fairness"] #fi-main .wrap>.sec .tl-p{color:var(--fb-ink)!important}
+html body[data-sidebar-page="fairness"] #fi-main :is(.wrap>.sec .db-btn,.fi-cta){display:inline-flex!important;align-items:center;gap:8px;min-height:44px;padding:0 20px!important;border:0!important;border-radius:999px!important;background:var(--fb-navy)!important;color:#fff!important;font:700 14px var(--fb-display)!important;box-shadow:none!important}
+html body[data-sidebar-page="fairness"] #fi-main :is(.wrap>.sec .db-btn,.fi-cta):hover{background:var(--fb-blue)!important}
+html body[data-sidebar-page="fairness"] #fi-main :is(.db-loading-panel,.db-error-panel){border:0!important;border-radius:24px!important;background:#fff!important;box-shadow:none!important}
+
+@media (max-width:1100px){html body[data-sidebar-page="fairness"] #fi-main .fb-cards{grid-template-columns:repeat(2,minmax(0,1fr))}}
+@media (max-width:640px){
+  html body[data-sidebar-page="fairness"] #fi-main .fb-cards{grid-template-columns:minmax(0,1fr);gap:12px}
+  html body[data-sidebar-page="fairness"] #fi-main .fb-card{min-height:0}
+  html body[data-sidebar-page="fairness"] #fi-main .fb-card b{font-size:23px}
+}
+@media print{
+  html body[data-sidebar-page="fairness"] #fi-main .fb-deco{display:none}
+  html body[data-sidebar-page="fairness"] #fi-main .fb-card{border:1px solid #bbb;background:#fff!important;color:#000!important}
+}

@@ -112,6 +112,21 @@ html body.hb-board #hm-body .hm-acts .db-btn{border-radius:999px!important;backg
   html body.hb-board #hm-body .hb-group>.sec2>.sec2-h{padding:14px!important}
   html body.hb-board #hm-body .hb-group>.sec2>.sec2-b{padding:0 14px 18px!important}
 }
+/* Phone top bar: keep the weather, alerts and profile group on the first row so
+   it never wraps down over the property picker. The square Watchdog mark stands in
+   for the wordmark on narrow screens, and the weather keeps only its icon under 360px. */
+@media (max-width:760px){
+  html body.hb-board .hm27-topbar .hm27-top-in{flex-wrap:nowrap!important;gap:8px!important}
+  html body.hb-board .hm27-topbar .hm27-brand-side{flex:0 1 auto!important;min-width:0!important;gap:10px!important}
+  html body.hb-board .hm27-topbar .hm27-menu{flex:0 0 auto!important}
+  html body.hb-board .hm27-topbar .hm27-top-right{flex:0 0 auto!important;flex-wrap:nowrap!important;gap:6px!important;margin-left:auto!important}
+}
+@media (max-width:500px){
+  html body.hb-board .hm27-topbar .hm27-brand{width:44px!important;min-width:44px!important;height:44px!important;flex:0 0 44px!important;border-radius:12px!important;overflow:hidden!important;background-image:url('/property/branding/watchdog-mark.svg')!important;background-size:cover!important;background-position:center!important}
+}
+@media (max-width:360px){
+  html body.hb-board .hm27-topbar .hm27-weather>span{display:none!important}
+}
 @media (prefers-reduced-motion:reduce){
   html body.hb-board #hm-body .hb-card{transition:none!important}
 }

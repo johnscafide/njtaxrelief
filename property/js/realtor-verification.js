@@ -33,7 +33,7 @@ function render(){
   var s=status(state),verified=currentVerified(state),section=document.createElement('section');
   section.id='ac-realtor-verification';section.className='ac-section acp-editor acr-editor';
   section.innerHTML=
-   '<header class="acp-header acr-header"><div><span>REALTOR® STATUS</span><h2>REALTOR® membership</h2><p>Verify association membership separately from your New Jersey real-estate license.</p></div><div class="acp-source acr-status '+s.className+'"><i class="fas '+s.icon+'"></i><span>'+esc(s.label)+'</span></div></header>'+
+   '<header class="acp-header acr-header"><div><span>REALTOR® STATUS</span><h2>REALTOR® membership</h2><p>Verify association membership separately from your New Jersey Real Estate License.</p></div><div class="acp-source acr-status '+s.className+'"><i class="fas '+s.icon+'"></i><span>'+esc(s.label)+'</span></div></header>'+
    '<div class="acr-grid">'+
     '<section class="acr-panel">'+
       '<div class="acr-panel-head"><i class="fa-regular fa-id-badge"></i><div><b>Membership details</b><small>User-submitted, Watchdog-reviewed</small></div></div>'+

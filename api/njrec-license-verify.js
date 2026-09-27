@@ -39,7 +39,7 @@ module.exports=async function handler(req,res){
   if(req.method!=='POST'){res.setHeader('Allow','POST');return res.status(405).json({error:'Method not allowed'})}
   let auth;try{auth=await requireUser(req)}catch(e){return res.status(e.status||401).json({error:e.message||'Authentication required.'})}
   const body=req.body&&typeof req.body==='object'?req.body:{},license=clean(body.license_number,30),ref=digits(license);
-  if(!/^\d{5,10}$/.test(ref))return res.status(400).json({error:'Enter a valid NJ real-estate license number.'});
+  if(!/^\d{5,10}$/.test(ref))return res.status(400).json({error:'Enter a valid New Jersey Real Estate License number.'});
   try{
     const profiles=await rest('watchdog_onboarding_profiles?select=primary_profession&user_id=eq.'+encodeURIComponent(auth.user.id)+'&limit=1',auth.config);
     if(!profiles[0]||profiles[0].primary_profession!=='real_estate')return res.status(403).json({error:'Real-estate professional profile required.'});

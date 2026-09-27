@@ -214,6 +214,9 @@
     if (!legacy) return;
     if (legacy.id !== 'ac-profile-editor') {
       var replacement = document.createElement('section');
+      // Keep the id so the loaded profile can find this placeholder again.
+      replacement.id = 'ac-profile-editor';
+      replacement.className = 'ac-section acp-editor';
       legacy.replaceWith(replacement);
       legacy = replacement;
     }
