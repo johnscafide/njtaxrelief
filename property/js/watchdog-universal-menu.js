@@ -10,11 +10,11 @@
   if(window.__WATCHDOG_UNIVERSAL_MENU__) return;
   window.__WATCHDOG_UNIVERSAL_MENU__ = true;
 
-  var VERSION = '20260926a';
+  var VERSION = '20260927a';
   /* CSS has a longer browser/CDN cache lifetime than this runtime. Keep a
      separate asset revision so interaction fixes can invalidate cached chrome
      immediately without coupling that cache key to the menu data contract. */
-  var CSS_VERSION = '20260926a';
+  var CSS_VERSION = '20260927a';
   var URL = 'https://uvkvaxljhhngydvlrzom.supabase.co';
   var KEY = 'sb_publishable_MYX59qCbK3d-21zDfJqkNw_fvmfnexa';
   var hostname = String(location.hostname || '').toLowerCase();
@@ -112,6 +112,66 @@
     out.push({key:'account',href:route('/account'),icon:'fa-user-gear',label:'Account'});
     return out;
   }
+  /* Two "lenses" keep homeowners from wading through professional tools they
+     cannot use. items() stays the single entitlement-filtered source of
+     destinations; META only says which lens a destination belongs to and adds
+     a one-line plain-English hint under the label. */
+  var META = {
+    'dashboard':{lens:'home',hint:'Your daily overview'},
+    'home':{lens:'home',hint:'Your saved homes and their scores'},
+    'anchor':{lens:'home',hint:'NJ property tax relief applications'},
+    'town-compare':{lens:'home',hint:'Compare taxes between towns'},
+    'robust':{lens:'home',hint:'How the Watchdog Score works'},
+    'pulse':{lens:'home',hint:'What is changing near your home'},
+    'agent-desk':{lens:'work',hint:'Farming, marketing and deals'},
+    'scan':{lens:'work',hint:'Find homes that look over-assessed'},
+    'transaction':{lens:'work',hint:'Closing checklist and documents'},
+    'data-workbench':{lens:'work',hint:'Build and export property lists'},
+    'data-center':{lens:'work',hint:'Every public data source we use'},
+    'pro':{lens:'work',hint:'Plans and professional tools'},
+    'account':{lens:'both',hint:'Profile, plan and billing'}
+  };
+  /* Professional tools the viewer cannot open yet. They appear only in the
+     "My work" lens with the plan they need, so pros can discover them and
+     homeowners never see them in their own lens. */
+  function lockedItems(){
+    if(!state.ready) return [];
+    var have = {};
+    items().forEach(function(item){ have[item.key] = true; });
+    var out = [];
+    if(!have['agent-desk']) out.push({key:'agent-desk',icon:'fa-briefcase',label:'Agent Desk',need:'Agent'});
+    if(!have.scan) out.push({key:'scan',icon:'fa-magnifying-glass-chart',label:'Appeal Scanner',need:'Pro+'});
+    if(!have.transaction) out.push({key:'transaction',icon:'fa-file-signature',label:'Transactions',need:'Agent'});
+    if(!have['data-workbench']) out.push({key:'data-workbench',icon:'fa-table-list',label:'Data Workbench',need:'Agent'});
+    return out;
+  }
+  var LENS_KEY = 'wd_menu_lens_v1';
+  function storedLens(){ try{ var v = localStorage.getItem(LENS_KEY); return v === 'home' || v === 'work' ? v : ''; }catch(_){ return ''; } }
+  function defaultLens(){
+    var page = currentPage();
+    if(page === 'fairness') page = 'robust';
+    var meta = META[page];
+    if(meta && meta.lens !== 'both') return meta.lens;
+    var saved = storedLens();
+    if(saved) return saved;
+    return state.user && state.ready && (isAgent() || can('agent')) ? 'work' : 'home';
+  }
+  function setLens(lens){
+    lens = lens === 'work' ? 'work' : 'home';
+    try{ localStorage.setItem(LENS_KEY,lens); }catch(_){}
+    var sheet = document.getElementById('wd-main-sheet');
+    if(!sheet) return;
+    var nav = sheet.querySelector('.wd-universal-nav-links');
+    if(nav) nav.setAttribute('data-lens',lens);
+    var tabs = sheet.querySelector('.wd-universal-lens');
+    if(tabs) tabs.setAttribute('data-lens',lens);
+    sheet.querySelectorAll('[data-wd-lens]').forEach(function(tab){
+      var on = tab.getAttribute('data-wd-lens') === lens;
+      tab.setAttribute('aria-selected',on ? 'true' : 'false');
+      tab.tabIndex = on ? 0 : -1;
+    });
+  }
+
   function developerItems(){
     return [
       {key:'developer',href:route('/developer'),icon:'fa-code',label:'Developer Command Center',detail:'Platform map and developer shortcuts'},
@@ -156,11 +216,35 @@
     if(item.key === 'robust') return page === 'robust' || page === 'fairness';
     return item.key === page;
   }
+  function navLinkHtml(item,page){
+    var meta = META[item.key] || {lens:'home',hint:''};
+    var cls = 'wd-universal-link wd-universal-lens-' + meta.lens + (activeFor(item,page) ? ' active' : '');
+    return '<a class="' + cls + '"' + (activeFor(item,page) ? ' aria-current="page"' : '') + ' href="' + item.href + '"><i class="fas ' + item.icon + '"></i><span>' + item.label + (meta.hint ? '<small>' + meta.hint + '</small>' : '') + '</span></a>';
+  }
   function navLinksHtml(){
     var page = currentPage();
-    return items().map(function(item){
-      return '<a' + (activeFor(item,page) ? ' class="active" aria-current="page"' : '') + ' href="' + item.href + '"><i class="fas ' + item.icon + '"></i><span>' + item.label + '</span></a>';
+    var all = items();
+    var account = all.filter(function(item){ return item.key === 'account'; });
+    var main = all.filter(function(item){ return item.key !== 'account'; });
+    var home = main.filter(function(item){ return (META[item.key] || {}).lens !== 'work'; });
+    var work = main.filter(function(item){ return (META[item.key] || {}).lens === 'work'; });
+    var locked = lockedItems().map(function(item){
+      return '<a class="wd-universal-link wd-universal-lens-work wd-universal-locked" href="' + route('/pro#pricing') + '"><i class="fas ' + item.icon + '"></i><span>' + item.label + '<small>Included with ' + item.need + '</small></span><em>' + item.need + '</em></a>';
     }).join('');
+    return '<p class="wd-universal-lens-eyebrow wd-universal-lens-home">For your home</p>' +
+      home.map(function(item){ return navLinkHtml(item,page); }).join('') +
+      '<button type="button" class="wd-universal-lens-hint wd-universal-lens-home" data-wd-universal="lens" data-wd-lens-to="work"><i class="fas fa-briefcase"></i><span><b>Agent or pro?</b><small>Your professional tools are under My work</small></span><i class="fas fa-arrow-right"></i></button>' +
+      '<p class="wd-universal-lens-eyebrow wd-universal-lens-work">For your business</p>' +
+      work.map(function(item){ return navLinkHtml(item,page); }).join('') + locked +
+      '<div class="wd-universal-nav-rule"></div>' +
+      account.map(function(item){ return navLinkHtml(item,page); }).join('');
+  }
+  function lensTabsHtml(lens){
+    var tab = function(key,icon,label){
+      var on = key === lens;
+      return '<button type="button" role="tab" data-wd-universal="lens" data-wd-lens="' + key + '" aria-selected="' + on + '" tabindex="' + (on ? 0 : -1) + '"><i class="fas ' + icon + '"></i><span>' + label + '</span></button>';
+    };
+    return '<div class="wd-universal-lens" data-lens="' + lens + '" role="tablist" aria-label="Show tools for">' + tab('home','fa-house-chimney','My home') + tab('work','fa-briefcase','My work') + '<span class="wd-universal-lens-thumb" aria-hidden="true"></span></div>';
   }
   function brandHtml(){
     return '<a class="wd-universal-brand" href="' + route('/dashboard') + '"><span class="wd-universal-brand-mark"><i class="fas fa-dog"></i></span><span class="wd-universal-brand-copy"><strong>Watchdog</strong><small>PROPERTY INTELLIGENCE</small></span></a>';
@@ -168,8 +252,10 @@
 
   function publicDrawerHtml(){
     var footer = state.user ? '' : '<div class="wd-universal-nav-foot"><button type="button" data-wd-universal="signin"><i class="fas fa-right-to-bracket"></i><span>Sign in</span></button></div>';
+    var lens = defaultLens();
     return '<div class="wd-universal-nav-head">' + brandHtml() + '<button class="wd-public-close wd-universal-close" type="button" data-wd-universal="close" aria-label="Close navigation"><i class="fas fa-xmark"></i></button></div>' +
-      '<nav class="wd-universal-nav-links" aria-label="Watchdog navigation">' + navLinksHtml() + '</nav>' + footer;
+      lensTabsHtml(lens) +
+      '<nav class="wd-universal-nav-links" data-lens="' + lens + '" aria-label="Watchdog navigation">' + navLinksHtml() + '</nav>' + footer;
   }
   /* Pages that do not ship the public header markup still get the exact same
      drawer: mount the backdrop + sheet once, at the end of <body>. */
@@ -217,8 +303,11 @@
           '<a href="' + route('/') + '"><i class="fas fa-magnifying-glass"></i><span><b>Property lookup</b><small>Search any New Jersey property</small></span></a>' +
         '</nav>';
     }
+    var pic = avatar();
+    var initial = esc(String(displayName()).trim().charAt(0).toUpperCase() || 'W');
+    var face = pic ? '<img class="wd-universal-face" src="' + esc(pic) + '" alt="">' : '<em class="wd-universal-face" aria-hidden="true">' + initial + '</em>';
     return close +
-      '<header><span><b>' + esc(displayName()) + '</b><small>' + esc(state.user.email || '') + '</small></span><i>' + esc(prettyPlan()) + '</i></header>' +
+      '<header>' + face + '<span><b>' + esc(displayName()) + '</b><small>' + esc(state.user.email || '') + '</small></span><i>' + esc(prettyPlan()) + '</i></header>' +
       '<nav>' +
         planPromoHtml() +
         '<a href="' + route('/account') + '"><i class="fas fa-user-pen"></i><span><b>Edit profile &amp; role</b><small>Profile, profession and preferences</small></span></a>' +
@@ -285,6 +374,37 @@
       return state.referral;
     }).catch(function(){ return null; });
   }
+  /* Invite credit that does not depend on analytics cookies. When someone
+     arrives through a member invite link we keep only the invite code (no
+     visitor or session tracking), and once they sign in with a brand-new
+     account the server credits the inviter. */
+  var INVITE_KEY = 'wd_invite_code_v1';
+  function captureInvite(){
+    try{
+      var q = new URLSearchParams(location.search || '');
+      var code = q.get('invite') || '';
+      if(!code && String(q.get('utm_source') || '').toLowerCase() === 'watchdog_referral' && String(q.get('utm_medium') || '').toLowerCase() === 'member') code = q.get('utm_campaign') || '';
+      code = String(code).toUpperCase().replace(/[^A-Z0-9]/g,'');
+      if(!/^[A-Z0-9]{10,16}$/.test(code)) return;
+      if(localStorage.getItem(INVITE_KEY)) return; /* first invite wins */
+      localStorage.setItem(INVITE_KEY,JSON.stringify({code:code,at:Date.now()}));
+    }catch(_){}
+  }
+  function claimInvite(){
+    if(!db || !state.user || typeof db.rpc !== 'function') return;
+    var saved = null;
+    try{ saved = JSON.parse(localStorage.getItem(INVITE_KEY) || 'null'); }catch(_){}
+    if(!saved || !saved.code) return;
+    var drop = function(){ try{ localStorage.removeItem(INVITE_KEY); }catch(_){} };
+    if(Date.now() - Number(saved.at || 0) > 30 * 86400000){ drop(); return; }
+    var created = Date.parse(state.user.created_at || '');
+    /* Existing accounts cannot be credited; forget the code. */
+    if(Number.isFinite(created) && Date.now() - created > 14 * 86400000){ drop(); return; }
+    Promise.resolve(db.rpc('claim_my_watchdog_referral',{p_code:saved.code})).then(function(r){
+      if(r && !r.error) drop();
+    }).catch(function(){});
+  }
+
   function showInvite(){
     if(!state.user){ signIn(); return; }
     loadReferral().then(function(d){ renderInvite(d); });
@@ -421,6 +541,7 @@
       var session = r && r.data && r.data.session;
       state.user = session && session.user || state.user || null;
       if(!state.user){ state.ready = true; queue(); return null; }
+      claimInvite();
       return Promise.allSettled([
         db.from('profiles').select('display_name,full_name,avatar_url,role,roles,pro_agent,plan,plan_tier,account_role').eq('id',state.user.id).maybeSingle(),
         db.rpc('get_my_entitlement')
@@ -452,6 +573,7 @@
     var action = control.getAttribute('data-wd-universal');
     if(action === 'open-menu'){ ev.preventDefault(); ev.stopPropagation(); openMenu(); }
     else if(action === 'close'){ ev.preventDefault(); closePublic(); }
+    else if(action === 'lens'){ ev.preventDefault(); setLens(control.getAttribute('data-wd-lens') || control.getAttribute('data-wd-lens-to')); }
     else if(action === 'signin'){ ev.preventDefault(); signIn(); }
     else if(action === 'signout'){ ev.preventDefault(); signOut(); }
     else if(action === 'invite'){ ev.preventDefault(); showInvite(); }
@@ -465,6 +587,15 @@
     else if(ev.target.id === 'wd-public-backdrop' && !window.WatchdogPublicNav) closePublic();
   });
   document.addEventListener('keydown',function(ev){
+    var tab = ev.target && ev.target.closest && ev.target.closest('.wd-universal-lens [data-wd-lens]');
+    if(tab && (ev.key === 'ArrowLeft' || ev.key === 'ArrowRight')){
+      ev.preventDefault();
+      var next = tab.getAttribute('data-wd-lens') === 'home' ? 'work' : 'home';
+      setLens(next);
+      var target = tab.parentNode.querySelector('[data-wd-lens="' + next + '"]');
+      if(target) target.focus();
+      return;
+    }
     if(ev.key !== 'Escape') return;
     closeInvite();
     var sheet = document.getElementById('wd-main-sheet');
@@ -484,6 +615,7 @@
   }
 
   function boot(){
+    captureInvite();
     ensureCss();
     ensureSiteEditorLoader();
     queue();

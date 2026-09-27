@@ -7,7 +7,7 @@
   var UNIVERSAL='/property/js/watchdog-universal-menu.js';
   var ANCHOR_APPS_MENU='/property/js/anchor-applications-menu-runtime.js?v=20260926a';
   var CITY_ADDRESS='/property/js/city-address-runtime.js?v=20260823a';
-  var LANDING_RECENTS='/property/js/landing-recent-intelligence.js?v=20260824a';
+  var LANDING_RECENTS='/property/js/landing-recent-intelligence.js?v=20260927a';
   var FREE_GRID_IMAGERY='/property/js/free-imagery-grid-runtime.js';
   var PROPERTY_IMAGERY='/property/js/property-imagery-runtime.js';
   var MAP_PERSISTENCE='/property/js/map-persistence-runtime.js';

@@ -304,3 +304,9 @@ verify_jwt = true
 
 [functions.transaction-collaboration]
 verify_jwt = true
+
+[functions.public-report-share]
+verify_jwt = false
+
+[functions.watchdog-vercel-release-relay]
+verify_jwt = false

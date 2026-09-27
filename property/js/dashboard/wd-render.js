@@ -360,7 +360,7 @@ function start(){
       var inList=!!pick.closest('#wdd-positions'),inBars=!!pick.closest('.wdd-bars');
       // A pick from the chart may be hidden in the collapsed list; open it.
       if(inBars&&sortedProps().map(function(p){return String(p.pams_pin||'');}).indexOf(ui.pin)>=LIST_LIMIT)ui.all=true;
-      paintList();paintDetail();paintCards();
+      paintList();paintDetail();paintCards();bridge();
       var sel='[data-select-pin="'+ui.pin.replace(/["\\]/g,'\\$&')+'"]';
       refocus((inList?'#wdd-positions ':inBars?'.wdd-bars ':'')+sel);
       if(w.matchMedia&&w.matchMedia('(max-width: 980px)').matches&&inList){var det=H.el('wdd-detail');if(det)det.scrollIntoView({behavior:w.matchMedia('(prefers-reduced-motion: reduce)').matches?'auto':'smooth',block:'start'});}
@@ -372,7 +372,7 @@ function start(){
     if(cal){var m=ui.calM+Number(cal.getAttribute('data-cal'));ui.calY+=Math.floor(m/12);ui.calM=((m%12)+12)%12;paintSide();refocus('[data-cal="'+cal.getAttribute('data-cal')+'"]');return;}
     var act=t.closest('[data-act]');if(!act||act.tagName==='SELECT')return;
     var a=act.getAttribute('data-act');
-    if(a==='list-all'){ui.all=!ui.all;paintList();refocus('[data-act="list-all"]');}
+    if(a==='list-all'){ui.all=!ui.all;paintList();bridge();refocus('[data-act="list-all"]');}
     else if(a==='clear-day'){ui.day='';paintSide();refocus('.wdd-timeline h2');}
     else if(a==='export')exportCsv();
     else if(a==='refresh')location.reload();
@@ -381,7 +381,7 @@ function start(){
   function onChange(ev){
     var t=ev.target;if(!t||!t.getAttribute)return;
     var a=t.getAttribute('data-act');
-    if(a==='sort'){ui.sort=t.value;ui.pin='';paintList();paintDetail();paintCards();refocus('[data-act="sort"]');}
+    if(a==='sort'){ui.sort=t.value;ui.pin='';paintList();paintDetail();paintCards();bridge();refocus('[data-act="sort"]');}
     else if(a==='feed'){ui.feed=t.value==='important'?'important':'all';paintSide();refocus('[data-act="feed"]');}
   }
   function onSubmit(ev){
@@ -390,8 +390,29 @@ function start(){
   function onKeydown(ev){
     if((ev.metaKey||ev.ctrlKey)&&String(ev.key).toLowerCase()==='k'){var input=H.el('wdd-command-input');if(input){ev.preventDefault();input.focus();}}
   }
-  function paintAll(){paintTop();paintCards();paintList();paintDetail();paintSide();paintFoot();}
+  // Color bridge: on the two-column layout the selected row and the details
+  // card share one sky tint, joined across the gap so they read as one unit.
+  // Only drawn when the row sits fully beside the card; otherwise plain rows.
+  var bridgeFrame=0;
+  function bridge(){
+    w.cancelAnimationFrame(bridgeFrame);
+    bridgeFrame=w.requestAnimationFrame(function(){
+      var lower=d.querySelector('.wdd-lower'),rowEl=d.querySelector('#wdd-positions .wdd-row.is-selected'),card=d.querySelector('#wdd-detail .wdd-detail-card');
+      if(!lower)return;
+      var on=false,top=false,bottom=false;
+      if(rowEl&&card&&!(w.matchMedia&&w.matchMedia('(max-width: 980px)').matches)){
+        var r=rowEl.getBoundingClientRect(),c=card.getBoundingClientRect();
+        on=r.top>=c.top-1&&r.bottom<=c.bottom+1;
+        top=on&&r.top-c.top>=12;bottom=on&&c.bottom-r.bottom>=12;
+      }
+      lower.classList.toggle('has-bridge',on);
+      lower.classList.toggle('bridge-top',top);
+      lower.classList.toggle('bridge-bottom',bottom);
+    });
+  }
+  function paintAll(){paintTop();paintCards();paintList();paintDetail();paintSide();paintFoot();bridge();}
   d.addEventListener('click',onClick);d.addEventListener('change',onChange);d.addEventListener('submit',onSubmit);d.addEventListener('keydown',onKeydown);
+  w.addEventListener('resize',bridge);
   WD.onRepaint(paintAll);paintAll();
 }
 if(w.WD&&w.WD.S&&w.WD.S.user)start();else d.addEventListener('wd:ready',start,{once:true});
