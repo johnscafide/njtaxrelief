@@ -314,6 +314,18 @@
       "sha256": "087e8de1074ae55bf702a9a85682f517af6e61af0e94779fca426ed63ee2eed8",
       "verify_jwt": true,
       "tracking": "fingerprint_only"
+    },
+    "municipal-property-tax-evidence": {
+      "version": 4,
+      "sha256": "c6a5e08df79f1c4894f59c42ad1f85de48760151212a1621b452809fd92f0880",
+      "verify_jwt": true,
+      "tracking": "source_snapshot"
+    },
+    "transaction-municipal-evidence": {
+      "version": 2,
+      "sha256": "c36ceff03ba6103d68832ace89dfb49f07480978b8a6e1cf3e11af66f2c55d2c",
+      "verify_jwt": true,
+      "tracking": "source_snapshot"
     }
   }
 }
