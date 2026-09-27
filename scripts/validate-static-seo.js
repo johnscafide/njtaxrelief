@@ -58,11 +58,12 @@ for (const need of [
   '/qscore.html',
   '/property/insights/admin.html',
   '/property/data-workbench',
-  '/property/data-center',
   '/property/growth/(.*)'
 ]) {
   if (!noindexPaths.has(need)) errors.push('missing X-Robots-Tag noindex ' + need);
 }
+// NJW-98 (2026-08-30) made the public Data Center indexable on purpose.
+if (noindexPaths.has('/property/data-center')) errors.push('public Data Center must stay indexable (NJW-98)');
 
 const baselineSitemaps = ['sitemap.xml', 'sitemap-content.xml', 'sitemap-plays.xml', 'sitemap-glossary.xml'];
 const typedSitemaps = ['sitemap-alternatives.xml', 'sitemap-calculators.xml', 'sitemap-statistics.xml'];

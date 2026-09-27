@@ -14,8 +14,14 @@ assert.match(runtime, /autoRefreshToken:\s*true/,
   'Central Supabase runtime must retain automatic token refresh.');
 assert.match(runtime, /parsed\.origin\s*!==\s*location\.origin/,
   'OAuth continuation must keep the same-origin boundary.');
-assert.match(runtime, /parsed\.pathname\.indexOf\(['"]\/property\/['"]\)\s*!==\s*0/,
-  'OAuth continuation must remain inside /property/.');
+// Clean WatchdogIndex hosts use root-level routes; the legacy host keeps the
+// /property/ boundary. Both stay same-origin and refuse onboarding/API targets.
+assert.match(runtime, /path\.indexOf\(['"]\/property\/['"]\)\s*!==\s*0/,
+  'OAuth continuation must remain inside /property/ on the legacy host.');
+assert.match(runtime, /cleanWatchdogHost[\s\S]{0,160}path\.indexOf\(['"]\/api\/['"]\)\s*===\s*0\)\s*return dashboardPath/,
+  'OAuth continuation on WatchdogIndex must refuse API paths.');
+assert.match(runtime, /path\s*===\s*['"]\/onboarding['"]/,
+  'OAuth continuation on WatchdogIndex must refuse onboarding loops.');
 
 const jsRoot = path.join(root, 'property/js');
 const files = [];
@@ -34,7 +40,14 @@ const consoleToken = /console\.(?:log|info|debug|warn|error)\s*\([^\n;]*(?:acces
 for (const absolute of files) {
   const source = fs.readFileSync(absolute, 'utf8');
   const relative = path.relative(root, absolute).replaceAll('\\', '/');
-  assert.doesNotMatch(source, narrowLogout,
+  // Reviewed exception (Account self-service, 2026-08-22): the Account page offers
+  // "Sign out this device" (scope local) right next to "Sign out everywhere"
+  // (scope global). Only that exact paired control is allowed to narrow scope.
+  const reviewedDeviceSignOut = relative === 'property/js/account-self-service.js'
+    && /getElementById\('ac-signout-all'\)[^\n]*signOut\(\{scope:'global'\}\)/.test(source)
+    && (source.match(narrowLogout) || []).length === 1
+    && /getElementById\('ac-signout-device'\)[^\n]*signOut\(\{scope:'local'\}\)/.test(source);
+  if (!reviewedDeviceSignOut) assert.doesNotMatch(source, narrowLogout,
     `${relative} explicitly narrows Supabase sign-out scope. Normal Watchdog sign out must retain global semantics unless separately reviewed.`);
   assert.doesNotMatch(source, consoleToken,
     `${relative} appears to write auth-token material to the browser console.`);

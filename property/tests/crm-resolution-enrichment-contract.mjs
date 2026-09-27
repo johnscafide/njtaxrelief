@@ -51,9 +51,10 @@ requireText(ui, 'Address evidence stays candidate-only', 'Integration Center ver
 requireText(ui, 'human-reviewed negative evidence', 'Integration Center rejection explanation');
 forbidText(ui, '?v=', 'Integration Center CRM resolution asset');
 
-requireText(gold, '27 relationships are explicitly human verified', 'gold-set count');
-requireText(gold, 'wrong parcel candidates: **0**', 'gold-set fail-closed result');
-requireText(gold, '85.19% reproduction rate', 'gold-set shadow result');
+// The gold set was expanded from 27 to 105 human-verified relationships on 2026-08-20.
+requireText(gold, '105 relationships are explicitly human verified', 'gold-set count');
+requireText(gold, 'wrong unique parcel candidates among completed parcel responses: **0**', 'gold-set fail-closed result');
+requireText(gold, 'same governed parcel reproduced: **76**', 'gold-set shadow result');
 requireText(gold, '0 human-rejected relationships', 'gold-set negative-sample caveat');
 
 if (!process.exitCode) console.log('CRM resolution enrichment contract passed.');

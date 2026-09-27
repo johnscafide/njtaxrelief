@@ -97,10 +97,13 @@
       { auth: { persistSession: true, autoRefreshToken: true, detectSessionInUrl: true, flowType: 'pkce', storageKey: 'sb-uvkvaxljhhngydvlrzom-auth-token' } });
     return true;
   }
-  window.watchdogScoreHistory = function (r, markerId) {
+  // Governed browser history projection; row ownership is enforced by Supabase RLS.
+  window.watchdogScoreHistory = function (r, markerId, modelVersion) {
     if (!sb || !plUser || !r || !r.pams_pin) return Promise.resolve([]);
     markerId=markerId||'watchdog.score';
-    return sb.from('score_observations').select('score,observed_at,observed_on').eq('user_id',plUser.id).eq('pams_pin',r.pams_pin).eq('marker_id',markerId).order('observed_at',{ascending:true}).limit(240).then(function(x){return x.data||[];});
+    var q=sb.from('score_observations').select('pams_pin,marker_id,score,observed_at,model_version').eq('pams_pin',r.pams_pin).eq('marker_id',markerId);
+    if (modelVersion) q=q.eq('model_version',modelVersion);
+    return q.order('observed_at',{ascending:true}).limit(240).then(function(x){return x.data||[];});
   };
   window.watchdogAppealCaseLoad = function (r) { if(!sb||!plUser)return Promise.resolve(null);return sb.from('appeal_case_workspaces').select('*').eq('user_id',plUser.id).eq('pams_pin',r.pams_pin).maybeSingle().then(function(x){if(x.error)throw x.error;return x.data;}); };
   window.watchdogAppealCaseSave = function (r, values) { var opp=typeof appealOpportunityIndex==='function'?appealOpportunityIndex(r):null,evid=typeof appealEvidenceStrength==='function'?appealEvidenceStrength(r):null;return sb.from('appeal_case_workspaces').upsert(Object.assign({user_id:plUser.id,pams_pin:r.pams_pin,property_address:r.address||'',municipality:r.town||r.municipality||'',opportunity_score:opp&&opp.score,evidence_score:evid&&evid.score,updated_at:new Date().toISOString()},values),{onConflict:'user_id,pams_pin'}).select().single().then(function(x){if(x.error)throw x.error;return x.data;}); };
@@ -1495,7 +1498,7 @@
         '<section class="ai">' +
           '<div class="ai-h">' +
             '<img src="/johnprofile.jpg" alt="" onerror="this.style.display=\'none\'">' +
-            '<div><b>Watchdog Analyst Intel</b><span>Generated from this property\u2019s records</span></div>' +
+            '<div><b>Watchdog Intelligence</b><span>Generated from this property\u2019s records</span></div>' +
           '</div>' +
           summarySentence(r, c, u, a) +
           intelPoints(r, c, u, a) +
@@ -1991,7 +1994,7 @@
       var overlay = el('hm-mobile-intel-overlay'), content = el('hm-mobile-intel-content');
       if (!overlay || !content) return;
       content.innerHTML = panel.outerHTML.replace('class="ai"', 'class="ai ai-mobile"')
-        .replace('<b>Watchdog Analyst Intel</b>', '<b id="hm-mobile-intel-title">Watchdog Analyst Intel</b>');
+        .replace('<b>Watchdog Intelligence</b>', '<b id="hm-mobile-intel-title">Watchdog Intelligence</b>');
       overlay.classList.add('open'); overlay.setAttribute('aria-hidden', 'false');
       document.body.classList.add('mobile-intel-open');
       document.querySelectorAll('.db-side-mobile .pn').forEach(function (n) { n.classList.remove('on'); });

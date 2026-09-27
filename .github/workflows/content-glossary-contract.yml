@@ -41,4 +41,5 @@ jobs:
       - name: Generate deploy artifact
         run: npm run content-glossary:generate
       - name: Verify generated glossary exists and is non-empty
-        run: node -e "const fs=require('fs');const p='property/developer/content-glossary/glossary.json';const d=JSON.parse(fs.readFileSync(p,'utf8'));if(!d.sourceFingerprint||d.entryCount<100||!Array.isArray(d.entries)||!d.owners||!Object.prototype.hasOwnProperty.call(d.owners,'DATA'))process.exit(1);console.log('content glossary contract: ok',d.entryCount,d.owners)"
+        run: |
+          node -e "const fs=require('fs');const p='property/developer/content-glossary/glossary.json';const d=JSON.parse(fs.readFileSync(p,'utf8'));if(!d.sourceFingerprint||d.entryCount<100||!Array.isArray(d.entries)||!d.owners||!Object.prototype.hasOwnProperty.call(d.owners,'DATA'))process.exit(1);console.log('content glossary contract: ok',d.entryCount,d.owners)"

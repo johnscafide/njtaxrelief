@@ -49,6 +49,10 @@ assert.match(semanticFunction,/https:\/\/watchdogindex\.com/,'Semantic Context m
 assert.match(semanticFunction,/https:\/\/www\.watchdogindex\.com/,'Semantic Context must allow the www Watchdog production origin');
 assert.match(semanticFunction,/http:\/\/127\.0\.0\.1:4173/,'Semantic Context must allow the isolated hosted-acceptance origin');
 assert.match(semanticFunction,/REGISTRY_URL="https:\/\/watchdogindex\.com\/property\/data\/marker-registry\.json"/,'Semantic Context must load the marker registry from the current Watchdog domain');
-for(const [path,content] of [[graphPath,graph],[cssPath,css],[loaderPath,loader],[semanticPath,semantic]]) assert.equal(/\?v=/.test(content),false,`${path} must not introduce version query strings`);
+// The loader (home-menu-sync.js) also versions unrelated Home fixes; only its
+// Intelligence runtime list must stay unversioned.
+const intelligenceLoader=(loader.match(/function loadIntelligenceRuntime\(\)\{[^\n]*/)||[''])[0];
+assert.ok(intelligenceLoader,'Home loader must keep loadIntelligenceRuntime');
+for(const [path,content] of [[graphPath,graph],[cssPath,css],[loaderPath+' (Intelligence runtime list)',intelligenceLoader],[semanticPath,semantic]]) assert.equal(/\?v=/.test(content),false,`${path} must not introduce version query strings`);
 
 console.log('Watchdog Data Graph lineage, truthful counting, production-origin, lazy-load, placement and asset contract passed');

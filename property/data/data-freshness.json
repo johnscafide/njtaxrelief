@@ -1,6 +1,6 @@
 {
   "schema_version": 3,
-  "generated_at": "2026-09-27T14:43:58.293734+00:00",
+  "generated_at": "2026-09-27T21:00:30.727422+00:00",
   "overall_status": "failed",
   "definitions": {
     "live_health": "Endpoint/service health was probed. This does not mean every property has a matching record.",
@@ -12,27 +12,22 @@
       "id": "nj-lpt-statistical-index",
       "label": "NJ Local Property Tax statistical publication index",
       "agency": "NJ Division of Taxation",
-      "status": "passed",
+      "status": "failed",
       "validation_kind": "live_health",
       "action": "health_checked",
-      "records_or_files": 1,
+      "records_or_files": 0,
       "minimum": 1,
-      "changed": true,
+      "changed": false,
       "last_modified": null,
       "cadence": "six-hour monitor",
       "source_url": "https://www.nj.gov/treasury/taxation/lpt/statdata.shtml",
       "live": true,
       "note": "Change-detection landing page for new Abstract of Ratables, equalization, residential statistics, tax-rate and related annual publications. A page change is an alert, not automatic approval of new data.",
       "health": {
-        "checked_at": "2026-09-27T14:43:51.927061+00:00",
+        "checked_at": "2026-09-27T21:00:16.846130+00:00",
         "healthcheck_url": "https://www.nj.gov/treasury/taxation/lpt/statdata.shtml",
-        "http_status": 200,
-        "content_type": "text/html",
-        "content_sha256": "f234a11d1deb07a286bd7e1f394eaca1b70a6fb3016680e38d7637d2c59972bd",
-        "last_modified_header": null,
-        "etag": null,
-        "latency_ms": 104,
-        "semantic_error": null
+        "latency_ms": 323,
+        "error": "URLError: <urlopen error Tunnel connection failed: 403 Forbidden>"
       }
     },
     {
@@ -45,7 +40,7 @@
       "records_or_files": 564,
       "minimum": 550,
       "changed": false,
-      "last_modified": "2026-09-27T14:43:50.647579+00:00",
+      "last_modified": "2026-09-27T18:41:47.876270+00:00",
       "cadence": "annual",
       "source_url": "https://www.nj.gov/treasury/taxation/pdf/lpt/CoefficientDeviations.pdf",
       "live": false
@@ -60,7 +55,7 @@
       "records_or_files": 558,
       "minimum": 500,
       "changed": false,
-      "last_modified": "2026-09-27T14:43:50.805270+00:00",
+      "last_modified": "2026-09-27T18:41:48.093383+00:00",
       "cadence": "annual",
       "source_url": "https://www.nj.gov/treasury/taxation/lpt/statdata.shtml",
       "live": false
@@ -75,7 +70,7 @@
       "records_or_files": 10,
       "minimum": 8,
       "changed": false,
-      "last_modified": "2026-09-27T14:43:50.621539+00:00",
+      "last_modified": "2026-09-27T01:29:54.511712+00:00",
       "cadence": "annual",
       "source_url": "https://www.nj.gov/treasury/taxation/lpt/lpt-appeal.shtml",
       "live": false
@@ -90,7 +85,7 @@
       "records_or_files": 567,
       "minimum": 500,
       "changed": false,
-      "last_modified": "2026-09-27T14:43:50.795041+00:00",
+      "last_modified": "2026-09-27T01:29:55.063712+00:00",
       "cadence": "annual",
       "source_url": "https://www.nj.gov/treasury/taxation/lpt/statdata.shtml",
       "live": false
@@ -105,7 +100,7 @@
       "records_or_files": 536,
       "minimum": 350,
       "changed": false,
-      "last_modified": "2026-09-27T14:43:50.794041+00:00",
+      "last_modified": "2026-09-27T01:29:55.059712+00:00",
       "cadence": "quarterly",
       "source_url": "https://www.nj.gov/treasury/taxation/lpt/sr1a.shtml",
       "live": false
@@ -120,7 +115,7 @@
       "records_or_files": 21,
       "minimum": 21,
       "changed": false,
-      "last_modified": "2026-09-27T14:43:50.790041+00:00",
+      "last_modified": "2026-09-27T01:29:55.047712+00:00",
       "cadence": "quarterly",
       "source_url": "https://www.nj.gov/treasury/taxation/lpt/statdata.shtml",
       "live": false
@@ -135,7 +130,7 @@
       "records_or_files": 564,
       "minimum": 200,
       "changed": false,
-      "last_modified": "2026-09-27T14:43:50.619164+00:00",
+      "last_modified": "2026-09-27T18:41:47.840270+00:00",
       "cadence": "annual",
       "source_url": "https://www.nj.gov/treasury/taxation/lpt/statdata.shtml",
       "live": false
@@ -150,7 +145,7 @@
       "records_or_files": 564,
       "minimum": 560,
       "changed": false,
-      "last_modified": "2026-09-27T14:43:50.647039+00:00",
+      "last_modified": "2026-09-27T18:41:47.872270+00:00",
       "cadence": "annual",
       "source_url": "https://www.nj.gov/dca/dlgs/Property_Tax_info.shtml",
       "live": false
@@ -165,7 +160,7 @@
       "records_or_files": 564,
       "minimum": 564,
       "changed": false,
-      "last_modified": "2026-09-27T14:43:50.652039+00:00",
+      "last_modified": "2026-09-27T18:41:47.888270+00:00",
       "cadence": "annual",
       "source_url": "https://www.nj.gov/dca/dlgs/taxabatementkit.shtml",
       "live": false
@@ -190,36 +185,31 @@
       "id": "construction-permits-live",
       "label": "Parcel construction permit and certificate activity",
       "agency": "NJ Department of Community Affairs",
-      "status": "passed",
+      "status": "failed",
       "validation_kind": "live_health",
       "action": "health_checked",
-      "records_or_files": 1,
+      "records_or_files": 0,
       "minimum": 1,
-      "changed": true,
+      "changed": false,
       "last_modified": null,
       "cadence": "monthly",
       "source_url": "https://data.nj.gov/Reference-Data/NJ-Construction-Permit-Data/w9se-dmra",
       "live": true,
       "health": {
-        "checked_at": "2026-09-27T14:43:53.050634+00:00",
+        "checked_at": "2026-09-27T21:00:17.721985+00:00",
         "healthcheck_url": "https://data.nj.gov/Reference-Data/NJ-Construction-Permit-Data/w9se-dmra",
-        "http_status": 200,
-        "content_type": "text/html; charset=utf-8",
-        "content_sha256": "bc424d399d0eeff23ee2bd39c09b78ee8a20b9514157ba7b2e38af24d388c044",
-        "last_modified_header": null,
-        "etag": "W/\"24961962bf3c85d379b2484dc08809c9\"",
-        "latency_ms": 428,
-        "semantic_error": null
+        "latency_ms": 265,
+        "error": "URLError: <urlopen error Tunnel connection failed: 403 Forbidden>"
       }
     },
     {
       "id": "known-contaminated-sites-live",
       "label": "Known Contaminated Sites List",
       "agency": "NJ Department of Environmental Protection",
-      "status": "passed",
+      "status": "failed",
       "validation_kind": "live_health",
       "action": "health_checked",
-      "records_or_files": 1,
+      "records_or_files": 0,
       "minimum": 1,
       "changed": false,
       "last_modified": null,
@@ -227,25 +217,20 @@
       "source_url": "https://mapsdep.nj.gov/arcgis/rest/services/Features/Environmental_NJEMS/MapServer/0",
       "live": true,
       "health": {
-        "checked_at": "2026-09-27T14:43:53.634834+00:00",
+        "checked_at": "2026-09-27T21:00:18.273909+00:00",
         "healthcheck_url": "https://mapsdep.nj.gov/arcgis/rest/services/Features/Environmental_NJEMS/MapServer/0?f=json",
-        "http_status": 200,
-        "content_type": "application/json;charset=UTF-8",
-        "content_sha256": "b255e7d1436addbeb5bcaed6f3d8dcfa3d61d63220f56bcd53bbf44b344ee923",
-        "last_modified_header": null,
-        "etag": "\"28efd781\"",
-        "latency_ms": 37,
-        "semantic_error": null
+        "latency_ms": 761,
+        "error": "URLError: <urlopen error Tunnel connection failed: 403 Forbidden>"
       }
     },
     {
       "id": "deed-notices-live",
       "label": "Environmental Deed Notice Areas",
       "agency": "NJ Department of Environmental Protection",
-      "status": "passed",
+      "status": "failed",
       "validation_kind": "live_health",
       "action": "health_checked",
-      "records_or_files": 1,
+      "records_or_files": 0,
       "minimum": 1,
       "changed": false,
       "last_modified": null,
@@ -253,25 +238,20 @@
       "source_url": "https://mapsdep.nj.gov/arcgis/rest/services/Features/Environmental/MapServer/40",
       "live": true,
       "health": {
-        "checked_at": "2026-09-27T14:43:53.712864+00:00",
+        "checked_at": "2026-09-27T21:00:19.373851+00:00",
         "healthcheck_url": "https://mapsdep.nj.gov/arcgis/rest/services/Features/Environmental/MapServer/40?f=json",
-        "http_status": 200,
-        "content_type": "application/json;charset=UTF-8",
-        "content_sha256": "c37909569fb4abb4da22470cc5d30a0b9b65ed99c02236af902f0e7f06d2d225",
-        "last_modified_header": null,
-        "etag": "\"84e4623c\"",
-        "latency_ms": 50,
-        "semantic_error": null
+        "latency_ms": 227,
+        "error": "URLError: <urlopen error Tunnel connection failed: 403 Forbidden>"
       }
     },
     {
       "id": "groundwater-cea-live",
       "label": "Groundwater Classification Exception Areas",
       "agency": "NJ Department of Environmental Protection",
-      "status": "passed",
+      "status": "failed",
       "validation_kind": "live_health",
       "action": "health_checked",
-      "records_or_files": 1,
+      "records_or_files": 0,
       "minimum": 1,
       "changed": false,
       "last_modified": null,
@@ -279,25 +259,20 @@
       "source_url": "https://mapsdep.nj.gov/arcgis/rest/services/Applications/RSP_Query_Layers/MapServer/5",
       "live": true,
       "health": {
-        "checked_at": "2026-09-27T14:43:53.828869+00:00",
+        "checked_at": "2026-09-27T21:00:19.905397+00:00",
         "healthcheck_url": "https://mapsdep.nj.gov/arcgis/rest/services/Applications/RSP_Query_Layers/MapServer/5?f=json",
-        "http_status": 200,
-        "content_type": "application/json;charset=UTF-8",
-        "content_sha256": "02443d832d362fe0ceec3f3f9df39077f25201292f843686f17f65bf63c21bcb",
-        "last_modified_header": null,
-        "etag": "\"e8aa3735\"",
-        "latency_ms": 71,
-        "semantic_error": null
+        "latency_ms": 119,
+        "error": "URLError: <urlopen error Tunnel connection failed: 403 Forbidden>"
       }
     },
     {
       "id": "underground-storage-tanks-live",
       "label": "Underground Storage Tank Facilities",
       "agency": "NJ Department of Environmental Protection",
-      "status": "passed",
+      "status": "failed",
       "validation_kind": "live_health",
       "action": "health_checked",
-      "records_or_files": 1,
+      "records_or_files": 0,
       "minimum": 1,
       "changed": false,
       "last_modified": null,
@@ -305,25 +280,20 @@
       "source_url": "https://mapsdep.nj.gov/arcgis/rest/services/Features/Environmental_NJEMS/MapServer/9",
       "live": true,
       "health": {
-        "checked_at": "2026-09-27T14:43:53.945281+00:00",
+        "checked_at": "2026-09-27T21:00:20.309903+00:00",
         "healthcheck_url": "https://mapsdep.nj.gov/arcgis/rest/services/Features/Environmental_NJEMS/MapServer/9?f=json",
-        "http_status": 200,
-        "content_type": "application/json;charset=UTF-8",
-        "content_sha256": "09064a172aaac0332dbfe733cc3652c62cfaac436da894851f434a6b66fabb3b",
-        "last_modified_header": null,
-        "etag": "\"28efd781\"",
-        "latency_ms": 141,
-        "semantic_error": null
+        "latency_ms": 273,
+        "error": "URLError: <urlopen error Tunnel connection failed: 403 Forbidden>"
       }
     },
     {
       "id": "tidelands-reference-live",
       "label": "Tidelands statewide reference layer",
       "agency": "NJ Department of Environmental Protection",
-      "status": "passed",
+      "status": "failed",
       "validation_kind": "live_health",
       "action": "health_checked",
-      "records_or_files": 1,
+      "records_or_files": 0,
       "minimum": 1,
       "changed": false,
       "last_modified": null,
@@ -332,25 +302,20 @@
       "live": true,
       "warning": "Reference screening only; NJDEP states only promulgated 1:2400 Tidelands maps locate the legally valid riparian claim line.",
       "health": {
-        "checked_at": "2026-09-27T14:43:54.226928+00:00",
+        "checked_at": "2026-09-27T21:00:20.707158+00:00",
         "healthcheck_url": "https://mapsdep.nj.gov/arcgis/rest/services/Features/Hydrography/MapServer/30?f=json",
-        "http_status": 200,
-        "content_type": "application/json;charset=UTF-8",
-        "content_sha256": "4845b1310ca402fd84a30dc0aca14d1c0f6280e4fe66716e5287962d7df24c93",
-        "last_modified_header": null,
-        "etag": "\"20d496b7\"",
-        "latency_ms": 38,
-        "semantic_error": null
+        "latency_ms": 256,
+        "error": "URLError: <urlopen error Tunnel connection failed: 403 Forbidden>"
       }
     },
     {
       "id": "highlands-area-live",
       "label": "Highlands Area",
       "agency": "NJ Department of Environmental Protection",
-      "status": "passed",
+      "status": "failed",
       "validation_kind": "live_health",
       "action": "health_checked",
-      "records_or_files": 1,
+      "records_or_files": 0,
       "minimum": 1,
       "changed": false,
       "last_modified": null,
@@ -358,25 +323,20 @@
       "source_url": "https://mapsdep.nj.gov/arcgis/rest/services/Applications/RSP_Query_Layers/MapServer/6",
       "live": true,
       "health": {
-        "checked_at": "2026-09-27T14:43:54.365718+00:00",
+        "checked_at": "2026-09-27T21:00:21.265280+00:00",
         "healthcheck_url": "https://mapsdep.nj.gov/arcgis/rest/services/Applications/RSP_Query_Layers/MapServer/6?f=json",
-        "http_status": 200,
-        "content_type": "application/json;charset=UTF-8",
-        "content_sha256": "c4cc22991c1467f667a72932f3a1c7f9e464bcd1aec6deb7cf1b8b74e54ceeb6",
-        "last_modified_header": null,
-        "etag": "\"e8aa3735\"",
-        "latency_ms": 50,
-        "semantic_error": null
+        "latency_ms": 123,
+        "error": "URLError: <urlopen error Tunnel connection failed: 403 Forbidden>"
       }
     },
     {
       "id": "pinelands-area-live",
       "label": "Pinelands Area",
       "agency": "NJ Department of Environmental Protection",
-      "status": "passed",
+      "status": "failed",
       "validation_kind": "live_health",
       "action": "health_checked",
-      "records_or_files": 1,
+      "records_or_files": 0,
       "minimum": 1,
       "changed": false,
       "last_modified": null,
@@ -384,25 +344,20 @@
       "source_url": "https://mapsdep.nj.gov/arcgis/rest/services/Applications/RSP_Query_Layers/MapServer/7",
       "live": true,
       "health": {
-        "checked_at": "2026-09-27T14:43:54.503644+00:00",
+        "checked_at": "2026-09-27T21:00:21.684203+00:00",
         "healthcheck_url": "https://mapsdep.nj.gov/arcgis/rest/services/Applications/RSP_Query_Layers/MapServer/7?f=json",
-        "http_status": 200,
-        "content_type": "application/json;charset=UTF-8",
-        "content_sha256": "2e0a6c52d5ac17c8052f8e45cb1b718d14284bd16dfac0343254db73195c31b0",
-        "last_modified_header": null,
-        "etag": "\"e8aa3735\"",
-        "latency_ms": 41,
-        "semantic_error": null
+        "latency_ms": 216,
+        "error": "URLError: <urlopen error Tunnel connection failed: 403 Forbidden>"
       }
     },
     {
       "id": "nfhl-flood-live",
       "label": "National Flood Hazard Layer",
       "agency": "FEMA via NJDEP",
-      "status": "passed",
+      "status": "failed",
       "validation_kind": "live_health",
       "action": "health_checked",
-      "records_or_files": 1,
+      "records_or_files": 0,
       "minimum": 1,
       "changed": false,
       "last_modified": null,
@@ -411,25 +366,20 @@
       "live": true,
       "warning": "Screening result only; regulatory mapping and written rules control.",
       "health": {
-        "checked_at": "2026-09-27T14:43:54.604938+00:00",
+        "checked_at": "2026-09-27T21:00:22.037871+00:00",
         "healthcheck_url": "https://mapsdep.nj.gov/arcgis/rest/services/Features/Hydrography/MapServer/43?f=json",
-        "http_status": 200,
-        "content_type": "application/json;charset=UTF-8",
-        "content_sha256": "23c67799f81512535cee93248e86ce439c7fb99a02208a0c5fbf4281c333bf0c",
-        "last_modified_header": null,
-        "etag": "\"20d496b7\"",
-        "latency_ms": 90,
-        "semantic_error": null
+        "latency_ms": 312,
+        "error": "URLError: <urlopen error Tunnel connection failed: 403 Forbidden>"
       }
     },
     {
       "id": "tidal-cafe-live",
       "label": "Tidal Climate Adjusted Flood Elevation",
       "agency": "NJ Department of Environmental Protection",
-      "status": "passed",
+      "status": "failed",
       "validation_kind": "live_health",
       "action": "health_checked",
-      "records_or_files": 1,
+      "records_or_files": 0,
       "minimum": 1,
       "changed": false,
       "last_modified": null,
@@ -437,25 +387,20 @@
       "source_url": "https://mapsdep.nj.gov/arcgis/rest/services/Features/Hydrography/MapServer/48",
       "live": true,
       "health": {
-        "checked_at": "2026-09-27T14:43:54.743304+00:00",
+        "checked_at": "2026-09-27T21:00:22.615398+00:00",
         "healthcheck_url": "https://mapsdep.nj.gov/arcgis/rest/services/Features/Hydrography/MapServer/48?f=json",
-        "http_status": 200,
-        "content_type": "application/json;charset=UTF-8",
-        "content_sha256": "eea054a467a053a7477b463afcfcae8296aa4a366ba21476ea580a5adaca2c4e",
-        "last_modified_header": null,
-        "etag": "\"20d496b7\"",
-        "latency_ms": 118,
-        "semantic_error": null
+        "latency_ms": 166,
+        "error": "URLError: <urlopen error Tunnel connection failed: 403 Forbidden>"
       }
     },
     {
       "id": "wetlands-2012-live",
       "label": "NJDEP Wetlands 2012 reference",
       "agency": "NJ Department of Environmental Protection",
-      "status": "passed",
+      "status": "failed",
       "validation_kind": "live_health",
       "action": "health_checked",
-      "records_or_files": 1,
+      "records_or_files": 0,
       "minimum": 1,
       "changed": false,
       "last_modified": null,
@@ -464,25 +409,20 @@
       "live": true,
       "warning": "2012 reference data; not a regulatory wetlands delineation.",
       "health": {
-        "checked_at": "2026-09-27T14:43:54.910150+00:00",
+        "checked_at": "2026-09-27T21:00:23.005407+00:00",
         "healthcheck_url": "https://mapsdep.nj.gov/arcgis/rest/services/Features/Land_lu/MapServer/2?f=json",
-        "http_status": 200,
-        "content_type": "application/json;charset=UTF-8",
-        "content_sha256": "c3eb242d8ac0f9e4b40d5300e1f7e7d492ac49139099af96bd984f6025f025ab",
-        "last_modified_header": null,
-        "etag": "\"c98ebae3\"",
-        "latency_ms": 45,
-        "semantic_error": null
+        "latency_ms": 237,
+        "error": "URLError: <urlopen error Tunnel connection failed: 403 Forbidden>"
       }
     },
     {
       "id": "priority-wetlands-live",
       "label": "EPA Priority Wetlands",
       "agency": "NJ Department of Environmental Protection",
-      "status": "passed",
+      "status": "failed",
       "validation_kind": "live_health",
       "action": "health_checked",
-      "records_or_files": 1,
+      "records_or_files": 0,
       "minimum": 1,
       "changed": false,
       "last_modified": null,
@@ -490,25 +430,20 @@
       "source_url": "https://mapsdep.nj.gov/arcgis/rest/services/Features/Land/MapServer/79",
       "live": true,
       "health": {
-        "checked_at": "2026-09-27T14:43:55.026269+00:00",
+        "checked_at": "2026-09-27T21:00:23.513293+00:00",
         "healthcheck_url": "https://mapsdep.nj.gov/arcgis/rest/services/Features/Land/MapServer/79?f=json",
-        "http_status": 200,
-        "content_type": "application/json;charset=UTF-8",
-        "content_sha256": "761073230ed805686c99129b4762104797c4ab7866c108942a73dc76add9dc52",
-        "last_modified_header": null,
-        "etag": "\"766376a4\"",
-        "latency_ms": 51,
-        "semantic_error": null
+        "latency_ms": 250,
+        "error": "URLError: <urlopen error Tunnel connection failed: 403 Forbidden>"
       }
     },
     {
       "id": "njdep-geology-live",
       "label": "NJDEP Geology feature service",
       "agency": "NJ Department of Environmental Protection",
-      "status": "passed",
+      "status": "failed",
       "validation_kind": "live_health",
       "action": "health_checked",
-      "records_or_files": 1,
+      "records_or_files": 0,
       "minimum": 1,
       "changed": false,
       "last_modified": null,
@@ -517,25 +452,20 @@
       "live": true,
       "warning": "Screening data only. Layer metadata, mapped features and applicable professional/regulatory review control.",
       "health": {
-        "checked_at": "2026-09-27T14:43:55.120621+00:00",
+        "checked_at": "2026-09-27T21:00:24.086171+00:00",
         "healthcheck_url": "https://mapsdep.nj.gov/arcgis/rest/services/Features/Geology/MapServer?f=json",
-        "http_status": 200,
-        "content_type": "application/json;charset=UTF-8",
-        "content_sha256": "4038264e045f85d41cea259830602f75201a4a1f2328ea727ef4c5235bbeab36",
-        "last_modified_header": null,
-        "etag": "\"c4111a66\"",
-        "latency_ms": 34,
-        "semantic_error": null
+        "latency_ms": 271,
+        "error": "URLError: <urlopen error Tunnel connection failed: 403 Forbidden>"
       }
     },
     {
       "id": "njdep-hydro-live",
       "label": "NJDEP Hydrography feature service",
       "agency": "NJ Department of Environmental Protection",
-      "status": "passed",
+      "status": "failed",
       "validation_kind": "live_health",
       "action": "health_checked",
-      "records_or_files": 1,
+      "records_or_files": 0,
       "minimum": 1,
       "changed": false,
       "last_modified": null,
@@ -544,25 +474,20 @@
       "live": true,
       "warning": "Screening data only. Flood, wellhead and water-resource determinations require the governing map, rule or agency record.",
       "health": {
-        "checked_at": "2026-09-27T14:43:55.252128+00:00",
+        "checked_at": "2026-09-27T21:00:24.646867+00:00",
         "healthcheck_url": "https://mapsdep.nj.gov/arcgis/rest/services/Features/Hydrography/MapServer?f=json",
-        "http_status": 200,
-        "content_type": "application/json;charset=UTF-8",
-        "content_sha256": "52a40a4f0e061bda715f4fb6410fdb69904dd63cf755025efca3c342f1162374",
-        "last_modified_header": null,
-        "etag": "\"20d496b7\"",
-        "latency_ms": 83,
-        "semantic_error": null
+        "latency_ms": 270,
+        "error": "URLError: <urlopen error Tunnel connection failed: 403 Forbidden>"
       }
     },
     {
       "id": "njdep-land-live",
       "label": "NJDEP Land feature service",
       "agency": "NJ Department of Environmental Protection",
-      "status": "passed",
+      "status": "failed",
       "validation_kind": "live_health",
       "action": "health_checked",
-      "records_or_files": 1,
+      "records_or_files": 0,
       "minimum": 1,
       "changed": false,
       "last_modified": null,
@@ -571,15 +496,10 @@
       "live": true,
       "warning": "Public screening context only; mapped historic, archaeological, wetlands and open-space features are not legal determinations.",
       "health": {
-        "checked_at": "2026-09-27T14:43:55.440689+00:00",
+        "checked_at": "2026-09-27T21:00:25.141613+00:00",
         "healthcheck_url": "https://mapsdep.nj.gov/arcgis/rest/services/Features/Land/MapServer?f=json",
-        "http_status": 200,
-        "content_type": "application/json;charset=UTF-8",
-        "content_sha256": "ae2c5f6bd2163ea2404c174f0386948c704150ae602fa65d65c983d031be4ca8",
-        "last_modified_header": null,
-        "etag": "\"766376a4\"",
-        "latency_ms": 70,
-        "semantic_error": null
+        "latency_ms": 305,
+        "error": "URLError: <urlopen error Tunnel connection failed: 403 Forbidden>"
       }
     },
     {
@@ -592,7 +512,7 @@
       "records_or_files": 564,
       "minimum": 50,
       "changed": false,
-      "last_modified": "2026-09-27T14:43:50.644039+00:00",
+      "last_modified": "2026-09-27T18:41:47.866191+00:00",
       "cadence": "annual",
       "source_url": "https://www.nj.gov/dca/dlps/hss/annualreporting/Affordable%20Housing%20Municipal%20Status%20Report%207-1-26.xlsx",
       "live": false
@@ -601,64 +521,54 @@
       "id": "nj-dca-fourth-round-affordable",
       "label": "NJ DCA Fourth Round 2025\u20132035 calculations",
       "agency": "NJ Department of Community Affairs",
-      "status": "passed",
+      "status": "failed",
       "validation_kind": "live_health",
       "action": "health_checked",
-      "records_or_files": 1,
+      "records_or_files": 0,
       "minimum": 1,
-      "changed": true,
+      "changed": false,
       "last_modified": null,
       "cadence": "source change / monitored",
       "source_url": "https://www.nj.gov/dca/dlps/4th_Round_Numbers.shtml",
       "live": true,
       "warning": "DCA publishes the Fourth Round calculations as non-binding guidance. Watchdog presents published values and does not make a legal determination of municipal affordable-housing obligation.",
       "health": {
-        "checked_at": "2026-09-27T14:43:56.186750+00:00",
+        "checked_at": "2026-09-27T21:00:26.035994+00:00",
         "healthcheck_url": "https://www.nj.gov/dca/dlps/4th_Round_Numbers.shtml",
-        "http_status": 200,
-        "content_type": "text/html",
-        "content_sha256": "6f29b019f8ab019cd09785ea7678be5f9b5409aedf8744cd9e51ba8b5d1086ed",
-        "last_modified_header": null,
-        "etag": null,
-        "latency_ms": 89,
-        "semantic_error": null
+        "latency_ms": 288,
+        "error": "URLError: <urlopen error Tunnel connection failed: 403 Forbidden>"
       }
     },
     {
       "id": "nj-dca-affordable-housing",
       "label": "NJ DCA Affordable Housing Municipal Status Report",
       "agency": "NJ Department of Community Affairs",
-      "status": "passed",
+      "status": "failed",
       "validation_kind": "live_health",
       "action": "health_checked",
-      "records_or_files": 1,
+      "records_or_files": 0,
       "minimum": 1,
-      "changed": true,
+      "changed": false,
       "last_modified": null,
       "cadence": "annual / source change monitored",
       "source_url": "https://www.nj.gov/dca/dlps/hss/MuniStatusReporting.shtml",
       "live": true,
       "warning": "Selected municipality-entered AHMS data; the DCA workbook states it is not comprehensive and is presented as-is without DCA accuracy certification. Watchdog does not infer legal compliance. HUD-subsidized units, LMI cost burden and affordable_units_pipeline remain unavailable from this workbook.",
       "health": {
-        "checked_at": "2026-09-27T14:43:56.344357+00:00",
+        "checked_at": "2026-09-27T21:00:26.628678+00:00",
         "healthcheck_url": "https://www.nj.gov/dca/dlps/hss/MuniStatusReporting.shtml",
-        "http_status": 200,
-        "content_type": "text/html",
-        "content_sha256": "b45a181c12426a0ac29b5a3c96de445a752884bb678c7ff511cf9515c8dfa43f",
-        "last_modified_header": null,
-        "etag": null,
-        "latency_ms": 49,
-        "semantic_error": null
+        "latency_ms": 309,
+        "error": "URLError: <urlopen error Tunnel connection failed: 403 Forbidden>"
       }
     },
     {
       "id": "nj-dca-development-trends-annual-v038",
       "label": "NJ DCA Development Trends Viewer annual municipality series",
       "agency": "NJ Department of Community Affairs",
-      "status": "passed",
+      "status": "failed",
       "validation_kind": "live_health",
       "action": "health_checked",
-      "records_or_files": 1,
+      "records_or_files": 0,
       "minimum": 1,
       "changed": false,
       "last_modified": null,
@@ -667,52 +577,42 @@
       "live": true,
       "warning": "Viewer as of 2025-08-21; 2024 is the workbook-designated latest published annual data year. 2025 placeholder columns are not treated as published annual observations. Permit/development facts are not legal, zoning, code-compliance, construction-completion, appraisal, lending, insurance, eligibility, or transaction determinations.",
       "health": {
-        "checked_at": "2026-09-27T14:43:56.469023+00:00",
+        "checked_at": "2026-09-27T21:00:27.215870+00:00",
         "healthcheck_url": "https://www.nj.gov/dca/codes/reporter/Development_Trend_Viewer.xlsb",
-        "http_status": 200,
-        "content_type": "text/plain",
-        "content_sha256": "0c65840e9c88c2cd3244532e19faf3daa640b9d2126d32e8a6019bd5ec257c69",
-        "last_modified_header": "Thu, 28 Aug 2025 13:02:38 GMT",
-        "etag": "\"9c3feb-68b0536e\"",
-        "latency_ms": 318,
-        "semantic_error": null
+        "latency_ms": 185,
+        "error": "URLError: <urlopen error Tunnel connection failed: 403 Forbidden>"
       }
     },
     {
       "id": "nj-lpt-general-tax-rates-2025",
       "label": "2025 General and Effective Tax Rates",
       "agency": "NJ Division of Taxation",
-      "status": "passed",
+      "status": "failed",
       "validation_kind": "live_health",
       "action": "health_checked",
-      "records_or_files": 1,
+      "records_or_files": 0,
       "minimum": 1,
-      "changed": true,
+      "changed": false,
       "last_modified": null,
       "cadence": "daily publication check",
       "source_url": "https://www.nj.gov/treasury/taxation/lpt/statdata.shtml",
       "live": true,
       "note": "2025 remains the latest statewide General Tax Rate table listed by NJ Division of Taxation as of 2026-09-22. Do not label a projected 2026 rate as published.",
       "health": {
-        "checked_at": "2026-09-27T14:43:56.847419+00:00",
+        "checked_at": "2026-09-27T21:00:27.668240+00:00",
         "healthcheck_url": "https://www.nj.gov/treasury/taxation/lpt/statdata.shtml",
-        "http_status": 200,
-        "content_type": "text/html",
-        "content_sha256": "27ad72086277cd335f0b8e0921699e22b096ff0fc61b2ba42e3ad9c2035ee18c",
-        "last_modified_header": null,
-        "etag": null,
-        "latency_ms": 70,
-        "semantic_error": null
+        "latency_ms": 298,
+        "error": "URLError: <urlopen error Tunnel connection failed: 403 Forbidden>"
       }
     },
     {
       "id": "nj-lpt-chapter123-2026",
       "label": "2026 Chapter 123 common level ranges",
       "agency": "NJ Division of Taxation",
-      "status": "passed",
+      "status": "failed",
       "validation_kind": "live_health",
       "action": "health_checked",
-      "records_or_files": 1,
+      "records_or_files": 0,
       "minimum": 1,
       "changed": false,
       "last_modified": null,
@@ -721,25 +621,20 @@
       "live": true,
       "note": "Certified for use in tax year 2026; amended by NJ Tax Court January 30, 2026.",
       "health": {
-        "checked_at": "2026-09-27T14:43:57.023476+00:00",
+        "checked_at": "2026-09-27T21:00:28.248981+00:00",
         "healthcheck_url": "https://nj.gov/treasury/taxation/pdf/lpt/chap123/2026CH123.pdf",
-        "http_status": 200,
-        "content_type": "application/pdf",
-        "content_sha256": "2d2e7257a179eab0334923441f05790c925773df4849d008ef92dd61b6b78df5",
-        "last_modified_header": "Tue, 03 Mar 2026 12:58:23 GMT",
-        "etag": "\"51593-69a6daef\"",
-        "latency_ms": 101,
-        "semantic_error": null
+        "latency_ms": 248,
+        "error": "URLError: <urlopen error Tunnel connection failed: 403 Forbidden>"
       }
     },
     {
       "id": "nj-lpt-state-equalization-2026",
       "label": "2026 State Equalization Table",
       "agency": "NJ Division of Taxation",
-      "status": "passed",
+      "status": "failed",
       "validation_kind": "live_health",
       "action": "health_checked",
-      "records_or_files": 1,
+      "records_or_files": 0,
       "minimum": 1,
       "changed": false,
       "last_modified": null,
@@ -747,134 +642,239 @@
       "source_url": "https://www.nj.gov/treasury/taxation/pdf/lpt/2026StateEq.pdf",
       "live": true,
       "health": {
-        "checked_at": "2026-09-27T14:43:57.288457+00:00",
+        "checked_at": "2026-09-27T21:00:28.778536+00:00",
         "healthcheck_url": "https://www.nj.gov/treasury/taxation/pdf/lpt/2026StateEq.pdf",
-        "http_status": 200,
-        "content_type": "application/pdf",
-        "content_sha256": "db5f050acd35e718b3ea35d675de3059dc18f9e653f54e3dd0ad4d0a5a1199de",
-        "last_modified_header": "Wed, 22 Jul 2026 14:17:42 GMT",
-        "etag": "\"188c78-6a60d106\"",
-        "latency_ms": 94,
-        "semantic_error": null
+        "latency_ms": 132,
+        "error": "URLError: <urlopen error Tunnel connection failed: 403 Forbidden>"
       }
     },
     {
       "id": "nj-lpt-county-equalization-2026",
       "label": "2026 County Equalization Tables",
       "agency": "NJ Division of Taxation",
-      "status": "passed",
+      "status": "failed",
       "validation_kind": "live_health",
       "action": "health_checked",
-      "records_or_files": 1,
+      "records_or_files": 0,
       "minimum": 1,
-      "changed": true,
+      "changed": false,
       "last_modified": null,
       "cadence": "daily publication check",
       "source_url": "https://www.nj.gov/treasury/taxation/lpt/county_equalized.shtml",
       "live": true,
       "note": "NJ currently exposes 2026 county equalization tables.",
       "health": {
-        "checked_at": "2026-09-27T14:43:57.591292+00:00",
+        "checked_at": "2026-09-27T21:00:29.193474+00:00",
         "healthcheck_url": "https://www.nj.gov/treasury/taxation/lpt/county_equalized.shtml",
-        "http_status": 200,
-        "content_type": "text/html",
-        "content_sha256": "a423302e1a92ff23304d4b2c3478c2163ec470fe059a9d31dd636ac86f1dc8c8",
-        "last_modified_header": null,
-        "etag": null,
-        "latency_ms": 112,
-        "semantic_error": null
+        "latency_ms": 271,
+        "error": "URLError: <urlopen error Tunnel connection failed: 403 Forbidden>"
       }
     },
     {
       "id": "nj-lpt-modiv-2026",
       "label": "2026 Property Assessment (MOD-IV) files",
       "agency": "NJ Division of Taxation",
-      "status": "passed",
+      "status": "failed",
       "validation_kind": "live_health",
       "action": "health_checked",
-      "records_or_files": 1,
+      "records_or_files": 0,
       "minimum": 1,
-      "changed": true,
+      "changed": false,
       "last_modified": null,
       "cadence": "daily publication check",
       "source_url": "https://www.nj.gov/treasury/taxation/lpt/statdata.shtml",
       "live": true,
       "health": {
-        "checked_at": "2026-09-27T14:43:57.824188+00:00",
+        "checked_at": "2026-09-27T21:00:29.748077+00:00",
         "healthcheck_url": "https://www.nj.gov/treasury/taxation/lpt/statdata.shtml",
-        "http_status": 200,
-        "content_type": "text/html",
-        "content_sha256": "991608c5826b289d524daa527c37f3f1dd7b6af92d573209d98959a2fa7b7960",
-        "last_modified_header": null,
-        "etag": null,
-        "latency_ms": 71,
-        "semantic_error": null
+        "latency_ms": 131,
+        "error": "URLError: <urlopen error Tunnel connection failed: 403 Forbidden>"
       }
     },
     {
       "id": "nj-dca-ufb-2026",
       "label": "2026 User-Friendly Budget Database",
       "agency": "NJ Department of Community Affairs",
-      "status": "passed",
+      "status": "failed",
       "validation_kind": "live_health",
       "action": "health_checked",
-      "records_or_files": 1,
+      "records_or_files": 0,
       "minimum": 1,
-      "changed": true,
+      "changed": false,
       "last_modified": null,
       "cadence": "daily publication check",
       "source_url": "https://www.nj.gov/dca/dlgs/programs/mc_budgets.shtml",
       "live": true,
       "note": "2026 User-Friendly Budget Database is published; use it for levy/budget context, not as a certified parcel tax rate.",
       "health": {
-        "checked_at": "2026-09-27T14:43:58.054511+00:00",
+        "checked_at": "2026-09-27T21:00:30.025217+00:00",
         "healthcheck_url": "https://www.nj.gov/dca/dlgs/programs/mc_budgets.shtml",
-        "http_status": 200,
-        "content_type": "text/html",
-        "content_sha256": "59fb375939c968433064a4bc26b9f7099f0fc244f83b3b3775149d0f6388e68b",
-        "last_modified_header": null,
-        "etag": null,
-        "latency_ms": 117,
-        "semantic_error": null
+        "latency_ms": 287,
+        "error": "URLError: <urlopen error Tunnel connection failed: 403 Forbidden>"
       }
     },
     {
       "id": "nj-dca-fast-2026",
       "label": "2026 FAST municipal/county budget templates and updates",
       "agency": "NJ Department of Community Affairs",
-      "status": "passed",
+      "status": "failed",
       "validation_kind": "live_health",
       "action": "health_checked",
-      "records_or_files": 1,
+      "records_or_files": 0,
       "minimum": 1,
-      "changed": true,
+      "changed": false,
       "last_modified": null,
       "cadence": "daily publication check",
       "source_url": "https://www.nj.gov/dca/dlgs/Fast.shtml",
       "live": true,
       "health": {
-        "checked_at": "2026-09-27T14:43:58.257053+00:00",
+        "checked_at": "2026-09-27T21:00:30.593048+00:00",
         "healthcheck_url": "https://www.nj.gov/dca/dlgs/Fast.shtml",
-        "http_status": 200,
-        "content_type": "text/html",
-        "content_sha256": "c90dc24e1ede7332f8d527b3e02bd9470f8f151575a3ab9d24a080511738ef97",
-        "last_modified_header": null,
-        "etag": null,
-        "latency_ms": 36,
-        "semantic_error": null
+        "latency_ms": 132,
+        "error": "URLError: <urlopen error Tunnel connection failed: 403 Forbidden>"
       }
     }
   ],
   "failures": [
     {
+      "dataset": "nj-lpt-statistical-index",
+      "stage": "source_health",
+      "error": "URLError: <urlopen error Tunnel connection failed: 403 Forbidden>"
+    },
+    {
       "dataset": "cod-history",
       "stage": "refresh",
-      "error": "Command '['node', 'property/scripts/parse-cod-pdf.js', '/tmp/njptr-refresh-bwqon1oc/source.download']' returned non-zero exit status 1."
+      "error": "<urlopen error Tunnel connection failed: 403 Forbidden>"
+    },
+    {
+      "dataset": "construction-permits-live",
+      "stage": "source_health",
+      "error": "URLError: <urlopen error Tunnel connection failed: 403 Forbidden>"
+    },
+    {
+      "dataset": "known-contaminated-sites-live",
+      "stage": "source_health",
+      "error": "URLError: <urlopen error Tunnel connection failed: 403 Forbidden>"
+    },
+    {
+      "dataset": "deed-notices-live",
+      "stage": "source_health",
+      "error": "URLError: <urlopen error Tunnel connection failed: 403 Forbidden>"
+    },
+    {
+      "dataset": "groundwater-cea-live",
+      "stage": "source_health",
+      "error": "URLError: <urlopen error Tunnel connection failed: 403 Forbidden>"
+    },
+    {
+      "dataset": "underground-storage-tanks-live",
+      "stage": "source_health",
+      "error": "URLError: <urlopen error Tunnel connection failed: 403 Forbidden>"
+    },
+    {
+      "dataset": "tidelands-reference-live",
+      "stage": "source_health",
+      "error": "URLError: <urlopen error Tunnel connection failed: 403 Forbidden>"
+    },
+    {
+      "dataset": "highlands-area-live",
+      "stage": "source_health",
+      "error": "URLError: <urlopen error Tunnel connection failed: 403 Forbidden>"
+    },
+    {
+      "dataset": "pinelands-area-live",
+      "stage": "source_health",
+      "error": "URLError: <urlopen error Tunnel connection failed: 403 Forbidden>"
+    },
+    {
+      "dataset": "nfhl-flood-live",
+      "stage": "source_health",
+      "error": "URLError: <urlopen error Tunnel connection failed: 403 Forbidden>"
+    },
+    {
+      "dataset": "tidal-cafe-live",
+      "stage": "source_health",
+      "error": "URLError: <urlopen error Tunnel connection failed: 403 Forbidden>"
+    },
+    {
+      "dataset": "wetlands-2012-live",
+      "stage": "source_health",
+      "error": "URLError: <urlopen error Tunnel connection failed: 403 Forbidden>"
+    },
+    {
+      "dataset": "priority-wetlands-live",
+      "stage": "source_health",
+      "error": "URLError: <urlopen error Tunnel connection failed: 403 Forbidden>"
+    },
+    {
+      "dataset": "njdep-geology-live",
+      "stage": "source_health",
+      "error": "URLError: <urlopen error Tunnel connection failed: 403 Forbidden>"
+    },
+    {
+      "dataset": "njdep-hydro-live",
+      "stage": "source_health",
+      "error": "URLError: <urlopen error Tunnel connection failed: 403 Forbidden>"
+    },
+    {
+      "dataset": "njdep-land-live",
+      "stage": "source_health",
+      "error": "URLError: <urlopen error Tunnel connection failed: 403 Forbidden>"
     },
     {
       "dataset": "affordable-housing-status",
       "stage": "refresh",
-      "error": "Command '['python3', 'property/scripts/parse_affordable_housing.py', '/tmp/njptr-refresh-dcr3i6j7/source.download', 'property/data/affordable-housing.json']' returned non-zero exit status 1."
+      "error": "<urlopen error Tunnel connection failed: 403 Forbidden>"
+    },
+    {
+      "dataset": "nj-dca-fourth-round-affordable",
+      "stage": "source_health",
+      "error": "URLError: <urlopen error Tunnel connection failed: 403 Forbidden>"
+    },
+    {
+      "dataset": "nj-dca-affordable-housing",
+      "stage": "source_health",
+      "error": "URLError: <urlopen error Tunnel connection failed: 403 Forbidden>"
+    },
+    {
+      "dataset": "nj-dca-development-trends-annual-v038",
+      "stage": "source_health",
+      "error": "URLError: <urlopen error Tunnel connection failed: 403 Forbidden>"
+    },
+    {
+      "dataset": "nj-lpt-general-tax-rates-2025",
+      "stage": "source_health",
+      "error": "URLError: <urlopen error Tunnel connection failed: 403 Forbidden>"
+    },
+    {
+      "dataset": "nj-lpt-chapter123-2026",
+      "stage": "source_health",
+      "error": "URLError: <urlopen error Tunnel connection failed: 403 Forbidden>"
+    },
+    {
+      "dataset": "nj-lpt-state-equalization-2026",
+      "stage": "source_health",
+      "error": "URLError: <urlopen error Tunnel connection failed: 403 Forbidden>"
+    },
+    {
+      "dataset": "nj-lpt-county-equalization-2026",
+      "stage": "source_health",
+      "error": "URLError: <urlopen error Tunnel connection failed: 403 Forbidden>"
+    },
+    {
+      "dataset": "nj-lpt-modiv-2026",
+      "stage": "source_health",
+      "error": "URLError: <urlopen error Tunnel connection failed: 403 Forbidden>"
+    },
+    {
+      "dataset": "nj-dca-ufb-2026",
+      "stage": "source_health",
+      "error": "URLError: <urlopen error Tunnel connection failed: 403 Forbidden>"
+    },
+    {
+      "dataset": "nj-dca-fast-2026",
+      "stage": "source_health",
+      "error": "URLError: <urlopen error Tunnel connection failed: 403 Forbidden>"
     }
   ]
 }
