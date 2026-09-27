@@ -1,0 +1,80 @@
+/* ==========================================================================
+   Appeal Scanner in the Watchdog board design. Presentation only: scan.js
+   and its UI add-ons render every number, note and legal caveat unchanged.
+   secondary-pages-2027.css loads later with !important rules, so these
+   selectors carry the #sc-main id to win without fighting load order.
+   ========================================================================== */
+html body[data-sidebar-page="scan"]{
+  --sb-bg:#f3f1ec;--sb-surface:#fbfaf7;--sb-line:#e3dfd6;--sb-ink:#0e2248;--sb-muted:#5d6877;
+  --sb-navy:#0e2248;--sb-blue:#1456a0;--sb-blue-bright:#2f6df6;--sb-gold:#b8972a;
+  --sb-sky:#e3edfb;--sb-sky-deep:#b9d0f2;--sb-teal:#dff1ec;--sb-teal-deep:#9fd3c5;--sb-sand:#f6efd9;--sb-sand-deep:#e4cf8e;
+  --sb-display:"Plus Jakarta Sans",Inter,system-ui,sans-serif;
+}
+html body[data-sidebar-page="scan"],
+html body[data-sidebar-page="scan"] .db-workspace,
+html body[data-sidebar-page="scan"] #sc-main{background:var(--sb-bg)!important}
+html body[data-sidebar-page="scan"] .wdx-topbar{background:rgba(251,250,247,.94)!important}
+html body[data-sidebar-page="scan"] .wdx-pagebar h1{color:var(--sb-ink)!important}
+html body[data-sidebar-page="scan"] .wdx-btn{border-radius:999px!important}
+html body[data-sidebar-page="scan"] .wdx-btn.primary{background:var(--sb-navy)!important;border-color:var(--sb-navy)!important}
+html body[data-sidebar-page="scan"] #sc-main .sc-wrap{word-spacing:.06em}
+
+/* Intro: the navy card */
+html body[data-sidebar-page="scan"] #sc-main .sc-intro{position:relative!important;overflow:hidden!important;max-width:none!important;border:0!important;border-radius:24px!important;background:var(--sb-navy)!important;color:#fff!important;padding:28px 30px!important;padding-right:170px!important}
+html body[data-sidebar-page="scan"] #sc-main .sc-intro::after{content:"";position:absolute;right:-18px;top:14px;width:150px;height:170px;opacity:.6;background:no-repeat center/contain url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 116'%3E%3Cpath fill='%231456a0' d='M50 2 94 18v34c0 30-19 52-44 62C25 104 6 82 6 52V18Z'/%3E%3Cpath fill='none' stroke='%232f6df6' stroke-width='7' stroke-linecap='round' stroke-linejoin='round' d='m30 58 14 14 28-30'/%3E%3C/svg%3E")}
+html body[data-sidebar-page="scan"] #sc-main .sc-intro h2{color:#fff!important}
+html body[data-sidebar-page="scan"] #sc-main .sc-intro p{color:rgba(255,255,255,.78)!important}
+html body[data-sidebar-page="scan"] #sc-main .sc-eyebrow{color:#e4cf8e!important}
+
+/* Form */
+html body[data-sidebar-page="scan"] #sc-main .sc-form{border:0!important;border-radius:24px!important;background:#fff!important;box-shadow:none!important;padding:20px!important}
+html body[data-sidebar-page="scan"] #sc-main .sc-f label{font-size:12px!important;font-weight:700!important;color:var(--sb-muted)!important}
+html body[data-sidebar-page="scan"] #sc-main .sc-f select{border-radius:999px!important;border-color:var(--sb-line)!important;background:var(--sb-surface)!important;color:var(--sb-ink)!important;padding:0 16px!important}
+html body[data-sidebar-page="scan"] #sc-main .sc-run{border-radius:999px!important;background:var(--sb-navy)!important;box-shadow:none!important;font-weight:700!important}
+html body[data-sidebar-page="scan"] #sc-main .sc-run:hover{background:var(--sb-blue)!important}
+html body[data-sidebar-page="scan"] #sc-main .sc-cov{font-size:12px!important;color:var(--sb-muted)!important}
+
+/* Result summary: the four board cards */
+html body[data-sidebar-page="scan"] #sc-main .sc-sum{display:grid!important;grid-template-columns:repeat(4,minmax(0,1fr))!important;gap:16px!important;border:0!important;background:transparent!important;overflow:visible!important}
+html body[data-sidebar-page="scan"] #sc-main .sc-sum>div{position:relative;overflow:hidden;min-height:132px;border:0!important;border-radius:24px!important;padding:22px!important;color:var(--sb-ink)}
+html body[data-sidebar-page="scan"] #sc-main .sc-sum>div::after{content:"";position:absolute;right:14px;top:14px;width:64px;height:64px;background:no-repeat center/contain}
+html body[data-sidebar-page="scan"] #sc-main .sc-sum>div:nth-child(1){background:var(--sb-navy)!important;color:#fff}
+html body[data-sidebar-page="scan"] #sc-main .sc-sum>div:nth-child(1)::after{opacity:.55;background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 116'%3E%3Cpath fill='%231456a0' d='M50 2 94 18v34c0 30-19 52-44 62C25 104 6 82 6 52V18Z'/%3E%3C/svg%3E")}
+html body[data-sidebar-page="scan"] #sc-main .sc-sum>div:nth-child(2){background:var(--sb-sky)!important}
+html body[data-sidebar-page="scan"] #sc-main .sc-sum>div:nth-child(2)::after{background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 92'%3E%3Cpath fill='%23b9d0f2' d='M50 4 96 42h-12v46H62V62H38v26H16V42H4Z'/%3E%3C/svg%3E")}
+html body[data-sidebar-page="scan"] #sc-main .sc-sum>div:nth-child(3){background:var(--sb-teal)!important}
+html body[data-sidebar-page="scan"] #sc-main .sc-sum>div:nth-child(3)::after{background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Ccircle cx='42' cy='42' r='28' fill='none' stroke='%239fd3c5' stroke-width='14'/%3E%3Cpath stroke='%239fd3c5' stroke-width='16' stroke-linecap='round' d='m64 64 26 26'/%3E%3C/svg%3E")}
+html body[data-sidebar-page="scan"] #sc-main .sc-sum>div:nth-child(4){background:var(--sb-sand)!important}
+html body[data-sidebar-page="scan"] #sc-main .sc-sum>div:nth-child(4)::after{background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 80 100'%3E%3Cpath fill='%23e4cf8e' d='M40 2C19 2 4 17 4 37c0 26 36 61 36 61s36-35 36-61C76 17 61 2 40 2Z'/%3E%3Ccircle cx='40' cy='37' r='13' fill='%23f6efd9'/%3E%3C/svg%3E")}
+html body[data-sidebar-page="scan"] #sc-main .sc-sum b{position:relative;z-index:1;display:inline-block!important;color:inherit!important;font:700 34px/1.1 var(--sb-display)!important;padding-bottom:6px;border-bottom:2px solid currentColor;margin-bottom:10px}
+html body[data-sidebar-page="scan"] #sc-main .sc-sum>div:nth-child(1) b{border-color:var(--sb-gold)}
+html body[data-sidebar-page="scan"] #sc-main .sc-sum span{position:relative;z-index:1;display:block;font-size:12px!important;font-weight:700!important;letter-spacing:.04em;text-transform:uppercase;color:inherit!important;opacity:.78}
+
+/* Actions, table, notes */
+html body[data-sidebar-page="scan"] #sc-main .sc-lede{color:var(--sb-ink)!important;font-size:15px!important;line-height:1.6!important}
+html body[data-sidebar-page="scan"] #sc-main .sc-exp{border-radius:999px!important;background:var(--sb-navy)!important;border-color:var(--sb-navy)!important;color:#fff!important}
+html body[data-sidebar-page="scan"] #sc-main .sc-exp.ghost{background:#fff!important;border-color:var(--sb-line)!important;color:var(--sb-ink)!important}
+html body[data-sidebar-page="scan"] #sc-main .sc-tablewrap{border:0!important;border-radius:24px!important;background:#fff!important;box-shadow:none!important}
+html body[data-sidebar-page="scan"] #sc-main .sc-t thead th{background:var(--sb-surface)!important;color:var(--sb-muted)!important;border-color:var(--sb-line)!important}
+html body[data-sidebar-page="scan"] #sc-main .sc-t tbody tr:hover td{background:#f7f5f0!important}
+html body[data-sidebar-page="scan"] #sc-main .sc-t td{border-color:#efebe4!important}
+html body[data-sidebar-page="scan"] #sc-main .sc-op{display:inline-grid!important;justify-items:center;min-width:64px;padding:6px 10px!important;border-radius:14px!important}
+html body[data-sidebar-page="scan"] #sc-main .sc-op b{font:700 20px/1 var(--sb-display)!important}
+html body[data-sidebar-page="scan"] #sc-main .sc-op.ophi{background:var(--sb-navy)!important;color:#fff!important}
+html body[data-sidebar-page="scan"] #sc-main .sc-op.ophi b,html body[data-sidebar-page="scan"] #sc-main .sc-op.ophi small{color:#fff!important}
+html body[data-sidebar-page="scan"] #sc-main .sc-op.opmd{background:var(--sb-sky)!important}
+html body[data-sidebar-page="scan"] #sc-main .sc-op.oplo{background:var(--sb-sand)!important}
+html body[data-sidebar-page="scan"] #sc-main .sc-op.opmd b,html body[data-sidebar-page="scan"] #sc-main .sc-op.oplo b{color:var(--sb-ink)!important}
+html body[data-sidebar-page="scan"] #sc-main .sc-quick{border-radius:999px!important}
+html body[data-sidebar-page="scan"] #sc-main .sc-method{border:0!important;border-radius:24px!important;background:#fff!important;box-shadow:none!important;max-width:none!important}
+html body[data-sidebar-page="scan"] #sc-main .sc-plan-gate,html body[data-sidebar-page="scan"] #sc-main .sc-err,html body[data-sidebar-page="scan"] #sc-main .sc-none,html body[data-sidebar-page="scan"] #sc-main .sc-load{border-radius:24px!important;border-color:var(--sb-line)!important;background:#fff!important}
+html body[data-sidebar-page="scan"] #sc-main :focus-visible{outline:3px solid var(--sb-blue-bright)!important;outline-offset:2px}
+
+@media (max-width:1100px){html body[data-sidebar-page="scan"] #sc-main .sc-sum{grid-template-columns:repeat(2,minmax(0,1fr))!important}}
+@media (max-width:640px){
+  html body[data-sidebar-page="scan"] #sc-main .sc-intro{padding:22px!important;padding-right:22px!important}
+  html body[data-sidebar-page="scan"] #sc-main .sc-intro::after{width:90px;height:100px;right:-20px;opacity:.35}
+  html body[data-sidebar-page="scan"] #sc-main .sc-sum{grid-template-columns:minmax(0,1fr)!important;gap:12px!important}
+  html body[data-sidebar-page="scan"] #sc-main .sc-sum>div{min-height:0}
+}
+@media print{html body[data-sidebar-page="scan"] #sc-main .sc-sum>div,html body[data-sidebar-page="scan"] #sc-main .sc-intro{background:#fff!important;color:#000!important;border:1px solid #bbb!important}html body[data-sidebar-page="scan"] #sc-main .sc-sum>div::after,html body[data-sidebar-page="scan"] #sc-main .sc-intro::after{display:none}}

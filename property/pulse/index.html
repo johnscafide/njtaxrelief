@@ -1,7 +1,63 @@
-<!doctype html><html lang="en" data-access-require="standard"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover"><title>Property Pulse | Watchdog</title><meta name="robots" content="noindex,nofollow"><meta name="theme-color" content="#102a4c"><link rel="manifest" href="/property/manifest.webmanifest"><link rel="apple-touch-icon" href="/apple-touch-icon.png"><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css"><link rel="stylesheet" href="/styles.css"><link rel="stylesheet" href="/property/css/shared.css?v=20260805b"><link rel="stylesheet" href="/property/css/dashboard.css?v=20260807a"><link rel="stylesheet" href="/property/css/mobile-app.css?v=20260807b"><link rel="stylesheet" href="/property/css/pulse.css?v=20260808a"></head><body data-sidebar-page="pulse"><main><div class="db-shell"><div id="property-side-menu"></div><div class="db-workspace"><header class="top pulse-top"><div class="top-in"><div class="who"><div class="db-noav"><i class="fas fa-wave-square"></i></div><div><span class="top-eyebrow">PROPERTY PULSE</span><h1>Your properties, over time</h1><span>See what changed, when it changed and where the evidence came from.</span></div></div><a class="pulse-add" href="/property/"><i class="fas fa-plus"></i> Add property</a></div></header>
-<link rel="stylesheet" href="/property/css/pulse-v040.css?v=20260808a"><section class="pulse-shell" id="pulse-app" hidden>
-  <div class="pulse-summary" id="pulse-summary"></div>
-  <section class="pulse-panel pulse-trend"><div class="pulse-panel-head"><div><span>HISTORICAL VIEW</span><h2>Watchdog Score timeline</h2></div><select id="pulse-property-select" aria-label="Property history"></select></div><div id="pulse-trend-chart" class="pulse-trend-chart"></div><p class="pulse-intro">Only trusted, dated observations are plotted. Browser sessions cannot create historical evidence.</p></section>
-  <div class="pulse-toolbar"><div class="pulse-ranges" id="pulse-ranges"><button type="button" data-days="30">30d</button><button type="button" data-days="183" class="on">6m</button><button type="button" data-days="365">1y</button><button type="button" data-days="0">All</button></div><div class="pulse-types" id="pulse-types"><button type="button" data-type="all" class="on">All</button><button type="button" data-type="score_change">Scores</button><button type="button" data-type="assessment_change">Assessment</button><button type="button" data-type="tax_change">Tax</button><button type="button" data-type="permit_change">Permits</button><button type="button" data-type="deed_change">Deeds</button><button type="button" data-type="source_refresh">Sources</button></div></div>
-  <div class="pulse-layout"><section class="pulse-panel"><div class="pulse-panel-head"><div><span>VERIFIED TIMELINE</span><h2>Change ledger</h2></div><button id="pulse-read-all" class="pulse-quiet" type="button" hidden>Mark all read</button></div><div id="pulse-events" class="pulse-events"></div></section><section class="pulse-panel pulse-preferences"><div class="pulse-panel-head"><div><span>PROPERTY CONTROLS</span><h2>Follow what matters</h2></div></div><p class="pulse-intro">Choose which changes matter for each saved property. Data jobs create the events; this page only reads and explains them.</p><div id="pulse-properties" class="pulse-properties"></div></section></div>
-</section><section class="pulse-gate" id="pulse-gate"><i class="fas fa-lock"></i><h2>Sign in to open Property Pulse</h2><p>Your property history and alert controls are private to your account.</p><a href="/property/dashboard">Open Dashboard to sign in</a></section></div></div></main><script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2/dist/umd/supabase.js"></script><script src="/property/js/access-guard.js?v=20260808a"></script><script src="/property/js/sidemenu.js?v=20260809f"></script><script src="/property/js/pwa.js?v=20260807a"></script><script src="/property/js/pulse.js?v=20260808a"></script></body></html>
+<!doctype html>
+<html lang="en" data-access-require="standard" data-ui="board">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<title>Property Pulse | Watchdog</title>
+<meta name="robots" content="noindex,nofollow">
+<meta name="theme-color" content="#f3f1ec">
+<link rel="manifest" href="/property/manifest.webmanifest">
+<link rel="apple-touch-icon" href="/apple-touch-icon.png">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=Inter:wght@400;500;600;700;800&display=swap">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+<link rel="stylesheet" href="/property/css/shared/00-design-tokens.css">
+<!-- Shared board design (dashboard), then Pulse specifics. -->
+<link rel="stylesheet" href="/property/css/dashboard/watchdog-dashboard-board.css?v=20260927c">
+<link rel="stylesheet" href="/property/css/pulse-board.css?v=20260927a">
+</head>
+<body data-sidebar-page="pulse">
+<main>
+  <div class="db-shell"><div id="property-side-menu"></div><div class="db-workspace">
+    <div class="wdd-app pulse-app" id="pulse-app" hidden>
+      <div class="wdd-board">
+        <div class="wdd-board-main">
+          <section class="pulse-head" aria-labelledby="pulse-title">
+            <div>
+              <h1 id="pulse-title">Property Pulse</h1>
+              <p id="pulse-line">Everything that moved across your saved properties.</p>
+            </div>
+            <div class="pulse-filters">
+              <label class="wdd-pill-select is-light"><span class="wdd-sr">Property</span><select id="pulse-property" data-pulse="property"></select></label>
+              <label class="wdd-pill-select"><span class="wdd-sr">Time range</span><select id="pulse-range" data-pulse="range"><option value="30">Last 30 days</option><option value="183" selected>Last 6 months</option><option value="365">Last year</option><option value="0">All time</option></select></label>
+            </div>
+          </section>
+          <div class="pulse-types" id="pulse-types" role="group" aria-label="Change type"></div>
+          <section class="wdd-cards" id="pulse-cards" aria-label="Pulse summary"></section>
+          <div class="wdd-lower">
+            <section class="wdd-list" id="pulse-ledger" aria-label="Change ledger"></section>
+            <section class="wdd-detail" id="pulse-detail" aria-label="Change details" aria-live="polite"></section>
+          </div>
+        </div>
+        <aside class="wdd-board-side" id="pulse-side" aria-label="Calendar and alert controls"></aside>
+      </div>
+      <footer class="wdd-foot">Data jobs create these events from public records; this page only reads and explains them. Only trusted, dated observations are plotted, and a browser session cannot create historical evidence.</footer>
+    </div>
+    <section class="pulse-gate" id="pulse-gate" hidden>
+      <i class="fas fa-lock" aria-hidden="true"></i>
+      <h2>Sign in to open Property Pulse</h2>
+      <p>Your property history and alert controls are private to your account.</p>
+      <a class="wdd-btn" href="/property/dashboard">Open Dashboard to sign in</a>
+    </section>
+  </div></div>
+</main>
+<div class="wdd-toast" id="wdd-toast" role="status" aria-live="polite"></div>
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2/dist/umd/supabase.js"></script>
+<script src="/property/js/supabase-runtime.js"></script>
+<script src="/property/js/access-guard.js?v=20260808a"></script>
+<script src="/property/js/sidemenu.js?v=20260809f"></script>
+<script src="/property/js/pwa.js?v=20260807a"></script>
+<script src="/property/js/pulse.js?v=20260927a"></script>
+</body>
+</html>
