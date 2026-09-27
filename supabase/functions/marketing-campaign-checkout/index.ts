@@ -117,6 +117,11 @@ Deno.serve(async (req) => {
 
   const body = await req.json().catch(() => ({}));
   const quoteId = clean(body?.quote_id, 80);
+  // Send the agent back to the site and page that started checkout. WatchdogIndex
+  // uses clean root URLs; NJPropertyTaxRelief keeps its legacy /property/ path.
+  const returnHost = ALLOWED_ORIGINS.has(origin) ? origin : 'https://njpropertytaxrelief.com';
+  const legacyPath = clean(body?.return_to, 20) === 'postcards' ? '/property/marketing-studio/postcards' : '/property/marketing-studio/review';
+  const returnBase = returnHost + (/watchdogindex\.com$/.test(returnHost) ? legacyPath.replace(/^\/property/, '') : legacyPath);
   if (!quoteId) return reply(req, 400, { error: 'quote_id is required' });
 
   const quoteResult = await admin
@@ -290,7 +295,7 @@ Deno.serve(async (req) => {
     });
 
     const fulfillment = await triggerFulfillment(url, service, String(quote.campaign_id), String(saved.data.id), 'watchdog_credit');
-    const successUrl = `https://njpropertytaxrelief.com/property/marketing-studio/review?campaign=${encodeURIComponent(String(quote.campaign_id))}&payment=success&credit=applied`;
+    const successUrl = `${returnBase}?campaign=${encodeURIComponent(String(quote.campaign_id))}&payment=success&credit=applied`;
     return reply(req, 200, {
       funded: true,
       credit_only: true,
@@ -349,8 +354,8 @@ Deno.serve(async (req) => {
           },
         },
       }],
-      success_url: `https://njpropertytaxrelief.com/property/marketing-studio/review?campaign=${encodeURIComponent(String(quote.campaign_id))}&payment=success`,
-      cancel_url: `https://njpropertytaxrelief.com/property/marketing-studio/review?campaign=${encodeURIComponent(String(quote.campaign_id))}&payment=cancelled`,
+      success_url: `${returnBase}?campaign=${encodeURIComponent(String(quote.campaign_id))}&payment=success`,
+      cancel_url: `${returnBase}?campaign=${encodeURIComponent(String(quote.campaign_id))}&payment=cancelled`,
       metadata,
       payment_intent_data: { metadata },
       integration_identifier: `watchdog_campaign_${suffix}`,

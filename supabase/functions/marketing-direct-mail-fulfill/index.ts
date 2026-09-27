@@ -1,4 +1,5 @@
 import { createClient } from 'npm:@supabase/supabase-js@2.95.0';
+import { childRef, pcmConfigured, pcmRequest, returnAddressFrom, cancelDeadline } from '../_shared/pcm-v3.ts';
 
 const URL = Deno.env.get('SUPABASE_URL')!;
 const SERVICE = Deno.env.get('SUPABASE_SERVICE_ROLE_KEY')!;
@@ -22,97 +23,18 @@ function reply(status: number, body: unknown) {
   });
 }
 
+// PCM Direct Mail API v3: POST /order/postcard under the agent's child account.
+// PCM_LIVE_LAUNCH_ENABLED remains the explicit kill switch for real mail.
 function cfg() {
-  const token = clean(Deno.env.get('PCM_ACCESS_TOKEN'), 4000);
-  const key = clean(Deno.env.get('PCM_API_KEY'), 1000);
-  const secret = clean(Deno.env.get('PCM_API_SECRET'), 2000);
-  const tokenUrl = clean(Deno.env.get('PCM_TOKEN_URL'), 1000);
-  const base = clean(
-    Deno.env.get('PCM_API_BASE_URL') || 'https://api.pcmintegrations.com/v2/directmail-api',
-    1000,
-  ).replace(/\/$/, '');
-  const path = '/' + clean(Deno.env.get('PCM_ORDER_PATH') || '/order', 300).replace(/^\/+/, '');
   return {
-    token,
-    key,
-    secret,
-    tokenUrl,
-    base,
-    path,
-    configured: Boolean(token || (key && secret && tokenUrl)),
+    configured: pcmConfigured('live'),
     enabled: String(Deno.env.get('PCM_LIVE_LAUNCH_ENABLED') || '').toLowerCase() === 'true',
   };
-}
-
-let cached = '';
-let expiry = 0;
-
-async function pcmToken() {
-  const current = cfg();
-  if (current.token) return current.token;
-  if (cached && Date.now() < expiry - 60000) return cached;
-  if (!current.key || !current.secret || !current.tokenUrl) {
-    throw new Error('PCM live credentials are not connected');
-  }
-
-  const response = await fetch(current.tokenUrl, {
-    method: 'POST',
-    headers: { 'Content-Type': 'application/json', Accept: 'application/json' },
-    body: JSON.stringify({ apiKey: current.key, apiSecret: current.secret }),
-  });
-  const text = await response.text();
-  let data: any = {};
-  try {
-    data = JSON.parse(text);
-  } catch {
-    // Keep the normalized provider error below.
-  }
-  if (!response.ok) throw new Error(`PCM token request failed (${response.status})`);
-  cached = clean(data.token ?? data.accessToken ?? data.access_token, 4000);
-  if (!cached) throw new Error('PCM token response was invalid');
-  expiry = Date.now() + 45 * 60000;
-  return cached;
 }
 
 async function hash(text: string) {
   const bytes = await crypto.subtle.digest('SHA-256', new TextEncoder().encode(text));
   return Array.from(new Uint8Array(bytes)).map((value) => value.toString(16).padStart(2, '0')).join('');
-}
-
-function reportedCount(value: unknown) {
-  if (value === null || value === undefined || value === '') return null;
-  const parsed = Number(value);
-  return Number.isFinite(parsed) && parsed >= 0 ? Math.trunc(parsed) : null;
-}
-
-function providerRecipientOutcome(output: any, expectedRecipientCount: number) {
-  const successfulOrders = Array.isArray(output?.successfulOrders) ? output.successfulOrders : [];
-  const failedOrders = Array.isArray(output?.failedOrders) ? output.failedOrders : [];
-  const orders = [...successfulOrders, ...failedOrders];
-  const sumReported = (key: string) => {
-    let reported = false;
-    let total = 0;
-    for (const order of orders) {
-      const value = reportedCount(order?.[key]);
-      if (value === null) continue;
-      reported = true;
-      total += value;
-    }
-    return reported ? total : null;
-  };
-  const acceptedRecipientCount = sumReported('successfulRecipientCount');
-  const rejectedRecipientCount = sumReported('failedRecipientCount');
-  const reconciliationRequired = failedOrders.length > 0
-    || (rejectedRecipientCount !== null && rejectedRecipientCount > 0)
-    || (acceptedRecipientCount !== null && acceptedRecipientCount !== expectedRecipientCount);
-  return {
-    successful_order_count: successfulOrders.length,
-    failed_order_count: failedOrders.length,
-    expected_recipient_count: expectedRecipientCount,
-    provider_accepted_recipient_count: acceptedRecipientCount,
-    provider_rejected_recipient_count: rejectedRecipientCount,
-    recipient_count_reconciliation_required: reconciliationRequired,
-  };
 }
 
 Deno.serve(async (req) => {
@@ -212,6 +134,10 @@ Deno.serve(async (req) => {
     .maybeSingle();
   if (creativeResult.error || !creativeResult.data) return reply(409, { error: 'Approved creative is missing' });
   const creative = creativeResult.data;
+  const review = campaign.settings?.pcm_design?.proof_review;
+  if (review?.creative_id && (review.creative_id !== creative.id || String(review.design_id) !== String(creative.provider_design_id))) {
+    return reply(409, { error: 'The approved proof does not match the latest approved design', code: 'PCM_PROOF_STALE' });
+  }
   if (!clean(creative.provider_design_id, 80)) {
     return reply(409, { error: 'PCM Design ID is required before fulfillment', code: 'PCM_DESIGN_REQUIRED' });
   }
@@ -366,56 +292,31 @@ Deno.serve(async (req) => {
   await admin.from('marketing_provider_jobs').update({ status: 'submitting', updated_at: new Date().toISOString() }).eq('id', job.id);
 
   try {
-    const token = await pcmToken();
     const design = /^\d+$/.test(String(creative.provider_design_id))
       ? Number(creative.provider_design_id)
       : creative.provider_design_id;
-    const payload = [{
+    const returnAddress = returnAddressFrom(campaign.settings?.return_address);
+    const order: any = {
       extRefNbr: `WD-${campaignId.slice(0, 8)}-${approval.id.slice(0, 8)}`,
-      orderConfig: {
-        designID: design,
-        mailClass: 'FirstClass',
-        globalDesignVariables: [],
-      },
-      recipientList: recipients.data.map((recipient: any) => ({
+      mailClass: 'FirstClass',
+      designID: design,
+      globalDesignVariables: [],
+      recipients: recipients.data.map((recipient: any) => ({
         firstName: 'Current',
         lastName: 'Resident',
         address: clean(recipient.address, 140),
-        address2: '',
         city: clean(recipient.city, 80),
         state: clean(recipient.state || 'NJ', 2),
         zipCode: clean(recipient.zip, 10).slice(0, 5),
         extRefNbr: clean(recipient.property_key, 160),
-        recipientDesignVariables: [],
       })),
-    }];
+    };
+    if (returnAddress) order.returnAddress = returnAddress;
 
-    const response = await fetch(current.base + current.path, {
-      method: 'POST',
-      headers: {
-        Authorization: `Bearer ${token}`,
-        Accept: 'application/json',
-        'Content-Type': 'Postcard',
-      },
-      body: JSON.stringify(payload),
-    });
-    const text = await response.text();
-    let output: any = {};
-    try {
-      output = JSON.parse(text);
-    } catch {
-      output = { message: clean(text, 500) };
-    }
-    if (!response.ok) {
-      throw new Error(`PCM order request failed (${response.status}): ${clean(output?.message || output?.error, 500)}`);
-    }
-
+    const { data: output } = await pcmRequest('live', childRef(payment.user_id), 'POST', '/order/postcard', order);
     const batch = clean(output?.batchID, 160) || null;
-    const orderId = clean(output?.successfulOrders?.[0]?.orderID, 160) || null;
-    const outcome = providerRecipientOutcome(output, recipients.data.length);
-    if (outcome.failed_order_count && !outcome.successful_order_count) {
-      throw new Error('PCM did not accept the production order');
-    }
+    const orderId = clean(output?.orderID, 160) || null;
+    if (!orderId && !batch) throw new Error('PCM did not return an order number');
 
     const now = new Date().toISOString();
     const done = await admin
@@ -426,12 +327,12 @@ Deno.serve(async (req) => {
         response_summary: {
           batch_id: batch,
           order_id: orderId,
-          successful_orders: outcome.successful_order_count,
-          failed_orders: outcome.failed_order_count,
-          expected_recipient_count: outcome.expected_recipient_count,
-          provider_accepted_recipient_count: outcome.provider_accepted_recipient_count,
-          provider_rejected_recipient_count: outcome.provider_rejected_recipient_count,
-          recipient_count_reconciliation_required: outcome.recipient_count_reconciliation_required,
+          api_version: 'v3',
+          environment: 'live',
+          child_ref: childRef(payment.user_id),
+          expected_recipient_count: recipients.data.length,
+          return_address_set: Boolean(returnAddress),
+          cancel_deadline: cancelDeadline(now).toISOString(),
           provider_order_status: 'pending',
           initial_launch_contract: true,
         },
@@ -444,21 +345,8 @@ Deno.serve(async (req) => {
 
     await admin.from('marketing_launch_approvals').update({ status: 'consumed', consumed_at: now }).eq('id', approval.id);
 
-    if (outcome.recipient_count_reconciliation_required) {
-      return reply(202, {
-        submitted: false,
-        provider_submission_detected: Boolean(orderId || batch || outcome.successful_order_count),
-        reconciliation_required: true,
-        code: 'PROVIDER_RECIPIENT_RECONCILIATION_REQUIRED',
-        job: done.data,
-        provider: { batch_id: batch, order_id: orderId, initial_status: 'pending' },
-        expected_recipient_count: outcome.expected_recipient_count,
-        provider_accepted_recipient_count: outcome.provider_accepted_recipient_count,
-        provider_rejected_recipient_count: outcome.provider_rejected_recipient_count,
-        failed_order_count: outcome.failed_order_count,
-        credit_reconciliation_required: creditCents > 0,
-      });
-    }
+    // Mail credits held by this paid quote are now spent.
+    await admin.rpc('marketing_mail_credit_redeem', { p_user_id: payment.user_id, p_quote_id: quote.id });
 
     await admin.from('marketing_campaigns').update({ status: 'live', launched_at: now, updated_at: now }).eq('id', campaignId).eq('user_id', payment.user_id);
     await admin.from('marketing_events').insert({
@@ -473,8 +361,6 @@ Deno.serve(async (req) => {
         batch_id: batch,
         order_id: orderId,
         recipient_count: recipients.data.length,
-        provider_accepted_recipient_count: outcome.provider_accepted_recipient_count,
-        provider_rejected_recipient_count: outcome.provider_rejected_recipient_count,
         product_type: product,
         size_label: INITIAL_PCM_SIZE,
         mail_class: INITIAL_PCM_MAIL_CLASS,
@@ -490,8 +376,6 @@ Deno.serve(async (req) => {
       job: done.data,
       provider: { batch_id: batch, order_id: orderId, initial_status: 'pending' },
       recipient_count: recipients.data.length,
-      provider_accepted_recipient_count: outcome.provider_accepted_recipient_count,
-      provider_rejected_recipient_count: outcome.provider_rejected_recipient_count,
       format: { size_label: INITIAL_PCM_SIZE, mail_class: INITIAL_PCM_MAIL_CLASS },
     });
   } catch (error) {
