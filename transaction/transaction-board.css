@@ -1,0 +1,98 @@
+/* ==========================================================================
+   Transactions in the Watchdog board design. Presentation only: the
+   transaction scripts render every value, action and evidence row.
+   Loads last so it wins over the earlier transaction style layers.
+   ========================================================================== */
+html body[data-sidebar-page="transaction"]{
+  --tb-bg:#f3f1ec;--tb-surface:#fbfaf7;--tb-line:#e3dfd6;--tb-ink:#0e2248;--tb-muted:#5d6877;
+  --tb-navy:#0e2248;--tb-blue:#1456a0;--tb-blue-bright:#2f6df6;--tb-gold:#b8972a;
+  --tb-sky:#e3edfb;--tb-sky-deep:#b9d0f2;--tb-teal:#dff1ec;--tb-teal-deep:#9fd3c5;--tb-sand:#f6efd9;--tb-sand-deep:#e4cf8e;
+  --tb-red:#f7e2df;--tb-red-ink:#8a2c22;
+  --tb-display:"Plus Jakarta Sans",Inter,system-ui,sans-serif;
+}
+html body[data-sidebar-page="transaction"],
+html body[data-sidebar-page="transaction"] .tx-page,
+html body[data-sidebar-page="transaction"] #tx-v2-shell,
+html body[data-sidebar-page="transaction"] #tx-v2-shell .txv2-workspace{background:var(--tb-bg)!important}
+html body[data-sidebar-page="transaction"] .wdx-topbar{background:rgba(251,250,247,.94)!important}
+html body[data-sidebar-page="transaction"] #tx-v2-shell{word-spacing:.04em;font-family:var(--tb-display)}
+
+/* Left rail: warm, with the selected deal as a navy pill */
+html body[data-sidebar-page="transaction"] #tx-v2-shell .txv2-rail{background:var(--tb-bg)!important;border-right:1px solid var(--tb-line)!important}
+html body[data-sidebar-page="transaction"] #tx-v2-shell .txv2-search{border:1px solid var(--tb-line)!important;border-radius:999px!important;background:#fff!important;box-shadow:none!important}
+html body[data-sidebar-page="transaction"] #tx-v2-shell .txv2-list-row{margin-bottom:6px!important;border:0!important;border-radius:14px!important;background:transparent!important;color:var(--tb-ink)!important}
+html body[data-sidebar-page="transaction"] #tx-v2-shell .txv2-list-row:hover{background:#fff!important}
+html body[data-sidebar-page="transaction"] #tx-v2-shell .txv2-list-row.active{background:var(--tb-navy)!important;color:#fff!important}
+html body[data-sidebar-page="transaction"] #tx-v2-shell .txv2-list-row.active:before{display:none!important}
+html body[data-sidebar-page="transaction"] #tx-v2-shell .txv2-list-row.active :is(strong,span,small,b){color:#fff!important}
+html body[data-sidebar-page="transaction"] #tx-v2-shell .txv2-portfolio{padding:16px!important;border:0!important;border-radius:20px!important;background:#fff!important}
+
+/* Property header: one rounded white card */
+html body[data-sidebar-page="transaction"] #tx-v2-shell .txv2-utility{background:transparent!important;border:0!important}
+html body[data-sidebar-page="transaction"] #tx-v2-shell .txv2-property-head{margin:0 28px!important;padding:24px 28px!important;border:0!important;border-radius:24px 24px 0 0!important;background:#fff!important;box-shadow:none!important}
+html body[data-sidebar-page="transaction"] #tx-v2-shell #txv2-property-title{color:var(--tb-ink)!important;font:700 32px/1.15 var(--tb-display)!important;letter-spacing:-.02em!important}
+html body[data-sidebar-page="transaction"] #tx-v2-shell #txv2-property-meta{color:var(--tb-muted)!important}
+html body[data-sidebar-page="transaction"] #tx-v2-shell .txv2-tabs{margin:0 28px!important;padding:0 20px 14px!important;gap:6px!important;border:0!important;border-radius:0 0 24px 24px!important;background:#fff!important;box-shadow:none!important}
+html body[data-sidebar-page="transaction"] #tx-v2-shell .txv2-tabs>button,
+html body[data-sidebar-page="transaction"] #tx-v2-shell .txv2-more-wrap>button{min-height:40px!important;padding:0 16px!important;border:1px solid var(--tb-line)!important;border-radius:999px!important;background:#fff!important;color:var(--tb-ink)!important;font:600 14px var(--tb-display)!important}
+html body[data-sidebar-page="transaction"] #tx-v2-shell .txv2-tabs>button[aria-current]:not([aria-current="false"]),
+html body[data-sidebar-page="transaction"] #tx-v2-shell .txv2-more-wrap>button.active{background:var(--tb-navy)!important;border-color:var(--tb-navy)!important;color:#fff!important}
+html body[data-sidebar-page="transaction"] #tx-v2-shell .txv2-tabs>button[aria-current]:not([aria-current="false"]):after,
+html body[data-sidebar-page="transaction"] #tx-v2-shell .txv2-more-wrap>button.active:after{display:none!important}
+
+/* Buttons */
+html body[data-sidebar-page="transaction"] #tx-v2-shell :is(.txv2-add,.txv2-strong-action,.txv2-issue>button,.txv2-empty-add){border:0!important;border-radius:999px!important;background:var(--tb-navy)!important;color:#fff!important;box-shadow:none!important}
+html body[data-sidebar-page="transaction"] #tx-v2-shell :is(.txv2-add,.txv2-strong-action,.txv2-issue>button,.txv2-empty-add):hover{background:var(--tb-blue)!important}
+html body[data-sidebar-page="transaction"] #tx-v2-shell :is(.txv2-invite,.txv2-icon-button,.txv2-upload,.txv2-refresh){border:1px solid var(--tb-line)!important;border-radius:999px!important;background:#fff!important;color:var(--tb-ink)!important;box-shadow:none!important}
+html body[data-sidebar-page="transaction"] #tx-v2-shell .txv2-link{color:var(--tb-blue)!important;font-weight:700!important}
+html body[data-sidebar-page="transaction"] #tx-v2-shell :is(button,a):focus-visible{outline:3px solid var(--tb-blue-bright)!important;outline-offset:2px}
+
+/* Other tabs (Evidence, Documents, Timeline, Activity...) */
+html body[data-sidebar-page="transaction"] #tx-v2-shell .txv2-secondary{margin:18px 28px 28px!important;border:0!important;border-radius:24px!important;background:#fff!important;box-shadow:none!important}
+
+/* Work area */
+html body[data-sidebar-page="transaction"] #tx-v2-shell .txv2-overview-grid{padding-top:18px!important}
+html body[data-sidebar-page="transaction"] #tx-v2-shell .txv2-issue{border:0!important;border-radius:20px!important;background:var(--tb-red)!important;box-shadow:none!important}
+html body[data-sidebar-page="transaction"] #tx-v2-shell .txv2-issue :is(strong,b,h2,h3){color:var(--tb-red-ink)!important}
+html body[data-sidebar-page="transaction"] #tx-v2-shell .txv2-evidence-section{padding:22px!important;border-radius:24px!important;background:#fff!important}
+html body[data-sidebar-page="transaction"] #tx-v2-shell .txv2-section-head :is(h2,h3){color:var(--tb-ink)!important;font:700 22px/1.2 var(--tb-display)!important;letter-spacing:-.015em!important}
+html body[data-sidebar-page="transaction"] #tx-v2-shell .txv2-evidence-table-wrap{overflow:hidden;border:1px solid var(--tb-line)!important;border-radius:18px!important}
+html body[data-sidebar-page="transaction"] #tx-v2-shell .txv2-evidence-table thead th{background:var(--tb-surface)!important;color:var(--tb-muted)!important;border-color:var(--tb-line)!important;font-size:12px!important;font-weight:700!important;letter-spacing:.04em;text-transform:uppercase}
+html body[data-sidebar-page="transaction"] #tx-v2-shell .txv2-evidence-table td{border-color:#efebe4!important;color:var(--tb-ink)}
+html body[data-sidebar-page="transaction"] #tx-v2-shell .txv2-evidence-table tbody tr{background:#fff!important}
+html body[data-sidebar-page="transaction"] #tx-v2-shell .txv2-evidence-table tbody tr:hover{background:var(--tb-surface)!important}
+html body[data-sidebar-page="transaction"] #tx-v2-shell .txv2-evidence-table tbody tr:has(.txv2-status.issue){background:#fffaf8!important}
+
+/* Status as rounded pills */
+html body[data-sidebar-page="transaction"] #tx-v2-shell .txv2-status{display:inline-flex!important;align-items:center;gap:6px;min-height:26px;padding:0 12px!important;border-radius:999px!important;background:var(--tb-sand)!important;color:#6b5412!important;font-size:12px!important;font-weight:700!important;white-space:nowrap}
+html body[data-sidebar-page="transaction"] #tx-v2-shell .txv2-status i{display:none!important}
+html body[data-sidebar-page="transaction"] #tx-v2-shell .txv2-status.issue{background:var(--tb-red)!important;color:var(--tb-red-ink)!important}
+html body[data-sidebar-page="transaction"] #tx-v2-shell :is(.txv2-status.clear,.txv2-status.ok,.txv2-status.resolved){background:var(--tb-teal)!important;color:#0f5f58!important}
+html body[data-sidebar-page="transaction"] #tx-v2-shell :is(.txv2-status.none,.txv2-status.no-match){background:#eef0f4!important;color:var(--tb-muted)!important}
+
+/* Right column: closing (sky), readiness (navy), then white cards */
+html body[data-sidebar-page="transaction"] #tx-v2-shell .txv2-context{display:grid!important;gap:14px!important;align-content:start;border:0!important;padding-left:0!important}
+html body[data-sidebar-page="transaction"] #tx-v2-shell .txv2-context>section{margin:0!important;padding:20px!important;border:0!important;border-radius:22px!important;background:#fff!important;box-shadow:none!important}
+html body[data-sidebar-page="transaction"] #tx-v2-shell .txv2-context>section:nth-of-type(1){background:var(--tb-sky)!important}
+html body[data-sidebar-page="transaction"] #tx-v2-shell .txv2-context>section:nth-of-type(2){position:relative;overflow:hidden;background:var(--tb-navy)!important;color:#fff!important}
+html body[data-sidebar-page="transaction"] #tx-v2-shell .txv2-context>section:nth-of-type(2) :is(h2,strong,b,span,small,p){color:#fff!important}
+html body[data-sidebar-page="transaction"] #tx-v2-shell .txv2-context>section:nth-of-type(2) .txv2-meter{background:rgba(255,255,255,.18)!important;border-radius:999px!important}
+html body[data-sidebar-page="transaction"] #tx-v2-shell .txv2-context>section:nth-of-type(2) .txv2-meter>*{background:var(--tb-gold)!important;border-radius:999px!important}
+html body[data-sidebar-page="transaction"] #tx-v2-shell .txv2-context>section:nth-of-type(2) .txv2-link{color:#fff!important;text-decoration:underline;text-underline-offset:3px}
+html body[data-sidebar-page="transaction"] #tx-v2-shell .txv2-context>section:nth-of-type(2)::after{content:"";position:absolute;right:-30px;bottom:-40px;width:96px;height:112px;opacity:.45;pointer-events:none;background:no-repeat center/contain url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 116'%3E%3Cpath fill='%231456a0' d='M50 2 94 18v34c0 30-19 52-44 62C25 104 6 82 6 52V18Z'/%3E%3C/svg%3E")}
+html body[data-sidebar-page="transaction"] #tx-v2-shell .txv2-context>section:nth-of-type(2)>*{position:relative;z-index:1}
+html body[data-sidebar-page="transaction"] #tx-v2-shell .txv2-context h2{color:var(--tb-ink);font:700 18px/1.25 var(--tb-display)!important}
+html body[data-sidebar-page="transaction"] #tx-v2-shell .txv2-context-row{border-color:#efebe4!important}
+
+@media (max-width:900px){
+  html body[data-sidebar-page="transaction"] #tx-v2-shell .txv2-property-head,
+  html body[data-sidebar-page="transaction"] #tx-v2-shell .txv2-tabs{margin:0 12px!important}
+  html body[data-sidebar-page="transaction"] #tx-v2-shell .txv2-property-head{padding:18px!important}
+  html body[data-sidebar-page="transaction"] #tx-v2-shell .txv2-tabs{padding:0 14px 12px!important;overflow-x:auto}
+  html body[data-sidebar-page="transaction"] #tx-v2-shell .txv2-evidence-section{padding:14px!important}
+  html body[data-sidebar-page="transaction"] #tx-v2-shell #txv2-property-title{font-size:26px!important}
+}
+@media print{
+  html body[data-sidebar-page="transaction"] #tx-v2-shell .txv2-context>section{background:#fff!important;color:#000!important;border:1px solid #bbb!important}
+  html body[data-sidebar-page="transaction"] #tx-v2-shell .txv2-context>section::after{display:none}
+}

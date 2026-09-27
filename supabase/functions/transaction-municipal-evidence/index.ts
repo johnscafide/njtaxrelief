@@ -39,6 +39,13 @@ function pickAddressMatch(rows:Row[],tx:Row){
   }
   return null;
 }
+// NJ has two municipal numberings: the MOD-IV/PIN district code Watchdog keys by, and the
+// state county/municipal code (Treasury Abstract, DCA). They differ for 99 renamed towns.
+// WIPP ids are confirmed by the town name Edmunds returns; if the PIN code answers with a
+// different town, the state code is tried. Map: PIN code -> [state code, town name key].
+// Source: property/data/nj-district-crosswalk.json
+const NJ_CODE_ALT:Record<string,[string,string]>={"1209":["1210","metuchen"],"1210":["1211","middlesex"],"1211":["1212","milltown"],"1212":["1213","monroe"],"1213":["1214","newbrunswick"],"1214":["1215","northbrunswick"],"1215":["1209","oldbridge"],"1301":["1330","aberdeen"],"1302":["1301","allenhurst"],"1303":["1302","allentown"],"1304":["1303","asburypark"],"1305":["1304","atlantichighlands"],"1306":["1305","avonbysea"],"1307":["1306","belmar"],"1308":["1307","bradleybeach"],"1309":["1308","brielle"],"1310":["1309","coltsneck"],"1311":["1310","deal"],"1312":["1311","eatontown"],"1313":["1312","englishtown"],"1314":["1313","fairhaven"],"1315":["1314","farmingdale"],"1316":["1315","freehold"],"1317":["1316","freehold"],"1318":["1339","hazlet"],"1319":["1317","highlands"],"1320":["1318","holmdel"],"1321":["1319","howell"],"1322":["1320","interlaken"],"1323":["1321","keansburg"],"1324":["1322","keyport"],"1325":["1323","littlesilver"],"1326":["1324","locharbour"],"1327":["1325","longbranch"],"1328":["1326","manalapan"],"1329":["1327","manasquan"],"1330":["1328","marlboro"],"1331":["1329","matawan"],"1332":["1331","middletown"],"1333":["1332","millstone"],"1334":["1333","monmouthbeach"],"1335":["1334","neptune"],"1336":["1335","neptune"],"1339":["1340","redbank"],"1340":["1341","roosevelt"],"1341":["1342","rumson"],"1342":["1343","seabright"],"1343":["1344","seagirt"],"1344":["1345","shrewsbury"],"1345":["1346","shrewsbury"],"1346":["1347","lakecomo"],"1347":["1348","springlake"],"1348":["1349","springlakeheights"],"1349":["1336","tintonfalls"],"1501":["1533","barnegat"],"1502":["1501","barnegatlight"],"1503":["1502","bayhead"],"1504":["1503","beachhaven"],"1505":["1504","beachwood"],"1506":["1505","berkeley"],"1507":["1506","brick"],"1508":["1507","tomsriver"],"1509":["1508","eagleswood"],"1510":["1509","harveycedars"],"1511":["1510","islandheights"],"1512":["1511","jackson"],"1513":["1512","lacey"],"1514":["1513","lakehurst"],"1515":["1514","lakewood"],"1516":["1515","lavallette"],"1517":["1516","littleeggharbor"],"1518":["1517","longbeach"],"1519":["1518","manchester"],"1520":["1519","mantoloking"],"1521":["1520","ocean"],"1522":["1521","oceangate"],"1523":["1522","pinebeach"],"1524":["1523","plumsted"],"1525":["1524","pointpleasant"],"1526":["1525","pointpleasantbeach"],"1527":["1526","seasideheights"],"1528":["1527","seasidepark"],"1529":["1528","shipbottom"],"1530":["1529","southtomsriver"],"1531":["1530","stafford"],"1532":["1531","surf"],"1533":["1532","tuckerton"],"1702":["1713","carneyspoint"],"1703":["1702","elmer"],"1704":["1703","elsinboro"],"1705":["1704","lowerallowayscreek"],"1706":["1705","mannington"],"1707":["1706","oldmans"],"1708":["1707","pennsgrove"],"1709":["1708","pennsville"],"1710":["1709","pilesgrove"],"1711":["1710","pittsgrove"],"1712":["1711","quinton"],"1713":["1712","salem"]};
+const townKey=(v:unknown)=>String(v??"").toLowerCase().replace(/\b(township|twp|borough|boro|city|town|village|of|the)\b/g," ").replace(/[^a-z]/g,"");
 function wippHeaders(id:string){return {"X-Wipp-Id":id,"User-Agent":UA,"Accept":"application/json"}}
 async function wippGet(id:string,path:string,timeoutMs=8000){
   const controller=new AbortController();const timeout=setTimeout(()=>controller.abort(),timeoutMs);
@@ -99,8 +106,10 @@ Deno.serve(async(req:Request)=>{
   const results:Row[]=[];
 
   const processTx=async(tx:Row)=>{
-    const district=districtFor(tx);if(!district)return {transaction_id:tx.id,provider:"wipp",status:"no_district"};
-    const meta=await getMeta(district);if(!meta?.ok||!meta.data)return {transaction_id:tx.id,provider:"wipp",wipp_id:district,status:"provider_not_available",http_status:meta?.status||0};
+    const pinDistrict=districtFor(tx);if(!pinDistrict)return {transaction_id:tx.id,provider:"wipp",status:"no_district"};
+    let district=pinDistrict,meta=await getMeta(pinDistrict);const alt=NJ_CODE_ALT[pinDistrict];
+    if(alt&&!(meta?.ok&&meta.data&&townKey(meta.data.cityName).includes(alt[1]))){const m2=await getMeta(alt[0]);if(m2?.ok&&m2.data&&townKey(m2.data.cityName).includes(alt[1])){district=alt[0];meta=m2}else return {transaction_id:tx.id,provider:"wipp",wipp_id:pinDistrict,status:"provider_not_available",reason:"town_not_confirmed"}}
+    if(!meta?.ok||!meta.data)return {transaction_id:tx.id,provider:"wipp",wipp_id:district,status:"provider_not_available",http_status:meta?.status||0};
     const term=searchTerm(tx.address);if(!term)return {transaction_id:tx.id,provider:"wipp",wipp_id:district,status:"address_unusable"};
     const providerLabel=`${clean(meta.data.cityName,160)||clean(tx.municipality,160)||"Municipality"} · Edmunds GovTech WIPP`;
     const providerKey=`edmunds-wipp-${district}`;

@@ -16,8 +16,14 @@ must(proPage.includes('/property/js/professional-invite.js'), 'The Professional 
 
 const invite=read('property/js/professional-invite.js');
 must(invite.includes('Invite fellow co-op agents') && invite.includes('Invite your professional sphere'), 'Agents and other professionals must each get their own invite heading.');
-must(/'WD-' \+ String\(user\.id\)\.replace\(\/-\/g, ''\)\.slice\(0, 10\)\.toUpperCase\(\)/.test(invite), 'The invite code must match the shared invite modal format.');
-must(!invite.includes("'/property/?ref="), 'The invite link must use the route prefix, not a hard-coded /property/ public path.');
+// Every invite surface uses the tracked member referral link, so joins are credited.
+const REFERRAL="https://www.watchdogindex.com/?utm_source=watchdog_referral&utm_medium=member&utm_campaign=";
+for (const f of ['property/js/professional-invite.js','property/js/watchdog-invite.js','property/js/watchdog-universal-menu.js','property/js/app-shell-2027.js']) {
+  const src=read(f);
+  must(src.includes(REFERRAL) && src.includes("get_or_create_my_watchdog_referral_code"), f+' must use the tracked member referral link.');
+  must(!/\?ref=/.test(src) && !/'WD-' ?\+/.test(src), f+' must not build the old untracked WD-/?ref= invite.');
+}
+must(invite.includes("from('watchdog_referral_conversions')"), 'The invite panel must show how many people joined with the invite.');
 must(!/functions\.invoke|\.insert\(|\.update\(|\.upsert\(|fetch\(/.test(invite), 'The invite panel only copies text; it must not send or write anything.');
 
 for (const f of ['property/js/professional-license-verification.js','property/js/onboarding-professional-license.js','property/js/realtor-verification.js','api/njrec-license-verify.js','property/agent/index.html']) {

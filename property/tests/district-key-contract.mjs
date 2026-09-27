@@ -22,6 +22,20 @@ must(new Set(codes.map(c=>crosswalk[c].dca_code)).size===564,'Each state municip
 const cod=read('property/data/cod/cod-history.json').municipalities.map(r=>r.code).sort();
 must(JSON.stringify(cod)===JSON.stringify([...codes].sort()),'Crosswalk keys must be the official COD table district codes.');
 
+// Official NJGIN municipal boundaries carry both numberings: MUN_CODE (PIN district
+// code) and SSN (state county/municipal code). The crosswalk must agree on every town.
+const boundaries=read('Municipal_Boundaries_of_NJ.json').features.map(f=>f.properties);
+must(boundaries.length===564,'The official municipal boundary file must list 564 municipalities.');
+const badBoundary=boundaries.filter(p=>!crosswalk[String(p.MUN_CODE).padStart(4,'0')]||crosswalk[String(p.MUN_CODE).padStart(4,'0')].dca_code!==String(p.SSN).padStart(4,'0'));
+must(!badBoundary.length,`Crosswalk must match the official boundary file (MUN_CODE -> SSN): ${badBoundary.slice(0,5).map(p=>p.MUN_CODE+'->'+p.SSN).join('; ')}`);
+
+// The NJPropertyTaxRelief tax map joins tax-data.json to the boundary file by MUN_CODE.
+const officialName=Object.fromEntries(boundaries.map(p=>[String(p.MUN_CODE).padStart(4,'0'),p.MUN]));
+const simple=s=>String(s||'').toUpperCase().replace(/TOWNSHIP/g,'TWP').replace(/BOROUGH/g,'BORO').replace(/^MT /,'MOUNT ').replace(/[^A-Z]/g,'').replace(/CITYCITY$/,'CITY').replace(/(TWP|BORO|CITY|TOWN|VILLAGE)$/,'');
+const taxData=read('tax-data.json');
+const badTax=Object.entries(taxData).filter(([code,row])=>!officialName[code]||(simple(row.name)!==simple(officialName[code])&&!['0717','1704'].includes(code)));
+must(!badTax.length,`tax-data.json rows must sit on their PIN district code: ${badTax.slice(0,5).map(([c,r])=>c+' '+r.name+' vs '+officialName[c]).join('; ')}`);
+
 // Town names seen on real property records by PIN prefix (production lookups).
 const VERIFIED={'0102':'Atlantic City','0415':'Gloucester Township','0436':'Winslow Township','0818':'Washington Township','1225':'Woodbridge Township','1325':'Little Silver Borough','1326':'Loch Arbour Village','1330':'Marlboro Township','1512':'Jackson Township','1517':'Little Egg Harbor Township','1521':'Ocean Township','1531':'Stafford Township'};
 for(const [code,name] of Object.entries(VERIFIED)) must(norm(crosswalk[code].name)===norm(name),`Crosswalk ${code} must be ${name} (verified PIN prefix), found ${crosswalk[code].name}.`);
