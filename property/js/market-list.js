@@ -140,6 +140,7 @@ function drawTable(){
   const host=qs('#ml-content');if(!host)return;
   const a=filteredRows(),radius=list.scope_type==='radius',intel=hasIntel(),over=assessmentMode();
   const allOn=a.length&&a.every(r=>selected.has(pinOf(r)));
+  // content-architecture: dynamic — the table is built from the filtered, sorted farm rows and the agent's CRM matches.
   host.innerHTML=a.length?`<div class="ml-table-wrap"><table class="ml-table${over?' ml-over-table':''}"><thead><tr><th class="ml-check"><input type="checkbox" id="ml-all" aria-label="Select every property shown" ${allOn?'checked':''}></th><th>${header('property','Property')}</th><th>${header('crm','Your CRM')}</th><th>${header('assessment','Assessment')}</th>${over?`<th>${header('sale','Recorded sale')}</th><th class="ml-th-plain">Ratio / upper limit</th><th>${header('supported','Supported assessment')}</th><th>${header('reduction','Est. reduction')}</th><th>${header('annual','Annual tax impact')}</th><th>${header('overpct','% above upper')}</th>`:`<th>${header('tax','Tax')}</th><th>${header('held','Last deed')}</th>${intel?`<th>${header('wdscore','WD Score')}</th><th>${header('taxpressure','Tax Pressure')}</th><th>${header('uniformity','Uniformity')}</th><th>${header('reval','Reval Risk')}</th>`:`<th>${header('year','Built')}</th><th>${header('use','Use')}</th>`}<th>${header('sale','Last sale')}</th>${radius?`<th>${header('distance','Distance')}</th>`:''}`}<th class="ml-th-plain">Actions</th></tr></thead><tbody>${a.map(r=>{
     const href=propertyHref(r),pin=pinOf(r),done=deskPins.has(pin)&&(!over||assessmentPins.has(pin)),e=enrich[pin]||{},mv=k=>{const v=metric(r,k);return v===null||v===undefined?'—':Number(v).toLocaleString(undefined,{maximumFractionDigits:2})};
     return `<tr data-pin="${esc(pin)}" data-address="${esc(r.address)}" data-town="${esc(r.town)}" data-county="${esc(r.county)}" data-zip="${esc(r.zip)}"${selected.has(pin)?' class="is-picked"':''}><td class="ml-check"><input type="checkbox" data-pick="${esc(pin)}" aria-label="Select ${esc(r.address||'property')}" ${selected.has(pin)?'checked':''}></td><td><a class="ml-address" href="${href}">${esc(r.address||'Property record')}</a><span class="ml-sub">${esc(e.postal_city?titleCase(e.postal_city)+' · ':'')}${esc(r.town||'')}${r.block?' · Block '+esc(r.block):''}${r.lot?' / Lot '+esc(r.lot):''}</span>${e.owner_mails_elsewhere?'<span class="ml-flag" title="The tax bill for this property is mailed to a different address">Tax bill mailed elsewhere</span>':''}</td><td>${crmCell(r)}</td><td>${money(r.assessed_value)}</td>${over?`<td>${money(r.last_sale_price)}</td><td>${ratio(metric(r,'watchdog.chapter123_assessment_ratio'))} / ${ratio(metric(r,'watchdog.chapter123_upper_limit'))}</td><td>${money(metric(r,'watchdog.chapter123_target_assessment'))}</td><td>${money(metric(r,'watchdog.chapter123_assessment_reduction'))}</td><td><b class="ml-impact">${money(metric(r,'watchdog.chapter123_annual_overpayment'))}</b></td><td>${mv('watchdog.chapter123_over_upper_pct')}%</td>`:`<td>${money(r.last_year_tax)}</td><td>${heldCell(r)}</td>${intel?`<td>${mv('watchdog.score')}</td><td>${mv('watchdog.tax_pressure')}</td><td>${mv('uniformity.score')}</td><td>${mv('watchdog.revaluation_risk')}</td>`:`<td>${esc(r.year_built||'—')}</td><td>${esc(r.prop_use||r.prop_class||'—')}</td>`}<td>${r.last_sale_price?money(r.last_sale_price):'—'}</td>${radius?`<td>${r.distance_miles!=null?Number(r.distance_miles).toFixed(2)+' mi':'—'}</td>`:''}`}<td><div class="ml-actions"><a class="ml-btn sm" href="${href}"><i class="fas fa-magnifying-glass" aria-hidden="true"></i> Open</a><button class="ml-btn sm ml-desk${done?' added':''}" type="button" ${done?'disabled':''}><i class="fas ${done?'fa-circle-check':'fa-bullseye'}" aria-hidden="true"></i> ${done?'Added':'Add to Desk'}</button></div></td></tr>`}).join('')}</tbody></table></div>`:`<div class="ml-empty"><i class="fas fa-filter-circle-xmark" aria-hidden="true"></i><h2>No properties match this view.</h2><p>${crmFilter!=='all'?'Try the "All" filter.':intel?'The selected Watchdog intelligence rules may be too narrow, or the required metric is not yet available for candidate parcels.':'Try changing the search term or farm criteria.'}</p></div>`;
@@ -164,6 +165,7 @@ function csvOf(heads,data){const cell=v=>{let s=String(v??'');if(/^[=+\-@]/.test
 function fileBase(){return(list.name||'watchdog-farm').replace(/[^a-z0-9]+/gi,'-').replace(/^-|-$/g,'').toLowerCase()||'watchdog-farm'}
 /* Postal city: the home's own, else the most common one among farm homes with the
    same ZIP, else the municipality name. The ZIP is what routes the mail. */
+// content-architecture: dynamic — postal city is looked up from this farm's own rows.
 function zipCity(zip){const z=String(zip||'').slice(0,5),n={};rows.forEach(r=>{const c=enrich[pinOf(r)]?.postal_city;if(c&&String(r.zip||'').slice(0,5)===z)n[c]=(n[c]||0)+1});let best='',m=0;for(const k in n)if(n[k]>m){m=n[k];best=k}return best}
 function cityOf(r){const e=enrich[pinOf(r)],c=(e&&e.postal_city)||zipCity(r.zip);if(c)return titleCase(c);return titleCase(String(r.town||'').replace(/\s+(TWP|TOWNSHIP|BORO|BOROUGH|CITY|TOWN|VILLAGE)$/i,''))}
 function addressee(r,mode){if(mode==='resident')return'Current Resident';if(mode==='homeowner')return'Homeowner';const n=knownName(r);return n?titleCase(n)+' or Current Resident':'Current Resident'}
@@ -200,17 +202,16 @@ function brief(){
   return items;
 }
 function paintSide(){
+  const en=qs('[data-f="enrichNote"]');if(en)en.textContent=enrichNote;
   const b=qs('#ml-brief');
+  // content-architecture: dynamic — each brief line is computed from the loaded farm rows, deed years and CRM matches.
   if(b){const items=brief();b.innerHTML=items.map(x=>`<li><i class="fas ${x.icon}" aria-hidden="true"></i><span>${x.text}${x.filter?` <button type="button" class="ml-link" data-crm-filter="${x.filter}">Show them</button>`:''}</span></li>`).join('')||'<li><i class="fas fa-circle-notch fa-spin" aria-hidden="true"></i><span>Reading this farm…</span></li>'}
   const c=qs('#ml-crm-body');if(!c)return;
   const conns=crm.connections.map(x=>`<div class="ml-conn"><span class="ml-conn-icon" aria-hidden="true"><i class="fas fa-plug"></i></span><div><b>${esc(x.provider==='boldtrail'?'BoldTrail (kvCORE)':x.label)}</b><small>${x.has_error?'Last sync had a problem. Check Integrations.':x.last_synced_at?'Synced '+esc(ago(x.last_synced_at))+(x.records_synced?' · '+x.records_synced.toLocaleString()+' contacts':''):'Waiting for first sync'}</small></div><span class="ml-dot${x.has_error?' bad':''}" aria-hidden="true"></span></div>`).join('');
   const known=rows.filter(r=>relFor(r).length).length;
-  c.innerHTML=`${crm.error?`<p class="ml-warn">${esc(crm.error)}</p>`:''}${conns||(crm.loaded?'<p class="ml-muted">No CRM connected yet. BoldTrail (kvCORE) syncs automatically once connected.</p>':'<p class="ml-muted">Checking your connections…</p>')}
-  <div class="ml-crm-meter"><div><b>${known.toLocaleString()}</b><span>of ${rows.length.toLocaleString()} loaded homes are in your CRM${imported.count?' or file':''}</span></div><div class="ml-meter" role="img" aria-label="${known} of ${rows.length} homes matched"><i style="width:${rows.length?Math.round(known/rows.length*100):0}%"></i></div></div>
-  ${crm.pending?`<p class="ml-muted"><i class="fas fa-circle-question" aria-hidden="true"></i> ${crm.pending} possible matches need a quick yes or no in Integrations.</p>`:''}
-  ${imported.count?`<div class="ml-file"><i class="fas fa-file-csv" aria-hidden="true"></i><span><b>${esc(imported.name)}</b><small>${imported.count.toLocaleString()} contacts · stays on this device</small></span><button type="button" class="ml-link" id="ml-file-clear">Remove</button></div>`:''}
-  <div class="ml-crm-actions"><a class="ml-btn" href="${esc(route('/integrations'))}"><i class="fas fa-plug" aria-hidden="true"></i> ${crm.connections.length?'Manage CRM':'Connect CRM'}</a><label class="ml-btn" for="ml-file"><i class="fas fa-file-arrow-up" aria-hidden="true"></i> Match a CSV</label><input type="file" id="ml-file" accept=".csv,text/csv" hidden></div>
-  <small class="ml-note">Use a CSV export from any database (Follow Up Boss, Lofty, Excel and so on). Watchdog matches it by street address in your browser and only keeps names and stages, never emails or phone numbers.</small>`;
+  // content-architecture: dynamic — connection status, sync times, match counts and the uploaded file all come from this agent's live CRM and device state.
+  c.innerHTML=`${crm.error?`<p class="ml-warn">${esc(crm.error)}</p>`:''}${conns||(crm.loaded?'<p class="ml-muted">No CRM connected yet. BoldTrail (kvCORE) syncs automatically once connected.</p>':'<p class="ml-muted">Checking your connections…</p>')}<div class="ml-crm-meter"><div><b>${known.toLocaleString()}</b><span>of ${rows.length.toLocaleString()} loaded homes are in your CRM${imported.count?' or file':''}</span></div><div class="ml-meter" role="img" aria-label="${known} of ${rows.length} homes matched"><i style="width:${rows.length?Math.round(known/rows.length*100):0}%"></i></div></div>${crm.pending?`<p class="ml-muted"><i class="fas fa-circle-question" aria-hidden="true"></i> ${crm.pending} possible matches need a quick yes or no in Integrations.</p>`:''}${imported.count?`<div class="ml-file"><i class="fas fa-file-csv" aria-hidden="true"></i><span><b>${esc(imported.name)}</b><small>${imported.count.toLocaleString()} contacts · stays on this device</small></span><button type="button" class="ml-link" id="ml-file-clear">Remove</button></div>`:''}`;
+  const link=qs('#ml-crm-link');if(link)link.textContent=crm.connections.length?'Manage CRM':'Connect CRM';
 }
 function askIntelligence(){
   const btn=qs('#ml-ask');if(btn){btn.disabled=true;btn.setAttribute('aria-busy','true')}
@@ -224,59 +225,27 @@ function askIntelligence(){
 }
 
 /* ------------------------------------------------------------- render -- */
+// Static page markup lives in <template id="ml-page"> in the HTML. This only
+// fills in the farm's own values and resolves clean routes.
+function fill(root,key,text){root.querySelectorAll(`[data-f="${key}"]`).forEach(n=>n.textContent=text)}
+function routeLinks(root){const lid=encodeURIComponent(list?list.id:'');root.querySelectorAll('[data-route]').forEach(a=>{a.href=route(a.dataset.route)+(a.hasAttribute('data-list-param')&&lid?'?list='+lid:'')})}
 function render(data){
   const avg=key=>{const x=rows.map(r=>Number(r[key])).filter(n=>n>0);return x.length?Math.round(x.reduce((a,b)=>a+b,0)/x.length):0};
   const intel=hasIntel(),over=assessmentMode(),scanNote=intel?`${Number(data.scanned_count||0).toLocaleString()} candidate parcels scanned${data.capacity_limited?' · plan capacity applied':''}${data.truncated?' · scan cap reached':''}`:'';
   if(over){sortKey='annual';sortDir=-1}
-  const lid=encodeURIComponent(list.id);
-  qs('#ml-app').innerHTML=`
-  <header class="ml-hero">
-    <div class="ml-hero-copy"><span class="ml-eyebrow"><i class="fas fa-seedling" aria-hidden="true"></i> Farm${over?' · Assessment screen':intel?' · Intelligence filtered':''}</span><h1>${esc(list.name)}</h1><p>${esc(list.scope_value)} · ${label()} · ${totalCount.toLocaleString()} matching parcels</p></div>
-    <div class="ml-hero-actions"><a class="ml-hbtn" href="${esc(route('/farm-builder'))}"><i class="fas fa-sliders" aria-hidden="true"></i> Edit farm</a><a class="ml-hbtn" href="${esc(route('/farm-map'))}?list=${lid}"><i class="fas fa-draw-polygon" aria-hidden="true"></i> Map</a><a class="ml-hbtn" href="${esc(route('/report-studio'))}?list=${lid}"><i class="fas fa-file-pdf" aria-hidden="true"></i> Reports</a><a class="ml-hbtn" href="${esc(route('/marketing-plan'))}?list=${lid}"><i class="fas fa-bullhorn" aria-hidden="true"></i> Marketing plan</a><button class="ml-hbtn gold" id="ml-refresh" type="button"><i class="fas fa-rotate" aria-hidden="true"></i> Refresh</button></div>
-  </header>
-  <section class="ml-stats" aria-label="Farm summary">
-    <div class="ml-stat t-sky"><b>${totalCount.toLocaleString()}</b><span>matching homes</span></div>
-    <div class="ml-stat t-teal"><b id="ml-loaded">${rows.length.toLocaleString()}</b><span>loaded now</span></div>
-    <div class="ml-stat t-sand"><b>${avg('assessed_value')?money(avg('assessed_value')):'—'}</b><span>avg assessment</span></div>
-    <div class="ml-stat t-rose"><b>${avg('last_year_tax')?money(avg('last_year_tax')):'—'}</b><span>avg annual tax</span></div>
-  </section>
-  <section class="ml-duo">
-    <article class="ml-card ml-intel" aria-labelledby="ml-intel-h">
-      <div class="ml-card-head"><h2 id="ml-intel-h">Watchdog <span class="wd-intelligence-brand-word">Intelligence</span> for this farm</h2><button class="ml-btn dark" id="ml-ask" type="button"><i class="fas fa-wand-magic-sparkles" aria-hidden="true"></i> Ask about this farm</button></div>
-      <ul class="ml-brief" id="ml-brief"></ul>
-      <small class="ml-note">${over?`Assessment review screening, not a predicted appeal outcome. ${esc(data.screening_note||'Verify current records before advising an owner.')}`:intel?`Your intelligence rules run after the statewide parcel search. ${esc(scanNote)}`:'Built from public NJ tax records and your own CRM. Watchdog never guesses who plans to sell.'}</small>
-    </article>
-    <article class="ml-card ml-crmcard" aria-labelledby="ml-crm-h">
-      <div class="ml-card-head"><h2 id="ml-crm-h"><i class="fas fa-arrows-rotate" aria-hidden="true"></i> Your CRM</h2></div>
-      <div id="ml-crm-body"></div>
-    </article>
-  </section>
-  <section class="ml-card ml-results" aria-labelledby="ml-results-h">
-    <div class="ml-toolbar">
-      <div class="ml-toolbar-left"><h2 id="ml-results-h">Homes in this farm</h2><span class="ml-count" id="ml-selcount"></span><button type="button" class="ml-link" id="ml-selclear" hidden>Clear selection</button></div>
-      <div class="ml-toolbar-right">
-        <div class="ml-seg" role="group" aria-label="CRM filter">${[['all','All'],['in','In my CRM'],['out','Not in CRM']].map(([k,t])=>`<button type="button" data-crm-filter="${k}" aria-pressed="${crmFilter===k}">${t}</button>`).join('')}</div>
-        <input id="ml-search" type="search" placeholder="Search address, name, ZIP, block/lot" aria-label="Search this farm">
-      </div>
-    </div>
-    <div class="ml-tools">
-      <button class="ml-btn" type="button" data-open="labels"><i class="fas fa-tags" aria-hidden="true"></i> Print labels</button>
-      <button class="ml-btn" type="button" data-open="download"><i class="fas fa-download" aria-hidden="true"></i> Download</button>
-      <button class="ml-btn" type="button" id="ml-bulk-desk"><i class="fas fa-bullseye" aria-hidden="true"></i> Add <span data-scope-label>shown</span> to Desk</button>
-      <small class="ml-muted">Actions use the homes you select, or every home shown if none are selected.</small>
-    </div>
-    <div class="ml-pop" id="ml-pop-labels" hidden><div class="ml-pop-grid">
-      <fieldset><legend>Label sheet</legend><label><input type="radio" name="ml-fmt" value="5160" checked> Avery 5160 · 30 per sheet</label><label><input type="radio" name="ml-fmt" value="5163"> Avery 5163 · 10 per sheet</label></fieldset>
-      <fieldset><legend>Addressed to</legend><label><input type="radio" name="ml-to" value="smart" checked> Name from your CRM or file, else "Current Resident"</label><label><input type="radio" name="ml-to" value="resident"> "Current Resident"</label><label><input type="radio" name="ml-to" value="homeowner"> "Homeowner"</label></fieldset>
-    </div><div class="ml-pop-actions"><button class="ml-btn dark" type="button" id="ml-print"><i class="fas fa-print" aria-hidden="true"></i> Print <span data-scope-label>shown</span></button><button class="ml-btn" type="button" id="ml-merge"><i class="fas fa-file-csv" aria-hidden="true"></i> Mail-merge file instead</button></div><small class="ml-note">Set the printer to "Actual size" (100%) so labels line up.</small></div>
-    <div class="ml-pop" id="ml-pop-download" hidden><div class="ml-dl">
-      <button type="button" class="ml-dl-opt" id="ml-export"><i class="fas fa-file-csv" aria-hidden="true"></i><span><b>CRM import (CSV)</b><small>Every column plus your CRM match. Imports into BoldTrail, Follow Up Boss, Excel and more.</small></span></button>
-      <button type="button" class="ml-dl-opt" id="ml-export-merge"><i class="fas fa-envelope" aria-hidden="true"></i><span><b>Mail merge (CSV)</b><small>Addressee, address, city, state and ZIP for Word or label software.</small></span></button>
-    </div></div>
-    <div id="ml-content"></div>
-    <button id="ml-more" class="ml-load" type="button"><i class="fas fa-chevron-down" aria-hidden="true"></i> Load more homes</button>
-    <p class="ml-source"><i class="fas fa-database" aria-hidden="true"></i> ${esc(data.source||'NJ statewide parcel data')}. New Jersey withholds owner names from its public parcel data, so names here come only from your CRM or file.${enrichNote?' '+esc(enrichNote):''}</p>
-  </section>`;
+  const page=qs('#ml-page').content.cloneNode(true);
+  fill(page,'mode',over?' · Assessment screen':intel?' · Intelligence filtered':'');
+  fill(page,'name',list.name||'Farm');
+  fill(page,'scope',`${list.scope_value||''} · ${label()} · ${totalCount.toLocaleString()} matching parcels`);
+  fill(page,'total',totalCount.toLocaleString());
+  fill(page,'avgAssess',avg('assessed_value')?money(avg('assessed_value')):'—');
+  fill(page,'avgTax',avg('last_year_tax')?money(avg('last_year_tax')):'—');
+  const note=page.querySelector('[data-f="intelNote"]');
+  note.textContent=over?`Assessment review screening, not a predicted appeal outcome. ${data.screening_note||'Verify current records before advising an owner.'}`:intel?`Your intelligence rules run after the statewide parcel search. ${scanNote}`:note.dataset.default;
+  fill(page,'source',data.source||'NJ statewide parcel data');
+  page.querySelector('#ml-loaded').textContent=rows.length.toLocaleString();
+  routeLinks(page);
+  const app=qs('#ml-app');app.replaceChildren(page);
   wire(data,over);drawTable();paintSide();
 }
 function wire(data,over){
@@ -338,5 +307,11 @@ async function start(ctx){
   const data=await fetchPage(0,false);render(data);loadWorkspace();
 }
 const ready=window.njptrAccessReady||Promise.reject(new Error('Access context did not initialize'));
-Promise.resolve(ready).then(start).catch(err=>{if(window.WatchdogAgentSafety)window.WatchdogAgentSafety.report('market-list-start',err);const h=qs('#ml-app');if(h)h.innerHTML=`<div class="ml-error"><b>This farm could not load.</b><p>${esc(safe(err,'market-list-start'))}</p><button class="ml-btn" type="button" onclick="location.reload()">Retry</button> <a class="ml-btn" href="${esc(route('/agent-desk'))}">Back to Agent Desk</a></div>`});
+Promise.resolve(ready).then(start).catch(err=>{
+  if(window.WatchdogAgentSafety)window.WatchdogAgentSafety.report('market-list-start',err);
+  const h=qs('#ml-app'),t=qs('#ml-fail');if(!h||!t)return;
+  const box=t.content.cloneNode(true);fill(box,'message',safe(err,'market-list-start'));routeLinks(box);
+  box.querySelector('[data-reload]').addEventListener('click',()=>location.reload());
+  h.replaceChildren(box);
+});
 })();
