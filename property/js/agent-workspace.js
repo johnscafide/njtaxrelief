@@ -17,7 +17,7 @@
   function route(path){return clean?path:'/property'+path;}
 
   var TABS=[
-    {key:'desk',href:'/agent-desk',icon:'fa-bullseye',label:'Opportunity Desk'},
+    {key:'desk',href:'/agent-desk',icon:'fa-briefcase',label:'Agent Desk'},
     {key:'farm-map',href:'/farm-map',icon:'fa-map',label:'Farm Map'},
     {key:'growth',href:'/growth/',icon:'fa-arrow-trend-up',label:'Growth'},
     {key:'farm-builder',href:'/farm-builder',icon:'fa-sliders',label:'Advanced Farm'}

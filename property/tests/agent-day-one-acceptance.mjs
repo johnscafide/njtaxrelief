@@ -38,7 +38,7 @@ try {
   const surfaces=[
     {name:'contacts',route:'/property/agent/contacts/',ready:'#acx-app[aria-busy="false"]',button:'#acx-open-guide',opened:'#acx-guide'},
     {name:'transaction',route:'/transaction/',ready:'#tx-app',button:'[data-tx-action="add"]',opened:'#tx-form'},
-    {name:'desk',route:'/property/agent-desk/',ready:'#ad-app',button:'#ad-list-new',opened:'#ad-list-form'},
+    {name:'desk',route:'/property/agent-desk/',hash:'#farm',ready:'#ad-app',button:'#ad-list-new',opened:'#ad-list-form'},
     {name:'farm-builder',route:'/property/farm-builder/',ready:'#fb-form'},
     {name:'farm-map',route:'/property/farm-map/',ready:'#fm-map'},
     {name:'growth',route:'/property/growth/',ready:'#gc-grid'},
@@ -61,7 +61,7 @@ try {
       page.on('response',response=>{if(response.url().startsWith(staging.origin+'/rest/v1/') && response.status()>=400)failedRequests.push({path:new URL(response.url()).pathname,status:response.status()});});
       let failure=null;
       try{
-        const response=await page.goto(base+surface.route,{waitUntil:'domcontentloaded',timeout:30000});
+        const response=await page.goto(base+surface.route+(surface.hash||''),{waitUntil:'domcontentloaded',timeout:30000});
         assert(response?.ok(),'Page response failed.');
         await page.locator(surface.ready).waitFor({state:'visible',timeout:20000});
         assert(!/[?&]access=(signin|restricted)/.test(page.url()),'Agent was redirected by a plan gate.');

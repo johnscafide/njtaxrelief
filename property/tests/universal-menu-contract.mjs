@@ -30,7 +30,7 @@ const canonical = [
   ['town-compare', 'Town Compare'],
   ['robust', 'ROBUST Framework'],
   ['pulse', 'Property Pulse'],
-  ['agent-desk', 'Agent Control'],
+  ['agent-desk', 'Agent Desk'],
   ['scan', 'Appeal Scanner'],
   ['transaction', 'Transactions'],
   ['data-workbench', 'Data Workbench'],
