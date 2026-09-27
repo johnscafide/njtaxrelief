@@ -9,6 +9,10 @@ on:
       - 'property/farm-builder/**'
       - 'property/farm-map/**'
       - 'property/market-list/**'
+      - 'property/js/market-list.js'
+      - 'property/css/market-list.css'
+      - 'property/tests/farm-list-contract.mjs'
+      - 'supabase/functions/farm-workspace/**'
       - 'property/growth/**'
       - 'property/report-studio/**'
       - 'property/js/agent-*.js'
@@ -40,6 +44,7 @@ jobs:
         run: |
           node property/tests/agent-route-access.mjs
           node property/tests/dashboard-signin-return.mjs
+          node property/tests/farm-list-contract.mjs
       - name: Verify owner policies in isolated PostgreSQL
         run: |
           node property/tests/agent-owner-policies.mjs

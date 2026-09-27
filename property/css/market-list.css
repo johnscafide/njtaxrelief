@@ -1,4 +1,209 @@
-.ml-shell{max-width:1460px;margin:auto;padding:20px 24px 80px;color:#14243d;font-family:Inter,system-ui,sans-serif}.ml-loading{text-align:center;padding:80px;color:#68788f}.ml-head{display:flex;justify-content:space-between;align-items:end;gap:20px;border-bottom:1px solid #dce5ec;padding-bottom:22px}.ml-head span{font:800 12px "Plus Jakarta Sans",Inter,sans-serif;letter-spacing:.14em;color:#088d8d}.ml-head h1{font:800 clamp(30px,4vw,48px)/1.05 "Plus Jakarta Sans",Inter,sans-serif;margin:7px 0}.ml-head p{margin:0;color:#68788f}.ml-head-actions{display:flex;gap:8px;flex-wrap:wrap;justify-content:flex-end}.ml-btn{border:1px solid #dce5ec;border-radius:10px;background:#fff;color:#14243d;padding:10px 13px;font-weight:800;text-decoration:none;cursor:pointer;white-space:nowrap}.ml-btn.primary{background:#102a4c;color:#fff;border-color:#102a4c}.ml-btn.added{background:#e7f6f0;border-color:#bfe4d1;color:#14794a;cursor:default}.ml-summary{display:grid;grid-template-columns:repeat(4,1fr);gap:10px;margin:18px 0}.ml-stat{border:1px solid #dce5ec;border-radius:15px;padding:15px;background:#fff}.ml-stat b{display:block;font:800 24px "Plus Jakarta Sans",Inter,sans-serif}.ml-stat span{color:#68788f}.ml-callout{display:flex;justify-content:space-between;align-items:center;background:#eef7f6;border:1px solid #cfe7e4;border-radius:14px;padding:14px 16px;margin:14px 0}.ml-callout b{display:block}.ml-callout small{color:#68788f}.ml-toolbar{display:flex;justify-content:space-between;gap:12px;align-items:center;margin:14px 0}.ml-toolbar input{height:42px;border:1px solid #dce5ec;border-radius:10px;padding:0 11px;min-width:290px}.ml-table-wrap{border:1px solid #dce5ec;border-radius:18px;overflow:auto;background:#fff}.ml-table{width:100%;border-collapse:collapse;min-width:1150px}.ml-over-table{min-width:1420px}.ml-table th{text-align:left;padding:0;background:#f4f7f9;color:#68788f;font:800 12px "Plus Jakarta Sans",Inter,sans-serif;letter-spacing:.08em}.ml-sort-head{width:100%;border:0;background:transparent;color:inherit;font:inherit;letter-spacing:inherit;text-align:left;padding:12px 14px;display:flex;align-items:center;gap:6px;cursor:pointer}.ml-sort-head:hover,.ml-sort-head.active{color:#102a4c;background:#eaf0f4}.ml-table th:last-child{padding:12px 14px}.ml-table td{padding:14px;border-top:1px solid #edf1f4}.ml-address{font-weight:800;color:#102a4c;text-decoration:none}.ml-address:hover{text-decoration:underline;color:#088d8d}.ml-sub{display:block;color:#68788f;font-size:12px;margin-top:2px}.ml-impact{color:#14794a}.ml-actions{display:flex;gap:6px;flex-wrap:wrap}.ml-error{padding:24px;border:1px solid #efd3d1;background:#fff6f5;border-radius:14px;color:#8e302c}.ml-empty{text-align:center;padding:55px 24px;color:#68788f}.ml-load{display:block;margin:18px auto;border:1px solid #dce5ec;border-radius:11px;background:#fff;padding:11px 17px;font-weight:800;cursor:pointer}.ml-load[hidden]{display:none}@media(max-width:800px){.ml-shell{padding:20px 16px 120px}.ml-head{display:block}.ml-head-actions{margin-top:14px;justify-content:flex-start}.ml-summary{grid-template-columns:1fr 1fr}.ml-toolbar{display:block}.ml-toolbar input{width:100%;min-width:0;box-sizing:border-box;margin-top:8px}.ml-callout{display:block}.ml-callout>span{display:block;margin-top:10px}}
-/* Agent Control workspace alignment (2026-09): compact page title under the workspace bar. */
-html.aw27-page .ml-head h1{font-size:clamp(1.4rem,2.2vw,1.75rem);line-height:1.15}
-html.aw27-page .ml-head{padding-bottom:16px}
+/* Watchdog agent farm list (/market-list). Board design, matching the Agent Desk
+   hub: warm page, navy hero, soft tinted stat tiles, white rounded cards.
+   Readability floor: 12px text, 42px controls (44px on phones). */
+@property --ml-intel-angle{syntax:"<angle>";inherits:false;initial-value:0deg}
+@keyframes ml-intel-spin{to{--ml-intel-angle:360deg}}
+
+body[data-sidebar-page="agent-desk"]:has(.ml-shell){background:#f3f1ec}
+.ml-shell{
+  --ml-navy:#0e2248;--ml-blue:#1456a0;--ml-gold:#b8972a;--ml-ink:#14213d;--ml-muted:#5d6678;
+  --ml-line:#e3dfd6;--ml-surface:#fbfaf7;--ml-sky:#e3edfb;--ml-sky-line:#b9d0f2;--ml-teal:#dff1ec;--ml-teal-ink:#0f6e5c;
+  --ml-sand:#f6efd9;--ml-sand-ink:#7a5d0c;--ml-rose:#fde8e4;--ml-radius:22px;
+  max-width:1440px;margin:0 auto;padding:20px 24px 80px;color:var(--ml-ink);font-family:Inter,system-ui,sans-serif
+}
+.ml-shell h1,.ml-shell h2{font-family:"Plus Jakarta Sans",Inter,sans-serif;letter-spacing:-.015em}
+.ml-loading{text-align:center;padding:80px 20px;color:var(--ml-muted)}
+.ml-muted{margin:0;color:var(--ml-muted);font-size:13px;line-height:1.5}
+.ml-note{display:block;margin-top:12px;color:var(--ml-muted);font-size:12px;line-height:1.5}
+.ml-dim{color:#9aa3b2}
+.ml-warn{margin:0 0 10px;padding:10px 12px;border-radius:12px;background:#fdecea;color:#9f2a1d;font-size:13px}
+
+/* Buttons */
+.ml-btn{display:inline-flex;align-items:center;justify-content:center;gap:7px;min-height:42px;padding:0 15px;border:1px solid var(--ml-line);border-radius:999px;background:#fff;color:var(--ml-ink);font:600 14px/1 Inter,system-ui,sans-serif;text-decoration:none;white-space:nowrap;cursor:pointer}
+.ml-btn:hover{background:var(--ml-surface);border-color:#cfc9bc}
+.ml-btn:focus-visible,.ml-hbtn:focus-visible,.ml-seg button:focus-visible,.ml-link:focus-visible,.ml-dl-opt:focus-visible{outline:2px solid var(--ml-blue);outline-offset:2px}
+.ml-btn.dark{background:var(--ml-navy);border-color:var(--ml-navy);color:#fff}
+.ml-btn.dark:hover{background:var(--ml-blue);border-color:var(--ml-blue)}
+.ml-btn.sm{min-height:36px;padding:0 12px;font-size:13px}
+.ml-btn.added{background:var(--ml-teal);border-color:#bfe4d1;color:var(--ml-teal-ink);cursor:default}
+.ml-btn[disabled]:not(.added){opacity:.6;cursor:wait}
+.ml-link{display:inline;min-height:0;padding:0;border:0;background:none;color:var(--ml-blue);font:700 13px Inter,sans-serif;text-decoration:underline;text-underline-offset:3px;cursor:pointer}
+
+/* Hero */
+.ml-hero{display:flex;align-items:flex-end;justify-content:space-between;gap:20px;flex-wrap:wrap;padding:26px 28px;border-radius:26px;background:var(--ml-navy);color:#fff;position:relative;overflow:hidden}
+.ml-hero::after{content:"";position:absolute;right:-60px;top:-80px;width:260px;height:260px;border-radius:50%;background:radial-gradient(circle,rgba(184,151,42,.28),transparent 70%);pointer-events:none}
+.ml-hero-copy{position:relative;z-index:1;min-width:0}
+.ml-eyebrow{display:inline-flex;align-items:center;gap:8px;color:#e8d18a;font:800 12px Inter,sans-serif;letter-spacing:.12em;text-transform:uppercase}
+.ml-hero h1{margin:8px 0 6px;font-size:clamp(28px,3.6vw,42px);line-height:1.06;font-weight:800;overflow-wrap:anywhere}
+.ml-hero p{margin:0;color:#c9d4e6;font-size:15px}
+.ml-hero-actions{position:relative;z-index:1;display:flex;flex-wrap:wrap;gap:8px;justify-content:flex-end}
+.ml-hbtn{display:inline-flex;align-items:center;gap:7px;min-height:42px;padding:0 15px;border:1px solid rgba(255,255,255,.22);border-radius:999px;background:rgba(255,255,255,.08);color:#fff;font:600 14px/1 Inter,sans-serif;text-decoration:none;white-space:nowrap;cursor:pointer}
+.ml-hbtn:hover{background:rgba(255,255,255,.16)}
+.ml-hbtn.gold{background:var(--ml-gold);border-color:var(--ml-gold);color:var(--ml-navy);font-weight:700}
+.ml-hbtn.gold:hover{background:#cfae3f}
+
+/* Stats */
+.ml-stats{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:14px;margin:16px 0}
+.ml-stat{padding:18px 20px;border-radius:var(--ml-radius)}
+.ml-stat b{display:block;font:800 clamp(22px,2.4vw,30px)/1.1 "Plus Jakarta Sans",Inter,sans-serif;letter-spacing:-.02em}
+.ml-stat span{display:block;margin-top:4px;color:rgba(20,33,61,.72);font-size:13px}
+.t-sky{background:var(--ml-sky)}.t-teal{background:var(--ml-teal)}.t-sand{background:var(--ml-sand)}.t-rose{background:var(--ml-rose)}
+
+/* Cards */
+.ml-card{min-width:0;padding:20px 22px;border:1px solid var(--ml-line);border-radius:var(--ml-radius);background:#fff}
+.ml-card-head{display:flex;align-items:center;justify-content:space-between;gap:12px;flex-wrap:wrap;margin-bottom:12px}
+.ml-card-head h2{display:flex;align-items:center;gap:9px;margin:0;font-size:19px;font-weight:700}
+.ml-card-head h2 i{color:var(--ml-blue);font-size:16px}
+.ml-duo{display:grid;grid-template-columns:minmax(0,1.55fr) minmax(0,1fr);gap:16px;align-items:start;margin-bottom:16px}
+
+/* Watchdog Intelligence surface: the rotating border belongs to the card only. */
+.ml-card.ml-intel{border:2px solid transparent;background:linear-gradient(#fff,#fff) padding-box,conic-gradient(from var(--ml-intel-angle),#15b7c9 0deg,#2478ff 90deg,#7857ff 170deg,#e84bc4 260deg,#15b7c9 360deg) border-box;animation:ml-intel-spin 7s linear infinite}
+@media (prefers-reduced-motion:reduce){.ml-card.ml-intel{animation:none}}
+.ml-intel .wd-intelligence-brand-word{color:transparent;-webkit-text-fill-color:transparent;background:linear-gradient(90deg,#0aaeb8 0%,#2478ff 34%,#7857ff 67%,#e84bc4 100%);-webkit-background-clip:text;background-clip:text;font:inherit}
+@media (forced-colors:active){.ml-intel .wd-intelligence-brand-word{color:CanvasText;-webkit-text-fill-color:CanvasText;background:none}}
+.ml-brief{display:grid;gap:10px;margin:0;padding:0;list-style:none}
+.ml-brief li{display:grid;grid-template-columns:36px minmax(0,1fr);gap:12px;align-items:start;padding:12px;border-radius:16px;background:var(--ml-surface);font-size:14px;line-height:1.5}
+.ml-brief li>i{display:grid;place-items:center;width:36px;height:36px;border-radius:12px;background:var(--ml-sky);color:var(--ml-blue);font-size:15px}
+.ml-brief b{font-weight:800}
+
+/* CRM card */
+.ml-conn{display:grid;grid-template-columns:38px minmax(0,1fr) 10px;gap:10px;align-items:center;padding:10px 12px;margin-bottom:8px;border-radius:14px;background:var(--ml-surface)}
+.ml-conn-icon{display:grid;place-items:center;width:38px;height:38px;border-radius:12px;background:var(--ml-sand);color:var(--ml-sand-ink)}
+.ml-conn b{display:block;font-size:14px}
+.ml-conn small{display:block;margin-top:2px;color:var(--ml-muted);font-size:12px}
+.ml-dot{width:10px;height:10px;border-radius:50%;background:#1f9d6b}
+.ml-dot.bad{background:#d23b2b}
+.ml-crm-meter{margin:12px 0}
+.ml-crm-meter b{font:800 26px/1 "Plus Jakarta Sans",Inter,sans-serif}
+.ml-crm-meter span{margin-left:6px;color:var(--ml-muted);font-size:13px}
+.ml-meter{height:10px;margin-top:8px;border-radius:999px;background:#ece8df;overflow:hidden}
+.ml-meter i{display:block;height:100%;border-radius:inherit;background:linear-gradient(90deg,var(--ml-blue),#2f6df6)}
+.ml-file{display:grid;grid-template-columns:auto minmax(0,1fr) auto;gap:10px;align-items:center;margin:10px 0;padding:10px 12px;border:1px dashed var(--ml-sky-line);border-radius:14px;background:#f6f9fe}
+.ml-file>i{color:var(--ml-blue);font-size:18px}
+.ml-file b{display:block;font-size:13px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.ml-file small{color:var(--ml-muted);font-size:12px}
+.ml-crm-actions{display:flex;flex-wrap:wrap;gap:8px;margin-top:12px}
+
+/* Results */
+.ml-toolbar{display:flex;align-items:center;justify-content:space-between;gap:12px;flex-wrap:wrap}
+.ml-toolbar-left{display:flex;align-items:baseline;gap:12px;flex-wrap:wrap}
+.ml-toolbar-left h2{margin:0;font-size:19px;font-weight:700}
+.ml-count{color:var(--ml-muted);font-size:13px}
+.ml-toolbar-right{display:flex;align-items:center;gap:10px;flex-wrap:wrap}
+.ml-seg{display:inline-flex;padding:4px;border-radius:999px;background:#f0ede6}
+.ml-seg button{min-height:36px;padding:0 14px;border:0;border-radius:999px;background:transparent;color:var(--ml-muted);font:600 13px Inter,sans-serif;cursor:pointer}
+.ml-seg button[aria-pressed="true"]{background:var(--ml-navy);color:#fff}
+#ml-search{min-height:42px;width:min(320px,100%);padding:0 16px;border:1px solid var(--ml-line);border-radius:999px;background:var(--ml-surface);font:14px Inter,sans-serif;color:var(--ml-ink)}
+#ml-search:focus{outline:2px solid var(--ml-blue);outline-offset:1px;background:#fff}
+.ml-tools{display:flex;align-items:center;gap:8px;flex-wrap:wrap;margin:14px 0 4px}
+.ml-pop{margin:10px 0;padding:16px;border:1px solid var(--ml-sky-line);border-radius:18px;background:#f6f9fe}
+.ml-pop-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:14px}
+.ml-pop fieldset{margin:0;padding:0;border:0;display:grid;gap:6px}
+.ml-pop legend{margin-bottom:6px;font-weight:700;font-size:13px}
+.ml-pop label{display:flex;align-items:center;gap:8px;min-height:32px;font-size:14px;cursor:pointer}
+.ml-pop input[type=radio]{width:18px;height:18px;accent-color:var(--ml-navy)}
+.ml-pop-actions{display:flex;flex-wrap:wrap;gap:8px;margin-top:12px}
+.ml-dl{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:10px}
+.ml-dl-opt{display:grid;grid-template-columns:40px minmax(0,1fr);gap:12px;align-items:start;padding:14px;border:1px solid var(--ml-line);border-radius:16px;background:#fff;text-align:left;cursor:pointer;font:inherit;color:inherit}
+.ml-dl-opt:hover{border-color:var(--ml-sky-line);background:#fbfdff}
+.ml-dl-opt>i{display:grid;place-items:center;width:40px;height:40px;border-radius:12px;background:var(--ml-sky);color:var(--ml-blue);font-size:17px}
+.ml-dl-opt b{display:block;font-size:14px}
+.ml-dl-opt small{display:block;margin-top:3px;color:var(--ml-muted);font-size:12px;line-height:1.45}
+
+.ml-table-wrap{margin-top:12px;overflow-x:auto;border:1px solid var(--ml-line);border-radius:18px;-webkit-overflow-scrolling:touch}
+.ml-table{width:100%;border-collapse:separate;border-spacing:0;min-width:980px;font-size:14px}
+.ml-table th{position:sticky;top:0;z-index:1;padding:10px 12px;background:var(--ml-surface);border-bottom:1px solid var(--ml-line);text-align:left;white-space:nowrap}
+.ml-table td{padding:12px;border-bottom:1px solid #f0ece4;vertical-align:top}
+.ml-table tbody tr:last-child td{border-bottom:0}
+.ml-table tbody tr:hover td{background:#fcfbf8}
+.ml-table tr.is-picked td{background:var(--ml-sky)}
+.ml-check{width:40px}
+.ml-check input{width:18px;height:18px;accent-color:var(--ml-navy);cursor:pointer}
+.ml-sort-head{display:inline-flex;align-items:center;gap:6px;min-height:32px;padding:0 8px;margin-left:-8px;border:0;border-radius:8px;background:none;color:var(--ml-muted);font:700 12px Inter,sans-serif;letter-spacing:.04em;text-transform:uppercase;cursor:pointer}
+.ml-sort-head.active{background:var(--ml-sky);color:var(--ml-navy)}
+.ml-sort-head i{font-size:11px}
+.ml-address{color:var(--ml-navy);font-weight:700;text-decoration:none}
+.ml-address:hover{text-decoration:underline}
+.ml-sub{display:block;margin-top:3px;color:var(--ml-muted);font-size:12px}
+.ml-flag{display:inline-block;margin-top:6px;padding:3px 8px;border-radius:999px;background:var(--ml-sand);color:var(--ml-sand-ink);font-size:12px;font-weight:600}
+.ml-crm{display:block;max-width:220px}
+.ml-crm.none{color:#8a92a1;font-size:13px}
+.ml-crm.in b{display:flex;align-items:center;gap:6px;color:var(--ml-teal-ink);font-size:13px}
+.ml-crm.in small{display:block;margin-top:2px;color:var(--ml-muted);font-size:12px}
+.ml-impact{color:#9f2a1d}
+.ml-actions{display:flex;flex-direction:column;align-items:flex-start;gap:6px}
+.ml-load{display:flex;align-items:center;justify-content:center;gap:8px;margin:14px auto 0;min-height:44px;padding:0 20px;border:1px solid var(--ml-line);border-radius:999px;background:#fff;font:600 14px Inter,sans-serif;cursor:pointer}
+.ml-load[hidden]{display:none}
+.ml-empty{padding:40px 20px;text-align:center;color:var(--ml-muted)}
+.ml-empty i{font-size:26px}
+.ml-empty h2{margin:10px 0 6px;color:var(--ml-ink);font-size:18px}
+.ml-source{display:flex;gap:8px;margin:14px 0 0;color:var(--ml-muted);font-size:12px;line-height:1.5}
+.ml-error{margin:40px auto;max-width:560px;padding:24px;border-radius:20px;background:#fff;border:1px solid var(--ml-line)}
+.pl-toast{position:fixed;left:50%;bottom:24px;z-index:1000;display:none;transform:translateX(-50%);max-width:calc(100vw - 32px);padding:12px 18px;border-radius:999px;background:var(--ml-navy,#0e2248);color:#fff;font:600 14px Inter,sans-serif;box-shadow:0 10px 30px rgba(14,34,72,.25)}
+
+@media (max-width:1100px){.ml-duo{grid-template-columns:minmax(0,1fr)}}
+@media (max-width:760px){
+  .ml-shell{padding:14px 16px 90px}
+  .ml-hero{padding:20px;border-radius:22px}
+  .ml-hero-actions{justify-content:flex-start}
+  .ml-hbtn,.ml-btn{min-height:44px}
+  .ml-stats{grid-template-columns:repeat(2,minmax(0,1fr));gap:10px}
+  .ml-card{padding:16px}
+  .ml-toolbar-right,#ml-search{width:100%}
+  .ml-seg{width:100%}.ml-seg button{flex:1;min-height:40px}
+  .ml-pop-grid,.ml-dl{grid-template-columns:minmax(0,1fr)}
+}
+
+/* Mailing labels. Only the sheets print; the page itself is hidden. */
+#ml-print-root{display:none}
+@media print{
+  @page{size:letter;margin:0}
+  body.ml-printing>*:not(#ml-print-root){display:none!important}
+  body.ml-printing{background:#fff!important}
+  body.ml-printing #ml-print-root{display:block}
+  .ml-sheet{box-sizing:border-box;width:8.5in;height:11in;display:grid;break-after:page;page-break-after:always;overflow:hidden}
+  .ml-sheet:last-child{break-after:auto;page-break-after:auto}
+  .ml-sheet.f5160{padding:.5in .1875in;grid-template-columns:repeat(3,2.625in);grid-auto-rows:1in;column-gap:.125in}
+  .ml-sheet.f5163{padding:.5in .15625in;grid-template-columns:repeat(2,4in);grid-auto-rows:2in;column-gap:.1875in}
+  .ml-label{box-sizing:border-box;display:flex;flex-direction:column;justify-content:center;padding:0 .18in;overflow:hidden;font:10pt/1.25 Arial,Helvetica,sans-serif;color:#000;text-transform:uppercase}
+  .f5163 .ml-label{padding:0 .3in;font-size:12pt}
+  .ml-label b,.ml-label span{white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+  .ml-label b{font-weight:400}
+  .ml-card.ml-intel{animation:none}
+}
+
+/* Page-level overrides that must win over the shared agent workspace sheet. */
+.ml-shell [hidden]{display:none!important}
+html.aw27-page .ml-hero h1{color:#fff}
+.ml-table th.ml-th-plain{color:var(--ml-muted);font:700 12px Inter,sans-serif;letter-spacing:.04em;text-transform:uppercase}
+.ml-actions{flex-direction:row;flex-wrap:wrap;align-items:center}
+
+/* Phones: each home becomes a card instead of a squeezed table row. */
+@media (max-width:760px){
+  .ml-table-wrap{border:0;border-radius:0;overflow:visible}
+  .ml-table{min-width:0;display:block}
+  .ml-table thead{display:flex;align-items:center;gap:8px;padding:0 0 8px}
+  .ml-table thead tr{display:flex;align-items:center;gap:10px}
+  .ml-table thead th{position:static;padding:0;border:0;background:none}
+  .ml-table thead th:not(.ml-check){display:none}
+  .ml-table thead th.ml-check::after{content:"Select all";margin-left:8px;color:var(--ml-muted);font-size:13px}
+  .ml-table thead th.ml-check{display:flex;align-items:center;width:auto}
+  .ml-table tbody{display:grid;gap:10px}
+  .ml-table tbody tr{display:grid;grid-template-columns:32px repeat(2,minmax(0,1fr));gap:8px 12px;padding:14px;border:1px solid var(--ml-line);border-radius:18px;background:#fff}
+  .ml-table tbody tr.is-picked{background:var(--ml-sky)}
+  .ml-table td{display:block;padding:0;border:0;background:none!important;min-width:0}
+  .ml-table td.ml-check{grid-row:span 2}
+  .ml-table td:nth-child(2),.ml-table td:nth-child(3){grid-column:2/-1}
+  .ml-table td:nth-child(n+4)::before{content:attr(data-l);display:block;color:var(--ml-muted);font-size:12px;font-weight:600;text-transform:uppercase;letter-spacing:.04em}
+  .ml-table td:nth-child(4){grid-column:2}
+  .ml-table td:last-child{grid-column:1/-1}
+  .ml-table td:last-child::before{display:none}
+  .ml-crm{max-width:none}
+}
+.ml-intel .ml-card-head h2{display:block;line-height:1.3}
+@media (max-width:760px){
+  .ml-table tbody tr{position:relative;grid-template-columns:repeat(2,minmax(0,1fr))}
+  .ml-table td.ml-check{position:absolute;top:12px;right:12px;grid-row:auto;width:auto}
+  .ml-table td:nth-child(2),.ml-table td:nth-child(3){grid-column:1/-1;padding-right:36px}
+  .ml-table td:nth-child(4){grid-column:auto}
+}

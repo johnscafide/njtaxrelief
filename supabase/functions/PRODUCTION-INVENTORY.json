@@ -75,6 +75,12 @@
       "verify_jwt": true,
       "tracking": "source_snapshot"
     },
+    "farm-workspace": {
+      "version": 2,
+      "sha256": "bbfd2a958e03c025b62d527c543fcb0c1e06f4889ebc52497e67dd62dbb85f22",
+      "verify_jwt": true,
+      "tracking": "source_snapshot"
+    },
     "get-platform-health": {
       "version": 30,
       "sha256": "1673a36856f87b2a9bf50f7f4b286d8c0a998d30761fcb9674578dee92a161db",
