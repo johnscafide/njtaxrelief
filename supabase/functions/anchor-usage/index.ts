@@ -8,7 +8,7 @@ function origin(req: Request) {
   const value = req.headers.get("origin") || "";
   try {
     const host = new URL(value).hostname.toLowerCase();
-    if (host === "njpropertytaxrelief.com" || host === "www.njpropertytaxrelief.com" || host === "localhost" || host === "127.0.0.1" || host.endsWith(".vercel.app")) return value;
+    if (host === "njpropertytaxrelief.com" || host === "www.njpropertytaxrelief.com" || host === "watchdogindex.com" || host === "www.watchdogindex.com" || host === "localhost" || host === "127.0.0.1" || host.endsWith(".vercel.app")) return value;
   } catch {}
   return "https://njpropertytaxrelief.com";
 }

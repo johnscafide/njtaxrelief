@@ -1,11 +1,13 @@
 import { createClient } from 'npm:@supabase/supabase-js@2.55.0';
 
-const cors = { 'Access-Control-Allow-Origin': 'https://njpropertytaxrelief.com', 'Access-Control-Allow-Headers': 'authorization, apikey, content-type' };
-const json = (body: unknown, status = 200) => new Response(JSON.stringify(body), { status, headers: { ...cors, 'Content-Type': 'application/json' } });
+const ORIGINS = new Set(['https://njpropertytaxrelief.com', 'https://www.njpropertytaxrelief.com', 'https://watchdogindex.com', 'https://www.watchdogindex.com']);
+const corsFor = (req: Request) => { const o = req.headers.get('origin') || ''; return { 'Access-Control-Allow-Origin': ORIGINS.has(o) ? o : 'https://www.watchdogindex.com', 'Access-Control-Allow-Headers': 'authorization, apikey, content-type, x-client-info', 'Vary': 'Origin' }; };
 const allowed = new Set(['client_error', 'unhandled_rejection', 'resource_error', 'slow_page']);
 const safe = (value: unknown, max: number) => String(value || '').replace(/[\w.+-]+@[\w.-]+\.[A-Za-z]{2,}/g, '[email]').replace(/[0-9a-f]{8}-[0-9a-f-]{27,}/gi, '[id]').replace(/\b\d{8,}\b/g, '[number]').slice(0, max);
 
 Deno.serve(async (req) => {
+  const cors = corsFor(req);
+  const json = (body: unknown, status = 200) => new Response(JSON.stringify(body), { status, headers: { ...cors, 'Content-Type': 'application/json' } });
   if (req.method === 'OPTIONS') return new Response('ok', { headers: cors });
   if (req.method !== 'POST') return json({ error: 'Method not allowed' }, 405);
   const auth = req.headers.get('Authorization');

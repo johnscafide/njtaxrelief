@@ -54,7 +54,7 @@ function keyFor(ctx){return[ctx.surface,ctx.scope_type,ctx.context_key||'',ctx.s
 function hostFor(s){
   if(s==='dashboard')return document.getElementById('db-panel-main');
   if(s==='home')return document.getElementById('hm-body')&&document.getElementById('hm-body').parentNode;
-  if(s==='agent_control')return document.getElementById('ad-app');
+  if(s==='agent_control')return document.getElementById('adh-home')||document.getElementById('ad-app');
   if(s==='data_workbench')return document.querySelector('.dw-shell,.workbench-shell,main');
   return null;
 }
@@ -65,7 +65,7 @@ function mount(s){
   var root=document.createElement('section');root.id='wdcx-root';root.className='wdcx-root wdcx-'+s;root.setAttribute('aria-live','polite');
   if(s==='dashboard'){var brief=document.getElementById('db-brief');host.insertBefore(root,brief||host.firstChild);}
   else if(s==='home'){var body=document.getElementById('hm-body');host.insertBefore(root,body||host.firstChild);}
-  else if(s==='agent_control'){var overview=host.querySelector('.ad-overview');if(overview&&overview.nextSibling)host.insertBefore(root,overview.nextSibling);else host.insertBefore(root,host.firstChild);}
+  else if(s==='agent_control'){var overview=host.querySelector('.ad27-kpis')||host.querySelector('.ad-overview');if(overview&&overview.nextSibling)host.insertBefore(root,overview.nextSibling);else host.insertBefore(root,host.firstChild);}
   else host.insertBefore(root,host.firstChild);
   return root;
 }

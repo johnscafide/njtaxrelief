@@ -1,7 +1,7 @@
 import { createClient } from 'npm:@supabase/supabase-js@2.95.0';
 
 const service=createClient(Deno.env.get('SUPABASE_URL')!,Deno.env.get('SUPABASE_SERVICE_ROLE_KEY')!,{auth:{persistSession:false}});
-const ORIGINS=new Set(['https://njpropertytaxrelief.com','https://www.njpropertytaxrelief.com']);
+const ORIGINS=new Set(['https://njpropertytaxrelief.com','https://www.njpropertytaxrelief.com','https://watchdogindex.com','https://www.watchdogindex.com']);
 function headers(req:Request){const o=req.headers.get('origin')||'';return{'Access-Control-Allow-Origin':ORIGINS.has(o)?o:'https://njpropertytaxrelief.com','Access-Control-Allow-Headers':'content-type','Access-Control-Allow-Methods':'GET, POST, OPTIONS','Cache-Control':'no-store','Vary':'Origin'};}
 function json(req:Request,status:number,body:unknown){return new Response(JSON.stringify(body),{status,headers:{...headers(req),'Content-Type':'application/json'}})}
 const clean=(v:unknown,max=120)=>String(v??'').trim().replace(/[\u0000-\u001f]/g,'').slice(0,max);

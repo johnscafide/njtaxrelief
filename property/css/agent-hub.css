@@ -53,6 +53,11 @@ body.adh-page .ad-gate{margin:24px}
 .adh-rail-link:hover{background:rgba(255,255,255,.08);color:#fff}
 
 .adh-ready .adh-stage{min-width:0;padding:26px 30px 72px}
+/* Anything another script adds straight into the app container stays in the content column. */
+.adh-app.adh-ready>:not(.adh-rail):not(.adh-stage):not(.adh-tabbar){grid-column:2;min-width:0}
+.adh-ready .adh-rail{grid-column:1;grid-row:1 / span 50}
+.adh-ready .adh-stage{grid-column:2}
+.adh-view>.wdcx-root{margin:0 0 16px}
 .adh-view{max-width:1200px;margin:0 auto}
 
 /* ---------- Section header ---------- */
@@ -108,6 +113,27 @@ body.adh-page .ad-gate{margin:24px}
 .adh-portal-link .ad27-btn{margin-top:0}
 .adh-app .ad27-btn.primary{background:var(--adh-bright);border-color:var(--adh-bright);color:#fff}
 
+.adh-tool-stat{display:inline-block;margin-top:6px;padding:2px 9px;border-radius:999px;background:var(--adh-sand);color:var(--adh-sand-ink);font-size:12px;font-style:normal;font-weight:800}
+.adh-tool-stat:empty{display:none}
+.adh-linkbtn{padding:0;border:0;background:none;color:var(--adh-blue);font:inherit;font-weight:700;text-decoration:underline;cursor:pointer}
+button.adh-rail-link{width:100%;border:0;background:none;font:600 13px/1 var(--aw-font,Inter,sans-serif);text-align:left;cursor:pointer}
+
+/* ---------- First-visit tour ---------- */
+.adh-coach{position:fixed;inset:0;z-index:900}
+.adh-coach-shade{position:absolute;inset:0;background:rgba(14,34,72,.38)}
+.adh-coach-card{position:fixed;left:50%;top:50%;transform:translate(-50%,-50%);width:min(360px,calc(100vw - 24px));padding:20px;border-radius:18px;background:#fff;box-shadow:0 24px 60px rgba(14,34,72,.28);color:var(--adh-ink)}
+.adh-coach-card[style*="top"]{transform:none}
+.adh-coach-count{display:block;color:var(--adh-gold);font-size:12px;font-weight:800;letter-spacing:.06em;text-transform:uppercase}
+.adh-coach-card h2{margin:6px 0 6px;color:var(--adh-navy);font-family:var(--adh-head-font);font-size:20px;font-weight:800}
+.adh-coach-card p{margin:0;color:var(--adh-muted);font-size:15px;line-height:1.5}
+.adh-coach-actions{display:flex;align-items:center;justify-content:space-between;gap:10px;margin-top:16px}
+.adh-coach-actions>span{display:flex;gap:8px}
+.adh-coach-actions .ad27-btn{margin-top:0;min-height:44px}
+.adh-coach-skip{min-height:44px;padding:0 4px;border:0;background:none;color:var(--adh-muted);font:600 14px/1 var(--aw-font,Inter,sans-serif);cursor:pointer}
+.adh-coach-target{position:relative;z-index:901;border-radius:16px;box-shadow:0 0 0 4px var(--adh-gold),0 0 0 9999px rgba(14,34,72,0)!important}
+.adh-rail.adh-coach-target,.adh-nav-list.adh-coach-target{z-index:901}
+.adh-tabbar.adh-coach-target{z-index:901!important;border-radius:0}
+
 /* ---------- Tool frame ---------- */
 .adh-frame{display:flex;flex-direction:column;height:calc(100vh - var(--aw-top,64px) - 36px);max-width:none}
 .adh-frame[hidden]{display:none}
@@ -160,6 +186,7 @@ body.adh-page .ad-gate{margin:24px}
   .adh-frame-out{width:48px;height:48px}
   .adh-frame-body{border-radius:12px}
   body.adh-page .pl-toast{bottom:calc(var(--adh-tabbar) + 16px + env(safe-area-inset-bottom))}
+  .adh-coach-card,.adh-coach-card[style*="top"]{top:auto;left:12px;right:12px;bottom:calc(var(--adh-tabbar) + 16px + env(safe-area-inset-bottom));width:auto;transform:none}
 }
 @media(max-width:360px){
   .adh-tabbar a{font-size:12px;letter-spacing:-.01em}
@@ -178,3 +205,5 @@ body.adh-page .ad-gate{margin:24px}
   .adh-view[hidden]{display:block!important}
 }
 .adh-view h1:focus,.adh-frame-bar h2:focus{outline:none}
+.adh-rail:has(.adh-coach-target){z-index:901}
+.adh-coach [hidden]{display:none!important}

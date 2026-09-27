@@ -3,7 +3,7 @@ import { createClient } from "npm:@supabase/supabase-js@2.95.0";
 
 const ENGINE="watchdog-model-repair-readiness-v4";
 const LEGACY_DIAGNOSTIC_KEYS=["v3_recency_feature_unavailable_in_persisted_evidence","vnext_direct_feature_dry_run_required_before_fresh_holdout"] as const;
-const ORIGINS=new Set(["https://njpropertytaxrelief.com","https://www.njpropertytaxrelief.com","http://localhost:3000","http://127.0.0.1:3000"]);
+const ORIGINS=new Set(["https://njpropertytaxrelief.com","https://www.njpropertytaxrelief.com","https://watchdogindex.com","https://www.watchdogindex.com","http://localhost:3000","http://127.0.0.1:3000"]);
 const clean=(v:unknown,n=180)=>String(v??"").replace(/[<>]/g,"").trim().slice(0,n);
 const num=(v:unknown)=>{const n=Number(v);return Number.isFinite(n)?n:null};
 const round=(v:number|null,d=2)=>v===null?null:Number(v.toFixed(d));

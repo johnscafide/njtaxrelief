@@ -2,7 +2,7 @@ import "jsr:@supabase/functions-js/edge-runtime.d.ts";
 import { createClient } from "npm:@supabase/supabase-js@2.95.0";
 
 type Obj = Record<string, any>;
-const PROD_ORIGINS = new Set(["https://njpropertytaxrelief.com","https://www.njpropertytaxrelief.com","http://localhost:3000","http://127.0.0.1:3000"]);
+const PROD_ORIGINS = new Set(["https://njpropertytaxrelief.com","https://www.njpropertytaxrelief.com","https://watchdogindex.com","https://www.watchdogindex.com","http://localhost:3000","http://127.0.0.1:3000"]);
 const PLANS = new Set(["pro_plus","teams","developer"]);
 const DIRECTIONS = new Set(["inbound","outbound","bidirectional"]);
 const EVENTS = new Set(["property.signal.changed","watchlist.alert","report.ready","intelligence.finding.created","integration.test"]);

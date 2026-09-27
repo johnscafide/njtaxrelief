@@ -4,7 +4,7 @@ import { createClient } from "npm:@supabase/supabase-js@2.95.0";
 const ENGINE="watchdog-intelligence-workbench-view-preview-v2-robust";
 const MAX_SOURCE_ROWS=10000;
 const MAX_PREVIEW_CANDIDATES=100;
-const ORIGINS=new Set(["https://njpropertytaxrelief.com","https://www.njpropertytaxrelief.com","http://localhost:3000","http://127.0.0.1:3000"]);
+const ORIGINS=new Set(["https://njpropertytaxrelief.com","https://www.njpropertytaxrelief.com","https://watchdogindex.com","https://www.watchdogindex.com","http://localhost:3000","http://127.0.0.1:3000"]);
 const RANK:Record<string,number>={standard:0,agent:1,pro:2,pro_plus:3,teams:4,developer:5};
 const STABLE_FILTERS=new Set(["town","county","assessedMin","assessedMax","taxMin","valueMin","wdMin","chapterMin"]);
 const SESSION_FILTERS=new Set(["yearMin","flood"]);

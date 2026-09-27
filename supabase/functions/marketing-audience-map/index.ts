@@ -4,7 +4,7 @@ const URL = Deno.env.get("SUPABASE_URL")!;
 const ANON = Deno.env.get("SUPABASE_ANON_KEY")!;
 const SERVICE = Deno.env.get("SUPABASE_SERVICE_ROLE_KEY")!;
 const NJOGIS = "https://maps.nj.gov/arcgis/rest/services/Framework/Cadastral/MapServer/0/query";
-const ORIGINS = new Set(["https://njpropertytaxrelief.com", "https://www.njpropertytaxrelief.com"]);
+const ORIGINS = new Set(["https://njpropertytaxrelief.com", "https://www.njpropertytaxrelief.com", "https://watchdogindex.com", "https://www.watchdogindex.com"]);
 
 function cors(req: Request) {
   const origin = req.headers.get("origin") || "";

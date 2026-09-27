@@ -3,7 +3,7 @@ import Stripe from 'npm:stripe@^22';
 
 const ALLOWED_ORIGINS = new Set([
   'https://njpropertytaxrelief.com',
-  'https://www.njpropertytaxrelief.com',
+  'https://www.njpropertytaxrelief.com', 'https://watchdogindex.com', 'https://www.watchdogindex.com',
 ]);
 const INITIAL_PCM_SIZE = '6 x 8.5';
 const INITIAL_PCM_MAIL_CLASS = 'FirstClass';

@@ -15,7 +15,7 @@ function allowedOrigin(origin: string) {
   try {
     const u = new URL(origin);
     if (u.protocol !== "https:") return "https://njpropertytaxrelief.com";
-    if (["njpropertytaxrelief.com", "www.njpropertytaxrelief.com", "njtaxrelief.vercel.app"].includes(u.hostname)) return origin;
+    if (["njpropertytaxrelief.com", "www.njpropertytaxrelief.com", "watchdogindex.com", "www.watchdogindex.com", "njtaxrelief.vercel.app"].includes(u.hostname)) return origin;
     if (u.hostname.endsWith(".vercel.app")) return origin;
   } catch { /* no-op */ }
   return "https://njpropertytaxrelief.com";
