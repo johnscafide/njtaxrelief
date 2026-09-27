@@ -121,7 +121,7 @@ body[data-sidebar-page="agent-desk"]:has(.ml-shell){background:#f3f1ec}
 .ml-check input{width:18px;height:18px;accent-color:var(--ml-navy);cursor:pointer}
 .ml-sort-head{display:inline-flex;align-items:center;gap:6px;min-height:32px;padding:0 8px;margin-left:-8px;border:0;border-radius:8px;background:none;color:var(--ml-muted);font:700 12px Inter,sans-serif;letter-spacing:.04em;text-transform:uppercase;cursor:pointer}
 .ml-sort-head.active{background:var(--ml-sky);color:var(--ml-navy)}
-.ml-sort-head i{font-size:11px}
+.ml-sort-head i{font-size:12px}
 .ml-address{color:var(--ml-navy);font-weight:700;text-decoration:none}
 .ml-address:hover{text-decoration:underline}
 .ml-sub{display:block;margin-top:3px;color:var(--ml-muted);font-size:12px}
