@@ -30,7 +30,11 @@ for (const asset of [
 ]) {
   assert(loader.includes("'" + asset + "'"), `Property Home runtime must load ${asset}.`);
 }
-assert(!loader.includes('?v='), 'Property Home Intelligence runtime assets must not use cache-busting ?v= URLs.');
+// The Intelligence runtime assets must load from one stable URL each (another page or
+// the bridge may request the same file, and a second URL would execute it twice).
+// Other Home fixes in this loader are versioned deliberately.
+const intelligenceLoader = (loader.match(/function loadIntelligenceRuntime\(\)\{[^\n]*/) || [''])[0];
+assert(intelligenceLoader && !intelligenceLoader.includes('?v='), 'Property Home Intelligence runtime assets must not use cache-busting ?v= URLs.');
 
 if (failures.length) {
   console.error(JSON.stringify({ passed: false, failures }, null, 2));

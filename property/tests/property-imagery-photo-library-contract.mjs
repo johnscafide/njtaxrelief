@@ -68,7 +68,9 @@ assert(!landing.includes('maps.googleapis.com/maps/api/streetview'),
   'Landing property cards must never create passive Google Static Street View requests');
 assert(!landing.includes('GMAPS_KEY'),
   'Landing showcase must not carry a Google Street View key path');
-assert(landingIntel.includes('prepareRenderedPropertyImage'),
+// Since the #270 card redesign the decorator adds the score chip on top of the
+// existing image (and the owner's own photo when present) without clearing it.
+assert(/photo\.insertAdjacentHTML\('beforeend',scoreMarkup\(/.test(landingIntel) && !/photo\.(?:innerHTML|textContent)\s*=/.test(landingIntel),
   'Landing intelligence must decorate property imagery instead of removing it');
 assert(!landingIntel.includes('stripRenderedPropertyImage'),
   'Landing intelligence must not strip real property imagery');

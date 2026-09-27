@@ -1,8 +1,11 @@
 import fs from 'node:fs';
 
 const read = (path) => fs.readFileSync(path, 'utf8');
-const dashboardLoader = read('property/js/watchdog-dashboard-v2-intelligence.js');
-const dashboardVoice = read('property/js/watchdog-dashboard-voice.js');
+// 2027 Dashboard: Voice and the contextual Analyst come from the governed
+// Intelligence page embedded in the Dashboard drawer (the in-page bridge was retired).
+const dashboardHtml = read('property/dashboard/index.html');
+const dashboardIntel = read('property/js/dashboard/wd-intel.js');
+const intelligencePage = read('property/intelligence/index.html');
 const todayPage = read('property/intelligence/daily/index.html');
 const todayVoice = read('property/js/watchdog-today-voice.js');
 const contextual = read('property/js/watchdog-contextual-analyst.js');
@@ -15,16 +18,10 @@ function must(condition, message) {
   if (!condition) throw new Error(message);
 }
 
-must(dashboardLoader.includes('/property/js/access-guard.js'), 'Dashboard Voice must expose the established signed-in client contract before loading Voice.');
-must(dashboardLoader.includes('/property/js/watchdog-contextual-analyst.js'), 'Dashboard must load the shared contextual Analyst.');
-must(dashboardLoader.includes('/property/js/watchdog-intelligence-voice-browser.js'), 'Dashboard must load the browser Voice layer.');
-must(dashboardLoader.includes('/property/js/watchdog-dashboard-voice.js'), 'Dashboard must load its contextual Voice bridge.');
-must(dashboardLoader.includes('/property/css/watchdog-contextual-voice.css'), 'Dashboard must load contextual Voice styling.');
-
-must(dashboardVoice.includes('WatchdogContextIntelligence.context'), 'Dashboard Voice must inherit the governed Dashboard Intelligence context.');
-must(dashboardVoice.includes("surface:'dashboard'"), 'Dashboard Voice must identify its surface.');
-must(dashboardVoice.includes('What changed on my important properties today?'), 'Dashboard must offer the Today-style contextual prompt.');
-must(!dashboardVoice.includes('getUserMedia'), 'Dashboard bridge must not implement a second microphone stack.');
+must(dashboardHtml.includes('/property/js/dashboard/wd-intel.js') && dashboardIntel.includes('src="/property/intelligence/?embed=1"'), 'Dashboard must open the governed Intelligence page in its drawer.');
+must(intelligencePage.includes('/property/js/access-guard.js'), 'Embedded Intelligence must expose the established signed-in client contract.');
+must(intelligencePage.includes('/property/js/watchdog-contextual-analyst.js'), 'Embedded Intelligence must load the shared contextual Analyst.');
+must(intelligencePage.includes('/property/js/watchdog-intelligence-voice.js'), 'Embedded Intelligence must load Voice.');
 
 must(todayPage.includes('/property/js/watchdog-contextual-analyst.js'), 'Today must load the shared contextual Analyst.');
 must(todayPage.includes('/property/js/watchdog-intelligence-voice.js'), 'Today must load the server Voice fallback.');

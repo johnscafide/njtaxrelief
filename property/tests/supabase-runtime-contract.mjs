@@ -27,7 +27,10 @@ must(runtime.includes("flowType: 'pkce'"),'Runtime must keep the shared PKCE aut
 must(runtime.includes("out.set('apikey', selected.key)"),'Runtime must rewrite legacy publishable API-key headers.');
 must(runtime.includes("out.set('authorization', 'Bearer ' + selected.key)"),'Runtime must rewrite legacy publishable bearer headers.');
 
-must(nav.includes('/property/js/supabase-runtime.js'),'Public property bootstrap must synchronously load the canonical Supabase runtime.');
+// Since the 2026-08-30 public-nav refactor the public lookup page loads the runtime
+// itself, synchronously (no async/defer), ahead of lookup.js.
+const runtimeTag=index.match(/<script[^>]*src="\/property\/js\/supabase-runtime\.js"[^>]*>/);
+must(nav.includes('/property/js/supabase-runtime.js') || (runtimeTag && !/\b(?:async|defer)\b/.test(runtimeTag[0]) && index.indexOf(runtimeTag[0]) < index.indexOf('/property/js/lookup.js')),'Public property bootstrap must synchronously load the canonical Supabase runtime.');
 must(!nav.includes('https://'+productionRef+'.supabase.co'),'Public nav must not duplicate production Supabase configuration.');
 must(!nav.includes('https://'+stagingRef+'.supabase.co'),'Public nav must not duplicate staging Supabase configuration.');
 must(nav.includes('opaqueCrossOrigin'),'Public bootstrap must identify opaque cross-origin script errors.');
@@ -56,7 +59,11 @@ must(anchorBridge.includes(`https://${productionRef}.supabase.co/functions/v1/an
 must(anchorBridge.includes("usage('count')"),'ANCHOR bridge must route weekly reads through the count action.');
 must(anchorBridge.includes("usage('record')"),'ANCHOR bridge must route writes through the record action.');
 
-for (const path of ['property/js/supabase-runtime.js','property/js/public-nav.js','anchor-watchdog-bridge.js']) {
+// The runtime and the ANCHOR bridge stay free of version queries so the key-rotation
+// path always resolves one stable runtime URL. public-nav.js may cache-bust its own
+// presentation assets (2026-09-11) but must never version the Supabase runtime itself.
+must(!/supabase-runtime\.js\?/.test(read('property/js/public-nav.js')),'property/js/public-nav.js must not version the Supabase runtime URL.');
+for (const path of ['property/js/supabase-runtime.js','anchor-watchdog-bridge.js']) {
   must(!read(path).match(/\.js\?v=|\.css\?v=/),`${path} must not introduce version-query asset URLs.`);
 }
 

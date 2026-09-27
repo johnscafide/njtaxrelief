@@ -174,8 +174,11 @@ async function toggleWatch(){if(!evidenceAllowed())return;const next=!current.wa
 async function logActivity(action,message,detail){if(!current)return;const r=await db.from('transaction_activity').insert({transaction_id:current.id,user_id:user.id,action,message,detail:detail||{}}).select().single();if(!r.error){activity.unshift(r.data);renderActivity()}}
 
 let modalReturnFocus=null;
-function openModal(html){modalReturnFocus=document.activeElement;$('#tx-modal-content').innerHTML=html;$('#tx-modal-layer').hidden=false;document.body.style.overflow='hidden';$('#tx-modal-content').querySelector('input,select,textarea,button')?.focus()}
-function closeModal(){$('#tx-modal-layer').hidden=true;document.body.style.overflow='';modalReturnFocus?.focus()}
+// Menus close before the dialog opens, so remember the last clicked control as the opener.
+let lastActionTrigger=null;document.addEventListener('click',e=>{const t=e.target&&e.target.closest?e.target.closest('button,a,[tabindex]'):null;if(t)lastActionTrigger=t},true);
+function openModal(html){const active=document.activeElement;modalReturnFocus=active&&active!==document.body&&active!==document.documentElement?active:lastActionTrigger;$('#tx-modal-content').innerHTML=html;$('#tx-modal-layer').hidden=false;document.body.style.overflow='hidden';$('#tx-modal-content').querySelector('input,select,textarea,button')?.focus()}
+function visibleFocusTarget(el){if(!el||!el.isConnected)return null;if(el.getClientRects().length)return el;const menu=el.closest('[role="menu"],.txv2-menu');const owner=menu&&menu.id?document.querySelector('[aria-controls="'+menu.id+'"]')||menu.parentElement?.querySelector('[aria-haspopup],[data-v2-action^="toggle-"]'):null;return owner&&owner.getClientRects().length?owner:null}
+function closeModal(){$('#tx-modal-layer').hidden=true;document.body.style.overflow='';(visibleFocusTarget(modalReturnFocus)||document.querySelector('#tx-v2-shell h1,main'))?.focus?.()}
 document.addEventListener('keydown',e=>{
   if($('#tx-modal-layer').hidden)return;
   if(e.key==='Escape'){e.preventDefault();closeModal();return}

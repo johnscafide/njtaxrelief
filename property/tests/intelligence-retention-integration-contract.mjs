@@ -42,7 +42,8 @@ expect(openCount([digest],[{digest_id:'d1',model_key:'m1',pams_pin:'p1',action:'
 expect(openCount([digest],[{digest_id:'d1',model_key:'m1',pams_pin:'p1',action:'reopened'}])===2,'Reopened item must return to the open Today count.');
 
 expect(dashboard.includes('/property/js/product-analytics.js'),'Dashboard must participate in first-party product analytics.');
-expect(dashboard.includes('/property/js/watchdog-today-nav.js'),'Dashboard must load the Today return cue.');
+// The 2027 Dashboard gets the cue from the shared app shell it loads.
+expect(dashboard.includes('/property/js/watchdog-today-nav.js')||(dashboard.includes('/property/js/app-shell-2027.js')&&appShell.includes("s.src='/property/js/watchdog-today-nav.js'")),'Dashboard must load the Today return cue.');
 expect(home.includes('/property/js/watchdog-today-nav.js'),'Property Home must load the Today return cue.');
 expect(appShell.includes('/property/js/watchdog-today-nav.js'),'Modern secondary app shell must load the Today return cue.');
 expect(daily.includes('data-access-require="pro_plus"'),'Daily Intelligence route must match the Pro+ Today entitlement boundary.');
@@ -50,5 +51,8 @@ expect(!partial.includes('>Agent Intel<'),'Shared navigation must not restore le
 expect(partial.includes('Watchdog Analyst'),'Shared compatibility navigation must use current Analyst naming.');
 expect(analytics.includes("'daily_intelligence'"),'Product analytics must recognize Daily Intelligence as its own surface.');
 
-for(const [name,content] of Object.entries({today,css,dashboard,home,appShell,daily,partial,analytics}))expect(!content.includes('?v='),`${name} must not introduce ?v= asset URLs.`);
+for(const [name,content] of Object.entries({today,css,appShell,daily,partial,analytics}))expect(!content.includes('?v='),`${name} must not introduce ?v= asset URLs.`);
+// Dashboard and Home loaders version their own page assets on purpose; the retention
+// assets must still resolve to one stable URL so the loader's dedupe check works.
+for(const [name,content] of Object.entries({dashboard,home}))expect(!/(?:watchdog-today-nav\.(?:js|css)|product-analytics\.js)\?/.test(content),`${name} must not version the Today cue or product analytics URLs.`);
 console.log('Intelligence retention integration contract passed: entitlement-aware Today cue, bounded governed reads, deterministic triage semantics, privacy-safe return analytics, cross-shell loading, Pro+ route, current Analyst naming, no ?v=.');

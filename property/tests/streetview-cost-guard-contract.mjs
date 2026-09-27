@@ -48,10 +48,17 @@ const lookupRuntime = lookupPage.indexOf('/property/js/lookup.js');
 assert(lookupGuard >= 0 && lookupRuntime >= 0 && lookupGuard < lookupRuntime,
   'ownership-verification.js must load before lookup.js so the cost guard is active first');
 
+// Property Home ships as one bundle (property/js/home.js). The guard must be
+// compiled in ahead of the Home runtime, or loaded ahead of it as a script.
 const homePage = read('property/home/index.html');
+const homeBundle = read('property/js/home.js');
+const bundleGuard = homeBundle.indexOf('/* ===== property/js/ownership-verification.js ===== */');
+const bundleRuntime = homeBundle.indexOf('/* ===== property/js/dashboard/home/index.js ===== */');
+const bundleGuardSection = bundleGuard >= 0 ? homeBundle.slice(bundleGuard, homeBundle.indexOf('/* =====', bundleGuard + 10)) : '';
+const bundled = homePage.includes('/property/js/home.js') && bundleGuard >= 0 && bundleRuntime > bundleGuard && bundleGuardSection.includes('__watchdogStreetViewCostGuard');
 const homeGuard = homePage.indexOf('/property/js/ownership-verification.js');
 const homeRuntime = homePage.indexOf('/property/js/dashboard/home/index.js');
-assert(homeGuard >= 0 && homeRuntime >= 0 && homeGuard < homeRuntime,
+assert(bundled || (homeGuard >= 0 && homeRuntime >= 0 && homeGuard < homeRuntime),
   'ownership-verification.js must load before Property Home so the cost guard is active first');
 
 const dashboardPage = read('property/dashboard/index.html');

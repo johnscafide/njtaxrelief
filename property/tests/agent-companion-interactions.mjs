@@ -84,7 +84,9 @@ try{
     const edit=page.locator('#txv2-overflow-menu [data-tx-action="edit"]');await edit.click();
     await page.keyboard.press('Escape');
     assert.equal(await page.locator('#tx-modal-layer').isVisible(),false);
-    assert.equal(await page.evaluate(()=>document.activeElement.dataset.txAction),'edit');
+    // The Edit item lives in the actions menu, which closes when it is chosen; focus
+    // returns to the menu button that owns it (WAI-ARIA dialog/menu pattern).
+    assert.equal(await page.evaluate(()=>document.activeElement.dataset.txAction||document.activeElement.dataset.v2Action),'toggle-overflow');
     await page.evaluate(()=>companionFixture.failDetails=true);
     if(width<1100)await page.locator('[data-v2-action="open-drawer"]').click();
     await page.locator('[data-v2-tx-id]').first().click();
@@ -103,6 +105,8 @@ try{
   assert.equal(await premium.page.locator('[data-v2-action="refresh"]').isVisible(),true);
   await premium.page.locator('[data-v2-action="refresh"]').click();
   await premium.page.waitForFunction(()=>companionFixture.invocations.includes('transaction-evidence-sweep'));
+  // The v2 Transaction command center keeps documents behind the Documents tab.
+  await premium.page.locator('.txv2-tabs [data-v2-view="documents"]').click();
   await premium.page.locator('#tx-documents-card').waitFor();
   assert.deepEqual(premium.errors,[]);await premium.context.close();
   const {page,context,errors}=await fixture('contacts');

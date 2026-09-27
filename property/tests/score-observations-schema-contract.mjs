@@ -8,12 +8,20 @@ const failures = [];
 const assert = (condition, message) => { if (!condition) failures.push(message); };
 
 const clientHistoryColumns = 'pams_pin,marker_id,score,observed_at,model_version';
-const dashboard = read('property/js/dashboard/dashboard-exact.js');
+// The 2027 Dashboard (wd-*.js) no longer reads score history in the browser. The
+// Property Home base reader lives in dashboard/home/index.js and ships in home.js.
+const dashboard = read('property/js/dashboard/home/index.js');
+const homeBundle = read('property/js/home.js');
+const dashboardRuntime = ['wd-core.js','wd-render.js','wd-session-data-bridge.js','wd-intel.js'].map((f) => read('property/js/dashboard/' + f)).join('\n');
+assert(!/score_observations/.test(dashboardRuntime) || !/observed_on|evidence_coverage/.test(dashboardRuntime), '2027 Dashboard runtime must not read legacy/internal score-history columns.');
 const propertyDashboard = read('property/js/dashboard/home/property-dashboard.js');
 const homeBridge = read('property/js/watchdog-home-semantic-bridge.js');
 
 const dashboardQuery = dashboard.match(/from\(['"]score_observations['"]\)\.select\(['"]([^'"]+)['"]\)/);
-assert(Boolean(dashboardQuery), '2027 Dashboard must contain a score_observations select.');
+assert(Boolean(dashboardQuery), 'Property Home base score history reader must contain a score_observations select.');
+const bundleQuery = homeBundle.match(/window\.watchdogScoreHistory = function[\s\S]{0,400}?from\(['"]score_observations['"]\)\.select\(['"]([^'"]+)['"]\)/);
+assert(Boolean(bundleQuery) && bundleQuery[1] === clientHistoryColumns, `Property Home bundle score history columns must be exactly ${clientHistoryColumns}.`);
+assert(!/watchdogScoreHistory[\s\S]{0,400}?\.eq\(['"]user_id['"]/.test(homeBundle.slice(homeBundle.indexOf('window.watchdogScoreHistory'), homeBundle.indexOf('window.watchdogScoreHistory') + 600)), 'Property Home bundle score history must leave row ownership to Supabase RLS.');
 if (dashboardQuery) {
   assert(dashboardQuery[1] === clientHistoryColumns, `2027 Dashboard score history columns must be exactly ${clientHistoryColumns}.`);
   assert(!/observed_on|evidence_coverage|user_id/.test(dashboardQuery[1]), '2027 Dashboard must not widen the governed browser history projection with legacy/internal columns.');
@@ -56,5 +64,5 @@ console.log(JSON.stringify({
   contract: 'score-observations-client-history-v2',
   columns: clientHistoryColumns.split(','),
   ownership: 'supabase-rls',
-  readers: ['dashboard-exact.js', 'home/property-dashboard.js', 'watchdog-home-semantic-bridge.js']
+  readers: ['dashboard/home/index.js (home.js)', 'home/property-dashboard.js', 'watchdog-home-semantic-bridge.js']
 }, null, 2));
