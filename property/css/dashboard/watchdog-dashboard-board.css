@@ -3,7 +3,9 @@
    One stylesheet, scoped to the dashboard page. The shared app shell
    (app-shell-2027.css) still owns the top bar and navigation drawer.
    ========================================================================== */
-html body[data-sidebar-page="dashboard"]{
+/* Shared by the dashboard and Property Pulse. */
+html body[data-sidebar-page="dashboard"],
+html body[data-sidebar-page="pulse"]{
   --b-bg:#f3f1ec;
   --b-surface:#fbfaf7;
   --b-white:#ffffff;
@@ -35,8 +37,8 @@ html body[data-sidebar-page="dashboard"]{
   color:var(--b-ink);
   font-family:var(--b-body);
 }
-body[data-sidebar-page="dashboard"] .wdx-pagebar{display:none!important}
-body[data-sidebar-page="dashboard"] .wdx-topbar{background:rgba(251,250,247,.94);border-bottom-color:var(--b-line)}
+body[data-sidebar-page="dashboard"] .wdx-pagebar,body[data-sidebar-page="pulse"] .wdx-pagebar{display:none!important}
+body[data-sidebar-page="dashboard"] .wdx-topbar,body[data-sidebar-page="pulse"] .wdx-topbar{background:rgba(251,250,247,.94);border-bottom-color:var(--b-line)}
 
 /* --------------------------------------------------------------------------
    Loader scene
