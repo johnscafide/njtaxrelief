@@ -4,7 +4,8 @@
     "publisher": "New Jersey Division of Taxation, Property Administration",
     "url": "https://www.nj.gov/treasury/taxation/pdf/lpt/revaluation/2026RevalList.pdf",
     "updated": "2026-05-13",
-    "note": "Districts verified for compliance with N.J.A.C. 18:12A-1.14(g) and recognized in the 2026 Director's Table for implementation of a revaluation or reassessment."
+    "note": "Districts verified for compliance with N.J.A.C. 18:12A-1.14(g) and recognized in the 2026 Director's Table for implementation of a revaluation or reassessment.",
+    "code_basis": "The PDF's 'CD Code' column is the MOD-IV (PAMS PIN) district code. Verified 2026-09-27 against the official PDF: 139 of 140 municipality names match nj-district-crosswalk.json at the printed code; the remaining row is a spelling variant in the PDF (Mendam/Mendham Township, 1419)."
   },
   "tax_year": 2026,
   "district_count": 140,
@@ -150,5 +151,6 @@
     "1911": true,
     "1915": true,
     "1919": true
-  }
+  },
+  "district_key": "modiv_pams"
 }
