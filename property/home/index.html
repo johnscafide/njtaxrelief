@@ -23,6 +23,7 @@ html,body{margin:0;min-height:100%;background:#f5f7fb;color:#10213f;font-family:
 @keyframes hmspin{to{transform:rotate(360deg)}}.hm-app{display:none}.gate{display:none}
 </style>
 <link rel="stylesheet" href="/property/css/home.css?v=20260922-single11">
+<link rel="stylesheet" href="/property/css/home/home-board.css?v=20260927a">
 </head>
 <body class="hm-dashboard-page" data-sidebar-page="home">
 <div class="pl-toast" id="pl-toast"></div>
@@ -197,6 +198,8 @@ window.__homeBootWatch=setTimeout(function(){
 },12000);
 window.addEventListener('error',function(e){console.error('[Property Home boot]',e.error||e.message);});
 </script>
-<script src="/property/js/home.js?v=20260926-menu1" onload="clearTimeout(window.__homeBootWatch)" onerror="document.getElementById('hm-loading').innerHTML='<div><b>Property Home application failed to load.</b><span>The Home JavaScript asset could not be downloaded.</span></div>'"></script>
+<script src="/property/js/dashboard/home/home-tools.js?v=20260927a"></script>
+<script src="/property/js/home.js?v=20260927-tools1" onload="clearTimeout(window.__homeBootWatch)" onerror="document.getElementById('hm-loading').innerHTML='<div><b>Property Home application failed to load.</b><span>The Home JavaScript asset could not be downloaded.</span></div>'"></script>
+<script src="/property/js/dashboard/home/home-board.js?v=20260927a" defer></script>
 </body>
 </html>
