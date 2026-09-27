@@ -55,14 +55,14 @@ body[data-sidebar-page="dashboard"] .wdd-h27-score{
 body[data-sidebar-page="dashboard"] .wdd-primary{
   display:grid;
   grid-template-columns:minmax(0,1fr) 286px;
-  grid-template-areas:"signals calendar" "positions positions" "queue queue";
+  grid-template-areas:"signals calendar";
   align-items:start;
   gap:14px;
   min-width:0;
 }
 body[data-sidebar-page="dashboard"] #wdd-signals{grid-area:signals;min-width:0}
-body[data-sidebar-page="dashboard"] #wdd-positions{grid-area:positions;min-width:0;scroll-margin-top:18px}
-body[data-sidebar-page="dashboard"] #wdd-queue{grid-area:queue;min-width:0}
+body[data-sidebar-page="dashboard"] #wdd-positions{min-width:0;scroll-margin-top:18px}
+body[data-sidebar-page="dashboard"] #wdd-queue{min-width:0}
 body[data-sidebar-page="dashboard"] .wdd-calendar-slot{grid-area:calendar;min-width:0}
 body[data-sidebar-page="dashboard"] .wdd-signals{
   display:grid;
@@ -180,8 +180,7 @@ body[data-sidebar-page="dashboard"] .wdd-appeal-calendar li span>b{font-size:12p
 body[data-sidebar-page="dashboard"] .wdd-appeal-calendar li small{font-size:12px}
 body[data-sidebar-page="dashboard"] .wdd-calendar-note{padding:8px 11px 10px;font-size:12px}
 
-body[data-sidebar-page="dashboard"] .wdd-support{display:grid;grid-template-columns:minmax(0,1fr);gap:14px;min-width:0}
-body[data-sidebar-page="dashboard"] .wdd-rail{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:10px}
+body[data-sidebar-page="dashboard"] .wdd-rail{display:grid;grid-template-columns:minmax(0,1fr);gap:10px}
 body[data-sidebar-page="dashboard"] .wdd-rail>.wdd-panel{border-color:#d9e1ec;border-radius:10px;box-shadow:none}
 body[data-sidebar-page="dashboard"] .wdd-rail .wdd-panel-head{padding:10px 12px}
 body[data-sidebar-page="dashboard"] .wdd-rail .wdd-panel-head h2{font-size:13px}
@@ -237,7 +236,7 @@ body[data-sidebar-page="dashboard"] .wdd-boot.is-completing .wdd-boot-dog-frame{
   body[data-sidebar-page="dashboard"] .wdd-property-list .wdd-table td{padding-inline:7px}
 }
 @media(max-width:900px){
-  body[data-sidebar-page="dashboard"] .wdd-primary{grid-template-columns:minmax(0,1fr);grid-template-areas:"signals" "positions" "queue" "calendar"}
+  body[data-sidebar-page="dashboard"] .wdd-primary{grid-template-columns:minmax(0,1fr);grid-template-areas:"signals" "calendar"}
   body[data-sidebar-page="dashboard"] .wdd-calendar-slot .wdd-appeal-calendar{position:static}
   body[data-sidebar-page="dashboard"] .wdd-h27{grid-template-columns:minmax(0,1fr) 270px}
   body[data-sidebar-page="dashboard"] .wdd-properties-layout{grid-template-columns:minmax(0,1fr) 270px}
@@ -279,7 +278,7 @@ body[data-sidebar-page="dashboard"] .wdd-boot.is-completing .wdd-boot-dog-frame{
   body[data-sidebar-page="dashboard"] .wdd-mini-legend{font-size:12px}
 }
 @media(min-width:761px) and (max-width:1160px){
-  body[data-sidebar-page="dashboard"] .wdd-primary{grid-template-columns:minmax(0,1fr);grid-template-areas:"signals" "positions" "queue" "calendar"}
+  body[data-sidebar-page="dashboard"] .wdd-primary{grid-template-columns:minmax(0,1fr);grid-template-areas:"signals" "calendar"}
   body[data-sidebar-page="dashboard"] .wdd-properties-layout{grid-template-columns:minmax(0,1fr);gap:0}
   body[data-sidebar-page="dashboard"] .wdd-property-inspector{position:static;margin:12px 0 0}
   body[data-sidebar-page="dashboard"] .wdd-property-list .wdd-table th:nth-child(2),
