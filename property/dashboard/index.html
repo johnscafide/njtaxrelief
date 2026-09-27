@@ -1,171 +1,83 @@
 <!DOCTYPE html>
-<html lang="en" data-ui="spike">
+<html lang="en" data-ui="board">
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
   <title>Dashboard | Watchdog Property Intelligence</title>
   <meta name="robots" content="noindex, nofollow">
-  <meta name="theme-color" content="#10294b">
+  <meta name="theme-color" content="#f3f1ec">
   <link rel="canonical" href="https://www.watchdogindex.com/dashboard">
   <link rel="icon" type="image/png" href="/favicon-96x96.png" sizes="96x96">
   <link rel="icon" type="image/svg+xml" href="/favicon.svg">
   <link rel="shortcut icon" href="/favicon.ico">
   <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
   <link rel="manifest" href="/property/manifest.webmanifest">
+  <link rel="preload" as="image" href="/property/assets/beagle/watchdog-beagle-frames.webp" fetchpriority="high">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=Inter:wght@400;500;600;700;800&display=swap">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.9.4/leaflet.min.css">
   <link rel="stylesheet" href="/property/css/shared/00-design-tokens.css">
   <link rel="stylesheet" href="/property/css/app-shell-2027.css">
-  <link rel="stylesheet" href="/property/css/dashboard/watchdog-dashboard.css?v=20260926c">
-  <link rel="stylesheet" href="/property/css/dashboard/watchdog-dashboard-hotfix.css?v=20260827e">
-  <link rel="stylesheet" href="/property/css/dashboard/watchdog-dashboard-followup.css?v=20260827a">
-  <link rel="stylesheet" href="/property/css/dashboard/watchdog-dashboard-visuals.css?v=20260911a">
-  <!-- NJW-404: Spike is the canonical dashboard presentation. -->
-  <link rel="stylesheet" href="/property/css/dashboard/watchdog-dashboard-spike.css?v=20260921b">
-  <link rel="stylesheet" href="/property/css/dashboard/watchdog-dashboard-spike-promoted.css?v=20260926b">
-  <!-- Dashboard hero (greeting, next action, score panel). Loaded last. -->
-  <link rel="stylesheet" href="/property/css/dashboard/watchdog-dashboard-hero-2027.css?v=20260925a">
-  <link rel="stylesheet" href="/property/css/dashboard/watchdog-dashboard-professional.css?v=20260926a">
-  <link rel="stylesheet" href="/property/css/dashboard/watchdog-dashboard-workspace.css?v=20260926a">
+  <!-- Dashboard board: the one stylesheet for the loader and the dashboard. -->
+  <link rel="stylesheet" href="/property/css/dashboard/watchdog-dashboard-board.css?v=20260927a">
 </head>
 <body data-sidebar-page="dashboard">
   <div class="wdd-boot" id="wdd-boot">
-    <div class="wdd-boot-card">
-      <div class="wdd-boot-scene" aria-hidden="true">
-        <span class="wdd-boot-track"><span class="wdd-boot-track-light"></span></span>
-        <span class="wdd-boot-dog" id="wdd-boot-dog"><span class="wdd-boot-dog-frame"></span></span>
+    <div class="wdd-boot-stage">
+      <div class="wdd-boot-scene" id="wdd-boot-scene" aria-hidden="true">
+        <span class="wdd-boot-ground"></span>
+        <span class="wdd-boot-treat" id="wdd-boot-treat">
+          <svg viewBox="0 0 64 30" focusable="false">
+            <defs>
+              <linearGradient id="wdd-treat-fill" x1="0" y1="0" x2="0" y2="1">
+                <stop offset="0" stop-color="#f1d09b"/>
+                <stop offset=".55" stop-color="#dba862"/>
+                <stop offset="1" stop-color="#b5783a"/>
+              </linearGradient>
+            </defs>
+            <path fill="url(#wdd-treat-fill)" stroke="#8a531f" stroke-width="1.1" stroke-linejoin="round" d="M12.5 4.2c3.2 0 5.3 2 5.9 4.4h27.2c.6-2.4 2.7-4.4 5.9-4.4 3.8 0 6.5 2.7 6.5 5.6 0 1.6-.8 2.9-1.9 3.8 1.2 1 1.9 2.4 1.9 4 0 3.2-2.8 5.9-6.5 5.9-3.3 0-5.4-2.1-5.9-4.6H18.4c-.5 2.5-2.6 4.6-5.9 4.6C8.8 23.5 6 20.8 6 17.6c0-1.6.7-3 1.9-4C6.8 12.7 6 11.4 6 9.8c0-2.9 2.7-5.6 6.5-5.6Z"/>
+            <path fill="#fff4dc" opacity=".6" d="M12.3 6.1c-2.3.1-4 1.7-4 3.4 0 .5.1.9.4 1.3.6-1.9 2.4-3.3 4.9-3.4 1.2 0 2.2.3 3 .8-.8-1.3-2.4-2.2-4.3-2.1Zm8 4.4h23.4c-.9.6-2 .9-3.4.9H23.7c-1.4 0-2.5-.3-3.4-.9Z"/>
+            <g fill="#7d4617" opacity=".55"><circle cx="24" cy="15.4" r=".9"/><circle cx="30.5" cy="17.2" r=".8"/><circle cx="36.5" cy="14.9" r=".9"/><circle cx="42" cy="17.4" r=".7"/><circle cx="12.2" cy="16.8" r=".8"/><circle cx="51.6" cy="11.2" r=".8"/></g>
+          </svg>
+        </span>
+        <span class="wdd-boot-dog" id="wdd-boot-dog">
+          <span class="wdd-boot-shadow"></span>
+          <span class="wdd-boot-sprite" id="wdd-boot-sprite" data-frame="a"></span>
+        </span>
       </div>
-      <h1>Opening your dashboard</h1>
-      <p id="wdd-boot-msg" role="status" aria-live="polite">Loading your saved properties and current scores.</p>
-      <button type="button" id="wdd-boot-retry" hidden>Reload</button>
+      <h1 class="wdd-boot-title" id="wdd-boot-title">Fetching your dashboard</h1>
+      <p class="wdd-boot-msg" id="wdd-boot-msg" role="status" aria-live="polite">Sniffing out your saved properties…</p>
+      <button type="button" class="wdd-boot-retry" id="wdd-boot-retry" hidden>Reload</button>
     </div>
   </div>
-
-  <script>
-    (function () {
-      var boot = document.getElementById('wdd-boot');
-      var retry = document.getElementById('wdd-boot-retry');
-      if (!boot || !retry) return;
-      var started = performance.now();
-      var pausedDuration = 0;
-      var glanceStartedAt = 0;
-      var failed = !retry.hidden;
-      var motion = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)');
-      var glanceTimer, runTimer;
-      function clearTimers() {
-        if (glanceTimer) window.clearTimeout(glanceTimer);
-        if (runTimer) window.clearTimeout(runTimer);
-        glanceTimer = runTimer = null;
-      }
-      function scheduleRun() {
-        if (runTimer) window.clearTimeout(runTimer);
-        if (failed || boot.hidden || (motion && motion.matches)) return;
-        var elapsed = performance.now() - started - pausedDuration;
-        runTimer = window.setTimeout(function () {
-          if (!failed && !boot.hidden && !(motion && motion.matches)) boot.classList.add('is-running');
-        }, Math.max(0, 7600 - elapsed));
-      }
-      function setGlance() {
-        if (failed || boot.hidden || (motion && motion.matches)) return;
-        glanceStartedAt = performance.now();
-        boot.classList.add('is-glancing');
-        window.setTimeout(function () {
-          boot.classList.remove('is-glancing');
-          pausedDuration += performance.now() - glanceStartedAt;
-          scheduleGlance(false);
-          scheduleRun();
-        }, 760);
-      }
-      function scheduleGlance(nextCycle) {
-        if (glanceTimer) window.clearTimeout(glanceTimer);
-        if (failed || boot.hidden || (motion && motion.matches)) return;
-        var wait = 0;
-        if (nextCycle) wait = nextCycle;
-        else {
-          var elapsed = performance.now() - started - pausedDuration;
-          var remainder = ((elapsed % 7600) + 7600) % 7600;
-          wait = remainder < 3750 ? 3750 - remainder : 7600 - remainder + 3750;
-        }
-        glanceTimer = window.setTimeout(setGlance, wait);
-      }
-      function startGlanceCycle() {
-        if (glanceTimer) window.clearTimeout(glanceTimer);
-        scheduleGlance(false);
-      }
-      function onMotionChange() {
-        if (motion && motion.matches) {
-          clearTimers();
-          boot.classList.remove('is-glancing', 'is-running');
-        } else if (motion) {
-          started = performance.now();
-          pausedDuration = 0;
-          boot.classList.remove('is-glancing', 'is-running');
-        }
-        startGlanceCycle();
-        scheduleRun();
-      }
-      function markFailed() {
-        failed = !retry.hidden;
-        if (failed) { clearTimers(); boot.classList.remove('is-running', 'is-glancing'); boot.classList.add('is-failed'); }
-        else { boot.classList.remove('is-failed'); startGlanceCycle(); scheduleRun(); }
-      }
-      if (window.MutationObserver) {
-        new MutationObserver(markFailed).observe(retry, { attributes: true, attributeFilter: ['hidden'] });
-      }
-      if (motion && motion.addEventListener) motion.addEventListener('change', onMotionChange);
-      else if (motion && motion.addListener) motion.addListener(onMotionChange);
-      startGlanceCycle();
-      scheduleRun();
-      document.addEventListener('wd:ready', function () {
-        var elapsed = performance.now() - started;
-        markFailed();
-        clearTimers();
-        boot.classList.remove('is-glancing', 'is-running');
-        if (!failed && elapsed < 2400 && !(motion && motion.matches)) {
-          boot.hidden = false;
-          boot.classList.add('is-completing');
-          window.setTimeout(function () { boot.hidden = true; boot.classList.remove('is-completing'); }, 260);
-        } else {
-          boot.hidden = true;
-        }
-      }, { once: true });
-    })();
-  </script>
+  <script src="/property/js/dashboard/wd-beagle-loader.js?v=20260927a"></script>
 
   <main class="wdd-app" id="wdd-app" hidden>
-    <div class="wdd-shell">
-      <div class="wdd-workspace">
-        <section class="wdd-standing" id="wdd-standing" aria-label="Dashboard header"></section>
-        <div class="wdd-primary" role="region" aria-label="Portfolio workspace">
-          <section class="wdd-signals" id="wdd-signals" aria-label="Portfolio overview"></section>
-          <aside class="wdd-calendar-slot" id="wdd-calendar" aria-label="Appeal calendar"></aside>
-        </div>
-        <section class="wdd-queue" id="wdd-queue" aria-label="Action queue"></section>
-        <div class="wdd-work">
-          <div class="wdd-main-column">
-            <section id="wdd-positions" aria-label="Your portfolio"></section>
-            <div class="wdd-secondary">
-              <div class="wdd-newsslot"><div id="wd4-root"></div></div>
-              <aside id="wdd-sponsor" aria-label="Sponsored information"></aside>
-            </div>
+    <div class="wdd-board">
+      <div class="wdd-board-main">
+        <section class="wdd-top" id="wdd-standing" aria-label="Search and greeting">
+          <div class="wdd-top-row">
+            <div class="wdd-top-search" id="wdd-search-slot"></div>
+            <button class="wdd-pull" id="wdd-pull" type="button" aria-label="Ask Watchdog" hidden><i class="fas fa-comment-dots" aria-hidden="true"></i><span>Ask Watchdog</span></button>
           </div>
-          <aside class="wdd-rail" id="wdd-rail" aria-label="Portfolio map, recent changes and analysis"></aside>
+          <div class="wdd-greet"><h1 id="wdd-greet-title">Welcome back</h1><p id="wdd-greet-line"></p></div>
+        </section>
+        <section class="wdd-cards" id="wdd-signals" aria-label="Portfolio summary"></section>
+        <div class="wdd-lower">
+          <section class="wdd-list" id="wdd-positions" aria-label="Your properties"></section>
+          <section class="wdd-detail" id="wdd-detail" aria-label="Property details" aria-live="polite"></section>
         </div>
-        <footer class="wdd-foot" id="wdd-foot"></footer>
       </div>
+      <aside class="wdd-board-side" id="wdd-rail" aria-label="Calendar and recent activity"></aside>
     </div>
-
+    <footer class="wdd-foot" id="wdd-foot"></footer>
   </main>
 
-  <button class="wdd-pull" id="wdd-pull" type="button" hidden><i class="fas fa-comment-dots" aria-hidden="true"></i>Ask Watchdog</button>
   <div class="wdd-drawer" id="wdd-drawer" hidden></div>
   <div class="wdd-toast" id="wdd-toast" role="status" aria-live="polite"></div>
-  <noscript><div class="wdd-boot"><div class="wdd-boot-card"><h1>JavaScript is required</h1><p>The Watchdog dashboard loads your private workspace in the browser.</p></div></div></noscript>
+  <noscript><div class="wdd-boot wdd-boot-static"><div class="wdd-boot-stage"><h1 class="wdd-boot-title">JavaScript is required</h1><p class="wdd-boot-msg">The Watchdog dashboard loads your private workspace in the browser.</p></div></div></noscript>
 
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.9.4/leaflet.min.js" defer></script>
   <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2/dist/umd/supabase.js" defer></script>
   <script src="/property/js/supabase-runtime.js" defer></script>
   <script src="/property/js/product-analytics.js" defer></script>
@@ -173,19 +85,9 @@
   <script src="/property/js/app-shell-2027.js" defer></script>
   <script src="/property/js/nj-address-autocomplete.js?v=20260922a" defer></script>
   <script src="/property/js/brand-consistency-runtime.js?v=20260912a" defer></script>
-  <script src="/property/js/tax-year-intelligence.js" defer></script>
   <script src="/property/js/dashboard/wd-core.js?v=20260926a" defer></script>
-  <script src="/property/js/dashboard/wd-dashboard-polish.js?v=20260827e" defer></script>
-  <script src="/property/js/dashboard/wd-render.js?v=20260926d" defer></script>
-  <script src="/property/js/dashboard/wd-dashboard-followup.js?v=20260827a" defer></script>
+  <script src="/property/js/dashboard/wd-render.js?v=20260927a" defer></script>
   <script src="/property/js/dashboard/wd-session-data-bridge.js?v=20260827c" defer></script>
   <script src="/property/js/dashboard/wd-intel.js?v=20260827a" defer></script>
-  <script src="/property/js/dashboard/dashboard-nj-news.js?v=20260827a" defer></script>
-  <script src="/property/js/dashboard/wd-dashboard-visual-core.js?v=20260911a" defer></script>
-  <script src="/property/js/dashboard/wd-dashboard-news-visuals.js?v=20260911a" defer></script>
-  <script src="/property/js/dashboard/wd-dashboard-spike-layout.js?v=20260925a" defer></script>
-  <script src="/property/js/dashboard/wd-dashboard-workspace.js?v=20260926a" defer></script>
 </body>
 </html>
-
-

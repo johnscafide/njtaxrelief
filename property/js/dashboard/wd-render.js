@@ -1,379 +1,344 @@
-/* Watchdog Dashboard V3 renderer. Reads WD state; never fetches. */
+/* ==========================================================================
+   Watchdog Dashboard board renderer. Reads WD state from wd-core.js; never
+   fetches. Layout: search + greeting, four summary cards, the property list
+   with a details card, and a side column with the calendar and activity.
+   Each region repaints only when its markup changes, so focus, the search
+   box and scroll position survive the secondary data arriving.
+   ========================================================================== */
 (function(w,d){
 'use strict';
 function start(){
-  var WD=w.WD;if(!WD)return;var H=WD.H,S=WD.S,esc=H.esc,map=null,railMap=null,voiceRecognition=null,analysisTab='assessed',selectedGapBin=-1;
-  var selectedPropertyPin='',mobileDrawerOpenerPin='',inspectorDismissed=false;
+  var WD=w.WD;if(!WD||start.done)return;start.done=true;
+  var H=WD.H,S=WD.S,esc=H.esc,voiceRecognition=null;
+  var today=new Date();
+  var ui={pin:'',sort:'review',all:false,calY:today.getFullYear(),calM:today.getMonth(),day:'',feed:'all'};
+  var LIST_LIMIT=5,WEEKS=17,DAY=86400000;
 
+  /* Clean public routes on WatchdogIndex; /property/... on the legacy host. */
+  function route(path){
+    var rt=w.NJPTRSupabaseRuntime,prefix=rt&&typeof rt.routePrefix==='string'?rt.routePrefix:((location.hostname==='watchdogindex.com'||location.hostname==='www.watchdogindex.com')?'':'/property');
+    path=String(path||'/');if(path.charAt(0)!=='/')path='/'+path;
+    return prefix+path;
+  }
+  function setHTML(id,html){var el=H.el(id);if(!el||el.__wddHTML===html)return false;el.__wddHTML=html;el.innerHTML=html;return true;}
+  function plural(n,one,many){return n===1?one:many;}
+  function dateKey(dt){return dt.getFullYear()+'-'+String(dt.getMonth()+1).padStart(2,'0')+'-'+String(dt.getDate()).padStart(2,'0');}
+  function place(p){return [H.titleCase(p.town),p.county?H.titleCase(p.county)+' County':''].filter(Boolean).join(', ')||'New Jersey';}
+
+  /* One status per property, from the shared category logic in wd-core. */
+  function statusOf(p){
+    var g=WD.gapFor(p),s=S.scores[p.pams_pin];
+    if(!g&&!(s&&s.score!=null))return{key:'none',label:'Not rated yet',short:'Not rated'};
+    var c=WD.categoryFor(p);
+    if(c==='bad')return{key:'review',label:'Worth a review',short:'Review'};
+    if(c==='warn')return{key:'watch',label:'Keep an eye on it',short:'Watch'};
+    return{key:'good',label:'Looks fair',short:'Fair'};
+  }
+  function scoreOf(p){var s=S.scores[p.pams_pin];return s&&s.score!=null?Math.round(s.score):null;}
+  function counts(props){var c={review:0,watch:0,good:0,none:0};props.forEach(function(p){c[statusOf(p).key]+=1;});return c;}
+
+  /* ---------------------------------------------------------------- top -- */
+  function greetingWord(){var h=new Date().getHours();return h<12?'Good morning':h<17?'Good afternoon':'Good evening';}
   function greeting(){
-    var phrases=['Be informed','Stay ahead','See the full picture',"Know what's changing",'Make informed moves','Lead with clarity','Decide with confidence'];
-    var today=new Date(),dayKey=today.getFullYear()*372+today.getMonth()*31+today.getDate(),phrase=phrases[((dayKey%phrases.length)+phrases.length)%phrases.length];
     var name=String(WD.userName()||'').trim().split(/\s+/)[0]||'';
-    if(!name||name==='there'||name.indexOf('@')>-1) return phrase;
-    return phrase+', '+name;
+    if(!name||name==='there'||name.indexOf('@')>-1)return greetingWord();
+    return greetingWord()+', '+name;
   }
-  function safeCssUrl(url){return String(url||'').replace(/[\\"')]/g,'');}
-  function tileUrl(p,z){
-    var lat=H.valid(p&&p.lat),lon=H.valid(p&&p.lon);if(lat==null||lon==null)return'';
-    z=z||15;var n=Math.pow(2,z),x=Math.floor((lon+180)/360*n),rad=lat*Math.PI/180;
-    var y=Math.floor((1-Math.asinh(Math.tan(rad))/Math.PI)/2*n);
-    return 'https://a.basemaps.cartocdn.com/light_all/'+z+'/'+x+'/'+y+'.png';
+  function summaryLine(){
+    var props=WD.filtered(),n=props.length,st=WD.stats(),c=counts(props),look=c.review+c.watch;
+    if(!n)return 'Add a New Jersey property and Watchdog will keep an eye on its assessment, taxes and changes for you.';
+    var first='Watchdog is watching <b>'+n.toLocaleString()+' '+plural(n,'property','properties')+'</b> for you. ';
+    var second=look?'<b>'+look+'</b> '+plural(look,'is','are')+' worth a closer look':'Nothing needs a closer look right now';
+    var third=st.changes30?', and <b>'+st.changes30+' '+plural(st.changes30,'change','changes')+'</b> came in over the last 30 days.':', and nothing new came in over the last 30 days.';
+    return first+second+third;
   }
-  function thumbStyle(p){
-    var u=tileUrl(p,15);return u?' style="background-image:url(\''+safeCssUrl(u)+'\')"':'';
-  }
-  function statusFor(p){
-    var g=WD.gapFor(p),cat=WD.categoryFor(p);
-    if((g&&g.pct>=15)||cat==='bad')return{label:'Review',cls:'is-review'};
-    if((g&&g.pct>=5)||cat==='warn')return{label:'Watch',cls:'is-watch'};
-    return{label:'Good',cls:'is-good'};
+  function paintTop(){
+    var slot=H.el('wdd-search-slot');
+    // The search box is built once so a repaint never wipes what someone is typing.
+    if(slot&&!slot.querySelector('#wdd-command')){
+      slot.innerHTML=
+        '<form class="wdd-search" id="wdd-command" role="search">'+
+          '<span class="wdd-search-icon" aria-hidden="true"><i class="fas fa-magnifying-glass"></i></span>'+
+          '<input id="wdd-command-input" data-watchdog-address-search type="search" autocomplete="off" placeholder="Search a New Jersey address..." aria-label="Search New Jersey property addresses">'+
+          '<button class="wdd-search-voice" type="button" data-act="voice-search" aria-label="Search by voice" title="Search by voice"><i class="fas fa-microphone" aria-hidden="true"></i></button>'+
+          '<kbd aria-hidden="true">⌘ K</kbd>'+
+        '</form>';
+      if(typeof w.WatchdogNJAddressAutocompleteRefresh==='function')w.setTimeout(w.WatchdogNJAddressAutocompleteRefresh,0);
+    }
+    var title=H.el('wdd-greet-title');
+    if(title&&title.textContent!==greeting())title.textContent=greeting();
+    setHTML('wdd-greet-line',summaryLine());
   }
 
-  // Appeal calendar. Mirrors appeal-deadline-rules.json (alternate_calendar_counties
-  // and baseline_month_day). The renderer never fetches, so the two baselines live
-  // here. Per that file's display_policy we show the statutory baseline only, never
-  // a countdown, and always tell the member to verify against their notice.
+  /* -------------------------------------------------------------- cards -- */
+  var DECO={
+    clover:'<svg class="wdd-deco wdd-deco--clover" viewBox="0 0 100 100" aria-hidden="true" focusable="false"><circle cx="50" cy="27" r="23"/><circle cx="73" cy="50" r="23"/><circle cx="50" cy="73" r="23"/><circle cx="27" cy="50" r="23"/><rect x="27" y="27" width="46" height="46"/></svg>',
+    paw:'<svg class="wdd-deco wdd-deco--paw" viewBox="0 0 100 100" aria-hidden="true" focusable="false"><ellipse cx="50" cy="66" rx="24" ry="20"/><ellipse cx="22" cy="42" rx="10" ry="13" transform="rotate(-18 22 42)"/><ellipse cx="40" cy="24" rx="10" ry="13" transform="rotate(-6 40 24)"/><ellipse cx="61" cy="24" rx="10" ry="13" transform="rotate(6 61 24)"/><ellipse cx="79" cy="42" rx="10" ry="13" transform="rotate(18 79 42)"/></svg>',
+    funnel:'<svg class="wdd-deco wdd-deco--funnel" viewBox="0 0 100 90" aria-hidden="true" focusable="false"><path d="M10 10H90L50 84Z" stroke-linejoin="round" stroke-width="12"/></svg>',
+    burst:''
+  };
+  (function(){
+    var pts=[],n=9,cx=50,cy=50;
+    for(var i=0;i<n*2;i++){var r=i%2?26:48,a=Math.PI*i/n-Math.PI/2;pts.push((cx+r*Math.cos(a)).toFixed(1)+','+(cy+r*Math.sin(a)).toFixed(1));}
+    DECO.burst='<svg class="wdd-deco wdd-deco--burst" viewBox="0 0 100 100" aria-hidden="true" focusable="false"><polygon points="'+pts.join(' ')+'" stroke-linejoin="round" stroke-width="6"/></svg>';
+  })();
+
+  function stat(value,unit,caption,lead){
+    return '<div class="wdd-stat'+(lead?' is-lead':'')+'"><b>'+value+(unit?'<small>'+unit+'</small>':'')+'</b><span>'+caption+'</span></div>';
+  }
+  function scoreCard(props){
+    var st=WD.stats(),scored=props.filter(function(p){return scoreOf(p)!=null;}),avg=st.score!=null?Math.round(st.score):null,peer=st.peer!=null?Math.round(st.peer):null;
+    var shown=props.slice(0,16),bars;
+    if(!shown.length)bars='<div class="wdd-bars" aria-hidden="true">'+[40,62,30,74,52,66,44].map(function(h){return '<span class="wdd-bar is-empty"><i style="height:'+h+'%"></i></span>';}).join('')+'</div>';
+    else bars='<div class="wdd-bars" role="group" aria-label="Watchdog Score by property">'+shown.map(function(p){
+      var sc=scoreOf(p),pin=String(p.pams_pin||''),sel=pin&&pin===ui.pin;
+      var label=(p.address||pin||'Saved property')+': '+(sc==null?'not scored yet':'Watchdog Score '+sc);
+      return '<button type="button" class="wdd-bar'+(sc==null?' is-empty':'')+(sel?' is-selected':'')+'" data-select-pin="'+esc(pin)+'" aria-label="'+esc(label)+'" title="'+esc(label)+'" aria-pressed="'+(sel?'true':'false')+'"><i style="height:'+(sc==null?34:Math.max(6,Math.min(100,sc)))+'%"></i></button>';
+    }).join('')+(peer!=null&&shown.length?'<span class="wdd-peer-line" style="bottom:'+Math.max(4,Math.min(96,peer))+'%" aria-hidden="true"><span>Town median '+peer+'</span></span>':'')+'</div>';
+    var verdict=WD.verdict(avg);
+    return '<article class="wdd-card wdd-card--score">'+DECO.clover+
+      '<div class="wdd-card-head"><h2>Watchdog Score:</h2><a class="wdd-card-info" href="'+esc(route('/data-methodology'))+'#robust" aria-label="How the Watchdog Score works" title="The Watchdog Score, powered by the ROBUST Framework."><i class="fas fa-info" aria-hidden="true"></i></a></div>'+
+      '<div class="wdd-stats">'+
+        stat(avg==null?'—':String(avg),avg==null?'':'/100','Your average',true)+
+        stat(peer==null?'—':String(peer),'','Town median')+
+        stat(String(scored.length),props.length?'of '+props.length:'','Scored')+
+      '</div>'+
+      '<div class="wdd-bars-wrap">'+bars+'</div>'+
+      '<div class="wdd-axis"><span>'+(props.length?esc(avg==null?'Not scored yet':verdict.label):'Your properties will show here')+'</span><span>Higher is better</span></div>'+
+    '</article>';
+  }
+
+  function weekly(changes){
+    var end=new Date();end.setHours(23,59,59,999);var endT=end.getTime(),out=[];
+    for(var i=0;i<WEEKS;i++){var from=endT-(WEEKS-i)*7*DAY;out.push({from:from,count:0});}
+    changes.forEach(function(r){var t=new Date(r.occurred_at).getTime();if(!Number.isFinite(t)||t>endT)return;var idx=WEEKS-1-Math.floor((endT-t)/(7*DAY));if(idx>=0&&idx<WEEKS)out[idx].count+=1;});
+    return out;
+  }
+  function smoothPath(pts,top,base){
+    if(pts.length<2)return'';
+    var dd='M'+pts[0][0].toFixed(1)+' '+pts[0][1].toFixed(1);
+    function clampY(v){return Math.max(top,Math.min(base,v));}
+    for(var i=0;i<pts.length-1;i++){
+      var p0=pts[i-1]||pts[i],p1=pts[i],p2=pts[i+1],p3=pts[i+2]||p2;
+      var c1x=p1[0]+(p2[0]-p0[0])/6,c1y=clampY(p1[1]+(p2[1]-p0[1])/6),c2x=p2[0]-(p3[0]-p1[0])/6,c2y=clampY(p2[1]-(p3[1]-p1[1])/6);
+      dd+=' C'+c1x.toFixed(1)+' '+c1y.toFixed(1)+' '+c2x.toFixed(1)+' '+c2y.toFixed(1)+' '+p2[0].toFixed(1)+' '+p2[1].toFixed(1);
+    }
+    return dd;
+  }
+  function shortDate(t){return new Date(t).toLocaleDateString('en-US',{month:'short',day:'numeric'});}
+  function changesCard(props){
+    var st=WD.stats(),changes=st.changes,weeks=weekly(changes),max=Math.max.apply(null,weeks.map(function(x){return x.count;}).concat([1]));
+    var W=600,Hh=120,top=12,base=108,pad=6;
+    var pts=weeks.map(function(wk,i){return[pad+i*(W-2*pad)/(WEEKS-1),base-(wk.count/max)*(base-top)];});
+    var peak=-1,peakCount=0;weeks.forEach(function(wk,i){if(wk.count>peakCount){peakCount=wk.count;peak=i;}});
+    var affected=H.unique(changes.map(function(r){return r.pams_pin;})).length;
+    var chart='<div class="wdd-line-wrap" style="position:relative">'+
+      '<svg class="wdd-line" viewBox="0 0 '+W+' '+Hh+'" preserveAspectRatio="none" role="img" aria-label="'+esc(changes.length?'Changes per week over the last '+WEEKS+' weeks. Busiest week: '+peakCount+' '+plural(peakCount,'change','changes')+', week of '+shortDate(weeks[peak].from+DAY)+'.':'No changes in the last '+WEEKS+' weeks.')+'">'+
+        '<line class="wdd-line-base" x1="0" y1="'+base+'" x2="'+W+'" y2="'+base+'" vector-effect="non-scaling-stroke"/>'+
+        (peak>-1?'<line class="wdd-line-drop" x1="'+pts[peak][0].toFixed(1)+'" y1="'+pts[peak][1].toFixed(1)+'" x2="'+pts[peak][0].toFixed(1)+'" y2="'+base+'" vector-effect="non-scaling-stroke"/>':'')+
+        '<path class="wdd-line-path" d="'+smoothPath(pts,top,base)+'" vector-effect="non-scaling-stroke"/>'+
+      '</svg>'+
+      (peak>-1?'<svg class="wdd-line-dot-wrap" viewBox="0 0 14 14" aria-hidden="true" style="position:absolute;width:14px;height:14px;left:calc('+(pts[peak][0]/W*100).toFixed(2)+'% - 7px);top:calc('+(10+pts[peak][1]/Hh*132).toFixed(1)+'px - 7px);overflow:visible"><circle class="wdd-line-dot" cx="7" cy="7" r="5.5"/></svg>':'')+
+    '</div>';
+    var labelIdx=[0,4,8,12,16],axis=labelIdx.map(function(i){
+      var near=peak>-1&&Math.abs(i-peak)<=1;
+      return near?'<b>'+esc(shortDate(weeks[peak].from+DAY))+'</b>':'<span>'+esc(shortDate(weeks[i].from+DAY))+'</span>';
+    });
+    if(peak>-1&&labelIdx.every(function(i){return Math.abs(i-peak)>1;})){
+      // Keep the peak's date visible even when it falls between the axis ticks.
+      var slot=Math.round(peak/4);axis[Math.max(0,Math.min(4,slot))]='<b>'+esc(shortDate(weeks[peak].from+DAY))+'</b>';
+    }
+    return '<article class="wdd-card wdd-card--changes">'+DECO.paw+
+      '<div class="wdd-card-head"><h2>Changes:</h2><a class="wdd-card-link" href="'+esc(route('/pulse'))+'">Show all <i class="fas fa-arrow-right" aria-hidden="true"></i></a></div>'+
+      '<div class="wdd-stats">'+
+        stat(String(st.changes30),'','Last 30 days',true)+
+        stat(String(changes.length),'','Last 120 days')+
+        stat(String(affected),props.length?'of '+props.length:'','Properties')+
+      '</div>'+chart+
+      '<div class="wdd-line-axis" aria-hidden="true">'+axis.join('')+'</div>'+
+      (changes.length?'':'<p class="wdd-card-note">A quiet stretch. Nothing has changed on your properties in the last 120 days.</p>')+
+    '</article>';
+  }
+  function statusCard(props){
+    var c=counts(props);
+    return '<article class="wdd-card wdd-card--status">'+DECO.funnel+
+      '<div class="wdd-card-head"><h2>By status:</h2></div>'+
+      '<div class="wdd-stats">'+stat(String(c.good),'','Looks fair',true)+stat(String(c.watch),'','Watch')+stat(String(c.review),'','Review')+'</div>'+
+      (c.none?'<p class="wdd-card-note">'+c.none+' '+plural(c.none,'property is','properties are')+' not rated yet.</p>':'')+
+    '</article>';
+  }
+  function valueCard(){
+    var st=WD.stats();
+    return '<article class="wdd-card wdd-card--value">'+DECO.burst+
+      '<div class="wdd-card-head"><h2>Portfolio value:</h2></div>'+
+      '<div class="wdd-stats">'+
+        stat(st.value?esc(H.money(st.value)):'—','','Market est.',true)+
+        stat(st.assessed?esc(H.money(st.assessed)):'—','','Assessed')+
+        stat(st.tax?esc(H.money(st.tax)):'—','','Annual tax')+
+      '</div>'+
+      (st.atStake?'<p class="wdd-card-note">About <b>'+esc(H.dollars(st.atStake))+'</b> a year sits in assessments above market evidence.</p>':'')+
+    '</article>';
+  }
+  function paintCards(){
+    var props=WD.filtered();
+    setHTML('wdd-signals',scoreCard(props)+changesCard(props)+statusCard(props)+valueCard());
+  }
+
+  /* --------------------------------------------------------- list+detail -- */
+  var RANK={review:0,watch:1,good:2,none:3};
+  function sortedProps(){
+    var props=WD.filtered().slice();
+    props.sort(function(a,b){
+      if(ui.sort==='score'){var x=scoreOf(a),y=scoreOf(b);if(x==null&&y==null)return 0;if(x==null)return 1;if(y==null)return -1;return x-y;}
+      if(ui.sort==='tax')return H.num(b.last_year_tax)-H.num(a.last_year_tax);
+      if(ui.sort==='recent')return new Date(b.created_at||0).getTime()-new Date(a.created_at||0).getTime();
+      var r=RANK[statusOf(a).key]-RANK[statusOf(b).key];if(r)return r;
+      var ga=WD.gapFor(a),gb=WD.gapFor(b);return (gb?gb.pct:-999)-(ga?ga.pct:-999);
+    });
+    return props;
+  }
+  function selected(list){
+    if(!list.length)return null;
+    var found=list.filter(function(p){return String(p.pams_pin||'')===ui.pin;})[0];
+    if(!found){found=list[0];ui.pin=String(found.pams_pin||'');}
+    return found;
+  }
+  function row(p){
+    var st=statusOf(p),sc=scoreOf(p),pin=String(p.pams_pin||''),sel=pin===ui.pin;
+    return '<li><button type="button" class="wdd-row'+(sel?' is-selected':'')+'" data-select-pin="'+esc(pin)+'" aria-pressed="'+(sel?'true':'false')+'">'+
+      '<span class="wdd-row-icon is-tone-'+st.key+'" aria-hidden="true"><i class="fas fa-house"></i></span>'+
+      '<span class="wdd-row-text"><b>'+esc(p.address||pin||'Saved property')+'</b><small>'+esc(place(p))+' · '+esc(st.label)+'</small></span>'+
+      '<span class="wdd-tag is-tone-'+st.key+'">'+(sc==null?'No score':'Score '+sc)+'</span>'+
+    '</button></li>';
+  }
+  function paintList(){
+    var list=sortedProps();selected(list);
+    var head='<div class="wdd-section-head"><h2 id="wdd-list-title">Your properties</h2>'+
+      (list.length>1?'<label class="wdd-pill-select"><span class="wdd-sr">Sort properties</span><select data-act="sort">'+
+        [['review','Needs review'],['score','Lowest score'],['tax','Highest tax'],['recent','Recently added']].map(function(o){return '<option value="'+o[0]+'"'+(ui.sort===o[0]?' selected':'')+'>'+o[1]+'</option>';}).join('')+
+      '</select></label>':'')+'</div>';
+    var body;
+    if(!list.length){
+      body='<div class="wdd-empty"><i class="fas fa-house-circle-check" aria-hidden="true"></i><p>No saved properties yet. Look one up and it will show here with its assessment, taxes and Watchdog Score.</p><a class="wdd-btn" href="'+esc(route('/'))+'">Look up an address</a></div>';
+    }else{
+      var shown=ui.all?list:list.slice(0,LIST_LIMIT);
+      body='<ul class="wdd-rows" aria-labelledby="wdd-list-title">'+shown.map(row).join('')+'</ul>'+
+        (list.length>LIST_LIMIT?'<button type="button" class="wdd-list-more" data-act="list-all" aria-expanded="'+(ui.all?'true':'false')+'">'+(ui.all?'Show fewer':'Show all '+list.length)+'</button>':'');
+    }
+    setHTML('wdd-positions',head+body);
+  }
+  function ago(v){var t=new Date(v).getTime();return Number.isFinite(t)&&Date.now()-t<60000?'just now':H.ago(v);}
+  function latestChange(p){return S.changes.filter(function(r){return r.pams_pin===p.pams_pin;})[0]||null;}
+  function paintDetail(){
+    var list=sortedProps(),p=selected(list);
+    var head='<div class="wdd-section-head"><h2>Property details</h2></div>';
+    if(!p){setHTML('wdd-detail',head+'<div class="wdd-detail-card"><p style="margin:0;font-size:14px;line-height:1.5">Pick a property from your list to see its assessment, market estimate and latest changes here.</p></div>');return;}
+    var st=statusOf(p),g=WD.gapFor(p),sc=scoreOf(p),s=S.scores[p.pams_pin],pin=String(p.pams_pin||''),change=latestChange(p);
+    var finding=S.findings.filter(function(f){return f.pams_pin===p.pams_pin;})[0],why=finding?H.copy(finding.why_now):'';
+    var tags=['<span>'+esc(st.label)+'</span>'];
+    if(g)tags.push('<span>'+(g.pct>0?'+':'')+g.pct.toFixed(1)+'% vs market</span>');
+    if(sc!=null)tags.push('<span>Score '+sc+(s&&s.peer!=null?' · town '+Math.round(s.peer):'')+'</span>');
+    var rows=[
+      ['Assessed',p.assessed?esc(H.dollars(p.assessed))+(p.assessment_year?'<small>'+esc(String(p.assessment_year))+' assessment</small>':''):'Not available'],
+      ['Market estimate',p.watchdog_value?esc(H.dollars(p.watchdog_value)):'Not available'],
+      ['Annual tax',p.last_year_tax?esc(H.dollars(p.last_year_tax))+(p.last_year_tax_year?'<small>'+esc(String(p.last_year_tax_year))+(p.municipal_tax_live?' municipal record':'')+'</small>':''):'Not available']
+    ];
+    if(g&&g.dollars&&g.pct>=5)rows.push(['Gap in tax',esc(H.dollars(g.dollars))+' a year<small>Estimate, not guaranteed savings</small>']);
+    rows.push(['Latest change',change?esc(change.title||H.pretty(change.event_type))+'<small>'+esc(ago(change.occurred_at))+'</small>':'Nothing in the last 120 days']);
+    if(why)rows.push(['Why now',esc(why)]);
+    var gate=WD.isPro()?'':'<p class="wdd-detail-gate">Evidence files and the appeal workflow come with Pro. <a href="'+esc(route('/pro'))+'">Compare plans</a></p>';
+    setHTML('wdd-detail',head+'<div class="wdd-detail-card">'+
+      '<div class="wdd-detail-top"><div><a href="'+esc(route('/home')+'?pin='+encodeURIComponent(pin))+'">'+esc(p.address||pin||'Saved property')+'</a><p>'+esc(place(p))+'</p></div>'+(pin?'<span class="wdd-pin" title="Property PIN">PIN '+esc(pin)+'</span>':'')+'</div>'+
+      '<div class="wdd-detail-tags">'+tags.join('')+'</div>'+
+      '<dl class="wdd-detail-list">'+rows.map(function(r){return '<div><dt>'+r[0]+'</dt><dd>'+r[1]+'</dd></div>';}).join('')+'</dl>'+
+      '<div class="wdd-detail-actions"><a class="wdd-btn" href="'+esc(route('/home')+'?pin='+encodeURIComponent(pin))+'">Open property</a><a class="wdd-btn is-ghost" href="'+esc(route('/report')+'?pin='+encodeURIComponent(pin))+'">Full report</a></div>'+
+      gate+
+    '</div>');
+  }
+
+  /* --------------------------------------------------------------- side -- */
+  // Appeal calendar baselines mirror appeal-deadline-rules.json: Burlington,
+  // Gloucester and Monmouth use the January 15 baseline, other counties
+  // April 1. Per its display_policy: statutory baseline only, no countdown,
+  // and always verify against the assessment notice.
   var APPEAL_ALT_COUNTIES=['BURLINGTON','GLOUCESTER','MONMOUTH'];
   function countyKey(c){return String(c||'').trim().toUpperCase().replace(/\s+COUNTY$/,'');}
   function nextBaseline(month,day){var now=new Date(),y=now.getFullYear();if(now>new Date(y,month-1,day,23,59,59))y+=1;return new Date(y,month-1,day);}
-  function shortDate(dt){try{return dt.toLocaleDateString('en-US',{month:'short',day:'numeric',year:'numeric'});}catch(_e){return'';}}
-  function appealBaseline(props){
+  function baselines(props){
     var alt=false,trad=false;
     props.forEach(function(p){var k=countyKey(p.county);if(!k)return;if(APPEAL_ALT_COUNTIES.indexOf(k)>-1)alt=true;else trad=true;});
-    var dates=[];if(alt)dates.push(shortDate(nextBaseline(1,15)));if(trad)dates.push(shortDate(nextBaseline(4,1)));
-    return dates.filter(Boolean).length?{dates:dates,mixed:alt&&trad}:null;
+    return{alt:alt,trad:trad};
   }
-
-  function heroState(st){
-    if(!st.count)return'empty';
-    if(st.over>0)return'review';
-    var measured=WD.filtered().some(function(p){return WD.gapFor(p)!=null;});
-    return measured?'clear':'watch';
-  }
-  function heroOverMarketAlert(st){
-    if(!st.over)return'';
-    var noun=st.over===1?'property is':'properties are';
-    var description=st.over+' '+noun+' assessed at least 5% above market evidence';
-    return'<button class="wdd-h27-alert" type="button" data-act="show-overmarket-evidence" title="'+esc(description)+'" aria-label="'+esc(description+'. Show assessed versus market evidence')+'"><i class="fas fa-bell" aria-hidden="true"></i><span>'+st.over.toLocaleString()+'</span></button>';
-  }
-  function heroSince(st){
-    if(!st.count)return'';
-    var bits=[],base=appealBaseline(WD.filtered());
-    bits.push('<li><i class="fas fa-wave-square" aria-hidden="true"></i><span><b>'+st.changes30+'</b> '+(st.changes30===1?'change':'changes')+' in the last 30 days</span></li>');
-    if(base)bits.push('<li><i class="fas fa-calendar-day" aria-hidden="true"></i><span>Next appeal baseline <b>'+base.dates.map(esc).join('</b> or <b>')+'</b>'+(base.mixed?' by county':'')+' · verify on your assessment notice</span></li>');
-    return'<ul class="wdd-h27-since">'+bits.join('')+'</ul>';
-  }
-
-  function paintStanding(){
-    var st=WD.stats(),state=heroState(st);
-    var host=H.el('wdd-standing');
-    // Keep the score panel node across repaints so its arc animates from the
-    // previous value instead of flashing empty and redrawing from zero.
-    var keep=host.querySelector('.wdd-h27-score');if(keep)keep.remove();
-    host.innerHTML=
-      '<div class="wdd-appbar">'+
-        '<form class="wdd-command" id="wdd-command" role="search"><i class="fas fa-magnifying-glass" aria-hidden="true"></i>'+
-          '<input id="wdd-command-input" data-watchdog-address-search type="search" autocomplete="off" placeholder="Search any New Jersey property address..." aria-label="Search New Jersey property addresses">'+
-          '<button class="wdd-command-voice" type="button" data-act="voice-search" aria-label="Search by voice" title="Search by voice"><i class="fas fa-microphone" aria-hidden="true"></i></button>'+
-          '<kbd>⌘ K</kbd></form>'+
-      '</div>'+
-      '<div class="wdd-h27" id="wdd-hero" data-state="'+state+'">'+
-        '<div class="wdd-h27-main">'+
-          '<div class="wdd-h27-who"><div class="wdd-h27-who-text">'+
-            '<div class="wdd-h27-eyebrow"><span>'+(st.count?st.count.toLocaleString()+' '+(st.count===1?'property':'properties')+' watched':'No properties yet')+'</span></div>'+
-            '<h1>'+esc(greeting())+'</h1></div></div>'+
-          heroOverMarketAlert(st)+
-          heroSince(st)+
-        '</div>'+
-        '<div class="wdd-h27-slot" id="wdd-hero-score"></div>'+
-      '</div>';
-    if(keep)H.el('wdd-hero-score').appendChild(keep);
-    if(typeof w.WatchdogNJAddressAutocompleteRefresh==='function')w.setTimeout(w.WatchdogNJAddressAutocompleteRefresh,0);
-  }
-
-  function paintSignals(){
-    var st=WD.stats(),review=st.warn+st.bad;
-    var avgTax=st.count&&st.tax?st.tax/st.count:0;
-    var items=[
-      {k:'Properties',icon:'fa-house',v:st.count.toLocaleString(),n:'Saved properties'},
-      {k:'Market Estimate',icon:'fa-coins',v:st.value?H.money(st.value):'—',n:st.value?'Current governed estimate':'Needs market evidence'},
-      {k:'Annual Tax',icon:'fa-file-invoice-dollar',v:st.tax?H.money(st.tax):'—',n:avgTax?H.dollars(avgTax)+' avg per property':'No tax total yet'},
-      {c:'is-review',k:'Worth Reviewing',icon:'fa-flag',v:review.toLocaleString(),n:review+' of '+st.count+' properties',t:st.bad?'bad':st.warn?'warn':'ok'}
-    ];
-    var cards=items.map(function(i){
-      return '<article class="wdd-signal '+(i.c||'')+'"><div class="wdd-signal-top"><div class="wdd-signal-k">'+esc(i.k)+'</div><span class="wdd-signal-icon"><i class="fas '+i.icon+'" aria-hidden="true"></i></span></div>'+
-        '<div class="wdd-signal-v'+(i.t?' wdd-'+i.t:'')+'">'+(i.raw?i.v:esc(i.v))+'</div><div class="wdd-signal-n">'+esc(i.n)+'</div></article>';
-    }).join('');
-    cards+='<a class="wdd-signal wdd-sponsor-signal" href="https://johnvarano.com/?utm_source=watchdog&utm_medium=internal_ad&utm_campaign=greentree_financing&utm_content=dashboard_kpi" target="_blank" rel="noopener sponsored" aria-label="Advertisement: Greentree Mortgage. Explore purchase, refinance, and home equity options with John Varano, NMLS 142739.">'+
-      '<div class="wdd-sponsor-top"><span class="wdd-ad-label">Advertisement</span><img src="/johnvarano.jpg" alt="" loading="lazy"></div>'+
-      '<strong>Greentree Mortgage</strong><span>Know the full monthly number before you start making offers. Get a quick estimate for purchase, refinance, or home equity options.</span><em>John Varano · NMLS #142739</em>'+
-      '<span class="wdd-sponsor-cta">Start a quick estimate <i class="fas fa-arrow-right" aria-hidden="true"></i></span></a>';
-    H.el('wdd-signals').innerHTML=cards;
-  }
-
-  var COLS=[
-    {key:'address',label:'Property'},
-    {key:'assessed',label:'Assessed',r:true},
-    {key:'value',label:'Market est.',r:true},
-    {key:'gap',label:'Gap',r:true},
-    {key:'tax',label:'Annual tax',r:true},
-    {key:'score',label:'Score',r:true},
-    {key:null,label:'Status'},
-    {key:null,label:'',r:true}
-  ];
-  function sortValue(p,key){
-    var g=WD.gapFor(p),s=S.scores[p.pams_pin];
-    if(key==='address')return String(p.address||'').toLowerCase();
-    if(key==='assessed')return H.num(p.assessed);
-    if(key==='value')return H.num(p.watchdog_value);
-    if(key==='gap')return g?g.pct:-999;
-    if(key==='tax')return H.num(p.last_year_tax);
-    if(key==='score')return s?s.score:-1;
-    return 0;
-  }
-  function sortedProps(){
-    var props=WD.filtered().slice(),dir=S.sort.dir==='asc'?1:-1;
-    props.sort(function(a,b){var x=sortValue(a,S.sort.key),y=sortValue(b,S.sort.key);return x===y?0:(x>y?1:-1)*dir;});
-    return props;
-  }
-  function rows(){
-    return sortedProps().map(function(p){
-      var g=WD.gapFor(p),s=S.scores[p.pams_pin],sc=s?Math.round(s.score):null,status=statusFor(p),gapTone=g==null?'':' wdd-'+(g.pct>=15?'bad':g.pct>=5?'warn':'ok');
-      var pin=String(p.pams_pin||''),selected=pin===selectedPropertyPin;
-      return '<tr data-pin="'+esc(pin)+'" class="'+(selected?'is-selected':'')+'">'+
-        '<td><div class="wdd-property-cell"><span class="wdd-property-thumb"'+thumbStyle(p)+' aria-hidden="true"><i class="fas fa-house"></i></span><button class="wdd-select-property" type="button" data-select-pin="'+esc(pin)+'" aria-current="'+(selected?'true':'false')+'"><span>'+esc(p.address||p.pams_pin||'Saved property')+'</span><small>'+esc([H.titleCase(p.town),H.titleCase(p.county)].filter(Boolean).join(' · ')||'New Jersey')+'</small></button></div></td>'+
-        '<td class="wdd-r wdd-fig" data-label="Assessed">'+(p.assessed?H.money(p.assessed):'—')+'</td>'+
-        '<td class="wdd-r wdd-fig" data-label="Market est.">'+(p.watchdog_value?H.money(p.watchdog_value):'—')+'</td>'+
-        '<td class="wdd-r" data-label="Gap"><span class="wdd-fig'+gapTone+'">'+(g==null?'—':(g.pct>0?'+':'')+g.pct.toFixed(1)+'%')+'</span>'+(g&&g.dollars?'<span class="wdd-sub">'+esc(H.dollars(g.dollars))+'/yr</span>':'')+'</td>'+
-        '<td class="wdd-r wdd-fig" data-label="Annual tax">'+(p.last_year_tax?H.money(p.last_year_tax):'—')+(p.last_year_tax_year?'<span class="wdd-sub">'+esc(String(p.last_year_tax_year))+(p.municipal_tax_live?' municipal':'')+'</span>':'')+'</td>'+
-        '<td class="wdd-r" data-label="Score"><span class="wdd-scorecell wdd-'+WD.categoryFor(p)+'"><b>'+(sc==null?'—':sc)+'</b></span></td>'+
-        '<td data-label="Status"><span class="wdd-status-pill '+status.cls+'">'+status.label+'</span></td>'+
-        '<td class="wdd-r wdd-row-actions-cell"><button class="wdd-row-menu" type="button" aria-label="Property options" aria-expanded="false"><i class="fas fa-ellipsis"></i></button>'+
-          '<div class="wdd-row-actions" hidden role="menu">'+
-            '<a role="menuitem" data-property-action="open" href="/property/home?pin='+encodeURIComponent(p.pams_pin||'')+'"><i class="fas fa-house"></i><span>Open property</span></a>'+
-            '<a role="menuitem" data-property-action="report" href="/property/report?pin='+encodeURIComponent(p.pams_pin||'')+'"><i class="fas fa-file-lines"></i><span>Full report</span></a>'+
-            '<a role="menuitem" data-property-action="pulse" href="/property/pulse?pin='+encodeURIComponent(p.pams_pin||'')+'"><i class="fas fa-wave-square"></i><span>View changes</span></a>'+
-            '<a role="menuitem" data-property-action="lookup" href="/property/?address='+encodeURIComponent(p.address||'')+'"><i class="fas fa-magnifying-glass"></i><span>New lookup</span></a>'+
-            '<button role="menuitem" type="button" data-property-action="copy-address" data-address="'+esc(p.address||'')+'"><i class="far fa-copy"></i><span>Copy address</span></button>'+
-          '</div></td>'+
-      '</tr>';
-    }).join('');
-  }
-  function inspectorContent(p,suffix){
-    if(!p)return '<div class="wdd-property-inspector-empty"><i class="fas fa-house" aria-hidden="true"></i><p>Select a property to see its quick details.</p></div>';
-    var place=[H.titleCase(p.town),H.titleCase(p.county)].filter(Boolean).join(', ');
-    var taxYear=p.last_year_tax_year||null;
-    var open='/property/home?pin='+encodeURIComponent(p.pams_pin||'');
-    return '<div class="wdd-inspector-heading"><div><p class="wdd-inspector-kicker">Property snapshot</p><h3 id="wdd-property-detail-title-'+suffix+'">'+esc(p.address||p.pams_pin||'Saved property')+'</h3><p class="wdd-inspector-place">'+esc(place||'New Jersey')+(p.pams_pin?' · PIN '+esc(p.pams_pin):'')+'</p></div>'+(suffix==='desktop'?'<button class="wdd-inspector-close" type="button" data-inspector-close aria-label="Close property details"><i class="fas fa-xmark" aria-hidden="true"></i></button>':'')+'</div>'+
-      '<dl class="wdd-inspector-values"><div><dt>Assessed value'+(p.assessment_year?' · '+esc(String(p.assessment_year)):'')+'</dt><dd>'+(p.assessed?esc(H.money(p.assessed)):'Not available')+'</dd></div><div><dt>Market estimate</dt><dd>'+(p.watchdog_value?esc(H.money(p.watchdog_value)):'Not available')+'</dd></div><div><dt>Annual tax'+(taxYear?' · '+esc(String(taxYear)):'')+'</dt><dd>'+(p.last_year_tax?esc(H.money(p.last_year_tax)):'Not available')+'</dd></div></dl>'+
-      taxHistoryContent(p)+
-      '<section class="wdd-inspector-section"><h4>Owner</h4><p>Owner details are not available in this dashboard.</p></section>'+
-      '<section class="wdd-inspector-section"><h4>Connections &amp; activity</h4><p>CRM/BoldTrail links and property activity are not available in this dashboard.</p></section>'+
-      '<a class="wdd-inspector-open" href="'+open+'">Open property <i class="fas fa-arrow-up-right-from-square" aria-hidden="true"></i></a>';
-  }
-  function externalHttpsUrl(value){try{var parsed=new URL(String(value||''),location.origin);return parsed.protocol==='https:'?parsed.href:'';}catch(_e){return'';}}
-  function taxHistoryContent(p){
-    var annual=p.municipal_tax_live===true&&p.municipal_tax_annual&&typeof p.municipal_tax_annual==='object'?p.municipal_tax_annual:null;
-    var years=annual?Object.keys(annual).filter(function(year){return /^\d{4}$/.test(year);}).sort(function(a,b){return Number(b)-Number(a);}):[];
-    if(!p.municipal_tax_live)return '<section class="wdd-inspector-section wdd-tax-history"><h4>Annual tax history</h4><p>Not available in this dashboard because no exact municipal match is loaded.</p></section>';
-    if(!years.length)return '<section class="wdd-inspector-section wdd-tax-history"><h4>Annual tax history</h4><p>No annual tax rows were returned for this exact municipal match.</p>'+taxSourceNote(p)+'</section>';
-    function hasNumber(value){return value!==null&&value!==undefined&&value!==''&&Number.isFinite(Number(value));}
-    function taxMoney(value){return hasNumber(value)?Number(value).toLocaleString('en-US',{style:'currency',currency:'USD',minimumFractionDigits:2,maximumFractionDigits:2}):'—';}
-    var rows=years.map(function(year){var row=annual[year]||{};var rate=hasNumber(row.tax_rate)?Number(row.tax_rate).toLocaleString('en-US',{maximumFractionDigits:4})+'%':'—';return '<tr><th scope="row">'+esc(year)+'</th><td>'+esc(taxMoney(row.property_tax_billed))+'</td><td>'+esc(rate)+'</td><td>'+(hasNumber(row.total_assessed_value)?esc(H.money(row.total_assessed_value)):'—')+'</td></tr>';}).join('');
-    return '<section class="wdd-inspector-section wdd-tax-history"><h4>Annual tax history</h4><div class="wdd-tax-history-scroll"><table aria-label="Annual municipal property tax evidence"><thead><tr><th scope="col">Year</th><th scope="col">Billed</th><th scope="col">Rate</th><th scope="col">Assessment</th></tr></thead><tbody>'+rows+'</tbody></table></div>'+taxSourceNote(p)+'</section>';
-  }
-  function taxSourceNote(p){
-    var href=externalHttpsUrl(p.municipal_tax_source),provider=String(p.municipal_tax_provider||'Municipal tax evidence'),semantics=String(p.municipal_tax_semantics||'Exact municipal address match.');
-    var checked='';
-    if(p.municipal_tax_checked_at){var date=new Date(p.municipal_tax_checked_at);if(Number.isFinite(date.getTime()))checked=' Checked '+date.toLocaleDateString('en-US',{month:'short',day:'numeric',year:'numeric'})+'.';}
-    return '<p class="wdd-tax-history-source">Source: '+(href?'<a href="'+esc(href)+'" target="_blank" rel="noopener">'+esc(provider)+'</a>':esc(provider))+'. '+esc(semantics)+esc(checked)+'</p>';
-  }
-  function selectedProperty(props){
-    if(!props.length){selectedPropertyPin='';return null;}
-    if(inspectorDismissed&&!selectedPropertyPin)return null;
-    var found=props.find(function(p){return String(p.pams_pin||'')===selectedPropertyPin;});
-    if(!found){found=props[0];selectedPropertyPin=String(found.pams_pin||'');}
-    return found;
-  }
-  function propertyInspector(p){
-    return '<aside class="wdd-property-inspector" aria-label="Selected property details">'+inspectorContent(p,'desktop')+'</aside>'+
-      '<dialog class="wdd-property-dialog" id="wdd-property-dialog" aria-label="Property details">'+
-        '<div class="wdd-property-dialog-head"><span>Property details</span><button class="wdd-inspector-close" type="button" data-dialog-close aria-label="Close property details"><i class="fas fa-xmark" aria-hidden="true"></i></button></div>'+
-        '<div class="wdd-property-dialog-content">'+inspectorContent(p,'mobile')+'</div>'+
-      '</dialog>';
-  }
-  function paintPositions(){
-    var props=WD.filtered(),selected=selectedProperty(props),current=COLS.filter(function(c){return c.key===S.sort.key;})[0]||COLS[0];
-    var head=COLS.map(function(c){
-      if(!c.key)return '<th'+(c.r?' class="wdd-r"':'')+'>'+esc(c.label)+'</th>';
-      var arrow=S.sort.key===c.key?(S.sort.dir==='asc'?' ↑':' ↓'):'';
-      return '<th'+(c.r?' class="wdd-r"':'')+'><button type="button" data-sort="'+c.key+'">'+esc(c.label)+arrow+'</button></th>';
-    }).join('');
-    var body=props.length?'<div class="wdd-scrollx"><table class="wdd-table"><thead><tr>'+head+'</tr></thead><tbody>'+rows()+'</tbody></table></div>':
-      '<div class="wdd-empty"><i class="fas fa-folder-open" aria-hidden="true"></i><p>No saved properties yet. Look one up and it will appear here with assessment, tax and Watchdog status.</p><a href="/property/">Look up an address</a></div>';
-    // content-architecture: dynamic — portfolio markup depends on authenticated rows, sort state, and table/map mode.
-    H.el('wdd-positions').innerHTML='<div class="wdd-panel"><div class="wdd-panel-head"><div><h2>Your Portfolio</h2><p>'+props.length+' propert'+(props.length===1?'y':'ies')+' · Sorted by '+esc(current.label.toLowerCase())+'</p></div><div class="wdd-fill"></div><div class="wdd-tabs" role="tablist"><button type="button" role="tab" data-tab="ledger" aria-selected="'+(S.tab==='ledger')+'">Table</button><button type="button" role="tab" data-tab="map" aria-selected="'+(S.tab==='map')+'">Map</button></div></div>'+
-      (S.tab==='map'?'<div id="wdd-map"></div>':'<div class="wdd-properties-layout"><div class="wdd-property-list">'+body+'</div>'+propertyInspector(selected)+'</div>')+'</div>';
-    bindPropertyDialog();
-    if(S.tab==='map')drawMap();
-  }
-  function bindPropertyDialog(){
-    var dialog=H.el('wdd-property-dialog');if(!dialog)return;
-    var close=dialog.querySelector('[data-dialog-close]');
-    if(close)close.addEventListener('click',function(){dialog.close();});
-    dialog.addEventListener('close',function(){
-      var pin=mobileDrawerOpenerPin||selectedPropertyPin;mobileDrawerOpenerPin='';
-      if(pin)w.setTimeout(function(){var trigger=d.querySelector('[data-select-pin="'+String(pin).replace(/["\\]/g,'\\$&')+'"]');if(trigger)trigger.focus();},0);
-    },{once:true});
-  }
-  function drawMap(){
-    if(!w.L)return;var node=H.el('wdd-map');if(!node)return;if(map){map.remove();map=null;}
-    map=w.L.map(node,{scrollWheelZoom:false,zoomControl:true,attributionControl:false}).setView([40.06,-74.5],8);
-    w.L.tileLayer('https://{s}.basemaps.cartocdn.com/light_all/{z}/{x}/{y}{r}.png',{maxZoom:19}).addTo(map);
-    var colors={bad:'#e24b5b',warn:'#d98b08',ok:'#16a365'},bounds=[];
-    WD.filtered().forEach(function(p){
-      if(H.valid(p.lat)==null||H.valid(p.lon)==null)return;
-      w.L.circleMarker([H.num(p.lat),H.num(p.lon)],{radius:7,weight:2,color:'#fff',fillColor:colors[WD.categoryFor(p)]||'#2563eb',fillOpacity:1}).addTo(map)
-        .bindPopup('<b>'+esc(p.address||'Saved property')+'</b><br>'+esc(H.titleCase(p.town||'')));
-      bounds.push([H.num(p.lat),H.num(p.lon)]);
-    });
-    if(bounds.length)map.fitBounds(bounds,{padding:[24,24],maxZoom:12});
-    setTimeout(function(){if(map)map.invalidateSize();},60);
-  }
-
-  function feedTone(r){var s=String(r.severity||'').toLowerCase();if(s==='high'||s==='critical')return'is-bad';if(s==='medium'||s==='warning')return'is-warn';if(H.num(r.delta_numeric)<0)return'is-ok';return'';}
-  function feedIcon(r){var t=String(r.event_type||r.marker_id||'').toLowerCase();if(/tax|assessment|ratio/.test(t))return'fa-receipt';if(/sale|market|value/.test(t))return'fa-house';if(/permit|construction/.test(t))return'fa-file-lines';if(/class/.test(t))return'fa-layer-group';if(/appeal/.test(t))return'fa-gavel';return'fa-wave-square';}
-  function addressFor(pin){var p=S.properties.find(function(x){return x.pams_pin===pin;});return p?(p.address||''):'';}
-
-  function railHistogram(){
-    var vals=WD.filtered().map(WD.gapFor).filter(Boolean).map(function(g){return Math.max(-30,Math.min(30,g.pct));});
-    if(!vals.length)return'<div class="wdd-gap-empty" role="status">No assessed-to-market comparisons are available for this filtered selection.</div>';
-    var bins=[0,0,0,0,0,0,0,0,0,0,0,0],step=5;
-    vals.forEach(function(v){var idx=Math.min(bins.length-1,Math.max(0,Math.floor((v+30)/step)));bins[idx]+=1;});
-    var max=Math.max.apply(null,bins.concat([1]));
-    var below=bins.slice(0,5).reduce(function(sum,count){return sum+count;},0),near=bins[5]+bins[6],above=bins.slice(7).reduce(function(sum,count){return sum+count;},0);
-    function bound(value){return value===0?'0%':(value<0?'−':'+')+Math.abs(value)+'%';}
-    var bars=bins.map(function(v,i){
-      var low=-30+i*step,high=low+step,group=i<5?'below':(i>6?'above':'near');
-      var range=i===0?'Below −25%, including values at or below −30% (left edge clipped)':(i===bins.length-1?'+25% and above, including values at or above +30% (right edge clipped)':bound(low)+' to under '+bound(high));
-      var groupText=group==='below'?'assessed below market by more than 5%':(group==='above'?'assessed above market by at least 5%':'between −5% and under +5% of market');
-      var detail=range+': '+v+' '+(v===1?'property':'properties')+'; '+groupText+'.';
-      var h=Math.max(8,(v/max)*76);
-      var mobileRange=i===0?'Below −25% (clipped at −30%)':(i===bins.length-1?'+25% and above (clipped at +30%)':bound(low)+' to under '+bound(high));
-      var barLength=((v/max)*100).toFixed(0);
-      return '<button class="wdd-gap-bin is-'+group+(selectedGapBin===i?' is-selected':'')+'" type="button" data-gap-bin="'+i+'" data-gap-detail="'+detail+'" title="'+detail+'" aria-label="'+detail.replace(/"/g,'&quot;')+'" aria-pressed="'+(selectedGapBin===i?'true':'false')+'"><span class="wdd-gap-range-label">'+mobileRange+'</span><span class="wdd-gap-count">'+v+'</span><span class="wdd-gap-bar" style="--bar-height:'+h.toFixed(0)+'%;--bar-length:'+barLength+'%"></span></button>';
-    }).join('');
-    var total=below+near+above;
-    return '<div class="wdd-gap-chart" role="group" aria-labelledby="wdd-gap-heading"><p class="wdd-gap-caption" id="wdd-gap-heading">Properties by assessed-to-market difference <span>· '+total+' with comparable data</span></p><div class="wdd-gap-legend" aria-label="Chart groups"><span class="is-below">Below market &lt;−5% <b>'+below+'</b></span><span class="is-near">−5% to under +5% <b>'+near+'</b></span><span class="is-above">Above market ≥+5% <b>'+above+'</b></span></div><div class="wdd-gap-plot"><span class="wdd-gap-zero-line" aria-hidden="true"></span><span class="wdd-gap-zero-badge" aria-hidden="true">0% market</span><div class="wdd-gap-bars">'+bars+'</div></div><div class="wdd-gap-axis" aria-hidden="true"><span>−30%</span><span>−20%</span><span>−10%</span><span>0%</span><span>+10%</span><span>+20%</span><span>+30%</span></div><p class="wdd-gap-bin-detail" id="wdd-gap-detail">End bins group values below −25% and at or above +25%; values beyond the ±30% scale stay in those bins. Choose a bar to see its count and range.</p></div>';
-  }
-  function analysisCopy(){
-    var st=WD.stats();if(!st.assessed||!st.value)return'Add market evidence to compare your portfolio against current value.';
-    var pct=(st.assessed/st.value-1)*100,dir=pct>0?'above':'below';
-    return 'Your portfolio is <b>'+Math.abs(pct).toFixed(0)+'% '+dir+' market</b> on aggregate'+(st.atStake?', representing '+H.dollars(st.atStake)+' a year across flagged gaps.':'.');
-  }
-  function taxDistribution(){
-    var bands=[{label:'Under $5k',min:0,max:5000,count:0},{label:'$5k–$10k',min:5000,max:10000,count:0},{label:'$10k–$20k',min:10000,max:20000,count:0},{label:'$20k+',min:20000,max:Infinity,count:0}],taxes=WD.filtered().map(function(p){return H.valid(p.last_year_tax);}).filter(function(v){return v!=null&&v>0;}),total=H.sum(taxes),max=1;
-    taxes.forEach(function(value){for(var i=0;i<bands.length;i++){if(value>=bands[i].min&&value<bands[i].max){bands[i].count++;break;}}});
-    bands.forEach(function(b){max=Math.max(max,b.count);});
-    if(!taxes.length)return'<div class="wdd-analysis-empty">Tax distribution will appear when annual tax data is available for your saved properties.</div>';
-    return'<div class="wdd-tax-distribution" role="img" aria-label="Annual tax distribution across '+taxes.length+' properties">'+bands.map(function(b){var height=Math.max(5,Math.round((b.count/max)*100));return'<div class="wdd-tax-band"><div class="wdd-tax-bar-wrap"><i class="wdd-tax-bar" style="height:'+height+'%"></i></div><b>'+b.count+'</b><span>'+b.label+'</span></div>';}).join('')+'</div><div class="wdd-analysis-copy">Annual taxes total <b>'+esc(H.dollars(total))+'</b> across '+taxes.length+' properties with tax data.</div>';
-  }
-  function drawRailMap(){
-    if(!w.L)return;var node=H.el('wdd-rail-map');if(!node)return;if(railMap){railMap.remove();railMap=null;}
-    railMap=w.L.map(node,{scrollWheelZoom:false,dragging:false,zoomControl:false,attributionControl:false,doubleClickZoom:false,boxZoom:false,keyboard:false,touchZoom:false}).setView([40.06,-74.5],8);
-    w.L.tileLayer('https://{s}.basemaps.cartocdn.com/light_all/{z}/{x}/{y}{r}.png',{maxZoom:19}).addTo(railMap);
-    var bounds=[];
-    WD.filtered().forEach(function(p){
-      if(H.valid(p.lat)==null||H.valid(p.lon)==null)return;
-      w.L.circleMarker([H.num(p.lat),H.num(p.lon)],{radius:5,weight:2,color:'#fff',fillColor:'#2563eb',fillOpacity:1}).addTo(railMap);
-      bounds.push([H.num(p.lat),H.num(p.lon)]);
-    });
-    if(bounds.length)railMap.fitBounds(bounds,{padding:[18,18],maxZoom:10});
-    setTimeout(function(){if(railMap)railMap.invalidateSize();},80);
-  }
-  function paintRail(){
-    var st=WD.stats(),recent=st.changes.slice(0,4);
-    selectedGapBin=-1;
-    var feed=recent.length?recent.map(function(r){
-      var tone=feedTone(r);return '<div class="wdd-feed-item '+tone+'"><span class="wdd-feed-source '+tone+'"><i class="fas '+feedIcon(r)+'" aria-hidden="true"></i></span><div><b>'+esc(r.title||H.pretty(r.event_type))+'</b><small>'+esc(addressFor(r.pams_pin)||r.pams_pin||'Saved property')+' · '+esc(H.ago(r.occurred_at))+'</small></div></div>';
-    }).join(''):'<div class="wdd-empty" style="padding:24px 14px"><p>Nothing has changed on your properties in the last 120 days.</p></div>';
-    // content-architecture: dynamic — rail modules combine live saved-property counts, map state, events, and calculated portfolio distribution.
-    H.el('wdd-rail').innerHTML=
-      '<section class="wdd-panel wdd-portfolio-map-card"><div class="wdd-panel-head"><div><h2>Your Portfolio</h2></div><a class="wdd-panel-link" href="#" data-tab-link="map">View map →</a></div><div class="wdd-map-wrap"><div id="wdd-rail-map"></div><span class="wdd-map-stat"><i class="fas fa-location-dot"></i>'+st.count+' properties</span></div></section>'+
-      '<section class="wdd-panel" id="wdd-activity"><div class="wdd-panel-head"><div><h2>Recent Changes</h2><p>'+(st.changes30?st.changes30+' in the last 30 days':'Last 120 days')+'</p></div><a class="wdd-panel-link" href="/property/pulse">View all →</a></div>'+feed+'</section>'+
-      '<section class="wdd-panel wdd-analysis-card" id="wdd-analysis-card"><div class="wdd-panel-head"><div><h2 id="wdd-analysis-heading" tabindex="-1">Portfolio Analysis</h2></div></div><div class="wdd-analysis-tabs" role="tablist" aria-label="Portfolio analysis views"><button class="wdd-analysis-tab" id="wdd-analysis-tab-assessed" role="tab" aria-controls="wdd-analysis-assessed" aria-selected="'+(analysisTab==='assessed')+'" data-analysis-tab="assessed" type="button">Assessed vs Market</button><button class="wdd-analysis-tab" id="wdd-analysis-tab-tax" role="tab" aria-controls="wdd-analysis-tax" aria-selected="'+(analysisTab==='tax')+'" data-analysis-tab="tax" type="button">Tax Distribution</button></div><div class="wdd-analysis-panel" id="wdd-analysis-assessed" role="tabpanel" aria-labelledby="wdd-analysis-tab-assessed"'+(analysisTab==='assessed'?'':' hidden')+'>'+railHistogram()+'<div class="wdd-analysis-copy">'+analysisCopy()+'</div></div><div class="wdd-analysis-panel" id="wdd-analysis-tax" role="tabpanel" aria-labelledby="wdd-analysis-tab-tax"'+(analysisTab==='tax'?'':' hidden')+'>'+taxDistribution()+'</div></section>';
-    H.el('wdd-rail').insertAdjacentHTML('beforeend',appealCalendar(WD.filtered()));
-    drawRailMap();
-  }
-  function appealCalendar(props){
-    var alt=false,trad=false;
-    props.forEach(function(p){var key=countyKey(p.county);if(!key)return;if(APPEAL_ALT_COUNTIES.indexOf(key)>-1)alt=true;else trad=true;});
-    var items=[];
-    if(alt)items.push({date:nextBaseline(1,15),area:'Burlington, Gloucester & Monmouth counties'});
-    if(trad)items.push({date:nextBaseline(4,1),area:'Other known counties'});
-    items.sort(function(a,b){return a.date-b.date;});
-    var focusDate=items.length?items[0].date:new Date(),year=focusDate.getFullYear(),month=focusDate.getMonth(),first=new Date(year,month,1),daysInMonth=new Date(year,month+1,0).getDate(),offset=first.getDay(),cellCount=Math.ceil((offset+daysInMonth)/7)*7;
-    var weekdays=['Sun','Mon','Tue','Wed','Thu','Fri','Sat'].map(function(day){return '<span>'+day+'</span>';}).join('');
-    var cells=[];
-    for(var cell=0;cell<cellCount;cell++){
-      var day=cell-offset+1;
-      if(day<1||day>daysInMonth){cells.push('<span class="is-outside" aria-hidden="true"></span>');continue;}
-      var markers=items.filter(function(item){return item.date.getFullYear()===year&&item.date.getMonth()===month&&item.date.getDate()===day;});
-      var title=markers.length?'County baseline '+new Date(year,month,day).toLocaleDateString('en-US',{month:'long',day:'numeric',year:'numeric'})+' · '+markers.map(function(item){return item.area;}).join('; '):'';
-      cells.push('<span class="wdd-calendar-day'+(markers.length?' is-baseline':'')+'"'+(title?' role="img" aria-label="'+esc(title)+'" title="'+esc(title)+'"':'')+'><time datetime="'+year+'-'+String(month+1).padStart(2,'0')+'-'+String(day).padStart(2,'0')+'">'+day+'</time></span>');
+  function isoWeek(dt){var t=new Date(Date.UTC(dt.getFullYear(),dt.getMonth(),dt.getDate()));var day=t.getUTCDay()||7;t.setUTCDate(t.getUTCDate()+4-day);var y0=new Date(Date.UTC(t.getUTCFullYear(),0,1));return Math.ceil(((t-y0)/DAY+1)/7);}
+  function eventsByDay(changes){var map={};changes.forEach(function(r){var t=new Date(r.occurred_at);if(!Number.isFinite(t.getTime()))return;var k=dateKey(t);(map[k]=map[k]||[]).push(r);});return map;}
+  function calendar(props,byDay){
+    var b=baselines(props),y=ui.calY,m=ui.calM,first=new Date(y,m,1),days=new Date(y,m+1,0).getDate(),offset=(first.getDay()+6)%7,todayKey=dateKey(new Date());
+    var label=first.toLocaleDateString('en-US',{month:'long',year:'numeric'});
+    var cells=['Mo','Tu','We','Th','Fr','Sa','Su'].map(function(x){return '<span aria-hidden="true">'+x+'</span>';}).join('')+'<span aria-hidden="true"></span>';
+    var total=Math.ceil((offset+days)/7)*7;
+    for(var i=0;i<total;i++){
+      var dayNum=i-offset+1;
+      if(dayNum<1||dayNum>days)cells+='<span aria-hidden="true"></span>';
+      else{
+        var dt=new Date(y,m,dayNum),k=dateKey(dt),ev=byDay[k]||[],base=(b.alt&&m===0&&dayNum===15)||(b.trad&&m===3&&dayNum===1);
+        var cls='wdd-cal-day'+(ev.length?' has-events':'')+(base?' is-baseline':'')+(k===todayKey?' is-today':'')+(k===ui.day?' is-selected':'');
+        var aria=dt.toLocaleDateString('en-US',{weekday:'long',month:'long',day:'numeric'})+(k===todayKey?', today':'')+(ev.length?', '+ev.length+' '+plural(ev.length,'change','changes'):'')+(base?', county appeal baseline':'');
+        cells+='<button type="button" class="'+cls+'" data-day="'+k+'" aria-label="'+esc(aria)+'" aria-pressed="'+(k===ui.day?'true':'false')+'">'+dayNum+'</button>';
+      }
+      if(i%7===6){var monday=new Date(y,m,i-6-offset+1);cells+='<span class="wdd-cal-wk" aria-hidden="true">W'+isoWeek(monday)+'</span>';}
     }
-    var monthLabel=focusDate.toLocaleDateString('en-US',{month:'long',year:'numeric'});
-    var content=items.length?items.map(function(item){var dt=item.date;return '<li><time datetime="'+dt.getFullYear()+'-'+String(dt.getMonth()+1).padStart(2,'0')+'-'+String(dt.getDate()).padStart(2,'0')+'"><b>'+esc(dt.toLocaleDateString('en-US',{month:'short'}))+'</b><strong>'+dt.getDate()+'</strong></time><span><b>County baseline</b><small>'+esc(item.area)+' · '+dt.getFullYear()+'</small></span></li>';}).join(''):'<li class="wdd-calendar-empty">County baseline dates appear when a county is available for a saved property.</li>';
-    return '<section class="wdd-panel wdd-appeal-calendar" aria-labelledby="wdd-appeal-calendar-title"><div class="wdd-panel-head"><div><h2 id="wdd-appeal-calendar-title">Appeal calendar</h2><p>County baselines for your portfolio</p></div><i class="fas fa-calendar-days" aria-hidden="true"></i></div><div class="wdd-calendar-month"><div class="wdd-calendar-month-title">'+esc(monthLabel)+'</div><div class="wdd-calendar-grid" role="group" aria-label="'+esc(monthLabel)+(items.length?'; county baseline dates shown':'')+'"><div class="wdd-calendar-weekdays">'+weekdays+'</div><div class="wdd-calendar-days">'+cells.join('')+'</div></div><div class="wdd-calendar-legend"><span aria-hidden="true"></span>County baseline</div></div><ul>'+content+'</ul><p class="wdd-calendar-note">These are county baselines, not parcel-specific deadlines. Verify your deadline on the assessment notice.</p></section>';
-  }
-
-  function cases(){
-    var out=[];WD.filtered().forEach(function(p){
-      var g=WD.gapFor(p);if(!g||g.pct<5)return;
-      var f=S.findings.find(function(x){return x.pams_pin===p.pams_pin;});
-      out.push({p:p,g:g,dollars:g.dollars||0,why:(f&&H.copy(f.why_now))||''});
-    });
-    return out.sort(function(a,b){return b.dollars-a.dollars;});
-  }
-  function paintQueue(){
-    var list=cases(),count=list.length,head='<div class="wdd-queue-head"><div><h2>Action Queue <span class="wdd-queue-count">'+count+'</span></h2><p>Properties with the biggest review opportunities based on current governed market evidence.</p></div><a class="wdd-queue-link" href="#wdd-positions">View all →</a></div>';
-    if(!WD.isPro()){
-      // content-architecture: dynamic — gated queue copy and actions depend on entitlement plus the live review-case count.
-      H.el('wdd-queue').innerHTML=head+'<div class="wdd-gate"><h3>'+(count?'Watchdog found '+count+' propert'+(count===1?'y':'ies')+' worth reviewing':'Nothing needs review right now')+'</h3><p>The gap remains visible in your portfolio. Professional plans add the governed evidence file and decision workflow.</p><a class="wdd-gate-cta" href="/property/pro">Compare plans <i class="fas fa-arrow-right"></i></a></div>';return;
+    var note='';
+    if(b.alt||b.trad){
+      var parts=[];
+      if(b.alt)parts.push('<b>'+esc(nextBaseline(1,15).toLocaleDateString('en-US',{month:'short',day:'numeric',year:'numeric'}))+'</b> for Burlington, Gloucester and Monmouth');
+      if(b.trad)parts.push('<b>'+esc(nextBaseline(4,1).toLocaleDateString('en-US',{month:'short',day:'numeric',year:'numeric'}))+'</b> for other counties');
+      note='<p class="wdd-cal-note">Next appeal baseline: '+parts.join('; ')+'. These are county baselines, so verify your deadline on the assessment notice.</p>';
     }
-    if(!list.length){
-      // content-architecture: dynamic — this empty state depends on the live authenticated review queue.
-      H.el('wdd-queue').innerHTML=head+'<div class="wdd-gate"><h3>Nothing to review right now</h3><p>No saved property is currently assessed above the review threshold. Watchdog keeps monitoring the evidence.</p></div>';return;
-    }
-    // content-architecture: dynamic — review cards are ranked from the authenticated portfolio and governed gap calculations.
-    H.el('wdd-queue').innerHTML=head+'<div class="wdd-cases">'+list.slice(0,3).map(function(c){
-      return '<article class="wdd-case"><span class="wdd-case-thumb"'+thumbStyle(c.p)+'><i class="fas fa-house"></i></span><div class="wdd-case-main"><h3 class="wdd-case-title">'+esc(c.p.address||c.p.pams_pin||'Saved property')+'</h3><span class="wdd-case-place">'+esc([H.titleCase(c.p.town),H.titleCase(c.p.county)].filter(Boolean).join(', ')||'New Jersey')+'</span><span class="wdd-gap-pill">+'+c.g.pct.toFixed(1)+'% gap</span></div><div class="wdd-case-row"><span class="wdd-case-value"><b>'+(c.dollars?H.dollars(c.dollars):'—')+'</b><small>a year</small></span><a class="wdd-case-review" href="/property/report?pin='+encodeURIComponent(c.p.pams_pin||'')+'">Review</a></div></article>';
-    }).join('')+'</div>';
+    return '<section class="wdd-cal" aria-label="Calendar">'+
+      '<div class="wdd-cal-head"><button type="button" class="wdd-cal-nav" data-cal="-1" aria-label="Previous month"><i class="fas fa-arrow-left" aria-hidden="true"></i></button><span class="wdd-cal-month" aria-live="polite">'+esc(label)+'</span><button type="button" class="wdd-cal-nav" data-cal="1" aria-label="Next month"><i class="fas fa-arrow-right" aria-hidden="true"></i></button></div>'+
+      '<div class="wdd-cal-grid">'+cells+'</div>'+
+      '<div class="wdd-cal-actions"><a class="wdd-btn" href="'+esc(route('/'))+'"><i class="fas fa-plus" aria-hidden="true"></i>Add a property</a><button type="button" class="wdd-icon-btn" data-act="refresh" aria-label="Refresh dashboard" title="Refresh"><i class="fas fa-rotate-right" aria-hidden="true"></i></button><button type="button" class="wdd-icon-btn" data-act="export" aria-label="Export properties as CSV" title="Export CSV"><i class="fas fa-download" aria-hidden="true"></i></button></div>'+
+      note+
+    '</section>';
+  }
+  function severity(r){var s=String(r.severity||'').toLowerCase();if(s==='high'||s==='critical')return'high';if(s==='medium'||s==='warning')return'medium';return'low';}
+  function feedIcon(r){var t=String(r.event_type||r.marker_id||'').toLowerCase();if(/tax|assessment|ratio/.test(t))return'fa-receipt';if(/sale|market|value/.test(t))return'fa-house';if(/permit|construction/.test(t))return'fa-hammer';if(/class/.test(t))return'fa-layer-group';if(/appeal/.test(t))return'fa-gavel';if(/flood/.test(t))return'fa-droplet';return'fa-wave-square';}
+  function addressFor(pin){var p=S.properties.filter(function(x){return x.pams_pin===pin;})[0];return p?(p.address||''):'';}
+  function timeline(changes,byDay){
+    var list=ui.day?(byDay[ui.day]||[]):changes;
+    if(ui.feed==='important')list=list.filter(function(r){return severity(r)!=='low';});
+    var title=ui.day?new Date(ui.day+'T12:00:00').toLocaleDateString('en-US',{month:'long',day:'numeric'}):'Recent activity';
+    var sub=ui.day?(list.length?list.length+' '+plural(list.length,'change','changes')+' on this day':'Nothing changed on this day'):'Latest changes';
+    var items=list.slice(0,6).map(function(r){
+      var t=new Date(r.occurred_at),when=ui.day?t.toLocaleTimeString('en-US',{hour:'numeric',minute:'2-digit'}):t.toLocaleDateString('en-US',{month:'short',day:'numeric'});
+      return '<li><time datetime="'+esc(Number.isFinite(t.getTime())?t.toISOString():'')+'">'+esc(when)+'</time><span class="wdd-feed-icon is-'+severity(r)+'" aria-hidden="true"><i class="fas '+feedIcon(r)+'"></i></span><span class="wdd-feed-text"><b>'+esc(r.title||H.pretty(r.event_type))+'</b><small>'+esc(addressFor(r.pams_pin)||r.pams_pin||'Saved property')+(ui.day?'':' · '+esc(ago(r.occurred_at)))+'</small></span></li>';
+    }).join('');
+    var empty=ui.day?'Pick another day with a dot, or clear the day to see all recent activity.':(S.properties.length?'Nothing has changed on your properties in the last 120 days.':'Changes to your saved properties will show up here.');
+    return '<section class="wdd-timeline" aria-label="Recent activity">'+
+      '<div class="wdd-timeline-head"><div><h2>'+esc(title)+'</h2><p>'+esc(sub)+'</p></div>'+
+        '<label class="wdd-pill-select is-light"><span class="wdd-sr">Filter activity</span><select data-act="feed"><option value="all"'+(ui.feed==='all'?' selected':'')+'>All</option><option value="important"'+(ui.feed==='important'?' selected':'')+'>Important</option></select></label></div>'+
+      (items?'<ol class="wdd-feed">'+items+'</ol>':'<p class="wdd-feed-empty">'+esc(empty)+'</p>')+
+      (ui.day?'<button type="button" class="wdd-list-more" data-act="clear-day">Show all recent activity</button>':'<a class="wdd-feed-more" href="'+esc(route('/pulse'))+'">View all changes <i class="fas fa-arrow-right" aria-hidden="true"></i></a>')+
+    '</section>';
+  }
+  function sponsor(){
+    return '<a class="wdd-sponsor" href="https://johnvarano.com/?utm_source=watchdog&utm_medium=internal_ad&utm_campaign=greentree_financing&utm_content=dashboard_kpi" target="_blank" rel="noopener sponsored" aria-label="Advertisement: Greentree Mortgage. Explore purchase, refinance, and home equity options with John Varano, NMLS 142739.">'+
+      '<img src="/johnvarano.jpg" alt="" loading="lazy" width="44" height="44"><em>Advertisement</em><strong>Greentree Mortgage</strong><span>Know the full monthly number before you make an offer. Purchase, refinance or home equity.</span><small>John Varano · NMLS #142739</small></a>';
+  }
+  function paintSide(){
+    var st=WD.stats(),byDay=eventsByDay(st.changes);
+    setHTML('wdd-rail',calendar(WD.filtered(),byDay)+timeline(st.changes,byDay)+sponsor());
   }
 
   function paintFoot(){
-    H.el('wdd-foot').innerHTML='<b>Decision-support data.</b> Market estimates and gap figures are not appraisals or legal conclusions. A gap does not establish appeal eligibility or success. Verify filing decisions against original county and municipal records.';
+    setHTML('wdd-foot','<b>Decision-support data.</b> Market estimates and gap figures are not appraisals or legal conclusions. A gap does not establish appeal eligibility or success. Verify filing decisions against original county and municipal records.');
   }
-  function cycleCounty(){
-    var list=['ALL'].concat(WD.counties());S.county=list[(list.indexOf(S.county)+1)%list.length];WD.repaint();WD.toast(S.county==='ALL'?'Showing all counties':'Showing '+H.titleCase(S.county)+' County');
-  }
+
+  /* ------------------------------------------------------------ actions -- */
   function exportCsv(){
     var st=WD.stats(),out=[['Watchdog portfolio export',new Date().toISOString()],[],['Metric','Value'],['Properties',st.count],['Watchdog Score',st.score==null?'':st.score.toFixed(1)],['Market estimate',Math.round(st.value)],['Assessed total',Math.round(st.assessed)],['Annual tax',Math.round(st.tax)],['Above evidence',st.over],['Annual gap estimate',Math.round(st.atStake)],[],['Address','Town','County','Assessed','Market estimate','Gap %','Annual gap estimate','Annual tax','Watchdog Score']];
     WD.filtered().forEach(function(p){var g=WD.gapFor(p),s=S.scores[p.pams_pin];out.push([p.address||'',p.town||'',p.county||'',p.assessed||'',p.watchdog_value||'',g?g.pct.toFixed(2):'',g&&g.dollars?Math.round(g.dollars):'',p.last_year_tax||'',s?Math.round(s.score):'']);});
     var csv=out.map(function(r){return r.map(function(v){return'"'+String(v==null?'':v).replace(/"/g,'""')+'"';}).join(',');}).join('\n'),url=URL.createObjectURL(new Blob([csv],{type:'text/csv;charset=utf-8'})),a=d.createElement('a');a.href=url;a.download='watchdog-portfolio.csv';d.body.appendChild(a);a.click();a.remove();setTimeout(function(){URL.revokeObjectURL(url);},1000);WD.toast('Exported '+WD.filtered().length+' properties');
-  }
-  function openMoreMenu(){
-    if(w.WatchdogPublicNav&&typeof w.WatchdogPublicNav.open==='function'){w.WatchdogPublicNav.open('main');return;}
-    var trigger=d.querySelector('#wd-menu-trigger,.wdx-menu,.wd4-menu,[data-wd-menu-toggle]');
-    if(trigger&&typeof trigger.click==='function')trigger.click();else location.href='/property/account';
-  }
-  function closePropertyMenus(except){
-    Array.prototype.slice.call(d.querySelectorAll('.wdd-row-actions')).forEach(function(menu){
-      if(menu===except)return;
-      menu.hidden=true;
-      var button=menu.parentNode&&menu.parentNode.querySelector('.wdd-row-menu');
-      if(button)button.setAttribute('aria-expanded','false');
-    });
   }
   function startVoiceSearch(button){
     var Speech=w.SpeechRecognition||w.webkitSpeechRecognition;
@@ -390,75 +355,48 @@ function start(){
     recognition.onend=function(){button.classList.remove('is-listening');button.setAttribute('aria-label','Search by voice');voiceRecognition=null;};
     try{recognition.start();}catch(_err){button.classList.remove('is-listening');voiceRecognition=null;}
   }
+  function refocus(selector){w.setTimeout(function(){var el=d.querySelector(selector);if(el)el.focus({preventScroll:true});},0);}
   function onClick(ev){
-    if(!ev.target||!ev.target.closest)return;
-    var inspectorClose=ev.target.closest('[data-inspector-close]');if(inspectorClose){selectedPropertyPin='';inspectorDismissed=true;paintPositions();return;}
-    var selectButton=ev.target.closest('[data-select-pin]');
-    if(selectButton){
-      selectedPropertyPin=selectButton.getAttribute('data-select-pin')||'';
-      inspectorDismissed=false;
-      var openOnMobile=w.matchMedia&&w.matchMedia('(max-width: 760px)').matches;
-      mobileDrawerOpenerPin=openOnMobile?selectedPropertyPin:'';
-      paintPositions();
-      if(openOnMobile){var dialog=H.el('wdd-property-dialog');if(dialog&&typeof dialog.showModal==='function')dialog.showModal();else if(dialog)dialog.setAttribute('open','');}
-      else{var focusedButton=d.querySelector('[data-select-pin="'+String(selectedPropertyPin).replace(/["\\]/g,'\\$&')+'"]');if(focusedButton)focusedButton.focus({preventScroll:true});}
+    var t=ev.target;if(!t||!t.closest||!t.closest('.wdd-app'))return;
+    var pick=t.closest('[data-select-pin]');
+    if(pick){
+      ui.pin=pick.getAttribute('data-select-pin')||'';
+      var inList=!!pick.closest('#wdd-positions'),inBars=!!pick.closest('.wdd-bars');
+      // A pick from the chart may be hidden in the collapsed list; open it.
+      if(inBars&&sortedProps().map(function(p){return String(p.pams_pin||'');}).indexOf(ui.pin)>=LIST_LIMIT)ui.all=true;
+      paintList();paintDetail();paintCards();
+      var sel='[data-select-pin="'+ui.pin.replace(/["\\]/g,'\\$&')+'"]';
+      refocus((inList?'#wdd-positions ':inBars?'.wdd-bars ':'')+sel);
+      if(w.matchMedia&&w.matchMedia('(max-width: 980px)').matches&&inList){var det=H.el('wdd-detail');if(det)det.scrollIntoView({behavior:w.matchMedia('(prefers-reduced-motion: reduce)').matches?'auto':'smooth',block:'start'});}
       return;
     }
-    var gapBin=ev.target.closest('[data-gap-bin]');if(gapBin){selectedGapBin=Number(gapBin.getAttribute('data-gap-bin'));var gapDetail=H.el('wdd-gap-detail');if(gapDetail)gapDetail.textContent=gapBin.getAttribute('data-gap-detail')||'';Array.prototype.forEach.call(d.querySelectorAll('[data-gap-bin]'),function(button){var selected=Number(button.getAttribute('data-gap-bin'))===selectedGapBin;button.classList.toggle('is-selected',selected);button.setAttribute('aria-pressed',selected?'true':'false');});return;}
-    var alert=ev.target.closest('[data-act="show-overmarket-evidence"]');if(alert){analysisTab='assessed';var assessedTab=H.el('wdd-analysis-tab-assessed');Array.prototype.forEach.call(d.querySelectorAll('[data-analysis-tab]'),function(button){button.setAttribute('aria-selected',button===assessedTab?'true':'false');});Array.prototype.forEach.call(d.querySelectorAll('.wdd-analysis-panel'),function(panel){panel.hidden=panel.id!=='wdd-analysis-assessed';});var heading=H.el('wdd-analysis-heading'),card=H.el('wdd-analysis-card'),behavior=w.matchMedia&&!w.matchMedia('(prefers-reduced-motion: reduce)').matches?'smooth':'auto';if(heading)heading.focus({preventScroll:true});if(card)card.scrollIntoView({behavior:behavior,block:'start'});return;}
-    var analysisButton=ev.target.closest('[data-analysis-tab]');if(analysisButton){analysisTab=analysisButton.getAttribute('data-analysis-tab')==='tax'?'tax':'assessed';var tabs=d.querySelectorAll('[data-analysis-tab]');Array.prototype.forEach.call(tabs,function(button){button.setAttribute('aria-selected',button===analysisButton?'true':'false');});var panels=d.querySelectorAll('.wdd-analysis-panel');Array.prototype.forEach.call(panels,function(panel){panel.hidden=panel.id!==(analysisTab==='tax'?'wdd-analysis-tax':'wdd-analysis-assessed');});return;}
-    var mapLink=ev.target.closest('[data-tab-link="map"]');if(mapLink){ev.preventDefault();S.tab='map';paintPositions();var p=H.el('wdd-positions');if(p)p.scrollIntoView({behavior:'smooth',block:'start'});return;}
-    var sortBtn=ev.target.closest('[data-sort]');if(sortBtn){var k=sortBtn.getAttribute('data-sort');if(S.sort.key===k)S.sort.dir=S.sort.dir==='asc'?'desc':'asc';else{S.sort.key=k;S.sort.dir=k==='address'?'asc':'desc';}paintPositions();return;}
-    var tab=ev.target.closest('[data-tab]');if(tab){S.tab=tab.getAttribute('data-tab');paintPositions();return;}
-    var propertyAction=ev.target.closest('[data-property-action]');if(propertyAction){
-      ev.stopPropagation();
-      var pa=propertyAction.getAttribute('data-property-action');
-      if(pa==='copy-address'){
-        ev.preventDefault();
-        var address=propertyAction.getAttribute('data-address')||'';
-        if(address&&navigator.clipboard&&navigator.clipboard.writeText)navigator.clipboard.writeText(address).then(function(){WD.toast('Address copied');}).catch(function(){WD.toast('Could not copy address');});
-      }
-      closePropertyMenus();
-      return;
-    }
-    var menu=ev.target.closest('.wdd-row-menu');if(menu){
-      ev.preventDefault();ev.stopPropagation();
-      var actionMenu=menu.parentNode&&menu.parentNode.querySelector('.wdd-row-actions'),open=actionMenu&&actionMenu.hidden;
-      closePropertyMenus(actionMenu);
-      if(actionMenu){actionMenu.hidden=!open;menu.setAttribute('aria-expanded',open?'true':'false');}
-      return;
-    }
-    if(!ev.target.closest('.wdd-row-actions'))closePropertyMenus();
-    var row=ev.target.closest('tr[data-pin]');if(row&&row.getAttribute('data-pin')){
-      selectedPropertyPin=row.getAttribute('data-pin');
-      inspectorDismissed=false;
-      var mobile=w.matchMedia&&w.matchMedia('(max-width: 760px)').matches;
-      mobileDrawerOpenerPin=mobile?selectedPropertyPin:'';
-      paintPositions();
-      if(mobile){var propertyDialog=H.el('wdd-property-dialog');if(propertyDialog&&typeof propertyDialog.showModal==='function')propertyDialog.showModal();else if(propertyDialog)propertyDialog.setAttribute('open','');}
-      return;
-    }
-    var act=ev.target.closest('[data-act]');if(!act)return;var a=act.getAttribute('data-act');
-    if(a==='export')exportCsv();else if(a==='county')cycleCounty();else if(a==='mobile-more')openMoreMenu();else if(a==='voice-search')startVoiceSearch(act);else if(a==='focus-search'){var fi=H.el('wdd-command-input');if(fi){fi.focus();fi.scrollIntoView({behavior:'smooth',block:'center'});}}
+    var day=t.closest('[data-day]');
+    if(day){var k=day.getAttribute('data-day');ui.day=ui.day===k?'':k;paintSide();refocus('[data-day="'+k+'"]');return;}
+    var cal=t.closest('[data-cal]');
+    if(cal){var m=ui.calM+Number(cal.getAttribute('data-cal'));ui.calY+=Math.floor(m/12);ui.calM=((m%12)+12)%12;paintSide();refocus('[data-cal="'+cal.getAttribute('data-cal')+'"]');return;}
+    var act=t.closest('[data-act]');if(!act||act.tagName==='SELECT')return;
+    var a=act.getAttribute('data-act');
+    if(a==='list-all'){ui.all=!ui.all;paintList();refocus('[data-act="list-all"]');}
+    else if(a==='clear-day'){ui.day='';paintSide();refocus('.wdd-timeline h2');}
+    else if(a==='export')exportCsv();
+    else if(a==='refresh')location.reload();
+    else if(a==='voice-search')startVoiceSearch(act);
+  }
+  function onChange(ev){
+    var t=ev.target;if(!t||!t.getAttribute)return;
+    var a=t.getAttribute('data-act');
+    if(a==='sort'){ui.sort=t.value;ui.pin='';paintList();paintDetail();paintCards();refocus('[data-act="sort"]');}
+    else if(a==='feed'){ui.feed=t.value==='important'?'important':'all';paintSide();refocus('[data-act="feed"]');}
   }
   function onSubmit(ev){
-    if(ev.target&&ev.target.id==='wdd-command'){ev.preventDefault();var input=H.el('wdd-command-input'),q=String(input&&input.value||'').trim();location.href='/property/'+(q?'?address='+encodeURIComponent(q):'');}
-  }
-  function onGapExplore(ev){
-    if(!ev.target||!ev.target.closest)return;
-    var button=ev.target.closest('[data-gap-bin]');if(!button)return;
-    var detail=H.el('wdd-gap-detail');if(detail)detail.textContent=button.getAttribute('data-gap-detail')||'';
+    if(ev.target&&ev.target.id==='wdd-command'){ev.preventDefault();var input=H.el('wdd-command-input'),q=String(input&&input.value||'').trim();location.href=route('/')+(q?'?address='+encodeURIComponent(q):'');}
   }
   function onKeydown(ev){
-    if(ev.key==='Escape'){
-      var dialog=H.el('wdd-property-dialog');if(dialog&&dialog.open)return;
-      if(selectedPropertyPin){selectedPropertyPin='';inspectorDismissed=true;paintPositions();return;}
-    }
     if((ev.metaKey||ev.ctrlKey)&&String(ev.key).toLowerCase()==='k'){var input=H.el('wdd-command-input');if(input){ev.preventDefault();input.focus();}}
   }
-  function paintAll(){paintStanding();paintSignals();paintQueue();paintPositions();paintRail();paintFoot();}
-  d.addEventListener('click',onClick);d.addEventListener('focusin',onGapExplore);d.addEventListener('pointerover',onGapExplore);d.addEventListener('submit',onSubmit);d.addEventListener('keydown',onKeydown);WD.onRepaint(paintAll);paintAll();
+  function paintAll(){paintTop();paintCards();paintList();paintDetail();paintSide();paintFoot();}
+  d.addEventListener('click',onClick);d.addEventListener('change',onChange);d.addEventListener('submit',onSubmit);d.addEventListener('keydown',onKeydown);
+  WD.onRepaint(paintAll);paintAll();
 }
 if(w.WD&&w.WD.S&&w.WD.S.user)start();else d.addEventListener('wd:ready',start,{once:true});
 })(window,document);
-
