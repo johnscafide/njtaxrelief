@@ -1,0 +1,57 @@
+name: Temporary live function source snapshot (read-only)
+
+# Downloads the currently deployed source of every production edge function
+# into live-snapshot/ on this branch so it can be compared with Git.
+# Read-only against Supabase: it never deploys. Removed before merge.
+on:
+  push:
+    branches:
+      - claude/loving-cray-xjuirj
+    paths:
+      - '.github/workflows/tmp-live-function-snapshot.yml'
+
+permissions:
+  contents: write
+
+env:
+  SUPABASE_ACCESS_TOKEN: ${{ secrets.NJW42_SUPABASE_ACCESS_TOKEN }}
+  SUPABASE_PROJECT_REF: uvkvaxljhhngydvlrzom
+
+jobs:
+  snapshot:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+      - uses: supabase/setup-cli@v1
+        with:
+          version: latest
+      - name: Download every deployed function
+        run: |
+          set -uo pipefail
+          test -n "$SUPABASE_ACCESS_TOKEN"
+          mkdir -p /tmp/snap/supabase && cd /tmp/snap
+          supabase functions list --project-ref "$SUPABASE_PROJECT_REF" -o json > /tmp/functions.json
+          python3 -c "import json;print('\n'.join(f['slug'] for f in json.load(open('/tmp/functions.json'))))" > /tmp/slugs.txt
+          wc -l /tmp/slugs.txt
+          : > /tmp/failed.txt
+          while read -r slug; do
+            [ -z "$slug" ] && continue
+            if ! supabase functions download "$slug" --project-ref "$SUPABASE_PROJECT_REF" --use-api >/tmp/dl.log 2>&1; then
+              echo "$slug" >> /tmp/failed.txt; tail -3 /tmp/dl.log
+            fi
+          done < /tmp/slugs.txt
+          echo "failed:"; cat /tmp/failed.txt
+      - name: Commit snapshot to this branch
+        run: |
+          set -euo pipefail
+          rm -rf live-snapshot && mkdir -p live-snapshot
+          cp -r /tmp/snap/supabase/functions live-snapshot/functions || true
+          cp /tmp/functions.json /tmp/failed.txt live-snapshot/
+          git config user.name 'Watchdog Automation'
+          git config user.email 'actions@users.noreply.github.com'
+          git add live-snapshot
+          git commit -m 'Temporary live function source snapshot' || echo 'nothing to commit'
+          git pull --rebase origin claude/loving-cray-xjuirj
+          git push origin HEAD:claude/loving-cray-xjuirj
