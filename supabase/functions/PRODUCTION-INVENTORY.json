@@ -298,8 +298,8 @@
       "tracking": "source_snapshot"
     },
     "workbench-derived": {
-      "version": 39,
-      "sha256": "e117407b4584eee8fdcda8e9e3a140148fa6882dff2d0b4341b4f2bcbd28420f",
+      "version": 45,
+      "sha256": "cc118d9f41a4dcc2b7b57a23a3d7e7c77d4f9538f4d06d1b67a2680174b68b6d",
       "verify_jwt": false,
       "tracking": "source_snapshot"
     },
@@ -486,6 +486,12 @@
     "intelligence-analyst": {
       "version": 14,
       "sha256": "e0ccf9d648cdf1ba542e1cbc07a3c3e1af849ffbdd7f1b76b796b0cfc3144e9f",
+      "verify_jwt": true,
+      "tracking": "source_snapshot"
+    },
+    "intelligence-brief": {
+      "version": 1,
+      "sha256": "4de2b287ad43c2a9a4cd56ec6ee6db89ec2d10ff9047bbdebc16a184205f364a",
       "verify_jwt": true,
       "tracking": "source_snapshot"
     },

@@ -208,6 +208,9 @@ verify_jwt = false
 [functions.intelligence-analyst]
 verify_jwt = true
 
+[functions.intelligence-brief]
+verify_jwt = true
+
 [functions.intelligence-learning]
 verify_jwt = true
 
