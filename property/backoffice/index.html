@@ -1,145 +1,487 @@
 <!doctype html>
-<html lang="en" data-access-require="developer">
+<html lang="en">
 <head>
   <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
   <meta name="robots" content="noindex,nofollow,noarchive">
   <meta name="referrer" content="same-origin">
   <title>Lead Intelligence | Watchdog Backoffice</title>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@600;700;800&family=Source+Sans+3:wght@400;600;700&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="/property/backoffice/backoffice.css">
-  <link rel="stylesheet" href="/property/backoffice/backoffice-secure.css">
-  <link rel="stylesheet" href="/property/backoffice/leadiq-tools.css">
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap">
+  <link rel="stylesheet" href="/property/backoffice/backoffice-board.css?v=20260928a">
+  <link rel="stylesheet" href="/property/backoffice/backoffice.css?v=20260928a">
+  <link rel="stylesheet" href="/property/backoffice/leadiq-tools.css?v=20260928a">
 </head>
-<body>
-  <section class="bo-auth" id="bo-auth" hidden>
-    <div class="bo-auth-card">
-      <a class="bo-auth-brand" href="/property/"><span class="bo-mark">W</span><span><b>WATCHDOG</b><small>Private Backoffice</small></span></a>
-      <span class="bo-kicker" id="bo-auth-kicker">PRIVATE ACCESS</span>
-      <h1 id="bo-auth-title">Watchdog Backoffice</h1>
-      <p id="bo-auth-copy">Backoffice opens for signed-in Watchdog accounts on the Backoffice access list. No separate password is needed.</p>
-      <form id="bo-auth-form" data-mode="login" hidden>
-        <label>Who's signing in?
-          <select name="actor"><option value="john">John</option><option value="wife">Wife</option></select>
-        </label>
-        <label>Shared Backoffice key<input name="key" type="password" autocomplete="off" data-lpignore="true" data-1p-ignore="true" minlength="14"></label>
-        <label id="bo-auth-confirm-wrap" hidden>Confirm shared key<input name="confirm" type="password" autocomplete="new-password" data-lpignore="true" data-1p-ignore="true" minlength="14"></label>
-        <p class="bo-auth-dev" id="bo-dev-hint" hidden>Developer access is required. <button type="button" id="bo-signin-dev">Sign in to Watchdog</button></p>
-        <div id="bo-auth-error" class="bo-form-error" role="alert"></div>
-        <button class="bo-button bo-button-primary bo-auth-submit" id="bo-auth-submit" type="submit">Unlock Backoffice</button>
-      </form>
-      <div id="bo-dev-access">
-        <p id="bo-dev-access-status" style="margin:0 0 16px;color:#617184">Checking your Watchdog sign-in…</p>
-        <button class="bo-button bo-button-primary bo-auth-submit" id="bo-dev-login" type="button">Open with my Watchdog account</button>
+<body class="bo-body" data-bo-page="leads">
+  <a class="bo-skip" href="#bo-main">Skip to content</a>
+
+  <header class="bo-shell">
+    <div class="bo-shell-bar">
+      <a class="bo-brand" href="/backoffice"><span class="bo-mark" aria-hidden="true">W</span><span class="bo-brand-text"><b>Watchdog</b><small>Backoffice</small></span></a>
+      <nav class="bo-nav" aria-label="Backoffice" data-bo-private hidden>
+        <a href="/backoffice#leads" aria-current="page">Leads</a>
+        <a href="/backoffice#leadiq">LeadIQ Tools</a>
+        <a href="/backoffice/reviews" data-bo-dev-only hidden>Application Reviews <span class="bo-review-badge" data-bo-badge="reviews" hidden><span data-bo-badge-count>0</span><span class="bo-sr"> waiting</span></span></a>
+        <a href="/backoffice/professional-verifications" data-bo-dev-only hidden>Professional Reviews <span class="bo-review-badge" data-bo-badge="professional" hidden><span data-bo-badge-count>0</span><span class="bo-sr"> waiting</span></span></a>
+        <a href="/backoffice/realestate" data-bo-dev-only hidden>Real Estate OS</a>
+      </nav>
+      <div class="bo-shell-session" data-bo-private hidden>
+        <span class="bo-who"><span class="bo-who-dot" aria-hidden="true"></span><span data-bo-who>Signed in</span></span>
+        <button type="button" class="bo-btn bo-btn-ghost bo-lock" data-bo-lock>Lock Backoffice</button>
       </div>
-      <small class="bo-auth-foot">Lead data stays on the server and is available only through a signed-in Watchdog account on the Backoffice access list.</small>
     </div>
-  </section>
+  </header>
 
-  <div class="bo-app" id="bo-app" hidden>
-    <aside class="bo-sidebar">
-      <a class="bo-brand" href="/property/dashboard" aria-label="Watchdog dashboard"><span class="bo-mark">W</span><span><b>WATCHDOG</b><small>Backoffice</small></span></a>
-      <nav class="bo-nav" aria-label="Backoffice"><a class="active" href="#leads"><span>01</span>Lead Intelligence</a><a href="#leadiq"><span>02</span>LeadIQ Tools</a><a href="#integrations"><span>03</span>Integrations</a><a href="#activity"><span>04</span>Activity</a><a href="/backoffice/realestate"><span>05</span>Real Estate OS</a></nav>
-      <div class="bo-sidebar-foot"><span class="bo-private-dot"></span><div><b>Private session</b><small>Signed in as <span id="bo-actor">—</span></small></div><button type="button" id="bo-logout">Lock Backoffice</button></div>
-    </aside>
+  <main class="bo-page" id="bo-main" tabindex="-1">
+    <section class="bo-gate" id="bo-gate" aria-live="polite">
+      <div class="bo-gate-card" data-gate="checking">
+        <span class="bo-kicker">Private access</span>
+        <h1>Watchdog Backoffice</h1>
+        <p>Checking your Watchdog sign-in…</p>
+      </div>
+      <div class="bo-gate-card" data-gate="signed-out" hidden>
+        <span class="bo-kicker">Private access</span>
+        <h1>Sign in to open Backoffice</h1>
+        <p>Backoffice opens for signed-in Watchdog accounts on the Backoffice access list. There is no separate password.</p>
+        <a class="bo-btn bo-btn-primary" href="/dashboard?access=signin&amp;return=%2Fbackoffice">Sign in to Watchdog</a>
+      </div>
+      <div class="bo-gate-card" data-gate="denied" hidden>
+        <span class="bo-kicker">Private access</span>
+        <h1>This account can’t open Backoffice</h1>
+        <p>You’re signed in to Watchdog, but this account isn’t on the Backoffice access list. If you use a different Watchdog account for Backoffice, sign in with that one.</p>
+        <button type="button" class="bo-btn bo-btn-primary" id="bo-switch-account">Sign in with a different account</button>
+      </div>
+      <div class="bo-gate-card" data-gate="locked" hidden>
+        <span class="bo-kicker">Private access</span>
+        <h1>Backoffice is locked</h1>
+        <p data-gate-copy="locked">Your Backoffice session on this device is closed. Open it again with your Watchdog account.</p>
+        <p data-gate-copy="expired" hidden>Your Backoffice session ended. Open it again to keep working.</p>
+        <button type="button" class="bo-btn bo-btn-primary" id="bo-open">Open Backoffice</button>
+      </div>
+      <div class="bo-gate-card" data-gate="error" hidden>
+        <span class="bo-kicker">Private access</span>
+        <h1>Backoffice couldn’t open</h1>
+        <p data-gate-error>The Backoffice service didn’t respond.</p>
+        <button type="button" class="bo-btn bo-btn-primary" id="bo-retry">Try again</button>
+      </div>
+      <p class="bo-gate-foot">Lead data stays on the server. It is shown only to signed-in Watchdog accounts on the Backoffice access list, through a session that ends after 12 hours or when you lock it.</p>
+    </section>
 
-    <main class="bo-main">
-      <header class="bo-topbar">
-        <div><span class="bo-kicker">OPERATIONS / LEADS</span><h1>Lead Intelligence</h1><p>One private queue for Watchdog leads, CRM cleanup, Google address validation and BoldTrail export workflows.</p></div>
-        <div class="bo-top-actions"><a class="bo-button bo-button-quiet" href="#leadiq">LeadIQ Tools</a><button class="bo-button bo-button-quiet" id="bo-settings" type="button">Settings</button><button class="bo-button bo-button-quiet" id="bo-refresh" type="button">Refresh</button><button class="bo-button bo-button-primary" id="bo-add" type="button">+ Add lead</button></div>
+    <div class="bo-app" id="bo-app" hidden>
+      <header class="bo-head">
+        <div>
+          <span class="bo-kicker">Leads</span>
+          <h1>Lead Intelligence</h1>
+          <p>Work the inbound queue, log every call, text and email, and hand leads to BoldTrail.</p>
+        </div>
+        <div class="bo-head-actions">
+          <button type="button" class="bo-btn bo-btn-ghost" id="bo-settings">Settings</button>
+          <button type="button" class="bo-btn bo-btn-ghost" id="bo-refresh">Refresh</button>
+          <button type="button" class="bo-btn bo-btn-primary" id="bo-add">Add lead</button>
+        </div>
       </header>
 
-      <section class="bo-stats" aria-label="Lead summary">
-        <article><span>Total leads</span><strong id="stat-total">—</strong><small>all sources</small></article>
-        <article><span>Needs review</span><strong id="stat-review">—</strong><small>address or processing</small></article>
-        <article><span>CSV exported</span><strong id="stat-exported">—</strong><small>BoldTrail handoffs</small></article>
-        <article><span>High intent</span><strong id="stat-high-intent">—</strong><small>intent 40+</small></article>
+      <section class="bo-tiles" aria-label="Today at a glance">
+        <button type="button" class="bo-tile bo-tile--navy" data-focus="new" aria-pressed="false"><small>New</small><b data-stat="new">0</b><span>not contacted yet</span></button>
+        <button type="button" class="bo-tile bo-tile--sand" data-focus="today" aria-pressed="false"><small>Due today</small><b data-stat="today">0</b><span>follow-ups for today</span></button>
+        <button type="button" class="bo-tile bo-tile--review" data-focus="overdue" aria-pressed="false"><small>Overdue</small><b data-stat="overdue">0</b><span>follow-ups past their date</span></button>
+        <button type="button" class="bo-tile bo-tile--sky" data-focus="attention" aria-pressed="false"><small>Needs attention</small><b data-stat="attention">0</b><span>address or intake to check</span></button>
       </section>
+      <p class="bo-note">Counts cover open leads for <b data-scope-label>your leads</b>. Closed and archived leads are left out.</p>
 
-      <section class="bo-integrations" id="integrations">
-        <div class="bo-section-head"><div><span>PIPELINE</span><h2>Connections & exports</h2></div><small>Credentials stay server-side. CSV export remains available even if direct CRM API access is added later.</small></div>
-        <div class="bo-integration-grid">
-          <article><div class="bo-provider-icon">G</div><div><b>Google Address Validation</b><span>Standardize and verify submitted addresses</span></div><em id="google-status" class="pending">Connect API key</em><button type="button" class="bo-card-action" id="google-configure" onclick="document.getElementById('bo-settings').click()">Configure</button></article>
-         <article><div class="bo-provider-icon">J</div><div><b>John BoldTrail</b><span>Direct sync or import-ready CSV</span></div><em id="john-boldtrail-status" class="pending">Not connected</em><button type="button" class="bo-card-action" id="export-john">Export CSV</button></article>
-          <article><div class="bo-provider-icon">W</div><div><b>Wife BoldTrail</b><span>Direct sync or import-ready CSV</span></div><em id="wife-boldtrail-status" class="pending">Not connected</em><button type="button" class="bo-card-action" id="export-wife">Export CSV</button></article>
-          <article><div class="bo-provider-icon">S</div><div><b>Backoffice security</b><span>Watchdog developer authentication + expiring sessions</span></div><em id="secure-status" class="connected">Developer gated</em><button type="button" class="bo-card-action" disabled>Developer access</button></article>
+      <section class="bo-board" id="leads" aria-labelledby="bo-queue-title">
+        <div class="bo-stages" role="group" aria-label="Pipeline stage">
+          <button type="button" class="bo-stage" data-stage="open" aria-pressed="true">Open <em data-stage-count="open">0</em></button>
+          <button type="button" class="bo-stage" data-stage="new" aria-pressed="false">New <em data-stage-count="new">0</em></button>
+          <button type="button" class="bo-stage" data-stage="contacted" aria-pressed="false">Contacted <em data-stage-count="contacted">0</em></button>
+          <button type="button" class="bo-stage" data-stage="qualified" aria-pressed="false">Qualified <em data-stage-count="qualified">0</em></button>
+          <button type="button" class="bo-stage" data-stage="nurture" aria-pressed="false">Nurture <em data-stage-count="nurture">0</em></button>
+          <button type="button" class="bo-stage" data-stage="closed" aria-pressed="false">Closed <em data-stage-count="closed">0</em></button>
+          <button type="button" class="bo-stage" data-stage="archived" aria-pressed="false">Archived <em data-stage-count="archived">0</em></button>
+        </div>
+
+        <div class="bo-toolbar">
+          <label class="bo-search"><span class="bo-sr">Search leads</span><input id="bo-search" type="search" placeholder="Search name, email, phone or address" autocomplete="off"></label>
+          <label class="bo-field"><span>Owner</span>
+            <select id="bo-owner">
+              <option value="mine">My leads</option>
+              <option value="unassigned" data-owner-anchor>Unassigned</option>
+              <option value="all">Everyone</option>
+            </select>
+          </label>
+          <label class="bo-field"><span>Follow-up</span>
+            <select id="bo-followup">
+              <option value="any">Any</option>
+              <option value="today">Due today</option>
+              <option value="overdue">Overdue</option>
+              <option value="upcoming">Upcoming</option>
+              <option value="none">No follow-up set</option>
+            </select>
+          </label>
+          <label class="bo-field"><span>Source</span>
+            <select id="bo-source">
+              <option value="all">All sources</option>
+              <optgroup label="Intake source" data-source-group="source"></optgroup>
+              <optgroup label="Heard about Watchdog" data-source-group="referral"></optgroup>
+            </select>
+          </label>
+          <label class="bo-field"><span>Sort</span>
+            <select id="bo-sort">
+              <option value="newest">Newest first</option>
+              <option value="oldest">Oldest first</option>
+              <option value="intent">Highest intent</option>
+              <option value="due">Follow-up due</option>
+            </select>
+          </label>
+          <label class="bo-check"><input type="checkbox" id="bo-attention-only"><span>Needs attention only</span></label>
+        </div>
+
+        <div class="bo-workspace">
+          <section class="bo-queue" aria-labelledby="bo-queue-title">
+            <div class="bo-queue-head">
+              <h2 id="bo-queue-title">Lead queue</h2>
+              <span class="bo-count" id="bo-queue-count" aria-live="polite">0 leads</span>
+            </div>
+            <label class="bo-check bo-select-all"><input type="checkbox" id="bo-select-all"><span>Select all shown</span></label>
+            <ul class="bo-list" id="bo-list" aria-labelledby="bo-queue-title"></ul>
+            <div class="bo-empty" id="bo-list-loading"><b>Loading leads…</b></div>
+            <div class="bo-empty" id="bo-list-empty" hidden><b>No leads match this view.</b><span>Try another owner, stage, follow-up or search.</span></div>
+            <div class="bo-empty" id="bo-list-error" hidden><b>Leads couldn’t load.</b><span data-list-error></span></div>
+          </section>
+
+          <section class="bo-detail" id="bo-detail" aria-label="Lead detail">
+            <div class="bo-detail-empty" id="bo-detail-empty">
+              <span class="bo-kicker">Lead detail</span>
+              <h2>Select a lead</h2>
+              <p>The submitted details stay exactly as the person entered them. Google’s standardized address and BoldTrail status are kept alongside, never on top.</p>
+            </div>
+            <div class="bo-detail-empty" id="bo-detail-loading" hidden><b>Loading lead…</b></div>
+            <div class="bo-detail-empty" id="bo-detail-error" hidden><h2>This lead couldn’t load</h2><p data-detail-error></p></div>
+
+            <article class="bo-lead" id="bo-lead" hidden>
+              <div class="bo-sheet-bar"><button type="button" class="bo-btn bo-btn-ghost" id="bo-back">Back to leads</button></div>
+
+              <header class="bo-lead-head">
+                <span class="bo-kicker" data-f="kicker"></span>
+                <h2 id="bo-lead-name" tabindex="-1" data-f="name"></h2>
+                <p class="bo-lead-sub"><span data-f="contact"></span></p>
+                <div class="bo-pills" data-f="pills"></div>
+              </header>
+
+              <section class="bo-card bo-reach" aria-labelledby="bo-reach-title">
+                <h3 id="bo-reach-title">Reach out</h3>
+                <div class="bo-actions">
+                  <a class="bo-btn bo-btn-primary" id="bo-call" data-channel="call" href="#">Call</a>
+                  <a class="bo-btn bo-btn-ghost" id="bo-text" data-channel="text" href="#">Text</a>
+                  <a class="bo-btn bo-btn-ghost" id="bo-email" data-channel="email" href="#">Email</a>
+                </div>
+                <p class="bo-consent" id="bo-consent-none"><b>No marketing consent on file.</b> Calling or replying one-to-one about this inquiry is fine. Don’t add this lead to email or text campaigns.</p>
+                <p class="bo-consent is-ok" id="bo-consent-some" hidden><b>Marketing consent on file:</b> <span data-f="consent"></span>.</p>
+                <p class="bo-muted" id="bo-no-contact" hidden>No phone number or email address on file.</p>
+                <p class="bo-muted">Last contacted: <b data-f="last-contacted">Not yet</b>. Tapping Call, Text or Email logs the contact and moves a New lead to Contacted.</p>
+              </section>
+
+              <section class="bo-card bo-attention" id="bo-attention-card" aria-labelledby="bo-attention-title" hidden>
+                <h3 id="bo-attention-title">Needs attention</h3>
+                <ul class="bo-reasons" data-f="reasons"></ul>
+                <p class="bo-muted">Check the details below. Once it’s handled, mark it reviewed. Re-checking the address later won’t reopen it.</p>
+                <button type="button" class="bo-btn bo-btn-primary" id="bo-mark-reviewed">Mark reviewed</button>
+              </section>
+
+              <section class="bo-card bo-dupes" id="bo-dupes" aria-labelledby="bo-dupes-title" hidden>
+                <h3 id="bo-dupes-title">Possible duplicate</h3>
+                <p class="bo-muted">Shares an email address or phone number with:</p>
+                <ul class="bo-dupe-list" data-f="dupes"></ul>
+              </section>
+
+              <div class="bo-lead-grid">
+                <section class="bo-card" aria-labelledby="bo-pipeline-title">
+                  <h3 id="bo-pipeline-title">Pipeline</h3>
+                  <div class="bo-grid2">
+                    <label class="bo-field"><span>Stage</span>
+                      <select id="bo-stage-select">
+                        <option value="new">New</option>
+                        <option value="contacted">Contacted</option>
+                        <option value="qualified">Qualified</option>
+                        <option value="nurture">Nurture</option>
+                        <option value="closed">Closed</option>
+                        <option value="archived">Archived</option>
+                      </select>
+                    </label>
+                    <label class="bo-field"><span>Owner</span>
+                      <select id="bo-owner-select">
+                        <option value="unassigned">Unassigned</option>
+                      </select>
+                    </label>
+                  </div>
+                </section>
+
+                <form class="bo-card" id="bo-followup-form" aria-labelledby="bo-followup-title">
+                  <h3 id="bo-followup-title">Follow-up</h3>
+                  <p class="bo-muted" id="bo-followup-off" hidden>Follow-ups turn on once the latest Backoffice database update is applied.</p>
+                  <label class="bo-field"><span>Next step</span><input name="next_action" maxlength="200" placeholder="Call back about a spring listing" autocomplete="off"></label>
+                  <label class="bo-field"><span>Due date</span><input name="next_action_due" type="date"></label>
+                  <div class="bo-actions">
+                    <button type="submit" class="bo-btn bo-btn-primary">Save follow-up</button>
+                    <button type="button" class="bo-btn bo-btn-ghost" id="bo-followup-clear">Clear</button>
+                  </div>
+                </form>
+              </div>
+
+              <section class="bo-card" aria-labelledby="bo-crm-title">
+                <h3 id="bo-crm-title">BoldTrail</h3>
+                <dl class="bo-dl">
+                  <dt>Destination</dt><dd data-f="crm-owner"></dd>
+                  <dt>Sent to BoldTrail</dt><dd data-f="crm-synced"></dd>
+                  <dt>Last handoff</dt><dd data-f="crm-exported"></dd>
+                  <dt>Hashtags</dt><dd data-f="hashtags"></dd>
+                </dl>
+                <p class="bo-error-text" data-f="crm-error" hidden></p>
+                <p class="bo-muted" id="bo-sync-off" hidden>This BoldTrail account isn’t connected for direct sending. Use the CSV export instead.</p>
+                <div class="bo-actions">
+                  <button type="button" class="bo-btn bo-btn-primary" id="bo-sync"><span data-sync-label>Send to BoldTrail</span></button>
+                  <button type="button" class="bo-btn bo-btn-ghost" id="bo-copy-brief">Copy CRM brief</button>
+                </div>
+              </section>
+
+              <form class="bo-card" id="bo-notes-form" aria-labelledby="bo-notes-title">
+                <h3 id="bo-notes-title">Lead notes</h3>
+                <label class="bo-field"><span>Included in BoldTrail handoffs</span><textarea name="notes" rows="4" maxlength="4000"></textarea></label>
+                <div class="bo-actions"><button type="submit" class="bo-btn bo-btn-ghost">Save notes</button></div>
+              </form>
+
+              <section class="bo-card" aria-labelledby="bo-details-title">
+                <h3 id="bo-details-title">What they submitted</h3>
+                <dl class="bo-dl">
+                  <dt>Submitted address</dt><dd data-f="submitted-address"></dd>
+                  <dt>Google address</dt><dd><span data-f="google-address"></span> <span class="bo-pill" data-f="address-status" hidden></span></dd>
+                  <dt>Phone</dt><dd data-f="phone"></dd>
+                  <dt>Email</dt><dd data-f="email"></dd>
+                  <dt>Tenure</dt><dd data-f="tenure"></dd>
+                  <dt>Household income</dt><dd data-f="income"></dd>
+                  <dt>Program</dt><dd data-f="program"></dd>
+                  <dt>Intent</dt><dd data-f="intent"></dd>
+                  <dt>Estimated benefit</dt><dd data-f="benefit"></dd>
+                  <dt>Intake source</dt><dd data-f="source"></dd>
+                  <dt>Heard about Watchdog</dt><dd data-f="referral"></dd>
+                  <dt>Received</dt><dd data-f="created"></dd>
+                </dl>
+                <div class="bo-actions"><button type="button" class="bo-btn bo-btn-ghost" id="bo-validate">Check address with Google</button></div>
+              </section>
+
+              <section class="bo-card" aria-labelledby="bo-timeline-title">
+                <h3 id="bo-timeline-title">Timeline</h3>
+                <form class="bo-note-form" id="bo-note-form">
+                  <label class="bo-field"><span>Add a note to the timeline</span><textarea name="note" rows="2" maxlength="2000" placeholder="Left a voicemail. Trying again Thursday."></textarea></label>
+                  <div class="bo-actions"><button type="submit" class="bo-btn bo-btn-ghost">Add note</button></div>
+                </form>
+                <ol class="bo-timeline" id="bo-timeline"></ol>
+                <p class="bo-muted" id="bo-timeline-empty" hidden>No activity yet.</p>
+              </section>
+            </article>
+          </section>
         </div>
       </section>
 
-      <section class="bo-bulk" id="bulk-actions">
-        <b id="bulk-count">Select leads</b><span>Assign selected to</span>
-        <select id="bulk-owner"><option value="john">John</option><option value="wife">Wife</option></select>
-        <button class="bo-button bo-button-quiet" id="bulk-assign" type="button" disabled>Assign</button>
-        <button class="bo-button bo-button-quiet" id="bulk-export" type="button" disabled>Export selected CSV</button>
-        <button class="bo-button bo-button-primary" id="bulk-sync-boldtrail" type="button" disabled>Sync selected to BoldTrail</button>
-        <button class="bo-button bo-button-quiet" id="bulk-archive" type="button" disabled>Archive</button>
-      </section>
-      
-      <section class="bo-workspace" id="leads">
-        <div class="bo-queue">
-          <div class="bo-queue-head"><div><span>LEAD QUEUE</span><h2>Incoming</h2></div><span id="queue-count" class="bo-count">0</span></div>
-          <div class="bo-filters">
-            <label class="bo-search"><span class="sr-only">Search leads</span><input id="lead-search" type="search" placeholder="Search name, email, phone or address"></label>
-            <select id="lead-filter" aria-label="Filter leads"><option value="all">All leads</option><option value="attention">Needs attention</option><option value="new">New</option><option value="exported">CSV exported</option><option value="archived">Archived</option><option value="high-intent">Intent 40+</option><option value="unassigned">Unassigned</option><option value="john">John</option><option value="wife">Wife</option></select>
+      <section class="bo-insights" aria-label="Lead sources and BoldTrail handoff">
+        <article class="bo-card bo-sources" aria-labelledby="bo-sources-title">
+          <div class="bo-card-head">
+            <div><span class="bo-kicker">Lead sources</span><h2 id="bo-sources-title">Where leads come from</h2></div>
+            <div class="bo-seg" role="group" aria-label="Time range">
+              <button type="button" data-range="30" aria-pressed="true">Last 30 days</button>
+              <button type="button" data-range="all" aria-pressed="false">All time</button>
+            </div>
           </div>
-          <div id="lead-list" class="bo-lead-list" aria-live="polite"><div class="bo-loading">Loading leads…</div></div>
-        </div>
-        <div class="bo-detail" id="lead-detail"><div class="bo-empty-detail"><span>LEAD DETAIL</span><h2>Select a lead</h2><p>Submitted information stays separate from Google-standardized and third-party data.</p></div></div>
+          <p class="bo-muted">For <b data-scope-label>your leads</b>, archived leads left out. <span data-sources-total></span></p>
+          <div class="bo-grid2">
+            <div><h3>Intake source</h3><ul class="bo-bars" id="bo-sources-intake"></ul></div>
+            <div><h3>Heard about Watchdog</h3><ul class="bo-bars" id="bo-sources-referral"></ul></div>
+          </div>
+        </article>
+
+        <article class="bo-card bo-handoff" aria-labelledby="bo-handoff-title">
+          <span class="bo-kicker">BoldTrail handoff</span>
+          <h2 id="bo-handoff-title">Export new leads</h2>
+          <p class="bo-muted">Download an import-ready CSV of each person’s leads that haven’t been exported yet. Archived leads are left out. Exporting records the handoff; it doesn’t confirm BoldTrail imported the file.</p>
+          <ul class="bo-handoff-list" id="bo-handoff-list"></ul>
+        </article>
       </section>
 
-      <section class="li-panel" id="leadiq" aria-labelledby="leadiq-title">
+      <section class="bo-card li-panel" id="leadiq" aria-labelledby="leadiq-title">
         <div class="li-head">
-          <div class="li-head-copy"><span class="li-kicker">LEADIQ / CRM TOOLBOX</span><h2 id="leadiq-title">Clean a contact file before it hits the CRM.</h2><p>This replaces the highest-use CSV analysis and conversion work from the old BTC page inside the authenticated Backoffice. Import one or more CSVs, audit quality, remove duplicates, normalize contact fields and create a BoldTrail-ready file.</p></div>
+          <div>
+            <span class="bo-kicker">LeadIQ Tools</span>
+            <h2 id="leadiq-title">Clean a contact file before it reaches the CRM</h2>
+            <p class="bo-muted">Import one or more CRM CSVs, check quality, remove duplicates, normalize contact fields and build a BoldTrail-ready or Kit-ready file.</p>
+          </div>
           <span class="li-memory">Browser memory only</span>
         </div>
         <div class="li-toolbar">
-          <label class="li-file"><span class="li-btn primary">Choose CSV</span><input id="leadiq-file" type="file" accept=".csv,text/csv" multiple aria-label="Choose CRM CSV files"></label>
-          <button class="li-btn" id="leadiq-cleaned" type="button" disabled>Cleaned CSV</button>
-          <button class="li-btn" id="leadiq-boldtrail" type="button" disabled>BoldTrail CSV</button>
-          <button class="li-btn" id="leadiq-view-export" type="button" disabled>Export view</button>
-          <button class="li-btn" id="leadiq-clear" type="button" disabled>Clear</button>
-          <span class="li-spacer"></span>
-          <select class="li-filter" id="leadiq-filter" aria-label="Filter imported contacts"><option value="all">All contacts</option><option value="complete">Complete</option><option value="ready">Reachout ready</option><option value="duplicates">Duplicates</option><option value="missing-contact">Missing contact</option><option value="missing-address">Missing address</option></select>
-          <input class="li-search" id="leadiq-search" type="search" placeholder="Search imported contacts" aria-label="Search imported contacts">
+          <label class="li-file"><input id="leadiq-file" type="file" accept=".csv,text/csv" multiple><span class="bo-btn bo-btn-primary">Choose CSV</span></label>
+          <button type="button" class="bo-btn bo-btn-ghost" id="leadiq-cleaned" disabled>Cleaned CSV</button>
+          <button type="button" class="bo-btn bo-btn-ghost" id="leadiq-boldtrail" disabled>BoldTrail CSV</button>
+          <button type="button" class="bo-btn bo-btn-ghost" id="leadiq-kit" disabled>Kit CSV</button>
+          <button type="button" class="bo-btn bo-btn-ghost" id="leadiq-view-export" disabled>Export view</button>
+          <button type="button" class="bo-btn bo-btn-ghost" id="leadiq-clear" disabled>Clear</button>
         </div>
-        <div class="li-stage" id="leadiq-stage" aria-live="polite"></div>
-      </section>
+        <div class="li-filters">
+          <label class="bo-field"><span>Show</span>
+            <select id="leadiq-filter">
+              <option value="all">All contacts</option>
+              <option value="complete">Complete</option>
+              <option value="ready">Has email or phone</option>
+              <option value="duplicates">Duplicates</option>
+              <option value="missing-contact">Missing contact</option>
+              <option value="missing-address">Missing address</option>
+            </select>
+          </label>
+          <label class="bo-search"><span class="bo-sr">Search imported contacts</span><input id="leadiq-search" type="search" placeholder="Search imported contacts" autocomplete="off"></label>
+        </div>
 
-      <section class="bo-activity" id="activity">
-        <div class="bo-section-head"><div><span>AUDIT</span><h2>Backoffice rules</h2></div></div>
-        <div class="bo-principles"><article><b>Original stays original</b><p>Consumer-submitted contact data is preserved even when Google returns a standardized address.</p></article><article><b>Separate CRM ownership</b><p>Every lead can be unassigned, assigned to John, or assigned to Wife before export.</p></article><article><b>Export history</b><p>Each generated CSV is logged with its profile, included leads and timestamp so duplicate exports are visible.</p></article></div>
+        <div class="li-drop" id="leadiq-drop">
+          <h3>Drop a CRM CSV here</h3>
+          <p>Or choose one or more CSV files above. Nothing is kept after you close this page.</p>
+          <p class="li-hint">Recognizes common BoldTrail, kvCORE and generic CRM columns. The Kit export keeps only first name and email address, and only for contacts who opted in to email.</p>
+        </div>
+
+        <div class="li-results" id="leadiq-results" hidden>
+          <div class="li-summary">
+            <div class="li-stat"><span>Imported</span><strong data-li-stat="total">0</strong></div>
+            <div class="li-stat is-good"><span>Unique</span><strong data-li-stat="unique">0</strong></div>
+            <div class="li-stat is-warn"><span>Duplicates</span><strong data-li-stat="duplicates">0</strong></div>
+            <div class="li-stat is-warn"><span>No contact</span><strong data-li-stat="missingContact">0</strong></div>
+            <div class="li-stat is-warn"><span>No address</span><strong data-li-stat="missingAddress">0</strong></div>
+            <div class="li-stat is-good"><span>Email opt-in</span><strong data-li-stat="emailOptIn">0</strong></div>
+          </div>
+          <p class="li-meta"><b data-li="files"></b> · <span data-li="shown"></span></p>
+          <div class="li-pills" id="leadiq-mapping"></div>
+          <label class="li-consent">
+            <input id="leadiq-batch-consent" type="checkbox">
+            <span><b>This whole batch opted in to email, calls and texts</b><small>Only check this when the source recorded that consent. Contacts with no recorded choice are then exported as opted in. A recorded “no” is always kept as no.</small></span>
+          </label>
+          <div class="li-table-wrap">
+            <table class="li-table">
+              <caption class="bo-sr">Imported contacts</caption>
+              <thead><tr><th scope="col">Contact</th><th scope="col">Email</th><th scope="col">Phone</th><th scope="col">Address</th><th scope="col">Source</th><th scope="col">Email opt-in</th><th scope="col">Quality</th><th scope="col">File</th><th scope="col"><span class="bo-sr">Action</span></th></tr></thead>
+              <tbody id="leadiq-rows"></tbody>
+            </table>
+          </div>
+          <p class="li-empty" id="leadiq-none" hidden>No contacts match this view.</p>
+          <p class="bo-muted li-footer">Showing up to 500 rows here; exports include the full filtered result. Having an email address or phone number is not marketing consent. <span id="leadiq-more" hidden></span></p>
+          <div class="li-legacy">
+            <div><b>Still in the old BTC toolbox</b><p class="bo-muted">Open House, Property IQ and the campaign helpers stay there while they move over.</p></div>
+            <a class="bo-btn bo-btn-ghost" href="/btc-legacy.html">Open legacy tools</a>
+          </div>
+        </div>
       </section>
-    </main>
+    </div>
+  </main>
+
+  <div class="bo-bulk" id="bo-bulk" role="region" aria-label="Bulk actions" hidden>
+    <b class="bo-bulk-count" id="bo-bulk-count" aria-live="polite">0 selected</b>
+    <label class="bo-field bo-field-inline"><span>For</span><select id="bo-bulk-owner"><option value="unassigned">Unassigned</option></select></label>
+    <div class="bo-bulk-actions">
+      <button type="button" class="bo-btn bo-btn-onnavy" id="bo-bulk-assign">Assign</button>
+      <button type="button" class="bo-btn bo-btn-onnavy" id="bo-bulk-export">Export CSV</button>
+      <button type="button" class="bo-btn bo-btn-light" id="bo-bulk-sync">Send to BoldTrail</button>
+      <button type="button" class="bo-btn bo-btn-onnavy" id="bo-bulk-archive"><span data-archive-label="archive">Archive</span><span data-archive-label="restore" hidden>Restore</span></button>
+      <button type="button" class="bo-btn bo-btn-onnavy" id="bo-bulk-clear">Clear selection</button>
+    </div>
   </div>
 
-  <dialog id="lead-dialog" class="bo-dialog">
-    <form id="lead-form">
-      <div class="bo-dialog-head"><div><span>MANUAL INGEST</span><h2>Add a lead</h2><p>Google validation runs automatically when connected and an address is supplied.</p></div><button type="button" class="bo-close" id="lead-dialog-close" aria-label="Close">×</button></div>
-      <div class="bo-form-grid">
-        <label class="wide">Full name<input name="full_name" autocomplete="name"></label><label>Email<input name="email" type="email" autocomplete="email"></label><label>Phone<input name="phone" autocomplete="tel"></label><label class="wide">Submitted address<input name="submitted_address" autocomplete="street-address" placeholder="Street, city, NJ ZIP"></label><label>Assign to<select name="crm_owner"><option value="unassigned">Unassigned</option><option value="john">John</option><option value="wife">Wife</option></select></label><label>Tenure<select name="tenure"><option value="">Unknown</option><option>Homeowner</option><option>Renter</option></select></label><label>Household income<input name="household_income" placeholder="Under $150,000"></label><label>Program<input name="program" value="ANCHOR Estimator"></label><label>Intent score<input name="intent_score" type="number" min="0" max="100"></label><label>Estimated benefit<input name="estimated_benefit" type="number" min="0" step="0.01" placeholder="1500"></label><label class="wide">Source<input name="source" value="manual"></label><label class="wide">Notes<textarea name="notes" rows="3"></textarea></label>
+  <dialog class="bo-dialog" id="bo-add-dialog" aria-labelledby="bo-add-title">
+    <form id="bo-add-form">
+      <div class="bo-dialog-head">
+        <div><span class="bo-kicker">Manual entry</span><h2 id="bo-add-title">Add a lead</h2><p class="bo-muted">Google checks the address automatically when it’s connected and an address is entered.</p></div>
+        <button type="button" class="bo-icon-btn" data-close aria-label="Close add lead">×</button>
       </div>
-      <div class="bo-dialog-actions"><span id="lead-form-error" role="alert"></span><button type="button" class="bo-button bo-button-quiet" id="lead-dialog-cancel">Cancel</button><button type="submit" class="bo-button bo-button-primary" id="lead-save">Save lead</button></div>
+      <div class="bo-form-grid">
+        <label class="bo-field is-wide"><span>Full name</span><input name="full_name" autocomplete="name"></label>
+        <label class="bo-field"><span>Email</span><input name="email" type="email" autocomplete="email"></label>
+        <label class="bo-field"><span>Phone</span><input name="phone" type="tel" autocomplete="tel"></label>
+        <label class="bo-field is-wide"><span>Submitted address</span><input name="submitted_address" autocomplete="street-address" placeholder="Street, city, NJ ZIP"></label>
+        <label class="bo-field"><span>Owner</span><select name="crm_owner" id="bo-add-owner"><option value="unassigned">Unassigned</option></select></label>
+        <label class="bo-field"><span>Tenure</span><select name="tenure"><option value="">Unknown</option><option>Homeowner</option><option>Renter</option></select></label>
+        <label class="bo-field"><span>Household income</span><input name="household_income" placeholder="Under $150,000"></label>
+        <label class="bo-field"><span>Program</span><input name="program" value="ANCHOR Estimator"></label>
+        <label class="bo-field"><span>Intent score (0–100)</span><input name="intent_score" type="number" min="0" max="100" inputmode="numeric"></label>
+        <label class="bo-field"><span>Estimated benefit</span><input name="estimated_benefit" type="number" min="0" step="0.01" placeholder="1500" inputmode="decimal"></label>
+        <label class="bo-field is-wide"><span>Source</span><input name="source" value="manual"></label>
+        <label class="bo-field is-wide"><span>Notes</span><textarea name="notes" rows="3" maxlength="4000"></textarea></label>
+      </div>
+      <div class="bo-dialog-actions">
+        <p class="bo-error-text" id="bo-add-error" role="alert"></p>
+        <button type="button" class="bo-btn bo-btn-ghost" data-close>Cancel</button>
+        <button type="submit" class="bo-btn bo-btn-primary" id="bo-add-save">Save lead</button>
+      </div>
     </form>
   </dialog>
 
-  <dialog id="settings-dialog" class="bo-dialog bo-settings-dialog">
-    <div class="bo-dialog-shell">
-      <div class="bo-dialog-head"><div><span>PRIVATE SETTINGS</span><h2>Backoffice connections</h2><p>Secrets are sent directly to the server and stored in Supabase Vault.</p></div><button type="button" class="bo-close" id="settings-close" aria-label="Close">×</button></div>
-      <div id="settings-error" class="bo-form-error" role="alert"></div>
-      <form id="google-form" class="bo-settings-section"><div><b>Google Address Validation</b><p>Paste the Google Maps Platform API key. It must be the single 39-character key beginning with AIza. This field is intentionally not a password field so browser password managers cannot replace it.</p></div><label>Google API key<input type="text" name="google_key" autocomplete="off" autocapitalize="none" spellcheck="false" data-lpignore="true" data-1p-ignore="true" placeholder="AIza…" minlength="39" maxlength="39" pattern="AIza[0-9A-Za-z_-]{35}" required></label><button class="bo-button bo-button-primary" id="google-save" type="submit">Save Google key</button></form>
-      <div class="bo-settings-section"><div><b>Backoffice access</b><p>The separate shared password is temporarily disabled. Access currently requires a signed-in Watchdog developer account.</p></div></div>
-      <form id="rotate-form" class="bo-settings-section" hidden><div><b>Shared Backoffice key</b><p>Password access is temporarily disabled.</p></div><label>New shared key<input type="password" name="new_key" minlength="14" autocomplete="new-password"></label><label>Confirm new key<input type="password" name="confirm_key" minlength="14" autocomplete="new-password"></label><button class="bo-button bo-button-quiet" type="submit">Rotate shared key</button></form>
+  <dialog class="bo-dialog" id="bo-settings-dialog" aria-labelledby="bo-settings-title">
+    <div class="bo-dialog-head">
+      <div><span class="bo-kicker">Settings</span><h2 id="bo-settings-title">Backoffice status</h2><p class="bo-muted">Read-only. Google and BoldTrail keys are server secrets set by a developer; nothing secret is entered or shown here.</p></div>
+      <button type="button" class="bo-icon-btn" data-close aria-label="Close settings">×</button>
     </div>
+    <dl class="bo-dl bo-status-list">
+      <dt>Signed in as</dt><dd data-s="who"></dd>
+      <dt>Session ends</dt><dd data-s="expires"></dd>
+      <dt>Google address validation</dt><dd data-s="google"></dd>
+    </dl>
+    <h3 class="bo-settings-sub">BoldTrail direct sending</h3>
+    <dl class="bo-dl bo-status-list" id="bo-settings-boldtrail"></dl>
+    <div class="bo-dialog-actions"><button type="button" class="bo-btn bo-btn-primary" data-close>Done</button></div>
   </dialog>
 
-  <div id="bo-toast" class="bo-toast" role="status" aria-live="polite"></div>
-  <div id="leadiq-toast" class="li-toast" role="status" aria-live="polite"></div>
+  <dialog class="bo-dialog bo-dialog-sm" id="bo-confirm" aria-labelledby="bo-confirm-title">
+    <form method="dialog">
+      <h2 id="bo-confirm-title" data-c="title"></h2>
+      <ul class="bo-confirm-lines" data-c="lines"></ul>
+      <label class="bo-check" data-c="resend-wrap" hidden><input type="checkbox" data-c="resend"><span>Re-send leads that are already in BoldTrail</span></label>
+      <div class="bo-dialog-actions">
+        <button type="submit" value="cancel" class="bo-btn bo-btn-ghost">Cancel</button>
+        <button type="submit" value="ok" class="bo-btn bo-btn-primary" data-c="ok">Continue</button>
+      </div>
+    </form>
+  </dialog>
+
+  <template id="tpl-lead-row">
+    <li class="bo-row">
+      <label class="bo-row-check"><input type="checkbox" data-row-check><span class="bo-sr" data-row-check-label></span></label>
+      <button type="button" class="bo-row-open" data-row-open>
+        <span class="bo-row-top"><span class="bo-row-name" data-r="name"></span><time class="bo-row-time" data-r="time"></time></span>
+        <span class="bo-row-meta" data-r="meta"></span>
+        <span class="bo-row-next" data-r="next" hidden></span>
+        <span class="bo-pills" data-r="pills"></span>
+      </button>
+    </li>
+  </template>
+  <template id="tpl-event">
+    <li class="bo-event">
+      <span class="bo-event-dot" aria-hidden="true"></span>
+      <div class="bo-event-body"><b data-e="title"></b><span data-e="meta"></span><p class="bo-event-note" data-e="note" hidden></p></div>
+      <time class="bo-event-time" data-e="time"></time>
+    </li>
+  </template>
+  <template id="tpl-bar">
+    <li class="bo-bar"><span class="bo-bar-label" data-b="label"></span><meter min="0" max="1" value="0" data-b="meter"></meter><b class="bo-bar-count" data-b="count"></b></li>
+  </template>
+  <template id="tpl-handoff">
+    <li class="bo-handoff-row">
+      <div><b data-h="label"></b><span class="bo-muted" data-h="status"></span></div>
+      <button type="button" class="bo-btn bo-btn-ghost" data-h="export">Export CSV</button>
+    </li>
+  </template>
+  <template id="tpl-dupe">
+    <li><button type="button" class="bo-link-btn" data-d="open"></button> <span class="bo-muted" data-d="why"></span></li>
+  </template>
+
+  <div class="bo-toast" id="bo-toast" role="status" aria-live="polite" hidden></div>
+
   <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2/dist/umd/supabase.js"></script>
   <script src="/property/js/access-guard.js"></script>
-  <script src="/property/backoffice/backoffice-dev-auth.js?v=20260928a" defer></script>
-  <script src="/property/backoffice/backoffice.js" defer></script>
-  <script src="/property/backoffice/leadiq-tools.js" defer></script>
+  <script src="/property/backoffice/backoffice-shell.js?v=20260928a" defer></script>
+  <script src="/property/backoffice/backoffice.js?v=20260928a" defer></script>
+  <script src="/property/backoffice/leadiq-tools.js?v=20260928a" defer></script>
 </body>
 </html>

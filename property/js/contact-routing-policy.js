@@ -4,6 +4,10 @@
    Explicit agent-match cards may show the licensed agent identity while keeping contact routing inside Watchdog. */
 (function () {
   'use strict';
+  // Backoffice is the private lead tool John and Heather use to call, text and
+  // email their own inbound leads. It is not a public contact path, so its
+  // tel:/sms:/mailto: links and lead text are left exactly as they are.
+  if (/^\/(?:property\/)?backoffice(?:\/|$)/i.test(String(location.pathname || ''))) return;
   if (window.__WATCHDOG_CONTACT_ROUTING_POLICY__) return;
   window.__WATCHDOG_CONTACT_ROUTING_POLICY__ = true;
 
