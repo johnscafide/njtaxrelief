@@ -73,4 +73,19 @@ assert.match(digest, /if \(!email \|\| \(!top\.length && !checkups\)\)/, 'a chec
 assert.match(digest, /const CHECKUP_URL = "https:\/\/www\.watchdogindex\.com\/agent-desk#clients";/);
 assert.doesNotMatch(digest, /njpropertytaxrelief\.com\/property\/agent-desk/, 'desk link uses the clean Watchdog URL');
 
+// Monday email is on by default for everyone who can open the Agent Desk.
+const { recipients } = await import(new URL('supabase/functions/agent-opportunity-digest/recipients.ts', root).href);
+const list = recipients(
+  [{ user_id: 'off', enabled: false }, { user_id: 'custom', enabled: true, weekday: 3, local_hour: 9, timezone: 'America/Chicago' }],
+  [{ user_id: 'agent', billing_tier: 'agent', subscription_status: 'active' }, { user_id: 'off', billing_tier: 'pro', subscription_status: 'active' },
+   { user_id: 'custom', plan_tier: 'Teams', subscription_status: 'trialing' }, { user_id: 'basic', billing_tier: 'standard', subscription_status: 'active' },
+   { user_id: 'lapsed', billing_tier: 'agent', subscription_status: 'canceled' }],
+  [{ id: 'dev' }]);
+assert.deepEqual(list.map((p) => p.user_id).sort(), ['agent', 'custom', 'dev'], 'no saved choice means on; off stays off; no plan, no email');
+assert.equal(list.find((p) => p.user_id === 'agent').weekday, 1);
+assert.equal(list.find((p) => p.user_id === 'agent').local_hour, 8);
+assert.equal(list.find((p) => p.user_id === 'custom').timezone, 'America/Chicago');
+assert.match(digest, /import \{ PLAN_ACTIVE, recipients \} from "\.\/recipients\.ts";/);
+assert.match(read('property/js/agent-desk.js'), /\$\('ad-digest'\)\.checked=digest\?digest\.enabled:true;/, 'the switch shows on when no choice is saved');
+
 console.log('Checkup contract passed.');

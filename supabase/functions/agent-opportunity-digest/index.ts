@@ -1,5 +1,6 @@
 import "jsr:@supabase/functions-js/edge-runtime.d.ts";
 import { createClient } from "npm:@supabase/supabase-js@2.95.0";
+import { PLAN_ACTIVE, recipients } from "./recipients.ts";
 
 const admin = createClient(Deno.env.get("SUPABASE_URL")!, Deno.env.get("SUPABASE_SERVICE_ROLE_KEY")!, { auth: { persistSession: false } });
 const eventWeights: Record<string, number> = { appeal_deadline: 30, assessment_change: 27, tax_change: 25, permit_change: 23, deed_change: 22, evidence_change: 22, market_change: 20, municipal_change: 18 };
@@ -39,10 +40,18 @@ Deno.serve(async request => {
   const templateId = Deno.env.get("EMAILJS_AGENT_DIGEST_TEMPLATE_ID") || "";
   if (!publicKey || !privateKey || !serviceId || !templateId) return Response.json({ ok: false, reason: "Agent digest EmailJS secrets are incomplete" }, { status: 503 });
   const now = new Date();
-  const { data: prefs, error } = await admin.from("agent_digest_preferences").select("*").eq("enabled", true);
+  // On by default: everyone who can open the Agent Desk gets the email unless
+  // they switched it off. A saved row only records a choice or the last send.
+  const [prefRes, entRes, devRes] = await Promise.all([
+    admin.from("agent_digest_preferences").select("*"),
+    admin.from("account_entitlements").select("user_id,billing_tier,plan_tier,subscription_status").in("subscription_status", PLAN_ACTIVE),
+    admin.from("profiles").select("id").eq("account_role", "developer")
+  ]);
+  const error = prefRes.error || entRes.error || devRes.error;
   if (error) return Response.json({ ok: false, reason: error.message }, { status: 500 });
+  const prefs = recipients(prefRes.data || [], entRes.data || [], devRes.data || []);
   const result = { sent: 0, skipped: 0, failed: 0 };
-  for (const pref of prefs || []) {
+  for (const pref of prefs) {
     if (!due(pref, now)) { result.skipped++; continue; }
     const since = pref.last_sent_at || new Date(now.getTime() - 8 * 86400000).toISOString();
     const [{ data: items }, authResult, { data: farm }, { data: saved }] = await Promise.all([
@@ -85,7 +94,7 @@ Deno.serve(async request => {
       template_params: { to_email: email, subject, opportunity_count: top.length + (checkups ? 1 : 0), digest_rows: (checkups ? checkupRow(checkups) : "") + digestHtml(top), desk_url: DESK_URL, compliance_note: "Property changes are not seller predictions. Review the source and your lawful contact basis before outreach." }
     }) });
     if (!response.ok) { result.failed++; continue; }
-    await admin.from("agent_digest_preferences").update({ last_sent_at: now.toISOString(), updated_at: now.toISOString() }).eq("user_id", pref.user_id);
+    await admin.from("agent_digest_preferences").upsert({ user_id: pref.user_id, last_sent_at: now.toISOString(), updated_at: now.toISOString() }); // a new row takes the table defaults (on, Monday 8 AM ET)
     result.sent++;
   }
   return Response.json({ ok: true, ...result });
