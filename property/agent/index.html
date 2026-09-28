@@ -7,13 +7,127 @@
   <meta name="referrer" content="strict-origin-when-cross-origin">
   <title>Agent Property Intelligence | Watchdog</title>
   <link rel="icon" href="/favicon.ico">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="/property/css/shared.css">
   <style>
-    :root{color-scheme:light}*{box-sizing:border-box}body{margin:0;background:var(--surface-subtle,#f5f6f7);color:var(--text-primary,#15212b);font-family:var(--font-ui,system-ui,sans-serif)}
-    .ap-shell{min-height:100vh}.ap-top{background:var(--wd-navy-950,#0b1f2a);color:#fff}.ap-topin{max-width:var(--container-wide,1500px);margin:auto;padding:18px clamp(18px,4vw,48px);display:flex;align-items:center;justify-content:space-between;gap:18px}.ap-watchdog{display:flex;align-items:center;gap:10px;font-weight:800;letter-spacing:.01em}.ap-watchdog a{color:inherit;text-decoration:none}.ap-badge{font-size:var(--type-xs,12px);opacity:.76}
-    .ap-card{max-width:var(--container-wide,1500px);margin:0 auto;padding:28px clamp(18px,4vw,48px) 18px;display:grid;grid-template-columns:auto 1fr auto;align-items:center;gap:18px}.ap-photo{width:78px;height:78px;border-radius:50%;object-fit:cover;background:#dde4e8}.ap-identity h1{margin:0 0 5px;font-size:clamp(24px,3vw,38px);line-height:1.08}.ap-identity p{margin:3px 0;color:var(--text-muted,#61717d);font-size:var(--type-sm,14px)}.ap-logo{max-height:62px;max-width:180px;object-fit:contain}.ap-contact{display:flex;gap:8px;flex-wrap:wrap;margin-top:12px}.ap-contact a{display:inline-flex;padding:9px 12px;border-radius:var(--radius-md,10px);background:#fff;border:1px solid var(--border-subtle,#d9e0e4);color:inherit;text-decoration:none;font-size:var(--type-sm,14px);font-weight:700}.ap-disclosure{max-width:var(--container-wide,1500px);margin:0 auto;padding:0 clamp(18px,4vw,48px) 18px;color:var(--text-muted,#61717d);font-size:var(--type-xs,12px)}
-    .ap-lookup,.ap-lead{max-width:var(--container-wide,1500px);margin:auto;padding:0 clamp(12px,2vw,24px) 32px}.ap-frame{width:100%;min-height:980px;border:0;border-radius:var(--radius-lg,16px);background:#fff;box-shadow:var(--shadow-md,0 10px 30px rgba(11,31,42,.08))}.ap-lead-card{margin-top:18px;padding:24px;background:#fff;border-radius:var(--radius-lg,16px);box-shadow:var(--shadow-md,0 10px 30px rgba(11,31,42,.08))}.ap-lead-card h2{margin:0 0 6px}.ap-lead-card p{margin:0 0 16px;color:var(--text-muted,#61717d)}.ap-grid{display:grid;grid-template-columns:1fr 1fr;gap:12px}.ap-grid .wide{grid-column:1/-1}.ap-grid label{display:grid;gap:6px;font-size:var(--type-sm,14px);font-weight:700}.ap-grid input{width:100%;padding:12px;border:1px solid var(--border-subtle,#d9e0e4);border-radius:var(--radius-md,10px);font:inherit}.ap-consent{display:flex!important;grid-template-columns:auto 1fr!important;align-items:start;gap:8px!important;font-weight:500!important}.ap-consent input{width:auto;margin-top:3px}.ap-submit{margin-top:14px;padding:12px 16px;border:0;border-radius:var(--radius-md,10px);background:var(--wd-navy-950,#0b1f2a);color:#fff;font:inherit;font-weight:800;cursor:pointer}.ap-submit[disabled]{opacity:.55;cursor:wait}.ap-msg{margin-top:10px;font-size:var(--type-sm,14px)}.ap-hp{position:absolute!important;left:-9999px!important;width:1px!important;height:1px!important;overflow:hidden!important}.ap-state{max-width:760px;margin:80px auto;padding:30px;text-align:center;background:#fff;border-radius:var(--radius-lg,16px);box-shadow:var(--shadow-md,0 10px 30px rgba(11,31,42,.08))}.ap-state h1{margin-top:0}.ap-state p{color:var(--text-muted,#61717d)}
-    @media(max-width:768px){.ap-topin{padding:14px 18px}.ap-card{grid-template-columns:64px 1fr;padding-top:20px}.ap-photo{width:64px;height:64px}.ap-logo{grid-column:1/-1;max-height:48px}.ap-frame{min-height:1100px;border-radius:12px}.ap-lookup,.ap-lead{padding-inline:0}.ap-lead-card{border-radius:0}.ap-contact a{font-size:12px}.ap-grid{grid-template-columns:1fr}}
+    :root{color-scheme:light;--ap-navy:#0f2350;--ap-navy-2:#1b3a7a;--ap-blue:#2f6fed;--ap-ink:#14202b;--ap-muted:#5c6b78;--ap-line:#dde4ea;--ap-bg:#f4f6f9;--ap-ok:#127a4a;--ap-ok-bg:#e8f6ee}
+    *{box-sizing:border-box}
+    [hidden]{display:none!important}
+    body{margin:0;background:var(--ap-bg);color:var(--ap-ink);font-family:'Plus Jakarta Sans',system-ui,-apple-system,'Segoe UI',sans-serif;-webkit-font-smoothing:antialiased}
+    a{color:inherit}
+    .ap-wrap{max-width:1180px;margin:0 auto;padding:0 clamp(16px,4vw,40px)}
+    svg.i{width:18px;height:18px;flex:none;fill:none;stroke:currentColor;stroke-width:2;stroke-linecap:round;stroke-linejoin:round}
+
+    /* Top bar */
+    .ap-top{background:var(--ap-navy);color:#fff}
+    .ap-top .ap-wrap{display:flex;align-items:center;justify-content:space-between;gap:12px;min-height:60px}
+    .ap-brand{display:flex;align-items:center;gap:10px;min-width:0}
+    .ap-brand a{display:inline-flex;align-items:center;min-height:44px;font-weight:800;font-size:20px;text-decoration:none;letter-spacing:.01em}
+    .ap-brand span{font-size:13px;opacity:.75;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+    .ap-top-pro{display:inline-flex;align-items:center;gap:6px;min-height:44px;padding:0 4px;font-size:14px;font-weight:700;color:#cfe0ff;text-decoration:none;white-space:nowrap}
+    .ap-top-pro:hover{color:#fff}
+    .ap-top-pro .short{display:none}
+
+    /* Hero */
+    .ap-band{background:linear-gradient(135deg,var(--ap-navy) 0%,var(--ap-navy-2) 60%,#2a4f9e 100%);padding:28px 0 96px}
+    .ap-band p{margin:0;color:#dbe6ff;font-size:14px;font-weight:600;letter-spacing:.02em}
+    .ap-hero{position:relative;margin-top:-72px;background:#fff;border-radius:22px;box-shadow:0 18px 50px rgba(15,35,80,.14);padding:clamp(20px,3.5vw,36px);display:grid;grid-template-columns:auto 1fr auto;gap:clamp(16px,3vw,32px);align-items:center}
+    .ap-photo{width:128px;height:128px;border-radius:50%;object-fit:cover;background:#e3e9f0;border:5px solid #fff;box-shadow:0 6px 20px rgba(15,35,80,.18)}
+    .ap-initials{width:128px;height:128px;border-radius:50%;display:grid;place-items:center;background:linear-gradient(135deg,var(--ap-navy-2),var(--ap-blue));color:#fff;font-size:42px;font-weight:800;border:5px solid #fff;box-shadow:0 6px 20px rgba(15,35,80,.18)}
+    .ap-id{min-width:0}
+    .ap-eyebrow{margin:0 0 6px;font-size:13px;font-weight:700;color:var(--ap-blue);letter-spacing:.04em;text-transform:uppercase}
+    .ap-id h1{margin:0;font-size:clamp(28px,4.2vw,46px);line-height:1.05;letter-spacing:-.02em;overflow-wrap:anywhere}
+    .ap-brokerage{margin:8px 0 0;font-size:17px;font-weight:600;color:var(--ap-ink)}
+    .ap-verified{display:flex;align-items:center;gap:8px;margin:10px 0 0;font-size:14px;color:var(--ap-muted)}
+    .ap-verified b{display:inline-flex;align-items:center;gap:5px;color:var(--ap-ok);font-weight:700}
+    .ap-verified b svg{width:16px;height:16px}
+    .ap-logo-tile{display:flex;align-items:center;justify-content:center;padding:14px 18px;border:1px solid var(--ap-line);border-radius:16px;background:#fff;min-width:150px}
+    .ap-logo{max-height:64px;max-width:190px;object-fit:contain}
+    .ap-actions{grid-column:1/-1;display:flex;flex-wrap:wrap;gap:10px;padding-top:6px;border-top:1px solid var(--ap-line);margin-top:4px;padding-top:18px}
+    .ap-btn{white-space:nowrap;display:inline-flex;align-items:center;justify-content:center;gap:8px;min-height:48px;padding:0 18px;border-radius:12px;border:1px solid var(--ap-line);background:#fff;color:var(--ap-ink);font:inherit;font-size:15px;font-weight:700;text-decoration:none;cursor:pointer;transition:background .15s,border-color .15s,transform .15s}
+    .ap-btn:hover{border-color:#b9c6d3;background:#f7f9fc}
+    .ap-btn:focus-visible,.ap-top-pro:focus-visible,.ap-tile:focus-visible,.ap-submit:focus-visible{outline:3px solid #8fb4ff;outline-offset:2px}
+    .ap-btn.primary{background:var(--ap-navy);border-color:var(--ap-navy);color:#fff}
+    .ap-btn.primary:hover{background:var(--ap-navy-2)}
+    .ap-btn .sub{font-weight:600;opacity:.8}
+
+    /* Quick tiles */
+    .ap-tiles{display:grid;grid-template-columns:repeat(3,1fr);gap:14px;margin:22px 0 8px}
+    .ap-tile{display:flex;gap:14px;align-items:flex-start;padding:18px;border-radius:16px;background:#fff;border:1px solid var(--ap-line);text-decoration:none;color:inherit;transition:border-color .15s,box-shadow .15s}
+    .ap-tile:hover{border-color:#b9c6d3;box-shadow:0 8px 24px rgba(15,35,80,.08)}
+    .ap-tile .ic{display:grid;place-items:center;width:44px;height:44px;border-radius:12px;background:#eaf1ff;color:var(--ap-blue);flex:none}
+    .ap-tile b{display:block;font-size:16px;margin-bottom:3px}
+    .ap-tile span span{display:block;font-size:14px;color:var(--ap-muted);line-height:1.4}
+
+    /* Sections */
+    .ap-section{margin:30px 0 0}
+    .ap-section-head{display:flex;align-items:flex-end;justify-content:space-between;gap:12px;margin:0 0 12px}
+    .ap-section-head h2{margin:0;font-size:clamp(20px,2.4vw,26px);letter-spacing:-.01em}
+    .ap-section-head p{margin:4px 0 0;color:var(--ap-muted);font-size:14px}
+    .ap-frame{display:block;width:100%;min-height:980px;border:0;border-radius:18px;background:#fff;box-shadow:0 10px 30px rgba(15,35,80,.08)}
+
+    /* Lead form */
+    .ap-lead-card{padding:clamp(20px,3vw,30px);background:#fff;border-radius:18px;box-shadow:0 10px 30px rgba(15,35,80,.08)}
+    .ap-lead-card h2{margin:0 0 6px;font-size:clamp(20px,2.4vw,26px)}
+    .ap-lead-card>p{margin:0 0 18px;color:var(--ap-muted)}
+    .ap-grid{display:grid;grid-template-columns:1fr 1fr;gap:14px}
+    .ap-grid .wide{grid-column:1/-1}
+    .ap-grid label{display:grid;gap:6px;font-size:14px;font-weight:700}
+    .ap-grid input{width:100%;min-height:48px;padding:12px;border:1px solid var(--ap-line);border-radius:12px;font:inherit;font-weight:500}
+    .ap-grid input:focus{outline:3px solid #cfe0ff;border-color:var(--ap-blue)}
+    .ap-consent{display:flex!important;align-items:flex-start;gap:10px!important;font-weight:500!important;color:var(--ap-muted)}
+    .ap-consent input{width:20px!important;min-height:20px!important;height:20px;margin-top:2px;flex:none}
+    .ap-submit{margin-top:16px;min-height:50px;padding:0 22px;border:0;border-radius:12px;background:var(--ap-navy);color:#fff;font:inherit;font-weight:800;font-size:16px;cursor:pointer}
+    .ap-submit[disabled]{opacity:.55;cursor:wait}
+    .ap-msg{margin-top:10px;font-size:14px}
+    .ap-hp{position:absolute!important;left:-9999px!important;width:1px!important;height:1px!important;overflow:hidden!important}
+
+    /* Pro invite */
+    .ap-pro{margin:34px 0 0;border-radius:22px;background:linear-gradient(135deg,var(--ap-navy) 0%,var(--ap-navy-2) 100%);color:#fff;padding:clamp(22px,4vw,40px);display:grid;grid-template-columns:1.4fr 1fr;gap:24px;align-items:center}
+    .ap-pro h2{margin:6px 0 10px;font-size:clamp(24px,3.2vw,34px);line-height:1.1;letter-spacing:-.02em}
+    .ap-pro p{margin:0;color:#dbe6ff;line-height:1.5}
+    .ap-pro .ap-eyebrow{color:#9fc0ff}
+    .ap-pro ul{list-style:none;margin:0;padding:0;display:grid;gap:10px}
+    .ap-pro li{display:flex;gap:10px;align-items:flex-start;color:#eef3ff;font-size:15px;line-height:1.4}
+    .ap-pro li svg{color:#7ee2a8;margin-top:2px}
+    .ap-pro-cta{display:flex;flex-wrap:wrap;gap:10px;margin-top:18px}
+    .ap-pro .ap-btn.primary{background:#fff;color:var(--ap-navy);border-color:#fff}
+    .ap-pro .ap-btn.primary:hover{background:#eaf1ff}
+    .ap-pro .ap-btn.ghost{background:transparent;color:#fff;border-color:rgba(255,255,255,.35)}
+    .ap-pro .ap-btn.ghost:hover{background:rgba(255,255,255,.08)}
+
+    .ap-foot{margin:28px 0 36px;color:var(--ap-muted);font-size:13px;line-height:1.5}
+    .ap-foot p{margin:6px 0}
+    .ap-state{max-width:760px;margin:80px auto;padding:30px;text-align:center;background:#fff;border-radius:18px;box-shadow:0 10px 30px rgba(15,35,80,.08)}
+    .ap-state h1{margin-top:0}
+    .ap-state p{color:var(--ap-muted)}
+    .ap-toast{position:fixed;left:50%;bottom:22px;transform:translateX(-50%);background:var(--ap-ink);color:#fff;padding:12px 18px;border-radius:12px;font-size:14px;font-weight:600;opacity:0;pointer-events:none;transition:opacity .2s;max-width:calc(100vw - 32px)}
+    .ap-toast.on{opacity:1}
+
+    @media(max-width:900px){
+      .ap-hero{grid-template-columns:auto 1fr}
+      .ap-logo-tile{grid-column:1/-1;justify-self:start;min-width:0;padding:10px 14px}
+      .ap-logo{max-height:48px}
+      .ap-tiles{grid-template-columns:1fr}
+      .ap-pro{grid-template-columns:1fr}
+    }
+    @media(max-width:600px){
+      .ap-brand span{display:none}
+      .ap-top-pro .long{display:none}.ap-top-pro .short{display:inline}
+      .ap-band{padding:20px 0 84px}
+      .ap-hero{grid-template-columns:1fr;text-align:center;justify-items:center;border-radius:18px}
+      .ap-photo,.ap-initials{width:112px;height:112px}
+      .ap-verified{justify-content:center;flex-wrap:wrap}
+      .ap-logo-tile{justify-self:center}
+      .ap-actions{display:grid;grid-template-columns:1fr 1fr;width:100%}
+      .ap-actions .ap-btn{width:100%;padding:0 8px;font-size:14px}
+      .ap-actions .ap-btn.primary{grid-column:1/-1}
+      .ap-grid{grid-template-columns:1fr}
+      .ap-frame{min-height:1100px;border-radius:14px}
+      .ap-section-head{flex-direction:column;align-items:flex-start}
+    }
+    @media(prefers-reduced-motion:reduce){*{transition:none!important}}
   </style>
   <meta name="twitter:card" content="summary_large_image">
   <meta property="og:image" content="https://www.watchdogindex.com/watchdog-social-share-20260913-v3.jpg">
@@ -26,41 +140,164 @@
   <meta name="twitter:image:alt" content="Watchdog Property Intelligence across New Jersey">
 </head>
 <body>
+<svg width="0" height="0" style="position:absolute" aria-hidden="true">
+  <symbol id="i-phone" viewBox="0 0 24 24"><path d="M22 16.9v3a2 2 0 0 1-2.2 2 19.8 19.8 0 0 1-8.6-3.1 19.5 19.5 0 0 1-6-6A19.8 19.8 0 0 1 2.1 4.2 2 2 0 0 1 4.1 2h3a2 2 0 0 1 2 1.7c.1.9.4 1.8.7 2.7a2 2 0 0 1-.5 2.1L8 9.8a16 16 0 0 0 6 6l1.3-1.3a2 2 0 0 1 2.1-.4c.9.3 1.8.6 2.7.7a2 2 0 0 1 1.7 2z"/></symbol>
+  <symbol id="i-text" viewBox="0 0 24 24"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></symbol>
+  <symbol id="i-mail" viewBox="0 0 24 24"><rect x="2" y="4" width="20" height="16" rx="2"/><path d="m22 6-10 7L2 6"/></symbol>
+  <symbol id="i-share" viewBox="0 0 24 24"><circle cx="18" cy="5" r="3"/><circle cx="6" cy="12" r="3"/><circle cx="18" cy="19" r="3"/><path d="m8.6 13.5 6.8 4M15.4 6.5l-6.8 4"/></symbol>
+  <symbol id="i-save" viewBox="0 0 24 24"><path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M19 8v6M22 11h-6"/></symbol>
+  <symbol id="i-search" viewBox="0 0 24 24"><circle cx="11" cy="11" r="7"/><path d="m21 21-4.3-4.3"/></symbol>
+  <symbol id="i-home" viewBox="0 0 24 24"><path d="m3 10 9-7 9 7v10a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/><path d="M9 22V12h6v10"/></symbol>
+  <symbol id="i-check" viewBox="0 0 24 24"><path d="M22 11.1V12a10 10 0 1 1-5.9-9.1"/><path d="M22 4 12 14l-3-3"/></symbol>
+  <symbol id="i-arrow" viewBox="0 0 24 24"><path d="M5 12h14M13 6l6 6-6 6"/></symbol>
+</svg>
 <div class="ap-shell">
-  <header class="ap-top"><div class="ap-topin"><div class="ap-watchdog"><a href="/property/">Watchdog</a><span class="ap-badge">New Jersey property intelligence</span></div><div class="ap-badge">Powered by governed public-record data</div></div></header>
+  <header class="ap-top"><div class="ap-wrap"><div class="ap-brand"><a href="/">Watchdog</a><span>New Jersey property intelligence</span></div><a class="ap-top-pro" href="#pros" data-pro-link><span class="long">For real estate pros</span><span class="short">For pros</span> <svg class="i"><use href="#i-arrow"/></svg></a></div></header>
   <main id="portal" hidden>
-    <section class="ap-card">
-      <img id="photo" class="ap-photo" alt="" hidden>
-      <div class="ap-identity"><h1 id="name">Your local real estate professional</h1><p id="brokerage"></p><p id="license"></p><div class="ap-contact"><a id="phone" hidden>Call</a><a id="email" hidden>Email</a></div></div>
-      <img id="logo" class="ap-logo" alt="Brokerage logo" hidden>
-    </section>
-    <p id="disclosure" class="ap-disclosure" hidden></p>
-    <section class="ap-lookup" aria-label="Watchdog property lookup"><iframe id="lookup" class="ap-frame" title="Watchdog New Jersey property lookup" loading="eager"></iframe></section>
-    <section class="ap-lead" aria-label="Contact this agent">
-      <form id="leadForm" class="ap-lead-card" novalidate>
-        <h2>Send this property to your agent</h2><p>After checking the property above, share the address and your contact details. Your information goes to this agent's private Watchdog workflow.</p>
-        <div class="ap-grid">
-          <label>Full name<input name="full_name" maxlength="120" autocomplete="name" required></label>
-          <label>Email<input name="email" maxlength="254" type="email" autocomplete="email"></label>
-          <label>Phone<input name="phone" maxlength="40" type="tel" autocomplete="tel"></label>
-          <label class="wide">Property address<input name="address" maxlength="240" autocomplete="street-address" required></label>
-          <label class="ap-hp" aria-hidden="true">Website<input name="website" tabindex="-1" autocomplete="off"></label>
-          <label class="wide ap-consent"><input name="contact_consent" type="checkbox" required><span>I agree that this real estate professional may contact me about this property request. Watchdog does not infer ownership or seller intent from this submission.</span></label>
+    <div class="ap-band"><div class="ap-wrap"><p>Watchdog Property Intelligence</p></div></div>
+    <div class="ap-wrap">
+      <section class="ap-hero" aria-labelledby="name">
+        <img id="photo" class="ap-photo" alt="" hidden onerror="this.hidden=true;var i=document.getElementById('initials');if(i.textContent)i.hidden=false"><div id="initials" class="ap-initials" aria-hidden="true" hidden></div>
+        <div class="ap-id">
+          <p class="ap-eyebrow">Your New Jersey real estate professional</p>
+          <h1 id="name">Your local real estate professional</h1>
+          <p id="brokerage" class="ap-brokerage" hidden></p>
+          <p id="license" class="ap-verified" hidden></p>
         </div>
-        <button class="ap-submit" type="submit">Send to agent</button><div id="leadMsg" class="ap-msg" role="status" aria-live="polite"></div>
-      </form>
-    </section>
+        <div id="logoTile" class="ap-logo-tile" hidden><img id="logo" class="ap-logo" alt="Brokerage logo" onerror="this.parentNode.hidden=true"></div>
+        <div class="ap-actions">
+          <a id="call" class="ap-btn primary" hidden><svg class="i"><use href="#i-phone"/></svg> Call <span class="sub" data-f="phone"></span></a>
+          <a id="text" class="ap-btn" hidden><svg class="i"><use href="#i-text"/></svg> Text</a>
+          <a id="email" class="ap-btn" hidden><svg class="i"><use href="#i-mail"/></svg> Email</a>
+          <button id="saveContact" class="ap-btn" type="button"><svg class="i"><use href="#i-save"/></svg> Save contact</button>
+          <button id="share" class="ap-btn" type="button"><svg class="i"><use href="#i-share"/></svg> Share</button>
+        </div>
+      </section>
+
+      <nav class="ap-tiles" aria-label="What you can do here">
+        <a class="ap-tile" href="#lookup-section"><span class="ic"><svg class="i"><use href="#i-search"/></svg></span><span><b>Look up any NJ property</b><span>Taxes, assessments, sales and more from public records.</span></span></a>
+        <a class="ap-tile" href="#lead-section"><span class="ic"><svg class="i"><use href="#i-home"/></svg></span><span><b>Ask me about a home</b><span data-f="askLine">Send an address and I'll get back to you.</span></span></a>
+        <a class="ap-tile" href="#pros" data-pro-link><span class="ic"><svg class="i"><use href="#i-arrow"/></svg></span><span><b>Real estate pro?</b><span>Build your own Watchdog portfolio page like this one.</span></span></a>
+      </nav>
+
+      <section id="lookup-section" class="ap-section" aria-labelledby="lookup-h">
+        <div class="ap-section-head"><div><h2 id="lookup-h">Look up a New Jersey property</h2><p>Search any address. Found one you like? Send it to me below.</p></div></div>
+        <iframe id="lookup" class="ap-frame" title="Watchdog New Jersey property lookup" loading="eager"></iframe>
+      </section>
+
+      <section id="lead-section" class="ap-section" aria-label="Contact this agent">
+        <form id="leadForm" class="ap-lead-card" novalidate>
+          <h2 data-f="leadTitle">Send me a property</h2><p data-f="leadLine">Share the address and how to reach you. Your request goes straight to me.</p>
+          <div class="ap-grid">
+            <label>Full name<input name="full_name" maxlength="120" autocomplete="name" required></label>
+            <label>Email<input name="email" maxlength="254" type="email" autocomplete="email"></label>
+            <label>Phone<input name="phone" maxlength="40" type="tel" autocomplete="tel"></label>
+            <label>Property address<input name="address" maxlength="240" autocomplete="street-address" required></label>
+            <label class="ap-hp" aria-hidden="true">Website<input name="website" tabindex="-1" autocomplete="off"></label>
+            <label class="wide ap-consent"><input name="contact_consent" type="checkbox" required><span>I agree that this real estate professional may contact me about this property request. Watchdog does not infer ownership or seller intent from this submission.</span></label>
+          </div>
+          <button class="ap-submit" type="submit">Send to agent</button><div id="leadMsg" class="ap-msg" role="status" aria-live="polite"></div>
+        </form>
+      </section>
+
+      <section id="pros" class="ap-pro" aria-labelledby="pro-h">
+        <div>
+          <p class="ap-eyebrow">For real estate professionals</p>
+          <h2 id="pro-h">Build your own Watchdog portfolio</h2>
+          <p>Get a page like this one with your verified license, your brokerage, and a full New Jersey property lookup your clients can use. Every request goes straight to you.</p>
+          <div class="ap-pro-cta"><a class="ap-btn primary" id="proJoin" href="/pro">Build my page <svg class="i"><use href="#i-arrow"/></svg></a><a class="ap-btn ghost" href="/pro">See plans</a></div>
+        </div>
+        <ul>
+          <li><svg class="i"><use href="#i-check"/></svg> Your name straight from the New Jersey Real Estate Commission</li>
+          <li><svg class="i"><use href="#i-check"/></svg> Property lookup, tax and assessment data for every NJ town</li>
+          <li><svg class="i"><use href="#i-check"/></svg> Leads land in your private Watchdog workspace, not ours</li>
+          <li><svg class="i"><use href="#i-check"/></svg> One link to share by text, email or social</li>
+        </ul>
+      </section>
+
+      <footer class="ap-foot"><p id="disclosure" hidden></p><p>Powered by Watchdog. Property details come from New Jersey public records. Licensing is checked against the official NJDOBI Real Estate Licensee Search.</p></footer>
+    </div>
   </main>
   <section id="state" class="ap-state"><h1>Loading agent portal…</h1><p>Watchdog is verifying this public portal and its current professional entitlement.</p></section>
 </div>
+<div id="toast" class="ap-toast" role="status" aria-live="polite"></div>
 <script>
 (function(){
-  const state=document.getElementById('state'),portal=document.getElementById('portal'),form=document.getElementById('leadForm'),msg=document.getElementById('leadMsg');
+  const $=id=>document.getElementById(id);
+  const state=$('state'),portal=$('portal'),form=$('leadForm'),msg=$('leadMsg');
   const path=location.pathname.replace(/\/+$/,'').split('/');const slug=(new URLSearchParams(location.search).get('slug')||path[path.length-1]||'').toLowerCase();const safe=/^[a-z0-9](?:[a-z0-9-]{1,38}[a-z0-9])?$/.test(slug);
-  function text(id,value){if(value)document.getElementById(id).textContent=value}function img(id,value,alt){if(!value)return;const el=document.getElementById(id);el.src=value;el.alt=alt||'';el.hidden=false}function unavailable(){state.innerHTML='<h1>Agent portal unavailable</h1><p>This vanity address is not active. The professional may have changed their portal name or their Watchdog entitlement may no longer be active.</p><p><a href="/property/">Use the public Watchdog property lookup</a></p>'}
+  const INVITE_KEY='wd_invite_code_v1';
+  let profile=null;
+  function setF(key,value){document.querySelectorAll('[data-f="'+key+'"]').forEach(el=>{el.textContent=value})}
+  function toast(t){const el=$('toast');el.textContent=t;el.classList.add('on');clearTimeout(toast.t);toast.t=setTimeout(()=>el.classList.remove('on'),2600)}
+  function unavailable(){state.innerHTML='<h1>Agent portal unavailable</h1><p>This vanity address is not active. The professional may have changed their portal name or their Watchdog entitlement may no longer be active.</p><p><a href="/">Use the public Watchdog property lookup</a></p>'}
+  function shareUrl(){return location.origin+'/agent/'+slug}
+  function initials(name){return String(name||'').split(/\s+/).filter(w=>/^[A-Za-z]/.test(w)&&!/\.$/.test(w)).map(w=>w[0].toUpperCase()).filter((_,i,a)=>i===0||i===a.length-1).join('')}
+  function vcf(v){return String(v||'').replace(/\\/g,'\\\\').replace(/[,;]/g,m=>'\\'+m).replace(/\r?\n/g,' ')}
+
   if(!safe)return unavailable();
-  fetch('/api/agent-portal-profile?slug='+encodeURIComponent(slug),{headers:{Accept:'application/json'}}).then(async r=>({ok:r.ok,body:await r.json().catch(()=>({}))})).then(({ok,body})=>{if(!ok||!body.available||!body.profile)return unavailable();const p=body.profile;text('name',p.display_name);text('brokerage',p.brokerage_name);text('license',p.license_number?'New Jersey Real Estate License '+p.license_number:'');img('photo',p.photo_url,p.display_name||'Agent photo');img('logo',p.brokerage_logo_url,(p.brokerage_name||'Brokerage')+' logo');if(p.business_phone){const el=document.getElementById('phone');el.href='tel:'+String(p.business_phone).replace(/[^+0-9]/g,'');el.textContent=p.business_phone;el.hidden=false}if(p.business_email){const el=document.getElementById('email');el.href='mailto:'+p.business_email;el.textContent=p.business_email;el.hidden=false}if(p.brokerage_disclosure){const el=document.getElementById('disclosure');el.textContent=p.brokerage_disclosure;el.hidden=false}document.title=(p.display_name||'Agent')+' | Watchdog Property Intelligence';document.getElementById('lookup').src='/property/?portal='+encodeURIComponent(slug);state.hidden=true;portal.hidden=false}).catch(unavailable);
-  form.addEventListener('submit',async e=>{e.preventDefault();msg.textContent='';const fd=new FormData(form),email=String(fd.get('email')||'').trim(),phone=String(fd.get('phone')||'').trim();if(!form.reportValidity()||(!email&&!phone)){msg.textContent='Please add an email address or phone number.';return}const btn=form.querySelector('button');btn.disabled=true;try{const r=await fetch('/api/agent-portal-lead',{method:'POST',headers:{'Content-Type':'application/json',Accept:'application/json'},body:JSON.stringify({slug,full_name:fd.get('full_name'),email,phone,address:fd.get('address'),website:fd.get('website'),contact_consent:fd.get('contact_consent')==='on'})});const b=await r.json().catch(()=>({}));if(!r.ok)throw new Error(b.error||'Unable to send request.');form.reset();msg.textContent='Sent. This property request is now in the agent’s private Watchdog workflow.'}catch(err){msg.textContent=err.message||'Unable to send request right now.'}finally{btn.disabled=false}});
+  fetch('/api/agent-portal-profile?slug='+encodeURIComponent(slug),{headers:{Accept:'application/json'}}).then(async r=>({ok:r.ok,body:await r.json().catch(()=>({}))})).then(({ok,body})=>{
+    if(!ok||!body.available||!body.profile)return unavailable();
+    const p=profile=body.profile;
+    // The official NJ Real Estate Commission name leads; the nickname is only a fallback.
+    const name=p.licensed_name||p.display_name||'Your local real estate professional';
+    const first=name.split(/\s+/)[0];
+    $('name').textContent=name;
+    if(p.brokerage_name){$('brokerage').textContent=p.brokerage_name;$('brokerage').hidden=false}
+    if(p.license_number){
+      const lic=$('license');lic.hidden=false;
+      if(p.license_verified){lic.innerHTML='<b><svg class="i"><use href="#i-check"/></svg> Verified</b><span></span>';lic.querySelector('span').textContent='New Jersey Real Estate License '+p.license_number}
+      else lic.textContent='New Jersey Real Estate License '+p.license_number;
+    }
+    $('initials').textContent=initials(name)||'W';
+    if(p.photo_url){const el=$('photo');el.src=String(p.photo_url).replace(/=s\d+-c$/,'=s400-c');el.alt=name;el.hidden=false}
+    else $('initials').hidden=false;
+    if(p.brokerage_logo_url){const el=$('logo');el.src=p.brokerage_logo_url;el.alt=(p.brokerage_name||'Brokerage')+' logo';$('logoTile').hidden=false}
+    const tel=String(p.business_phone||'').replace(/[^+0-9]/g,''),d10=tel.replace(/^\+?1(?=\d{10}$)/,'');
+    if(tel){$('call').href='tel:'+tel;setF('phone',/^\d{10}$/.test(d10)?'('+d10.slice(0,3)+') '+d10.slice(3,6)+'-'+d10.slice(6):p.business_phone);$('call').hidden=false;$('text').href='sms:'+tel;$('text').hidden=false}
+    if(p.business_email){$('email').href='mailto:'+p.business_email;$('email').hidden=false}
+    if(p.brokerage_disclosure){$('disclosure').textContent=p.brokerage_disclosure;$('disclosure').hidden=false}
+    setF('leadTitle','Send '+first+' a property');
+    setF('leadLine','Share the address and how to reach you. Your request goes straight to '+first+'.');
+    setF('askLine','Send '+first+' an address and get a real answer back.');
+    form.querySelector('.ap-submit').textContent='Send to '+first;
+    if(p.referral_code)$('proJoin').href='/pro?invite='+encodeURIComponent(p.referral_code);
+    document.title=name+' | Watchdog Property Intelligence';
+    $('lookup').src='/property/?portal='+encodeURIComponent(slug);
+    state.hidden=true;portal.hidden=false;
+  }).catch(unavailable);
+
+  // Pros who start from this page are credited to this agent (same invite code
+  // the member invite links use; the server credits it once they sign up).
+  $('proJoin').addEventListener('click',()=>{
+    const code=String(profile&&profile.referral_code||'').toUpperCase().replace(/[^A-Z0-9]/g,'');
+    if(!/^[A-Z0-9]{10,16}$/.test(code))return;
+    try{if(!localStorage.getItem(INVITE_KEY))localStorage.setItem(INVITE_KEY,JSON.stringify({code,at:Date.now()}))}catch(_){}
+  });
+
+  $('share').addEventListener('click',async()=>{
+    const name=$('name').textContent,url=shareUrl();
+    if(navigator.share){try{await navigator.share({title:name+' | Watchdog',text:'Look up any New Jersey property with '+name+'.',url});return}catch(e){if(e&&e.name==='AbortError')return}}
+    try{await navigator.clipboard.writeText(url);toast('Link copied')}catch(_){window.prompt('Copy this link',url)}
+  });
+
+  $('saveContact').addEventListener('click',()=>{
+    if(!profile)return;
+    const name=$('name').textContent,parts=name.split(/\s+/),last=parts.length>1?parts[parts.length-1]:'',firstNames=parts.slice(0,parts.length>1?-1:1).join(' ');
+    const lines=['BEGIN:VCARD','VERSION:3.0','N:'+vcf(last)+';'+vcf(firstNames)+';;;','FN:'+vcf(name)];
+    if(profile.brokerage_name)lines.push('ORG:'+vcf(profile.brokerage_name));
+    lines.push('TITLE:Real Estate Professional');
+    if(profile.business_phone)lines.push('TEL;TYPE=WORK,VOICE:'+vcf(profile.business_phone));
+    if(profile.business_email)lines.push('EMAIL;TYPE=WORK:'+vcf(profile.business_email));
+    lines.push('URL:'+shareUrl());
+    if(profile.license_number)lines.push('NOTE:New Jersey Real Estate License '+vcf(profile.license_number));
+    lines.push('END:VCARD');
+    const blob=new Blob([lines.join('\r\n')+'\r\n'],{type:'text/vcard'}),a=document.createElement('a');
+    a.href=URL.createObjectURL(blob);a.download=(name.replace(/[^A-Za-z0-9]+/g,'-').replace(/^-|-$/g,'')||'agent')+'.vcf';
+    document.body.appendChild(a);a.click();a.remove();setTimeout(()=>URL.revokeObjectURL(a.href),4000);
+  });
+
+  form.addEventListener('submit',async e=>{e.preventDefault();msg.textContent='';const fd=new FormData(form),email=String(fd.get('email')||'').trim(),phone=String(fd.get('phone')||'').trim();if(!form.reportValidity()||(!email&&!phone)){msg.textContent='Please add an email address or phone number.';return}const btn=form.querySelector('button');btn.disabled=true;try{const r=await fetch('/api/agent-portal-lead',{method:'POST',headers:{'Content-Type':'application/json',Accept:'application/json'},body:JSON.stringify({slug,full_name:fd.get('full_name'),email,phone,address:fd.get('address'),website:fd.get('website'),contact_consent:fd.get('contact_consent')==='on'})});const b=await r.json().catch(()=>({}));if(!r.ok)throw new Error(b.error||'Unable to send request.');form.reset();msg.textContent='Sent. Your request went straight to '+$('name').textContent+'.'}catch(err){msg.textContent=err.message||'Unable to send request right now.'}finally{btn.disabled=false}});
 })();
 </script>
 </body>
