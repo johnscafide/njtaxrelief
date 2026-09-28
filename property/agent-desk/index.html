@@ -15,7 +15,7 @@
   <link rel="stylesheet" href="/property/css/app-shell-2027.css">
   <link rel="stylesheet" href="/property/css/agent-workspace.css?v=20260926a">
   <link rel="stylesheet" href="/property/css/agent-desk.css?v=20260927a">
-  <link rel="stylesheet" href="/property/css/agent-hub.css?v=20260927b">
+  <link rel="stylesheet" href="/property/css/agent-hub.css?v=20260929a">
 </head>
 <body data-sidebar-page="agent-desk" data-plan-auto="true" class="adh-page wdx-agent-workspace">
   <main class="ad27 adh" id="ad-main">
@@ -123,6 +123,20 @@
             </section>
             <section id="ad-capacity" class="ad27-card ad-capacity"><p class="ad-control-loading">Loading plan capacity…</p></section>
           </div>
+          <section id="ad-checkups" class="ad27-card ad-checkups" aria-labelledby="ad-checkups-title">
+            <header class="ad27-card-head"><h2 id="ad-checkups-title">Tax checkups</h2></header>
+            <p class="adh-help">Every February the new assessments come out. Send each past client a checkup for their home: whether the assessment holds up and the appeal deadline. It comes from you, from your own email or CRM.</p>
+            <p class="ad-control-loading" data-ck-state="loading">Loading your clients…</p>
+            <p class="adh-help" data-ck-state="empty" hidden>Add past clients or sphere homes above, matched to a parcel, and their checkups show up here.</p>
+            <p class="adh-help" data-ck-state="error" hidden>Checkups could not load. Refresh to try again.</p>
+            <div data-ck-state="ready" hidden>
+              <p class="ad-ck-warn" data-ck-noslug hidden>Pick your page address so your contact card shows on each checkup. <a href="/account/professional-profile">Pick my page address</a></p>
+              <p class="ad-ck-count"><b data-ck-count>0</b> homes ready</p>
+              <ul class="ad-ck-list" data-ck-list></ul>
+              <div class="ad-ck-foot"><button type="button" class="ad27-btn" data-ck-all hidden>Show all</button><button type="button" class="ad27-btn primary" data-ck-csv><i class="fas fa-file-arrow-down" aria-hidden="true"></i> Download for your CRM</button></div>
+            </div>
+            <template id="ad-ck-row"><li class="ad-ck-row"><div class="ad-ck-copy"><b data-ck-address></b><small data-ck-meta></small></div><div class="ad-ck-actions"><button type="button" class="ad27-btn" data-ck-copy><i class="fas fa-copy" aria-hidden="true"></i> Copy note</button><a class="ad27-btn" data-ck-open target="_blank" rel="noopener">Open</a></div></li></template>
+          </section>
         </section>
 
         <!-- FARM -->
@@ -288,6 +302,7 @@
   <script src="/property/js/move-seats.js?v=20260926a"></script>
   <script src="/property/js/agent-import-mobile-a11y.js"></script>
   <script src="/property/js/agent-control-evidence-mobile.js"></script>
-  <script src="/property/js/agent-hub.js?v=20260928a"></script>
+  <script src="/property/js/agent-hub.js?v=20260929a"></script>
+  <script src="/property/js/agent-checkups.js?v=20260929a"></script>
 </body>
 </html>
