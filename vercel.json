@@ -19,6 +19,14 @@
     "api/watchdog-property-report.js": {
       "includeFiles": "{tax-rates.json,equalization-ratios.json}",
       "maxDuration": 15
+    },
+    "api/watchdog-true-cost.js": {
+      "includeFiles": "{tax-rates.json,equalization-ratios.json,chapter123-ratios-2026.json,property/revaluation-reassessment-2026.json}",
+      "maxDuration": 10
+    },
+    "api/watchdog-checkup.js": {
+      "includeFiles": "{tax-rates.json,equalization-ratios.json,chapter123-ratios-2026.json,property/revaluation-reassessment-2026.json}",
+      "maxDuration": 10
     }
   },
   "redirects": [

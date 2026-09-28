@@ -21,7 +21,8 @@ const tools = {};
 for (const m of js.matchAll(/'([a-z-]+)':\['([^']*)','([^']*)','[^']*','([a-z]+)'\]/g)) tools[m[1]] = { clean: m[2], physical: m[3], section: m[4] };
 assert.ok(Object.keys(tools).length >= 15, 'Agent hub tool registry did not parse');
 for (const [key, tool] of Object.entries(tools)) {
-  const file = tool.physical.replace(/^\//, '') + (tool.physical.endsWith('/') ? 'index.html' : '');
+  // Server-rendered tools point at their Vercel function (api/<name>.js).
+  const file = tool.physical.startsWith('/api/') ? tool.physical.replace(/^\//, '') + '.js' : tool.physical.replace(/^\//, '') + (tool.physical.endsWith('/') ? 'index.html' : '');
   assert.ok(fs.existsSync(file), `Tool ${key} points at a missing page: ${tool.physical}`);
   assert.ok(!tool.clean.startsWith('/property/'), `Tool ${key} must use a clean public path`);
 }
