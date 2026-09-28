@@ -1,0 +1,27 @@
+name: Assessment Chapter 123 range contract
+
+on:
+  push:
+    branches: [main]
+    paths:
+      - 'supabase/functions/workbench-derived/**'
+      - 'supabase/migrations/20260928180000_assessment_above_chapter123_range.sql'
+      - 'property/tests/assessment-chapter123-range-contract.mjs'
+      - '.github/workflows/assessment-chapter123-range-contract.yml'
+  pull_request:
+    paths:
+      - 'supabase/functions/workbench-derived/**'
+      - 'supabase/migrations/20260928180000_assessment_above_chapter123_range.sql'
+      - 'property/tests/assessment-chapter123-range-contract.mjs'
+      - '.github/workflows/assessment-chapter123-range-contract.yml'
+
+jobs:
+  contract:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+      - name: Verify assessment Chapter 123 range contract
+        run: node property/tests/assessment-chapter123-range-contract.mjs

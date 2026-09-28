@@ -36,6 +36,14 @@ const PLAIN: Record<string, { label: string; value: (v: number) => string }> = {
   "watchdog.title_constraint_stack": { label: "land-use restrictions", value: (v) => `${Math.round(v)} land-use ${v === 1 ? "restriction is" : "restrictions are"} on record` },
   "event.change_count_30d": { label: "recent record changes", value: (v) => `${Math.round(v)} record ${v === 1 ? "change" : "changes"} in the last 30 days` },
 };
+/* Feature v2 measures the assessment against the town's Chapter 123 range
+   (0 = within it, 0.12 = 12% above the top); v1 findings carry a raw ratio. */
+const RANGE_KEY="watchdog.assessment_above_chapter123_range";
+function plainValue(e: Record<string, any>) {
+  const id = String(e?.signal_id || ""), v = Number(e?.value);
+  if (id === "watchdog.assessment_to_sale_ratio_review_window" && String(e?.source_key || "") === RANGE_KEY) return v < 0.005 ? "based on a recent sale, the assessment is within the town's normal range" : `based on a recent sale, it is assessed about ${Math.round(v * 100)}% above the top of the town's normal range`;
+  return PLAIN[id] ? PLAIN[id].value(v) : "";
+}
 const META = new Set(["watchdog.source_authority_coverage", "watchdog.property_story_confidence", "watchdog.transaction_diligence_completion"]);
 
 function missingText(e: O) {
@@ -43,6 +51,7 @@ function missingText(e: O) {
   const g = num(e?.normalization?.detail?.guard_value), detail = String(e?.normalization?.detail?.reason || "");
   if (/sale age/i.test(detail) && g != null && g > 8 && g < 400) return `the last recorded sale is about ${Math.round(g)} years old, outside the eight-year window, so I did not use it to judge the assessment`;
   if (/sale age/i.test(detail)) return "there is no usable sale date on record, so I could not compare the assessment with a sale";
+  if (id === "watchdog.assessment_to_sale_ratio_review_window") return "there is no recent market sale to compare it with (paper transfers such as $1 deeds are not used)";
   return `I could not check ${label} because that record is not available yet`;
 }
 
@@ -55,8 +64,8 @@ function templateBrief(f: O) {
   const s: string[] = [];
   const bottom = score >= 70 ? "This one deserves a close look." : score >= 40 ? "This is worth a look, but it is not urgent." : "I would treat this as low priority for now.";
   s.push(bottom);
-  if (ev[0]) { const e = ev[0], st = Math.round(num(e.score) || 0); s.push(`The main reason it came up: ${PLAIN[e.signal_id].value(Number(e.value))}, which on its own is ${st >= 70 ? "a strong" : st >= 40 ? "a moderate" : "a weak"} signal (${st} out of 100).`); }
-  if (ev[1]) s.push(`Also noted: ${PLAIN[ev[1].signal_id].value(Number(ev[1].value))}.`);
+  if (ev[0]) { const e = ev[0], st = Math.round(num(e.score) || 0); s.push(`The main reason it came up: ${plainValue(e)}, which on its own is ${st >= 70 ? "a strong" : st >= 40 ? "a moderate" : "a weak"} signal (${st} out of 100).`); }
+  if (ev[1]) s.push(`Also noted: ${plainValue(ev[1])}.`);
   if (miss[0]) s.push(`One gap: ${missingText(miss[0])}${miss.length > 1 ? `, and ${miss.length - 1} other check${miss.length > 2 ? "s were" : " was"} not available` : ""}.`);
   s.push(`My confidence is ${conf >= 75 ? "high" : conf >= 50 ? "moderate" : "low"} (${conf}%), based on ${cov}% of the evidence I normally use.`);
   return s.join(" ");

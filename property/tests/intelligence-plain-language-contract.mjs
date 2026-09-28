@@ -85,4 +85,11 @@ assert.match(consoleSrc, /if\(requestedPrompt\|\|requestedPin\|\|!pins\.length/,
 const intelPage = fs.readFileSync('property/intelligence/index.html', 'utf8');
 assert.doesNotMatch(intelPage, /href="\/property\/(home|data-workbench|intelligence)"/, 'Intelligence page links use clean public URLs');
 
+// Feature v2 (Chapter 123 range) reads as distance above the town range; v1 findings keep ratio wording.
+const RANGE = 'watchdog.assessment_above_chapter123_range', RW = 'watchdog.assessment_to_sale_ratio_review_window';
+assert.equal(P.signal({ signal_id: RW, source_key: RANGE, value: 0.12 }).value, 'Based on a recent sale, it is assessed about 12% above the top of the town\u2019s normal range');
+assert.equal(P.signal({ signal_id: RW, source_key: RANGE, value: 0 }).value, 'Based on a recent sale, the assessment is within the town\u2019s normal range');
+assert.match(P.missing({ signal_id: RW, reason: 'missing' }).reason, /\$1 deeds are not used/);
+for (const src of [analystSrv, brief]) assert.match(src, /const RANGE_KEY="watchdog\.assessment_above_chapter123_range";/);
+
 console.log('Intelligence plain-language contract passed.');

@@ -104,12 +104,21 @@ const PLAIN:Record<string,{label:string,value:(v:number)=>string}>={
   "watchdog.title_constraint_stack":{label:"land-use restrictions",value:(v)=>`${Math.round(v)} land-use ${v===1?"restriction is":"restrictions are"} on record`},
   "event.change_count_30d":{label:"recent record changes",value:(v)=>`${Math.round(v)} record ${v===1?"change":"changes"} in the last 30 days`},
 };
+/* Feature v2 measures the assessment against the town's Chapter 123 range
+   (0 = within it, 0.12 = 12% above the top); v1 findings carry a raw ratio. */
+const RANGE_KEY="watchdog.assessment_above_chapter123_range";
+function plainValue(e: Record<string, any>) {
+  const id = String(e?.signal_id || ""), v = Number(e?.value);
+  if (id === "watchdog.assessment_to_sale_ratio_review_window" && String(e?.source_key || "") === RANGE_KEY) return v < 0.005 ? "based on a recent sale, the assessment is within the town's normal range" : `based on a recent sale, it is assessed about ${Math.round(v * 100)}% above the top of the town's normal range`;
+  return PLAIN[id] ? PLAIN[id].value(v) : "";
+}
 const META_SIGNALS=new Set(["watchdog.source_authority_coverage","watchdog.property_story_confidence","watchdog.transaction_diligence_completion"]);
 const plainLabel=(id:string)=>PLAIN[id]?.label||clean(id,140).replace(/^(watchdog|event)\./,"").replace(/_/g," ");
 function plainMissing(x:O){
   const g=Number(x?.normalization?.detail?.guard_value),detail=String(x?.normalization?.detail?.reason||"");
   if(/sale age/i.test(detail)&&Number.isFinite(g)&&g>8&&g<400)return`the last recorded sale is about ${Math.round(g)} years old, outside the eight-year window`;
   if(/sale age/i.test(detail))return"there is no usable sale date on record";
+  if(String(x?.signal_id||"")==="watchdog.assessment_to_sale_ratio_review_window")return"there is no recent market sale to compare it with (paper transfers such as $1 deeds are not used)";
   return`${plainLabel(String(x?.signal_id||""))} is not available yet`;
 }
 function leadSignals(f:O){
@@ -120,10 +129,10 @@ function leadSignals(f:O){
 const priorityOf=(score:number)=>score>=70?"High":score>=40?"Medium":"Low";
 function findingCard(f:O){
   const score=Math.round(Number(f.score||0)),conf=Math.round(Number(f.confidence||0)),cov=Math.round(Number(f.evidence_coverage||0)),lead=leadSignals(f),miss=Array.isArray(f.missing_evidence)?f.missing_evidence:[];
-  const reason=lead[0]?PLAIN[lead[0].signal_id].value(Number(lead[0].value)):"";
+  const reason=lead[0]?plainValue(lead[0]):"";
   return{pams_pin:clean(f.pams_pin,100),address:clean(f.property_address||f.pams_pin||"Property",180),score,confidence:conf,evidence_coverage:cov,priority:priorityOf(score),
     reason:reason?reason.charAt(0).toUpperCase()+reason.slice(1)+".":"No single check stands out; the score reflects several smaller signals.",
-    also:lead[1]?PLAIN[lead[1].signal_id].value(Number(lead[1].value)).replace(/^./,(c)=>c.toUpperCase())+".":"",
+    also:lead[1]?plainValue(lead[1]).replace(/^./,(c)=>c.toUpperCase())+".":"",
     gap:miss[0]?`Could not check: ${plainMissing(miss[0])}${miss.length>1?` (+${miss.length-1} more)`:""}.`:"",
     confidence_label:conf>=75?"High":conf>=50?"Moderate":"Low"};
 }
@@ -165,7 +174,7 @@ function deterministic(tool:string,result:O){
     for(const f of findings.slice(0,5)){
       const label=clean(f.property_address||f.pams_pin||"Property",180);
       evidence.push(`${label}: ${priorityOf(Math.round(Number(f.score||0)))} priority (${Math.round(Number(f.score||0))} out of 100), confidence ${Math.round(Number(f.confidence||0))}%, ${Math.round(Number(f.evidence_coverage||0))}% of the usual evidence checked.`);
-      for(const e of leadSignals(f).slice(0,2))evidence.push(`${label}: ${PLAIN[e.signal_id].value(Number(e.value))} (${Math.round(Number(e.score||0))} out of 100 as a signal).`);
+      for(const e of leadSignals(f).slice(0,2))evidence.push(`${label}: ${plainValue(e)} (${Math.round(Number(e.score||0))} out of 100 as a signal).`);
       for(const x of (Array.isArray(f.missing_evidence)?f.missing_evidence:[]).slice(0,3))missing.push(`${label}: ${plainMissing(x)}.`);
       for(const x of Array.isArray(f.evidence)?f.evidence:[]){const u=safeUrl(x.source_url);if(u)sources.push({label:`${label}: ${plainLabel(String(x.signal_id||x.source_key||"source"))}`,url:u})}
       for(const a of Array.isArray(f.recommended_actions)?f.recommended_actions:[])suggested.push(clean(a,80));
