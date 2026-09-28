@@ -32,13 +32,15 @@ SOURCE = "NJ Office of GIS Parcels and MOD-IV Composite"
 PAGE_SIZE = 1000
 BATCH = 500
 MIN_BATCH = 50
-# Owner fields (OWNER_NAME, ST_ADDRESS, CITY_STATE, ZIP_PLUS4 of the owner) are deliberately absent.
+# Owner fields are deliberately absent: OWNER_NAME and the owner's mailing
+# address (ST_ADDRESS, CITY_STATE, ZIP5, ZIP_CODE, ZIP_PLUS4). ZIP5/ZIP_CODE
+# are the owner's mailing ZIP, not the property's, so no ZIP is loaded.
 OUT_FIELDS = [
     "OBJECTID", "PAMS_PIN", "PCLBLOCK", "PCLLOT", "PCLQCODE", "COUNTY", "MUN_NAME", "PROP_CLASS",
-    "PROP_LOC", "ZIP5", "ZIP_CODE", "LAND_VAL", "IMPRVT_VAL", "NET_VALUE", "LAST_YR_TX", "BLDG_DESC",
+    "PROP_LOC", "LAND_VAL", "IMPRVT_VAL", "NET_VALUE", "LAST_YR_TX", "BLDG_DESC",
     "CALC_ACRE", "YR_CONSTR", "SALE_PRICE", "DEED_DATE", "SALES_CODE", "DWELL", "COMM_DWELL",
 ]
-FORBIDDEN_FIELDS = {"OWNER_NAME", "ST_ADDRESS", "CITY_STATE", "ZIP_PLUS4"}
+FORBIDDEN_FIELDS = {"OWNER_NAME", "ST_ADDRESS", "CITY_STATE", "ZIP5", "ZIP_CODE", "ZIP_PLUS4"}
 
 
 def clean(value, limit=220):
@@ -100,7 +102,6 @@ def normalize(a: dict) -> dict | None:
         "address": clean(a.get("PROP_LOC")) or "",
         "town": clean(a.get("MUN_NAME"), 140),
         "county": clean(a.get("COUNTY"), 100),
-        "zip": clean(a.get("ZIP5") or a.get("ZIP_CODE"), 10),
         "block": clean(a.get("PCLBLOCK"), 40),
         "lot": clean(a.get("PCLLOT"), 40),
         "qualifier": clean(a.get("PCLQCODE"), 40),
@@ -293,6 +294,8 @@ def self_test() -> None:
     assert row["pams_pin"] == "0904_9_20" and row["assessed_value"] == 424300 and row["last_sale_year"] == 2023
     assert row["last_sale_date"] == "2023-05-09" and row["sales_code"] == "10"
     assert not any("owner" in k for k in row), "owner fields are never stored"
+    assert "zip" not in row, "parcel ZIP5/ZIP_CODE is the owner mailing ZIP and is never stored"
+    assert not {"ZIP5", "ZIP_CODE"}.intersection(OUT_FIELDS), "mailing ZIP fields are never requested"
     assert normalize({"PAMS_PIN": "0901_7_1.01", "SALE_PRICE": 0})["last_sale_price"] is None, "no sale is blank, not $0"
     assert normalize({"PAMS_PIN": ""}) is None and normalize({"PAMS_PIN": "BAD"}) is None
     assert not FORBIDDEN_FIELDS.intersection(OUT_FIELDS)

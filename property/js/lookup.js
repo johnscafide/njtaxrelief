@@ -4790,10 +4790,22 @@ buildOpinion(hasCase, overBy, saving, target) + rows +
     localStorage.setItem('pl_saved', JSON.stringify(saved));
   };
 
-  function shareUrl() {
-    return location.origin + location.pathname + '?address=' +
-      encodeURIComponent(current.address + ', ' + current.town + ', NJ ' + current.zip);
+  // Public property page (/nj/property/<pin> redirects to /nj/<town>/<address>/<pin>).
+  // Served on the Watchdog host only; elsewhere fall back to the ?address= link.
+  function propertyPageUrl() {
+    if (!current || !current.pin || location.hostname !== 'www.watchdogindex.com') return '';
+    return location.origin + '/nj/property/' + encodeURIComponent(current.pin);
   }
+  function shareUrl() {
+    return propertyPageUrl() || (location.origin + location.pathname + '?address=' +
+      encodeURIComponent(current.address + ', ' + current.town + ', NJ ' + current.zip));
+  }
+  window.plFullPage = function () {
+    var m = el('plm-menu'); if (m) m.classList.remove('open');
+    var url = propertyPageUrl();
+    if (url) window.location.href = url;
+    else toast('Full page not available for this property yet');
+  };
   window.plCopy = function () {
     var m = el('plm-menu'); if (m) m.classList.remove('open');
     var url = shareUrl();

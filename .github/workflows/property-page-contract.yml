@@ -1,0 +1,43 @@
+name: Property page contract
+
+on:
+  push:
+    branches: [main]
+    paths:
+      - 'api/watchdog-property-page.js'
+      - 'middleware.js'
+      - 'property/js/lookup.js'
+      - 'property/index.html'
+      - 'property/scripts/sync_parcel_composite.py'
+      - 'supabase/migrations/20260928230000_public_property_page.sql'
+      - 'supabase/migrations/20260928231000_parcel_mailing_zip_privacy.sql'
+      - 'property/tests/property-page-contract.mjs'
+      - 'property/tests/parcel-mailing-zip-privacy-contract.mjs'
+      - '.github/workflows/property-page-contract.yml'
+  pull_request:
+    paths:
+      - 'api/watchdog-property-page.js'
+      - 'middleware.js'
+      - 'property/js/lookup.js'
+      - 'property/index.html'
+      - 'property/scripts/sync_parcel_composite.py'
+      - 'supabase/migrations/20260928230000_public_property_page.sql'
+      - 'supabase/migrations/20260928231000_parcel_mailing_zip_privacy.sql'
+      - 'property/tests/property-page-contract.mjs'
+      - 'property/tests/parcel-mailing-zip-privacy-contract.mjs'
+      - '.github/workflows/property-page-contract.yml'
+
+jobs:
+  contract:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+      - name: Verify property page contract
+        run: node property/tests/property-page-contract.mjs
+      - name: Verify parcel mailing ZIP privacy contract
+        run: node property/tests/parcel-mailing-zip-privacy-contract.mjs
+      - name: Verify property mailing ZIP contract
+        run: node property/tests/property-mailing-zip-contract.mjs
