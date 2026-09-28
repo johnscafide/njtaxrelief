@@ -9,6 +9,12 @@ on:
     - cron: '17 7 3 * *'
   workflow_dispatch:
     inputs:
+      what:
+        description: 'parcels = state parcel sync, scores = Watchdog Score precompute, both = sync then scores'
+        type: choice
+        options: [parcels, scores, both]
+        required: false
+        default: parcels
       county:
         description: 'One county (e.g. HUDSON). Leave blank for the whole state.'
         required: false
@@ -30,6 +36,7 @@ on:
   pull_request:
     paths:
       - 'property/scripts/sync_parcel_composite.py'
+      - 'property/scripts/precompute_scores.py'
       - 'supabase/migrations/20260928200000_statewide_parcel_sync.sql'
       - '.github/workflows/parcel-composite-sync.yml'
 
@@ -53,6 +60,8 @@ jobs:
       - run: python -m pip install --disable-pip-version-check requests
       - name: Loader self-test (no network writes)
         run: python property/scripts/sync_parcel_composite.py --self-test
+      - name: Score precompute script parses
+        run: python -m py_compile property/scripts/precompute_scores.py
       - name: Migration keeps owner data out and writes service-only
         run: |
           python - <<'PY'
@@ -77,6 +86,7 @@ jobs:
       - run: python -m pip install --disable-pip-version-check requests
       - run: python property/scripts/sync_parcel_composite.py --self-test
       - name: Sync parcels
+        if: github.event_name == 'schedule' || inputs.what == 'parcels' || inputs.what == 'both' || inputs.what == ''
         env:
           SUPABASE_URL: https://uvkvaxljhhngydvlrzom.supabase.co
           SUPABASE_SERVICE_ROLE_KEY: ${{ secrets.SUPABASE_SERVICE_ROLE_KEY }}
@@ -91,9 +101,24 @@ jobs:
           if [ "${DRY_RUN}" = "true" ]; then args+=(--dry-run); fi
           if [ "${RESUME}" = "true" ]; then args+=(--resume); fi
           python property/scripts/sync_parcel_composite.py "${args[@]}"
+      - name: Precompute Watchdog Scores
+        if: github.event_name == 'schedule' || inputs.what == 'scores' || inputs.what == 'both'
+        env:
+          SUPABASE_URL: https://uvkvaxljhhngydvlrzom.supabase.co
+          SUPABASE_SERVICE_ROLE_KEY: ${{ secrets.SUPABASE_SERVICE_ROLE_KEY }}
+          RESUME: ${{ inputs.resume }}
+          MAX_PAGES: ${{ inputs.max_pages }}
+        run: |
+          set -euo pipefail
+          args=(--max-pages "${MAX_PAGES:-0}" --summary score-precompute-summary.json)
+          if [ "${RESUME}" = "true" ]; then args+=(--resume); fi
+          python property/scripts/precompute_scores.py "${args[@]}"
       - name: Run summary
         if: always()
         run: |
           if [ -f parcel-sync-summary.json ]; then
             { echo '### Statewide parcel sync'; echo '```json'; cat parcel-sync-summary.json; echo '```'; } >> "$GITHUB_STEP_SUMMARY"
+          fi
+          if [ -f score-precompute-summary.json ]; then
+            { echo '### Watchdog Score precompute'; echo '```json'; cat score-precompute-summary.json; echo '```'; } >> "$GITHUB_STEP_SUMMARY"
           fi
