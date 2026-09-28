@@ -247,7 +247,7 @@ function start(){
       '<div class="wdd-detail-top"><div><a href="'+esc(route('/home')+'?pin='+encodeURIComponent(pin))+'">'+esc(p.address||pin||'Saved property')+'</a><p>'+esc(place(p))+'</p></div>'+(pin?'<span class="wdd-pin" title="Property PIN">PIN '+esc(pin)+'</span>':'')+'</div>'+
       '<div class="wdd-detail-tags">'+tags.join('')+'</div>'+
       '<dl class="wdd-detail-list">'+rows.map(function(r){return '<div><dt>'+r[0]+'</dt><dd>'+r[1]+'</dd></div>';}).join('')+'</dl>'+
-      '<div class="wdd-detail-actions"><a class="wdd-btn" href="'+esc(route('/home')+'?pin='+encodeURIComponent(pin))+'">Open property</a><a class="wdd-btn is-ghost" href="'+esc(route('/report')+'?pin='+encodeURIComponent(pin))+'">Full report</a></div>'+
+      '<div class="wdd-detail-actions"><a class="wdd-btn" href="'+esc(route('/home')+'?pin='+encodeURIComponent(pin))+'">Open property</a><a class="wdd-btn is-ghost" href="'+esc(route('/report')+'?pin='+encodeURIComponent(pin))+'">Full report</a>'+(pin?'<button type="button" class="wdd-btn is-ghost" data-act="why" data-why-pin="'+esc(pin)+'" data-why-address="'+esc(p.address||'')+'"><i class="fas fa-dog" aria-hidden="true"></i>Why Watchdog?</button>':'')+'</div>'+
       gate+
     '</div>');
   }
@@ -352,6 +352,15 @@ function start(){
     try{recognition.start();}catch(_err){button.classList.remove('is-listening');voiceRecognition=null;}
   }
   function refocus(selector){w.setTimeout(function(){var el=d.querySelector(selector);if(el)el.focus({preventScroll:true});},0);}
+  /* "Why Watchdog?" opens the plain-English evidence drawer (watchdog-why.js),
+     loaded on first use so the dashboard does not pay for it up front. */
+  function openWhy(btn){
+    var opts={pamsPin:btn.getAttribute('data-why-pin')||'',address:btn.getAttribute('data-why-address')||'',surface:'dashboard'};
+    if(w.WatchdogWhy){w.WatchdogWhy.open(opts);return;}
+    var s=d.getElementById('wd-why-script');
+    if(!s){s=d.createElement('script');s.id='wd-why-script';s.src='/property/js/watchdog-why.js';d.head.appendChild(s);}
+    s.addEventListener('load',function(){if(w.WatchdogWhy)w.WatchdogWhy.open(opts);},{once:true});
+  }
   function onClick(ev){
     var t=ev.target;if(!t||!t.closest||!t.closest('.wdd-app'))return;
     var pick=t.closest('[data-select-pin]');
@@ -377,6 +386,7 @@ function start(){
     else if(a==='export')exportCsv();
     else if(a==='refresh')location.reload();
     else if(a==='voice-search')startVoiceSearch(act);
+    else if(a==='why')openWhy(act);
   }
   function onChange(ev){
     var t=ev.target;if(!t||!t.getAttribute)return;
