@@ -8,6 +8,10 @@ on:
       - 'api/watchdog-property-report.js'
       - 'api/watchdog-property-alerts.js'
       - 'api/watchdog-true-cost.js'
+      - 'api/watchdog-checkup.js'
+      - 'property/js/agent-checkups.js'
+      - 'property/agent-desk/index.html'
+      - 'property/tests/checkup-contract.mjs'
       - 'chapter123-ratios-2026.json'
       - 'vercel.json'
       - 'property/js/agent-hub.js'
@@ -35,6 +39,10 @@ on:
       - 'api/watchdog-property-report.js'
       - 'api/watchdog-property-alerts.js'
       - 'api/watchdog-true-cost.js'
+      - 'api/watchdog-checkup.js'
+      - 'property/js/agent-checkups.js'
+      - 'property/agent-desk/index.html'
+      - 'property/tests/checkup-contract.mjs'
       - 'chapter123-ratios-2026.json'
       - 'vercel.json'
       - 'property/js/agent-hub.js'
@@ -69,6 +77,8 @@ jobs:
         run: npm install --omit=dev --ignore-scripts --no-audit --no-fund --no-package-lock
       - name: Verify property page contract
         run: node property/tests/property-page-contract.mjs
+      - name: Verify tax checkup contract
+        run: node property/tests/checkup-contract.mjs
       - name: Verify true cost card contract
         run: node property/tests/true-cost-contract.mjs
       - name: Verify property alerts contract

@@ -489,3 +489,7 @@ module.exports.changeItems = changeItems;
 module.exports.townFacts = townFacts;
 module.exports.renderCard = renderCard;
 module.exports.renderPicker = renderPicker;
+module.exports.fetchAgent = fetchAgent;
+module.exports.agentCard = agentCard;
+module.exports.shell = shell;
+module.exports.TC_STYLE = TC_STYLE;
