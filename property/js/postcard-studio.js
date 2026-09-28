@@ -10,7 +10,7 @@ const money=c=>'$'+(Number(c||0)/100).toLocaleString('en-US',{minimumFractionDig
 const safe=(e,c)=>window.WatchdogAgentSafety?window.WatchdogAgentSafety.friendlyError(e,c):(e&&e.message)||'Something went wrong. Please try again.';
 const W=window.WatchdogAgentWorkspace,route=W&&W.route?W.route:(p=>'/property'+p);
 const PCM_ORIGIN='https://portal.pcmintegrations.com';
-const STATUS={submitted:'Sent to PostcardMania',pending:'Waiting to print',processing:'Printing',mailed:'In the mail',delivered:'Delivered',completed:'Delivered',canceled:'Canceled',failed:'Needs attention',awaiting_live_enable:'Paid, waiting for mail launch',awaiting_provider_credentials:'Paid, waiting for mail launch',queued:'Queued',submitting:'Sending'};
+const STATUS={submitted:'Sent to print',pending:'Waiting to print',processing:'Printing',mailed:'In the mail',delivered:'Delivered',completed:'Delivered',canceled:'Canceled',failed:'Needs attention',awaiting_live_enable:'Paid, waiting for mail launch',awaiting_provider_credentials:'Paid, waiting for mail launch',queued:'Queued',submitting:'Sending'};
 
 let client,campaigns=[],campaignId='',st=null,editorDesign='',quote=null;
 
@@ -155,7 +155,7 @@ async function start(ctx){
   const page=qs('#ps-page').content.cloneNode(true);wire(page);qs('#ps-app').replaceChildren(page);
   paintCampaigns();await refresh();
   const paid=new URLSearchParams(location.search).get('payment');
-  if(paid==='success')toast('Payment received. Your postcards go to PostcardMania as soon as Stripe confirms it.');
+  if(paid==='success')toast('Payment received. Your postcards go to print as soon as the payment is confirmed.');
   if(paid==='cancelled')toast('Checkout was canceled. You were not charged.');
 }
 const ready=window.njptrAccessReady||Promise.reject(new Error('Access context did not initialize'));
