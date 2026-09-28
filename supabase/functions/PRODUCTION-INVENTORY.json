@@ -213,6 +213,12 @@
       "verify_jwt": false,
       "tracking": "source_snapshot"
     },
+    "referral-rewards-sweep": {
+      "version": 1,
+      "sha256": "27f2a9660f5366822a1c1fdb15caa3f1995257eab052f6d39f7e5d6bedd064d2",
+      "verify_jwt": false,
+      "tracking": "fingerprint_only"
+    },
     "report-platform-event": {
       "version": 28,
       "sha256": "0be80d17829eeb3c257e271f9351719f8a68ca12a2ba5bdd10634ddf134330a2",
@@ -250,8 +256,8 @@
       "tracking": "source_snapshot"
     },
     "stripe-webhook": {
-      "version": 45,
-      "sha256": "8c7823d826356369fb5b418ef1a2b18f4d64145c59067b9e66e2f7476126ce12",
+      "version": 46,
+      "sha256": "8d77c4faa4fa58b7424110887bcbffbf5ced8d08a9f0b7d896ad43cffb2e73b0",
       "verify_jwt": false,
       "tracking": "fingerprint_only"
     },
