@@ -1,0 +1,26 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>Watchdog</title>
+<link rel="stylesheet" href="popup.css">
+</head>
+<body>
+<header><img src="icons/icon-32.png" alt="" width="24" height="24"><b>Watchdog</b></header>
+<main>
+  <p class="lead">Open any New Jersey listing on Zillow, Realtor.com or Redfin and a Watchdog panel shows its tax, assessment and Watchdog Score.</p>
+  <section id="need-key">
+    <label for="key">Your extension key</label>
+    <input id="key" type="password" autocomplete="off" spellcheck="false" placeholder="wdg_ext_…">
+    <button id="save" type="button">Save key</button>
+    <p class="fine">Create your key in the <a href="https://www.watchdogindex.com/agent-desk#research" target="_blank" rel="noopener">Agent Desk</a> under Research. Part of the Watchdog Agent plan.</p>
+  </section>
+  <section id="has-key" hidden>
+    <p class="ok">Connected. Open a New Jersey listing to see the panel.</p>
+    <button id="remove" type="button" class="quiet">Remove key</button>
+  </section>
+  <p id="msg" class="fine" role="status" aria-live="polite"></p>
+</main>
+<script src="popup.js"></script>
+</body>
+</html>

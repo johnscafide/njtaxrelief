@@ -222,3 +222,13 @@ button.adh-rail-link{width:100%;border:0;background:none;font:600 13px/1 var(--a
 .ad-ck-actions,.ad-ck-foot{display:flex;flex-wrap:wrap;gap:8px}
 .ad-ck-actions .ad27-btn,.ad-ck-foot .ad27-btn{min-height:44px}
 .ad-ck-foot{margin-top:12px}
+
+/* Browser extension key (Research) */
+.ad-extension{margin-top:16px}
+.ad-ext-row{display:flex;flex-wrap:wrap;gap:8px;align-items:center}
+.ad-ext-row .ad27-btn{min-height:44px}
+.ad-ext-key{margin-top:12px}
+.ad-ext-key label{display:block;font-size:13px;font-weight:600;margin-bottom:6px}
+.ad-ext-key input{flex:1 1 260px;min-width:0;min-height:44px;padding:8px 12px;border:1px solid var(--aw-soft,#e5e7eb);border-radius:12px;font:500 14px ui-monospace,SFMono-Regular,Menlo,monospace;background:#fff}
+.ad-ext-msg{margin:10px 0 0;font-size:14px}
+.ad-ext-msg:empty{display:none}
