@@ -1,0 +1,59 @@
+date,time,channel,action,asset_id,asset_file,owner,phase,notes,source_feed
+2026-09-28,08:00,Milestone,"Kickoff: read 01-strategy/master-plan.md, pick the paid media tier, confirm billing gate state",,01-strategy/master-plan.md,John,0,Phase 0 begins,core
+2026-10-01,08:00,Milestone,NJ assessment valuation date (Oct 1). Content hook all week,,00-brief/product-and-brand-brief.md,John,0,,core
+2026-10-02,12:00,Decision,"Owner decisions due: trial terms, Founding perks, Triple Play go/no-go, Academy blocking or nudged",,01-strategy/master-plan.md,John,0,Section 14 of the master plan,core
+2026-10-02,15:00,Email,Write next Monday's Watchdog Agent Weekly issue,,05-email-sms-outreach/weekly-agent-email.md,John,0,,core
+2026-10-02,16:00,Review,"Billing gate check: is live_billing_lifecycle passed and public checkout open? If not, invite door only next week",,01-strategy/trial-decision.md,John,0,,core
+2026-10-02,16:30,Review,"Weekly scorecard: fill in the KPI sheet, decide kill or scale for each engine",,01-strategy/kpi-dashboard-template.csv,John,0,,core
+2026-10-05,08:30,Review,"Monday plan: review last week's scorecard, set this week's outreach and content priorities",,02-calendar/weekly-operating-rhythm.md,John,0,,core
+2026-10-05,12:00,Decision,"Owner decisions due: paid media tier, coordinator hire",,01-strategy/master-plan.md,John,0,,core
+2026-10-07,17:00,Milestone,Operations checklist due (O1 to O7),,01-strategy/launch-readiness-checklist.md,Coordinator,0,,core
+2026-10-09,15:00,Email,Write next Monday's Watchdog Agent Weekly issue,,05-email-sms-outreach/weekly-agent-email.md,John,0,,core
+2026-10-09,16:00,Review,"Billing gate check: is live_billing_lifecycle passed and public checkout open? If not, invite door only next week",,01-strategy/trial-decision.md,John,0,,core
+2026-10-09,16:30,Review,"Weekly scorecard: fill in the KPI sheet, decide kill or scale for each engine",,01-strategy/kpi-dashboard-template.csv,John,0,,core
+2026-10-09,17:00,Milestone,"Engineering, legal, content and commercial checklist items due",,01-strategy/launch-readiness-checklist.md,Engineering,0,,core
+2026-10-12,06:00,Milestone,LAUNCH DAY: both doors open (14-day Agent trial and Founding Agent invites). Run the launch-day sequence,,01-strategy/launch-readiness-checklist.md,John,1,"Phase 1 begins. If the billing gate is closed, invite door only",core
+2026-10-12,08:30,Review,"Monday plan: review last week's scorecard, set this week's outreach and content priorities",,02-calendar/weekly-operating-rhythm.md,John,1,,core
+2026-10-16,12:00,Decision,Owner decision due: radio yes or no,,07-traditional/podcast-and-radio.md,John,1,,core
+2026-10-16,15:00,Email,Write next Monday's Watchdog Agent Weekly issue,,05-email-sms-outreach/weekly-agent-email.md,John,1,,core
+2026-10-16,16:00,Review,"Billing gate check: is live_billing_lifecycle passed and public checkout open? If not, invite door only next week",,01-strategy/trial-decision.md,John,1,,core
+2026-10-16,16:30,Review,"Weekly scorecard: fill in the KPI sheet, decide kill or scale for each engine",,01-strategy/kpi-dashboard-template.csv,John,1,,core
+2026-10-19,08:30,Review,"Monday plan: review last week's scorecard, set this week's outreach and content priorities",,02-calendar/weekly-operating-rhythm.md,John,1,,core
+2026-10-23,15:00,Email,Write next Monday's Watchdog Agent Weekly issue,,05-email-sms-outreach/weekly-agent-email.md,John,1,,core
+2026-10-23,16:00,Review,"Billing gate check: is live_billing_lifecycle passed and public checkout open? If not, invite door only next week",,01-strategy/trial-decision.md,John,1,,core
+2026-10-23,16:30,Review,"Weekly scorecard: fill in the KPI sheet, decide kill or scale for each engine",,01-strategy/kpi-dashboard-template.csv,John,1,,core
+2026-10-26,08:30,Review,"Monday plan: review last week's scorecard, set this week's outreach and content priorities",,02-calendar/weekly-operating-rhythm.md,John,1,,core
+2026-10-26,12:00,Decision,Owner decision due: referral contest prizes,,06-recruitment-referral-partners/referral-program.md,John,1,,core
+2026-10-30,15:00,Email,Write next Monday's Watchdog Agent Weekly issue,,05-email-sms-outreach/weekly-agent-email.md,John,1,,core
+2026-10-30,16:00,Review,"Billing gate check: is live_billing_lifecycle passed and public checkout open? If not, invite door only next week",,01-strategy/trial-decision.md,John,1,,core
+2026-10-30,16:30,Review,"Weekly scorecard: fill in the KPI sheet, decide kill or scale for each engine",,01-strategy/kpi-dashboard-template.csv,John,1,,core
+2026-11-01,08:00,Milestone,Q4 property tax quarter due (Sunday; practically Nov 2 with grace periods). Content hook,,00-brief/product-and-brand-brief.md,John,1,,core
+2026-11-02,08:00,Milestone,ANCHOR and PAS-1 2025 season filing deadline. Phase 2 begins,,00-brief/product-and-brand-brief.md,John,2,,core
+2026-11-02,08:30,Review,"Monday plan: review last week's scorecard, set this week's outreach and content priorities",,02-calendar/weekly-operating-rhythm.md,John,2,,core
+2026-11-06,15:00,Email,Write next Monday's Watchdog Agent Weekly issue,,05-email-sms-outreach/weekly-agent-email.md,John,2,,core
+2026-11-06,16:30,Review,"Weekly scorecard: fill in the KPI sheet, decide kill or scale for each engine",,01-strategy/kpi-dashboard-template.csv,John,2,,core
+2026-11-09,08:30,Review,"Monday plan: review last week's scorecard, set this week's outreach and content priorities",,02-calendar/weekly-operating-rhythm.md,John,2,,core
+2026-11-13,15:00,Email,Write next Monday's Watchdog Agent Weekly issue,,05-email-sms-outreach/weekly-agent-email.md,John,2,,core
+2026-11-13,16:30,Review,"Weekly scorecard: fill in the KPI sheet, decide kill or scale for each engine",,01-strategy/kpi-dashboard-template.csv,John,2,,core
+2026-11-16,08:30,Review,"Monday plan: review last week's scorecard, set this week's outreach and content priorities",,02-calendar/weekly-operating-rhythm.md,John,2,,core
+2026-11-20,15:00,Email,Write next Monday's Watchdog Agent Weekly issue,,05-email-sms-outreach/weekly-agent-email.md,John,2,,core
+2026-11-20,16:30,Review,"Weekly scorecard: fill in the KPI sheet, decide kill or scale for each engine",,01-strategy/kpi-dashboard-template.csv,John,2,,core
+2026-11-23,08:30,Review,"Monday plan: review last week's scorecard, set this week's outreach and content priorities",,02-calendar/weekly-operating-rhythm.md,John,2,,core
+2026-11-26,00:00,Holiday,"Thanksgiving. No posting, no outreach",,,John,2,,core
+2026-11-27,00:00,Holiday,Day after Thanksgiving. No outreach; pre-scheduled posts only,,,John,2,,core
+2026-11-30,08:30,Review,"Monday plan: review last week's scorecard, set this week's outreach and content priorities",,02-calendar/weekly-operating-rhythm.md,John,2,,core
+2026-12-01,08:00,Milestone,Added and omitted assessment appeal deadline at the County Board of Taxation. Content hook,,00-brief/product-and-brand-brief.md,John,2,,core
+2026-12-04,15:00,Email,Write next Monday's Watchdog Agent Weekly issue,,05-email-sms-outreach/weekly-agent-email.md,John,2,,core
+2026-12-04,16:30,Review,"Weekly scorecard: fill in the KPI sheet, decide kill or scale for each engine",,01-strategy/kpi-dashboard-template.csv,John,2,,core
+2026-12-07,07:00,Milestone,"Triple Play begins (Dec 7 to 10, Atlantic City). Phase 3 begins",,06-recruitment-referral-partners/triple-play-plan.md,John,3,,core
+2026-12-07,08:30,Review,"Monday plan: review last week's scorecard, set this week's outreach and content priorities",,02-calendar/weekly-operating-rhythm.md,John,3,,core
+2026-12-11,15:00,Email,Write next Monday's Watchdog Agent Weekly issue,,05-email-sms-outreach/weekly-agent-email.md,John,3,,core
+2026-12-11,16:30,Review,"Weekly scorecard: fill in the KPI sheet, decide kill or scale for each engine",,01-strategy/kpi-dashboard-template.csv,John,3,,core
+2026-12-14,08:00,Milestone,"Year-end annual plan push begins ($590, ten monthly payments, expense it in 2026)",,05-email-sms-outreach/event-emails.md,John,3,,core
+2026-12-14,08:30,Review,"Monday plan: review last week's scorecard, set this week's outreach and content priorities",,02-calendar/weekly-operating-rhythm.md,John,3,,core
+2026-12-18,15:00,Email,Write next Monday's Watchdog Agent Weekly issue,,05-email-sms-outreach/weekly-agent-email.md,John,3,,core
+2026-12-18,16:30,Review,"Weekly scorecard: fill in the KPI sheet, decide kill or scale for each engine",,01-strategy/kpi-dashboard-template.csv,John,3,,core
+2026-12-21,08:30,Review,"Monday plan: review last week's scorecard, set this week's outreach and content priorities",,02-calendar/weekly-operating-rhythm.md,John,3,,core
+2026-12-24,00:00,Holiday,Christmas Eve. Pre-scheduled posts only,,,John,3,,core
+2026-12-25,00:00,Holiday,Christmas. Nothing scheduled,,,John,3,,core
+2026-12-31,12:00,Milestone,"Window ends. Final scorecard, Q1 2027 plan: appeal season (assessment notices about Feb 1, regular appeal deadline Apr 1)",,01-strategy/kpi-dashboard-template.csv,John,3,,core

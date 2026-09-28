@@ -1,0 +1,547 @@
+BEGIN:VCALENDAR
+VERSION:2.0
+PRODID:-//Watchdog//Agent Marketing Q4 2026//EN
+CALSCALE:GREGORIAN
+METHOD:PUBLISH
+X-WR-CALNAME:Watchdog Agent Marketing Q4 2026
+X-WR-TIMEZONE:America/New_York
+BEGIN:VTIMEZONE
+TZID:America/New_York
+BEGIN:DAYLIGHT
+TZOFFSETFROM:-0500
+TZOFFSETTO:-0400
+TZNAME:EDT
+DTSTART:19700308T020000
+RRULE:FREQ=YEARLY;BYMONTH=3;BYDAY=2SU
+END:DAYLIGHT
+BEGIN:STANDARD
+TZOFFSETFROM:-0400
+TZOFFSETTO:-0500
+TZNAME:EST
+DTSTART:19701101T020000
+RRULE:FREQ=YEARLY;BYMONTH=11;BYDAY=1SU
+END:STANDARD
+END:VTIMEZONE
+BEGIN:VEVENT
+UID:6e584a704b50b560e16d20b338117f58@watchdogindex.com
+DTSTAMP:20260928T120000Z
+DTSTART;TZID=America/New_York:20260928T080000
+DTEND;TZID=America/New_York:20260928T083000
+SUMMARY:[Milestone] Kickoff: read 01-strategy/master-plan.md\, pick the paid media tier\, confirm billing gate state
+DESCRIPTION:Asset: n/a | File: 01-strategy/master-plan.md | Owner: John | Phase 0 | Phase 0 begins
+CATEGORIES:Milestone
+END:VEVENT
+BEGIN:VEVENT
+UID:1bf25032badbc263d60aea9bbf14acd7@watchdogindex.com
+DTSTAMP:20260928T120000Z
+DTSTART;TZID=America/New_York:20261001T080000
+DTEND;TZID=America/New_York:20261001T083000
+SUMMARY:[Milestone] NJ assessment valuation date (Oct 1). Content hook all week
+DESCRIPTION:Asset: n/a | File: 00-brief/product-and-brand-brief.md | Owner: John | Phase 0 | 
+CATEGORIES:Milestone
+END:VEVENT
+BEGIN:VEVENT
+UID:e03424aee96d6427c24bc5f751f0698d@watchdogindex.com
+DTSTAMP:20260928T120000Z
+DTSTART;TZID=America/New_York:20261002T120000
+DTEND;TZID=America/New_York:20261002T123000
+SUMMARY:[Decision] Owner decisions due: trial terms\, Founding perks\, Triple Play go/no-go\, Academy blocking or nudged
+DESCRIPTION:Asset: n/a | File: 01-strategy/master-plan.md | Owner: John | Phase 0 | Section 14 of the master plan
+CATEGORIES:Decision
+END:VEVENT
+BEGIN:VEVENT
+UID:2ad7b20ec699f01ae7a527256b2499c3@watchdogindex.com
+DTSTAMP:20260928T120000Z
+DTSTART;TZID=America/New_York:20261002T150000
+DTEND;TZID=America/New_York:20261002T153000
+SUMMARY:[Email] Write next Monday's Watchdog Agent Weekly issue
+DESCRIPTION:Asset: n/a | File: 05-email-sms-outreach/weekly-agent-email.md | Owner: John | Phase 0 | 
+CATEGORIES:Email
+END:VEVENT
+BEGIN:VEVENT
+UID:3eea432186dc2ac9acf37c3b00eea40b@watchdogindex.com
+DTSTAMP:20260928T120000Z
+DTSTART;TZID=America/New_York:20261002T160000
+DTEND;TZID=America/New_York:20261002T163000
+SUMMARY:[Review] Billing gate check: is live_billing_lifecycle passed and public checkout open? If not\, invite door only next week
+DESCRIPTION:Asset: n/a | File: 01-strategy/trial-decision.md | Owner: John | Phase 0 | 
+CATEGORIES:Review
+END:VEVENT
+BEGIN:VEVENT
+UID:c8183e1a6977fad6f91e40ac33a8d608@watchdogindex.com
+DTSTAMP:20260928T120000Z
+DTSTART;TZID=America/New_York:20261002T163000
+DTEND;TZID=America/New_York:20261002T170000
+SUMMARY:[Review] Weekly scorecard: fill in the KPI sheet\, decide kill or scale for each engine
+DESCRIPTION:Asset: n/a | File: 01-strategy/kpi-dashboard-template.csv | Owner: John | Phase 0 | 
+CATEGORIES:Review
+END:VEVENT
+BEGIN:VEVENT
+UID:41114a6bd67d10eec1a3a11c498fb53c@watchdogindex.com
+DTSTAMP:20260928T120000Z
+DTSTART;TZID=America/New_York:20261005T083000
+DTEND;TZID=America/New_York:20261005T090000
+SUMMARY:[Review] Monday plan: review last week's scorecard\, set this week's outreach and content priorities
+DESCRIPTION:Asset: n/a | File: 02-calendar/weekly-operating-rhythm.md | Owner: John | Phase 0 | 
+CATEGORIES:Review
+END:VEVENT
+BEGIN:VEVENT
+UID:0b34b6df85aebf7b18713a7f3b203325@watchdogindex.com
+DTSTAMP:20260928T120000Z
+DTSTART;TZID=America/New_York:20261005T120000
+DTEND;TZID=America/New_York:20261005T123000
+SUMMARY:[Decision] Owner decisions due: paid media tier\, coordinator hire
+DESCRIPTION:Asset: n/a | File: 01-strategy/master-plan.md | Owner: John | Phase 0 | 
+CATEGORIES:Decision
+END:VEVENT
+BEGIN:VEVENT
+UID:f89a2aaa9be6ceb74cf2f6f461c164b8@watchdogindex.com
+DTSTAMP:20260928T120000Z
+DTSTART;TZID=America/New_York:20261007T170000
+DTEND;TZID=America/New_York:20261007T173000
+SUMMARY:[Milestone] Operations checklist due (O1 to O7)
+DESCRIPTION:Asset: n/a | File: 01-strategy/launch-readiness-checklist.md | Owner: Coordinator | Phase 0 | 
+CATEGORIES:Milestone
+END:VEVENT
+BEGIN:VEVENT
+UID:8896c6b97d89b613f595472797d7221f@watchdogindex.com
+DTSTAMP:20260928T120000Z
+DTSTART;TZID=America/New_York:20261009T150000
+DTEND;TZID=America/New_York:20261009T153000
+SUMMARY:[Email] Write next Monday's Watchdog Agent Weekly issue
+DESCRIPTION:Asset: n/a | File: 05-email-sms-outreach/weekly-agent-email.md | Owner: John | Phase 0 | 
+CATEGORIES:Email
+END:VEVENT
+BEGIN:VEVENT
+UID:fb9366d4ef07193f9070d22542ed1818@watchdogindex.com
+DTSTAMP:20260928T120000Z
+DTSTART;TZID=America/New_York:20261009T160000
+DTEND;TZID=America/New_York:20261009T163000
+SUMMARY:[Review] Billing gate check: is live_billing_lifecycle passed and public checkout open? If not\, invite door only next week
+DESCRIPTION:Asset: n/a | File: 01-strategy/trial-decision.md | Owner: John | Phase 0 | 
+CATEGORIES:Review
+END:VEVENT
+BEGIN:VEVENT
+UID:f1486fd38e9c30d40418b3080eb22b8a@watchdogindex.com
+DTSTAMP:20260928T120000Z
+DTSTART;TZID=America/New_York:20261009T163000
+DTEND;TZID=America/New_York:20261009T170000
+SUMMARY:[Review] Weekly scorecard: fill in the KPI sheet\, decide kill or scale for each engine
+DESCRIPTION:Asset: n/a | File: 01-strategy/kpi-dashboard-template.csv | Owner: John | Phase 0 | 
+CATEGORIES:Review
+END:VEVENT
+BEGIN:VEVENT
+UID:56d3f890c5a6c961634328923ffbae28@watchdogindex.com
+DTSTAMP:20260928T120000Z
+DTSTART;TZID=America/New_York:20261009T170000
+DTEND;TZID=America/New_York:20261009T173000
+SUMMARY:[Milestone] Engineering\, legal\, content and commercial checklist items due
+DESCRIPTION:Asset: n/a | File: 01-strategy/launch-readiness-checklist.md | Owner: Engineering | Phase 0 | 
+CATEGORIES:Milestone
+END:VEVENT
+BEGIN:VEVENT
+UID:165efaaf1c5468e4ca8ebfc2a1447f37@watchdogindex.com
+DTSTAMP:20260928T120000Z
+DTSTART;TZID=America/New_York:20261012T060000
+DTEND;TZID=America/New_York:20261012T063000
+SUMMARY:[Milestone] LAUNCH DAY: both doors open (14-day Agent trial and Founding Agent invites). Run the launch-day sequence
+DESCRIPTION:Asset: n/a | File: 01-strategy/launch-readiness-checklist.md | Owner: John | Phase 1 | Phase 1 begins. If the billing gate is closed\, invite door only
+CATEGORIES:Milestone
+END:VEVENT
+BEGIN:VEVENT
+UID:2c38c4d5ec12b749bbfdd70d7cade19f@watchdogindex.com
+DTSTAMP:20260928T120000Z
+DTSTART;TZID=America/New_York:20261012T083000
+DTEND;TZID=America/New_York:20261012T090000
+SUMMARY:[Review] Monday plan: review last week's scorecard\, set this week's outreach and content priorities
+DESCRIPTION:Asset: n/a | File: 02-calendar/weekly-operating-rhythm.md | Owner: John | Phase 1 | 
+CATEGORIES:Review
+END:VEVENT
+BEGIN:VEVENT
+UID:e7cb2bf2b555b08f32f8bd5fde6e3390@watchdogindex.com
+DTSTAMP:20260928T120000Z
+DTSTART;TZID=America/New_York:20261016T120000
+DTEND;TZID=America/New_York:20261016T123000
+SUMMARY:[Decision] Owner decision due: radio yes or no
+DESCRIPTION:Asset: n/a | File: 07-traditional/podcast-and-radio.md | Owner: John | Phase 1 | 
+CATEGORIES:Decision
+END:VEVENT
+BEGIN:VEVENT
+UID:b67daba93ba871f8fb59d1a1090e7548@watchdogindex.com
+DTSTAMP:20260928T120000Z
+DTSTART;TZID=America/New_York:20261016T150000
+DTEND;TZID=America/New_York:20261016T153000
+SUMMARY:[Email] Write next Monday's Watchdog Agent Weekly issue
+DESCRIPTION:Asset: n/a | File: 05-email-sms-outreach/weekly-agent-email.md | Owner: John | Phase 1 | 
+CATEGORIES:Email
+END:VEVENT
+BEGIN:VEVENT
+UID:5cc3d5fbc6c802182b3d8ba026a00cc3@watchdogindex.com
+DTSTAMP:20260928T120000Z
+DTSTART;TZID=America/New_York:20261016T160000
+DTEND;TZID=America/New_York:20261016T163000
+SUMMARY:[Review] Billing gate check: is live_billing_lifecycle passed and public checkout open? If not\, invite door only next week
+DESCRIPTION:Asset: n/a | File: 01-strategy/trial-decision.md | Owner: John | Phase 1 | 
+CATEGORIES:Review
+END:VEVENT
+BEGIN:VEVENT
+UID:68769a362a7f008bdc069996edf05c4d@watchdogindex.com
+DTSTAMP:20260928T120000Z
+DTSTART;TZID=America/New_York:20261016T163000
+DTEND;TZID=America/New_York:20261016T170000
+SUMMARY:[Review] Weekly scorecard: fill in the KPI sheet\, decide kill or scale for each engine
+DESCRIPTION:Asset: n/a | File: 01-strategy/kpi-dashboard-template.csv | Owner: John | Phase 1 | 
+CATEGORIES:Review
+END:VEVENT
+BEGIN:VEVENT
+UID:44ce4112ae724a04e2a514c825e2106b@watchdogindex.com
+DTSTAMP:20260928T120000Z
+DTSTART;TZID=America/New_York:20261019T083000
+DTEND;TZID=America/New_York:20261019T090000
+SUMMARY:[Review] Monday plan: review last week's scorecard\, set this week's outreach and content priorities
+DESCRIPTION:Asset: n/a | File: 02-calendar/weekly-operating-rhythm.md | Owner: John | Phase 1 | 
+CATEGORIES:Review
+END:VEVENT
+BEGIN:VEVENT
+UID:938d612fdfe7c5ee63a1daea5b5319c7@watchdogindex.com
+DTSTAMP:20260928T120000Z
+DTSTART;TZID=America/New_York:20261023T150000
+DTEND;TZID=America/New_York:20261023T153000
+SUMMARY:[Email] Write next Monday's Watchdog Agent Weekly issue
+DESCRIPTION:Asset: n/a | File: 05-email-sms-outreach/weekly-agent-email.md | Owner: John | Phase 1 | 
+CATEGORIES:Email
+END:VEVENT
+BEGIN:VEVENT
+UID:92cb355303ef9faab6fcc6b655ec6c25@watchdogindex.com
+DTSTAMP:20260928T120000Z
+DTSTART;TZID=America/New_York:20261023T160000
+DTEND;TZID=America/New_York:20261023T163000
+SUMMARY:[Review] Billing gate check: is live_billing_lifecycle passed and public checkout open? If not\, invite door only next week
+DESCRIPTION:Asset: n/a | File: 01-strategy/trial-decision.md | Owner: John | Phase 1 | 
+CATEGORIES:Review
+END:VEVENT
+BEGIN:VEVENT
+UID:239381cc1a88064773113a6de922c5fc@watchdogindex.com
+DTSTAMP:20260928T120000Z
+DTSTART;TZID=America/New_York:20261023T163000
+DTEND;TZID=America/New_York:20261023T170000
+SUMMARY:[Review] Weekly scorecard: fill in the KPI sheet\, decide kill or scale for each engine
+DESCRIPTION:Asset: n/a | File: 01-strategy/kpi-dashboard-template.csv | Owner: John | Phase 1 | 
+CATEGORIES:Review
+END:VEVENT
+BEGIN:VEVENT
+UID:0e3320bfbf135d1cbb752c70ccbeea22@watchdogindex.com
+DTSTAMP:20260928T120000Z
+DTSTART;TZID=America/New_York:20261026T083000
+DTEND;TZID=America/New_York:20261026T090000
+SUMMARY:[Review] Monday plan: review last week's scorecard\, set this week's outreach and content priorities
+DESCRIPTION:Asset: n/a | File: 02-calendar/weekly-operating-rhythm.md | Owner: John | Phase 1 | 
+CATEGORIES:Review
+END:VEVENT
+BEGIN:VEVENT
+UID:69dba5407a71f5d5b7285e2aa32aa93c@watchdogindex.com
+DTSTAMP:20260928T120000Z
+DTSTART;TZID=America/New_York:20261026T120000
+DTEND;TZID=America/New_York:20261026T123000
+SUMMARY:[Decision] Owner decision due: referral contest prizes
+DESCRIPTION:Asset: n/a | File: 06-recruitment-referral-partners/referral-program.md | Owner: John | Phase 1 | 
+CATEGORIES:Decision
+END:VEVENT
+BEGIN:VEVENT
+UID:c3c7473128e007bccf93df734ec7a5ca@watchdogindex.com
+DTSTAMP:20260928T120000Z
+DTSTART;TZID=America/New_York:20261030T150000
+DTEND;TZID=America/New_York:20261030T153000
+SUMMARY:[Email] Write next Monday's Watchdog Agent Weekly issue
+DESCRIPTION:Asset: n/a | File: 05-email-sms-outreach/weekly-agent-email.md | Owner: John | Phase 1 | 
+CATEGORIES:Email
+END:VEVENT
+BEGIN:VEVENT
+UID:63e618785401f39d33568ee31482a1da@watchdogindex.com
+DTSTAMP:20260928T120000Z
+DTSTART;TZID=America/New_York:20261030T160000
+DTEND;TZID=America/New_York:20261030T163000
+SUMMARY:[Review] Billing gate check: is live_billing_lifecycle passed and public checkout open? If not\, invite door only next week
+DESCRIPTION:Asset: n/a | File: 01-strategy/trial-decision.md | Owner: John | Phase 1 | 
+CATEGORIES:Review
+END:VEVENT
+BEGIN:VEVENT
+UID:525110811ee98c8990eab8070f222f11@watchdogindex.com
+DTSTAMP:20260928T120000Z
+DTSTART;TZID=America/New_York:20261030T163000
+DTEND;TZID=America/New_York:20261030T170000
+SUMMARY:[Review] Weekly scorecard: fill in the KPI sheet\, decide kill or scale for each engine
+DESCRIPTION:Asset: n/a | File: 01-strategy/kpi-dashboard-template.csv | Owner: John | Phase 1 | 
+CATEGORIES:Review
+END:VEVENT
+BEGIN:VEVENT
+UID:6aa1d19a20cdb3c7d1994c84b10c7b16@watchdogindex.com
+DTSTAMP:20260928T120000Z
+DTSTART;TZID=America/New_York:20261101T080000
+DTEND;TZID=America/New_York:20261101T083000
+SUMMARY:[Milestone] Q4 property tax quarter due (Sunday\; practically Nov 2 with grace periods). Content hook
+DESCRIPTION:Asset: n/a | File: 00-brief/product-and-brand-brief.md | Owner: John | Phase 1 | 
+CATEGORIES:Milestone
+END:VEVENT
+BEGIN:VEVENT
+UID:006bdb63c82fb6e4bc82537bd72d5d60@watchdogindex.com
+DTSTAMP:20260928T120000Z
+DTSTART;TZID=America/New_York:20261102T080000
+DTEND;TZID=America/New_York:20261102T083000
+SUMMARY:[Milestone] ANCHOR and PAS-1 2025 season filing deadline. Phase 2 begins
+DESCRIPTION:Asset: n/a | File: 00-brief/product-and-brand-brief.md | Owner: John | Phase 2 | 
+CATEGORIES:Milestone
+END:VEVENT
+BEGIN:VEVENT
+UID:9adf2e84ab9a103364c1bacbbf9c551a@watchdogindex.com
+DTSTAMP:20260928T120000Z
+DTSTART;TZID=America/New_York:20261102T083000
+DTEND;TZID=America/New_York:20261102T090000
+SUMMARY:[Review] Monday plan: review last week's scorecard\, set this week's outreach and content priorities
+DESCRIPTION:Asset: n/a | File: 02-calendar/weekly-operating-rhythm.md | Owner: John | Phase 2 | 
+CATEGORIES:Review
+END:VEVENT
+BEGIN:VEVENT
+UID:998e621f44f2ee6ab155a9c8ea84d935@watchdogindex.com
+DTSTAMP:20260928T120000Z
+DTSTART;TZID=America/New_York:20261106T150000
+DTEND;TZID=America/New_York:20261106T153000
+SUMMARY:[Email] Write next Monday's Watchdog Agent Weekly issue
+DESCRIPTION:Asset: n/a | File: 05-email-sms-outreach/weekly-agent-email.md | Owner: John | Phase 2 | 
+CATEGORIES:Email
+END:VEVENT
+BEGIN:VEVENT
+UID:59b6b1276d4cf5fe75617fb9e1f81a6e@watchdogindex.com
+DTSTAMP:20260928T120000Z
+DTSTART;TZID=America/New_York:20261106T163000
+DTEND;TZID=America/New_York:20261106T170000
+SUMMARY:[Review] Weekly scorecard: fill in the KPI sheet\, decide kill or scale for each engine
+DESCRIPTION:Asset: n/a | File: 01-strategy/kpi-dashboard-template.csv | Owner: John | Phase 2 | 
+CATEGORIES:Review
+END:VEVENT
+BEGIN:VEVENT
+UID:7f3b501fbfcd2b252e52e4beaf0321bc@watchdogindex.com
+DTSTAMP:20260928T120000Z
+DTSTART;TZID=America/New_York:20261109T083000
+DTEND;TZID=America/New_York:20261109T090000
+SUMMARY:[Review] Monday plan: review last week's scorecard\, set this week's outreach and content priorities
+DESCRIPTION:Asset: n/a | File: 02-calendar/weekly-operating-rhythm.md | Owner: John | Phase 2 | 
+CATEGORIES:Review
+END:VEVENT
+BEGIN:VEVENT
+UID:44239d889cef50b3063c8c38c7c84e95@watchdogindex.com
+DTSTAMP:20260928T120000Z
+DTSTART;TZID=America/New_York:20261113T150000
+DTEND;TZID=America/New_York:20261113T153000
+SUMMARY:[Email] Write next Monday's Watchdog Agent Weekly issue
+DESCRIPTION:Asset: n/a | File: 05-email-sms-outreach/weekly-agent-email.md | Owner: John | Phase 2 | 
+CATEGORIES:Email
+END:VEVENT
+BEGIN:VEVENT
+UID:f9b32d821adef99269bd3e0dcd4fff0e@watchdogindex.com
+DTSTAMP:20260928T120000Z
+DTSTART;TZID=America/New_York:20261113T163000
+DTEND;TZID=America/New_York:20261113T170000
+SUMMARY:[Review] Weekly scorecard: fill in the KPI sheet\, decide kill or scale for each engine
+DESCRIPTION:Asset: n/a | File: 01-strategy/kpi-dashboard-template.csv | Owner: John | Phase 2 | 
+CATEGORIES:Review
+END:VEVENT
+BEGIN:VEVENT
+UID:c5e1419b8b0013f2682be504fe8812f6@watchdogindex.com
+DTSTAMP:20260928T120000Z
+DTSTART;TZID=America/New_York:20261116T083000
+DTEND;TZID=America/New_York:20261116T090000
+SUMMARY:[Review] Monday plan: review last week's scorecard\, set this week's outreach and content priorities
+DESCRIPTION:Asset: n/a | File: 02-calendar/weekly-operating-rhythm.md | Owner: John | Phase 2 | 
+CATEGORIES:Review
+END:VEVENT
+BEGIN:VEVENT
+UID:6ee7e3fd203402ce2ff41f6f9f814ead@watchdogindex.com
+DTSTAMP:20260928T120000Z
+DTSTART;TZID=America/New_York:20261120T150000
+DTEND;TZID=America/New_York:20261120T153000
+SUMMARY:[Email] Write next Monday's Watchdog Agent Weekly issue
+DESCRIPTION:Asset: n/a | File: 05-email-sms-outreach/weekly-agent-email.md | Owner: John | Phase 2 | 
+CATEGORIES:Email
+END:VEVENT
+BEGIN:VEVENT
+UID:3d9bfc4a4c5c6309ae68aa26e12398cf@watchdogindex.com
+DTSTAMP:20260928T120000Z
+DTSTART;TZID=America/New_York:20261120T163000
+DTEND;TZID=America/New_York:20261120T170000
+SUMMARY:[Review] Weekly scorecard: fill in the KPI sheet\, decide kill or scale for each engine
+DESCRIPTION:Asset: n/a | File: 01-strategy/kpi-dashboard-template.csv | Owner: John | Phase 2 | 
+CATEGORIES:Review
+END:VEVENT
+BEGIN:VEVENT
+UID:8750ebefb8ee466e5fe2a8d498221862@watchdogindex.com
+DTSTAMP:20260928T120000Z
+DTSTART;TZID=America/New_York:20261123T083000
+DTEND;TZID=America/New_York:20261123T090000
+SUMMARY:[Review] Monday plan: review last week's scorecard\, set this week's outreach and content priorities
+DESCRIPTION:Asset: n/a | File: 02-calendar/weekly-operating-rhythm.md | Owner: John | Phase 2 | 
+CATEGORIES:Review
+END:VEVENT
+BEGIN:VEVENT
+UID:3c877b360c71cad891d321af672be9cb@watchdogindex.com
+DTSTAMP:20260928T120000Z
+DTSTART;VALUE=DATE:20261126
+DTEND;VALUE=DATE:20261127
+SUMMARY:[Holiday] Thanksgiving. No posting\, no outreach
+DESCRIPTION:Asset: n/a | File: n/a | Owner: John | Phase 2 | 
+CATEGORIES:Holiday
+END:VEVENT
+BEGIN:VEVENT
+UID:756dd4ac103b8f953bcb9327ea17fed4@watchdogindex.com
+DTSTAMP:20260928T120000Z
+DTSTART;VALUE=DATE:20261127
+DTEND;VALUE=DATE:20261128
+SUMMARY:[Holiday] Day after Thanksgiving. No outreach\; pre-scheduled posts only
+DESCRIPTION:Asset: n/a | File: n/a | Owner: John | Phase 2 | 
+CATEGORIES:Holiday
+END:VEVENT
+BEGIN:VEVENT
+UID:f3828416bbf8085aad616c013f536064@watchdogindex.com
+DTSTAMP:20260928T120000Z
+DTSTART;TZID=America/New_York:20261130T083000
+DTEND;TZID=America/New_York:20261130T090000
+SUMMARY:[Review] Monday plan: review last week's scorecard\, set this week's outreach and content priorities
+DESCRIPTION:Asset: n/a | File: 02-calendar/weekly-operating-rhythm.md | Owner: John | Phase 2 | 
+CATEGORIES:Review
+END:VEVENT
+BEGIN:VEVENT
+UID:c447a8ef60a29bc78ff3c080d203bcf3@watchdogindex.com
+DTSTAMP:20260928T120000Z
+DTSTART;TZID=America/New_York:20261201T080000
+DTEND;TZID=America/New_York:20261201T083000
+SUMMARY:[Milestone] Added and omitted assessment appeal deadline at the County Board of Taxation. Content hook
+DESCRIPTION:Asset: n/a | File: 00-brief/product-and-brand-brief.md | Owner: John | Phase 2 | 
+CATEGORIES:Milestone
+END:VEVENT
+BEGIN:VEVENT
+UID:be6be7982f583eb6e5e8eb7d8a35f358@watchdogindex.com
+DTSTAMP:20260928T120000Z
+DTSTART;TZID=America/New_York:20261204T150000
+DTEND;TZID=America/New_York:20261204T153000
+SUMMARY:[Email] Write next Monday's Watchdog Agent Weekly issue
+DESCRIPTION:Asset: n/a | File: 05-email-sms-outreach/weekly-agent-email.md | Owner: John | Phase 2 | 
+CATEGORIES:Email
+END:VEVENT
+BEGIN:VEVENT
+UID:bae271fe19de2d32ec6a372fcc5c436b@watchdogindex.com
+DTSTAMP:20260928T120000Z
+DTSTART;TZID=America/New_York:20261204T163000
+DTEND;TZID=America/New_York:20261204T170000
+SUMMARY:[Review] Weekly scorecard: fill in the KPI sheet\, decide kill or scale for each engine
+DESCRIPTION:Asset: n/a | File: 01-strategy/kpi-dashboard-template.csv | Owner: John | Phase 2 | 
+CATEGORIES:Review
+END:VEVENT
+BEGIN:VEVENT
+UID:6011db07f88c97c3b624308f8761e93c@watchdogindex.com
+DTSTAMP:20260928T120000Z
+DTSTART;TZID=America/New_York:20261207T070000
+DTEND;TZID=America/New_York:20261207T073000
+SUMMARY:[Milestone] Triple Play begins (Dec 7 to 10\, Atlantic City). Phase 3 begins
+DESCRIPTION:Asset: n/a | File: 06-recruitment-referral-partners/triple-play-plan.md | Owner: John | Phase 3 | 
+CATEGORIES:Milestone
+END:VEVENT
+BEGIN:VEVENT
+UID:6063ed3dd7daa3d961d89b345a3643b7@watchdogindex.com
+DTSTAMP:20260928T120000Z
+DTSTART;TZID=America/New_York:20261207T083000
+DTEND;TZID=America/New_York:20261207T090000
+SUMMARY:[Review] Monday plan: review last week's scorecard\, set this week's outreach and content priorities
+DESCRIPTION:Asset: n/a | File: 02-calendar/weekly-operating-rhythm.md | Owner: John | Phase 3 | 
+CATEGORIES:Review
+END:VEVENT
+BEGIN:VEVENT
+UID:7d2f76533958649dce41f67c3adf1592@watchdogindex.com
+DTSTAMP:20260928T120000Z
+DTSTART;TZID=America/New_York:20261211T150000
+DTEND;TZID=America/New_York:20261211T153000
+SUMMARY:[Email] Write next Monday's Watchdog Agent Weekly issue
+DESCRIPTION:Asset: n/a | File: 05-email-sms-outreach/weekly-agent-email.md | Owner: John | Phase 3 | 
+CATEGORIES:Email
+END:VEVENT
+BEGIN:VEVENT
+UID:8040abab78aba26143624607f86efa5f@watchdogindex.com
+DTSTAMP:20260928T120000Z
+DTSTART;TZID=America/New_York:20261211T163000
+DTEND;TZID=America/New_York:20261211T170000
+SUMMARY:[Review] Weekly scorecard: fill in the KPI sheet\, decide kill or scale for each engine
+DESCRIPTION:Asset: n/a | File: 01-strategy/kpi-dashboard-template.csv | Owner: John | Phase 3 | 
+CATEGORIES:Review
+END:VEVENT
+BEGIN:VEVENT
+UID:6943cb880f9830acb6026ec5f174db1c@watchdogindex.com
+DTSTAMP:20260928T120000Z
+DTSTART;TZID=America/New_York:20261214T080000
+DTEND;TZID=America/New_York:20261214T083000
+SUMMARY:[Milestone] Year-end annual plan push begins ($590\, ten monthly payments\, expense it in 2026)
+DESCRIPTION:Asset: n/a | File: 05-email-sms-outreach/event-emails.md | Owner: John | Phase 3 | 
+CATEGORIES:Milestone
+END:VEVENT
+BEGIN:VEVENT
+UID:2b716f177f8fbc9d6b60512512fe22c0@watchdogindex.com
+DTSTAMP:20260928T120000Z
+DTSTART;TZID=America/New_York:20261214T083000
+DTEND;TZID=America/New_York:20261214T090000
+SUMMARY:[Review] Monday plan: review last week's scorecard\, set this week's outreach and content priorities
+DESCRIPTION:Asset: n/a | File: 02-calendar/weekly-operating-rhythm.md | Owner: John | Phase 3 | 
+CATEGORIES:Review
+END:VEVENT
+BEGIN:VEVENT
+UID:365c8c376d0fa1fee50db459c83e9cbe@watchdogindex.com
+DTSTAMP:20260928T120000Z
+DTSTART;TZID=America/New_York:20261218T150000
+DTEND;TZID=America/New_York:20261218T153000
+SUMMARY:[Email] Write next Monday's Watchdog Agent Weekly issue
+DESCRIPTION:Asset: n/a | File: 05-email-sms-outreach/weekly-agent-email.md | Owner: John | Phase 3 | 
+CATEGORIES:Email
+END:VEVENT
+BEGIN:VEVENT
+UID:2b442b2c9f480993a59b6e68f8ea8c96@watchdogindex.com
+DTSTAMP:20260928T120000Z
+DTSTART;TZID=America/New_York:20261218T163000
+DTEND;TZID=America/New_York:20261218T170000
+SUMMARY:[Review] Weekly scorecard: fill in the KPI sheet\, decide kill or scale for each engine
+DESCRIPTION:Asset: n/a | File: 01-strategy/kpi-dashboard-template.csv | Owner: John | Phase 3 | 
+CATEGORIES:Review
+END:VEVENT
+BEGIN:VEVENT
+UID:6b0e46fba8def31a91f50ebf33747958@watchdogindex.com
+DTSTAMP:20260928T120000Z
+DTSTART;TZID=America/New_York:20261221T083000
+DTEND;TZID=America/New_York:20261221T090000
+SUMMARY:[Review] Monday plan: review last week's scorecard\, set this week's outreach and content priorities
+DESCRIPTION:Asset: n/a | File: 02-calendar/weekly-operating-rhythm.md | Owner: John | Phase 3 | 
+CATEGORIES:Review
+END:VEVENT
+BEGIN:VEVENT
+UID:afe19ca23e40049b736479945ed38990@watchdogindex.com
+DTSTAMP:20260928T120000Z
+DTSTART;VALUE=DATE:20261224
+DTEND;VALUE=DATE:20261225
+SUMMARY:[Holiday] Christmas Eve. Pre-scheduled posts only
+DESCRIPTION:Asset: n/a | File: n/a | Owner: John | Phase 3 | 
+CATEGORIES:Holiday
+END:VEVENT
+BEGIN:VEVENT
+UID:5090a814e79f6bd93d71184792108613@watchdogindex.com
+DTSTAMP:20260928T120000Z
+DTSTART;VALUE=DATE:20261225
+DTEND;VALUE=DATE:20261226
+SUMMARY:[Holiday] Christmas. Nothing scheduled
+DESCRIPTION:Asset: n/a | File: n/a | Owner: John | Phase 3 | 
+CATEGORIES:Holiday
+END:VEVENT
+BEGIN:VEVENT
+UID:fcebe40b2506d7bcf4ad12756b771f0d@watchdogindex.com
+DTSTAMP:20260928T120000Z
+DTSTART;TZID=America/New_York:20261231T120000
+DTEND;TZID=America/New_York:20261231T123000
+SUMMARY:[Milestone] Window ends. Final scorecard\, Q1 2027 plan: appeal season (assessment notices about Feb 1\, regular appeal deadline Apr 1)
+DESCRIPTION:Asset: n/a | File: 01-strategy/kpi-dashboard-template.csv | Owner: John | Phase 3 | 
+CATEGORIES:Milestone
+END:VEVENT
+END:VCALENDAR
