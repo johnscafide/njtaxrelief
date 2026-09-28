@@ -1,0 +1,25 @@
+name: Sale year parse contract
+
+on:
+  push:
+    branches: [main]
+    paths:
+      - 'supabase/functions/workbench-derived/index.ts'
+      - 'property/tests/sale-year-parse-contract.mjs'
+      - '.github/workflows/sale-year-parse-contract.yml'
+  pull_request:
+    paths:
+      - 'supabase/functions/workbench-derived/index.ts'
+      - 'property/tests/sale-year-parse-contract.mjs'
+      - '.github/workflows/sale-year-parse-contract.yml'
+
+jobs:
+  contract:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+      - name: Verify sale year parse contract
+        run: node property/tests/sale-year-parse-contract.mjs

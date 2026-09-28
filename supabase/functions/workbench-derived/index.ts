@@ -3,6 +3,21 @@ declare const Deno: any;
 import { createClient } from 'https://esm.sh/@supabase/supabase-js@2';
 
 const ENGINE_VERSION = 'watchdog-derived-v24-njw294';
+/* Year of a recorded date. NJ MOD-IV DEED_DATE arrives as YYMMDD (230509 is
+   2023-05-09); read as a plain number it looked like the year 230509 and made
+   every years-since-sale value about -228,000. Accepts a 4-digit year,
+   YYMMDD or MMDDYY, YYYYMMDD and ISO dates; anything not a real past date is
+   null, never a guess. */
+function recordedYear(x: unknown): number | null {
+  const now = new Date().getUTCFullYear(), s = String(x ?? '').trim(), d = s.replace(/\D/g, '');
+  const valid = (y: number, m: number, day: number) => { if (y < 1800 || y > now || m < 1 || m > 12 || day < 1 || day > 31) return false; const t = new Date(Date.UTC(y, m - 1, day)); return t.getUTCFullYear() === y && t.getUTCMonth() === m - 1 && t.getUTCDate() === day; };
+  const century = (yy: number) => (yy > 40 ? 1900 : 2000) + yy; // same rule as workbench-hydrate saleYear()
+  if (/^\d{4}$/.test(d) && d === s) { const y = Number(d); return y >= 1800 && y <= now ? y : null; }
+  if (d.length === 6) { let y = century(Number(d.slice(0, 2))); if (valid(y, Number(d.slice(2, 4)), Number(d.slice(4, 6)))) return y; y = century(Number(d.slice(4, 6))); return valid(y, Number(d.slice(0, 2)), Number(d.slice(2, 4))) ? y : null; }
+  if (d.length === 8) { const y = Number(d.slice(0, 4)); if (valid(y, Number(d.slice(4, 6)), Number(d.slice(6, 8)))) return y; const y2 = Number(d.slice(4, 8)); return valid(y2, Number(d.slice(0, 2)), Number(d.slice(2, 4))) ? y2 : null; }
+  const m = s.match(/\b(1[89]\d{2}|20\d{2})\b/); if (m) { const y = Number(m[1]); return y <= now ? y : null; }
+  return null;
+}
 const CHAPTER123_PROVIDER = 'chapter123-provider-v3';
 const SR1A_SUBJECT_PROVIDER = 'sr1a-subject-provider-v1';
 const SR1A_SUMMARY_URL = 'https://njpropertytaxrelief.com/property/sr1a-ratios.json';
@@ -180,7 +195,7 @@ Deno.serve(async (req: Request) => {
     const evalId = (id: string): any => {
       if (memo.has(id)) return memo.get(id); const def: any = defMap.get(id); if (!def || stack.has(id)) return null; stack.add(id);
       const value = (dep: string) => (defMap.has(dep) ? evalId(dep) : rawValue(dep)); const cfg = def.config || {}; let v: any = null;
-      if (def.operation === 'year_delta') { const x = value(cfg.dep); let year = num(x); if (cfg.date_year && !year) { const match = String(x || '').match(/(19|20)\d{2}/); if (match) year = Number(match[0]); } if (year && year > 1600) v = new Date().getUTCFullYear() - year; }
+      if (def.operation === 'year_delta') { const x = value(cfg.dep); const year = cfg.date_year ? recordedYear(x) : num(x); if (year && year > 1600) v = new Date().getUTCFullYear() - year; }
       else if (def.operation === 'ratio') { const numerator = num(value(cfg.num)), denominator = num(value(cfg.den)); if (numerator != null && denominator != null) { const denominatorFloor = num(cfg.den_min); const effectiveDenominator = denominatorFloor == null ? denominator : Math.max(denominator, denominatorFloor); if (effectiveDenominator === 0) v = cfg.zero_as_100 && numerator === 0 ? 100 : null; else v = round(numerator / effectiveDenominator * Number(cfg.scale ?? 1), Number(cfg.precision ?? 3)); } }
       else if (def.operation === 'completeness') { const requirements: any[] = Array.isArray(cfg.requirements) ? cfg.requirements : (def.dependencies || []); if (requirements.length) { const ok = (q: any) => { if (cfg.mode === 'checked' && typeof q === 'string') return defMap.has(q) ? present(value(q)) : checked(q); if (typeof q === 'string') return present(value(q)); if (q?.all) return q.all.every((x: string) => present(value(x))); if (q?.ratio) { const a = num(value(q.ratio[0])), z = num(value(q.ratio[1])); return a != null && z != null && z !== 0; } return false; }; v = Math.round(requirements.filter(ok).length / requirements.length * 100); } }
       else if (def.operation === 'inverse') { const x = num(value(cfg.dep)); if (x != null) v = clamp(100 - x); }

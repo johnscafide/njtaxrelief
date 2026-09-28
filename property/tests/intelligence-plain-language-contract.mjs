@@ -25,6 +25,7 @@ assert.match(s.text, /main reason: the yearly tax bill is 3\.90% of the assessed
 assert.doesNotMatch(s.text, /core public records/, 'record-coverage checks are never the main reason');
 assert.match(s.text, /could not check assessment vs\. a recent sale/);
 assert.match(s.text, /Confidence is low \(49%\), with 30% of the evidence/);
+assert.match(P.missing({ signal_id: 'watchdog.assessment_to_sale_ratio_review_window', reason: 'guard_failed', normalization: { detail: { reason: 'Recorded sale age is missing, future-dated, or outside the current eight-year professional review window', guard_value: 14 } } }).reason, /about 14 years ago, older than the eight-year window/);
 assert.equal(P.order(finding)[0].signal_id, 'watchdog.tax_to_assessment_rate');
 assert.doesNotMatch(P.signal({ signal_id: 'watchdog.made_up_signal', value: 1 }).label, /watchdog\./, 'unknown ids still read as words');
 // Every signal Intelligence emits today has a plain label.
