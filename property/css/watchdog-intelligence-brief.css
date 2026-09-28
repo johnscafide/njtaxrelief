@@ -47,3 +47,6 @@
 @media (forced-colors:active){
   .dwa-panel .wd-intelligence-brand-word{color:CanvasText;-webkit-text-fill-color:CanvasText;background:none}
 }
+.dwa-brief-status{display:flex;flex-wrap:wrap;align-items:center;gap:4px;margin:-2px 0 8px;color:#5b6b7b;font-size:13px}
+.dwa-brief-status button{display:inline-flex;align-items:center;min-height:44px;padding:0 6px;border:0;background:none;color:#078486;font:700 13px/1 "Plus Jakarta Sans",Inter,system-ui,sans-serif;cursor:pointer;text-decoration:underline;text-underline-offset:3px}
+.dwa-brief-status button:focus-visible{outline:3px solid #7cc4c6;outline-offset:2px}

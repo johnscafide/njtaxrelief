@@ -298,8 +298,8 @@
       "tracking": "source_snapshot"
     },
     "workbench-derived": {
-      "version": 45,
-      "sha256": "cc118d9f41a4dcc2b7b57a23a3d7e7c77d4f9538f4d06d1b67a2680174b68b6d",
+      "version": 47,
+      "sha256": "43ed77f836e1acf733f8cfa8317047291c0016ef7a3787f06c36cbca2156351c",
       "verify_jwt": false,
       "tracking": "source_snapshot"
     },
@@ -484,14 +484,14 @@
       "tracking": "source_snapshot"
     },
     "intelligence-analyst": {
-      "version": 21,
-      "sha256": "d5138e523fb28c31539b87a39cf1e688b2f3980c35662ac2232f476dec4456a6",
+      "version": 22,
+      "sha256": "dcd20625c7c1215d460fe76d905b764f68ea3f69c8976c99d2842e5f640c6b21",
       "verify_jwt": true,
       "tracking": "source_snapshot"
     },
     "intelligence-brief": {
-      "version": 1,
-      "sha256": "4de2b287ad43c2a9a4cd56ec6ee6db89ec2d10ff9047bbdebc16a184205f364a",
+      "version": 3,
+      "sha256": "d894537d84828a840267d07507d32b12c0cd9d5ee8e506530353bdb68af2689b",
       "verify_jwt": true,
       "tracking": "source_snapshot"
     },

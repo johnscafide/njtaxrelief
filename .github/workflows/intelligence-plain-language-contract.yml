@@ -12,6 +12,7 @@ on:
       - 'supabase/functions/intelligence-analyst/**'
       - 'property/intelligence/index.html'
       - 'property/css/watchdog-intelligence-brief.css'
+      - 'supabase/migrations/20260928190000_intelligence_saved_briefs.sql'
       - 'property/tests/intelligence-plain-language-contract.mjs'
       - '.github/workflows/intelligence-plain-language-contract.yml'
   pull_request:
@@ -24,6 +25,7 @@ on:
       - 'supabase/functions/intelligence-analyst/**'
       - 'property/intelligence/index.html'
       - 'property/css/watchdog-intelligence-brief.css'
+      - 'supabase/migrations/20260928190000_intelligence_saved_briefs.sql'
       - 'property/tests/intelligence-plain-language-contract.mjs'
       - '.github/workflows/intelligence-plain-language-contract.yml'
 

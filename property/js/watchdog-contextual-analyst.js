@@ -63,7 +63,7 @@ function evidenceWorkflowHtml(toolName){
 /* Briefing layout: when the Analyst returns property cards, lead with the
    written brief, then "Needs your attention" cards in plain English, and fold
    the evidence lists (still read by Voice) into "Evidence and sources". */
-var BRIEF_CSS='/property/css/watchdog-intelligence-brief.css?v=20260928a';
+var BRIEF_CSS='/property/css/watchdog-intelligence-brief.css?v=20260928b';
 function ensureBriefCss(){
   if(document.querySelector('link[data-dwa-brief-css]'))return;
   var link=document.createElement('link');link.rel='stylesheet';link.href=BRIEF_CSS;link.setAttribute('data-dwa-brief-css','true');document.head.appendChild(link);
@@ -165,13 +165,14 @@ async function ask(prompt,options){
     var sessionResult=await client.auth.getSession();
     var accessToken=sessionResult&&sessionResult.data&&sessionResult.data.session&&sessionResult.data.session.access_token?String(sessionResult.data.session.access_token):'';
     if(!accessToken)throw new Error('Sign in required');
-    var response=await fetch('/api/watchdog-intelligence-analyst',{method:'POST',headers:{Authorization:'Bearer '+accessToken,'Content-Type':'application/json'},body:JSON.stringify({prompt:prompt,session_id:state.sessionId,context:state.context||{},command_confirmation:options.commandConfirmation||null})});
+    var response=await fetch('/api/watchdog-intelligence-analyst',{method:'POST',headers:{Authorization:'Bearer '+accessToken,'Content-Type':'application/json'},body:JSON.stringify({prompt:prompt,session_id:state.sessionId,context:options.saveBrief?Object.assign({},state.context||{},{save_brief:true}):(state.context||{}),command_confirmation:options.commandConfirmation||null})});
     var data=await response.json().catch(function(){return{};});
     if(response.status===409&&data&&data.confirmation){showCommandGate(prompt,data.confirmation);if(input){input.value='';input.focus();}return;}
     if(response.status===403&&data&&data.command_policy&&data.command_policy.class==='prohibited'){showBlockedCommand(data);if(input){input.value='';input.focus();}return;}
     if(!response.ok)throw new Error(data&&data.error?String(data.error):'Watchdog Analyst request failed');
     if(data.session_id)state.sessionId=String(data.session_id);
-    appendMessage('assistant',responseHtml(data)+commandResultNote(options.commandConfirmation||''));
+    var answered=appendMessage('assistant',responseHtml(data)+commandResultNote(options.commandConfirmation||''));
+    if(options.replace&&answered&&options.replace.parentNode)options.replace.remove();
     if(input){input.value='';input.focus();}
     window.dispatchEvent(new CustomEvent('watchdog:contextual-analyst-response',{detail:{surface:state.context&&state.context.surface||'unknown',session_id:state.sessionId||null,command_confirmation:options.commandConfirmation||null}}));
   }catch(error){
@@ -237,5 +238,7 @@ function open(options){
   window.dispatchEvent(new CustomEvent('watchdog:contextual-analyst-open',{detail:{surface:surface,pams_pins:pins.slice(0,5)}}));
   return panel;
 }
-window.WatchdogContextualAnalyst={open:open,close:close,ask:ask,contract:'contextual-analyst-v4-command-gates'};
+/* Show a stored governed answer (the saved Intelligence brief) without a new request. */
+function renderStored(payload){return appendMessage('assistant',responseHtml(payload||{}));}
+window.WatchdogContextualAnalyst={open:open,close:close,ask:ask,renderStored:renderStored,contract:'contextual-analyst-v4-command-gates'};
 })();

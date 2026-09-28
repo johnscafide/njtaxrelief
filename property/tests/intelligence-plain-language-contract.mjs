@@ -92,4 +92,17 @@ assert.equal(P.signal({ signal_id: RW, source_key: RANGE, value: 0 }).value, 'Ba
 assert.match(P.missing({ signal_id: RW, reason: 'missing' }).reason, /\$1 deeds are not used/);
 for (const src of [analystSrv, brief]) assert.match(src, /const RANGE_KEY="watchdog\.assessment_above_chapter123_range";/);
 
+// Instant brief: saved brief first, background refresh when stale, only the server writes it.
+assert.match(consoleSrc, /from\('intelligence_saved_briefs'\)\.select\('payload,property_count,created_at'\)\.maybeSingle\(\)/);
+assert.match(consoleSrc, /briefNode=window\.WatchdogContextualAnalyst\.renderStored\(saved\.payload\);/);
+assert.match(consoleSrc, /BRIEF_STALE_MS=6\*60\*60\*1000/);
+assert.match(consoleSrc, /saveBrief:true,replace:old\|\|null/);
+assert.doesNotMatch(consoleSrc, /sessionStorage/, 'no per-tab HTML cache');
+assert.match(analystJs, /context:options\.saveBrief\?Object\.assign\(\{\},state\.context\|\|\{\},\{save_brief:true\}\)/);
+assert.match(analystSrv, /if\(context\.save_brief===true&&routed\.tool==="run_intelligence_model"\)\{const saved=await admin\.from\("intelligence_saved_briefs"\)\.upsert\(\{user_id:user\.id,/);
+const savedMigration = fs.readFileSync('supabase/migrations/20260928190000_intelligence_saved_briefs.sql', 'utf8');
+assert.match(savedMigration, /enable row level security/);
+assert.match(savedMigration, /using \(\(select auth\.uid\(\)\) = user_id\)/);
+assert.match(savedMigration, /revoke insert, update, delete on public\.intelligence_saved_briefs from authenticated;/);
+
 console.log('Intelligence plain-language contract passed.');
