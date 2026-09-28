@@ -6,12 +6,14 @@ on:
     paths:
       - 'property/js/watchdog-plain-language.js'
       - 'property/js/watchdog-why.js'
+      - 'supabase/functions/intelligence-brief/**'
       - 'property/tests/intelligence-plain-language-contract.mjs'
       - '.github/workflows/intelligence-plain-language-contract.yml'
   pull_request:
     paths:
       - 'property/js/watchdog-plain-language.js'
       - 'property/js/watchdog-why.js'
+      - 'supabase/functions/intelligence-brief/**'
       - 'property/tests/intelligence-plain-language-contract.mjs'
       - '.github/workflows/intelligence-plain-language-contract.yml'
 

@@ -23,3 +23,4 @@ body.wdwhy-open{overflow:hidden}.wdwhy-backdrop{position:fixed;inset:0;z-index:2
 .wdwhy-tech[open]{padding-bottom:12px}
 .wdwhy-why{margin:0 0 8px;padding-left:18px;color:#16242b;font-size:13px}
 @media(max-width:520px){.wdwhy-fact{flex-direction:column}.wdwhy-fact-meta{justify-items:start;text-align:left}}
+.wdwhy-brief-note{display:block;margin-top:8px;color:#a9bdd1;font-size:12px}

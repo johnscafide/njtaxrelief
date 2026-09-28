@@ -147,7 +147,7 @@ function render(data,context){
   const sum=window.WatchdogPlain?window.WatchdogPlain.summary(f):{headline:'Review finding',text:'',priority:'',score:Math.round(Number(f.score||0)),confidence:Math.round(Number(f.confidence||0)),coverage:Math.round(Number(f.evidence_coverage||0)),confidenceLevel:''};
   const ordered=window.WatchdogPlain?.order?window.WatchdogPlain.order(f):evidence;
   host.innerHTML=`
-    <section class="wdwhy-plain"><span class="wdwhy-plain-kicker">The short version</span><h3>${esc(sum.headline)}</h3>${sum.text?`<p>${esc(sum.text)}</p>`:''}
+    <section class="wdwhy-plain"><span class="wdwhy-plain-kicker">The short version</span><h3>${esc(sum.headline)}</h3>${sum.text?`<p id="wdwhy-brief">${esc(sum.text)}</p>`:''}<small class="wdwhy-brief-note" id="wdwhy-brief-note" hidden></small>
       <div class="wdwhy-plain-chips"><span><b>${esc(sum.priority||'')}</b> priority · ${sum.score}/100</span><span><b>${esc(sum.confidenceLevel?sum.confidenceLevel.charAt(0).toUpperCase()+sum.confidenceLevel.slice(1):'')}</b> confidence · ${sum.confidence}%</span><span>${sum.coverage}% of evidence checked</span></div>
     </section>
     <div class="wdwhy-context">${[ctx.municipality,ctx.county?`${ctx.county} County`:null,ctx.property_class?`Class ${ctx.property_class}`:null].filter(Boolean).map(x=>`<span>${esc(x)}</span>`).join('')}</div>
@@ -163,6 +163,19 @@ function render(data,context){
     </details>
     <div class="wdwhy-footer"><a href="/data-workbench">Open Data Workbench</a><button type="button" data-wdwhy-close>Close</button></div>`;
   $('[data-wdwhy-close]',host)?.addEventListener('click',close);
+}
+
+/* Professional brief: the same finding, written the way an experienced NJ
+   property professional would brief a client. Built server-side from the
+   user's own saved finding; the rule-based short version stays if it fails. */
+async function loadBrief(sb,pin){
+  try{
+    const r=await sb.functions.invoke('intelligence-brief',{body:{pams_pin:pin}});
+    const text=String(r?.data?.brief||'').trim(),p=document.getElementById('wdwhy-brief'),note=document.getElementById('wdwhy-brief-note');
+    if(r.error||!text||!p)return;
+    p.textContent=text;
+    if(note){note.textContent='Written by Watchdog Intelligence using only the checked facts below.';note.hidden=false;}
+  }catch(_){}
 }
 
 async function open(options){
@@ -182,6 +195,7 @@ async function open(options){
     const finding=Array.isArray(r.data?.findings)?r.data.findings[0]:null;
     const [context]=await Promise.all([propertyContext(sb,pin,finding?.property_context||{}),ensurePlain()]);
     render(r.data,context);
+    if(finding)loadBrief(sb,pin);
     window.dispatchEvent(new CustomEvent('watchdog:why-opened',{detail:{surface:options?.surface||'unknown',pams_pin:pin,model_key:r.data?.model?.key||'assessment_anomaly'}}));
   }catch(e){renderError(e?.message||'Watchdog Intelligence could not complete this review.',Number(e?.status||0));}
 }

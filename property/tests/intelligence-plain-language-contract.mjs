@@ -37,4 +37,13 @@ assert.match(why, /The short version/);
 assert.match(why, /<details class="wdwhy-tech"><summary>Technical details<\/summary>/, 'signal ids and lineage stay available, folded away');
 assert.match(why, /not a valuation, legal opinion or guaranteed outcome/);
 
+// Professional brief: server-loaded finding, template always, AI only as a grounded rewrite.
+const brief = fs.readFileSync('supabase/functions/intelligence-brief/index.ts', 'utf8');
+assert.match(brief, /\.from\("intelligence_findings"\)[^;]*\.eq\("user_id", user\.id\)\.eq\("pams_pin", pin\)/, 'the brief loads the caller\'s own finding server-side');
+assert.match(brief, /const template = templateBrief\(f\);/);
+assert.match(brief, /numbersIn\(candidate\)\.every\(\(n\) => allowed\.has\(n\)\)/, 'every AI number must already be a verified fact');
+assert.match(brief, /should appeal/, 'advice and outcome language is rejected');
+assert.match(brief, /const brief = useAi \? ai\.text! : template;/, 'falls back to the template brief');
+assert.match(why, /loadBrief\(sb,pin\)/);
+
 console.log('Intelligence plain-language contract passed.');
