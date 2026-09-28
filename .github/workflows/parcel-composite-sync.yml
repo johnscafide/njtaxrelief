@@ -1,0 +1,95 @@
+name: Statewide parcel sync
+
+# Copies the NJ Office of GIS Parcels and MOD-IV Composite into
+# property_lookups so town comparisons cover the whole state.
+# Manual only for now: run one county first, check it, then run statewide.
+on:
+  workflow_dispatch:
+    inputs:
+      county:
+        description: 'One county (e.g. HUDSON). Leave blank for the whole state.'
+        required: false
+        default: ''
+      max_pages:
+        description: 'Stop after this many pages of 1,000 (0 = no limit)'
+        required: false
+        default: '0'
+      dry_run:
+        description: 'Read from the state service only; write nothing'
+        type: boolean
+        required: false
+        default: false
+      resume:
+        description: 'Continue the latest unfinished run for this scope'
+        type: boolean
+        required: false
+        default: true
+  pull_request:
+    paths:
+      - 'property/scripts/sync_parcel_composite.py'
+      - 'supabase/migrations/20260928200000_statewide_parcel_sync.sql'
+      - '.github/workflows/parcel-composite-sync.yml'
+
+concurrency:
+  group: parcel-composite-sync
+  cancel-in-progress: false
+
+permissions:
+  contents: read
+
+jobs:
+  self-test:
+    if: github.event_name == 'pull_request'
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - run: python -m pip install --disable-pip-version-check requests
+      - name: Loader self-test (no network writes)
+        run: python property/scripts/sync_parcel_composite.py --self-test
+      - name: Migration keeps owner data out and writes service-only
+        run: |
+          python - <<'PY'
+          sql = open('supabase/migrations/20260928200000_statewide_parcel_sync.sql').read()
+          assert 'owner_name' not in sql.lower() and 'st_address' not in sql.lower(), 'no owner columns'
+          assert 'grant execute on function public.sync_parcel_batch(jsonb) to service_role;' in sql
+          assert 'revoke all on function public.sync_parcel_batch(jsonb) from public, anon, authenticated;' in sql
+          assert 'lookup_count = ' not in sql, 'sync never overwrites lookup_count'
+          assert 'history = ' not in sql and 'effective_rate = ' not in sql
+          print('migration contract ok')
+          PY
+
+  sync:
+    if: github.event_name == 'workflow_dispatch'
+    runs-on: ubuntu-latest
+    timeout-minutes: 350
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - run: python -m pip install --disable-pip-version-check requests
+      - run: python property/scripts/sync_parcel_composite.py --self-test
+      - name: Sync parcels
+        env:
+          SUPABASE_URL: https://uvkvaxljhhngydvlrzom.supabase.co
+          SUPABASE_SERVICE_ROLE_KEY: ${{ secrets.SUPABASE_SERVICE_ROLE_KEY }}
+          COUNTY: ${{ inputs.county }}
+          MAX_PAGES: ${{ inputs.max_pages }}
+          DRY_RUN: ${{ inputs.dry_run }}
+          RESUME: ${{ inputs.resume }}
+        run: |
+          set -euo pipefail
+          args=(--rps 3 --max-pages "${MAX_PAGES:-0}" --summary parcel-sync-summary.json)
+          if [ -n "${COUNTY}" ]; then args+=(--county "${COUNTY}"); fi
+          if [ "${DRY_RUN}" = "true" ]; then args+=(--dry-run); fi
+          if [ "${RESUME}" = "true" ]; then args+=(--resume); fi
+          python property/scripts/sync_parcel_composite.py "${args[@]}"
+      - name: Run summary
+        if: always()
+        run: |
+          if [ -f parcel-sync-summary.json ]; then
+            { echo '### Statewide parcel sync'; echo '```json'; cat parcel-sync-summary.json; echo '```'; } >> "$GITHUB_STEP_SUMMARY"
+          fi
