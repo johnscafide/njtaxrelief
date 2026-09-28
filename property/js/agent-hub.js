@@ -34,6 +34,7 @@
     'transactions':['/transaction/','/transaction/','Transactions','deals'],
     'listing-prep':['/agent/listing-prep','/agent/listing-prep/','Listing prep','deals'],
     'buyers':['/agent/buyers','/agent/buyers/','Buyer shortlists','deals'],
+    'true-cost':['/true-cost','/api/watchdog-true-cost','True cost card','deals'],
     'open-house':['/agent/open-house','/agent/open-house/','Open houses','deals'],
     'training':['/agent/training','/agent/training/','Training & how-tos','home']
   };
@@ -48,7 +49,9 @@
   var current={section:'home',tool:null};
 
   function esc(v){return String(v==null?'':v).replace(/[&<>"']/g,function(c){return{'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c];});}
-  function path(key){var t=TOOLS[key];return t?(cleanHost?t[0]:t[1]):'/';}
+  /* The true cost card carries the agent's page name so their contact card shows on it. */
+  var agentSlug=null;
+  function path(key){var t=TOOLS[key];if(!t)return '/';var p=cleanHost?t[0]:t[1];return key==='true-cost'&&agentSlug?p+'?agent='+encodeURIComponent(agentSlug):p;}
 
   /* Which tool does a link point at? Accepts clean, physical and legacy /property/ paths. */
   function normalize(p){
@@ -197,6 +200,8 @@
     var d=document.getElementById('adh-date');if(d)d.textContent=new Date().toLocaleDateString('en-US',{weekday:'long',month:'long',day:'numeric'});
   }
   function portal(slug){
+    agentSlug=slug||null;
+    app.querySelectorAll('a[data-adh-tool="true-cost"]').forEach(function(a){a.setAttribute('href',path('true-cost'));});
     var body=document.getElementById('adh-portal-body');if(!body)return;
     var profileHref=cleanHost?'/account/professional-profile':'/account/professional-profile/';
     if(!slug){

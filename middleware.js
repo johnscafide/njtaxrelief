@@ -50,6 +50,7 @@ if(url.pathname===INDEXNOW_KEY_PATH)return rewriteWatchdogSystemFile(request,'/a
 if(url.pathname==='/robots.txt')return rewriteWatchdogSystemFile(request,'/api/watchdog-index-robots');
 if(url.pathname==='/sitemap.xml')return rewriteWatchdogSystemFile(request,'/api/watchdog-index-sitemap');
 if(TYPED_SITEMAP_FILE.test(url.pathname))return next();
+if(url.pathname==='/true-cost'||url.pathname==='/true-cost/'){const destination=new URL('/api/watchdog-true-cost',request.url);destination.search=url.search;destination.searchParams.delete('q');return rewrite(destination);}
 if(url.pathname==='/alerts/confirm'||url.pathname==='/alerts/unsubscribe'){const destination=new URL('/api/watchdog-property-alerts',request.url);destination.search=url.search;destination.searchParams.set('action',url.pathname.slice('/alerts/'.length));return rewrite(destination);}
 if(PROPERTY_PAGE_PATH.test(url.pathname)){const destination=new URL('/api/watchdog-property-page',request.url);destination.searchParams.set('path',url.pathname);return rewrite(destination);}
 if(ROOT_COMPAT_REDIRECTS.has(url.pathname))return redirectCanonical(request,url,ROOT_COMPAT_REDIRECTS.get(url.pathname));
