@@ -56,6 +56,10 @@
 
   function missing(e){
     var s=signal(e),detail=e&&e.normalization&&e.normalization.detail&&e.normalization.detail.reason;
+    var saleYears=num(e&&e.normalization&&e.normalization.detail&&e.normalization.detail.guard_value);
+    if(detail&&/sale age/i.test(detail)&&saleYears!=null&&saleYears>8&&saleYears<400){
+      return {id:s.id,label:s.label,reason:'The last recorded sale was about '+Math.round(saleYears)+' years ago, older than the eight-year window Watchdog uses, so it was not used here.'};
+    }
     var noSaleDate=detail&&/sale age is missing/i.test(detail);
     var reason=noSaleDate?(s.id==='watchdog.sale_recency_confidence'?'No usable sale date is on record, so Watchdog could not tell how recent the last sale was.':'No usable sale date is on record for this property, so Watchdog could not compare the assessment with a recent sale.'):(MISSING[String(e&&e.reason||'')]||'This evidence is not available right now.');
     return {id:s.id,label:s.label,reason:reason};
