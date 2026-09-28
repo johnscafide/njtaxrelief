@@ -73,4 +73,21 @@ must(worker.includes('crm_candidate_link_read_failed') && worker.includes('crm_c
 must(/if\(!written\)\{await setState\(admin,ctx\.id,\{detail_status:alreadyVerified\?"enriched":"no_match"/.test(worker), 'A contact whose matches were all reviewed must not be left as a pending candidate.');
 must(worker.includes('crm_resolution_error_state_failed'), 'A failure to record an error must be logged, not swallowed.');
 
+// Parcel matching: NJOGIS ZIP5 is the owner's mailing ZIP, so it must never decide which parcel a CRM address is.
+const workerCode = worker.replace(/\/\/[^\n]*/g, '');
+must(!/ZIP5/.test(workerCode), 'The resolution worker must not match or filter parcels on NJOGIS ZIP5 (owner mailing ZIP).');
+must(/admin\.rpc\("integration_find_crm_parcels"/.test(worker) && worker.includes('crm_parcel_match_failed'), 'The worker must match through integration_find_crm_parcels and fail loudly when it errors.');
+must(/function parsedAddress\(/.test(worker), 'The worker must store the street, town, state and ZIP split out of one-line CRM addresses.');
+must(worker.includes('status:"candidate"') && !worker.includes('status:"verified"'), 'Local parcel matches stay candidates for review.');
+const localMatch = read('supabase/migrations/20260928240000_crm_parcel_match_local.sql');
+must(/function public\.integration_find_crm_parcels\([\s\S]*?security definer[\s\S]*?set search_path = public, pg_temp/.test(localMatch), 'integration_find_crm_parcels must be security definer with a fixed search_path.');
+must(localMatch.includes('revoke all on function public.integration_find_crm_parcels(text, text, text, text) from public, anon, authenticated;') && localMatch.includes('grant execute on function public.integration_find_crm_parcels(text, text, text, text) to service_role;'), 'integration_find_crm_parcels is for the service role only.');
+must(localMatch.includes('alter table public.nj_zip_districts enable row level security;') && localMatch.includes('revoke all on table public.nj_zip_districts from public, anon, authenticated;'), 'The ZIP to town table stays server-only.');
+must(/create index if not exists property_lookups_norm_street_idx\s+on public\.property_lookups \(public\.watchdog_norm_street\(address\)\)/.test(localMatch), 'Parcel address lookups need the normalized-street index.');
+must(/function public\.watchdog_norm_street\(p text\)[\s\S]*?immutable/.test(localMatch), 'Street normalization must be immutable so it can back an index.');
+must(/v_statewide = 1 and not v_zip_known/.test(localMatch), 'A contact with no town evidence only matches an address that is unique in New Jersey, and never against a known ZIP.');
+must(!/owner_name|mailing/i.test(localMatch.replace(/--[^\n]*/g, '')), 'Parcel matching must not use owner names or owner mailing addresses.');
+const page2 = read('property/integrations/index.html');
+must(!page2.includes('matches exactly one New Jersey parcel') && page2.includes('in the same town'), 'The "How matching works" copy must describe town-based matching.');
+
 console.log('Integration Center board and CRM property contract passed');
