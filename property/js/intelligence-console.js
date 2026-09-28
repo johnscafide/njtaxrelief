@@ -29,6 +29,7 @@ function startBrief(pins){
   var chat=q('#dwa-chat');if(!chat)return;
   var cached=readBrief();
   if(cached){chat.insertAdjacentHTML('beforeend',cached.html);setTimeout(syncRail,120);return;}
+  // content-architecture: dynamic — loading line carries the live saved-property count.
   chat.insertAdjacentHTML('beforeend','<div class="dwa-msg assistant dwa-brief-loading" data-wi-brief-loading><p>Reading your '+pins.length+' saved propert'+(pins.length===1?'y':'ies')+' and writing today\u2019s brief\u2026</p></div>');
   var done=function(){var l=q('[data-wi-brief-loading]');if(l)l.remove();saveBrief();window.removeEventListener('watchdog:contextual-analyst-response',done);};
   window.addEventListener('watchdog:contextual-analyst-response',done);
