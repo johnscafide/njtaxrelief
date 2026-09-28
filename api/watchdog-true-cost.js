@@ -235,7 +235,11 @@ function money(v) { return H.money(v) || '$0'; }
 function renderCard(row, inp, agent) {
   const v = H.view(row);
   const f = townFacts(row, v);
-  const tax = Number(row.last_year_tax) > 0 ? Number(row.last_year_tax) : (row.assessed_value && f.rate ? row.assessed_value * f.rate / 100 : 0);
+  const ts = H.taxStats(row, H.money);
+  // Monthly cost uses the newest year: an older state-list bill is moved to the
+  // newest published rate when its year is known.
+  const bill = Number(row.last_year_tax) > 0 ? Number(row.last_year_tax) : (row.assessed_value && f.rate ? row.assessed_value * f.rate / 100 : 0);
+  const tax = ts.by.current && !ts.by.current.generalRateOnly ? ts.by.current.amount : bill;
   const mc = monthlyCost({ ...inp, tax });
   const check = priceCheck({ price: inp.price, assessed: Number(row.assessed_value) || 0, tax, ratio: f.ratio, upper: f.upper, rate: f.rate });
   const verdict = verdictText(check, v.town);
@@ -270,7 +274,8 @@ function renderCard(row, inp, agent) {
     <section class="wdp-card wdp-card--tax" aria-labelledby="tc-tax-h">
       <div class="wdp-card-head"><h2 id="tc-tax-h">Property tax</h2><a class="wdp-card-link" href="${esc(v.path)}">Full property page</a></div>
       <div class="wdp-stats">
-        <div class="wdp-stat is-lead"><b>${esc(money(tax))}</b><span>Latest annual tax</span></div>
+        <div class="wdp-stat is-lead"><b>${esc(money(bill))}</b><span>${esc(ts.label)}</span></div>
+        ${ts.extra}
         <div class="wdp-stat"><b>${esc(H.money(row.assessed_value) || 'n/a')}</b><span>Assessed value</span></div>
         ${f.rate ? `<div class="wdp-stat"><b>$${f.rate.toFixed(3)}</b><span>${f.rateYear} rate per $100</span></div>` : ''}
       </div>
@@ -493,3 +498,4 @@ module.exports.fetchAgent = fetchAgent;
 module.exports.agentCard = agentCard;
 module.exports.shell = shell;
 module.exports.TC_STYLE = TC_STYLE;
+module.exports.rateChange = rateChange;
