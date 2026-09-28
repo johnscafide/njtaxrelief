@@ -2,8 +2,11 @@ name: Statewide parcel sync
 
 # Copies the NJ Office of GIS Parcels and MOD-IV Composite into
 # property_lookups so town comparisons cover the whole state.
-# Manual only for now: run one county first, check it, then run statewide.
+# Runs monthly (3rd of the month) as a full statewide refresh so new sales and
+# assessment changes flow in; can also be run by hand for one county.
 on:
+  schedule:
+    - cron: '17 7 3 * *'
   workflow_dispatch:
     inputs:
       county:
@@ -31,7 +34,8 @@ on:
       - '.github/workflows/parcel-composite-sync.yml'
 
 concurrency:
-  group: parcel-composite-sync
+  # One loader at a time; PR self-tests never wait behind a long sync.
+  group: parcel-composite-sync-${{ github.event_name == 'pull_request' && github.ref || 'loader' }}
   cancel-in-progress: false
 
 permissions:
@@ -62,7 +66,7 @@ jobs:
           PY
 
   sync:
-    if: github.event_name == 'workflow_dispatch'
+    if: github.event_name == 'workflow_dispatch' || github.event_name == 'schedule'
     runs-on: ubuntu-latest
     timeout-minutes: 350
     steps:
