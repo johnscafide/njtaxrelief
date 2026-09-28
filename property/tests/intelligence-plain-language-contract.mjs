@@ -46,4 +46,9 @@ assert.match(brief, /should appeal/, 'advice and outcome language is rejected');
 assert.match(brief, /const brief = useAi \? ai\.text! : template;/, 'falls back to the template brief');
 assert.match(why, /loadBrief\(sb,pin\)/);
 
+// The Intelligence chat sends the properties it is asked about (selected one, or the user's saved properties).
+const consoleJs = fs.readFileSync('property/js/intelligence-console.js', 'utf8');
+assert.match(consoleJs, /var pins=requestedPin\?\[requestedPin\]:await savedPins\(\);/);
+assert.match(consoleJs, /WatchdogContextualAnalyst\.open\(\{surface:'intelligence_console',pams_pins:pins,/, 'pins go where the analyst panel reads them');
+
 console.log('Intelligence plain-language contract passed.');
