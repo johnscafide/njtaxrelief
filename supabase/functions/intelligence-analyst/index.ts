@@ -1,7 +1,7 @@
 import "jsr:@supabase/functions-js/edge-runtime.d.ts";
 import { createClient } from "npm:@supabase/supabase-js@2.95.0";
 
-const ANALYST_VERSION="watchdog-analyst-v6-addon-entitlement";
+const ANALYST_VERSION="watchdog-analyst-v7-briefing";
 const TOOL_VERSION="watchdog-analyst-tools-v4-conflict-history";
 const INTELLIGENCE_ADDON_FEATURE="watchdog_intelligence";
 const ORIGINS=new Set(["https://njpropertytaxrelief.com","https://www.njpropertytaxrelief.com","https://watchdogindex.com","https://www.watchdogindex.com","http://localhost:3000","http://127.0.0.1:3000"]);
@@ -91,6 +91,59 @@ function addSemanticFacts(base:O,data:O,maxPerProperty=6){
   if(conflicts.length)base.caveats=uniq([...(Array.isArray(base.caveats)?base.caveats:[]),"One or more governed markers had competing observations. Watchdog used the canonical value selected by its published source-authority policy and preserved the alternatives."]);
   base.semantic_context=semanticLineage(data);return base;
 }
+/* Plain English for the briefing layout. Labels match
+   property/js/watchdog-plain-language.js and intelligence-brief. */
+const PLAIN:Record<string,{label:string,value:(v:number)=>string}>={
+  "watchdog.tax_to_assessment_rate":{label:"tax bill vs. assessed value",value:(v)=>`the yearly tax bill is ${v.toFixed(2)}% of the assessed value`},
+  "watchdog.assessment_to_sale_ratio":{label:"assessment vs. last sale price",value:(v)=>`it is assessed at ${Math.round(v<=5?v*100:v)}% of the price it last sold for`},
+  "watchdog.assessment_to_sale_ratio_review_window":{label:"assessment vs. a recent sale",value:(v)=>`it is assessed at ${Math.round(v<=5?v*100:v)}% of a sale within the last eight years`},
+  "watchdog.sale_recency_confidence":{label:"how recent the last sale is",value:(v)=>`the last sale scores ${Math.round(v)} out of 100 for recency`},
+  "watchdog.closing_exception_priority":{label:"closing items to review",value:(v)=>`closing items score ${Math.round(v)} out of 100 for priority`},
+  "watchdog.due_diligence_signal_count":{label:"due-diligence flags",value:(v)=>`${Math.round(v)} due-diligence ${v===1?"flag is":"flags are"} on record`},
+  "watchdog.permit_closure_confidence":{label:"permits closed out",value:(v)=>`${Math.round(v)}% of permits on record look closed`},
+  "watchdog.title_constraint_stack":{label:"land-use restrictions",value:(v)=>`${Math.round(v)} land-use ${v===1?"restriction is":"restrictions are"} on record`},
+  "event.change_count_30d":{label:"recent record changes",value:(v)=>`${Math.round(v)} record ${v===1?"change":"changes"} in the last 30 days`},
+};
+const META_SIGNALS=new Set(["watchdog.source_authority_coverage","watchdog.property_story_confidence","watchdog.transaction_diligence_completion"]);
+const plainLabel=(id:string)=>PLAIN[id]?.label||clean(id,140).replace(/^(watchdog|event)\./,"").replace(/_/g," ");
+function plainMissing(x:O){
+  const g=Number(x?.normalization?.detail?.guard_value),detail=String(x?.normalization?.detail?.reason||"");
+  if(/sale age/i.test(detail)&&Number.isFinite(g)&&g>8&&g<400)return`the last recorded sale is about ${Math.round(g)} years old, outside the eight-year window`;
+  if(/sale age/i.test(detail))return"there is no usable sale date on record";
+  return`${plainLabel(String(x?.signal_id||""))} is not available yet`;
+}
+function leadSignals(f:O){
+  const why=new Set((Array.isArray(f.why_now)?f.why_now:[]).map((w:O)=>String(w?.signal_id||"")));
+  return(Array.isArray(f.evidence)?f.evidence:[]).filter((e:O)=>!META_SIGNALS.has(String(e?.signal_id||""))&&PLAIN[String(e?.signal_id||"")]&&Number.isFinite(Number(e?.value))&&e?.value!==null&&e?.value!=="")
+    .sort((a:O,b:O)=>(why.has(String(b.signal_id))?1:0)-(why.has(String(a.signal_id))?1:0)||Number(b.score||0)-Number(a.score||0));
+}
+const priorityOf=(score:number)=>score>=70?"High":score>=40?"Medium":"Low";
+function findingCard(f:O){
+  const score=Math.round(Number(f.score||0)),conf=Math.round(Number(f.confidence||0)),cov=Math.round(Number(f.evidence_coverage||0)),lead=leadSignals(f),miss=Array.isArray(f.missing_evidence)?f.missing_evidence:[];
+  const reason=lead[0]?PLAIN[lead[0].signal_id].value(Number(lead[0].value)):"";
+  return{pams_pin:clean(f.pams_pin,100),address:clean(f.property_address||f.pams_pin||"Property",180),score,confidence:conf,evidence_coverage:cov,priority:priorityOf(score),
+    reason:reason?reason.charAt(0).toUpperCase()+reason.slice(1)+".":"No single check stands out; the score reflects several smaller signals.",
+    also:lead[1]?PLAIN[lead[1].signal_id].value(Number(lead[1].value)).replace(/^./,(c)=>c.toUpperCase())+".":"",
+    gap:miss[0]?`Could not check: ${plainMissing(miss[0])}${miss.length>1?` (+${miss.length-1} more)`:""}.`:"",
+    confidence_label:conf>=75?"High":conf>=50?"Moderate":"Low"};
+}
+function briefConclusion(cards:O[]){
+  if(!cards.length)return"Nothing stands out right now. Watchdog checked the public record for these properties and did not find anything that needs a closer look. It never fills gaps with a guess.";
+  const high=cards.filter(c=>c.score>=70),lead=cards[0],s:string[]=[];
+  s.push(high.length?`${high.length} of the ${cards.length} flagged ${cards.length===1?"property":"properties"} deserve${high.length===1?"s":""} a close look.`:`${cards.length} ${cards.length===1?"property is":"properties are"} worth a look, but nothing is urgent.`);
+  s.push(`The strongest is ${lead.address}: ${lead.reason.charAt(0).toLowerCase()+lead.reason.slice(1)}`);
+  if(cards[1])s.push(`Next is ${cards[1].address}: ${cards[1].reason.charAt(0).toLowerCase()+cards[1].reason.slice(1)}`);
+  return s.join(" ");
+}
+/* Every number in an AI rewrite must already appear in the approved response. */
+const numbersIn=(text:string)=>(String(text||"").match(/\d+(?:\.\d+)?/g)||[]).map((x)=>String(Number(x)));
+function groundedProse(candidate:string,base:O){
+  if(!candidate||candidate.length<30)return false;
+  if(/\b(guarantee|will win|should appeal|recommend(?:ed)? (?:an? )?appeal|worth \$|market value is|likely to sell|motivated)\b/i.test(candidate))return false;
+  if(/\b(?:watchdog|event)\.[a-z_]+/i.test(candidate))return false;
+  const allowed=new Set(numbersIn(JSON.stringify(base)));
+  return numbersIn(candidate).every((n)=>allowed.has(n));
+}
 function deterministic(tool:string,result:O){
   const evidence:string[]=[],missing:string[]=[],caveats:string[]=[],suggested:string[]=[],sources:{label:string,url:string|null}[]=[];
   if(tool==="get_property_facts"){
@@ -111,15 +164,16 @@ function deterministic(tool:string,result:O){
     const findings=Array.isArray(result.findings)?result.findings:[];
     for(const f of findings.slice(0,5)){
       const label=clean(f.property_address||f.pams_pin||"Property",180);
-      evidence.push(`${label}: Watchdog review score ${Math.round(Number(f.score||0))}/100, confidence ${Math.round(Number(f.confidence||0))}%, evidence ${Math.round(Number(f.evidence_coverage||0))}%.`);
-      for(const w of (Array.isArray(f.why_now)?f.why_now:[]).slice(0,2))evidence.push(`${label}: ${clean(w.signal_id,140)} normalized ${Math.round(Number(w.score||0))}/100${w.explanation?`: ${clean(w.explanation,260)}`:""}.`);
-      for(const x of (Array.isArray(f.missing_evidence)?f.missing_evidence:[]).slice(0,3))missing.push(`${label}: ${clean(x.signal_id,140)} (${clean(x.reason||"missing",120)}).`);
-      for(const x of Array.isArray(f.evidence)?f.evidence:[]){const u=safeUrl(x.source_url);if(u)sources.push({label:clean(x.signal_id||x.source_key||"Source",140),url:u})}
+      evidence.push(`${label}: ${priorityOf(Math.round(Number(f.score||0)))} priority (${Math.round(Number(f.score||0))} out of 100), confidence ${Math.round(Number(f.confidence||0))}%, ${Math.round(Number(f.evidence_coverage||0))}% of the usual evidence checked.`);
+      for(const e of leadSignals(f).slice(0,2))evidence.push(`${label}: ${PLAIN[e.signal_id].value(Number(e.value))} (${Math.round(Number(e.score||0))} out of 100 as a signal).`);
+      for(const x of (Array.isArray(f.missing_evidence)?f.missing_evidence:[]).slice(0,3))missing.push(`${label}: ${plainMissing(x)}.`);
+      for(const x of Array.isArray(f.evidence)?f.evidence:[]){const u=safeUrl(x.source_url);if(u)sources.push({label:`${label}: ${plainLabel(String(x.signal_id||x.source_key||"source"))}`,url:u})}
       for(const a of Array.isArray(f.recommended_actions)?f.recommended_actions:[])suggested.push(clean(a,80));
     }
     if(result.warning)caveats.push(clean(result.warning,400));
-    caveats.push("Scores rank governed evidence for review. They are not valuations, legal conclusions, seller predictions, or guaranteed outcomes.");
-    const base:O={conclusion:findings.length?`Watchdog found ${findings.length} evidence-backed review finding${findings.length===1?"":"s"}. The strongest findings are shown first.`:"No evidence-backed finding was produced for this governed scope. Watchdog did not fill the gap with a guess.",evidence,missing_evidence:uniq(missing),caveats:uniq(caveats),suggested_actions:uniq(suggested),sources:[...new Map(sources.map(x=>[x.url,x])).values()]};
+    caveats.push("These are review flags from public records, not valuations, legal opinions, seller predictions or guaranteed outcomes.");
+    const cards=findings.slice(0,5).map(findingCard);
+    const base:O={conclusion:briefConclusion(cards),cards,evidence,missing_evidence:uniq(missing),caveats:uniq(caveats),suggested_actions:uniq(suggested),sources:[...new Map(sources.map(x=>[x.url,x])).values()]};
     return result.semantic_context?addSemanticFacts(base,result.semantic_context,5):base;
   }
   if(tool==="get_score_history"){
@@ -142,11 +196,12 @@ function extractText(data:O){if(typeof data.output_text==="string")return data.o
 async function openAIOnce(apiKey:string,model:string,promptRow:O,prompt:string,base:O){
   const ctl=new AbortController(),timer=setTimeout(()=>ctl.abort(),8000);
   try{
-    const response=await fetch("https://api.openai.com/v1/responses",{method:"POST",signal:ctl.signal,headers:{Authorization:`Bearer ${apiKey}`,"Content-Type":"application/json"},body:JSON.stringify({model,store:false,reasoning:{effort:"low"},instructions:clean(promptRow.system_contract,5000),input:`User request:\n${prompt}\n\nApproved Watchdog response:\n${JSON.stringify(base).slice(0,30000)}\n\nRewrite only conclusion and caveats for clarity. Do not add facts, evidence, sources, actions, values, probabilities, or claims.`,text:{format:{type:"json_schema",name:"watchdog_analyst_prose",strict:true,schema:{type:"object",additionalProperties:false,properties:{conclusion:{type:"string"},caveats:{type:"array",items:{type:"string"}}},required:["conclusion","caveats"]}}}})});
+    const response=await fetch("https://api.openai.com/v1/responses",{method:"POST",signal:ctl.signal,headers:{Authorization:`Bearer ${apiKey}`,"Content-Type":"application/json"},body:JSON.stringify({model,store:false,reasoning:{effort:"low"},instructions:clean(promptRow.system_contract,5000),input:`User request:\n${prompt}\n\nApproved Watchdog response:\n${JSON.stringify(base).slice(0,30000)}\n\nRewrite only conclusion and caveats. Write the conclusion the way an experienced New Jersey property professional briefs a client: plain English, 2 to 4 short sentences, calm and direct, no internal signal names, ids, formulas or scores that are not already in the approved conclusion. Keep every number exactly as written. Do not add facts, evidence, sources, actions, values, probabilities, recommendations or claims.`,text:{format:{type:"json_schema",name:"watchdog_analyst_prose",strict:true,schema:{type:"object",additionalProperties:false,properties:{conclusion:{type:"string"},caveats:{type:"array",items:{type:"string"}}},required:["conclusion","caveats"]}}}})});
     const data=await response.json().catch(()=>({}));
     if(!response.ok){const error:any=new Error(clean(data?.error?.message||`OpenAI ${response.status}`,300));error.status=response.status;throw error}
     let parsed:O={};try{parsed=JSON.parse(extractText(data))}catch{}
-    return{ok:true,data,response:{...base,conclusion:clean(parsed.conclusion||base.conclusion,1400),caveats:Array.isArray(parsed.caveats)?uniq(parsed.caveats.map((x:unknown)=>clean(x,500))):base.caveats}};
+    const prose=clean(parsed.conclusion,1400);
+    return{ok:true,data,response:{...base,conclusion:groundedProse(prose,base)?prose:base.conclusion,caveats:Array.isArray(parsed.caveats)?uniq(parsed.caveats.map((x:unknown)=>clean(x,500))):base.caveats}};
   }finally{clearTimeout(timer)}
 }
 async function optionalProse(promptRow:O,prompt:string,base:O){

@@ -66,4 +66,23 @@ assert.match(analystJs, /options\.pams_pins:\[\]\)\.map\(canonicalPin\)/);
 assert.match(why, /does not have enough public records for this property/);
 assert.doesNotMatch(why, /r\.error\?\.message\|\|/);
 
+// Briefing layout: the Analyst returns a plain-English brief plus property cards,
+// and any AI rewrite must keep to the approved numbers and wording rules.
+const analystSrv = fs.readFileSync('supabase/functions/intelligence-analyst/index.ts', 'utf8');
+assert.match(analystSrv, /const cards=findings\.slice\(0,5\)\.map\(findingCard\);/);
+assert.match(analystSrv, /conclusion:briefConclusion\(cards\),cards,/);
+assert.match(analystSrv, /conclusion:groundedProse\(prose,base\)\?prose:base\.conclusion/, 'ungrounded AI prose falls back to the approved brief');
+assert.match(analystSrv, /numbersIn\(candidate\)\.every\(\(n\)=>allowed\.has\(n\)\)/);
+assert.match(analystSrv, /\(\?:watchdog\|event\)\\\.\[a-z_\]\+/, 'internal signal ids are rejected in prose');
+assert.doesNotMatch(analystSrv, /normalized \$\{Math\.round\(Number\(w\.score/, 'evidence lines no longer print raw signal ids');
+assert.match(analystJs, /if\(Array\.isArray\(response\.cards\)\)return briefHtml\(payload,response,toolName\);/);
+assert.match(analystJs, /<p class="dwa-brief-lead">/, 'the brief is the first direct paragraph, which Voice reads');
+assert.match(analystJs, /<details class="dwa-brief-tech"><summary>Evidence and sources<\/summary>'\+listSection\('Evidence'/);
+assert.match(analystJs, /data-dwa-why=/);
+const consoleSrc = fs.readFileSync('property/js/intelligence-console.js', 'utf8');
+assert.match(consoleSrc, /startBrief\(pins\);/, 'the Intelligence workspace opens on the brief');
+assert.match(consoleSrc, /if\(requestedPrompt\|\|requestedPin\|\|!pins\.length/, 'no auto brief for a single-property or prefilled question');
+const intelPage = fs.readFileSync('property/intelligence/index.html', 'utf8');
+assert.doesNotMatch(intelPage, /href="\/property\/(home|data-workbench|intelligence)"/, 'Intelligence page links use clean public URLs');
+
 console.log('Intelligence plain-language contract passed.');
