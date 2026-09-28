@@ -17,6 +17,8 @@ const AGENT_RESERVED_SEGMENTS = new Set(['agent','agents','analytics','assets','
 // have Watchdog versions at clean root URLs. NJPropertyTaxRelief keeps its own.
 const WATCHDOG_TOOL_REDIRECTS = new Map([['/resources.html','/glossary'],['/resources','/glossary'],['/home-improvement-abatement.html','/home-improvement-abatement'],['/mortgage-calculator.html','/mortgage-calculator'],['/home-value.html','/home-value'],['/search-homes.html','/search-homes']]);
 const SALES_API_PATH = '/api/sales-by-district';
+// Public property pages: /nj/<town>/<address>/<pams_pin> (or /nj/property/<pin>, redirected to the full form).
+const PROPERTY_PAGE_PATH = /^\/nj\/[^/]+\/[^/]+(?:\/[^/]+)?\/?$/i;
 const AUTOMATION_UA = /\b(?:curl|wget|python-requests|scrapy|go-http-client|libwww-perl|httpclient)\b/i;
 const ROOT_STATIC_PAGES = new Set(['/move', '/contact', '/search', '/agent', '/lender', '/attorney', '/investor', '/developer/communications', '/transaction', '/transaction/shared', '/account/profile', '/account/professional-profile', '/agent/listing-prep', '/agent/buyers', '/agent/open-house', '/agent/training', '/open-house', '/client-room', '/preview', '/preview/home']);
 const ROOT_COMPAT_REDIRECTS = new Map([['/contact.html', '/contact']]);
@@ -48,6 +50,7 @@ if(url.pathname===INDEXNOW_KEY_PATH)return rewriteWatchdogSystemFile(request,'/a
 if(url.pathname==='/robots.txt')return rewriteWatchdogSystemFile(request,'/api/watchdog-index-robots');
 if(url.pathname==='/sitemap.xml')return rewriteWatchdogSystemFile(request,'/api/watchdog-index-sitemap');
 if(TYPED_SITEMAP_FILE.test(url.pathname))return next();
+if(PROPERTY_PAGE_PATH.test(url.pathname)){const destination=new URL('/api/watchdog-property-page',request.url);destination.searchParams.set('path',url.pathname);return rewrite(destination);}
 if(ROOT_COMPAT_REDIRECTS.has(url.pathname))return redirectCanonical(request,url,ROOT_COMPAT_REDIRECTS.get(url.pathname));
 if(LEGACY_FAQ_PATHS.has(url.pathname))return redirectCanonical(request,url,'/faq');
 if(LEGACY_PUBLIC_REDIRECTS.has(url.pathname))return redirectCanonical(request,url,LEGACY_PUBLIC_REDIRECTS.get(url.pathname));
