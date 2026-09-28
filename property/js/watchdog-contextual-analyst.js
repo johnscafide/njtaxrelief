@@ -60,12 +60,50 @@ function evidenceWorkflowHtml(toolName){
   if(toolName==='inspect_lineage')return '<div class="dwa-provider" data-dwa-evidence-note>Read-only evidence review · No property action was taken.</div>';
   return'';
 }
+/* Briefing layout: when the Analyst returns property cards, lead with the
+   written brief, then "Needs your attention" cards in plain English, and fold
+   the evidence lists (still read by Voice) into "Evidence and sources". */
+var BRIEF_CSS='/property/css/watchdog-intelligence-brief.css?v=20260928a';
+function ensureBriefCss(){
+  if(document.querySelector('link[data-dwa-brief-css]'))return;
+  var link=document.createElement('link');link.rel='stylesheet';link.href=BRIEF_CSS;link.setAttribute('data-dwa-brief-css','true');document.head.appendChild(link);
+}
+function routeFor(path){try{var p=window.NJPTRSupabaseRuntime&&window.NJPTRSupabaseRuntime.routePrefix;return (typeof p==='string'?p:'')+path;}catch(_error){return path;}}
+function briefCard(c){
+  var level=String(c.priority||'Low').toLowerCase(),pin=String(c.pams_pin||'');
+  return '<article class="dwa-card is-'+esc(level)+'">'+
+    '<header><h4>'+esc(c.address||pin||'Property')+'</h4><span class="dwa-card-priority is-'+esc(level)+'">'+esc(c.priority||'Low')+' priority · '+esc(c.score)+'/100</span></header>'+
+    '<p class="dwa-card-reason">'+esc(c.reason||'')+'</p>'+
+    (c.also?'<p class="dwa-card-also">Also: '+esc(String(c.also).charAt(0).toLowerCase()+String(c.also).slice(1))+'</p>':'')+
+    (c.gap?'<p class="dwa-card-gap">'+esc(c.gap)+'</p>':'')+
+    '<p class="dwa-card-meta">'+esc(c.confidence_label||'')+' confidence ('+esc(c.confidence)+'%) · '+esc(c.evidence_coverage)+'% of the usual evidence checked</p>'+
+    (pin?'<div class="dwa-card-actions"><button type="button" data-dwa-why="'+esc(pin)+'" data-dwa-why-address="'+esc(c.address||'')+'"><i class="fas fa-dog" aria-hidden="true"></i> Why Watchdog?</button><a href="'+esc(routeFor('/home')+'?pin='+encodeURIComponent(pin))+'" target="_top">Open property</a></div>':'')+
+  '</article>';
+}
+function briefHtml(payload,response,toolName){
+  ensureBriefCss();
+  var cards=Array.isArray(response.cards)?response.cards.slice(0,5):[];
+  var written=payload&&payload.provider==='openai'&&payload.provider_status==='complete';
+  return '<b class="dwa-brief-kicker">Watchdog <span class="wd-intelligence-brand-word">Intelligence</span> brief</b><p class="dwa-brief-lead">'+esc(response.conclusion||'')+'</p>'+
+    (cards.length?'<div class="dwa-brief-cards"><strong class="dwa-brief-label">Needs your attention</strong>'+cards.map(briefCard).join('')+'</div>':'')+
+    '<details class="dwa-brief-tech"><summary>Evidence and sources</summary>'+listSection('Evidence',response.evidence,'evidence')+listSection('Missing evidence',response.missing_evidence,'missing')+listSection('Caveats',response.caveats,'caveats')+sourcesSection(response.sources)+'</details>'+
+    evidenceWorkflowHtml(toolName)+
+    '<div class="dwa-provider" data-dwa-provider-note>'+(written?'Written by Watchdog Intelligence from the checked public records above.':'Built by Watchdog from the checked public records above.')+' Review flags, not valuations or legal advice.</div>';
+}
+function openWhy(pin,address){
+  var go=function(){if(window.WatchdogWhy)window.WatchdogWhy.open({pamsPin:pin,address:address,surface:'intelligence_brief'});};
+  if(window.WatchdogWhy){go();return;}
+  var s=document.getElementById('wd-why-script');
+  if(!s){s=document.createElement('script');s.id='wd-why-script';s.src='/property/js/watchdog-why.js';document.head.appendChild(s);}
+  s.addEventListener('load',go,{once:true});
+}
 function responseHtml(payload){
   var response=payload&&payload.response?payload.response:payload||{};
   var provider=payload&&payload.provider?String(payload.provider):'Watchdog governed Analyst';
   var providerStatus=payload&&payload.provider_status?String(payload.provider_status):'';
   var toolName=payload&&payload.tool&&payload.tool.name?String(payload.tool.name):'';
   var conclusion=response.conclusion||'Watchdog completed the request.';
+  if(Array.isArray(response.cards))return briefHtml(payload,response,toolName);
   return '<b>Watchdog</b><p>'+esc(conclusion)+'</p>'+listSection('Evidence',response.evidence,'evidence')+listSection('Missing evidence',response.missing_evidence,'missing')+listSection('Caveats',response.caveats,'caveats')+sourcesSection(response.sources)+evidenceWorkflowHtml(toolName)+'<div class="dwa-provider" data-dwa-provider-note>Governed Analyst · '+esc(provider)+(providerStatus?' · '+esc(providerStatus):'')+'</div>';
 }
 function appendMessage(kind,html){
@@ -157,11 +195,13 @@ function open(options){
   var backdrop=document.createElement('div');backdrop.id='dwa-backdrop';backdrop.className='dwa-backdrop';backdrop.dataset.contextualAnalyst='true';
   var panel=document.createElement('aside');panel.id='dwa-panel';panel.className='dwa-panel';panel.dataset.contextualAnalyst='true';panel.dataset.watchdogSurface=surface;panel.setAttribute('role','dialog');panel.setAttribute('aria-modal','true');panel.setAttribute('aria-label',options.title||'Ask Watchdog');
   var contextText=options.contextLabel||((pins.length===1?'1 property':pins.length+' properties')+' in the current Watchdog context');
-  panel.innerHTML='<div class="dwa-head"><div><span>'+esc(options.kicker||'WATCHDOG INTELLIGENCE')+'</span><h2>'+esc(options.title||'Ask Watchdog')+'</h2><p>'+esc(options.subtitle||'Ask, follow up, inspect evidence, or use Voice without leaving this page.')+'</p></div><button class="dwa-close" type="button" aria-label="Close Ask Watchdog"><i class="fas fa-xmark"></i></button></div><div class="dwa-body" id="dwa-body"><div class="dwa-note"><b>Current context:</b> '+esc(contextText)+'. Spoken and typed questions use the same governed Analyst, plan gates, approved tools, evidence, source rules, and command policy.</div><div class="dwa-chips">'+chipList(options)+'</div><div class="dwa-chat" id="dwa-chat"></div><div class="dwa-compose"><textarea id="dwa-input" aria-label="Ask Watchdog" placeholder="'+esc(options.placeholder||'Ask Watchdog about the current context...')+'"></textarea><div class="dwa-compose-row"><small>Voice always shows a transcript before submission. Consequential commands retain confirmation and approval gates.</small><button class="dwa-send" id="dwa-send" type="button">Ask Watchdog</button></div></div></div>';
+  panel.innerHTML='<div class="dwa-head"><div><span>'+esc(options.kicker||'WATCHDOG INTELLIGENCE')+'</span><h2>'+esc(options.title||'Ask Watchdog')+'</h2><p>'+esc(options.subtitle||'Ask, follow up, inspect evidence, or use Voice without leaving this page.')+'</p></div><button class="dwa-close" type="button" aria-label="Close Ask Watchdog"><i class="fas fa-xmark"></i></button></div><div class="dwa-body" id="dwa-body"><div class="dwa-note"><b>Current context:</b> '+esc(contextText)+'. Watchdog answers only from checked public records and says when something is missing.</div><div class="dwa-chips">'+chipList(options)+'</div><div class="dwa-chat" id="dwa-chat"></div><div class="dwa-compose"><textarea id="dwa-input" aria-label="Ask Watchdog" placeholder="'+esc(options.placeholder||'Ask Watchdog about the current context...')+'"></textarea><div class="dwa-compose-row"><small>Ask in your own words or use Voice. You always see what will be sent, and nothing changes without your OK.</small><button class="dwa-send" id="dwa-send" type="button">Ask Watchdog</button></div></div></div>';
   document.body.appendChild(backdrop);document.body.appendChild(panel);document.documentElement.classList.add('watchdog-contextual-analyst-open');
   backdrop.addEventListener('click',close);panel.querySelector('.dwa-close').addEventListener('click',close);
   panel.querySelectorAll('[data-contextual-chip]').forEach(function(button){button.addEventListener('click',function(){var input=document.getElementById('dwa-input');if(input){input.value=button.dataset.contextualChip||'';input.focus();}});});
   panel.addEventListener('click',function(event){
+    var why=event.target&&event.target.closest?event.target.closest('[data-dwa-why]'):null;
+    if(why&&panel.contains(why)){openWhy(why.getAttribute('data-dwa-why')||'',why.getAttribute('data-dwa-why-address')||'');return;}
     var evidenceTarget=event.target&&event.target.closest?event.target.closest('[data-contextual-evidence]'):null;
     if(evidenceTarget&&panel.contains(evidenceTarget)){
       var evidenceInput=document.getElementById('dwa-input');
