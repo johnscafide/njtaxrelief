@@ -176,5 +176,5 @@ body.igcc-enabled:not([data-igcc-view="overview"]):has(#ig-workspace:not([hidden
   .igx{background:#fff;padding:0}
   .igx-card{border:1px solid #999;color:#000;background:#fff}
   .igx-btn,.igx-tabs,.igx-toolbar,.igx-toast,.igx-more{display:none!important}
-  .igx-panel[hidden]{display:block!important}
+  .igx-how-body{display:block}
 }

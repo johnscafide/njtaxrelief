@@ -10,7 +10,11 @@ must(!/sidemenu\.js/.test(page), 'Integration Center must not load the legacy si
 must(/integrations-board\.css\?v=\d{8}[a-z]/.test(page), 'Board stylesheet must load with a cache version.');
 must(page.indexOf('integrations-board.css') > page.indexOf('integrations-direct-crm.css'), 'Board stylesheet must load after the legacy integration styles.');
 must(/<script src="\/property\/js\/integrations-crm-properties\.js\?v=\d{8}[a-z]" defer><\/script>/.test(page), 'CRM property panel script must load deferred with a cache version.');
-must(/<section class="igx" id="igx-crm"[^>]*hidden><\/section>/.test(page), 'CRM property panel container must start hidden.');
+must(/<section class="igx" id="igx-crm"[^>]*hidden>/.test(page), 'CRM property panel must start hidden.');
+// Static structure and copy live in the page; the script only fills in data.
+['loading', 'upsell', 'connect', 'error'].forEach((state) => must(page.includes(`data-igx-state="${state}"`), `CRM panel ${state} state must be static HTML.`));
+['ready', 'dashboard', 'missing', 'review', 'search'].forEach((name) => must(page.includes(`data-igx-empty="${name}"`), `CRM panel ${name} empty state must be static HTML.`));
+must(page.includes('Nothing is linked until you say so') && page.includes('Watchdog never writes to your CRM on its own'), 'CRM panel intros must live in the page HTML.');
 must(/Agent and Pro/.test(page) && /Automations need Pro\+ or Teams/.test(page), 'Plan gate must say the CRM panel works on Agent and Pro.');
 
 const js = read('property/js/integrations-crm-properties.js');
@@ -22,6 +26,7 @@ must(/function route\(path\)/.test(js) && js.includes('NJPTRSupabaseRuntime') &&
 must(!/['"]\/property\//.test(js), 'CRM panel must not hard-code /property/ links.');
 must(!/ZIP5/.test(js.replace(/\/\/[^\n]*/g, '')), 'NJOGIS ZIP5 is the owner mailing ZIP and must not be requested.');
 must(/PGRST202/.test(js) && /root\.hidden = true/.test(js), 'Panel must hide itself if the overview RPC is not deployed yet.');
+must(!/root\.innerHTML\s*=/.test(js) && !/Nothing is linked until you say so/.test(js), 'CRM panel script must not own the static panel markup or copy.');
 must(/function esc\(/.test(js), 'CRM panel must escape rendered text.');
 must(js.includes("/^[=+\\-@]/.test(s)"), 'CSV export must neutralize spreadsheet formulas.');
 
