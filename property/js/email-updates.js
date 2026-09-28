@@ -212,7 +212,8 @@ async function send(e){
   const a=audience(),w=when(),d=fields(),s=sender();
   if(w!=='draft'&&a.type==='all'&&!confirm(word('confirmAll')))return;
   const payload={subject:d.subject,preview_text:d.preview_text,content:emailHtml(false),target_label:a.label};
-  if(s.email)payload.email_address=s.email;
+  // Kit only sends from a saved sender identity; otherwise Kit uses the account's own address.
+  if(s.email&&(st.senders||[]).some(x=>x.email_address===s.email))payload.email_address=s.email;
   if(a.type!=='all'){payload.target_type=a.type;payload.target_ids=[Number(a.id)];payload.target_mode='all'}
   if(w!=='draft'){const at=w==='later'?new Date(qs('#eu-send-at').value):new Date(Date.now()+SEND_NOW_MINUTES*60000);payload.send_at=at.toISOString();payload.confirm_send=true;if(a.type==='all')payload.confirm_all_subscribers=true}
   const r=await busy(e.currentTarget,()=>gateway('broadcast.create',payload));if(!r)return;
