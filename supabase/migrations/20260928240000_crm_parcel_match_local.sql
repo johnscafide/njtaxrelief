@@ -12,8 +12,9 @@
 -- public.property_lookups (every NJ parcel, filled by the statewide parcel sync):
 -- 1. watchdog_split_address() pulls city, state and ZIP out of one-line street fields.
 -- 2. watchdog_norm_street() normalizes both sides the same way. Only parcels with
---    the same house number are compared (a text_pattern_ops index range), so a
---    lookup reads a few thousand rows, not 3.5 million.
+--    the same house number are compared, through the address index from
+--    20260928210000_instant_parcel_search.sql (property_lookups_address_prefix_idx),
+--    so a lookup reads a few thousand index entries, not 3.5 million rows.
 -- 3. The parcel's town has to fit the contact: the towns a ZIP serves
 --    (nj_zip_districts), the city name, or, when the contact gives neither, the
 --    address has to be the only one in New Jersey.
@@ -154,10 +155,10 @@ begin
 end;
 $$;
 
--- House-number range scans on the parcel address ("12 " .. "12!"). An expression
--- index on watchdog_norm_street() was too slow to build over 3.5 million rows.
-create index if not exists property_lookups_address_pattern_idx
-  on public.property_lookups (address text_pattern_ops);
+-- House-number range scans ("12 " .. "12!") use property_lookups_address_prefix_idx
+-- (address text_pattern_ops where county is set), created by
+-- 20260928210000_instant_parcel_search.sql; the lookups below repeat its predicate.
+-- An expression index on watchdog_norm_street() was too slow to build over 3.5 million rows.
 
 -- Which municipalities (Treasury district codes, the first four characters of a
 -- PAMS PIN) each NJ ZIP serves. Parcel records carry the owner's mailing ZIP and
@@ -266,11 +267,13 @@ begin
            'county', p.county, 'district', left(p.pams_pin, 4)) order by p.pams_pin), '[]'::jsonb)
     into v_all
     from public.property_lookups p
-   where p.address in (
+   where p.county is not null and p.county <> ''
+     and p.address in (
      select q.address from (
        -- Index-only: addresses with this house number that contain the key word.
        select distinct r.address from public.property_lookups r
-        where r.address ~>=~ (v_house || ' ') and r.address ~<~ (v_house || '!')
+        where r.county is not null and r.county <> ''
+          and r.address ~>=~ (v_house || ' ') and r.address ~<~ (v_house || '!')
           and (v_key is null or strpos(upper(r.address), v_key) > 0)
      ) q
      where public.watchdog_norm_street(q.address) = v_norm);
@@ -281,10 +284,12 @@ begin
              'county', p.county, 'district', left(p.pams_pin, 4)) order by p.pams_pin), '[]'::jsonb)
       into v_all
       from public.property_lookups p
-     where p.address in (
+     where p.county is not null and p.county <> ''
+       and p.address in (
        select q.address from (
          select distinct r.address from public.property_lookups r
-          where r.address ~>=~ (v_house || ' ') and r.address ~<~ (v_house || '!')
+          where r.county is not null and r.county <> ''
+            and r.address ~>=~ (v_house || ' ') and r.address ~<~ (v_house || '!')
             and (v_key is null or strpos(upper(r.address), v_key) > 0)
        ) q
        where public.watchdog_norm_street(q.address) = regexp_replace(v_norm, ' UNIT .*$', ''));
