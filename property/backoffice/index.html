@@ -19,7 +19,7 @@
       <a class="bo-auth-brand" href="/property/"><span class="bo-mark">W</span><span><b>WATCHDOG</b><small>Private Backoffice</small></span></a>
       <span class="bo-kicker" id="bo-auth-kicker">PRIVATE ACCESS</span>
       <h1 id="bo-auth-title">Watchdog Backoffice</h1>
-      <p id="bo-auth-copy">Backoffice currently uses your Watchdog developer account. No separate shared password is required.</p>
+      <p id="bo-auth-copy">Backoffice opens for signed-in Watchdog accounts on the Backoffice access list. No separate password is needed.</p>
       <form id="bo-auth-form" data-mode="login" hidden>
         <label>Who's signing in?
           <select name="actor"><option value="john">John</option><option value="wife">Wife</option></select>
@@ -31,10 +31,10 @@
         <button class="bo-button bo-button-primary bo-auth-submit" id="bo-auth-submit" type="submit">Unlock Backoffice</button>
       </form>
       <div id="bo-dev-access">
-        <p id="bo-dev-access-status" style="margin:0 0 16px;color:#617184">Checking your Watchdog developer session…</p>
-        <button class="bo-button bo-button-primary bo-auth-submit" id="bo-dev-login" type="button">Open with Watchdog developer account</button>
+        <p id="bo-dev-access-status" style="margin:0 0 16px;color:#617184">Checking your Watchdog sign-in…</p>
+        <button class="bo-button bo-button-primary bo-auth-submit" id="bo-dev-login" type="button">Open with my Watchdog account</button>
       </div>
-      <small class="bo-auth-foot">Lead data remains server-side and is available only through an authenticated Watchdog developer session.</small>
+      <small class="bo-auth-foot">Lead data stays on the server and is available only through a signed-in Watchdog account on the Backoffice access list.</small>
     </div>
   </section>
 
@@ -138,7 +138,7 @@
   <div id="leadiq-toast" class="li-toast" role="status" aria-live="polite"></div>
   <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2/dist/umd/supabase.js"></script>
   <script src="/property/js/access-guard.js"></script>
-  <script src="/property/backoffice/backoffice-dev-auth.js" defer></script>
+  <script src="/property/backoffice/backoffice-dev-auth.js?v=20260928a" defer></script>
   <script src="/property/backoffice/backoffice.js" defer></script>
   <script src="/property/backoffice/leadiq-tools.js" defer></script>
 </body>

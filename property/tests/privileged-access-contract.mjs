@@ -51,6 +51,30 @@ assert.match(backoffice, /revoked_at/i,
   'Backoffice privileged sessions must retain revocation state.');
 assert.match(backoffice, /12 \* 60 \* 60 \* 1000/,
   'Backoffice privileged sessions must retain a bounded expiry unless deliberately re-reviewed.');
+assert.match(backoffice, /verifyDeveloperToken[^\n]*from\("backoffice_operators"\)/,
+  'Backoffice first-time setup must also require a listed Backoffice operator.');
+
+// The Backoffice session login once issued sessions to anyone ("temporary open
+// access"). It must stay tied to a signed-in Watchdog account on the access list.
+const backofficeLogin = read('supabase/functions/backoffice-dev-login/index.ts');
+assert.doesNotMatch(backofficeLogin, /open[-_ ]access|authentication_required:\s*false/i,
+  'Backoffice login must not issue open-access sessions.');
+assert.match(backofficeLogin, /service\.auth\.getUser\(accessToken\)/,
+  'Backoffice login must verify the Watchdog access token server-side.');
+assert.match(backofficeLogin, /from\("backoffice_operators"\)\.select\("actor_label"\)\.eq\("user_id", user\.id\)/,
+  'Backoffice login must require the signed-in account to be on the Backoffice access list.');
+assert.doesNotMatch(backofficeLogin, /body\.actor/,
+  'Backoffice login must take the actor from the access list, not the request body.');
+const backofficeOperators = read('supabase/migrations/20260928230000_backoffice_operator_access.sql');
+assert.match(backofficeOperators, /alter table public\.backoffice_operators enable row level security;/,
+  'Backoffice access list must have RLS enabled.');
+assert.match(backofficeOperators, /revoke all on table public\.backoffice_operators from public, anon, authenticated;/,
+  'Backoffice access list must not be readable by browser roles.');
+const backofficePage = read('property/backoffice/backoffice-dev-auth.js');
+assert.match(backofficePage, /'Authorization':'Bearer '\+accessToken/,
+  'Backoffice page must send the Watchdog access token when opening a session.');
+assert.doesNotMatch(backofficePage, /temporarily disabled|Open access/i,
+  'Backoffice page must not describe authentication as disabled.');
 
 function walk(dir) {
   const absolute = path.join(root, dir);

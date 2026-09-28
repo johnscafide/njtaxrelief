@@ -1,6 +1,6 @@
 import { createClient } from 'https://esm.sh/@supabase/supabase-js@2';
-const allowedOrigins=new Set(['https://njpropertytaxrelief.com','https://www.njpropertytaxrelief.com']);
-function cors(req:Request){const o=req.headers.get('origin')||'';return{'Access-Control-Allow-Origin':allowedOrigins.has(o)?o:'https://njpropertytaxrelief.com','Access-Control-Allow-Headers':'authorization, x-client-info, apikey, content-type','Access-Control-Allow-Methods':'POST, OPTIONS','Vary':'Origin'}}
+const allowedOrigins=new Set(['https://www.watchdogindex.com','https://watchdogindex.com','https://njpropertytaxrelief.com','https://www.njpropertytaxrelief.com']);
+function cors(req:Request){const o=req.headers.get('origin')||'';return{'Access-Control-Allow-Origin':allowedOrigins.has(o)?o:'https://www.watchdogindex.com','Access-Control-Allow-Headers':'authorization, x-client-info, apikey, content-type, x-retry-count, traceparent, tracestate, baggage','Access-Control-Allow-Methods':'POST, OPTIONS','Vary':'Origin'}}
 function json(req:Request,status:number,payload:any){return new Response(JSON.stringify(payload),{status,headers:{...cors(req),'Content-Type':'application/json; charset=utf-8','Cache-Control':'private, no-store'}})}
 function scalar(v:any){if(v===null||v===undefined)return null;if(typeof v==='object'&&v!==null&&'value' in v)return v.value;return v}
 function n(v:any){const x=Number(v);return Number.isFinite(x)?x:null}

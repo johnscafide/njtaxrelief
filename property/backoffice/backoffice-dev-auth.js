@@ -24,18 +24,25 @@ if(window.fetch&&!window.__watchdogBackofficeCanonicalFetch){
   window.__watchdogBackofficeCanonicalFetch=true;
 }
 
+const SIGN_IN_URL='/dashboard?access=signin&return=%2Fbackoffice';
+
 function paint(message){
-  const title=$('#bo-auth-title');
-  const copy=$('#bo-auth-copy');
   const status=$('#bo-dev-access-status');
   const secure=$('#secure-status');
-  if(title)title.textContent='Watchdog Backoffice';
-  if(copy)copy.textContent='Authentication is temporarily disabled. Backoffice opens automatically.';
   if(status&&message)status.textContent=message;
   if(secure){
-    secure.textContent='Open access';
-    secure.className='pending';
+    secure.textContent='Watchdog sign-in';
+    secure.className='connected';
   }
+}
+
+function offerSignIn(message,label){
+  paint(message);
+  const btn=$('#bo-dev-login');
+  if(!btn)return;
+  btn.textContent=label;
+  btn.disabled=false;
+  btn.onclick=()=>{location.href=SIGN_IN_URL;};
 }
 
 async function developerToken(){
@@ -154,20 +161,35 @@ async function sessionStillWorks(sessionToken){
   }
 }
 
-async function openPublicSession(){
+// Backoffice sessions are issued only to signed-in Watchdog accounts on the
+// Backoffice access list; the server checks the account, not this page.
+async function openSession(){
   if(working)return;
   working=true;
   const btn=$('#bo-dev-login');
   if(btn){btn.disabled=true;btn.textContent='Opening Backoffice…';}
   try{
+    const accessToken=await developerToken();
+    if(!accessToken){
+      offerSignIn('Sign in to Watchdog to open Backoffice.','Sign in to Watchdog');
+      return;
+    }
     paint('Opening Backoffice…');
     const res=await fetch(SESSION_API,{
       method:'POST',
-      headers:{'Content-Type':'application/json'},
-      body:JSON.stringify({actor:'john'})
+      headers:{'Content-Type':'application/json','Authorization':'Bearer '+accessToken},
+      body:'{}'
     });
     let data={};
     try{data=await res.json();}catch{}
+    if(res.status===401){
+      offerSignIn(data.error||'Sign in to Watchdog to open Backoffice.','Sign in to Watchdog');
+      return;
+    }
+    if(res.status===403){
+      offerSignIn(data.error||'This Watchdog account does not have Backoffice access.','Sign in with a different account');
+      return;
+    }
     if(!res.ok||!data.token)throw new Error(data.error||'Could not open Backoffice.');
     sessionStorage.setItem(SESSION_KEY,data.token);
     location.reload();
@@ -176,7 +198,7 @@ async function openPublicSession(){
     if(btn){
       btn.textContent='Try again';
       btn.disabled=false;
-      btn.onclick=openPublicSession;
+      btn.onclick=openSession;
     }
   }finally{
     working=false;
@@ -203,7 +225,7 @@ async function install(){
   }
 
   sessionStorage.removeItem(SESSION_KEY);
-  await openPublicSession();
+  await openSession();
 }
 
 if(document.readyState==='loading')document.addEventListener('DOMContentLoaded',install);else install();
