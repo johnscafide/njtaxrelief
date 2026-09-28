@@ -10,6 +10,7 @@
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="/property/css/shared.css">
+  <link rel="stylesheet" href="/property/css/watchdog-glass-header.css">
   <style>
     :root{color-scheme:light;--ap-navy:#0f2350;--ap-navy-2:#1b3a7a;--ap-blue:#2f6fed;--ap-ink:#14202b;--ap-muted:#5c6b78;--ap-line:#dde4ea;--ap-bg:#f4f6f9;--ap-ok:#127a4a;--ap-ok-bg:#e8f6ee}
     *{box-sizing:border-box}
@@ -20,7 +21,7 @@
     svg.i{width:18px;height:18px;flex:none;fill:none;stroke:currentColor;stroke-width:2;stroke-linecap:round;stroke-linejoin:round}
 
     /* Top bar */
-    .ap-top{background:var(--ap-navy);color:#fff}
+    .ap-top{position:sticky;top:0;z-index:50;background:var(--ap-navy);color:#fff}
     .ap-top .ap-wrap{display:flex;align-items:center;justify-content:space-between;gap:12px;min-height:60px}
     .ap-brand{display:flex;align-items:center;gap:10px;min-width:0}
     .ap-brand a{display:inline-flex;align-items:center;min-height:44px;font-weight:800;font-size:20px;text-decoration:none;letter-spacing:.01em}
@@ -300,5 +301,6 @@
   form.addEventListener('submit',async e=>{e.preventDefault();msg.textContent='';const fd=new FormData(form),email=String(fd.get('email')||'').trim(),phone=String(fd.get('phone')||'').trim();if(!form.reportValidity()||(!email&&!phone)){msg.textContent='Please add an email address or phone number.';return}const btn=form.querySelector('button');btn.disabled=true;try{const r=await fetch('/api/agent-portal-lead',{method:'POST',headers:{'Content-Type':'application/json',Accept:'application/json'},body:JSON.stringify({slug,full_name:fd.get('full_name'),email,phone,address:fd.get('address'),website:fd.get('website'),contact_consent:fd.get('contact_consent')==='on'})});const b=await r.json().catch(()=>({}));if(!r.ok)throw new Error(b.error||'Unable to send request.');form.reset();msg.textContent='Sent. Your request went straight to '+$('name').textContent+'.'}catch(err){msg.textContent=err.message||'Unable to send request right now.'}finally{btn.disabled=false}});
 })();
 </script>
+<script src="/property/js/watchdog-glass-header.js" defer></script>
 </body>
 </html>
