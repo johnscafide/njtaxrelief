@@ -225,15 +225,32 @@ Deno.serve(async (req) => {
       const { data } = await pcmRequest(environment, child, 'POST', '/design/generate-proof/postcard', {
         designID: Number(designId), format: 'pdf', recipient, returnAddress,
       });
+      // PCM documents {front, back}, but its live responses use PascalCase elsewhere
+      // and may wrap the body or return a single combined {pdf}. Accept all of them.
+      const find = (obj: any, keys: string[], depth = 0): string => {
+        if (!obj || typeof obj !== 'object' || depth > 2) return '';
+        for (const [k, v] of Object.entries(obj)) {
+          if (keys.includes(k.toLowerCase()) && typeof v === 'string' && /^https?:\/\//i.test(v)) return v;
+        }
+        for (const v of Object.values(obj)) {
+          const hit = find(v, keys, depth + 1);
+          if (hit) return hit;
+        }
+        return '';
+      };
+      const single = find(data, ['pdf', 'url', 'proof', 'proofurl', 'proofpdf']);
       const proof = {
         design_id: designId,
         creative_id: creative!.id,
-        front: clean(data?.front, 2000) || null,
-        back: clean(data?.back, 2000) || null,
+        front: clean(find(data, ['front', 'fronturl', 'frontproof']) || single, 2000) || null,
+        back: clean(find(data, ['back', 'backurl', 'backproof']), 2000) || null,
         generated_at: new Date().toISOString(),
         environment,
       };
-      if (!proof.front && !proof.back) throw new PcmError(502, 'PCM_PROOF_EMPTY', 'PCM did not return a proof');
+      if (!proof.front && !proof.back) {
+        const shape = data && typeof data === 'object' ? Object.keys(data).join(',') : typeof data;
+        throw new PcmError(502, 'PCM_PROOF_EMPTY', `PCM did not return a proof (response keys: ${clean(shape, 200)})`);
+      }
       await saveSettings({ pcm_design: { ...(settings.pcm_design || {}), proof, proof_review: null } });
       return reply(req, 200, { proof });
     }
