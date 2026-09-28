@@ -836,4 +836,5 @@ module.exports.INDEXABLE_COUNTIES = INDEXABLE_COUNTIES;
 module.exports.rateTrend = rateTrend;
 module.exports.fetchProperty = fetchProperty;
 module.exports.messagePage = messagePage;
+module.exports.parts = { HEAD_ASSETS, STYLE, FOOT_SCRIPTS, chrome, esc };
 module.exports.helpers = { view, money, count, saleDate, monthYear, titleCase, componentScore, townCompareText, rateTrend, latestRatio, faqItems, reportFileName, propertyPath, DIMENSIONS, CANONICAL_ORIGIN, REPORT_CONSENT };
