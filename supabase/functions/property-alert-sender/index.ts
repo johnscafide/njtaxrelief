@@ -125,7 +125,10 @@ Deno.serve(async (req: Request) => {
           template_params: { to_email: row.email, subject: mail.subject, message_html: mail.body }
         })
       });
-      if (!response.ok) throw new Error(`email_provider_rejected_${response.status}`);
+      if (!response.ok) {
+        const detail = clean(await response.text().catch(() => ""), 100);
+        throw new Error(`email_provider_rejected_${response.status}${detail ? `: ${detail}` : ""}`);
+      }
       await db.rpc("complete_property_alert_outbox", { p_id: row.id, p_sent: true, p_error: null });
       sent++;
     } catch (error) {
