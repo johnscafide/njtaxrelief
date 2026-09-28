@@ -23,6 +23,8 @@ const PUBLIC_MAX_ROWS = 8;
 const PUBLIC_CACHE_MS = 24 * 60 * 60 * 1000;
 const PUBLIC_RATE_WINDOW_MS = 60 * 1000;
 const PUBLIC_RATE_MAX = 80;
+const BATCH_MAX_ROWS = 1000;
+const BATCH_CACHE_MS = 40 * 24 * 60 * 60 * 1000;
 const publicRate = new Map<string, { start: number; count: number }>();
 
 function cors(req) {
@@ -337,6 +339,52 @@ async function handlePublicScore(req, body, admin) {
   return out(req, 200, { rows: rows.map(row => result.get(row.pams_pin)).filter(Boolean), framework: "ROBUST", model_version: SCORE_MODEL, checked_at: new Date().toISOString() });
 }
 
+/* Batch precompute: scores a page of property_lookups (ordered by pams_pin)
+   with the same ROBUST-v1 formula and stores compact results in
+   public_watchdog_score_cache_v1, so search, dashboards and property pages
+   read a ready score instead of computing one per visit. Server key only. */
+async function handleBatchPrecompute(req, body, admin, service) {
+  const auth = req.headers.get("authorization") || "";
+  if (!service || auth !== `Bearer ${service}`) return out(req, 401, { error: "Server key required" });
+  const after = clean(body?.after_pin, 80), limit = Math.min(Math.max(Number(body?.limit) || BATCH_MAX_ROWS, 1), BATCH_MAX_ROWS);
+  let query = admin.from("property_lookups")
+    .select("pams_pin,town,county,block,lot,qualifier,assessed_value,last_year_tax")
+    .not("county", "is", null).neq("county", "").not("assessed_value", "is", null)
+    .order("pams_pin", { ascending: true }).limit(limit);
+  if (after) query = query.gt("pams_pin", after);
+  const { data: rows, error } = await query;
+  if (error) return out(req, 503, { error: "Property warehouse unavailable", detail: clean(error.message, 200) });
+  if (!rows?.length) return out(req, 200, { processed: 0, scored: 0, next_after: null, done: true, model_version: SCORE_MODEL });
+  const src = await sources();
+  let subjects = new Map(), subjectEvidenceStatus = "available";
+  try { subjects = await subjectEvidence(admin, rows); } catch (err) { subjectEvidenceStatus = "unavailable"; console.error("Batch ROBUST subject evidence lookup failed", err); }
+  const computedAt = new Date().toISOString(), expiresAt = new Date(Date.now() + BATCH_CACHE_MS).toISOString(), upserts = [];
+  for (const raw of rows) {
+    const row = { ...raw, pams_pin: String(raw.pams_pin) }, subject = subjects.get(row.pams_pin) || null;
+    if (subject) {
+      row.subject_match_quality = subject.match_quality || null;
+      if (num(subject.sale_price) != null && num(subject.sale_year) != null) { row.subject_sale_price = Number(subject.sale_price); row.subject_sale_year = Number(subject.sale_year); }
+      if (num(subject.living_space) != null) row.subject_living_space = Number(subject.living_space);
+    }
+    const wd = robustScore(row, src, null);
+    if (!wd) continue;
+    const components = Object.fromEntries(Object.entries(wd.detail || {}).map(([k, v]) => [k, v?.score ?? null]));
+    upserts.push({
+      pams_pin: row.pams_pin, model_version: SCORE_MODEL, score: wd.score, evidence_coverage: wd.coverage,
+      confidence: wd.confidence, verdict: wd.verdict,
+      inputs: { framework: "ROBUST", components, coverage_weight: wd.coverage, market_source: wd.market?.src || null, subject_evidence_status: subjectEvidenceStatus, precomputed: true },
+      formula: "ROBUST-v1 batch precompute (same formula as on-demand scoring)",
+      facts_hash: await hashPublicFacts({ pams_pin: row.pams_pin, town: clean(row.town, 100), county: clean(row.county, 60), block: clean(row.block, 30), lot: clean(row.lot, 30), qualifier: clean(row.qualifier, 30), assessed_value: num(row.assessed_value), last_year_tax: num(row.last_year_tax) }),
+      computed_at: computedAt, expires_at: expiresAt
+    });
+  }
+  for (let i = 0; i < upserts.length; i += 250) {
+    const { error: writeError } = await admin.from("public_watchdog_score_cache_v1").upsert(upserts.slice(i, i + 250), { onConflict: "pams_pin" });
+    if (writeError) return out(req, 503, { error: "Score cache write failed", detail: clean(writeError.message, 200), next_after: after || null });
+  }
+  return out(req, 200, { processed: rows.length, scored: upserts.length, next_after: String(rows[rows.length - 1].pams_pin), done: rows.length < limit, subject_evidence_status: subjectEvidenceStatus, model_version: SCORE_MODEL });
+}
+
 Deno.serve(async req => {
   if (req.method === "OPTIONS") return new Response("ok", { headers: cors(req) });
   if (req.method !== "POST") return out(req, 405, { error: "POST required" });
@@ -346,6 +394,7 @@ Deno.serve(async req => {
   const url = Deno.env.get("SUPABASE_URL") || "", anon = Deno.env.get("SUPABASE_ANON_KEY") || "", service = Deno.env.get("SUPABASE_SERVICE_ROLE_KEY") || "";
   const admin = createClient(url, service, { auth: { persistSession: false, autoRefreshToken: false } });
   if (body?.mode === "public_score") return handlePublicScore(req, body, admin);
+  if (body?.mode === "batch_precompute") return handleBatchPrecompute(req, body, admin, service);
 
   const auth = req.headers.get("authorization") || "";
   if (!auth.startsWith("Bearer ")) return out(req, 401, { error: "Sign in required" });
