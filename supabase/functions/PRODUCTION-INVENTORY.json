@@ -4,8 +4,8 @@
   "policy": "Git-first. This file fingerprints the deployed production function inventory. `source_snapshot` means the committed source is intended to match production; `fingerprint_only` means the deployed fingerprint is recorded but source parity must be verified before redeployment.",
   "functions": {
     "agent-opportunity-digest": {
-      "version": 15,
-      "sha256": "8f6940c31ebd7b433bf9ba610dc7840bc22fdc4d33018adc26832486186af15f",
+      "version": 39,
+      "sha256": "b0ed6e5317a89f2804dba9263234083791d2aa6c764e9509b9a18c270746cf6b",
       "verify_jwt": true,
       "tracking": "source_snapshot"
     },
