@@ -7,7 +7,7 @@ const read = (path) => readFileSync(new URL(`../../${path}`, import.meta.url), '
 const must = (condition, message) => { if (!condition) throw new Error(message); };
 
 const SDK_HEADERS = ['authorization', 'x-client-info', 'apikey', 'content-type'];
-const functions = ['tmp-boldtrail-probe', 'integration-provider-manager', 'integration-gateway', 'integration-key-manager'];
+const functions = ['tmp-boldtrail-probe', 'integration-provider-manager', 'integration-gateway', 'integration-key-manager', 'create-support-checkout', 'get-platform-health', 'pcm-direct-mail'];
 
 for (const name of functions) {
   const source = read(`supabase/functions/${name}/index.ts`);
@@ -22,7 +22,13 @@ must(self.includes('Where do I find my BoldTrail API token?'), 'BoldTrail key he
 must(self.includes('Where do I find my Kit V4 API key?'), 'Kit key help missing on Sync Accounts.');
 must(self.includes('FunctionsFetchError'), 'Unreachable-service error is not translated into plain language.');
 
+// /support has no deployed Edge Function slot; it submits through the submit_support_request RPC.
+const support = read('property/js/support.js');
+must(support.includes("client.rpc('submit_support_request'") && !support.includes("functions.invoke('submit-support-request'"), 'Support form must use the submit_support_request RPC.');
+const supportSql = read('supabase/migrations/20260928200000_support_request_rpc.sql');
+must(/security definer/i.test(supportSql) && /revoke all on function public\.submit_support_request/i.test(supportSql) && /'access'/.test(supportSql) && /'other'/.test(supportSql), 'Support RPC migration must be security definer, revoke public access and allow the form categories.');
+
 const css = read('property/css/account-self-service.css');
 must(css.includes('.ac-key-help>summary') && css.includes('min-height:44px'), 'Key help toggle must keep a 44px touch target.');
 
-console.log('Sync Accounts CORS and key-help contract passed');
+console.log('Sync Accounts CORS, key-help and support contract passed');

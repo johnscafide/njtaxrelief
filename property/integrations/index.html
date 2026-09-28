@@ -5,6 +5,9 @@
   <meta name="viewport" content="width=device-width,initial-scale=1">
   <title>Integrations | Watchdog</title>
   <meta name="robots" content="noindex,nofollow">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
   <link rel="stylesheet" href="/styles.css">
   <link rel="stylesheet" href="/property/css/shared.css">
@@ -12,6 +15,7 @@
   <link rel="stylesheet" href="/property/css/secondary-pages-2027.css">
   <link rel="stylesheet" href="/property/css/integrations.css">
   <link rel="stylesheet" href="/property/css/integrations-direct-crm.css">
+  <link rel="stylesheet" href="/property/css/integrations-board.css?v=20260928a">
   <link rel="manifest" href="/property/manifest.webmanifest">
   <meta name="theme-color" content="#102a4c">
 </head>
@@ -23,7 +27,7 @@
   </section>
 
   <section class="ig-gate" id="ig-signin" hidden><i class="fas fa-lock"></i><div><h3>Sign in to manage integrations</h3><p>Your connections, keys and permissions are account-scoped.</p></div><a href="/property/dashboard">Open Dashboard</a></section>
-  <section class="ig-gate" id="ig-plan-gate" hidden><i class="fas fa-plug-circle-xmark"></i><div><h3>Integrations require Pro+ or Teams</h3><p>Zapier, CRM context and automation webhooks are professional workflow capabilities.</p></div><a href="/property/pro#pricing">Compare plans</a></section>
+  <section class="ig-gate" id="ig-plan-gate" hidden><i class="fas fa-plug-circle-xmark"></i><div><h3>Automations need Pro+ or Teams</h3><p>Zapier keys, webhooks and automation tools are Pro+ and Teams features. Your CRM and property connection below works on Agent and Pro too.</p></div><a href="/property/pro#pricing">Compare plans</a></section>
   <section class="ig-gate ig-error" id="ig-error" hidden><i class="fas fa-triangle-exclamation"></i><div><h3>Integration Center could not load</h3><p id="ig-error-text">Try again from this page.</p></div><button type="button" data-ig-action="reload">Retry</button></section>
 
   <div id="ig-workspace" hidden>
@@ -89,6 +93,74 @@
     <section class="ig-section"><div class="ig-section-head"><div><span>DELIVERY LOG</span><h3>Recent outbound activity</h3></div><button type="button" data-ig-action="history"><i class="fas fa-clock-rotate-left"></i>Reload log</button></div><div class="ig-history-wrap"><table class="ig-history"><thead><tr><th>Event</th><th>Connection</th><th>Status</th><th>Attempts</th><th>HTTP</th><th>When</th></tr></thead><tbody id="ig-history"></tbody></table></div><div class="ig-empty compact" id="ig-history-empty"><i class="fas fa-wave-square"></i><b>No deliveries yet</b><span>Test a webhook connection or wait for a subscribed Watchdog event.</span></div></section>
     <section class="ig-next"><div><span>PHASE 4 · PROVIDER FRAMEWORK</span><h3>One native connector framework, not one-off CRM code.</h3><p>BoldTrail is the first provider on the shared direct-sync runtime. The same Vault boundary, sync history and normalized context contract can support the next demanded CRM.</p></div><i class="fas fa-network-wired"></i></section>
   </div>
+
+  <section class="igx" id="igx-crm" aria-labelledby="igx-title" hidden>
+    <header class="igx-head">
+      <div><span class="igx-kicker">YOUR CRM + YOUR PROPERTIES</span><h2 id="igx-title">Every CRM contact, tied to a real property.</h2>
+        <p><span id="igx-status"></span> See which CRM properties to add to your dashboard, and who in your CRM is connected to the properties you already watch.</p></div>
+      <button type="button" class="igx-btn is-ghost" data-igx-action="refresh"><i class="fas fa-rotate" aria-hidden="true"></i>Refresh</button>
+    </header>
+
+    <div class="igx-panel" data-igx-state="loading" aria-busy="true" hidden><div class="igx-list"><div class="igx-skeleton"></div><div class="igx-skeleton"></div><div class="igx-skeleton"></div></div></div>
+    <div class="igx-state" data-igx-state="upsell" hidden><i class="fas fa-address-book" aria-hidden="true"></i><div><b>Connect your CRM to your properties</b><p>Match BoldTrail / kvCORE contacts to New Jersey properties, add them to your dashboard and see who&rsquo;s connected to each property. Available on Agent, Pro, Pro+ and Teams.</p></div><a class="igx-btn" data-igx-route="/pro#pricing" href="/pro#pricing">Compare plans</a></div>
+    <div class="igx-state" data-igx-state="connect" hidden><i class="fas fa-plug" aria-hidden="true"></i><div><b>Connect your CRM</b><p>Connect BoldTrail / kvCORE from Sync Accounts on your Account page. Watchdog then matches your contacts to New Jersey properties automatically.</p></div><a class="igx-btn" data-igx-route="/account#ac-connections" href="/account#ac-connections">Open Sync Accounts</a></div>
+    <div class="igx-state" data-igx-state="error" hidden><i class="fas fa-triangle-exclamation" aria-hidden="true"></i><div><b>Your CRM overview could not load</b><p id="igx-error-text">Please refresh the page and try again.</p></div><button type="button" class="igx-btn" data-igx-action="refresh">Try again</button></div>
+
+    <div id="igx-board" hidden>
+      <div class="igx-cards">
+        <div class="igx-card igx-card--navy"><small>CRM contacts</small><b data-igx-count="contacts">0</b><span><span data-igx-count="matched_contacts">0</span> linked to <span data-igx-count="matched_properties">0</span> properties</span></div>
+        <button type="button" class="igx-card igx-card--sky" data-igx-tab="ready" aria-pressed="false"><small>Ready to add</small><b data-igx-count="ready_to_add">0</b><span>In your CRM, not on your dashboard</span></button>
+        <button type="button" class="igx-card igx-card--teal" data-igx-tab="dashboard" aria-pressed="false"><small>On your dashboard</small><b data-igx-count="on_dashboard">0</b><span>Dashboard properties with CRM details</span></button>
+        <button type="button" class="igx-card igx-card--sand" data-igx-tab="missing" aria-pressed="false"><small>Not in your CRM</small><b data-igx-count="dashboard_not_in_crm">0</b><span>Dashboard properties no CRM contact is linked to</span></button>
+      </div>
+
+      <div class="igx-tabs" role="tablist" aria-label="CRM and property views">
+        <button type="button" role="tab" class="igx-tab" id="igx-tab-ready" aria-controls="igx-panel" aria-selected="false" data-igx-tab="ready">Ready to add<em data-igx-count="ready_to_add">0</em></button>
+        <button type="button" role="tab" class="igx-tab" id="igx-tab-dashboard" aria-controls="igx-panel" aria-selected="false" data-igx-tab="dashboard">On your dashboard<em data-igx-count="on_dashboard">0</em></button>
+        <button type="button" role="tab" class="igx-tab" id="igx-tab-missing" aria-controls="igx-panel" aria-selected="false" data-igx-tab="missing">Not in your CRM<em data-igx-count="dashboard_not_in_crm">0</em></button>
+        <button type="button" role="tab" class="igx-tab" id="igx-tab-review" aria-controls="igx-panel" aria-selected="false" data-igx-tab="review">Needs your review<em data-igx-count="needs_review">0</em></button>
+      </div>
+
+      <div class="igx-panel" id="igx-panel" role="tabpanel">
+        <p class="igx-panel-intro" data-igx-for="ready">These properties belong to contacts in your CRM but aren&rsquo;t on your Watchdog dashboard yet. Add them to track taxes, assessments and changes.
+          <span class="igx-note" data-igx-cap="some">You can add <b data-igx-count="remaining">0</b> more properties on your plan.</span>
+          <span class="igx-note" data-igx-cap="none" hidden>Your plan&rsquo;s property limit is reached. Remove a property from your dashboard or upgrade to add more.</span></p>
+        <p class="igx-panel-intro" data-igx-for="dashboard" hidden>Properties on your dashboard that are linked to people in your CRM. Use this before you call, email or send a mailer.</p>
+        <p class="igx-panel-intro" data-igx-for="missing" hidden>These dashboard properties aren&rsquo;t linked to anyone in your CRM. Download them to import into BoldTrail or share with your team. Watchdog never writes to your CRM on its own.</p>
+        <p class="igx-panel-intro" data-igx-for="review" hidden>Watchdog found a New Jersey parcel at the address saved in your CRM. Confirm it&rsquo;s the same property to link them. Nothing is linked until you say so. When more than one parcel matched, pick the right one under Advanced &rarr; CRM resolution, or mark it as not a match.</p>
+
+        <div class="igx-toolbar" id="igx-toolbar">
+          <div class="igx-toolbar-left">
+            <label class="igx-search"><i class="fas fa-magnifying-glass" aria-hidden="true"></i><span class="sr-only">Search</span><input type="search" id="igx-search" autocomplete="off" placeholder="Search address or contact"></label>
+            <label class="igx-check" data-igx-for="ready"><input type="checkbox" id="igx-select-all"> Select all shown</label>
+          </div>
+          <div class="igx-toolbar-right">
+            <button type="button" class="igx-btn" data-igx-for="ready" data-igx-action="add-selected" disabled><i class="fas fa-plus" aria-hidden="true"></i>Add selected (<span id="igx-selected-count">0</span>)</button>
+            <button type="button" class="igx-btn" data-igx-for="missing" data-igx-action="download" hidden><i class="fas fa-file-arrow-down" aria-hidden="true"></i>Download CSV</button>
+            <button type="button" class="igx-btn is-ghost" data-igx-for="missing" data-igx-action="copy" hidden><i class="fas fa-copy" aria-hidden="true"></i>Copy addresses</button>
+          </div>
+        </div>
+
+        <ul class="igx-list" id="igx-list"></ul>
+
+        <div class="igx-empty" data-igx-empty="ready" hidden><i class="fas fa-circle-check" aria-hidden="true"></i><b>Nothing waiting to be added</b><p>Every property linked to your CRM is already on your dashboard. New matches show up here after each sync.</p></div>
+        <div class="igx-empty" data-igx-empty="dashboard" hidden><i class="fas fa-house-user" aria-hidden="true"></i><b>No dashboard property is linked to your CRM yet</b><p>Add properties from &ldquo;Ready to add&rdquo;, or confirm matches under &ldquo;Needs your review&rdquo;.</p></div>
+        <div class="igx-empty" data-igx-empty="missing" hidden><i class="fas fa-circle-check" aria-hidden="true"></i><b>Every dashboard property is in your CRM</b><p>New dashboard properties that aren&rsquo;t linked to a contact will show up here.</p></div>
+        <div class="igx-empty" data-igx-empty="review" hidden><i class="fas fa-circle-check" aria-hidden="true"></i><b>Nothing to review</b><p>When Watchdog finds a possible match for a CRM address, it waits here for you.</p></div>
+        <div class="igx-empty" data-igx-empty="search" hidden><i class="fas fa-magnifying-glass" aria-hidden="true"></i><b>No matches for that search</b><p>Try a street, town or contact name.</p></div>
+
+        <div class="igx-more"><button type="button" class="igx-btn is-ghost" id="igx-more" data-igx-action="more" hidden>Show more</button></div>
+      </div>
+
+      <details class="igx-how"><summary><i class="fas fa-circle-info" aria-hidden="true"></i>How Watchdog matches your CRM to properties<i class="fas fa-chevron-down igx-chevron" aria-hidden="true"></i></summary>
+        <div class="igx-how-body">
+          <p>Watchdog links a CRM contact to a property only when the address in your CRM matches exactly one New Jersey parcel. It never guesses from names or partial addresses, and a possible match waits for your OK.</p>
+          <div class="igx-breakdown" id="igx-breakdown"></div>
+          <p>To link more contacts, add a full street address with ZIP code to the contact in BoldTrail. Watchdog re-checks updated contacts after each sync, every 15 minutes.</p>
+        </div>
+      </details>
+    </div>
+  </section>
 </main>
 
 <div class="ig-modal" id="ig-credentials-modal" hidden><button class="ig-modal-shade" type="button" data-ig-action="close-credentials" aria-label="Close"></button><section role="dialog" aria-modal="true" aria-labelledby="ig-credentials-title"><header><div><span>SHOWING ONCE</span><h3 id="ig-credentials-title">Save your credential</h3></div><button type="button" data-ig-action="close-credentials"><i class="fas fa-xmark"></i></button></header><p id="ig-credentials-copy">Watchdog will not show this secret again. Store it securely.</p><div id="ig-credentials-fields"></div><footer><button class="ig-primary" type="button" data-ig-action="close-credentials">I saved this credential</button></footer></section></div>
@@ -100,6 +172,7 @@
 <script src="/property/js/app-shell-2027.js"></script>
 <script src="/property/js/integrations.js"></script>
 <script src="/property/js/integrations-direct-crm.js"></script>
+<script src="/property/js/integrations-crm-properties.js?v=20260928a" defer></script>
 <script src="/property/js/pwa.js"></script>
 <script src="/property/js/platform-observability.js"></script>
 </body>

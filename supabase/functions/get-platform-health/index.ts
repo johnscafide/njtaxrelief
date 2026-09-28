@@ -43,7 +43,7 @@ function allowedOrigin(req: Request) {
 function cors(req: Request) {
   return {
     'Access-Control-Allow-Origin': allowedOrigin(req),
-    'Access-Control-Allow-Headers': 'authorization, apikey, content-type',
+    'Access-Control-Allow-Headers': 'authorization, x-client-info, apikey, content-type, x-retry-count, traceparent, tracestate, baggage',
     'Access-Control-Allow-Methods': 'GET, POST, OPTIONS',
     'Vary': 'Origin'
   };
