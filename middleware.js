@@ -52,7 +52,7 @@ if(url.pathname==='/property'||url.pathname==='/property/')return redirectCanoni
 const publicPath=cleanPublicPath(url.pathname);
 if(ROOT_STATIC_PAGES.has(publicPath))return next();
 const legacyPortalMatch=url.pathname.match(LEGACY_AGENT_PORTAL_PATH);if(legacyPortalMatch&&!AGENT_RESERVED_SEGMENTS.has(legacyPortalMatch[1].toLowerCase()))return redirectCanonical(request,url,`/agent/${legacyPortalMatch[1].toLowerCase()}`);
-const agentPortalMatch=url.pathname.match(AGENT_PORTAL_PATH);if(agentPortalMatch&&!AGENT_RESERVED_SEGMENTS.has(agentPortalMatch[1].toLowerCase())){const destination=new URL('/property/agent/index.html',request.url);destination.searchParams.set('slug',agentPortalMatch[1].toLowerCase());return rewrite(destination);}
+const agentPortalMatch=url.pathname.match(AGENT_PORTAL_PATH);if(agentPortalMatch&&!AGENT_RESERVED_SEGMENTS.has(agentPortalMatch[1].toLowerCase())){const destination=new URL('/api/agent-portal-page',request.url);destination.searchParams.set('slug',agentPortalMatch[1].toLowerCase());return rewrite(destination);}
 if(url.pathname.startsWith('/property/'))return next();
 if(isReservedRootPath(url.pathname)||STATIC_FILE.test(url.pathname))return next();
 return rewriteCleanPage(request,publicPath);}

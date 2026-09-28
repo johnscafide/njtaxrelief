@@ -38,6 +38,42 @@
     return { count: rows.length, latest: rows[0] && rows[0].verified_at || null };
   }
 
+  /* Free-month referral rewards (read only; stripe-webhook records them and the
+     daily sweep pays them out 90 days after the referred yearly plan starts). */
+  async function rewardsFor(user) {
+    var result = await db.from('watchdog_referral_rewards')
+      .select('status,eligible_at,credited_at,amount_cents')
+      .eq('inviter_user_id', user.id)
+      .order('created_at', { ascending: false })
+      .limit(200);
+    if (result.error) return null;
+    var rows = Array.isArray(result.data) ? result.data : [];
+    var credited = rows.filter(function (r) { return r.status === 'credited'; });
+    var holding = rows.filter(function (r) { return r.status === 'pending' || r.status === 'waiting_for_subscription'; });
+    var next = holding.map(function (r) { return r.eligible_at; }).filter(Boolean).sort()[0] || null;
+    return {
+      credited: credited.length,
+      creditedCents: credited.reduce(function (sum, r) { return sum + Number(r.amount_cents || 0); }, 0),
+      holding: holding.length,
+      waitingForPlan: holding.some(function (r) { return r.status === 'waiting_for_subscription'; }),
+      next: next
+    };
+  }
+
+  function day(value) {
+    try { return value ? new Date(value).toLocaleDateString('en-US', { month: 'short', day: 'numeric', year: 'numeric' }) : ''; } catch (_) { return ''; }
+  }
+
+  function rewardsLine(r) {
+    if (!r) return '';
+    var parts = [];
+    if (r.credited) parts.push(r.credited + (r.credited === 1 ? ' free month' : ' free months') + ' credited to your bill' + (r.creditedCents ? ' ($' + (r.creditedCents / 100).toFixed(2).replace(/\.00$/, '') + ')' : '') + '.');
+    if (r.holding) parts.push(r.holding + ' more on hold' + (r.next ? ', next one lands ' + day(r.next) : '') + '.');
+    if (r.waitingForPlan) parts.push('Rewards are applied while you have an active paid plan.');
+    if (!parts.length) parts.push('When someone you invite starts a yearly plan, you get one month of your plan free once they have been on it for 90 days.');
+    return parts.join(' ');
+  }
+
   function joinedLine(joined) {
     if (!joined) return '';
     if (!joined.count) return 'Nobody has joined with your invite yet. When someone creates an account from your link, it shows up here.';
@@ -90,6 +126,7 @@
           '<button type="button" data-api-copy="link"><i class="fas fa-link" aria-hidden="true"></i><span>Copy link only</span></button>' +
         '</div>' +
         (state.joined ? '<div class="api-joined' + (state.joined.count ? ' has-joins' : '') + '"><b>' + state.joined.count + '</b><span>' + esc(joinedLine(state.joined)) + '</span></div>' : '') +
+        (state.rewards ? '<div class="api-joined api-rewards' + (state.rewards.credited || state.rewards.holding ? ' has-joins' : '') + '"><b>' + (state.rewards.credited + state.rewards.holding) + '</b><span><strong>Free months earned.</strong> ' + esc(rewardsLine(state.rewards)) + '</span></div>' : '') +
         '<small class="api-note" id="api-note" aria-live="polite">"Copy invite" copies a short message with your link and code, ready to paste.</small>' +
       '</div>';
     app.appendChild(section);
@@ -141,8 +178,8 @@
       var row = result.data || {};
       var professional = (row.persona === 'professional' || row.persona === 'both') && !!row.primary_profession;
       if (!professional) { state = null; remove(); return; }
-      var results = await Promise.all([inviteFor(), joinedFor(user)]);
-      state = { profession: row.primary_profession, invite: results[0], joined: results[1] };
+      var results = await Promise.all([inviteFor(), joinedFor(user), rewardsFor(user)]);
+      state = { profession: row.primary_profession, invite: results[0], joined: results[1], rewards: results[2] };
       render();
     } catch (error) {
       console.warn('professional invite', error);
