@@ -13,6 +13,15 @@ const functions = ['tmp-boldtrail-probe', 'integration-provider-manager', 'integ
 const crmContext = read('supabase/functions/intelligence-crm-context/index.ts');
 must(crmContext.includes('"https://www.watchdogindex.com"') && crmContext.includes('"https://watchdogindex.com"'), 'intelligence-crm-context must allow the WatchdogIndex origins.');
 
+// Pages on the old host now redirect to www.watchdogindex.com, so browser-called functions
+// that keep an origin allowlist must include both WatchdogIndex hosts.
+const watchdogIndexBrowserFunctions = ['workbench-derived', 'workbench-baseline', 'bulk-marker-hydrate', 'farm-intelligence-scan'];
+for (const name of watchdogIndexBrowserFunctions) {
+  const source = read(`supabase/functions/${name}/index.ts`);
+  must(source.includes("'https://www.watchdogindex.com'") && source.includes("'https://watchdogindex.com'"), `${name} must allow the WatchdogIndex origins.`);
+  functions.push(name);
+}
+
 for (const name of functions) {
   const source = read(`supabase/functions/${name}/index.ts`);
   const match = source.match(/Access-Control-Allow-Headers["']\s*:\s*["']([^"']+)["']/);

@@ -13,7 +13,7 @@ function allowedOrigin(origin: string) {
   try {
     const url = new URL(origin);
     if (url.protocol !== "https:") return "https://njpropertytaxrelief.com";
-    if (["njpropertytaxrelief.com", "www.njpropertytaxrelief.com", "njtaxrelief.vercel.app"].includes(url.hostname)) return origin;
+    if (["watchdogindex.com", "www.watchdogindex.com", "njpropertytaxrelief.com", "www.njpropertytaxrelief.com", "njtaxrelief.vercel.app"].includes(url.hostname)) return origin;
     if (url.hostname.endsWith(".vercel.app")) return origin;
   } catch {
     // fall through
@@ -59,20 +59,40 @@ async function fingerprint(req: Request) {
   return sha256(`${ip}|${ua}`);
 }
 
+// Backoffice sessions go only to signed-in Watchdog accounts listed in
+// public.backoffice_operators. The operator row decides the actor label; the
+// request body cannot choose it.
 Deno.serve(async (req: Request) => {
   if (req.method === "OPTIONS") return new Response("ok", { headers: cors(req) });
   if (req.method !== "POST") return json(req, { error: "Method not allowed" }, 405);
   if (!service) return json(req, { error: "Backoffice session service is unavailable." }, 500);
 
-  let body: Record<string, unknown> = {};
-  try { body = await req.json(); } catch { /* body optional */ }
-  const actorRaw = typeof body.actor === "string" ? body.actor.trim().toLowerCase() : "john";
-  const actor = ["john", "wife"].includes(actorRaw) ? actorRaw : "john";
+  const auth = req.headers.get("authorization") || "";
+  const accessToken = (auth.match(/^Bearer\s+(.+)$/i) || [])[1] || "";
+  if (!accessToken) return json(req, { error: "Sign in to Watchdog to open Backoffice.", sign_in_required: true }, 401);
+  const fp = await fingerprint(req);
+
+  const { data: userData, error: userError } = await service.auth.getUser(accessToken);
+  const user = userData?.user;
+  if (userError || !user) return json(req, { error: "Sign in to Watchdog to open Backoffice.", sign_in_required: true }, 401);
+
+  const operator = await service.from("backoffice_operators").select("actor_label").eq("user_id", user.id).maybeSingle();
+  if (operator.error) return json(req, { error: "Backoffice access could not be checked." }, 503);
+  if (!operator.data) {
+    await service.from("backoffice_auth_events").insert({
+      actor_label: null,
+      event_type: "login.denied",
+      success: false,
+      request_fingerprint: fp,
+      metadata: { method: "watchdog-account", user_id: user.id },
+    });
+    return json(req, { error: "This Watchdog account does not have Backoffice access.", access_denied: true }, 403);
+  }
+  const actor = operator.data.actor_label === "wife" ? "wife" : "john";
 
   const token = randomToken();
   const tokenHash = await sha256(token);
   const expiresAt = new Date(Date.now() + 12 * 60 * 60 * 1000).toISOString();
-  const fp = await fingerprint(req);
 
   const inserted = await service.from("backoffice_sessions").insert({
     token_hash: tokenHash,
@@ -85,10 +105,10 @@ Deno.serve(async (req: Request) => {
 
   await service.from("backoffice_auth_events").insert({
     actor_label: actor,
-    event_type: "open_access.succeeded",
+    event_type: "login.succeeded",
     success: true,
     request_fingerprint: fp,
-    metadata: { method: "temporary-open-access", authentication_required: false },
+    metadata: { method: "watchdog-account", user_id: user.id },
   });
 
   return json(req, {
@@ -96,6 +116,5 @@ Deno.serve(async (req: Request) => {
     token,
     actor,
     expires_at: inserted.data.expires_at,
-    authentication_required: false,
   });
 });

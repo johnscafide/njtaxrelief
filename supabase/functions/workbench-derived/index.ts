@@ -22,6 +22,8 @@ const CHAPTER123_PROVIDER = 'chapter123-provider-v3';
 const SR1A_SUBJECT_PROVIDER = 'sr1a-subject-provider-v1';
 const SR1A_SUMMARY_URL = 'https://njpropertytaxrelief.com/property/sr1a-ratios.json';
 const ORIGINS = new Set([
+  'https://www.watchdogindex.com',
+  'https://watchdogindex.com',
   'https://njpropertytaxrelief.com',
   'https://www.njpropertytaxrelief.com',
 ]);
@@ -32,8 +34,8 @@ let sr1aSummaryAt = 0;
 function cors(req: Request) {
   const origin = req.headers.get('origin') || '';
   return {
-    'Access-Control-Allow-Origin': ORIGINS.has(origin) ? origin : 'https://njpropertytaxrelief.com',
-    'Access-Control-Allow-Headers': 'authorization, x-client-info, apikey, content-type',
+    'Access-Control-Allow-Origin': ORIGINS.has(origin) ? origin : 'https://www.watchdogindex.com',
+    'Access-Control-Allow-Headers': 'authorization, x-client-info, apikey, content-type, x-retry-count, traceparent, tracestate, baggage',
     'Access-Control-Allow-Methods': 'POST, OPTIONS',
     Vary: 'Origin',
   };
