@@ -44,8 +44,27 @@ assert.match(html, /<b>100<\/b>/, 'object-shaped component scores render');
 assert.match(html, /href="\/nj\/harrison-town\/140-grant-ave\/0904_9_1"/, 'block neighbors link to their pages');
 assert.doesNotMatch(html, /0904_9_99/, 'unnumbered, untaxed lots are left out');
 assert.match(html, /href="\/\?address=102%20Grant%20Ave%2C%20Harrison%20Town%2C%20NJ"/, 'main button opens the full popup analysis');
-assert.doesNotMatch(html, /\/property\//, 'no /property/ paths in public links');
-assert.doesNotMatch(html.replace('Watchdog does not show owner names.', ''), /owner|mailing/i, 'no owner or mailing data');
+const hrefs = [...html.matchAll(/<a [^>]*href="([^"]+)"/g)].map((m) => m[1]);
+assert.ok(hrefs.length > 10);
+assert.ok(hrefs.every((h) => !h.startsWith('/property/')), 'no /property/ paths in public links');
+const withoutPolicy = html.replace(/Watchdog does not show owner names( or mailing addresses)?\./g, '').replace(/Does Watchdog show who owns this property\?/g, '');
+assert.doesNotMatch(withoutPolicy, /\bowners?\b|\bmailing\b/i, 'no owner or mailing data');
+
+// Site chrome, sharing and homeowner tools
+assert.match(html, /<header class="wd-nav" id="wd-nav">/, 'standard Watchdog header');
+assert.match(html, /id="wd-main-sheet"/, 'universal menu sheet');
+assert.match(html, /<script src="\/property\/js\/public-nav\.js"><\/script>/, 'shared public navigation');
+assert.match(html, /\/property\/partials\/footer\.html/, 'shared footer');
+assert.match(html, /class="tp-hero"/, 'Watchdog tool-page hero');
+for (const s of ['data-wdp-copy', 'data-wdp-native', 'data-wdp-print', 'facebook.com/sharer', 'twitter.com/intent/tweet', 'linkedin.com/sharing', 'sms:?&amp;body=', 'mailto:?subject=']) assert.ok(html.includes(s), `share option ${s}`);
+assert.match(html, /href="\/appeal-savings-estimator\/\?assessed=424300&amp;rate=2\.384/, 'appeal estimator prefilled with assessment and town rate');
+assert.match(html, /\/nj-property-tax-calendar/, 'appeal deadlines');
+assert.match(html, /\/senior-benefit-estimator/, 'relief programs');
+assert.match(html, /Harrison Town's general tax rate is <b>\$2\.384<\/b>/, 'town tax rate from the state table');
+assert.match(html, /since 2020, the first year after the last town-wide revaluation/, 'rate trend starts after the last revaluation');
+assert.match(html, /"@type":"FAQPage"/, 'FAQ structured data');
+assert.match(html, /WatchdogPublicNav\.remember/, 'page is remembered in recent properties');
+assert.equal(page.rateTrend({ town: 'WOODBRIDGE TWP', county: 'MIDDLESEX' }).cutAtReval, false);
 assert.match(page.renderPage({ ...row, score: null }), /still being calculated/);
 assert.equal(page.INDEXABLE_COUNTIES.size, 0, 'pilot: no county released to search engines yet');
 

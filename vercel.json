@@ -11,6 +11,10 @@
     "api/watchdog-index-entry.js": {
       "includeFiles": "property/index.html",
       "maxDuration": 10
+    },
+    "api/watchdog-property-page.js": {
+      "includeFiles": "{tax-rates.json,equalization-ratios.json}",
+      "maxDuration": 10
     }
   },
   "redirects": [
