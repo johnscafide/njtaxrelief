@@ -30,7 +30,8 @@ import requests
 SERVICE = "https://maps.nj.gov/arcgis/rest/services/Framework/Cadastral/MapServer/0/query"
 SOURCE = "NJ Office of GIS Parcels and MOD-IV Composite"
 PAGE_SIZE = 1000
-BATCH = 1000
+BATCH = 500
+MIN_BATCH = 50
 # Owner fields (OWNER_NAME, ST_ADDRESS, CITY_STATE, ZIP_PLUS4 of the owner) are deliberately absent.
 OUT_FIELDS = [
     "OBJECTID", "PAMS_PIN", "PCLBLOCK", "PCLLOT", "PCLQCODE", "COUNTY", "MUN_NAME", "PROP_CLASS",
@@ -130,6 +131,32 @@ class Supabase:
         if r.status_code >= 300:
             raise RuntimeError(f"rpc {name} {r.status_code}: {r.text[:300]}")
         return r.json()
+
+    def write_rows(self, rows: list[dict], tries: int = 4) -> int:
+        """Write a batch; on a timeout or server error, pause and split it.
+
+        The database gives each write 8 seconds. As property_lookups grows,
+        an occasional large batch runs longer, so it is halved and retried
+        (down to MIN_BATCH rows) instead of stopping the whole sync.
+        """
+        delay = 2.0
+        for attempt in range(tries):
+            try:
+                return int(self.rpc("sync_parcel_batch", {"p_rows": rows}) or 0)
+            except (RuntimeError, requests.RequestException) as exc:
+                text = str(exc)
+                retryable = "57014" in text or "timeout" in text.lower() or " 5" in text[:40] or isinstance(exc, requests.RequestException)
+                if not retryable:
+                    raise
+                if len(rows) > MIN_BATCH:
+                    mid = len(rows) // 2
+                    print(f"[sync] slow write of {len(rows)} rows; splitting", flush=True)
+                    return self.write_rows(rows[:mid]) + self.write_rows(rows[mid:])
+                if attempt == tries - 1:
+                    raise
+                time.sleep(delay)
+                delay *= 2
+        return 0
 
     def select_run(self, scope: str):
         q = urlencode({"select": "*", "scope": f"eq.{scope}", "status": "in.(running,failed,stopped)", "order": "started_at.desc", "limit": "1"})
@@ -233,7 +260,7 @@ def run(args) -> dict:
             pages += 1
             if db:
                 for i in range(0, len(rows), BATCH):
-                    written += int(db.rpc("sync_parcel_batch", {"p_rows": rows[i:i + BATCH]}) or 0)
+                    written += db.write_rows(rows[i:i + BATCH])
                 db.update_run(run_row["id"], {"last_objectid": after, "pages": pages, "rows_received": received, "rows_written": written})
             if pages % 25 == 0 or pages == 1:
                 rate = received / max(time.time() - started, 1)
@@ -270,6 +297,28 @@ def self_test() -> None:
     assert normalize({"PAMS_PIN": ""}) is None and normalize({"PAMS_PIN": "BAD"}) is None
     assert not FORBIDDEN_FIELDS.intersection(OUT_FIELDS)
     assert "UPPER(COUNTY) = 'O''BRIEN'" in where_clause("o'brien", 5)
+    class FakeDb(Supabase):
+        def __init__(self):
+            self.calls = []
+        def rpc(self, name, payload):
+            n = len(payload["p_rows"])
+            self.calls.append(n)
+            if n > 125:
+                raise RuntimeError('rpc sync_parcel_batch 500: {"code":"57014","message":"canceling statement due to statement timeout"}')
+            return n
+    fake = FakeDb()
+    assert fake.write_rows([{"pams_pin": f"0101_{i}_1"} for i in range(500)]) == 500, "slow batches split and still write every row"
+    assert max(c for c in fake.calls if c <= 125) <= 125
+    class BadDb(Supabase):
+        def __init__(self):
+            pass
+        def rpc(self, name, payload):
+            raise RuntimeError("rpc sync_parcel_batch 400: bad input")
+    try:
+        BadDb().write_rows([{"pams_pin": "0101_1_1"}])
+        raise AssertionError("non-retryable errors must surface")
+    except RuntimeError as exc:
+        assert "400" in str(exc)
     print("sync_parcel_composite self-test passed")
 
 
