@@ -7,7 +7,11 @@ const read = (path) => readFileSync(new URL(`../../${path}`, import.meta.url), '
 const must = (condition, message) => { if (!condition) throw new Error(message); };
 
 const SDK_HEADERS = ['authorization', 'x-client-info', 'apikey', 'content-type'];
-const functions = ['tmp-boldtrail-probe', 'integration-provider-manager', 'integration-gateway', 'integration-key-manager', 'create-support-checkout', 'get-platform-health', 'pcm-direct-mail'];
+const functions = ['tmp-boldtrail-probe', 'integration-provider-manager', 'integration-gateway', 'integration-key-manager', 'create-support-checkout', 'get-platform-health', 'pcm-direct-mail', 'intelligence-crm-context'];
+
+// Watchdog Intelligence CRM context must accept the WatchdogIndex hosts, not only the legacy site.
+const crmContext = read('supabase/functions/intelligence-crm-context/index.ts');
+must(crmContext.includes('"https://www.watchdogindex.com"') && crmContext.includes('"https://watchdogindex.com"'), 'intelligence-crm-context must allow the WatchdogIndex origins.');
 
 for (const name of functions) {
   const source = read(`supabase/functions/${name}/index.ts`);

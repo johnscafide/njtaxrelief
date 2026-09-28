@@ -1,6 +1,7 @@
 import { readFileSync } from 'node:fs';
 
-// Integration Center board redesign + CRM <-> property connection.
+// Integration Center board redesign + CRM <-> property connection, plus the CRM
+// address and matcher fixes behind it.
 const read = (path) => readFileSync(new URL(`../../${path}`, import.meta.url), 'utf8');
 const must = (condition, message) => { if (!condition) throw new Error(message); };
 
@@ -55,5 +56,21 @@ must(!/insert into public\.integration_crm_property_links/i.test(sql), 'The over
 const fix = read('supabase/migrations/20260928205000_crm_link_method_enriched_fix.sql');
 must(fix.includes("'enriched_zip_exact_candidate'") && fix.includes("'exact_address_candidate'") && fix.includes("'verified_address'"), 'link_method check must allow the enriched candidate label and keep existing labels.');
 must(/detail_status = 'pending'[\s\S]*where s\.detail_status = 'candidate'[\s\S]*not exists/.test(fix), 'Only candidate states without any link are re-queued.');
+
+// BoldTrail re-syncs send no address; they must not erase the one the resolver stored.
+const keep = read('supabase/migrations/20260928220000_crm_sync_keeps_resolved_address.sql');
+must(keep.includes("property_address = coalesce(excluded.property_address, integration_crm_context.property_address),"), 'CRM sync upsert must keep the stored address when the incoming row has none.');
+must(/raise exception 'integration_upsert_crm_context_batch changed/.test(keep), 'Address rule rewrite must stop if the upsert function changed shape.');
+const requeue = read('supabase/migrations/20260928223000_crm_requeue_blanked_addresses.sql');
+must(/c\.property_address is null/.test(requeue) && /s\.normalized_address is not null/.test(requeue) && /not in \('pending', 'error'\)/.test(requeue), 'Only resolved contacts that lost their address are re-queued.');
+must(!/delete from/i.test(requeue), 'Address recovery must not delete CRM links.');
+
+// The matcher must not report success when a save fails.
+const worker = read('supabase/functions/integration-crm-resolution-worker/index.ts');
+must(/async function setState[^\n]*if\(error\)throw new Error\(`crm_resolution_state_update_failed/.test(worker), 'Resolution state saves must throw on error.');
+must(/async function clearAddressCandidates[^\n]*if\(error\)throw new Error\(`crm_candidate_link_clear_failed/.test(worker), 'Clearing old candidates must throw on error.');
+must(worker.includes('crm_candidate_link_read_failed') && worker.includes('crm_candidate_link_write_failed') && worker.includes('crm_explicit_link_refresh_failed'), 'Candidate link reads, writes, and explicit link refresh must check for errors.');
+must(/if\(!written\)\{await setState\(admin,ctx\.id,\{detail_status:alreadyVerified\?"enriched":"no_match"/.test(worker), 'A contact whose matches were all reviewed must not be left as a pending candidate.');
+must(worker.includes('crm_resolution_error_state_failed'), 'A failure to record an error must be logged, not swallowed.');
 
 console.log('Integration Center board and CRM property contract passed');
