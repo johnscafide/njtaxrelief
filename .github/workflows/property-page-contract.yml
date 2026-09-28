@@ -6,6 +6,11 @@ on:
     paths:
       - 'api/watchdog-property-page.js'
       - 'api/watchdog-property-report.js'
+      - 'api/watchdog-property-alerts.js'
+      - 'supabase/functions/property-alert-sender/index.ts'
+      - 'supabase/migrations/20260928235000_property_alerts.sql'
+      - 'supabase/migrations/20260929000000_property_alerts_page_flag.sql'
+      - 'property/tests/property-alerts-contract.mjs'
       - 'package.json'
       - 'supabase/migrations/20260928234000_property_page_sales_reports.sql'
       - 'middleware.js'
@@ -22,6 +27,11 @@ on:
     paths:
       - 'api/watchdog-property-page.js'
       - 'api/watchdog-property-report.js'
+      - 'api/watchdog-property-alerts.js'
+      - 'supabase/functions/property-alert-sender/index.ts'
+      - 'supabase/migrations/20260928235000_property_alerts.sql'
+      - 'supabase/migrations/20260929000000_property_alerts_page_flag.sql'
+      - 'property/tests/property-alerts-contract.mjs'
       - 'package.json'
       - 'supabase/migrations/20260928234000_property_page_sales_reports.sql'
       - 'middleware.js'
@@ -47,6 +57,8 @@ jobs:
         run: npm install --omit=dev --ignore-scripts --no-audit --no-fund --no-package-lock
       - name: Verify property page contract
         run: node property/tests/property-page-contract.mjs
+      - name: Verify property alerts contract
+        run: node property/tests/property-alerts-contract.mjs
       - name: Verify parcel mailing ZIP privacy contract
         run: node property/tests/parcel-mailing-zip-privacy-contract.mjs
       - name: Verify property mailing ZIP contract

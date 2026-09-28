@@ -342,6 +342,19 @@ function toolkitSection(row, v) {
     </section>`;
 }
 
+function alertsSection(row, v) {
+  if (row.alerts_enabled !== true) return '';
+  return `<section class="wdp-panel" id="wdp-alerts" aria-labelledby="wdp-alerts-h">
+      <h2 id="wdp-alerts-h">Get alerts for this property</h2>
+      <p>We check the state tax list once a month and email you if the assessment, tax bill or Watchdog Score for ${esc(v.address)} changes. Unsubscribe any time.</p>
+      <form class="wdp-alert-form" id="wdp-alert-form" novalidate>
+        <label><span class="wdp-sr">Email</span><input name="email" type="email" autocomplete="email" required maxlength="200" placeholder="you@example.com"></label>
+        <button class="wdp-pill is-dark" type="submit"><i class="fas fa-bell" aria-hidden="true"></i>Email me changes</button>
+      </form>
+      <p class="wdp-form-msg" role="status" aria-live="polite"></p>
+    </section>`;
+}
+
 function reportSection(row, v) {
   return `<section class="wdp-panel wdp-report" id="wdp-report" aria-labelledby="wdp-report-h">
       <div class="wdp-report-copy">
@@ -514,6 +527,12 @@ const STYLE = `
 .wdp-form-msg{font-size:14px;font-weight:600}
 .wdp-form-msg.is-error{color:#c0342b}
 .wdp-form-msg.is-ok{color:#1c7a4a}
+.wdp-alert-form{display:flex;flex-wrap:wrap;gap:10px;margin:4px 0 8px}
+.wdp-alert-form label{flex:1 1 220px;display:block}
+.wdp-alert-form input{width:100%;box-sizing:border-box;min-height:46px;padding:10px 12px;border:1px solid var(--b-line);border-radius:12px;background:var(--b-surface);font:500 16px "Plus Jakarta Sans",system-ui,sans-serif;color:var(--b-ink)}
+.wdp-alert-form input:focus{border-color:var(--b-ink);background:#fff}
+.wdp-alert-form input[aria-invalid=true]{border-color:#c0342b}
+.wdp-sr{position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0);white-space:nowrap}
 .wdp-share-wrap{margin-top:16px}
 .wdp-toast{display:block;margin-top:8px;font-size:14px;font-weight:600;color:#1c7a4a}
 .wdp-faq{margin-top:16px}
@@ -527,7 +546,7 @@ const STYLE = `
 @media (max-width:980px){.wdp-card--score,.wdp-card--tax,.wdp-card--sales,.wdp-card--home{grid-column:1/-1}.wdp-grid,.wdp-report{grid-template-columns:minmax(0,1fr)}}
 @media (max-width:640px){.wdp-app{padding:84px 16px 40px}.wdp-card,.wdp-panel{padding:18px 16px}.wdp-form{grid-template-columns:minmax(0,1fr)}.wdp-facts{grid-template-columns:minmax(0,1fr)}.wdp-head .wdp-pills{width:100%}.wdp-head .wdp-pill{flex:1 1 auto;justify-content:center}.wdp-hide-sm{display:none}.wdp-dims a{grid-template-columns:26px minmax(0,1fr) 22% 32px;gap:8px}.wdp-score-lead b{font-size:48px}}
 @media (prefers-reduced-motion:reduce){.wdp *{transition:none!important;animation:none!important}}
-@media print{.wd-nav,.wd-public-sheet,.wd-public-backdrop,.wdp-head .wdp-pills,#wdp-share,#wdp-report,#main-footer,.wdp-card--home{display:none!important}.wdp{background:#fff!important}.wdp-app{padding:0}.wdp-card,.wdp-panel{break-inside:avoid}.wdp-card--score{background:#fff!important;color:#000!important;border:1px solid #ccc}.wdp-card--score *{color:#000!important}.wdp-bar i{background:#000!important}}
+@media print{.wd-nav,.wd-public-sheet,.wd-public-backdrop,.wdp-head .wdp-pills,#wdp-share,#wdp-report,#wdp-alerts,#main-footer,.wdp-card--home{display:none!important}.wdp{background:#fff!important}.wdp-app{padding:0}.wdp-card,.wdp-panel{break-inside:avoid}.wdp-card--score{background:#fff!important;color:#000!important;border:1px solid #ccc}.wdp-card--score *{color:#000!important}.wdp-bar i{background:#000!important}}
 `;
 
 const PAGE_SCRIPT = `(function(){
@@ -543,6 +562,23 @@ const PAGE_SCRIPT = `(function(){
   document.querySelectorAll('[data-wdp-share-top]').forEach(function(a){a.addEventListener('click',function(e){if(navigator.share){e.preventDefault();nativeShare()}})});
   function remember(){if(window.WatchdogPublicNav&&typeof window.WatchdogPublicNav.remember==='function'&&data.recent){window.WatchdogPublicNav.remember(data.recent);return true}return false}
   if(!remember())window.addEventListener('load',remember);
+
+  var af=document.getElementById('wdp-alert-form');
+  if(af){
+    var am=af.parentNode.querySelector('.wdp-form-msg');
+    af.addEventListener('submit',function(e){
+      e.preventDefault();
+      var input=af.elements.email,email=input.value.trim();input.removeAttribute('aria-invalid');
+      function tell(t,ok){am.textContent=t;am.className='wdp-form-msg '+(ok?'is-ok':'is-error')}
+      if(!/^[^@\\s]+@[^@\\s]+\\.[^@\\s]+$/.test(email)){input.setAttribute('aria-invalid','true');input.focus();return tell('Please enter a valid email.',false)}
+      var b=af.querySelector('button');b.disabled=true;tell('Sending...',true);
+      fetch('/api/watchdog-property-alerts',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({pin:data.pin,email:email})})
+        .then(function(r){return r.json().catch(function(){return{}}).then(function(j){if(!r.ok)throw new Error(j.error||'Something went wrong. Please try again.');return j})})
+        .then(function(j){tell(j.message||'Check your email to confirm.',true);af.reset()})
+        .catch(function(err){tell(err.message,false)})
+        .then(function(){b.disabled=false});
+    });
+  }
 
   var form=document.getElementById('wdp-report-form');
   if(!form)return;
@@ -681,6 +717,7 @@ ${chrome()}
     <div class="wdp-col">
       ${factsSection(row, v)}
       ${neighborsSection(row)}
+      ${alertsSection(row, v)}
     </div>
   </div>
   ${reportSection(row, v)}
@@ -696,12 +733,16 @@ ${FOOT_SCRIPTS}
 </html>`;
 }
 
-function notFoundPage() {
-  return `<!doctype html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1"><title>Property not found | Watchdog</title><meta name="robots" content="noindex, follow">
+function messagePage(title, heading, text, actions = '') {
+  return `<!doctype html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1"><title>${esc(title)} | Watchdog</title><meta name="robots" content="noindex, follow">
 ${HEAD_ASSETS}<style>${STYLE}</style></head>
 <body class="nav-solid wdp">${chrome()}
-<main class="wdp-app"><div class="wdp-head"><div><h1>We couldn't find that property</h1><p>The link may be old, or the parcel has no tax record on the state list.</p></div><div class="wdp-pills"><a class="wdp-pill is-dark" href="/">Search an address</a></div></div></main>
+<main class="wdp-app"><div class="wdp-head"><div><h1>${esc(heading)}</h1><p>${esc(text)}</p></div>${actions ? `<div class="wdp-pills">${actions}</div>` : ''}</div></main>
 <div id="main-footer"></div>${FOOT_SCRIPTS}</body></html>`;
+}
+
+function notFoundPage() {
+  return messagePage('Property not found', 'We couldn\'t find that property', 'The link may be old, or the parcel has no tax record on the state list.', '<a class="wdp-pill is-dark" href="/">Search an address</a>');
 }
 
 async function fetchProperty(pin) {
@@ -794,4 +835,5 @@ module.exports.slugify = slugify;
 module.exports.INDEXABLE_COUNTIES = INDEXABLE_COUNTIES;
 module.exports.rateTrend = rateTrend;
 module.exports.fetchProperty = fetchProperty;
+module.exports.messagePage = messagePage;
 module.exports.helpers = { view, money, count, saleDate, monthYear, titleCase, componentScore, townCompareText, rateTrend, latestRatio, faqItems, reportFileName, propertyPath, DIMENSIONS, CANONICAL_ORIGIN, REPORT_CONSENT };
