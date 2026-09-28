@@ -1,0 +1,79 @@
+date,time,channel,action,asset_id,asset_file,owner,phase,notes
+2026-09-28,09:00,Meta,Create or confirm Facebook page Watchdog New Jersey Property Intelligence and Instagram @watchdogindex; Business Manager; ad account; payment method,SETUP-META-ACCOUNT,04-paid-ads/meta-ads.md,John,0,Both handles marked [create] in the brief; three organic posts each before Oct 5
+2026-09-28,10:00,Google Search,Create or confirm Google Ads account; link GA4 G-ENP9182L0J; enable auto-tagging,SETUP-GOOGLE-ACCOUNT,04-paid-ads/google-search-ads.md,Coordinator,0,
+2026-09-28,11:00,LinkedIn,Create company page Watchdog if missing; Campaign Manager account; request John's thought leader authorization,SETUP-LINKEDIN-ACCOUNT,04-paid-ads/linkedin-ads.md,Coordinator,0,Recommended and Aggressive tiers only
+2026-09-28,14:00,YouTube,Create or confirm @watchdogindex channel; link channel to Google Ads,SETUP-YOUTUBE-CHANNEL,04-paid-ads/youtube-ads.md,Coordinator,0,Recommended and Aggressive tiers only
+2026-09-28,15:00,All,Choose budget tier and record it in budget-and-pacing.csv,DECISION-TIER,04-paid-ads/paid-media-strategy.md,John,0,"Lean, Recommended, or Aggressive"
+2026-09-29,09:00,All,"Paid review: kill, scale, refresh",REVIEW-WEEKLY,04-paid-ads/paid-media-strategy.md,John,0,Setup checklist and tier decision
+2026-09-29,10:00,Meta,Install Meta pixel site-wide via routing adapter; Conversions API from Stripe webhook; event_id dedup,SETUP-META-PIXEL,04-paid-ads/utm-and-tracking.md,Engineering,0,Respect GPC and DNT as product-analytics.js does
+2026-09-30,10:00,All,"Add GA4 events view_landing, trial_started, founding_invite_requested, free_account_created, academy_lesson_1_done; mark key events",SETUP-GA4-EVENTS,04-paid-ads/utm-and-tracking.md,Engineering,0,Extend EVENTS set in product-analytics.js
+2026-10-01,10:00,LinkedIn,Install LinkedIn Insight Tag via routing adapter; conversion rules; matched audiences,SETUP-LINKEDIN-TAG,04-paid-ads/utm-and-tracking.md,Engineering,0,
+2026-10-01,11:00,Google Search,"Build campaign Q4-SEARCH-NJ-AGENTS with six ad groups, negatives, extensions, tracking template; leave paused",BUILD-GOOGLE-CAMPAIGN,04-paid-ads/google-search-ads.md,Coordinator,0,AD-G-BRAND to AD-G-TP
+2026-10-02,10:00,Meta,Upload customer exclusion list and launch list custom audience (hashed); build INT and EMP audiences; verify pixel events in Events Manager,SETUP-META-AUDIENCES,04-paid-ads/meta-ads.md,Coordinator,0,Test-events tool must show StartTrial deduplicated
+2026-10-02,17:00,Meta,"Creative due: CR-01, CR-02, CR-10, CR-11, CR-12 in three sizes",CR-01,04-paid-ads/creative-briefs.md,Designer,0,Phase 0 set; John approves same day
+2026-10-05,07:00,Meta,Launch Q4-P0-CONTENT with AD-M-001 to AD-M-005; AD-M-006 to LIST audience,AD-M-001,04-paid-ads/meta-ads.md,Coordinator,0,Content and free lookup only; no trial ads in Phase 0
+2026-10-05,07:00,Google Search,Enable BRAND and INTENT ad groups at half the Phase 1 budget; manual CPC,AD-G-BRAND,04-paid-ads/google-search-ads.md,Coordinator,0,
+2026-10-05,07:00,LinkedIn,Aggressive tier only: document ad AD-L-003 on at $60 for the week,AD-L-003,04-paid-ads/linkedin-ads.md,Coordinator,0,Seeds Insight Tag audience
+2026-10-05,07:00,YouTube,Aggressive tier only: AD-Y-001 CPV test at $60 for the week,AD-Y-001,04-paid-ads/youtube-ads.md,Coordinator,0,
+2026-10-05,10:00,Google Search,Verify GA4 conversion import into Google Ads shows the five imported actions recording,SETUP-GOOGLE-IMPORT,04-paid-ads/utm-and-tracking.md,Engineering,0,
+2026-10-06,09:00,All,"Paid review: kill, scale, refresh",REVIEW-WEEKLY,04-paid-ads/paid-media-strategy.md,John,0,"Search terms, kill and scale rules, frequency, pool sizes, budget pacing"
+2026-10-07,17:00,Meta,"Creative due: CR-03, CR-04, CR-05, CR-06, CR-07 in three sizes",CR-03,04-paid-ads/creative-briefs.md,Designer,0,Phase 1 set
+2026-10-07,17:00,YouTube,"John records AD-Y-001, AD-Y-002, AD-Y-004 on camera",AD-Y-001,04-paid-ads/youtube-ads.md,John,0,"One session, plain wall"
+2026-10-08,12:00,All,/agents/trial and /agents/trial/thanks live on staging with all events firing; Variant A and B switch tested,LP-AGENTS-TRIAL,04-paid-ads/landing-page-specs.md,Engineering,0,Clean route registered; canonical without /property/
+2026-10-09,10:00,All,"Landing page QA at 320, 390, 430, 768, 1440 and mobile WebKit; Playwright targeted run; Lighthouse mobile",LP-QA,04-paid-ads/landing-page-specs.md,John,0,Fix hard failures before Oct 12
+2026-10-09,12:00,Meta,"Build Q4-P1-TRIAL, Q4-P1-INVITE, Q4-RT campaigns paused with AD-M-007 to AD-M-016 and AD-R-001 to AD-R-010",AD-M-007,04-paid-ads/meta-ads.md,Coordinator,0,
+2026-10-09,17:00,YouTube,"Video cuts due: AD-Y-001, AD-Y-002, AD-Y-004 with captions and end card",AD-Y-004,04-paid-ads/youtube-ads.md,Designer,0,
+2026-10-09,17:00,LinkedIn,"Build form Q4-LNL-FORM and AD-L-001, AD-L-002, AD-L-007 paused",AD-L-001,04-paid-ads/linkedin-ads.md,Coordinator,0,Privacy URL confirmed
+2026-10-11,18:00,All,Confirm billing gate state; choose Variant A or B; confirm tier and Phase 1 budgets,DECISION-VARIANT,04-paid-ads/paid-media-strategy.md,John,0,"If gate closed, Phase 1 runs on invite path"
+2026-10-12,07:00,Meta,Launch Q4-P1-TRIAL and Q4-P1-INVITE; Phase 1 budget; hook test CR-01 vs CR-07 vs SV video,AD-M-007,04-paid-ads/meta-ads.md,Coordinator,1,Budget change at phase boundary
+2026-10-12,07:00,Google Search,All ad groups on except TP; Phase 1 budget; Maximize clicks with bid limit,AD-G-INTENT,04-paid-ads/google-search-ads.md,Coordinator,1,Budget change at phase boundary
+2026-10-12,07:00,LinkedIn,Launch form campaign AD-L-001 and AD-L-002; AD-L-007 trial ad,AD-L-001,04-paid-ads/linkedin-ads.md,Coordinator,1,Recommended and Aggressive only
+2026-10-12,07:00,YouTube,Launch custom intent with AD-Y-001 and AD-Y-004; placements with AD-Y-002,AD-Y-001,04-paid-ads/youtube-ads.md,Coordinator,1,Placements list filled by Oct 12
+2026-10-12,07:00,Retargeting,Launch Q4-RT stages 1 to 3 and checkout abandoner ad set,AD-R-001,04-paid-ads/retargeting.md,Coordinator,1,"Merge pools under 1,000"
+2026-10-13,09:00,All,"Paid review: kill, scale, refresh",REVIEW-WEEKLY,04-paid-ads/paid-media-strategy.md,John,1,"Search terms, kill and scale rules, frequency, pool sizes, budget pacing"
+2026-10-14,10:00,LinkedIn,Sponsor John's Oct 1 post as thought leader ad AD-L-004,AD-L-004,04-paid-ads/linkedin-ads.md,John,1,Needs authorization in Campaign Manager
+2026-10-16,17:00,Meta,"Creative due: CR-08, CR-09 in three sizes",CR-08,04-paid-ads/creative-briefs.md,Designer,1,Phase 2 and 3 set; CR-09 booth placeholder stays
+2026-10-19,07:00,Meta,"Creative refresh: angle test AD-M-009, AD-M-010, AD-M-012, AD-M-013 on the winning hook style",REFRESH-CREATIVE,04-paid-ads/meta-ads.md,Coordinator,1,Every 2 weeks
+2026-10-20,09:00,All,"Paid review: kill, scale, refresh",REVIEW-WEEKLY,04-paid-ads/paid-media-strategy.md,John,1,"Search terms, kill and scale rules, frequency, pool sizes, budget pacing"
+2026-10-23,17:00,YouTube,"Video cuts due: AD-Y-003, AD-Y-005, AD-Y-006",AD-Y-005,04-paid-ads/youtube-ads.md,Designer,1,John records by Oct 20
+2026-10-25,18:00,All,"Week-2 win check against section 7 criteria; decide hold, cut, or scale",DECISION-WEEK2,04-paid-ads/paid-media-strategy.md,John,1,Written into the Oct 27 report
+2026-10-26,07:00,Meta,AD-M-017 (Nov 1 tax quarter) and AD-M-018 (Nov 2 deadline) on,AD-M-017,04-paid-ads/meta-ads.md,Coordinator,1,
+2026-10-27,09:00,All,"Paid review: kill, scale, refresh",REVIEW-WEEKLY,04-paid-ads/paid-media-strategy.md,John,1,Week-2 win check written up
+2026-10-30,12:00,Meta,Collect first real agent quotes for AD-M-020; build Phase 2 ads paused,AD-M-020,04-paid-ads/meta-ads.md,John,1,Placeholder stays until a quote is signed off
+2026-11-02,07:00,Meta,"Phase 2 budget; rename to Q4-P2; AD-M-019, AD-M-023, AD-M-026, AD-M-027 on; creative refresh; UTM campaign to p2",AD-M-019,04-paid-ads/meta-ads.md,Coordinator,2,Budget change at phase boundary
+2026-11-02,07:00,Google Search,Phase 2 budget; second RSA in INTENT and COMP; UTM campaign to p2,AD-G-COMP,04-paid-ads/google-search-ads.md,Coordinator,2,Budget change at phase boundary
+2026-11-02,07:00,LinkedIn,Phase 2 budget; UTM campaign to p2,AD-L-002,04-paid-ads/linkedin-ads.md,Coordinator,2,Budget change at phase boundary
+2026-11-02,07:00,YouTube,Phase 2 budget; add AD-Y-005 and AD-Y-006 to custom intent; AD-Y-003 on placements,AD-Y-006,04-paid-ads/youtube-ads.md,Coordinator,2,Budget change at phase boundary
+2026-11-02,07:00,Retargeting,Phase 2 budget; UTM campaign to p2,AD-R-005,04-paid-ads/retargeting.md,Coordinator,2,Budget change at phase boundary
+2026-11-03,09:00,All,"Paid review: kill, scale, refresh",REVIEW-WEEKLY,04-paid-ads/paid-media-strategy.md,John,2,"Search terms, kill and scale rules, frequency, pool sizes, budget pacing"
+2026-11-09,07:00,Meta,AD-M-021 (Dec 1 hook) and AD-M-022 (holiday mailer) on; AD-M-025 seat count set from the real number,AD-M-021,04-paid-ads/meta-ads.md,Coordinator,2,
+2026-11-10,09:00,All,"Paid review: kill, scale, refresh",REVIEW-WEEKLY,04-paid-ads/paid-media-strategy.md,John,2,"Search terms, kill and scale rules, frequency, pool sizes, budget pacing"
+2026-11-16,07:00,Meta,Creative refresh; AD-M-024 and AD-M-028 on,REFRESH-CREATIVE,04-paid-ads/meta-ads.md,Coordinator,2,Every 2 weeks
+2026-11-17,09:00,All,"Paid review: kill, scale, refresh",REVIEW-WEEKLY,04-paid-ads/paid-media-strategy.md,John,2,"Search terms, kill and scale rules, frequency, pool sizes, budget pacing"
+2026-11-17,10:00,LinkedIn,Sponsor John's Dec 1 added-assessment post as thought leader ad AD-L-005,AD-L-005,04-paid-ads/linkedin-ads.md,John,2,
+2026-11-20,17:00,Meta,Triple Play creative final: CR-09 with booth placeholder filled; AD-Y-006 Triple Play end card cut,CR-09,04-paid-ads/creative-briefs.md,Designer,2,Booth confirmed after registration
+2026-11-23,07:00,All,Thanksgiving week budgets at about 60 percent across channels,BUDGET-THANKSGIVING,04-paid-ads/budget-and-pacing.csv,Coordinator,2,
+2026-11-24,09:00,All,"Paid review: kill, scale, refresh",REVIEW-WEEKLY,04-paid-ads/paid-media-strategy.md,John,2,"Search terms, kill and scale rules, frequency, pool sizes, budget pacing"
+2026-11-27,12:00,Meta,Build Q4-P3-TRIPLEPLAY (TP radius) and Google TP ad group paused; AD-M-029 and AD-M-030 loaded,AD-M-029,04-paid-ads/meta-ads.md,Coordinator,2,
+2026-11-30,07:00,All,Budgets back to Phase 2 rate; creative refresh; AD-M-021 Dec 1 hook gets priority,REFRESH-CREATIVE,04-paid-ads/meta-ads.md,Coordinator,2,Every 2 weeks
+2026-12-01,07:00,Google Search,TP ad group on (Dec 1 to 11),AD-G-TP,04-paid-ads/google-search-ads.md,Coordinator,2,Telecom and sports negatives in place
+2026-12-01,07:00,LinkedIn,AD-L-006 Triple Play on,AD-L-006,04-paid-ads/linkedin-ads.md,Coordinator,2,
+2026-12-01,09:00,All,"Paid review: kill, scale, refresh",REVIEW-WEEKLY,04-paid-ads/paid-media-strategy.md,John,2,"Search terms, kill and scale rules, frequency, pool sizes, budget pacing"
+2026-12-04,17:00,Meta,"Build year-end ads AD-M-031, AD-M-032, AD-R-011, AD-R-012, AD-L-008 paused",AD-M-031,04-paid-ads/meta-ads.md,Coordinator,2,
+2026-12-05,07:00,Meta,Triple Play geo campaign ON: TP radius around Atlantic City Convention Center with AD-M-029,AD-M-029,04-paid-ads/meta-ads.md,Coordinator,3,Dec 5 on
+2026-12-07,07:00,All,Phase 3 budget; rename campaigns to p3; AD-M-030 day-of and AD-M-033 on; UTM campaign to p3,BUDGET-P3,04-paid-ads/budget-and-pacing.csv,Coordinator,3,Budget change at phase boundary; John at Triple Play
+2026-12-07,08:00,Meta,Update AD-M-030 booth and time placeholders each morning Dec 7 to 10,AD-M-030,04-paid-ads/meta-ads.md,Coordinator,3,"Repeat Dec 8, 9, 10"
+2026-12-08,09:00,All,"Paid review: kill, scale, refresh",REVIEW-WEEKLY,04-paid-ads/paid-media-strategy.md,Coordinator,3,Coordinator runs it; John at Triple Play
+2026-12-11,07:00,Meta,Triple Play geo campaign OFF; convert TP audience to post-event pool; AD-M-036 on,AD-M-036,04-paid-ads/meta-ads.md,Coordinator,3,Dec 11 off
+2026-12-11,07:00,Google Search,TP ad group off,AD-G-TP,04-paid-ads/google-search-ads.md,Coordinator,3,
+2026-12-14,07:00,Meta,Year-end campaign ON: Q4-P3-ANNUAL with AD-M-031 and AD-M-032; AD-M-034 founder note on; creative refresh,AD-M-031,04-paid-ads/meta-ads.md,Coordinator,3,Dec 14 on
+2026-12-14,07:00,Retargeting,AD-R-011 and AD-R-012 on in stage 3; creative refresh,AD-R-011,04-paid-ads/retargeting.md,Coordinator,3,
+2026-12-14,07:00,LinkedIn,AD-L-008 year-end on,AD-L-008,04-paid-ads/linkedin-ads.md,Coordinator,3,
+2026-12-14,07:00,YouTube,AD-Y-006 year-end end card variant on,AD-Y-006,04-paid-ads/youtube-ads.md,Coordinator,3,
+2026-12-15,09:00,All,"Paid review: kill, scale, refresh",REVIEW-WEEKLY,04-paid-ads/paid-media-strategy.md,John,3,"Search terms, kill and scale rules, frequency, pool sizes, budget pacing"
+2026-12-18,12:00,Meta,AD-M-035 last seats on if Founding seats remain,AD-M-035,04-paid-ads/meta-ads.md,Coordinator,3,Real count only
+2026-12-22,09:00,All,"Paid review: kill, scale, refresh",REVIEW-WEEKLY,04-paid-ads/paid-media-strategy.md,John,3,"Search terms, kill and scale rules, frequency, pool sizes, budget pacing"
+2026-12-23,17:00,All,Quiet week: reduce to BRAND search and RT stage 3 only for Dec 24 to 27,BUDGET-QUIET,04-paid-ads/budget-and-pacing.csv,Coordinator,3,
+2026-12-28,07:00,All,Resume year-end campaign; creative refresh; final push through Dec 31,REFRESH-CREATIVE,04-paid-ads/meta-ads.md,Coordinator,3,Every 2 weeks
+2026-12-29,09:00,All,"Paid review: kill, scale, refresh",REVIEW-WEEKLY,04-paid-ads/paid-media-strategy.md,John,3,"Search terms, kill and scale rules, frequency, pool sizes, budget pacing"
+2026-12-31,12:00,All,Year-end campaign off at end of day; Q4 paid wrap report; January budget decision,REPORT-Q4-WRAP,04-paid-ads/utm-and-tracking.md,John,3,Cohort CAC on October and November trials
