@@ -536,6 +536,12 @@
       "sha256": "1563efa5a10580e250639f6fe8eda4ff8c273f8722249f4c5507013f55598bcd",
       "verify_jwt": true,
       "tracking": "source_snapshot"
+    },
+    "property-alert-sender": {
+      "version": 1,
+      "sha256": "75b5383531827073b14bb22156926f54a070b1c557a9e49ca6e5373f68c514e7",
+      "verify_jwt": false,
+      "tracking": "source_snapshot"
     }
   }
 }
