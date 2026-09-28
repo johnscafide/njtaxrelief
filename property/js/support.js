@@ -43,12 +43,22 @@
       subject: document.getElementById('support-subject').value,
       message: document.getElementById('support-message').value
     };
-    client.functions.invoke('submit-support-request', { body: body }).then(function (result) {
+    client.rpc('submit_support_request', {
+      p_category: body.category,
+      p_priority: body.priority,
+      p_subject: body.subject,
+      p_message: body.message
+    }).then(function (result) {
       if (result.error) throw result.error;
-      var request = result.data && result.data.request;
-      setNote('Request submitted' + (request && request.id ? '. Reference ' + request.id.slice(0, 8).toUpperCase() + '.' : '.'), 'success');
+      var request = result.data;
+      setNote('Request submitted' + (request && request.id ? '. Reference ' + String(request.id).slice(0, 8).toUpperCase() + '.' : '.'), 'success');
       form.reset();
-    }).catch(function () {
+    }).catch(function (error) {
+      var message = error && error.message || '';
+      if (/subject and enough detail|too many support requests/i.test(message)) {
+        setNote(message, 'error');
+        return;
+      }
       note.innerHTML = 'The request could not be submitted. Please <a href="/contact?topic=support-fallback">Contact Watchdog</a> if the problem continues.';
       note.className = 'op-note error';
     }).finally(function () { submit.disabled = false; });

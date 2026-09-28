@@ -40,6 +40,14 @@ async function callFunction(name, { method = 'POST', token, body } = {}) {
   return { response, data };
 }
 
+async function callRpc(name, { token, body } = {}) {
+  const headers = { apikey: supabaseKey, 'Content-Type': 'application/json' };
+  if (token) headers.Authorization = `Bearer ${token}`;
+  const response = await fetch(`${supabaseUrl}/rest/v1/rpc/${name}`, { method: 'POST', headers, body: JSON.stringify(body || {}) });
+  const data = await response.json().catch(() => ({}));
+  return { response, data };
+}
+
 const developerToken = await login(developerEmail, developerPassword);
 const standardToken = await login(standardEmail, standardPassword);
 const checks = [];
@@ -50,17 +58,17 @@ checks.push({ name: 'public platform status', passed: status.response.ok && ['op
 const exportResult = await callFunction('export-my-data', { token: developerToken, body: {} });
 checks.push({ name: 'authenticated data export', passed: exportResult.response.ok && exportResult.data?.account?.email === developerEmail && exportResult.data?.data && Object.prototype.hasOwnProperty.call(exportResult.data.data, 'profile'), status: exportResult.response.status });
 
-const supportValidation = await callFunction('submit-support-request', {
+const supportValidation = await callRpc('submit_support_request', {
   token: developerToken,
-  body: { category: 'technical', priority: 'normal', subject: 'x', message: 'too short' }
+  body: { p_category: 'technical', p_priority: 'normal', p_subject: 'x', p_message: 'too short' }
 });
-checks.push({ name: 'support auth + validation boundary', passed: supportValidation.response.status === 400 && /subject|detail/i.test(String(supportValidation.data?.error || '')), status: supportValidation.response.status });
+checks.push({ name: 'support auth + validation boundary', passed: supportValidation.response.status === 400 && /subject|detail/i.test(String(supportValidation.data?.message || '')), status: supportValidation.response.status });
 
 const anonymousExport = await callFunction('export-my-data', { body: {} });
 checks.push({ name: 'anonymous export denied', passed: anonymousExport.response.status === 401, status: anonymousExport.response.status });
 
-const anonymousSupport = await callFunction('submit-support-request', { body: { category: 'other', priority: 'normal', subject: 'Anonymous test', message: 'This must never create a support row.' } });
-checks.push({ name: 'anonymous support denied', passed: anonymousSupport.response.status === 401, status: anonymousSupport.response.status });
+const anonymousSupport = await callRpc('submit_support_request', { body: { p_category: 'other', p_priority: 'normal', p_subject: 'Anonymous test', p_message: 'This must never create a support row.' } });
+checks.push({ name: 'anonymous support denied', passed: [401, 403].includes(anonymousSupport.response.status), status: anonymousSupport.response.status });
 
 const anonymousScanner = await callFunction('appeal-prospect-scan', { body: { action: 'catalog' } });
 checks.push({ name: 'anonymous Scanner denied', passed: anonymousScanner.response.status === 401, status: anonymousScanner.response.status });
