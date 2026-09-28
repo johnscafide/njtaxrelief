@@ -2,19 +2,55 @@
   "manifest_version": 3,
   "name": "Watchdog for NJ listings",
   "short_name": "Watchdog",
-  "version": "1.0.0",
-  "description": "See the New Jersey property tax, assessment and Watchdog Score for the listing you are viewing. For Watchdog Agent plan members.",
+  "version": "1.1.0",
+  "description": "Watchdog on New Jersey listings: the Watchdog Score, the real tax bill and year, whether the assessment holds up at the list price, and nearby sales. For Watchdog Agent plan members.",
   "homepage_url": "https://www.watchdogindex.com/agent-desk",
-  "icons": { "16": "icons/icon-16.png", "32": "icons/icon-32.png", "48": "icons/icon-48.png", "128": "icons/icon-128.png" },
-  "action": { "default_title": "Watchdog", "default_popup": "popup.html", "default_icon": { "16": "icons/icon-16.png", "32": "icons/icon-32.png" } },
-  "permissions": ["storage"],
-  "host_permissions": ["https://www.watchdogindex.com/*"],
-  "background": { "service_worker": "background.js" },
+  "icons": {
+    "16": "icons/icon-16.png",
+    "32": "icons/icon-32.png",
+    "48": "icons/icon-48.png",
+    "128": "icons/icon-128.png"
+  },
+  "action": {
+    "default_title": "Watchdog",
+    "default_popup": "popup.html",
+    "default_icon": {
+      "16": "icons/icon-16.png",
+      "32": "icons/icon-32.png"
+    }
+  },
+  "permissions": [
+    "storage"
+  ],
+  "host_permissions": [
+    "https://www.watchdogindex.com/*"
+  ],
+  "background": {
+    "service_worker": "background.js"
+  },
   "content_scripts": [
     {
-      "matches": ["https://www.zillow.com/*", "https://www.realtor.com/*", "https://www.redfin.com/*"],
-      "js": ["content.js"],
+      "matches": [
+        "https://www.zillow.com/*",
+        "https://www.realtor.com/*",
+        "https://www.redfin.com/*"
+      ],
+      "js": [
+        "content.js"
+      ],
       "run_at": "document_idle"
+    }
+  ],
+  "web_accessible_resources": [
+    {
+      "resources": [
+        "icons/icon-32.png"
+      ],
+      "matches": [
+        "https://www.zillow.com/*",
+        "https://www.realtor.com/*",
+        "https://www.redfin.com/*"
+      ]
     }
   ]
 }

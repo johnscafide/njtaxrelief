@@ -188,6 +188,39 @@ function rateTrend(row) {
   return { points, latest: points[points.length - 1], first: points[0], cutAtReval };
 }
 
+// Which year the state-list tax bill is for. The MOD-IV "last year tax" is a
+// mix: some towns' files carry the 2024 bill, others 2025. A bill is matched
+// to a year only when it equals assessed x that year's general rate (within
+// 0.2%); special district charges can make that impossible, and then the year
+// stays unknown rather than guessed. When the bill is older than the newest
+// published rate, current = the bill moved to the newest rate.
+function billYear(row) {
+  const bill = Number(row.last_year_tax), assessed = Number(row.assessed_value);
+  const series = loadTownData().rates[townKey(row)];
+  if (!(bill > 0) || !(assessed > 0) || !series) return { year: null, current: null };
+  const implied = bill / assessed * 100;
+  const years = Object.keys(series).map(Number).filter((y) => Number(series[y]) > 0).sort((a, b) => b - a);
+  if (!years.length) return { year: null, current: null };
+  const latest = years[0];
+  // Only the two newest years: an older rate can match a bill by coincidence.
+  const hit = years.slice(0, 2).find((y) => Math.abs(implied / Number(series[y]) - 1) <= 0.002);
+  if (!hit) {
+    // Year unknown (usually special district charges on top of the general
+    // rate): estimate the newest year from the general rate alone.
+    return { year: null, current: { year: latest, amount: Math.round(assessed * Number(series[latest])) / 100, generalRateOnly: true } };
+  }
+  const current = hit < latest ? { year: latest, amount: Math.round(bill * Number(series[latest]) / Number(series[hit]) * 100) / 100 } : null;
+  return { year: hit, current };
+}
+
+// Stat label + optional second stat for the bill year (see billYear).
+function taxStats(row, money) {
+  const by = billYear(row);
+  const label = by.year ? `${by.year} tax bill` : 'Latest annual tax';
+  const extra = by.current ? `<div class="wdp-stat"><b>${esc(money(by.current.amount))}</b><span>${by.current.year} ${by.current.generalRateOnly ? 'estimate' : 'at new rate'}</span></div>` : '';
+  return { label, extra, by };
+}
+
 function latestRatio(row) {
   const series = loadTownData().ratios[townKey(row)];
   if (!series) return null;
@@ -235,7 +268,8 @@ function taxCard(row, v) {
   return `<section class="wdp-card wdp-card--tax" aria-labelledby="wdp-tax-h">
       <div class="wdp-card-head"><h2 id="wdp-tax-h">Property tax</h2><a class="wdp-card-link" href="/town-compare">Compare towns</a></div>
       <div class="wdp-stats">
-        <div class="wdp-stat is-lead"><b>${esc(money(row.last_year_tax) || 'n/a')}</b><span>Latest annual tax</span></div>
+        <div class="wdp-stat is-lead"><b>${esc(money(row.last_year_tax) || 'n/a')}</b><span>${esc(taxStats(row, money).label)}</span></div>
+        ${taxStats(row, money).extra}
         <div class="wdp-stat"><b>${esc(money(row.assessed_value) || 'n/a')}</b><span>Assessed value</span></div>
         ${tc && tc.median_tax ? `<div class="wdp-stat"><b>${esc(money(tc.median_tax))}</b><span>${esc(v.town)} median</span></div>` : ''}
         ${trend ? `<div class="wdp-stat"><b>$${trend.latest.rate.toFixed(3)}</b><span>${trend.latest.year} rate</span></div>` : ''}
@@ -837,4 +871,4 @@ module.exports.rateTrend = rateTrend;
 module.exports.fetchProperty = fetchProperty;
 module.exports.messagePage = messagePage;
 module.exports.parts = { HEAD_ASSETS, STYLE, FOOT_SCRIPTS, chrome, esc };
-module.exports.helpers = { view, money, count, saleDate, monthYear, titleCase, componentScore, townCompareText, rateTrend, latestRatio, faqItems, reportFileName, propertyPath, DIMENSIONS, CANONICAL_ORIGIN, REPORT_CONSENT };
+module.exports.helpers = { billYear, taxStats, view, money, count, saleDate, monthYear, titleCase, componentScore, townCompareText, rateTrend, latestRatio, faqItems, reportFileName, propertyPath, DIMENSIONS, CANONICAL_ORIGIN, REPORT_CONSENT };
