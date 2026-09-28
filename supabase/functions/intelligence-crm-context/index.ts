@@ -2,12 +2,12 @@ import "jsr:@supabase/functions-js/edge-runtime.d.ts";
 import { createClient } from "npm:@supabase/supabase-js@2.95.0";
 
 type Obj=Record<string,any>;
-const ORIGINS=new Set(["https://njpropertytaxrelief.com","https://www.njpropertytaxrelief.com","http://localhost:3000","http://127.0.0.1:3000"]);
+const ORIGINS=new Set(["https://njpropertytaxrelief.com","https://www.njpropertytaxrelief.com","https://watchdogindex.com","https://www.watchdogindex.com","http://localhost:3000","http://127.0.0.1:3000"]);
 const PLANS=new Set(["pro_plus","teams","developer"]);
 const FIELDS=["contact_name","lead_stage","relationship","last_activity_at","tags","property_ref","property_address","source","system_source","deal_type","assigned_agent_id","assigned_agent_external_id","source_updated_at","updated_at"];
 function clean(v:unknown,max=220){return String(v??"").replace(/[\u0000-\u001f<>]/g,"").trim().slice(0,max);}
 function namedEnv(jsonName:string,legacyName:string){const raw=Deno.env.get(jsonName)||"";if(raw){try{const x=JSON.parse(raw);if(x?.default)return String(x.default)}catch{}}return Deno.env.get(legacyName)||"";}
-function cors(req:Request){const o=req.headers.get("origin")||"";const allow=ORIGINS.has(o)||/^https:\/\/[a-z0-9-]+\.vercel\.app$/i.test(o)?o:"https://njpropertytaxrelief.com";return{"Access-Control-Allow-Origin":allow,"Access-Control-Allow-Headers":"authorization, x-client-info, apikey, content-type","Access-Control-Allow-Methods":"POST, OPTIONS","Vary":"Origin"};}
+function cors(req:Request){const o=req.headers.get("origin")||"";const allow=ORIGINS.has(o)||/^https:\/\/[a-z0-9-]+\.vercel\.app$/i.test(o)?o:"https://www.watchdogindex.com";return{"Access-Control-Allow-Origin":allow,"Access-Control-Allow-Headers":"authorization, x-client-info, apikey, content-type, x-retry-count, traceparent, tracestate, baggage","Access-Control-Allow-Methods":"POST, OPTIONS","Vary":"Origin"};}
 function out(req:Request,status:number,payload:unknown){return new Response(JSON.stringify(payload),{status,headers:{...cors(req),"Content-Type":"application/json","Cache-Control":"private, no-store"}});}
 function plan(v:unknown){return clean(v,30).toLowerCase().replace("pro+","pro_plus")||"standard";}
 function safeContext(v:unknown){const x=v&&typeof v==="object"&&!Array.isArray(v)?v as Obj:{};return{source:clean(x.source,120)||null,system_source:clean(x.system_source,120)||null,deal_type:clean(x.deal_type,100)||null,assigned_agent_id:x.assigned_agent_id==null?null:clean(x.assigned_agent_id,80),assigned_agent_external_id:clean(x.assigned_agent_external_id,120)||null};}
