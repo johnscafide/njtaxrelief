@@ -1,0 +1,109 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <meta name="robots" content="index,follow">
+  <title>New Jersey Mortgage Calculator | Watchdog</title>
+  <meta name="description" content="Estimate a monthly payment in New Jersey with principal, interest, property taxes, insurance and PMI.">
+  <link rel="canonical" href="https://www.watchdogindex.com/mortgage-calculator">
+  <meta property="og:type" content="website">
+  <meta property="og:site_name" content="Watchdog">
+  <meta property="og:url" content="https://www.watchdogindex.com/mortgage-calculator">
+  <meta property="og:title" content="New Jersey Mortgage Calculator | Watchdog">
+  <meta property="og:description" content="Estimate a monthly payment in New Jersey with principal, interest, property taxes, insurance and PMI.">
+  <meta property="og:image" content="https://www.watchdogindex.com/watchdog-social-share-20260913-v3.jpg">
+  <meta name="twitter:card" content="summary_large_image">
+  <link rel="icon" href="/favicon-96x96.png">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@600&family=Plus+Jakarta+Sans:wght@500;600;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+  <link rel="stylesheet" href="/styles.css">
+  <link rel="stylesheet" href="/property/css/shared.css">
+  <link rel="stylesheet" href="/property/css/public-mobile-nav.css">
+  <link rel="stylesheet" href="/property/css/watchdog-tool-page.css?v=20260928a">
+</head>
+<body class="tp-page nav-solid">
+<header class="wd-nav" id="wd-nav">
+  <div class="wd-nav-in">
+    <button class="wd-public-trigger" id="wd-menu-trigger" type="button" onclick="WatchdogPublicNav.open('main')" aria-label="Open Watchdog menu">
+      <i class="fas fa-bars"></i><span>Menu</span>
+    </button>
+    <a class="wd-logo" href="/"><i class="fas fa-dog"></i><span>Watchdog</span></a>
+    <button class="wd-public-trigger wd-public-profile" id="wd-profile-trigger" type="button" onclick="WatchdogPublicNav.open('profile')" aria-label="Open account menu">
+      <i class="fas fa-user"></i><span>Sign in</span>
+    </button>
+  </div>
+</header>
+<div class="wd-public-backdrop" id="wd-public-backdrop" onclick="WatchdogPublicNav.close()"></div>
+<aside class="wd-public-sheet" id="wd-main-sheet" aria-hidden="true" aria-label="Watchdog navigation"><!-- Filled by /property/js/watchdog-universal-menu.js: the one shared Watchdog menu. --></aside>
+<aside class="wd-public-sheet right" id="wd-profile-sheet" aria-hidden="true" aria-label="Watchdog account">
+  <div class="wd-public-sheet-head"><b>Your Watchdog</b><button class="wd-public-close" type="button" onclick="WatchdogPublicNav.close()" aria-label="Close account menu"><i class="fas fa-xmark"></i></button></div>
+  <div id="wd-profile-content"></div>
+</aside>
+<main>
+  <section class="tp-hero"><div class="tp-shell">
+    <p class="tp-kicker">Mortgage calculator</p>
+    <h1>Your real monthly payment, <em>taxes included.</em></h1>
+    <p>In New Jersey, property taxes can be a third of the payment. Enter the numbers and see the full monthly cost, not just the loan.</p>
+  </div></section>
+  <div class="tp-main"><div class="tp-shell">
+    <div class="tp-grid">
+      <form class="tp-card" id="mc-form" novalidate>
+        <h2>Your numbers</h2>
+        <p>Change any field and the payment updates.</p>
+        <div class="tp-fields">
+          <label class="tp-field wide">Home price ($)<input id="mc-price" inputmode="decimal" value="400000"></label>
+          <label class="tp-field">Down payment (%)<input id="mc-down" inputmode="decimal" value="20"></label>
+          <label class="tp-field">Interest rate (%)<input id="mc-rate" inputmode="decimal" value="6.5"></label>
+          <label class="tp-field">Loan term<select id="mc-term"><option value="30">30 years</option><option value="20">20 years</option><option value="15">15 years</option><option value="10">10 years</option></select></label>
+          <label class="tp-field">Annual property tax ($)<input id="mc-tax" inputmode="decimal" value="9000"><small>Look up the real bill for any NJ address on Watchdog.</small></label>
+          <label class="tp-field">Home insurance ($ / year)<input id="mc-ins" inputmode="decimal" value="1500"></label>
+          <label class="tp-field">HOA ($ / month)<input id="mc-hoa" inputmode="decimal" value="0"></label>
+          <label class="tp-field wide">PMI (% of loan / year)<input id="mc-pmi" inputmode="decimal" value="0.5"><small>Only applies when the down payment is under 20%.</small></label>
+        </div>
+      </form>
+      <section class="tp-card tp-result" aria-live="polite">
+        <p class="tp-kicker">Estimated monthly payment</p>
+        <div class="tp-big" id="mc-total">$0</div>
+        <p class="tp-sub" id="mc-loan">Loan amount $0</p>
+        <div class="tp-bar" id="mc-bar" aria-hidden="true"></div>
+        <div class="tp-legend"><span style="--c:#5ec2b7">Principal &amp; interest</span><span style="--c:#e7d28d">Property tax</span><span style="--c:#8fb4ff">Insurance</span><span style="--c:#f29e9e">PMI + HOA</span></div>
+        <ul class="tp-rows" style="margin-top:16px">
+          <li><span>Principal &amp; interest</span><b id="mc-pi">$0</b></li>
+          <li><span>Property tax</span><b id="mc-tx">$0</b></li>
+          <li><span>Home insurance</span><b id="mc-in">$0</b></li>
+          <li><span>PMI</span><b id="mc-pm">$0</b></li>
+          <li><span>HOA</span><b id="mc-ho">$0</b></li>
+        </ul>
+        <p class="tp-note">Estimate only. Your lender's rate, fees and escrow will differ. New Jersey tax bills vary a lot from town to town, so use the real bill for the home you want.</p>
+        <div class="tp-cta"><a class="tp-btn light" href="/">Look up a property's real tax bill</a></div>
+      </section>
+    </div>
+  </div></div>
+</main>
+<div id="main-footer"></div>
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2/dist/umd/supabase.js"></script>
+<script src="/property/js/public-nav.js"></script>
+<script>fetch('/property/partials/footer.html').then(function(r){return r.ok?r.text():''}).then(function(h){var f=document.getElementById('main-footer');if(f&&h)f.innerHTML=h}).catch(function(){});</script>
+<script>
+(function(){
+  var $=function(id){return document.getElementById(id)};
+  var num=function(id){var v=parseFloat(String($(id).value).replace(/[^0-9.]/g,''));return isFinite(v)&&v>=0?v:0};
+  var money=function(n){return '$'+Math.round(n).toLocaleString('en-US')};
+  function calc(){
+    var price=num('mc-price'),down=Math.min(num('mc-down'),100),rate=num('mc-rate')/100/12,n=Number($('mc-term').value)*12;
+    var loan=price*(1-down/100);
+    var pi=loan<=0?0:(rate===0?loan/n:loan*rate/(1-Math.pow(1+rate,-n)));
+    var tax=num('mc-tax')/12,ins=num('mc-ins')/12,hoa=num('mc-hoa'),pmi=down<20?loan*num('mc-pmi')/100/12:0;
+    var total=pi+tax+ins+pmi+hoa;
+    $('mc-total').textContent=money(total);$('mc-loan').textContent='Loan amount '+money(loan)+' over '+(n/12)+' years';
+    $('mc-pi').textContent=money(pi);$('mc-tx').textContent=money(tax);$('mc-in').textContent=money(ins);$('mc-pm').textContent=money(pmi);$('mc-ho').textContent=money(hoa);
+    var parts=[[pi,'#5ec2b7'],[tax,'#e7d28d'],[ins,'#8fb4ff'],[pmi+hoa,'#f29e9e']];
+    $('mc-bar').innerHTML=total>0?parts.map(function(p){return '<i style="width:'+(p[0]/total*100).toFixed(2)+'%;background:'+p[1]+'"></i>'}).join(''):'';
+  }
+  $('mc-form').addEventListener('input',calc);$('mc-form').addEventListener('submit',function(e){e.preventDefault();calc()});calc();
+})();
+</script>
+</body>
+</html>

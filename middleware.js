@@ -13,6 +13,9 @@ const LEGACY_AGENT_PORTAL_PATH = /^\/property\/agent\/([a-z0-9](?:[a-z0-9-]{1,38
 // Agent portal addresses are /agent/<slug>. These names are real /agent/* pages or kept
 // for future ones, so they never resolve to a portal (also blocked when reserving a slug).
 const AGENT_RESERVED_SEGMENTS = new Set(['agent','agents','analytics','assets','buyers','client-room','clients','contacts','desk','edit','extension','farm-map','index','leads','listing-prep','new','onboarding','open-house','portal','reports','settings','shared','sphere','team','teams','today','training','workspace']);
+// Watchdog host only: old NJPropertyTaxRelief tool pages linked from Watchdog now
+// have Watchdog versions at clean root URLs. NJPropertyTaxRelief keeps its own.
+const WATCHDOG_TOOL_REDIRECTS = new Map([['/resources.html','/glossary'],['/resources','/glossary'],['/home-improvement-abatement.html','/home-improvement-abatement'],['/mortgage-calculator.html','/mortgage-calculator'],['/home-value.html','/home-value'],['/search-homes.html','/search-homes']]);
 const SALES_API_PATH = '/api/sales-by-district';
 const AUTOMATION_UA = /\b(?:curl|wget|python-requests|scrapy|go-http-client|libwww-perl|httpclient)\b/i;
 const ROOT_STATIC_PAGES = new Set(['/move', '/contact', '/search', '/agent', '/lender', '/attorney', '/investor', '/developer/communications', '/transaction', '/transaction/shared', '/account/profile', '/account/professional-profile', '/agent/listing-prep', '/agent/buyers', '/agent/open-house', '/agent/training', '/open-house', '/client-room', '/preview', '/preview/home']);
@@ -39,6 +42,7 @@ if(LEGACY_NJPTR_HOSTS.has(host)&&LEGACY_WATCHDOG_PROMO_PATHS.has(url.pathname))r
 if(BULK_SALES_FILE.test(url.pathname)){console.warn('watchdog-data-edge',JSON.stringify({event:'bulk_sales_blocked',path:url.pathname}));await recordEdgeSecurityEvent(request,'bulk_sales_blocked',url.pathname,AUTOMATION_UA.test(userAgent));return blockedDataResponse(404,'Bulk sales files are not a public delivery surface.','public, max-age=300, s-maxage=86400');}
 if(url.pathname===SALES_API_PATH&&AUTOMATION_UA.test(userAgent)){console.warn('watchdog-data-edge',JSON.stringify({event:'automation_client_blocked',path:url.pathname}));await recordEdgeSecurityEvent(request,'automation_client_blocked',url.pathname,true);return blockedDataResponse(403,'Automated bulk extraction is not permitted on this endpoint.','no-store');}
 if(host!==WATCHDOG_HOST)return next();
+if(WATCHDOG_TOOL_REDIRECTS.has(url.pathname))return redirectCanonical(request,url,WATCHDOG_TOOL_REDIRECTS.get(url.pathname));
 if(url.pathname==='/anchor-estimator.html'||url.pathname==='/anchor-estimator'){const destination=new URL('/anchor-estimator.html','https://njpropertytaxrelief.com');destination.search=url.search;return Response.redirect(destination,308);}
 if(url.pathname===INDEXNOW_KEY_PATH)return rewriteWatchdogSystemFile(request,'/api/watchdog-index-indexnow-key');
 if(url.pathname==='/robots.txt')return rewriteWatchdogSystemFile(request,'/api/watchdog-index-robots');

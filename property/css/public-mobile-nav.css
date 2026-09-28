@@ -137,3 +137,6 @@ html body .faqp-wrap .faq-item[hidden],html body .faqp-wrap .faq-cat[hidden]{dis
   body.wd-consumer-mode #wd-property-footer .wdf-social-link{align-items:center!important;display:inline-flex!important;height:44px!important;justify-content:center!important;min-height:44px!important;min-width:44px!important;width:44px!important}
 }
 @media(prefers-reduced-motion:reduce){.wd-public-sheet,.wd-public-backdrop{transition:none}}
+/* Public header slots (grouped by public-nav.js): left menu, centered logo, right account. */
+.wd-nav-in>.wd-left{display:flex;align-items:center;justify-content:flex-start;gap:10px;min-width:0}
+.wd-nav-in>.wd-right{display:flex;align-items:center;justify-content:flex-end;gap:10px;min-width:0}

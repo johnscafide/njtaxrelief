@@ -333,7 +333,7 @@
       eyebrow: 'John Scafide · Licensed NJ Real Estate Agent · Opus Elite Real Estate',
       headline: 'Found a property worth watching? See what is actually for sale.',
       sub: 'Public records tell you about the property. MLS access tells you what you can buy right now. Search New Jersey homes with John Scafide.',
-      cta: 'Search Homes', href: '/search-homes.html?utm_source=watchdog&utm_medium=internal_ad&utm_campaign=john_buyer&utm_content=mls_search',
+      cta: 'Search Homes', href: '/search-homes?utm_source=watchdog&utm_medium=internal_ad&utm_campaign=john_buyer&utm_content=mls_search',
       photo: '/johnprofile.jpg', alt: 'John Scafide, licensed New Jersey real estate agent', disclosure: AD_DISCLOSURE_JOHN, theme: 'john'
     },
     {
@@ -341,7 +341,7 @@
       eyebrow: 'John Scafide · Licensed NJ Real Estate Agent · Opus Elite Real Estate',
       headline: 'Your tax record is one piece of your home’s story. Market value is another.',
       sub: 'If selling is on your radar, start with a home-value estimate and a real conversation about what today’s market could mean for your move.',
-      cta: 'Check Home Value', href: '/home-value.html?utm_source=watchdog&utm_medium=internal_ad&utm_campaign=john_seller&utm_content=home_value',
+      cta: 'Check Home Value', href: '/home-value?utm_source=watchdog&utm_medium=internal_ad&utm_campaign=john_seller&utm_content=home_value',
       photo: '/johnprofile.jpg', alt: 'John Scafide, licensed New Jersey real estate agent', disclosure: AD_DISCLOSURE_JOHN, theme: 'john'
     },
     {

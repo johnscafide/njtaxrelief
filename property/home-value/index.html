@@ -1,0 +1,83 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <meta name="robots" content="index,follow">
+  <title>What Is My New Jersey Home Worth? | Watchdog</title>
+  <meta name="description" content="See public-record value signals for any New Jersey home: assessment, recent sales and town context, with sources.">
+  <link rel="canonical" href="https://www.watchdogindex.com/home-value">
+  <meta property="og:type" content="website">
+  <meta property="og:site_name" content="Watchdog">
+  <meta property="og:url" content="https://www.watchdogindex.com/home-value">
+  <meta property="og:title" content="What Is My New Jersey Home Worth? | Watchdog">
+  <meta property="og:description" content="See public-record value signals for any New Jersey home: assessment, recent sales and town context, with sources.">
+  <meta property="og:image" content="https://www.watchdogindex.com/watchdog-social-share-20260913-v3.jpg">
+  <meta name="twitter:card" content="summary_large_image">
+  <link rel="icon" href="/favicon-96x96.png">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@600&family=Plus+Jakarta+Sans:wght@500;600;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+  <link rel="stylesheet" href="/styles.css">
+  <link rel="stylesheet" href="/property/css/shared.css">
+  <link rel="stylesheet" href="/property/css/public-mobile-nav.css">
+  <link rel="stylesheet" href="/property/css/watchdog-tool-page.css?v=20260928a">
+</head>
+<body class="tp-page nav-solid">
+<header class="wd-nav" id="wd-nav">
+  <div class="wd-nav-in">
+    <button class="wd-public-trigger" id="wd-menu-trigger" type="button" onclick="WatchdogPublicNav.open('main')" aria-label="Open Watchdog menu">
+      <i class="fas fa-bars"></i><span>Menu</span>
+    </button>
+    <a class="wd-logo" href="/"><i class="fas fa-dog"></i><span>Watchdog</span></a>
+    <button class="wd-public-trigger wd-public-profile" id="wd-profile-trigger" type="button" onclick="WatchdogPublicNav.open('profile')" aria-label="Open account menu">
+      <i class="fas fa-user"></i><span>Sign in</span>
+    </button>
+  </div>
+</header>
+<div class="wd-public-backdrop" id="wd-public-backdrop" onclick="WatchdogPublicNav.close()"></div>
+<aside class="wd-public-sheet" id="wd-main-sheet" aria-hidden="true" aria-label="Watchdog navigation"><!-- Filled by /property/js/watchdog-universal-menu.js: the one shared Watchdog menu. --></aside>
+<aside class="wd-public-sheet right" id="wd-profile-sheet" aria-hidden="true" aria-label="Watchdog account">
+  <div class="wd-public-sheet-head"><b>Your Watchdog</b><button class="wd-public-close" type="button" onclick="WatchdogPublicNav.close()" aria-label="Close account menu"><i class="fas fa-xmark"></i></button></div>
+  <div id="wd-profile-content"></div>
+</aside>
+<main>
+  <section class="tp-hero"><div class="tp-shell">
+    <p class="tp-kicker">Home value</p>
+    <h1>What is your home <em>worth?</em></h1>
+    <p>Start with the public record. Watchdog shows the assessment, recent nearby sales and your town&#39;s ratio, with the source beside each number.</p>
+  </div></section>
+  <div class="tp-main"><div class="tp-shell">
+    <div class="tp-grid">
+      <form class="tp-card" id="hv-form" action="/" method="get">
+        <h2>Check any New Jersey address</h2>
+        <p>Free. No account needed.</p>
+        <div class="tp-search"><label class="tp-field" style="flex:1 1 260px">Property address<input name="address" autocomplete="street-address" placeholder="123 Main Street, Williamstown, NJ" required></label></div>
+        <div class="tp-cta"><button class="tp-btn" type="submit">See the value signals</button></div>
+        <p class="tp-note">You land on the Watchdog property page for that address.</p>
+      </form>
+      <section class="tp-card">
+        <h2>What you will see</h2>
+        <ul class="tp-list">
+          <li><i class="fas fa-landmark"></i><span><b>Assessed value</b> and how your town's ratio turns it into an implied market value.</span></li>
+          <li><i class="fas fa-file-signature"></i><span><b>Recorded sales</b> on the home and nearby, from New Jersey deed records.</span></li>
+          <li><i class="fas fa-chart-line"></i><span><b>Tax and assessment history</b>, so you can see where things are heading.</span></li>
+          <li><i class="fas fa-circle-check"></i><span><b>Sources on every number.</b> Estimates are labeled as estimates.</span></li>
+        </ul>
+        <p class="tp-note">Public-record signals are not an appraisal. For a price to list or offer at, talk to a licensed New Jersey real estate professional.</p>
+      </section>
+    </div>
+    <section class="tp-card tp-section">
+      <h2>Want a local agent's market opinion?</h2>
+      <p>Request a free comparative market analysis from Opus Elite Real Estate. This form is run by the brokerage, not Watchdog.</p>
+      <iframe class="tp-frame" style="min-height:220px" src="https://johnscafide.opuselitesj.com/sellembed.php" title="Request a market analysis from Opus Elite Real Estate" loading="lazy"></iframe>
+    </section>
+  </div></div>
+</main>
+<div id="main-footer"></div>
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2/dist/umd/supabase.js"></script>
+<script src="/property/js/public-nav.js"></script>
+<script>fetch('/property/partials/footer.html').then(function(r){return r.ok?r.text():''}).then(function(h){var f=document.getElementById('main-footer');if(f&&h)f.innerHTML=h}).catch(function(){});</script>
+
+</body>
+</html>
