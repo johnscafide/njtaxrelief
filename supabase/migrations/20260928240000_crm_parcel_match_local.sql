@@ -11,8 +11,9 @@
 -- The worker now asks integration_find_crm_parcels(), which matches against
 -- public.property_lookups (every NJ parcel, filled by the statewide parcel sync):
 -- 1. watchdog_split_address() pulls city, state and ZIP out of one-line street fields.
--- 2. watchdog_norm_street() normalizes both sides the same way; an expression index
---    keeps the lookup fast.
+-- 2. watchdog_norm_street() normalizes both sides the same way. Only parcels with
+--    the same house number are compared (a text_pattern_ops index range), so a
+--    lookup reads a few thousand rows, not 3.5 million.
 -- 3. The parcel's town has to fit the contact: the towns a ZIP serves
 --    (nj_zip_districts), the city name, or, when the contact gives neither, the
 --    address has to be the only one in New Jersey.
@@ -153,9 +154,10 @@ begin
 end;
 $$;
 
--- Fast exact lookups on the normalized parcel address.
-create index if not exists property_lookups_norm_street_idx
-  on public.property_lookups (public.watchdog_norm_street(address));
+-- House-number range scans on the parcel address ("12 " .. "12!"). An expression
+-- index on watchdog_norm_street() was too slow to build over 3.5 million rows.
+create index if not exists property_lookups_address_pattern_idx
+  on public.property_lookups (address text_pattern_ops);
 
 -- Which municipalities (Treasury district codes, the first four characters of a
 -- PAMS PIN) each NJ ZIP serves. Parcel records carry the owner's mailing ZIP and
@@ -228,6 +230,7 @@ as $$
 declare
   a record;
   v_norm text;
+  v_house text;
   v_city_key text;
   v_all jsonb;
   v_pick jsonb := '[]'::jsonb;
@@ -248,12 +251,14 @@ begin
   if v_norm is null or v_norm !~ '^[0-9]' then
     return v_out || jsonb_build_object('status', 'no_match', 'reason', 'no_house_number', 'parcels', '[]'::jsonb);
   end if;
+  v_house := split_part(v_norm, ' ', 1);
 
   select coalesce(jsonb_agg(jsonb_build_object('pams_pin', p.pams_pin, 'address', p.address, 'town', p.town,
            'county', p.county, 'district', left(p.pams_pin, 4)) order by p.pams_pin), '[]'::jsonb)
     into v_all
     from public.property_lookups p
-   where public.watchdog_norm_street(p.address) = v_norm;
+   where p.address ~>=~ (v_house || ' ') and p.address ~<~ (v_house || '!')
+     and public.watchdog_norm_street(p.address) = v_norm;
 
   -- "12 Main St Unit 4" when the parcel record has no unit.
   if jsonb_array_length(v_all) = 0 and v_norm ~ ' UNIT ' then
@@ -261,7 +266,8 @@ begin
              'county', p.county, 'district', left(p.pams_pin, 4)) order by p.pams_pin), '[]'::jsonb)
       into v_all
       from public.property_lookups p
-     where public.watchdog_norm_street(p.address) = regexp_replace(v_norm, ' UNIT .*$', '');
+     where p.address ~>=~ (v_house || ' ') and p.address ~<~ (v_house || '!')
+       and public.watchdog_norm_street(p.address) = regexp_replace(v_norm, ' UNIT .*$', '');
     v_match := 'unit_base';
   end if;
 
