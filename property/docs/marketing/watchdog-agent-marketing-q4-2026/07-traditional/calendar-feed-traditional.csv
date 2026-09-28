@@ -1,0 +1,93 @@
+date,time,channel,action,asset_id,asset_file,owner,phase,notes
+2026-09-28,09:00,traditional,Kickoff: confirm print budget ceiling and postcard vendor path,PR-001,print-ads.md,John,0,Decide whether Postcard Studio can address office mail [confirm with Postcard Studio] or a vendor is needed [placeholder]
+2026-09-29,09:00,postcard,Start office mailing list build from NJ Real Estate Commission licensee search and public brokerage directories,PC-001,agent-postcards.md,Coordinator,0,Target 300 offices per drop. Office addresses only. No personal addresses
+2026-09-30,09:00,print,Send rate and deadline inquiries: NJ REALTORS member magazine and e-newsletter,PR-001,print-ads.md,Coordinator,0,[verify rates and deadlines]
+2026-09-30,09:30,print,Send rate and deadline inquiries: county and regional board newsletters,PR-005,print-ads.md,Coordinator,0,[verify per board]
+2026-09-30,10:00,print,Send rate and deadline inquiry: Triple Play show guide and mobile app,PR-009,print-ads.md,Coordinator,0,[verify with Triple Play exhibitor services]
+2026-09-30,10:30,print,Send rate and deadline inquiries: NJBIZ and ROI-NJ real estate sections,PR-003,print-ads.md,Coordinator,0,[verify]
+2026-09-30,11:00,print,Send rate and deadline inquiry: Real Estate NJ,PR-007,print-ads.md,Coordinator,0,[verify]
+2026-09-30,14:00,pr,Pitch wave 1: Oct 1 valuation date explainer and founder story to NJ business and real estate desks,PR-P02,press-release-and-pr.md,John,0,Also send PR-P05. Reporter placeholders must be verified before sending
+2026-10-01,09:00,postcard,List build checkpoint: dedupe offices and confirm 300 mailable addresses for drop 1,PC-001,agent-postcards.md,Coordinator,0,
+2026-10-01,14:00,postcard,Design approval PC-001 (October 1 valuation date),PC-001,agent-postcards.md,John,0,Designer supplies front and back proof by Sep 30
+2026-10-02,09:00,postcard,Finalize office list drop 1 and save as audience or vendor CSV,PC-001,agent-postcards.md,Coordinator,0,Same 300 offices for drops 1 to 3 unless John decides otherwise
+2026-10-02,10:00,print,Start print ad layouts PR-001 to PR-008 at four sizes,PR-001,print-ads.md,Designer,0,Trim and bleed pending rate cards [verify]
+2026-10-05,09:00,postcard,Upload and pay PC-001 drop (300 offices),PC-001,agent-postcards.md,Coordinator,0,Postcard Studio if office addressing confirmed; otherwise vendor [placeholder]
+2026-10-06,09:00,event,Confirm three brokerage lunch-and-learn dates and post break-room flyers with permission,EV-002,office-flyers-and-sell-sheet.md,John,0,Dates [placeholder]
+2026-10-07,09:00,print,Sell sheet and flyer artwork final,EV-001,office-flyers-and-sell-sheet.md,Designer,0,Also EV-003 table tent and EV-004 business card back and EV-005 calendar card
+2026-10-07,10:00,podcast,Podcast pitch wave 1 (NJ agent shows and NJ business shows),RA-P01,podcast-and-radio.md,John,0,One-sheet RA-OS-01 attached
+2026-10-07,14:00,audio,Record Watchdog Agent Desk episode 1,RA-E01,podcast-and-radio.md,John,0,
+2026-10-07,15:00,postcard,PC-001 estimated mail date (prints 1 to 3 business days after upload),PC-001,agent-postcards.md,Coordinator,0,In-home window about Oct 9 to Oct 14
+2026-10-08,09:00,pr,Press release PR-REL-01 final approval,PR-REL-01,press-release-and-pr.md,John,0,Founder quote [John to approve]. Agent quote [placeholder] or approved anonymous quote
+2026-10-09,07:00,audio,Publish Watchdog Agent Desk episode 1,RA-E01,podcast-and-radio.md,John,0,
+2026-10-09,09:00,print,Send sell sheet and flyer and table tents and calendar cards and business cards to print,EV-001,office-flyers-and-sell-sheet.md,Coordinator,0,Quantities [placeholder]
+2026-10-09,11:00,print,Artwork deadline estimate: NJ REALTORS member magazine Nov/Dec issue,PR-001,print-ads.md,Designer,0,[verify actual deadline]
+2026-10-12,07:00,pr,Send press release PR-REL-01 to media list and post on site,PR-REL-01,press-release-and-pr.md,John,1,Wire service [placeholder verify cost]. Press route [placeholder]
+2026-10-13,09:00,pr,Pitch wave 2: launch pitch to full media list,PR-P01,press-release-and-pr.md,John,1,Second send of PR-P05 to outlets that did not reply
+2026-10-14,09:00,sponsorship,Send sponsorship asks: board dinners and holiday parties and CE classes and sales meetings and Triple Play add-ons,EV-020,sponsorships-and-local.md,John,1,Log every ask in EV-021
+2026-10-14,12:00,event,Lunch-and-learn 1 [brokerage placeholder],EV-001,office-flyers-and-sell-sheet.md,John,1,Bring sell sheets and calendar cards and sign-in sheet EV-012
+2026-10-14,14:00,postcard,Design approval PC-002 (Founding Agents),PC-002,agent-postcards.md,John,1,
+2026-10-14,15:00,audio,Record episode 2,RA-E02,podcast-and-radio.md,John,1,
+2026-10-15,09:00,directmail,Print and hand-sign broker-owner letters DM-L01 and address envelopes,DM-L01,sponsorships-and-local.md,Coordinator,1,Quantity [placeholder]. Office addresses only
+2026-10-16,07:00,audio,Publish episode 2,RA-E02,podcast-and-radio.md,John,1,
+2026-10-16,09:00,print,Artwork deadline estimate: NJ REALTORS e-newsletter first insertion,PR-007,print-ads.md,Designer,1,[verify]
+2026-10-16,14:00,radio,Radio spot decision: go or no-go on November and December flights,RA-001,podcast-and-radio.md,John,1,[verify rates] NJ 101.5 and WOBM and streaming
+2026-10-19,09:00,postcard,Upload and pay PC-002 drop (300 offices),PC-002,agent-postcards.md,Coordinator,1,
+2026-10-20,09:00,directmail,Mail broker-owner letters DM-L01,DM-L01,sponsorships-and-local.md,Coordinator,1,First-class stamp. Envelope teaser per file
+2026-10-20,10:00,pr,Submit op-ed PR-OPED-01 to [NJ outlet placeholder],PR-OPED-01,press-release-and-pr.md,John,1,[verify submission rules and word limit]
+2026-10-21,09:00,audio,Record episode 3,RA-E03,podcast-and-radio.md,John,1,
+2026-10-21,12:00,event,Lunch-and-learn 2 [brokerage placeholder],EV-001,office-flyers-and-sell-sheet.md,John,1,
+2026-10-21,15:00,postcard,PC-002 estimated mail date,PC-002,agent-postcards.md,Coordinator,1,In-home window about Oct 22 to Oct 28
+2026-10-23,07:00,audio,Publish episode 3,RA-E03,podcast-and-radio.md,John,1,
+2026-10-23,09:00,print,Artwork deadline estimate: county and regional board newsletters November editions,PR-005,print-ads.md,Designer,1,[verify per board]
+2026-10-23,10:00,radio,Book radio flight 1 if approved and send RA-001 to RA-004 to production,RA-001,podcast-and-radio.md,Coordinator,1,[verify rates and availability]
+2026-10-27,09:00,directmail,Follow-up calls to broker-owners who received DM-L01,DM-L01,sponsorships-and-local.md,John,1,Published business numbers only. Honor any do-not-call request immediately
+2026-10-28,09:00,audio,Record episode 4,RA-E04,podcast-and-radio.md,John,1,
+2026-10-28,10:00,event,Booth kit copy final: back wall and banners and signs and QR cards and sign-in sheet,EV-010,event-booth-kit.md,Designer,1,
+2026-10-28,12:00,event,Lunch-and-learn 3 [brokerage placeholder],EV-001,office-flyers-and-sell-sheet.md,John,1,
+2026-10-30,07:00,audio,Publish episode 4,RA-E04,podcast-and-radio.md,John,1,
+2026-10-30,09:00,print,Artwork deadline estimate: NJBIZ and ROI-NJ and Real Estate NJ November insertions,PR-003,print-ads.md,Designer,1,[verify]
+2026-11-02,06:00,radio,Radio flight 1 starts [placeholder] Nov 2 to Nov 20,RA-001,podcast-and-radio.md,Partner,2,Only if approved Oct 16. Station traffic confirms
+2026-11-02,09:00,event,Order booth kit: back wall and banners and table runner and signs and QR cards and shirts,EV-010,event-booth-kit.md,Coordinator,2,Delivery due by Nov 27 [verify vendor]
+2026-11-03,09:00,pr,Pitch wave 3: December 1 added-assessment deadline explainer,PR-P03,press-release-and-pr.md,John,2,
+2026-11-04,09:00,podcast,Podcast pitch wave 2 (coaching shows and brokerage internal podcasts and radio talk segments),RA-P01,podcast-and-radio.md,John,2,
+2026-11-04,14:00,postcard,Design approval PC-003 (December 1 deadline),PC-003,agent-postcards.md,John,2,
+2026-11-04,15:00,audio,Record episode 5,RA-E05,podcast-and-radio.md,John,2,
+2026-11-06,07:00,audio,Publish episode 5,RA-E05,podcast-and-radio.md,John,2,
+2026-11-06,09:00,print,Artwork deadline estimate: Triple Play printed show guide,PR-009,print-ads.md,Designer,2,[verify with exhibitor services]. Booth number required
+2026-11-09,09:00,postcard,Upload and pay PC-003 drop (300 offices),PC-003,agent-postcards.md,Coordinator,2,
+2026-11-10,09:00,pr,Request PR-REL-03 numbers from the data team with sources and dates,PR-REL-03,press-release-and-pr.md,John,2,Every bracket must be filled from data. Nothing from memory
+2026-11-11,09:00,audio,Record episode 6,RA-E06,podcast-and-radio.md,John,2,
+2026-11-12,15:00,postcard,PC-003 estimated mail date (Nov 11 is a postal holiday),PC-003,agent-postcards.md,Coordinator,2,In-home window about Nov 14 to Nov 19
+2026-11-13,07:00,audio,Publish episode 6,RA-E06,podcast-and-radio.md,John,2,
+2026-11-17,07:00,pr,Send PR-REL-03 data story and pitch wave 4 (agents and the tax question),PR-REL-03,press-release-and-pr.md,John,2,Also send PR-P04. Hold if data team numbers are not confirmed
+2026-11-18,09:00,audio,Record episode 7,RA-E07,podcast-and-radio.md,John,2,
+2026-11-18,14:00,postcard,Design approval PC-004 (Triple Play),PC-004,agent-postcards.md,John,2,Booth number and dinner details must be confirmed first
+2026-11-20,07:00,audio,Publish episode 7,RA-E07,podcast-and-radio.md,John,2,
+2026-11-20,09:00,print,Artwork deadline estimate: Triple Play mobile app,PR-009,print-ads.md,Designer,2,[verify]
+2026-11-20,18:00,radio,Radio flight 1 ends [placeholder],RA-001,podcast-and-radio.md,Partner,2,
+2026-11-23,08:00,postcard,Upload and pay PC-004 drop (300 offices plus [number] in Atlantic and Cape May and Ocean counties),PC-004,agent-postcards.md,Coordinator,2,Upload early so it prints before Thanksgiving
+2026-11-24,15:00,postcard,PC-004 estimated mail date,PC-004,agent-postcards.md,Coordinator,2,In-home window about Nov 27 to Dec 3
+2026-11-30,09:00,event,Booth kit delivery check: unpack and inspect and test-assemble back wall and test QR cards and loop screen,EV-010,event-booth-kit.md,Coordinator,2,Reorder anything damaged same day
+2026-12-01,06:00,radio,Radio flight 2 starts [placeholder] Dec 1 to Dec 6,RA-002,podcast-and-radio.md,Partner,2,Only if approved Oct 16
+2026-12-01,07:00,pr,Send PR-REL-02 Triple Play release and pitch wave 5,PR-REL-02,press-release-and-pr.md,John,2,Also send PR-P06. Press of Atlantic City first
+2026-12-02,09:00,audio,Record episode 8,RA-E08,podcast-and-radio.md,John,2,
+2026-12-04,07:00,audio,Publish episode 8,RA-E08,podcast-and-radio.md,John,2,
+2026-12-04,10:00,event,Pack booth kit per checklist and load vehicle,EV-010,event-booth-kit.md,Coordinator,2,Count Founding Agent invite cards [number]
+2026-12-06,18:00,radio,Radio flight 2 ends [placeholder],RA-002,podcast-and-radio.md,Partner,2,
+2026-12-07,08:00,event,Triple Play day 1: load in and set booth and open,EV-010,event-booth-kit.md,John,3,Booth [###]. Read the do-not-do list
+2026-12-08,08:00,event,Triple Play day 2: booth open,EV-010,event-booth-kit.md,John,3,Photograph sign-in sheets at close
+2026-12-08,18:30,event,Founding Agent dinner [venue and time placeholder],EV-011,event-booth-kit.md,John,3,RSVP list from booth and postcard and show guide responses
+2026-12-09,08:00,event,Triple Play day 3: booth open,EV-010,event-booth-kit.md,John,3,
+2026-12-09,15:00,audio,Record episode 9 on site at Triple Play,RA-E09,podcast-and-radio.md,John,3,No guest names without consent
+2026-12-10,08:00,event,Triple Play day 4: booth open and breakdown and secure sign-in sheets,EV-010,event-booth-kit.md,John,3,
+2026-12-11,07:00,audio,Publish episode 9,RA-E09,podcast-and-radio.md,John,3,
+2026-12-11,09:00,event,Enter sign-in sheets with both consent flags and hand to the email and SMS owner,EV-012,event-booth-kit.md,Coordinator,3,No box no message
+2026-12-14,09:00,sponsorship,Send thank-you notes to every board and brokerage sponsor contact and log attendance in EV-021,EV-021,sponsorships-and-local.md,John,3,
+2026-12-15,09:00,print,Print and postcard results review: QR scans and visits and invite requests by asset ID,PR-001,print-ads.md,Coordinator,3,Report to 02-calendar owner. Drop any placement with zero scans after two insertions
+2026-12-15,10:00,pr,Follow up with every outlet pitched this quarter. No new pitch,PR-P01,press-release-and-pr.md,John,3,Update media list status column
+2026-12-16,09:00,audio,Record episode 10,RA-E10,podcast-and-radio.md,John,3,
+2026-12-18,07:00,audio,Publish episode 10,RA-E10,podcast-and-radio.md,John,3,2027 appeal calendar and annual plan note
+2026-12-21,09:00,traditional,Q4 traditional channel recap: postcards and print and radio and events and sponsorships by asset ID,PR-001,print-ads.md,Coordinator,3,One page. Numbers only from tracking
+2026-12-22,09:00,event,Confirm January lunch-and-learn dates from Triple Play conversations,EV-002,office-flyers-and-sell-sheet.md,John,3,Quiet week Dec 24 to 27 follows
+2026-12-28,09:00,postcard,Draft 2027 appeal-season postcard and print plan (Feb 1 notices and Apr 1 deadline),PC-001,agent-postcards.md,John,3,Reuse the office list. Refresh sources
+2026-12-31,09:00,traditional,Close the Q4 traditional log and hand results to the 02-calendar owner,PR-001,print-ads.md,Coordinator,3,
