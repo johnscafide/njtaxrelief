@@ -13,7 +13,7 @@ function cors(req: Request) {
   const origin = req.headers.get('origin') || '';
   return {
     'Access-Control-Allow-Origin': ALLOWED_ORIGINS.has(origin) ? origin : 'https://njpropertytaxrelief.com',
-    'Access-Control-Allow-Headers': 'authorization, apikey, content-type',
+    'Access-Control-Allow-Headers': 'authorization, x-client-info, apikey, content-type',
     'Access-Control-Allow-Methods': 'POST, OPTIONS',
     Vary: 'Origin',
   };
@@ -170,7 +170,7 @@ Deno.serve(async (req) => {
     }
     if (!pcmEnabled()) {
       return reply(req, 503, {
-        error: 'PCM production checkout is intentionally locked until live fulfillment certification is complete',
+        error: 'Postcard ordering opens soon. Your design and proof are saved.',
         code: 'PCM_LIVE_LAUNCH_DISABLED',
       });
     }
@@ -189,7 +189,7 @@ Deno.serve(async (req) => {
     return reply(req, 409, { error: 'Campaign is not eligible for checkout' });
   }
   if (quote.provider_key === 'pcm' && campaign.settings?.pcm_design?.proof_review?.status !== 'approved') {
-    return reply(req, 409, { error: 'Approve the PCM proof before checkout', code: 'PCM_PROOF_APPROVAL_REQUIRED' });
+    return reply(req, 409, { error: 'Approve your postcard proof before checkout', code: 'PCM_PROOF_APPROVAL_REQUIRED' });
   }
 
   const idempotencyKey = `stripe:marketing:${quote.campaign_id}:${quote.id}`;

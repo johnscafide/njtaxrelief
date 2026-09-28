@@ -20,7 +20,13 @@ const inventory = JSON.parse(read('supabase/functions/PRODUCTION-INVENTORY.json'
 // Page: agent-gated, one size, static copy in HTML, clean routes.
 assert.match(html, /data-access-require="agent"/);
 assert.match(html, /<template id="ps-page">/);
-assert.match(html, /6 x 8\.5 postcards, printed and mailed First Class by PostcardMania/);
+assert.match(html, /6 x 8\.5 postcards, printed and mailed First Class by Watchdog Designs/);
+// White label: agents only ever see Watchdog Designs, never the print vendor's name.
+for (const [name, text] of [['page', html], ['page script', js.replace(/\/\*[\s\S]*?\*\/|\/\/[^\n]*/g, '')]]) {
+  assert.doesNotMatch(text, /postcard ?mania/i, `Postcard Studio ${name} must not show the vendor name`);
+  assert.doesNotMatch(text, /\bPCM\b/, `Postcard Studio ${name} must not show the vendor abbreviation`);
+}
+assert.doesNotMatch(studio.match(/error: error\.status === 404[^\n]*/)?.[0] || '', /PostcardMania|PCM/, 'agent-facing studio errors use the Watchdog Designs name');
 assert.match(css, /\.ps-shell \[hidden\][^{]*\{display:none!important\}/, 'hidden controls stay hidden despite button display rules');
 assert.doesNotMatch(js, /['"`]\/property\/(?!js\/|css\/)/, 'no hard-coded /property/ page links');
 assert.match(vercel, /frame-src[^;]*https:\/\/portal\.pcmintegrations\.com/, 'CSP lets the PCM embedded editor load');
@@ -69,11 +75,23 @@ assert.match(fulfill, /PCM_PROOF_STALE/);
 assert.match(checkout, /MARKETING_BILLING_ENABLED/);
 assert.match(checkout, /PCM_LIVE_LAUNCH_ENABLED/);
 assert.match(checkout, /ALLOWED_ORIGINS\.has\(origin\) \? origin : 'https:\/\/njpropertytaxrelief\.com'/);
+// supabase-js sends x-client-info; without it the browser blocks the POST after preflight.
+assert.match(checkout, /'Access-Control-Allow-Headers': '[^']*x-client-info/, 'checkout CORS must allow the x-client-info header');
 
 // Pricing: fixed per-plan retail with a 20% margin floor; credits are service-issued only.
 assert.match(migration, /'agent', 179, 'pro', 169, 'pro_plus', 159, 'teams', 149, 'developer', 149/);
 assert.match(migration, /greatest\(plan_unit_cents, floor_unit_cents\)/);
 assert.match(migration, /revoke all on function public\.marketing_mail_credit_issue\([^)]*\) from public, anon, authenticated;/);
 assert.match(migration, /greatest\(gross_retail_cents - 100, 0\)/, 'at least $1.00 stays due so checkout always has a real charge');
+
+// Every agent-facing Marketing Studio page runs a white-label filter (admin is staff-only).
+for (const page of fs.readdirSync('property/marketing-studio', { withFileTypes: true }).filter((d) => d.isDirectory() && d.name !== 'admin').map((d) => d.name).concat([''])) {
+  const file = `property/marketing-studio/${page ? page + '/' : ''}index.html`;
+  const src = read(file);
+  assert.match(src, /watchdog-designs-white-label\.js|marketing-studio-providers\.js/, `${file} must load a Watchdog Designs white-label filter`);
+}
+const whiteLabel = read('property/js/watchdog-designs-white-label.js');
+assert.match(whiteLabel, /Post\\s\?card\\s\?Mania/, 'filter catches the vendor name');
+assert.match(whiteLabel, /\\bPCM\\b/, 'filter catches the vendor abbreviation');
 
 console.log('Postcard Studio contract passed.');

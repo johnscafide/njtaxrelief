@@ -170,7 +170,7 @@ Deno.serve(async (req) => {
 
     if (action === 'save_design') {
       const designId = clean(body.design_id, 40);
-      if (!/^\d{1,20}$/.test(designId)) return reply(req, 400, { error: 'A PCM design number is required' });
+      if (!/^\d{1,20}$/.test(designId)) return reply(req, 400, { error: 'Save your design in the editor first.' });
       // Reading it under the agent's child login proves the design is theirs.
       const { data: design } = await pcmRequest(environment, child, 'GET', `/design/${designId}`);
       const sizeKey = clean(design?.size?.key ?? design?.size, 10);
@@ -314,7 +314,7 @@ Deno.serve(async (req) => {
       console.error('PCM_POSTCARD_STUDIO', action, error.status, error.message);
       const status = error.code === 'PCM_NOT_CONNECTED' ? 503 : error.status === 404 ? 404 : 502;
       return reply(req, status, {
-        error: error.status === 404 ? 'PostcardMania could not find that design on your account.' : 'PostcardMania did not accept the request. Try again in a minute.',
+        error: error.status === 404 ? 'Watchdog Designs could not find that design on your account.' : 'Watchdog Designs could not finish that step. Try again in a minute.',
         code: error.code,
       });
     }
