@@ -527,12 +527,64 @@
     return true;
   }
 
+  /* Instant statewide search: Watchdog's own copy of the state parcel list
+     (search_parcels) answers in one indexed query with the public-record
+     fields already filled in. Google is only asked when Watchdog has no
+     match (e.g. brand-new construction). */
+  var watchdogSearchCache={};
+  function watchdogSearch(value){
+    var key=normalizedAddress(value);
+    if(!/^\d/.test(key)||key.split(' ').length<2)return Promise.resolve([]);
+    if(watchdogSearchCache[key])return watchdogSearchCache[key];
+    var sb=getClient();
+    if(!sb||typeof sb.rpc!=='function')return Promise.resolve([]);
+    watchdogSearchCache[key]=Promise.resolve(sb.rpc('search_parcels',{p_query:value,p_limit:8})).then(function(r){
+      return r&&!r.error&&Array.isArray(r.data)?r.data.map(function(x){return{pams_pin:x.pams_pin,address:x.address,town:x.town,county:x.county,zip:x.zip,prop_class:x.prop_class,assessed:x.assessed_value,last_year_tax:x.last_year_tax};}):[];
+    }).catch(function(){delete watchdogSearchCache[key];return[];});
+    return watchdogSearchCache[key];
+  }
+
+  function renderWatchdogRows(input,rows,needle,requestSeq){
+    var box=getBox(input),groups=[],byCounty={},ordered=[];
+    rows.forEach(function(row){
+      var label=row.county?titleCase(row.county)+' County':'New Jersey';
+      if(!byCounty[label]){byCounty[label]=[];groups.push(label);}
+      byCounty[label].push(row);
+    });
+    var html='';
+    groups.forEach(function(label){
+      var count=byCounty[label].length;
+      html+='<div class="wd-nj-county"><span>'+esc(label)+'</span><small>'+count+' match'+(count===1?'':'es')+'</small></div>';
+      byCounty[label].forEach(function(row){
+        var idx=ordered.length;ordered.push(row);
+        html+='<button type="button" class="wd-nj-option" role="option" aria-selected="false" data-wd-index="'+idx+'">'+
+          '<i class="fas fa-location-dot"></i><span class="wd-nj-copy"><span class="wd-nj-main">'+highlight(row.address,needle)+'</span><span class="wd-nj-secondary">'+esc([titleCase(row.town||''),'NJ',row.zip||''].filter(Boolean).join(' '))+'</span><span class="wd-nj-intel" aria-live="polite"></span></span><span class="wd-nj-score" hidden><b></b><span>Watchdog<br>Score</span></span></button>';
+      });
+    });
+    box.innerHTML=html;
+    box.classList.add('open');
+    input.setAttribute('aria-expanded','true');
+    input.__wdPredictions=ordered;
+    input.__wdPredictionKind='watchdog';
+    input.__wdPredictionIndex=-1;
+    Array.prototype.slice.call(box.querySelectorAll('.wd-nj-option')).forEach(function(button){
+      button.addEventListener('mousedown',function(e){e.preventDefault();});
+      button.addEventListener('click',function(){var idx=Number(button.getAttribute('data-wd-index'));if(ordered[idx])openProperty(input,ordered[idx]);});
+    });
+    Promise.all([loadSaved(),scoreRows(ordered)]).then(function(results){
+      if(input.__wdRequestSeq!==requestSeq)return;
+      var savedSet={};
+      (results[0]||[]).forEach(function(r){if(r.pams_pin)savedSet[r.pams_pin]=1;if(r.address)savedSet[normalizedAddress(r.address)]=1;});
+      var scores=results[1]||{};
+      ordered.forEach(function(row,index){var sc=scores[row.pams_pin]&&scores[row.pams_pin].score;paintIntel(input,index,row,sc,savedSet);});
+    });
+  }
+  function titleCase(v){return String(v||'').toLowerCase().replace(/\b([a-z])/g,function(m){return m.toUpperCase();});}
+
   function bindCustom(input,lib){
     if(!input||input.dataset.wdGoogleAutocomplete==='2')return;
     var Suggestion=lib&&lib.AutocompleteSuggestion;
     var SessionToken=lib&&lib.AutocompleteSessionToken;
-    if(!Suggestion||!SessionToken)return;
-
     input.dataset.wdGoogleAutocomplete='2';
     input.setAttribute('autocomplete','off');
     getBox(input);
@@ -542,9 +594,18 @@
     function request(){
       var value=String(input.value||'').trim();
       if(value.length<3){closeBox(input);if(!value)renderQuickStart(input);return;}
-      if(!token)token=new SessionToken();
       var thisSeq=++seq;
       input.__wdRequestSeq=thisSeq;
+      watchdogSearch(value).then(function(found){
+        if(thisSeq!==seq||String(input.value||'').trim()!==value)return;
+        if(found.length){renderWatchdogRows(input,found,value,thisSeq);return;}
+        googleRequest(value,thisSeq);
+      });
+    }
+
+    function googleRequest(value,thisSeq){
+      if(!Suggestion||!SessionToken){render(input,[],{},value);return;}
+      if(!token)token=new SessionToken();
       Promise.all([
         Suggestion.fetchAutocompleteSuggestions({
           input:value,
@@ -561,6 +622,7 @@
         var suggestions=results[0]&&results[0].suggestions||[];
         var map=results[1]||{};
         var predictions=suggestions.map(function(s){return s&&s.placePrediction;}).filter(function(p){return p&&isNjPrediction(p,map);}).slice(0,8);
+        input.__wdPredictionKind='google';
         render(input,predictions,map,value);
         enrichVisible(input,predictions,thisSeq);
       }).catch(function(){closeBox(input);});
@@ -570,7 +632,7 @@
       input.setCustomValidity('');
       clearGoogleSelection(input);
       clearTimeout(timer);
-      timer=setTimeout(request,190);
+      timer=setTimeout(request,120);
     });
 
     input.addEventListener('keydown',function(e){
@@ -583,7 +645,8 @@
         if(idx>=0&&rows[idx]){
           e.preventDefault();
           e.stopImmediatePropagation();
-          selectPrediction(input,rows[idx]);
+          if(input.__wdPredictionKind==='watchdog')openProperty(input,rows[idx]);
+          else selectPrediction(input,rows[idx]);
           token=null;
         }
       }
@@ -659,6 +722,7 @@
     script.id='wd-google-places-script';
     script.async=true;
     script.defer=true;
+    script.onerror=function(){['pl-addr','ss-addr','wdd-command-input'].forEach(function(id){bindCustom(q(id),null);});};
     script.src='https://maps.googleapis.com/maps/api/js?key='+encodeURIComponent(GMAPS_KEY)+'&loading=async&libraries=places&region=US&v=weekly&callback=WatchdogNJAddressGoogleReady';
     document.head.appendChild(script);
   }

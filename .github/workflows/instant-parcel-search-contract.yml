@@ -1,0 +1,27 @@
+name: Instant parcel search contract
+
+on:
+  push:
+    branches: [main]
+    paths:
+      - 'property/js/nj-address-autocomplete.js'
+      - 'supabase/migrations/20260928210000_instant_parcel_search.sql'
+      - 'property/tests/instant-parcel-search-contract.mjs'
+      - '.github/workflows/instant-parcel-search-contract.yml'
+  pull_request:
+    paths:
+      - 'property/js/nj-address-autocomplete.js'
+      - 'supabase/migrations/20260928210000_instant_parcel_search.sql'
+      - 'property/tests/instant-parcel-search-contract.mjs'
+      - '.github/workflows/instant-parcel-search-contract.yml'
+
+jobs:
+  contract:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+      - name: Verify instant parcel search contract
+        run: node property/tests/instant-parcel-search-contract.mjs
