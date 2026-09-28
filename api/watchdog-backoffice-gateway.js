@@ -13,6 +13,19 @@ function isAllowedHost(host) {
   return ALLOWED_HOSTS.has(host) || host.endsWith('.vercel.app');
 }
 
+// The upstream Edge Functions fingerprint sessions and sign-in attempts by IP and
+// user agent. Forward the browser's values; otherwise every fingerprint would
+// describe this Vercel function instead of the operator's device. Vercel sets
+// x-vercel-forwarded-for / x-forwarded-for / x-real-ip itself, so a browser
+// cannot choose them.
+function clientIp(req) {
+  for (const name of ['x-vercel-forwarded-for', 'x-forwarded-for', 'x-real-ip']) {
+    const value = String(req.headers[name] || '').split(',')[0].trim();
+    if (value) return value.slice(0, 64);
+  }
+  return '';
+}
+
 function targetUrl(target) {
   if (target === 'login') return `${SUPABASE_FUNCTIONS}/backoffice-dev-login`;
   if (target === 'api') return `${SUPABASE_FUNCTIONS}/backoffice-api`;
@@ -39,6 +52,13 @@ export default async function handler(req, res) {
 
   const headers = { 'Content-Type': 'application/json' };
   if (req.headers.authorization) headers.Authorization = req.headers.authorization;
+  const ip = clientIp(req);
+  if (ip) {
+    headers['X-Forwarded-For'] = ip;
+    headers['X-Real-IP'] = ip;
+  }
+  const userAgent = String(req.headers['user-agent'] || '').slice(0, 512);
+  if (userAgent) headers['User-Agent'] = userAgent;
 
   let body = req.body;
   if (typeof body === 'string') {

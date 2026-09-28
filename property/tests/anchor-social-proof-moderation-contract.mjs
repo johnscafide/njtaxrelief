@@ -11,7 +11,8 @@ const socialProxy = read('api/watchdog-anchor-social-proof.js');
 const reviewsApi = read('api/watchdog-backoffice-reviews.js');
 const reviewsPage = read('property/backoffice/reviews/index.html');
 const reviewsJs = read('property/backoffice/reviews/reviews.js');
-const backofficeAuth = read('property/backoffice/backoffice-dev-auth.js');
+const backofficeShell = read('property/backoffice/backoffice-shell.js');
+const backofficePage = read('property/backoffice/index.html');
 
 must(usage.includes('action === "social_proof"'), 'Deployed ANCHOR usage contract must expose the social_proof aggregate action.');
 must(usage.includes('anchor_relief_profiles'), 'Legacy people count must remain privacy-safe and use the one-per-user relief profile source.');
@@ -52,7 +53,9 @@ must(reviewsApi.includes("action === 'approve'") && reviewsApi.includes("action 
 must(!reviewsApi.includes('application_id') && !reviewsApi.includes('user_id'), 'Review moderation API source must not expose application/user identifiers in its response contract.');
 must(reviewsApi.includes('SUPABASE_SERVICE_ROLE_KEY'), 'Privileged review access must stay server-side.');
 must(reviewsJs.includes("API='/api/watchdog-backoffice-reviews'"), 'Review moderation UI must use the same-origin developer API.');
-must(backofficeAuth.includes("REVIEWS_API='/api/watchdog-backoffice-reviews'"), 'Backoffice notification badge must use the same developer API.');
-must(backofficeAuth.includes('bo-review-badge') && backofficeAuth.includes('pending_count'), 'Backoffice must show a red pending-review notification count.');
+must(backofficeShell.includes("REVIEWS_API='/api/watchdog-backoffice-reviews'"), 'Backoffice notification badge must use the same developer API.');
+must(backofficeShell.includes('bo-review-badge') && backofficeShell.includes('pending_count'), 'Backoffice must show a red pending-review notification count.');
+must(/class="bo-review-badge" data-bo-badge="reviews"/.test(backofficePage), 'Backoffice nav must carry the pending-review badge.');
+must(/is_watchdog_developer/.test(backofficeShell) && /if\(!developer\)return;\s*refreshBadges\(\);/.test(backofficeShell), 'Review counts must only be requested for developers.');
 
 console.log('ANCHOR social proof + Backoffice review moderation contract passed.');

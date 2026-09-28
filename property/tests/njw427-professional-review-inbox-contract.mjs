@@ -12,7 +12,8 @@ const profilePage=read('property/account/professional-profile/index.html');
 const api=read('api/watchdog-backoffice-professional.js');
 const adminPage=read('property/backoffice/professional-verifications/index.html');
 const adminJs=read('property/backoffice/professional-verifications/professional-verifications.js');
-const backofficeAuth=read('property/backoffice/backoffice-dev-auth.js');
+const backofficeShell=read('property/backoffice/backoffice-shell.js');
+const backofficePage=read('property/backoffice/index.html');
 const vercel=read('vercel.json');
 
 must(migration.includes("'needs_info'"),'REALTOR review model must support needs_info.');
@@ -50,8 +51,9 @@ must(adminJs.includes("data-review-action=\"verified\""),'Verify REALTOR action 
 must(adminJs.includes("data-review-action=\"needs_info\""),'Request-information action missing.');
 must(adminJs.includes("data-review-action=\"rejected\""),'Reject action missing.');
 must(adminJs.includes('data-expire-user'),'Expire/revoke action missing.');
-must(backofficeAuth.includes("PROFESSIONAL_API='/api/watchdog-backoffice-professional'"),'Main Backoffice professional badge API missing.');
-must(backofficeAuth.includes('Professional Reviews'),'Main Backoffice Professional Reviews nav missing.');
+must(backofficeShell.includes("PROFESSIONAL_API='/api/watchdog-backoffice-professional'"),'Main Backoffice professional badge API missing.');
+must(/<a href="\/backoffice\/professional-verifications" data-bo-dev-only hidden>Professional Reviews/.test(backofficePage),'Main Backoffice Professional Reviews nav missing (developer-only link).');
+must(/<a href="\/backoffice\/professional-verifications"[^>]*>Professional Reviews/.test(adminPage)&&adminPage.includes('backoffice-shell.js'),'Professional Reviews page must use the shared Backoffice nav.');
 
 const config=JSON.parse(vercel);
 must(config.rewrites.some(r=>r.source==='/backoffice/professional-verifications'&&r.destination==='/property/backoffice/professional-verifications/index.html'),'Professional Reviews clean route missing.');
