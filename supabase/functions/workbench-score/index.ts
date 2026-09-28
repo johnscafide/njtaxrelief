@@ -343,9 +343,26 @@ async function handlePublicScore(req, body, admin) {
    with the same ROBUST-v1 formula and stores compact results in
    public_watchdog_score_cache_v1, so search, dashboards and property pages
    read a ready score instead of computing one per visit. Server key only. */
+function serverKeys(service) {
+  // Accept the legacy service_role key and the newer sb_secret_ keys.
+  const keys = [service];
+  try { Object.values(JSON.parse(Deno.env.get("SUPABASE_SECRET_KEYS") || "{}") || {}).forEach((k) => keys.push(String(k || ""))); } catch { /* not set */ }
+  return keys.filter((k) => k.length >= 20);
+}
+function sameKey(a, b) {
+  if (a.length !== b.length) return false;
+  let diff = 0;
+  for (let i = 0; i < a.length; i++) diff |= a.charCodeAt(i) ^ b.charCodeAt(i);
+  return diff === 0;
+}
+function isServerCaller(req, service) {
+  const bearer = (req.headers.get("authorization") || "").replace(/^Bearer\s+/i, "");
+  const apikey = req.headers.get("apikey") || "";
+  return serverKeys(service).some((k) => (bearer && sameKey(bearer, k)) || (apikey && sameKey(apikey, k)));
+}
+
 async function handleBatchPrecompute(req, body, admin, service) {
-  const auth = req.headers.get("authorization") || "";
-  if (!service || auth !== `Bearer ${service}`) return out(req, 401, { error: "Server key required" });
+  if (!isServerCaller(req, service)) return out(req, 401, { error: "Server key required" });
   const after = clean(body?.after_pin, 80), limit = Math.min(Math.max(Number(body?.limit) || BATCH_MAX_ROWS, 1), BATCH_MAX_ROWS);
   let query = admin.from("property_lookups")
     .select("pams_pin,town,county,block,lot,qualifier,assessed_value,last_year_tax")
