@@ -18,6 +18,18 @@ function digestHtml(items: any[]) {
   return items.map((e, i) => `<tr><td style="padding:14px 10px;border-bottom:1px solid #e4e9ee;color:#0f8b8d;font-weight:800">${i + 1}</td><td style="padding:14px 10px;border-bottom:1px solid #e4e9ee"><b>${clean(e.title)}</b><br><span style="color:#65758a">${clean(e.summary, 360)}</span><br><small>${clean(e.property_address || e.pams_pin || "Saved property")} · ${new Date(e.occurred_at).toLocaleDateString("en-US")}</small></td><td style="padding:14px 10px;border-bottom:1px solid #e4e9ee;font-weight:800">${score(e)}</td></tr>`).join("");
 }
 
+// February, when the new assessment notices are out: remind the agent that
+// their past clients' tax checkups (Agent Desk > Clients) are ready to send.
+function checkupSeason(pref: any, now: Date) {
+  const local = new Date(now.toLocaleString("en-US", { timeZone: pref.timezone || "America/New_York" }));
+  return local.getMonth() === 1;
+}
+function checkupRow(count: number) {
+  return `<tr><td style="padding:14px 10px;border-bottom:1px solid #e4e9ee;color:#b8972a;font-weight:800">&#9733;</td><td style="padding:14px 10px;border-bottom:1px solid #e4e9ee"><b>Tax checkup season: ${count} ${count === 1 ? "client's checkup is" : "clients' checkups are"} ready</b><br><span style="color:#65758a">New assessments are out and appeals are due April 1. Send each past client their checkup from your own email or CRM.</span><br><small><a href="${CHECKUP_URL}" style="color:#0e2248">Open Tax checkups</a></small></td><td style="padding:14px 10px;border-bottom:1px solid #e4e9ee"></td></tr>`;
+}
+const DESK_URL = "https://www.watchdogindex.com/agent-desk";
+const CHECKUP_URL = "https://www.watchdogindex.com/agent-desk#clients";
+
 Deno.serve(async request => {
   if (request.method !== "POST") return new Response("Method not allowed", { status: 405 });
   if (!Deno.env.get("AGENT_DIGEST_CRON_SECRET") || request.headers.get("x-watchdog-cron-secret") !== Deno.env.get("AGENT_DIGEST_CRON_SECRET")) return new Response("Forbidden", { status: 403 });
@@ -36,7 +48,7 @@ Deno.serve(async request => {
     const [{ data: items }, authResult, { data: farm }, { data: saved }] = await Promise.all([
       admin.from("property_update_events").select("id,pams_pin,event_type,severity,title,summary,source_url,occurred_at,payload").eq("user_id", pref.user_id).gte("occurred_at", since).order("occurred_at", { ascending: false }).limit(100),
       admin.auth.admin.getUserById(pref.user_id),
-      admin.from("agent_farm_properties").select("pams_pin,address").eq("user_id", pref.user_id).limit(1000),
+      admin.from("agent_farm_properties").select("pams_pin,address,relationship").eq("user_id", pref.user_id).limit(1000),
       admin.from("saved_properties").select("pams_pin,address").eq("user_id", pref.user_id).limit(1000)
     ]);
     const sphere = [...(farm || []), ...(saved || [])];
@@ -63,11 +75,14 @@ Deno.serve(async request => {
       uniqueProperties.add(key);
       return true;
     }).slice(0, 10);
+    const checkups = checkupSeason(pref, now) ? (farm || []).filter((x: any) => clean(x.pams_pin) && (x.relationship === "past_client" || x.relationship === "sphere")).length : 0;
     const email = authResult.data.user?.email;
-    if (!email || !top.length) { result.skipped++; continue; }
+    if (!email || (!top.length && !checkups)) { result.skipped++; continue; }
+    const subject = checkups && !top.length ? `Tax checkup season: ${checkups} ${checkups === 1 ? "client is" : "clients are"} ready`
+      : `Your ${top.length} Watchdog property reasons this week${checkups ? " + tax checkups" : ""}`;
     const response = await fetch("https://api.emailjs.com/api/v1.0/email/send", { method: "POST", headers: { "Content-Type": "application/json" }, body: JSON.stringify({
       service_id: serviceId, template_id: templateId, user_id: publicKey, accessToken: privateKey,
-      template_params: { to_email: email, subject: `Your ${top.length} Watchdog property reasons this week`, opportunity_count: top.length, digest_rows: digestHtml(top), desk_url: "https://njpropertytaxrelief.com/property/agent-desk", compliance_note: "Property changes are not seller predictions. Review the source and your lawful contact basis before outreach." }
+      template_params: { to_email: email, subject, opportunity_count: top.length + (checkups ? 1 : 0), digest_rows: (checkups ? checkupRow(checkups) : "") + digestHtml(top), desk_url: DESK_URL, compliance_note: "Property changes are not seller predictions. Review the source and your lawful contact basis before outreach." }
     }) });
     if (!response.ok) { result.failed++; continue; }
     await admin.from("agent_digest_preferences").update({ last_sent_at: now.toISOString(), updated_at: now.toISOString() }).eq("user_id", pref.user_id);

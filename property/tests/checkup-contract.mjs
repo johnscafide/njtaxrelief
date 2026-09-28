@@ -65,4 +65,12 @@ assert.match(cards, /\.eq\('user_id',user\.id\)\.in\('relationship',\['past_clie
 assert.match(cards, /ORIGIN\+'\/checkup\?pin='/);
 assert.doesNotMatch(cards, /\.insert\(|\.update\(|\.upsert\(|emailjs|mailto:/i, 'the card never writes data or sends email');
 
+// February reminder in the Monday agent email.
+const digest = read('supabase/functions/agent-opportunity-digest/index.ts');
+assert.match(digest, /return local\.getMonth\(\) === 1;/, 'reminder runs in February, agent local time');
+assert.match(digest, /x\.relationship === "past_client" \|\| x\.relationship === "sphere"/, 'counts only past clients and sphere');
+assert.match(digest, /if \(!email \|\| \(!top\.length && !checkups\)\)/, 'a checkup-only week still sends');
+assert.match(digest, /const CHECKUP_URL = "https:\/\/www\.watchdogindex\.com\/agent-desk#clients";/);
+assert.doesNotMatch(digest, /njpropertytaxrelief\.com\/property\/agent-desk/, 'desk link uses the clean Watchdog URL');
+
 console.log('Checkup contract passed.');
