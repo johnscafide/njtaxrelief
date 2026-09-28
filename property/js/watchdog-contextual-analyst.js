@@ -10,6 +10,14 @@ var commandPolicyPromise=null;
 function esc(v){return String(v==null?'':v).replace(/[&<>"']/g,function(c){return {'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c];});}
 function uniq(values){var seen={};return (Array.isArray(values)?values:[]).map(function(v){return String(v||'').trim();}).filter(function(v){if(!v||seen[v])return false;seen[v]=true;return true;});}
 function safeUrl(value){try{var u=new URL(String(value||''),location.origin);return /^https?:$/.test(u.protocol)?u.href:'';}catch(_error){return'';}}
+/* Saved rows can carry zero-padded PINs (0904_00009_00020); Watchdog records
+   use the short form (0904_9_20). Same rule as workbench-baseline canonicalPin. */
+function canonicalPin(pin){
+  var parts=String(pin||'').trim().split('_');
+  if(parts.length<3)return parts.join('_');
+  var strip=function(v){var m=String(v).match(/^(\d+)(\.\d+)?$/);return m?String(Number(m[1]))+(m[2]||''):v;};
+  return [parts[0],strip(parts[1]),strip(parts[2])].concat(parts.slice(3)).join('_');
+}
 function getClient(){
   if(state.client)return state.client;
   try{state.client=window.NJPTRAccess&&window.NJPTRAccess.client&&window.NJPTRAccess.client();}catch(_error){}
@@ -141,7 +149,7 @@ function chipList(options){
 function open(options){
   options=options||{};
   close();
-  var pins=uniq(options.pams_pins).slice(0,100);
+  var pins=uniq((Array.isArray(options.pams_pins)?options.pams_pins:[]).map(canonicalPin)).slice(0,100);
   var surface=String(options.surface||'watchdog').slice(0,80);
   var context=Object.assign({},options.context||{},{surface:surface,pams_pins:pins,interaction_surface:'contextual_voice'});
   state.options=options;state.context=context;state.sessionId=null;

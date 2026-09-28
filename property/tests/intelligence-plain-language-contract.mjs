@@ -51,4 +51,19 @@ const consoleJs = fs.readFileSync('property/js/intelligence-console.js', 'utf8')
 assert.match(consoleJs, /var pins=requestedPin\?\[requestedPin\]:await savedPins\(\);/);
 assert.match(consoleJs, /WatchdogContextualAnalyst\.open\(\{surface:'intelligence_console',pams_pins:pins,/, 'pins go where the analyst panel reads them');
 
+// Zero-padded saved PINs resolve to the short form Watchdog records use.
+const analystJs = fs.readFileSync('property/js/watchdog-contextual-analyst.js', 'utf8');
+for (const src of [why, analystJs]) {
+  const fn = src.match(/function canonicalPin[\s\S]*?\n}\n/)[0];
+  const c = {}; vm.createContext(c); vm.runInContext(fn, c);
+  assert.equal(c.canonicalPin('0904_00009_00020'), '0904_9_20');
+  assert.equal(c.canonicalPin('0818_018.02_2_C0105'), '0818_18.02_2_C0105');
+  assert.equal(c.canonicalPin('0508_70.03_19_C2'), '0508_70.03_19_C2');
+}
+assert.match(why, /pin=canonicalPin\(await resolvePin\(sb,pin,address\)\);/);
+assert.match(analystJs, /options\.pams_pins:\[\]\)\.map\(canonicalPin\)/);
+// Errors read in plain words, never "non-2xx".
+assert.match(why, /does not have enough public records for this property/);
+assert.doesNotMatch(why, /r\.error\?\.message\|\|/);
+
 console.log('Intelligence plain-language contract passed.');
