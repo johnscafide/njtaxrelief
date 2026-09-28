@@ -43,6 +43,10 @@ verify_jwt = true
 [functions.stripe-webhook]
 verify_jwt = false
 
+# Called only by pg_cron with a Vault token (checked in the function).
+[functions.referral-rewards-sweep]
+verify_jwt = false
+
 [functions.marketing-track]
 verify_jwt = false
 

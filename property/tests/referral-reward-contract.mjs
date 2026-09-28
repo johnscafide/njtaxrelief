@@ -14,18 +14,34 @@ assert.match(sql, /using \(inviter_user_id = auth\.uid\(\)\)/, 'members only rea
 assert.match(sql, /revoke all on public\.watchdog_referral_rewards from anon, authenticated;/);
 assert.doesNotMatch(sql, /grant (insert|update|delete|all)[^;]*to authenticated/i, 'only the service role writes rewards');
 
-// Earned only by a paid (active, not trialing) yearly plan.
-assert.match(hook, /config\.interval === 'yearly' && sub\.status === 'active'/);
-// Amount is the inviter's own monthly price, read from Stripe.
-assert.match(hook, /row\.tier === tier && row\.interval === 'monthly'/);
-assert.match(hook, /stripe\.prices\.retrieve\(monthly\.id\)/);
-// Credit, never a charge, and idempotent per reward.
-assert.match(hook, /amount: -amount,/);
-assert.match(hook, /idempotencyKey: `watchdog-referral-reward-\$\{reward\.id\}`/);
+const sweep = read('supabase/functions/referral-rewards-sweep/index.ts');
+const hold = read('supabase/migrations/20260928160000_referral_reward_90_day_hold.sql');
+const config = read('supabase/config.toml');
+
+// Webhook only records the reward (paid yearly plan, not trialing) with a 90-day hold.
+assert.match(hook, /config\.interval !== 'yearly' \|\| sub\.status !== 'active'/);
+assert.match(hook, /const REFERRAL_HOLD_DAYS = 90;/);
+assert.match(hook, /eligible_at: eligibleAt/);
 assert.match(hook, /onConflict: 'referred_user_id', ignoreDuplicates: true/);
-// A reward never blocks the entitlement sync.
-assert.match(hook, /catch \(e\) \{ console\.error\('REFERRAL_REWARD_ERROR'/);
-assert.equal((hook.match(/, event\.created, stripe\)/g) || []).length, 2, 'both subscription sync paths pass Stripe for rewards');
+assert.doesNotMatch(hook, /createBalanceTransaction/, 'the webhook never moves money; the sweep pays out after the hold');
+assert.match(hook, /catch \(e\) \{ console\.error\('REFERRAL_REWARD_ERROR'/, 'recording a reward never blocks the entitlement sync');
+
+// Sweep: token from Vault, only cleared rewards, void if the referred plan stopped or was refunded.
+assert.match(sweep, /rpc\('referral_rewards_sweep_authorized'/);
+assert.match(sweep, /\.lte\('eligible_at', new Date\(\)\.toISOString\(\)\)/);
+assert.match(sweep, /billing\.subscription_refund_observed/);
+assert.match(sweep, /const REFERRED_PAYING = \['active', 'past_due'\];/);
+assert.match(sweep, /voidReward\(reward, blocked\)/);
+// Credit, never a charge; the inviter's own monthly price read from Stripe; idempotent per reward.
+assert.match(sweep, /amount: -amount,/);
+assert.match(sweep, /stripe\.prices\.retrieve\(priceId\)/);
+assert.match(sweep, /idempotencyKey: `watchdog-referral-reward-\$\{reward\.id\}`/);
+
+assert.match(hold, /alter column eligible_at set not null/);
+assert.match(hold, /revoke all on function public\.referral_rewards_sweep_authorized\(text\) from public, anon, authenticated;/);
+assert.match(hold, /revoke all on function public\.invoke_referral_rewards_sweep\(\) from public, anon, authenticated;/);
+assert.match(hold, /cron\.schedule\('watchdog-referral-rewards-sweep'/);
+assert.match(config, /\[functions\.referral-rewards-sweep\]\nverify_jwt = false/);
 
 // Pricing page Lifetime toggle: one handler owns the button whether the page
 // ships it (soft-launch build) or the guard adds it.
