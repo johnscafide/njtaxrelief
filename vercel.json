@@ -27,6 +27,10 @@
     "api/watchdog-checkup.js": {
       "includeFiles": "{tax-rates.json,equalization-ratios.json,chapter123-ratios-2026.json,property/revaluation-reassessment-2026.json}",
       "maxDuration": 10
+    },
+    "api/watchdog-extension.js": {
+      "includeFiles": "{tax-rates.json,equalization-ratios.json,chapter123-ratios-2026.json,property/revaluation-reassessment-2026.json}",
+      "maxDuration": 10
     }
   },
   "redirects": [
