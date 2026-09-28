@@ -8,10 +8,9 @@
 --
 -- 1. search_parcels() no longer returns or matches on zip.
 -- 2. sync_parcel_batch() no longer accepts or writes zip.
--- 3. ZIPs on every synced row are cleared (in production this ran in county
---    batches first, so the statement below finds nothing left to change).
---    Rows looked up before the sync had their address-derived ZIP overwritten
---    by the mailing ZIP, so they are cleared too; the next lookup restores it.
+-- 3. Stored ZIPs on synced rows are cleared by the throttled job in
+--    20260928233000_slow_mailing_zip_purge.sql. (A one-shot UPDATE of ~3M
+--    rows here caused a production outage on 2026-09-28; do not reintroduce it.)
 --
 -- Property ZIPs for the public pages will come from address evidence or a
 -- ZIP-boundary lookup, never from the parcel mailing fields.
@@ -141,7 +140,3 @@ begin
   return v_count;
 end;
 $$;
-
-update public.property_lookups
-set zip = null
-where source_synced_at is not null and zip is not null;
