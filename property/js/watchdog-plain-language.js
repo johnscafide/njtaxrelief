@@ -47,11 +47,16 @@
     return s?s.charAt(0).toUpperCase()+s.slice(1):'Signal';
   }
 
+  /* Feature v2 measures the assessment against the town's Chapter 123 range
+     (0 = within it, 0.12 = 12% above the top); v1 findings carry a raw ratio. */
+  var RANGE_KEY='watchdog.assessment_above_chapter123_range';
+  function rangeValue(v){var n=num(v);if(n==null)return'';return n<0.005?'Based on a recent sale, the assessment is within the town\u2019s normal range':'Based on a recent sale, it is assessed about '+Math.round(n*100)+'% above the top of the town\u2019s normal range';}
   function signal(e){
     var id=String(e&&e.signal_id||''),def=SIGNALS[id];
-    var label=def?def.label:readable(id);
-    var value=def&&e&&e.value!=null&&e.value!==''?def.value(e.value):'';
-    return {id:id,label:label,value:value,why:def?def.why:'',known:!!def};
+    var ranged=id==='watchdog.assessment_to_sale_ratio_review_window'&&String(e&&e.source_key||'')===RANGE_KEY;
+    var label=ranged?'Assessment vs. the town\u2019s normal range':def?def.label:readable(id);
+    var value=e&&e.value!=null&&e.value!==''?(ranged?rangeValue(e.value):def?def.value(e.value):''):'';
+    return {id:id,label:label,value:value,why:ranged?'NJ law lets a town\u2019s assessments run up to 15% above its average level. Above that range, an assessment may be worth a second look.':def?def.why:'',known:!!def};
   }
 
   function missing(e){
@@ -61,6 +66,7 @@
       return {id:s.id,label:s.label,reason:'The last recorded sale was about '+Math.round(saleYears)+' years ago, older than the eight-year window Watchdog uses, so it was not used here.'};
     }
     var noSaleDate=detail&&/sale age is missing/i.test(detail);
+    if(!detail&&s.id==='watchdog.assessment_to_sale_ratio_review_window')return {id:s.id,label:s.label,reason:'There is no recent market sale to compare the assessment with. Paper transfers such as $1 deeds are not used.'};
     var reason=noSaleDate?(s.id==='watchdog.sale_recency_confidence'?'No usable sale date is on record, so Watchdog could not tell how recent the last sale was.':'No usable sale date is on record for this property, so Watchdog could not compare the assessment with a recent sale.'):(MISSING[String(e&&e.reason||'')]||'This evidence is not available right now.');
     return {id:s.id,label:s.label,reason:reason};
   }
