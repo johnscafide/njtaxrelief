@@ -11,6 +11,7 @@ on:
       - 'property/js/app-shell-2027.js'
       - 'property/js/watchdog-universal-menu.js'
       - 'property/js/public-nav.js'
+      - 'property/css/landing-review.css'
       - '.github/workflows/glass-header-contract.yml'
   pull_request:
     paths:
@@ -21,6 +22,7 @@ on:
       - 'property/js/app-shell-2027.js'
       - 'property/js/watchdog-universal-menu.js'
       - 'property/js/public-nav.js'
+      - 'property/css/landing-review.css'
       - '.github/workflows/glass-header-contract.yml'
 
 jobs:
