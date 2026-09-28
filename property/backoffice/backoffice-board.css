@@ -1,0 +1,149 @@
+/* Watchdog Backoffice board design: shared tokens, shell and building blocks for
+   every Backoffice page. Mirrors the Integration Center board (warm paper
+   background, flat 24px cards, navy pills, 44px targets, Plus Jakarta Sans).
+   Page stylesheets load after this one. */
+:root{
+  --bo-bg:#f3f1ec;--bo-surface:#fbfaf7;--bo-card:#ffffff;--bo-line:#e3dfd6;--bo-line-strong:#c9c2b4;
+  --bo-navy:#0e2248;--bo-ink:#142033;--bo-muted:#56606e;--bo-blue:#1456a0;--bo-focus:#2f6df6;--bo-gold:#b8972a;
+  --bo-sky:#e3edfb;--bo-sky-line:#b9d0f2;--bo-teal:#dff1ec;--bo-teal-line:#9fd3c5;--bo-sand:#f6efd9;--bo-sand-line:#e4cf8e;
+  --bo-review:#fde2e0;--bo-review-line:#f1b5ae;--bo-good:#0b6b50;--bo-bad:#a61f14;--bo-warn:#6b4e00;
+  --bo-radius:24px;--bo-radius-md:18px;--bo-radius-sm:14px;
+  --bo-font:"Plus Jakarta Sans",Inter,system-ui,-apple-system,"Segoe UI",Roboto,Arial,sans-serif;
+  --bo-shell-h:72px;
+  color-scheme:light;
+}
+*,*::before,*::after{box-sizing:border-box}
+html{-webkit-text-size-adjust:100%;text-size-adjust:100%}
+html,body{margin:0;min-height:100%}
+body{background:var(--bo-bg);color:var(--bo-ink);font-family:var(--bo-font);font-size:15px;line-height:1.5}
+button,input,select,textarea{font:inherit;color:inherit}
+[hidden]{display:none!important}
+img,svg{max-width:100%}
+h1,h2,h3{font-family:var(--bo-font);color:var(--bo-navy);letter-spacing:-.02em;margin:0}
+a{color:var(--bo-blue)}
+.bo-sr{position:absolute!important;width:1px;height:1px;padding:0;margin:-1px;overflow:hidden;clip:rect(0 0 0 0);white-space:nowrap;border:0}
+.bo-skip{position:absolute;left:16px;top:-80px;z-index:100;background:var(--bo-navy);color:#fff;border-radius:999px;padding:12px 18px;font-weight:700;text-decoration:none}
+.bo-skip:focus{top:12px}
+:is(a,button,input,select,textarea,summary,[tabindex]):focus-visible{outline:3px solid var(--bo-focus);outline-offset:2px}
+
+/* ---------- shell ---------- */
+.bo-shell{position:sticky;top:0;z-index:30;background:var(--bo-surface);border-bottom:1px solid var(--bo-line)}
+.bo-shell-bar{max-width:1560px;margin:0 auto;min-height:var(--bo-shell-h);padding:12px 24px;display:flex;align-items:center;gap:20px}
+.bo-brand{display:inline-flex;align-items:center;gap:10px;min-height:44px;color:var(--bo-navy);text-decoration:none;flex:0 0 auto}
+.bo-mark{width:40px;height:40px;border-radius:14px;background:var(--bo-navy);color:#fff;display:grid;place-items:center;font:800 18px/1 var(--bo-font)}
+.bo-brand-text{display:grid;line-height:1.1}
+.bo-brand-text b{font:800 16px/1.1 var(--bo-font);letter-spacing:-.01em}
+.bo-brand-text small{font:600 12px/1.2 var(--bo-font);color:var(--bo-muted)}
+.bo-nav{position:relative;display:flex;align-items:center;gap:6px;flex:1 1 auto;min-width:0;overflow-x:auto;scrollbar-width:thin;padding:2px}
+.bo-nav a{display:inline-flex;align-items:center;gap:8px;min-height:44px;padding:0 16px;border-radius:999px;color:var(--bo-navy);font:700 14px/1 var(--bo-font);text-decoration:none;white-space:nowrap;border:1px solid transparent}
+.bo-nav a:hover{background:var(--bo-sky)}
+.bo-nav a[aria-current="page"]{background:var(--bo-navy);color:#fff}
+.bo-review-badge{display:inline-flex;align-items:center;justify-content:center;min-width:24px;height:24px;padding:0 7px;border-radius:999px;background:var(--bo-bad);color:#fff;font:800 12px/1 var(--bo-font)}
+.bo-shell-session{display:flex;align-items:center;gap:12px;flex:0 0 auto;margin-left:auto}
+.bo-who{display:inline-flex;align-items:center;gap:8px;font:600 13px/1.3 var(--bo-font);color:var(--bo-muted);white-space:nowrap}
+.bo-who-dot{width:9px;height:9px;border-radius:50%;background:var(--bo-good)}
+
+/* ---------- page frame ---------- */
+.bo-page{max-width:1560px;margin:0 auto;padding:28px 24px 72px;min-width:0}
+.bo-page:focus{outline:0}
+.bo-kicker{display:block;font:800 12px/1.2 var(--bo-font);letter-spacing:.14em;text-transform:uppercase;color:var(--bo-blue)}
+.bo-muted{color:var(--bo-muted)}
+.bo-note{margin:10px 2px 0;font-size:13px;color:var(--bo-muted)}
+.bo-error-text{color:var(--bo-bad);font-weight:600;margin:0}
+
+/* ---------- buttons ---------- */
+.bo-btn{display:inline-flex;align-items:center;justify-content:center;gap:8px;min-height:44px;min-width:44px;padding:0 18px;border-radius:999px;border:1px solid transparent;font:700 14px/1.1 var(--bo-font);text-decoration:none;cursor:pointer;white-space:nowrap;transition:background-color .15s ease,color .15s ease}
+.bo-btn-primary{background:var(--bo-navy);color:#fff}
+.bo-btn-primary:hover{background:var(--bo-blue)}
+.bo-btn-ghost{background:#fff;color:var(--bo-navy);border-color:var(--bo-line-strong)}
+.bo-btn-ghost:hover{background:var(--bo-sky)}
+.bo-btn-light{background:#fff;color:var(--bo-navy)}
+.bo-btn-light:hover{background:var(--bo-sky)}
+.bo-btn-onnavy{background:transparent;color:#fff;border-color:rgba(255,255,255,.55)}
+.bo-btn-onnavy:hover{background:rgba(255,255,255,.14)}
+.bo-btn:disabled,.bo-btn[aria-disabled="true"]{opacity:.5;cursor:not-allowed}
+.bo-icon-btn{width:44px;height:44px;border-radius:50%;border:1px solid var(--bo-line-strong);background:#fff;color:var(--bo-navy);font:600 22px/1 var(--bo-font);cursor:pointer;display:inline-grid;place-items:center;flex:0 0 auto}
+.bo-icon-btn:hover{background:var(--bo-sky)}
+.bo-link-btn{min-height:44px;padding:0;border:0;background:none;color:var(--bo-blue);font:700 14px/1.3 var(--bo-font);text-decoration:underline;text-underline-offset:3px;cursor:pointer}
+.bo-actions{display:flex;flex-wrap:wrap;gap:10px;align-items:center}
+
+/* ---------- cards ---------- */
+.bo-card{background:var(--bo-surface);border-radius:var(--bo-radius);padding:24px;min-width:0}
+.bo-card h2{font:800 22px/1.2 var(--bo-font)}
+.bo-card h3{font:800 16px/1.3 var(--bo-font);margin:0 0 12px}
+.bo-card-head{display:flex;justify-content:space-between;align-items:flex-start;gap:16px;flex-wrap:wrap;margin-bottom:8px}
+
+/* ---------- form controls ---------- */
+.bo-field{display:grid;gap:6px;min-width:0}
+.bo-field>span{font:700 12px/1.3 var(--bo-font);color:var(--bo-muted);letter-spacing:.02em}
+.bo-field :is(input,select,textarea),.bo-search input{width:100%;min-height:44px;border:1px solid var(--bo-line-strong);border-radius:var(--bo-radius-sm);background:#fff;color:var(--bo-ink);padding:10px 14px;font:500 14px/1.4 var(--bo-font)}
+.bo-field textarea{resize:vertical;min-height:88px}
+.bo-field select{padding-right:34px}
+.bo-field :is(input,select,textarea):disabled{background:var(--bo-surface);color:var(--bo-muted)}
+.bo-search{display:block;position:relative;min-width:0}
+.bo-search input{border-radius:999px;padding:0 18px}
+.bo-check{display:inline-flex;align-items:center;gap:10px;min-height:44px;font:600 14px/1.3 var(--bo-font);color:var(--bo-ink);cursor:pointer}
+.bo-check input{width:20px;height:20px;margin:0;accent-color:var(--bo-navy);flex:0 0 auto}
+
+/* ---------- pills ---------- */
+.bo-pills{display:flex;flex-wrap:wrap;gap:6px}
+.bo-pill{display:inline-flex;align-items:center;min-height:24px;padding:2px 10px;border-radius:999px;background:var(--bo-sky);color:var(--bo-navy);font:700 12px/1.3 var(--bo-font);white-space:nowrap}
+.bo-pill.is-stage{background:#fff;border:1px solid var(--bo-line-strong)}
+.bo-pill.is-owner{background:var(--bo-bg);color:var(--bo-navy)}
+.bo-pill.is-good{background:var(--bo-teal);color:var(--bo-good)}
+.bo-pill.is-warn{background:var(--bo-sand);color:var(--bo-warn)}
+.bo-pill.is-bad{background:var(--bo-review);color:var(--bo-bad)}
+.bo-pill.is-intent{background:var(--bo-sky);color:var(--bo-blue)}
+
+/* ---------- definition lists ---------- */
+.bo-dl{display:grid;grid-template-columns:minmax(120px,38%) minmax(0,1fr);gap:0;margin:0}
+.bo-dl dt,.bo-dl dd{padding:9px 0;border-top:1px solid var(--bo-line);font-size:14px}
+.bo-dl dt:first-of-type,.bo-dl dt:first-of-type+dd{border-top:0}
+.bo-dl dt{color:var(--bo-muted);font-weight:600;padding-right:12px}
+.bo-dl dd{margin:0;color:var(--bo-ink);font-weight:600;overflow-wrap:anywhere}
+
+/* ---------- dialogs ---------- */
+.bo-dialog{width:min(680px,calc(100vw - 32px));max-height:calc(100vh - 32px);border:0;border-radius:var(--bo-radius);padding:24px;background:var(--bo-card);color:var(--bo-ink)}
+.bo-dialog::backdrop{background:rgba(14,34,72,.45)}
+.bo-dialog-sm{width:min(520px,calc(100vw - 32px))}
+.bo-dialog h2{font:800 22px/1.25 var(--bo-font)}
+.bo-dialog-head{display:flex;justify-content:space-between;align-items:flex-start;gap:16px;margin-bottom:16px}
+.bo-dialog-head p{margin:6px 0 0;font-size:14px}
+.bo-dialog-actions{display:flex;flex-wrap:wrap;gap:10px;justify-content:flex-end;align-items:center;margin-top:20px}
+.bo-dialog-actions .bo-error-text{margin-right:auto;font-size:13px}
+
+/* ---------- toast ---------- */
+.bo-toast{position:fixed;left:50%;bottom:24px;z-index:80;transform:translate(-50%,8px);max-width:min(560px,calc(100vw - 32px));background:var(--bo-navy);color:#fff;border-radius:18px;padding:13px 18px;font:700 14px/1.45 var(--bo-font);opacity:0;transition:opacity .2s ease,transform .2s ease;pointer-events:none}
+.bo-toast.is-shown{opacity:1;transform:translate(-50%,0)}
+
+/* ---------- responsive shell ---------- */
+@media (max-width:1100px){
+  .bo-shell-bar{flex-wrap:wrap;gap:8px 16px}
+  .bo-nav{order:3;flex:1 0 100%}
+}
+@media (max-width:899.98px){
+  .bo-shell{position:static}
+  .bo-shell-bar{padding:10px 16px}
+  .bo-who{display:none}
+  .bo-nav{flex-wrap:nowrap;margin:0 -16px;padding:2px 16px 4px;width:calc(100% + 32px);flex-basis:calc(100% + 32px)}
+  .bo-nav a{background:#fff;border-color:var(--bo-line)}
+  .bo-page{padding:20px 16px 64px}
+  .bo-card{padding:18px}
+  .bo-dl{grid-template-columns:minmax(0,1fr)}
+  .bo-dl dt{padding-bottom:0}
+  .bo-dl dd{border-top:0;padding-top:2px}
+  .bo-dialog{width:100vw;max-width:100vw;max-height:100dvh;margin:auto 0 0;border-radius:var(--bo-radius) var(--bo-radius) 0 0;padding:20px 16px calc(20px + env(safe-area-inset-bottom))}
+}
+
+@media (prefers-reduced-motion:reduce){
+  *,*::before,*::after{transition:none!important;animation:none!important;scroll-behavior:auto!important}
+}
+
+@media print{
+  body{background:#fff;color:#000;font-size:12pt}
+  .bo-shell,.bo-skip,.bo-toast,.bo-btn,.bo-icon-btn,dialog{display:none!important}
+  .bo-page{padding:0;max-width:none}
+  .bo-card{background:#fff;border:1px solid #999;break-inside:avoid}
+  .bo-pill{border:1px solid #666;background:#fff;color:#000}
+  a{color:#000}
+}
