@@ -1,0 +1,27 @@
+name: Intelligence plain-language contract
+
+on:
+  push:
+    branches: [main]
+    paths:
+      - 'property/js/watchdog-plain-language.js'
+      - 'property/js/watchdog-why.js'
+      - 'property/tests/intelligence-plain-language-contract.mjs'
+      - '.github/workflows/intelligence-plain-language-contract.yml'
+  pull_request:
+    paths:
+      - 'property/js/watchdog-plain-language.js'
+      - 'property/js/watchdog-why.js'
+      - 'property/tests/intelligence-plain-language-contract.mjs'
+      - '.github/workflows/intelligence-plain-language-contract.yml'
+
+jobs:
+  contract:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+      - name: Verify Intelligence plain-language contract
+        run: node property/tests/intelligence-plain-language-contract.mjs

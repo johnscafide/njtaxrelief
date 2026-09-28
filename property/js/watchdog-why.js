@@ -8,6 +8,18 @@ const FALLBACK_KEY='sb_publishable_MYX59qCbK3d-21zDfJqkNw_fvmfnexa';
 let fallbackClient=null;
 let installTimer=null;
 
+/* Plain-English layer: the drawer leads with a short, readable finding and
+   keeps the governed signal ids and formula lineage in "Technical details". */
+function ensurePlain(){
+  if(window.WatchdogPlain)return Promise.resolve();
+  return new Promise(resolve=>{
+    let s=document.querySelector('script[data-watchdog-plain]');
+    if(!s){s=document.createElement('script');s.src='/property/js/watchdog-plain-language.js?v=20260928a';s.dataset.watchdogPlain='true';document.head.appendChild(s);}
+    s.addEventListener('load',()=>resolve(),{once:true});s.addEventListener('error',()=>resolve(),{once:true});
+    setTimeout(resolve,4000);
+  });
+}
+
 function ensureCss(){
   if(document.querySelector('link[data-watchdog-why-css]'))return;
   const link=document.createElement('link');
@@ -109,27 +121,47 @@ async function propertyContext(sb,pin,existing){
   }catch(_){return existing||{};}
 }
 
+function plainRow(e){
+  const P=window.WatchdogPlain,p=P?P.signal(e):{label:e?.signal_id,value:'',why:''},url=safeUrl(e?.source_url);
+  const when=e?.observed_at?`Checked ${esc(dateLabel(e.observed_at))}`:'';
+  return `<li class="wdwhy-fact"><div><b>${esc(p.label)}</b>${p.value?`<span>${esc(p.value)}</span>`:''}${p.why?`<small>${esc(p.why)}</small>`:''}</div><div class="wdwhy-fact-meta">${isDerived(e)?'<em>Watchdog calculation</em>':'<em>Public record</em>'}${when?`<small>${when}</small>`:''}${url?`<a href="${esc(url)}" target="_blank" rel="noopener noreferrer">Source <i class="fas fa-arrow-up-right-from-square"></i></a>`:''}</div></li>`;
+}
+
+function missingRow(e){
+  const P=window.WatchdogPlain,m=P?P.missing(e):{label:e?.signal_id,reason:e?.reason||'Evidence unavailable'};
+  return `<li class="wdwhy-fact missing"><div><b>${esc(m.label)}</b><small>${esc(m.reason)}</small></div></li>`;
+}
+
 function render(data,context){
   const host=$('#wdwhy-body');
   if(!host)return;
   const f=Array.isArray(data?.findings)?data.findings[0]:null;
   if(!f){
-    host.innerHTML='<div class="wdwhy-empty"><i class="fas fa-circle-check"></i><h3>No review finding</h3><p>The current evidence did not produce a review finding for this property. Watchdog does not fill missing evidence with a guess.</p></div>';
+    host.innerHTML='<div class="wdwhy-empty"><i class="fas fa-circle-check"></i><h3>Nothing flagged</h3><p>Watchdog checked the current public record and did not find anything that needs a closer look. It never fills missing records with a guess.</p></div>';
     return;
   }
   const evidence=Array.isArray(f.evidence)?f.evidence:[],facts=evidence.filter(e=>!isDerived(e)),derived=evidence.filter(isDerived),missing=Array.isArray(f.missing_evidence)?f.missing_evidence:[],why=Array.isArray(f.why_now)?f.why_now:[],ctx=context||f.property_context||{},model=data?.model||{};
   const modelLabel=String(model.label||model.key||'Assessment review').trim();
   const modelVersion=model.version?` v${esc(model.version)}`:'';
   const modelStatus=String(model.status||'').toLowerCase()==='preview'?' · Preview':'';
+  const sum=window.WatchdogPlain?window.WatchdogPlain.summary(f):{headline:'Review finding',text:'',priority:'',score:Math.round(Number(f.score||0)),confidence:Math.round(Number(f.confidence||0)),coverage:Math.round(Number(f.evidence_coverage||0)),confidenceLevel:''};
+  const ordered=window.WatchdogPlain?.order?window.WatchdogPlain.order(f):evidence;
   host.innerHTML=`
-    <div class="wdwhy-scoreline"><div><b>${Math.round(Number(f.score||0))}</b><span>review score</span></div><div><b>${Math.round(Number(f.confidence||0))}%</b><span>confidence</span></div><div><b>${Math.round(Number(f.evidence_coverage||0))}%</b><span>evidence</span></div></div>
+    <section class="wdwhy-plain"><span class="wdwhy-plain-kicker">The short version</span><h3>${esc(sum.headline)}</h3>${sum.text?`<p>${esc(sum.text)}</p>`:''}
+      <div class="wdwhy-plain-chips"><span><b>${esc(sum.priority||'')}</b> priority · ${sum.score}/100</span><span><b>${esc(sum.confidenceLevel?sum.confidenceLevel.charAt(0).toUpperCase()+sum.confidenceLevel.slice(1):'')}</b> confidence · ${sum.confidence}%</span><span>${sum.coverage}% of evidence checked</span></div>
+    </section>
     <div class="wdwhy-context">${[ctx.municipality,ctx.county?`${ctx.county} County`:null,ctx.property_class?`Class ${ctx.property_class}`:null].filter(Boolean).map(x=>`<span>${esc(x)}</span>`).join('')}</div>
-    <section class="wdwhy-callout"><b>Review finding, not a determination</b><p>Watchdog ranked the current evidence for professional review. It is not a valuation, legal conclusion, seller prediction, or guaranteed outcome.</p>${why.length?`<ul>${why.map(w=>`<li><b>${esc(w.signal_id)}</b>${w.explanation?` · ${esc(w.explanation)}`:''}</li>`).join('')}</ul>`:''}</section>
-    ${facts.length?`<section class="wdwhy-section"><h3>Source evidence</h3><div class="wdwhy-grid">${facts.map(e=>evidenceCard(e,false)).join('')}</div></section>`:''}
-    ${derived.length?`<section class="wdwhy-section"><h3>Watchdog calculations</h3><p>Calculated from the source facts above.</p><div class="wdwhy-grid">${derived.map(e=>evidenceCard(e,true)).join('')}</div></section>`:''}
-    <section class="wdwhy-section"><h3>Missing evidence</h3>${missing.length?`<div class="wdwhy-grid">${missing.map(e=>`<article class="wdwhy-evidence missing"><b>${esc(e.signal_id)}</b><strong>${esc(e.reason||'Evidence unavailable')}</strong>${e?.normalization?.detail?.reason?`<p>${esc(e.normalization.detail.reason)}</p>`:''}</article>`).join('')}</div>`:'<p class="wdwhy-complete"><i class="fas fa-circle-check"></i> No required evidence is missing for this finding.</p>'}</section>
-    <section class="wdwhy-lineage"><h3>Method</h3><p>${esc(modelLabel)}${modelVersion}${modelStatus}</p></section>
-    <div class="wdwhy-footer"><a href="/property/data-workbench">Open Data Workbench</a><button type="button" data-wdwhy-close>Close</button></div>`;
+    ${ordered.length?`<section class="wdwhy-section"><h3>What Watchdog checked</h3><ul class="wdwhy-facts">${ordered.map(plainRow).join('')}</ul></section>`:''}
+    ${missing.length?`<section class="wdwhy-section"><h3>What Watchdog couldn't check</h3><ul class="wdwhy-facts">${missing.map(missingRow).join('')}</ul></section>`:''}
+    <p class="wdwhy-disclaimer">This is a review flag from public records, not a valuation, legal opinion or guaranteed outcome.</p>
+    <details class="wdwhy-tech"><summary>Technical details</summary>
+      ${why.length?`<ul class="wdwhy-why">${why.map(w=>`<li><b>${esc(w.signal_id)}</b>${w.explanation?` · ${esc(w.explanation)}`:''}</li>`).join('')}</ul>`:''}
+      ${facts.length?`<section class="wdwhy-section"><h3>Source evidence</h3><div class="wdwhy-grid">${facts.map(e=>evidenceCard(e,false)).join('')}</div></section>`:''}
+      ${derived.length?`<section class="wdwhy-section"><h3>Watchdog calculations</h3><div class="wdwhy-grid">${derived.map(e=>evidenceCard(e,true)).join('')}</div></section>`:''}
+      ${missing.length?`<section class="wdwhy-section"><h3>Missing evidence</h3><div class="wdwhy-grid">${missing.map(e=>`<article class="wdwhy-evidence missing"><b>${esc(e.signal_id)}</b><strong>${esc(e.reason||'Evidence unavailable')}</strong>${e?.normalization?.detail?.reason?`<p>${esc(e.normalization.detail.reason)}</p>`:''}</article>`).join('')}</div></section>`:''}
+      <section class="wdwhy-lineage"><h3>Method</h3><p>${esc(modelLabel)}${modelVersion}${modelStatus}</p></section>
+    </details>
+    <div class="wdwhy-footer"><a href="/data-workbench">Open Data Workbench</a><button type="button" data-wdwhy-close>Close</button></div>`;
   $('[data-wdwhy-close]',host)?.addEventListener('click',close);
 }
 
@@ -148,7 +180,7 @@ async function open(options){
       throw Object.assign(new Error(r.error?.message||'Watchdog Intelligence could not complete this review.'),{status});
     }
     const finding=Array.isArray(r.data?.findings)?r.data.findings[0]:null;
-    const context=await propertyContext(sb,pin,finding?.property_context||{});
+    const [context]=await Promise.all([propertyContext(sb,pin,finding?.property_context||{}),ensurePlain()]);
     render(r.data,context);
     window.dispatchEvent(new CustomEvent('watchdog:why-opened',{detail:{surface:options?.surface||'unknown',pams_pin:pin,model_key:r.data?.model?.key||'assessment_anomaly'}}));
   }catch(e){renderError(e?.message||'Watchdog Intelligence could not complete this review.',Number(e?.status||0));}
