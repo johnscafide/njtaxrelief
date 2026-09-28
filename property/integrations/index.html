@@ -5,6 +5,9 @@
   <meta name="viewport" content="width=device-width,initial-scale=1">
   <title>Integrations | Watchdog</title>
   <meta name="robots" content="noindex,nofollow">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
   <link rel="stylesheet" href="/styles.css">
   <link rel="stylesheet" href="/property/css/shared.css">
@@ -12,6 +15,7 @@
   <link rel="stylesheet" href="/property/css/secondary-pages-2027.css">
   <link rel="stylesheet" href="/property/css/integrations.css">
   <link rel="stylesheet" href="/property/css/integrations-direct-crm.css">
+  <link rel="stylesheet" href="/property/css/integrations-board.css?v=20260928a">
   <link rel="manifest" href="/property/manifest.webmanifest">
   <meta name="theme-color" content="#102a4c">
 </head>
@@ -23,7 +27,7 @@
   </section>
 
   <section class="ig-gate" id="ig-signin" hidden><i class="fas fa-lock"></i><div><h3>Sign in to manage integrations</h3><p>Your connections, keys and permissions are account-scoped.</p></div><a href="/property/dashboard">Open Dashboard</a></section>
-  <section class="ig-gate" id="ig-plan-gate" hidden><i class="fas fa-plug-circle-xmark"></i><div><h3>Integrations require Pro+ or Teams</h3><p>Zapier, CRM context and automation webhooks are professional workflow capabilities.</p></div><a href="/property/pro#pricing">Compare plans</a></section>
+  <section class="ig-gate" id="ig-plan-gate" hidden><i class="fas fa-plug-circle-xmark"></i><div><h3>Automations need Pro+ or Teams</h3><p>Zapier keys, webhooks and automation tools are Pro+ and Teams features. Your CRM and property connection below works on Agent and Pro too.</p></div><a href="/property/pro#pricing">Compare plans</a></section>
   <section class="ig-gate ig-error" id="ig-error" hidden><i class="fas fa-triangle-exclamation"></i><div><h3>Integration Center could not load</h3><p id="ig-error-text">Try again from this page.</p></div><button type="button" data-ig-action="reload">Retry</button></section>
 
   <div id="ig-workspace" hidden>
@@ -89,6 +93,8 @@
     <section class="ig-section"><div class="ig-section-head"><div><span>DELIVERY LOG</span><h3>Recent outbound activity</h3></div><button type="button" data-ig-action="history"><i class="fas fa-clock-rotate-left"></i>Reload log</button></div><div class="ig-history-wrap"><table class="ig-history"><thead><tr><th>Event</th><th>Connection</th><th>Status</th><th>Attempts</th><th>HTTP</th><th>When</th></tr></thead><tbody id="ig-history"></tbody></table></div><div class="ig-empty compact" id="ig-history-empty"><i class="fas fa-wave-square"></i><b>No deliveries yet</b><span>Test a webhook connection or wait for a subscribed Watchdog event.</span></div></section>
     <section class="ig-next"><div><span>PHASE 4 · PROVIDER FRAMEWORK</span><h3>One native connector framework, not one-off CRM code.</h3><p>BoldTrail is the first provider on the shared direct-sync runtime. The same Vault boundary, sync history and normalized context contract can support the next demanded CRM.</p></div><i class="fas fa-network-wired"></i></section>
   </div>
+
+  <section class="igx" id="igx-crm" aria-labelledby="igx-title" hidden></section>
 </main>
 
 <div class="ig-modal" id="ig-credentials-modal" hidden><button class="ig-modal-shade" type="button" data-ig-action="close-credentials" aria-label="Close"></button><section role="dialog" aria-modal="true" aria-labelledby="ig-credentials-title"><header><div><span>SHOWING ONCE</span><h3 id="ig-credentials-title">Save your credential</h3></div><button type="button" data-ig-action="close-credentials"><i class="fas fa-xmark"></i></button></header><p id="ig-credentials-copy">Watchdog will not show this secret again. Store it securely.</p><div id="ig-credentials-fields"></div><footer><button class="ig-primary" type="button" data-ig-action="close-credentials">I saved this credential</button></footer></section></div>
@@ -100,6 +106,7 @@
 <script src="/property/js/app-shell-2027.js"></script>
 <script src="/property/js/integrations.js"></script>
 <script src="/property/js/integrations-direct-crm.js"></script>
+<script src="/property/js/integrations-crm-properties.js?v=20260928a" defer></script>
 <script src="/property/js/pwa.js"></script>
 <script src="/property/js/platform-observability.js"></script>
 </body>

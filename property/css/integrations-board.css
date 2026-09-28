@@ -1,0 +1,180 @@
+/* Integration Center in the board design, plus the CRM <-> property panel.
+   Loaded after integrations.css and integrations-direct-crm.css. Modules that
+   inject their own stylesheets later (command center, automations, resolution)
+   are re-themed through their tokens and through the page-scoped selectors below. */
+html body[data-sidebar-page="integrations"]{
+  --ixb-bg:#f3f1ec;--ixb-surface:#fbfaf7;--ixb-line:#e3dfd6;--ixb-navy:#0e2248;--ixb-ink:#142033;--ixb-muted:#5d6877;
+  --ixb-blue:#1456a0;--ixb-blue-bright:#2f6df6;--ixb-gold:#b8972a;--ixb-sky:#e3edfb;--ixb-sky-line:#b9d0f2;
+  --ixb-teal:#dff1ec;--ixb-teal-line:#9fd3c5;--ixb-sand:#f6efd9;--ixb-sand-line:#e4cf8e;--ixb-review:#fde2e0;--ixb-good:#0b7356;--ixb-bad:#b42318;
+  --ixb-radius:24px;--ixb-font:"Plus Jakarta Sans",Inter,system-ui,-apple-system,"Segoe UI",sans-serif;
+  /* Re-theme the legacy and module tokens so everything reads as one board. */
+  --ig-navy:var(--ixb-navy);--ig-teal:var(--ixb-blue);--ig-ink:var(--ixb-ink);--ig-muted:var(--ixb-muted);--ig-line:var(--ixb-line);--ig-soft:var(--ixb-bg);
+  --igd-blue:var(--ixb-blue);--igd-violet:var(--ixb-navy);--igd-soft:var(--ixb-bg);--igd-line:var(--ixb-line);--igd-ink:var(--ixb-ink);--igd-muted:var(--ixb-muted);
+  --igcc-ink:var(--ixb-navy);--igcc-text:var(--ixb-ink);--igcc-muted:var(--ixb-muted);--igcc-line:var(--ixb-line);--igcc-blue:var(--ixb-blue);--igcc-soft:var(--ixb-sky);--igcc-surface:var(--ixb-surface);
+  --waf-blue:var(--ixb-blue);--waf-navy:var(--ixb-navy);--waf-soft:var(--ixb-sky);--waf-ink:var(--ixb-navy);--waf-text:var(--ixb-ink);--waf-muted:var(--ixb-muted);--waf-line:var(--ixb-line);
+  background:var(--ixb-bg);color:var(--ixb-ink);font-family:var(--ixb-font)
+}
+html body[data-sidebar-page="integrations"] .ig-shell{max-width:1480px;padding:24px 30px 64px}
+html body[data-sidebar-page="integrations"] .ig-intro{display:none}
+
+/* Flat board surfaces for the existing sections. */
+html body[data-sidebar-page="integrations"] :is(.ig-card,.ig-gate,.ig-section,.ig-next,.igd-native,.igd-panel,.igd-history,.igcc,.igcc-summary article,.igcc-next,.igcc-learning,.ig-stats article){
+  background:var(--ixb-surface);border:0;border-radius:var(--ixb-radius);box-shadow:none
+}
+html body[data-sidebar-page="integrations"] .igd-panel{background:#fff}
+html body[data-sidebar-page="integrations"] :is(.ig-card,.ig-section,.igd-native,.igcc){padding:24px}
+html body[data-sidebar-page="integrations"] :is(.ig-kicker,.ig-card header span,.ig-section-head span,.ig-next span,.ig-subhead span,.igcc-kicker){color:var(--ixb-blue);letter-spacing:.14em}
+html body[data-sidebar-page="integrations"] :is(h2,h3,h4){color:var(--ixb-navy);font-family:var(--ixb-font)}
+
+/* Buttons: navy pills, 44px tall. */
+html body[data-sidebar-page="integrations"] :is(.ig-primary,.igcc-btn.primary,.ig-gate a,.ig-gate button){
+  min-height:44px;border-radius:999px;background:var(--ixb-navy);color:#fff;border:0;padding:0 18px;font-weight:800
+}
+html body[data-sidebar-page="integrations"] :is(.ig-primary,.igcc-btn.primary,.ig-gate a,.ig-gate button):hover{background:var(--ixb-blue)}
+html body[data-sidebar-page="integrations"] :is(.igd-actions button:not(.ig-primary),.ig-section-head button,.ig-subhead button,.igcc-btn:not(.primary),.igd-history-head button){
+  min-height:44px;border-radius:999px;background:#fff;color:var(--ixb-navy);border:1px solid var(--ixb-line);padding:0 16px;font-weight:700
+}
+html body[data-sidebar-page="integrations"] .igd-actions button.danger{color:var(--ixb-bad)}
+html body[data-sidebar-page="integrations"] :is(.ig-card,.igd-panel,.ig-modal) :is(input:not([type="checkbox"]):not([type="radio"]),select,textarea){
+  border-radius:14px;border:1px solid var(--ixb-line);background:#fff;min-height:44px
+}
+html body[data-sidebar-page="integrations"] .igcc-nav button{min-height:44px;border-radius:999px}
+html body[data-sidebar-page="integrations"] .igcc-nav button[aria-selected="true"]{background:var(--ixb-navy);color:#fff}
+html body[data-sidebar-page="integrations"] :is(button,a,input,select,summary):focus-visible{outline:3px solid var(--ixb-blue-bright);outline-offset:2px}
+
+/* ---------- CRM <-> property panel ---------- */
+.igx{margin:18px 0 0;background:var(--ixb-surface);border-radius:var(--ixb-radius);padding:26px;min-width:0}
+.igx[hidden],.igx [hidden]{display:none!important}
+.igx .sr-only{position:absolute;width:1px;height:1px;padding:0;margin:-1px;overflow:hidden;clip:rect(0 0 0 0);white-space:nowrap;border:0}
+.igx-head{display:flex;justify-content:space-between;gap:18px;align-items:flex-start;margin-bottom:18px}
+.igx-kicker{display:block;font:800 12px/1.2 var(--ixb-font);letter-spacing:.14em;color:var(--ixb-blue)}
+.igx-head h2{margin:8px 0 6px;font:800 clamp(24px,2.6vw,34px)/1.1 var(--ixb-font);letter-spacing:-.03em;color:var(--ixb-navy);max-width:780px}
+.igx-head p{margin:0;color:var(--ixb-muted);font-size:15px;line-height:1.55;max-width:760px}
+.igx-btn{display:inline-flex;align-items:center;justify-content:center;gap:8px;min-height:44px;padding:0 18px;border-radius:999px;border:0;background:var(--ixb-navy);color:#fff;font:800 14px/1 var(--ixb-font);text-decoration:none;cursor:pointer;white-space:nowrap}
+.igx-btn:hover{background:var(--ixb-blue)}
+.igx-btn.is-ghost{background:#fff;color:var(--ixb-navy);border:1px solid var(--ixb-line)}
+.igx-btn.is-ghost:hover{background:var(--ixb-sky)}
+.igx-btn.is-small{min-height:44px;padding:0 14px;font-size:13px}
+.igx-btn.is-quiet{background:transparent;color:var(--ixb-navy);border:1px solid var(--ixb-line)}
+.igx-btn:disabled{opacity:.5;cursor:not-allowed}
+.igx-btn:focus-visible,.igx-tab:focus-visible,.igx-how summary:focus-visible,.igx-search input:focus-visible,.igx-check input:focus-visible{outline:3px solid var(--ixb-blue-bright);outline-offset:2px}
+
+.igx-cards{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:14px;margin:0 0 20px}
+.igx-card{position:relative;overflow:hidden;border-radius:var(--ixb-radius);padding:20px 20px 18px;min-height:132px;display:flex;flex-direction:column;justify-content:space-between;text-align:left;border:1px solid transparent;font:inherit;color:var(--ixb-ink);cursor:pointer}
+.igx-card small{font:800 12px/1.3 var(--ixb-font);letter-spacing:.12em;text-transform:uppercase;opacity:.8}
+.igx-card b{display:block;font:800 34px/1 var(--ixb-font);letter-spacing:-.03em;margin:12px 0 6px}
+.igx-card span{font-size:13px;line-height:1.45;opacity:.85}
+.igx-card--navy{background:var(--ixb-navy);color:#fff;cursor:default}
+.igx-card--navy b{text-decoration:underline;text-decoration-color:var(--ixb-gold);text-decoration-thickness:3px;text-underline-offset:6px}
+.igx-card--sky{background:var(--ixb-sky);border-color:var(--ixb-sky-line)}
+.igx-card--teal{background:var(--ixb-teal);border-color:var(--ixb-teal-line)}
+.igx-card--sand{background:var(--ixb-sand);border-color:var(--ixb-sand-line)}
+.igx-card[aria-pressed="true"]{box-shadow:0 0 0 3px var(--ixb-navy) inset}
+.igx-card--navy[aria-pressed="true"]{box-shadow:0 0 0 3px var(--ixb-gold) inset}
+
+.igx-tabs{display:flex;flex-wrap:wrap;gap:8px;margin:0 0 14px}
+.igx-tab{min-height:44px;padding:0 16px;border-radius:999px;border:1px solid var(--ixb-line);background:#fff;color:var(--ixb-navy);font:700 14px/1 var(--ixb-font);cursor:pointer;display:inline-flex;align-items:center;gap:8px}
+.igx-tab[aria-selected="true"]{background:var(--ixb-navy);border-color:var(--ixb-navy);color:#fff}
+.igx-tab em{font-style:normal;font-weight:800;min-width:22px;padding:3px 7px;border-radius:999px;background:var(--ixb-bg);color:var(--ixb-navy);font-size:12px;text-align:center}
+.igx-tab[aria-selected="true"] em{background:rgba(255,255,255,.18);color:#fff}
+
+.igx-panel{background:#fff;border-radius:var(--ixb-radius);padding:18px}
+.igx-panel-intro{margin:0 0 14px;color:var(--ixb-muted);font-size:14px;line-height:1.55}
+.igx-toolbar{display:flex;flex-wrap:wrap;gap:10px;align-items:center;justify-content:space-between;margin:0 0 12px}
+.igx-toolbar-left,.igx-toolbar-right{display:flex;flex-wrap:wrap;gap:10px;align-items:center}
+.igx-search{position:relative;display:block;min-width:280px;flex:1;max-width:440px}
+.igx-search i{position:absolute;left:15px;top:50%;transform:translateY(-50%);color:var(--ixb-muted);font-size:14px}
+.igx-search input{width:100%;min-height:44px;border-radius:999px;border:1px solid var(--ixb-line);background:var(--ixb-surface);padding:0 16px 0 40px;font:500 14px/1 var(--ixb-font);color:var(--ixb-ink)}
+.igx-check{display:inline-flex;align-items:center;gap:10px;min-height:44px;font-size:14px;color:var(--ixb-ink);cursor:pointer}
+.igx-check input{width:20px;height:20px;accent-color:var(--ixb-navy)}
+.igx-note{font-size:13px;color:var(--ixb-muted);line-height:1.5}
+
+.igx-list{list-style:none;margin:0;padding:0;display:grid;gap:10px}
+.igx-row{display:grid;grid-template-columns:auto minmax(0,1fr) auto;gap:14px;align-items:center;padding:14px 16px;border-radius:18px;background:var(--ixb-surface)}
+.igx-row.no-check{grid-template-columns:minmax(0,1fr) auto}
+.igx-row-icon{width:44px;height:44px;border-radius:50%;display:grid;place-items:center;background:var(--ixb-sky);color:var(--ixb-blue);flex:0 0 44px}
+.igx-row-main{min-width:0}
+.igx-row-title{display:block;font:800 15px/1.3 var(--ixb-font);color:var(--ixb-navy);overflow-wrap:anywhere}
+.igx-row-sub{display:block;font-size:13px;color:var(--ixb-muted);margin-top:3px;overflow-wrap:anywhere}
+.igx-people{display:flex;flex-wrap:wrap;gap:6px;margin-top:8px}
+.igx-person{display:inline-flex;align-items:center;gap:6px;min-height:28px;padding:4px 10px;border-radius:999px;background:#fff;border:1px solid var(--ixb-line);font-size:12px;color:var(--ixb-ink);max-width:100%}
+.igx-person b{font-weight:800;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.igx-tag{display:inline-flex;align-items:center;min-height:22px;padding:2px 8px;border-radius:999px;font-size:12px;font-weight:700;background:var(--ixb-sky);color:var(--ixb-navy)}
+.igx-tag.stage-client,.igx-tag.stage-closed{background:var(--ixb-teal)}
+.igx-tag.stage-contract,.igx-tag.stage-active{background:var(--ixb-sand)}
+.igx-row-actions{display:flex;gap:8px;flex-wrap:wrap;justify-content:flex-end}
+
+.igx-contacts{display:grid;grid-template-columns:repeat(auto-fill,minmax(min(100%,280px),1fr));gap:10px;margin-top:10px}
+.igx-contact{background:#fff;border-radius:16px;padding:12px 14px;border:1px solid var(--ixb-line);min-width:0}
+.igx-contact-top{display:flex;justify-content:space-between;gap:8px;align-items:flex-start}
+.igx-contact-name{font:800 14px/1.3 var(--ixb-font);color:var(--ixb-navy);overflow-wrap:anywhere}
+.igx-contact dl{display:grid;grid-template-columns:auto minmax(0,1fr);gap:4px 10px;margin:8px 0 0;font-size:13px}
+.igx-contact dt{color:var(--ixb-muted)}
+.igx-contact dd{margin:0;color:var(--ixb-ink);overflow-wrap:anywhere}
+.igx-contact a{color:var(--ixb-blue);font-weight:700;text-decoration:none;display:inline-flex;align-items:center;min-height:44px;max-width:100%;overflow-wrap:anywhere}
+.igx-contact dt{align-self:center}
+.igx-contact a:hover{text-decoration:underline}
+
+.igx-compare{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:10px;margin-top:8px}
+.igx-compare div{background:#fff;border-radius:14px;padding:10px 12px;border:1px solid var(--ixb-line)}
+.igx-compare small{display:block;font-size:12px;color:var(--ixb-muted);font-weight:700;margin-bottom:3px}
+.igx-compare b{font-size:14px;color:var(--ixb-navy);overflow-wrap:anywhere}
+
+.igx-empty{display:grid;justify-items:center;text-align:center;gap:8px;padding:34px 18px;color:var(--ixb-muted)}
+.igx-empty i{width:52px;height:52px;border-radius:50%;display:grid;place-items:center;background:var(--ixb-bg);color:var(--ixb-navy);font-size:20px}
+.igx-empty b{color:var(--ixb-navy);font:800 17px/1.3 var(--ixb-font)}
+.igx-empty p{margin:0;max-width:520px;font-size:14px;line-height:1.55}
+.igx-state{background:#fff;border-radius:var(--ixb-radius);padding:22px;display:flex;gap:16px;align-items:center}
+.igx-state>i{width:52px;height:52px;border-radius:50%;display:grid;place-items:center;background:var(--ixb-sky);color:var(--ixb-navy);font-size:20px;flex:0 0 52px}
+.igx-state div{flex:1;min-width:0}
+.igx-state b{display:block;color:var(--ixb-navy);font:800 17px/1.3 var(--ixb-font)}
+.igx-state p{margin:4px 0 0;color:var(--ixb-muted);font-size:14px;line-height:1.55}
+
+.igx-more{display:flex;justify-content:center;margin-top:12px}
+.igx-how{margin-top:16px;background:#fff;border-radius:var(--ixb-radius);padding:0 18px}
+.igx-how summary{min-height:52px;display:flex;align-items:center;gap:10px;cursor:pointer;list-style:none;font:800 15px/1.3 var(--ixb-font);color:var(--ixb-navy)}
+.igx-how summary::-webkit-details-marker{display:none}
+.igx-how summary .igx-chevron{margin-left:auto;transition:transform .2s ease}
+.igx-how[open] summary .igx-chevron{transform:rotate(180deg)}
+.igx-how-body{padding:0 0 18px;color:var(--ixb-ink);font-size:14px;line-height:1.6}
+.igx-how-body p{margin:0 0 10px}
+.igx-breakdown{display:grid;grid-template-columns:repeat(auto-fit,minmax(180px,1fr));gap:10px;margin:12px 0}
+.igx-breakdown div{background:var(--ixb-surface);border-radius:16px;padding:12px 14px}
+.igx-breakdown b{display:block;font:800 22px/1 var(--ixb-font);color:var(--ixb-navy)}
+.igx-breakdown span{display:block;margin-top:6px;font-size:13px;color:var(--ixb-muted);line-height:1.4}
+
+.igx-toast{position:fixed;left:50%;bottom:22px;transform:translateX(-50%);z-index:60;max-width:min(560px,calc(100vw - 32px));background:var(--ixb-navy);color:#fff;border-radius:18px;padding:13px 18px;font:700 14px/1.45 var(--ixb-font);box-shadow:0 16px 40px rgba(14,34,72,.25)}
+.igx-toast.is-error{background:var(--ixb-bad)}
+.igx-skeleton{height:84px;border-radius:18px;background:linear-gradient(90deg,var(--ixb-surface),#efece5,var(--ixb-surface));background-size:200% 100%;animation:igx-shimmer 1.4s ease-in-out infinite}
+@keyframes igx-shimmer{to{background-position:-200% 0}}
+
+/* Show the CRM panel on the Overview tab; other tabs keep their focused views. */
+body.igcc-enabled:not([data-igcc-view="overview"]):has(#ig-workspace:not([hidden])) #igx-crm{display:none!important}
+
+@media (max-width:1100px){.igx-cards{grid-template-columns:repeat(2,minmax(0,1fr))}}
+@media (max-width:760px){
+  html body[data-sidebar-page="integrations"] .ig-shell{padding:16px 16px 56px}
+  .igx{padding:18px 16px}
+  .igx-head{flex-direction:column}
+  .igx-cards{grid-template-columns:1fr 1fr;gap:10px}
+  .igx-card{min-height:118px;padding:16px}
+  .igx-card b{font-size:28px}
+  .igx-panel{padding:12px}
+  .igx-row{grid-template-columns:auto minmax(0,1fr);padding:12px}
+  .igx-row.no-check{grid-template-columns:minmax(0,1fr)}
+  .igx-row-actions{grid-column:1/-1;justify-content:flex-start}
+  .igx-row-icon{display:none}
+  .igx-compare{grid-template-columns:1fr}
+  .igx-search{min-width:0;max-width:none;width:100%}
+  .igx-toolbar-right{width:100%}
+  .igx-toolbar-right .igx-btn{flex:1}
+}
+@media (max-width:380px){.igx-cards{grid-template-columns:1fr}}
+@media (prefers-reduced-motion:reduce){.igx-skeleton{animation:none}.igx-how summary .igx-chevron{transition:none}}
+@media print{
+  html body[data-sidebar-page="integrations"]{background:#fff}
+  .igx{background:#fff;padding:0}
+  .igx-card{border:1px solid #999;color:#000;background:#fff}
+  .igx-btn,.igx-tabs,.igx-toolbar,.igx-toast,.igx-more{display:none!important}
+  .igx-panel[hidden]{display:block!important}
+}
