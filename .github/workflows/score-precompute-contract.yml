@@ -1,0 +1,29 @@
+name: Score precompute contract
+
+on:
+  push:
+    branches: [main]
+    paths:
+      - 'supabase/functions/workbench-score/**'
+      - 'property/scripts/precompute_scores.py'
+      - 'property/tests/score-precompute-contract.mjs'
+      - '.github/workflows/score-precompute-contract.yml'
+      - '.github/workflows/parcel-composite-sync.yml'
+  pull_request:
+    paths:
+      - 'supabase/functions/workbench-score/**'
+      - 'property/scripts/precompute_scores.py'
+      - 'property/tests/score-precompute-contract.mjs'
+      - '.github/workflows/score-precompute-contract.yml'
+      - '.github/workflows/parcel-composite-sync.yml'
+
+jobs:
+  contract:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+      - name: Verify score precompute contract
+        run: node property/tests/score-precompute-contract.mjs
