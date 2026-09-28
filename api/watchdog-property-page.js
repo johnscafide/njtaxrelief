@@ -152,11 +152,56 @@ function townCompareText(row, v) {
   return `Among ${count(tc.peers)} ${group} in ${v.town}, the typical (median) tax bill is ${money(tc.median_tax)}. ${position}`;
 }
 
+// Town reference data shipped with the function (vercel.json includeFiles):
+// general tax rates by year and the latest equalization (common-level) ratio.
+let townData = null;
+function loadTownData() {
+  if (townData) return townData;
+  townData = { rates: {}, ratios: {} };
+  try {
+    const fs = require('fs');
+    const path = require('path');
+    townData.rates = JSON.parse(fs.readFileSync(path.join(process.cwd(), 'tax-rates.json'), 'utf8')).rates || {};
+    townData.ratios = JSON.parse(fs.readFileSync(path.join(process.cwd(), 'equalization-ratios.json'), 'utf8')).ratios || {};
+  } catch (err) {
+    console.warn('watchdog-property-page town data', err && err.message || err);
+  }
+  return townData;
+}
+const townKey = (row) => `${String(row.town || '').toUpperCase().trim()} (${String(row.county || '').toUpperCase().trim()})`;
+
+// General tax rates since the last town-wide revaluation. A revaluation
+// resets assessments, so the rate jumps; years before it are not comparable.
+function rateTrend(row) {
+  const series = loadTownData().rates[townKey(row)];
+  if (!series) return null;
+  const years = Object.keys(series).map(Number).filter((y) => y > 1990 && Number(series[y]) > 0).sort((a, b) => b - a);
+  if (!years.length) return null;
+  const kept = [years[0]];
+  for (let i = 1; i < years.length; i++) {
+    const newer = Number(series[kept[kept.length - 1]]), older = Number(series[years[i]]);
+    if (years[i] !== kept[kept.length - 1] - 1 || older / newer > 1.3 || older / newer < 0.7) break;
+    kept.push(years[i]);
+  }
+  const points = kept.reverse().map((y) => ({ year: y, rate: Number(series[y]) }));
+  const cutAtReval = kept.length < years.length;
+  return { points, latest: points[points.length - 1], first: points[0], cutAtReval };
+}
+
+function latestRatio(row) {
+  const series = loadTownData().ratios[townKey(row)];
+  if (!series) return null;
+  const years = Object.keys(series).map(Number).filter((y) => y > 1990).sort((a, b) => b - a);
+  const hit = years.length ? series[String(years[0])] : null;
+  const ratio = hit && typeof hit === 'object' ? Number(hit.ratio) : Number(hit);
+  return Number.isFinite(ratio) && ratio > 0 ? { ratio, year: years[0] } : null;
+}
+
 function scoreSection(row) {
   const s = row.score;
   if (!s || s.score == null) {
-    return `<section class="wdp-card wdp-score" aria-labelledby="wdp-score-h">
-      <h2 id="wdp-score-h">Watchdog Score</h2>
+    return `<section class="tp-card wdp-card" aria-labelledby="wdp-score-h">
+      <h2 id="wdp-score-h"><i class="fas fa-shield-dog" aria-hidden="true"></i> Watchdog Score</h2>
       <p class="wdp-muted">The Watchdog Score for this property is still being calculated. Open the full analysis to run it now.</p>
     </section>`;
   }
@@ -164,21 +209,69 @@ function scoreSection(row) {
   const parts = s.components || {};
   const rows = DIMENSIONS.map((d) => {
     const value = componentScore(parts[d.key]);
-    const width = value == null ? 0 : value;
     return `<li><a href="/robust/${d.slug}"><span class="wdp-letter" aria-hidden="true">${d.letter}</span><span class="wdp-dim">${esc(d.name)}</span>
-        <span class="wdp-bar" aria-hidden="true"><i style="width:${width}%"></i></span><b>${value == null ? 'n/a' : value}</b></a></li>`;
+        <span class="wdp-bar" aria-hidden="true"><i style="width:${value == null ? 0 : value}%"></i></span><b>${value == null ? 'n/a' : value}</b></a></li>`;
   }).join('');
-  return `<section class="wdp-card wdp-score" aria-labelledby="wdp-score-h">
+  return `<section class="tp-card wdp-card" aria-labelledby="wdp-score-h">
       <div class="wdp-score-head">
         <div class="wdp-score-ring" style="--wdp-score:${score};--wdp-score-color:${scoreColor(score)}" role="img" aria-label="Watchdog Score ${score} out of 100"><span>${score}</span><small>/100</small></div>
         <div>
           <h2 id="wdp-score-h">Watchdog Score</h2>
           <p class="wdp-verdict">${esc(s.verdict || '')}</p>
-          <p class="wdp-muted">The Watchdog Score, powered by the ROBUST Framework. Higher means a stronger tax position. Evidence coverage ${Math.round(Number(s.evidence_coverage || 0))}%, ${esc(s.confidence || 'low')} confidence.</p>
+          <p class="wdp-muted wdp-small">The Watchdog Score, powered by the ROBUST Framework. Higher means a stronger tax position. Evidence coverage ${Math.round(Number(s.evidence_coverage || 0))}%, ${esc(s.confidence || 'low')} confidence.</p>
         </div>
       </div>
       <ul class="wdp-dims">${rows}</ul>
-      <p class="wdp-muted wdp-small"><a href="/robust">How the ROBUST Framework works</a></p>
+      <p class="wdp-small"><a href="/robust">How the ROBUST Framework works</a></p>
+    </section>`;
+}
+
+function taxContextSection(row, v) {
+  const compare = townCompareText(row, v);
+  const trend = rateTrend(row);
+  if (!compare && !trend) return '';
+  let trendHtml = '';
+  if (trend) {
+    const max = Math.max(...trend.points.map((p) => p.rate));
+    const bars = trend.points.map((p) => `<li><span class="wdp-rbar" style="height:${Math.max(8, Math.round(p.rate / max * 100))}%" title="${p.year}: $${p.rate.toFixed(3)} per $100"></span><small>${String(p.year).slice(2)}</small></li>`).join('');
+    const change = trend.points.length >= 3 ? (trend.latest.rate / trend.first.rate - 1) * 100 : null;
+    const changeText = change == null ? '' : ` That's ${change >= 0 ? 'up' : 'down'} ${Math.abs(change).toFixed(1)}% since ${trend.first.year}${trend.cutAtReval ? ', the first year after the last town-wide revaluation' : ''}.`;
+    trendHtml = `<h3>Town tax rate</h3>
+      <p>${esc(v.town)}'s general tax rate is <b>$${trend.latest.rate.toFixed(3)}</b> per $100 of assessed value (${trend.latest.year}).${esc(changeText)}</p>
+      <ul class="wdp-rates" aria-label="General tax rate by year">${bars}</ul>
+      ${trend.cutAtReval ? '<p class="wdp-muted wdp-small">Years before the last revaluation are left out because assessments were reset, so the rates are not comparable.</p>' : ''}`;
+  }
+  return `<section class="tp-card wdp-card" aria-labelledby="wdp-town-h">
+      <h2 id="wdp-town-h"><i class="fas fa-scale-balanced" aria-hidden="true"></i> This tax bill in context</h2>
+      ${compare ? `<p>${esc(compare)}</p>` : ''}
+      ${trendHtml}
+      <p class="wdp-small"><a href="/town-compare">Compare ${esc(v.town)} with other towns</a></p>
+    </section>`;
+}
+
+function toolkitSection(row, v) {
+  const trend = rateTrend(row);
+  const ratio = latestRatio(row);
+  const appeal = new URLSearchParams();
+  if (row.assessed_value) appeal.set('assessed', String(row.assessed_value));
+  if (trend) appeal.set('rate', trend.latest.rate.toFixed(3));
+  if (ratio) appeal.set('ratio', String(ratio.ratio));
+  const maps = `https://www.google.com/maps/search/?api=1&query=${encodeURIComponent(`${v.address}, ${v.town}, NJ`)}`;
+  const items = [
+    ['fa-magnifying-glass-dollar', 'Could an appeal lower this bill?', `Screen it with the appeal estimator, already filled in with this property's assessment${trend ? ' and the town tax rate' : ''}.`, `/appeal-savings-estimator/?${appeal.toString()}`],
+    ['fa-calendar-check', 'Appeal deadlines', `In most towns the deadline is April 1 (May 1 after a town-wide revaluation), or 45 days after assessment notices go out if that is later. See the ${v.county} County dates.`, '/nj-property-tax-calendar'],
+    ['fa-hand-holding-dollar', 'ANCHOR, Senior Freeze and Stay NJ', 'See which New Jersey property tax relief programs a homeowner here may qualify for.', '/senior-benefit-estimator'],
+    ['fa-house-circle-check', 'Is this your home?', 'Save it to your Watchdog account to follow its assessment, tax and Watchdog Score over time.', `/home?pin=${encodeURIComponent(row.pams_pin)}`],
+    ['fa-calculator', 'Buying here?', 'Estimate the full monthly cost with the real tax bill included.', '/home-buying-cost-calculator'],
+    ['fa-map-location-dot', 'See it on a map', 'Open this address in Google Maps.', maps]
+  ];
+  const list = items.map(([icon, title, text, href]) => {
+    const external = /^https?:\/\//.test(href);
+    return `<li><a href="${esc(href)}"${external ? ' target="_blank" rel="noopener"' : ''}><i class="fas ${icon}" aria-hidden="true"></i><span><b>${esc(title)}</b><small>${esc(text)}</small></span><i class="fas fa-chevron-right wdp-go" aria-hidden="true"></i></a></li>`;
+  }).join('');
+  return `<section class="tp-card wdp-card" aria-labelledby="wdp-tools-h">
+      <h2 id="wdp-tools-h"><i class="fas fa-toolbox" aria-hidden="true"></i> Homeowner toolkit</h2>
+      <ul class="wdp-tools">${list}</ul>
     </section>`;
 }
 
@@ -194,8 +287,8 @@ function factsSection(row, v) {
     ['Improvement value', money(row.improvement_value)],
     ['County', `${v.county} County`]
   ].filter(([, value]) => value !== '' && value != null);
-  return `<section class="wdp-card" aria-labelledby="wdp-facts-h">
-      <h2 id="wdp-facts-h">Property record</h2>
+  return `<section class="tp-card wdp-card" aria-labelledby="wdp-facts-h">
+      <h2 id="wdp-facts-h"><i class="fas fa-file-lines" aria-hidden="true"></i> Property record</h2>
       <dl class="wdp-facts">${facts.map(([k, value]) => `<div><dt>${esc(k)}</dt><dd>${esc(value)}</dd></div>`).join('')}</dl>
     </section>`;
 }
@@ -206,22 +299,64 @@ function saleSection(row) {
   const note = row.sale_flagged_non_market
     ? '<p class="wdp-muted wdp-small">The state marked this sale as a non-market transfer (for example between family members), so it may not reflect market value.</p>'
     : '';
-  return `<section class="wdp-card" aria-labelledby="wdp-sale-h">
-      <h2 id="wdp-sale-h">Last recorded sale</h2>
+  return `<section class="tp-card wdp-card" aria-labelledby="wdp-sale-h">
+      <h2 id="wdp-sale-h"><i class="fas fa-handshake" aria-hidden="true"></i> Last recorded sale</h2>
       <p class="wdp-big">${money(row.last_sale_price)}${when ? ` <span class="wdp-muted">on ${esc(when)}</span>` : ''}</p>
       ${note}
     </section>`;
 }
 
-function neighborsSection(row, v) {
+function neighborsSection(row) {
   // Skip unnumbered lots and parcels with no tax bill (common areas, road lots).
   const list = Array.isArray(row.neighbors) ? row.neighbors.filter((n) => n && n.pams_pin && /^\d/.test(String(n.address || '')) && Number(n.last_year_tax) > 0) : [];
   if (!list.length) return '';
   const items = list.map((n) => `<li><a href="${esc(propertyPath({ ...n, town: n.town || row.town }))}"><span>${esc(titleCase(n.address))}</span><small>${n.last_year_tax ? money(n.last_year_tax) + ' tax' : ''}</small></a></li>`).join('');
-  return `<section class="wdp-card" aria-labelledby="wdp-near-h">
-      <h2 id="wdp-near-h">More properties on block ${esc(row.block)}</h2>
+  return `<section class="tp-card wdp-card" aria-labelledby="wdp-near-h">
+      <h2 id="wdp-near-h"><i class="fas fa-street-view" aria-hidden="true"></i> More properties on block ${esc(row.block)}</h2>
       <ul class="wdp-near">${items}</ul>
     </section>`;
+}
+
+function shareBar(row, v) {
+  const url = v.url;
+  const text = `${v.address}, ${v.town}, NJ${row.last_year_tax ? `: ${money(row.last_year_tax)} property tax` : ''}${row.score && row.score.score != null ? `, Watchdog Score ${Math.round(Number(row.score.score))}/100` : ''}`;
+  const enc = encodeURIComponent;
+  const links = [
+    ['fa-comment-sms', 'Text', `sms:?&body=${enc(`${text} ${url}`)}`],
+    ['fa-envelope', 'Email', `mailto:?subject=${enc(`${v.address}, ${v.town}, NJ`)}&body=${enc(`${text}\n\n${url}`)}`],
+    ['fa-brands fa-facebook-f', 'Facebook', `https://www.facebook.com/sharer/sharer.php?u=${enc(url)}`],
+    ['fa-brands fa-x-twitter', 'X', `https://twitter.com/intent/tweet?url=${enc(url)}&text=${enc(text)}`],
+    ['fa-brands fa-linkedin-in', 'LinkedIn', `https://www.linkedin.com/sharing/share-offsite/?url=${enc(url)}`]
+  ].map(([icon, label, href]) => {
+    const external = /^https:/.test(href);
+    return `<a class="wdp-sh" href="${esc(href)}"${external ? ' target="_blank" rel="noopener"' : ''}><i class="${icon.startsWith('fa-brands') ? icon : 'fas ' + icon}" aria-hidden="true"></i><span>${label}</span></a>`;
+  }).join('');
+  return `<section class="tp-card wdp-share" id="wdp-share" aria-label="Share this property">
+      <b class="wdp-share-t"><i class="fas fa-share-nodes" aria-hidden="true"></i> Share this property</b>
+      <div class="wdp-share-row">
+        <button class="wdp-sh" type="button" data-wdp-native hidden><i class="fas fa-arrow-up-from-bracket" aria-hidden="true"></i><span>Share</span></button>
+        <button class="wdp-sh" type="button" data-wdp-copy><i class="fas fa-link" aria-hidden="true"></i><span>Copy link</span></button>
+        ${links}
+        <button class="wdp-sh" type="button" data-wdp-print><i class="fas fa-print" aria-hidden="true"></i><span>Print</span></button>
+      </div>
+      <span class="wdp-toast" role="status" aria-live="polite"></span>
+    </section>`;
+}
+
+function faqItems(row, v) {
+  const items = [];
+  if (row.last_year_tax) items.push([`How much are the property taxes at ${v.address}?`, `The latest annual property tax on the New Jersey tax list is ${money(row.last_year_tax)}${row.assessed_value ? `, on an assessed value of ${money(row.assessed_value)}` : ''}.`]);
+  const compare = townCompareText(row, v);
+  if (compare) items.push([`How does this tax bill compare with others in ${v.town}?`, compare]);
+  if (row.score && row.score.score != null) items.push(['What is the Watchdog Score?', `The Watchdog Score, powered by the ROBUST Framework, rates a property's tax position from 0 to 100 using six kinds of public evidence. Higher is better. This property scores ${Math.round(Number(row.score.score))}${row.score.verdict ? ` (${row.score.verdict})` : ''}.`]);
+  items.push(['Can the assessment be appealed?', `Yes. Appeals go to the ${v.county} County Board of Taxation. In most towns the deadline is April 1 (May 1 after a town-wide revaluation), or 45 days after assessment notices are mailed if that is later.`]);
+  items.push(['Does Watchdog show who owns this property?', 'No. Watchdog does not show owner names or mailing addresses. Everything on this page comes from public tax and parcel records.']);
+  return items;
+}
+
+function faqSection(row, v) {
+  const items = faqItems(row, v).map(([q, a]) => `<details><summary>${esc(q)}</summary><p>${esc(a)}</p></details>`).join('');
+  return `<section class="tp-card wdp-card wdp-faq" aria-labelledby="wdp-faq-h"><h2 id="wdp-faq-h">Questions about ${esc(v.address)}</h2>${items}</section>`;
 }
 
 function jsonLd(row, v) {
@@ -239,72 +374,109 @@ function jsonLd(row, v) {
       { '@type': 'ListItem', position: 2, name: `${v.county} County`, item: CANONICAL_ORIGIN + '/town-compare' },
       { '@type': 'ListItem', position: 3, name: v.address, item: v.url }
     ]
+  }, {
+    '@context': 'https://schema.org',
+    '@type': 'FAQPage',
+    mainEntity: faqItems(row, v).map(([q, a]) => ({ '@type': 'Question', name: q, acceptedAnswer: { '@type': 'Answer', text: a } }))
   }];
   return JSON.stringify(data).replace(/</g, '\\u003c');
 }
 
 const STYLE = `
-:root{--wd-teal:#087f82;--wd-teal-soft:#e9f5f3;--wd-paper:#f7f6f2;--wd-navy:#10294b;--wd-navy-deep:#0b203d;--wd-muted:#5a6b75;--wd-ink:#172234;--wd-gold:#d7b65c;--wd-gold-deep:#9a7a1c;--wd-good:#1f7a4d;--wd-warn:#b4472f;--wd-line:#e3e1d9}
-*{box-sizing:border-box}
-body{margin:0;background:var(--wd-paper);color:var(--wd-ink);font:16px/1.55 "Source Sans 3",system-ui,-apple-system,"Segoe UI",sans-serif}
-a{color:var(--wd-teal)}
-a:focus-visible{outline:3px solid var(--wd-gold);outline-offset:2px;border-radius:6px}
-.wdp-top{background:var(--wd-navy-deep);color:#fff}
-.wdp-top-in{max-width:1080px;margin:0 auto;padding:10px 16px;display:flex;align-items:center;justify-content:space-between;gap:12px}
-.wdp-brand{color:#fff;text-decoration:none;font:800 20px/1 "Plus Jakarta Sans",sans-serif;display:inline-flex;align-items:center;min-height:44px}
-.wdp-top a.wdp-search{color:#fff;text-decoration:none;border:1px solid rgba(255,255,255,.35);border-radius:999px;padding:0 16px;min-height:44px;display:inline-flex;align-items:center;font-weight:700;font-size:15px}
-main{max-width:1080px;margin:0 auto;padding:16px 16px 48px}
-.wdp-crumbs{font-size:14px;color:var(--wd-muted);margin:4px 0 12px}
-.wdp-crumbs a{color:var(--wd-muted)}
-.wdp-hero{background:#fff;border:1px solid var(--wd-line);border-radius:20px;padding:20px}
-h1{font:800 clamp(26px,5vw,38px)/1.15 "Plus Jakarta Sans",sans-serif;margin:0;color:var(--wd-navy)}
-.wdp-place{margin:6px 0 0;color:var(--wd-muted);font-size:17px}
-.wdp-keys{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:12px;margin-top:18px}
-.wdp-key{background:var(--wd-teal-soft);border-radius:14px;padding:12px 14px;min-width:0}
-.wdp-key span{display:block;font-size:13px;color:var(--wd-muted);font-weight:600}
-.wdp-key b{display:block;font:800 22px/1.2 "Plus Jakarta Sans",sans-serif;color:var(--wd-navy);overflow-wrap:anywhere}
-.wdp-actions{display:flex;flex-wrap:wrap;gap:10px;margin-top:18px}
-.wdp-btn{display:inline-flex;align-items:center;justify-content:center;min-height:44px;padding:0 18px;border-radius:999px;font-weight:700;text-decoration:none;font-size:16px}
-.wdp-btn-primary{background:var(--wd-teal);color:#fff}
-.wdp-btn-ghost{border:1px solid var(--wd-teal);color:var(--wd-teal);background:#fff}
-.wdp-grid{display:grid;grid-template-columns:minmax(0,1.15fr) minmax(0,1fr);gap:16px;margin-top:16px;align-items:start}
-.wdp-col{display:grid;gap:16px;min-width:0}
-.wdp-card{background:#fff;border:1px solid var(--wd-line);border-radius:20px;padding:18px 20px;min-width:0}
-.wdp-card h2{font:800 19px/1.25 "Plus Jakarta Sans",sans-serif;margin:0 0 8px;color:var(--wd-navy)}
+.wdp{--wd-teal:#078486;--wd-teal-soft:#e6f4f3;--wd-navy:#0e2849;--wd-ink:#14202b;--wd-muted:#5a6b78;--wd-line:#dde4ea;--wd-gold:#e7d28d;--wd-gold-deep:#9a7a1c;--wd-good:#1f7a4d;--wd-warn:#b4472f}
+.wdp a:focus-visible,.wdp button:focus-visible,.wdp summary:focus-visible{outline:3px solid var(--wd-gold);outline-offset:2px;border-radius:8px}
+.wdp .tp-hero{padding:104px 0 96px}
+.wdp-crumbs{font-size:14px;color:#b9cddc;margin:0 0 14px;background:none}
+.wdp-crumbs a{color:#d8e5ed}
+.wdp .tp-hero h1{margin-bottom:8px}
+.wdp-place{font-size:18px!important;color:#d8e5ed}
+.wdp-keys{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:12px;margin:24px 0 0;max-width:860px}
+.wdp-key{background:rgba(255,255,255,.08);border:1px solid rgba(255,255,255,.16);border-radius:16px;padding:14px 16px;min-width:0}
+.wdp-key span{display:block;font-size:13px;color:#b9cddc;font-weight:700}
+.wdp-key b{display:block;font-size:clamp(22px,3vw,30px);line-height:1.15;font-weight:800;color:#fff;overflow-wrap:anywhere}
+.wdp-key b.wdp-gold{color:var(--wd-gold)}
+.wdp-actions{display:flex;flex-wrap:wrap;gap:10px;margin-top:22px}
+.wdp-actions .tp-btn.gold{background:var(--wd-gold);border-color:var(--wd-gold);color:var(--wd-navy)}
+.wdp-actions .tp-btn.outline{background:transparent;color:#fff;border-color:rgba(255,255,255,.45)}
+.wdp-share{display:flex;flex-wrap:wrap;align-items:center;gap:10px 16px;padding:14px 18px!important;margin-bottom:20px;position:relative}
+.wdp-share-t{font-size:15px;color:var(--wd-navy);white-space:nowrap}
+.wdp-share-row{display:flex;flex-wrap:wrap;gap:8px}
+.wdp-sh{display:inline-flex;align-items:center;gap:8px;min-height:44px;padding:0 14px;border-radius:999px;border:1px solid var(--wd-line);background:#fff;color:var(--wd-navy);font:700 14px "Plus Jakarta Sans",system-ui,sans-serif;text-decoration:none;cursor:pointer}
+.wdp-sh:hover{border-color:var(--wd-teal);color:var(--wd-teal)}
+.wdp-sh[hidden]{display:none}
+.wdp-toast{font-size:14px;color:var(--wd-good);font-weight:700}
+.wdp-grid{display:grid;grid-template-columns:minmax(0,1.2fr) minmax(0,1fr);gap:20px;align-items:start}
+.wdp-col{display:grid;gap:20px;min-width:0}
+.wdp-card h2{display:flex;align-items:center;gap:10px;color:var(--wd-navy)}
+.wdp-card h2 .fas{color:var(--wd-teal);font-size:18px}
+.wdp-card h3{margin:18px 0 6px;font-size:16px;color:var(--wd-navy)}
+.wdp-card p{line-height:1.6;margin:0 0 10px}
 .wdp-muted{color:var(--wd-muted)}
 .wdp-small{font-size:14px}
-.wdp-big{font:800 24px/1.3 "Plus Jakarta Sans",sans-serif;margin:0;color:var(--wd-navy)}
-.wdp-big .wdp-muted{font:600 16px/1.3 "Source Sans 3",sans-serif}
-.wdp-score-head{display:flex;gap:16px;align-items:center}
-.wdp-score-ring{flex:0 0 auto;width:96px;height:96px;border-radius:50%;display:grid;place-content:center;text-align:center;background:conic-gradient(var(--wdp-score-color) calc(var(--wdp-score)*1%),#ebe8df 0);position:relative}
-.wdp-score-ring::before{content:"";position:absolute;inset:9px;border-radius:50%;background:#fff}
+.wdp-card a{color:var(--wd-teal);font-weight:700}
+.wdp-big{font-size:26px;font-weight:800;color:var(--wd-navy)}
+.wdp-big .wdp-muted{font-size:16px;font-weight:600}
+.wdp-score-head{display:flex;gap:18px;align-items:center}
+.wdp-score-ring{flex:0 0 auto;width:104px;height:104px;border-radius:50%;display:grid;place-content:center;text-align:center;background:conic-gradient(var(--wdp-score-color) calc(var(--wdp-score)*1%),#ebe8df 0);position:relative}
+.wdp-score-ring::before{content:"";position:absolute;inset:10px;border-radius:50%;background:#fff}
 .wdp-score-ring span,.wdp-score-ring small{position:relative}
-.wdp-score-ring span{font:800 32px/1 "Plus Jakarta Sans",sans-serif;color:var(--wd-navy)}
+.wdp-score-ring span{font-size:34px;font-weight:800;line-height:1;color:var(--wd-navy)}
 .wdp-score-ring small{font-size:13px;color:var(--wd-muted)}
-.wdp-verdict{margin:0;font-weight:700;font-size:17px}
-.wdp-score .wdp-muted{margin:4px 0 0;font-size:14px}
-.wdp-dims{list-style:none;margin:14px 0 0;padding:0;display:grid;gap:2px}
-.wdp-dims a{display:grid;grid-template-columns:28px minmax(0,1fr) minmax(60px,34%) 34px;gap:10px;align-items:center;min-height:44px;text-decoration:none;color:var(--wd-ink);border-radius:10px;padding:0 4px}
+.wdp-verdict{font-weight:800;font-size:17px;margin:2px 0 4px!important}
+.wdp-dims{list-style:none;margin:14px 0 8px;padding:0;display:grid;gap:2px}
+.wdp-dims a{display:grid;grid-template-columns:28px minmax(0,1fr) minmax(60px,34%) 34px;gap:10px;align-items:center;min-height:44px;text-decoration:none;color:var(--wd-ink)!important;font-weight:600!important;border-radius:10px;padding:0 4px}
 .wdp-dims a:hover{background:var(--wd-teal-soft)}
-.wdp-letter{width:28px;height:28px;border-radius:8px;background:var(--wd-navy);color:#fff;display:grid;place-content:center;font:800 14px/1 "Plus Jakarta Sans",sans-serif}
-.wdp-dim{font-weight:600;font-size:15px;overflow-wrap:break-word;hyphens:auto}
+.wdp-letter{width:28px;height:28px;border-radius:8px;background:var(--wd-navy);color:#fff;display:grid;place-content:center;font-weight:800;font-size:14px}
+.wdp-dim{font-size:15px;overflow-wrap:break-word;hyphens:auto}
 .wdp-bar{height:8px;border-radius:99px;background:#ebe8df;overflow:hidden}
 .wdp-bar i{display:block;height:100%;background:var(--wd-teal);border-radius:99px}
 .wdp-dims b{text-align:right;font-size:15px}
-.wdp-facts{margin:0;display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:10px 16px}
+.wdp-rates{list-style:none;margin:10px 0 6px;padding:0;display:flex;align-items:flex-end;gap:6px;height:96px}
+.wdp-rates li{flex:1 1 0;display:flex;flex-direction:column;align-items:center;justify-content:flex-end;height:100%;min-width:0}
+.wdp-rbar{display:block;width:100%;max-width:34px;border-radius:6px 6px 2px 2px;background:linear-gradient(180deg,var(--wd-teal),#0e5f6a)}
+.wdp-rates small{font-size:12px;color:var(--wd-muted);margin-top:4px}
+.wdp-tools{list-style:none;margin:0;padding:0;display:grid;gap:4px}
+.wdp-tools a{display:grid;grid-template-columns:36px minmax(0,1fr) 16px;gap:12px;align-items:center;min-height:56px;padding:10px 8px;border-radius:14px;text-decoration:none;color:var(--wd-ink)!important;font-weight:400!important}
+.wdp-tools a:hover{background:var(--wd-teal-soft)}
+.wdp-tools a>.fas:first-child{width:36px;height:36px;border-radius:10px;background:var(--wd-teal-soft);color:var(--wd-teal);display:grid;place-content:center;font-size:16px}
+.wdp-tools b{display:block;font-size:15px;color:var(--wd-navy)}
+.wdp-tools small{display:block;font-size:14px;color:var(--wd-muted);line-height:1.45}
+.wdp-go{color:#9aa9b5;font-size:13px}
+.wdp-facts{margin:0;display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:12px 16px}
 .wdp-facts div{min-width:0}
-.wdp-facts dt{font-size:13px;color:var(--wd-muted);font-weight:600}
-.wdp-facts dd{margin:0;font-weight:700;overflow-wrap:anywhere}
-.wdp-near{list-style:none;margin:0;padding:0;display:grid;gap:2px}
-.wdp-near a{display:flex;justify-content:space-between;gap:12px;align-items:center;min-height:44px;text-decoration:none;color:var(--wd-ink);border-bottom:1px solid var(--wd-line);padding:0 2px}
-.wdp-near a span{font-weight:600;overflow-wrap:anywhere}
-.wdp-near small{color:var(--wd-muted);font-size:14px;white-space:nowrap}
-.wdp-source{margin-top:20px;font-size:14px;color:var(--wd-muted)}
-@media (max-width:480px){.wdp-dims a{grid-template-columns:28px minmax(0,1fr) 22% 34px;gap:8px}.wdp-dim{font-size:14px}}
-@media (max-width:760px){.wdp-grid{grid-template-columns:minmax(0,1fr)}.wdp-keys{grid-template-columns:minmax(0,1fr)}.wdp-hero{padding:16px}.wdp-card{padding:16px}.wdp-facts{grid-template-columns:minmax(0,1fr)}.wdp-actions .wdp-btn{flex:1 1 100%}}
-@media (prefers-reduced-motion:reduce){*{transition:none!important;animation:none!important}}
-@media print{.wdp-top,.wdp-actions{display:none}body{background:#fff}}
+.wdp-facts dt{font-size:13px;color:var(--wd-muted);font-weight:700}
+.wdp-facts dd{margin:0;font-weight:800;overflow-wrap:anywhere}
+.wdp-near{list-style:none;margin:0;padding:0;display:grid}
+.wdp-near a{display:flex;justify-content:space-between;gap:12px;align-items:center;min-height:44px;text-decoration:none;color:var(--wd-ink)!important;border-bottom:1px solid var(--wd-line)}
+.wdp-near a span{overflow-wrap:anywhere}
+.wdp-near small{color:var(--wd-muted);font-size:14px;white-space:nowrap;font-weight:600}
+.wdp-faq{margin-top:20px}
+.wdp-faq details{border-top:1px solid var(--wd-line)}
+.wdp-faq summary{cursor:pointer;min-height:48px;display:flex;align-items:center;font-weight:800;color:var(--wd-navy);list-style:none;padding:10px 0}
+.wdp-faq summary::after{content:"+";margin-left:auto;padding-left:12px;color:var(--wd-teal);font-size:20px}
+.wdp-faq details[open] summary::after{content:"–"}
+.wdp-faq details p{color:var(--wd-muted)}
+.wdp-source{margin:20px 0 0;font-size:14px;color:var(--wd-muted);line-height:1.55}
+.wdp-source a{color:var(--wd-teal);font-weight:700}
+@media (max-width:860px){.wdp-grid{grid-template-columns:minmax(0,1fr)}}
+@media (max-width:640px){.wdp .tp-hero{padding:92px 0 80px}.wdp-keys{grid-template-columns:minmax(0,1fr)}.wdp-facts{grid-template-columns:minmax(0,1fr)}.wdp-actions .tp-btn{flex:1 1 100%}.wdp-share-row .wdp-sh{padding:0 12px;font-size:13px;gap:6px}.wdp-share{padding:14px!important}.wdp-dims a{grid-template-columns:28px minmax(0,1fr) 22% 34px;gap:8px}.wdp-dim{font-size:14px}}
+@media (prefers-reduced-motion:reduce){.wdp *{transition:none!important;animation:none!important}}
+@media print{.wd-nav,.wd-public-sheet,.wd-public-backdrop,.wdp-actions,.wdp-share,#main-footer{display:none!important}.wdp .tp-hero{background:#fff!important;color:#000!important;padding:0 0 12px}.wdp .tp-hero *{color:#000!important}.tp-main{margin-top:0!important}.tp-card{box-shadow:none!important;break-inside:avoid}}
 `;
+
+const PAGE_SCRIPT = `(function(){
+  var data={};try{data=JSON.parse(document.getElementById('wdp-data').textContent)}catch(e){}
+  var toast=document.querySelector('.wdp-toast');
+  function say(t){if(!toast)return;toast.textContent=t;clearTimeout(say.t);say.t=setTimeout(function(){toast.textContent=''},2500)}
+  function copy(){var u=data.url||location.href;if(navigator.clipboard&&navigator.clipboard.writeText){navigator.clipboard.writeText(u).then(function(){say('Link copied')},function(){prompt('Copy this link',u)})}else{prompt('Copy this link',u)}}
+  var nat=document.querySelector('[data-wdp-native]');
+  if(nat&&navigator.share){nat.hidden=false;nat.addEventListener('click',function(){navigator.share({title:data.title,text:data.text,url:data.url}).catch(function(){})})}
+  var c=document.querySelector('[data-wdp-copy]');if(c)c.addEventListener('click',copy);
+  var p=document.querySelector('[data-wdp-print]');if(p)p.addEventListener('click',function(){window.print()});
+  document.querySelectorAll('[data-wdp-scroll-share]').forEach(function(a){a.addEventListener('click',function(e){var s=document.getElementById('wdp-share');if(!s)return;e.preventDefault();if(navigator.share){navigator.share({title:data.title,text:data.text,url:data.url}).catch(function(){})}else{s.scrollIntoView({behavior:'smooth',block:'center'});var b=s.querySelector('[data-wdp-copy]');if(b)b.focus()}})});
+  function remember(){if(window.WatchdogPublicNav&&typeof window.WatchdogPublicNav.remember==='function'&&data.recent){window.WatchdogPublicNav.remember(data.recent);return true}return false}
+  if(!remember())window.addEventListener('load',remember);
+})();`;
 
 function renderPage(row, options = {}) {
   const v = view(row);
@@ -313,7 +485,13 @@ function renderPage(row, options = {}) {
   const description = describe(row, v);
   const lookup = `/?address=${encodeURIComponent(`${v.address}, ${v.town}, NJ${row.zip ? ' ' + row.zip : ''}`)}`;
   const updated = monthYear(row.source_synced_at);
-  const compare = townCompareText(row, v);
+  const score = row.score && row.score.score != null ? Math.round(Number(row.score.score)) : null;
+  const shareText = `${v.address}, ${v.town}, NJ${row.last_year_tax ? `: ${money(row.last_year_tax)} property tax` : ''}${score != null ? `, Watchdog Score ${score}/100` : ''}`;
+  const pageData = JSON.stringify({
+    url: v.url, title: `${v.address}, ${v.town}, NJ`, text: shareText,
+    recent: { address: v.address, town: row.town, pin: row.pams_pin, assessed: row.assessed_value || '', tax: row.last_year_tax || '', year_built: row.year_built || '', zip: row.zip || '' }
+  }).replace(/</g, '\\u003c');
+  const kicker = ['NJ property record', v.cls ? v.cls[0] : '', row.block ? `Block ${row.block}, Lot ${row.lot || ''}` : ''].filter(Boolean).join(' · ');
   return `<!doctype html>
 <html lang="en">
 <head>
@@ -330,53 +508,85 @@ function renderPage(row, options = {}) {
 <meta property="og:description" content="${esc(description)}">
 <meta property="og:image" content="${CANONICAL_ORIGIN}/watchdog-social-share-20260913-v3.jpg">
 <meta name="twitter:card" content="summary_large_image">
-<link rel="icon" href="/favicon.svg" type="image/svg+xml">
+<meta name="twitter:title" content="${esc(`${v.address}, ${v.town}, NJ`)}">
+<meta name="twitter:description" content="${esc(description)}">
+<link rel="icon" href="/favicon-96x96.png">
 <link rel="preconnect" href="https://fonts.googleapis.com">
-<link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@700;800&family=Source+Sans+3:wght@400;600;700&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@600&family=Plus+Jakarta+Sans:wght@500;600;700;800&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+<link rel="stylesheet" href="/styles.css">
+<link rel="stylesheet" href="/property/css/shared.css">
+<link rel="stylesheet" href="/property/css/public-mobile-nav.css">
+<link rel="stylesheet" href="/property/css/watchdog-tool-page.css?v=20260928a">
 <script type="application/ld+json">${jsonLd(row, v)}</script>
 <style>${STYLE}</style>
 </head>
-<body>
-<header class="wdp-top"><div class="wdp-top-in">
-  <a class="wdp-brand" href="/">Watchdog</a>
-  <a class="wdp-search" href="/">Look up another address</a>
-</div></header>
+<body class="tp-page nav-solid wdp">
+<header class="wd-nav" id="wd-nav">
+  <div class="wd-nav-in">
+    <button class="wd-public-trigger" id="wd-menu-trigger" type="button" onclick="WatchdogPublicNav.open('main')" aria-label="Open Watchdog menu"><i class="fas fa-bars"></i><span>Menu</span></button>
+    <a class="wd-logo" href="/"><i class="fas fa-dog"></i><span>Watchdog</span></a>
+    <button class="wd-public-trigger wd-public-profile" id="wd-profile-trigger" type="button" onclick="WatchdogPublicNav.open('profile')" aria-label="Open account menu"><i class="fas fa-user"></i><span>Sign in</span></button>
+  </div>
+</header>
+<div class="wd-public-backdrop" id="wd-public-backdrop" onclick="WatchdogPublicNav.close()"></div>
+<aside class="wd-public-sheet" id="wd-main-sheet" aria-hidden="true" aria-label="Watchdog navigation"></aside>
+<aside class="wd-public-sheet right" id="wd-profile-sheet" aria-hidden="true" aria-label="Watchdog account">
+  <div class="wd-public-sheet-head"><b>Your Watchdog</b><button class="wd-public-close" type="button" onclick="WatchdogPublicNav.close()" aria-label="Close account menu"><i class="fas fa-xmark"></i></button></div>
+  <div id="wd-profile-content"></div>
+</aside>
 <main>
-  <nav class="wdp-crumbs" aria-label="Breadcrumb"><a href="/">New Jersey</a> › ${esc(v.county)} County › ${esc(v.town)}</nav>
-  <section class="wdp-hero" aria-labelledby="wdp-h1">
+  <section class="tp-hero" aria-labelledby="wdp-h1"><div class="tp-shell">
+    <div class="wdp-crumbs" role="navigation" aria-label="Breadcrumb"><a href="/">New Jersey</a> › ${esc(v.county)} County › ${esc(v.town)}</div>
+    <p class="tp-kicker">${esc(kicker)}</p>
     <h1 id="wdp-h1">${esc(v.address)}</h1>
     <p class="wdp-place">${esc(v.place)} · ${esc(v.county)} County</p>
     <div class="wdp-keys">
       <div class="wdp-key"><span>Property tax (latest year)</span><b>${esc(money(row.last_year_tax) || 'Not on file')}</b></div>
       <div class="wdp-key"><span>Assessed value</span><b>${esc(money(row.assessed_value) || 'Not on file')}</b></div>
-      <div class="wdp-key"><span>Watchdog Score</span><b>${row.score && row.score.score != null ? `${Math.round(Number(row.score.score))} / 100` : 'Calculating'}</b></div>
+      <div class="wdp-key"><span>Watchdog Score</span><b class="wdp-gold">${score != null ? `${score} / 100` : 'Calculating'}</b></div>
     </div>
     <div class="wdp-actions">
-      <a class="wdp-btn wdp-btn-primary" href="${esc(lookup)}">See the full Watchdog analysis</a>
-      <a class="wdp-btn wdp-btn-ghost" href="/home?pin=${encodeURIComponent(row.pams_pin)}">Track this property</a>
+      <a class="tp-btn gold" href="${esc(lookup)}"><i class="fas fa-magnifying-glass-chart" aria-hidden="true"></i>See the full Watchdog analysis</a>
+      <a class="tp-btn light" href="/home?pin=${encodeURIComponent(row.pams_pin)}"><i class="fas fa-bookmark" aria-hidden="true"></i>Track this property</a>
+      <a class="tp-btn outline" href="#wdp-share" data-wdp-scroll-share><i class="fas fa-share-nodes" aria-hidden="true"></i>Share</a>
     </div>
-  </section>
-  <div class="wdp-grid">
-    <div class="wdp-col">
-      ${scoreSection(row)}
-      ${compare ? `<section class="wdp-card" aria-labelledby="wdp-town-h"><h2 id="wdp-town-h">Compared with ${esc(v.town)}</h2><p>${esc(compare)}</p><p class="wdp-small"><a href="/town-compare">Compare towns</a></p></section>` : ''}
+  </div></section>
+  <div class="tp-main"><div class="tp-shell">
+    ${shareBar(row, v)}
+    <div class="wdp-grid">
+      <div class="wdp-col">
+        ${scoreSection(row)}
+        ${taxContextSection(row, v)}
+        ${toolkitSection(row, v)}
+      </div>
+      <div class="wdp-col">
+        ${factsSection(row, v)}
+        ${saleSection(row)}
+        ${neighborsSection(row)}
+      </div>
     </div>
-    <div class="wdp-col">
-      ${factsSection(row, v)}
-      ${saleSection(row)}
-      ${neighborsSection(row, v)}
-    </div>
-  </div>
-  <p class="wdp-source">Source: New Jersey MOD-IV tax list and NJ Office of GIS parcel data, refreshed monthly${updated ? ` (last refresh ${esc(updated)})` : ''}. Tax shown is the latest annual amount on the state list. Watchdog does not show owner names. <a href="/data-methodology">Data methodology</a></p>
+    ${faqSection(row, v)}
+    <p class="wdp-source">Source: New Jersey MOD-IV tax list and NJ Office of GIS parcel data, refreshed monthly${updated ? ` (last refresh ${esc(updated)})` : ''}. Town tax rates from the NJ Division of Taxation. Tax shown is the latest annual amount on the state list. Watchdog does not show owner names. <a href="/data-methodology">Data methodology</a></p>
+  </div></div>
 </main>
+<div id="main-footer"></div>
+<script id="wdp-data" type="application/json">${pageData}</script>
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2/dist/umd/supabase.js"></script>
+<script src="/property/js/public-nav.js"></script>
+<script>fetch('/property/partials/footer.html').then(function(r){return r.ok?r.text():''}).then(function(h){var f=document.getElementById('main-footer');if(f&&h)f.innerHTML=h}).catch(function(){});</script>
+<script>${PAGE_SCRIPT}</script>
 </body>
 </html>`;
 }
 
 function notFoundPage() {
-  return `<!doctype html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1"><title>Property not found | Watchdog</title><meta name="robots" content="noindex, follow"><style>${STYLE}</style></head>
-<body><header class="wdp-top"><div class="wdp-top-in"><a class="wdp-brand" href="/">Watchdog</a><a class="wdp-search" href="/">Look up another address</a></div></header>
-<main><section class="wdp-hero"><h1>We couldn't find that property</h1><p class="wdp-place">The link may be old, or the parcel has no tax record on the state list. Try searching for the address instead.</p><div class="wdp-actions"><a class="wdp-btn wdp-btn-primary" href="/">Search an address</a></div></section></main></body></html>`;
+  return `<!doctype html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1"><title>Property not found | Watchdog</title><meta name="robots" content="noindex, follow">
+<link rel="icon" href="/favicon-96x96.png"><link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@600&family=Plus+Jakarta+Sans:wght@500;600;700;800&display=swap" rel="stylesheet"><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css"><link rel="stylesheet" href="/styles.css"><link rel="stylesheet" href="/property/css/shared.css"><link rel="stylesheet" href="/property/css/public-mobile-nav.css"><link rel="stylesheet" href="/property/css/watchdog-tool-page.css?v=20260928a"><style>${STYLE}</style></head>
+<body class="tp-page nav-solid wdp"><header class="wd-nav" id="wd-nav"><div class="wd-nav-in"><button class="wd-public-trigger" id="wd-menu-trigger" type="button" onclick="WatchdogPublicNav.open('main')" aria-label="Open Watchdog menu"><i class="fas fa-bars"></i><span>Menu</span></button><a class="wd-logo" href="/"><i class="fas fa-dog"></i><span>Watchdog</span></a><button class="wd-public-trigger wd-public-profile" id="wd-profile-trigger" type="button" onclick="WatchdogPublicNav.open('profile')" aria-label="Open account menu"><i class="fas fa-user"></i><span>Sign in</span></button></div></header>
+<div class="wd-public-backdrop" id="wd-public-backdrop" onclick="WatchdogPublicNav.close()"></div><aside class="wd-public-sheet" id="wd-main-sheet" aria-hidden="true" aria-label="Watchdog navigation"></aside><aside class="wd-public-sheet right" id="wd-profile-sheet" aria-hidden="true" aria-label="Watchdog account"><div class="wd-public-sheet-head"><b>Your Watchdog</b><button class="wd-public-close" type="button" onclick="WatchdogPublicNav.close()" aria-label="Close account menu"><i class="fas fa-xmark"></i></button></div><div id="wd-profile-content"></div></aside>
+<main><section class="tp-hero"><div class="tp-shell"><p class="tp-kicker">NJ property record</p><h1>We couldn't find that property</h1><p>The link may be old, or the parcel has no tax record on the state list. Try searching for the address instead.</p><div class="wdp-actions"><a class="tp-btn gold" href="/">Search an address</a></div></div></section></main>
+<div id="main-footer"></div><script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2/dist/umd/supabase.js"></script><script src="/property/js/public-nav.js"></script><script>fetch('/property/partials/footer.html').then(function(r){return r.ok?r.text():''}).then(function(h){var f=document.getElementById('main-footer');if(f&&h)f.innerHTML=h}).catch(function(){});</script></body></html>`;
 }
 
 async function fetchProperty(pin) {
@@ -443,3 +653,4 @@ module.exports.renderPage = renderPage;
 module.exports.townName = townName;
 module.exports.slugify = slugify;
 module.exports.INDEXABLE_COUNTIES = INDEXABLE_COUNTIES;
+module.exports.rateTrend = rateTrend;
