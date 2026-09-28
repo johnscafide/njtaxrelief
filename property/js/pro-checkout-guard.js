@@ -76,7 +76,6 @@
   function addLifetimeButton(){
     var group=document.querySelector('.pro-cadence');if(!group||group.querySelector('[data-cadence="lifetime"]'))return;
     var b=document.createElement('button');b.type='button';b.dataset.cadence='lifetime';b.setAttribute('aria-pressed','false');b.innerHTML='Lifetime <span>Founding</span>';group.appendChild(b);
-    b.addEventListener('click',function(){setLifetime(true);});
   }
 
   function setCtas(cadence){
@@ -154,8 +153,11 @@
   function bindCadence(){
     document.addEventListener('click',function(ev){
       var lifetime=ev.target.closest('[data-lifetime-plan]');if(lifetime){ev.preventDefault();ev.stopPropagation();lifetimeCheckout(lifetime.dataset.lifetimePlan);return;}
-      var cadence=ev.target.closest('[data-cadence]');if(!cadence||cadence.dataset.cadence==='lifetime')return;
-      setTimeout(function(){document.querySelectorAll('.pro-price-band').forEach(function(b){b.classList.remove('is-founding-lifetime');});setCtas(cadence.dataset.cadence);},0);
+      var cadence=ev.target.closest('[data-cadence]');if(!cadence)return;
+      /* The Lifetime button may ship in the page HTML (soft-launch build) or be
+         added above; either way this one handler owns it. */
+      if(cadence.dataset.cadence==='lifetime'){ev.preventDefault();setLifetime(true);return;}
+      setTimeout(function(){document.querySelectorAll('.pro-price-band').forEach(function(b){b.classList.remove('is-founding-lifetime');});var lt=document.querySelector('.pro-cadence [data-cadence="lifetime"]');if(lt){lt.classList.remove('active');lt.setAttribute('aria-pressed','false');}setCtas(cadence.dataset.cadence);},0);
     },true);
   }
 

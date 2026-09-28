@@ -49,7 +49,7 @@ async function resolveSubscriptionUser(sub: Stripe.Subscription, customerId: str
   return byCustomer.data?.user_id || null;
 }
 
-async function syncSubscription(sub: Stripe.Subscription, eventCreated?: number) {
+async function syncSubscription(sub: Stripe.Subscription, eventCreated?: number, stripe?: Stripe) {
   const customerId = typeof sub.customer === 'string' ? sub.customer : sub.customer.id;
   const price = sub.items.data[0]?.price;
   const priceId = price?.id || null;
@@ -75,7 +75,74 @@ async function syncSubscription(sub: Stripe.Subscription, eventCreated?: number)
     resource_type: 'subscription', resource_id: sub.id, required_plan: config?.tier || 'standard', allowed: Boolean(config),
     metadata: { provider: 'stripe', stripe_status: sub.status, entitlement_status: next.subscription_status, price_id: priceId, billing_tier: config?.tier || null, billing_interval: config?.interval || null, event_at: eventAt }
   });
-  return config ? { user_id: userId, plan_tier: config.tier, status, billing_interval: config.interval, property_capacity: config.capacity } : { user_id: userId, plan_tier: 'standard', status: 'none', warning: 'unrecognized Stripe price' };
+  // Referral free month never blocks the entitlement sync; a failed reward
+  // stays pending and is retried on the next subscription event.
+  let referral: Record<string, unknown> | null = null;
+  if (config && stripe) {
+    try { referral = await referralRewards(stripe, userId, config, sub); }
+    catch (e) { console.error('REFERRAL_REWARD_ERROR', userId, e); referral = { error: e instanceof Error ? e.message : 'referral reward failed' }; }
+  }
+  return config ? { user_id: userId, plan_tier: config.tier, status, billing_interval: config.interval, property_capacity: config.capacity, referral } : { user_id: userId, plan_tier: 'standard', status: 'none', warning: 'unrecognized Stripe price' };
+}
+
+/* Referral reward: a referred account's paid yearly plan earns the member who
+   invited them one free month of the member's own plan, as a Stripe customer
+   balance credit (applied to their next invoice). One reward per referred
+   account (unique referred_user_id). A member without a live Stripe plan keeps
+   the reward waiting until they subscribe. */
+const REFERRAL_REWARD_STATUSES = ['active', 'trialing', 'past_due'];
+
+async function referralRewards(stripe: Stripe, userId: string, config: PriceConfig, sub: Stripe.Subscription) {
+  const out: Record<string, unknown> = {};
+  if (config.interval === 'yearly' && sub.status === 'active') out.earned = await earnReferralReward(stripe, userId, sub, config);
+  if (REFERRAL_REWARD_STATUSES.includes(sub.status)) {
+    const { data: waiting, error } = await service.from('watchdog_referral_rewards').select('*').eq('inviter_user_id', userId).in('status', ['pending', 'waiting_for_subscription']).order('created_at').limit(12);
+    if (error) throw error;
+    const applied = [];
+    for (const reward of waiting || []) applied.push(await applyReferralReward(stripe, reward));
+    if (applied.length) out.applied = applied;
+  }
+  return Object.keys(out).length ? out : null;
+}
+
+async function earnReferralReward(stripe: Stripe, referredUserId: string, sub: Stripe.Subscription, config: PriceConfig) {
+  const { data: conversion, error } = await service.from('watchdog_referral_conversions').select('inviter_user_id').eq('referred_user_id', referredUserId).maybeSingle();
+  if (error) throw error;
+  if (!conversion?.inviter_user_id || conversion.inviter_user_id === referredUserId) return null;
+  const { error: insertError } = await service.from('watchdog_referral_rewards').upsert({ inviter_user_id: conversion.inviter_user_id, referred_user_id: referredUserId, trigger_subscription_id: sub.id, trigger_price_id: config.id, status: 'pending', detail: { referred_tier: config.tier, referred_interval: config.interval } }, { onConflict: 'referred_user_id', ignoreDuplicates: true });
+  if (insertError) throw insertError;
+  const { data: reward, error: rewardError } = await service.from('watchdog_referral_rewards').select('*').eq('referred_user_id', referredUserId).maybeSingle();
+  if (rewardError) throw rewardError;
+  if (!reward || !['pending', 'waiting_for_subscription'].includes(reward.status)) return reward ? { reward_id: reward.id, status: reward.status } : null;
+  return applyReferralReward(stripe, reward);
+}
+
+async function applyReferralReward(stripe: Stripe, reward: any) {
+  const now = new Date().toISOString();
+  const { data: ent, error } = await service.from('account_entitlements').select('provider,provider_customer_id,billing_tier,subscription_status').eq('user_id', reward.inviter_user_id).maybeSingle();
+  if (error) throw error;
+  const tier = ent?.billing_tier as BillingTier | undefined;
+  const monthly = tier ? priceCatalog().find(row => row.tier === tier && row.interval === 'monthly') : null;
+  if (ent?.provider !== 'stripe' || !ent.provider_customer_id || !monthly || !REFERRAL_REWARD_STATUSES.includes(ent.subscription_status)) {
+    if (reward.status !== 'waiting_for_subscription') {
+      const { error: waitError } = await service.from('watchdog_referral_rewards').update({ status: 'waiting_for_subscription', updated_at: now }).eq('id', reward.id).eq('status', 'pending');
+      if (waitError) throw waitError;
+    }
+    return { reward_id: reward.id, status: 'waiting_for_subscription' };
+  }
+  const price = await stripe.prices.retrieve(monthly.id);
+  const amount = Number(price.unit_amount || 0);
+  if (!(amount > 0)) throw new Error(`referral reward: monthly ${tier} price has no amount`);
+  const txn = await stripe.customers.createBalanceTransaction(ent.provider_customer_id, {
+    amount: -amount,
+    currency: price.currency,
+    description: 'Watchdog referral reward: one free month',
+    metadata: { watchdog_referral_reward_id: reward.id, referred_user_id: reward.referred_user_id }
+  }, { idempotencyKey: `watchdog-referral-reward-${reward.id}` });
+  const { error: creditError } = await service.from('watchdog_referral_rewards').update({ status: 'credited', inviter_tier: tier, amount_cents: amount, currency: price.currency, stripe_customer_id: ent.provider_customer_id, stripe_balance_transaction_id: txn.id, credited_at: now, updated_at: now }).eq('id', reward.id).in('status', ['pending', 'waiting_for_subscription']);
+  if (creditError) throw creditError;
+  await service.from('access_audit_log').insert({ user_id: reward.inviter_user_id, event_type: 'billing.referral_free_month_credited', resource_type: 'referral_reward', resource_id: reward.id, required_plan: tier, allowed: true, metadata: { provider: 'stripe', amount_cents: amount, currency: price.currency, balance_transaction_id: txn.id, referred_user_id: reward.referred_user_id } });
+  return { reward_id: reward.id, status: 'credited', amount_cents: amount };
 }
 
 function campaignMeta(session: Stripe.Checkout.Session) {
@@ -304,14 +371,14 @@ Deno.serve(async (req) => {
   try {
     let result: Record<string, unknown> = { ignored: true };
     if (event.type.startsWith('customer.subscription.')) {
-      result = await syncSubscription(event.data.object as Stripe.Subscription, event.created);
+      result = await syncSubscription(event.data.object as Stripe.Subscription, event.created, stripe);
     } else if (event.type === 'checkout.session.completed') {
       const session = event.data.object as Stripe.Checkout.Session;
       if (moveMeta(session)) result = await recordMovePayment(session);
       else if (campaignMeta(session)) result = await recordCampaignPayment(session);
       else if (session.subscription) {
         const subscriptionId = typeof session.subscription === 'string' ? session.subscription : session.subscription.id;
-        result = await syncSubscription(await stripe.subscriptions.retrieve(subscriptionId), event.created);
+        result = await syncSubscription(await stripe.subscriptions.retrieve(subscriptionId), event.created, stripe);
       }
     } else if (event.type === 'checkout.session.async_payment_succeeded') {
       const session = event.data.object as Stripe.Checkout.Session;
