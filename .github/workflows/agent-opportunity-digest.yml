@@ -1,9 +1,10 @@
 name: Agent Opportunity weekly digest
 
 on:
-  # Hourly scheduling is intentionally paused until the required repository
-  # secrets are configured and a manual dispatch succeeds. Keeping the broken
-  # cron active creates 24 false failures per day and hides meaningful CI noise.
+  # Hourly: each agent's email goes out on their chosen weekday and local hour
+  # (Monday 8 AM by default). The function decides who is due.
+  schedule:
+    - cron: '7 * * * *'
   workflow_dispatch:
 
 permissions:
