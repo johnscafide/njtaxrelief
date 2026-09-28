@@ -15,6 +15,10 @@
     "api/watchdog-property-page.js": {
       "includeFiles": "{tax-rates.json,equalization-ratios.json}",
       "maxDuration": 10
+    },
+    "api/watchdog-property-report.js": {
+      "includeFiles": "{tax-rates.json,equalization-ratios.json}",
+      "maxDuration": 15
     }
   },
   "redirects": [
