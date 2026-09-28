@@ -47,26 +47,63 @@ assert.match(html, /href="\/\?address=102%20Grant%20Ave%2C%20Harrison%20Town%2C%
 const hrefs = [...html.matchAll(/<a [^>]*href="([^"]+)"/g)].map((m) => m[1]);
 assert.ok(hrefs.length > 10);
 assert.ok(hrefs.every((h) => !h.startsWith('/property/')), 'no /property/ paths in public links');
-const withoutPolicy = html.replace(/Watchdog does not show owner names( or mailing addresses)?\./g, '').replace(/Does Watchdog show who owns this property\?/g, '');
+// Owner data never appears. The report form asks for the requester's own
+// mailing address, so it is left out of this check.
+const outsideForm = html.replace(/<section class="wdp-panel wdp-report"[\s\S]*?<\/section>/, '').replace(/<script>[\s\S]*?<\/script>/g, '');
+const withoutPolicy = outsideForm.replace(/Watchdog does not show owner names( or mailing addresses)?\./g, '').replace(/Does Watchdog show who owns this property\?/g, '');
 assert.doesNotMatch(withoutPolicy, /\bowners?\b|\bmailing\b/i, 'no owner or mailing data');
 
-// Site chrome, sharing and homeowner tools
+// Site chrome and the dashboard board look
 assert.match(html, /<header class="wd-nav" id="wd-nav">/, 'standard Watchdog header');
 assert.match(html, /id="wd-main-sheet"/, 'universal menu sheet');
 assert.match(html, /<script src="\/property\/js\/public-nav\.js"><\/script>/, 'shared public navigation');
 assert.match(html, /\/property\/partials\/footer\.html/, 'shared footer');
-assert.match(html, /class="tp-hero"/, 'Watchdog tool-page hero');
+assert.match(html, /--b-bg:#f3f1ec/, 'dashboard board background');
+for (const c of ['wdp-card--score', 'wdp-card--tax', 'wdp-card--sales', 'wdp-card--home']) assert.ok(html.includes(c), `summary card ${c}`);
+assert.doesNotMatch(html, /tp-hero/, 'no dark banner hero');
+
+// Sharing and homeowner tools
 for (const s of ['data-wdp-copy', 'data-wdp-native', 'data-wdp-print', 'facebook.com/sharer', 'twitter.com/intent/tweet', 'linkedin.com/sharing', 'sms:?&amp;body=', 'mailto:?subject=']) assert.ok(html.includes(s), `share option ${s}`);
 assert.match(html, /href="\/appeal-savings-estimator\/\?assessed=424300&amp;rate=2\.384/, 'appeal estimator prefilled with assessment and town rate');
 assert.match(html, /\/nj-property-tax-calendar/, 'appeal deadlines');
 assert.match(html, /\/senior-benefit-estimator/, 'relief programs');
-assert.match(html, /Harrison Town's general tax rate is <b>\$2\.384<\/b>/, 'town tax rate from the state table');
-assert.match(html, /since 2020, the first year after the last town-wide revaluation/, 'rate trend starts after the last revaluation');
+assert.match(html, /\$2\.384<\/b><span>2025 rate<\/span>/, 'town tax rate from the state table');
+assert.match(html, /Rates start in 2020, the first year after the last town-wide revaluation\./, 'rate trend starts after the last revaluation');
 assert.match(html, /"@type":"FAQPage"/, 'FAQ structured data');
 assert.match(html, /WatchdogPublicNav\.remember/, 'page is remembered in recent properties');
 assert.equal(page.rateTrend({ town: 'WOODBRIDGE TWP', county: 'MIDDLESEX' }).cutAtReval, false);
-assert.match(page.renderPage({ ...row, score: null }), /still being calculated/);
+assert.match(page.renderPage({ ...row, score: null }), /Still being calculated/);
 assert.equal(page.INDEXABLE_COUNTIES.size, 0, 'pilot: no county released to search engines yet');
+
+// Claim, photo, recent sales, PDF report
+assert.match(html, /href="\/home\?pin=0904_9_20">.*Claim this home/, 'claim this home');
+assert.match(html, /href="\/home\?pin=0904_9_20#photo">.*Add a photo/, 'add a photo');
+assert.doesNotMatch(html, /<figure class="wdp-photo">/, 'no photo block without an approved photo');
+assert.match(page.renderPage(row, { photoUrl: 'https://x.supabase.co/storage/v1/object/sign/property-photos/a.jpg?token=t' }), /<figure class="wdp-photo"><img src="https:\/\/x\.supabase\.co\/storage\/v1\/object\/sign\/property-photos\/a\.jpg\?token=t"/, 'approved homeowner photo shows');
+const withSales = page.renderPage({ ...row, recent_sales: [{ pams_pin: '0904_9_4', address: '134 GRANT AVE', town: 'HARRISON TOWN', price: 775000, date: '2024-08-18', year_built: 1960, same_street: true }], sales_summary: { count: 69, median: 700000, first_date: '2023-09-28' } });
+assert.match(withSales, /id="wdp-sales"/, 'recent sales section');
+assert.match(withSales, /134 Grant Ave<\/a><span class="wdp-tag">Same street<\/span>/);
+assert.match(withSales, /\$775,000/);
+assert.match(withSales, /Similar sales since 2023/);
+assert.match(withSales, /can include sales between relatives or other non-market transfers/, 'honest about the sale data');
+assert.doesNotMatch(html, /non-market transfer \(for example/, 'no per-sale non-market label from the unconfirmed sales code');
+assert.match(html, /<form class="wdp-form" id="wdp-report-form" novalidate>/, 'PDF report form');
+for (const f of ['name="name"', 'name="email"', 'name="phone"', 'name="address"', 'name="consent" type="checkbox" required']) assert.ok(html.includes(f), `report field ${f}`);
+assert.match(html, /may contact me by phone, text or email about this property/, 'contact consent text');
+assert.match(html, /fetch\('\/api\/watchdog-property-report'/, 'form posts to the report API');
+
+// PDF report API
+const report = require(new URL('api/watchdog-property-report.js', root).pathname);
+const good = { pin: '0904_9_20', name: 'Pat Doe', email: 'pat@example.com', phone: '(856) 555-0100', address: '1 Main St, Trenton, NJ 08608', consent: true };
+assert.ok(report.validate(good).value);
+for (const [k, v] of [['name', 'P'], ['email', 'nope'], ['phone', '555-0100'], ['address', 'NJ'], ['consent', false], ['pin', 'x']]) assert.ok(report.validate({ ...good, [k]: v }).error, `rejects bad ${k}`);
+assert.equal(report.pdfText('A – B · C ’s ☃'), "A - B - C 's ");
+const pdf = await report.buildPdf({ ...row, recent_sales: [{ pams_pin: '0904_9_4', address: '134 GRANT AVE', price: 775000, date: '2024-08-18', same_street: true }] }, { name: 'Pat Doe' });
+assert.ok(pdf.length > 3000 && Buffer.from(pdf.slice(0, 5)).toString() === '%PDF-', 'builds a PDF');
+const reportSql = read('supabase/migrations/20260928234000_property_page_sales_reports.sql');
+assert.match(reportSql, /revoke all on public\.property_report_requests from anon, authenticated;/, 'report requests are server-only');
+assert.match(reportSql, /contact_consent boolean not null check \(contact_consent\)/, 'consent is required');
+assert.match(reportSql, /cron\.schedule\('watchdog-recent-sales', '39 6 4 \* \*'/, 'recent sales refresh monthly');
 
 // Handler: redirect, 404, cache
 function call(path, data) {

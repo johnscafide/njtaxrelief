@@ -45,7 +45,8 @@
   "dependencies": {
     "@vercel/functions": "3.9.3",
     "@vercel/oidc": "3.8.5",
-    "parse5": "8.0.1"
+    "parse5": "8.0.1",
+    "pdf-lib": "1.17.1"
   },
   "devDependencies": {
     "pagefind": "1.5.2"
