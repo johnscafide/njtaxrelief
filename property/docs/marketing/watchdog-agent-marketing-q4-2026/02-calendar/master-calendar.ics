@@ -86,6 +86,15 @@ DESCRIPTION:Asset: RF-001 | File: founding-agent-program.md | Owner: John | Phas
 CATEGORIES:Founding Agents
 END:VEVENT
 BEGIN:VEVENT
+UID:e567aa67b9d2a0e1d9d8a67eee7bf156@watchdogindex.com
+DTSTAMP:20260928T120000Z
+DTSTART;TZID=America/New_York:20260928T090000
+DTEND;TZID=America/New_York:20260928T093000
+SUMMARY:[Meta ads] Create or confirm Facebook page Watchdog New Jersey Property Intelligence and Instagram @watchdogindex\; Business Manager\; ad account\; payment method
+DESCRIPTION:Asset: SETUP-META-ACCOUNT | File: 04-paid-ads/meta-ads.md | Owner: John | Phase 0 | Both handles marked [create] in the brief\; three organic posts each before Oct 5
+CATEGORIES:Meta ads
+END:VEVENT
+BEGIN:VEVENT
 UID:39ac166f37309da7d67ec079e3e7f15f@watchdogindex.com
 DTSTAMP:20260928T120000Z
 DTSTART;TZID=America/New_York:20260928T090000
@@ -104,6 +113,15 @@ DESCRIPTION:Asset: PR-001 | File: print-ads.md | Owner: John | Phase 0 | Decide 
 CATEGORIES:Traditional
 END:VEVENT
 BEGIN:VEVENT
+UID:0e398465f16216b6bf1802af53e592a9@watchdogindex.com
+DTSTAMP:20260928T120000Z
+DTSTART;TZID=America/New_York:20260928T100000
+DTEND;TZID=America/New_York:20260928T103000
+SUMMARY:[Google Ads] Create or confirm Google Ads account\; link GA4 G-ENP9182L0J\; enable auto-tagging
+DESCRIPTION:Asset: SETUP-GOOGLE-ACCOUNT | File: 04-paid-ads/google-search-ads.md | Owner: Coordinator | Phase 0 | 
+CATEGORIES:Google Ads
+END:VEVENT
+BEGIN:VEVENT
 UID:6c814bc3182f2bfe70e1c04acbc73329@watchdogindex.com
 DTSTAMP:20260928T120000Z
 DTSTART;TZID=America/New_York:20260928T100000
@@ -111,6 +129,15 @@ DTEND;TZID=America/New_York:20260928T103000
 SUMMARY:[Instagram Stories] Post Story set
 DESCRIPTION:Asset: IG-S01 | File: 03-social/instagram-plan.md | Owner: Coordinator | Phase 0 | Share to FB page Stories\; save to matching highlight
 CATEGORIES:Instagram Stories
+END:VEVENT
+BEGIN:VEVENT
+UID:876e4e940f323d358e169d404a9f07d9@watchdogindex.com
+DTSTAMP:20260928T120000Z
+DTSTART;TZID=America/New_York:20260928T110000
+DTEND;TZID=America/New_York:20260928T113000
+SUMMARY:[LinkedIn] Create company page Watchdog if missing\; Campaign Manager account\; request John's thought leader authorization
+DESCRIPTION:Asset: SETUP-LINKEDIN-ACCOUNT | File: 04-paid-ads/linkedin-ads.md | Owner: Coordinator | Phase 0 | Recommended and Aggressive tiers only
+CATEGORIES:LinkedIn
 END:VEVENT
 BEGIN:VEVENT
 UID:5b4aad76b5dd91c6ff24e491454f504b@watchdogindex.com
@@ -138,6 +165,24 @@ DTEND;TZID=America/New_York:20260928T133000
 SUMMARY:[Facebook groups] Group engagement: 20 minutes of helpful comments
 DESCRIPTION:Asset: FBG-ENG | File: 03-social/facebook-group-playbook.md | Owner: John | Phase 0 | Search groups for tax assessment appeal revaluation permit flood\; log count in target sheet
 CATEGORIES:Facebook groups
+END:VEVENT
+BEGIN:VEVENT
+UID:6793edf09acf1e039e4cbf90fd74342a@watchdogindex.com
+DTSTAMP:20260928T120000Z
+DTSTART;TZID=America/New_York:20260928T140000
+DTEND;TZID=America/New_York:20260928T143000
+SUMMARY:[YouTube] Create or confirm @watchdogindex channel\; link channel to Google Ads
+DESCRIPTION:Asset: SETUP-YOUTUBE-CHANNEL | File: 04-paid-ads/youtube-ads.md | Owner: Coordinator | Phase 0 | Recommended and Aggressive tiers only
+CATEGORIES:YouTube
+END:VEVENT
+BEGIN:VEVENT
+UID:2920065e620ea6e05b34832371e531be@watchdogindex.com
+DTSTAMP:20260928T120000Z
+DTSTART;TZID=America/New_York:20260928T150000
+DTEND;TZID=America/New_York:20260928T153000
+SUMMARY:[All] Choose budget tier and record it in budget-and-pacing.csv
+DESCRIPTION:Asset: DECISION-TIER | File: 04-paid-ads/paid-media-strategy.md | Owner: John | Phase 0 | Lean\, Recommended\, or Aggressive
+CATEGORIES:All
 END:VEVENT
 BEGIN:VEVENT
 UID:b245f2f8832ae47696ef84e7ba063db1@watchdogindex.com
@@ -185,6 +230,15 @@ DESCRIPTION:Asset: SV-002 | File: 03-social/short-form-video-scripts.md | Owner:
 CATEGORIES:LinkedIn video
 END:VEVENT
 BEGIN:VEVENT
+UID:7a54b786bd68803e47876ae7b21e5323@watchdogindex.com
+DTSTAMP:20260928T120000Z
+DTSTART;TZID=America/New_York:20260929T090000
+DTEND;TZID=America/New_York:20260929T093000
+SUMMARY:[All] Paid review: kill\, scale\, refresh
+DESCRIPTION:Asset: REVIEW-WEEKLY | File: 04-paid-ads/paid-media-strategy.md | Owner: John | Phase 0 | Setup checklist and tier decision
+CATEGORIES:All
+END:VEVENT
+BEGIN:VEVENT
 UID:b33c93cb4f26ee978e8be9ae58c0b5ab@watchdogindex.com
 DTSTAMP:20260928T120000Z
 DTSTART;TZID=America/New_York:20260929T090000
@@ -219,6 +273,15 @@ DTEND;TZID=America/New_York:20260929T103000
 SUMMARY:[Lunch-and-learn] Build the 60-office target sheet (5 per county across 12 counties)
 DESCRIPTION:Asset: EV-001 | File: brokerage-lunch-and-learn.md | Owner: Coordinator | Phase 0 | Use target-list-template.csv
 CATEGORIES:Lunch-and-learn
+END:VEVENT
+BEGIN:VEVENT
+UID:5767ecbc865c643edb771914b942378c@watchdogindex.com
+DTSTAMP:20260928T120000Z
+DTSTART;TZID=America/New_York:20260929T100000
+DTEND;TZID=America/New_York:20260929T103000
+SUMMARY:[Meta ads] Install Meta pixel site-wide via routing adapter\; Conversions API from Stripe webhook\; event_id dedup
+DESCRIPTION:Asset: SETUP-META-PIXEL | File: 04-paid-ads/utm-and-tracking.md | Owner: Engineering | Phase 0 | Respect GPC and DNT as product-analytics.js does
+CATEGORIES:Meta ads
 END:VEVENT
 BEGIN:VEVENT
 UID:ca06bb827614e3d037e30826b5f07358@watchdogindex.com
@@ -336,6 +399,15 @@ DTEND;TZID=America/New_York:20260930T100000
 SUMMARY:[Print] Send rate and deadline inquiries: county and regional board newsletters
 DESCRIPTION:Asset: PR-005 | File: print-ads.md | Owner: Coordinator | Phase 0 | [verify per board]
 CATEGORIES:Print
+END:VEVENT
+BEGIN:VEVENT
+UID:3ed083c51f83fa480c29fafeb8855772@watchdogindex.com
+DTSTAMP:20260928T120000Z
+DTSTART;TZID=America/New_York:20260930T100000
+DTEND;TZID=America/New_York:20260930T103000
+SUMMARY:[All] Add GA4 events view_landing\, trial_started\, founding_invite_requested\, free_account_created\, academy_lesson_1_done\; mark key events
+DESCRIPTION:Asset: SETUP-GA4-EVENTS | File: 04-paid-ads/utm-and-tracking.md | Owner: Engineering | Phase 0 | Extend EVENTS set in product-analytics.js
+CATEGORIES:All
 END:VEVENT
 BEGIN:VEVENT
 UID:9a0fbc79bd370e70ee5e8e6f8095309b@watchdogindex.com
@@ -527,6 +599,15 @@ DESCRIPTION:Asset: EM-BR01 | File: 05-email-sms-outreach/broker-and-team-lead-ou
 CATEGORIES:Broker outreach
 END:VEVENT
 BEGIN:VEVENT
+UID:b42c65d586e977895346fa3872afa2df@watchdogindex.com
+DTSTAMP:20260928T120000Z
+DTSTART;TZID=America/New_York:20261001T100000
+DTEND;TZID=America/New_York:20261001T103000
+SUMMARY:[LinkedIn] Install LinkedIn Insight Tag via routing adapter\; conversion rules\; matched audiences
+DESCRIPTION:Asset: SETUP-LINKEDIN-TAG | File: 04-paid-ads/utm-and-tracking.md | Owner: Engineering | Phase 0 | 
+CATEGORIES:LinkedIn
+END:VEVENT
+BEGIN:VEVENT
 UID:78b4b76637cba5b0fcfc1ec4e4d1bccb@watchdogindex.com
 DTSTAMP:20260928T120000Z
 DTSTART;TZID=America/New_York:20261001T100000
@@ -543,6 +624,15 @@ DTEND;TZID=America/New_York:20261001T113000
 SUMMARY:[Facebook groups] Post group value post
 DESCRIPTION:Asset: FBG-002 | File: 03-social/facebook-group-playbook.md | Owner: John | Phase 0 | From John profile\; 2 to 3 groups\; no link in body\; 90/10 rule
 CATEGORIES:Facebook groups
+END:VEVENT
+BEGIN:VEVENT
+UID:2628008aed1860cfd3c86aea1563d410@watchdogindex.com
+DTSTAMP:20260928T120000Z
+DTSTART;TZID=America/New_York:20261001T110000
+DTEND;TZID=America/New_York:20261001T113000
+SUMMARY:[Google Ads] Build campaign Q4-SEARCH-NJ-AGENTS with six ad groups\, negatives\, extensions\, tracking template\; leave paused
+DESCRIPTION:Asset: BUILD-GOOGLE-CAMPAIGN | File: 04-paid-ads/google-search-ads.md | Owner: Coordinator | Phase 0 | AD-G-BRAND to AD-G-TP
+CATEGORIES:Google Ads
 END:VEVENT
 BEGIN:VEVENT
 UID:d5dc8258be9c28dff2f1a54301e33505@watchdogindex.com
@@ -662,6 +752,15 @@ DESCRIPTION:Asset: IG-S03 | File: 03-social/instagram-plan.md | Owner: Coordinat
 CATEGORIES:Instagram Stories
 END:VEVENT
 BEGIN:VEVENT
+UID:f648e53fa5d09580b92a0a46f69452cd@watchdogindex.com
+DTSTAMP:20260928T120000Z
+DTSTART;TZID=America/New_York:20261002T100000
+DTEND;TZID=America/New_York:20261002T103000
+SUMMARY:[Meta ads] Upload customer exclusion list and launch list custom audience (hashed)\; build INT and EMP audiences\; verify pixel events in Events Manager
+DESCRIPTION:Asset: SETUP-META-AUDIENCES | File: 04-paid-ads/meta-ads.md | Owner: Coordinator | Phase 0 | Test-events tool must show StartTrial deduplicated
+CATEGORIES:Meta ads
+END:VEVENT
+BEGIN:VEVENT
 UID:2b0d949a54b7fae8086dee2401870c8a@watchdogindex.com
 DTSTAMP:20260928T120000Z
 DTSTART;TZID=America/New_York:20261002T100000
@@ -752,6 +851,15 @@ DESCRIPTION:Asset: n/a | File: 01-strategy/kpi-dashboard-template.csv | Owner: J
 CATEGORIES:Review
 END:VEVENT
 BEGIN:VEVENT
+UID:4e402638b52427376cc495ca5adfd670@watchdogindex.com
+DTSTAMP:20260928T120000Z
+DTSTART;TZID=America/New_York:20261002T170000
+DTEND;TZID=America/New_York:20261002T173000
+SUMMARY:[Meta ads] Creative due: CR-01\, CR-02\, CR-10\, CR-11\, CR-12 in three sizes
+DESCRIPTION:Asset: CR-01 | File: 04-paid-ads/creative-briefs.md | Owner: Designer | Phase 0 | Phase 0 set\; John approves same day
+CATEGORIES:Meta ads
+END:VEVENT
+BEGIN:VEVENT
 UID:bf9bafc643c481ee0546b5c9a8de1aa0@watchdogindex.com
 DTSTAMP:20260928T120000Z
 DTSTART;TZID=America/New_York:20261002T170000
@@ -795,6 +903,42 @@ DTEND;TZID=America/New_York:20261005T070000
 SUMMARY:[Email] Send Watchdog Agent Weekly issue 1: Oct 1 valuation date\, add five past clients\, door opens Oct 12
 DESCRIPTION:Asset: EM-N01 | File: 05-email-sms-outreach/weekly-agent-email.md | Owner: Coordinator | Phase 0 | First issue\; whole agent list
 CATEGORIES:Email
+END:VEVENT
+BEGIN:VEVENT
+UID:190ce588acb85deffafbcc2479126fde@watchdogindex.com
+DTSTAMP:20260928T120000Z
+DTSTART;TZID=America/New_York:20261005T070000
+DTEND;TZID=America/New_York:20261005T073000
+SUMMARY:[Google Ads] Enable BRAND and INTENT ad groups at half the Phase 1 budget\; manual CPC
+DESCRIPTION:Asset: AD-G-BRAND | File: 04-paid-ads/google-search-ads.md | Owner: Coordinator | Phase 0 | 
+CATEGORIES:Google Ads
+END:VEVENT
+BEGIN:VEVENT
+UID:30e8951ae659bb6d4e809e5fd07e23c2@watchdogindex.com
+DTSTAMP:20260928T120000Z
+DTSTART;TZID=America/New_York:20261005T070000
+DTEND;TZID=America/New_York:20261005T073000
+SUMMARY:[LinkedIn] Aggressive tier only: document ad AD-L-003 on at $60 for the week
+DESCRIPTION:Asset: AD-L-003 | File: 04-paid-ads/linkedin-ads.md | Owner: Coordinator | Phase 0 | Seeds Insight Tag audience
+CATEGORIES:LinkedIn
+END:VEVENT
+BEGIN:VEVENT
+UID:0bae178eb45fa47dba27820cb6447aa6@watchdogindex.com
+DTSTAMP:20260928T120000Z
+DTSTART;TZID=America/New_York:20261005T070000
+DTEND;TZID=America/New_York:20261005T073000
+SUMMARY:[Meta ads] Launch Q4-P0-CONTENT with AD-M-001 to AD-M-005\; AD-M-006 to LIST audience
+DESCRIPTION:Asset: AD-M-001 | File: 04-paid-ads/meta-ads.md | Owner: Coordinator | Phase 0 | Content and free lookup only\; no trial ads in Phase 0
+CATEGORIES:Meta ads
+END:VEVENT
+BEGIN:VEVENT
+UID:95bfbc784bce256d61277c403585939d@watchdogindex.com
+DTSTAMP:20260928T120000Z
+DTSTART;TZID=America/New_York:20261005T070000
+DTEND;TZID=America/New_York:20261005T073000
+SUMMARY:[YouTube] Aggressive tier only: AD-Y-001 CPV test at $60 for the week
+DESCRIPTION:Asset: AD-Y-001 | File: 04-paid-ads/youtube-ads.md | Owner: Coordinator | Phase 0 | 
+CATEGORIES:YouTube
 END:VEVENT
 BEGIN:VEVENT
 UID:3e6a9827920037b83e7f3a761246692d@watchdogindex.com
@@ -867,6 +1011,15 @@ DTEND;TZID=America/New_York:20261005T100000
 SUMMARY:[Broker outreach] Broker outreach block: 10 new brokers\, 10 follow-ups (EM-BR01 to EM-BR05 by day\, PH-BR01\, PH-BR02\, DM-BR01 to DM-BR03)
 DESCRIPTION:Asset: EM-BR01 | File: 05-email-sms-outreach/broker-and-team-lead-outreach.md | Owner: John | Phase 0 | 
 CATEGORIES:Broker outreach
+END:VEVENT
+BEGIN:VEVENT
+UID:ca04bae6826791097088f9106ab47dc0@watchdogindex.com
+DTSTAMP:20260928T120000Z
+DTSTART;TZID=America/New_York:20261005T100000
+DTEND;TZID=America/New_York:20261005T103000
+SUMMARY:[Google Ads] Verify GA4 conversion import into Google Ads shows the five imported actions recording
+DESCRIPTION:Asset: SETUP-GOOGLE-IMPORT | File: 04-paid-ads/utm-and-tracking.md | Owner: Engineering | Phase 0 | 
+CATEGORIES:Google Ads
 END:VEVENT
 BEGIN:VEVENT
 UID:6a19be2d49bb93e2d1de84fe89697e15@watchdogindex.com
@@ -984,6 +1137,15 @@ DTEND;TZID=America/New_York:20261006T083000
 SUMMARY:[LinkedIn video] Post SV-007
 DESCRIPTION:Asset: SV-007 | File: 03-social/short-form-video-scripts.md | Owner: John | Phase 0 | Tax bill translator: Equalization ratio explains assessed 250 vs listed 480. CTA: Look up a property free. utm_content=SV-007. Native upload with custom thumbnail\; link in first comment\; max 3 hashtags.
 CATEGORIES:LinkedIn video
+END:VEVENT
+BEGIN:VEVENT
+UID:6000520fcd5f6b4692403409781532c4@watchdogindex.com
+DTSTAMP:20260928T120000Z
+DTSTART;TZID=America/New_York:20261006T090000
+DTEND;TZID=America/New_York:20261006T093000
+SUMMARY:[All] Paid review: kill\, scale\, refresh
+DESCRIPTION:Asset: REVIEW-WEEKLY | File: 04-paid-ads/paid-media-strategy.md | Owner: John | Phase 0 | Search terms\, kill and scale rules\, frequency\, pool sizes\, budget pacing
+CATEGORIES:All
 END:VEVENT
 BEGIN:VEVENT
 UID:9c64a0fe61c46c8463f6920c57b9bacc@watchdogindex.com
@@ -1211,6 +1373,15 @@ DESCRIPTION:Asset: DM-A01 | File: 05-email-sms-outreach/agent-direct-outreach.md
 CATEGORIES:Agent DMs
 END:VEVENT
 BEGIN:VEVENT
+UID:3ffc863e66ebacba5baedea7db564863@watchdogindex.com
+DTSTAMP:20260928T120000Z
+DTSTART;TZID=America/New_York:20261007T170000
+DTEND;TZID=America/New_York:20261007T173000
+SUMMARY:[Meta ads] Creative due: CR-03\, CR-04\, CR-05\, CR-06\, CR-07 in three sizes
+DESCRIPTION:Asset: CR-03 | File: 04-paid-ads/creative-briefs.md | Owner: Designer | Phase 0 | Phase 1 set
+CATEGORIES:Meta ads
+END:VEVENT
+BEGIN:VEVENT
 UID:f89a2aaa9be6ceb74cf2f6f461c164b8@watchdogindex.com
 DTSTAMP:20260928T120000Z
 DTSTART;TZID=America/New_York:20261007T170000
@@ -1218,6 +1389,15 @@ DTEND;TZID=America/New_York:20261007T173000
 SUMMARY:[Milestone] Operations checklist due (O1 to O7)
 DESCRIPTION:Asset: n/a | File: 01-strategy/launch-readiness-checklist.md | Owner: Coordinator | Phase 0 | 
 CATEGORIES:Milestone
+END:VEVENT
+BEGIN:VEVENT
+UID:14d53367e5b724ee46c8428024efde98@watchdogindex.com
+DTSTAMP:20260928T120000Z
+DTSTART;TZID=America/New_York:20261007T170000
+DTEND;TZID=America/New_York:20261007T173000
+SUMMARY:[YouTube] John records AD-Y-001\, AD-Y-002\, AD-Y-004 on camera
+DESCRIPTION:Asset: AD-Y-001 | File: 04-paid-ads/youtube-ads.md | Owner: John | Phase 0 | One session\, plain wall
+CATEGORIES:YouTube
 END:VEVENT
 BEGIN:VEVENT
 UID:5f1e9e59067a99da1f6432c9a8712a95@watchdogindex.com
@@ -1317,6 +1497,15 @@ DTEND;TZID=America/New_York:20261008T113000
 SUMMARY:[Facebook groups] Post group value post
 DESCRIPTION:Asset: FBG-004 | File: 03-social/facebook-group-playbook.md | Owner: John | Phase 0 | From John profile\; 2 to 3 groups\; no link in body\; 90/10 rule
 CATEGORIES:Facebook groups
+END:VEVENT
+BEGIN:VEVENT
+UID:c7b2288dcca6262fa6ca5daaa6345c31@watchdogindex.com
+DTSTAMP:20260928T120000Z
+DTSTART;TZID=America/New_York:20261008T120000
+DTEND;TZID=America/New_York:20261008T123000
+SUMMARY:[All] /agents/trial and /agents/trial/thanks live on staging with all events firing\; Variant A and B switch tested
+DESCRIPTION:Asset: LP-AGENTS-TRIAL | File: 04-paid-ads/landing-page-specs.md | Owner: Engineering | Phase 0 | Clean route registered\; canonical without /property/
+CATEGORIES:All
 END:VEVENT
 BEGIN:VEVENT
 UID:e77601df9eaf383a2304add4bb3c0387@watchdogindex.com
@@ -1427,6 +1616,15 @@ DESCRIPTION:Asset: EM-BR01 | File: 05-email-sms-outreach/broker-and-team-lead-ou
 CATEGORIES:Broker outreach
 END:VEVENT
 BEGIN:VEVENT
+UID:4d9eb4eae2a27928922c1701415b8716@watchdogindex.com
+DTSTAMP:20260928T120000Z
+DTSTART;TZID=America/New_York:20261009T100000
+DTEND;TZID=America/New_York:20261009T103000
+SUMMARY:[All] Landing page QA at 320\, 390\, 430\, 768\, 1440 and mobile WebKit\; Playwright targeted run\; Lighthouse mobile
+DESCRIPTION:Asset: LP-QA | File: 04-paid-ads/landing-page-specs.md | Owner: John | Phase 0 | Fix hard failures before Oct 12
+CATEGORIES:All
+END:VEVENT
+BEGIN:VEVENT
 UID:cb37180d9ead52f609fdba4d8244be25@watchdogindex.com
 DTSTAMP:20260928T120000Z
 DTSTART;TZID=America/New_York:20261009T100000
@@ -1452,6 +1650,15 @@ DTEND;TZID=America/New_York:20261009T123000
 SUMMARY:[Instagram Reels] Post SV-010
 DESCRIPTION:Asset: SV-010 | File: 03-social/short-form-video-scripts.md | Owner: John | Phase 0 | Town compare: Which town has lower taxes is the wrong question. CTA: Comment TOWN. utm_content=SV-010. @watchdogindex [create]. Choose cover\; link in bio.
 CATEGORIES:Instagram Reels
+END:VEVENT
+BEGIN:VEVENT
+UID:ed81509c325857a13adb213598e46cc7@watchdogindex.com
+DTSTAMP:20260928T120000Z
+DTSTART;TZID=America/New_York:20261009T120000
+DTEND;TZID=America/New_York:20261009T123000
+SUMMARY:[Meta ads] Build Q4-P1-TRIAL\, Q4-P1-INVITE\, Q4-RT campaigns paused with AD-M-007 to AD-M-016 and AD-R-001 to AD-R-010
+DESCRIPTION:Asset: AD-M-007 | File: 04-paid-ads/meta-ads.md | Owner: Coordinator | Phase 0 | 
+CATEGORIES:Meta ads
 END:VEVENT
 BEGIN:VEVENT
 UID:847d3310368f0ec41f5145d307828095@watchdogindex.com
@@ -1544,6 +1751,15 @@ DESCRIPTION:Asset: n/a | File: 01-strategy/kpi-dashboard-template.csv | Owner: J
 CATEGORIES:Review
 END:VEVENT
 BEGIN:VEVENT
+UID:e14038969f638072a3e16a2be3fd51c6@watchdogindex.com
+DTSTAMP:20260928T120000Z
+DTSTART;TZID=America/New_York:20261009T170000
+DTEND;TZID=America/New_York:20261009T173000
+SUMMARY:[LinkedIn] Build form Q4-LNL-FORM and AD-L-001\, AD-L-002\, AD-L-007 paused
+DESCRIPTION:Asset: AD-L-001 | File: 04-paid-ads/linkedin-ads.md | Owner: Coordinator | Phase 0 | Privacy URL confirmed
+CATEGORIES:LinkedIn
+END:VEVENT
+BEGIN:VEVENT
 UID:56d3f890c5a6c961634328923ffbae28@watchdogindex.com
 DTSTAMP:20260928T120000Z
 DTSTART;TZID=America/New_York:20261009T170000
@@ -1551,6 +1767,15 @@ DTEND;TZID=America/New_York:20261009T173000
 SUMMARY:[Milestone] Engineering\, legal\, content and commercial checklist items due
 DESCRIPTION:Asset: n/a | File: 01-strategy/launch-readiness-checklist.md | Owner: Engineering | Phase 0 | 
 CATEGORIES:Milestone
+END:VEVENT
+BEGIN:VEVENT
+UID:6d93b14a30eac238fbc1e63426c94d54@watchdogindex.com
+DTSTAMP:20260928T120000Z
+DTSTART;TZID=America/New_York:20261009T170000
+DTEND;TZID=America/New_York:20261009T173000
+SUMMARY:[YouTube] Video cuts due: AD-Y-001\, AD-Y-002\, AD-Y-004 with captions and end card
+DESCRIPTION:Asset: AD-Y-004 | File: 04-paid-ads/youtube-ads.md | Owner: Designer | Phase 0 | 
+CATEGORIES:YouTube
 END:VEVENT
 BEGIN:VEVENT
 UID:2f4d1ae134f6c0b96fad6d5e49105be4@watchdogindex.com
@@ -1598,6 +1823,15 @@ DESCRIPTION:Asset: EM-SETUP-15 | File: 05-email-sms-outreach/waitlist-and-launch
 CATEGORIES:Setup
 END:VEVENT
 BEGIN:VEVENT
+UID:2a1d723ac8db40b36a0c2b9579129c8d@watchdogindex.com
+DTSTAMP:20260928T120000Z
+DTSTART;TZID=America/New_York:20261011T180000
+DTEND;TZID=America/New_York:20261011T183000
+SUMMARY:[All] Confirm billing gate state\; choose Variant A or B\; confirm tier and Phase 1 budgets
+DESCRIPTION:Asset: DECISION-VARIANT | File: 04-paid-ads/paid-media-strategy.md | Owner: John | Phase 0 | If gate closed\, Phase 1 runs on invite path
+CATEGORIES:All
+END:VEVENT
+BEGIN:VEVENT
 UID:540368c782fd3925d342bdd086d8569c@watchdogindex.com
 DTSTAMP:20260928T120000Z
 DTSTART;TZID=America/New_York:20261011T190000
@@ -1625,6 +1859,33 @@ DESCRIPTION:Asset: EM-N02 | File: 05-email-sms-outreach/weekly-agent-email.md | 
 CATEGORIES:Email
 END:VEVENT
 BEGIN:VEVENT
+UID:1a61dfa71c04f587832e9d318b21f81e@watchdogindex.com
+DTSTAMP:20260928T120000Z
+DTSTART;TZID=America/New_York:20261012T070000
+DTEND;TZID=America/New_York:20261012T073000
+SUMMARY:[Google Ads] All ad groups on except TP\; Phase 1 budget\; Maximize clicks with bid limit
+DESCRIPTION:Asset: AD-G-INTENT | File: 04-paid-ads/google-search-ads.md | Owner: Coordinator | Phase 1 | Budget change at phase boundary
+CATEGORIES:Google Ads
+END:VEVENT
+BEGIN:VEVENT
+UID:bc1da9f78e645294bc998403e21eeeac@watchdogindex.com
+DTSTAMP:20260928T120000Z
+DTSTART;TZID=America/New_York:20261012T070000
+DTEND;TZID=America/New_York:20261012T073000
+SUMMARY:[LinkedIn] Launch form campaign AD-L-001 and AD-L-002\; AD-L-007 trial ad
+DESCRIPTION:Asset: AD-L-001 | File: 04-paid-ads/linkedin-ads.md | Owner: Coordinator | Phase 1 | Recommended and Aggressive only
+CATEGORIES:LinkedIn
+END:VEVENT
+BEGIN:VEVENT
+UID:04bda3087cd999e8806158b5ce2a4a24@watchdogindex.com
+DTSTAMP:20260928T120000Z
+DTSTART;TZID=America/New_York:20261012T070000
+DTEND;TZID=America/New_York:20261012T073000
+SUMMARY:[Meta ads] Launch Q4-P1-TRIAL and Q4-P1-INVITE\; Phase 1 budget\; hook test CR-01 vs CR-07 vs SV video
+DESCRIPTION:Asset: AD-M-007 | File: 04-paid-ads/meta-ads.md | Owner: Coordinator | Phase 1 | Budget change at phase boundary
+CATEGORIES:Meta ads
+END:VEVENT
+BEGIN:VEVENT
 UID:81a36a771ee47dc5a643afffe67333b7@watchdogindex.com
 DTSTAMP:20260928T120000Z
 DTSTART;TZID=America/New_York:20261012T070000
@@ -1632,6 +1893,24 @@ DTEND;TZID=America/New_York:20261012T073000
 SUMMARY:[PR] Send press release PR-REL-01 to media list and post on site
 DESCRIPTION:Asset: PR-REL-01 | File: press-release-and-pr.md | Owner: John | Phase 1 | Wire service [placeholder verify cost]. Press route [placeholder]
 CATEGORIES:PR
+END:VEVENT
+BEGIN:VEVENT
+UID:536d42fd42eb4e026f9adabb2e755873@watchdogindex.com
+DTSTAMP:20260928T120000Z
+DTSTART;TZID=America/New_York:20261012T070000
+DTEND;TZID=America/New_York:20261012T073000
+SUMMARY:[Retargeting] Launch Q4-RT stages 1 to 3 and checkout abandoner ad set
+DESCRIPTION:Asset: AD-R-001 | File: 04-paid-ads/retargeting.md | Owner: Coordinator | Phase 1 | Merge pools under 1\,000
+CATEGORIES:Retargeting
+END:VEVENT
+BEGIN:VEVENT
+UID:f64046d811b1a673e49bf8641f7621d8@watchdogindex.com
+DTSTAMP:20260928T120000Z
+DTSTART;TZID=America/New_York:20261012T070000
+DTEND;TZID=America/New_York:20261012T073000
+SUMMARY:[YouTube] Launch custom intent with AD-Y-001 and AD-Y-004\; placements with AD-Y-002
+DESCRIPTION:Asset: AD-Y-001 | File: 04-paid-ads/youtube-ads.md | Owner: Coordinator | Phase 1 | Placements list filled by Oct 12
+CATEGORIES:YouTube
 END:VEVENT
 BEGIN:VEVENT
 UID:15ca4570848af811cfb061e8d3d4d59c@watchdogindex.com
@@ -1805,6 +2084,15 @@ DESCRIPTION:Asset: SV-012 | File: 03-social/short-form-video-scripts.md | Owner:
 CATEGORIES:LinkedIn video
 END:VEVENT
 BEGIN:VEVENT
+UID:8b42c6fbe605674b08850a8b1d56f50a@watchdogindex.com
+DTSTAMP:20260928T120000Z
+DTSTART;TZID=America/New_York:20261013T090000
+DTEND;TZID=America/New_York:20261013T093000
+SUMMARY:[All] Paid review: kill\, scale\, refresh
+DESCRIPTION:Asset: REVIEW-WEEKLY | File: 04-paid-ads/paid-media-strategy.md | Owner: John | Phase 1 | Search terms\, kill and scale rules\, frequency\, pool sizes\, budget pacing
+CATEGORIES:All
+END:VEVENT
+BEGIN:VEVENT
 UID:dc71cd516533431d61bba0194b6d3f0c@watchdogindex.com
 DTSTAMP:20260928T120000Z
 DTSTART;TZID=America/New_York:20261013T090000
@@ -1956,6 +2244,15 @@ DTEND;TZID=America/New_York:20261014T103000
 SUMMARY:[Instagram Stories] Post Story set
 DESCRIPTION:Asset: IG-S08 | File: 03-social/instagram-plan.md | Owner: Coordinator | Phase 1 | Share to FB page Stories\; save to matching highlight
 CATEGORIES:Instagram Stories
+END:VEVENT
+BEGIN:VEVENT
+UID:5525ee43fabc765e544b8b0e136046b6@watchdogindex.com
+DTSTAMP:20260928T120000Z
+DTSTART;TZID=America/New_York:20261014T100000
+DTEND;TZID=America/New_York:20261014T103000
+SUMMARY:[LinkedIn] Sponsor John's Oct 1 post as thought leader ad AD-L-004
+DESCRIPTION:Asset: AD-L-004 | File: 04-paid-ads/linkedin-ads.md | Owner: John | Phase 1 | Needs authorization in Campaign Manager
+CATEGORIES:LinkedIn
 END:VEVENT
 BEGIN:VEVENT
 UID:a3aed27cfcbc69618d118d391af6c870@watchdogindex.com
@@ -2345,6 +2642,15 @@ DESCRIPTION:Asset: n/a | File: 01-strategy/kpi-dashboard-template.csv | Owner: J
 CATEGORIES:Review
 END:VEVENT
 BEGIN:VEVENT
+UID:beaec11dd6bb09fa3a1f83d06cbc5523@watchdogindex.com
+DTSTAMP:20260928T120000Z
+DTSTART;TZID=America/New_York:20261016T170000
+DTEND;TZID=America/New_York:20261016T173000
+SUMMARY:[Meta ads] Creative due: CR-08\, CR-09 in three sizes
+DESCRIPTION:Asset: CR-08 | File: 04-paid-ads/creative-briefs.md | Owner: Designer | Phase 1 | Phase 2 and 3 set\; CR-09 booth placeholder stays
+CATEGORIES:Meta ads
+END:VEVENT
+BEGIN:VEVENT
 UID:df3d31fbaded1d082bb654efb2ee1030@watchdogindex.com
 DTSTAMP:20260928T120000Z
 DTSTART;TZID=America/New_York:20261016T170000
@@ -2379,6 +2685,15 @@ DTEND;TZID=America/New_York:20261019T070000
 SUMMARY:[Email] Send Watchdog Agent Weekly issue 3: Chapter 123\, reading the desk\, first lunch-and-learns
 DESCRIPTION:Asset: EM-N03 | File: 05-email-sms-outreach/weekly-agent-email.md | Owner: Coordinator | Phase 1 | 
 CATEGORIES:Email
+END:VEVENT
+BEGIN:VEVENT
+UID:c704e313743000a217efb13724fe5848@watchdogindex.com
+DTSTAMP:20260928T120000Z
+DTSTART;TZID=America/New_York:20261019T070000
+DTEND;TZID=America/New_York:20261019T073000
+SUMMARY:[Meta ads] Creative refresh: angle test AD-M-009\, AD-M-010\, AD-M-012\, AD-M-013 on the winning hook style
+DESCRIPTION:Asset: REFRESH-CREATIVE | File: 04-paid-ads/meta-ads.md | Owner: Coordinator | Phase 1 | Every 2 weeks
+CATEGORIES:Meta ads
 END:VEVENT
 BEGIN:VEVENT
 UID:3f1cc9f45f0f78cd9d622fdfc343ac5b@watchdogindex.com
@@ -2577,6 +2892,15 @@ DTEND;TZID=America/New_York:20261020T083000
 SUMMARY:[LinkedIn video] Post SV-017
 DESCRIPTION:Asset: SV-017 | File: 03-social/short-form-video-scripts.md | Owner: John | Phase 1 | Tax bill translator: Revaluation vs reassessment\; rate resets too. CTA: Start your 14-day Agent trial. utm_content=SV-017. Native upload with custom thumbnail\; link in first comment\; max 3 hashtags.
 CATEGORIES:LinkedIn video
+END:VEVENT
+BEGIN:VEVENT
+UID:5fe607b9af37a5515f6aedbd9e8845c3@watchdogindex.com
+DTSTAMP:20260928T120000Z
+DTSTART;TZID=America/New_York:20261020T090000
+DTEND;TZID=America/New_York:20261020T093000
+SUMMARY:[All] Paid review: kill\, scale\, refresh
+DESCRIPTION:Asset: REVIEW-WEEKLY | File: 04-paid-ads/paid-media-strategy.md | Owner: John | Phase 1 | Search terms\, kill and scale rules\, frequency\, pool sizes\, budget pacing
+CATEGORIES:All
 END:VEVENT
 BEGIN:VEVENT
 UID:444492170c068b0df546dbf2476c7fbf@watchdogindex.com
@@ -3164,6 +3488,15 @@ DESCRIPTION:Asset: n/a | File: 01-strategy/kpi-dashboard-template.csv | Owner: J
 CATEGORIES:Review
 END:VEVENT
 BEGIN:VEVENT
+UID:06840cb2f5305e0da8201ea827d5c35b@watchdogindex.com
+DTSTAMP:20260928T120000Z
+DTSTART;TZID=America/New_York:20261023T170000
+DTEND;TZID=America/New_York:20261023T173000
+SUMMARY:[YouTube] Video cuts due: AD-Y-003\, AD-Y-005\, AD-Y-006
+DESCRIPTION:Asset: AD-Y-005 | File: 04-paid-ads/youtube-ads.md | Owner: Designer | Phase 1 | John records by Oct 20
+CATEGORIES:YouTube
+END:VEVENT
+BEGIN:VEVENT
 UID:1ed2cbbc2635a2f728cd23eeb9835780@watchdogindex.com
 DTSTAMP:20260928T120000Z
 DTSTART;TZID=America/New_York:20261023T170000
@@ -3191,6 +3524,15 @@ DESCRIPTION:Asset: n/a | File: 02-calendar/weekly-operating-rhythm.md | Owner: J
 CATEGORIES:Light day
 END:VEVENT
 BEGIN:VEVENT
+UID:be018970606e44fd7a61ff254eb35f47@watchdogindex.com
+DTSTAMP:20260928T120000Z
+DTSTART;TZID=America/New_York:20261025T180000
+DTEND;TZID=America/New_York:20261025T183000
+SUMMARY:[All] Week-2 win check against section 7 criteria\; decide hold\, cut\, or scale
+DESCRIPTION:Asset: DECISION-WEEK2 | File: 04-paid-ads/paid-media-strategy.md | Owner: John | Phase 1 | Written into the Oct 27 report
+CATEGORIES:All
+END:VEVENT
+BEGIN:VEVENT
 UID:6c2d6931459223521cd5eb16acaf4687@watchdogindex.com
 DTSTAMP:20260928T120000Z
 DTSTART;TZID=America/New_York:20261025T190000
@@ -3207,6 +3549,15 @@ DTEND;TZID=America/New_York:20261026T070000
 SUMMARY:[Email] Send Watchdog Agent Weekly issue 4: Nov 1 is a Sunday\, Town Compare
 DESCRIPTION:Asset: EM-N04 | File: 05-email-sms-outreach/weekly-agent-email.md | Owner: Coordinator | Phase 1 | First day-14 charges also land Oct 26\; EM-T14-A/B automated
 CATEGORIES:Email
+END:VEVENT
+BEGIN:VEVENT
+UID:a7e1fe2cc1d843258bed8934f17f1a92@watchdogindex.com
+DTSTAMP:20260928T120000Z
+DTSTART;TZID=America/New_York:20261026T070000
+DTEND;TZID=America/New_York:20261026T073000
+SUMMARY:[Meta ads] AD-M-017 (Nov 1 tax quarter) and AD-M-018 (Nov 2 deadline) on
+DESCRIPTION:Asset: AD-M-017 | File: 04-paid-ads/meta-ads.md | Owner: Coordinator | Phase 1 | 
+CATEGORIES:Meta ads
 END:VEVENT
 BEGIN:VEVENT
 UID:76024308a6452bd2735c11a2292600e2@watchdogindex.com
@@ -3396,6 +3747,15 @@ DTEND;TZID=America/New_York:20261027T083000
 SUMMARY:[LinkedIn video] Post SV-022
 DESCRIPTION:Asset: SV-022 | File: 03-social/short-form-video-scripts.md | Owner: John | Phase 1 | Tax bill translator: Four quarters a year\; Nov 1 practically Nov 2. CTA: Save this. utm_content=SV-022. Native upload with custom thumbnail\; link in first comment\; max 3 hashtags.
 CATEGORIES:LinkedIn video
+END:VEVENT
+BEGIN:VEVENT
+UID:2a9c2bef406d419ca15ab3ded94d0034@watchdogindex.com
+DTSTAMP:20260928T120000Z
+DTSTART;TZID=America/New_York:20261027T090000
+DTEND;TZID=America/New_York:20261027T093000
+SUMMARY:[All] Paid review: kill\, scale\, refresh
+DESCRIPTION:Asset: REVIEW-WEEKLY | File: 04-paid-ads/paid-media-strategy.md | Owner: John | Phase 1 | Week-2 win check written up
+CATEGORIES:All
 END:VEVENT
 BEGIN:VEVENT
 UID:7be37589d35f75f220f6a4d9c30c39e5@watchdogindex.com
@@ -3857,6 +4217,15 @@ DESCRIPTION:Asset: SV-025 | File: 03-social/short-form-video-scripts.md | Owner:
 CATEGORIES:Instagram Reels
 END:VEVENT
 BEGIN:VEVENT
+UID:866010508a03912bc94ad18c70c910fa@watchdogindex.com
+DTSTAMP:20260928T120000Z
+DTSTART;TZID=America/New_York:20261030T120000
+DTEND;TZID=America/New_York:20261030T123000
+SUMMARY:[Meta ads] Collect first real agent quotes for AD-M-020\; build Phase 2 ads paused
+DESCRIPTION:Asset: AD-M-020 | File: 04-paid-ads/meta-ads.md | Owner: John | Phase 1 | Placeholder stays until a quote is signed off
+CATEGORIES:Meta ads
+END:VEVENT
+BEGIN:VEVENT
 UID:a9e8772877443b62723c2b1dff84d7c2@watchdogindex.com
 DTSTAMP:20260928T120000Z
 DTSTART;TZID=America/New_York:20261030T130000
@@ -3972,6 +4341,51 @@ DTEND;TZID=America/New_York:20261102T070000
 SUMMARY:[Email] Send Watchdog Agent Weekly issue 5: ANCHOR/PAS-1 deadline today\, Property Pulse\, referral link
 DESCRIPTION:Asset: EM-N05 | File: 05-email-sms-outreach/weekly-agent-email.md | Owner: Coordinator | Phase 2 | 
 CATEGORIES:Email
+END:VEVENT
+BEGIN:VEVENT
+UID:a4822d2427782bf41cd9caef06ebd785@watchdogindex.com
+DTSTAMP:20260928T120000Z
+DTSTART;TZID=America/New_York:20261102T070000
+DTEND;TZID=America/New_York:20261102T073000
+SUMMARY:[Google Ads] Phase 2 budget\; second RSA in INTENT and COMP\; UTM campaign to p2
+DESCRIPTION:Asset: AD-G-COMP | File: 04-paid-ads/google-search-ads.md | Owner: Coordinator | Phase 2 | Budget change at phase boundary
+CATEGORIES:Google Ads
+END:VEVENT
+BEGIN:VEVENT
+UID:65c4492660103ec7f1ff1a63f67f366b@watchdogindex.com
+DTSTAMP:20260928T120000Z
+DTSTART;TZID=America/New_York:20261102T070000
+DTEND;TZID=America/New_York:20261102T073000
+SUMMARY:[LinkedIn] Phase 2 budget\; UTM campaign to p2
+DESCRIPTION:Asset: AD-L-002 | File: 04-paid-ads/linkedin-ads.md | Owner: Coordinator | Phase 2 | Budget change at phase boundary
+CATEGORIES:LinkedIn
+END:VEVENT
+BEGIN:VEVENT
+UID:c84e82dea826cb1bff39a4a07a777fd5@watchdogindex.com
+DTSTAMP:20260928T120000Z
+DTSTART;TZID=America/New_York:20261102T070000
+DTEND;TZID=America/New_York:20261102T073000
+SUMMARY:[Meta ads] Phase 2 budget\; rename to Q4-P2\; AD-M-019\, AD-M-023\, AD-M-026\, AD-M-027 on\; creative refresh\; UTM campaign to p2
+DESCRIPTION:Asset: AD-M-019 | File: 04-paid-ads/meta-ads.md | Owner: Coordinator | Phase 2 | Budget change at phase boundary
+CATEGORIES:Meta ads
+END:VEVENT
+BEGIN:VEVENT
+UID:257f266bcbae4c88b54491c1c3cb9359@watchdogindex.com
+DTSTAMP:20260928T120000Z
+DTSTART;TZID=America/New_York:20261102T070000
+DTEND;TZID=America/New_York:20261102T073000
+SUMMARY:[Retargeting] Phase 2 budget\; UTM campaign to p2
+DESCRIPTION:Asset: AD-R-005 | File: 04-paid-ads/retargeting.md | Owner: Coordinator | Phase 2 | Budget change at phase boundary
+CATEGORIES:Retargeting
+END:VEVENT
+BEGIN:VEVENT
+UID:aa57d9bb9137f37a97dca4724013f192@watchdogindex.com
+DTSTAMP:20260928T120000Z
+DTSTART;TZID=America/New_York:20261102T070000
+DTEND;TZID=America/New_York:20261102T073000
+SUMMARY:[YouTube] Phase 2 budget\; add AD-Y-005 and AD-Y-006 to custom intent\; AD-Y-003 on placements
+DESCRIPTION:Asset: AD-Y-006 | File: 04-paid-ads/youtube-ads.md | Owner: Coordinator | Phase 2 | Budget change at phase boundary
+CATEGORIES:YouTube
 END:VEVENT
 BEGIN:VEVENT
 UID:1eacdb6a97636c684b780927aa337a9a@watchdogindex.com
@@ -4206,6 +4620,15 @@ DTEND;TZID=America/New_York:20261103T083000
 SUMMARY:[LinkedIn video] Post SV-027
 DESCRIPTION:Asset: SV-027 | File: 03-social/short-form-video-scripts.md | Owner: John | Phase 2 | Tax bill translator: Added assessment\; bill up $900 nobody told them. CTA: Start your 14-day Agent trial. utm_content=SV-027. Native upload with custom thumbnail\; link in first comment\; max 3 hashtags.
 CATEGORIES:LinkedIn video
+END:VEVENT
+BEGIN:VEVENT
+UID:6613db0ae5c595575ba38f3ab0835295@watchdogindex.com
+DTSTAMP:20260928T120000Z
+DTSTART;TZID=America/New_York:20261103T090000
+DTEND;TZID=America/New_York:20261103T093000
+SUMMARY:[All] Paid review: kill\, scale\, refresh
+DESCRIPTION:Asset: REVIEW-WEEKLY | File: 04-paid-ads/paid-media-strategy.md | Owner: John | Phase 2 | Search terms\, kill and scale rules\, frequency\, pool sizes\, budget pacing
+CATEGORIES:All
 END:VEVENT
 BEGIN:VEVENT
 UID:b96df708a99d44167afdb8743c87f9af@watchdogindex.com
@@ -4775,6 +5198,15 @@ DESCRIPTION:Asset: EM-N06 | File: 05-email-sms-outreach/weekly-agent-email.md | 
 CATEGORIES:Email
 END:VEVENT
 BEGIN:VEVENT
+UID:543cb96da0474034c2c7255f7e53be9a@watchdogindex.com
+DTSTAMP:20260928T120000Z
+DTSTART;TZID=America/New_York:20261109T070000
+DTEND;TZID=America/New_York:20261109T073000
+SUMMARY:[Meta ads] AD-M-021 (Dec 1 hook) and AD-M-022 (holiday mailer) on\; AD-M-025 seat count set from the real number
+DESCRIPTION:Asset: AD-M-021 | File: 04-paid-ads/meta-ads.md | Owner: Coordinator | Phase 2 | 
+CATEGORIES:Meta ads
+END:VEVENT
+BEGIN:VEVENT
 UID:b6ed40b3931ad3402d022d80062be525@watchdogindex.com
 DTSTAMP:20260928T120000Z
 DTSTART;TZID=America/New_York:20261109T071500
@@ -4971,6 +5403,15 @@ DTEND;TZID=America/New_York:20261110T083000
 SUMMARY:[LinkedIn video] Post SV-032
 DESCRIPTION:Asset: SV-032 | File: 03-social/short-form-video-scripts.md | Owner: John | Phase 2 | Tax bill translator: Dec 1 added-assessment appeal deadline. CTA: Save this. utm_content=SV-032. Native upload with custom thumbnail\; link in first comment\; max 3 hashtags.
 CATEGORIES:LinkedIn video
+END:VEVENT
+BEGIN:VEVENT
+UID:913b0def04b7e9326b2d6ef1812ed485@watchdogindex.com
+DTSTAMP:20260928T120000Z
+DTSTART;TZID=America/New_York:20261110T090000
+DTEND;TZID=America/New_York:20261110T093000
+SUMMARY:[All] Paid review: kill\, scale\, refresh
+DESCRIPTION:Asset: REVIEW-WEEKLY | File: 04-paid-ads/paid-media-strategy.md | Owner: John | Phase 2 | Search terms\, kill and scale rules\, frequency\, pool sizes\, budget pacing
+CATEGORIES:All
 END:VEVENT
 BEGIN:VEVENT
 UID:7eccabb6b3b8f4b5c9eacb4e4177b28f@watchdogindex.com
@@ -5540,6 +5981,15 @@ DESCRIPTION:Asset: EM-N07 | File: 05-email-sms-outreach/weekly-agent-email.md | 
 CATEGORIES:Email
 END:VEVENT
 BEGIN:VEVENT
+UID:076edbe6373c7d7ef054d8adfb7be378@watchdogindex.com
+DTSTAMP:20260928T120000Z
+DTSTART;TZID=America/New_York:20261116T070000
+DTEND;TZID=America/New_York:20261116T073000
+SUMMARY:[Meta ads] Creative refresh\; AD-M-024 and AD-M-028 on
+DESCRIPTION:Asset: REFRESH-CREATIVE | File: 04-paid-ads/meta-ads.md | Owner: Coordinator | Phase 2 | Every 2 weeks
+CATEGORIES:Meta ads
+END:VEVENT
+BEGIN:VEVENT
 UID:f91d1f3c354d042101c8b84943b35d1c@watchdogindex.com
 DTSTAMP:20260928T120000Z
 DTSTART;TZID=America/New_York:20261116T071500
@@ -5729,6 +6179,15 @@ DESCRIPTION:Asset: SV-037 | File: 03-social/short-form-video-scripts.md | Owner:
 CATEGORIES:LinkedIn video
 END:VEVENT
 BEGIN:VEVENT
+UID:233d3674fe93077d268da939aea6441d@watchdogindex.com
+DTSTAMP:20260928T120000Z
+DTSTART;TZID=America/New_York:20261117T090000
+DTEND;TZID=America/New_York:20261117T093000
+SUMMARY:[All] Paid review: kill\, scale\, refresh
+DESCRIPTION:Asset: REVIEW-WEEKLY | File: 04-paid-ads/paid-media-strategy.md | Owner: John | Phase 2 | Search terms\, kill and scale rules\, frequency\, pool sizes\, budget pacing
+CATEGORIES:All
+END:VEVENT
+BEGIN:VEVENT
 UID:f4bf5e1f7fc49e73b07010f071e61645@watchdogindex.com
 DTSTAMP:20260928T120000Z
 DTSTART;TZID=America/New_York:20261117T090000
@@ -5745,6 +6204,15 @@ DTEND;TZID=America/New_York:20261117T100000
 SUMMARY:[Broker outreach] Broker outreach block: 10 new brokers\, 10 follow-ups (EM-BR01 to EM-BR05 by day\, PH-BR01\, PH-BR02\, DM-BR01 to DM-BR03)
 DESCRIPTION:Asset: EM-BR01 | File: 05-email-sms-outreach/broker-and-team-lead-outreach.md | Owner: John | Phase 2 | 
 CATEGORIES:Broker outreach
+END:VEVENT
+BEGIN:VEVENT
+UID:35a9110ae2267ef94960627b2d04a859@watchdogindex.com
+DTSTAMP:20260928T120000Z
+DTSTART;TZID=America/New_York:20261117T100000
+DTEND;TZID=America/New_York:20261117T103000
+SUMMARY:[LinkedIn] Sponsor John's Dec 1 added-assessment post as thought leader ad AD-L-005
+DESCRIPTION:Asset: AD-L-005 | File: 04-paid-ads/linkedin-ads.md | Owner: John | Phase 2 | 
+CATEGORIES:LinkedIn
 END:VEVENT
 BEGIN:VEVENT
 UID:d637508564bb96dc2d112bc583f40219@watchdogindex.com
@@ -6242,6 +6710,15 @@ DESCRIPTION:Asset: RF-044 | File: ambassador-program.md | Owner: Coordinator | P
 CATEGORIES:Ambassadors
 END:VEVENT
 BEGIN:VEVENT
+UID:6faa20da62b4ac2afab7954612945644@watchdogindex.com
+DTSTAMP:20260928T120000Z
+DTSTART;TZID=America/New_York:20261120T170000
+DTEND;TZID=America/New_York:20261120T173000
+SUMMARY:[Meta ads] Triple Play creative final: CR-09 with booth placeholder filled\; AD-Y-006 Triple Play end card cut
+DESCRIPTION:Asset: CR-09 | File: 04-paid-ads/creative-briefs.md | Owner: Designer | Phase 2 | Booth confirmed after registration
+CATEGORIES:Meta ads
+END:VEVENT
+BEGIN:VEVENT
 UID:d046500385f844ad3ec42b0b8bd54abf@watchdogindex.com
 DTSTAMP:20260928T120000Z
 DTSTART;TZID=America/New_York:20261120T170000
@@ -6294,6 +6771,15 @@ DTEND;TZID=America/New_York:20261123T070000
 SUMMARY:[Email] Send Watchdog Agent Weekly issue 8: rate vs assessment\, share page\, Thanksgiving week
 DESCRIPTION:Asset: EM-N08 | File: 05-email-sms-outreach/weekly-agent-email.md | Owner: Coordinator | Phase 2 | 
 CATEGORIES:Email
+END:VEVENT
+BEGIN:VEVENT
+UID:db8d7c890a21d709d24db266c8c667b3@watchdogindex.com
+DTSTAMP:20260928T120000Z
+DTSTART;TZID=America/New_York:20261123T070000
+DTEND;TZID=America/New_York:20261123T073000
+SUMMARY:[All] Thanksgiving week budgets at about 60 percent across channels
+DESCRIPTION:Asset: BUDGET-THANKSGIVING | File: 04-paid-ads/budget-and-pacing.csv | Owner: Coordinator | Phase 2 | 
+CATEGORIES:All
 END:VEVENT
 BEGIN:VEVENT
 UID:55b0cc6fbf3ffe42f4f5133efc5f7ed7@watchdogindex.com
@@ -6465,6 +6951,15 @@ DTEND;TZID=America/New_York:20261124T083000
 SUMMARY:[LinkedIn video] Post SV-042
 DESCRIPTION:Asset: SV-042 | File: 03-social/short-form-video-scripts.md | Owner: John | Phase 2 | Client asked me: Thanksgiving table tax question\; show three numbers. CTA: Look up a property free. utm_content=SV-042. Native upload with custom thumbnail\; link in first comment\; max 3 hashtags.
 CATEGORIES:LinkedIn video
+END:VEVENT
+BEGIN:VEVENT
+UID:c7f68a6840a2f81177e628dc5bde1057@watchdogindex.com
+DTSTAMP:20260928T120000Z
+DTSTART;TZID=America/New_York:20261124T090000
+DTEND;TZID=America/New_York:20261124T093000
+SUMMARY:[All] Paid review: kill\, scale\, refresh
+DESCRIPTION:Asset: REVIEW-WEEKLY | File: 04-paid-ads/paid-media-strategy.md | Owner: John | Phase 2 | Search terms\, kill and scale rules\, frequency\, pool sizes\, budget pacing
+CATEGORIES:All
 END:VEVENT
 BEGIN:VEVENT
 UID:07b79cc404a6a4d042fdc1d840b381ad@watchdogindex.com
@@ -6692,6 +7187,15 @@ DESCRIPTION:Asset: n/a | File: n/a | Owner: John | Phase 2 |
 CATEGORIES:Holiday
 END:VEVENT
 BEGIN:VEVENT
+UID:2d738ad3d528a208a52b10c5cad91b86@watchdogindex.com
+DTSTAMP:20260928T120000Z
+DTSTART;TZID=America/New_York:20261127T120000
+DTEND;TZID=America/New_York:20261127T123000
+SUMMARY:[Meta ads] Build Q4-P3-TRIPLEPLAY (TP radius) and Google TP ad group paused\; AD-M-029 and AD-M-030 loaded
+DESCRIPTION:Asset: AD-M-029 | File: 04-paid-ads/meta-ads.md | Owner: Coordinator | Phase 2 | 
+CATEGORIES:Meta ads
+END:VEVENT
+BEGIN:VEVENT
 UID:30a19d8298809f4e7a88e7ee853b8593@watchdogindex.com
 DTSTAMP:20260928T120000Z
 DTSTART;TZID=America/New_York:20261127T140000
@@ -6726,6 +7230,15 @@ DTEND;TZID=America/New_York:20261130T070000
 SUMMARY:[Email] Send Watchdog Agent Weekly issue 9: Dec 1 deadline tomorrow\, Deals\, Triple Play next week
 DESCRIPTION:Asset: EM-N09 | File: 05-email-sms-outreach/weekly-agent-email.md | Owner: Coordinator | Phase 2 | 
 CATEGORIES:Email
+END:VEVENT
+BEGIN:VEVENT
+UID:6449f635a0e924a452b8e06009f57f14@watchdogindex.com
+DTSTAMP:20260928T120000Z
+DTSTART;TZID=America/New_York:20261130T070000
+DTEND;TZID=America/New_York:20261130T073000
+SUMMARY:[All] Budgets back to Phase 2 rate\; creative refresh\; AD-M-021 Dec 1 hook gets priority
+DESCRIPTION:Asset: REFRESH-CREATIVE | File: 04-paid-ads/meta-ads.md | Owner: Coordinator | Phase 2 | Every 2 weeks
+CATEGORIES:All
 END:VEVENT
 BEGIN:VEVENT
 UID:524469f9af0e29b1a738a4f7ecb16010@watchdogindex.com
@@ -6881,6 +7394,24 @@ DESCRIPTION:Asset: RA-002 | File: podcast-and-radio.md | Owner: Partner | Phase 
 CATEGORIES:Radio
 END:VEVENT
 BEGIN:VEVENT
+UID:25939509b30c727f576acbf393fedfca@watchdogindex.com
+DTSTAMP:20260928T120000Z
+DTSTART;TZID=America/New_York:20261201T070000
+DTEND;TZID=America/New_York:20261201T073000
+SUMMARY:[Google Ads] TP ad group on (Dec 1 to 11)
+DESCRIPTION:Asset: AD-G-TP | File: 04-paid-ads/google-search-ads.md | Owner: Coordinator | Phase 2 | Telecom and sports negatives in place
+CATEGORIES:Google Ads
+END:VEVENT
+BEGIN:VEVENT
+UID:77a9354002d46758bec700f7a875bccf@watchdogindex.com
+DTSTAMP:20260928T120000Z
+DTSTART;TZID=America/New_York:20261201T070000
+DTEND;TZID=America/New_York:20261201T073000
+SUMMARY:[LinkedIn] AD-L-006 Triple Play on
+DESCRIPTION:Asset: AD-L-006 | File: 04-paid-ads/linkedin-ads.md | Owner: Coordinator | Phase 2 | 
+CATEGORIES:LinkedIn
+END:VEVENT
+BEGIN:VEVENT
 UID:686d4583e3cab0974b6fef19abaaeb7e@watchdogindex.com
 DTSTAMP:20260928T120000Z
 DTSTART;TZID=America/New_York:20261201T070000
@@ -6942,6 +7473,15 @@ DTEND;TZID=America/New_York:20261201T083000
 SUMMARY:[Milestone] Added and omitted assessment appeal deadline at the County Board of Taxation. Content hook
 DESCRIPTION:Asset: n/a | File: 00-brief/product-and-brand-brief.md | Owner: John | Phase 2 | 
 CATEGORIES:Milestone
+END:VEVENT
+BEGIN:VEVENT
+UID:77eebe6aa11b0f298b16e0bb8d07feb3@watchdogindex.com
+DTSTAMP:20260928T120000Z
+DTSTART;TZID=America/New_York:20261201T090000
+DTEND;TZID=America/New_York:20261201T093000
+SUMMARY:[All] Paid review: kill\, scale\, refresh
+DESCRIPTION:Asset: REVIEW-WEEKLY | File: 04-paid-ads/paid-media-strategy.md | Owner: John | Phase 2 | Search terms\, kill and scale rules\, frequency\, pool sizes\, budget pacing
+CATEGORIES:All
 END:VEVENT
 BEGIN:VEVENT
 UID:2676800aae4944b2a890d95276300130@watchdogindex.com
@@ -7457,6 +7997,15 @@ DESCRIPTION:Asset: n/a | File: 01-strategy/kpi-dashboard-template.csv | Owner: J
 CATEGORIES:Review
 END:VEVENT
 BEGIN:VEVENT
+UID:9467f7d193256cbd8b10c9d228e27e28@watchdogindex.com
+DTSTAMP:20260928T120000Z
+DTSTART;TZID=America/New_York:20261204T170000
+DTEND;TZID=America/New_York:20261204T173000
+SUMMARY:[Meta ads] Build year-end ads AD-M-031\, AD-M-032\, AD-R-011\, AD-R-012\, AD-L-008 paused
+DESCRIPTION:Asset: AD-M-031 | File: 04-paid-ads/meta-ads.md | Owner: Coordinator | Phase 2 | 
+CATEGORIES:Meta ads
+END:VEVENT
+BEGIN:VEVENT
 UID:8dee29fcd17598109e5c53400dd89c8d@watchdogindex.com
 DTSTAMP:20260928T120000Z
 DTSTART;TZID=America/New_York:20261204T170000
@@ -7464,6 +8013,15 @@ DTEND;TZID=America/New_York:20261204T173000
 SUMMARY:[YouTube Shorts] Post SV-048
 DESCRIPTION:Asset: SV-048 | File: 03-social/short-form-video-scripts.md | Owner: John | Phase 2 | Postcard Friday: January card by Dec 15\; 2027 deadlines. CTA: Start your 14-day Agent trial. utm_content=SV-048. @watchdogindex [create]. Title = hook\; upload SRT.
 CATEGORIES:YouTube Shorts
+END:VEVENT
+BEGIN:VEVENT
+UID:16d1c2d92cb54d9ba2a2b0feb0c3b377@watchdogindex.com
+DTSTAMP:20260928T120000Z
+DTSTART;TZID=America/New_York:20261205T070000
+DTEND;TZID=America/New_York:20261205T073000
+SUMMARY:[Meta ads] Triple Play geo campaign ON: TP radius around Atlantic City Convention Center with AD-M-029
+DESCRIPTION:Asset: AD-M-029 | File: 04-paid-ads/meta-ads.md | Owner: Coordinator | Phase 2 | Dec 5 on
+CATEGORIES:Meta ads
 END:VEVENT
 BEGIN:VEVENT
 UID:857477a33db1e250b5eb326303cb7f96@watchdogindex.com
@@ -7511,6 +8069,15 @@ DESCRIPTION:Asset: EM-N10 | File: 05-email-sms-outreach/weekly-agent-email.md | 
 CATEGORIES:Email
 END:VEVENT
 BEGIN:VEVENT
+UID:6cd538704954eaa961a97d6e26768c52@watchdogindex.com
+DTSTAMP:20260928T120000Z
+DTSTART;TZID=America/New_York:20261207T070000
+DTEND;TZID=America/New_York:20261207T073000
+SUMMARY:[All] Phase 3 budget\; rename campaigns to p3\; AD-M-030 day-of and AD-M-033 on\; UTM campaign to p3
+DESCRIPTION:Asset: BUDGET-P3 | File: 04-paid-ads/budget-and-pacing.csv | Owner: Coordinator | Phase 3 | Budget change at phase boundary\; John at Triple Play
+CATEGORIES:All
+END:VEVENT
+BEGIN:VEVENT
 UID:6011db07f88c97c3b624308f8761e93c@watchdogindex.com
 DTSTAMP:20260928T120000Z
 DTSTART;TZID=America/New_York:20261207T070000
@@ -7545,6 +8112,15 @@ DTEND;TZID=America/New_York:20261207T083000
 SUMMARY:[Events] Triple Play day 1: load in and set booth and open
 DESCRIPTION:Asset: EV-010 | File: event-booth-kit.md | Owner: John | Phase 3 | Booth [###]. Read the do-not-do list
 CATEGORIES:Events
+END:VEVENT
+BEGIN:VEVENT
+UID:ce51aed3f1829d6639e5d5f059de73c1@watchdogindex.com
+DTSTAMP:20260928T120000Z
+DTSTART;TZID=America/New_York:20261207T080000
+DTEND;TZID=America/New_York:20261207T083000
+SUMMARY:[Meta ads] Update AD-M-030 booth and time placeholders each morning Dec 7 to 10
+DESCRIPTION:Asset: AD-M-030 | File: 04-paid-ads/meta-ads.md | Owner: Coordinator | Phase 3 | Repeat Dec 8\, 9\, 10
+CATEGORIES:Meta ads
 END:VEVENT
 BEGIN:VEVENT
 UID:bc0ef7a692b1f03da0b113cd67abea22@watchdogindex.com
@@ -7698,6 +8274,15 @@ DTEND;TZID=America/New_York:20261208T083000
 SUMMARY:[LinkedIn video] Post SV-050
 DESCRIPTION:Asset: SV-050 | File: 03-social/short-form-video-scripts.md | Owner: John | Phase 3 | Tax bill translator: 2027 appeal calendar and the Jan 15 trap. CTA: Save this. utm_content=SV-050. Native upload with custom thumbnail\; link in first comment\; max 3 hashtags.
 CATEGORIES:LinkedIn video
+END:VEVENT
+BEGIN:VEVENT
+UID:622877f1889bf349c45bc4d823d6cdc1@watchdogindex.com
+DTSTAMP:20260928T120000Z
+DTSTART;TZID=America/New_York:20261208T090000
+DTEND;TZID=America/New_York:20261208T093000
+SUMMARY:[All] Paid review: kill\, scale\, refresh
+DESCRIPTION:Asset: REVIEW-WEEKLY | File: 04-paid-ads/paid-media-strategy.md | Owner: Coordinator | Phase 3 | Coordinator runs it\; John at Triple Play
+CATEGORIES:All
 END:VEVENT
 BEGIN:VEVENT
 UID:b2869fbb7b762df810fd233076da3eac@watchdogindex.com
@@ -8042,6 +8627,24 @@ DESCRIPTION:Asset: EV-051 | File: triple-play-plan.md | Owner: Coordinator | Pha
 CATEGORIES:Triple Play
 END:VEVENT
 BEGIN:VEVENT
+UID:5c0eef3cda81b73c852a3a4b1d606e5a@watchdogindex.com
+DTSTAMP:20260928T120000Z
+DTSTART;TZID=America/New_York:20261211T070000
+DTEND;TZID=America/New_York:20261211T073000
+SUMMARY:[Google Ads] TP ad group off
+DESCRIPTION:Asset: AD-G-TP | File: 04-paid-ads/google-search-ads.md | Owner: Coordinator | Phase 3 | 
+CATEGORIES:Google Ads
+END:VEVENT
+BEGIN:VEVENT
+UID:31755c9bdea127c39d66b3b6cd951a77@watchdogindex.com
+DTSTAMP:20260928T120000Z
+DTSTART;TZID=America/New_York:20261211T070000
+DTEND;TZID=America/New_York:20261211T073000
+SUMMARY:[Meta ads] Triple Play geo campaign OFF\; convert TP audience to post-event pool\; AD-M-036 on
+DESCRIPTION:Asset: AD-M-036 | File: 04-paid-ads/meta-ads.md | Owner: Coordinator | Phase 3 | Dec 11 off
+CATEGORIES:Meta ads
+END:VEVENT
+BEGIN:VEVENT
 UID:1d1b59e7bc461789231c3fc612bf0c67@watchdogindex.com
 DTSTAMP:20260928T120000Z
 DTSTART;TZID=America/New_York:20261211T070000
@@ -8276,6 +8879,42 @@ DESCRIPTION:Asset: EM-N11 | File: 05-email-sms-outreach/weekly-agent-email.md | 
 CATEGORIES:Email
 END:VEVENT
 BEGIN:VEVENT
+UID:484217b8fd99c390dfb4ea78fd3c5311@watchdogindex.com
+DTSTAMP:20260928T120000Z
+DTSTART;TZID=America/New_York:20261214T070000
+DTEND;TZID=America/New_York:20261214T073000
+SUMMARY:[LinkedIn] AD-L-008 year-end on
+DESCRIPTION:Asset: AD-L-008 | File: 04-paid-ads/linkedin-ads.md | Owner: Coordinator | Phase 3 | 
+CATEGORIES:LinkedIn
+END:VEVENT
+BEGIN:VEVENT
+UID:cf84eb370358f6b1faf5b84512259598@watchdogindex.com
+DTSTAMP:20260928T120000Z
+DTSTART;TZID=America/New_York:20261214T070000
+DTEND;TZID=America/New_York:20261214T073000
+SUMMARY:[Meta ads] Year-end campaign ON: Q4-P3-ANNUAL with AD-M-031 and AD-M-032\; AD-M-034 founder note on\; creative refresh
+DESCRIPTION:Asset: AD-M-031 | File: 04-paid-ads/meta-ads.md | Owner: Coordinator | Phase 3 | Dec 14 on
+CATEGORIES:Meta ads
+END:VEVENT
+BEGIN:VEVENT
+UID:4a9368104252688650620d65d59acdff@watchdogindex.com
+DTSTAMP:20260928T120000Z
+DTSTART;TZID=America/New_York:20261214T070000
+DTEND;TZID=America/New_York:20261214T073000
+SUMMARY:[Retargeting] AD-R-011 and AD-R-012 on in stage 3\; creative refresh
+DESCRIPTION:Asset: AD-R-011 | File: 04-paid-ads/retargeting.md | Owner: Coordinator | Phase 3 | 
+CATEGORIES:Retargeting
+END:VEVENT
+BEGIN:VEVENT
+UID:ee05aef3f3a8366fb831958161c09e07@watchdogindex.com
+DTSTAMP:20260928T120000Z
+DTSTART;TZID=America/New_York:20261214T070000
+DTEND;TZID=America/New_York:20261214T073000
+SUMMARY:[YouTube] AD-Y-006 year-end end card variant on
+DESCRIPTION:Asset: AD-Y-006 | File: 04-paid-ads/youtube-ads.md | Owner: Coordinator | Phase 3 | 
+CATEGORIES:YouTube
+END:VEVENT
+BEGIN:VEVENT
 UID:d5699ae1770fb10979615d97fb3ad237@watchdogindex.com
 DTSTAMP:20260928T120000Z
 DTSTART;TZID=America/New_York:20261214T071500
@@ -8454,6 +9093,15 @@ DTEND;TZID=America/New_York:20261215T083000
 SUMMARY:[LinkedIn video] Post SV-055
 DESCRIPTION:Asset: SV-055 | File: 03-social/short-form-video-scripts.md | Owner: John | Phase 3 | Tax bill translator: Watchdog Score is not an appraisal. CTA: Start your 14-day Agent trial. utm_content=SV-055. Native upload with custom thumbnail\; link in first comment\; max 3 hashtags.
 CATEGORIES:LinkedIn video
+END:VEVENT
+BEGIN:VEVENT
+UID:146a0a5618745e7893a596a381d3b1ef@watchdogindex.com
+DTSTAMP:20260928T120000Z
+DTSTART;TZID=America/New_York:20261215T090000
+DTEND;TZID=America/New_York:20261215T093000
+SUMMARY:[All] Paid review: kill\, scale\, refresh
+DESCRIPTION:Asset: REVIEW-WEEKLY | File: 04-paid-ads/paid-media-strategy.md | Owner: John | Phase 3 | Search terms\, kill and scale rules\, frequency\, pool sizes\, budget pacing
+CATEGORIES:All
 END:VEVENT
 BEGIN:VEVENT
 UID:219569488f4ea7422f137416a76c0bb2@watchdogindex.com
@@ -8870,6 +9518,15 @@ DESCRIPTION:Asset: SV-058 | File: 03-social/short-form-video-scripts.md | Owner:
 CATEGORIES:Instagram Reels
 END:VEVENT
 BEGIN:VEVENT
+UID:11d1a8b0ff125be17c4de937222a628b@watchdogindex.com
+DTSTAMP:20260928T120000Z
+DTSTART;TZID=America/New_York:20261218T120000
+DTEND;TZID=America/New_York:20261218T123000
+SUMMARY:[Meta ads] AD-M-035 last seats on if Founding seats remain
+DESCRIPTION:Asset: AD-M-035 | File: 04-paid-ads/meta-ads.md | Owner: Coordinator | Phase 3 | Real count only
+CATEGORIES:Meta ads
+END:VEVENT
+BEGIN:VEVENT
 UID:214d8b7584759bbc7cc3ab487dd9a073@watchdogindex.com
 DTSTAMP:20260928T120000Z
 DTSTART;TZID=America/New_York:20261218T130000
@@ -9131,6 +9788,15 @@ DESCRIPTION:Asset: SV-060 | File: 03-social/short-form-video-scripts.md | Owner:
 CATEGORIES:LinkedIn video
 END:VEVENT
 BEGIN:VEVENT
+UID:449480ab86f6abcfe754db046157ddfb@watchdogindex.com
+DTSTAMP:20260928T120000Z
+DTSTART;TZID=America/New_York:20261222T090000
+DTEND;TZID=America/New_York:20261222T093000
+SUMMARY:[All] Paid review: kill\, scale\, refresh
+DESCRIPTION:Asset: REVIEW-WEEKLY | File: 04-paid-ads/paid-media-strategy.md | Owner: John | Phase 3 | Search terms\, kill and scale rules\, frequency\, pool sizes\, budget pacing
+CATEGORIES:All
+END:VEVENT
+BEGIN:VEVENT
 UID:c398999661dae8d8da15cb2e26b6350c@watchdogindex.com
 DTSTAMP:20260928T120000Z
 DTSTART;TZID=America/New_York:20261222T090000
@@ -9293,6 +9959,15 @@ DESCRIPTION:Asset: DM-A01 | File: 05-email-sms-outreach/agent-direct-outreach.md
 CATEGORIES:Agent DMs
 END:VEVENT
 BEGIN:VEVENT
+UID:3d9ab72620d6e7f8f2d5f536b7897fe8@watchdogindex.com
+DTSTAMP:20260928T120000Z
+DTSTART;TZID=America/New_York:20261223T170000
+DTEND;TZID=America/New_York:20261223T173000
+SUMMARY:[All] Quiet week: reduce to BRAND search and RT stage 3 only for Dec 24 to 27
+DESCRIPTION:Asset: BUDGET-QUIET | File: 04-paid-ads/budget-and-pacing.csv | Owner: Coordinator | Phase 3 | 
+CATEGORIES:All
+END:VEVENT
+BEGIN:VEVENT
 UID:70d5d76da5463470fdfb9a0e471513eb@watchdogindex.com
 DTSTAMP:20260928T120000Z
 DTSTART;TZID=America/New_York:20261223T170000
@@ -9372,6 +10047,15 @@ DTEND;TZID=America/New_York:20261228T070000
 SUMMARY:[Email] Send Watchdog Agent Weekly issue 13: should I appeal\, 2027 setup\, Dec 31
 DESCRIPTION:Asset: EM-N13 | File: 05-email-sms-outreach/weekly-agent-email.md | Owner: Coordinator | Phase 3 | 
 CATEGORIES:Email
+END:VEVENT
+BEGIN:VEVENT
+UID:5ba68dfc26a132732e8d2962229218d4@watchdogindex.com
+DTSTAMP:20260928T120000Z
+DTSTART;TZID=America/New_York:20261228T070000
+DTEND;TZID=America/New_York:20261228T073000
+SUMMARY:[All] Resume year-end campaign\; creative refresh\; final push through Dec 31
+DESCRIPTION:Asset: REFRESH-CREATIVE | File: 04-paid-ads/meta-ads.md | Owner: Coordinator | Phase 3 | Every 2 weeks
+CATEGORIES:All
 END:VEVENT
 BEGIN:VEVENT
 UID:1bbc054a190a5a2bc692ed4a546bcac3@watchdogindex.com
@@ -9516,6 +10200,15 @@ DTEND;TZID=America/New_York:20261229T083000
 SUMMARY:[LinkedIn video] Post SV-063
 DESCRIPTION:Asset: SV-063 | File: 03-social/short-form-video-scripts.md | Owner: John | Phase 3 | Tax bill translator: Three numbers in 30 seconds (BANK). CTA: Look up a property free. utm_content=SV-063. Native upload with custom thumbnail\; link in first comment\; max 3 hashtags.
 CATEGORIES:LinkedIn video
+END:VEVENT
+BEGIN:VEVENT
+UID:75fe668c9f05c22ae7336911bcc9e53e@watchdogindex.com
+DTSTAMP:20260928T120000Z
+DTSTART;TZID=America/New_York:20261229T090000
+DTEND;TZID=America/New_York:20261229T093000
+SUMMARY:[All] Paid review: kill\, scale\, refresh
+DESCRIPTION:Asset: REVIEW-WEEKLY | File: 04-paid-ads/paid-media-strategy.md | Owner: John | Phase 3 | Search terms\, kill and scale rules\, frequency\, pool sizes\, budget pacing
+CATEGORIES:All
 END:VEVENT
 BEGIN:VEVENT
 UID:8aa8212fa72ae8c5a3cc794ac8672847@watchdogindex.com
@@ -9741,6 +10434,15 @@ DTEND;TZID=America/New_York:20261231T113000
 SUMMARY:[Facebook groups] Post group value post
 DESCRIPTION:Asset: FBG-026 | File: 03-social/facebook-group-playbook.md | Owner: John | Phase 3 | From John profile\; 2 to 3 groups\; no link in body\; 90/10 rule
 CATEGORIES:Facebook groups
+END:VEVENT
+BEGIN:VEVENT
+UID:1a0ba3b3684a4f069f5d304ee2b6d561@watchdogindex.com
+DTSTAMP:20260928T120000Z
+DTSTART;TZID=America/New_York:20261231T120000
+DTEND;TZID=America/New_York:20261231T123000
+SUMMARY:[All] Year-end campaign off at end of day\; Q4 paid wrap report\; January budget decision
+DESCRIPTION:Asset: REPORT-Q4-WRAP | File: 04-paid-ads/utm-and-tracking.md | Owner: John | Phase 3 | Cohort CAC on October and November trials
+CATEGORIES:All
 END:VEVENT
 BEGIN:VEVENT
 UID:57a5bc5a62dd5cf3ac3d1a5517efbbfc@watchdogindex.com

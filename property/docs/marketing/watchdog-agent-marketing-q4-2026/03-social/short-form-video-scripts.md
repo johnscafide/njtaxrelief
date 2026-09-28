@@ -1734,7 +1734,7 @@ Homeowner angle: no | Bank: yes
 4. Reason, confidence, source, wording, next action
 5. 30 minutes, done
 
-**B-roll / screen:** Real-time screen recording: Agent Desk Home, Opportunity Desk, open a card, record an outcome, snooze one (sample data throughout).
+**B-roll / screen:** Live screen recording: Agent Desk Home, Opportunity Desk, open a card, record an outcome, snooze one (sample data throughout).
 
 **Caption:** What a Monday with the desk looks like, start to finish. 30 minutes. Your people, real reasons.
 

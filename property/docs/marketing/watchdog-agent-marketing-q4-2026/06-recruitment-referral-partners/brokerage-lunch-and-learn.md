@@ -237,7 +237,7 @@ The office offer card (EV-008) is a single printed page left with the broker: th
 - Sell sheet printed (from 07-traditional; [confirm the file and asset ID with the 07 writer]). One per attendee plus five.
 - Office offer card (EV-008) printed.
 - Sign-in sheet (EV-006) printed, two copies.
-- QR card (EV-007) printed: https://www.watchdogindex.com/agents/trial?utm_source=lunch-learn&utm_medium=event&utm_campaign=q4-agents-[phase]&utm_content=EV-004 . The office is identified by its invite code, not by the UTM.
+- QR card (EV-007) printed: https://www.watchdogindex.com/agents/trial?utm_source=lunch-learn&utm_medium=event&utm_campaign=q4-agents-<phase>&utm_content=EV-004 . The office is identified by its invite code, not by the UTM.
 
 2 business days before:
 - Volunteer's past-sale address received (EV-012). Pre-loaded and screenshotted.

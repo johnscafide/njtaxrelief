@@ -2,13 +2,13 @@
 
 Every dated action in the plan, merged from each workstream's feed plus the core milestones. Times are Eastern. Asset IDs point to the file in the asset_file column. The CSV and ICS versions of this calendar sit beside this file.
 
-Total actions: 1084. Days with actions: 95 of 95.
+Total actions: 1162. Days with actions: 95 of 95.
 
 ## Phase 0: Groundwork
 
 ### Week of Monday, September 28
 
-#### Monday, September 28, 2026  (14 actions)
+#### Monday, September 28, 2026  (19 actions)
 
 | Time | Channel | Action | Asset | File | Owner | Notes |
 | --- | --- | --- | --- | --- | --- | --- |
@@ -19,15 +19,20 @@ Total actions: 1084. Days with actions: 95 of 95.
 | 08:15 | LinkedIn | Publish LinkedIn post | LI-001 | 03-social/linkedin-posts.md | John | story post; track teaching |
 | 09:00 | Facebook page | Publish FB page post | FB-001 | 03-social/facebook-page-posts.md | Coordinator | Native video where the post says reuse this week SV script |
 | 09:00 | Founding Agents | Start recruiting the first 40 Founding Agent applicants from the TikTok and LinkedIn audience and known agents | RF-001 | founding-agent-program.md | John | Application page goes live Oct 5 |
+| 09:00 | Meta ads | Create or confirm Facebook page Watchdog New Jersey Property Intelligence and Instagram @watchdogindex; Business Manager; ad account; payment method | SETUP-META-ACCOUNT | 04-paid-ads/meta-ads.md | John | Both handles marked [create] in the brief; three organic posts each before Oct 5 |
 | 09:00 | Setup | ESP setup: sending domain authentication (SPF, DKIM, DMARC), physical mailing address in footer, unsubscribe, sender John Scafide, separate warmed domain for cold broker email | EM-SETUP-01 | 05-email-sms-outreach/waitlist-and-launch-list-nurture.md | Engineering | Needed before EM-W01 on Sep 30 |
 | 09:00 | Traditional | Kickoff: confirm print budget ceiling and postcard vendor path | PR-001 | print-ads.md | John | Decide whether Postcard Studio can address office mail [confirm with Postcard Studio] or a vendor is needed [placeholder] |
+| 10:00 | Google Ads | Create or confirm Google Ads account; link GA4 G-ENP9182L0J; enable auto-tagging | SETUP-GOOGLE-ACCOUNT | 04-paid-ads/google-search-ads.md | Coordinator |  |
 | 10:00 | Instagram Stories | Post Story set | IG-S01 | 03-social/instagram-plan.md | Coordinator | Share to FB page Stories; save to matching highlight |
+| 11:00 | LinkedIn | Create company page Watchdog if missing; Campaign Manager account; request John's thought leader authorization | SETUP-LINKEDIN-ACCOUNT | 04-paid-ads/linkedin-ads.md | Coordinator | Recommended and Aggressive tiers only |
 | 11:00 | Setup | Broker target list: 40 NJ brokerages, broker-owner and managing-broker business emails and published office numbers, 3 lunch-and-learn targets flagged | EM-SETUP-02 | 05-email-sms-outreach/broker-and-team-lead-outreach.md | Coordinator | Business addresses only per CAN-SPAM rules in file |
 | 12:00 | Instagram Reels | Post SV-001 | SV-001 | 03-social/short-form-video-scripts.md | John | Founder log: Two years teaching homeowners; now the agent side. CTA: Request a Founding Agent invite. utm_content=SV-001. @watchdogindex [create]. Choose cover; link in bio. |
 | 13:00 | Facebook groups | Group engagement: 20 minutes of helpful comments | FBG-ENG | 03-social/facebook-group-playbook.md | John | Search groups for tax assessment appeal revaluation permit flood; log count in target sheet |
+| 14:00 | YouTube | Create or confirm @watchdogindex channel; link channel to Google Ads | SETUP-YOUTUBE-CHANNEL | 04-paid-ads/youtube-ads.md | Coordinator | Recommended and Aggressive tiers only |
+| 15:00 | All | Choose budget tier and record it in budget-and-pacing.csv | DECISION-TIER | 04-paid-ads/paid-media-strategy.md | John | Lean, Recommended, or Aggressive |
 | 17:00 | YouTube Shorts | Post SV-001 | SV-001 | 03-social/short-form-video-scripts.md | John | Founder log: Two years teaching homeowners; now the agent side. CTA: Request a Founding Agent invite. utm_content=SV-001. @watchdogindex [create]. Title = hook; upload SRT. |
 
-#### Tuesday, September 29, 2026  (13 actions)
+#### Tuesday, September 29, 2026  (15 actions)
 
 | Time | Channel | Action | Asset | File | Owner | Notes |
 | --- | --- | --- | --- | --- | --- | --- |
@@ -35,17 +40,19 @@ Total actions: 1084. Days with actions: 95 of 95.
 | 07:30 | TikTok | Post SV-002 | SV-002 | 03-social/short-form-video-scripts.md | John | Tax bill translator: Assessment is not market value; 55.2% median ratio. CTA: Look up a property free. utm_content=SV-002. @thetaxwatchdog. Native upload; link in bio. |
 | 07:45 | LinkedIn | Publish LinkedIn post | LI-002 | 03-social/linkedin-posts.md | John | founder log post; track founder log |
 | 08:00 | LinkedIn video | Post SV-002 | SV-002 | 03-social/short-form-video-scripts.md | John | Tax bill translator: Assessment is not market value; 55.2% median ratio. CTA: Look up a property free. utm_content=SV-002. Native upload with custom thumbnail; link in first comment; max 3 hashtags. |
+| 09:00 | All | Paid review: kill, scale, refresh | REVIEW-WEEKLY | 04-paid-ads/paid-media-strategy.md | John | Setup checklist and tier decision |
 | 09:00 | Postcards | Start office mailing list build from NJ Real Estate Commission licensee search and public brokerage directories | PC-001 | agent-postcards.md | Coordinator | Target 300 offices per drop. Office addresses only. No personal addresses |
 | 09:00 | Setup | List import: launch list into ESP, tag source and role, dedupe against existing accounts, suppress unsubscribes | EM-SETUP-03 | 05-email-sms-outreach/waitlist-and-launch-list-nurture.md | Coordinator |  |
 | 09:30 | Broker outreach | Broker outreach block: 10 new brokers, 10 follow-ups (EM-BR01 to EM-BR05 by day, PH-BR01, PH-BR02, DM-BR01 to DM-BR03) | EM-BR01 | 05-email-sms-outreach/broker-and-team-lead-outreach.md | John |  |
 | 10:00 | Lunch-and-learn | Build the 60-office target sheet (5 per county across 12 counties) | EV-001 | brokerage-lunch-and-learn.md | Coordinator | Use target-list-template.csv |
+| 10:00 | Meta ads | Install Meta pixel site-wide via routing adapter; Conversions API from Stripe webhook; event_id dedup | SETUP-META-PIXEL | 04-paid-ads/utm-and-tracking.md | Engineering | Respect GPC and DNT as product-analytics.js does |
 | 11:00 | Facebook groups | Post group value post | FBG-001 | 03-social/facebook-group-playbook.md | John | From John profile; 2 to 3 groups; no link in body; 90/10 rule |
 | 12:00 | Instagram Reels | Post SV-002 | SV-002 | 03-social/short-form-video-scripts.md | John | Tax bill translator: Assessment is not market value; 55.2% median ratio. CTA: Look up a property free. utm_content=SV-002. @watchdogindex [create]. Choose cover; link in bio. |
 | 14:00 | Setup | Load EM-W01 to EM-W07 and EM-W05-B as scheduled sends with UTMs | EM-SETUP-04 | 05-email-sms-outreach/waitlist-and-launch-list-nurture.md | Coordinator | EM-W05 vs EM-W05-B chosen Oct 11 |
 | 15:30 | Agent DMs | Agent DM block: 20 warm agents (DM-A01 to DM-A10, EM-A01 to EM-A04 by day, PH-A01, PH-A02) | DM-A01 | 05-email-sms-outreach/agent-direct-outreach.md | John |  |
 | 17:00 | YouTube Shorts | Post SV-002 | SV-002 | 03-social/short-form-video-scripts.md | John | Tax bill translator: Assessment is not market value; 55.2% median ratio. CTA: Look up a property free. utm_content=SV-002. @watchdogindex [create]. Title = hook; upload SRT. |
 
-#### Wednesday, September 30, 2026  (20 actions)
+#### Wednesday, September 30, 2026  (21 actions)
 
 | Time | Channel | Action | Asset | File | Owner | Notes |
 | --- | --- | --- | --- | --- | --- | --- |
@@ -57,6 +64,7 @@ Total actions: 1084. Days with actions: 95 of 95.
 | 09:00 | Print | Send rate and deadline inquiries: NJ REALTORS member magazine and e-newsletter | PR-001 | print-ads.md | Coordinator | [verify rates and deadlines] |
 | 09:30 | Broker outreach | Broker outreach block: 10 new brokers, 10 follow-ups (EM-BR01 to EM-BR05 by day, PH-BR01, PH-BR02, DM-BR01 to DM-BR03) | EM-BR01 | 05-email-sms-outreach/broker-and-team-lead-outreach.md | John |  |
 | 09:30 | Print | Send rate and deadline inquiries: county and regional board newsletters | PR-005 | print-ads.md | Coordinator | [verify per board] |
+| 10:00 | All | Add GA4 events view_landing, trial_started, founding_invite_requested, free_account_created, academy_lesson_1_done; mark key events | SETUP-GA4-EVENTS | 04-paid-ads/utm-and-tracking.md | Engineering | Extend EVENTS set in product-analytics.js |
 | 10:00 | Instagram Stories | Post Story set | IG-S02 | 03-social/instagram-plan.md | Coordinator | Share to FB page Stories; save to matching highlight |
 | 10:00 | Lunch-and-learn | Send EV-001 broker pitch to the first 15 offices (Founding applicant offices first) | EV-001 | brokerage-lunch-and-learn.md | John | Goal: 3 sessions booked by Oct 11 |
 | 10:00 | Print | Send rate and deadline inquiry: Triple Play show guide and mobile app | PR-009 | print-ads.md | Coordinator | [verify with Triple Play exhibitor services] |
@@ -70,7 +78,7 @@ Total actions: 1084. Days with actions: 95 of 95.
 | 17:00 | YouTube Shorts | Post SV-003 | SV-003 | 03-social/short-form-video-scripts.md | John | Walk in knowing: Listing appointment tomorrow; five-year tax history. CTA: Look up a property free. utm_content=SV-003. @watchdogindex [create]. Title = hook; upload SRT. |
 | 19:00 | Video production | Film batch: SV-004 to SV-005 | SV-004 to SV-005 | 03-social/short-form-video-scripts.md | John | Wednesday batch. Schedule Thu and Fri posts tonight. |
 
-#### Thursday, October 01, 2026  (16 actions)
+#### Thursday, October 01, 2026  (18 actions)
 
 | Time | Channel | Action | Asset | File | Owner | Notes |
 | --- | --- | --- | --- | --- | --- | --- |
@@ -83,15 +91,17 @@ Total actions: 1084. Days with actions: 95 of 95.
 | 09:00 | Postcards | List build checkpoint: dedupe offices and confirm 300 mailable addresses for drop 1 | PC-001 | agent-postcards.md | Coordinator |  |
 | 09:00 | Setup | SMS provider setup: consent checkbox at trial and invite signup, consent record with timestamp, STOP handling, quiet hours 09:00 to 20:00 ET | EM-SETUP-05 | 05-email-sms-outreach/trial-onboarding-sequence.md | Engineering | Deadline Oct 9 |
 | 09:30 | Broker outreach | Broker outreach block: 10 new brokers, 10 follow-ups (EM-BR01 to EM-BR05 by day, PH-BR01, PH-BR02, DM-BR01 to DM-BR03) | EM-BR01 | 05-email-sms-outreach/broker-and-team-lead-outreach.md | John |  |
+| 10:00 | LinkedIn | Install LinkedIn Insight Tag via routing adapter; conversion rules; matched audiences | SETUP-LINKEDIN-TAG | 04-paid-ads/utm-and-tracking.md | Engineering |  |
 | 10:00 | Triple Play | Confirm booth pricing and availability and the sponsorship menu with the Triple Play organizer | EV-054 | triple-play-plan.md | Coordinator | Placeholders until confirmed |
 | 11:00 | Facebook groups | Post group value post | FBG-002 | 03-social/facebook-group-playbook.md | John | From John profile; 2 to 3 groups; no link in body; 90/10 rule |
+| 11:00 | Google Ads | Build campaign Q4-SEARCH-NJ-AGENTS with six ad groups, negatives, extensions, tracking template; leave paused | BUILD-GOOGLE-CAMPAIGN | 04-paid-ads/google-search-ads.md | Coordinator | AD-G-BRAND to AD-G-TP |
 | 12:00 | Instagram Reels | Post SV-004 | SV-004 | 03-social/short-form-video-scripts.md | John | Tax bill translator: Oct 1 assessment valuation date. CTA: Save this. utm_content=SV-004. @watchdogindex [create]. Choose cover; link in bio. |
 | 12:30 | Instagram | Publish carousel | IG-C01 | 03-social/instagram-plan.md | Coordinator | Also LinkedIn document post same day; FB page album next Monday |
 | 14:00 | Postcards | Design approval PC-001 (October 1 valuation date) | PC-001 | agent-postcards.md | John | Designer supplies front and back proof by Sep 30 |
 | 15:30 | Agent DMs | Agent DM block: 20 warm agents (DM-A01 to DM-A10, EM-A01 to EM-A04 by day, PH-A01, PH-A02) | DM-A01 | 05-email-sms-outreach/agent-direct-outreach.md | John |  |
 | 17:00 | YouTube Shorts | Post SV-004 | SV-004 | 03-social/short-form-video-scripts.md | John | Tax bill translator: Oct 1 assessment valuation date. CTA: Save this. utm_content=SV-004. @watchdogindex [create]. Title = hook; upload SRT. |
 
-#### Friday, October 02, 2026  (19 actions)
+#### Friday, October 02, 2026  (21 actions)
 
 | Time | Channel | Action | Asset | File | Owner | Notes |
 | --- | --- | --- | --- | --- | --- | --- |
@@ -103,6 +113,7 @@ Total actions: 1084. Days with actions: 95 of 95.
 | 09:00 | Setup | Trial automation build start: EM-T00 to EM-T16, SMS-T01 to SMS-T03, Path B EM-B01 to EM-B08, triggers and suppression rules per file | EM-SETUP-06 | 05-email-sms-outreach/trial-onboarding-sequence.md | Engineering | Deadline Oct 9; EM-T11 and SMS-T01 must not be suppressible |
 | 09:30 | Broker outreach | Broker outreach block: 10 new brokers, 10 follow-ups (EM-BR01 to EM-BR05 by day, PH-BR01, PH-BR02, DM-BR01 to DM-BR03) | EM-BR01 | 05-email-sms-outreach/broker-and-team-lead-outreach.md | John |  |
 | 10:00 | Instagram Stories | Post Story set | IG-S03 | 03-social/instagram-plan.md | Coordinator | Share to FB page Stories; save to matching highlight |
+| 10:00 | Meta ads | Upload customer exclusion list and launch list custom audience (hashed); build INT and EMP audiences; verify pixel events in Events Manager | SETUP-META-AUDIENCES | 04-paid-ads/meta-ads.md | Coordinator | Test-events tool must show StartTrial deduplicated |
 | 10:00 | Print | Start print ad layouts PR-001 to PR-008 at four sizes | PR-001 | print-ads.md | Designer | Trim and bleed pending rate cards [verify] |
 | 11:00 | Triple Play | Triple Play go or no-go decision (Path A booth or Path B floor); write the EV-054 memo | EV-054 | triple-play-plan.md | John | Five criteria in triple-play-plan.md |
 | 12:00 | Decision | Owner decisions due: trial terms, Founding perks, Triple Play go/no-go, Academy blocking or nudged |  | 01-strategy/master-plan.md | John | Section 14 of the master plan |
@@ -113,6 +124,7 @@ Total actions: 1084. Days with actions: 95 of 95.
 | 16:00 | Pipeline review | Weekly pipeline review (offices pitched; sessions booked; Founding applicants; Triple Play decision) | EV-011 | brokerage-lunch-and-learn.md | John |  |
 | 16:00 | Review | Billing gate check: is live_billing_lifecycle passed and public checkout open? If not, invite door only next week |  | 01-strategy/trial-decision.md | John |  |
 | 16:30 | Review | Weekly scorecard: fill in the KPI sheet, decide kill or scale for each engine |  | 01-strategy/kpi-dashboard-template.csv | John |  |
+| 17:00 | Meta ads | Creative due: CR-01, CR-02, CR-10, CR-11, CR-12 in three sizes | CR-01 | 04-paid-ads/creative-briefs.md | Designer | Phase 0 set; John approves same day |
 | 17:00 | YouTube Shorts | Post SV-005 | SV-005 | 03-social/short-form-video-scripts.md | John | Postcard Friday: Owner names not public; cards go to Current Resident. CTA: Save this. utm_content=SV-005. @watchdogindex [create]. Title = hook; upload SRT. |
 
 #### Saturday, October 03, 2026  (2 actions)
@@ -130,11 +142,15 @@ Total actions: 1084. Days with actions: 95 of 95.
 
 ### Week of Monday, October 05
 
-#### Monday, October 05, 2026  (17 actions)
+#### Monday, October 05, 2026  (22 actions)
 
 | Time | Channel | Action | Asset | File | Owner | Notes |
 | --- | --- | --- | --- | --- | --- | --- |
 | 06:30 | Email | Send Watchdog Agent Weekly issue 1: Oct 1 valuation date, add five past clients, door opens Oct 12 | EM-N01 | 05-email-sms-outreach/weekly-agent-email.md | Coordinator | First issue; whole agent list |
+| 07:00 | Google Ads | Enable BRAND and INTENT ad groups at half the Phase 1 budget; manual CPC | AD-G-BRAND | 04-paid-ads/google-search-ads.md | Coordinator |  |
+| 07:00 | LinkedIn | Aggressive tier only: document ad AD-L-003 on at $60 for the week | AD-L-003 | 04-paid-ads/linkedin-ads.md | Coordinator | Seeds Insight Tag audience |
+| 07:00 | Meta ads | Launch Q4-P0-CONTENT with AD-M-001 to AD-M-005; AD-M-006 to LIST audience | AD-M-001 | 04-paid-ads/meta-ads.md | Coordinator | Content and free lookup only; no trial ads in Phase 0 |
+| 07:00 | YouTube | Aggressive tier only: AD-Y-001 CPV test at $60 for the week | AD-Y-001 | 04-paid-ads/youtube-ads.md | Coordinator |  |
 | 07:15 | LinkedIn | LinkedIn engagement block | LI-ENG | 03-social/linkedin-founder-playbook.md | John | 20 minutes: reply to comments; 6 to 8 comments on broker/team-leader/association/partner posts; accept connections; send day-after DMs |
 | 07:30 | TikTok | Post SV-006 | SV-006 | 03-social/short-form-video-scripts.md | John | The Monday desk: Material assessment increase sample card. CTA: Request a Founding Agent invite. utm_content=SV-006. @thetaxwatchdog. Native upload; link in bio. |
 | 08:15 | LinkedIn | Publish LinkedIn post | LI-006 | 03-social/linkedin-posts.md | John | teaching post; track agent workflow |
@@ -143,6 +159,7 @@ Total actions: 1084. Days with actions: 95 of 95.
 | 09:00 | Founding Agents | Founding Agents application page goes live (RF-001) | RF-001 | founding-agent-program.md | Coordinator | Link from /for/real-estate-agents and /agents/trial |
 | 09:00 | Postcards | Upload and pay PC-001 drop (300 offices) | PC-001 | agent-postcards.md | Coordinator | Postcard Studio if office addressing confirmed; otherwise vendor [placeholder] |
 | 09:30 | Broker outreach | Broker outreach block: 10 new brokers, 10 follow-ups (EM-BR01 to EM-BR05 by day, PH-BR01, PH-BR02, DM-BR01 to DM-BR03) | EM-BR01 | 05-email-sms-outreach/broker-and-team-lead-outreach.md | John |  |
+| 10:00 | Google Ads | Verify GA4 conversion import into Google Ads shows the five imported actions recording | SETUP-GOOGLE-IMPORT | 04-paid-ads/utm-and-tracking.md | Engineering |  |
 | 10:00 | Instagram Stories | Post Story set | IG-S04 | 03-social/instagram-plan.md | Coordinator | Share to FB page Stories; save to matching highlight |
 | 10:00 | Setup | Load weekly template and EM-N02 to EM-N13 drafts; document Sunday-night CTA swap (trial vs invite) procedure | EM-SETUP-07 | 05-email-sms-outreach/weekly-agent-email.md | Coordinator |  |
 | 10:00 | Triple Play | Book the Triple Play booth (Path A) or register attendees (Path B) | EV-040 | triple-play-plan.md | John | Deposit or registrations paid today |
@@ -152,7 +169,7 @@ Total actions: 1084. Days with actions: 95 of 95.
 | 15:30 | Agent DMs | Agent DM block: 20 warm agents (DM-A01 to DM-A10, EM-A01 to EM-A04 by day, PH-A01, PH-A02) | DM-A01 | 05-email-sms-outreach/agent-direct-outreach.md | John |  |
 | 17:00 | YouTube Shorts | Post SV-006 | SV-006 | 03-social/short-form-video-scripts.md | John | The Monday desk: Material assessment increase sample card. CTA: Request a Founding Agent invite. utm_content=SV-006. @watchdogindex [create]. Title = hook; upload SRT. |
 
-#### Tuesday, October 06, 2026  (13 actions)
+#### Tuesday, October 06, 2026  (14 actions)
 
 | Time | Channel | Action | Asset | File | Owner | Notes |
 | --- | --- | --- | --- | --- | --- | --- |
@@ -161,6 +178,7 @@ Total actions: 1084. Days with actions: 95 of 95.
 | 07:30 | TikTok | Post SV-007 | SV-007 | 03-social/short-form-video-scripts.md | John | Tax bill translator: Equalization ratio explains assessed 250 vs listed 480. CTA: Look up a property free. utm_content=SV-007. @thetaxwatchdog. Native upload; link in bio. |
 | 07:45 | LinkedIn | Publish LinkedIn post | LI-007 | 03-social/linkedin-posts.md | John | contrarian post; track teaching |
 | 08:00 | LinkedIn video | Post SV-007 | SV-007 | 03-social/short-form-video-scripts.md | John | Tax bill translator: Equalization ratio explains assessed 250 vs listed 480. CTA: Look up a property free. utm_content=SV-007. Native upload with custom thumbnail; link in first comment; max 3 hashtags. |
+| 09:00 | All | Paid review: kill, scale, refresh | REVIEW-WEEKLY | 04-paid-ads/paid-media-strategy.md | John | Search terms, kill and scale rules, frequency, pool sizes, budget pacing |
 | 09:00 | Associations | Association outreach wave 1: statewide plus the five largest boards (RF-050) | RF-050 | partners-and-associations.md | Coordinator | John signs; Coordinator sends |
 | 09:00 | Events | Confirm three brokerage lunch-and-learn dates and post break-room flyers with permission | EV-002 | office-flyers-and-sell-sheet.md | John | Dates [placeholder] |
 | 09:30 | Broker outreach | Broker outreach block: 10 new brokers, 10 follow-ups (EM-BR01 to EM-BR05 by day, PH-BR01, PH-BR02, DM-BR01 to DM-BR03) | EM-BR01 | 05-email-sms-outreach/broker-and-team-lead-outreach.md | John |  |
@@ -170,7 +188,7 @@ Total actions: 1084. Days with actions: 95 of 95.
 | 15:30 | Agent DMs | Agent DM block: 20 warm agents (DM-A01 to DM-A10, EM-A01 to EM-A04 by day, PH-A01, PH-A02) | DM-A01 | 05-email-sms-outreach/agent-direct-outreach.md | John |  |
 | 17:00 | YouTube Shorts | Post SV-007 | SV-007 | 03-social/short-form-video-scripts.md | John | Tax bill translator: Equalization ratio explains assessed 250 vs listed 480. CTA: Look up a property free. utm_content=SV-007. @watchdogindex [create]. Title = hook; upload SRT. |
 
-#### Wednesday, October 07, 2026  (20 actions)
+#### Wednesday, October 07, 2026  (22 actions)
 
 | Time | Channel | Action | Asset | File | Owner | Notes |
 | --- | --- | --- | --- | --- | --- | --- |
@@ -191,11 +209,13 @@ Total actions: 1084. Days with actions: 95 of 95.
 | 14:00 | Setup | Load referral EM-R01 to EM-R05, EM-F01, EM-F02 template; broker EM-BR01 to EM-BR07 and EM-TL01; agent EM-A01 to EM-A04; event EM-E01 to EM-E11 | EM-SETUP-10 | 05-email-sms-outreach/referral-and-founding-emails.md | Coordinator | Cold sequences on the warmed domain |
 | 15:00 | Postcards | PC-001 estimated mail date (prints 1 to 3 business days after upload) | PC-001 | agent-postcards.md | Coordinator | In-home window about Oct 9 to Oct 14 |
 | 15:30 | Agent DMs | Agent DM block: 20 warm agents (DM-A01 to DM-A10, EM-A01 to EM-A04 by day, PH-A01, PH-A02) | DM-A01 | 05-email-sms-outreach/agent-direct-outreach.md | John |  |
+| 17:00 | Meta ads | Creative due: CR-03, CR-04, CR-05, CR-06, CR-07 in three sizes | CR-03 | 04-paid-ads/creative-briefs.md | Designer | Phase 1 set |
 | 17:00 | Milestone | Operations checklist due (O1 to O7) |  | 01-strategy/launch-readiness-checklist.md | Coordinator |  |
+| 17:00 | YouTube | John records AD-Y-001, AD-Y-002, AD-Y-004 on camera | AD-Y-001 | 04-paid-ads/youtube-ads.md | John | One session, plain wall |
 | 17:00 | YouTube Shorts | Post SV-008 | SV-008 | 03-social/short-form-video-scripts.md | John | Client asked me: Am I being overcharged; answer with Uniformity evidence. CTA: Look up a property free. utm_content=SV-008. @watchdogindex [create]. Title = hook; upload SRT. |
 | 19:00 | Video production | Film batch: SV-009 to SV-010 | SV-009 to SV-010 | 03-social/short-form-video-scripts.md | John | Wednesday batch. Town Compare screen for SV-010. |
 
-#### Thursday, October 08, 2026  (13 actions)
+#### Thursday, October 08, 2026  (14 actions)
 
 | Time | Channel | Action | Asset | File | Owner | Notes |
 | --- | --- | --- | --- | --- | --- | --- |
@@ -208,12 +228,13 @@ Total actions: 1084. Days with actions: 95 of 95.
 | 09:30 | Broker outreach | Broker outreach block: 10 new brokers, 10 follow-ups (EM-BR01 to EM-BR05 by day, PH-BR01, PH-BR02, DM-BR01 to DM-BR03) | EM-BR01 | 05-email-sms-outreach/broker-and-team-lead-outreach.md | John |  |
 | 10:00 | Lunch-and-learn | Finish the 14-slide deck and the screenshot fallback pack | EV-004 | brokerage-lunch-and-learn.md | John | Designer lays out; every sample screen labeled sample |
 | 11:00 | Facebook groups | Post group value post | FBG-004 | 03-social/facebook-group-playbook.md | John | From John profile; 2 to 3 groups; no link in body; 90/10 rule |
+| 12:00 | All | /agents/trial and /agents/trial/thanks live on staging with all events firing; Variant A and B switch tested | LP-AGENTS-TRIAL | 04-paid-ads/landing-page-specs.md | Engineering | Clean route registered; canonical without /property/ |
 | 12:00 | Instagram Reels | Post SV-009 | SV-009 | 03-social/short-form-video-scripts.md | John | Objection: I already pay for PropStream; compare the job not the bill. CTA: Look up a property free. utm_content=SV-009. @watchdogindex [create]. Choose cover; link in bio. |
 | 12:30 | Instagram | Publish carousel | IG-C02 | 03-social/instagram-plan.md | Coordinator | Also LinkedIn document post same day; FB page album next Monday |
 | 15:30 | Agent DMs | Agent DM block: 20 warm agents (DM-A01 to DM-A10, EM-A01 to EM-A04 by day, PH-A01, PH-A02) | DM-A01 | 05-email-sms-outreach/agent-direct-outreach.md | John |  |
 | 17:00 | YouTube Shorts | Post SV-009 | SV-009 | 03-social/short-form-video-scripts.md | John | Objection: I already pay for PropStream; compare the job not the bill. CTA: Look up a property free. utm_content=SV-009. @watchdogindex [create]. Title = hook; upload SRT. |
 
-#### Friday, October 09, 2026  (23 actions)
+#### Friday, October 09, 2026  (27 actions)
 
 | Time | Channel | Action | Asset | File | Owner | Notes |
 | --- | --- | --- | --- | --- | --- | --- |
@@ -225,9 +246,11 @@ Total actions: 1084. Days with actions: 95 of 95.
 | 09:00 | Facebook page | Publish FB page post | FB-006 | 03-social/facebook-page-posts.md | Coordinator | Native video where the post says reuse this week SV script |
 | 09:00 | Print | Send sell sheet and flyer and table tents and calendar cards and business cards to print | EV-001 | office-flyers-and-sell-sheet.md | Coordinator | Quantities [placeholder] |
 | 09:30 | Broker outreach | Broker outreach block: 10 new brokers, 10 follow-ups (EM-BR01 to EM-BR05 by day, PH-BR01, PH-BR02, DM-BR01 to DM-BR03) | EM-BR01 | 05-email-sms-outreach/broker-and-team-lead-outreach.md | John |  |
+| 10:00 | All | Landing page QA at 320, 390, 430, 768, 1440 and mobile WebKit; Playwright targeted run; Lighthouse mobile | LP-QA | 04-paid-ads/landing-page-specs.md | John | Fix hard failures before Oct 12 |
 | 10:00 | Instagram Stories | Post Story set | IG-S06 | 03-social/instagram-plan.md | Coordinator | Share to FB page Stories; save to matching highlight |
 | 11:00 | Print | Artwork deadline estimate: NJ REALTORS member magazine Nov/Dec issue | PR-001 | print-ads.md | Designer | [verify actual deadline] |
 | 12:00 | Instagram Reels | Post SV-010 | SV-010 | 03-social/short-form-video-scripts.md | John | Town compare: Which town has lower taxes is the wrong question. CTA: Comment TOWN. utm_content=SV-010. @watchdogindex [create]. Choose cover; link in bio. |
+| 12:00 | Meta ads | Build Q4-P1-TRIAL, Q4-P1-INVITE, Q4-RT campaigns paused with AD-M-007 to AD-M-016 and AD-R-001 to AD-R-010 | AD-M-007 | 04-paid-ads/meta-ads.md | Coordinator |  |
 | 12:00 | Setup | DEADLINE: trial sequence automation live (Path A and Path B) | EM-SETUP-12 | 05-email-sms-outreach/trial-onboarding-sequence.md | Engineering | Hard deadline |
 | 12:00 | Setup | DEADLINE: SMS consent checkbox live at signup | EM-SETUP-13 | 05-email-sms-outreach/trial-onboarding-sequence.md | Engineering | Hard deadline |
 | 13:00 | Facebook groups | Group engagement: 20 minutes of helpful comments | FBG-ENG | 03-social/facebook-group-playbook.md | John | Search groups for tax assessment appeal revaluation permit flood; log count in target sheet |
@@ -238,7 +261,9 @@ Total actions: 1084. Days with actions: 95 of 95.
 | 16:00 | Pipeline review | Weekly pipeline review | EV-011 | brokerage-lunch-and-learn.md | John |  |
 | 16:00 | Review | Billing gate check: is live_billing_lifecycle passed and public checkout open? If not, invite door only next week |  | 01-strategy/trial-decision.md | John |  |
 | 16:30 | Review | Weekly scorecard: fill in the KPI sheet, decide kill or scale for each engine |  | 01-strategy/kpi-dashboard-template.csv | John |  |
+| 17:00 | LinkedIn | Build form Q4-LNL-FORM and AD-L-001, AD-L-002, AD-L-007 paused | AD-L-001 | 04-paid-ads/linkedin-ads.md | Coordinator | Privacy URL confirmed |
 | 17:00 | Milestone | Engineering, legal, content and commercial checklist items due |  | 01-strategy/launch-readiness-checklist.md | Engineering |  |
+| 17:00 | YouTube | Video cuts due: AD-Y-001, AD-Y-002, AD-Y-004 with captions and end card | AD-Y-004 | 04-paid-ads/youtube-ads.md | Designer |  |
 | 17:00 | YouTube Shorts | Post SV-010 | SV-010 | 03-social/short-form-video-scripts.md | John | Town compare: Which town has lower taxes is the wrong question. CTA: Comment TOWN. utm_content=SV-010. @watchdogindex [create]. Title = hook; upload SRT. |
 
 #### Saturday, October 10, 2026  (3 actions)
@@ -249,24 +274,30 @@ Total actions: 1084. Days with actions: 95 of 95.
 | 10:00 | Light day | Saturday light: 15 minutes replying to comments and DMs; write down 3 content ideas from this week's questions |  | 02-calendar/weekly-operating-rhythm.md | John |  |
 | 10:00 | Setup | Final proof of EM-W05 and EM-W05-B and EM-N02 both CTA states | EM-SETUP-14 | 05-email-sms-outreach/waitlist-and-launch-list-nurture.md | John |  |
 
-#### Sunday, October 11, 2026  (2 actions)
+#### Sunday, October 11, 2026  (3 actions)
 
 | Time | Channel | Action | Asset | File | Owner | Notes |
 | --- | --- | --- | --- | --- | --- | --- |
 | 17:00 | Setup | Billing-state call: send EM-W05 (checkout open) or EM-W05-B (invite only) on Oct 12; set EM-N02 CTA to match | EM-SETUP-15 | 05-email-sms-outreach/waitlist-and-launch-list-nurture.md | John | Decision recorded in launch-control file |
+| 18:00 | All | Confirm billing gate state; choose Variant A or B; confirm tier and Phase 1 budgets | DECISION-VARIANT | 04-paid-ads/paid-media-strategy.md | John | If gate closed, Phase 1 runs on invite path |
 | 19:00 | Video production | Film batch: SV-011 to SV-013 | SV-011 to SV-013 | 03-social/short-form-video-scripts.md | John | Phase 1 opens tomorrow. Confirm billing gate state before filming SV-011 trial lines. |
 
 ## Phase 1: Founding Agents open
 
 ### Week of Monday, October 12
 
-#### Monday, October 12, 2026  (18 actions)
+#### Monday, October 12, 2026  (23 actions)
 
 | Time | Channel | Action | Asset | File | Owner | Notes |
 | --- | --- | --- | --- | --- | --- | --- |
 | 06:00 | Milestone | LAUNCH DAY: both doors open (14-day Agent trial and Founding Agent invites). Run the launch-day sequence |  | 01-strategy/launch-readiness-checklist.md | John | Phase 1 begins. If the billing gate is closed, invite door only |
 | 06:30 | Email | Send Watchdog Agent Weekly issue 2: launch day, assessment is not a price | EM-N02 | 05-email-sms-outreach/weekly-agent-email.md | Coordinator | CTA per Oct 11 decision |
+| 07:00 | Google Ads | All ad groups on except TP; Phase 1 budget; Maximize clicks with bid limit | AD-G-INTENT | 04-paid-ads/google-search-ads.md | Coordinator | Budget change at phase boundary |
+| 07:00 | LinkedIn | Launch form campaign AD-L-001 and AD-L-002; AD-L-007 trial ad | AD-L-001 | 04-paid-ads/linkedin-ads.md | Coordinator | Recommended and Aggressive only |
+| 07:00 | Meta ads | Launch Q4-P1-TRIAL and Q4-P1-INVITE; Phase 1 budget; hook test CR-01 vs CR-07 vs SV video | AD-M-007 | 04-paid-ads/meta-ads.md | Coordinator | Budget change at phase boundary |
 | 07:00 | PR | Send press release PR-REL-01 to media list and post on site | PR-REL-01 | press-release-and-pr.md | John | Wire service [placeholder verify cost]. Press route [placeholder] |
+| 07:00 | Retargeting | Launch Q4-RT stages 1 to 3 and checkout abandoner ad set | AD-R-001 | 04-paid-ads/retargeting.md | Coordinator | Merge pools under 1,000 |
+| 07:00 | YouTube | Launch custom intent with AD-Y-001 and AD-Y-004; placements with AD-Y-002 | AD-Y-001 | 04-paid-ads/youtube-ads.md | Coordinator | Placements list filled by Oct 12 |
 | 07:15 | LinkedIn | LinkedIn engagement block | LI-ENG | 03-social/linkedin-founder-playbook.md | John | 20 minutes: reply to comments; 6 to 8 comments on broker/team-leader/association/partner posts; accept connections; send day-after DMs |
 | 07:30 | TikTok | Post SV-011 | SV-011 | 03-social/short-form-video-scripts.md | John | Founder log: Door opens today; trial and invite explained. CTA: Start your 14-day Agent trial or Request a Founding Agent invite. utm_content=SV-011. @thetaxwatchdog. Native upload; link in bio. |
 | 08:00 | Founding Agents | Founding Agent invite batch 1: 20 acceptance messages sent (RF-002) with code FOUNDING-B1 | RF-002 | founding-agent-program.md | Coordinator | Accept within 7 days |
@@ -283,7 +314,7 @@ Total actions: 1084. Days with actions: 95 of 95.
 | 15:30 | Agent DMs | Agent DM block: 20 warm agents (DM-A01 to DM-A10, EM-A01 to EM-A04 by day, PH-A01, PH-A02) | DM-A01 | 05-email-sms-outreach/agent-direct-outreach.md | John |  |
 | 17:00 | YouTube Shorts | Post SV-011 | SV-011 | 03-social/short-form-video-scripts.md | John | Founder log: Door opens today; trial and invite explained. CTA: Start your 14-day Agent trial or Request a Founding Agent invite. utm_content=SV-011. @watchdogindex [create]. Title = hook; upload SRT. |
 
-#### Tuesday, October 13, 2026  (12 actions)
+#### Tuesday, October 13, 2026  (13 actions)
 
 | Time | Channel | Action | Asset | File | Owner | Notes |
 | --- | --- | --- | --- | --- | --- | --- |
@@ -291,6 +322,7 @@ Total actions: 1084. Days with actions: 95 of 95.
 | 07:30 | TikTok | Post SV-012 | SV-012 | 03-social/short-form-video-scripts.md | John | Tax bill translator: Chapter 123 in plain words. CTA: Start your 14-day Agent trial. utm_content=SV-012. @thetaxwatchdog. Native upload; link in bio. |
 | 07:45 | LinkedIn | Publish LinkedIn post | LI-012 | 03-social/linkedin-posts.md | John | teaching post; track teaching |
 | 08:00 | LinkedIn video | Post SV-012 | SV-012 | 03-social/short-form-video-scripts.md | John | Tax bill translator: Chapter 123 in plain words. CTA: Start your 14-day Agent trial. utm_content=SV-012. Native upload with custom thumbnail; link in first comment; max 3 hashtags. |
+| 09:00 | All | Paid review: kill, scale, refresh | REVIEW-WEEKLY | 04-paid-ads/paid-media-strategy.md | John | Search terms, kill and scale rules, frequency, pool sizes, budget pacing |
 | 09:00 | PR | Pitch wave 2: launch pitch to full media list | PR-P01 | press-release-and-pr.md | John | Second send of PR-P05 to outlets that did not reply |
 | 09:00 | Partners | Partner outreach wave 1: title companies; mortgage lenders; real estate attorneys (RF-053) | RF-053 | partners-and-associations.md | Coordinator | January webinar co-host ask |
 | 09:30 | Broker outreach | Broker outreach block: 10 new brokers, 10 follow-ups (EM-BR01 to EM-BR05 by day, PH-BR01, PH-BR02, DM-BR01 to DM-BR03) | EM-BR01 | 05-email-sms-outreach/broker-and-team-lead-outreach.md | John |  |
@@ -300,7 +332,7 @@ Total actions: 1084. Days with actions: 95 of 95.
 | 15:30 | Agent DMs | Agent DM block: 20 warm agents (DM-A01 to DM-A10, EM-A01 to EM-A04 by day, PH-A01, PH-A02) | DM-A01 | 05-email-sms-outreach/agent-direct-outreach.md | John |  |
 | 17:00 | YouTube Shorts | Post SV-012 | SV-012 | 03-social/short-form-video-scripts.md | John | Tax bill translator: Chapter 123 in plain words. CTA: Start your 14-day Agent trial. utm_content=SV-012. @watchdogindex [create]. Title = hook; upload SRT. |
 
-#### Wednesday, October 14, 2026  (20 actions)
+#### Wednesday, October 14, 2026  (21 actions)
 
 | Time | Channel | Action | Asset | File | Owner | Notes |
 | --- | --- | --- | --- | --- | --- | --- |
@@ -313,6 +345,7 @@ Total actions: 1084. Days with actions: 95 of 95.
 | 09:30 | Broker outreach | Broker outreach block: 10 new brokers, 10 follow-ups (EM-BR01 to EM-BR05 by day, PH-BR01, PH-BR02, DM-BR01 to DM-BR03) | EM-BR01 | 05-email-sms-outreach/broker-and-team-lead-outreach.md | John |  |
 | 09:30 | Email | Send lunch-and-learn invite to [Office 1] agents (session 2026-10-21) | EM-E01 | 05-email-sms-outreach/event-emails.md | Coordinator | Placeholder date; replace with booked session for [Office 1]; broker OK required first |
 | 10:00 | Instagram Stories | Post Story set | IG-S08 | 03-social/instagram-plan.md | Coordinator | Share to FB page Stories; save to matching highlight |
+| 10:00 | LinkedIn | Sponsor John's Oct 1 post as thought leader ad AD-L-004 | AD-L-004 | 04-paid-ads/linkedin-ads.md | John | Needs authorization in Campaign Manager |
 | 10:00 | Lunch-and-learn | Send EV-001 to the next 15 offices | EV-001 | brokerage-lunch-and-learn.md | John |  |
 | 10:00 | Lunch-and-learn | Session 1 prep: headcount; food order; sign-in sheet; QR card; offer card; sell sheets; volunteer address; office code; screenshots | EV-006 | brokerage-lunch-and-learn.md | Coordinator | EV-005 EV-007 EV-008 EV-012 |
 | 12:00 | Events | Lunch-and-learn 1 [brokerage placeholder] | EV-001 | office-flyers-and-sell-sheet.md | John | Bring sell sheets and calendar cards and sign-in sheet EV-012 |
@@ -343,7 +376,7 @@ Total actions: 1084. Days with actions: 95 of 95.
 | 17:00 | YouTube Shorts | Post SV-014 | SV-014 | 03-social/short-form-video-scripts.md | John | Client asked me: Should I appeal; evidence and referral not a verdict. CTA: Start your 14-day Agent trial or Request a Founding Agent invite. utm_content=SV-014. @watchdogindex [create]. Title = hook; upload SRT. |
 | 17:30 | Founding Agents | Batch 1 onboarding call B | RF-002 | founding-agent-program.md | John |  |
 
-#### Friday, October 16, 2026  (20 actions)
+#### Friday, October 16, 2026  (21 actions)
 
 | Time | Channel | Action | Asset | File | Owner | Notes |
 | --- | --- | --- | --- | --- | --- | --- |
@@ -366,6 +399,7 @@ Total actions: 1084. Days with actions: 95 of 95.
 | 16:00 | Pipeline review | Weekly pipeline review: sessions; Founding metrics; referrals; pilots; partners; Triple Play | EV-011 | brokerage-lunch-and-learn.md | John | Scorecards EV-011 reviewed |
 | 16:00 | Review | Billing gate check: is live_billing_lifecycle passed and public checkout open? If not, invite door only next week |  | 01-strategy/trial-decision.md | John |  |
 | 16:30 | Review | Weekly scorecard: fill in the KPI sheet, decide kill or scale for each engine |  | 01-strategy/kpi-dashboard-template.csv | John |  |
+| 17:00 | Meta ads | Creative due: CR-08, CR-09 in three sizes | CR-08 | 04-paid-ads/creative-briefs.md | Designer | Phase 2 and 3 set; CR-09 booth placeholder stays |
 | 17:00 | YouTube Shorts | Post SV-015 | SV-015 | 03-social/short-form-video-scripts.md | John | Postcard Friday: $1.79 per card math on a 200-home farm. CTA: Start your 14-day Agent trial. utm_content=SV-015. @watchdogindex [create]. Title = hook; upload SRT. |
 
 #### Saturday, October 17, 2026  (1 actions)
@@ -382,11 +416,12 @@ Total actions: 1084. Days with actions: 95 of 95.
 
 ### Week of Monday, October 19
 
-#### Monday, October 19, 2026  (19 actions)
+#### Monday, October 19, 2026  (20 actions)
 
 | Time | Channel | Action | Asset | File | Owner | Notes |
 | --- | --- | --- | --- | --- | --- | --- |
 | 06:30 | Email | Send Watchdog Agent Weekly issue 3: Chapter 123, reading the desk, first lunch-and-learns | EM-N03 | 05-email-sms-outreach/weekly-agent-email.md | Coordinator |  |
+| 07:00 | Meta ads | Creative refresh: angle test AD-M-009, AD-M-010, AD-M-012, AD-M-013 on the winning hook style | REFRESH-CREATIVE | 04-paid-ads/meta-ads.md | Coordinator | Every 2 weeks |
 | 07:15 | LinkedIn | LinkedIn engagement block | LI-ENG | 03-social/linkedin-founder-playbook.md | John | 20 minutes: reply to comments; 6 to 8 comments on broker/team-leader/association/partner posts; accept connections; send day-after DMs |
 | 07:30 | TikTok | Post SV-016 | SV-016 | 03-social/short-form-video-scripts.md | John | The Monday desk: Recent recorded transfer; post-closing tax check-in. CTA: Start your 14-day Agent trial. utm_content=SV-016. @thetaxwatchdog. Native upload; link in bio. |
 | 08:00 | Founding Agents | Founding Agent invite batch 2: 20 acceptance messages sent (RF-002) with code FOUNDING-B2 | RF-002 | founding-agent-program.md | Coordinator | Accept within 7 days |
@@ -406,7 +441,7 @@ Total actions: 1084. Days with actions: 95 of 95.
 | 15:30 | Agent DMs | Agent DM block: 20 warm agents (DM-A01 to DM-A10, EM-A01 to EM-A04 by day, PH-A01, PH-A02) | DM-A01 | 05-email-sms-outreach/agent-direct-outreach.md | John |  |
 | 17:00 | YouTube Shorts | Post SV-016 | SV-016 | 03-social/short-form-video-scripts.md | John | The Monday desk: Recent recorded transfer; post-closing tax check-in. CTA: Start your 14-day Agent trial. utm_content=SV-016. @watchdogindex [create]. Title = hook; upload SRT. |
 
-#### Tuesday, October 20, 2026  (14 actions)
+#### Tuesday, October 20, 2026  (15 actions)
 
 | Time | Channel | Action | Asset | File | Owner | Notes |
 | --- | --- | --- | --- | --- | --- | --- |
@@ -414,6 +449,7 @@ Total actions: 1084. Days with actions: 95 of 95.
 | 07:30 | TikTok | Post SV-017 | SV-017 | 03-social/short-form-video-scripts.md | John | Tax bill translator: Revaluation vs reassessment; rate resets too. CTA: Start your 14-day Agent trial. utm_content=SV-017. @thetaxwatchdog. Native upload; link in bio. |
 | 07:45 | LinkedIn | Publish LinkedIn post | LI-017 | 03-social/linkedin-posts.md | John | teaching post; track agent workflow |
 | 08:00 | LinkedIn video | Post SV-017 | SV-017 | 03-social/short-form-video-scripts.md | John | Tax bill translator: Revaluation vs reassessment; rate resets too. CTA: Start your 14-day Agent trial. utm_content=SV-017. Native upload with custom thumbnail; link in first comment; max 3 hashtags. |
+| 09:00 | All | Paid review: kill, scale, refresh | REVIEW-WEEKLY | 04-paid-ads/paid-media-strategy.md | John | Search terms, kill and scale rules, frequency, pool sizes, budget pacing |
 | 09:00 | Associations | Association outreach wave 2: next six boards (RF-050) | RF-050 | partners-and-associations.md | Coordinator |  |
 | 09:00 | Direct mail | Mail broker-owner letters DM-L01 | DM-L01 | sponsorships-and-local.md | Coordinator | First-class stamp. Envelope teaser per file |
 | 09:00 | Lunch-and-learn | Session 1 follow-up: attendee email (EV-009); broker thank-you (EV-010); scorecard (EV-011); consented list to 05 | EV-009 | brokerage-lunch-and-learn.md | Coordinator | Within 24 hours |
@@ -471,7 +507,7 @@ Total actions: 1084. Days with actions: 95 of 95.
 | 17:00 | YouTube Shorts | Post SV-019 | SV-019 | 03-social/short-form-video-scripts.md | John | Objection: No time to learn another tool; Agent Academy 8 lessons. CTA: Start your 14-day Agent trial. utm_content=SV-019. @watchdogindex [create]. Title = hook; upload SRT. |
 | 17:30 | Founding Agents | Batch 2 onboarding call B | RF-002 | founding-agent-program.md | John |  |
 
-#### Friday, October 23, 2026  (20 actions)
+#### Friday, October 23, 2026  (21 actions)
 
 | Time | Channel | Action | Asset | File | Owner | Notes |
 | --- | --- | --- | --- | --- | --- | --- |
@@ -494,6 +530,7 @@ Total actions: 1084. Days with actions: 95 of 95.
 | 16:00 | Pipeline review | Weekly pipeline review: sessions; Founding metrics; referrals; pilots; partners; Triple Play | EV-011 | brokerage-lunch-and-learn.md | John | Scorecards EV-011 reviewed |
 | 16:00 | Review | Billing gate check: is live_billing_lifecycle passed and public checkout open? If not, invite door only next week |  | 01-strategy/trial-decision.md | John |  |
 | 16:30 | Review | Weekly scorecard: fill in the KPI sheet, decide kill or scale for each engine |  | 01-strategy/kpi-dashboard-template.csv | John |  |
+| 17:00 | YouTube | Video cuts due: AD-Y-003, AD-Y-005, AD-Y-006 | AD-Y-005 | 04-paid-ads/youtube-ads.md | Designer | John records by Oct 20 |
 | 17:00 | YouTube Shorts | Post SV-020 | SV-020 | 03-social/short-form-video-scripts.md | John | Postcard Friday: Name brokerage and disclosure on every card. CTA: Save this. utm_content=SV-020. @watchdogindex [create]. Title = hook; upload SRT. |
 
 #### Saturday, October 24, 2026  (2 actions)
@@ -503,19 +540,21 @@ Total actions: 1084. Days with actions: 95 of 95.
 | 09:00 | YouTube | Publish long-form video | YT-L02 | 03-social/youtube-and-cross-posting.md | John | FB page link post and LinkedIn summary following Monday; 3 Shorts over 2 weeks |
 | 10:00 | Light day | Saturday light: 15 minutes replying to comments and DMs; write down 3 content ideas from this week's questions |  | 02-calendar/weekly-operating-rhythm.md | John |  |
 
-#### Sunday, October 25, 2026  (1 actions)
+#### Sunday, October 25, 2026  (2 actions)
 
 | Time | Channel | Action | Asset | File | Owner | Notes |
 | --- | --- | --- | --- | --- | --- | --- |
+| 18:00 | All | Week-2 win check against section 7 criteria; decide hold, cut, or scale | DECISION-WEEK2 | 04-paid-ads/paid-media-strategy.md | John | Written into the Oct 27 report |
 | 19:00 | Video production | Film batch: SV-021 to SV-023 | SV-021 to SV-023 | 03-social/short-form-video-scripts.md | John | Sunday batch. Nov 2 deadline scripts; check the tax calendar page. |
 
 ### Week of Monday, October 26
 
-#### Monday, October 26, 2026  (18 actions)
+#### Monday, October 26, 2026  (19 actions)
 
 | Time | Channel | Action | Asset | File | Owner | Notes |
 | --- | --- | --- | --- | --- | --- | --- |
 | 06:30 | Email | Send Watchdog Agent Weekly issue 4: Nov 1 is a Sunday, Town Compare | EM-N04 | 05-email-sms-outreach/weekly-agent-email.md | Coordinator | First day-14 charges also land Oct 26; EM-T14-A/B automated |
+| 07:00 | Meta ads | AD-M-017 (Nov 1 tax quarter) and AD-M-018 (Nov 2 deadline) on | AD-M-017 | 04-paid-ads/meta-ads.md | Coordinator |  |
 | 07:15 | LinkedIn | LinkedIn engagement block | LI-ENG | 03-social/linkedin-founder-playbook.md | John | 20 minutes: reply to comments; 6 to 8 comments on broker/team-leader/association/partner posts; accept connections; send day-after DMs |
 | 07:30 | TikTok | Post SV-021 | SV-021 | 03-social/short-form-video-scripts.md | John | The Monday desk: Nov 2 Q4 taxes and ANCHOR/PAS-1 deadline reminder. CTA: Start your 14-day Agent trial. utm_content=SV-021. @thetaxwatchdog. Native upload; link in bio. |
 | 08:00 | Founding Agents | Founding Agent invite batch 3: 20 acceptance messages sent (RF-002) with code FOUNDING-B3 | RF-002 | founding-agent-program.md | Coordinator | Accept within 7 days |
@@ -534,7 +573,7 @@ Total actions: 1084. Days with actions: 95 of 95.
 | 15:30 | Agent DMs | Agent DM block: 20 warm agents (DM-A01 to DM-A10, EM-A01 to EM-A04 by day, PH-A01, PH-A02) | DM-A01 | 05-email-sms-outreach/agent-direct-outreach.md | John |  |
 | 17:00 | YouTube Shorts | Post SV-021 | SV-021 | 03-social/short-form-video-scripts.md | John | The Monday desk: Nov 2 Q4 taxes and ANCHOR/PAS-1 deadline reminder. CTA: Start your 14-day Agent trial. utm_content=SV-021. @watchdogindex [create]. Title = hook; upload SRT. |
 
-#### Tuesday, October 27, 2026  (12 actions)
+#### Tuesday, October 27, 2026  (13 actions)
 
 | Time | Channel | Action | Asset | File | Owner | Notes |
 | --- | --- | --- | --- | --- | --- | --- |
@@ -542,6 +581,7 @@ Total actions: 1084. Days with actions: 95 of 95.
 | 07:30 | TikTok | Post SV-022 | SV-022 | 03-social/short-form-video-scripts.md | John | Tax bill translator: Four quarters a year; Nov 1 practically Nov 2. CTA: Save this. utm_content=SV-022. @thetaxwatchdog. Native upload; link in bio. |
 | 07:45 | LinkedIn | Publish LinkedIn post | LI-022 | 03-social/linkedin-posts.md | John | teaching post; track teaching |
 | 08:00 | LinkedIn video | Post SV-022 | SV-022 | 03-social/short-form-video-scripts.md | John | Tax bill translator: Four quarters a year; Nov 1 practically Nov 2. CTA: Save this. utm_content=SV-022. Native upload with custom thumbnail; link in first comment; max 3 hashtags. |
+| 09:00 | All | Paid review: kill, scale, refresh | REVIEW-WEEKLY | 04-paid-ads/paid-media-strategy.md | John | Week-2 win check written up |
 | 09:00 | Direct mail | Follow-up calls to broker-owners who received DM-L01 | DM-L01 | sponsorships-and-local.md | John | Published business numbers only. Honor any do-not-call request immediately |
 | 09:00 | Lunch-and-learn | Session 3 follow-up: attendee email (EV-009); broker thank-you (EV-010); scorecard (EV-011); consented list to 05 | EV-009 | brokerage-lunch-and-learn.md | Coordinator | Within 24 hours |
 | 09:30 | Broker outreach | Broker outreach block: 10 new brokers, 10 follow-ups (EM-BR01 to EM-BR05 by day, PH-BR01, PH-BR02, DM-BR01 to DM-BR03) | EM-BR01 | 05-email-sms-outreach/broker-and-team-lead-outreach.md | John |  |
@@ -594,7 +634,7 @@ Total actions: 1084. Days with actions: 95 of 95.
 | 17:00 | YouTube Shorts | Post SV-024 | SV-024 | 03-social/short-form-video-scripts.md | John | Founder log: What the first Founding Agents said I got wrong. CTA: Request a Founding Agent invite. utm_content=SV-024. @watchdogindex [create]. Title = hook; upload SRT. |
 | 17:30 | Founding Agents | Batch 3 onboarding call B | RF-002 | founding-agent-program.md | John |  |
 
-#### Friday, October 30, 2026  (18 actions)
+#### Friday, October 30, 2026  (19 actions)
 
 | Time | Channel | Action | Asset | File | Owner | Notes |
 | --- | --- | --- | --- | --- | --- | --- |
@@ -608,6 +648,7 @@ Total actions: 1084. Days with actions: 95 of 95.
 | 10:00 | Instagram Stories | Post Story set | IG-S15 | 03-social/instagram-plan.md | Coordinator | Share to FB page Stories; save to matching highlight |
 | 10:00 | Lunch-and-learn | Session 5 prep: headcount; food order; sign-in sheet; QR card; offer card; sell sheets; volunteer address; office code; screenshots | EV-006 | brokerage-lunch-and-learn.md | Coordinator | EV-005 EV-007 EV-008 EV-012 |
 | 12:00 | Instagram Reels | Post SV-025 | SV-025 | 03-social/short-form-video-scripts.md | John | Town compare: Stop saying crazy taxes; use measurement language. CTA: Comment TOWN. utm_content=SV-025. @watchdogindex [create]. Choose cover; link in bio. |
+| 12:00 | Meta ads | Collect first real agent quotes for AD-M-020; build Phase 2 ads paused | AD-M-020 | 04-paid-ads/meta-ads.md | John | Placeholder stays until a quote is signed off |
 | 13:00 | Facebook groups | Group engagement: 20 minutes of helpful comments | FBG-ENG | 03-social/facebook-group-playbook.md | John | Search groups for tax assessment appeal revaluation permit flood; log count in target sheet |
 | 14:00 | Founding Agents | Application review block; rank waitlist; approve next batch; reassign freed seats | RF-006 | founding-agent-program.md | Coordinator |  |
 | 15:00 | Email | Write next Monday's Watchdog Agent Weekly issue |  | 05-email-sms-outreach/weekly-agent-email.md | John |  |
@@ -634,12 +675,17 @@ Total actions: 1084. Days with actions: 95 of 95.
 
 ### Week of Monday, November 02
 
-#### Monday, November 02, 2026  (23 actions)
+#### Monday, November 02, 2026  (28 actions)
 
 | Time | Channel | Action | Asset | File | Owner | Notes |
 | --- | --- | --- | --- | --- | --- | --- |
 | 06:00 | Radio | Radio flight 1 starts [placeholder] Nov 2 to Nov 20 | RA-001 | podcast-and-radio.md | Partner | Only if approved Oct 16. Station traffic confirms |
 | 06:30 | Email | Send Watchdog Agent Weekly issue 5: ANCHOR/PAS-1 deadline today, Property Pulse, referral link | EM-N05 | 05-email-sms-outreach/weekly-agent-email.md | Coordinator |  |
+| 07:00 | Google Ads | Phase 2 budget; second RSA in INTENT and COMP; UTM campaign to p2 | AD-G-COMP | 04-paid-ads/google-search-ads.md | Coordinator | Budget change at phase boundary |
+| 07:00 | LinkedIn | Phase 2 budget; UTM campaign to p2 | AD-L-002 | 04-paid-ads/linkedin-ads.md | Coordinator | Budget change at phase boundary |
+| 07:00 | Meta ads | Phase 2 budget; rename to Q4-P2; AD-M-019, AD-M-023, AD-M-026, AD-M-027 on; creative refresh; UTM campaign to p2 | AD-M-019 | 04-paid-ads/meta-ads.md | Coordinator | Budget change at phase boundary |
+| 07:00 | Retargeting | Phase 2 budget; UTM campaign to p2 | AD-R-005 | 04-paid-ads/retargeting.md | Coordinator | Budget change at phase boundary |
+| 07:00 | YouTube | Phase 2 budget; add AD-Y-005 and AD-Y-006 to custom intent; AD-Y-003 on placements | AD-Y-006 | 04-paid-ads/youtube-ads.md | Coordinator | Budget change at phase boundary |
 | 07:15 | LinkedIn | LinkedIn engagement block | LI-ENG | 03-social/linkedin-founder-playbook.md | John | 20 minutes: reply to comments; 6 to 8 comments on broker/team-leader/association/partner posts; accept connections; send day-after DMs |
 | 07:30 | TikTok | Post SV-026 | SV-026 | 03-social/short-form-video-scripts.md | John | The Monday desk: Deadline day text to past clients before noon. CTA: Start your 14-day Agent trial. utm_content=SV-026. @thetaxwatchdog. Native upload; link in bio. |
 | 08:00 | Founding Agents | Founding Agent invite batch 4: 20 acceptance messages sent (RF-002) with code FOUNDING-B4 | RF-002 | founding-agent-program.md | Coordinator | Accept within 7 days |
@@ -662,7 +708,7 @@ Total actions: 1084. Days with actions: 95 of 95.
 | 15:30 | Agent DMs | Agent DM block: 20 warm agents (DM-A01 to DM-A10, EM-A01 to EM-A04 by day, PH-A01, PH-A02) | DM-A01 | 05-email-sms-outreach/agent-direct-outreach.md | John |  |
 | 17:00 | YouTube Shorts | Post SV-026 | SV-026 | 03-social/short-form-video-scripts.md | John | The Monday desk: Deadline day text to past clients before noon. CTA: Start your 14-day Agent trial. utm_content=SV-026. @watchdogindex [create]. Title = hook; upload SRT. |
 
-#### Tuesday, November 03, 2026  (13 actions)
+#### Tuesday, November 03, 2026  (14 actions)
 
 | Time | Channel | Action | Asset | File | Owner | Notes |
 | --- | --- | --- | --- | --- | --- | --- |
@@ -671,6 +717,7 @@ Total actions: 1084. Days with actions: 95 of 95.
 | 07:45 | LinkedIn | Publish LinkedIn post | LI-027 | 03-social/linkedin-posts.md | John | founder log post; track founder log |
 | 08:00 | Email | Send monthly value recap to paying Agent accounts 14+ days old | EM-P01 | 05-email-sms-outreach/post-trial-and-winback.md | Coordinator | Small batch; first paid accounts from Oct 26 |
 | 08:00 | LinkedIn video | Post SV-027 | SV-027 | 03-social/short-form-video-scripts.md | John | Tax bill translator: Added assessment; bill up $900 nobody told them. CTA: Start your 14-day Agent trial. utm_content=SV-027. Native upload with custom thumbnail; link in first comment; max 3 hashtags. |
+| 09:00 | All | Paid review: kill, scale, refresh | REVIEW-WEEKLY | 04-paid-ads/paid-media-strategy.md | John | Search terms, kill and scale rules, frequency, pool sizes, budget pacing |
 | 09:00 | Associations | Association outreach wave 3: remaining boards plus phone calls to non-responders (RF-050; RF-051) | RF-050 | partners-and-associations.md | Coordinator |  |
 | 09:00 | PR | Pitch wave 3: December 1 added-assessment deadline explainer | PR-P03 | press-release-and-pr.md | John |  |
 | 09:30 | Broker outreach | Broker outreach block: 10 new brokers, 10 follow-ups (EM-BR01 to EM-BR05 by day, PH-BR01, PH-BR02, DM-BR01 to DM-BR03) | EM-BR01 | 05-email-sms-outreach/broker-and-team-lead-outreach.md | John |  |
@@ -761,11 +808,12 @@ Total actions: 1084. Days with actions: 95 of 95.
 
 ### Week of Monday, November 09
 
-#### Monday, November 09, 2026  (19 actions)
+#### Monday, November 09, 2026  (20 actions)
 
 | Time | Channel | Action | Asset | File | Owner | Notes |
 | --- | --- | --- | --- | --- | --- | --- |
 | 06:30 | Email | Send Watchdog Agent Weekly issue 6: added assessments, permit reason, Triple Play announced | EM-N06 | 05-email-sms-outreach/weekly-agent-email.md | Coordinator |  |
+| 07:00 | Meta ads | AD-M-021 (Dec 1 hook) and AD-M-022 (holiday mailer) on; AD-M-025 seat count set from the real number | AD-M-021 | 04-paid-ads/meta-ads.md | Coordinator |  |
 | 07:15 | LinkedIn | LinkedIn engagement block | LI-ENG | 03-social/linkedin-founder-playbook.md | John | 20 minutes: reply to comments; 6 to 8 comments on broker/team-leader/association/partner posts; accept connections; send day-after DMs |
 | 07:30 | TikTok | Post SV-031 | SV-031 | 03-social/short-form-video-scripts.md | John | The Monday desk: Long ownership tenure; offer a review no strings. CTA: Start your 14-day Agent trial or Request a Founding Agent invite. utm_content=SV-031. @thetaxwatchdog. Native upload; link in bio. |
 | 08:00 | Founding Agents | Founding Agent invite batch 5: 20 acceptance messages sent (RF-002) with code FOUNDING-B5 | RF-002 | founding-agent-program.md | Coordinator | Accept within 7 days |
@@ -785,7 +833,7 @@ Total actions: 1084. Days with actions: 95 of 95.
 | 15:30 | Agent DMs | Agent DM block: 20 warm agents (DM-A01 to DM-A10, EM-A01 to EM-A04 by day, PH-A01, PH-A02) | DM-A01 | 05-email-sms-outreach/agent-direct-outreach.md | John |  |
 | 17:00 | YouTube Shorts | Post SV-031 | SV-031 | 03-social/short-form-video-scripts.md | John | The Monday desk: Long ownership tenure; offer a review no strings. CTA: Start your 14-day Agent trial or Request a Founding Agent invite. utm_content=SV-031. @watchdogindex [create]. Title = hook; upload SRT. |
 
-#### Tuesday, November 10, 2026  (13 actions)
+#### Tuesday, November 10, 2026  (14 actions)
 
 | Time | Channel | Action | Asset | File | Owner | Notes |
 | --- | --- | --- | --- | --- | --- | --- |
@@ -793,6 +841,7 @@ Total actions: 1084. Days with actions: 95 of 95.
 | 07:30 | TikTok | Post SV-032 | SV-032 | 03-social/short-form-video-scripts.md | John | Tax bill translator: Dec 1 added-assessment appeal deadline. CTA: Save this. utm_content=SV-032. @thetaxwatchdog. Native upload; link in bio. |
 | 07:45 | LinkedIn | Publish LinkedIn post | LI-032 | 03-social/linkedin-posts.md | John | teaching post; track agent workflow; broker and team-leader rhythm post |
 | 08:00 | LinkedIn video | Post SV-032 | SV-032 | 03-social/short-form-video-scripts.md | John | Tax bill translator: Dec 1 added-assessment appeal deadline. CTA: Save this. utm_content=SV-032. Native upload with custom thumbnail; link in first comment; max 3 hashtags. |
+| 09:00 | All | Paid review: kill, scale, refresh | REVIEW-WEEKLY | 04-paid-ads/paid-media-strategy.md | John | Search terms, kill and scale rules, frequency, pool sizes, budget pacing |
 | 09:00 | Lunch-and-learn | Session 6 follow-up: attendee email (EV-009); broker thank-you (EV-010); scorecard (EV-011); consented list to 05 | EV-009 | brokerage-lunch-and-learn.md | Coordinator | Within 24 hours |
 | 09:00 | PR | Request PR-REL-03 numbers from the data team with sources and dates | PR-REL-03 | press-release-and-pr.md | John | Every bracket must be filled from data. Nothing from memory |
 | 09:00 | Partners | Partner outreach wave 2: inspectors; appraisers; coaches; podcasts; schools (RF-052; RF-053; RF-055) | RF-055 | partners-and-associations.md | Coordinator |  |
@@ -883,11 +932,12 @@ Total actions: 1084. Days with actions: 95 of 95.
 
 ### Week of Monday, November 16
 
-#### Monday, November 16, 2026  (17 actions)
+#### Monday, November 16, 2026  (18 actions)
 
 | Time | Channel | Action | Asset | File | Owner | Notes |
 | --- | --- | --- | --- | --- | --- | --- |
 | 06:30 | Email | Send Watchdog Agent Weekly issue 7: revaluation vs reassessment, Postcard Studio timing | EM-N07 | 05-email-sms-outreach/weekly-agent-email.md | Coordinator |  |
+| 07:00 | Meta ads | Creative refresh; AD-M-024 and AD-M-028 on | REFRESH-CREATIVE | 04-paid-ads/meta-ads.md | Coordinator | Every 2 weeks |
 | 07:15 | LinkedIn | LinkedIn engagement block | LI-ENG | 03-social/linkedin-founder-playbook.md | John | 20 minutes: reply to comments; 6 to 8 comments on broker/team-leader/association/partner posts; accept connections; send day-after DMs |
 | 07:30 | TikTok | Post SV-036 | SV-036 | 03-social/short-form-video-scripts.md | John | The Monday desk: Permit lifecycle change three doors down. CTA: Start your 14-day Agent trial. utm_content=SV-036. @thetaxwatchdog. Native upload; link in bio. |
 | 08:15 | LinkedIn | Publish LinkedIn post | LI-036 | 03-social/linkedin-posts.md | John | teaching post; track teaching |
@@ -905,7 +955,7 @@ Total actions: 1084. Days with actions: 95 of 95.
 | 15:30 | Agent DMs | Agent DM block: 20 warm agents (DM-A01 to DM-A10, EM-A01 to EM-A04 by day, PH-A01, PH-A02) | DM-A01 | 05-email-sms-outreach/agent-direct-outreach.md | John |  |
 | 17:00 | YouTube Shorts | Post SV-036 | SV-036 | 03-social/short-form-video-scripts.md | John | The Monday desk: Permit lifecycle change three doors down. CTA: Start your 14-day Agent trial. utm_content=SV-036. @watchdogindex [create]. Title = hook; upload SRT. |
 
-#### Tuesday, November 17, 2026  (11 actions)
+#### Tuesday, November 17, 2026  (13 actions)
 
 | Time | Channel | Action | Asset | File | Owner | Notes |
 | --- | --- | --- | --- | --- | --- | --- |
@@ -914,8 +964,10 @@ Total actions: 1084. Days with actions: 95 of 95.
 | 07:30 | TikTok | Post SV-037 | SV-037 | 03-social/short-form-video-scripts.md | John | Tax bill translator: Assessment flat bill up; the rate moved. CTA: Start your 14-day Agent trial. utm_content=SV-037. @thetaxwatchdog. Native upload; link in bio. |
 | 07:45 | LinkedIn | Publish LinkedIn post | LI-037 | 03-social/linkedin-posts.md | John | story post; track teaching |
 | 08:00 | LinkedIn video | Post SV-037 | SV-037 | 03-social/short-form-video-scripts.md | John | Tax bill translator: Assessment flat bill up; the rate moved. CTA: Start your 14-day Agent trial. utm_content=SV-037. Native upload with custom thumbnail; link in first comment; max 3 hashtags. |
+| 09:00 | All | Paid review: kill, scale, refresh | REVIEW-WEEKLY | 04-paid-ads/paid-media-strategy.md | John | Search terms, kill and scale rules, frequency, pool sizes, budget pacing |
 | 09:00 | Lunch-and-learn | Session 7 follow-up: attendee email (EV-009); broker thank-you (EV-010); scorecard (EV-011); consented list to 05 | EV-009 | brokerage-lunch-and-learn.md | Coordinator | Within 24 hours |
 | 09:30 | Broker outreach | Broker outreach block: 10 new brokers, 10 follow-ups (EM-BR01 to EM-BR05 by day, PH-BR01, PH-BR02, DM-BR01 to DM-BR03) | EM-BR01 | 05-email-sms-outreach/broker-and-team-lead-outreach.md | John |  |
+| 10:00 | LinkedIn | Sponsor John's Dec 1 added-assessment post as thought leader ad AD-L-005 | AD-L-005 | 04-paid-ads/linkedin-ads.md | John |  |
 | 11:00 | Facebook groups | Post group value post | FBG-015 | 03-social/facebook-group-playbook.md | John | From John profile; 2 to 3 groups; no link in body; 90/10 rule |
 | 12:00 | Instagram Reels | Post SV-037 | SV-037 | 03-social/short-form-video-scripts.md | John | Tax bill translator: Assessment flat bill up; the rate moved. CTA: Start your 14-day Agent trial. utm_content=SV-037. @watchdogindex [create]. Choose cover; link in bio. |
 | 15:30 | Agent DMs | Agent DM block: 20 warm agents (DM-A01 to DM-A10, EM-A01 to EM-A04 by day, PH-A01, PH-A02) | DM-A01 | 05-email-sms-outreach/agent-direct-outreach.md | John |  |
@@ -964,7 +1016,7 @@ Total actions: 1084. Days with actions: 95 of 95.
 | 15:30 | Agent DMs | Agent DM block: 20 warm agents (DM-A01 to DM-A10, EM-A01 to EM-A04 by day, PH-A01, PH-A02) | DM-A01 | 05-email-sms-outreach/agent-direct-outreach.md | John |  |
 | 17:00 | YouTube Shorts | Post SV-039 | SV-039 | 03-social/short-form-video-scripts.md | John | Objection: $59 a month is another subscription; what it replaces. CTA: Start your 14-day Agent trial. utm_content=SV-039. @watchdogindex [create]. Title = hook; upload SRT. |
 
-#### Friday, November 20, 2026  (20 actions)
+#### Friday, November 20, 2026  (21 actions)
 
 | Time | Channel | Action | Asset | File | Owner | Notes |
 | --- | --- | --- | --- | --- | --- | --- |
@@ -986,6 +1038,7 @@ Total actions: 1084. Days with actions: 95 of 95.
 | 16:30 | Referral | Referral leaderboard reconciled against Stripe and posted in the chat | RF-025 | referral-program.md | Coordinator | First names and brokerage only; with consent |
 | 16:30 | Review | Weekly scorecard: fill in the KPI sheet, decide kill or scale for each engine |  | 01-strategy/kpi-dashboard-template.csv | John |  |
 | 17:00 | Ambassadors | Ambassador acceptances close; RF-044 sent to each; Designer briefed on co-branded postcard templates | RF-044 | ambassador-program.md | Coordinator |  |
+| 17:00 | Meta ads | Triple Play creative final: CR-09 with booth placeholder filled; AD-Y-006 Triple Play end card cut | CR-09 | 04-paid-ads/creative-briefs.md | Designer | Booth confirmed after registration |
 | 17:00 | YouTube Shorts | Post SV-040 | SV-040 | 03-social/short-form-video-scripts.md | John | Postcard Friday: Proof before print; four checks. CTA: Save this. utm_content=SV-040. @watchdogindex [create]. Title = hook; upload SRT. |
 | 18:00 | Radio | Radio flight 1 ends [placeholder] | RA-001 | podcast-and-radio.md | Partner |  |
 
@@ -1004,11 +1057,12 @@ Total actions: 1084. Days with actions: 95 of 95.
 
 ### Week of Monday, November 23
 
-#### Monday, November 23, 2026  (16 actions)
+#### Monday, November 23, 2026  (17 actions)
 
 | Time | Channel | Action | Asset | File | Owner | Notes |
 | --- | --- | --- | --- | --- | --- | --- |
 | 06:30 | Email | Send Watchdog Agent Weekly issue 8: rate vs assessment, share page, Thanksgiving week | EM-N08 | 05-email-sms-outreach/weekly-agent-email.md | Coordinator |  |
+| 07:00 | All | Thanksgiving week budgets at about 60 percent across channels | BUDGET-THANKSGIVING | 04-paid-ads/budget-and-pacing.csv | Coordinator |  |
 | 07:15 | LinkedIn | LinkedIn engagement block | LI-ENG | 03-social/linkedin-founder-playbook.md | John | 20 minutes: reply to comments; 6 to 8 comments on broker/team-leader/association/partner posts; accept connections; send day-after DMs |
 | 07:30 | TikTok | Post SV-041 | SV-041 | 03-social/short-form-video-scripts.md | John | The Monday desk: Verified-sale movement nearby; Thanksgiving call. CTA: Start your 14-day Agent trial. utm_content=SV-041. @thetaxwatchdog. Native upload; link in bio. |
 | 08:00 | Postcards | Upload and pay PC-004 drop (300 offices plus [number] in Atlantic and Cape May and Ocean counties) | PC-004 | agent-postcards.md | Coordinator | Upload early so it prints before Thanksgiving |
@@ -1025,7 +1079,7 @@ Total actions: 1084. Days with actions: 95 of 95.
 | 15:30 | Agent DMs | Agent DM block: 20 warm agents (DM-A01 to DM-A10, EM-A01 to EM-A04 by day, PH-A01, PH-A02) | DM-A01 | 05-email-sms-outreach/agent-direct-outreach.md | John |  |
 | 17:00 | YouTube Shorts | Post SV-041 | SV-041 | 03-social/short-form-video-scripts.md | John | The Monday desk: Verified-sale movement nearby; Thanksgiving call. CTA: Start your 14-day Agent trial. utm_content=SV-041. @watchdogindex [create]. Title = hook; upload SRT. |
 
-#### Tuesday, November 24, 2026  (11 actions)
+#### Tuesday, November 24, 2026  (12 actions)
 
 | Time | Channel | Action | Asset | File | Owner | Notes |
 | --- | --- | --- | --- | --- | --- | --- |
@@ -1033,6 +1087,7 @@ Total actions: 1084. Days with actions: 95 of 95.
 | 07:30 | TikTok | Post SV-042 | SV-042 | 03-social/short-form-video-scripts.md | John | Client asked me: Thanksgiving table tax question; show three numbers. CTA: Look up a property free. utm_content=SV-042. @thetaxwatchdog. Native upload; link in bio. |
 | 07:45 | LinkedIn | Publish LinkedIn post | LI-042 | 03-social/linkedin-posts.md | John | teaching post; track teaching |
 | 08:00 | LinkedIn video | Post SV-042 | SV-042 | 03-social/short-form-video-scripts.md | John | Client asked me: Thanksgiving table tax question; show three numbers. CTA: Look up a property free. utm_content=SV-042. Native upload with custom thumbnail; link in first comment; max 3 hashtags. |
+| 09:00 | All | Paid review: kill, scale, refresh | REVIEW-WEEKLY | 04-paid-ads/paid-media-strategy.md | John | Search terms, kill and scale rules, frequency, pool sizes, budget pacing |
 | 09:00 | Lunch-and-learn | Session 9 follow-up: attendee email (EV-009); broker thank-you (EV-010); scorecard (EV-011); consented list to 05 | EV-009 | brokerage-lunch-and-learn.md | Coordinator | Within 24 hours |
 | 09:30 | Broker outreach | Broker outreach block: 10 new brokers, 10 follow-ups (EM-BR01 to EM-BR05 by day, PH-BR01, PH-BR02, DM-BR01 to DM-BR03) | EM-BR01 | 05-email-sms-outreach/broker-and-team-lead-outreach.md | John |  |
 | 11:00 | Facebook groups | Post group value post | FBG-017 | 03-social/facebook-group-playbook.md | John | From John profile; 2 to 3 groups; no link in body; 90/10 rule |
@@ -1068,11 +1123,12 @@ Total actions: 1084. Days with actions: 95 of 95.
 | --- | --- | --- | --- | --- | --- | --- |
 | 00:00 | Holiday | Thanksgiving. No posting, no outreach |  |  | John |  |
 
-#### Friday, November 27, 2026  (2 actions)
+#### Friday, November 27, 2026  (3 actions)
 
 | Time | Channel | Action | Asset | File | Owner | Notes |
 | --- | --- | --- | --- | --- | --- | --- |
 | 00:00 | Holiday | Day after Thanksgiving. No outreach; pre-scheduled posts only |  |  | John |  |
+| 12:00 | Meta ads | Build Q4-P3-TRIPLEPLAY (TP radius) and Google TP ad group paused; AD-M-029 and AD-M-030 loaded | AD-M-029 | 04-paid-ads/meta-ads.md | Coordinator |  |
 | 14:00 | Founding Agents | No review block (Thanksgiving weekend); applications reviewed Mon Nov 30 at 14:00 | RF-006 | founding-agent-program.md | Coordinator |  |
 
 #### Saturday, November 28, 2026  (1 actions)
@@ -1089,11 +1145,12 @@ Total actions: 1084. Days with actions: 95 of 95.
 
 ### Week of Monday, November 30
 
-#### Monday, November 30, 2026  (17 actions)
+#### Monday, November 30, 2026  (18 actions)
 
 | Time | Channel | Action | Asset | File | Owner | Notes |
 | --- | --- | --- | --- | --- | --- | --- |
 | 06:30 | Email | Send Watchdog Agent Weekly issue 9: Dec 1 deadline tomorrow, Deals, Triple Play next week | EM-N09 | 05-email-sms-outreach/weekly-agent-email.md | Coordinator |  |
+| 07:00 | All | Budgets back to Phase 2 rate; creative refresh; AD-M-021 Dec 1 hook gets priority | REFRESH-CREATIVE | 04-paid-ads/meta-ads.md | Coordinator | Every 2 weeks |
 | 07:15 | LinkedIn | LinkedIn engagement block | LI-ENG | 03-social/linkedin-founder-playbook.md | John | 20 minutes: reply to comments; 6 to 8 comments on broker/team-leader/association/partner posts; accept connections; send day-after DMs |
 | 07:30 | TikTok | Post SV-044 | SV-044 | 03-social/short-form-video-scripts.md | John | The Monday desk: Tomorrow is Dec 1; approaching appeal deadline. CTA: Start your 14-day Agent trial. utm_content=SV-044. @thetaxwatchdog. Native upload; link in bio. |
 | 08:15 | LinkedIn | Publish LinkedIn post | LI-044 | 03-social/linkedin-posts.md | John | teaching post; track teaching |
@@ -1111,11 +1168,13 @@ Total actions: 1084. Days with actions: 95 of 95.
 | 16:00 | Pipeline review | Weekly pipeline review (moved from Nov 27) | EV-011 | brokerage-lunch-and-learn.md | John |  |
 | 17:00 | YouTube Shorts | Post SV-044 | SV-044 | 03-social/short-form-video-scripts.md | John | The Monday desk: Tomorrow is Dec 1; approaching appeal deadline. CTA: Start your 14-day Agent trial. utm_content=SV-044. @watchdogindex [create]. Title = hook; upload SRT. |
 
-#### Tuesday, December 01, 2026  (14 actions)
+#### Tuesday, December 01, 2026  (17 actions)
 
 | Time | Channel | Action | Asset | File | Owner | Notes |
 | --- | --- | --- | --- | --- | --- | --- |
 | 06:00 | Radio | Radio flight 2 starts [placeholder] Dec 1 to Dec 6 | RA-002 | podcast-and-radio.md | Partner | Only if approved Oct 16 |
+| 07:00 | Google Ads | TP ad group on (Dec 1 to 11) | AD-G-TP | 04-paid-ads/google-search-ads.md | Coordinator | Telecom and sports negatives in place |
+| 07:00 | LinkedIn | AD-L-006 Triple Play on | AD-L-006 | 04-paid-ads/linkedin-ads.md | Coordinator |  |
 | 07:00 | PR | Send PR-REL-02 Triple Play release and pitch wave 5 | PR-REL-02 | press-release-and-pr.md | John | Also send PR-P06. Press of Atlantic City first |
 | 07:15 | LinkedIn | LinkedIn engagement block | LI-ENG | 03-social/linkedin-founder-playbook.md | John | 20 minutes: reply to comments; 6 to 8 comments on broker/team-leader/association/partner posts; accept connections; send day-after DMs |
 | 07:30 | TikTok | Post SV-045 | SV-045 | 03-social/short-form-video-scripts.md | John | Tax bill translator: Dec 1 or 30 days from bulk mailing whichever is later. CTA: Save this. utm_content=SV-045. @thetaxwatchdog. Native upload; link in bio. |
@@ -1123,6 +1182,7 @@ Total actions: 1084. Days with actions: 95 of 95.
 | 08:00 | Email | Send monthly value recap to paying Agent accounts (December) | EM-P01 | 05-email-sms-outreach/post-trial-and-winback.md | Coordinator |  |
 | 08:00 | LinkedIn video | Post SV-045 | SV-045 | 03-social/short-form-video-scripts.md | John | Tax bill translator: Dec 1 or 30 days from bulk mailing whichever is later. CTA: Save this. utm_content=SV-045. Native upload with custom thumbnail; link in first comment; max 3 hashtags. |
 | 08:00 | Milestone | Added and omitted assessment appeal deadline at the County Board of Taxation. Content hook |  | 00-brief/product-and-brand-brief.md | John |  |
+| 09:00 | All | Paid review: kill, scale, refresh | REVIEW-WEEKLY | 04-paid-ads/paid-media-strategy.md | John | Search terms, kill and scale rules, frequency, pool sizes, budget pacing |
 | 09:30 | Broker outreach | Broker outreach block: 10 new brokers, 10 follow-ups (EM-BR01 to EM-BR05 by day, PH-BR01, PH-BR02, DM-BR01 to DM-BR03) | EM-BR01 | 05-email-sms-outreach/broker-and-team-lead-outreach.md | John |  |
 | 10:00 | Email | Annual switch batch to monthly Agent accounts with 2+ charges | EM-P04 | 05-email-sms-outreach/post-trial-and-winback.md | Coordinator | Window Dec 1 to Dec 20; resend to non-openers Dec 29 |
 | 11:00 | Facebook groups | Post group value post | FBG-018 | 03-social/facebook-group-playbook.md | John | From John profile; 2 to 3 groups; no link in body; 90/10 rule |
@@ -1172,7 +1232,7 @@ Total actions: 1084. Days with actions: 95 of 95.
 | 15:30 | Agent DMs | Agent DM block: 20 warm agents (DM-A01 to DM-A10, EM-A01 to EM-A04 by day, PH-A01, PH-A02) | DM-A01 | 05-email-sms-outreach/agent-direct-outreach.md | John |  |
 | 17:00 | YouTube Shorts | Post SV-047 | SV-047 | 03-social/short-form-video-scripts.md | John | Objection: My broker gives us a tool; does it know Chapter 123. CTA: Start your 14-day Agent trial. utm_content=SV-047. @watchdogindex [create]. Title = hook; upload SRT. |
 
-#### Friday, December 04, 2026  (20 actions)
+#### Friday, December 04, 2026  (21 actions)
 
 | Time | Channel | Action | Asset | File | Owner | Notes |
 | --- | --- | --- | --- | --- | --- | --- |
@@ -1195,12 +1255,14 @@ Total actions: 1084. Days with actions: 95 of 95.
 | 16:00 | Pipeline review | Weekly pipeline review: sessions; Founding metrics; referrals; pilots; partners; Triple Play | EV-011 | brokerage-lunch-and-learn.md | John | Scorecards EV-011 reviewed |
 | 16:30 | Referral | Referral leaderboard reconciled against Stripe and posted in the chat | RF-025 | referral-program.md | Coordinator | First names and brokerage only; with consent |
 | 16:30 | Review | Weekly scorecard: fill in the KPI sheet, decide kill or scale for each engine |  | 01-strategy/kpi-dashboard-template.csv | John |  |
+| 17:00 | Meta ads | Build year-end ads AD-M-031, AD-M-032, AD-R-011, AD-R-012, AD-L-008 paused | AD-M-031 | 04-paid-ads/meta-ads.md | Coordinator |  |
 | 17:00 | YouTube Shorts | Post SV-048 | SV-048 | 03-social/short-form-video-scripts.md | John | Postcard Friday: January card by Dec 15; 2027 deadlines. CTA: Start your 14-day Agent trial. utm_content=SV-048. @watchdogindex [create]. Title = hook; upload SRT. |
 
-#### Saturday, December 05, 2026  (2 actions)
+#### Saturday, December 05, 2026  (3 actions)
 
 | Time | Channel | Action | Asset | File | Owner | Notes |
 | --- | --- | --- | --- | --- | --- | --- |
+| 07:00 | Meta ads | Triple Play geo campaign ON: TP radius around Atlantic City Convention Center with AD-M-029 | AD-M-029 | 04-paid-ads/meta-ads.md | Coordinator | Dec 5 on |
 | 09:00 | YouTube | Publish long-form video | YT-L05 | 03-social/youtube-and-cross-posting.md | John | FB page link post and LinkedIn summary following Monday; 3 Shorts over 2 weeks |
 | 10:00 | Light day | Saturday light: 15 minutes replying to comments and DMs; write down 3 content ideas from this week's questions |  | 02-calendar/weekly-operating-rhythm.md | John |  |
 
@@ -1215,15 +1277,17 @@ Total actions: 1084. Days with actions: 95 of 95.
 
 ### Week of Monday, December 07
 
-#### Monday, December 07, 2026  (16 actions)
+#### Monday, December 07, 2026  (18 actions)
 
 | Time | Channel | Action | Asset | File | Owner | Notes |
 | --- | --- | --- | --- | --- | --- | --- |
 | 06:30 | Email | Send Watchdog Agent Weekly issue 10: the Watchdog Score letter by letter, Triple Play this week | EM-N10 | 05-email-sms-outreach/weekly-agent-email.md | Coordinator | Scheduled in advance; John at Triple Play |
+| 07:00 | All | Phase 3 budget; rename campaigns to p3; AD-M-030 day-of and AD-M-033 on; UTM campaign to p3 | BUDGET-P3 | 04-paid-ads/budget-and-pacing.csv | Coordinator | Budget change at phase boundary; John at Triple Play |
 | 07:00 | Milestone | Triple Play begins (Dec 7 to 10, Atlantic City). Phase 3 begins |  | 06-recruitment-referral-partners/triple-play-plan.md | John |  |
 | 07:15 | LinkedIn | LinkedIn engagement block | LI-ENG | 03-social/linkedin-founder-playbook.md | John | 20 minutes: reply to comments; 6 to 8 comments on broker/team-leader/association/partner posts; accept connections; send day-after DMs |
 | 07:30 | TikTok | Post SV-049 | SV-049 | 03-social/short-form-video-scripts.md | John | Founder log: Triple Play starts today in Atlantic City. CTA: Start your 14-day Agent trial. utm_content=SV-049. @thetaxwatchdog. Native upload; link in bio. |
 | 08:00 | Events | Triple Play day 1: load in and set booth and open | EV-010 | event-booth-kit.md | John | Booth [###]. Read the do-not-do list |
+| 08:00 | Meta ads | Update AD-M-030 booth and time placeholders each morning Dec 7 to 10 | AD-M-030 | 04-paid-ads/meta-ads.md | Coordinator | Repeat Dec 8, 9, 10 |
 | 08:00 | Triple Play | Triple Play day 1: booth setup (Path A) or arrive and register (Path B); post booth number or find-John schedule | EV-047 | triple-play-plan.md | John | Ambassador shifts 10:00 and 13:00 |
 | 08:15 | LinkedIn | Publish LinkedIn post | LI-049 | 03-social/linkedin-posts.md | John | event post; track offer and event |
 | 08:30 | Review | Monday plan: review last week's scorecard, set this week's outreach and content priorities |  | 02-calendar/weekly-operating-rhythm.md | John |  |
@@ -1236,7 +1300,7 @@ Total actions: 1084. Days with actions: 95 of 95.
 | 17:00 | Triple Play | Daily debrief (EV-051); export the consented list tagged tripleplay-2026 day 1 | EV-051 | triple-play-plan.md | Coordinator |  |
 | 17:00 | YouTube Shorts | Post SV-049 | SV-049 | 03-social/short-form-video-scripts.md | John | Founder log: Triple Play starts today in Atlantic City. CTA: Start your 14-day Agent trial. utm_content=SV-049. @watchdogindex [create]. Title = hook; upload SRT. |
 
-#### Tuesday, December 08, 2026  (15 actions)
+#### Tuesday, December 08, 2026  (16 actions)
 
 | Time | Channel | Action | Asset | File | Owner | Notes |
 | --- | --- | --- | --- | --- | --- | --- |
@@ -1246,6 +1310,7 @@ Total actions: 1084. Days with actions: 95 of 95.
 | 07:45 | LinkedIn | Publish LinkedIn post | LI-050 | 03-social/linkedin-posts.md | John | founder log post; track founder log |
 | 08:00 | Events | Triple Play day 2: booth open | EV-010 | event-booth-kit.md | John | Photograph sign-in sheets at close |
 | 08:00 | LinkedIn video | Post SV-050 | SV-050 | 03-social/short-form-video-scripts.md | John | Tax bill translator: 2027 appeal calendar and the Jan 15 trap. CTA: Save this. utm_content=SV-050. Native upload with custom thumbnail; link in first comment; max 3 hashtags. |
+| 09:00 | All | Paid review: kill, scale, refresh | REVIEW-WEEKLY | 04-paid-ads/paid-media-strategy.md | Coordinator | Coordinator runs it; John at Triple Play |
 | 09:00 | Triple Play | Triple Play day 2: booth or floor; lunch-hour demo block at 12:00 | EV-043 | triple-play-plan.md | John | 90-second demo (EV-043); qualifying questions (EV-044) |
 | 09:30 | Broker outreach | Broker outreach block: 10 new brokers, 10 follow-ups (EM-BR01 to EM-BR05 by day, PH-BR01, PH-BR02, DM-BR01 to DM-BR03) | EM-BR01 | 05-email-sms-outreach/broker-and-team-lead-outreach.md | John | Triple Play week: run from Atlantic City, booth hours take priority |
 | 11:00 | Facebook groups | Post group value post | FBG-020 | 03-social/facebook-group-playbook.md | John | From John profile; 2 to 3 groups; no link in body; 90/10 rule |
@@ -1295,10 +1360,12 @@ Total actions: 1084. Days with actions: 95 of 95.
 | 17:00 | YouTube Shorts | Post SV-052 | SV-052 | 03-social/short-form-video-scripts.md | John | Objection: Not committing to a year; annual is ten payments. CTA: Start your 14-day Agent trial. utm_content=SV-052. @watchdogindex [create]. Title = hook; upload SRT. |
 | 18:00 | Triple Play | Final debrief: totals; lunch-and-learn asks; pilot asks; objections to 08 | EV-051 | triple-play-plan.md | Coordinator |  |
 
-#### Friday, December 11, 2026  (23 actions)
+#### Friday, December 11, 2026  (25 actions)
 
 | Time | Channel | Action | Asset | File | Owner | Notes |
 | --- | --- | --- | --- | --- | --- | --- |
+| 07:00 | Google Ads | TP ad group off | AD-G-TP | 04-paid-ads/google-search-ads.md | Coordinator |  |
+| 07:00 | Meta ads | Triple Play geo campaign OFF; convert TP audience to post-event pool; AD-M-036 on | AD-M-036 | 04-paid-ads/meta-ads.md | Coordinator | Dec 11 off |
 | 07:00 | Owned audio | Publish episode 9 | RA-E09 | podcast-and-radio.md | John |  |
 | 07:15 | LinkedIn | LinkedIn engagement block | LI-ENG | 03-social/linkedin-founder-playbook.md | John | 20 minutes: reply to comments; 6 to 8 comments on broker/team-leader/association/partner posts; accept connections; send day-after DMs |
 | 07:30 | TikTok | Post SV-053 | SV-053 | 03-social/short-form-video-scripts.md | John | Postcard Friday: What do I put on the card; one fact one town one action. CTA: Start your 14-day Agent trial. utm_content=SV-053. @thetaxwatchdog. Native upload; link in bio. |
@@ -1337,11 +1404,15 @@ Total actions: 1084. Days with actions: 95 of 95.
 
 ### Week of Monday, December 14
 
-#### Monday, December 14, 2026  (17 actions)
+#### Monday, December 14, 2026  (21 actions)
 
 | Time | Channel | Action | Asset | File | Owner | Notes |
 | --- | --- | --- | --- | --- | --- | --- |
 | 06:30 | Email | Send Watchdog Agent Weekly issue 11: 2027 appeal calendar, appeal-season watchlist, annual plan | EM-N11 | 05-email-sms-outreach/weekly-agent-email.md | Coordinator |  |
+| 07:00 | LinkedIn | AD-L-008 year-end on | AD-L-008 | 04-paid-ads/linkedin-ads.md | Coordinator |  |
+| 07:00 | Meta ads | Year-end campaign ON: Q4-P3-ANNUAL with AD-M-031 and AD-M-032; AD-M-034 founder note on; creative refresh | AD-M-031 | 04-paid-ads/meta-ads.md | Coordinator | Dec 14 on |
+| 07:00 | Retargeting | AD-R-011 and AD-R-012 on in stage 3; creative refresh | AD-R-011 | 04-paid-ads/retargeting.md | Coordinator |  |
+| 07:00 | YouTube | AD-Y-006 year-end end card variant on | AD-Y-006 | 04-paid-ads/youtube-ads.md | Coordinator |  |
 | 07:15 | LinkedIn | LinkedIn engagement block | LI-ENG | 03-social/linkedin-founder-playbook.md | John | 20 minutes: reply to comments; 6 to 8 comments on broker/team-leader/association/partner posts; accept connections; send day-after DMs |
 | 07:30 | TikTok | Post SV-054 | SV-054 | 03-social/short-form-video-scripts.md | John | The Monday desk: Town announced a revaluation; every past client there. CTA: Start your 14-day Agent trial or Request a Founding Agent invite. utm_content=SV-054. @thetaxwatchdog. Native upload; link in bio. |
 | 08:00 | Milestone | Year-end annual plan push begins ($590, ten monthly payments, expense it in 2026) |  | 05-email-sms-outreach/event-emails.md | John |  |
@@ -1359,7 +1430,7 @@ Total actions: 1084. Days with actions: 95 of 95.
 | 15:30 | Agent DMs | Agent DM block: 20 warm agents (DM-A01 to DM-A10, EM-A01 to EM-A04 by day, PH-A01, PH-A02) | DM-A01 | 05-email-sms-outreach/agent-direct-outreach.md | John |  |
 | 17:00 | YouTube Shorts | Post SV-054 | SV-054 | 03-social/short-form-video-scripts.md | John | The Monday desk: Town announced a revaluation; every past client there. CTA: Start your 14-day Agent trial or Request a Founding Agent invite. utm_content=SV-054. @watchdogindex [create]. Title = hook; upload SRT. |
 
-#### Tuesday, December 15, 2026  (14 actions)
+#### Tuesday, December 15, 2026  (15 actions)
 
 | Time | Channel | Action | Asset | File | Owner | Notes |
 | --- | --- | --- | --- | --- | --- | --- |
@@ -1367,6 +1438,7 @@ Total actions: 1084. Days with actions: 95 of 95.
 | 07:30 | TikTok | Post SV-055 | SV-055 | 03-social/short-form-video-scripts.md | John | Tax bill translator: Watchdog Score is not an appraisal. CTA: Start your 14-day Agent trial. utm_content=SV-055. @thetaxwatchdog. Native upload; link in bio. |
 | 07:45 | LinkedIn | Publish LinkedIn post | LI-055 | 03-social/linkedin-posts.md | John | offer post; track offer and event |
 | 08:00 | LinkedIn video | Post SV-055 | SV-055 | 03-social/short-form-video-scripts.md | John | Tax bill translator: Watchdog Score is not an appraisal. CTA: Start your 14-day Agent trial. utm_content=SV-055. Native upload with custom thumbnail; link in first comment; max 3 hashtags. |
+| 09:00 | All | Paid review: kill, scale, refresh | REVIEW-WEEKLY | 04-paid-ads/paid-media-strategy.md | John | Search terms, kill and scale rules, frequency, pool sizes, budget pacing |
 | 09:00 | Lunch-and-learn | Session 11 follow-up: attendee email (EV-009); broker thank-you (EV-010); scorecard (EV-011); consented list to 05 | EV-009 | brokerage-lunch-and-learn.md | Coordinator | Within 24 hours |
 | 09:00 | Print | Print and postcard results review: QR scans and visits and invite requests by asset ID | PR-001 | print-ads.md | Coordinator | Report to 02-calendar owner. Drop any placement with zero scans after two insertions |
 | 09:30 | Broker outreach | Broker outreach block: 10 new brokers, 10 follow-ups (EM-BR01 to EM-BR05 by day, PH-BR01, PH-BR02, DM-BR01 to DM-BR03) | EM-BR01 | 05-email-sms-outreach/broker-and-team-lead-outreach.md | John |  |
@@ -1414,7 +1486,7 @@ Total actions: 1084. Days with actions: 95 of 95.
 | 15:30 | Agent DMs | Agent DM block: 20 warm agents (DM-A01 to DM-A10, EM-A01 to EM-A04 by day, PH-A01, PH-A02) | DM-A01 | 05-email-sms-outreach/agent-direct-outreach.md | John |  |
 | 17:00 | YouTube Shorts | Post SV-057 | SV-057 | 03-social/short-form-video-scripts.md | John | Founder log: Honest case for annual and when not to. CTA: Start your 14-day Agent trial. utm_content=SV-057. @watchdogindex [create]. Title = hook; upload SRT. |
 
-#### Friday, December 18, 2026  (18 actions)
+#### Friday, December 18, 2026  (19 actions)
 
 | Time | Channel | Action | Asset | File | Owner | Notes |
 | --- | --- | --- | --- | --- | --- | --- |
@@ -1428,6 +1500,7 @@ Total actions: 1084. Days with actions: 95 of 95.
 | 10:00 | Instagram Stories | Post Story set | IG-S35 | 03-social/instagram-plan.md | Coordinator | Share to FB page Stories; save to matching highlight |
 | 10:00 | Team pilot | Pilot reports (RF-032) for pilots 7 and 8; day-30 conversion conversations (RF-036) | RF-032 | team-leader-offer.md | Coordinator | John holds the conversion conversation |
 | 12:00 | Instagram Reels | Post SV-058 | SV-058 | 03-social/short-form-video-scripts.md | John | Postcard Friday: Ten-minute January card. CTA: Start your 14-day Agent trial. utm_content=SV-058. @watchdogindex [create]. Choose cover; link in bio. |
+| 12:00 | Meta ads | AD-M-035 last seats on if Founding seats remain | AD-M-035 | 04-paid-ads/meta-ads.md | Coordinator | Real count only |
 | 13:00 | Facebook groups | Group engagement: 20 minutes of helpful comments | FBG-ENG | 03-social/facebook-group-playbook.md | John | Search groups for tax assessment appeal revaluation permit flood; log count in target sheet |
 | 14:00 | Founding Agents | Application review block; reassign freed seats; waitlist replies (RF-006) | RF-006 | founding-agent-program.md | Coordinator |  |
 | 15:00 | Email | Write next Monday's Watchdog Agent Weekly issue |  | 05-email-sms-outreach/weekly-agent-email.md | John |  |
@@ -1471,7 +1544,7 @@ Total actions: 1084. Days with actions: 95 of 95.
 | 15:30 | Agent DMs | Agent DM block: 20 warm agents (DM-A01 to DM-A10, EM-A01 to EM-A04 by day, PH-A01, PH-A02) | DM-A01 | 05-email-sms-outreach/agent-direct-outreach.md | John |  |
 | 17:00 | YouTube Shorts | Post SV-059 | SV-059 | 03-social/short-form-video-scripts.md | John | The Monday desk: First Monday of 2027; ten minutes of setup. CTA: Start your 14-day Agent trial. utm_content=SV-059. @watchdogindex [create]. Title = hook; upload SRT. |
 
-#### Tuesday, December 22, 2026  (11 actions)
+#### Tuesday, December 22, 2026  (12 actions)
 
 | Time | Channel | Action | Asset | File | Owner | Notes |
 | --- | --- | --- | --- | --- | --- | --- |
@@ -1479,6 +1552,7 @@ Total actions: 1084. Days with actions: 95 of 95.
 | 07:30 | TikTok | Post SV-060 | SV-060 | 03-social/short-form-video-scripts.md | John | Client asked me: Assessment notice in February; four steps and a date. CTA: Save this. utm_content=SV-060. @thetaxwatchdog. Native upload; link in bio. |
 | 07:45 | LinkedIn | Publish LinkedIn post | LI-060 | 03-social/linkedin-posts.md | John | teaching post; track teaching |
 | 08:00 | LinkedIn video | Post SV-060 | SV-060 | 03-social/short-form-video-scripts.md | John | Client asked me: Assessment notice in February; four steps and a date. CTA: Save this. utm_content=SV-060. Native upload with custom thumbnail; link in first comment; max 3 hashtags. |
+| 09:00 | All | Paid review: kill, scale, refresh | REVIEW-WEEKLY | 04-paid-ads/paid-media-strategy.md | John | Search terms, kill and scale rules, frequency, pool sizes, budget pacing |
 | 09:00 | Events | Confirm January lunch-and-learn dates from Triple Play conversations | EV-002 | office-flyers-and-sell-sheet.md | John | Quiet week Dec 24 to 27 follows |
 | 09:30 | Broker outreach | Broker outreach block: 10 new brokers, 10 follow-ups (EM-BR01 to EM-BR05 by day, PH-BR01, PH-BR02, DM-BR01 to DM-BR03) | EM-BR01 | 05-email-sms-outreach/broker-and-team-lead-outreach.md | John |  |
 | 10:00 | Pipeline review | Q4 recruitment recap drafted (sessions; seats; conversion; referrals; pilots; partners; Triple Play) | EV-011 | brokerage-lunch-and-learn.md | Coordinator | Clean root-level URLs in the recap |
@@ -1487,7 +1561,7 @@ Total actions: 1084. Days with actions: 95 of 95.
 | 15:30 | Agent DMs | Agent DM block: 20 warm agents (DM-A01 to DM-A10, EM-A01 to EM-A04 by day, PH-A01, PH-A02) | DM-A01 | 05-email-sms-outreach/agent-direct-outreach.md | John |  |
 | 17:00 | YouTube Shorts | Post SV-060 | SV-060 | 03-social/short-form-video-scripts.md | John | Client asked me: Assessment notice in February; four steps and a date. CTA: Save this. utm_content=SV-060. @watchdogindex [create]. Title = hook; upload SRT. |
 
-#### Wednesday, December 23, 2026  (13 actions)
+#### Wednesday, December 23, 2026  (14 actions)
 
 | Time | Channel | Action | Asset | File | Owner | Notes |
 | --- | --- | --- | --- | --- | --- | --- |
@@ -1502,6 +1576,7 @@ Total actions: 1084. Days with actions: 95 of 95.
 | 12:00 | LinkedIn | Publish LinkedIn carousel (PDF document post) | LI-C13 | 03-social/linkedin-carousels.md | John | Weekly PDF carousel: 2027 appeal season prep calendar |
 | 13:00 | Facebook groups | Group engagement: 20 minutes of helpful comments | FBG-ENG | 03-social/facebook-group-playbook.md | John | Search groups for tax assessment appeal revaluation permit flood; log count in target sheet |
 | 15:30 | Agent DMs | Agent DM block: 20 warm agents (DM-A01 to DM-A10, EM-A01 to EM-A04 by day, PH-A01, PH-A02) | DM-A01 | 05-email-sms-outreach/agent-direct-outreach.md | John |  |
+| 17:00 | All | Quiet week: reduce to BRAND search and RT stage 3 only for Dec 24 to 27 | BUDGET-QUIET | 04-paid-ads/budget-and-pacing.csv | Coordinator |  |
 | 17:00 | YouTube Shorts | Post SV-061 | SV-061 | 03-social/short-form-video-scripts.md | John | Town compare: Same house two towns (BANK). CTA: Comment TOWN. utm_content=SV-061. @watchdogindex [create]. Title = hook; upload SRT. |
 | 19:00 | Video production | Film batch: Reshoots only | Reshoots only | 03-social/short-form-video-scripts.md | John | Quiet week Dec 24 to 27 follows. Nothing films on those days. |
 
@@ -1533,11 +1608,12 @@ Total actions: 1084. Days with actions: 95 of 95.
 
 ### Week of Monday, December 28
 
-#### Monday, December 28, 2026  (13 actions)
+#### Monday, December 28, 2026  (14 actions)
 
 | Time | Channel | Action | Asset | File | Owner | Notes |
 | --- | --- | --- | --- | --- | --- | --- |
 | 06:30 | Email | Send Watchdog Agent Weekly issue 13: should I appeal, 2027 setup, Dec 31 | EM-N13 | 05-email-sms-outreach/weekly-agent-email.md | Coordinator |  |
+| 07:00 | All | Resume year-end campaign; creative refresh; final push through Dec 31 | REFRESH-CREATIVE | 04-paid-ads/meta-ads.md | Coordinator | Every 2 weeks |
 | 07:15 | LinkedIn | LinkedIn engagement block | LI-ENG | 03-social/linkedin-founder-playbook.md | John | 20 minutes: reply to comments; 6 to 8 comments on broker/team-leader/association/partner posts; accept connections; send day-after DMs |
 | 07:30 | TikTok | Post SV-062 | SV-062 | 03-social/short-form-video-scripts.md | John | The Monday desk: A Monday with the desk start to finish (BANK). CTA: Start your 14-day Agent trial. utm_content=SV-062. @thetaxwatchdog. Native upload; link in bio. |
 | 08:15 | LinkedIn | Publish LinkedIn post | LI-062 | 03-social/linkedin-posts.md | John | founder log post; track founder log |
@@ -1551,7 +1627,7 @@ Total actions: 1084. Days with actions: 95 of 95.
 | 13:00 | Facebook groups | Group engagement: 20 minutes of helpful comments | FBG-ENG | 03-social/facebook-group-playbook.md | John | Search groups for tax assessment appeal revaluation permit flood; log count in target sheet |
 | 17:00 | YouTube Shorts | Post SV-062 | SV-062 | 03-social/short-form-video-scripts.md | John | The Monday desk: A Monday with the desk start to finish (BANK). CTA: Start your 14-day Agent trial. utm_content=SV-062. @watchdogindex [create]. Title = hook; upload SRT. |
 
-#### Tuesday, December 29, 2026  (9 actions)
+#### Tuesday, December 29, 2026  (10 actions)
 
 | Time | Channel | Action | Asset | File | Owner | Notes |
 | --- | --- | --- | --- | --- | --- | --- |
@@ -1559,6 +1635,7 @@ Total actions: 1084. Days with actions: 95 of 95.
 | 07:30 | TikTok | Post SV-063 | SV-063 | 03-social/short-form-video-scripts.md | John | Tax bill translator: Three numbers in 30 seconds (BANK). CTA: Look up a property free. utm_content=SV-063. @thetaxwatchdog. Native upload; link in bio. |
 | 07:45 | LinkedIn | Publish LinkedIn post | LI-063 | 03-social/linkedin-posts.md | John | teaching post; track teaching |
 | 08:00 | LinkedIn video | Post SV-063 | SV-063 | 03-social/short-form-video-scripts.md | John | Tax bill translator: Three numbers in 30 seconds (BANK). CTA: Look up a property free. utm_content=SV-063. Native upload with custom thumbnail; link in first comment; max 3 hashtags. |
+| 09:00 | All | Paid review: kill, scale, refresh | REVIEW-WEEKLY | 04-paid-ads/paid-media-strategy.md | John | Search terms, kill and scale rules, frequency, pool sizes, budget pacing |
 | 09:30 | Email | Resend annual switch to monthly accounts who did not open EM-P04 | EM-P04 | 05-email-sms-outreach/post-trial-and-winback.md | Coordinator |  |
 | 10:00 | Ambassadors | January post prompt drafted; ambassador office Q and A dates for January collected | RF-046 | ambassador-program.md | Coordinator |  |
 | 11:00 | Facebook groups | Post group value post | FBG-025 | 03-social/facebook-group-playbook.md | John | From John profile; 2 to 3 groups; no link in body; 90/10 rule |
@@ -1581,7 +1658,7 @@ Total actions: 1084. Days with actions: 95 of 95.
 | 17:00 | YouTube Shorts | Post SV-064 | SV-064 | 03-social/short-form-video-scripts.md | John | Walk in knowing: Five checks in two minutes (BANK). CTA: Save this. utm_content=SV-064. @watchdogindex [create]. Title = hook; upload SRT. |
 | 19:00 | Video production | Film batch: January week 1 (next plan) | January week 1 (next plan) | 03-social/short-form-video-scripts.md | John | Optional. Film the first January scripts if the Q1 plan is ready. |
 
-#### Thursday, December 31, 2026  (13 actions)
+#### Thursday, December 31, 2026  (14 actions)
 
 | Time | Channel | Action | Asset | File | Owner | Notes |
 | --- | --- | --- | --- | --- | --- | --- |
@@ -1594,6 +1671,7 @@ Total actions: 1084. Days with actions: 95 of 95.
 | 10:00 | Founding Agents | January Founding batch plan (waitlist and freed seats) and the 2027 events calendar handoff | RF-006 | founding-agent-program.md | John |  |
 | 10:00 | Setup | Q4 outreach wrap: export trial starts by source, day-14 conversion, EM-T11 and SMS-T01 delivery logs, unsubscribe and do-not-contact log, broker sessions booked, pilots started | EM-SETUP-16 | 05-email-sms-outreach/objection-handling.md | Coordinator | Feeds 2027 plan |
 | 11:00 | Facebook groups | Post group value post | FBG-026 | 03-social/facebook-group-playbook.md | John | From John profile; 2 to 3 groups; no link in body; 90/10 rule |
+| 12:00 | All | Year-end campaign off at end of day; Q4 paid wrap report; January budget decision | REPORT-Q4-WRAP | 04-paid-ads/utm-and-tracking.md | John | Cohort CAC on October and November trials |
 | 12:00 | Instagram Reels | Post SV-065 | SV-065 | 03-social/short-form-video-scripts.md | John | Founder log: Last day of 2026; recap and January. CTA: Start your 14-day Agent trial or go annual. utm_content=SV-065. @watchdogindex [create]. Choose cover; link in bio. |
 | 12:00 | Milestone | Window ends. Final scorecard, Q1 2027 plan: appeal season (assessment notices about Feb 1, regular appeal deadline Apr 1) |  | 01-strategy/kpi-dashboard-template.csv | John |  |
 | 12:30 | Instagram | Publish carousel | IG-C13 | 03-social/instagram-plan.md | Coordinator | Also LinkedIn document post same day; FB page album next Monday |

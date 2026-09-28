@@ -9,6 +9,25 @@ Everything needed to market Watchdog to New Jersey real estate agents, team lead
 3. `02-calendar/master-calendar.md`: every day from September 28 to December 31 with what to do, when, which asset, and who owns it. Import `master-calendar.ics` into Google Calendar or Outlook. Open `master-calendar.csv` in a sheet.
 4. `01-strategy/launch-readiness-checklist.md`: what has to be true before the doors open on October 12.
 
+## By the numbers
+
+| Item | Count |
+| --- | ---: |
+| Days covered by the calendar (Sep 28 to Dec 31) | 95 of 95 |
+| Dated actions in the master calendar | 1,162 |
+| Short-form video scripts | 65 |
+| LinkedIn posts / carousels | 65 / 13 |
+| Facebook page posts / group value posts | 40 / 26 |
+| Instagram carousels / Story prompts | 13 / 39 |
+| Meta ad variants / Google Search ad groups / LinkedIn ads / YouTube scripts / retargeting variants | 36 / 6 / 8 / 6 / 12 |
+| Rendered static creatives (12 concepts x 3 sizes) | 36 PNGs |
+| Emails, texts, DMs, and call scripts | about 120 |
+| Weekly agent email issues | 13 |
+| Lunch-and-learn sessions planned / webinars / Founding Agent seats | 12 / 2 / 100 |
+| Print ad sets / postcards / press releases / radio spots | 9 / 4 / 3 / 4 |
+| Objections answered | 20 |
+| Words of ready-to-use copy and plans | about 209,000 |
+
 ## Folder map
 
 | Folder | What is in it |
@@ -32,6 +51,10 @@ Everything needed to market Watchdog to New Jersey real estate agents, team lead
 ## Rules that apply to everything
 
 No em dashes. No emojis. No buzzwords. No "leads." Property data is not seller intent. Only the prices in the brief. Placeholders in square brackets are things to fill in, never facts. Full list: `08-objections-and-compliance/compliance-copy-rules.md`.
+
+## The ZIP
+
+The same folder is packaged as `watchdog-agent-marketing-q4-2026.zip` beside it. Unzip it anywhere; every link inside the kit is relative to the kit root.
 
 ## Note on where this folder lives
 

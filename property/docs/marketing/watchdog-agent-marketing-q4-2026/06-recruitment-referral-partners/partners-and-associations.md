@@ -38,7 +38,7 @@ Wave logic: the statewide association and the five largest regions first (they t
 
 1. Affiliate membership. Most boards offer an affiliate or business-partner category with dues [placeholder: confirm dues per board]. It buys a listing, event access, and usually a seat at the table. Join the statewide association and the two or three boards where the most Founding Agents work. Owner decision on which and how many.
 2. A 45-minute member education session: "New Jersey property taxes for agents: what the assessment means, Chapter 123, the October 1 date, added assessments, and what a buyer actually pays." Education first, product for five minutes, same rules as the lunch-and-learn. Offered virtual or in person, any weekday. Not CE credit unless the board's own CE provider approves it [verify].
-3. Newsletter placement. A 150-word item with one property fact and the free lookup, or a paid placement [placeholder: confirm rates]. Link to /for/real-estate-agents with utm_source=[board-slug]&utm_medium=newsletter&utm_campaign=q4-agents-[phase]&utm_content=RF-050.
+3. Newsletter placement. A 150-word item with one property fact and the free lookup, or a paid placement [placeholder: confirm rates]. Link to /for/real-estate-agents with utm_source=[board-slug]&utm_medium=newsletter&utm_campaign=q4-agents-<phase>&utm_content=RF-050.
 4. Sponsorship of a Q4 event: a coffee break, a breakfast, or a table at a member meeting [placeholder: confirm the event calendar and the sponsorship menu per board]. Only where the audience is agents.
 
 ### RF-050: Association email (to the executive officer or member services contact; business address; unsubscribe and physical address)
