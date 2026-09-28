@@ -9,6 +9,10 @@ on:
       - 'api/watchdog-property-alerts.js'
       - 'api/watchdog-true-cost.js'
       - 'api/watchdog-checkup.js'
+      - 'api/watchdog-extension.js'
+      - 'extension/**'
+      - 'property/js/agent-extension-key.js'
+      - 'property/tests/browser-extension-contract.mjs'
       - 'property/js/agent-checkups.js'
       - 'property/agent-desk/index.html'
       - 'property/tests/checkup-contract.mjs'
@@ -40,6 +44,10 @@ on:
       - 'api/watchdog-property-alerts.js'
       - 'api/watchdog-true-cost.js'
       - 'api/watchdog-checkup.js'
+      - 'api/watchdog-extension.js'
+      - 'extension/**'
+      - 'property/js/agent-extension-key.js'
+      - 'property/tests/browser-extension-contract.mjs'
       - 'property/js/agent-checkups.js'
       - 'property/agent-desk/index.html'
       - 'property/tests/checkup-contract.mjs'
@@ -77,6 +85,8 @@ jobs:
         run: npm install --omit=dev --ignore-scripts --no-audit --no-fund --no-package-lock
       - name: Verify property page contract
         run: node property/tests/property-page-contract.mjs
+      - name: Verify browser extension contract
+        run: node property/tests/browser-extension-contract.mjs
       - name: Verify tax checkup contract
         run: node property/tests/checkup-contract.mjs
       - name: Verify true cost card contract

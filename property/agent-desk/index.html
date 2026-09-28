@@ -220,6 +220,19 @@
             <a class="adh-tool" href="/town-compare" data-adh-tool="town-compare"><span class="adh-tool-ic tone-teal"><i class="fas fa-city" aria-hidden="true"></i></span><span class="adh-tool-copy"><b>Compare towns</b><small>Taxes, fairness and budget pressure side by side.</small></span><span class="adh-tool-go"><span>Open</span> <i class="fas fa-arrow-right" aria-hidden="true"></i></span></a>
             <a class="adh-tool" href="/data-center" data-adh-tool="data-center"><span class="adh-tool-ic tone-sky"><i class="fas fa-database" aria-hidden="true"></i></span><span class="adh-tool-copy"><b>Data center</b><small>Statewide tables, revaluations and sources.</small></span><span class="adh-tool-go"><span>Open</span> <i class="fas fa-arrow-right" aria-hidden="true"></i></span></a>
           </div>
+          <section id="ad-extension" class="ad27-card ad-extension" aria-labelledby="ad-extension-title" data-msg-created="Key created. Copy it into the Watchdog extension now; it won't be shown again." data-msg-copied="Copied." data-msg-revoked="Your key is turned off. The extension stops working until you create a new one." data-msg-plan="The browser extension is part of the Agent plan." data-msg-signin="Sign in again, then try once more." data-msg-error="That didn't work. Try again in a minute.">
+            <header class="ad27-card-head"><h2 id="ad-extension-title">Browser extension</h2></header>
+            <p class="adh-help">See the tax, assessment and Watchdog Score on any New Jersey listing while you browse Zillow, Realtor.com or Redfin. Add the Watchdog extension to Chrome or Edge, then paste your key into it.</p>
+            <div class="ad-ext-row">
+              <button type="button" class="ad27-btn primary" data-ext-create><i class="fas fa-key" aria-hidden="true"></i> Create my key</button>
+              <button type="button" class="ad27-btn" data-ext-revoke>Turn off my key</button>
+            </div>
+            <div class="ad-ext-key" data-ext-key hidden>
+              <label for="ad-ext-key-value">Your key (shown once; creating a new one replaces it)</label>
+              <div class="ad-ext-row"><input id="ad-ext-key-value" readonly spellcheck="false"><button type="button" class="ad27-btn" data-ext-copy><i class="fas fa-copy" aria-hidden="true"></i> Copy</button></div>
+            </div>
+            <p class="ad-ext-msg" role="status" aria-live="polite" data-ext-msg></p>
+          </section>
         </section>
 
         <!-- DEALS -->
@@ -304,5 +317,6 @@
   <script src="/property/js/agent-control-evidence-mobile.js"></script>
   <script src="/property/js/agent-hub.js?v=20260929a"></script>
   <script src="/property/js/agent-checkups.js?v=20260929a"></script>
+  <script src="/property/js/agent-extension-key.js?v=20260929a"></script>
 </body>
 </html>
