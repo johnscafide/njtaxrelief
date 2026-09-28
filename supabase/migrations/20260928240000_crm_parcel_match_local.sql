@@ -231,6 +231,7 @@ declare
   a record;
   v_norm text;
   v_house text;
+  v_key text;
   v_city_key text;
   v_all jsonb;
   v_pick jsonb := '[]'::jsonb;
@@ -252,13 +253,27 @@ begin
     return v_out || jsonb_build_object('status', 'no_match', 'reason', 'no_house_number', 'parcels', '[]'::jsonb);
   end if;
   v_house := split_part(v_norm, ' ', 1);
+  -- The street's most distinctive word ("FARNWOOD" in "91 FARNWOOD RD") must appear in the
+  -- parcel address before the full normalization runs; suffixes and directions can be spelled out.
+  select t into v_key
+    from unnest(string_to_array(regexp_replace(v_norm, ' UNIT .*$', ''), ' ')) with ordinality as u(t, i)
+   where i > 1 and t not in ('ST', 'AVE', 'RD', 'DR', 'LN', 'CT', 'BLVD', 'CIR', 'PKWY', 'HWY', 'TER', 'PL',
+                             'TRL', 'TPKE', 'RT', 'N', 'S', 'E', 'W', 'UNIT', 'AND')
+   order by length(t) desc, i
+   limit 1;
 
   select coalesce(jsonb_agg(jsonb_build_object('pams_pin', p.pams_pin, 'address', p.address, 'town', p.town,
            'county', p.county, 'district', left(p.pams_pin, 4)) order by p.pams_pin), '[]'::jsonb)
     into v_all
     from public.property_lookups p
-   where p.address ~>=~ (v_house || ' ') and p.address ~<~ (v_house || '!')
-     and public.watchdog_norm_street(p.address) = v_norm;
+   where p.address in (
+     select q.address from (
+       -- Index-only: addresses with this house number that contain the key word.
+       select distinct r.address from public.property_lookups r
+        where r.address ~>=~ (v_house || ' ') and r.address ~<~ (v_house || '!')
+          and (v_key is null or strpos(upper(r.address), v_key) > 0)
+     ) q
+     where public.watchdog_norm_street(q.address) = v_norm);
 
   -- "12 Main St Unit 4" when the parcel record has no unit.
   if jsonb_array_length(v_all) = 0 and v_norm ~ ' UNIT ' then
@@ -266,8 +281,13 @@ begin
              'county', p.county, 'district', left(p.pams_pin, 4)) order by p.pams_pin), '[]'::jsonb)
       into v_all
       from public.property_lookups p
-     where p.address ~>=~ (v_house || ' ') and p.address ~<~ (v_house || '!')
-       and public.watchdog_norm_street(p.address) = regexp_replace(v_norm, ' UNIT .*$', '');
+     where p.address in (
+       select q.address from (
+         select distinct r.address from public.property_lookups r
+          where r.address ~>=~ (v_house || ' ') and r.address ~<~ (v_house || '!')
+            and (v_key is null or strpos(upper(r.address), v_key) > 0)
+       ) q
+       where public.watchdog_norm_street(q.address) = regexp_replace(v_norm, ' UNIT .*$', ''));
     v_match := 'unit_base';
   end if;
 
