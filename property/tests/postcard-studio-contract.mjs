@@ -94,4 +94,10 @@ const whiteLabel = read('property/js/watchdog-designs-white-label.js');
 assert.match(whiteLabel, /Post\\s\?card\\s\?Mania/, 'filter catches the vendor name');
 assert.match(whiteLabel, /\\bPCM\\b/, 'filter catches the vendor abbreviation');
 
+// Postcard Studio is the default place to mail postcards.
+const desk = read('property/agent-desk/index.html');
+assert.equal((desk.match(/href="\/marketing-studio\/postcards" data-adh-tool="mailers"/g) || []).length, 2, 'Agent Desk mailer buttons open Postcard Studio');
+assert.match(read('property/js/agent-hub.js'), /'mailers':\['\/marketing-studio\/postcards'/);
+assert.match(read('property/js/marketing-studio-audience-review.js'), /location\.href=`\/marketing-studio\/postcards\?campaign=/, 'saving an audience continues to Postcard Studio');
+
 console.log('Postcard Studio contract passed.');
