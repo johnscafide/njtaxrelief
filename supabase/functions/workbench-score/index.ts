@@ -280,6 +280,14 @@ function sanitizePublicRow(raw) {
     last_year_tax: num(raw?.last_year_tax ?? raw?.tax)
   };
 }
+/* Precomputed rows store each ROBUST part as a bare score to keep the
+   statewide cache small; expand to the { score } shape on-demand rows use. */
+function cachedComponents(inputs) {
+  const parts = inputs?.components || {};
+  if (!inputs?.precomputed) return parts;
+  return Object.fromEntries(Object.entries(parts).map(([key, value]) => [key, value && typeof value === "object" ? value : { score: value ?? null }]));
+}
+
 async function handlePublicScore(req, body, admin) {
   const origin = req.headers.get("origin") || "";
   if (!ORIGINS.has(origin)) return out(req, 403, { error: "Origin not allowed" });
@@ -301,7 +309,7 @@ async function handlePublicScore(req, body, admin) {
   for (const row of rows) {
     const hit = cachedByPin.get(row.pams_pin);
     if (hit && hit.model_version === SCORE_MODEL && hit.facts_hash === hashes.get(row.pams_pin) && Date.parse(hit.expires_at) > now) {
-      result.set(row.pams_pin, { pams_pin: row.pams_pin, watchdog_score: Number(hit.score), evidence_coverage: num(hit.evidence_coverage), confidence: hit.confidence, verdict: hit.verdict, model_version: SCORE_MODEL, components: hit.inputs?.components || {}, observed_at: hit.computed_at, source: "robust_public_cache" });
+      result.set(row.pams_pin, { pams_pin: row.pams_pin, watchdog_score: Number(hit.score), evidence_coverage: num(hit.evidence_coverage), confidence: hit.confidence, verdict: hit.verdict, model_version: SCORE_MODEL, components: cachedComponents(hit.inputs), observed_at: hit.computed_at, source: "robust_public_cache" });
     } else missing.push(row);
   }
 

@@ -27,4 +27,7 @@ assert.match(py, /if len\(job_token\) < 32:/, 'the batch job refuses to run with
 const wf = fs.readFileSync('.github/workflows/parcel-composite-sync.yml', 'utf8');
 assert.match(wf, /name: Precompute Watchdog Scores\n\s+if: github\.event_name == 'schedule' \|\| inputs\.what == 'scores' \|\| inputs\.what == 'both'/, 'scores refresh after every monthly parcel sync');
 assert.match(wf, /SCORE_PRECOMPUTE_TOKEN: \$\{\{ secrets\.SCORE_PRECOMPUTE_TOKEN \}\}/, 'the workflow passes the job token from secrets');
+assert.match(fn, /components: cachedComponents\(hit\.inputs\), observed_at: hit\.computed_at, source: "robust_public_cache"/, 'public cache hits go through the component expander');
+assert.match(fn, /if \(!inputs\?\.precomputed\) return parts;/, 'on-demand cache rows are returned unchanged');
+assert.match(fn, /\{ score: value \?\? null \}/, 'precomputed bare scores become { score } objects');
 console.log('Score precompute contract passed.');
