@@ -58,6 +58,24 @@ function dateLabel(value){
   return d.toLocaleDateString('en-US',{month:'short',day:'numeric',year:'numeric'});
 }
 
+/* Saved rows can carry zero-padded PINs (0904_00009_00020); Watchdog records
+   use the short form (0904_9_20). Same rule as workbench-baseline canonicalPin. */
+function canonicalPin(pin){
+  const parts=String(pin||'').trim().split('_');
+  if(parts.length<3)return parts.join('_');
+  const strip=v=>{const m=String(v).match(/^(\d+)(\.\d+)?$/);return m?String(Number(m[1]))+(m[2]||''):v;};
+  return [parts[0],strip(parts[1]),strip(parts[2]),...parts.slice(3)].join('_');
+}
+
+async function friendlyError(err){
+  const status=Number(err?.context?.status||err?.status||0);
+  let body=null;try{body=await err?.context?.json?.();}catch(_){}
+  if(status===403)return{status,message:body?.error||'This review is part of Watchdog Pro.'};
+  if(status===409)return{status,message:'Watchdog does not have enough public records for this property to run a review yet. It will not guess.'};
+  if(status===429)return{status,message:'You have reached today’s review limit. Try again tomorrow.'};
+  return{status,message:'Watchdog could not finish this review right now. Please try again in a minute.'};
+}
+
 function close(){
   document.getElementById('wdwhy-backdrop')?.remove();
   document.getElementById('wdwhy-panel')?.remove();
@@ -184,13 +202,13 @@ async function open(options){
   shell(address||pin||'Property review');
   const sb=client();
   if(!sb){renderError('Your signed-in Watchdog session is not available on this page.',401);return;}
-  pin=await resolvePin(sb,pin,address);
+  pin=canonicalPin(await resolvePin(sb,pin,address));
   if(!pin){renderError('Watchdog could not match this saved property to a parcel record.',400);return;}
   try{
     const r=await sb.functions.invoke('intelligence-assessment-run-preview',{body:{model_key:'assessment_anomaly',scope_type:'property',scope_value:{source:'watchdog_why',surface:String(options?.surface||'unknown').slice(0,80)},pams_pins:[pin],limit:1}});
     if(r.error){
-      const status=Number(r.error?.context?.status||r.error?.status||0);
-      throw Object.assign(new Error(r.error?.message||'Watchdog Intelligence could not complete this review.'),{status});
+      const fe=await friendlyError(r.error);
+      throw Object.assign(new Error(fe.message),{status:fe.status});
     }
     const finding=Array.isArray(r.data?.findings)?r.data.findings[0]:null;
     const [context]=await Promise.all([propertyContext(sb,pin,finding?.property_context||{}),ensurePlain()]);
@@ -256,5 +274,5 @@ ensureCss();
 document.addEventListener('click',delegated);
 if(document.readyState==='loading')document.addEventListener('DOMContentLoaded',installSurfaceButtons,{once:true});else installSurfaceButtons();
 new MutationObserver(scheduleInstall).observe(document.documentElement,{childList:true,subtree:true});
-window.WatchdogWhy={open,close,install:installSurfaceButtons};
+window.WatchdogWhy={open,close,install:installSurfaceButtons,canonicalPin};
 })();
