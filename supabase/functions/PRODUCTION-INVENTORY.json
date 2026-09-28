@@ -10,16 +10,16 @@
       "tracking": "source_snapshot"
     },
     "backoffice-api": {
-      "version": 23,
-      "sha256": "d99ba50255c1d885b759295c269b0722ff95b2db8b7ec335ee1006dd88944776",
+      "version": 31,
+      "sha256": "5380281a5f1bed89e89fde46ae1647fb8d1fc7df8080d953b7a7b0e560569c9e",
       "verify_jwt": false,
       "tracking": "source_snapshot"
     },
     "backoffice-dev-login": {
-      "version": 5,
-      "sha256": "fe4731f524b38934db9f3dea3661670449b8d90f65e55e4aa0f4b22ef0743e73",
+      "version": 25,
+      "sha256": "7cc33e89acda271782ce70bbaa4ec30981c13b907779b5c3d93509f0d6d05c7a",
       "verify_jwt": false,
-      "tracking": "fingerprint_only"
+      "tracking": "source_snapshot"
     },
     "backoffice-lead-ingest": {
       "version": 4,
@@ -34,8 +34,8 @@
       "tracking": "source_snapshot"
     },
     "bulk-marker-hydrate": {
-      "version": 20,
-      "sha256": "b0fda121d5897d19d0fb7fe1b354fce67aca0fc4d2796b2b10c063316aad521f",
+      "version": 27,
+      "sha256": "c176a4dc94c7aed598b4536010c20b04c42041c32315e50325221e725357b782",
       "verify_jwt": true,
       "tracking": "source_snapshot"
     },
@@ -64,8 +64,8 @@
       "tracking": "source_snapshot"
     },
     "farm-intelligence-scan": {
-      "version": 21,
-      "sha256": "7f9a6d47852b3453cc5b531361f4b6da785887be695942128e29ee34995849b1",
+      "version": 28,
+      "sha256": "4ca9c3257f2c37389fe2128a1e7cf2b5b6f078733e0f54d5a88e57c1aa444564",
       "verify_jwt": true,
       "tracking": "source_snapshot"
     },
@@ -292,14 +292,14 @@
       "tracking": "source_snapshot"
     },
     "workbench-baseline": {
-      "version": 23,
-      "sha256": "7159ed39401d1b36bd1f0b90e192cffe0b0f161a4a40bb33ec0cd60271bfd09e",
+      "version": 30,
+      "sha256": "11fe27a51bd0960c010cf75b2b4ee7a3175579ce9d80540f6153aed9da2e622b",
       "verify_jwt": true,
       "tracking": "source_snapshot"
     },
     "workbench-derived": {
-      "version": 47,
-      "sha256": "43ed77f836e1acf733f8cfa8317047291c0016ef7a3787f06c36cbca2156351c",
+      "version": 48,
+      "sha256": "ecc02163f6fec1fdddcd7ebc590c369e177857eefc7f1e6a254afc3133e43db0",
       "verify_jwt": false,
       "tracking": "source_snapshot"
     },
