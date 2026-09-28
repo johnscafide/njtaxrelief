@@ -35,7 +35,7 @@ Use this page as the final review before anything ships. It repeats the binding 
 ## Review process before anything ships
 
 1. Read the piece out loud. If it sounds like a brochure, rewrite it.
-2. Search for the em dash character and every banned phrase above. Fix all hits.
+2. Search for the em dash character (U+2014) and every banned phrase above. Fix all hits.
 3. Check every number against the brief. Delete any number not in the brief unless it is a labeled sample.
 4. Check every URL is a clean root-level www.watchdogindex.com route with the UTM pattern.
 5. For anything mentioning the trial: amount, day, cancel method present.
@@ -49,7 +49,7 @@ Use this page as the final review before anything ships. It repeats the binding 
 Run from the plan folder:
 
 ```
-grep -rn -e "—" -e "lead" -e "likely to sell" -e "motivated" -e "distressed" -e "ROBUST Score" -e "Intel " -e "7-day" -e "free forever" -e "unlock" -e "leverage" -e "seamless" -e "game-chang" --include=*.md --include=*.csv . | grep -v -e "leader" -e "leadership" -e "Intelligence"
+grep -rn -e "$(printf '\xe2\x80\x94')" -e "lead" -e "likely to sell" -e "motivated" -e "distressed" -e "ROBUST Score" -e "Intel " -e "7-day" -e "free forever" -e "unlock" -e "leverage" -e "seamless" -e "game-chang" --include=*.md --include=*.csv . | grep -v -e "leader" -e "leadership" -e "Intelligence"
 ```
 
 Anything the grep finds gets fixed or gets an explicit exception written next to it.

@@ -50,7 +50,7 @@ No screenshot on the banner. No tagline with a superlative.
 - Industry: Software Development.
 - Current position: Founder, Watchdog. Link the position to the Watchdog company page once it exists so the logo shows.
 - Creator mode: on. Topics: New Jersey real estate, property tax, real estate agents, proptech, founders.
-- Custom button (Premium): "Visit website" to https://www.watchdogindex.com/for/real-estate-agents?utm_source=linkedin&utm_medium=profile&utm_campaign=q4-agents-phase0&utm_content=profile-button. Update the phase token at each phase boundary.
+- Custom button (Premium): "Visit website" to https://www.watchdogindex.com/for/real-estate-agents?utm_source=linkedin&utm_medium=profile&utm_campaign=q4-agents-0&utm_content=profile-button. Update the phase token at each phase boundary.
 
 ## 2. Company page setup checklist ("Watchdog")
 

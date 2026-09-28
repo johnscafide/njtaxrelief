@@ -53,7 +53,7 @@ You can pull the assessment, the ratio, and the sale history for any New Jersey 
 
 **First comment**
 
-Free property lookup, any New Jersey address: https://www.watchdogindex.com/free?utm_source=linkedin&utm_medium=organic&utm_campaign=q4-agents-phase0&utm_content=LI-001
+Free property lookup, any New Jersey address: https://www.watchdogindex.com/free?utm_source=linkedin&utm_medium=organic&utm_campaign=q4-agents-0&utm_content=LI-001
 Assessments are tax-administration values, not appraisals. Every number on the page shows its source and date.
 
 **Image or document**
@@ -80,7 +80,7 @@ If you sell in New Jersey and you want in early, the link is in the first commen
 
 **First comment**
 
-Request a Founding Agent invite (limited to 100 New Jersey agents): https://www.watchdogindex.com/for/real-estate-agents?utm_source=linkedin&utm_medium=organic&utm_campaign=q4-agents-phase0&utm_content=LI-002
+Request a Founding Agent invite (limited to 100 New Jersey agents): https://www.watchdogindex.com/for/real-estate-agents?utm_source=linkedin&utm_medium=organic&utm_campaign=q4-agents-0&utm_content=LI-002
 
 **Image or document**
 
@@ -112,7 +112,7 @@ Watchdog shows the valuation year, the town ratio, and the sale history beside e
 
 **First comment**
 
-Free property lookup: https://www.watchdogindex.com/free?utm_source=linkedin&utm_medium=organic&utm_campaign=q4-agents-phase0&utm_content=LI-003
+Free property lookup: https://www.watchdogindex.com/free?utm_source=linkedin&utm_medium=organic&utm_campaign=q4-agents-0&utm_content=LI-003
 Watchdog's tax calendar page lists the October 1 valuation date and the rest of the New Jersey property tax year.
 
 **Image or document**
@@ -145,8 +145,8 @@ Today is the valuation date. Good day to learn the math. Look up any address, fr
 
 **First comment**
 
-Free property lookup: https://www.watchdogindex.com/free?utm_source=linkedin&utm_medium=organic&utm_campaign=q4-agents-phase0&utm_content=LI-004
-How Watchdog sources the ratio and every other number: https://www.watchdogindex.com/data-methodology?utm_source=linkedin&utm_medium=organic&utm_campaign=q4-agents-phase0&utm_content=LI-004
+Free property lookup: https://www.watchdogindex.com/free?utm_source=linkedin&utm_medium=organic&utm_campaign=q4-agents-0&utm_content=LI-004
+How Watchdog sources the ratio and every other number: https://www.watchdogindex.com/data-methodology?utm_source=linkedin&utm_medium=organic&utm_campaign=q4-agents-0&utm_content=LI-004
 
 **Image or document**
 
@@ -179,7 +179,7 @@ I am building the place where they sit next to each other. Vote, and tell me in 
 
 **First comment**
 
-Look up both houses, free: https://www.watchdogindex.com/free?utm_source=linkedin&utm_medium=organic&utm_campaign=q4-agents-phase0&utm_content=LI-005
+Look up both houses, free: https://www.watchdogindex.com/free?utm_source=linkedin&utm_medium=organic&utm_campaign=q4-agents-0&utm_content=LI-005
 
 **Image or document**
 
@@ -212,8 +212,8 @@ Watchdog puts all six on one page with the source attached to each. Free lookup,
 
 **First comment**
 
-Free property lookup: https://www.watchdogindex.com/free?utm_source=linkedin&utm_medium=organic&utm_campaign=q4-agents-phase0&utm_content=LI-006
-The agent field guide walks through each of the six: https://www.watchdogindex.com/real-estate-agents?utm_source=linkedin&utm_medium=organic&utm_campaign=q4-agents-phase0&utm_content=LI-006
+Free property lookup: https://www.watchdogindex.com/free?utm_source=linkedin&utm_medium=organic&utm_campaign=q4-agents-0&utm_content=LI-006
+The agent field guide walks through each of the six: https://www.watchdogindex.com/real-estate-agents?utm_source=linkedin&utm_medium=organic&utm_campaign=q4-agents-0&utm_content=LI-006
 
 **Image or document**
 
@@ -243,8 +243,8 @@ I keep a one-page explainer of the bill layout. First comment.
 
 **First comment**
 
-The agent field guide, including the tax-bill walkthrough: https://www.watchdogindex.com/real-estate-agents?utm_source=linkedin&utm_medium=organic&utm_campaign=q4-agents-phase0&utm_content=LI-007
-Free lookup for any address: https://www.watchdogindex.com/free?utm_source=linkedin&utm_medium=organic&utm_campaign=q4-agents-phase0&utm_content=LI-007
+The agent field guide, including the tax-bill walkthrough: https://www.watchdogindex.com/real-estate-agents?utm_source=linkedin&utm_medium=organic&utm_campaign=q4-agents-0&utm_content=LI-007
+Free lookup for any address: https://www.watchdogindex.com/free?utm_source=linkedin&utm_medium=organic&utm_campaign=q4-agents-0&utm_content=LI-007
 
 **Image or document**
 
@@ -272,8 +272,8 @@ Founding list this week: [X] agents. Trial flow: [status]. Door opens October 12
 
 **First comment**
 
-Free property lookup: https://www.watchdogindex.com/free?utm_source=linkedin&utm_medium=organic&utm_campaign=q4-agents-phase0&utm_content=LI-008
-How every number is sourced: https://www.watchdogindex.com/data-methodology?utm_source=linkedin&utm_medium=organic&utm_campaign=q4-agents-phase0&utm_content=LI-008
+Free property lookup: https://www.watchdogindex.com/free?utm_source=linkedin&utm_medium=organic&utm_campaign=q4-agents-0&utm_content=LI-008
+How every number is sourced: https://www.watchdogindex.com/data-methodology?utm_source=linkedin&utm_medium=organic&utm_campaign=q4-agents-0&utm_content=LI-008
 
 **Image or document**
 
@@ -308,8 +308,8 @@ If you run a team and want to talk about setting this up for the whole office, m
 
 **First comment**
 
-For offices and teams, Watchdog Teams is controlled enrollment. Talk to us: message me here, or read the plans overview at https://www.watchdogindex.com/pro?utm_source=linkedin&utm_medium=organic&utm_campaign=q4-agents-phase0&utm_content=LI-009
-Individual agents can start with the free lookup: https://www.watchdogindex.com/free?utm_source=linkedin&utm_medium=organic&utm_campaign=q4-agents-phase0&utm_content=LI-009
+For offices and teams, Watchdog Teams is controlled enrollment. Talk to us: message me here, or read the plans overview at https://www.watchdogindex.com/pro?utm_source=linkedin&utm_medium=organic&utm_campaign=q4-agents-0&utm_content=LI-009
+Individual agents can start with the free lookup: https://www.watchdogindex.com/free?utm_source=linkedin&utm_medium=organic&utm_campaign=q4-agents-0&utm_content=LI-009
 
 **Image or document**
 
@@ -341,8 +341,8 @@ Request a Founding Agent invite this weekend. Link in the first comment. Monday 
 
 **First comment**
 
-Request a Founding Agent invite: https://www.watchdogindex.com/for/real-estate-agents?utm_source=linkedin&utm_medium=organic&utm_campaign=q4-agents-phase0&utm_content=LI-010
-Plan details and comparison: https://www.watchdogindex.com/pro?utm_source=linkedin&utm_medium=organic&utm_campaign=q4-agents-phase0&utm_content=LI-010
+Request a Founding Agent invite: https://www.watchdogindex.com/for/real-estate-agents?utm_source=linkedin&utm_medium=organic&utm_campaign=q4-agents-0&utm_content=LI-010
+Plan details and comparison: https://www.watchdogindex.com/pro?utm_source=linkedin&utm_medium=organic&utm_campaign=q4-agents-0&utm_content=LI-010
 
 **Image or document**
 
@@ -372,10 +372,10 @@ Links in the first comment. Ask me anything below.
 
 **First comment**
 
-Start your 14-day Agent trial: https://www.watchdogindex.com/agents/trial?utm_source=linkedin&utm_medium=organic&utm_campaign=q4-agents-phase1&utm_content=LI-011
-Request a Founding Agent invite: https://www.watchdogindex.com/for/real-estate-agents?utm_source=linkedin&utm_medium=organic&utm_campaign=q4-agents-phase1&utm_content=LI-011
+Start your 14-day Agent trial: https://www.watchdogindex.com/agents/trial?utm_source=linkedin&utm_medium=organic&utm_campaign=q4-agents-1&utm_content=LI-011
+Request a Founding Agent invite: https://www.watchdogindex.com/for/real-estate-agents?utm_source=linkedin&utm_medium=organic&utm_campaign=q4-agents-1&utm_content=LI-011
 
-Fallback if the billing gate is not open on Oct 12: drop the trial paragraph, keep the Founding paragraph, and link the invite-code beta page: https://www.watchdogindex.com/beta?utm_source=linkedin&utm_medium=organic&utm_campaign=q4-agents-phase1&utm_content=LI-011
+Fallback if the billing gate is not open on Oct 12: drop the trial paragraph, keep the Founding paragraph, and link the invite-code beta page: https://www.watchdogindex.com/beta?utm_source=linkedin&utm_medium=organic&utm_campaign=q4-agents-1&utm_content=LI-011
 
 **Image or document**
 
@@ -409,8 +409,8 @@ Start your 14-day Agent trial, first comment.
 
 **First comment**
 
-Start your 14-day Agent trial: https://www.watchdogindex.com/agents/trial?utm_source=linkedin&utm_medium=organic&utm_campaign=q4-agents-phase1&utm_content=LI-012
-Free lookup if you just want to see the Chapter 123 line: https://www.watchdogindex.com/free?utm_source=linkedin&utm_medium=organic&utm_campaign=q4-agents-phase1&utm_content=LI-012
+Start your 14-day Agent trial: https://www.watchdogindex.com/agents/trial?utm_source=linkedin&utm_medium=organic&utm_campaign=q4-agents-1&utm_content=LI-012
+Free lookup if you just want to see the Chapter 123 line: https://www.watchdogindex.com/free?utm_source=linkedin&utm_medium=organic&utm_campaign=q4-agents-1&utm_content=LI-012
 
 **Image or document**
 
@@ -442,8 +442,8 @@ If you started a trial and something confused you, reply here or message me. I r
 
 **First comment**
 
-Start your 14-day Agent trial: https://www.watchdogindex.com/agents/trial?utm_source=linkedin&utm_medium=organic&utm_campaign=q4-agents-phase1&utm_content=LI-013
-Agent Academy (eight lessons, required on trial accounts): https://www.watchdogindex.com/agent/training?utm_source=linkedin&utm_medium=organic&utm_campaign=q4-agents-phase1&utm_content=LI-013
+Start your 14-day Agent trial: https://www.watchdogindex.com/agents/trial?utm_source=linkedin&utm_medium=organic&utm_campaign=q4-agents-1&utm_content=LI-013
+Agent Academy (eight lessons, required on trial accounts): https://www.watchdogindex.com/agent/training?utm_source=linkedin&utm_medium=organic&utm_campaign=q4-agents-1&utm_content=LI-013
 
 **Image or document**
 
@@ -473,8 +473,8 @@ Watchdog puts those four on one page for any address. Start your 14-day Agent tr
 
 **First comment**
 
-Start your 14-day Agent trial: https://www.watchdogindex.com/agents/trial?utm_source=linkedin&utm_medium=organic&utm_campaign=q4-agents-phase1&utm_content=LI-014
-Buyers and sellers can run their own check with Watchdog Move ($29 for 90 days, no auto-renewal): https://www.watchdogindex.com/move?utm_source=linkedin&utm_medium=organic&utm_campaign=q4-agents-phase1&utm_content=LI-014
+Start your 14-day Agent trial: https://www.watchdogindex.com/agents/trial?utm_source=linkedin&utm_medium=organic&utm_campaign=q4-agents-1&utm_content=LI-014
+Buyers and sellers can run their own check with Watchdog Move ($29 for 90 days, no auto-renewal): https://www.watchdogindex.com/move?utm_source=linkedin&utm_medium=organic&utm_campaign=q4-agents-1&utm_content=LI-014
 
 **Image or document**
 
@@ -507,8 +507,8 @@ If you run a team and want to see what that Monday list looks like for your offi
 
 **First comment**
 
-Watchdog Teams is controlled enrollment. Talk to us: message me here. Plans overview: https://www.watchdogindex.com/pro?utm_source=linkedin&utm_medium=organic&utm_campaign=q4-agents-phase1&utm_content=LI-015
-Individual agents: start your 14-day Agent trial at https://www.watchdogindex.com/agents/trial?utm_source=linkedin&utm_medium=organic&utm_campaign=q4-agents-phase1&utm_content=LI-015
+Watchdog Teams is controlled enrollment. Talk to us: message me here. Plans overview: https://www.watchdogindex.com/pro?utm_source=linkedin&utm_medium=organic&utm_campaign=q4-agents-1&utm_content=LI-015
+Individual agents: start your 14-day Agent trial at https://www.watchdogindex.com/agents/trial?utm_source=linkedin&utm_medium=organic&utm_campaign=q4-agents-1&utm_content=LI-015
 
 **Image or document**
 
@@ -542,8 +542,8 @@ Watchdog flags revaluation and reassessment status on the property view, so you 
 
 **First comment**
 
-Start your 14-day Agent trial: https://www.watchdogindex.com/agents/trial?utm_source=linkedin&utm_medium=organic&utm_campaign=q4-agents-phase1&utm_content=LI-016
-Compare revaluation status across towns: https://www.watchdogindex.com/town-compare?utm_source=linkedin&utm_medium=organic&utm_campaign=q4-agents-phase1&utm_content=LI-016
+Start your 14-day Agent trial: https://www.watchdogindex.com/agents/trial?utm_source=linkedin&utm_medium=organic&utm_campaign=q4-agents-1&utm_content=LI-016
+Compare revaluation status across towns: https://www.watchdogindex.com/town-compare?utm_source=linkedin&utm_medium=organic&utm_campaign=q4-agents-1&utm_content=LI-016
 
 **Image or document**
 
@@ -580,8 +580,8 @@ Watchdog's Opportunity Desk sorts these reasons for your client list into Now, T
 
 **First comment**
 
-Start your 14-day Agent trial and load your past clients into Agent Desk: https://www.watchdogindex.com/agents/trial?utm_source=linkedin&utm_medium=organic&utm_campaign=q4-agents-phase1&utm_content=LI-017
-What the Agent Desk looks like: https://www.watchdogindex.com/agent-desk?utm_source=linkedin&utm_medium=organic&utm_campaign=q4-agents-phase1&utm_content=LI-017
+Start your 14-day Agent trial and load your past clients into Agent Desk: https://www.watchdogindex.com/agents/trial?utm_source=linkedin&utm_medium=organic&utm_campaign=q4-agents-1&utm_content=LI-017
+What the Agent Desk looks like: https://www.watchdogindex.com/agent-desk?utm_source=linkedin&utm_medium=organic&utm_campaign=q4-agents-1&utm_content=LI-017
 
 **Image or document**
 
@@ -613,7 +613,7 @@ Watchdog's tax calendar and the Opportunity Desk surface both. Start your 14-day
 
 **First comment**
 
-Start your 14-day Agent trial: https://www.watchdogindex.com/agents/trial?utm_source=linkedin&utm_medium=organic&utm_campaign=q4-agents-phase1&utm_content=LI-018
+Start your 14-day Agent trial: https://www.watchdogindex.com/agents/trial?utm_source=linkedin&utm_medium=organic&utm_campaign=q4-agents-1&utm_content=LI-018
 
 **Image or document**
 
@@ -643,8 +643,8 @@ Trials so far: [X]. Founding cohort: [X] of 100. First comment has both doors.
 
 **First comment**
 
-Start your 14-day Agent trial: https://www.watchdogindex.com/agents/trial?utm_source=linkedin&utm_medium=organic&utm_campaign=q4-agents-phase1&utm_content=LI-019
-Request a Founding Agent invite: https://www.watchdogindex.com/for/real-estate-agents?utm_source=linkedin&utm_medium=organic&utm_campaign=q4-agents-phase1&utm_content=LI-019
+Start your 14-day Agent trial: https://www.watchdogindex.com/agents/trial?utm_source=linkedin&utm_medium=organic&utm_campaign=q4-agents-1&utm_content=LI-019
+Request a Founding Agent invite: https://www.watchdogindex.com/for/real-estate-agents?utm_source=linkedin&utm_medium=organic&utm_campaign=q4-agents-1&utm_content=LI-019
 
 **Image or document**
 
@@ -675,7 +675,7 @@ Reply or message me with your office and a date. Details in the first comment.
 
 **First comment**
 
-To book a lunch-and-learn, message me with your office, town, and preferred date. For teams, Watchdog Teams is controlled enrollment; talk to us. Overview: https://www.watchdogindex.com/for/real-estate-agents?utm_source=linkedin&utm_medium=organic&utm_campaign=q4-agents-phase1&utm_content=LI-020
+To book a lunch-and-learn, message me with your office, town, and preferred date. For teams, Watchdog Teams is controlled enrollment; talk to us. Overview: https://www.watchdogindex.com/for/real-estate-agents?utm_source=linkedin&utm_medium=organic&utm_campaign=q4-agents-1&utm_content=LI-020
 
 **Image or document**
 
@@ -706,7 +706,7 @@ Watchdog's tax calendar carries the date, and the Opportunity Desk flags tax-rel
 
 **First comment**
 
-Start your 14-day Agent trial: https://www.watchdogindex.com/agents/trial?utm_source=linkedin&utm_medium=organic&utm_campaign=q4-agents-phase1&utm_content=LI-021
+Start your 14-day Agent trial: https://www.watchdogindex.com/agents/trial?utm_source=linkedin&utm_medium=organic&utm_campaign=q4-agents-1&utm_content=LI-021
 The state's ANCHOR and PAS-1 page: [insert official NJ Division of Taxation URL]
 
 **Image or document**
@@ -738,7 +738,7 @@ Watchdog shows permit lifecycle and assessment changes on the same page so you s
 
 **First comment**
 
-Start your 14-day Agent trial: https://www.watchdogindex.com/agents/trial?utm_source=linkedin&utm_medium=organic&utm_campaign=q4-agents-phase1&utm_content=LI-022
+Start your 14-day Agent trial: https://www.watchdogindex.com/agents/trial?utm_source=linkedin&utm_medium=organic&utm_campaign=q4-agents-1&utm_content=LI-022
 
 **Image or document**
 
@@ -770,8 +770,8 @@ Watchdog's Town Compare lays those side by side for any set of New Jersey towns.
 
 **First comment**
 
-Town Compare: https://www.watchdogindex.com/town-compare?utm_source=linkedin&utm_medium=organic&utm_campaign=q4-agents-phase1&utm_content=LI-023
-Start your 14-day Agent trial: https://www.watchdogindex.com/agents/trial?utm_source=linkedin&utm_medium=organic&utm_campaign=q4-agents-phase1&utm_content=LI-023
+Town Compare: https://www.watchdogindex.com/town-compare?utm_source=linkedin&utm_medium=organic&utm_campaign=q4-agents-1&utm_content=LI-023
+Start your 14-day Agent trial: https://www.watchdogindex.com/agents/trial?utm_source=linkedin&utm_medium=organic&utm_campaign=q4-agents-1&utm_content=LI-023
 
 **Image or document**
 
@@ -805,8 +805,8 @@ Both doors in the first comment. [X] Founding spots left.
 
 **First comment**
 
-Start your 14-day Agent trial: https://www.watchdogindex.com/agents/trial?utm_source=linkedin&utm_medium=organic&utm_campaign=q4-agents-phase1&utm_content=LI-024
-Request a Founding Agent invite: https://www.watchdogindex.com/for/real-estate-agents?utm_source=linkedin&utm_medium=organic&utm_campaign=q4-agents-phase1&utm_content=LI-024
+Start your 14-day Agent trial: https://www.watchdogindex.com/agents/trial?utm_source=linkedin&utm_medium=organic&utm_campaign=q4-agents-1&utm_content=LI-024
+Request a Founding Agent invite: https://www.watchdogindex.com/for/real-estate-agents?utm_source=linkedin&utm_medium=organic&utm_campaign=q4-agents-1&utm_content=LI-024
 
 **Image or document**
 
@@ -838,10 +838,10 @@ First comment.
 
 **First comment**
 
-Start your 14-day Agent trial: https://www.watchdogindex.com/agents/trial?utm_source=linkedin&utm_medium=organic&utm_campaign=q4-agents-phase1&utm_content=LI-025
-Request a Founding Agent invite: https://www.watchdogindex.com/for/real-estate-agents?utm_source=linkedin&utm_medium=organic&utm_campaign=q4-agents-phase1&utm_content=LI-025
+Start your 14-day Agent trial: https://www.watchdogindex.com/agents/trial?utm_source=linkedin&utm_medium=organic&utm_campaign=q4-agents-1&utm_content=LI-025
+Request a Founding Agent invite: https://www.watchdogindex.com/for/real-estate-agents?utm_source=linkedin&utm_medium=organic&utm_campaign=q4-agents-1&utm_content=LI-025
 
-Fallback if the billing gate is not open: replace the last paragraph with "Request a Founding Agent invite, [X] of 100 spots left," and link https://www.watchdogindex.com/beta?utm_source=linkedin&utm_medium=organic&utm_campaign=q4-agents-phase1&utm_content=LI-025
+Fallback if the billing gate is not open: replace the last paragraph with "Request a Founding Agent invite, [X] of 100 spots left," and link https://www.watchdogindex.com/beta?utm_source=linkedin&utm_medium=organic&utm_campaign=q4-agents-1&utm_content=LI-025
 
 **Image or document**
 
@@ -869,8 +869,8 @@ I keep both open on Watchdog. Free lookup or the 14-day Agent trial in the first
 
 **First comment**
 
-Free lookup: https://www.watchdogindex.com/free?utm_source=linkedin&utm_medium=organic&utm_campaign=q4-agents-phase2&utm_content=LI-026
-Start your 14-day Agent trial: https://www.watchdogindex.com/agents/trial?utm_source=linkedin&utm_medium=organic&utm_campaign=q4-agents-phase2&utm_content=LI-026
+Free lookup: https://www.watchdogindex.com/free?utm_source=linkedin&utm_medium=organic&utm_campaign=q4-agents-2&utm_content=LI-026
+Start your 14-day Agent trial: https://www.watchdogindex.com/agents/trial?utm_source=linkedin&utm_medium=organic&utm_campaign=q4-agents-2&utm_content=LI-026
 
 **Image or document**
 
@@ -908,8 +908,8 @@ Both doors in the first comment.
 
 **First comment**
 
-Start your 14-day Agent trial: https://www.watchdogindex.com/agents/trial?utm_source=linkedin&utm_medium=organic&utm_campaign=q4-agents-phase2&utm_content=LI-027
-Request a Founding Agent invite: https://www.watchdogindex.com/for/real-estate-agents?utm_source=linkedin&utm_medium=organic&utm_campaign=q4-agents-phase2&utm_content=LI-027
+Start your 14-day Agent trial: https://www.watchdogindex.com/agents/trial?utm_source=linkedin&utm_medium=organic&utm_campaign=q4-agents-2&utm_content=LI-027
+Request a Founding Agent invite: https://www.watchdogindex.com/for/real-estate-agents?utm_source=linkedin&utm_medium=organic&utm_campaign=q4-agents-2&utm_content=LI-027
 
 **Image or document**
 
@@ -940,8 +940,8 @@ Uniformity is one of the six things the Watchdog Score, powered by the ROBUST Fr
 
 **First comment**
 
-Start your 14-day Agent trial: https://www.watchdogindex.com/agents/trial?utm_source=linkedin&utm_medium=organic&utm_campaign=q4-agents-phase2&utm_content=LI-028
-Free lookup on both houses: https://www.watchdogindex.com/free?utm_source=linkedin&utm_medium=organic&utm_campaign=q4-agents-phase2&utm_content=LI-028
+Start your 14-day Agent trial: https://www.watchdogindex.com/agents/trial?utm_source=linkedin&utm_medium=organic&utm_campaign=q4-agents-2&utm_content=LI-028
+Free lookup on both houses: https://www.watchdogindex.com/free?utm_source=linkedin&utm_medium=organic&utm_campaign=q4-agents-2&utm_content=LI-028
 
 **Image or document**
 
@@ -971,8 +971,8 @@ Draw the farm, pick the audience, proof the card. First comment.
 
 **First comment**
 
-Start your 14-day Agent trial and open Postcard Studio from Agent Desk: https://www.watchdogindex.com/agents/trial?utm_source=linkedin&utm_medium=organic&utm_campaign=q4-agents-phase2&utm_content=LI-029
-Agent Desk overview: https://www.watchdogindex.com/agent-desk?utm_source=linkedin&utm_medium=organic&utm_campaign=q4-agents-phase2&utm_content=LI-029
+Start your 14-day Agent trial and open Postcard Studio from Agent Desk: https://www.watchdogindex.com/agents/trial?utm_source=linkedin&utm_medium=organic&utm_campaign=q4-agents-2&utm_content=LI-029
+Agent Desk overview: https://www.watchdogindex.com/agent-desk?utm_source=linkedin&utm_medium=organic&utm_campaign=q4-agents-2&utm_content=LI-029
 
 **Image or document**
 
@@ -1005,7 +1005,7 @@ Drop the question your buyers actually ask, in their words. I will write the one
 
 **First comment**
 
-Free lookup, so you can answer with the record open: https://www.watchdogindex.com/free?utm_source=linkedin&utm_medium=organic&utm_campaign=q4-agents-phase2&utm_content=LI-030
+Free lookup, so you can answer with the record open: https://www.watchdogindex.com/free?utm_source=linkedin&utm_medium=organic&utm_campaign=q4-agents-2&utm_content=LI-030
 
 **Image or document**
 
@@ -1035,7 +1035,7 @@ Watchdog flags revaluation and reassessment status on the property view and in T
 
 **First comment**
 
-Start your 14-day Agent trial: https://www.watchdogindex.com/agents/trial?utm_source=linkedin&utm_medium=organic&utm_campaign=q4-agents-phase2&utm_content=LI-031
+Start your 14-day Agent trial: https://www.watchdogindex.com/agents/trial?utm_source=linkedin&utm_medium=organic&utm_campaign=q4-agents-2&utm_content=LI-031
 
 **Image or document**
 
@@ -1067,7 +1067,7 @@ Watchdog Teams runs this for a whole office. Controlled enrollment. Talk to us, 
 
 **First comment**
 
-Watchdog Teams is controlled enrollment. Talk to us: message me here with your office size and CRM. Plans overview: https://www.watchdogindex.com/pro?utm_source=linkedin&utm_medium=organic&utm_campaign=q4-agents-phase2&utm_content=LI-032
+Watchdog Teams is controlled enrollment. Talk to us: message me here with your office size and CRM. Plans overview: https://www.watchdogindex.com/pro?utm_source=linkedin&utm_medium=organic&utm_campaign=q4-agents-2&utm_content=LI-032
 
 **Image or document**
 
@@ -1098,8 +1098,8 @@ Town Compare on Watchdog shows the effective rate, the ratio, and the revaluatio
 
 **First comment**
 
-Town Compare: https://www.watchdogindex.com/town-compare?utm_source=linkedin&utm_medium=organic&utm_campaign=q4-agents-phase2&utm_content=LI-033
-Start your 14-day Agent trial: https://www.watchdogindex.com/agents/trial?utm_source=linkedin&utm_medium=organic&utm_campaign=q4-agents-phase2&utm_content=LI-033
+Town Compare: https://www.watchdogindex.com/town-compare?utm_source=linkedin&utm_medium=organic&utm_campaign=q4-agents-2&utm_content=LI-033
+Start your 14-day Agent trial: https://www.watchdogindex.com/agents/trial?utm_source=linkedin&utm_medium=organic&utm_campaign=q4-agents-2&utm_content=LI-033
 
 **Image or document**
 
@@ -1131,8 +1131,8 @@ First comment has both doors and the referral details.
 
 **First comment**
 
-Start your 14-day Agent trial: https://www.watchdogindex.com/agents/trial?utm_source=linkedin&utm_medium=organic&utm_campaign=q4-agents-phase2&utm_content=LI-034
-Request a Founding Agent invite: https://www.watchdogindex.com/for/real-estate-agents?utm_source=linkedin&utm_medium=organic&utm_campaign=q4-agents-phase2&utm_content=LI-034
+Start your 14-day Agent trial: https://www.watchdogindex.com/agents/trial?utm_source=linkedin&utm_medium=organic&utm_campaign=q4-agents-2&utm_content=LI-034
+Request a Founding Agent invite: https://www.watchdogindex.com/for/real-estate-agents?utm_source=linkedin&utm_medium=organic&utm_campaign=q4-agents-2&utm_content=LI-034
 Already on the plan? Your invite link is on your Account page.
 
 **Image or document**
@@ -1167,8 +1167,8 @@ Request a Founding Agent invite, or start your 14-day Agent trial. Both in the f
 
 **First comment**
 
-Request a Founding Agent invite: https://www.watchdogindex.com/for/real-estate-agents?utm_source=linkedin&utm_medium=organic&utm_campaign=q4-agents-phase2&utm_content=LI-035
-Start your 14-day Agent trial: https://www.watchdogindex.com/agents/trial?utm_source=linkedin&utm_medium=organic&utm_campaign=q4-agents-phase2&utm_content=LI-035
+Request a Founding Agent invite: https://www.watchdogindex.com/for/real-estate-agents?utm_source=linkedin&utm_medium=organic&utm_campaign=q4-agents-2&utm_content=LI-035
+Start your 14-day Agent trial: https://www.watchdogindex.com/agents/trial?utm_source=linkedin&utm_medium=organic&utm_campaign=q4-agents-2&utm_content=LI-035
 
 **Image or document**
 
@@ -1203,7 +1203,7 @@ Watchdog shows the permit lifecycle, the assessment change, and the deadline tog
 
 **First comment**
 
-Start your 14-day Agent trial: https://www.watchdogindex.com/agents/trial?utm_source=linkedin&utm_medium=organic&utm_campaign=q4-agents-phase2&utm_content=LI-036
+Start your 14-day Agent trial: https://www.watchdogindex.com/agents/trial?utm_source=linkedin&utm_medium=organic&utm_campaign=q4-agents-2&utm_content=LI-036
 
 **Image or document**
 
@@ -1234,8 +1234,8 @@ Watchdog shows assessment history, ratio, and permit status on one page. First c
 
 **First comment**
 
-Start your 14-day Agent trial: https://www.watchdogindex.com/agents/trial?utm_source=linkedin&utm_medium=organic&utm_campaign=q4-agents-phase2&utm_content=LI-037
-Free lookup: https://www.watchdogindex.com/free?utm_source=linkedin&utm_medium=organic&utm_campaign=q4-agents-phase2&utm_content=LI-037
+Start your 14-day Agent trial: https://www.watchdogindex.com/agents/trial?utm_source=linkedin&utm_medium=organic&utm_campaign=q4-agents-2&utm_content=LI-037
+Free lookup: https://www.watchdogindex.com/free?utm_source=linkedin&utm_medium=organic&utm_campaign=q4-agents-2&utm_content=LI-037
 
 **Image or document**
 
@@ -1270,7 +1270,7 @@ Watchdog builds that page for any New Jersey address, with a PDF you can leave b
 
 **First comment**
 
-Start your 14-day Agent trial: https://www.watchdogindex.com/agents/trial?utm_source=linkedin&utm_medium=organic&utm_campaign=q4-agents-phase2&utm_content=LI-038
+Start your 14-day Agent trial: https://www.watchdogindex.com/agents/trial?utm_source=linkedin&utm_medium=organic&utm_campaign=q4-agents-2&utm_content=LI-038
 
 **Image or document**
 
@@ -1303,8 +1303,8 @@ If you disagree with any of the five, tell me below. I might not change it, but 
 
 **First comment**
 
-Plans and what each tier carries: https://www.watchdogindex.com/pro?utm_source=linkedin&utm_medium=organic&utm_campaign=q4-agents-phase2&utm_content=LI-039
-Start your 14-day Agent trial: https://www.watchdogindex.com/agents/trial?utm_source=linkedin&utm_medium=organic&utm_campaign=q4-agents-phase2&utm_content=LI-039
+Plans and what each tier carries: https://www.watchdogindex.com/pro?utm_source=linkedin&utm_medium=organic&utm_campaign=q4-agents-2&utm_content=LI-039
+Start your 14-day Agent trial: https://www.watchdogindex.com/agents/trial?utm_source=linkedin&utm_medium=organic&utm_campaign=q4-agents-2&utm_content=LI-039
 
 **Image or document**
 
@@ -1337,7 +1337,7 @@ If you want to see what the Monday list looks like for your office, message me. 
 
 **First comment**
 
-Watchdog Teams is controlled enrollment. Talk to us: message me here with your office size. Plans overview: https://www.watchdogindex.com/pro?utm_source=linkedin&utm_medium=organic&utm_campaign=q4-agents-phase2&utm_content=LI-040
+Watchdog Teams is controlled enrollment. Talk to us: message me here with your office size. Plans overview: https://www.watchdogindex.com/pro?utm_source=linkedin&utm_medium=organic&utm_campaign=q4-agents-2&utm_content=LI-040
 
 **Image or document**
 
@@ -1369,7 +1369,7 @@ Free lookup in the first comment. Happy Thanksgiving.
 
 **First comment**
 
-Free lookup, any New Jersey address: https://www.watchdogindex.com/free?utm_source=linkedin&utm_medium=organic&utm_campaign=q4-agents-phase2&utm_content=LI-041
+Free lookup, any New Jersey address: https://www.watchdogindex.com/free?utm_source=linkedin&utm_medium=organic&utm_campaign=q4-agents-2&utm_content=LI-041
 
 **Image or document**
 
@@ -1404,7 +1404,7 @@ Watchdog shows the bill history so the line stands out. First comment.
 
 **First comment**
 
-Start your 14-day Agent trial: https://www.watchdogindex.com/agents/trial?utm_source=linkedin&utm_medium=organic&utm_campaign=q4-agents-phase2&utm_content=LI-042
+Start your 14-day Agent trial: https://www.watchdogindex.com/agents/trial?utm_source=linkedin&utm_medium=organic&utm_campaign=q4-agents-2&utm_content=LI-042
 The state's deduction forms: [insert NJ Division of Taxation URL for the veteran and senior deduction forms]
 
 **Image or document**
@@ -1435,8 +1435,8 @@ First comment has the doors, and the booth number when I have it.
 
 **First comment**
 
-Start your 14-day Agent trial: https://www.watchdogindex.com/agents/trial?utm_source=linkedin&utm_medium=organic&utm_campaign=q4-agents-phase2&utm_content=LI-043
-Request a Founding Agent invite: https://www.watchdogindex.com/for/real-estate-agents?utm_source=linkedin&utm_medium=organic&utm_campaign=q4-agents-phase2&utm_content=LI-043
+Start your 14-day Agent trial: https://www.watchdogindex.com/agents/trial?utm_source=linkedin&utm_medium=organic&utm_campaign=q4-agents-2&utm_content=LI-043
+Request a Founding Agent invite: https://www.watchdogindex.com/for/real-estate-agents?utm_source=linkedin&utm_medium=organic&utm_campaign=q4-agents-2&utm_content=LI-043
 Triple Play booth: [number], Atlantic City Convention Center, Dec 7 to 10.
 
 **Image or document**
@@ -1468,7 +1468,7 @@ Watchdog flags approaching appeal deadlines on the Opportunity Desk. First comme
 
 **First comment**
 
-Start your 14-day Agent trial: https://www.watchdogindex.com/agents/trial?utm_source=linkedin&utm_medium=organic&utm_campaign=q4-agents-phase2&utm_content=LI-044
+Start your 14-day Agent trial: https://www.watchdogindex.com/agents/trial?utm_source=linkedin&utm_medium=organic&utm_campaign=q4-agents-2&utm_content=LI-044
 County Board of Taxation contacts: [insert link to the county board directory]
 
 **Image or document**
@@ -1500,7 +1500,7 @@ Watchdog shows the Chapter 123 position and the county's deadline per address. F
 
 **First comment**
 
-Start your 14-day Agent trial: https://www.watchdogindex.com/agents/trial?utm_source=linkedin&utm_medium=organic&utm_campaign=q4-agents-phase2&utm_content=LI-045
+Start your 14-day Agent trial: https://www.watchdogindex.com/agents/trial?utm_source=linkedin&utm_medium=organic&utm_campaign=q4-agents-2&utm_content=LI-045
 
 **Image or document**
 
@@ -1534,8 +1534,8 @@ Send it to the people whose record you actually pulled. Agent Desk holds your cl
 
 **First comment**
 
-Start your 14-day Agent trial and load your client list: https://www.watchdogindex.com/agents/trial?utm_source=linkedin&utm_medium=organic&utm_campaign=q4-agents-phase2&utm_content=LI-046
-Agent Desk: https://www.watchdogindex.com/agent-desk?utm_source=linkedin&utm_medium=organic&utm_campaign=q4-agents-phase2&utm_content=LI-046
+Start your 14-day Agent trial and load your client list: https://www.watchdogindex.com/agents/trial?utm_source=linkedin&utm_medium=organic&utm_campaign=q4-agents-2&utm_content=LI-046
+Agent Desk: https://www.watchdogindex.com/agent-desk?utm_source=linkedin&utm_medium=organic&utm_campaign=q4-agents-2&utm_content=LI-046
 
 **Image or document**
 
@@ -1570,8 +1570,8 @@ Numbers this week: [X] trials, [X] paid, [X] Founding. First comment.
 
 **First comment**
 
-Start your 14-day Agent trial: https://www.watchdogindex.com/agents/trial?utm_source=linkedin&utm_medium=organic&utm_campaign=q4-agents-phase2&utm_content=LI-047
-How the data is sourced: https://www.watchdogindex.com/data-methodology?utm_source=linkedin&utm_medium=organic&utm_campaign=q4-agents-phase2&utm_content=LI-047
+Start your 14-day Agent trial: https://www.watchdogindex.com/agents/trial?utm_source=linkedin&utm_medium=organic&utm_campaign=q4-agents-2&utm_content=LI-047
+How the data is sourced: https://www.watchdogindex.com/data-methodology?utm_source=linkedin&utm_medium=organic&utm_campaign=q4-agents-2&utm_content=LI-047
 
 **Image or document**
 
@@ -1601,8 +1601,8 @@ Booth hours: [hours]. I am there all four days. First comment has the map.
 
 **First comment**
 
-Start your 14-day Agent trial: https://www.watchdogindex.com/agents/trial?utm_source=linkedin&utm_medium=organic&utm_campaign=q4-agents-phase2&utm_content=LI-048
-Request a Founding Agent invite: https://www.watchdogindex.com/for/real-estate-agents?utm_source=linkedin&utm_medium=organic&utm_campaign=q4-agents-phase2&utm_content=LI-048
+Start your 14-day Agent trial: https://www.watchdogindex.com/agents/trial?utm_source=linkedin&utm_medium=organic&utm_campaign=q4-agents-2&utm_content=LI-048
+Request a Founding Agent invite: https://www.watchdogindex.com/for/real-estate-agents?utm_source=linkedin&utm_medium=organic&utm_campaign=q4-agents-2&utm_content=LI-048
 Floor map and booth [number]: [insert Triple Play expo map link]
 
 **Image or document**
@@ -1633,7 +1633,7 @@ If you cannot make it, start your 14-day Agent trial from the link in the first 
 
 **First comment**
 
-Start your 14-day Agent trial: https://www.watchdogindex.com/agents/trial?utm_source=linkedin&utm_medium=organic&utm_campaign=q4-agents-phase3&utm_content=LI-049
+Start your 14-day Agent trial: https://www.watchdogindex.com/agents/trial?utm_source=linkedin&utm_medium=organic&utm_campaign=q4-agents-3&utm_content=LI-049
 Booth [number], hours [hours].
 
 **Image or document**
@@ -1664,8 +1664,8 @@ Booth [number] through Thursday. First comment.
 
 **First comment**
 
-Start your 14-day Agent trial: https://www.watchdogindex.com/agents/trial?utm_source=linkedin&utm_medium=organic&utm_campaign=q4-agents-phase3&utm_content=LI-050
-How Watchdog compares to PropStream, job by job: https://www.watchdogindex.com/pricing/propstream?utm_source=linkedin&utm_medium=organic&utm_campaign=q4-agents-phase3&utm_content=LI-050
+Start your 14-day Agent trial: https://www.watchdogindex.com/agents/trial?utm_source=linkedin&utm_medium=organic&utm_campaign=q4-agents-3&utm_content=LI-050
+How Watchdog compares to PropStream, job by job: https://www.watchdogindex.com/pricing/propstream?utm_source=linkedin&utm_medium=organic&utm_campaign=q4-agents-3&utm_content=LI-050
 
 **Image or document**
 
@@ -1700,8 +1700,8 @@ Look one up: first comment. Booth [number] at Triple Play through tomorrow.
 
 **First comment**
 
-Free lookup: https://www.watchdogindex.com/free?utm_source=linkedin&utm_medium=organic&utm_campaign=q4-agents-phase3&utm_content=LI-051
-The methodology behind each component: https://www.watchdogindex.com/data-methodology?utm_source=linkedin&utm_medium=organic&utm_campaign=q4-agents-phase3&utm_content=LI-051
+Free lookup: https://www.watchdogindex.com/free?utm_source=linkedin&utm_medium=organic&utm_campaign=q4-agents-3&utm_content=LI-051
+The methodology behind each component: https://www.watchdogindex.com/data-methodology?utm_source=linkedin&utm_medium=organic&utm_campaign=q4-agents-3&utm_content=LI-051
 
 **Image or document**
 
@@ -1735,8 +1735,8 @@ Founding Agent spots for individual agents: [X] left after this week.
 
 **First comment**
 
-Watchdog Teams: controlled enrollment, talk to us. Message me here, or start at https://www.watchdogindex.com/pro?utm_source=linkedin&utm_medium=organic&utm_campaign=q4-agents-phase3&utm_content=LI-052
-Individual agents: request a Founding Agent invite at https://www.watchdogindex.com/for/real-estate-agents?utm_source=linkedin&utm_medium=organic&utm_campaign=q4-agents-phase3&utm_content=LI-052
+Watchdog Teams: controlled enrollment, talk to us. Message me here, or start at https://www.watchdogindex.com/pro?utm_source=linkedin&utm_medium=organic&utm_campaign=q4-agents-3&utm_content=LI-052
+Individual agents: request a Founding Agent invite at https://www.watchdogindex.com/for/real-estate-agents?utm_source=linkedin&utm_medium=organic&utm_campaign=q4-agents-3&utm_content=LI-052
 
 **Image or document**
 
@@ -1770,7 +1770,7 @@ Vote, then tell me what you picked and why.
 **First comment**
 
 The 2027 appeal-season calendar (PDF): [insert link to the calendar file]
-Start your 14-day Agent trial: https://www.watchdogindex.com/agents/trial?utm_source=linkedin&utm_medium=organic&utm_campaign=q4-agents-phase3&utm_content=LI-053
+Start your 14-day Agent trial: https://www.watchdogindex.com/agents/trial?utm_source=linkedin&utm_medium=organic&utm_campaign=q4-agents-3&utm_content=LI-053
 
 **Image or document**
 
@@ -1800,7 +1800,7 @@ Flood screening is on every property view. First comment.
 
 **First comment**
 
-Free lookup, flood screening included: https://www.watchdogindex.com/free?utm_source=linkedin&utm_medium=organic&utm_campaign=q4-agents-phase3&utm_content=LI-054
+Free lookup, flood screening included: https://www.watchdogindex.com/free?utm_source=linkedin&utm_medium=organic&utm_campaign=q4-agents-3&utm_content=LI-054
 NJDEP official flood risk lookup: [insert NJDEP URL]
 
 **Image or document**
@@ -1834,8 +1834,8 @@ If you are on a monthly plan already, switch to annual from your Account page. I
 
 **First comment**
 
-Start your 14-day Agent trial: https://www.watchdogindex.com/agents/trial?utm_source=linkedin&utm_medium=organic&utm_campaign=q4-agents-phase3&utm_content=LI-055
-Plans, monthly vs. annual: https://www.watchdogindex.com/pro?utm_source=linkedin&utm_medium=organic&utm_campaign=q4-agents-phase3&utm_content=LI-055
+Start your 14-day Agent trial: https://www.watchdogindex.com/agents/trial?utm_source=linkedin&utm_medium=organic&utm_campaign=q4-agents-3&utm_content=LI-055
+Plans, monthly vs. annual: https://www.watchdogindex.com/pro?utm_source=linkedin&utm_medium=organic&utm_campaign=q4-agents-3&utm_content=LI-055
 
 **Image or document**
 
@@ -1873,7 +1873,7 @@ Watchdog carries the county's deadline on each property view. First comment has 
 **First comment**
 
 The 2027 appeal-season calendar (PDF): [insert link to the calendar file]
-Start your 14-day Agent trial: https://www.watchdogindex.com/agents/trial?utm_source=linkedin&utm_medium=organic&utm_campaign=q4-agents-phase3&utm_content=LI-056
+Start your 14-day Agent trial: https://www.watchdogindex.com/agents/trial?utm_source=linkedin&utm_medium=organic&utm_campaign=q4-agents-3&utm_content=LI-056
 
 **Image or document**
 
@@ -1905,8 +1905,8 @@ Watchdog puts the bill history, ratio, revaluation status, and permits on one pa
 
 **First comment**
 
-Start your 14-day Agent trial: https://www.watchdogindex.com/agents/trial?utm_source=linkedin&utm_medium=organic&utm_campaign=q4-agents-phase3&utm_content=LI-057
-Buyers can run their own check with Watchdog Move ($29 for 90 days): https://www.watchdogindex.com/move?utm_source=linkedin&utm_medium=organic&utm_campaign=q4-agents-phase3&utm_content=LI-057
+Start your 14-day Agent trial: https://www.watchdogindex.com/agents/trial?utm_source=linkedin&utm_medium=organic&utm_campaign=q4-agents-3&utm_content=LI-057
+Buyers can run their own check with Watchdog Move ($29 for 90 days): https://www.watchdogindex.com/move?utm_source=linkedin&utm_medium=organic&utm_campaign=q4-agents-3&utm_content=LI-057
 
 **Image or document**
 
@@ -1938,7 +1938,7 @@ First comment.
 
 **First comment**
 
-Start your 14-day Agent trial: https://www.watchdogindex.com/agents/trial?utm_source=linkedin&utm_medium=organic&utm_campaign=q4-agents-phase3&utm_content=LI-058
+Start your 14-day Agent trial: https://www.watchdogindex.com/agents/trial?utm_source=linkedin&utm_medium=organic&utm_campaign=q4-agents-3&utm_content=LI-058
 
 **Image or document**
 
@@ -1968,8 +1968,8 @@ Watchdog shows the Chapter 123 position with the math visible. Not a legal opini
 
 **First comment**
 
-Start your 14-day Agent trial: https://www.watchdogindex.com/agents/trial?utm_source=linkedin&utm_medium=organic&utm_campaign=q4-agents-phase3&utm_content=LI-059
-Free lookup to see the Chapter 123 line on any address: https://www.watchdogindex.com/free?utm_source=linkedin&utm_medium=organic&utm_campaign=q4-agents-phase3&utm_content=LI-059
+Start your 14-day Agent trial: https://www.watchdogindex.com/agents/trial?utm_source=linkedin&utm_medium=organic&utm_campaign=q4-agents-3&utm_content=LI-059
+Free lookup to see the Chapter 123 line on any address: https://www.watchdogindex.com/free?utm_source=linkedin&utm_medium=organic&utm_campaign=q4-agents-3&utm_content=LI-059
 
 **Image or document**
 
@@ -2002,8 +2002,8 @@ Free lookup in the first comment. Quiet week starts Thursday.
 
 **First comment**
 
-Free lookup: https://www.watchdogindex.com/free?utm_source=linkedin&utm_medium=organic&utm_campaign=q4-agents-phase3&utm_content=LI-060
-How sales are verified: https://www.watchdogindex.com/data-methodology?utm_source=linkedin&utm_medium=organic&utm_campaign=q4-agents-phase3&utm_content=LI-060
+Free lookup: https://www.watchdogindex.com/free?utm_source=linkedin&utm_medium=organic&utm_campaign=q4-agents-3&utm_content=LI-060
+How sales are verified: https://www.watchdogindex.com/data-methodology?utm_source=linkedin&utm_medium=organic&utm_campaign=q4-agents-3&utm_content=LI-060
 
 **Image or document**
 
@@ -2035,7 +2035,7 @@ Free lookup in the first comment. Merry Christmas to those celebrating.
 
 **First comment**
 
-Free lookup: https://www.watchdogindex.com/free?utm_source=linkedin&utm_medium=organic&utm_campaign=q4-agents-phase3&utm_content=LI-061
+Free lookup: https://www.watchdogindex.com/free?utm_source=linkedin&utm_medium=organic&utm_campaign=q4-agents-3&utm_content=LI-061
 
 **Image or document**
 
@@ -2074,8 +2074,8 @@ If you were part of this year, thank you. If you were not, the doors are in the 
 
 **First comment**
 
-Start your 14-day Agent trial: https://www.watchdogindex.com/agents/trial?utm_source=linkedin&utm_medium=organic&utm_campaign=q4-agents-phase3&utm_content=LI-062
-Request a Founding Agent invite: https://www.watchdogindex.com/for/real-estate-agents?utm_source=linkedin&utm_medium=organic&utm_campaign=q4-agents-phase3&utm_content=LI-062
+Start your 14-day Agent trial: https://www.watchdogindex.com/agents/trial?utm_source=linkedin&utm_medium=organic&utm_campaign=q4-agents-3&utm_content=LI-062
+Request a Founding Agent invite: https://www.watchdogindex.com/for/real-estate-agents?utm_source=linkedin&utm_medium=organic&utm_campaign=q4-agents-3&utm_content=LI-062
 
 **Image or document**
 
@@ -2107,7 +2107,7 @@ Watchdog monitors assessment changes on saved properties. Up to 25 on the Agent 
 
 **First comment**
 
-Start your 14-day Agent trial: https://www.watchdogindex.com/agents/trial?utm_source=linkedin&utm_medium=organic&utm_campaign=q4-agents-phase3&utm_content=LI-063
+Start your 14-day Agent trial: https://www.watchdogindex.com/agents/trial?utm_source=linkedin&utm_medium=organic&utm_campaign=q4-agents-3&utm_content=LI-063
 
 **Image or document**
 
@@ -2136,8 +2136,8 @@ $59 per month, or $590 per year, which is ten monthly payments. Ask your account
 
 **First comment**
 
-Start your 14-day Agent trial: https://www.watchdogindex.com/agents/trial?utm_source=linkedin&utm_medium=organic&utm_campaign=q4-agents-phase3&utm_content=LI-064
-Plans, monthly vs. annual: https://www.watchdogindex.com/pro?utm_source=linkedin&utm_medium=organic&utm_campaign=q4-agents-phase3&utm_content=LI-064
+Start your 14-day Agent trial: https://www.watchdogindex.com/agents/trial?utm_source=linkedin&utm_medium=organic&utm_campaign=q4-agents-3&utm_content=LI-064
+Plans, monthly vs. annual: https://www.watchdogindex.com/pro?utm_source=linkedin&utm_medium=organic&utm_campaign=q4-agents-3&utm_content=LI-064
 
 **Image or document**
 
@@ -2170,9 +2170,9 @@ Free lookup and both doors in the first comment. Happy New Year.
 
 **First comment**
 
-Free lookup: https://www.watchdogindex.com/free?utm_source=linkedin&utm_medium=organic&utm_campaign=q4-agents-phase3&utm_content=LI-065
-Start your 14-day Agent trial: https://www.watchdogindex.com/agents/trial?utm_source=linkedin&utm_medium=organic&utm_campaign=q4-agents-phase3&utm_content=LI-065
-Request a Founding Agent invite: https://www.watchdogindex.com/for/real-estate-agents?utm_source=linkedin&utm_medium=organic&utm_campaign=q4-agents-phase3&utm_content=LI-065
+Free lookup: https://www.watchdogindex.com/free?utm_source=linkedin&utm_medium=organic&utm_campaign=q4-agents-3&utm_content=LI-065
+Start your 14-day Agent trial: https://www.watchdogindex.com/agents/trial?utm_source=linkedin&utm_medium=organic&utm_campaign=q4-agents-3&utm_content=LI-065
+Request a Founding Agent invite: https://www.watchdogindex.com/for/real-estate-agents?utm_source=linkedin&utm_medium=organic&utm_campaign=q4-agents-3&utm_content=LI-065
 
 **Image or document**
 

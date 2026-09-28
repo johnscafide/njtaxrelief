@@ -47,7 +47,7 @@ Tomorrow is October 1. Every 2027 assessment in New Jersey is supposed to reflec
 
 **First comment**
 
-Free lookup, any New Jersey address: https://www.watchdogindex.com/free?utm_source=linkedin&utm_medium=organic&utm_campaign=q4-agents-phase0&utm_content=LI-C01
+Free lookup, any New Jersey address: https://www.watchdogindex.com/free?utm_source=linkedin&utm_medium=organic&utm_campaign=q4-agents-0&utm_content=LI-C01
 
 **Slides (9)**
 
@@ -101,8 +101,8 @@ The tax figure on the listing sheet is last year's bill, and buyers treat it as 
 
 **First comment**
 
-The agent field guide, including the tax-bill walkthrough: https://www.watchdogindex.com/real-estate-agents?utm_source=linkedin&utm_medium=organic&utm_campaign=q4-agents-phase0&utm_content=LI-C02
-Free lookup: https://www.watchdogindex.com/free?utm_source=linkedin&utm_medium=organic&utm_campaign=q4-agents-phase0&utm_content=LI-C02
+The agent field guide, including the tax-bill walkthrough: https://www.watchdogindex.com/real-estate-agents?utm_source=linkedin&utm_medium=organic&utm_campaign=q4-agents-0&utm_content=LI-C02
+Free lookup: https://www.watchdogindex.com/free?utm_source=linkedin&utm_medium=organic&utm_campaign=q4-agents-0&utm_content=LI-C02
 
 **Slides (10)**
 
@@ -160,8 +160,8 @@ A seller says her assessment proves the house is worth $612,000. It does not. Ni
 
 **First comment**
 
-Start your 14-day Agent trial: https://www.watchdogindex.com/agents/trial?utm_source=linkedin&utm_medium=organic&utm_campaign=q4-agents-phase1&utm_content=LI-C03
-Free lookup: https://www.watchdogindex.com/free?utm_source=linkedin&utm_medium=organic&utm_campaign=q4-agents-phase1&utm_content=LI-C03
+Start your 14-day Agent trial: https://www.watchdogindex.com/agents/trial?utm_source=linkedin&utm_medium=organic&utm_campaign=q4-agents-1&utm_content=LI-C03
+Free lookup: https://www.watchdogindex.com/free?utm_source=linkedin&utm_medium=organic&utm_campaign=q4-agents-1&utm_content=LI-C03
 
 **Slides (9)**
 
@@ -216,8 +216,8 @@ Chapter 123 decides most New Jersey tax appeals, and almost nobody outside the c
 
 **First comment**
 
-Start your 14-day Agent trial: https://www.watchdogindex.com/agents/trial?utm_source=linkedin&utm_medium=organic&utm_campaign=q4-agents-phase1&utm_content=LI-C04
-Free lookup to see the Chapter 123 line for any address: https://www.watchdogindex.com/free?utm_source=linkedin&utm_medium=organic&utm_campaign=q4-agents-phase1&utm_content=LI-C04
+Start your 14-day Agent trial: https://www.watchdogindex.com/agents/trial?utm_source=linkedin&utm_medium=organic&utm_campaign=q4-agents-1&utm_content=LI-C04
+Free lookup to see the Chapter 123 line for any address: https://www.watchdogindex.com/free?utm_source=linkedin&utm_medium=organic&utm_campaign=q4-agents-1&utm_content=LI-C04
 
 **Slides (8)**
 
@@ -268,8 +268,8 @@ Your buyer's lender built the escrow estimate on last year's bill. The first rea
 
 **First comment**
 
-Start your 14-day Agent trial: https://www.watchdogindex.com/agents/trial?utm_source=linkedin&utm_medium=organic&utm_campaign=q4-agents-phase1&utm_content=LI-C05
-Buyers can run their own check with Watchdog Move ($29 for 90 days, no auto-renewal): https://www.watchdogindex.com/move?utm_source=linkedin&utm_medium=organic&utm_campaign=q4-agents-phase1&utm_content=LI-C05
+Start your 14-day Agent trial: https://www.watchdogindex.com/agents/trial?utm_source=linkedin&utm_medium=organic&utm_campaign=q4-agents-1&utm_content=LI-C05
+Buyers can run their own check with Watchdog Move ($29 for 90 days, no auto-renewal): https://www.watchdogindex.com/move?utm_source=linkedin&utm_medium=organic&utm_campaign=q4-agents-1&utm_content=LI-C05
 
 **Slides (9)**
 
@@ -321,8 +321,8 @@ The best past-client call is the one where you know something about their house 
 
 **First comment**
 
-Start your 14-day Agent trial and load your past clients into Agent Desk: https://www.watchdogindex.com/agents/trial?utm_source=linkedin&utm_medium=organic&utm_campaign=q4-agents-phase2&utm_content=LI-C06
-Request a Founding Agent invite: https://www.watchdogindex.com/for/real-estate-agents?utm_source=linkedin&utm_medium=organic&utm_campaign=q4-agents-phase2&utm_content=LI-C06
+Start your 14-day Agent trial and load your past clients into Agent Desk: https://www.watchdogindex.com/agents/trial?utm_source=linkedin&utm_medium=organic&utm_campaign=q4-agents-2&utm_content=LI-C06
+Request a Founding Agent invite: https://www.watchdogindex.com/for/real-estate-agents?utm_source=linkedin&utm_medium=organic&utm_campaign=q4-agents-2&utm_content=LI-C06
 
 **Slides (9)**
 
@@ -379,7 +379,7 @@ An added-assessment bill shows up in October, is due November 1, and can be appe
 
 **First comment**
 
-Start your 14-day Agent trial: https://www.watchdogindex.com/agents/trial?utm_source=linkedin&utm_medium=organic&utm_campaign=q4-agents-phase2&utm_content=LI-C07
+Start your 14-day Agent trial: https://www.watchdogindex.com/agents/trial?utm_source=linkedin&utm_medium=organic&utm_campaign=q4-agents-2&utm_content=LI-C07
 County Board of Taxation contacts: [insert link to the county board directory]
 
 **Slides (9)**
@@ -432,8 +432,8 @@ A revaluation does not raise the town's taxes. It moves the same bill between ne
 
 **First comment**
 
-Start your 14-day Agent trial: https://www.watchdogindex.com/agents/trial?utm_source=linkedin&utm_medium=organic&utm_campaign=q4-agents-phase2&utm_content=LI-C08
-See revaluation status across towns in Town Compare: https://www.watchdogindex.com/town-compare?utm_source=linkedin&utm_medium=organic&utm_campaign=q4-agents-phase2&utm_content=LI-C08
+Start your 14-day Agent trial: https://www.watchdogindex.com/agents/trial?utm_source=linkedin&utm_medium=organic&utm_campaign=q4-agents-2&utm_content=LI-C08
+See revaluation status across towns in Town Compare: https://www.watchdogindex.com/town-compare?utm_source=linkedin&utm_medium=organic&utm_campaign=q4-agents-2&utm_content=LI-C08
 
 **Slides (9)**
 
@@ -485,8 +485,8 @@ A relocating buyer says "we want low taxes." They mean the bill. Two towns with 
 
 **First comment**
 
-Town Compare: https://www.watchdogindex.com/town-compare?utm_source=linkedin&utm_medium=organic&utm_campaign=q4-agents-phase2&utm_content=LI-C09
-Start your 14-day Agent trial: https://www.watchdogindex.com/agents/trial?utm_source=linkedin&utm_medium=organic&utm_campaign=q4-agents-phase2&utm_content=LI-C09
+Town Compare: https://www.watchdogindex.com/town-compare?utm_source=linkedin&utm_medium=organic&utm_campaign=q4-agents-2&utm_content=LI-C09
+Start your 14-day Agent trial: https://www.watchdogindex.com/agents/trial?utm_source=linkedin&utm_medium=organic&utm_campaign=q4-agents-2&utm_content=LI-C09
 
 **Slides (9)**
 
@@ -539,8 +539,8 @@ Farm postcards get thrown out because they say nothing. Nine slides on a card th
 
 **First comment**
 
-Start your 14-day Agent trial and open Postcard Studio from Agent Desk: https://www.watchdogindex.com/agents/trial?utm_source=linkedin&utm_medium=organic&utm_campaign=q4-agents-phase2&utm_content=LI-C10
-Agent Desk overview: https://www.watchdogindex.com/agent-desk?utm_source=linkedin&utm_medium=organic&utm_campaign=q4-agents-phase2&utm_content=LI-C10
+Start your 14-day Agent trial and open Postcard Studio from Agent Desk: https://www.watchdogindex.com/agents/trial?utm_source=linkedin&utm_medium=organic&utm_campaign=q4-agents-2&utm_content=LI-C10
+Agent Desk overview: https://www.watchdogindex.com/agent-desk?utm_source=linkedin&utm_medium=organic&utm_campaign=q4-agents-2&utm_content=LI-C10
 
 **Slides (9)**
 
@@ -593,8 +593,8 @@ Six letters explain the Watchdog Score. Ten slides on what each one measures, wh
 
 **First comment**
 
-Free lookup: https://www.watchdogindex.com/free?utm_source=linkedin&utm_medium=organic&utm_campaign=q4-agents-phase3&utm_content=LI-C11
-The methodology behind each component: https://www.watchdogindex.com/data-methodology?utm_source=linkedin&utm_medium=organic&utm_campaign=q4-agents-phase3&utm_content=LI-C11
+Free lookup: https://www.watchdogindex.com/free?utm_source=linkedin&utm_medium=organic&utm_campaign=q4-agents-3&utm_content=LI-C11
+The methodology behind each component: https://www.watchdogindex.com/data-methodology?utm_source=linkedin&utm_medium=organic&utm_campaign=q4-agents-3&utm_content=LI-C11
 
 **Slides (10)**
 
@@ -650,7 +650,7 @@ New Jersey sellers have to disclose flood risk. Watchdog screens for it. NJDEP i
 
 **First comment**
 
-Free lookup, flood screening included: https://www.watchdogindex.com/free?utm_source=linkedin&utm_medium=organic&utm_campaign=q4-agents-phase3&utm_content=LI-C12
+Free lookup, flood screening included: https://www.watchdogindex.com/free?utm_source=linkedin&utm_medium=organic&utm_campaign=q4-agents-3&utm_content=LI-C12
 NJDEP official flood risk lookup: [insert NJDEP URL]
 
 **Slides (8)**
@@ -699,8 +699,8 @@ The 2027 appeal season starts now, not in April. Nine slides: the four dates, th
 
 **First comment**
 
-Start your 14-day Agent trial: https://www.watchdogindex.com/agents/trial?utm_source=linkedin&utm_medium=organic&utm_campaign=q4-agents-phase3&utm_content=LI-C13
-Free lookup to see the Chapter 123 position and county deadline on any address: https://www.watchdogindex.com/free?utm_source=linkedin&utm_medium=organic&utm_campaign=q4-agents-phase3&utm_content=LI-C13
+Start your 14-day Agent trial: https://www.watchdogindex.com/agents/trial?utm_source=linkedin&utm_medium=organic&utm_campaign=q4-agents-3&utm_content=LI-C13
+Free lookup to see the Chapter 123 position and county deadline on any address: https://www.watchdogindex.com/free?utm_source=linkedin&utm_medium=organic&utm_campaign=q4-agents-3&utm_content=LI-C13
 
 **Slides (9)**
 
