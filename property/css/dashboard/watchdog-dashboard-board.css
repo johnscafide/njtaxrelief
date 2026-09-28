@@ -205,6 +205,7 @@ body:has(#wdd-boot:not([hidden])) .wd-public-backdrop:not(.open){transition:none
 .wdd-btn:hover{background:var(--b-blue)}
 .wdd-btn.is-ghost{background:rgba(255,255,255,.6);color:var(--b-ink)!important}
 .wdd-btn.is-ghost:hover{background:var(--b-white)}
+.wdd-detail-actions button.wdd-btn{font-family:inherit!important;letter-spacing:inherit}
 .wdd-icon-btn{width:44px;height:44px;flex:none;display:grid;place-items:center;border:1px solid var(--b-line);border-radius:50%;background:var(--b-white);color:var(--b-ink);cursor:pointer;font-size:15px}
 .wdd-icon-btn:hover{background:var(--b-surface)}
 
