@@ -79,7 +79,8 @@ function renderCheckup(row, agent, now) {
     <section class="wdp-card wdp-card--tax" aria-labelledby="ck-tax-h">
       <div class="wdp-card-head"><h2 id="ck-tax-h">Your tax</h2><a class="wdp-card-link" href="${esc(v.path)}">Full property page</a></div>
       <div class="wdp-stats">
-        <div class="wdp-stat is-lead"><b>${esc(H.money(tax) || 'n/a')}</b><span>Latest annual tax</span></div>
+        <div class="wdp-stat is-lead"><b>${esc(H.money(tax) || 'n/a')}</b><span>${esc(H.taxStats(row, H.money).label)}</span></div>
+        ${H.taxStats(row, H.money).extra}
         <div class="wdp-stat"><b>${esc(H.money(assessed) || 'n/a')}</b><span>Assessed value</span></div>
         ${f.rate ? `<div class="wdp-stat"><b>$${f.rate.toFixed(3)}</b><span>${f.rateYear} rate per $100</span></div>` : ''}
       </div>
