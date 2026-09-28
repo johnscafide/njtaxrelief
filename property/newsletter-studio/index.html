@@ -1,57 +1,279 @@
-<!doctype html>
-<html lang="en">
-<head>
-  <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width,initial-scale=1">
-  <meta name="robots" content="noindex,nofollow">
-  <title>Broadcasts | Watchdog</title>
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@600;700;800&family=Source+Sans+3:wght@400;600;700&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
-  <link rel="stylesheet" href="/property/css/shared.css">
-  <link rel="stylesheet" href="/property/css/newsletter-studio.css">
-  <link rel="stylesheet" href="/property/css/newsletter-studio-ux.css">
-  <link rel="stylesheet" href="/property/css/newsletter-brand-kit.css">
-  <link rel="stylesheet" href="/property/css/broadcast-studio-v3.css">
-</head>
-<body>
-  <main class="nl-shell" id="nl-app">
-    <header class="nl-head nl-broadcast-head">
-      <div><span class="nl-kicker">MARKETING STUDIO · PRIVATE BETA</span><div class="nl-title-row"><h1>Broadcasts</h1><span class="nl-powered-badge kit" title="Email delivery powered by Kit"><span>Powered by</span><img src="https://media.kit.com/images/logos/kit-logo-soft-black.svg" alt="Kit"></span></div><p>Create one-time email broadcasts, newsletters, market updates and campaigns from your Watchdog workspace.</p></div>
-      <div class="nl-head-actions"><a href="/property/account/" class="nl-btn ghost"><i class="fas fa-user-circle"></i> Account</a><button class="nl-btn" id="nl-refresh" type="button"><i class="fas fa-rotate"></i> Refresh</button></div>
-    </header>
-    <section class="nl-notice" id="nl-signin" hidden><i class="fas fa-lock"></i><div><b>Open your Watchdog account</b><span>Broadcasts uses the same Watchdog account session as the rest of the property platform.</span></div><a href="/property/account/">Account</a></section>
-    <section class="nl-notice" id="nl-denied" hidden><i class="fas fa-flask"></i><div><b>Private beta</b><span>This workspace is currently enabled only for the internal Broadcasts beta accounts.</span></div></section>
-    <section class="nl-notice error" id="nl-error" hidden><i class="fas fa-triangle-exclamation"></i><div><b>Broadcasts could not load</b><span id="nl-error-copy"></span></div></section>
-    <div id="nl-workspace" hidden>
-      <section class="nl-provider-strip" aria-label="Connected marketing providers"><div class="nl-provider-brand crm"><span class="nl-provider-label">CRM powered by</span><img src="https://brand.insiderealestate.com/wp-content/uploads/2025/08/BoldTrailPrimaryLogo.webp" alt="BoldTrail" class="nl-boldtrail-logo"><span class="nl-provider-state" id="nl-provider-crm-state">Checking connection</span></div><div class="nl-provider-brand email"><span class="nl-provider-label">Broadcast delivery powered by</span><img src="https://media.kit.com/images/logos/kit-logo-soft-black.svg" alt="Kit" class="nl-kit-logo"><span class="nl-provider-state" id="nl-provider-kit-state">Checking connection</span></div></section>
-      <section class="nl-setup-overview" aria-label="Broadcasts setup status"><article class="nl-setup-item" id="nl-setup-crm"><span class="nl-setup-icon"><i class="fas fa-address-book"></i></span><div><small>1 · CRM</small><b id="nl-setup-crm-title">Checking BoldTrail</b><span id="nl-setup-crm-copy">Looking for an existing Watchdog CRM sync.</span></div></article><article class="nl-setup-item" id="nl-setup-kit"><span class="nl-setup-icon"><i class="fas fa-envelope"></i></span><div><small>2 · EMAIL SERVICE</small><b id="nl-setup-kit-title">Connect your Kit</b><span id="nl-setup-kit-copy">Each user connects their own Kit credentials.</span></div></article><article class="nl-setup-item" id="nl-setup-ready"><span class="nl-setup-icon"><i class="fas fa-bullhorn"></i></span><div><small>3 · BROADCASTS</small><b id="nl-setup-ready-title">Finish setup</b><span id="nl-setup-ready-copy">Connect Kit to unlock broadcast drafting.</span></div></article></section>
-      <section class="nl-next" id="nl-next" aria-label="Next step"><div class="nl-next-copy"><span class="nl-eyebrow">WHAT TO DO NEXT</span><h2 id="nl-next-title">Checking your setup…</h2><p id="nl-next-copy">Watchdog is finding the next useful step for this account.</p></div><a class="nl-btn primary nl-next-action" id="nl-next-action" href="#nl-connections-panel"><span>Continue</span><i class="fas fa-arrow-right"></i></a></section>
-      <nav class="nl-jump-nav" aria-label="Broadcasts navigation"><a href="#nl-brand-studio"><i class="fas fa-palette"></i><span>Design</span></a><a href="#nl-compose-card"><i class="fas fa-pen-to-square"></i><span>Create broadcast</span></a><a href="#nl-audience-card"><i class="fas fa-users"></i><span>Audience</span></a><a href="#nl-connections-panel"><i class="fas fa-plug"></i><span>Connections</span></a><a href="#nl-activity"><i class="fas fa-chart-line"></i><span>Analytics</span></a></nav>
-      <section id="nl-brand-studio" class="nl-card nl-brand-studio">
-        <header class="nl-brand-head"><div><span class="nl-eyebrow">DESIGN STUDIO</span><h2>Template + Brand Kit</h2><p>Choose a layout, apply your saved brand, then generate email-safe HTML for any type of broadcast.</p></div><span class="nl-brand-beta"><i class="fas fa-wand-magic-sparkles"></i> Brand-aware templates</span></header>
-        <div class="nl-design-step"><span>1</span><div><b>Choose a template</b><small>The same broadcast content can be rendered as Basic, Deluxe or Premium.</small></div></div>
-        <div class="nl-template-grid" id="nl-template-grid">
-          <button type="button" class="nl-template-card" data-template-key="email_basic_clean_v1" data-tier="basic"><div class="nl-template-thumb basic"><div class="nl-mini-head"></div><div class="nl-mini-hero"></div><div class="nl-mini-lines"><i></i><i></i><i></i></div></div><div class="nl-template-copy"><span>Basic</span><b>Clean Update</b><small>Simple, personal and easy to read.</small></div><i class="fas fa-circle-check nl-template-check"></i></button>
-          <button type="button" class="nl-template-card" data-template-key="email_deluxe_modern_v1" data-tier="deluxe"><div class="nl-template-thumb deluxe"><div class="nl-mini-head"></div><div class="nl-mini-hero"></div><div class="nl-mini-lines"><i></i><i></i><i></i></div></div><div class="nl-template-copy"><span>Deluxe</span><b>Modern Brief</b><small>Designed, modern and visually organized.</small></div><i class="fas fa-circle-check nl-template-check"></i></button>
-          <button type="button" class="nl-template-card selected" data-template-key="email_premium_editorial_v1" data-tier="premium"><div class="nl-template-thumb premium"><div class="nl-mini-head"></div><div class="nl-mini-hero"></div><div class="nl-mini-lines"><i></i><i></i><i></i></div></div><div class="nl-template-copy"><span>Premium</span><b>Editorial Intelligence</b><small>Editorial, premium and publication-grade.</small></div><i class="fas fa-circle-check nl-template-check"></i></button>
-        </div>
-        <div class="nl-design-split">
-          <details class="nl-brand-panel" id="nl-brand-panel" open><summary><div><span class="nl-design-step-mini">2</span><b>Brand Kit</b><small id="nl-brand-summary">Colors, type and logos</small></div><i class="fas fa-chevron-down"></i></summary><div class="nl-brand-panel-body"><div class="nl-brand-toolbar"><label>Saved brand<select id="nl-brand-select"><option>Loading brands…</option></select></label><button class="nl-btn" type="button" id="nl-brand-new"><i class="fas fa-plus"></i> New brand</button></div><div class="nl-field-row"><label>Brand name<input id="nl-brand-name" maxlength="120" placeholder="My Brand"></label><label class="nl-brand-default-label"><span>Default brand</span><span class="nl-switch"><input id="nl-brand-default" type="checkbox"><i></i></span></label></div><div class="nl-brand-subhead"><div><b>Color palette</b><small>Saved swatches flow into every compatible template.</small></div></div><div class="nl-swatch-grid" id="nl-swatch-grid"></div><div class="nl-brand-subhead"><div><b>Typography</b><small>Save the brand font plus a reliable inbox fallback.</small></div></div><div class="nl-type-grid"><label>Heading font<input id="nl-font-heading" maxlength="80" placeholder="Georgia"></label><label>Heading fallback<select id="nl-font-heading-fallback"><option value="Georgia, 'Times New Roman', serif">Georgia / Times</option><option value="Arial, Helvetica, sans-serif">Arial / Helvetica</option><option value="'Trebuchet MS', Arial, sans-serif">Trebuchet / Arial</option><option value="'Times New Roman', Times, serif">Times New Roman</option></select></label><label>Body font<input id="nl-font-body" maxlength="80" placeholder="Arial"></label><label>Body fallback<select id="nl-font-body-fallback"><option value="Arial, Helvetica, sans-serif">Arial / Helvetica</option><option value="'Trebuchet MS', Arial, sans-serif">Trebuchet / Arial</option><option value="Verdana, Geneva, sans-serif">Verdana / Geneva</option><option value="Georgia, 'Times New Roman', serif">Georgia / Times</option></select></label></div><div class="nl-font-note"><i class="fas fa-circle-info"></i><span>Generated email uses an inbox-safe fallback stack.</span></div><div class="nl-brand-subhead"><div><b>Logo set</b><small>Primary, light, dark and compact mark.</small></div></div><div class="nl-logo-grid" id="nl-logo-grid"></div><div class="nl-brand-subhead"><div><b>Visual style</b><small>Reusable across Marketing Studio creative.</small></div></div><div class="nl-style-grid"><label>Personality<select id="nl-style-personality"><option value="minimal">Minimal</option><option value="modern">Modern</option><option value="editorial">Editorial</option><option value="luxury">Luxury</option><option value="bold">Bold</option></select></label><label>Buttons<select id="nl-style-button"><option value="rounded">Rounded</option><option value="pill">Pill</option><option value="square">Square</option></select></label><label>Corners<select id="nl-style-radius"><option value="soft">Soft</option><option value="medium">Medium</option><option value="sharp">Sharp</option></select></label><label>Images<select id="nl-style-image"><option value="rounded">Rounded</option><option value="full_bleed">Full bleed</option><option value="framed">Framed</option></select></label><label>Content width<select id="nl-style-width"><option value="compact">Compact</option><option value="standard">Standard</option><option value="wide">Wide</option></select></label></div><div class="nl-brand-actions"><button class="nl-btn primary" type="button" id="nl-brand-save"><i class="fas fa-floppy-disk"></i> Save Brand Kit</button><button class="nl-btn danger" type="button" id="nl-brand-delete"><i class="fas fa-trash"></i> Delete</button><span class="nl-form-note" id="nl-brand-note"></span></div></div></details>
-          <details class="nl-brand-panel nl-content-builder" id="nl-template-builder" open><summary><div><span class="nl-design-step-mini">3</span><b>Broadcast content</b><small>Fill the story fields, then build the HTML.</small></div><i class="fas fa-chevron-down"></i></summary><div class="nl-brand-panel-body"><div class="nl-builder-grid"><label>Edition label<input id="nl-build-kicker" maxlength="80" placeholder="WEEKLY BRIEF"></label><label>Main headline<input id="nl-build-headline" maxlength="180" placeholder="Four things worth knowing right now"></label></div><label>Introduction<textarea id="nl-build-intro" rows="3" maxlength="900"></textarea></label><label>Hero image URL <small>optional</small><input id="nl-build-hero" type="url" maxlength="1200" placeholder="https://..."></label><details class="nl-story-block" open><summary><b>Feature story</b><span>Primary article</span></summary><div class="nl-story-fields"><label>Title<input id="nl-story-1-title" maxlength="220"></label><label>Summary<textarea id="nl-story-1-summary" rows="3" maxlength="1000"></textarea></label><div class="nl-field-row"><label>Article URL<input id="nl-story-1-url" type="url" maxlength="1200"></label><label>Button text<input id="nl-story-1-cta" maxlength="80" placeholder="Read the story"></label></div></div></details><details class="nl-story-block"><summary><b>Story 2</b><span>Supporting story</span></summary><div class="nl-story-fields"><label>Title<input id="nl-story-2-title" maxlength="220"></label><label>Summary<textarea id="nl-story-2-summary" rows="3" maxlength="1000"></textarea></label><label>Article URL<input id="nl-story-2-url" type="url" maxlength="1200"></label></div></details><details class="nl-story-block"><summary><b>Story 3</b><span>Supporting story</span></summary><div class="nl-story-fields"><label>Title<input id="nl-story-3-title" maxlength="220"></label><label>Summary<textarea id="nl-story-3-summary" rows="3" maxlength="1000"></textarea></label><label>Article URL<input id="nl-story-3-url" type="url" maxlength="1200"></label></div></details><details class="nl-story-block"><summary><b>Story 4</b><span>Supporting story</span></summary><div class="nl-story-fields"><label>Title<input id="nl-story-4-title" maxlength="220"></label><label>Summary<textarea id="nl-story-4-summary" rows="3" maxlength="1000"></textarea></label><label>Article URL<input id="nl-story-4-url" type="url" maxlength="1200"></label></div></details><details class="nl-story-block"><summary><b>Closing call to action</b><span>Optional</span></summary><div class="nl-story-fields"><label>CTA headline<input id="nl-build-cta-title" maxlength="180"></label><label>CTA copy<textarea id="nl-build-cta-copy" rows="2" maxlength="700"></textarea></label><div class="nl-field-row"><label>Button URL<input id="nl-build-cta-url" type="url" maxlength="1200"></label><label>Button text<input id="nl-build-cta-button" maxlength="80" placeholder="Learn more"></label></div></div></details><label>Footer line <small>optional</small><input id="nl-build-footer" maxlength="240"></label><div class="nl-builder-actions"><button class="nl-btn" type="button" id="nl-build-sample"><i class="fas fa-sparkles"></i> Load sample</button><button class="nl-btn primary" type="button" id="nl-build-html"><i class="fas fa-wand-magic-sparkles"></i> Build broadcast HTML</button><span class="nl-form-note" id="nl-build-note"></span></div></div></details>
-        </div><div class="nl-design-foot"><i class="fas fa-code"></i><span>Generated HTML appears in the email-content editor below and remains editable.</span></div>
-      </section>
-      <details class="nl-connections-panel" id="nl-connections-panel"><summary><div><span class="nl-eyebrow">CONNECTIONS</span><b>CRM &amp; email delivery</b><small id="nl-connections-summary">Manage the services connected to this Watchdog account.</small></div><i class="fas fa-chevron-down"></i></summary><section class="nl-grid two">
-        <article class="nl-card" id="nl-crm-card"><header><div><span class="nl-eyebrow">CRM CONNECTION</span><div class="nl-service-title"><h2>BoldTrail / kvCORE</h2><img src="https://brand.insiderealestate.com/wp-content/uploads/2025/08/BoldTrailPrimaryLogo.webp" alt="BoldTrail"></div></div><span class="nl-status" id="nl-crm-status">Checking</span></header><div id="nl-crm-connect"><div class="nl-setup-callout"><span class="nl-callout-icon"><i class="fas fa-plug"></i></span><div><b>BoldTrail is not connected to this Watchdog login yet.</b><span>Add your BoldTrail API token once.</span></div></div><form id="nl-crm-form" autocomplete="off"><label>Account label <small>optional</small><input id="nl-crm-label" maxlength="120" placeholder="My BoldTrail CRM"></label><label>BoldTrail API token<input id="nl-crm-token" type="password" autocomplete="new-password" minlength="20" maxlength="5000" required></label><div class="nl-credential-note"><i class="fas fa-shield-halved"></i><span>Your token is validated server-side and stored securely.</span></div><button class="nl-btn primary" type="submit"><i class="fas fa-link"></i> Connect &amp; start sync</button><span class="nl-form-note" id="nl-crm-note"></span></form></div><div id="nl-crm-connected" hidden><div class="nl-connected-banner"><span><i class="fas fa-circle-check"></i></span><div><b>BoldTrail is connected to Watchdog.</b><small id="nl-crm-connected-copy">Your CRM sync is available to Broadcasts.</small></div></div><div class="nl-metrics three"><div><small>CRM contacts</small><b id="nl-crm-total">0</b></div><div><small>With email</small><b id="nl-crm-email">0</b></div><div><small>Last sync</small><b id="nl-crm-last">Not yet</b></div></div><p class="nl-callout"><i class="fas fa-shield-halved"></i> CRM presence does not automatically equal marketing consent.</p><div class="nl-actions"><button class="nl-btn" id="nl-crm-sync" type="button"><i class="fas fa-arrows-rotate"></i> Sync now</button><button class="nl-btn danger" id="nl-crm-disconnect" type="button"><i class="fas fa-unlink"></i> Disconnect</button></div><span class="nl-form-note" id="nl-crm-status-note"></span></div></article>
-        <article class="nl-card" id="nl-kit-card"><header><div><span class="nl-eyebrow">EMAIL DELIVERY · REQUIRED</span><div class="nl-service-title"><h2>Your Kit account</h2><img src="https://media.kit.com/images/logos/kit-logo-soft-black.svg" alt="Kit"></div></div><span class="nl-status" id="nl-kit-status">Not connected</span></header><div id="nl-kit-connect"><div class="nl-setup-callout kit"><span class="nl-callout-icon"><i class="fas fa-key"></i></span><div><b>Enter your own Kit credentials.</b><span>Every Broadcasts user connects a separate Kit account.</span></div></div><div class="nl-key-help"><i class="fas fa-circle-info"></i><div><b>Where do I get the Kit key?</b><span>Kit Settings → Developer → V4 Keys.</span></div></div><form id="nl-kit-form" autocomplete="off"><label>Kit V4 API key<div class="nl-password-wrap"><input id="nl-kit-key" type="password" autocomplete="new-password" minlength="16" maxlength="5000" required><button type="button" class="nl-password-toggle" id="nl-kit-key-toggle"><i class="fas fa-eye"></i></button></div></label><div class="nl-field-row"><label>Sender name <small>optional</small><input id="nl-sender-name" maxlength="120"></label><label>Sender email <small>optional</small><input id="nl-sender-email" type="email" maxlength="254"></label></div><div class="nl-credential-note"><i class="fas fa-lock"></i><span>The Kit key is encrypted server-side.</span></div><button class="nl-btn primary" type="submit"><i class="fas fa-envelope-circle-check"></i> Connect my Kit account</button><span class="nl-form-note" id="nl-kit-note"></span></form></div><div id="nl-kit-connected" hidden><div class="nl-connected-banner"><span><i class="fas fa-circle-check"></i></span><div><b>Your Kit account is connected.</b><small>Watchdog can create, schedule and send broadcasts through this account.</small></div></div><div class="nl-account"><div><small>Kit account</small><b id="nl-kit-account">Connected</b><span id="nl-kit-plan"></span></div><button class="nl-btn small" id="nl-kit-health" type="button">Check connection</button></div><div class="nl-sender" id="nl-sender-box"><small>Default sender</small><b id="nl-default-sender">Set a sender</b><span id="nl-sender-verification"></span></div><form id="nl-sender-form" class="nl-inline-form"><input id="nl-new-sender-name" maxlength="120" placeholder="Sender name"><input id="nl-new-sender-email" type="email" maxlength="254" placeholder="you@yourdomain.com" required><button class="nl-btn" type="submit">Save sender</button></form><div class="nl-actions"><button class="nl-btn danger" id="nl-kit-disconnect" type="button"><i class="fas fa-unlink"></i> Disconnect Kit</button></div><span class="nl-form-note" id="nl-kit-status-note"></span></div></article>
-      </section></details>
-      <section class="nl-card nl-audience-card" id="nl-audience-card"><header><div><span class="nl-eyebrow">AUDIENCE</span><h2>Choose who receives it</h2><p>Watchdog compares your CRM contacts with subscribers already in Kit. CRM-only emails are not automatically uploaded.</p></div><button class="nl-btn primary" id="nl-reconcile" type="button"><i class="fas fa-link"></i> Refresh audience match</button></header><div class="nl-gate" id="nl-audience-gate"><i class="fas fa-lock"></i><span>Connect your CRM and Kit to reconcile your audience.</span></div><div class="nl-metrics four"><div><small>CRM emails</small><b id="nl-aud-crm">0</b></div><div><small>Linked to Kit</small><b id="nl-aud-linked">0</b></div><div><small>Eligible</small><b id="nl-aud-eligible">0</b></div><div><small>Suppressed / inactive</small><b id="nl-aud-suppressed">0</b></div></div><div class="nl-result" id="nl-reconcile-result" hidden></div></section>
-      <section class="nl-grid compose nl-compose-v3"><article class="nl-card" id="nl-compose-card"><header><div><span class="nl-eyebrow">CREATE BROADCAST</span><h2>Build &amp; send a broadcast</h2><p>Create a one-time email, preview it like a real inbox message, then save, schedule or send through Kit.</p></div></header><div class="nl-gate" id="nl-compose-gate"><i class="fas fa-lock"></i><span>Connect your Kit account to unlock broadcast drafting.</span></div><form id="nl-broadcast-form"><label>Subject<input id="nl-subject" maxlength="180" required placeholder="South Jersey market update"></label><label>Preview text<input id="nl-preview" maxlength="240" placeholder="A quick update for this month..."></label><div class="nl-field-row"><label>Audience<select id="nl-target-type"><option value="">All Kit subscribers</option><option value="tag">Kit tag</option><option value="segment">Kit segment</option></select></label><label id="nl-target-row" hidden>Choose target<select id="nl-target-id"></select></label></div><label>Email content<textarea id="nl-content" rows="14" required placeholder="<h1>Your broadcast</h1><p>Write or paste HTML here.</p>"></textarea></label><div class="nl-compose-actions"><button class="nl-btn" type="submit"><i class="fas fa-file-lines"></i> Save draft</button><span class="nl-form-note" id="nl-broadcast-note"></span></div></form></article>
-        <aside class="nl-card nl-preview-card nl-client-preview-card"><div class="nl-preview-card-head"><div><span class="nl-eyebrow">EMAIL CLIENT PREVIEW</span><h2>Inbox → opened email</h2></div><div class="nl-preview-actions"><div class="nl-preview-tabs" role="tablist"><button type="button" class="nl-preview-tab active" id="nl-preview-tab-inbox" aria-selected="true">Inbox</button><button type="button" class="nl-preview-tab" id="nl-preview-tab-open" aria-selected="false">Opened</button></div><button class="nl-preview-fullscreen" id="nl-preview-fullscreen" type="button" aria-label="Full screen preview"><i class="fas fa-expand"></i></button></div></div><div class="nl-mail-client" id="nl-mail-client"><div class="nl-mail-chrome"><i class="nl-mail-dot"></i><i class="nl-mail-dot"></i><i class="nl-mail-dot"></i><span class="nl-mail-address">mail.preview.local / Inbox</span></div><div class="nl-mail-window"><aside class="nl-mail-sidebar"><div class="nl-mail-sidebar-brand"></div><div class="nl-mail-folder active"><i class="fas fa-inbox"></i> Inbox</div><div class="nl-mail-folder"><i class="far fa-star"></i> Starred</div><div class="nl-mail-folder"><i class="far fa-paper-plane"></i> Sent</div><div class="nl-mail-folder"><i class="far fa-file"></i> Drafts</div></aside><div class="nl-mail-main"><div class="nl-mail-view" id="nl-mail-inbox-view"><div class="nl-mail-toolbar"><i class="far fa-square"></i><i class="fas fa-rotate"></i><span class="nl-mail-spacer"></span><span>1–3 of 3</span></div><div class="nl-mail-list"><div class="nl-mail-row nl-mail-fake-row"><span class="nl-mail-avatar">A</span><span class="nl-mail-sender">Market Update</span><span class="nl-mail-subject-line"><b>Monthly report</b> <span>— Your latest update...</span></span><time>9:24 AM</time></div><button type="button" class="nl-mail-row" id="nl-preview-inbox-row"><span class="nl-mail-avatar" id="nl-client-avatar">W</span><span class="nl-mail-sender" id="nl-client-inbox-sender">Your sender</span><span class="nl-mail-subject-line"><b id="nl-client-inbox-subject">Your subject</b> <span>— <span id="nl-client-inbox-preheader">Preview text will appear here.</span></span></span><time>Now</time></button><div class="nl-mail-row nl-mail-fake-row"><span class="nl-mail-avatar">S</span><span class="nl-mail-sender">Service Alert</span><span class="nl-mail-subject-line"><b>Your weekly digest</b> <span>— Here is what changed...</span></span><time>Yesterday</time></div></div></div><div class="nl-mail-view nl-mail-open" id="nl-mail-open-view" hidden><div class="nl-mail-toolbar"><button class="nl-mail-back" id="nl-preview-back" type="button"><i class="fas fa-arrow-left"></i></button><i class="fas fa-box-archive"></i><i class="far fa-trash-can"></i><i class="far fa-envelope"></i><span class="nl-mail-spacer"></span><i class="fas fa-ellipsis-vertical"></i></div><div class="nl-mail-open-top"><div class="nl-mail-open-copy"><h3 id="nl-preview-subject">Your subject</h3><div class="nl-mail-from"><span class="nl-mail-from-avatar">W</span><div><strong id="nl-client-open-sender">Your sender</strong><span id="nl-client-open-email">sender@example.com</span></div></div><p id="nl-preview-preheader">Preview text will appear here.</p></div><div class="nl-mail-open-actions"><i class="far fa-star"></i><i class="fas fa-reply"></i><i class="fas fa-ellipsis-vertical"></i></div></div><div class="nl-email-preview-compat" id="nl-email-preview" hidden></div><div class="nl-mail-frame-wrap"><iframe id="nl-email-preview-frame" class="nl-mail-frame" title="Broadcast email preview" sandbox=""></iframe></div></div></div></div></div></aside>
-      </section>
-      <section class="nl-card nl-activity-v3" id="nl-activity"><header class="nl-activity-head"><div><span class="nl-eyebrow">BROADCASTS &amp; ANALYTICS</span><h2>Drafts, scheduled &amp; sent</h2><p>Delivery and engagement data comes from your connected Kit account.</p><div class="nl-activity-provider">Powered by <img src="https://media.kit.com/images/logos/kit-logo-soft-black.svg" alt="Kit"></div></div><button class="nl-btn" id="nl-analytics-refresh" type="button"><i class="fas fa-chart-line"></i> Refresh analytics</button></header><div class="nl-table-wrap"><table class="nl-analytics-table"><thead><tr><th>Subject</th><th>Status</th><th>Recipients</th><th>Opened</th><th>Open rate</th><th>Clicks</th><th>Click rate</th><th>Unsubs</th><th>Updated</th><th></th></tr></thead><tbody id="nl-broadcasts"></tbody></table></div><div class="nl-empty" id="nl-broadcasts-empty">No Watchdog broadcasts yet.</div></section>
+<!doctype html><html lang="en" class="aw27-page" data-access-require="agent"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><meta name="robots" content="noindex,nofollow"><title>Email updates | Watchdog</title><link rel="preconnect" href="https://fonts.googleapis.com"><link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet"><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css"><link rel="stylesheet" href="/property/css/shared/00-design-tokens.css"><link rel="stylesheet" href="/property/css/app-shell-2027.css"><link rel="stylesheet" href="/property/css/agent-workspace.css?v=20260926a"><link rel="stylesheet" href="/property/css/email-updates.css?v=20260928a"></head><body data-sidebar-page="email-updates" data-plan-auto="true"><main><div id="eu-app" class="eu-shell"><div class="eu-loading"><i class="fas fa-circle-notch fa-spin" aria-hidden="true"></i> Opening Email updates…</div></div></main>
+
+<template id="eu-page">
+  <header class="eu-hero">
+    <div class="eu-hero-copy">
+      <span class="eu-eyebrow"><i class="fas fa-paper-plane" aria-hidden="true"></i> Email updates</span>
+      <h1>Write it once. Send it to your whole list.</h1>
+      <p>Market updates, listing news and monthly newsletters, sent from your own Kit account. Your name, brokerage and disclosure are added to every email for you.</p>
     </div>
-  </main>
-  <dialog id="nl-analytics-dialog" class="nl-analytics-dialog"><div class="nl-analytics-modal"><header><div><span class="nl-eyebrow">KIT BROADCAST ANALYTICS</span><h2 id="nl-analytics-title">Broadcast analytics</h2><p id="nl-analytics-subtitle">Live engagement data from Kit.</p></div><button type="button" class="nl-icon-btn" id="nl-analytics-close"><i class="fas fa-xmark"></i></button></header><div class="nl-analytics-loading" id="nl-analytics-loading"><i class="fas fa-circle-notch fa-spin"></i> Loading Kit analytics…</div><div id="nl-analytics-content" hidden><div class="nl-analytics-kpis"><article><small>Recipients</small><b id="nl-stat-recipients">0</b><span>Delivered audience</span></article><article><small>Opened</small><b id="nl-stat-opened">0</b><span id="nl-stat-open-rate">0% open rate</span></article><article><small>Clicks</small><b id="nl-stat-clicks">0</b><span id="nl-stat-click-rate">0% click rate</span></article><article><small>Unsubscribed</small><b id="nl-stat-unsubs">0</b><span id="nl-stat-unsub-rate">0% unsubscribe rate</span></article></div><div class="nl-analytics-meta" id="nl-analytics-meta"></div><section class="nl-link-analytics"><div class="nl-link-analytics-head"><span class="nl-eyebrow">LINK PERFORMANCE</span><h3>What readers clicked</h3></div><div class="nl-table-wrap"><table><thead><tr><th>Destination</th><th>Unique clicks</th><th>Click / delivered</th><th>Click / opened</th></tr></thead><tbody id="nl-link-clicks"></tbody></table></div><div class="nl-empty" id="nl-link-clicks-empty">No link clicks reported yet.</div></section></div><div class="nl-analytics-error" id="nl-analytics-error" hidden></div></div></dialog>
-  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2/dist/umd/supabase.js"></script><script src="/property/js/supabase-runtime.js"></script><script src="/property/js/newsletter-studio.js"></script><script src="/property/js/newsletter-studio-ux.js"></script><script src="/property/js/broadcast-brand-kit.js"></script><script src="/property/js/broadcast-studio-v3.js"></script>
-</body></html>
+    <div class="eu-hero-side">
+      <span class="eu-partner"><span class="eu-partner-label">In partnership with</span> <span class="eu-kit-word">Kit</span></span>
+      <span class="eu-conn" data-f="connLabel"></span>
+    </div>
+  </header>
+
+  <ol class="eu-steps">
+    <li class="eu-step" data-step="connect">
+      <div class="eu-step-head"><span class="eu-num">1</span><div><h2>Connect Kit</h2><p>Kit sends your email, handles unsubscribes and adds the legal footer. Connect it once.</p></div><span class="eu-state" data-state></span></div>
+      <div class="eu-step-body">
+        <div id="eu-connected" hidden>
+          <p class="eu-facts"><i class="fas fa-circle-check eu-ok-ic" aria-hidden="true"></i> Connected to <b data-f="kitAccount"></b></p>
+          <p class="eu-facts">Sending as <b data-f="senderLine"></b></p>
+          <div class="eu-actions">
+            <button type="button" class="eu-btn" id="eu-sender-edit"><i class="fas fa-user-pen" aria-hidden="true"></i> Change sender</button>
+            <a class="eu-btn ghost" href="https://app.kit.com/broadcasts" target="_blank" rel="noopener"><i class="fas fa-arrow-up-right-from-square" aria-hidden="true"></i> Open Kit</a>
+            <button type="button" class="eu-btn ghost danger" id="eu-disconnect"><i class="fas fa-link-slash" aria-hidden="true"></i> Disconnect</button>
+          </div>
+          <form class="eu-form" id="eu-sender-form" hidden novalidate>
+            <label class="eu-field"><span>Name people see</span><input name="display_name" maxlength="120" autocomplete="name"></label>
+            <label class="eu-field"><span>Send from this email</span><input name="email_address" type="email" maxlength="200" autocomplete="email" required></label>
+            <small class="eu-note wide">Use an email address you have confirmed in Kit (Kit → Settings → Email addresses). Kit won't send from an address it hasn't confirmed.</small>
+            <div class="eu-actions wide"><button type="submit" class="eu-btn dark"><i class="fas fa-floppy-disk" aria-hidden="true"></i> Save sender</button><button type="button" class="eu-btn ghost" id="eu-sender-cancel">Cancel</button></div>
+          </form>
+        </div>
+        <div id="eu-connect" hidden>
+          <ol class="eu-howto">
+            <li>Open <a href="https://app.kit.com/account_settings/developer_settings" target="_blank" rel="noopener">Kit's Developer settings</a>.</li>
+            <li>Under <b>V4 Keys</b>, choose <b>Add a new key</b> and copy it. It starts with <code>kit_</code>.</li>
+            <li>Paste it below. Watchdog stores it server-side only and never shows it again.</li>
+          </ol>
+          <form class="eu-form" id="eu-connect-form" novalidate>
+            <label class="eu-field wide"><span>Kit V4 API key</span><input name="api_key" type="password" autocomplete="off" spellcheck="false" maxlength="5000" required></label>
+            <label class="eu-field"><span>Name people see <em>(optional)</em></span><input name="sender_name" maxlength="120" autocomplete="name"></label>
+            <label class="eu-field"><span>Send from this email <em>(optional)</em></span><input name="sender_email" type="email" maxlength="200" autocomplete="email"></label>
+            <div class="eu-actions wide"><button type="submit" class="eu-btn dark" id="eu-connect-btn"><i class="fas fa-plug" aria-hidden="true"></i> Connect Kit</button></div>
+          </form>
+          <small class="eu-note">No Kit account yet? <a href="https://kit.com" target="_blank" rel="noopener">Kit</a> has a free plan. Sign up, import your contacts, then come back here.</small>
+        </div>
+      </div>
+    </li>
+
+    <li class="eu-step" data-step="audience">
+      <div class="eu-step-head"><span class="eu-num">2</span><div><h2>Who gets it</h2><p>Only people subscribed in your Kit account get email. Anyone who unsubscribed is skipped automatically.</p></div><span class="eu-state" data-state></span></div>
+      <div class="eu-step-body">
+        <fieldset class="eu-choices" id="eu-audience">
+          <legend class="sr-only">Audience</legend>
+          <label class="eu-choice"><input type="radio" name="audience" value="all" checked><span><b>Everyone subscribed</b><small data-f="allCount">All active subscribers in Kit</small></span></label>
+          <label class="eu-choice"><input type="radio" name="audience" value="tag"><span><b>People with a tag</b><small>For example "Past clients" or "Buyers"</small></span></label>
+          <label class="eu-choice"><input type="radio" name="audience" value="segment"><span><b>A segment</b><small>Saved filters from Kit</small></span></label>
+        </fieldset>
+        <label class="eu-field eu-pick" id="eu-tag-field" hidden><span>Tag</span><select id="eu-tag"></select></label>
+        <label class="eu-field eu-pick" id="eu-segment-field" hidden><span>Segment</span><select id="eu-segment"></select></label>
+        <p class="eu-count" id="eu-count" aria-live="polite"></p>
+        <p class="eu-empty" id="eu-no-tags" hidden>No tags in Kit yet. Tag people in Kit (for example "Past clients") to send to a group.</p>
+        <p class="eu-empty" id="eu-no-segments" hidden>No segments in Kit yet.</p>
+        <details class="eu-tips" id="eu-crm-box" hidden>
+          <summary>Your CRM contacts and Kit</summary>
+          <p class="eu-facts">Of your CRM contacts, <b data-f="crmEligible">0</b> are subscribed in Kit, <b data-f="crmBounced">0</b> bounced and <b data-f="crmUnsub">0</b> unsubscribed.</p>
+          <p class="eu-note">Watchdog never adds anyone to Kit. Import people into Kit yourself, with their permission, then re-check the match.</p>
+          <div class="eu-actions"><button type="button" class="eu-btn" id="eu-reconcile"><i class="fas fa-arrows-rotate" aria-hidden="true"></i> Re-check the match</button></div>
+        </details>
+      </div>
+    </li>
+
+    <li class="eu-step" data-step="write">
+      <div class="eu-step-head"><span class="eu-num">3</span><div><h2>Write it</h2><p>Start from a ready-made email or a blank page. The preview updates as you type.</p></div><span class="eu-state" data-state></span></div>
+      <div class="eu-step-body">
+        <div class="eu-starters" role="group" aria-label="Start from">
+          <button type="button" class="eu-starter" data-starter="market"><i class="fas fa-chart-line" aria-hidden="true"></i> Market update</button>
+          <button type="button" class="eu-starter" data-starter="listed"><i class="fas fa-house-circle-check" aria-hidden="true"></i> Just listed</button>
+          <button type="button" class="eu-starter" data-starter="sold"><i class="fas fa-handshake" aria-hidden="true"></i> Just sold</button>
+          <button type="button" class="eu-starter" data-starter="newsletter"><i class="fas fa-newspaper" aria-hidden="true"></i> Monthly newsletter</button>
+          <button type="button" class="eu-starter" data-starter="taxes"><i class="fas fa-landmark" aria-hidden="true"></i> Property tax tip</button>
+          <button type="button" class="eu-starter" data-starter="note"><i class="fas fa-pen-nib" aria-hidden="true"></i> Personal note</button>
+          <button type="button" class="eu-starter" data-starter="blank"><i class="fas fa-file" aria-hidden="true"></i> Blank</button>
+        </div>
+        <p class="eu-restored" id="eu-restored" hidden><i class="fas fa-clock-rotate-left" aria-hidden="true"></i> We kept your unsent draft. <button type="button" class="eu-link" id="eu-start-over">Start over</button></p>
+        <div class="eu-compose">
+          <form class="eu-write" id="eu-write" novalidate>
+            <label class="eu-field"><span>Subject line</span><input name="subject" maxlength="150" required><small class="eu-hint"><span data-f="subjectCount">0</span>/150 · Short and specific gets opened.</small></label>
+            <label class="eu-field"><span>Preview text <em>(shows next to the subject in the inbox)</em></span><input name="preview_text" maxlength="140"></label>
+            <label class="eu-field"><span>Headline <em>(optional)</em></span><input name="headline" maxlength="120"></label>
+            <label class="eu-check"><input type="checkbox" name="greeting" checked> Start with the reader's first name ("Hi Alex,")</label>
+            <label class="eu-field"><span>Message</span><textarea name="body" rows="9" maxlength="6000" required></textarea><small class="eu-hint">Leave a blank line between paragraphs.</small></label>
+            <details class="eu-more">
+              <summary><i class="fas fa-image" aria-hidden="true"></i> Photo</summary>
+              <label class="eu-field"><span>Photo link <em>(https://…, optional)</em></span><input name="image_url" type="url" maxlength="500" inputmode="url"></label>
+              <label class="eu-field"><span>Describe the photo <em>(for people who can't see images)</em></span><input name="image_alt" maxlength="160"></label>
+            </details>
+            <details class="eu-more">
+              <summary><i class="fas fa-hand-pointer" aria-hidden="true"></i> Button</summary>
+              <label class="eu-field"><span>Button text</span><input name="cta_label" maxlength="40"></label>
+              <label class="eu-field"><span>Button link <em>(https://…)</em></span><input name="cta_url" type="url" maxlength="500" inputmode="url"></label>
+              <small class="eu-hint" id="eu-cta-default" hidden>Leave the link empty to send people to your agent page.</small>
+            </details>
+            <details class="eu-more" id="eu-snapshot">
+              <summary><i class="fas fa-landmark" aria-hidden="true"></i> Town tax snapshot <span class="eu-new">Watchdog data</span></summary>
+              <p class="eu-note">Adds a small box with the town's latest general tax rate, how it changed from last year, and how close assessments are to market value. Numbers come from the NJ Division of Taxation.</p>
+              <label class="eu-field"><span>Town</span><input name="snapshot_town" list="eu-towns" maxlength="80" autocomplete="off" placeholder="Start typing a town"></label>
+              <datalist id="eu-towns"></datalist>
+              <p class="eu-empty" id="eu-snapshot-miss" hidden>We couldn't find that town. Pick one from the list.</p>
+            </details>
+            <div class="eu-sig">
+              <div class="eu-sig-head"><b>Signature</b><a class="eu-link" data-route="/account/professional-profile">Edit</a></div>
+              <p class="eu-sig-line" data-f="sigLine"></p>
+              <p class="eu-empty" id="eu-sig-missing" hidden>Add your brokerage and phone in your professional profile so they show up here.</p>
+            </div>
+          </form>
+          <aside class="eu-preview" aria-label="Email preview">
+            <div class="eu-preview-bar">
+              <b>Preview</b>
+              <div class="eu-seg" role="group" aria-label="Preview size"><button type="button" class="on" data-size="desktop" aria-pressed="true"><i class="fas fa-desktop" aria-hidden="true"></i><span class="sr-only">Computer</span></button><button type="button" data-size="phone" aria-pressed="false"><i class="fas fa-mobile-screen" aria-hidden="true"></i><span class="sr-only">Phone</span></button></div>
+            </div>
+            <div class="eu-inbox">
+              <p class="eu-inbox-from" data-f="pvFrom"></p>
+              <p class="eu-inbox-subject" data-f="pvSubject"></p>
+              <p class="eu-inbox-preview" data-f="pvPreview"></p>
+            </div>
+            <div class="eu-frame-wrap"><iframe id="eu-frame" title="Email preview" sandbox="allow-popups allow-popups-to-escape-sandbox" referrerpolicy="no-referrer"></iframe></div>
+            <small class="eu-note">Kit adds your unsubscribe link and mailing address at the bottom. "Alex" stands in for each reader's first name.</small>
+          </aside>
+        </div>
+      </div>
+    </li>
+
+    <li class="eu-step" data-step="send">
+      <div class="eu-step-head"><span class="eu-num">4</span><div><h2>Send it</h2><p>Send now, pick a time, or save it as a draft in Kit to send yourself a test first.</p></div><span class="eu-state" data-state></span></div>
+      <div class="eu-step-body">
+        <dl class="eu-summary">
+          <div><dt>To</dt><dd data-f="sumTo"></dd></div>
+          <div><dt>From</dt><dd data-f="sumFrom"></dd></div>
+          <div><dt>Subject</dt><dd data-f="sumSubject"></dd></div>
+        </dl>
+        <fieldset class="eu-choices eu-when" id="eu-when">
+          <legend class="sr-only">When</legend>
+          <label class="eu-choice"><input type="radio" name="when" value="now" checked><span><b>Send now</b><small>Goes out in about 3 minutes. You can still cancel until then.</small></span></label>
+          <label class="eu-choice"><input type="radio" name="when" value="later"><span><b>Schedule</b><small>Pick a day and time</small></span></label>
+          <label class="eu-choice"><input type="radio" name="when" value="draft"><span><b>Save as a draft in Kit</b><small>Send yourself a test from Kit, then send it there</small></span></label>
+        </fieldset>
+        <label class="eu-field eu-pick" id="eu-when-field" hidden><span>Send on</span><input type="datetime-local" id="eu-send-at"></label>
+        <label class="eu-check" id="eu-consent-row"><input type="checkbox" id="eu-consent"> Everyone in this audience agreed to get email from me.</label>
+        <div class="eu-actions"><button type="button" class="eu-btn dark big" id="eu-send"><i class="fas fa-paper-plane" aria-hidden="true"></i> <span data-f="sendLabel">Send now</span></button></div>
+        <p class="eu-empty" id="eu-send-blocked" hidden></p>
+        <template id="eu-blockers">
+          <span data-why="connect">Connect Kit first (step 1).</span>
+          <span data-why="audience">Pick who gets it (step 2).</span>
+          <span data-why="subject">Add a subject line (step 3).</span>
+          <span data-why="body">Write a message (step 3).</span>
+          <span data-why="consent">Check the box to confirm people agreed to get email from you.</span>
+          <span data-why="time">Pick a send time at least 10 minutes from now.</span>
+        </template>
+      </div>
+    </li>
+
+    <li class="eu-step" data-step="track">
+      <div class="eu-step-head"><span class="eu-num">5</span><div><h2>Sent and scheduled</h2><p>Opens and clicks come from Kit. Refresh any time.</p></div><span class="eu-state" data-state></span></div>
+      <div class="eu-step-body">
+        <div class="eu-actions"><button type="button" class="eu-btn" id="eu-refresh"><i class="fas fa-arrows-rotate" aria-hidden="true"></i> Refresh stats</button><a class="eu-btn ghost" href="https://app.kit.com/broadcasts" target="_blank" rel="noopener"><i class="fas fa-arrow-up-right-from-square" aria-hidden="true"></i> All broadcasts in Kit</a></div>
+        <ul class="eu-sent" id="eu-sent"></ul>
+        <p class="eu-empty" id="eu-sent-empty" hidden>Nothing sent yet. Your emails show up here with opens and clicks.</p>
+      </div>
+    </li>
+  </ol>
+</template>
+
+<template id="eu-row">
+  <li class="eu-row">
+    <div class="eu-row-main"><b class="eu-row-subject" data-r="subject"></b><span class="eu-pill" data-r="status"></span><small class="eu-row-meta" data-r="meta"></small></div>
+    <dl class="eu-stats" data-r="stats" hidden>
+      <div><dt>Sent to</dt><dd data-r="recipients"></dd></div>
+      <div><dt>Opened</dt><dd data-r="opens"></dd></div>
+      <div><dt>Clicked</dt><dd data-r="clicks"></dd></div>
+      <div><dt>Unsubscribed</dt><dd data-r="unsubs"></dd></div>
+    </dl>
+    <div class="eu-row-actions"><button type="button" class="eu-btn ghost danger small" data-r="cancel" hidden><i class="fas fa-ban" aria-hidden="true"></i> <span data-r="cancelLabel">Cancel send</span></button></div>
+  </li>
+</template>
+
+<!-- Starter emails. Plain text; the page turns them into the email. -->
+<template id="eu-starter-copy">
+  <div data-starter="market" data-subject="What's happening with home prices in [Town]" data-preview="A quick look at the local market this month" data-headline="Your [Month] market update" data-cta="See what your home is worth">Here's a quick look at what homes in [Town] did this month.
+
+Homes are selling in about [X] days, and most are going for close to the asking price. Buyers are still out there, especially for homes that are priced right and show well.
+
+Thinking about a move this year, or just curious what your home would sell for today? Reply to this email and I'll put together a free price estimate for you.</div>
+  <div data-starter="listed" data-subject="Just listed: [Address]" data-preview="[Beds] beds, [Baths] baths in [Town]" data-headline="Just listed in [Town]" data-cta="See the photos">I just listed a home I think you'll love at [Address].
+
+It has [Beds] bedrooms, [Baths] bathrooms and [one feature buyers will love]. It's listed at [Price].
+
+Know someone who's been looking in [Town]? Forward this along, or reply and I'll set up a private showing.</div>
+  <div data-starter="sold" data-subject="Just sold in [Town]" data-preview="Another happy homeowner in your neighborhood" data-headline="Just sold: [Address]" data-cta="What's my home worth?">Great news: [Address] just sold for [Price] in [X] days.
+
+Sales like this one set the value for homes nearby, including yours. If you've wondered what your home could sell for, now is a good time to ask.
+
+Reply to this email and I'll send you a free, no-pressure estimate.</div>
+  <div data-starter="newsletter" data-subject="Your [Month] home and neighborhood update" data-preview="Local news, market numbers and one tip for homeowners" data-headline="[Month] in [Town]" data-cta="Say hello">Here's what's new around [Town] this month.
+
+Around town: [a local event, opening or project].
+
+The market: [one or two sentences on prices, inventory or rates].
+
+Homeowner tip: [a seasonal tip, like checking your property tax assessment or servicing your heating system].
+
+As always, if you have a question about your home or the market, just reply. I read every email.</div>
+  <div data-starter="taxes" data-subject="Is your property tax assessment right?" data-preview="How to check it in five minutes" data-headline="Check your property tax assessment" data-cta="Check my property">Most people never check their property tax assessment, but mistakes happen, and they can cost you every year.
+
+Here's a quick way to check: look up your home, compare its assessed value to what similar homes nearby sold for, and see whether your town's assessments are running high.
+
+If yours looks off, you may be able to appeal. The deadline in most New Jersey towns is April 1. Reply to this email and I'm happy to take a look with you.</div>
+  <div data-starter="note" data-subject="Quick hello from [Your first name]" data-preview="Just checking in" data-headline="" data-cta="">I just wanted to say hello and see how things are going.
+
+If there's anything I can help with, whether it's a question about your home, a contractor recommendation or what homes nearby are selling for, just reply to this email.
+
+Hope you have a great month.</div>
+  <div data-starter="blank" data-subject="" data-preview="" data-headline="" data-cta=""></div>
+</template>
+
+<!-- Words the page fills in (kept here, not in the script). -->
+<template id="eu-words">
+  <span data-w="connected">Connected to Kit</span>
+  <span data-w="notConnected">Kit not connected</span>
+  <span data-w="done">Done</span>
+  <span data-w="todo">To do</span>
+  <span data-w="ready">Ready</span>
+  <span data-w="nothingYet">Nothing yet</span>
+  <span data-w="sendNow">Send now</span>
+  <span data-w="saveDraft">Save draft in Kit</span>
+  <span data-w="draft">Draft in Kit</span>
+  <span data-w="scheduled">Scheduled</span>
+  <span data-w="sending">Sending</span>
+  <span data-w="sent">Sent</span>
+  <span data-w="canceled">Canceled</span>
+  <span data-w="error">Needs attention</span>
+  <span data-w="deleteDraft">Delete draft</span>
+  <span data-w="cancelSend">Cancel send</span>
+  <span data-w="everyone">Everyone subscribed</span>
+  <span data-w="counting">Counting…</span>
+  <span data-w="segmentCount">Kit counts a segment when it sends.</span>
+  <span data-w="confirmDisconnect">Disconnect Kit from Watchdog? Your Kit account and subscribers stay as they are.</span>
+  <span data-w="confirmCancel">Cancel this email? It won't be sent.</span>
+  <span data-w="confirmStarter">Replace what you've written with this starter email?</span>
+  <span data-w="confirmAll">This goes to everyone subscribed in your Kit account. Send it?</span>
+  <span data-w="toastSent">Your email is on its way. It goes out in about 3 minutes.</span>
+  <span data-w="toastScheduled">Scheduled. You can cancel it until it goes out.</span>
+  <span data-w="toastDraft">Saved as a draft in Kit. Open Kit to send yourself a test.</span>
+  <span data-w="toastConnected">Kit is connected.</span>
+  <span data-w="toastSender">Sender saved.</span>
+  <span data-w="toastRefreshed">Stats updated.</span>
+  <span data-w="toastCanceled">Canceled.</span>
+  <span data-w="toastMatched">Match updated.</span>
+  <span data-w="snapshotTitle">Property taxes in</span>
+  <span data-w="snapshotRate">General tax rate</span>
+  <span data-w="snapshotChange">Change from last year</span>
+  <span data-w="snapshotRatio">Assessments vs. market value</span>
+  <span data-w="snapshotSource">Source: NJ Division of Taxation</span>
+  <span data-w="rateUnit">per $100 of assessed value</span>
+  <span data-w="up">Up</span>
+  <span data-w="down">Down</span>
+  <span data-w="same">About the same</span>
+  <span data-w="about">About</span>
+  <span data-w="myPage">Look up any home on my page</span>
+  <span data-w="license">License</span>
+  <span data-w="greeting">Hi</span>
+  <span data-w="sampleName">Alex</span>
+</template>
+
+<template id="eu-fail"><div class="eu-error"><b>Email updates could not open.</b><p data-f="message"></p><button class="eu-btn" type="button" data-reload>Retry</button></div></template>
+<div id="pl-toast" class="pl-toast" role="status" aria-live="polite"></div>
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2/dist/umd/supabase.js"></script><script src="/property/js/access-guard.js"></script><script src="/property/js/app-shell-2027.js"></script><script src="/property/js/agent-workspace.js?v=20260926a"></script><script src="/property/js/platform-observability.js?v=20260811a"></script><script src="/property/js/agent-ui-safety.js?v=20260811a"></script><script src="/property/js/email-updates.js?v=20260928a"></script></body></html>

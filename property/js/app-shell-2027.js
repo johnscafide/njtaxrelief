@@ -16,6 +16,7 @@ var configs={
   'account-homeowner':{kicker:'Account',title:'Homeowner Profile',desc:'Your contact details, home area, property goals and optional household context.',action:'/account',actionLabel:'Account overview'},
   'account-professional':{kicker:'Account',title:'Professional Profile',desc:'Your professional role, brokerage identity, license and invite tools.',action:'/account',actionLabel:'Account overview'},
   'postcard-studio':{kicker:'Marketing',title:'Postcard Studio',desc:'Design, proof and mail 6 x 8.5 postcards to your farm.',action:'/property/agent-desk',actionLabel:'Agent Desk'},
+  'email-updates':{kicker:'Marketing',title:'Email updates',desc:'Write, send and track email to your list, in partnership with Kit.',action:'/property/agent-desk',actionLabel:'Agent Desk'},
   'data-workbench':{kicker:'Professional data',title:'Data Workbench',desc:'Build governed property datasets, filter records and move selected intelligence into professional workflows.',action:'/property/data-center',actionLabel:'Field Catalog'}
 };
 function esc(v){return String(v==null?'':v).replace(/[&<>\"]/g,function(c){return{'&':'&amp;','<':'&lt;','>':'&gt;','\"':'&quot;'}[c]});}

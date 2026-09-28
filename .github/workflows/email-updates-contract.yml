@@ -1,0 +1,31 @@
+name: Email updates contract
+
+on:
+  push:
+    branches: [main]
+    paths:
+      - 'property/newsletter-studio/**'
+      - 'property/js/email-updates.js'
+      - 'property/css/email-updates.css'
+      - 'property/tests/email-updates-contract.mjs'
+      - 'supabase/functions/tmp-boldtrail-probe/**'
+      - '.github/workflows/email-updates-contract.yml'
+  pull_request:
+    paths:
+      - 'property/newsletter-studio/**'
+      - 'property/js/email-updates.js'
+      - 'property/css/email-updates.css'
+      - 'property/tests/email-updates-contract.mjs'
+      - 'supabase/functions/tmp-boldtrail-probe/**'
+      - '.github/workflows/email-updates-contract.yml'
+
+jobs:
+  contract:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+      - name: Verify Email updates contract
+        run: node property/tests/email-updates-contract.mjs
