@@ -145,8 +145,15 @@ function applyCanonicalRuntimeDiet(input, publicPath) {
   return html;
 }
 
+// Backoffice is the operators' private lead tool; its quick-contact links
+// (tel:/sms:/mailto: to their own leads) must reach the phone and mail apps.
+function isBackofficePath(pathname) {
+  return pathname === '/backoffice' || pathname.startsWith('/backoffice/');
+}
+
 function sanitizeContactHtml(input, publicPath) {
   let html = String(input || '');
+  if (isBackofficePath(publicPath)) return html;
 
   html = html.replace(
     /<a\b([^>]*?)href=(["'])mailto:(?!\?)[^"']*\2([^>]*)>[\s\S]*?<\/a>/gi,

@@ -1,76 +1,92 @@
 # Watchdog Backoffice — Lead Intelligence
 
-Private operations area at `/property/backoffice/` for retained Watchdog leads, CRM cleanup, address validation and BoldTrail handoffs.
+Private lead-management area for the two Watchdog operators (John and Heather), served at the clean Watchdog URL `https://www.watchdogindex.com/backoffice`. The physical files live in `property/backoffice/`; that path is an implementation detail and is never used in links.
 
-## Security
+## Access
 
-Backoffice lead data is not read directly from browser Supabase queries. The page talks to the `backoffice-api` Edge Function, which uses short-lived authenticated sessions and service-role database access.
+- Backoffice opens for a **signed-in Watchdog account listed in `public.backoffice_operators`**. There is no separate password.
+- `backoffice.js` reads the Watchdog access token from `window.NJPTRAccess.client().auth.getSession()` and posts it to the same-origin gateway `/api/watchdog-backoffice-gateway?target=login` (Supabase function `backoffice-dev-login`). The response is a 12-hour Backoffice session token (`{ok, token, actor, expires_at}`); `401` means not signed in, `403` means the account is not on the access list.
+- Every lead call then goes to `/api/watchdog-backoffice-gateway?target=api` (Supabase function `backoffice-api`) with `Authorization: Bearer <backoffice session token>`. The gateway forwards the browser's IP and user agent so session fingerprints describe the operator's device.
+- **Lock Backoffice** revokes the session on the server (`logout`) and leaves a locked card; **Open Backoffice** starts a new session from the Watchdog sign-in. Nothing reloads the page.
+- The old shared-key login, first-time setup, key rotation and in-page Google key form are retired. `backoffice-api` answers `410 {"error":"retired"}` for `setup`, `login`, `rotate_access_key` and `set_google_key`, and it never creates sessions itself.
+- Operator names come from `backoffice_export_profiles.label`. The stored owner keys stay `john` and `wife`; the page never hard-codes a display name.
 
-The current browser UI is gated by a signed-in Watchdog developer account. Secrets used by Backoffice services remain server-side / in Supabase Vault and are not committed to GitHub.
+## Navigation
 
-Imported LeadIQ CSV files are handled in browser memory only. They are not written to Supabase, `localStorage` or the Backoffice lead queue unless the user explicitly chooses **Add to queue** and then saves the lead through the authenticated Backoffice workflow.
+One shared shell (`backoffice-board.css` + `backoffice-shell.js`) is used by every Backoffice page:
+
+- **Leads** and **LeadIQ Tools** — both operators.
+- **Application Reviews** (`/backoffice/reviews`), **Professional Reviews** (`/backoffice/professional-verifications`) and **Real Estate OS** (`/backoffice/realestate`) — shown only when the signed-in account passes the server-side `is_watchdog_developer` check. Pending-review badge counts are requested only for developers. Those pages keep their own developer gate (`data-access-require="developer"`).
+- `crm-companion/` is a developer telemetry page that is not linked from the Backoffice nav.
 
 ## Lead workflow
 
-- Searchable lead queue and detailed audit history.
-- Preserve the original submitted phone, email and address.
-- Optional Google Address Validation stored separately from the submitted address.
-- Assignment values: `unassigned`, `john`, or `wife`.
-- Bulk assignment and individual assignment.
-- Separate BoldTrail-ready CSV exports for John and Wife.
-- Export history with export ID, filename, profile, included lead IDs and timestamp.
-- Deterministic Watchdog hashtags derived from program, tenure, intent and estimated benefit.
-- Manual lead entry for testing and fallback entry.
+- **My leads** is the default view, with an owner filter (Mine / each operator / Unassigned / Everyone).
+- **Pipeline stages** use `lead_status`: New → Contacted → Qualified → Nurture → Closed, with Archived kept separately. Stage tabs show counts; each lead has a stage picker.
+- **Follow-ups**: one next step (≤200 characters) and a due date per lead, with Due today / Overdue / Upcoming / No follow-up filters and tiles.
+- **Quick contact**: Call (`tel:`), Text (`sms:`) and Email (`mailto:`) open the device app and log the contact (`log_contact`), which records `last_contacted_at` and moves a New lead to Contacted. Consent is shown next to the buttons; an email address or phone number is never treated as marketing consent.
+- **Notes & timeline**: editable lead notes (included in BoldTrail handoffs) plus dated timeline notes (`add_note`) that record who wrote them. Activity is shown in plain language.
+- **Needs attention** means `processing_status` is `review` or `error` (for example, Google could not fully confirm the address). **Mark reviewed** sets it to `ready`; re-checking the address later does not reopen a lead an operator already reviewed.
+- **Possible duplicates** are flagged in the browser when leads share a normalized email address or phone number.
+- **Lead sources**: a per-owner snapshot of intake source and "heard about Watchdog" answers, last 30 days or all time.
+- **Bulk actions** appear only while leads are selected. Bulk owner defaults to the signed-in operator. Sending or exporting leads that belong to the other operator asks first, because it moves them.
+- **BoldTrail**: direct send skips leads already in BoldTrail unless you choose **Re-send**; bulk sends go in batches of 50 and report sent / skipped / failed counts. Email and text opt-ins are sent as `1` only when `consent_data` records explicit consent (`marketing_consent` or `email_marketing_consent` for email, `sms_consent` for texts); `marketing_consent_inferred` is not consent. Calls stay on for inbound inquiries. Hashtags are bucketed (`intent-high`, `intent-medium`, `intent-low`, `benefit-1k-plus`, `benefit-500-plus`, `benefit-under-500`).
+- **CSV export** leaves archived leads out, records the handoff (it does not claim BoldTrail imported the file) and neutralizes spreadsheet formulas.
+- **Settings** is read-only status: Google address validation connected or not, BoldTrail direct sending per operator, who is signed in and when the session ends. Keys are server secrets set by a developer.
 
-CSV export includes clear contact/address/source/status/hashtags/notes columns plus Watchdog lead context. BoldTrail's import mapper can map the desired CRM fields during upload. Exporting a lead records the handoff but does not claim that BoldTrail has successfully imported or synced it.
+## `backoffice-api` actions
+
+All actions require a Backoffice session except the four retired ones.
+
+| Action | Request | Response |
+| --- | --- | --- |
+| `session` | — | `{ok, actor, actor_label, expires_at, operators:[{key,label}], integrations}` |
+| `logout` | — | `{ok}` |
+| `status` | — | `{ok, setup_required:false, google_address_validation}` |
+| `integrations` | — | `{ok, google_address_validation, boldtrail:{john,wife}, profiles}` |
+| `list` | — | `{ok, leads, followups_available, integrations}` |
+| `detail` | `{lead_id}` | `{ok, lead, events}` |
+| `add` | `{lead}` | `{ok, lead}` (201) |
+| `update` | `{lead_id, patch:{lead_status?, processing_status?, notes?, next_action?, next_action_due?}}` | `{ok, lead}` |
+| `mark_reviewed` | `{lead_id}` | `{ok, lead}` |
+| `add_note` | `{lead_id, note}` | `{ok, event}` (201) |
+| `log_contact` | `{lead_id, channel: call\|text\|email}` | `{ok, lead, event}` |
+| `assign` | `{lead_ids, profile_key: unassigned\|john\|wife}` | `{ok, updated}` |
+| `validate_address` | `{lead_id}` | `{ok, lead}` |
+| `sync_boldtrail` | `{lead_id, profile_key, resend?}` | `{ok, lead}`; `409 ALREADY_SYNCED` unless `resend` |
+| `sync_boldtrail_bulk` | `{lead_ids (≤50), profile_key, resend?}` | `{ok, requested_count, synced_count, skipped_count, failed_count, synced, skipped, failed}` |
+| `archive_bulk` | `{lead_ids, archive}` | `{ok, updated}` |
+| `export_csv` | `{profile_key, lead_ids?, include_exported?}` | `{ok, filename, csv, count, excluded_count, export_id}` |
+| `setup`, `login`, `rotate_access_key`, `set_google_key` | — | `410 {error:"retired"}` |
 
 ## LeadIQ Tools
 
-`/btc.html` now routes to `/property/backoffice/#leadiq` so the previous BTC bookmark opens the integrated workflow.
+`/btc.html` redirects to `https://www.watchdogindex.com/backoffice#leadiq`.
 
-The LeadIQ Tools workspace currently migrates the highest-use contact-file workflow from the legacy BTC page:
+- Import one or more CSV files by picker or drag-and-drop; recognize common BoldTrail, kvCORE and generic CRM columns.
+- Normalize email, phone, state and ZIP values; flag duplicates, missing contact details and malformed values.
+- Export a cleaned CSV, the filtered view, a BoldTrail-ready CSV or a Kit CSV.
+- The **Kit CSV** includes only contacts who opted in to email and reports how many were left out. The optional batch opt-in checkbox fills in contacts with no recorded choice; a recorded "no" always stays no.
+- **Add to queue** prefills the Add lead form; nothing is saved unless the operator saves that lead.
+- Imported files stay in browser memory only.
 
-- Import one or multiple CSV files by picker or drag-and-drop.
-- Recognize common BoldTrail, kvCORE and generic CRM contact columns.
-- Normalize email, phone, state and ZIP values.
-- Detect duplicates using email, phone, then name/address evidence.
-- Flag missing contact information, missing addresses and malformed email/phone values.
-- Search and filter the imported contact set.
-- Export a cleaned/deduplicated CSV.
-- Export a BoldTrail-ready CSV using the same column contract as the server Backoffice exporter.
-- Prefill the secure **Add lead** form from an imported contact without silently persisting the entire CSV.
-
-Having an email address or phone number is a data-completeness signal only. It is not proof of marketing consent or permission to contact.
-
-The original BTC application remains preserved at `/btc-legacy.html` while specialty utilities such as Open House, Property IQ and remaining reachout/campaign helpers are migrated deliberately. The legacy page is not the authoritative source for retained lead records.
-
-## Google Address Validation
-
-Open **Settings** in Backoffice and paste the Google Address Validation API key. The key is sent to the server and stored in Supabase Vault as `google_address_validation_api_key`.
-
-Manual leads with a submitted address are automatically validated when Google is connected. Existing leads can be revalidated from the lead detail panel. The submitted address remains unchanged; Google's standardized address, postal components, verdict summary and USPS DPV result are stored separately.
+The original BTC application remains at `/btc-legacy.html` while Open House, Property IQ and the remaining campaign helpers move over.
 
 ## Server components
 
-- `backoffice-api` — authenticated lead reads/writes, assignment, Google validation, CSV generation, export audit and secret configuration.
-- `backoffice-lead-ingest` — server-to-server intake scaffold for future automatic lead sources.
-- `backoffice_leads` / `backoffice_lead_events` — master lead record and audit trail.
-- `backoffice_sessions` / `backoffice_auth_events` — private access sessions and login audit.
-- `backoffice_exports` / `backoffice_export_items` — export history.
-- `backoffice_export_profiles` — John/Wife export profiles.
-
-## Server-to-server intake
-
-The existing `backoffice-lead-ingest` function remains fail-closed until its intake secret is configured. A public estimator must not call a secret-protected ingest endpoint from client-side JavaScript. Route automatic submissions through a trusted server boundary.
+- `backoffice-api` — session-checked lead reads/writes, pipeline, follow-ups, notes, contact log, assignment, Google validation, BoldTrail send and CSV export.
+- `backoffice-dev-login` — issues Backoffice sessions to listed Watchdog accounts.
+- `backoffice-lead-ingest` — server-to-server intake scaffold (fail-closed until its intake secret is configured).
+- Tables: `backoffice_leads`, `backoffice_lead_events`, `backoffice_sessions`, `backoffice_auth_events`, `backoffice_exports`, `backoffice_export_items`, `backoffice_export_profiles`, `backoffice_operators`.
+- `supabase/migrations/20260928250000_backoffice_lead_followups.sql` adds `next_action`, `next_action_due` and `last_contacted_at`. Until it is applied, `list` falls back to the older columns and reports `followups_available: false`.
 
 ## Provider policy
 
-TruePeopleSearch scraping is intentionally not implemented. If identity enrichment is added, use an authorized provider with a stable API. Enriched contact data is supporting intelligence and is not treated as proof of marketing consent.
-
+TruePeopleSearch scraping is intentionally not implemented. If identity enrichment is added, use an authorized provider with a stable API. Enriched contact data is supporting intelligence and is not proof of marketing consent.
 
 ## Professional Reviews
 
-Developer-only professional identity operations are available at `/backoffice/professional-verifications`.
+Developer-only professional identity operations are at `/backoffice/professional-verifications`.
 
 The Professional Reviews inbox is the authoritative queue for:
 
