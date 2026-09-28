@@ -10,7 +10,7 @@ const refresh=read('property/js/account-refresh-20260925.js');
 const css=read('property/css/account-refresh-20260925.css');
 const kit=read('property/assets/integrations/kit-logo.svg');
 const bold=read('property/assets/integrations/boldtrail-logo.svg');
-expect(page.includes('20260925b'),'account refresh cache version not bumped');
+expect(page.includes('20260928a'),'account refresh cache version not bumped');
 expect(css.includes('h1~span{display:none!important}'),'account heading subtitle hard-hide missing');
 expect(css.includes('width:44px!important;height:44px!important'),'camera button fixed circle dimensions missing');
 expect(refresh.includes("panel.id='ac-theme-popover'"),'fixed premium theme popover missing');

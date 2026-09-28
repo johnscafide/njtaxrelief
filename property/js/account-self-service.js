@@ -20,16 +20,34 @@
     el.textContent = text || '';
     el.className = 'ac-self-note' + (type ? ' ' + type : '');
   }
+  var UNREACHABLE_MESSAGE = 'We couldn’t reach Watchdog’s connection service. Check your internet connection, refresh the page and try again.';
   async function invoke(functionName, body) {
     var result = await client.functions.invoke(functionName, { body:body || {} });
     if (result.error) {
+      var name = result.error.name || '';
       var message = result.error.message || 'Request failed';
-      if (result.error.context && typeof result.error.context.json === 'function') {
+      var status = result.error.context && result.error.context.status || 0;
+      if (name === 'FunctionsFetchError' || name === 'FunctionsRelayError' || /failed to send a request/i.test(message)) message = UNREACHABLE_MESSAGE;
+      else if (result.error.context && typeof result.error.context.json === 'function') {
         try { var payload = await result.error.context.json(); if (payload && payload.error) message = payload.error; } catch (_error) {}
       }
-      throw new Error(message);
+      var failure = new Error(message);
+      failure.status = status;
+      throw failure;
     }
     return result.data || {};
+  }
+  function keyHelpMarkup(provider) {
+    if (provider === 'boldtrail') {
+      return '<details class="ac-key-help"><summary><i class="fas fa-circle-question" aria-hidden="true"></i><span>Where do I find my BoldTrail API token?</span><i class="fas fa-chevron-down ac-key-help-chevron" aria-hidden="true"></i></summary><div class="ac-key-help-body">' +
+        '<ol><li>Sign in to BoldTrail (kvCORE).</li><li>In the main menu, open <b>Lead Engine</b>, then <b>Lead Dropbox</b>.</li><li>Scroll down to the <b>My API Tokens</b> box.</li><li>Check <b>Contacts</b> (or <b>All</b>), then click <b>Generate</b>.</li><li>The page refreshes and your new token shows at the top of that box. Copy the whole token and paste it above.</li></ol>' +
+        '<p>BoldTrail tokens last one year and you can have up to three at a time. When yours expires, generate a new one and save it here again. If you don’t see the My API Tokens box, your brokerage’s BoldTrail admin or BoldTrail support can help.</p>' +
+        '<a href="https://help.insiderealestate.com/en/articles/4263959-boldtrail-api-tokens" target="_blank" rel="noopener noreferrer">BoldTrail’s guide to API tokens <i class="fas fa-arrow-up-right-from-square" aria-hidden="true"></i></a></div></details>';
+    }
+    return '<details class="ac-key-help"><summary><i class="fas fa-circle-question" aria-hidden="true"></i><span>Where do I find my Kit V4 API key?</span><i class="fas fa-chevron-down ac-key-help-chevron" aria-hidden="true"></i></summary><div class="ac-key-help-body">' +
+      '<ol><li>Sign in to Kit at app.kit.com.</li><li>Click your name in the top right, then choose <b>Settings</b>.</li><li>Open the <b>Developer</b> tab.</li><li>Under <b>V4 Keys</b>, click <b>Add a new key</b>, name it something like “Watchdog”, then click <b>Create API Key</b>.</li><li>Copy the key right away and paste it above. Kit only shows it once.</li></ol>' +
+      '<p>Use a V4 key, not the older V3 API key or API secret. API keys work on every Kit plan, including the free one. Lost your key? In Kit’s Developer settings, click <b>Edit</b> on the key, then <b>Reset</b> to get a new one.</p>' +
+      '<a href="https://help.kit.com/en/articles/9902901-kit-api-overview" target="_blank" rel="noopener noreferrer">Kit’s API help article <i class="fas fa-arrow-up-right-from-square" aria-hidden="true"></i></a></div></details>';
   }
   function renderAvatarControls() {
     var hero = document.querySelector('.ac-profile-hero');
@@ -114,9 +132,9 @@
     section.innerHTML = '<header class="ac-sync-header"><div><h2>Sync Accounts</h2></div><a class="ac-connection-center" href="/property/integrations"><i class="fas fa-arrow-up-right-from-square"></i> Integration Center</a></header>' +
       '<div class="ac-connection-grid">' +
       '<article class="ac-connection-card"><div class="ac-connection-head"><span class="ac-provider-logo ac-provider-boldtrail"><img src="/property/assets/integrations/boldtrail-logo.svg" alt="BoldTrail"></span><div><small>CRM</small><h3>BoldTrail / kvCORE</h3><p id="ac-crm-status">Checking connection…</p></div></div>' +
-      '<label>API token<input id="ac-crm-key" type="password" autocomplete="off" spellcheck="false" placeholder="Paste your BoldTrail API token"></label><small class="ac-secret-note"><i class="fas fa-lock"></i> The key is validated server-side and never returned to this browser.</small><div class="ac-connection-actions"><button type="button" id="ac-crm-save">Save CRM connection</button><button type="button" class="ghost" id="ac-crm-sync">Sync now</button><button type="button" class="danger-ghost" id="ac-crm-disconnect">Disconnect</button></div><div class="ac-self-note" id="ac-crm-note" aria-live="polite"></div></article>' +
+      '<label>API token<input id="ac-crm-key" type="password" autocomplete="off" spellcheck="false" placeholder="Paste your BoldTrail API token"></label><small class="ac-secret-note"><i class="fas fa-lock"></i> The key is validated server-side and never returned to this browser.</small>' + keyHelpMarkup('boldtrail') + '<div class="ac-connection-actions"><button type="button" id="ac-crm-save">Save CRM connection</button><button type="button" class="ghost" id="ac-crm-sync">Sync now</button><button type="button" class="danger-ghost" id="ac-crm-disconnect">Disconnect</button></div><div class="ac-self-note" id="ac-crm-note" aria-live="polite"></div></article>' +
       '<article class="ac-connection-card"><div class="ac-connection-head"><span class="ac-provider-logo ac-provider-kit"><img src="/property/assets/integrations/kit-logo.svg" alt="Kit"></span><div><small>NEWSLETTER / EMAIL SERVICE</small><h3>Kit</h3><p id="ac-kit-status">Checking connection…</p></div></div>' +
-      '<label>V4 API key<input id="ac-kit-key" type="password" autocomplete="off" spellcheck="false" placeholder="Paste your Kit V4 API key"></label><small class="ac-secret-note"><i class="fas fa-lock"></i> Saving a provider connection does not by itself grant Broadcasts access or marketing consent.</small><div class="ac-connection-actions"><button type="button" id="ac-kit-save">Save Kit connection</button><button type="button" class="ghost" id="ac-kit-health">Check connection</button><button type="button" class="danger-ghost" id="ac-kit-disconnect">Disconnect</button></div><div class="ac-self-note" id="ac-kit-note" aria-live="polite"></div></article>' +
+      '<label>V4 API key<input id="ac-kit-key" type="password" autocomplete="off" spellcheck="false" placeholder="Paste your Kit V4 API key"></label><small class="ac-secret-note"><i class="fas fa-lock"></i> Saving a provider connection does not by itself grant Broadcasts access or marketing consent.</small>' + keyHelpMarkup('kit') + '<div class="ac-connection-actions"><button type="button" id="ac-kit-save">Save Kit connection</button><button type="button" class="ghost" id="ac-kit-health">Check connection</button><button type="button" class="danger-ghost" id="ac-kit-disconnect">Disconnect</button></div><div class="ac-self-note" id="ac-kit-note" aria-live="polite"></div></article>' +
       '</div>';
     var pricing = document.getElementById('membership-options');
     if (pricing) pricing.insertAdjacentElement('beforebegin', section); else app.appendChild(section);
@@ -154,7 +172,7 @@
       document.getElementById('ac-kit-health').disabled = !provider || provider.status === 'revoked';
       document.getElementById('ac-kit-disconnect').disabled = !provider || provider.status === 'revoked';
     } catch (error) {
-      document.getElementById('ac-kit-status').textContent = 'Not connected';
+      document.getElementById('ac-kit-status').textContent = 'Connection status unavailable';
     }
   }
   async function saveCrm() {
@@ -163,7 +181,7 @@
     if (key.length < 20) { note('ac-crm-note','Paste a valid BoldTrail API token.','error'); return; }
     connectionBusy = true; note('ac-crm-note','Validating and securing the CRM connection…');
     try { await invoke('tmp-boldtrail-probe',{ action:'boldtrail.connect', api_token:key, external_account_label:'BoldTrail CRM' }); document.getElementById('ac-crm-key').value=''; note('ac-crm-note','BoldTrail connected. The saved token is server-side only.','success'); await refreshConnections(); }
-    catch (error) { note('ac-crm-note', error.message || 'BoldTrail could not be connected.','error'); }
+    catch (error) { note('ac-crm-note', error.status === 400 && /could not be verified/i.test(error.message || '') ? 'BoldTrail didn\u2019t accept that token. Make sure you copied the whole token and that it was generated with Contacts (or All) checked. See \u201cWhere do I find my BoldTrail API token?\u201d above.' : (error.message || 'BoldTrail could not be connected.'),'error'); }
     finally { connectionBusy=false; }
   }
   async function syncCrm() {
@@ -186,7 +204,7 @@
     if(key.length<16){note('ac-kit-note','Paste a valid Kit V4 API key.','error');return;}
     connectionBusy=true;note('ac-kit-note','Validating and securing the Kit connection…');
     try{await invoke('tmp-boldtrail-probe',{action:'kit.connect',api_key:key});document.getElementById('ac-kit-key').value='';note('ac-kit-note','Kit connected. The saved key is server-side only.','success');await refreshConnections();}
-    catch(error){note('ac-kit-note',error.message||'Kit could not be connected.','error');}
+    catch(error){note('ac-kit-note',error.status === 502 ? 'Kit didn\u2019t accept that key' + (error.message ? ' (Kit said: ' + error.message + ')' : '') + '. Make sure it\u2019s a V4 API key from Settings \u2192 Developer in Kit. See \u201cWhere do I find my Kit V4 API key?\u201d above.' : (error.message || 'Kit could not be connected.'),'error');}
     finally{connectionBusy=false;}
   }
   async function healthKit(){if(connectionBusy)return;connectionBusy=true;note('ac-kit-note','Checking Kit…');try{await invoke('tmp-boldtrail-probe',{action:'kit.health'});note('ac-kit-note','Kit connection verified.','success');await refreshConnections();}catch(error){note('ac-kit-note',error.message||'Kit check failed.','error');}finally{connectionBusy=false;}}
