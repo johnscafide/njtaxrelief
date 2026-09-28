@@ -4,7 +4,7 @@
 -- when it had to recover the ZIP code before finding the parcel. The link_method
 -- check never allowed that label, so those inserts failed silently: the resolution
 -- state says "candidate" but no candidate link exists for the user to review
--- (69 contacts vs 1 link in production on 2026-09-28).
+-- (16 contacts in production on 2026-09-28; the other "candidate" states already had links).
 --
 -- 1. Allow the label (all existing values are kept).
 -- 2. Put the affected contacts back in the queue so the worker (every 5 minutes,

@@ -291,7 +291,9 @@
   function howItWorks() {
     var r = data.resolution || {};
     var c = data.counts || {};
-    var checking = num(r.pending) + num(r.candidate) + num(r.error);
+    // A "candidate" resolution state can be stale once its link was reviewed, so only the
+    // queue itself counts as being checked.
+    var checking = num(r.pending) + num(r.error);
     var tiles = [
       [c.matched_contacts, 'Linked to a property'],
       [c.needs_review, 'Waiting for your review'],
