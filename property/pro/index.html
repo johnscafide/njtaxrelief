@@ -20,12 +20,29 @@
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
   <link rel="stylesheet" href="/styles.css">
   <link rel="stylesheet" href="/property/css/shared.css">
+  <link rel="stylesheet" href="/property/css/public-mobile-nav.css">
   <link rel="stylesheet" href="/property/css/pro.css">
   <link rel="stylesheet" href="/property/css/pro-conversion.css">
   <link rel="stylesheet" href="/property/css/pro-buying-path.css">
 </head>
-<body class="wd-pro-page">
-  <div id="main-nav"></div>
+<body class="wd-pro-page nav-solid">
+<header class="wd-nav" id="wd-nav">
+  <div class="wd-nav-in">
+    <button class="wd-public-trigger" id="wd-menu-trigger" type="button" onclick="WatchdogPublicNav.open('main')" aria-label="Open Watchdog menu">
+      <i class="fas fa-bars"></i><span>Menu</span>
+    </button>
+    <a class="wd-logo" href="/"><i class="fas fa-dog"></i><span>Watchdog</span></a>
+    <button class="wd-public-trigger wd-public-profile" id="wd-profile-trigger" type="button" onclick="WatchdogPublicNav.open('profile')" aria-label="Open account menu">
+      <i class="fas fa-user"></i><span>Sign in</span>
+    </button>
+  </div>
+</header>
+<div class="wd-public-backdrop" id="wd-public-backdrop" onclick="WatchdogPublicNav.close()"></div>
+<aside class="wd-public-sheet" id="wd-main-sheet" aria-hidden="true" aria-label="Watchdog navigation"><!-- Filled by /property/js/watchdog-universal-menu.js: the one shared Watchdog menu. --></aside>
+<aside class="wd-public-sheet right" id="wd-profile-sheet" aria-hidden="true" aria-label="Watchdog account">
+  <div class="wd-public-sheet-head"><b>Your Watchdog</b><button class="wd-public-close" type="button" onclick="WatchdogPublicNav.close()" aria-label="Close account menu"><i class="fas fa-xmark"></i></button></div>
+  <div id="wd-profile-content"></div>
+</aside>
   <main id="pro-main">
     <section class="pro-hero" aria-labelledby="pro-hero-title">
       <div class="pro-hero-glow pro-hero-glow-a"></div><div class="pro-hero-glow pro-hero-glow-b"></div>
@@ -182,6 +199,7 @@
   <div id="main-footer"></div>
   <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2/dist/umd/supabase.js"></script>
   <script src="/property/js/billing-client.js"></script>
+  <script src="/property/js/public-nav.js"></script>
   <script src="/property/js/pro.js"></script>
 </body>
 </html>

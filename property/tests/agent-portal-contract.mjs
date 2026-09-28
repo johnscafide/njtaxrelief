@@ -37,4 +37,14 @@ assert.match(read('property/js/watchdog-universal-menu.js'), /var INVITE_KEY = '
 // Clean public links only.
 assert.doesNotMatch(page, /href="\/property\/"/);
 
+// Link previews: /agent/<slug> is served with server-built Open Graph tags
+// (texting apps and social sites never run page scripts).
+const previewApi = read('api/agent-portal-page.js');
+assert.match(read('middleware.js'), /new URL\('\/api\/agent-portal-page',request\.url\)/);
+assert.match(previewApi, /rpc\/get_public_agent_portal_profile/);
+assert.match(previewApi, /p\.licensed_name \|\| p\.display_name/, 'previews use the official NJREC name first');
+assert.match(previewApi, /property="og:title"/);
+assert.match(previewApi, /const esc = /, 'profile text is escaped before it goes into HTML');
+assert.match(previewApi, /Any failure serves the static page unchanged/);
+
 console.log('Agent portal contract passed.');

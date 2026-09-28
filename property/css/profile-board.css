@@ -102,6 +102,9 @@ html body[data-account-profile-mode] #ac-app .api-joined{display:flex;align-item
 html body[data-account-profile-mode] #ac-app .api-joined b{flex:none;display:grid;place-items:center;min-width:40px;height:40px;padding:0 8px;border-radius:12px;background:#fff;color:var(--ab-ink);font:800 18px var(--ab-display);border:1px solid var(--ab-line)}
 html body[data-account-profile-mode] #ac-app .api-joined.has-joins b{background:var(--ab-navy);border-color:var(--ab-navy);color:#fff}
 html body[data-account-profile-mode] #ac-app .api-joined span{color:var(--ab-ink);font-size:13px;line-height:1.45}
+html body[data-account-profile-mode] #ac-app .api-rewards{margin-top:8px}
+html body[data-account-profile-mode] #ac-app .api-rewards.has-joins b{background:#127a4a;border-color:#127a4a}
+html body[data-account-profile-mode] #ac-app .api-joined span strong{font-weight:800}
 html body[data-account-profile-mode] #ac-app .api-note{color:var(--ab-muted);font-size:12px;line-height:1.45}
 
 @media (max-width:768px){

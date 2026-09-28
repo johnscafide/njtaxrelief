@@ -227,7 +227,20 @@
     };
   }
 
+  /* One header layout on every public page: menu on the left, logo in the
+     middle, account (and any icons added next to it, like ANCHOR apps) on the
+     right. The homepage showcase does the same; without it, extra icons pushed
+     "Sign in" onto a second row. */
+  function groupNav(){
+    var nav=document.querySelector('#wd-nav .wd-nav-in');if(!nav||nav.querySelector(':scope>.wd-right'))return;
+    var menu=q('wd-menu-trigger'),logo=nav.querySelector(':scope>.wd-logo');if(!logo)return;
+    var left=document.createElement('div'),right=document.createElement('div');left.className='wd-left';right.className='wd-right';
+    Array.prototype.slice.call(nav.children).forEach(function(el){if(el===logo)return;(el===menu?left:right).appendChild(el);});
+    nav.insertBefore(left,logo);nav.appendChild(right);
+  }
+
   function init(){
+    groupNav();
     suppressLegacyIndexUi();
     ensureUniversalMenu();
     loadScript('wd-anchor-applications-menu-script','/property/js/anchor-applications-menu-runtime.js?v=20260926a');
