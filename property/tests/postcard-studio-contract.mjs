@@ -75,6 +75,8 @@ assert.match(fulfill, /PCM_PROOF_STALE/);
 assert.match(checkout, /MARKETING_BILLING_ENABLED/);
 assert.match(checkout, /PCM_LIVE_LAUNCH_ENABLED/);
 assert.match(checkout, /ALLOWED_ORIGINS\.has\(origin\) \? origin : 'https:\/\/njpropertytaxrelief\.com'/);
+// supabase-js sends x-client-info; without it the browser blocks the POST after preflight.
+assert.match(checkout, /'Access-Control-Allow-Headers': '[^']*x-client-info/, 'checkout CORS must allow the x-client-info header');
 
 // Pricing: fixed per-plan retail with a 20% margin floor; credits are service-issued only.
 assert.match(migration, /'agent', 179, 'pro', 169, 'pro_plus', 159, 'teams', 149, 'developer', 149/);
