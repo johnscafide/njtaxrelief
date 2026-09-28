@@ -1,0 +1,35 @@
+name: Glass header contract
+
+on:
+  push:
+    branches: [main]
+    paths:
+      - 'property/js/watchdog-glass-header.js'
+      - 'property/css/watchdog-glass-header.css'
+      - 'property/tests/glass-header-contract.mjs'
+      - 'api/watchdog-index-page-contact-safe.js'
+      - 'property/js/app-shell-2027.js'
+      - 'property/js/watchdog-universal-menu.js'
+      - 'property/js/public-nav.js'
+      - '.github/workflows/glass-header-contract.yml'
+  pull_request:
+    paths:
+      - 'property/js/watchdog-glass-header.js'
+      - 'property/css/watchdog-glass-header.css'
+      - 'property/tests/glass-header-contract.mjs'
+      - 'api/watchdog-index-page-contact-safe.js'
+      - 'property/js/app-shell-2027.js'
+      - 'property/js/watchdog-universal-menu.js'
+      - 'property/js/public-nav.js'
+      - '.github/workflows/glass-header-contract.yml'
+
+jobs:
+  contract:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+      - name: Verify glass header contract
+        run: node property/tests/glass-header-contract.mjs
