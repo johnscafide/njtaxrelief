@@ -6,7 +6,9 @@ server-only batch_precompute mode (the same formula used on demand) and saves
 progress in parcel_sync_runs (scope "score:statewide") after every call, so a
 stopped run resumes where it left off.
 
-Environment: SUPABASE_URL, SUPABASE_SERVICE_ROLE_KEY.
+Environment: SUPABASE_URL, SUPABASE_SERVICE_ROLE_KEY (progress rows),
+SCORE_PRECOMPUTE_TOKEN (the batch scoring token, sent as
+x-score-precompute-token).
 """
 from __future__ import annotations
 
@@ -24,9 +26,10 @@ SOURCE = "Watchdog Score ROBUST-v1 batch precompute"
 
 
 class Api:
-    def __init__(self, url: str, key: str):
+    def __init__(self, url: str, key: str, job_token: str):
         self.url = url.rstrip("/")
         self.key = key
+        self.job_token = job_token
         self.s = requests.Session()
         self.s.headers.update({"apikey": key, "Authorization": f"Bearer {key}", "Content-Type": "application/json"})
 
@@ -34,7 +37,7 @@ class Api:
         delay = 3.0
         for attempt in range(tries):
             try:
-                r = self.s.post(f"{self.url}/functions/v1/workbench-score", data=json.dumps({"mode": "batch_precompute", "after_pin": after or "", "limit": limit}), timeout=150)
+                r = self.s.post(f"{self.url}/functions/v1/workbench-score", data=json.dumps({"mode": "batch_precompute", "after_pin": after or "", "limit": limit}), headers={"x-score-precompute-token": self.job_token}, timeout=150)
                 if r.status_code == 200:
                     return r.json()
                 err = f"HTTP {r.status_code}: {r.text[:200]}"
@@ -68,7 +71,10 @@ class Api:
 
 
 def run(args) -> dict:
-    api = Api(os.environ["SUPABASE_URL"], os.environ["SUPABASE_SERVICE_ROLE_KEY"])
+    job_token = os.environ.get("SCORE_PRECOMPUTE_TOKEN", "")
+    if len(job_token) < 32:
+        raise SystemExit("SCORE_PRECOMPUTE_TOKEN is missing or shorter than 32 characters")
+    api = Api(os.environ["SUPABASE_URL"], os.environ["SUPABASE_SERVICE_ROLE_KEY"], job_token)
     run_row = api.latest_run() if args.resume else None
     if run_row:
         api.update_run(run_row["id"], {"status": "running", "error": None})

@@ -356,6 +356,11 @@ function sameKey(a, b) {
   return diff === 0;
 }
 function isServerCaller(req, service) {
+  // Dedicated batch token (SCORE_PRECOMPUTE_TOKEN), shared only with the
+  // scheduled GitHub job. Must be long; an unset or short secret never matches.
+  const jobToken = Deno.env.get("SCORE_PRECOMPUTE_TOKEN") || "";
+  const sentToken = req.headers.get("x-score-precompute-token") || "";
+  if (jobToken.length >= 32 && sentToken && sameKey(sentToken, jobToken)) return true;
   const bearer = (req.headers.get("authorization") || "").replace(/^Bearer\s+/i, "");
   const apikey = req.headers.get("apikey") || "";
   return serverKeys(service).some((k) => (bearer && sameKey(bearer, k)) || (apikey && sameKey(apikey, k)));

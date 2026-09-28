@@ -106,6 +106,7 @@ jobs:
         env:
           SUPABASE_URL: https://uvkvaxljhhngydvlrzom.supabase.co
           SUPABASE_SERVICE_ROLE_KEY: ${{ secrets.SUPABASE_SERVICE_ROLE_KEY }}
+          SCORE_PRECOMPUTE_TOKEN: ${{ secrets.SCORE_PRECOMPUTE_TOKEN }}
           RESUME: ${{ inputs.resume }}
           MAX_PAGES: ${{ inputs.max_pages }}
         run: |
