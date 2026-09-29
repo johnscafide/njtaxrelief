@@ -191,11 +191,11 @@
     return '<a class="wd-universal-developer-tool" data-wd-developer-tool="sales-desk" href="' + route('/sales-desk') + '"><i class="fas fa-handshake"></i><span><b>Sales Desk</b><small>' + (isDeveloper() ? 'Consultants, attributions and payouts' : 'Your share links, accounts and commissions') + '</small></span></a>';
   }
   function developerToolsHtml(){
-    if(!isDeveloper()) return salesDeskHtml();
+    if(!isDeveloper()) return '';
     return '<div class="wd-universal-developer-label"><i class="fas fa-code"></i><span>Developer tools</span></div>' +
       developerItems().map(function(item){
         return '<a class="wd-universal-developer-tool" data-wd-developer-tool="' + item.key + '" href="' + item.href + '"><i class="fas ' + item.icon + '"></i><span><b>' + item.label + '</b><small>' + item.detail + '</small></span></a>';
-      }).join('') + salesDeskHtml();
+      }).join('');
   }
   function planPromo(){
     if(!state.user || !state.ready || isDeveloper()) return null;
@@ -323,7 +323,7 @@
         '<a href="' + route('/account') + '"><i class="fas fa-credit-card"></i><span><b>Account &amp; billing</b><small>Plan, subscription and billing</small></span></a>' +
         '<a href="/agent/training/"><i class="fas fa-graduation-cap"></i><span><b>Training Center</b><small>Review Agent and Pro+ workflows anytime</small></span></a>' +
         '<a href="' + route('/home') + '"><i class="fas fa-house"></i><span><b>Property Home</b><small>Your saved-home workspace</small></span></a>' +
-        developerToolsHtml() +
+        developerToolsHtml() + salesDeskHtml() +
       '</nav><button class="wd-universal-signout" type="button" data-wd-universal="signout"><i class="fas fa-arrow-right-from-bracket"></i> Sign out</button>';
   }
   function patchProfiles(){

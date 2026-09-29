@@ -144,6 +144,7 @@
         notice(m.text + (m.account ? ' ' : ''), true);
         if (m.account) {
           var n = $('[data-trial-notice]');
+          // content-architecture: dynamic — this notice and link exist only for a server-side checkout rejection code; the text is chosen from live billing state, not static page copy.
           if (n) { var a = document.createElement('a'); a.href = prefix + '/account'; a.textContent = 'Open Account'; n.appendChild(document.createTextNode(' ')); n.appendChild(a); }
         }
       });

@@ -17,6 +17,7 @@
        signed-out state with a plain message instead of a blank page. */
     document.addEventListener('DOMContentLoaded', function () {
       var n = document.querySelector('[data-notice]');
+      // content-architecture: dynamic — shown only when the auth library failed to load at runtime; a recovery message for a failure state, not page copy.
       if (n) { n.textContent = 'The sign-in library did not load. Refresh the page or check your connection.'; n.hidden = false; n.classList.add('is-error'); }
       Array.prototype.forEach.call(document.querySelectorAll('[data-state]'), function (x) { x.hidden = x.getAttribute('data-state') !== 'signin'; });
     }, { once: true });
@@ -115,13 +116,13 @@
         var input = document.getElementById(b.getAttribute('data-copy'));
         if (!input) return;
         input.select();
+        // content-architecture: dynamic — button label flips with the clipboard result and reverts after a moment; interaction state, not static copy.
         try { navigator.clipboard.writeText(input.value); b.textContent = 'Copied'; setTimeout(function () { b.textContent = 'Copy'; }, 1500); } catch (_) { document.execCommand('copy'); }
       });
     });
     renderAccounts(d.accounts || []);
     renderCommissions(d.commissions || [], owner);
     renderProspects(d.prospects || []);
-    renderKit();
   }
 
   function planSummary(p) {
@@ -193,18 +194,6 @@
         db.from('watchdog_sales_prospects').delete().eq('id', Number(b.getAttribute('data-delete-prospect'))).then(function (r) { if (r.error) throw r.error; return refresh(); }).catch(function (e) { notice(err(e), true); });
       });
     });
-  }
-
-  function renderKit() {
-    var items = [
-      { href: SITE + '/agents/trial', label: 'Agent trial page', small: 'The door for agents. Add your link.' },
-      { href: SITE + '/for/real-estate-agents', label: 'For real estate agents', small: 'The long-form agent page.' },
-      { href: SITE + '/pro', label: 'Plans and pricing', small: 'Agent, Pro, Pro+ and lifetime options.' },
-      { href: SITE + '/real-estate-agents', label: 'Agent field guide', small: 'How agents should use the data.' },
-      { href: SITE + '/data-methodology', label: 'Data methodology', small: 'Where every number comes from.' },
-      { href: 'https://github.com/johnscafide/njtaxrelief/tree/main/property/docs/marketing/watchdog-agent-marketing-q4-2026', label: 'Q4 marketing kit', small: 'Scripts, emails, objections, creatives (owner grants access).' }
-    ];
-    $('[data-kit]').innerHTML = items.map(function (i) { return '<a href="' + esc(i.href) + '" target="_blank" rel="noopener"><span>' + esc(i.label) + '</span><small>' + esc(i.small) + '</small></a>'; }).join('');
   }
 
   /* ---- Actions ---- */
