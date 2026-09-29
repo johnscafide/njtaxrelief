@@ -5,9 +5,11 @@ const must=(ok,msg)=>{if(!ok)throw new Error(msg)};
 
 must(src.includes('ADAPTER_RANK'),'county routing must rank provider maturity');
 must(src.includes('function bestRoute'),'county routing must select per-evidence-family routes');
-must(src.includes('["liens","clerk_land_records","deeds_mortgages"]'),'lien routing must prefer lien/land-record families');
-must(src.includes('["clerk_land_records","legal_notices","liens"]'),'lis pendens routing must prefer county recording families');
-must(src.includes('["deeds_mortgages","clerk_land_records"]'),'deed routing must prefer deed/land-record families');
+// acf49872 inserted real county search portals into each family ranking; the family order behind
+// the portal is unchanged (also covered by transaction-county-discovery-quality-contract).
+must(src.includes('lienRoute=bestRoute(all,["liens","search_portal","clerk_land_records","deeds_mortgages"])'),'lien routing must prefer lien/land-record families');
+must(src.includes('lisRoute=bestRoute(all,["search_portal","clerk_land_records","legal_notices","liens"])'),'lis pendens routing must prefer county recording families');
+must(src.includes('deedRoute=bestRoute(all,["search_portal","deeds_mortgages","clerk_land_records"])'),'deed routing must prefer deed/land-record families');
 must(src.includes('source_type:"official_search_required"'),'unsearched lien/title routes must render as search required');
 must(src.includes('source_checked_at:null'),'routing discovery must not masquerade as completed search time');
 must(src.includes('search_state:"not_run"'),'routing payload must expose not-run state');

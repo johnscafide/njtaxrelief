@@ -24,7 +24,8 @@ for(const key of ['min_materiality','min_evidence_coverage','max_evidence_age_ho
   requireText(evidence,key,'evidence-aware shadow conditions');
 }
 requireText(evidence,"'evidence_not_fully_governed'",'authority fail-closed reason');
-requireText(evidence,"'verified_relationship_missing'",'relationship fail-closed reason');
+// The applied migration (7a296610) names this reason verified_relationship_required.
+requireText(evidence,"and not v_relationship_verified then v_result:='skipped'; v_reasons:=array_append(v_reasons,'verified_relationship_required')",'relationship fail-closed reason');
 requireText(evidence,"'execution_allowed',false",'evidence replay execution flag');
 requireText(evidence,"'shadow_mode_no_execution'",'evidence replay blocked action');
 requireText(evidence,'integration_create_finding_proof','proof artifact creation');
@@ -37,10 +38,19 @@ requireText(approvals,'External execution remains disabled in this phase.','appr
 requireText(approvals,"'automation.approval.'||v_status",'approval audit trail');
 
 requireText(ui,'Shadow Lab','shadow lab UI');
-requireText(ui,'No CRM write, email, task or other external action is executed','shadow lab zero-write copy');
+// Zero-write copy as shipped in the Shadow Lab (c0d832c4).
+requireText(ui,'Shadow policies still have no external execution path.','shadow lab zero-write copy');
+requireText(ui,'Shadow only · zero execution','shadow lab zero-write copy');
+requireText(ui,"note('Shadow policy created. It cannot execute external work.')",'shadow lab zero-write copy');
 requireText(ui,'integration_run_shadow_policy','shadow replay UI');
-requireText(ui,'integration_request_automation_approval','approval request UI');
-requireText(ui,'integration_decide_automation_approval','approval decision UI');
 forbidText(ui,'?v=','shadow lab asset loading');
+
+// Approval request/decision lives in the Proof Explorer, which the Shadow Lab loads (20cfb134, 03ca4d97).
+const proofExplorer=read('property/js/integrations-proof-explorer.js');
+requireText(ui,"s.src='/property/js/integrations-proof-explorer.js'",'shadow lab proof explorer loader');
+requireText(proofExplorer,'integration_request_automation_approval','approval request UI');
+requireText(proofExplorer,'integration_decide_automation_approval','approval decision UI');
+requireText(proofExplorer,'<b>Execution remains disabled.</b> An approved review record does not send this action to Zapier or any external system in the current phase.','approved-is-not-executed UI copy');
+forbidText(proofExplorer,'?v=','proof explorer asset loading');
 
 if(!process.exitCode)console.log('Integration Phase 9 shadow-policy contract passed.');
