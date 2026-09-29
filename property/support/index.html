@@ -26,6 +26,9 @@
     <section class="op-grid">
       <article class="op-card"><h2>Send a support request</h2><p>Signed-in requests are saved to your Watchdog account so the team can investigate without asking you to resend the basic context.</p>
         <div id="support-gate" class="op-callout">Checking your Watchdog session…</div>
+        <template id="support-gate-signed-out"><b>Sign in to link this request to your account.</b><br><a href="/signin">Sign in to Watchdog</a>, or <a href="/contact?topic=account-access">Contact Watchdog</a> if you cannot access your account.</template>
+        <template id="support-gate-preview"><b>Preview environment.</b><br>The interactive form is connected to Watchdog staging. Sign in with a staging test account to submit a non-production request, or <a href="/contact?topic=account-access">Contact Watchdog</a>.</template>
+        <template id="support-gate-error">The account session could not be checked. Please <a href="/contact?topic=account-access">Contact Watchdog</a>.</template>
         <form class="op-form" id="support-form" hidden>
           <div class="op-form-grid"><label>Category<select id="support-category"><option value="account">Account</option><option value="access">Plan or access</option><option value="data">Property data</option><option value="technical">Technical issue</option><option value="billing">Billing</option><option value="other">Other</option></select></label><label>Priority<select id="support-priority"><option value="normal">Normal</option><option value="high">High, blocking my work</option></select></label></div>
           <label>Subject<input id="support-subject" maxlength="140" required placeholder="Short description of the issue"></label>
@@ -43,7 +46,7 @@
     <footer class="op-footer"><span>Watchdog Property Intelligence</span><span><a href="/privacy">Privacy</a> · <a href="/terms">Terms</a> · <a href="/contact">Contact Watchdog</a></span></footer>
   </main>
   <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2/dist/umd/supabase.js"></script>
-  <script src="/property/js/support.js?v=20260928a"></script>
+  <script src="/property/js/support.js?v=20260929a"></script>
   <script src="/property/js/contact-routing-policy.js"></script>
 </body>
 </html>
