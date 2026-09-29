@@ -24,7 +24,7 @@ html body[data-sidebar-page="data-center"] .dcv2-hero::before{display:none!impor
 html body[data-sidebar-page="data-center"] .dcv2-hero-actions :is(a,button){border-radius:999px!important}
 
 html body[data-sidebar-page="data-center"] .dcv2-tabs{gap:6px!important;padding:6px!important;border:0!important;border-radius:999px!important;background:#fff!important;box-shadow:none!important;width:fit-content;max-width:100%;overflow-x:auto}
-html body[data-sidebar-page="data-center"] .dcv2-tab{min-height:42px!important;padding:0 18px!important;border:0!important;border-radius:999px!important;background:transparent!important;color:var(--xb-ink)!important;font:600 14px var(--xb-display)!important;white-space:nowrap}
+html body[data-sidebar-page="data-center"] .dcv2-tab{min-height:44px!important;padding:0 18px!important;border:0!important;border-radius:999px!important;background:transparent!important;color:var(--xb-ink)!important;font:600 14px var(--xb-display)!important;white-space:nowrap}
 html body[data-sidebar-page="data-center"] .dcv2-tab[aria-selected="true"]{background:var(--xb-navy)!important;color:#fff!important}
 
 /* The four summary numbers become the board's colored cards */
@@ -87,6 +87,45 @@ html body[data-sidebar-page="data-workbench"] #dw-app :is(button,a,input,select)
   html body[data-sidebar-page="data-center"] .dcv2-hero::after{right:-40px;width:150px;height:175px}
   html body[data-sidebar-page="data-center"] .dcv2-tabs{width:auto}
 }
+/* ---------------- Load, error and missing-value states ---------------- */
+html body[data-sidebar-page="data-center"] .dc-load-notice{display:flex;align-items:center;justify-content:space-between;gap:16px;flex-wrap:wrap;margin:0 0 16px;padding:18px 20px;border:1px solid var(--xb-sand-deep);border-radius:24px;background:var(--xb-sand);color:var(--xb-ink)}
+html body[data-sidebar-page="data-center"] .dc-load-notice[hidden]{display:none!important}
+html body[data-sidebar-page="data-center"] .dc-load-notice strong{display:block;font:700 16px/1.3 var(--xb-display)}
+html body[data-sidebar-page="data-center"] .dc-load-notice p{margin:4px 0 0;font-size:14px;line-height:1.45;color:var(--xb-muted)}
+html body[data-sidebar-page="data-center"] .dc-load-notice button{min-height:44px;padding:0 20px;border-radius:999px!important;border:1px solid var(--xb-navy)!important;background:var(--xb-navy)!important;color:#fff!important;font:700 14px var(--xb-display);cursor:pointer}
+html body[data-sidebar-page="data-center"] #dc-rows tr:is([data-provider-status="planned"],[data-provider-status="unavailable"]) strong{color:var(--xb-muted)}
+html body[data-sidebar-page="data-center"] .dc-results td.dc-cell-missing{color:var(--xb-muted);font-style:italic}
+html body[data-sidebar-page="data-center"] .dc-drawer:focus-visible{outline:3px solid var(--xb-blue-bright);outline-offset:-3px}
+html body[data-sidebar-page="data-center"] .dc-drawer-close{width:44px!important;height:44px!important;min-width:44px!important}
+html body[data-sidebar-page="data-center"] .dc-drawer-actions :is(a,button){min-height:44px!important;display:inline-flex;align-items:center}
+/* Builder, saved-view and modal controls: 44px targets and no overflow at 320px. */
+html body[data-sidebar-page="data-center"] :is(.dc-result-controls,.dc-view-actions,.dc-modal-actions) :is(select,button){min-height:44px!important}
+html body[data-sidebar-page="data-center"] :is(.dc-result-controls,.dc-view-actions) :is(label,select){min-width:0;max-width:100%}
+@media (max-width:640px){html body[data-sidebar-page="data-center"] .dc-result-controls :is(label,select,button){width:100%}}
+/* Readable-type floor (12px) for the builder, catalog table, chips and saved-view controls. */
+html body[data-sidebar-page="data-center"] :is(.dc-build-intro p,.dc-brand p,.dc-selected span,#dc-result-note,.dc-table-wrap td,.dc-table-wrap td small,.dc-bulk-yes,.dc-bulk-no,.dc-pill,.dc-status-dot){font-size:12px!important;line-height:1.4!important}
+html body[data-sidebar-page="data-center"] .dc-table-wrap td strong{font-size:13px!important}
+html body[data-sidebar-page="data-center"] .dc-table-wrap td small{color:var(--xb-muted)!important}
+html body[data-sidebar-page="data-center"] .dc-chips button{min-height:40px!important;padding:6px 12px!important;font-size:12px!important}
+html body[data-sidebar-page="data-center"] :is(.dc-result-controls,.dc-view-actions) :is(select,button){font-size:13px!important}
+html body[data-sidebar-page="data-center"] .dc-view-actions select{max-width:100%!important}
+html body[data-sidebar-page="data-center"] .dc-check input[type=checkbox]{width:22px!important;height:22px!important;cursor:pointer;accent-color:var(--xb-navy)}
+html body[data-sidebar-page="data-workbench"] #dw-app .dw-grid td.dw-source-missing{color:var(--xb-muted)!important;font-style:italic}
+html body[data-sidebar-page="data-workbench"] #dw-app .dw-start-error{display:grid!important;justify-items:center;gap:14px;text-align:center}
+html body[data-sidebar-page="data-workbench"] #dw-app .dw-start-error p{margin:0;max-width:520px;font-size:15px;line-height:1.5;color:var(--xb-ink)}
+html body[data-sidebar-page="data-workbench"] #dw-app .dw-start-retry{min-height:44px;padding:0 22px;border:0;border-radius:999px;background:var(--xb-navy);color:#fff;font:700 14px var(--xb-display);cursor:pointer}
+html body[data-sidebar-page="data-workbench"] #dw-app .dw-start-retry:focus-visible{outline:3px solid var(--xb-blue-bright);outline-offset:2px}
+/* "Load more from source" only exists for paged farm sources; a display rule must not unhide it. */
+html body[data-sidebar-page="data-workbench"] #dw-app .dw-load-more[hidden]{display:none!important}
+/* Workbench readable-type floor (12px) and 44px action targets across toolbar, grid, side rail and action bar. */
+html body[data-sidebar-page="data-workbench"] #dw-app :is(.dw-toolbar :is(button,select,input),.dw-summary,.dw-summary :is(span,div,b),.dw-grid :is(th,td),.dw-grid td span,.dw-actionbar :is(button,span),.dw-side :is(span,small,p),.dw-eyebrow,.dw-field-category-shown,.dw-field-category-title small,.dw-field-access-filter :is(span,small),.dw-menu-pop button){font-size:12px!important}
+html body[data-sidebar-page="data-workbench"] #dw-app .dw-grid td{font-size:13px!important}
+html body[data-sidebar-page="data-workbench"] #dw-app :is(.dw-toolbar,.dw-actionbar) :is(button,select,input){min-height:44px!important}
+html body[data-sidebar-page="data-workbench"] #dw-app :is(.dw-grid,.dw-field,.dw-field-access-filter) input[type=checkbox]{width:20px!important;height:20px!important;cursor:pointer}
+/* Field-library status lines meet the 12px readable-type floor and body-text contrast. */
+html body[data-sidebar-page="data-workbench"] #dw-app .dw-field small,
+html body[data-sidebar-page="data-workbench"] #dw-app .dw-coverage-line{font-size:12px!important;line-height:1.35!important;color:var(--xb-muted)!important}
+
 @media print{
   html body[data-sidebar-page="data-center"] :is(.dcv2-hero,.dcv2-kpi){background:#fff!important;color:#000!important;border:1px solid #bbb!important}
   html body[data-sidebar-page="data-center"] :is(.dcv2-hero,.dcv2-kpi)::after{display:none}
