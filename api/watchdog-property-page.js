@@ -301,8 +301,8 @@ function homeCard(row) {
       <div class="wdp-card-head"><h2 id="wdp-home-h">Is this your home?</h2></div>
       <p class="wdp-card-note">Claim it to follow its assessment, tax and score in your Watchdog account. Once ownership is verified, you can add a photo that shows wherever this address appears on Watchdog.</p>
       <div class="wdp-pills">
-        <a class="wdp-pill is-dark" href="/home?pin=${pin}"><i class="fas fa-house-circle-check" aria-hidden="true"></i>Claim this home</a>
-        <a class="wdp-pill" href="/home?pin=${pin}#photo"><i class="fas fa-camera" aria-hidden="true"></i>Add a photo</a>
+        <a class="wdp-pill is-dark" href="/home?pin=${pin}&amp;claim=1"><i class="fas fa-house-circle-check" aria-hidden="true"></i>Claim this home</a>
+        <a class="wdp-pill" href="/home?pin=${pin}&amp;claim=1#photo"><i class="fas fa-camera" aria-hidden="true"></i>Add a photo</a>
       </div>
     </section>`;
 }

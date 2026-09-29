@@ -37,6 +37,11 @@ on:
       - 'supabase/migrations/20260928233000_slow_mailing_zip_purge.sql'
       - 'property/tests/property-page-contract.mjs'
       - 'property/tests/parcel-mailing-zip-privacy-contract.mjs'
+      - 'property/js/dashboard/home/home-claim.js'
+      - 'property/js/ownership-verification.js'
+      - 'property/js/home.js'
+      - 'property/home/index.html'
+      - 'property/tests/home-claim-contract.mjs'
       - '.github/workflows/property-page-contract.yml'
   pull_request:
     paths:
@@ -73,6 +78,11 @@ on:
       - 'supabase/migrations/20260928233000_slow_mailing_zip_purge.sql'
       - 'property/tests/property-page-contract.mjs'
       - 'property/tests/parcel-mailing-zip-privacy-contract.mjs'
+      - 'property/js/dashboard/home/home-claim.js'
+      - 'property/js/ownership-verification.js'
+      - 'property/js/home.js'
+      - 'property/home/index.html'
+      - 'property/tests/home-claim-contract.mjs'
       - '.github/workflows/property-page-contract.yml'
 
 jobs:
@@ -99,3 +109,5 @@ jobs:
         run: node property/tests/parcel-mailing-zip-privacy-contract.mjs
       - name: Verify property mailing ZIP contract
         run: node property/tests/property-mailing-zip-contract.mjs
+      - name: Verify claim this home contract
+        run: node property/tests/home-claim-contract.mjs

@@ -134,3 +134,17 @@ html body.hb-board #hm-body .hm-acts .db-btn{border-radius:999px!important;backg
   html body.hb-board #hm-body .hb-nav,html body.hb-board #hm-body .hb-deco{display:none!important}
   html body.hb-board #hm-body .hb-card{border:1px solid #bbb!important;background:#fff!important;color:#000!important}
 }
+
+/* "Claim this home" status line (property/js/dashboard/home/home-claim.js). */
+html body.hm-dashboard-page .hm-claim-status{max-width:1180px;margin:14px auto 0;padding:0 24px;box-sizing:border-box}
+html body.hm-dashboard-page .hm-claim-status[hidden],html body.hm-dashboard-page .hm-claim-status [hidden]{display:none!important}
+html body.hm-dashboard-page .hm-claim-status p{display:flex;flex-wrap:wrap;align-items:center;gap:10px 12px;margin:0;padding:14px 18px;border:1px solid var(--hb-teal-deep);border-radius:16px;background:var(--hb-teal);color:var(--hb-ink);font-size:14px;line-height:1.5}
+html body.hm-dashboard-page .hm-claim-status p span{flex:1 1 240px;min-width:0}
+html body.hm-dashboard-page .hm-claim-status p>i{color:#177a5e;font-size:18px}
+html body.hm-dashboard-page .hm-claim-status[data-state="pending"] p{border-color:var(--hb-sky-deep);background:var(--hb-sky)}
+html body.hm-dashboard-page .hm-claim-status[data-state="pending"] p>i{color:var(--hb-blue)}
+html body.hm-dashboard-page .hm-claim-status[data-state="unavailable"] p{border-color:var(--hb-sand-deep);background:var(--hb-sand)}
+html body.hm-dashboard-page .hm-claim-status[data-state="unavailable"] p>i{color:#8a6d12}
+html body.hm-dashboard-page .hm-claim-action{min-height:44px;padding:0 18px;border:0;border-radius:12px;background:var(--hb-navy);color:#fff;font:700 14px Inter,system-ui,sans-serif;cursor:pointer}
+html body.hm-dashboard-page .hm-claim-action:focus-visible{outline:3px solid var(--hb-blue-bright);outline-offset:2px}
+@media (max-width:760px){html body.hm-dashboard-page .hm-claim-status{padding:0 16px}html body.hm-dashboard-page .hm-claim-action{width:100%}}
