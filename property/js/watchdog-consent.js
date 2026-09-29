@@ -18,7 +18,7 @@
     watchdog:'y8g1uivano',
     legacy:'wjeklv0exl'
   });
-  var CSS_URL = '/property/css/watchdog-consent.css';
+  var CSS_URL = '/property/css/watchdog-consent.css?v=20260929a';
   var CONTACT_POLICY_URL = '/property/js/contact-routing-policy.js';
   var stored = readStored();
   var lastFocus = null;

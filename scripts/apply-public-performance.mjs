@@ -34,7 +34,7 @@ async function patchPropertyLookup() {
   let html = await readFile(htmlPath, 'utf8');
   html = ensureAnalytics(html);
   if (!html.includes(MARKER)) {
-    const critical = `<link ${MARKER} rel="stylesheet" href="/property/css/lookup/01-search-hero.css">\n  <link rel="preload" as="image" href="${PROPERTY_HERO_MOBILE}" media="(max-width: 760px)" fetchpriority="high">\n  <link rel="preload" as="image" href="${PROPERTY_HERO_DESKTOP}" media="(min-width: 761px)" fetchpriority="high">\n  `;
+    const critical = `<link ${MARKER} rel="stylesheet" href="/property/css/lookup/01-search-hero.css?v=20260929a">\n  <link rel="preload" as="image" href="${PROPERTY_HERO_MOBILE}" media="(max-width: 760px)" fetchpriority="high">\n  <link rel="preload" as="image" href="${PROPERTY_HERO_DESKTOP}" media="(min-width: 761px)" fetchpriority="high">\n  `;
     html = injectBefore(html, '<link rel="stylesheet" href="/property/css/lookup.css">', critical, 'lookup stylesheet link');
   }
   await writeFile(htmlPath, html, 'utf8');

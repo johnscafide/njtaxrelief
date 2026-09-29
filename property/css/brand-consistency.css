@@ -126,7 +126,7 @@ body.wdx-modern :is(button,input,select,textarea){
 body.wdx-modern .wdx-btn,
 body.wdx-modern .wdx-menu,
 body.wdx-modern .wdx-icon,
-body.wdx-modern .wdx-user{min-height:42px}
+body.wdx-modern .wdx-user{min-height:44px}
 body.wdx-modern .wdx-btn{font-size:var(--type-sm)!important}
 body.wdx-modern .wdx-date span,
 body.wdx-modern .wdx-weather span{font-size:var(--type-xs)!important}

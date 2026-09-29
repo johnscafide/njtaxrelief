@@ -75,7 +75,10 @@
         display: inline-flex;
         flex-shrink: 0;
         gap: 10px;
+        justify-content: center;
         margin: 0;
+        min-height: 44px;
+        min-width: 44px;
         padding: 6px 0;
         text-decoration: none;
         transform: none;
@@ -155,13 +158,13 @@
         color: var(--wdn-muted);
         cursor: pointer;
         display: inline-flex;
-        flex: 0 0 40px;
-        height: 40px;
+        flex: 0 0 44px;
+        height: 44px;
         justify-content: center;
         margin: 0;
         padding: 0;
         transform: none;
-        width: 40px;
+        width: 44px;
     }
 
     #wd-property-nav .wdn-location:hover,
@@ -211,8 +214,8 @@
         color: #fff;
         cursor: pointer;
         display: inline-flex;
-        flex: 0 0 42px;
-        height: 42px;
+        flex: 0 0 44px;
+        height: 44px;
         justify-content: center;
         margin: 0;
         padding: 0;
@@ -220,7 +223,7 @@
         transition:
             background-color 0.18s ease,
             transform 0.18s ease;
-        width: 42px;
+        width: 44px;
     }
 
     #wd-property-nav .wdn-search-button:hover,
@@ -333,7 +336,8 @@
         }
 
         #wd-property-nav .wdn-search {
-            height: 46px;
+            height: 50px;
+            padding-right: 3px;
         }
 
         #wd-property-nav .wdn-location {
@@ -342,15 +346,15 @@
 
         #wd-property-nav .wdn-address {
             font-size: 14px;
-            height: 42px;
+            height: 44px;
             padding-left: 15px;
             padding-right: 8px;
         }
 
         #wd-property-nav .wdn-search-button {
-            flex-basis: 36px;
-            height: 36px;
-            width: 36px;
+            flex-basis: 44px;
+            height: 44px;
+            width: 44px;
         }
 
         #wd-property-nav .wdn-mobile-button {
@@ -362,7 +366,7 @@
 
     @media (max-width: 400px) {
         #wd-property-nav .wdn-inner {
-            grid-template-columns: 38px minmax(0, 1fr) 44px;
+            grid-template-columns: 44px minmax(0, 1fr) 44px;
         }
 
         #wd-property-nav .wdn-address::placeholder {

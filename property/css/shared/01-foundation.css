@@ -107,6 +107,7 @@
 .plm-back {
   display: inline-flex; align-items: center; gap: 9px; font-size: 15px; font-weight: 600;
   font-family: inherit; background: none; border: none; color: #1a1a2e; cursor: pointer; padding: 6px 4px;
+  min-height: 44px; min-width: 44px;
 }
 .plm-back:hover { color: var(--navy); }
 .plm-bar-actions { display: flex; align-items: center; gap: 4px; position: relative; }
@@ -114,6 +115,7 @@
   display: inline-flex; align-items: center; gap: 8px; font-size: 14px; font-weight: 600;
   font-family: inherit; background: none; border: none; color: #1a1a2e;
   padding: 8px 13px; border-radius: 8px; cursor: pointer;
+  min-height: 44px; min-width: 44px; justify-content: center;
 }
 .plm-barbtn:hover { background: #f2f5fa; }
 .plm-barbtn i { font-size: 15px; }
