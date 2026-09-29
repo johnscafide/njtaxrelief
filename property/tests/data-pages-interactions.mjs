@@ -145,6 +145,8 @@ async function shot(page, name) { if (evidence) await page.screenshot({ path: pa
   assert.equal(stats.registry, 1, 'the Data Center downloads the marker registry once');
   assert.equal(c.rpc.get_public_data_center_overview_v1, 1, 'the Data Center calls the overview RPC once');
   assert.equal(await page.locator('.pg-summary, .pg-toggle').count(), 0, 'static provider governance does not overlay the governed page');
+  const pagebarLinks = await page.$$eval('[data-dc-pagebar-action]', (links) => links.map((a) => a.getAttribute('href')));
+  if (pagebarLinks.length) assert.deepEqual(pagebarLinks, ['/dashboard', '/data-workbench'], 'page-bar actions use root-level URLs');
   await page.click('[data-dc-tab="build"]');
   const liveRows = await page.locator('#dc-rows tr[data-provider-status="live"]').count();
   assert.equal(await page.textContent('#dc-kpi-live'), liveRows.toLocaleString('en-US'), 'Live fields KPI equals the builder Live filter');
@@ -245,6 +247,8 @@ for (const opts of [{ width: 320, height: 720 }, { width: 390, height: 844 }, { 
   assert.deepEqual(after.functions, settled.functions, 'no further edge-function calls once the grid has settled');
   assert.equal(await page.evaluate(() => window.__rowMutations), 0, 'the grid does not keep re-rendering');
   assert.equal(await page.isVisible('#dw-more'), false, 'Load more is hidden for sources that are not paged');
+  const shellLinks = await page.$$eval('#dw-app a[href]', (links) => links.map((a) => a.getAttribute('href')));
+  assert.ok(shellLinks.length > 0 && shellLinks.every((href) => !href.startsWith('/property/')), `Workbench page links are root-level: ${shellLinks.join(', ')}`);
   await page.click('#dw-fields');
   const listed = await page.locator('#dw-fields-list [data-field]').count();
   assert.ok(listed >= registry.markers.length, `field library lists every catalog marker (${listed}/${registry.markers.length})`);
@@ -275,6 +279,9 @@ for (const opts of [{ width: 320, height: 720 }, { width: 390, height: 844 }, { 
   assert.ok(await overflow(page) <= 1, 'no horizontal overflow on the Workbench at 390px');
   await shot(page, 'data-workbench-390');
   assert.deepEqual(errors, []);
+  // The legacy close control is hidden by the modern page shell; its handler must still use the root-level route.
+  const [closeRequest] = await Promise.all([page.waitForRequest((request) => request.isNavigationRequest()), page.evaluate(() => document.getElementById('dw-close').click())]);
+  assert.equal(new URL(closeRequest.url()).pathname, '/dashboard', 'Close returns to the root-level Dashboard');
   await context.close();
 }
 
