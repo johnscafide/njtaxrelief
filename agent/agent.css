@@ -21,7 +21,7 @@
   .hero-description{font-size:16px;line-height:24px;max-width:430px}
   .hero-cta{font-size:15px;line-height:20px}
   .hero-proof{font-size:12.5px;line-height:18px;row-gap:10px}
-  .product-preview figcaption>span{font-size:11px;line-height:16px}
+  .product-preview figcaption>span{font-size:12px;line-height:16px}
 
   .trust-benefits p{font-size:14px;line-height:20px}
   .trust-statement>p{font-size:24px;line-height:1.08}
@@ -38,27 +38,27 @@
   .price>span{font-size:13px}
   .price-card .check-list{font-size:14px;line-height:24px}
   .price-cta{font-size:15px;line-height:20px}
-  .offer-terms{font-size:11px;line-height:16px}
+  .offer-terms{font-size:12px;line-height:16px}
   .founding-band{min-height:650px}
 
   .bottom-trust>p{font-size:14px;line-height:21px;max-width:390px}
   .bottom-trust li{font-size:12px;line-height:17px}
-  .site-footer{font-size:11px;line-height:16px}
-  .site-footer a,.site-footer button{font-size:11px}
+  .site-footer{font-size:12px;line-height:16px}
+  .site-footer a,.site-footer button{font-size:12px}
 
   .annual-copy>p:last-child{font-size:14px;line-height:20px}
   .annual-price h3{font-size:14px}
   .annual-offer .check-list{font-size:12px;line-height:24px}
   .annual-cta{font-size:15px}
   .keep-lifetime{font-size:13px}
-  .annual-terms{font-size:10px;line-height:15px}
+  .annual-terms{font-size:12px;line-height:15px}
 
   .tour-heading>p:last-child{font-size:14px;line-height:21px}
-  .tour-tabs button{font-size:11px}
-  .tour-image-wrap>p{font-size:10px;line-height:15px}
+  .tour-tabs button{font-size:12px}
+  .tour-image-wrap>p{font-size:12px;line-height:15px}
   .tour-detail>p:not(.eyebrow){font-size:14px;line-height:22px}
   .tour-detail>ul li{font-size:12px;line-height:18px}
-  .tour-detail .tour-coverage{font-size:11px!important;line-height:16px}
+  .tour-detail .tour-coverage{font-size:12px!important;line-height:16px}
 }
 
 @media(max-width:370px){
@@ -67,7 +67,7 @@
   .trust-benefits p,.features p{font-size:13px;line-height:20px}
   .why-copy>p:not(.eyebrow),.founding-copy>p:last-child{font-size:14px;line-height:21px}
   .price-card .check-list{font-size:13px;line-height:23px}
-  .bottom-trust li{font-size:11.5px}
+  .bottom-trust li{font-size:12px}
 }
 
 /* Fine-tune the mobile founding offer so the larger type still reads as a polished sales card rather than feeling oversized. */
@@ -78,6 +78,9 @@
   .price-card{width:min(316px,calc(100vw - 48px));padding-inline:20px}
   .price-card .check-list{font-size:13.5px;line-height:23px}
   .price>span{font-size:12.5px}
-  .offer-terms{font-size:10.5px;line-height:15px}
+  .offer-terms{font-size:12px;line-height:15px}
   .bottom-trust>p{font-size:13.5px;line-height:20px}
 }
+
+/* Header brand link keeps its logo size but gets a full 44px-tall tap target. */
+.site-header a.brand{display:flex;align-items:center;height:auto;min-height:44px}

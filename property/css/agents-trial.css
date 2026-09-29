@@ -138,7 +138,7 @@ html:not([data-trial-variant="b"]) [data-variant-b]{display:none!important}
 .wt-final .wt-actions{margin-top:18px}
 .wt-footer{padding:24px 0 40px;font-size:14px;line-height:1.6;color:var(--wt-muted);border-top:1px solid var(--wt-line);background:var(--wt-surface)}
 .wt-footer nav{display:flex;flex-wrap:wrap;gap:6px 18px;margin-top:10px}
-.wt-footer nav a{display:inline-flex;align-items:center;min-height:44px;color:var(--wt-ink);font-weight:700;text-decoration:none}
+.wt-footer nav a{display:inline-flex;align-items:center;justify-content:center;min-height:44px;min-width:44px;color:var(--wt-ink);font-weight:700;text-decoration:none}
 .wt-footer nav a:hover{text-decoration:underline}
 
 /* Invite form (variant B and secondary path) */
