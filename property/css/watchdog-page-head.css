@@ -1,0 +1,52 @@
+/* Watchdog page header breadcrumb for agent tools.
+   Every agent tool says where it lives in the information architecture
+   (property/docs/watchdog-information-architecture.md):
+
+     <- Agent Desk  /  Farm  /  Farm Map
+
+   The first crumb is the obvious way back to the Agent Desk; the second opens
+   the tool's area on the desk; the last names the page. The markup is static
+   HTML in each page (or rendered by agent-workspace.js inside the workspace
+   bar), always:
+
+     <nav class="wd-crumbs" aria-label="Breadcrumb">
+       <a class="wd-crumbs-desk" href="/agent-desk" data-wd-route>...Agent Desk</a>
+       <span class="wd-crumbs-sep" aria-hidden="true">/</span>
+       <a href="/agent-desk#farm" data-wd-route>Farm</a>
+       <span class="wd-crumbs-sep" aria-hidden="true">/</span>
+       <span class="wd-crumbs-here" aria-current="page">Farm Map</span>
+     </nav>
+
+   Board language: navy pill back link, Plus Jakarta Sans, 44px touch targets,
+   12px minimum text, visible focus ring. Inside the Agent Desk tool frame the
+   desk's own Back bar replaces this row (agent-hub.js hides it there). */
+.wd-crumbs{
+  display:flex;flex-wrap:wrap;align-items:center;gap:2px 8px;min-width:0;margin:0;padding:0;
+  color:#5d6877;font:700 13px/1.2 "Plus Jakarta Sans",Inter,system-ui,-apple-system,"Segoe UI",sans-serif;
+  letter-spacing:0;text-transform:none;
+  /* The legacy root styles.css turns every <nav> into a sticky navy bar; undo that here. */
+  position:static;z-index:auto;background:transparent;box-shadow:none;
+}
+.wd-crumbs a{
+  display:inline-flex;align-items:center;gap:7px;min-height:44px;padding:0 6px;border-radius:999px;
+  color:#1456a0;text-decoration:none;white-space:nowrap;
+}
+.wd-crumbs a:hover{text-decoration:underline;text-underline-offset:3px}
+.wd-crumbs a.wd-crumbs-desk{padding:0 16px 0 14px;background:#0e2248;color:#fff}
+.wd-crumbs a.wd-crumbs-desk:hover{background:#1456a0;text-decoration:none}
+.wd-crumbs a.wd-crumbs-desk i{font-size:12px}
+.wd-crumbs a:focus-visible{outline:3px solid #2f6df6;outline-offset:2px}
+.wd-crumbs-sep{color:#a79f8e;font-weight:600}
+.wd-crumbs-here{min-width:0;color:#0e2248;overflow-wrap:anywhere}
+
+/* A breadcrumb row that sits above a page's own header. */
+.wd-crumbs.wd-crumbs-row{padding:12px 16px 0}
+.wd-crumbs.wd-crumbs-bar{padding:0 28px;min-height:56px;border-bottom:1px solid #e3dfd6;background:#fff}
+
+/* Phones: the page title is right below, so the last crumb steps aside. */
+@media(max-width:600px){
+  .wd-crumbs .wd-crumbs-here,.wd-crumbs .wd-crumbs-sep:has(+ .wd-crumbs-here){display:none}
+  .wd-crumbs.wd-crumbs-bar{padding:0 16px}
+}
+@media(prefers-reduced-motion:reduce){.wd-crumbs a{transition:none}}
+@media print{.wd-crumbs{display:none!important}}

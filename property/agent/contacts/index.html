@@ -18,7 +18,7 @@
   <link rel="stylesheet" href="/property/css/plan-context.css">
   <link rel="stylesheet" href="/property/css/app-shell-2027.css">
   <link rel="stylesheet" href="/property/css/watchdog-universal-menu.css?v=20260825a">
-  <link rel="stylesheet" href="/agent/contacts/contacts.css">
+<link rel="stylesheet" href="/property/css/watchdog-page-head.css">  <link rel="stylesheet" href="/agent/contacts/contacts.css">
   <link rel="stylesheet" href="/agent/contacts/contacts-polish.css" data-agent-contacts-polish="1">
   <link rel="stylesheet" href="/agent/shared/agent-workspace.css">
   <link rel="stylesheet" href="/agent/contacts/workspace-v2.css" data-agent-workspace-final="1">
@@ -26,7 +26,7 @@
 <body data-sidebar-page="agent-contacts" data-plan-auto="true" data-agent-workspace="contacts">
   <main class="acx-page awx-page" id="acx-app" aria-busy="true" data-agent-page="contacts">
     <div class="awx-utility">
-      <div class="awx-breadcrumb"><span>Agent Workspace</span><i>/</i><strong>Contacts</strong></div>
+      <nav class="wd-crumbs" aria-label="Breadcrumb"><a class="wd-crumbs-desk" href="/agent-desk" data-wd-route><i class="fas fa-arrow-left" aria-hidden="true"></i><span>Agent Desk</span></a><span class="wd-crumbs-sep" aria-hidden="true">/</span><a href="/agent-desk#clients" data-wd-route>Clients</a><span class="wd-crumbs-sep" aria-hidden="true">/</span><span class="wd-crumbs-here" aria-current="page">Contacts</span></nav>
     </div>
 
     <header class="awx-header" aria-labelledby="acx-title">
@@ -44,14 +44,13 @@
       </div>
     </header>
 
-    <nav class="awx-tabs" aria-label="Agent workspace sections">
-      <a href="/agent-desk"><i class="fa-solid fa-bullseye" aria-hidden="true"></i>Today</a>
+    <!-- Clients-area tools, same names and order as the Agent Desk cards. The desk itself and Marketing are one tap away in the breadcrumb and the Watchdog menu. -->
+    <nav class="awx-tabs" aria-label="Clients tools">
       <a href="/agent/listing-prep"><i class="fa-solid fa-house-chimney" aria-hidden="true"></i>Listing Prep</a>
-      <a href="/agent/buyers"><i class="fa-solid fa-scale-balanced" aria-hidden="true"></i>Buyers</a>
-      <a href="/agent/open-house"><i class="fa-solid fa-qrcode" aria-hidden="true"></i>Open House</a>
+      <a href="/agent/buyers"><i class="fa-solid fa-scale-balanced" aria-hidden="true"></i>Buyer Shortlists</a>
+      <a href="/agent/open-house"><i class="fa-solid fa-qrcode" aria-hidden="true"></i>Open Houses</a>
       <a href="/agent/contacts" aria-current="page"><i class="fa-solid fa-address-book" aria-hidden="true"></i>Contacts</a>
       <a href="/transaction/"><i class="fa-solid fa-file-signature" aria-hidden="true"></i>Transactions</a>
-      <button type="button" data-agent-soon="Coming soon for Agents" title="Coming soon for Agents"><i class="fa-solid fa-wand-magic-sparkles" aria-hidden="true"></i>Marketing <small>Coming soon</small></button>
       <button type="button" data-agent-soon="Coming soon for Agents" title="Coming soon for Agents"><i class="fa-solid fa-plug" aria-hidden="true"></i>Integrations <small>Coming soon</small></button>
     </nav>
 

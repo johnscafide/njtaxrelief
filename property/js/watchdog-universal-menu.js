@@ -10,11 +10,11 @@
   if(window.__WATCHDOG_UNIVERSAL_MENU__) return;
   window.__WATCHDOG_UNIVERSAL_MENU__ = true;
 
-  var VERSION = '20260927a';
+  var VERSION = '20260929a';
   /* CSS has a longer browser/CDN cache lifetime than this runtime. Keep a
      separate asset revision so interaction fixes can invalidate cached chrome
      immediately without coupling that cache key to the menu data contract. */
-  var CSS_VERSION = '20260927a';
+  var CSS_VERSION = '20260929a';
   var URL = 'https://uvkvaxljhhngydvlrzom.supabase.co';
   var KEY = 'sb_publishable_MYX59qCbK3d-21zDfJqkNw_fvmfnexa';
   var hostname = String(location.hostname || '').toLowerCase();
@@ -25,6 +25,7 @@
   var queued = false;
   var authAttempts = 0;
   var observed = typeof WeakSet === 'function' ? new WeakSet() : null;
+  var chromeObservers = [];
   var lastFocus = null;
 
   function route(path){
@@ -92,50 +93,107 @@
     return m ? m[1] : 'lookup';
   }
 
+  /* Normalizes a clean, /property/ or .html path to its public clean path. */
+  function publicPath(p){
+    p = String(p || '/').split('#')[0].split('?')[0];
+    if(p === '/property' || p.indexOf('/property/') === 0) p = p.slice('/property'.length) || '/';
+    p = p.replace(/\/index\.html$/i,'').replace(/\.html$/i,'');
+    if(p.length > 1) p = p.replace(/\/+$/,'');
+    return p || '/';
+  }
+  /* Watchdog information architecture, agent side (see
+     property/docs/watchdog-information-architecture.md). The five areas are the
+     Agent Desk sections and the future agent app tab bar. Each area owns the
+     tool pages in `paths`, so a tool page lights up its area in the menu. These
+     labels are the canonical nav labels: the Agent Desk rail, the app-shell
+     page header and the agent workspace breadcrumb use the same words. */
+  var AGENT_AREAS = [
+    {key:'agent-desk',section:'home',label:'Agent Desk',icon:'fa-briefcase',hint:'Who to call today and what is due',paths:['/agent-desk','/agent/training']},
+    {key:'clients',section:'clients',label:'Clients',icon:'fa-user-group',hint:'Contacts, sphere and deals',paths:['/agent/contacts','/agent/listing-prep','/agent/buyers','/agent/open-house','/transaction','/client-room','/true-cost']},
+    {key:'farm',section:'farm',label:'Farm',icon:'fa-map-location-dot',hint:'Neighborhoods you want to own',paths:['/farm-map','/farm-builder','/market-list']},
+    {key:'marketing',section:'marketing',label:'Marketing',icon:'fa-bullhorn',hint:'Mailers, email updates and reports',paths:['/marketing-studio','/newsletter-studio','/report-builder','/report-studio','/marketing-plan','/growth']},
+    {key:'research',section:'research',label:'Research',icon:'fa-magnifying-glass',hint:'Homes, towns and public data',paths:['/scan','/data-workbench','/data-center','/workbench']}
+  ];
+  /* Which agent area a page belongs to. On the desk itself the hash names the
+     section; #deals is the retired sixth section, now part of Clients. */
+  function agentAreaFor(path,hash){
+    path = publicPath(path);
+    var i, j;
+    if(path === '/agent-desk'){
+      var section = String(hash || '').replace(/^#/,'').split('/')[0];
+      if(section === 'deals') section = 'clients';
+      for(i = 0; i < AGENT_AREAS.length; i++) if(AGENT_AREAS[i].section === section) return AGENT_AREAS[i].key;
+      return 'agent-desk';
+    }
+    for(i = 0; i < AGENT_AREAS.length; i++){
+      for(j = 0; j < AGENT_AREAS[i].paths.length; j++){
+        var p = AGENT_AREAS[i].paths[j];
+        if(path === p || path.indexOf(p + '/') === 0) return AGENT_AREAS[i].key;
+      }
+    }
+    return '';
+  }
+  function onDesk(){ return publicPath(location.pathname) === '/agent-desk'; }
+  /* Areas open their Agent Desk section. On the desk a hash link switches the
+     section in place; elsewhere it opens the desk on that section. */
+  function areaHref(area){
+    var hash = area.section === 'home' ? (onDesk() ? '#home' : '') : '#' + area.section;
+    return route('/agent-desk') + hash;
+  }
+
   function items(){
     var out = [
       {key:'dashboard',href:route('/dashboard'),icon:'fa-table-columns',label:'Dashboard'},
+      {key:'lookup',href:route('/'),icon:'fa-magnifying-glass-location',label:'Property Lookup'},
       {key:'home',href:route('/home'),icon:'fa-house',label:'Property Home'},
+      {key:'pulse',href:route('/pulse'),icon:'fa-wave-square',label:'Property Pulse'},
       {key:'anchor',href:route('/anchor/applications/'),icon:'fa-file-circle-check',label:'ANCHOR Applications'},
       {key:'town-compare',href:route('/town-compare'),icon:'fa-code-compare',label:'Town Compare'},
-      {key:'robust',href:route('/robust/'),icon:'fa-gauge-high',label:'ROBUST Framework'},
-      {key:'pulse',href:route('/pulse'),icon:'fa-wave-square',label:'Property Pulse'}
+      {key:'robust',href:route('/robust/'),icon:'fa-gauge-high',label:'ROBUST Framework'}
     ];
-    if(state.ready && isAgent()) out.push({key:'agent-desk',href:route('/agent-desk'),icon:'fa-briefcase',label:'Agent Desk'});
-    if(state.ready && can('pro_plus')) out.push({key:'scan',href:route('/scan'),icon:'fa-magnifying-glass-chart',label:'Appeal Scanner'});
-    if(state.ready && can('agent')) out.push({key:'transaction',href:'/transaction/',icon:'fa-file-signature',label:'Transactions'});
-    if(state.ready && can('agent')) out.push({key:'data-workbench',href:route('/data-workbench'),icon:'fa-table-list',label:'Data Workbench'});
-    /* NJW-98: the public Data Center transparency surface is discoverable for
-       every visitor. Private execution stays enforced inside Data Center. */
-    out.push({key:'data-center',href:route('/data-center'),icon:'fa-database',label:'Data Center'});
-    out.push({key:'pro',href:route('/pro'),icon:'fa-briefcase',label:'Professional Hub'});
+    if(state.ready && isAgent()){
+      /* Agents get their five Agent Desk areas. Transactions, Data Workbench,
+         Data Center and the Appeal Scanner live inside Clients and Research. */
+      AGENT_AREAS.forEach(function(area){ out.push({key:area.key,href:areaHref(area),icon:area.icon,label:area.label}); });
+    } else {
+      if(state.ready && can('pro_plus')) out.push({key:'scan',href:route('/scan'),icon:'fa-magnifying-glass-chart',label:'Appeal Scanner'});
+      if(state.ready && can('agent')) out.push({key:'transaction',href:'/transaction/',icon:'fa-file-signature',label:'Transactions'});
+      if(state.ready && can('agent')) out.push({key:'data-workbench',href:route('/data-workbench'),icon:'fa-table-list',label:'Data Workbench'});
+      /* NJW-98: the public Data Center transparency surface is discoverable for
+         every visitor. Private execution stays enforced inside Data Center. */
+      out.push({key:'data-center',href:route('/data-center'),icon:'fa-database',label:'Data Center'});
+      out.push({key:'pro',href:route('/pro'),icon:'fa-tags',label:'Plans & Pricing'});
+    }
     out.push({key:'account',href:route('/account'),icon:'fa-user-gear',label:'Account'});
     return out;
   }
   /* Two "lenses" keep homeowners from wading through professional tools they
      cannot use. items() stays the single entitlement-filtered source of
-     destinations; META only says which lens a destination belongs to and adds
-     a one-line plain-English hint under the label. */
+     destinations; META only says which lens (and group) a destination belongs
+     to and adds a one-line plain-English hint under the label. The first five
+     home destinations are the homeowner app tab bar; "learn" rows sit below. */
   var META = {
     'dashboard':{lens:'home',hint:'Your daily overview'},
+    'lookup':{lens:'home',hint:'Search any New Jersey address'},
     'home':{lens:'home',hint:'Your saved homes and their scores'},
-    'anchor':{lens:'home',hint:'NJ property tax relief applications'},
-    'town-compare':{lens:'home',hint:'Compare taxes between towns'},
-    'robust':{lens:'home',hint:'How the Watchdog Score works'},
     'pulse':{lens:'home',hint:'What is changing near your home'},
-    'agent-desk':{lens:'work',hint:'Farming, marketing and deals'},
+    'anchor':{lens:'home',hint:'NJ property tax relief applications'},
+    'town-compare':{lens:'home',group:'learn',hint:'Compare taxes between towns'},
+    'robust':{lens:'home',group:'learn',hint:'How the Watchdog Score works'},
     'scan':{lens:'work',hint:'Find homes that look over-assessed'},
     'transaction':{lens:'work',hint:'Closing checklist and documents'},
     'data-workbench':{lens:'work',hint:'Build and export property lists'},
     'data-center':{lens:'work',hint:'Every public data source we use'},
-    'pro':{lens:'work',hint:'Plans and professional tools'},
+    'pro':{lens:'work',hint:'Compare plans for professionals'},
     'account':{lens:'both',hint:'Profile, plan and billing'}
   };
+  AGENT_AREAS.forEach(function(area){ META[area.key] = {lens:'work',hint:area.hint}; });
   /* Professional tools the viewer cannot open yet. They appear only in the
      "My work" lens with the plan they need, so pros can discover them and
-     homeowners never see them in their own lens. */
+     homeowners never see them in their own lens. Agents find these tools
+     inside their Agent Desk areas instead. */
   function lockedItems(){
-    if(!state.ready) return [];
+    if(!state.ready || isAgent()) return [];
     var have = {};
     items().forEach(function(item){ have[item.key] = true; });
     var out = [];
@@ -148,6 +206,7 @@
   var LENS_KEY = 'wd_menu_lens_v1';
   function storedLens(){ try{ var v = localStorage.getItem(LENS_KEY); return v === 'home' || v === 'work' ? v : ''; }catch(_){ return ''; } }
   function defaultLens(){
+    if(agentAreaFor(location.pathname,location.hash)) return 'work';
     var page = currentPage();
     if(page === 'fairness') page = 'robust';
     var meta = META[page];
@@ -176,7 +235,7 @@
     return [
       {key:'developer',href:route('/developer'),icon:'fa-code',label:'Developer Command Center',detail:'Platform map and developer shortcuts'},
       {key:'developer-recaps',href:route('/logs/recap'),icon:'fa-calendar-check',label:'Daily Recaps',detail:'Daily operating memory and handoffs'},
-      {key:'developer-marketing',href:'/property/developer-marketing-plan.html',icon:'fa-bullhorn',label:'Marketing Campaign',detail:'Organic-first Watchdog launch plan under $100'},
+      {key:'developer-marketing',href:route('/developer-marketing-plan'),icon:'fa-bullhorn',label:'Marketing Campaign',detail:'Organic-first Watchdog launch plan under $100'},
       {key:'developer-analytics',href:route('/analytics'),icon:'fa-chart-line',label:'Analytics',detail:'External product and account KPIs'},
       {key:'developer-logs',href:route('/logs'),icon:'fa-clock-rotate-left',label:'Build Logs',detail:'Build, verification and audit history'},
       {key:'developer-data',href:route('/developer-data'),icon:'fa-database',label:'Data Operations',detail:'Marker freshness and release controls'}
@@ -220,30 +279,40 @@
       '<span class="wd-universal-plan-promo-cta">' + promo.cta + ' <i class="fas fa-arrow-right"></i></span>' +
     '</a>';
   }
+  /* The one destination that shows as current. Agent tool pages light up their
+     Agent Desk area (Farm Map -> Farm); everything else matches its page key. */
+  function activeKey(){
+    var area = agentAreaFor(location.pathname,location.hash);
+    if(area && state.ready && isAgent()) return area;
+    return currentPage();
+  }
   function activeFor(item,page){
     if(item.key === 'robust') return page === 'robust' || page === 'fairness';
     return item.key === page;
   }
   function navLinkHtml(item,page){
     var meta = META[item.key] || {lens:'home',hint:''};
-    var cls = 'wd-universal-link wd-universal-lens-' + meta.lens + (activeFor(item,page) ? ' active' : '');
-    return '<a class="' + cls + '"' + (activeFor(item,page) ? ' aria-current="page"' : '') + ' href="' + item.href + '"><i class="fas ' + item.icon + '"></i><span>' + item.label + (meta.hint ? '<small>' + meta.hint + '</small>' : '') + '</span></a>';
+    var on = activeFor(item,page);
+    var cls = 'wd-universal-link wd-universal-lens-' + meta.lens + (on ? ' active' : '');
+    return '<a class="' + cls + '"' + (on ? ' aria-current="page"' : '') + ' data-wd-nav="' + item.key + '" href="' + item.href + '"><i class="fas ' + item.icon + '" aria-hidden="true"></i><span>' + item.label + (meta.hint ? '<small>' + meta.hint + '</small>' : '') + '</span></a>';
   }
   function navLinksHtml(){
-    var page = currentPage();
+    var page = activeKey();
     var all = items();
     var account = all.filter(function(item){ return item.key === 'account'; });
     var main = all.filter(function(item){ return item.key !== 'account'; });
-    var home = main.filter(function(item){ return (META[item.key] || {}).lens !== 'work'; });
+    var home = main.filter(function(item){ var m = META[item.key] || {}; return m.lens !== 'work' && m.group !== 'learn'; });
+    var learn = main.filter(function(item){ return (META[item.key] || {}).group === 'learn'; });
     var work = main.filter(function(item){ return (META[item.key] || {}).lens === 'work'; });
     var locked = lockedItems().map(function(item){
-      return '<a class="wd-universal-link wd-universal-lens-work wd-universal-locked" href="' + route('/pro#pricing') + '"><i class="fas ' + item.icon + '"></i><span>' + item.label + '<small>Included with ' + item.need + '</small></span><em>' + item.need + '</em></a>';
+      return '<a class="wd-universal-link wd-universal-lens-work wd-universal-locked" href="' + route('/pro#pricing') + '"><i class="fas ' + item.icon + '" aria-hidden="true"></i><span>' + item.label + '<small>Included with ' + item.need + '</small></span><em>' + item.need + '</em></a>';
     }).join('');
-    return '<p class="wd-universal-lens-eyebrow wd-universal-lens-home">For your home</p>' +
-      home.map(function(item){ return navLinkHtml(item,page); }).join('') +
-      '<button type="button" class="wd-universal-lens-hint wd-universal-lens-home" data-wd-universal="lens" data-wd-lens-to="work"><i class="fas fa-briefcase"></i><span><b>Agent or pro?</b><small>Your professional tools are under My work</small></span><i class="fas fa-arrow-right"></i></button>' +
-      '<p class="wd-universal-lens-eyebrow wd-universal-lens-work">For your business</p>' +
-      work.map(function(item){ return navLinkHtml(item,page); }).join('') + locked +
+    var list = function(rows){ return rows.map(function(item){ return navLinkHtml(item,page); }).join(''); };
+    return '<p class="wd-universal-lens-eyebrow wd-universal-lens-home">For your home</p>' + list(home) +
+      (learn.length ? '<p class="wd-universal-lens-eyebrow wd-universal-lens-home wd-universal-group-learn">Learn and compare</p>' + list(learn) : '') +
+      '<button type="button" class="wd-universal-lens-hint wd-universal-lens-home" data-wd-universal="lens" data-wd-lens-to="work"><i class="fas fa-briefcase" aria-hidden="true"></i><span><b>Agent or pro?</b><small>Your professional tools are under My work</small></span><i class="fas fa-arrow-right" aria-hidden="true"></i></button>' +
+      '<p class="wd-universal-lens-eyebrow wd-universal-lens-work">' + (state.ready && isAgent() ? 'Your Agent Desk' : 'For your business') + '</p>' +
+      list(work) + locked +
       '<div class="wd-universal-nav-rule"></div>' +
       account.map(function(item){ return navLinkHtml(item,page); }).join('');
   }
@@ -287,6 +356,27 @@
     }
     return sheet;
   }
+  /* Idempotent render for every piece of shared chrome. The old check, which
+     compared innerHTML with the source string, was always true (browsers serialize markup
+     differently from the source string, and other runtimes such as the ANCHOR
+     profile row add to it), so each refresh rewrote the profile, the observer
+     on that node queued another refresh, and the menu re-rendered about 60
+     times a second. Now a node is rewritten only when the markup this runtime
+     wants changed, or when another script replaced our content (our first
+     child is gone). Rows other runtimes add inside are left alone, and the
+     mutation records of our own write are dropped so the target observers
+     cannot feed a loop. */
+  function renderChrome(node,html){
+    if(!node) return false;
+    var mine = node.__wdUniversalFirst;
+    if(node.__wdUniversalSource === html && mine && mine.parentNode === node) return false;
+    node.innerHTML = html;
+    node.__wdUniversalSource = html;
+    node.__wdUniversalFirst = node.firstElementChild || node.firstChild;
+    if(node.dataset) node.dataset.wdUniversal = VERSION;
+    chromeObservers.forEach(function(observer){ observer.takeRecords(); });
+    return true;
+  }
   function patchPublicDrawer(){
     var sheet = ensureDrawer();
     if(!sheet) return;
@@ -297,7 +387,7 @@
        intermittently on Chromium). public-nav.js re-runs refresh() on close. */
     if(sheet.classList.contains('open')) return;
     var html = publicDrawerHtml();
-    if(sheet.innerHTML !== html){ sheet.innerHTML = html; sheet.dataset.wdUniversal = VERSION; }
+    renderChrome(sheet,html);
   }
 
   function profileMarkup(publicMode){
@@ -321,7 +411,7 @@
         '<a href="' + route('/account') + '"><i class="fas fa-user-pen"></i><span><b>Edit profile &amp; role</b><small>Profile, profession and preferences</small></span></a>' +
         '<button type="button" data-wd-universal="invite"><i class="fas fa-user-plus"></i><span><b>Invite others</b><small>Share your Watchdog referral link</small></span></button>' +
         '<a href="' + route('/account') + '"><i class="fas fa-credit-card"></i><span><b>Account &amp; billing</b><small>Plan, subscription and billing</small></span></a>' +
-        '<a href="/agent/training/"><i class="fas fa-graduation-cap"></i><span><b>Training Center</b><small>Review Agent and Pro+ workflows anytime</small></span></a>' +
+        ((isAgent() || can('agent')) ? '<a href="/agent/training"><i class="fas fa-graduation-cap"></i><span><b>Training Center</b><small>Review Agent and Pro+ workflows anytime</small></span></a>' : '') +
         '<a href="' + route('/home') + '"><i class="fas fa-house"></i><span><b>Property Home</b><small>Your saved-home workspace</small></span></a>' +
         developerToolsHtml() + salesDeskHtml() +
       '</nav><button class="wd-universal-signout" type="button" data-wd-universal="signout"><i class="fas fa-arrow-right-from-bracket"></i> Sign out</button>';
@@ -336,21 +426,21 @@
       if(oldHead) oldHead.setAttribute('aria-hidden','true');
       publicHost.classList.add('wd-universal-profile');
       var publicHtml = profileMarkup(true);
-      if(publicHost.innerHTML !== publicHtml){ publicHost.innerHTML = publicHtml; publicHost.dataset.wdUniversal = VERSION; }
+      renderChrome(publicHost,publicHtml);
     }
     ['wd6-profile','hm27-profile-pop'].forEach(function(id){
       var host = document.getElementById(id);
       if(!host) return;
       host.classList.add('wd-universal-profile');
       var html = profileMarkup(false);
-      if(host.innerHTML !== html){ host.innerHTML = html; host.dataset.wdUniversal = VERSION; }
+      renderChrome(host,html);
     });
   }
   function patchProfileTriggers(){
     var publicTrigger = document.getElementById('wd-profile-trigger');
     if(!publicTrigger) return;
     var a = avatar();
-    publicTrigger.innerHTML = a ? '<img src="' + esc(a) + '" alt=""><span>' + (state.user ? 'Account' : 'Sign in') + '</span>' : '<i class="fas fa-user"></i><span>' + (state.user ? 'Account' : 'Sign in') + '</span>';
+    renderChrome(publicTrigger,a ? '<img src="' + esc(a) + '" alt=""><span>' + (state.user ? 'Account' : 'Sign in') + '</span>' : '<i class="fas fa-user"></i><span>' + (state.user ? 'Account' : 'Sign in') + '</span>');
     publicTrigger.setAttribute('aria-label',state.user ? 'Open account menu' : 'Sign in or open account menu');
   }
 
@@ -520,12 +610,30 @@
     if(!node || typeof MutationObserver === 'undefined') return;
     if(observed && observed.has(node)) return;
     if(observed) observed.add(node);
-    new MutationObserver(queue).observe(node,{childList:true,subtree:true});
+    var observer = new MutationObserver(queue);
+    observer.observe(node,{childList:true,subtree:true});
+    chromeObservers.push(observer);
   }
     function attachTargetObservers(){
     ['wd6-profile','hm27-profile-pop'].forEach(function(id){ watchTarget(document.getElementById(id)); });
   }
+  /* Static navigation links (breadcrumbs, back links) carry clean public
+     paths. Preview and local hosts serve pages under /property, so rewrite them
+     there once; on WatchdogIndex the clean path already works. */
+  function localizeRouteLinks(){
+    if(cleanHost) return;
+    document.querySelectorAll('a[data-wd-route]').forEach(function(a){
+      if(a.dataset.wdRouted === '1') return;
+      var raw = a.getAttribute('href') || '/';
+      var hash = raw.indexOf('#') >= 0 ? raw.slice(raw.indexOf('#')) : '';
+      var path = raw.split('#')[0];
+      /* Root-level static pages (/agent/*, /transaction) are served as-is. */
+      if(!/^\/(agent|transaction|client-room)(\/|$)/.test(path)) a.setAttribute('href',route(path) + hash);
+      a.dataset.wdRouted = '1';
+    });
+  }
   function refresh(){
+    localizeRouteLinks();
     patchPublicDrawer();
     patchProfiles();
     patchProfileTriggers();
@@ -610,6 +718,13 @@
     if(sheet && sheet.classList.contains('open') && !window.WatchdogPublicNav) closePublic();
   });
   document.addEventListener('njptr:plan-change',loadAuth);
+  /* Area links on the Agent Desk only change the hash: close the drawer and
+     move the current-area highlight with it. */
+  window.addEventListener('hashchange',function(){
+    var sheet = document.getElementById('wd-main-sheet');
+    if(sheet && sheet.classList.contains('open')) closePublic();
+    else queue();
+  });
   document.addEventListener('watchdog:developer-confirmed',loadAuth);
 
   /* Pages the clean-route adapter does not serve (direct /property/ URLs and
@@ -636,6 +751,8 @@
   window.WatchdogUniversalMenu = {
     version:VERSION,
     items:items,
+    areas:AGENT_AREAS,
+    areaFor:agentAreaFor,
     developerItems:developerItems,
     planPromo:planPromo,
     refresh:queue,

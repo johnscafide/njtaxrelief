@@ -1,8 +1,9 @@
 /* Watchdog Agent Control workspace chrome.
-   Shared by every Agent Control page (Opportunity Desk, Farm Map, Growth,
-   Advanced Farm, Farm database). Owns: tokens, the compact app topbar, the
-   workspace tab bar rendered by /property/js/agent-workspace.js, and the
-   shared type/controls baseline. Page content styles live in each page's own
+   Shared by every Agent Control page (Agent Desk, Farm Map, Farm Builder,
+   Farm Lists, Playbooks, Postcard Studio, Email Updates). Owns: tokens, the
+   compact app topbar, the workspace bar rendered by
+   /property/js/agent-workspace.js (its breadcrumb is styled by
+   /property/css/watchdog-page-head.css), and the shared type/controls baseline. Page content styles live in each page's own
    stylesheet. Readability floor: 12px text, 42px desktop / 48px mobile controls. */
 
 :root{
@@ -46,7 +47,7 @@ html.aw27-page :focus-visible{outline:2px solid var(--aw-blue);outline-offset:2p
 
 /* ---------- compact app topbar (app-shell-2027) on workspace pages ---------- */
 body.wdx-agent-workspace .wdx-topbar{height:var(--aw-top);padding:0 20px}
-body.wdx-agent-workspace .wdx-menu{width:42px;height:42px}
+body.wdx-agent-workspace .wdx-menu{width:44px;height:44px}
 body.wdx-agent-workspace .wdx-brand-mark{width:38px;height:38px}
 
 /* ---------- workspace tab bar ---------- */
@@ -58,16 +59,8 @@ body.wdx-agent-workspace .wdx-brand-mark{width:38px;height:38px}
   box-shadow:0 6px 16px rgba(17,29,56,.035);
   font-family:var(--aw-font);
 }
-.aw27-tabs{display:flex;align-items:center;gap:4px;min-width:0;overflow-x:auto;scrollbar-width:none;-ms-overflow-style:none}
-.aw27-tabs::-webkit-scrollbar{display:none}
-.aw27-tab{
-  display:inline-flex;align-items:center;gap:8px;flex:0 0 auto;
-  min-height:42px;padding:0 14px;border-radius:10px;
-  color:#4a5b74;font:600 var(--aw-sm)/1 var(--aw-font);text-decoration:none;white-space:nowrap;
-}
-.aw27-tab:hover{background:var(--aw-soft);color:var(--aw-ink)}
-.aw27-tab.on{background:var(--aw-blue-soft);color:var(--aw-blue-ink)}
-.aw27-tab i{font-size:14px;width:16px;text-align:center}
+/* The breadcrumb (Agent Desk / Area / Tool) takes the room the old tabs used. */
+.aw27-bar>.wd-crumbs{flex:1 1 auto}
 .aw27-actions{display:flex;align-items:center;gap:8px;flex:0 0 auto}
 .aw27-primary,.aw27-secondary{
   display:inline-flex;align-items:center;justify-content:center;gap:8px;
@@ -98,10 +91,6 @@ html.aw27-page b,html.aw27-page .aw27-num{font-variant-numeric:tabular-nums}
   :root{--aw-top:60px}
   body.wdx-agent-workspace .wdx-topbar{height:var(--aw-top);padding:0 12px}
   .aw27-bar{padding:6px 10px;gap:6px}
-  .aw27-tab{min-height:44px;padding:0 12px}
-  /* Phones: inactive tabs are icon-only (labels stay for screen readers); the active tab keeps its label. */
-  .aw27-tab:not(.on){width:44px;padding:0;justify-content:center}
-  .aw27-tab:not(.on) span{position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0,0,0,0);white-space:nowrap}
   .aw27-primary{min-height:44px;width:44px;padding:0}
   .aw27-secondary{min-height:44px;width:44px;padding:0}
   .aw27-primary span,.aw27-secondary span{position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0,0,0,0);white-space:nowrap}

@@ -23,19 +23,29 @@ new Function(brandRuntime);
 new Function(homeMenu);
 new Function(todayNav);
 
+// Information architecture (property/docs/watchdog-information-architecture.md):
+// homeowner destinations, the five Agent Desk areas for agents, and the research
+// tools other professionals use. /pro is the plans page, so it is labelled
+// "Plans & Pricing" (it was "Professional Hub"). Behaviour per persona is
+// covered by navigation-ia-contract.mjs.
 const canonical = [
   ['dashboard', 'Dashboard'],
+  ['lookup', 'Property Lookup'],
   ['home', 'Property Home'],
   ['anchor', 'ANCHOR Applications'],
   ['town-compare', 'Town Compare'],
   ['robust', 'ROBUST Framework'],
   ['pulse', 'Property Pulse'],
   ['agent-desk', 'Agent Desk'],
+  ['clients', 'Clients'],
+  ['farm', 'Farm'],
+  ['marketing', 'Marketing'],
+  ['research', 'Research'],
   ['scan', 'Appeal Scanner'],
   ['transaction', 'Transactions'],
   ['data-workbench', 'Data Workbench'],
   ['data-center', 'Data Center'],
-  ['pro', 'Professional Hub'],
+  ['pro', 'Plans & Pricing'],
   ['account', 'Account']
 ];
 
@@ -92,7 +102,7 @@ assert(universal.includes('planPromo:planPromo'), 'Plan promo registry is not ex
 assert(universal.includes("tone:'pro'"), 'Pro promo tone is missing from plan mapping');
 assert(universal.includes("tone:'plus'"), 'Pro+ promo tone is missing from plan mapping');
 assert(universal.includes("tone:'teams'"), 'Teams promo tone is missing from plan mapping');
-assert(universal.includes("var VERSION = '20260927a'"), 'Universal menu asset version is stale');
+assert(universal.includes("var VERSION = '20260929a'"), 'Universal menu asset version is stale');
 assert(!universal.includes('function ensurePromoCss()'), 'Plan promo styling must not be injected inline from JavaScript');
 assert(!universal.includes('wd-universal-plan-promo-css'), 'Legacy inline plan-promo style element is still present');
 
