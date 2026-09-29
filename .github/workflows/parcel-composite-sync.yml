@@ -7,6 +7,9 @@ name: Statewide parcel sync
 on:
   schedule:
     - cron: '17 7 3 * *'
+    # Every 6 hours: keep scoring until every property has a Watchdog Score,
+    # then only start a new full pass when the last one is 25 days old.
+    - cron: '41 */6 * * *'
   workflow_dispatch:
     inputs:
       what:
@@ -86,7 +89,7 @@ jobs:
       - run: python -m pip install --disable-pip-version-check requests
       - run: python property/scripts/sync_parcel_composite.py --self-test
       - name: Sync parcels
-        if: github.event_name == 'schedule' || inputs.what == 'parcels' || inputs.what == 'both' || inputs.what == ''
+        if: (github.event_name == 'schedule' && github.event.schedule == '17 7 3 * *') || inputs.what == 'parcels' || inputs.what == 'both' || inputs.what == ''
         env:
           SUPABASE_URL: https://uvkvaxljhhngydvlrzom.supabase.co
           SUPABASE_SERVICE_ROLE_KEY: ${{ secrets.SUPABASE_SERVICE_ROLE_KEY }}
@@ -107,12 +110,13 @@ jobs:
           SUPABASE_URL: https://uvkvaxljhhngydvlrzom.supabase.co
           SUPABASE_SERVICE_ROLE_KEY: ${{ secrets.SUPABASE_SERVICE_ROLE_KEY }}
           SCORE_PRECOMPUTE_TOKEN: ${{ secrets.SCORE_PRECOMPUTE_TOKEN }}
-          RESUME: ${{ inputs.resume }}
           MAX_PAGES: ${{ inputs.max_pages }}
+          # Right after the monthly parcel sync every fact may have changed, so a
+          # new full pass starts (an unfinished pass is always resumed first).
+          REFRESH_DAYS: ${{ (github.event_name == 'schedule' && github.event.schedule == '17 7 3 * *') && '0' || '25' }}
         run: |
           set -euo pipefail
-          args=(--max-pages "${MAX_PAGES:-0}" --summary score-precompute-summary.json)
-          if [ "${RESUME}" = "true" ]; then args+=(--resume); fi
+          args=(--max-pages "${MAX_PAGES:-0}" --refresh-days "${REFRESH_DAYS}" --max-minutes 330 --summary score-precompute-summary.json)
           python property/scripts/precompute_scores.py "${args[@]}"
       - name: Run summary
         if: always()
