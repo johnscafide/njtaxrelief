@@ -5,6 +5,8 @@
   var catalog = null;
   var coverage = new Map();
   var access = { signedIn: false, proPlus: false };
+  var loadState = { overview: 'loading', catalog: 'loading' };
+  var drawerReturnFocus = null;
   var resolveReady;
   var ready = new Promise(function (resolve) { resolveReady = resolve; });
 
@@ -64,6 +66,14 @@
     return coverage.get(String(id || '')) || null;
   }
 
+  // The status every Data Center surface shows for a marker: the database-governed coverage row
+  // when one exists, otherwise the published catalog status. KPIs, coverage bars and the builder's
+  // Availability filter all count with this one rule, so their numbers agree.
+  function effectiveStatus(marker) {
+    var c = coverageFor(marker && marker.id);
+    return String(c ? c.value_status : (marker && marker.provider_status) || 'planned');
+  }
+
   function setText(id, value) {
     var node = $(id);
     if (node) node.textContent = value;
@@ -71,9 +81,12 @@
 
   function renderKpis() {
     var summary = overview && overview.summary ? overview.summary : {};
-    setText('dc-kpi-live', summary.live_fields == null ? '—' : Number(summary.live_fields).toLocaleString());
-    setText('dc-kpi-bulk', summary.bulk_ready_fields == null ? '—' : Number(summary.bulk_ready_fields).toLocaleString());
-    setText('dc-kpi-verified', formatDate(summary.newest_live_verified_at));
+    var markers = catalog && Array.isArray(catalog.markers) ? catalog.markers : null;
+    var live = markers ? markers.filter(function (m) { return effectiveStatus(m) === 'live'; }) : null;
+    var bulk = live ? live.filter(function (m) { var c = coverageFor(m.id); return !!(c && c.bulk_capable); }).length : null;
+    setText('dc-kpi-live', live ? live.length.toLocaleString() : (summary.live_fields == null ? '—' : Number(summary.live_fields).toLocaleString()));
+    setText('dc-kpi-bulk', overview && live ? bulk.toLocaleString() : (summary.bulk_ready_fields == null ? '—' : Number(summary.bulk_ready_fields).toLocaleString()));
+    setText('dc-kpi-verified', overview ? formatDate(summary.newest_live_verified_at) : 'Unavailable');
     var selected = 0;
     try {
       var stored = JSON.parse(localStorage.getItem('watchdog:data-center:fields') || '[]');
@@ -84,6 +97,9 @@
 
   function renderCoverage() {
     var host = $('dc-category-coverage');
+    var failed = $('dc-category-coverage-error');
+    if (failed) failed.hidden = loadState.catalog !== 'error';
+    if (loadState.catalog === 'error') { var loading = $('dc-category-coverage-empty'); if (loading) loading.hidden = true; }
     if (!host || !catalog || !Array.isArray(catalog.markers)) return;
     var groups = {};
     catalog.markers.forEach(function (marker) {
@@ -92,7 +108,7 @@
       var item = groups[key];
       item.total += 1;
       var c = coverageFor(marker.id);
-      var status = c ? c.value_status : String(marker.provider_status || 'planned');
+      var status = effectiveStatus(marker);
       if (status === 'live') {
         item.live += 1;
         if (c && c.bulk_capable) item.bulk += 1;
@@ -102,16 +118,16 @@
       }
     });
 
-    var connected = Array.from(coverage.values());
-    var live = connected.filter(function (item) { return item && item.value_status === 'live'; });
+    var connected = catalog.markers.map(function (marker) { return { value_status: effectiveStatus(marker), row: coverageFor(marker.id) || {} }; });
+    var live = connected.filter(function (item) { return item.value_status === 'live'; }).map(function (item) { return item.row; });
     var bulk = live.filter(function (item) { return item.bulk_capable; }).length;
     var recent = live.filter(function (item) { return item.last_verified_at && daysSince(item.last_verified_at) <= 7; }).length;
     var livePct = percentage(live.length, connected.length);
     var bulkPct = percentage(bulk, live.length);
     var recentPct = percentage(recent, live.length);
     setText('dc-coverage-live-pct', livePct);
-    setText('dc-coverage-bulk-pct', bulkPct);
-    setText('dc-coverage-recent-pct', recentPct);
+    setText('dc-coverage-bulk-pct', loadState.overview === 'ready' ? bulkPct : '—');
+    setText('dc-coverage-recent-pct', loadState.overview === 'ready' ? recentPct : '—');
     setWidth('dc-coverage-bar-bulk', percentage(bulk, connected.length));
     setWidth('dc-coverage-bar-live', percentage(Math.max(0, live.length - bulk), connected.length));
     setWidth('dc-coverage-bar-not-live', percentage(Math.max(0, connected.length - live.length), connected.length));
@@ -149,7 +165,14 @@
   function renderFreshness() {
     var host = $('dc-source-freshness-rows');
     if (!host) return;
-    var live = Array.from(coverage.values()).filter(function (item) { return item && item.value_status === 'live'; });
+    // Live catalog fields without a governed coverage row count as "without a verification date".
+    // Without the live status check there are no verification dates to count, so show dashes.
+    if (loadState.overview !== 'ready') {
+      ['dc-recency-recent-pct', 'dc-recency-recent', 'dc-recency-review', 'dc-recency-older', 'dc-recency-unverified'].forEach(function (id) { setText(id, '—'); });
+    }
+    var live = loadState.overview !== 'ready' ? [] : catalog && Array.isArray(catalog.markers)
+      ? catalog.markers.filter(function (m) { return effectiveStatus(m) === 'live'; }).map(function (m) { return coverageFor(m.id) || {}; })
+      : Array.from(coverage.values()).filter(function (item) { return item && item.value_status === 'live'; });
     var recent = 0;
     var review = 0;
     var older = 0;
@@ -161,11 +184,13 @@
       else if (age <= 30) review += 1;
       else older += 1;
     });
-    setText('dc-recency-recent-pct', percentage(recent, live.length));
-    setText('dc-recency-recent', recent.toLocaleString());
-    setText('dc-recency-review', review.toLocaleString());
-    setText('dc-recency-older', older.toLocaleString());
-    setText('dc-recency-unverified', unverified.toLocaleString());
+    if (loadState.overview === 'ready') {
+      setText('dc-recency-recent-pct', percentage(recent, live.length));
+      setText('dc-recency-recent', recent.toLocaleString());
+      setText('dc-recency-review', review.toLocaleString());
+      setText('dc-recency-older', older.toLocaleString());
+      setText('dc-recency-unverified', unverified.toLocaleString());
+    }
     setWidth('dc-recency-bar-recent', percentage(recent, live.length));
     setWidth('dc-recency-bar-review', percentage(review, live.length));
     setWidth('dc-recency-bar-older', percentage(older + unverified, live.length));
@@ -174,8 +199,13 @@
 
     var rows = overview && Array.isArray(overview.source_freshness) ? overview.source_freshness : [];
     var empty = $('dc-source-freshness-empty');
-    Array.from(host.children).forEach(function (child) { if (child !== empty) child.remove(); });
-    if (empty) empty.hidden = rows.length > 0;
+    var failed = $('dc-source-freshness-error');
+    Array.from(host.children).forEach(function (child) { if (child !== empty && child !== failed) child.remove(); });
+    if (failed) failed.hidden = loadState.overview !== 'error';
+    if (empty) {
+      empty.hidden = rows.length > 0 || loadState.overview === 'error';
+      if (!rows.length && loadState.overview === 'ready') empty.textContent = 'No source freshness checks have been published yet.';
+    }
     var template = $('dc-source-freshness-template');
     if (!rows.length || !template || !template.content) return;
     rows.forEach(function (row) {
@@ -205,10 +235,10 @@
         if (action) { action.textContent = 'Workspace active'; action.setAttribute('href', '#dc-selected-workspace'); action.classList.add('secondary'); }
       } else if (access.signedIn) {
         if (text) text.textContent = 'Catalog browsing is public. Building private datasets, exports, saved views and schedules require Pro+.';
-        if (action) { action.textContent = 'See Pro+ access'; action.setAttribute('href', '/property/pro'); }
+        if (action) { action.textContent = 'See Pro+ access'; action.setAttribute('href', '/pro'); }
       } else {
         if (text) text.textContent = 'Browse every governed field publicly. Sign in with Pro+ to run these fields against your saved-property workspace.';
-        if (action) { action.textContent = 'Sign in / view Pro+'; action.setAttribute('href', '/property/pro'); }
+        if (action) { action.textContent = 'Sign in / view Pro+'; action.setAttribute('href', '/pro'); }
       }
     }
     document.dispatchEvent(new CustomEvent('watchdog:data-center-access', { detail: Object.assign({}, access) }));
@@ -258,17 +288,22 @@
     setText('dc-drawer-origin', marker.origin === 'watchdog-derived' ? 'Watchdog derived' : 'Public source');
     setText('dc-drawer-tier', marker.tier === 'pro_plus' ? 'Pro+' : title(marker.tier || 'standard'));
     var pageLink = $('dc-drawer-link');
-    if (pageLink) pageLink.href = '/property/marker?id=' + encodeURIComponent(id);
+    if (pageLink) pageLink.href = '/marker?id=' + encodeURIComponent(id);
+    drawerReturnFocus = document.activeElement && document.activeElement !== document.body ? document.activeElement : null;
     drawer.classList.add('open');
     drawer.setAttribute('aria-hidden', 'false');
+    var close = drawer.querySelector('.dc-drawer-close');
+    (close || drawer).focus({ preventScroll: true });
     analytics('marker_viewed', { marker_id: id, surface: 'data_center' });
   }
 
   function closeDrawer() {
     var drawer = $('dc-marker-drawer');
-    if (!drawer) return;
+    if (!drawer || !drawer.classList.contains('open')) return;
     drawer.classList.remove('open');
     drawer.setAttribute('aria-hidden', 'true');
+    if (drawerReturnFocus && document.contains(drawerReturnFocus)) drawerReturnFocus.focus({ preventScroll: true });
+    drawerReturnFocus = null;
   }
 
   function wireUi() {
@@ -284,7 +319,8 @@
       }
       var detail = event.target.closest('[data-marker-detail]');
       if (detail) { event.preventDefault(); openDrawer(detail.dataset.markerDetail); return; }
-      if (event.target.closest('[data-dc-drawer-close]')) closeDrawer();
+      if (event.target.closest('[data-dc-drawer-close]')) { closeDrawer(); return; }
+      if (event.target.closest('[data-dc-retry]')) retry();
     });
     document.addEventListener('keydown', function (event) { if (event.key === 'Escape') closeDrawer(); });
     document.addEventListener('watchdog:data-center-selection', function (event) {
@@ -292,27 +328,55 @@
     });
   }
 
+  function registry() {
+    var shared = window.WatchdogMarkerRuntime;
+    if (shared && typeof shared.registry === 'function') return shared.registry();
+    return fetch('/property/data/marker-registry.json', { cache: 'no-cache' })
+      .then(function (response) { if (!response.ok) throw new Error('Marker registry HTTP ' + response.status); return response.json(); });
+  }
+
+  function showLoadState() {
+    var notice = $('dc-overview-error');
+    if (notice) notice.hidden = loadState.overview !== 'error';
+    document.documentElement.dataset.dcOverview = loadState.overview;
+    document.documentElement.dataset.dcCatalog = loadState.catalog;
+  }
+
   function load() {
     var c = client();
+    loadState.overview = 'loading';
+    if (!catalog) loadState.catalog = 'loading';
     var overviewPromise = c ? c.rpc('get_public_data_center_overview_v1').then(function (response) {
       if (response.error) throw response.error;
       overview = response.data || null;
       coverage.clear();
       ((overview && overview.marker_coverage) || []).forEach(function (row) { coverage.set(String(row.marker_id || ''), row); });
+      loadState.overview = 'ready';
       return overview;
     }) : Promise.reject(new Error('Data service unavailable'));
+    overviewPromise = overviewPromise.catch(function (error) {
+      loadState.overview = 'error';
+      console.warn('[Watchdog Data Center] live coverage status unavailable', error && error.message ? error.message : error);
+      throw error;
+    });
 
-    var catalogPromise = fetch('/property/data/marker-registry.json?v=20260830-public-v3', { cache: 'no-store' })
-      .then(function (response) { if (!response.ok) throw new Error('Marker registry HTTP ' + response.status); return response.json(); })
-      .then(function (data) { catalog = data; return data; });
+    var catalogPromise = catalog ? Promise.resolve(catalog) : registry()
+      .then(function (data) { catalog = data; loadState.catalog = 'ready'; return data; })
+      .catch(function (error) { loadState.catalog = 'error'; throw error; });
 
     return Promise.allSettled([overviewPromise, catalogPromise]).then(function () {
+      showLoadState();
       renderKpis();
       renderCoverage();
       renderFreshness();
       document.dispatchEvent(new CustomEvent('watchdog:data-center-overview', { detail: overview || {} }));
       resolveReady({ overview: overview, catalog: catalog });
     });
+  }
+
+  function retry() {
+    document.dispatchEvent(new CustomEvent('watchdog:data-center-retry'));
+    return load();
   }
 
   window.WatchdogDataCenterPublic = {
@@ -322,7 +386,10 @@
     hasProPlus: function () { return !!access.proPlus; },
     requireAccessRefresh: resolveAccess,
     openMarker: openDrawer,
-    activateTab: activateTab
+    activateTab: activateTab,
+    effectiveStatus: effectiveStatus,
+    overview: function () { return overview; },
+    retry: retry
   };
 
   function start() {

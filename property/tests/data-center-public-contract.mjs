@@ -16,7 +16,9 @@ const overviewMigration = await read('supabase/migrations/20260829152600_public_
 
 // The customer-facing route is public, indexable, and no longer framed around an internal catalog goal.
 assert.match(html, /name="robots" content="index,follow,max-image-preview:large"/);
-assert.match(html, /rel="canonical" href="https:\/\/www\.watchdogindex\.com\/property\/data-center"/);
+// Public Watchdog URLs are root-level (AGENTS.md); /property/ is only the physical repository path.
+assert.match(html, /rel="canonical" href="https:\/\/www\.watchdogindex\.com\/data-center"/);
+assert.doesNotMatch(html, /rel="canonical" href="[^"]*\/property\//);
 assert.match(html, /Build, analyze and monitor property datasets/);
 assert.match(html, /Overview/);
 assert.match(html, /Build Dataset/);
