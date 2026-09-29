@@ -82,6 +82,35 @@ assert.doesNotMatch(providerStatus, /cell\.(?:textContent|innerHTML|title)\s*=/,
 assert.match(coverageJs, /function set\(node,key,value\)\{if\(node&&node\[key\]!==value\)/, 'coverage decoration writes are idempotent');
 assert.doesNotMatch(enhancements, /function direct\(/, 'regex-based value borrowing is gone');
 
+// ---- Root-level page navigation from the data pages' own scripts (AGENTS.md: /property/ is only the repo path). ----
+const pageScripts = ['data-center-shell-2027.js', 'data-center-public-v2.js', 'data-center-runtime-v2.js', 'data-center-provider-filter.js', 'data-center-mobile-results.js', 'data-center-mobile-recovery.js', 'data-workbench-shell-2027.js', 'data-workbench.js', 'data-workbench-enhancements.js', 'data-workbench-derived-bridge.js', 'data-workbench-intelligence.js', 'data-workbench-marketing-studio.js', 'data-workbench-pcm.js'];
+for (const name of pageScripts) {
+  const code = read('property/js/' + name);
+  assert.doesNotMatch(code, /location\.(?:href|assign|replace)\s*[=(]\s*['"`]\/property\//, `${name} navigates to a root-level URL`);
+  assert.doesNotMatch(code, /\.href\s*=\s*['"`]\/property\/(?!js\/|css\/|data\/|assets\/)/, `${name} sets root-level link targets`);
+}
+assert.match(dcHtml, /<template id="dc-pagebar-actions">[^]*href="\/dashboard"[^]*href="\/data-workbench"[^]*<\/template>/, 'Data Center page actions are authored in HTML with root-level URLs');
+assert.match(workbench, /function cleanPageHref\(href\)/, 'Workbench normalizes script-rendered page links to root-level URLs');
+
+// ---- Coverage registration migration: only evidenced, catalog-live markers; none of the unverifiable ones. ----
+const migration = read('supabase/migrations/20260929170000_register_verified_catalog_markers.sql');
+const registered = [...migration.matchAll(/^  \('([^']+)',array\[/gm)].map((m) => m[1]);
+assert.ok(registered.length > 0, 'migration registers markers');
+assert.equal(new Set(registered).size, registered.length, 'each marker is registered once');
+const catalogById = new Map(markers.map((m) => [m.id, m]));
+for (const id of registered) assert.equal(catalogById.get(id)?.provider_status, 'live', `${id} is a catalog-live marker`);
+const notRegistered = [...migration.matchAll(/^--\s+(?:unverifiable|failed)\s+([a-z0-9_.-]+):/gm)].map((m) => m[1]);
+assert.ok(notRegistered.length > 0, 'migration lists markers left unregistered with a reason');
+for (const id of notRegistered) assert.ok(!registered.includes(id), `${id} without evidence is not registered`);
+assert.doesNotMatch(migration, /now\(\)/, 'last_verified_at records the evidence time, not the apply time');
+const rowBlocks = migration.split(/\n  \('/).slice(1);
+assert.equal(rowBlocks.length, registered.length);
+for (const block of rowBlocks) {
+  assert.match(block, /,'live',/);
+  assert.match(block, /(Resolver|Artifact|Warehouse) evidence: /, 'every row names its evidence');
+  assert.match(block, / = [^;.']/, 'every row records an observed value');
+}
+
 // ---- Shared runtime behaviour (evaluated in a sandbox). ----
 const sandbox = { window: {}, fetch: () => Promise.reject(new Error('no network')), console };
 vm.createContext(sandbox);
