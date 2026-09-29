@@ -182,12 +182,20 @@
       {key:'developer-data',href:route('/developer-data'),icon:'fa-database',label:'Data Operations',detail:'Marker freshness and release controls'}
     ];
   }
+  function isSalesConsultant(){
+    var a = state.profile && state.profile.account_role, b = state.entitlement && state.entitlement.account_role;
+    return String(a || '') === 'sales_consultant' || String(b || '') === 'sales_consultant';
+  }
+  function salesDeskHtml(){
+    if(!isSalesConsultant() && !isDeveloper()) return '';
+    return '<a class="wd-universal-developer-tool" data-wd-developer-tool="sales-desk" href="' + route('/sales-desk') + '"><i class="fas fa-handshake"></i><span><b>Sales Desk</b><small>' + (isDeveloper() ? 'Consultants, attributions and payouts' : 'Your share links, accounts and commissions') + '</small></span></a>';
+  }
   function developerToolsHtml(){
-    if(!isDeveloper()) return '';
+    if(!isDeveloper()) return salesDeskHtml();
     return '<div class="wd-universal-developer-label"><i class="fas fa-code"></i><span>Developer tools</span></div>' +
       developerItems().map(function(item){
         return '<a class="wd-universal-developer-tool" data-wd-developer-tool="' + item.key + '" href="' + item.href + '"><i class="fas ' + item.icon + '"></i><span><b>' + item.label + '</b><small>' + item.detail + '</small></span></a>';
-      }).join('');
+      }).join('') + salesDeskHtml();
   }
   function planPromo(){
     if(!state.user || !state.ready || isDeveloper()) return null;
