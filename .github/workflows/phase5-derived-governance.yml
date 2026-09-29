@@ -7,6 +7,7 @@ on:
       - 'property/data/derived-marker-formulas.json'
       - 'property/data/db-governed-status.json'
       - 'property/data/db-governed-provider-overlay.json'
+      - 'property/data/governed-marker-definitions.json'
       - 'supabase/functions/workbench-derived/**'
       - 'supabase/migrations/**'
       - 'scripts/build-derived-governance.js'
