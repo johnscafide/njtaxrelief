@@ -2,7 +2,10 @@ import assert from 'node:assert/strict';
 import fs from 'node:fs';
 import vm from 'node:vm';
 
-// Agent Desk is one app: six sections on one page, and every agent tool opens inside it.
+// Agent Desk is one app: five areas on one page, and every agent tool opens inside it.
+// The five areas are the agent side of the Watchdog information architecture
+// (property/docs/watchdog-information-architecture.md) and the agent app tab bar.
+// The former sixth "Deals" section now lives inside Clients; #deals still works.
 const read = p => fs.readFileSync(p, 'utf8');
 const html = read('property/agent-desk/index.html');
 const js = read('property/js/agent-hub.js');
@@ -10,9 +13,35 @@ const css = read('property/css/agent-hub.css');
 new vm.Script(js, { filename: 'agent-hub.js' });
 
 assert.ok(html.includes('/property/css/agent-hub.css') && html.includes('/property/js/agent-hub.js'), 'Agent Desk must load the hub stylesheet and runtime');
-for (const section of ['home', 'clients', 'farm', 'marketing', 'research', 'deals']) {
+const AREAS = ['home', 'clients', 'farm', 'marketing', 'research'];
+for (const section of AREAS) {
   assert.ok(html.includes(`data-adh-view="${section}"`), `Agent Desk is missing the ${section} section`);
   assert.equal((html.match(new RegExp(`data-adh-nav="${section}"`, 'g')) || []).length >= 2, true, `The ${section} section needs a desktop rail link and a phone tab`);
+}
+const views = [...html.matchAll(/data-adh-view="([a-z]+)"/g)].map(m => m[1]);
+assert.deepEqual(views, AREAS, 'Agent Desk has exactly five areas, in menu order');
+assert.doesNotMatch(html, /data-adh-(?:view|nav)="deals"/, 'Deals is part of Clients, not a sixth area');
+assert.match(js, /SECTION_ALIASES=\{deals:'clients'\}/, 'Old #deals links must still open the deal tools in Clients');
+assert.ok(html.includes('id="adh-deals"') && html.indexOf('id="adh-deals"') > html.indexOf('data-adh-view="clients"') && html.indexOf('id="adh-deals"') < html.indexOf('data-adh-view="farm"'), 'The deal tools sit inside Clients under "Your deals"');
+const tabbar = html.match(/<nav class="adh-tabbar"[\s\S]*?<\/nav>/)[0];
+assert.equal((tabbar.match(/data-adh-nav=/g) || []).length, 5, 'The phone tab bar has five areas');
+assert.match(css, /grid-template-columns:repeat\(5,minmax\(0,1fr\)\)/, 'The phone tab bar lays out five areas');
+for (const label of ['Today', 'Clients', 'Farm', 'Marketing', 'Research']) assert.ok(tabbar.includes(`<span>${label}</span>`), `Tab bar label ${label} is missing`);
+
+// A warm first-visit welcome: who Watchdog is for and the three things to do first.
+const welcome = html.match(/<section class="adh-welcome"[\s\S]*?<\/section>/);
+assert.ok(welcome, 'Agent Desk Today must open with the first-visit welcome');
+assert.match(welcome[0], /New Jersey agents/, 'The welcome says who Watchdog is for');
+assert.equal((welcome[0].match(/class="adh-step"/g) || []).length, 3, 'The welcome lists exactly three first steps');
+assert.match(welcome[0], /data-adh-welcome-hide/, 'Agents can hide the welcome');
+assert.match(welcome[0], /data-adh-tour/, 'The welcome offers the tour');
+assert.match(js, /wd_agent_desk_welcome_v1/, 'Hiding the welcome is remembered');
+assert.match(css, /\.adh-welcome:not\(\[hidden\]\)~\.adh-quick/, 'The quick-start row steps aside while the welcome shows');
+assert.doesNotMatch(css, /radial-gradient\(circle/, 'No decorative circles (Watchdog design guardrails)');
+// Every tool card explains what the tool does (and why it matters) in plain words.
+for (const m of html.matchAll(/<a class="adh-tool"[^>]*data-adh-tool="([a-z-]+)"[\s\S]*?<\/a>/g)) {
+  const small = (m[0].match(/<small>([^<]+)<\/small>/) || [])[1] || '';
+  assert.ok(small.split(/\s+/).length >= 8, `Tool card ${m[1]} needs a plain explanation`);
 }
 assert.ok(html.includes('id="adh-frame"') && html.includes('id="adh-iframe"') && html.includes('id="adh-frame-back"'), 'Tools must open inside the desk with a Back button');
 
@@ -51,4 +80,4 @@ for (const key of ['farm', 'lists', 'watched', 'campaigns']) assert.ok(html.incl
 assert.match(read('property/js/watchdog-intelligence-context.js'), /getElementById\('adh-home'\)/, 'Watchdog Intelligence must mount inside the Home section, not the app grid');
 assert.match(css, /\.adh-ready \.adh-rail\{grid-column:1;grid-row:1 \/ span 50\}/, 'The rail must keep its column when another script injects content');
 
-console.log(`Agent hub contract passed (${Object.keys(tools).length} tools, 6 sections).`);
+console.log(`Agent hub contract passed (${Object.keys(tools).length} tools, 5 areas).`);

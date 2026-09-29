@@ -1,9 +1,12 @@
 /* Watchdog Agent Desk hub.
-   One page for agents. Six sections (Home, Clients, Farm, Marketing, Research, Deals)
-   switch in place, and every agent tool opens inside the desk in a framed view with a
-   Back button, so agents never hunt across separate pages. Browser Back works: each
-   section and each open tool is a history entry (#farm, #farm/farm-map).
-   Without this script every section simply shows in order, so the desk still works. */
+   One page for agents. Five areas (Today, Clients, Farm, Marketing, Research) switch in
+   place, and every agent tool opens inside the desk in a framed view with a Back button,
+   so agents never hunt across separate pages. The five areas are the same ones the
+   Watchdog menu shows agents and the agent app tab bar will use (see
+   property/docs/watchdog-information-architecture.md). Browser Back works: each area and
+   each open tool is a history entry (#farm, #farm/farm-map). The retired sixth section
+   (#deals) now opens Clients at "Your deals".
+   Without this script every area simply shows in order, so the desk still works. */
 (function(){
   'use strict';
   if(window.WatchdogAgentHub)return;
@@ -13,29 +16,34 @@
   var host=String(location.hostname||'').toLowerCase();
   var cleanHost=host==='watchdogindex.com'||host==='www.watchdogindex.com';
 
-  var SECTIONS={home:'Home',clients:'Clients',farm:'Farm',marketing:'Marketing',research:'Research',deals:'Deals'};
-  /* key: [clean public path, physical path, title, section] */
+  /* Area labels match the Watchdog menu (AGENT_AREAS in watchdog-universal-menu.js);
+     "home" is the desk's Today area. */
+  var SECTIONS={home:'Today',clients:'Clients',farm:'Farm',marketing:'Marketing',research:'Research'};
+  var SECTION_ALIASES={deals:'clients'};
+  /* key: [clean public path, physical path, title, section]. Titles are the canonical
+     tool names used on the cards, in page breadcrumbs and in the IA doc. */
   var TOOLS={
     'contacts':['/agent/contacts','/property/agent/contacts/','Contacts','clients'],
-    'farm-map':['/farm-map','/property/farm-map/','Farm map','farm'],
-    'farm-builder':['/farm-builder','/property/farm-builder/','Farm by filters','farm'],
-    'market-list':['/market-list','/property/market-list/','Farm list','farm'],
-    'mailers':['/marketing-studio/postcards','/property/marketing-studio/postcards/','Mailers & postcards','marketing'],
-    'broadcasts':['/newsletter-studio','/property/newsletter-studio/','Email updates','marketing'],
-    'report-studio':['/report-studio','/property/report-studio/','Farm reports','marketing'],
-    'report-builder':['/report-builder','/property/report-builder/','Client reports','marketing'],
-    'marketing-plan':['/marketing-plan','/property/marketing-plan/','Marketing plan','marketing'],
+    'farm-map':['/farm-map','/property/farm-map/','Farm Map','farm'],
+    'farm-builder':['/farm-builder','/property/farm-builder/','Farm Builder','farm'],
+    'market-list':['/market-list','/property/market-list/','Farm Lists','farm'],
+    'mailers':['/marketing-studio/postcards','/property/marketing-studio/postcards/','Postcard Studio','marketing'],
+    'broadcasts':['/newsletter-studio','/property/newsletter-studio/','Email Updates','marketing'],
+    'report-studio':['/report-studio','/property/report-studio/','Farm Reports','marketing'],
+    'report-builder':['/report-builder','/property/report-builder/','Report Builder','marketing'],
+    'marketing-plan':['/marketing-plan','/property/marketing-plan/','Marketing Plan','marketing'],
     'growth':['/growth/','/property/growth/','Playbooks','marketing'],
-    'lookup':['/','/property/','Look up a property','research'],
-    'home':['/home','/property/home/','Property','research'],
-    'scan':['/scan','/property/scan/','Appeal scanner','research'],
-    'town-compare':['/town-compare','/property/town-compare/','Compare towns','research'],
-    'data-center':['/data-center','/property/data-center/','Data center','research'],
-    'transactions':['/transaction/','/transaction/','Transactions','deals'],
-    'listing-prep':['/agent/listing-prep','/agent/listing-prep/','Listing prep','deals'],
-    'buyers':['/agent/buyers','/agent/buyers/','Buyer shortlists','deals'],
-    'true-cost':['/true-cost','/api/watchdog-true-cost','True cost card','deals'],
-    'open-house':['/agent/open-house','/agent/open-house/','Open houses','deals'],
+    'lookup':['/','/property/','Property Lookup','research'],
+    'home':['/home','/property/home/','Property Home','research'],
+    'scan':['/scan','/property/scan/','Appeal Scanner','research'],
+    'town-compare':['/town-compare','/property/town-compare/','Town Compare','research'],
+    'data-workbench':['/data-workbench','/property/data-workbench/','Data Workbench','research'],
+    'data-center':['/data-center','/property/data-center/','Data Center','research'],
+    'transactions':['/transaction/','/transaction/','Transactions','clients'],
+    'listing-prep':['/agent/listing-prep','/agent/listing-prep/','Listing Prep','clients'],
+    'buyers':['/agent/buyers','/agent/buyers/','Buyer Shortlists','clients'],
+    'true-cost':['/true-cost','/api/watchdog-true-cost','True Cost Card','clients'],
+    'open-house':['/agent/open-house','/agent/open-house/','Open Houses','clients'],
     'training':['/agent/training','/agent/training/','Training & how-tos','home']
   };
 
@@ -124,12 +132,18 @@
   }
   function render(state){
     if(state&&state.tool&&TOOLS[state.tool])openTool(state.tool,state.url,state.section);
-    else showSection(state&&state.section||'home');
+    else{showSection(state&&state.section||'home');if(state&&state.anchor)revealAnchor(state.anchor);}
   }
   function fromHash(){
     var h=String(location.hash||'').replace(/^#/,'').split('/');
-    var section=SECTIONS[h[0]]?h[0]:'home',tool=TOOLS[h[1]]?h[1]:null;
-    return {section:section,tool:tool,url:null};
+    var alias=SECTION_ALIASES[h[0]];
+    var section=alias||(SECTIONS[h[0]]?h[0]:'home'),tool=TOOLS[h[1]]?h[1]:null;
+    return {section:section,tool:tool,url:null,anchor:alias?'adh-'+h[0]:null};
+  }
+  /* Old #deals links land on Clients at "Your deals". */
+  function revealAnchor(id){
+    var el=id&&document.getElementById(id);if(!el)return;
+    requestAnimationFrame(function(){try{el.scrollIntoView({block:'start'});el.focus({preventScroll:true});}catch(_){}});
   }
 
   /* Clicks: section tabs, tool cards, and any in-desk link that points at an agent tool. */
@@ -141,6 +155,10 @@
     if(add&&!add.closest('#ad-focus')){var opener=document.getElementById('ad-import-open');if(opener&&typeof opener.onclick==='function'){e.preventDefault();opener.onclick.call(opener);}return;}
     var nav=e.target.closest&&e.target.closest('[data-adh-nav]');
     if(nav){e.preventDefault();go(nav.dataset.adhNav);return;}
+    var jump=e.target.closest&&e.target.closest('[data-adh-scroll]');
+    if(jump){e.preventDefault();var target=document.getElementById(jump.dataset.adhScroll);if(target){try{target.scrollIntoView({block:'start'});}catch(_){}var h=target.querySelector('h2');if(h){h.setAttribute('tabindex','-1');try{h.focus({preventScroll:true});}catch(_){}}}return;}
+    var hide=e.target.closest&&e.target.closest('[data-adh-welcome-hide]');
+    if(hide){e.preventDefault();hideWelcome(true);return;}
     var a=e.target.closest&&e.target.closest('a[href]');
     if(!a||frame.contains(a)||a.target==='_blank'||a.hasAttribute('download'))return;
     var key=a.dataset.adhTool||toolFor(a.href);
@@ -158,7 +176,7 @@
 
   /* Tools render without their own site chrome inside the desk. */
   var EMBED_CSS=[
-    '.wdx-topbar,#agent-workspace-nav,.wdx-pagebar,.awx-tabs,.awx-utility,#rs-close,#rs-fullscreen,.wd-public-nav,.pn-header,.site-header,header.site-nav,.wd-site-footer,footer.site-footer,.cookie-banner,#cookie-banner,.wd-consent-banner{display:none!important}',
+    '.wdx-topbar,#agent-workspace-nav,.wdx-pagebar,.wd-crumbs,.ag-utility,.awx-tabs,.awx-utility,#rs-close,#rs-fullscreen,.wd-public-nav,.pn-header,.site-header,header.site-nav,.wd-site-footer,footer.site-footer,.cookie-banner,#cookie-banner,.wd-consent-banner{display:none!important}',
     'html,body{scroll-padding-top:0!important}',
     ':root{--aw-top:0px!important;--aw-bar:0px!important}',
     'body{padding-top:0!important}'
@@ -239,12 +257,27 @@
     });
   }
 
-  /* A short first-visit tour. Shown once per browser; "Show me around" replays it. */
+  /* First-visit welcome: who Watchdog is for and the three things to do first. It stays
+     until the agent hides it (remembered per browser); while it shows, the quick-start row
+     and the older first-run card step aside in CSS so the page does not repeat itself. */
+  var WELCOME_KEY='wd_agent_desk_welcome_v1';
+  var welcome=document.getElementById('adh-welcome');
+  function welcomeHidden(){try{return localStorage.getItem(WELCOME_KEY)==='hidden';}catch(_){return false;}}
+  function hideWelcome(remember){
+    if(!welcome)return;
+    welcome.hidden=true;
+    if(remember){try{localStorage.setItem(WELCOME_KEY,'hidden');}catch(_){}var q=app.querySelector('.adh-quick-btn');if(q)try{q.focus({preventScroll:true});}catch(_){}}
+  }
+  if(welcome&&welcomeHidden())hideWelcome(false);
+  function welcomeShowing(){return !!(welcome&&!welcome.hidden);}
+
+  /* A short tour. It starts on its own only for agents who already hid the welcome (the
+     welcome offers it as a button instead); "Show me around" replays it any time. */
   var TOUR_KEY='wd_agent_desk_tour_v1';
   var TOUR=[
-    {target:function(){return window.matchMedia('(max-width:900px)').matches?app.querySelector('.adh-tabbar'):app.querySelector('.adh-nav-list');},title:'Everything is in this menu',text:'Home, Clients, Farm, Marketing, Research and Deals. Every tool opens right here, so you never have to hunt for another page.'},
-    {target:function(){return app.querySelector('.adh-quick');},title:'Not sure where to start?',text:'These four buttons cover the jobs agents do most: add clients, draw a farm, send a mailer and start a deal.'},
-    {target:function(){return document.getElementById('ad-today-hub');},title:'Today',text:'Closings, listing prep and open houses that need you soon show up here automatically.'},
+    {target:function(){return window.matchMedia('(max-width:900px)').matches?app.querySelector('.adh-tabbar'):app.querySelector('.adh-nav-list');},title:'Five areas, one desk',text:'Today, Clients, Farm, Marketing and Research. The Watchdog menu shows the same five, and every tool opens right here.'},
+    {target:function(){return welcomeShowing()?welcome.querySelector('.adh-welcome-steps'):app.querySelector('.adh-quick');},title:'Not sure where to start?',text:'Add your clients, draw a farm, then check who to reach out to. Each button opens the right tool inside the desk.'},
+    {target:function(){return document.getElementById('ad-today-hub');},title:'Due soon',text:'Closings, listing prep and open houses that need you soon show up here automatically.'},
     {target:function(){return app.querySelector('.ad27-worklist');},title:'Who to reach out to',text:'Homes in your sphere and farm with a fresh public-record reason to check in. Tap Evidence to see the proof before you call.'},
     {target:null,title:'That is it',text:'When a tool opens, the Back button at the top brings you right back. You can replay this tour any time from "Show me around".'}
   ];
@@ -289,7 +322,7 @@
   document.addEventListener('click',function(e){var b=e.target.closest&&e.target.closest('[data-adh-tour]');if(b){e.preventDefault();startTour();}});
   window.addEventListener('resize',function(){if(tourEl)place(tourEl.querySelector('.adh-coach-card'),tourTarget);});
   function maybeAutoTour(){
-    if(seen()||app.hidden||current.tool||current.section!=='home')return false;
+    if(seen()||welcomeShowing()||app.hidden||current.tool||current.section!=='home')return false;
     setTimeout(function(){if(!seen()&&!tourEl&&!app.hidden&&current.section==='home'&&!current.tool)startTour();},900);
     return true;
   }
@@ -316,5 +349,5 @@
   try{history.replaceState(initial,'',location.hash?stateHash(initial.section,initial.tool):location.pathname+location.search);}catch(_){}
   render(initial);
 
-  window.WatchdogAgentHub={open:function(key,url){go(TOOLS[key]?TOOLS[key][3]:'home',key,url||null);},section:function(s){go(s);},tools:TOOLS};
+  window.WatchdogAgentHub={open:function(key,url){go(TOOLS[key]?TOOLS[key][3]:'home',key,url||null);},section:function(s){go(SECTION_ALIASES[s]||s);},tools:TOOLS,sections:SECTIONS};
 })();
