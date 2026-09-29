@@ -25,6 +25,7 @@
   var queued = false;
   var authAttempts = 0;
   var observed = typeof WeakSet === 'function' ? new WeakSet() : null;
+  var chromeObservers = [];
   var lastFocus = null;
 
   function route(path){
@@ -234,7 +235,7 @@
     return [
       {key:'developer',href:route('/developer'),icon:'fa-code',label:'Developer Command Center',detail:'Platform map and developer shortcuts'},
       {key:'developer-recaps',href:route('/logs/recap'),icon:'fa-calendar-check',label:'Daily Recaps',detail:'Daily operating memory and handoffs'},
-      {key:'developer-marketing',href:'/property/developer-marketing-plan.html',icon:'fa-bullhorn',label:'Marketing Campaign',detail:'Organic-first Watchdog launch plan under $100'},
+      {key:'developer-marketing',href:route('/developer-marketing-plan'),icon:'fa-bullhorn',label:'Marketing Campaign',detail:'Organic-first Watchdog launch plan under $100'},
       {key:'developer-analytics',href:route('/analytics'),icon:'fa-chart-line',label:'Analytics',detail:'External product and account KPIs'},
       {key:'developer-logs',href:route('/logs'),icon:'fa-clock-rotate-left',label:'Build Logs',detail:'Build, verification and audit history'},
       {key:'developer-data',href:route('/developer-data'),icon:'fa-database',label:'Data Operations',detail:'Marker freshness and release controls'}
@@ -355,6 +356,27 @@
     }
     return sheet;
   }
+  /* Idempotent render for every piece of shared chrome. The old check, which
+     compared innerHTML with the source string, was always true (browsers serialize markup
+     differently from the source string, and other runtimes such as the ANCHOR
+     profile row add to it), so each refresh rewrote the profile, the observer
+     on that node queued another refresh, and the menu re-rendered about 60
+     times a second. Now a node is rewritten only when the markup this runtime
+     wants changed, or when another script replaced our content (our first
+     child is gone). Rows other runtimes add inside are left alone, and the
+     mutation records of our own write are dropped so the target observers
+     cannot feed a loop. */
+  function renderChrome(node,html){
+    if(!node) return false;
+    var mine = node.__wdUniversalFirst;
+    if(node.__wdUniversalSource === html && mine && mine.parentNode === node) return false;
+    node.innerHTML = html;
+    node.__wdUniversalSource = html;
+    node.__wdUniversalFirst = node.firstElementChild || node.firstChild;
+    if(node.dataset) node.dataset.wdUniversal = VERSION;
+    chromeObservers.forEach(function(observer){ observer.takeRecords(); });
+    return true;
+  }
   function patchPublicDrawer(){
     var sheet = ensureDrawer();
     if(!sheet) return;
@@ -365,7 +387,7 @@
        intermittently on Chromium). public-nav.js re-runs refresh() on close. */
     if(sheet.classList.contains('open')) return;
     var html = publicDrawerHtml();
-    if(sheet.innerHTML !== html){ sheet.innerHTML = html; sheet.dataset.wdUniversal = VERSION; }
+    renderChrome(sheet,html);
   }
 
   function profileMarkup(publicMode){
@@ -404,21 +426,21 @@
       if(oldHead) oldHead.setAttribute('aria-hidden','true');
       publicHost.classList.add('wd-universal-profile');
       var publicHtml = profileMarkup(true);
-      if(publicHost.innerHTML !== publicHtml){ publicHost.innerHTML = publicHtml; publicHost.dataset.wdUniversal = VERSION; }
+      renderChrome(publicHost,publicHtml);
     }
     ['wd6-profile','hm27-profile-pop'].forEach(function(id){
       var host = document.getElementById(id);
       if(!host) return;
       host.classList.add('wd-universal-profile');
       var html = profileMarkup(false);
-      if(host.innerHTML !== html){ host.innerHTML = html; host.dataset.wdUniversal = VERSION; }
+      renderChrome(host,html);
     });
   }
   function patchProfileTriggers(){
     var publicTrigger = document.getElementById('wd-profile-trigger');
     if(!publicTrigger) return;
     var a = avatar();
-    publicTrigger.innerHTML = a ? '<img src="' + esc(a) + '" alt=""><span>' + (state.user ? 'Account' : 'Sign in') + '</span>' : '<i class="fas fa-user"></i><span>' + (state.user ? 'Account' : 'Sign in') + '</span>';
+    renderChrome(publicTrigger,a ? '<img src="' + esc(a) + '" alt=""><span>' + (state.user ? 'Account' : 'Sign in') + '</span>' : '<i class="fas fa-user"></i><span>' + (state.user ? 'Account' : 'Sign in') + '</span>');
     publicTrigger.setAttribute('aria-label',state.user ? 'Open account menu' : 'Sign in or open account menu');
   }
 
@@ -588,7 +610,9 @@
     if(!node || typeof MutationObserver === 'undefined') return;
     if(observed && observed.has(node)) return;
     if(observed) observed.add(node);
-    new MutationObserver(queue).observe(node,{childList:true,subtree:true});
+    var observer = new MutationObserver(queue);
+    observer.observe(node,{childList:true,subtree:true});
+    chromeObservers.push(observer);
   }
     function attachTargetObservers(){
     ['wd6-profile','hm27-profile-pop'].forEach(function(id){ watchTarget(document.getElementById(id)); });

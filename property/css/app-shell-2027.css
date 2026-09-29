@@ -26,3 +26,22 @@ body.wdx-modern .wd6-shade{position:fixed;inset:0;border:0;background:rgba(15,29
 
 /* Narrow phones: the logo mark alone keeps the bell and avatar from crowding the wordmark. */
 @media(max-width:400px){.wdx-brand-copy{display:none}}
+
+/* Readability floor for the shared app header (2026-09-29): 12px minimum text
+   and 44px minimum controls in the top bar, page bar, profile, notifications
+   and invite popovers on every page that uses this shell. */
+.wdx-brand{min-height:44px;min-width:44px}
+.wdx-brand-copy small,body.wdx-modern .wd4-brand-copy small{font-size:12px;letter-spacing:.06em}
+.wdx-date span,.wdx-weather span{font-size:12px}
+.wdx-badge{min-width:20px;height:20px;right:-4px;top:-4px;font-size:12px;line-height:1}
+.wdx-icon,.wdx-user{min-width:44px;min-height:44px}
+.wdx-user>i{font-size:12px}
+.wdx-kicker{font-size:12px}
+.wdx-btn{min-height:44px;font-size:13px}
+body.wdx-modern .wd6-pop header small,body.wdx-modern .wd6-pop header>i,body.wdx-modern .wd6-pop header>button,body.wdx-modern .wd6-pop nav small,body.wdx-modern .wd6-note small,body.wdx-modern .wd6-note em,body.wdx-modern .wd6-nfoot,body.wdx-modern .wd6-empty small,body.wdx-modern .wd6-invite>small,body.wdx-modern .wd6-invite label,body.wdx-modern .wd6-invite>em{font-size:12px}
+body.wdx-modern .wd6-pop nav b,body.wdx-modern .wd6-note b,body.wdx-modern .wd6-empty b,body.wdx-modern .wd6-invite>p,body.wdx-modern .wd6-invite>div button,body.wdx-modern .wd6-invite footer a,body.wdx-modern .wd6-invite footer button,body.wdx-modern .wd6-out{font-size:13px}
+body.wdx-modern .wd6-invite input{font-size:16px;height:44px}
+body.wdx-modern .wd6-pop header>button{min-height:44px}
+body.wdx-modern .wd6-out,body.wdx-modern .wd6-nfoot{min-height:44px}
+body.wdx-modern .wd6-invite>div button,body.wdx-modern .wd6-invite footer a,body.wdx-modern .wd6-invite footer button{height:44px}
+body.wdx-modern .wd6-x{width:44px;height:44px}

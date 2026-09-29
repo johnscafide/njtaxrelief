@@ -47,7 +47,7 @@ html.aw27-page :focus-visible{outline:2px solid var(--aw-blue);outline-offset:2p
 
 /* ---------- compact app topbar (app-shell-2027) on workspace pages ---------- */
 body.wdx-agent-workspace .wdx-topbar{height:var(--aw-top);padding:0 20px}
-body.wdx-agent-workspace .wdx-menu{width:42px;height:42px}
+body.wdx-agent-workspace .wdx-menu{width:44px;height:44px}
 body.wdx-agent-workspace .wdx-brand-mark{width:38px;height:38px}
 
 /* ---------- workspace tab bar ---------- */
