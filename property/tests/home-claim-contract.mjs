@@ -165,4 +165,11 @@ assert.deepEqual({ ...sandbox('https://www.watchdogindex.com/home?pin=0904_9_20&
   assert.equal(s.box.visibleState(), 'unavailable');
 }
 
+// Switching saved homes keeps the clean public path (/home), never /property/home.
+for (const file of ['property/js/home.js', 'property/js/dashboard/home/index.js']) {
+  const src = read(file);
+  assert.ok(!src.includes("replaceState({}, '', '/property/home"), file + ' must not expose /property/ in the address bar');
+  assert.ok(src.includes("history.replaceState({}, '', location.pathname + '?pin=' + encodeURIComponent(pin));"), file + ' keeps the current clean path when switching homes');
+}
+
 console.log('home claim contract: ok');
