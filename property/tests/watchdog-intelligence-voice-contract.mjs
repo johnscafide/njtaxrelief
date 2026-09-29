@@ -145,6 +145,13 @@ assert(page.indexOf(analystScript) < page.indexOf(addonScript), 'Agent add-on br
 assert(page.indexOf(addonScript) < page.indexOf(voiceScript), 'Voice server decorator must load after both Analyst access paths.');
 assert(page.indexOf(voiceScript) < page.indexOf(browserScript), 'Browser Voice must load after the server Voice decorator so it can safely override provider-unavailable interactions.');
 
+// Moved from the retired dashboard-mobile-polish contract (its dashboard CSS was removed):
+// Voice must survive mobile auth/runtime startup races.
+const voiceClient = read('property/js/watchdog-intelligence-voice.js');
+assert(voiceClient.includes('function resolveClient()'), 'Voice must lazily resolve the signed-in runtime.');
+assert(voiceClient.includes('async function waitForClient()'), 'Voice must tolerate mobile auth/runtime startup races.');
+assert(voiceClient.includes('observePanel();\n    const existing'), 'Voice panel observation must start before auth runtime resolution completes.');
+
 if (fail.length) {
   console.error(JSON.stringify({ passed: false, contract: 'watchdog-intelligence-voice-vnext-narration-1', failures: fail }, null, 2));
   process.exit(1);

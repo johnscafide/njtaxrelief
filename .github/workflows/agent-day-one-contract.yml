@@ -18,6 +18,7 @@ on:
       - 'property/js/agent-*.js'
       - 'property/css/agent-*.css'
       - 'property/js/access-guard.js'
+      - 'property/tests/access-guard-redirect-contract.mjs'
       - 'property/js/dashboard/wd-core.js'
       - 'property/tests/agent-*.mjs'
       - 'property/tests/dashboard-signin-return.mjs'
@@ -43,6 +44,7 @@ jobs:
       - name: Verify Agent page access and sign-in handoff
         run: |
           node property/tests/agent-route-access.mjs
+          node property/tests/access-guard-redirect-contract.mjs
           node property/tests/dashboard-signin-return.mjs
           node property/tests/farm-list-contract.mjs
       - name: Verify owner policies in isolated PostgreSQL

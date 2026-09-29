@@ -21,7 +21,7 @@
   <link rel="stylesheet" href="/styles.css">
   <link rel="stylesheet" href="/property/css/shared.css">
   <link rel="stylesheet" href="/property/css/public-mobile-nav.css">
-  <link rel="stylesheet" href="/property/css/watchdog-tool-page.css?v=20260928a">
+  <link rel="stylesheet" href="/property/css/watchdog-tool-page.css?v=20260929a">
 </head>
 <body class="tp-page nav-solid">
 <header class="wd-nav" id="wd-nav">
@@ -51,7 +51,8 @@
     <section class="tp-card">
       <h2>Homes for sale</h2>
       <p>Listing search provided by Opus Elite Real Estate. Listing data comes from the MLS and is not verified by Watchdog.</p>
-      <iframe class="tp-frame" style="min-height:720px" src="https://johnscafide.opuselitesj.com/wide.php" title="Search New Jersey homes for sale" loading="lazy"></iframe>
+      <div class="tp-cta" id="tp-idx-gate" style="margin:18px 0 0"><button class="tp-btn" type="button" id="tp-idx-load">Start searching homes</button></div>
+      <iframe class="tp-frame" id="tp-idx-frame" style="min-height:720px" data-src="https://johnscafide.opuselitesj.com/wide.php" title="Search New Jersey homes for sale" hidden></iframe>
     </section>
     <section class="tp-card tp-section">
       <h2>Found one you like?</h2>
@@ -63,6 +64,7 @@
 <div id="main-footer"></div>
 <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2/dist/umd/supabase.js"></script>
 <script src="/property/js/public-nav.js"></script>
+<script>(function(){var b=document.getElementById('tp-idx-load'),f=document.getElementById('tp-idx-frame'),g=document.getElementById('tp-idx-gate');if(!b||!f)return;b.addEventListener('click',function(){f.src=f.getAttribute('data-src');f.hidden=false;if(g)g.hidden=true;f.focus();});})();</script>
 <script>fetch('/property/partials/footer.html').then(function(r){return r.ok?r.text():''}).then(function(h){var f=document.getElementById('main-footer');if(f&&h)f.innerHTML=h}).catch(function(){});</script>
 
 </body>

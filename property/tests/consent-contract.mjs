@@ -23,7 +23,13 @@ assert(consent.includes('Reject optional cookies'), 'Reject optional cookies cho
 assert(consent.includes('Accept all cookies'), 'Accept all cookies choice is missing');
 assert(consent.includes('Cookie settings'), 'Cookie settings choice is missing');
 assert(consent.includes('Necessary cookies'), 'Necessary cookies disclosure is missing');
-assert(consent.includes('Optional cookies'), 'Optional cookies disclosure is missing');
+// The optional category was renamed when OpenAI Ads measurement was added (commit 7d120005):
+// the banner now names "optional measurement cookies" and the opt-in toggle names both
+// analytics and ad measurement. Both disclosures and the toggle itself must stay present.
+assert(consent.includes('Optional measurement cookies help us understand'), 'Optional cookies disclosure is missing');
+assert(consent.includes('<b>Optional analytics &amp; ad measurement</b>'), 'Optional cookies category label is missing from cookie settings');
+assert(consent.includes('id="wd-consent-analytics" type="checkbox"'), 'Optional cookies opt-in toggle is missing from cookie settings');
+assert(!consent.includes('We do not use advertising cookies'), 'Consent copy must not deny advertising cookies while opt-in ad measurement cookies exist');
 assert(consent.includes('GA_ID'), 'Google Analytics consent implementation is missing');
 assert(consent.includes('CLARITY_ID'), 'Microsoft Clarity consent implementation is missing');
 assert(consent.includes("watchdog:'G-EDW7CZV66M'"), 'Watchdog GA4 measurement ID is missing');

@@ -39,6 +39,21 @@
     return client;
   }
 
+  // A redirect away (sign in, plan, training) rejects njptrAccessReady so pages
+  // stop loading their data. The page is already leaving, so that rejection is
+  // expected, not a crash: keep it out of the browser's uncaught-error reports.
+  function leaving(error) {
+    if (error && typeof error === 'object') {
+      try { error.watchdogAccessRedirect = true; } catch (_error) {}
+    }
+    return error;
+  }
+  if (typeof window.addEventListener === 'function') {
+    window.addEventListener('unhandledrejection', function (event) {
+      if (event && event.reason && event.reason.watchdogAccessRedirect) event.preventDefault();
+    });
+  }
+
   function logicalPath(pathname) {
     var path = String(pathname || '').replace(/\/+$/, '');
     if (cleanWatchdogHost && (path === '/property' || path.indexOf('/property/') === 0)) {
@@ -64,7 +79,7 @@
     if (!window.supabase) return Promise.reject(new Error('Authentication library unavailable'));
     return sb().auth.getUser().then(function (result) {
       var user = result && result.data && result.data.user;
-      if (!user) { location.replace(destination('signin')); throw new Error('Sign in required'); }
+      if (!user) { location.replace(destination('signin')); throw leaving(new Error('Sign in required')); }
       return Promise.all([sb().rpc('is_watchdog_developer'), sb().rpc('get_my_entitlement')]).then(function (values) {
         var devResult = values[0], entitlementResult = values[1];
         if (devResult.error) throw devResult.error;
@@ -78,7 +93,7 @@
         var paidActive = status === 'active' || status === 'trialing' || status === 'past_due';
         var allowed = required === 'standard' || isDeveloper || (paidActive && order[plan] >= (order[required] == null ? 999 : order[required]));
         if (required === 'developer' && !isDeveloper) allowed = false;
-        if (!allowed) { location.replace(destination('restricted')); throw new Error('Plan access required'); }
+        if (!allowed) { location.replace(destination('restricted')); throw leaving(new Error('Plan access required')); }
 
         function finishAccess() {
           if (isDeveloper) {
@@ -100,7 +115,7 @@
             if (training && training.required && !training.completed) {
               var returnTo = location.pathname + location.search + location.hash;
               location.replace(trainingPath + '?return=' + encodeURIComponent(returnTo));
-              throw new Error('Training required');
+              throw leaving(new Error('Training required'));
             }
             return finishAccess();
           });
@@ -109,8 +124,8 @@
         return finishAccess();
       });
     }).catch(function (error) {
-      if (!/required$/.test(error.message || '')) location.replace(destination('restricted'));
-      throw error;
+      if (!/required$/.test(error && error.message || '')) location.replace(destination('restricted'));
+      throw leaving(error);
     });
   }
 

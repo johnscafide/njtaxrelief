@@ -13,7 +13,10 @@
   var gate = document.getElementById('support-gate');
   var note = document.getElementById('support-note');
   var submit = document.getElementById('support-submit');
-  var contactFallback = '<a href="/contact?topic=account-access">Contact Watchdog</a>';
+  function showGate(templateId) {
+    var template = document.getElementById(templateId);
+    if (template) gate.replaceChildren(template.content.cloneNode(true));
+  }
 
   function setNote(text, type) {
     note.textContent = text || '';
@@ -26,11 +29,9 @@
       form.hidden = false;
       return;
     }
-    gate.innerHTML = preview
-      ? '<b>Preview environment.</b><br>The interactive form is connected to Watchdog staging. Sign in with a staging test account to submit a non-production request, or ' + contactFallback + '.'
-      : '<b>Sign in required for account-linked support.</b><br><a href="/signin">Sign in to Watchdog</a>, or ' + contactFallback + ' if you cannot access your account.';
+    showGate(preview ? 'support-gate-preview' : 'support-gate-signed-out');
   }).catch(function () {
-    gate.innerHTML = 'The account session could not be checked. Please ' + contactFallback + '.';
+    showGate('support-gate-error');
   });
 
   form.addEventListener('submit', function (event) {

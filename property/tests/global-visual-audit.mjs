@@ -355,7 +355,16 @@ try {
       });
 
       await context.close();
-      process.stdout.write(`${passed ? 'PASS' : 'FAIL'} ${viewport.key} ${record.route}\n`);
+      // Say why a check failed in the job log itself, so the cause can be read
+      // without downloading the evidence artifact.
+      const reasons = [];
+      if (navigationError) reasons.push(`navigation: ${navigationError}`);
+      if (!statusOk) reasons.push(`HTTP ${responseStatus}`);
+      if (publicUnexpectedGate) reasons.push(`public page gated at ${finalPath}`);
+      if (fatalOverflow) reasons.push(`horizontal overflow ${metrics.horizontalOverflowPx}px`);
+      if (tinyBody) reasons.push(`empty render (${metrics.bodyTextLength} chars)`);
+      for (const error of pageErrors.slice(0, 3)) reasons.push(`page error: ${error}`);
+      process.stdout.write(`${passed ? 'PASS' : 'FAIL'} ${viewport.key} ${record.route}${reasons.length ? ` :: ${reasons.join(' | ').slice(0, 600)}` : ''}\n`);
     }
   }
 } finally {

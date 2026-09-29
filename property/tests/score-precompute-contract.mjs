@@ -30,4 +30,17 @@ assert.match(wf, /SCORE_PRECOMPUTE_TOKEN: \$\{\{ secrets\.SCORE_PRECOMPUTE_TOKEN
 assert.match(fn, /components: cachedComponents\(hit\.inputs\), observed_at: hit\.computed_at, source: "robust_public_cache"/, 'public cache hits go through the component expander');
 assert.match(fn, /if \(!inputs\?\.precomputed\) return parts;/, 'on-demand cache rows are returned unchanged');
 assert.match(fn, /\{ score: value \?\? null \}/, 'precomputed bare scores become { score } objects');
+// Every property gets a score: the job keeps going every 6 hours, always resumes
+// an unfinished pass, and brakes itself instead of adding load (the Sept 28
+// outage came from two heavy jobs at once).
+assert.match(wf, /- cron: '41 \*\/6 \* \* \*'/, 'scores resume every 6 hours');
+assert.match(wf, /name: Sync parcels\n\s+if: \(github\.event_name == 'schedule' && github\.event\.schedule == '17 7 3 \* \*'\)/, 'only the monthly schedule syncs parcels');
+assert.match(wf, /group: parcel-composite-sync-/, 'one loader at a time: parcel sync and scoring never overlap');
+assert.match(wf, /--max-minutes 330/, 'stops cleanly before the job limit');
+assert.match(py, /run_row = api\.latest_run\(\)\n    if run_row:/, 'an unfinished pass is always resumed');
+assert.match(py, /while busy\(api\.db_load\(\), args\.max_active, args\.max_query_seconds\)/, 'waits while the database is busy');
+assert.match(py, /time\.sleep\(args\.pause\)/, 'rests between calls');
+const load = fs.readFileSync('supabase/migrations/20260929160000_watchdog_db_load.sql', 'utf8');
+assert.match(load, /revoke all on function public\.watchdog_db_load\(\) from public, anon, authenticated;/);
+assert.match(load, /grant execute on function public\.watchdog_db_load\(\) to service_role;/);
 console.log('Score precompute contract passed.');

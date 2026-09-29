@@ -8,7 +8,11 @@ const refresh=read('property/js/account-refresh-20260925.js');
 const customizer=read('property/css/account-customizer-20260926.css');
 const api=read('api/watchdog-backoffice-professional.js');
 
-must(page.includes('account-customizer-20260926.css?v=20260926d'),'Isolated customizer stylesheet is not loaded after legacy Account CSS.');
+// The customizer stylesheet last changed in c3c9fc22 (#449), which shipped it as ?v=20260926c.
+// 7050a675 (#450) bumped only the runtime JS to d, so the CSS key "d" was never published.
+const customizerCssKey=(page.match(/account-customizer-20260926\.css\?v=(\d{8}[a-z]*)/)||[])[1]||'';
+must(customizerCssKey>='20260926c','Isolated customizer stylesheet is not loaded after legacy Account CSS.');
+must(page.indexOf('/property/css/account-refresh-20260925.css')>0&&page.indexOf('/property/css/account-customizer-20260926.css')>page.indexOf('/property/css/account-refresh-20260925.css'),'Isolated customizer stylesheet is not loaded after legacy Account CSS.');
 must(page.includes('account-refresh-20260925.js?v=20260926d'),'Account customizer runtime cache key not bumped.');
 must(refresh.includes("panel.className='acx-picker'"),'Customizer still uses legacy popup class.');
 must(refresh.includes("backdrop.className='acx-backdrop'"),'Customizer backdrop is not isolated.');

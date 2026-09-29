@@ -50,7 +50,15 @@ must(!rating.includes('observe(document.documentElement,{childList:true,subtree:
 must(reviewsPage.includes('data-access-require="developer"'), 'Review moderation page must be developer-only.');
 must(reviewsApi.includes('/rest/v1/rpc/is_watchdog_developer'), 'Review moderation API must independently enforce developer access.');
 must(reviewsApi.includes("action === 'approve'") && reviewsApi.includes("action === 'unpublish'"), 'Review moderation API must support publish and unpublish actions.');
-must(!reviewsApi.includes('application_id') && !reviewsApi.includes('user_id'), 'Review moderation API source must not expose application/user identifiers in its response contract.');
+// NJW-364 (commit 5d426ac6) reads outreach user_id server-side only to join the developer-facing
+// email/name. The response objects must never carry application or user identifiers.
+const reviewShape = (reviewsApi.match(/function safeReview\(row\) \{[\s\S]*?\n\}/) || [''])[0];
+const outreachShape = (reviewsApi.match(/return outreach\.map\(\(row\) => \{[\s\S]*?\n  \}\);/) || [''])[0];
+must(reviewShape.includes('comment:') && outreachShape.includes('status: outreachStatus(row)'), 'Review moderation response shapes must stay explicit object literals.');
+must(!reviewsApi.includes('application_id'), 'Review moderation API source must not expose application/user identifiers in its response contract.');
+must(!reviewShape.includes('user_id') && !/user_id\s*:|\.\.\.\s*row\b/.test(outreachShape), 'Review moderation API source must not expose application/user identifiers in its response contract.');
+must(!/REVIEW_SELECT = '[^']*user_id/.test(reviewsApi), 'Review moderation rows must not select user identifiers.');
+must((reviewsApi.match(/user_id/g) || []).length === 3, 'user_id may only be selected and used server-side to join outreach rows to profiles.');
 must(reviewsApi.includes('SUPABASE_SERVICE_ROLE_KEY'), 'Privileged review access must stay server-side.');
 must(reviewsJs.includes("API='/api/watchdog-backoffice-reviews'"), 'Review moderation UI must use the same-origin developer API.');
 must(backofficeShell.includes("REVIEWS_API='/api/watchdog-backoffice-reviews'"), 'Backoffice notification badge must use the same developer API.');

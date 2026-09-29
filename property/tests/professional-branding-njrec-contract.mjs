@@ -7,7 +7,10 @@ const css=read('property/css/agent-branding-profile.css');
 const brandApi=read('api/brokerage-brand-discovery.js');
 const njrecApi=read('api/njrec-license-search.js');
 expect(page.includes('agent-branding-profile.css?v=20260925a'),'branding CSS not loaded');
-expect(page.includes('agent-branding-profile.js?v=20260925a'),'branding JS cache key missing');
+// The branding runtime was bumped past this revision in 196b485c (#441, ?v=20260925b);
+// require at least the NJREC branding revision rather than one frozen key.
+const brandingJsKey=(page.match(/\/property\/js\/agent-branding-profile\.js\?v=(\d{8}[a-z]*)/)||[])[1]||'';
+expect(brandingJsKey>='20260925a','branding JS cache key missing');
 expect(js.includes('Choose brokerage'),'brokerage chooser missing');
 expect(js.includes('Find branding'),'website brand discovery missing');
 expect(js.includes('Search NJREC'),'NJREC lookup UI missing');
