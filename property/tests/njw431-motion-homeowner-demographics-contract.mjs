@@ -50,7 +50,10 @@ must(!intel.includes("'primary_residence'"),'Primary residence flag must not be 
 
 must(accountPage.includes('account-refresh-20260925.css?v=20260926a'),'Account customizer CSS cache version missing.');
 must(accountPage.includes('account-refresh-20260925.js?v=20260926d'),'Account customizer JS cache version missing.');
-must(accountPage.includes('account-customizer-20260926.css?v=20260926d'),'Account isolated customizer CSS cache version missing.');
+// The customizer stylesheet last changed in c3c9fc22 (#449), which shipped it as ?v=20260926c.
+// 7050a675 (#450) bumped only the runtime JS to d, so the CSS key "d" was never published.
+const customizerCssKey=(accountPage.match(/account-customizer-20260926\.css\?v=(\d{8}[a-z]*)/)||[])[1]||'';
+must(customizerCssKey>='20260926c','Account isolated customizer CSS cache version missing.');
 must(accountPage.includes('account-profile.js?v=20260926a'),'Shared profile JS cache version missing.');
 must(homeownerPage.includes('account-profile.js?v=20260927a'),'Homeowner profile JS cache version missing.');
 must(homeownerPage.includes('account-profile.css?v=20260926a'),'Homeowner profile CSS cache version missing.');

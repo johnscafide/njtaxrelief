@@ -18,12 +18,15 @@ assert.match(manager,/last_identity_cannot_be_removed/);
 assert.doesNotMatch(manager,/signInWithPassword|password\s*:/i);
 assert.match(account,/account-identity-security\.html/);
 assert.match(account,/get_my_watchdog_onboarding_state/);
-assert.match(partial,/SIGN-IN &amp; SECURITY/);
+// The "SIGN-IN & SECURITY" eyebrow was removed on purpose in the Account & Billing refresh
+// (93bb9b3f, NJW-416); account-refresh-20260925-contract forbids it returning.
+assert.match(partial,/<section class="ac-section ac-signin-security" id="ac-signin-security">/);
+assert.match(partial,/<h2>Ways to sign in<\/h2>/);
 assert.match(partial,/data-signin-row="google"/);
 assert.match(partial,/data-signin-row="facebook"/);
 assert.match(partial,/data-signin-row="linkedin_oidc"/);
 assert.match(partial,/Finish setting up Watchdog/);
-assert.match(page,/Account & Profile/);
+assert.match(page,/<title>Account & Billing \| Watchdog/);
 assert.match(page,/watchdog-identity-manager\.js/);
 assert.match(page,/account-identities\.js/);
 assert.ok(page.indexOf('watchdog-identity-manager.js')<page.indexOf('account-identities.js'));

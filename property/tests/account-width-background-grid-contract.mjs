@@ -4,7 +4,11 @@ function expect(v,m){if(!v)throw new Error(m)}
 const page=read('property/account/index.html');
 const refresh=read('property/js/account-refresh-20260925.js');
 const css=read('property/css/account-refresh-20260925.css');
-expect(page.includes('20260925e'),'cache e missing');
+// NJW-420 shipped the account refresh assets as ?v=20260925e; later Account releases bumped them
+// (for example 778b69e3, 7050a675). Require the page to load at least the NJW-420 revision.
+const cacheKey=(asset)=>(page.match(new RegExp(asset.replace(/[.*+?^${}()|[\]\\]/g,'\\$&')+'\\?v=(\\d{8}[a-z]*)'))||[])[1]||'';
+expect(cacheKey('/property/css/account-refresh-20260925.css')>='20260925e','cache e missing');
+expect(cacheKey('/property/js/account-refresh-20260925.js')>='20260925e','cache e missing');
 expect(refresh.includes('data-theme-tab="color"')&&refresh.includes('data-theme-tab="image"')&&refresh.includes('data-theme-tab="motion"'),'theme tabs missing');
 expect(refresh.includes('setThemeTab(panel,kind)'),'theme tab JS missing');
 expect(refresh.includes('ac-theme-browser')&&refresh.includes('ac-theme-browser-grid'),'single theme browser missing');

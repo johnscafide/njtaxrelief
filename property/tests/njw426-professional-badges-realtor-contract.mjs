@@ -24,8 +24,11 @@ expect(account.includes('has-broker-brand')&&account.includes('ac-avatar-broker-
 expect(refresh.includes('.ac-pro-badge.social-verify')&&refresh.includes('.ac-avatar-wrap.has-broker-brand'),'Professional hero styling missing');
 expect(accountPage.includes('account.js?v=20260925c'),'Account JS cache key missing');
 expect(accountPage.includes('account-refresh-20260925.css?v=20260926a'),'Account CSS cache key missing');
-expect(professionalPage.includes('realtor-verification.css?v=20260925a'),'REALTOR CSS not loaded');
-expect(professionalPage.includes('realtor-verification.js?v=20260925a'),'REALTOR JS not loaded');
+// Later professional-profile releases bumped these keys past the NJW-426 revision (CSS in
+// 99614c89, JS in 83478993); require at least the NJW-426 revision rather than one frozen key.
+const assetKey=(html,asset)=>(html.match(new RegExp(asset.replace(/[.*+?^${}()|[\]\\]/g,'\\$&')+'\\?v=(\\d{8}[a-z]*)'))||[])[1]||'';
+expect(assetKey(professionalPage,'/property/css/realtor-verification.css')>='20260925a','REALTOR CSS not loaded');
+expect(assetKey(professionalPage,'/property/js/realtor-verification.js')>='20260925a','REALTOR JS not loaded');
 expect(realtor.includes("db.rpc('submit_my_realtor_verification_v1'"),'REALTOR submit RPC missing');
 expect(realtor.includes("db.rpc('my_realtor_verification_v1')"),'REALTOR read RPC missing');
 expect(realtor.includes('does not yet have a direct NAR membership-verification API connection'),'Manual-review disclosure missing');
