@@ -95,12 +95,16 @@ comment on table public.push_device_registrations is
 comment on column public.push_device_registrations.token is
   'Raw FCM registration token. Never returned to clients; read only by push-sender with the service key.';
 
--- Token-free device list for the signed-in user.
-create or replace function public.get_my_push_devices()
+-- Token-free device list for the signed-in user. Returns the same column set
+-- the push-device-register function returns (its SAFE_COLUMNS); the contract
+-- test keeps the two lists identical. Dropped first because "or replace"
+-- cannot change a function's result columns.
+drop function if exists public.get_my_push_devices();
+create function public.get_my_push_devices()
 returns table (
   id uuid, platform text, device_label text, app_version text,
   alerts_enabled boolean, digest_enabled boolean,
-  quiet_hours_start smallint, quiet_hours_end smallint, timezone text,
+  quiet_hours_start smallint, quiet_hours_end smallint, timezone text, locale text,
   created_at timestamptz, last_seen_at timestamptz, disabled_at timestamptz
 )
 language sql
@@ -110,7 +114,7 @@ set search_path = public, pg_temp
 as $$
   select r.id, r.platform, r.device_label, r.app_version,
          r.alerts_enabled, r.digest_enabled,
-         r.quiet_hours_start, r.quiet_hours_end, r.timezone,
+         r.quiet_hours_start, r.quiet_hours_end, r.timezone, r.locale,
          r.created_at, r.last_seen_at, r.disabled_at
   from public.push_device_registrations r
   where r.user_id = auth.uid()

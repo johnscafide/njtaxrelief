@@ -102,7 +102,7 @@ fun SearchScreen(query: String, navigator: Navigator) {
                     value = text,
                     onValueChange = vm::setQuery,
                     onSearch = vm::searchNow,
-                    onClear = vm::clear,
+                    onClear = vm::clearQuery,
                     modifier = Modifier.weight(1f).focusRequester(focus),
                 )
             }

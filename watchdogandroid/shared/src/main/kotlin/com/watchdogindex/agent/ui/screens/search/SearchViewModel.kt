@@ -59,7 +59,7 @@ class SearchViewModel(private val repos: Repositories, initialQuery: String) : V
 
     fun setQuery(text: String) = requests.update { Request(text) }
 
-    fun clear() = setQuery("")
+    fun clearQuery() = setQuery("")
 
     /** Runs the current query again right away (the keyboard's Search action, or "Try again"). */
     fun searchNow() = requests.update { it.copy(attempt = it.attempt + 1) }
