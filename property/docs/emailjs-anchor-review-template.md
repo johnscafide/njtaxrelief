@@ -27,6 +27,8 @@ The worker supplies these variables individually for every recipient:
 - `{{privacy_url}}`
 - `{{terms_url}}`
 
+The logo must stay a PNG. Gmail and Outlook do not display SVG images in email, so an SVG logo shows up as a broken image.
+
 Do not add an email address, user ID, application ID, ZIP code, SSN/ITIN, or application answers to any tracking URL. The supplied URLs contain only a random opaque token.
 
 ## HTML body
@@ -87,7 +89,7 @@ Do not add an email address, user ID, application ID, ZIP code, SSN/ITIN, or app
 
 ## Automation behavior
 
-- Worker checks every 5 minutes.
+- Worker runs on the `watchdog-anchor-review-outreach` cron job (every 4 hours in production).
 - Only applications generated after automation is enabled are eligible; historical applications are not backfilled.
 - Default delay is 60 minutes after generation.
 - A user who has already submitted a review is skipped.

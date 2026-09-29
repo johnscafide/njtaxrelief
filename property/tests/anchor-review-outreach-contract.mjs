@@ -23,7 +23,7 @@ assert.doesNotMatch(openApi,/email/i);
 
 assert.match(clickApi,/createHash\('sha256'\)/);
 assert.match(clickApi,/p_event: 'click'/);
-assert.match(clickApi,/\/property\/review\//);
+assert.match(clickApi,/watchdogindex\.com\/review'/,'click redirect must use the clean /review URL');
 assert.doesNotMatch(clickApi,/email/i);
 assert.doesNotMatch(clickApi,/application_id/i);
 
