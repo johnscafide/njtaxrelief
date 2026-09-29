@@ -108,9 +108,9 @@
      labels are the canonical nav labels: the Agent Desk rail, the app-shell
      page header and the agent workspace breadcrumb use the same words. */
   var AGENT_AREAS = [
-    {key:'agent-desk',section:'home',label:'Agent Desk',icon:'fa-briefcase',hint:'Your day: who to call and what is due',paths:['/agent-desk','/agent/training']},
-    {key:'clients',section:'clients',label:'Clients',icon:'fa-user-group',hint:'Contacts, sphere and deals to closing',paths:['/agent/contacts','/agent/listing-prep','/agent/buyers','/agent/open-house','/transaction','/client-room','/true-cost']},
-    {key:'farm',section:'farm',label:'Farm',icon:'fa-map-location-dot',hint:'The neighborhoods you want to be known in',paths:['/farm-map','/farm-builder','/market-list']},
+    {key:'agent-desk',section:'home',label:'Agent Desk',icon:'fa-briefcase',hint:'Who to call today and what is due',paths:['/agent-desk','/agent/training']},
+    {key:'clients',section:'clients',label:'Clients',icon:'fa-user-group',hint:'Contacts, sphere and deals',paths:['/agent/contacts','/agent/listing-prep','/agent/buyers','/agent/open-house','/transaction','/client-room','/true-cost']},
+    {key:'farm',section:'farm',label:'Farm',icon:'fa-map-location-dot',hint:'Neighborhoods you want to own',paths:['/farm-map','/farm-builder','/market-list']},
     {key:'marketing',section:'marketing',label:'Marketing',icon:'fa-bullhorn',hint:'Mailers, email updates and reports',paths:['/marketing-studio','/newsletter-studio','/report-builder','/report-studio','/marketing-plan','/growth']},
     {key:'research',section:'research',label:'Research',icon:'fa-magnifying-glass',hint:'Homes, towns and public data',paths:['/scan','/data-workbench','/data-center','/workbench']}
   ];
