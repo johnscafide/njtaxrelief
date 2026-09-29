@@ -14,6 +14,9 @@ const URLS = {
   equalization: BASE + "/equalization-ratios.json",
   tax: BASE + "/tax-rates.json"
 };
+// Certified tax-year Chapter 123 ratios for all 564 districts ([ratio, lower, upper] in percent).
+// Optional: if it cannot be read, scoring falls back to the sources above instead of failing.
+const CERTIFIED_URL = BASE + "/chapter123-ratios-2026.json";
 const SCORE_ID = "watchdog.watchdog_score";
 const SCORE_MODEL = "ROBUST-v1";
 const SIGNAL_MODEL = "workbench-signals-v2.1.0";
@@ -87,12 +90,24 @@ async function sources() {
   if (responses.some(r => !r.ok)) throw new Error("Canonical scoring source unavailable");
   const values = await Promise.all(responses.map(r => r.json()));
   sourceCache = Object.fromEntries(keys.map((key, i) => [key, values[i]]));
+  try {
+    const certified = await fetch(CERTIFIED_URL, { headers: { accept: "application/json" } });
+    sourceCache.certified = certified.ok ? await certified.json() : null;
+  } catch (error) {
+    console.error("Certified Chapter 123 ratios unavailable", error);
+    sourceCache.certified = null;
+  }
   sourceCacheAt = Date.now();
   return sourceCache;
 }
 function sr1aFor(src, pin) {
   const row = src?.districts?.[district(pin)];
   return row && num(row.ratio) && num(row.n) >= 10 ? row : null;
+}
+function certifiedFor(src, pin) {
+  const row = src?.districts?.[district(pin)];
+  if (!Array.isArray(row) || !(num(row[0]) > 0)) return null;
+  return { ratio: Number(row[0]) / 100, lower: num(row[1]) ? Number(row[1]) / 100 : null, upper: num(row[2]) ? Number(row[2]) / 100 : null, year: num(src?.tax_year) };
 }
 function uniFor(src, pin) { return src?.districts?.[district(pin)] || null; }
 function appealFor(src, pin) { return src?.counties?.[countyCode(pin)] || null; }
@@ -120,6 +135,10 @@ async function subjectEvidence(admin, rows) {
   return records;
 }
 function marketValue(row, src, stored) {
+  // The certified Chapter 123 district ratio is the legal basis for an appeal, so it comes first;
+  // Watchdog's own SR-1A median and the legacy static table are fallbacks only.
+  const certified = certifiedFor(src.certified, row.pams_pin);
+  if (certified && num(row.assessed_value)) return { v: Number(row.assessed_value) / certified.ratio, ratio: certified.ratio, upper: certified.upper, year: certified.year, n: null, src: "certified" };
   const verified = sr1aFor(src.sr1a, row.pams_pin);
   if (verified && num(row.assessed_value)) return { v: Number(row.assessed_value) / Number(verified.ratio), ratio: Number(verified.ratio), n: Number(verified.n), src: "verified" };
   const published = ratioFor(src.equalization, row.town, row.county);
@@ -165,7 +184,11 @@ function chapter123(row, market, stored, sr1a) {
     independent_source: independentSource, subject_evidence: subjectEvidence
   };
   if (independent == null || market.ratio == null) return result;
-  const fair = independent * market.ratio, limit = fair * 1.15;
+  // Chapter 123: the upper limit of the common level range is the average ratio plus 15%,
+  // never above 100% of true value. Use the certified upper limit when we have it.
+  const upper = Math.min(num(market.upper) ?? market.ratio * 1.15, 1);
+  const fair = independent * market.ratio, limit = independent * upper;
+  result.upper = upper;
   result.testable = true;
   result.fair = fair;
   result.limit = limit;
@@ -488,7 +511,7 @@ Deno.serve(async req => {
       markers[requestedPin]["watchdog.market_value_estimate"] = Math.round(market.v);
       meta[requestedPin]["watchdog.market_value_estimate"] = {
         status: "available", provider_kind: "canonical_intelligence",
-        source: market.src === "verified" ? "NJ verified SR-1A sales ratio" : market.src === "published" ? "NJ published equalization ratio" : "stored comparable-sale estimate",
+        source: market.src === "certified" ? "NJ certified Chapter 123 average ratio" : market.src === "verified" ? "NJ verified SR-1A sales ratio" : market.src === "published" ? "NJ published equalization ratio" : "stored comparable-sale estimate",
         observed_at: now, model_version: SIGNAL_MODEL
       };
     }

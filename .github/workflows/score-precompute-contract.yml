@@ -7,6 +7,8 @@ on:
       - 'supabase/functions/workbench-score/**'
       - 'property/scripts/precompute_scores.py'
       - 'property/tests/score-precompute-contract.mjs'
+      - 'property/tests/watchdog-score-certified-ratio-contract.mjs'
+      - 'chapter123-ratios-2026.json'
       - '.github/workflows/score-precompute-contract.yml'
       - '.github/workflows/parcel-composite-sync.yml'
   pull_request:
@@ -14,6 +16,8 @@ on:
       - 'supabase/functions/workbench-score/**'
       - 'property/scripts/precompute_scores.py'
       - 'property/tests/score-precompute-contract.mjs'
+      - 'property/tests/watchdog-score-certified-ratio-contract.mjs'
+      - 'chapter123-ratios-2026.json'
       - '.github/workflows/score-precompute-contract.yml'
       - '.github/workflows/parcel-composite-sync.yml'
 
@@ -26,4 +30,7 @@ jobs:
         with:
           node-version: 22
       - name: Verify score precompute contract
-        run: node property/tests/score-precompute-contract.mjs
+        run: |
+          node property/tests/score-precompute-contract.mjs
+          node property/tests/watchdog-score-certified-ratio-contract.mjs
+          node property/tests/prelaunch-audit-78-contract.mjs
