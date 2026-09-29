@@ -1,0 +1,52 @@
+name: Data Center and Data Workbench contracts
+on:
+  pull_request:
+    paths:
+      - 'property/data-center/**'
+      - 'property/data-workbench/**'
+      - 'property/js/data-center-*.js'
+      - 'property/js/data-workbench*.js'
+      - 'property/js/data-marker-runtime.js'
+      - 'property/js/provider-governance.js'
+      - 'property/js/marker-intelligence.js'
+      - 'property/css/data-board.css'
+      - 'property/data/marker-registry.json'
+      - 'property/data/governed-marker-definitions.json'
+      - 'property/data/db-governed-status.json'
+      - 'property/data/db-governed-provider-overlay.json'
+      - 'scripts/build-derived-governance.js'
+      - 'supabase/functions/workbench-hydrate/index.ts'
+      - 'property/tests/data-marker-wiring-contract.mjs'
+      - 'property/tests/data-pages-interactions.mjs'
+      - 'property/tests/data-center-public-contract.mjs'
+      - '.github/workflows/data-pages-contract.yml'
+  workflow_dispatch:
+permissions:
+  contents: read
+jobs:
+  data-pages:
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    steps:
+      - uses: actions/checkout@v6
+      - uses: actions/setup-node@v6
+        with:
+          node-version: '24'
+      - name: Verify marker wiring, catalog generation and source producibility
+        run: |
+          node property/tests/data-center-public-contract.mjs
+          node property/tests/data-marker-wiring-contract.mjs
+      - name: Install isolated browser test dependency
+        run: |
+          npm install --no-save --ignore-scripts playwright@1.62.0
+          npx playwright install --with-deps chromium
+      - name: Verify Data Center and Data Workbench with network-isolated browser fixtures
+        env:
+          DATA_PAGES_EVIDENCE_DIR: data-pages-evidence
+        run: node property/tests/data-pages-interactions.mjs
+      - uses: actions/upload-artifact@v5
+        if: always()
+        with:
+          name: data-pages-evidence
+          path: data-pages-evidence
+          if-no-files-found: warn
