@@ -20,6 +20,9 @@ on:
       - 'property/tests/data-pages-interactions.mjs'
       - 'property/tests/data-center-public-contract.mjs'
       - 'property/tests/njdep-catalog-canary-contract.mjs'
+      - 'property/tests/njdep-attribute-map-contract.mjs'
+      - 'supabase/functions/workbench-hydrate/production-njdep-attribute-map-bootstrap.ts'
+      - 'supabase/functions/workbench-hydrate/njdep-attribute-map.import-map.json'
       - 'supabase/functions/provider-release-canary/**'
       - 'supabase/functions/workbench-hydrate/environment-provider.ts'
       - 'supabase/migrations/*release_canary*.sql'
@@ -42,6 +45,7 @@ jobs:
           node property/tests/data-center-public-contract.mjs
           node property/tests/data-marker-wiring-contract.mjs
           node property/tests/njdep-catalog-canary-contract.mjs
+          node --no-warnings property/tests/njdep-attribute-map-contract.mjs
       - name: Install isolated browser test dependency
         run: |
           npm install --no-save --ignore-scripts playwright@1.62.0
