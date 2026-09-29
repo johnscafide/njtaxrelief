@@ -19,6 +19,11 @@ on:
       - 'property/tests/data-marker-wiring-contract.mjs'
       - 'property/tests/data-pages-interactions.mjs'
       - 'property/tests/data-center-public-contract.mjs'
+      - 'property/tests/njdep-catalog-canary-contract.mjs'
+      - 'supabase/functions/provider-release-canary/**'
+      - 'supabase/functions/workbench-hydrate/environment-provider.ts'
+      - 'supabase/migrations/*release_canary*.sql'
+      - 'supabase/migrations/*_canary.sql'
       - '.github/workflows/data-pages-contract.yml'
   workflow_dispatch:
 permissions:
@@ -36,6 +41,7 @@ jobs:
         run: |
           node property/tests/data-center-public-contract.mjs
           node property/tests/data-marker-wiring-contract.mjs
+          node property/tests/njdep-catalog-canary-contract.mjs
       - name: Install isolated browser test dependency
         run: |
           npm install --no-save --ignore-scripts playwright@1.62.0
