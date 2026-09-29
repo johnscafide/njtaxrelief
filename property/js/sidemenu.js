@@ -54,27 +54,14 @@
     paintToggle();
   }
 
-  function openingOverlay() {
-    var old = document.getElementById('wd-agent-opening'); if (old) old.remove();
-    var node = document.createElement('div'); node.id = 'wd-agent-opening';
-    node.innerHTML = '<div><i class="fas fa-circle-notch fa-spin"></i><b>Opening Agent Control Center</b><span>Launching the standalone real estate workspace…</span></div>';
-    node.style.cssText = 'position:fixed;inset:0;z-index:250000;background:rgba(238,243,246,.94);display:grid;place-items:center;font-family:Inter,system-ui,-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;color:#102a4c;backdrop-filter:blur(8px)';
-    var card=node.firstElementChild; card.style.cssText='display:grid;justify-items:center;gap:10px;background:#fff;border:1px solid #dce5ec;border-radius:18px;padding:34px 42px;box-shadow:0 24px 65px rgba(18,36,63,.19)';
-    card.querySelector('i').style.cssText='font-size:24px;color:#2f6df6'; card.querySelector('b').style.cssText='font:800 22px "Plus Jakarta Sans",sans-serif'; card.querySelector('span').style.cssText='color:#748198';
-    document.body.appendChild(node); return node;
-  }
-
+  /* The Agent Desk used to open as a separate "Agent Control Center" popup
+     window from the retired sidebar. It is now the agent's in-app front door
+     (see property/docs/watchdog-information-architecture.md), so this legacy
+     hook simply goes to it. */
   function openAgentControl(event) {
     if (event) event.preventDefault();
-    var url = '/property/agent-desk?standalone=1';
-    var overlay = openingOverlay();
-    var features = 'popup=yes,width=1600,height=980,resizable=yes,scrollbars=yes,toolbar=no,location=no,menubar=no,status=no';
-    var win = window.open(url, 'watchdogAgentControl', features);
-    window.setTimeout(function () {
-      if (overlay && overlay.parentNode) overlay.remove();
-      if (!win) window.location.href = url;
-      else { try { win.focus(); } catch (_) {} }
-    }, 700);
+    var host = String(location.hostname || '').toLowerCase();
+    location.href = (host === 'watchdogindex.com' || host === 'www.watchdogindex.com') ? '/agent-desk' : '/property/agent-desk';
   }
 
   function runAction(action, event) {

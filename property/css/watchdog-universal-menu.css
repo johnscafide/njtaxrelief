@@ -562,3 +562,11 @@ html body .wd-universal-nav-head .wd-universal-brand>span{
 }
 /* Rows sit at the top of the drawer instead of stretching to fill it. */
 .wd-universal-nav-links{align-content:start!important;grid-auto-rows:max-content!important}
+
+/* ======================================================================
+   Information architecture pass (2026-09-29)
+   Home lens: five destinations, then a quieter "Learn and compare" group.
+   Work lens for agents: the five Agent Desk areas. See
+   property/docs/watchdog-information-architecture.md.
+   ====================================================================== */
+.wd-universal-lens-eyebrow.wd-universal-group-learn{margin-top:14px!important}
