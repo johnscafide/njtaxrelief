@@ -202,8 +202,8 @@
       "tracking": "fingerprint_only"
     },
     "provider-release-canary": {
-      "version": 45,
-      "sha256": "2f8d35ab575f63f4676a687f57b5f822051893a065cca0fb8a9127d8d4306eab",
+      "version": 58,
+      "sha256": "525d8c974cc98bc56145640d33b6c2eb559ad77d80ba1e3e84cf02e567bc6002",
       "verify_jwt": false,
       "tracking": "source_snapshot"
     },
@@ -304,8 +304,8 @@
       "tracking": "source_snapshot"
     },
     "workbench-hydrate": {
-      "version": 79,
-      "sha256": "e229df1b56d3ae0541958fd1f18a9f6f6e2cad345896d0edb24d2d2fe9ed8713",
+      "version": 92,
+      "sha256": "ef243d976823f0033b6322b1d1c520dcf6c903e8da07ed51a93b9dcf6b861348",
       "verify_jwt": true,
       "tracking": "source_snapshot"
     },
@@ -322,8 +322,8 @@
       "tracking": "source_snapshot"
     },
     "workbench-score": {
-      "version": 38,
-      "sha256": "bdd8d57173aa1897496a9dab0fa44d127ece3afb7ccc0706746e55b53f93b60a",
+      "version": 43,
+      "sha256": "e09af481a70b35f3c30e8c5b3df6c14eadbd797d73cb5939a074907804841951",
       "verify_jwt": false,
       "tracking": "source_snapshot"
     },

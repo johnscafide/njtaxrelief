@@ -4,6 +4,8 @@ const FORM='property/data/derived-marker-formulas.json';
 const STATUS='property/data/db-governed-status.json';
 const OVERLAY='property/data/db-governed-provider-overlay.json';
 const OUT='property/data/derived-marker-governance.json';
+// Hand-maintained catalog definitions for DB-governed markers that no source pack or formula spec adds.
+const DEFS='property/data/governed-marker-definitions.json';
 const PROFESSIONS=['consumer','attorney','title','agent','lender','appraiser','contractor','investor','municipal','insurance'];
 const TRUSTED_OBSERVATION=new Set(['watchdog.watchdog_score','watchdog.score','watchdog.tax_pressure','watchdog.revaluation_risk','uniformity.score']);
 function read(p){return JSON.parse(fs.readFileSync(p,'utf8'))}
@@ -19,6 +21,22 @@ function main(){
    registry.markers.push({id,label:label(id),description:'Watchdog governed derived intelligence marker.',category:'derived',scope:'property',tier:'pro',origin:'watchdog-derived',proprietary:true,professions:[...PROFESSIONS],source_id:'watchdog-models',field:id.split('.').slice(1).join('_'),provider_status:dbStatus[id],provider_note:'Production status is governed by the database-first Data Center provider registry.'});
    ids.add(id);
  }
+ // Production coverage also governs live markers that are neither source-pack fields nor formula
+ // specifications (Chapter 123 fields, score history, newer derived models, parcel fields such as ZIP).
+ // Without a catalog entry they resolve in production but can never be selected in the Data Center or
+ // found in the Data Workbench field library. A curated definition is appended only while the DB
+ // snapshot/overlay marks the id live or partial; alias ids map to an existing catalog marker instead.
+ const defs=fs.existsSync(DEFS)?read(DEFS):{markers:[],aliases:{}};
+ const aliases=defs.aliases&&typeof defs.aliases==='object'?defs.aliases:{};
+ for(const def of Array.isArray(defs.markers)?defs.markers:[]){
+   const id=String(def&&def.id||'');
+   if(!id||ids.has(id)||Object.prototype.hasOwnProperty.call(aliases,id))continue;
+   if(!['live','partial'].includes(dbStatus[id]))continue;
+   registry.markers.push({...def,provider_status:dbStatus[id],provider_note:'Production status is governed by the database-first Data Center provider registry; runtime dependency and source checks remain authoritative.'});
+   ids.add(id);
+ }
+ const validAliases=Object.fromEntries(Object.entries(aliases).filter(([alias,target])=>!ids.has(alias)&&ids.has(String(target))));
+ if(Object.keys(validAliases).length)registry.marker_aliases=validAliases;else delete registry.marker_aliases;
  const derived=registry.markers.filter(m=>m.origin==='watchdog-derived'||m.proprietary===true);
  const triage=[];const retired=new Set();
  for(const m of derived){

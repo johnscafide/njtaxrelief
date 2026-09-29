@@ -159,7 +159,7 @@ function shell(){
 }
 
 function upsell(){
-  return `<div class="dwi-upsell"><span class="dwi-eyebrow">PRO INTELLIGENCE</span><h3>Intelligence starts with Pro</h3><p>Pro turns property facts into ranked, evidence-backed findings. Pro+ adds Closing Review, population scans and Change Intelligence.</p><a href="/property/pro#plans">See Pro plans</a></div>`;
+  return `<div class="dwi-upsell"><span class="dwi-eyebrow">PRO INTELLIGENCE</span><h3>Intelligence starts with Pro</h3><p>Pro turns property facts into ranked, evidence-backed findings. Pro+ adds Closing Review, population scans and Change Intelligence.</p><a href="/pro#plans">See Pro plans</a></div>`;
 }
 
 async function loadPropertyContexts(data){
@@ -382,7 +382,7 @@ function sendToMarketing(f){
   const why=(Array.isArray(f?.why_now)?f.why_now:[]).map(x=>x?.signal_id).filter(Boolean).slice(0,3);
   rememberAction(f,'marketing');
   sessionStorage.setItem('watchdog_marketing_handoff',JSON.stringify({source:'watchdog_intelligence',property_keys:[f.pams_pin],qualification_summary:`${label} review finding. Score ${Number(f.score||0).toFixed(1)}, confidence ${Number(f.confidence||0).toFixed(1)}%, evidence ${Number(f.evidence_coverage||0).toFixed(1)}%. Review source evidence before outreach.`,intelligence:{...findingLineage(f),why_now_signals:why},created_at:Date.now()}));
-  location.href='/property/marketing-studio?source=watchdog_intelligence';
+  location.href='/marketing-studio?source=watchdog_intelligence';
 }
 
 async function act(name,f,button){

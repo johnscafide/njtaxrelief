@@ -60,6 +60,12 @@
     }
     return null;
   }
+  function statusFor(marker) {
+    var pub = window.WatchdogDataCenterPublic;
+    if (pub && typeof pub.effectiveStatus === 'function') return pub.effectiveStatus(marker);
+    var c = coverageFor(marker && marker.id);
+    return String(c ? c.value_status : (marker && marker.provider_status) || 'planned');
+  }
   function formatDate(value) {
     if (!value) return 'Not verified';
     var d = new Date(value);
@@ -107,8 +113,7 @@
     var query = current.query.toLowerCase();
     var rows = catalog.markers.filter(function (marker) {
       var professions = markerProfessions(marker);
-      var c = coverageFor(marker.id);
-      var status = c ? String(c.value_status || 'planned') : String(marker.provider_status || 'planned');
+      var status = statusFor(marker);
       var searchable = [marker.label, marker.description, marker.id, marker.category, professions.join(' '), marker.professional_reason].join(' ').toLowerCase();
       return (!current.category || marker.category === current.category) &&
         (!current.origin || marker.origin === current.origin) &&
@@ -119,10 +124,12 @@
 
     $('dc-rows').innerHTML = rows.length ? rows.map(function (marker) {
       var c = coverageFor(marker.id) || {};
-      var status = String(c.value_status || marker.provider_status || 'planned');
+      var status = statusFor(marker);
       var origin = marker.origin === 'watchdog-derived' ? 'Watchdog derived' : 'Public source';
-      return '<tr>' +
-        '<td class="dc-check"><input type="checkbox" aria-label="Add ' + esc(marker.label) + '" data-marker="' + esc(marker.id) + '" ' + (selected.indexOf(marker.id) >= 0 ? 'checked' : '') + '></td>' +
+      // Planned and unavailable fields have no connected source, so they cannot be added to a dataset.
+      var selectable = status === 'live' || status === 'partial' || selected.indexOf(marker.id) >= 0;
+      return '<tr data-provider-status="' + esc(status) + '">' +
+        '<td class="dc-check"><input type="checkbox" aria-label="Add ' + esc(marker.label) + '" data-marker="' + esc(marker.id) + '" ' + (selected.indexOf(marker.id) >= 0 ? 'checked' : '') + (selectable ? '' : ' disabled title="Not connected to a source yet"') + '></td>' +
         '<td><div class="dc-marker-name"><button class="dc-marker-detail" type="button" data-marker-detail="' + esc(marker.id) + '" aria-label="Details for ' + esc(marker.label) + '"><i class="fas fa-circle-info"></i></button><div><strong>' + esc(marker.label) + '</strong><small>' + esc(marker.description || marker.id) + '</small></div></div></td>' +
         '<td><span class="dc-status-dot ' + esc(status) + '">' + esc(label(status)) + '</span></td>' +
         '<td>' + esc(formatDate(c.last_verified_at)) + '</td>' +
@@ -200,12 +207,12 @@
     return c.auth.getSession().then(function (response) {
       var session = response.data && response.data.session;
       if (!session) {
-        if (showGate) openModal({ title: 'Pro+ workspace', copy: 'The governed field catalog is public. Sign in with Pro+ to build against your private saved properties, export results, save views or schedule deliveries.', confirm: 'View Pro+', cancel: 'Not now' }).then(function (choice) { if (choice) location.href = '/property/pro'; });
+        if (showGate) openModal({ title: 'Pro+ workspace', copy: 'The governed field catalog is public. Sign in with Pro+ to build against your private saved properties, export results, save views or schedule deliveries.', confirm: 'View Pro+', cancel: 'Not now' }).then(function (choice) { if (choice) location.href = '/pro'; });
         return { ok: false, session: null };
       }
       return c.rpc('has_watchdog_plan', { required_plan: 'pro_plus' }).then(function (plan) {
         var ok = !plan.error && plan.data === true;
-        if (!ok && showGate) openModal({ title: 'Pro+ required', copy: 'Your account can browse and select fields here, but private Data Center execution is a Pro+ capability.', confirm: 'See Pro+', cancel: 'Keep browsing' }).then(function (choice) { if (choice) location.href = '/property/pro'; });
+        if (!ok && showGate) openModal({ title: 'Pro+ required', copy: 'Your account can browse and select fields here, but private Data Center execution is a Pro+ capability.', confirm: 'See Pro+', cancel: 'Keep browsing' }).then(function (choice) { if (choice) location.href = '/pro'; });
         return { ok: ok, session: session };
       });
     }).catch(function () { return { ok: false, session: null }; });
@@ -233,15 +240,33 @@
     'property.assessed_value': 'assessed', 'property.assessed': 'assessed', 'property.annual_tax': 'last_year_tax', 'property.market_value': 'watchdog_value',
     'watchdog.market_value_estimate': 'watchdog_value', 'watchdog.effective_tax_rate': 'effective_rate', 'tax.effective_rate': 'effective_rate'
   };
-  function value(row, id) {
-    if (row && row.__markers && Object.prototype.hasOwnProperty.call(row.__markers, id)) {
-      var resolved = row.__markers[id];
-      return resolved == null || resolved === '' ? 'Not available' : resolved;
-    }
+  function present(v) { return v !== null && v !== undefined && v !== ''; }
+  function rawValue(row, id) {
+    if (!row) return null;
+    if (row.__markers && present(row.__markers[id])) return row.__markers[id];
     var key = providers[id];
-    if (!key) return 'Not connected';
-    var raw = row ? row[key] : null;
-    return raw == null || raw === '' ? 'Not available' : raw;
+    if (key && present(row[key])) return row[key];
+    // Property-scope parcel-record markers may read the merged parcel record (explicit shared map).
+    var rt = window.WatchdogMarkerRuntime;
+    return rt ? rt.parcelValue(id, row) : null;
+  }
+  // Missing values keep the provider's reason ("No value at source", "Not yet scored", …) instead of
+  // a blank or a generic label. Structured values (annual histories) never render as [object Object].
+  function value(row, id, options) {
+    var raw = rawValue(row, id);
+    var rt = window.WatchdogMarkerRuntime;
+    if (present(raw)) {
+      if (options && options.raw && typeof raw !== 'object') return raw;
+      return rt ? rt.formatValue(id, raw, markerById(id), { full: !!(options && options.full) }) : String(raw);
+    }
+    var meta = row && row.__meta ? row.__meta[id] : null;
+    if (meta && meta.status && meta.status !== 'available') return rt ? rt.statusLabel(meta.status) : 'Not available';
+    return providers[id] || (row && row.__meta) ? 'Not available' : 'Not connected yet';
+  }
+  function missing(v) {
+    var rt = window.WatchdogMarkerRuntime;
+    if (v == null || v === '' || v === 'Not available' || v === 'Not connected' || v === 'Not connected yet') return true;
+    return !!(rt && typeof v === 'string' && ['source_checked_no_value', 'not_computed', 'dependency_missing', 'provider_missing', 'provider_error', 'not_entitled', 'redacted_by_source'].some(function (s) { return rt.statusLabel(s) === v; }));
   }
   function aggregate(rows, scope) {
     var grouped = {};
@@ -251,7 +276,7 @@
     });
     return Object.keys(grouped).sort().map(function (key) {
       var group = grouped[key];
-      var out = { address: key, town: scope === 'town' ? key : '', county: scope === 'county' ? key : (group[0] && group[0].county), pams_pin: group.length + ' saved properties', __markers: {} };
+      var out = { address: key, town: scope === 'town' ? key : '', county: scope === 'county' ? key : (group[0] && group[0].county), pams_pin: group.length + ' saved properties', __markers: {}, __meta: {} };
       ['assessed', 'last_year_tax', 'watchdog_value'].forEach(function (field) {
         var nums = group.map(function (r) { return Number(r[field]); }).filter(Number.isFinite);
         out[field] = nums.length ? nums.reduce(function (a, b) { return a + b; }, 0) : null;
@@ -279,7 +304,7 @@
     var calls = [];
     chunksOf(pins, 500).forEach(function (batch) {
       chunksOf(selected, 500).forEach(function (ids) { calls.push(invokeWorkbench('workbench-hydrate', batch, ids).then(function (data) { return { kind: 'base', data: data }; })); });
-      var derived = selected.filter(function (id) { var m = markerById(id); return m && m.origin === 'watchdog-derived'; });
+      var derived = selected.slice();
       chunksOf(derived, 250).forEach(function (ids) { if (ids.length) calls.push(invokeWorkbench('workbench-derived', batch, ids).then(function (data) { return { kind: 'derived', data: data }; })); });
     });
     return Promise.all(calls).then(function (parts) {
@@ -287,8 +312,21 @@
       parts.sort(function (a, b) { return a.kind === b.kind ? 0 : (a.kind === 'base' ? -1 : 1); });
       parts.forEach(function (part) {
         (part.data.records || []).forEach(function (record) { var pin = String(record.pams_pin); records[pin] = Object.assign(records[pin] || {}, record); });
-        Object.keys(part.data.markers || {}).forEach(function (pin) { markers[pin] = Object.assign(markers[pin] || {}, part.data.markers[pin]); });
-        Object.keys(part.data.meta || {}).forEach(function (pin) { meta[pin] = Object.assign(meta[pin] || {}, part.data.meta[pin]); });
+        Object.keys(part.data.markers || {}).forEach(function (pin) {
+          var values = part.data.markers[pin] || {};
+          markers[pin] = markers[pin] || {};
+          Object.keys(values).forEach(function (id) { if (present(values[id])) markers[pin][id] = values[id]; });
+        });
+        // A resolved value wins; a derived formula's specific state is not replaced by "no base provider".
+        Object.keys(part.data.meta || {}).forEach(function (pin) {
+          var incoming = part.data.meta[pin] || {};
+          meta[pin] = meta[pin] || {};
+          Object.keys(incoming).forEach(function (id) {
+            var next = incoming[id], prev = meta[pin][id];
+            if (!next) return;
+            if (next.status === 'available' || !prev || (prev.status !== 'available' && next.status !== 'provider_missing')) meta[pin][id] = next;
+          });
+        });
       });
       return rows.map(function (row) { var pin = String(row.pams_pin || ''); return Object.assign({}, row, records[pin] || {}, { __markers: markers[pin] || {}, __meta: meta[pin] || {} }); });
     });
@@ -316,13 +354,13 @@
     var host = $('dc-result-analytics');
     if (!host) return;
     var totalCells = rows.length * selected.length;
-    var missing = 0;
+    var missingCount = 0;
     var cards = [];
     selected.forEach(function (id) {
       var m = markerById(id) || { label: id };
-      var values = rows.map(function (row) { return value(row, id); }).filter(function (v) {
-        var absent = v == null || v === '' || v === 'Not available' || v === 'Not connected';
-        if (absent) missing += 1;
+      var values = rows.map(function (row) { return value(row, id, { raw: true }); }).filter(function (v) {
+        var absent = missing(v);
+        if (absent) missingCount += 1;
         return !absent;
       });
       if (!values.length) return;
@@ -336,8 +374,8 @@
         cards.push('<div class="dc-analysis-card"><b>' + esc(counts[top]) + '</b><strong>' + esc(m.label) + '</strong><p>Most common: ' + esc(top) + ' · ' + values.length + ' populated values</p></div>');
       }
     });
-    var coveragePct = totalCells ? Math.round(((totalCells - missing) / totalCells) * 100) : 0;
-    cards.unshift('<div class="dc-analysis-card dc-analysis-wide"><b>' + coveragePct + '%</b><strong>Dataset value coverage</strong><p>' + (totalCells - missing) + ' of ' + totalCells + ' selected cells returned a value. Missing and unsupported values remain explicit.</p></div>');
+    var coveragePct = totalCells ? Math.round(((totalCells - missingCount) / totalCells) * 100) : 0;
+    cards.unshift('<div class="dc-analysis-card dc-analysis-wide"><b>' + coveragePct + '%</b><strong>Dataset value coverage</strong><p>' + (totalCells - missingCount) + ' of ' + totalCells + ' selected cells returned a value. Missing and unsupported values remain explicit.</p></div>');
     if ($('dc-scope') && $('dc-scope').value === 'property') {
       var towns = {};
       rows.forEach(function (r) { if (r.town) towns[r.town] = (towns[r.town] || 0) + 1; });
@@ -348,10 +386,25 @@
     host.innerHTML = cards.slice(0, 10).join('');
   }
 
+  function friendlyError(error) {
+    var status = error && error.context && error.context.status;
+    if (status === 401) return 'Your session has expired. Sign in again, then rebuild the sheet.';
+    if (status === 403) return 'Your plan does not include one of the selected fields.';
+    if (status === 429) return 'Too many requests right now. Wait a minute, then try again.';
+    if (/fetch|network|Failed to send|non-2xx|timeout/i.test(String(error && error.message || ''))) return 'A data source did not respond. Try again in a moment.';
+    return String(error && error.message || 'An unexpected error occurred. Try again in a moment.');
+  }
+  function setBuilding(busy) {
+    var button = $('dc-build');
+    if (!button) return;
+    button.disabled = !!busy;
+    if (busy) button.setAttribute('aria-busy', 'true'); else button.removeAttribute('aria-busy');
+  }
   function buildSheet() {
     if (!selected.length) { toast('Select at least one field first.', 'error'); return; }
     checkProPlus(true).then(function (accessState) {
       if (!accessState.ok) return;
+      setBuilding(true);
       $('dc-result-note').textContent = 'Resolving selected fields through governed providers…';
       analytics('data_center_build_started', { scope: $('dc-scope').value, selected_count_bucket: countBucket(selected.length) });
       return client().from('saved_properties').select('pams_pin,address,town,county,block,lot,assessed,last_year_tax,effective_rate,watchdog_value').order('address')
@@ -361,17 +414,18 @@
           resultRows = scope === 'property' ? rows : aggregate(rows, scope);
           var labels = {}; catalog.markers.forEach(function (m) { labels[m.id] = m.label; });
           $('dc-results').hidden = false;
-          $('dc-results').innerHTML = '<table><thead><tr>' + selected.map(function (id) { return '<th>' + esc(labels[id] || id) + '</th>'; }).join('') + '</tr></thead><tbody>' + resultRows.map(function (row) { return '<tr>' + selected.map(function (id) { return '<td>' + esc(value(row, id)) + '</td>'; }).join('') + '</tr>'; }).join('') + '</tbody></table>';
+          $('dc-results').innerHTML = '<table><thead><tr>' + selected.map(function (id) { return '<th>' + esc(labels[id] || id) + '</th>'; }).join('') + '</tr></thead><tbody>' + resultRows.map(function (row) { return '<tr>' + selected.map(function (id) { var shown = value(row, id), meta = row.__meta && row.__meta[id], rt = window.WatchdogMarkerRuntime, tip = missing(shown) ? (meta && meta.status && rt ? rt.statusHint(meta.status) : '') : (meta && meta.status === 'available' && meta.source ? meta.source : ''); return '<td' + (missing(shown) ? ' class="dc-cell-missing"' : '') + (tip ? ' title="' + esc(tip) + '"' : '') + '>' + esc(shown) + '</td>'; }).join('') + '</tr>'; }).join('') + '</tbody></table>';
           $('dc-export').disabled = !resultRows.length;
           $('dc-result-note').textContent = resultRows.length + ' governed ' + (scope === 'property' ? 'property row' : scope + ' rollup') + (resultRows.length === 1 ? '' : 's') + ' from your saved-property workspace. Missing source values remain explicit.';
           renderAnalysis(resultRows);
           analytics('data_center_dataset_built', { scope: scope, row_count_bucket: countBucket(resultRows.length), selected_count_bucket: countBucket(selected.length), status: 'success' });
           toast('Governed dataset built.', 'success');
         }).catch(function (error) {
-          $('dc-result-note').textContent = 'Sheet could not be built: ' + error.message;
+          var reason = friendlyError(error);
+          $('dc-result-note').textContent = 'Sheet could not be built: ' + reason;
           analytics('data_center_dataset_built', { scope: $('dc-scope').value, status: 'error' });
-          toast('Dataset build failed. ' + error.message, 'error');
-        });
+          toast('Dataset build failed. ' + reason, 'error');
+        }).then(function () { setBuilding(false); });
     });
   }
 
@@ -380,7 +434,7 @@
     if (!resultRows.length) return;
     var labels = {}; catalog.markers.forEach(function (m) { labels[m.id] = m.label; });
     analytics('export_started', { tool: 'data_center', format: 'csv', result_count_bucket: countBucket(resultRows.length) });
-    var csv = [selected.map(function (id) { return csvCell(labels[id] || id); }).join(',')].concat(resultRows.map(function (row) { return selected.map(function (id) { return csvCell(value(row, id)); }).join(','); })).join('\r\n');
+    var csv = [selected.map(function (id) { return csvCell(labels[id] || id); }).join(',')].concat(resultRows.map(function (row) { return selected.map(function (id) { return csvCell(value(row, id, { raw: true, full: true })); }).join(','); })).join('\r\n');
     var url = URL.createObjectURL(new Blob([csv], { type: 'text/csv' }));
     var a = document.createElement('a'); a.href = url; a.download = 'watchdog-data-center-' + new Date().toISOString().slice(0, 10) + '.csv'; a.click(); setTimeout(function () { URL.revokeObjectURL(url); }, 1000);
     analytics('data_center_export_completed', { format: 'csv', row_count_bucket: countBucket(resultRows.length), selected_count_bucket: countBucket(selected.length), status: 'success' });
@@ -500,16 +554,23 @@
       render(); clearTimeout(searchTimer); searchTimer = setTimeout(function () { if ($('dc-search').value.trim()) analytics('data_center_searched', { interaction: 'query_present' }); }, 500);
     });
     document.addEventListener('watchdog:data-center-overview', render);
+    document.addEventListener('watchdog:data-center-retry', function () { if (!catalog) loadCatalog(); });
   }
 
+  function registry() {
+    var shared = window.WatchdogMarkerRuntime;
+    if (shared && typeof shared.registry === 'function') return shared.registry();
+    return fetch('/property/data/marker-registry.json', { cache: 'no-cache' }).then(function (response) { if (!response.ok) throw new Error('Marker registry HTTP ' + response.status); return response.json(); });
+  }
   function loadCatalog() {
-    return fetch('/property/data/marker-registry.json?v=20260829-dc-runtime', { cache: 'no-store' }).then(function (response) { if (!response.ok) throw new Error('Marker registry HTTP ' + response.status); return response.json(); }).then(function (data) {
+    if ($('dc-catalog-error')) $('dc-catalog-error').hidden = true;
+    return registry().then(function (data) {
       catalog = data;
       try { var stored = JSON.parse(localStorage.getItem('watchdog:data-center:fields') || '[]'); selected = Array.isArray(stored) ? stored : []; } catch (_error) { selected = []; }
       populateFilters(); ensureResultBuilder(); render();
       document.dispatchEvent(new CustomEvent('watchdog:data-center-ready', { detail: { total: catalog.markers.length } }));
       return data;
-    }).catch(function (error) { if ($('dc-rows')) $('dc-rows').innerHTML = '<tr><td colspan="8" class="dc-empty">Data catalog could not be loaded.</td></tr>'; console.error('[Watchdog Data Center]', error); });
+    }).catch(function (error) { if ($('dc-catalog-error')) $('dc-catalog-error').hidden = false; if ($('dc-rows')) $('dc-rows').innerHTML = '<tr><td colspan="8" class="dc-empty">Data catalog could not be loaded.</td></tr>'; console.error('[Watchdog Data Center]', error); });
   }
 
   window.WatchdogDataCenterRuntime = { render: render, selected: function () { return selected.slice(); }, catalog: function () { return catalog; }, checkProPlus: checkProPlus };

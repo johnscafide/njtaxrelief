@@ -46,6 +46,9 @@
 
   function showRecovery(reason) {
     if (ready() || recoveryShown) return;
+    // The builder already shows its own catalog error with Try again at every width.
+    var catalogNotice = document.getElementById('dc-catalog-error');
+    if (catalogNotice && !catalogNotice.hidden) return;
     var host = recoveryHost();
     if (!host) return;
 

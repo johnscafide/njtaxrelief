@@ -182,7 +182,7 @@ For current product work:
 - If a page is not yet migrated to a current shell, render it without the retired sidebar rather than reintroducing legacy navigation.
 - When creating a new route, explicitly choose its current navigation pattern before considering the page complete.
 
-Canonical signed-in app navigation labels are: Dashboard, Property Home, Town Compare, ROBUST Framework, Change Intelligence, Agent Control, Appeal Scanner, Data Workbench, Data Center, Professional Hub, and Account.
+Canonical signed-in app navigation labels are: Dashboard, Property Home, Town Compare, ROBUST Framework, Property Pulse, Agent Desk, Appeal Scanner, Data Workbench, Data Center, Plans & Pricing (the /pro plans page, formerly "Professional Hub"), and Account. The agent areas inside the Agent Desk are Today, Clients, Farm, Marketing and Research (see property/docs/watchdog-information-architecture.md).
 
 The shared `/property/js/sidemenu.js` intentionally no longer fetches `/property/partials/sidemenu.html`. Do not restore that fallback.
 

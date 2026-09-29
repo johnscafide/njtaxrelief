@@ -1,9 +1,12 @@
 {
   "schema_version": 1,
   "source": "Supabase project uvkvaxljhhngydvlrzom, data_center_provider_coverage runtime reconciliation",
-  "captured_at": "2026-08-28T20:41:41.023Z",
+  "captured_at": "2026-09-29T16:05:00.000Z",
   "definition": "Newest production provider-status overrides not yet folded into db-governed-status.json. This overlay is merged after the base snapshot by Phase 5 governance; database runtime remains authoritative.",
   "statuses": {
+    "watchdog.njplus.housing_program_record_freshness": "live",
+    "watchdog.njplus.parcel_record_volatility": "live",
+    "watchdog.njplus.pilot_revenue_concentration": "live",
     "budget.levy_base_gap": "live",
     "budget.pressure_band": "live",
     "budget.pressure_score": "live",
@@ -571,7 +574,7 @@
     "njplus.nj-dca-municipal-housing-profile.housing_production": "live",
     "njplus.nj-dca-neighborhood-trends.commute_mode_mix": "unavailable",
     "njplus.nj-dca-neighborhood-trends.real_estate_tax_median": "live",
-    "njplus.nj-dca-neighborhood-trends.walkability_score": "unavailable",
+    "njplus.nj-dca-neighborhood-trends.walkability_score": "live",
     "njplus.nj-dca-permits-raw.authorized_construction_cost": "live",
     "njplus.nj-dca-permits-raw.authorized_square_feet": "live",
     "njplus.nj-dca-permits-raw.certificate_count": "live",
@@ -859,6 +862,27 @@
     "watchdog.njplus.assessment_component_shift": "live"
   },
   "providers": {
+    "watchdog.njplus.housing_program_record_freshness": {
+      "provider_key": "workbench-derived",
+      "provider_kind": "derived_governed",
+      "calculation_key": "watchdog-derived-v24-njw294",
+      "source": "nj-dca-affordable-housing · dca-affordable-housing-municipal-v3-project-trust-merge",
+      "bulk_capable": false
+    },
+    "watchdog.njplus.parcel_record_volatility": {
+      "provider_key": "workbench-derived",
+      "provider_kind": "derived_governed",
+      "calculation_key": "watchdog-derived-v24-njw294",
+      "source": "nj-dca-modiv-longitudinal · treasury-modiv-2021-2026-v2",
+      "bulk_capable": false
+    },
+    "watchdog.njplus.pilot_revenue_concentration": {
+      "provider_key": "workbench-derived",
+      "provider_kind": "derived_governed",
+      "calculation_key": "watchdog-derived-v24-njw294",
+      "source": "nj-dca-pilot-forecast · NJ DCA PILOT Database and Viewer 2026 · nj-dca-user-friendly-budget · nj-dca-ufb-2025-2025-10-23-v1",
+      "bulk_capable": false
+    },
     "watchdog.watchdog_score": {
       "provider_key": "workbench-score",
       "provider_kind": "canonical_watchdog_score",
@@ -4542,10 +4566,10 @@
       "bulk_capable": true
     },
     "njplus.nj-dca-neighborhood-trends.walkability_score": {
-      "provider_key": "dca_housing_context_v1",
-      "provider_kind": "authoritative_reference",
+      "provider_key": "epa_walkability_v1",
+      "provider_kind": "authoritative_spatial_reference",
       "calculation_key": null,
-      "source": "nj-dca-neighborhood-trends · NJ DCA 2026 Neighborhood Trends Database",
+      "source": "epa-national-walkability-index · U.S. EPA National Walkability Index",
       "bulk_capable": false
     },
     "njplus.nj-dca-permits-raw.authorized_construction_cost": {

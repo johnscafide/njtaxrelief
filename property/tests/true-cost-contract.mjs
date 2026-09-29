@@ -110,7 +110,8 @@ assert.match(middleware, /url\.pathname==='\/true-cost'\|\|url\.pathname==='\/tr
 assert.match(middleware, /destination\.searchParams\.delete\('q'\)/, 'the page route never serves the JSON search');
 assert.match(vercel.functions['api/watchdog-true-cost.js'].includeFiles, /chapter123-ratios-2026\.json/);
 assert.match(vercel.functions['api/watchdog-true-cost.js'].includeFiles, /revaluation-reassessment-2026\.json/);
-assert.match(hub, /'true-cost':\['\/true-cost','\/api\/watchdog-true-cost','True cost card','deals'\]/);
+// The Agent Desk "Deals" section is now part of Clients ("Your deals"); tool names are title case.
+assert.match(hub, /'true-cost':\['\/true-cost','\/api\/watchdog-true-cost','True Cost Card','clients'\]/);
 assert.match(hub, /key==='true-cost'&&agentSlug\?p\+'\?agent='/);
 assert.match(desk, /data-adh-tool="true-cost"/);
 

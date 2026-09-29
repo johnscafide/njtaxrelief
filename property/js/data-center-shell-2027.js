@@ -10,7 +10,9 @@ function paint(){
     if(kicker)kicker.textContent='PRO+ · governed intelligence';
     if(title)title.textContent='Data Center';
     if(desc)desc.textContent='Build, save and export governed New Jersey property datasets from Watchdog’s source-backed marker catalog.';
-    if(actions)actions.innerHTML='<a class="wdx-btn" href="/property/dashboard"><i class="fas fa-table-columns"></i> Dashboard</a><a class="wdx-btn primary" href="/property/data-workbench"><i class="fas fa-table-list"></i> Open Data Workbench</a>';
+    // Page actions are authored in the Data Center HTML (root-level URLs) and cloned into the shared page bar.
+    var tpl=document.getElementById('dc-pagebar-actions');
+    if(actions&&tpl&&tpl.content&&!actions.querySelector('[data-dc-pagebar-action]'))actions.replaceChildren(tpl.content.cloneNode(true));
   }
   /* Active menu state comes from the shared universal drawer (data-sidebar-page). */
   if(bar){clearInterval(timer);timer=null;}

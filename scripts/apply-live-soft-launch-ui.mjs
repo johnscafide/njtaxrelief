@@ -16,7 +16,9 @@ await transform('property/js/app-shell-2027.js', [
   {
     label: 'topbar brand home link',
     from: '<a class="wdx-brand" href="/property/dashboard">',
-    to: '<a class="wdx-brand" href="/property/" aria-label="Watchdog property lookup">'
+    // The app shell now builds its links with route(), so the brand already points
+    // at the clean root property lookup; this edit is satisfied by that markup.
+    to: '<a class="wdx-brand" href="\'+route(\'/\')+\'" aria-label="Watchdog property lookup">'
   }
 ]);
 

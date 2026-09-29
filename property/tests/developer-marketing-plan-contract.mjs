@@ -23,7 +23,8 @@ assert(access.includes("sb().rpc('is_watchdog_developer')"), 'Shared access guar
 assert(access.includes("if (required === 'developer' && !isDeveloper) allowed = false;"), 'Developer access must remain fail-closed');
 
 assert(universal.includes("key:'developer-marketing'"), 'Universal developer menu must include the marketing campaign entry');
-assert(universal.includes("href:'/property/developer-marketing-plan.html'"), 'Universal developer menu must point to the developer marketing page');
+// Clean root-level URL; the page still lives at property/developer-marketing-plan.html (the clean-route adapter serves it).
+assert(universal.includes("href:route('/developer-marketing-plan')"), 'Universal developer menu must point to the developer marketing page');
 assert(universal.includes("label:'Marketing Campaign'"), 'Universal developer menu must label the marketing campaign entry');
 assert(universal.includes("if(!isDeveloper()) return '';"), 'Universal developer tools must stay hidden for non-developers');
 

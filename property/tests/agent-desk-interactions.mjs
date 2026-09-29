@@ -28,6 +28,11 @@ async function fixture(mode, width = 1440) {
     if (url.pathname === '/agent-desk') {
       let html = await fs.readFile(path.join(root, 'property/agent-desk/index.html'), 'utf8');
       html = html.replace('<body ', '<body class="wdx-modern" ');
+      // The first-visit welcome (agent-hub.js, not loaded in this isolated fixture) stands in for the
+      // first-run card until the agent hides it. This fixture covers the first-run card and dialogs
+      // that follow, so it starts with the welcome already hidden.
+      assert.ok(html.includes('<section class="adh-welcome" id="adh-welcome"'), 'Agent Desk ships the first-visit welcome');
+      html = html.replace('<section class="adh-welcome" id="adh-welcome"', '<section class="adh-welcome" id="adh-welcome" hidden');
       html = html.replace('</body>', '<script src="/property/js/agent-import-mobile-a11y.js"></script><script src="/property/js/agent-control-evidence-mobile.js"></script></body>');
       return route.fulfill({ contentType: 'text/html', body: html });
     }

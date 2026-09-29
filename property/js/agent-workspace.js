@@ -1,13 +1,21 @@
-/* Watchdog Agent Control workspace bar.
-   One definition of the Agent Control tabs (Opportunity Desk, Farm Map, Growth,
-   Advanced Farm) shared by every agent workspace page. A page declares:
+/* Watchdog agent workspace bar.
+   Agent tool pages that keep a sticky workspace bar (Farm Map, Farm Builder,
+   Farm Lists, Playbooks) show where they live in the information architecture
+   instead of a second set of tabs:
 
-     <nav class="aw27-bar" id="agent-workspace-nav" data-active="desk">
+     <- Agent Desk  /  Farm  /  Farm Map          [page actions] [fullscreen] [close]
+
+   The first crumb is the way back to the Agent Desk and the second opens the
+   tool's area on the desk. Area labels are the five Agent Desk areas the
+   Watchdog menu uses (AGENT_AREAS in watchdog-universal-menu.js); tool names are
+   the canonical names on the desk cards. A page declares:
+
+     <nav class="aw27-bar" id="agent-workspace-nav" data-active="farm-map">
        <div class="aw27-actions">…page-specific buttons…</div>
      </nav>
 
-   and this runtime adds the tabs (with the active one marked) plus the shared
-   fullscreen / close window controls. Change TABS here and every page follows. */
+   and this runtime adds the breadcrumb plus the shared fullscreen / close
+   window controls. Styles: /property/css/watchdog-page-head.css. */
 (function(){
   'use strict';
   if(window.WatchdogAgentWorkspace)return;
@@ -16,20 +24,32 @@
   var clean=host==='watchdogindex.com'||host==='www.watchdogindex.com';
   function route(path){return clean?path:'/property'+path;}
 
-  var TABS=[
-    {key:'desk',href:'/agent-desk',icon:'fa-briefcase',label:'Agent Desk'},
-    {key:'farm-map',href:'/farm-map',icon:'fa-map',label:'Farm Map'},
-    {key:'growth',href:'/growth/',icon:'fa-arrow-trend-up',label:'Growth'},
-    {key:'farm-builder',href:'/farm-builder',icon:'fa-sliders',label:'Advanced Farm'}
-  ];
+  /* The five Agent Desk areas (desk section key -> menu label). */
+  var AREAS={home:'Agent Desk',clients:'Clients',farm:'Farm',marketing:'Marketing',research:'Research'};
+  /* Workspace-bar pages: data-active key -> area and canonical tool name. */
+  var PAGES={
+    'desk':{area:'home',label:''},
+    'farm-map':{area:'farm',label:'Farm Map'},
+    'farm-builder':{area:'farm',label:'Farm Builder'},
+    'market-list':{area:'farm',label:'Farm Lists'},
+    'growth':{area:'marketing',label:'Playbooks'}
+  };
 
   function esc(v){return String(v==null?'':v).replace(/[&<>"']/g,function(c){return{'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c];});}
 
-  function tabsHtml(active){
-    return '<div class="aw27-tabs" role="list">'+TABS.map(function(t){
-      var on=t.key===active;
-      return '<a role="listitem" class="aw27-tab'+(on?' on':'')+'"'+(on?' aria-current="page"':'')+' href="'+esc(route(t.href))+'" data-aw27-tab="'+t.key+'" title="'+esc(t.label)+'"><i class="fas '+t.icon+'" aria-hidden="true"></i><span>'+esc(t.label)+'</span></a>';
-    }).join('')+'</div>';
+  // content-architecture: dynamic — navigation chrome bound from the page's data-active key to its IA area and canonical tool name; no page copy lives here.
+  function crumbsHtml(active){
+    var page=PAGES[active]||{area:'home',label:''};
+    var sep='<span class="wd-crumbs-sep" aria-hidden="true">/</span>';
+    var html='<a class="wd-crumbs-desk" href="'+esc(route('/agent-desk'))+'"><i class="fas fa-arrow-left" aria-hidden="true"></i><span>Agent Desk</span></a>';
+    if(page.area!=='home')html+=sep+'<a href="'+esc(route('/agent-desk')+'#'+page.area)+'">'+esc(AREAS[page.area])+'</a>';
+    if(page.label)html+=sep+'<span class="wd-crumbs-here" aria-current="page">'+esc(page.label)+'</span>';
+    return '<nav class="wd-crumbs" aria-label="Breadcrumb">'+html+'</nav>';
+  }
+  function ensureCss(){
+    var href='/property/css/watchdog-page-head.css';
+    if(document.querySelector('link[href^="'+href+'"]'))return;
+    var l=document.createElement('link');l.rel='stylesheet';l.href=href;(document.head||document.documentElement).appendChild(l);
   }
 
   function windowControls(){
@@ -41,14 +61,15 @@
     var bar=document.getElementById('agent-workspace-nav');
     if(!bar||bar.dataset.aw27Ready==='1')return;
     bar.dataset.aw27Ready='1';
+    ensureCss();
     var actions=bar.querySelector('.aw27-actions');
     if(!actions){actions=document.createElement('div');actions.className='aw27-actions';bar.appendChild(actions);}
-    bar.insertAdjacentHTML('afterbegin',tabsHtml(bar.dataset.active||''));
+    /* The breadcrumb inside is the landmark; the bar itself is just a toolbar row. */
+    bar.setAttribute('role','none');bar.removeAttribute('aria-label');
+    bar.insertAdjacentHTML('afterbegin',crumbsHtml(bar.dataset.active||''));
     actions.insertAdjacentHTML('beforeend',windowControls());
     /* In-page links into other Agent Control workspaces follow the same host-aware routing. */
     document.querySelectorAll('a[data-aw27-route]').forEach(function(a){a.setAttribute('href',route(a.dataset.aw27Route));});
-    var current=bar.querySelector('.aw27-tab.on');
-    if(current&&current.scrollIntoView&&bar.scrollWidth>bar.clientWidth){try{current.scrollIntoView({block:'nearest',inline:'center'});}catch(_){}}
   }
 
   document.addEventListener('click',function(e){
@@ -70,7 +91,7 @@
     document.querySelectorAll('[data-aw27="fullscreen"] i').forEach(function(i){i.className='fas '+(document.fullscreenElement?'fa-compress':'fa-expand');});
   });
 
-  window.WatchdogAgentWorkspace={tabs:TABS,route:route,render:render};
+  window.WatchdogAgentWorkspace={areas:AREAS,pages:PAGES,route:route,render:render};
   render();
   if(document.readyState==='loading')document.addEventListener('DOMContentLoaded',render,{once:true});
 })();

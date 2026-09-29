@@ -10,7 +10,12 @@
     if(kicker)kicker.textContent='Professional data';
     if(title)title.textContent='Data Workbench';
     if(desc)desc.textContent='Build governed property datasets, choose fields, filter records and prepare exports from one professional workspace.';
-    if(primary){primary.href='/property/data-center';primary.innerHTML='<i class="fas fa-database"></i> Field Catalog';}
+    if(primary){primary.href='/data-center';primary.innerHTML='<i class="fas fa-database"></i> Field Catalog';}
+    // Page-bar links from the shared shell point at /property/ pages; public page URLs are root-level.
+    bar.querySelectorAll('a[href^="/property/"]').forEach(function(a){
+      var href=a.getAttribute('href');
+      if(!/^\/property\/(?:js|css|data|assets)\//.test(href))a.setAttribute('href',href.slice(9)||'/');
+    });
     return true;
   }
   if(apply())return;

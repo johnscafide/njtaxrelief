@@ -32,6 +32,8 @@
       client = window.NJPTRSupabaseRuntime.createClient();
       return client;
     }
+    // The auth library comes from a CDN; when it is blocked or offline there is no client to return.
+    if (!window.supabase || typeof window.supabase.createClient !== 'function') return null;
     client = window.supabase.createClient(FALLBACK_URL, FALLBACK_KEY, { auth: {
       persistSession: true, autoRefreshToken: true, detectSessionInUrl: true,
       flowType: 'pkce', storageKey: previewHost ? STAGING_STORAGE : 'sb-uvkvaxljhhngydvlrzom-auth-token'
