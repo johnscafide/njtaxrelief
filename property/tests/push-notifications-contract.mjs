@@ -6,10 +6,12 @@ import { readFileSync } from 'node:fs';
 
 const read = (p) => readFileSync(new URL(`../../${p}`, import.meta.url), 'utf8');
 const sql = read('supabase/migrations/20260930090000_push_device_registrations.sql');
+const planSql = read('supabase/migrations/20260818214500_watchdog_standard_entitlement_access_fix.sql');
 const register = read('supabase/functions/push-device-register/index.ts');
 const sender = read('supabase/functions/push-sender/index.ts');
 const config = read('supabase/config.toml');
 const pkg = JSON.parse(read('package.json'));
+const between = (text, start, end) => { const a = text.indexOf(start); assert.ok(a >= 0, `missing ${start}`); const b = text.indexOf(end, a); assert.ok(b > a, `missing ${end}`); return text.slice(a, b); };
 
 // --- Migration: tokens are service-role only, push starts switched off. ---
 assert.match(sql, /create table if not exists public\.push_device_registrations/);
@@ -22,22 +24,28 @@ assert.match(sql, /grant select, insert, update, delete on public\.push_device_r
 assert.match(sql, /create table if not exists public\.push_settings[\s\S]*?enabled boolean not null default false/, 'kill switch defaults to off');
 assert.match(sql, /insert into public\.push_settings \(singleton, enabled\) values \(true, false\) on conflict do nothing;/);
 assert.match(sql, /revoke all on public\.push_settings from anon, authenticated;/);
+assert.match(sql, /revoke all on private\.push_runtime from public, anon, authenticated;/, 'worker runtime is not readable by browser roles');
 
 for (const t of ['push_outbox']) {
   assert.match(sql, new RegExp(`alter table public\\.${t} enable row level security;`));
   assert.match(sql, new RegExp(`revoke all on public\\.${t} from anon, authenticated;`));
 }
 
-// Token-free device list is the only thing authenticated may execute.
-const devicesFn = sql.slice(sql.indexOf('create or replace function public.get_my_push_devices()'), sql.indexOf('grant execute on function public.get_my_push_devices() to authenticated;'));
-assert.ok(devicesFn.length > 0, 'get_my_push_devices exists and is granted to authenticated');
+// Token-free device list is the only thing authenticated may execute, and it
+// returns exactly the register function's SAFE_COLUMNS.
+const devicesFn = between(sql, 'create function public.get_my_push_devices()', 'grant execute on function public.get_my_push_devices() to authenticated;');
 assert.doesNotMatch(devicesFn, /\btoken\b/, 'get_my_push_devices never selects the token column');
 assert.match(devicesFn, /where r\.user_id = auth\.uid\(\)/);
+assert.match(sql, /drop function if exists public\.get_my_push_devices\(\);/, 'result columns can change between source revisions');
+const safeColumns = register.match(/const SAFE_COLUMNS = "([^"]+)"/)[1].split(',');
+const rpcColumns = [...devicesFn.match(/returns table \(([\s\S]*?)\)\s*language sql/)[1].matchAll(/([a-z_]+) (?:uuid|text|boolean|smallint|timestamptz)/g)].map((m) => m[1]);
+assert.deepEqual(rpcColumns, safeColumns, 'get_my_push_devices() and SAFE_COLUMNS must stay identical');
+assert.ok(!safeColumns.includes('token') && !safeColumns.includes('token_hash'), 'responses never include the token');
 const authenticatedGrants = [...sql.matchAll(/grant execute on function public\.([a-z_]+)\([^)]*\) to authenticated/g)].map((m) => m[1]);
 assert.deepEqual(authenticatedGrants, ['get_my_push_devices'], 'only get_my_push_devices is executable by authenticated');
 
 // Worker RPCs are service-role only, same shape as property alerts.
-for (const fn of ['verify_push_worker(text)', 'claim_push_outbox(integer)', 'complete_push_outbox(bigint,boolean,text,uuid)', 'defer_push_outbox(bigint,timestamptz)', 'invoke_push_sender()']) {
+for (const fn of ['verify_push_worker(text)', 'claim_push_outbox(integer)', 'complete_push_outbox(bigint,boolean,text,uuid)', 'release_push_outbox(bigint,timestamptz,text)', 'defer_push_outbox(bigint,timestamptz)', 'invoke_push_sender()']) {
   assert.ok(sql.includes(`'${fn}'`), `${fn} is in the revoke/grant loop`);
 }
 assert.match(sql, /revoke all on function public\.%s from public, anon, authenticated/);
@@ -45,15 +53,41 @@ assert.match(sql, /grant execute on function public\.%s to service_role/);
 assert.match(sql, /create table if not exists private\.push_runtime/);
 assert.match(sql, /x-push-worker-token/);
 
-// Hook: guarded by the kill switch, alerts_enabled, pause, plan and quiet hours.
-const hook = sql.slice(sql.indexOf('create or replace function private.push_enqueue_property_event()'), sql.indexOf('create trigger trg_push_property_event'));
-assert.match(hook, /select enabled from public\.push_settings where singleton/);
+// Claim: fan-out locks, marks and expands parents in one statement.
+const claim = between(sql, 'create or replace function public.claim_push_outbox', 'create or replace function public.complete_push_outbox');
+assert.match(claim, /with parents as \(\s*select o\.id from public\.push_outbox o\s*where o\.status = 'queued' and o\.registration_id is null[\s\S]*?for update skip locked\s*\),\s*done as \(\s*update public\.push_outbox o\s*set status = 'skipped', error = 'fanned_out'\s*from parents[\s\S]*?returning[\s\S]*?\)\s*insert into public\.push_outbox/, 'fan-out is a single locked statement');
+assert.equal((claim.match(/registration_id is null/g) || []).length, 1, 'no second unlocked statement touches parent rows');
+assert.match(claim, /o\.next_attempt_at <= now\(\)/, 'claim honours the backoff / quiet-hours time');
+
+// Complete: failed sends back off; invalid tokens disable the device.
+const complete = between(sql, 'create or replace function public.complete_push_outbox', 'create or replace function public.release_push_outbox');
+assert.match(complete, /next_attempt_at = case when p_sent then next_attempt_at\s*else now\(\) \+ make_interval\(mins => least\(60, 2 \^ attempts\)::integer\) end/, 'retry backoff 2^attempts minutes capped at 60');
+assert.match(complete, /disabled_reason = coalesce\(disabled_reason, 'invalid_token'\)/);
+const releaseFn = between(sql, 'create or replace function public.release_push_outbox', 'create or replace function public.defer_push_outbox');
+assert.match(releaseFn, /attempts = greatest\(attempts - 1, 0\)/, 'release does not count an attempt');
+assert.match(sql, /select public\.release_push_outbox\(p_id, p_until, 'deferred_quiet_hours'\);/);
+
+// Plan helper copies has_watchdog_plan's tier maps exactly.
+const tierMaps = (text) => [...text.matchAll(/case\s+[^\n]+?\n((?:\s*when\s+'[a-z_+]+'\s+then\s+\d+\s*\n)+)\s*else\s+(\d+)\s*\n\s*end/g)]
+  .map((m) => m[1].trim().split(/\n/).map((l) => l.trim()).join(' ') + ` else ${m[2]}`);
+const sourceMaps = tierMaps(planSql), pushMaps = tierMaps(between(sql, 'create or replace function private.push_plan_allows', 'revoke all on function private.push_plan_allows'));
+assert.equal(sourceMaps.length, 2, 'has_watchdog_plan has two tier maps');
+assert.deepEqual(pushMaps, sourceMaps, 'private.push_plan_allows tier maps must match has_watchdog_plan (20260818214500)');
+assert.match(sql, /20260818214500_watchdog_standard_entitlement_access_fix\.sql/, 'comment points at the source migration');
+
+// Hook: guarded by the kill switch, an early device check, pause, plan and quiet hours.
+const hook = between(sql, 'create or replace function private.push_enqueue_property_event()', 'create trigger trg_push_property_event');
+const killSwitchAt = hook.indexOf('select enabled from public.push_settings where singleton');
+const deviceCheckAt = hook.indexOf('if not exists (\n    select 1 from public.push_device_registrations d');
+const pauseAt = hook.indexOf('property_alert_preferences p');
+const planAt = hook.indexOf('private.push_plan_allows(new.user_id, new.minimum_plan)');
+assert.ok(killSwitchAt >= 0 && deviceCheckAt > killSwitchAt && pauseAt > deviceCheckAt && planAt > pauseAt, 'order: kill switch, cheap device exists, pause, plan');
 assert.match(hook, /d\.disabled_at is null and d\.alerts_enabled/);
 assert.match(hook, /property_alert_preferences p[\s\S]*p\.paused/);
-assert.match(hook, /private\.push_plan_allows\(new\.user_id, new\.minimum_plan\)/);
+assert.match(hook, /order by d\.last_seen_at desc\s*limit 20/, 'defensive cap on devices per event');
 assert.match(hook, /private\.push_in_quiet_hours\(r\.quiet_hours_start, r\.quiet_hours_end, r\.timezone\)/);
 assert.match(hook, /private\.push_quiet_hours_end\(r\.quiet_hours_end, r\.timezone\)/);
-assert.match(hook, /return new;\s*exception when others then/, 'a push problem never blocks the producer insert');
+assert.match(hook, /exception when others then[\s\S]*raise warning 'push_enqueue_property_event: %', sqlerrm;\s*return new;/, 'a push problem is logged and never blocks the producer insert');
 assert.match(sql, /create trigger trg_push_property_event\s+after insert on public\.property_update_events/);
 // The payload is built from the reviewed columns only.
 const payload = hook.slice(hook.indexOf('v_data := jsonb_strip_nulls('), hook.indexOf('));', hook.indexOf('v_data := jsonb_strip_nulls(')));
@@ -87,12 +121,13 @@ assert.match(register, /push\.device\.registered/);
 assert.match(register, /push\.device\.unregistered/);
 assert.match(register, /integration_audit_log/);
 assert.match(register, /action === "register" \? 201 : 200/);
-const safeColumns = register.match(/const SAFE_COLUMNS = "([^"]+)"/)[1].split(',');
-assert.ok(!safeColumns.includes('token') && !safeColumns.includes('token_hash'), 'responses never include the token');
+assert.match(register, /const MAX_ACTIVE_DEVICES = 10;/, 'active devices per member are capped');
+assert.match(register, /\.slice\(MAX_ACTIVE_DEVICES\)[\s\S]*disabled_reason: "replaced"/, 'overflow devices are retired, not rejected');
+assert.match(register, /order\("last_seen_at", \{ ascending: false \}\)/, 'the least recently seen device is the one retired');
 assert.doesNotMatch(register, /select\("\*"\)/, 'no wildcard select that could leak the token');
 assert.doesNotMatch(register, /get_my_entitlement|has_watchdog_plan|watchdog_effective_plan/, 'no plan gate on registration');
 
-// --- push-sender: worker token, configured gate, FCM v1, quiet hours, invalid tokens. ---
+// --- push-sender: worker token, configured gate, FCM v1, quiet hours, invalid tokens, outages. ---
 assert.match(sender, /x-push-worker-token/);
 assert.match(sender, /rpc\("verify_push_worker"/);
 assert.match(sender, /FCM_PROJECT_ID/);
@@ -104,12 +139,20 @@ assert.match(sender, /urn:ietf:params:oauth:grant-type:jwt-bearer/);
 assert.match(sender, /fcm\.googleapis\.com\/v1\/projects\/\$\{encodeURIComponent\(projectId\)\}\/messages:send/);
 assert.match(sender, /rpc\("claim_push_outbox"/);
 assert.match(sender, /rpc\("defer_push_outbox"/, 'quiet hours requeue instead of drop');
+assert.match(sender, /rpc\("release_push_outbox"/, 'outages release rows without an attempt');
+assert.match(sender, /catch \(error\) \{[\s\S]*?const released = await release\(rows, OAUTH_RELEASE_MS/, 'OAuth failure releases every claimed row and stops');
 assert.match(sender, /p_invalid_registration: row\.registration_id/, 'unregistered tokens disable the registration');
-assert.match(sender, /response\.status === 404 \|\| \/UNREGISTERED\/\.test\(code\)/);
+assert.match(sender, /httpStatus === 404 \|\| e\.codes\.includes\("UNREGISTERED"\)/);
+assert.match(sender, /httpStatus === 403 && \(e\.codes\.includes\("SENDER_ID_MISMATCH"\)/, 'sender-id mismatch is a dead token');
+assert.match(sender, /httpStatus === 400 && \(e\.codes\.includes\("INVALID_ARGUMENT"\)[^\n]*\/registration token\/i/, 'invalid-argument naming the token is a dead token');
+assert.match(sender, /httpStatus === 429 \|\| httpStatus >= 500/, '429 and 5xx are outages');
+for (const code of ['QUOTA_EXCEEDED', 'UNAVAILABLE', 'INTERNAL']) assert.ok(sender.includes(`"${code}"`), `${code} is treated as an outage`);
+assert.match(sender, /headers\.get\("retry-after"\)/, 'Retry-After is honoured');
+assert.match(sender, /if \(isOutage\(response\.status, err\)\) \{[\s\S]*?break;/, 'an outage stops the row loop');
 assert.match(sender, /priority = severity === "action" \? "HIGH" : "NORMAL"/);
 assert.match(sender, /collapse_key: collapse/);
 for (const key of ['route:', 'pin,', 'channel:', 'actions:']) assert.ok(sender.includes(key), `data map carries ${key.replace(/[:,]/, '')}`);
-assert.match(sender, /push_configured: true/);
+assert.match(sender, /released, push_configured: true/);
 assert.doesNotMatch(sender, /njpropertytaxrelief/i);
 
 // --- Config and scripts. ---

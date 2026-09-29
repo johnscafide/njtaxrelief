@@ -14,18 +14,39 @@ deployed, applied, or switched on by merging them.
     tokens live here and are service-role only; browser roles have no grants.
   - `public.get_my_push_devices()`: the only user-callable read, token-free.
   - `public.push_outbox` with `claim_push_outbox`, `complete_push_outbox`,
-    `defer_push_outbox`, `invoke_push_sender`, `verify_push_worker`, and the
-    `private.push_runtime` worker URL/token singleton.
+    `release_push_outbox`, `defer_push_outbox`, `invoke_push_sender`,
+    `verify_push_worker`, and the `private.push_runtime` worker URL/token
+    singleton.
   - `trg_push_property_event` on `property_update_events`: queues one push per
-    active device with alerts on, honoring the per-property pause, the event's
-    `minimum_plan`, and the device's quiet hours (deferred, not dropped).
+    active device with alerts on (at most 20 devices per event), honoring the
+    per-property pause, the event's `minimum_plan`, and the device's quiet
+    hours (deferred, not dropped). A failure inside the trigger is logged as a
+    warning and never blocks the producer's insert.
   - pg_cron job `watchdog-push-sender` every minute; it returns at once when
     push is off or nothing is due.
 - `supabase/functions/push-device-register/index.ts` (`verify_jwt = true`):
   actions `register`, `heartbeat`, `update`, `unregister`, `list`. Responses
-  never include the token.
+  never include the token. A member keeps at most 10 active devices; when an
+  eleventh registers, the least recently seen device is retired with
+  `disabled_reason = 'replaced'` (nobody is locked out, the row count cannot
+  grow without bound).
 - `supabase/functions/push-sender/index.ts` (`verify_jwt = false`, worker
   token checked inside): claims outbox rows and sends FCM HTTP v1 messages.
+
+## Retries and backoff
+
+- A row gets 5 attempts. After a failed send it waits 2, 4, 8 then 16 minutes
+  (capped at 60) before it is claimed again, so a short outage cannot exhaust
+  the budget while the cron runs every minute.
+- An outage is not charged to rows. If the Google OAuth token cannot be minted,
+  or FCM answers 429 / 5xx / `QUOTA_EXCEEDED` / `UNAVAILABLE` / `INTERNAL`, the
+  run stops and every unsent claimed row is released without an attempt
+  (`release_push_outbox`), due again after `Retry-After` (1 to 60 minutes;
+  3 minutes for OAuth failures).
+- A token FCM reports as permanently unusable (`UNREGISTERED` / 404,
+  `SENDER_ID_MISMATCH`, an `INVALID_ARGUMENT` that names the registration
+  token) disables the device (`disabled_reason = 'invalid_token'`) and the row
+  is skipped, not retried.
 - `property/tests/push-notifications-contract.mjs`
   (`npm run test:push-notifications`): repository-side invariants.
 

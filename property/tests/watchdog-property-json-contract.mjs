@@ -27,7 +27,11 @@ function backend(state) {
     if (u.pathname === '/rest/v1/usage_events') return ok(null);
     if (u.pathname === '/rest/v1/rpc/search_parcels') return ok(state.matches || []);
     if (u.pathname === '/rest/v1/property_lookups') return ok(state.coords || []);
-    if (u.pathname === '/functions/v1/workbench-score') return ok(state.scored || { rows: [] });
+    if (u.pathname === '/functions/v1/workbench-score') {
+      // scoreStatus simulates the scorer failing (429 from its shared-IP rate limit, 500, ...).
+      if (state.scoreStatus) return { ok: false, status: state.scoreStatus, json: async () => ({ error: 'rate limited' }) };
+      return ok(state.scored || { rows: [] });
+    }
     if (u.pathname === '/rest/v1/rpc/get_public_property_page') {
       if (state.rpcDown) return { ok: false, status: 500, json: async () => ({}) };
       return ok(state.row || null);
@@ -79,6 +83,11 @@ assert.equal(out.calls.length, 0, 'no backend call without a token');
 out = await call({ method: 'GET', headers: auth, query: { pin: '0904_9_20' } }, { ...signedIn, user: null });
 assert.equal(out.res.statusCode, 401, 'token does not resolve to a user');
 assert.deepEqual(out.body, { error: 'Sign in again.' });
+assert.ok(!out.calls.some((c) => c.path !== '/auth/v1/user'), 'a rejected token reaches nothing but the session check');
+out = await call({ method: 'GET', headers: { authorization: 'Bearer ' + 'a'.repeat(4001) }, query: { pin: '0904_9_20' } }, signedIn);
+assert.equal(out.res.statusCode, 401, 'an over-long token is refused');
+assert.deepEqual(out.body, { error: 'Sign in again.' });
+assert.ok(!out.calls.some((c) => c.path === '/auth/v1/user'), 'without asking the auth service');
 out = await call({ method: 'GET', headers: auth, query: { pin: "0904'; drop" } }, signedIn);
 assert.equal(out.res.statusCode, 400);
 assert.deepEqual(out.body, { error: 'Unknown property.' });
@@ -93,13 +102,34 @@ out = await call({ method: 'GET', headers: auth, query: { pin: '0904_9_20' } }, 
 assert.equal(out.res.statusCode, 503);
 assert.equal(out.res.headers['retry-after'], '60');
 assert.equal(out.res.headers['cache-control'], 'no-store');
+assert.equal(out.res.headers.vary, 'Authorization');
 assert.ok(out.body.error);
+assert.ok(out.calls.some((c) => c.method === 'POST' && c.path === '/rest/v1/usage_events'), 'a miss the backend caused is still a counted lookup');
+// The usage write itself failing is a 503 too: never a free lookup.
+const usageDown = { ...signedIn };
+out = await (async () => {
+  const b = backend(usageDown);
+  const inner = b.fetchImpl;
+  b.fetchImpl = async (url, init) => {
+    if (new URL(url).pathname === '/rest/v1/usage_events' && (init && init.method) === 'POST') { b.calls.push({ method: 'POST', path: '/rest/v1/usage_events' }); return { ok: false, status: 500, text: async () => '', headers: { get: () => null } }; }
+    return inner(url, init);
+  };
+  const res = { headers: {}, statusCode: 0, body: undefined, setHeader(k, v) { this.headers[k.toLowerCase()] = v; }, end(x) { this.body = x; } };
+  const real = global.fetch;
+  global.fetch = b.fetchImpl;
+  try { await api({ headers: auth, query: { pin: '0904_9_20' }, method: 'GET' }, res); } finally { global.fetch = real; }
+  return { res, body: JSON.parse(res.body), calls: b.calls };
+})();
+assert.equal(out.res.statusCode, 503, 'usage write failed: the lookup is refused');
+assert.ok(out.calls.some((c) => c.path === '/rest/v1/rpc/get_public_property_page'), 'the lookup ran alongside the write');
 
 // Success by pin.
 out = await call({ method: 'GET', headers: auth, query: { pin: '0904_9_20' } }, signedIn);
 assert.equal(out.res.statusCode, 200);
 assert.equal(out.res.headers['cache-control'], 'private, max-age=300');
 assert.equal(out.res.headers['content-type'], 'application/json; charset=utf-8');
+assert.equal(out.res.headers.vary, 'Authorization', 'a per-user answer is never shared across tokens');
+assert.equal(out.res.headers['x-robots-tag'], 'noindex, nofollow');
 assert.deepEqual(Object.keys(out.body), ['ok', 'property', 'photo_url', 'derived']);
 const p = out.body.property, d = out.body.derived;
 assert.deepEqual(Object.keys(p), ['pams_pin', 'address', 'town', 'county', 'block', 'lot', 'qualifier', 'prop_class', 'year_built', 'acres', 'dwelling_units', 'building_desc',
@@ -156,6 +186,8 @@ const rpc = out.calls.find((c) => c.path === '/rest/v1/rpc/get_public_property_p
 assert.deepEqual(rpc.body, { p_pin: '0904_9_20' });
 const useIndex = out.calls.indexOf(use), rpcIndex = out.calls.indexOf(rpc);
 assert.ok(useIndex < rpcIndex, 'usage is written before the lookup');
+const planIndex = out.calls.findIndex((c) => c.path === '/rest/v1/profiles'), countIndex = out.calls.indexOf(count);
+assert.ok(planIndex >= 0 && countIndex >= 0 && Math.abs(planIndex - countIndex) <= 2 && Math.max(planIndex, countIndex) < useIndex, 'the plan read and the count are issued together, before the write');
 // WATCHDOG_PROPERTY_SAMPLE=1 prints the fixture's success body (for docs and the app's test fixtures).
 if (process.env.WATCHDOG_PROPERTY_SAMPLE) console.log(JSON.stringify(out.body, null, 2));
 

@@ -8,10 +8,17 @@
 // derived numbers the page and the true-cost/checkup cards already compute,
 // so the app never re-implements them. There is no plan gate: the HTML page
 // serves this data to anyone. Every call is tied to the signed-in account and
-// capped per UTC day, so the route cannot be used as a bulk feed.
+// capped per UTC day (a best-effort cap: the count and the write are two
+// calls, so requests arriving together can overshoot by a few), so the route
+// cannot be used as a bulk feed.
 // Owner names and mailing addresses are never stored. The owner mailing ZIP
 // (property_lookups.zip) and the private photo storage key are never returned;
 // the response is built field by field, never by spreading the database row.
+//
+// Time budget: the function has 15 s (vercel.json). Backend calls that do
+// not depend on each other run together, and the two usage_events calls get
+// a shorter timeout, so a slow table cannot push the whole request past the
+// budget into a non-JSON platform timeout instead of the documented 503.
 
 const crypto = require('crypto');
 const page = require('./watchdog-property-page');
@@ -23,6 +30,9 @@ const H = page.helpers;
 const PIN = /^\d{4}_[0-9A-Za-z.&_-]{1,70}$/;
 const METRIC = 'app_property_lookup';
 const DAILY_LIMIT = 2000;
+const CLIENT = 'watchdog-property/1.0';
+const USAGE_TIMEOUT_MS = 4000;
+const OK_CACHE = 'private, max-age=300';
 const enc = encodeURIComponent;
 const num = ext.toNumber;
 
@@ -45,25 +55,27 @@ function utcDay(now) {
 
 // Same meter as the browser extension (usage_events), under its own metric
 // key so app lookups never eat into the extension allowance. One row per call,
-// written before the lookup so misses count too.
+// started before the lookup so misses count too.
 async function usedToday(b, userId, since) {
-  const used = await ext.rest(b, `usage_events?select=id&user_id=eq.${enc(userId)}&metric_key=eq.${METRIC}&occurred_at=gte.${enc(since)}`, { headers: { Prefer: 'count=exact', Range: '0-0' } });
+  const used = await ext.rest(b, `usage_events?select=id&user_id=eq.${enc(userId)}&metric_key=eq.${METRIC}&occurred_at=gte.${enc(since)}`, { headers: { Prefer: 'count=exact', Range: '0-0' }, timeoutMs: USAGE_TIMEOUT_MS });
   return Number(String(used.headers.get('content-range') || '').split('/')[1]) || 0;
 }
 
 function recordUse(b, userId, how) {
   return ext.rest(b, 'usage_events', {
-    method: 'POST', headers: { Prefer: 'return=minimal' },
+    method: 'POST', headers: { Prefer: 'return=minimal' }, timeoutMs: USAGE_TIMEOUT_MS,
     body: JSON.stringify({ user_id: userId, metric_key: METRIC, quantity: 1, request_key: crypto.randomUUID(), metadata: { lookup: how } })
   });
 }
 
 // One score shape for the app: the cached ROBUST row when there is one,
 // otherwise the fresh public score. Components become bare 0-100 integers
-// (or null) whatever shape the cache stored them in.
+// (or null) whatever shape the cache stored them in. A fresh result of
+// `{ unavailable: true }` (the scorer could not answer) gives null, never a
+// fake zero; the caller marks that answer uncacheable.
 function scoreBlock(row, fresh) {
   const cached = row.score && row.score.score != null ? row.score : null;
-  const s = cached || fresh;
+  const s = cached || (fresh && !fresh.unavailable ? fresh : null);
   if (!s || s.score == null) return null;
   const parts = s.components && typeof s.components === 'object' ? s.components : {};
   const components = {};
@@ -156,35 +168,60 @@ async function lookup(req, res, query) {
   const parsed = pinQuery ? null : ext.parseAddress(address);
   if (!pinQuery && !parsed) return send(req, res, 400, { error: 'Not a New Jersey street address.' });
 
-  // Who is asking. Same session check as the extension key API; the plan is
-  // read only for the agent link slug and the developer exemption from the cap.
+  // Who is asking. Same session check as the extension key API.
   const b = ext.backend();
   const user = await ext.sessionUser(b, req);
   if (!user) return send(req, res, 401, { error: 'Sign in again.' });
-  const access = await ext.agentAccess(b, user.id);
+
+  // HEAD gets the headers a successful GET would send once the token and the
+  // input check out. Nothing is looked up, counted or scored, so a probe
+  // costs no quota and no backend work.
+  if (req.method === 'HEAD') return send(req, res, 200, null, OK_CACHE);
+
+  // The plan (read only for the agent link slug and the developer exemption
+  // from the cap) and today's count do not depend on each other.
   const day = utcDay(new Date());
-  if (!access.developer && (await usedToday(b, user.id, day.since)) >= DAILY_LIMIT) {
+  const [access, used] = await Promise.all([ext.agentAccess(b, user.id), usedToday(b, user.id, day.since)]);
+  if (!access.developer && used >= DAILY_LIMIT) {
     res.setHeader('Retry-After', String(day.resetIn));
     return send(req, res, 429, { error: 'Daily lookup limit reached. It resets at midnight UTC.' });
   }
-  await recordUse(b, user.id, pinQuery ? 'pin' : 'address');
 
-  // Which property. An address goes through the extension's matcher, with
-  // the listing's map location (when the app has one) breaking ties.
+  // The usage row is started before the lookup (so a miss counts too) and
+  // must have landed before any answer goes out; a failed write is a 503
+  // like any other backend failure, never a free lookup. The no-op catch
+  // only keeps Node from treating an early rejection as unhandled while the
+  // lookup is still running; the await below still sees the failure.
+  const counted = recordUse(b, user.id, pinQuery ? 'pin' : 'address');
+  counted.catch(() => {});
+  let out;
+  try {
+    out = await answer(b, query, pinQuery, parsed, access);
+  } finally {
+    await counted;
+  }
+  return send(req, res, out.status, out.body, out.cache);
+}
+
+// Which property, then the row and its extras. Returns the answer instead of
+// sending it, so the caller can finish its bookkeeping first.
+async function answer(b, query, pinQuery, parsed, access) {
+  // An address goes through the extension's matcher, with the listing's map
+  // location (when the app has one) breaking ties.
   let pin = pinQuery, match = null;
   if (!pin) {
     match = await ext.resolveAddress(b, parsed, num(query.lat), num(query.lon));
-    if (!match.pin) return send(req, res, 404, { error: 'Not found on the New Jersey tax list.', alternatives: match.alternatives });
+    if (!match.pin) return { status: 404, body: { error: 'Not found on the New Jersey tax list.', alternatives: match.alternatives } };
     pin = match.pin;
   }
   const row = await page.fetchProperty(pin);
-  if (!row) return send(req, res, 404, { error: 'Not found on the New Jersey tax list.' });
+  if (!row) return { status: 404, body: { error: 'Not found on the New Jersey tax list.' } };
 
   // Score when the cache has none, the parcel's coordinates (not in the row)
   // and a signed photo link, in parallel. Coordinates and photo are extras,
   // so their failure never fails the row.
   const [fresh, coords, photoUrl] = await Promise.all([
-    row.score && row.score.score != null ? null : ext.scoreOnDemand(row),
+    row.score && row.score.score != null ? null : ext.scoreOnDemand(row, CLIENT),
     ext.parcelCoords(b, [pin]).catch((err) => { console.warn('watchdog-property coords', err && err.message || err); return {}; }),
     page.signPhoto(row.photo_path)
   ]);
@@ -200,7 +237,11 @@ async function lookup(req, res, query) {
     body.confident = match.confident;
     body.alternatives = match.alternatives;
   }
-  return send(req, res, 200, body, 'private, max-age=300');
+  // When the scorer could not answer, `score` is null for now but must not
+  // be remembered as "this home has no score": the app re-asks on its next
+  // visit instead of holding the gap for five minutes.
+  const scoreUnavailable = Boolean(fresh && fresh.unavailable);
+  return { status: 200, body, cache: scoreUnavailable ? 'private, no-store' : OK_CACHE };
 }
 
 async function handler(req, res) {
@@ -219,3 +260,4 @@ module.exports = handler;
 module.exports.scoreBlock = scoreBlock;
 module.exports.METRIC = METRIC;
 module.exports.DAILY_LIMIT = DAILY_LIMIT;
+module.exports.CLIENT = CLIENT;

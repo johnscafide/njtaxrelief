@@ -169,6 +169,7 @@ create table if not exists private.push_runtime (
 insert into private.push_runtime (singleton, worker_url)
 values (true, 'https://uvkvaxljhhngydvlrzom.supabase.co/functions/v1/push-sender')
 on conflict do nothing;
+revoke all on private.push_runtime from public, anon, authenticated;
 
 create or replace function public.verify_push_worker(p_token text)
 returns boolean
@@ -244,6 +245,10 @@ revoke all on function private.push_quiet_hours_end(smallint, text, timestamptz)
 -- from a trigger fired by service-role producers): developers pass, standard
 -- always passes, paid tiers need an active-like subscription and a tier rank
 -- at or above the requirement, unknown requirements fail closed.
+-- The two tier maps below are copied from
+-- supabase/migrations/20260818214500_watchdog_standard_entitlement_access_fix.sql
+-- and property/tests/push-notifications-contract.mjs asserts they stay
+-- identical to that source. Change them there first.
 create or replace function private.push_plan_allows(p_user_id uuid, p_minimum_plan text)
 returns boolean
 language plpgsql
@@ -265,10 +270,22 @@ begin
         p.account_role = 'developer'
         or (
           e.subscription_status in ('active', 'trialing', 'past_due')
-          and case lower(coalesce(e.billing_tier, e.plan_tier, 'standard'))
-                when 'teams' then 4 when 'pro_plus' then 3 when 'pro+' then 3 when 'pro' then 2 when 'agent' then 1 else 0 end
-              >= case v_required
-                when 'teams' then 4 when 'pro_plus' then 3 when 'pro+' then 3 when 'pro' then 2 when 'agent' then 1 else 999 end
+          and case lower(coalesce(e.billing_tier,e.plan_tier,'standard'))
+                when 'teams' then 4
+                when 'pro_plus' then 3
+                when 'pro+' then 3
+                when 'pro' then 2
+                when 'agent' then 1
+                else 0
+              end >=
+              case v_required
+                when 'teams' then 4
+                when 'pro_plus' then 3
+                when 'pro+' then 3
+                when 'pro' then 2
+                when 'agent' then 1
+                else 999
+              end
         )
       )
   ) into v_ok;
@@ -298,6 +315,11 @@ declare
   v_collapse text;
 begin
   if not coalesce((select enabled from public.push_settings where singleton), false) then return new; end if;
+  -- Cheapest check first: most members have no registered device.
+  if not exists (
+    select 1 from public.push_device_registrations d
+    where d.user_id = new.user_id and d.disabled_at is null and d.alerts_enabled
+  ) then return new; end if;
   if new.title is null or new.summary is null then return new; end if;
   -- Respect the per-property preference the email producers already honor.
   if new.pams_pin is not null and exists (
@@ -321,10 +343,14 @@ begin
 
   -- One row per active device with alerts switched on. A device inside its
   -- quiet hours gets the row deferred to the end of the window, not dropped.
+  -- push-device-register keeps at most 10 active devices per member; the
+  -- limit here is a defensive cap on trigger and FCM cost.
   for r in
     select d.id, d.quiet_hours_start, d.quiet_hours_end, d.timezone
     from public.push_device_registrations d
     where d.user_id = new.user_id and d.disabled_at is null and d.alerts_enabled
+    order by d.last_seen_at desc
+    limit 20
   loop
     insert into public.push_outbox (user_id, registration_id, kind, collapse_key, title, body, data, next_attempt_at)
     values (
@@ -336,7 +362,9 @@ begin
   end loop;
   return new;
 exception when others then
-  -- A push problem must never block the producer's insert.
+  -- A push problem must never block the producer's insert, but it must not
+  -- disappear either.
+  raise warning 'push_enqueue_property_event: %', sqlerrm;
   return new;
 end;
 $$;
@@ -367,20 +395,32 @@ security definer
 set search_path = public, private, pg_temp
 as $$
 begin
-  -- Fan out user-wide rows into per-device rows.
+  -- Fan out user-wide rows into per-device rows. Lock, mark and expand the
+  -- parents in one statement so two concurrent worker runs can never fan out
+  -- the same parent twice.
+  with parents as (
+    select o.id from public.push_outbox o
+    where o.status = 'queued' and o.registration_id is null
+    order by o.id
+    limit 200
+    for update skip locked
+  ),
+  done as (
+    update public.push_outbox o
+    set status = 'skipped', error = 'fanned_out'
+    from parents
+    where o.id = parents.id
+    returning o.user_id, o.kind, o.collapse_key, o.title, o.body, o.data
+  )
   insert into public.push_outbox (user_id, registration_id, kind, collapse_key, title, body, data, next_attempt_at)
-  select o.user_id, d.id, o.kind, o.collapse_key, o.title, o.body, o.data,
+  select done.user_id, d.id, done.kind, done.collapse_key, done.title, done.body, done.data,
          case when private.push_in_quiet_hours(d.quiet_hours_start, d.quiet_hours_end, d.timezone)
               then private.push_quiet_hours_end(d.quiet_hours_end, d.timezone)
               else now() end
-  from public.push_outbox o
+  from done
   join public.push_device_registrations d
-    on d.user_id = o.user_id and d.disabled_at is null
-   and case o.kind when 'property_event' then d.alerts_enabled when 'digest' then d.digest_enabled else true end
-  where o.status = 'queued' and o.registration_id is null;
-  update public.push_outbox o
-  set status = 'skipped', error = 'fanned_out'
-  where o.status = 'queued' and o.registration_id is null;
+    on d.user_id = done.user_id and d.disabled_at is null
+   and case done.kind when 'property_event' then d.alerts_enabled when 'digest' then d.digest_enabled else true end;
 
   -- Devices that were disabled after the row was queued.
   update public.push_outbox o
@@ -409,10 +449,13 @@ begin
 end;
 $$;
 
--- Marks a row sent / queued for retry / failed after 5 attempts. When FCM
--- reports the token as UNREGISTERED (404) the sender passes the registration
--- id: the device is disabled with reason 'invalid_token' and the row is
--- skipped instead of retried.
+-- Marks a row sent / queued for retry / failed after 5 attempts. A retry
+-- backs off (2, 4, 8, 16 minutes, capped at 60) so a short FCM outage does
+-- not burn the whole budget while the cron runs every minute. When FCM
+-- reports the token as permanently unusable (UNREGISTERED / 404,
+-- SENDER_ID_MISMATCH, an INVALID_ARGUMENT naming the token) the sender passes
+-- the registration id: the device is disabled with reason 'invalid_token'
+-- and the row is skipped instead of retried.
 create or replace function public.complete_push_outbox(
   p_id bigint, p_sent boolean, p_error text, p_invalid_registration uuid default null
 )
@@ -436,6 +479,8 @@ begin
   update public.push_outbox
   set status = case when p_sent then 'sent' when attempts >= 5 then 'failed' else 'queued' end,
       sent_at = case when p_sent then now() else sent_at end,
+      next_attempt_at = case when p_sent then next_attempt_at
+                             else now() + make_interval(mins => least(60, 2 ^ attempts)::integer) end,
       error = left(p_error, 200)
   where id = p_id
   returning registration_id into v_registration;
@@ -445,9 +490,11 @@ begin
 end;
 $$;
 
--- Puts a claimed row back in the queue without counting an attempt, to be
--- picked up at p_until (used for quiet hours).
-create or replace function public.defer_push_outbox(p_id bigint, p_until timestamptz)
+-- Puts a claimed row back in the queue WITHOUT counting an attempt, to be
+-- picked up at p_until. The sender uses it when the run cannot continue for
+-- reasons unrelated to the row (OAuth token minting failed, FCM answered
+-- 429 / 5xx), honouring Retry-After through p_until.
+create or replace function public.release_push_outbox(p_id bigint, p_until timestamptz, p_error text)
 returns void
 language sql
 security definer
@@ -458,8 +505,18 @@ as $$
       attempts = greatest(attempts - 1, 0),
       claimed_at = null,
       next_attempt_at = greatest(coalesce(p_until, now()), now()),
-      error = 'deferred_quiet_hours'
+      error = left(p_error, 200)
   where id = p_id and status = 'sending';
+$$;
+
+-- Same, for a device inside its quiet hours.
+create or replace function public.defer_push_outbox(p_id bigint, p_until timestamptz)
+returns void
+language sql
+security definer
+set search_path = public, pg_temp
+as $$
+  select public.release_push_outbox(p_id, p_until, 'deferred_quiet_hours');
 $$;
 
 create or replace function public.invoke_push_sender()
@@ -494,8 +551,8 @@ declare f text;
 begin
   foreach f in array array[
     'verify_push_worker(text)', 'claim_push_outbox(integer)',
-    'complete_push_outbox(bigint,boolean,text,uuid)', 'defer_push_outbox(bigint,timestamptz)',
-    'invoke_push_sender()'
+    'complete_push_outbox(bigint,boolean,text,uuid)', 'release_push_outbox(bigint,timestamptz,text)',
+    'defer_push_outbox(bigint,timestamptz)', 'invoke_push_sender()'
   ] loop
     execute format('revoke all on function public.%s from public, anon, authenticated', f);
     execute format('grant execute on function public.%s to service_role', f);

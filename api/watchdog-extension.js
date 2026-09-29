@@ -29,11 +29,14 @@ function backend() {
   return { url, key };
 }
 
+// `timeoutMs` (default 6 s) lets a caller give a small bookkeeping call less
+// time than a lookup, so a slow table cannot eat the whole request budget.
 async function rest(b, pathname, init = {}) {
+  const { timeoutMs = 6000, ...options } = init;
   const r = await fetch(`${b.url}/rest/v1/${pathname}`, {
-    ...init,
-    headers: { apikey: b.key, Authorization: `Bearer ${b.key}`, 'Content-Type': 'application/json', Accept: 'application/json', ...(init.headers || {}) },
-    signal: AbortSignal.timeout(6000)
+    ...options,
+    headers: { apikey: b.key, Authorization: `Bearer ${b.key}`, 'Content-Type': 'application/json', Accept: 'application/json', ...(options.headers || {}) },
+    signal: AbortSignal.timeout(timeoutMs)
   });
   if (!r.ok) throw new Error(`${pathname.split('?')[0]} http ${r.status}`);
   const text = await r.text();
@@ -152,18 +155,28 @@ function pickMatch(candidates, city, geo, coords) {
 
 const n = (v) => (v == null || v === '' || !Number.isFinite(Number(v)) ? null : Number(v));
 
-async function scoreOnDemand(row) {
+// Asks workbench-score for a fresh public score. Three outcomes, kept apart
+// so callers never cache a service failure as "this home has no score":
+//   the score object   the function scored the parcel
+//   null               the function answered and found nothing to score
+//   { unavailable }    the function could not answer (error, rate limit,
+//                      timeout, unreadable body)
+// `client` is the x-client-info label the function logs, so app and
+// extension traffic can be told apart when the shared rate limit trips.
+const SCORE_UNAVAILABLE = Object.freeze({ unavailable: true });
+async function scoreOnDemand(row, client = 'watchdog-extension/1.1') {
   try {
     const b = backend();
     const r = await fetch(`${b.url}/functions/v1/workbench-score`, {
       method: 'POST',
-      headers: { apikey: b.key, 'Content-Type': 'application/json', Origin: H.CANONICAL_ORIGIN, 'x-client-info': 'watchdog-extension/1.1' },
+      headers: { apikey: b.key, 'Content-Type': 'application/json', Origin: H.CANONICAL_ORIGIN, 'x-client-info': client },
       body: JSON.stringify({ mode: 'public_score', rows: [{ pams_pin: row.pams_pin, town: row.town, county: row.county, block: row.block, lot: row.lot, qualifier: row.qualifier, assessed_value: row.assessed_value, last_year_tax: row.last_year_tax }] }),
       signal: AbortSignal.timeout(5000)
     });
-    if (!r.ok) return null;
+    if (!r.ok) return SCORE_UNAVAILABLE;
     const j = await r.json().catch(() => null);
-    const s = j && Array.isArray(j.rows) ? j.rows.find((x) => x && x.pams_pin) : null;
+    if (!j || !Array.isArray(j.rows)) return SCORE_UNAVAILABLE;
+    const s = j.rows.find((x) => x && x.pams_pin);
     if (!s || s.watchdog_score == null) return null;
     // The extension summary reads score/verdict/confidence; the app's JSON
     // route (watchdog-property) also needs the ROBUST parts and the source.
@@ -174,7 +187,7 @@ async function scoreOnDemand(row) {
       computed_at: s.observed_at || null, source: s.source || 'robust_on_demand'
     };
   } catch (_) {
-    return null;
+    return SCORE_UNAVAILABLE;
   }
 }
 
@@ -295,7 +308,10 @@ async function lookup(req, res, query) {
   }
   const row = await page.fetchProperty(pin);
   if (!row) return json(res, 404, { error: 'Not found on the New Jersey tax list.' });
-  const score = row.score && row.score.score != null ? null : await scoreOnDemand(row);
+  // The extension summary shows no score when the scorer is unavailable; its
+  // answers are never cached, so the next lookup asks again.
+  const fresh = row.score && row.score.score != null ? null : await scoreOnDemand(row);
+  const score = fresh && !fresh.unavailable ? fresh : null;
   return json(res, 200, { ok: true, confident, alternatives, property: summary(row, access.slug, score) });
 }
 

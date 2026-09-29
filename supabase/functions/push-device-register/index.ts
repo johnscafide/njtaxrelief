@@ -9,10 +9,15 @@ import { createClient } from "npm:@supabase/supabase-js@2.95.0";
 //   returned in any response. Only the sha256 hash is used for matching.
 // - Android sends no Origin header. A missing Origin is accepted; a present
 //   Origin must be on the allowlist (same rule and list as farm-workspace).
+// - A member keeps at most MAX_ACTIVE_DEVICES active registrations; beyond
+//   that the least recently seen are retired ('replaced') so a real member
+//   with many phones is never locked out while a client-chosen
+//   installation_id cannot grow the row count without bound.
 // - Nothing here sends a push. Sending is the push-sender worker, and it stays
 //   idle until push_settings.enabled is true.
 
 type Obj = Record<string, any>;
+const MAX_ACTIVE_DEVICES = 10;
 
 const ORIGINS = new Set([
   "https://www.watchdogindex.com", "https://watchdogindex.com",
@@ -188,8 +193,20 @@ Deno.serve(async (req: Request) => {
     .upsert(record, { onConflict: "user_id,installation_id" })
     .select(SAFE_COLUMNS).single();
   if (saved.error || !saved.data) return reply(req, 500, { error: "registration_failed" });
+
+  // Cap active devices per member: keep the most recently seen, retire the rest.
+  const { data: active } = await admin.from("push_device_registrations").select("id")
+    .eq("user_id", user.id).is("disabled_at", null)
+    .order("last_seen_at", { ascending: false }).order("created_at", { ascending: false });
+  const overflow = (active || []).slice(MAX_ACTIVE_DEVICES).map((r) => r.id).filter((id) => id !== saved.data.id);
+  if (overflow.length) {
+    await admin.from("push_device_registrations")
+      .update({ disabled_at: now(), disabled_reason: "replaced", updated_at: now() })
+      .in("id", overflow);
+  }
+
   if (!existing || action === "register") {
-    await audit("push.device.registered", { registration_id: saved.data.id, platform: saved.data.platform, app_version: saved.data.app_version, replaced: (others || []).length });
+    await audit("push.device.registered", { registration_id: saved.data.id, platform: saved.data.platform, app_version: saved.data.app_version, replaced: (others || []).length, retired: overflow.length });
   }
   return reply(req, action === "register" ? 201 : 200, { ok: true, registration: saved.data });
 });

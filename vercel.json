@@ -34,7 +34,7 @@
     },
     "api/watchdog-property.js": {
       "includeFiles": "{tax-rates.json,equalization-ratios.json,chapter123-ratios-2026.json,property/revaluation-reassessment-2026.json}",
-      "maxDuration": 10
+      "maxDuration": 15
     }
   },
   "redirects": [

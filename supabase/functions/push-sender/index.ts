@@ -10,8 +10,14 @@ import { createClient } from "npm:@supabase/supabase-js@2.95.0";
 //   {ok:true, claimed:0, push_configured:false} and leaves rows queued.
 // - A row whose device is inside its quiet hours is put back in the queue
 //   until the window ends (defer_push_outbox), never dropped.
-// - A token FCM reports as UNREGISTERED (404) disables the registration
-//   through complete_push_outbox(p_invalid_registration).
+// - A token FCM reports as permanently unusable (UNREGISTERED / 404,
+//   SENDER_ID_MISMATCH, an INVALID_ARGUMENT that names the registration token)
+//   disables the registration through complete_push_outbox(p_invalid_registration).
+// - Outages are not charged to rows: if OAuth token minting fails, or FCM
+//   answers 429 / 5xx / QUOTA_EXCEEDED / UNAVAILABLE / INTERNAL, the run stops
+//   and every unsent claimed row is released (release_push_outbox) without an
+//   attempt, to be retried after Retry-After (1 to 60 minutes). Per-row
+//   failures back off through complete_push_outbox (2, 4, 8, 16 minutes).
 // - The message carries only what the outbox row holds: title, body and a
 //   small string map (pin, route, event type, severity, channel, actions).
 //   Outbox rows are built from privacy-reviewed event columns only; no owner,
@@ -23,9 +29,14 @@ type Claimed = {
   collapse_key: string | null; title: string; body: string; data: Obj | null;
   timezone: string | null; quiet_hours_start: number | null; quiet_hours_end: number | null; platform: string | null;
 };
+type FcmError = { status: string; codes: string[]; message: string };
 
 const FCM_SCOPE = "https://www.googleapis.com/auth/firebase.messaging";
 const TOKEN_URI = "https://oauth2.googleapis.com/token";
+const RELEASE_MIN_MS = 60_000;          // never retry an outage sooner than a minute
+const RELEASE_DEFAULT_MS = 120_000;     // when FCM sends no Retry-After
+const RELEASE_MAX_MS = 3_600_000;       // cap Retry-After at an hour
+const OAUTH_RELEASE_MS = 180_000;       // credentials rejected: try again in 3 minutes
 
 function clean(value: unknown, max = 240) {
   return String(value ?? "").trim().replace(/[\u0000-\u001f]/g, "").slice(0, max);
@@ -143,12 +154,37 @@ function fcmMessage(row: Claimed) {
     },
   };
 }
-async function fcmErrorCode(response: Response) {
+
+// --- FCM error classification ---
+async function fcmError(response: Response): Promise<FcmError> {
   try {
-    const body = await response.json() as { error?: { status?: string; details?: Array<{ errorCode?: string }> } };
-    const codes = (body?.error?.details || []).map((x) => String(x.errorCode || "")).filter(Boolean);
-    return `${body?.error?.status || ""}|${codes.join(",")}`;
-  } catch { return ""; }
+    const body = await response.json() as { error?: { status?: string; message?: string; details?: Array<{ errorCode?: string }> } };
+    return {
+      status: String(body?.error?.status || ""),
+      codes: (body?.error?.details || []).map((x) => String(x.errorCode || "")).filter(Boolean),
+      message: String(body?.error?.message || ""),
+    };
+  } catch { return { status: "", codes: [], message: "" }; }
+}
+// The token can never work again: disable the registration.
+function isInvalidToken(httpStatus: number, e: FcmError) {
+  if (httpStatus === 404 || e.codes.includes("UNREGISTERED") || e.status === "NOT_FOUND") return true;
+  if (httpStatus === 403 && (e.codes.includes("SENDER_ID_MISMATCH") || /sender ?id mismatch/i.test(e.message))) return true;
+  if (httpStatus === 400 && (e.codes.includes("INVALID_ARGUMENT") || e.status === "INVALID_ARGUMENT") && /registration token/i.test(e.message)) return true;
+  return false;
+}
+// FCM itself is unavailable or throttling: stop the run, release rows, retry later.
+function isOutage(httpStatus: number, e: FcmError) {
+  if (httpStatus === 429 || httpStatus >= 500) return true;
+  if (e.codes.includes("QUOTA_EXCEEDED") || e.codes.includes("UNAVAILABLE") || e.codes.includes("INTERNAL")) return true;
+  return ["RESOURCE_EXHAUSTED", "UNAVAILABLE", "INTERNAL"].includes(e.status);
+}
+function retryAfterMs(response: Response) {
+  const raw = response.headers.get("retry-after") || "";
+  let ms = RELEASE_DEFAULT_MS;
+  if (raw) { const n = Number(raw); ms = Number.isFinite(n) ? n * 1000 : Date.parse(raw) - Date.now(); }
+  if (!Number.isFinite(ms)) ms = RELEASE_DEFAULT_MS;
+  return Math.max(RELEASE_MIN_MS, Math.min(RELEASE_MAX_MS, ms));
 }
 
 Deno.serve(async (req: Request) => {
@@ -179,19 +215,28 @@ Deno.serve(async (req: Request) => {
   if (claimed.error) return json(500, { error: "claim_failed" });
   const rows = (claimed.data || []) as Claimed[];
 
-  let sent = 0, failed = 0, skipped = 0, deferred = 0;
+  // Put rows back without spending an attempt; they become due at now + delay.
+  const release = async (pending: Claimed[], delayMs: number, reason: string) => {
+    const until = new Date(Date.now() + delayMs).toISOString();
+    for (const row of pending) await db.rpc("release_push_outbox", { p_id: row.id, p_until: until, p_error: clean(reason, 120) });
+    return pending.length;
+  };
+
   let bearer = "";
   if (rows.length) {
     try { bearer = await accessToken(serviceAccount); } catch (error) {
-      // Credentials rejected: put every claimed row back for the next run.
+      // Credentials rejected or Google unreachable: this is not the rows' fault.
       const message = clean(error instanceof Error ? error.message : "oauth_failed", 120);
-      for (const row of rows) await db.rpc("complete_push_outbox", { p_id: row.id, p_sent: false, p_error: message, p_invalid_registration: null });
-      return json(200, { ok: true, claimed: rows.length, sent: 0, failed: rows.length, skipped: 0, deferred: 0, push_configured: true, error: message });
+      const released = await release(rows, OAUTH_RELEASE_MS, `oauth_failed: ${message}`);
+      return json(200, { ok: true, claimed: rows.length, sent: 0, failed: 0, skipped: 0, deferred: 0, released, push_configured: true, error: message });
     }
   }
 
   const endpoint = `https://fcm.googleapis.com/v1/projects/${encodeURIComponent(projectId)}/messages:send`;
-  for (const row of rows) {
+  let sent = 0, failed = 0, skipped = 0, deferred = 0, released = 0;
+  let outage = "", outageDelay = RELEASE_DEFAULT_MS, stoppedAt = -1;
+  for (let i = 0; i < rows.length; i++) {
+    const row = rows[i];
     try {
       if (inQuietHours(row)) {
         await db.rpc("defer_push_outbox", { p_id: row.id, p_until: quietHoursEnd(row).toISOString() });
@@ -208,17 +253,27 @@ Deno.serve(async (req: Request) => {
         sent++;
         continue;
       }
-      const code = await fcmErrorCode(response);
-      if (response.status === 404 || /UNREGISTERED/.test(code)) {
-        await db.rpc("complete_push_outbox", { p_id: row.id, p_sent: false, p_error: `fcm_unregistered_${response.status}`, p_invalid_registration: row.registration_id });
+      const err = await fcmError(response);
+      const detail = clean([err.status, ...err.codes].filter(Boolean).join("|"), 80);
+      if (isInvalidToken(response.status, err)) {
+        await db.rpc("complete_push_outbox", { p_id: row.id, p_sent: false, p_error: `fcm_invalid_token_${response.status}${detail ? `: ${detail}` : ""}`, p_invalid_registration: row.registration_id });
         skipped++;
         continue;
       }
-      throw new Error(`fcm_rejected_${response.status}${code ? `: ${clean(code, 80)}` : ""}`);
+      if (isOutage(response.status, err)) {
+        // One outage must not spend an attempt on every claimed row: stop here
+        // and release this row and every row after it.
+        outage = `fcm_retry_${response.status}${detail ? `: ${detail}` : ""}`;
+        outageDelay = retryAfterMs(response);
+        stoppedAt = i;
+        break;
+      }
+      throw new Error(`fcm_rejected_${response.status}${detail ? `: ${detail}` : ""}`);
     } catch (error) {
       await db.rpc("complete_push_outbox", { p_id: row.id, p_sent: false, p_error: clean(error instanceof Error ? error.message : "delivery_failed", 120), p_invalid_registration: null });
       failed++;
     }
   }
-  return json(200, { ok: true, claimed: rows.length, sent, failed, skipped, deferred, push_configured: true });
+  if (stoppedAt >= 0) released += await release(rows.slice(stoppedAt), outageDelay, outage);
+  return json(200, { ok: true, claimed: rows.length, sent, failed, skipped, deferred, released, push_configured: true, ...(outage ? { error: outage } : {}) });
 });
