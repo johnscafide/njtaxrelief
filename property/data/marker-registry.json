@@ -1,35 +1,35 @@
 {
  "schema_version": "1+provider-status+v037",
- "generated_at": "2026-09-29T16:27:38.240Z",
+ "generated_at": "2026-09-29T18:09:31.196Z",
  "target_markers": 1000,
  "definition": "One marker is one distinct selectable field or calculated statistic; repeated parcel/town values are not counted as new markers.",
  "tier_rule": "Standard sees Standard. Pro sees Standard + profession-relevant Pro. Pro+ sees every marker.",
  "summary": {
-  "total": 1130,
-  "public_source": 820,
-  "proprietary_derived": 310,
+  "total": 1169,
+  "public_source": 824,
+  "proprietary_derived": 345,
   "by_tier": {
-   "standard": 31,
-   "pro": 345,
-   "pro_plus": 754
+   "standard": 33,
+   "pro": 374,
+   "pro_plus": 762
   },
   "by_profession": {
-   "consumer": 79,
-   "attorney": 918,
-   "title": 184,
-   "agent": 968,
-   "lender": 780,
-   "appraiser": 869,
-   "contractor": 297,
-   "investor": 985,
-   "municipal": 811,
-   "insurance": 112
+   "consumer": 101,
+   "attorney": 950,
+   "title": 193,
+   "agent": 998,
+   "lender": 801,
+   "appraiser": 893,
+   "contractor": 306,
+   "investor": 1019,
+   "municipal": 817,
+   "insurance": 113
   },
-  "percent_of_goal": 113,
+  "percent_of_goal": 116.9,
   "provider_status": {
-   "live": 1044,
-   "planned": 70,
-   "unavailable": 16
+   "live": 1087,
+   "planned": 67,
+   "unavailable": 15
   },
   "retired_phase5": 0
  },
@@ -13949,8 +13949,8 @@
    "dependencies": [
     "nj-dca-affordable-housing"
    ],
-   "provider_status": "planned",
-   "provider_note": "Defined marker remains blocked until every dependency has a governed executable provider and the formula passes validation.",
+   "provider_status": "live",
+   "provider_note": "Production Data Center provider governance marks this derived marker live. Runtime execution remains dependency-gated and missing inputs do not receive synthetic values.",
    "provider_contract": "workbench-hydrate-v15"
   },
   {
@@ -14989,8 +14989,8 @@
    "dependencies": [
     "nj-dca-pilot-forecast"
    ],
-   "provider_status": "planned",
-   "provider_note": "Defined marker remains blocked until every dependency has a governed executable provider and the formula passes validation.",
+   "provider_status": "live",
+   "provider_note": "Production Data Center provider governance marks this derived marker live. Runtime execution remains dependency-gated and missing inputs do not receive synthetic values.",
    "provider_contract": "workbench-hydrate-v15"
   },
   {
@@ -15367,8 +15367,8 @@
    "dependencies": [
     "nj-dca-modiv-longitudinal"
    ],
-   "provider_status": "planned",
-   "provider_note": "Defined marker remains blocked until every dependency has a governed executable provider and the formula passes validation.",
+   "provider_status": "live",
+   "provider_note": "Production Data Center provider governance marks this derived marker live. Runtime execution remains dependency-gated and missing inputs do not receive synthetic values.",
    "provider_contract": "workbench-hydrate-v15"
   },
   {
@@ -15571,7 +15571,7 @@
    "field": "walkability_score",
    "professional_reason": "Published neighborhood trends data for professional review; verify the official record before reliance.",
    "source_field": "walkability_score",
-   "provider_status": "unavailable",
+   "provider_status": "live",
    "provider_note": "Production status is governed by the database-first Data Center provider registry; runtime dependency and source checks remain authoritative.",
    "provider_contract": "workbench-hydrate-v15"
   },
@@ -28585,6 +28585,844 @@
    "provider_note": "Production status is governed by the database-first Data Center provider registry; runtime dependency and source checks remain authoritative.",
    "provider_contract": "workbench-hydrate:nj-dca-ufb-v040-longitudinal",
    "status_reason": "Certified production provider coverage: authenticated ufb_longitudinal_v040 canary request 4155 passed with zero mismatches; exact NJ DCA UFB annual Summary-sheet observations only."
+  },
+  {
+   "id": "property.city",
+   "label": "Address city (locality)",
+   "description": "Familiar address locality from the NJ Office of GIS statewide geocoder. It can differ from the parcel's official municipality.",
+   "category": "parcel",
+   "scope": "property",
+   "tier": "standard",
+   "origin": "public",
+   "proprietary": false,
+   "professions": [
+    "consumer",
+    "attorney",
+    "title",
+    "agent",
+    "lender",
+    "appraiser",
+    "contractor",
+    "investor"
+   ],
+   "source_id": "nj-parcels-modiv",
+   "field": "city",
+   "provider_status": "live",
+   "provider_note": "Production status is governed by the database-first Data Center provider registry; runtime dependency and source checks remain authoritative."
+  },
+  {
+   "id": "property.units",
+   "label": "Dwelling units",
+   "description": "Number of dwelling units on the MOD-IV parcel record.",
+   "category": "parcel",
+   "scope": "property",
+   "tier": "pro",
+   "origin": "public",
+   "proprietary": false,
+   "professions": [
+    "attorney",
+    "title",
+    "agent",
+    "lender",
+    "appraiser",
+    "contractor",
+    "investor"
+   ],
+   "source_id": "nj-parcels-modiv",
+   "field": "units",
+   "unit": "count",
+   "provider_status": "live",
+   "provider_note": "Production status is governed by the database-first Data Center provider registry; runtime dependency and source checks remain authoritative."
+  },
+  {
+   "id": "property.use",
+   "label": "Property use code",
+   "description": "Property use description on the MOD-IV parcel record.",
+   "category": "parcel",
+   "scope": "property",
+   "tier": "pro",
+   "origin": "public",
+   "proprietary": false,
+   "professions": [
+    "attorney",
+    "title",
+    "agent",
+    "lender",
+    "appraiser",
+    "contractor",
+    "investor"
+   ],
+   "source_id": "nj-parcels-modiv",
+   "field": "property_use",
+   "provider_status": "live",
+   "provider_note": "Production status is governed by the database-first Data Center provider registry; runtime dependency and source checks remain authoritative."
+  },
+  {
+   "id": "property.zip",
+   "label": "Property ZIP code",
+   "description": "Five-digit ZIP code of the property location on the parcel record.",
+   "category": "parcel",
+   "scope": "property",
+   "tier": "standard",
+   "origin": "public",
+   "proprietary": false,
+   "professions": [
+    "consumer",
+    "attorney",
+    "title",
+    "agent",
+    "lender",
+    "appraiser",
+    "contractor",
+    "investor"
+   ],
+   "source_id": "nj-parcels-modiv",
+   "field": "zip",
+   "provider_status": "live",
+   "provider_note": "Production status is governed by the database-first Data Center provider registry; runtime dependency and source checks remain authoritative."
+  },
+  {
+   "id": "watchdog.chapter123_screen",
+   "label": "Chapter 123 screen",
+   "description": "Chapter 123 screening result with plausible-sale checks. A screening position only, not appeal eligibility or legal advice.",
+   "category": "appeals",
+   "scope": "property",
+   "tier": "pro_plus",
+   "origin": "watchdog-derived",
+   "proprietary": true,
+   "professions": [
+    "consumer",
+    "attorney",
+    "agent",
+    "appraiser",
+    "investor"
+   ],
+   "source_id": "watchdog-models",
+   "field": "chapter123_screen",
+   "provider_status": "live",
+   "provider_note": "Production Data Center provider governance marks this derived marker live. Runtime execution remains dependency-gated and missing inputs do not receive synthetic values."
+  },
+  {
+   "id": "watchdog.chapter123_assessment_ratio",
+   "label": "Assessment-to-sale ratio (Chapter 123)",
+   "description": "Assessment divided by the recorded sale price after the sale plausibility screen.",
+   "category": "appeals",
+   "scope": "property",
+   "tier": "pro_plus",
+   "origin": "watchdog-derived",
+   "proprietary": true,
+   "professions": [
+    "attorney",
+    "agent",
+    "appraiser",
+    "investor"
+   ],
+   "source_id": "watchdog-models",
+   "field": "chapter123_assessment_ratio",
+   "unit": "ratio",
+   "provider_status": "live",
+   "provider_note": "Production Data Center provider governance marks this derived marker live. Runtime execution remains dependency-gated and missing inputs do not receive synthetic values."
+  },
+  {
+   "id": "watchdog.chapter123_common_ratio",
+   "label": "Chapter 123 common level ratio",
+   "description": "Published common level ratio for the property's taxing district.",
+   "category": "appeals",
+   "scope": "property",
+   "tier": "pro_plus",
+   "origin": "watchdog-derived",
+   "proprietary": true,
+   "professions": [
+    "attorney",
+    "agent",
+    "appraiser",
+    "investor"
+   ],
+   "source_id": "watchdog-models",
+   "field": "chapter123_common_ratio",
+   "unit": "percent",
+   "provider_status": "live",
+   "provider_note": "Production Data Center provider governance marks this derived marker live. Runtime execution remains dependency-gated and missing inputs do not receive synthetic values."
+  },
+  {
+   "id": "watchdog.chapter123_upper_limit",
+   "label": "Chapter 123 upper limit",
+   "description": "Upper limit of the Chapter 123 common level range for the property's taxing district.",
+   "category": "appeals",
+   "scope": "property",
+   "tier": "pro_plus",
+   "origin": "watchdog-derived",
+   "proprietary": true,
+   "professions": [
+    "attorney",
+    "agent",
+    "appraiser",
+    "investor"
+   ],
+   "source_id": "watchdog-models",
+   "field": "chapter123_upper_limit",
+   "unit": "percent",
+   "provider_status": "live",
+   "provider_note": "Production Data Center provider governance marks this derived marker live. Runtime execution remains dependency-gated and missing inputs do not receive synthetic values."
+  },
+  {
+   "id": "watchdog.chapter123_over_upper_pct",
+   "label": "% above Chapter 123 upper limit",
+   "description": "How far the assessment sits above the Chapter 123 upper limit, in percent.",
+   "category": "appeals",
+   "scope": "property",
+   "tier": "pro_plus",
+   "origin": "watchdog-derived",
+   "proprietary": true,
+   "professions": [
+    "consumer",
+    "attorney",
+    "agent",
+    "appraiser",
+    "investor"
+   ],
+   "source_id": "watchdog-models",
+   "field": "chapter123_over_upper_pct",
+   "unit": "percent",
+   "provider_status": "live",
+   "provider_note": "Production Data Center provider governance marks this derived marker live. Runtime execution remains dependency-gated and missing inputs do not receive synthetic values."
+  },
+  {
+   "id": "watchdog.chapter123_target_assessment",
+   "label": "Chapter 123 supported assessment",
+   "description": "Screening-supported assessment when the current assessment is above the Chapter 123 upper limit.",
+   "category": "appeals",
+   "scope": "property",
+   "tier": "pro_plus",
+   "origin": "watchdog-derived",
+   "proprietary": true,
+   "professions": [
+    "consumer",
+    "attorney",
+    "agent",
+    "appraiser",
+    "investor"
+   ],
+   "source_id": "watchdog-models",
+   "field": "chapter123_target_assessment",
+   "unit": "currency",
+   "provider_status": "live",
+   "provider_note": "Production Data Center provider governance marks this derived marker live. Runtime execution remains dependency-gated and missing inputs do not receive synthetic values."
+  },
+  {
+   "id": "watchdog.chapter123_assessment_reduction",
+   "label": "Estimated assessment reduction",
+   "description": "Estimated screening reduction to the Chapter 123 supported assessment. Not an appeal outcome guarantee.",
+   "category": "appeals",
+   "scope": "property",
+   "tier": "pro_plus",
+   "origin": "watchdog-derived",
+   "proprietary": true,
+   "professions": [
+    "consumer",
+    "attorney",
+    "agent",
+    "appraiser",
+    "investor"
+   ],
+   "source_id": "watchdog-models",
+   "field": "chapter123_assessment_reduction",
+   "unit": "currency",
+   "provider_status": "live",
+   "provider_note": "Production Data Center provider governance marks this derived marker live. Runtime execution remains dependency-gated and missing inputs do not receive synthetic values."
+  },
+  {
+   "id": "watchdog.chapter123_annual_overpayment",
+   "label": "Estimated annual tax difference",
+   "description": "Estimated annual tax difference implied by the Chapter 123 screening reduction.",
+   "category": "appeals",
+   "scope": "property",
+   "tier": "pro_plus",
+   "origin": "watchdog-derived",
+   "proprietary": true,
+   "professions": [
+    "consumer",
+    "attorney",
+    "agent",
+    "appraiser",
+    "investor"
+   ],
+   "source_id": "watchdog-models",
+   "field": "chapter123_annual_overpayment",
+   "unit": "currency",
+   "provider_status": "live",
+   "provider_note": "Production Data Center provider governance marks this derived marker live. Runtime execution remains dependency-gated and missing inputs do not receive synthetic values."
+  },
+  {
+   "id": "watchdog.history.observation_count",
+   "label": "Score history: observations",
+   "description": "Number of trusted Watchdog Score observations supporting the longitudinal metrics. At least two are required.",
+   "category": "watchdog intelligence",
+   "scope": "property",
+   "tier": "pro",
+   "origin": "watchdog-derived",
+   "proprietary": true,
+   "professions": [
+    "consumer",
+    "attorney",
+    "agent",
+    "lender",
+    "appraiser",
+    "investor"
+   ],
+   "source_id": "watchdog-models",
+   "field": "history_observation_count",
+   "unit": "count",
+   "provider_status": "live",
+   "provider_note": "Production Data Center provider governance marks this derived marker live. Runtime execution remains dependency-gated and missing inputs do not receive synthetic values."
+  },
+  {
+   "id": "watchdog.history.observation_span_days",
+   "label": "Score history: span in days",
+   "description": "Calendar days between the earliest and latest trusted Watchdog Score observations.",
+   "category": "watchdog intelligence",
+   "scope": "property",
+   "tier": "pro",
+   "origin": "watchdog-derived",
+   "proprietary": true,
+   "professions": [
+    "consumer",
+    "attorney",
+    "agent",
+    "lender",
+    "appraiser",
+    "investor"
+   ],
+   "source_id": "watchdog-models",
+   "field": "history_observation_span_days",
+   "unit": "days",
+   "provider_status": "live",
+   "provider_note": "Production Data Center provider governance marks this derived marker live. Runtime execution remains dependency-gated and missing inputs do not receive synthetic values."
+  },
+  {
+   "id": "watchdog.history.watchdog_score_delta",
+   "label": "Watchdog Score change",
+   "description": "Latest minus earliest trusted Watchdog Score in the observation window. Requires at least two observations.",
+   "category": "watchdog intelligence",
+   "scope": "property",
+   "tier": "pro",
+   "origin": "watchdog-derived",
+   "proprietary": true,
+   "professions": [
+    "consumer",
+    "attorney",
+    "agent",
+    "lender",
+    "appraiser",
+    "investor"
+   ],
+   "source_id": "watchdog-models",
+   "field": "history_watchdog_score_delta",
+   "provider_status": "live",
+   "provider_note": "Production Data Center provider governance marks this derived marker live. Runtime execution remains dependency-gated and missing inputs do not receive synthetic values."
+  },
+  {
+   "id": "watchdog.history.watchdog_score_trend_30d",
+   "label": "Watchdog Score 30-day trend",
+   "description": "Observed Watchdog Score change normalized to 30 days. Not a forecast.",
+   "category": "watchdog intelligence",
+   "scope": "property",
+   "tier": "pro",
+   "origin": "watchdog-derived",
+   "proprietary": true,
+   "professions": [
+    "consumer",
+    "attorney",
+    "agent",
+    "lender",
+    "appraiser",
+    "investor"
+   ],
+   "source_id": "watchdog-models",
+   "field": "history_watchdog_score_trend_30d",
+   "provider_status": "live",
+   "provider_note": "Production Data Center provider governance marks this derived marker live. Runtime execution remains dependency-gated and missing inputs do not receive synthetic values."
+  },
+  {
+   "id": "watchdog.history.watchdog_score_volatility",
+   "label": "Watchdog Score volatility",
+   "description": "Population standard deviation of the Watchdog Score across trusted observations, in score points.",
+   "category": "watchdog intelligence",
+   "scope": "property",
+   "tier": "pro",
+   "origin": "watchdog-derived",
+   "proprietary": true,
+   "professions": [
+    "consumer",
+    "attorney",
+    "agent",
+    "lender",
+    "appraiser",
+    "investor"
+   ],
+   "source_id": "watchdog-models",
+   "field": "history_watchdog_score_volatility",
+   "provider_status": "live",
+   "provider_note": "Production Data Center provider governance marks this derived marker live. Runtime execution remains dependency-gated and missing inputs do not receive synthetic values."
+  },
+  {
+   "id": "watchdog.history.tax_pressure_delta",
+   "label": "Tax pressure change",
+   "description": "Latest minus earliest trusted tax-pressure score in the observation window.",
+   "category": "watchdog intelligence",
+   "scope": "property",
+   "tier": "pro",
+   "origin": "watchdog-derived",
+   "proprietary": true,
+   "professions": [
+    "consumer",
+    "attorney",
+    "agent",
+    "lender",
+    "appraiser",
+    "investor"
+   ],
+   "source_id": "watchdog-models",
+   "field": "history_tax_pressure_delta",
+   "provider_status": "live",
+   "provider_note": "Production Data Center provider governance marks this derived marker live. Runtime execution remains dependency-gated and missing inputs do not receive synthetic values."
+  },
+  {
+   "id": "watchdog.history.tax_pressure_trend_30d",
+   "label": "Tax pressure 30-day trend",
+   "description": "Observed tax-pressure change normalized to 30 days. Not a tax forecast.",
+   "category": "watchdog intelligence",
+   "scope": "property",
+   "tier": "pro",
+   "origin": "watchdog-derived",
+   "proprietary": true,
+   "professions": [
+    "consumer",
+    "attorney",
+    "agent",
+    "lender",
+    "appraiser",
+    "investor"
+   ],
+   "source_id": "watchdog-models",
+   "field": "history_tax_pressure_trend_30d",
+   "provider_status": "live",
+   "provider_note": "Production Data Center provider governance marks this derived marker live. Runtime execution remains dependency-gated and missing inputs do not receive synthetic values."
+  },
+  {
+   "id": "watchdog.history.tax_pressure_volatility",
+   "label": "Tax pressure volatility",
+   "description": "Population standard deviation of the tax-pressure score across trusted observations.",
+   "category": "watchdog intelligence",
+   "scope": "property",
+   "tier": "pro",
+   "origin": "watchdog-derived",
+   "proprietary": true,
+   "professions": [
+    "consumer",
+    "attorney",
+    "agent",
+    "lender",
+    "appraiser",
+    "investor"
+   ],
+   "source_id": "watchdog-models",
+   "field": "history_tax_pressure_volatility",
+   "provider_status": "live",
+   "provider_note": "Production Data Center provider governance marks this derived marker live. Runtime execution remains dependency-gated and missing inputs do not receive synthetic values."
+  },
+  {
+   "id": "watchdog.history.revaluation_risk_delta",
+   "label": "Revaluation risk change",
+   "description": "Latest minus earliest trusted revaluation-risk score in the observation window.",
+   "category": "watchdog intelligence",
+   "scope": "property",
+   "tier": "pro",
+   "origin": "watchdog-derived",
+   "proprietary": true,
+   "professions": [
+    "consumer",
+    "attorney",
+    "agent",
+    "lender",
+    "appraiser",
+    "investor"
+   ],
+   "source_id": "watchdog-models",
+   "field": "history_revaluation_risk_delta",
+   "provider_status": "live",
+   "provider_note": "Production Data Center provider governance marks this derived marker live. Runtime execution remains dependency-gated and missing inputs do not receive synthetic values."
+  },
+  {
+   "id": "watchdog.history.uniformity_delta",
+   "label": "Uniformity score change",
+   "description": "Latest minus earliest trusted assessment-uniformity score in the observation window.",
+   "category": "watchdog intelligence",
+   "scope": "property",
+   "tier": "pro",
+   "origin": "watchdog-derived",
+   "proprietary": true,
+   "professions": [
+    "consumer",
+    "attorney",
+    "agent",
+    "lender",
+    "appraiser",
+    "investor"
+   ],
+   "source_id": "watchdog-models",
+   "field": "history_uniformity_delta",
+   "provider_status": "live",
+   "provider_note": "Production Data Center provider governance marks this derived marker live. Runtime execution remains dependency-gated and missing inputs do not receive synthetic values."
+  },
+  {
+   "id": "watchdog.consumer.appeal_readiness",
+   "label": "Appeal readiness",
+   "description": "Homeowner appeal-readiness context: 50% governed appeal evidence strength and 50% evidence-chain completeness. Both inputs are required. Not a prediction of success or legal advice.",
+   "category": "appeals",
+   "scope": "property",
+   "tier": "pro",
+   "origin": "watchdog-derived",
+   "proprietary": true,
+   "professions": [
+    "consumer",
+    "attorney",
+    "agent"
+   ],
+   "source_id": "watchdog-models",
+   "field": "consumer_appeal_readiness",
+   "unit": "score / 100",
+   "provider_status": "live",
+   "provider_note": "Production Data Center provider governance marks this derived marker live. Runtime execution remains dependency-gated and missing inputs do not receive synthetic values."
+  },
+  {
+   "id": "watchdog.tax_appeal_evidence_strength",
+   "label": "Tax appeal evidence strength",
+   "description": "Canonical alias of the governed Appeal Evidence Strength model. Not legal advice or a prediction of appeal success.",
+   "category": "appeals",
+   "scope": "property",
+   "tier": "pro",
+   "origin": "watchdog-derived",
+   "proprietary": true,
+   "professions": [
+    "consumer",
+    "attorney",
+    "agent",
+    "appraiser"
+   ],
+   "source_id": "watchdog-models",
+   "field": "tax_appeal_evidence_strength",
+   "unit": "score / 100",
+   "provider_status": "live",
+   "provider_note": "Production Data Center provider governance marks this derived marker live. Runtime execution remains dependency-gated and missing inputs do not receive synthetic values."
+  },
+  {
+   "id": "watchdog.comparable_evidence_quality",
+   "label": "Comparable evidence quality",
+   "description": "70% governed comparable-evidence reliability and 30% appraisal public-record completeness. Both inputs are required.",
+   "category": "appraisal",
+   "scope": "property",
+   "tier": "pro",
+   "origin": "watchdog-derived",
+   "proprietary": true,
+   "professions": [
+    "attorney",
+    "agent",
+    "lender",
+    "appraiser"
+   ],
+   "source_id": "watchdog-models",
+   "field": "comparable_evidence_quality",
+   "unit": "score / 100",
+   "provider_status": "live",
+   "provider_note": "Production Data Center provider governance marks this derived marker live. Runtime execution remains dependency-gated and missing inputs do not receive synthetic values."
+  },
+  {
+   "id": "watchdog.title_evidence_completeness",
+   "label": "Title evidence completeness",
+   "description": "Completeness of the defined municipal-search, recording-reference and parcel-identity public evidence. Not a title opinion or lien clearance.",
+   "category": "title diligence",
+   "scope": "property",
+   "tier": "pro",
+   "origin": "watchdog-derived",
+   "proprietary": true,
+   "professions": [
+    "attorney",
+    "title",
+    "lender"
+   ],
+   "source_id": "watchdog-models",
+   "field": "title_evidence_completeness",
+   "unit": "score / 100",
+   "provider_status": "live",
+   "provider_note": "Production Data Center provider governance marks this derived marker live. Runtime execution remains dependency-gated and missing inputs do not receive synthetic values."
+  },
+  {
+   "id": "watchdog.closing_clearance_confidence",
+   "label": "Closing clearance confidence",
+   "description": "Public-record closing triage confidence from title evidence completeness, inverse closing exception priority and parcel identity confidence. Does not certify clear title.",
+   "category": "title diligence",
+   "scope": "property",
+   "tier": "pro",
+   "origin": "watchdog-derived",
+   "proprietary": true,
+   "professions": [
+    "attorney",
+    "title",
+    "lender",
+    "agent"
+   ],
+   "source_id": "watchdog-models",
+   "field": "closing_clearance_confidence",
+   "unit": "score / 100",
+   "provider_status": "live",
+   "provider_note": "Production Data Center provider governance marks this derived marker live. Runtime execution remains dependency-gated and missing inputs do not receive synthetic values."
+  },
+  {
+   "id": "watchdog.contractor.site_approval_complexity",
+   "label": "Site approval complexity",
+   "description": "Public-record screening of overlapping review contexts: regulatory density, environmental encumbrance and title/public-land constraints. Not a buildability or permitting determination.",
+   "category": "permits",
+   "scope": "property",
+   "tier": "pro",
+   "origin": "watchdog-derived",
+   "proprietary": true,
+   "professions": [
+    "contractor",
+    "investor",
+    "attorney"
+   ],
+   "source_id": "watchdog-models",
+   "field": "contractor_site_approval_complexity",
+   "unit": "score / 100",
+   "provider_status": "live",
+   "provider_note": "Production Data Center provider governance marks this derived marker live. Runtime execution remains dependency-gated and missing inputs do not receive synthetic values."
+  },
+  {
+   "id": "watchdog.open_permit_gap_presence",
+   "label": "Open permit gap present",
+   "description": "0 when the DCA permit provider reports no permit-issued/certificate gap; 100 when one or more gaps are present.",
+   "category": "permits",
+   "scope": "property",
+   "tier": "pro",
+   "origin": "watchdog-derived",
+   "proprietary": true,
+   "professions": [
+    "consumer",
+    "attorney",
+    "title",
+    "agent",
+    "contractor",
+    "investor"
+   ],
+   "source_id": "watchdog-models",
+   "field": "open_permit_gap_presence",
+   "unit": "score / 100",
+   "provider_status": "live",
+   "provider_note": "Production Data Center provider governance marks this derived marker live. Runtime execution remains dependency-gated and missing inputs do not receive synthetic values."
+  },
+  {
+   "id": "watchdog.permit_latest_record_age_years",
+   "label": "Latest permit record age",
+   "description": "Calendar years since the latest DCA permit record. Not the age of a physical condition or proof that work remains open.",
+   "category": "permits",
+   "scope": "property",
+   "tier": "pro",
+   "origin": "watchdog-derived",
+   "proprietary": true,
+   "professions": [
+    "attorney",
+    "title",
+    "agent",
+    "contractor",
+    "investor"
+   ],
+   "source_id": "watchdog-models",
+   "field": "permit_latest_record_age_years",
+   "unit": "years",
+   "provider_status": "live",
+   "provider_note": "Production Data Center provider governance marks this derived marker live. Runtime execution remains dependency-gated and missing inputs do not receive synthetic values."
+  },
+  {
+   "id": "watchdog.permit_record_age_attention",
+   "label": "Permit record age attention",
+   "description": "Latest permit-record age scaled to 0-100 over ten years; context for an existing permit or certificate gap.",
+   "category": "permits",
+   "scope": "property",
+   "tier": "pro",
+   "origin": "watchdog-derived",
+   "proprietary": true,
+   "professions": [
+    "attorney",
+    "title",
+    "agent",
+    "contractor",
+    "investor"
+   ],
+   "source_id": "watchdog-models",
+   "field": "permit_record_age_attention",
+   "unit": "score / 100",
+   "provider_status": "live",
+   "provider_note": "Production Data Center provider governance marks this derived marker live. Runtime execution remains dependency-gated and missing inputs do not receive synthetic values."
+  },
+  {
+   "id": "watchdog.exit_liquidity_score",
+   "label": "Exit liquidity score",
+   "description": "Investor screening score from inverse marketability drag, property story confidence, inverse carry-cost volatility and inverse asset constraints. All four inputs are required. Not a sale-timing or price forecast.",
+   "category": "investment",
+   "scope": "property",
+   "tier": "pro",
+   "origin": "watchdog-derived",
+   "proprietary": true,
+   "professions": [
+    "investor",
+    "agent",
+    "lender"
+   ],
+   "source_id": "watchdog-models",
+   "field": "exit_liquidity_score",
+   "unit": "score / 100",
+   "provider_status": "live",
+   "provider_note": "Production Data Center provider governance marks this derived marker live. Runtime execution remains dependency-gated and missing inputs do not receive synthetic values."
+  },
+  {
+   "id": "watchdog.portfolio_data_confidence",
+   "label": "Portfolio data confidence",
+   "description": "Evidence-coverage score from property story confidence, physical-risk source coverage and municipal source coverage. Measures evidence, not investment quality.",
+   "category": "investment",
+   "scope": "property",
+   "tier": "pro",
+   "origin": "watchdog-derived",
+   "proprietary": true,
+   "professions": [
+    "investor",
+    "lender",
+    "insurance"
+   ],
+   "source_id": "watchdog-models",
+   "field": "portfolio_data_confidence",
+   "unit": "score / 100",
+   "provider_status": "live",
+   "provider_note": "Production Data Center provider governance marks this derived marker live. Runtime execution remains dependency-gated and missing inputs do not receive synthetic values."
+  },
+  {
+   "id": "watchdog.municipal_fiscal_beta",
+   "label": "Municipal fiscal beta",
+   "description": "Screening score for property-tax sensitivity to local levy and ratable-base imbalance and reset pressure. Not a statistical beta or tax forecast.",
+   "category": "investment",
+   "scope": "property",
+   "tier": "pro",
+   "origin": "watchdog-derived",
+   "proprietary": true,
+   "professions": [
+    "investor",
+    "lender",
+    "municipal"
+   ],
+   "source_id": "watchdog-models",
+   "field": "municipal_fiscal_beta",
+   "unit": "score / 100",
+   "provider_status": "live",
+   "provider_note": "Production Data Center provider governance marks this derived marker live. Runtime execution remains dependency-gated and missing inputs do not receive synthetic values."
+  },
+  {
+   "id": "watchdog.fiscal_intervention_priority",
+   "label": "Fiscal intervention priority",
+   "description": "The strongest of four governed municipal pressure screens: tax-base absorption, exemption pressure, tax-rate pressure and revaluation risk. Not a fiscal distress determination.",
+   "category": "municipal finance",
+   "scope": "municipality",
+   "tier": "pro",
+   "origin": "watchdog-derived",
+   "proprietary": true,
+   "professions": [
+    "municipal",
+    "investor",
+    "attorney"
+   ],
+   "source_id": "watchdog-models",
+   "field": "fiscal_intervention_priority",
+   "unit": "score / 100",
+   "provider_status": "live",
+   "provider_note": "Production Data Center provider governance marks this derived marker live. Runtime execution remains dependency-gated and missing inputs do not receive synthetic values."
+  },
+  {
+   "id": "watchdog.revenue_base_resilience",
+   "label": "Revenue base resilience",
+   "description": "Municipal screening score from ratable growth quality, collection resilience and inverse exemption pressure. Not a revenue forecast or credit rating.",
+   "category": "municipal finance",
+   "scope": "municipality",
+   "tier": "pro",
+   "origin": "watchdog-derived",
+   "proprietary": true,
+   "professions": [
+    "municipal",
+    "investor",
+    "lender"
+   ],
+   "source_id": "watchdog-models",
+   "field": "revenue_base_resilience",
+   "unit": "score / 100",
+   "provider_status": "live",
+   "provider_note": "Production Data Center provider governance marks this derived marker live. Runtime execution remains dependency-gated and missing inputs do not receive synthetic values."
+  },
+  {
+   "id": "watchdog.service_cost_ratable_gap",
+   "label": "Service cost vs. ratable growth gap",
+   "description": "Levy growth minus ratable-base growth from the governed DCA budget model. Positive values mean levy growth is outpacing organic ratable growth.",
+   "category": "municipal finance",
+   "scope": "municipality",
+   "tier": "pro",
+   "origin": "watchdog-derived",
+   "proprietary": true,
+   "professions": [
+    "municipal",
+    "investor",
+    "consumer"
+   ],
+   "source_id": "watchdog-models",
+   "field": "service_cost_ratable_gap",
+   "provider_status": "live",
+   "provider_note": "Production Data Center provider governance marks this derived marker live. Runtime execution remains dependency-gated and missing inputs do not receive synthetic values."
+  },
+  {
+   "id": "watchdog.tax_history_5y_completeness",
+   "label": "Five-year tax-rate history completeness",
+   "description": "Share of the official 2021-2025 municipal general tax-rate fields that are present. Evidence depth only.",
+   "category": "municipal finance",
+   "scope": "municipality",
+   "tier": "pro",
+   "origin": "watchdog-derived",
+   "proprietary": true,
+   "professions": [
+    "municipal",
+    "investor",
+    "consumer"
+   ],
+   "source_id": "watchdog-models",
+   "field": "tax_history_5y_completeness",
+   "unit": "score / 100",
+   "provider_status": "live",
+   "provider_note": "Production Data Center provider governance marks this derived marker live. Runtime execution remains dependency-gated and missing inputs do not receive synthetic values."
+  },
+  {
+   "id": "watchdog.redevelopment_incentive_exposure",
+   "label": "Redevelopment incentive exposure",
+   "description": "Municipal context from governed PILOT value share and abated tax-base share. Does not infer eligibility or agreement terms.",
+   "category": "development",
+   "scope": "municipality",
+   "tier": "pro",
+   "origin": "watchdog-derived",
+   "proprietary": true,
+   "professions": [
+    "investor",
+    "contractor",
+    "municipal"
+   ],
+   "source_id": "watchdog-models",
+   "field": "redevelopment_incentive_exposure",
+   "unit": "score / 100",
+   "provider_status": "live",
+   "provider_note": "Production Data Center provider governance marks this derived marker live. Runtime execution remains dependency-gated and missing inputs do not receive synthetic values."
   }
  ],
  "provider_summary": {
@@ -28602,5 +29440,14 @@
   "planned": "Cataloged marker without a connected resolver path.",
   "unavailable": "Connected source does not supply this field, or no authoritative source has been confirmed at all."
  },
- "catalog_extension": "nj-source-pack-v037.json; availability is resolved from production data_center_provider_coverage."
+ "catalog_extension": "nj-source-pack-v037.json; availability is resolved from production data_center_provider_coverage.",
+ "marker_aliases": {
+  "property.class": "property.property_class",
+  "property.acres": "property.lot_area",
+  "property.land_value": "property.land_assessment",
+  "property.improvement_value": "property.improvement_assessment",
+  "property.last_sale_price": "property.sale_price",
+  "property.deed_date": "property.sale_date",
+  "watchdog.score": "watchdog.watchdog_score"
+ }
 }
