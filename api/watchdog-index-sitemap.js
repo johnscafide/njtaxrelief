@@ -80,6 +80,7 @@ const CURATED_PUBLIC_ROUTES = [
   { path: '/senior-benefit-estimator', lastmod: '2026-08-24', changefreq: 'monthly', priority: '0.82' },
   { path: '/nj-property-tax-calendar', lastmod: '2026-08-24', changefreq: 'monthly', priority: '0.84' },
   { path: '/pro', lastmod: '2026-08-22', changefreq: 'monthly', priority: '0.78' },
+  { path: '/agents/trial', lastmod: '2026-09-29', changefreq: 'monthly', priority: '0.84' },
   { path: '/trust', lastmod: '2026-08-22', changefreq: 'monthly', priority: '0.72' },
   { path: '/robust', lastmod: '2026-08-22', changefreq: 'monthly', priority: '0.86' },
   { path: '/robust/recourse', lastmod: '2026-08-22', changefreq: 'monthly', priority: '0.72' },
