@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="utf-8"?>
+<full-backup-content>
+    <!-- Sessions and tokens never leave the device through backup. -->
+    <exclude domain="sharedpref" path="supabase_session.xml" />
+    <exclude domain="file" path="datastore/watchdog_session.preferences_pb" />
+</full-backup-content>

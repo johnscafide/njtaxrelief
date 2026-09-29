@@ -5,3 +5,13 @@ property/data-factory-work/
 property/scripts/__pycache__/
 /node_modules/
 dist/
+
+# Watchdog for Android (watchdogandroid/): build output and machine-local files
+watchdogandroid/**/build/
+watchdogandroid/**/.gradle/
+watchdogandroid/.idea/
+watchdogandroid/**/.kotlin/
+watchdogandroid/local.properties
+watchdogandroid/keystore.properties
+watchdogandroid/app/google-services.json
+watchdogandroid/preview/local.properties
