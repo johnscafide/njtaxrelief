@@ -25,6 +25,7 @@ android {
         testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
         vectorDrawables.useSupportLibrary = true
         buildConfigField("boolean", "FIREBASE_CONFIGURED", hasGoogleServices.toString())
+        buildConfigField("boolean", "PASSKEYS_ENABLED", "false") // The backend has no WebAuthn yet; flip when it does.
     }
 
     signingConfigs {

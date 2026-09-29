@@ -20,10 +20,13 @@ import androidx.compose.ui.geometry.Size
 import androidx.compose.ui.graphics.Brush
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.Path
+import androidx.compose.ui.graphics.PathOperation
 import androidx.compose.ui.graphics.Shape
+import androidx.compose.ui.graphics.addOutline
 import androidx.compose.ui.graphics.drawOutline
 import androidx.compose.ui.graphics.drawscope.clipPath
 import androidx.compose.ui.graphics.drawscope.rotate
+import androidx.compose.ui.graphics.drawscope.translate
 import androidx.compose.ui.semantics.contentDescription
 import androidx.compose.ui.semantics.semantics
 import androidx.compose.ui.text.AnnotatedString
@@ -96,7 +99,7 @@ fun Modifier.intelligenceSurface(
         val ring = Path().apply {
             addOutline(outer)
             val innerPath = Path().apply { addOutline(inner); translate(Offset(bw, bw)) }
-            op(this, innerPath, androidx.compose.ui.graphics.PathOperation.Difference)
+            op(this, innerPath, PathOperation.Difference)
         }
         // CSS conic-gradient(from angle, cyan 0deg, blue 90deg, violet 170deg, magenta 260deg, cyan 360deg),
         // where 0deg points up. Compose sweep gradients start at 3 o'clock, hence the -90 offset.

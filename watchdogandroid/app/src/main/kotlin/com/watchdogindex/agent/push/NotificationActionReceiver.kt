@@ -1,0 +1,33 @@
+package com.watchdogindex.agent.push
+
+import android.app.PendingIntent
+import android.content.BroadcastReceiver
+import android.content.Context
+import android.content.Intent
+import androidx.core.app.NotificationManagerCompat
+
+/** Handles the "Later" action: clears that one alert without opening the app. Declared non-exported in the manifest. */
+class NotificationActionReceiver : BroadcastReceiver() {
+    override fun onReceive(context: Context, intent: Intent) {
+        if (intent.action != ACTION_DISMISS) return
+        val id = intent.getIntExtra(WatchdogMessagingService.EXTRA_NOTIFICATION_ID, -1)
+        if (id >= 0) NotificationManagerCompat.from(context).cancel(id)
+    }
+
+    companion object {
+        const val ACTION_DISMISS = "com.watchdogindex.agent.action.DISMISS_NOTIFICATION"
+
+        fun dismissIntent(context: Context, notificationId: Int, requestSalt: Int): PendingIntent {
+            val intent = Intent(context, NotificationActionReceiver::class.java).apply {
+                action = ACTION_DISMISS
+                putExtra(WatchdogMessagingService.EXTRA_NOTIFICATION_ID, notificationId)
+            }
+            return PendingIntent.getBroadcast(
+                context,
+                notificationId * 8 + requestSalt,
+                intent,
+                PendingIntent.FLAG_UPDATE_CURRENT or PendingIntent.FLAG_IMMUTABLE,
+            )
+        }
+    }
+}

@@ -1,6 +1,8 @@
 package com.watchdogindex.agent.ui.preview
 
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.CompositionLocalProvider
+import androidx.compose.runtime.staticCompositionLocalOf
 import com.watchdogindex.agent.app.AppGraph
 import com.watchdogindex.agent.app.WatchdogApp
 import com.watchdogindex.agent.design.ThemeMode
@@ -19,6 +21,19 @@ data class CatalogEntry(
     val route: Route,
     val fullHeightDp: Int? = null,
 )
+
+/**
+ * Lets the screenshot harness open a screen in a specific state without changing the screen's public API.
+ * Screens read [LocalPreviewState] once on first composition and otherwise ignore it (it is null in the app).
+ */
+data class PreviewState(
+    /** Marketing: open the true cost share sheet for this PIN, as the approved mockup shows it. */
+    val openTrueCostSheetPin: String? = null,
+    /** Scan: show the result already resolved (the mockup shows a finished paste lookup). */
+    val scanResolved: Boolean = false,
+)
+
+val LocalPreviewState = staticCompositionLocalOf<PreviewState?> { null }
 
 object ScreenCatalog {
     const val WIDTH_DP = 412
@@ -42,7 +57,14 @@ object ScreenCatalog {
 /** Renders one catalog entry with the sample graph in the given theme, exactly as the app would. */
 @Composable
 fun CatalogScreen(entry: CatalogEntry, graph: AppGraph, dark: Boolean) {
+    val preview = when (entry.id) {
+        "marketing" -> PreviewState(openTrueCostSheetPin = "0409_285.14_9")
+        "scan" -> PreviewState(scanResolved = true)
+        else -> PreviewState()
+    }
     WatchdogApp(graph = graph, themeMode = if (dark) ThemeMode.Dark else ThemeMode.Light, reducedMotion = true) {
-        ScreenHost(entry.route, NoopNavigator)
+        CompositionLocalProvider(LocalPreviewState provides preview) {
+            ScreenHost(entry.route, NoopNavigator)
+        }
     }
 }

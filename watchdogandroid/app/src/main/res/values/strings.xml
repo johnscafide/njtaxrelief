@@ -3,4 +3,23 @@
     <string name="app_name">Watchdog</string>
     <string name="camera_purpose">Watchdog uses the camera only to read the QR rider on a For Sale sign so it can look up that home.</string>
     <string name="location_purpose">Watchdog uses your location only while scanning a sign, to confirm which parcel is in front of you.</string>
+
+    <!-- Notification channel groups (channels themselves are named from AlertChannel in core). -->
+    <string name="notification_group_alerts">Alerts</string>
+    <string name="notification_group_monday_brief">Monday brief</string>
+    <string name="notification_summary_title">Watchdog</string>
+    <string name="notification_summary_text">New changes in your clients\' homes and farm</string>
+
+    <!-- Camera permission notice inside the Scan screen. -->
+    <string name="scan_camera_denied_title">Camera access is off</string>
+    <string name="scan_camera_denied_body">Watchdog uses the camera only to read the QR rider on a For Sale sign. Allow camera access, or paste the listing link instead.</string>
+    <string name="scan_camera_allow">Allow camera</string>
+    <string name="scan_camera_settings">Open settings</string>
+    <string name="scan_camera_preview_description">Camera preview. Point at the QR code on the For Sale sign.</string>
+    <string name="farm_map_description">Farm map. Parcels are colored by Watchdog Score; gold dots mark homes sold in the last 12 months.</string>
+
+    <!-- Platform services. -->
+    <string name="share_chooser_title">Share</string>
+    <string name="copied_toast">Copied</string>
+    <string name="no_app_toast">No app on this phone can open that.</string>
 </resources>

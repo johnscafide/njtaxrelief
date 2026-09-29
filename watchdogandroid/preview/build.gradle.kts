@@ -62,7 +62,7 @@ compose.desktop {
         nativeDistributions {
             targetFormats(TargetFormat.Msi, TargetFormat.Dmg, TargetFormat.Deb)
             packageName = "WatchdogPreview"
-            packageVersion = "0.1.0"
+            packageVersion = "1.0.0"
         }
     }
 }

@@ -1,0 +1,128 @@
+<?xml version="1.0" encoding="utf-8"?>
+<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <uses-permission android:name="android.permission.INTERNET" />
+    <!-- Camera: only to read the QR rider on a For Sale sign (see @string/camera_purpose). -->
+    <uses-permission android:name="android.permission.CAMERA" />
+    <!-- Location: only while a sign is being scanned, to confirm the parcel in front of the agent. -->
+    <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" />
+    <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
+    <uses-permission android:name="android.permission.POST_NOTIFICATIONS" />
+    <uses-permission android:name="android.permission.VIBRATE" />
+
+    <!-- The app works without a camera (Scan opens in paste mode) and without GPS. -->
+    <uses-feature android:name="android.hardware.camera.any" android:required="false" />
+    <uses-feature android:name="android.hardware.location" android:required="false" />
+    <uses-feature android:name="android.hardware.location.gps" android:required="false" />
+
+    <application
+        android:name=".WatchdogApplication"
+        android:label="@string/app_name"
+        android:icon="@mipmap/ic_launcher"
+        android:roundIcon="@mipmap/ic_launcher_round"
+        android:theme="@style/Theme.Watchdog.Starting"
+        android:allowBackup="true"
+        android:fullBackupContent="@xml/backup_rules"
+        android:dataExtractionRules="@xml/data_extraction_rules"
+        android:usesCleartextTraffic="false"
+        android:supportsRtl="true"
+        android:enableOnBackInvokedCallback="true"
+        tools:targetApi="tiramisu">
+
+        <activity
+            android:name=".MainActivity"
+            android:exported="true"
+            android:launchMode="singleTask"
+            android:theme="@style/Theme.Watchdog.Starting"
+            android:windowSoftInputMode="adjustResize">
+
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+
+            <!-- Share target: a listing link shared from Zillow, Realtor.com or Redfin opens Scan with that link. -->
+            <intent-filter>
+                <action android:name="android.intent.action.SEND" />
+                <category android:name="android.intent.category.DEFAULT" />
+                <data android:mimeType="text/plain" />
+            </intent-filter>
+
+            <!--
+              Android App Links for the clean public Watchdog URLs. Verification needs
+              https://www.watchdogindex.com/.well-known/assetlinks.json to list this package
+              (com.watchdogindex.agent, and com.watchdogindex.agent.debug for debug builds) with the SHA-256 of the
+              signing certificate; the verifier does not follow redirects, so the file must be served directly by
+              the www host. Until it is published these links still open the app from the disambiguation dialog.
+            -->
+            <intent-filter android:autoVerify="true">
+                <action android:name="android.intent.action.VIEW" />
+                <category android:name="android.intent.category.DEFAULT" />
+                <category android:name="android.intent.category.BROWSABLE" />
+                <data android:scheme="https" />
+                <data android:host="www.watchdogindex.com" />
+                <data android:pathPrefix="/nj/" />
+                <data android:path="/true-cost" />
+                <data android:path="/checkup" />
+                <data android:path="/scan" />
+            </intent-filter>
+
+            <!-- The bare host 301-redirects to www, which the App Links verifier cannot follow, so it is not auto-verified. -->
+            <intent-filter>
+                <action android:name="android.intent.action.VIEW" />
+                <category android:name="android.intent.category.DEFAULT" />
+                <category android:name="android.intent.category.BROWSABLE" />
+                <data android:scheme="https" />
+                <data android:host="watchdogindex.com" />
+                <data android:pathPrefix="/nj/" />
+                <data android:path="/true-cost" />
+                <data android:path="/checkup" />
+                <data android:path="/scan" />
+            </intent-filter>
+
+            <!-- watchdog://property/<pin>, watchdog://scan?url=..., watchdog://farm, watchdog://brief ... -->
+            <intent-filter>
+                <action android:name="android.intent.action.VIEW" />
+                <category android:name="android.intent.category.DEFAULT" />
+                <category android:name="android.intent.category.BROWSABLE" />
+                <data android:scheme="watchdog" />
+            </intent-filter>
+        </activity>
+
+        <!-- Firebase Cloud Messaging. Only active when google-services.json is present (BuildConfig.FIREBASE_CONFIGURED). -->
+        <service
+            android:name=".push.WatchdogMessagingService"
+            android:exported="false">
+            <intent-filter>
+                <action android:name="com.google.firebase.MESSAGING_EVENT" />
+            </intent-filter>
+        </service>
+
+        <!-- Handles the "Later" notification action (dismiss without opening the app). -->
+        <receiver
+            android:name=".push.NotificationActionReceiver"
+            android:exported="false" />
+
+        <!-- Shared true cost card images are written to cacheDir/shared_cards and handed to the Sharesheet by URI. -->
+        <provider
+            android:name="androidx.core.content.FileProvider"
+            android:authorities="${applicationId}.fileprovider"
+            android:exported="false"
+            android:grantUriPermissions="true">
+            <meta-data
+                android:name="android.support.FILE_PROVIDER_PATHS"
+                android:resource="@xml/file_paths" />
+        </provider>
+
+        <meta-data
+            android:name="com.google.firebase.messaging.default_notification_icon"
+            android:resource="@drawable/ic_notification" />
+        <meta-data
+            android:name="com.google.firebase.messaging.default_notification_color"
+            android:resource="@color/mark_blue" />
+        <meta-data
+            android:name="com.google.firebase.messaging.default_notification_channel_id"
+            android:value="client_home_changes" />
+    </application>
+</manifest>
