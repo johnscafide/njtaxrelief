@@ -48,7 +48,10 @@ class MainActivity : ComponentActivity() {
         val splashStart = SystemClock.elapsedRealtime()
         splash.setKeepOnScreenCondition {
             val restored = app.sessionRestored.value && graph.repos.auth.state.value !is AuthState.Unknown
-            !restored && SystemClock.elapsedRealtime() - splashStart < SPLASH_MAX_MILLIS
+            // Kotlin reads a line that starts with "!" as a continuation of the previous "!is", so keep the
+            // condition in a named value.
+            val stillWaiting = !restored && SystemClock.elapsedRealtime() - splashStart < SPLASH_MAX_MILLIS
+            stillWaiting
         }
 
         if (savedInstanceState == null) pendingRoute = intent?.toRoute()
