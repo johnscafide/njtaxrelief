@@ -32,5 +32,6 @@ assert.doesNotMatch(migration,/p_(?:gross_income|nj_taxable_income|filing_status
 assert.doesNotMatch(migration,/(?:gross_income|nj_taxable_income|filing_status|birth_year)\s*=\s*excluded\./i);
 assert.match(account,/set_my_reusable_profile_v1/);
 assert.match(account,/syncAuthDisplayName/);
-assert.match(accountPartial,/Only reusable account details belong here/i);
+// Account disclaimer rewritten in NJW-431 (4fb2e3d9).
+assert.match(accountPartial,/This section is only for reusable name and mailing details\./i);
 console.log('NJW-335 safe ANCHOR reusable profile sync contract passed');

@@ -27,7 +27,20 @@ assert.match(checkout, /normalizeTier[\s\S]*\['agent', 'pro', 'pro_plus'\]/, 'ap
 assert.match(checkout, /sha256\(code\)/, 'plaintext beta codes must be hashed before storage/claim');
 assert.match(checkout, /betaRedeem = action === 'redeem_beta_trial'/, 'beta redemption must be a distinct controlled path');
 assert.match(checkout, /if \(!betaRedeem && control\.mode === 'controlled'/, 'beta redemption may bypass only the normal controlled-user allowlist');
-assert.match(checkout, /if \(control\.mode !== 'controlled'\)[\s\S]*BETA_TRIAL_UNAVAILABLE/, 'beta redemption must fail outside controlled launch mode');
+// NJW-53 (commit a6231baa) deliberately keeps invite-only beta redemption available after the
+// soft launch opens billing. Outside controlled mode, redemption must therefore still fail while
+// billing is closed and must pass the database-backed live_billing_lifecycle gate before
+// redeemBetaTrial() can run.
+const redeemStart = checkout.indexOf('async function redeemBetaTrial(');
+const redeemGuard = checkout.slice(redeemStart, checkout.indexOf('const code = normalizeBetaCode', redeemStart));
+assert.match(redeemGuard, /if \(control\.mode === 'closed'\)[\s\S]*BETA_TRIAL_UNAVAILABLE/, 'beta redemption must fail while billing is closed');
+const betaDispatchAt = checkout.indexOf('if (betaRedeem) return redeemBetaTrial(');
+const closedGateAt = checkout.search(/if \(control\.mode === 'closed'\) return json\(req,[^\n]*'BILLING_ENROLLMENT_CLOSED'/);
+const liveGateAt = checkout.search(/if \(control\.mode === 'open' && !control\.liveGatePassed\) \{[^\n]*\n[^\n]*'BILLING_GATE_NOT_PASSED'/);
+assert(redeemStart > 0 && betaDispatchAt > 0, 'beta redemption dispatch must exist');
+assert(closedGateAt > 0 && closedGateAt < betaDispatchAt, 'beta redemption must be refused by the closed-billing gate before redemption runs');
+assert(liveGateAt > 0 && liveGateAt < betaDispatchAt, 'beta redemption outside controlled launch mode must pass the live billing gate before redemption runs');
+assert.match(checkout, /\.eq\('gate_key', 'live_billing_lifecycle'\)[\s\S]{0,700}liveGatePassed: data\?\.status === 'passed'/, 'open-mode beta redemption must be governed by the live_billing_lifecycle release gate');
 assert.match(checkout, /resolvePrice\(stripe, tier, 'monthly'\)/, 'beta continuation must use the governed monthly price');
 assert.match(checkout, /trial_period_days: durationDays/, 'Stripe must own the beta trial clock');
 assert.match(checkout, /missing_payment_method: 'cancel'/, 'Stripe must cancel at beta end when no payment method exists');
@@ -40,7 +53,9 @@ assert.match(betaPage, /noindex,nofollow,noarchive/, 'beta redemption surface mu
 assert.match(betaPage, /sessionStorage\.setItem\('watchdog_beta_code'/, 'beta code must survive the sign-in redirect in tab storage');
 assert.match(betaPage, /history\.replaceState/, 'beta code must be removed from the visible URL fragment promptly');
 assert.match(betaPage, /action:'redeem_beta_trial'/, 'beta page must use the governed redemption action');
-assert.match(betaPage, /No card to begin/, 'beta UX must clearly state no card is required');
+// Copy polished in commit f621d722 ("No card to begin" became the sentences below).
+assert.match(betaPage, /<p class="lead" id="hero-copy">[^<]*No credit card is required to begin\.<\/p>/, 'beta UX must clearly state no card is required');
+assert.match(betaPage, /No credit card is required to activate\./, 'beta UX must clearly state no card is required');
 assert.match(betaPage, /returns to Standard/, 'beta UX must clearly explain no-payment fallback');
 
 assert.match(devPage, /data-access-require="developer"/, 'beta admin page must be developer-only');

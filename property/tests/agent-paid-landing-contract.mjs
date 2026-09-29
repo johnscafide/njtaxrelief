@@ -32,7 +32,8 @@ expect(js.includes("sessionStorage.setItem('watchdog:lifetime:pending','agent')"
 expect(js.includes('watchdog:agent-paid-attribution'),'paid acquisition attribution is not preserved');
 expect(js.includes('agent_annual_exit_offer_view'),'exit offer analytics missing');
 expect(js.includes("document.addEventListener('mouseout',onExitIntent)"),'desktop exit intent trigger missing');
-expect(css.includes('@media(max-width:720px)'),'mobile landing breakpoint missing');
+// The approved graphical landing (f9ec6a34) moved the mobile breakpoint from 720px to 760px.
+expect(css.includes('@media(max-width:760px)'),'mobile landing breakpoint missing');
 expect(billing.includes("sessionStorage.getItem('watchdog:lifetime:pending')"),'billing client cannot resume pending Lifetime checkout');
 expect(billing.includes("invoke('create-lifetime-checkout',{tier:tier})"),'billing client Lifetime resume is not server-authoritative');
 

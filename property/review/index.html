@@ -58,7 +58,9 @@
           <span>Please tell us what we could have done better before submitting your rating.</span>
         </div>
         <label id="review-comment-label" class="review-label" for="review-comment">Anything you'd like to add? <span>Optional</span></label>
-        <textarea id="review-comment" maxlength="1200" rows="5" placeholder="Tell us what worked well or what we could improve."></textarea>
+        <template id="review-comment-label-optional">Anything you'd like to add? <span>Optional</span></template>
+        <template id="review-comment-label-required">What could we have done better? <span>Required</span></template>
+        <textarea id="review-comment" maxlength="1200" rows="5" placeholder="Tell us what worked well or what we could improve." data-placeholder-optional="Tell us what worked well or what we could improve." data-placeholder-required="Please tell us what happened or what we could improve."></textarea>
         <p class="review-privacy">Your email and application details are never published. Written comments stay private unless Watchdog separately approves them for testimonial use.</p>
         <button id="review-submit" type="button" class="review-button review-submit">Submit review</button>
       </div>

@@ -3,7 +3,7 @@ const SERVICE_KEY = process.env.SUPABASE_SERVICE_ROLE_KEY || '';
 const PUBLISHABLE_KEY = 'sb_publishable_MYX59qCbK3d-21zDfJqkNw_fvmfnexa';
 const ALLOWED_HOSTS = new Set(['www.watchdogindex.com', 'watchdogindex.com']);
 const REVIEW_SELECT = 'id,rating,review_comment,public_comment_approved,public_comment_approved_at,submitted_at,updated_at';
-const OUTREACH_SELECT = 'id,user_id,application_id,campaign_key,prepared_at,sent_at,first_opened_at,last_opened_at,open_count,first_clicked_at,last_clicked_at,click_count,last_click_rating,review_submitted_at,review_id,written_review';
+const OUTREACH_SELECT = 'id,user_id,campaign_key,prepared_at,sent_at,first_opened_at,last_opened_at,open_count,first_clicked_at,last_clicked_at,click_count,last_click_rating,review_submitted_at,review_id,written_review';
 
 function requestHost(req) {
   return String(req.headers['x-forwarded-host'] || req.headers.host || '')

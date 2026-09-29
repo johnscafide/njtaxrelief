@@ -8,7 +8,10 @@ const root=path.resolve(here,'../..');
 const read=(file)=>fs.readFileSync(path.join(root,file),'utf8');
 const attorney=read('attorney/index.html');
 const investor=read('investor/index.html');
-const sharedCss=read('agent/agent.css');
+// 43276962 split the shared Agent stylesheet: agent.css now @imports agent-base.css, which holds the
+// hero/founding imagery. Read the stylesheet the way the browser resolves it.
+const agentCss=read('agent/agent.css');
+const sharedCss=agentCss+'\n'+(agentCss.includes("@import url('/agent/agent-base.css');")?read('agent/agent-base.css'):'');
 const pricingCss=read('lender/lender.css');
 const sharedJs=read('agent/agent.js');
 const checkout=read('property/js/professional-lifetime-landing.js');

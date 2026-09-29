@@ -7,6 +7,7 @@ on:
       - 'supabase/migrations/20260819222157_integration_phase9_evidence_relationship_proof.sql'
       - 'supabase/migrations/20260820094603_integration_proof_explorer_outcomes_approvals.sql'
       - 'property/js/integrations-shadow-lab.js'
+      - 'property/js/integrations-proof-explorer.js'
       - 'property/tests/integration-phase9-shadow-contract.mjs'
       - '.github/workflows/integration-phase9-shadow-contract.yml'
   pull_request:
@@ -15,6 +16,7 @@ on:
       - 'supabase/migrations/20260819222157_integration_phase9_evidence_relationship_proof.sql'
       - 'supabase/migrations/20260820094603_integration_proof_explorer_outcomes_approvals.sql'
       - 'property/js/integrations-shadow-lab.js'
+      - 'property/js/integrations-proof-explorer.js'
       - 'property/tests/integration-phase9-shadow-contract.mjs'
       - '.github/workflows/integration-phase9-shadow-contract.yml'
   workflow_dispatch:

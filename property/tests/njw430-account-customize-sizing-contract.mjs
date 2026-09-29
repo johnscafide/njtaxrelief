@@ -18,6 +18,9 @@ must(css.includes('grid-template-columns:repeat(2,minmax(0,1fr))'),'Mobile Custo
 must(css.includes('border:5px solid transparent!important'),'Brokerage avatar ring is not thick enough.');
 must(css.includes('.acx-preview-avatar.has-broker-brand')&&css.includes('border:4px solid transparent'),'Live preview brokerage ring is not strengthened.');
 must(refresh.includes('data-theme-tab="color"')&&refresh.includes('data-theme-tab="image"')&&refresh.includes('data-theme-tab="motion"'),'Gradient/Photo/Motion tabs are not mounted.');
-must(page.includes('account-customizer-20260926.css?v=20260926d'),'Account customizer CSS cache version missing.');
+// The customizer stylesheet last changed in c3c9fc22 (#449), which shipped it as ?v=20260926c.
+// 7050a675 (#450) bumped only the runtime JS to d, so the CSS key "d" was never published.
+const customizerCssKey=(page.match(/account-customizer-20260926\.css\?v=(\d{8}[a-z]*)/)||[])[1]||'';
+must(customizerCssKey>='20260926c','Account customizer CSS cache version missing.');
 
 console.log('NJW-430 Customize modal sizing contract passed');

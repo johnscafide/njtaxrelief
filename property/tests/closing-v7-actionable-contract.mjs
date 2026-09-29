@@ -30,7 +30,9 @@ requireText(v7, "watchdog.closing_permit_lifecycle_exception_v7", 'v7 direct exc
 requireText(v7, "watchdog.closing_recording_exception_v7", 'v7 direct exception registry');
 requireText(v7, "Evidence coverage is not prediction confidence", 'v7 evidence semantics');
 
-requireText(freeze, "development_sanity_threshold','50'", 'v7 frozen threshold');
+// Exact text of the applied migration (ba9d8edd); this contract was authored with a
+// "threshold','50'" spelling that never matched the jsonb_set path literal.
+requireText(freeze, "'{development_sanity_threshold}','50'::jsonb", 'v7 frozen threshold');
 requireText(freeze, 'Frozen before development sanity labels', 'v7 frozen threshold rationale');
 
 requireText(review, "['draft','reviewing'].includes", 'active review queue filter');
@@ -54,9 +56,11 @@ for (const [label, sql, fn] of [
   requireText(sql, 'watchdog_closing_shadow_token', label);
 }
 
-requireText(sourceMatrix, 'Missing coverage is not a negative finding', 'Closing source matrix');
+// Exact wording of the source matrix (eb1993fd), which this contract never matched verbatim.
+requireText(sourceMatrix, 'A missing provider is not a negative finding.', 'Closing source matrix');
 requireText(sourceMatrix, 'Supporting context only', 'Closing source matrix');
-requireText(sourceMatrix, 'do not ingest', 'Closing source matrix');
+requireText(sourceMatrix, '**Do not ingest**', 'Closing source matrix');
+requireText(sourceMatrix, 'Absence of a Watchdog record must never mean taxes are current.', 'Closing source matrix');
 
 if (!process.exitCode) {
   console.log('Closing v7 actionable evidence contract passed.');

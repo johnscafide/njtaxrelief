@@ -49,6 +49,9 @@ must(refresh.includes('id="ac-theme-browser-grid"')&&refresh.includes('renderThe
 must(page.includes('account.js?v=20260925c'),'Account hero JS cache version missing.');
 must(page.includes('account-refresh-20260925.css?v=20260926a'),'Account motion CSS cache version missing.');
 must(page.includes('account-refresh-20260925.js?v=20260926d'),'Account customizer JS cache version missing.');
-must(page.includes('account-customizer-20260926.css?v=20260926d'),'Isolated Account customizer CSS missing.');
+// The customizer stylesheet last changed in c3c9fc22 (#449), which shipped it as ?v=20260926c.
+// 7050a675 (#450) bumped only the runtime JS to d, so the CSS key "d" was never published.
+const customizerCssKey=(page.match(/account-customizer-20260926\.css\?v=(\d{8}[a-z]*)/)||[])[1]||'';
+must(customizerCssKey>='20260926c','Isolated Account customizer CSS missing.');
 
 console.log('NJW-429 brokerage avatar and motion background contract passed');

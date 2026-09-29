@@ -8,7 +8,10 @@ const root=path.resolve(here,'../..');
 const read=(file)=>fs.readFileSync(path.join(root,file),'utf8');
 const page=read('lender/index.html');
 const agent=read('agent/index.html');
-const sharedCss=read('agent/agent.css');
+// 43276962 split the shared Agent stylesheet: agent.css now @imports agent-base.css, which holds the
+// hero/founding imagery. Read the stylesheet the way the browser resolves it.
+const agentCss=read('agent/agent.css');
+const sharedCss=agentCss+'\n'+(agentCss.includes("@import url('/agent/agent-base.css');")?read('agent/agent-base.css'):'');
 const lenderCss=read('lender/lender.css');
 const sharedJs=read('agent/agent.js');
 const middleware=read('middleware.js');
@@ -45,7 +48,8 @@ expect(page.includes('Built for the way<br>New Jersey lenders work.'),'lender-sp
 expect(page.includes('Lender Founding Lifetime'),'lender Founding Lifetime heading missing');
 expect(page.includes('$3,499')&&page.includes('$9,999'),'Pro and Pro+ lifetime prices missing');
 expect(page.includes('250-property capacity')&&page.includes('2,500-property capacity'),'Pro and Pro+ capacities missing');
-expect((page.match(/data-lender-lifetime-checkout/g)||[]).length===2,'lender page must expose exactly two lifetime checkout choices');
+// Count checkout controls only; the inline checkout script also names the attribute in its selectors.
+expect((page.match(/<button\b[^>]*\bdata-lender-lifetime-checkout\b/g)||[]).length===2,'lender page must expose exactly two lifetime checkout choices');
 expect(page.includes('data-tier="pro"')&&page.includes('data-tier="pro_plus"'),'both governed lifetime tiers must be present');
 expect(page.includes('lender-proplus-card')&&page.includes('<span class="price-ribbon">Recommended</span>'),'Pro+ must be the primary recommended Lifetime card');
 expect(page.indexOf('data-tier="pro_plus"')<page.indexOf('data-tier="pro"'),'Pro+ must appear before Pro in the lender offer hierarchy');
