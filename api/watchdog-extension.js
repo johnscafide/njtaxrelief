@@ -164,7 +164,15 @@ async function scoreOnDemand(row) {
     if (!r.ok) return null;
     const j = await r.json().catch(() => null);
     const s = j && Array.isArray(j.rows) ? j.rows.find((x) => x && x.pams_pin) : null;
-    return s && s.watchdog_score != null ? { score: s.watchdog_score, verdict: s.verdict || null, confidence: s.confidence || null } : null;
+    if (!s || s.watchdog_score == null) return null;
+    // The extension summary reads score/verdict/confidence; the app's JSON
+    // route (watchdog-property) also needs the ROBUST parts and the source.
+    return {
+      score: s.watchdog_score, verdict: s.verdict || null, confidence: s.confidence || null,
+      evidence_coverage: s.evidence_coverage != null ? s.evidence_coverage : null, model_version: s.model_version || null,
+      components: s.components && typeof s.components === 'object' ? s.components : null,
+      computed_at: s.observed_at || null, source: s.source || 'robust_on_demand'
+    };
   } catch (_) {
     return null;
   }
@@ -227,6 +235,33 @@ async function findCandidates(b, parsed) {
   return [...seen.values()];
 }
 
+// Map location of a few parcels, to tell apart exact street matches in
+// different towns (the listing's own coordinates decide within 250 m). Only
+// the pin and the coordinates are read; never the owner mailing ZIP.
+async function parcelCoords(b, pins) {
+  const list = pins.map((p) => `"${String(p).replace(/"/g, '')}"`).join(',');
+  const c = await rest(b, `property_lookups?select=pams_pin,lat,lon&pams_pin=in.(${list})`);
+  return Object.fromEntries((c.data || []).filter((r) => n(r.lat) != null && n(r.lon) != null).map((r) => [r.pams_pin, { lat: Number(r.lat), lon: Number(r.lon) }]));
+}
+
+const brief = (r) => ({ pin: r.pams_pin, address: H.titleCase(r.address), town: page.townName(r.town) });
+
+// A parsed listing address to one parcel: street spellings, then the
+// listing's map location, then the town. Gives the pin, whether the match is
+// certain and up to 4 other candidates; with no match, no pin and the closest
+// listings so the caller can offer a choice. Shared with the app's JSON route.
+async function resolveAddress(b, parsed, lat, lon) {
+  const candidates = await findCandidates(b, parsed);
+  const geo = lat != null && lon != null && Math.abs(lat - 40) < 2 && Math.abs(lon + 74.5) < 2 ? { lat, lon } : null;
+  const exact = candidates.filter((c) => c.exact);
+  const coords = geo && exact.length > 1 ? await parcelCoords(b, exact.map((x) => x.row.pams_pin)) : null;
+  const pick = pickMatch(candidates, parsed.city, geo, coords);
+  const others = (exact.length ? exact : candidates).map((c) => c.row);
+  if (!pick) return { pin: null, confident: false, alternatives: others.slice(0, 4).map(brief) };
+  const pin = pick.row.pams_pin;
+  return { pin, confident: pick.confident, alternatives: pick.confident ? [] : others.filter((r) => r.pams_pin !== pin).slice(0, 4).map(brief) };
+}
+
 async function lookup(req, res, query) {
   const supplied = String(req.headers['x-watchdog-key'] || '').trim();
   if (!supplied.startsWith(PREFIX) || supplied.length > 100) return json(res, 401, { error: 'Add your Watchdog extension key.' });
@@ -252,24 +287,11 @@ async function lookup(req, res, query) {
   ]);
   let pin = pinQuery, confident = true, alternatives = [];
   if (!pin) {
-    const candidates = await findCandidates(b, parsed);
-    const lat = n(query.lat), lon = n(query.lon);
-    const geo = lat != null && lon != null && Math.abs(lat - 40) < 2 && Math.abs(lon + 74.5) < 2 ? { lat, lon } : null;
-    const exact = candidates.filter((c) => c.exact);
-    let coords = null;
-    if (geo && exact.length > 1) {
-      const c = await rest(b, `property_lookups?select=pams_pin,lat,lon&pams_pin=in.(${exact.map((x) => `"${String(x.row.pams_pin).replace(/"/g, '')}"`).join(',')})`);
-      coords = Object.fromEntries((c.data || []).filter((r) => n(r.lat) != null && n(r.lon) != null).map((r) => [r.pams_pin, { lat: Number(r.lat), lon: Number(r.lon) }]));
-    }
-    const pick = pickMatch(candidates, parsed.city, geo, coords);
-    const others = (exact.length ? exact : candidates).map((c) => c.row);
-    if (!pick) {
-      return json(res, 404, { error: 'Not found on the New Jersey tax list. New construction and some condos are not listed yet.',
-        alternatives: others.slice(0, 4).map((r) => ({ pin: r.pams_pin, address: H.titleCase(r.address), town: page.townName(r.town) })) });
-    }
-    pin = pick.row.pams_pin;
-    confident = pick.confident;
-    alternatives = confident ? [] : others.filter((r) => r.pams_pin !== pin).slice(0, 4).map((r) => ({ pin: r.pams_pin, address: H.titleCase(r.address), town: page.townName(r.town) }));
+    const found = await resolveAddress(b, parsed, n(query.lat), n(query.lon));
+    if (!found.pin) return json(res, 404, { error: 'Not found on the New Jersey tax list. New construction and some condos are not listed yet.', alternatives: found.alternatives });
+    pin = found.pin;
+    confident = found.confident;
+    alternatives = found.alternatives;
   }
   const row = await page.fetchProperty(pin);
   if (!row) return json(res, 404, { error: 'Not found on the New Jersey tax list.' });
@@ -307,3 +329,13 @@ module.exports.findCandidates = findCandidates;
 module.exports.summary = summary;
 module.exports.PREFIX = PREFIX;
 module.exports.DAILY_LIMIT = DAILY_LIMIT;
+// Shared with api/watchdog-property.js (the app's JSON route) so both routes
+// verify sessions, meter usage, score and resolve addresses the same way.
+module.exports.backend = backend;
+module.exports.rest = rest;
+module.exports.sessionUser = sessionUser;
+module.exports.agentAccess = agentAccess;
+module.exports.scoreOnDemand = scoreOnDemand;
+module.exports.parcelCoords = parcelCoords;
+module.exports.resolveAddress = resolveAddress;
+module.exports.toNumber = n;

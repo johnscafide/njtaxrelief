@@ -317,3 +317,15 @@ verify_jwt = false
 
 [functions.watchdog-vercel-release-relay]
 verify_jwt = false
+
+# Mobile push notifications. Device registration takes the app's Supabase
+# session at the gateway and verifies it again inside the function; raw FCM
+# tokens are written with the service key and never returned.
+[functions.push-device-register]
+verify_jwt = true
+
+# Called only by pg_cron with the private.push_runtime worker token (checked in
+# the function). It sends nothing until push_settings.enabled is true and the
+# FCM secrets are set.
+[functions.push-sender]
+verify_jwt = false

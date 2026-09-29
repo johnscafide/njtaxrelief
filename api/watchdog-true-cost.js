@@ -21,7 +21,11 @@ let refs = null;
 function loadRefs() {
   if (refs) return refs;
   refs = { ratios: {}, revals: {} };
-  try { refs.ratios = JSON.parse(fs.readFileSync(path.join(process.cwd(), 'chapter123-ratios-2026.json'), 'utf8')).districts || {}; } catch (err) { console.warn('true-cost ratios', err && err.message); }
+  try {
+    const certified = JSON.parse(fs.readFileSync(path.join(process.cwd(), 'chapter123-ratios-2026.json'), 'utf8'));
+    refs.ratios = certified.districts || {};
+    refs.ratioYear = Number(certified.tax_year) || null;
+  } catch (err) { console.warn('true-cost ratios', err && err.message); }
   try { refs.revals = JSON.parse(fs.readFileSync(path.join(process.cwd(), 'property/revaluation-reassessment-2026.json'), 'utf8')).districts || {}; } catch (err) { console.warn('true-cost revals', err && err.message); }
   return refs;
 }
@@ -103,7 +107,9 @@ function townFacts(row, v) {
   return {
     district,
     ratio: ch ? ch[0] : null,
+    lower: ch ? ch[1] : null,
     upper: ch ? ch[2] : null,
+    ratioYear: ch ? r.ratioYear || null : null,
     rate: trend ? trend.latest.rate : null,
     rateYear: trend ? trend.latest.year : null,
     trend,
