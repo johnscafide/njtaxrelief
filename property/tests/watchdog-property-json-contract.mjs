@@ -24,7 +24,7 @@ function backend(state) {
     if (u.pathname === '/rest/v1/profiles') return ok([state.profile || {}]);
     if (u.pathname === '/rest/v1/account_entitlements') return ok(state.entitlement ? [state.entitlement] : []);
     if (u.pathname === '/rest/v1/usage_events' && method === 'GET') return ok([], { 'content-range': `0-0/${state.used || 0}` });
-    if (u.pathname === '/rest/v1/usage_events') return ok(null);
+    if (u.pathname === '/rest/v1/usage_events') return state.usageWriteDown ? { ok: false, status: 500, text: async () => '', headers: { get: () => null } } : ok(null);
     if (u.pathname === '/rest/v1/rpc/search_parcels') return ok(state.matches || []);
     if (u.pathname === '/rest/v1/property_lookups') return ok(state.coords || []);
     if (u.pathname === '/functions/v1/workbench-score') {
@@ -105,23 +105,12 @@ assert.equal(out.res.headers['cache-control'], 'no-store');
 assert.equal(out.res.headers.vary, 'Authorization');
 assert.ok(out.body.error);
 assert.ok(out.calls.some((c) => c.method === 'POST' && c.path === '/rest/v1/usage_events'), 'a miss the backend caused is still a counted lookup');
-// The usage write itself failing is a 503 too: never a free lookup.
-const usageDown = { ...signedIn };
-out = await (async () => {
-  const b = backend(usageDown);
-  const inner = b.fetchImpl;
-  b.fetchImpl = async (url, init) => {
-    if (new URL(url).pathname === '/rest/v1/usage_events' && (init && init.method) === 'POST') { b.calls.push({ method: 'POST', path: '/rest/v1/usage_events' }); return { ok: false, status: 500, text: async () => '', headers: { get: () => null } }; }
-    return inner(url, init);
-  };
-  const res = { headers: {}, statusCode: 0, body: undefined, setHeader(k, v) { this.headers[k.toLowerCase()] = v; }, end(x) { this.body = x; } };
-  const real = global.fetch;
-  global.fetch = b.fetchImpl;
-  try { await api({ headers: auth, query: { pin: '0904_9_20' }, method: 'GET' }, res); } finally { global.fetch = real; }
-  return { res, body: JSON.parse(res.body), calls: b.calls };
-})();
+// The usage write itself failing is a 503 too: never a free lookup, even
+// though the lookup runs alongside the write.
+out = await call({ method: 'GET', headers: auth, query: { pin: '0904_9_20' } }, { ...signedIn, usageWriteDown: true });
 assert.equal(out.res.statusCode, 503, 'usage write failed: the lookup is refused');
-assert.ok(out.calls.some((c) => c.path === '/rest/v1/rpc/get_public_property_page'), 'the lookup ran alongside the write');
+assert.equal(out.res.headers['cache-control'], 'no-store');
+assert.ok(out.calls.some((c) => c.path === '/rest/v1/rpc/get_public_property_page'), 'the lookup had already started alongside the write');
 
 // Success by pin.
 out = await call({ method: 'GET', headers: auth, query: { pin: '0904_9_20' } }, signedIn);
@@ -217,9 +206,25 @@ out = await call({ method: 'GET', headers: auth, query: { pin: '0904_9_20' } }, 
 assert.equal(out.res.statusCode, 200);
 assert.deepEqual(out.body.property.score, { score: 71, verdict: 'Fair', confidence: 'medium', evidence_coverage: 62, model_version: 'ROBUST-v1', computed_at: '2026-09-29T00:00:00Z', source: 'robust_on_demand',
   components: { recourse: 56, fairness: 80, burden: null, uniformity: 70, stability: 10, trajectory: 40 } });
-assert.equal(out.calls.find((c) => c.path === '/functions/v1/workbench-score').body.mode, 'public_score');
+const scoreCall = out.calls.find((c) => c.path === '/functions/v1/workbench-score');
+assert.equal(scoreCall.body.mode, 'public_score');
+assert.equal(scoreCall.headers['x-client-info'], api.CLIENT, 'app lookups are labelled as the app, not as the browser extension');
+assert.equal(api.CLIENT, 'watchdog-property/1.0');
+assert.equal(out.res.headers['cache-control'], 'private, max-age=300', 'a fresh score is cacheable like a cached one');
 out = await call({ method: 'GET', headers: auth, query: { pin: '0904_9_20' } }, { ...signedIn, row: { ...row, score: null }, scored: { rows: [] } });
 assert.equal(out.body.property.score, null, 'no score yet is null, not a fake zero');
+assert.equal(out.res.headers['cache-control'], 'private, max-age=300', 'a genuine "nothing to score" answer is cacheable');
+// The scorer could not answer (its shared-IP rate limit, an outage, a timeout):
+// still null, still 200, but not cacheable, so the app asks again soon.
+for (const scoreStatus of [429, 500]) {
+  out = await call({ method: 'GET', headers: auth, query: { pin: '0904_9_20' } }, { ...signedIn, row: { ...row, score: null }, scoreStatus });
+  assert.equal(out.res.statusCode, 200, `scorer ${scoreStatus}: the row still comes back`);
+  assert.equal(out.body.property.score, null, `scorer ${scoreStatus}: no fake score`);
+  assert.equal(out.res.headers['cache-control'], 'private, no-store', `scorer ${scoreStatus}: not remembered as "no score"`);
+}
+out = await call({ method: 'GET', headers: auth, query: { pin: '0904_9_20' } }, { ...signedIn, scoreStatus: 429 });
+assert.equal(out.body.property.score.score, 78, 'a cached score never asks the scorer');
+assert.equal(out.res.headers['cache-control'], 'private, max-age=300');
 
 // Nothing to derive: blocks are null, never invented.
 out = await call({ method: 'GET', headers: auth, query: { pin: '9999_1_1' } }, { ...signedIn, coords: [], row: { pams_pin: '9999_1_1', address: '1 MAIN ST', town: 'NOWHERE', county: 'NONE', assessed_value: 100000, last_year_tax: 2000, score: null, neighbors: [], recent_sales: [], sales_summary: null, alerts_enabled: true }, scored: { rows: [] } });
@@ -266,16 +271,25 @@ assert.equal(out.calls.length, 0);
 out = await call({ method: 'GET', headers: auth, query: { pin: '0904_9_20', price: '700000' } }, signedIn);
 assert.equal(out.body.derived.price_check.expected_tax, 11580, 'price works with a pin too');
 
-// HEAD: headers only.
-out = await call({ method: 'HEAD', headers: auth, query: { pin: '0904_9_20' } }, signedIn);
+// HEAD: headers only, after the token check; no lookup, no usage row, no scoring, no photo signing.
+out = await call({ method: 'HEAD', headers: auth, query: { pin: '0904_9_20' } }, { ...signedIn, row: { ...row, score: null } });
 assert.equal(out.res.statusCode, 200);
 assert.equal(out.res.headers['cache-control'], 'private, max-age=300');
+assert.equal(out.res.headers.vary, 'Authorization');
 assert.equal(out.res.body, undefined);
+assert.deepEqual(out.calls.map((c) => c.path), ['/auth/v1/user'], 'HEAD costs nothing beyond the session check');
+out = await call({ method: 'HEAD', headers: {}, query: { pin: '0904_9_20' } }, signedIn);
+assert.equal(out.res.statusCode, 401, 'HEAD still needs a token');
+assert.equal(out.res.body, undefined);
+out = await call({ method: 'HEAD', headers: auth, query: { pin: 'nope' } }, signedIn);
+assert.equal(out.res.statusCode, 400, 'HEAD still checks the input');
+assert.equal(out.calls.length, 0);
 
 // Deployment wiring: the function ships the same town files as the
 // extension, the test has a script, and the script is not part of the build.
 const vercel = JSON.parse(read('vercel.json'));
 assert.equal(vercel.functions['api/watchdog-property.js'].includeFiles, vercel.functions['api/watchdog-extension.js'].includeFiles);
+assert.equal(vercel.functions['api/watchdog-property.js'].maxDuration, 15, 'room for a slow backend to end in the documented 503, not a platform timeout');
 const pkg = JSON.parse(read('package.json'));
 assert.equal(pkg.scripts['test:watchdog-property-json'], 'node property/tests/watchdog-property-json-contract.mjs');
 assert.ok(!pkg.scripts['vercel-build:full'].includes('test:watchdog-property-json'));

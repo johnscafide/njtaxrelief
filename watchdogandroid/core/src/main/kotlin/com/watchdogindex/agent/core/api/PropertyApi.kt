@@ -4,6 +4,7 @@ import com.watchdogindex.agent.core.NotSignedInException
 import com.watchdogindex.agent.core.PlanRequiredException
 import com.watchdogindex.agent.core.WatchdogException
 import io.ktor.client.statement.HttpResponse
+import io.ktor.http.HttpHeaders
 import kotlinx.serialization.SerialName
 import kotlinx.serialization.Serializable
 import kotlinx.serialization.json.JsonArray
@@ -257,7 +258,8 @@ class PropertyApi(private val site: SiteApi) {
             throw NotFoundException(body?.str("error") ?: "Not found on the New Jersey tax list.", alternatives)
         }
         if (status == 401) throw NotSignedInException()
-        throw WatchdogHttp.failure(status, body, feature = "property lookup")
+        // The route's 429 says when the day turns in Retry-After (seconds), so it travels with the exception.
+        throw WatchdogHttp.failure(status, body, feature = "property lookup", retryAfter = response.headers[HttpHeaders.RetryAfter])
     }
 
     /** Agent-plan address search. Throws [PlanRequiredException] on 403 so the caller can fall back to the public search. */

@@ -134,9 +134,21 @@ open class HttpFailureException(
     userMessage: String,
 ) : WatchdogException("HTTP $status ${code ?: ""} ${serverError ?: ""}".trim(), userMessage = userMessage)
 
-/** A 429: a plan capacity or request window was hit. [resetAt] is the server's `reset_at` when it sent one. */
-class QuotaException(status: Int, code: String?, serverError: String?, userMessage: String, val resetAt: String?, val limit: Int?) :
-    HttpFailureException(status, code, serverError, userMessage)
+/**
+ * A 429: a plan capacity or request window was hit. The two ways a server says when to come back are kept apart:
+ * [resetAt] is the body's `reset_at` timestamp when it sent one (the edge functions), [retryAfterSeconds] is a
+ * numeric `Retry-After` header (the site's property route sends the seconds to UTC midnight). A UI that formats
+ * [resetAt] as a date must never be handed a number of seconds.
+ */
+class QuotaException(
+    status: Int,
+    code: String?,
+    serverError: String?,
+    userMessage: String,
+    val resetAt: String?,
+    val limit: Int?,
+    val retryAfterSeconds: Int? = null,
+) : HttpFailureException(status, code, serverError, userMessage)
 
 /** A 409 from a route that needs the caller to confirm something first (the Intelligence command policy). */
 class ConfirmationRequiredException(val body: JsonObject, userMessage: String) : HttpFailureException(409, "CONFIRMATION_REQUIRED", null, userMessage)
@@ -250,9 +262,11 @@ object WatchdogHttp {
         }
         if (status == 429) {
             val message = plain ?: "Your current plan capacity has been reached. Reduce the request or upgrade to continue."
-            val reset = body?.get("reset_at")?.stringOrNull() ?: retryAfter
+            val reset = body?.get("reset_at")?.stringOrNull()
             val limit = body?.get("limit")?.intOrNull()
-            return QuotaException(status, code, serverError, message, reset, limit)
+            // Retry-After may also be an HTTP date; only a plain number of seconds is kept.
+            val retryAfterSeconds = retryAfter?.trim()?.toIntOrNull()?.takeIf { it >= 0 }
+            return QuotaException(status, code, serverError, message, reset, limit, retryAfterSeconds)
         }
         if (status == 409 && body != null && (body.containsKey("confirmation") || lowerCode == "confirmation_required")) {
             val confirmation = body["confirmation"] as? JsonObject

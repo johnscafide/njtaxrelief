@@ -14,14 +14,16 @@ Why: the HTML property page, true-cost card and checkup card each compute the nu
 - `GET /api/watchdog-property?address=<listing address>[&lat=<lat>&lon=<lon>][&price=<listing price>]`
 - Optional `price=` on either form adds `derived.price_check`. `$` and `,` are stripped; clamped to 0..50,000,000 like `/true-cost`.
 - Headers: `Authorization: Bearer <Supabase access token>` (required), `Accept: application/json`.
-- `HEAD` is accepted and returns headers only.
+- `HEAD` is accepted and returns headers only. It stops after the input and token checks: a `200` means "this token works here", not "this property exists". No usage row is written, nothing is looked up, scored or signed, so a probe costs no quota and no backend work.
 
 ### Who may call it
 
 - Any signed-in Watchdog account. The session is verified exactly as the extension key API does it (`sessionUser`: the JWT is sent to `/auth/v1/user` with the service key; anything that does not resolve to a user is `401`).
 - No plan gate: this is the same public-record data the anonymous HTML page serves. The plan is read only to put the agent's `&agent=<slug>` on the card links (active Agent-tier plan or developer role, via `agentAccess`) and to exempt developer accounts from the cap.
-- Every call writes one `usage_events` row (`metric_key: 'app_property_lookup'`, `quantity: 1`, `metadata: { lookup: 'pin' | 'address' }`) tied to the user id, before the lookup runs, so misses are attributable too.
-- Cap: 2,000 lookups per account per UTC day, counted from the same table (`occurred_at >= <UTC midnight>`). Over the cap: `429 { error: 'Daily lookup limit reached. It resets at midnight UTC.' }` with `Retry-After: <seconds to UTC midnight>`; a refused call is not counted. Developer accounts are counted but not capped, as with the extension. This is a separate meter from the extension's 600-per-24-hours `extension_lookup` key.
+- Every `GET` writes one `usage_events` row (`metric_key: 'app_property_lookup'`, `quantity: 1`, `metadata: { lookup: 'pin' | 'address' }`) tied to the user id. The write is started before the lookup and must have landed before any answer goes out, so misses (a `404`, and a `503` the backend caused) are counted too; if the write itself fails the answer is a `503`, never a free lookup.
+- Cap: 2,000 lookups per account per UTC day, counted from the same table (`occurred_at >= <UTC midnight>`). Over the cap: `429 { error: 'Daily lookup limit reached. It resets at midnight UTC.' }` with `Retry-After: <seconds to UTC midnight>` (a plain number of seconds, not a timestamp; the app keeps it in `QuotaException.retryAfterSeconds`, separate from the edge functions' `reset_at`); a refused call is not counted. Developer accounts are counted but not capped, as with the extension. This is a separate meter from the extension's 600-per-24-hours `extension_lookup` key.
+- The cap is best effort, like the extension's: the count and the write are two PostgREST calls with no lock between them, so requests that arrive at the same moment near the limit can all pass and the day can overshoot 2,000 by the number of concurrent requests. That is acceptable for a bulk-feed deterrent; a hard cap would need a SQL function that counts and inserts in one statement.
+- Time budget: `vercel.json` gives the function `maxDuration: 15`. The plan read and the count run together, the usage write runs alongside the lookup, and the two `usage_events` calls have a 4 s timeout (other backend calls keep 6 s, the scorer 5 s), so a slow backend ends in the documented `503`, not the platform's non-JSON `504`.
 
 ### Response
 
@@ -57,6 +59,7 @@ Why: the HTML property page, true-cost card and checkup card each compute the nu
 Notes the app can rely on:
 
 - `score.components` are bare integers 0..100 or `null` (normalized with the page's `componentScore`), whatever shape the cache stored. `score.source` is `robust_public_cache` for a cached row, otherwise whatever `workbench-score` reports for the on-demand score (`robust_on_demand`, or `robust_public_cache` when it finds a fresh cache entry the RPC missed). `score` is `null` when neither exists; never a fake zero.
+- When the cache has no score and `workbench-score` could not answer (its shared-IP `public_score` rate limit of 80 per minute, which every app and extension user behind the Vercel egress IP shares; an outage; a timeout), the answer is still `200` with `score: null`, but with `Cache-Control: private, no-store` instead of `max-age=300`, so the app does not remember the gap as "this home has no score" and asks again on its next visit. A genuine "nothing to score" answer keeps `max-age=300`. The on-demand call carries `x-client-info: watchdog-property/1.0` (the extension keeps `watchdog-extension/1.1`), so the two can be told apart in the function's logs when that limit trips.
 - `lat`/`lon` come from `property_lookups` (`select=pams_pin,lat,lon`, the same select the extension uses to break address ties); `null` when the parcel has no coordinates.
 - `photo_url` is a signed, week-long URL for the approved homeowner photo, or `null`. The private storage key is never returned.
 - `derived.bill` is always an object (`{ year: null, label: 'Latest annual tax', current: null }` when the bill year cannot be matched to a town rate). All other `derived` blocks are `null` exactly when their helper has nothing.
@@ -88,6 +91,10 @@ Same as the browser extension, now in one shared function (`resolveAddress` in `
 
 - `api/watchdog-property-page.js`: exports `signPhoto`.
 - `api/watchdog-true-cost.js`: `townFacts` also returns `lower` (Chapter 123 lower limit) and `ratioYear` (the file's `tax_year`); `loadRefs` keeps `tax_year`.
-- `api/watchdog-extension.js`: `scoreOnDemand` now also carries `evidence_coverage`, `model_version`, `components`, `computed_at` and `source` from `workbench-score` (the extension summary still reads only `score`/`verdict`/`confidence`); the address-resolution block of `lookup()` moved into exported `resolveAddress` and `parcelCoords` with identical behavior; `backend`, `rest`, `sessionUser`, `agentAccess`, `scoreOnDemand` and `toNumber` are exported.
+- `api/watchdog-extension.js`: `scoreOnDemand(row, client)` now also carries `evidence_coverage`, `model_version`, `components`, `computed_at` and `source` from `workbench-score` (the extension summary still reads only `score`/`verdict`/`confidence`), takes the `x-client-info` label as its second argument (default unchanged: `watchdog-extension/1.1`), and returns `{ unavailable: true }` instead of `null` when the function did not answer (non-2xx, timeout, unreadable body), keeping `null` for "answered, nothing to score"; the extension's own lookup treats `unavailable` as no score, exactly as before. `rest(b, path, init)` accepts `init.timeoutMs` (default 6000). The address-resolution block of `lookup()` moved into exported `resolveAddress` and `parcelCoords` with identical behavior; `backend`, `rest`, `sessionUser`, `agentAccess`, `scoreOnDemand` and `toNumber` are exported.
+
+### App-side contract test
+
+`watchdogandroid/core/src/test/kotlin/com/watchdogindex/agent/core/api/PropertyApiTest.kt` decodes the exact success body the route's contract test prints (`WATCHDOG_PROPERTY_SAMPLE=1 npm run test:watchdog-property-json`, checked in as `core/src/test/resources/watchdog-property-sample.json`) through `PropertyApi.Response` and `PropertyMapper`, and drives `PropertyApi` through Ktor's `MockEngine` for the 401 -> refresh -> retry path, the 404 with `alternatives`, the 429 with `Retry-After`, and the 503. When the route's shape changes, regenerate the fixture and re-run `cd watchdogandroid/core && ./gradlew test`.
 
 Nothing about plan gates, RLS, the billing gate or the Supabase schema changed. `usage_events.metric_key` is free text (no check constraint), so the new key needs no migration.

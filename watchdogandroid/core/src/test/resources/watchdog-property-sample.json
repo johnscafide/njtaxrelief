@@ -1,0 +1,165 @@
+{
+  "ok": true,
+  "property": {
+    "pams_pin": "0904_9_20",
+    "address": "102 GRANT AVE",
+    "town": "HARRISON TOWN",
+    "county": "HUDSON",
+    "block": "9",
+    "lot": "20",
+    "qualifier": null,
+    "prop_class": "2",
+    "year_built": 1900,
+    "acres": 0.0574,
+    "dwelling_units": 2,
+    "building_desc": "2 SF 2 FAM",
+    "land_value": 180000,
+    "improvement_value": 244300,
+    "assessed_value": 424300,
+    "last_year_tax": 9954.08,
+    "last_sale_price": null,
+    "last_sale_date": null,
+    "last_sale_year": null,
+    "source_synced_at": "2026-09-28T15:15:28Z",
+    "lat": 40.7357,
+    "lon": -74.1724,
+    "score": {
+      "score": 78,
+      "verdict": "Favorable tax position",
+      "confidence": "high",
+      "evidence_coverage": 85,
+      "model_version": "ROBUST-v1",
+      "computed_at": "2026-09-01T00:00:00Z",
+      "source": "robust_public_cache",
+      "components": {
+        "recourse": 60,
+        "fairness": 100,
+        "burden": 86,
+        "uniformity": 69,
+        "stability": null,
+        "trajectory": 45
+      }
+    },
+    "town_compare": {
+      "peers": 1964,
+      "median_tax": 10828,
+      "median_assessed": null,
+      "share_paying_less": 39,
+      "refreshed_at": "2026-09-04T06:29:00Z"
+    },
+    "neighbors": [
+      {
+        "pams_pin": "0904_9_1",
+        "address": "140 GRANT AVE",
+        "town": "HARRISON TOWN",
+        "assessed_value": null,
+        "last_year_tax": 10655.53
+      }
+    ],
+    "recent_sales": [
+      {
+        "pams_pin": "0904_9_4",
+        "address": "134 GRANT AVE",
+        "town": "HARRISON TOWN",
+        "price": 775000,
+        "date": "2024-08-18",
+        "year_built": 1960,
+        "assessed_value": null,
+        "same_street": true
+      }
+    ],
+    "sales_summary": {
+      "count": 69,
+      "median": 700000,
+      "first_date": "2023-09-28",
+      "last_date": "2025-06-30"
+    },
+    "alerts_enabled": false
+  },
+  "photo_url": "https://example.supabase.co/storage/v1/object/sign/property-photos/a.jpg?token=t",
+  "derived": {
+    "display": {
+      "address": "102 Grant Ave",
+      "town": "Harrison Town",
+      "county": "Hudson",
+      "class_label": "Residential",
+      "property_path": "/nj/harrison-town/102-grant-ave/0904_9_20"
+    },
+    "bill": {
+      "year": 2024,
+      "label": "2024 tax bill",
+      "current": {
+        "year": 2025,
+        "amount": 10115.31,
+        "general_rate_only": false
+      }
+    },
+    "rate_trend": {
+      "points": [
+        {
+          "year": 2020,
+          "rate": 2.28
+        },
+        {
+          "year": 2021,
+          "rate": 2.243
+        },
+        {
+          "year": 2022,
+          "rate": 2.281
+        },
+        {
+          "year": 2023,
+          "rate": 2.299
+        },
+        {
+          "year": 2024,
+          "rate": 2.346
+        },
+        {
+          "year": 2025,
+          "rate": 2.384
+        }
+      ],
+      "latest": {
+        "year": 2025,
+        "rate": 2.384
+      },
+      "first": {
+        "year": 2020,
+        "rate": 2.28
+      },
+      "cut_at_reval": true
+    },
+    "rate_change": {
+      "from_year": 2020,
+      "to_year": 2025,
+      "per_year_pct": 0.9
+    },
+    "chapter123": {
+      "district": "0904",
+      "tax_year": 2026,
+      "ratio": 69.39,
+      "lower": 58.98,
+      "upper": 79.8
+    },
+    "revalued_2026": false,
+    "holds_up": {
+      "floor": 531704,
+      "implied": 611471,
+      "limit": 79.8,
+      "ratio": 69.39
+    },
+    "town_compare_text": "Among 1,964 homes in Harrison Town, the typical (median) tax bill is $10,828. This bill is lower than about 61% of them.",
+    "next_deadline": {
+      "date": "April 1, 2027",
+      "note": "May 1 if your town revalues that year"
+    },
+    "price_check": null,
+    "links": {
+      "property": "https://www.watchdogindex.com/nj/harrison-town/102-grant-ave/0904_9_20",
+      "true_cost": "https://www.watchdogindex.com/true-cost?pin=0904_9_20",
+      "checkup": "https://www.watchdogindex.com/checkup?pin=0904_9_20"
+    }
+  }
+}
