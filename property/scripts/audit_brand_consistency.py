@@ -47,7 +47,7 @@ CANONICAL_NAV = [
     "Appeal Scanner",
     "Data Workbench",
     "Data Center",
-    "Professional Hub",
+    "Plans & Pricing",
     "Account",
 ]
 
