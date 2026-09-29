@@ -100,33 +100,55 @@ fun MicButton(
     size: Dp = 44.dp,
     contentDescription: String = "Ask Watchdog Intelligence Voice",
 ) {
-    val base = modifier.size(size).clip(CircleShape).background(FixedInk.navy)
-    val interactive = if (onClick != null) {
-        base.clickable(role = Role.Button, onClick = onClick).semantics { this.contentDescription = contentDescription }
+    val circle = Modifier.size(size).clip(CircleShape).background(FixedInk.navy)
+    if (onClick != null) {
+        // Drawn at its mockup size; the click node is at least 48 dp and overflows the 44 dp circle.
+        Box(
+            modifier = modifier
+                .overflowTouchTarget()
+                .clip(CircleShape)
+                .clickable(role = Role.Button, onClick = onClick)
+                .semantics { this.contentDescription = contentDescription },
+            contentAlignment = Alignment.Center,
+        ) {
+            Box(modifier = circle, contentAlignment = Alignment.Center) { MicGlyph() }
+        }
     } else {
-        base
-    }
-    Box(modifier = interactive, contentAlignment = Alignment.Center) {
-        Icon(imageVector = WdIcons.MicFill, contentDescription = null, modifier = Modifier.size(24.dp), tint = FixedInk.onNavy)
+        Box(modifier = modifier.then(circle), contentAlignment = Alignment.Center) { MicGlyph() }
     }
 }
 
-/** Listen pill (`.play`): 44 dp tonal pill with the filled play icon and a 14 sp 700 label such as "Listen 1:52". */
+@Composable
+private fun MicGlyph() {
+    Icon(imageVector = WdIcons.MicFill, contentDescription = null, modifier = Modifier.size(24.dp), tint = FixedInk.onNavy)
+}
+
+/**
+ * Listen pill (`.play`): 44 dp tonal pill with the filled play icon and a 14 sp 700 label such as
+ * "Listen 1:52". It draws at 44 dp; the click node behind it is 48 dp and overflows the brief header.
+ */
 @Composable
 fun ListenPill(label: String, onClick: () -> Unit, modifier: Modifier = Modifier) {
     val c = WatchdogTheme.colors
-    Row(
+    Box(
         modifier = modifier
-            .heightIn(min = 44.dp)
-            .clip(RoundedCornerShape(22.dp))
-            .background(c.tint)
-            .clickable(role = Role.Button, onClick = onClick)
-            .padding(start = 10.dp, end = 14.dp),
-        horizontalArrangement = Arrangement.spacedBy(4.dp),
-        verticalAlignment = Alignment.CenterVertically,
+            .overflowTouchTarget()
+            .clip(RoundedCornerShape(24.dp))
+            .clickable(role = Role.Button, onClick = onClick),
+        contentAlignment = Alignment.Center,
     ) {
-        Icon(imageVector = WdIcons.PlayArrowFill, contentDescription = null, modifier = Modifier.size(22.dp), tint = c.onTint)
-        Text(text = label, color = c.onTint, style = WatchdogTheme.type.body.sized(14, FontWeight.Bold), maxLines = 1, softWrap = false)
+        Row(
+            modifier = Modifier
+                .height(44.dp)
+                .clip(RoundedCornerShape(22.dp))
+                .background(c.tint)
+                .padding(start = 10.dp, end = 14.dp),
+            horizontalArrangement = Arrangement.spacedBy(4.dp),
+            verticalAlignment = Alignment.CenterVertically,
+        ) {
+            Icon(imageVector = WdIcons.PlayArrowFill, contentDescription = null, modifier = Modifier.size(22.dp), tint = c.onTint)
+            Text(text = label, color = c.onTint, style = WatchdogTheme.type.body.sized(14, FontWeight.Bold), maxLines = 1, softWrap = false)
+        }
     }
 }
 
@@ -157,13 +179,15 @@ fun IntelligenceTeaserCard(
             horizontalArrangement = Arrangement.spacedBy(10.dp),
             verticalAlignment = Alignment.CenterVertically,
         ) {
+            // Both footer controls draw at their mockup size (44 dp mic row, 22 dp link) over 48 dp click nodes.
             Row(
                 modifier = Modifier
-                    .clip(RoundedCornerShape(22.dp))
+                    .overflowTouchTarget()
+                    .clip(RoundedCornerShape(24.dp))
                     .clickable(role = Role.Button, onClick = onAsk)
                     .semantics(mergeDescendants = true) { contentDescription = "$askLabel, Watchdog Intelligence Voice" }
                     .padding(end = 4.dp),
-                horizontalArrangement = Arrangement.spacedBy(10.dp),
+                horizontalArrangement = Arrangement.spacedBy(10.dp, Alignment.CenterHorizontally),
                 verticalAlignment = Alignment.CenterVertically,
             ) {
                 MicButton(onClick = null)
@@ -171,8 +195,11 @@ fun IntelligenceTeaserCard(
             }
             Spacer(Modifier.weight(1f))
             Row(
-                modifier = Modifier.clickable(role = Role.Button, onClick = onReadBrief),
-                horizontalArrangement = Arrangement.spacedBy(2.dp),
+                modifier = Modifier
+                    .overflowTouchTarget()
+                    .clip(RoundedCornerShape(8.dp))
+                    .clickable(role = Role.Button, onClick = onReadBrief),
+                horizontalArrangement = Arrangement.spacedBy(2.dp, Alignment.CenterHorizontally),
                 verticalAlignment = Alignment.CenterVertically,
             ) {
                 Text(text = briefLabel, color = Spectrum.link, style = t.sectionLink, maxLines = 1)
@@ -312,6 +339,8 @@ fun FollowUpRow(followUp: FollowUp, onClick: () -> Unit, modifier: Modifier = Mo
  * The Material composer bar (`.composer.m`): container color, padding 12 16 (6 + inset below), a 56 dp
  * field with 28 dp radius on container-high, and the 56 dp square mic FAB without a shadow. Pass
  * [onValueChange] to make the field editable; the FAB becomes Send when there is text and [onSend] is set.
+ * Without [onValueChange] the field is a button that runs [onFieldClick] (for example to open the typed
+ * composer); with neither it is a plain hint.
  */
 @Composable
 fun IntelligenceComposer(
@@ -321,6 +350,7 @@ fun IntelligenceComposer(
     value: String = "",
     onValueChange: ((String) -> Unit)? = null,
     onSend: (() -> Unit)? = null,
+    onFieldClick: (() -> Unit)? = null,
     windowInsets: WindowInsets = bottomChromeInsets(),
 ) {
     val c = WatchdogTheme.colors
@@ -334,12 +364,18 @@ fun IntelligenceComposer(
         horizontalArrangement = Arrangement.spacedBy(10.dp),
         verticalAlignment = Alignment.CenterVertically,
     ) {
+        val fieldClick = if (onValueChange == null && onFieldClick != null) {
+            Modifier.clickable(role = Role.Button, onClick = onFieldClick)
+        } else {
+            Modifier
+        }
         Box(
             modifier = Modifier
                 .weight(1f)
                 .height(56.dp)
                 .clip(RoundedCornerShape(28.dp))
                 .background(c.mHigh)
+                .then(fieldClick)
                 .padding(horizontal = 18.dp),
             contentAlignment = Alignment.CenterStart,
         ) {

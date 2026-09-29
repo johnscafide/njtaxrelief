@@ -24,13 +24,15 @@ import com.watchdogindex.agent.core.model.AuthState
 import com.watchdogindex.agent.design.ThemeMode
 import com.watchdogindex.agent.navigation.IntentRoutes
 import com.watchdogindex.agent.navigation.WatchdogNavHost
+import com.watchdogindex.agent.push.WatchdogMessagingService
 import com.watchdogindex.agent.ui.nav.Route
 
 /**
  * The single activity. Installs the splash, goes edge to edge with bar icons that follow the app theme (not
  * only the system theme, since Settings can force light or dark), and hosts the Navigation Compose graph.
  * Incoming intents (share target, App Links, watchdog:// links, notification taps) become a pending [Route]
- * that the host opens once the agent is signed in.
+ * that the host opens once the agent is signed in. Notification intents also clear the alert they came from
+ * and, for a "Call client" action with a number, start the dialer.
  */
 class MainActivity : ComponentActivity() {
     private var pendingRoute by mutableStateOf<Route?>(null)
@@ -54,7 +56,7 @@ class MainActivity : ComponentActivity() {
             stillWaiting
         }
 
-        if (savedInstanceState == null) pendingRoute = intent?.toRoute()
+        if (savedInstanceState == null) pendingRoute = consumeLaunchIntent(intent)
 
         val reducedMotion = animationsDisabled()
 
@@ -86,7 +88,7 @@ class MainActivity : ComponentActivity() {
     override fun onNewIntent(intent: Intent) {
         super.onNewIntent(intent)
         setIntent(intent)
-        intent.toRoute()?.let { pendingRoute = it }
+        consumeLaunchIntent(intent)?.let { pendingRoute = it }
     }
 
     override fun onDestroy() {
@@ -101,6 +103,23 @@ class MainActivity : ComponentActivity() {
         Settings.Global.getFloat(contentResolver, Settings.Global.ANIMATOR_DURATION_SCALE, 1f) == 0f
     } catch (e: Exception) {
         !ValueAnimator.areAnimatorsEnabled()
+    }
+
+    /**
+     * Everything an incoming intent asks for besides navigation: clears the alert whose tap or action button
+     * opened the app (action buttons do not auto-cancel) and dials the client when a "Call client" button carried
+     * a phone number, then returns the route to open. An intent replayed from Recents is ignored, so a
+     * notification action is never repeated by reopening the task.
+     */
+    private fun consumeLaunchIntent(intent: Intent?): Route? {
+        if (intent == null) return null
+        if ((intent.flags and Intent.FLAG_ACTIVITY_LAUNCHED_FROM_HISTORY) != 0) return null
+        val notificationId = intent.getIntExtra(WatchdogMessagingService.EXTRA_NOTIFICATION_ID, -1)
+        if (notificationId >= 0) WatchdogMessagingService.cancelAlert(this, notificationId)
+        intent.getStringExtra(WatchdogMessagingService.EXTRA_DIAL_PHONE)?.takeIf { it.isNotBlank() }?.let { phone ->
+            (application as WatchdogApplication).graph.platform.dial(phone)
+        }
+        return intent.toRoute()
     }
 
     private fun Intent.toRoute(): Route? = IntentRoutes.parse(

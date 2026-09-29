@@ -10,7 +10,6 @@ import androidx.compose.runtime.getValue
 import androidx.compose.runtime.remember
 import androidx.compose.ui.Modifier
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
-import androidx.navigation.NavGraph.Companion.findStartDestination
 import androidx.navigation.NavHostController
 import androidx.navigation.NavType
 import androidx.navigation.compose.NavHost
@@ -43,7 +42,9 @@ fun WatchdogNavHost(
 ) {
     val navController = rememberNavController()
     val authState by graph.repos.auth.state.collectAsStateWithLifecycle()
-    val startDestination = remember { if (graph.repos.auth.state.value is AuthState.SignedIn) RouteNames.TODAY else RouteNames.WELCOME }
+    // The collected state is seeded from the same StateFlow value, so it picks the same start screen as a direct
+    // `.value` read would, without reading a StateFlow value in composition (a lint error in CI).
+    val startDestination = remember { if (authState is AuthState.SignedIn) RouteNames.TODAY else RouteNames.WELCOME }
     val navigator = remember(navController) { NavControllerNavigator(navController, onExit) }
 
     // Sign-in and sign-out transitions.
@@ -58,7 +59,10 @@ fun WatchdogNavHost(
             }
             AuthState.SignedOut -> if (current != null && current != RouteNames.WELCOME) {
                 navController.navigate(RouteNames.WELCOME) {
-                    popUpTo(navController.graph.findStartDestination().id) { inclusive = true }
+                    // Pop the whole graph, not its start destination: after a first-run sign-in Welcome (the start
+                    // destination) is no longer on the stack, and popping to a missing destination is ignored,
+                    // which would leave Welcome stacked over signed-out content.
+                    popUpTo(navController.graph.id) { inclusive = true }
                     launchSingleTop = true
                 }
             }
@@ -126,7 +130,8 @@ class NavControllerNavigator(
     override fun open(route: Route) {
         if (route == Route.Welcome) {
             controller.navigate(RouteNames.WELCOME) {
-                popUpTo(controller.graph.findStartDestination().id) { inclusive = true }
+                // Same as sign-out in WatchdogNavHost: clear the whole graph so Welcome is the only entry.
+                popUpTo(controller.graph.id) { inclusive = true }
                 launchSingleTop = true
             }
             return

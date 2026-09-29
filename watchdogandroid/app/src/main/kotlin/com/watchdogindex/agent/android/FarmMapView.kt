@@ -55,8 +55,10 @@ import org.maplibre.android.geometry.LatLng as MapLatLng
  *   - a GeoJSON source of parcel polygons (properties: pin, address, score, band, sold, permit, residential)
  *   - a FillLayer colored per layer: Score bands from WatchdogTheme.colors.mapBands, residential / sold /
  *     permit highlights on the other layers, everything else mapOut
- *   - a LineLayer for parcel edges (mapRoad), a CircleLayer of gold dots at sold parcels (Score and Sold layers)
- *   - the farm boundary (mapBound), the selected parcel outline, and the polygon being drawn in draw mode.
+ *   - a LineLayer for parcel edges (2-unit mapLand, as the mockup's parcel strokes), a CircleLayer of gold dots
+ *     ringed in mapLand at sold parcels (Score and Sold layers)
+ *   - the farm boundary (mapBound 2.5 stroke over a 5% mapBound fill), the selected parcel outline (ink 3.5)
+ *     and the polygon being drawn in draw mode. Widths follow Docs/mockup-css-to-compose.md section 3.40.
  * In dark mode a translucent BackgroundLayer under the parcels dims the light basemap toward mapLand.
  *
  * Everything that touches the map is behind null checks: the style loads asynchronously, and the composable
@@ -74,6 +76,7 @@ private const val LAYER_DIM = "watchdog-dim"
 private const val LAYER_PARCEL_FILL = "watchdog-parcel-fill"
 private const val LAYER_PARCEL_LINE = "watchdog-parcel-line"
 private const val LAYER_SOLD = "watchdog-sold-dots"
+private const val LAYER_BOUNDARY_FILL = "watchdog-boundary-fill"
 private const val LAYER_BOUNDARY = "watchdog-boundary-line"
 private const val LAYER_SELECTED = "watchdog-selected-line"
 private const val LAYER_DRAW_FILL = "watchdog-draw-fill"
@@ -98,6 +101,7 @@ private data class MapPalette(
     val dot: Int,
     val land: Int,
     val surface: Int,
+    val ink: Int,
 ) {
     companion object {
         fun from(c: WatchdogColors) = MapPalette(
@@ -109,6 +113,7 @@ private data class MapPalette(
             dot = c.mapDot.toArgb(),
             land = c.mapLand.toArgb(),
             surface = c.surface.toArgb(),
+            ink = c.ink.toArgb(),
         )
     }
 }
@@ -269,10 +274,16 @@ private class FarmMapController(private val density: Float) {
         )
         add(
             LineLayer(LAYER_PARCEL_LINE, SRC_PARCELS).withProperties(
-                PropertyFactory.lineColor(palette.road),
-                PropertyFactory.lineWidth(1.2f),
+                PropertyFactory.lineColor(palette.land),
+                PropertyFactory.lineWidth(2f),
                 PropertyFactory.lineJoin(Property.LINE_JOIN_ROUND),
             ),
+        )
+        add(
+            FillLayer(LAYER_BOUNDARY_FILL, SRC_BOUNDARY).withProperties(
+                PropertyFactory.fillColor(palette.bound),
+                PropertyFactory.fillOpacity(0.05f),
+            ).also { it.setFilter(Expression.eq(Expression.geometryType(), Expression.literal("Polygon"))) },
         )
         add(
             FillLayer(LAYER_DRAW_FILL, SRC_DRAW).withProperties(
@@ -284,15 +295,15 @@ private class FarmMapController(private val density: Float) {
         add(
             LineLayer(LAYER_BOUNDARY, SRC_BOUNDARY).withProperties(
                 PropertyFactory.lineColor(palette.bound),
-                PropertyFactory.lineWidth(3f),
+                PropertyFactory.lineWidth(2.5f),
                 PropertyFactory.lineJoin(Property.LINE_JOIN_ROUND),
                 PropertyFactory.lineCap(Property.LINE_CAP_ROUND),
-            ),
+            ).also { it.setFilter(Expression.eq(Expression.geometryType(), Expression.literal("LineString"))) },
         )
         add(
             LineLayer(LAYER_SELECTED, SRC_PARCELS).withProperties(
-                PropertyFactory.lineColor(palette.bound),
-                PropertyFactory.lineWidth(3f),
+                PropertyFactory.lineColor(palette.ink),
+                PropertyFactory.lineWidth(3.5f),
                 PropertyFactory.lineJoin(Property.LINE_JOIN_ROUND),
             ).also { it.setFilter(Expression.literal(false)) },
         )
@@ -300,8 +311,8 @@ private class FarmMapController(private val density: Float) {
             CircleLayer(LAYER_SOLD, SRC_SOLD).withProperties(
                 PropertyFactory.circleColor(palette.dot),
                 PropertyFactory.circleRadius(5f),
-                PropertyFactory.circleStrokeColor(palette.surface),
-                PropertyFactory.circleStrokeWidth(1.5f),
+                PropertyFactory.circleStrokeColor(palette.land),
+                PropertyFactory.circleStrokeWidth(2f),
             ),
         )
         add(
@@ -390,10 +401,11 @@ private class FarmMapController(private val density: Float) {
 
     private fun restyle(s: Style, p: MapPalette) {
         s.getLayer(LAYER_DIM)?.setProperties(PropertyFactory.backgroundColor(p.land), PropertyFactory.backgroundOpacity(if (p.isDark) 0.62f else 0f))
-        s.getLayer(LAYER_PARCEL_LINE)?.setProperties(PropertyFactory.lineColor(p.road))
+        s.getLayer(LAYER_PARCEL_LINE)?.setProperties(PropertyFactory.lineColor(p.land))
+        s.getLayer(LAYER_BOUNDARY_FILL)?.setProperties(PropertyFactory.fillColor(p.bound))
         s.getLayer(LAYER_BOUNDARY)?.setProperties(PropertyFactory.lineColor(p.bound))
-        s.getLayer(LAYER_SELECTED)?.setProperties(PropertyFactory.lineColor(p.bound))
-        s.getLayer(LAYER_SOLD)?.setProperties(PropertyFactory.circleColor(p.dot), PropertyFactory.circleStrokeColor(p.surface))
+        s.getLayer(LAYER_SELECTED)?.setProperties(PropertyFactory.lineColor(p.ink))
+        s.getLayer(LAYER_SOLD)?.setProperties(PropertyFactory.circleColor(p.dot), PropertyFactory.circleStrokeColor(p.land))
         s.getLayer(LAYER_DRAW_FILL)?.setProperties(PropertyFactory.fillColor(p.bound))
         s.getLayer(LAYER_DRAW_LINE)?.setProperties(PropertyFactory.lineColor(p.bound))
         s.getLayer(LAYER_DRAW_POINTS)?.setProperties(PropertyFactory.circleColor(p.surface), PropertyFactory.circleStrokeColor(p.bound))
@@ -467,9 +479,15 @@ private class FarmMapController(private val density: Float) {
         return FeatureCollection.fromFeatures(features)
     }
 
+    /** The boundary as a Polygon (for the 5% fill) and a LineString (for the stroke); the layers filter by geometry type. */
     private fun boundaryCollection(boundary: List<LatLng>): FeatureCollection {
         val ring = closedRing(boundary) ?: return FeatureCollection.fromFeatures(emptyList())
-        return FeatureCollection.fromFeatures(listOf(Feature.fromGeometry(LineString.fromLngLats(ring))))
+        return FeatureCollection.fromFeatures(
+            listOf(
+                Feature.fromGeometry(Polygon.fromLngLats(listOf(ring))),
+                Feature.fromGeometry(LineString.fromLngLats(ring)),
+            ),
+        )
     }
 
     private fun drawCollection(points: List<LatLng>): FeatureCollection {

@@ -15,6 +15,7 @@ import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.selection.selectable
+import androidx.compose.foundation.selection.selectableGroup
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material3.Icon
 import androidx.compose.material3.Text
@@ -59,6 +60,8 @@ fun StatusChipView(chip: StatusChip, modifier: Modifier = Modifier) {
  * Material filter chip as the mockups draw it (`.mchip`): 32 dp tall, 8 dp radius, 1 dp outline, 14 sp 700
  * ink2; selected = indicator fill with a leading 18 dp check; [elevated] unselected = surface with a soft
  * shadow (the Farm overlay). Reserves a 48 dp touch target, so the chip sits in a 48 dp tall box.
+ * The chips in the app pick one option, so [role] defaults to a radio button; pass [Role.Checkbox] for a
+ * multi-select filter.
  */
 @Composable
 fun WdFilterChip(
@@ -68,6 +71,7 @@ fun WdFilterChip(
     modifier: Modifier = Modifier,
     elevated: Boolean = false,
     icon: ImageVector? = null,
+    role: Role = Role.RadioButton,
 ) {
     val c = WatchdogTheme.colors
     val shape = RoundedCornerShape(8.dp)
@@ -83,7 +87,7 @@ fun WdFilterChip(
     m = m.clip(shape).background(container)
     if (!selected && !elevated) m = m.border(1.dp, c.mOutline, shape)
     m = m
-        .selectable(selected = selected, role = Role.Checkbox, onClick = onClick)
+        .selectable(selected = selected, role = role, onClick = onClick)
         .padding(start = if (leading != null) 10.dp else 14.dp, end = 14.dp)
     Row(modifier = m, horizontalArrangement = Arrangement.spacedBy(6.dp), verticalAlignment = Alignment.CenterVertically) {
         if (leading != null) {
@@ -102,7 +106,7 @@ fun WdFilterChip(
 /**
  * Horizontally scrolling filter chips (`.mchips`): 8 dp gaps, 16 dp side padding inside the scroller.
  * The row is 48 dp tall with the 32 dp chips centred; to match the mockup's 14 dp gap above the chips,
- * give the row 6 dp of top padding.
+ * give the row 6 dp of top padding. One option is selected at a time, so the row is a selectable group.
  */
 @Composable
 fun FilterChipsRow(
@@ -116,6 +120,7 @@ fun FilterChipsRow(
     Row(
         modifier = modifier
             .fillMaxWidth()
+            .selectableGroup()
             .horizontalScroll(rememberScrollState())
             .padding(contentPadding),
         horizontalArrangement = Arrangement.spacedBy(8.dp),

@@ -1,7 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources xmlns:tools="http://schemas.android.com/tools">
-    <!-- Splash: the paper background and the Watchdog mark; the Compose theme takes over immediately. -->
-    <style name="Theme.Watchdog.Starting" parent="Theme.SplashScreen">
+    <!-- Splash: the paper background and the Watchdog mark on its mark-blue disc (IconBackground is the parent that
+         honours windowSplashScreenIconBackgroundColor); the Compose theme takes over immediately. -->
+    <style name="Theme.Watchdog.Starting" parent="Theme.SplashScreen.IconBackground">
         <item name="windowSplashScreenBackground">@color/paper</item>
         <item name="windowSplashScreenAnimatedIcon">@drawable/ic_launcher_foreground</item>
         <item name="windowSplashScreenIconBackgroundColor">@color/mark_blue</item>

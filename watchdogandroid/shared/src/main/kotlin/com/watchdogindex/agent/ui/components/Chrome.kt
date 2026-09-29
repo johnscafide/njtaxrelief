@@ -8,20 +8,20 @@ import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.WindowInsets
+import androidx.compose.foundation.layout.fillMaxHeight
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.layout.windowInsetsPadding
+import androidx.compose.foundation.selection.selectable
+import androidx.compose.foundation.selection.selectableGroup
 import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material3.ExtendedFloatingActionButton
 import androidx.compose.material3.FloatingActionButton
 import androidx.compose.material3.FloatingActionButtonDefaults
 import androidx.compose.material3.Icon
-import androidx.compose.material3.NavigationBar
-import androidx.compose.material3.NavigationBarItem
-import androidx.compose.material3.NavigationBarItemDefaults
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.Immutable
@@ -29,6 +29,7 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.draw.shadow
+import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.vector.ImageVector
 import androidx.compose.ui.semantics.Role
 import androidx.compose.ui.semantics.contentDescription
@@ -173,10 +174,16 @@ fun WatchdogTopBar(
     }
 }
 
+/** The nav bar's content height: the mockup's 104 dp minus its 24 dp gesture area, which the real inset adds back. */
+private val NavBarContentHeight: Dp = 80.dp
+
 /**
- * Navigation bar (`.nav-m`): Material NavigationBar on the container color with the 64x32 indicator,
- * 12 sp labels (600, 800 when selected) and the filled icon for the selected tab. 80 dp plus the bottom
- * inset, which is the mockup's 104 dp with a 24 dp gesture area.
+ * Navigation bar (`.nav-m`): four equal columns on the container color, each a 64x32 indicator (16 dp
+ * radius, filled with mIndicator and the filled icon when selected) 12 dp from the top, a 4 dp gap and the
+ * 12 sp label (600 muted; 800 ink when selected). Drawn by hand rather than with Material's NavigationBar
+ * so the icon sits exactly where the mockup puts it (Material centres the stack about 2 dp lower). 80 dp
+ * plus the bottom inset, which is the mockup's 104 dp with a 24 dp gesture area; every column is a
+ * full-height tab target.
  */
 @Composable
 fun WatchdogNavigationBar(
@@ -187,37 +194,49 @@ fun WatchdogNavigationBar(
 ) {
     val c = WatchdogTheme.colors
     val t = WatchdogTheme.type
-    NavigationBar(
-        modifier = modifier,
-        containerColor = c.mContainer,
-        contentColor = c.ink2,
-        tonalElevation = 0.dp,
-        windowInsets = windowInsets,
+    Row(
+        modifier = modifier
+            .fillMaxWidth()
+            .background(c.mContainer)
+            .windowInsetsPadding(windowInsets)
+            .height(NavBarContentHeight)
+            .selectableGroup(),
     ) {
         Tab.entries.forEach { tab ->
             val isSelected = tab == selected
             val outlined = WdIcons.byName(tab.icon) ?: WdIcons.Home
             val filled = WdIcons.byName(tab.icon + "_fill") ?: outlined
-            NavigationBarItem(
-                selected = isSelected,
-                onClick = { onSelect(tab) },
-                icon = {
+            Column(
+                modifier = Modifier
+                    .weight(1f)
+                    .fillMaxHeight()
+                    .selectable(selected = isSelected, role = Role.Tab, onClick = { onSelect(tab) })
+                    .padding(top = 12.dp),
+                horizontalAlignment = Alignment.CenterHorizontally,
+            ) {
+                Box(
+                    modifier = Modifier
+                        .size(width = 64.dp, height = 32.dp)
+                        .clip(RoundedCornerShape(16.dp))
+                        .background(if (isSelected) c.mIndicator else Color.Transparent),
+                    contentAlignment = Alignment.Center,
+                ) {
                     Icon(
                         imageVector = if (isSelected) filled else outlined,
                         contentDescription = null,
                         modifier = Modifier.size(24.dp),
+                        tint = if (isSelected) c.mOnIndicator else c.ink2,
                     )
-                },
-                label = { Text(text = tab.label, style = if (isSelected) t.navLabelSelected else t.navLabel) },
-                alwaysShowLabel = true,
-                colors = NavigationBarItemDefaults.colors(
-                    selectedIconColor = c.mOnIndicator,
-                    selectedTextColor = c.ink,
-                    indicatorColor = c.mIndicator,
-                    unselectedIconColor = c.ink2,
-                    unselectedTextColor = c.muted,
-                ),
-            )
+                }
+                Text(
+                    text = tab.label,
+                    modifier = Modifier.padding(top = 4.dp),
+                    color = if (isSelected) c.ink else c.muted,
+                    style = if (isSelected) t.navLabelSelected else t.navLabel,
+                    maxLines = 1,
+                    softWrap = false,
+                )
+            }
         }
     }
 }

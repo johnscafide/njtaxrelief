@@ -91,6 +91,8 @@ dependencies {
     implementation(libs.androidx.datastore.preferences)
     implementation(libs.androidx.credentials)
     implementation(libs.androidx.credentials.play)
+    // The Ktor engine the app names explicitly in WatchdogApplication.buildHttpClient (no ServiceLoader lookup).
+    implementation(libs.ktor.client.okhttp)
     implementation(libs.kotlinx.coroutines.android)
     implementation(libs.kotlinx.coroutines.play.services)
     implementation(libs.coil.compose)

@@ -15,10 +15,12 @@ import androidx.compose.ui.draw.drawBehind
 import androidx.compose.ui.geometry.Offset
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.vector.ImageVector
+import androidx.compose.ui.layout.layout
 import androidx.compose.ui.text.TextStyle
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.text.style.TextOverflow
+import androidx.compose.ui.unit.Constraints
 import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.TextUnit
 import androidx.compose.ui.unit.dp
@@ -27,15 +29,16 @@ import com.watchdogindex.agent.core.model.TileTint
 import com.watchdogindex.agent.core.model.Tint
 import com.watchdogindex.agent.core.model.Tone
 import com.watchdogindex.agent.design.Spectrum
+import com.watchdogindex.agent.design.WatchdogDimens
+import com.watchdogindex.agent.design.WatchdogLightColors
 import com.watchdogindex.agent.design.WatchdogTheme
 import com.watchdogindex.agent.design.icons.WdIcons
-import kotlin.math.abs
-import kotlin.math.roundToLong
 
 /*
- * Shared helpers for the component library: margins, touch targets, separators, tabular text,
- * the palette mappings for the core model enums, the fixed colors the mockups never swap with the theme,
- * and the small number formatters the cards need. Screens use these through the components; they
+ * Shared helpers for the component library: margins, touch targets, separators, tabular text, the palette
+ * mappings for the core model enums and the fixed colors the mockups never swap with the theme. Numbers
+ * are formatted by core's com.watchdogindex.agent.core.format.Format; the components add no formatters of
+ * their own, so cards and screens cannot drift apart. Screens use these through the components; they
  * rarely need them directly.
  */
 
@@ -47,10 +50,40 @@ fun Modifier.listMargin(): Modifier = padding(start = 16.dp, end = 16.dp, top = 
 
 /**
  * Reserves the 48 dp Material touch target around a smaller control without changing how the control is
- * drawn. Compose already expands the hit area of small pointer-input nodes to 48 dp; this additionally
- * reserves the space so neighbouring targets cannot overlap.
+ * drawn: the node grows to 48 dp in the layout with the control centred in it. Use it where the layout has
+ * the room (chips in their 48 dp row); use [overflowTouchTarget] where it does not.
  */
 fun Modifier.minTouchTarget(): Modifier = minimumInteractiveComponentSize()
+
+/**
+ * Gives a control the mockup draws smaller than 48 dp a [minSize] click and accessibility area without
+ * changing the space it takes in the layout. The node measured after this modifier (put `.clickable`,
+ * `.selectable` or `.toggleable` after it) is at least [minSize] wide and tall, centred on the content's
+ * natural bounds, and overflows them on purpose, the same way the task tick's 48 dp box overflows its 28 dp
+ * column. The natural size comes from the content's intrinsics, so the content must centre itself inside
+ * the enlarged node (a `Box` with `Alignment.Center`, or a `Row` with centred arrangement and alignment).
+ * Used by the 44 dp pills, the mic, text links, the client next-action line and the sheet handle.
+ */
+fun Modifier.overflowTouchTarget(minSize: Dp = WatchdogDimens.touchTarget): Modifier = layout { measurable, constraints ->
+    val min = minSize.roundToPx()
+    // What the content would measure on its own; this is the size the layout keeps.
+    val naturalWidth = measurable.maxIntrinsicWidth(constraints.maxHeight).coerceIn(constraints.minWidth, constraints.maxWidth)
+    val naturalHeight = measurable.minIntrinsicHeight(naturalWidth).coerceIn(constraints.minHeight, constraints.maxHeight)
+    val targetWidth = maxOf(naturalWidth, min)
+    val targetHeight = maxOf(naturalHeight, min)
+    val placeable = measurable.measure(
+        Constraints(
+            minWidth = targetWidth,
+            maxWidth = maxOf(constraints.maxWidth, targetWidth),
+            minHeight = targetHeight,
+            maxHeight = maxOf(constraints.maxHeight, targetHeight),
+        ),
+    )
+    layout(naturalWidth, naturalHeight) {
+        // Centred on the natural bounds, so a 48 dp node behind 44 dp content sticks out 2 dp on each side.
+        placeable.place((naturalWidth - placeable.width) / 2, (naturalHeight - placeable.height) / 2)
+    }
+}
 
 /** A 1 dp separator along the top edge, starting [inset] from the start edge (the mockups' `border-top`). */
 fun Modifier.topSeparator(color: Color, inset: Dp = 0.dp): Modifier = drawBehind {
@@ -130,8 +163,9 @@ internal fun TextStyle.sized(
 
 /**
  * Colors the approved mockups keep identical in light and dark (spec §1.12): the Intelligence mic and brief
- * numerals, result panel headers, postcard thumbs, the true cost card and the share targets. Everything
- * else comes from [WatchdogTheme.colors].
+ * numerals, result panel headers, postcard thumbs, the true cost card and the share targets. Every value is
+ * a design token ([Spectrum] or the light palette, which is what the mockups freeze); nothing is spelled out
+ * in hex here. Everything else comes from [WatchdogTheme.colors].
  */
 object FixedInk {
     /** `#0e2248`: mic, brief numerals, `.wp-h`, `.pc-t`, `.shh .th`, `.tc`. */
@@ -145,19 +179,22 @@ object FixedInk {
     val onNavyFaint: Color = Color.White.copy(alpha = .72f)
     /** `rgba(255,255,255,.14)`: dividers on navy cards and the true cost track. */
     val navyDivider: Color = Color.White.copy(alpha = .14f)
-    /** `#b8972a`: true cost rules and bars (the light gold, in both themes). */
-    val gold: Color = Color(0xFFB8972A)
-    /** `#f6efd9` / `#0e2248`: postcard thumb bottom row. */
-    val sand: Color = Color(0xFFF6EFD9)
-    /** `#0f8b8d`: Messages share target and the true cost agent avatar. */
-    val teal: Color = Color(0xFF0F8B8D)
+    /** `#b8972a`: the light theme's gold, kept in dark mode for the true cost rules and bars. */
+    val gold: Color = WatchdogLightColors.gold
+    /** `#f6efd9`: the light theme's sand, kept in dark mode for the postcard thumb's bottom row. */
+    val sand: Color = WatchdogLightColors.sand
+    /** `#0f8b8d`: the light theme's teal, kept for the Messages share target and the true cost agent avatar. */
+    val teal: Color = WatchdogLightColors.teal
     /** `#1456a0`: Mail share target. */
     val link: Color = Spectrum.link
     /** `#14213d` / `#5d6678`: true cost agent footer text. */
     val ink: Color = Spectrum.ink
     val muted: Color = Spectrum.muted
-    /** `rgba(30,57,91,.10)`: the Intelligence card shadow, the same in both themes. */
-    val intelligenceShadow: Color = Color(0xFF1E395B)
+    /**
+     * The Intelligence card shadow (CSS `0 14px 34px rgba(30,57,91,.10)`), the same in both themes: the
+     * light theme's navy shadow ink, with the alpha set where it is drawn.
+     */
+    val intelligenceShadow: Color = WatchdogLightColors.shadow
 }
 
 /** Container, content and label colors for a card [Tint]. */
@@ -206,38 +243,3 @@ fun Tone.colors(): Pair<Color, Color> {
 
 /** Resolves a Material Symbols name carried by a core model ("receipt_long", "mic_fill") to an icon. */
 fun iconByName(name: String?, fallback: ImageVector): ImageVector = name?.let { WdIcons.byName(it) } ?: fallback
-
-/** "1,980" */
-fun formatCount(value: Int): String {
-    val digits = abs(value).toString()
-    val grouped = StringBuilder()
-    digits.forEachIndexed { index, ch ->
-        if (index > 0 && (digits.length - index) % 3 == 0) grouped.append(',')
-        grouped.append(ch)
-    }
-    return if (value < 0) "-$grouped" else grouped.toString()
-}
-
-/** "$11,284" */
-fun formatMoney(value: Int): String = (if (value < 0) "-$" else "$") + formatCount(abs(value))
-
-/** "$373k" for 372,800: whole thousands, used on the value line. */
-fun formatThousands(value: Int): String = "$" + (value / 1000.0).roundToLong() + "k"
-
-/** Fixed decimals without java.text: 4.47 with 3 decimals is "4.470"; trimZeros turns 61.0 into "61". */
-fun formatDecimal(value: Double, decimals: Int, trimZeros: Boolean = false): String {
-    var factor = 1L
-    repeat(decimals) { factor *= 10 }
-    val scaled = (abs(value) * factor).roundToLong()
-    val whole = scaled / factor
-    var fraction = if (decimals == 0) "" else (scaled % factor).toString().padStart(decimals, '0')
-    if (trimZeros) fraction = fraction.trimEnd('0')
-    val sign = if (value < 0 && scaled != 0L) "-" else ""
-    return if (fraction.isEmpty()) "$sign$whole" else "$sign$whole.$fraction"
-}
-
-/** "$4.470": a general tax rate per $100 of assessed value. */
-fun formatRate(ratePer100: Double): String = "$" + formatDecimal(ratePer100, 3)
-
-/** "61%" or "5.1%". */
-fun formatPercent(value: Double): String = formatDecimal(value, 1, trimZeros = true) + "%"

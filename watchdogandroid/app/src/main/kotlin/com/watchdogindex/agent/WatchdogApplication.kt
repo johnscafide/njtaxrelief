@@ -19,6 +19,7 @@ import com.watchdogindex.agent.core.sample.SampleRepositories
 import com.watchdogindex.agent.push.NotificationChannels
 import com.watchdogindex.agent.push.PushRegistrar
 import io.ktor.client.HttpClient
+import io.ktor.client.engine.okhttp.OkHttp
 import io.ktor.client.plugins.HttpTimeout
 import io.ktor.client.plugins.contentnegotiation.ContentNegotiation
 import io.ktor.serialization.kotlinx.json.json
@@ -107,11 +108,11 @@ class WatchdogApplication : Application() {
     }
 
     /**
-     * Ktor with JSON and a 20 s ceiling. The OkHttp engine comes from :shared's `ktor-client-okhttp` runtime
-     * dependency; Ktor picks it up through its engine service loader, so `HttpClient { }` resolves to OkHttp on
-     * device without this module compiling against the engine artifact.
+     * Ktor on the OkHttp engine with JSON and a 20 s ceiling. The engine is named explicitly (and depended on in
+     * app/build.gradle.kts) rather than found through Ktor's ServiceLoader lookup, which R8 can break in the
+     * minified release build; proguard-rules.pro also keeps the engine container as a second guard.
      */
-    private fun buildHttpClient(): HttpClient = HttpClient {
+    private fun buildHttpClient(): HttpClient = HttpClient(OkHttp) {
         expectSuccess = false
         install(ContentNegotiation) {
             json(

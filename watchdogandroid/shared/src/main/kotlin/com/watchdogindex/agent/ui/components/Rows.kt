@@ -9,6 +9,7 @@ import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.ColumnScope
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.fillMaxWidth
+import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.heightIn
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.requiredSize
@@ -225,39 +226,50 @@ fun TaskRow(
     }
 }
 
-/** The task row's trailing pill (`.tka`): min 44x44, 22 dp radius, tonal; label 14 sp 700 or a 20 dp call icon. */
+/**
+ * The task row's trailing pill (`.tka`): 44 dp tall, min 44 wide, 22 dp radius, tonal; label 14 sp 700 or a
+ * 20 dp call icon. It draws at 44 dp so the row stays 66 dp; the click and accessibility node behind it is
+ * 48 dp and overflows the pill.
+ */
 @Composable
 fun TaskPill(action: TaskAction, onClick: () -> Unit, modifier: Modifier = Modifier) {
     val c = WatchdogTheme.colors
     val t = WatchdogTheme.type
     val isCall = action.kind == TaskActionKind.Call
     val label = action.label
-    Row(
+    Box(
         modifier = modifier
-            .heightIn(min = 44.dp)
-            .widthIn(min = 44.dp)
-            .clip(RoundedCornerShape(22.dp))
-            .background(c.tint)
-            .clickable(role = Role.Button, onClick = onClick)
-            .then(if (label != null && !isCall) Modifier.padding(horizontal = 14.dp) else Modifier),
-        horizontalArrangement = Arrangement.Center,
-        verticalAlignment = Alignment.CenterVertically,
+            .overflowTouchTarget()
+            .clip(RoundedCornerShape(24.dp))
+            .clickable(role = Role.Button, onClick = onClick),
+        contentAlignment = Alignment.Center,
     ) {
-        if (isCall) {
-            Icon(
-                imageVector = WdIcons.Call,
-                contentDescription = label ?: "Call",
-                modifier = Modifier.size(20.dp),
-                tint = c.onTint,
-            )
-        } else {
-            Text(
-                text = label ?: action.kind.name,
-                color = c.onTint,
-                style = t.body.sized(14, FontWeight.Bold),
-                maxLines = 1,
-                softWrap = false,
-            )
+        Row(
+            modifier = Modifier
+                .height(44.dp)
+                .widthIn(min = 44.dp)
+                .clip(RoundedCornerShape(22.dp))
+                .background(c.tint)
+                .then(if (label != null && !isCall) Modifier.padding(horizontal = 14.dp) else Modifier),
+            horizontalArrangement = Arrangement.Center,
+            verticalAlignment = Alignment.CenterVertically,
+        ) {
+            if (isCall) {
+                Icon(
+                    imageVector = WdIcons.Call,
+                    contentDescription = label ?: "Call",
+                    modifier = Modifier.size(20.dp),
+                    tint = c.onTint,
+                )
+            } else {
+                Text(
+                    text = label ?: action.kind.name,
+                    color = c.onTint,
+                    style = t.body.sized(14, FontWeight.Bold),
+                    maxLines = 1,
+                    softWrap = false,
+                )
+            }
         }
     }
 }
@@ -312,10 +324,18 @@ fun ClientRowView(
                 NextActionKind.Edit -> WdIcons.Edit
                 NextActionKind.None -> null
             }
-            val click = if (actionable) Modifier.clickable(role = Role.Button, onClick = onNextAction) else Modifier
+            // The line is 28 dp in the mockup; when actionable, a 48 dp click node overflows behind it.
+            val click = if (actionable) {
+                Modifier
+                    .overflowTouchTarget()
+                    .clip(RoundedCornerShape(8.dp))
+                    .clickable(role = Role.Button, onClick = onNextAction)
+            } else {
+                Modifier
+            }
             Row(
-                modifier = Modifier.padding(top = 6.dp).heightIn(min = 28.dp).then(click),
-                horizontalArrangement = Arrangement.spacedBy(6.dp),
+                modifier = Modifier.padding(top = 6.dp).then(click).heightIn(min = 28.dp),
+                horizontalArrangement = Arrangement.spacedBy(6.dp, Alignment.CenterHorizontally),
                 verticalAlignment = Alignment.CenterVertically,
             ) {
                 if (icon != null) {

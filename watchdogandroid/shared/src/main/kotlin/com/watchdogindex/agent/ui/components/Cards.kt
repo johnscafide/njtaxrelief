@@ -4,6 +4,7 @@ import androidx.compose.foundation.background
 import androidx.compose.foundation.border
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Arrangement
+import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.ColumnScope
 import androidx.compose.foundation.layout.PaddingValues
@@ -107,14 +108,18 @@ fun SectionHeader(
     ) {
         Text(text = title, modifier = Modifier.weight(1f).alignByBaseline(), color = c.ink, style = t.sectionTitle)
         if (linkLabel != null) {
-            val link = if (onLink != null) Modifier.clickable(role = Role.Button, onClick = onLink) else Modifier
-            Text(
-                text = linkLabel,
-                modifier = Modifier.alignByBaseline().then(link),
-                color = c.link,
-                style = t.sectionLink,
-                maxLines = 1,
-            )
+            // The link keeps its 21 dp text height in the row; when clickable, a 48 dp node overflows behind it.
+            val link = if (onLink != null) {
+                Modifier
+                    .overflowTouchTarget()
+                    .clip(RoundedCornerShape(8.dp))
+                    .clickable(role = Role.Button, onClick = onLink)
+            } else {
+                Modifier
+            }
+            Box(modifier = Modifier.alignByBaseline().then(link), contentAlignment = Alignment.Center) {
+                Text(text = linkLabel, color = c.link, style = t.sectionLink, maxLines = 1)
+            }
         }
     }
 }

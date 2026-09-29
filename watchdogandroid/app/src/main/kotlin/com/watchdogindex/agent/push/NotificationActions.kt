@@ -60,7 +60,7 @@ object NotificationActions {
     /**
      * The route word an action opens (see IntentRoutes.fromExtras). Null means the action does not open the app
      * (Later dismisses the notification). Call client opens the property when a PIN is known so the agent can dial
-     * from the client's home; the payload's `phone` field, when present, is dialled directly by the service instead.
+     * from the client's home; when the payload carries a `phone`, MainActivity also starts the dialer on that number.
      */
     fun routeFor(kind: NotificationActionKind, pin: String?, defaultRoute: String?): String? = when (kind) {
         NotificationActionKind.OpenBrief -> "intelligence"

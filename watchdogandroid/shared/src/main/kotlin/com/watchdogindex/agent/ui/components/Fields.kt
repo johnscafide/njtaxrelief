@@ -19,6 +19,8 @@ import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.SolidColor
 import androidx.compose.ui.graphics.vector.ImageVector
 import androidx.compose.ui.semantics.Role
+import androidx.compose.ui.semantics.contentDescription
+import androidx.compose.ui.semantics.semantics
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import com.watchdogindex.agent.design.WatchdogTheme
@@ -60,7 +62,9 @@ fun WdOutlinedField(
                 onValueChange = onValueChange,
                 modifier = Modifier
                     .fillMaxWidth()
-                    .padding(start = 18.dp, end = if (showTrailing) 46.dp else 18.dp, top = 20.dp, bottom = 12.dp),
+                    .padding(start = 18.dp, end = if (showTrailing) 46.dp else 18.dp, top = 20.dp, bottom = 12.dp)
+                    // The floating label is a separate Text, so the field carries its own name for TalkBack.
+                    .semantics { contentDescription = label },
                 enabled = enabled,
                 textStyle = t.fieldValue.copy(color = c.ink),
                 singleLine = true,

@@ -41,6 +41,8 @@ import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.TextUnit
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import com.watchdogindex.agent.core.format.Format
+import com.watchdogindex.agent.core.math.TaxMath
 import com.watchdogindex.agent.core.model.HomeFacts
 import com.watchdogindex.agent.core.model.RatePoint
 import com.watchdogindex.agent.core.model.RobustDimension
@@ -61,9 +63,10 @@ import kotlin.math.roundToInt
  */
 
 /**
- * The Watchdog Score dial: 118 dp, 9 dp round-capped stroke, track in dialTrack, gold value arc starting
- * at 135 degrees and sweeping 270 * score/100, with the number (38 sp) and "of 100" (12 sp) inside.
- * Reads as "Watchdog Score 72 out of 100, favorable tax position".
+ * The Watchdog Score dial: 118 dp, round-capped stroke of 9 SVG units (8.85 dp at 118 dp, scaled with the
+ * dial like the arc), track in dialTrack, gold value arc starting at 135 degrees and sweeping
+ * 270 * score/100, with the number (38 sp) and "of 100" (12 sp) inside.
+ * Reads as "Watchdog Score 72 out of 100, favorable tax position" (core's [TaxMath.scoreAccessibilityLabel]).
  */
 @Composable
 fun ScoreDial(
@@ -71,12 +74,11 @@ fun ScoreDial(
     verdict: String,
     modifier: Modifier = Modifier,
     dialSize: Dp = 118.dp,
-    strokeWidth: Dp = 9.dp,
 ) {
     val c = WatchdogTheme.colors
     val t = WatchdogTheme.type
     val clamped = score.coerceIn(0, 100)
-    val description = "Watchdog Score $clamped out of 100, $verdict"
+    val description = TaxMath.scoreAccessibilityLabel(clamped, verdict)
     val track = c.dialTrack
     val gold = c.gold
     Box(
@@ -91,7 +93,8 @@ fun ScoreDial(
             val diameter = this.size.minDimension * (104f / 120f)
             val topLeft = Offset((this.size.width - diameter) / 2f, (this.size.height - diameter) / 2f)
             val arc = Size(diameter, diameter)
-            val stroke = Stroke(width = strokeWidth.toPx(), cap = StrokeCap.Round)
+            // The SVG stroke is 9 units of the same 120-unit box, so it scales with the arc: 8.85 dp at 118 dp.
+            val stroke = Stroke(width = 9f * this.size.minDimension / 120f, cap = StrokeCap.Round)
             drawArc(color = track, startAngle = 135f, sweepAngle = 270f, useCenter = false, topLeft = topLeft, size = arc, style = stroke)
             if (clamped > 0) {
                 drawArc(
@@ -205,7 +208,7 @@ fun SparkBars(
 
         val firstCenter = (24f + barWidth / 2f) * s
         val lastCenter = (24f + (n - 1) * step + barWidth / 2f) * s
-        val value = measurer.measure(formatRate(points.last().ratePer100), strong)
+        val value = measurer.measure(Format.ratePer100(points.last().ratePer100), strong)
         drawText(value, topLeft = Offset(lastCenter - value.size.width / 2f, 18f * s - value.firstBaseline))
         val firstYear = measurer.measure(points.first().year.toString(), plain)
         drawText(firstYear, topLeft = Offset(firstCenter - firstYear.size.width / 2f, 80f * s - firstYear.firstBaseline))
@@ -226,15 +229,15 @@ fun TaxCardView(tax: TaxCard, modifier: Modifier = Modifier) {
     val t = WatchdogTheme.type
     WdCard(tint = Tint.Sky, modifier = modifier) {
         CardLabel("Property tax")
-        TabularText(text = formatMoney(tax.bill), modifier = Modifier.padding(top = 6.dp), style = t.lead, color = c.ink)
+        TabularText(text = Format.money(tax.bill), modifier = Modifier.padding(top = 6.dp), style = t.lead, color = c.ink)
         Text(
             text = tax.billSourceLabel,
             modifier = Modifier.padding(top = 2.dp, bottom = 8.dp),
             color = c.muted,
             style = t.supporting.sized(13, FontWeight.Medium, 18.2),
         )
-        tax.nextYearBill?.let { KeyValueRow(label = "${tax.nextYear} at the new rate", value = formatMoney(it)) }
-        tax.townMedian?.let { KeyValueRow(label = "${tax.townName} median", value = formatMoney(it), muted = true) }
+        tax.nextYearBill?.let { KeyValueRow(label = "${tax.nextYear} at the new rate", value = Format.money(it)) }
+        tax.townMedian?.let { KeyValueRow(label = "${tax.townName} median", value = Format.money(it), muted = true) }
         if (tax.rateHistory.isNotEmpty()) {
             val first = tax.rateHistory.first()
             val last = tax.rateHistory.last()
@@ -254,8 +257,8 @@ fun TaxCardView(tax: TaxCard, modifier: Modifier = Modifier) {
                 SparkBars(
                     points = tax.rateHistory,
                     modifier = Modifier.padding(top = 6.dp),
-                    contentDescription = "${tax.townName} general tax rate $verb from ${formatRate(first.ratePer100)} in ${first.year} " +
-                        "to ${formatRate(last.ratePer100)} in ${last.year}",
+                    contentDescription = "${tax.townName} general tax rate $verb from ${Format.ratePer100(first.ratePer100)} in ${first.year} " +
+                        "to ${Format.ratePer100(last.ratePer100)} in ${last.year}",
                 )
             }
         }
@@ -275,8 +278,8 @@ fun ValueLine(v: ValueCheck, modifier: Modifier = Modifier) {
     val labelBase = WatchdogTheme.type.caption
     val median: Int? = v.salesMedian
     val description = buildString {
-        append("The assessment holds up above ${formatMoney(v.holdsUpAbove)}.")
-        if (median != null) append(" Similar homes nearby sold for a median of ${formatMoney(median)}.")
+        append("The assessment holds up above ${Format.money(v.holdsUpAbove)}.")
+        if (median != null) append(" Similar homes nearby sold for a median of ${Format.money(median)}.")
     }
     Canvas(
         modifier
@@ -315,15 +318,15 @@ fun ValueLine(v: ValueCheck, modifier: Modifier = Modifier) {
         val width = this.size.width
         fun centered(x: Float, textWidth: Int): Float = (x - textWidth / 2f).coerceIn(0f, (width - textWidth).coerceAtLeast(0f))
 
-        val start = measurer.measure(formatThousands(v.rangeMin), plain)
+        val start = measurer.measure(Format.moneyCompact(v.rangeMin, lowercase = true), plain)
         drawText(start, topLeft = Offset(8f * s, 13f * s - start.firstBaseline))
-        val end = measurer.measure(formatThousands(v.rangeMax), plain)
+        val end = measurer.measure(Format.moneyCompact(v.rangeMax, lowercase = true), plain)
         drawText(end, topLeft = Offset(292f * s - end.size.width, 58f * s - end.firstBaseline))
         if (medianX != null && median != null) {
-            val sales = measurer.measure("Sales ${formatThousands(median)}", strong)
+            val sales = measurer.measure("Sales ${Format.moneyCompact(median, lowercase = true)}", strong)
             drawText(sales, topLeft = Offset(centered(medianX * s, sales.size.width), 13f * s - sales.firstBaseline))
         }
-        val floor = measurer.measure("Holds up above ${formatThousands(v.holdsUpAbove)}", plain)
+        val floor = measurer.measure("Holds up above ${Format.moneyCompact(v.holdsUpAbove, lowercase = true)}", plain)
         drawText(floor, topLeft = Offset(centered(floorX * s, floor.size.width), 58f * s - floor.firstBaseline))
     }
 }
@@ -336,13 +339,13 @@ fun ValueLine(v: ValueCheck, modifier: Modifier = Modifier) {
 fun ValueCheckCardView(v: ValueCheck, modifier: Modifier = Modifier) {
     WdCard(tint = Tint.Sand, modifier = modifier) {
         CardLabel("Value check")
-        KeyValueRow(label = "Assessed", value = formatMoney(v.assessed))
+        KeyValueRow(label = "Assessed", value = Format.money(v.assessed))
         KeyValueRow(
             label = "Matches a home worth",
-            value = formatMoney(v.impliedValue),
-            sublabel = "town ratio ${formatPercent(v.ratioPercent)}",
+            value = Format.money(v.impliedValue),
+            sublabel = "town ratio ${Format.percent(v.ratioPercent)}",
         )
-        KeyValueRow(label = "Assessment holds up above", value = formatMoney(v.holdsUpAbove))
+        KeyValueRow(label = "Assessment holds up above", value = Format.money(v.holdsUpAbove))
         ValueLine(v = v, modifier = Modifier.padding(top = 10.dp, bottom = 2.dp))
         VerdictBox(verdict = v.verdict, modifier = Modifier.padding(top = 10.dp))
     }
@@ -361,7 +364,7 @@ fun SalesCardView(s: SalesNearby, modifier: Modifier = Modifier) {
         CardLabel("Sales nearby")
         KeyValueRow(
             label = "${s.count} similar sales since ${s.sinceLabel}",
-            value = s.median?.let { "median ${formatMoney(it)}" } ?: "no median yet",
+            value = s.median?.let { "median ${Format.money(it)}" } ?: "no median yet",
         )
         s.sales.forEach { sale ->
             Row(
@@ -384,7 +387,7 @@ fun SalesCardView(s: SalesNearby, modifier: Modifier = Modifier) {
                     maxLines = 1,
                 )
                 TabularText(
-                    text = formatMoney(sale.price),
+                    text = Format.money(sale.price),
                     modifier = Modifier.alignByBaseline(),
                     style = t.body.sized(14, FontWeight.Bold),
                     color = c.ink,
@@ -396,7 +399,7 @@ fun SalesCardView(s: SalesNearby, modifier: Modifier = Modifier) {
         if (lastSold != null) {
             KeyValueRow(
                 label = "This home last sold",
-                value = listOfNotNull(formatMoney(lastSold), s.lastSoldYear?.toString()).joinToString(" · "),
+                value = listOfNotNull(Format.money(lastSold), s.lastSoldYear?.toString()).joinToString(" · "),
                 muted = true,
             )
         }
@@ -412,8 +415,8 @@ fun FactsCardView(f: HomeFacts, modifier: Modifier = Modifier) {
         "Class" to f.propertyClass,
         "Built" to (f.built?.toString() ?: "Not on file"),
         "Style" to (f.style ?: "Not on file"),
-        "Living area" to (f.livingAreaSqFt?.let { "${formatCount(it)} sq ft" } ?: "Not on file"),
-        "Lot" to (f.lotAcres?.let { "${formatDecimal(it, 2, trimZeros = true)} acres" } ?: "Not on file"),
+        "Living area" to (f.livingAreaSqFt?.let { Format.sqFt(it) } ?: "Not on file"),
+        "Lot" to (f.lotAcres?.let { Format.acres(it) } ?: "Not on file"),
         "Block and lot" to "${f.block} · ${f.lot}",
     )
     WdCard(tint = Tint.Plain, modifier = modifier) {
@@ -521,7 +524,7 @@ fun SummaryCard(
         ) {
             // The underline spans the glyph box, so the column shrinks to the number's own width.
             Column(modifier = Modifier.width(IntrinsicSize.Min)) {
-                TabularText(text = formatCount(digest.total), style = t.big, color = c.onNavy)
+                TabularText(text = Format.number(digest.total), style = t.big, color = c.onNavy)
                 Spacer(Modifier.height(5.dp))
                 Box(Modifier.fillMaxWidth().height(2.dp).background(c.gold))
             }
@@ -542,7 +545,7 @@ fun SummaryCard(
             cells.forEachIndexed { index, (count, label) ->
                 val divided = if (index > 0) Modifier.startSeparator(FixedInk.navyDivider).padding(start = 12.dp) else Modifier
                 Column(modifier = Modifier.weight(1f).then(divided)) {
-                    TabularText(text = formatCount(count), style = t.statSmall, color = c.onNavy)
+                    TabularText(text = Format.number(count), style = t.statSmall, color = c.onNavy)
                     Text(text = label, modifier = Modifier.padding(top = 1.dp), color = c.onNavy2, style = t.caption.sized(12, FontWeight.SemiBold, 16.8))
                 }
             }

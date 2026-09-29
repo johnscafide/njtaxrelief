@@ -50,6 +50,7 @@ import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.viewinterop.AndroidView
 import androidx.core.content.ContextCompat
+import androidx.lifecycle.compose.LifecycleResumeEffect
 import androidx.lifecycle.compose.LocalLifecycleOwner
 import com.google.mlkit.vision.barcode.BarcodeScanner
 import com.google.mlkit.vision.barcode.BarcodeScannerOptions
@@ -83,6 +84,12 @@ fun ScanCamera(onQr: (String) -> Unit, torch: Boolean, modifier: Modifier = Modi
     val launcher = rememberLauncherForActivityResult(ActivityResultContracts.RequestPermission()) { result ->
         granted = result
         asked = true
+    }
+    // Re-check on every resume: after "Open settings" the agent grants the permission there and comes back,
+    // and nothing else would tell this composable.
+    LifecycleResumeEffect(Unit) {
+        granted = hasCameraPermission(context)
+        onPauseOrDispose { }
     }
     LaunchedEffect(Unit) { if (!granted) launcher.launch(Manifest.permission.CAMERA) }
 

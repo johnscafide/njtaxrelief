@@ -35,6 +35,7 @@ import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.unit.dp
+import com.watchdogindex.agent.core.format.Format
 import com.watchdogindex.agent.core.model.Campaign
 import com.watchdogindex.agent.core.model.CampaignKind
 import com.watchdogindex.agent.core.model.Tint
@@ -162,7 +163,7 @@ fun TrueCostCardView(card: TrueCostCard, modifier: Modifier = Modifier) {
             ) {
                 Column(modifier = Modifier.width(IntrinsicSize.Min)) {
                     TabularText(
-                        text = formatMoney(card.monthlyTotal),
+                        text = Format.money(card.monthlyTotal),
                         style = t.body.sized(34, FontWeight.ExtraBold, 34.0, em(34, -0.04)),
                         color = FixedInk.onNavy,
                     )
@@ -170,7 +171,7 @@ fun TrueCostCardView(card: TrueCostCard, modifier: Modifier = Modifier) {
                     Box(Modifier.fillMaxWidth().height(2.dp).background(FixedInk.gold))
                 }
                 Text(
-                    text = "a month at ${formatMoney(card.inputs.price)}",
+                    text = "a month at ${Format.money(card.inputs.price)}",
                     modifier = Modifier.padding(bottom = 5.dp),
                     color = FixedInk.onNavyMuted2,
                     style = t.body.sized(13, FontWeight.Normal),
@@ -213,7 +214,7 @@ private fun TrueCostLine(label: String, value: Int, fraction: Float) {
     Column(verticalArrangement = Arrangement.spacedBy(2.dp)) {
         Row(modifier = Modifier.fillMaxWidth(), horizontalArrangement = Arrangement.spacedBy(10.dp)) {
             Text(text = label, modifier = Modifier.weight(1f), color = FixedInk.onNavy, style = t.body.sized(13, FontWeight.Normal, 18.2))
-            TabularText(text = formatMoney(value), style = t.body.sized(13, FontWeight.Bold, 18.2), color = FixedInk.onNavy)
+            TabularText(text = Format.money(value), style = t.body.sized(13, FontWeight.Bold, 18.2), color = FixedInk.onNavy)
         }
         Box(
             modifier = Modifier
@@ -262,15 +263,20 @@ fun ShareSheetHeader(
             Text(text = title, color = c.ink, style = t.body.sized(15, FontWeight.ExtraBold, 18.75), maxLines = 1, overflow = TextOverflow.Ellipsis)
             Text(text = subtitle, color = c.muted, style = t.body.sized(12, FontWeight.SemiBold), maxLines = 1, overflow = TextOverflow.Ellipsis)
         }
+        // The button draws at 44 dp as in the mockup; its click node is 48 dp and overflows the header row.
         Box(
             modifier = Modifier
-                .size(44.dp)
+                .overflowTouchTarget()
                 .clip(CircleShape)
-                .background(c.fill)
                 .clickable(role = Role.Button, onClick = onTrailing),
             contentAlignment = Alignment.Center,
         ) {
-            Icon(imageVector = trailingIcon, contentDescription = trailingDescription, modifier = Modifier.size(22.dp), tint = c.ink2)
+            Box(
+                modifier = Modifier.size(44.dp).clip(CircleShape).background(c.fill),
+                contentAlignment = Alignment.Center,
+            ) {
+                Icon(imageVector = trailingIcon, contentDescription = trailingDescription, modifier = Modifier.size(22.dp), tint = c.ink2)
+            }
         }
     }
 }
@@ -305,20 +311,19 @@ private fun ShareTarget(
     onClick: () -> Unit,
     modifier: Modifier = Modifier,
 ) {
+    // The whole column is the button, so TalkBack gets one node, labelled by the text under the circle.
     Column(
-        modifier = modifier.semantics(mergeDescendants = true) {},
+        modifier = modifier
+            .clip(RoundedCornerShape(16.dp))
+            .clickable(role = Role.Button, onClick = onClick),
         horizontalAlignment = Alignment.CenterHorizontally,
         verticalArrangement = Arrangement.spacedBy(6.dp),
     ) {
         Box(
-            modifier = Modifier
-                .size(56.dp)
-                .clip(CircleShape)
-                .background(container)
-                .clickable(role = Role.Button, onClickLabel = label, onClick = onClick),
+            modifier = Modifier.size(56.dp).clip(CircleShape).background(container),
             contentAlignment = Alignment.Center,
         ) {
-            Icon(imageVector = icon, contentDescription = label, modifier = Modifier.size(28.dp), tint = tint)
+            Icon(imageVector = icon, contentDescription = null, modifier = Modifier.size(28.dp), tint = tint)
         }
         Text(
             text = label,

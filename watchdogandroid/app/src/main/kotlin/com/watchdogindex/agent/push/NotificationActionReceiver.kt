@@ -4,14 +4,17 @@ import android.app.PendingIntent
 import android.content.BroadcastReceiver
 import android.content.Context
 import android.content.Intent
-import androidx.core.app.NotificationManagerCompat
 
-/** Handles the "Later" action: clears that one alert without opening the app. Declared non-exported in the manifest. */
+/**
+ * Handles the "Later" action: clears that one alert without opening the app. Declared non-exported in the
+ * manifest. It never starts an activity: a receiver reached from a notification action is a trampoline on
+ * Android 12+, so actions that open a screen or the dialer are activity intents to MainActivity instead.
+ */
 class NotificationActionReceiver : BroadcastReceiver() {
     override fun onReceive(context: Context, intent: Intent) {
         if (intent.action != ACTION_DISMISS) return
         val id = intent.getIntExtra(WatchdogMessagingService.EXTRA_NOTIFICATION_ID, -1)
-        if (id >= 0) NotificationManagerCompat.from(context).cancel(id)
+        if (id >= 0) WatchdogMessagingService.cancelAlert(context, id)
     }
 
     companion object {
