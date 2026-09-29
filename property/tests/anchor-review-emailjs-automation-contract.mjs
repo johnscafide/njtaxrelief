@@ -28,6 +28,8 @@ assert.match(worker,/marketing_suppressions/,'review-email suppressions must be 
 assert.match(worker,/token_digest: tokenDigest/,'database must store only token digest');
 assert.doesNotMatch(worker,/searchParams\.set\(['"]email/i,'tracking URLs must not contain recipient email');
 assert.doesNotMatch(worker,/searchParams\.set\(['"]application/i,'tracking URLs must not contain application IDs');
+assert.doesNotMatch(worker,/watchdog_logo_url: [^\n]*\.svg/,'email logo must be a PNG; Gmail and Outlook block SVG images');
+assert.match(worker,/privacy_url: `\$\{WATCHDOG_ORIGIN\}\/privacy`/,'email footer must use clean root-level URLs');
 assert.match(worker,/review_1_url/);
 assert.match(worker,/review_5_url/);
 assert.match(worker,/open_pixel_url/);

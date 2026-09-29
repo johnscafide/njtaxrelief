@@ -2,7 +2,7 @@ import crypto from 'node:crypto';
 
 const SUPABASE_URL = process.env.SUPABASE_URL || process.env.NEXT_PUBLIC_SUPABASE_URL || 'https://uvkvaxljhhngydvlrzom.supabase.co';
 const SERVICE_KEY = process.env.SUPABASE_SERVICE_ROLE_KEY || '';
-const REVIEW_URL = 'https://www.watchdogindex.com/property/review/';
+const REVIEW_URL = 'https://www.watchdogindex.com/review';
 
 function first(value) {
   return Array.isArray(value) ? value[0] : value;

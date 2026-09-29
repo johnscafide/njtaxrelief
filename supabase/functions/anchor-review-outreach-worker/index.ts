@@ -315,9 +315,10 @@ Deno.serve(async (req: Request) => {
             review_url: urls.review_url,
             open_pixel_url: urls.open_pixel_url,
             unsubscribe_url: urls.unsubscribe_url,
-            watchdog_logo_url: `${WATCHDOG_ORIGIN}/property/branding/watchdog-logo-horizontal.svg`,
-            privacy_url: `${WATCHDOG_ORIGIN}/property/privacy/`,
-            terms_url: `${WATCHDOG_ORIGIN}/property/terms/`,
+            // PNG, not SVG: Gmail and Outlook do not display SVG images in email.
+            watchdog_logo_url: `${WATCHDOG_ORIGIN}/property/images/watchdognewsletterlogo.png`,
+            privacy_url: `${WATCHDOG_ORIGIN}/privacy`,
+            terms_url: `${WATCHDOG_ORIGIN}/terms`,
           },
         }),
       });
