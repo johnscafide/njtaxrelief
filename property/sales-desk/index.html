@@ -1,0 +1,215 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+  <meta name="robots" content="noindex,nofollow,noarchive">
+  <meta name="referrer" content="strict-origin-when-cross-origin">
+  <meta name="theme-color" content="#f5f7fb">
+  <title>Sales Desk | Watchdog</title>
+  <link rel="canonical" href="https://www.watchdogindex.com/sales-desk">
+  <link rel="icon" type="image/png" href="/favicon-96x96.png" sizes="96x96">
+  <link rel="icon" type="image/svg+xml" href="/favicon.svg">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@500;600;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="/property/css/sales-desk.css">
+</head>
+<body class="sd-page">
+  <a class="sd-skip" href="#main">Skip to content</a>
+  <header class="sd-header">
+    <div class="sd-wrap">
+      <a class="sd-brand" href="/property/dashboard" aria-label="Watchdog dashboard"><img src="/property/branding/watchdog-logo-horizontal.svg" alt="Watchdog Property Intelligence" width="220" height="51"></a>
+      <nav aria-label="Desk navigation">
+        <a href="/property/dashboard">Dashboard</a>
+        <a href="/property/account">Account</a>
+      </nav>
+    </div>
+  </header>
+
+  <main id="main" class="sd-main">
+    <div class="sd-wrap">
+      <p class="sd-notice" data-notice role="status" aria-live="polite" hidden></p>
+
+      <section class="sd-state" data-state="loading">
+        <span class="sd-kicker">Sales Desk</span>
+        <h1>Opening your desk.</h1>
+        <p class="sd-muted">Checking your account.</p>
+      </section>
+
+      <section class="sd-state" data-state="signin" hidden>
+        <span class="sd-kicker">Sales Desk</span>
+        <h1>Sign in to open the Sales Desk.</h1>
+        <p>The desk is available to Watchdog sales consultants and the owner.</p>
+        <a class="sd-btn sd-btn-primary" href="/property/onboarding/" data-signin>Sign in</a>
+      </section>
+
+      <section class="sd-state" data-state="denied" hidden>
+        <span class="sd-kicker">Sales Desk</span>
+        <h1>This desk is not on your account.</h1>
+        <p>The Sales Desk is for Watchdog sales consultants. If you were expecting access, contact the owner.</p>
+        <a class="sd-btn sd-btn-secondary" href="/property/dashboard">Back to the dashboard</a>
+      </section>
+
+      <section class="sd-state" data-state="owner-pick" hidden>
+        <span class="sd-kicker">Owner view</span>
+        <h1>Sales consultants.</h1>
+        <div class="sd-card">
+          <div class="sd-table-wrap">
+            <table class="sd-table" data-consultants-table>
+              <thead><tr><th>Name</th><th>Code</th><th>Status</th><th>Attributed accounts</th><th>Owed</th><th>Paid</th><th></th></tr></thead>
+              <tbody></tbody>
+            </table>
+          </div>
+          <div class="sd-empty" data-consultants-empty hidden>No consultants yet. Provision one below.</div>
+        </div>
+        <div class="sd-card">
+          <h2>Provision a consultant</h2>
+          <p class="sd-muted">She creates a free Watchdog account first, with the email below. Provisioning sets her role to sales consultant, grants Pro+ access on a manual entitlement, and issues her share code. It never touches a live Stripe subscription.</p>
+          <form class="sd-form" data-provision-form novalidate>
+            <div class="sd-row">
+              <label>Account email <input type="email" name="email" required autocomplete="off"></label>
+              <label>Display name <input type="text" name="display_name" required maxlength="120"></label>
+            </div>
+            <label>Share code (optional, SC plus 6 to 12 letters or digits) <input type="text" name="code" maxlength="14" autocapitalize="characters" autocomplete="off" placeholder="Leave blank to generate"></label>
+            <div class="sd-actions"><button type="submit" class="sd-btn sd-btn-primary">Provision consultant</button></div>
+            <p class="sd-muted" data-provision-status role="status" aria-live="polite"></p>
+          </form>
+        </div>
+      </section>
+
+      <section class="sd-state" data-state="desk" hidden>
+        <div class="sd-toprow">
+          <div>
+            <span class="sd-kicker" data-desk-kicker>Sales Desk</span>
+            <h1 data-desk-title>Your desk</h1>
+            <p class="sd-muted" data-desk-sub></p>
+          </div>
+          <div class="sd-actions" data-owner-only hidden>
+            <button type="button" class="sd-btn sd-btn-secondary" data-back-to-list>All consultants</button>
+          </div>
+        </div>
+
+        <div class="sd-tiles" aria-label="Totals">
+          <div class="sd-tile"><small>Attributed accounts</small><b data-total="attributed">0</b></div>
+          <div class="sd-tile"><small>Active plans</small><b data-total="active_plans">0</b></div>
+          <div class="sd-tile"><small>Eligible to pay</small><b data-total="eligible_cents">$0</b></div>
+          <div class="sd-tile"><small>Paid to date</small><b data-total="paid_cents">$0</b></div>
+        </div>
+
+        <div class="sd-card">
+          <h2>Your share code and links</h2>
+          <p class="sd-muted">Anyone who signs up within 180 days of following one of these links is attributed to you, as long as it is their first Watchdog account and the link is followed before sign-in. Offline sales are attributed by the owner with your code.</p>
+          <div class="sd-code" data-code>SC</div>
+          <div class="sd-links" data-links></div>
+        </div>
+
+        <div class="sd-tabs" role="tablist" aria-label="Desk sections">
+          <button type="button" class="sd-tab" role="tab" aria-selected="true" data-tab="accounts">Accounts</button>
+          <button type="button" class="sd-tab" role="tab" aria-selected="false" data-tab="commissions">Commissions</button>
+          <button type="button" class="sd-tab" role="tab" aria-selected="false" data-tab="prospects">Prospects</button>
+          <button type="button" class="sd-tab" role="tab" aria-selected="false" data-tab="kit">Marketing kit</button>
+          <button type="button" class="sd-tab" role="tab" aria-selected="false" data-tab="owner" data-owner-only hidden>Owner tools</button>
+        </div>
+
+        <section class="sd-panel sd-card" data-panel="accounts" role="tabpanel">
+          <h2>Attributed accounts</h2>
+          <div class="sd-table-wrap">
+            <table class="sd-table" data-accounts-table>
+              <thead><tr><th>Account</th><th>Attributed</th><th>Source</th><th>Plan</th><th>Status</th><th>Commission so far</th></tr></thead>
+              <tbody></tbody>
+            </table>
+          </div>
+          <div class="sd-empty" data-accounts-empty hidden>No attributed accounts yet. Share your link, or ask the owner to attribute an offline sale to your code.</div>
+        </section>
+
+        <section class="sd-panel sd-card" data-panel="commissions" role="tabpanel" hidden>
+          <h2>Commission ledger</h2>
+          <p class="sd-muted">Pending means the refund hold has not passed. Eligible means it can be paid on the next payout. Paid shows the payout reference. Void means the sale was refunded or cancelled inside the hold. Clawback means a paid commission was refunded and is netted from the next payout.</p>
+          <div class="sd-table-wrap">
+            <table class="sd-table" data-commissions-table>
+              <thead><tr><th>Date</th><th>Account</th><th>Type</th><th>Plan</th><th>Base</th><th>Rate</th><th>Commission</th><th>Status</th><th>Hold until</th><th data-owner-only hidden>Action</th></tr></thead>
+              <tbody></tbody>
+            </table>
+          </div>
+          <div class="sd-empty" data-commissions-empty hidden>No commissions yet. They appear automatically when an attributed account pays.</div>
+        </section>
+
+        <section class="sd-panel sd-card" data-panel="prospects" role="tabpanel" hidden>
+          <h2>Prospects</h2>
+          <p class="sd-muted">Your own pipeline. Only you can edit it; the owner can read it. Use it for people you are actively working, not for lists.</p>
+          <form class="sd-form" data-prospect-form novalidate>
+            <input type="hidden" name="id" value="">
+            <div class="sd-row">
+              <label>Name <input type="text" name="full_name" required maxlength="120"></label>
+              <label>Brokerage <input type="text" name="brokerage" maxlength="160"></label>
+            </div>
+            <div class="sd-row">
+              <label>Email <input type="email" name="email" maxlength="254"></label>
+              <label>Phone <input type="tel" name="phone" maxlength="40"></label>
+            </div>
+            <div class="sd-row">
+              <label>Role <select name="role"><option value="agent">Agent</option><option value="team_lead">Team lead</option><option value="broker">Broker</option><option value="other">Other</option></select></label>
+              <label>Stage <select name="stage"><option value="new">New</option><option value="contacted">Contacted</option><option value="demo">Demo booked</option><option value="trial">On trial</option><option value="won">Won</option><option value="lost">Lost</option></select></label>
+            </div>
+            <div class="sd-row">
+              <label>Plan interest <select name="plan_interest"><option value="unsure">Unsure</option><option value="agent">Agent</option><option value="pro">Pro</option><option value="pro_plus">Pro+</option><option value="teams">Teams</option><option value="lifetime">Lifetime</option></select></label>
+              <label>Next action date <input type="date" name="next_action_at"></label>
+            </div>
+            <label>Next action <input type="text" name="next_action" maxlength="200"></label>
+            <label>Notes <textarea name="notes" maxlength="2000"></textarea></label>
+            <div class="sd-actions">
+              <button type="submit" class="sd-btn sd-btn-primary" data-prospect-submit>Save prospect</button>
+              <button type="button" class="sd-btn sd-btn-secondary" data-prospect-reset>Clear</button>
+            </div>
+            <p class="sd-muted" data-prospect-status role="status" aria-live="polite"></p>
+          </form>
+          <div class="sd-table-wrap" style="margin-top:16px">
+            <table class="sd-table" data-prospects-table>
+              <thead><tr><th>Name</th><th>Brokerage</th><th>Stage</th><th>Interest</th><th>Next action</th><th>Updated</th><th data-consultant-only></th></tr></thead>
+              <tbody></tbody>
+            </table>
+          </div>
+          <div class="sd-empty" data-prospects-empty hidden>No prospects yet.</div>
+        </section>
+
+        <section class="sd-panel sd-card" data-panel="kit" role="tabpanel" hidden>
+          <h2>Marketing kit</h2>
+          <p class="sd-muted">Everything you send should carry your share link. The pages below are the doors; the kit has the copy, scripts, and creatives.</p>
+          <div class="sd-kit">
+            <a href="https://www.watchdogindex.com/agents/trial" target="_blank" rel="noopener"><span>Agent trial page</span><small>The door for agents. Add your share code.</small></a>
+            <a href="https://www.watchdogindex.com/for/real-estate-agents" target="_blank" rel="noopener"><span>For real estate agents</span><small>The long-form agent page.</small></a>
+            <a href="https://www.watchdogindex.com/pro" target="_blank" rel="noopener"><span>Plans and pricing</span><small>Agent, Pro, Pro+ and lifetime options.</small></a>
+            <a href="https://www.watchdogindex.com/real-estate-agents" target="_blank" rel="noopener"><span>Agent field guide</span><small>How agents should use the data.</small></a>
+            <a href="https://www.watchdogindex.com/data-methodology" target="_blank" rel="noopener"><span>Data methodology</span><small>Where every number comes from.</small></a>
+            <a href="https://github.com/johnscafide/njtaxrelief/tree/main/property/docs/marketing/watchdog-agent-marketing-q4-2026" target="_blank" rel="noopener"><span>Q4 marketing kit</span><small>Scripts, emails, objections, creatives. The owner grants access.</small></a>
+          </div>
+        </section>
+
+        <section class="sd-panel sd-card" data-panel="owner" role="tabpanel" hidden data-owner-only>
+          <h2>Owner tools</h2>
+          <h3>Attribute an offline sale</h3>
+          <p class="sd-muted">For a sale closed in person or by phone. The account must already exist. Any lifetime purchase or paid invoice from the last 45 days accrues immediately.</p>
+          <form class="sd-form" data-assign-form novalidate>
+            <div class="sd-row">
+              <label>Customer account email <input type="email" name="email" required autocomplete="off"></label>
+              <label>Note <input type="text" name="note" maxlength="500" placeholder="Lunch-and-learn, Oct 21, Cherry Hill office"></label>
+            </div>
+            <div class="sd-actions"><button type="submit" class="sd-btn sd-btn-primary">Attribute to this consultant</button></div>
+            <p class="sd-muted" data-assign-status role="status" aria-live="polite"></p>
+          </form>
+          <h3 style="margin-top:20px">End this consultant</h3>
+          <p class="sd-muted">Ends the agreement: role returns to user, the manual Pro+ entitlement is removed, existing commissions stay on the ledger for payout.</p>
+          <div class="sd-actions"><button type="button" class="sd-btn sd-btn-danger" data-end-consultant>End consultant</button></div>
+        </section>
+      </section>
+    </div>
+  </main>
+
+  <footer class="sd-footer"><div class="sd-wrap">Commissions are calculated from Watchdog billing records and held for the refund window. This desk records payouts; it does not move money. Questions go to the owner.</div></footer>
+
+  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2/dist/umd/supabase.js"></script>
+  <script src="/property/js/supabase-runtime.js"></script>
+  <script src="/property/js/sales-desk.js" defer></script>
+</body>
+</html>

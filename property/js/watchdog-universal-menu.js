@@ -182,6 +182,14 @@
       {key:'developer-data',href:route('/developer-data'),icon:'fa-database',label:'Data Operations',detail:'Marker freshness and release controls'}
     ];
   }
+  function isSalesConsultant(){
+    var a = state.profile && state.profile.account_role, b = state.entitlement && state.entitlement.account_role;
+    return String(a || '') === 'sales_consultant' || String(b || '') === 'sales_consultant';
+  }
+  function salesDeskHtml(){
+    if(!isSalesConsultant() && !isDeveloper()) return '';
+    return '<a class="wd-universal-developer-tool" data-wd-developer-tool="sales-desk" href="' + route('/sales-desk') + '"><i class="fas fa-handshake"></i><span><b>Sales Desk</b><small>' + (isDeveloper() ? 'Consultants, attributions and payouts' : 'Your share links, accounts and commissions') + '</small></span></a>';
+  }
   function developerToolsHtml(){
     if(!isDeveloper()) return '';
     return '<div class="wd-universal-developer-label"><i class="fas fa-code"></i><span>Developer tools</span></div>' +
@@ -315,7 +323,7 @@
         '<a href="' + route('/account') + '"><i class="fas fa-credit-card"></i><span><b>Account &amp; billing</b><small>Plan, subscription and billing</small></span></a>' +
         '<a href="/agent/training/"><i class="fas fa-graduation-cap"></i><span><b>Training Center</b><small>Review Agent and Pro+ workflows anytime</small></span></a>' +
         '<a href="' + route('/home') + '"><i class="fas fa-house"></i><span><b>Property Home</b><small>Your saved-home workspace</small></span></a>' +
-        developerToolsHtml() +
+        developerToolsHtml() + salesDeskHtml() +
       '</nav><button class="wd-universal-signout" type="button" data-wd-universal="signout"><i class="fas fa-arrow-right-from-bracket"></i> Sign out</button>';
   }
   function patchProfiles(){
