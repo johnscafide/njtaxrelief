@@ -20,11 +20,16 @@ assert.match(worker,/await sleep\(1100\)/,'worker must respect EmailJS send rate
 assert.match(worker,/\.eq\("status", "generated"\)/,'only completed/generated applications are eligible');
 assert.match(worker,/\.eq\("tax_year", 2025\)/,'automation is currently scoped to the 2025 application');
 assert.match(worker,/\.gte\("generated_at", startedAt\.toISOString\(\)\)/,'automation must not backfill applications older than its activation');
+assert.match(worker,/\.range\(page \* pageSize, \(page \+ 1\) \* pageSize - 1\)/,'worker must page through the eligible window');
+assert.match(worker,/\.in\("delivery_status", \["sent", "suppressed", "failed"\]\)/,'finished outreach must be skipped before choosing candidates');
+assert.doesNotMatch(worker,/\.limit\(limit \* 4\)/,'a single oldest-first window stalls delivery once it fills with finished applications');
 assert.match(worker,/anchor_application_reviews/,'already-reviewed applications must be reconciled');
 assert.match(worker,/marketing_suppressions/,'review-email suppressions must be honored');
 assert.match(worker,/token_digest: tokenDigest/,'database must store only token digest');
 assert.doesNotMatch(worker,/searchParams\.set\(['"]email/i,'tracking URLs must not contain recipient email');
 assert.doesNotMatch(worker,/searchParams\.set\(['"]application/i,'tracking URLs must not contain application IDs');
+assert.doesNotMatch(worker,/watchdog_logo_url: [^\n]*\.svg/,'email logo must be a PNG; Gmail and Outlook block SVG images');
+assert.match(worker,/privacy_url: `\$\{WATCHDOG_ORIGIN\}\/privacy`/,'email footer must use clean root-level URLs');
 assert.match(worker,/review_1_url/);
 assert.match(worker,/review_5_url/);
 assert.match(worker,/open_pixel_url/);
