@@ -90,21 +90,57 @@ Deno.serve(async (req: Request) => {
   const campaignKey = clean(runtime.campaign_key || "anchor_review_auto_v1", 120);
   const maxAttempts = Math.max(1, Math.min(10, Number(runtime.max_attempts || 3)));
 
-  const applicationsResult = await db
-    .from("anchor_applications")
-    .select("id,user_id,tax_year,generated_at")
-    .eq("status", "generated")
-    .eq("tax_year", 2025)
-    .gte("generated_at", startedAt.toISOString())
-    .lte("generated_at", cutoff.toISOString())
-    .order("generated_at", { ascending: true })
-    .limit(limit * 4);
+  // Page past applications that are already finished (emailed, suppressed,
+  // failed, or reviewed). Reading only the oldest limit * 4 rows stalled
+  // delivery once that window filled with finished applications, so newer
+  // completions were never reached.
+  const pageSize = limit * 4;
+  const maxPages = 50;
+  const applications: { id: string; user_id: string; tax_year: number; generated_at: string }[] = [];
 
-  if (applicationsResult.error) {
-    return Response.json({ error: "Could not load generated applications" }, { status: 500 });
+  for (let page = 0; page < maxPages && applications.length < pageSize; page++) {
+    const applicationsResult = await db
+      .from("anchor_applications")
+      .select("id,user_id,tax_year,generated_at")
+      .eq("status", "generated")
+      .eq("tax_year", 2025)
+      .gte("generated_at", startedAt.toISOString())
+      .lte("generated_at", cutoff.toISOString())
+      .order("generated_at", { ascending: true })
+      .order("id", { ascending: true })
+      .range(page * pageSize, (page + 1) * pageSize - 1);
+
+    if (applicationsResult.error) {
+      return Response.json({ error: "Could not load generated applications" }, { status: 500 });
+    }
+
+    const rows = Array.isArray(applicationsResult.data) ? applicationsResult.data : [];
+    if (!rows.length) break;
+
+    const rowIds = rows.map((row) => row.id);
+    const [rowReviews, rowFinished] = await Promise.all([
+      db.from("anchor_application_reviews").select("application_id,user_id").in("application_id", rowIds),
+      db.from("anchor_review_outreach")
+        .select("application_id")
+        .eq("campaign_key", campaignKey)
+        .in("application_id", rowIds)
+        .in("delivery_status", ["sent", "suppressed", "failed"]),
+    ]);
+
+    if (rowReviews.error || rowFinished.error) {
+      return Response.json({ error: "Could not reconcile review outreach state" }, { status: 500 });
+    }
+
+    const rowReviewed = new Set((rowReviews.data || []).map((row) => `${row.application_id}:${row.user_id}`));
+    const rowDone = new Set((rowFinished.data || []).map((row) => row.application_id));
+    for (const row of rows) {
+      if (rowDone.has(row.id) || rowReviewed.has(`${row.id}:${row.user_id}`)) continue;
+      if (applications.length < pageSize) applications.push(row);
+    }
+
+    if (rows.length < pageSize) break;
   }
 
-  const applications = Array.isArray(applicationsResult.data) ? applicationsResult.data : [];
   if (!applications.length) {
     return Response.json({ ok: true, enabled: true, processed: 0, sent: 0, failed: 0, skipped: 0 }, { headers: { "cache-control": "no-store" } });
   }

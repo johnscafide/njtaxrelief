@@ -20,6 +20,9 @@ assert.match(worker,/await sleep\(1100\)/,'worker must respect EmailJS send rate
 assert.match(worker,/\.eq\("status", "generated"\)/,'only completed/generated applications are eligible');
 assert.match(worker,/\.eq\("tax_year", 2025\)/,'automation is currently scoped to the 2025 application');
 assert.match(worker,/\.gte\("generated_at", startedAt\.toISOString\(\)\)/,'automation must not backfill applications older than its activation');
+assert.match(worker,/\.range\(page \* pageSize, \(page \+ 1\) \* pageSize - 1\)/,'worker must page through the eligible window');
+assert.match(worker,/\.in\("delivery_status", \["sent", "suppressed", "failed"\]\)/,'finished outreach must be skipped before choosing candidates');
+assert.doesNotMatch(worker,/\.limit\(limit \* 4\)/,'a single oldest-first window stalls delivery once it fills with finished applications');
 assert.match(worker,/anchor_application_reviews/,'already-reviewed applications must be reconciled');
 assert.match(worker,/marketing_suppressions/,'review-email suppressions must be honored');
 assert.match(worker,/token_digest: tokenDigest/,'database must store only token digest');
