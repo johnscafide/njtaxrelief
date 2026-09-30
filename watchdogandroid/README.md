@@ -65,6 +65,17 @@ is false, and Settings reports push as not set up.
 
 ## Running the desktop preview
 
+### No tools needed: the Windows build from CI
+
+Every push builds the desktop preview for Windows with a bundled Java runtime. On the run's page under
+`https://github.com/johnscafide/njtaxrelief/actions/workflows/watchdog-android-build.yml`, download the
+`watchdog-preview-windows` artifact, extract the zip, open the `WatchdogPreview` folder and double-click
+`WatchdogPreview.exe`. Windows SmartScreen warns because the build is not code-signed; choose "More info" and
+"Run anyway". The window shows the whole app on the sample data set, starting on Today; Escape goes back and the
+theme follows the in-app Settings. No emulator, JDK or Android Studio is involved.
+
+### From source
+
 `preview/` is its own Gradle build. Run it from that folder; it compiles `../shared/src/main/kotlin` and the
 bundled fonts against Compose Multiplatform 1.7.3 and `../core`.
 
