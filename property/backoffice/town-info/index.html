@@ -1,0 +1,83 @@
+<!doctype html>
+<html lang="en" data-access-require="developer">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+  <meta name="robots" content="noindex,nofollow,noarchive">
+  <meta name="referrer" content="same-origin">
+  <title>Town Info Reviews | Watchdog Backoffice</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap">
+  <link rel="stylesheet" href="/property/backoffice/backoffice-board.css?v=20260928a">
+  <link rel="stylesheet" href="/property/backoffice/town-info/town-info.css?v=20260930a">
+</head>
+<body class="bo-body" data-bo-page="town">
+  <a class="bo-skip" href="#bo-main">Skip to content</a>
+
+  <header class="bo-shell">
+    <div class="bo-shell-bar">
+      <a class="bo-brand" href="/backoffice"><span class="bo-mark" aria-hidden="true">W</span><span class="bo-brand-text"><b>Watchdog</b><small>Backoffice</small></span></a>
+      <nav class="bo-nav" aria-label="Backoffice">
+        <a href="/backoffice#leads">Leads</a>
+        <a href="/backoffice#leadiq">LeadIQ Tools</a>
+        <a href="/backoffice/reviews" data-bo-dev-only hidden>Application Reviews <span class="bo-review-badge" data-bo-badge="reviews" hidden><span data-bo-badge-count>0</span><span class="bo-sr"> waiting</span></span></a>
+        <a href="/backoffice/professional-verifications" data-bo-dev-only hidden>Professional Reviews <span class="bo-review-badge" data-bo-badge="professional" hidden><span data-bo-badge-count>0</span><span class="bo-sr"> waiting</span></span></a>
+        <a href="/backoffice/town-info" aria-current="page" data-bo-dev-only hidden>Town Info <span class="bo-review-badge" data-bo-badge="town" hidden><span data-bo-badge-count>0</span><span class="bo-sr"> waiting</span></span></a>
+        <a href="/backoffice/realestate" data-bo-dev-only hidden>Real Estate OS</a>
+      </nav>
+      <div class="bo-shell-session">
+        <button type="button" class="bo-btn bo-btn-ghost bo-lock" data-bo-lock>Lock Backoffice</button>
+      </div>
+    </div>
+  </header>
+
+  <main class="bo-page ti-main" id="bo-main" tabindex="-1">
+    <header class="ti-topbar">
+      <div>
+        <span class="bo-kicker">Town CO &amp; fire certificate · From the Town Needs page</span>
+        <h1>Town Info Reviews</h1>
+        <p>People send what they know about a red-flag town from <a href="/town-needs" target="_blank" rel="noopener">watchdogindex.com/town-needs</a>. Open the document or link, then approve or reject. Nothing goes live on its own: approved info is published in the next checked-requirements update.</p>
+      </div>
+      <button class="bo-btn bo-btn-ghost" id="ti-refresh" type="button">Refresh</button>
+    </header>
+
+    <section class="ti-panel" aria-labelledby="ti-queue-title">
+      <header><div><span class="bo-kicker">Needs your review</span><h2 id="ti-queue-title">Waiting for a decision</h2></div><b id="ti-count">0</b></header>
+      <p class="ti-note">Approving keeps the file as the public source agents can open once the info is published. Check it has no personal information (names, phone numbers or signatures of private people) before you approve.</p>
+      <div id="ti-list" class="ti-list"><div class="ti-loading">Loading submissions…</div></div>
+    </section>
+
+    <section class="ti-panel" aria-labelledby="ti-history-title">
+      <header><div><span class="bo-kicker">Recent decisions</span><h2 id="ti-history-title">Approved and rejected</h2></div></header>
+      <div id="ti-history" class="ti-list"><div class="ti-loading">Loading recent decisions…</div></div>
+    </section>
+  </main>
+
+  <template id="ti-card-template">
+    <article class="ti-card">
+      <div class="ti-card-head"><h3><span class="ti-town"></span> <small class="ti-code"></small></h3><p class="ti-who"></p></div>
+      <ul class="ti-needs"></ul>
+      <div class="ti-answer"></div>
+      <p class="ti-muted ti-no-answer" hidden>No typed answer. See the document or link.</p>
+      <div class="ti-sources"></div>
+      <div class="ti-controls">
+        <label><span>Note (optional)</span><textarea data-note maxlength="1000" placeholder="Why you approved or rejected it"></textarea></label>
+        <div class="ti-actions"><button class="bo-btn ti-approve" type="button" data-review="approved">Approve</button><button class="bo-btn bo-btn-ghost ti-reject" type="button" data-review="rejected">Reject</button></div>
+      </div>
+    </article>
+  </template>
+  <template id="ti-history-template">
+    <article class="ti-history"><div><b class="ti-h-title"></b><span class="ti-h-detail"></span></div><div class="ti-history-side"><span class="ti-h-date"></span><a class="ti-h-source" target="_blank" rel="noopener noreferrer">Source</a></div></article>
+  </template>
+  <template id="ti-empty-queue"><div class="ti-empty"><b>Nothing waiting.</b><span>New submissions from the Town Needs page will show up here.</span></div></template>
+  <template id="ti-empty-history"><div class="ti-empty"><b>No decisions yet.</b><span>Approved and rejected submissions will show up here.</span></div></template>
+  <template id="ti-error"><div class="ti-empty"><b>Couldn't load town info submissions.</b><span class="ti-error-text"></span></div></template>
+
+  <div id="ti-toast" class="ti-toast" role="status" aria-live="polite"></div>
+  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2/dist/umd/supabase.js"></script>
+  <script src="/property/js/access-guard.js"></script>
+  <script src="/property/backoffice/backoffice-shell.js?v=20260930a" defer></script>
+  <script src="/property/backoffice/town-info/town-info.js?v=20260930a" defer></script>
+</body>
+</html>

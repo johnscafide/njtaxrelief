@@ -1,5 +1,5 @@
 /* Watchdog Backoffice shell, shared by every Backoffice page.
-   - Developer-only navigation (Application Reviews, Professional Reviews,
+   - Developer-only navigation (Application Reviews, Professional Reviews, Town Info,
      Real Estate OS) stays hidden unless the signed-in Watchdog account passes
      the server-side is_watchdog_developer check.
    - Pending-review badge counts are requested only for developers.
@@ -10,6 +10,7 @@
 'use strict';
 const REVIEWS_API='/api/watchdog-backoffice-reviews';
 const PROFESSIONAL_API='/api/watchdog-backoffice-professional';
+const TOWN_INFO_API='/api/watchdog-backoffice-town-needs';
 const GATEWAY_API='/api/watchdog-backoffice-gateway?target=api';
 const SESSION_KEY='watchdog-backoffice-session';
 const LOCK_KEY='watchdog-backoffice-locked';
@@ -72,7 +73,7 @@ async function refreshCount(url,name){
   }catch(_){el.hidden=true}
 }
 
-function refreshBadges(){refreshCount(REVIEWS_API,'reviews');refreshCount(PROFESSIONAL_API,'professional')}
+function refreshBadges(){refreshCount(REVIEWS_API,'reviews');refreshCount(PROFESSIONAL_API,'professional');refreshCount(TOWN_INFO_API,'town')}
 
 async function revealDeveloperTools(){
   const developer=await isDeveloper();

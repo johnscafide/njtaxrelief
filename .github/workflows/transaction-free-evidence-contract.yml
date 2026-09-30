@@ -27,6 +27,7 @@ on:
       - 'supabase/migrations/20260930150000_municipal_requirements_hold_unchecked.sql'
       - 'property/tests/municipal-requirements-unchecked-contract.mjs'
       - 'property/scripts/build_checked_municipal_requirements.py'
+      - 'property/scripts/build_town_needs.py'
       - 'property/data/municipal-requirements/**'
       - 'supabase/migrations/*_checked_municipal_requirements_*.sql'
       - 'supabase/migrations/*_watchdog_town_certificates.sql'
@@ -66,6 +67,7 @@ jobs:
         run: |
           python property/scripts/build_checked_municipal_requirements.py --self-test
           python property/scripts/build_checked_municipal_requirements.py --check
+          python property/scripts/build_town_needs.py --check
       - name: Guard source semantics and privacy boundaries
         run: |
           set -euo pipefail

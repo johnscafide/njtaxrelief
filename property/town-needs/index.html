@@ -1,0 +1,142 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <title>Town CO and Fire Certificate Needs | Watchdog</title>
+  <meta name="description" content="New Jersey towns where Watchdog is still missing resale CO or smoke / CO alarm certificate details. Send the town's form, fee sheet, letter or page, and Watchdog checks it before anything goes live.">
+  <meta name="robots" content="noindex,follow">
+  <meta name="author" content="Watchdog">
+  <link rel="canonical" href="https://www.watchdogindex.com/town-needs">
+  <link rel="icon" type="image/png" href="/favicon-96x96.png" sizes="96x96">
+  <link rel="icon" type="image/svg+xml" href="/favicon.svg">
+  <link rel="shortcut icon" href="/favicon.ico">
+  <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@600;700;800&family=Source+Sans+3:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+  <link rel="stylesheet" href="/styles.css">
+  <link rel="stylesheet" href="/property/css/shared.css">
+  <link rel="stylesheet" href="/property/css/public-mobile-nav.css">
+  <link rel="stylesheet" href="/property/css/town-needs.css?v=20260930a">
+</head>
+<body class="tn-page nav-solid">
+  <header class="wd-nav" id="wd-nav">
+    <div class="wd-nav-in">
+      <button class="wd-public-trigger" id="wd-menu-trigger" type="button" onclick="WatchdogPublicNav.open('main')" aria-label="Open Watchdog menu">
+        <i class="fas fa-bars"></i><span>Menu</span>
+      </button>
+      <a class="wd-logo" href="/"><i class="fas fa-dog"></i><span>Watchdog</span></a>
+      <button class="wd-public-trigger wd-public-profile" id="wd-profile-trigger" type="button" onclick="WatchdogPublicNav.open('profile')" aria-label="Open account menu">
+        <i class="fas fa-user"></i><span>Sign in</span>
+      </button>
+    </div>
+  </header>
+  <div class="wd-public-backdrop" id="wd-public-backdrop" onclick="WatchdogPublicNav.close()"></div>
+  <aside class="wd-public-sheet" id="wd-main-sheet" aria-hidden="true" aria-label="Watchdog navigation"><!-- Filled by /property/js/watchdog-universal-menu.js: the one shared Watchdog menu. --></aside>
+  <aside class="wd-public-sheet right" id="wd-profile-sheet" aria-hidden="true" aria-label="Watchdog account">
+    <div class="wd-public-sheet-head"><b>Your Watchdog</b><button class="wd-public-close" type="button" onclick="WatchdogPublicNav.close()" aria-label="Close account menu"><i class="fas fa-xmark"></i></button></div>
+    <div id="wd-profile-content"></div>
+  </aside>
+
+  <main class="tn-main" id="tn-main">
+    <section class="tn-hero">
+      <span class="tn-kicker"><i class="fas fa-clipboard-question" aria-hidden="true"></i> Town CO and fire certificate needs</span>
+      <h1>Help fill in what these towns require before a sale</h1>
+      <p>Agents use Watchdog to see each New Jersey town's resale certificate (CO) and smoke / CO alarm certificate rules, fees and who to call. For the towns below, Watchdog couldn't confirm some of it from official sources online.</p>
+      <p>If you know the answer and have the town's form, fee sheet, letter or a link to the town's page, send it here. <b>Watchdog checks every submission against the document before anything goes live.</b></p>
+      <ul class="tn-rules">
+        <li><i class="fas fa-file-circle-check" aria-hidden="true"></i><span>A document or a link to the town's page is required. A typed answer alone isn't enough.</span></li>
+        <li><i class="fas fa-lock" aria-hidden="true"></i><span>Uploads stay private until they're reviewed. PDF or photo, up to 10 MB.</span></li>
+        <li><i class="fas fa-user-shield" aria-hidden="true"></i><span>Your name and email are optional and only used if we have a question.</span></li>
+      </ul>
+    </section>
+
+    <section class="tn-panel" aria-labelledby="tn-list-title">
+      <div class="tn-panel-head">
+        <h2 id="tn-list-title">Towns that need details</h2>
+        <p class="tn-count" id="tn-count" aria-live="polite">Loading towns…</p>
+      </div>
+      <div class="tn-filters" role="search">
+        <label class="tn-field"><span>Find a town</span><input id="tn-search" type="search" autocomplete="off" placeholder="Town name"></label>
+        <label class="tn-field"><span>County</span><select id="tn-county"><option value="">All counties</option></select></label>
+      </div>
+      <div class="tn-list" id="tn-list"></div>
+      <p class="tn-empty" id="tn-empty" hidden>No towns match. Try another name or county.</p>
+      <p class="tn-empty" id="tn-error" hidden>Watchdog couldn't load the town list. Please refresh the page.</p>
+    </section>
+  </main>
+
+  <template id="tn-town-template">
+    <article class="tn-town">
+      <div class="tn-town-head">
+        <div>
+          <h3 class="tn-town-name"></h3>
+          <p class="tn-town-meta"></p>
+        </div>
+        <button class="tn-btn tn-help" type="button" aria-expanded="false">I can help</button>
+      </div>
+      <p class="tn-missing-label">Still missing:</p>
+      <ul class="tn-missing"></ul>
+      <div class="tn-form-host"></div>
+    </article>
+  </template>
+
+  <template id="tn-form-template">
+    <form class="tn-form" novalidate>
+      <fieldset class="tn-needs">
+        <legend>What can you help with?</legend>
+      </fieldset>
+      <label class="tn-field"><span>What you know <small>(optional)</small></span>
+        <textarea name="answer" rows="4" maxlength="2000" placeholder="For example: Yes, the town requires a resale CO for one- and two-family homes. The fee is $100 and the inspection takes about a week."></textarea>
+      </label>
+      <div class="tn-source">
+        <p class="tn-source-title">The town's document or page <b>(one is required)</b></p>
+        <label class="tn-field"><span>Upload the form, fee sheet or letter</span>
+          <input name="file" type="file" accept="application/pdf,image/jpeg,image/png,image/webp,image/heic,image/heif,.pdf,.jpg,.jpeg,.png,.webp,.heic,.heif">
+          <small>PDF or photo, up to 10 MB.</small>
+        </label>
+        <label class="tn-field"><span>Or a link to the town's page</span>
+          <input name="source_url" type="url" inputmode="url" placeholder="https://" maxlength="1000">
+        </label>
+      </div>
+      <div class="tn-about">
+        <label class="tn-field"><span>Your name <small>(optional)</small></span><input name="name" autocomplete="name" maxlength="120"></label>
+        <label class="tn-field"><span>Email <small>(optional)</small></span><input name="email" type="email" autocomplete="email" maxlength="254"></label>
+        <label class="tn-field"><span>You are <small>(optional)</small></span>
+          <select name="role">
+            <option value="">Choose one</option>
+            <option>Real estate agent</option>
+            <option>Attorney</option>
+            <option>Title or closing company</option>
+            <option>Town or fire office staff</option>
+            <option>Home inspector</option>
+            <option>Homeowner, buyer or seller</option>
+            <option>Other</option>
+          </select>
+        </label>
+      </div>
+      <label class="tn-hp" aria-hidden="true">Website <input name="website" tabindex="-1" autocomplete="off"></label>
+      <p class="tn-form-status" role="status" aria-live="polite"></p>
+      <div class="tn-form-actions">
+        <button class="tn-btn tn-primary" type="submit">Send for review</button>
+        <button class="tn-btn tn-ghost tn-cancel" type="button">Cancel</button>
+      </div>
+    </form>
+  </template>
+
+  <template id="tn-done-template">
+    <div class="tn-done" role="status">
+      <i class="fas fa-circle-check" aria-hidden="true"></i>
+      <div><b>Thanks, it's in.</b><p>Watchdog will check it against the document before anything goes live. You can send more for this town or another one.</p></div>
+    </div>
+  </template>
+
+  <div id="tn-footer"></div>
+
+  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2/dist/umd/supabase.js"></script>
+  <script src="/scripts.js"></script>
+  <script src="/property/js/public-nav.js"></script>
+  <script src="/property/js/town-needs.js?v=20260930a" defer></script>
+</body>
+</html>
