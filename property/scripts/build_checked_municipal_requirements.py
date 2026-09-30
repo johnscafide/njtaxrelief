@@ -81,10 +81,17 @@ def sources(*groups) -> list[dict]:
     return out[:8]
 
 
+def inferred_not_required(co: dict) -> bool:
+    """The town's pages leave the certificate out but never say in writing that none is needed."""
+    return co.get("status") == "not_required" and co.get("confidence") != "high"
+
+
 def flag_reasons(r: dict) -> list[str]:
     why = []
     if (r.get("resale_co") or {}).get("status") == "not_found":
         why.append("town certificate not confirmed online")
+    if inferred_not_required(r.get("resale_co") or {}):
+        why.append("no town certificate listed, but not ruled out in writing")
     fees = list((r.get("resale_co") or {}).get("fees") or [])
     fees += [f for a in (r.get("fire_cert") or {}).get("authorities") or [] for f in a.get("fees") or []]
     if not fees:
@@ -98,6 +105,9 @@ def co_row(r: dict, flags: list[str]) -> dict:
     lines = []
     if status == "not_found":
         lines.append(f"Not confirmed yet: Watchdog could not confirm online whether {town} requires a resale certificate. Call the office before closing.")
+    elif inferred_not_required(co):
+        lines.append(f"Not confirmed yet: {town}'s official pages list no town resale certificate for sales, but they don't say in writing "
+                     "that none is needed. Call the office before closing.")
     elif status == "not_required":
         lines.append(f"Not required for sales, per {clean(co.get('issued_by'), 160) or town}. Confirm with the office if the buyer's lender or title company asks.")
     if clean(co.get("issued_by")):
@@ -111,7 +121,7 @@ def co_row(r: dict, flags: list[str]) -> dict:
     lines += [clean(x, 300) for x in (co.get("requirements") or [])[:15] if clean(x)]
     lines += [f"Also: {clean(x.get('label'), 120)}" + (f": {clean(x.get('detail'), 240)}" if clean(x.get("detail")) else "")
               for x in (r.get("other_items") or [])[:6] if clean(x.get("label"))]
-    state = {"required": "explicit_required", "not_required": "official_process_found"}.get(status, "verify")
+    state = "verify" if inferred_not_required(co) else {"required": "explicit_required", "not_required": "official_process_found"}.get(status, "verify")
     title = clean(co.get("name"), 160) if status == "required" and clean(co.get("name")) else "Resale / Continued Certificate of Occupancy (CCO)"
     return {"requirement_key": "resale_cco", "requirement_state": state, "title": title, "requirements": lines,
             "fees": fee_rows(co.get("fees")), "application_url": usable(co.get("application_url")),
