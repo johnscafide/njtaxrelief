@@ -24,6 +24,8 @@ on:
       - 'supabase/migrations/20260916163000_transaction_municipal_services.sql'
       - 'property/scripts/extract_transaction_municipal_requirements*.py'
       - 'property/scripts/publish_transaction_municipal_requirements.py'
+      - 'supabase/migrations/20260930150000_municipal_requirements_hold_unchecked.sql'
+      - 'property/tests/municipal-requirements-unchecked-contract.mjs'
   workflow_dispatch:
 
 permissions:
@@ -47,6 +49,10 @@ jobs:
           node --check transaction/refinements.js
           node --check transaction/evidence-first.js
           node --check transaction/shell.js
+      - name: Keep unchecked town scan text away from agents
+        run: |
+          python property/scripts/publish_transaction_municipal_requirements.py --self-test
+          node property/tests/municipal-requirements-unchecked-contract.mjs
       - name: Guard source semantics and privacy boundaries
         run: |
           set -euo pipefail
