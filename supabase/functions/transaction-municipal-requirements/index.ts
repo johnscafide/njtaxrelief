@@ -10,6 +10,10 @@ const safe=(v:unknown)=>(v&&typeof v==="object"&&!Array.isArray(v)?v as Row:{});
 const cors=(r:Request)=>({"Access-Control-Allow-Origin":ORIGINS.has(r.headers.get("origin")||"")?(r.headers.get("origin")||""):"https://www.watchdogindex.com","Access-Control-Allow-Headers":"authorization,apikey,content-type,x-client-info","Access-Control-Allow-Methods":"POST,OPTIONS","Vary":"Origin"});
 const respond=(r:Request,s:number,b:unknown)=>new Response(JSON.stringify(b),{status:s,headers:{...cors(r),"Content-Type":"application/json","Cache-Control":"private, no-store"}});
 const district=(tx:Row)=>{const p=clean(tx.pams_pin,100);return /^\d{4}/.test(p)?p.slice(0,4):""};
+// Town-website account pages (sign up, sign in, password reset) and news posts are
+// never an application or an official source for a closing requirement.
+const SKIP_LINK=/\/MyAccount(?:\/|$|\?)|\/Identity\/Account\/|cpauthentication\.civicplus\.com|ForgotPassword|\/newsflash\//i;
+const usableLink=(u:unknown)=>{const s=clean(u,2000);return /^https?:\/\//i.test(s)&&!SKIP_LINK.test(s)?s:null};
 async function hash(v:unknown){const b=await crypto.subtle.digest("SHA-256",new TextEncoder().encode(JSON.stringify(v)));return [...new Uint8Array(b)].map(x=>x.toString(16).padStart(2,"0")).join("")}
 function existingStrength(item:Row){
   const p=safe(item.payload), requirements=Array.isArray(p.requirements)?p.requirements:[];
@@ -67,7 +71,13 @@ Deno.serve(async(req:Request)=>{
     for(const key of itemKeys){
       const r=reqMap.get(`${code}:${key}`), item=itemMap.get(`${tx.id}:${key}`);
       if(!r||!item){txResult.requirements[key]="registry_or_item_missing";continue}
-      const requirements=Array.isArray(r.requirements)?r.requirements:[], fees=Array.isArray(r.fees)?r.fees:[], sources=Array.isArray(r.source_urls)?r.source_urls:[];
+      // Only a person-checked row (curated_override) may show requirements, fees or an
+      // application link. The statewide scan keeps its raw page text in metadata.unchecked:
+      // it once showed website menus, blank form lines and grant amounts as fees.
+      const checked=r.curated_override===true;
+      const requirements=checked&&Array.isArray(r.requirements)?r.requirements:[], fees=checked&&Array.isArray(r.fees)?r.fees:[];
+      const sources=(Array.isArray(r.source_urls)?r.source_urls:[]).filter((s:Row)=>usableLink(s?.url));
+      const applicationUrl=checked?usableLink(r.application_url):null, departmentUrl=usableLink(r.department_url), ordinanceUrl=usableLink(r.ordinance_url);
       const registryRank=REQUIREMENT_RANK[clean(r.requirement_state,60)]??0;
       const prior=existingStrength(item);
 
@@ -75,8 +85,8 @@ Deno.serve(async(req:Request)=>{
       // detailed statewide crawl. The registry observation is still preserved below.
       const preserveExisting=prior.rank>registryRank || (prior.rank===registryRank && prior.count>requirements.length);
       const explicit=r.requirement_state==="explicit_required", process=r.requirement_state==="official_process_found", baseline=r.requirement_state==="statewide_baseline";
-      const sourceUrl=r.application_url||r.department_url||r.ordinance_url||sources?.[0]?.url||null;
-      const registryEvidence={requirement_key:key,requirement_state:r.requirement_state,requirements,fees,application_url:r.application_url,department_url:r.department_url,ordinance_url:r.ordinance_url,sources};
+      const sourceUrl=applicationUrl||departmentUrl||ordinanceUrl||sources?.[0]?.url||null;
+      const registryEvidence={requirement_key:key,requirement_state:r.requirement_state,details_checked:checked,requirements,fees,application_url:applicationUrl,department_url:departmentUrl,ordinance_url:ordinanceUrl,sources};
 
       await admin.from("transaction_evidence_observations").upsert({
         transaction_id:tx.id,user_id:user.id,pams_pin:tx.pams_pin,
@@ -92,17 +102,20 @@ Deno.serve(async(req:Request)=>{
       }
 
       let description="";
+      const note=checked?"":" Watchdog has not checked the exact requirements and fees yet, so open the official links below before quoting anything.";
       if(key==="resale_cco"){
-        if(explicit)description=`Official municipal source material contains affirmative resale/occupancy requirement language for ${r.municipality_name}. Review the exact requirements, fees and application evidence below and track completion before closing.`;
-        else if(process)description=`Watchdog found an official municipal resale/occupancy process for ${r.municipality_name}, but the source parser did not promote it to an unconditional requirement. Verify applicability for this transaction with the enforcing office.`;
+        if(explicit)description=checked
+          ?`Official municipal source material contains affirmative resale/occupancy requirement language for ${r.municipality_name}. Review the exact requirements, fees and application evidence below and track completion before closing.`
+          :`Official municipal source material contains affirmative resale/occupancy requirement language for ${r.municipality_name}.${note}`;
+        else if(process)description=`Watchdog found an official municipal resale/occupancy process for ${r.municipality_name}, but the source parser did not promote it to an unconditional requirement. Verify applicability for this transaction with the enforcing office.${note}`;
         else description=`Watchdog has not obtained enough official municipal text to state that a resale/CO certificate is or is not required in ${r.municipality_name}. Verify with the municipality; missing web coverage is never treated as “not required.”`;
       }else{
-        if(explicit)description=`Official local material contains affirmative smoke/CO/fire compliance language tied to sale or change of occupancy in ${r.municipality_name}. Track the applicable inspection/certificate process before closing.`;
-        else if(process)description=`Watchdog found an official local smoke/CO/fire process for ${r.municipality_name}. Confirm how it applies to this property and whether it is handled separately or through the municipal occupancy process.`;
+        if(explicit)description=`Official local material contains affirmative smoke/CO/fire compliance language tied to sale or change of occupancy in ${r.municipality_name}. Track the applicable inspection/certificate process before closing.${note}`;
+        else if(process)description=`Watchdog found an official local smoke/CO/fire process for ${r.municipality_name}. Confirm how it applies to this property and whether it is handled separately or through the municipal occupancy process.${note}`;
         else if(baseline)description=`NJ statewide fire-safety change-of-occupancy compliance remains a required verification point. Watchdog did not find enough local web material to state the municipality’s exact workflow, so confirm it with the applicable enforcing agency.`;
         else description=`Smoke/CO/fire compliance still requires verification with the applicable local enforcing agency. Missing local web coverage is never treated as a waiver.`;
       }
-      const payload={...safe(item.payload),requirement_state:r.requirement_state,requirements,fees,application_url:r.application_url,department_url:r.department_url,ordinance_url:r.ordinance_url,official_sources:sources,source_excerpt:r.source_excerpt,last_verified_at:r.last_verified_at,municipality_code:code,municipality_name:r.municipality_name,never_infer_not_required:true};
+      const payload={...safe(item.payload),requirement_state:r.requirement_state,details_checked:checked,requirements,fees,application_url:applicationUrl,department_url:departmentUrl,ordinance_url:ordinanceUrl,official_sources:sources,source_excerpt:r.source_excerpt,last_verified_at:r.last_verified_at,municipality_code:code,municipality_name:r.municipality_name,never_infer_not_required:true};
       await admin.from("transaction_items").update({
         title:r.title,evidence_state:"verify",severity:explicit?"attention":"review",source_type:"official_requirement",
         source_label:`${r.municipality_name} official sources`,source_url:sourceUrl,source_checked_at:r.last_verified_at||checkedAt,
