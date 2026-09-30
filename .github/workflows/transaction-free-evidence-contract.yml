@@ -28,8 +28,7 @@ on:
       - 'property/tests/municipal-requirements-unchecked-contract.mjs'
       - 'property/scripts/build_checked_municipal_requirements.py'
       - 'property/data/municipal-requirements/**'
-      - 'supabase/migrations/20260930170000_checked_municipal_requirements_camden_gloucester.sql'
-      - 'supabase/migrations/20260930180000_checked_municipal_requirements_burlington_warren.sql'
+      - 'supabase/migrations/*_checked_municipal_requirements_*.sql'
   workflow_dispatch:
 
 permissions:
