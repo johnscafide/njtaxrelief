@@ -5,6 +5,7 @@ Inputs (all in property/data/municipal-requirements/):
   checked/<code>.json                 town research from official sources, every fee quoted
   approvals.json                      which towns a person approved in the tracker
   nj-dca-fire-officials-2026-09.json  fire official per town from the NJ DCA directory
+  nj-dca-fire-officials-corrections.json  directory fields a person found wrong (left out)
 
 Output: a migration that upserts two curated rows per approved town (resale_cco and
 smoke_fire_cert). Agents see these on the Transactions page as plain text lines, so
@@ -200,9 +201,31 @@ def fire_row(r: dict, officials: list[dict]) -> dict:
             "source_excerpt": clean(next((e.get("quote") for a in auths for e in a.get("evidence") or [] if e.get("quote")), ""), 900) or None}
 
 
+# The directory PDF cuts long emails off (e.g. "fireprevention@hightstownborough."); only whole addresses are shown.
+DIRECTORY_EMAIL = re.compile(r"^[A-Za-z0-9._%+-]+@[A-Za-z0-9-]+(?:\.[A-Za-z0-9-]+)*\.(?:com|org|gov|net|us|edu)$", re.I)
+
+
+def directory_officials() -> dict:
+    """The NJ DCA fire directory by town, minus cut-off emails and the fields a person found wrong
+    (see the corrections file)."""
+    towns = json.loads((DATA / "nj-dca-fire-officials-2026-09.json").read_text())["towns"]
+    for town in towns.values():
+        for a in town.get("agencies") or []:
+            first = next((e.strip() for e in str(a.get("email") or "").split(";") if e.strip()), "")
+            a["email"] = first if DIRECTORY_EMAIL.match(first) else ""
+    fixes = DATA / "nj-dca-fire-officials-corrections.json"
+    for fix in json.loads(fixes.read_text())["corrections"] if fixes.exists() else []:
+        matched = [a for a in (towns.get(fix["code"]) or {}).get("agencies") or [] if a.get("leaid") == fix["leaid"]]
+        assert matched, f"correction for {fix['code']} {fix['leaid']} matches no directory entry"
+        for a in matched:
+            for field in fix["drop"]:
+                a[field] = ""
+    return towns
+
+
 def build_rows() -> list[dict]:
     approvals = json.loads((DATA / "approvals.json").read_text())["towns"]
-    officials = json.loads((DATA / "nj-dca-fire-officials-2026-09.json").read_text())["towns"]
+    officials = directory_officials()
     rows = []
     for path in sorted((DATA / "checked").glob("*.json")):
         r = json.loads(path.read_text())
@@ -305,6 +328,9 @@ def self_test() -> None:
     assert clean("word " * 400, 50).endswith("…") and len(clean("word " * 400, 50)) <= 50
     assert clean("see fire_cert and resale_co") == "see the fire certificate and the town certificate"
     assert clean("(see other_items)") == '(see the "Also" lines)'
+    officials = directory_officials()
+    assert all(not a.get("email") or DIRECTORY_EMAIL.match(a["email"]) for t in officials.values() for a in t.get("agencies") or []), \
+        "a cut-off directory email would reach agents"
     assert contact_line({"contact_name": "A B", "contact_title": "Fire Official (per the Borough's 2024 form)"}) == "Contact: A B, Fire Official"
     print(f"checked requirements self-test ok ({len(rows) // 2} towns, {len(rows)} rows)")
 
