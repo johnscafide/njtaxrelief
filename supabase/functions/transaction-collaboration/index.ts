@@ -228,14 +228,19 @@ Deno.serve(async(req:Request)=>{
     if(listError||!obj)return respond(req,409,{error:"Uploaded file could not be verified"});
     const fileSize=Number(obj.metadata?.size||body.file_size||0);
     if(!fileSize||fileSize>MAX_BYTES)return respond(req,400,{error:"Uploaded file size is invalid"});
-    const allowedTypes=new Set(["title_commitment","mortgage_payoff","lender_commitment","appraisal","inspection_report","attorney_review","hoa_condo","solar_agreement","tenancy","estate_probate","divorce","bankruptcy","final_walkthrough","closing_package","other"]);
+    const allowedTypes=new Set(["title_commitment","mortgage_payoff","lender_commitment","appraisal","inspection_report","attorney_review","hoa_condo","solar_agreement","tenancy","estate_probate","divorce","bankruptcy","final_walkthrough","closing_package","certificate_of_occupancy","other"]);
     const docType=allowedTypes.has(type)?type:"other";
-    const {error}=await admin.from("transaction_documents").insert({
+    const row:any={
       id:documentId,transaction_id:txId,user_id:m.owner_user_id,document_type:docType,document_label:label,
       original_name:fileName,storage_bucket:BUCKET,storage_path:path,mime_type:mime,file_size:fileSize,
       status:"uploaded",extraction_status:"not_requested",uploaded_by_user_id:user.id,uploaded_by_role:m.role,
       metadata:{supplied_by:"shared_professional_upload",independent_public_evidence:false,shared_role:m.role}
-    });
+    };
+    let {error}=await admin.from("transaction_documents").insert(row);
+    // Before the CO migration is applied the old document_type CHECK rejects certificate_of_occupancy (23514): keep it as "other".
+    if(error&&docType==="certificate_of_occupancy"&&(error.code==="23514"||/document_type_check/i.test(String(error.message||"")))){
+      ({error}=await admin.from("transaction_documents").insert({...row,document_type:"other",document_label:label||"Certificate of Occupancy (CO / CCO)",metadata:{...row.metadata,requested_document_type:docType}}));
+    }
     if(error)return respond(req,500,{error:"Could not register uploaded document"});
     await admin.from("transaction_activity").insert({
       transaction_id:txId,user_id:m.owner_user_id,actor_user_id:user.id,action:"professional_document_upload",
