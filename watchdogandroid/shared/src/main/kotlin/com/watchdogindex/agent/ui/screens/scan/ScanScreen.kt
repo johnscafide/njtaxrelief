@@ -39,9 +39,9 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.draw.drawBehind
+import androidx.compose.ui.draw.shadow
 import androidx.compose.ui.geometry.Offset
 import androidx.compose.ui.geometry.Size
-import androidx.compose.ui.graphics.vector.ImageVector
 import androidx.compose.ui.layout.FirstBaseline
 import androidx.compose.ui.semantics.clearAndSetSemantics
 import androidx.compose.ui.semantics.contentDescription
@@ -58,9 +58,7 @@ import com.watchdogindex.agent.core.format.Format
 import com.watchdogindex.agent.core.math.TaxMath
 import com.watchdogindex.agent.core.model.ScanHistoryItem
 import com.watchdogindex.agent.core.model.ScanResult
-import com.watchdogindex.agent.core.model.StatusChip
 import com.watchdogindex.agent.core.model.TileTint
-import com.watchdogindex.agent.core.model.Tone
 import com.watchdogindex.agent.design.WatchdogDimens
 import com.watchdogindex.agent.design.WatchdogTheme
 import com.watchdogindex.agent.design.icons.WdIcons
@@ -73,7 +71,6 @@ import com.watchdogindex.agent.ui.components.LocalBottomChromeInsets
 import com.watchdogindex.agent.ui.components.ReadBox
 import com.watchdogindex.agent.ui.components.RowList
 import com.watchdogindex.agent.ui.components.SegmentOption
-import com.watchdogindex.agent.ui.components.StatusChipView
 import com.watchdogindex.agent.ui.components.SupportingText
 import com.watchdogindex.agent.ui.components.TabularText
 import com.watchdogindex.agent.ui.components.TopBarAction
@@ -107,6 +104,16 @@ private val ScrollBottomBeyondChrome = 86.dp
 
 /** The navy score tile's fixed column in the `.duo` grid (118 / 1fr). */
 private val ScoreTileWidth = 118.dp
+
+/**
+ * The mockup's `line-height: 1` number rows, as a multiplier a hair above 1: the desktop text engine treats a
+ * line height at or below the font size as unset and falls back to the font's own 1.26 line, which would make
+ * the score tile 8 dp taller than the mockup; 1.003 keeps the box at the type size on both platforms.
+ */
+private const val UnitLineHeight = 1.003
+
+/** `.detect` sits 300 dp down the mockup frame; the camera area starts 172 dp down (bar, segments, 12 dp gap). */
+private val DetectPillTop = 128.dp
 
 @Composable
 fun ScanScreen(initialUrl: String?, navigator: Navigator) {
@@ -312,9 +319,7 @@ private fun CameraMode(state: ScanUiState.Ready, vm: ScanViewModel, onFullPage: 
         val result = state.result
         val matchLabel = result?.matchLabel
         if (matchLabel != null && !state.resolving) {
-            Box(modifier = Modifier.align(Alignment.BottomCenter).padding(bottom = 40.dp + chromeBottom)) {
-                StatusChipView(StatusChip(label = matchLabel, tone = Tone.Good, icon = "check"))
-            }
+            DetectPill(label = matchLabel, modifier = Modifier.align(Alignment.TopCenter).padding(top = DetectPillTop))
         }
         val error = state.error
         if (error != null && !state.resolving) {
@@ -352,6 +357,32 @@ private fun CameraMode(state: ScanUiState.Ready, vm: ScanViewModel, onFullPage: 
                 )
             }
         }
+    }
+}
+
+/**
+ * Detect pill (`.detect`; private to this screen until it is promoted): a 34 dp pill with a 17 dp radius, white
+ * at 94% over the camera image in both themes, a 20 dp teal filled check_circle, 13 sp 700 navy text and a
+ * soft shadow, saying what the camera matched. Reads as one line for TalkBack.
+ */
+@Composable
+private fun DetectPill(label: String, modifier: Modifier = Modifier) {
+    val c = WatchdogTheme.colors
+    val t = WatchdogTheme.type
+    val shape = RoundedCornerShape(17.dp)
+    Row(
+        modifier = modifier
+            .shadow(elevation = 6.dp, shape = shape, ambientColor = c.shadow, spotColor = c.shadow)
+            .clip(shape)
+            .background(FixedInk.onNavy.copy(alpha = .94f))
+            .height(34.dp)
+            .padding(start = 10.dp, end = 14.dp)
+            .semantics(mergeDescendants = true) {},
+        horizontalArrangement = Arrangement.spacedBy(6.dp),
+        verticalAlignment = Alignment.CenterVertically,
+    ) {
+        Icon(imageVector = WdIcons.CheckCircleFill, contentDescription = null, modifier = Modifier.size(20.dp), tint = FixedInk.teal)
+        Text(text = label, color = FixedInk.navy, style = t.supporting.sized(13, FontWeight.Bold), maxLines = 1, softWrap = false)
     }
 }
 
@@ -421,6 +452,7 @@ private fun ScoreTile(score: Int?, verdict: String?, modifier: Modifier = Modifi
             .clearAndSetSemantics { contentDescription = description },
     ) {
         CardLabel(text = "Watchdog Score", color = c.onNavy2)
+        // `.n`: margin-top 6, a 30 dp line box, 3 dp of padding and the 2 dp gold rule under it (41 dp in all).
         Row(
             modifier = Modifier
                 .padding(top = 6.dp)
@@ -428,18 +460,18 @@ private fun ScoreTile(score: Int?, verdict: String?, modifier: Modifier = Modifi
                     val rule = 2.dp.toPx()
                     drawRect(color = gold, topLeft = Offset(0f, size.height - rule), size = Size(size.width, rule))
                 }
-                .padding(bottom = 3.dp),
+                .padding(bottom = 5.dp),
         ) {
             TabularText(
                 text = score?.toString() ?: "–",
                 modifier = Modifier.alignByBaseline(),
-                style = t.lead.sized(30, FontWeight.ExtraBold, 30.0, (-0.9).sp, tabular = true),
+                style = t.lead.sized(30, FontWeight.ExtraBold, UnitLineHeight * 30, (-0.9).sp, tabular = true),
                 color = c.onNavy,
             )
             TabularText(
                 text = " /100",
                 modifier = Modifier.alignByBaseline(),
-                style = t.caption.sized(12, FontWeight.Bold, 12.0, tabular = true),
+                style = t.caption.sized(12, FontWeight.Bold, UnitLineHeight * 12, tabular = true),
                 color = c.onNavy2,
             )
         }
@@ -610,6 +642,3 @@ private fun ScanFatalError(userMessage: String, onClose: () -> Unit) {
 @Composable
 private fun statusBarAllowance(): Dp =
     if (LocalBottomChromeInsets.current != null) 40.dp else WindowInsets.statusBars.asPaddingValues().calculateTopPadding()
-
-@Suppress("unused")
-private val unusedIconType: ImageVector? = null
