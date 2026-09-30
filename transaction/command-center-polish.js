@@ -4,7 +4,8 @@ if(window.__WATCHDOG_TRANSACTION_WORKSPACE_V2__)return;
 window.__WATCHDOG_TRANSACTION_WORKSPACE_V2__=true;
 
 var db=null,user=null,workspaces=[],selectedId='',selected=null,items=[],documents=[];
-var evidenceFilter='all',activeView='overview',loadSeq=0,refreshTimer=0,observerTimer=0,drawerRestore=null,loading=false;
+var evidenceFilter='all',activeView='overview',loadSeq=0,refreshTimer=0,observerTimer=0,drawerRestore=null,loading=false,evidenceReturn=null,evidenceWatch=false;
+var pendingEvidence=clean(new URLSearchParams(location.search).get('evidence'));
 
 var EVIDENCE_GROUPS=[
   {key:'occupancy',label:'Occupancy / resale',itemKeys:['resale_cco','permit_certificate_lifecycle'],sourcePatterns:[/certificate of occupancy/i,/resale/i,/permit.*certificate/i,/permits.*certificates/i]},
@@ -145,8 +146,8 @@ async function loadAll(){
   var c=client();if(!c)return;
   var auth=await c.auth.getUser();user=auth&&auth.data&&auth.data.user;if(!user)return;
   var r=await c.from('transaction_workspaces').select('*').eq('user_id',user.id).order('closing_date',{ascending:true,nullsFirst:false}).order('created_at',{ascending:false});
-  if(r.error){console.warn('Transaction v2 workspaces could not load',r.error);renderEmpty(true);return}
-  workspaces=r.data||[];var requested=clean(new URLSearchParams(location.search).get('tx'));var requestedOwned=requested&&workspaces.some(function(t){return t.id===requested})?requested:'';selectedId=requestedOwned||legacySelected()||selectedId||(workspaces[0]&&workspaces[0].id)||'';renderRail();renderPortfolio();if(selectedId)await loadSelected(selectedId);else renderEmpty(false);
+  if(r.error){console.warn('Transaction v2 workspaces could not load',r.error);pendingEvidence='';renderEmpty(true);return}
+  workspaces=r.data||[];var requested=clean(new URLSearchParams(location.search).get('tx'));var requestedOwned=requested&&workspaces.some(function(t){return t.id===requested})?requested:'';selectedId=requestedOwned||legacySelected()||selectedId||(workspaces[0]&&workspaces[0].id)||'';renderRail();renderPortfolio();if(selectedId)await loadSelected(selectedId);else{pendingEvidence='';renderEmpty(false)}
 }
 
 async function loadSelected(id){
@@ -156,10 +157,11 @@ async function loadSelected(id){
   var results=await Promise.all([itemQuery,docsQuery]);if(seq!==loadSeq)return;
   var latest=await c.from('transaction_workspaces').select('*').eq('id',id).eq('user_id',user.id).maybeSingle();if(seq!==loadSeq)return;
   if(!latest.error&&latest.data){selected=latest.data;var idx=workspaces.findIndex(function(t){return t.id===id});if(idx>=0)workspaces[idx]=latest.data;else workspaces.unshift(latest.data);renderRail()}
-  if(results[0].error){console.warn('Transaction v2 items could not load',results[0].error);loading=false;showLoadError();renderHeader();renderPortfolio();return}
+  if(results[0].error){console.warn('Transaction v2 items could not load',results[0].error);loading=false;pendingEvidence='';showLoadError();renderHeader();renderPortfolio();return}
   if(results[1].error&&premiumAvailable())console.warn('Transaction v2 documents could not load',results[1].error);
-  items=results[0].data||[];documents=results[1].error?[]:(results[1].data||[]);loading=false;hideLoadState();renderSelected();renderPortfolio();activateView(activeView,true);
+  items=results[0].data||[];documents=results[1].error?[]:(results[1].data||[]);loading=false;hideLoadState();renderSelected();renderPortfolio();activateView(activeView,true);openPendingEvidence();
 }
+function openPendingEvidence(){var key=pendingEvidence;pendingEvidence='';if(key&&EVIDENCE_GROUPS.some(function(g){return g.key===key}))openEvidence(key)}
 function refreshSelected(){if(selectedId)loadSelected(selectedId)}
 
 function selectTransaction(id){
@@ -253,10 +255,12 @@ function sourceCards(group){
 }
 function openEvidence(key){
   var group=EVIDENCE_GROUPS.find(function(g){return g.key===key});if(!group)return;var cards=sourceCards(group),rows=groupItems(group),layer=$('#tx-modal-layer'),modal=$('#tx-modal'),content=$('#tx-modal-content');if(!layer||!modal||!content){activateView('evidence');return}
-  content.innerHTML='<div class="txv2-deep"><h2>'+esc(group.label)+'</h2><p>'+esc(selected&&selected.address||'')+'</p><div class="txv2-deep-stack"></div></div>';var stack=content.querySelector('.txv2-deep-stack');
+  content.innerHTML='<div class="txv2-deep"><h2 id="tx-modal-title">'+esc(group.label)+'</h2><p>'+esc(selected&&selected.address||'')+'</p><div class="txv2-deep-stack"></div></div>';var stack=content.querySelector('.txv2-deep-stack');
   if(cards.length){cards.forEach(function(card){var clone=card.cloneNode(true);clone.removeAttribute('style');stack.appendChild(clone)})}else if(rows.length){stack.innerHTML=rows.map(function(i){return '<article class="txv2-fallback-evidence"><h3>'+esc(i.title||group.label)+'</h3><p>'+esc(i.description||'No summary is available yet.')+'</p>'+(i.source_label?'<small>Source: '+esc(i.source_label)+'</small>':'')+'</article>'}).join('')}else{stack.innerHTML='<p>Evidence isn’t available yet for this category.</p>'}
-  modal.classList.add('txv2-modal');layer.hidden=false;document.body.classList.add('tx-modal-open');
+  evidenceReturn=document.activeElement;watchEvidenceClose(layer,modal);modal.classList.add('txv2-modal');layer.hidden=false;document.body.classList.add('tx-modal-open');document.body.style.overflow='hidden';var x=modal.querySelector('.tx-modal-x');if(x)x.focus();
 }
+// The legacy closeModal hides the shared layer: drop the wide evidence style so the next legacy dialog opens at its own width, and return focus to the evidence button.
+function watchEvidenceClose(layer,modal){if(evidenceWatch)return;evidenceWatch=true;new MutationObserver(function(){if(!layer.hidden||!modal.classList.contains('txv2-modal'))return;modal.classList.remove('txv2-modal');document.body.classList.remove('tx-modal-open');var back=evidenceReturn;evidenceReturn=null;if(back&&back.isConnected&&back.closest&&back.closest('[data-v2-evidence]')&&back.getClientRects().length)back.focus()}).observe(layer,{attributes:true,attributeFilter:['hidden']})}
 
 function park(node){var p=$('#txv2-parking');if(node&&p&&node.parentNode!==p){p.appendChild(node);node.hidden=true}}
 function moveToSecondary(node){var host=$('#txv2-secondary');if(!node||!host)return false;host.innerHTML='';host.appendChild(node);node.hidden=false;return true}

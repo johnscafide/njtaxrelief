@@ -61,6 +61,15 @@ assert.match(approvedCss,/@media\(max-width:759px\)/,'approved mobile layout con
 assert.match(approvedCss,/body\[data-sidebar-page="transaction"\] \.wdx-pagebar\{display:none!important\}/,'old page title bar must be removed while the shared app shell remains');
 assert.doesNotMatch(approvedCss,/gradient|backdrop-filter|glass|glow/i,'approved transaction workspace must stay flat and restrained');
 
+// ?evidence=<group> deep link: read once, checked against EVIDENCE_GROUPS, and every site-search link must name a real group.
+assert.match(approved,/get\('evidence'\)/,'approved v2 adapter must read the ?evidence= deep link');
+assert.match(approved,/EVIDENCE_GROUPS\.some\(/,'?evidence= must be checked against EVIDENCE_GROUPS');
+const evidenceKeys=new Set([...approved.matchAll(/\{key:'([a-z-]+)',label:/g)].map((m)=>m[1]));
+assert.ok(evidenceKeys.has('occupancy'),'EVIDENCE_GROUPS keys could not be parsed');
+for(const m of read('property/data/site-search.json').matchAll(/\/transaction\?evidence=([^"&#]+)/g)){
+  assert.ok(evidenceKeys.has(m[1]),`site search links to unknown evidence group ${m[1]}`);
+}
+
 // Production routing contract: middleware must pass Transaction through to Vercel's
 // static route before the generic root clean-page resolver can rewrite it under /property.
 assert.match(middleware,/ROOT_STATIC_PAGES[^\n]*['"]\/transaction['"]/,'middleware must allow /transaction through as a root static page');

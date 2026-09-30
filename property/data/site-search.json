@@ -1,0 +1,2945 @@
+{
+  "schema_version": 1,
+  "updated": "2026-09-30",
+  "entries": [
+    {
+      "id": "certificate-of-occupancy",
+      "kind": "term",
+      "label": "CO - Certificate of Occupancy",
+      "aliases": [
+        "co",
+        "c.o.",
+        "c of o",
+        "certificate of occupancy",
+        "cert of occupancy",
+        "occupancy certificate",
+        "occupancy permit",
+        "certificate of occupation",
+        "certificate of occupency",
+        "certificate of ocupancy",
+        "final co",
+        "certifcate of occupancy",
+        "certficate of occupancy",
+        "tco",
+        "temporary co",
+        "temporary certificate of occupancy"
+      ],
+      "keywords": [
+        "resale",
+        "closing",
+        "town inspection",
+        "construction official",
+        "final inspection",
+        "new construction",
+        "permits",
+        "upload",
+        "document"
+      ],
+      "summary": "Town sign-off that a home is fit to live in, issued after new construction or major work. For a resale, many NJ towns require a CCO.",
+      "href": "/transaction?evidence=occupancy",
+      "where": "Transactions > Occupancy / resale",
+      "need": "agent",
+      "icon": "fa-house-circle-check"
+    },
+    {
+      "id": "certificate-of-continued-occupancy",
+      "kind": "term",
+      "label": "CCO - Certificate of Continued Occupancy",
+      "aliases": [
+        "cco",
+        "c.c.o.",
+        "certificate of continued occupancy",
+        "certificate of continuing occupancy",
+        "continued occupancy",
+        "resale certificate",
+        "resale inspection",
+        "resale co",
+        "municipal resale inspection",
+        "point of sale inspection",
+        "housing inspection",
+        "co for resale",
+        "resale certificate of occupancy",
+        "certificate of occupancy for resale",
+        "continued certificate of occupancy",
+        "certificate of habitability",
+        "habitability certificate",
+        "certificate of code compliance",
+        "rental co",
+        "rental certificate of occupancy",
+        "rental inspection"
+      ],
+      "keywords": [
+        "resale",
+        "closing",
+        "town inspection",
+        "municipal inspection",
+        "reinspection",
+        "rental",
+        "change of occupancy",
+        "certificate of occupancy"
+      ],
+      "summary": "A certificate some NJ towns require after a local inspection before a home is sold or re-rented.",
+      "href": "/transaction?evidence=occupancy",
+      "where": "Transactions > Occupancy / resale",
+      "need": "agent",
+      "icon": "fa-clipboard-check"
+    },
+    {
+      "id": "smoke-co-alarm-fire-extinguisher-certificate",
+      "kind": "term",
+      "label": "Smoke, CO alarm and fire extinguisher certificate",
+      "aliases": [
+        "co",
+        "co alarm",
+        "carbon monoxide",
+        "carbon monoxide alarm",
+        "carbon monoxide detector",
+        "smoke cert",
+        "smoke detector",
+        "smoke alarm",
+        "smoke and co certificate",
+        "fire extinguisher",
+        "fire certificate",
+        "sdcmafec",
+        "csdcmafec",
+        "csdcmapfec",
+        "csacmapfec"
+      ],
+      "keywords": [
+        "fire official",
+        "fire inspection",
+        "resale",
+        "rental",
+        "closing",
+        "one and two family",
+        "fire code"
+      ],
+      "summary": "NJ requires it before a one- or two-family home is sold or rented. The local fire official checks the smoke and CO alarms and extinguisher.",
+      "href": "/transaction?evidence=fire",
+      "where": "Transactions > Smoke / CO / fire",
+      "need": "agent",
+      "icon": "fa-fire-extinguisher"
+    },
+    {
+      "id": "open-permits",
+      "kind": "term",
+      "label": "Open permits and unpermitted work",
+      "aliases": [
+        "open permits",
+        "open building permits",
+        "unclosed permits",
+        "expired permits",
+        "permit history",
+        "permit search",
+        "permit closeout",
+        "building permits",
+        "construction permits",
+        "unpermitted work",
+        "work without permits",
+        "illegal addition"
+      ],
+      "keywords": [
+        "construction code",
+        "dca",
+        "certificate of approval",
+        "renovation",
+        "addition",
+        "seller disclosure",
+        "closing"
+      ],
+      "summary": "Permits that never got a final sign-off, or work done without a permit. Either can hold up a CO, a CCO or the closing.",
+      "href": "/transaction?evidence=occupancy",
+      "where": "Transactions > Occupancy / resale",
+      "need": "agent",
+      "icon": "fa-file-circle-exclamation"
+    },
+    {
+      "id": "open-code-violations",
+      "kind": "term",
+      "label": "Open code violations",
+      "aliases": [
+        "code violations",
+        "open violations",
+        "violation search",
+        "code enforcement",
+        "housing code violation",
+        "property maintenance violation",
+        "zoning violation",
+        "notice of violation"
+      ],
+      "keywords": [
+        "municipality",
+        "closing",
+        "fines",
+        "inspection",
+        "code official"
+      ],
+      "summary": "Unresolved town code or housing violations on the property. They often must be cleared or handled before closing.",
+      "href": "/transaction?evidence=violations",
+      "where": "Transactions > Open violations",
+      "need": "agent",
+      "icon": "fa-triangle-exclamation"
+    },
+    {
+      "id": "municipal-lien-search",
+      "kind": "term",
+      "label": "Municipal lien search",
+      "aliases": [
+        "municipal lien search",
+        "municipal search",
+        "lien search",
+        "tax search",
+        "tax and lien search",
+        "municipal clearance",
+        "municipal lien",
+        "municipal certificate",
+        "tax certification",
+        "official tax search"
+      ],
+      "keywords": [
+        "title",
+        "closing",
+        "unpaid taxes",
+        "water",
+        "sewer",
+        "special assessment",
+        "tax collector"
+      ],
+      "summary": "A search of town records for unpaid taxes, water and sewer bills and special assessments that must be paid at closing.",
+      "href": "/transaction?evidence=municipal-lien",
+      "where": "Transactions > Municipal lien / clearance",
+      "need": "agent",
+      "icon": "fa-magnifying-glass-dollar"
+    },
+    {
+      "id": "property-tax-status-at-closing",
+      "kind": "term",
+      "label": "Property tax status at closing",
+      "aliases": [
+        "tax status",
+        "property tax status",
+        "unpaid taxes",
+        "tax delinquency",
+        "delinquent taxes",
+        "back taxes",
+        "tax arrears",
+        "taxes current"
+      ],
+      "keywords": [
+        "closing",
+        "tax collector",
+        "quarterly taxes",
+        "proration",
+        "escrow"
+      ],
+      "summary": "Confirms the property taxes are paid up to date with the town tax collector before the home closes.",
+      "href": "/transaction?evidence=tax",
+      "where": "Transactions > Property tax",
+      "need": "agent",
+      "icon": "fa-receipt"
+    },
+    {
+      "id": "tax-sale-tax-lien",
+      "kind": "term",
+      "label": "Tax sale and tax lien certificates",
+      "aliases": [
+        "tax sale",
+        "tax lien",
+        "tax lien certificate",
+        "tax sale certificate",
+        "tsc",
+        "lien certificate",
+        "tax foreclosure",
+        "redemption"
+      ],
+      "keywords": [
+        "delinquent taxes",
+        "municipality",
+        "title",
+        "closing",
+        "redeem"
+      ],
+      "summary": "If taxes stay unpaid, a NJ town can sell a tax lien on the property at a tax sale. The lien must be paid off before closing.",
+      "href": "/transaction?evidence=tax",
+      "where": "Transactions > Property tax",
+      "need": "agent",
+      "icon": "fa-gavel"
+    },
+    {
+      "id": "water-sewer-final-reading",
+      "kind": "term",
+      "label": "Water and sewer final reading",
+      "aliases": [
+        "water final reading",
+        "sewer final reading",
+        "final water reading",
+        "final meter reading",
+        "final reading",
+        "water sewer",
+        "water bill",
+        "sewer bill",
+        "water and sewer balance",
+        "utility balance"
+      ],
+      "keywords": [
+        "utilities",
+        "utility authority",
+        "closing",
+        "meter",
+        "balance"
+      ],
+      "summary": "A last meter reading ordered before closing so the seller's water and sewer balance can be paid.",
+      "href": "/transaction?evidence=utilities",
+      "where": "Transactions > Water / sewer",
+      "need": "agent",
+      "icon": "fa-faucet-drip"
+    },
+    {
+      "id": "title-commitment",
+      "kind": "term",
+      "label": "Title commitment",
+      "aliases": [
+        "title commitment",
+        "title binder",
+        "title report",
+        "title search",
+        "title insurance",
+        "title exceptions",
+        "title work",
+        "commitment for title insurance"
+      ],
+      "keywords": [
+        "title company",
+        "closing",
+        "schedule b",
+        "exceptions",
+        "owner's policy",
+        "lender's policy"
+      ],
+      "summary": "The title company's report of what it will insure, what must be cleared first and any exceptions.",
+      "href": "/transaction",
+      "where": "Transactions > Readiness",
+      "need": "agent",
+      "icon": "fa-file-signature"
+    },
+    {
+      "id": "mortgage-payoff",
+      "kind": "term",
+      "label": "Mortgage payoff",
+      "aliases": [
+        "mortgage payoff",
+        "payoff letter",
+        "payoff statement",
+        "heloc payoff",
+        "loan payoff",
+        "lien payoff",
+        "home equity line"
+      ],
+      "keywords": [
+        "lender",
+        "closing",
+        "seller",
+        "title",
+        "heloc",
+        "satisfaction"
+      ],
+      "summary": "The exact amount needed to pay off the seller's mortgage or HELOC at closing. Order it early from each lender.",
+      "href": "/transaction?evidence=deed",
+      "where": "Transactions > Deed / recording",
+      "need": "agent",
+      "icon": "fa-money-check-dollar"
+    },
+    {
+      "id": "deed-and-recording",
+      "kind": "term",
+      "label": "Deed and recording",
+      "aliases": [
+        "deed",
+        "deed recording",
+        "recorded deed",
+        "deed book and page",
+        "vesting",
+        "ownership",
+        "owner of record",
+        "chain of title",
+        "county clerk",
+        "register of deeds"
+      ],
+      "keywords": [
+        "title",
+        "transfer",
+        "book and page",
+        "closing",
+        "county records"
+      ],
+      "summary": "The recorded document that transfers ownership. Check the owner of record and the deed book and page with the county.",
+      "href": "/transaction?evidence=deed",
+      "where": "Transactions > Deed / recording",
+      "need": "agent",
+      "icon": "fa-scroll"
+    },
+    {
+      "id": "judgment-and-lien-search",
+      "kind": "term",
+      "label": "Judgment and lien search",
+      "aliases": [
+        "judgment search",
+        "judgement search",
+        "judgment",
+        "judgement",
+        "judgment lien",
+        "docketed judgment",
+        "recorded liens",
+        "federal tax lien",
+        "irs lien",
+        "construction lien"
+      ],
+      "keywords": [
+        "title",
+        "attorney",
+        "courts",
+        "encumbrance",
+        "closing"
+      ],
+      "summary": "A search for court judgments and recorded liens against the owners that could attach to the property.",
+      "href": "/transaction?evidence=deed",
+      "where": "Transactions > Deed / recording",
+      "need": "agent",
+      "icon": "fa-scale-balanced"
+    },
+    {
+      "id": "lis-pendens",
+      "kind": "term",
+      "label": "Lis pendens",
+      "aliases": [
+        "lis pendens",
+        "notice of lis pendens",
+        "notice of pending action",
+        "pending lawsuit",
+        "foreclosure filing"
+      ],
+      "keywords": [
+        "title",
+        "foreclosure",
+        "county records",
+        "exceptions",
+        "lawsuit"
+      ],
+      "summary": "A recorded notice that a lawsuit about the property is pending, such as a foreclosure. Title must clear it before closing.",
+      "href": "/transaction?evidence=deed",
+      "where": "Transactions > Deed / recording",
+      "need": "agent",
+      "icon": "fa-file-contract"
+    },
+    {
+      "id": "closing-documents",
+      "kind": "term",
+      "label": "Closing documents",
+      "aliases": [
+        "closing documents",
+        "document vault",
+        "documents",
+        "upload a document",
+        "closing file",
+        "closing package",
+        "settlement statement",
+        "closing disclosure",
+        "alta statement",
+        "hud-1",
+        "co document",
+        "co copy",
+        "upload co",
+        "upload certificate of occupancy",
+        "cco document"
+      ],
+      "keywords": [
+        "pdf",
+        "private",
+        "upload",
+        "title commitment",
+        "inspection report",
+        "appraisal",
+        "hoa package",
+        "certificate of occupancy",
+        "cco"
+      ],
+      "summary": "One private file per deal for title, lender, inspection and certificate papers, including CO and CCO copies.",
+      "href": "/transaction",
+      "where": "Transactions > Documents",
+      "need": "pro_plus",
+      "icon": "fa-folder-open"
+    },
+    {
+      "id": "final-walk-through",
+      "kind": "term",
+      "label": "Final walk-through",
+      "aliases": [
+        "final walk-through",
+        "final walkthrough",
+        "walk-through",
+        "walkthrough",
+        "pre-closing walk-through"
+      ],
+      "keywords": [
+        "buyer",
+        "closing",
+        "condition",
+        "repairs",
+        "possession"
+      ],
+      "summary": "The buyer's last visit before closing to confirm the home's condition and that agreed repairs are done.",
+      "href": "/transaction",
+      "where": "Transactions > Readiness",
+      "need": "agent",
+      "icon": "fa-person-walking"
+    },
+    {
+      "id": "attorney-review",
+      "kind": "term",
+      "label": "Attorney review",
+      "aliases": [
+        "attorney review",
+        "attorney review period",
+        "three day attorney review",
+        "3 day attorney review",
+        "attorney review letter",
+        "contract review"
+      ],
+      "keywords": [
+        "contract",
+        "cancel",
+        "disapprove",
+        "amendment",
+        "sales contract",
+        "lawyer"
+      ],
+      "summary": "A 3 business day window after a NJ sales contract is signed when either side's attorney can cancel it or ask for changes.",
+      "href": "/transaction",
+      "where": "Transactions > Readiness",
+      "need": "agent",
+      "icon": "fa-user-tie"
+    },
+    {
+      "id": "home-inspection",
+      "kind": "term",
+      "label": "Home inspection",
+      "aliases": [
+        "home inspection",
+        "inspection",
+        "inspection report",
+        "radon test",
+        "termite inspection",
+        "wdi inspection",
+        "wood destroying insect"
+      ],
+      "keywords": [
+        "buyer",
+        "repairs",
+        "credit",
+        "contract",
+        "inspector"
+      ],
+      "summary": "The buyer's inspection of the home's condition. Track the report and any repair requests or credits.",
+      "href": "/transaction",
+      "where": "Transactions > Readiness",
+      "need": "agent",
+      "icon": "fa-magnifying-glass"
+    },
+    {
+      "id": "mortgage-commitment",
+      "kind": "term",
+      "label": "Mortgage commitment",
+      "aliases": [
+        "mortgage commitment",
+        "loan commitment",
+        "commitment letter",
+        "mortgage approval",
+        "loan approval",
+        "lender conditions"
+      ],
+      "keywords": [
+        "lender",
+        "financing",
+        "appraisal",
+        "closing",
+        "clear to close"
+      ],
+      "summary": "The lender's written loan approval, often with conditions that must be met before closing.",
+      "href": "/transaction",
+      "where": "Transactions > Readiness",
+      "need": "agent",
+      "icon": "fa-building-columns"
+    },
+    {
+      "id": "private-well-and-septic",
+      "kind": "term",
+      "label": "Private well and septic",
+      "aliases": [
+        "private well",
+        "well test",
+        "well water test",
+        "private well testing act",
+        "pwta",
+        "septic",
+        "septic inspection",
+        "septic system",
+        "cesspool"
+      ],
+      "keywords": [
+        "water test",
+        "closing",
+        "buyer",
+        "inspection"
+      ],
+      "summary": "Homes on a private well or septic have extra steps. NJ requires a well water test when the home is sold.",
+      "href": "/transaction",
+      "where": "Transactions > Readiness",
+      "need": "agent",
+      "icon": "fa-droplet"
+    },
+    {
+      "id": "oil-tank",
+      "kind": "term",
+      "label": "Oil tank",
+      "aliases": [
+        "oil tank",
+        "underground oil tank",
+        "buried oil tank",
+        "abandoned oil tank",
+        "heating oil tank",
+        "tank sweep",
+        "oil tank sweep",
+        "tank removal",
+        "ust"
+      ],
+      "keywords": [
+        "environmental",
+        "inspection",
+        "remediation",
+        "seller disclosure",
+        "closing"
+      ],
+      "summary": "A buried or unused heating oil tank. Buyers often order a tank sweep, and removal needs a town permit.",
+      "href": "/transaction",
+      "where": "Transactions > Readiness",
+      "need": "agent",
+      "icon": "fa-oil-can"
+    },
+    {
+      "id": "solar-lease-or-ppa",
+      "kind": "term",
+      "label": "Solar lease or PPA",
+      "aliases": [
+        "solar",
+        "solar panels",
+        "solar lease",
+        "ppa",
+        "power purchase agreement",
+        "solar loan",
+        "leased solar",
+        "solar transfer"
+      ],
+      "keywords": [
+        "payoff",
+        "transfer",
+        "seller disclosure",
+        "closing"
+      ],
+      "summary": "Panels may be owned, financed, leased or under a power purchase agreement (PPA). Leases and loans need a transfer or payoff plan.",
+      "href": "/transaction",
+      "where": "Transactions > Readiness",
+      "need": "agent",
+      "icon": "fa-solar-panel"
+    },
+    {
+      "id": "hoa-and-condo-documents",
+      "kind": "term",
+      "label": "HOA and condo documents",
+      "aliases": [
+        "hoa",
+        "condominium",
+        "homeowners association",
+        "hoa package",
+        "resale package",
+        "condo questionnaire",
+        "association dues",
+        "capital contribution"
+      ],
+      "keywords": [
+        "association",
+        "approval",
+        "balances",
+        "closing",
+        "certificate"
+      ],
+      "summary": "Associations may require a resale package, paid-up dues and approvals before a sale closes.",
+      "href": "/transaction",
+      "where": "Transactions > Readiness",
+      "need": "agent",
+      "icon": "fa-building"
+    },
+    {
+      "id": "environmental-and-deed-controls",
+      "kind": "term",
+      "label": "Environmental and deed controls",
+      "aliases": [
+        "environmental",
+        "deed notice",
+        "deed restriction",
+        "contamination",
+        "remediation",
+        "contaminated site",
+        "flood zone",
+        "flood risk",
+        "wetlands",
+        "no further action letter"
+      ],
+      "keywords": [
+        "dep",
+        "cleanup",
+        "lsrp",
+        "flood",
+        "closing"
+      ],
+      "summary": "Public records on contamination, cleanup, deed notices and flood risk that can affect the property or the sale.",
+      "href": "/transaction?evidence=environment",
+      "where": "Transactions > Environmental / deed controls",
+      "need": "agent",
+      "icon": "fa-leaf"
+    },
+    {
+      "id": "municipal-services-move-in",
+      "kind": "term",
+      "label": "Municipal services and move-in",
+      "aliases": [
+        "municipal services",
+        "trash pickup",
+        "garbage pickup",
+        "recycling",
+        "bulk pickup",
+        "move-in",
+        "new resident",
+        "town services"
+      ],
+      "keywords": [
+        "trash",
+        "town",
+        "new owner",
+        "closing"
+      ],
+      "summary": "Move-in details from the town, such as trash and recycling pickup, for the new owner.",
+      "href": "/transaction?evidence=municipal-services",
+      "where": "Transactions > Municipal services",
+      "need": "agent",
+      "icon": "fa-recycle"
+    },
+    {
+      "id": "seller-disclosures",
+      "kind": "term",
+      "label": "Seller disclosures",
+      "aliases": [
+        "seller disclosure",
+        "seller's disclosure",
+        "client disclosures",
+        "disclosures",
+        "property condition disclosure",
+        "disclosure questions"
+      ],
+      "keywords": [
+        "liens",
+        "oil tank",
+        "solar",
+        "tenants",
+        "estate",
+        "probate",
+        "bankruptcy",
+        "hoa"
+      ],
+      "summary": "Seller answers about liens, past work, oil tanks, solar, tenants and more, matched to the closing checklist.",
+      "href": "/transaction",
+      "where": "Transactions > Client disclosures",
+      "need": "agent",
+      "icon": "fa-clipboard-question"
+    },
+    {
+      "id": "closing-readiness",
+      "kind": "term",
+      "label": "Closing readiness checklist",
+      "aliases": [
+        "readiness",
+        "readiness score",
+        "closing checklist",
+        "closing readiness",
+        "checklist",
+        "clear to close",
+        "ctc"
+      ],
+      "keywords": [
+        "appraisal",
+        "inspection",
+        "title",
+        "milestones",
+        "open items",
+        "closing"
+      ],
+      "summary": "A checklist and score showing how many closing items are resolved for each deal.",
+      "href": "/transaction",
+      "where": "Transactions > Readiness",
+      "need": "agent",
+      "icon": "fa-list-check"
+    },
+    {
+      "id": "client-room",
+      "kind": "term",
+      "label": "Client room",
+      "aliases": [
+        "client room",
+        "client portal",
+        "share with client",
+        "client view",
+        "buyer portal",
+        "seller portal"
+      ],
+      "keywords": [
+        "milestones",
+        "shared documents",
+        "buyer",
+        "seller",
+        "share"
+      ],
+      "summary": "A shared page where your buyer or seller can follow milestones and shared documents.",
+      "href": "/transaction",
+      "where": "Transactions > Client room",
+      "need": "agent",
+      "icon": "fa-house-user"
+    },
+    {
+      "id": "transactions",
+      "kind": "page",
+      "label": "Transactions",
+      "aliases": [
+        "transactions",
+        "closings",
+        "deals",
+        "transaction coordinator",
+        "under contract",
+        "pending sales",
+        "closing tracker"
+      ],
+      "keywords": [
+        "closing",
+        "evidence",
+        "checklist",
+        "documents",
+        "timeline",
+        "tc"
+      ],
+      "summary": "Track each deal from contract to closing: evidence review, readiness checklist, documents and timeline.",
+      "href": "/transaction",
+      "where": "Agent Desk > Clients > Transactions",
+      "need": "agent",
+      "icon": "fa-file-signature"
+    },
+    {
+      "id": "tax-checkups",
+      "kind": "term",
+      "label": "Tax checkups for past clients",
+      "aliases": [
+        "tax checkup",
+        "checkup",
+        "annual checkup",
+        "past client checkup",
+        "assessment checkup",
+        "checkup link"
+      ],
+      "keywords": [
+        "past clients",
+        "sphere",
+        "appeal deadline",
+        "assessment",
+        "follow up"
+      ],
+      "summary": "Send past clients a yearly check on whether their assessment holds up and when they would need to appeal.",
+      "href": "/agent-desk#clients",
+      "where": "Agent Desk > Clients > Tax checkups",
+      "need": "agent",
+      "icon": "fa-stethoscope"
+    },
+    {
+      "id": "true-cost-card",
+      "kind": "term",
+      "label": "True Cost Card",
+      "aliases": [
+        "true cost",
+        "true cost card",
+        "cost of owning",
+        "ownership cost",
+        "monthly cost of owning"
+      ],
+      "keywords": [
+        "buyer",
+        "showing",
+        "tax bill",
+        "monthly payment",
+        "share"
+      ],
+      "summary": "A page to share with buyers: the real tax bill, what could change it after the sale and the full monthly cost.",
+      "href": "/agent-desk#clients/true-cost",
+      "where": "Agent Desk > Clients > True Cost Card",
+      "need": "agent",
+      "icon": "fa-sack-dollar"
+    },
+    {
+      "id": "property-tax-appeal",
+      "kind": "term",
+      "label": "Property tax appeal",
+      "aliases": [
+        "appeal",
+        "apeal",
+        "property tax appeal",
+        "tax appeal",
+        "assessment appeal",
+        "appeal my taxes",
+        "appeal deadline",
+        "petition of appeal",
+        "county board of taxation",
+        "tax court",
+        "tax grievance",
+        "lower my taxes",
+        "reduce property taxes",
+        "appeal savings estimator",
+        "is an appeal worth it"
+      ],
+      "keywords": [
+        "assessment",
+        "chapter 123",
+        "comparable sales",
+        "savings",
+        "april 1",
+        "evidence",
+        "january 15",
+        "may 1"
+      ],
+      "summary": "Ask the county tax board to lower your assessment. Usually due April 1 (May 1 in a revaluation year), or January 15 in Burlington, Gloucester and Monmouth.",
+      "href": "/appeal-savings-estimator",
+      "where": "Tools > Appeal savings estimator",
+      "icon": "fa-scale-unbalanced"
+    },
+    {
+      "id": "assessed-value",
+      "kind": "term",
+      "label": "Assessed value",
+      "aliases": [
+        "assessed value",
+        "assessment",
+        "tax assessment",
+        "property assessment",
+        "assessed valuation",
+        "tax assessor",
+        "assessor",
+        "land value",
+        "improvement value",
+        "net taxable value",
+        "assesment",
+        "assessement"
+      ],
+      "keywords": [
+        "market value",
+        "tax bill",
+        "equalization",
+        "ratio",
+        "assessment notice"
+      ],
+      "summary": "The value your town puts on a property for taxes. Your bill is roughly the assessed value times the local tax rate.",
+      "href": "/assessed-value-vs-market-value",
+      "where": "Guides > Assessed vs market value",
+      "icon": "fa-building-columns"
+    },
+    {
+      "id": "added-assessment",
+      "kind": "term",
+      "label": "Added assessment",
+      "aliases": [
+        "added assessment",
+        "added tax bill",
+        "added tax",
+        "added assesment",
+        "new construction tax",
+        "addition tax",
+        "improvement tax bill"
+      ],
+      "keywords": [
+        "renovation",
+        "addition",
+        "new construction",
+        "prorated",
+        "tax bill",
+        "improvement"
+      ],
+      "summary": "An extra tax bill for new construction or improvements finished during the year, prorated for the months after the work is done.",
+      "href": "/glossary/added-assessment/",
+      "where": "Glossary > Added assessment",
+      "icon": "fa-file-invoice-dollar"
+    },
+    {
+      "id": "omitted-assessment",
+      "kind": "term",
+      "label": "Omitted assessment",
+      "aliases": [
+        "omitted assessment",
+        "omitted added assessment",
+        "omitted tax"
+      ],
+      "keywords": [
+        "tax list",
+        "assessor",
+        "tax bill",
+        "improvement"
+      ],
+      "summary": "A tax bill for property or improvements that should have been assessed but were left off the regular tax list.",
+      "href": "/glossary/omitted-assessment/",
+      "where": "Glossary > Omitted assessment",
+      "icon": "fa-file-circle-exclamation"
+    },
+    {
+      "id": "directors-ratio",
+      "kind": "term",
+      "label": "Director's Ratio (equalization ratio)",
+      "aliases": [
+        "director's ratio",
+        "directors ratio",
+        "equalization ratio",
+        "equalization",
+        "average ratio",
+        "assessment ratio",
+        "sales ratio",
+        "county equalization",
+        "common level ratio"
+      ],
+      "keywords": [
+        "chapter 123",
+        "appeal",
+        "true value",
+        "assessment",
+        "division of taxation"
+      ],
+      "summary": "The state-certified average ratio of assessed value to market value in a town. Used in tax appeals and to split county taxes between towns.",
+      "href": "/glossary/directors-ratio/",
+      "where": "Glossary > Director's Ratio",
+      "icon": "fa-percent"
+    },
+    {
+      "id": "chapter-123",
+      "kind": "term",
+      "label": "Chapter 123",
+      "aliases": [
+        "chapter 123",
+        "ch 123",
+        "chapter123",
+        "chapter 123 ratio",
+        "chapter 123 test",
+        "ratio test"
+      ],
+      "keywords": [
+        "appeal",
+        "common level range",
+        "average ratio",
+        "true value",
+        "assessment"
+      ],
+      "summary": "NJ appeal rule that tests an assessment against market value using the town's average ratio and a 15% range.",
+      "href": "/glossary/chapter-123/",
+      "where": "Glossary > Chapter 123",
+      "icon": "fa-scale-balanced"
+    },
+    {
+      "id": "common-level-range",
+      "kind": "term",
+      "label": "Common level range",
+      "aliases": [
+        "common level range",
+        "common level",
+        "clr",
+        "upper limit",
+        "lower limit",
+        "15 percent range"
+      ],
+      "keywords": [
+        "chapter 123",
+        "appeal",
+        "average ratio",
+        "assessment"
+      ],
+      "summary": "The band 15% above and below a town's average ratio. If a home's ratio is above it, the tax board can lower the assessment.",
+      "href": "/glossary/common-level-range/",
+      "where": "Glossary > Common level range",
+      "icon": "fa-ruler-horizontal"
+    },
+    {
+      "id": "coefficient-of-deviation",
+      "kind": "term",
+      "label": "COD - Coefficient of Deviation",
+      "aliases": [
+        "cod",
+        "coefficient of deviation",
+        "coefficient of dispersion",
+        "assessment dispersion"
+      ],
+      "keywords": [
+        "uniformity",
+        "fairness",
+        "revaluation",
+        "ratio",
+        "assessment"
+      ],
+      "summary": "Measures how evenly a town assesses homes. A lower number means assessments are more uniform.",
+      "href": "/glossary/coefficient-of-deviation/",
+      "where": "Glossary > Coefficient of deviation",
+      "icon": "fa-chart-simple"
+    },
+    {
+      "id": "revaluation-and-reassessment",
+      "kind": "term",
+      "label": "Revaluation vs reassessment",
+      "aliases": [
+        "revaluation",
+        "reassessment",
+        "town revaluation",
+        "municipal revaluation",
+        "reassessment notice",
+        "revaluation letter",
+        "townwide reassessment",
+        "revalue"
+      ],
+      "keywords": [
+        "assessment",
+        "market value",
+        "tax rate",
+        "inspection",
+        "appeal"
+      ],
+      "summary": "Town-wide resets of assessments to market value. An outside firm usually does a revaluation; the assessor does a reassessment.",
+      "href": "/glossary/revaluation-vs-reassessment/",
+      "where": "Glossary > Revaluation vs reassessment",
+      "icon": "fa-arrows-rotate"
+    },
+    {
+      "id": "true-value-vs-assessed-value",
+      "kind": "term",
+      "label": "True value vs assessed value",
+      "aliases": [
+        "true value",
+        "market value",
+        "fair market value",
+        "equalized value",
+        "full value",
+        "true market value"
+      ],
+      "keywords": [
+        "assessment",
+        "equalization",
+        "ratio",
+        "appeal"
+      ],
+      "summary": "True value is what a home would likely sell for. Assessed value is the taxable value on the town's tax list.",
+      "href": "/glossary/true-value-vs-assessed-value/",
+      "where": "Glossary > True value vs assessed value",
+      "icon": "fa-equals"
+    },
+    {
+      "id": "effective-tax-rate",
+      "kind": "term",
+      "label": "Effective tax rate",
+      "aliases": [
+        "effective tax rate",
+        "effective rate",
+        "equalized tax rate",
+        "effective property tax rate"
+      ],
+      "keywords": [
+        "tax rate",
+        "market value",
+        "compare towns",
+        "burden"
+      ],
+      "summary": "Tax as a share of a home's market value. It makes tax burdens comparable between towns.",
+      "href": "/glossary/tax-rate-vs-effective-tax-rate/",
+      "where": "Glossary > Tax rate vs effective tax rate",
+      "icon": "fa-percent"
+    },
+    {
+      "id": "general-tax-rate",
+      "kind": "term",
+      "label": "Tax rate",
+      "aliases": [
+        "tax rate",
+        "general tax rate",
+        "property tax rate",
+        "local tax rate",
+        "tax rate per 100",
+        "mill rate",
+        "millage"
+      ],
+      "keywords": [
+        "levy",
+        "school tax",
+        "county tax",
+        "municipal budget",
+        "tax bill"
+      ],
+      "summary": "The yearly rate per $100 of assessed value that pays for town, school and county budgets.",
+      "href": "/property-tax-estimator",
+      "where": "Tools > Property tax estimator",
+      "icon": "fa-receipt"
+    },
+    {
+      "id": "anchor-applications",
+      "kind": "page",
+      "label": "ANCHOR Applications",
+      "aliases": [
+        "anchor",
+        "affordable new jersey communities for homeowners and renters",
+        "anchor program",
+        "anchor rebate",
+        "anchor benefit",
+        "anchor payment",
+        "anchor check",
+        "anchor status",
+        "homestead rebate",
+        "property tax rebate",
+        "renter rebate",
+        "property tax relief application"
+      ],
+      "keywords": [
+        "relief",
+        "rebate",
+        "homeowners",
+        "renters",
+        "income",
+        "application"
+      ],
+      "summary": "Prepare your ANCHOR form and track where it stands, then sign and mail it yourself. ANCHOR is NJ's yearly property tax relief for homeowners and renters.",
+      "href": "/anchor/applications/",
+      "where": "Menu > ANCHOR Applications",
+      "icon": "fa-file-circle-check"
+    },
+    {
+      "id": "senior-freeze",
+      "kind": "term",
+      "label": "Senior Freeze - Property Tax Reimbursement",
+      "aliases": [
+        "senior freeze",
+        "property tax reimbursement",
+        "ptr",
+        "senior tax freeze",
+        "tax freeze",
+        "freeze program",
+        "base year",
+        "senior freeze base year"
+      ],
+      "keywords": [
+        "seniors",
+        "disabled",
+        "reimbursement",
+        "65",
+        "pas-1",
+        "income limit"
+      ],
+      "summary": "Pays back eligible seniors and disabled homeowners for property tax increases above their base year amount.",
+      "href": "/senior-benefit-estimator",
+      "where": "Tools > Senior benefit estimator",
+      "icon": "fa-snowflake"
+    },
+    {
+      "id": "pas-1",
+      "kind": "term",
+      "label": "PAS-1 - Senior relief application",
+      "aliases": [
+        "pas-1",
+        "pas1",
+        "pas 1",
+        "pas-1 form",
+        "senior relief application",
+        "senior application"
+      ],
+      "keywords": [
+        "anchor",
+        "senior freeze",
+        "stay nj",
+        "deadline",
+        "seniors",
+        "disability"
+      ],
+      "summary": "The single NJ form for people 65 or older, or on Social Security disability, to apply for ANCHOR, Senior Freeze and Stay NJ.",
+      "href": "/senior-benefit-estimator",
+      "where": "Tools > Senior benefit estimator",
+      "icon": "fa-file-pen"
+    },
+    {
+      "id": "stay-nj",
+      "kind": "term",
+      "label": "Stay NJ - Senior property tax credit",
+      "aliases": [
+        "stay nj",
+        "staynj",
+        "stay new jersey",
+        "stay nj credit",
+        "senior property tax credit"
+      ],
+      "keywords": [
+        "seniors",
+        "65",
+        "credit",
+        "relief",
+        "pas-1"
+      ],
+      "summary": "A state credit for eligible homeowners 65 or older that can pay part of the property tax bill, up to a yearly cap.",
+      "href": "/benefit-stacking",
+      "where": "Tools > Benefit stacking calculator",
+      "icon": "fa-person-cane"
+    },
+    {
+      "id": "veterans-deduction",
+      "kind": "term",
+      "label": "Veterans property tax deduction",
+      "aliases": [
+        "veterans deduction",
+        "veteran deduction",
+        "veteran tax deduction",
+        "veterans",
+        "disabled veteran exemption",
+        "100% disabled veteran",
+        "military",
+        "surviving spouse"
+      ],
+      "keywords": [
+        "deduction",
+        "exemption",
+        "tax assessor",
+        "relief",
+        "250"
+      ],
+      "summary": "A $250 yearly deduction for eligible NJ veterans or surviving spouses. A 100% service-connected disability can mean a full exemption.",
+      "href": "/benefit-stacking",
+      "where": "Tools > Benefit stacking calculator",
+      "icon": "fa-medal"
+    },
+    {
+      "id": "senior-and-disabled-deduction",
+      "kind": "term",
+      "label": "Senior and disabled person deduction",
+      "aliases": [
+        "senior deduction",
+        "senior citizen deduction",
+        "disabled person deduction",
+        "disabled deduction",
+        "$250 deduction",
+        "250 deduction"
+      ],
+      "keywords": [
+        "seniors",
+        "65",
+        "disabled",
+        "low income",
+        "tax assessor",
+        "relief",
+        "tax collector"
+      ],
+      "summary": "A $250 yearly deduction for low-income homeowners who are 65 or older or permanently disabled. Apply through your town tax office.",
+      "href": "/benefit-stacking",
+      "where": "Tools > Benefit stacking calculator",
+      "icon": "fa-hand-holding-dollar"
+    },
+    {
+      "id": "abatement-vs-exemption",
+      "kind": "term",
+      "label": "Tax abatement vs exemption",
+      "aliases": [
+        "abatement",
+        "tax abatement",
+        "exemption",
+        "tax exemption",
+        "exempt property",
+        "abatement vs exemption"
+      ],
+      "keywords": [
+        "pilot",
+        "redevelopment",
+        "improvement",
+        "assessment"
+      ],
+      "summary": "An exemption removes value from taxation. An abatement lowers or phases in the tax under a specific program.",
+      "href": "/glossary/abatement-vs-exemption/",
+      "where": "Glossary > Abatement vs exemption",
+      "icon": "fa-circle-minus"
+    },
+    {
+      "id": "pilot",
+      "kind": "term",
+      "label": "PILOT - Payment in Lieu of Taxes",
+      "aliases": [
+        "pilot",
+        "p.i.l.o.t.",
+        "payment in lieu of taxes",
+        "pilot agreement",
+        "pilot program",
+        "long term tax exemption"
+      ],
+      "keywords": [
+        "redevelopment",
+        "abatement",
+        "exemption",
+        "developer"
+      ],
+      "summary": "A negotiated payment an approved project makes instead of regular property taxes, often under a redevelopment plan.",
+      "href": "/glossary/pilot-agreement/",
+      "where": "Glossary > PILOT agreement",
+      "icon": "fa-handshake"
+    },
+    {
+      "id": "farmland-assessment",
+      "kind": "term",
+      "label": "Farmland assessment",
+      "aliases": [
+        "farmland assessment",
+        "farmland",
+        "farm assessment",
+        "farm qualified",
+        "qualified farm",
+        "agricultural assessment",
+        "rollback taxes"
+      ],
+      "keywords": [
+        "farm",
+        "acreage",
+        "agriculture",
+        "assessment"
+      ],
+      "summary": "A lower assessment for land actively farmed that meets NJ acreage and income rules. A change in use can bring rollback taxes.",
+      "href": "/glossary/farmland-assessment/",
+      "where": "Glossary > Farmland assessment",
+      "icon": "fa-tractor"
+    },
+    {
+      "id": "sr-1a",
+      "kind": "term",
+      "label": "SR-1A sales record",
+      "aliases": [
+        "sr-1a",
+        "sr1a",
+        "sr 1a",
+        "sr-1a form",
+        "sales ratio data",
+        "deed sale record",
+        "nu code",
+        "non-usable sale"
+      ],
+      "keywords": [
+        "sales",
+        "division of taxation",
+        "ratio",
+        "deed",
+        "assessment"
+      ],
+      "summary": "The state's record of each NJ property sale. The Division of Taxation uses it to compare sale prices with assessments.",
+      "href": "/glossary/sr1a/",
+      "where": "Glossary > SR-1A",
+      "icon": "fa-file-lines"
+    },
+    {
+      "id": "mod-iv",
+      "kind": "term",
+      "label": "MOD-IV assessment records",
+      "aliases": [
+        "mod-iv",
+        "mod iv",
+        "modiv",
+        "mod 4",
+        "tax list",
+        "assessment roll",
+        "tax roll",
+        "property classification"
+      ],
+      "keywords": [
+        "assessment",
+        "owner",
+        "block and lot",
+        "tax records",
+        "data"
+      ],
+      "summary": "NJ's standard format for town assessment records, including owner, assessed values, property class, block and lot.",
+      "href": "/glossary/mod-iv/",
+      "where": "Glossary > MOD-IV",
+      "icon": "fa-table"
+    },
+    {
+      "id": "block-lot-qualifier",
+      "kind": "term",
+      "label": "Block, lot and qualifier",
+      "aliases": [
+        "block and lot",
+        "block lot",
+        "block number",
+        "lot number",
+        "qualifier",
+        "tax map",
+        "parcel number",
+        "parcel id",
+        "apn"
+      ],
+      "keywords": [
+        "parcel",
+        "tax bill",
+        "condo",
+        "deed",
+        "property record"
+      ],
+      "summary": "The tax map numbers that identify a NJ parcel. A qualifier marks a unit within a lot, such as a condo.",
+      "href": "/block-lot-qualifier",
+      "where": "Guides > Block, lot and qualifier",
+      "icon": "fa-map"
+    },
+    {
+      "id": "realty-transfer-fee",
+      "kind": "term",
+      "label": "RTF - Realty Transfer Fee",
+      "aliases": [
+        "rtf",
+        "realty transfer fee",
+        "transfer fee",
+        "transfer tax",
+        "mansion tax",
+        "graduated percent fee",
+        "rtf-1",
+        "deed transfer tax",
+        "realty transfer fee calculator"
+      ],
+      "keywords": [
+        "seller",
+        "closing costs",
+        "deed",
+        "sale price",
+        "calculator"
+      ],
+      "summary": "A NJ fee paid when a deed is recorded, based on the sale price. The seller usually pays it; some sellers get a partial exemption.",
+      "href": "/realty-transfer-fee-calculator",
+      "where": "Tools > Realty transfer fee calculator",
+      "icon": "fa-money-bill-transfer"
+    },
+    {
+      "id": "property-tax-bill",
+      "kind": "term",
+      "label": "Property tax bill",
+      "aliases": [
+        "tax bill",
+        "property tax bill",
+        "read my tax bill",
+        "tax statement",
+        "preliminary tax bill",
+        "final tax bill",
+        "estimated tax bill"
+      ],
+      "keywords": [
+        "assessed value",
+        "tax rate",
+        "deductions",
+        "quarterly",
+        "block and lot"
+      ],
+      "summary": "How to read a NJ tax bill: assessed value, tax rate, deductions, quarterly payments and block and lot.",
+      "href": "/how-to-read-nj-property-tax-bill",
+      "where": "Guides > How to read a NJ tax bill",
+      "icon": "fa-file-invoice"
+    },
+    {
+      "id": "property-tax-due-dates",
+      "kind": "term",
+      "label": "Property tax due dates",
+      "aliases": [
+        "tax due dates",
+        "property tax due date",
+        "when are taxes due",
+        "quarterly taxes",
+        "tax calendar",
+        "tax deadlines",
+        "grace period",
+        "late taxes"
+      ],
+      "keywords": [
+        "february 1",
+        "may 1",
+        "august 1",
+        "november 1",
+        "quarterly",
+        "deadline"
+      ],
+      "summary": "NJ property taxes are due quarterly on Feb 1, May 1, Aug 1 and Nov 1. Many towns allow a grace period of up to 10 days.",
+      "href": "/nj-property-tax-calendar",
+      "where": "Guides > NJ property tax calendar",
+      "icon": "fa-calendar-days"
+    },
+    {
+      "id": "watchdog-score",
+      "kind": "term",
+      "label": "Watchdog Score",
+      "aliases": [
+        "watchdog score",
+        "score",
+        "property score",
+        "my score",
+        "tax score"
+      ],
+      "keywords": [
+        "robust",
+        "rating",
+        "overassessment",
+        "burden",
+        "uniformity"
+      ],
+      "summary": "The Watchdog Score, powered by the ROBUST Framework, sums up how a property's taxes and assessment hold up.",
+      "href": "/robust/",
+      "where": "Menu > ROBUST Framework",
+      "icon": "fa-gauge"
+    },
+    {
+      "id": "property-alerts",
+      "kind": "term",
+      "label": "Property alerts",
+      "aliases": [
+        "property alerts",
+        "alerts",
+        "alert settings",
+        "notifications",
+        "email alerts",
+        "change alerts",
+        "pause alerts"
+      ],
+      "keywords": [
+        "score changes",
+        "tax changes",
+        "assessment changes",
+        "appeal deadlines",
+        "saved properties"
+      ],
+      "summary": "Choose which score, tax, assessment and deadline changes alert you for each saved property.",
+      "href": "/pulse",
+      "where": "Property Pulse > Follow what matters",
+      "icon": "fa-bell"
+    },
+    {
+      "id": "home-improvement-exemption",
+      "kind": "page",
+      "label": "Home improvement exemption (5 year)",
+      "aliases": [
+        "home improvement exemption",
+        "home improvement abatement",
+        "5 year exemption",
+        "five year exemption",
+        "5 year abatement",
+        "five year abatement",
+        "renovation exemption"
+      ],
+      "keywords": [
+        "renovation",
+        "addition",
+        "added assessment",
+        "30 days",
+        "tax assessor"
+      ],
+      "summary": "Some NJ towns exempt part of a home improvement's added value for 5 years if you file with the assessor within 30 days.",
+      "href": "/home-improvement-abatement",
+      "where": "Guides > Home improvement exemption",
+      "icon": "fa-hammer"
+    },
+    {
+      "id": "added-assessments-guide",
+      "kind": "page",
+      "label": "Added assessments guide",
+      "aliases": [
+        "added assessments guide",
+        "added assessment notice",
+        "added assessment after renovation",
+        "why did i get an added assessment"
+      ],
+      "keywords": [
+        "added assessment",
+        "renovation",
+        "new construction",
+        "notice",
+        "forecast"
+      ],
+      "summary": "What an added assessment is, why renovations or new construction can trigger one and what to check on the notice.",
+      "href": "/added-assessments",
+      "where": "Guides > Added assessments",
+      "icon": "fa-file-invoice-dollar"
+    },
+    {
+      "id": "revaluation-reassessment-guide",
+      "kind": "page",
+      "label": "Revaluation and reassessment guide",
+      "aliases": [
+        "revaluation guide",
+        "reassessment guide",
+        "revaluation and reassessment guide",
+        "my town is doing a revaluation"
+      ],
+      "keywords": [
+        "revaluation",
+        "reassessment",
+        "assessment",
+        "inspection",
+        "appeal"
+      ],
+      "summary": "What a NJ revaluation or reassessment means for homeowners, why assessments change and what to review.",
+      "href": "/revaluation-reassessment-guide",
+      "where": "Guides > Revaluation and reassessment",
+      "icon": "fa-arrows-rotate"
+    },
+    {
+      "id": "dashboard",
+      "kind": "page",
+      "label": "Dashboard",
+      "aliases": [
+        "dashboard",
+        "my dashboard",
+        "overview",
+        "home screen"
+      ],
+      "keywords": [
+        "saved homes",
+        "changes",
+        "next steps"
+      ],
+      "summary": "Your daily overview of saved homes, recent changes and what to do next.",
+      "href": "/dashboard",
+      "where": "Menu > Dashboard",
+      "icon": "fa-table-columns"
+    },
+    {
+      "id": "property-lookup",
+      "kind": "page",
+      "label": "Property Lookup",
+      "aliases": [
+        "property lookup",
+        "property search",
+        "address search",
+        "search an address",
+        "look up an address",
+        "find a property",
+        "owner lookup",
+        "lookup"
+      ],
+      "keywords": [
+        "address",
+        "taxes",
+        "assessment",
+        "sales",
+        "watchdog score"
+      ],
+      "summary": "Search any New Jersey address to see taxes, assessments, sales and the Watchdog Score.",
+      "href": "/",
+      "where": "Menu > Property Lookup",
+      "icon": "fa-magnifying-glass-location"
+    },
+    {
+      "id": "property-home",
+      "kind": "page",
+      "label": "Property Home",
+      "aliases": [
+        "property home",
+        "my homes",
+        "saved homes",
+        "saved properties",
+        "my properties",
+        "claim my home",
+        "watchlist",
+        "home"
+      ],
+      "keywords": [
+        "score",
+        "taxes",
+        "saved",
+        "follow"
+      ],
+      "summary": "Your saved homes in one place, with their scores, taxes and what changed.",
+      "href": "/home",
+      "where": "Menu > Property Home",
+      "icon": "fa-house"
+    },
+    {
+      "id": "property-pulse",
+      "kind": "page",
+      "label": "Property Pulse",
+      "aliases": [
+        "property pulse",
+        "pulse",
+        "what changed",
+        "activity feed",
+        "property changes"
+      ],
+      "keywords": [
+        "alerts",
+        "calendar",
+        "saved properties",
+        "updates"
+      ],
+      "summary": "What is changing for your saved properties, with a calendar of key dates and alert controls.",
+      "href": "/pulse",
+      "where": "Menu > Property Pulse",
+      "icon": "fa-wave-square"
+    },
+    {
+      "id": "town-compare",
+      "kind": "page",
+      "label": "Town Compare",
+      "aliases": [
+        "town compare",
+        "compare towns",
+        "town comparison",
+        "compare municipalities",
+        "municipality comparison",
+        "best towns for taxes"
+      ],
+      "keywords": [
+        "budget pressure",
+        "levy growth",
+        "tax rate history",
+        "uniformity",
+        "municipality"
+      ],
+      "summary": "Compare up to four NJ towns on assessment fairness, budget pressure, levy growth and tax rate history.",
+      "href": "/town-compare",
+      "where": "Menu > Town Compare",
+      "icon": "fa-code-compare"
+    },
+    {
+      "id": "uniformity-index",
+      "kind": "page",
+      "label": "Assessment Uniformity Index",
+      "aliases": [
+        "uniformity index",
+        "assessment uniformity",
+        "fairness",
+        "assessment fairness",
+        "fair assessments",
+        "town fairness",
+        "uniformity"
+      ],
+      "keywords": [
+        "cod",
+        "coefficient of deviation",
+        "revaluation",
+        "sales",
+        "municipality"
+      ],
+      "summary": "See how evenly each NJ town assesses homes, using the state COD and verified sales.",
+      "href": "/fairness",
+      "where": "Tools > Uniformity index",
+      "icon": "fa-scale-balanced"
+    },
+    {
+      "id": "robust-framework",
+      "kind": "page",
+      "label": "ROBUST Framework",
+      "aliases": [
+        "robust",
+        "robust framework",
+        "score methodology",
+        "how the score works",
+        "six dimensions"
+      ],
+      "keywords": [
+        "watchdog score",
+        "recourse",
+        "overassessment",
+        "burden",
+        "uniformity",
+        "stability",
+        "trajectory"
+      ],
+      "summary": "The Watchdog Score, powered by the ROBUST Framework: six evidence-backed checks on a property's tax position.",
+      "href": "/robust/",
+      "where": "Menu > ROBUST Framework",
+      "icon": "fa-gauge-high"
+    },
+    {
+      "id": "robust-recourse",
+      "kind": "page",
+      "label": "Recourse (ROBUST R)",
+      "aliases": [
+        "recourse",
+        "robust r",
+        "appeal odds",
+        "appeal chances"
+      ],
+      "keywords": [
+        "appeal",
+        "county",
+        "evidence",
+        "watchdog score"
+      ],
+      "summary": "How realistic an appeal looks, based on county appeal history and the strength of the evidence.",
+      "href": "/robust/recourse",
+      "where": "ROBUST Framework > Recourse",
+      "icon": "fa-route"
+    },
+    {
+      "id": "robust-overassessment-position",
+      "kind": "page",
+      "label": "Overassessment Position (ROBUST O)",
+      "aliases": [
+        "overassessment position",
+        "overassessment",
+        "over assessed",
+        "overassessed",
+        "robust o",
+        "am i over assessed"
+      ],
+      "keywords": [
+        "assessed value",
+        "supported value",
+        "chapter 123",
+        "watchdog score"
+      ],
+      "summary": "Whether a property looks over-assessed, comparing its assessment with supported value and Chapter 123.",
+      "href": "/robust/overassessment-position",
+      "where": "ROBUST Framework > Overassessment Position",
+      "icon": "fa-arrow-up-wide-short"
+    },
+    {
+      "id": "robust-burden",
+      "kind": "page",
+      "label": "Burden (ROBUST B)",
+      "aliases": [
+        "burden",
+        "tax burden",
+        "robust b",
+        "property tax burden"
+      ],
+      "keywords": [
+        "market value",
+        "annual tax",
+        "watchdog score"
+      ],
+      "summary": "How heavy the yearly tax is compared with the home's supported market value.",
+      "href": "/robust/burden",
+      "where": "ROBUST Framework > Burden",
+      "icon": "fa-weight-hanging"
+    },
+    {
+      "id": "robust-uniformity",
+      "kind": "page",
+      "label": "Uniformity (ROBUST U)",
+      "aliases": [
+        "robust u",
+        "uniformity score",
+        "assessment uniformity score"
+      ],
+      "keywords": [
+        "cod",
+        "coefficient of deviation",
+        "watchdog score",
+        "town"
+      ],
+      "summary": "How evenly a town assesses homes, based on the state coefficient of deviation, and how that feeds the Watchdog Score.",
+      "href": "/robust/uniformity",
+      "where": "ROBUST Framework > Uniformity",
+      "icon": "fa-scale-balanced"
+    },
+    {
+      "id": "robust-stability",
+      "kind": "page",
+      "label": "Stability (ROBUST S)",
+      "aliases": [
+        "stability",
+        "robust s",
+        "revaluation risk",
+        "reassessment risk",
+        "ratio drift"
+      ],
+      "keywords": [
+        "revaluation",
+        "uniformity",
+        "watchdog score"
+      ],
+      "summary": "How likely assessments are to shift, based on revaluation pressure, ratio drift and town uniformity.",
+      "href": "/robust/stability",
+      "where": "ROBUST Framework > Stability",
+      "icon": "fa-shield-halved"
+    },
+    {
+      "id": "robust-trajectory",
+      "kind": "page",
+      "label": "Trajectory (ROBUST T)",
+      "aliases": [
+        "trajectory",
+        "robust t",
+        "assessment trend"
+      ],
+      "keywords": [
+        "sales",
+        "ratio",
+        "watchdog score"
+      ],
+      "summary": "Where a property's assessment is heading compared with verified sales and town ratios.",
+      "href": "/robust/trajectory",
+      "where": "ROBUST Framework > Trajectory",
+      "icon": "fa-arrow-trend-up"
+    },
+    {
+      "id": "watchdog-intelligence",
+      "kind": "page",
+      "label": "Watchdog Intelligence",
+      "aliases": [
+        "watchdog intelligence",
+        "intelligence",
+        "ask watchdog",
+        "analyst",
+        "watchdog intelligence voice",
+        "voice brief",
+        "watchdog intelligence brief",
+        "ask a question"
+      ],
+      "keywords": [
+        "answers",
+        "sources",
+        "listen",
+        "voice",
+        "chat"
+      ],
+      "summary": "Ask questions about NJ properties and get sourced answers. Read them or listen with Watchdog Intelligence Voice.",
+      "href": "/intelligence",
+      "where": "Dashboard > Watchdog Intelligence",
+      "need": "pro",
+      "icon": "fa-brain"
+    },
+    {
+      "id": "daily-intelligence",
+      "kind": "page",
+      "label": "Today",
+      "aliases": [
+        "today",
+        "daily intelligence",
+        "daily brief",
+        "review queue",
+        "inbox"
+      ],
+      "keywords": [
+        "scheduled",
+        "follow up",
+        "changes"
+      ],
+      "summary": "Watchdog Intelligence checks that run on a schedule and line up what needs your review, even after you close the browser.",
+      "href": "/intelligence/daily/",
+      "where": "Watchdog Intelligence > Today",
+      "need": "pro_plus",
+      "icon": "fa-inbox"
+    },
+    {
+      "id": "data-center",
+      "kind": "page",
+      "label": "Data Center",
+      "aliases": [
+        "data center",
+        "data catalog",
+        "data sources",
+        "datasets",
+        "source freshness",
+        "data coverage"
+      ],
+      "keywords": [
+        "export",
+        "monitoring",
+        "public records",
+        "markers"
+      ],
+      "summary": "Browse Watchdog's NJ data sources, coverage and freshness. Pro+ members can build, export and monitor datasets.",
+      "href": "/data-center",
+      "where": "Menu > Data Center",
+      "icon": "fa-database"
+    },
+    {
+      "id": "data-workbench",
+      "kind": "page",
+      "label": "Data Workbench",
+      "aliases": [
+        "data workbench",
+        "workbench",
+        "property lists",
+        "build a list",
+        "list builder",
+        "export a list",
+        "filter properties"
+      ],
+      "keywords": [
+        "export",
+        "csv",
+        "prospecting",
+        "research"
+      ],
+      "summary": "Build, filter and export lists of NJ properties from public records.",
+      "href": "/data-workbench",
+      "where": "Agent Desk > Research > Data Workbench",
+      "need": "agent",
+      "icon": "fa-table-list"
+    },
+    {
+      "id": "appeal-scanner",
+      "kind": "page",
+      "label": "Appeal Scanner",
+      "aliases": [
+        "appeal scanner",
+        "scanner",
+        "appeal prospects",
+        "over-assessed homes",
+        "find over-assessed homes",
+        "prospect scanner"
+      ],
+      "keywords": [
+        "appeal",
+        "overassessment",
+        "prospecting",
+        "research"
+      ],
+      "summary": "Find homes that look over-assessed and may be good appeal candidates.",
+      "href": "/scan",
+      "where": "Agent Desk > Research > Appeal Scanner",
+      "need": "pro_plus",
+      "icon": "fa-magnifying-glass-chart"
+    },
+    {
+      "id": "agent-desk",
+      "kind": "page",
+      "label": "Agent Desk",
+      "aliases": [
+        "agent desk",
+        "desk",
+        "who to call",
+        "call list",
+        "agent home",
+        "monday email",
+        "outreach queue"
+      ],
+      "keywords": [
+        "agent",
+        "follow up",
+        "due today",
+        "sphere"
+      ],
+      "summary": "Your agent home base: who to reach out to today, what is due and your Monday email.",
+      "href": "/agent-desk",
+      "where": "Menu > Agent Desk",
+      "need": "agent",
+      "icon": "fa-briefcase"
+    },
+    {
+      "id": "agent-desk-clients",
+      "kind": "term",
+      "label": "Clients and deals",
+      "aliases": [
+        "clients",
+        "my clients",
+        "past clients",
+        "sphere",
+        "your people",
+        "your deals"
+      ],
+      "keywords": [
+        "contacts",
+        "transactions",
+        "tax checkups",
+        "deals"
+      ],
+      "summary": "Your people, their homes and their deals, plus tax checkups for past clients.",
+      "href": "/agent-desk#clients",
+      "where": "Agent Desk > Clients",
+      "need": "agent",
+      "icon": "fa-user-group"
+    },
+    {
+      "id": "agent-desk-farm",
+      "kind": "term",
+      "label": "Farm lists and territories",
+      "aliases": [
+        "farming",
+        "farm lists",
+        "territories",
+        "geographic farm",
+        "neighborhood farm"
+      ],
+      "keywords": [
+        "farm map",
+        "farm builder",
+        "neighborhood",
+        "prospecting"
+      ],
+      "summary": "The neighborhoods you want to own: farm lists, territories and the homes inside them.",
+      "href": "/agent-desk#farm",
+      "where": "Agent Desk > Farm",
+      "need": "agent",
+      "icon": "fa-map-location-dot"
+    },
+    {
+      "id": "listing-prep",
+      "kind": "page",
+      "label": "Listing Prep",
+      "aliases": [
+        "listing prep",
+        "listing prep pack",
+        "listing presentation",
+        "listing appointment",
+        "seller presentation"
+      ],
+      "keywords": [
+        "seller",
+        "tax context",
+        "municipal diligence",
+        "listing"
+      ],
+      "summary": "Start with one NJ address and keep property facts, tax context, seller notes and town diligence together.",
+      "href": "/agent/listing-prep",
+      "where": "Agent Desk > Clients > Listing Prep",
+      "need": "agent",
+      "icon": "fa-clipboard-list"
+    },
+    {
+      "id": "buyer-shortlists",
+      "kind": "page",
+      "label": "Buyer Shortlists",
+      "aliases": [
+        "buyer shortlists",
+        "shortlists",
+        "buyer workspace",
+        "compare homes",
+        "home shortlist"
+      ],
+      "keywords": [
+        "buyer",
+        "notes",
+        "taxes",
+        "transactions"
+      ],
+      "summary": "Keep a buyer's candidate homes together, compare taxes and assessments, and move the chosen home into Transactions.",
+      "href": "/agent/buyers",
+      "where": "Agent Desk > Clients > Buyer Shortlists",
+      "need": "agent",
+      "icon": "fa-list-ul"
+    },
+    {
+      "id": "open-houses",
+      "kind": "page",
+      "label": "Open Houses",
+      "aliases": [
+        "open houses",
+        "open house sign in",
+        "qr code",
+        "sign in sheet",
+        "visitor check-in",
+        "lead capture"
+      ],
+      "keywords": [
+        "leads",
+        "check-in",
+        "visitors",
+        "qr"
+      ],
+      "summary": "Create a QR check-in link for an open house and keep consented visitors with the event.",
+      "href": "/agent/open-house",
+      "where": "Agent Desk > Clients > Open Houses",
+      "need": "agent",
+      "icon": "fa-qrcode"
+    },
+    {
+      "id": "crm-contact-cleanup",
+      "kind": "page",
+      "label": "Contacts (CRM cleanup)",
+      "aliases": [
+        "contacts",
+        "crm",
+        "crm contact cleanup",
+        "contact cleanup",
+        "import contacts",
+        "clean contact list",
+        "csv upload"
+      ],
+      "keywords": [
+        "csv",
+        "database",
+        "import",
+        "sphere"
+      ],
+      "summary": "Upload a contact file, fix the messy parts and move a clean list to wherever you work next.",
+      "href": "/agent/contacts",
+      "where": "Agent Desk > Clients > Contacts",
+      "need": "agent",
+      "icon": "fa-address-book"
+    },
+    {
+      "id": "agent-training",
+      "kind": "page",
+      "label": "Training and how-tos",
+      "aliases": [
+        "training",
+        "how-tos",
+        "tutorial",
+        "getting started",
+        "learn watchdog",
+        "agent training"
+      ],
+      "keywords": [
+        "agent",
+        "pro+",
+        "workflows",
+        "evidence"
+      ],
+      "summary": "A guided walk-through of Agent and Pro+ workflows and how to read Watchdog evidence.",
+      "href": "/agent/training",
+      "where": "Agent Desk > Training and how-tos",
+      "icon": "fa-chalkboard-user"
+    },
+    {
+      "id": "farm-map",
+      "kind": "page",
+      "label": "Farm Map",
+      "aliases": [
+        "farm map",
+        "draw a farm",
+        "draw streets",
+        "map a farm"
+      ],
+      "keywords": [
+        "farm",
+        "parcels",
+        "neighborhood",
+        "prospecting"
+      ],
+      "summary": "Search an address or town, draw the streets you want, then narrow the homes with Watchdog data.",
+      "href": "/farm-map",
+      "where": "Agent Desk > Farm > Farm Map",
+      "need": "agent",
+      "icon": "fa-map-location-dot"
+    },
+    {
+      "id": "farm-builder",
+      "kind": "page",
+      "label": "Farm Builder",
+      "aliases": [
+        "farm builder",
+        "advanced farm",
+        "build a farm",
+        "statewide farm"
+      ],
+      "keywords": [
+        "farm",
+        "parcels",
+        "filters",
+        "prospecting"
+      ],
+      "summary": "Build a farm from statewide NJ parcel data, then narrow it with Watchdog filters.",
+      "href": "/farm-builder",
+      "where": "Agent Desk > Farm > Farm Builder",
+      "need": "agent",
+      "icon": "fa-layer-group"
+    },
+    {
+      "id": "postcard-studio",
+      "kind": "page",
+      "label": "Postcard Studio",
+      "aliases": [
+        "postcard studio",
+        "postcards",
+        "mailers",
+        "direct mail",
+        "just sold postcard",
+        "farm postcard",
+        "print and mail"
+      ],
+      "keywords": [
+        "marketing",
+        "mailing",
+        "audience",
+        "farm"
+      ],
+      "summary": "Design, proof and mail 6 x 8.5 postcards to a saved audience. You only pay for cards that can be mailed.",
+      "href": "/marketing-studio/postcards",
+      "where": "Agent Desk > Marketing > Postcard Studio",
+      "need": "agent",
+      "icon": "fa-envelopes-bulk"
+    },
+    {
+      "id": "email-updates",
+      "kind": "page",
+      "label": "Email Updates",
+      "aliases": [
+        "email updates",
+        "newsletters",
+        "email campaign",
+        "market update email",
+        "email list",
+        "kit"
+      ],
+      "keywords": [
+        "marketing",
+        "sphere",
+        "broadcast",
+        "listing news"
+      ],
+      "summary": "Write market updates and newsletters once and send them to your whole list through your Kit account.",
+      "href": "/newsletter-studio",
+      "where": "Agent Desk > Marketing > Email Updates",
+      "need": "agent",
+      "icon": "fa-envelope"
+    },
+    {
+      "id": "report-builder",
+      "kind": "page",
+      "label": "Report Builder",
+      "aliases": [
+        "report builder",
+        "reports",
+        "build a report",
+        "pdf report",
+        "client report",
+        "property report"
+      ],
+      "keywords": [
+        "pdf",
+        "share",
+        "evidence",
+        "deliverable"
+      ],
+      "summary": "Pick a profession preset, review the evidence and save a report to share or download as a PDF.",
+      "href": "/report-builder",
+      "where": "Agent Desk > Marketing > Report Builder",
+      "need": "agent",
+      "icon": "fa-file-export"
+    },
+    {
+      "id": "plans-and-pricing",
+      "kind": "page",
+      "label": "Plans & Pricing",
+      "aliases": [
+        "plans and pricing",
+        "pricing",
+        "plans",
+        "upgrade",
+        "pro plan",
+        "pro+",
+        "pro plus",
+        "agent plan",
+        "compare plans",
+        "price",
+        "free trial",
+        "free",
+        "free plan",
+        "free account"
+      ],
+      "keywords": [
+        "subscription",
+        "agent",
+        "pro",
+        "billing"
+      ],
+      "summary": "Compare Watchdog plans for homeowners and professionals, including Agent, Pro and Pro+.",
+      "href": "/pro",
+      "where": "Menu > Plans & Pricing",
+      "icon": "fa-tags"
+    },
+    {
+      "id": "account-and-billing",
+      "kind": "page",
+      "label": "Account & billing",
+      "aliases": [
+        "account",
+        "account and billing",
+        "billing",
+        "subscription",
+        "manage subscription",
+        "cancel subscription",
+        "payment method",
+        "invoices",
+        "change plan",
+        "profile",
+        "edit profile",
+        "sign out",
+        "sign in",
+        "log in",
+        "login",
+        "sign up",
+        "create account",
+        "log out",
+        "logout"
+      ],
+      "keywords": [
+        "plan",
+        "receipt",
+        "role",
+        "profession",
+        "preferences"
+      ],
+      "summary": "Manage your profile, role, plan, subscription and billing.",
+      "href": "/account",
+      "where": "Menu > Account",
+      "icon": "fa-user-gear"
+    },
+    {
+      "id": "data-deletion",
+      "kind": "page",
+      "label": "Delete my account and data",
+      "aliases": [
+        "data deletion",
+        "delete my account",
+        "delete account",
+        "delete my data",
+        "remove my data",
+        "close account"
+      ],
+      "keywords": [
+        "privacy",
+        "personal information",
+        "account"
+      ],
+      "summary": "How to ask Watchdog to delete your account and the personal information tied to it.",
+      "href": "/data-deletion",
+      "where": "Help > Data deletion",
+      "icon": "fa-trash-can"
+    },
+    {
+      "id": "faq",
+      "kind": "page",
+      "label": "FAQ",
+      "aliases": [
+        "faq",
+        "frequently asked questions",
+        "questions",
+        "common questions"
+      ],
+      "keywords": [
+        "plans",
+        "billing",
+        "appeals",
+        "tax relief",
+        "data"
+      ],
+      "summary": "Answers about property data, plans, billing, appeals, tax relief and your account.",
+      "href": "/faq",
+      "where": "Help > FAQ",
+      "icon": "fa-circle-question"
+    },
+    {
+      "id": "help-and-support",
+      "kind": "page",
+      "label": "Help and support",
+      "aliases": [
+        "help",
+        "support",
+        "customer support",
+        "report a problem",
+        "something is broken",
+        "technical issue",
+        "bug report"
+      ],
+      "keywords": [
+        "account",
+        "access",
+        "property data",
+        "problem"
+      ],
+      "summary": "Get help with your account, property data, access or a technical problem.",
+      "href": "/support",
+      "where": "Help > Support",
+      "icon": "fa-life-ring"
+    },
+    {
+      "id": "contact",
+      "kind": "page",
+      "label": "Contact Watchdog",
+      "aliases": [
+        "contact",
+        "contact us",
+        "get in touch",
+        "send a message",
+        "voice message",
+        "email watchdog"
+      ],
+      "keywords": [
+        "message",
+        "voice",
+        "help"
+      ],
+      "summary": "Send Watchdog a written or voice message. No phone number needed.",
+      "href": "/contact",
+      "where": "Help > Contact",
+      "icon": "fa-comments"
+    },
+    {
+      "id": "privacy-policy",
+      "kind": "page",
+      "label": "Privacy policy",
+      "aliases": [
+        "privacy",
+        "privacy policy",
+        "privacy notice",
+        "what data you collect",
+        "personal data"
+      ],
+      "keywords": [
+        "data",
+        "cookies",
+        "personal information",
+        "delete"
+      ],
+      "summary": "What Watchdog collects, why, who it goes to, and how to get it back or delete it.",
+      "href": "/privacy",
+      "where": "Help > Privacy policy",
+      "icon": "fa-user-shield"
+    },
+    {
+      "id": "terms-of-use",
+      "kind": "page",
+      "label": "Terms of use",
+      "aliases": [
+        "terms",
+        "terms of use",
+        "terms of service",
+        "tos",
+        "user agreement"
+      ],
+      "keywords": [
+        "legal",
+        "subscription",
+        "acceptable use",
+        "account"
+      ],
+      "summary": "The rules for using Watchdog, including accounts, property data, subscriptions and acceptable use.",
+      "href": "/terms",
+      "where": "Help > Terms of use",
+      "icon": "fa-file-contract"
+    },
+    {
+      "id": "refund-policy",
+      "kind": "page",
+      "label": "Refund policy",
+      "aliases": [
+        "refund",
+        "refunds",
+        "refund policy",
+        "money back",
+        "get a refund"
+      ],
+      "keywords": [
+        "cancel",
+        "subscription",
+        "billing",
+        "charge"
+      ],
+      "summary": "When a refund may be available for a Watchdog subscription, and how to ask for one.",
+      "href": "/refunds",
+      "where": "Help > Refund policy",
+      "icon": "fa-rotate-left"
+    },
+    {
+      "id": "watchdog-teams",
+      "kind": "page",
+      "label": "Watchdog Teams",
+      "aliases": [
+        "teams",
+        "team plan",
+        "watchdog teams",
+        "team account",
+        "brokerage plan"
+      ],
+      "keywords": [
+        "seats",
+        "brokerage",
+        "office",
+        "shared",
+        "organization"
+      ],
+      "summary": "A preview of Watchdog for brokerages and other property teams, with shared work and team controls. It is not on sale yet.",
+      "href": "/teams",
+      "where": "Menu > Preview Teams",
+      "icon": "fa-users"
+    },
+    {
+      "id": "glossary",
+      "kind": "page",
+      "label": "NJ property tax glossary",
+      "aliases": [
+        "glossary",
+        "definitions",
+        "tax terms",
+        "property tax terms",
+        "what does it mean"
+      ],
+      "keywords": [
+        "chapter 123",
+        "equalization",
+        "mod-iv",
+        "sr-1a",
+        "added assessment"
+      ],
+      "summary": "Plain-English definitions of NJ property tax terms, with real examples and official sources.",
+      "href": "/glossary",
+      "where": "Guides > Glossary",
+      "icon": "fa-book"
+    },
+    {
+      "id": "insights",
+      "kind": "page",
+      "label": "Insights",
+      "aliases": [
+        "insights",
+        "blog",
+        "articles",
+        "news",
+        "relief updates"
+      ],
+      "keywords": [
+        "research",
+        "deadlines",
+        "assessment",
+        "tax relief"
+      ],
+      "summary": "NJ property tax news, relief updates, assessment explainers and Watchdog research.",
+      "href": "/insights",
+      "where": "Guides > Insights",
+      "icon": "fa-lightbulb"
+    },
+    {
+      "id": "data-methodology",
+      "kind": "page",
+      "label": "Data methodology",
+      "aliases": [
+        "data methodology",
+        "methodology",
+        "how watchdog works",
+        "where the data comes from",
+        "public records sources"
+      ],
+      "keywords": [
+        "sources",
+        "public records",
+        "parcel",
+        "accuracy"
+      ],
+      "summary": "How Watchdog combines NJ public records into one property record and keeps each source attached.",
+      "href": "/data-methodology",
+      "where": "Guides > Data methodology",
+      "icon": "fa-diagram-project"
+    },
+    {
+      "id": "professional-guides",
+      "kind": "page",
+      "label": "Professional guides",
+      "aliases": [
+        "professional guides",
+        "professionals",
+        "for professionals",
+        "lenders",
+        "attorneys",
+        "appraisers",
+        "investors",
+        "title professionals",
+        "home inspectors",
+        "real estate agents"
+      ],
+      "keywords": [
+        "guide",
+        "use cases",
+        "work"
+      ],
+      "summary": "Guides for agents, lenders, attorneys, appraisers, investors and other pros on using Watchdog at work.",
+      "href": "/professionals",
+      "where": "Guides > Professional guides",
+      "icon": "fa-user-tie"
+    },
+    {
+      "id": "home-value",
+      "kind": "page",
+      "label": "Home value",
+      "aliases": [
+        "home value",
+        "what is my home worth",
+        "house value",
+        "property value",
+        "home worth",
+        "home valuation",
+        "comps",
+        "comparable sales"
+      ],
+      "keywords": [
+        "assessment",
+        "recent sales",
+        "market value",
+        "estimate"
+      ],
+      "summary": "See public-record value signals for any NJ home: assessment, recent sales and town context.",
+      "href": "/home-value",
+      "where": "Tools > Home value",
+      "icon": "fa-house-chimney"
+    },
+    {
+      "id": "homes-for-sale",
+      "kind": "page",
+      "label": "Homes for sale",
+      "aliases": [
+        "homes for sale",
+        "search homes",
+        "houses for sale",
+        "listings",
+        "buy a home"
+      ],
+      "keywords": [
+        "taxes",
+        "assessments",
+        "sales history",
+        "listing"
+      ],
+      "summary": "Search NJ homes for sale, then check taxes, assessments and sales history for any listing.",
+      "href": "/search-homes",
+      "where": "Tools > Homes for sale",
+      "icon": "fa-signs-post"
+    },
+    {
+      "id": "mortgage-calculator",
+      "kind": "page",
+      "label": "Mortgage calculator",
+      "aliases": [
+        "mortgage calculator",
+        "monthly payment",
+        "mortgage payment",
+        "piti",
+        "loan calculator",
+        "pmi"
+      ],
+      "keywords": [
+        "interest",
+        "property taxes",
+        "insurance",
+        "escrow"
+      ],
+      "summary": "Estimate a NJ monthly payment with principal, interest, property taxes, insurance and PMI.",
+      "href": "/mortgage-calculator",
+      "where": "Tools > Mortgage calculator",
+      "icon": "fa-calculator"
+    },
+    {
+      "id": "home-buying-cost-calculator",
+      "kind": "page",
+      "label": "Home buying cost calculator",
+      "aliases": [
+        "home buying cost calculator",
+        "closing costs",
+        "buyer closing costs",
+        "cash to close",
+        "cost to buy a home",
+        "upfront costs",
+        "down payment"
+      ],
+      "keywords": [
+        "mortgage",
+        "taxes",
+        "insurance",
+        "hoa",
+        "monthly cost"
+      ],
+      "summary": "Estimate a NJ buyer's cash needed up front and the true monthly cost of owning.",
+      "href": "/home-buying-cost-calculator",
+      "where": "Tools > Home buying cost calculator",
+      "icon": "fa-coins"
+    },
+    {
+      "id": "property-tax-estimator",
+      "kind": "page",
+      "label": "Property tax estimator",
+      "aliases": [
+        "property tax estimator",
+        "property tax calculator",
+        "estimate property taxes",
+        "tax calculator",
+        "how much are taxes",
+        "tax estimate"
+      ],
+      "keywords": [
+        "assessed value",
+        "tax rate",
+        "escrow",
+        "monthly"
+      ],
+      "summary": "Estimate a NJ property tax bill from assessed value and the town's general tax rate.",
+      "href": "/property-tax-estimator",
+      "where": "Tools > Property tax estimator",
+      "icon": "fa-calculator"
+    },
+    {
+      "id": "added-assessment-forecaster",
+      "kind": "page",
+      "label": "Added assessment forecaster",
+      "aliases": [
+        "added assessment forecaster",
+        "added assessment calculator",
+        "renovation tax impact",
+        "addition tax estimate",
+        "new construction tax estimate"
+      ],
+      "keywords": [
+        "added assessment",
+        "renovation",
+        "addition",
+        "tax rate",
+        "ratio"
+      ],
+      "summary": "Estimate the added assessment and future tax from new construction, an addition or a major improvement.",
+      "href": "/added-assessment-forecaster",
+      "where": "Tools > Added assessment forecaster",
+      "icon": "fa-chart-line"
+    },
+    {
+      "id": "senior-benefit-estimator",
+      "kind": "page",
+      "label": "Senior benefit estimator",
+      "aliases": [
+        "senior benefit estimator",
+        "senior benefits",
+        "senior programs",
+        "senior eligibility",
+        "senior tax relief"
+      ],
+      "keywords": [
+        "anchor",
+        "senior freeze",
+        "stay nj",
+        "pas-1",
+        "65"
+      ],
+      "summary": "Screen eligibility for ANCHOR, Senior Freeze and Stay NJ using the facts you enter.",
+      "href": "/senior-benefit-estimator",
+      "where": "Tools > Senior benefit estimator",
+      "icon": "fa-person-cane"
+    },
+    {
+      "id": "benefit-stacking-calculator",
+      "kind": "page",
+      "label": "Benefit stacking calculator",
+      "aliases": [
+        "benefit stacking",
+        "benefit stacking calculator",
+        "stack benefits",
+        "combine relief",
+        "total tax relief"
+      ],
+      "keywords": [
+        "anchor",
+        "senior freeze",
+        "stay nj",
+        "veterans",
+        "deductions"
+      ],
+      "summary": "See how ANCHOR, Senior Freeze, Stay NJ and local deductions can combine against a home's property tax.",
+      "href": "/benefit-stacking",
+      "where": "Tools > Benefit stacking calculator",
+      "icon": "fa-layer-group"
+    }
+  ]
+}

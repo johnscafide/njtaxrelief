@@ -13,6 +13,12 @@ const CONTACT_POLICY_SCRIPT = '<script src="/property/js/contact-routing-policy.
 const SUPABASE_GUARD_SCRIPT = '<script src="/property/js/supabase-client-singleton-guard.js" data-watchdog-supabase-singleton-guard="1"></script>';
 const SITE_EDITOR_LOADER_SCRIPT = '<script src="/property/js/site-editor-loader.js" data-watchdog-site-editor-loader="1" defer></script>';
 const GLASS_HEADER_TAGS = '<link rel="stylesheet" href="/property/css/watchdog-glass-header.css" data-watchdog-glass-header="1">\n<script src="/property/js/watchdog-glass-header.js" data-watchdog-glass-header="1" defer></script>';
+const SITE_SEARCH_TAGS = '<link rel="stylesheet" href="/property/css/watchdog-site-search.css?v=20260930a" data-watchdog-site-search="1">\n<script src="/property/js/watchdog-site-search.js" data-watchdog-site-search="1" defer></script>';
+/* Client-facing shared surfaces (client room, collaborator upload link, shared
+   report, open-house sign-in, agent public portals) do not get site search. */
+const SITE_SEARCH_OFF_PATH = /^\/(?:transaction\/shared|client-room|public-report|open-house|offline)(?:\/|$)/i;
+const SITE_SEARCH_AGENT_PORTAL = /^\/agent\/([a-z0-9][a-z0-9-]{1,38}[a-z0-9])$/i;
+const SITE_SEARCH_AGENT_RESERVED = /^(?:agent|agents|analytics|assets|buyers|client-room|clients|contacts|desk|edit|extension|farm-map|index|leads|listing-prep|new|onboarding|open-house|portal|reports|settings|shared|sphere|team|teams|today|training|workspace)$/i;
 const AI_REFERRAL_SCRIPT = '<script src="/property/js/ai-referral-analytics.js" data-watchdog-ai-referral-runtime="1" defer></script>';
 const AI_REFERRAL_PRIVATE_PREFIXES = ['/account','/agent','/agent-control','/agent-desk','/transaction','/analytics','/backoffice','/compare','/dashboard','/data-center','/data-workbench','/developer','/developer-data','/diagnostics','/farm-builder','/growth','/home','/insights/admin','/integrations','/intelligence','/logs','/marketing-studio','/newsletter-studio','/onboarding','/report-builder','/watchlist','/whitepapers','/workbench'];
 const ENTITY_GRAPH_ID = 'watchdog-entity-graph';
@@ -217,6 +223,18 @@ function installGlassHeader(input) {
   return html.replace(/<\/head>/i, `${GLASS_HEADER_TAGS}\n</head>`);
 }
 
+/* Site search (Ctrl/Cmd+K) on every clean Watchdog page. The runtime also
+   self-loads from the shared shells and is idempotent. */
+function installSiteSearch(input, publicPath) {
+  const html = String(input || '');
+  const path = cleanPath(publicPath);
+  if (SITE_SEARCH_OFF_PATH.test(path)) return html;
+  const portal = path.match(SITE_SEARCH_AGENT_PORTAL);
+  if (portal && !SITE_SEARCH_AGENT_RESERVED.test(portal[1])) return html;
+  if (/watchdog-site-search\.js/i.test(html) || !/<\/head>/i.test(html)) return html;
+  return html.replace(/<\/head>/i, `${SITE_SEARCH_TAGS}\n</head>`);
+}
+
 /* Developer-only site editor. The loader makes no request for signed-out
    visitors and only fetches the editor after a server-side developer check. */
 function installSiteEditorLoader(input) {
@@ -291,6 +309,7 @@ module.exports = async function handler(req, res) {
     safeBody = applyCanonicalRuntimeDiet(safeBody, publicPath);
     safeBody = installSiteEditorLoader(safeBody);
     safeBody = installGlassHeader(safeBody);
+    safeBody = installSiteSearch(safeBody, publicPath);
     if (publicPath === '/') {
       safeBody = installEntityGraph(safeBody);
       safeBody = installRootSocialMetadata(safeBody);

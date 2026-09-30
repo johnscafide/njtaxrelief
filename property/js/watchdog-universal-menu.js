@@ -10,11 +10,11 @@
   if(window.__WATCHDOG_UNIVERSAL_MENU__) return;
   window.__WATCHDOG_UNIVERSAL_MENU__ = true;
 
-  var VERSION = '20260929a';
+  var VERSION = '20260930a';
   /* CSS has a longer browser/CDN cache lifetime than this runtime. Keep a
      separate asset revision so interaction fixes can invalidate cached chrome
      immediately without coupling that cache key to the menu data contract. */
-  var CSS_VERSION = '20260929a';
+  var CSS_VERSION = '20260930a';
   var URL = 'https://uvkvaxljhhngydvlrzom.supabase.co';
   var KEY = 'sb_publishable_MYX59qCbK3d-21zDfJqkNw_fvmfnexa';
   var hostname = String(location.hostname || '').toLowerCase();
@@ -330,7 +330,9 @@
   function publicDrawerHtml(){
     var footer = state.user ? '' : '<div class="wd-universal-nav-foot"><button type="button" data-wd-universal="signin"><i class="fas fa-right-to-bracket"></i><span>Sign in</span></button></div>';
     var lens = defaultLens();
+    /* Site search (watchdog-site-search.js) opens from any [data-wd-search="open"]. */
     return '<div class="wd-universal-nav-head">' + brandHtml() + '<button class="wd-public-close wd-universal-close" type="button" data-wd-universal="close" aria-label="Close navigation"><i class="fas fa-xmark"></i></button></div>' +
+      '<button type="button" class="wd-universal-search" data-wd-search="open"><i class="fas fa-magnifying-glass" aria-hidden="true"></i><span>Search Watchdog</span><small>Pages, terms, addresses</small></button>' +
       lensTabsHtml(lens) +
       '<nav class="wd-universal-nav-links" data-lens="' + lens + '" aria-label="Watchdog navigation">' + navLinksHtml() + '</nav>' + footer;
   }
@@ -769,3 +771,5 @@
 
 /* Universal glass top bar (idempotent; the page server may already load it). */
 (function(){try{if(window.__wdGlassHeader||document.querySelector('script[src^="/property/js/watchdog-glass-header.js"]'))return;var s=document.createElement('script');s.src='/property/js/watchdog-glass-header.js';s.defer=true;(document.head||document.documentElement).appendChild(s);}catch(_){}})();
+/* Site search, Ctrl/Cmd+K (idempotent; the page server may already load it). */
+(function(){try{if(window.__wdSiteSearch||document.querySelector('script[src^="/property/js/watchdog-site-search.js"]'))return;var s=document.createElement('script');s.src='/property/js/watchdog-site-search.js';s.defer=true;(document.head||document.documentElement).appendChild(s);}catch(_){}})();
