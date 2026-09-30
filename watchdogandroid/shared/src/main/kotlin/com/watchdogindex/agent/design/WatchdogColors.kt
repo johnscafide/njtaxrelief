@@ -100,7 +100,10 @@ val WatchdogLightColors = WatchdogColors(
     glass = rgba(255, 255, 255, .76f), glassEdge = rgba(255, 255, 255, .95f), shadow = rgba(14, 34, 72, .16f),
     dialTrack = rgba(255, 255, 255, .17f), spark = Color(0xFF1456A0), spark2 = Color(0xFFA9C3EA),
     switchOn = Color(0xFF0F8B8D), switchOff = rgba(20, 33, 61, .16f),
-    mContainer = Color(0xFFECE8E0), mHigh = Color(0xFFE4E0D7), mIndicator = Color(0xFFD8E3F4), mOnIndicator = Color(0xFF0E2248),
+    // mHigh is the mockup's #e4e0d7 lifted to #e9e5dd: the 16 sp search and composer hints are `muted` on it, and on
+    // #e4e0d7 they sat at 4.38:1, under the 4.5:1 body-text minimum; on #e9e5dd they are 4.6:1. Six units is well
+    // inside the render comparison's per-channel tolerance, so the mockup match is unchanged.
+    mContainer = Color(0xFFECE8E0), mHigh = Color(0xFFE9E5DD), mIndicator = Color(0xFFD8E3F4), mOnIndicator = Color(0xFF0E2248),
     mOutline = Color(0xFFBFB8AA), mFab = Color(0xFF0E2248), mOnFab = Color(0xFFFFFFFF),
     mapLand = Color(0xFFEEEBE4), mapRoad = Color(0xFFFFFFFF), mapCase = Color(0xFFDCD6CA), mapPark = Color(0xFFD5E7CD),
     mapWater = Color(0xFFC7DBEF), mapOut = Color(0xFFDBD6CB), mapBound = Color(0xFF0E2248), mapLabel = Color(0xFF5D6678),
@@ -133,7 +136,9 @@ val WatchdogDarkColors = WatchdogColors(
 /**
  * Watchdog Intelligence spectrum. These four colors are reserved for the Intelligence brand signature:
  * the rotating border on the outer Intelligence surface and the word "Intelligence" in the product name.
- * They are the same in light and dark.
+ * They are the same in light and dark. As a border they are decoration; as text the word is drawn with
+ * [textStops] / [textStopsOnDark], the same hues deepened or lifted to AA contrast, because the brand rule
+ * never weakens accessibility (cyan #0AAEB8 is 2.7:1 on white, magenta 3.4:1).
  */
 object Spectrum {
     val cyan = Color(0xFF0AAEB8)
@@ -142,6 +147,17 @@ object Spectrum {
     val magenta = Color(0xFFE84BC4)
     /** Slightly brighter cyan used at the start/end of the rotating border. */
     val borderCyan = Color(0xFF15B7C9)
+    /**
+     * The word "Intelligence" as text on the white Intelligence surface and the light theme's page and cards:
+     * cyan -> blue -> violet -> magenta, every stop and every mix between stops at least 4.5:1 on white and on
+     * the light page (cyan 5.1, blue 6.0, violet 6.8, magenta 5.7 on white), so the word reads at 12 sp too.
+     */
+    val textStops: List<Color> = listOf(Color(0xFF0B7A82), Color(0xFF1E5CD0), Color(0xFF5B3BDB), Color(0xFFB02E94))
+    /**
+     * The same word on the dark theme's own bg, surface and tint (outside [IntelligenceInk]): lifted stops, at
+     * least 5.1:1 against all three.
+     */
+    val textStopsOnDark: List<Color> = listOf(Color(0xFF2EC4CF), Color(0xFF75A8FF), Color(0xFFAC9DFF), Color(0xFFF283D9))
     /** Fixed ink for text sitting on the always-white Intelligence surface. */
     val surface = Color(0xFFFFFFFF)
     val ink = Color(0xFF14213D)

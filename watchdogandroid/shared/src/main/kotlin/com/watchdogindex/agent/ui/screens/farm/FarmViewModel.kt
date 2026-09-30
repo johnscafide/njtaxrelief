@@ -221,5 +221,8 @@ class FarmViewModel(private val repos: Repositories) : ViewModel() {
         }
     }
 
+    /** A one-line message for the snackbar from the screen (for example when no home sits at the centre of the map). */
+    fun notify(message: String) = updateReady { it.copy(notice = message) }
+
     fun clearNotice() = updateReady { if (it.notice != null) it.copy(notice = null) else it }
 }

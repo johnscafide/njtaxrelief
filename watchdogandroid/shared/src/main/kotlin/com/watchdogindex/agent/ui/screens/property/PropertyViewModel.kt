@@ -61,9 +61,19 @@ class PropertyViewModel(
 
     // ------------------------------------------------------------------ saved / watched
 
+    /**
+     * The newest save and watch requests, so a slow failure cannot undo a later tap (the bookmark is offered in
+     * the top bar and in the action area, and two quick taps race). Only the newest request for a toggle may
+     * put it back; an older failure is reported but leaves the toggle where the agent last set it. Touched only
+     * on the main dispatcher [viewModelScope] runs on, like Today's tick requests.
+     */
+    private var savedRequest = 0L
+    private var watchedRequest = 0L
+
     fun toggleSaved() {
         val ready = ready() ?: return
         val saved = !ready.saved
+        val request = ++savedRequest
         updateReady { it.copy(saved = saved, notice = if (saved) "Saved to your clients" else "Removed from your clients") }
         viewModelScope.launch {
             try {
@@ -71,7 +81,8 @@ class PropertyViewModel(
             } catch (e: CancellationException) {
                 throw e
             } catch (e: Exception) {
-                updateReady { it.copy(saved = !saved, notice = e.friendlyMessage()) }
+                val latest = savedRequest == request
+                updateReady { if (latest) it.copy(saved = !saved, notice = e.friendlyMessage()) else it.copy(notice = e.friendlyMessage()) }
             }
         }
     }
@@ -79,6 +90,7 @@ class PropertyViewModel(
     fun toggleWatched() {
         val ready = ready() ?: return
         val watched = !ready.watched
+        val request = ++watchedRequest
         updateReady { it.copy(watched = watched, menuOpen = false, notice = if (watched) "Watching this home" else "No longer watching this home") }
         viewModelScope.launch {
             try {
@@ -86,7 +98,8 @@ class PropertyViewModel(
             } catch (e: CancellationException) {
                 throw e
             } catch (e: Exception) {
-                updateReady { it.copy(watched = !watched, notice = e.friendlyMessage()) }
+                val latest = watchedRequest == request
+                updateReady { if (latest) it.copy(watched = !watched, notice = e.friendlyMessage()) else it.copy(notice = e.friendlyMessage()) }
             }
         }
     }

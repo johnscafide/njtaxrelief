@@ -272,6 +272,9 @@ fun PropertyChangeRow(change: PropertyChange, onClick: () -> Unit, modifier: Mod
  * Task row (`.row.tk`): 24 dp ring tick in a 28 dp column, title and subtitle, trailing 44 dp tonal pill
  * with the action label or a call icon. Separator inset for these rows is 54 dp.
  * The tick's touch box is 48 dp and overflows its column on purpose so the row stays 66 dp tall.
+ * The open ring is drawn in `muted`, not the mockup's `fill2`: the ring is the whole of the unchecked state,
+ * and fill2 is 1.3:1 on the surface (1.5 dark) where a control's boundary needs 3:1 (WCAG 1.4.11); muted is
+ * 5.8:1 light and 6.9:1 dark.
  */
 @Composable
 fun TaskRow(
@@ -302,7 +305,7 @@ fun TaskRow(
                 val ring = if (task.done) {
                     Modifier.background(c.primary, CircleShape)
                 } else {
-                    Modifier.border(2.dp, c.fill2, CircleShape)
+                    Modifier.border(2.dp, c.muted, CircleShape)
                 }
                 Box(modifier = Modifier.size(24.dp).then(ring), contentAlignment = Alignment.Center) {
                     if (task.done) {

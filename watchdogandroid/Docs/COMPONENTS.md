@@ -37,7 +37,16 @@ Conventions
   `LineBox(lineHeight) { … }`, because the desktop harness keeps the font's natural height for a line height
   at or under the font size while Android and the browser shrink it.
 - Text on Intelligence surfaces is drawn with the fixed light ink (`Spectrum.*`) via `IntelligenceInk`;
-  never restyle it per theme.
+  never restyle it per theme. The word "Intelligence" (`IntelligenceName`, `Intelligence.productName()`) is
+  drawn with the AA text stops (`Spectrum.textStops`, at least 4.5:1 on white and the light page;
+  `Spectrum.textStopsOnDark` on the dark theme's own surfaces, picked from the theme by the composable
+  overload), never the bright border stops, so the word reads at 12 sp as well as at 22 sp.
+- Unselected and off states are `muted`, not `mOutline`: the task tick ring, the off switch's border and
+  thumb, `WdRadioButton`'s ring, the unselected filter chip border, the outlined button border and the
+  segmented buttons' border and dividers. `mOutline` is under 2:1 on the page and the surface in both themes,
+  and a control whose boundary is its only visual needs 3:1 (WCAG 1.4.11); muted clears it (at least 4.4:1
+  wherever it is used) without making colour the signal. Search and composer hints stay `muted` on `mHigh`,
+  which the light palette lifts to #e9e5dd so the 16 sp hint is 4.6:1.
 
 ## Foundation.kt
 
@@ -91,7 +100,7 @@ Conventions
 | `@Composable fun RowChevron(modifier: Modifier = Modifier)` | `chevron_right` 22 dp muted. |
 | `@Composable fun WdRow(title: String, modifier: Modifier = Modifier, supporting: String? = null, tile: TileTint? = null, icon: ImageVector? = null, onClick: (() -> Unit)? = null, minHeight: Dp = 66.dp, detail: AnnotatedString? = null, maxLines: Int = Int.MAX_VALUE, contentDescription: String? = null, trailing: @Composable (() -> Unit)? = { RowChevron() })` | `.row`: 40 / 1fr / auto, padding 11x14, 12 dp gaps, 15 sp 700 title, 13 sp 500 muted supporting line 2 dp below. Two-line variant: `detail` is a second 13 sp muted line directly under `supporting` (spans keep their own colour and weight, e.g. "Score 72" in its verdict ink beside the block/lot; the number stays the signal); `maxLines` caps and ellipsises every line (Search's result rows use 1 so long addresses share one row height); `contentDescription` is the row's single spoken description (a clickable row already merges its children; a plain row merges them here). |
 | `@Composable fun PropertyChangeRow(change: PropertyChange, onClick: () -> Unit, modifier: Modifier = Modifier)` | A "Top changes" row from a `PropertyChange` (tile tint + icon name). |
-| `@Composable fun TaskRow(task: AgentTask, onToggle: (Boolean) -> Unit, onAction: () -> Unit, modifier: Modifier = Modifier)` | `.row.tk`: 24 dp ring tick (48 dp touch box), title/subtitle, trailing pill. |
+| `@Composable fun TaskRow(task: AgentTask, onToggle: (Boolean) -> Unit, onAction: () -> Unit, modifier: Modifier = Modifier)` | `.row.tk`: 24 dp ring tick (2 dp `muted` ring when open, primary disc with a check when done; 48 dp touch box), title/subtitle, trailing pill. |
 | `@Composable fun TaskPill(action: TaskAction, onClick: () -> Unit, modifier: Modifier = Modifier)` | `.tka`: 44 dp tonal pill with label or 20 dp call icon, on a 48 dp overflow click node. |
 | `@Composable fun ClientRowView(row: ClientRow, onClick: () -> Unit, onNextAction: () -> Unit, modifier: Modifier = Modifier)` | `.row.cl`: home tile, address + chip, meta line, next-action line (link 700 on a 48 dp overflow node, or muted 600 with no icon and no action). |
 
@@ -100,10 +109,10 @@ Conventions
 | Signature | Draws |
 |---|---|
 | `@Composable fun StatusChipView(chip: StatusChip, modifier: Modifier = Modifier)` | `.chip`: 26 dp, 13 dp radius, 0x10 padding, 12 sp 700, 16 dp icon, warn/good/sky/neutral. |
-| `@Composable fun WdFilterChip(label: String, selected: Boolean, onClick: () -> Unit, modifier: Modifier = Modifier, elevated: Boolean = false, icon: ImageVector? = null, role: Role = Role.RadioButton)` | `.mchip`: 32 dp, 8 dp radius, outline; selected = indicator fill + check; elevated = surface + shadow; 48 dp reserved target. Radio semantics by default (single choice); pass `Role.Checkbox` for multi-select. |
+| `@Composable fun WdFilterChip(label: String, selected: Boolean, onClick: () -> Unit, modifier: Modifier = Modifier, elevated: Boolean = false, icon: ImageVector? = null, role: Role = Role.RadioButton)` | `.mchip`: 32 dp, 8 dp radius, 1 dp `muted` border; selected = indicator fill + check; elevated = surface + shadow; 48 dp reserved target. Radio semantics by default (single choice); pass `Role.Checkbox` for multi-select. |
 | `@Composable fun FilterChipsRow(options: List<String>, selectedIndex: Int, onSelect: (Int) -> Unit, modifier: Modifier = Modifier, elevatedUnselected: Boolean = false, contentPadding: PaddingValues = PaddingValues(horizontal = 16.dp))` | `.mchips`: scrolling selectable group, 8 dp gaps; 48 dp tall, so add 6 dp top padding for the mockup's 14. |
 | `data class SegmentOption(val label: String, val icon: ImageVector? = null)` | One segment. |
-| `@Composable fun WdSegmentedButtons(options: List<SegmentOption>, selectedIndex: Int, onSelect: (Int) -> Unit, modifier: Modifier = Modifier)` | `.mseg`: 48 dp, 24 dp radius, outline + dividers, selected indicator + check. |
+| `@Composable fun WdSegmentedButtons(options: List<SegmentOption>, selectedIndex: Int, onSelect: (Int) -> Unit, modifier: Modifier = Modifier)` | `.mseg`: 48 dp, 24 dp radius, `muted` border + dividers, selected indicator + check. |
 
 ## Buttons.kt
 
@@ -111,17 +120,19 @@ Conventions
 |---|---|
 | `@Composable fun WdPrimaryButton(label: String, onClick: () -> Unit, modifier: Modifier = Modifier, icon: ImageVector? = null, small: Boolean = false, enabled: Boolean = true)` | `.btn.primary`: 48 dp, 24 dp radius, 16 sp 700 (15 sp small), 20 dp icon. |
 | `@Composable fun WdTonalButton(label: String, onClick: () -> Unit, modifier: Modifier = Modifier, icon: ImageVector? = null, small: Boolean = false, enabled: Boolean = true)` | `.btn.tint`. |
-| `@Composable fun WdOutlinedButton(label: String, onClick: () -> Unit, modifier: Modifier = Modifier, icon: ImageVector? = null, small: Boolean = false, enabled: Boolean = true)` | `.btn.outl`: 1 dp `mOutline` border, ink text. |
+| `@Composable fun WdOutlinedButton(label: String, onClick: () -> Unit, modifier: Modifier = Modifier, icon: ImageVector? = null, small: Boolean = false, enabled: Boolean = true)` | `.btn.outl`: 1 dp `muted` border, ink text. |
 | (all three, via the private `WdButtonBase` / `NoWrapLine`) | The label is one line that never wraps or clips (CSS `white-space: nowrap`): icon + label sit at their natural size with 20 dp side padding (16 small) when the button is wide enough; when it is not, they stay centred and the padding takes the squeeze down to a minimum; only then is the line scaled down uniformly, never below the 12 sp floor. Touch target, button size and semantics are unchanged, and intrinsic sizes still work. |
 | `@Composable fun WdIconButton(icon: ImageVector, contentDescription: String, onClick: () -> Unit, modifier: Modifier = Modifier, tint: Color = WatchdogTheme.colors.ink, enabled: Boolean = true)` | `.mib`: 48 dp round target, 24 dp icon. |
 | `@Composable fun WdRoundTonalIconButton(icon: ImageVector, contentDescription: String, onClick: () -> Unit, modifier: Modifier = Modifier, enabled: Boolean = true)` | `.btn.tint.rnd`: 48 dp tonal circle, 20 dp icon. |
-| `@Composable fun WdSwitch(checked: Boolean, onCheckedChange: ((Boolean) -> Unit)?, modifier: Modifier = Modifier, enabled: Boolean = true)` | `.sw-m`: Material 3 switch, primary track + onPrimary thumb with 18 dp check when on, outline thumb when off. Pass `null` when the row toggles. |
+| `@Composable fun WdSwitch(checked: Boolean, onCheckedChange: ((Boolean) -> Unit)?, modifier: Modifier = Modifier, enabled: Boolean = true)` | `.sw-m`: Material 3 switch, primary track + onPrimary thumb with 18 dp check when on; `mHigh` track with a `muted` border and 16 dp thumb when off. Pass `null` when the row toggles. |
+| `@Composable fun WdRadioButton(selected: Boolean, onClick: (() -> Unit)?, modifier: Modifier = Modifier, enabled: Boolean = true)` | Material 3 radio button: primary when selected, `muted` ring when not. Pass `null` when the row is the selectable (picker sheets, theme rows). |
 
 ## Fields.kt
 
 | Signature | Draws |
 |---|---|
-| `@Composable fun WdOutlinedField(label: String, value: String, onValueChange: (String) -> Unit, modifier: Modifier = Modifier, trailingIcon: ImageVector? = WdIcons.Cancel, trailingDescription: String = "Clear", onClear: (() -> Unit)? = null, placeholder: String? = null, enabled: Boolean = true)` | `.mfield`: 2 dp ink border, 8 dp radius, floating 12 sp label, 15 sp single-line value, trailing 22 dp icon in a 48 dp target; the field is announced as `label`. A long value is ellipsised while the field is not focused (`.mfield .val`: nowrap + ellipsis) and scrolls once it is. |
+| `@Composable fun WdOutlinedField(label: String, value: String, onValueChange: (String) -> Unit, modifier: Modifier = Modifier, trailingIcon: ImageVector? = WdIcons.Cancel, trailingDescription: String = "Clear", onClear: (() -> Unit)? = null, placeholder: String? = null, enabled: Boolean = true, keyboardOptions: KeyboardOptions = KeyboardOptions.Default, keyboardActions: KeyboardActions = KeyboardActions.Default, autofill: WdAutofill? = null)` | `.mfield`: 2 dp ink border, 8 dp radius, floating 12 sp label, 15 sp single-line value, trailing 22 dp icon in a 48 dp target; the field is announced as `label`. A long value is ellipsised while the field is not focused (`.mfield .val`: nowrap + ellipsis) and scrolls once it is. `keyboardOptions` / `keyboardActions` set the keyboard the value needs and what its action key runs (the sweep table below lists each field's); `autofill` (`WdAutofill.EmailAddress` / `OneTimeCode` / `PostalAddress`, a plain enum so screens never opt in to the experimental autofill API) lets the platform offer a saved value while the field is focused, a no-op on the desktop. |
+| `enum class WdAutofill { EmailAddress, OneTimeCode, PostalAddress }` | The autofill hints a field can carry, mapped internally to the platform's types. |
 | `@Composable fun WdOutlinedTextArea(label: String, value: String, onValueChange: (String) -> Unit, modifier: Modifier = Modifier, placeholder: String? = null, enabled: Boolean = true, minLines: Int = 4, minHeight: Dp = 132.dp)` | The multi-line `.mfield` (paste box): same border, radius and floating label, a wrapping 15 sp 500 value from `minLines` lines up, min 132 dp, padding 18 / 20 / 12; announced as `label`. |
 | `@Composable fun SupportingText(text: String, modifier: Modifier = Modifier)` | `.msup`: 12 sp muted, padding 6 32 0. |
 
@@ -131,9 +142,9 @@ Conventions
 |---|---|
 | `@Composable fun ScoreDial(score: Int, verdict: String, modifier: Modifier = Modifier, dialSize: Dp = 118.dp)` | The dial: dialTrack track, gold arc from 135° sweeping 270·score/100 with a stroke of 9 SVG units (8.85 dp at 118 dp), 38 sp number + "of 100" on their `line-height: 1` boxes; reads `TaxMath.scoreAccessibilityLabel` ("Watchdog Score 72 out of 100, favorable tax position"). |
 | `@Composable fun ScoreCardView(score: ScoreCard, modifier: Modifier = Modifier)` | Navy card: dial, "WATCHDOG SCORE", verdict, explanation, `ScoreCard.FOOTER` under a white-14% line. |
-| `@Composable fun SparkBars(points: List<RatePoint>, modifier: Modifier = Modifier, contentDescription: String? = null, highlightLast: Boolean = true)` | `.spark`: 300x84-unit canvas, 22-unit bars, spark/spark2, rate label above the last bar, years below. |
+| `@Composable fun SparkBars(points: List<RatePoint>, modifier: Modifier = Modifier, contentDescription: String? = null, highlightLast: Boolean = true)` | `.spark`: 300x84-unit canvas, 22-unit bars, spark/spark2, rate label above the last bar, years below; labels scale with the chart (13.7 sp on the 412 dp frame) but never under the 12 sp floor, so on a 320 dp phone only the geometry shrinks. |
 | `@Composable fun TaxCardView(tax: TaxCard, modifier: Modifier = Modifier)` | Sky card: "PROPERTY TAX", 30 sp bill, source line, next-year bill, town median (muted), "Town rate per $100" / trend, `SparkBars`. |
-| `@Composable fun ValueLine(v: ValueCheck, modifier: Modifier = Modifier)` | `.vline`: track, holds-up segment, floor and implied markers, navy median dot with sand ring, four labels. |
+| `@Composable fun ValueLine(v: ValueCheck, modifier: Modifier = Modifier)` | `.vline`: track, holds-up segment, floor and implied markers, navy median dot with sand ring, four labels (same 12 sp floor). |
 | `@Composable fun ValueCheckCardView(v: ValueCheck, modifier: Modifier = Modifier)` | Sand card: "VALUE CHECK", assessed / matches (ratio sublabel) / holds up above, `ValueLine`, `VerdictBox`. |
 | `@Composable fun SalesCardView(s: SalesNearby, modifier: Modifier = Modifier)` | Mint card: "SALES NEARBY", count / median, sale rows with 1 dp lines, "This home last sold" (muted). |
 | `@Composable fun FactsCardView(f: HomeFacts, modifier: Modifier = Modifier)` | Plain card: "HOME", 2-column grid of 12 sp labels over 15 sp 700 values. |
@@ -145,7 +156,7 @@ Conventions
 | Signature | Draws |
 |---|---|
 | `@Composable fun Avatar(initials: String, modifier: Modifier = Modifier, size: Dp = 44.dp)` | `.avatar`: navy circle, 2 dp inset gold ring, white 800 initials (14 sp under 44 dp). `AvatarSizeSmall/Default/Large` = 40/44/52 dp. |
-| `@Composable fun WatchdogSearchBar(hint: String, onClick: () -> Unit, modifier: Modifier = Modifier, leadingIcon: ImageVector = WdIcons.Search, emphasized: Boolean = false, elevated: Boolean = false, trailing: @Composable (() -> Unit)? = null)` | `.msearch`: 56 dp, 28 dp radius, container-high; `emphasized` = ink 700 text; `elevated` = surface + shadow (Farm overlay). |
+| `@Composable fun WatchdogSearchBar(hint: String, onClick: () -> Unit, modifier: Modifier = Modifier, leadingIcon: ImageVector = WdIcons.Search, emphasized: Boolean = false, elevated: Boolean = false, trailing: @Composable (() -> Unit)? = null)` | `.msearch`: 56 dp, 28 dp radius, container-high with the `muted` hint (4.6:1 on the lifted light `mHigh`); `emphasized` = ink 700 text; `elevated` = surface + shadow (Farm overlay). |
 | `data class TopBarAction(val icon: ImageVector, val contentDescription: String, val onClick: () -> Unit)` | A trailing 48 dp icon button. |
 | `@Composable fun WatchdogTopBar(title: String, modifier: Modifier = Modifier, onBack: (() -> Unit)? = null, actions: List<TopBarAction> = emptyList(), backIcon: ImageVector = WdIcons.ArrowBack, backDescription: String = "Back")` | `.mbar`: 64 dp, transparent, 22 sp 700 title at x 60 / 8. |
 | `@Composable fun WatchdogTopBar(title: AnnotatedString, ...same...)` | Same with a styled title, e.g. `Intelligence.productName()`. |
@@ -209,6 +220,12 @@ Conventions
   the Welcome hero's fixed colors (spec §1.12 / §3.31), next to `Spectrum`. `WelcomeScreen` should read
   `WelcomeHero.gradientEnd` and `WelcomeHero.gold` instead of its literal and the dark map dot.
 - `WatchdogDimens.statusBarAllowance = 40.dp`, the mockups' status bar, behind `statusBarAllowance()`.
+- `Spectrum.textStops` / `Spectrum.textStopsOnDark` (`WatchdogColors.kt`): the spectrum as text, at AA.
+  `Intelligence.productName(suffix)` is a composable that picks the set from the theme (`isDark`, which
+  `IntelligenceInk` forces to false on the white surface); `Intelligence.productName(suffix, onDark)` and
+  `Intelligence.wordStyle(onDark)` are the plain variants. `Spectrum.cyan/blue/violet/magenta` stay the
+  border's.
+- Light `mHigh` is #e9e5dd, the mockup's #e4e0d7 lifted six units, so `muted` hints on it are 4.6:1.
 
 ## Promoting the screens' private copies (for the sweep)
 
@@ -222,6 +239,8 @@ Conventions
 | Search `ResultRow(property, onClick)` | `WdRow(title = property.address, supporting = "${property.town} · ${property.county}", detail = <block/lot + " · " + "Score n" span in the verdict ink, bold, tnum>, tile = TileTint.Sky, icon = WdIcons.Home, onClick = onClick, maxLines = 1, contentDescription = <address, place, block/lot, "Watchdog Score n out of 100, verdict">)`. |
 | Intelligence `VoiceComposer(hint, value, onValueChange, onSend, onMic, listening)` | `IntelligenceComposer(hint = hint, onMic = onMic, value = value, onValueChange = onValueChange, onSend = onSend, listening = listening)`. |
 | Welcome `HeroGradientEnd = Color(0xFF11306A)`, `EyebrowGold = WatchdogDarkColors.mapDot` | `WelcomeHero.gradientEnd`, `WelcomeHero.gold` (and `WelcomeHero.gradientStart` for the start). |
+| `RadioButton(selected, onClick = null, colors = RadioButtonDefaults.colors(selectedColor = c.primary, unselectedColor = c.mOutline))` in Clients' sort sheet, Farm's picker sheet and Settings' theme rows | `WdRadioButton(selected = selected, onClick = null)`: the `muted` ring clears 3:1 in both themes; the row stays the selectable. |
+| `WdOutlinedField(...)` on the default keyboard | Give each field its keyboard and action key: Welcome email `keyboardOptions = KeyboardOptions(keyboardType = KeyboardType.Email, imeAction = ImeAction.Send)`, `keyboardActions = KeyboardActions(onSend = { if (canSend) onSendCode() })`, `autofill = WdAutofill.EmailAddress`; Welcome code `KeyboardType.NumberPassword` + `ImeAction.Done` running `onVerify` once six digits are in, `autofill = WdAutofill.OneTimeCode`; Scan's listing link `KeyboardType.Uri` + `ImeAction.Go` running the resolve; Marketing's address `ImeAction.Search`; Farm's name `ImeAction.Done` running the create. |
 
 ## Typical screen assembly
 

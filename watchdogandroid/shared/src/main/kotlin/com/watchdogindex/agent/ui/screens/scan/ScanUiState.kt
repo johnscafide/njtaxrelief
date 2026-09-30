@@ -36,6 +36,8 @@ sealed interface ScanUiState {
         val historyLoading: Boolean = false,
         /** Null until the history sheet is first opened. */
         val history: List<ScanHistoryItem>? = null,
+        /** Why the history could not be loaded, shown inside the sheet with a retry; null once a load lands. */
+        val historyError: String? = null,
         /** A one-off message for the snackbar. */
         val notice: String? = null,
     ) : ScanUiState

@@ -13,6 +13,7 @@ import androidx.compose.foundation.layout.fillMaxHeight
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
+import androidx.compose.foundation.layout.ime
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.layout.width
@@ -38,8 +39,10 @@ import androidx.compose.ui.draw.shadow
 import androidx.compose.ui.geometry.Offset
 import androidx.compose.ui.geometry.Size
 import androidx.compose.ui.layout.FirstBaseline
+import androidx.compose.ui.semantics.LiveRegionMode
 import androidx.compose.ui.semantics.clearAndSetSemantics
 import androidx.compose.ui.semantics.contentDescription
+import androidx.compose.ui.semantics.liveRegion
 import androidx.compose.ui.semantics.semantics
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextAlign
@@ -60,6 +63,7 @@ import com.watchdogindex.agent.platform.LocalPlatformServices
 import com.watchdogindex.agent.ui.components.CardLabel
 import com.watchdogindex.agent.ui.components.FixedInk
 import com.watchdogindex.agent.ui.components.InfoPanel
+import com.watchdogindex.agent.ui.components.LocalBottomChromeInsets
 import com.watchdogindex.agent.ui.components.ReadBox
 import com.watchdogindex.agent.ui.components.RowList
 import com.watchdogindex.agent.ui.components.SegmentOption
@@ -132,7 +136,8 @@ fun ScanScreen(initialUrl: String?, navigator: Navigator) {
     Scaffold(
         containerColor = c.bg,
         contentColor = c.ink,
-        contentWindowInsets = WindowInsets(0, 0, 0, 0),
+        // Only the soft keyboard: the paste field's result panel then scrolls above it instead of under it.
+        contentWindowInsets = keyboardInsets(),
         snackbarHost = { SnackbarHost(snackbar) },
     ) { inner ->
         Column(modifier = Modifier.fillMaxSize().padding(inner).padding(top = statusBarAllowance())) {
@@ -164,7 +169,7 @@ fun ScanScreen(initialUrl: String?, navigator: Navigator) {
     }
 
     if (ready != null && ready.historyOpen) {
-        HistorySheet(state = ready, onDismiss = vm::closeHistory, onPick = vm::showHistoryItem)
+        HistorySheet(state = ready, onDismiss = vm::closeHistory, onPick = vm::showHistoryItem, onRetry = vm::openHistory)
     }
 }
 
@@ -206,7 +211,15 @@ private fun PasteMode(state: ScanUiState.Ready, vm: ScanViewModel, onFullPage: (
     }
 }
 
-/** A quiet block in the panel's shape while the lookup runs. */
+/**
+ * The soft keyboard's inset on device, so a screen with text input keeps its content above it. Nothing where
+ * the harness provides the chrome insets: there is no keyboard there, and ARCHITECTURE.md keeps the desktop
+ * clear of the IME inset (the same gate as `statusBarAllowance()`).
+ */
+@Composable
+private fun keyboardInsets(): WindowInsets = if (LocalBottomChromeInsets.current == null) WindowInsets.ime else WindowInsets(0, 0, 0, 0)
+
+/** A quiet block in the panel's shape while the lookup runs; announced as it appears. */
 @Composable
 private fun ResolvingPanel() {
     Box(
@@ -216,7 +229,10 @@ private fun ResolvingPanel() {
             .height(300.dp)
             .clip(RoundedCornerShape(WatchdogDimens.cardRadius))
             .background(WatchdogTheme.colors.fill)
-            .semantics { contentDescription = "Looking up the listing" },
+            .semantics {
+                contentDescription = "Looking up the listing"
+                liveRegion = LiveRegionMode.Polite
+            },
     )
 }
 
@@ -275,6 +291,7 @@ private fun CameraMode(state: ScanUiState.Ready, vm: ScanViewModel, onFullPage: 
         if (state.hasCamera) {
             platform.ScanCamera(onQr = vm::onQr, torch = state.torch, modifier = Modifier.fillMaxSize())
             // The hint gives way to the error box (below) so the two never stack at the bottom of the camera.
+            // It is a live region, so "Reading the sign…" is spoken when a code is found, not only drawn.
             if (state.error == null) {
                 Text(
                     text = if (state.resolving) "Reading the sign…" else "Point the camera at the QR code on a For Sale sign",
@@ -283,7 +300,8 @@ private fun CameraMode(state: ScanUiState.Ready, vm: ScanViewModel, onFullPage: 
                         .padding(start = 24.dp, end = 24.dp, bottom = 96.dp + chromeBottom)
                         .clip(RoundedCornerShape(14.dp))
                         .background(c.scrim)
-                        .padding(horizontal = 14.dp, vertical = 8.dp),
+                        .padding(horizontal = 14.dp, vertical = 8.dp)
+                        .semantics { liveRegion = LiveRegionMode.Polite },
                     color = FixedInk.onNavy,
                     style = t.supporting,
                     textAlign = TextAlign.Center,
@@ -370,7 +388,7 @@ private fun CameraMode(state: ScanUiState.Ready, vm: ScanViewModel, onFullPage: 
 /**
  * Detect pill (`.detect`; private to this screen until it is promoted): a 34 dp pill with a 17 dp radius, white
  * at 94% over the camera image in both themes, a 20 dp teal filled check_circle, 13 sp 700 navy text and a
- * soft shadow, saying what the camera matched. Reads as one line for TalkBack.
+ * soft shadow, saying what the camera matched. Reads as one line for TalkBack, and is announced as it appears.
  */
 @Composable
 private fun DetectPill(label: String, modifier: Modifier = Modifier) {
@@ -384,7 +402,7 @@ private fun DetectPill(label: String, modifier: Modifier = Modifier) {
             .background(FixedInk.onNavy.copy(alpha = .94f))
             .height(34.dp)
             .padding(start = 10.dp, end = 14.dp)
-            .semantics(mergeDescendants = true) {},
+            .semantics(mergeDescendants = true) { liveRegion = LiveRegionMode.Polite },
         horizontalArrangement = Arrangement.spacedBy(6.dp),
         verticalAlignment = Alignment.CenterVertically,
     ) {
@@ -567,9 +585,12 @@ private fun PriceRow(listPrice: Int?, sourceLabel: String, modifier: Modifier = 
 
 // ---------------------------------------------------------------------- history sheet
 
-/** Earlier scans, newest first: the home, then its score and bill. Tapping one shows it again. */
+/**
+ * Earlier scans, newest first: the home, then its score and bill. Tapping one shows it again. A load that
+ * failed is explained here with a retry ([onRetry]), inside the sheet, where the agent is looking.
+ */
 @Composable
-private fun HistorySheet(state: ScanUiState.Ready, onDismiss: () -> Unit, onPick: (ScanHistoryItem) -> Unit) {
+private fun HistorySheet(state: ScanUiState.Ready, onDismiss: () -> Unit, onPick: (ScanHistoryItem) -> Unit, onRetry: () -> Unit) {
     val c = WatchdogTheme.colors
     val t = WatchdogTheme.type
     WdModalSheet(onDismiss = onDismiss) {
@@ -580,7 +601,12 @@ private fun HistorySheet(state: ScanUiState.Ready, onDismiss: () -> Unit, onPick
             style = t.sectionTitle,
         )
         val items = state.history
+        val error = state.historyError
         when {
+            error != null && !state.historyLoading -> Column(modifier = Modifier.padding(top = 10.dp).semantics { liveRegion = LiveRegionMode.Polite }) {
+                ReadBox(icon = WdIcons.CloudOff, text = error)
+                WdTonalButton(label = "Try again", onClick = onRetry, modifier = Modifier.padding(top = 10.dp), icon = WdIcons.Refresh, small = true)
+            }
             state.historyLoading || items == null -> Box(
                 modifier = Modifier
                     .padding(top = 10.dp)

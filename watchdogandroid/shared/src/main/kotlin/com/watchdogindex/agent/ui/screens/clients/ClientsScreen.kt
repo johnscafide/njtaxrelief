@@ -8,12 +8,14 @@ import androidx.compose.foundation.layout.PaddingValues
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.WindowInsets
+import androidx.compose.foundation.layout.asPaddingValues
 import androidx.compose.foundation.layout.calculateEndPadding
 import androidx.compose.foundation.layout.calculateStartPadding
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.heightIn
+import androidx.compose.foundation.layout.ime
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.layout.width
@@ -45,9 +47,11 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.platform.LocalLayoutDirection
 import androidx.compose.ui.semantics.CustomAccessibilityAction
+import androidx.compose.ui.semantics.LiveRegionMode
 import androidx.compose.ui.semantics.Role
 import androidx.compose.ui.semantics.contentDescription
 import androidx.compose.ui.semantics.customActions
+import androidx.compose.ui.semantics.liveRegion
 import androidx.compose.ui.semantics.semantics
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.Dp
@@ -56,6 +60,7 @@ import com.watchdogindex.agent.app.LocalAppGraph
 import com.watchdogindex.agent.app.screenViewModel
 import com.watchdogindex.agent.core.model.ClientFilter
 import com.watchdogindex.agent.core.model.ClientRow
+import com.watchdogindex.agent.core.model.NextAction
 import com.watchdogindex.agent.core.model.NextActionKind
 import com.watchdogindex.agent.core.model.TileTint
 import com.watchdogindex.agent.design.WatchdogDimens
@@ -67,8 +72,8 @@ import com.watchdogindex.agent.ui.components.CardLabel
 import com.watchdogindex.agent.ui.components.CheckupSeasonCard
 import com.watchdogindex.agent.ui.components.ClientRowView
 import com.watchdogindex.agent.ui.components.FilterChipsRow
+import com.watchdogindex.agent.ui.components.LocalBottomChromeInsets
 import com.watchdogindex.agent.ui.components.OptionRow
-import com.watchdogindex.agent.ui.components.ReadBox
 import com.watchdogindex.agent.ui.components.RowList
 import com.watchdogindex.agent.ui.components.RowListSegment
 import com.watchdogindex.agent.ui.components.SearchTopBar
@@ -91,9 +96,10 @@ import com.watchdogindex.agent.ui.nav.Route
 import com.watchdogindex.agent.ui.nav.Tab
 
 /*
- * Clients (tab), spec §4.5: the top bar ("Clients", search and tune), the checkup season banner, the filter
- * chips, the client rows and the "Add clients" FAB over the navigation bar. Scroll padding is the mockup's
- * 40 (status bar) at the top and, at the bottom, the nav bar plus room for the FAB (see [scrollBottomGap]).
+ * Clients (tab), spec §4.5: the top bar ("Clients", search and tune, pinned in the Scaffold like Marketing's so
+ * the search field never scrolls away with the rows), the checkup season banner, the filter chips, the client
+ * rows and the "Add clients" FAB over the navigation bar. Scroll padding is the mockup's 40 (status bar) plus the
+ * bar at the top and, at the bottom, the nav bar plus room for the FAB (see [scrollBottomGap]).
  * Rows lead with the home and the agent's CRM reference; no owner
  * name is ever shown. Every next-action line acts: Call dials, Send records the checkup and drafts the
  * email with its link, Mail and Edit open the mail composer, and a swipe snoozes a row until Monday.
@@ -144,17 +150,48 @@ fun ClientsScreen(navigator: Navigator, initialFilter: ClientFilter? = null) {
         contentColor = c.ink,
         contentWindowInsets = WindowInsets(0, 0, 0, 0),
         snackbarHost = { SnackbarHost(snackbar) },
+        topBar = {
+            // Pinned: the search field keeps its focus and keyboard while the results scroll, and its focus request
+            // runs once, when the search opens, not every time the bar scrolls back into composition.
+            Column(modifier = Modifier.fillMaxWidth().background(c.bg)) {
+                Spacer(Modifier.height(statusBarAllowance()))
+                if (ready != null && ready.searchOpen) {
+                    SearchTopBar(
+                        query = ready.query,
+                        onQueryChange = vm::setQuery,
+                        onClose = { vm.setSearchOpen(false) },
+                        placeholder = "Street, town or CRM reference",
+                        fieldDescription = "Search clients",
+                    )
+                } else {
+                    WatchdogTopBar(
+                        title = "Clients",
+                        // The actions arrive with the rows; on the skeleton and the error card they would act on nothing.
+                        actions = if (ready == null) {
+                            emptyList()
+                        } else {
+                            listOf(
+                                TopBarAction(WdIcons.Search, "Search clients") { vm.setSearchOpen(true) },
+                                TopBarAction(WdIcons.Tune, "Sort and filter") { vm.openSheet(ClientsSheet.SortFilter) },
+                            )
+                        },
+                    )
+                }
+            }
+        },
         bottomBar = { WatchdogNavigationBar(selected = Tab.Clients, onSelect = navigator::switchTab) },
         floatingActionButton = {
             WatchdogFab(icon = WdIcons.PersonAdd, label = "Add clients", onClick = { vm.openSheet(ClientsSheet.AddClients) })
         },
     ) { inner ->
         val direction = LocalLayoutDirection.current
+        // While the search keyboard is up it covers the navigation bar, so the rows scroll clear of the keyboard instead.
+        val keyboardBottom = keyboardInsets().asPaddingValues().calculateBottomPadding()
         val contentPadding = PaddingValues(
             start = inner.calculateStartPadding(direction),
             end = inner.calculateEndPadding(direction),
-            top = statusBarAllowance(),
-            bottom = inner.calculateBottomPadding() + scrollBottomGap,
+            top = inner.calculateTopPadding(),
+            bottom = maxOf(inner.calculateBottomPadding(), keyboardBottom) + scrollBottomGap,
         )
         when (val s = state) {
             ClientsUiState.Loading -> ClientsSkeleton(contentPadding)
@@ -177,13 +214,21 @@ fun ClientsScreen(navigator: Navigator, initialFilter: ClientFilter? = null) {
 
     if (ready != null) {
         when (ready.sheet) {
-            ClientsSheet.ReviewCheckups -> ReviewCheckupsSheet(ready, onSend = vm::sendAllReadyCheckups, onDismiss = vm::closeSheet)
+            ClientsSheet.ReviewCheckups -> ReviewCheckupsSheet(ready, onSend = vm::sendAllReadyCheckups, onRetryList = vm::retryReadyRows, onDismiss = vm::closeSheet)
             ClientsSheet.AddClients -> AddClientsSheet(ready, vm = vm, onDismiss = vm::closeSheet)
             ClientsSheet.SortFilter -> SortFilterSheet(ready, vm = vm, onDismiss = vm::closeSheet)
             null -> Unit
         }
     }
 }
+
+/**
+ * The soft keyboard's inset on device. Nothing where the harness provides the chrome insets: there is no
+ * keyboard there, and ARCHITECTURE.md keeps the desktop clear of the IME inset (the same gate as
+ * `statusBarAllowance()`).
+ */
+@Composable
+private fun keyboardInsets(): WindowInsets = if (LocalBottomChromeInsets.current == null) WindowInsets.ime else WindowInsets(0, 0, 0, 0)
 
 /** What the next-action line does per kind. Nothing is a dead link: a call without a number opens the home. */
 private fun runNextAction(row: ClientRow, vm: ClientsViewModel, platform: PlatformServices, navigator: Navigator) {
@@ -220,25 +265,6 @@ private fun ClientsContent(
 ) {
     val rows = state.visibleRows
     LazyColumn(modifier = Modifier.fillMaxSize(), contentPadding = contentPadding) {
-        item(key = "bar") {
-            if (state.searchOpen) {
-                SearchTopBar(
-                    query = state.query,
-                    onQueryChange = vm::setQuery,
-                    onClose = { vm.setSearchOpen(false) },
-                    placeholder = "Street, town or CRM reference",
-                    fieldDescription = "Search clients",
-                )
-            } else {
-                WatchdogTopBar(
-                    title = "Clients",
-                    actions = listOf(
-                        TopBarAction(WdIcons.Search, "Search clients") { vm.setSearchOpen(true) },
-                        TopBarAction(WdIcons.Tune, "Sort and filter") { vm.openSheet(ClientsSheet.SortFilter) },
-                    ),
-                )
-            }
-        }
         val season = state.overview.season
         if (season != null) {
             item(key = "season") {
@@ -261,7 +287,7 @@ private fun ClientsContent(
                         supporting = when {
                             state.query.isNotEmpty() -> "Search by street, town or CRM reference."
                             state.onlyWithNews -> "Nothing new this week in this group."
-                            else -> "Add clients from your contacts or a CSV."
+                            else -> "Add clients by pasting a CSV."
                         },
                         icon = WdIcons.Group,
                         trailing = null,
@@ -279,6 +305,11 @@ private fun ClientsContent(
                 ) {
                     SnoozableClientRow(
                         row = row,
+                        busyLabel = when (row.id) {
+                            in state.sendingIds -> "Sending…"
+                            in state.snoozingIds -> "Snoozing until Monday…"
+                            else -> null
+                        },
                         onClick = { onOpen(row) },
                         onNextAction = { onNextAction(row) },
                         onSnooze = { vm.snooze(row) },
@@ -292,13 +323,16 @@ private fun ClientsContent(
 /**
  * A client row that swipes from the end to snooze until Monday; quiet rows have nothing to snooze and do not
  * swipe. The swipe is gesture-only, so the same snooze is offered as an accessibility action on the row for
- * TalkBack and switch access.
+ * TalkBack and switch access. While the row's send or snooze is in flight, [busyLabel] replaces the next-action
+ * line with a quiet, non-clickable status and the row neither swipes nor offers the action, so a second tap or
+ * swipe cannot repeat it.
  */
 @Composable
-private fun SnoozableClientRow(row: ClientRow, onClick: () -> Unit, onNextAction: () -> Unit, onSnooze: () -> Unit) {
+private fun SnoozableClientRow(row: ClientRow, busyLabel: String?, onClick: () -> Unit, onNextAction: () -> Unit, onSnooze: () -> Unit) {
     val c = WatchdogTheme.colors
     val t = WatchdogTheme.type
-    val snoozable = row.nextAction.kind != NextActionKind.None
+    val shown = if (busyLabel != null) row.copy(nextAction = NextAction(kind = NextActionKind.None, label = busyLabel)) else row
+    val snoozable = shown.nextAction.kind != NextActionKind.None
     val rowModifier = if (snoozable) {
         Modifier.semantics {
             customActions = listOf(
@@ -337,14 +371,14 @@ private fun SnoozableClientRow(row: ClientRow, onClick: () -> Unit, onNextAction
     ) {
         Box(Modifier.fillMaxWidth().background(c.surface)) {
             // The action rides on the row's own click node, so it is listed with the row, not on an empty node.
-            ClientRowView(row = row, onClick = onClick, onNextAction = onNextAction, modifier = rowModifier)
+            ClientRowView(row = shown, onClick = onClick, onNextAction = onNextAction, modifier = rowModifier)
         }
     }
 }
 
 // ---------------------------------------------------------------------- loading and error
 
-/** Loading: the real top bar, then quiet blocks in the shapes of the banner, the chips and the list. */
+/** Loading: under the pinned top bar, quiet blocks in the shapes of the banner, the chips and the list. */
 @Composable
 private fun ClientsSkeleton(contentPadding: PaddingValues) {
     Column(
@@ -354,7 +388,6 @@ private fun ClientsSkeleton(contentPadding: PaddingValues) {
             .padding(contentPadding)
             .semantics { contentDescription = "Loading your clients" },
     ) {
-        WatchdogTopBar(title = "Clients")
         SkeletonBlock(height = 210.dp, modifier = Modifier.cardMargin())
         Row(modifier = Modifier.padding(start = 16.dp, top = 14.dp), horizontalArrangement = Arrangement.spacedBy(8.dp)) {
             SkeletonBlock(width = 92.dp, height = 32.dp, radius = 8.dp)
@@ -371,13 +404,12 @@ private fun SkeletonBlock(height: Dp, modifier: Modifier = Modifier, width: Dp? 
     Box(sized.height(height).clip(RoundedCornerShape(radius)).background(WatchdogTheme.colors.fill))
 }
 
-/** Error: the top bar, then a card explaining the problem with a retry button. */
+/** Error: under the pinned top bar, a card explaining the problem with a retry button. */
 @Composable
 private fun ClientsError(userMessage: String, contentPadding: PaddingValues, onRetry: () -> Unit) {
     val c = WatchdogTheme.colors
     val t = WatchdogTheme.type
     Column(modifier = Modifier.fillMaxSize().verticalScroll(rememberScrollState()).padding(contentPadding)) {
-        WatchdogTopBar(title = "Clients")
         WdCard(modifier = Modifier.cardMargin()) {
             CardLabel("Clients")
             Text(text = "Your clients didn’t load", modifier = Modifier.padding(top = 6.dp), color = c.ink, style = t.verdict)
@@ -404,9 +436,31 @@ private fun SheetBody(text: String) {
     )
 }
 
-/** "Review and send": the homes whose checkups are ready, then one button that sends them all. */
+/**
+ * A problem with what the sheet itself just did (a list that did not come back, an import or a send that did not
+ * go through), said inside the sheet where the agent is looking and announced as it appears.
+ */
 @Composable
-private fun ReviewCheckupsSheet(state: ClientsUiState.Ready, onSend: () -> Unit, onDismiss: () -> Unit) {
+private fun SheetProblem(text: String, modifier: Modifier = Modifier) {
+    Text(
+        text = text,
+        modifier = modifier
+            .padding(start = 4.dp, end = 4.dp, top = 6.dp)
+            .semantics {
+                contentDescription = "Problem: $text"
+                liveRegion = LiveRegionMode.Polite
+            },
+        color = WatchdogTheme.colors.warnInk,
+        style = WatchdogTheme.type.caption.sized(12, FontWeight.SemiBold, 17.4),
+    )
+}
+
+/**
+ * "Review and send": the homes whose checkups are ready, then one button that sends them all. A list or a send
+ * that fails is explained here, in the sheet ([ClientsUiState.Ready.reviewError]), with the list's own retry.
+ */
+@Composable
+private fun ReviewCheckupsSheet(state: ClientsUiState.Ready, onSend: () -> Unit, onRetryList: () -> Unit, onDismiss: () -> Unit) {
     val count = state.readyCount
     val deadline = state.overview.season?.appealDeadline
     WdModalSheet(onDismiss = onDismiss) {
@@ -416,19 +470,24 @@ private fun ReviewCheckupsSheet(state: ClientsUiState.Ready, onSend: () -> Unit,
                 (if (deadline != null) " and the $deadline appeal deadline." else " and the next appeal deadline."),
         )
         val ready = state.readyRows
+        val error = state.reviewError
         Column(modifier = Modifier.weight(1f, fill = false).verticalScroll(rememberScrollState()).padding(top = 12.dp)) {
-            if (ready == null) {
-                SkeletonBlock(height = WatchdogDimens.rowMinHeight * 3, modifier = Modifier.semantics { contentDescription = "Loading the ready checkups" })
-            } else if (ready.isEmpty()) {
-                RowList {
+            when {
+                ready == null && error != null -> {
+                    SheetProblem(text = error)
+                    WdTonalButton(label = "Try again", onClick = onRetryList, modifier = Modifier.padding(start = 4.dp, top = 10.dp), icon = WdIcons.Refresh, small = true)
+                }
+                ready == null -> SkeletonBlock(height = WatchdogDimens.rowMinHeight * 3, modifier = Modifier.semantics { contentDescription = "Loading the ready checkups" })
+                ready.isEmpty() -> RowList {
                     WdRow(title = "No checkups are waiting", supporting = "New ones appear when final bills are published.", icon = WdIcons.TaskAlt, trailing = null)
                 }
-            } else {
-                RowList(items = ready) { row ->
+                else -> RowList(items = ready) { row ->
                     WdRow(title = row.address, supporting = row.metaLine, tile = row.tile, icon = WdIcons.Home, trailing = null)
                 }
             }
         }
+        // A send that did not go through: the sheet stays open and says so above the button that tries again.
+        if (ready != null && error != null) SheetProblem(text = error)
         WdPrimaryButton(
             label = if (state.sending) "Sending…" else if (count == 1) "Send 1 checkup" else "Send $count checkups",
             onClick = onSend,
@@ -440,7 +499,10 @@ private fun ReviewCheckupsSheet(state: ClientsUiState.Ready, onSend: () -> Unit,
     }
 }
 
-/** The FAB's sheet: pick from contacts (through the Android app) or paste a CSV with the five columns. */
+/**
+ * The FAB's sheet: paste a CSV with the five columns (open on arrival). A "From contacts" row is deliberately
+ * absent until the platform offers a contact picker; a row that only explained itself would be a dead control.
+ */
 @Composable
 private fun AddClientsSheet(state: ClientsUiState.Ready, vm: ClientsViewModel, onDismiss: () -> Unit) {
     val c = WatchdogTheme.colors
@@ -451,30 +513,15 @@ private fun AddClientsSheet(state: ClientsUiState.Ready, vm: ClientsViewModel, o
         Column(modifier = Modifier.weight(1f, fill = false).verticalScroll(rememberScrollState())) {
             RowList(modifier = Modifier.padding(top = 12.dp)) {
                 WdRow(
-                    title = "From contacts",
-                    supporting = "Pick people on your phone; their addresses are matched",
-                    tile = TileTint.Sky,
-                    icon = WdIcons.Contacts,
-                    onClick = { vm.setAddMode(AddClientsMode.Contacts) },
-                    trailing = { ExpandChevron(expanded = state.addMode == AddClientsMode.Contacts) },
+                    title = "Upload a CSV",
+                    supporting = "address, town, relationship, year, crm_ref",
+                    tile = TileTint.Sand,
+                    icon = WdIcons.UploadFile,
+                    onClick = { vm.setAddMode(AddClientsMode.Csv) },
+                    trailing = { ExpandChevron(expanded = state.addMode == AddClientsMode.Csv) },
                 )
-                Box(Modifier.fillMaxWidth().topSeparator(c.separator, 66.dp)) {
-                    WdRow(
-                        title = "Upload a CSV",
-                        supporting = "address, town, relationship, year, crm_ref",
-                        tile = TileTint.Sand,
-                        icon = WdIcons.UploadFile,
-                        onClick = { vm.setAddMode(AddClientsMode.Csv) },
-                        trailing = { ExpandChevron(expanded = state.addMode == AddClientsMode.Csv) },
-                    )
-                }
             }
             when (state.addMode) {
-                AddClientsMode.Contacts -> ReadBox(
-                    icon = WdIcons.Info,
-                    text = "The contact picker comes with the Watchdog app on your phone: it opens the system picker and matches each address to a parcel. On this computer, paste a CSV instead.",
-                    modifier = Modifier.padding(top = 12.dp),
-                )
                 AddClientsMode.Csv -> {
                     Text(
                         text = "One home per line, in this order: address, town, relationship (past client, sphere, farm or watching), year, crm_ref. A header line is fine; only the address and town are required.",
@@ -491,14 +538,7 @@ private fun AddClientsSheet(state: ClientsUiState.Ready, vm: ClientsViewModel, o
                         enabled = !state.importing,
                     )
                     val error = state.importError
-                    if (error != null) {
-                        Text(
-                            text = error,
-                            modifier = Modifier.padding(start = 4.dp, end = 4.dp, top = 6.dp).semantics { contentDescription = "Import problem: $error" },
-                            color = c.warnInk,
-                            style = t.caption.sized(12, FontWeight.SemiBold, 17.4),
-                        )
-                    }
+                    if (error != null) SheetProblem(text = error)
                     WdPrimaryButton(
                         label = if (state.importing) "Importing…" else "Import",
                         onClick = vm::importCsv,

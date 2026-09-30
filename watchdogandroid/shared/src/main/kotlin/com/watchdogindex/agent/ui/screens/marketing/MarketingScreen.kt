@@ -9,12 +9,14 @@ import androidx.compose.foundation.layout.PaddingValues
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.WindowInsets
+import androidx.compose.foundation.layout.asPaddingValues
 import androidx.compose.foundation.layout.calculateEndPadding
 import androidx.compose.foundation.layout.calculateStartPadding
 import androidx.compose.foundation.layout.fillMaxHeight
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
+import androidx.compose.foundation.layout.ime
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.items
@@ -37,14 +39,17 @@ import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.remember
+import androidx.compose.runtime.rememberCoroutineScope
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.focus.FocusRequester
 import androidx.compose.ui.focus.focusRequester
 import androidx.compose.ui.platform.LocalLayoutDirection
+import androidx.compose.ui.semantics.LiveRegionMode
 import androidx.compose.ui.semantics.Role
 import androidx.compose.ui.semantics.contentDescription
+import androidx.compose.ui.semantics.liveRegion
 import androidx.compose.ui.semantics.semantics
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
@@ -66,6 +71,7 @@ import com.watchdogindex.agent.platform.LocalPlatformServices
 import com.watchdogindex.agent.platform.PlatformServices
 import com.watchdogindex.agent.ui.components.CampaignCard
 import com.watchdogindex.agent.ui.components.CardLabel
+import com.watchdogindex.agent.ui.components.LocalBottomChromeInsets
 import com.watchdogindex.agent.ui.components.OptionRow
 import com.watchdogindex.agent.ui.components.RowList
 import com.watchdogindex.agent.ui.components.SectionHeader
@@ -92,6 +98,7 @@ import com.watchdogindex.agent.ui.components.statusBarAllowance
 import com.watchdogindex.agent.ui.nav.Navigator
 import com.watchdogindex.agent.ui.nav.Tab
 import com.watchdogindex.agent.ui.preview.LocalPreviewState
+import kotlinx.coroutines.launch
 
 /*
  * Marketing (tab), spec §4.7: the top bar ("Marketing", search and more), the three-tab row, and per tab the
@@ -147,11 +154,13 @@ fun MarketingScreen(navigator: Navigator) {
         },
     ) { inner ->
         val direction = LocalLayoutDirection.current
+        // While the address field's keyboard is up it covers the navigation bar, so the results scroll clear of the keyboard instead.
+        val keyboardBottom = keyboardInsets().asPaddingValues().calculateBottomPadding()
         val contentPadding = PaddingValues(
             start = inner.calculateStartPadding(direction),
             end = inner.calculateEndPadding(direction),
             top = inner.calculateTopPadding(),
-            bottom = inner.calculateBottomPadding() + scrollBottomGap,
+            bottom = maxOf(inner.calculateBottomPadding(), keyboardBottom) + scrollBottomGap,
         )
         when (val s = state) {
             MarketingUiState.Loading -> MarketingSkeleton(contentPadding)
@@ -192,7 +201,6 @@ fun MarketingScreen(navigator: Navigator) {
             platform = platform,
             siteLabel = links.label,
             onDismiss = vm::closeSheet,
-            onNotice = vm::notify,
             onQrOpen = { vm.setQrOpen(true) },
             onQrClose = { vm.setQrOpen(false) },
             onInclude = vm::setIncludeContactCard,
@@ -200,6 +208,14 @@ fun MarketingScreen(navigator: Navigator) {
         )
     }
 }
+
+/**
+ * The soft keyboard's inset on device. Nothing where the harness provides the chrome insets: there is no
+ * keyboard there, and ARCHITECTURE.md keeps the desktop clear of the IME inset (the same gate as
+ * `statusBarAllowance()`).
+ */
+@Composable
+private fun keyboardInsets(): WindowInsets = if (LocalBottomChromeInsets.current == null) WindowInsets.ime else WindowInsets(0, 0, 0, 0)
 
 // ---------------------------------------------------------------------- header
 
@@ -570,6 +586,8 @@ private fun TrueCostCard.shareText(): String = buildString {
 /**
  * The true cost share sheet (`.sheet.and`, spec §4.7 items 5-6): the mockup handle, the share header with the
  * copy button, the card (tap it for the system share sheet), the four share targets and the contact card switch.
+ * Its one-line feedback ("Link copied", or why a target cannot act yet) is a snackbar hosted in the sheet itself:
+ * the screen's Scaffold host would draw under the modal sheet's scrim, where nobody sees it.
  */
 @Composable
 private fun TrueCostSheet(
@@ -578,8 +596,6 @@ private fun TrueCostSheet(
     /** "watchdogindex.com", the site the share header names. */
     siteLabel: String,
     onDismiss: () -> Unit,
-    /** One-line snackbar feedback: "Link copied", or why a share target could not act yet. */
-    onNotice: (String) -> Unit,
     onQrOpen: () -> Unit,
     onQrClose: () -> Unit,
     onInclude: (Boolean) -> Unit,
@@ -589,76 +605,94 @@ private fun TrueCostSheet(
     val t = WatchdogTheme.type
     val card = sheet.card
     val url = card?.shareUrl
+    val feedback = remember { SnackbarHostState() }
+    val scope = rememberCoroutineScope()
+    val notice: (String) -> Unit = { message ->
+        scope.launch {
+            feedback.currentSnackbarData?.dismiss()
+            feedback.showSnackbar(message)
+        }
+    }
     /** Runs [action] with the built card, or says why the sheet cannot act yet (building, or failed with a retry above). */
     fun withCard(action: (TrueCostCard) -> Unit): () -> Unit = {
         when {
             card != null -> action(card)
-            sheet.error != null -> onNotice("The card didn’t build. Try again above.")
-            else -> onNotice("The card is still building")
+            sheet.error != null -> notice("The card didn’t build. Try again above.")
+            else -> notice("The card is still building")
         }
     }
     val copyLink = withCard {
         platform.copyToClipboard("True cost card link", it.shareUrl)
-        onNotice("Link copied")
+        notice("Link copied")
     }
     // The subtitle follows the built card: an account without a professional profile gets no agent footer even with
     // the switch on, so only while the card is still building does it follow the switch.
     val withContactCard = if (card != null) card.agent != null else sheet.includeContactCard
     WdModalSheet(onDismiss = onDismiss) {
-        ShareSheetHeader(
-            title = if (card != null) card.shareTitle() else "True cost card",
-            subtitle = if (withContactCard) "$siteLabel · with your contact card" else siteLabel,
-            onTrailing = copyLink,
-        )
-        when {
-            card != null -> TrueCostCardView(
-                card = card,
-                modifier = Modifier
-                    .padding(top = 12.dp)
-                    .clip(RoundedCornerShape(WatchdogDimens.cardRadius))
-                    .clickable(role = Role.Button, onClickLabel = "Share the true cost card") {
-                        platform.share(card.shareTitle(), card.shareText(), card.shareUrl)
-                    },
-            )
-            sheet.error != null -> Column(
-                modifier = Modifier
-                    .fillMaxWidth()
-                    .padding(top = 12.dp)
-                    .clip(RoundedCornerShape(WatchdogDimens.cardRadius))
-                    .background(c.fill)
-                    .padding(horizontal = 18.dp, vertical = 16.dp),
-            ) {
-                Text(text = "The card didn’t build", color = c.ink, style = t.verdict)
-                Text(text = sheet.error, modifier = Modifier.padding(top = 6.dp), color = c.ink2, style = t.body.sized(14, FontWeight.Normal, 20.3))
-                WdTonalButton(label = "Try again", onClick = onRetry, modifier = Modifier.padding(top = 12.dp), icon = WdIcons.Refresh, small = true)
+        Box(modifier = Modifier.fillMaxWidth()) {
+            Column(modifier = Modifier.fillMaxWidth()) {
+                ShareSheetHeader(
+                    title = if (card != null) card.shareTitle() else "True cost card",
+                    subtitle = if (withContactCard) "$siteLabel · with your contact card" else siteLabel,
+                    onTrailing = copyLink,
+                )
+                when {
+                    card != null -> TrueCostCardView(
+                        card = card,
+                        modifier = Modifier
+                            .padding(top = 12.dp)
+                            .clip(RoundedCornerShape(WatchdogDimens.cardRadius))
+                            .clickable(role = Role.Button, onClickLabel = "Share the true cost card") {
+                                platform.share(card.shareTitle(), card.shareText(), card.shareUrl)
+                            },
+                    )
+                    sheet.error != null -> Column(
+                        modifier = Modifier
+                            .fillMaxWidth()
+                            .padding(top = 12.dp)
+                            .clip(RoundedCornerShape(WatchdogDimens.cardRadius))
+                            .background(c.fill)
+                            .padding(horizontal = 18.dp, vertical = 16.dp)
+                            .semantics { liveRegion = LiveRegionMode.Polite },
+                    ) {
+                        Text(text = "The card didn’t build", color = c.ink, style = t.verdict)
+                        Text(text = sheet.error, modifier = Modifier.padding(top = 6.dp), color = c.ink2, style = t.body.sized(14, FontWeight.Normal, 20.3))
+                        WdTonalButton(label = "Try again", onClick = onRetry, modifier = Modifier.padding(top = 12.dp), icon = WdIcons.Refresh, small = true)
+                    }
+                    // Announced as it appears, so the wait is spoken as well as drawn.
+                    else -> Box(
+                        modifier = Modifier
+                            .fillMaxWidth()
+                            .padding(top = 12.dp)
+                            .height(262.dp)
+                            .clip(RoundedCornerShape(WatchdogDimens.cardRadius))
+                            .background(c.fill)
+                            .semantics {
+                                contentDescription = "Building the true cost card"
+                                liveRegion = LiveRegionMode.Polite
+                            },
+                        contentAlignment = Alignment.Center,
+                    ) {
+                        Text(text = "Building the card…", color = c.muted, style = t.body)
+                    }
+                }
+                ShareTargets(
+                    onMessages = withCard { platform.composeSms(null, it.shareText() + "\n" + it.shareUrl) },
+                    onMail = withCard { platform.composeEmail(null, it.shareTitle(), it.shareText() + "\n\n" + it.shareUrl) },
+                    onCopy = copyLink,
+                    onQr = withCard { onQrOpen() },
+                    modifier = Modifier.padding(top = 14.dp),
+                )
+                OptionRow(
+                    title = "Include my contact card",
+                    subtitle = "Name, brokerage, phone and email",
+                    checked = sheet.includeContactCard,
+                    onChecked = onInclude,
+                    modifier = Modifier.padding(top = 12.dp),
+                )
             }
-            else -> Box(
-                modifier = Modifier
-                    .fillMaxWidth()
-                    .padding(top = 12.dp)
-                    .height(262.dp)
-                    .clip(RoundedCornerShape(WatchdogDimens.cardRadius))
-                    .background(c.fill)
-                    .semantics { contentDescription = "Building the true cost card" },
-                contentAlignment = Alignment.Center,
-            ) {
-                Text(text = "Building the card…", color = c.muted, style = t.body)
-            }
+            SnackbarHost(hostState = feedback, modifier = Modifier.align(Alignment.BottomCenter))
         }
-        ShareTargets(
-            onMessages = withCard { platform.composeSms(null, it.shareText() + "\n" + it.shareUrl) },
-            onMail = withCard { platform.composeEmail(null, it.shareTitle(), it.shareText() + "\n\n" + it.shareUrl) },
-            onCopy = copyLink,
-            onQr = withCard { onQrOpen() },
-            modifier = Modifier.padding(top = 14.dp),
-        )
-        OptionRow(
-            title = "Include my contact card",
-            subtitle = "Name, brokerage, phone and email",
-            checked = sheet.includeContactCard,
-            onChecked = onInclude,
-            modifier = Modifier.padding(top = 12.dp),
-        )
     }
     if (sheet.qrOpen && url != null) {
         QrDialog(url = url, onDismiss = onQrClose, onOpenWeb = {

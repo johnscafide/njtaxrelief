@@ -65,6 +65,13 @@ import kotlin.math.roundToInt
  * width. Every chart carries a spoken description; the numbers themselves are in the card text.
  */
 
+/**
+ * The app's type floor for chart labels. The SVG's 12-unit labels scale with the chart (13.7 sp on the 342 dp
+ * card of the 412 dp frame) but never below this: at 360 dp the card is 290 dp (11.6 sp unclamped) and at
+ * 320 dp it is 250 dp (10 sp), so there only the geometry shrinks and the labels stay 12 sp.
+ */
+private const val MinChartLabelSp = 12f
+
 
 /**
  * The Watchdog Score dial: 118 dp, round-capped stroke of 9 SVG units (8.85 dp at 118 dp, scaled with the
@@ -192,8 +199,8 @@ fun SparkBars(
         // 38 units between bar starts for the seven-year history; closer together if there are more points.
         val step = if (n <= 1) 0f else min(38f, (300f - 24f - barWidth - 24f) / (n - 1))
         val maxRate = points.maxOf { it.ratePer100 }.takeIf { it > 0.0 } ?: 1.0
-        // 12 SVG units, scaled with the chart (about 13.8 at the 344 dp card width), kept in sp.
-        val fontSize = (12f * s).toDp().value.sp
+        // 12 SVG units, scaled with the chart (about 13.7 at the 342 dp card width), kept in sp, never under 12.
+        val fontSize = maxOf(MinChartLabelSp, (12f * s).toDp().value).sp
         val plain = labelBase.copy(fontSize = fontSize, fontWeight = FontWeight.SemiBold, color = c.muted, lineHeight = TextUnit.Unspecified)
         val strong = plain.copy(fontWeight = FontWeight.ExtraBold, color = c.ink)
 
@@ -318,7 +325,7 @@ fun ValueLine(v: ValueCheck, modifier: Modifier = Modifier) {
             drawCircle(color = c.sand, radius = 7f * s, center = center, style = Stroke(width = 2.5f * s))
         }
 
-        val fontSize = (12f * s).toDp().value.sp
+        val fontSize = maxOf(MinChartLabelSp, (12f * s).toDp().value).sp
         val plain = labelBase.copy(fontSize = fontSize, fontWeight = FontWeight.SemiBold, color = c.muted, lineHeight = TextUnit.Unspecified)
         val strong = plain.copy(fontWeight = FontWeight.ExtraBold, color = c.ink)
         val width = this.size.width

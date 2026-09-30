@@ -10,6 +10,11 @@ import com.watchdogindex.agent.core.model.NotificationActionKind
  * Kinds and labels (the labels are the exact strings in the approved notification mockup):
  * open_brief "Open brief", call_client "Call client", view_farm "View farm", send_checkups "Send checkups",
  * later "Later", open "Open". Android shows at most three actions, so the list is capped at three.
+ *
+ * The server's push-sender (`actionsFor` in supabase/functions/push-sender/index.ts) sends its own words, which
+ * map onto these kinds: open_property, open_desk and open_app are [NotificationActionKind.Open] (the payload's
+ * route decides the screen, the property when there is a pin); mark_read is [NotificationActionKind.Later],
+ * which clears the alert on the device (the app sends no read receipt).
  */
 object NotificationActions {
     const val MAX_ACTIONS = 3
@@ -23,7 +28,7 @@ object NotificationActions {
         NotificationActionKind.Open to "Open",
     )
 
-    /** "open_brief" -> OpenBrief; also accepts "openBrief", "OPEN_BRIEF", "open-brief". */
+    /** "open_brief" -> OpenBrief; also accepts "openBrief", "OPEN_BRIEF", "open-brief", and push-sender's words (see the class note). */
     fun kindOf(raw: String?): NotificationActionKind? {
         val key = raw?.trim()?.lowercase()?.replace("-", "_")?.replace(" ", "_") ?: return null
         return when (key) {
@@ -31,8 +36,8 @@ object NotificationActions {
             "call_client", "callclient", "call" -> NotificationActionKind.CallClient
             "view_farm", "viewfarm", "farm" -> NotificationActionKind.ViewFarm
             "send_checkups", "sendcheckups", "send_checkup", "checkups" -> NotificationActionKind.SendCheckups
-            "later", "snooze", "dismiss" -> NotificationActionKind.Later
-            "open" -> NotificationActionKind.Open
+            "later", "snooze", "dismiss", "mark_read", "markread" -> NotificationActionKind.Later
+            "open", "open_property", "openproperty", "open_desk", "opendesk", "open_app", "openapp" -> NotificationActionKind.Open
             else -> null
         }
     }

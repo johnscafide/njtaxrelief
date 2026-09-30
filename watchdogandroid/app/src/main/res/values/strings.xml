@@ -2,7 +2,6 @@
 <resources>
     <string name="app_name">Watchdog</string>
     <string name="camera_purpose">Watchdog uses the camera only to read the QR rider on a For Sale sign so it can look up that home.</string>
-    <string name="location_purpose">Watchdog uses your location only while scanning a sign, to confirm which parcel is in front of you.</string>
 
     <!-- Notification channel groups (channels themselves are named from AlertChannel in core). -->
     <string name="notification_group_alerts">Alerts</string>

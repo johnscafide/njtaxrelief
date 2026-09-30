@@ -17,8 +17,12 @@ enum class ClientSort(val label: String) {
 /** The sheets the Clients screen can open over the list. */
 enum class ClientsSheet { ReviewCheckups, AddClients, SortFilter }
 
-/** Which way of adding clients is expanded inside the Add clients sheet. */
-enum class AddClientsMode { Contacts, Csv }
+/**
+ * Which way of adding clients is expanded inside the Add clients sheet. Only the pasted CSV for now: a "From
+ * contacts" row returns once the platform offers a contact picker (`PlatformServices`), so the sheet never shows
+ * a control that cannot act on the device in hand.
+ */
+enum class AddClientsMode { Csv }
 
 /** An email the screen hands to the platform's mail composer once, then clears. */
 data class EmailDraft(val subject: String, val body: String)
@@ -44,9 +48,18 @@ sealed interface ClientsUiState {
         val onlyWithNews: Boolean = false,
         val refreshing: Boolean = false,
         val sheet: ClientsSheet? = null,
-        /** Every home with a checkup ready, for the review sheet; null while it loads. */
+        /** Every home with a checkup ready, for the review sheet; null while it loads (or when listing them failed). */
         val readyRows: List<ClientRow>? = null,
         val sending: Boolean = false,
+        /**
+         * Why the review sheet could not list or send the checkups, shown inside the sheet: a snackbar in the
+         * screen's Scaffold would draw under the modal sheet. Cleared when the sheet opens or closes.
+         */
+        val reviewError: String? = null,
+        /** Rows whose "Send tax checkup" is in flight; their next-action line reads "Sending…" and takes no second tap. */
+        val sendingIds: Set<String> = emptySet(),
+        /** Rows being snoozed; the swipe and the accessibility action wait until the row comes back snoozed. */
+        val snoozingIds: Set<String> = emptySet(),
         val addMode: AddClientsMode? = null,
         val csvText: String = "",
         val importing: Boolean = false,

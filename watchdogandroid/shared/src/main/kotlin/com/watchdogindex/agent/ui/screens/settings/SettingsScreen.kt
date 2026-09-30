@@ -1,5 +1,6 @@
 package com.watchdogindex.agent.ui.screens.settings
 
+import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
@@ -11,10 +12,14 @@ import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.heightIn
 import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.lazy.LazyColumn
+import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.selection.selectable
 import androidx.compose.foundation.selection.selectableGroup
+import androidx.compose.foundation.shape.RoundedCornerShape
+import androidx.compose.foundation.verticalScroll
 import androidx.compose.material3.AlertDialog
 import androidx.compose.material3.RadioButton
 import androidx.compose.material3.RadioButtonDefaults
@@ -30,13 +35,17 @@ import androidx.compose.runtime.getValue
 import androidx.compose.runtime.remember
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.draw.clip
+import androidx.compose.ui.graphics.vector.ImageVector
 import androidx.compose.ui.semantics.Role
 import androidx.compose.ui.semantics.contentDescription
 import androidx.compose.ui.semantics.semantics
 import androidx.compose.ui.text.style.TextAlign
+import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.dp
 import com.watchdogindex.agent.app.LocalAppGraph
 import com.watchdogindex.agent.app.screenViewModel
+import com.watchdogindex.agent.core.WatchdogConfig
 import com.watchdogindex.agent.core.model.AlertChannel
 import com.watchdogindex.agent.core.model.AppThemeMode
 import com.watchdogindex.agent.core.model.QuietHours
@@ -70,7 +79,12 @@ import com.watchdogindex.agent.ui.nav.Route
 /** `.pb-sm` is 110 on the mockup device, whose gesture area is 24; the rest scales with the real inset. */
 private val ScrollBottomBeyondChrome = 86.dp
 
-private const val AGENT_DESK_URL = "https://www.watchdogindex.com/dashboard"
+/**
+ * The Agent Desk is `/dashboard` on the configured site origin, so a staging or preview build opens its own host
+ * rather than production. A clean root-level Watchdog route. `SiteLinks` does not name the dashboard yet; once it
+ * does (`config.links.dashboard`), this helper goes.
+ */
+private fun WatchdogConfig.dashboardUrl(): String = "${siteOrigin.trimEnd('/')}/dashboard"
 
 @Composable
 fun SettingsScreen(navigator: Navigator) {
@@ -104,7 +118,7 @@ fun SettingsScreen(navigator: Navigator) {
                 actions = listOf(TopBarAction(WdIcons.Search, "Search", onClick = { navigator.open(Route.Search()) })),
             )
             when (val s = state) {
-                SettingsUiState.Loading -> Box(Modifier.fillMaxSize())
+                SettingsUiState.Loading -> SettingsSkeleton()
                 is SettingsUiState.Error -> Column(
                     modifier = Modifier.fillMaxWidth().padding(horizontal = 20.dp, vertical = 24.dp),
                     verticalArrangement = Arrangement.spacedBy(12.dp),
@@ -119,7 +133,7 @@ fun SettingsScreen(navigator: Navigator) {
                         contentPadding = PaddingValues(bottom = ScrollBottomBeyondChrome + chromeBottom),
                         vm = vm,
                     )
-                    SettingsDialogs(ready = s, vm = vm, onOpenAgentDesk = { platform.openUrl(AGENT_DESK_URL) })
+                    SettingsDialogs(ready = s, vm = vm, onOpenAgentDesk = { platform.openUrl(graph.config.dashboardUrl()) })
                 }
             }
         }
@@ -201,7 +215,7 @@ private fun SettingsList(ready: SettingsUiState.Ready, contentPadding: PaddingVa
 
 @Composable
 private fun ChannelRow(
-    icon: androidx.compose.ui.graphics.vector.ImageVector,
+    icon: ImageVector,
     channel: AlertChannel,
     channels: Map<AlertChannel, Boolean>,
     subtitle: String?,
@@ -216,6 +230,60 @@ private fun ChannelRow(
             onCheckedChange = { on -> vm.setChannel(channel, on) },
         ),
     )
+}
+
+/**
+ * Loading: the list's silhouette in the theme's fill colour while the account and the alert preferences arrive,
+ * announced as one node like the other screens' skeletons. The profile row, the divider, then three sections of
+ * a label and two rows at the rows' own heights (84 dp profile, 72 dp rows, the `.msec` label's 22 dp above), so
+ * the content lands in place without a jump.
+ */
+@Composable
+private fun SettingsSkeleton() {
+    Column(
+        modifier = Modifier
+            .fillMaxSize()
+            .verticalScroll(rememberScrollState())
+            .semantics { contentDescription = "Loading settings" },
+    ) {
+        Row(
+            modifier = Modifier.fillMaxWidth().heightIn(min = 84.dp).padding(horizontal = 20.dp, vertical = 10.dp),
+            horizontalArrangement = Arrangement.spacedBy(16.dp),
+            verticalAlignment = Alignment.CenterVertically,
+        ) {
+            SkeletonBlock(width = 40.dp, height = 40.dp, radius = 20.dp)
+            Column(verticalArrangement = Arrangement.spacedBy(6.dp)) {
+                SkeletonBlock(width = 128.dp, height = 16.dp)
+                SkeletonBlock(width = 168.dp, height = 14.dp)
+            }
+        }
+        SettingsDivider()
+        repeat(3) {
+            SkeletonBlock(width = 96.dp, height = 14.dp, modifier = Modifier.padding(start = 20.dp, top = 26.dp, bottom = 4.dp))
+            repeat(2) { SkeletonRow() }
+        }
+    }
+}
+
+/** One row's silhouette at the `.mli` geometry: the 24 dp icon square and two text bars. */
+@Composable
+private fun SkeletonRow() {
+    Row(
+        modifier = Modifier.fillMaxWidth().heightIn(min = 72.dp).padding(horizontal = 20.dp, vertical = 10.dp),
+        horizontalArrangement = Arrangement.spacedBy(16.dp),
+        verticalAlignment = Alignment.CenterVertically,
+    ) {
+        SkeletonBlock(width = 24.dp, height = 24.dp)
+        Column(verticalArrangement = Arrangement.spacedBy(6.dp)) {
+            SkeletonBlock(width = 184.dp, height = 16.dp)
+            SkeletonBlock(width = 120.dp, height = 14.dp)
+        }
+    }
+}
+
+@Composable
+private fun SkeletonBlock(width: Dp, height: Dp, modifier: Modifier = Modifier, radius: Dp = 6.dp) {
+    Box(modifier.size(width, height).clip(RoundedCornerShape(radius)).background(WatchdogTheme.colors.fill))
 }
 
 @Composable

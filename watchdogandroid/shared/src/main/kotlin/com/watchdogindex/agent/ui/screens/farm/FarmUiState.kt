@@ -23,7 +23,7 @@ val MapLayer.description: String
     get() = when (this) {
         MapLayer.Score -> "Every parcel colored by Watchdog Score"
         MapLayer.Residential -> "Homes only, colored by Watchdog Score (MOD-IV class 2)"
-        MapLayer.SoldIn12Months -> "Deeds recorded in the last 12 months (SR-1A)"
+        MapLayer.SoldIn12Months -> "Deeds recorded in the last 12 months (SR1A deed sales)"
         MapLayer.Permits -> "Permits filed in the last 90 days"
     }
 

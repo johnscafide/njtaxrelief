@@ -61,6 +61,16 @@ class NotificationActionsTest {
     }
 
     @Test
+    fun `push-sender's action words map onto the app's kinds`() {
+        // actionsFor() in supabase/functions/push-sender/index.ts: a property event, a digest, a test push.
+        assertEquals(listOf(NotificationActionKind.Open, NotificationActionKind.Later), NotificationActions.parse("open_property,mark_read").map { it.kind })
+        assertEquals(listOf(NotificationActionKind.Open), NotificationActions.parse("open_desk").map { it.kind })
+        assertEquals(listOf(NotificationActionKind.Open), NotificationActions.parse("open_app").map { it.kind })
+        assertEquals(NotificationActionKind.Later, NotificationActions.kindOf("Mark read"))
+        assertEquals(NotificationActionKind.Open, NotificationActions.kindOf("open-property"))
+    }
+
+    @Test
     fun `each action opens the right screen`() {
         val pin = "0409_285.14_9"
         assertEquals("intelligence", NotificationActions.routeFor(NotificationActionKind.OpenBrief, pin, null))

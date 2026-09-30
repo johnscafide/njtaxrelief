@@ -11,6 +11,7 @@ import com.watchdogindex.agent.core.model.AlertChannel
  * Notification channels, one per [AlertChannel] so the system switches line up with the Alerts section in
  * Settings, in two groups: "Alerts" (the four property/farm/town/deadline channels) and "Monday brief".
  * Every description ends with [AlertChannel.NOT_A_SELLER_PREDICTION], as the privacy rules require.
+ * Which channel a push payload posts on is decided by [PushPayload.channelFor].
  */
 object NotificationChannels {
     const val GROUP_ALERTS = "alerts"
@@ -20,7 +21,7 @@ object NotificationChannels {
     const val GROUP_KEY = "com.watchdogindex.agent.ALERTS"
     const val SUMMARY_ID = 1_000
 
-    val DEFAULT_CHANNEL: AlertChannel = AlertChannel.ClientHomeChanges
+    val DEFAULT_CHANNEL: AlertChannel = PushPayload.DEFAULT_CHANNEL
 
     /** Creates (or updates the names/descriptions of) every channel. Safe to call on every start. */
     fun ensure(context: Context) {
@@ -34,12 +35,7 @@ object NotificationChannels {
         manager.createNotificationChannelsCompat(AlertChannel.entries.map { channel -> channel.toNotificationChannel() })
     }
 
-    /** The channel id to post on for a payload's `channel` value; unknown or missing values fall back to client home changes. */
-    fun idFor(raw: String?): String {
-        val clean = raw?.trim()?.lowercase() ?: return DEFAULT_CHANNEL.id
-        return AlertChannel.entries.firstOrNull { it.id == clean || it.name.equals(clean, ignoreCase = true) }?.id ?: DEFAULT_CHANNEL.id
-    }
-
+    /** The channel a stored channel id names; unknown ids read as the default. */
     fun channelFor(id: String): AlertChannel = AlertChannel.entries.firstOrNull { it.id == id } ?: DEFAULT_CHANNEL
 
     private fun AlertChannel.toNotificationChannel(): NotificationChannelCompat {

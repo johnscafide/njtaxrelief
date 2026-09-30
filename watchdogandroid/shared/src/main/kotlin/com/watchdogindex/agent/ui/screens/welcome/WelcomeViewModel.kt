@@ -105,12 +105,6 @@ class WelcomeViewModel(private val repos: Repositories) : ViewModel() {
         }
     }
 
-    /** From the [WelcomeUiState.Error] state back to a fresh Ready state. */
-    fun reset() {
-        cooldown?.cancel()
-        _state.value = WelcomeUiState.Ready()
-    }
-
     private suspend fun finishSignIn() {
         cooldown?.cancel()
         // The auth repository has already flipped its state to SignedIn, and the host reacts by popping

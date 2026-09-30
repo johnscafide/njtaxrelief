@@ -49,9 +49,11 @@ import androidx.compose.ui.draw.clip
 import androidx.compose.foundation.layout.requiredSize
 import androidx.compose.ui.layout.onSizeChanged
 import androidx.compose.ui.platform.LocalDensity
+import androidx.compose.ui.semantics.CustomAccessibilityAction
 import androidx.compose.ui.semantics.LiveRegionMode
 import androidx.compose.ui.semantics.Role
 import androidx.compose.ui.semantics.contentDescription
+import androidx.compose.ui.semantics.customActions
 import androidx.compose.ui.semantics.liveRegion
 import androidx.compose.ui.semantics.semantics
 import androidx.compose.ui.text.SpanStyle
@@ -106,7 +108,10 @@ import com.watchdogindex.agent.ui.components.topSeparator
 import com.watchdogindex.agent.ui.nav.Navigator
 import com.watchdogindex.agent.ui.nav.Route
 import com.watchdogindex.agent.ui.nav.Tab
+import kotlin.math.PI
 import kotlin.math.abs
+import kotlin.math.cos
+import kotlin.math.hypot
 
 /*
  * Farm (tab), spec §4.6: the platform map fills the screen; over it sit the elevated farm picker (top 48),
@@ -221,7 +226,7 @@ private fun FarmContent(
                 MapLayer.Permits -> "Farm map of $name highlighting homes with a permit in the last 90 days"
             },
         )
-        if (state.drawing) append(". Drawing a new area: tap to add a corner")
+        if (state.drawing) append(". Drawing a new area: tap to add a corner, or add one at the centre of the map from the actions")
     }
 
     BoxWithConstraints(Modifier.fillMaxSize()) {
@@ -256,7 +261,34 @@ private fun FarmContent(
             drawPoints = state.drawPoints,
             onDrawPoint = onDrawPoint,
         )
-        platform.FarmMap(mapState, Modifier.fillMaxSize().semantics { contentDescription = mapDescription })
+        // Tapping a parcel and dropping a corner are pointer gestures, so the map node also offers them as
+        // accessibility actions at its centre: the map pans with two fingers under TalkBack, and the sheet's
+        // parcel row (Open, Dismiss) and the drawing sheet take it from there.
+        val centreActions = if (state.drawing) {
+            listOf(
+                CustomAccessibilityAction(label = "Add a corner at the centre of the map") {
+                    vm.addDrawPoint(center)
+                    true
+                },
+            )
+        } else if (state.mapParcels.isNotEmpty()) {
+            listOf(
+                CustomAccessibilityAction(label = "Select the home at the centre of the map") {
+                    val parcel = parcelAt(center, zoom, state.mapParcels)
+                    if (parcel != null) vm.onParcelTap(parcel) else vm.notify("No home at the centre of the map. Pan closer to one and try again.")
+                    true
+                },
+            )
+        } else {
+            emptyList()
+        }
+        platform.FarmMap(
+            mapState,
+            Modifier.fillMaxSize().semantics {
+                contentDescription = mapDescription
+                if (centreActions.isNotEmpty()) customActions = centreActions
+            },
+        )
 
         // Farm picker in the elevated search bar's clothes (`.msearch` overlay, top 48). Its visible text names the
         // farm; the description also says what the bar does, since the component has no click label of its own.
@@ -313,7 +345,7 @@ private fun FarmContent(
                 }
             }
             when {
-                state.drawing -> DrawingSheet(state, vm, modifier = sheetModifier)
+                state.drawing -> DrawingSheet(state, vm, onAddCentreCorner = { vm.addDrawPoint(center) }, modifier = sheetModifier)
                 farm == null -> EmptyFarmCard(modifier = sheetModifier)
                 else -> FarmSheet(state = state, farm = farm, vm = vm, onOpenProperty = onOpenProperty, maxHeight = maxSheetHeight, modifier = sheetModifier)
             }
@@ -516,7 +548,8 @@ private fun ScoreLegend(modifier: Modifier = Modifier) {
 private fun StatTiles(stats: FarmStats, modifier: Modifier = Modifier) {
     Row(modifier = modifier.fillMaxWidth(), horizontalArrangement = Arrangement.spacedBy(8.dp)) {
         StatTile(
-            value = stats.medianScore?.toString() ?: "—",
+            // The en dash the Scan tiles use for a missing figure (ScanScreen's score, bill and price rows).
+            value = stats.medianScore?.toString() ?: "–",
             label = if (stats.medianScore != null) "Median score" else "No score yet",
             modifier = Modifier.weight(1f),
         )
@@ -584,11 +617,12 @@ private fun TurnoverNotes(stats: FarmStats, modifier: Modifier = Modifier) {
     }
 }
 
-/** Below the fold once the sheet is expanded: the recent deeds (public SR-1A records) and a way to switch farms. */
+/** Below the fold once the sheet is expanded: the recent deeds (public SR1A deed records) and a way to switch farms. */
 @Composable
 private fun ExpandedFarmDetails(state: FarmUiState.Ready, vm: FarmViewModel, onOpenProperty: (String) -> Unit) {
     val deeds = state.recentDeeds
-    CardLabel(text = "Recent deeds · SR-1A deed sales", modifier = Modifier.padding(top = 18.dp))
+    // Spelled as the property sources note, the brief and the mockup spell it.
+    CardLabel(text = "Recent deeds · SR1A deed sales", modifier = Modifier.padding(top = 18.dp))
     RowList(modifier = Modifier.padding(top = 8.dp)) {
         if (deeds.isEmpty()) {
             WdRow(title = "No deeds in the last 12 months", supporting = "New deeds appear here as the county records them.", icon = WdIcons.Sell, trailing = null)
@@ -616,9 +650,12 @@ private fun ExpandedFarmDetails(state: FarmUiState.Ready, vm: FarmViewModel, onO
 
 // ---------------------------------------------------------------------- drawing, empty, loading, error
 
-/** While drawing: how many corners so far, undo and cancel. The FAB reads "Done". */
+/**
+ * While drawing: how many corners so far, a way to add a corner without tapping the map ([onAddCentreCorner]
+ * drops one at the map's centre, so the area can be drawn by panning), undo and cancel. The FAB reads "Done".
+ */
 @Composable
-private fun DrawingSheet(state: FarmUiState.Ready, vm: FarmViewModel, modifier: Modifier = Modifier) {
+private fun DrawingSheet(state: FarmUiState.Ready, vm: FarmViewModel, onAddCentreCorner: () -> Unit, modifier: Modifier = Modifier) {
     val c = WatchdogTheme.colors
     val t = WatchdogTheme.type
     val corners = state.drawPoints.size
@@ -627,15 +664,22 @@ private fun DrawingSheet(state: FarmUiState.Ready, vm: FarmViewModel, modifier: 
         Text(text = "Draw your farm", color = c.ink, style = t.sectionTitle.copy(lineHeight = 28.sp))
         Text(
             text = when {
-                corners == 0 -> "Tap the map at each corner of the neighborhood. Three corners make an area."
+                corners == 0 -> "Tap the map at each corner of the neighborhood, or pan and add the corner at the centre. Three corners make an area."
                 corners < 3 -> "${Format.count(corners, "corner")} so far. Add ${3 - corners} more, then tap Done."
                 else -> "${Format.count(corners, "corner")} drawn. Keep adding, or tap Done to name the farm."
             },
-            modifier = Modifier.padding(top = 2.dp),
+            modifier = Modifier.padding(top = 2.dp).semantics { liveRegion = LiveRegionMode.Polite },
             color = c.muted,
             style = t.supporting.sized(13, FontWeight.Medium, 18.2),
         )
-        Row(modifier = Modifier.fillMaxWidth().padding(top = 12.dp), horizontalArrangement = Arrangement.spacedBy(8.dp)) {
+        WdTonalButton(
+            label = "Add corner at the centre",
+            onClick = onAddCentreCorner,
+            modifier = Modifier.fillMaxWidth().padding(top = 12.dp),
+            icon = WdIcons.Draw,
+            small = true,
+        )
+        Row(modifier = Modifier.fillMaxWidth().padding(top = 8.dp), horizontalArrangement = Arrangement.spacedBy(8.dp)) {
             WdTonalButton(
                 label = "Undo corner",
                 onClick = vm::undoDrawPoint,
@@ -855,12 +899,51 @@ private fun MapParcel.centroid(): LatLng {
 }
 
 /**
+ * The parcel under [point] (the map's centre, for the accessibility action): the one whose ring contains it,
+ * otherwise the nearest one within [SELECT_REACH_DP] at [zoom], so a home need only be roughly centred.
+ */
+private fun parcelAt(point: LatLng, zoom: Double, parcels: List<MapParcel>): MapParcel? {
+    parcels.firstOrNull { it.ring.containsPoint(point) }?.let { return it }
+    val metresPerDegreeLon = METRES_PER_DEGREE_LAT * cos(point.lat * PI / 180.0)
+    val reachMetres = SELECT_REACH_DP * MapZoom.metresPerDp(zoom, point.lat)
+    return parcels
+        .map { parcel ->
+            val c = parcel.centroid()
+            parcel to hypot((c.lat - point.lat) * METRES_PER_DEGREE_LAT, (c.lon - point.lon) * metresPerDegreeLon)
+        }
+        .filter { (_, metres) -> metres <= reachMetres }
+        .minByOrNull { (_, metres) -> metres }
+        ?.first
+}
+
+/** How far from the map's centre a home may sit and still be the one selected, in dp of the map. */
+private const val SELECT_REACH_DP = 40.0
+private const val METRES_PER_DEGREE_LAT = 111_320.0
+
+/** Ray casting over the ring's edges (the closing point may or may not repeat the first). */
+private fun List<LatLng>.containsPoint(p: LatLng): Boolean {
+    if (size < 3) return false
+    var inside = false
+    var j = lastIndex
+    for (i in indices) {
+        val a = this[i]
+        val b = this[j]
+        if ((a.lat > p.lat) != (b.lat > p.lat)) {
+            val crossing = (b.lon - a.lon) * (p.lat - a.lat) / (b.lat - a.lat) + a.lon
+            if (p.lon < crossing) inside = !inside
+        }
+        j = i
+    }
+    return inside
+}
+
+/**
  * The map centre that puts [anchor] [northOfCentreDp] above the middle of the map at [zoom] (in core's MapZoom
  * convention): the centre sits that far south, so the anchor lands in the middle of the strip the sheet leaves
  * visible.
  */
 private fun framedCenter(anchor: LatLng, zoom: Double, northOfCentreDp: Dp): LatLng {
-    val deltaLat = northOfCentreDp.value * MapZoom.metresPerDp(zoom, anchor.lat) / 111_320.0
+    val deltaLat = northOfCentreDp.value * MapZoom.metresPerDp(zoom, anchor.lat) / METRES_PER_DEGREE_LAT
     return LatLng(anchor.lat - deltaLat, anchor.lon)
 }
 

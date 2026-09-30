@@ -27,7 +27,4 @@ sealed interface WelcomeUiState {
         /** True once sign-in succeeded; the screen then opens Today and the host replaces the stack. */
         val signedIn: Boolean = false,
     ) : WelcomeUiState
-
-    /** Something the screen cannot recover from inline; the CTA block offers "Try again". */
-    data class Error(val userMessage: String) : WelcomeUiState
 }

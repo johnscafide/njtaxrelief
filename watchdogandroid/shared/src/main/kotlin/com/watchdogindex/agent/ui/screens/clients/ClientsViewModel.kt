@@ -39,23 +39,28 @@ class ClientsViewModel(private val repos: Repositories, initialFilter: ClientFil
     }
 
     /** First load or a retry after an error: the skeleton shows until the overview arrives. */
-    fun load() = reload(keepContent = false, refreshing = false)
+    fun load() {
+        reload(keepContent = false, refreshing = false)
+    }
 
     /** Pull to refresh: keeps the list on screen and only flags [ClientsUiState.Ready.refreshing]. */
-    fun refresh() = reload(keepContent = true, refreshing = true)
+    fun refresh() {
+        reload(keepContent = true, refreshing = true)
+    }
 
     /**
      * Fetches the overview for the current filter and query. With [keepContent] the previous rows stay on
      * screen until the new ones arrive (chip taps and typing never flash a skeleton). Only the latest reload
      * lands: each one cancels the last, so fast chip taps or typing never flicker through stale result sets.
+     * Returns the reload's job, for a row action that keeps its in-flight state until the fresh rows are here.
      */
-    private fun reload(keepContent: Boolean, refreshing: Boolean) {
+    private fun reload(keepContent: Boolean, refreshing: Boolean): Job {
         val previous = _state.value as? ClientsUiState.Ready
         queryJob?.cancel()
         loadJob?.cancel()
         val filter = previous?.filter ?: requestedFilter ?: ClientFilter.All
         val query = previous?.query.orEmpty()
-        loadJob = viewModelScope.launch {
+        val job = viewModelScope.launch {
             _state.value = when {
                 keepContent && previous != null -> previous.copy(refreshing = refreshing)
                 else -> ClientsUiState.Loading
@@ -76,6 +81,8 @@ class ClientsViewModel(private val repos: Repositories, initialFilter: ClientFil
                 fail("Your clients could not be loaded. Try again.")
             }
         }
+        loadJob = job
+        return job
     }
 
     /**
@@ -155,16 +162,25 @@ class ClientsViewModel(private val repos: Repositories, initialFilter: ClientFil
 
     // ------------------------------------------------------------------ sheets
 
+    /** Opens a sheet. The Add clients sheet opens on the pasted CSV, its one way in; the review sheet lists the ready checkups. */
     fun openSheet(sheet: ClientsSheet) {
-        updateReady { it.copy(sheet = sheet, addMode = null, importError = null) }
+        updateReady {
+            it.copy(sheet = sheet, addMode = if (sheet == ClientsSheet.AddClients) AddClientsMode.Csv else null, importError = null, reviewError = null)
+        }
         if (sheet == ClientsSheet.ReviewCheckups) loadReadyRows()
     }
 
-    fun closeSheet() = updateReady { it.copy(sheet = null, addMode = null, importError = null) }
+    fun closeSheet() = updateReady { it.copy(sheet = null, addMode = null, importError = null, reviewError = null) }
 
-    /** The review sheet lists every home with a checkup ready, whatever the list's filter shows. */
+    /** The review sheet's "Try again" after the ready checkups could not be listed. */
+    fun retryReadyRows() = loadReadyRows()
+
+    /**
+     * The review sheet lists every home with a checkup ready, whatever the list's filter shows. A list that does
+     * not come back is said in the sheet ([ClientsUiState.Ready.reviewError]) rather than shown as "no checkups".
+     */
     private fun loadReadyRows() {
-        updateReady { it.copy(readyRows = null) }
+        updateReady { it.copy(readyRows = null, reviewError = null) }
         viewModelScope.launch {
             try {
                 val ready = repos.clients.overview(ClientFilter.CheckupReady).rows
@@ -172,18 +188,21 @@ class ClientsViewModel(private val repos: Repositories, initialFilter: ClientFil
             } catch (e: CancellationException) {
                 throw e
             } catch (e: WatchdogException) {
-                updateReady { it.copy(readyRows = emptyList(), notice = e.userMessage) }
+                updateReady { it.copy(reviewError = e.userMessage) }
             } catch (e: Exception) {
-                updateReady { it.copy(readyRows = emptyList(), notice = "The ready checkups could not be listed. Try again.") }
+                updateReady { it.copy(reviewError = "The ready checkups could not be listed. Try again.") }
             }
         }
     }
 
-    /** "Review and send": sends every ready checkup, reports the count and reloads the list. */
+    /**
+     * "Review and send": sends every ready checkup, reports the count and reloads the list. A send that fails
+     * keeps the sheet open and explains itself inside it, where a snackbar under the sheet would go unseen.
+     */
     fun sendAllReadyCheckups() {
         val current = _state.value as? ClientsUiState.Ready ?: return
         if (current.sending) return
-        _state.value = current.copy(sending = true)
+        _state.value = current.copy(sending = true, reviewError = null)
         viewModelScope.launch {
             try {
                 val sent = repos.clients.sendAllReadyCheckups()
@@ -199,9 +218,9 @@ class ClientsViewModel(private val repos: Repositories, initialFilter: ClientFil
             } catch (e: CancellationException) {
                 throw e
             } catch (e: WatchdogException) {
-                updateReady { it.copy(sending = false, notice = e.userMessage) }
+                updateReady { it.copy(sending = false, reviewError = e.userMessage) }
             } catch (e: Exception) {
-                updateReady { it.copy(sending = false, notice = "The checkups could not be sent. Try again.") }
+                updateReady { it.copy(sending = false, reviewError = "The checkups could not be sent. Try again.") }
             }
         }
     }
@@ -214,62 +233,79 @@ class ClientsViewModel(private val repos: Repositories, initialFilter: ClientFil
      *
      * Only the send itself can fail the action. Once it is recorded, a link lookup that does not come back
      * still leaves an email to send (without the link), and the list reload reports its own problems.
+     *
+     * One send per row at a time: the row is in [ClientsUiState.Ready.sendingIds] (its line reads "Sending…")
+     * from the tap until the reloaded rows show it as sent, so a second tap cannot record a second send or hand
+     * the screen a second email draft.
      */
     fun sendCheckup(row: ClientRow) {
         val current = _state.value as? ClientsUiState.Ready ?: return
+        if (row.id in current.sendingIds) return
+        _state.value = current.copy(sendingIds = current.sendingIds + row.id)
         viewModelScope.launch {
             try {
-                repos.clients.sendCheckup(row.id)
-            } catch (e: CancellationException) {
-                throw e
-            } catch (e: WatchdogException) {
-                updateReady { it.copy(notice = e.userMessage) }
-                return@launch
-            } catch (e: Exception) {
-                updateReady { it.copy(notice = "That checkup could not be sent. Try again.") }
-                return@launch
-            }
-            val link = row.pin?.let { pin ->
                 try {
-                    repos.properties.checkupLink(pin)
+                    repos.clients.sendCheckup(row.id)
                 } catch (e: CancellationException) {
                     throw e
+                } catch (e: WatchdogException) {
+                    updateReady { it.copy(notice = e.userMessage) }
+                    return@launch
                 } catch (e: Exception) {
-                    null
+                    updateReady { it.copy(notice = "That checkup could not be sent. Try again.") }
+                    return@launch
                 }
+                val link = row.pin?.let { pin ->
+                    try {
+                        repos.properties.checkupLink(pin)
+                    } catch (e: CancellationException) {
+                        throw e
+                    } catch (e: Exception) {
+                        null
+                    }
+                }
+                val deadline = current.overview.season?.appealDeadline
+                val body = buildString {
+                    append("Hi,\n\nYour tax checkup for ${row.address} is ready. It shows whether the assessment holds up")
+                    if (deadline != null) append(" and the $deadline appeal deadline") else append(" and the next appeal deadline")
+                    append(".\n\n")
+                    if (link != null) append(link).append("\n\n")
+                    append("Happy to walk through it whenever suits you.")
+                }
+                updateReady {
+                    it.copy(
+                        notice = "Tax checkup sent for ${row.address}",
+                        emailDraft = EmailDraft(subject = "Your tax checkup for ${row.address}", body = body),
+                    )
+                }
+                reload(keepContent = true, refreshing = false).join()
+            } finally {
+                updateReady { it.copy(sendingIds = it.sendingIds - row.id) }
             }
-            val deadline = current.overview.season?.appealDeadline
-            val body = buildString {
-                append("Hi,\n\nYour tax checkup for ${row.address} is ready. It shows whether the assessment holds up")
-                if (deadline != null) append(" and the $deadline appeal deadline") else append(" and the next appeal deadline")
-                append(".\n\n")
-                if (link != null) append(link).append("\n\n")
-                append("Happy to walk through it whenever suits you.")
-            }
-            updateReady {
-                it.copy(
-                    notice = "Tax checkup sent for ${row.address}",
-                    emailDraft = EmailDraft(subject = "Your tax checkup for ${row.address}", body = body),
-                )
-            }
-            reload(keepContent = true, refreshing = false)
         }
     }
 
-    /** Swipe (or the row's accessibility action) to snooze: the row's task waits until next Monday. */
+    /**
+     * Swipe (or the row's accessibility action) to snooze: the row's task waits until next Monday. One snooze per
+     * row at a time, held in [ClientsUiState.Ready.snoozingIds] until the reloaded rows show it snoozed.
+     */
     fun snooze(row: ClientRow) {
-        if (_state.value !is ClientsUiState.Ready) return
+        val current = _state.value as? ClientsUiState.Ready ?: return
+        if (row.id in current.snoozingIds) return
+        _state.value = current.copy(snoozingIds = current.snoozingIds + row.id)
         viewModelScope.launch {
             try {
                 repos.clients.snooze(row.id)
                 updateReady { it.copy(notice = "${row.address} snoozed until next Monday") }
-                reload(keepContent = true, refreshing = false)
+                reload(keepContent = true, refreshing = false).join()
             } catch (e: CancellationException) {
                 throw e
             } catch (e: WatchdogException) {
                 updateReady { it.copy(notice = e.userMessage) }
             } catch (e: Exception) {
                 updateReady { it.copy(notice = "That home could not be snoozed. Try again.") }
+            } finally {
+                updateReady { it.copy(snoozingIds = it.snoozingIds - row.id) }
             }
         }
     }

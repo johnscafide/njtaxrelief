@@ -57,11 +57,12 @@ fun StatusChipView(chip: StatusChip, modifier: Modifier = Modifier) {
 }
 
 /**
- * Material filter chip as the mockups draw it (`.mchip`): 32 dp tall, 8 dp radius, 1 dp outline, 14 sp 700
+ * Material filter chip as the mockups draw it (`.mchip`): 32 dp tall, 8 dp radius, 1 dp border, 14 sp 700
  * ink2; selected = indicator fill with a leading 18 dp check; [elevated] unselected = surface with a soft
  * shadow (the Farm overlay). Reserves a 48 dp touch target, so the chip sits in a 48 dp tall box.
  * The chips in the app pick one option, so [role] defaults to a radio button; pass [Role.Checkbox] for a
- * multi-select filter.
+ * multi-select filter. The unselected border is `muted`, not the mockup's `mOutline`, which is 1.75:1 on the
+ * page (2.1 dark) where a control's boundary needs 3:1 (WCAG 1.4.11); muted is 5.1:1 light and 7.8:1 dark.
  */
 @Composable
 fun WdFilterChip(
@@ -85,7 +86,7 @@ fun WdFilterChip(
     var m = modifier.minTouchTarget().height(32.dp)
     if (!selected && elevated) m = m.shadow(elevation = 2.dp, shape = shape, ambientColor = c.shadow, spotColor = c.shadow)
     m = m.clip(shape).background(container)
-    if (!selected && !elevated) m = m.border(1.dp, c.mOutline, shape)
+    if (!selected && !elevated) m = m.border(1.dp, c.muted, shape)
     m = m
         .selectable(selected = selected, role = role, onClick = onClick)
         .padding(start = if (leading != null) 10.dp else 14.dp, end = 14.dp)
@@ -142,8 +143,10 @@ fun FilterChipsRow(
 data class SegmentOption(val label: String, val icon: ImageVector? = null)
 
 /**
- * Segmented buttons (`.mseg`): equal columns, 48 dp tall, 24 dp radius, 1 dp outline with 1 dp dividers;
- * the selected segment is indicator-filled with a leading check, 14 sp 700.
+ * Segmented buttons (`.mseg`): equal columns, 48 dp tall, 24 dp radius, 1 dp border with 1 dp dividers;
+ * the selected segment is indicator-filled with a leading check, 14 sp 700. Border and dividers are `muted`
+ * for the same reason as the chips': they are the unselected segments' only boundary, and `mOutline` is
+ * under 3:1 on the page in both themes.
  */
 @Composable
 fun WdSegmentedButtons(
@@ -159,11 +162,11 @@ fun WdSegmentedButtons(
             .fillMaxWidth()
             .height(WatchdogDimens.buttonHeight)
             .clip(shape)
-            .border(1.dp, c.mOutline, shape),
+            .border(1.dp, c.muted, shape),
     ) {
         options.forEachIndexed { index, option ->
             if (index > 0) {
-                Box(Modifier.width(1.dp).fillMaxHeight().background(c.mOutline))
+                Box(Modifier.width(1.dp).fillMaxHeight().background(c.muted))
             }
             val selected = index == selectedIndex
             val content = if (selected) c.mOnIndicator else c.ink2

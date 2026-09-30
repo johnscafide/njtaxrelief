@@ -124,10 +124,17 @@ class ScanViewModel(
 
     // ------------------------------------------------------------------ result actions
 
+    /**
+     * The newest save request, so a slow failure cannot undo a later tap on the bookmark; only the newest
+     * request may put the bookmark back, and only while the panel still shows the home it was for.
+     */
+    private var savedRequest = 0L
+
     fun toggleSaved() {
         val ready = ready() ?: return
         val pin = ready.result?.property?.pin ?: return
         val saved = !ready.saved
+        val request = ++savedRequest
         updateReady { it.copy(saved = saved, notice = if (saved) "Saved to your clients" else "Removed from your clients") }
         viewModelScope.launch {
             try {
@@ -135,7 +142,10 @@ class ScanViewModel(
             } catch (e: CancellationException) {
                 throw e
             } catch (e: Exception) {
-                updateReady { it.copy(saved = !saved, notice = e.friendlyMessage()) }
+                val latest = savedRequest == request
+                updateReady {
+                    if (latest && it.result?.property?.pin == pin) it.copy(saved = !saved, notice = e.friendlyMessage()) else it.copy(notice = e.friendlyMessage())
+                }
             }
         }
     }
@@ -164,16 +174,21 @@ class ScanViewModel(
 
     // ------------------------------------------------------------------ history
 
+    /**
+     * Opens the history sheet and (re)loads it; also the sheet's own retry. A failed load is reported inside the
+     * sheet ([ScanUiState.Ready.historyError]): a snackbar would draw under the modal sheet, and an empty list in
+     * its place would claim nothing was ever scanned.
+     */
     fun openHistory() {
-        updateReady { it.copy(historyOpen = true, historyLoading = it.history == null) }
+        updateReady { it.copy(historyOpen = true, historyLoading = it.history == null, historyError = null) }
         viewModelScope.launch {
             try {
                 val items = repos.scan.history()
-                updateReady { it.copy(history = items, historyLoading = false) }
+                updateReady { it.copy(history = items, historyLoading = false, historyError = null) }
             } catch (e: CancellationException) {
                 throw e
             } catch (e: Exception) {
-                updateReady { it.copy(historyLoading = false, history = it.history ?: emptyList(), notice = e.friendlyMessage()) }
+                updateReady { it.copy(historyLoading = false, historyError = e.friendlyMessage()) }
             }
         }
     }

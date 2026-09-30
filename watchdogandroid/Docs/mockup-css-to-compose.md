@@ -111,6 +111,17 @@ Intelligence tokens (those do **not** change with theme).
 | `--m-fab` | `#0e2248` | `#e3eaf7` | `WdColor.m3Fab` | |
 | `--m-on-fab` | `#ffffff` | `#0e2248` | `WdColor.m3OnFab` | |
 
+App deviations from these two rows, all for AA contrast (the render comparison tolerates 24 per channel, so
+none of them moves a similarity score):
+
+- Light `--m-high` is drawn as **`#e9e5dd`** (`WatchdogColors.mHigh`): the `muted` 16sp hints of `.msearch` and
+  the composer `.fld` were 4.38:1 on `#e4e0d7` and are 4.6:1 now. Dark keeps `#18253f` (6.5:1).
+- `--m-outline` is not used where a border is a control's only boundary, because WCAG 1.4.11 asks 3:1 there and
+  it is 1.75:1 on the light page (2.1 dark). The shared components draw those boundaries in `muted` instead: the
+  `.tick` ring of `.row.tk`, the `.btn.outl` border, the `.mseg` border and dividers, the unselected `.mchip`
+  border, the `.sw-m` off border and thumb, and the radio ring (`WdRadioButton`). `.handle` keeps `m3Outline`
+  (a drag handle is supplementary to swipe and tap), as does the Material `outline` slot.
+
 ### 1.9 Map
 
 | CSS var | Light | Dark | Kotlin |

@@ -29,14 +29,12 @@ import kotlinx.coroutines.launch
  * Receives FCM messages and token rotations. Only runs when Firebase is configured (google-services.json present);
  * without it the service is declared but Firebase never starts it.
  *
- * Payload contract (all data fields are strings; see Docs push proposal, section 8):
- *  title, body            the notification text (also accepted from the `notification` block)
- *  channel                an AlertChannel id, default client_home_changes
- *  actions                comma-separated kinds: open_brief, call_client, view_farm, send_checkups, later, open
- *  pin / pams_pin         the home the alert is about (opens the property)
- *  route                  the screen to open (see IntentRoutes.fromExtras)
- *  phone                  optional; "Call client" then opens the app, which starts the dialer on that number
- *  event_id / collapse_key stable ids used for the notification id
+ * The payload is decoded by [PushPayload], which documents both shapes it accepts: the app's data-only contract
+ * (title, body, channel, actions, pin/pams_pin, route, phone, event_id) and what the server's push-sender emits
+ * today (a `notification` block plus route, pin, event_id, event_type, severity, its own channel names and action
+ * words). A message with a `notification` block reaches this service only while the app is in the foreground;
+ * in the background the system renders it on the channel the server named (falling back to the manifest's default
+ * channel) and its tap delivers the data keys as launcher-intent extras, which MainActivity reads too.
  * Push bodies come from privacy-reviewed sources; this service shows them as-is and never adds owner data.
  *
  * Every tap and action button carries [EXTRA_NOTIFICATION_ID]; MainActivity clears that alert through
@@ -52,25 +50,23 @@ class WatchdogMessagingService : FirebaseMessagingService() {
     }
 
     override fun onMessageReceived(message: RemoteMessage) {
-        val data = message.data
-        val title = message.notification?.title ?: data["title"] ?: getString(R.string.app_name)
-        val body = message.notification?.body ?: data["body"] ?: data["summary"] ?: return
-        val channelId = NotificationChannels.idFor(data["channel"])
-        val pin = (data["pin"] ?: data["pams_pin"])?.takeIf { IntentRoutes.isPin(it) }
-        val route = data["route"]
-        val actions = NotificationActions.parse(data["actions"])
-        val idSeed = data["event_id"] ?: message.messageId ?: message.collapseKey ?: "$title|$body"
-        val notificationId = idSeed.hashCode() and 0x7FFFFFFF
+        val payload = PushPayload.parse(
+            data = message.data,
+            defaultTitle = getString(R.string.app_name),
+            notificationTitle = message.notification?.title,
+            notificationBody = message.notification?.body,
+            messageId = message.messageId ?: message.collapseKey,
+        ) ?: return
         showNotification(
             context = this,
-            notificationId = notificationId,
-            channelId = channelId,
-            title = title,
-            body = body,
-            pin = pin,
-            route = route,
-            phone = data["phone"],
-            actions = actions,
+            notificationId = payload.notificationId,
+            channelId = payload.channel.id,
+            title = payload.title,
+            body = payload.body,
+            pin = payload.pin,
+            route = payload.route,
+            phone = payload.phone,
+            actions = payload.actions,
         )
     }
 

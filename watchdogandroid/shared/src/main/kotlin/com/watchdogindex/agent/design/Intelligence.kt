@@ -11,6 +11,7 @@ import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.CompositionLocalProvider
+import androidx.compose.runtime.ReadOnlyComposable
 import androidx.compose.runtime.getValue
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.composed
@@ -44,26 +45,47 @@ import kotlin.math.hypot
  *  - that surface stays white even in dark mode, with fixed light-ink text colors ([Spectrum.ink] etc.);
  *  - in the product name only the word "Intelligence" carries the spectrum gradient, "Watchdog" stays in the
  *    surrounding text color;
+ *  - as text the gradient uses the AA stops ([Spectrum.textStops] on the white surface and the light theme,
+ *    [Spectrum.textStopsOnDark] on the dark theme's own surfaces), never the bright border stops, so the word
+ *    passes 4.5:1 at every size it is drawn (12 sp in an answer bubble up to the 22 sp top bar);
  *  - the name is never put in a pill or capsule;
  *  - with reduced motion the border is static.
  */
 object Intelligence {
-    /** Horizontal text gradient for the word "Intelligence" (CSS: 0%, 34%, 67%, 100%). */
-    fun wordBrush(width: Float = Float.POSITIVE_INFINITY): Brush = Brush.linearGradient(
-        colorStops = arrayOf(0f to Spectrum.cyan, .34f to Spectrum.blue, .67f to Spectrum.violet, 1f to Spectrum.magenta),
-        start = Offset.Zero,
-        end = Offset(width, 0f),
-    )
+    /**
+     * Horizontal text gradient for the word "Intelligence" (CSS: 0%, 34%, 67%, 100%) in the AA text stops:
+     * [Spectrum.textStopsOnDark] when [onDark], otherwise [Spectrum.textStops]. Inside [IntelligenceInk] the
+     * surface is always white, so [onDark] is false there.
+     */
+    fun wordBrush(onDark: Boolean = false, width: Float = Float.POSITIVE_INFINITY): Brush {
+        val stops = if (onDark) Spectrum.textStopsOnDark else Spectrum.textStops
+        return Brush.linearGradient(
+            colorStops = arrayOf(0f to stops[0], .34f to stops[1], .67f to stops[2], 1f to stops[3]),
+            start = Offset.Zero,
+            end = Offset(width, 0f),
+        )
+    }
 
     /** The word with the spectrum treatment, to be used inside a Text via [productName]. */
-    val wordStyle: SpanStyle get() = SpanStyle(brush = wordBrush())
+    fun wordStyle(onDark: Boolean = false): SpanStyle = SpanStyle(brush = wordBrush(onDark))
 
-    /** "Watchdog Intelligence" with only the second word in spectrum. [suffix] adds e.g. " Voice". */
-    fun productName(suffix: String = ""): AnnotatedString = buildAnnotatedString {
+    /**
+     * "Watchdog Intelligence" with only the second word in spectrum. [suffix] adds e.g. " Voice"; [onDark] picks
+     * the text stops for a dark surface. Composables use the overload without it, which reads the theme.
+     */
+    fun productName(suffix: String, onDark: Boolean): AnnotatedString = buildAnnotatedString {
         append("Watchdog ")
-        withStyle(wordStyle) { append("Intelligence") }
+        withStyle(wordStyle(onDark)) { append("Intelligence") }
         if (suffix.isNotEmpty()) append(suffix)
     }
+
+    /**
+     * [productName] for the surface it is drawn on: the dark stops on the dark theme's bg, surface and tint, the
+     * light stops in the light theme and inside [IntelligenceInk] (whose colors report `isDark = false`).
+     */
+    @Composable
+    @ReadOnlyComposable
+    fun productName(suffix: String = ""): AnnotatedString = productName(suffix, LocalWatchdogColors.current.isDark)
 
     const val ROTATION_MILLIS = 7000
     val borderWidth = 2.dp

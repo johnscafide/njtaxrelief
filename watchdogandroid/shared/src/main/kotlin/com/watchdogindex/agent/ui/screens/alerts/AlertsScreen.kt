@@ -34,7 +34,6 @@ import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.remember
-import androidx.compose.runtime.rememberCoroutineScope
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
@@ -49,6 +48,7 @@ import com.watchdogindex.agent.app.screenViewModel
 import com.watchdogindex.agent.core.model.AlertChannel
 import com.watchdogindex.agent.core.model.AlertPreferences
 import com.watchdogindex.agent.core.model.AppNotification
+import com.watchdogindex.agent.core.model.ClientFilter
 import com.watchdogindex.agent.core.model.NotificationAction
 import com.watchdogindex.agent.core.model.NotificationActionKind
 import com.watchdogindex.agent.core.model.Tint
@@ -72,7 +72,6 @@ import com.watchdogindex.agent.ui.components.statusBarAllowance
 import com.watchdogindex.agent.ui.components.topSeparator
 import com.watchdogindex.agent.ui.nav.Navigator
 import com.watchdogindex.agent.ui.nav.Route
-import kotlinx.coroutines.launch
 
 /*
  * Alerts (spec §4.9 documents the Android notification shade; this is the in-app list of the same alerts).
@@ -92,7 +91,6 @@ fun AlertsScreen(navigator: Navigator) {
     val vm = screenViewModel { AlertsViewModel(graph.repos, graph.platform) }
     val state by vm.state.collectAsState()
     val c = WatchdogTheme.colors
-    val scope = rememberCoroutineScope()
     val snackbar = remember { SnackbarHostState() }
 
     val notice = (state as? AlertsUiState.Ready)?.notice
@@ -139,17 +137,21 @@ fun AlertsScreen(navigator: Navigator) {
                     NotificationGroup(
                         notifications = s.notifications,
                         expanded = s.expanded,
+                        callEnabled = !s.resolvingPhones,
                         onToggleExpanded = vm::toggleExpanded,
                         onAction = { notification, action ->
                             when (action.kind) {
                                 NotificationActionKind.OpenBrief -> navigator.open(Route.Intelligence)
                                 NotificationActionKind.ViewFarm -> navigator.open(Route.Farm)
-                                NotificationActionKind.SendCheckups -> navigator.open(Route.Clients(com.watchdogindex.agent.core.model.ClientFilter.CheckupReady))
+                                NotificationActionKind.SendCheckups -> navigator.open(Route.Clients(ClientFilter.CheckupReady))
                                 NotificationActionKind.Later -> vm.dismiss(notification.id)
                                 NotificationActionKind.Open -> navigator.open(notification.openRoute())
-                                NotificationActionKind.CallClient -> scope.launch {
-                                    val phone = vm.phoneFor(notification.pin)
+                                NotificationActionKind.CallClient -> {
+                                    // The number was resolved once with the list, so a tap dials at once or
+                                    // opens the home; nothing is fetched here and a second tap cannot start a
+                                    // second lookup or a second dial.
                                     val pin = notification.pin
+                                    val phone = pin?.let { s.clientPhones[it] }
                                     when {
                                         phone != null -> platform.dial(phone)
                                         pin != null -> navigator.open(Route.Property(pin))
@@ -169,11 +171,13 @@ fun AlertsScreen(navigator: Navigator) {
 /**
  * The grouped notification card (`.ngroup`): 28 dp radius surface; header row (padding 14 16 4) with the
  * 20 dp Watchdog mark, "Watchdog · now" in 12 sp and the collapse chevron; then one item per alert.
+ * [callEnabled] is false while the view model is still looking up the numbers behind "Call client".
  */
 @Composable
 private fun NotificationGroup(
     notifications: List<AppNotification>,
     expanded: Boolean,
+    callEnabled: Boolean,
     onToggleExpanded: () -> Unit,
     onAction: (AppNotification, NotificationAction) -> Unit,
 ) {
@@ -217,6 +221,7 @@ private fun NotificationGroup(
                 NotificationItem(
                     notification = notification,
                     first = index == 0,
+                    callEnabled = callEnabled,
                     onAction = { action -> onAction(notification, action) },
                 )
             }
@@ -256,7 +261,7 @@ private fun ExpandToggle(expanded: Boolean, count: Int, onClick: () -> Unit) {
  * starts 2 dp lower and the item ends 4 dp sooner than the shade's numbers; the visible geometry is the same.
  */
 @Composable
-private fun NotificationItem(notification: AppNotification, first: Boolean, onAction: (NotificationAction) -> Unit) {
+private fun NotificationItem(notification: AppNotification, first: Boolean, callEnabled: Boolean, onAction: (NotificationAction) -> Unit) {
     val c = WatchdogTheme.colors
     val t = WatchdogTheme.type
     Column(
@@ -284,30 +289,37 @@ private fun NotificationItem(notification: AppNotification, first: Boolean, onAc
                 verticalAlignment = Alignment.CenterVertically,
             ) {
                 notification.actions.forEach { action ->
-                    ActionPill(label = action.label, onClick = { onAction(action) })
+                    ActionPill(
+                        label = action.label,
+                        onClick = { onAction(action) },
+                        enabled = action.kind != NotificationActionKind.CallClient || callEnabled,
+                    )
                 }
             }
         }
     }
 }
 
-/** A shade action (`.nact`): 40 dp tall, 20 dp radius, padding 0 12, 14 sp 500 in the link color, inside a 48 dp target. */
+/**
+ * A shade action (`.nact`): 40 dp tall, 20 dp radius, padding 0 12, 14 sp 500 in the link color, inside a 48 dp
+ * target. Disabled (a "Call client" whose number is still being looked up) it draws muted and reads as disabled.
+ */
 @Composable
-private fun ActionPill(label: String, onClick: () -> Unit) {
+private fun ActionPill(label: String, onClick: () -> Unit, enabled: Boolean = true) {
     val c = WatchdogTheme.colors
     val t = WatchdogTheme.type
     Box(
         modifier = Modifier
             .minTouchTarget()
             .clip(RoundedCornerShape(20.dp))
-            .clickable(role = Role.Button, onClick = onClick)
+            .clickable(enabled = enabled, role = Role.Button, onClick = onClick)
             .heightIn(min = 40.dp)
             .padding(horizontal = 12.dp),
         contentAlignment = Alignment.Center,
     ) {
         Text(
             text = label,
-            color = c.link,
+            color = if (enabled) c.link else c.muted,
             style = t.body.sized(14, FontWeight.Medium, 19.6),
             maxLines = 1,
             softWrap = false,

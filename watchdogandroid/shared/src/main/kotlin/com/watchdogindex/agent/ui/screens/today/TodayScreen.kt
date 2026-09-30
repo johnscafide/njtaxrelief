@@ -36,9 +36,12 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.platform.LocalLayoutDirection
+import androidx.compose.ui.semantics.CustomAccessibilityAction
 import androidx.compose.ui.semantics.Role
 import androidx.compose.ui.semantics.clearAndSetSemantics
 import androidx.compose.ui.semantics.contentDescription
+import androidx.compose.ui.semantics.customActions
+import androidx.compose.ui.semantics.heading
 import androidx.compose.ui.semantics.role
 import androidx.compose.ui.semantics.semantics
 import androidx.compose.ui.text.font.FontWeight
@@ -139,6 +142,7 @@ fun TodayScreen(navigator: Navigator) {
                     contentPadding = contentPadding,
                     onSearch = openSearch,
                     onAccount = openSettings,
+                    onRefresh = vm::refresh,
                     onToggleTask = vm::setTaskDone,
                     onToggleAllTasks = vm::toggleAllTasks,
                     onToggleAllChanges = vm::toggleAllChanges,
@@ -160,6 +164,7 @@ private fun TodayContent(
     contentPadding: PaddingValues,
     onSearch: () -> Unit,
     onAccount: () -> Unit,
+    onRefresh: () -> Unit,
     onToggleTask: (taskId: String, done: Boolean) -> Unit,
     onToggleAllTasks: () -> Unit,
     onToggleAllChanges: () -> Unit,
@@ -170,7 +175,7 @@ private fun TodayContent(
     val digest = state.digest
     LazyColumn(modifier = Modifier.fillMaxSize(), contentPadding = contentPadding) {
         item(key = "search") { SearchRow(initials = state.initials, onSearch = onSearch, onAccount = onAccount) }
-        item(key = "head") { PageHead(dateLabel = digest.dateLabel) }
+        item(key = "head") { PageHead(dateLabel = digest.dateLabel, onRefresh = onRefresh) }
         item(key = "summary") { SummaryCard(digest = digest, modifier = Modifier.cardMargin()) }
 
         item(key = "needs-you") {
@@ -282,9 +287,15 @@ private fun AccountAvatar(initials: String?, onClick: () -> Unit) {
     }
 }
 
-/** Page head (`.mhead`): 22 dp above, the upper-case 13 sp eyebrow (padding 0 20, 4 below) and the 30 sp headline. */
+/**
+ * Page head (`.mhead`): 22 dp above, the upper-case 13 sp eyebrow (padding 0 20, 4 below) and the 30 sp headline.
+ * The headline is the page's heading and, with [onRefresh], carries a "Refresh" accessibility action: pull to
+ * refresh is a gesture only, so TalkBack and switch-access users refresh from the actions menu on the heading
+ * instead (a scrollable container is not a reliable focus stop; the heading always is). Offered in the Ready
+ * state only; the skeleton is already loading and the error card has its own retry.
+ */
 @Composable
-private fun PageHead(dateLabel: String?) {
+private fun PageHead(dateLabel: String?, onRefresh: (() -> Unit)? = null) {
     val c = WatchdogTheme.colors
     val t = WatchdogTheme.type
     Column(modifier = Modifier.fillMaxWidth().padding(top = 22.dp)) {
@@ -298,7 +309,22 @@ private fun PageHead(dateLabel: String?) {
         } else {
             SkeletonBlock(width = 168.dp, height = 13.dp, radius = 6.dp, modifier = Modifier.padding(start = 20.dp, top = 3.dp, bottom = 6.dp))
         }
-        Text(text = "Today", modifier = Modifier.padding(horizontal = 20.dp), color = c.ink, style = t.headline)
+        Text(
+            text = "Today",
+            modifier = Modifier.padding(horizontal = 20.dp).semantics {
+                heading()
+                if (onRefresh != null) {
+                    customActions = listOf(
+                        CustomAccessibilityAction(label = "Refresh") {
+                            onRefresh()
+                            true
+                        },
+                    )
+                }
+            },
+            color = c.ink,
+            style = t.headline,
+        )
     }
 }
 

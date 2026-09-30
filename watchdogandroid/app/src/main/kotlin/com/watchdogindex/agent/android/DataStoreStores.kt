@@ -2,6 +2,7 @@ package com.watchdogindex.agent.android
 
 import android.content.Context
 import androidx.datastore.core.DataStore
+import androidx.datastore.core.handlers.ReplaceFileCorruptionHandler
 import androidx.datastore.preferences.core.Preferences
 import androidx.datastore.preferences.core.edit
 import androidx.datastore.preferences.core.emptyPreferences
@@ -24,12 +25,20 @@ import java.io.IOException
  *  - watchdog_prefs: small app state (sample repositories' settings, alert preferences, remembered choices).
  *  - watchdog_session: the Supabase session only. backup_rules.xml and data_extraction_rules.xml exclude
  *    datastore/watchdog_session.preferences_pb, so tokens never leave the device through backups.
+ * A file DataStore cannot decode is replaced with empty preferences once (the corruption handler), so a bad file
+ * costs the stored values, never the ability to save again; without the handler every later edit would rethrow.
  */
 
-val Context.watchdogPrefsDataStore: DataStore<Preferences> by preferencesDataStore(name = "watchdog_prefs")
-val Context.watchdogSessionDataStore: DataStore<Preferences> by preferencesDataStore(name = "watchdog_session")
+val Context.watchdogPrefsDataStore: DataStore<Preferences> by preferencesDataStore(
+    name = "watchdog_prefs",
+    corruptionHandler = ReplaceFileCorruptionHandler { emptyPreferences() },
+)
+val Context.watchdogSessionDataStore: DataStore<Preferences> by preferencesDataStore(
+    name = "watchdog_session",
+    corruptionHandler = ReplaceFileCorruptionHandler { emptyPreferences() },
+)
 
-/** A read that survives a corrupt or unreadable file: IO problems read as empty preferences. */
+/** A read that survives an unreadable file: IO problems (a failing disk, not corruption, which is replaced) read as empty preferences. */
 private fun DataStore<Preferences>.safeData(): Flow<Preferences> =
     data.catch { error -> if (error is IOException) emit(emptyPreferences()) else throw error }
 

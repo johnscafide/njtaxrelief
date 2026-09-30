@@ -5,16 +5,17 @@
     <uses-permission android:name="android.permission.INTERNET" />
     <!-- Camera: only to read the QR rider on a For Sale sign (see @string/camera_purpose). -->
     <uses-permission android:name="android.permission.CAMERA" />
-    <!-- Location: only while a sign is being scanned, to confirm the parcel in front of the agent. -->
-    <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" />
-    <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
+    <!--
+      No location permission: a sign's QR rider carries the home's PIN, so the scan resolves the parcel without
+      coordinates (ScanViewModel sends none). Declare ACCESS_COARSE/FINE_LOCATION again only together with the code
+      that uses it and a matching purpose string, or the Play Data safety form and the permission prompt promise
+      behaviour the app does not have.
+    -->
     <uses-permission android:name="android.permission.POST_NOTIFICATIONS" />
     <uses-permission android:name="android.permission.VIBRATE" />
 
-    <!-- The app works without a camera (Scan opens in paste mode) and without GPS. -->
+    <!-- The app works without a camera (Scan opens in paste mode). -->
     <uses-feature android:name="android.hardware.camera.any" android:required="false" />
-    <uses-feature android:name="android.hardware.location" android:required="false" />
-    <uses-feature android:name="android.hardware.location.gps" android:required="false" />
 
     <application
         android:name=".WatchdogApplication"
@@ -54,7 +55,10 @@
               https://www.watchdogindex.com/.well-known/assetlinks.json to list this package
               (com.watchdogindex.agent, and com.watchdogindex.agent.debug for debug builds) with the SHA-256 of the
               signing certificate; the verifier does not follow redirects, so the file must be served directly by
-              the www host. Until it is published these links still open the app from the disambiguation dialog.
+              the www host. Until it is published verification fails, and on Android 12+ a failed autoVerify filter
+              is not offered at all: these https links keep opening in the browser unless the agent turns on
+              "Open supported links" for Watchdog by hand. Only Android 11 and earlier show the disambiguation
+              dialog. The watchdog:// scheme and the share target below work either way.
             -->
             <intent-filter android:autoVerify="true">
                 <action android:name="android.intent.action.VIEW" />

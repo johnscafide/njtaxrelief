@@ -15,7 +15,9 @@ import androidx.compose.foundation.layout.calculateStartPadding
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
+import androidx.compose.foundation.layout.ime
 import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.layout.union
 import androidx.compose.foundation.layout.widthIn
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.rememberLazyListState
@@ -36,8 +38,10 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.platform.LocalLayoutDirection
+import androidx.compose.ui.semantics.LiveRegionMode
 import androidx.compose.ui.semantics.Role
 import androidx.compose.ui.semantics.contentDescription
+import androidx.compose.ui.semantics.liveRegion
 import androidx.compose.ui.semantics.semantics
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
@@ -54,6 +58,7 @@ import com.watchdogindex.agent.ui.components.BriefCard
 import com.watchdogindex.agent.ui.components.CardLabel
 import com.watchdogindex.agent.ui.components.FollowUpRow
 import com.watchdogindex.agent.ui.components.IntelligenceComposer
+import com.watchdogindex.agent.ui.components.LocalBottomChromeInsets
 import com.watchdogindex.agent.ui.components.RowList
 import com.watchdogindex.agent.ui.components.SectionHeader
 import com.watchdogindex.agent.ui.components.TopBarAction
@@ -62,6 +67,7 @@ import com.watchdogindex.agent.ui.components.WdCard
 import com.watchdogindex.agent.ui.components.WdModalSheet
 import com.watchdogindex.agent.ui.components.WdRow
 import com.watchdogindex.agent.ui.components.WdTonalButton
+import com.watchdogindex.agent.ui.components.bottomChromeInsets
 import com.watchdogindex.agent.ui.components.cardMargin
 import com.watchdogindex.agent.ui.components.listMargin
 import com.watchdogindex.agent.ui.components.overflowTouchTarget
@@ -139,7 +145,8 @@ fun IntelligenceScreen(navigator: Navigator) {
         },
         bottomBar = {
             // The composer appears with the brief: while the skeleton or the error card shows there is nothing to
-            // ask against, and a visible but inert mic would be a dead control.
+            // ask against, and a visible but inert mic would be a dead control. It sits above the soft keyboard
+            // while the agent types (the keyboard inset already spans the gesture bar, so the union pads once).
             if (ready != null) {
                 IntelligenceComposer(
                     hint = COMPOSER_HINT,
@@ -147,7 +154,9 @@ fun IntelligenceScreen(navigator: Navigator) {
                     value = ready.draft,
                     onValueChange = vm::setDraft,
                     onSend = vm::sendDraft,
+                    windowInsets = bottomChromeInsets().union(keyboardInsets()),
                     listening = ready.listening,
+                    micDescription = if (voice.available) "Watchdog Intelligence Voice" else NoVoiceSession.UNAVAILABLE_MIC_DESCRIPTION,
                 )
             }
         },
@@ -232,11 +241,14 @@ private fun IntelligenceContent(
         }
         if (state.hasConversation) {
             item(key = "conversation-header") { SectionHeader(title = "Your questions") }
+            // The newest answer and the newest failure are live regions, so a screen reader hears them arrive
+            // instead of only having the list scroll; older bubbles stay quiet.
+            val newestFailed = state.failed.keys.maxOrNull()
             state.turns.forEachIndexed { index, turn ->
-                item(key = "turn-$index") { ChatBubble(turn) }
+                item(key = "turn-$index") { ChatBubble(turn, announce = index == state.turns.lastIndex && !turn.fromAgent) }
                 val failure = state.failed[index]
                 if (failure != null) {
-                    item(key = "failed-$index") { FailedBubble(message = failure, onRetry = { onRetry(index) }) }
+                    item(key = "failed-$index") { FailedBubble(message = failure, onRetry = { onRetry(index) }, announce = index == newestFailed) }
                 }
             }
             if (state.pending.isNotEmpty()) {
@@ -246,11 +258,22 @@ private fun IntelligenceContent(
     }
 }
 
+/**
+ * The soft keyboard's inset on device, so the composer stays above it. Nothing where the harness provides the
+ * chrome insets: there is no keyboard there, and ARCHITECTURE.md keeps the desktop clear of the IME inset (the
+ * same gate as `statusBarAllowance()`).
+ */
+@Composable
+private fun keyboardInsets(): WindowInsets = if (LocalBottomChromeInsets.current == null) WindowInsets.ime else WindowInsets(0, 0, 0, 0)
+
 // ---------------------------------------------------------------------- conversation
 
-/** A question (agent, tinted, at the end) or an answer (surface with a line border, at the start, sources under it). */
+/**
+ * A question (agent, tinted, at the end) or an answer (surface with a line border, at the start, sources under
+ * it). [announce] makes the bubble a polite live region (the newest answer).
+ */
 @Composable
-private fun ChatBubble(turn: ChatTurn) {
+private fun ChatBubble(turn: ChatTurn, announce: Boolean = false) {
     val c = WatchdogTheme.colors
     val t = WatchdogTheme.type
     val shape = if (turn.fromAgent) {
@@ -271,6 +294,7 @@ private fun ChatBubble(turn: ChatTurn) {
                 .padding(horizontal = 14.dp, vertical = 12.dp)
                 .semantics(mergeDescendants = true) {
                     if (turn.fromAgent) contentDescription = "You asked: " + turn.text
+                    if (announce) liveRegion = LiveRegionMode.Polite
                 },
         ) {
             if (!turn.fromAgent) IntelligenceName(style = t.body.sized(12, FontWeight.Bold, 16.0), color = c.muted)
@@ -305,16 +329,19 @@ private fun ThinkingBubble() {
                 .background(c.surface)
                 .border(1.dp, c.line, shape)
                 .padding(horizontal = 14.dp, vertical = 12.dp)
-                .semantics { contentDescription = "Watchdog Intelligence is answering" },
+                .semantics {
+                    contentDescription = "Watchdog Intelligence is answering"
+                    liveRegion = LiveRegionMode.Polite
+                },
             color = c.muted,
             style = t.body,
         )
     }
 }
 
-/** A friendly failure in the conversation with a "Try again" link on a 48 dp target. */
+/** A friendly failure in the conversation with a "Try again" link on a 48 dp target; [announce] for the newest one. */
 @Composable
-private fun FailedBubble(message: String, onRetry: () -> Unit) {
+private fun FailedBubble(message: String, onRetry: () -> Unit, announce: Boolean = false) {
     val c = WatchdogTheme.colors
     val t = WatchdogTheme.type
     val shape = RoundedCornerShape(topStart = 20.dp, topEnd = 20.dp, bottomStart = 6.dp, bottomEnd = 20.dp)
@@ -324,7 +351,8 @@ private fun FailedBubble(message: String, onRetry: () -> Unit) {
                 .widthIn(max = bubbleMaxWidth)
                 .clip(shape)
                 .background(c.warnBg)
-                .padding(horizontal = 14.dp, vertical = 12.dp),
+                .padding(horizontal = 14.dp, vertical = 12.dp)
+                .semantics { if (announce) liveRegion = LiveRegionMode.Polite },
         ) {
             Text(text = message, color = c.warnInk, style = t.body.sized(14, FontWeight.Medium, 20.3))
             Box(

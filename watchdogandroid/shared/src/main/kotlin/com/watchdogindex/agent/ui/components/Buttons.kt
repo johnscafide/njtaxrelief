@@ -11,6 +11,8 @@ import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material3.Icon
+import androidx.compose.material3.RadioButton
+import androidx.compose.material3.RadioButtonDefaults
 import androidx.compose.material3.Switch
 import androidx.compose.material3.SwitchDefaults
 import androidx.compose.material3.Text
@@ -152,7 +154,11 @@ fun WdTonalButton(
     WdButtonBase(label, onClick, modifier, c.tint, c.onTint, null, icon, small, enabled)
 }
 
-/** Outlined button (`.btn.outl`): transparent, ink text, 1 dp Material outline. */
+/**
+ * Outlined button (`.btn.outl`): transparent, ink text, 1 dp border. The border is `muted` rather than the
+ * mockup's `mOutline`: it is the only thing that marks the button's extent, and mOutline is 1.75:1 on the page
+ * (2.1 dark) where a control's boundary needs 3:1 (WCAG 1.4.11); muted is 5.1:1 light and 7.8:1 dark.
+ */
 @Composable
 fun WdOutlinedButton(
     label: String,
@@ -163,7 +169,7 @@ fun WdOutlinedButton(
     enabled: Boolean = true,
 ) {
     val c = WatchdogTheme.colors
-    WdButtonBase(label, onClick, modifier, Color.Transparent, c.ink, c.mOutline, icon, small, enabled)
+    WdButtonBase(label, onClick, modifier, Color.Transparent, c.ink, c.muted, icon, small, enabled)
 }
 
 /** Icon button (`.mib`): 48 dp round target, 24 dp icon in ink. [contentDescription] is required: there is no label. */
@@ -216,9 +222,12 @@ fun WdRoundTonalIconButton(
 }
 
 /**
- * Material 3 switch styled per the mockup (`.sw-m`): 52x32 track with a 2 dp outline, 16 dp outline thumb
- * when off; primary track, 24 dp onPrimary thumb with an 18 dp check when on. Pass null for
- * [onCheckedChange] when an enclosing row is the toggle (the switch then only displays state).
+ * Material 3 switch styled per the mockup (`.sw-m`): 52x32 track with a 2 dp border and a 16 dp thumb when
+ * off; primary track, 24 dp onPrimary thumb with an 18 dp check when on. Pass null for [onCheckedChange]
+ * when an enclosing row is the toggle (the switch then only displays state). The off border and thumb are
+ * `muted` instead of the mockup's `mOutline`, whose ring sat under 2:1 on the surface (1.9 dark) and left the
+ * off switch close to invisible in dark mode; muted clears the 3:1 boundary minimum in both themes (4.4:1 on
+ * the track light, 6.5 dark), so on and off differ by thumb size, check and position, never by colour alone.
  */
 @Composable
 fun WdSwitch(
@@ -243,10 +252,33 @@ fun WdSwitch(
             checkedTrackColor = c.primary,
             checkedBorderColor = c.primary,
             checkedIconColor = c.primary,
-            uncheckedThumbColor = c.mOutline,
+            uncheckedThumbColor = c.muted,
             uncheckedTrackColor = c.mHigh,
-            uncheckedBorderColor = c.mOutline,
+            uncheckedBorderColor = c.muted,
             uncheckedIconColor = c.mHigh,
         ),
+    )
+}
+
+/**
+ * Material 3 radio button in the app's colours: primary when selected, a `muted` ring when not. The ring is
+ * the whole of the unselected state, and the `mOutline` the screens used sits under 2:1 on the surface in both
+ * themes; muted keeps it at 5.8:1 light and 6.9:1 dark (WCAG 1.4.11 asks 3:1). Pass null for [onClick] when
+ * an enclosing row is the selectable (the picker sheets and the theme rows), so the row is the one target.
+ */
+@Composable
+fun WdRadioButton(
+    selected: Boolean,
+    onClick: (() -> Unit)?,
+    modifier: Modifier = Modifier,
+    enabled: Boolean = true,
+) {
+    val c = WatchdogTheme.colors
+    RadioButton(
+        selected = selected,
+        onClick = onClick,
+        modifier = modifier,
+        enabled = enabled,
+        colors = RadioButtonDefaults.colors(selectedColor = c.primary, unselectedColor = c.muted),
     )
 }

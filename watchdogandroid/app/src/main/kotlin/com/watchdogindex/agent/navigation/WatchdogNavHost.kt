@@ -32,6 +32,12 @@ import com.watchdogindex.agent.ui.nav.tab
  *
  * [pendingRoute] is a deep link, share or notification target from MainActivity; it opens once the agent is
  * signed in and is then cleared through [onPendingRouteConsumed].
+ *
+ * [sessionRestored] is WatchdogApplication.sessionRestored: the graph is not built while the auth state is still
+ * [AuthState.Unknown] and restore is running, so the start destination comes from the restored session rather
+ * than from whichever state a cold start's first frame happens to see (restore reads DataStore off the main
+ * thread). The splash covers the wait; after its cap the themed window background shows. Once restore has
+ * finished, or given up, an Unknown state starts on Welcome as before.
  */
 @Composable
 fun WatchdogNavHost(
@@ -40,11 +46,14 @@ fun WatchdogNavHost(
     onPendingRouteConsumed: () -> Unit,
     onExit: () -> Unit,
     modifier: Modifier = Modifier,
+    sessionRestored: Boolean = true,
 ) {
-    val navController = rememberNavController()
     val authState by graph.repos.auth.state.collectAsStateWithLifecycle()
-    // The collected state is seeded from the same StateFlow value, so it picks the same start screen as a direct
-    // `.value` read would, without reading a StateFlow value in composition (a lint error in CI).
+    if (authState is AuthState.Unknown && !sessionRestored) return
+
+    val navController = rememberNavController()
+    // Decided once, from the collected state (seeded from the same StateFlow value, so no StateFlow read in
+    // composition, a lint error in CI); the sign-in effect below still covers a state that changes afterwards.
     val startDestination = remember { if (authState is AuthState.SignedIn) RouteNames.TODAY else RouteNames.WELCOME }
     val navigator = remember(navController) { NavControllerNavigator(navController, onExit) }
 

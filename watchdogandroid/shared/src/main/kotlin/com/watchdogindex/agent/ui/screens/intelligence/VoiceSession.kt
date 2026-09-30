@@ -4,10 +4,11 @@ import androidx.compose.runtime.staticCompositionLocalOf
 
 /**
  * Watchdog Intelligence Voice: the platform speech recognizer behind every mic on the Intelligence screen.
- * There is no shared platform API for speech yet, so the screen takes one through [LocalVoiceSession]: the
- * Android app can provide a SpeechRecognizer-backed implementation at its root, and the desktop keeps
- * [NoVoiceSession], which only says that voice is for the phone. Candidate for promotion into
- * `platform/PlatformServices` once the Android implementation lands.
+ * There is no shared platform API for speech yet, so the screen takes one through [LocalVoiceSession]: a host
+ * provides a real implementation at its root (`CompositionLocalProvider(LocalVoiceSession provides …)` around
+ * the app content; on Android a SpeechRecognizer-backed one), and every host without one keeps
+ * [NoVoiceSession], whose message says plainly that Voice is not ready on this device rather than promising it
+ * somewhere else. Candidate for promotion into `platform/PlatformServices` once the Android implementation lands.
  */
 interface VoiceSession {
     /** False when this platform cannot listen; the screen then explains instead of starting. */
@@ -23,9 +24,12 @@ interface VoiceSession {
     fun stop()
 }
 
-/** The desktop (and any host without a recognizer): never listens, always says voice is available on the phone. */
+/** Any host without a recognizer (the desktop, and the app until it provides one): never listens, and says so honestly. */
 object NoVoiceSession : VoiceSession {
-    const val UNAVAILABLE_MESSAGE = "Voice is available on your phone"
+    const val UNAVAILABLE_MESSAGE = "Watchdog Intelligence Voice isn’t ready on this device yet. Type your question instead."
+
+    /** What the mic is announced as while [available] is false, so the limit is known before the tap. */
+    const val UNAVAILABLE_MIC_DESCRIPTION = "Watchdog Intelligence Voice, not ready on this device yet"
 
     override val available: Boolean = false
 

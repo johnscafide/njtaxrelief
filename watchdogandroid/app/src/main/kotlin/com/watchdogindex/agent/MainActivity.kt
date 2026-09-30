@@ -3,6 +3,7 @@ package com.watchdogindex.agent
 import android.animation.ValueAnimator
 import android.content.Intent
 import android.graphics.Color
+import android.graphics.drawable.ColorDrawable
 import android.os.Bundle
 import android.os.SystemClock
 import android.provider.Settings
@@ -15,6 +16,7 @@ import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.setValue
+import androidx.compose.ui.graphics.toArgb
 import androidx.core.splashscreen.SplashScreen.Companion.installSplashScreen
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import com.watchdogindex.agent.android.PasskeyBridge
@@ -22,17 +24,21 @@ import com.watchdogindex.agent.app.WatchdogApp
 import com.watchdogindex.agent.app.toThemeMode
 import com.watchdogindex.agent.core.model.AuthState
 import com.watchdogindex.agent.design.ThemeMode
+import com.watchdogindex.agent.design.WatchdogDarkColors
+import com.watchdogindex.agent.design.WatchdogLightColors
 import com.watchdogindex.agent.navigation.IntentRoutes
 import com.watchdogindex.agent.navigation.WatchdogNavHost
+import com.watchdogindex.agent.push.PushPayload
 import com.watchdogindex.agent.push.WatchdogMessagingService
 import com.watchdogindex.agent.ui.nav.Route
 
 /**
- * The single activity. Installs the splash, goes edge to edge with bar icons that follow the app theme (not
- * only the system theme, since Settings can force light or dark), and hosts the Navigation Compose graph.
- * Incoming intents (share target, App Links, watchdog:// links, notification taps) become a pending [Route]
- * that the host opens once the agent is signed in. Notification intents also clear the alert they came from
- * and, for a "Call client" action with a number, start the dialer.
+ * The single activity. Installs the splash, goes edge to edge with bar icons and a window background that follow
+ * the app theme (not only the system theme, since Settings can force light or dark), and hosts the Navigation
+ * Compose graph once the stored session has been restored. Incoming intents (share target, App Links, watchdog://
+ * links, notification taps) become a pending [Route] that the host opens once the agent is signed in.
+ * Notification intents also clear the alert they came from and, for a "Call client" action with a number, start
+ * the dialer.
  */
 class MainActivity : ComponentActivity() {
     private var pendingRoute by mutableStateOf<Route?>(null)
@@ -62,6 +68,7 @@ class MainActivity : ComponentActivity() {
 
         setContent {
             val settings by graph.repos.settings.settings.collectAsStateWithLifecycle()
+            val sessionRestored by app.sessionRestored.collectAsStateWithLifecycle()
             val themeMode = settings.themeMode.toThemeMode()
             val dark = when (themeMode) {
                 ThemeMode.System -> isSystemInDarkTheme()
@@ -73,6 +80,10 @@ class MainActivity : ComponentActivity() {
                     statusBarStyle = if (dark) SystemBarStyle.dark(Color.TRANSPARENT) else SystemBarStyle.light(Color.TRANSPARENT, Color.TRANSPARENT),
                     navigationBarStyle = if (dark) SystemBarStyle.dark(Color.TRANSPARENT) else SystemBarStyle.light(Color.TRANSPARENT, Color.TRANSPARENT),
                 )
+                // themes.xml can only follow the system night mode. When Settings forces the other theme the window
+                // itself has to match, or it shows through as a wrong-coloured flash behind screen transitions, the
+                // IME, activity recreation and the moment before the graph is composed.
+                window.setBackgroundDrawable(ColorDrawable((if (dark) WatchdogDarkColors else WatchdogLightColors).bg.toArgb()))
             }
             WatchdogApp(graph = graph, themeMode = themeMode, reducedMotion = reducedMotion) {
                 WatchdogNavHost(
@@ -80,6 +91,7 @@ class MainActivity : ComponentActivity() {
                     pendingRoute = pendingRoute,
                     onPendingRouteConsumed = { pendingRoute = null },
                     onExit = { finish() },
+                    sessionRestored = sessionRestored,
                 )
             }
         }
@@ -122,12 +134,18 @@ class MainActivity : ComponentActivity() {
         return intent.toRoute()
     }
 
+    /**
+     * The app's own notification intents carry the namespaced extras. A push the system rendered itself (one with a
+     * `notification` block that arrived while the app was in the background) delivers its data map as bare extras
+     * on the launcher intent instead, so those keys are read as the fallback (see [PushPayload]).
+     */
     private fun Intent.toRoute(): Route? = IntentRoutes.parse(
         action = action,
         dataString = dataString,
         sharedText = if (action == Intent.ACTION_SEND) getStringExtra(Intent.EXTRA_TEXT) else null,
-        extraPin = getStringExtra(IntentRoutes.EXTRA_PIN),
-        extraRoute = getStringExtra(IntentRoutes.EXTRA_ROUTE),
+        extraPin = getStringExtra(IntentRoutes.EXTRA_PIN)
+            ?: PushPayload.pinOf(getStringExtra(PushPayload.KEY_PIN), getStringExtra(PushPayload.KEY_PAMS_PIN)),
+        extraRoute = getStringExtra(IntentRoutes.EXTRA_ROUTE) ?: getStringExtra(PushPayload.KEY_ROUTE),
     )
 
     private companion object {

@@ -46,6 +46,7 @@ import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import com.watchdogindex.agent.app.LocalAppGraph
 import com.watchdogindex.agent.app.screenViewModel
+import com.watchdogindex.agent.core.WatchdogConfig
 import com.watchdogindex.agent.design.WatchdogDimens
 import com.watchdogindex.agent.design.WatchdogLogo
 import com.watchdogindex.agent.design.WatchdogTheme
@@ -90,7 +91,12 @@ import kotlin.math.sin
 private val LogoRing = Color.White.copy(alpha = .18f)
 private val LedeInk = Color.White.copy(alpha = .8f)
 
-private const val ONBOARDING_URL = "https://www.watchdogindex.com/onboarding/"
+/**
+ * "Create an account" opens `/onboarding` on the configured site origin, so a staging or preview build links to
+ * its own host rather than to production. A clean root-level Watchdog route (no trailing slash, like the other
+ * routes). `SiteLinks` does not name this page yet; once it does (`config.links.onboarding`), this helper goes.
+ */
+private fun WatchdogConfig.onboardingUrl(): String = "${siteOrigin.trimEnd('/')}/onboarding"
 
 private class WelcomeStep(val title: String, val body: String)
 
@@ -149,7 +155,6 @@ fun WelcomeScreen(navigator: Navigator) {
                     Column(modifier = Modifier.padding(top = 24.dp)) {
                         when (val s = state) {
                             WelcomeUiState.Loading -> Box(Modifier.fillMaxWidth().height(106.dp))
-                            is WelcomeUiState.Error -> ErrorBlock(message = s.userMessage, onRetry = vm::reset)
                             is WelcomeUiState.Ready -> CtaBlock(
                                 ready = s,
                                 showPasskey = platform.supportsPasskeys,
@@ -163,7 +168,7 @@ fun WelcomeScreen(navigator: Navigator) {
                                 onEditEmail = vm::editEmail,
                             )
                         }
-                        FinePrint(onCreateAccount = { platform.openUrl(ONBOARDING_URL) })
+                        FinePrint(onCreateAccount = { platform.openUrl(graph.config.onboardingUrl()) })
                     }
                 }
             }
@@ -358,14 +363,6 @@ private fun InlineError(message: String?) {
     ) {
         Icon(imageVector = WdIcons.Error, contentDescription = null, modifier = Modifier.size(18.dp), tint = c.red)
         Text(text = message, color = c.red, style = t.supporting)
-    }
-}
-
-@Composable
-private fun ErrorBlock(message: String, onRetry: () -> Unit) {
-    Column(modifier = Modifier.fillMaxWidth(), verticalArrangement = Arrangement.spacedBy(10.dp)) {
-        InlineError(message)
-        WdPrimaryButton(label = "Try again", onClick = onRetry, modifier = Modifier.fillMaxWidth())
     }
 }
 

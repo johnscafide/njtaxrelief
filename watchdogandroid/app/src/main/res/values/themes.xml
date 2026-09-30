@@ -8,6 +8,8 @@
         <item name="windowSplashScreenIconBackgroundColor">@color/mark_blue</item>
         <item name="postSplashScreenTheme">@style/Theme.Watchdog</item>
     </style>
+    <!-- Follows the system night mode only; when Settings forces light or dark, MainActivity sets the window
+         background to the resolved WatchdogColors.bg so nothing of the other theme shows through. -->
     <style name="Theme.Watchdog" parent="android:Theme.Material.Light.NoActionBar">
         <item name="android:windowBackground">@color/paper</item>
         <item name="android:statusBarColor">@android:color/transparent</item>

@@ -52,7 +52,11 @@ class AndroidPlatformServices(context: Context) : PlatformServices {
 
     private val activity: ComponentActivity? get() = activityRef?.get()
 
-    /** Call from MainActivity.onCreate. Registers the notification permission launcher on the activity's result registry. */
+    /**
+     * Call from MainActivity.onCreate. Registers the notification permission launcher on the activity's result
+     * registry under a fixed key, so a result still pending from a destroyed activity (the system dialog was up
+     * during a configuration change) is delivered to this registration and completes the request that is waiting.
+     */
     fun attach(activity: ComponentActivity) {
         activityRef = WeakReference(activity)
         notificationLauncher?.unregister()
@@ -62,13 +66,15 @@ class AndroidPlatformServices(context: Context) : PlatformServices {
         ) { granted -> pendingNotificationResult?.complete(granted); pendingNotificationResult = null }
     }
 
-    /** Call from MainActivity.onDestroy. */
+    /**
+     * Call from MainActivity.onDestroy. A request still waiting is left open: the activity may only be recreated,
+     * and the next [attach] receives its real result. It completes on that result, or with false when a new request
+     * supersedes it ([requestNotificationPermission]).
+     */
     fun detach(activity: ComponentActivity) {
         if (activityRef?.get() !== activity) return
         notificationLauncher?.unregister()
         notificationLauncher = null
-        pendingNotificationResult?.complete(false)
-        pendingNotificationResult = null
         activityRef = null
     }
 
