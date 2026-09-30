@@ -279,10 +279,11 @@ the interim `[skip ci]` snapshots between these commits started no run.
 | 6 | `73b024e` foundation review follow-ups | green | |
 | 7 | `48d9553` README, verification notes, core tests in CI | green | First run with the `Core unit tests` step in the Android job. |
 | 8 | `f4d4888` all ten screens built, reviewed and fixed | green | The preview job's similarity table is the "CI run 8" column in section 5 (average 83.1%). Last push-triggered run at the time of this pass; `c02a58c` and `605716c` carried `[skip ci]`. |
-| 9+ | the certification commit and later | run 9+: see Actions | Not recorded here: check the workflow's runs for branch `claude/charming-thompson-clws7b` at `https://github.com/johnscafide/njtaxrelief/actions/workflows/watchdog-android-build.yml` and copy the result and the similarity table into this file. |
+| 9 | `43c9085` audit fixes complete, voice, push contract, verification docs | green | First CI compile of the Android voice session, the PlatformServices change and the app-side push decoder; core unit tests (131), shared and app unit tests, lint, unsigned release build and the preview comparison all passed. |
+| 10+ | later commits | see Actions | Check the workflow's runs for branch `claude/charming-thompson-clws7b` at `https://github.com/johnscafide/njtaxrelief/actions/workflows/watchdog-android-build.yml`. |
 
 Run links: `https://github.com/johnscafide/njtaxrelief/actions/runs/<id>` with ids 36637264584 (1), 36646025043
-(2), 36646383792 (3), 36646635825 (4), 36647100991 (5), 36649317542 (6), 36721171451 (7), 36730952239 (8).
+(2), 36646383792 (3), 36646635825 (4), 36647100991 (5), 36649317542 (6), 36721171451 (7), 36730952239 (8), 36756617905 (9).
 
 ## 7. Checks that still need a device
 
