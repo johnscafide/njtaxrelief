@@ -79,6 +79,7 @@ assert.match(js, /function safeHref\(href\)[\s\S]*?: '#';/, 'non-Watchdog links 
 assert.match(js, /replace\(\/<\(\?!\\\/\?mark>\)\[\^>\]\*>\/g,''\)/, 'guide excerpts keep only <mark>');
 assert.match(js, /parcel\.until = Date\.now\(\) \+ 60000/, 'address search backs off when the database is slow');
 assert.match(js, /PARCEL_TIMEOUT = 3500/, 'address search has a timeout');
+assert.match(js, /if\(!byPath\[k\]\) byPath\[k\] = e;/, 'first menu row wins, so the Agent Desk areas do not overwrite the desk itself');
 assert.match(js, /transaction\\\/shared\|client-room\|public-report\|open-house/, 'client-facing shared pages are excluded');
 assert.match(js, /prefers-reduced-motion:no-preference/, 'animation respects reduced motion');
 assert.match(js, /@media print\{\.wdss,\.wdss-trigger\{display:none!important\}\}/, 'search chrome never prints');

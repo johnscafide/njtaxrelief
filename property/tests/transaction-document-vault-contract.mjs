@@ -35,4 +35,18 @@ must(!ui.includes('clear_observed'),'document upload/review must never manufactu
 must(ui.includes("from('transaction_documents').delete()"),'document delete flow must remove metadata after private object removal');
 must(shell.includes('/transaction/documents.js'),'transaction shell must load the document vault module');
 
+// Certificate of Occupancy type: every list that gates document_type must include it, and the
+// pre-migration fallback ('other' + requested_document_type marker) must be reclassified by the migration.
+const coMigration=fs.readFileSync('supabase/migrations/20260930120000_transaction_documents_certificate_of_occupancy.sql','utf8');
+const sharedHtml=fs.readFileSync('transaction/shared/index.html','utf8');
+const edge=fs.readFileSync('supabase/functions/transaction-collaboration/index.ts','utf8');
+for(const t of ['title_commitment','mortgage_payoff','lender_commitment','appraisal','inspection_report','attorney_review','hoa_condo','solar_agreement','tenancy','estate_probate','divorce','bankruptcy','final_walkthrough','closing_package','certificate_of_occupancy','other'])must(coMigration.includes(`'${t}'`),`CO migration must keep document type ${t}`);
+must(/pg_get_constraintdef\(con\.oid\) ilike '%document_type%'/.test(coMigration),'CO migration must find the old document_type CHECK by definition');
+must(coMigration.includes(') not valid;')&&coMigration.includes('validate constraint transaction_documents_document_type_check'),'CO migration must add the CHECK NOT VALID then validate it');
+must(/metadata->>'requested_document_type' = 'certificate_of_occupancy'/.test(coMigration),'CO migration must reclassify fallback rows');
+must(ui.includes("['certificate_of_occupancy','Certificate of Occupancy (CO / CCO)']"),'vault upload types must include Certificate of Occupancy');
+must(sharedHtml.includes('<option value="certificate_of_occupancy">'),'collaborator upload form must include Certificate of Occupancy');
+must(/allowedTypes=new Set\(\[[^\]]*"certificate_of_occupancy"/.test(edge),'collaboration Edge Function must allow certificate_of_occupancy');
+must(ui.includes('requested_document_type:type')&&edge.includes('requested_document_type:docType'),'pre-migration CO fallback must mark rows for the backfill');
+
 console.log('transaction document vault contract: ok');

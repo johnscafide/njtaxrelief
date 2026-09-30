@@ -5,6 +5,10 @@ function $(s,r){return (r||document).querySelector(s)}
 function esc(v){return String(v==null?'':v).replace(/[&<>"']/g,function(c){return {'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]})}
 function clean(v){return String(v==null?'':v).trim()}
 function title(v){return clean(v).replace(/_/g,' ').replace(/\b\w/g,function(c){return c.toUpperCase()})}
+/* A CO upload carries its label, so even a transaction-collaboration build
+   that predates the CO type keeps it readable (and the migration can backfill it). */
+var CO_LABEL='Certificate of Occupancy (CO / CCO)';
+function docLabel(d){return clean(d.document_label)||(d.document_type==='certificate_of_occupancy'?CO_LABEL:title(d.document_type))}
 function fmtDate(v){if(!v)return'—';var d=new Date(String(v).slice(0,10)+'T12:00:00');return Number.isFinite(d.getTime())?d.toLocaleDateString('en-US',{month:'short',day:'numeric',year:'numeric'}):'—'}
 function fmtDateTime(v){if(!v)return'—';var d=new Date(v);return Number.isFinite(d.getTime())?d.toLocaleString('en-US',{month:'short',day:'numeric',hour:'numeric',minute:'2-digit'}):'—'}
 function fmtSize(n){n=Number(n)||0;if(n<1024)return n+' B';if(n<1048576)return(n/1024).toFixed(1)+' KB';return(n/1048576).toFixed(1)+' MB'}
@@ -21,7 +25,7 @@ function render(){
   $('#sg-items').innerHTML=items.length?items.map(function(i){var s=evidenceStatus(i);return '<div class="sg-item"><b>'+esc(i.title)+'</b><p>'+esc(i.description||i.source_label||'Verification state available in Watchdog.')+'</p><span class="sg-item-status '+esc(s[0])+'"><i></i>'+esc(s[1])+'</span></div>'}).join(''):'<div class="sg-empty">No shared evidence or readiness items are available yet.</div>';
   renderDocs();$('#sg-gate').hidden=true;$('#sg-app').hidden=false;
 }
-function renderDocs(){var docs=snapshot.documents||[],host=$('#sg-doc-list');host.innerHTML=docs.length?docs.map(function(d){return '<div class="sg-doc" data-id="'+esc(d.id)+'"><i class="fas '+(d.mime_type==='application/pdf'?'fa-file-pdf':'fa-file-image')+'"></i><div><b>'+esc(d.original_name)+'</b><small>'+esc(title(d.document_type))+' · '+esc(fmtSize(d.file_size))+' · '+esc(fmtDate(d.created_at))+(d.uploaded_by_role?' · '+esc(roleLabel(d.uploaded_by_role)):'')+'</small></div><button type="button" data-doc-open>Open</button></div>'}).join(''):'<div class="sg-empty">No documents have been shared yet.</div>'}
+function renderDocs(){var docs=snapshot.documents||[],host=$('#sg-doc-list');host.innerHTML=docs.length?docs.map(function(d){return '<div class="sg-doc" data-id="'+esc(d.id)+'"><i class="fas '+(d.mime_type==='application/pdf'?'fa-file-pdf':'fa-file-image')+'"></i><div><b>'+esc(d.original_name)+'</b><small>'+esc(docLabel(d))+' · '+esc(fmtSize(d.file_size))+' · '+esc(fmtDate(d.created_at))+(d.uploaded_by_role?' · '+esc(roleLabel(d.uploaded_by_role)):'')+'</small></div><button type="button" data-doc-open>Open</button></div>'}).join(''):'<div class="sg-empty">No documents have been shared yet.</div>'}
 async function load(){snapshot=await invoke('shared_snapshot',{transaction_id:txId});render()}
 async function accept(token){var d=await invoke('accept_invite',{token:token});txId=clean(d.transaction_id);history.replaceState(null,'','/transaction/shared/?transaction='+encodeURIComponent(txId));await load()}
 async function openDoc(id){try{var d=await invoke('document_url',{transaction_id:txId,document_id:id});window.open(d.url,'_blank','noopener')}catch(e){toast(e.message)}}
@@ -33,7 +37,7 @@ async function upload(e){
     var grant=await invoke('create_upload',{transaction_id:txId,file_name:file.name,mime_type:file.type,file_size:file.size});
     var up=await db.storage.from('transaction-documents').uploadToSignedUrl(grant.path,grant.token,file,{contentType:file.type,cacheControl:'0'});
     if(up.error)throw up.error;
-    await invoke('register_upload',{transaction_id:txId,document_id:grant.document_id,path:grant.path,mime_type:file.type,file_size:file.size,document_type:clean(fd.get('document_type'))});
+    await invoke('register_upload',{transaction_id:txId,document_id:grant.document_id,path:grant.path,mime_type:file.type,file_size:file.size,document_type:clean(fd.get('document_type')),document_label:clean(fd.get('document_type'))==='certificate_of_occupancy'?CO_LABEL:undefined});
     toast('Document uploaded.');e.currentTarget.reset();await load();
   }catch(err){toast(err.message||'Upload failed.')}finally{busy=false;b.disabled=false;b.innerHTML='<i class="fas fa-cloud-arrow-up"></i> Upload document'}
 }

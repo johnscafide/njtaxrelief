@@ -17,7 +17,12 @@
         "certificate of occupation",
         "certificate of occupency",
         "certificate of ocupancy",
-        "final co"
+        "final co",
+        "certifcate of occupancy",
+        "certficate of occupancy",
+        "tco",
+        "temporary co",
+        "temporary certificate of occupancy"
       ],
       "keywords": [
         "resale",
@@ -30,7 +35,7 @@
         "upload",
         "document"
       ],
-      "summary": "Town sign-off that a home is fit to live in, issued after new construction or major work. Many NJ towns also require one at resale.",
+      "summary": "Town sign-off that a home is fit to live in, issued after new construction or major work. For a resale, many NJ towns require a CCO.",
       "href": "/transaction?evidence=occupancy",
       "where": "Transactions > Occupancy / resale",
       "need": "agent",
@@ -51,7 +56,17 @@
         "resale co",
         "municipal resale inspection",
         "point of sale inspection",
-        "housing inspection"
+        "housing inspection",
+        "co for resale",
+        "resale certificate of occupancy",
+        "certificate of occupancy for resale",
+        "continued certificate of occupancy",
+        "certificate of habitability",
+        "habitability certificate",
+        "certificate of code compliance",
+        "rental co",
+        "rental certificate of occupancy",
+        "rental inspection"
       ],
       "keywords": [
         "resale",
@@ -87,7 +102,8 @@
         "fire certificate",
         "sdcmafec",
         "csdcmafec",
-        "csdcmapfec"
+        "csdcmapfec",
+        "csacmapfec"
       ],
       "keywords": [
         "fire official",
@@ -98,7 +114,7 @@
         "one and two family",
         "fire code"
       ],
-      "summary": "NJ requires it before a 1 or 2 family home is sold or rented. The local fire official checks the smoke and CO alarms and extinguisher.",
+      "summary": "NJ requires it before a one- or two-family home is sold or rented. The local fire official checks the smoke and CO alarms and extinguisher.",
       "href": "/transaction?evidence=fire",
       "where": "Transactions > Smoke / CO / fire",
       "need": "agent",
@@ -131,7 +147,7 @@
         "seller disclosure",
         "closing"
       ],
-      "summary": "Permits that never got a final sign-off, or work done without one. Either can hold up a CO, a resale certificate or the closing.",
+      "summary": "Permits that never got a final sign-off, or work done without a permit. Either can hold up a CO, a CCO or the closing.",
       "href": "/transaction?evidence=occupancy",
       "where": "Transactions > Occupancy / resale",
       "need": "agent",
@@ -429,7 +445,12 @@
         "settlement statement",
         "closing disclosure",
         "alta statement",
-        "hud-1"
+        "hud-1",
+        "co document",
+        "co copy",
+        "upload co",
+        "upload certificate of occupancy",
+        "cco document"
       ],
       "keywords": [
         "pdf",
@@ -624,7 +645,7 @@
         "seller disclosure",
         "closing"
       ],
-      "summary": "Panels may be owned, financed, leased or under a PPA. Leases and loans need a transfer or payoff plan.",
+      "summary": "Panels may be owned, financed, leased or under a power purchase agreement (PPA). Leases and loans need a transfer or payoff plan.",
       "href": "/transaction",
       "where": "Transactions > Readiness",
       "need": "agent",
@@ -873,6 +894,8 @@
       "kind": "term",
       "label": "Property tax appeal",
       "aliases": [
+        "appeal",
+        "apeal",
         "property tax appeal",
         "tax appeal",
         "assessment appeal",
@@ -893,9 +916,11 @@
         "comparable sales",
         "savings",
         "april 1",
-        "evidence"
+        "evidence",
+        "january 15",
+        "may 1"
       ],
-      "summary": "Ask the county tax board to lower your assessment. The usual deadline is April 1, or May 1 in a revaluation town.",
+      "summary": "Ask the county tax board to lower your assessment. Usually due April 1 (May 1 in a revaluation year), or January 15 in Burlington, Gloucester and Monmouth.",
       "href": "/appeal-savings-estimator",
       "where": "Tools > Appeal savings estimator",
       "icon": "fa-scale-unbalanced"
@@ -951,7 +976,7 @@
         "tax bill",
         "improvement"
       ],
-      "summary": "An extra tax bill for new construction or improvements finished during the year, prorated by the months complete.",
+      "summary": "An extra tax bill for new construction or improvements finished during the year, prorated for the months after the work is done.",
       "href": "/glossary/added-assessment/",
       "where": "Glossary > Added assessment",
       "icon": "fa-file-invoice-dollar"
@@ -998,7 +1023,7 @@
         "assessment",
         "division of taxation"
       ],
-      "summary": "The state-certified average ratio of assessed value to market value in a town. It is used to equalize taxes and in appeals.",
+      "summary": "The state-certified average ratio of assessed value to market value in a town. Used in tax appeals and to split county taxes between towns.",
       "href": "/glossary/directors-ratio/",
       "where": "Glossary > Director's Ratio",
       "icon": "fa-percent"
@@ -1193,7 +1218,7 @@
         "income",
         "application"
       ],
-      "summary": "Track and file ANCHOR, NJ's yearly property tax relief payment for eligible homeowners and renters.",
+      "summary": "Prepare your ANCHOR form and track where it stands, then sign and mail it yourself. ANCHOR is NJ's yearly property tax relief for homeowners and renters.",
       "href": "/anchor/applications/",
       "where": "Menu > ANCHOR Applications",
       "icon": "fa-file-circle-check"
@@ -1245,7 +1270,7 @@
         "seniors",
         "disability"
       ],
-      "summary": "The single NJ form seniors and disability recipients use to apply for ANCHOR, Senior Freeze and Stay NJ.",
+      "summary": "The single NJ form for people 65 or older, or on Social Security disability, to apply for ANCHOR, Senior Freeze and Stay NJ.",
       "href": "/senior-benefit-estimator",
       "where": "Tools > Senior benefit estimator",
       "icon": "fa-file-pen"
@@ -1291,9 +1316,10 @@
         "deduction",
         "exemption",
         "tax assessor",
-        "relief"
+        "relief",
+        "250"
       ],
-      "summary": "A $250 yearly deduction for eligible NJ veterans or surviving spouses. Totally disabled veterans may qualify for a full exemption.",
+      "summary": "A $250 yearly deduction for eligible NJ veterans or surviving spouses. A 100% service-connected disability can mean a full exemption.",
       "href": "/benefit-stacking",
       "where": "Tools > Benefit stacking calculator",
       "icon": "fa-medal"
@@ -1316,9 +1342,10 @@
         "disabled",
         "low income",
         "tax assessor",
-        "relief"
+        "relief",
+        "tax collector"
       ],
-      "summary": "A $250 yearly deduction for low-income homeowners who are 65 or older or permanently disabled. Apply with the tax assessor.",
+      "summary": "A $250 yearly deduction for low-income homeowners who are 65 or older or permanently disabled. Apply through your town tax office.",
       "href": "/benefit-stacking",
       "where": "Tools > Benefit stacking calculator",
       "icon": "fa-hand-holding-dollar"
@@ -1725,7 +1752,8 @@
         "saved properties",
         "my properties",
         "claim my home",
-        "watchlist"
+        "watchlist",
+        "home"
       ],
       "keywords": [
         "score",
@@ -1795,8 +1823,7 @@
         "assessment fairness",
         "fair assessments",
         "town fairness",
-        "uniformity",
-        "robust u"
+        "uniformity"
       ],
       "keywords": [
         "cod",
@@ -1900,6 +1927,26 @@
       "icon": "fa-weight-hanging"
     },
     {
+      "id": "robust-uniformity",
+      "kind": "page",
+      "label": "Uniformity (ROBUST U)",
+      "aliases": [
+        "robust u",
+        "uniformity score",
+        "assessment uniformity score"
+      ],
+      "keywords": [
+        "cod",
+        "coefficient of deviation",
+        "watchdog score",
+        "town"
+      ],
+      "summary": "How evenly a town assesses homes, based on the state coefficient of deviation, and how that feeds the Watchdog Score.",
+      "href": "/robust/uniformity",
+      "where": "ROBUST Framework > Uniformity",
+      "icon": "fa-scale-balanced"
+    },
+    {
       "id": "robust-stability",
       "kind": "page",
       "label": "Stability (ROBUST S)",
@@ -1960,7 +2007,7 @@
         "voice",
         "chat"
       ],
-      "summary": "Ask questions about NJ properties and get sourced answers you can read or hear as a Voice brief.",
+      "summary": "Ask questions about NJ properties and get sourced answers. Read them or listen with Watchdog Intelligence Voice.",
       "href": "/intelligence",
       "where": "Dashboard > Watchdog Intelligence",
       "need": "pro",
@@ -1969,7 +2016,7 @@
     {
       "id": "daily-intelligence",
       "kind": "page",
-      "label": "Today (Daily Intelligence)",
+      "label": "Today",
       "aliases": [
         "today",
         "daily intelligence",
@@ -1982,9 +2029,9 @@
         "follow up",
         "changes"
       ],
-      "summary": "Scheduled review queues that keep running after you close the browser.",
+      "summary": "Watchdog Intelligence checks that run on a schedule and line up what needs your review, even after you close the browser.",
       "href": "/intelligence/daily/",
-      "where": "Menu > Today",
+      "where": "Watchdog Intelligence > Today",
       "need": "pro_plus",
       "icon": "fa-inbox"
     },
@@ -2382,7 +2429,10 @@
         "agent plan",
         "compare plans",
         "price",
-        "free trial"
+        "free trial",
+        "free",
+        "free plan",
+        "free account"
       ],
       "keywords": [
         "subscription",
@@ -2411,7 +2461,14 @@
         "change plan",
         "profile",
         "edit profile",
-        "sign out"
+        "sign out",
+        "sign in",
+        "log in",
+        "login",
+        "sign up",
+        "create account",
+        "log out",
+        "logout"
       ],
       "keywords": [
         "plan",
@@ -2516,6 +2573,95 @@
       "icon": "fa-comments"
     },
     {
+      "id": "privacy-policy",
+      "kind": "page",
+      "label": "Privacy policy",
+      "aliases": [
+        "privacy",
+        "privacy policy",
+        "privacy notice",
+        "what data you collect",
+        "personal data"
+      ],
+      "keywords": [
+        "data",
+        "cookies",
+        "personal information",
+        "delete"
+      ],
+      "summary": "What Watchdog collects, why, who it goes to, and how to get it back or delete it.",
+      "href": "/privacy",
+      "where": "Help > Privacy policy",
+      "icon": "fa-user-shield"
+    },
+    {
+      "id": "terms-of-use",
+      "kind": "page",
+      "label": "Terms of use",
+      "aliases": [
+        "terms",
+        "terms of use",
+        "terms of service",
+        "tos",
+        "user agreement"
+      ],
+      "keywords": [
+        "legal",
+        "subscription",
+        "acceptable use",
+        "account"
+      ],
+      "summary": "The rules for using Watchdog, including accounts, property data, subscriptions and acceptable use.",
+      "href": "/terms",
+      "where": "Help > Terms of use",
+      "icon": "fa-file-contract"
+    },
+    {
+      "id": "refund-policy",
+      "kind": "page",
+      "label": "Refund policy",
+      "aliases": [
+        "refund",
+        "refunds",
+        "refund policy",
+        "money back",
+        "get a refund"
+      ],
+      "keywords": [
+        "cancel",
+        "subscription",
+        "billing",
+        "charge"
+      ],
+      "summary": "When a refund may be available for a Watchdog subscription, and how to ask for one.",
+      "href": "/refunds",
+      "where": "Help > Refund policy",
+      "icon": "fa-rotate-left"
+    },
+    {
+      "id": "watchdog-teams",
+      "kind": "page",
+      "label": "Watchdog Teams",
+      "aliases": [
+        "teams",
+        "team plan",
+        "watchdog teams",
+        "team account",
+        "brokerage plan"
+      ],
+      "keywords": [
+        "seats",
+        "brokerage",
+        "office",
+        "shared",
+        "organization"
+      ],
+      "summary": "A preview of Watchdog for brokerages and other property teams, with shared work and team controls. It is not on sale yet.",
+      "href": "/teams",
+      "where": "Menu > Preview Teams",
+      "icon": "fa-users"
+    },
+    {
       "id": "glossary",
       "kind": "page",
       "label": "NJ property tax glossary",
@@ -2618,7 +2764,9 @@
         "house value",
         "property value",
         "home worth",
-        "home valuation"
+        "home valuation",
+        "comps",
+        "comparable sales"
       ],
       "keywords": [
         "assessment",

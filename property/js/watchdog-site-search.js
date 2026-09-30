@@ -199,7 +199,7 @@
   var AGENT_RESERVED = /^(?:agent|agents|analytics|assets|buyers|client-room|clients|contacts|desk|edit|extension|farm-map|index|leads|listing-prep|new|onboarding|open-house|portal|reports|settings|shared|sphere|team|teams|today|training|workspace)$/i;
   /* Top-level folders that live at the repository root rather than under
      /property/, so preview and local hosts must not prefix them. */
-  var ROOT_PHYSICAL = /^\/(?:transaction|towns|search|contact|move|lender|attorney|investor|client-room|open-house|nj|statistics|checkup|true-cost|alerts)(?:[\/?#]|$)/i;
+  var ROOT_PHYSICAL = /^\/(?:transaction|towns|search|contact|move|lender|attorney|investor|client-room|open-house|nj|statistics|checkup|true-cost|alerts|agent\/(?:listing-prep|buyers|open-house))(?:[\/?#]|$)/i;
   var POPULAR = ['certificate of occupancy','property tax appeal','anchor','senior freeze','added assessment','town compare'];
 
   var host = String(root.location.hostname || '').toLowerCase();
@@ -303,7 +303,10 @@
     /* Menu destinations first: they are already entitlement-filtered and
        routed for this host. Dictionary entries for the same page add the
        aliases, summary and "where" text. */
-    menuEntries().forEach(function(e){ byPath[pathKey(e.href)] = e; list.push(e); });
+    /* First menu row wins: the five Agent Desk areas share /agent-desk once
+       the #section is dropped, and the dictionary's Agent Desk entry belongs
+       to the first (the desk itself). */
+    menuEntries().forEach(function(e){ var k = pathKey(e.href); if(!byPath[k]) byPath[k] = e; list.push(e); });
     entries.forEach(function(e){
       var k = pathKey(e.href), hit = byPath[k];
       if(hit && hit.routed && e.kind === 'page'){
