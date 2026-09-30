@@ -542,6 +542,12 @@
       "sha256": "f554324636ed495a0baf6eefd0eff63b70349aa9c23ea9be412a9acae1cc017d",
       "verify_jwt": false,
       "tracking": "source_snapshot"
+    },
+    "transaction-municipal-requirements": {
+      "version": 16,
+      "sha256": "ff512de62a6a9475b1e379f1dee4b59f80a71b43b59c73eb827514b2e380bffa",
+      "verify_jwt": true,
+      "tracking": "source_snapshot"
     }
   }
 }
