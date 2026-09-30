@@ -1,5 +1,6 @@
 package com.watchdogindex.agent.navigation
 
+import com.watchdogindex.agent.core.model.ClientFilter
 import com.watchdogindex.agent.ui.nav.Route
 import org.junit.Assert.assertEquals
 import org.junit.Assert.assertFalse
@@ -99,11 +100,25 @@ class IntentRoutesTest {
         assertEquals(Route.Today, IntentRoutes.fromExtras(null, "digest"))
         assertEquals(Route.Intelligence, IntentRoutes.fromExtras(null, "intelligence"))
         assertEquals(Route.Farm, IntentRoutes.fromExtras(null, "farm"))
-        assertEquals(Route.Clients, IntentRoutes.fromExtras(null, "clients"))
+        assertEquals(Route.Clients(), IntentRoutes.fromExtras(null, "clients"))
+        assertEquals(Route.Clients(ClientFilter.CheckupReady), IntentRoutes.fromExtras(null, "checkups"))
+        assertEquals(Route.Clients(ClientFilter.CheckupReady), IntentRoutes.fromExtras(null, "clients?filter=checkup"))
+        assertEquals(Route.Clients(ClientFilter.Sphere), IntentRoutes.fromExtras(null, "/clients?filter=sphere"))
+        assertEquals("an unknown key opens the tab as it is", Route.Clients(), IntentRoutes.fromExtras(null, "clients?filter=sellers"))
         assertEquals(Route.Settings, IntentRoutes.fromExtras(null, "settings"))
         assertNull(IntentRoutes.fromExtras(null, null))
         assertNull(IntentRoutes.fromExtras("not-a-pin", null))
         assertNull(IntentRoutes.fromExtras(null, "unknown"))
+    }
+
+    @Test
+    fun `clients links carry the web's filter key`() {
+        assertEquals(Route.Clients(ClientFilter.CheckupReady), IntentRoutes.fromLink("https://www.watchdogindex.com/clients?filter=checkup"))
+        assertEquals(Route.Clients(ClientFilter.PastClients), IntentRoutes.fromLink("https://www.watchdogindex.com/clients?filter=past"))
+        assertEquals(Route.Clients(), IntentRoutes.fromLink("https://www.watchdogindex.com/clients"))
+        assertEquals(Route.Clients(ClientFilter.CheckupReady), IntentRoutes.fromLink("watchdog://clients?filter=checkup"))
+        assertEquals(Route.Clients(), IntentRoutes.fromLink("watchdog://clients"))
+        assertEquals(Route.Clients(ClientFilter.CheckupReady), IntentRoutes.fromLink("watchdog://checkups"))
     }
 
     @Test
@@ -136,6 +151,16 @@ class IntentRoutesTest {
         assertEquals(RouteNames.PROPERTY, RouteNames.patternOf(Route.Property("x")))
         assertTrue(RouteNames.isTabRoute(Route.Farm))
         assertFalse(RouteNames.isTabRoute(Route.Alerts))
+        // Clients: the bare tab route keeps working; a filter travels as the web's key and comes back as the enum.
+        assertEquals("clients", RouteNames.of(Route.Clients()))
+        assertEquals("clients?filter=checkup", RouteNames.of(Route.Clients(ClientFilter.CheckupReady)))
+        assertEquals("clients?filter=past", RouteNames.of(Route.Clients(ClientFilter.PastClients)))
+        assertEquals(RouteNames.CLIENTS, RouteNames.patternOf(Route.Clients(ClientFilter.Sphere)))
+        assertEquals(RouteNames.CLIENTS, RouteNames.patternOf(Route.Clients()))
+        assertTrue(RouteNames.isTabRoute(Route.Clients(ClientFilter.CheckupReady)))
+        assertEquals(ClientFilter.CheckupReady, RouteNames.clientFilterOf("checkup"))
+        assertNull(RouteNames.clientFilterOf(null))
+        assertNull(RouteNames.clientFilterOf("sellers"))
     }
 
     @Test

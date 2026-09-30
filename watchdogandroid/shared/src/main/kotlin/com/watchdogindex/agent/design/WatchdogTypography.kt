@@ -43,7 +43,10 @@ data class WatchdogTypography(
     val buttonSmall: TextStyle,
     /** Status chip (12, 700). */
     val chip: TextStyle,
-    /** Key/value rows: label (14, 500) and value (15, 700, tabular). */
+    /**
+     * Key/value rows (`.kv`): label (14 / 19.6, 400) and value (15 / 21, 700, tabular). Both inherit the frame's
+     * 1.4 line height at their own size, which is what gives the row its 31 dp pitch.
+     */
     val kvLabel: TextStyle,
     val kvValue: TextStyle,
     /** Card lead number such as "$11,284" (30, 800). */
@@ -57,7 +60,7 @@ data class WatchdogTypography(
     val verdict: TextStyle,
     /** Property header address (30, 800) and its subline (14, 500). */
     val propertyTitle: TextStyle,
-    /** Stat tiles (22, 800) and summary-grid numbers (19, 800). */
+    /** Stat tiles (`.stile .t`: 22 / 24.2, 800) and summary-grid numbers (`.sum-grid b`: 19 / 26.6, 800). */
     val stat: TextStyle,
     val statSmall: TextStyle,
     /** Navigation bar label (12, 600 / 800 when selected). */
@@ -69,7 +72,7 @@ data class WatchdogTypography(
     val settingTitle: TextStyle,
     val settingSubtitle: TextStyle,
     val settingSection: TextStyle,
-    /** Watchdog Intelligence brief: heading (21, 800), items (15, 500), source line (12, 600). */
+    /** Watchdog Intelligence brief: heading (21 / 25.2, 800), items (15 / 21.75, 500), source line (12 / 16.8, 600). */
     val briefHeading: TextStyle,
     val briefItem: TextStyle,
     val briefSource: TextStyle,
@@ -115,7 +118,7 @@ fun watchdogTypography(family: FontFamily): WatchdogTypography {
         buttonSmall = style(15, FontWeight.Bold, 19.0),
         chip = style(12, FontWeight.Bold, 16.0),
         kvLabel = style(14, FontWeight.Normal, 19.6),
-        kvValue = style(15, FontWeight.Bold, 19.6, tabular = true),
+        kvValue = style(15, FontWeight.Bold, 21.0, tabular = true),
         lead = style(30, FontWeight.ExtraBold, 31.5, em(30.sp, -0.03), tabular = true),
         big = style(46, FontWeight.ExtraBold, 46.0, em(46.sp, -0.04), tabular = true),
         dialNumber = style(38, FontWeight.ExtraBold, 38.0, em(38.sp, -0.04), tabular = true),
@@ -123,7 +126,7 @@ fun watchdogTypography(family: FontFamily): WatchdogTypography {
         verdict = style(19, FontWeight.ExtraBold, 22.8, em(19.sp, -0.01)),
         propertyTitle = style(30, FontWeight.ExtraBold, 33.0, em(30.sp, -0.03)),
         stat = style(22, FontWeight.ExtraBold, 26.0, em(22.sp, -0.02), tabular = true),
-        statSmall = style(19, FontWeight.ExtraBold, 23.0, tabular = true),
+        statSmall = style(19, FontWeight.ExtraBold, 26.6, tabular = true),
         navLabel = style(12, FontWeight.SemiBold, 16.0),
         navLabelSelected = style(12, FontWeight.ExtraBold, 16.0),
         searchHint = style(16, FontWeight.Medium, 22.0),
@@ -132,7 +135,7 @@ fun watchdogTypography(family: FontFamily): WatchdogTypography {
         settingSection = style(14, FontWeight.ExtraBold, 18.0),
         briefHeading = style(21, FontWeight.ExtraBold, 25.2, em(21.sp, -0.015)),
         briefItem = style(15, FontWeight.Medium, 21.75),
-        briefSource = style(12, FontWeight.SemiBold, 16.0),
+        briefSource = style(12, FontWeight.SemiBold, 16.8),
         welcomeName = style(28, FontWeight.ExtraBold, 33.0, em(28.sp, -0.02)),
         welcomeFor = style(13, FontWeight.Bold, 18.0, em(13.sp, 0.07)),
         welcomeHeadline = style(25, FontWeight.ExtraBold, 29.5, em(25.sp, -0.02)),

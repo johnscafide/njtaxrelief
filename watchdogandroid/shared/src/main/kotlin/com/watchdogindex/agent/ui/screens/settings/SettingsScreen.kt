@@ -11,7 +11,6 @@ import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.heightIn
 import androidx.compose.foundation.layout.padding
-import androidx.compose.foundation.layout.statusBars
 import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.selection.selectable
@@ -35,18 +34,17 @@ import androidx.compose.ui.semantics.Role
 import androidx.compose.ui.semantics.contentDescription
 import androidx.compose.ui.semantics.semantics
 import androidx.compose.ui.text.style.TextAlign
-import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.dp
 import com.watchdogindex.agent.app.LocalAppGraph
 import com.watchdogindex.agent.app.screenViewModel
 import com.watchdogindex.agent.core.model.AlertChannel
 import com.watchdogindex.agent.core.model.AppThemeMode
 import com.watchdogindex.agent.core.model.QuietHours
+import com.watchdogindex.agent.design.WatchdogDimens
 import com.watchdogindex.agent.design.WatchdogTheme
 import com.watchdogindex.agent.design.icons.WdIcons
 import com.watchdogindex.agent.platform.LocalPlatformServices
 import com.watchdogindex.agent.ui.components.KeyValueRow
-import com.watchdogindex.agent.ui.components.LocalBottomChromeInsets
 import com.watchdogindex.agent.ui.components.SettingsDivider
 import com.watchdogindex.agent.ui.components.SettingsProfileRow
 import com.watchdogindex.agent.ui.components.SettingsRow
@@ -59,6 +57,7 @@ import com.watchdogindex.agent.ui.components.WatchdogTopBar
 import com.watchdogindex.agent.ui.components.WdIconButton
 import com.watchdogindex.agent.ui.components.WdPrimaryButton
 import com.watchdogindex.agent.ui.components.bottomChromeInsets
+import com.watchdogindex.agent.ui.components.statusBarTopPadding
 import com.watchdogindex.agent.ui.nav.Navigator
 import com.watchdogindex.agent.ui.nav.Route
 
@@ -236,7 +235,7 @@ private fun SettingsDialogs(ready: SettingsUiState.Ready, vm: SettingsViewModel,
                         Row(
                             modifier = Modifier
                                 .fillMaxWidth()
-                                .heightIn(min = 48.dp)
+                                .heightIn(min = WatchdogDimens.touchTarget)
                                 .selectable(selected = selected, role = Role.RadioButton, onClick = { vm.setTheme(mode) })
                                 .padding(horizontal = 4.dp),
                             horizontalArrangement = Arrangement.spacedBy(12.dp),
@@ -326,7 +325,7 @@ private fun HourStepper(label: String, hour: Int, onEarlier: () -> Unit, onLater
     Row(
         modifier = Modifier
             .fillMaxWidth()
-            .heightIn(min = 48.dp)
+            .heightIn(min = WatchdogDimens.touchTarget)
             .semantics(mergeDescendants = true) { contentDescription = "$label $hourLabel" },
         verticalAlignment = Alignment.CenterVertically,
     ) {
@@ -350,13 +349,3 @@ private fun AppThemeMode.label(): String = when (this) {
     AppThemeMode.Light -> "Light"
     AppThemeMode.Dark -> "Dark"
 }
-
-/**
- * The status bar allowance above the top bar: the mockups' 40 dp in the desktop preview and screenshot
- * harness, which have no status bar but provide [LocalBottomChromeInsets] to reproduce the mockups' chrome,
- * and the real inset everywhere else (including a hidden status bar, where it is rightly 0). The same rule as
- * the tab screens; a candidate for one shared helper in the components' Foundation.
- */
-@Composable
-private fun statusBarTopPadding(): Dp =
-    if (LocalBottomChromeInsets.current != null) 40.dp else WindowInsets.statusBars.asPaddingValues().calculateTopPadding()

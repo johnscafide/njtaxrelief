@@ -15,19 +15,16 @@ import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
-import androidx.compose.foundation.layout.statusBars
 import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.foundation.verticalScroll
 import androidx.compose.material3.Icon
-import androidx.compose.material3.ModalBottomSheet
 import androidx.compose.material3.Scaffold
 import androidx.compose.material3.SnackbarHost
 import androidx.compose.material3.SnackbarHostState
 import androidx.compose.material3.Text
-import androidx.compose.material3.rememberModalBottomSheetState
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.collectAsState
@@ -46,7 +43,6 @@ import androidx.compose.ui.semantics.contentDescription
 import androidx.compose.ui.semantics.semantics
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextAlign
-import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import com.watchdogindex.agent.app.LocalAppGraph
@@ -61,11 +57,9 @@ import com.watchdogindex.agent.design.WatchdogDimens
 import com.watchdogindex.agent.design.WatchdogTheme
 import com.watchdogindex.agent.design.icons.WdIcons
 import com.watchdogindex.agent.platform.LocalPlatformServices
-import com.watchdogindex.agent.ui.components.BottomSheetHandle
 import com.watchdogindex.agent.ui.components.CardLabel
 import com.watchdogindex.agent.ui.components.FixedInk
 import com.watchdogindex.agent.ui.components.InfoPanel
-import com.watchdogindex.agent.ui.components.LocalBottomChromeInsets
 import com.watchdogindex.agent.ui.components.ReadBox
 import com.watchdogindex.agent.ui.components.RowList
 import com.watchdogindex.agent.ui.components.SegmentOption
@@ -75,6 +69,7 @@ import com.watchdogindex.agent.ui.components.TopBarAction
 import com.watchdogindex.agent.ui.components.VerdictBox
 import com.watchdogindex.agent.ui.components.WatchdogTopBar
 import com.watchdogindex.agent.ui.components.WdIconButton
+import com.watchdogindex.agent.ui.components.WdModalSheet
 import com.watchdogindex.agent.ui.components.WdOutlinedField
 import com.watchdogindex.agent.ui.components.WdPrimaryButton
 import com.watchdogindex.agent.ui.components.WdRoundTonalIconButton
@@ -83,6 +78,7 @@ import com.watchdogindex.agent.ui.components.WdSegmentedButtons
 import com.watchdogindex.agent.ui.components.WdTonalButton
 import com.watchdogindex.agent.ui.components.bottomChromeInsets
 import com.watchdogindex.agent.ui.components.sized
+import com.watchdogindex.agent.ui.components.statusBarAllowance
 import com.watchdogindex.agent.ui.nav.Navigator
 import com.watchdogindex.agent.ui.nav.Route
 import com.watchdogindex.agent.ui.preview.LocalPreviewState
@@ -357,23 +353,14 @@ private fun CameraMode(state: ScanUiState.Ready, vm: ScanViewModel, onFullPage: 
 
     val sheetResult = state.result
     if (state.sheetOpen && sheetResult != null) {
-        ModalBottomSheet(
-            onDismissRequest = vm::closeSheet,
-            sheetState = rememberModalBottomSheetState(skipPartiallyExpanded = true),
-            shape = RoundedCornerShape(topStart = WatchdogDimens.sheetRadius, topEnd = WatchdogDimens.sheetRadius),
-            containerColor = c.surface,
-            contentColor = c.ink,
-            scrimColor = c.scrim,
-            dragHandle = { BottomSheetHandle(onDismiss = vm::closeSheet) },
-        ) {
-            Column(modifier = Modifier.verticalScroll(rememberScrollState()).padding(bottom = 6.dp + chromeBottom)) {
+        WdModalSheet(onDismiss = vm::closeSheet) {
+            Column(modifier = Modifier.weight(1f, fill = false).verticalScroll(rememberScrollState())) {
                 ScanResultPanel(
                     result = sheetResult,
                     saved = state.saved,
                     onTrueCost = vm::shareTrueCost,
                     onFullPage = { onFullPage(sheetResult) },
                     onToggleSaved = vm::toggleSaved,
-                    modifier = Modifier.padding(horizontal = 16.dp),
                 )
             }
         }
@@ -585,19 +572,10 @@ private fun PriceRow(listPrice: Int?, sourceLabel: String, modifier: Modifier = 
 private fun HistorySheet(state: ScanUiState.Ready, onDismiss: () -> Unit, onPick: (ScanHistoryItem) -> Unit) {
     val c = WatchdogTheme.colors
     val t = WatchdogTheme.type
-    val chromeBottom = bottomChromeInsets().asPaddingValues().calculateBottomPadding()
-    ModalBottomSheet(
-        onDismissRequest = onDismiss,
-        sheetState = rememberModalBottomSheetState(skipPartiallyExpanded = true),
-        shape = RoundedCornerShape(topStart = WatchdogDimens.sheetRadius, topEnd = WatchdogDimens.sheetRadius),
-        containerColor = c.surface,
-        contentColor = c.ink,
-        scrimColor = c.scrim,
-        dragHandle = { BottomSheetHandle(onDismiss = onDismiss) },
-    ) {
+    WdModalSheet(onDismiss = onDismiss) {
         Text(
             text = "Scan history",
-            modifier = Modifier.padding(start = 20.dp, end = 20.dp, bottom = 4.dp),
+            modifier = Modifier.padding(start = 4.dp, end = 4.dp, bottom = 4.dp),
             color = c.ink,
             style = t.sectionTitle,
         )
@@ -605,7 +583,7 @@ private fun HistorySheet(state: ScanUiState.Ready, onDismiss: () -> Unit, onPick
         when {
             state.historyLoading || items == null -> Box(
                 modifier = Modifier
-                    .padding(start = 16.dp, end = 16.dp, top = 10.dp)
+                    .padding(top = 10.dp)
                     .fillMaxWidth()
                     .height(WatchdogDimens.rowMinHeight * 2)
                     .clip(RoundedCornerShape(WatchdogDimens.cardRadius))
@@ -615,7 +593,7 @@ private fun HistorySheet(state: ScanUiState.Ready, onDismiss: () -> Unit, onPick
             items.isEmpty() -> ReadBox(
                 icon = WdIcons.History,
                 text = "Nothing scanned yet. Homes you look up from a sign or a pasted link land here.",
-                modifier = Modifier.padding(start = 16.dp, end = 16.dp, top = 10.dp),
+                modifier = Modifier.padding(top = 10.dp),
             )
             // The list is one bordered card, so it scrolls as a whole; `fill = false` lets a short list keep
             // the sheet at its content height while a long one takes the rest of the sheet and scrolls.
@@ -624,7 +602,7 @@ private fun HistorySheet(state: ScanUiState.Ready, onDismiss: () -> Unit, onPick
                     .fillMaxWidth()
                     .weight(1f, fill = false)
                     .verticalScroll(rememberScrollState())
-                    .padding(start = 16.dp, end = 16.dp, top = 10.dp),
+                    .padding(top = 10.dp),
             ) {
                 RowList(items = items) { item ->
                     val r = item.result
@@ -643,7 +621,8 @@ private fun HistorySheet(state: ScanUiState.Ready, onDismiss: () -> Unit, onPick
                 }
             }
         }
-        Spacer(Modifier.height(16.dp + chromeBottom))
+        // With the sheet's own 6 dp above the gesture bar, the 16 dp the list had below it.
+        Spacer(Modifier.height(10.dp))
     }
 }
 
@@ -657,12 +636,3 @@ private fun ScanFatalError(userMessage: String, onClose: () -> Unit) {
         WdTonalButton(label = "Close", onClick = onClose, modifier = Modifier.padding(top = 10.dp), icon = WdIcons.Close, small = true)
     }
 }
-
-/**
- * The top inset the page starts under. On device this is the system status bar. The desktop preview and
- * screenshot harness have no status bar but provide [LocalBottomChromeInsets] to reproduce the mockups'
- * chrome allowances, so the mockups' 40 dp status bar allowance is used there too.
- */
-@Composable
-private fun statusBarAllowance(): Dp =
-    if (LocalBottomChromeInsets.current != null) 40.dp else WindowInsets.statusBars.asPaddingValues().calculateTopPadding()

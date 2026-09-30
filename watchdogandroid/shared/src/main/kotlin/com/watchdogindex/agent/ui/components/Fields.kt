@@ -7,6 +7,7 @@ import androidx.compose.foundation.interaction.MutableInteractionSource
 import androidx.compose.foundation.interaction.collectIsFocusedAsState
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.fillMaxWidth
+import androidx.compose.foundation.layout.heightIn
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.shape.CircleShape
@@ -29,6 +30,7 @@ import androidx.compose.ui.semantics.contentDescription
 import androidx.compose.ui.semantics.semantics
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextOverflow
+import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.dp
 import com.watchdogindex.agent.design.WatchdogTheme
 import com.watchdogindex.agent.design.icons.WdIcons
@@ -119,6 +121,61 @@ fun WdOutlinedField(
                 }
             }
         }
+        Text(
+            text = label,
+            modifier = Modifier.padding(start = 12.dp).background(c.bg).padding(horizontal = 4.dp),
+            color = c.ink,
+            style = t.fieldLabel,
+            maxLines = 1,
+        )
+    }
+}
+
+/**
+ * Multi-line variant of [WdOutlinedField] (`.mfield` as a paste box): the same 2 dp ink border, 8 dp radius
+ * and floating 12 sp 700 label, a 15 sp 500 value that wraps and grows from [minLines] lines (never shorter
+ * than [minHeight]), padding 18 at the sides, 20 above and 12 below the text. The field is announced as
+ * [label]. For pasted CSV and notes; a single-line value belongs in [WdOutlinedField].
+ */
+@Composable
+fun WdOutlinedTextArea(
+    label: String,
+    value: String,
+    onValueChange: (String) -> Unit,
+    modifier: Modifier = Modifier,
+    placeholder: String? = null,
+    enabled: Boolean = true,
+    minLines: Int = 4,
+    minHeight: Dp = 132.dp,
+) {
+    val c = WatchdogTheme.colors
+    val t = WatchdogTheme.type
+    val shape = RoundedCornerShape(8.dp)
+    Box(modifier = modifier.fillMaxWidth()) {
+        BasicTextField(
+            value = value,
+            onValueChange = onValueChange,
+            modifier = Modifier
+                .fillMaxWidth()
+                .padding(top = 8.dp)
+                .background(c.bg, shape)
+                .border(2.dp, c.ink, shape)
+                .heightIn(min = minHeight)
+                .padding(start = 18.dp, end = 18.dp, top = 20.dp, bottom = 12.dp)
+                .semantics { contentDescription = label },
+            enabled = enabled,
+            textStyle = t.fieldValue.copy(color = c.ink),
+            minLines = minLines,
+            cursorBrush = SolidColor(c.ink),
+            decorationBox = { innerTextField ->
+                Box {
+                    if (value.isEmpty() && placeholder != null) {
+                        Text(text = placeholder, color = c.muted, style = t.fieldValue)
+                    }
+                    innerTextField()
+                }
+            },
+        )
         Text(
             text = label,
             modifier = Modifier.padding(start = 12.dp).background(c.bg).padding(horizontal = 4.dp),

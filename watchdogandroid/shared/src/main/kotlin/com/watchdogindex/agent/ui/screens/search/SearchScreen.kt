@@ -12,10 +12,8 @@ import androidx.compose.foundation.layout.asPaddingValues
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
-import androidx.compose.foundation.layout.heightIn
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
-import androidx.compose.foundation.layout.statusBars
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.foundation.shape.RoundedCornerShape
@@ -50,7 +48,6 @@ import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.input.ImeAction
 import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.text.withStyle
-import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.dp
 import com.watchdogindex.agent.app.LocalAppGraph
 import com.watchdogindex.agent.app.screenViewModel
@@ -61,16 +58,15 @@ import com.watchdogindex.agent.core.model.Tone
 import com.watchdogindex.agent.design.WatchdogDimens
 import com.watchdogindex.agent.design.WatchdogTheme
 import com.watchdogindex.agent.design.icons.WdIcons
-import com.watchdogindex.agent.ui.components.IconTile
-import com.watchdogindex.agent.ui.components.LocalBottomChromeInsets
-import com.watchdogindex.agent.ui.components.RowChevron
 import com.watchdogindex.agent.ui.components.RowList
 import com.watchdogindex.agent.ui.components.SourcesNote
 import com.watchdogindex.agent.ui.components.WdIconButton
+import com.watchdogindex.agent.ui.components.WdRow
 import com.watchdogindex.agent.ui.components.WdTonalButton
 import com.watchdogindex.agent.ui.components.bottomChromeInsets
 import com.watchdogindex.agent.ui.components.colors
 import com.watchdogindex.agent.ui.components.listMargin
+import com.watchdogindex.agent.ui.components.statusBarTopPadding
 import com.watchdogindex.agent.ui.nav.Navigator
 import com.watchdogindex.agent.ui.nav.Route
 
@@ -165,19 +161,16 @@ fun SearchScreen(query: String, navigator: Navigator) {
 }
 
 /**
- * One result, on the `.row` metrics (40 dp tile, 15 sp 700 title, 13 sp 500 supporting, padding 11x14,
- * 12 dp gaps, chevron) with two supporting lines instead of `WdRow`'s one: "town · county" and
- * "block/lot · Score n". The full identifier line from the property header (town · county · block/lot) is
- * about 320 dp at 13 sp, wider than any phone's row leaves next to a tile and chevron, and a trailing score
- * chip would leave under 190 dp even at 412 dp, so the score joins the second line as text the way the farm
- * mockup's home row reads ("Score 72 · tax $11,284"). Every line is one line, ellipsised, so rows share one
- * height instead of wrapping mid phrase. The score's ink follows its verdict; the number is the signal.
- * A candidate for promotion as a two-line `WdRow` variant.
+ * One result as the shared two-line `WdRow`: "town · county" and "block/lot · Score n" under the address, every
+ * line ellipsised to one so rows share one height instead of wrapping mid phrase. The full identifier line from
+ * the property header (town · county · block/lot) is about 320 dp at 13 sp, wider than any phone's row leaves
+ * next to a tile and chevron, and a trailing score chip would leave under 190 dp even at 412 dp, so the score
+ * joins the second line as text the way the farm mockup's home row reads ("Score 72 · tax $11,284"). The
+ * score's ink follows its verdict; the number is the signal, and the row's single spoken description carries
+ * the verdict with it, so nothing is read twice.
  */
 @Composable
 private fun ResultRow(property: PropertySummary, onClick: () -> Unit) {
-    val c = WatchdogTheme.colors
-    val t = WatchdogTheme.type
     val score = property.score
     val verdict = score?.let { TaxMath.verdictFor(it) }
     val (_, scoreInk) = (score?.let { scoreTone(it) } ?: Tone.Neutral).colors()
@@ -191,36 +184,20 @@ private fun ResultRow(property: PropertySummary, onClick: () -> Unit) {
             }
         }
     }
-    // One spoken description for the whole row, so the verdict is read with the score and nothing is read twice.
     val description = buildString {
         append(property.address).append(", ").append(placeLine).append(", ").append(property.blockLot)
         if (score != null) append(". Watchdog Score ").append(score).append(" out of 100, ").append(verdict)
     }
-    Row(
-        modifier = Modifier
-            .fillMaxWidth()
-            .clickable(role = Role.Button, onClick = onClick)
-            .semantics { contentDescription = description }
-            .heightIn(min = WatchdogDimens.rowMinHeight)
-            .padding(horizontal = 14.dp, vertical = 11.dp),
-        horizontalArrangement = Arrangement.spacedBy(12.dp),
-        verticalAlignment = Alignment.CenterVertically,
-    ) {
-        IconTile(tint = TileTint.Sky, icon = WdIcons.Home)
-        Column(modifier = Modifier.weight(1f)) {
-            Text(text = property.address, color = c.ink, style = t.rowTitle, maxLines = 1, overflow = TextOverflow.Ellipsis)
-            Text(
-                text = placeLine,
-                modifier = Modifier.padding(top = 2.dp),
-                color = c.muted,
-                style = t.rowSupport,
-                maxLines = 1,
-                overflow = TextOverflow.Ellipsis,
-            )
-            Text(text = parcelLine, color = c.muted, style = t.rowSupport, maxLines = 1, overflow = TextOverflow.Ellipsis)
-        }
-        RowChevron()
-    }
+    WdRow(
+        title = property.address,
+        supporting = placeLine,
+        detail = parcelLine,
+        tile = TileTint.Sky,
+        icon = WdIcons.Home,
+        onClick = onClick,
+        maxLines = 1,
+        contentDescription = description,
+    )
 }
 
 /**
@@ -339,13 +316,3 @@ private fun SearchField(
         }
     }
 }
-
-/**
- * The status bar allowance above the field: the mockups' 40 dp in the desktop preview and screenshot harness,
- * which have no status bar but provide [LocalBottomChromeInsets] to reproduce the mockups' chrome, and the
- * real inset everywhere else (including a hidden status bar, where it is rightly 0). The same rule as the
- * tab screens; a candidate for one shared helper in the components' Foundation.
- */
-@Composable
-private fun statusBarTopPadding(): Dp =
-    if (LocalBottomChromeInsets.current != null) 40.dp else WindowInsets.statusBars.asPaddingValues().calculateTopPadding()

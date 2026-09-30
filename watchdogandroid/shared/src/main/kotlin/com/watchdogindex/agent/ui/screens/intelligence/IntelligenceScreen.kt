@@ -10,30 +10,22 @@ import androidx.compose.foundation.layout.PaddingValues
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.WindowInsets
-import androidx.compose.foundation.layout.asPaddingValues
 import androidx.compose.foundation.layout.calculateEndPadding
 import androidx.compose.foundation.layout.calculateStartPadding
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
-import androidx.compose.foundation.layout.statusBars
 import androidx.compose.foundation.layout.widthIn
-import androidx.compose.foundation.layout.windowInsetsPadding
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.rememberLazyListState
 import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.shape.RoundedCornerShape
-import androidx.compose.foundation.text.BasicTextField
-import androidx.compose.foundation.text.KeyboardActions
-import androidx.compose.foundation.text.KeyboardOptions
 import androidx.compose.foundation.verticalScroll
-import androidx.compose.material3.ModalBottomSheet
 import androidx.compose.material3.Scaffold
 import androidx.compose.material3.SnackbarHost
 import androidx.compose.material3.SnackbarHostState
 import androidx.compose.material3.Text
-import androidx.compose.material3.rememberModalBottomSheetState
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.DisposableEffect
 import androidx.compose.runtime.LaunchedEffect
@@ -43,14 +35,11 @@ import androidx.compose.runtime.remember
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
-import androidx.compose.ui.graphics.SolidColor
 import androidx.compose.ui.platform.LocalLayoutDirection
 import androidx.compose.ui.semantics.Role
 import androidx.compose.ui.semantics.contentDescription
 import androidx.compose.ui.semantics.semantics
 import androidx.compose.ui.text.font.FontWeight
-import androidx.compose.ui.text.input.ImeAction
-import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.dp
 import com.watchdogindex.agent.app.LocalAppGraph
 import com.watchdogindex.agent.app.screenViewModel
@@ -61,24 +50,23 @@ import com.watchdogindex.agent.design.WatchdogDimens
 import com.watchdogindex.agent.design.WatchdogTheme
 import com.watchdogindex.agent.design.icons.WdIcons
 import com.watchdogindex.agent.platform.LocalPlatformServices
-import com.watchdogindex.agent.ui.components.BottomSheetHandle
 import com.watchdogindex.agent.ui.components.BriefCard
 import com.watchdogindex.agent.ui.components.CardLabel
 import com.watchdogindex.agent.ui.components.FollowUpRow
-import com.watchdogindex.agent.ui.components.LocalBottomChromeInsets
+import com.watchdogindex.agent.ui.components.IntelligenceComposer
 import com.watchdogindex.agent.ui.components.RowList
 import com.watchdogindex.agent.ui.components.SectionHeader
 import com.watchdogindex.agent.ui.components.TopBarAction
-import com.watchdogindex.agent.ui.components.WatchdogFab
 import com.watchdogindex.agent.ui.components.WatchdogTopBar
 import com.watchdogindex.agent.ui.components.WdCard
+import com.watchdogindex.agent.ui.components.WdModalSheet
 import com.watchdogindex.agent.ui.components.WdRow
 import com.watchdogindex.agent.ui.components.WdTonalButton
-import com.watchdogindex.agent.ui.components.bottomChromeInsets
 import com.watchdogindex.agent.ui.components.cardMargin
 import com.watchdogindex.agent.ui.components.listMargin
 import com.watchdogindex.agent.ui.components.overflowTouchTarget
 import com.watchdogindex.agent.ui.components.sized
+import com.watchdogindex.agent.ui.components.statusBarAllowance
 import com.watchdogindex.agent.ui.nav.Navigator
 
 /*
@@ -153,12 +141,12 @@ fun IntelligenceScreen(navigator: Navigator) {
             // The composer appears with the brief: while the skeleton or the error card shows there is nothing to
             // ask against, and a visible but inert mic would be a dead control.
             if (ready != null) {
-                VoiceComposer(
+                IntelligenceComposer(
                     hint = COMPOSER_HINT,
+                    onMic = toggleVoice,
                     value = ready.draft,
                     onValueChange = vm::setDraft,
                     onSend = vm::sendDraft,
-                    onMic = toggleVoice,
                     listening = ready.listening,
                 )
             }
@@ -353,84 +341,6 @@ private fun FailedBubble(message: String, onRetry: () -> Unit) {
     }
 }
 
-// ---------------------------------------------------------------------- composer
-
-/**
- * The composer bar (`.composer.m`) with Watchdog Intelligence Voice: the same 56 dp field and square FAB as
- * the shared IntelligenceComposer, plus the IME Send action and a listening state on the FAB (equaliser icon
- * and a teal ring, so the state is not carried by colour alone). Composed only once the brief is ready, so it
- * never shows a control that cannot act. Private until it is promoted to components.
- */
-@Composable
-private fun VoiceComposer(
-    hint: String,
-    value: String,
-    onValueChange: (String) -> Unit,
-    onSend: () -> Unit,
-    onMic: () -> Unit,
-    listening: Boolean,
-    modifier: Modifier = Modifier,
-) {
-    val c = WatchdogTheme.colors
-    val t = WatchdogTheme.type
-    val canSend = value.isNotBlank()
-    Row(
-        modifier = modifier
-            .fillMaxWidth()
-            .background(c.mContainer)
-            .windowInsetsPadding(bottomChromeInsets())
-            .padding(start = 16.dp, end = 16.dp, top = 12.dp, bottom = 6.dp),
-        horizontalArrangement = Arrangement.spacedBy(10.dp),
-        verticalAlignment = Alignment.CenterVertically,
-    ) {
-        Box(
-            modifier = Modifier
-                .weight(1f)
-                .height(56.dp)
-                .clip(RoundedCornerShape(28.dp))
-                .background(c.mHigh)
-                .padding(horizontal = 18.dp),
-            contentAlignment = Alignment.CenterStart,
-        ) {
-            BasicTextField(
-                value = value,
-                onValueChange = onValueChange,
-                modifier = Modifier.fillMaxWidth().semantics { contentDescription = hint },
-                textStyle = t.searchHint.copy(color = c.ink),
-                singleLine = true,
-                keyboardOptions = KeyboardOptions(imeAction = ImeAction.Send),
-                keyboardActions = KeyboardActions(onSend = { if (canSend) onSend() }),
-                cursorBrush = SolidColor(c.ink),
-                decorationBox = { innerTextField ->
-                    Box {
-                        if (value.isEmpty()) {
-                            Text(text = hint, color = c.muted, style = t.searchHint, maxLines = 1)
-                        }
-                        innerTextField()
-                    }
-                },
-            )
-        }
-        val ring = if (listening) Modifier.border(2.dp, c.teal, RoundedCornerShape(WatchdogDimens.fabRadius)) else Modifier
-        WatchdogFab(
-            icon = when {
-                listening -> WdIcons.GraphicEq
-                canSend -> WdIcons.Send
-                else -> WdIcons.MicFill
-            },
-            label = null,
-            onClick = if (canSend && !listening) onSend else onMic,
-            modifier = ring,
-            contentDescription = when {
-                listening -> "Watchdog Intelligence Voice, listening. Tap to stop"
-                canSend -> "Send"
-                else -> "Watchdog Intelligence Voice"
-            },
-            elevated = false,
-        )
-    }
-}
-
 // ---------------------------------------------------------------------- history
 
 /** The history action: this session's questions, newest first; tapping one asks it again. */
@@ -438,33 +348,21 @@ private fun VoiceComposer(
 private fun HistorySheet(questions: List<String>, onAsk: (String) -> Unit, onDismiss: () -> Unit) {
     val c = WatchdogTheme.colors
     val t = WatchdogTheme.type
-    val chromeBottom = bottomChromeInsets().asPaddingValues().calculateBottomPadding()
-    ModalBottomSheet(
-        onDismissRequest = onDismiss,
-        sheetState = rememberModalBottomSheetState(skipPartiallyExpanded = true),
-        shape = RoundedCornerShape(topStart = WatchdogDimens.sheetRadius, topEnd = WatchdogDimens.sheetRadius),
-        containerColor = c.surface,
-        contentColor = c.ink,
-        scrimColor = c.scrim,
-        dragHandle = { BottomSheetHandle(onDismiss = onDismiss) },
-        contentWindowInsets = { WindowInsets(0, 0, 0, 0) },
-    ) {
-        Column(modifier = Modifier.padding(start = 16.dp, end = 16.dp, bottom = 6.dp + chromeBottom)) {
-            Text(text = "History", modifier = Modifier.padding(start = 4.dp, top = 4.dp, bottom = 10.dp), color = c.ink, style = t.sectionTitle)
-            val recent = questions.asReversed().distinct()
-            if (recent.isEmpty()) {
-                RowList {
-                    WdRow(
-                        title = "No questions yet",
-                        supporting = "Questions you ask this session appear here.",
-                        icon = WdIcons.History,
-                        trailing = null,
-                    )
-                }
-            } else {
-                RowList(items = recent, dividerInset = 54.dp) { question ->
-                    FollowUpRow(icon = WdIcons.History, text = question, onClick = { onAsk(question) })
-                }
+    WdModalSheet(onDismiss = onDismiss) {
+        Text(text = "History", modifier = Modifier.padding(start = 4.dp, top = 4.dp, bottom = 10.dp), color = c.ink, style = t.sectionTitle)
+        val recent = questions.asReversed().distinct()
+        if (recent.isEmpty()) {
+            RowList {
+                WdRow(
+                    title = "No questions yet",
+                    supporting = "Questions you ask this session appear here.",
+                    icon = WdIcons.History,
+                    trailing = null,
+                )
+            }
+        } else {
+            RowList(items = recent, dividerInset = 54.dp) { question ->
+                FollowUpRow(icon = WdIcons.History, text = question, onClick = { onAsk(question) })
             }
         }
     }
@@ -501,12 +399,3 @@ private fun IntelligenceError(userMessage: String, contentPadding: PaddingValues
         }
     }
 }
-
-/**
- * The top inset the pinned top bar starts under. On device this is the system status bar. The desktop preview
- * and screenshot harness have no status bar but provide [LocalBottomChromeInsets] to reproduce the mockups'
- * chrome allowances, so the mockups' 40 dp status bar allowance is used there too.
- */
-@Composable
-private fun statusBarAllowance(): Dp =
-    if (LocalBottomChromeInsets.current != null) 40.dp else WindowInsets.statusBars.asPaddingValues().calculateTopPadding()

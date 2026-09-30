@@ -155,4 +155,19 @@ object Spectrum {
     val navy = Color(0xFF0E2248)
 }
 
+/**
+ * The Welcome hero's fixed colors (spec §1.12 and §3.31), identical in light and dark like [Spectrum]: the
+ * `linear-gradient(170deg, #0e2248, #11306a)` behind the brand and the `#e3c46a` gold of the "For New Jersey
+ * agents and teams" eyebrow (`.wel-for`). Nothing else in the app uses these two values, so they live here
+ * rather than in the theme palettes.
+ */
+object WelcomeHero {
+    /** `#0e2248`: the gradient start, the same fixed navy as the Intelligence mic and the true cost card. */
+    val gradientStart: Color = Spectrum.navy
+    /** `#11306a`: the gradient end. */
+    val gradientEnd = Color(0xFF11306A)
+    /** `#e3c46a`: the eyebrow gold (also the dark palette's map dot, by coincidence of value, not of meaning). */
+    val gold = Color(0xFFE3C46A)
+}
+
 val LocalWatchdogColors = staticCompositionLocalOf { WatchdogLightColors }

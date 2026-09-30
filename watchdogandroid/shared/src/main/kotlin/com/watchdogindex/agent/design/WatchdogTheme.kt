@@ -43,6 +43,8 @@ object WatchdogDimens {
     val searchBarHeight = 56.dp
     val appBarHeight = 64.dp
     val sheetRadius = 28.dp
+    /** The mockups' status bar allowance (`.scr.and .scroll{padding-top:40px}`), used where there is no real status bar. */
+    val statusBarAllowance = 40.dp
 }
 
 object WatchdogTheme {

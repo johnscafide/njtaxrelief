@@ -22,6 +22,7 @@ import com.watchdogindex.agent.ui.nav.Navigator
 import com.watchdogindex.agent.ui.nav.Route
 import com.watchdogindex.agent.ui.nav.ScreenHost
 import com.watchdogindex.agent.ui.nav.Tab
+import com.watchdogindex.agent.ui.nav.tab
 
 /**
  * Navigation Compose host for every [Route]. The start destination is Welcome when signed out and Today when
@@ -90,7 +91,13 @@ fun WatchdogNavHost(
     ) {
         composable(RouteNames.WELCOME) { ScreenHost(Route.Welcome, navigator) }
         composable(RouteNames.TODAY) { ScreenHost(Route.Today, navigator) }
-        composable(RouteNames.CLIENTS) { ScreenHost(Route.Clients, navigator) }
+        composable(
+            route = RouteNames.CLIENTS,
+            arguments = listOf(navArgument(RouteNames.ARG_FILTER) { type = NavType.StringType; nullable = true; defaultValue = null }),
+        ) { entry ->
+            // "clients" (the tab switch) and "clients?filter=checkup" (Today's Review task, a deep link) share this entry.
+            ScreenHost(Route.Clients(RouteNames.clientFilterOf(entry.arguments?.getString(RouteNames.ARG_FILTER))), navigator)
+        }
         composable(RouteNames.FARM) { ScreenHost(Route.Farm, navigator) }
         composable(RouteNames.MARKETING) { ScreenHost(Route.Marketing, navigator) }
         composable(
@@ -121,6 +128,10 @@ fun WatchdogNavHost(
 /**
  * [Navigator] on a NavHostController. Tab switches pop to Today saving state, restore the target tab's saved
  * stack and never stack duplicates; other routes push. Back pops, and closes the activity from the root.
+ *
+ * A tab route that carries arguments (Clients with a filter) also switches tabs, but with its own route string
+ * and without restoring the tab's saved stack: a fresh Clients entry opens on the filter, or, when Clients is
+ * already on top, single-top replaces the entry's arguments and the screen re-selects the chip.
  */
 class NavControllerNavigator(
     private val controller: NavHostController,
@@ -136,9 +147,9 @@ class NavControllerNavigator(
             }
             return
         }
-        val tab = Tab.entries.firstOrNull { it.route == route }
+        val tab = route.tab()
         if (tab != null) {
-            switchTab(tab)
+            navigateToTab(RouteNames.of(route), restoreSavedStack = route == tab.route)
             return
         }
         controller.navigate(RouteNames.of(route)) {
@@ -152,16 +163,18 @@ class NavControllerNavigator(
         if (!controller.popBackStack()) onExit()
     }
 
-    override fun switchTab(tab: Tab) {
+    override fun switchTab(tab: Tab) = navigateToTab(RouteNames.of(tab.route), restoreSavedStack = true)
+
+    private fun navigateToTab(routeString: String, restoreSavedStack: Boolean) {
         val leavingWelcome = controller.currentDestination?.route == RouteNames.WELCOME
-        controller.navigate(RouteNames.of(tab.route)) {
+        controller.navigate(routeString) {
             if (leavingWelcome) {
                 popUpTo(RouteNames.WELCOME) { inclusive = true }
             } else {
                 popUpTo(RouteNames.TODAY) { saveState = true }
             }
             launchSingleTop = true
-            restoreState = true
+            restoreState = restoreSavedStack
         }
     }
 }

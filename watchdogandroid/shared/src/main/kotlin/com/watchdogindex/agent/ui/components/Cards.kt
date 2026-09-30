@@ -35,7 +35,6 @@ import androidx.compose.ui.text.AnnotatedString
 import androidx.compose.ui.text.TextStyle
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
-import androidx.compose.ui.unit.sp
 import com.watchdogindex.agent.core.model.CheckupSeason
 import com.watchdogindex.agent.core.math.TaxMath
 import com.watchdogindex.agent.core.model.PriceCheck
@@ -157,10 +156,8 @@ fun KeyValueRow(
                 Text(text = sublabel, color = c.muted, style = t.caption.sized(12, FontWeight.Normal, 16.8))
             }
         }
-        // `.kv b` inherits the 1.4 line height (21 dp at 15 sp), which gives the row its 31 dp pitch; the kvValue
-        // token carries the 14 sp label's 19.6, so the default style is corrected here and a caller's own style is kept.
-        val valueLine = if (valueStyle == t.kvValue) valueStyle.copy(lineHeight = 21.sp) else valueStyle
-        TabularText(text = value, modifier = Modifier.alignByBaseline(), style = valueLine, color = color, maxLines = 1)
+        // `.kv b` inherits the 1.4 line height (21 dp at 15 sp, the kvValue token), which gives the row its 31 dp pitch.
+        TabularText(text = value, modifier = Modifier.alignByBaseline(), style = valueStyle, color = color, maxLines = 1)
     }
 }
 

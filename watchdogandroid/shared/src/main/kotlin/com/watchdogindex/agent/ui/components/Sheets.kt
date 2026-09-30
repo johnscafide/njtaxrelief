@@ -10,14 +10,20 @@ import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.ColumnScope
 import androidx.compose.foundation.layout.WindowInsets
+import androidx.compose.foundation.layout.asPaddingValues
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.requiredHeight
 import androidx.compose.foundation.layout.size
+import androidx.compose.foundation.layout.statusBars
 import androidx.compose.foundation.layout.windowInsetsPadding
 import androidx.compose.foundation.shape.RoundedCornerShape
+import androidx.compose.material3.ModalBottomSheet
+import androidx.compose.material3.SheetState
+import androidx.compose.material3.SheetValue
+import androidx.compose.material3.rememberModalBottomSheetState
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.remember
 import androidx.compose.ui.Alignment
@@ -29,6 +35,7 @@ import androidx.compose.ui.semantics.Role
 import androidx.compose.ui.semantics.contentDescription
 import androidx.compose.ui.semantics.semantics
 import androidx.compose.ui.unit.dp
+import com.watchdogindex.agent.design.LocalReducedMotion
 import com.watchdogindex.agent.design.WatchdogDimens
 import com.watchdogindex.agent.design.WatchdogTheme
 
@@ -106,6 +113,47 @@ fun SheetSurface(
             .padding(start = 16.dp, end = 16.dp, bottom = 6.dp),
         content = content,
     )
+}
+
+/**
+ * The modal sheet every picker, review and history sheet uses (`.sheet.and` hosted in Material's
+ * `ModalBottomSheet`): surface colour and ink, 28 dp top radius, the scrim token, the [BottomSheetHandle]
+ * as the drag handle (tap or drag it down to close), and [content] padded 16 dp at the sides and 6 dp plus
+ * the bottom chrome inset below (the mockups' 30 dp). It opens fully expanded with no partial stop; under
+ * reduced motion it appears in place instead of sliding up. Material's own bottom inset is turned off so
+ * [windowInsets] alone clears the gesture bar (the status bar still pads a sheet tall enough to reach it).
+ * [onDismiss] runs for the scrim, the handle, the back gesture and a swipe down; the caller drops the sheet
+ * from composition in response.
+ */
+@Composable
+fun WdModalSheet(
+    onDismiss: () -> Unit,
+    modifier: Modifier = Modifier,
+    windowInsets: WindowInsets = bottomChromeInsets(),
+    content: @Composable ColumnScope.() -> Unit,
+) {
+    val c = WatchdogTheme.colors
+    val chromeBottom = windowInsets.asPaddingValues().calculateBottomPadding()
+    val sheetState = if (LocalReducedMotion.current) {
+        // Already expanded when it first composes, so nothing slides; it still drags and dismisses.
+        val density = LocalDensity.current
+        remember(density) { SheetState(skipPartiallyExpanded = true, density = density, initialValue = SheetValue.Expanded) }
+    } else {
+        rememberModalBottomSheetState(skipPartiallyExpanded = true)
+    }
+    ModalBottomSheet(
+        onDismissRequest = onDismiss,
+        modifier = modifier,
+        sheetState = sheetState,
+        shape = RoundedCornerShape(topStart = WatchdogDimens.sheetRadius, topEnd = WatchdogDimens.sheetRadius),
+        containerColor = c.surface,
+        contentColor = c.ink,
+        scrimColor = c.scrim,
+        dragHandle = { BottomSheetHandle(onDismiss = onDismiss) },
+        contentWindowInsets = { WindowInsets.statusBars },
+    ) {
+        Column(modifier = Modifier.padding(start = 16.dp, end = 16.dp, bottom = 6.dp + chromeBottom), content = content)
+    }
 }
 
 /** Full-screen scrim (`.dim`) under a sheet. [onDismiss] makes a tap on it close the sheet, without a ripple. */

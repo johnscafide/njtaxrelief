@@ -1,5 +1,6 @@
 package com.watchdogindex.agent.navigation
 
+import com.watchdogindex.agent.core.model.ClientFilter
 import com.watchdogindex.agent.ui.nav.Route
 
 /**
@@ -12,9 +13,11 @@ import com.watchdogindex.agent.ui.nav.Route
  *   link is passed through as the Scan input so the paste field is pre-filled.
  * - https://www.watchdogindex.com/nj/<town>/<address>/<pin>: the last path segment that is a PAMS PIN.
  * - /true-cost?pin=, /checkup?pin=: the PIN in the query. /scan?url= opens Scan with that link.
- * - watchdog://property/<pin>, watchdog://scan?url=, watchdog://<tab or screen>, watchdog://search?q=.
+ * - /clients?filter=checkup (the web's filter keys, [ClientFilter.fromKey]) opens Clients on that chip.
+ * - watchdog://property/<pin>, watchdog://scan?url=, watchdog://<tab or screen>, watchdog://search?q=,
+ *   watchdog://clients?filter=.
  * - Notification extras: `pin` and/or `route` (see [fromExtras] for the accepted route words, which include the
- *   server-side names `pulse` and `agent-desk` from the push proposal).
+ *   server-side names `pulse` and `agent-desk` from the push proposal); a route word may carry `?filter=` too.
  */
 object IntentRoutes {
     const val ACTION_SEND = "android.intent.action.SEND"
@@ -62,19 +65,22 @@ object IntentRoutes {
     }
 
     /**
-     * Notification extras. [pin] alone opens the property; [route] words: today, clients, farm, marketing,
-     * property (needs a pin), scan, intelligence, brief, alerts, settings, search, and the server names
-     * pulse (a property event, needs a pin, otherwise the alerts list), agent-desk and digest (Today).
+     * Notification extras. [pin] alone opens the property; [route] words: today, clients (optionally
+     * `clients?filter=checkup`), checkups (Clients on the Checkup ready chip), farm, marketing, property (needs a
+     * pin), scan, intelligence, brief, alerts, settings, search, and the server names pulse (a property event,
+     * needs a pin, otherwise the alerts list), agent-desk and digest (Today).
      */
     fun fromExtras(pin: String?, route: String?): Route? {
         val cleanPin = pin?.trim()?.takeIf { isPin(it) }
-        val word = route?.trim()?.lowercase()?.removePrefix("/")?.substringBefore('?')?.substringBefore('/')
+        val clean = route?.trim()?.lowercase()?.removePrefix("/")
+        val word = clean?.substringBefore('?')?.substringBefore('/')
         return when (word) {
             null, "" -> cleanPin?.let { Route.Property(it) }
             "property", "nj", "true-cost", "checkup" -> cleanPin?.let { Route.Property(it) }
             "pulse" -> cleanPin?.let { Route.Property(it) } ?: Route.Alerts
             "today", "home", "digest", "agent-desk" -> Route.Today
-            "clients", "checkups" -> Route.Clients
+            "clients" -> Route.Clients(ClientFilter.fromKey(queryOf(clean)["filter"]))
+            "checkups" -> Route.Clients(ClientFilter.CheckupReady)
             "farm" -> Route.Farm
             "marketing" -> Route.Marketing
             "scan" -> Route.Scan(null)
@@ -103,6 +109,7 @@ object IntentRoutes {
             "scan" -> Route.Scan(link.query["url"]?.trim()?.takeIf { it.isNotEmpty() })
             "property" -> (segments.getOrNull(1)?.takeIf { isPin(it) } ?: queryPin)?.let { Route.Property(it) }
             "search" -> Route.Search(link.query["q"]?.trim().orEmpty())
+            "clients" -> Route.Clients(ClientFilter.fromKey(link.query["filter"]))
             else -> queryPin?.let { Route.Property(it) }
         }
     }
@@ -115,8 +122,23 @@ object IntentRoutes {
             "property", "nj" -> (args.lastOrNull { isPin(it) } ?: link.query["pin"]?.takeIf { isPin(it) })?.let { Route.Property(it) }
             "scan" -> Route.Scan(link.query["url"]?.trim()?.takeIf { it.isNotEmpty() })
             "search" -> Route.Search(link.query["q"]?.trim().orEmpty())
+            "clients" -> Route.Clients(ClientFilter.fromKey(link.query["filter"]))
             else -> fromExtras(link.query["pin"], target)
         }
+    }
+
+    /** The query of a route word such as "clients?filter=checkup" as a map; empty when there is none. */
+    private fun queryOf(route: String?): Map<String, String> {
+        val queryText = route?.substringAfter('?', "").orEmpty()
+        if (queryText.isEmpty()) return emptyMap()
+        val query = LinkedHashMap<String, String>()
+        for (pair in queryText.split('&')) {
+            if (pair.isEmpty()) continue
+            val key = percentDecode(pair.substringBefore('='), plusIsSpace = true)
+            val value = percentDecode(pair.substringAfter('=', ""), plusIsSpace = true)
+            if (key.isNotEmpty() && !query.containsKey(key)) query[key] = value
+        }
+        return query
     }
 
     /** A minimal URL split: scheme, host (lower-cased, no port or userinfo), decoded path segments, decoded query. */

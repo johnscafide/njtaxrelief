@@ -8,13 +8,11 @@ import androidx.compose.foundation.layout.FlowRow
 import androidx.compose.foundation.layout.PaddingValues
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.WindowInsets
-import androidx.compose.foundation.layout.asPaddingValues
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
-import androidx.compose.foundation.layout.statusBars
 import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.rememberScrollState
@@ -54,7 +52,6 @@ import com.watchdogindex.agent.ui.components.ActionSpec
 import com.watchdogindex.agent.ui.components.BottomActionArea
 import com.watchdogindex.agent.ui.components.CardLabel
 import com.watchdogindex.agent.ui.components.FactsCardView
-import com.watchdogindex.agent.ui.components.LocalBottomChromeInsets
 import com.watchdogindex.agent.ui.components.RobustCardView
 import com.watchdogindex.agent.ui.components.SalesCardView
 import com.watchdogindex.agent.ui.components.ScoreCardView
@@ -69,6 +66,7 @@ import com.watchdogindex.agent.ui.components.WdPrimaryButton
 import com.watchdogindex.agent.ui.components.WdTonalButton
 import com.watchdogindex.agent.ui.components.cardMargin
 import com.watchdogindex.agent.ui.components.sized
+import com.watchdogindex.agent.ui.components.statusBarAllowance
 import com.watchdogindex.agent.ui.nav.Navigator
 import com.watchdogindex.agent.ui.nav.Route
 
@@ -327,12 +325,3 @@ private fun PropertyError(userMessage: String, contentPadding: PaddingValues, on
         }
     }
 }
-
-/**
- * The top inset the page starts under. On device this is the system status bar. The desktop preview and
- * screenshot harness have no status bar but provide [LocalBottomChromeInsets] to reproduce the mockups'
- * chrome allowances, so the mockups' 40 dp status bar allowance is used there too.
- */
-@Composable
-private fun statusBarAllowance(): Dp =
-    if (LocalBottomChromeInsets.current != null) 40.dp else WindowInsets.statusBars.asPaddingValues().calculateTopPadding()

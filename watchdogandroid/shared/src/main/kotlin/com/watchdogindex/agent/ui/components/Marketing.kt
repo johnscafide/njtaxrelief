@@ -161,12 +161,12 @@ fun TrueCostCardView(card: TrueCostCard, modifier: Modifier = Modifier) {
                 horizontalArrangement = Arrangement.spacedBy(8.dp),
                 verticalAlignment = Alignment.Bottom,
             ) {
+                // `.tc-tot b` is 34 sp on a `line-height: 1` box; LineBox keeps that 34 dp line on every platform.
+                val totalStyle = t.body.sized(34, FontWeight.ExtraBold, 34.0, em(34, -0.04))
                 Column(modifier = Modifier.width(IntrinsicSize.Min)) {
-                    TabularText(
-                        text = Format.money(card.monthlyTotal),
-                        style = t.body.sized(34, FontWeight.ExtraBold, 34.0, em(34, -0.04)),
-                        color = FixedInk.onNavy,
-                    )
+                    LineBox(totalStyle.lineHeight) {
+                        TabularText(text = Format.money(card.monthlyTotal), style = totalStyle, color = FixedInk.onNavy)
+                    }
                     Spacer(Modifier.height(4.dp))
                     Box(Modifier.fillMaxWidth().height(2.dp).background(FixedInk.gold))
                 }

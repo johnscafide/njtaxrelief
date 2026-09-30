@@ -1,8 +1,13 @@
 package com.watchdogindex.agent.ui.components
 
+import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.WindowInsets
+import androidx.compose.foundation.layout.asPaddingValues
+import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.navigationBars
 import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.layout.statusBars
+import androidx.compose.foundation.layout.wrapContentHeight
 import androidx.compose.material3.LocalTextStyle
 import androidx.compose.material3.Text
 import androidx.compose.material3.minimumInteractiveComponentSize
@@ -10,12 +15,14 @@ import androidx.compose.runtime.Composable
 import androidx.compose.runtime.Immutable
 import androidx.compose.runtime.ReadOnlyComposable
 import androidx.compose.runtime.staticCompositionLocalOf
+import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.drawBehind
 import androidx.compose.ui.geometry.Offset
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.vector.ImageVector
 import androidx.compose.ui.layout.layout
+import androidx.compose.ui.platform.LocalDensity
 import androidx.compose.ui.text.TextStyle
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextAlign
@@ -117,6 +124,21 @@ val LocalBottomChromeInsets = staticCompositionLocalOf<WindowInsets?> { null }
 @Composable
 fun bottomChromeInsets(): WindowInsets = LocalBottomChromeInsets.current ?: WindowInsets.navigationBars
 
+/**
+ * The top inset a screen's first element (pinned top bar, hero, scrolling content) starts under. On device
+ * this is the system status bar, which is rightly 0 when the bar is hidden. The desktop preview and the
+ * screenshot harness have no status bar but provide [LocalBottomChromeInsets] to reproduce the mockups'
+ * chrome allowances, so the mockups' 40 dp status bar allowance ([WatchdogDimens.statusBarAllowance]) is
+ * used there too. The rule every screen converged on; screens should call this rather than carry a copy.
+ */
+@Composable
+fun statusBarAllowance(): Dp =
+    if (LocalBottomChromeInsets.current != null) WatchdogDimens.statusBarAllowance else WindowInsets.statusBars.asPaddingValues().calculateTopPadding()
+
+/** [statusBarAllowance] under the name the pushed screens (Welcome, Search, Settings) used for it. */
+@Composable
+fun statusBarTopPadding(): Dp = statusBarAllowance()
+
 /** Text with tabular figures, for money, counts and scores so columns line up. */
 @Composable
 fun TabularText(
@@ -160,6 +182,23 @@ internal fun TextStyle.sized(
     letterSpacing = tracking,
     fontFeatureSettings = if (tabular) "tnum" else fontFeatureSettings,
 )
+
+/**
+ * Pins a one-line text to the CSS line box it is given, centring the glyphs in it however tall the
+ * platform lays the line out. The mockup's big numbers use `line-height: 1` (a 46 sp line for the 46 sp
+ * count, 38 for the dial number, 12 for its caption, 34 for the true cost total); Android and the browser
+ * shrink the line to that, but the desktop harness keeps the font's natural height for a line height at or
+ * under the font size, which pushed the summary card 12 dp, the dial caption 5 dp and the true cost card
+ * 9 dp off the reference. Glyphs may overflow the box by a few dp above and below, exactly as negative
+ * half-leading does in CSS.
+ */
+@Composable
+internal fun LineBox(lineHeight: TextUnit, modifier: Modifier = Modifier, content: @Composable () -> Unit) {
+    val height = with(LocalDensity.current) { lineHeight.toDp() }
+    Box(modifier = modifier.height(height), contentAlignment = Alignment.Center) {
+        Box(modifier = Modifier.wrapContentHeight(align = Alignment.CenterVertically, unbounded = true)) { content() }
+    }
+}
 
 /**
  * Colors the approved mockups keep identical in light and dark (spec §1.12): the Intelligence mic and brief

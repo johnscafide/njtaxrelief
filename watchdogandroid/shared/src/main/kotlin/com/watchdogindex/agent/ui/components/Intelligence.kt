@@ -1,6 +1,7 @@
 package com.watchdogindex.agent.ui.components
 
 import androidx.compose.foundation.background
+import androidx.compose.foundation.border
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
@@ -20,6 +21,8 @@ import androidx.compose.foundation.layout.windowInsetsPadding
 import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.foundation.text.BasicTextField
+import androidx.compose.foundation.text.KeyboardActions
+import androidx.compose.foundation.text.KeyboardOptions
 import androidx.compose.material3.Icon
 import androidx.compose.material3.LocalContentColor
 import androidx.compose.material3.Text
@@ -37,6 +40,7 @@ import androidx.compose.ui.semantics.semantics
 import androidx.compose.ui.text.SpanStyle
 import androidx.compose.ui.text.buildAnnotatedString
 import androidx.compose.ui.text.font.FontWeight
+import androidx.compose.ui.text.input.ImeAction
 import androidx.compose.ui.text.withStyle
 import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.dp
@@ -281,14 +285,17 @@ fun BriefCard(
                 }
             }
         }
+        // `.ib-voice`: margin-top 6, 1 dp separator, then the row. The approved render puts the 56 dp mic and the text
+        // 26 dp under the separator (the sheet's "padding-top 14" plus the grid's 12 dp gap) with both top-aligned,
+        // and closes the card 16 dp under the mic; measured on the 2x references, not read off the CSS summary.
         Row(
             modifier = Modifier
                 .fillMaxWidth()
                 .padding(top = 6.dp)
                 .topSeparator(Spectrum.separator)
-                .padding(top = 14.dp),
+                .padding(top = 26.dp),
             horizontalArrangement = Arrangement.spacedBy(12.dp),
-            verticalAlignment = Alignment.CenterVertically,
+            verticalAlignment = Alignment.Top,
         ) {
             MicButton(onClick = onVoice, size = 56.dp, contentDescription = "Watchdog Intelligence Voice")
             Column {
@@ -339,11 +346,14 @@ fun FollowUpRow(followUp: FollowUp, onClick: () -> Unit, modifier: Modifier = Mo
 }
 
 /**
- * The Material composer bar (`.composer.m`): container color, padding 12 16 (6 + inset below), a 56 dp
- * field with 28 dp radius on container-high, and the 56 dp square mic FAB without a shadow. Pass
- * [onValueChange] to make the field editable; the FAB becomes Send when there is text and [onSend] is set.
- * Without [onValueChange] the field is a button that runs [onFieldClick] (for example to open the typed
- * composer); with neither it is a plain hint.
+ * The Material composer bar (`.composer.m`) with Watchdog Intelligence Voice: container color, padding
+ * 12 16 (6 + inset below), a 56 dp field with 28 dp radius on container-high, and the 56 dp square mic FAB
+ * without a shadow. Pass [onValueChange] to make the field editable; the field is announced as [hint], its
+ * keyboard action is Send when [onSend] is set, and the FAB becomes Send while there is text. Without
+ * [onValueChange] the field is a button that runs [onFieldClick] (for example to open the typed composer);
+ * with neither it is a plain hint. [listening] is the Voice state: the FAB shows the equaliser glyph inside
+ * a 2 dp teal ring (a shape change, not colour alone), announces "[micDescription], listening. Tap to stop"
+ * and always runs [onMic], which then stops the session.
  */
 @Composable
 fun IntelligenceComposer(
@@ -355,9 +365,12 @@ fun IntelligenceComposer(
     onSend: (() -> Unit)? = null,
     onFieldClick: (() -> Unit)? = null,
     windowInsets: WindowInsets = bottomChromeInsets(),
+    listening: Boolean = false,
+    micDescription: String = "Watchdog Intelligence Voice",
 ) {
     val c = WatchdogTheme.colors
     val t = WatchdogTheme.type
+    val canSend = onSend != null && value.isNotBlank()
     Row(
         modifier = modifier
             .fillMaxWidth()
@@ -386,9 +399,12 @@ fun IntelligenceComposer(
                 BasicTextField(
                     value = value,
                     onValueChange = onValueChange,
-                    modifier = Modifier.fillMaxWidth(),
+                    // The hint is drawn as a placeholder, so the field carries it as its name for TalkBack too.
+                    modifier = Modifier.fillMaxWidth().semantics { contentDescription = hint },
                     textStyle = t.searchHint.copy(color = c.ink),
                     singleLine = true,
+                    keyboardOptions = KeyboardOptions(imeAction = if (onSend != null) ImeAction.Send else ImeAction.Default),
+                    keyboardActions = KeyboardActions(onSend = { if (canSend) onSend?.invoke() }),
                     cursorBrush = SolidColor(c.ink),
                     decorationBox = { innerTextField ->
                         Box {
@@ -403,13 +419,24 @@ fun IntelligenceComposer(
                 Text(text = hint, color = c.muted, style = t.searchHint, maxLines = 1)
             }
         }
-        // The FAB sends while there is typed text and a send handler; otherwise it is the mic.
-        val send: (() -> Unit)? = onSend?.takeIf { value.isNotBlank() }
+        // The FAB sends while there is typed text and a send handler and Voice is not listening; otherwise it
+        // is the mic, which also stops a listening session.
+        val send: (() -> Unit)? = onSend?.takeIf { canSend && !listening }
+        val ring = if (listening) Modifier.border(2.dp, c.teal, RoundedCornerShape(WatchdogDimens.fabRadius)) else Modifier
         WatchdogFab(
-            icon = if (send != null) WdIcons.Send else WdIcons.MicFill,
+            icon = when {
+                listening -> WdIcons.GraphicEq
+                send != null -> WdIcons.Send
+                else -> WdIcons.MicFill
+            },
             label = null,
             onClick = send ?: onMic,
-            contentDescription = if (send != null) "Send" else "Ask Watchdog Intelligence Voice",
+            modifier = ring,
+            contentDescription = when {
+                listening -> "$micDescription, listening. Tap to stop"
+                send != null -> "Send"
+                else -> micDescription
+            },
             elevated = false,
         )
     }

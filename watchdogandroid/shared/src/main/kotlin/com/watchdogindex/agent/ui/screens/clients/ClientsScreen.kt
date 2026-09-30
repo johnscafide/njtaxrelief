@@ -1,16 +1,13 @@
 package com.watchdogindex.agent.ui.screens.clients
 
 import androidx.compose.foundation.background
-import androidx.compose.foundation.border
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
-import androidx.compose.foundation.layout.ColumnScope
 import androidx.compose.foundation.layout.PaddingValues
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.WindowInsets
-import androidx.compose.foundation.layout.asPaddingValues
 import androidx.compose.foundation.layout.calculateEndPadding
 import androidx.compose.foundation.layout.calculateStartPadding
 import androidx.compose.foundation.layout.fillMaxSize
@@ -19,7 +16,6 @@ import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.heightIn
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
-import androidx.compose.foundation.layout.statusBars
 import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.itemsIndexed
@@ -27,10 +23,8 @@ import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.selection.selectable
 import androidx.compose.foundation.selection.selectableGroup
 import androidx.compose.foundation.shape.RoundedCornerShape
-import androidx.compose.foundation.text.BasicTextField
 import androidx.compose.foundation.verticalScroll
 import androidx.compose.material3.Icon
-import androidx.compose.material3.ModalBottomSheet
 import androidx.compose.material3.RadioButton
 import androidx.compose.material3.RadioButtonDefaults
 import androidx.compose.material3.Scaffold
@@ -40,7 +34,6 @@ import androidx.compose.material3.SwipeToDismissBox
 import androidx.compose.material3.SwipeToDismissBoxValue
 import androidx.compose.material3.Text
 import androidx.compose.material3.pulltorefresh.PullToRefreshBox
-import androidx.compose.material3.rememberModalBottomSheetState
 import androidx.compose.material3.rememberSwipeToDismissBoxState
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
@@ -50,14 +43,6 @@ import androidx.compose.runtime.remember
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
-import androidx.compose.ui.draw.drawWithContent
-import androidx.compose.ui.focus.FocusRequester
-import androidx.compose.ui.focus.focusRequester
-import androidx.compose.ui.geometry.CornerRadius
-import androidx.compose.ui.geometry.Offset
-import androidx.compose.ui.geometry.Size
-import androidx.compose.ui.graphics.SolidColor
-import androidx.compose.ui.graphics.drawscope.Stroke
 import androidx.compose.ui.platform.LocalLayoutDirection
 import androidx.compose.ui.semantics.CustomAccessibilityAction
 import androidx.compose.ui.semantics.Role
@@ -78,27 +63,28 @@ import com.watchdogindex.agent.design.WatchdogTheme
 import com.watchdogindex.agent.design.icons.WdIcons
 import com.watchdogindex.agent.platform.LocalPlatformServices
 import com.watchdogindex.agent.platform.PlatformServices
-import com.watchdogindex.agent.ui.components.BottomSheetHandle
 import com.watchdogindex.agent.ui.components.CardLabel
 import com.watchdogindex.agent.ui.components.CheckupSeasonCard
 import com.watchdogindex.agent.ui.components.ClientRowView
 import com.watchdogindex.agent.ui.components.FilterChipsRow
-import com.watchdogindex.agent.ui.components.LocalBottomChromeInsets
 import com.watchdogindex.agent.ui.components.OptionRow
 import com.watchdogindex.agent.ui.components.ReadBox
 import com.watchdogindex.agent.ui.components.RowList
+import com.watchdogindex.agent.ui.components.RowListSegment
+import com.watchdogindex.agent.ui.components.SearchTopBar
 import com.watchdogindex.agent.ui.components.TopBarAction
 import com.watchdogindex.agent.ui.components.WatchdogFab
 import com.watchdogindex.agent.ui.components.WatchdogNavigationBar
 import com.watchdogindex.agent.ui.components.WatchdogTopBar
 import com.watchdogindex.agent.ui.components.WdCard
-import com.watchdogindex.agent.ui.components.WdIconButton
+import com.watchdogindex.agent.ui.components.WdModalSheet
+import com.watchdogindex.agent.ui.components.WdOutlinedTextArea
 import com.watchdogindex.agent.ui.components.WdPrimaryButton
 import com.watchdogindex.agent.ui.components.WdRow
 import com.watchdogindex.agent.ui.components.WdTonalButton
-import com.watchdogindex.agent.ui.components.bottomChromeInsets
 import com.watchdogindex.agent.ui.components.cardMargin
 import com.watchdogindex.agent.ui.components.sized
+import com.watchdogindex.agent.ui.components.statusBarAllowance
 import com.watchdogindex.agent.ui.components.topSeparator
 import com.watchdogindex.agent.ui.nav.Navigator
 import com.watchdogindex.agent.ui.nav.Route
@@ -236,7 +222,13 @@ private fun ClientsContent(
     LazyColumn(modifier = Modifier.fillMaxSize(), contentPadding = contentPadding) {
         item(key = "bar") {
             if (state.searchOpen) {
-                SearchTopBar(query = state.query, onQueryChange = vm::setQuery, onClose = { vm.setSearchOpen(false) })
+                SearchTopBar(
+                    query = state.query,
+                    onQueryChange = vm::setQuery,
+                    onClose = { vm.setSearchOpen(false) },
+                    placeholder = "Street, town or CRM reference",
+                    fieldDescription = "Search clients",
+                )
             } else {
                 WatchdogTopBar(
                     title = "Clients",
@@ -350,97 +342,6 @@ private fun SnoozableClientRow(row: ClientRow, onClick: () -> Unit, onNextAction
     }
 }
 
-/**
- * One slice of a `.rows` container for a lazy list: surface fill, the 1 dp line border on the sides (and
- * the rounded top or bottom on the first or last slice) and the 66 dp-inset separator above every row
- * after the first. Stacked slices look exactly like [RowList]. Candidate for promotion to the components
- * package as a lazy-list companion of RowList.
- */
-@Composable
-private fun RowListSegment(first: Boolean, last: Boolean, modifier: Modifier = Modifier, content: @Composable () -> Unit) {
-    val c = WatchdogTheme.colors
-    val radius = WatchdogDimens.cardRadius
-    val shape = RoundedCornerShape(
-        topStart = if (first) radius else 0.dp,
-        topEnd = if (first) radius else 0.dp,
-        bottomStart = if (last) radius else 0.dp,
-        bottomEnd = if (last) radius else 0.dp,
-    )
-    val line = c.line
-    val separator = c.separator
-    Box(
-        modifier = modifier
-            .fillMaxWidth()
-            .clip(shape)
-            .background(c.surface)
-            .drawWithContent {
-                drawContent()
-                // Drawn over the row like RowList's border. The rounded rect overshoots the open edges, so the
-                // clip hides those sides and only the left and right lines (and the rounded end) remain.
-                val stroke = 1.dp.toPx()
-                val r = radius.toPx()
-                val overshoot = r + stroke
-                val top = if (first) stroke / 2f else -overshoot
-                val bottom = if (last) size.height - stroke / 2f else size.height + overshoot
-                drawRoundRect(
-                    color = line,
-                    topLeft = Offset(stroke / 2f, top),
-                    size = Size(size.width - stroke, bottom - top),
-                    cornerRadius = CornerRadius(r, r),
-                    style = Stroke(width = stroke),
-                )
-                if (!first) {
-                    drawLine(separator, Offset(66.dp.toPx(), stroke / 2f), Offset(size.width, stroke / 2f), strokeWidth = stroke)
-                }
-            },
-    ) {
-        content()
-    }
-}
-
-/**
- * The top bar with the inline search field in place of the title (the search action toggles it): a back
- * button that closes the search, the 16 sp field and a clear button while there is text. The field takes
- * focus when it appears.
- */
-@Composable
-private fun SearchTopBar(query: String, onQueryChange: (String) -> Unit, onClose: () -> Unit) {
-    val c = WatchdogTheme.colors
-    val t = WatchdogTheme.type
-    val focus = remember { FocusRequester() }
-    LaunchedEffect(Unit) { focus.requestFocus() }
-    Row(
-        modifier = Modifier.fillMaxWidth().height(WatchdogDimens.appBarHeight).padding(horizontal = 4.dp),
-        horizontalArrangement = Arrangement.spacedBy(4.dp),
-        verticalAlignment = Alignment.CenterVertically,
-    ) {
-        WdIconButton(icon = WdIcons.ArrowBack, contentDescription = "Close search", onClick = onClose)
-        BasicTextField(
-            value = query,
-            onValueChange = onQueryChange,
-            modifier = Modifier
-                .weight(1f)
-                .padding(start = 4.dp)
-                .focusRequester(focus)
-                .semantics { contentDescription = "Search clients" },
-            textStyle = t.searchHint.copy(color = c.ink),
-            singleLine = true,
-            cursorBrush = SolidColor(c.ink),
-            decorationBox = { inner ->
-                Box {
-                    if (query.isEmpty()) {
-                        Text(text = "Street, town or CRM reference", color = c.muted, style = t.searchHint, maxLines = 1)
-                    }
-                    inner()
-                }
-            },
-        )
-        if (query.isNotEmpty()) {
-            WdIconButton(icon = WdIcons.Cancel, contentDescription = "Clear search", onClick = { onQueryChange("") })
-        }
-    }
-}
-
 // ---------------------------------------------------------------------- loading and error
 
 /** Loading: the real top bar, then quiet blocks in the shapes of the banner, the chips and the list. */
@@ -488,27 +389,6 @@ private fun ClientsError(userMessage: String, contentPadding: PaddingValues, onR
 
 // ---------------------------------------------------------------------- sheets
 
-/**
- * The shared modal sheet chrome: surface, 28 dp top radius, the scrim token and the mockup handle. The Farm
- * screen carries the same wrapper; candidate for promotion to the components package as `WdModalSheet`.
- */
-@Composable
-private fun ClientsSheet(onDismiss: () -> Unit, content: @Composable ColumnScope.() -> Unit) {
-    val c = WatchdogTheme.colors
-    val chromeBottom = bottomChromeInsets().asPaddingValues().calculateBottomPadding()
-    ModalBottomSheet(
-        onDismissRequest = onDismiss,
-        sheetState = rememberModalBottomSheetState(skipPartiallyExpanded = true),
-        shape = RoundedCornerShape(topStart = WatchdogDimens.sheetRadius, topEnd = WatchdogDimens.sheetRadius),
-        containerColor = c.surface,
-        contentColor = c.ink,
-        scrimColor = c.scrim,
-        dragHandle = { BottomSheetHandle(onDismiss = onDismiss) },
-    ) {
-        Column(modifier = Modifier.padding(start = 16.dp, end = 16.dp, bottom = 6.dp + chromeBottom), content = content)
-    }
-}
-
 @Composable
 private fun SheetTitle(text: String) {
     Text(text = text, modifier = Modifier.padding(horizontal = 4.dp), color = WatchdogTheme.colors.ink, style = WatchdogTheme.type.sectionTitle)
@@ -529,7 +409,7 @@ private fun SheetBody(text: String) {
 private fun ReviewCheckupsSheet(state: ClientsUiState.Ready, onSend: () -> Unit, onDismiss: () -> Unit) {
     val count = state.readyCount
     val deadline = state.overview.season?.appealDeadline
-    ClientsSheet(onDismiss = onDismiss) {
+    WdModalSheet(onDismiss = onDismiss) {
         SheetTitle(if (count == 1) "Send 1 tax checkup" else "Send $count tax checkups")
         SheetBody(
             "Each checkup goes out under your name and shows whether the home’s assessment holds up" +
@@ -565,7 +445,7 @@ private fun ReviewCheckupsSheet(state: ClientsUiState.Ready, onSend: () -> Unit,
 private fun AddClientsSheet(state: ClientsUiState.Ready, vm: ClientsViewModel, onDismiss: () -> Unit) {
     val c = WatchdogTheme.colors
     val t = WatchdogTheme.type
-    ClientsSheet(onDismiss = onDismiss) {
+    WdModalSheet(onDismiss = onDismiss) {
         SheetTitle("Add clients")
         SheetBody("Each home is matched to its parcel. Watchdog keeps your CRM reference and never stores an owner’s name.")
         Column(modifier = Modifier.weight(1f, fill = false).verticalScroll(rememberScrollState())) {
@@ -602,10 +482,12 @@ private fun AddClientsSheet(state: ClientsUiState.Ready, vm: ClientsViewModel, o
                         color = c.muted,
                         style = t.caption.sized(12, FontWeight.Normal, 17.4),
                     )
-                    CsvField(
+                    WdOutlinedTextArea(
+                        label = "Pasted CSV",
                         value = state.csvText,
                         onValueChange = vm::setCsvText,
                         modifier = Modifier.padding(top = 12.dp),
+                        placeholder = "27 Hamilton St, Harrison, past client, 2019, CRM-104",
                         enabled = !state.importing,
                     )
                     val error = state.importError
@@ -643,60 +525,12 @@ private fun ExpandChevron(expanded: Boolean) {
     )
 }
 
-/**
- * A multi-line paste box in the outlined field's clothes (2 dp ink border, 8 dp radius, 15 sp 500), since
- * the shared field is single-line. Candidate for promotion as a multi-line variant of WdOutlinedField.
- */
-@Composable
-private fun CsvField(value: String, onValueChange: (String) -> Unit, modifier: Modifier = Modifier, enabled: Boolean = true) {
-    val c = WatchdogTheme.colors
-    val t = WatchdogTheme.type
-    val shape = RoundedCornerShape(8.dp)
-    Box(modifier = modifier.fillMaxWidth()) {
-        BasicTextField(
-            value = value,
-            onValueChange = onValueChange,
-            modifier = Modifier
-                .fillMaxWidth()
-                .padding(top = 8.dp)
-                .background(c.bg, shape)
-                .border(2.dp, c.ink, shape)
-                .heightIn(min = 132.dp)
-                .padding(start = 18.dp, end = 18.dp, top = 20.dp, bottom = 12.dp)
-                .semantics { contentDescription = "Pasted CSV" },
-            enabled = enabled,
-            textStyle = t.fieldValue.copy(color = c.ink),
-            minLines = 4,
-            cursorBrush = SolidColor(c.ink),
-            decorationBox = { inner ->
-                Box {
-                    if (value.isEmpty()) {
-                        Text(
-                            text = "27 Hamilton St, Harrison, past client, 2019, CRM-104",
-                            color = c.muted,
-                            style = t.fieldValue,
-                        )
-                    }
-                    inner()
-                }
-            },
-        )
-        Text(
-            text = "Pasted CSV",
-            modifier = Modifier.padding(start = 12.dp).background(c.bg).padding(horizontal = 4.dp),
-            color = c.ink,
-            style = t.fieldLabel,
-            maxLines = 1,
-        )
-    }
-}
-
 /** The tune action's sheet: one sort order, and a switch that hides the quiet homes. */
 @Composable
 private fun SortFilterSheet(state: ClientsUiState.Ready, vm: ClientsViewModel, onDismiss: () -> Unit) {
     val c = WatchdogTheme.colors
     val t = WatchdogTheme.type
-    ClientsSheet(onDismiss = onDismiss) {
+    WdModalSheet(onDismiss = onDismiss) {
         SheetTitle("Sort and filter")
         RowList(modifier = Modifier.padding(top = 12.dp).selectableGroup()) {
             ClientSort.entries.forEachIndexed { index, sort ->
@@ -731,12 +565,3 @@ private fun SortFilterSheet(state: ClientsUiState.Ready, vm: ClientsViewModel, o
         WdTonalButton(label = "Done", onClick = onDismiss, modifier = Modifier.fillMaxWidth().padding(top = 14.dp))
     }
 }
-
-/**
- * The top inset the scrolling content starts under. On device this is the system status bar; the desktop
- * preview and screenshot harness have no status bar but provide [LocalBottomChromeInsets] to reproduce the
- * mockups' chrome allowances, so the mockups' 40 dp status bar allowance is used there too.
- */
-@Composable
-private fun statusBarAllowance(): Dp =
-    if (LocalBottomChromeInsets.current != null) 40.dp else WindowInsets.statusBars.asPaddingValues().calculateTopPadding()

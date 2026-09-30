@@ -24,10 +24,16 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
+import androidx.compose.ui.draw.drawWithContent
+import androidx.compose.ui.geometry.CornerRadius
+import androidx.compose.ui.geometry.Offset
+import androidx.compose.ui.geometry.Size
+import androidx.compose.ui.graphics.drawscope.Stroke
 import androidx.compose.ui.graphics.vector.ImageVector
 import androidx.compose.ui.semantics.Role
 import androidx.compose.ui.semantics.contentDescription
 import androidx.compose.ui.semantics.semantics
+import androidx.compose.ui.text.AnnotatedString
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.unit.Dp
@@ -88,6 +94,64 @@ fun RowSeparator(inset: Dp = 66.dp, modifier: Modifier = Modifier) {
     Box(modifier.fillMaxWidth().padding(start = inset).heightIn(min = 1.dp).background(WatchdogTheme.colors.separator))
 }
 
+/**
+ * One slice of a `.rows` container for a lazy list, where one clipped [RowList] cannot wrap the items:
+ * surface fill, the 1 dp line border along the sides (with the 24 dp rounded top or bottom on the [first]
+ * or [last] slice) and the separator above every slice after the first, inset [dividerInset] from the
+ * container edge like [RowList]'s (66 dp for tile rows, 54 dp for task and follow-up rows). The content is
+ * inset 1 dp from the drawn border exactly as inside [RowList], so a column of slices is indistinguishable
+ * from one list. Put one per `LazyColumn` item; a single item is both first and last.
+ */
+@Composable
+fun RowListSegment(
+    first: Boolean,
+    last: Boolean,
+    modifier: Modifier = Modifier,
+    dividerInset: Dp = 66.dp,
+    content: @Composable () -> Unit,
+) {
+    val c = WatchdogTheme.colors
+    val radius = WatchdogDimens.cardRadius
+    val shape = RoundedCornerShape(
+        topStart = if (first) radius else 0.dp,
+        topEnd = if (first) radius else 0.dp,
+        bottomStart = if (last) radius else 0.dp,
+        bottomEnd = if (last) radius else 0.dp,
+    )
+    val line = c.line
+    val separator = c.separator
+    Box(
+        modifier = modifier
+            .fillMaxWidth()
+            .clip(shape)
+            .background(c.surface)
+            .drawWithContent {
+                drawContent()
+                // The rounded rect overshoots the open edges, so the clip hides those sides and only the left and
+                // right lines (and the rounded end) remain, drawn where RowList's border sits.
+                val stroke = 1.dp.toPx()
+                val r = radius.toPx()
+                val overshoot = r + stroke
+                val top = if (first) stroke / 2f else -overshoot
+                val bottom = if (last) size.height - stroke / 2f else size.height + overshoot
+                drawRoundRect(
+                    color = line,
+                    topLeft = Offset(stroke / 2f, top),
+                    size = Size(size.width - stroke, bottom - top),
+                    cornerRadius = CornerRadius(r, r),
+                    style = Stroke(width = stroke),
+                )
+                if (!first) {
+                    // Between the side borders, from the inset, at the very top of the slice: the previous row's edge.
+                    drawLine(separator, Offset(stroke + dividerInset.toPx(), stroke / 2f), Offset(size.width - stroke, stroke / 2f), strokeWidth = stroke)
+                }
+            }
+            .padding(start = 1.dp, end = 1.dp, top = if (first) 1.dp else 0.dp, bottom = if (last) 1.dp else 0.dp),
+    ) {
+        content()
+    }
+}
+
 /** Square icon tile (`.tile`): 40 dp, 12 dp radius, 22 dp icon, tinted by meaning. */
 @Composable
 fun IconTile(
@@ -122,6 +186,13 @@ fun RowChevron(modifier: Modifier = Modifier) {
  * List row (`.row`): 40 dp tile column, title (15 sp 700) and supporting line (13 sp 500 muted), trailing
  * slot (chevron by default), min height 66, padding 11x14, 12 dp gaps. Pass [tile] with [icon] for the
  * tinted tile; [icon] alone draws a bare 22 dp icon in the 40 dp column.
+ *
+ * The two-supporting-line variant: [detail] adds a second 13 sp muted line directly under [supporting]
+ * (styled spans keep their own colour and weight, e.g. "Score 72" in its verdict ink next to the block/lot,
+ * with the number as the signal, never the colour alone); [maxLines] caps every line and ellipsises it so
+ * rows with long addresses share one height instead of wrapping mid phrase (Search's result rows use 1);
+ * [contentDescription] replaces the merged text for TalkBack, e.g. to read the score once as
+ * "Watchdog Score 72 out of 100, favorable tax position" instead of the address, the line and the number.
  */
 @Composable
 fun WdRow(
@@ -132,15 +203,26 @@ fun WdRow(
     icon: ImageVector? = null,
     onClick: (() -> Unit)? = null,
     minHeight: Dp = WatchdogDimens.rowMinHeight,
+    detail: AnnotatedString? = null,
+    maxLines: Int = Int.MAX_VALUE,
+    contentDescription: String? = null,
     trailing: @Composable (() -> Unit)? = { RowChevron() },
 ) {
     val c = WatchdogTheme.colors
     val t = WatchdogTheme.type
     val click = if (onClick != null) Modifier.clickable(role = Role.Button, onClick = onClick) else Modifier
+    // One spoken description for the whole row; a clickable row already merges its children, a plain one does so here.
+    val described = when {
+        contentDescription == null -> Modifier
+        onClick != null -> Modifier.semantics { this.contentDescription = contentDescription }
+        else -> Modifier.semantics(mergeDescendants = true) { this.contentDescription = contentDescription }
+    }
+    val overflow = if (maxLines == Int.MAX_VALUE) TextOverflow.Clip else TextOverflow.Ellipsis
     Row(
         modifier = modifier
             .fillMaxWidth()
             .then(click)
+            .then(described)
             .heightIn(min = minHeight)
             .padding(horizontal = 14.dp, vertical = 11.dp),
         horizontalArrangement = Arrangement.spacedBy(12.dp),
@@ -154,9 +236,19 @@ fun WdRow(
             }
         }
         Column(modifier = Modifier.weight(1f)) {
-            Text(text = title, color = c.ink, style = t.rowTitle)
+            Text(text = title, color = c.ink, style = t.rowTitle, maxLines = maxLines, overflow = overflow)
             if (supporting != null) {
-                Text(text = supporting, modifier = Modifier.padding(top = 2.dp), color = c.muted, style = t.rowSupport)
+                Text(
+                    text = supporting,
+                    modifier = Modifier.padding(top = 2.dp),
+                    color = c.muted,
+                    style = t.rowSupport,
+                    maxLines = maxLines,
+                    overflow = overflow,
+                )
+            }
+            if (detail != null) {
+                Text(text = detail, color = c.muted, style = t.rowSupport, maxLines = maxLines, overflow = overflow)
             }
         }
         trailing?.invoke()

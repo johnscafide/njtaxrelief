@@ -18,6 +18,9 @@ import androidx.compose.foundation.selection.selectable
 import androidx.compose.foundation.selection.selectableGroup
 import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.foundation.shape.RoundedCornerShape
+import androidx.compose.foundation.text.BasicTextField
+import androidx.compose.foundation.text.KeyboardActions
+import androidx.compose.foundation.text.KeyboardOptions
 import androidx.compose.material3.ExtendedFloatingActionButton
 import androidx.compose.material3.FloatingActionButton
 import androidx.compose.material3.FloatingActionButtonDefaults
@@ -25,17 +28,23 @@ import androidx.compose.material3.Icon
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.Immutable
+import androidx.compose.runtime.LaunchedEffect
+import androidx.compose.runtime.remember
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.draw.shadow
+import androidx.compose.ui.focus.FocusRequester
+import androidx.compose.ui.focus.focusRequester
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.graphics.SolidColor
 import androidx.compose.ui.graphics.vector.ImageVector
 import androidx.compose.ui.semantics.Role
 import androidx.compose.ui.semantics.contentDescription
 import androidx.compose.ui.semantics.semantics
 import androidx.compose.ui.text.AnnotatedString
 import androidx.compose.ui.text.font.FontWeight
+import androidx.compose.ui.text.input.ImeAction
 import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.dp
@@ -170,6 +179,63 @@ fun WatchdogTopBar(
         )
         actions.forEach { action ->
             WdIconButton(icon = action.icon, contentDescription = action.contentDescription, onClick = action.onClick)
+        }
+    }
+}
+
+/**
+ * The top bar with an inline search field in place of the title (`.mbar` while a screen's search action is
+ * open): a back button that closes the search, the 16 sp field showing [placeholder] until there is text,
+ * and a clear button while there is. The field takes focus when the bar appears and is announced as
+ * [fieldDescription]; with [onSearch] the keyboard's action key is Search and runs it. Same 64 dp frame and
+ * 4 dp gutters as [WatchdogTopBar], so swapping the two does not move the content below.
+ */
+@Composable
+fun SearchTopBar(
+    query: String,
+    onQueryChange: (String) -> Unit,
+    onClose: () -> Unit,
+    placeholder: String,
+    modifier: Modifier = Modifier,
+    fieldDescription: String = placeholder,
+    closeDescription: String = "Close search",
+    clearDescription: String = "Clear search",
+    onSearch: (() -> Unit)? = null,
+) {
+    val c = WatchdogTheme.colors
+    val t = WatchdogTheme.type
+    val focus = remember { FocusRequester() }
+    LaunchedEffect(Unit) { focus.requestFocus() }
+    Row(
+        modifier = modifier.fillMaxWidth().height(WatchdogDimens.appBarHeight).padding(horizontal = 4.dp),
+        horizontalArrangement = Arrangement.spacedBy(4.dp),
+        verticalAlignment = Alignment.CenterVertically,
+    ) {
+        WdIconButton(icon = WdIcons.ArrowBack, contentDescription = closeDescription, onClick = onClose)
+        BasicTextField(
+            value = query,
+            onValueChange = onQueryChange,
+            modifier = Modifier
+                .weight(1f)
+                .padding(start = 4.dp)
+                .focusRequester(focus)
+                .semantics { contentDescription = fieldDescription },
+            textStyle = t.searchHint.copy(color = c.ink),
+            singleLine = true,
+            keyboardOptions = KeyboardOptions(imeAction = if (onSearch != null) ImeAction.Search else ImeAction.Default),
+            keyboardActions = KeyboardActions(onSearch = { onSearch?.invoke() }),
+            cursorBrush = SolidColor(c.ink),
+            decorationBox = { inner ->
+                Box {
+                    if (query.isEmpty()) {
+                        Text(text = placeholder, color = c.muted, style = t.searchHint, maxLines = 1)
+                    }
+                    inner()
+                }
+            },
+        )
+        if (query.isNotEmpty()) {
+            WdIconButton(icon = WdIcons.Cancel, contentDescription = clearDescription, onClick = { onQueryChange("") })
         }
     }
 }

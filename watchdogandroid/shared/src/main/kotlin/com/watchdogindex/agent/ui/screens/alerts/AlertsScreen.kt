@@ -19,7 +19,6 @@ import androidx.compose.foundation.layout.heightIn
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.requiredSize
 import androidx.compose.foundation.layout.size
-import androidx.compose.foundation.layout.statusBars
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.shape.CircleShape
@@ -44,7 +43,6 @@ import androidx.compose.ui.semantics.Role
 import androidx.compose.ui.semantics.contentDescription
 import androidx.compose.ui.semantics.semantics
 import androidx.compose.ui.text.font.FontWeight
-import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.dp
 import com.watchdogindex.agent.app.LocalAppGraph
 import com.watchdogindex.agent.app.screenViewModel
@@ -61,7 +59,6 @@ import com.watchdogindex.agent.design.icons.WdIcons
 import com.watchdogindex.agent.platform.LocalPlatformServices
 import com.watchdogindex.agent.ui.components.CardLabel
 import com.watchdogindex.agent.ui.components.KeyValueRow
-import com.watchdogindex.agent.ui.components.LocalBottomChromeInsets
 import com.watchdogindex.agent.ui.components.TopBarAction
 import com.watchdogindex.agent.ui.components.WatchdogTopBar
 import com.watchdogindex.agent.ui.components.WdCard
@@ -71,6 +68,7 @@ import com.watchdogindex.agent.ui.components.bottomChromeInsets
 import com.watchdogindex.agent.ui.components.cardMargin
 import com.watchdogindex.agent.ui.components.minTouchTarget
 import com.watchdogindex.agent.ui.components.sized
+import com.watchdogindex.agent.ui.components.statusBarAllowance
 import com.watchdogindex.agent.ui.components.topSeparator
 import com.watchdogindex.agent.ui.nav.Navigator
 import com.watchdogindex.agent.ui.nav.Route
@@ -470,12 +468,3 @@ private fun AppNotification.openRoute(): Route {
  */
 private fun AppNotification.townFromTitle(): String =
     title.substringAfterLast(" at ", missingDelimiterValue = "").substringAfterLast(", ").trim()
-
-/**
- * The top inset the app bar sits under. On device this is the system status bar. The desktop preview and the
- * screenshot harness have no status bar but provide [LocalBottomChromeInsets] to reproduce the mockups' chrome
- * allowances, so the mockups' 40 dp status bar allowance is used there too.
- */
-@Composable
-private fun statusBarAllowance(): Dp =
-    if (LocalBottomChromeInsets.current != null) 40.dp else WindowInsets.statusBars.asPaddingValues().calculateTopPadding()

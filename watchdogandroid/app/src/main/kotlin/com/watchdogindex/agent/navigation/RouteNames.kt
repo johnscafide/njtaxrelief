@@ -1,6 +1,8 @@
 package com.watchdogindex.agent.navigation
 
+import com.watchdogindex.agent.core.model.ClientFilter
 import com.watchdogindex.agent.ui.nav.Route
+import com.watchdogindex.agent.ui.nav.tab
 
 /**
  * String routes for Navigation Compose, one per [Route]. Pure Kotlin so unit tests can run it on the JVM.
@@ -8,11 +10,14 @@ import com.watchdogindex.agent.ui.nav.Route
  * Argument values are percent-encoded with [encode] (RFC 3986 unreserved characters pass through, everything
  * else becomes %XX), which is what Navigation's deep-link matcher decodes with Uri.decode. A PAMS PIN such as
  * "0409_285.14_9" survives untouched; a listing URL in `scan?url=` is fully escaped.
+ *
+ * Clients takes an optional `filter` (a [ClientFilter.key], the web's `clients?filter=checkup`); the bare
+ * "clients" route still works and opens the tab on its own state.
  */
 object RouteNames {
     const val WELCOME = "welcome"
     const val TODAY = "today"
-    const val CLIENTS = "clients"
+    const val CLIENTS = "clients?filter={filter}"
     const val FARM = "farm"
     const val MARKETING = "marketing"
     const val PROPERTY = "property/{pin}"
@@ -25,12 +30,16 @@ object RouteNames {
     const val ARG_PIN = "pin"
     const val ARG_URL = "url"
     const val ARG_QUERY = "q"
+    const val ARG_FILTER = "filter"
+
+    /** The Clients tab's route without arguments, the one tab switches navigate to. */
+    const val CLIENTS_BARE = "clients"
 
     /** The concrete route string to navigate to for [route]. */
     fun of(route: Route): String = when (route) {
         Route.Welcome -> WELCOME
         Route.Today -> TODAY
-        Route.Clients -> CLIENTS
+        is Route.Clients -> route.filter?.let { "$CLIENTS_BARE?$ARG_FILTER=${encode(it.key)}" } ?: CLIENTS_BARE
         Route.Farm -> FARM
         Route.Marketing -> MARKETING
         is Route.Property -> "property/${encode(route.pin)}"
@@ -45,7 +54,7 @@ object RouteNames {
     fun patternOf(route: Route): String = when (route) {
         Route.Welcome -> WELCOME
         Route.Today -> TODAY
-        Route.Clients -> CLIENTS
+        is Route.Clients -> CLIENTS
         Route.Farm -> FARM
         Route.Marketing -> MARKETING
         is Route.Property -> PROPERTY
@@ -56,9 +65,11 @@ object RouteNames {
         is Route.Search -> SEARCH
     }
 
-    /** True for the four navigation-bar destinations, which are navigated with the tab-switch options. */
-    fun isTabRoute(route: Route): Boolean =
-        route == Route.Today || route == Route.Clients || route == Route.Farm || route == Route.Marketing
+    /** True for the four navigation-bar destinations (with or without arguments), which are navigated with the tab-switch options. */
+    fun isTabRoute(route: Route): Boolean = route.tab() != null
+
+    /** The [ClientFilter] a Clients route string carries ("clients?filter=checkup"), or null for the bare route or an unknown key. */
+    fun clientFilterOf(filterArg: String?): ClientFilter? = ClientFilter.fromKey(filterArg?.let(::decode))
 
     private const val UNRESERVED = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789-._~"
     private const val HEX = "0123456789ABCDEF"

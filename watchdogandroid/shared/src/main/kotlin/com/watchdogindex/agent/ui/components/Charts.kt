@@ -16,7 +16,7 @@ import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.layout.width
-import androidx.compose.foundation.layout.wrapContentHeight
+
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
@@ -65,21 +65,6 @@ import kotlin.math.roundToInt
  * width. Every chart carries a spoken description; the numbers themselves are in the card text.
  */
 
-/**
- * Pins a one-line text to the CSS line box it is given, centring the glyphs in it however tall the
- * platform lays the line out. The mockup's big numbers use `line-height: 1` (a 46 sp line for the 46 sp
- * count, 38 for the dial number, 12 for its caption); Android and the browser shrink the line to that, but
- * the desktop harness keeps the font's natural height for a line height at or under the font size, which
- * pushed the summary card 12 dp and the dial caption 5 dp off the reference. Glyphs may overflow the box
- * by a few dp above and below, exactly as negative half-leading does in CSS.
- */
-@Composable
-private fun LineBox(lineHeight: TextUnit, modifier: Modifier = Modifier, content: @Composable () -> Unit) {
-    val height = with(LocalDensity.current) { lineHeight.toDp() }
-    Box(modifier = modifier.height(height), contentAlignment = Alignment.Center) {
-        Box(modifier = Modifier.wrapContentHeight(align = Alignment.CenterVertically, unbounded = true)) { content() }
-    }
-}
 
 /**
  * The Watchdog Score dial: 118 dp, round-capped stroke of 9 SVG units (8.85 dp at 118 dp, scaled with the
@@ -578,8 +563,8 @@ fun SummaryCard(
             cells.forEachIndexed { index, (count, label) ->
                 val divided = if (index > 0) Modifier.startSeparator(FixedInk.navyDivider).padding(start = 12.dp) else Modifier
                 Column(modifier = Modifier.weight(1f).then(divided)) {
-                    // `.sum-grid b` is 19 sp on the inherited 1.4 line (26.6); the statSmall token carries 23.
-                    TabularText(text = Format.number(count), style = t.statSmall.copy(lineHeight = 26.6.sp), color = c.onNavy)
+                    // `.sum-grid b`: 19 sp on the inherited 1.4 line (26.6), which is the statSmall token.
+                    TabularText(text = Format.number(count), style = t.statSmall, color = c.onNavy)
                     Text(text = label, modifier = Modifier.padding(top = 1.dp), color = c.onNavy2, style = t.caption.sized(12, FontWeight.SemiBold, 16.8))
                 }
             }

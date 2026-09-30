@@ -8,7 +8,6 @@ import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.PaddingValues
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.WindowInsets
-import androidx.compose.foundation.layout.asPaddingValues
 import androidx.compose.foundation.layout.calculateEndPadding
 import androidx.compose.foundation.layout.calculateStartPadding
 import androidx.compose.foundation.layout.fillMaxSize
@@ -17,7 +16,6 @@ import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.requiredSize
 import androidx.compose.foundation.layout.size
-import androidx.compose.foundation.layout.statusBars
 import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.rememberScrollState
@@ -58,9 +56,9 @@ import com.watchdogindex.agent.design.WatchdogTheme
 import com.watchdogindex.agent.design.icons.WdIcons
 import com.watchdogindex.agent.platform.LocalPlatformServices
 import com.watchdogindex.agent.ui.components.Avatar
+import com.watchdogindex.agent.ui.components.AvatarSizeSmall
 import com.watchdogindex.agent.ui.components.CardLabel
 import com.watchdogindex.agent.ui.components.IntelligenceTeaserCard
-import com.watchdogindex.agent.ui.components.LocalBottomChromeInsets
 import com.watchdogindex.agent.ui.components.PropertyChangeRow
 import com.watchdogindex.agent.ui.components.RowList
 import com.watchdogindex.agent.ui.components.SummaryCard
@@ -75,6 +73,7 @@ import com.watchdogindex.agent.ui.components.cardMargin
 import com.watchdogindex.agent.ui.components.listMargin
 import com.watchdogindex.agent.ui.components.overflowTouchTarget
 import com.watchdogindex.agent.ui.components.sized
+import com.watchdogindex.agent.ui.components.statusBarAllowance
 import com.watchdogindex.agent.ui.nav.Navigator
 import com.watchdogindex.agent.ui.nav.Route
 import com.watchdogindex.agent.ui.nav.Tab
@@ -262,7 +261,7 @@ private fun SearchRow(initials: String?, onSearch: () -> Unit, onAccount: () -> 
 @Composable
 private fun AccountAvatar(initials: String?, onClick: () -> Unit) {
     val c = WatchdogTheme.colors
-    Box(modifier = Modifier.size(40.dp), contentAlignment = Alignment.Center) {
+    Box(modifier = Modifier.size(AvatarSizeSmall), contentAlignment = Alignment.Center) {
         Box(
             modifier = Modifier
                 .requiredSize(WatchdogDimens.touchTarget)
@@ -275,9 +274,9 @@ private fun AccountAvatar(initials: String?, onClick: () -> Unit) {
             contentAlignment = Alignment.Center,
         ) {
             if (initials == null) {
-                Box(Modifier.size(40.dp).clip(CircleShape).background(c.fill2))
+                Box(Modifier.size(AvatarSizeSmall).clip(CircleShape).background(c.fill2))
             } else {
-                Avatar(initials = initials, size = 40.dp)
+                Avatar(initials = initials, size = AvatarSizeSmall)
             }
         }
     }
@@ -416,15 +415,6 @@ private fun TodayError(
         }
     }
 }
-
-/**
- * The top inset the scrolling content starts under. On device this is the system status bar. The desktop
- * preview and screenshot harness have no status bar but provide [LocalBottomChromeInsets] to reproduce the
- * mockups' chrome allowances, so the mockups' 40 dp status bar allowance is used there too.
- */
-@Composable
-private fun statusBarAllowance(): Dp =
-    if (LocalBottomChromeInsets.current != null) 40.dp else WindowInsets.statusBars.asPaddingValues().calculateTopPadding()
 
 /**
  * Where a task's trailing pill goes. Prefers the route the digest names ("clients?filter=checkup" opens Clients on

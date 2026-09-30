@@ -9,7 +9,6 @@ import androidx.compose.foundation.layout.PaddingValues
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.WindowInsets
-import androidx.compose.foundation.layout.asPaddingValues
 import androidx.compose.foundation.layout.calculateEndPadding
 import androidx.compose.foundation.layout.calculateStartPadding
 import androidx.compose.foundation.layout.fillMaxHeight
@@ -17,7 +16,6 @@ import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
-import androidx.compose.foundation.layout.statusBars
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.items
 import androidx.compose.foundation.rememberScrollState
@@ -29,13 +27,11 @@ import androidx.compose.material3.AlertDialog
 import androidx.compose.material3.DropdownMenu
 import androidx.compose.material3.DropdownMenuItem
 import androidx.compose.material3.Icon
-import androidx.compose.material3.ModalBottomSheet
 import androidx.compose.material3.Scaffold
 import androidx.compose.material3.SnackbarHost
 import androidx.compose.material3.SnackbarHostState
 import androidx.compose.material3.Text
 import androidx.compose.material3.TextButton
-import androidx.compose.material3.rememberModalBottomSheetState
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.collectAsState
@@ -51,7 +47,6 @@ import androidx.compose.ui.semantics.Role
 import androidx.compose.ui.semantics.contentDescription
 import androidx.compose.ui.semantics.semantics
 import androidx.compose.ui.text.font.FontWeight
-import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.dp
 import com.watchdogindex.agent.app.LocalAppGraph
 import com.watchdogindex.agent.app.screenViewModel
@@ -69,10 +64,8 @@ import com.watchdogindex.agent.design.WatchdogTheme
 import com.watchdogindex.agent.design.icons.WdIcons
 import com.watchdogindex.agent.platform.LocalPlatformServices
 import com.watchdogindex.agent.platform.PlatformServices
-import com.watchdogindex.agent.ui.components.BottomSheetHandle
 import com.watchdogindex.agent.ui.components.CampaignCard
 import com.watchdogindex.agent.ui.components.CardLabel
-import com.watchdogindex.agent.ui.components.LocalBottomChromeInsets
 import com.watchdogindex.agent.ui.components.OptionRow
 import com.watchdogindex.agent.ui.components.RowList
 import com.watchdogindex.agent.ui.components.SectionHeader
@@ -86,15 +79,16 @@ import com.watchdogindex.agent.ui.components.WatchdogFab
 import com.watchdogindex.agent.ui.components.WatchdogNavigationBar
 import com.watchdogindex.agent.ui.components.WatchdogTopBar
 import com.watchdogindex.agent.ui.components.WdCard
+import com.watchdogindex.agent.ui.components.WdModalSheet
 import com.watchdogindex.agent.ui.components.WdOutlinedField
 import com.watchdogindex.agent.ui.components.WdPrimaryButton
 import com.watchdogindex.agent.ui.components.WdRow
 import com.watchdogindex.agent.ui.components.WdTonalButton
-import com.watchdogindex.agent.ui.components.bottomChromeInsets
 import com.watchdogindex.agent.ui.components.bottomSeparator
 import com.watchdogindex.agent.ui.components.cardMargin
 import com.watchdogindex.agent.ui.components.listMargin
 import com.watchdogindex.agent.ui.components.sized
+import com.watchdogindex.agent.ui.components.statusBarAllowance
 import com.watchdogindex.agent.ui.nav.Navigator
 import com.watchdogindex.agent.ui.nav.Tab
 import com.watchdogindex.agent.ui.preview.LocalPreviewState
@@ -593,7 +587,6 @@ private fun TrueCostSheet(
 ) {
     val c = WatchdogTheme.colors
     val t = WatchdogTheme.type
-    val chromeBottom = bottomChromeInsets().asPaddingValues().calculateBottomPadding()
     val card = sheet.card
     val url = card?.shareUrl
     /** Runs [action] with the built card, or says why the sheet cannot act yet (building, or failed with a retry above). */
@@ -611,72 +604,61 @@ private fun TrueCostSheet(
     // The subtitle follows the built card: an account without a professional profile gets no agent footer even with
     // the switch on, so only while the card is still building does it follow the switch.
     val withContactCard = if (card != null) card.agent != null else sheet.includeContactCard
-    ModalBottomSheet(
-        onDismissRequest = onDismiss,
-        sheetState = rememberModalBottomSheetState(skipPartiallyExpanded = true),
-        shape = RoundedCornerShape(topStart = WatchdogDimens.sheetRadius, topEnd = WatchdogDimens.sheetRadius),
-        containerColor = c.surface,
-        contentColor = c.ink,
-        scrimColor = c.scrim,
-        dragHandle = { BottomSheetHandle(onDismiss = onDismiss) },
-        contentWindowInsets = { WindowInsets(0, 0, 0, 0) },
-    ) {
-        Column(modifier = Modifier.padding(start = 16.dp, end = 16.dp, bottom = 6.dp + chromeBottom)) {
-            ShareSheetHeader(
-                title = if (card != null) card.shareTitle() else "True cost card",
-                subtitle = if (withContactCard) "$siteLabel · with your contact card" else siteLabel,
-                onTrailing = copyLink,
+    WdModalSheet(onDismiss = onDismiss) {
+        ShareSheetHeader(
+            title = if (card != null) card.shareTitle() else "True cost card",
+            subtitle = if (withContactCard) "$siteLabel · with your contact card" else siteLabel,
+            onTrailing = copyLink,
+        )
+        when {
+            card != null -> TrueCostCardView(
+                card = card,
+                modifier = Modifier
+                    .padding(top = 12.dp)
+                    .clip(RoundedCornerShape(WatchdogDimens.cardRadius))
+                    .clickable(role = Role.Button, onClickLabel = "Share the true cost card") {
+                        platform.share(card.shareTitle(), card.shareText(), card.shareUrl)
+                    },
             )
-            when {
-                card != null -> TrueCostCardView(
-                    card = card,
-                    modifier = Modifier
-                        .padding(top = 12.dp)
-                        .clip(RoundedCornerShape(WatchdogDimens.cardRadius))
-                        .clickable(role = Role.Button, onClickLabel = "Share the true cost card") {
-                            platform.share(card.shareTitle(), card.shareText(), card.shareUrl)
-                        },
-                )
-                sheet.error != null -> Column(
-                    modifier = Modifier
-                        .fillMaxWidth()
-                        .padding(top = 12.dp)
-                        .clip(RoundedCornerShape(WatchdogDimens.cardRadius))
-                        .background(c.fill)
-                        .padding(horizontal = 18.dp, vertical = 16.dp),
-                ) {
-                    Text(text = "The card didn’t build", color = c.ink, style = t.verdict)
-                    Text(text = sheet.error, modifier = Modifier.padding(top = 6.dp), color = c.ink2, style = t.body.sized(14, FontWeight.Normal, 20.3))
-                    WdTonalButton(label = "Try again", onClick = onRetry, modifier = Modifier.padding(top = 12.dp), icon = WdIcons.Refresh, small = true)
-                }
-                else -> Box(
-                    modifier = Modifier
-                        .fillMaxWidth()
-                        .padding(top = 12.dp)
-                        .height(262.dp)
-                        .clip(RoundedCornerShape(WatchdogDimens.cardRadius))
-                        .background(c.fill)
-                        .semantics { contentDescription = "Building the true cost card" },
-                    contentAlignment = Alignment.Center,
-                ) {
-                    Text(text = "Building the card…", color = c.muted, style = t.body)
-                }
+            sheet.error != null -> Column(
+                modifier = Modifier
+                    .fillMaxWidth()
+                    .padding(top = 12.dp)
+                    .clip(RoundedCornerShape(WatchdogDimens.cardRadius))
+                    .background(c.fill)
+                    .padding(horizontal = 18.dp, vertical = 16.dp),
+            ) {
+                Text(text = "The card didn’t build", color = c.ink, style = t.verdict)
+                Text(text = sheet.error, modifier = Modifier.padding(top = 6.dp), color = c.ink2, style = t.body.sized(14, FontWeight.Normal, 20.3))
+                WdTonalButton(label = "Try again", onClick = onRetry, modifier = Modifier.padding(top = 12.dp), icon = WdIcons.Refresh, small = true)
             }
-            ShareTargets(
-                onMessages = withCard { platform.composeSms(null, it.shareText() + "\n" + it.shareUrl) },
-                onMail = withCard { platform.composeEmail(null, it.shareTitle(), it.shareText() + "\n\n" + it.shareUrl) },
-                onCopy = copyLink,
-                onQr = withCard { onQrOpen() },
-                modifier = Modifier.padding(top = 14.dp),
-            )
-            OptionRow(
-                title = "Include my contact card",
-                subtitle = "Name, brokerage, phone and email",
-                checked = sheet.includeContactCard,
-                onChecked = onInclude,
-                modifier = Modifier.padding(top = 12.dp),
-            )
+            else -> Box(
+                modifier = Modifier
+                    .fillMaxWidth()
+                    .padding(top = 12.dp)
+                    .height(262.dp)
+                    .clip(RoundedCornerShape(WatchdogDimens.cardRadius))
+                    .background(c.fill)
+                    .semantics { contentDescription = "Building the true cost card" },
+                contentAlignment = Alignment.Center,
+            ) {
+                Text(text = "Building the card…", color = c.muted, style = t.body)
+            }
         }
+        ShareTargets(
+            onMessages = withCard { platform.composeSms(null, it.shareText() + "\n" + it.shareUrl) },
+            onMail = withCard { platform.composeEmail(null, it.shareTitle(), it.shareText() + "\n\n" + it.shareUrl) },
+            onCopy = copyLink,
+            onQr = withCard { onQrOpen() },
+            modifier = Modifier.padding(top = 14.dp),
+        )
+        OptionRow(
+            title = "Include my contact card",
+            subtitle = "Name, brokerage, phone and email",
+            checked = sheet.includeContactCard,
+            onChecked = onInclude,
+            modifier = Modifier.padding(top = 12.dp),
+        )
     }
     if (sheet.qrOpen && url != null) {
         QrDialog(url = url, onDismiss = onQrClose, onOpenWeb = {
@@ -717,12 +699,3 @@ private fun QrDialog(url: String, onDismiss: () -> Unit, onOpenWeb: () -> Unit) 
         },
     )
 }
-
-/**
- * The top inset the pinned header starts under. On device this is the system status bar. The desktop preview
- * and screenshot harness have no status bar but provide [LocalBottomChromeInsets] to reproduce the mockups'
- * chrome allowances, so the mockups' 40 dp status bar allowance is used there too.
- */
-@Composable
-private fun statusBarAllowance(): Dp =
-    if (LocalBottomChromeInsets.current != null) 40.dp else WindowInsets.statusBars.asPaddingValues().calculateTopPadding()

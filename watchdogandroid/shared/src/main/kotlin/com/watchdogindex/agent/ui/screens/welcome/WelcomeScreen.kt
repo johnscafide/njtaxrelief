@@ -17,7 +17,6 @@ import androidx.compose.foundation.layout.heightIn
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.requiredHeight
 import androidx.compose.foundation.layout.size
-import androidx.compose.foundation.layout.statusBars
 import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.shape.CircleShape
@@ -44,23 +43,22 @@ import androidx.compose.ui.semantics.liveRegion
 import androidx.compose.ui.semantics.semantics
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextAlign
-import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.dp
 import com.watchdogindex.agent.app.LocalAppGraph
 import com.watchdogindex.agent.app.screenViewModel
-import com.watchdogindex.agent.design.WatchdogDarkColors
+import com.watchdogindex.agent.design.WatchdogDimens
 import com.watchdogindex.agent.design.WatchdogLogo
 import com.watchdogindex.agent.design.WatchdogTheme
+import com.watchdogindex.agent.design.WelcomeHero
 import com.watchdogindex.agent.design.icons.WdIcons
 import com.watchdogindex.agent.platform.LocalPlatformServices
-import com.watchdogindex.agent.ui.components.FixedInk
-import com.watchdogindex.agent.ui.components.LocalBottomChromeInsets
 import com.watchdogindex.agent.ui.components.SupportingText
 import com.watchdogindex.agent.ui.components.WdOutlinedButton
 import com.watchdogindex.agent.ui.components.WdOutlinedField
 import com.watchdogindex.agent.ui.components.WdPrimaryButton
 import com.watchdogindex.agent.ui.components.bottomChromeInsets
 import com.watchdogindex.agent.ui.components.sized
+import com.watchdogindex.agent.ui.components.statusBarTopPadding
 import com.watchdogindex.agent.ui.components.topSeparator
 import com.watchdogindex.agent.ui.nav.Navigator
 import com.watchdogindex.agent.ui.nav.Route
@@ -87,20 +85,6 @@ import kotlin.math.sin
  * observer (the desktop preview's stack navigator); on Android it runs after the host's transition and is a
  * `launchSingleTop` no-op.
  */
-
-/**
- * Hero gradient `linear-gradient(170deg, #0e2248, #11306a)`: fixed in both themes (spec §1.12). The start is
- * the design's fixed navy; the end has no token yet (a `heroGradientEnd` in `Spectrum`/`FixedInk` is the
- * design owner's to add), so it is the one colour this screen still spells out.
- */
-private val HeroGradientStart = FixedInk.navy
-private val HeroGradientEnd = Color(0xFF11306A)
-
-/**
- * `.wel-for` gold `#e3c46a`, identical in dark (spec §1.12). The design carries this exact value as the dark
- * palette's map dot; until a `welcomeGold` fixed token exists, that is the token this reads.
- */
-private val EyebrowGold = WatchdogDarkColors.mapDot
 
 /** `.logo` ring `rgba(255,255,255,.18)` and `.wel-p` ink `rgba(255,255,255,.8)` on the fixed-navy hero. */
 private val LogoRing = Color.White.copy(alpha = .18f)
@@ -211,7 +195,7 @@ private fun WelcomeHero() {
         Text(
             text = "FOR NEW JERSEY AGENTS AND TEAMS",
             modifier = Modifier.padding(top = 18.dp),
-            color = EyebrowGold,
+            color = WelcomeHero.gold,
             style = t.welcomeFor,
         )
         Text(
@@ -414,7 +398,7 @@ private fun TextLink(label: String, onClick: () -> Unit, modifier: Modifier = Mo
     Box(modifier = modifier.height(21.dp), contentAlignment = Alignment.Center) {
         Box(
             modifier = Modifier
-                .requiredHeight(48.dp)
+                .requiredHeight(WatchdogDimens.touchTarget)
                 .clip(RoundedCornerShape(8.dp))
                 .clickable(role = Role.Button, onClick = onClick)
                 .padding(horizontal = 4.dp),
@@ -426,16 +410,9 @@ private fun TextLink(label: String, onClick: () -> Unit, modifier: Modifier = Mo
 }
 
 /**
- * The status bar allowance above the hero: the mockups' 40 dp in the desktop preview and screenshot harness,
- * which have no status bar but provide [LocalBottomChromeInsets] to reproduce the mockups' chrome, and the
- * real inset everywhere else (including a hidden status bar, where it is rightly 0). The same rule as the
- * tab screens; a candidate for one shared helper in the components' Foundation.
+ * `.wel-hero`'s `linear-gradient(170deg, …)` in the fixed [WelcomeHero] colours (the same in both themes, spec §1.12):
+ * the gradient line runs 170° clockwise from "to top" through the center.
  */
-@Composable
-private fun statusBarTopPadding(): Dp =
-    if (LocalBottomChromeInsets.current != null) 40.dp else WindowInsets.statusBars.asPaddingValues().calculateTopPadding()
-
-/** CSS `linear-gradient(170deg, …)`: the gradient line runs 170° clockwise from "to top" through the center. */
 private fun Modifier.heroGradient(shape: Shape): Modifier = clip(shape).drawBehind {
     val radians = 170.0 * PI / 180.0
     val dx = sin(radians).toFloat()
@@ -443,5 +420,5 @@ private fun Modifier.heroGradient(shape: Shape): Modifier = clip(shape).drawBehi
     val length = abs(size.width * dx) + abs(size.height * dy)
     val start = Offset(center.x - dx * length / 2f, center.y - dy * length / 2f)
     val end = Offset(center.x + dx * length / 2f, center.y + dy * length / 2f)
-    drawRect(brush = Brush.linearGradient(listOf(HeroGradientStart, HeroGradientEnd), start = start, end = end))
+    drawRect(brush = Brush.linearGradient(listOf(WelcomeHero.gradientStart, WelcomeHero.gradientEnd), start = start, end = end))
 }

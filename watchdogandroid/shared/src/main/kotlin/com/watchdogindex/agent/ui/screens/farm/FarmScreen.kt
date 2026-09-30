@@ -9,11 +9,9 @@ import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.BoxWithConstraints
 import androidx.compose.foundation.layout.Column
-import androidx.compose.foundation.layout.ColumnScope
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.WindowInsets
-import androidx.compose.foundation.layout.asPaddingValues
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
@@ -21,7 +19,6 @@ import androidx.compose.foundation.layout.heightIn
 import androidx.compose.foundation.layout.offset
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
-import androidx.compose.foundation.layout.statusBars
 import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.selection.selectable
@@ -31,7 +28,6 @@ import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.foundation.verticalScroll
 import androidx.compose.material3.AlertDialog
 import androidx.compose.material3.Icon
-import androidx.compose.material3.ModalBottomSheet
 import androidx.compose.material3.RadioButton
 import androidx.compose.material3.RadioButtonDefaults
 import androidx.compose.material3.Scaffold
@@ -39,7 +35,6 @@ import androidx.compose.material3.SnackbarHost
 import androidx.compose.material3.SnackbarHostState
 import androidx.compose.material3.Text
 import androidx.compose.material3.TextButton
-import androidx.compose.material3.rememberModalBottomSheetState
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.SideEffect
@@ -91,7 +86,6 @@ import com.watchdogindex.agent.ui.components.BottomSheetHandle
 import com.watchdogindex.agent.ui.components.CardLabel
 import com.watchdogindex.agent.ui.components.FilterChipsRow
 import com.watchdogindex.agent.ui.components.IconTile
-import com.watchdogindex.agent.ui.components.LocalBottomChromeInsets
 import com.watchdogindex.agent.ui.components.RowList
 import com.watchdogindex.agent.ui.components.SheetSurface
 import com.watchdogindex.agent.ui.components.TabularText
@@ -100,13 +94,14 @@ import com.watchdogindex.agent.ui.components.WatchdogNavigationBar
 import com.watchdogindex.agent.ui.components.WatchdogSearchBar
 import com.watchdogindex.agent.ui.components.WdCard
 import com.watchdogindex.agent.ui.components.WdIconButton
+import com.watchdogindex.agent.ui.components.WdModalSheet
 import com.watchdogindex.agent.ui.components.WdOutlinedButton
 import com.watchdogindex.agent.ui.components.WdOutlinedField
 import com.watchdogindex.agent.ui.components.WdRow
 import com.watchdogindex.agent.ui.components.WdTonalButton
-import com.watchdogindex.agent.ui.components.bottomChromeInsets
 import com.watchdogindex.agent.ui.components.iconByName
 import com.watchdogindex.agent.ui.components.sized
+import com.watchdogindex.agent.ui.components.statusBarAllowance
 import com.watchdogindex.agent.ui.components.topSeparator
 import com.watchdogindex.agent.ui.nav.Navigator
 import com.watchdogindex.agent.ui.nav.Route
@@ -726,33 +721,12 @@ private fun FarmError(userMessage: String, onRetry: () -> Unit) {
 
 // ---------------------------------------------------------------------- pickers and the name dialog
 
-/**
- * The shared modal sheet chrome: surface, 28 dp top radius, the scrim token and the mockup handle. The Clients
- * screen carries the same wrapper; candidate for promotion to the components package as `WdModalSheet`.
- */
-@Composable
-private fun FarmModalSheet(onDismiss: () -> Unit, content: @Composable ColumnScope.() -> Unit) {
-    val c = WatchdogTheme.colors
-    val chromeBottom = bottomChromeInsets().asPaddingValues().calculateBottomPadding()
-    ModalBottomSheet(
-        onDismissRequest = onDismiss,
-        sheetState = rememberModalBottomSheetState(skipPartiallyExpanded = true),
-        shape = RoundedCornerShape(topStart = WatchdogDimens.sheetRadius, topEnd = WatchdogDimens.sheetRadius),
-        containerColor = c.surface,
-        contentColor = c.ink,
-        scrimColor = c.scrim,
-        dragHandle = { BottomSheetHandle(onDismiss = onDismiss) },
-    ) {
-        Column(modifier = Modifier.padding(start = 16.dp, end = 16.dp, bottom = 6.dp + chromeBottom), content = content)
-    }
-}
-
 /** The picker behind the search bar: every farm, the current one checked, and a way to draw another. */
 @Composable
 private fun FarmPickerSheet(state: FarmUiState.Ready, vm: FarmViewModel) {
     val c = WatchdogTheme.colors
     val t = WatchdogTheme.type
-    FarmModalSheet(onDismiss = vm::closePicker) {
+    WdModalSheet(onDismiss = vm::closePicker) {
         Text(text = "Your farms", modifier = Modifier.padding(horizontal = 4.dp), color = c.ink, style = t.sectionTitle)
         Column(modifier = Modifier.weight(1f, fill = false).verticalScroll(rememberScrollState())) {
             RowList(modifier = Modifier.padding(top = 12.dp).selectableGroup()) {
@@ -793,7 +767,7 @@ private fun FarmPickerSheet(state: FarmUiState.Ready, vm: FarmViewModel) {
 private fun LayerPickerSheet(state: FarmUiState.Ready, vm: FarmViewModel) {
     val c = WatchdogTheme.colors
     val t = WatchdogTheme.type
-    FarmModalSheet(onDismiss = vm::closePicker) {
+    WdModalSheet(onDismiss = vm::closePicker) {
         Text(text = "Map layers", modifier = Modifier.padding(horizontal = 4.dp), color = c.ink, style = t.sectionTitle)
         RowList(modifier = Modifier.padding(top = 12.dp).selectableGroup()) {
             MapLayer.entries.forEachIndexed { index, layer ->
@@ -910,12 +884,3 @@ private class SuppliedCameras {
     private fun matches(camera: Pair<LatLng, Double>, center: LatLng, zoom: Double): Boolean =
         abs(camera.first.lat - center.lat) < 1e-6 && abs(camera.first.lon - center.lon) < 1e-6 && abs(camera.second - zoom) < 0.01
 }
-
-/**
- * The top inset the overlays start under. On device this is the system status bar; the desktop preview and
- * screenshot harness have no status bar but provide [LocalBottomChromeInsets] to reproduce the mockups'
- * chrome allowances, so the mockups' 40 dp status bar allowance is used there too.
- */
-@Composable
-private fun statusBarAllowance(): Dp =
-    if (LocalBottomChromeInsets.current != null) 40.dp else WindowInsets.statusBars.asPaddingValues().calculateTopPadding()

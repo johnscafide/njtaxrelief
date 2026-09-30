@@ -22,6 +22,7 @@ import com.watchdogindex.agent.R
 import com.watchdogindex.agent.core.model.LatLng
 import com.watchdogindex.agent.core.model.MapLayer
 import com.watchdogindex.agent.core.model.MapParcel
+import com.watchdogindex.agent.core.model.MapZoom
 import com.watchdogindex.agent.core.model.ScoreBands
 import com.watchdogindex.agent.design.WatchdogColors
 import com.watchdogindex.agent.design.WatchdogTheme
@@ -60,6 +61,11 @@ import org.maplibre.android.geometry.LatLng as MapLatLng
  *   - the farm boundary (mapBound 2.5 stroke over a 5% mapBound fill), the selected parcel outline (ink 3.5)
  *     and the polygon being drawn in draw mode. Widths follow Docs/mockup-css-to-compose.md section 3.40.
  * In dark mode a translucent BackgroundLayer under the parcels dims the light basemap toward mapLand.
+ *
+ * Zoom: FarmMapState.zoom (and Farm.zoom, and the Farm screen's street zoom) is a Web Mercator zoom over 256 dp
+ * tiles, core's MapZoom convention; MapLibre counts 512 px tiles and runs one level lower for the same scale. This
+ * adapter is the only place that converts: MapZoom.toMapLibre on the way into the camera, MapZoom.fromMapLibre
+ * on the way back out through onMapMoved, so shared code never sees MapLibre's numbers.
  *
  * Everything that touches the map is behind null checks: the style loads asynchronously, and the composable
  * may leave before it does.
@@ -411,6 +417,7 @@ private class FarmMapController(private val density: Float) {
         s.getLayer(LAYER_DRAW_POINTS)?.setProperties(PropertyFactory.circleColor(p.surface), PropertyFactory.circleStrokeColor(p.bound))
     }
 
+    /** Cameras are compared and remembered in the state's (Watchdog) zoom; only the MapLibre calls see the converted value. */
     private fun moveCameraIfNeeded(m: MapLibreMap, state: FarmMapState) {
         val wanted = Triple(state.center.lat, state.center.lon, state.zoom)
         if (wanted == appliedCamera) return
@@ -420,8 +427,10 @@ private class FarmMapController(private val density: Float) {
         val alreadyThere = target != null &&
             abs(target.latitude - state.center.lat) < 1e-6 &&
             abs(target.longitude - state.center.lon) < 1e-6 &&
-            abs(current.zoom - state.zoom) < 0.01
-        if (!alreadyThere) m.moveCamera(CameraUpdateFactory.newLatLngZoom(MapLatLng(state.center.lat, state.center.lon), state.zoom))
+            abs(MapZoom.fromMapLibre(current.zoom) - state.zoom) < 0.01
+        if (!alreadyThere) {
+            m.moveCamera(CameraUpdateFactory.newLatLngZoom(MapLatLng(state.center.lat, state.center.lon), MapZoom.toMapLibre(state.zoom)))
+        }
     }
 
     // Interaction
@@ -448,8 +457,11 @@ private class FarmMapController(private val density: Float) {
         val position = map?.cameraPosition ?: return
         val target = position.target ?: return
         val center = LatLng(target.latitude, target.longitude)
-        appliedCamera = Triple(center.lat, center.lon, position.zoom)
-        callback(center, position.zoom)
+        // Reported back in the state's convention, so the Farm screen's "camera I supplied" check and its next
+        // FarmMapState compare like with like.
+        val zoom = MapZoom.fromMapLibre(position.zoom)
+        appliedCamera = Triple(center.lat, center.lon, zoom)
+        callback(center, zoom)
     }
 
     // GeoJSON
