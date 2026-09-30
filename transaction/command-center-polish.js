@@ -228,11 +228,11 @@ function evidenceState(group,rows){
 }
 function evidenceFinding(group,rows){
   var byKey=function(k){return rows.find(function(i){return i.item_key===k})};
-  if(group.key==='occupancy'){var co=byKey('resale_cco');if(co)return'Certificate requirements need review';var permit=byKey('permit_certificate_lifecycle');return permit?clean(permit.description).split('.')[0]:'Evidence isn’t available yet'}
+  if(group.key==='occupancy'){var co=byKey('resale_cco'),cp=payload(co);if(co&&cp.details_checked===true)return cp.requirement_state==='explicit_required'?'Required: '+clean(co.title):cp.requirement_state==='official_process_found'?'Not required for sales (town says so)':'Not confirmed yet: call the office';if(co)return'Certificate requirements need review';var permit=byKey('permit_certificate_lifecycle');return permit?clean(permit.description).split('.')[0]:'Evidence isn’t available yet'}
   if(group.key==='tax'){var tax=byKey('property_tax_status'),tp=payload(tax);if(Number.isFinite(Number(tp.prior_year_tax))&&Number(tp.prior_year_tax)>0)return'Prior-year baseline: '+money(tp.prior_year_tax);return tax?clean(tax.description).split('.')[0]:'Evidence isn’t available yet'}
   if(group.key==='deed'){if(selected&&selected.block&&selected.lot)return'Block '+selected.block+' · Lot '+selected.lot;var deed=byKey('deed_recording_reference');return deed?clean(deed.description).split('.')[0]:'Evidence isn’t available yet'}
   if(group.key==='municipal-lien'){var ml=byKey('municipal_lien_clearance');if(ml&&ml.evidence_state==='provider_missing')return'Parcel-level source unavailable';return ml?clean(ml.description).split('.')[0]:'Evidence isn’t available yet'}
-  if(group.key==='fire'){var fire=byKey('smoke_fire_cert');return fire?'Sale inspection requirements':'Evidence isn’t available yet'}
+  if(group.key==='fire'){var fire=byKey('smoke_fire_cert');return fire&&payload(fire).details_checked===true?'Required: smoke / CO alarm certificate':fire?'Sale inspection requirements':'Evidence isn’t available yet'}
   if(group.key==='utilities'){var util=byKey('water_sewer'),up=payload(util);if(util&&Number.isFinite(Number(up.live_amount_due)))return'Current amount due: '+money(up.live_amount_due);return util?clean(util.description).split('.')[0]:'No property-specific balance match'}
   if(group.key==='violations'){var vio=byKey('open_violations');return vio?(vio.source_label||'Code enforcement / housing'):'Evidence isn’t available yet'}
   if(group.key==='municipal-services'){var svc=byKey('municipal_services'),sp=payload(svc);return sp.service_provider||svc&&svc.source_label||'Municipal service information'}
@@ -251,7 +251,7 @@ function renderEvidence(){
 }
 
 function sourceCards(group){
-  var grid=$('#tx-source-sweep .tx-source-grid');if(!grid)return[];var cards=$$(':scope > .tx-source-card',grid);return cards.filter(function(card){var title=clean(card.querySelector('strong')&&card.querySelector('strong').textContent);return group.sourcePatterns.some(function(re){return re.test(title)})})
+  var grid=$('#tx-source-sweep .tx-source-grid');if(!grid)return[];var cards=$$(':scope > .tx-source-card',grid);return cards.filter(function(card){if(card.dataset.itemKey)return group.itemKeys.indexOf(card.dataset.itemKey)>=0;var title=clean(card.querySelector('strong')&&card.querySelector('strong').textContent);return group.sourcePatterns.some(function(re){return re.test(title)})})
 }
 function openEvidence(key){
   var group=EVIDENCE_GROUPS.find(function(g){return g.key===key});if(!group)return;var cards=sourceCards(group),rows=groupItems(group),layer=$('#tx-modal-layer'),modal=$('#tx-modal'),content=$('#tx-modal-content');if(!layer||!modal||!content){activateView('evidence');return}

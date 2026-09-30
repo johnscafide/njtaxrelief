@@ -2574,8 +2574,8 @@ document.addEventListener('mouseover',e=>{var t=e.target.closest('[data-marker-i
     {
       k: 'diligence', tier: 'pro_plus', cat: 'Professional diligence', icon: 'fa-shield-halved', title: 'Closing & collateral due diligence',
       pro: 'This is the professional preflight: Watchdog first connects parcel identity, tax, permit, environmental and land evidence into a sourced graph, then exposes the underlying live checks. It is designed to tell counsel, lenders and brokers what deserves source-document review before a closing or credit decision.',
-      build: function (r) { return toolTitleEvidenceGraph(r) + toolProfessionalDueDiligence(r) + toolDevelopmentConstraintStack(r) + toolPermitLifecycle(r) + toolProfessionalWorkflows(r); },
-      sum: function () { return 'Evidence graph + closing evidence + escrow + lien + NJDEP constraints'; }
+      build: function (r) { return toolTownCertificates(r) + toolTitleEvidenceGraph(r) + toolProfessionalDueDiligence(r) + toolDevelopmentConstraintStack(r) + toolPermitLifecycle(r) + toolProfessionalWorkflows(r); },
+      sum: function () { return 'Town CO & fire certificate + evidence graph + closing evidence + escrow + lien + NJDEP constraints'; }
     },
     {
       k: 'broker', tier: 'pro', cat: 'Professional intelligence', icon: 'fa-house-circle-check', title: 'Real Estate Professional Intelligence',
@@ -2651,7 +2651,7 @@ document.addEventListener('mouseover',e=>{var t=e.target.closest('[data-marker-i
     file: ['appeal-opportunity', 'appeal-packet', 'appeal-evidence-strength', 'appeal-case-workspace'],
     owed: ['senior-benefits'],
     buy: ['buyer-closing-costs', 'collateral-escrow-stress'],
-    diligence: ['professional-due-diligence', 'title-evidence-graph', 'development-constraint-stack', 'permit-lifecycle-intelligence', 'professional-workflows'],
+    diligence: ['town-certificates', 'professional-due-diligence', 'title-evidence-graph', 'development-constraint-stack', 'permit-lifecycle-intelligence', 'professional-workflows'],
     broker: ['real-estate-intelligence', 'broker-listing-brief'],
     decision: ['professional-decision-signals'],
     statewide: ['statewide-modiv-intelligence'],

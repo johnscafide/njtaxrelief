@@ -72,12 +72,12 @@ function loadEvidenceAddons(){
 function loadPreflight(){
   if(window.__WATCHDOG_TRANSACTION_AUTO_PREFLIGHT__||document.querySelector('script[data-transaction-preflight]')){setTimeout(loadEvidenceAddons,0);return;}
   if(document.readyState==='loading'){
-    document.write('<script data-transaction-preflight src="/transaction/preflight.js?v=20260916b"><\/script>');
+    document.write('<script data-transaction-preflight src="/transaction/preflight.js?v=20260930a"><\/script>');
     document.write('<script data-transaction-evidence-addons src="/transaction/evidence-addons.js?v=20260915a"><\/script>');
     return;
   }
   var script=document.createElement('script');
-  script.src='/transaction/preflight.js?v=20260916b';
+  script.src='/transaction/preflight.js?v=20260930a';
   script.async=false;
   script.dataset.transactionPreflight='true';
   script.addEventListener('load',loadEvidenceAddons,{once:true});

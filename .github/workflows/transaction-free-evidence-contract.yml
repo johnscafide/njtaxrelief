@@ -29,6 +29,12 @@ on:
       - 'property/scripts/build_checked_municipal_requirements.py'
       - 'property/data/municipal-requirements/**'
       - 'supabase/migrations/*_checked_municipal_requirements_*.sql'
+      - 'supabase/migrations/*_watchdog_town_certificates.sql'
+      - 'transaction/evidence-compact-v3.js'
+      - 'transaction/command-center-polish.js'
+      - 'transaction/preflight.js'
+      - 'property/js/dashboard/tools/town-certificates.js'
+      - 'property/js/home.js'
   workflow_dispatch:
 
 permissions:

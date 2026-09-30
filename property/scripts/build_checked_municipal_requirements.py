@@ -65,11 +65,15 @@ def usable(url) -> str | None:
     return url if isinstance(url, str) and re.match(r"^https?://", url, re.I) and not SKIP_LINK.search(url) else None
 
 
+# Research notes about where a title came from, e.g. "(per the Borough's 2024 form)".
+TITLE_NOTE = re.compile(r"\s*\([^()]*\b(?:named on|no title given|per the|according to|listed as|state directory|township page)\b[^()]*\)", re.I)
+
+
 def contact_line(o: dict, prefix="Contact") -> str | None:
     bits = []
     name = clean(o.get("contact_name"), 120)
     if name:
-        title = clean(o.get("contact_title"), 120)
+        title = clean(TITLE_NOTE.sub("", clean(o.get("contact_title"), 240)), 120)
         bits.append(f"{name}, {title}" if title else name)
     for k in ("phone", "email"):
         if clean(o.get(k)):
@@ -299,6 +303,7 @@ def self_test() -> None:
     assert sql.count("$j$") % 2 == 0 and sql.count("$t$") % 2 == 0
     assert clean("word " * 400, 50).endswith("…") and len(clean("word " * 400, 50)) <= 50
     assert clean("see fire_cert and resale_co") == "see the fire certificate and the town certificate"
+    assert contact_line({"contact_name": "A B", "contact_title": "Fire Official (per the Borough's 2024 form)"}) == "Contact: A B, Fire Official"
     print(f"checked requirements self-test ok ({len(rows) // 2} towns, {len(rows)} rows)")
 
 

@@ -46,7 +46,11 @@ function stateMeta(item){
 }
 function sourceName(item){return clean(item&&item.source_label)||clean(item&&item.source_type).replace(/_/g,' ')||'No provider connected'}
 function row(label,value){return value?`<div class="tx-evidence-row"><span>${esc(label)}</span><b>${esc(value)}</b></div>`:''}
-function listRows(values,limit){const a=Array.isArray(values)?values.slice(0,limit||99):[];return a.length?`<ul class="tx-evidence-list">${a.map(v=>`<li>${esc(v)}</li>`).join('')}</ul>`:''}
+// Phone numbers and emails inside already-escaped text become tap-to-call / mail links.
+function linkify(h){return h.replace(/\(?\b(\d{3})\)?[\s.-]?(\d{3})[\s.-](\d{4})\b(?:\s*(?:ext\.?|x|extension)\s*(\d{1,6}))?/gi,(m,a,b,c,x)=>`<a href="tel:+1${a}${b}${c}${x?','+x:''}">${m}</a>`).replace(/[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\.[A-Za-z]{2,}/g,m=>`<a href="mailto:${m}">${m}</a>`)}
+function listRows(values,limit){const a=Array.isArray(values)?values.slice(0,limit||99):[];return a.length?`<ul class="tx-evidence-list">${a.map(v=>`<li>${linkify(esc(v))}</li>`).join('')}</ul>`:''}
+// A person-checked town row says whether the town requires the certificate.
+function certKicker(item){const p=payloadOf(item);if(p.details_checked!==true)return'Official requirements retrieved';if(item.item_key==='smoke_fire_cert'||p.requirement_state==='explicit_required')return'Required · checked by Watchdog';return p.requirement_state==='official_process_found'?'Not required for sales (town says so) · checked by Watchdog':'Not confirmed yet · call the office'}
 function linkHtml(url,label){return url?`<a class="tx-source-link" href="${esc(url)}" target="_blank" rel="noopener">${esc(label||'Open official source')} <i class="fas fa-arrow-up-right-from-square"></i></a>`:''}
 
 function evidenceBody(item){
@@ -72,7 +76,7 @@ function evidenceBody(item){
   }
   if(key==='resale_cco'||key==='smoke_fire_cert'){
     const req=Array.isArray(p.requirements)?p.requirements:[],fees=Array.isArray(p.fees)?p.fees:[];
-    if(req.length)return `<div class="tx-evidence-box"><div class="tx-evidence-kicker">Official requirements retrieved</div>${listRows(req,5)}${req.length>5?`<details class="tx-evidence-details"><summary>Show all ${req.length} requirements</summary>${listRows(req,99)}</details>`:''}${fees.length?`<div class="tx-fee-grid">${fees.map(f=>`<span><b>${esc(f.label)}</b><em>${esc(f.amount)}</em></span>`).join('')}</div>`:''}</div>`;
+    if(req.length)return `<div class="tx-evidence-box"><div class="tx-evidence-kicker">${esc(certKicker(item))}</div>${listRows(req,5)}${req.length>5?`<details class="tx-evidence-details"><summary>Show all ${req.length} requirements</summary>${listRows(req,99)}</details>`:''}${fees.length?`<div class="tx-fee-grid">${fees.map(f=>`<span><b>${esc(f.label)}</b><em>${esc(f.amount)}</em></span>`).join('')}</div>`:''}</div>`;
   }
   if(key==='ownership_vesting'&&p.owner_name)return `<div class="tx-evidence-box">${row('Owner name on record',p.owner_name)}${row('Block / Lot',[p.block,p.lot].filter(Boolean).join(' / '))}<p>Compare this public-record name with the contract and title commitment. It is not a vesting determination.</p></div>`;
   if(key==='property_tax_status'){
@@ -89,10 +93,10 @@ function evidenceBody(item){
 
 function sourceLinks(item){
   const p=payloadOf(item),links=[];
-  if(Array.isArray(p.official_sources))p.official_sources.forEach(s=>{if(s&&s.url)links.push([s.url,s.label||'Official source'])});
-  if(p.official_record_source&&p.official_record_source.url)links.push([p.official_record_source.url,p.official_record_source.label||'County record']);
   if(p.application_url)links.push([p.application_url,'Open application']);
   if(p.department_url)links.push([p.department_url,'Department page']);
+  if(Array.isArray(p.official_sources))p.official_sources.forEach(s=>{if(s&&s.url)links.push([s.url,s.label||'Official source'])});
+  if(p.official_record_source&&p.official_record_source.url)links.push([p.official_record_source.url,p.official_record_source.label||'County record']);
   if(item&&item.source_url)links.push([item.source_url,'Open source']);
   const seenUrls=new Set();return links.filter(([u])=>u&&!seenUrls.has(u)&&seenUrls.add(u)).slice(0,4).map(([u,l])=>linkHtml(u,l)).join('');
 }
@@ -110,7 +114,7 @@ async function renderSourceSweep(id){if(!canUseEvidence())return;
       let box=document.querySelector('#tx-source-sweep');if(!box){box=document.createElement('section');box.id='tx-source-sweep';box.className='tx-source-sweep';tabs.parentNode.insertBefore(box,tabs)}
       const cards=SOURCE_KEYS.map(([key,label,icon])=>{
         const item=byKey[key]||{item_key:key,evidence_state:'unknown'},meta=stateMeta(item),checked=item.source_checked_at?fmtDate(item.source_checked_at):'';
-        return `<article class="tx-source-card ${meta.cls}"><div class="tx-source-card-top"><span class="tx-source-card-icon"><i class="fas ${icon}"></i></span><span class="tx-source-status">${esc(meta.label)}</span></div><strong>${esc(item.title||label)}</strong>${evidenceBody(item)}<div class="tx-source-provenance"><span>${esc(sourceName(item))}</span>${checked?`<small>Checked ${esc(checked)}</small>`:''}</div><div class="tx-source-actions">${sourceLinks(item)}</div></article>`;
+        return `<article class="tx-source-card ${meta.cls}" data-item-key="${esc(key)}"><div class="tx-source-card-top"><span class="tx-source-card-icon"><i class="fas ${icon}"></i></span><span class="tx-source-status">${esc(meta.label)}</span></div><strong>${esc(item.title||label)}</strong>${evidenceBody(item)}<div class="tx-source-provenance"><span>${esc(sourceName(item))}</span>${checked?`<small>Checked ${esc(checked)}</small>`:''}</div><div class="tx-source-actions">${sourceLinks(item)}</div></article>`;
       }).join('');
       const parcel=[tx.pams_pin?'Parcel '+tx.pams_pin:'Parcel not matched',tx.block&&tx.lot?`Block ${tx.block} · Lot ${tx.lot}`:'Block/lot resolving'].join(' · ');
       box.innerHTML=`<div class="tx-source-sweep-head"><div><span class="tx-eyebrow">ONE-ADDRESS EVIDENCE SWEEP</span><h3>What Watchdog actually found — and what still needs an official search</h3><p>Evidence is shown directly in each card. “None found” appears only after the authoritative source was actually searched successfully.</p></div><span class="tx-source-sweep-meta">${esc(parcel)}</span></div><div class="tx-source-grid">${cards}</div>`;
