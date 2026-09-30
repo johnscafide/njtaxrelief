@@ -6,12 +6,14 @@ import com.watchdogindex.agent.core.WatchdogException
 import com.watchdogindex.agent.core.repo.Repositories
 import kotlinx.coroutines.CancellationException
 import kotlinx.coroutines.Job
+import kotlinx.coroutines.NonCancellable
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.flow.asStateFlow
 import kotlinx.coroutines.flow.update
 import kotlinx.coroutines.launch
+import kotlinx.coroutines.withContext
 
 /**
  * Drives the Welcome screen's sign-in: the email code flow the website's Agent Desk uses
@@ -111,12 +113,15 @@ class WelcomeViewModel(private val repos: Repositories) : ViewModel() {
 
     private suspend fun finishSignIn() {
         cooldown?.cancel()
-        try {
-            repos.settings.update { it.copy(hasSeenWelcome = true) }
-        } catch (e: CancellationException) {
-            throw e
-        } catch (_: Exception) {
-            // A preference that failed to persist must not block a successful sign-in.
+        // The auth repository has already flipped its state to SignedIn, and the host reacts by popping
+        // Welcome, which clears this view model and cancels viewModelScope. The preference write must not be
+        // lost to that cancellation, so it runs to completion regardless.
+        withContext(NonCancellable) {
+            try {
+                repos.settings.update { it.copy(hasSeenWelcome = true) }
+            } catch (_: Exception) {
+                // A preference that failed to persist must not block a successful sign-in.
+            }
         }
         updateReady { it.copy(busy = false, resendSeconds = 0, signedIn = true) }
     }

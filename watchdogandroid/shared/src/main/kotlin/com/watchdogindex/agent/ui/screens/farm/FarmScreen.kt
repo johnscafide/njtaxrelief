@@ -42,6 +42,7 @@ import androidx.compose.material3.TextButton
 import androidx.compose.material3.rememberModalBottomSheetState
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
+import androidx.compose.runtime.SideEffect
 import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableIntStateOf
@@ -53,8 +54,10 @@ import androidx.compose.ui.draw.clip
 import androidx.compose.foundation.layout.requiredSize
 import androidx.compose.ui.layout.onSizeChanged
 import androidx.compose.ui.platform.LocalDensity
+import androidx.compose.ui.semantics.LiveRegionMode
 import androidx.compose.ui.semantics.Role
 import androidx.compose.ui.semantics.contentDescription
+import androidx.compose.ui.semantics.liveRegion
 import androidx.compose.ui.semantics.semantics
 import androidx.compose.ui.text.SpanStyle
 import androidx.compose.ui.text.buildAnnotatedString
@@ -107,6 +110,7 @@ import com.watchdogindex.agent.ui.nav.Navigator
 import com.watchdogindex.agent.ui.nav.Route
 import com.watchdogindex.agent.ui.nav.Tab
 import kotlin.math.PI
+import kotlin.math.abs
 import kotlin.math.cos
 import kotlin.math.pow
 
@@ -126,6 +130,22 @@ private val sheetBottomInsets = WindowInsets(bottom = 24.dp)
 /** A default view of New Jersey for an agent with no farm yet. */
 private val newJersey = LatLng(40.0583, -74.4057)
 private const val NEW_JERSEY_ZOOM = 8.0
+
+/*
+ * Zoom convention. FarmMapState.zoom is a Web Mercator zoom over 256 dp tiles, so the ground covered by one dp
+ * is 2π · 6 378 137 · cos(lat) / (256 · 2^zoom) metres. That is the convention Farm.zoom arrives in from both
+ * repositories (LiveFarmRepository's extent table puts a 670 m farm at 16, which fills a 412 dp screen only
+ * over 256 dp tiles; the sample farm's 15.6 likewise) and the one the desktop map projects with, so this screen
+ * speaks it too. MapLibre's own zoom counts 512 px tiles and runs one level lower for the same scale: the
+ * Android map adapter (app/FarmMapView) is where FarmMapState.zoom must be converted (zoom − 1 in, + 1 back
+ * from onIdle), for this street zoom and for Farm.zoom alike, so that a platform exposing metresPerDp is not
+ * needed here. Until it converts, the device opens one level tighter than the mockup.
+ */
+private const val MAP_TILE_DP = 256.0
+private const val EARTH_CIRCUMFERENCE_M = 2 * PI * 6_378_137.0
+
+/** Ground metres per dp at [lat] and [zoom] in the convention above (156 543 · cos(lat) / 2^zoom). */
+private fun metresPerDp(zoom: Double, lat: Double): Double = EARTH_CIRCUMFERENCE_M * cos(lat * PI / 180.0) / (MAP_TILE_DP * 2.0.pow(zoom))
 
 /** Street level, where an 18 m lot is about 28 dp wide as in the mockup's map, for opening on the spotlight home. */
 private const val STREET_ZOOM = 17.5
@@ -195,9 +215,15 @@ private fun FarmContent(
     // The sheet's height decides where the visible part of the map is, so the spotlight home can sit in its middle.
     var sheetHeightPx by remember { mutableIntStateOf(0) }
     val sheetModifier = Modifier.onSizeChanged { sheetHeightPx = it.height }
+    // The cameras this screen handed the map. A platform map reports its camera back once it settles (MapLibre's
+    // onIdle), and that echo must not count as the agent panning, or the first frame's centre would be frozen
+    // before the sheet has measured. Only a camera the screen did not supply is a pan.
+    val supplied = remember { SuppliedCameras() }
     // Stable callbacks, so the map's pointer handlers are not restarted on every recomposition.
     val onParcelTap = remember(vm) { { parcel: MapParcel -> vm.onParcelTap(parcel) } }
-    val onMapMoved = remember(vm) { { center: LatLng, zoom: Double -> vm.onMapMoved(center, zoom) } }
+    val onMapMoved = remember(vm, supplied) {
+        { center: LatLng, zoom: Double -> if (!supplied.contains(center, zoom)) vm.onMapMoved(center, zoom) }
+    }
     val onDrawPoint = remember(vm) { { point: LatLng -> vm.addDrawPoint(point) } }
     val chipsShown = farm != null && !state.drawing
     val mapDescription = buildString {
@@ -218,7 +244,9 @@ private fun FarmContent(
         // Until the agent pans, the map opens on the spotlight home at street level, framed in the clear strip
         // between the chips and the sheet with room for its callout; without one it frames the whole farm the
         // way the repository describes it.
-        val spotlight = state.spotlightParcel
+        // The strip is only known once the sheet has measured; before that the farm's own view is shown, so the
+        // map is never framed against an empty strip.
+        val spotlight = state.spotlightParcel?.takeIf { sheetHeightPx > 0 }
         val zoom = state.zoom ?: if (spotlight != null) STREET_ZOOM else farm?.zoom ?: NEW_JERSEY_ZOOM
         val center = state.center
             ?: spotlight?.let { parcel ->
@@ -229,6 +257,7 @@ private fun FarmContent(
             }
             ?: farm?.center
             ?: newJersey
+        SideEffect { supplied.record(center, zoom) }
         val mapState = FarmMapState(
             center = center,
             zoom = zoom,
@@ -244,11 +273,20 @@ private fun FarmContent(
         )
         platform.FarmMap(mapState, Modifier.fillMaxSize().semantics { contentDescription = mapDescription })
 
-        // Farm picker in the elevated search bar's clothes (`.msearch` overlay, top 48).
+        // Farm picker in the elevated search bar's clothes (`.msearch` overlay, top 48). Its visible text names the
+        // farm; the description also says what the bar does, since the component has no click label of its own.
+        val pickerDescription = if (farm != null) {
+            "Farm: ${farm.name}, ${Format.number(farm.homes)} homes. Change farm"
+        } else {
+            "No farm yet. Draw your farm"
+        }
         WatchdogSearchBar(
             hint = if (farm != null) "${farm.name} · ${Format.number(farm.homes)} homes" else "No farm yet",
             onClick = { if (state.farms.isNotEmpty()) vm.openPicker(FarmPicker.Farms) else vm.startDrawing() },
-            modifier = Modifier.align(Alignment.TopCenter).padding(start = 16.dp, end = 16.dp, top = top + 8.dp),
+            modifier = Modifier
+                .align(Alignment.TopCenter)
+                .padding(start = 16.dp, end = 16.dp, top = top + 8.dp)
+                .semantics { contentDescription = pickerDescription },
             leadingIcon = WdIcons.Map,
             emphasized = true,
             elevated = true,
@@ -330,6 +368,10 @@ private fun sheetDrag(expanded: Boolean, onExpand: () -> Unit, onCollapse: () ->
  * The farm sheet (`.sheet.and.fsheet`): handle, name and town line, the score legend, the three tiles,
  * the turnover notes and the note that Watchdog never labels a home as a likely seller. Tapping the title
  * or dragging up expands it with the recent deeds and a farm switch; the handle closes it again.
+ *
+ * The content scrolls whenever it is taller than the sheet, expanded or not, so on a short phone, with large
+ * text or with the tapped parcel's row showing, the note at the tail stays reachable. When it fits, the scroll
+ * is off and a drag anywhere on the sheet expands it as before.
  */
 @Composable
 private fun FarmSheet(
@@ -346,10 +388,11 @@ private fun FarmSheet(
     val drag = sheetDrag(expanded = expanded, onExpand = vm::expandSheet, onCollapse = vm::collapseSheet)
     SheetSurface(modifier = modifier.heightIn(max = maxHeight).then(drag), windowInsets = sheetBottomInsets) {
         BottomSheetHandle(onDismiss = if (expanded) vm::collapseSheet else null, dismissLabel = "Show less")
+        val scroll = rememberScrollState()
         Column(
             modifier = Modifier
                 .weight(1f, fill = false)
-                .verticalScroll(rememberScrollState(), enabled = expanded),
+                .verticalScroll(scroll, enabled = expanded || scroll.maxValue > 0),
         ) {
             val selected = state.selectedParcel
             if (state.calloutOpen && selected != null) {
@@ -367,6 +410,16 @@ private fun FarmSheet(
                     modifier = Modifier.padding(top = 2.dp),
                     color = c.muted,
                     style = t.supporting.sized(13, FontWeight.Medium, 18.2),
+                )
+            }
+            // "Loading Permits…" / "Opening Elm Ridge…" while the repository answers; announced as it appears.
+            val loadingLine = state.loadingLine
+            if (loadingLine != null) {
+                Text(
+                    text = loadingLine,
+                    modifier = Modifier.padding(top = 4.dp).semantics { liveRegion = LiveRegionMode.Polite },
+                    color = c.muted,
+                    style = t.caption.sized(12, FontWeight.SemiBold, 16.8),
                 )
             }
             ScoreLegend(modifier = Modifier.padding(top = 12.dp))
@@ -683,7 +736,10 @@ private fun FarmError(userMessage: String, onRetry: () -> Unit) {
 
 // ---------------------------------------------------------------------- pickers and the name dialog
 
-/** The shared modal sheet chrome: surface, 28 dp top radius, the scrim token and the mockup handle. */
+/**
+ * The shared modal sheet chrome: surface, 28 dp top radius, the scrim token and the mockup handle. The Clients
+ * screen carries the same wrapper; candidate for promotion to the components package as `WdModalSheet`.
+ */
 @Composable
 private fun FarmModalSheet(onDismiss: () -> Unit, content: @Composable ColumnScope.() -> Unit) {
     val c = WatchdogTheme.colors
@@ -835,14 +891,34 @@ private fun MapParcel.centroid(): LatLng {
 }
 
 /**
- * The map centre that puts [anchor] [northOfCentreDp] above the middle of the map at [zoom] (Web Mercator,
- * 256 · 2^zoom dp across the world): the centre sits that far south, so the anchor lands in the middle of
- * the strip the sheet leaves visible.
+ * The map centre that puts [anchor] [northOfCentreDp] above the middle of the map at [zoom] (in the zoom
+ * convention documented at the top of this file): the centre sits that far south, so the anchor lands in
+ * the middle of the strip the sheet leaves visible.
  */
 private fun framedCenter(anchor: LatLng, zoom: Double, northOfCentreDp: Dp): LatLng {
-    val metresPerDp = 156_543.03392 * cos(anchor.lat * PI / 180.0) / 2.0.pow(zoom)
-    val deltaLat = northOfCentreDp.value * metresPerDp / 111_320.0
+    val deltaLat = northOfCentreDp.value * metresPerDp(zoom, anchor.lat) / 111_320.0
     return LatLng(anchor.lat - deltaLat, anchor.lon)
+}
+
+/**
+ * The last few cameras the screen handed the map, so a map that reports one of them back (MapLibre's idle
+ * after `moveCamera`, or a drag that ended where it began) is not taken for a pan. Tolerances match the
+ * Android adapter's own "already there" test. Kept out of composition state: recording it is a side effect
+ * of composing, and reading it happens in a map callback.
+ */
+private class SuppliedCameras {
+    private val recent = ArrayDeque<Pair<LatLng, Double>>()
+
+    fun record(center: LatLng, zoom: Double) {
+        if (recent.lastOrNull()?.let { matches(it, center, zoom) } == true) return
+        recent.addLast(center to zoom)
+        while (recent.size > 4) recent.removeFirst()
+    }
+
+    fun contains(center: LatLng, zoom: Double): Boolean = recent.any { matches(it, center, zoom) }
+
+    private fun matches(camera: Pair<LatLng, Double>, center: LatLng, zoom: Double): Boolean =
+        abs(camera.first.lat - center.lat) < 1e-6 && abs(camera.first.lon - center.lon) < 1e-6 && abs(camera.second - zoom) < 0.01
 }
 
 /**

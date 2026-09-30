@@ -7,103 +7,28 @@ import com.watchdogindex.agent.core.format.Format
 import com.watchdogindex.agent.core.model.ClientFilter
 import com.watchdogindex.agent.core.model.ClientImportRow
 import com.watchdogindex.agent.core.model.ClientRow
-import com.watchdogindex.agent.core.model.ClientsOverview
-import com.watchdogindex.agent.core.model.NextActionKind
 import com.watchdogindex.agent.core.model.Relationship
 import com.watchdogindex.agent.core.repo.Repositories
 import kotlinx.coroutines.CancellationException
 import kotlinx.coroutines.Job
+import kotlinx.coroutines.delay
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.flow.asStateFlow
 import kotlinx.coroutines.flow.update
 import kotlinx.coroutines.launch
 
-/** How the list is ordered. [Suggested] keeps the repository's ranking, which leads with what needs the agent. */
-enum class ClientSort(val label: String) {
-    Suggested("Suggested: needs you first"),
-    Address("Street, A to Z"),
-    Town("Town, A to Z"),
-    Newest("Newest relationship first"),
-}
-
-/** The sheets the Clients screen can open over the list. */
-enum class ClientsSheet { ReviewCheckups, AddClients, SortFilter }
-
-/** Which way of adding clients is expanded inside the Add clients sheet. */
-enum class AddClientsMode { Contacts, Csv }
-
-/** An email the screen hands to the platform's mail composer once, then clears. */
-data class EmailDraft(val subject: String, val body: String)
-
-/** The Clients tab: the overview for the current filter and query plus every bit of screen state that survives a reload. */
-sealed interface ClientsUiState {
-    data object Loading : ClientsUiState
-
-    data class Ready(
-        val overview: ClientsOverview,
-        val filter: ClientFilter = ClientFilter.All,
-        val query: String = "",
-        /** The top bar shows the inline search field instead of the title. */
-        val searchOpen: Boolean = false,
-        val sort: ClientSort = ClientSort.Suggested,
-        /** Hides homes with no status chip and nothing to do this week. */
-        val onlyWithNews: Boolean = false,
-        val refreshing: Boolean = false,
-        val sheet: ClientsSheet? = null,
-        /** Every home with a checkup ready, for the review sheet; null while it loads. */
-        val readyRows: List<ClientRow>? = null,
-        val sending: Boolean = false,
-        val addMode: AddClientsMode? = null,
-        val csvText: String = "",
-        val importing: Boolean = false,
-        val importError: String? = null,
-        val emailDraft: EmailDraft? = null,
-        /** A one-line message for the snackbar; cleared by [ClientsViewModel.clearNotice]. */
-        val notice: String? = null,
-    ) : ClientsUiState {
-        /** The repository's rows for the filter and query, in the chosen order, minus the quiet homes when asked. */
-        val visibleRows: List<ClientRow>
-            get() {
-                val rows = if (onlyWithNews) overview.rows.filter { it.hasNews } else overview.rows
-                return when (sort) {
-                    ClientSort.Suggested -> rows
-                    ClientSort.Address -> rows.sortedWith(compareBy({ it.streetName }, { it.houseNumber }, { it.address }))
-                    ClientSort.Town -> rows.sortedWith(compareBy({ it.town }, { it.streetName }, { it.houseNumber }))
-                    ClientSort.Newest -> rows.sortedWith(compareByDescending<ClientRow> { it.relationshipYear ?: Int.MIN_VALUE }.thenBy { it.address })
-                }
-            }
-
-        /** "All 146", "Past clients 58", "Sphere 88", "Checkup ready 12", in [ClientFilter] order. */
-        val chipLabels: List<String>
-            get() = ClientFilter.entries.map { f ->
-                when (f) {
-                    ClientFilter.All -> "All ${Format.number(overview.all)}"
-                    ClientFilter.PastClients -> "Past clients ${Format.number(overview.pastClients)}"
-                    ClientFilter.Sphere -> "Sphere ${Format.number(overview.sphere)}"
-                    ClientFilter.CheckupReady -> "Checkup ready ${Format.number(overview.checkupsReady)}"
-                }
-            }
-
-        /** How many checkups the review sheet would send: the loaded list when it is here, the season's count until then. */
-        val readyCount: Int get() = readyRows?.size ?: overview.checkupsReady
-    }
-
-    data class Error(val userMessage: String) : ClientsUiState
-}
-
-/** A home with a status chip or something to do this week. */
-private val ClientRow.hasNews: Boolean get() = status != null || nextAction.kind != NextActionKind.None
-
-private val ClientRow.streetName: String get() = address.trim().substringAfter(' ', address).lowercase()
-
-private val ClientRow.houseNumber: Int get() = address.trim().substringBefore(' ').filter(Char::isDigit).toIntOrNull() ?: Int.MAX_VALUE
+/** How long typing pauses before the query is sent: one overview request per pause, not per keystroke. */
+private const val QUERY_DEBOUNCE_MS = 250L
 
 class ClientsViewModel(private val repos: Repositories) : ViewModel() {
     private val _state = MutableStateFlow<ClientsUiState>(ClientsUiState.Loading)
     val state: StateFlow<ClientsUiState> = _state.asStateFlow()
 
     private var loadJob: Job? = null
+
+    /** The reload waiting for the agent to pause typing; the next keystroke or any other reload cancels it. */
+    private var queryJob: Job? = null
 
     init {
         load()
@@ -117,36 +42,56 @@ class ClientsViewModel(private val repos: Repositories) : ViewModel() {
 
     /**
      * Fetches the overview for the current filter and query. With [keepContent] the previous rows stay on
-     * screen until the new ones arrive (chip taps and typing never flash a skeleton).
+     * screen until the new ones arrive (chip taps and typing never flash a skeleton). Only the latest reload
+     * lands: each one cancels the last, so fast chip taps or typing never flicker through stale result sets.
      */
     private fun reload(keepContent: Boolean, refreshing: Boolean) {
         val previous = _state.value as? ClientsUiState.Ready
+        queryJob?.cancel()
         loadJob?.cancel()
+        val filter = previous?.filter ?: ClientFilter.All
+        val query = previous?.query.orEmpty()
         loadJob = viewModelScope.launch {
             _state.value = when {
                 keepContent && previous != null -> previous.copy(refreshing = refreshing)
                 else -> ClientsUiState.Loading
             }
-            val filter = previous?.filter ?: ClientFilter.All
-            val query = previous?.query.orEmpty()
             try {
                 val overview = repos.clients.overview(filter, query)
                 _state.update { s ->
+                    // Build on the state as it is now, not as it was: a sheet opened meanwhile stays open.
                     val base = (s as? ClientsUiState.Ready) ?: previous
-                    base?.copy(overview = overview, refreshing = false) ?: ClientsUiState.Ready(overview = overview)
+                    base?.copy(overview = overview, refreshing = false, loadedFilter = filter, loadedQuery = query)
+                        ?: ClientsUiState.Ready(overview = overview, filter = filter, query = query)
                 }
             } catch (e: CancellationException) {
                 throw e
             } catch (e: WatchdogException) {
-                fail(e.userMessage, previous)
+                fail(e.userMessage)
             } catch (e: Exception) {
-                fail("Your clients could not be loaded. Try again.", previous)
+                fail("Your clients could not be loaded. Try again.")
             }
         }
     }
 
-    private fun fail(message: String, previous: ClientsUiState.Ready?) {
-        _state.value = previous?.copy(refreshing = false, notice = message) ?: ClientsUiState.Error(message)
+    /**
+     * A reload that did not land. With rows on screen they stay, and the chip and query go back to the ones
+     * those rows were fetched for, so the list never claims to show "Sphere" over the "All" rows; the notice
+     * says what happened. A query that comes back non-empty reopens the search field it belongs to.
+     */
+    private fun fail(message: String) {
+        _state.update { s ->
+            when (s) {
+                is ClientsUiState.Ready -> s.copy(
+                    refreshing = false,
+                    notice = message,
+                    filter = s.loadedFilter,
+                    query = s.loadedQuery,
+                    searchOpen = s.searchOpen || s.loadedQuery.isNotEmpty(),
+                )
+                else -> ClientsUiState.Error(message)
+            }
+        }
     }
 
     private inline fun updateReady(transform: (ClientsUiState.Ready) -> ClientsUiState.Ready) {
@@ -165,17 +110,27 @@ class ClientsViewModel(private val repos: Repositories) : ViewModel() {
     fun setSearchOpen(open: Boolean) {
         val current = _state.value as? ClientsUiState.Ready ?: return
         if (current.searchOpen == open) return
-        val hadQuery = current.query.isNotEmpty()
+        val hadQuery = current.query.isNotEmpty() || current.loadedQuery.isNotEmpty()
         _state.value = current.copy(searchOpen = open, query = if (open) current.query else "")
         // Closing the field drops the query, so the full list comes back.
         if (!open && hadQuery) reload(keepContent = true, refreshing = false)
     }
 
+    /** The field updates at once; the overview request waits for a pause in typing. Clearing the field does not wait. */
     fun setQuery(query: String) {
         val current = _state.value as? ClientsUiState.Ready ?: return
         if (current.query == query) return
         _state.value = current.copy(query = query)
-        reload(keepContent = true, refreshing = false)
+        queryJob?.cancel()
+        if (query.isEmpty()) {
+            reload(keepContent = true, refreshing = false)
+            return
+        }
+        queryJob = viewModelScope.launch {
+            delay(QUERY_DEBOUNCE_MS)
+            queryJob = null
+            reload(keepContent = true, refreshing = false)
+        }
     }
 
     fun setSort(sort: ClientSort) = updateReady { it.copy(sort = sort) }
@@ -208,7 +163,7 @@ class ClientsViewModel(private val repos: Repositories) : ViewModel() {
         }
     }
 
-    /** "Review and send": sends every ready checkup, reloads the list and reports the count. */
+    /** "Review and send": sends every ready checkup, reports the count and reloads the list. */
     fun sendAllReadyCheckups() {
         val current = _state.value as? ClientsUiState.Ready ?: return
         if (current.sending) return
@@ -216,16 +171,15 @@ class ClientsViewModel(private val repos: Repositories) : ViewModel() {
         viewModelScope.launch {
             try {
                 val sent = repos.clients.sendAllReadyCheckups()
-                val overview = repos.clients.overview(current.filter, current.query)
                 updateReady {
                     it.copy(
-                        overview = overview,
                         sending = false,
                         sheet = null,
                         readyRows = null,
                         notice = if (sent == 0) "No checkups were waiting to be sent" else "${Format.count(sent, "tax checkup")} sent",
                     )
                 }
+                reload(keepContent = true, refreshing = false)
             } catch (e: CancellationException) {
                 throw e
             } catch (e: WatchdogException) {
@@ -241,53 +195,59 @@ class ClientsViewModel(private val repos: Repositories) : ViewModel() {
     /**
      * "Send tax checkup" on one row: records the send, then hands the screen an email with the public checkup
      * link (the agent sends it under their own name), and reloads so the row shows "Checkup sent".
+     *
+     * Only the send itself can fail the action. Once it is recorded, a link lookup that does not come back
+     * still leaves an email to send (without the link), and the list reload reports its own problems.
      */
     fun sendCheckup(row: ClientRow) {
         val current = _state.value as? ClientsUiState.Ready ?: return
         viewModelScope.launch {
             try {
                 repos.clients.sendCheckup(row.id)
-                val link = row.pin?.let { pin ->
-                    try {
-                        repos.properties.checkupLink(pin)
-                    } catch (e: WatchdogException) {
-                        null
-                    }
-                }
-                val overview = repos.clients.overview(current.filter, current.query)
-                val deadline = current.overview.season?.appealDeadline
-                val body = buildString {
-                    append("Hi,\n\nYour tax checkup for ${row.address} is ready. It shows whether the assessment holds up")
-                    if (deadline != null) append(" and the $deadline appeal deadline") else append(" and the next appeal deadline")
-                    append(".\n\n")
-                    if (link != null) append(link).append("\n\n")
-                    append("Happy to walk through it whenever suits you.")
-                }
-                updateReady {
-                    it.copy(
-                        overview = overview,
-                        notice = "Tax checkup sent for ${row.address}",
-                        emailDraft = EmailDraft(subject = "Your tax checkup for ${row.address}", body = body),
-                    )
-                }
             } catch (e: CancellationException) {
                 throw e
             } catch (e: WatchdogException) {
                 updateReady { it.copy(notice = e.userMessage) }
+                return@launch
             } catch (e: Exception) {
                 updateReady { it.copy(notice = "That checkup could not be sent. Try again.") }
+                return@launch
             }
+            val link = row.pin?.let { pin ->
+                try {
+                    repos.properties.checkupLink(pin)
+                } catch (e: CancellationException) {
+                    throw e
+                } catch (e: Exception) {
+                    null
+                }
+            }
+            val deadline = current.overview.season?.appealDeadline
+            val body = buildString {
+                append("Hi,\n\nYour tax checkup for ${row.address} is ready. It shows whether the assessment holds up")
+                if (deadline != null) append(" and the $deadline appeal deadline") else append(" and the next appeal deadline")
+                append(".\n\n")
+                if (link != null) append(link).append("\n\n")
+                append("Happy to walk through it whenever suits you.")
+            }
+            updateReady {
+                it.copy(
+                    notice = "Tax checkup sent for ${row.address}",
+                    emailDraft = EmailDraft(subject = "Your tax checkup for ${row.address}", body = body),
+                )
+            }
+            reload(keepContent = true, refreshing = false)
         }
     }
 
-    /** Swipe to snooze: the row's task waits until next Monday. */
+    /** Swipe (or the row's accessibility action) to snooze: the row's task waits until next Monday. */
     fun snooze(row: ClientRow) {
-        val current = _state.value as? ClientsUiState.Ready ?: return
+        if (_state.value !is ClientsUiState.Ready) return
         viewModelScope.launch {
             try {
                 repos.clients.snooze(row.id)
-                val overview = repos.clients.overview(current.filter, current.query)
-                updateReady { it.copy(overview = overview, notice = "${row.address} snoozed until next Monday") }
+                updateReady { it.copy(notice = "${row.address} snoozed until next Monday") }
+                reload(keepContent = true, refreshing = false)
             } catch (e: CancellationException) {
                 throw e
             } catch (e: WatchdogException) {
@@ -317,10 +277,8 @@ class ClientsViewModel(private val repos: Repositories) : ViewModel() {
         viewModelScope.launch {
             try {
                 val added = repos.clients.import(parsed.rows)
-                val overview = repos.clients.overview(current.filter, current.query)
                 updateReady {
                     it.copy(
-                        overview = overview,
                         importing = false,
                         sheet = null,
                         addMode = null,
@@ -328,6 +286,7 @@ class ClientsViewModel(private val repos: Repositories) : ViewModel() {
                         notice = "${Format.count(added, "client")} added and matched to parcels",
                     )
                 }
+                reload(keepContent = true, refreshing = false)
             } catch (e: CancellationException) {
                 throw e
             } catch (e: WatchdogException) {

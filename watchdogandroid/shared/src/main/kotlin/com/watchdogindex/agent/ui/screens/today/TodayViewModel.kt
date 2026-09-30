@@ -104,29 +104,48 @@ class TodayViewModel(private val repos: Repositories) : ViewModel() {
     }
 
     /**
+     * The newest tick request per task, so a slow failure cannot undo a later tick. Only touched on the
+     * main dispatcher that [viewModelScope] runs on, so a plain map is enough.
+     */
+    private val latestTickRequest = HashMap<String, Long>()
+    private var tickRequestSeq = 0L
+
+    /**
      * Ticks or unticks a task. The row and the "N this week" count change immediately; if the backend refuses,
-     * the tick is put back and the reason goes to [TodayUiState.Ready.notice].
+     * the tick is put back and the reason goes to [TodayUiState.Ready.notice]. When the agent ticks and unticks
+     * quickly, only the newest request for that task may revert the row: an older failure is reported but
+     * leaves the row on the value the agent last asked for.
      */
     fun setTaskDone(taskId: String, done: Boolean) {
         val current = _state.value as? TodayUiState.Ready ?: return
         if (current.digest.tasks.none { it.id == taskId }) return
         _state.value = current.copy(digest = current.digest.withTaskDone(taskId, done))
+        val request = ++tickRequestSeq
+        latestTickRequest[taskId] = request
         viewModelScope.launch {
             try {
                 repos.digest.markTaskDone(taskId, done)
             } catch (e: CancellationException) {
                 throw e
             } catch (e: WatchdogException) {
-                revertTask(taskId, !done, e.userMessage)
+                revertTask(taskId, !done, e.userMessage, request)
             } catch (e: Exception) {
-                revertTask(taskId, !done, "That task could not be saved. Try again.")
+                revertTask(taskId, !done, "That task could not be saved. Try again.", request)
+            } finally {
+                if (latestTickRequest[taskId] == request) latestTickRequest.remove(taskId)
             }
         }
     }
 
-    private fun revertTask(taskId: String, done: Boolean, message: String) {
+    /** Puts a failed tick back, but only when [request] is still the newest one for the task; the notice shows either way. */
+    private fun revertTask(taskId: String, done: Boolean, message: String, request: Long) {
+        val latest = latestTickRequest[taskId] == request
         _state.update { s ->
-            if (s is TodayUiState.Ready) s.copy(digest = s.digest.withTaskDone(taskId, done), notice = message) else s
+            when {
+                s !is TodayUiState.Ready -> s
+                latest -> s.copy(digest = s.digest.withTaskDone(taskId, done), notice = message)
+                else -> s.copy(notice = message)
+            }
         }
     }
 

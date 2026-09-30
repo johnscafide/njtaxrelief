@@ -5,7 +5,6 @@ import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.IntrinsicSize
-import androidx.compose.foundation.layout.PaddingValues
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.WindowInsets
@@ -18,7 +17,6 @@ import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.layout.statusBars
 import androidx.compose.foundation.layout.width
-import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.foundation.shape.RoundedCornerShape
@@ -154,7 +152,8 @@ fun ScanScreen(initialUrl: String?, navigator: Navigator) {
                 is ScanUiState.Error -> ScanFatalError(userMessage = s.userMessage, onClose = navigator::back)
                 is ScanUiState.Ready -> {
                     WdSegmentedButtons(
-                        options = listOf(SegmentOption("Camera", WdIcons.PhotoCamera), SegmentOption("Paste link", WdIcons.Check)),
+                        // The component swaps the selected segment's icon for the check; the options keep their own icons.
+                        options = listOf(SegmentOption("Camera", WdIcons.PhotoCamera), SegmentOption("Paste link", WdIcons.Link)),
                         selectedIndex = if (s.mode == ScanMode.Camera) 0 else 1,
                         onSelect = { index -> vm.setMode(if (index == 0) ScanMode.Camera else ScanMode.Paste) },
                         modifier = Modifier.padding(start = 16.dp, end = 16.dp, top = 8.dp),
@@ -198,7 +197,7 @@ private fun PasteMode(state: ScanUiState.Ready, vm: ScanViewModel, onFullPage: (
         val error = state.error
         when {
             state.resolving -> ResolvingPanel()
-            error != null -> ScanErrorBox(error = error, onRetry = vm::retry, onClear = vm::clearUrl)
+            error != null -> ScanErrorBox(error = error, onRetry = vm::retry, onDismiss = vm::clearUrl)
             result != null -> ScanResultPanel(
                 result = result,
                 saved = state.saved,
@@ -225,11 +224,23 @@ private fun ResolvingPanel() {
     )
 }
 
-/** Unsupported link, not found, network: a read box with the reason and the right way out. */
+/**
+ * Unsupported link, not found, network: a read box with the reason and the right way out. An unreadable link
+ * is dismissed ([onDismiss]): "Clear the link" empties the paste field, "Scan again" ([fromCamera]) puts the
+ * error away so the next sign's code is read. The other kinds run the same lookup again ([onRetry]).
+ */
 @Composable
-private fun ScanErrorBox(error: ScanError, onRetry: () -> Unit, onClear: () -> Unit, modifier: Modifier = Modifier) {
+private fun ScanErrorBox(
+    error: ScanError,
+    onRetry: () -> Unit,
+    onDismiss: () -> Unit,
+    modifier: Modifier = Modifier,
+    fromCamera: Boolean = false,
+) {
+    val dismissLabel = if (fromCamera) "Scan again" else "Clear the link"
+    val dismissIcon = if (fromCamera) WdIcons.QrCodeScanner else WdIcons.Cancel
     val (icon, action, onAction) = when (error.kind) {
-        ScanErrorKind.UnsupportedLink -> Triple(WdIcons.Link, "Clear the link", onClear)
+        ScanErrorKind.UnsupportedLink -> Triple(WdIcons.Link, dismissLabel, onDismiss)
         ScanErrorKind.NotFound -> Triple(WdIcons.SearchOff, "Try again", onRetry)
         ScanErrorKind.Network -> Triple(WdIcons.CloudOff, "Try again", onRetry)
         ScanErrorKind.Other -> Triple(WdIcons.Error, "Try again", onRetry)
@@ -240,7 +251,7 @@ private fun ScanErrorBox(error: ScanError, onRetry: () -> Unit, onClear: () -> U
             label = action,
             onClick = onAction,
             modifier = Modifier.padding(top = 10.dp),
-            icon = if (error.kind == ScanErrorKind.UnsupportedLink) WdIcons.Cancel else WdIcons.Refresh,
+            icon = if (error.kind == ScanErrorKind.UnsupportedLink) dismissIcon else WdIcons.Refresh,
             small = true,
         )
     }
@@ -267,18 +278,21 @@ private fun CameraMode(state: ScanUiState.Ready, vm: ScanViewModel, onFullPage: 
     ) {
         if (state.hasCamera) {
             platform.ScanCamera(onQr = vm::onQr, torch = state.torch, modifier = Modifier.fillMaxSize())
-            Text(
-                text = if (state.resolving) "Reading the sign…" else "Point the camera at the QR code on a For Sale sign",
-                modifier = Modifier
-                    .align(Alignment.BottomCenter)
-                    .padding(start = 24.dp, end = 24.dp, bottom = 96.dp + chromeBottom)
-                    .clip(RoundedCornerShape(14.dp))
-                    .background(c.scrim)
-                    .padding(horizontal = 14.dp, vertical = 8.dp),
-                color = FixedInk.onNavy,
-                style = t.supporting,
-                textAlign = TextAlign.Center,
-            )
+            // The hint gives way to the error box (below) so the two never stack at the bottom of the camera.
+            if (state.error == null) {
+                Text(
+                    text = if (state.resolving) "Reading the sign…" else "Point the camera at the QR code on a For Sale sign",
+                    modifier = Modifier
+                        .align(Alignment.BottomCenter)
+                        .padding(start = 24.dp, end = 24.dp, bottom = 96.dp + chromeBottom)
+                        .clip(RoundedCornerShape(14.dp))
+                        .background(c.scrim)
+                        .padding(horizontal = 14.dp, vertical = 8.dp),
+                    color = FixedInk.onNavy,
+                    style = t.supporting,
+                    textAlign = TextAlign.Center,
+                )
+            }
         } else {
             Column(
                 modifier = Modifier.align(Alignment.Center).padding(horizontal = 24.dp),
@@ -330,7 +344,13 @@ private fun CameraMode(state: ScanUiState.Ready, vm: ScanViewModel, onFullPage: 
                     .clip(RoundedCornerShape(16.dp))
                     .background(c.surface),
             ) {
-                ScanErrorBox(error = error, onRetry = vm::retry, onClear = vm::retry, modifier = Modifier.padding(bottom = 14.dp))
+                ScanErrorBox(
+                    error = error,
+                    onRetry = vm::retry,
+                    onDismiss = vm::dismissError,
+                    modifier = Modifier.padding(bottom = 14.dp),
+                    fromCamera = true,
+                )
             }
         }
     }
@@ -597,26 +617,29 @@ private fun HistorySheet(state: ScanUiState.Ready, onDismiss: () -> Unit, onPick
                 text = "Nothing scanned yet. Homes you look up from a sign or a pasted link land here.",
                 modifier = Modifier.padding(start = 16.dp, end = 16.dp, top = 10.dp),
             )
-            else -> LazyColumn(
-                modifier = Modifier.fillMaxWidth(),
-                contentPadding = PaddingValues(start = 16.dp, end = 16.dp, top = 10.dp),
+            // The list is one bordered card, so it scrolls as a whole; `fill = false` lets a short list keep
+            // the sheet at its content height while a long one takes the rest of the sheet and scrolls.
+            else -> Column(
+                modifier = Modifier
+                    .fillMaxWidth()
+                    .weight(1f, fill = false)
+                    .verticalScroll(rememberScrollState())
+                    .padding(start = 16.dp, end = 16.dp, top = 10.dp),
             ) {
-                item(key = "rows") {
-                    RowList(items = items) { item ->
-                        val r = item.result
-                        val meta = listOfNotNull(
-                            r.score?.let { "Score $it" },
-                            r.taxBill?.let { "${r.taxBillYear} tax ${Format.money(it)}" },
-                            r.listPrice?.let { "listed at ${Format.money(it)}" },
-                        ).joinToString(" · ")
-                        WdRow(
-                            title = "${r.property.address}, ${Derived.shortTownName(r.property.town)}",
-                            supporting = meta.ifBlank { r.property.county },
-                            tile = TileTint.Sky,
-                            icon = WdIcons.QrCodeScanner,
-                            onClick = { onPick(item) },
-                        )
-                    }
+                RowList(items = items) { item ->
+                    val r = item.result
+                    val meta = listOfNotNull(
+                        r.score?.let { "Score $it" },
+                        r.taxBill?.let { "${r.taxBillYear} tax ${Format.money(it)}" },
+                        r.listPrice?.let { "listed at ${Format.money(it)}" },
+                    ).joinToString(" · ")
+                    WdRow(
+                        title = "${r.property.address}, ${Derived.shortTownName(r.property.town)}",
+                        supporting = meta.ifBlank { r.property.county },
+                        tile = TileTint.Sky,
+                        icon = WdIcons.QrCodeScanner,
+                        onClick = { onPick(item) },
+                    )
                 }
             }
         }

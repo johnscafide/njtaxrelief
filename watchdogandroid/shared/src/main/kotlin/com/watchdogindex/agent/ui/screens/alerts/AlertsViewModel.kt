@@ -73,16 +73,30 @@ class AlertsViewModel(
             }
             // The platform has no "is it granted" query, only the request, which returns at once when
             // permission is already held and otherwise asks the system. Alerts is the one screen where
-            // asking on arrival is expected; the answer decides whether the banner shows.
-            val granted = platform.requestNotificationPermission()
+            // asking on arrival is expected; the answer decides whether the banner shows. A platform
+            // failure here must not take the list down after it is already Ready, so it counts as granted.
+            val granted = permissionGranted(fallback = true)
             _state.update { s -> if (s is AlertsUiState.Ready) s.copy(permissionGranted = granted) else s }
         }
     }
 
-    /** The banner button: asks again; a refusal keeps the banner and points at the system settings. */
+    /**
+     * [PlatformServices.requestNotificationPermission] guarded against platform exceptions (a missing
+     * activity, a system dialog that could not be shown): those return [fallback] instead of crashing.
+     */
+    private suspend fun permissionGranted(fallback: Boolean): Boolean =
+        try {
+            platform.requestNotificationPermission()
+        } catch (e: CancellationException) {
+            throw e
+        } catch (e: Exception) {
+            fallback
+        }
+
+    /** The banner button: asks again; a refusal (or a platform failure) keeps the banner and points at the system settings. */
     fun requestPermission() {
         viewModelScope.launch {
-            val granted = platform.requestNotificationPermission()
+            val granted = permissionGranted(fallback = false)
             _state.update { s ->
                 if (s !is AlertsUiState.Ready) {
                     s
@@ -113,8 +127,9 @@ class AlertsViewModel(
 
     /**
      * The number "Call client" dials: the phone on the client's next action for the home the alert is about.
-     * Null when the alert names no home, the home is not a client, or the client list cannot be read; the
-     * screen then opens the home instead. Never a public-record owner number.
+     * Null when the alert names no home, the home is not a client, or the client list cannot be read for any
+     * reason (a Watchdog error or a mapping failure in the live repository; the caller runs in a UI scope, so
+     * nothing may escape); the screen then opens the home instead. Never a public-record owner number.
      */
     suspend fun phoneFor(pin: PamsPin?): String? {
         if (pin == null) return null
@@ -123,6 +138,8 @@ class AlertsViewModel(
         } catch (e: CancellationException) {
             throw e
         } catch (e: WatchdogException) {
+            null
+        } catch (e: Exception) {
             null
         }
     }

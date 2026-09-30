@@ -62,7 +62,6 @@ import com.watchdogindex.agent.ui.components.IntelligenceTeaserCard
 import com.watchdogindex.agent.ui.components.LocalBottomChromeInsets
 import com.watchdogindex.agent.ui.components.PropertyChangeRow
 import com.watchdogindex.agent.ui.components.RowList
-import com.watchdogindex.agent.ui.components.SectionHeader
 import com.watchdogindex.agent.ui.components.SummaryCard
 import com.watchdogindex.agent.ui.components.TaskRow
 import com.watchdogindex.agent.ui.components.WatchdogFab
@@ -73,6 +72,7 @@ import com.watchdogindex.agent.ui.components.WdRow
 import com.watchdogindex.agent.ui.components.WdTonalButton
 import com.watchdogindex.agent.ui.components.cardMargin
 import com.watchdogindex.agent.ui.components.listMargin
+import com.watchdogindex.agent.ui.components.overflowTouchTarget
 import com.watchdogindex.agent.ui.components.sized
 import com.watchdogindex.agent.ui.nav.Navigator
 import com.watchdogindex.agent.ui.nav.Route
@@ -174,9 +174,15 @@ private fun TodayContent(
         item(key = "summary") { SummaryCard(digest = digest, modifier = Modifier.cardMargin()) }
 
         item(key = "needs-you") {
-            SectionHeader(
+            val showingAll = state.showAllTasks && state.hasMoreTasks
+            ExpandableSectionHeader(
                 title = "Needs you",
-                linkLabel = if (state.showAllTasks && state.hasMoreTasks) "Show fewer" else "${digest.needsYouCount} this week",
+                linkLabel = if (showingAll) "Show fewer" else "${digest.needsYouCount} this week",
+                linkContentDescription = when {
+                    showingAll -> "Show fewer tasks"
+                    state.hasMoreTasks -> "Show all ${digest.tasks.size} tasks"
+                    else -> null
+                },
                 onLink = if (state.hasMoreTasks) onToggleAllTasks else null,
             )
         }
@@ -198,9 +204,15 @@ private fun TodayContent(
         }
 
         item(key = "top-changes") {
-            SectionHeader(
+            val showingAll = state.showAllChanges && state.hasMoreChanges
+            ExpandableSectionHeader(
                 title = "Top changes",
-                linkLabel = if (state.showAllChanges && state.hasMoreChanges) "Show fewer" else "See all ${digest.total}",
+                linkLabel = if (showingAll) "Show fewer" else "See all ${digest.total}",
+                linkContentDescription = when {
+                    showingAll -> "Show fewer changes"
+                    state.hasMoreChanges -> "Show all ${digest.changes.size} changes"
+                    else -> null
+                },
                 onLink = if (state.hasMoreChanges) onToggleAllChanges else null,
             )
         }
@@ -287,6 +299,55 @@ private fun PageHead(dateLabel: String?) {
             SkeletonBlock(width = 168.dp, height = 13.dp, radius = 6.dp, modifier = Modifier.padding(start = 20.dp, top = 3.dp, bottom = 6.dp))
         }
         Text(text = "Today", modifier = Modifier.padding(horizontal = 20.dp), color = c.ink, style = t.headline)
+    }
+}
+
+/**
+ * The shared `SectionHeader` (`.sec`) with one addition: the link can carry an accessible name that differs
+ * from its visible label. "5 this week" and "See all 10" expand their list inline, so a screen reader should
+ * hear what activating them does ("Show all 5 tasks, button"), not the count read as a button. The geometry
+ * is the shared header's: padding 20 / [WatchdogDimens.sectionTop], 12 dp gap, baseline-aligned 21 dp link
+ * with a 48 dp node overflowing it, 8 dp ripple radius. Candidate for a `linkContentDescription` parameter
+ * on `SectionHeader` itself, after which this copy goes away.
+ */
+@Composable
+private fun ExpandableSectionHeader(
+    title: String,
+    linkLabel: String?,
+    linkContentDescription: String?,
+    onLink: (() -> Unit)?,
+) {
+    val c = WatchdogTheme.colors
+    val t = WatchdogTheme.type
+    Row(
+        modifier = Modifier.fillMaxWidth().padding(start = 20.dp, end = 20.dp, top = WatchdogDimens.sectionTop),
+        horizontalArrangement = Arrangement.spacedBy(12.dp),
+    ) {
+        Text(text = title, modifier = Modifier.weight(1f).alignByBaseline(), color = c.ink, style = t.sectionTitle)
+        if (linkLabel != null) {
+            val link = if (onLink != null) {
+                // The description replaces the merged label; `clearAndSetSemantics` sits after `clickable`
+                // so the click action and role stay while the child text's semantics are dropped.
+                val named = if (linkContentDescription != null) {
+                    Modifier.clearAndSetSemantics {
+                        role = Role.Button
+                        contentDescription = linkContentDescription
+                    }
+                } else {
+                    Modifier
+                }
+                Modifier
+                    .overflowTouchTarget()
+                    .clip(RoundedCornerShape(8.dp))
+                    .clickable(role = Role.Button, onClick = onLink)
+                    .then(named)
+            } else {
+                Modifier
+            }
+            Box(modifier = Modifier.alignByBaseline().then(link), contentAlignment = Alignment.Center) {
+                Text(text = linkLabel, color = c.link, style = t.sectionLink, maxLines = 1)
+            }
+        }
     }
 }
 

@@ -59,8 +59,10 @@ import androidx.compose.ui.geometry.Size
 import androidx.compose.ui.graphics.SolidColor
 import androidx.compose.ui.graphics.drawscope.Stroke
 import androidx.compose.ui.platform.LocalLayoutDirection
+import androidx.compose.ui.semantics.CustomAccessibilityAction
 import androidx.compose.ui.semantics.Role
 import androidx.compose.ui.semantics.contentDescription
+import androidx.compose.ui.semantics.customActions
 import androidx.compose.ui.semantics.semantics
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.Dp
@@ -105,13 +107,18 @@ import com.watchdogindex.agent.ui.nav.Tab
 /*
  * Clients (tab), spec §4.5: the top bar ("Clients", search and tune), the checkup season banner, the filter
  * chips, the client rows and the "Add clients" FAB over the navigation bar. Scroll padding is the mockup's
- * 40 (status bar) / 128 (nav bar + 24). Rows lead with the home and the agent's CRM reference; no owner
+ * 40 (status bar) at the top and, at the bottom, the nav bar plus room for the FAB (see [scrollBottomGap]).
+ * Rows lead with the home and the agent's CRM reference; no owner
  * name is ever shown. Every next-action line acts: Call dials, Send records the checkup and drafts the
  * email with its link, Mail and Edit open the mail composer, and a swipe snoozes a row until Monday.
  */
 
-/** The mockup's 24 dp between the last row and the navigation bar (`.scroll` bottom 128 = 104 + 24). */
-private val scrollBottomGap = 24.dp
+/**
+ * Room under the last row for the extended FAB, which Scaffold floats 16 dp above the navigation bar: 16 dp
+ * of gap, the 56 dp button and 16 dp more, so the last row's next-action line is never left behind it. The
+ * mockup's `.scroll` bottom (128 = 104 + 24) is smaller, but its 24 dp would end the list under the FAB.
+ */
+private val scrollBottomGap = 16.dp + WatchdogDimens.fabHeight + 16.dp
 
 /** `.mchips` padding-top 14 minus the 8 dp of slack above a 32 dp chip in its 48 dp row. */
 private val chipsTopPadding = 6.dp
@@ -284,12 +291,28 @@ private fun ClientsContent(
     }
 }
 
-/** A client row that swipes from the end to snooze until Monday; quiet rows have nothing to snooze and do not swipe. */
+/**
+ * A client row that swipes from the end to snooze until Monday; quiet rows have nothing to snooze and do not
+ * swipe. The swipe is gesture-only, so the same snooze is offered as an accessibility action on the row for
+ * TalkBack and switch access.
+ */
 @Composable
 private fun SnoozableClientRow(row: ClientRow, onClick: () -> Unit, onNextAction: () -> Unit, onSnooze: () -> Unit) {
     val c = WatchdogTheme.colors
     val t = WatchdogTheme.type
     val snoozable = row.nextAction.kind != NextActionKind.None
+    val rowModifier = if (snoozable) {
+        Modifier.semantics {
+            customActions = listOf(
+                CustomAccessibilityAction(label = "Snooze until Monday") {
+                    onSnooze()
+                    true
+                },
+            )
+        }
+    } else {
+        Modifier
+    }
     val dismissState = rememberSwipeToDismissBoxState(
         confirmValueChange = { value ->
             if (value == SwipeToDismissBoxValue.EndToStart) onSnooze()
@@ -315,7 +338,8 @@ private fun SnoozableClientRow(row: ClientRow, onClick: () -> Unit, onNextAction
         enableDismissFromEndToStart = snoozable,
     ) {
         Box(Modifier.fillMaxWidth().background(c.surface)) {
-            ClientRowView(row = row, onClick = onClick, onNextAction = onNextAction)
+            // The action rides on the row's own click node, so it is listed with the row, not on an empty node.
+            ClientRowView(row = row, onClick = onClick, onNextAction = onNextAction, modifier = rowModifier)
         }
     }
 }
@@ -458,7 +482,10 @@ private fun ClientsError(userMessage: String, contentPadding: PaddingValues, onR
 
 // ---------------------------------------------------------------------- sheets
 
-/** The shared modal sheet chrome: surface, 28 dp top radius, the scrim token and the mockup handle. */
+/**
+ * The shared modal sheet chrome: surface, 28 dp top radius, the scrim token and the mockup handle. The Farm
+ * screen carries the same wrapper; candidate for promotion to the components package as `WdModalSheet`.
+ */
 @Composable
 private fun ClientsSheet(onDismiss: () -> Unit, content: @Composable ColumnScope.() -> Unit) {
     val c = WatchdogTheme.colors

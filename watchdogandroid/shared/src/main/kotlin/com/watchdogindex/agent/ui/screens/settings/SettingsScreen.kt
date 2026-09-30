@@ -46,6 +46,7 @@ import com.watchdogindex.agent.design.WatchdogTheme
 import com.watchdogindex.agent.design.icons.WdIcons
 import com.watchdogindex.agent.platform.LocalPlatformServices
 import com.watchdogindex.agent.ui.components.KeyValueRow
+import com.watchdogindex.agent.ui.components.LocalBottomChromeInsets
 import com.watchdogindex.agent.ui.components.SettingsDivider
 import com.watchdogindex.agent.ui.components.SettingsProfileRow
 import com.watchdogindex.agent.ui.components.SettingsRow
@@ -66,9 +67,6 @@ import com.watchdogindex.agent.ui.nav.Route
  * "Alerts" and "App" sections exactly as the mockup lists them, followed by "Account" (plan, email, sign out)
  * and the privacy footer. `.scroll.pb-sm`: bottom padding 110 (no navigation bar).
  */
-
-/** The mockup's status bar allowance, used when the host draws no status bar (the desktop preview). */
-private val MockupStatusBarHeight = 40.dp
 
 /** `.pb-sm` is 110 on the mockup device, whose gesture area is 24; the rest scales with the real inset. */
 private val ScrollBottomBeyondChrome = 86.dp
@@ -316,7 +314,10 @@ private fun LabelledValue(label: String, value: String) {
     }
 }
 
-/** One hour picker: label, "earlier" and "later" 48 dp buttons around the hour, announced as one control. */
+/**
+ * One hour picker: label, "earlier" and "later" 48 dp buttons around the hour. The label and value merge into
+ * one spoken node ("Start 9 PM"); the two buttons stay separate, each with its own description.
+ */
 @Composable
 private fun HourStepper(label: String, hour: Int, onEarlier: () -> Unit, onLater: () -> Unit) {
     val c = WatchdogTheme.colors
@@ -326,7 +327,7 @@ private fun HourStepper(label: String, hour: Int, onEarlier: () -> Unit, onLater
         modifier = Modifier
             .fillMaxWidth()
             .heightIn(min = 48.dp)
-            .semantics { contentDescription = "$label $hourLabel" },
+            .semantics(mergeDescendants = true) { contentDescription = "$label $hourLabel" },
         verticalAlignment = Alignment.CenterVertically,
     ) {
         Text(text = label, modifier = Modifier.weight(1f), color = c.ink, style = t.kvLabel)
@@ -351,11 +352,11 @@ private fun AppThemeMode.label(): String = when (this) {
 }
 
 /**
- * The system status bar height, or the mockup's 40 dp allowance where the host draws no status bar (the
- * desktop preview and the screenshot harness), so the top bar lines up with the reference frames.
+ * The status bar allowance above the top bar: the mockups' 40 dp in the desktop preview and screenshot
+ * harness, which have no status bar but provide [LocalBottomChromeInsets] to reproduce the mockups' chrome,
+ * and the real inset everywhere else (including a hidden status bar, where it is rightly 0). The same rule as
+ * the tab screens; a candidate for one shared helper in the components' Foundation.
  */
 @Composable
-private fun statusBarTopPadding(): Dp {
-    val system = WindowInsets.statusBars.asPaddingValues().calculateTopPadding()
-    return if (system > 0.dp) system else MockupStatusBarHeight
-}
+private fun statusBarTopPadding(): Dp =
+    if (LocalBottomChromeInsets.current != null) 40.dp else WindowInsets.statusBars.asPaddingValues().calculateTopPadding()

@@ -5,7 +5,6 @@ import androidx.lifecycle.viewModelScope
 import com.watchdogindex.agent.core.WatchdogException
 import com.watchdogindex.agent.core.format.Format
 import com.watchdogindex.agent.core.model.Farm
-import com.watchdogindex.agent.core.model.FarmStats
 import com.watchdogindex.agent.core.model.LatLng
 import com.watchdogindex.agent.core.model.MapLayer
 import com.watchdogindex.agent.core.model.MapParcel
@@ -20,98 +19,13 @@ import kotlinx.coroutines.flow.asStateFlow
 import kotlinx.coroutines.flow.update
 import kotlinx.coroutines.launch
 
-/** The pickers the Farm screen opens over the map. */
-enum class FarmPicker { Farms, Layers }
-
-/** The map layer chips and picker rows, in [MapLayer] order. */
-val MapLayer.label: String
-    get() = when (this) {
-        MapLayer.Score -> "Score"
-        MapLayer.Residential -> "Residential"
-        MapLayer.SoldIn12Months -> "Sold in 12 mo"
-        MapLayer.Permits -> "Permits"
-    }
-
-/** What each layer shows, for the layer picker; every one names its public source. */
-val MapLayer.description: String
-    get() = when (this) {
-        MapLayer.Score -> "Every parcel colored by Watchdog Score"
-        MapLayer.Residential -> "Homes only, colored by Watchdog Score (MOD-IV class 2)"
-        MapLayer.SoldIn12Months -> "Deeds recorded in the last 12 months (SR-1A)"
-        MapLayer.Permits -> "Permits filed in the last 90 days"
-    }
-
-/** The Farm tab: the agent's farms, the one on the map with its parcels and neighborhood totals, and the map's own state. */
-sealed interface FarmUiState {
-    data object Loading : FarmUiState
-
-    data class Ready(
-        val farms: List<Farm>,
-        /** The farm on the map; null when the agent has not drawn one yet (the empty state). */
-        val farm: Farm?,
-        /** Every parcel of [farm] (the Score layer), which the map colors per the chosen layer. */
-        val parcels: List<MapParcel> = emptyList(),
-        /** The repository's parcels for the chosen layer; merged over [parcels] so fresher flags win. */
-        val layerParcels: List<MapParcel> = emptyList(),
-        val layer: MapLayer = MapLayer.Score,
-        val stats: FarmStats? = null,
-        /** The parcel the map outlines with its callout. */
-        val selectedPin: String? = null,
-        /**
-         * The home the map opens on at street level: the first of the agent's known homes inside the farm.
-         * Taps move [selectedPin], never this, so selecting a parcel does not pan the map.
-         */
-        val spotlightPin: String? = null,
-        /** True once the agent tapped a parcel; the sheet then shows the parcel row with its Open button. */
-        val calloutOpen: Boolean = false,
-        /** Where the agent panned the map to; null until then, so the screen frames the spotlight home or the farm. */
-        val center: LatLng? = null,
-        val zoom: Double? = null,
-        val sheetExpanded: Boolean = false,
-        val picker: FarmPicker? = null,
-        val drawing: Boolean = false,
-        val drawPoints: List<LatLng> = emptyList(),
-        /** The name dialog after "Done" while drawing. */
-        val naming: Boolean = false,
-        val newFarmName: String = "",
-        val creating: Boolean = false,
-        val loadingLayer: Boolean = false,
-        /** A one-line message for the snackbar; cleared by [FarmViewModel.clearNotice]. */
-        val notice: String? = null,
-    ) : FarmUiState {
-        /** What the map draws: all parcels, with the layer's own records replacing their Score-layer twins. */
-        val mapParcels: List<MapParcel>
-            get() = if (layer == MapLayer.Score || layerParcels.isEmpty()) {
-                parcels
-            } else {
-                val fresh = layerParcels.associateBy { it.pin }
-                parcels.map { fresh[it.pin] ?: it }
-            }
-
-        val selectedParcel: MapParcel? get() = selectedPin?.let { pin -> mapParcels.firstOrNull { it.pin == pin } }
-
-        val spotlightParcel: MapParcel? get() = spotlightPin?.let { pin -> parcels.firstOrNull { it.pin == pin } }
-
-        /** Homes with a deed in the last 12 months, for the expanded sheet; neighborhood facts, never a prediction. */
-        val recentDeeds: List<MapParcel> get() = mapParcels.filter { it.soldInLast12Months && it.residential }.take(8)
-    }
-
-    data class Error(val userMessage: String) : FarmUiState
-}
-
-/** "Score 72 · tax $11,284"; stores and unscored parcels say so instead of showing a blank. */
-fun MapParcel.calloutLine(): String {
-    val scoreText = score?.let { "Score $it" } ?: if (residential) "Not scored yet" else "Not a home"
-    val taxText = taxBill?.let { " · tax ${Format.money(it)}" } ?: ""
-    return scoreText + taxText
-}
-
 class FarmViewModel(private val repos: Repositories) : ViewModel() {
     private val _state = MutableStateFlow<FarmUiState>(FarmUiState.Loading)
     val state: StateFlow<FarmUiState> = _state.asStateFlow()
 
     private var loadJob: Job? = null
     private var layerJob: Job? = null
+    private var farmJob: Job? = null
 
     init {
         load()
@@ -187,6 +101,7 @@ class FarmViewModel(private val repos: Repositories) : ViewModel() {
 
     // ------------------------------------------------------------------ farm and layer
 
+    /** A picker row: the current farm stays on screen, with the sheet saying which one is opening, until the new one lands. */
     fun selectFarm(farm: Farm) {
         val current = _state.value as? FarmUiState.Ready ?: return
         if (current.farm?.id == farm.id) {
@@ -194,22 +109,27 @@ class FarmViewModel(private val repos: Repositories) : ViewModel() {
             return
         }
         layerJob?.cancel()
-        _state.value = current.copy(picker = null, loadingLayer = true)
-        viewModelScope.launch {
+        farmJob?.cancel()
+        _state.value = current.copy(picker = null, openingFarm = farm.name)
+        farmJob = viewModelScope.launch {
             try {
                 val opened = openFarm(farm, current.farms, previous = null)
                 _state.value = opened.copy(notice = null)
             } catch (e: CancellationException) {
                 throw e
             } catch (e: WatchdogException) {
-                updateReady { it.copy(loadingLayer = false, notice = e.userMessage) }
+                updateReady { it.copy(openingFarm = null, notice = e.userMessage) }
             } catch (e: Exception) {
-                updateReady { it.copy(loadingLayer = false, notice = "That farm could not be opened. Try again.") }
+                updateReady { it.copy(openingFarm = null, notice = "That farm could not be opened. Try again.") }
             }
         }
     }
 
-    /** A chip or picker row: the map recolors at once; the layer's records follow from the repository. */
+    /**
+     * A chip or picker row: the map recolors at once from the parcels it already has (their sold and permit
+     * flags come with the Score layer), and the layer's own records replace them when the repository answers.
+     * The previous layer's records are dropped the moment the layer changes.
+     */
     fun setLayer(layer: MapLayer) {
         val current = _state.value as? FarmUiState.Ready ?: return
         val farm = current.farm ?: return
@@ -218,7 +138,7 @@ class FarmViewModel(private val repos: Repositories) : ViewModel() {
             return
         }
         layerJob?.cancel()
-        _state.value = current.copy(layer = layer, picker = null, loadingLayer = layer != MapLayer.Score, layerParcels = if (layer == MapLayer.Score) current.parcels else current.layerParcels)
+        _state.value = current.copy(layer = layer, picker = null, loadingLayer = layer != MapLayer.Score, layerParcels = current.parcels)
         if (layer == MapLayer.Score) return
         layerJob = viewModelScope.launch {
             try {
@@ -242,6 +162,7 @@ class FarmViewModel(private val repos: Repositories) : ViewModel() {
 
     fun dismissCallout() = updateReady { it.copy(selectedPin = null, calloutOpen = false) }
 
+    /** The agent panned or zoomed; from here on the map stays where they left it. The screen filters out the map echoing its own camera. */
     fun onMapMoved(center: LatLng, zoom: Double) = updateReady { it.copy(center = center, zoom = zoom) }
 
     fun toggleSheet() = updateReady { it.copy(sheetExpanded = !it.sheetExpanded) }

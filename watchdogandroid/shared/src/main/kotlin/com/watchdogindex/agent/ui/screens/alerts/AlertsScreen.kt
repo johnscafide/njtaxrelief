@@ -148,7 +148,7 @@ fun AlertsScreen(navigator: Navigator) {
                                 NotificationActionKind.ViewFarm -> navigator.open(Route.Farm)
                                 NotificationActionKind.SendCheckups -> navigator.open(Route.Clients)
                                 NotificationActionKind.Later -> vm.dismiss(notification.id)
-                                NotificationActionKind.Open -> navigator.open(notification.pin?.let { Route.Property(it) } ?: Route.Intelligence)
+                                NotificationActionKind.Open -> navigator.open(notification.openRoute())
                                 NotificationActionKind.CallClient -> scope.launch {
                                     val phone = vm.phoneFor(notification.pin)
                                     val pin = notification.pin
@@ -182,14 +182,18 @@ private fun NotificationGroup(
     val c = WatchdogTheme.colors
     val t = WatchdogTheme.type
     val shape = RoundedCornerShape(WatchdogDimens.sheetRadius)
-    val timeLabel = notifications.firstOrNull()?.timeLabel ?: "now"
+    // The live repository leaves the label blank when an event has no timestamp; "now" keeps the header whole.
+    val timeLabel = notifications.firstOrNull()?.timeLabel?.takeIf { it.isNotBlank() } ?: "now"
+    // The shade group is a plain surface with no border (spec §3.49): in light its edge is the surface against
+    // the backdrop. In dark the group sits beside the bordered switches card, so it takes the same 1 dp line.
+    val edge = if (c.isDark) Modifier.border(1.dp, c.line, shape) else Modifier
     Column(
         modifier = Modifier
             .cardMargin()
             .fillMaxWidth()
             .clip(shape)
             .background(c.surface)
-            .border(1.dp, c.line, shape),
+            .then(edge),
     ) {
         Row(
             modifier = Modifier.fillMaxWidth().padding(start = 16.dp, end = 16.dp, top = 14.dp, bottom = 4.dp),
@@ -443,6 +447,29 @@ private fun AlertsError(userMessage: String, contentPadding: PaddingValues, onRe
         }
     }
 }
+
+/**
+ * Where a plain "Open" action goes. The home when the alert names one; otherwise the screen that owns the
+ * alert's channel, so a town-level rate or revaluation notice (no PIN) lands on a search for that town, not on
+ * the Monday brief.
+ */
+private fun AppNotification.openRoute(): Route {
+    val pin = pin
+    if (pin != null) return Route.Property(pin)
+    return when (channel) {
+        AlertChannel.FarmSalesAndDeeds -> Route.Farm
+        AlertChannel.ClientHomeChanges, AlertChannel.AppealDeadlines -> Route.Clients
+        AlertChannel.TownRatesAndRevaluations -> Route.Search(townFromTitle())
+        AlertChannel.MondayBrief -> Route.Intelligence
+    }
+}
+
+/**
+ * The town a live alert title names: titles read "<change> at <address>, <town>" or "<change> at <town>", so
+ * the town is what follows the last " at " and the last comma. Empty when the title names no place.
+ */
+private fun AppNotification.townFromTitle(): String =
+    title.substringAfterLast(" at ", missingDelimiterValue = "").substringAfterLast(", ").trim()
 
 /**
  * The top inset the app bar sits under. On device this is the system status bar. The desktop preview and the

@@ -48,10 +48,13 @@ import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.dp
 import com.watchdogindex.agent.app.LocalAppGraph
 import com.watchdogindex.agent.app.screenViewModel
+import com.watchdogindex.agent.design.WatchdogDarkColors
 import com.watchdogindex.agent.design.WatchdogLogo
 import com.watchdogindex.agent.design.WatchdogTheme
 import com.watchdogindex.agent.design.icons.WdIcons
 import com.watchdogindex.agent.platform.LocalPlatformServices
+import com.watchdogindex.agent.ui.components.FixedInk
+import com.watchdogindex.agent.ui.components.LocalBottomChromeInsets
 import com.watchdogindex.agent.ui.components.SupportingText
 import com.watchdogindex.agent.ui.components.WdOutlinedButton
 import com.watchdogindex.agent.ui.components.WdOutlinedField
@@ -70,21 +73,38 @@ import kotlin.math.sin
  * Welcome (`S.welcome.android`, spec §3.31 / §4.1): the fixed-navy hero with the 60 dp mark, the three
  * numbered steps, and the CTA block pinned to the bottom. Edge to edge, no scroll in the idle state, no
  * navigation bar. The email code flow lives inside the same screen as CTA states.
+ *
+ * Passkey decision: the mockup draws "Use a passkey" under "Continue with email". The button is rendered only
+ * when `PlatformServices.supportsPasskeys` is true, and no current build reports true: the desktop preview
+ * has no credential manager, and the Android app gates on `PasskeyBridge.isAvailable`, which stays false until
+ * the Watchdog backend has WebAuthn endpoints (BuildConfig.PASSKEYS_ENABLED). Hiding, rather than showing a
+ * disabled "coming soon" button, is deliberate: an action the agent can never complete is not offered. The
+ * only visible difference from the reference frames is therefore the empty passkey slot (the primary button
+ * sits one slot lower); the similarity figures for this screen carry that gap by design.
+ *
+ * Leaving the screen: the Android host follows `AuthRepository.state` and replaces Welcome with Today itself.
+ * The screen's own `navigator.open(Route.Today)` after sign-in is the fallback for hosts without that
+ * observer (the desktop preview's stack navigator); on Android it runs after the host's transition and is a
+ * `launchSingleTop` no-op.
  */
 
-/** Hero gradient `linear-gradient(170deg, #0e2248, #11306a)`: fixed in both themes (spec §1.12). */
-private val HeroGradientStart = Color(0xFF0E2248)
+/**
+ * Hero gradient `linear-gradient(170deg, #0e2248, #11306a)`: fixed in both themes (spec §1.12). The start is
+ * the design's fixed navy; the end has no token yet (a `heroGradientEnd` in `Spectrum`/`FixedInk` is the
+ * design owner's to add), so it is the one colour this screen still spells out.
+ */
+private val HeroGradientStart = FixedInk.navy
 private val HeroGradientEnd = Color(0xFF11306A)
 
-/** `.wel-for` gold `#e3c46a`, identical in dark (spec §1.12). Not yet a FixedInk token; see the report. */
-private val EyebrowGold = Color(0xFFE3C46A)
+/**
+ * `.wel-for` gold `#e3c46a`, identical in dark (spec §1.12). The design carries this exact value as the dark
+ * palette's map dot; until a `welcomeGold` fixed token exists, that is the token this reads.
+ */
+private val EyebrowGold = WatchdogDarkColors.mapDot
 
 /** `.logo` ring `rgba(255,255,255,.18)` and `.wel-p` ink `rgba(255,255,255,.8)` on the fixed-navy hero. */
 private val LogoRing = Color.White.copy(alpha = .18f)
 private val LedeInk = Color.White.copy(alpha = .8f)
-
-/** The mockup's status bar allowance, used when the host draws no status bar (the desktop preview). */
-private val MockupStatusBarHeight = 40.dp
 
 private const val ONBOARDING_URL = "https://www.watchdogindex.com/onboarding/"
 
@@ -107,7 +127,8 @@ fun WelcomeScreen(navigator: Navigator) {
 
     val signedIn = (state as? WelcomeUiState.Ready)?.signedIn == true
     LaunchedEffect(signedIn) {
-        // The host replaces the back stack when Today opens from Welcome.
+        // Fallback for hosts that do not follow the auth state (see the file comment); the Android host has
+        // already replaced Welcome with Today by the time this runs, and switching to the current tab is a no-op.
         if (signedIn) navigator.open(Route.Today)
     }
 
@@ -272,9 +293,7 @@ private fun CtaBlock(
                     modifier = Modifier.fillMaxWidth(),
                     enabled = !ready.busy,
                 )
-                // Passkeys need the platform's credential manager AND a WebAuthn enrolment on the backend.
-                // Desktop reports false; the Android app reports false today as well because the Watchdog
-                // backend has no WebAuthn endpoint yet, so this button is hidden on every current build.
+                // Hidden on every current build; see the passkey decision in the file comment.
                 if (showPasskey) {
                     WdOutlinedButton(
                         label = "Use a passkey",
@@ -407,14 +426,14 @@ private fun TextLink(label: String, onClick: () -> Unit, modifier: Modifier = Mo
 }
 
 /**
- * The system status bar height, or the mockup's 40 dp allowance where the host draws no status bar (the
- * desktop preview and the screenshot harness), so the hero lines up with the reference frames.
+ * The status bar allowance above the hero: the mockups' 40 dp in the desktop preview and screenshot harness,
+ * which have no status bar but provide [LocalBottomChromeInsets] to reproduce the mockups' chrome, and the
+ * real inset everywhere else (including a hidden status bar, where it is rightly 0). The same rule as the
+ * tab screens; a candidate for one shared helper in the components' Foundation.
  */
 @Composable
-private fun statusBarTopPadding(): Dp {
-    val system = WindowInsets.statusBars.asPaddingValues().calculateTopPadding()
-    return if (system > 0.dp) system else MockupStatusBarHeight
-}
+private fun statusBarTopPadding(): Dp =
+    if (LocalBottomChromeInsets.current != null) 40.dp else WindowInsets.statusBars.asPaddingValues().calculateTopPadding()
 
 /** CSS `linear-gradient(170deg, …)`: the gradient line runs 170° clockwise from "to top" through the center. */
 private fun Modifier.heroGradient(shape: Shape): Modifier = clip(shape).drawBehind {
