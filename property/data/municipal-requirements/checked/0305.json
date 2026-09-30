@@ -1,0 +1,212 @@
+{
+ "municipality_code": "0305",
+ "municipality": "Burlington City",
+ "county": "BURLINGTON",
+ "checked_at": "2026-09-30",
+ "resale_co": {
+  "status": "required",
+  "name": "Resale Certificate of Inspection / Housing Clear Certificate (certificate of continued occupancy)",
+  "issued_by": "City of Burlington Code Enforcement (Resales)",
+  "lead_time": "Apply at least 30 business days before closing, as soon as the seller decides to sell. No same-day inspections.",
+  "valid_for": "60 days",
+  "requirements": [
+   "Ten-year sealed battery smoke alarm on each level of living space, in every bedroom and in the basement",
+   "Carbon monoxide alarm within 10 feet of the sleeping areas",
+   "Fire extinguisher 2A-10B:C under 10 lb within 10 feet of the kitchen, visible, not behind a door or cabinet, top no more than 5 feet above the floor",
+   "Chimney certification for fossil fuel burning fireplaces and appliances",
+   "Handrails on 4 or more risers; guardrails on porches and decks 30 inches or more above grade",
+   "GFCI outlets within 6 feet of water; circuit breaker panel in order; no bare-wire fixtures",
+   "Ceilings, walls and floors without holes, chipped paint, severe cracks or water stains",
+   "Key locks on entry doors only",
+   "Heat, appliances, hot and cold water and toilets working; anti-tip device on range",
+   "Water heater bonding strap and relief valve pipe extended to 6 inches from the floor",
+   "Bathroom has a window or exhaust fan",
+   "Utilities on at the time of inspection",
+   "Yard free of trash, motor vehicles and debris; no exterior damage or roof leaks; code violations abated",
+   "No work without permits, no illegal apartments or illegally rented rooms"
+  ],
+  "fees": [
+   {
+    "label": "Resale processing and inspection",
+    "amount": "$100.00",
+    "quote": "The fee for processing/inspection for resale is $100.00.",
+    "source_url": "https://www.burlingtonnj.us/wp-content/uploads/2026/02/RESALE-PROCESS-with-Checklist-2-3-26.pdf",
+    "verified": true
+   },
+   {
+    "label": "Each additional re-inspection",
+    "amount": "$75.00",
+    "quote": "Each additional re-inspection will require a fee of $75.00.",
+    "source_url": "https://www.burlingtonnj.us/wp-content/uploads/2026/02/RESALE-PROCESS-with-Checklist-2-3-26.pdf",
+    "verified": true
+   },
+   {
+    "label": "No one present / missed inspection",
+    "amount": "$100",
+    "quote": "another fee of $100 dollars will be due as per our ordinance Chapter 146 Fee Schedule 146-15",
+    "source_url": "https://www.burlingtonnj.us/wp-content/uploads/2026/02/RESALE-PROCESS-with-Checklist-2-3-26.pdf",
+    "verified": true
+   }
+  ],
+  "how_to_apply": "Once there is a buyer, the seller or agent submits the Resale Certificate of Inspection Application to resales@burlingtonnj.us (or by mail to Code Enforcement, 525 High Street) with the $100 fee. Pay online through the city's Pay Here link on the Code Enforcement page, using the property address as the reference number. Code Enforcement emails the appointment to the agent; inspections are Monday, Wednesday and Friday 9 AM to 1 PM. A lock box code is used only if the home is vacant.",
+  "application_url": "https://www.burlingtonnj.us/wp-content/uploads/2026/02/Resale-Application.pdf",
+  "department_url": "https://www.burlingtonnj.us/code-enforcement/",
+  "contact_name": "Autumn Harley",
+  "contact_title": "Resales, Code Enforcement",
+  "phone": "609-386-0200 ext. 132",
+  "email": "Resales@burlingtonnj.us",
+  "evidence": [
+   {
+    "url": "https://www.burlingtonnj.us/wp-content/uploads/2026/02/RESALE-PROCESS-with-Checklist-2-3-26.pdf",
+    "quote": "Homes that are sold in the City of Burlington must be inspected. The seller must receive a Housing Clear Certificate before transferring ownership.",
+    "doc_date": "2026-02 (Resale Process dated 2-3-26)",
+    "via": "pdf",
+    "verified": true
+   },
+   {
+    "url": "https://www.burlingtonnj.us/wp-content/uploads/2026/02/RESALE-PROCESS-with-Checklist-2-3-26.pdf",
+    "quote": "Property owners who are intending to sell any dwelling unit",
+    "doc_date": "2026-02 (Resale Process dated 2-3-26)",
+    "via": "pdf",
+    "verified": true
+   },
+   {
+    "url": "https://www.burlingtonnj.us/wp-content/uploads/2026/02/RESALE-PROCESS-with-Checklist-2-3-26.pdf",
+    "quote": "This should be done at least 30 business days before closing",
+    "doc_date": "2026-02 (Resale Process dated 2-3-26)",
+    "via": "pdf",
+    "verified": true
+   },
+   {
+    "url": "https://www.burlingtonnj.us/wp-content/uploads/2026/02/RESALE-PROCESS-with-Checklist-2-3-26.pdf",
+    "quote": "A residential certificate of continued occupancy shall be effective for a period of 60 days.",
+    "doc_date": "2026-02 (Resale Process dated 2-3-26)",
+    "via": "pdf",
+    "verified": true
+   },
+   {
+    "url": "https://www.burlingtonnj.us/wp-content/uploads/2026/02/RESALE-PROCESS-with-Checklist-2-3-26.pdf",
+    "quote": "Failure to obtain a certificate and comply with the ordinance of the City of Burlington (Chapter 195, Housing Standards), will be subject to a fine up to $500.",
+    "doc_date": "2026-02 (Resale Process dated 2-3-26)",
+    "via": "pdf",
+    "verified": true
+   },
+   {
+    "url": "https://www.burlingtonnj.us/wp-content/uploads/2026/02/Resale-Application.pdf",
+    "quote": "RESALE CERTIFICATE OF INSPECTION APPLICATION $100.00 Fee",
+    "doc_date": "2026-07 (file modified July 24, 2026)",
+    "via": "pdf",
+    "verified": true
+   },
+   {
+    "url": "https://www.burlingtonnj.us/code-enforcement/",
+    "quote": "Autumn Harley, Resales Tel: 609-386-0200 ext. 132 Email: Resales@burlingtonnj.us",
+    "doc_date": "",
+    "via": "page",
+    "verified": true
+   }
+  ],
+  "confidence": "high",
+  "notes": "Required by City Ordinance Chapter 195 (Housing Standards), section 195-15A; fees under Chapter 146 (146-15). If the home fails, the buyer can take responsibility for the listed items by signing a notarized Affidavit in Lieu to get a temporary housing conditional certificate before settlement; if the report says no occupancy, the temporary certificate is for work only. Certificates are not transferable and fees are not refundable. The certificate is emailed to the agent about 2 to 3 business days after a passed inspection."
+ },
+ "fire_cert": {
+  "requirements": [
+   "Ten-year sealed battery smoke alarm on each level, in every bedroom and in the basement",
+   "Carbon monoxide alarm within 10 feet of the sleeping areas",
+   "Fire extinguisher 2A-10B:C, under 10 lb, within 10 feet of each kitchen, visible and accessible, on the maker's bracket, top no more than 5 feet above the floor (Resale Process dated February 2026 still requires it)"
+  ],
+  "authorities": [
+   {
+    "name": "City of Burlington Code Enforcement (resale inspection issues the Housing Clear Certificate and the NJ Division of Fire Safety certificate)",
+    "type": "municipal_fire_bureau",
+    "area_served": "Entire city",
+    "lead_time": "At least 30 business days before closing",
+    "fees": [
+     {
+      "label": "Combined resale inspection including smoke/CO/extinguisher (paid once)",
+      "amount": "$100.00",
+      "quote": "The fee for processing/inspection for resale is $100.00.",
+      "source_url": "https://www.burlingtonnj.us/wp-content/uploads/2026/02/RESALE-PROCESS-with-Checklist-2-3-26.pdf",
+      "verified": true
+     },
+     {
+      "label": "Combined re-inspection",
+      "amount": "$75.00",
+      "quote": "Each additional re-inspection will require a fee of $75.00.",
+      "source_url": "https://www.burlingtonnj.us/wp-content/uploads/2026/02/RESALE-PROCESS-with-Checklist-2-3-26.pdf",
+      "verified": true
+     }
+    ],
+    "how_to_apply": "Part of the city Resale Certificate of Inspection application; no separate smoke certificate application.",
+    "application_url": "https://www.burlingtonnj.us/wp-content/uploads/2026/02/Resale-Application.pdf",
+    "department_url": "https://www.burlingtonnj.us/code-enforcement/",
+    "contact_name": "Autumn Harley",
+    "contact_title": "Resales, Code Enforcement",
+    "phone": "609-386-0200 ext. 132",
+    "email": "Resales@burlingtonnj.us",
+    "evidence": [
+     {
+      "url": "https://www.burlingtonnj.us/wp-content/uploads/2026/02/RESALE-PROCESS-with-Checklist-2-3-26.pdf",
+      "quote": "The inspection conducted by City of Burlington is the basis for the issuance of a Housing Clear Certificate & New Jersey Division Fire Safety (NJDFS) Certificate as required by Chapter 195 -15A, City Ordinance.",
+      "doc_date": "2026-02 (Resale Process dated 2-3-26)",
+      "via": "pdf",
+      "verified": true
+     },
+     {
+      "url": "https://nj.gov/dca/dfs/pdf/ANNUAL%20REGISTRY/THIRD%20QUARTER%20LEA%20REGISTRY%202026.pdf",
+      "quote": "M Burlington City",
+      "doc_date": "2026-07",
+      "via": "pdf",
+      "verified": true
+     },
+     {
+      "url": "https://www.burlingtonnj.us/division-of-fire-prevention/",
+      "quote": "Corey Towner, Fire Official Tel: 609-386-0200 ext. 171 Email: CTowner@burlingtonnj.us",
+      "doc_date": "",
+      "via": "page",
+      "verified": true
+     },
+     {
+      "url": "https://www.nj.gov/dca/dfs/pdf/fire%20directory_county%20summary/fire_code_enforcement_director.pdf",
+      "quote": "03 Burlington Burlington City0305 LEAID: 0305-001 Enf Auth. Municipal Fire Official Corey Towner Phone (609) 386-0200 Email ctowner@burlingtonnj.us Burlington City Fire Prev",
+      "doc_date": "2026-08-13 (survey date)",
+      "via": "state_directory",
+      "verified": true
+     }
+    ],
+    "confidence": "high"
+   }
+  ],
+  "notes": "Burlington City is its own fire code enforcing agency (municipal). The Division of Fire Prevention (Fire Official Corey Towner, 609-386-0200 ext. 171, CTowner@burlingtonnj.us) inspects commercial occupancies and runs a smoke detector program for low income and senior housing; the DCA directory lists 'Burlington City Fire Prev' under smoke detector compliance. For home sales, the city's Resale Process says the Code Enforcement resale inspection is the basis for both the Housing Clear Certificate and the NJ Division of Fire Safety certificate, so there is one application and one fee. The city still lists the extinguisher although P.L.2025, c.19 (February 3, 2025) removed it from the state rule."
+ },
+ "other_items": [
+  {
+   "label": "Open permits",
+   "detail": "All open construction permits must be closed out with the Construction Office, and any work needing permits must pass permit inspection, before the city issues the final clear housing certificate.",
+   "source_url": "https://www.burlingtonnj.us/wp-content/uploads/2026/02/RESALE-PROCESS-with-Checklist-2-3-26.pdf"
+  },
+  {
+   "label": "Permits for water heaters and HVAC",
+   "detail": "The application asks that permits be pulled and closed for all water heaters, HVAC equipment and any other work before the inspection.",
+   "source_url": "https://www.burlingtonnj.us/wp-content/uploads/2026/02/Resale-Application.pdf"
+  },
+  {
+   "label": "Chimney certification",
+   "detail": "Needed for fossil fuel burning fireplaces and appliances.",
+   "source_url": "https://www.burlingtonnj.us/wp-content/uploads/2025/01/Resale-Checklist.pdf"
+  }
+ ],
+ "open_questions": [
+  "Confirm whether the city still requires the fire extinguisher after P.L.2025, c.19."
+ ],
+ "verification": {
+  "fees": 5,
+  "fee_ok": 5,
+  "fee_bad": 0,
+  "fee_unchecked": 0,
+  "quotes": 11,
+  "q_ok": 11,
+  "q_bad": 0,
+  "q_unchecked": 0
+ }
+}

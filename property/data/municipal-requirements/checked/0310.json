@@ -1,0 +1,169 @@
+{
+ "municipality_code": "0310",
+ "municipality": "Delran Township",
+ "county": "BURLINGTON",
+ "checked_at": "2026-09-30",
+ "resale_co": {
+  "status": "not_required",
+  "name": "",
+  "issued_by": "",
+  "lead_time": "",
+  "valid_for": "",
+  "requirements": [],
+  "fees": [],
+  "how_to_apply": "The Township's Construction Office page tells sellers that the Fire District Office handles resale inspections; no separate township resale certificate is described. See the fire certificate section.",
+  "application_url": "",
+  "department_url": "https://delrantownship.org/construction-office/",
+  "phone": "856-461-8667",
+  "email": "constructioninspections@delrantownship.org",
+  "contact_name": "Bill Lunemann",
+  "contact_title": "Construction Official",
+  "evidence": [
+   {
+    "url": "https://delrantownship.org/construction-office/",
+    "quote": "Selling Your House? The Fire District Office handles inspections for resale. You will need to have your house inspected before you go to settlement;",
+    "doc_date": "",
+    "via": "page",
+    "verified": true
+   },
+   {
+    "url": "https://delrantownship.org/fire-department/",
+    "quote": "Selling your house? You will need to have your house inspected before you go to settlement,",
+    "doc_date": "",
+    "via": "page",
+    "verified": true
+   },
+   {
+    "url": "https://delrantownship.org/construction-office/",
+    "quote": "Bill Lunemann Construction Official Director of Construction Department",
+    "doc_date": "",
+    "via": "page",
+    "verified": true
+   }
+  ],
+  "confidence": "medium",
+  "notes": "The Township does not say in so many words that no CO is needed, but its Construction Office page answers 'Selling Your House?' by sending sellers only to the Fire District Office for the resale (smoke/CO) inspection. The Construction Office also posts the generic state UCC 'Application for Certificate' (form F270, rev. 6/2003, marked 'Cost: $150.00', with boxes for CO, CCO, lead clearance and temporary CO); it is for construction permits and change of use, not described as a resale requirement. The Township code (ecode360 DE1570) could not be opened. Status would change to required if the code shows a resale CCO ordinance."
+ },
+ "fire_cert": {
+  "requirements": [
+   "Older homes need 10-year sealed battery smoke alarms (or AC powered alarms) on each level and outside sleeping areas",
+   "Homes built with hardwired, battery backup, interconnected alarms (for example Summer Hill, Forest Hill, Waters Edge, The Grande, the Orchard) must keep them on each level and in each bedroom, and they must be less than 10 years old",
+   "Carbon monoxide detectors must be less than 5 years old (check the manufacture or replace-by date) and installed outside each sleeping area",
+   "All smoke and CO detectors must be UL listed",
+   "House number: Arabic numerals, contrasting color, at least 3 inches tall, at least 30 inches above ground, visible from the street (Township Code Chapter 95)",
+   "The current form (February 2025) does not list a portable fire extinguisher"
+  ],
+  "authorities": [
+   {
+    "name": "Delran Township Fire District No. 1, Bureau of Fire Prevention (Local Enforcing Agency)",
+    "type": "fire_district",
+    "area_served": "Entire township",
+    "lead_time": "Apply more than 10 business days (excluding holidays) before the change of occupant for the lowest fee. Payment is due before the inspection.",
+    "fees": [
+     {
+      "label": "Request received more than 10 business days before closing",
+      "amount": "$45.00",
+      "quote": "Requests for inspection received more than 10 business days excluding holidays prior to the change of occupant: $45.00",
+      "source_url": "https://www.delranfire.org/content/forms/file/APPLICATION%20FOR%20SD%20INSPECTION%202025.pdf",
+      "verified": true
+     },
+     {
+      "label": "Request received 4 to 10 business days before closing",
+      "amount": "$90.00",
+      "quote": "Requests for inspection received four to 10 business days excluding holidays prior to the change of occupant: $90.00",
+      "source_url": "https://www.delranfire.org/content/forms/file/APPLICATION%20FOR%20SD%20INSPECTION%202025.pdf",
+      "verified": true
+     },
+     {
+      "label": "Request received fewer than 4 business days before closing",
+      "amount": "$161.00",
+      "quote": "Requests for inspection received fewer than four business days excluding holidays prior to the change of occupant: $161.00",
+      "source_url": "https://www.delranfire.org/content/forms/file/APPLICATION%20FOR%20SD%20INSPECTION%202025.pdf",
+      "verified": true
+     }
+    ],
+    "how_to_apply": "Fill out the Application for Inspection (Smoke Detector and CO Detector) and email it to LEA@delranfire.org or drop it off at the Fire District office in the Municipal Building, 900 S. Chester Avenue, Delran. Pay before the inspection by check payable to Delran Fire District #1 or online (list the inspection address as the invoice number).",
+    "application_url": "https://www.delranfire.org/content/forms/file/APPLICATION%20FOR%20SD%20INSPECTION%202025.pdf",
+    "department_url": "https://www.delranfire.org/content/prevention",
+    "phone": "856-461-5474",
+    "email": "LEA@delranfire.org",
+    "contact_name": "Joseph Cunningham Jr.",
+    "contact_title": "Fire Marshal / Fire Official",
+    "evidence": [
+     {
+      "url": "https://www.delranfire.org/content/forms/file/APPLICATION%20FOR%20SD%20INSPECTION%202025.pdf",
+      "quote": "N.J. State Fire Code N.J.A.C. 5:70-2.3 requires the inspection of One & Two Family Dwellings and R-2 Occupancies for smoke detectors and carbon monoxide detectors before it is sold or leased.",
+      "doc_date": "2025-02",
+      "via": "pdf",
+      "verified": true
+     },
+     {
+      "url": "https://www.delranfire.org/content/forms/file/APPLICATION%20FOR%20SD%20INSPECTION%202025.pdf",
+      "quote": "MAKE CHECK PAYABLE TO DELRAN FIRE DISTRICT #1 OR PAY ONLINE ON OUR WEBSITE",
+      "doc_date": "2025-02",
+      "via": "pdf",
+      "verified": true
+     },
+     {
+      "url": "https://www.delranfire.org/content/prevention",
+      "quote": "Fire Marshal Joseph Cunningham Jr.",
+      "doc_date": "",
+      "via": "page",
+      "verified": true
+     },
+     {
+      "url": "https://www.delranfire.org/content/prevention",
+      "quote": "Please contact our office anytime at (856) 461-5474 or by email at LEA@delranfire.org",
+      "doc_date": "",
+      "via": "page",
+      "verified": true
+     },
+     {
+      "url": "https://www.delranfire.org/content/payment",
+      "quote": "When making the payment please list the address of the inspection as the invoice number.",
+      "doc_date": "",
+      "via": "page",
+      "verified": true
+     },
+     {
+      "url": "https://delrantownship.org/fire-department/",
+      "quote": "The Bureau of Fire Prevention and the Local Enforcement Agency are also part of Delran Township Fire District #1. These agencies are headed up by Fire Official Joseph Cunningham, Jr.",
+      "doc_date": "",
+      "via": "page",
+      "verified": true
+     },
+     {
+      "url": "https://www.nj.gov/dca/dfs/pdf/fire%20directory_county%20summary/fire_code_enforcement_director.pdf",
+      "quote": "Fire Official Joseph Cunningham, Jr",
+      "doc_date": "2026-03",
+      "via": "state_directory",
+      "verified": true
+     },
+     {
+      "url": "https://nj.gov/dca/dfs/pdf/ANNUAL%20REGISTRY/THIRD%20QUARTER%20LEA%20REGISTRY%202026.pdf",
+      "quote": "D Delran Township",
+      "doc_date": "2026-07",
+      "via": "pdf",
+      "verified": true
+     }
+    ],
+    "confidence": "high"
+   }
+  ],
+  "notes": "The fire district's form is marked 'Updated February 2025'. The Township website links an older copy marked 'Updated March 2024' (https://delrantownship.org/wp-content/uploads/2025/03/APPLICATION-FOR-SD-INSPECTION-2025-1.pdf) with the same fees and rules. Online payment: https://heartlandpaymentservices.net/webpayments/DelranTownshipFireDistrict1/bills. The state directory (survey 3/5/2026) lists the fire official's phone as (856) 577-1077 and email joseph.cunninghamjr@delranfire.org; the district's own pages give the office line 856-461-5474 and LEA@delranfire.org, which are used here. A time extension application is also posted on the district Forms page."
+ },
+ "other_items": [],
+ "open_questions": [
+  "Township code (ecode360 DE1570) could not be checked for any resale CCO ordinance; the Township website only sends sellers to the fire district."
+ ],
+ "verification": {
+  "fees": 3,
+  "fee_ok": 3,
+  "fee_bad": 0,
+  "fee_unchecked": 0,
+  "quotes": 11,
+  "q_ok": 11,
+  "q_bad": 0,
+  "q_unchecked": 0
+ }
+}

@@ -1,0 +1,216 @@
+{
+ "municipality_code": "0327",
+ "municipality": "Palmyra Borough",
+ "county": "BURLINGTON",
+ "checked_at": "2026-09-30",
+ "resale_co": {
+  "status": "required",
+  "name": "Certificate of Occupancy (resale Housing Code inspection)",
+  "issued_by": "Borough of Palmyra Department of Housing (Housing Official)",
+  "contact_name": "Tracy Kilmer",
+  "contact_title": "Housing Official (also Fire Marshal)",
+  "lead_time": "Fee must be paid before the inspection is scheduled. Allow 48 hours after the inspection for the report.",
+  "valid_for": "",
+  "requirements": [
+   "Review of required permits along with the inspection",
+   "Interior: structural members, interior surfaces, lead-based paint, stairs, railings (including attic and basement), handrails and guards",
+   "Anti-tip bracket on the oven",
+   "Exterior: paint, street numbers (Arabic numerals at least 3 inches high), foundation, walls, roof, gutters and downspouts, chimneys, porches, decks and stairs (sidewalks not inspected)",
+   "Windows open and stay open; no broken glass; insect screens; deadbolt locks on doors; basement hatch and basement window guards",
+   "Yard: sanitation, grading and drainage, weeds under 6 inches, no rodent harborage, no unregistered or junk vehicles, firewood stored off the ground, fences in good condition",
+   "Plumbing fixtures, water heater, exhaust fan and drainage in working order",
+   "Heat, HVAC, washer and dryer, flue and combustion air; electrical hazards, GFCI outlets where required, covers and switch plates, no open junction boxes",
+   "Borough green trash carts; no rubbish, no infestation",
+   "Means of egress, locked doors, emergency escape",
+   "Smoke detectors on each level including basement and walk-up attic, outside each sleeping area within 10 feet, not in the kitchen; 10-year sealed lithium battery type",
+   "CO detectors within 10 feet of sleeping areas",
+   "One 2A:10BC fire extinguisher in the kitchen (not mounted), bought within a year with receipt or tagged (checklist dated January 2022)"
+  ],
+  "fees": [
+   {
+    "label": "Resale inspection for Certificate of Occupancy, per unit",
+    "amount": "$125.00",
+    "quote": "A fee of $125.00 payable to the Borough of Palmyra is due before scheduling the inspection.",
+    "source_url": "https://boroughofpalmyra.com/Documents/Government/Forms/Resale-Inspection-App.pdf?t=202502101114010",
+    "verified": true
+   },
+   {
+    "label": "Per unit (separate application for each unit)",
+    "amount": "$125",
+    "quote": "(Fee is $125 per/unit and a separate application is required for each unit)",
+    "source_url": "https://boroughofpalmyra.com/Documents/Government/Forms/Resale-Inspection-App.pdf?t=202502101114010",
+    "verified": true
+   },
+   {
+    "label": "Certificate of Occupancy inspection on home resale (Borough web page)",
+    "amount": "$125.00",
+    "quote": "Effective April 1, 2014, Certificate of Occupancy inspections (on existing home re-sales) are now required. That fee is also $125.00.",
+    "source_url": "https://boroughofpalmyra.com/government/rental_unit_certificate_of_occupancy.php",
+    "verified": true
+   }
+  ],
+  "how_to_apply": "Fill out the Resale Inspection Application for Certificate of Occupancy (one per unit) and turn it in at Borough Hall, 20 W. Broad Street, with the $125.00 fee payable to the Borough of Palmyra (check or cash). Then call (856) 829-1096 to schedule. Palmyra Harbour condominiums use a separate application.",
+  "application_url": "https://boroughofpalmyra.com/Documents/Government/Forms/Resale-Inspection-App.pdf?t=202502101114010",
+  "department_url": "https://boroughofpalmyra.com/government/rental_unit_certificate_of_occupancy.php",
+  "phone": "856-829-1096",
+  "email": "tkilmer@boroughofpalmyra.com",
+  "evidence": [
+   {
+    "url": "https://boroughofpalmyra.com/government/rental_unit_certificate_of_occupancy.php",
+    "quote": "Attention Homeowners: thinking of selling your home? Effective April 1, 2014, Certificate of Occupancy inspections (on existing home re-sales) are now required.",
+    "doc_date": "2026-09",
+    "via": "page",
+    "verified": true
+   },
+   {
+    "url": "https://boroughofpalmyra.com/government/rental_unit_certificate_of_occupancy.php",
+    "quote": "Please register your rental unit with Housing Official Tracy Kilmer and submit your Certificate of Occupancy Application to Housing Official Tracy Kilmer.",
+    "doc_date": "2026-09",
+    "via": "page",
+    "verified": true
+   },
+   {
+    "url": "https://boroughofpalmyra.com/departments/code_enforcement.php",
+    "quote": "To schedule a rental property or Certificate of Occupancy inspection (on existing home re-sales) please call (856) 829-1096.",
+    "doc_date": "2026-09",
+    "via": "page",
+    "verified": true
+   },
+   {
+    "url": "https://boroughofpalmyra.com/Documents/Government/Forms/Resale-Inspection-App.pdf?t=202502101114010",
+    "quote": "This memo shall serve as a request for a Housing Code Inspection regarding the above referenced property for sale.",
+    "doc_date": "2022-06",
+    "via": "pdf",
+    "verified": true
+   },
+   {
+    "url": "https://boroughofpalmyra.com/Documents/Government/Forms/Resale-Inspection-App.pdf?t=202502101114010",
+    "quote": "BOROUGH OF PALMYRA Department of Housing 20 W. Broad Street Palmyra, NJ 08065 Phone: 856-829-1096 Email: tkilmer@boroughofpalmyra.com",
+    "doc_date": "2022-06",
+    "via": "pdf",
+    "verified": true
+   },
+   {
+    "url": "https://boroughofpalmyra.com/Documents/Government/Forms/Resale-Inspection-App.pdf?t=202502101114010",
+    "quote": "NOTE: PLEASE ALLOW 48 HOURS FOR INSPECTION REPORT RESULTS TO BE AVAILABLE.",
+    "doc_date": "2022-06",
+    "via": "pdf",
+    "verified": true
+   },
+   {
+    "url": "https://boroughofpalmyra.com/Documents/Government/Forms/CO-Checklist-2022.pdf?t=202502101113570",
+    "quote": "IN ADDITION TO THE INSPECTION A REVIEW OF REQUIRED PERMITS WILL BE COMPLETED.",
+    "doc_date": "2022-01",
+    "via": "pdf",
+    "verified": true
+   }
+  ],
+  "confidence": "high",
+  "notes": "Palmyra requires a Certificate of Occupancy (Housing Code) inspection on every home resale since April 1, 2014. The application PDF was created June 2022 and the checklist is REV DATE 01/20/2022; the $125 fee matches the current Borough web page. The same inspection checklist covers home resales and rental tenant turnover. The web page says to turn completed applications in at Borough Hall with the fee; the code enforcement page says to call (856) 829-1096 to schedule. The checklist's fire safety section (smoke, CO and a kitchen fire extinguisher) is part of this Borough inspection. Validity period and how far before closing to apply are not published. Borough code chapters 142 (Housing Standards) and 203 (Property Maintenance) on ecode360 were not read."
+ },
+ "fire_cert": {
+  "requirements": [
+   "Smoke detectors over 10 years old will not pass",
+   "Resale/rental smoke alarms must be 10-year sealed battery single station units (hardwired systems must work; interconnected and hardwired detectors are checked against the maker's life span)",
+   "Smoke alarm on each level; smoke and CO detector outside each sleeping area; none in the kitchen",
+   "Third floor or attic with walk-up steps needs a smoke and CO detector, used or not",
+   "One ABC 2A:10B:C portable fire extinguisher in the kitchen, tagged by a fire service company within the year or with a receipt showing purchase within a year; need not be mounted (Fire Marshal page, undated; checklist January 2022)"
+  ],
+  "authorities": [
+   {
+    "name": "Palmyra Bureau of Fire Prevention (Borough Fire Marshal)",
+    "type": "municipal_fire_bureau",
+    "area_served": "Entire borough",
+    "contact_name": "Tracy Kilmer",
+    "contact_title": "Fire Marshal (also Housing Official and Fire Sub Code Official)",
+    "lead_time": "",
+    "fees": [],
+    "how_to_apply": "The Fire Marshal page sends resale smoke detector inspections to the housing (rental and resale) page. Apply through the Borough's resale Certificate of Occupancy process: application and fee to Borough Hall, then call (856) 829-1096 to schedule. No separate smoke certificate fee is published.",
+    "application_url": "https://boroughofpalmyra.com/Documents/Government/Forms/Resale-Inspection-App.pdf?t=202502101114010",
+    "department_url": "https://boroughofpalmyra.com/departments/fire_marshal.php",
+    "phone": "(856) 829-1096",
+    "email": "tkilmer@boroughofpalmyra.com",
+    "evidence": [
+     {
+      "url": "https://boroughofpalmyra.com/departments/fire_marshal.php",
+      "quote": "SMOKE DETECTOR INSPECTIONS FOR RESALE OR CHANGE OF OCCUPANCY: Please Visit the housing page for rental and resale information.",
+      "doc_date": "2026-09",
+      "via": "page",
+      "verified": true
+     },
+     {
+      "url": "https://boroughofpalmyra.com/departments/fire_marshal.php",
+      "quote": "The Bureau operates under the Fire Marshal Tracy Kilmer.",
+      "doc_date": "2026-09",
+      "via": "page",
+      "verified": true
+     },
+     {
+      "url": "https://boroughofpalmyra.com/departments/fire_marshal.php",
+      "quote": "SMOKE DETECTORS WILL NOT PASS INSPECTION IF OVER 10 YEARS OF AGE!",
+      "doc_date": "2026-09",
+      "via": "page",
+      "verified": true
+     },
+     {
+      "url": "https://boroughofpalmyra.com/Documents/Government/Forms/NEW-JERSEY-STATE-FIRE-CODE-UPDATE.pdf?t=202502101114000",
+      "quote": "In one- and two-family or attached single family dwellings subject to the requirements of N.J.A.C. 5:70- 2.3, (inspection for rental or resale) smoke alarms shall be installed with a ten-year sealed battery- powered single station smoke alarm.",
+      "doc_date": "2019-01",
+      "via": "pdf",
+      "verified": true
+     },
+     {
+      "url": "https://nj.gov/dca/dfs/pdf/ANNUAL%20REGISTRY/THIRD%20QUARTER%20LEA%20REGISTRY%202026.pdf",
+      "quote": "M Palmyra Borough",
+      "doc_date": "2026-07",
+      "via": "pdf",
+      "verified": true
+     },
+     {
+      "url": "https://www.nj.gov/dca/dfs/pdf/fire%20directory_county%20summary/fire_code_enforcement_director.pdf",
+      "quote": "Fire Official Tracy L Kilmer Phone (856) 829-1096 Addr: 20 W Broad St",
+      "doc_date": "2023-01",
+      "via": "state_directory",
+      "verified": true
+     },
+     {
+      "url": "https://www.nj.gov/dca/dfs/pdf/fire%20directory_county%20summary/fire_code_enforcement_director.pdf",
+      "quote": "Email tkilmer@boroughofpalmyra.com",
+      "doc_date": "2023-01",
+      "via": "state_directory",
+      "verified": true
+     }
+    ],
+    "confidence": "medium"
+   }
+  ],
+  "notes": "Palmyra Borough is its own fire code enforcing agency (M in the DCA LEA registry, July 2026). Tracy Kilmer is both Fire Marshal and Housing Official, and the Fire Marshal page sends resale smoke inspections to the housing/resale page, so the smoke/CO/extinguisher check appears to be done within the $125 resale CO inspection; the Borough does not say this outright and no separate smoke certificate fee is published. The fire extinguisher is still listed on the Fire Marshal page (undated) and the January 2022 checklist, even though P.L.2025, c.19 (February 2025) removed it from the state requirement; ask the office whether it is still enforced. The state directory page for Palmyra is from a January 2023 survey."
+ },
+ "other_items": [
+  {
+   "label": "Flood risk disclosure",
+   "detail": "The Borough's 'Resale/Rental Additional Requirements' form: since March 20, 2024 sellers must give the buyer the flood risk information (Property Condition Disclosure Statement: Flood Risk Notice, N.J.S.A. 46:8-50) before the buyer is bound by the contract.",
+   "source_url": "https://boroughofpalmyra.com/Documents/Departments/Housing/PALMYRA%20RESALE%20SALES%20REQUIREMENT%20NOW%20IN%20EFFECT.pdf?t=202510301622000"
+  },
+  {
+   "label": "Open permits",
+   "detail": "A review of required permits is done with the CO inspection.",
+   "source_url": "https://boroughofpalmyra.com/Documents/Government/Forms/CO-Checklist-2022.pdf?t=202502101113570"
+  }
+ ],
+ "open_questions": [
+  "Whether the $125 CO inspection includes the smoke/CO certificate or a separate fire fee is charged.",
+  "Whether the kitchen fire extinguisher is still required after P.L.2025, c.19.",
+  "Lead time and validity period of the resale CO."
+ ],
+ "verification": {
+  "fees": 3,
+  "fee_ok": 3,
+  "fee_bad": 0,
+  "fee_unchecked": 0,
+  "quotes": 14,
+  "q_ok": 14,
+  "q_bad": 0,
+  "q_unchecked": 0
+ }
+}

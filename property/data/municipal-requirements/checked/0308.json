@@ -1,0 +1,170 @@
+{
+ "municipality_code": "0308",
+ "municipality": "Cinnaminson Township",
+ "county": "BURLINGTON",
+ "checked_at": "2026-09-30",
+ "resale_co": {
+  "status": "not_required",
+  "name": "",
+  "issued_by": "",
+  "lead_time": "",
+  "valid_for": "",
+  "requirements": [],
+  "fees": [],
+  "how_to_apply": "No town resale CO is needed. The Township says to contact the Cinnaminson Sewerage Authority (856-829-5287) for the sewer compliance inspection and the Fire District (856-829-5220) for the smoke and CO alarm inspection.",
+  "application_url": "",
+  "department_url": "https://cinnaminsonnj.org/office-of-community-and-economic-development/",
+  "phone": "856-829-6000 ext. 2379",
+  "email": "",
+  "contact_name": "",
+  "contact_title": "Code Enforcement Officer",
+  "evidence": [
+   {
+    "url": "https://cinnaminsonnj.org/office-of-community-and-economic-development/",
+    "quote": "Do I need a Certificate of Occupancy Inspection to sell my home? No, Cinnaminson Township does not require CO inspections for resale of a residential home. They do require an inspection from the Sewerage Authority (856)829-5287 and the Fire District (856)829-5220. Please contact them directly for scheduling and fees.",
+    "doc_date": "",
+    "via": "page",
+    "verified": true
+   },
+   {
+    "url": "https://cinnaminsonnj.org/office-of-community-and-economic-development/",
+    "quote": "The Code Enforcement Officer investigates reported violations of Chapter 405. He can be reached at 856-829-6000 ext. 2379.",
+    "doc_date": "",
+    "via": "page",
+    "verified": true
+   }
+  ],
+  "confidence": "high",
+  "notes": "Statement is in the Code Enforcement and Zoning FAQ on the Office of Community and Economic Development page. The Code Enforcement Officer is not named on that page. The Township code (ecode360 CI0302) could not be opened."
+ },
+ "fire_cert": {
+  "requirements": [
+   "Battery smoke alarms must be 10-year sealed lithium battery units",
+   "Smoke alarms cannot be older than 10 years from the manufacture date",
+   "Smoke alarms on each level and outside each sleeping area; hardwired alarms must stay hardwired with battery backup and cannot be swapped for battery units",
+   "CO alarm near all sleeping areas (within 10 feet of all bedrooms) if there are fuel burning appliances or an attached garage",
+   "The district's current forms still list a portable fire extinguisher: at least 2-A:10-B:C, no more than 10 pounds, within 10 feet of the kitchen in the path of exit, not next to the stove, mounted on the maker's bracket with the top no more than 5 feet above the floor, with the manual left for the buyer, and a service tag from a state-certified contractor within 12 months or a purchase receipt under 12 months old",
+   "House numbers visible from the street: Arabic numerals, contrasting color, at least 3 inches tall, mounted at least 30 inches above grade",
+   "Owner or representative 18 or older must be present at the inspection"
+  ],
+  "authorities": [
+   {
+    "name": "Cinnaminson Fire District No. 1, Fire Marshal's Office (Bureau of Fire Prevention)",
+    "type": "fire_district",
+    "area_served": "Entire township (the same office also serves Beverly City under a shared service agreement)",
+    "lead_time": "At least one week advance notice to schedule the inspection",
+    "fees": [
+     {
+      "label": "Initial inspection",
+      "amount": "$80.00",
+      "quote": "Cinnaminson Initial Inspection $80.00",
+      "source_url": "https://cinnafire.org/fire-marshal/application-for-home-inspection/",
+      "verified": true
+     },
+     {
+      "label": "Re-inspection",
+      "amount": "$55.00",
+      "quote": "Cinnaminson Re-Inspection $55.00",
+      "source_url": "https://cinnafire.org/fire-marshal/application-for-home-inspection/",
+      "verified": true
+     },
+     {
+      "label": "Missed appointment",
+      "amount": "$45.00",
+      "quote": "Missed appointment $45.00",
+      "source_url": "https://cinnafire.org/fire-marshal/application-for-home-inspection/",
+      "verified": true
+     },
+     {
+      "label": "Senior citizen discount (ID required)",
+      "amount": "$10.00",
+      "quote": "Cinnaminson Senior Discount $10.00 (Must provide ID)",
+      "source_url": "https://cinnafire.org/fire-marshal/application-for-home-inspection/",
+      "verified": true
+     }
+    ],
+    "how_to_apply": "Submit the online Application for Home Inspection on the fire department website (property address, block and lot, seller and agent contacts, settlement date). Pay by check or money order payable to Cinnaminson Fire District, or through the district's online payment link. Give at least one week notice.",
+    "application_url": "https://cinnafire.org/fire-marshal/application-for-home-inspection/",
+    "department_url": "https://cinnafire.org/fire-marshal/home-inspection-information/",
+    "phone": "856-829-5220",
+    "email": "jnickum@cinnaminsonfire.org",
+    "contact_name": "Jesse Nickum",
+    "contact_title": "Fire Marshal (Lieutenant)",
+    "evidence": [
+     {
+      "url": "https://cinnafire.org/fire-marshal/home-inspection-information/",
+      "quote": "The New Jersey Fire Code requires that whenever a home is being sold, or a rental unit changes occupant, that a Certificate of Smoke and Carbon Monoxide Detector Compliance be obtained from the local fire code enforcing agency, which in Cinnaminson is the Cinnaminson Fire Marshal's Office.",
+      "doc_date": "2024-11",
+      "via": "page",
+      "verified": true
+     },
+     {
+      "url": "https://cinnafire.org/fire-marshal/home-inspection-information/",
+      "quote": "A minimum of one-week advanced notice is required to schedule an inspection",
+      "doc_date": "2024-11",
+      "via": "page",
+      "verified": true
+     },
+     {
+      "url": "https://cinnafire.org/fire-marshal/application-for-home-inspection/",
+      "quote": "MAKE CHECK/MONEY ORDER PAYABLE TO: CINNAMINSON FIRE DISTRICT",
+      "doc_date": "2026-09",
+      "via": "page",
+      "verified": true
+     },
+     {
+      "url": "https://cinnafire.org/cfd/staff/",
+      "quote": "Fire Prevention Fire Marshal Lieutenant Jesse Nickum",
+      "doc_date": "",
+      "via": "page",
+      "verified": true
+     },
+     {
+      "url": "https://www.nj.gov/dca/dfs/pdf/fire%20directory_county%20summary/fire_code_enforcement_director.pdf",
+      "quote": "Fire Official Jesse Nickum",
+      "doc_date": "2026-01",
+      "via": "state_directory",
+      "verified": true
+     },
+     {
+      "url": "https://www.nj.gov/dca/dfs/pdf/fire%20directory_county%20summary/fire_code_enforcement_director.pdf",
+      "quote": "Email jnickum@cinnaminsonfire.org",
+      "doc_date": "2026-01",
+      "via": "state_directory",
+      "verified": true
+     },
+     {
+      "url": "https://nj.gov/dca/dfs/pdf/ANNUAL%20REGISTRY/THIRD%20QUARTER%20LEA%20REGISTRY%202026.pdf",
+      "quote": "D Cinnaminson Township",
+      "doc_date": "2026-07",
+      "via": "pdf",
+      "verified": true
+     }
+    ],
+    "confidence": "high"
+   }
+  ],
+  "notes": "The DCA Q3 2026 registry lists Cinnaminson as a fire district (D) enforcing agency and says Cinnaminson Township is the LEA for Beverly City. The information page (last modified November 2024) and the application form (last modified September 2026) both still require a portable fire extinguisher, even though P.L.2025, c.19 removed it from the state baseline. The information page lists the same fees (Initial $80.00, Re-Inspection $55.00, Missed Appointment $45.00, Senior discount $10.00) and warns of a $500 to $2,500 penalty for not getting the certificate. The fire marshal's email comes from the state fire directory (survey dated 1/12/2026); the district site gives only the office phone. Online payment link: https://heartlandpaymentservices.net/webpayments/CinnaminsonFireDistrict1"
+ },
+ "other_items": [
+  {
+   "label": "Sewer compliance inspection (Cinnaminson Sewerage Authority)",
+   "detail": "All properties require a sewer compliance inspection before settlement. Call 856-829-5287 to schedule. Title companies can submit the online form to get the open balance and recommended escrow. The inspection fee is collected at the time of inspection; the amount is not published.",
+   "source_url": "https://cinnaminsonsewerage.org/title-companies/"
+  }
+ ],
+ "open_questions": [
+  "The Sewerage Authority does not publish the compliance inspection fee.",
+  "The Township page does not name the Code Enforcement Officer."
+ ],
+ "verification": {
+  "fees": 4,
+  "fee_ok": 4,
+  "fee_bad": 0,
+  "fee_unchecked": 0,
+  "quotes": 9,
+  "q_ok": 9,
+  "q_bad": 0,
+  "q_unchecked": 0
+ }
+}

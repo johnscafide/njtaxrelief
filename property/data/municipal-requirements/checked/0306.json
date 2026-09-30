@@ -1,0 +1,235 @@
+{
+ "municipality_code": "0306",
+ "municipality": "Burlington Township",
+ "county": "BURLINGTON",
+ "checked_at": "2026-09-30",
+ "resale_co": {
+  "status": "required",
+  "name": "Certificate of Continued Occupancy (resale housing inspection)",
+  "issued_by": "Burlington Township Licenses & Inspections (Housing Inspector)",
+  "lead_time": "No minimum lead time published; an expedited inspection within 5 days of the request costs $200.",
+  "valid_for": "60 days from issuance",
+  "requirements": [
+   "Smoke detector on each level",
+   "Carbon monoxide detector in the hallway outside the bedrooms, within 10 feet of each bedroom (one per hallway on each bedroom floor)",
+   "Fire extinguisher 2A 10 BC mounted no higher than 5 feet, within 10 feet of the kitchen",
+   "All windows open, close and lock; screens on windows and patio doors without rips",
+   "Outlets grounded; GFCI outlets working near water sources",
+   "Toilets flush properly, no leaks under sinks",
+   "Oven and stove working with an anti-tilt bracket",
+   "Overflow pipe on the water heater",
+   "Heater certification and chimney certification before the CO is issued",
+   "Railings for 4 or more steps or 30 inches and above",
+   "House number on the home; exterior maintained",
+   "No active, open or unpaid permits"
+  ],
+  "fees": [
+   {
+    "label": "Resale inspection, single family house, townhouse or condo",
+    "amount": "$100.00",
+    "quote": "Resale property inspection fees are as follows: Inspection Fee Re-Inspection Fee Single Family Houses $100.00 $50.00",
+    "source_url": "https://www.twp.burlington.nj.us/filestorage/279/714/753/CO_Inspection_Fees.pdf",
+    "verified": true
+   },
+   {
+    "label": "Resale re-inspection, single family house, townhouse or condo",
+    "amount": "$50.00",
+    "quote": "Resale property inspection fees are as follows: Inspection Fee Re-Inspection Fee Single Family Houses $100.00 $50.00",
+    "source_url": "https://www.twp.burlington.nj.us/filestorage/279/714/753/CO_Inspection_Fees.pdf",
+    "verified": true
+   },
+   {
+    "label": "Resale inspection, low-mod (affordable housing) unit",
+    "amount": "$50.00",
+    "quote": "Low-Mod Units $50.00 $20.00",
+    "source_url": "https://www.twp.burlington.nj.us/filestorage/279/714/753/CO_Inspection_Fees.pdf",
+    "verified": true
+   },
+   {
+    "label": "Resale re-inspection, low-mod (affordable housing) unit",
+    "amount": "$20.00",
+    "quote": "Low-Mod Units $50.00 $20.00",
+    "source_url": "https://www.twp.burlington.nj.us/filestorage/279/714/753/CO_Inspection_Fees.pdf",
+    "verified": true
+   },
+   {
+    "label": "Expedited inspection (within 5 days of request)",
+    "amount": "$200.00",
+    "quote": "Expedited inspection fee (inspection performed within 5 days of request)-$200.00",
+    "source_url": "https://www.twp.burlington.nj.us/filestorage/279/714/753/CO_Inspection_Fees.pdf",
+    "verified": true
+   }
+  ],
+  "how_to_apply": "Fill out the Housing Inspection Request (listed as Residential CO Application on the Licenses & Inspections page) and return it to Caitlyn Bryant or Anthony Trappanese by email to HousingInspection@twp.burlington.nj.us or fax 609-239-6293. Licenses & Inspections is at 851 Old York Road.",
+  "application_url": "https://www.twp.burlington.nj.us/filestorage/279/714/753/HousingInspectionRequestForm.pdf",
+  "department_url": "https://www.twp.burlington.nj.us/licenses-and-inspections/",
+  "contact_name": "Anthony Trappanese",
+  "contact_title": "Housing Inspector/Zoning Officer/Property Maintenance Inspector",
+  "phone": "609-239-5845",
+  "email": "HousingInspection@twp.burlington.nj.us",
+  "evidence": [
+   {
+    "url": "https://www.twp.burlington.nj.us/licenses-and-inspections/",
+    "quote": "Housing/Rental/Apartment Inspections are to provide minimum, reasonable standards before the occupancy of a home/apartment",
+    "doc_date": "",
+    "via": "page",
+    "verified": true
+   },
+   {
+    "url": "https://www.twp.burlington.nj.us/filestorage/279/714/753/CO_Inspection_Fees.pdf",
+    "quote": "Certificate of Occupancy is valid for 60 days after date of issuance.",
+    "doc_date": "2023-10 (fees updated 10/2023, uploaded 12/21/2023)",
+    "via": "pdf",
+    "verified": true
+   },
+   {
+    "url": "https://www.twp.burlington.nj.us/filestorage/279/714/753/CO_Inspection_Fees.pdf",
+    "quote": "Heater certifications and Chimney certifications are required on all Single Family, Townhouses, and Condo Re-sale and Rental properties, prior to issuance of Certificate of Occupancy.",
+    "doc_date": "2023-10 (fees updated 10/2023, uploaded 12/21/2023)",
+    "via": "pdf",
+    "verified": true
+   },
+   {
+    "url": "https://www.twp.burlington.nj.us/filestorage/279/714/753/HousingInspectionRequestForm.pdf",
+    "quote": "HOUSING INSPECTION REQUEST RESALE/RENTAL INSPECTIONS",
+    "doc_date": "2019-10 (uploaded 3/5/2021)",
+    "via": "pdf",
+    "verified": true
+   },
+   {
+    "url": "https://www.twp.burlington.nj.us/filestorage/279/714/753/HousingInspectionRequestForm.pdf",
+    "quote": "RETURN FORM TO : Caitlyn Bryant or Anthony Trappanese FAX: 609-239-6293 OR EMAIL: HousingInspection@twp.burlington.nj.us",
+    "doc_date": "2019-10 (uploaded 3/5/2021)",
+    "via": "pdf",
+    "verified": true
+   },
+   {
+    "url": "https://www.twp.burlington.nj.us/filestorage/279/714/753/HousingInspectionItems.pdf",
+    "quote": "THIS IS NOT A COMPLETE LIST OF EVERYTHING THAT IS CHECKED DURING AN INSPECTION, BUT THE MOST COMMON ITEMS THAT PREVENT A C.C.O. TO BE ISSUED.",
+    "doc_date": "2018-07",
+    "via": "pdf",
+    "verified": true
+   },
+   {
+    "url": "https://www.twp.burlington.nj.us/licenses-and-inspections/",
+    "quote": "Anthony Trappanese, Housing Inspector/Zoning Officer/Property Maintenance Inspector Office Hours: Monday-Friday 8:00A.M.-4:00P.M. (609)239-5845 atrappanese@twp.burlington.nj.us",
+    "doc_date": "",
+    "via": "page",
+    "verified": true
+   },
+   {
+    "url": "https://www.twp.burlington.nj.us/licenses-and-inspections/",
+    "quote": "Caitlyn Bryant, Technical Asst. (609)239-5846 cbryant@twp.burlington.nj.us",
+    "doc_date": "",
+    "via": "page",
+    "verified": true
+   }
+  ],
+  "confidence": "high",
+  "notes": "Burlington Township's own site does not quote the ordinance, but its Licenses & Inspections page, fee sheet (Rental & Resale Inspection Fees, updated 10/2023) and Housing Inspection Request cover resale inspections and the resulting certificate of occupancy. If a re-inspection is not done within 60 days of the original inspection, a new inspection and fee are required; this also applies if the CO expires before closing, and heater and chimney certifications expire with the CO. Anthony Trappanese's direct email is atrappanese@twp.burlington.nj.us. The staff directory lists Caitlyn Bryant at (609) 239-5847 while the Licenses & Inspections page lists her at (609)239-5846; the department's main line is (609) 239-5847. Township ordinances are on ecode360 (BU2696), which could not be opened. Note: the ecode360 lead in the Watchdog leads (BU2898) is Burlington City's code, not the township's."
+ },
+ "fire_cert": {
+  "requirements": [
+   "Smoke detector on each level",
+   "Carbon monoxide detectors in the bedroom hallway, within 10 feet of each bedroom",
+   "Fire extinguisher 2A 10 BC mounted in the kitchen no more than 5 feet above the floor (still listed on the township page and 2018 items sheet)"
+  ],
+  "authorities": [
+   {
+    "name": "Burlington Township Licenses & Inspections (housing inspector checks smoke, CO and extinguisher in the resale inspection)",
+    "type": "municipal_fire_bureau",
+    "area_served": "Entire township",
+    "lead_time": "",
+    "fees": [
+     {
+      "label": "Combined resale housing inspection including smoke/CO/extinguisher, single family house, townhouse or condo (paid once)",
+      "amount": "$100.00",
+      "quote": "Resale property inspection fees are as follows: Inspection Fee Re-Inspection Fee Single Family Houses $100.00 $50.00",
+      "source_url": "https://www.twp.burlington.nj.us/filestorage/279/714/753/CO_Inspection_Fees.pdf",
+      "verified": true
+     },
+     {
+      "label": "Combined re-inspection",
+      "amount": "$50.00",
+      "quote": "Resale property inspection fees are as follows: Inspection Fee Re-Inspection Fee Single Family Houses $100.00 $50.00",
+      "source_url": "https://www.twp.burlington.nj.us/filestorage/279/714/753/CO_Inspection_Fees.pdf",
+      "verified": true
+     }
+    ],
+    "how_to_apply": "Part of the township Housing Inspection Request; no separate smoke certificate application was found.",
+    "application_url": "https://www.twp.burlington.nj.us/filestorage/279/714/753/HousingInspectionRequestForm.pdf",
+    "department_url": "https://www.twp.burlington.nj.us/licenses-and-inspections/",
+    "contact_name": "Caitlyn Bryant",
+    "contact_title": "Technical Assistant, Licenses & Inspections",
+    "phone": "609-239-5846",
+    "email": "cbryant@twp.burlington.nj.us",
+    "evidence": [
+     {
+      "url": "https://www.twp.burlington.nj.us/licenses-and-inspections/",
+      "quote": "The housing inspector also checks smoke detectors(one on each level), carbon monoxide detector(s) and fire extinguisher.",
+      "doc_date": "",
+      "via": "page",
+      "verified": true
+     },
+     {
+      "url": "https://www.nj.gov/dca/dfs/pdf/fire%20directory_county%20summary/fire_code_enforcement_director.pdf",
+      "quote": "03 Burlington Burlington Township0306 LEAID: 0306-001 Enf Auth. District Fire Official Ashley L Johnson Phone (609) 239-5850 Addr: 851 Old York Rd Phone (609) 239-5847 Email ajohnson@btfd.org Burlington Twp Inspections",
+      "doc_date": "2026-07-22 (survey date)",
+      "via": "state_directory",
+      "verified": true
+     },
+     {
+      "url": "https://nj.gov/dca/dfs/pdf/ANNUAL%20REGISTRY/THIRD%20QUARTER%20LEA%20REGISTRY%202026.pdf",
+      "quote": "D Burlington Township",
+      "doc_date": "2026-07",
+      "via": "pdf",
+      "verified": true
+     },
+     {
+      "url": "https://btfd.org/fire-safety-prevention/",
+      "quote": "The Fire Prevention Bureau conducts regular inspections on all structures (excluding owner-occupied dwellings)",
+      "doc_date": "",
+      "via": "page",
+      "verified": true
+     },
+     {
+      "url": "https://btfd.org/fire-safety-prevention/",
+      "quote": "Fire Official Matthew Tomaszewski Phone: 609-239-5850",
+      "doc_date": "",
+      "via": "page",
+      "verified": true
+     }
+    ],
+    "confidence": "medium"
+   }
+  ],
+  "notes": "The fire code enforcing agency for Burlington Township is the fire district (Burlington Township Fire Department, Bureau of Fire Prevention, 1601 Burlington Bypass). The district's own page names Fire Official Matthew Tomaszewski (609-239-5850, mtomaszewski@btfd.org), while the DCA directory (survey 7/22/2026) still lists Ashley L Johnson (ajohnson@btfd.org); the district page is used as more current. The DCA directory lists 'Burlington Twp Inspections' at 851 Old York Rd, (609) 239-5847 for smoke detector compliance, and the township page says its housing inspector checks smoke, CO and extinguisher, so the resale smoke/CO check appears to be done in the township housing inspection with no separate fire district fee. This is inferred from those two sources; no page states it in one sentence."
+ },
+ "other_items": [
+  {
+   "label": "Heater and chimney certifications",
+   "detail": "Required on single family, townhouse and condo resales before the CO is issued; they expire with the CO.",
+   "source_url": "https://www.twp.burlington.nj.us/filestorage/279/714/753/CO_Inspection_Fees.pdf"
+  },
+  {
+   "label": "Open permits",
+   "detail": "Call Licenses and Inspections (609-239-5847) to make sure there are no active, open or unpaid permits for the home.",
+   "source_url": "https://www.twp.burlington.nj.us/filestorage/279/714/753/HousingInspectionItems.pdf"
+  }
+ ],
+ "open_questions": [
+  "Confirm that the Burlington Township Fire District does not issue a separate smoke certificate for owner-occupied home sales.",
+  "Confirm the recommended lead time before closing (none published).",
+  "Confirm whether the township still requires the fire extinguisher after P.L.2025, c.19."
+ ],
+ "verification": {
+  "fees": 7,
+  "fee_ok": 7,
+  "fee_bad": 0,
+  "fee_unchecked": 0,
+  "quotes": 13,
+  "q_ok": 13,
+  "q_bad": 0,
+  "q_unchecked": 0
+ }
+}

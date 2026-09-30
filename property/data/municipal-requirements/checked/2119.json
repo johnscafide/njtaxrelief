@@ -1,0 +1,211 @@
+{
+ "municipality_code": "2119",
+ "municipality": "Phillipsburg Town",
+ "county": "WARREN",
+ "checked_at": "2026-09-30",
+ "resale_co": {
+  "status": "required",
+  "name": "Certificate of Habitability (CH)",
+  "issued_by": "Town of Phillipsburg Office of Inspections (Inspections / Building Dept)",
+  "lead_time": "A minimum of 2 weeks is usually required",
+  "valid_for": "",
+  "requirements": [
+   "Smoke alarms: at least one working alarm on each level and within 10 feet of each sleeping area; battery alarms must be listed 10-year sealed type; wired alarms may not be replaced with battery alarms",
+   "CO alarms within 10 feet of each sleeping area (hardwired, plug-in or battery)",
+   "Fire extinguisher: 2A:10-B:C minimum, 10 pounds maximum, mounted within 10 feet of the kitchen (not near the stove), no higher than 5 feet, new or tagged",
+   "House numbers at least 4 inches, visible from all facing streets and alleys",
+   "Yard, fences, sheds, sidewalks and curbs kept free of weeds, debris and trip hazards",
+   "Exterior in good repair: no rotten wood or peeling paint, roof, siding, gutters, downspouts, chimney and foundation in good condition",
+   "Handrails on stairs with more than four risers; guardrails on porches and decks 30 inches or taller",
+   "Interior clean, walls, ceilings and floors free of breaks or flaking paint; old unused appliances, water heaters, boilers and oil tanks removed",
+   "Electrical: at least two receptacles per room, GFCI in bathrooms, kitchen counters and outside, grounded or GFCI three-prong outlets, covered boxes, no visible knob-and-tube wiring or fuse panels",
+   "Proof of professional heating system service; no plumbing leaks; approved fittings; property connected to town sewer",
+   "Other violations under the 2000 International Property Maintenance Code and town code may be cited"
+  ],
+  "fees": [
+   {
+    "label": "Certificate for sale or transfer, per unit (1 to 19 units per lot)",
+    "amount": "$100",
+    "quote": "Certificates for the sale or transfer of property or tenant unit; Units per Lot Fee per Unit 1 to 19 $100",
+    "source_url": "https://phillipsburgnj.org/wp-content/uploads/2024/07/O2024-12-Amend-Ch-219-Cert-of-Habit-Requirements-and-Fees-1st-read.pdf",
+    "verified": null
+   },
+   {
+    "label": "Conditional certificate (buyer affidavit), plus $50 per covered unit beyond 5",
+    "amount": "$100",
+    "quote": "Conditional certificate; $100 Affidavit fee plus $50 per additional covered unit beyond 5;",
+    "source_url": "https://phillipsburgnj.org/wp-content/uploads/2024/07/O2024-12-Amend-Ch-219-Cert-of-Habit-Requirements-and-Fees-1st-read.pdf",
+    "verified": null
+   },
+   {
+    "label": "Conditional certificate affidavit, buyer who did not pay for the CH inspection",
+    "amount": "$100",
+    "quote": "Buyers who did not pay for their own Certificate of Habitability inspection are to enclose a check payable to Town of Phillipsburg in the amount of $100.",
+    "source_url": "https://phillipsburgnj.org/wp-content/uploads/2024/10/Affidavit-Of-Understanding-2024.docx",
+    "verified": true
+   }
+  ],
+  "how_to_apply": "Email the Office of Inspections at constructionofficial@phillipsburgnj.org (buying/selling property) to request the Certificate of Habitability inspection; fees are paid before the inspection and checks are payable to the Town of Phillipsburg. Office at 120 Filmore Street, Monday to Friday 8 am to 4 pm. If violations remain at closing, the buyer can sign a notarized Affidavit of Understanding for a 180-day conditional certificate (form: https://phillipsburgnj.org/wp-content/uploads/2024/10/Affidavit-Of-Understanding-2024.docx). No CH application form is posted.",
+  "application_url": "",
+  "department_url": "https://phillipsburgnj.org/our-town/departments/inspections/",
+  "phone": "908-454-5500 ext 346",
+  "email": "constructionofficial@phillipsburgnj.org",
+  "contact_name": "",
+  "contact_title": "",
+  "evidence": [
+   {
+    "url": "https://phillipsburgnj.org/our-town/departments/inspections/",
+    "quote": "Certificates of Habitability ... required for the occupancy of a home. Inspections for the certificate are required to insure that properties are brought up to code. A minimum of 2 weeks is usually required.",
+    "doc_date": "",
+    "via": "page",
+    "verified": true
+   },
+   {
+    "url": "https://phillipsburgnj.org/our-town/departments/inspections/",
+    "quote": "Phone: (908) 454-5500 ext 346 for Construction Permits: If you are Buying/Selling Property or for Planning, Zoning, Certificate of Habitability, and Rentals : email constructionofficial@phillipsburgnj.org",
+    "doc_date": "",
+    "via": "page",
+    "verified": true
+   },
+   {
+    "url": "https://phillipsburgnj.org/wp-content/uploads/2024/07/O2024-12-Amend-Ch-219-Cert-of-Habit-Requirements-and-Fees-1st-read.pdf",
+    "quote": "The following fee schedule shall be used and said fees shall be paid prior to inspections being made.",
+    "doc_date": "2024-06 (introduced June 12, 2024; scanned PDF, read visually)",
+    "via": "pdf",
+    "verified": null
+   },
+   {
+    "url": "https://phillipsburgnj.org/wp-content/uploads/2024/07/O2024-12-Amend-Ch-219-Cert-of-Habit-Requirements-and-Fees-1st-read.pdf",
+    "quote": "All checks shall be made payable to the Town of Phillipsburg.",
+    "doc_date": "2024-06",
+    "via": "pdf",
+    "verified": null
+   },
+   {
+    "url": "https://phillipsburgnj.org/wp-content/uploads/2024/10/Affidavit-Of-Understanding-2024.docx",
+    "quote": "I understand the Town of Phillipsburg Conditional Certificate of Habitability",
+    "doc_date": "2024-10 (upload folder)",
+    "via": "page",
+    "verified": true
+   },
+   {
+    "url": "https://phillipsburgnj.org/wp-content/uploads/2022/07/CH-Info-FAQ-Handout-v3.pdf",
+    "quote": "The Office of Inspections provides this guide as a courtesy to help property owners know what is generally required to receive a Certificate of Habitability.",
+    "doc_date": "2022-07 (upload folder)",
+    "via": "pdf",
+    "verified": true
+   }
+  ],
+  "confidence": "medium",
+  "notes": "Phillipsburg requires a Certificate of Habitability (Code Chapter 219) for sale or transfer as well as for rentals. The fee schedule comes from Ordinance 2024-12 as posted on the town's ordinance list; the posted copy is the first-reading version (introduced June 12, 2024, final hearing set for June 26, 2024), and adoption was not confirmed from minutes, though the town's 2024 conditional-certificate affidavit uses the same $100 fee. The fee schedule for 20 or more units and commercial certificates is omitted here. The town's standard Certificate of Occupancy application (UCC F270) on the same page is for new construction, not resale. Rentals also need yearly registration and a yearly CH (rental-only). The Office of Inspections contact is a shared mailbox; no named staff contact is published. The site uses a rate limit (Wordfence), so some pages could not be re-read."
+ },
+ "fire_cert": {
+  "requirements": [
+   "The town's Certificate of Habitability inspection checks smoke alarms, CO alarms and a fire extinguisher (see resale certificate requirements); the town's 2022 guide still lists a fire extinguisher (2A:10-B:C, max 10 pounds, within 10 feet of the kitchen, no higher than 5 feet)"
+  ],
+  "authorities": [
+   {
+    "name": "Town of Phillipsburg Fire Official (Chapter 311, Fire Prevention)",
+    "type": "municipal_fire_bureau",
+    "area_served": "Entire town",
+    "lead_time": "More than 10 business days before the change of occupancy for the lowest fee",
+    "fees": [
+     {
+      "label": "Request received more than 10 business days before change of occupancy",
+      "amount": "$45.00",
+      "quote": "Requests for a CSACMAPFEC received more than 10 business days prior to the change of occupancy: $45.00.",
+      "source_url": "https://phillipsburgnj.org/wp-content/uploads/2026/08/O2026-24-Amend-Ch-311-Fire-Official-2nd-read.pdf",
+      "verified": null
+     },
+     {
+      "label": "Request received 4 to 10 business days before change of occupancy",
+      "amount": "$90.00",
+      "quote": "Requests for a CSACMAPFEC received four (4) to 10 business days prior to the change of occupancy: $90.00.",
+      "source_url": "https://phillipsburgnj.org/wp-content/uploads/2026/08/O2026-24-Amend-Ch-311-Fire-Official-2nd-read.pdf",
+      "verified": null
+     },
+     {
+      "label": "Request received fewer than 4 business days before change of occupancy",
+      "amount": "$161.00",
+      "quote": "Requests for a CSACMAPFEC received fewer than four (4) business days prior to the change of occupancy: $161.00.",
+      "source_url": "https://phillipsburgnj.org/wp-content/uploads/2026/08/O2026-24-Amend-Ch-311-Fire-Official-2nd-read.pdf",
+      "verified": null
+     }
+    ],
+    "how_to_apply": "No smoke certificate application form or instructions are posted yet. Contact the Office of Inspections (constructionofficial@phillipsburgnj.org, 908-454-5500) to ask how to book the CSACMAPFEC inspection; it may be done together with the Certificate of Habitability inspection.",
+    "application_url": "",
+    "department_url": "https://phillipsburgnj.org/our-town/departments/inspections/",
+    "phone": "",
+    "email": "",
+    "contact_name": "",
+    "contact_title": "",
+    "evidence": [
+     {
+      "url": "https://phillipsburgnj.org/wp-content/uploads/2026/08/O2026-24-Amend-Ch-311-Fire-Official-2nd-read.pdf",
+      "quote": "The application fee for a certificate of smoke alarm, carbon monoxide alarm and portable fire extinguisher compliance (CSACMAPFEC), as required by N.J.A.C. 5:70-2.3, shall be in accordance with the following fees schedule:",
+      "doc_date": "2026-08-11 (Ordinance 2026-24 adopted August 11, 2026; scanned PDF, read visually)",
+      "via": "pdf",
+      "verified": null
+     },
+     {
+      "url": "https://phillipsburgnj.org/wp-content/uploads/2026/08/O2026-24-Amend-Ch-311-Fire-Official-2nd-read.pdf",
+      "quote": "The Fire Official of the Town of Phillipsburg shall administer and direct the enforcement of provisions of relevant fire safety codes and relevant regulations, including, but not limited to, the Uniform Fire Code",
+      "doc_date": "2026-08-11",
+      "via": "pdf",
+      "verified": null
+     },
+     {
+      "url": "https://nj.gov/dca/dfs/pdf/ANNUAL%20REGISTRY/THIRD%20QUARTER%20LEA%20REGISTRY%202026.pdf",
+      "quote": "S Phillipsburg Township",
+      "doc_date": "2026-07 (as of June 30, 2026)",
+      "via": "pdf",
+      "verified": true
+     },
+     {
+      "url": "https://www.nj.gov/dca/dfs/pdf/fire%20directory_county%20summary/state_towns%207_17_26.pdf",
+      "quote": "PHILLIPSBURG 2119",
+      "doc_date": "2026-07-17 (listed without the SC = Smoke Certs mark)",
+      "via": "pdf",
+      "verified": true
+     },
+     {
+      "url": "https://www.nj.gov/dca/dfs/pdf/fire%20directory_county%20summary/fire_code_enforcement_director.pdf",
+      "quote": "LEAID: 2119-999 Enf Auth. State Fire Official Louis Kilmer",
+      "doc_date": "2026 (survey date 2/6/2026)",
+      "via": "state_directory",
+      "verified": true
+     }
+    ],
+    "confidence": "low"
+   }
+  ],
+  "notes": "Unsettled. The July 2026 DCA LEA Registry lists Phillipsburg (printed as 'Phillipsburg Township') as State-enforced, but DCA's state-enforced towns list (revised 7/17/2026) shows Phillipsburg WITHOUT the 'SC' (Smoke Certs) mark, so DCA does not issue smoke certificates there. On August 11, 2026 the Town Council adopted Ordinance 2026-24, which creates a Town Fire Official and sets CSACMAPFEC fees of $45 / $90 / $161. The town's Certificate of Habitability inspection also checks smoke alarms, CO alarms and an extinguisher. No town page yet explains how to book the smoke certificate or names the Fire Official; the Fire Department page lists only the volunteer Fire Chief (Rich Hay). The ordinance still says 'portable fire extinguisher' in the certificate name although P.L.2025, c.19 removed it from the state requirement."
+ },
+ "other_items": [
+  {
+   "label": "Rental units: yearly rental registration and yearly Certificate of Habitability",
+   "detail": "Rental registration ($100 per unit per the town's guide) is filed online; the CH must be renewed every year for rentals. Not needed for a sale to an owner-occupant beyond the resale CH.",
+   "source_url": "https://phillipsburgnj.org/wp-content/uploads/2022/07/CH-Info-FAQ-Handout-v3.pdf"
+  },
+  {
+   "label": "Property must be connected to town sewer",
+   "detail": "Listed in the Certificate of Habitability compliance guide.",
+   "source_url": "https://phillipsburgnj.org/wp-content/uploads/2022/07/CH-Info-FAQ-Handout-v3.pdf"
+  }
+ ],
+ "open_questions": [
+  "Confirm Ordinance 2024-12 (Certificate of Habitability fees) was adopted as introduced.",
+  "Who issues the smoke/CO certificate in practice after Ordinance 2026-24 (Town Fire Official, the Office of Inspections as part of the CH, or DCA), how to book it, and who the Fire Official is.",
+  "Whether the CH has a validity period for resale."
+ ],
+ "verification": {
+  "fees": 6,
+  "fee_ok": 1,
+  "fee_bad": 0,
+  "fee_unchecked": 5,
+  "quotes": 11,
+  "q_ok": 7,
+  "q_bad": 0,
+  "q_unchecked": 4
+ }
+}

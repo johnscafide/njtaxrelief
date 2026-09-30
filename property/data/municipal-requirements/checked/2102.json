@@ -1,0 +1,195 @@
+{
+ "municipality_code": "2102",
+ "municipality": "Alpha Borough",
+ "county": "WARREN",
+ "checked_at": "2026-09-30",
+ "resale_co": {
+  "status": "required",
+  "name": "Certificate of Habitability (CH), applied for on the Residential Property Sale Application & Fire Safety Certification Form",
+  "issued_by": "Borough of Alpha Code & Zoning Enforcement",
+  "lead_time": "",
+  "valid_for": "",
+  "requirements": [
+   "No CH while any construction permit is still open; all building permits must be closed",
+   "Exterior: fences, garage and sheds in good condition; chimney mortar and bricks secure",
+   "Exterior: foundation free of cracks; gutters and downspouts attached and working; roof with no loose shingles, leaks or bowing",
+   "Exterior: paint free of chipping; sidewalks level and free of cracks; landscaping clean and trimmed",
+   "Stairs in good condition with secure railings for three or more treads",
+   "No vermin or pest infestation, inside or out",
+   "Asbestos encapsulated or professionally removed; basement floor and walls free of moisture and cracks",
+   "Bathroom window or working exhaust fan; kitchen ventilation vented outside from the stove",
+   "At least two working outlets in every habitable room; GFCI outlets in kitchen and bathrooms",
+   "Furnace and water heater in good working order; fireplace working with proof of the last flue cleaning",
+   "Plumbing free of leaks; floors, ceilings and walls in good condition",
+   "Working sash locks on all first-floor windows; all windows in good working order",
+   "Smoke detectors on every floor including basements and attics; CO detectors within 10 feet of every bedroom",
+   "Fire extinguisher in each kitchen (1 to 3 family)"
+  ],
+  "fees": [
+   {
+    "label": "Sale of a single-family dwelling (when occupancy will change)",
+    "amount": "$75",
+    "quote": "For the sale or change in ownership of a single-family dwelling whenever a change in occupancy will occur $75",
+    "source_url": "https://www.alphaboronj.org/Property_Sale_App__Fire_Safety_Cert_Form.pdf?t=202406101420570",
+    "verified": null
+   },
+   {
+    "label": "Sale of a two-family dwelling",
+    "amount": "$150",
+    "quote": "For the sale or change in ownership of a two-family dwelling regardless of any change in occupants or apartment tenancy $150",
+    "source_url": "https://www.alphaboronj.org/Property_Sale_App__Fire_Safety_Cert_Form.pdf?t=202406101420570",
+    "verified": null
+   }
+  ],
+  "how_to_apply": "Download the Residential Property Sale Application & Fire Safety Certification Form from the Construction & Zoning page. Fill in the property, owner, broker, buyer and closing date details, sign the smoke/CO/extinguisher attestation, and submit it with payment by check, cash or money order payable to the Borough of Alpha to Code & Zoning Enforcement, 1001 East Blvd, Phillipsburg (Alpha), NJ 08865. An official will call to schedule the Habitability Inspection; the owner or a designee must be there. If violations are found you get a Violation Notice with a comply-by date. If the home cannot pass re-inspection in time for closing, a Conditional CH may be requested once all fire and life safety items are fixed; the buyer must then sign a notarized affidavit taking responsibility for the open violations.",
+  "application_url": "https://www.alphaboronj.org/Property_Sale_App__Fire_Safety_Cert_Form.pdf?t=202406101420570",
+  "department_url": "https://www.alphaboronj.org/offices/construction___zoning/index.php",
+  "contact_name": "Andrew Melendez",
+  "contact_title": "Zoning Official and Housing Inspections (also Code Enforcement Officer)",
+  "phone": "908-454-0088 x173",
+  "email": "codeenforcement@alphaboronj.org",
+  "evidence": [
+   {
+    "url": "https://www.alphaboronj.org/Property_Sale_App__Fire_Safety_Cert_Form.pdf?t=202406101420570",
+    "quote": "Before you sell any residential property in Alpha, you must obtain a Certificate of Habitability from the zoning and code enforcement department and should comply will all but not limited to construction, zoning, and property maintenance codes and ordinances. This applies to single-family homes, two-family homes, co-ops, apartments, condos, town homes, multi-family homes and dwelling units in mixed-use buildings.",
+    "doc_date": "2024-06-10 (PDF created; scanned, read visually)",
+    "via": "pdf",
+    "verified": null
+   },
+   {
+    "url": "https://www.alphaboronj.org/Property_Sale_App__Fire_Safety_Cert_Form.pdf?t=202406101420570",
+    "quote": "Include your payment via check/cash/money order (payable to the Borough of Alpha) for the Certificate of Habitability fees.",
+    "doc_date": "2024-06-10",
+    "via": "pdf",
+    "verified": null
+   },
+   {
+    "url": "https://www.alphaboronj.org/Property_Sale_App__Fire_Safety_Cert_Form.pdf?t=202406101420570",
+    "quote": "Note: No CH will be issued while an open construction permit exists. Please contact the Construction Department at 908-454-0088 Ext 176 to review open permits.",
+    "doc_date": "2024-06-10",
+    "via": "pdf",
+    "verified": null
+   },
+   {
+    "url": "https://www.alphaboronj.org/Property_Sale_App__Fire_Safety_Cert_Form.pdf?t=202406101420570",
+    "quote": "If you have questions about the approval process or how to calculate your fees, please email the official at codeenforcement@alphaboronj.org",
+    "doc_date": "2024-06-10",
+    "via": "pdf",
+    "verified": null
+   },
+   {
+    "url": "https://www.alphaboronj.org/offices/construction___zoning/index.php",
+    "quote": "Zoning Official and Housing Inspections - Andrew Melendez Email (Preferred): zoningofficer@alphaboronj.org Phone: 908-454-0088 X173",
+    "doc_date": "2026-09-30 (page fetched)",
+    "via": "page",
+    "verified": true
+   },
+   {
+    "url": "https://www.alphaboronj.org/offices/construction___zoning/index.php",
+    "quote": "APPLICATION FOR PROPERTY & FIRE SAFETY CERTIFICATION: HERE",
+    "doc_date": "2026-09-30 (page fetched)",
+    "via": "page",
+    "verified": true
+   },
+   {
+    "url": "https://www.alphaboronj.org/offices/code_enforcement_officer/index.php",
+    "quote": "Andrew Melendez Code Enforcement Officer Phone: 908-498-2952 Fax: (908) 454-0076 Email: codeenforcement@alphaboronj.org",
+    "doc_date": "2026-09-30 (page fetched)",
+    "via": "page",
+    "verified": true
+   }
+  ],
+  "confidence": "high",
+  "notes": "The form is a scanned PDF (created June 10, 2024), so quotes were read from the page images. The fee table also lists $150 for a 3-unit multifamily plus $25 per unit over three, $75 for a commercial tenancy change and $200 for a commercial sale. The official-use box has a line for a re-inspection fee but no amount is printed. No lead time or validity period is printed on the form. If no mail recipient is named, the town calls or emails you to pick up the CH; if not picked up within 3 business days it is mailed. Andrew Melendez is also listed by Allamuchy as its zoning officer (shared staff)."
+ },
+ "fire_cert": {
+  "requirements": [
+   "Homes built before 1977: 10-year sealed battery smoke alarms (or combination smoke/CO); homes built after 1977: working AC hardwired alarms, which may not be replaced with battery alarms",
+   "Smoke alarms on each level and outside each sleeping area; basement alarm near the bottom of the basement stairs",
+   "CO alarms near the sleeping areas (within 10 feet of bedroom doors or one in each bedroom) in homes with a fuel-burning device or attached garage",
+   "Form still requires a portable fire extinguisher: at least 2A:10B:C, no more than 10 lbs, within 10 feet of the kitchen in the path of egress, on the maker's bracket, top no more than 5 feet above the floor, serviced and tagged within 12 months or with a purchase receipt, owner's manual left for the new occupant. Form dated June 2024, before the February 2025 state law change"
+  ],
+  "authorities": [
+   {
+    "name": "Borough of Alpha Code & Zoning Enforcement (fire safety certification combined with the Certificate of Habitability)",
+    "type": "municipal_fire_bureau",
+    "area_served": "Entire borough",
+    "lead_time": "",
+    "fees": [],
+    "how_to_apply": "Same combined form, inspection and fee as the Certificate of Habitability (see resale_co). The owner signs an attestation that smoke/CO alarms and the extinguisher are installed, and the smoke, CO and extinguisher items are checked during the Habitability Inspection.",
+    "application_url": "https://www.alphaboronj.org/Property_Sale_App__Fire_Safety_Cert_Form.pdf?t=202406101420570",
+    "department_url": "https://www.alphaboronj.org/offices/construction___zoning/index.php",
+    "contact_name": "Andrew Melendez",
+    "contact_title": "Zoning Official and Housing Inspections (also Code Enforcement Officer)",
+    "phone": "908-454-0088 x173",
+    "email": "codeenforcement@alphaboronj.org",
+    "evidence": [
+     {
+      "url": "https://www.alphaboronj.org/Property_Sale_App__Fire_Safety_Cert_Form.pdf?t=202406101420570",
+      "quote": "ALL HOMES MUST MEET THE FOLLOWING REQUIREMENTS FOR: Certification of Smoke Detector, Carbon Monoxide Alarm and Fire Extinguisher",
+      "doc_date": "2024-06-10 (scanned, read visually)",
+      "via": "pdf",
+      "verified": null
+     },
+     {
+      "url": "https://www.alphaboronj.org/Property_Sale_App__Fire_Safety_Cert_Form.pdf?t=202406101420570",
+      "quote": "Inspections are required for the sale, rental or change of occupancy of a 1 - or 2- family dwelling. The inspection will check for the proper placement of smoke detectors, carbon monoxide, Smoke/Carbon Monoxide combined alarms as well as the required fire extinguisher. The inspection is required by the New Jersey Uniform Fire Code.",
+      "doc_date": "2024-06-10",
+      "via": "pdf",
+      "verified": null
+     },
+     {
+      "url": "https://nj.gov/dca/dfs/pdf/ANNUAL%20REGISTRY/THIRD%20QUARTER%20LEA%20REGISTRY%202026.pdf",
+      "quote": "S Alpha Borough",
+      "doc_date": "2026-07 (as of June 30, 2026)",
+      "via": "pdf",
+      "verified": true
+     },
+     {
+      "url": "https://www.nj.gov/dca/dfs/pdf/fire%20directory_county%20summary/state_towns%207_17_26.pdf",
+      "quote": "ALPHA TWP 2102",
+      "doc_date": "2026-07-17 (listed without the SC = Smoke Certs mark)",
+      "via": "pdf",
+      "verified": true
+     },
+     {
+      "url": "https://www.nj.gov/dca/dfs/pdf/fire%20directory_county%20summary/fire_code_enforcement_director.pdf",
+      "quote": "Alpha Borough2102 LEAID: 2102-999 Enf Auth. State Fire Official Louis Kilmer Phone (609) 633-6132 NJ Division Fire Safety PO Box 809",
+      "doc_date": "2026 directory (survey 5/30/2025)",
+      "via": "state_directory",
+      "verified": true
+     }
+    ],
+    "confidence": "medium"
+   }
+  ],
+  "notes": "Conflict to be aware of: the NJ DCA registry lists Alpha as 'S' (state enforces the fire code) and the state fire directory lists the NJ Division of Fire Safety (Louis Kilmer, 609-633-6132) for smoke detector compliance. But DCA's July 17, 2026 list of state-enforced towns shows Alpha ('ALPHA TWP 2102') without the 'SC = Smoke Certs' mark that Belvidere, Blairstown, Franklin and Frelinghuysen carry, and the Borough's own sale form combines the smoke/CO/extinguisher certification with its Certificate of Habitability inspection and fee. So the borough appears to handle the resale smoke certificate itself. If a title company or buyer asks for a separate state CSACMASPSIL, the DCA online application (https://firesolutions.dca.nj.gov/ultra-fire-home/smoke-application-create/, $45 / $90 / $161 by business days before closing) is the state route; this was not confirmed as needed in Alpha."
+ },
+ "other_items": [
+  {
+   "label": "Open construction permits must be closed",
+   "detail": "No CH is issued while an open construction permit exists; call the Construction Department at 908-454-0088 ext. 176 to review open permits.",
+   "source_url": "https://www.alphaboronj.org/Property_Sale_App__Fire_Safety_Cert_Form.pdf?t=202406101420570"
+  },
+  {
+   "label": "Final water reading",
+   "detail": "Requests for final water readings must be submitted in writing to taxcollector@alphaboronj.org (Utility Collector, 908-454-0088 ext. 120).",
+   "source_url": "https://www.alphaboronj.org/offices/utility_collector/index.php"
+  }
+ ],
+ "open_questions": [
+  "Whether the Borough's combined form is accepted in place of a separate state smoke/CO certificate (DCA registry says the State is the fire code LEA)",
+  "Re-inspection fee amount (blank on the form) and any lead time or validity period",
+  "Whether the Borough has updated the extinguisher requirement after the February 2025 state law change"
+ ],
+ "verification": {
+  "fees": 2,
+  "fee_ok": 0,
+  "fee_bad": 0,
+  "fee_unchecked": 2,
+  "quotes": 12,
+  "q_ok": 6,
+  "q_bad": 0,
+  "q_unchecked": 6
+ }
+}

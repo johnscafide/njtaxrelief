@@ -1,0 +1,199 @@
+{
+ "municipality_code": "0309",
+ "municipality": "Delanco Township",
+ "county": "BURLINGTON",
+ "checked_at": "2026-09-30",
+ "resale_co": {
+  "status": "required",
+  "name": "Certificate of Habitability (COH)",
+  "issued_by": "Delanco Township (Rental/COH Coordinator, Municipal Building)",
+  "lead_time": "No set lead time published. The applicant must schedule the inspection, and any violations must be corrected within 90 days.",
+  "valid_for": "90 days or until the next change in ownership, whichever comes first",
+  "requirements": [
+   "Walls and ceilings free of cracks or holes in every room",
+   "Floor coverings, windows and doors in good condition",
+   "Electrical wiring, fixtures and receptacles working; enough outlets in bedrooms",
+   "Entrance locks on front, rear and side doors cannot need a key from the inside",
+   "Kitchen counter, sink, dishwasher, exhaust and stove anti-tip device",
+   "Bathroom tile, sink, tub, toilet and ventilation fan",
+   "Handrails, guards and stairs sound",
+   "Exterior: roof, gutters and downspouts, paint, windows, foundation, siding, chimney cap",
+   "Fence and gate, lawn and landscaping kept up, no rubbish or debris",
+   "House number visible, driveway cracks and holes, front light working",
+   "Heating, electrical or plumbing certifications if the inspector asks for them"
+  ],
+  "fees": [
+   {
+    "label": "Home inspection (COH application)",
+    "amount": "$100",
+    "quote": "HOME INSPECTION: $100 CASH or CHECK PAYABLE TO DELANCO TOWNSHIP MUST ACCOMPANY THIS APPLICATION.",
+    "source_url": "https://www.delancotownship.com/filestorage/5328/5330/10714/Certificate_of_Habitability_Application_REVISED_06-02-2025.pdf",
+    "verified": true
+   },
+   {
+    "label": "Each re-inspection after the first free one",
+    "amount": "$50",
+    "quote": "One COH Re-inspection if required shall be at no additional fee. Any subsequent Re-inspections shall be $50 per Re-inspection.",
+    "source_url": "https://www.delancotownship.com/filestorage/5328/5330/10714/Certificate_of_Habitability_Application_REVISED_06-02-2025.pdf",
+    "verified": true
+   }
+  ],
+  "how_to_apply": "Fill out the Certificate of Habitability Application (Buying or Selling a Home) and return it with $100 cash or a check payable to Delanco Township to the Municipal Building, 770 Coopertown Rd., Delanco, NJ 08075. Then call Jessica Husband at 856-461-0561 ext. 222 to set up the inspection; the applicant must schedule it.",
+  "application_url": "https://www.delancotownship.com/filestorage/5328/5330/10714/Certificate_of_Habitability_Application_REVISED_06-02-2025.pdf",
+  "department_url": "https://www.delancotownship.com/onlineforms",
+  "phone": "856-461-0561 ext. 222",
+  "email": "",
+  "contact_name": "Jessica Husband",
+  "contact_title": "Rental / COH Coordinator",
+  "evidence": [
+   {
+    "url": "https://www.delancotownship.com/filestorage/5328/5330/10714/Certificate_of_Habitability_Application_REVISED_06-02-2025.pdf",
+    "quote": "CERTIFICATE OF HABITABILITY APPLICATION ... Buying or Selling a Home",
+    "doc_date": "2025-06",
+    "via": "pdf",
+    "verified": true
+   },
+   {
+    "url": "https://www.delancotownship.com/filestorage/5328/5330/10714/Certificate_of_Habitability_Application_REVISED_06-02-2025.pdf",
+    "quote": "CALL JESSICA HUSBAND AT 856-461-0561 x222 TO SET UP APPOINTMENT.",
+    "doc_date": "2025-06",
+    "via": "pdf",
+    "verified": true
+   },
+   {
+    "url": "https://www.delancotownship.com/filestorage/5328/5330/10714/Certificate_of_Habitability_Application_REVISED_06-02-2025.pdf",
+    "quote": "(Valid for 90 days or until next change in ownership whichever occurs first)",
+    "doc_date": "2025-06",
+    "via": "pdf",
+    "verified": true
+   },
+   {
+    "url": "https://www.delancotownship.com/content/5300/7041/default.aspx",
+    "quote": "Jessica Husband Admin. Assistant, Rental / COH Coordinator, Shade Tree Commission Secretary ext. 222",
+    "doc_date": "",
+    "via": "page",
+    "verified": true
+   },
+   {
+    "url": "https://www.delancotownship.com/filestorage/5328/5330/10714/Certificate_of_Habitability_-COH-_Inspection_Guidelines.pdf",
+    "quote": "Remarks: ALL VIOLATIONS MUST BE CORRECTED WITHIN 90 DAYS",
+    "doc_date": "2023-03",
+    "via": "pdf",
+    "verified": true
+   }
+  ],
+  "confidence": "high",
+  "notes": "The COH application form is marked REVISED 06-02-2025. It is listed on the Online Forms page under Rental/COH Applications as 'Certificate of Habitability (COH) Application -buying or selling a house'. The inspection guidelines are a blank 3-page Uniform Inspection Report (template with 2022 file numbers, posted March 2023); it lists 856-820-5620 to schedule a reinspection, which differs from the main office number. The Township code (ecode360 DE0379) could not be opened. Rentals have a separate rental registration and lead-based paint inspection program."
+ },
+ "fire_cert": {
+  "requirements": [
+   "All smoke and CO alarms must be less than 10 years old",
+   "All non-AC (battery) smoke alarms must be the 10-year sealed battery type",
+   "Smoke alarm type and locations depend on the year the home was built (for example, 1991 and newer: interconnected AC alarms with battery backup on each level and in each bedroom)",
+   "CO alarms near sleeping areas if the home has a fuel-burning device or attached garage",
+   "House number easily visible from the street",
+   "Homes with a secondary power source (generator, solar panels, battery storage) need printed warning labels such as 'CAUTION: MULTIPLE SOURCES OF POWER' within 18 inches of the main electrical panel and within 18 inches of the electric meter (ANSI Z535.4 label accepted); hand-written labels not allowed",
+   "Seller must complete and sign a self-inspection certification on the form before the inspection is scheduled",
+   "A separate application and fee is required for each dwelling unit on the property",
+   "The current form (August 2025) does not list a portable fire extinguisher"
+  ],
+  "authorities": [
+   {
+    "name": "Delanco Fire District No. 1, Bureau of Fire Prevention & Inspection",
+    "type": "fire_district",
+    "area_served": "Entire township",
+    "lead_time": "Submit the form and payment at least 10 business days before settlement. Inspections are scheduled on the first available Monday after all information and payment are received. If settlement is less than 10 business days away, email and call the Fire Official.",
+    "fees": [
+     {
+      "label": "Smoke/CO certificate, application received 10+ business days before settlement (per dwelling unit)",
+      "amount": "$45.00",
+      "quote": "If received ten (10) business days or more prior to settlement the fee is $45.00.",
+      "source_url": "https://www.delancofire.com/_files/ugd/6a69cf_4e8f084c80ef4ec28cc09d33bdc48ff7.pdf",
+      "verified": true
+     }
+    ],
+    "how_to_apply": "Download the Application for Certification of Smoke Alarm and Carbon Monoxide Alarm Compliance, complete the self-inspection form, and mail it with a check or money order payable to Delanco Fire District #1 to Delanco Fire Official, P.O. Box 5021, Delanco, NJ 08075. Payment must be received before the inspection is scheduled.",
+    "application_url": "https://www.delancofire.com/_files/ugd/6a69cf_4e8f084c80ef4ec28cc09d33bdc48ff7.pdf",
+    "department_url": "https://www.delancofire.com/fire-marshall",
+    "phone": "856-764-8176",
+    "email": "fm@delancofire.com",
+    "contact_name": "Randy Johnson",
+    "contact_title": "Fire Official",
+    "evidence": [
+     {
+      "url": "https://www.delancofire.com/fire-marshall",
+      "quote": "This includes the Residential Resale-Smoke/CO Detector Inspection.",
+      "doc_date": "",
+      "via": "page",
+      "verified": true
+     },
+     {
+      "url": "https://www.delancofire.com/fire-marshall",
+      "quote": "Randy Johnson, Fire Official",
+      "doc_date": "",
+      "via": "page",
+      "verified": true
+     },
+     {
+      "url": "https://www.delancofire.com/fire-marshall",
+      "quote": "Phone: 856-764-8176",
+      "doc_date": "",
+      "via": "page",
+      "verified": true
+     },
+     {
+      "url": "https://www.delancofire.com/_files/ugd/6a69cf_4e8f084c80ef4ec28cc09d33bdc48ff7.pdf",
+      "quote": "Please email fm@delancofire.com if you have any questions prior to submitting this form.",
+      "doc_date": "2025-08",
+      "via": "pdf",
+      "verified": true
+     },
+     {
+      "url": "https://www.delancofire.com/_files/ugd/6a69cf_4e8f084c80ef4ec28cc09d33bdc48ff7.pdf",
+      "quote": "Fees are payable by Check or Money Order to Delanco Fire District #1",
+      "doc_date": "2025-08",
+      "via": "pdf",
+      "verified": true
+     },
+     {
+      "url": "https://www.nj.gov/dca/dfs/pdf/fire%20directory_county%20summary/fire_code_enforcement_director.pdf",
+      "quote": "Fire Official Randy Johnson",
+      "doc_date": "2026-06",
+      "via": "state_directory",
+      "verified": true
+     },
+     {
+      "url": "https://nj.gov/dca/dfs/pdf/ANNUAL%20REGISTRY/THIRD%20QUARTER%20LEA%20REGISTRY%202026.pdf",
+      "quote": "D Delanco Township",
+      "doc_date": "2026-07",
+      "via": "pdf",
+      "verified": true
+     }
+    ],
+    "confidence": "high"
+   }
+  ],
+  "notes": "The fire form PDF was created August 2025 and the Township posts the identical form (Smoke/CO Inspection Application, uploaded December 2025) in its Online Forms under Fire Department Inspection Documents and Rental/COH Applications. No fee is published for applications received less than 10 business days before settlement; the form says to contact the Fire Official. The Township COH application calls this the 'State Smoke Detector Inspection' with the fee paid directly to the inspector, but the fire district handles it. The state directory lists a comcast.net email for the fire official; the district's own form uses fm@delancofire.com, which is recorded here."
+ },
+ "other_items": [
+  {
+   "label": "Sewer inspection (Delanco Sewerage Authority)",
+   "detail": "SEWER INSPECTION: $25 cash or check payable to Delanco Sewerage Authority may accompany the COH application. Call Delanco Sewer at 856-461-6876 to set up the appointment.",
+   "source_url": "https://www.delancotownship.com/filestorage/5328/5330/10714/Certificate_of_Habitability_Application_REVISED_06-02-2025.pdf"
+  }
+ ],
+ "open_questions": [
+  "Fire certificate fee for applications received less than 10 business days before settlement is not published.",
+  "The COH form does not state how far ahead of closing to apply."
+ ],
+ "verification": {
+  "fees": 3,
+  "fee_ok": 3,
+  "fee_bad": 0,
+  "fee_unchecked": 0,
+  "quotes": 12,
+  "q_ok": 12,
+  "q_bad": 0,
+  "q_unchecked": 0
+ }
+}

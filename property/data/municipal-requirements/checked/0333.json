@@ -1,0 +1,198 @@
+{
+ "municipality_code": "0333",
+ "municipality": "Southampton Township",
+ "county": "BURLINGTON",
+ "checked_at": "2026-09-30",
+ "resale_co": {
+  "status": "required",
+  "name": "Residential Resale Inspection / Resale Certificate",
+  "issued_by": "Southampton Township Office of Construction, Zoning and Land Development",
+  "lead_time": "Application and fee must be received at least 14 days before the settlement date",
+  "valid_for": "",
+  "requirements": [
+   "Smoke alarms on each level of the home and within 10 feet of any sleeping room",
+   "Carbon monoxide alarms within 10 feet of any sleeping room",
+   "House number at least 3 inches, visible from the street",
+   "All utilities on",
+   "Guard rails and handrails secure and steady, no missing spindles",
+   "Yard free of trash, grass cut, brush and weeds not overgrown",
+   "Siding, soffit and fascia secure",
+   "Doors and windows in good working condition",
+   "No open electric outlets, switches or lights; electric panel cover in place with no missing blanks",
+   "No open holes in walls or ceilings",
+   "Appliance venting in place and free of defects",
+   "Burlington County recycling receptacle stays at the property"
+  ],
+  "fees": [
+   {
+    "label": "Resale inspection, per unit",
+    "amount": "$50.00",
+    "quote": "FEE $50.00 per unit",
+    "source_url": "https://www.southamptonnj.org/Construction%20&%20Zoning/Forms/Resale%20Inspection%20Application%202026%20New.pdf?t=202607210900510",
+    "verified": true
+   },
+   {
+    "label": "Reinspection, per unit",
+    "amount": "$25.00",
+    "quote": "REINSPECTION FEE $25.00 per unit",
+    "source_url": "https://www.southamptonnj.org/Construction%20&%20Zoning/Forms/Resale%20Inspection%20Application%202026%20New.pdf?t=202607210900510",
+    "verified": true
+   }
+  ],
+  "how_to_apply": "Download the 2026 Residential Resale Inspection Application from the Construction & Zoning page and submit it with the fee to the Construction Office, 5 Retreat Road, at least 14 days before settlement. Questions and inspection requests go to construction@southamptonnj.org. Payment method is not stated on the form.",
+  "application_url": "https://www.southamptonnj.org/Construction%20&%20Zoning/Forms/Resale%20Inspection%20Application%202026%20New.pdf?t=202607210900510",
+  "department_url": "https://www.southamptonnj.org/government/construction___zoning.php",
+  "contact_name": "Tom Boyd",
+  "contact_title": "Construction Official, Building Subcode Official (handles resale inspections)",
+  "phone": "609-859-2786",
+  "email": "tboyd@southamptonnj.org",
+  "evidence": [
+   {
+    "url": "https://www.southamptonnj.org/Construction%20&%20Zoning/Forms/Resale%20Inspection%20Application%202026%20New.pdf?t=202607210900510",
+    "quote": "RESIDENTIAL RESALE INSPECTION APPLICATION",
+    "doc_date": "2026-07 (PDF created July 21, 2026)",
+    "via": "pdf",
+    "verified": true
+   },
+   {
+    "url": "https://www.southamptonnj.org/Construction%20&%20Zoning/Forms/Resale%20Inspection%20Application%202026%20New.pdf?t=202607210900510",
+    "quote": "APPLICATION MUST BE RECEIVED WITH FEE AT LEAST 14 DAYS PRIOR TO SETTLEMENT DATE",
+    "doc_date": "2026-07 (PDF created July 21, 2026)",
+    "via": "pdf",
+    "verified": true
+   },
+   {
+    "url": "https://www.southamptonnj.org/Construction%20&%20Zoning/Forms/Resale%20Inspection%20Application%202026%20New.pdf?t=202607210900510",
+    "quote": "A RESALE CERTIFICATE WILL ONLY BE ISSUED WHEN THE PREMISES INSPECTED ARE CONSISTENT WITH THE REQUIREMENTS OF N.J.S.A.52:27D-198.1, N.J.A.C. 5:70-4.19 AND CHAPTER 8 OF THE SOUTHAMPTON PROPERTY MAINTENANCE CODE.",
+    "doc_date": "2026-07 (PDF created July 21, 2026)",
+    "via": "pdf",
+    "verified": true
+   },
+   {
+    "url": "https://www.southamptonnj.org/Construction%20&%20Zoning/Forms/Resale%20Inspection%20Application%202026%20New.pdf?t=202607210900510",
+    "quote": "OFFICE OF CONSTRUCTION, ZONING AND LAND DEVELOPMENT 5 Retreat Road 609-859-2786",
+    "doc_date": "2026-07 (PDF created July 21, 2026)",
+    "via": "pdf",
+    "verified": true
+   },
+   {
+    "url": "https://www.southamptonnj.org/government/construction___zoning.php",
+    "quote": "Tom Boyd, Construction Official, Building Subcode Official, Building, Resale Inspections",
+    "doc_date": "",
+    "via": "page",
+    "verified": true
+   },
+   {
+    "url": "https://www.southamptonnj.org/government/construction___zoning.php",
+    "quote": "tboyd@southamptonnj.org",
+    "doc_date": "",
+    "via": "page",
+    "verified": true
+   }
+  ],
+  "confidence": "medium",
+  "notes": "The July 2026 application is titled Residential Resale Inspection Application and must be filed 14 days before settlement; the resale certificate is issued against the state smoke/CO alarm law (N.J.S.A. 52:27D-198.1, N.J.A.C. 5:70-4.19) and Chapter 8 of the township property maintenance code. No page or ordinance text seen says outright that every sale needs it, and the code (ecode360 SO3594) could not be opened, so confidence is medium. Office hours for Tom Boyd: Monday to Thursday, 9 am to 3 pm. Rental properties have separate rental registration and rental inspection forms."
+ },
+ "fire_cert": {
+  "requirements": [
+   "Smoke alarms on each level and within 10 feet of any sleeping room",
+   "CO alarms within 10 feet of any sleeping room",
+   "The July 2026 township form does not list a fire extinguisher"
+  ],
+  "authorities": [
+   {
+    "name": "Southampton Township Construction Office (designated for smoke detector compliance; NJ DCA is the fire code enforcing agency)",
+    "type": "municipal_fire_bureau",
+    "area_served": "Entire township",
+    "lead_time": "At least 14 days before settlement",
+    "fees": [],
+    "how_to_apply": "Smoke and CO alarms are checked during the Residential Resale Inspection ($50 per unit, see the resale certificate section); the resale certificate cites the state smoke alarm rules. No separate smoke certificate form or fee was found.",
+    "application_url": "https://www.southamptonnj.org/Construction%20&%20Zoning/Forms/Resale%20Inspection%20Application%202026%20New.pdf?t=202607210900510",
+    "department_url": "https://www.southamptonnj.org/government/construction___zoning.php",
+    "contact_name": "Tom Boyd",
+    "contact_title": "Construction Official, Building Subcode Official (handles resale inspections)",
+    "phone": "609-859-2786",
+    "email": "tboyd@southamptonnj.org",
+    "evidence": [
+     {
+      "url": "https://nj.gov/dca/dfs/pdf/ANNUAL%20REGISTRY/THIRD%20QUARTER%20LEA%20REGISTRY%202026.pdf",
+      "quote": "S Southampton Township",
+      "doc_date": "2026-07",
+      "via": "pdf",
+      "verified": true
+     },
+     {
+      "url": "https://www.nj.gov/dca/dfs/pdf/fire%20directory_county%20summary/state_towns%207_17_26.pdf",
+      "quote": "SOUTHAMPTON TWP 0333",
+      "doc_date": "2026-07-17",
+      "via": "pdf",
+      "verified": true
+     },
+     {
+      "url": "https://www.nj.gov/dca/dfs/pdf/fire%20directory_county%20summary/state_towns%207_17_26.pdf",
+      "quote": "SC = Smoke Certs",
+      "doc_date": "2026-07-17",
+      "via": "pdf",
+      "verified": true
+     },
+     {
+      "url": "https://www.nj.gov/dca/dfs/pdf/fire%20directory_county%20summary/fire_code_enforcement_director.pdf",
+      "quote": "LEAID: 0333-999 Enf Auth. State Fire Official Louis Kilmer Phone (609)633-6132",
+      "doc_date": "2026-07-17 (survey date)",
+      "via": "state_directory",
+      "verified": true
+     },
+     {
+      "url": "https://www.nj.gov/dca/dfs/pdf/fire%20directory_county%20summary/fire_code_enforcement_director.pdf",
+      "quote": "SMOKE DETECTOR COMPLIANCE Name:Southhampton T wp Constr Office Addr: 5 Retreat Rd Southhampton NJ 08088 Phone (609) 859-2786",
+      "doc_date": "2026-07-17 (survey date)",
+      "via": "state_directory",
+      "verified": true
+     },
+     {
+      "url": "https://www.southamptonnj.org/Construction%20&%20Zoning/Forms/Resale%20Inspection%20Application%202026%20New.pdf?t=202607210900510",
+      "quote": "Smoke detectors required on each level of the home & within 10 feet of any sleeping room",
+      "doc_date": "2026-07 (PDF created July 21, 2026)",
+      "via": "pdf",
+      "verified": true
+     },
+     {
+      "url": "https://www.southamptonnj.org/Construction%20&%20Zoning/Forms/Resale%20Inspection%20Application%202026%20New.pdf?t=202607210900510",
+      "quote": "Carbon Monoxide detectors are required to be within 10 feet of any sleeping room",
+      "doc_date": "2026-07 (PDF created July 21, 2026)",
+      "via": "pdf",
+      "verified": true
+     }
+    ],
+    "confidence": "medium"
+   }
+  ],
+  "notes": "The NJ DCA is the fire code enforcing agency for Southampton (LEA registry code S). The DCA state-towns list (revised 7/17/2026) lists Southampton without the \"SC\" (smoke certs) flag, and the state directory (two fire company pages, Vincentown and Hampton Lakes) names the Southampton Township Construction Office, 5 Retreat Rd, (609) 859-2786, for smoke detector compliance."
+ },
+ "other_items": [
+  {
+   "label": "County recycling receptacle",
+   "detail": "The Burlington County recycling receptacle must stay at the property; contact the Recycling Coordinator (recyclingcoordinator@southamptonnj.org, 609-859-5574) if one is needed.",
+   "source_url": "https://www.southamptonnj.org/Construction%20&%20Zoning/Forms/Resale%20Inspection%20Application%202026%20New.pdf?t=202607210900510"
+  },
+  {
+   "label": "Utilities on for inspection",
+   "detail": "All utilities must be on for the resale inspection.",
+   "source_url": "https://www.southamptonnj.org/Construction%20&%20Zoning/Forms/Resale%20Inspection%20Application%202026%20New.pdf?t=202607210900510"
+  }
+ ],
+ "open_questions": [
+  "Confirm with the Construction Office that the resale inspection is mandatory for every sale (ordinance text not accessible).",
+  "Payment method, certificate validity period and any rush fee are not stated."
+ ],
+ "verification": {
+  "fees": 2,
+  "fee_ok": 2,
+  "fee_bad": 0,
+  "fee_unchecked": 0,
+  "quotes": 13,
+  "q_ok": 13,
+  "q_bad": 0,
+  "q_unchecked": 0
+ }
+}

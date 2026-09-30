@@ -1,0 +1,192 @@
+{
+ "municipality_code": "0307",
+ "municipality": "Chesterfield Township",
+ "county": "BURLINGTON",
+ "checked_at": "2026-09-30",
+ "resale_co": {
+  "status": "required",
+  "name": "Certificate of Inspection (resales or rentals)",
+  "issued_by": "Chesterfield Township Construction Office (Code Enforcement Officer)",
+  "lead_time": "No set lead time; the certificate takes 3 business days to generate after all repairs and certifications are in, so allow time before closing.",
+  "valid_for": "",
+  "requirements": [
+   "Smoke detectors on each floor, working; tested by the township inspector (or certification from the monitoring company if monitored)",
+   "Carbon monoxide detectors near the bedrooms",
+   "Visible 2.5 to 10 lb ABC fire extinguisher hung no higher than 60 inches and within 10 feet of the kitchen (April 2024 form)",
+   "Original certifications for the heater, heater chimney, wood fireplaces or woodstoves, and their chimneys",
+   "Well water test by a certified lab if on well water; buyer signs that they were told the results",
+   "GFI outlets outside, within 6 feet of the kitchen sink and in every bathroom; three-prong outlet for the washer; no open spaces in the panel; no multi-gang outlets or extension cords",
+   "Guardrails and handrails on all stairways; halls and stairways lighted",
+   "Heater and water heater relief valve pipe within 6 to 8 inches of the floor",
+   "Gutters, downspouts, screens, windows, siding, paint, decks, porches and accessory buildings in repair",
+   "Interior wall holes, tub and shower tile and leaking faucets repaired",
+   "No trash or rubbish on the property",
+   "House number visible on the front of the house or the mailbox"
+  ],
+  "fees": [
+   {
+    "label": "Resale certificate of inspection (includes one re-inspection)",
+    "amount": "$50.00",
+    "quote": "Rental ($25.00) _____ Resale ($50.00) _____",
+    "source_url": "https://web.archive.org/web/20240520224747/https://chesterfieldtwpnj.gov/images/construction/certificate_of_inspection_app41824.pdf",
+    "verified": null
+   },
+   {
+    "label": "Each additional inspection after the included re-inspection",
+    "amount": "$25.00",
+    "quote": "If additional inspections are required, there is a $25.00 fee per inspection.",
+    "source_url": "https://web.archive.org/web/20240520224747/https://chesterfieldtwpnj.gov/images/construction/certificate_of_inspection_app41824.pdf",
+    "verified": null
+   }
+  ],
+  "how_to_apply": "Fill out the Application for Certificate of Inspection, mark Resale, and pay by check or cash at the Township of Chesterfield, 295 Bordentown-Chesterfield Road. Call 609-298-2311 ext. 140 to schedule the inspection (voice mail requests are accepted). Turn in original certifications and the well water form if needed.",
+  "application_url": "https://web.archive.org/web/20240520224747/https://chesterfieldtwpnj.gov/images/construction/certificate_of_inspection_app41824.pdf",
+  "department_url": "https://web.archive.org/web/20241228104107/https://www.chesterfieldtwpnj.gov/construction",
+  "contact_name": "Glenn McMahon",
+  "contact_title": "Code Enforcement Officer",
+  "phone": "609-298-2311 ext. 140",
+  "email": "glenn@chesterfieldtwp.com",
+  "evidence": [
+   {
+    "url": "https://web.archive.org/web/20240520224747/https://chesterfieldtwpnj.gov/images/construction/certificate_of_inspection_app41824.pdf",
+    "quote": "APPLICATION FOR CERTIFICATE OF INSPECTION",
+    "doc_date": "2024-04 (PDF created April 18, 2024; archive capture 2024-05-20)",
+    "via": "pdf",
+    "verified": null
+   },
+   {
+    "url": "https://web.archive.org/web/20240520224747/https://chesterfieldtwpnj.gov/images/construction/certificate_of_inspection_app41824.pdf",
+    "quote": "REQUIREMENTS FOR CERTIFICATE OF INSPECTION RESALES OR RENTALS",
+    "doc_date": "2024-04 (PDF created April 18, 2024; archive capture 2024-05-20)",
+    "via": "pdf",
+    "verified": null
+   },
+   {
+    "url": "https://web.archive.org/web/20240520224747/https://chesterfieldtwpnj.gov/images/construction/certificate_of_inspection_app41824.pdf",
+    "quote": "All violations must be corrected and re-inspected and all certifications must be received in order to process the Certificate of Inspection. When all requirements have been met, three (3) business days are needed to generate the Certificate.",
+    "doc_date": "2024-04 (PDF created April 18, 2024; archive capture 2024-05-20)",
+    "via": "pdf",
+    "verified": null
+   },
+   {
+    "url": "https://web.archive.org/web/20240520224747/https://chesterfieldtwpnj.gov/images/construction/certificate_of_inspection_app41824.pdf",
+    "quote": "PHONE - 609-298-2311 ... ext.140",
+    "doc_date": "2024-04 (PDF created April 18, 2024; archive capture 2024-05-20)",
+    "via": "pdf",
+    "verified": null
+   },
+   {
+    "url": "https://web.archive.org/web/20241228104107/https://www.chesterfieldtwpnj.gov/construction",
+    "quote": "Glenn McMahon Code Enforcement Officer (609) 298-2311 ext. 140",
+    "doc_date": "2024-12-28 (archive capture)",
+    "via": "page",
+    "verified": true
+   },
+   {
+    "url": "https://web.archive.org/web/20241228104107/https://www.chesterfieldtwpnj.gov/construction",
+    "quote": "glenn [at] chesterfieldtwp.com",
+    "doc_date": "2024-12-28 (archive capture)",
+    "via": "page",
+    "verified": true
+   }
+  ],
+  "confidence": "medium",
+  "notes": "The live township site (chesterfieldtwpnj.gov) is behind a Cloudflare check, so Internet Archive copies were used: the application https://chesterfieldtwpnj.gov/images/construction/certificate_of_inspection_app41824.pdf (captured 2024-05-20) and the Construction page https://www.chesterfieldtwpnj.gov/construction (captured 2024-12-28), which links a 'Certificate Of Inspection' page that was not archived. The township ordinance on ecode360 (CH1100) could not be opened, so the requirement comes from the township's own resale/rental certificate form rather than the ordinance text. The email is shown on the page as 'glenn [at] chesterfieldtwp.com'. Fees and contacts may have changed since late 2024."
+ },
+ "fire_cert": {
+  "requirements": [
+   "Smoke detectors on each floor and carbon monoxide detectors near the bedrooms, tested by the township inspector during the Certificate of Inspection",
+   "2.5 to 10 lb ABC fire extinguisher, visible, no higher than 60 inches, within 10 feet of the kitchen (April 2024 form still lists it)"
+  ],
+  "authorities": [
+   {
+    "name": "Chesterfield Township Construction Office (smoke and CO checked in the township Certificate of Inspection)",
+    "type": "municipal_fire_bureau",
+    "area_served": "Entire township",
+    "lead_time": "",
+    "fees": [
+     {
+      "label": "Combined resale Certificate of Inspection including smoke/CO check (paid once)",
+      "amount": "$50.00",
+      "quote": "Rental ($25.00) _____ Resale ($50.00) _____",
+      "source_url": "https://web.archive.org/web/20240520224747/https://chesterfieldtwpnj.gov/images/construction/certificate_of_inspection_app41824.pdf",
+      "verified": null
+     }
+    ],
+    "how_to_apply": "Part of the township Certificate of Inspection application; no separate smoke certificate application was found.",
+    "application_url": "https://web.archive.org/web/20240520224747/https://chesterfieldtwpnj.gov/images/construction/certificate_of_inspection_app41824.pdf",
+    "department_url": "https://web.archive.org/web/20241228104107/https://www.chesterfieldtwpnj.gov/construction",
+    "contact_name": "Glenn McMahon",
+    "contact_title": "Code Enforcement Officer",
+    "phone": "609-298-2311 ext. 140",
+    "email": "glenn@chesterfieldtwp.com",
+    "evidence": [
+     {
+      "url": "https://web.archive.org/web/20240520224747/https://chesterfieldtwpnj.gov/images/construction/certificate_of_inspection_app41824.pdf",
+      "quote": "Smoke detectors and carbon monoxide detectors will be tested by the Township Inspector during the physical inspection of your property, unless you have a monitored system.",
+      "doc_date": "2024-04 (PDF created April 18, 2024; archive capture 2024-05-20)",
+      "via": "pdf",
+      "verified": null
+     },
+     {
+      "url": "https://nj.gov/dca/dfs/pdf/ANNUAL%20REGISTRY/THIRD%20QUARTER%20LEA%20REGISTRY%202026.pdf",
+      "quote": "S Chesterfield Township",
+      "doc_date": "2026-07",
+      "via": "pdf",
+      "verified": true
+     },
+     {
+      "url": "https://www.nj.gov/dca/dfs/pdf/fire%20directory_county%20summary/state_towns%207_17_26.pdf",
+      "quote": "CHESTERFIELD 0307",
+      "doc_date": "2026-07-17",
+      "via": "pdf",
+      "verified": true
+     },
+     {
+      "url": "https://www.nj.gov/dca/dfs/pdf/fire%20directory_county%20summary/state_towns%207_17_26.pdf",
+      "quote": "SC = Smoke Certs",
+      "doc_date": "2026-07-17",
+      "via": "pdf",
+      "verified": true
+     },
+     {
+      "url": "https://www.nj.gov/dca/dfs/pdf/fire%20directory_county%20summary/fire_code_enforcement_director.pdf",
+      "quote": "03 Burlington Chesterfield Township0307 LEAID: 0307-999 Enf Auth. State Fire Official Louis Kilmer Phone (609)633-6132 Addr: 300 Bordentown Chesterfield Rd Chesterfield NJ 08515 Phone (609) 298-0426 Chesterfield Twp Constr Office",
+      "doc_date": "2026 (directory)",
+      "via": "state_directory",
+      "verified": true
+     }
+    ],
+    "confidence": "medium"
+   }
+  ],
+  "notes": "The NJ DCA is the fire code enforcing agency for Chesterfield (LEA registry code S; Fire Official Louis Kilmer, (609)633-6132), but the DCA state-towns list (revised 7/17/2026) does not mark Chesterfield with 'SC' (state issues smoke certs), and the DCA directory lists 'Chesterfield Twp Constr Office' (300 Bordentown Chesterfield Rd, (609) 298-0426) for smoke detector compliance. The township's own form says its inspector tests smoke and CO detectors during the Certificate of Inspection, which under N.J.A.C. 5:70-2.3(a)1 stands in for a separate state certificate. The directory's address and phone differ from the township form (295 Bordentown-Chesterfield Road, 609-298-2311). The form (April 2024) still lists an extinguisher; P.L.2025, c.19 (February 3, 2025) removed it from the state rule."
+ },
+ "other_items": [
+  {
+   "label": "Well water test",
+   "detail": "If on well water, have it tested by a certified lab; the buyer signs the township water test certification.",
+   "source_url": "https://web.archive.org/web/20240520224747/https://chesterfieldtwpnj.gov/images/construction/certificate_of_inspection_app41824.pdf"
+  },
+  {
+   "label": "Heater and chimney certifications",
+   "detail": "Original certifications for the heater, heater chimney, fireplaces or woodstoves and their chimneys are required before the certificate is issued.",
+   "source_url": "https://web.archive.org/web/20240520224747/https://chesterfieldtwpnj.gov/images/construction/certificate_of_inspection_app41824.pdf"
+  }
+ ],
+ "open_questions": [
+  "Confirm the current fee ($50 resale on the April 2024 form) and whether a newer form is posted on the live site.",
+  "Confirm whether the township still requires the fire extinguisher after P.L.2025, c.19.",
+  "Confirm whether the DCA issues any separate smoke certificate for Chesterfield sales (state list suggests it does not)."
+ ],
+ "verification": {
+  "fees": 3,
+  "fee_ok": 0,
+  "fee_bad": 0,
+  "fee_unchecked": 3,
+  "quotes": 11,
+  "q_ok": 6,
+  "q_bad": 0,
+  "q_unchecked": 5
+ }
+}

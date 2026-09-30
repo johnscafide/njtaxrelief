@@ -1,0 +1,250 @@
+{
+ "municipality_code": "0315",
+ "municipality": "Florence Township",
+ "county": "BURLINGTON",
+ "checked_at": "2026-09-30",
+ "resale_co": {
+  "status": "required",
+  "name": "Continued Certificate of Occupancy (CCO), Residential Change of Tenant/Occupancy/Ownership inspection",
+  "issued_by": "Florence Township Housing Department (Construction and Code Enforcement)",
+  "contact_name": "Michael Perna",
+  "contact_title": "Housing Inspector",
+  "lead_time": "Allow at least 2 weeks to get the first inspection appointment; in busy times it can be up to 4 weeks out.",
+  "valid_for": "",
+  "requirements": [
+   "Smoke alarms on every level and outside each sleeping area; replace alarms older than 10 years; battery units must be 10-year sealed (UL 217)",
+   "Carbon monoxide alarm near the bedrooms if the home has fuel-burning appliances or an attached garage",
+   "Portable fire extinguisher (Township Code 116-4.B(1)(d)), see fire certificate section",
+   "Electrical: 100 amp minimum service, grounded outlets with cover plates, GFI outlets in bathrooms, panel door with no open slots",
+   "Plumbing: no leaks, J-bend sink drains, water heater relief pipe to 6 inches above floor, hot water 120 to 140 degrees, backflow devices where needed",
+   "Sump pump works, drains properly and opening is covered",
+   "Floors, walls and ceilings sound with no holes, trip hazards or loose paint",
+   "Kitchen: stove, oven and broiler work; anti-tilt bracket on range",
+   "Windows open, stay open and lock; screens on all windows; no broken glass",
+   "Doors latch; exterior and bathroom doors lock; garage door and opener work safely",
+   "Graspable handrails on stairs; deck and porch railings at 30 inches or more with no more than 4 inch openings",
+   "Roof certification from a licensed roofer if there are signs of active leaks",
+   "Exterior, gutters, downspouts, fences, sidewalks and driveway in good repair; yard mowed and cleared",
+   "Heating system certification on the Township form, original with raised seal (not needed for Florence Tollgate condos); inactive oil fill pipes and tanks removed",
+   "Level II chimney certification for wood-burning fireplaces or solid fuel stoves; any work done without permits must be permitted and inspected"
+  ],
+  "fees": [
+   {
+    "label": "Initial CCO inspection, per unit (new fees from November 1, 2024, Ordinance 2024-16)",
+    "amount": "$165",
+    "quote": "INITIAL FEES PER UNIT: $165",
+    "source_url": "https://web.archive.org/web/20251110020217/http://www.florence-nj.gov/wp-content/uploads/Housing-Inspection-Application-Form-7-2-25.pdf",
+    "verified": true
+   },
+   {
+    "label": "1st re-inspection",
+    "amount": "$35",
+    "quote": "ADDITIONAL FEES: $35 1st re-inspection; $50 2nd re-inspection; $75 3rd re-inspection; $100 for 4th and any subsequent re-inspections.",
+    "source_url": "https://web.archive.org/web/20251110020217/http://www.florence-nj.gov/wp-content/uploads/Housing-Inspection-Application-Form-7-2-25.pdf",
+    "verified": true
+   },
+   {
+    "label": "2nd re-inspection",
+    "amount": "$50",
+    "quote": "ADDITIONAL FEES: $35 1st re-inspection; $50 2nd re-inspection; $75 3rd re-inspection; $100 for 4th and any subsequent re-inspections.",
+    "source_url": "https://web.archive.org/web/20251110020217/http://www.florence-nj.gov/wp-content/uploads/Housing-Inspection-Application-Form-7-2-25.pdf",
+    "verified": true
+   },
+   {
+    "label": "3rd re-inspection",
+    "amount": "$75",
+    "quote": "ADDITIONAL FEES: $35 1st re-inspection; $50 2nd re-inspection; $75 3rd re-inspection; $100 for 4th and any subsequent re-inspections.",
+    "source_url": "https://web.archive.org/web/20251110020217/http://www.florence-nj.gov/wp-content/uploads/Housing-Inspection-Application-Form-7-2-25.pdf",
+    "verified": true
+   },
+   {
+    "label": "4th and each later re-inspection",
+    "amount": "$100",
+    "quote": "ADDITIONAL FEES: $35 1st re-inspection; $50 2nd re-inspection; $75 3rd re-inspection; $100 for 4th and any subsequent re-inspections.",
+    "source_url": "https://web.archive.org/web/20251110020217/http://www.florence-nj.gov/wp-content/uploads/Housing-Inspection-Application-Form-7-2-25.pdf",
+    "verified": true
+   },
+   {
+    "label": "\"No Occupancy\" letter for an as-is purchase (application and inspection fee must be paid first)",
+    "amount": "$165.00",
+    "quote": "The Housing Inspection Application form & $165.00 inspection fee must be submitted prior to processing a “No Occupancy” letter.",
+    "source_url": "https://web.archive.org/web/20251110020217/http://www.florence-nj.gov/wp-content/uploads/Housing-Inspection-Application-Form-7-2-25.pdf",
+    "verified": true
+   }
+  ],
+  "how_to_apply": "Fill out page 1 of the Housing Inspection Application form (check Buyer, give owner and buyer contact details) and submit it with the fee to the Florence Township Housing Department, 711 Broad Street, Florence. The inspection is booked for the next open slot once the form is complete and paid. A lock box is allowed for vacant homes; otherwise an adult must let the inspector in. Give at least 24 hours notice to cancel or reschedule. For an as-is sale where the buyer will not move in, ask for a notarized \"No Occupancy\" letter (needs the paid application, the as-is contract and a signed buyer letter).",
+  "application_url": "https://www.florence-nj.gov/wp-content/uploads/Housing-Inspection-Application-Form-7-2-25.pdf",
+  "department_url": "https://florence-nj.gov/departments/housing/housing-application/",
+  "phone": "609-499-2130 ext. 124",
+  "email": "housing@florence-nj.gov",
+  "evidence": [
+   {
+    "url": "https://web.archive.org/web/20260911211838/https://florence-nj.gov/departments/housing/",
+    "quote": "All residential units must be inspected by the Housing Department and a Continued Certificate of Occupancy issued PRIOR to a change in occupancy or a transfer of property",
+    "doc_date": "2026-09 (archive capture)",
+    "via": "page",
+    "verified": true
+   },
+   {
+    "url": "https://web.archive.org/web/20260911211838/https://florence-nj.gov/departments/housing/",
+    "quote": "Michael Perna ... Housing Inspector ... Phone: 609-499-2130 ext. 124 ... Email: housing@florence-nj.gov",
+    "doc_date": "2026-09 (archive capture)",
+    "via": "page",
+    "verified": true
+   },
+   {
+    "url": "https://web.archive.org/web/20260511030111/https://florence-nj.gov/departments/housing/housing-faqs/",
+    "quote": "A Continued Certificate of Occupancy (CCO) is always required in Florence Township when selling or purchasing a property",
+    "doc_date": "2026-05 (archive capture)",
+    "via": "page",
+    "verified": true
+   },
+   {
+    "url": "https://web.archive.org/web/20260511030111/https://florence-nj.gov/departments/housing/housing-faqs/",
+    "quote": "Please allow at least 2 weeks for scheduling your initial inspection appointment. During our busy times, we can be up to 4 weeks out.",
+    "doc_date": "2026-05 (archive capture)",
+    "via": "page",
+    "verified": true
+   },
+   {
+    "url": "https://web.archive.org/web/20260606135559/https://florence-nj.gov/departments/housing/housing-application/",
+    "quote": "Fill out the first page of the Housing Inspection Form and submit the form and fee to the Florence Township Housing Department.",
+    "doc_date": "2026-06 (archive capture)",
+    "via": "page",
+    "verified": true
+   },
+   {
+    "url": "https://web.archive.org/web/20251110020217/http://www.florence-nj.gov/wp-content/uploads/Housing-Inspection-Application-Form-7-2-25.pdf",
+    "quote": "New fees beginning November 1, 2024. Ordinance 2024-16",
+    "doc_date": "2025-07",
+    "via": "pdf",
+    "verified": true
+   }
+  ],
+  "confidence": "high",
+  "notes": "The live florence-nj.gov site shows a bot check (captcha) to automated requests, so all Township pages were read from Internet Archive captures of the original URLs: https://florence-nj.gov/departments/housing/ (captured 2026-09-11), https://florence-nj.gov/departments/housing/housing-application/ (2026-06-06), https://florence-nj.gov/departments/housing/housing-faqs/ (2026-05-11) and https://www.florence-nj.gov/wp-content/uploads/Housing-Inspection-Application-Form-7-2-25.pdf (captured 2025-11-10; file name dates the form July 2, 2025). The form cites Chapter 116 of the Township Code. A 90-day validity is stated only for rental inspections done before a tenant is named; no validity period is published for sales. The Township does not issue a Temporary CO. Other staff on the housing page: Jessica Carroll, Code Enforcement Officer, ext. 118, jcarroll@florence-nj.gov; technical assistants at ext. 117 (techassist@florence-nj.gov) and ext. 131 (techassist2@florence-nj.gov). The form's general Township line is (609) 499-2525. Rentals also need Landlord and Tenant Registration forms and a Lead-Safe Certificate for pre-1978 units ($40 Township filing fee), plus a new radio water meter before the CCO."
+ },
+ "fire_cert": {
+  "requirements": [
+   "Smoke alarms on every level (including habitable attic and basement) and outside each sleeping area; alarms must be replaced after 10 years",
+   "Battery smoke alarms must be 10-year sealed, single station, listed to UL 217; hard-wired alarms from original construction may not be swapped for battery units",
+   "Carbon monoxide alarm (UL 2034) in the immediate vicinity of the bedrooms when the home has fuel-burning appliances or an attached garage",
+   "Portable fire extinguisher still required by Township Code 116-4.B(1)(d) on the July 2025 form: at least 2A:10B:C, residential rated, 10 lb or less",
+   "Extinguisher mounted with the maker's bracket, within 10 feet of the kitchen, top no more than 5 feet above the floor, visible, near an exit path",
+   "Extinguisher serviced and tagged by a certified contractor within 12 months, or a receipt for a newly bought unit; owner's manual present; do not remove the tamper seal"
+  ],
+  "authorities": [
+   {
+    "name": "Florence Township Housing Department / Construction Office (smoke, CO and extinguisher checked on the CCO housing inspection)",
+    "type": "municipal_fire_bureau",
+    "area_served": "Entire township",
+    "lead_time": "Same as the CCO: allow at least 2 weeks, up to 4 weeks in busy times.",
+    "fees": [
+     {
+      "label": "No separate fire certificate fee published; smoke, CO and extinguisher are items 1 to 3 of the CCO housing inspection, which costs this per unit",
+      "amount": "$165",
+      "quote": "INITIAL FEES PER UNIT: $165",
+      "source_url": "https://web.archive.org/web/20251110020217/http://www.florence-nj.gov/wp-content/uploads/Housing-Inspection-Application-Form-7-2-25.pdf",
+      "verified": true
+     }
+    ],
+    "how_to_apply": "No separate application found. The smoke alarm, CO alarm and extinguisher check is part of the Housing Inspection Application for the CCO, submitted with the fee to the Housing Department at 711 Broad Street.",
+    "application_url": "https://www.florence-nj.gov/wp-content/uploads/Housing-Inspection-Application-Form-7-2-25.pdf",
+    "department_url": "https://florence-nj.gov/departments/housing/",
+    "contact_name": "Michael Perna",
+    "contact_title": "Housing Inspector",
+    "phone": "609-499-2130 ext. 124",
+    "email": "housing@florence-nj.gov",
+    "evidence": [
+     {
+      "url": "https://www.nj.gov/dca/dfs/pdf/fire%20directory_county%20summary/fire_code_enforcement_director.pdf",
+      "quote": "SMOKE DETECTOR COMPLIANCE Name: Florence Twp Constr Dept Addr: 711 Broad Street Florence NJ 08518 Phone (609) 499-2130",
+      "doc_date": "2026-03 (Florence page survey date 3/5/2026)",
+      "via": "state_directory",
+      "verified": true
+     },
+     {
+      "url": "https://web.archive.org/web/20251110020217/http://www.florence-nj.gov/wp-content/uploads/Housing-Inspection-Application-Form-7-2-25.pdf",
+      "quote": "The Code of The Township of Florence, at section 116 -4.B.(1)(d), requires that all one and two family dwellings at a change of occupancy be provided with at least one portable fire extinguisher, in addition to the requirements for smoke and carbon monoxide detectors.",
+      "doc_date": "2025-07",
+      "via": "pdf",
+      "verified": true
+     },
+     {
+      "url": "https://web.archive.org/web/20251110020217/http://www.florence-nj.gov/wp-content/uploads/Housing-Inspection-Application-Form-7-2-25.pdf",
+      "quote": "Required on all house levels (habitable attic, second floor, first floor, basement, etc.) and outside of each sleeping area.",
+      "doc_date": "2025-07",
+      "via": "pdf",
+      "verified": true
+     },
+     {
+      "url": "https://web.archive.org/web/20260911211838/https://florence-nj.gov/departments/housing/",
+      "quote": "Michael Perna ... Housing Inspector ... Phone: 609-499-2130 ext. 124 ... Email: housing@florence-nj.gov",
+      "doc_date": "2026-09 (archive capture)",
+      "via": "page",
+      "verified": true
+     },
+     {
+      "url": "https://nj.gov/dca/dfs/pdf/ANNUAL%20REGISTRY/THIRD%20QUARTER%20LEA%20REGISTRY%202026.pdf",
+      "quote": "D Florence Township",
+      "doc_date": "2026-07",
+      "via": "pdf",
+      "verified": true
+     },
+     {
+      "url": "https://web.archive.org/web/20231130075912/https://ftfd40.org/fire-prevention/",
+      "quote": "We are responsible for enforcing the New Jersey Uniform Fire Code within Florence Township in all buildings except 1 and 2 family owner occupied dwellings.",
+      "doc_date": "2023-11 (archive capture)",
+      "via": "page",
+      "verified": true
+     }
+    ],
+    "confidence": "medium"
+   }
+  ],
+  "notes": "The DCA registry lists Florence Township's fire code enforcing agency as a fire district (code D), and the DCA directory names Fire Official Brian Richardson (Florence Twp Fire Dept / Fire District, 401 Firehouse Lane, phone (609) 499-1393, brichardson@ftfd40.org). But the same directory page lists 'Florence Twp Constr Dept' at 711 Broad Street, (609) 499-2130 as the Smoke Detector Compliance contact, and the fire district's own Fire Prevention page (archived 2023-11-30 from https://ftfd40.org/fire-prevention/, since the live site shows a bot check) says the bureau enforces the fire code 'in all buildings except 1 and 2 family owner occupied dwellings'. The Township's July 2025 CCO form covers smoke, CO and extinguisher. So for a home sale, go through the Township Housing Department. The Township still requires an extinguisher under its own code even though P.L.2025, c.19 removed it from the state rule. No separate fire certificate fee or form was found; confirm with the Housing Department whether the CCO also serves as the state smoke/CO certificate."
+ },
+ "other_items": [
+  {
+   "label": "Open permits and unpermitted work",
+   "detail": "Property records are checked. Any work done without a permit must get a permit and pass inspection, and outstanding construction permits must be closed, before the CCO is issued.",
+   "source_url": "https://web.archive.org/web/20260606135559/https://florence-nj.gov/departments/housing/housing-application/"
+  },
+  {
+   "label": "Heating system certification",
+   "detail": "Original Township Heating System Certification form signed by a licensed contractor with raised seal; copies or faxes not accepted.",
+   "source_url": "https://web.archive.org/web/20251110020217/http://www.florence-nj.gov/wp-content/uploads/Housing-Inspection-Application-Form-7-2-25.pdf"
+  },
+  {
+   "label": "Chimney certification",
+   "detail": "Level II chimney certification for wood-burning fireplaces or solid fuel stoves.",
+   "source_url": "https://web.archive.org/web/20251110020217/http://www.florence-nj.gov/wp-content/uploads/Housing-Inspection-Application-Form-7-2-25.pdf"
+  },
+  {
+   "label": "Age Restricted Development form",
+   "detail": "Required if applicable, listed with the CCO application.",
+   "source_url": "https://web.archive.org/web/20260606135559/https://florence-nj.gov/departments/housing/housing-application/"
+  },
+  {
+   "label": "Underground oil tank",
+   "detail": "Township FAQ says a tank in use and not leaking, or properly abandoned in place with permits, may stay; removal is a buyer/seller negotiation.",
+   "source_url": "https://web.archive.org/web/20260511030111/https://florence-nj.gov/departments/housing/housing-faqs/"
+  }
+ ],
+ "open_questions": [
+  "Whether the Township issues a separate state smoke/CO certificate document or the CCO covers it; no separate fire certificate fee was found.",
+  "No-show or late cancellation fee amount: the FAQ warns of fees for cancelling with less than 24 hours notice but no amount was found.",
+  "Payment methods accepted are not stated on the pages found.",
+  "Whether the application can be emailed rather than delivered in person is not stated."
+ ],
+ "verification": {
+  "fees": 7,
+  "fee_ok": 7,
+  "fee_bad": 0,
+  "fee_unchecked": 0,
+  "quotes": 12,
+  "q_ok": 12,
+  "q_bad": 0,
+  "q_unchecked": 0
+ }
+}

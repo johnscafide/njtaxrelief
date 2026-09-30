@@ -1,0 +1,218 @@
+{
+ "municipality_code": "0321",
+ "municipality": "Medford Lakes Borough",
+ "county": "BURLINGTON",
+ "checked_at": "2026-09-30",
+ "resale_co": {
+  "status": "required",
+  "name": "Certificate of Continued Occupancy (CCO)",
+  "issued_by": "Borough of Medford Lakes Office of Construction",
+  "contact_name": "Tom Boyd",
+  "contact_title": "Construction Official",
+  "lead_time": "Inspections are scheduled based on availability. The related fire and extraneous flow applications cost least when filed more than 10 business days before settlement.",
+  "valid_for": "",
+  "requirements": [
+   "Smoke alarm, CO alarm and fire extinguisher inspection done together with the CCO inspection (see fire_cert)",
+   "Separate extraneous flow inspection by the Wastewater Department: sump pumps, roof drains and floor drains must not be connected to the Borough wastewater system"
+  ],
+  "fees": [
+   {
+    "label": "Extraneous flow (sump pump / roof / floor drain) inspection, Wastewater Department, more than 10 business days before settlement (no separate CCO fee was found)",
+    "amount": "$50",
+    "quote": "More than 10 Business Days Prior to Settlement: $50",
+    "source_url": "https://www.medfordlakes.com/DocumentCenter/View/28/Extraneous-Flow-Application",
+    "verified": true
+   },
+   {
+    "label": "Extraneous flow inspection, 4 to 10 business days before settlement",
+    "amount": "$70",
+    "quote": "4-10 Business Days Prior to Settlement: $70",
+    "source_url": "https://www.medfordlakes.com/DocumentCenter/View/28/Extraneous-Flow-Application",
+    "verified": true
+   },
+   {
+    "label": "Extraneous flow inspection, less than 4 business days before settlement",
+    "amount": "$125",
+    "quote": "Less than 4 Business Days Prior to Settlement: $125",
+    "source_url": "https://www.medfordlakes.com/DocumentCenter/View/28/Extraneous-Flow-Application",
+    "verified": true
+   },
+   {
+    "label": "Extraneous flow re-inspection",
+    "amount": "$35",
+    "quote": "Re-Inspection: $35",
+    "source_url": "https://www.medfordlakes.com/DocumentCenter/View/28/Extraneous-Flow-Application",
+    "verified": true
+   }
+  ],
+  "how_to_apply": "The Borough says a simple application is completed when applying for a residential CCO when selling or renting a home; no separate CCO form is posted, so contact the Office of Construction, 1 Cabin Circle, 609-654-8898 ext. 128, construction@medfordlakes.com. File the Fire Inspection Application and the Application for Certificate of Extraneous Flow Elimination Compliance (Wastewater Department, 14 Stokes Road, 609-654-2013, office hours Monday to Friday 7 a.m. to 2:30 p.m.) with their fees; each inspector contacts the applicant once the paid application is received.",
+  "application_url": "",
+  "department_url": "https://www.medfordlakes.com/157/Rentals-Change-of-Occupancy",
+  "phone": "609-654-8898, ext. 128",
+  "email": "construction@medfordlakes.com",
+  "evidence": [
+   {
+    "url": "https://www.medfordlakes.com/157/Rentals-Change-of-Occupancy",
+    "quote": "A residential Smoke Alarm/CO Alarm/Fire Extinguisher inspection is performed in conjunction with the CCO (Certificate of Continued Occupancy) inspection. A simple application can be completed when applying for a residential CCO when selling or renting a home.",
+    "doc_date": "",
+    "via": "page",
+    "verified": true
+   },
+   {
+    "url": "https://www.medfordlakes.com/157/Rentals-Change-of-Occupancy",
+    "quote": "You will also need an extraneous flow inspection, this inspection insures that sump pumps, roof drains, and floor drains are not connected to the Borough wastewater system.",
+    "doc_date": "",
+    "via": "page",
+    "verified": true
+   },
+   {
+    "url": "https://www.medfordlakes.com/149/Construction-Building",
+    "quote": "Tom Boyd Construction Official Sherry Rockhill-Smith Assistant to the Construction Official",
+    "doc_date": "",
+    "via": "page",
+    "verified": true
+   },
+   {
+    "url": "https://www.medfordlakes.com/149/Construction-Building",
+    "quote": "Phone: 609-654-8898, ext. 128",
+    "doc_date": "",
+    "via": "page",
+    "verified": true
+   }
+  ],
+  "confidence": "medium",
+  "notes": "The Borough's Rentals and Change of Occupancy page (under Construction) says a residential CCO is applied for when selling or renting a home and that the smoke/CO/extinguisher inspection is done with it. No separate CCO application form, CCO fee or list of CCO inspection items was found on the Borough site; the fees listed here are for the extraneous flow inspection, which the same page says is also needed. The page gives the same three tiers for the extraneous flow inspection ($50 if 10 days before, $70 at 4 to 10 days, $125 under 4 days, $35 re-inspection). The Office of Construction email link on the Construction page is construction@medfordlakes.com (labeled for Sherry Rockhill-Smith, Assistant to the Construction Official). Rentals also need Landlord Registration signed by the Fire Official. The Borough code (ecode360 ME1961) could not be opened."
+ },
+ "fire_cert": {
+  "requirements": [
+   "House numbers: numerals at least 4 inches high, contrasting color, permanently fixed to the house and visible from the street; light post or mailbox numbers are not accepted",
+   "Smoke alarm on every level; basement alarm at the bottom of the stairwell at ceiling level (not between joists); hallway alarm within 10 feet of all bedroom doors",
+   "Smoke alarm on the ceiling of every bedroom in homes built 1991 to present",
+   "Hard-wired smoke alarms cannot be replaced with battery alarms; all smoke alarms under 10 years old and working; battery alarms must be the 10-year battery type",
+   "CO alarm in the hallway within 10 feet of all bedrooms, under 10 years old, installed per the maker; plug-in, battery or hard-wired accepted, but not in switched outlets or against floor molding",
+   "Fire extinguisher still on the October 2024 form: minimum 2A-10B:C, under 10 pounds, mounted on its bracket within 10 feet of the kitchen in the exit path, visible and reachable",
+   "Homes with a low voltage fire alarm system must have it tested and approved by the alarm company before the inspection and show the alarm certification at the inspection"
+  ],
+  "authorities": [
+   {
+    "name": "Borough of Medford Lakes Fire Department, Bureau of Fire Prevention (LEA #03321)",
+    "type": "municipal_fire_bureau",
+    "area_served": "Entire borough",
+    "lead_time": "Submit to the Borough Office more than 10 business days before settlement to avoid higher fees. The Fire Official contacts the applicant once the paid application is received. The October 2024 form says certificates are valid for 90 days; the Borough web page says six months.",
+    "fees": [
+     {
+      "label": "More than 10 business days before settlement",
+      "amount": "$50",
+      "quote": "More than 10 Business Days Prior to Settlement: $50",
+      "source_url": "https://www.medfordlakes.com/DocumentCenter/View/119/Fire-Inspection-Application-PDF",
+      "verified": true
+     },
+     {
+      "label": "4 to 10 business days before settlement",
+      "amount": "$70",
+      "quote": "4-10 Business Days Prior to Settlement: $70",
+      "source_url": "https://www.medfordlakes.com/DocumentCenter/View/119/Fire-Inspection-Application-PDF",
+      "verified": true
+     },
+     {
+      "label": "Less than 4 business days before settlement",
+      "amount": "$125",
+      "quote": "Less than 4 Business Days Prior to Settlement: $125",
+      "source_url": "https://www.medfordlakes.com/DocumentCenter/View/119/Fire-Inspection-Application-PDF",
+      "verified": true
+     },
+     {
+      "label": "Re-inspection",
+      "amount": "$35",
+      "quote": "Re-Inspection: $35",
+      "source_url": "https://www.medfordlakes.com/DocumentCenter/View/119/Fire-Inspection-Application-PDF",
+      "verified": true
+     }
+    ],
+    "how_to_apply": "Fill out the Application for Certificate of Smoke Alarm, Carbon Monoxide Alarm and Portable Fire Extinguisher Compliance (address, block and lot, owner, occupant, sales agent and firm, settlement date) and submit it with the fee, payable to the Borough of Medford Lakes, to the Borough Office at 1 Cabin Circle. The form records cash or check; the web page says cash or money order. The Fire Official then calls to schedule.",
+    "application_url": "https://www.medfordlakes.com/DocumentCenter/View/119/Fire-Inspection-Application-PDF",
+    "department_url": "https://www.medfordlakes.com/157/Rentals-Change-of-Occupancy",
+    "contact_name": "Vincent Knott",
+    "contact_title": "Fire Official (per the Borough's October 2024 application form)",
+    "phone": "(856) 316-8584",
+    "email": "vincent.knott@mlfd371.org",
+    "evidence": [
+     {
+      "url": "https://www.medfordlakes.com/157/Rentals-Change-of-Occupancy",
+      "quote": "The cost of the Smoke Detector/CO Detector Compliance Certificate is $50 if scheduled 10 days prior to change of occupancy, $70 if scheduled 4 to 10 days prior to change or $125 if scheduled less than 4 days prior.",
+      "doc_date": "",
+      "via": "page",
+      "verified": true
+     },
+     {
+      "url": "https://www.medfordlakes.com/157/Rentals-Change-of-Occupancy",
+      "quote": "Cash or Money Order are acceptable methods of payment. The Certificate issued is good for six months from the date of issuance.",
+      "doc_date": "",
+      "via": "page",
+      "verified": true
+     },
+     {
+      "url": "https://www.medfordlakes.com/DocumentCenter/View/119/Fire-Inspection-Application-PDF",
+      "quote": "Requests should be submitted to the Borough Office more than ten business days prior to the settlement date to avoid additional fees. For questions contact the Fire Official (609) 316-8584 vincent.knott@mlfd371.org",
+      "doc_date": "2024-10",
+      "via": "pdf",
+      "verified": true
+     },
+     {
+      "url": "https://www.medfordlakes.com/DocumentCenter/View/119/Fire-Inspection-Application-PDF",
+      "quote": "(856) 316-8584 vincent.knott@mlfd371.org",
+      "doc_date": "2024-10",
+      "via": "pdf",
+      "verified": true
+     },
+     {
+      "url": "https://www.medfordlakes.com/DocumentCenter/View/119/Fire-Inspection-Application-PDF",
+      "quote": "Certificates are valid for 90 days",
+      "doc_date": "2024-10",
+      "via": "pdf",
+      "verified": true
+     },
+     {
+      "url": "https://www.nj.gov/dca/dfs/pdf/fire%20directory_county%20summary/fire_code_enforcement_director.pdf",
+      "quote": "Enf Auth. Municipal Fire Official Craig Farnsworth II Phone (609) 654-8898 Email craig.farnsworth@mlfd371.org",
+      "doc_date": "2026-05 (Medford Lakes page survey date 5/18/2026)",
+      "via": "state_directory",
+      "verified": true
+     },
+     {
+      "url": "https://nj.gov/dca/dfs/pdf/ANNUAL%20REGISTRY/THIRD%20QUARTER%20LEA%20REGISTRY%202026.pdf",
+      "quote": "M Medford Lakes Borough",
+      "doc_date": "2026-07",
+      "via": "pdf",
+      "verified": true
+     }
+    ],
+    "confidence": "medium"
+   }
+  ],
+  "notes": "The DCA registry lists Medford Lakes as a municipal fire code enforcing agency (code M). Contact conflict: the Borough's Fire Inspection Application (PDF created 2024-10-30) names Vincent Knott as the Fire Official contact, with (856) 316-8584 in the header and (609) 316-8584 in the body; the DCA directory, surveyed 5/18/2026 and newer than the form, lists Fire Official Craig Farnsworth II, (609) 654-8898, craig.farnsworth@mlfd371.org, with 'Medford Lakes Boro Fire Prev', 1 Cabin Circle Dr as the Smoke Detector Compliance contact. Per the research rules the Borough's own form is used above, but the directory may be more current; the Borough office line is 609-654-8898. The 856 area code matches a number the DCA directory prints for the neighboring Lumberton entry. The web page suggests keeping the extinguisher under the kitchen sink or mounted within 10 feet of the kitchen, while the October 2024 form requires it to be mounted on its bracket; the form is used here. The web page and the form also differ on how long the certificate is valid (six months vs 90 days). The form predates P.L.2025, c.19 and still requires an extinguisher."
+ },
+ "other_items": [
+  {
+   "label": "Extraneous flow elimination certificate (sump pump, roof and floor drains)",
+   "detail": "Wastewater Department inspection needed at change of occupancy to confirm sump pumps, roof drains and floor drains are not tied into the Borough wastewater system. Same fee tiers as the fire certificate; $35 re-inspection. Wastewater Department, 14 Stokes Road, 609-654-2013.",
+   "source_url": "https://www.medfordlakes.com/DocumentCenter/View/28/Extraneous-Flow-Application"
+  }
+ ],
+ "open_questions": [
+  "The CCO's own application, fee and inspection items are not posted; confirm with the Office of Construction whether the CCO is issued on the basis of the fire and extraneous flow certificates alone or needs its own inspection and fee.",
+  "Who the current Fire Official is: the Borough form (2024) says Vincent Knott, the DCA directory (May 2026) says Craig Farnsworth II.",
+  "Whether the fire certificate is valid for 90 days (form) or six months (web page).",
+  "Whether the Bureau still requires a fire extinguisher after P.L.2025, c.19."
+ ],
+ "verification": {
+  "fees": 8,
+  "fee_ok": 8,
+  "fee_bad": 0,
+  "fee_unchecked": 0,
+  "quotes": 11,
+  "q_ok": 11,
+  "q_bad": 0,
+  "q_unchecked": 0
+ }
+}

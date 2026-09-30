@@ -1,0 +1,175 @@
+{
+ "municipality_code": "0337",
+ "municipality": "Westampton Township",
+ "county": "BURLINGTON",
+ "checked_at": "2026-09-30",
+ "resale_co": {
+  "status": "not_required",
+  "name": "",
+  "issued_by": "",
+  "lead_time": "",
+  "valid_for": "",
+  "requirements": [],
+  "fees": [],
+  "how_to_apply": "",
+  "application_url": "",
+  "department_url": "https://www.westamptonnj.gov/construction-code-enforcement-inspections/pages/resalerental-home",
+  "phone": "(609) 267-1891 ext. 101",
+  "email": "",
+  "contact_name": "",
+  "contact_title": "",
+  "evidence": [
+   {
+    "url": "https://web.archive.org/web/20260530112936/https://www.westamptonnj.gov/construction-code-enforcement-inspections/pages/resalerental-home",
+    "quote": "There is no Certificate of Occupancy (CO) required in Westampton Township. What is required is a Smoke Detector/Carbon Monoxide/Fire Extinguisher Inspection.",
+    "doc_date": "2026-05-30 (Internet Archive capture)",
+    "via": "page",
+    "verified": true
+   },
+   {
+    "url": "https://web.archive.org/web/20260530112936/https://www.westamptonnj.gov/construction-code-enforcement-inspections/pages/resalerental-home",
+    "quote": "Contact Info Phone: (609) 267-1891 ext. 101 Fax: (609) 267-7398",
+    "doc_date": "2026-05-30 (Internet Archive capture)",
+    "via": "page",
+    "verified": true
+   }
+  ],
+  "confidence": "high",
+  "notes": "Source is the township's Construction, Codes & Inspections 'Resale/Rental of Home' page (https://www.westamptonnj.gov/construction-code-enforcement-inspections/pages/resalerental-home), read from an Internet Archive capture dated May 30, 2026 because the live township site shows a Cloudflare bot check. The page lists key contacts Michael Lunemann (609-267-1891 x 116) and Charline Stephens (609-267-1891 x 101) without titles."
+ },
+ "fire_cert": {
+  "requirements": [
+   "House numbers at least 4 inches high, contrasting color, permanently fixed to the house and visible from the street (mailbox or lamp post numbers not accepted)",
+   "Smoke alarm on every level; basement alarm at the bottom of the stairwell on the ceiling (not between joists)",
+   "Hallway smoke alarms within 10 feet of all bedroom doors; smoke alarms on the ceiling in each bedroom if the home was built after 1991",
+   "Smoke and CO alarms must be less than 10 years old and working; battery smoke alarms must be the 10-year sealed type; hard-wired alarms cannot be replaced with battery alarms",
+   "CO alarm in the hallway within 10 feet of all bedrooms (plug-in, battery or hard-wired accepted; not in switched outlets)",
+   "Homes with a low-voltage fire alarm system need the system tested and certified by an alarm contractor before the inspection, with the certificate shown to the inspector",
+   "Fire extinguisher still listed on the WTES page (2026): mounted on a bracket within 10 feet of the kitchen in the path of egress, minimum rating 2A-10B:C, under 10 pounds"
+  ],
+  "authorities": [
+   {
+    "name": "Westampton Township Emergency Services Bureau of Fire Prevention (WTES)",
+    "type": "municipal_fire_bureau",
+    "area_served": "Entire township",
+    "lead_time": "Submit the request 3 to 4 weeks before settlement. The lowest fee applies when the request is received 14 calendar days or more before settlement.",
+    "fees": [
+     {
+      "label": "Request received 14 calendar days before settlement",
+      "amount": "$70.00",
+      "quote": "Requests received fourteen (14) calendar days prior to the settlement date: $70.00",
+      "source_url": "https://www.westamptonfire.org/content/certificate/",
+      "verified": true
+     },
+     {
+      "label": "Request received 13 calendar days or less before settlement",
+      "amount": "$140.00",
+      "quote": "Requests received thirteen (13) calendar days or less prior to the settlement date: $140.00",
+      "source_url": "https://www.westamptonfire.org/content/certificate/",
+      "verified": true
+     },
+     {
+      "label": "Request received 4 calendar days or less before settlement",
+      "amount": "$165.00",
+      "quote": "Requests received four (4) calendar days or less prior to the settlement date: $165.00",
+      "source_url": "https://www.westamptonfire.org/content/certificate/",
+      "verified": true
+     },
+     {
+      "label": "Re-inspection",
+      "amount": "$70.00",
+      "quote": "Re-inspection Fee: $70.00",
+      "source_url": "https://www.westamptonfire.org/content/certificate/",
+      "verified": true
+     }
+    ],
+    "how_to_apply": "Request the inspection online with the WTES Formstack form, or call 609-267-2041 to set an appointment. Pay by check or money order payable to 'Westampton Township Emergency Services Bureau of Fire Prevention' at the time of inspection. Certificates are valid for 90 days.",
+    "application_url": "https://westamptonfire.formstack.com/forms/smoke_detector_inspection_application",
+    "department_url": "https://www.westamptonfire.org/content/certificate/",
+    "phone": "609-267-2041 (option 3 for the Fire Marshal)",
+    "email": "firemarshal@wtes.us",
+    "contact_name": "Vincent M Knott",
+    "contact_title": "Fire Official",
+    "evidence": [
+     {
+      "url": "https://www.westamptonfire.org/content/certificate/",
+      "quote": "Requests must be submitted 3 to 4 weeks prior to the settlement date. For questions and to set an appointment call 609-267-2041.",
+      "doc_date": "2026 (page copyright 2026)",
+      "via": "page",
+      "verified": true
+     },
+     {
+      "url": "https://www.westamptonfire.org/content/certificate/",
+      "quote": "Check or money order payable to the \"Westampton Township Emergency Services Bureau of Fire Prevention\" is due at the time of inspection.",
+      "doc_date": "2026",
+      "via": "page",
+      "verified": true
+     },
+     {
+      "url": "https://www.westamptonfire.org/content/certificate/",
+      "quote": "Certificates are valid for 90 days",
+      "doc_date": "2026",
+      "via": "page",
+      "verified": true
+     },
+     {
+      "url": "https://web.archive.org/web/20260530112936/https://www.westamptonnj.gov/construction-code-enforcement-inspections/pages/resalerental-home",
+      "quote": "You must either call Westampton Township Emergency Services at 609-267-2041, at least 2 weeks prior to your settlement date to set up an inspection over the phone or click here to fill out an inspection request online.",
+      "doc_date": "2026-05-30 (Internet Archive capture)",
+      "via": "page",
+      "verified": true
+     },
+     {
+      "url": "https://www.westamptonfire.org/content/ordinances/",
+      "quote": "The local enforcing agency shall be the Westampton Township Emergency Services Bureau of Fire Prevention.",
+      "doc_date": "",
+      "via": "page",
+      "verified": true
+     },
+     {
+      "url": "https://www.westamptonfire.org/content/ordinances/",
+      "quote": "the Township hereby mandates inspection of all residential dwellings, either on sale, resale, rental or rerental, for appropriate smoke detectors pursuant to law and appropriate carbon monoxide detectors as required by law. It shall be the responsibility of the buyer of residential property to ensure the inspection prior to transfer of title.",
+      "doc_date": "",
+      "via": "page",
+      "verified": true
+     },
+     {
+      "url": "https://www.westamptonfire.org/content/fireprevention/",
+      "quote": "Please contact my office anytime at 609-267-2041, Option 3 for the Fire Marshal or by email at firemarshal@wtes.us",
+      "doc_date": "",
+      "via": "page",
+      "verified": true
+     },
+     {
+      "url": "https://nj.gov/dca/dfs/pdf/ANNUAL%20REGISTRY/THIRD%20QUARTER%20LEA%20REGISTRY%202026.pdf",
+      "quote": "M Westampton Township",
+      "doc_date": "2026-07 (third quarter 2026 registry)",
+      "via": "pdf",
+      "verified": true
+     },
+     {
+      "url": "https://www.nj.gov/dca/dfs/pdf/fire%20directory_county%20summary/fire_code_enforcement_director.pdf",
+      "quote": "LEAID: 0337-001 Westampton Twp Enf Auth. Municipal Fire Official Vincent M Knott Phone (609) 267-2041 Email Vknott@wtes.us Name: Westampton Twp Fire Prev Addr: 780 Woodlane Rd",
+      "doc_date": "2026 (Westampton page survey date 5/18/2026)",
+      "via": "state_directory",
+      "verified": true
+     }
+    ],
+    "confidence": "high"
+   }
+  ],
+  "notes": "Fees are from the WTES Bureau of Fire Prevention certificate page (westamptonfire.org, 2026). The township's own Resale/Rental page (Internet Archive capture May 30, 2026) gives the same amounts: '$70.00 with a 14 or more day notice, $140.00 for a less than 14 day notice. If 4 or less days notice, $165.00. All reinspections are $70.00.' The 'unofficial summary' of Chapter 128 on the WTES ordinances page still shows older amounts ($60 fee, $60 late penalty for a total of $120, $25 reinspection) and a $500 court fine for failing to get the inspection; the certificate page amounts are newer. The Fire Official's name and direct email (Vknott@wtes.us) come from the state fire directory; the WTES site names no Fire Marshal but gives firemarshal@wtes.us. WTES address: 780 Woodlane Road, Westampton, NJ 08060. The township ordinance makes the buyer responsible for getting the inspection before transfer of title."
+ },
+ "other_items": [],
+ "open_questions": [],
+ "verification": {
+  "fees": 4,
+  "fee_ok": 4,
+  "fee_bad": 0,
+  "fee_unchecked": 0,
+  "quotes": 11,
+  "q_ok": 11,
+  "q_bad": 0,
+  "q_unchecked": 0
+ }
+}
