@@ -1,0 +1,160 @@
+{
+ "municipality_code": "0336",
+ "municipality": "Washington Township",
+ "county": "BURLINGTON",
+ "checked_at": "2026-09-30",
+ "resale_co": {
+  "status": "required",
+  "name": "Resale Inspection Certificate",
+  "issued_by": "Washington Township Code Enforcement",
+  "lead_time": "",
+  "valid_for": "",
+  "requirements": [
+   "House number in Arabic numerals, at least 3 inches high, at least 30 inches above ground, not blocked by trees or shrubs, visible from the street",
+   "Any fence, deck, shed, or above-ground or in-ground pool built without zoning or construction permits will delay the certificate until corrected",
+   "Sidewalks must not be raised or broken",
+   "The form refers to an attached sheet of more inspected items; that sheet is not posted online"
+  ],
+  "fees": [
+   {
+    "label": "Resale inspection",
+    "amount": "$150.00",
+    "quote": "FEE: $150.00 - RE-INSPECTION REQUIRED/PER RE-INSPECTION FEE: $50.00",
+    "source_url": "https://wtbcnj.org/wp-content/uploads/2026/08/0535_001.pdf",
+    "verified": null
+   },
+   {
+    "label": "Each re-inspection",
+    "amount": "$50.00",
+    "quote": "FEE: $150.00 - RE-INSPECTION REQUIRED/PER RE-INSPECTION FEE: $50.00",
+    "source_url": "https://wtbcnj.org/wp-content/uploads/2026/08/0535_001.pdf",
+    "verified": null
+   }
+  ],
+  "how_to_apply": "Fill out the township Re-Sale Form (Code Enforcement; owner, block and lot, agent and settlement date) and return it to the Municipal Building, 2436 Route 563, Green Bank, Egg Harbor City, NJ 08215, with the fee. Payment method is not stated. Contact Code Enforcement at 609-965-3242 x253.",
+  "application_url": "https://wtbcnj.org/wp-content/uploads/2026/08/0535_001.pdf",
+  "department_url": "https://wtbcnj.org/code-enforcement-officer/",
+  "phone": "609-965-3242 x253",
+  "email": "codeenforcement@wtbcnj.org",
+  "contact_name": "Robert Henchy, III",
+  "contact_title": "Code Enforcement Officer",
+  "evidence": [
+   {
+    "url": "https://wtbcnj.org/wp-content/uploads/2026/08/Ordinance-2026-07-Adoption-Washington-Twp.pdf",
+    "quote": "AMENDING CHAPTER 145 OF THE CODE OF THE TOWNSHIP OF WASHINGTON TO CREATE AN ARTICLE V ENTITLED RESALE OF PROPERTY",
+    "doc_date": "2026-08-04 (adopted)",
+    "via": "pdf",
+    "verified": true
+   },
+   {
+    "url": "https://wtbcnj.org/wp-content/uploads/2026/08/Ordinance-2026-07-Adoption-Washington-Twp.pdf",
+    "quote": "were introduced and passed a first reading on July 7, 2026 and finally adopted on August 4, 2026",
+    "doc_date": "2026-08-04",
+    "via": "pdf",
+    "verified": true
+   },
+   {
+    "url": "https://wtbcnj.org/wp-content/uploads/2026/09/8.4.2026-Regular.pdf",
+    "quote": "PUBLIC HEARING ... ORDINANCE ... SECOND READING Ordinance # 2026-07 ... Re-Sale for Private & Retail Property",
+    "doc_date": "2026-08-04 (minutes)",
+    "via": "pdf",
+    "verified": true
+   },
+   {
+    "url": "https://wtbcnj.org/forms-applications/",
+    "quote": "Clerk: Re-Sale Form",
+    "doc_date": "2026-08 (form uploaded August 2026)",
+    "via": "page",
+    "verified": true
+   },
+   {
+    "url": "https://wtbcnj.org/wp-content/uploads/2026/08/0535_001.pdf",
+    "quote": "Any fence, deck, shed, above or in ground pool, etc. which may have been previously installed or constructed on the property without Zoning or Construction permits will cause a delay in issuing a Resale Inspection Certificate until the violations are corrected or abated",
+    "doc_date": "2026-08",
+    "via": "pdf",
+    "verified": null
+   },
+   {
+    "url": "https://wtbcnj.org/code-enforcement-officer/",
+    "quote": "Code Enforcement Officer ... Robert Henchy, III 609-965-3242 x253",
+    "doc_date": "",
+    "via": "page",
+    "verified": true
+   }
+  ],
+  "confidence": "medium",
+  "notes": "Ordinance 2026-07 (Chapter 145, new Article V 'Resale of Property') was introduced July 7, 2026 and adopted August 4, 2026; the full ordinance text is not posted online (the notices say copies are at the Clerk's Office). The Re-Sale Form is a scanned one-page PDF read visually; its title is printed across two scan layers and reads 'Resale Inspection Certificate' with a 'Code Enforcement' header. The form lists an inspection fee and re-inspection fee but no lead time, validity period or payment method, and it mentions an attached sheet of additional inspected items that is not posted. The minutes call the ordinance 'Re-Sale for Private & Retail Property'. The code enforcement email is shown on the township page behind Cloudflare email protection (decoded: codeenforcement@wtbcnj.org). Construction permits are handled by Marie Reese, Construction Code Official (NJ DCA email), 609-567-3653, per https://wtbcnj.org/construction/."
+ },
+ "fire_cert": {
+  "requirements": [],
+  "authorities": [
+   {
+    "name": "Not confirmed: Washington Township (NJ DCA is the fire code agency but does not issue smoke certificates here)",
+    "type": "unknown",
+    "area_served": "Entire township",
+    "lead_time": "",
+    "fees": [],
+    "how_to_apply": "Call the Municipal Building at 609-965-3242 to ask which office issues the smoke alarm and carbon monoxide alarm certificate for a sale. The NJ DCA online smoke certificate portal marks Washington Township (Burlington) as smoke-certificate exempt, so the state does not take these applications.",
+    "application_url": "",
+    "department_url": "https://wtbcnj.org/",
+    "phone": "609-965-3242",
+    "email": "",
+    "contact_name": "",
+    "contact_title": "",
+    "evidence": [
+     {
+      "url": "https://nj.gov/dca/dfs/pdf/ANNUAL%20REGISTRY/THIRD%20QUARTER%20LEA%20REGISTRY%202026.pdf",
+      "quote": "S Washington Township",
+      "doc_date": "2026-07 (third quarter 2026 registry; Burlington County column)",
+      "via": "pdf",
+      "verified": true
+     },
+     {
+      "url": "https://www.nj.gov/dca/dfs/pdf/fire%20directory_county%20summary/state_towns%207_17_26.pdf",
+      "quote": "WASHINGTON TWP 0336",
+      "doc_date": "2026-07-17 (not marked SC; SC = Smoke Certs)",
+      "via": "pdf",
+      "verified": true
+     },
+     {
+      "url": "https://firesolutions.dca.nj.gov/_odata/firedistricts",
+      "quote": "\"ultra_name\":\"WASHINGTON TWP (BU)-001\" ... \"ultra_firejurisdiction\":{ \"Name\":\"State\",\"Value\":240000000 },\"ultra_smokecertexempt\":true",
+      "doc_date": "2026-09-30 (live portal data)",
+      "via": "page",
+      "verified": null
+     },
+     {
+      "url": "https://www.nj.gov/dca/dfs/pdf/fire%20directory_county%20summary/fire_code_enforcement_director.pdf",
+      "quote": "LEAID: 0336-999 Washington Twp Enf Auth. State Fire Official Louis Kilmer NJ Division Fire Safety PO Box 809 Phone (609)633-6132",
+      "doc_date": "2026 (Washington page survey date 6/17/2026)",
+      "via": "state_directory",
+      "verified": true
+     }
+    ],
+    "confidence": "low"
+   }
+  ],
+  "notes": "NJ DCA is the fire code enforcing agency for Washington Township (registry code S), but DCA's list of state-enforced towns does not mark Washington Twp 'SC' (smoke certs), and the DCA smoke certificate portal data flags WASHINGTON TWP (BU) as smoke-certificate exempt. The state fire directory leaves the smoke detector compliance contact blank for this township (LEA contact: Louis Kilmer, NJ Division of Fire Safety, (609) 633-6132). The township website has no smoke or CO certificate page or form (site search for 'smoke' returns nothing). It is possible the new Resale Inspection Certificate covers smoke and CO alarms, but the posted form does not say so. Local fire companies: Green Bank Volunteer Fire Company and Lower Bank Volunteer Fire Company (emergency response only)."
+ },
+ "other_items": [
+  {
+   "label": "Unpermitted structures",
+   "detail": "Fences, decks, sheds or pools built without zoning or construction permits must be corrected or abated before the Resale Inspection Certificate is issued.",
+   "source_url": "https://wtbcnj.org/wp-content/uploads/2026/08/0535_001.pdf"
+  }
+ ],
+ "open_questions": [
+  "Who issues the smoke/CO alarm certificate in Washington Township (Burlington) and at what fee; not published by the township, and DCA does not issue it here.",
+  "Full text of Ordinance 2026-07 (Resale of Property): lead time, validity period, whether smoke/CO alarms are part of the resale inspection, and the attached inspection sheet."
+ ],
+ "verification": {
+  "fees": 2,
+  "fee_ok": 0,
+  "fee_bad": 0,
+  "fee_unchecked": 2,
+  "quotes": 10,
+  "q_ok": 8,
+  "q_bad": 0,
+  "q_unchecked": 2
+ }
+}

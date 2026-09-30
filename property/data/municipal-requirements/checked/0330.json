@@ -1,0 +1,202 @@
+{
+ "municipality_code": "0330",
+ "municipality": "Riverside Township",
+ "county": "BURLINGTON",
+ "checked_at": "2026-09-30",
+ "resale_co": {
+  "status": "required",
+  "name": "Resale Certificate of Occupancy",
+  "issued_by": "Riverside Township Housing Office (inspections arranged through the Construction Office; the Housing Office page lists Cinnaminson Fire Department as the inspectors)",
+  "lead_time": "",
+  "valid_for": "60 days from the date of issuance",
+  "requirements": [
+   "Exterior: driveway and walks without cracks or sinking sections; yard free of high grass, trash and debris",
+   "Windows not broken or cracked, able to open and stay up; screens in place without holes",
+   "Roof, siding, gutters, downspouts and foundation in good repair; peeling paint removed",
+   "Visible house number (and unit numbers on each unit)",
+   "Doors open and close properly; double-key deadbolts not permitted",
+   "Exterior wiring in good condition and GFI outlets near water",
+   "Converted garages may need permits; garage separation needs drywall and a fire-rated or solid door",
+   "Pools safeguarded and bonded; pool gates and fencing self-closing or self-latching",
+   "Interior walls, ceilings and floors in good condition; all lights, switches and outlets work with cover plates",
+   "Handrails on all staircases, including the open side",
+   "Working stove and oven with anti-tip device; range hood or exhaust fan",
+   "Hot and cold water without leaks; drains flow freely",
+   "Smoke alarms on each floor; smoke and CO alarms within 10 feet of bedrooms (10-year battery recommended)",
+   "Electric panel covered with working, labeled breakers; water heater with relief pipe",
+   "Fire extinguisher (checklist says \"210ABC\") mounted on the kitchen wall no higher than 5 feet (2019 checklist)"
+  ],
+  "fees": [
+   {
+    "label": "Resale inspection, per unit",
+    "amount": "$125.00",
+    "quote": "The fee for the inspection is $125.00 per unit.",
+    "source_url": "https://riversidetwp.org/housing-office/",
+    "verified": true
+   }
+  ],
+  "how_to_apply": "Download the Application for Resale (April 2025 version) from the Housing Office page, fill it out, and email it to schedule the inspection. The Housing Office page says to arrange inspections through the Construction Office at housing@riversidetwp.org; the application form itself says inspection requests must be emailed to acosello@riversidetwp.org. The $125 per unit fee is printed on the form. Payment method is not stated.",
+  "application_url": "https://riversidetwp.org/wp-content/uploads/2025/04/2APPLICATION-FOR-RESALE.pdf",
+  "department_url": "https://riversidetwp.org/housing-office/",
+  "contact_name": "",
+  "contact_title": "",
+  "phone": "856-461-1460",
+  "email": "housing@riversidetwp.org",
+  "evidence": [
+   {
+    "url": "https://riversidetwp.org/housing-office/",
+    "quote": "A Certificate of Occupancy is required prior to the sale of any property within the Township.",
+    "doc_date": "",
+    "via": "page",
+    "verified": true
+   },
+   {
+    "url": "https://riversidetwp.org/housing-office/",
+    "quote": "A Certificate will be issued only after the completion of an inspection, and will only be valid for sixty (60) days from the date of issuance.",
+    "doc_date": "",
+    "via": "page",
+    "verified": true
+   },
+   {
+    "url": "https://riversidetwp.org/housing-office/",
+    "quote": "Additional fees charged after the second unsuccessful inspection (3rd overall) or after the sixty (60) day time period has elapsed.",
+    "doc_date": "",
+    "via": "page",
+    "verified": true
+   },
+   {
+    "url": "https://riversidetwp.org/housing-office/",
+    "quote": "Housing Office Cinnaminson Fire Department, Inspectors",
+    "doc_date": "",
+    "via": "page",
+    "verified": true
+   },
+   {
+    "url": "https://riversidetwp.org/wp-content/uploads/2025/04/2APPLICATION-FOR-RESALE.pdf",
+    "quote": "FEE: $125 per unit",
+    "doc_date": "2025-04 (PDF created April 4, 2025)",
+    "via": "pdf",
+    "verified": true
+   },
+   {
+    "url": "https://riversidetwp.org/wp-content/uploads/2025/04/2APPLICATION-FOR-RESALE.pdf",
+    "quote": "INSPECTION REQUESTS MUST BE EMAILED TO ACOSELLO@RIVERSIDETWP.ORG",
+    "doc_date": "2025-04 (PDF created April 4, 2025)",
+    "via": "pdf",
+    "verified": true
+   },
+   {
+    "url": "https://riversidetwp.org/wp-content/uploads/2025/04/2APPLICATION-FOR-RESALE.pdf",
+    "quote": "PLEASE BE ADVISED THAT ALL RESALE INSPECTIONS MUST OBTAIN A CERTIFICATE OF OCCUPANY BEFORE SETTLEMENT IN ORDER TO OCCUPY THE PROPERTY.",
+    "doc_date": "2025-04 (PDF created April 4, 2025)",
+    "via": "pdf",
+    "verified": true
+   },
+   {
+    "url": "https://riversidetwp.org/wp-content/uploads/2021/11/1HOUSING-INSPECTION-CHECKLIST-Copy.pdf",
+    "quote": "Please be advised that in order to obtain a Certificate of Occupancy for transfer of title on a Resale of a property, all repairs must be completed before the property can be occupied.",
+    "doc_date": "2019-06 (PDF created June 21, 2019; posted 2021-11)",
+    "via": "pdf",
+    "verified": true
+   }
+  ],
+  "confidence": "high",
+  "notes": "The Housing Office page shows the current $125 per unit fee; an older hidden version of the same page still carries a $100 per unit fee and a 856-461-1460 x3 contact, so $125 (matching the April 2025 form) is used. Two inspections are covered; extra fees apply after the second failed inspection (3rd overall) or after the 60-day period, but the amount is not published. No named housing inspector is listed. The page email is shown on the site through an email-protection script (decoded: housing@riversidetwp.org). Rental properties have a separate annual registration and change-of-tenant Certificate of Habitability (not a resale requirement)."
+ },
+ "fire_cert": {
+  "requirements": [
+   "Smoke alarms on each floor, and smoke and CO alarms within 10 feet of bedrooms; 10-year battery recommended (township 2019 housing checklist)",
+   "Fire extinguisher (checklist says \"210ABC\") mounted on the wall in the kitchen no higher than 5 feet (2019 checklist)"
+  ],
+  "authorities": [
+   {
+    "name": "Riverside Township Fire Official (municipal fire code enforcing agency)",
+    "type": "municipal_fire_bureau",
+    "area_served": "Entire township",
+    "lead_time": "",
+    "fees": [],
+    "how_to_apply": "No separate smoke/CO certificate form or fee was found on the township website. The state directory lists Riverside Township, 237 S. Pavilion Ave, (856) 461-1460 for smoke detector compliance. The resale housing inspection also checks smoke alarms, CO alarms and the extinguisher. Call 856-461-1460 to confirm how the certificate is issued.",
+    "application_url": "",
+    "department_url": "https://riversidetwp.org/construction-and-zoning-office/",
+    "contact_name": "Robert Yearly",
+    "contact_title": "Fire Official (state directory); Fire Subcode Official, Fire Inspector (township page)",
+    "phone": "856-461-1460",
+    "email": "",
+    "evidence": [
+     {
+      "url": "https://nj.gov/dca/dfs/pdf/ANNUAL%20REGISTRY/THIRD%20QUARTER%20LEA%20REGISTRY%202026.pdf",
+      "quote": "M Riverside Township",
+      "doc_date": "2026-07",
+      "via": "pdf",
+      "verified": true
+     },
+     {
+      "url": "https://www.nj.gov/dca/dfs/pdf/fire%20directory_county%20summary/fire_code_enforcement_director.pdf",
+      "quote": "LEAID: 0330-001 Enf Auth. Municipal Fire Official Robert Yearly Phone (856) 461-1460",
+      "doc_date": "2026-03-05 (survey date)",
+      "via": "state_directory",
+      "verified": true
+     },
+     {
+      "url": "https://www.nj.gov/dca/dfs/pdf/fire%20directory_county%20summary/fire_code_enforcement_director.pdf",
+      "quote": "SMOKE DETECTOR COMPLIANCE Name: Riverside Twp Addr: PO Box 188 - 237 S. Pavilion Ave Riverside NJ 08075 Phone (856) 461-1460",
+      "doc_date": "2026-03-05 (survey date)",
+      "via": "state_directory",
+      "verified": true
+     },
+     {
+      "url": "https://riversidetwp.org/construction-and-zoning-office/",
+      "quote": "Robert Yearly, Fire Subcode Official, Fire Inspector, Building Inspector",
+      "doc_date": "",
+      "via": "page",
+      "verified": true
+     },
+     {
+      "url": "https://riversidetwp.org/wp-content/uploads/2021/11/1HOUSING-INSPECTION-CHECKLIST-Copy.pdf",
+      "quote": "Smoke and Carbon Monoxide must be present within 10 feet of bedrooms and smoke detectors must be present on each floor (10 year battery life is recommended)",
+      "doc_date": "2019-06 (PDF created June 21, 2019; posted 2021-11)",
+      "via": "pdf",
+      "verified": true
+     },
+     {
+      "url": "https://riversidetwp.org/wp-content/uploads/2021/11/1HOUSING-INSPECTION-CHECKLIST-Copy.pdf",
+      "quote": "Must be 210ABC and mounted on the wall in the kitchen no higher than 5’0 ft.",
+      "doc_date": "2019-06 (PDF created June 21, 2019; posted 2021-11)",
+      "via": "pdf",
+      "verified": true
+     }
+    ],
+    "confidence": "medium"
+   }
+  ],
+  "notes": "The DCA LEA registry lists Riverside Township as a municipal (M) fire code enforcing agency. The state directory lists an email for the fire official that is not a township address, so it is not recorded here. No published smoke certificate fee was found; it is unclear whether the $125 resale CO inspection also serves as the state smoke/CO certificate. Riverside Fire Company No. 1 (riversidefire.org) is the fire company and has a Board of Fire Commissioners, but it is not the LEA."
+ },
+ "other_items": [
+  {
+   "label": "Resale Affidavit if the buyer takes on repairs",
+   "detail": "A notarized Resale Affidavit lets the buyer accept responsibility for noted violations, but it is not a substitute for the Certificate of Occupancy: all repairs must be completed, reinspected and approved before the property can be occupied.",
+   "source_url": "https://riversidetwp.org/wp-content/uploads/2021/11/3RESALE-AFFIDAVIT.pdf"
+  },
+  {
+   "label": "Rental registration if the buyer will rent it out",
+   "detail": "The resale application asks the proposed use (owner occupy, rental, renovate to sell); rental and vacant properties must be registered (contact jransburgh@riversidetwp.org per the form).",
+   "source_url": "https://riversidetwp.org/wp-content/uploads/2025/04/2APPLICATION-FOR-RESALE.pdf"
+  }
+ ],
+ "open_questions": [
+  "Who issues the state smoke/CO certificate in Riverside and what does it cost? No form or fee is published; confirm with the Township (856-461-1460).",
+  "What is the fee after the second failed inspection or after the 60-day period? Not published.",
+  "Is the inspector a Cinnaminson Fire Department employee under a shared-service agreement? The Housing Office heading suggests so but no agreement text was found.",
+  "The housing checklist is from 2019 and still lists a fire extinguisher; confirm current requirements given P.L.2025, c.19."
+ ],
+ "verification": {
+  "fees": 1,
+  "fee_ok": 1,
+  "fee_bad": 0,
+  "fee_unchecked": 0,
+  "quotes": 14,
+  "q_ok": 14,
+  "q_bad": 0,
+  "q_unchecked": 0
+ }
+}

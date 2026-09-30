@@ -10,8 +10,12 @@ Output: a migration that upserts two curated rows per approved town (resale_cco 
 smoke_fire_cert). Agents see these on the Transactions page as plain text lines, so
 contacts and "not confirmed yet" red flags show without a frontend change.
 
-  python3 property/scripts/build_checked_municipal_requirements.py --out supabase/migrations/<file>.sql
+Each batch of counties gets its own migration, so an already-applied migration never
+changes when later counties are approved. MIGRATIONS lists them; CI regenerates each one.
+
+  python3 property/scripts/build_checked_municipal_requirements.py --counties BURLINGTON,WARREN --out supabase/migrations/<file>.sql
   python3 property/scripts/build_checked_municipal_requirements.py --self-test
+  python3 property/scripts/build_checked_municipal_requirements.py --check   # CI: committed migrations match the data
 """
 from __future__ import annotations
 
@@ -26,6 +30,10 @@ DATA = ROOT / "property/data/municipal-requirements"
 SKIP_LINK = re.compile(r"/MyAccount(?:/|$|\?)|/Identity/Account/|cpauthentication\.civicplus\.com|ForgotPassword|/newsflash/", re.I)
 AUTH_TYPE = {"municipal_fire_bureau": "town fire bureau", "fire_district": "fire district", "state_dca": "NJ DCA, state", "unknown": ""}
 DIR_AGENCY = {"District": "fire district", "Municipal": "town", "State": "NJ DCA, state", "County": "county fire marshal"}
+MIGRATIONS = {
+    "supabase/migrations/20260930170000_checked_municipal_requirements_camden_gloucester.sql": ("CAMDEN", "GLOUCESTER"),
+    "supabase/migrations/20260930180000_checked_municipal_requirements_burlington_warren.sql": ("BURLINGTON", "WARREN"),
+}
 EXTINGUISHER_NOTE = ("State rule: a 2025 law (P.L.2025, c.19) dropped the fire extinguisher from the state requirement. "
                      "Follow the town's current form, which may still list one.")
 
@@ -160,7 +168,7 @@ def fire_row(r: dict, officials: list[dict]) -> dict:
             "source_excerpt": clean(next((e.get("quote") for a in auths for e in a.get("evidence") or [] if e.get("quote")), ""), 900) or None}
 
 
-def build_rows() -> list[dict]:
+def build_rows(counties: tuple[str, ...] | None = None) -> list[dict]:
     approvals = json.loads((DATA / "approvals.json").read_text())["towns"]
     officials = json.loads((DATA / "nj-dca-fire-officials-2026-09.json").read_text())["towns"]
     rows = []
@@ -168,6 +176,8 @@ def build_rows() -> list[dict]:
         r = json.loads(path.read_text())
         code = r["municipality_code"]
         if (approvals.get(code) or {}).get("status") != "approved":
+            continue
+        if counties and clean(r.get("county"), 60).upper() not in counties:
             continue
         flags = flag_reasons(r)
         town_officials = (officials.get(code) or {}).get("agencies") or []
@@ -235,20 +245,37 @@ def self_test() -> None:
             assert row["requirements"][-1] == EXTINGUISHER_NOTE, where
     sql = migration(rows)
     assert sql.count("$j$") % 2 == 0 and sql.count("$t$") % 2 == 0
+    # Every approved town belongs to exactly one migration batch.
+    batched = [c for counties in MIGRATIONS.values() for c in counties]
+    assert len(batched) == len(set(batched)), "a county is in two migrations"
+    assert {row["county"].upper() for row in rows} <= set(batched), "approved county missing from MIGRATIONS"
     print(f"checked requirements self-test ok ({len(rows) // 2} towns, {len(rows)} rows)")
+
+
+def check() -> None:
+    for path, counties in MIGRATIONS.items():
+        want = migration(build_rows(counties))
+        got = (ROOT / path).read_text()
+        assert got == want, f"{path} does not match the data for {', '.join(counties)}: regenerate it"
+        print(f"{path}: matches ({want.count(chr(10) + '  (') // 2} towns)")
 
 
 def main() -> int:
     ap = argparse.ArgumentParser()
     ap.add_argument("--out")
+    ap.add_argument("--counties", help="comma-separated county names, e.g. CAMDEN,GLOUCESTER")
     ap.add_argument("--self-test", action="store_true")
+    ap.add_argument("--check", action="store_true")
     args = ap.parse_args()
     if args.self_test:
         self_test()
         return 0
-    if not args.out:
-        raise SystemExit("--out is required")
-    rows = build_rows()
+    if args.check:
+        check()
+        return 0
+    if not args.out or not args.counties:
+        raise SystemExit("--out and --counties are required")
+    rows = build_rows(tuple(c.strip().upper() for c in args.counties.split(",") if c.strip()))
     pathlib.Path(args.out).write_text(migration(rows))
     print(json.dumps({"towns": len(rows) // 2, "rows": len(rows), "out": args.out}))
     return 0

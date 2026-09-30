@@ -1,0 +1,218 @@
+{
+ "municipality_code": "0312",
+ "municipality": "Edgewater Park Township",
+ "county": "BURLINGTON",
+ "checked_at": "2026-09-30",
+ "resale_co": {
+  "status": "required",
+  "name": "Certificate of Inspection (C/I), formerly Certificate of Occupancy",
+  "issued_by": "Edgewater Park Township Inspections Department, Code Enforcement",
+  "lead_time": "No set lead time published. Payment must be received before the inspection is scheduled; inspections are given the next available slot. A failed resale inspection gets a Temporary C/I good for 30 days.",
+  "valid_for": "Temporary C/I after a failed resale inspection: 30 days from the first inspection",
+  "requirements": [
+   "All open construction permits (old or new) must be closed; work done without a permit must be permitted and inspected",
+   "Exterior walls, roof, gutters, foundation, stairs, decks, porches, fences and accessory structures sound and in good repair",
+   "House number at least 3 inches high, readable from the street",
+   "Driveways and sidewalks level with no tripping hazards; yard maintained",
+   "Guardrails on landings and porches 30 inches or higher (balusters no more than 4 inches apart)",
+   "No double-keyed deadbolts on exit doors",
+   "Pool fence with self-closing, self-latching gate (48 inches; 6 feet for in-ground pools); no stagnant pool water",
+   "All utilities on at the time of inspection",
+   "Smoke detector on each level and within 10 feet outside sleeping areas; battery units must be 10-year sealed type; existing hardwired units stay",
+   "CO detector on all levels with bedrooms",
+   "2A-10B:C fire extinguisher mounted on the wall within 10 feet of the kitchen, about 5 feet high, on the way to the exit",
+   "Stove anti-tip device; GFCI outlets at kitchen counters and bathrooms; no extension-cord wiring or open splices",
+   "No plumbing leaks; heat to all habitable rooms; water heater bonding strap and relief valve pipe to 6 inches off the floor",
+   "Electrical, plumbing, roofing or heating certification may be required at the inspector's discretion",
+   "A blue recycling cart must be on the property at the inspection"
+  ],
+  "fees": [
+   {
+    "label": "Resale inspection (includes 1 re-inspection)",
+    "amount": "$120.00",
+    "quote": "RE-SALE INSPECTION *** + 1 re-inspection FEE: $120.00",
+    "source_url": "https://www.edgewaterpark-nj.com/filestorage/173/360/430/432/Certificate_of_Occupancy_Form.pdf",
+    "verified": true
+   },
+   {
+    "label": "Each additional re-inspection for a temporary or expired C/O",
+    "amount": "$50.00",
+    "quote": "EVERY ADDITIONAL RE-INSPECTION for a temporary/expired C/O FEE: $50.00",
+    "source_url": "https://www.edgewaterpark-nj.com/filestorage/173/360/430/432/Certificate_of_Occupancy_Form.pdf",
+    "verified": true
+   },
+   {
+    "label": "Re-inspection fee when the Temporary C/I passes its 30-day expiration or after 2 failed inspections in a row",
+    "amount": "$50",
+    "quote": "A $50 fee is applied if the Temporary Certificate of Inspection exceeds the 30 day expiration period -or- surpasses 2 failed consecutive inspections.",
+    "source_url": "https://www.edgewaterpark-nj.com/content/163/338/4749.aspx",
+    "verified": true
+   }
+  ],
+  "how_to_apply": "Fill out the Certificate of Inspection Application Report (check Re-Sale Inspection), including seller and buyer contacts and a requested inspection date, and submit it with payment. Pay by check or money order mailed to or left in the drop box at 400 Delanco Road, Edgewater Park, NJ 08010, or in person (cash accepted). The form can also be submitted through the Township's SDL citizen portal (account required). Inspections are not scheduled until payment is received. Call 609-877-2050 ext. 314 or email code-enforcement@edgewaterpark-nj.com to reserve a time.",
+  "application_url": "https://www.edgewaterpark-nj.com/filestorage/173/360/430/432/Certificate_of_Occupancy_Form.pdf",
+  "department_url": "https://www.edgewaterpark-nj.com/content/163/338/4749.aspx",
+  "phone": "609-877-2050 ext. 314",
+  "email": "code-enforcement@edgewaterpark-nj.com",
+  "contact_name": "Yakup Koksaldi",
+  "contact_title": "Code Enforcement",
+  "evidence": [
+   {
+    "url": "https://www.edgewaterpark-nj.com/content/163/338/4749.aspx",
+    "quote": "is always required when selling or purchasing a property in Edgewater Park Township (this includes purchasing a bank owned/foreclosed parcel), and when a property is to be rented out.",
+    "doc_date": "",
+    "via": "page",
+    "verified": true
+   },
+   {
+    "url": "https://www.edgewaterpark-nj.com/content/163/338/4749.aspx",
+    "quote": "$120 check - This includes 1 re-inspection.",
+    "doc_date": "",
+    "via": "page",
+    "verified": true
+   },
+   {
+    "url": "https://www.edgewaterpark-nj.com/content/163/338/4749.aspx",
+    "quote": "outstanding construction permits must be closed to receive a final Certificate of Inspection (C/I).",
+    "doc_date": "",
+    "via": "page",
+    "verified": true
+   },
+   {
+    "url": "https://www.edgewaterpark-nj.com/content/163/338/4749.aspx",
+    "quote": "That Temporary C/I is only good for 30 days after the first inspection.",
+    "doc_date": "",
+    "via": "page",
+    "verified": true
+   },
+   {
+    "url": "https://www.edgewaterpark-nj.com/content/163/338/4749.aspx",
+    "quote": "Inspections cannot be done until payment is received.",
+    "doc_date": "",
+    "via": "page",
+    "verified": true
+   },
+   {
+    "url": "https://www.edgewaterpark-nj.com/filestorage/173/360/430/432/Certificate_of_Occupancy_Form.pdf",
+    "quote": "Please call or email to reserve inspection date & time if you do not enter it above: 609-877-2050 x314 or code-enforcement@edgewaterpark-nj.com.",
+    "doc_date": "2026-09",
+    "via": "pdf",
+    "verified": true
+   },
+   {
+    "url": "https://www.edgewaterpark-nj.com/content/163/338/default.aspx",
+    "quote": "Code Enforcement Yakup Koksaldi ykoksaldi@edgewaterpark-nj.com Phone: 609-877-2050 x340",
+    "doc_date": "",
+    "via": "page",
+    "verified": true
+   }
+  ],
+  "confidence": "high",
+  "notes": "The Certificate of Inspection Application Report PDF was updated September 8, 2026 (uploaded 9/8/2026). The Code Enforcement page lists two inspectors: Yakup Koksaldi (609-877-2050 x340, ykoksaldi@edgewaterpark-nj.com) and David Boulden (609-877-2050 x341, dboulden@edgewaterpark-nj.com); the shared Code Enforcement line is x314. If a resale cannot meet Temporary C/I items by settlement, the buyer can assume responsibility with an Affidavit in Lieu of C/I (https://www.edgewaterpark-nj.com/filestorage/173/360/430/432/Affidavit_in_Lieu_of_C-I.pdf) but may not occupy until items pass. The SDL portal (https://www.sdlportal.com/towns/nj/burlington/edgewaterparktwp/requests/certificate) needs a login. If buyers plan to rent the home, a separate rental C/I ($100) and landlord registration are needed. The Township code (ecode360 ED3219) could not be opened."
+ },
+ "fire_cert": {
+  "requirements": [
+   "The Township's resale C/I checklist also covers smoke detectors on each level (10-year sealed battery type if battery powered), CO detectors on levels with bedrooms, and a wall-mounted 2A-10B:C extinguisher within 10 feet of the kitchen (form dated September 2026, after P.L.2025, c.19)"
+  ],
+  "authorities": [
+   {
+    "name": "Edgewater Park Township Fire District No. 1 (Fire Official / Bureau of Fire Safety)",
+    "type": "fire_district",
+    "area_served": "Entire township (the Township has one fire district)",
+    "lead_time": "",
+    "fees": [],
+    "how_to_apply": "No resale smoke/CO certificate application or fee is posted on the Township or fire district pages. Call the Fire Official's office at 609-877-8812 to request the certificate and confirm the fee.",
+    "application_url": "",
+    "department_url": "https://www.edgewaterpark-nj.com/content/161/330/907/default.aspx",
+    "phone": "609-877-8812",
+    "email": "epfdfi14@gmail.com",
+    "contact_name": "Matt Augustino",
+    "contact_title": "Fire Official",
+    "evidence": [
+     {
+      "url": "https://www.edgewaterpark-nj.com/content/161/330/907/default.aspx",
+      "quote": "The Township has one Fire District, with its own publicly elected Board of Fire Commissioners. The Fire Commissioners are the legal governing body of the Fire Companies, the Bureau of Fire Safety, and the Training Center.",
+      "doc_date": "",
+      "via": "page",
+      "verified": true
+     },
+     {
+      "url": "https://www.edgewaterpark-nj.com/content/161/330/907/default.aspx",
+      "quote": "Fire Official Matt Augustino",
+      "doc_date": "",
+      "via": "page",
+      "verified": true
+     },
+     {
+      "url": "https://www.edgewaterpark-nj.com/filestorage/161/330/907/Beverly-EP_Smoke-Detectors_revised.pdf",
+      "quote": "Beverly City Bureau of Fire Prevention and partner Edgewater Park Township Fire District #1 are responsible for enforcing the New Jersey Uniform Fire Code within each municipality.",
+      "doc_date": "2023-03",
+      "via": "pdf",
+      "verified": true
+     },
+     {
+      "url": "https://www.edgewaterpark-nj.com/filestorage/161/330/907/Beverly-EP_Smoke-Detectors_revised.pdf",
+      "quote": "Contact the Edgewater Park Fire Official's office for more information at (609) 877-8812 or contact the Fire District at: epfdfi14@gmail.com.",
+      "doc_date": "2023-03",
+      "via": "pdf",
+      "verified": true
+     },
+     {
+      "url": "https://www.nj.gov/dca/dfs/pdf/fire%20directory_county%20summary/fire_code_enforcement_director.pdf",
+      "quote": "Fire Official Matthew J Augustino Phone (609) 877-8812",
+      "doc_date": "2026-02",
+      "via": "state_directory",
+      "verified": true
+     },
+     {
+      "url": "https://www.nj.gov/dca/dfs/pdf/fire%20directory_county%20summary/fire_code_enforcement_director.pdf",
+      "quote": "Edgewater Park Twp Fire Prev Addr: 400 Delanco Rd Edgewater Park NJ 08010 Phone (609) 877-2050",
+      "doc_date": "2026-02",
+      "via": "state_directory",
+      "verified": true
+     },
+     {
+      "url": "https://nj.gov/dca/dfs/pdf/ANNUAL%20REGISTRY/THIRD%20QUARTER%20LEA%20REGISTRY%202026.pdf",
+      "quote": "D Edgewater Park Township",
+      "doc_date": "2026-07",
+      "via": "pdf",
+      "verified": true
+     }
+    ],
+    "confidence": "medium"
+   }
+  ],
+  "notes": "The DCA Q3 2026 registry lists Edgewater Park as a fire district (D) enforcing agency; the state directory lists the LEA as 'Edgewater Park Twp FD #1', fire official Matthew J Augustino, (609) 877-8812, email epfdfi14@gmail.com, and 'Edgewater Park Twp Fire Prev' at 400 Delanco Rd, (609) 877-2050 for smoke detector compliance. The Township publishes the same gmail address as the Fire Official's office contact; the Board of Fire Commissioners' general email is epfc.district1@gmail.com. The Township page says the fire district has its own website, but no address for it was found. No resale smoke/CO certificate fee was found on any official page. The 'Smoke Alarm & Carbon Monoxide Compliance' form in the Township's construction forms is for construction permit final inspections, not resales."
+ },
+ "other_items": [
+  {
+   "label": "Open construction permits must be closed",
+   "detail": "Any old or new outstanding construction permits must be closed before a final Certificate of Inspection is issued; unpermitted work must be permitted and inspected by the Construction Department (609-877-2217, inspections@edgewaterpark-nj.com).",
+   "source_url": "https://www.edgewaterpark-nj.com/content/163/338/4749.aspx"
+  },
+  {
+   "label": "Blue recycling cart",
+   "detail": "A blue recycling cart must be on the premises at the time of inspection and must stay with the property.",
+   "source_url": "https://www.edgewaterpark-nj.com/filestorage/173/360/430/432/Certificate_of_Occupancy_Form.pdf"
+  },
+  {
+   "label": "Heating system certification",
+   "detail": "At the inspector's discretion a heating system certification form may be required.",
+   "source_url": "https://www.edgewaterpark-nj.com/content/163/338/4749.aspx"
+  }
+ ],
+ "open_questions": [
+  "Resale smoke/CO certificate fee and application process for Edgewater Park Fire District No. 1 are not published on any page found; the district's own website was not located.",
+  "Whether the Township C/I inspection satisfies the state smoke/CO certificate or a separate fire district inspection is needed."
+ ],
+ "verification": {
+  "fees": 3,
+  "fee_ok": 3,
+  "fee_bad": 0,
+  "fee_unchecked": 0,
+  "quotes": 14,
+  "q_ok": 14,
+  "q_bad": 0,
+  "q_unchecked": 0
+ }
+}

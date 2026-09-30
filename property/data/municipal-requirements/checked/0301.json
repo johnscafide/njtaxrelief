@@ -1,0 +1,228 @@
+{
+ "municipality_code": "0301",
+ "municipality": "Bass River Township",
+ "county": "BURLINGTON",
+ "checked_at": "2026-09-30",
+ "resale_co": {
+  "status": "required",
+  "name": "Resale / Rental Inspection (Rental/Resale Application)",
+  "issued_by": "Tuckerton Borough Construction and Code Enforcement Office, serving Bass River under an interlocal service agreement",
+  "lead_time": "",
+  "valid_for": "",
+  "requirements": [
+   "Yard free of debris and weeds, sheds empty; waterfront lots need bulkhead in good condition",
+   "Home clean and move-in ready, trash and hazardous material removed; paint, flooring, siding, roof, windows and screens in good condition",
+   "Attached garage walls and attic ceilings finished with 1/2 inch drywall (two layers of Type X under living space); rated doors",
+   "Stairs with graspable handrails and closed risers; decks and landings 30 inches or more above grade need 36 inch guardrails with openings under 4 inches",
+   "Smoke alarms to code (see fire certificate) and carbon monoxide alarm within 10 feet of all bedrooms",
+   "Anti-tip device on the range",
+   "Electrical: no exposed wires, panel labeled, all boxes covered",
+   "Water heater relief valve piped to within 6 inches of the floor; heating equipment properly vented",
+   "House numbers at least 4 inches near the front door (not on the door), contrasting",
+   "Well water test by the Board of Health if on well water",
+   "Flood elevation certificate in special flood hazard areas",
+   "Chimney caps on all fireplaces",
+   "Certificates by professionals for chimneys, woodstoves, fireplaces, heat and hot water systems, elevation, bulkhead, and lead paint for homes built before 1978",
+   "Portable fire extinguisher, minimum 2A:10BC, 2.5 to 10 lb dry chemical, within 10 feet of the kitchen (still listed on the May 2026 form)"
+  ],
+  "fees": [],
+  "how_to_apply": "Download the Resale - Rental Application from the Bass River Forms page, check Resale Inspection, and submit it with payment (cash, check or money order) to the Tuckerton Borough Construction Office, 420 East Main Street, Tuckerton, NJ 08087. Inspections are done on Fridays only. Attach any required certifications (well water, chimney, woodstove, fireplace, heat and hot water, elevation, lead paint).",
+  "application_url": "https://bassriver-nj.org/site_files/Forms/Property_Resale_Rental_Application.pdf",
+  "department_url": "https://bassriver-nj.org/offices/",
+  "contact_name": "Joseph Ventresca",
+  "contact_title": "Housing Official / Code Enforcement Officer (Tuckerton Borough)",
+  "phone": "609-296-4916",
+  "email": "LCranmer@TuckertonBorough.com",
+  "evidence": [
+   {
+    "url": "https://bassriver-nj.org/offices/",
+    "quote": "The Township of Bass River has an Interlocal Service Agreement with Tuckerton Borough for building, electrical, and plumbing services. All three services are coordinated through the Tuckerton Borough Construction Office located in the Administrative Building, 420 East Main Street Tuckerton, New Jersey 08087.",
+    "doc_date": "",
+    "via": "page",
+    "verified": true
+   },
+   {
+    "url": "https://bassriver-nj.org/offices/",
+    "quote": "Forms associated with property resale and rental can be found on the Forms Page",
+    "doc_date": "",
+    "via": "page",
+    "verified": true
+   },
+   {
+    "url": "https://bassriver-nj.org/forms/",
+    "quote": "Property Resale and Rental",
+    "doc_date": "",
+    "via": "page",
+    "verified": true
+   },
+   {
+    "url": "https://bassriver-nj.org/site_files/Forms/Property_Resale_Rental_Application.pdf",
+    "quote": "Please check one RESALE INSPECTION: RENTAL INSPECTION:",
+    "doc_date": "2026-05 (file last modified May 27, 2026)",
+    "via": "pdf",
+    "verified": null
+   },
+   {
+    "url": "https://bassriver-nj.org/site_files/Forms/Property_Resale_Rental_Application.pdf",
+    "quote": "Joe Ventresca Code Enforcement Residential Resale / Rental Inspection Checklist",
+    "doc_date": "2026-05 (file last modified May 27, 2026)",
+    "via": "pdf",
+    "verified": null
+   },
+   {
+    "url": "https://bassriver-nj.org/site_files/Forms/Property_Resale_Rental_Application.pdf",
+    "quote": "Phil Reed Joseph Ventresca Housing Official",
+    "doc_date": "2026-05 (file last modified May 27, 2026)",
+    "via": "pdf",
+    "verified": null
+   },
+   {
+    "url": "https://tuckertonborough.com/government/departments/construction-and-code-enforcement/",
+    "quote": "Code Enforcement Officers: James McAndrew JMCANDREW@TuckertonBorough.com Joe Ventresca Larry Ditzel Technical Assistant to Construction Officials: Lindsay Cranmer LCranmer@TuckertonBorough.com",
+    "doc_date": "",
+    "via": "page",
+    "verified": true
+   },
+   {
+    "url": "https://tuckertonborough.com/government/departments/construction-and-code-enforcement/",
+    "quote": "Building, Zoning & Code Enforcement Telephone: 609-296-4916 Or 609-296-2447",
+    "doc_date": "",
+    "via": "page",
+    "verified": true
+   }
+  ],
+  "confidence": "low",
+  "notes": "Bass River's own site sends sellers to a Resale - Rental Application, but the form is the Borough of Tuckerton's (Ocean County) form, run by Tuckerton's Construction and Code Enforcement office under Bass River's interlocal service agreement. Bass River's posted copy matches Tuckerton's form 'updated 5/26/2026'. Some checklist lines are Tuckerton-specific (for example no sleeping space on the third floor in Tuckerton Meadows). No Bass River ordinance requiring a resale certificate was found: the township code on Municode (Supplement 17, 2021) only requires a certificate of occupancy for rental units (Chapter 5.16, $25 first unit, $15 each additional unit, applied for through the municipal clerk). The only fee on the form is tied to the smoke, carbon monoxide and extinguisher certificate (see fire_cert); no separate resale housing inspection fee is published. The Tuckerton page routes web messages for Joe Ventresca to the technical assistant's address (LCranmer@TuckertonBorough.com). Confirm with the Tuckerton Construction Office whether the full resale checklist applies to Bass River properties or only the fire certificate items."
+ },
+ "fire_cert": {
+  "requirements": [
+   "Ten-year sealed battery smoke alarms required where alarms are battery powered (effective January 1, 2019); hardwired alarms from original construction must stay hardwired",
+   "Smoke alarm rules by year built (1978 and before, 1979-1981, 1981-1987, 1987-1991, 1991 to present), with hardwired and interconnected alarms required for newer homes",
+   "Carbon monoxide alarm within 10 feet of the sleeping areas",
+   "Portable fire extinguisher, minimum 2A:10BC, 2.5 to 10 lb dry chemical, within 10 feet of the kitchen (form dated May 2026 still lists it)"
+  ],
+  "authorities": [
+   {
+    "name": "Tuckerton Borough Fire Prevention / Construction and Code Enforcement Office (for Bass River under interlocal agreement)",
+    "type": "municipal_fire_bureau",
+    "area_served": "Entire township",
+    "lead_time": "Fee depends on how soon the inspection is needed: more than 10 business days, 4 to 10 business days, or 1 to 4 business days after the application is received.",
+    "fees": [
+     {
+      "label": "Smoke/CO/extinguisher certificate, inspection more than 10 business days after application",
+      "amount": "$75.00",
+      "quote": "$75.00- Inspection will be done more than 10 business days after the application is received.",
+      "source_url": "https://bassriver-nj.org/site_files/Forms/Property_Resale_Rental_Application.pdf",
+      "verified": null
+     },
+     {
+      "label": "Smoke/CO/extinguisher certificate, inspection 4 to 10 business days after application",
+      "amount": "$150.00",
+      "quote": "$150.00 - Inspection will be done 4 to 10 business days after the application is received.",
+      "source_url": "https://bassriver-nj.org/site_files/Forms/Property_Resale_Rental_Application.pdf",
+      "verified": null
+     },
+     {
+      "label": "Smoke/CO/extinguisher certificate, inspection 1 to 4 business days after application",
+      "amount": "$225.00",
+      "quote": "$225.00 - Inspection will be done 1 to 4 business days after the application is received.",
+      "source_url": "https://bassriver-nj.org/site_files/Forms/Property_Resale_Rental_Application.pdf",
+      "verified": null
+     }
+    ],
+    "how_to_apply": "Use the Resale - Rental Application on Bass River's Forms page. Submit it with the non-refundable fee (cash, check or money order only) to the Tuckerton Borough Construction Office, 420 East Main Street, Tuckerton, NJ 08087. Inspections are done on Fridays only.",
+    "application_url": "https://bassriver-nj.org/site_files/Forms/Property_Resale_Rental_Application.pdf",
+    "department_url": "https://tuckertonborough.com/government/departments/construction-and-code-enforcement/",
+    "contact_name": "Joseph Ventresca",
+    "contact_title": "Housing Official / Code Enforcement Officer (Tuckerton Borough)",
+    "phone": "609-296-4916",
+    "email": "LCranmer@TuckertonBorough.com",
+    "evidence": [
+     {
+      "url": "https://bassriver-nj.org/site_files/Forms/Property_Resale_Rental_Application.pdf",
+      "quote": "Certification of smoke detector, carbon monoxide alarm and portable fire extinguisher compliance.",
+      "doc_date": "2026-05 (file last modified May 27, 2026)",
+      "via": "pdf",
+      "verified": null
+     },
+     {
+      "url": "https://bassriver-nj.org/site_files/Forms/Property_Resale_Rental_Application.pdf",
+      "quote": "Upon the change of ownership (resale) of any real property a Fire Certificate must be applied for, for the inspection of Smoke Detectors, Carbon Monoxide Detectors and Fire Extinguishers only.",
+      "doc_date": "2026-05 (file last modified May 27, 2026)",
+      "via": "pdf",
+      "verified": null
+     },
+     {
+      "url": "https://bassriver-nj.org/site_files/Forms/Property_Resale_Rental_Application.pdf",
+      "quote": "WE ONLY ACCEPT CASH, CHECK, OR MONEY ORDER",
+      "doc_date": "2026-05 (file last modified May 27, 2026)",
+      "via": "pdf",
+      "verified": null
+     },
+     {
+      "url": "https://nj.gov/dca/dfs/pdf/ANNUAL%20REGISTRY/THIRD%20QUARTER%20LEA%20REGISTRY%202026.pdf",
+      "quote": "S Bass River Township",
+      "doc_date": "2026-07",
+      "via": "pdf",
+      "verified": true
+     },
+     {
+      "url": "https://www.nj.gov/dca/dfs/pdf/fire%20directory_county%20summary/state_towns%207_17_26.pdf",
+      "quote": "BASS RIVER TWP 0301",
+      "doc_date": "2026-07-17",
+      "via": "pdf",
+      "verified": true
+     },
+     {
+      "url": "https://www.nj.gov/dca/dfs/pdf/fire%20directory_county%20summary/state_towns%207_17_26.pdf",
+      "quote": "SC = Smoke Certs",
+      "doc_date": "2026-07-17",
+      "via": "pdf",
+      "verified": true
+     },
+     {
+      "url": "https://www.nj.gov/dca/dfs/pdf/fire%20directory_county%20summary/fire_code_enforcement_director.pdf",
+      "quote": "LEAID: 0301-999 Enf Auth. State Fire Official Louis Kilmer Phone (609)633-6132",
+      "doc_date": "2026-05-18 (survey date)",
+      "via": "state_directory",
+      "verified": true
+     }
+    ],
+    "confidence": "medium"
+   }
+  ],
+  "notes": "The NJ DCA is the fire code enforcing agency for Bass River (LEA registry code S; directory lists Fire Official Louis Kilmer, (609)633-6132). The DCA state-towns list (revised 7/17/2026) lists Bass River without the 'SC' (smoke certs) flag, so the state does not appear to issue smoke certificates here. Bass River's site instead posts the Tuckerton Borough Rental/Resale Application, whose first page is the smoke alarm, CO alarm and extinguisher certification with the fee schedule quoted. Under N.J.A.C. 5:70-2.3(a)1 a municipal resale inspection can stand in for the separate state certificate. The fee amounts were printed on a scanned form; digits were read from the image. The state law change of February 3, 2025 (P.L.2025, c.19) dropped the extinguisher from the state requirement, but this May 2026 form still lists it."
+ },
+ "other_items": [
+  {
+   "label": "Well water test",
+   "detail": "The form says a well water test must be completed by the Board of Health for homes on well water.",
+   "source_url": "https://bassriver-nj.org/site_files/Forms/Property_Resale_Rental_Application.pdf"
+  },
+  {
+   "label": "Professional certifications",
+   "detail": "Attach certifications for well and septic, chimneys, woodstoves, fireplaces, heat and hot water systems, elevation, and lead paint if the home was built before 1978.",
+   "source_url": "https://bassriver-nj.org/site_files/Forms/Property_Resale_Rental_Application.pdf"
+  },
+  {
+   "label": "Rental certificate of occupancy (rentals only)",
+   "detail": "Rental units need a township certificate of occupancy before each new occupancy, applied for through the municipal clerk (Chapter 5.16). Not a resale requirement.",
+   "source_url": "https://library.municode.com/nj/bass_river_township/codes/municipal_code?nodeId=TIT5BULIRE_CH5.16REREUN_5.16.030CEOCREUN"
+  }
+ ],
+ "open_questions": [
+  "Does Bass River have an ordinance requiring a resale inspection, or is the Tuckerton checklist applied only because of the interlocal agreement? The online code (2021) only covers rentals.",
+  "Confirm with the Tuckerton Construction Office (609-296-4916) that the $75 / $150 / $225 fee schedule on the form applies to Bass River properties.",
+  "Confirm whether the extinguisher is still required given P.L.2025, c.19; the May 2026 form still lists it."
+ ],
+ "verification": {
+  "fees": 3,
+  "fee_ok": 0,
+  "fee_bad": 0,
+  "fee_unchecked": 3,
+  "quotes": 15,
+  "q_ok": 9,
+  "q_bad": 0,
+  "q_unchecked": 6
+ }
+}

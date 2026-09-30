@@ -1,0 +1,164 @@
+{
+ "municipality_code": "0313",
+ "municipality": "Evesham Township (Marlton)",
+ "county": "BURLINGTON",
+ "checked_at": "2026-09-30",
+ "resale_co": {
+  "status": "not_required",
+  "name": "",
+  "issued_by": "",
+  "lead_time": "",
+  "valid_for": "",
+  "requirements": [],
+  "fees": [],
+  "how_to_apply": "No township resale CO or CCO. The Township says all home resales and rentals must get an inspection from the fire department (Evesham Fire-Rescue); see the fire certificate section.",
+  "application_url": "",
+  "department_url": "https://evesham-nj.org/departments/construction",
+  "phone": "856-983-2914",
+  "email": "",
+  "contact_name": "",
+  "contact_title": "Construction Office",
+  "evidence": [
+   {
+    "url": "https://web.archive.org/web/20260508123727/https://evesham-nj.org/construction-page-list/791-construction-faq",
+    "quote": "What if I am selling my house? Is an inspection required? The Township of Evesham does not currently inspect existing residential homes for Certificate of Occupancy or Continuing Certificate of Occupancy. All home resales and rentals are required to obtain an inspection from the Township fire department.",
+    "doc_date": "2026-05",
+    "via": "page",
+    "verified": true
+   },
+   {
+    "url": "https://web.archive.org/web/20260508113240/https://evesham-nj.org/departments/construction",
+    "quote": "Phone: (856) 983-2914",
+    "doc_date": "2026-05",
+    "via": "page",
+    "verified": true
+   }
+  ],
+  "confidence": "high",
+  "notes": "The live evesham-nj.org site shows a bot-check page to scripted requests, so the Construction FAQ (original URL https://evesham-nj.org/construction-page-list/791-construction-faq) was read from an Internet Archive capture dated May 8, 2026. Commercial properties need a New Tenant Certificate / New Owner Certificate; that does not apply to 1-2 family homes. Rentals (including short-term rentals) must register with the Township Clerk and get the fire department smoke/CO inspection at each new tenant. The Township code (ecode360 EV0481) could not be opened."
+ },
+ "fire_cert": {
+  "requirements": [
+   "Smoke alarm type and locations depend on the year the home was built (before 1977: 10-year sealed battery alarm on each level including basement; 1992 to present: interconnected hardwired alarms with battery backup in all bedrooms, near bedrooms and on all levels)",
+   "Hardwired smoke alarms older than 10 years must be replaced with new hardwired alarms with battery backup",
+   "All smoke alarms must be less than 10 years old; if no date is stamped, replace the alarm",
+   "Each level needs an AC (hardwired) or 10-year sealed battery smoke alarm; hardwired alarms must be interconnected",
+   "CO alarm outside and near all sleeping areas if the home has a fuel-burning appliance, fireplace or garage",
+   "House numbers: 3-inch Arabic numerals, contrasting color, at least 30 inches off the ground, visible from the street",
+   "Low-voltage fire alarm systems must be tested and approved by an alarm contractor before the inspection; give the certificate to the inspector",
+   "Homes with residential fire sprinklers need a licensed sprinkler contractor inspection within 30 days before the fire inspection",
+   "Portable fire extinguisher is required for RENTALS ONLY (2A:10BC, kitchen, visible, mounted no higher than 5 feet, tagged within 12 months or new with receipt); not required for sales",
+   "No change of ownership or occupancy before a successful inspection and certificate; violators face a $500 penalty per occurrence"
+  ],
+  "authorities": [
+   {
+    "name": "Evesham Township Fire District No. 1 (Evesham Fire-Rescue), Division of Fire Prevention",
+    "type": "fire_district",
+    "area_served": "Entire township",
+    "lead_time": "Apply more than 10 business days before the change of occupant for the lowest fee. Inspections are given a block of time; missing it requires a new non-refundable application fee.",
+    "fees": [
+     {
+      "label": "Request received more than 10 business days before the change of occupant",
+      "amount": "$70",
+      "quote": "Requests for a CSACMAPFEC received more than 10 business days prior to the change of occupant: $70",
+      "source_url": "https://eveshamfire.org/inspections-forms/smoke-alarm-certficate/",
+      "verified": true
+     },
+     {
+      "label": "Request received 4 to 10 business days before the change of occupant",
+      "amount": "$115",
+      "quote": "Requests for a CSACMAPFEC received 4 to 10 business days prior to the change of occupant: $115",
+      "source_url": "https://eveshamfire.org/inspections-forms/smoke-alarm-certficate/",
+      "verified": true
+     },
+     {
+      "label": "Request received fewer than 4 business days before the change of occupant",
+      "amount": "$160",
+      "quote": "Requests for a CSACMAPFEC received fewer than 4 business day prior to the change of occupant: $160",
+      "source_url": "https://eveshamfire.org/inspections-forms/smoke-alarm-certficate/",
+      "verified": true
+     },
+     {
+      "label": "Each required re-inspection (a third visit needs a new application and fee)",
+      "amount": "$35",
+      "quote": "A fee of $35 shall be assessed for all required re-inspections. A third (3rd) visit will require a new application and new fee.",
+      "source_url": "https://eveshamfire.org/inspections-forms/smoke-alarm-certficate/",
+      "verified": true
+     }
+    ],
+    "how_to_apply": "Start the online Smoke/CO Certificate application on the fire district's Muniverse portal (linked from the Home Smoke/CO Alarm Inspections page). All fees are non-refundable. Questions: Fire Prevention Office, 984 Tuckerton Road, Suite 205, Marlton (Municipal Building 2nd floor), 856-983-2750, open Monday to Thursday 7:30 a.m. to 5:30 p.m. Short sales and foreclosures: call the Division of Fire Prevention to schedule.",
+    "application_url": "https://geo.muniverse.us/prod1/portal/portal.jsp?c=596833708&p=557152673&g=557273727",
+    "department_url": "https://eveshamfire.org/inspections-forms/smoke-alarm-certficate/",
+    "phone": "856-983-2750",
+    "email": "sfreedman@eveshamfire.org",
+    "contact_name": "Scott Freedman",
+    "contact_title": "Deputy Chief, Fire Marshal / Fire Official / Fire Subcode Official",
+    "evidence": [
+     {
+      "url": "https://eveshamfire.org/inspections-forms/smoke-alarm-certficate/",
+      "quote": "Any change of ownership or occupancy/tenancy may not occur prior to a successful inspection and possession of a CSACMAPFEC Certification. Changes without this inspection will result in a $500 penalty per occurrence (N.J.S.A 52:27D-198.3).",
+      "doc_date": "",
+      "via": "page",
+      "verified": true
+     },
+     {
+      "url": "https://eveshamfire.org/inspections-forms/smoke-alarm-certficate/",
+      "quote": "Fire Extinguisher (RENTALS ONLY):",
+      "doc_date": "",
+      "via": "page",
+      "verified": true
+     },
+     {
+      "url": "https://geo.muniverse.us/prod1/portal/portal.jsp?c=596833708&p=557152673&g=557273727",
+      "quote": "The fee is based on the number of business days between the scheduled closing date and the application date: 11 Business days or more $70.00 10 to 4 Business days $115.00 3 Business days or less $160.00 First required re-inspection $35.00",
+      "doc_date": "",
+      "via": "page",
+      "verified": true
+     },
+     {
+      "url": "https://eveshamfire.org/facilities/fire-administration-fire-prevention-office/",
+      "quote": "The office handles all matters related to fire permits, home resale and smoke detector inspections, fire prevention education and tours, and any other inquiries related to fire district business.",
+      "doc_date": "",
+      "via": "page",
+      "verified": true
+     },
+     {
+      "url": "https://eveshamfire.org/organization/contact/",
+      "quote": "Deputy Chief Scott Freedman Fire Marshal/Fire Official/Fire Subcode Official PO Box 276 Marlton, NJ 08053 Phone: 856-983-2750",
+      "doc_date": "",
+      "via": "page",
+      "verified": true
+     },
+     {
+      "url": "https://www.nj.gov/dca/dfs/pdf/fire%20directory_county%20summary/fire_code_enforcement_director.pdf",
+      "quote": "Fire Official Scott L Freedman Phone (856) 983-2750 Email sfreedman@eveshamfire.org",
+      "doc_date": "2026-03",
+      "via": "state_directory",
+      "verified": true
+     },
+     {
+      "url": "https://nj.gov/dca/dfs/pdf/ANNUAL%20REGISTRY/THIRD%20QUARTER%20LEA%20REGISTRY%202026.pdf",
+      "quote": "D Evesham Township",
+      "doc_date": "2026-07",
+      "via": "pdf",
+      "verified": true
+     }
+    ],
+    "confidence": "high"
+   }
+  ],
+  "notes": "The fire district's page and its Muniverse application both list the same fees ($70 / $115 / $160, re-inspection $35); the portal words the tiers as 11+ business days, 10 to 4, and 3 or less. All fees are non-refundable. The page says the fire extinguisher is required for rentals only, which matches P.L.2025, c.19. Short-term rental certificates are valid 365 days."
+ },
+ "other_items": [],
+ "open_questions": [],
+ "verification": {
+  "fees": 4,
+  "fee_ok": 4,
+  "fee_bad": 0,
+  "fee_unchecked": 0,
+  "quotes": 9,
+  "q_ok": 9,
+  "q_bad": 0,
+  "q_unchecked": 0
+ }
+}

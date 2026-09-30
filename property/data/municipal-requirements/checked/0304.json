@@ -1,0 +1,276 @@
+{
+ "municipality_code": "0304",
+ "municipality": "Bordentown Township",
+ "county": "BURLINGTON",
+ "checked_at": "2026-09-30",
+ "resale_co": {
+  "status": "required",
+  "name": "Certificate of Conformity for Resale / Change of Occupancy",
+  "issued_by": "Bordentown Township Construction Department (inspection by the fire district serving the block)",
+  "lead_time": "Request at least 10 business days before the change in ownership or occupancy",
+  "valid_for": "60 days",
+  "requirements": [
+   "Smoke detectors on all floors (Township Code 274-5); battery units must be 10-year sealed",
+   "Carbon monoxide alarm within 10 feet of sleeping areas (UL 2034) if there is a fuel-burning appliance or attached garage",
+   "Portable fire extinguisher, 2A:10BC residential, no more than 10 lb, within 10 feet of the kitchen (form still lists it)",
+   "House numbers in Arabic numerals, at least 3 inches, on the front wall or porch and visible from the street (Township Code 200-7)",
+   "Open construction permits and violations must be closed first"
+  ],
+  "fees": [
+   {
+    "label": "Single family home, townhouse, duplex, or apartment in a single family home",
+    "amount": "$100.00",
+    "quote": "Single Family Homes/Townhouses/Duplexes/Apartments in Single Family Homes: $100.00",
+    "source_url": "https://files-backend.assets.thrillshare.com/documents/asset/uploaded_file/4427/Bordentown/dfb58020-382a-46f3-ab06-b2b90f5c8736/COC_RESALE__fillable_.pdf.pdf?disposition=inline",
+    "verified": true
+   },
+   {
+    "label": "House resale re-inspection",
+    "amount": "$65.00",
+    "quote": "House Resale / Rental Inspection Fee: $100.00 Re-Inspection Fee: $65.00",
+    "source_url": "https://files-backend.assets.thrillshare.com/documents/asset/uploaded_file/4427/Bordentown/dfb58020-382a-46f3-ab06-b2b90f5c8736/COC_RESALE__fillable_.pdf.pdf?disposition=inline",
+    "verified": true
+   },
+   {
+    "label": "Apartment in an apartment complex",
+    "amount": "$80.00",
+    "quote": "Apartments in Apartment Complexes ONLY: $80.00",
+    "source_url": "https://files-backend.assets.thrillshare.com/documents/asset/uploaded_file/4427/Bordentown/dfb58020-382a-46f3-ab06-b2b90f5c8736/COC_RESALE__fillable_.pdf.pdf?disposition=inline",
+    "verified": true
+   },
+   {
+    "label": "Apartment re-inspection",
+    "amount": "$55.00",
+    "quote": "Apartment Rental/Change in Tenancy Fee: $80.00 Re-Inspection Fee: $55.00",
+    "source_url": "https://files-backend.assets.thrillshare.com/documents/asset/uploaded_file/4427/Bordentown/dfb58020-382a-46f3-ab06-b2b90f5c8736/COC_RESALE__fillable_.pdf.pdf?disposition=inline",
+    "verified": true
+   }
+  ],
+  "how_to_apply": "Fill out page 2 (Request for Certificate of Conformity) of the fillable form, check the fire district for the property's block, and return it to the Bordentown Township Construction Department, 1 Municipal Drive, with exact cash or a check payable to Bordentown Township. The fire district then calls the contact person to schedule; the homeowner, realtor or maintenance staff must be present.",
+  "application_url": "https://files-backend.assets.thrillshare.com/documents/asset/uploaded_file/4427/Bordentown/dfb58020-382a-46f3-ab06-b2b90f5c8736/COC_RESALE__fillable_.pdf.pdf?disposition=inline",
+  "department_url": "https://www.bordentowntownship.com/documents/departments/construction/resale-housing-%2F-change-of-occupancy-%2F-change-of-commercial-tenancy/563317",
+  "contact_name": "Reyan Frank",
+  "contact_title": "Technical Assistant to the Construction Official",
+  "phone": "609-298-2800 ext. 2121",
+  "email": "r.frank@bordentowntownship.org",
+  "evidence": [
+   {
+    "url": "https://files-backend.assets.thrillshare.com/documents/asset/uploaded_file/4427/Bordentown/dfb58020-382a-46f3-ab06-b2b90f5c8736/COC_RESALE__fillable_.pdf.pdf?disposition=inline",
+    "quote": "Inspection requests must be made at least TEN (10) BUSINESS DAYS prior to the change in ownership or occupancy of the dwelling.",
+    "doc_date": "2024-03 (PDF created March 27, 2024; uploaded November 2025)",
+    "via": "pdf",
+    "verified": true
+   },
+   {
+    "url": "https://files-backend.assets.thrillshare.com/documents/asset/uploaded_file/4427/Bordentown/dfb58020-382a-46f3-ab06-b2b90f5c8736/COC_RESALE__fillable_.pdf.pdf?disposition=inline",
+    "quote": "Please complete page 2 and return it to the Bordentown Township Construction Department with the appropriate application fee.",
+    "doc_date": "2024-03 (PDF created March 27, 2024; uploaded November 2025)",
+    "via": "pdf",
+    "verified": true
+   },
+   {
+    "url": "https://files-backend.assets.thrillshare.com/documents/asset/uploaded_file/4427/Bordentown/dfb58020-382a-46f3-ab06-b2b90f5c8736/COC_RESALE__fillable_.pdf.pdf?disposition=inline",
+    "quote": "Open Construction Permits and Violations must be closed before a Certificate of Conformity will be issued.",
+    "doc_date": "2024-03 (PDF created March 27, 2024; uploaded November 2025)",
+    "via": "pdf",
+    "verified": true
+   },
+   {
+    "url": "https://files-backend.assets.thrillshare.com/documents/asset/uploaded_file/4427/Bordentown/dfb58020-382a-46f3-ab06-b2b90f5c8736/COC_RESALE__fillable_.pdf.pdf?disposition=inline",
+    "quote": "Certificates of Conformity are valid for 60 days",
+    "doc_date": "2024-03 (PDF created March 27, 2024; uploaded November 2025)",
+    "via": "pdf",
+    "verified": true
+   },
+   {
+    "url": "https://thrillshare-cmsv2.services.thrillshare.com/api/v2/s/339998/documents?folder_id=563317",
+    "quote": "Certificate of Conformity for Resale/Change of Occupancy (Fillable Form).pdf",
+    "doc_date": "",
+    "via": "page",
+    "verified": true
+   },
+   {
+    "url": "https://web.archive.org/web/20240620031242/https://www.bordentowntownship.com/documents/departments/construction/548482",
+    "quote": "Resale Housing / Change of Occupancy / Change of Commercial Tenancy",
+    "doc_date": "2024-06-20 (archive capture)",
+    "via": "page",
+    "verified": true
+   },
+   {
+    "url": "https://thrillshare-cmsv2.services.thrillshare.com/api/v2/s/339996/directories?page_no=1",
+    "quote": "Reyan Frank ... Technical Assistant to the Construction Official ... r.frank@bordentowntownship.org ... (609)298-2800,2121",
+    "doc_date": "",
+    "via": "page",
+    "verified": true
+   }
+  ],
+  "confidence": "high",
+  "notes": "The township website (bordentowntownship.com) shows a browser challenge page. The form was found through the site's own document listing service (thrillshare-cmsv2.services.thrillshare.com), which lists it in the Construction > Resale Housing / Change of Occupancy / Change of Commercial Tenancy folder, and downloaded from the township's document host. The certificate is a fire safety inspection only (smoke, CO, extinguisher, house numbers); the form says a fuller building inspection is up to the buyer's private inspector. Pay by exact cash or check to Bordentown Township."
+ },
+ "fire_cert": {
+  "requirements": [
+   "All battery smoke alarms must be 10-year sealed units; alarms on each level and outside each sleeping area; alarms need not be interconnected; hardwired alarms from original construction cannot be replaced with battery units",
+   "Smoke/CO combination units are acceptable but must have the 10-year sealed battery",
+   "Fire extinguisher at least 2A:10BC, no more than 10 lb, within 10 feet of the kitchen, top no higher than 60 inches, on the maker's bracket, near an exit path, with the owner's manual; proof of purchase accepted instead of a service tag (form created March 2024 still lists it)",
+   "House numbers at least 3 inches, Arabic numerals, contrasting and visible from the street"
+  ],
+  "authorities": [
+   {
+    "name": "Bordentown Township Fire District #1 (Mission Fire Company) Fire Prevention Bureau",
+    "type": "fire_district",
+    "area_served": "Blocks 1 through 61",
+    "lead_time": "10 business days",
+    "fees": [
+     {
+      "label": "Combined Certificate of Conformity inspection, house (paid once, to Bordentown Township)",
+      "amount": "$100.00",
+      "quote": "House Resale / Rental Inspection Fee: $100.00",
+      "source_url": "https://files-backend.assets.thrillshare.com/documents/asset/uploaded_file/4427/Bordentown/dfb58020-382a-46f3-ab06-b2b90f5c8736/COC_RESALE__fillable_.pdf.pdf?disposition=inline",
+      "verified": true
+     },
+     {
+      "label": "Combined re-inspection, house",
+      "amount": "$65.00",
+      "quote": "Re-Inspection Fee: $65.00",
+      "source_url": "https://files-backend.assets.thrillshare.com/documents/asset/uploaded_file/4427/Bordentown/dfb58020-382a-46f3-ab06-b2b90f5c8736/COC_RESALE__fillable_.pdf.pdf?disposition=inline",
+      "verified": true
+     }
+    ],
+    "how_to_apply": "Apply through the township Construction Department using the Certificate of Conformity form and check Fire District #1 (Mission). The district calls to schedule.",
+    "application_url": "https://files-backend.assets.thrillshare.com/documents/asset/uploaded_file/4427/Bordentown/dfb58020-382a-46f3-ab06-b2b90f5c8736/COC_RESALE__fillable_.pdf.pdf?disposition=inline",
+    "department_url": "https://www.missionfire.org/prevention.php",
+    "contact_name": "Mark Mezger",
+    "contact_title": "Fire Marshal",
+    "phone": "609-298-5375 ext. 105",
+    "email": "dutyfm@missionfire.org",
+    "evidence": [
+     {
+      "url": "https://files-backend.assets.thrillshare.com/documents/asset/uploaded_file/4427/Bordentown/dfb58020-382a-46f3-ab06-b2b90f5c8736/COC_RESALE__fillable_.pdf.pdf?disposition=inline",
+      "quote": "FIRE DISTRICT #1 (Mission) Block 1 through 61 (609) 298-5375 ext. 105 or email dutyfm@missionfire.org",
+      "doc_date": "2024-03 (PDF created March 27, 2024; uploaded November 2025)",
+      "via": "pdf",
+      "verified": true
+     },
+     {
+      "url": "https://files-backend.assets.thrillshare.com/documents/asset/uploaded_file/4427/Bordentown/dfb58020-382a-46f3-ab06-b2b90f5c8736/COC_RESALE__fillable_.pdf.pdf?disposition=inline",
+      "quote": "The Fire District checked below will call the contact person named to schedule the inspection and all questions regarding the said inspection and or requirements should be directed to that Fire District.",
+      "doc_date": "2024-03 (PDF created March 27, 2024; uploaded November 2025)",
+      "via": "pdf",
+      "verified": true
+     },
+     {
+      "url": "https://www.missionfire.org/prevention.php",
+      "quote": "FM-321 - Mark Mezger - Fire Marshal - Phone Ext - 503",
+      "doc_date": "",
+      "via": "page",
+      "verified": true
+     },
+     {
+      "url": "https://www.missionfire.org/",
+      "quote": "Mission Fire Company is a combination volunteer/career staffed fire company that provides fire, rescue, and emergency services to the approximately 10,000 residents that live in Bordentown Township's 9.3 square miles.",
+      "doc_date": "",
+      "via": "page",
+      "verified": true
+     },
+     {
+      "url": "https://nj.gov/dca/dfs/pdf/ANNUAL%20REGISTRY/THIRD%20QUARTER%20LEA%20REGISTRY%202026.pdf",
+      "quote": "Bordentown Township FD#1 is the LEA for Bordentown City and Bordentown Township FD#2.",
+      "doc_date": "2026-07",
+      "via": "pdf",
+      "verified": true
+     },
+     {
+      "url": "https://www.nj.gov/dca/dfs/pdf/fire%20directory_county%20summary/fire_code_enforcement_director.pdf",
+      "quote": "Mission Fire Co Phone (609) 298-5375 Email mmezger@missionfire.org LEAID: 0304-002 Enf Auth. District Fire Official Mark Mezger",
+      "doc_date": "2026-03-05 (survey date)",
+      "via": "state_directory",
+      "verified": true
+     }
+    ],
+    "confidence": "high"
+   },
+   {
+    "name": "Bordentown Township Fire District #2 (Derby)",
+    "type": "fire_district",
+    "area_served": "Block 62 and up",
+    "lead_time": "10 business days",
+    "fees": [
+     {
+      "label": "Combined Certificate of Conformity inspection, house (paid once, to Bordentown Township)",
+      "amount": "$100.00",
+      "quote": "House Resale / Rental Inspection Fee: $100.00",
+      "source_url": "https://files-backend.assets.thrillshare.com/documents/asset/uploaded_file/4427/Bordentown/dfb58020-382a-46f3-ab06-b2b90f5c8736/COC_RESALE__fillable_.pdf.pdf?disposition=inline",
+      "verified": true
+     },
+     {
+      "label": "Combined re-inspection, house",
+      "amount": "$65.00",
+      "quote": "Re-Inspection Fee: $65.00",
+      "source_url": "https://files-backend.assets.thrillshare.com/documents/asset/uploaded_file/4427/Bordentown/dfb58020-382a-46f3-ab06-b2b90f5c8736/COC_RESALE__fillable_.pdf.pdf?disposition=inline",
+      "verified": true
+     }
+    ],
+    "how_to_apply": "Apply through the township Construction Department using the Certificate of Conformity form and check Fire District #2 (Derby). The district calls to schedule.",
+    "application_url": "https://files-backend.assets.thrillshare.com/documents/asset/uploaded_file/4427/Bordentown/dfb58020-382a-46f3-ab06-b2b90f5c8736/COC_RESALE__fillable_.pdf.pdf?disposition=inline",
+    "department_url": "https://www.btfd2.org/contact-information.html",
+    "contact_name": "Scully",
+    "contact_title": "Captain",
+    "phone": "609-298-8527",
+    "email": "inspections@btfd2.org",
+    "evidence": [
+     {
+      "url": "https://files-backend.assets.thrillshare.com/documents/asset/uploaded_file/4427/Bordentown/dfb58020-382a-46f3-ab06-b2b90f5c8736/COC_RESALE__fillable_.pdf.pdf?disposition=inline",
+      "quote": "FIRE DISTRICT #2 (Derby) Block 62 & UP",
+      "doc_date": "2024-03 (PDF created March 27, 2024; uploaded November 2025)",
+      "via": "pdf",
+      "verified": true
+     },
+     {
+      "url": "https://files-backend.assets.thrillshare.com/documents/asset/uploaded_file/4427/Bordentown/dfb58020-382a-46f3-ab06-b2b90f5c8736/COC_RESALE__fillable_.pdf.pdf?disposition=inline",
+      "quote": "Capt. Scully (609) 298-8527 or email inspections@btfd2.org",
+      "doc_date": "2024-03 (PDF created March 27, 2024; uploaded November 2025)",
+      "via": "pdf",
+      "verified": true
+     },
+     {
+      "url": "https://www.btfd2.org/contact-information.html",
+      "quote": "Chief of Department Robert MacFarland - r.macfarland@btfd2.org",
+      "doc_date": "",
+      "via": "page",
+      "verified": true
+     },
+     {
+      "url": "https://www.nj.gov/dca/dfs/pdf/fire%20directory_county%20summary/fire_code_enforcement_director.pdf",
+      "quote": "Bordentown Twp Fire Dist #2 Phone (609) 298-8527 Email r.macfarland@btfd2.org",
+      "doc_date": "2026-03-05 (survey date)",
+      "via": "state_directory",
+      "verified": true
+     }
+    ],
+    "confidence": "high"
+   }
+  ],
+  "notes": "Which district inspects depends on the property's tax block: District #1 (Mission) for Blocks 1 through 61, District #2 (Derby) for Block 62 and up. The fee is paid once to Bordentown Township with the Certificate of Conformity application; no separate fire district smoke certificate fee was found. The state LEA registry says District #1 is the fire code enforcing agency for District #2's area (and for Bordentown City), and the DCA directory lists Fire Official Mark Mezger (mmezger@missionfire.org) for both township district pages. The form gives only 'Capt. Scully' for District #2 (no first name). The Mission Fire page lists Mark Mezger at extension 503; the form's scheduling line is extension 105. The form (created March 2024) still requires a fire extinguisher although P.L.2025, c.19 (February 3, 2025) removed it from the state rule."
+ },
+ "other_items": [
+  {
+   "label": "Open permits and violations",
+   "detail": "Open construction permits and violations must be closed before the Certificate of Conformity is issued.",
+   "source_url": "https://files-backend.assets.thrillshare.com/documents/asset/uploaded_file/4427/Bordentown/dfb58020-382a-46f3-ab06-b2b90f5c8736/COC_RESALE__fillable_.pdf.pdf?disposition=inline"
+  }
+ ],
+ "open_questions": [
+  "Confirm the first name of Capt. Scully at Fire District #2.",
+  "Confirm whether the township still requires the fire extinguisher after P.L.2025, c.19."
+ ],
+ "verification": {
+  "fees": 8,
+  "fee_ok": 8,
+  "fee_bad": 0,
+  "fee_unchecked": 0,
+  "quotes": 17,
+  "q_ok": 17,
+  "q_bad": 0,
+  "q_unchecked": 0
+ }
+}

@@ -1,0 +1,184 @@
+{
+ "municipality_code": "2121",
+ "municipality": "Washington Borough",
+ "county": "WARREN",
+ "checked_at": "2026-09-30",
+ "resale_co": {
+  "status": "not_required",
+  "name": "Certificate of Occupancy (new construction only)",
+  "issued_by": "",
+  "lead_time": "",
+  "valid_for": "",
+  "requirements": [],
+  "fees": [],
+  "how_to_apply": "No town resale certificate is needed. The seller only needs the fire official's smoke alarm / CO alarm certificate (see fire certificate).",
+  "application_url": "",
+  "department_url": "https://www.washingtonboro-nj.gov/160/Code-Enforcement",
+  "phone": "908-689-1630",
+  "email": "pantuso@wtpd.net",
+  "contact_name": "Todd Pantuso",
+  "contact_title": "Police Officer / Code Enforcement Officer",
+  "evidence": [
+   {
+    "url": "https://www.washingtonboro-nj.gov/Faq.aspx?QID=75",
+    "quote": "The Borough does not require a Certificate of Occupancy upon the resale of properties (required for new construction only.) We do require an inspection by the Fire Official for residential properties prior to transfer of ownership",
+    "doc_date": "",
+    "via": "page",
+    "verified": true
+   },
+   {
+    "url": "https://www.washingtonboro-nj.gov/160/Code-Enforcement",
+    "quote": "Todd Pantuso Police Officer / Code Enforcement Officer Washington Township Police Department 211 Route 31 North Washington, NJ 07882 Phone: 908-689-1630",
+    "doc_date": "",
+    "via": "page",
+    "verified": true
+   }
+  ],
+  "confidence": "high",
+  "notes": "Rentals are different: the same FAQ says all residential rental properties must be inspected before a new tenant moves in (Safety and Property Maintenance Inspection plus smoke and CO alarm test, by appointment, 908-689-3600 ext. 120), and landlords must register yearly under Borough Code Chapter 66 (2026-2027 fee $100 for the first unit, Office of Housing). These are rental-only programs, not resale. Building and construction permits are handled by the Washington Township (Warren) Code and Construction Office under a shared services agreement."
+ },
+ "fire_cert": {
+  "requirements": [
+   "Smoke alarms more than 10 years old (from the manufacture date) or giving an end-of-life signal must be replaced",
+   "Battery-only smoke alarms must be 10-year sealed battery units; replaceable-battery single-station alarms are not accepted (since January 1, 2019)",
+   "Hardwired (A/C powered) alarms cannot be replaced with battery alarms",
+   "Smoke alarm type depends on the year built: before 1977 a 10-year sealed alarm on each level and within 10 feet of bedrooms; 1977 onward hardwired alarms on sleeping levels (and basement from October 1978; interconnected from August 1984); March 1991 onward hardwired interconnected alarms with battery backup on every level and in each bedroom",
+   "CO alarms within 10 feet of bedrooms; homes built 1993 and later need hardwired CO alarms with battery backup",
+   "All smoke and CO alarms must be listed (for example UL) and installed before booking the inspection",
+   "Battery smoke alarms may not be within 5 feet of a kitchen or bathroom",
+   "Fire extinguisher (still on the June 2024 form): listed 2A-10B:C, no more than 10 pounds, within 10 feet of the kitchen in the path of exit, mounted on its bracket with the top no more than 5 feet above the floor, serviced and tagged within 12 months or a recent purchase receipt, and the manual left for the buyer"
+  ],
+  "authorities": [
+   {
+    "name": "Washington Township (Morris County) Bureau of Fire Prevention, under a shared services agreement with Washington Borough",
+    "type": "municipal_fire_bureau",
+    "area_served": "Entire borough",
+    "lead_time": "Call to schedule 2 to 3 weeks before closing; more than 10 business days ahead for the lowest fee",
+    "fees": [
+     {
+      "label": "Request received more than 10 business days before change in occupant",
+      "amount": "$40",
+      "quote": "Requests for inspection received more than 10 business days prior to change in occupant: $40",
+      "source_url": "https://www.wtmorris.org/media/attachments/2024/08/14/2024-requirements-for-csacmapfec-updated-061224.pdf",
+      "verified": true
+     },
+     {
+      "label": "Request received 4 to 10 business days before change in occupant",
+      "amount": "$70",
+      "quote": "Requests for inspection received fewer 4 to 10 business days prior to change in occupant: $70",
+      "source_url": "https://www.wtmorris.org/media/attachments/2024/08/14/2024-requirements-for-csacmapfec-updated-061224.pdf",
+      "verified": true
+     },
+     {
+      "label": "Request received fewer than 4 days before change in occupant",
+      "amount": "$125",
+      "quote": "Requests for inspection received fewer than 4 days prior to change in occupant: $125",
+      "source_url": "https://www.wtmorris.org/media/attachments/2024/08/14/2024-requirements-for-csacmapfec-updated-061224.pdf",
+      "verified": true
+     }
+    ],
+    "how_to_apply": "Call the Washington Township (Morris County) Fire Prevention Office at 908-876-8637 to schedule (by appointment only; no form needed to schedule). Checks are payable to Washington Township. Office hours Monday to Friday 8:30 am to noon and 1 pm to 4:30 pm. Certificates are valid for six months.",
+    "application_url": "https://www.washingtonboro-nj.gov/DocumentCenter/View/447/Certificate-of-Smoke-Alarm-Carbon-Monoxide-Alarm-and-Portable-Fire-Extinguisher-Compliance-for-Resale-or-Rental-PDF",
+    "department_url": "https://www.washingtonboro-nj.gov/162/Fire-Prevention",
+    "phone": "908-876-8637",
+    "email": "fireinspection@wtmorris.net",
+    "contact_name": "Matthew Lopez",
+    "contact_title": "Fire Marshal",
+    "evidence": [
+     {
+      "url": "https://www.washingtonboro-nj.gov/Faq.aspx?QID=75",
+      "quote": "We do require an inspection by the Fire Official for residential properties prior to transfer of ownership, as well as inspections of commercial properties for compliance with local and State laws. Inspections are by Appointment only. Call 908-876-8637",
+      "doc_date": "",
+      "via": "page",
+      "verified": true
+     },
+     {
+      "url": "https://www.washingtonboro-nj.gov/162/Fire-Prevention",
+      "quote": "The Borough of Washington has entered into a shared service agreement with Washington Township (Morris County) to provide Fire Prevention services effective April 1, 2019.",
+      "doc_date": "2019-03-26 (letter)",
+      "via": "page",
+      "verified": true
+     },
+     {
+      "url": "https://www.washingtonboro-nj.gov/162/Fire-Prevention",
+      "quote": "Please call to schedule 2 to 3 weeks from the closing/change of occupancy.",
+      "doc_date": "",
+      "via": "page",
+      "verified": true
+     },
+     {
+      "url": "https://www.washingtonboro-nj.gov/162/Fire-Prevention",
+      "quote": "Matthew Lopez Fire Marshall Email Matthew Lopez Phone: 908-876-8637 Fire Prevention Phone: 908-876-8637",
+      "doc_date": "",
+      "via": "page",
+      "verified": true
+     },
+     {
+      "url": "https://www.washingtonboro-nj.gov/DocumentCenter/View/447/Certificate-of-Smoke-Alarm-Carbon-Monoxide-Alarm-and-Portable-Fire-Extinguisher-Compliance-for-Resale-or-Rental-PDF",
+      "quote": "All checks Payable to Washington Township",
+      "doc_date": "2023-08-15 (PDF file date)",
+      "via": "pdf",
+      "verified": true
+     },
+     {
+      "url": "https://www.wtmorris.org/media/attachments/2024/08/14/2024-requirements-for-csacmapfec-updated-061224.pdf",
+      "quote": "Serving Warren County's Mansfield, Independence Township, Borough of Washington & Hunterdon County's Califon Boro",
+      "doc_date": "2024-06-12",
+      "via": "pdf",
+      "verified": true
+     },
+     {
+      "url": "https://web.archive.org/web/20260501121051/https://www.wtmorris.org/index.php/departments/fire-prevention",
+      "quote": "Matt Lopez Fire Official Email: mlopez@wtmorris.net Robert Griffith Fire Inspector Email: rgriffith@wtmorris.net",
+      "doc_date": "archive capture 2026-05-01",
+      "via": "page",
+      "verified": true
+     },
+     {
+      "url": "https://web.archive.org/web/20260501121051/https://www.wtmorris.org/index.php/departments/fire-prevention",
+      "quote": "Inspection certificates are valid for six months, so please plan ahead.",
+      "doc_date": "archive capture 2026-05-01",
+      "via": "page",
+      "verified": true
+     },
+     {
+      "url": "https://nj.gov/dca/dfs/pdf/ANNUAL%20REGISTRY/THIRD%20QUARTER%20LEA%20REGISTRY%202026.pdf",
+      "quote": "Washington Twp. (Morris County) is the LEA for Independence and Mansfield Townships and Washington Borough in (Warren County).",
+      "doc_date": "2026-07 (as of June 30, 2026)",
+      "via": "pdf",
+      "verified": true
+     },
+     {
+      "url": "https://www.nj.gov/dca/dfs/pdf/fire%20directory_county%20summary/fire_code_enforcement_director.pdf",
+      "quote": "LEAID: 2121-001 Enf Auth. Municipal Fire Official Matthew J Lopez",
+      "doc_date": "2025 (survey date 9/8/2025)",
+      "via": "state_directory",
+      "verified": true
+     }
+    ],
+    "confidence": "high"
+   }
+  ],
+  "notes": "Washington Borough is served by the Washington Township (Morris County) fire prevention bureau, not by Washington Township (Warren). The same $40 / $70 / $125 fee schedule appears on the Borough's own copy of the requirements sheet (PDF dated August 2023) and on the Washington Township (Morris) sheet updated June 12, 2024. Both still list a portable fire extinguisher, although P.L.2025, c.19 later removed it from the state requirement. The Borough page spells the title 'Fire Marshall'; the Washington Township (Morris) page lists him as Fire Official (archive copy of https://www.wtmorris.org/index.php/departments/fire-prevention, captured 2026-05-01, because the live site shows a bot check)."
+ },
+ "other_items": [
+  {
+   "label": "Rental units: borough rental inspection and landlord registration (not needed for a sale to an owner-occupant)",
+   "detail": "All residential rental properties must be inspected before a new tenant moves in (Safety and Property Maintenance Inspection and smoke/CO alarm test, call 908-689-3600 ext. 120). Landlords register yearly with the Office of Housing.",
+   "source_url": "https://www.washingtonboro-nj.gov/Faq.aspx?QID=75"
+  }
+ ],
+ "open_questions": [
+  "Whether the fire bureau still checks for a portable fire extinguisher after P.L.2025, c.19, and whether it checks the secondary power source label."
+ ],
+ "verification": {
+  "fees": 3,
+  "fee_ok": 3,
+  "fee_bad": 0,
+  "fee_unchecked": 0,
+  "quotes": 12,
+  "q_ok": 12,
+  "q_bad": 0,
+  "q_unchecked": 0
+ }
+}

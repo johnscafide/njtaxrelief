@@ -1,0 +1,398 @@
+{
+ "municipality_code": "0322",
+ "municipality": "Moorestown Township",
+ "county": "BURLINGTON",
+ "checked_at": "2026-09-30",
+ "resale_co": {
+  "status": "required",
+  "name": "Certificate for Change in Occupancy/Ownership (Township page calls it Certificate of Continuing Occupancy)",
+  "issued_by": "Moorestown Township Department of Public Works (inspection); Director of Community Development reviews surveys",
+  "contact_name": "Don Lloyd",
+  "contact_title": "Director, Public Works",
+  "lead_time": "Get it before the real estate closing; the seller schedules the inspection with Public Works.",
+  "valid_for": "60 days from issue; if closing does not happen within 60 days a new certificate is needed",
+  "requirements": [
+   "No sump pumps, roof drains or other drainage connected to the sanitary sewer (must be permanently disconnected)",
+   "Water meter working and reading accurately; the Township replaces a bad meter, but any plumbing changes needed are at the owner's cost by a licensed plumber",
+   "Sidewalks free of trip hazards or other hazards; owner repairs or replaces as directed",
+   "No open construction permits; all improvements inspected and passed so permits can be closed",
+   "No encroachment on Township-owned land",
+   "If the property adjoins Township-owned property: a survey no more than 90 days old, with corner flags left in place until closing"
+  ],
+  "fees": [
+   {
+    "label": "Inspection, all residential and commercial properties (noted on tax search, collected at closing)",
+    "amount": "$75.00",
+    "quote": "(a) For all residential and commercial properties: $75.00.",
+    "source_url": "https://www.moorestown.nj.us/DocumentCenter/View/6678/05-2022",
+    "verified": true
+   },
+   {
+    "label": "Inspection, second floor condominium (noted on tax search, collected at closing)",
+    "amount": "$50.00",
+    "quote": "(b) For second floor condominium properties: $50.00.",
+    "source_url": "https://www.moorestown.nj.us/DocumentCenter/View/6678/05-2022",
+    "verified": true
+   }
+  ],
+  "how_to_apply": "Call Public Works at 856-235-3520, option 2, to schedule the inspection. The fee is noted on the tax search and collected at closing. If the property is on the Township's list of properties adjoining Township land, give a survey (no more than 90 days old) to the Department of Community Development.",
+  "application_url": "",
+  "department_url": "https://www.moorestown.nj.us/641/Certificate-of-Continuing-Occupancy",
+  "phone": "856-235-3520, option 2",
+  "email": "dlloyd@moorestown.nj.us",
+  "evidence": [
+   {
+    "url": "https://www.moorestown.nj.us/DocumentCenter/View/6678/05-2022",
+    "quote": "The Township of Moorestown requires the Seller of any property in the Township to obtain a Certificate for Change in Occupancy/Ownership prior to the real estate closing",
+    "doc_date": "2022-04",
+    "via": "pdf",
+    "verified": true
+   },
+   {
+    "url": "https://www.moorestown.nj.us/DocumentCenter/View/6678/05-2022",
+    "quote": "It shall be the responsibility of the property owner to schedule an inspection with the Department of Public Works.",
+    "doc_date": "2022-04",
+    "via": "pdf",
+    "verified": true
+   },
+   {
+    "url": "https://www.moorestown.nj.us/DocumentCenter/View/6678/05-2022",
+    "quote": "A Certificate shall be valid for a period of sixty (60) days once issued.",
+    "doc_date": "2022-04",
+    "via": "pdf",
+    "verified": true
+   },
+   {
+    "url": "https://www.moorestown.nj.us/DocumentCenter/View/6678/05-2022",
+    "quote": "The following schedule of fees, which shall be noted on the tax search and collected at the time of closing",
+    "doc_date": "2022-04",
+    "via": "pdf",
+    "verified": true
+   },
+   {
+    "url": "https://www.moorestown.nj.us/641/Certificate-of-Continuing-Occupancy",
+    "quote": "To facilitate a change to a Certificate of Continuing Occupancy contact, Public Works at 856-235-3520, opt #2. The sanitary sewer system, water meter and sidewalks will need to be inspected before this change can occur.",
+    "doc_date": "2026-09",
+    "via": "page",
+    "verified": true
+   },
+   {
+    "url": "https://www.moorestown.nj.us/DocumentCenter/View/6604/Buying_-Selling_Renting-_Change-of-Mailing-Address",
+    "quote": "A \"Certificate of Change of Ownership\" Inspection , contact (856) 235-3520, Opt #2",
+    "doc_date": "2026-04",
+    "via": "pdf",
+    "verified": true
+   },
+   {
+    "url": "https://www.moorestown.nj.us/162/Water-Sewer",
+    "quote": "Don Lloyd Director, Public Works",
+    "doc_date": "2026-09",
+    "via": "page",
+    "verified": true
+   }
+  ],
+  "confidence": "high",
+  "notes": "Chapter 53 of the Township code, as amended by Ordinance No. 5-2022 (introduced April 11, 2022; effective the later of June 1, 2022 or 20 days after adoption). The PDF on the Township site is the introduction copy, so the adopted fee amounts should be confirmed with the Township. This is a Public Works / permit / survey check, not a full housing code inspection. A Temporary Certificate with an escrow (valid 90 days) is allowed when sidewalk work or an encroachment cannot be fixed before closing. List of properties needing a survey: https://www.moorestown.nj.us/DocumentCenter/View/7007/Mtwn-Properties-that-Require-Surveys (questions: Tax Collector Jennifer Dellavalle, jdellavalle@moorestown.nj.us). No application form was found online; Don Lloyd is the Public Works director named on the Township site, not a named CCO inspector."
+ },
+ "fire_cert": {
+  "requirements": [
+   "All smoke detectors must be within 10 years of the manufacture date",
+   "All CO detectors must be within 7 years of the manufacture date",
+   "CO detector within 10 feet outside all sleeping areas if the home has a fuel-burning appliance, fireplace or garage (CO detectors only in bedrooms fail)",
+   "Pre-1975 homes: 10-year sealed battery smoke detector on each level, within 10 feet of each bedroom, including basement",
+   "AC smoke detectors must be interconnected; smoke detector at the bottom of basement stairs and top of walk-up attic stairs",
+   "Hardwired low-voltage fire alarm system must be tested and approved by a NJ licensed fire alarm contractor before the inspection; show or upload the certification",
+   "Smoke detector circuit located and labeled at the panel before the inspector arrives; panel circuits properly labeled",
+   "Homes with a generator, solar panels or battery storage need a permanent (not handwritten) 'CAUTION: MULTIPLE SOURCES OF POWER' type label within 18 inches of the main panel and the electric meter",
+   "House numbers permanently affixed, Arabic numerals about 3 inches high and 1 inch wide, contrasting background, visible from the street, not on a door",
+   "Upload a copy of the contract of sale or lease with the application",
+   "The Construction Office is notified of each application to check for open permits or violations"
+  ],
+  "authorities": [
+   {
+    "name": "Moorestown Fire District No. 1 (Moorestown Fire Department), served by Moorestown Fire Prevention (Bureau of Fire Prevention)",
+    "type": "fire_district",
+    "area_served": "Fire District 1 part of the township (the Township says to find your district on the NJ Division of Elections 'Find Your Polling Location' page, 'Fire' row)",
+    "contact_name": "Matthew Orsini",
+    "contact_title": "Fire Official (Moorestown Fire Prevention, shared by both districts)",
+    "lead_time": "Certificates are only good for 30 days, so requests for inspections more than 30 days before settlement/move-in are denied. Apply more than 10 business days before the change of occupant for the lowest fee.",
+    "fees": [
+     {
+      "label": "Smoke/CO certificate, request received more than 10 business days before change of occupant",
+      "amount": "$45.00",
+      "quote": "Requests for CSACMAC received more than 10 business days prior to change of occupant: $45.00;",
+      "source_url": "https://form.jotform.com/fireofficial313/smokeinspection",
+      "verified": true
+     },
+     {
+      "label": "Smoke/CO certificate, request received 4 to 10 business days before change of occupant",
+      "amount": "$90.00",
+      "quote": "Requests for CSACMAC received four to 10 business days prior to change of occupant: $90.00;",
+      "source_url": "https://form.jotform.com/fireofficial313/smokeinspection",
+      "verified": true
+     },
+     {
+      "label": "Smoke/CO certificate, request received fewer than 4 days before change of occupant",
+      "amount": "$161.00",
+      "quote": "Requests for CSACMAC received fewer than four days prior to change of occupant: $161.00;",
+      "source_url": "https://form.jotform.com/fireofficial313/smokeinspection",
+      "verified": true
+     },
+     {
+      "label": "Second or later reinspection",
+      "amount": "$45.00",
+      "quote": "The fee for a second or further succeeding reinspection pursuant to the inspection for CSACMAC shall be $45.00.",
+      "source_url": "https://form.jotform.com/fireofficial313/smokeinspection",
+      "verified": true
+     }
+    ],
+    "how_to_apply": "Apply online with the Moorestown Fire Prevention Jotform application (linked from the Township's Certificate of Continuing Occupancy page). Upload a copy of the contract of sale or lease. Pick a requested inspection date; inspections are Tuesdays and Thursdays, 9 to 11 AM, excluding holidays. The bureau emails a confirmation with the fee and who to make the check payable to. Pay by check or money order to the inspector at the inspection; not paying on arrival is an automatic failure. If you need an inspection within 24 hours, call the office after submitting.",
+    "application_url": "https://form.jotform.com/fireofficial313/smokeinspection",
+    "department_url": "https://www.moorestown.nj.us/641/Certificate-of-Continuing-Occupancy",
+    "phone": "(856) 234-1222",
+    "email": "info@fireprevention31.org",
+    "evidence": [
+     {
+      "url": "https://www.moorestown.nj.us/696/Fire-Department",
+      "quote": "Moorestown Township is home to two volunteer fire districts.",
+      "doc_date": "2026-09",
+      "via": "page",
+      "verified": true
+     },
+     {
+      "url": "https://www.moorestown.nj.us/696/Fire-Department",
+      "quote": "Scroll down on the page and locate the \"Fire\" row to identify your district number.",
+      "doc_date": "2026-09",
+      "via": "page",
+      "verified": true
+     },
+     {
+      "url": "https://nj.gov/dca/dfs/pdf/ANNUAL%20REGISTRY/THIRD%20QUARTER%20LEA%20REGISTRY%202026.pdf",
+      "quote": "D Moorestown Township (1)",
+      "doc_date": "2026-07",
+      "via": "pdf",
+      "verified": true
+     },
+     {
+      "url": "https://www.moorestown.nj.us/641/Certificate-of-Continuing-Occupancy",
+      "quote": "When selling or renting a property, you must also obtain a Certificate of Compliance from Moorestown Fire Prevention at https://form.jotform.com/fireofficial313/smokeinspection",
+      "doc_date": "2026-09",
+      "via": "page",
+      "verified": true
+     },
+     {
+      "url": "https://form.jotform.com/fireofficial313/smokeinspection",
+      "quote": "Requested date of inspection (All inspections are on Tuesdays & Thursdays between 9am and 11am, excluding holidays) *Please Be Advised Certificates Are Only Good For 30 Days. Inspections Requested For More Than 30 Days Before Settlement/Move-in, Will Be Denied .*",
+      "doc_date": "2026-09",
+      "via": "page",
+      "verified": true
+     },
+     {
+      "url": "https://form.jotform.com/fireofficial313/smokeinspection",
+      "quote": "Payments must be in the form of a check or money order and paid at the time of your scheduled inspection . Failure to pay the inspector upon arrival will result in an immediate failure of the inspection.",
+      "doc_date": "2026-09",
+      "via": "page",
+      "verified": true
+     },
+     {
+      "url": "https://web.archive.org/web/20260610022031/https://bureauoffireprevention.com/contact",
+      "quote": "Matthew Orsini - Fire Official",
+      "doc_date": "2026-06",
+      "via": "page",
+      "verified": true
+     },
+     {
+      "url": "https://web.archive.org/web/20260610022031/https://bureauoffireprevention.com/contact",
+      "quote": "Moorestown Fire Prevention 225 North Lenola Road Moorestown, NJ 08057 P. (856) 234-1222 F. (856) 234-4248",
+      "doc_date": "2026-06",
+      "via": "page",
+      "verified": true
+     },
+     {
+      "url": "https://web.archive.org/web/20260411081752/https://www.bureauoffireprevention.com/_files/ugd/42b6a6_44bdd1b5d1164a1a8102b8dd30d9ef6f.pdf?index=true",
+      "quote": "A Fire Inspector from Moorestown Fire Prevention will inspect the dwelling during the scheduled time slot that was confirmed to by email.",
+      "doc_date": "2025-03",
+      "via": "pdf",
+      "verified": true
+     },
+     {
+      "url": "https://nj.gov/dca/dfs/pdf/ANNUAL%20REGISTRY/THIRD%20QUARTER%20LEA%20REGISTRY%202026.pdf",
+      "quote": "Moorestown Township FD#2 is sharing their Fire Official and Clerk with Moorestown Township FD#1.",
+      "doc_date": "2026-07",
+      "via": "pdf",
+      "verified": true
+     },
+     {
+      "url": "https://www.nj.gov/dca/dfs/pdf/fire%20directory_county%20summary/fire_code_enforcement_director.pdf",
+      "quote": "Fire Official Matthew M Orsini Phone (856) 234-6660 Addr: 225 N Lenola Rd",
+      "doc_date": "2026-05",
+      "via": "state_directory",
+      "verified": true
+     }
+    ],
+    "confidence": "high"
+   },
+   {
+    "name": "Moorestown Fire District No. 2 (Lenola Fire Company), served by Moorestown Fire Prevention (Bureau of Fire Prevention)",
+    "type": "fire_district",
+    "area_served": "Fire District 2, the western portion of the township (Lenola area); confirm with the polling-location lookup",
+    "contact_name": "Matthew Orsini",
+    "contact_title": "Fire Official (Moorestown Fire Prevention, shared by both districts)",
+    "lead_time": "Certificates are only good for 30 days, so requests for inspections more than 30 days before settlement/move-in are denied. Apply more than 10 business days before the change of occupant for the lowest fee.",
+    "fees": [
+     {
+      "label": "Smoke/CO certificate, request received more than 10 business days before change of occupant",
+      "amount": "$45.00",
+      "quote": "Requests for CSACMAC received more than 10 business days prior to change of occupant: $45.00;",
+      "source_url": "https://form.jotform.com/fireofficial313/smokeinspection",
+      "verified": true
+     },
+     {
+      "label": "Smoke/CO certificate, request received 4 to 10 business days before change of occupant",
+      "amount": "$90.00",
+      "quote": "Requests for CSACMAC received four to 10 business days prior to change of occupant: $90.00;",
+      "source_url": "https://form.jotform.com/fireofficial313/smokeinspection",
+      "verified": true
+     },
+     {
+      "label": "Smoke/CO certificate, request received fewer than 4 days before change of occupant",
+      "amount": "$161.00",
+      "quote": "Requests for CSACMAC received fewer than four days prior to change of occupant: $161.00;",
+      "source_url": "https://form.jotform.com/fireofficial313/smokeinspection",
+      "verified": true
+     },
+     {
+      "label": "Second or later reinspection",
+      "amount": "$45.00",
+      "quote": "The fee for a second or further succeeding reinspection pursuant to the inspection for CSACMAC shall be $45.00.",
+      "source_url": "https://form.jotform.com/fireofficial313/smokeinspection",
+      "verified": true
+     }
+    ],
+    "how_to_apply": "Apply online with the Moorestown Fire Prevention Jotform application (linked from the Township's Certificate of Continuing Occupancy page). Upload a copy of the contract of sale or lease. Pick a requested inspection date; inspections are Tuesdays and Thursdays, 9 to 11 AM, excluding holidays. The bureau emails a confirmation with the fee and who to make the check payable to. Pay by check or money order to the inspector at the inspection; not paying on arrival is an automatic failure. If you need an inspection within 24 hours, call the office after submitting.",
+    "application_url": "https://form.jotform.com/fireofficial313/smokeinspection",
+    "department_url": "https://www.moorestown.nj.us/641/Certificate-of-Continuing-Occupancy",
+    "phone": "(856) 234-1222",
+    "email": "info@fireprevention31.org",
+    "evidence": [
+     {
+      "url": "https://www.moorestownfire2.com/",
+      "quote": "the western portion of the Township of Moorestown",
+      "doc_date": "2026-09",
+      "via": "page",
+      "verified": null
+     },
+     {
+      "url": "https://www.moorestownfire2.com/",
+      "quote": "Click here to be redirected to Moorestown Fire Prevention",
+      "doc_date": "2026-09",
+      "via": "page",
+      "verified": null
+     },
+     {
+      "url": "https://nj.gov/dca/dfs/pdf/ANNUAL%20REGISTRY/THIRD%20QUARTER%20LEA%20REGISTRY%202026.pdf",
+      "quote": "D Moorestown Township (2)",
+      "doc_date": "2026-07",
+      "via": "pdf",
+      "verified": true
+     },
+     {
+      "url": "https://www.moorestown.nj.us/641/Certificate-of-Continuing-Occupancy",
+      "quote": "When selling or renting a property, you must also obtain a Certificate of Compliance from Moorestown Fire Prevention at https://form.jotform.com/fireofficial313/smokeinspection",
+      "doc_date": "2026-09",
+      "via": "page",
+      "verified": true
+     },
+     {
+      "url": "https://form.jotform.com/fireofficial313/smokeinspection",
+      "quote": "Requested date of inspection (All inspections are on Tuesdays & Thursdays between 9am and 11am, excluding holidays) *Please Be Advised Certificates Are Only Good For 30 Days. Inspections Requested For More Than 30 Days Before Settlement/Move-in, Will Be Denied .*",
+      "doc_date": "2026-09",
+      "via": "page",
+      "verified": true
+     },
+     {
+      "url": "https://form.jotform.com/fireofficial313/smokeinspection",
+      "quote": "Payments must be in the form of a check or money order and paid at the time of your scheduled inspection . Failure to pay the inspector upon arrival will result in an immediate failure of the inspection.",
+      "doc_date": "2026-09",
+      "via": "page",
+      "verified": true
+     },
+     {
+      "url": "https://web.archive.org/web/20260610022031/https://bureauoffireprevention.com/contact",
+      "quote": "Matthew Orsini - Fire Official",
+      "doc_date": "2026-06",
+      "via": "page",
+      "verified": true
+     },
+     {
+      "url": "https://web.archive.org/web/20260610022031/https://bureauoffireprevention.com/contact",
+      "quote": "Moorestown Fire Prevention 225 North Lenola Road Moorestown, NJ 08057 P. (856) 234-1222 F. (856) 234-4248",
+      "doc_date": "2026-06",
+      "via": "page",
+      "verified": true
+     },
+     {
+      "url": "https://web.archive.org/web/20260411081752/https://www.bureauoffireprevention.com/_files/ugd/42b6a6_44bdd1b5d1164a1a8102b8dd30d9ef6f.pdf?index=true",
+      "quote": "A Fire Inspector from Moorestown Fire Prevention will inspect the dwelling during the scheduled time slot that was confirmed to by email.",
+      "doc_date": "2025-03",
+      "via": "pdf",
+      "verified": true
+     },
+     {
+      "url": "https://nj.gov/dca/dfs/pdf/ANNUAL%20REGISTRY/THIRD%20QUARTER%20LEA%20REGISTRY%202026.pdf",
+      "quote": "Moorestown Township FD#2 is sharing their Fire Official and Clerk with Moorestown Township FD#1.",
+      "doc_date": "2026-07",
+      "via": "pdf",
+      "verified": true
+     },
+     {
+      "url": "https://www.nj.gov/dca/dfs/pdf/fire%20directory_county%20summary/fire_code_enforcement_director.pdf",
+      "quote": "Fire Official Matthew M Orsini Phone (856) 234-6660 Addr: 225 N Lenola Rd",
+      "doc_date": "2026-05",
+      "via": "state_directory",
+      "verified": true
+     }
+    ],
+    "confidence": "high"
+   }
+  ],
+  "notes": "Both fire districts use the same fire prevention office: the DCA LEA registry (July 2026) says 'Moorestown Township FD#2 is sharing their Fire Official and Clerk with Moorestown Township FD#1', and both district sites link to Moorestown Fire Prevention (225 North Lenola Road). The fees and process are therefore the same whichever district the home is in. The bureau's old website (bureauoffireprevention.com) now shows a Wix domain error; its contact page and March 2025 'Instructions for Smoke Detector and Carbon Monoxide Detector Compliance' PDF were read from Internet Archive copies (captured 2026-06-10 and 2026-04-11; original URLs https://bureauoffireprevention.com/contact and https://www.bureauoffireprevention.com/_files/ugd/42b6a6_44bdd1b5d1164a1a8102b8dd30d9ef6f.pdf). The new site www.fireprevention31.org ('Serving Moorestown and Maple Shade') did not load with curl; WebFetch showed only its menu. The moorestownfire2.com text was read with WebFetch. The Fire Official's email on the archived contact page link is fm@fireprevention31.org; the instruction PDF lists office email info@fireprevention31.org and phone (856) 234-1222. The state directory (survey 5/18/2026) lists Fire Official Matthew M Orsini, phone (856) 234-6660, email fireofficial313@gmail.com; the bureau's own documents give (856) 234-1222, which is used here. The Township's 2026 'Selling Your Home' sheet also lists 'Fire Inspection (856)234-1222' with an older Jotform link (form 92477012539157), which shows the same fees. The fee text still names the certificate 'CSACMAC' (smoke alarm, carbon monoxide alarm and portable fire extinguisher compliance), but neither the current application nor the March 2025 instructions list a fire extinguisher requirement. Penalty per the instructions: not less than $100.00 or more than $2,500.00 per occurrence for a change of occupancy without the certificate."
+ },
+ "other_items": [
+  {
+   "label": "Open permits must be closed before settlement",
+   "detail": "'Property cannot settle until all open permits are closed.' Construction Office: (856) 235-0914, Ext. 3018 or 3069 (per the selling sheet); the Construction Office page lists 856-235-0912, ext. 3018.",
+   "source_url": "https://www.moorestown.nj.us/DocumentCenter/View/6604/Buying_-Selling_Renting-_Change-of-Mailing-Address"
+  },
+  {
+   "label": "Final water meter reading",
+   "detail": "Call Public Works 856-235-3520, option 2. Final figures are available after 2 p.m. the day before settlement at (856) 235-0912 ext. 3008, 3009, 3010.",
+   "source_url": "https://www.moorestown.nj.us/DocumentCenter/View/6604/Buying_-Selling_Renting-_Change-of-Mailing-Address"
+  },
+  {
+   "label": "Survey for properties adjoining Township land",
+   "detail": "Needed to settle if the property adjoins Township-owned land; survey dated no more than 90 days before, flags left in place until closing.",
+   "source_url": "https://www.moorestown.nj.us/641/Certificate-of-Continuing-Occupancy"
+  },
+  {
+   "label": "Buyer water/sewer account",
+   "detail": "Buyers contact Tax / Water & Sewer Billing (856) 235-0912 ext. 3008, 3009, 3010 with name, address, settlement date and mailing address.",
+   "source_url": "https://www.moorestown.nj.us/DocumentCenter/View/6604/Buying_-Selling_Renting-_Change-of-Mailing-Address"
+  }
+ ],
+ "open_questions": [
+  "Adopted text of Ordinance 5-2022 (Chapter 53) was not confirmed; the online PDF is the April 2022 introduction copy. ecode360 MO1116 was not read.",
+  "Exact boundary between Fire District 1 and Fire District 2 is not published as a list; agents should use the NJ polling-location lookup ('Fire' row).",
+  "The bureau's new website (fireprevention31.org) could not be read directly."
+ ],
+ "verification": {
+  "fees": 10,
+  "fee_ok": 10,
+  "fee_bad": 0,
+  "fee_unchecked": 0,
+  "quotes": 29,
+  "q_ok": 27,
+  "q_bad": 0,
+  "q_unchecked": 2
+ }
+}

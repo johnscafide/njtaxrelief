@@ -1,0 +1,191 @@
+{
+ "municipality_code": "0311",
+ "municipality": "Eastampton Township",
+ "county": "BURLINGTON",
+ "checked_at": "2026-09-30",
+ "resale_co": {
+  "status": "required",
+  "name": "Certificate of Continued Occupancy (CCO), Resale/Rental Inspection",
+  "issued_by": "Eastampton Township Resale/Rental Inspections office",
+  "lead_time": "Schedule the inspection at least 5 calendar days before settlement; requests 4 calendar days or less before settlement pay the higher fee.",
+  "valid_for": "",
+  "requirements": [
+   "House numbers: numerals at least 4 inches high, contrasting color, fixed to the house and visible from the street (mailbox or lamp post numbers not accepted)",
+   "Smoke alarm on every level, including the bottom of the basement stairs at the ceiling",
+   "Smoke alarm within 10 feet of all bedroom doors and one on the ceiling of every bedroom",
+   "Hardwired smoke alarms cannot be replaced with battery alarms",
+   "Smoke alarms under 10 years old and working; battery alarms must be 10-year sealed type",
+   "CO alarm in the hallway within 10 feet of all bedrooms, under 10 years old and working",
+   "Fire extinguisher (2019 checklist): 2A-10B:C, under 10 pounds, mounted on its bracket within 10 feet of the kitchen in the path of exit",
+   "Homes with a monitored low-voltage fire alarm system need a test certificate from an alarm contractor at the inspection",
+   "Owner certifies all structures meet zoning and no rubbish, debris or bulk trash is left before the new occupant moves in"
+  ],
+  "fees": [
+   {
+    "label": "CCO inspection, 5 or more calendar days before settlement (per dwelling unit, includes one reinspection)",
+    "amount": "$75",
+    "quote": "Prior to inspection, Owners are required to submit an online application along with the fee of $75.",
+    "source_url": "https://web.archive.org/web/20230323224804/https://www.eastampton.com/rental",
+    "verified": true
+   },
+   {
+    "label": "CCO inspection requested 4 calendar days or less before settlement",
+    "amount": "$125",
+    "quote": "Requests for inspection received four (4) calendar days or less prior to settlement or renter's move in date will require an inspection fee of $125.",
+    "source_url": "https://web.archive.org/web/20230323224804/https://www.eastampton.com/rental",
+    "verified": true
+   },
+   {
+    "label": "Each additional reinspection (after the one included)",
+    "amount": "$25",
+    "quote": "These inspection fees shall include one reinspection. If any additional reinspections are needed, there shall be a $25 reinspection fee.",
+    "source_url": "https://web.archive.org/web/20211231133235/https://www.eastampton.com/sites/default/files/fileattachments/resale/rental_inspections/page/1891/ordinance_2019-9.pdf",
+    "verified": null
+   }
+  ],
+  "how_to_apply": "Submit the online CCO Application on GovPilot (choose Resale) and pay the fee online, or pay by check payable to Eastampton Township mailed or delivered to 12 Manor House Court, Eastampton, NJ 08060. Schedule the inspection at least 5 calendar days before settlement.",
+  "application_url": "https://main.govpilot.com/web/public/f108198f-fab_CCO-Application-eastampton?uid=7272&ust=NJ&pu=1&id=0",
+  "department_url": "https://www.eastampton.com/rental",
+  "phone": "609-267-5723 ext. 200",
+  "email": "resales@eastampton.com",
+  "contact_name": "David Shaw",
+  "contact_title": "Resale/Rental Inspector",
+  "evidence": [
+   {
+    "url": "https://web.archive.org/web/20230323224804/https://www.eastampton.com/rental",
+    "quote": "Per Ordinance 2010-4; 385-4 a Certificate of Occupancy inspection is required for all property resales or rental units whenever there is a change of occupancy and/or ownership.",
+    "doc_date": "2023-03",
+    "via": "page",
+    "verified": true
+   },
+   {
+    "url": "https://web.archive.org/web/20230323224804/https://www.eastampton.com/rental",
+    "quote": "Payments must be made payable to Eastampton Township and mailed or delivered to 12 Manor House Court, Eastampton, NJ 08060.",
+    "doc_date": "2023-03",
+    "via": "page",
+    "verified": true
+   },
+   {
+    "url": "https://web.archive.org/web/20211231133235/https://www.eastampton.com/sites/default/files/fileattachments/resale/rental_inspections/page/1891/ordinance_2019-9.pdf",
+    "quote": "Inspections must be scheduled at least five (5) calendar days prior to the settlement date or renter's move in date.",
+    "doc_date": "2019-05",
+    "via": "pdf",
+    "verified": null
+   },
+   {
+    "url": "https://web.archive.org/web/20240625220011/http://www.eastampton.com/rental/directory-listing/david-shaw",
+    "quote": "David Shaw Position Resale/Rental Inspector Phone Number (609) 267-5723 ext. 200",
+    "doc_date": "2024-06",
+    "via": "page",
+    "verified": true
+   },
+   {
+    "url": "https://main.govpilot.com/web/public/f108198f-fab_CCO-Application-eastampton?uid=7272&ust=NJ&pu=1&id=0",
+    "quote": "I certify that this dwelling and all other structures on the property meet the zoning requirements of Eastampton Township I attest to the fact that no rubbish/debris/bulk garbage will be left on this property prior to new occupancy.",
+    "doc_date": "",
+    "via": "page",
+    "verified": true
+   },
+   {
+    "url": "https://web.archive.org/web/20211231172247/https://www.eastampton.com/sites/default/files/fileattachments/resale/rental_inspections/page/4301/inspection_checklist.pdf",
+    "quote": "Numbers are numerical characters, contrasting color from the house, at least 4” high, permanently affixed to the house & visible from the street.",
+    "doc_date": "2019-11",
+    "via": "pdf",
+    "verified": true
+   }
+  ],
+  "confidence": "medium",
+  "notes": "The live eastampton.com site is behind a Cloudflare bot check, so the Resale/Rental Inspections page (original https://www.eastampton.com/rental), staff listing, ordinance and checklist were read from Internet Archive captures (page captured 2023-03-23, staff listing 2024-06-25, ordinance and checklist captured 2021-12-31). Ordinance 2019-9 (adopted May 13, 2019) amends Township Code 385-7 and is a scanned PDF read visually; it sets $75 per dwelling unit including one reinspection, $25 for each extra reinspection, and $125 when requested 4 calendar days or less before settlement. The inspection checklist is from November 2019 and still lists a fire extinguisher; it refers to a 'WTES' inspector (see fire section). The GovPilot CCO application is live and offers Resale, Rental and Other; its fee schedule is filled in after the address is entered, so no current fee could be read there. The inspector's cell number is published but not recorded. Rentals built before 1978 also need a lead-based paint inspection with a separate lead fee."
+ },
+ "fire_cert": {
+  "requirements": [
+   "The Township's CCO inspection checklist (November 2019) covers smoke alarms, CO alarms and a mounted 2A-10B:C fire extinguisher within 10 feet of the kitchen, so these are checked at the resale inspection",
+   "Smoke and CO alarms must be under 10 years old; battery smoke alarms must be 10-year sealed type"
+  ],
+  "authorities": [
+   {
+    "name": "Eastampton Township Local Enforcing Agency (Fire Prevention Bureau, Office of the Fire Marshal)",
+    "type": "municipal_fire_bureau",
+    "area_served": "Entire township",
+    "lead_time": "",
+    "fees": [],
+    "how_to_apply": "No separate resale smoke/CO certificate application or fee was found. The smoke, CO and extinguisher items are on the Township's resale CCO checklist; ask the Resale/Rental Inspector or the Fire Marshal whether the CCO inspection also issues the smoke/CO certificate.",
+    "application_url": "",
+    "department_url": "https://www.eastampton.com/fm",
+    "phone": "609-267-5723 ext. 203",
+    "email": "firemarshal@eastampton.com",
+    "contact_name": "Yunus Boduroglu",
+    "contact_title": "Fire Marshal / Fire Official",
+    "evidence": [
+     {
+      "url": "https://web.archive.org/web/20240130220436/https://www.eastampton.com/fm",
+      "quote": "The Eastampton LEA is administered by Eastampton Township, and is outside of the Fire Department command structure.",
+      "doc_date": "2024-01",
+      "via": "page",
+      "verified": true
+     },
+     {
+      "url": "https://web.archive.org/web/20240130220436/https://www.eastampton.com/fm",
+      "quote": "in Eastampton Township, both roles are filled by Yunus Boduroglu, and the titles are used interchangeably.",
+      "doc_date": "2024-01",
+      "via": "page",
+      "verified": true
+     },
+     {
+      "url": "https://web.archive.org/web/20240130220436/https://www.eastampton.com/fm",
+      "quote": "Fire Marshal Yunus Boduroglu (609) 267-5723 ext. 203",
+      "doc_date": "2024-01",
+      "via": "page",
+      "verified": true
+     },
+     {
+      "url": "https://www.nj.gov/dca/dfs/pdf/fire%20directory_county%20summary/fire_code_enforcement_director.pdf",
+      "quote": "Email firemarshal@eastampton.com",
+      "doc_date": "2026-05",
+      "via": "state_directory",
+      "verified": true
+     },
+     {
+      "url": "https://www.nj.gov/dca/dfs/pdf/fire%20directory_county%20summary/fire_code_enforcement_director.pdf",
+      "quote": "Westampton Twp Emergency Ser Addr: 780 Woodland Road Westampton NJ 08060 Phone (609) 267-5723",
+      "doc_date": "2026-05",
+      "via": "state_directory",
+      "verified": true
+     },
+     {
+      "url": "https://web.archive.org/web/20211231172247/https://www.eastampton.com/sites/default/files/fileattachments/resale/rental_inspections/page/4301/inspection_checklist.pdf",
+      "quote": "A copy of the alarm certification provided by the alarm contractor must be presented to the WTES inspector at the time of the inspection.",
+      "doc_date": "2019-11",
+      "via": "pdf",
+      "verified": true
+     },
+     {
+      "url": "https://nj.gov/dca/dfs/pdf/ANNUAL%20REGISTRY/THIRD%20QUARTER%20LEA%20REGISTRY%202026.pdf",
+      "quote": "D Eastampton Township",
+      "doc_date": "2026-07",
+      "via": "pdf",
+      "verified": true
+     }
+    ],
+    "confidence": "low"
+   }
+  ],
+  "notes": "The DCA Q3 2026 registry codes Eastampton as a fire district (D) enforcing agency, but the Township's Fire Marshal page (archived January 2024) says the LEA is administered by the Township, outside the fire department. The state fire directory (survey 5/18/2026) lists the fire official as 'Yunus Bodugroglu' (the Township spells it Boduroglu) and names 'Westampton Twp Emergency Ser' at 780 Woodland Road, Westampton, phone (609) 267-5723, as the smoke detector compliance contact. The Township's resale checklist refers to a 'WTES' inspector, which suggests Westampton Township Emergency Services performs the resale smoke/CO inspection under a shared arrangement, but no official page says so directly and no separate fire certificate fee was found. The live eastampton.com site could not be opened (Cloudflare bot check); the Fire Marshal's Fees and Pre-Inspection Checklist covers business inspections only."
+ },
+ "other_items": [],
+ "open_questions": [
+  "Current (2025-2026) CCO fees could not be read: the live site is behind a bot check and the GovPilot form computes fees after an address is entered. Fees above are from Ordinance 2019-9 and the page as archived in March 2023.",
+  "Whether the Township CCO inspection also issues the state smoke/CO certificate, or whether Westampton Township Emergency Services issues it separately, and at what fee.",
+  "Whether the current checklist still requires a fire extinguisher after P.L.2025, c.19."
+ ],
+ "verification": {
+  "fees": 3,
+  "fee_ok": 2,
+  "fee_bad": 0,
+  "fee_unchecked": 1,
+  "quotes": 13,
+  "q_ok": 12,
+  "q_bad": 0,
+  "q_unchecked": 1
+ }
+}

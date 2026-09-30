@@ -1,0 +1,169 @@
+{
+ "municipality_code": "0326",
+ "municipality": "North Hanover Township",
+ "county": "BURLINGTON",
+ "checked_at": "2026-09-30",
+ "resale_co": {
+  "status": "not_required",
+  "name": "",
+  "issued_by": "",
+  "contact_name": "Robert Gancarz",
+  "contact_title": "Fire Official (Office of the Fire Marshal)",
+  "lead_time": "",
+  "valid_for": "",
+  "requirements": [],
+  "fees": [],
+  "how_to_apply": "No Township resale CO/housing inspection. The only resale inspection is the smoke and CO certificate from the Fire Official (see fire certificate).",
+  "application_url": "",
+  "department_url": "https://northhanovertwp.com/Fire%20Marshal/fire_marshal.html",
+  "phone": "(609) 209-8345",
+  "email": "fireofficial@northhanovertwp.com",
+  "evidence": [
+   {
+    "url": "https://northhanovertwp.com/Fire%20Marshal/Resale%20and%20Rental%20Requirements.pdf",
+    "quote": "RESALE REQUIREMENTS Only one inspection is required for a resale in North Hanover Township: Certification of Smoke & Carbon Monoxide Detectors",
+    "doc_date": "2025-05",
+    "via": "pdf",
+    "verified": null
+   }
+  ],
+  "confidence": "high",
+  "notes": "The Township's 'Resale & Rental Requirements' packet (linked from the Fire Marshal page; application pages marked Rev 5/25) says only one inspection is required for a resale: the smoke and CO certification. The PDF is a scan, so quotes were read from the page images. Rentals additionally need a Landlord Registration Form, liability insurance proof and a lead-safe certificate (rental only). Zoning Officer Patti Conrad (609-758-2522 Ext. 215) also handles code enforcement and mobile homes; the Township code (ordinances page) was not reviewed for a separate resale rule."
+ },
+ "fire_cert": {
+  "requirements": [
+   "All detectors must be less than 10 years old",
+   "Smoke alarms on every level including the basement, and within 10 feet of sleeping room doors",
+   "Homes built before 1978: battery alarms must be 10-year sealed units or the inspection fails",
+   "Do not replace hardwired smoke alarms with battery alarms; replace bad interconnected alarms with compatible ones",
+   "Test all smoke detectors before the inspection date",
+   "CO alarm required if the home has any fuel-burning appliance or an attached garage: on each sleeping level, in hallways near bedrooms (electric or battery)",
+   "No fire extinguisher required (form says the State and the Township no longer require one)"
+  ],
+  "authorities": [
+   {
+    "name": "North Hanover Township Office of the Fire Marshal (Fire Official)",
+    "type": "municipal_fire_bureau",
+    "area_served": "Entire township",
+    "contact_name": "Robert Gancarz",
+    "contact_title": "Fire Official / Fire Marshal",
+    "lead_time": "Apply more than 10 business days before the change of occupant for the lowest fee.",
+    "fees": [
+     {
+      "label": "Request received more than 10 business days before change of occupant",
+      "amount": "$35.00",
+      "quote": "Requests received more than 10 business days prior to change of occupant: $35.00.",
+      "source_url": "https://northhanovertwp.com/Fire%20Marshal/Resale%20and%20Rental%20Requirements.pdf",
+      "verified": null
+     },
+     {
+      "label": "Request received 4 to 10 business days before change of occupant",
+      "amount": "$70.00",
+      "quote": "Requests received four to 10 business days prior to the change of occupant: $70.00.",
+      "source_url": "https://northhanovertwp.com/Fire%20Marshal/Resale%20and%20Rental%20Requirements.pdf",
+      "verified": null
+     },
+     {
+      "label": "Request received fewer than 4 business days before change of occupant",
+      "amount": "$125.00",
+      "quote": "Requests received fewer than four business days prior to the change of occupant: $125.00",
+      "source_url": "https://northhanovertwp.com/Fire%20Marshal/Resale%20and%20Rental%20Requirements.pdf",
+      "verified": null
+     }
+    ],
+    "how_to_apply": "Fill out the 'Application for Certificate of Smoke Detector, Carbon Monoxide and Fire Extinguisher Compliance' (in the Resale & Rental Requirements packet) and submit it with the fee to schedule. Checks payable to North Hanover Township (the packet summary says check or cash). Office of the Fire Marshal, 41 Schoolhouse Road, Wrightstown, NJ 08562. A failed inspection means a reinspection and an additional fee.",
+    "application_url": "https://northhanovertwp.com/Fire%20Marshal/Resale%20and%20Rental%20Requirements.pdf",
+    "department_url": "https://northhanovertwp.com/Fire%20Marshal/fire_marshal.html",
+    "phone": "(609) 209-8345",
+    "email": "fireofficial@northhanovertwp.com",
+    "evidence": [
+     {
+      "url": "https://northhanovertwp.com/Fire%20Marshal/Resale%20and%20Rental%20Requirements.pdf",
+      "quote": "Note: Fill out the application form and submit along with the $35.00 fee to schedule the Smoke & CO certification.",
+      "doc_date": "2025-05",
+      "via": "pdf",
+      "verified": null
+     },
+     {
+      "url": "https://northhanovertwp.com/Fire%20Marshal/Resale%20and%20Rental%20Requirements.pdf",
+      "quote": "Please make checks payable to North Hanover Township",
+      "doc_date": "2025-05",
+      "via": "pdf",
+      "verified": null
+     },
+     {
+      "url": "https://northhanovertwp.com/Fire%20Marshal/Resale%20and%20Rental%20Requirements.pdf",
+      "quote": "FIRE EXTINGUISHER NOT REQUIRED The State of New Jersey and North Hanover Township no longer require a Fire Extinguisher.",
+      "doc_date": "2025-05",
+      "via": "pdf",
+      "verified": null
+     },
+     {
+      "url": "https://northhanovertwp.com/Fire%20Marshal/Resale%20and%20Rental%20Requirements.pdf",
+      "quote": "READ ALL DIRECTIONS THOROUGHLY, FAILURE WILL RESULT IN A REINSPECTION AND ADDITIONAL FEE",
+      "doc_date": "2025-05",
+      "via": "pdf",
+      "verified": null
+     },
+     {
+      "url": "https://northhanovertwp.com/Fire%20Marshal/Resale%20and%20Rental%20Requirements.pdf",
+      "quote": "Questions? Contact the Fire Official at (609) 209-8345 or fireofficial@northhanovertwp.com",
+      "doc_date": "2025-05",
+      "via": "pdf",
+      "verified": null
+     },
+     {
+      "url": "https://northhanovertwp.com/Fire%20Marshal/fire_marshal.html",
+      "quote": "North Hanover Township Office of the Fire Official 41 Schoolhouse Road Wrightstown, NJ 08562 Robert Gancarz Phone: 609-209-8345",
+      "doc_date": "2026-09",
+      "via": "page",
+      "verified": true
+     },
+     {
+      "url": "https://nj.gov/dca/dfs/pdf/ANNUAL%20REGISTRY/THIRD%20QUARTER%20LEA%20REGISTRY%202026.pdf",
+      "quote": "M North Hanover Township",
+      "doc_date": "2026-07",
+      "via": "pdf",
+      "verified": true
+     },
+     {
+      "url": "https://nj.gov/dca/dfs/pdf/ANNUAL%20REGISTRY/THIRD%20QUARTER%20LEA%20REGISTRY%202026.pdf",
+      "quote": "Plumsted Township (Ocean Co) is no longer the LEA for North Hanover Township effective 4/1/2022.",
+      "doc_date": "2026-07",
+      "via": "pdf",
+      "verified": true
+     },
+     {
+      "url": "https://www.nj.gov/dca/dfs/pdf/fire%20directory_county%20summary/fire_code_enforcement_director.pdf",
+      "quote": "Fire Official Robert E Gancarz",
+      "doc_date": "2026-07",
+      "via": "state_directory",
+      "verified": true
+     }
+    ],
+    "confidence": "high"
+   }
+  ],
+  "notes": "North Hanover Township is its own fire code enforcing agency (M in the DCA LEA registry, July 2026; Plumsted Township stopped serving as LEA on 4/1/2022). The application form and instructions are marked Rev 5/25. The form title still says 'Fire Extinguisher Compliance', but the instructions say no extinguisher is required. The form header gives the office phone as 609-758-2522 ext. 218, while the packet summary and the Fire Marshal web page give (609) 209-8345. The www.northhanovertwp.com host returned 403 to curl; the same pages load at northhanovertwp.com. The packet is a scanned PDF, so quotes were read from the page images."
+ },
+ "other_items": [
+  {
+   "label": "Rental only: landlord registration, insurance and lead-safe certificate",
+   "detail": "Rentals also need a Landlord Registration Form, proof of liability insurance, and a lead-safe certificate (lead inspection fee $200.00 + $20.00 through the Township). Not required for a sale to an owner-occupant.",
+   "source_url": "https://northhanovertwp.com/Fire%20Marshal/Resale%20and%20Rental%20Requirements.pdf"
+  }
+ ],
+ "open_questions": [
+  "Township code was not checked for any separate resale rule, but the Township's own resale packet says only the smoke/CO inspection is required."
+ ],
+ "verification": {
+  "fees": 3,
+  "fee_ok": 0,
+  "fee_bad": 0,
+  "fee_unchecked": 3,
+  "quotes": 10,
+  "q_ok": 4,
+  "q_bad": 0,
+  "q_unchecked": 6
+ }
+}

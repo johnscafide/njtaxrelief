@@ -1,0 +1,196 @@
+{
+ "municipality_code": "0320",
+ "municipality": "Medford Township",
+ "county": "BURLINGTON",
+ "checked_at": "2026-09-30",
+ "resale_co": {
+  "status": "required",
+  "name": "Residential Certificate of Occupancy for closing (the Township sends sellers to the Fire Department; it is the same smoke and CO alarm certificate listed under fire_cert, not a separate housing inspection)",
+  "issued_by": "Medford Township Fire & EMS Department",
+  "contact_name": "Brian Widmann",
+  "contact_title": "Fire Marshall",
+  "lead_time": "Apply more than 10 business days before the change of occupant for the lowest fee.",
+  "valid_for": "",
+  "requirements": [
+   "Working smoke alarm on every level including the basement (not attic or crawl space) and within 10 feet of sleeping areas",
+   "Original hard-wired or interconnected alarm systems must be kept working; they cannot be swapped for stand-alone battery detectors",
+   "Carbon monoxide alarm near the sleeping areas, with more if bedrooms are on more than one level",
+   "Leave alarm instruction manuals for the next owner",
+   "House number clearly visible from the road (Township Code 51-3)"
+  ],
+  "fees": [
+   {
+    "label": "Same single Fire Department inspection as the fire certificate (not an extra fee): request received more than 10 business days before the change of occupant",
+    "amount": "$50",
+    "quote": "Requests for a CSDCMAC received more than 10 business days prior to the change of occupant: $50 ;",
+    "source_url": "https://hipaa.jotform.com/221363427572152",
+    "verified": true
+   }
+  ],
+  "how_to_apply": "The Township's closing requirements say to contact the Fire Department for the residential Certificate of Occupancy. Apply online with the Fire Department's Smoke Detector Inspection Application (see fire_cert). If the home has public water or sewer, also call Utility Billing for a final meter reading and sewer inspection.",
+  "application_url": "https://hipaa.jotform.com/221363427572152",
+  "department_url": "https://medfordtownship.com/construction/",
+  "phone": "(609) 953-3291",
+  "email": "bwidmann@medfordfire.org",
+  "evidence": [
+   {
+    "url": "https://medfordtownship.com/construction/",
+    "quote": "To obtain a Certificate of Occupancy please contact the Fire Department . For those units with public water and/or sewer, please contact the Utility Billing office for final meter readings and sewer inspections.",
+    "doc_date": "",
+    "via": "page",
+    "verified": null
+   },
+   {
+    "url": "https://medfordtownship.com/construction/",
+    "quote": "A residential smoke detector, CO Detector, and inspection is performed by the Fire Department.",
+    "doc_date": "",
+    "via": "page",
+    "verified": null
+   },
+   {
+    "url": "https://medfordtownship.com/construction/",
+    "quote": "The Township Council adopted Ordinance 2018-24 establishing an annual inspection program for 1- and 2-family residential rental buildings and premises; or at the time of change of use, ownership, or tenancy. Said inspections will be conducted by the Construction Code Office. The fee for said inspection is $200.",
+    "doc_date": "",
+    "via": "page",
+    "verified": null
+   }
+  ],
+  "confidence": "medium",
+  "notes": "Medford's Construction and Inspections page lists the residential 'Certificates of Occupancy/Closing Requirements' as: contact the Fire Department for the Certificate of Occupancy, and contact Utility Billing for final meter readings and sewer inspections where there is public water or sewer. No separate Construction Office housing inspection is described for owner-occupied sales. Only one inspection is involved; its fee tiers are listed under fire_cert. Rental properties are different: under Ordinances 2015-2 and 2018-24 the Construction Code Office inspects 1-2 family rentals annually and at change of use, ownership or tenancy ($200), plus a $20 Landlord/Tenant registration, a Lead Safe Certificate for pre-1978 rentals and a well water test every 5 years where applicable. Construction Office: 49 Union Street, 2nd floor, (609) 654-2608, medfordconstruction@medfordtownship.com. The Township code (ecode360 ME0295) could not be opened. Quotes from medfordtownship.com/construction/ and /fire-ems-department/ were copied from the live pages on 2026-09-30 (saved copies: WORK/tmp/0320/construction.html and fire-ems-department.html); later automated fetches of that site got a 'request is being verified' bot-check page, and the Internet Archive has no captures of these pages."
+ },
+ "fire_cert": {
+  "requirements": [
+   "Smoke alarm on each level including basements (not attic or crawl space), and smoke and CO alarms outside each sleeping area within 10 feet of bedrooms",
+   "Homes built before 1977: 10-year sealed battery smoke alarms; later homes: AC hard-wired alarms by year built, interconnected where required, and kept in working order",
+   "Homes with a monitored NFPA 72 system instead of AC alarms need a certificate of compliance from a certified alarm contractor or electrician; the Fire Department cannot test these systems",
+   "CO alarm in the common hall outside of, and within 10 feet of, the bedroom doors; battery or plug-in is acceptable",
+   "House number visible from the public road, contrasting and bright or reflective (Township Code 51-3)",
+   "The Medford online form (titled 2022) does not list a fire extinguisher"
+  ],
+  "authorities": [
+   {
+    "name": "Medford Township Fire & EMS Department (Fire Marshal / fire inspections)",
+    "type": "municipal_fire_bureau",
+    "area_served": "Entire township",
+    "lead_time": "Apply more than 10 business days before the change of occupant for the lowest fee.",
+    "fees": [
+     {
+      "label": "Request received more than 10 business days before the change of occupant",
+      "amount": "$50",
+      "quote": "Requests for a CSDCMAC received more than 10 business days prior to the change of occupant: $50 ;",
+      "source_url": "https://hipaa.jotform.com/221363427572152",
+      "verified": true
+     },
+     {
+      "label": "Request received 5 to 9 business days before the change of occupant",
+      "amount": "$90",
+      "quote": "Requests for a CSDCMAC received 5 to 9 business days prior to the change of occupant: $90 ;",
+      "source_url": "https://hipaa.jotform.com/221363427572152",
+      "verified": true
+     },
+     {
+      "label": "Request received 4 or fewer business days before the change of occupant",
+      "amount": "$161",
+      "quote": "Requests for a CSDCMAC received four or less business days prior to the change of occupant: $161 ;",
+      "source_url": "https://hipaa.jotform.com/221363427572152",
+      "verified": true
+     },
+     {
+      "label": "Second re-inspection or later, each (first re-inspection is free)",
+      "amount": "$35",
+      "quote": "A fee of $35 shall be assessed for the second required reinspection or greater. There shall be no additional fee charged for the first reinspection.",
+      "source_url": "https://hipaa.jotform.com/221363427572152",
+      "verified": true
+     }
+    ],
+    "how_to_apply": "Fill out the online Smoke Detector Inspection Application linked from medfordfire.org (property address, settlement date, time until settlement, owner, phone to set up the inspection, email for the certificate) and check each compliance box; all boxes must be checked before an inspection is scheduled. The form says to add the fee amount to the MuniPay form when paying by credit card. The certificate is emailed. Inspection line (609) 953-3291.",
+    "application_url": "https://hipaa.jotform.com/221363427572152",
+    "department_url": "https://medfordtownship.com/fire-ems-department/",
+    "contact_name": "Brian Widmann",
+    "contact_title": "Fire Marshall",
+    "phone": "(609) 953-3291",
+    "email": "bwidmann@medfordfire.org",
+    "evidence": [
+     {
+      "url": "https://www.medfordfire.org/",
+      "quote": "Smoke Detector Inspection Application",
+      "doc_date": "",
+      "via": "page",
+      "verified": true
+     },
+     {
+      "url": "https://hipaa.jotform.com/221363427572152",
+      "quote": "APPLICATION FOR CERTIFICATE OF SMOKE ALARM AND CARBON MONOXIDE ALARM COMPLIANCE",
+      "doc_date": "2022 (form title 'Smoke Detector Inspection 2022')",
+      "via": "page",
+      "verified": true
+     },
+     {
+      "url": "https://hipaa.jotform.com/221363427572152",
+      "quote": "NOTE: ALL BOXES MUST BE CHECKED IN ORDER FOR INSPECTION TO BE SCHEDULED.",
+      "doc_date": "2022",
+      "via": "page",
+      "verified": true
+     },
+     {
+      "url": "https://medfordtownship.com/fire-ems-department/",
+      "quote": "Fire Marshall Brian Widmann",
+      "doc_date": "",
+      "via": "page",
+      "verified": null
+     },
+     {
+      "url": "https://medfordtownship.com/fire-ems-department/",
+      "quote": "Inspections: (609) 953-3291",
+      "doc_date": "",
+      "via": "page",
+      "verified": null
+     },
+     {
+      "url": "https://www.nj.gov/dca/dfs/pdf/fire%20directory_county%20summary/fire_code_enforcement_director.pdf",
+      "quote": "Enf Auth. Municipal Fire Official Brian D Widmann Phone (609) 953-3291 Email bwidmann@medfordfire.org",
+      "doc_date": "2026-07 (Medford page survey date 7/30/2026)",
+      "via": "state_directory",
+      "verified": true
+     },
+     {
+      "url": "https://nj.gov/dca/dfs/pdf/ANNUAL%20REGISTRY/THIRD%20QUARTER%20LEA%20REGISTRY%202026.pdf",
+      "quote": "M Medford Township",
+      "doc_date": "2026-07",
+      "via": "pdf",
+      "verified": true
+     }
+    ],
+    "confidence": "high"
+   }
+  ],
+  "notes": "The DCA registry lists Medford as a municipal fire code enforcing agency (code M) and the DCA directory lists 'Medford Twp Fire Prev', 1 Firehouse Lane, (609) 953-3291 as the Smoke Detector Compliance contact, matching the Township and Fire Department pages. The application is an online JotForm linked from the official medfordfire.org site. The Township page spells the title 'Fire Marshall'; the DCA directory calls Mr. Widmann the Fire Official. Fire inspectors listed on the Township page: Nathan Brown, Nicholas Pica, John Horn, Eddie Keebler and Matt Plowman (all @medfordfire.org). The form's time choices read '10 or more', '5 to 9' and '4 or less' business days, while the fee text says 'more than 10' business days for the $50 tier, so exactly 10 business days is unclear."
+ },
+ "other_items": [
+  {
+   "label": "Final water meter reading and sewer inspection",
+   "detail": "For homes on public water and/or sewer, contact the Township Utility Billing office for final meter readings and sewer inspections before closing.",
+   "source_url": "https://medfordtownship.com/construction/"
+  },
+  {
+   "label": "Wells and septic systems",
+   "detail": "Handled by the Burlington County Health Department, 15 Pioneer Boulevard, Westampton, 609-265-5515.",
+   "source_url": "https://medfordtownship.com/construction/"
+  }
+ ],
+ "open_questions": [
+  "Whether a sale of a home that is currently a registered rental also triggers the $200 Construction Office rental inspection (the page says rental inspections apply at 'change of use, ownership, or tenancy').",
+  "Which fee tier applies at exactly 10 business days before closing.",
+  "How long the certificate is valid; not stated on the form."
+ ],
+ "verification": {
+  "fees": 5,
+  "fee_ok": 5,
+  "fee_bad": 0,
+  "fee_unchecked": 0,
+  "quotes": 10,
+  "q_ok": 5,
+  "q_bad": 0,
+  "q_unchecked": 5
+ }
+}
