@@ -1,0 +1,300 @@
+{
+ "municipality_code": "1107",
+ "municipality": "Lawrence Township",
+ "county": "MERCER",
+ "checked_at": "2026-09-30",
+ "resale_co": {
+  "status": "required",
+  "name": "Certificate of Inspection (Property Transfer Application, Division of Housing)",
+  "issued_by": "Township of Lawrence Division of Housing (Housing Bureau)",
+  "lead_time": "Apply as soon as possible after listing; the Township says the current wait for an inspection is about 3-4 weeks (its FAQ says generally within two weeks). No expediting.",
+  "valid_for": "One year from the original inspection date",
+  "requirements": [
+   "Smoke alarms as required for the year the home was built (hard-wired, interconnected alarms for newer homes); battery-only alarms must be 10-year sealed units",
+   "Smoke alarms older than 10 years must be replaced",
+   "Carbon monoxide alarm within 10 feet of the bedroom doors (or one in each bedroom)",
+   "Secondary power source label (generators, solar, batteries) within 18 inches of the main electrical panel and meter, not handwritten",
+   "Fire extinguisher is checked during the housing inspection (per the Housing FAQ; the February 2026 checklist no longer lists it)",
+   "Dryer vents must be aluminum flex, not plastic",
+   "Sump pumps must discharge outdoors, not into the sewer",
+   "Private well: well test report under the NJ Private Well Testing Act sent to the Division of Housing",
+   "Septic system: NJDEP-protocol septic inspection reviewed and approved by the Health Department before the certificate is issued",
+   "A failed septic system or outstanding permits must be addressed by the current owner before closing",
+   "Life safety violations must be corrected and reinspected before anyone moves in; a buyer may assume most other violations in writing"
+  ],
+  "fees": [
+   {
+    "label": "Certificate of Inspection for a sale (single or two family)",
+    "amount": "$80.00",
+    "quote": "You must complete the application and submit it with the fee of $80.00 to our office.",
+    "source_url": "https://www.lawrencetwp.com/HousingFAQ",
+    "verified": true
+   },
+   {
+    "label": "Housing Inspection Fee (Township fee ordinance 2495-25, adopted May 20, 2025)",
+    "amount": "$80.00",
+    "quote": "Housing Inspection Fee $80.00",
+    "source_url": "https://www.lawrencetwp.com/media/Ordinances/2025/2495.25.pdf",
+    "verified": true
+   }
+  ],
+  "how_to_apply": "Fill out the Property Transfer Application and bring or mail it with the $80.00 fee to the Division of Housing, 2207 Lawrence Road (Lawrenceville Road), Lawrence Township, NJ 08648. Faxed or emailed applications are not accepted. Pay by check (payable to Township of Lawrence), exact cash, money order, or Visa/Mastercard credit in the office only. After the application and fee are received, the owner or agent calls the Division of Housing (609-844-7032) to schedule. An adult must be present if occupied; a vacant home with a lockbox can be inspected with the lockbox code. The certificate is typed the next business day and mailed or picked up (not emailed or faxed).",
+  "application_url": "https://www.lawrencetwp.com/media/Departments/Housing/Housing%20Forms/Property%20Transfer%20Application",
+  "department_url": "https://www.lawrencetwp.com/departments/division-of-housing",
+  "phone": "609-844-7032",
+  "email": "kbarkalow@lawrencetwp.com",
+  "contact_name": "Kelly Barkalow",
+  "contact_title": "Fire Prevention Specialist, Division of Housing",
+  "evidence": [
+   {
+    "url": "https://www.lawrencetwp.com/HousingFAQ",
+    "quote": "If I am selling my home/condo do I need to get a Certificate of Inspection? Yes, a Certificate of Inspection is required prior to the transfer of ownership.",
+    "doc_date": "",
+    "via": "page",
+    "verified": true
+   },
+   {
+    "url": "https://www.lawrencetwp.com/departments/division-of-housing",
+    "quote": "All single family or two family dwellings being sold are required to file an application of sale with the Housing Bureau, prior to sale.",
+    "doc_date": "",
+    "via": "page",
+    "verified": true
+   },
+   {
+    "url": "https://www.lawrencetwp.com/HousingFAQ",
+    "quote": "How long is a Certificate of Inspection for a sale valid for? A Certificate of Inspection expires one year from the original inspection date.",
+    "doc_date": "",
+    "via": "page",
+    "verified": true
+   },
+   {
+    "url": "https://www.lawrencetwp.com/HousingFAQ",
+    "quote": "Is there a fee for a re-inspection? No there is no fee for a re-inspection.",
+    "doc_date": "",
+    "via": "page",
+    "verified": true
+   },
+   {
+    "url": "https://www.lawrencetwp.com/departments/division-of-housing",
+    "quote": "Currently the wait time for an inspection is approximately 3-4 weeks.",
+    "doc_date": "",
+    "via": "page",
+    "verified": true
+   },
+   {
+    "url": "https://www.lawrencetwp.com/HousingFAQ",
+    "quote": "Can I pay extra to expedite an appointment? No. We do not expedite appointments.",
+    "doc_date": "",
+    "via": "page",
+    "verified": true
+   },
+   {
+    "url": "https://www.lawrencetwp.com/HousingFAQ",
+    "quote": "Our office accepts checks, exact cash, money orders or we can accept Visa or Mastercard (credit only, no debit) In the office.",
+    "doc_date": "",
+    "via": "page",
+    "verified": true
+   },
+   {
+    "url": "https://www.lawrencetwp.com/HousingFAQ",
+    "quote": "If there is a failed septic system on the property or outstanding permits these must be addressed by the current owner prior to closing.",
+    "doc_date": "",
+    "via": "page",
+    "verified": true
+   },
+   {
+    "url": "https://www.lawrencetwp.com/media/Departments/Housing/Housing%20Forms/Property%20Transfer%20Application",
+    "quote": "Applications can be submitted In person or malled to our office. We do not accept faxed or e-mailed applications.",
+    "doc_date": "2020-12 (scanned form)",
+    "via": "pdf",
+    "verified": true
+   },
+   {
+    "url": "https://www.lawrencetwp.com/media/Departments/Housing/Housing%20Forms/Housing%20Pre%20Inspection%20Checklist",
+    "quote": "Label must be installed within 18 inches of the main electrical panel and electrical meter warning of dangers associated with secondary power source.",
+    "doc_date": "2026-02",
+    "via": "pdf",
+    "verified": true
+   },
+   {
+    "url": "https://www.lawrencetwp.com/media/Departments/Housing/Housing%20Forms/Housing%20Pre%20Inspection%20Checklist",
+    "quote": "Review and approval by the Health Department is required prior to issuance of a Certificate of Inspection.",
+    "doc_date": "2026-02",
+    "via": "pdf",
+    "verified": true
+   },
+   {
+    "url": "https://www.lawrencetwp.com/departments/division-of-housing",
+    "quote": "Kelly Barkalow , Fire Prevention Specialist Telephone: (609) 844-7032",
+    "doc_date": "",
+    "via": "page",
+    "verified": true
+   },
+   {
+    "url": "https://www.lawrencetwp.com/departments/division-of-housing",
+    "quote": "Email kbarkalow@lawrencetwp.com Phone Numbers 609.844.7032",
+    "doc_date": "",
+    "via": "page",
+    "verified": true
+   }
+  ],
+  "confidence": "high",
+  "notes": "There is no fee for a re-inspection. Lawrence calls the resale certificate a Certificate of Inspection, issued by the Division of Housing (the FAQ explains a Certificate of Occupancy is a construction document). The Property Transfer Application is a December 2020 scan; the Pre-Inspection Checklist is dated February 2026. The seller is normally responsible, but for as-is, bank-owned or foreclosure sales the buyer may be. A separate rental Certificate of Inspection ($75, needed at each tenant change) and a lead-in-rentals program apply to rentals only, not sales. The Housing and Fire Marshal pages both list kbarkalow@lawrencetwp.com as the office email."
+ },
+ "fire_cert": {
+  "requirements": [
+   "No separate smoke/CO certificate for a sale: smoke alarms, CO alarms and the fire extinguisher are inspected during the Division of Housing inspection and included in the Certificate of Inspection",
+   "Battery-only smoke alarms must be 10-year sealed units; alarms over 10 years old must be replaced",
+   "Secondary power source warning label within 18 inches of the main panel and meter (homes with generators, solar or batteries)",
+   "Low-voltage monitored systems are supplemental; originally required alarms must be put back if removed"
+  ],
+  "authorities": [
+   {
+    "name": "Lawrence Township Fire Marshal's Office (municipal fire code enforcing agency); the resale smoke/CO check is done by the Township housing inspector",
+    "type": "municipal_fire_bureau",
+    "area_served": "Entire township",
+    "lead_time": "Part of the housing inspection (currently about 3-4 weeks wait)",
+    "fees": [
+     {
+      "label": "Included in the $80.00 Certificate of Inspection (no separate certificate needed for a sale)",
+      "amount": "$80.00",
+      "quote": "You must complete the application and submit it with the fee of $80.00 to our office.",
+      "source_url": "https://www.lawrencetwp.com/HousingFAQ",
+      "verified": true
+     },
+     {
+      "label": "Separate Certificate of Smoke Detector and Carbon Monoxide Alarm Compliance, application received 10 or more business days before change of occupant (printed as '-10'; fee schedule in Ordinance 2495-25, not charged on a sale per the Housing FAQ)",
+      "amount": "$45.00",
+      "quote": "Certificate of Smoke Detector and Carbon Monoxide Alarm Compliance Application Fee received: -10 business days prior to change of Occupant $45.00",
+      "source_url": "https://www.lawrencetwp.com/media/Ordinances/2025/2495.25.pdf",
+      "verified": true
+     },
+     {
+      "label": "Separate Certificate of Smoke Detector and Carbon Monoxide Alarm Compliance, application received 4-10 business days before change of occupant (Ordinance 2495-25)",
+      "amount": "$90.00",
+      "quote": "-4-10 business days prior to change of Occupant $90.00",
+      "source_url": "https://www.lawrencetwp.com/media/Ordinances/2025/2495.25.pdf",
+      "verified": true
+     },
+     {
+      "label": "Separate Certificate of Smoke Detector and Carbon Monoxide Alarm Compliance, application received fewer than 4 business days before change of occupant (Ordinance 2495-25)",
+      "amount": "$161.00",
+      "quote": "-fewer than 4 business days prior to change of Occupant $161.00",
+      "source_url": "https://www.lawrencetwp.com/media/Ordinances/2025/2495.25.pdf",
+      "verified": true
+     }
+    ],
+    "how_to_apply": "For a sale, file the Division of Housing Property Transfer Application ($80.00); the housing inspector checks smoke alarms, CO alarms and the extinguisher under the Fire Marshal's oversight. Questions: Division of Housing 609-844-7032 or Fire Marshal's Office 609-844-7018, 2207 Lawrenceville Road.",
+    "application_url": "https://www.lawrencetwp.com/media/Departments/Housing/Housing%20Forms/Property%20Transfer%20Application",
+    "department_url": "https://www.lawrencetwp.com/departments/firemarshal",
+    "phone": "609-844-7021",
+    "email": "ETencza@lawrencetwp.com",
+    "contact_name": "Edward Tencza",
+    "contact_title": "Fire Official",
+    "evidence": [
+     {
+      "url": "https://www.lawrencetwp.com/HousingFAQ",
+      "quote": "Is a separate smoke alarm and carbon monoxide detector certificate required? No, a separate certificate is not required. The smoke alarms, carbon monoxide detectors, and fire extinguishers are inspected during the housing Inspection and included as part of the Certificate of Inspection",
+      "doc_date": "",
+      "via": "page",
+      "verified": true
+     },
+     {
+      "url": "https://www.lawrencetwp.com/departments/firemarshal",
+      "quote": "Oversees the Smoke Detector/Carbon Monoxide Detector/fire ExtinguisherCompliance for the resale of the residential properties performed the township housing inspector.",
+      "doc_date": "",
+      "via": "page",
+      "verified": true
+     },
+     {
+      "url": "https://www.lawrencetwp.com/departments/firemarshal",
+      "quote": "Edward Tencza , Fire Official Telephone: (609) 844-7021",
+      "doc_date": "",
+      "via": "page",
+      "verified": true
+     },
+     {
+      "url": "https://www.lawrencetwp.com/departments/firemarshal",
+      "quote": "Email kbarkalow@lawrencetwp.com Phone Numbers 609.844.7018",
+      "doc_date": "",
+      "via": "page",
+      "verified": true
+     },
+     {
+      "url": "https://www.lawrencetwp.com/media/Ordinances/2025/2495.25.pdf",
+      "quote": "Ordinance No. 2495-25 AN ORDINANCE AMENDING THE CONSOLIDATED LICENSE, PERMIT AND FEE CHAPTER OF THE LAWRENCE TOWNSHIP ADMINISTRATIVE CODE",
+      "doc_date": "2025-05-20 (adopted)",
+      "via": "pdf",
+      "verified": true
+     },
+     {
+      "url": "https://nj.gov/dca/dfs/pdf/ANNUAL%20REGISTRY/THIRD%20QUARTER%20LEA%20REGISTRY%202026.pdf",
+      "quote": "M Lawrence Township",
+      "doc_date": "2026-07",
+      "via": "pdf",
+      "verified": true
+     },
+     {
+      "url": "https://www.nj.gov/dca/dfs/pdf/fire%20directory_county%20summary/fire_code_enforcement_director.pdf",
+      "quote": "LEAID: 1107-001 Enf Auth. Municipal Fire Official Edward C Tencza Phone (609) 844-7021",
+      "doc_date": "2026 (survey date 1/9/2026)",
+      "via": "state_directory",
+      "verified": true
+     },
+     {
+      "url": "https://www.nj.gov/dca/dfs/pdf/fire%20directory_county%20summary/fire_code_enforcement_director.pdf",
+      "quote": "Email ETencza@lawrencetwp.com",
+      "doc_date": "2026",
+      "via": "state_directory",
+      "verified": true
+     },
+     {
+      "url": "https://www.nj.gov/dca/dfs/pdf/fire%20directory_county%20summary/fire_code_enforcement_director.pdf",
+      "quote": "Phone (609) 844-7018 SMOKE DETECTOR COMPLIANCE Lawence Twp Fire Prev",
+      "doc_date": "2026",
+      "via": "state_directory",
+      "verified": true
+     }
+    ],
+    "confidence": "high"
+   }
+  ],
+  "notes": "Lawrence has one municipal fire code enforcing agency (the LEA registry shows a single 'M Lawrence Township'; no fire districts). The Township fee ordinance (Sec. 156-3(c), Ordinance 2495-25 adopted May 20, 2025) lists state-level smoke/CO certificate fees ($45/$90/$161), but the Housing FAQ says a separate smoke/CO certificate is not needed for a sale because the check is part of the $80.00 Certificate of Inspection. The Fire Marshal page links Edward Tencza to etencza@lawrencetwp.com; the state directory prints ETencza@lawrencetwp.com. The Housing FAQ still says extinguishers are inspected, but the February 2026 Pre-Inspection Checklist (which cites P.L.2025, c.19) does not list an extinguisher."
+ },
+ "other_items": [
+  {
+   "label": "Open permits",
+   "detail": "Outstanding permits must be addressed by the current owner before closing; the application has an Outstanding Permits section. The checklist also tells buyers to verify there are no open permits (records requests go to the Municipal Clerk).",
+   "source_url": "https://www.lawrencetwp.com/HousingFAQ"
+  },
+  {
+   "label": "Septic system",
+   "detail": "A NJDEP-protocol septic inspection (N.J.A.C. 7:9A-12.6) must be reviewed and approved by the Health Department before the Certificate of Inspection is issued; a failed septic system must be addressed by the current owner before closing.",
+   "source_url": "https://www.lawrencetwp.com/media/Departments/Housing/Housing%20Forms/Housing%20Pre%20Inspection%20Checklist"
+  },
+  {
+   "label": "Private well test",
+   "detail": "Homes with a private well must be tested under the NJ Private Well Testing Act; the report should be sent to the Division of Housing.",
+   "source_url": "https://www.lawrencetwp.com/media/Departments/Housing/Housing%20Forms/Housing%20Pre%20Inspection%20Checklist"
+  },
+  {
+   "label": "Buyer assumption of violations",
+   "detail": "A buyer may assume most violations with the Assumption of Violations by Buyer letter; life hazard violations must be corrected and reinspected before occupancy.",
+   "source_url": "https://www.lawrencetwp.com/media/Departments/Housing/Housing%20Forms/Housing%20Assumption%20Violations"
+  }
+ ],
+ "open_questions": [
+  "Ordinance 2495-25 prints the lowest smoke/CO tier as '-10 business days'; it likely means 10 or more business days, but the fee does not apply to sales per the Housing FAQ. Confirm with the Fire Marshal's Office when, if ever, the separate smoke/CO fee is charged for 1-2 family homes.",
+  "Current inspection wait: the Housing page says about 3-4 weeks while the FAQ says generally within two weeks."
+ ],
+ "verification": {
+  "fees": 6,
+  "fee_ok": 6,
+  "fee_bad": 0,
+  "fee_unchecked": 0,
+  "quotes": 22,
+  "q_ok": 22,
+  "q_bad": 0,
+  "q_unchecked": 0
+ }
+}

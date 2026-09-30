@@ -1,0 +1,219 @@
+{
+ "municipality_code": "0908",
+ "municipality": "North Bergen Township",
+ "county": "HUDSON",
+ "checked_at": "2026-09-30",
+ "resale_co": {
+  "status": "required",
+  "name": "Residential Owner Certificate (residential certificate of occupancy, CCO) with buyer Affidavit for Application for Certificate of Occupancy",
+  "issued_by": "North Bergen Code Enforcement Office (Building/Code Enforcement/Zoning Department), Town Hall Room 208",
+  "lead_time": "",
+  "valid_for": "",
+  "requirements": [],
+  "fees": [],
+  "how_to_apply": "Fill out the Residential Owner Certificate form (mark it as a sale; list the owner and the new owner and all occupants) and the buyer's notarized Affidavit for Application for Certificate of Occupancy, then file them with the Code Enforcement Office, Room 208, Town Hall, 4233 Kennedy Boulevard, North Bergen. The office schedules the inspection and collects the fee (amount not published online). Questions: (201) 392-2051.",
+  "application_url": "https://www.northbergen.org/_Content/pdf/forms/Residential-Owner-Certificate.pdf",
+  "department_url": "https://www.northbergen.org/Departments/code-enforcement",
+  "phone": "(201) 392-2051",
+  "email": "",
+  "contact_name": "",
+  "contact_title": "",
+  "evidence": [
+   {
+    "url": "https://www.northbergen.org/Departments/code-enforcement",
+    "quote": "We inspect and issue commercial and residential certificates of occupancy.",
+    "doc_date": "2026-09-30 (page fetched)",
+    "via": "page",
+    "verified": true
+   },
+   {
+    "url": "https://www.northbergen.org/Departments/commercial-business-mixed-use-and-residential-owner-certificates",
+    "quote": "To request a Commercial Business/Mixed Use or Residential Owner Certificate or other forms, please visit our online forms library . You may also call our office or visit the Building/Code Enforcement/Zoning Department at Town Hall.",
+    "doc_date": "2026-09-30 (page fetched)",
+    "via": "page",
+    "verified": true
+   },
+   {
+    "url": "https://www.northbergen.org/_Content/pdf/forms/Residential-Owner-Certificate.pdf",
+    "quote": "CODE ENFORCEMENT OFFICE - ROOM 208 4233 KENNEDY BOULEVARD NORTH BERGEN, NEW JERSEY 07047 (201) 392-2051",
+    "doc_date": "2024-05-21 (PDF created May 21, 2024; scanned, read visually)",
+    "via": "pdf",
+    "verified": null
+   },
+   {
+    "url": "https://www.northbergen.org/_Content/pdf/forms/Residential-Owner-Certificate.pdf",
+    "quote": "IS THIS APPLICATION FOR A SALE RE-FINANCE RENTAL OTHER",
+    "doc_date": "2024-05-21 (scanned, read visually)",
+    "via": "pdf",
+    "verified": null
+   },
+   {
+    "url": "https://www.northbergen.org/_Content/pdf/forms/Affidavit-Application-Certificate-of-Occupancy.pdf",
+    "quote": "AFFIDAVIT FOR APPLICATION FOR CERTIFICATE OF OCCUPANCY",
+    "doc_date": "2020-04-03 (PDF created April 3, 2020; scanned, read visually)",
+    "via": "pdf",
+    "verified": null
+   },
+   {
+    "url": "https://www.northbergen.org/_Content/pdf/forms/Affidavit-Application-Certificate-of-Occupancy.pdf",
+    "quote": "I am the Buyer of property known as",
+    "doc_date": "2020-04-03 (scanned, read visually)",
+    "via": "pdf",
+    "verified": null
+   },
+   {
+    "url": "https://www.northbergen.org/_Content/pdf/forms/Affidavit-Application-Certificate-of-Occupancy.pdf",
+    "quote": "BUYERS SIGNATURE(S) MUST BE NOTARIZED",
+    "doc_date": "2020-04-03 (scanned, read visually)",
+    "via": "pdf",
+    "verified": null
+   },
+   {
+    "url": "https://www.northbergen.org/api/data/GetFormsData",
+    "quote": "\"Label\": \"Residential Owner Certificate\", \"EngPDF\": \"/_Content/pdf/forms/Residential-Owner-Certificate.pdf\"",
+    "doc_date": "2026-09-30 (forms library data fetched)",
+    "via": "page",
+    "verified": true
+   }
+  ],
+  "confidence": "medium",
+  "notes": "The Township website lists the Residential Owner Certificate under Code Enforcement forms and says Code Enforcement inspects and issues residential certificates of occupancy. The form asks whether the application is for a sale, refinance or rental, and a separate notarized buyer affidavit is titled Affidavit for Application for Certificate of Occupancy. No ordinance text, fee schedule, lead time or inspection checklist for the residential certificate was found online, and the Township code is not posted on the website. The buyer affidavit says the buyer cannot add dwelling units, that a basement cannot have both a kitchen and a bathroom with a separate entrance, and cites Ordinance No 1061-06 with a minimum fine of $750.00 per day for adding units. The forms are scans and were read visually. The phone is the number printed on the form (the Township directory lists Code Enforcement with the same number). No named Code Enforcement contact is published. North Bergen also has rent control and a Bureau of Housing Inspectors for multiple dwellings; those are not resale programs."
+ },
+ "fire_cert": {
+  "requirements": [
+   "Smoke alarms must be ten-year sealed battery single station units (UL 217), effective January 1, 2019; A/C powered alarms from original construction must not be replaced with battery units",
+   "A/C powered smoke alarms must be tested by a licensed electrician or a certified fire alarm company, with a service report or letter given to North Bergen Fire Prevention at the inspection",
+   "Smoke alarm on each level and outside each sleeping area (no more than 10 feet); CO alarm outside each sleeping area (no more than 10 feet), UL 2034, NFPA 720",
+   "The October 2025 application is still titled Smoke Detector, Carbon Monoxide & Fire Extinguisher Compliance and the guidelines still show an extinguisher within 10 feet of the kitchen near an exit, top no higher than 5 feet, mounted on a bracket"
+  ],
+  "authorities": [
+   {
+    "name": "North Bergen Fire Prevention Bureau (Department of Public Safety, Fire Prevention Bureau - Code Enforcement), the local enforcing agency",
+    "type": "municipal_fire_bureau",
+    "area_served": "Entire township",
+    "lead_time": "Fee depends on business days before the change of occupant: more than 10, 5 to 10, or fewer than 4.",
+    "fees": [
+     {
+      "label": "Smoke detector, carbon monoxide and fire extinguisher compliance certificate, more than 10 business days before change of occupant",
+      "amount": "$45.00",
+      "quote": "More than 10 business days prior to change of occupant $45.00",
+      "source_url": "https://www.northbergen.org/_Content/pdf/forms/APPLICATION-FOR-SMOKE-DETECTOR.pdf",
+      "verified": null
+     },
+     {
+      "label": "5 to 10 business days before change of occupant",
+      "amount": "$90.00",
+      "quote": "5 to 10 business days prior to change of occupant $90.00",
+      "source_url": "https://www.northbergen.org/_Content/pdf/forms/APPLICATION-FOR-SMOKE-DETECTOR.pdf",
+      "verified": null
+     },
+     {
+      "label": "Fewer than 4 business days before change of occupant",
+      "amount": "$161.00",
+      "quote": "Fewer than 4 business days prior to change-of occupant $161.00",
+      "source_url": "https://www.northbergen.org/_Content/pdf/forms/APPLICATION-FOR-SMOKE-DETECTOR.pdf",
+      "verified": null
+     },
+     {
+      "label": "Re-inspection",
+      "amount": "$50.00",
+      "quote": "*Re-Inspection fee: $50.00",
+      "source_url": "https://www.northbergen.org/_Content/pdf/forms/APPLICATION-FOR-SMOKE-DETECTOR.pdf",
+      "verified": null
+     }
+    ],
+    "how_to_apply": "Fill out the Application for Smoke Detector, Carbon Monoxide & Fire Extinguisher Compliance (property, 1 or 2 family or condo, sale or rental, owner of record, realtor) and bring it with payment to the Fire Prevention Bureau, 4233 Kennedy Boulevard, to set an appointment. Pay by cash, check or money order payable to North Bergen Fire Prevention, LEA; credit cards are not accepted. Phone (201) 392-2162 or (201) 392-2075.",
+    "application_url": "https://www.northbergen.org/_Content/pdf/forms/APPLICATION-FOR-SMOKE-DETECTOR.pdf",
+    "department_url": "https://www.northbergen.org/Departments/fire-prevention",
+    "phone": "(201) 392-2162",
+    "email": "FirePrev@northbergen.org",
+    "contact_name": "Elvis Pena",
+    "contact_title": "Fire Official (per the NJ DCA fire directory)",
+    "evidence": [
+     {
+      "url": "https://www.northbergen.org/_Content/pdf/forms/APPLICATION-FOR-SMOKE-DETECTOR.pdf",
+      "quote": "Application for Smoke Detector, Carbon Monoxide & Fire Extinguisher Compliance",
+      "doc_date": "2025-10-07 (PDF created October 7, 2025; scanned, read visually)",
+      "via": "pdf",
+      "verified": null
+     },
+     {
+      "url": "https://www.northbergen.org/_Content/pdf/forms/APPLICATION-FOR-SMOKE-DETECTOR.pdf",
+      "quote": "Cash or Check/Money Order Payable to North Bergen Fire Prevention, LEA",
+      "doc_date": "2025-10-07 (PDF created October 7, 2025; scanned, read visually)",
+      "via": "pdf",
+      "verified": null
+     },
+     {
+      "url": "https://www.northbergen.org/_Content/pdf/forms/APPLICATION-FOR-SMOKE-DETECTOR.pdf",
+      "quote": "TELEPHONE: (201) 392-2162 (201) 392-2075",
+      "doc_date": "2025-10-07 (PDF created October 7, 2025; scanned, read visually)",
+      "via": "pdf",
+      "verified": null
+     },
+     {
+      "url": "https://www.northbergen.org/Departments/fire-prevention",
+      "quote": "Fire Prevention does NOT accept credit cards, only cash, check, or money order.",
+      "doc_date": "2026-09-30 (page fetched)",
+      "via": "page",
+      "verified": true
+     },
+     {
+      "url": "https://www.northbergen.org/_Content/pdf/forms/SMOKE-DETECTOR-GUIDELINES.pdf",
+      "quote": "A/C powered smoke detectors shall be tested by a licensed electrician or a certified fire alarm company. A service report or letter will be submitted to North Bergen Fire Prevention at the time of inspection.",
+      "doc_date": "2025-10-07 (PDF created October 7, 2025; scanned, read visually)",
+      "via": "pdf",
+      "verified": null
+     },
+     {
+      "url": "https://www.northbergen.org/api/data/GetDirectoryDepartmentsData",
+      "quote": "\"Label\":\"Fire Prevention\",\"Phone\":\"201-392-2162\"",
+      "doc_date": "2026-09-30 (Township directory data fetched)",
+      "via": "page",
+      "verified": true
+     },
+     {
+      "url": "https://nj.gov/dca/dfs/pdf/ANNUAL%20REGISTRY/THIRD%20QUARTER%20LEA%20REGISTRY%202026.pdf",
+      "quote": "M North Bergen Township",
+      "doc_date": "2026-07 (registry as of June 30, 2026)",
+      "via": "pdf",
+      "verified": true
+     },
+     {
+      "url": "https://www.nj.gov/dca/dfs/pdf/fire%20directory_county%20summary/fire_code_enforcement_director.pdf",
+      "quote": "LEAID: 0908-001 Enf Auth. Municipal Fire Official Elvis Pena Phone (201) 392-2162 Email FirePrev@northbergen.org SMOKE DETECTOR COMPLIANCE North Bergen Twp Fire Prev Addr: 4233 Kennedy Blvd",
+      "doc_date": "2026-01-12 (survey date)",
+      "via": "state_directory",
+      "verified": true
+     }
+    ],
+    "confidence": "high"
+   }
+  ],
+  "notes": "North Bergen Township is its own fire code enforcing agency (registry code M); fire suppression is by North Hudson Regional Fire & Rescue, which does not issue the certificate. Fees are from the Township application form (PDF created October 7, 2025, a scan read visually). The form prints the tiers as \"More than 10\", \"5 to 10\" and \"Fewer than 4\" business days, so a request exactly 4 business days out is not spelled out. The contact name and email come from the NJ DCA fire directory (survey January 2026); the Township site lists the Fire Prevention phone but no staff names."
+ },
+ "other_items": [
+  {
+   "label": "Buyer affidavit",
+   "detail": "The buyer must sign a notarized Affidavit for Application for Certificate of Occupancy confirming the legal number of units and agreeing not to add units without approvals.",
+   "source_url": "https://www.northbergen.org/_Content/pdf/forms/Affidavit-Application-Certificate-of-Occupancy.pdf"
+  }
+ ],
+ "open_questions": [
+  "What is the fee for a Residential Owner Certificate (CCO) on a 1-2 family sale?",
+  "How far ahead of closing should the CCO be requested, and how long is it valid?",
+  "What does the CCO inspection check? No checklist is published.",
+  "Who is the Construction Official / Code Enforcement contact for resale certificates?",
+  "Is the fire extinguisher still checked after the February 2025 state law change? The October 2025 form still lists it."
+ ],
+ "verification": {
+  "fees": 4,
+  "fee_ok": 0,
+  "fee_bad": 0,
+  "fee_unchecked": 4,
+  "quotes": 16,
+  "q_ok": 7,
+  "q_bad": 0,
+  "q_unchecked": 9
+ }
+}

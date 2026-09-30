@@ -1,0 +1,197 @@
+{
+ "municipality_code": "1111",
+ "municipality": "Trenton",
+ "county": "MERCER",
+ "checked_at": "2026-09-30",
+ "resale_co": {
+  "status": "required",
+  "name": "Certificate of Housing Code Compliance",
+  "issued_by": "City of Trenton Department of Inspections, Division of Housing Inspections",
+  "lead_time": "",
+  "valid_for": "",
+  "requirements": [
+   "Home must conform to the City's existing Zoning and Fire Safety Codes",
+   "Smoke detector and carbon monoxide alarm compliance (City Code Chapter 132, Section 40)",
+   "Must substantially meet the City's minimum habitability standards (Chapter 132, Articles V-VIII)",
+   "Electrical and plumbing service and fixtures must be safe, sound and sturdy and not create a fire, safety or life hazard"
+  ],
+  "fees": [
+   {
+    "label": "Certificate of Housing Code Compliance (1 to 4 units)",
+    "amount": "$200",
+    "quote": "The fee for a Certificate of Housing Code Compliance is $200.",
+    "source_url": "https://trentonnj.org/233/Housing-Inspections",
+    "verified": true
+   },
+   {
+    "label": "Each unit over four (structures with more than four units)",
+    "amount": "$15 per unit",
+    "quote": "Structures with more than four units will pay an additional $15 per unit.",
+    "source_url": "https://trentonnj.org/233/Housing-Inspections",
+    "verified": true
+   },
+   {
+    "label": "Each re-inspection after the first (1 and 2 unit homes)",
+    "amount": "$50",
+    "quote": "If more than one re-inspection is required a fee of $50 will be charged for 1 and 2 units.",
+    "source_url": "https://trentonnj.org/233/Housing-Inspections",
+    "verified": true
+   }
+  ],
+  "how_to_apply": "Apply to the Division of Housing Inspections, Department of Inspections, City Hall Annex, 319 East State Street, 2nd Floor, Trenton, NJ 08608 (609-989-3550; Housing Inspections line 609-989-3563). No online application form was found; call the Division for the application. If the certificate cannot be obtained before closing, the owner may file an affidavit that the home will not be occupied until the certificate is issued. A Certificate of Approval or Certificate of Continued Occupancy is accepted instead.",
+  "application_url": "",
+  "department_url": "https://trentonnj.org/233/Housing-Inspections",
+  "phone": "609-989-3542",
+  "email": "yvazquez@trentonnj.org",
+  "contact_name": "Yolanda Vazquez",
+  "contact_title": "Chief Housing Inspector",
+  "evidence": [
+   {
+    "url": "https://trentonnj.org/233/Housing-Inspections",
+    "quote": "Prior to the change of ownership of any residential property a Certificate of Housing Code Compliance shall have first been obtained from the Department of Inspections, Division of Housing Inspections.",
+    "doc_date": "",
+    "via": "page",
+    "verified": true
+   },
+   {
+    "url": "https://trentonnj.org/233/Housing-Inspections",
+    "quote": "This document issued by the Director shall certify that the residential property conforms to the existing Zoning and Fire Safety Codes of the City of Trenton, Smoke Detector and Carbon Monoxide Compliance as set forth in Chapter 132 Section 40",
+    "doc_date": "",
+    "via": "page",
+    "verified": true
+   },
+   {
+    "url": "https://trentonnj.org/233/Housing-Inspections",
+    "quote": "In lieu of the Certificate of Housing Code Compliance the change of ownership may occur if the owner files with the Department of Inspections an affidavit indicating that the property will not be occupied until such time as a Certificate of Housing Code Compliance is obtained.",
+    "doc_date": "",
+    "via": "page",
+    "verified": true
+   },
+   {
+    "url": "https://trentonnj.org/233/Housing-Inspections",
+    "quote": "A Certificate of Approval and/or Certificate of Continued Occupancy are acceptable substitutes for a Certificate of Housing Code Compliance.",
+    "doc_date": "",
+    "via": "page",
+    "verified": true
+   },
+   {
+    "url": "https://trentonnj.org/233/Housing-Inspections",
+    "quote": "All complaints regarding any violations may be given to the Division by calling 609-989-3563",
+    "doc_date": "",
+    "via": "page",
+    "verified": true
+   },
+   {
+    "url": "https://trentonnj.org/231/Inspections-Department",
+    "quote": "Yolanda Vazquez Chief Housing Inspector Send Email Phone: 609-989-3542",
+    "doc_date": "",
+    "via": "page",
+    "verified": true
+   },
+   {
+    "url": "https://trentonnj.org/231/Inspections-Department",
+    "quote": "319 East State Street 2nd Floor Annex Trenton , NJ 08608 Phone: 609-989-3550",
+    "doc_date": "",
+    "via": "page",
+    "verified": true
+   }
+  ],
+  "confidence": "high",
+  "notes": "Trenton's page quotes City Code sections 132-108 to 132-113 (Transfer of Property). The inspector's email yvazquez@trentonnj.org is taken from the 'Send Email' link on the official Inspections Department page (not shown as text). The Senior Housing Inspector is Leonard Martin, 609-989-3524 (City directory). The absentee owner (rental) license, vacant property registration and rental re-inspection fees are rental or vacancy programs, not sale requirements. The fee page is undated."
+ },
+ "fire_cert": {
+  "requirements": [
+   "Smoke detector and carbon monoxide compliance is certified as part of the City's Certificate of Housing Code Compliance (City Code Chapter 132, Section 40)"
+  ],
+  "authorities": [
+   {
+    "name": "City of Trenton Division of Housing Inspections (smoke/CO compliance is part of the Certificate of Housing Code Compliance); NJ DCA Division of Fire Safety is the fire code enforcing agency but is not listed as issuing smoke certificates in Trenton",
+    "type": "municipal_fire_bureau",
+    "area_served": "Entire city",
+    "lead_time": "",
+    "fees": [
+     {
+      "label": "Included in the Certificate of Housing Code Compliance fee (no separate smoke/CO fee published)",
+      "amount": "$200",
+      "quote": "The fee for a Certificate of Housing Code Compliance is $200.",
+      "source_url": "https://trentonnj.org/233/Housing-Inspections",
+      "verified": true
+     }
+    ],
+    "how_to_apply": "Handled through the Division of Housing Inspections resale certificate (319 East State Street, 2nd Floor Annex; 609-989-3550). Confirm by phone whether a separate smoke/CO certificate is issued.",
+    "application_url": "",
+    "department_url": "https://trentonnj.org/233/Housing-Inspections",
+    "phone": "609-989-3542",
+    "email": "yvazquez@trentonnj.org",
+    "contact_name": "Yolanda Vazquez",
+    "contact_title": "Chief Housing Inspector",
+    "evidence": [
+     {
+      "url": "https://trentonnj.org/233/Housing-Inspections",
+      "quote": "This document issued by the Director shall certify that the residential property conforms to the existing Zoning and Fire Safety Codes of the City of Trenton, Smoke Detector and Carbon Monoxide Compliance as set forth in Chapter 132 Section 40",
+      "doc_date": "",
+      "via": "page",
+      "verified": true
+     },
+     {
+      "url": "https://nj.gov/dca/dfs/pdf/ANNUAL%20REGISTRY/THIRD%20QUARTER%20LEA%20REGISTRY%202026.pdf",
+      "quote": "S Trenton City",
+      "doc_date": "2026-07",
+      "via": "pdf",
+      "verified": true
+     },
+     {
+      "url": "https://www.nj.gov/dca/dfs/pdf/fire%20directory_county%20summary/state_towns%207_17_26.pdf",
+      "quote": "TRENTON 1111",
+      "doc_date": "2026-07-17 (Trenton is listed without the SC smoke-certificate mark)",
+      "via": "pdf",
+      "verified": true
+     },
+     {
+      "url": "https://www.nj.gov/dca/dfs/pdf/fire%20directory_county%20summary/fire_code_enforcement_director.pdf",
+      "quote": "LEAID: 1111-999 Enf Auth. State Fire Official Louis Kilmer Phone (609) 633-6132",
+      "doc_date": "2026 (survey date 6/3/2026)",
+      "via": "state_directory",
+      "verified": true
+     },
+     {
+      "url": "https://trentonnj.org/231/Inspections-Department",
+      "quote": "Yolanda Vazquez Chief Housing Inspector Send Email Phone: 609-989-3542",
+      "doc_date": "",
+      "via": "page",
+      "verified": true
+     }
+    ],
+    "confidence": "medium"
+   }
+  ],
+  "notes": "The July 2026 LEA registry lists the State (S) as Trenton's fire code enforcing agency, but the state's list of State-enforced towns (July 17, 2026) shows Trenton without the 'SC' (smoke certificates) mark, and the state directory's smoke detector compliance block for Trenton is blank. The City's transfer-of-property rule makes smoke and CO compliance part of the Certificate of Housing Code Compliance, so the City housing division appears to be the issuer. Trenton Fire Department Fire Prevention is at 609-989-4032 (education only on its page). No information on extinguishers or the secondary power source label was found."
+ },
+ "other_items": [
+  {
+   "label": "Zoning conformity",
+   "detail": "The Certificate of Housing Code Compliance certifies the home conforms to the City's existing Zoning Code.",
+   "source_url": "https://trentonnj.org/233/Housing-Inspections"
+  },
+  {
+   "label": "Affidavit option",
+   "detail": "If the certificate is not ready, the sale may close if the owner files an affidavit that the property will not be occupied until the certificate is obtained.",
+   "source_url": "https://trentonnj.org/233/Housing-Inspections"
+  }
+ ],
+ "open_questions": [
+  "How to apply (form, payment method) and how many days before closing to apply for the Certificate of Housing Code Compliance.",
+  "Whether the Division issues a separate smoke/CO certificate or only the combined Certificate of Housing Code Compliance, and whether the fire extinguisher or secondary power source label is checked.",
+  "Whether the $200 fee on the City page is current."
+ ],
+ "verification": {
+  "fees": 4,
+  "fee_ok": 4,
+  "fee_bad": 0,
+  "fee_unchecked": 0,
+  "quotes": 12,
+  "q_ok": 12,
+  "q_bad": 0,
+  "q_unchecked": 0
+ }
+}

@@ -1,0 +1,204 @@
+{
+ "municipality_code": "0902",
+ "municipality": "East Newark Borough",
+ "county": "HUDSON",
+ "checked_at": "2026-09-30",
+ "resale_co": {
+  "status": "required",
+  "name": "Certificate of Occupancy for resale (Certificate of Continued Occupancy)",
+  "issued_by": "East Newark Building & Construction Department (Construction Code Enforcement Department)",
+  "lead_time": "Borough recommends having the inspection done as soon as the sales contract is signed",
+  "valid_for": "",
+  "requirements": [
+   "Ten-year sealed smoke alarms within 10 feet outside each bedroom door, plus the usual basement and first floor locations near the stairs",
+   "Carbon monoxide alarm (battery or plug-in) outside sleeping areas",
+   "Portable fire extinguisher (2A:10B:C, no more than 10 lbs) mounted within 10 feet of each kitchen in the exit path (2021 checklist; state law dropped this in 2025)",
+   "Covers on all switches, outlets and junction boxes",
+   "Handrail on any stairs with more than three risers; guard railings where the drop is 30 inches or more",
+   "Pressure relief discharge pipe on boilers and water heaters, ending 6 to 8 inches above the floor",
+   "Working faucets and toilets",
+   "Attached garage fire separation kept intact, with a fire-rated self-closing door into the house",
+   "No double cylinder deadbolts on exit doors",
+   "Gas piping strapped, shut-off valves near appliances, unused lines capped, no aluminum gas piping",
+   "No broken or missing glass",
+   "Sheds at least 3 feet from property lines",
+   "Sidewalks, stairs, driveways, fences and garages in good repair; yard free of debris and overgrowth",
+   "House numbers at least 4 inches tall and visible from the street",
+   "Sound roof, leaders that drain away from the foundation, painted exterior walls, and repaired interior plaster, paint and floors"
+  ],
+  "fees": [
+   {
+    "label": "Certificate of Occupancy on sale or transfer of owner or renter, residential, per unit (Ord. 10-2025 raised it from $50)",
+    "amount": "$75.00",
+    "quote": "Sale or Transfer of Owner/Renter of Property Residential (per unit) $50 $75.00",
+    "source_url": "https://www.boroughofeastnewark.com/_Content/pdf/minutes/2025-05-14-Council-Minutes.pdf",
+    "verified": true
+   },
+   {
+    "label": "Certificate of Continued Occupancy (separate line in the same fee table; the ordinance does not say when it applies instead of the per-unit sale fee)",
+    "amount": "$250",
+    "quote": "Certificate of Continued Occupancy $250",
+    "source_url": "https://www.boroughofeastnewark.com/_Content/pdf/minutes/2025-05-14-Council-Minutes.pdf",
+    "verified": true
+   },
+   {
+    "label": "Temporary Certificate of Occupancy",
+    "amount": "$50.00",
+    "quote": "Temporary Certificate of Occupancy $30 $50.00",
+    "source_url": "https://www.boroughofeastnewark.com/_Content/pdf/minutes/2025-05-14-Council-Minutes.pdf",
+    "verified": true
+   }
+  ],
+  "how_to_apply": "Fill out the Borough's Application for Zoning Certificate (the residential Certificate of Occupancy form) with block and lot, seller and buyer names, number of units and the approximate closing date, and pay by check or cash at the Building Department, Municipal Building, 34 Sherman Avenue. The Building Department checks for open permits, zoning, penalties and state housing violations, and the Fire Department signs off on smoke detectors. Use the Borough's Certificate of Continued Occupancy checklist to prepare for the inspection.",
+  "application_url": "https://www.boroughofeastnewark.com/_Content/pdf/forms/CO-Application.pdf",
+  "department_url": "https://www.boroughofeastnewark.com/Departments/building-and-construction",
+  "phone": "973-481-2902, ext. 232",
+  "email": "constructionta@boroughofeastnewark.com",
+  "contact_name": "Bruno Silva",
+  "contact_title": "Construction Official / Building Subcode Official (part time)",
+  "evidence": [
+   {
+    "url": "https://www.boroughofeastnewark.com/_Content/pdf/forms/Smoke-CO-Fire-Ext.pdf",
+    "quote": "The Uniform Fire Code is now requiring that fire extinguishers be installed, along with smoke and carbon monoxide detectors, as an essential part of the inspection for a Certificate of Occupancy, required for resales.",
+    "doc_date": "2020-10 (PDF created October 23, 2020)",
+    "via": "pdf",
+    "verified": true
+   },
+   {
+    "url": "https://www.boroughofeastnewark.com/_Content/pdf/forms/CCO-Instructions.pdf",
+    "quote": "It is recommended that the Certificate of Occupancy Inspection be conducted as soon as your sales contract is signed.",
+    "doc_date": "2021-01 (PDF created January 13, 2021)",
+    "via": "pdf",
+    "verified": true
+   },
+   {
+    "url": "https://www.boroughofeastnewark.com/_Content/pdf/forms/CO-Application.pdf",
+    "quote": "The Certificate of Continued Use Occupancy shall indicate that as a result of a general inspection of the visible parts of the structure, no violations have been determined to have occurred and no unsafe conditions have been found, and that the existing use of the structure heretofore lawfully existed.",
+    "doc_date": "2021-01",
+    "via": "pdf",
+    "verified": true
+   },
+   {
+    "url": "https://www.boroughofeastnewark.com/_Content/pdf/minutes/2025-05-14-Council-Minutes.pdf",
+    "quote": "Public Hearing on Ordinance 10-2025: No one wished to be heard.",
+    "doc_date": "2025-05-14",
+    "via": "pdf",
+    "verified": true
+   },
+   {
+    "url": "https://www.boroughofeastnewark.com/api/data/GetDirectoryDepartmentsData",
+    "quote": "Building & Construction ... 973-481-2902, ext. 232 ... constructionta@boroughofeastnewark.com",
+    "doc_date": "2026-09 (checked 2026-09-30)",
+    "via": "page",
+    "verified": true
+   },
+   {
+    "url": "https://www.boroughofeastnewark.com/_Content/pdf/minutes/2024-09-11-Council-Minutes.pdf",
+    "quote": "that Bruno Silva is hereby appointed to serve as Construction Official/Building Sub-code Official for the Borough of East Newark, on a part-time basis effective September 5, 2024",
+    "doc_date": "2024-09-11",
+    "via": "pdf",
+    "verified": true
+   }
+  ],
+  "confidence": "high",
+  "notes": "Required: the Borough's Construction Department handout says the Certificate of Occupancy inspection is required for resales, and Ordinance 10-2025 (adopted May 14, 2025, amending Chapter 14 section 14-1.3) sets a Certificate of Occupancy fee for a sale or transfer of owner or renter of $75.00 per residential unit. The ordinance text is in the May 14, 2025 council minutes; in the printed table the old amount is struck through and the new amount follows it (checked visually). The same table also lists a $250 Certificate of Continued Occupancy fee with no explanation of when it applies; ask the Building Department. The directory phone and email come from the data feed behind the Borough's Directories page (https://www.boroughofeastnewark.com/directory). The Construction Official's name comes from a September 2024 appointment resolution; no later confirmation was found, so confirm by phone. The Borough also has an apartment registration form (a rental program, not a resale requirement)."
+ },
+ "fire_cert": {
+  "requirements": [
+   "Ten-year sealed battery smoke alarms (required since January 22, 2019) on each level and outside each sleeping area within 10 feet of bedrooms, on or near the ceiling",
+   "Carbon monoxide alarm (battery, hard-wired or plug-in) outside each sleeping area within 10 feet of bedrooms, UL 2034 listed",
+   "Borough handout (2020) still lists a 2A:10B:C portable fire extinguisher, no more than 10 pounds, mounted within 10 feet of each kitchen in the exit path; a kitchen-only extinguisher does not pass"
+  ],
+  "authorities": [
+   {
+    "name": "East Newark Fire Prevention Bureau",
+    "type": "municipal_fire_bureau",
+    "area_served": "Entire borough",
+    "lead_time": "",
+    "fees": [],
+    "how_to_apply": "The smoke and carbon monoxide check is done as part of the resale Certificate of Occupancy process; the Borough's CO application has a Fire Department (smoke detectors) sign-off line. The Borough also posts an Application for One and Two Families, Certification of Smoke Detector and Carbon Monoxide Detector Compliance, from the Construction Code Department. Call the Fire Prevention Bureau to confirm how to schedule and pay.",
+    "application_url": "https://www.boroughofeastnewark.com/_Content/pdf/forms/Smoke-Carbon-Monoxide-Certification.pdf",
+    "department_url": "https://www.boroughofeastnewark.com/Departments/fire-prevention-bureau",
+    "phone": "973-481-2902, ext. 234",
+    "email": "fireprevention@boroughofeastnewark.com",
+    "contact_name": "Juan C. Barroso Jr.",
+    "contact_title": "Fire Code Official",
+    "evidence": [
+     {
+      "url": "https://www.boroughofeastnewark.com/Departments/fire-prevention-bureau",
+      "quote": "Fire Code Official Juan C. Barroso Jr.",
+      "doc_date": "2026-09 (page checked 2026-09-30)",
+      "via": "page",
+      "verified": true
+     },
+     {
+      "url": "https://www.boroughofeastnewark.com/api/data/GetDirectoryDepartmentsData",
+      "quote": "Fire Prevention Bureau ... 973-481-2902, ext. 234 ... fireprevention@boroughofeastnewark.com",
+      "doc_date": "2026-09 (checked 2026-09-30)",
+      "via": "page",
+      "verified": true
+     },
+     {
+      "url": "https://www.boroughofeastnewark.com/_Content/pdf/minutes/2026-01-07-Council-Minutes.pdf",
+      "quote": "Confirming the Appointment of Juan Barroso, Jr., as the Fire Official",
+      "doc_date": "2026-01-07",
+      "via": "pdf",
+      "verified": true
+     },
+     {
+      "url": "https://www.boroughofeastnewark.com/_Content/pdf/forms/Smoke-CO-Fire-Ext.pdf",
+      "quote": "Ten-year sealed battery-powered alarms are required as of January 22, 2019",
+      "doc_date": "2020-10",
+      "via": "pdf",
+      "verified": true
+     },
+     {
+      "url": "https://www.boroughofeastnewark.com/_Content/pdf/forms/Smoke-CO-Fire-Ext.pdf",
+      "quote": "A “portable fire extinguisher”, which must be 2A:10B:C type, rated for residential use and no larger than 10 pounds, is required to be mounted within 10 feet of each kitchen area, and located in the path of egress.",
+      "doc_date": "2020-10",
+      "via": "pdf",
+      "verified": true
+     },
+     {
+      "url": "https://nj.gov/dca/dfs/pdf/ANNUAL%20REGISTRY/THIRD%20QUARTER%20LEA%20REGISTRY%202026.pdf",
+      "quote": "F East Newark Borough",
+      "doc_date": "2026-07",
+      "via": "pdf",
+      "verified": true
+     },
+     {
+      "url": "https://www.nj.gov/dca/dfs/pdf/fire%20directory_county%20summary/fire_code_enforcement_director.pdf",
+      "quote": "LEAID: 0902-001 Enf Auth. Fire Dept Fire Official Juan C Barroso Jr Phone (973) 481-2902",
+      "doc_date": "2026-07-13 (survey date)",
+      "via": "state_directory",
+      "verified": true
+     }
+    ],
+    "confidence": "medium"
+   }
+  ],
+  "notes": "The East Newark Fire Department is the local fire enforcing agency (DCA registry code F) and Juan C. Barroso Jr. was reappointed Fire Official / Inspector in January 2026. No smoke/CO certificate fee was found on the Borough site or in 2022 to 2026 council minutes. The Borough's smoke and CO certification form (created January 2021, Construction Code Department letterhead) says the inspection is done by the Town of Kearny Construction Code Enforcement Department and prints the Borough phone as (201) 481-2902; it looks copied from a Kearny form, so it is weak evidence and its contact details are not used. The fire extinguisher item comes from a 2020 Borough handout; state law (P.L.2025, c.19) removed the extinguisher requirement in 2025."
+ },
+ "other_items": [
+  {
+   "label": "Open permits, zoning and penalties checked",
+   "detail": "The CO application's office section records use group, open permits, zone, monetary penalties, legal use, Fire Department smoke detector sign-off, and State Housing violations and registration number.",
+   "source_url": "https://www.boroughofeastnewark.com/_Content/pdf/forms/CO-Application.pdf"
+  }
+ ],
+ "open_questions": [
+  "Does a 1-2 family resale pay the $75.00 per unit sale/transfer fee, the $250 Certificate of Continued Occupancy fee, or both?",
+  "What does the Fire Prevention Bureau charge for the smoke/CO certificate, and is it billed separately from the CO?",
+  "Is Bruno Silva still the Construction Official (appointed September 2024)?"
+ ],
+ "verification": {
+  "fees": 3,
+  "fee_ok": 3,
+  "fee_bad": 0,
+  "fee_unchecked": 0,
+  "quotes": 13,
+  "q_ok": 13,
+  "q_bad": 0,
+  "q_unchecked": 0
+ }
+}
