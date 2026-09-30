@@ -107,3 +107,28 @@ jobs:
             watchdogandroid/preview/build/screens/**
             watchdogandroid/preview/build/compare/**
           if-no-files-found: warn
+
+  preview-windows:
+    name: Desktop preview for Windows (double-click build)
+    runs-on: windows-latest
+    timeout-minutes: 40
+    defaults:
+      run:
+        working-directory: watchdogandroid/preview
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-java@v4
+        with:
+          distribution: temurin
+          java-version: '17'
+      - uses: gradle/actions/setup-gradle@v4
+        with:
+          cache-read-only: ${{ github.ref != 'refs/heads/main' }}
+      - name: Build the Windows app image (bundled Java runtime, no installer needed)
+        run: ./gradlew.bat --no-daemon --stacktrace createDistributable
+      - name: Upload the Windows preview
+        uses: actions/upload-artifact@v4
+        with:
+          name: watchdog-preview-windows
+          path: watchdogandroid/preview/build/compose/binaries/main/app/**
+          if-no-files-found: error
