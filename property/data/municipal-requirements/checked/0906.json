@@ -1,0 +1,176 @@
+{
+ "municipality_code": "0906",
+ "municipality": "Jersey City",
+ "county": "HUDSON",
+ "checked_at": "2026-09-30",
+ "resale_co": {
+  "status": "not_required",
+  "name": "",
+  "issued_by": "",
+  "lead_time": "",
+  "valid_for": "",
+  "requirements": [],
+  "fees": [],
+  "how_to_apply": "",
+  "application_url": "",
+  "department_url": "https://www.jerseycitynj.gov/cityhall/HousingAndDevelopment/constructioncode/inspections___certificates",
+  "phone": "(201) 547-5055",
+  "email": "ConstructionCode@jcnj.org",
+  "contact_name": "Joseph Severini",
+  "contact_title": "Construction Code Official",
+  "evidence": [
+   {
+    "url": "https://www.jerseycitynj.gov/cityhall/HousingAndDevelopment/constructioncode/inspections___certificates",
+    "quote": "Please note: Jersey City does not issue New Certificates of Occupancy for the buying and selling of property.",
+    "doc_date": "2026-09 (page checked 2026-09-30)",
+    "via": "page",
+    "verified": true
+   },
+   {
+    "url": "https://www.jerseycitynj.gov/cityhall/HousingAndDevelopment/constructioncode/inspections___certificates",
+    "quote": "A new Certificate of Occupancy is required for new construction or after a major renovation.",
+    "doc_date": "2026-09",
+    "via": "page",
+    "verified": true
+   },
+   {
+    "url": "https://www.jerseycitynj.gov/cityhall/HousingAndDevelopment/constructioncode",
+    "quote": "Joseph Severini Construction Code Official",
+    "doc_date": "2026-09",
+    "via": "page",
+    "verified": true
+   },
+   {
+    "url": "https://www.jerseycitynj.gov/cityhall/HousingAndDevelopment/constructioncode",
+    "quote": "(201) 547-5055",
+    "doc_date": "2026-09",
+    "via": "page",
+    "verified": true
+   },
+   {
+    "url": "https://api.municode.com/CodesContent?jobId=472619&nodeId=CH160FECH&productId=16093",
+    "quote": "No Certificate of Occupancy letters for real estate transfers provided no Certificate ... has been issued. $50.00",
+    "doc_date": "Code codified through Ord. 25-054 (May 7, 2025); fee section amended 2005",
+    "via": "page",
+    "verified": true
+   }
+  ],
+  "confidence": "high",
+  "notes": "Not required: the City's Construction Code page says Jersey City does not issue new Certificates of Occupancy for the buying and selling of property; a new CO is needed only for new construction or a major renovation (or a change of use). If a buyer's lender or attorney wants proof, the Construction Official can issue a letter stating whether a CO is required (City Code section 119-3); the fee schedule lists $50.00 for a No Certificate of Occupancy letter for real estate transfers. The Construction Code email is shown on the City page through email protection and was decoded from the page code. The City code is quoted from Municode's data service for the official Jersey City Code (readable at https://library.municode.com/nj/jersey_city/codes/code_of_ordinances); that page loads by script, so the data address is cited. Jersey City's landlord registration and rent control are rental programs, not resale requirements."
+ },
+ "fire_cert": {
+  "requirements": [
+   "Ten-year sealed battery single station smoke alarms on each level and outside each separate sleeping area; hard-wired alarms may not be replaced with battery alarms",
+   "Carbon monoxide alarm near the sleeping areas (battery, hard-wired or plug-in)",
+   "The April 2026 City form no longer lists a fire extinguisher (the 2019 version did)",
+   "A Fire Prevention inspector does a walk-through inspection before the certificate is issued"
+  ],
+  "authorities": [
+   {
+    "name": "Jersey City Division of Fire, Fire Prevention Bureau",
+    "type": "municipal_fire_bureau",
+    "area_served": "Entire city",
+    "lead_time": "",
+    "fees": [
+     {
+      "label": "Certificate of smoke detector and carbon monoxide alarm compliance (sale of a 1-family, 2-family or condominium unit)",
+      "amount": "$75.00",
+      "quote": "CHECK OR MONEY ORDER IN THE AMOUNT OF $75.00 MADE OUT TO CITY OF JERSEY CITY",
+      "source_url": "https://www.jerseycitynj.gov/UserFiles/Servers/Server_6189660/File/City%20Hall/Public%20Safety/Fire%20Prevention/SMOKE%20CARBON%20%20CERT.pdf",
+      "verified": true
+     },
+     {
+      "label": "Same fee in the City Code fee schedule (added 2014, amended 2016 and 2019)",
+      "amount": "$75.00",
+      "quote": "Certificate of Smoke Detector and Carbon Monoxide Alarm Compliance (CSDCMAC) - (N.J.A.C. ... 5:70-2.3) - Fee: $75.00.",
+      "source_url": "https://api.municode.com/CodesContent?jobId=472619&nodeId=CH160FECH&productId=16093",
+      "verified": true
+     }
+    ],
+    "how_to_apply": "Fill out the Sale of Property Smoke Alarm, Carbon Monoxide Alarm Certification Form (property, owner, and an email for scheduling), bring it to Fire Headquarters, 2 Jackson Square Plaza / 356 Martin Luther King Drive, with a check or money order for $75.00 payable to City of Jersey City, then wait for an email from the fire inspector to set up the walk-through inspection.",
+    "application_url": "https://www.jerseycitynj.gov/UserFiles/Servers/Server_6189660/File/City%20Hall/Public%20Safety/Fire%20Prevention/SMOKE%20CARBON%20%20CERT.pdf",
+    "department_url": "https://www.jerseycitynj.gov/cityhall/public_safety/Fire/fireprevention/",
+    "phone": "(201) 547-4255",
+    "email": "FirePrevention@njjcps.org",
+    "contact_name": "Omar Manning",
+    "contact_title": "Fire Official",
+    "evidence": [
+     {
+      "url": "https://www.jerseycitynj.gov/cityhall/public_safety/Fire/fireprevention/",
+      "quote": "Fire Prevention Office: (201) 547-4255",
+      "doc_date": "2026-09 (page checked 2026-09-30)",
+      "via": "page",
+      "verified": true
+     },
+     {
+      "url": "https://www.jerseycitynj.gov/UserFiles/Servers/Server_6189660/File/City%20Hall/Public%20Safety/Fire%20Prevention/SMOKE%20CARBON%20%20CERT.pdf",
+      "quote": "PHONE: 201-547-4255 FAX:201-547-5733 EMAIL:FIREPREVENTION@NJJCPS.ORG",
+      "doc_date": "2026-04 (PDF created April 8, 2026)",
+      "via": "pdf",
+      "verified": true
+     },
+     {
+      "url": "https://www.jerseycitynj.gov/UserFiles/Servers/Server_6189660/File/City%20Hall/Public%20Safety/Fire%20Prevention/SMOKE%20CARBON%20%20CERT.pdf",
+      "quote": "AWAIT EMAIL FROM FIRE INSPECTOR TO COORDINATE WALK THROUGH INSPECTION",
+      "doc_date": "2026-04",
+      "via": "pdf",
+      "verified": true
+     },
+     {
+      "url": "https://api.municode.com/CodesContent?jobId=472619&nodeId=CH160FECH&productId=16093",
+      "quote": "Added 9-23-2014 by Ord. No. 14-117 ; 9-28-2016 by Ord. No. 16-140 ; 2-27-2019 by Ord. No. 19-011",
+      "doc_date": "2019-02-27",
+      "via": "page",
+      "verified": true
+     },
+     {
+      "url": "https://nj.gov/dca/dfs/pdf/ANNUAL%20REGISTRY/THIRD%20QUARTER%20LEA%20REGISTRY%202026.pdf",
+      "quote": "F Jersey City",
+      "doc_date": "2026-07",
+      "via": "pdf",
+      "verified": true
+     },
+     {
+      "url": "https://www.nj.gov/dca/dfs/pdf/fire%20directory_county%20summary/fire_code_enforcement_director.pdf",
+      "quote": "LEAID: 0906-001 Enf Auth. Fire Dept Fire Official Omar Manning Phone (201) 547-4255 Email omanning@njjcps.org",
+      "doc_date": "2026-02-06 (survey date)",
+      "via": "state_directory",
+      "verified": true
+     }
+    ],
+    "confidence": "high"
+   }
+  ],
+  "notes": "The Jersey City Fire Department is the local fire enforcing agency (DCA registry code F). The $75.00 flat fee appears on the April 2026 City form and in City Code section 160-1 (Ord. 19-011, 2019). The same fee section of the code also still prints an older tiered schedule for smoke detector and carbon monoxide alarm compliance ($60.00 more than 10 business days before change of occupancy, $90.00 at 4 to 10 days, $125.00 under 4 days); the City's current form uses the flat $75.00, so that is listed. Fire Official name: the state directory (survey February 6, 2026) lists Omar Manning; the City's own Fire Prevention staff list is older (dated October 31, 2023) and names John Paul Tambini as Fire Official, so the newer state listing is used and the general Fire Prevention email (on the City page and form) is given instead of a personal one. The email on the City page is shown through email protection and was decoded from the page code; the same address is printed on the form."
+ },
+ "other_items": [
+  {
+   "label": "Seller must disclose open code violations in the sale contract",
+   "detail": "City Code section 257-2: a seller must include a copy of any outstanding property maintenance violation notice or order in the agreement of sale.",
+   "source_url": "https://api.municode.com/CodesContent?jobId=472619&nodeId=CH257PRTR&productId=16093"
+  },
+  {
+   "label": "Lead paint notice to buyer",
+   "detail": "City Code section 257-4: before a binder, contract or deposit for the sale of a dwelling, the seller or broker must give the buyer the City's lead-based paint notice and keep the buyer's signed acknowledgment.",
+   "source_url": "https://api.municode.com/CodesContent?jobId=472619&nodeId=CH257PRTR&productId=16093"
+  },
+  {
+   "label": "Optional No Certificate of Occupancy letter",
+   "detail": "The Construction Official can issue a letter on whether a CO is required; the City fee schedule lists $50.00 for a No Certificate of Occupancy letter for real estate transfers.",
+   "source_url": "https://api.municode.com/CodesContent?jobId=472619&nodeId=CH160FECH&productId=16093"
+  }
+ ],
+ "open_questions": [
+  "Who is the current Fire Official? The state directory (February 2026) says Omar Manning; the City's October 2023 staff list says John Paul Tambini."
+ ],
+ "verification": {
+  "fees": 2,
+  "fee_ok": 2,
+  "fee_bad": 0,
+  "fee_unchecked": 0,
+  "quotes": 11,
+  "q_ok": 11,
+  "q_bad": 0,
+  "q_unchecked": 0
+ }
+}

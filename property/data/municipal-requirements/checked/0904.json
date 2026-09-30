@@ -1,0 +1,203 @@
+{
+ "municipality_code": "0904",
+ "municipality": "Harrison",
+ "county": "HUDSON",
+ "checked_at": "2026-09-30",
+ "resale_co": {
+  "status": "required",
+  "name": "Certificate of Continued Occupancy (Transfer of Title Certificate of Occupancy)",
+  "issued_by": "Department of Construction and Zoning (Construction & Engineering); the Zoning Office does the inspection",
+  "lead_time": "",
+  "valid_for": "",
+  "requirements": [
+   "General inspection of the visible parts of the building; no violations or unsafe conditions",
+   "Existing use must be lawful and allowed by zoning",
+   "Open permits, monetary penalties, State Housing violations and registration are checked",
+   "Fire Department smoke detector sign-off",
+   "Lead-safe certification compliance under N.J.A.C. 5:28A",
+   "Application must name the new occupant(s); residential applications list every occupant with birth dates",
+   "Multiple dwellings attach their state certificate of registration"
+  ],
+  "fees": [
+   {
+    "label": "Transfer of Title or Change in Tenancy Certificate of Occupancy, residential use groups R-2, R-3 and R-4, per unit",
+    "amount": "$75.00",
+    "quote": "The fee for Transfer of Title or Change in Tenancy Certificate of Occupancy shall ... be ... R-2, R-3 and R-4, $75.00 per unit",
+    "source_url": "https://api.municode.com/CodesContent?jobId=481661&nodeId=TIT15BUCO_CH15.04STUNCOCOEN_15.04.040COFESC&productId=16390",
+    "verified": true
+   },
+   {
+    "label": "Continued Certificate of Occupancy, residential use groups R-2, R-3 and R-4, per unit (separate line in the same fee schedule)",
+    "amount": "$75.00",
+    "quote": "The fee for a continued Certificate of Occupancy shall be ... R-2, R-3 and R-4, $75.00 per unit",
+    "source_url": "https://api.municode.com/CodesContent?jobId=481661&nodeId=TIT15BUCO_CH15.04STUNCOCOEN_15.04.040COFESC&productId=16390",
+    "verified": true
+   },
+   {
+    "label": "Temporary certificate tied to a change in title or tenancy, 1 and 2 family (first issuance or renewal)",
+    "amount": "$75.00",
+    "quote": "Temporary Certificate related to Changes in Title or Tenancy for the first issuance and the renewal of the same shall be ... Use Groups R3 & R-5, 1 & 2 Family ... $75.00",
+    "source_url": "https://api.municode.com/CodesContent?jobId=481661&nodeId=TIT15BUCO_CH15.04STUNCOCOEN_15.04.040COFESC&productId=16390",
+    "verified": true
+   },
+   {
+    "label": "Certificate of continued occupancy application fee, per residential dwelling unit (Chapter 15.08, 1994; may overlap with the $75.00 fee above)",
+    "amount": "$15.00",
+    "quote": "A. Fifteen dollars ($15.00) per residential dwelling unit or portion thereof",
+    "source_url": "https://api.municode.com/CodesContent?jobId=481661&nodeId=TIT15BUCO_CH15.08CECOOC_15.08.060APFE&productId=16390",
+    "verified": true
+   }
+  ],
+  "how_to_apply": "Fill out the Transfer of Title Application (block and lot, owner and purchaser, number of dwelling units, approximate closing date, use) and pay by check or cash at the Department of Construction and Zoning. The Zoning Office inspects and the Zoning Official or designee signs off. Office hours are Monday to Friday, 8 a.m. to 4:30 p.m. Inspections can also be requested by email to inspections@townofharrison.com.",
+  "application_url": "https://www.townofharrison.com/DocumentCenter/View/2118/Transfer-of-Title-Application",
+  "department_url": "https://townofharrison.com/313/Construction-Permits-and-Schedule-Inspec",
+  "phone": "973-268-2446",
+  "email": "swoods@townofharrison.com",
+  "contact_name": "Stephen Woods",
+  "contact_title": "Building Subcode Official and Zoning Officer",
+  "evidence": [
+   {
+    "url": "https://townofharrison.com/313/Construction-Permits-and-Schedule-Inspec",
+    "quote": "Perform inspections for the issuance of Certificates of Continued Occupancy in connection with the transfer of title or changes in occupancy.",
+    "doc_date": "2026-09 (page checked 2026-09-30)",
+    "via": "page",
+    "verified": true
+   },
+   {
+    "url": "https://townofharrison.com/313/Construction-Permits-and-Schedule-Inspec",
+    "quote": "Stephen Woods Building Subcode Official and Zoning Officer",
+    "doc_date": "2026-09",
+    "via": "page",
+    "verified": true
+   },
+   {
+    "url": "https://townofharrison.com/313/Construction-Permits-and-Schedule-Inspec",
+    "quote": "Phone: 973-268-2446",
+    "doc_date": "2026-09",
+    "via": "page",
+    "verified": true
+   },
+   {
+    "url": "https://api.municode.com/CodesContent?jobId=481661&nodeId=TIT15BUCO_CH15.08CECOOC_15.08.030CECOOCREWH&productId=16390",
+    "quote": "after such building ... or portion thereof has been vacated or sold",
+    "doc_date": "Code current through Ord. 1557 (March 3, 2026); section from Ord. 903, 1994",
+    "via": "page",
+    "verified": true
+   },
+   {
+    "url": "https://api.municode.com/CodesContent?jobId=481661&nodeId=TIT15BUCO_CH15.08CECOOC_15.08.030CECOOCREWH&productId=16390",
+    "quote": "the construction official of the town shall have ... issued a certificate of continued occupancy therefor",
+    "doc_date": "Ord. 903, 1994",
+    "via": "page",
+    "verified": true
+   },
+   {
+    "url": "https://api.municode.com/CodesContent?jobId=481661&nodeId=TIT15BUCO_CH15.04STUNCOCOEN_15.04.040COFESC&productId=16390",
+    "quote": "Ord. No. 1523, § 1, 12-17-24",
+    "doc_date": "2024-12-17 (latest amendment of the fee schedule)",
+    "via": "page",
+    "verified": true
+   },
+   {
+    "url": "https://www.townofharrison.com/DocumentCenter/View/2118/Transfer-of-Title-Application",
+    "quote": "The Certificate shall indicate that as a result of a general inspection of the visible parts of the structure, no violations have been determined to have occurred and no unsafe conditions have been found, and that the existing use of the structure heretofore lawfully existed.",
+    "doc_date": "Form Revision 1, 04/25/2008 (PDF posted October 2024)",
+    "via": "pdf",
+    "verified": true
+   }
+  ],
+  "confidence": "high",
+  "notes": "Required by Harrison Code Chapter 15.08 (Certificates of Continued Occupancy): no one may occupy a building after it is sold until the construction official issues a certificate of continued occupancy; conveyances by court order and between spouses or parents and children are exempt. Code section 15.08.090 also has the tax collector print a CCO notice on tax searches. Fees: the construction fee schedule (section 15.04.040, last amended by Ord. 1523 on December 17, 2024) sets $75.00 per unit for a Transfer of Title or Change in Tenancy CO for R-2, R-3 and R-4 use groups; the older Chapter 15.08 (1994) still lists a $15.00 per residential unit application fee, so ask whether both apply. The code is quoted from Municode's data service for the official Harrison Municipal Code (readable at https://library.municode.com/nj/harrison/codes/code_of_ordinances); that page loads by script, so the data address is cited. The Transfer of Title Application has a blank fee line and lists 318 Harrison Ave; the Town page now gives the Construction & Engineering office as 401 Warren Street, 2nd Floor. The Construction Official is Rocco Russomanno (Municipal Engineer and Construction Official, rrussomanno@townofharrison.com). Harrison also requires a Tenant Occupancy Application for new tenants; that is a rental program."
+ },
+ "fire_cert": {
+  "requirements": [],
+  "authorities": [
+   {
+    "name": "Harrison Fire Department, Fire Prevention Bureau",
+    "type": "municipal_fire_bureau",
+    "area_served": "Entire town",
+    "lead_time": "",
+    "fees": [],
+    "how_to_apply": "Contact the Fire Prevention Bureau at 634 Sussex Street. The Town's Transfer of Title Application includes a Fire Department smoke detector sign-off line, so the smoke/CO check is tied to the resale CO. No smoke/CO certificate form or fee was found online.",
+    "application_url": "",
+    "department_url": "https://townofharrison.com/151/Fire-Department",
+    "phone": "973-483-3039",
+    "email": "gkondek@townofharrison.com",
+    "contact_name": "George Kondek",
+    "contact_title": "Fire Official",
+    "evidence": [
+     {
+      "url": "https://townofharrison.com/151/Fire-Department",
+      "quote": "Fire Prevention Bureau Phone: 973-483-3039",
+      "doc_date": "2026-09 (page checked 2026-09-30)",
+      "via": "page",
+      "verified": true
+     },
+     {
+      "url": "https://townofharrison.com/151/Fire-Department",
+      "quote": "George Kondek Fire Official",
+      "doc_date": "2026-09",
+      "via": "page",
+      "verified": true
+     },
+     {
+      "url": "https://api.municode.com/CodesContent?jobId=481661&nodeId=TIT8HESA_CH8.08UNFISAACEN&productId=16390",
+      "quote": "The local enforcing agency shall be the fire prevention bureau, which is an existing ... fire prevention office in the Harrison fire department.",
+      "doc_date": "Ord. 868, 1992",
+      "via": "page",
+      "verified": true
+     },
+     {
+      "url": "https://www.townofharrison.com/DocumentCenter/View/2118/Transfer-of-Title-Application",
+      "quote": "Fire Dept: (Smoke Detector)",
+      "doc_date": "Form Revision 1, 04/25/2008",
+      "via": "pdf",
+      "verified": true
+     },
+     {
+      "url": "https://nj.gov/dca/dfs/pdf/ANNUAL%20REGISTRY/THIRD%20QUARTER%20LEA%20REGISTRY%202026.pdf",
+      "quote": "F Harrison Town",
+      "doc_date": "2026-07",
+      "via": "pdf",
+      "verified": true
+     },
+     {
+      "url": "https://www.nj.gov/dca/dfs/pdf/fire%20directory_county%20summary/fire_code_enforcement_director.pdf",
+      "quote": "LEAID: 0904-001 Enf Auth. Fire Dept Fire Official George P Kondek Phone (973) 483-3039 Email gkondek@townofharrison.com",
+      "doc_date": "2026-07-22 (survey date)",
+      "via": "state_directory",
+      "verified": true
+     }
+    ],
+    "confidence": "medium"
+   }
+  ],
+  "notes": "The Harrison Fire Department's Fire Prevention Bureau is the local fire enforcing agency (Code section 8.08.020; DCA registry code F Harrison Town). The leads file listed code D and the name Harrison Township, which is a different town (Gloucester County); the July 2026 registry lists Harrison Town (Hudson) as F. No smoke/CO certificate fee, form or local requirement was found on the Town site or in the Town code (the fire code chapter only says permit fees follow the Uniform Fire Code). The Fire Official's email comes from the state directory (survey July 22, 2026); the Town page lists his name and the Bureau phone but no email."
+ },
+ "other_items": [
+  {
+   "label": "Open permits and penalties",
+   "detail": "The Transfer of Title Application's office section checks open permits, monetary penalties and State Housing violations and registration before the certificate is signed.",
+   "source_url": "https://www.townofharrison.com/DocumentCenter/View/2118/Transfer-of-Title-Application"
+  },
+  {
+   "label": "Lead-safe certification",
+   "detail": "The Transfer of Title Application includes a line for Lead Certification Compliance per N.J.A.C. 5:28A.",
+   "source_url": "https://www.townofharrison.com/DocumentCenter/View/2118/Transfer-of-Title-Application"
+  }
+ ],
+ "open_questions": [
+  "Is the Transfer of Title CO fee $75.00 per unit only, or is the $15.00 per unit Chapter 15.08 application fee also charged?",
+  "What does the Fire Prevention Bureau charge for the smoke/CO certificate on a 1-2 family sale, and how far ahead must it be requested?"
+ ],
+ "verification": {
+  "fees": 4,
+  "fee_ok": 4,
+  "fee_bad": 0,
+  "fee_unchecked": 0,
+  "quotes": 13,
+  "q_ok": 13,
+  "q_bad": 0,
+  "q_unchecked": 0
+ }
+}

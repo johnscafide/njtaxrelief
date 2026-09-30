@@ -38,7 +38,8 @@ COLS = ["municipality_code", "municipality_name", "county", "requirement_key", "
         "application_url", "department_url", "source_urls", "source_excerpt", "source_hash", "last_verified_at", "metadata", "curated_note"]
 ROW_KEY = re.compile(r"^  \(\$t\$(\d{4})\$t\$, .*?, \$t\$(resale_cco|smoke_fire_cert)\$t\$, ")
 # Research notes sometimes point at their own JSON sections; agents see plain words instead.
-INTERNAL_WORDS = [(re.compile(r"\bfire_cert\b"), "the fire certificate"), (re.compile(r"\bresale_co\b"), "the town certificate")]
+INTERNAL_WORDS = [(re.compile(r"\bfire_cert\b"), "the fire certificate"), (re.compile(r"\bresale_co\b"), "the town certificate"),
+                  (re.compile(r"\bother_items\b"), "the \"Also\" lines")]
 EXTINGUISHER_NOTE = ("State rule: a 2025 law (P.L.2025, c.19) dropped the fire extinguisher from the state requirement. "
                      "Follow the town's current form, which may still list one.")
 
@@ -303,6 +304,7 @@ def self_test() -> None:
     assert sql.count("$j$") % 2 == 0 and sql.count("$t$") % 2 == 0
     assert clean("word " * 400, 50).endswith("…") and len(clean("word " * 400, 50)) <= 50
     assert clean("see fire_cert and resale_co") == "see the fire certificate and the town certificate"
+    assert clean("(see other_items)") == '(see the "Also" lines)'
     assert contact_line({"contact_name": "A B", "contact_title": "Fire Official (per the Borough's 2024 form)"}) == "Contact: A B, Fire Official"
     print(f"checked requirements self-test ok ({len(rows) // 2} towns, {len(rows)} rows)")
 

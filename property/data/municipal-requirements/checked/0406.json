@@ -13,27 +13,77 @@
   "fees": [],
   "how_to_apply": "",
   "application_url": "",
-  "department_url": "https://berlintwp.com/",
-  "phone": "",
+  "department_url": "https://berlintwp.com/planning-zoning-board/",
+  "contact_name": "Michael DePalma",
+  "contact_title": "Construction Official",
+  "phone": "856-767-1854",
   "email": "",
-  "evidence": [],
+  "evidence": [
+   {
+    "url": "https://berlintwp.com/planning-zoning-board/",
+    "quote": "Michael DePalma Construction Official",
+    "doc_date": "2026",
+    "via": "page",
+    "verified": true
+   },
+   {
+    "url": "https://berlintwp.com/contact/",
+    "quote": "Location: 135 Route 73 South West Berlin, NJ 08091 Telephone: 856-767-1854",
+    "doc_date": "",
+    "via": "page",
+    "verified": true
+   }
+  ],
   "confidence": "low",
-  "notes": "The Township website (berlintwp.com) has no construction, code enforcement or resale inspection page, and no resale certificate form was found. The Township's 2023 construction fee ordinance (https://berlintwp.com/wp-content/uploads/2023/08/7-3-2023.pdf) sets a $100.00 fee for a certificate of occupancy for residential R-3 and R-5 uses, but that is the construction-permit CO under the Uniform Construction Code, not a resale certificate, so it is not listed as a resale fee. Construction Official listed on the Planning/Zoning page: Greg Fusco. The Township code (ecode360 BE0574) could not be opened. Note: leads.json listed ecode360 BE0276, which is Berlin Borough's code, not Berlin Township's."
+  "notes": "Still not found in round 3. The Township website (berlintwp.com) has no construction, code enforcement or resale page and no resale certificate form. Round 3 searched the Township's WordPress media library and site search (resale, occupancy, smoke, certificate, inspection, rental, landlord) and read the text of about 200 posted minutes, agendas and ordinances (2020 to 2026): no resale CO or housing inspection ordinance was found. The only certificate of occupancy fee found ($100.00 for R-3 and R-5 in the 2023 construction fee ordinance, https://berlintwp.com/wp-content/uploads/2023/08/7-3-2023.pdf) is the Uniform Construction Code CO for permitted work, not a resale certificate. The Township has a Landlord Registration form (rentals only). Correction to round 2: the Planning and Zoning page lists Michael DePalma as Construction Official; Greg Fusco is listed as Engineer (round 2 had these swapped). Phone is the Township main line. The Township code (ecode360 BE0574) could not be opened."
  },
  "fire_cert": {
-  "requirements": [],
+  "requirements": [
+   "District web page (2016) says the resale inspection checks smoke detectors, carbon monoxide alarms and a fire extinguisher; state law dropped the extinguisher in 2025, so confirm the current rule with the district"
+  ],
   "authorities": [
    {
-    "name": "Berlin Township Fire District No. 1 (Board of Fire Commissioners)",
+    "name": "Berlin Township Fire District No. 1, Bureau of Fire Prevention",
     "type": "fire_district",
     "area_served": "Entire township (only one fire district is listed for Berlin Township)",
-    "lead_time": "",
-    "fees": [],
-    "how_to_apply": "No application or fee schedule was found online. The Township website links 'Berlin Township Fire Department' to www.westberlinfire.com, which now redirects to a Facebook page (West Berlin Fire Rescue). Contact the fire district directly.",
-    "application_url": "",
+    "lead_time": "More than 10 business days before the change of occupant for the lowest fee; form and check must be in before an appointment is made",
+    "fees": [
+     {
+      "label": "Request more than 10 business days before scheduling/change of occupant (2017 district form)",
+      "amount": "$45.00",
+      "quote": "1- More than 10 business days prior to scheduling/change of occupant(s):  $45.00",
+      "source_url": "https://web.archive.org/web/20190921045451/https://berlintwp.com/wp-content/uploads/2018/05/Smoke-Detector-Carbon-Monoxide-Detector-Application.pdf",
+      "verified": true
+     },
+     {
+      "label": "Request 4 to 10 business days before (2017 district form)",
+      "amount": "$90.00",
+      "quote": "2- 4 To 10 business days prior to scheduling/change of occupant(s) :  $90.00",
+      "source_url": "https://web.archive.org/web/20190921045451/https://berlintwp.com/wp-content/uploads/2018/05/Smoke-Detector-Carbon-Monoxide-Detector-Application.pdf",
+      "verified": true
+     },
+     {
+      "label": "Request fewer than 4 business days before (2017 district form)",
+      "amount": "$161.00",
+      "quote": "3- Fewer than four business days prior to the change of the occupant(s):  $161.00",
+      "source_url": "https://web.archive.org/web/20190921045451/https://berlintwp.com/wp-content/uploads/2018/05/Smoke-Detector-Carbon-Monoxide-Detector-Application.pdf",
+      "verified": true
+     },
+     {
+      "label": "Re-inspection (2017 district form)",
+      "amount": "$20.00",
+      "quote": "In the event that a re-inspection is required a fee of $20.00 shall be required.",
+      "source_url": "https://web.archive.org/web/20190921045451/https://berlintwp.com/wp-content/uploads/2018/05/Smoke-Detector-Carbon-Monoxide-Detector-Application.pdf",
+      "verified": true
+     }
+    ],
+    "how_to_apply": "Fill out the district's Application for Certification of Smoke Detector and Carbon Monoxide Alarm Compliance and send it with a check to the Bureau of Fire Prevention, Berlin Township Fire District #1, 186 Haddon Avenue, West Berlin, NJ 08091 (fax 856-767-2248). The completed form and check must be received before an appointment is scheduled. Fees are non-refundable. The only form found is a 2017 version once posted on the Township website (Internet Archive copy); confirm the current form and fees with the district.",
+    "application_url": "https://web.archive.org/web/20190921045451/https://berlintwp.com/wp-content/uploads/2018/05/Smoke-Detector-Carbon-Monoxide-Detector-Application.pdf",
     "department_url": "",
-    "phone": "",
-    "email": "",
+    "contact_name": "Joseph V Cornforth",
+    "contact_title": "Fire Official",
+    "phone": "856-767-1839",
+    "email": "firemarshal222@gmail.com",
     "evidence": [
      {
       "url": "https://nj.gov/dca/dfs/pdf/ANNUAL%20REGISTRY/THIRD%20QUARTER%20LEA%20REGISTRY%202026.pdf",
@@ -48,27 +98,62 @@
       "doc_date": "",
       "via": "page",
       "verified": true
+     },
+     {
+      "url": "https://web.archive.org/web/20190921045451/https://berlintwp.com/wp-content/uploads/2018/05/Smoke-Detector-Carbon-Monoxide-Detector-Application.pdf",
+      "quote": "Bureau of Fire Prevention Berlin Township Fire District #1 186 Haddon Avenue West Berlin, NJ  08091 Phone (856)767-1839",
+      "doc_date": "2017-12 (PDF last modified Dec 1, 2017; uploaded to the Township site 2018-05; Internet Archive capture Sept 21, 2019)",
+      "via": "pdf",
+      "verified": true
+     },
+     {
+      "url": "https://web.archive.org/web/20190921045451/https://berlintwp.com/wp-content/uploads/2018/05/Smoke-Detector-Carbon-Monoxide-Detector-Application.pdf",
+      "quote": "NOTE: COMPLETED FORM AND CHECK MUST BE SUBMITTED PRIOR TO SCHEDULING AN APPOINTMENT",
+      "doc_date": "2017-12",
+      "via": "pdf",
+      "verified": true
+     },
+     {
+      "url": "https://web.archive.org/web/20160318035219/http://westberlinfire.com/fire-prevention/",
+      "quote": "Inspect all homes for sale to ensure smoke detectors, carbon monoxide alarms, and fire extinguishers are installed and operating",
+      "doc_date": "2016-03 (Internet Archive capture of the West Berlin Fire Department site, which the Township links as its fire department)",
+      "via": "page",
+      "verified": null
+     },
+     {
+      "url": "https://www.nj.gov/dca/dfs/pdf/fire%20directory_county%20summary/fire_code_enforcement_director.pdf",
+      "quote": "LEAID: 0406-001 Enf Auth. District Fire Official Joseph V Cornforth Phone (856) 767-1839",
+      "doc_date": "2026-08-05 (fire department survey date)",
+      "via": "state_directory",
+      "verified": true
+     },
+     {
+      "url": "https://www.nj.gov/dca/dfs/pdf/fire%20directory_county%20summary/fire_code_enforcement_director.pdf",
+      "quote": "Email firemarshal222@gmail.com",
+      "doc_date": "2026-08-05 (fire department survey date)",
+      "via": "state_directory",
+      "verified": true
      }
     ],
     "confidence": "medium"
    }
   ],
-  "notes": "The NJ DCA Uniform Fire Code LEA Registry (July 2026) lists Berlin Township's local enforcing agency as a fire district (code D), and the DCA Local Government Services list of Camden County agencies names one district, Berlin Township Fire District No. 1. So the smoke/CO/extinguisher certificate should come from that district's fire prevention bureau, not the state. No fee schedule, form, phone or email for the district's fire prevention office was found on any official site."
+  "notes": "The NJ DCA Uniform Fire Code LEA Registry (July 2026) lists Berlin Township's local enforcing agency as a fire district (code D), and the DCA fire directory (survey 8/5/2026) lists Fire Official Joseph V Cornforth, 186 Haddon Ave, (856) 767-1839, firemarshal222@gmail.com (the same address is printed on the district's own form, so it is the office address, not a personal one). Fees come from the district's smoke/CO application once posted on berlintwp.com (file dated Dec 2017; Internet Archive copy of Sept 2019; the live file is gone). The amounts match the state default schedule, but they are quoted from the district's own form. www.westberlinfire.com now redirects to Facebook; its 2016 and 2019 archived pages describe the resale inspection but show no fees."
  },
  "other_items": [],
  "open_questions": [
-  "Does Berlin Township require a resale certificate of occupancy or housing inspection? Nothing found online; confirm with the Construction Office.",
-  "Berlin Township Fire District No. 1 smoke certificate fees, application form, phone and email were not found.",
-  "An unattributed ecode360 search snippet mentions a 'Township' smoke certificate fee of sixty dollars, but the snippet does not identify the town, so it was not used."
+  "Does Berlin Township require a resale certificate of occupancy or housing inspection? Nothing found online; ask the Construction Office.",
+  "Are the Fire District No. 1 fees still $45 / $90 / $161 with a $20 re-inspection (2017 form)? Is there a newer form?",
+  "Does the district still require a fire extinguisher at resale after the 2025 state law change?"
  ],
  "verification": {
-  "fees": 0,
-  "fee_ok": 0,
+  "fees": 4,
+  "fee_ok": 4,
   "fee_bad": 0,
   "fee_unchecked": 0,
-  "quotes": 2,
-  "q_ok": 2,
+  "quotes": 9,
+  "q_ok": 8,
   "q_bad": 0,
-  "q_unchecked": 0
+  "q_unchecked": 1
  }
 }
