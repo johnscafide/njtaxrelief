@@ -17,6 +17,8 @@ assert.match(fn, /applicationUrl=checked\?usableLink\(r\.application_url\):null/
 assert.match(fn, /filter\(\(s:Row\)=>usableLink\(s\?\.url\)\)/, 'official source links drop account and news pages');
 assert.match(fn, /details_checked:checked/, 'payload says whether a person checked the details');
 assert.match(fn, /const preserveExisting=!checked && \(/, 'a person-checked row always replaces older saved evidence');
+assert.match(fn, /says in writing that it does not require a resale certificate/, 'a checked "not required" town is described as the town states it');
+assert.doesNotMatch(fn.split('if(key==="resale_cco")')[1].split('}else{')[0].match(/checked\s*\?`[^`]*`/g).join(''), /parser/, 'checked rows never mention the scan parser');
 assert.doesNotMatch(fn, /application_url:r\.application_url/, 'raw application links never reach the payload');
 assert.doesNotMatch(fn, /r\.application_url\|\|/, 'raw application links never become the source link');
 
@@ -51,5 +53,26 @@ assert.match(migration, /coalesce\(t\.metadata->'unchecked'/, 'cleanup is safe t
 assert.match(migration, /and i\.payload \? 'requirement_state'/, 'hand-entered transaction evidence is untouched');
 assert.doesNotMatch(migration, /[–—]/, 'no em or en dashes in customer copy');
 assert.doesNotMatch(fn.match(/const note=[^\n]+/)[0], /[–—]/, 'no em or en dashes in customer copy');
+
+// ---------- where agents see checked towns ----------
+// Transactions evidence view: status comes from the checked state, contacts become links after escaping.
+const compact = read('transaction/evidence-compact-v3.js');
+assert.match(compact, /if\(p\.details_checked===true\)\{if\(fire\|\|p\.requirement_state==='explicit_required'\)return'Required'/, 'evidence view reads the checked state');
+assert.match(compact, /'Not required \(town says so\)':'Not confirmed, call the office'/, 'red-flag and not-required towns are never shown as Required');
+assert.match(compact, /linkify\(esc\(v\)\)/, 'phone and email links are added only after escaping');
+assert.match(compact, /watchdog:transaction-preflight-complete',function\(\)\{cache\.clear\(\)\}/, 'a finished sweep drops cached evidence');
+assert.match(read('transaction/command-center-polish.js'), /card\.dataset\.itemKey\)return group\.itemKeys\.indexOf/, 'deep links match evidence cards by item type');
+
+// Property Home: Pro+ server check, person-checked rows only.
+const homeRpc = read('supabase/migrations/20260930190500_watchdog_town_certificates.sql');
+assert.match(homeRpc, /security definer/, 'Home reads the service-only table through a definer function');
+assert.match(homeRpc, /not public\.has_watchdog_plan\('pro_plus'\)/, 'Home town certificates are Pro+ on the server');
+assert.match(homeRpc, /and r\.curated_override\s+and r\.metadata \? 'checked'/, 'Home shows person-checked rows only');
+assert.match(homeRpc, /revoke all on function public\.watchdog_town_certificates\(text\) from public, anon;/, 'signed-out visitors cannot call it');
+const homeTool = read('property/js/dashboard/tools/town-certificates.js');
+assert.match(homeTool, /rpc\('watchdog_town_certificates'/, 'Home card uses the Pro+ function');
+assert.match(homeTool, /linkify\(esc\(l\)\)/, 'Home card escapes before adding links');
+assert.doesNotMatch(homeTool, /wdai|wd-intelligence/, 'Home card is not a Watchdog Intelligence surface');
+assert.match(read('property/js/home.js'), /build: function \(r\) \{ return toolTownCertificates\(r\) \+ toolTitleEvidenceGraph\(r\)/, 'Home closing section shows the town certificate card first');
 
 console.log('Municipal requirements unchecked-text contract passed.');

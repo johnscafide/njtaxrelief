@@ -109,8 +109,12 @@ Deno.serve(async(req:Request)=>{
         if(explicit)description=checked
           ?`Official municipal source material contains affirmative resale/occupancy requirement language for ${r.municipality_name}. Review the exact requirements, fees and application evidence below and track completion before closing.`
           :`Official municipal source material contains affirmative resale/occupancy requirement language for ${r.municipality_name}.${note}`;
-        else if(process)description=`Watchdog found an official municipal resale/occupancy process for ${r.municipality_name}, but the source parser did not promote it to an unconditional requirement. Verify applicability for this transaction with the enforcing office.${note}`;
-        else description=`Watchdog has not obtained enough official municipal text to state that a resale/CO certificate is or is not required in ${r.municipality_name}. Verify with the municipality; missing web coverage is never treated as “not required.”`;
+        else if(process)description=checked
+          ?`${r.municipality_name} says in writing that it does not require a resale certificate for sales. The smoke / CO alarm certificate is still required. Confirm with the office if the lender or title company asks.`
+          :`Watchdog found an official municipal resale/occupancy process for ${r.municipality_name}, but the source parser did not promote it to an unconditional requirement. Verify applicability for this transaction with the enforcing office.${note}`;
+        else description=checked
+          ?`Watchdog checked ${r.municipality_name}'s official sources but could not confirm whether a resale certificate is required. Call the office before closing; the contact is listed below.`
+          :`Watchdog has not obtained enough official municipal text to state that a resale/CO certificate is or is not required in ${r.municipality_name}. Verify with the municipality; missing web coverage is never treated as “not required.”`;
       }else{
         if(explicit)description=`Official local material contains affirmative smoke/CO/fire compliance language tied to sale or change of occupancy in ${r.municipality_name}. Track the applicable inspection/certificate process before closing.${note}`;
         else if(process)description=`Watchdog found an official local smoke/CO/fire process for ${r.municipality_name}. Confirm how it applies to this property and whether it is handled separately or through the municipal occupancy process.${note}`;

@@ -10957,3 +10957,48 @@ body[data-sidebar-page="dashboard"] .wd-contextual-voice-open{
 
 /* ===== inlined property/css/watchdog-intelligence-voice.css ===== */
 .dwa-voice-button{display:inline-flex;align-items:center;justify-content:center;gap:7px;border:1px solid #cbd5e1;border-radius:11px;background:#fff;color:#0f172a;padding:9px 12px;font-weight:800;cursor:pointer;white-space:nowrap}.dwa-voice-button:hover{background:#f8fafc}.dwa-voice-button:disabled{opacity:.5;cursor:not-allowed}.dwa-voice-button.recording{border-color:#b91c1c;background:#fff1f2;color:#b91c1c}.dwa-voice-status{margin-top:7px;color:#64748b;font-size:11px;line-height:1.4}.dwa-voice-status[data-state="recording"]{color:#b91c1c;font-weight:700}.dwa-voice-status[data-state="ready"]{color:#0f766e;font-weight:700}.dwa-voice-status[data-state="error"]{color:#9a3412}.dwa-voice-message-tools{display:flex;align-items:center;gap:8px;flex-wrap:wrap;margin-top:10px;padding-top:9px;border-top:1px solid #edf1f5}.dwa-voice-message-tools button{display:inline-flex;align-items:center;gap:6px;border:1px solid #dbe3ec;background:#fff;border-radius:9px;padding:7px 9px;color:#334155;font-weight:800;cursor:pointer}.dwa-voice-message-tools button:disabled{opacity:.55;cursor:not-allowed}.dwa-voice-message-tools span{color:#64748b;font-size:11px}@media(max-width:720px){.dwa-compose-row{gap:8px}.dwa-voice-button{width:100%}.dwa-voice-message-tools{align-items:flex-start;flex-direction:column}}
+
+/* Town CO & fire certificate (Pro+ closing): person-checked town and fire certificate rules. */
+.tcx-tool{background:#fff;border:1px solid #dbe5ea;border-radius:20px;color:#17304e;margin:18px 0;padding:22px}
+.tcx-badge{color:#0c7777;font:800 12px 'Plus Jakarta Sans',sans-serif;letter-spacing:.1em;text-transform:uppercase}
+.tcx-intro h3{font:800 24px/1.15 'Plus Jakarta Sans',sans-serif;margin:6px 0 6px}
+.tcx-intro p,.tcx-when{color:#4d6275;font-size:14px;line-height:1.55;margin:0}
+.tcx-when{margin:14px 0 12px}
+.tcx-when b{color:#8c1d18}
+.tcx-grid{display:grid;gap:14px;grid-template-columns:repeat(2,minmax(0,1fr))}
+.tcx-card{background:#f8fafb;border:1px solid #e1e8ec;border-radius:16px;min-width:0;padding:16px}
+.tcx-card.flag{border-color:#efc4bf}
+.tcx-card-head{align-items:center;display:flex;flex-wrap:wrap;gap:8px;justify-content:space-between}
+.tcx-label{color:#5d7184;font-size:12px;font-weight:700;letter-spacing:.06em;text-transform:uppercase}
+.tcx-chip{border-radius:999px;font-size:12px;font-weight:700;padding:4px 10px}
+.tcx-chip.req{background:#fff4e0;color:#7a4b00}
+.tcx-chip.ok{background:#e6f4ea;color:#1e6b34}
+.tcx-chip.flag{background:#fdecea;color:#a3231b}
+.tcx-card h4{font:800 17px/1.3 'Plus Jakarta Sans',sans-serif;margin:10px 0 8px}
+.tcx-key{list-style:none;margin:0 0 12px;padding:0}
+.tcx-key li{align-items:flex-start;border-bottom:1px solid #e7edf0;display:grid;font-size:14px;gap:9px;grid-template-columns:18px minmax(0,1fr);line-height:1.5;padding:8px 0}
+.tcx-key li i{color:#6b7f90;font-size:13px;margin-top:4px;text-align:center}
+.tcx-key li span{overflow-wrap:anywhere}
+.tcx-key li.flag span{color:#8c1d18;font-weight:700}
+.tcx-key li.flag i{color:#b3261e}
+.tcx-key li.ok i{color:#1e7e34}
+.tcx-key li.contact i{color:#0c7777}
+.tcx-card a{color:#0c6f6f;font-weight:700;text-decoration:none}
+.tcx-card a:hover,.tcx-card a:focus-visible{text-decoration:underline}
+.tcx-card a[href^="tel:"]{white-space:nowrap}
+.tcx-fees{display:grid;gap:6px;margin:4px 0 10px}
+.tcx-fees>div{align-items:center;background:#fff;border:1px solid #e1e8ec;border-radius:10px;display:flex;gap:12px;justify-content:space-between;padding:8px 10px}
+.tcx-fees span{color:#4d6275;font-size:13px;line-height:1.4;min-width:0;overflow-wrap:anywhere}
+.tcx-fees b{flex:0 0 auto;font-size:14px;max-width:50%;text-align:right}
+.tcx-muted{color:#5d7184;font-size:13px;margin:4px 0 10px}
+.tcx-items{border-top:1px solid #e7edf0;padding-top:8px}
+.tcx-items summary{cursor:pointer;font-size:14px;font-weight:700;min-height:44px;display:flex;align-items:center}
+.tcx-items ul{margin:4px 0 8px;padding-left:20px}
+.tcx-items li{font-size:14px;line-height:1.5;margin:4px 0;overflow-wrap:anywhere}
+.tcx-links{display:flex;flex-wrap:wrap;gap:6px 14px;margin-top:10px}
+.tcx-links a{align-items:center;display:inline-flex;font-size:13px;gap:5px;min-height:44px}
+.tcx-loading,.tcx-msg{align-items:center;color:#4d6275;display:flex;flex-wrap:wrap;font-size:14px;gap:12px;margin-top:16px}
+.tcx-msg p{margin:0}
+.tcx-msg button{background:#17304e;border:0;border-radius:10px;color:#fff;cursor:pointer;font:700 13px 'Plus Jakarta Sans',sans-serif;min-height:44px;padding:0 16px}
+@media(max-width:760px){.tcx-tool{border-radius:18px;margin:14px -2px;padding:18px 15px}.tcx-intro h3{font-size:21px}.tcx-grid{grid-template-columns:1fr}}
+@media print{.tcx-tool{border:1px solid #999}.tcx-items{display:block}.tcx-links a{min-height:0}}
