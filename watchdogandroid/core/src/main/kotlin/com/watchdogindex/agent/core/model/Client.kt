@@ -38,7 +38,29 @@ data class ClientRow(
         ).joinToString(" · ")
 }
 
-enum class ClientFilter { All, PastClients, Sphere, CheckupReady }
+/** The Clients tab's chips. [key] is the web's `?filter=` value (`clients?filter=checkup`), the one routes and deep links carry. */
+enum class ClientFilter(val key: String) {
+    All("all"),
+    PastClients("past"),
+    Sphere("sphere"),
+    CheckupReady("checkup");
+
+    companion object {
+        /**
+         * The filter a route or link names, or null for a missing or unknown key (the screen then opens on its own
+         * state). Accepts the web keys, the enum names and the plural "checkups" the notification route words use.
+         */
+        fun fromKey(key: String?): ClientFilter? {
+            val k = key?.trim()?.lowercase()?.replace('-', '_') ?: return null
+            if (k.isEmpty()) return null
+            return entries.firstOrNull { it.key == k || it.name.lowercase() == k } ?: when (k) {
+                "checkups", "checkup_ready", "ready" -> CheckupReady
+                "past_clients", "past_client", "pastclients" -> PastClients
+                else -> null
+            }
+        }
+    }
+}
 
 data class CheckupSeason(
     /** "12 tax checkups ready to send" */

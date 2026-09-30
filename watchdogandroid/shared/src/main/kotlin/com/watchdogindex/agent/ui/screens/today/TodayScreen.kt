@@ -48,6 +48,7 @@ import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.dp
 import com.watchdogindex.agent.app.LocalAppGraph
 import com.watchdogindex.agent.app.screenViewModel
+import com.watchdogindex.agent.core.model.ClientFilter
 import com.watchdogindex.agent.core.model.PropertyChange
 import com.watchdogindex.agent.core.model.Relationship
 import com.watchdogindex.agent.core.model.TaskAction
@@ -425,24 +426,31 @@ private fun TodayError(
 private fun statusBarAllowance(): Dp =
     if (LocalBottomChromeInsets.current != null) 40.dp else WindowInsets.statusBars.asPaddingValues().calculateTopPadding()
 
-/** Where a task's trailing pill goes. Prefers the route the digest names; falls back on the action kind. */
+/**
+ * Where a task's trailing pill goes. Prefers the route the digest names ("clients?filter=checkup" opens Clients on
+ * the Checkup ready chip, as the web does); falls back on the action kind, where "Review" means the checkups.
+ */
 private fun TaskAction.route(): Route {
-    val named = route.orEmpty()
+    val named = route.orEmpty().removePrefix("/")
     return when {
-        named.startsWith("property/") -> Route.Property(named.removePrefix("property/"))
-        named.startsWith("clients") -> Route.Clients
+        named.startsWith("property/") -> Route.Property(named.removePrefix("property/").substringBefore('?'))
+        named.startsWith("clients") -> Route.Clients(ClientFilter.fromKey(named.queryValue("filter")))
         named.startsWith("marketing") -> Route.Marketing
         named.startsWith("farm") -> Route.Farm
         named.startsWith("intelligence") -> Route.Intelligence
         named.startsWith("scan") -> Route.Scan()
         else -> when (kind) {
-            TaskActionKind.Review -> Route.Clients
+            TaskActionKind.Review -> Route.Clients(ClientFilter.CheckupReady)
             TaskActionKind.Open -> Route.Marketing
-            TaskActionKind.Send -> Route.Clients
-            TaskActionKind.Call -> Route.Clients
+            TaskActionKind.Send -> Route.Clients()
+            TaskActionKind.Call -> Route.Clients()
         }
     }
 }
+
+/** The value of [key] in a route string's query ("clients?filter=checkup" → "checkup"), or null when it is not there. */
+private fun String.queryValue(key: String): String? =
+    substringAfter('?', "").split('&').firstOrNull { it.substringBefore('=') == key }?.substringAfter('=', "")?.takeIf { it.isNotEmpty() }
 
 /** A "Top changes" row opens the home when it has a PIN; a town-wide change opens the farm it touches, or a search. */
 private fun PropertyChange.route(): Route {

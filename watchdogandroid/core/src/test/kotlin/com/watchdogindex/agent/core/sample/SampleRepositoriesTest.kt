@@ -341,6 +341,22 @@ class SampleRepositoriesTest {
         assertTrue(repos.scan.history().size >= 4)
     }
 
+    @Test
+    fun `scan results carry whether the home is already saved`() = runTest {
+        val repos = SampleRepositories()
+        assertFalse(repos.scan.resolve(ScanInput.ListingUrl(SampleData.HARDING_LISTING_URL)).isSaved)
+        assertFalse(repos.scan.history().first().result.isSaved)
+
+        repos.properties.setSaved(SampleData.HARDING_PIN, true)
+        assertTrue(repos.scan.resolve(ScanInput.ListingUrl(SampleData.HARDING_LISTING_URL)).isSaved, "the scan reads the saved set, no detail lookup needed")
+        assertTrue(repos.scan.resolve(ScanInput.QrCode(SampleData.HARDING_PIN, null, null)).isSaved)
+        assertFalse(repos.scan.resolve(ScanInput.Address("27 Hamilton St")).isSaved)
+        // History reports the flag as it is now, so a home saved after its scan reads as saved and one removed reads as not.
+        assertTrue(repos.scan.history().first { it.result.property.pin == SampleData.HARDING_PIN }.result.isSaved)
+        repos.properties.setSaved(SampleData.HARDING_PIN, false)
+        assertFalse(repos.scan.history().first { it.result.property.pin == SampleData.HARDING_PIN }.result.isSaved)
+    }
+
     // ---------------------------------------------------------------- marketing
 
     @Test

@@ -209,6 +209,9 @@ class SampleRepositories(
             this.saved.update { if (saved) it + pin else it - pin }
         }
 
+        /** Whether [pin] is one of the agent's saved homes right now; the scan repository stamps its results with it. */
+        fun isSaved(pin: PamsPin): Boolean = pin in saved.value
+
         override suspend fun setWatched(pin: PamsPin, watched: Boolean) {
             latency()
             this.watched.update { if (watched) it + pin else it - pin }
@@ -227,7 +230,7 @@ class SampleRepositories(
 
         override suspend fun resolve(input: ScanInput): ScanResult {
             latency()
-            val result = when (input) {
+            val resolved = when (input) {
                 is ScanInput.ListingUrl -> pinIn(input.url)?.let { fromPin(it, fromSign = false) } ?: fromUrl(input.url, fromSign = false)
                 is ScanInput.QrCode -> {
                     // A PIN is checked first: a bare PIN contains '.', so it would otherwise be taken for a link.
@@ -240,13 +243,15 @@ class SampleRepositories(
                 }
                 is ScanInput.Address -> fromAddress(input.query)
             }
+            val result = resolved.copy(isSaved = properties.isSaved(resolved.property.pin))
             scans.update { listOf(ScanHistoryItem(result, SampleData.nowUtc.epochSeconds)) + it.filter { h -> h.result.property.pin != result.property.pin } }
             return result
         }
 
+        /** Newest first, each with its saved flag as it is now (a home saved after the scan reads as saved). */
         override suspend fun history(): List<ScanHistoryItem> {
             latency()
-            return scans.value
+            return scans.value.map { item -> item.copy(result = item.result.copy(isSaved = properties.isSaved(item.result.property.pin))) }
         }
 
         /**

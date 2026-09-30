@@ -23,7 +23,7 @@ fun ScreenHost(route: Route, navigator: Navigator) {
     when (route) {
         Route.Welcome -> WelcomeScreen(navigator)
         Route.Today -> TodayScreen(navigator)
-        Route.Clients -> ClientsScreen(navigator)
+        is Route.Clients -> ClientsScreen(navigator, route.filter)
         Route.Farm -> FarmScreen(navigator)
         Route.Marketing -> MarketingScreen(navigator)
         is Route.Property -> PropertyScreen(route.pin, navigator)

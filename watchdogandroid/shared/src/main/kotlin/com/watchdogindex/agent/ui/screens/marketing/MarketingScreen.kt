@@ -55,6 +55,7 @@ import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.dp
 import com.watchdogindex.agent.app.LocalAppGraph
 import com.watchdogindex.agent.app.screenViewModel
+import com.watchdogindex.agent.core.SiteLinks
 import com.watchdogindex.agent.core.format.Format
 import com.watchdogindex.agent.core.model.Account
 import com.watchdogindex.agent.core.model.Campaign
@@ -103,15 +104,9 @@ import com.watchdogindex.agent.ui.preview.LocalPreviewState
  * campaign cards, the true cost cards or the agent's public page, with the navigation bar and the "New card"
  * FAB. Campaigns are designed and sent in the web studio and only tracked here, so a campaign opens on the web.
  * The true cost share sheet is a modal sheet over the tab: share header, the card itself, the four share
- * targets and the contact card switch. Scroll padding is the mockup's 128 below (nav bar + 24).
+ * targets and the contact card switch. Scroll padding is the mockup's 128 below (nav bar + 24). Every site URL
+ * (the studio, the agent's portal, the profile page) comes from core's SiteLinks through the graph's config.
  */
-
-private const val SITE_ORIGIN = "https://www.watchdogindex.com"
-private const val SITE_LABEL = "watchdogindex.com"
-private const val POSTCARD_STUDIO_URL = "$SITE_ORIGIN/marketing-studio/postcards"
-private const val NEWSLETTER_STUDIO_URL = "$SITE_ORIGIN/newsletter-studio"
-/** Where the agent chooses their vanity link: the professional profile page is the one that edits the slug. */
-private const val PAGE_SETUP_URL = "$SITE_ORIGIN/account/professional-profile"
 
 /** The mockup's 24 dp between the last card and the navigation bar (`.scroll` bottom 128 = 104 + 24). */
 private val scrollBottomGap = 24.dp
@@ -124,6 +119,7 @@ fun MarketingScreen(navigator: Navigator) {
     val preview = LocalPreviewState.current
     val initialSheetPin = remember { preview?.openTrueCostSheetPin }
     val vm = screenViewModel { MarketingViewModel(graph.repos, initialSheetPin) }
+    val links = graph.config.links
     val state by vm.state.collectAsState()
     val c = WatchdogTheme.colors
     val snackbar = remember { SnackbarHostState() }
@@ -147,7 +143,7 @@ fun MarketingScreen(navigator: Navigator) {
                 onSearch = vm::focusCardSearch,
                 menuOpen = ready?.menuOpen == true,
                 onMenuOpen = vm::setMenuOpen,
-                onOpenStudio = { platform.openUrl(POSTCARD_STUDIO_URL) },
+                onOpenStudio = { platform.openUrl(links.postcardStudio) },
                 onRefresh = vm::refresh,
             )
         },
@@ -170,8 +166,9 @@ fun MarketingScreen(navigator: Navigator) {
                 MarketingTab.Campaigns -> CampaignsTab(
                     campaigns = s.campaigns,
                     contentPadding = contentPadding,
-                    onCampaign = { platform.openUrl(it.studioUrl()) },
-                    onOpenStudio = { platform.openUrl(POSTCARD_STUDIO_URL) },
+                    siteLabel = links.label,
+                    onCampaign = { platform.openUrl(it.studioUrl(links)) },
+                    onOpenStudio = { platform.openUrl(links.postcardStudio) },
                 )
                 MarketingTab.Cards -> CardsTab(
                     state = s,
@@ -183,6 +180,7 @@ fun MarketingScreen(navigator: Navigator) {
                 )
                 MarketingTab.MyPage -> MyPageTab(
                     account = s.account,
+                    links = links,
                     contentPadding = contentPadding,
                     onCopy = { url ->
                         platform.copyToClipboard("Your Watchdog page", url)
@@ -198,6 +196,7 @@ fun MarketingScreen(navigator: Navigator) {
         TrueCostSheet(
             sheet = sheet,
             platform = platform,
+            siteLabel = links.label,
             onDismiss = vm::closeSheet,
             onNotice = vm::notify,
             onQrOpen = { vm.setQrOpen(true) },
@@ -305,15 +304,16 @@ private fun MarketingTabs(selected: MarketingTab, onSelect: (MarketingTab) -> Un
 
 // ---------------------------------------------------------------------- Campaigns
 
-private fun Campaign.studioUrl(): String = when (kind) {
-    CampaignKind.Postcard -> POSTCARD_STUDIO_URL
-    CampaignKind.Email -> NEWSLETTER_STUDIO_URL
+private fun Campaign.studioUrl(links: SiteLinks): String = when (kind) {
+    CampaignKind.Postcard -> links.postcardStudio
+    CampaignKind.Email -> links.newsletterStudio
 }
 
 @Composable
 private fun CampaignsTab(
     campaigns: List<Campaign>,
     contentPadding: PaddingValues,
+    siteLabel: String,
     onCampaign: (Campaign) -> Unit,
     onOpenStudio: () -> Unit,
 ) {
@@ -334,7 +334,7 @@ private fun CampaignsTab(
         items(campaigns, key = { it.id }) { campaign ->
             CampaignCard(c = campaign, onClick = { onCampaign(campaign) }, modifier = Modifier.cardMargin())
         }
-        item(key = "studio") { StudioCard(onOpenStudio) }
+        item(key = "studio") { StudioCard(siteLabel = siteLabel, onOpenStudio = onOpenStudio) }
         item(key = "sources") {
             SourcesNote("Home counts come from the NJ MOD-IV tax list for each farm. Opens and replies come from the newsletter studio.")
         }
@@ -343,14 +343,14 @@ private fun CampaignsTab(
 
 /** Explains that campaigns are built on the web and tracked here, with a way into the studio. */
 @Composable
-private fun StudioCard(onOpenStudio: () -> Unit) {
+private fun StudioCard(siteLabel: String, onOpenStudio: () -> Unit) {
     val c = WatchdogTheme.colors
     val t = WatchdogTheme.type
     WdCard(modifier = Modifier.cardMargin()) {
         CardLabel("Built on the web")
         Text(text = "Campaigns start in the studio", modifier = Modifier.padding(top = 6.dp), color = c.ink, style = t.verdict)
         Text(
-            text = "Postcards and emails are designed and sent from the marketing studio on $SITE_LABEL. This tab tracks each " +
+            text = "Postcards and emails are designed and sent from the marketing studio on $siteLabel. This tab tracks each " +
                 "campaign’s proof, mailing date, opens and replies. Tap a campaign to open it there.",
             modifier = Modifier.padding(top = 6.dp),
             color = c.ink2,
@@ -447,12 +447,11 @@ private fun CardsTab(
 
 // ---------------------------------------------------------------------- My page
 
-/** The agent's public portal, `/agent/<slug>`, the same address the web page shares (`/agents/` is the trial landing page). */
-private fun agentPageUrl(slug: String): String = "$SITE_ORIGIN/agent/$slug"
-
+/** The agent's public portal (`SiteLinks.agentPage`, `/agent/<slug>`) and, without a slug yet, the way to set it up on the web. */
 @Composable
 private fun MyPageTab(
     account: Account?,
+    links: SiteLinks,
     contentPadding: PaddingValues,
     onCopy: (String) -> Unit,
     onOpen: (String) -> Unit,
@@ -470,9 +469,9 @@ private fun MyPageTab(
                     Text(text = brokerage, modifier = Modifier.padding(top = 2.dp), color = c.muted, style = t.body.sized(14, FontWeight.Medium, 19.6))
                 }
                 if (slug != null) {
-                    val url = agentPageUrl(slug)
+                    val url = links.agentPage(slug)
                     Text(
-                        text = "$SITE_LABEL/agent/$slug",
+                        text = links.agentPageLabel(slug),
                         modifier = Modifier.padding(top = 12.dp).semantics { contentDescription = "Your page link, $url" },
                         color = c.link,
                         style = t.body.sized(15, FontWeight.Bold, 21.0),
@@ -498,7 +497,7 @@ private fun MyPageTab(
                         color = c.ink2,
                         style = t.body.sized(14, FontWeight.Normal, 20.3),
                     )
-                    WdPrimaryButton(label = "Set up on the web", onClick = { onOpen(PAGE_SETUP_URL) }, modifier = Modifier.padding(top = 14.dp), icon = WdIcons.OpenInNew, small = true)
+                    WdPrimaryButton(label = "Set up on the web", onClick = { onOpen(links.professionalProfile) }, modifier = Modifier.padding(top = 14.dp), icon = WdIcons.OpenInNew, small = true)
                 }
             }
         }
@@ -582,6 +581,8 @@ private fun TrueCostCard.shareText(): String = buildString {
 private fun TrueCostSheet(
     sheet: TrueCostSheetState,
     platform: PlatformServices,
+    /** "watchdogindex.com", the site the share header names. */
+    siteLabel: String,
     onDismiss: () -> Unit,
     /** One-line snackbar feedback: "Link copied", or why a share target could not act yet. */
     onNotice: (String) -> Unit,
@@ -623,7 +624,7 @@ private fun TrueCostSheet(
         Column(modifier = Modifier.padding(start = 16.dp, end = 16.dp, bottom = 6.dp + chromeBottom)) {
             ShareSheetHeader(
                 title = if (card != null) card.shareTitle() else "True cost card",
-                subtitle = if (withContactCard) "$SITE_LABEL · with your contact card" else SITE_LABEL,
+                subtitle = if (withContactCard) "$siteLabel · with your contact card" else siteLabel,
                 onTrailing = copyLink,
             )
             when {

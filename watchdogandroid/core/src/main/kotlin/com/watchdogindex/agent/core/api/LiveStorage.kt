@@ -127,6 +127,8 @@ internal data class StoredScan(
     val priceCheckBody: String? = null,
     val priceCheckExpected: Int? = null,
     val matchLabel: String? = null,
+    /** The saved flag as it was at scan time; the repository refreshes it when it reads the history back. */
+    val isSaved: Boolean = false,
 ) {
     fun toModel() = ScanHistoryItem(
         result = ScanResult(
@@ -143,6 +145,7 @@ internal data class StoredScan(
                 PriceCheck(PriceCheckKind.entries.firstOrNull { it.name == kind } ?: PriceCheckKind.Unknown, priceCheckTitle ?: "", priceCheckBody ?: "", priceCheckExpected)
             },
             matchLabel = matchLabel,
+            isSaved = isSaved,
         ),
         scannedAtEpochSeconds = scannedAtEpochSeconds,
     )
@@ -155,6 +158,7 @@ internal data class StoredScan(
                 item.scannedAtEpochSeconds, p.pin, p.address, p.town, p.county, p.blockLot, p.score, p.taxBill, p.propertyClassLabel, p.lat, p.lon,
                 r.score, r.verdict, r.taxBillYear, r.taxBill, r.nextYear, r.nextYearBill, r.listPrice, r.priceSourceLabel,
                 r.priceCheck?.kind?.name, r.priceCheck?.title, r.priceCheck?.body, r.priceCheck?.expectedTax, r.matchLabel,
+                r.isSaved,
             )
         }
     }

@@ -12,17 +12,22 @@ import com.watchdogindex.agent.core.model.ScanHistoryItem
 import com.watchdogindex.agent.core.model.ScanInput
 import com.watchdogindex.agent.core.model.ScanResult
 import com.watchdogindex.agent.core.repo.ScanRepository
+import kotlinx.coroutines.CancellationException
 
 /**
  * Scan: a pasted listing link, a sign's QR code or a typed address becomes a parcel through the property route's
  * `?pin=` or `?address=&lat=&lon=` modes (the extension's request shapes, `extension/background.js:11-16`). The
  * list price is never read from a link, so the result asks for it; the price check runs once the agent adds it.
  * History is kept on the device (last 25, one per parcel).
+ *
+ * Every result says whether the home is already one of the agent's saved homes ([ScanResult.isSaved], from
+ * [properties]): one `saved_properties` lookup here instead of a whole property detail round-trip in the screen.
+ * A lookup that fails only means the bookmark starts unsaved (saving is idempotent), never that the scan is lost.
  */
-class LiveScanRepository(private val ctx: LiveContext) : ScanRepository {
+class LiveScanRepository(private val ctx: LiveContext, private val properties: LivePropertyRepository = LivePropertyRepository(ctx)) : ScanRepository {
 
     override suspend fun resolve(input: ScanInput): ScanResult {
-        val result = when (input) {
+        val resolved = when (input) {
             is ScanInput.ListingUrl -> resolvePayload(ListingLinks.parsePayload(input.url), lat = null, lon = null, fromSign = false)
             is ScanInput.QrCode -> resolvePayload(ListingLinks.parsePayload(input.payload), input.lat, input.lon, fromSign = true)
             is ScanInput.Address -> {
@@ -32,8 +37,17 @@ class LiveScanRepository(private val ctx: LiveContext) : ScanRepository {
                 ctx.mapper.scanResult(response, null, "Add the list price", if (response.confident) "Address matched to a parcel" else "Closest match · check the address")
             }
         }
+        val result = resolved.copy(isSaved = savedOrFalse(resolved.property.pin))
         remember(result)
         return result
+    }
+
+    private suspend fun savedOrFalse(pin: String): Boolean = try {
+        properties.isSaved(pin)
+    } catch (e: CancellationException) {
+        throw e
+    } catch (e: Exception) {
+        false
     }
 
     private suspend fun resolvePayload(payload: ListingLinks.Payload, lat: Double?, lon: Double?, fromSign: Boolean): ScanResult = when (payload) {
@@ -76,8 +90,19 @@ class LiveScanRepository(private val ctx: LiveContext) : ScanRepository {
         ctx.store.writeJson(LiveKeys.SCAN_HISTORY, StoredScanHistory(next.take(MAX_HISTORY)))
     }
 
-    override suspend fun history(): List<ScanHistoryItem> =
-        (ctx.store.readJson<StoredScanHistory>(LiveKeys.SCAN_HISTORY) ?: StoredScanHistory()).items.map { it.toModel() }
+    /** The stored scans, newest first, each with its saved flag refreshed in one request; the stored flag stands when that fails. */
+    override suspend fun history(): List<ScanHistoryItem> {
+        val items = (ctx.store.readJson<StoredScanHistory>(LiveKeys.SCAN_HISTORY) ?: StoredScanHistory()).items.map { it.toModel() }
+        if (items.isEmpty()) return items
+        val saved = try {
+            properties.savedPins(items.map { it.result.property.pin })
+        } catch (e: CancellationException) {
+            throw e
+        } catch (e: Exception) {
+            return items
+        }
+        return items.map { item -> item.copy(result = item.result.copy(isSaved = item.result.property.pin in saved)) }
+    }
 
     companion object {
         const val MAX_HISTORY = 25

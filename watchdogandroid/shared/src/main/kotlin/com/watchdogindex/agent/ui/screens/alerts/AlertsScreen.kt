@@ -146,7 +146,7 @@ fun AlertsScreen(navigator: Navigator) {
                             when (action.kind) {
                                 NotificationActionKind.OpenBrief -> navigator.open(Route.Intelligence)
                                 NotificationActionKind.ViewFarm -> navigator.open(Route.Farm)
-                                NotificationActionKind.SendCheckups -> navigator.open(Route.Clients)
+                                NotificationActionKind.SendCheckups -> navigator.open(Route.Clients(com.watchdogindex.agent.core.model.ClientFilter.CheckupReady))
                                 NotificationActionKind.Later -> vm.dismiss(notification.id)
                                 NotificationActionKind.Open -> navigator.open(notification.openRoute())
                                 NotificationActionKind.CallClient -> scope.launch {
@@ -155,7 +155,7 @@ fun AlertsScreen(navigator: Navigator) {
                                     when {
                                         phone != null -> platform.dial(phone)
                                         pin != null -> navigator.open(Route.Property(pin))
-                                        else -> navigator.open(Route.Clients)
+                                        else -> navigator.open(Route.Clients())
                                     }
                                 }
                             }
@@ -458,7 +458,7 @@ private fun AppNotification.openRoute(): Route {
     if (pin != null) return Route.Property(pin)
     return when (channel) {
         AlertChannel.FarmSalesAndDeeds -> Route.Farm
-        AlertChannel.ClientHomeChanges, AlertChannel.AppealDeadlines -> Route.Clients
+        AlertChannel.ClientHomeChanges, AlertChannel.AppealDeadlines -> Route.Clients()
         AlertChannel.TownRatesAndRevaluations -> Route.Search(townFromTitle())
         AlertChannel.MondayBrief -> Route.Intelligence
     }

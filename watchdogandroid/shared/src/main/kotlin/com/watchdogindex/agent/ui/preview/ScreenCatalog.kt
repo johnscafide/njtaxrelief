@@ -41,13 +41,16 @@ object ScreenCatalog {
     const val DENSITY = 2.625f
 
     val entries: List<CatalogEntry> = listOf(
+        // The passkey button is hidden until the backend supports WebAuthn (PlatformServices.supportsPasskeys is
+        // false everywhere for now), so the render leaves the mockup's passkey slot empty by policy.
         CatalogEntry("welcome", "Welcome and sign in", Route.Welcome),
         CatalogEntry("today", "Today", Route.Today, fullHeightDp = 1900),
         CatalogEntry("property", "Property detail", Route.Property("0409_285.14_9"), fullHeightDp = 2340),
-        CatalogEntry("scan", "Scan a listing", Route.Scan("https://www.zillow.com/homedetails/143-Harding-Rd-Red-Bank-NJ-07701"), fullHeightDp = 1100),
-        CatalogEntry("clients", "Clients", Route.Clients, fullHeightDp = 1300),
+        // Scan and Marketing do not scroll in the mockups (no -full captures exist), so they render the frame only.
+        CatalogEntry("scan", "Scan a listing", Route.Scan("https://www.zillow.com/homedetails/143-Harding-Rd-Red-Bank-NJ-07701")),
+        CatalogEntry("clients", "Clients", Route.Clients(), fullHeightDp = 1300),
         CatalogEntry("farm", "Farm map", Route.Farm),
-        CatalogEntry("marketing", "Marketing with share sheet", Route.Marketing, fullHeightDp = 1300),
+        CatalogEntry("marketing", "Marketing with share sheet", Route.Marketing),
         CatalogEntry("intelligence", "Watchdog Intelligence brief", Route.Intelligence, fullHeightDp = 1500),
         CatalogEntry("notifications", "Alerts", Route.Alerts),
         CatalogEntry("settings", "Settings", Route.Settings, fullHeightDp = 1200),

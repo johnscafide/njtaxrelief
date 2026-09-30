@@ -13,7 +13,10 @@ import com.watchdogindex.agent.core.model.PropertyDetail
 import com.watchdogindex.agent.core.model.PropertySummary
 import com.watchdogindex.agent.core.repo.PropertyRepository
 import kotlinx.datetime.Instant
+import kotlinx.serialization.json.JsonObject
 import kotlinx.serialization.json.buildJsonObject
+import kotlinx.serialization.json.contentOrNull
+import kotlinx.serialization.json.jsonPrimitive
 import kotlinx.serialization.json.put
 import kotlin.math.roundToInt
 
@@ -88,6 +91,18 @@ class LivePropertyRepository(private val ctx: LiveContext) : PropertyRepository 
     /** Only the `watch` row counts: it is the one [setSaved] creates and removes. */
     suspend fun isSaved(pin: PamsPin): Boolean =
         ctx.rest.select("saved_properties", "pams_pin", listOf("pams_pin" to "eq.$pin", "kind" to "eq.watch"), limit = 1, feature = "saved homes").isNotEmpty()
+
+    /**
+     * Which of [pins] have the `watch` row, in one request (`pams_pin=in.(...)`), for lists such as the scan
+     * history. Empty input asks nothing and returns nothing.
+     */
+    suspend fun savedPins(pins: Collection<PamsPin>): Set<PamsPin> {
+        val distinct = pins.map { it.trim() }.filter { it.isNotEmpty() }.distinct()
+        if (distinct.isEmpty()) return emptySet()
+        val list = distinct.joinToString(",") { "\"" + it.replace("\"", "") + "\"" }
+        val rows = ctx.rest.select("saved_properties", "pams_pin", listOf("pams_pin" to "in.($list)", "kind" to "eq.watch"), feature = "saved homes")
+        return rows.mapNotNull { (it as? JsonObject)?.get("pams_pin")?.jsonPrimitive?.contentOrNull }.toSet()
+    }
 
     /** Saved and with a preference row that is not paused; a preference row for an unsaved home produces no events. */
     suspend fun isWatched(pin: PamsPin): Boolean = isSaved(pin) && hasActivePreference(pin)

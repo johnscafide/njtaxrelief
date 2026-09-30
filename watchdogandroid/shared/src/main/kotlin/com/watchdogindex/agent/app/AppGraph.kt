@@ -4,6 +4,7 @@ import androidx.compose.runtime.Composable
 import androidx.compose.runtime.CompositionLocalProvider
 import androidx.compose.runtime.staticCompositionLocalOf
 import androidx.compose.ui.text.font.FontFamily
+import com.watchdogindex.agent.core.WatchdogConfig
 import com.watchdogindex.agent.core.model.AppThemeMode
 import com.watchdogindex.agent.core.repo.Repositories
 import com.watchdogindex.agent.design.ThemeMode
@@ -19,6 +20,9 @@ interface AppGraph {
     val repos: Repositories
     val platform: PlatformServices
     val fontFamily: FontFamily
+
+    /** The backend and site configuration the repositories run against; screens take public site links from `config.links`. */
+    val config: WatchdogConfig get() = WatchdogConfig.Production
 }
 
 val LocalAppGraph = staticCompositionLocalOf<AppGraph> { error("No AppGraph provided") }

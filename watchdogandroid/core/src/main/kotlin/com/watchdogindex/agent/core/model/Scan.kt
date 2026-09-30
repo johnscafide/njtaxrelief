@@ -32,6 +32,8 @@ data class ScanResult(
     val priceCheck: PriceCheck?,
     /** "For Sale sign · QR read · parcel matched" */
     val matchLabel: String?,
+    /** True when the home is already in the agent's clients (a saved home), so the bookmark starts filled without a second lookup. */
+    val isSaved: Boolean = false,
 )
 
 data class ScanHistoryItem(val result: ScanResult, val scannedAtEpochSeconds: Long)

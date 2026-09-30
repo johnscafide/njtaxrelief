@@ -33,11 +33,11 @@ import androidx.compose.ui.text.rememberTextMeasurer
 import androidx.compose.ui.unit.IntSize
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
-import com.watchdogindex.agent.core.format.Format
 import com.watchdogindex.agent.core.model.LatLng
 import com.watchdogindex.agent.core.model.MapLayer
 import com.watchdogindex.agent.core.model.MapParcel
 import com.watchdogindex.agent.core.model.ScoreBands
+import com.watchdogindex.agent.core.model.calloutLine
 import com.watchdogindex.agent.design.WatchdogColors
 import com.watchdogindex.agent.design.WatchdogTheme
 import com.watchdogindex.agent.platform.FarmMapState
@@ -741,7 +741,7 @@ private fun DrawScope.drawNewArea(points: List<Offset>, colors: WatchdogColors) 
     }
 }
 
-/** The callout above the selected parcel: address in 13 sp 800, "Score 72 · tax $11,284" in 12 sp 600. */
+/** The callout above the selected parcel: address in 13 sp 800, core's `MapParcel.calloutLine()` ("Score 72 · tax $11,284") in 12 sp 600. */
 private fun DrawScope.drawCallout(
     parcel: MapParcel,
     ring: List<Offset>,
@@ -751,7 +751,7 @@ private fun DrawScope.drawCallout(
     bodyStyle: TextStyle,
 ) {
     val title = measurer.measure(text = parcel.address, style = titleStyle)
-    val body = measurer.measure(text = calloutLine(parcel), style = bodyStyle)
+    val body = measurer.measure(text = parcel.calloutLine(), style = bodyStyle)
     val padX = 14.dp.toPx()
     val width = max(150.dp.toPx(), max(title.size.width, body.size.width) + padX * 2)
     val height = 46.dp.toPx()
@@ -783,13 +783,6 @@ private fun DrawScope.drawCallout(
     val textTop = boxTop + (height - textHeight) / 2f
     drawText(title, color = colors.ink, topLeft = Offset(left + padX, textTop))
     drawText(body, color = colors.muted, topLeft = Offset(left + padX, textTop + title.size.height))
-}
-
-/** "Score 72 · tax $11,284"; stores and unscored parcels say so instead of showing a blank. */
-fun calloutLine(parcel: MapParcel): String {
-    val score = parcel.score?.let { "Score $it" } ?: if (parcel.residential) "Not scored yet" else "Not a home"
-    val tax = parcel.taxBill?.let { " · tax ${Format.money(it)}" } ?: ""
-    return score + tax
 }
 
 private fun polygonPath(points: List<Offset>): Path = Path().apply {

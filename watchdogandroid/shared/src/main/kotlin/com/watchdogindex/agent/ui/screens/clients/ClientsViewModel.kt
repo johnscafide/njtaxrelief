@@ -21,11 +21,15 @@ import kotlinx.coroutines.launch
 /** How long typing pauses before the query is sent: one overview request per pause, not per keystroke. */
 private const val QUERY_DEBOUNCE_MS = 250L
 
-class ClientsViewModel(private val repos: Repositories) : ViewModel() {
+/** [initialFilter] is the chip the route asked for; the first load fetches that filter instead of All. */
+class ClientsViewModel(private val repos: Repositories, initialFilter: ClientFilter? = null) : ViewModel() {
     private val _state = MutableStateFlow<ClientsUiState>(ClientsUiState.Loading)
     val state: StateFlow<ClientsUiState> = _state.asStateFlow()
 
     private var loadJob: Job? = null
+
+    /** The filter the route last asked for: the first load opens on it, and only a different request changes the chip again. */
+    private var requestedFilter: ClientFilter? = initialFilter
 
     /** The reload waiting for the agent to pause typing; the next keystroke or any other reload cancels it. */
     private var queryJob: Job? = null
@@ -49,7 +53,7 @@ class ClientsViewModel(private val repos: Repositories) : ViewModel() {
         val previous = _state.value as? ClientsUiState.Ready
         queryJob?.cancel()
         loadJob?.cancel()
-        val filter = previous?.filter ?: ClientFilter.All
+        val filter = previous?.filter ?: requestedFilter ?: ClientFilter.All
         val query = previous?.query.orEmpty()
         loadJob = viewModelScope.launch {
             _state.value = when {
@@ -99,6 +103,18 @@ class ClientsViewModel(private val repos: Repositories) : ViewModel() {
     }
 
     // ------------------------------------------------------------------ filter, search, sort
+
+    /**
+     * A filter the route asks for (`Route.Clients(filter)`: Today's "Review" task, the Alerts "Send checkups" action,
+     * a `clients?filter=` link). Applied once per request: the same request again, which is what the screen sends
+     * when it re-enters composition on a tab switch or a rotation, changes nothing, so the agent's own chip choice
+     * survives. Null asks for nothing.
+     */
+    fun requestFilter(filter: ClientFilter?) {
+        if (filter == null || filter == requestedFilter) return
+        requestedFilter = filter
+        if (_state.value is ClientsUiState.Ready) setFilter(filter) else reload(keepContent = false, refreshing = false)
+    }
 
     fun setFilter(filter: ClientFilter) {
         val current = _state.value as? ClientsUiState.Ready ?: return

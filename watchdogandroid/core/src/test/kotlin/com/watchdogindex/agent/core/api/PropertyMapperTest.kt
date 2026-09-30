@@ -10,6 +10,7 @@ import kotlinx.coroutines.runBlocking
 import kotlinx.datetime.LocalDate
 import kotlin.test.Test
 import kotlin.test.assertEquals
+import kotlin.test.assertFalse
 import kotlin.test.assertFailsWith
 import kotlin.test.assertNotNull
 import kotlin.test.assertNull
@@ -126,6 +127,9 @@ class PropertyMapperTest {
         assertEquals("In line for this price", check.title)
         assertTrue(check.expectedTax!! in 10_700..10_800, "typical bill = price × ratio × rate: ${check.expectedTax}")
         assertNull(mapper.scanResult(response, null, "Add the list price", null).priceCheck)
+        // The saved flag is the repository's to supply; the mapper defaults it to false and passes it through.
+        assertFalse(scan.isSaved)
+        assertTrue(mapper.scanResult(response, null, "Add the list price", null, isSaved = true).isSaved)
     }
 
     @Test

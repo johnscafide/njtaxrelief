@@ -4,6 +4,7 @@ import androidx.compose.ui.geometry.Offset
 import androidx.compose.ui.geometry.Size
 import com.watchdogindex.agent.core.model.LatLng
 import com.watchdogindex.agent.core.model.MapLayer
+import com.watchdogindex.agent.core.model.calloutLine
 import com.watchdogindex.agent.core.sample.SampleData
 import kotlin.math.abs
 import kotlin.test.Test
@@ -113,11 +114,12 @@ class FarmMapGeometryTest {
 
     @Test
     fun calloutReadsLikeTheMockup() {
+        // The callout draws core's MapParcel.calloutLine(), the same line the farm sheet's rows show.
         val selected = assertNotNull(grid.byPin(SampleData.BIRCHWOOD_PIN))
         assertEquals("36 Birchwood Dr", selected.address)
-        assertEquals("Score 72 · tax $11,284", calloutLine(selected))
+        assertEquals("Score 72 · tax $11,284", selected.calloutLine())
         val store = grid.parcels.first { !it.residential }
-        assertTrue(calloutLine(store).startsWith("Not a home"))
+        assertTrue(store.calloutLine().startsWith("Not a home"))
     }
 
     @Test

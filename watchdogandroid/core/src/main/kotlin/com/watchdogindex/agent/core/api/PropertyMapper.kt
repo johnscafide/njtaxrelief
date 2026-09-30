@@ -191,8 +191,9 @@ class PropertyMapper(private val today: () -> LocalDate = { Clock.System.now().t
      * The Scan result: score, this year's bill, next year's at the new rate, the list price and the price check. The
      * server's `price_check` is used when it sent one (it ran with the same math); otherwise the check is computed
      * here from the Chapter 123 ratio, the latest rate and the bill, exactly as `api/watchdog-true-cost.js` does.
+     * [isSaved] is whether the home is already one of the agent's saved homes; the repository looks it up.
      */
-    fun scanResult(response: PropertyApi.Response, listPrice: Int?, priceSourceLabel: String, matchLabel: String?): ScanResult {
+    fun scanResult(response: PropertyApi.Response, listPrice: Int?, priceSourceLabel: String, matchLabel: String?, isSaved: Boolean = false): ScanResult {
         val row = response.property
         val derived = response.derived
         val summary = summary(response)
@@ -236,6 +237,7 @@ class PropertyMapper(private val today: () -> LocalDate = { Clock.System.now().t
             priceSourceLabel = priceSourceLabel,
             priceCheck = priceCheck,
             matchLabel = matchLabel,
+            isSaved = isSaved,
         )
     }
 

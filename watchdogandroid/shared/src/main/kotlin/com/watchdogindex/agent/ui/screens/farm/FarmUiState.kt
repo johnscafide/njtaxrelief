@@ -1,6 +1,5 @@
 package com.watchdogindex.agent.ui.screens.farm
 
-import com.watchdogindex.agent.core.format.Format
 import com.watchdogindex.agent.core.model.Farm
 import com.watchdogindex.agent.core.model.FarmStats
 import com.watchdogindex.agent.core.model.LatLng
@@ -98,15 +97,4 @@ sealed interface FarmUiState {
     }
 
     data class Error(val userMessage: String) : FarmUiState
-}
-
-/**
- * "Score 72 · tax $11,284"; stores and unscored parcels say so instead of showing a blank. The desktop map's
- * callout (preview/DesktopFarmMap.kt) formats the same line; both belong in core next to [MapParcel] so the
- * callout and the sheet row cannot drift apart. Internal until that promotion happens.
- */
-internal fun MapParcel.calloutLine(): String {
-    val scoreText = score?.let { "Score $it" } ?: if (residential) "Not scored yet" else "Not a home"
-    val taxText = taxBill?.let { " · tax ${Format.money(it)}" } ?: ""
-    return scoreText + taxText
 }

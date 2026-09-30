@@ -126,16 +126,22 @@ private val chipsTopPadding = 6.dp
 /** `.rows` margin-top 10 minus the 8 dp of slack below the chips. */
 private val listTopPadding = 2.dp
 
+/**
+ * [initialFilter] is the chip the route asks for (`Route.Clients(filter)`); the list opens on it, and a new filter
+ * arriving on the same screen (the Android host replaces the arguments of the Clients entry already on top)
+ * re-selects it once. Null leaves the tab on its own state.
+ */
 @Composable
-fun ClientsScreen(navigator: Navigator) {
+fun ClientsScreen(navigator: Navigator, initialFilter: ClientFilter? = null) {
     val graph = LocalAppGraph.current
     val platform = LocalPlatformServices.current
-    val vm = screenViewModel { ClientsViewModel(graph.repos) }
+    val vm = screenViewModel { ClientsViewModel(graph.repos, initialFilter) }
     val state by vm.state.collectAsState()
     val c = WatchdogTheme.colors
     val snackbar = remember { SnackbarHostState() }
     val ready = state as? ClientsUiState.Ready
 
+    LaunchedEffect(initialFilter) { vm.requestFilter(initialFilter) }
     LaunchedEffect(ready?.notice) {
         val notice = ready?.notice ?: return@LaunchedEffect
         snackbar.showSnackbar(notice)

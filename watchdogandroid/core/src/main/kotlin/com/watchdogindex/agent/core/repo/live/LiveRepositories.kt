@@ -163,7 +163,7 @@ class LiveRepositorySet(val context: LiveContext) : Repositories {
     override val auth = LiveAuthRepository(context, beforeSignOut = { alerts.forgetPushRegistration() })
     override val digest = LiveDigestRepository(context)
     override val properties = LivePropertyRepository(context)
-    override val scan = LiveScanRepository(context)
+    override val scan = LiveScanRepository(context, properties)
     override val clients = LiveClientsRepository(context)
     override val farm = LiveFarmRepository(context)
     override val marketing = LiveMarketingRepository(context)

@@ -77,8 +77,10 @@ import com.watchdogindex.agent.core.model.FarmStats
 import com.watchdogindex.agent.core.model.LatLng
 import com.watchdogindex.agent.core.model.MapLayer
 import com.watchdogindex.agent.core.model.MapParcel
+import com.watchdogindex.agent.core.model.MapZoom
 import com.watchdogindex.agent.core.model.ScoreBands
 import com.watchdogindex.agent.core.model.TileTint
+import com.watchdogindex.agent.core.model.calloutLine
 import com.watchdogindex.agent.design.WatchdogDimens
 import com.watchdogindex.agent.design.WatchdogTheme
 import com.watchdogindex.agent.design.icons.WdIcons
@@ -109,10 +111,7 @@ import com.watchdogindex.agent.ui.components.topSeparator
 import com.watchdogindex.agent.ui.nav.Navigator
 import com.watchdogindex.agent.ui.nav.Route
 import com.watchdogindex.agent.ui.nav.Tab
-import kotlin.math.PI
 import kotlin.math.abs
-import kotlin.math.cos
-import kotlin.math.pow
 
 /*
  * Farm (tab), spec §4.6: the platform map fills the screen; over it sit the elevated farm picker (top 48),
@@ -132,20 +131,11 @@ private val newJersey = LatLng(40.0583, -74.4057)
 private const val NEW_JERSEY_ZOOM = 8.0
 
 /*
- * Zoom convention. FarmMapState.zoom is a Web Mercator zoom over 256 dp tiles, so the ground covered by one dp
- * is 2π · 6 378 137 · cos(lat) / (256 · 2^zoom) metres. That is the convention Farm.zoom arrives in from both
- * repositories (LiveFarmRepository's extent table puts a 670 m farm at 16, which fills a 412 dp screen only
- * over 256 dp tiles; the sample farm's 15.6 likewise) and the one the desktop map projects with, so this screen
- * speaks it too. MapLibre's own zoom counts 512 px tiles and runs one level lower for the same scale: the
- * Android map adapter (app/FarmMapView) is where FarmMapState.zoom must be converted (zoom − 1 in, + 1 back
- * from onIdle), for this street zoom and for Farm.zoom alike, so that a platform exposing metresPerDp is not
- * needed here. Until it converts, the device opens one level tighter than the mockup.
+ * Zoom convention: core's MapZoom. FarmMapState.zoom, Farm.zoom and STREET_ZOOM are Web Mercator zooms over 256 dp
+ * tiles (the convention both repositories author and the desktop map projects with); the Android map adapter
+ * (app/FarmMapView) converts to and from MapLibre's 512 px-tile zoom at its boundary with MapZoom.toMapLibre and
+ * MapZoom.fromMapLibre, so this screen never sees MapLibre's numbers.
  */
-private const val MAP_TILE_DP = 256.0
-private const val EARTH_CIRCUMFERENCE_M = 2 * PI * 6_378_137.0
-
-/** Ground metres per dp at [lat] and [zoom] in the convention above (156 543 · cos(lat) / 2^zoom). */
-private fun metresPerDp(zoom: Double, lat: Double): Double = EARTH_CIRCUMFERENCE_M * cos(lat * PI / 180.0) / (MAP_TILE_DP * 2.0.pow(zoom))
 
 /** Street level, where an 18 m lot is about 28 dp wide as in the mockup's map, for opening on the spotlight home. */
 private const val STREET_ZOOM = 17.5
@@ -891,12 +881,12 @@ private fun MapParcel.centroid(): LatLng {
 }
 
 /**
- * The map centre that puts [anchor] [northOfCentreDp] above the middle of the map at [zoom] (in the zoom
- * convention documented at the top of this file): the centre sits that far south, so the anchor lands in
- * the middle of the strip the sheet leaves visible.
+ * The map centre that puts [anchor] [northOfCentreDp] above the middle of the map at [zoom] (in core's MapZoom
+ * convention): the centre sits that far south, so the anchor lands in the middle of the strip the sheet leaves
+ * visible.
  */
 private fun framedCenter(anchor: LatLng, zoom: Double, northOfCentreDp: Dp): LatLng {
-    val deltaLat = northOfCentreDp.value * metresPerDp(zoom, anchor.lat) / 111_320.0
+    val deltaLat = northOfCentreDp.value * MapZoom.metresPerDp(zoom, anchor.lat) / 111_320.0
     return LatLng(anchor.lat - deltaLat, anchor.lon)
 }
 

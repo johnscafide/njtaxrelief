@@ -7,7 +7,6 @@ import com.watchdogindex.agent.core.WatchdogException
 import com.watchdogindex.agent.core.api.ListingLinks
 import com.watchdogindex.agent.core.api.PropertyApi
 import com.watchdogindex.agent.core.format.Format
-import com.watchdogindex.agent.core.model.PamsPin
 import com.watchdogindex.agent.core.model.ScanHistoryItem
 import com.watchdogindex.agent.core.model.ScanInput
 import com.watchdogindex.agent.core.model.ScanResult
@@ -182,9 +181,8 @@ class ScanViewModel(
     fun closeHistory() = updateReady { it.copy(historyOpen = false) }
 
     /**
-     * Shows an earlier scan again, in paste mode with the panel inline. The panel appears at once; whether the
-     * home is already in the agent's clients follows from the repository, applied only while this home is
-     * still the one on screen.
+     * Shows an earlier scan again, in paste mode with the panel inline. The bookmark follows the item's own
+     * [ScanResult.isSaved], which the repository refreshed when it listed the history.
      */
     fun showHistoryItem(item: ScanHistoryItem) {
         resolveJob?.cancel()
@@ -197,14 +195,9 @@ class ScanViewModel(
                 resolving = false,
                 error = null,
                 result = item.result,
-                saved = false,
+                saved = item.result.isSaved,
                 url = "",
             )
-        }
-        val pin = item.result.property.pin
-        resolveJob = viewModelScope.launch {
-            val saved = isSaved(pin)
-            if (saved) updateReady { if (it.result?.property?.pin == pin) it.copy(saved = true) else it }
         }
     }
 
@@ -220,9 +213,9 @@ class ScanViewModel(
         resolveJob = viewModelScope.launch {
             try {
                 val result = repos.scan.resolve(input)
-                val saved = isSaved(result.property.pin)
                 if (fromCamera) platform.haptic(Haptic.Success)
-                updateReady { it.copy(resolving = false, result = result, saved = saved, error = null, sheetOpen = fromCamera && it.mode == ScanMode.Camera) }
+                // The repository says whether the home is already in the agent's clients; no detail round-trip needed.
+                updateReady { it.copy(resolving = false, result = result, saved = result.isSaved, error = null, sheetOpen = fromCamera && it.mode == ScanMode.Camera) }
             } catch (e: CancellationException) {
                 throw e
             } catch (e: Exception) {
@@ -230,19 +223,6 @@ class ScanViewModel(
                 updateReady { it.copy(resolving = false, error = classify(e, input)) }
             }
         }
-    }
-
-    /**
-     * Whether the home is already in the agent's clients. [ScanResult] carries no saved flag, so the property
-     * detail supplies it; a failed lookup only means the bookmark starts unsaved (saving is idempotent), never
-     * that the scan result is lost. A `ScanResult.isSaved` from core would make this call unnecessary.
-     */
-    private suspend fun isSaved(pin: PamsPin): Boolean = try {
-        repos.properties.detail(pin).isSaved
-    } catch (e: CancellationException) {
-        throw e
-    } catch (e: Exception) {
-        false
     }
 
     private fun classify(e: Exception, input: ScanInput): ScanError = when (e) {
