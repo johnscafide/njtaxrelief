@@ -6,6 +6,7 @@ on:
     paths:
       - 'supabase/functions/workbench-score/**'
       - 'property/scripts/precompute_scores.py'
+      - 'property/scripts/db_brake.py'
       - 'property/tests/score-precompute-contract.mjs'
       - 'property/tests/watchdog-score-certified-ratio-contract.mjs'
       - 'chapter123-ratios-2026.json'
@@ -15,6 +16,7 @@ on:
     paths:
       - 'supabase/functions/workbench-score/**'
       - 'property/scripts/precompute_scores.py'
+      - 'property/scripts/db_brake.py'
       - 'property/tests/score-precompute-contract.mjs'
       - 'property/tests/watchdog-score-certified-ratio-contract.mjs'
       - 'chapter123-ratios-2026.json'
@@ -34,3 +36,11 @@ jobs:
           node property/tests/score-precompute-contract.mjs
           node property/tests/watchdog-score-certified-ratio-contract.mjs
           node property/tests/prelaunch-audit-78-contract.mjs
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - name: Precompute and database brake self-tests (offline)
+        run: |
+          python -m pip install --disable-pip-version-check requests
+          python property/scripts/db_brake.py
+          python property/scripts/precompute_scores.py --self-test

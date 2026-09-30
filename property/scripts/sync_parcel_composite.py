@@ -10,6 +10,11 @@ through the service-only sync_parcel_batch() database function.
 - Polite: at most --rps requests per second to the state service.
 - Resumable: progress is saved in parcel_sync_runs after every page; a new run
   for the same scope continues from the last saved OBJECTID.
+- Gentle on the database: every batch write waits for the shared brake
+  (db_brake.py). A failed write backs off before it is retried or split, and
+  BREAKER_LIMIT failures in a row stop the run (status "stopped", exit code 2)
+  with its progress saved. sync_parcel_batch() skips parcels that have not
+  changed, so rows_written counts only rows the database really wrote.
 - Scope: --county limits the run to one county (use it for the first check).
 
 Environment: SUPABASE_URL, SUPABASE_SERVICE_ROLE_KEY (not needed for --dry-run
@@ -20,6 +25,7 @@ from __future__ import annotations
 import argparse
 import json
 import os
+import re
 import sys
 import time
 from datetime import date
@@ -27,11 +33,20 @@ from urllib.parse import urlencode
 
 import requests
 
+from db_brake import Brake, Breaker, Overloaded
+
 SERVICE = "https://maps.nj.gov/arcgis/rest/services/Framework/Cadastral/MapServer/0/query"
 SOURCE = "NJ Office of GIS Parcels and MOD-IV Composite"
 PAGE_SIZE = 1000
 BATCH = 500
 MIN_BATCH = 50
+# A write that timed out may still be running on the server. On 2026-09-30
+# resending at once (halved) stacked lock waits until the database went down,
+# so a failed write first backs off (15 s, 30 s, 60 s, then 120 s) and waits
+# for the brake; BREAKER_LIMIT failures in a row stop the run.
+BACKOFF_FIRST = 15.0
+BACKOFF_MAX = 120.0
+BREAKER_LIMIT = 4
 # Owner fields are deliberately absent: OWNER_NAME and the owner's mailing
 # address (ST_ADDRESS, CITY_STATE, ZIP5, ZIP_CODE, ZIP_PLUS4). ZIP5/ZIP_CODE
 # are the owner's mailing ZIP, not the property's, so no ZIP is loaded.
@@ -121,11 +136,44 @@ def normalize(a: dict) -> dict | None:
     }
 
 
+def write_failure_kind(exc: Exception) -> str | None:
+    """Name a failed batch write, or None when retrying cannot help (e.g. a 400)."""
+    if isinstance(exc, requests.Timeout):
+        return "client timeout"
+    if isinstance(exc, requests.RequestException):
+        return "connection error"
+    text = str(exc)
+    if "57014" in text or "statement timeout" in text.lower():
+        return "statement timeout"
+    status = re.match(r"rpc \S+ (\d{3})\b", text)
+    if status and status.group(1).startswith("5"):
+        return "server error"
+    return None
+
+
+def after_write_failure(kind: str | None, rows: int, failures: int) -> tuple[str, float]:
+    """What to do after the `failures`-th failed write in a row.
+
+    Returns (action, pause). "raise": not retryable. Otherwise pause for
+    `pause` seconds, wait for the brake, then "split" the batch (a statement
+    timeout on more than MIN_BATCH rows) or "retry" it as it is (server errors
+    and client timeouts point at load, not batch size). Never resends at once.
+    The Breaker, not this function, decides when to give up.
+    """
+    if kind is None:
+        return "raise", 0.0
+    pause = min(BACKOFF_FIRST * 2 ** max(failures - 1, 0), BACKOFF_MAX)
+    return ("split" if kind == "statement timeout" and rows > MIN_BATCH else "retry"), pause
+
+
 class Supabase:
     def __init__(self, url: str, key: str):
         self.url = url.rstrip("/")
         self.s = requests.Session()
         self.s.headers.update({"apikey": key, "Authorization": f"Bearer {key}", "Content-Type": "application/json"})
+        self.brake = Brake(self.s, self.url, "sync")
+        self.breaker = Breaker("sync", limit=BREAKER_LIMIT)
+        self.sleep = time.sleep
 
     def rpc(self, name: str, payload: dict):
         r = self.s.post(f"{self.url}/rest/v1/rpc/{name}", data=json.dumps(payload), timeout=120)
@@ -133,31 +181,34 @@ class Supabase:
             raise RuntimeError(f"rpc {name} {r.status_code}: {r.text[:300]}")
         return r.json()
 
-    def write_rows(self, rows: list[dict], tries: int = 4) -> int:
-        """Write a batch; on a timeout or server error, pause and split it.
+    def write_rows(self, rows: list[dict]) -> int:
+        """Write a batch without piling onto a struggling database.
 
-        The database gives each write 8 seconds. As property_lookups grows,
-        an occasional large batch runs longer, so it is halved and retried
-        (down to MIN_BATCH rows) instead of stopping the whole sync.
+        Every attempt waits for the shared brake first. The database gives each
+        write 8 seconds, and a write that timed out may still be running there,
+        so a failed write is never resent at once: it backs off, waits for the
+        brake, then is retried or, after a statement timeout, halved (down to
+        MIN_BATCH rows). BREAKER_LIMIT failures in a row raise Overloaded
+        instead of splitting forever; run() then saves progress and stops.
         """
-        delay = 2.0
-        for attempt in range(tries):
+        while True:
+            self.brake.wait()
             try:
-                return int(self.rpc("sync_parcel_batch", {"p_rows": rows}) or 0)
+                written = int(self.rpc("sync_parcel_batch", {"p_rows": rows}) or 0)
             except (RuntimeError, requests.RequestException) as exc:
-                text = str(exc)
-                retryable = "57014" in text or "timeout" in text.lower() or " 5" in text[:40] or isinstance(exc, requests.RequestException)
-                if not retryable:
+                kind = write_failure_kind(exc)
+                action, pause = after_write_failure(kind, len(rows), self.breaker.fails + 1)
+                if action == "raise":
                     raise
-                if len(rows) > MIN_BATCH:
+                self.breaker.fail(f"{kind} writing {len(rows)} rows: {str(exc)[:200]}")
+                print(f"[sync] {kind} writing {len(rows)} rows; backing off {pause:.0f}s, then {'splitting' if action == 'split' else 'retrying'}", flush=True)
+                self.sleep(pause)
+                if action == "split":
                     mid = len(rows) // 2
-                    print(f"[sync] slow write of {len(rows)} rows; splitting", flush=True)
                     return self.write_rows(rows[:mid]) + self.write_rows(rows[mid:])
-                if attempt == tries - 1:
-                    raise
-                time.sleep(delay)
-                delay *= 2
-        return 0
+                continue
+            self.breaker.ok()
+            return written
 
     def select_run(self, scope: str):
         q = urlencode({"select": "*", "scope": f"eq.{scope}", "status": "in.(running,failed,stopped)", "order": "started_at.desc", "limit": "1"})
@@ -206,14 +257,31 @@ def fetch_json(session: requests.Session, params: dict, tries: int = 5):
     raise RuntimeError("unreachable")
 
 
-def run(args) -> dict:
+def save_progress(db, run_row, patch: dict) -> None:
+    """Best effort: a failed save must not hide why the run stopped.
+
+    Progress is also saved after every page, so the last saved OBJECTID
+    still holds when this one cannot be written.
+    """
+    if not (db and run_row):
+        return
+    try:
+        db.update_run(run_row["id"], patch)
+    except Exception as exc:  # noqa: BLE001 - report and keep the original error
+        print(f"[sync] could not save progress ({str(exc)[:200]}); the last saved OBJECTID still holds", flush=True)
+
+
+def run(args, db: Supabase | None = None, fetch=fetch_json) -> dict:
     scope = f"county:{args.county.upper()}" if args.county else "statewide"
     http = requests.Session()
     http.headers.update({"User-Agent": "WatchdogParcelSync/1.0 (+https://www.watchdogindex.com)"})
-    count = fetch_json(http, {"where": where_clause(args.county, 0), "returnCountOnly": "true", "f": "json"})["count"]
+    count = fetch(http, {"where": where_clause(args.county, 0), "returnCountOnly": "true", "f": "json"})["count"]
     print(f"[sync] {scope}: state service reports {count:,} parcels", flush=True)
 
-    db = None if args.dry_run else Supabase(os.environ["SUPABASE_URL"], os.environ["SUPABASE_SERVICE_ROLE_KEY"])
+    if args.dry_run:
+        db = None
+    elif db is None:
+        db = Supabase(os.environ["SUPABASE_URL"], os.environ["SUPABASE_SERVICE_ROLE_KEY"])
     run_row, after = None, 0
     if db:
         previous = db.select_run(scope) if args.resume else None
@@ -230,6 +298,7 @@ def run(args) -> dict:
     written = int(run_row.get("rows_written") or 0) if run_row else 0
     gap = 1.0 / max(args.rps, 0.1)
     started = time.time()
+    overloaded = None
     try:
         while True:
             if args.max_pages and pages >= args.max_pages:
@@ -238,7 +307,7 @@ def run(args) -> dict:
                     db.update_run(run_row["id"], {"status": "stopped", "last_objectid": after, "pages": pages, "rows_received": received, "rows_written": written})
                 break
             t0 = time.time()
-            data = fetch_json(http, {
+            data = fetch(http, {
                 "where": where_clause(args.county, after),
                 "outFields": ",".join(OUT_FIELDS),
                 "orderByFields": "OBJECTID ASC",
@@ -255,13 +324,17 @@ def run(args) -> dict:
             leaked = FORBIDDEN_FIELDS.intersection(*[set(a) for a in attrs[:1]])
             if leaked:
                 raise RuntimeError(f"owner fields returned unexpectedly: {sorted(leaked)}")
-            after = max(int(a.get("OBJECTID") or 0) for a in attrs)
+            page_last = max(int(a.get("OBJECTID") or 0) for a in attrs)
             rows = [r for r in (normalize(a) for a in attrs) if r]
-            received += len(attrs)
-            pages += 1
             if db:
                 for i in range(0, len(rows), BATCH):
                     written += db.write_rows(rows[i:i + BATCH])
+            # The cursor moves only once the whole page is written, so a run
+            # stopped mid-page re-reads that page instead of skipping its rest.
+            after = page_last
+            received += len(attrs)
+            pages += 1
+            if db:
                 db.update_run(run_row["id"], {"last_objectid": after, "pages": pages, "rows_received": received, "rows_written": written})
             if pages % 25 == 0 or pages == 1:
                 rate = received / max(time.time() - started, 1)
@@ -269,16 +342,23 @@ def run(args) -> dict:
             wait = gap - (time.time() - t0)
             if wait > 0:
                 time.sleep(wait)
+    except Overloaded as exc:
+        overloaded = exc
+        print(f"[sync] stopping to protect the database: {exc}; progress saved at OBJECTID {after:,}", flush=True)
+        save_progress(db, run_row, {"status": "stopped", "error": f"database overloaded: {exc}"[:500], "last_objectid": after, "pages": pages, "rows_received": received, "rows_written": written})
     except Exception as exc:
-        if db and run_row:
-            db.update_run(run_row["id"], {"status": "failed", "error": str(exc)[:500], "last_objectid": after, "pages": pages, "rows_received": received, "rows_written": written})
+        save_progress(db, run_row, {"status": "failed", "error": str(exc)[:500], "last_objectid": after, "pages": pages, "rows_received": received, "rows_written": written})
         raise
 
     summary = {"scope": scope, "source": SOURCE, "source_count": count, "pages": pages, "rows_received": received, "rows_written": written, "last_objectid": after, "run_id": run_row["id"] if run_row else None, "dry_run": bool(args.dry_run), "minutes": round((time.time() - started) / 60, 1)}
+    if overloaded:
+        summary["stopped"] = f"database overloaded: {overloaded}"
     print("[sync] summary " + json.dumps(summary), flush=True)
     if args.summary:
         with open(args.summary, "w") as fh:
             json.dump(summary, fh, indent=2)
+    if overloaded:
+        raise overloaded
     return summary
 
 
@@ -300,32 +380,150 @@ def self_test() -> None:
     assert normalize({"PAMS_PIN": ""}) is None and normalize({"PAMS_PIN": "BAD"}) is None
     assert not FORBIDDEN_FIELDS.intersection(OUT_FIELDS)
     assert "UPPER(COUNTY) = 'O''BRIEN'" in where_clause("o'brien", 5)
+
+    # Failed writes: classify, back off, never resend at once.
+    timeout_500 = 'rpc sync_parcel_batch 500: {"code":"57014","message":"canceling statement due to statement timeout"}'
+    assert write_failure_kind(RuntimeError(timeout_500)) == "statement timeout"
+    assert write_failure_kind(RuntimeError("rpc sync_parcel_batch 503: upstream connect error")) == "server error"
+    assert write_failure_kind(RuntimeError("rpc sync_parcel_batch 400: bad input")) is None
+    assert write_failure_kind(RuntimeError("rpc sync_parcel_batch 404: Could not find the function")) is None
+    assert write_failure_kind(requests.ReadTimeout("read timed out")) == "client timeout"
+    assert write_failure_kind(requests.ConnectionError("reset")) == "connection error"
+    assert after_write_failure(None, 500, 1) == ("raise", 0.0)
+    assert after_write_failure("statement timeout", 500, 1) == ("split", 15.0)
+    assert after_write_failure("statement timeout", 250, 2) == ("split", 30.0)
+    assert after_write_failure("statement timeout", MIN_BATCH, 3) == ("retry", 60.0), "never split below MIN_BATCH"
+    assert after_write_failure("server error", 500, 1) == ("retry", 15.0), "a 5xx means load, not batch size"
+    assert after_write_failure("client timeout", 500, 4) == ("retry", 120.0)
+    assert after_write_failure("connection error", 500, 9) == ("retry", BACKOFF_MAX), "backoff is capped"
+    assert all(after_write_failure(k, n, f)[1] >= BACKOFF_FIRST for k in ("statement timeout", "server error", "client timeout") for n in (50, 500) for f in (0, 1, 5))
+
+    class FakeBrake:
+        def __init__(self, log, trip_after=None):
+            self.log, self.trip_after, self.calls = log, trip_after, 0
+        def wait(self):
+            self.calls += 1
+            self.log.append("brake")
+            if self.trip_after is not None and self.calls > self.trip_after:
+                raise Overloaded("database still busy after 900s (7 queries waiting on disk)")
+
     class FakeDb(Supabase):
-        def __init__(self):
-            self.calls = []
+        def __init__(self, fail=None, brake_trips_after=None):
+            self.log, self.fail = [], fail or (lambda n, call: None)
+            self.brake = FakeBrake(self.log, brake_trips_after)
+            self.breaker = Breaker("sync-test", limit=BREAKER_LIMIT)
+            self.sleep = lambda s: self.log.append(("sleep", s))
         def rpc(self, name, payload):
             n = len(payload["p_rows"])
-            self.calls.append(n)
-            if n > 125:
-                raise RuntimeError('rpc sync_parcel_batch 500: {"code":"57014","message":"canceling statement due to statement timeout"}')
+            calls = sum(1 for e in self.log if isinstance(e, tuple) and e[0] == "rpc")
+            self.log.append(("rpc", n))
+            err = self.fail(n, calls)
+            if err:
+                raise err
             return n
-    fake = FakeDb()
-    assert fake.write_rows([{"pams_pin": f"0101_{i}_1"} for i in range(500)]) == 500, "slow batches split and still write every row"
-    assert max(c for c in fake.calls if c <= 125) <= 125
-    class BadDb(Supabase):
-        def __init__(self):
-            pass
-        def rpc(self, name, payload):
-            raise RuntimeError("rpc sync_parcel_batch 400: bad input")
+        def rpcs(self):
+            return [e[1] for e in self.log if isinstance(e, tuple) and e[0] == "rpc"]
+        def sleeps(self):
+            return [e[1] for e in self.log if isinstance(e, tuple) and e[0] == "sleep"]
+
+    def resends_wait(log):
+        """Every rpc after a failure is preceded by a backoff sleep and then a brake check."""
+        rpc_at = [i for i, e in enumerate(log) if isinstance(e, tuple) and e[0] == "rpc"]
+        for prev, cur in zip(rpc_at, rpc_at[1:]):
+            between = log[prev + 1:cur]
+            if any(isinstance(e, tuple) and e[0] == "sleep" for e in between):
+                assert between[-1] == "brake", "the brake is checked right before a resend"
+        return True
+
+    batch = [{"pams_pin": f"0101_{i}_1"} for i in range(500)]
+    fake = FakeDb(fail=lambda n, call: RuntimeError(timeout_500) if n > 125 else None)
+    assert fake.write_rows(batch) == 500, "slow batches split and still write every row"
+    assert fake.rpcs() == [500, 250, 125, 125, 250, 125, 125], fake.rpcs()
+    assert fake.sleeps() == [15.0, 30.0, 15.0], "backs off before every split; a success resets the backoff"
+    assert fake.log[0] == "brake" and fake.log.count("brake") == len(fake.rpcs()), "every attempt waits for the brake"
+    assert resends_wait(fake.log)
+
+    fake = FakeDb(fail=lambda n, call: RuntimeError(timeout_500))
     try:
-        BadDb().write_rows([{"pams_pin": "0101_1_1"}])
+        fake.write_rows(batch)
+        raise AssertionError("endless statement timeouts must stop the run")
+    except Overloaded as exc:
+        assert "4 failures in a row" in str(exc) and "statement timeout" in str(exc)
+    assert fake.rpcs() == [500, 250, 125, 62], "stops after BREAKER_LIMIT failures instead of splitting down forever"
+    assert fake.sleeps() == [15.0, 30.0, 60.0] and resends_wait(fake.log)
+
+    fake = FakeDb(fail=lambda n, call: RuntimeError("rpc sync_parcel_batch 503: upstream connect error"))
+    try:
+        fake.write_rows(batch)
+        raise AssertionError("a database that keeps failing must stop the run")
+    except Overloaded:
+        pass
+    assert fake.rpcs() == [500] * BREAKER_LIMIT, "server errors retry the same batch, never split"
+    assert fake.sleeps() == [15.0, 30.0, 60.0]
+
+    fake = FakeDb(fail=lambda n, call: requests.ReadTimeout("read timed out") if call == 0 else None)
+    assert fake.write_rows(batch) == 500
+    assert fake.rpcs() == [500, 500] and fake.sleeps() == [15.0] and resends_wait(fake.log), "a client timeout backs off, then resends the same rows"
+    assert fake.breaker.fails == 0, "a success resets the breaker"
+
+    fake = FakeDb(fail=lambda n, call: RuntimeError("rpc sync_parcel_batch 400: bad input"))
+    try:
+        fake.write_rows([{"pams_pin": "0101_1_1"}])
         raise AssertionError("non-retryable errors must surface")
     except RuntimeError as exc:
-        assert "400" in str(exc)
+        assert "400" in str(exc) and not isinstance(exc, Overloaded)
+    assert fake.rpcs() == [1] and fake.sleeps() == [] and fake.breaker.fails == 0
+
+    fake = FakeDb(brake_trips_after=0)
+    try:
+        fake.write_rows(batch)
+        raise AssertionError("a database that stays busy must stop the run")
+    except Overloaded:
+        pass
+    assert fake.rpcs() == [], "nothing is written while the brake says busy"
+
+    # run(): Overloaded saves the cursor of the last fully written page, marks
+    # the run stopped with the reason, writes the summary, and re-raises.
+    def page(first, n):
+        return {"features": [{"attributes": {"OBJECTID": first + i, "PAMS_PIN": f"0904_9_{first + i}", "PROP_LOC": f"{first + i} GRANT AVE"}} for i in range(n)]}
+
+    def fake_fetch(session, params):
+        if params.get("returnCountOnly"):
+            return {"count": 6}
+        after = int(params["where"].split("OBJECTID > ")[1].split()[0])
+        return page(after + 1, 3) if after < 6 else {"features": []}
+
+    class RunDb(FakeDb):
+        def __init__(self):
+            super().__init__(brake_trips_after=1)
+            self.patches = []
+        def select_run(self, scope):
+            return None
+        def insert_run(self, row):
+            return {"id": "run-1", **row}
+        def update_run(self, run_id, patch):
+            self.patches.append(patch)
+
+    import tempfile
+    db = RunDb()
+    with tempfile.TemporaryDirectory() as tmp:
+        summary_path = os.path.join(tmp, "summary.json")
+        args = argparse.Namespace(county=None, max_pages=0, rps=1000.0, resume=False, dry_run=False, summary=summary_path)
+        try:
+            run(args, db=db, fetch=fake_fetch)
+            raise AssertionError("run must re-raise Overloaded")
+        except Overloaded:
+            pass
+        with open(summary_path) as fh:
+            summary = json.load(fh)
+    last = db.patches[-1]
+    assert last["status"] == "stopped" and last["error"].startswith("database overloaded: database still busy"), last
+    assert last["last_objectid"] == 3 and last["pages"] == 1 and last["rows_received"] == 3 and last["rows_written"] == 3, "cursor stays at the last fully written page"
+    assert summary["last_objectid"] == 3 and summary["stopped"].startswith("database overloaded"), summary
     print("sync_parcel_composite self-test passed")
 
 
-def main() -> None:
+def main() -> int:
     p = argparse.ArgumentParser(description=__doc__, formatter_class=argparse.RawDescriptionHelpFormatter)
     p.add_argument("--county", help="Limit to one county, e.g. HUDSON")
     p.add_argument("--max-pages", type=int, default=0, help="Stop after this many pages (0 = no limit)")
@@ -337,8 +535,13 @@ def main() -> None:
     args = p.parse_args()
     if args.self_test:
         self_test()
-        return
-    run(args)
+        return 0
+    try:
+        run(args)
+    except Overloaded as exc:
+        print(f"::error::Statewide parcel sync stopped to protect the database: {exc}. Progress is saved; run it again with --resume (workflow: what=parcels, resume=true) once the database is quiet.", flush=True)
+        return 2
+    return 0
 
 
 if __name__ == "__main__":

@@ -34,12 +34,46 @@ assert.match(fn, /\{ score: value \?\? null \}/, 'precomputed bare scores become
 // an unfinished pass, and brakes itself instead of adding load (the Sept 28
 // outage came from two heavy jobs at once).
 assert.match(wf, /- cron: '41 \*\/6 \* \* \*'/, 'scores resume every 6 hours');
-assert.match(wf, /name: Sync parcels\n\s+if: \(github\.event_name == 'schedule' && github\.event\.schedule == '17 7 3 \* \*'\)/, 'only the monthly schedule syncs parcels');
+assert.match(wf, /name: Sync parcels\n(?:\s+#[^\n]*\n)*\s+if: \(github\.event_name == 'schedule' && github\.event\.schedule == '17 7 3 \* \*'\)/, 'only the monthly schedule syncs parcels');
 assert.match(wf, /group: parcel-composite-sync-/, 'one loader at a time: parcel sync and scoring never overlap');
 assert.match(wf, /--max-minutes 330/, 'stops cleanly before the job limit');
 assert.match(py, /run_row = api\.latest_run\(\)\n    if run_row:/, 'an unfinished pass is always resumed');
-assert.match(py, /while busy\(api\.db_load\(\), args\.max_active, args\.max_query_seconds\)/, 'waits while the database is busy');
-assert.match(py, /time\.sleep\(args\.pause\)/, 'rests between calls');
+assert.match(py, /sleep\(args\.pause\)/, 'rests between calls');
+
+// Sep 30 2026: lookup_sr1a_subject_evidence timed out on every batch page, the
+// function still cached 1,000 scores per page without SR-1A evidence for 40
+// days, and the job's brake failed open. Batch pages now fail closed and the
+// job uses the shared fail-closed brake (property/scripts/db_brake.py).
+const batch = (fn.match(/async function handleBatchPrecompute\([\s\S]*?\n\}\n/) || [''])[0];
+assert.ok(batch, 'handleBatchPrecompute is present');
+assert.match(fn, /const BATCH_RETRY_AFTER_SECONDS = 60;/);
+assert.match(batch, /try \{ subjects = await subjectEvidence\(admin, rows\); \} catch \(err\) \{\n\s+console\.error\([^\n]*\);\n\s+return out\(req, 503, \{ error: "subject_evidence_unavailable", retry_after_seconds: BATCH_RETRY_AFTER_SECONDS, next_after: after \|\| null \}\);\n\s+\}/, 'a failed SR-1A lookup returns 503 and writes nothing for the page');
+assert.doesNotMatch(batch, /subjectEvidenceStatus = "unavailable"/, 'batch never caches scores without subject evidence');
+assert.ok(batch.indexOf('"subject_evidence_unavailable"') < batch.indexOf('.upsert('), 'the 503 comes before any cache write');
+assert.match(batch, /done: rows\.length < limit/, 'cursor semantics unchanged on success');
+assert.match(fn, /try \{ subjects = await subjectEvidence\(admin, missing\); \} catch \(error\) \{ subjectEvidenceStatus = "unavailable";/, 'public on-demand scoring still degrades gracefully');
+assert.match(fn, /subjectEvidenceStatus = "unavailable";\n\s+console\.error\("SR-1A subject evidence lookup failed:", error\);/, 'signed-in on-demand scoring still degrades gracefully');
+
+assert.match(py, /from db_brake import [^\n]*\bBrake\b[^\n]*\bBreaker\b[^\n]*\bOverloaded\b/, 'uses the shared brake');
+assert.doesNotMatch(py, /def busy\(|def db_load\(/, 'the fail-open brake is gone');
+assert.match(py, /Brake\(api\.s, api\.url, "scores", max_wait=BRAKE_MAX_WAIT, limits=brake_limits\(args\.max_active, args\.max_query_seconds\)\)/, 'CLI limits feed the brake');
+assert.match(py, /default=LIMITS\["max_active"\]/);
+assert.match(py, /default=LIMITS\["max_query_seconds"\]/);
+const brakeSrc = fs.readFileSync('property/scripts/db_brake.py', 'utf8');
+assert.match(brakeSrc, /"max_active": 5,/, 'default: wait while more than 5 queries are active');
+assert.match(brakeSrc, /"max_query_seconds": 5(\.0)?,/, 'default: wait while a query has run longer than 5 s');
+assert.match(py, /brake_wait\(\)\n\s+res = api\.score_page\(after, args\.limit, brake_wait, breaker/, 'brakes before every page');
+assert.match(py, /sleep\(wait\)\n\s+brake_wait\(\)/, 'backs off and brakes before every retry');
+assert.match(py, /FAILURE_LIMIT = 3\b/);
+assert.match(py, /Breaker\("scores", limit=FAILURE_LIMIT\)/, 'three failed pages in a row stop the job');
+assert.match(py, /BACKOFF = \(30, 60, 120\)/);
+assert.match(py, /CALL_TIMEOUT = 90\b/);
+assert.match(py, /FATAL_STATUSES = \(400, 401, 403\)/, 'bad requests and tokens are not retried');
+assert.match(py, /except \(Overloaded, OutOfTime\) as exc:[\s\S]*?"status": "stopped", "error": reason\[:500\], "cursor": after/, 'an overload stop saves the reason and the cursor');
+assert.match(py, /EXIT_OVERLOADED = 75/);
+assert.match(py, /return exit_code\(run\(args\)\)/, 'an overload stop exits non-zero');
+assert.match(py, /"--self-test"/, 'offline self-test for the decision logic');
+assert.match(py, /if body\.get\("subject_evidence_status"\) != "unavailable":\n\s+breaker\.ok\(\)\n\s+return body/, 'a page scored without SR-1A evidence is never accepted');
 const load = fs.readFileSync('supabase/migrations/20260929160000_watchdog_db_load.sql', 'utf8');
 assert.match(load, /revoke all on function public\.watchdog_db_load\(\) from public, anon, authenticated;/);
 assert.match(load, /grant execute on function public\.watchdog_db_load\(\) to service_role;/);
