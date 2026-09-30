@@ -1,0 +1,74 @@
+{
+ "municipality_code": "0406",
+ "municipality": "Berlin Township",
+ "county": "CAMDEN",
+ "checked_at": "2026-09-30",
+ "resale_co": {
+  "status": "not_found",
+  "name": "",
+  "issued_by": "",
+  "lead_time": "",
+  "valid_for": "",
+  "requirements": [],
+  "fees": [],
+  "how_to_apply": "",
+  "application_url": "",
+  "department_url": "https://berlintwp.com/",
+  "phone": "",
+  "email": "",
+  "evidence": [],
+  "confidence": "low",
+  "notes": "The Township website (berlintwp.com) has no construction, code enforcement or resale inspection page, and no resale certificate form was found. The Township's 2023 construction fee ordinance (https://berlintwp.com/wp-content/uploads/2023/08/7-3-2023.pdf) sets a $100.00 fee for a certificate of occupancy for residential R-3 and R-5 uses, but that is the construction-permit CO under the Uniform Construction Code, not a resale certificate, so it is not listed as a resale fee. Construction Official listed on the Planning/Zoning page: Greg Fusco. The Township code (ecode360 BE0574) could not be opened. Note: leads.json listed ecode360 BE0276, which is Berlin Borough's code, not Berlin Township's."
+ },
+ "fire_cert": {
+  "requirements": [],
+  "authorities": [
+   {
+    "name": "Berlin Township Fire District No. 1 (Board of Fire Commissioners)",
+    "type": "fire_district",
+    "area_served": "Entire township (only one fire district is listed for Berlin Township)",
+    "lead_time": "",
+    "fees": [],
+    "how_to_apply": "No application or fee schedule was found online. The Township website links 'Berlin Township Fire Department' to www.westberlinfire.com, which now redirects to a Facebook page (West Berlin Fire Rescue). Contact the fire district directly.",
+    "application_url": "",
+    "department_url": "",
+    "phone": "",
+    "email": "",
+    "evidence": [
+     {
+      "url": "https://nj.gov/dca/dfs/pdf/ANNUAL%20REGISTRY/THIRD%20QUARTER%20LEA%20REGISTRY%202026.pdf",
+      "quote": "D Berlin Township",
+      "doc_date": "2026-07 (LEA registry as of June 30, 2026; key: D = District)",
+      "via": "pdf",
+      "verified": true
+     },
+     {
+      "url": "https://nj.gov/dca/divisions/dlgs/programs/lpcl_docs/cd_camden.docx",
+      "quote": "Berlin Township Fire District No. 1",
+      "doc_date": "",
+      "via": "page",
+      "verified": true
+     }
+    ],
+    "confidence": "medium"
+   }
+  ],
+  "notes": "The NJ DCA Uniform Fire Code LEA Registry (July 2026) lists Berlin Township's local enforcing agency as a fire district (code D), and the DCA Local Government Services list of Camden County agencies names one district, Berlin Township Fire District No. 1. So the smoke/CO/extinguisher certificate should come from that district's fire prevention bureau, not the state. No fee schedule, form, phone or email for the district's fire prevention office was found on any official site."
+ },
+ "other_items": [],
+ "open_questions": [
+  "Does Berlin Township require a resale certificate of occupancy or housing inspection? Nothing found online; confirm with the Construction Office.",
+  "Berlin Township Fire District No. 1 smoke certificate fees, application form, phone and email were not found.",
+  "An unattributed ecode360 search snippet mentions a 'Township' smoke certificate fee of sixty dollars, but the snippet does not identify the town, so it was not used."
+ ],
+ "verification": {
+  "fees": 0,
+  "fee_ok": 0,
+  "fee_bad": 0,
+  "fee_unchecked": 0,
+  "quotes": 2,
+  "q_ok": 2,
+  "q_bad": 0,
+  "q_unchecked": 0
+ }
+}

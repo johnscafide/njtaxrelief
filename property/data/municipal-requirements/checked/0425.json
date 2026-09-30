@@ -1,0 +1,202 @@
+{
+ "municipality_code": "0425",
+ "municipality": "Mount Ephraim Borough",
+ "county": "CAMDEN",
+ "checked_at": "2026-09-30",
+ "resale_co": {
+  "status": "required",
+  "name": "Resale Certificate of Occupancy (Certificate of Continued Occupancy)",
+  "issued_by": "Construction / Zoning / Code Enforcement Office",
+  "lead_time": "Application and fee must be received before an inspection can be scheduled; no set number of days published",
+  "valid_for": "",
+  "requirements": [
+   "Exterior: visible 911 house number, steps, walkways, ramps, guardrails, handrails",
+   "Exterior: obstructions and hazards, perimeter grading, gutters, spouts and splash blocks",
+   "Basement or crawl space: foundation openings, secure weatherproof accesses, vapor barrier, mold",
+   "Sump pump: electrical connection, backflow preventer, discharge",
+   "Interior: infestation (mice, insects), handrails, guardrails, bathroom venting (fan or window)",
+   "GFCI receptacles in kitchen and bath",
+   "Garage, flooring, kitchen, bath condition",
+   "Switch and receptacle covers, electrical fixtures, panel box and panel covers, A/C disconnect",
+   "Window glass, operable egress windows, window guards",
+   "Water heater: chimney connection, relief valve and floor discharge",
+   "Water pipes, drain pipes, fixtures, toilet mounting, hot and cold water controls",
+   "Heating system",
+   "All open permits must be closed before the CO is issued"
+  ],
+  "fees": [
+   {
+    "label": "Single family dwelling resale CO",
+    "amount": "$120.00",
+    "quote": "Single Family Dwelling RESALE FEE= $120.00",
+    "source_url": "https://web.archive.org/web/20211229005949/https://mountephraim-nj.com/wp-content/uploads/2021/10/Application-for-Resale-CO-inspection.pdf",
+    "verified": true
+   },
+   {
+    "label": "Certificate of continued occupancy, 1-2 family residence under 5,000 sq ft (Ordinance 2024-15)",
+    "amount": "$120",
+    "quote": "b) Fee for certificate of continued occupancy: $120.",
+    "source_url": "https://web.archive.org/web/20241112171805/https://mountephraim-nj.com/wp-content/uploads/2021/02/Ord.-2024-15-Construction-Codes-Uniform.pdf",
+    "verified": null
+   },
+   {
+    "label": "Reinspection, 1-2 family residence (Ordinance 2024-15 certificate of occupancy section)",
+    "amount": "$50",
+    "quote": "a) Minimum fee: $100; reinspection fee: $50.",
+    "source_url": "https://web.archive.org/web/20241112171805/https://mountephraim-nj.com/wp-content/uploads/2021/02/Ord.-2024-15-Construction-Codes-Uniform.pdf",
+    "verified": null
+   }
+  ],
+  "how_to_apply": "Complete the Application for Resale CO Inspection and submit it with the fee (cash or check payable to 'Borough of Mount Ephraim'). If mailing, address it to 'Attn: Construction', 121 S. Black Horse Pike, Mount Ephraim, NJ 08059. After the office receives the form and payment, call to schedule the inspection. Contact 856-931-1546 ext. 205 or tweiss@mountephraim-nj.com.",
+  "application_url": "",
+  "department_url": "https://www.mountephraim-nj.com/page/construction-office-zoning-resale-inspections/",
+  "phone": "856-931-1546 ext. 205",
+  "email": "tweiss@mountephraim-nj.com",
+  "evidence": [
+   {
+    "url": "https://web.archive.org/web/20211229005949/https://mountephraim-nj.com/wp-content/uploads/2021/10/Application-for-Resale-CO-inspection.pdf",
+    "quote": "*Please Note*: No CO will be issued until all open permits have been closed. Application and fee must be received prior to scheduling any inspection.",
+    "doc_date": "2021-10",
+    "via": "pdf",
+    "verified": true
+   },
+   {
+    "url": "https://web.archive.org/web/20211229010006/https://mountephraim-nj.com/wp-content/uploads/2021/10/Resale-Inspection-Checklist-003.pdf",
+    "quote": "REGISTRATION AND INSPECTION CHECKLIST FOR RESALE APPLICATION FOR CONTINUED CERTIFICATE OF OCCUPANCY $120.00 FOR INITIAL INSPECTION",
+    "doc_date": "2021-10",
+    "via": "pdf",
+    "verified": true
+   },
+   {
+    "url": "https://web.archive.org/web/20241112171805/https://mountephraim-nj.com/wp-content/uploads/2021/02/Ord.-2024-15-Construction-Codes-Uniform.pdf",
+    "quote": "Exceptions: one- and two-family residences less than 5,000 square feet in area and less than 30 feet in height. a) Minimum fee: $100; reinspection fee: $50. b) Fee for certificate of continued occupancy: $120.",
+    "doc_date": "2024-11 (introduced November 6, 2024; adoption date blank on this copy)",
+    "via": "pdf",
+    "verified": null
+   }
+  ],
+  "confidence": "medium",
+  "notes": "The borough's current website (www.mountephraim-nj.com, including the 'Construction Office, Zoning & Resale Inspections' page) is behind a bot challenge and could not be read. All evidence comes from Internet Archive copies of official borough PDFs: the October 2021 resale application and checklist, and Ordinance 2024-15 (Chapter 127 fees). The 2021 application also offers a 'Change of Ownership ONLY' certificate with no inspection, but states no one can occupy the property until the full CO is issued. The application points applicants to the Regional Fire Alliance for the separate smoke/CO/fire inspection. A current direct application link could not be confirmed, so application_url is left blank. Rental registration ordinances (2024-11, 2024-13) exist but were not reviewed."
+ },
+ "fire_cert": {
+  "requirements": [
+   "Smoke alarms by construction date: pre-1975 homes need 10-year sealed battery alarms on each level including basement; newer homes need AC powered interconnected alarms per the era table",
+   "All smoke alarms must be less than 10 years old; someone must take them down and check the date on the back, and undated alarms must be replaced",
+   "Low voltage (alarm company) fire alarm systems must be tested by an alarm contractor before inspection, with the certification shown to the inspector",
+   "CO alarm within 10 feet of sleeping areas if the home has a fuel burning appliance, fireplace or attached garage; CO alarms must be less than 7 years old",
+   "House numbers: Arabic numerals at least 3 inches tall, contrasting, mounted at least 60 inches above ground and visible from the street",
+   "Secondary power source warning label within 18 inches of the main electrical panel and meter if there is a generator, solar, or battery storage",
+   "Everything must be done before the inspector arrives; an adult (18+) must be present at the start of the time block"
+  ],
+  "authorities": [
+   {
+    "name": "Regional Fire Prevention Alliance (Barrington)",
+    "type": "municipal_fire_bureau",
+    "area_served": "Entire borough (the Alliance serves Barrington, Hi-Nella, Lawnside, Mt. Ephraim and Oaklyn)",
+    "lead_time": "14 or more business days before the change of occupant for the lowest fee; weekends, holidays and the settlement date do not count",
+    "fees": [
+     {
+      "label": "Request received 14+ business days before change of occupant",
+      "amount": "$66.00",
+      "quote": "14+ business days prior to the change of occupant is $66.00.",
+      "source_url": "https://barringtonboro.com/wp-content/uploads/2025/11/Barrington-Smoke-Doc-update-Fillable-pdf.pdf",
+      "verified": true
+     },
+     {
+      "label": "Request received 8-13 business days before",
+      "amount": "$74.00",
+      "quote": "8-13 business days prior to the change of occupant is $74.00.",
+      "source_url": "https://barringtonboro.com/wp-content/uploads/2025/11/Barrington-Smoke-Doc-update-Fillable-pdf.pdf",
+      "verified": true
+     },
+     {
+      "label": "Request received 4-7 business days before",
+      "amount": "$106.00",
+      "quote": "4-7 business days prior to the change of occupant is $106.00.",
+      "source_url": "https://barringtonboro.com/wp-content/uploads/2025/11/Barrington-Smoke-Doc-update-Fillable-pdf.pdf",
+      "verified": true
+     },
+     {
+      "label": "Request received 3 business days or less before",
+      "amount": "$171.00",
+      "quote": "3 business days or less notice prior to change of occupant is $171.00.",
+      "source_url": "https://barringtonboro.com/wp-content/uploads/2025/11/Barrington-Smoke-Doc-update-Fillable-pdf.pdf",
+      "verified": true
+     },
+     {
+      "label": "Reinspection after a failed inspection",
+      "amount": "$50.00",
+      "quote": "ALL FAILED INSPECTIONS WILL REQUIRED A $50.00 RE INSPECTION FEE.",
+      "source_url": "https://barringtonboro.com/wp-content/uploads/2025/11/Barrington-Smoke-Doc-update-Fillable-pdf.pdf",
+      "verified": true
+     },
+     {
+      "label": "Penalty for change of ownership or occupancy without the certificate",
+      "amount": "$500",
+      "quote": "the owner will be subject to a penalty of $500 per occurrence (N.J.A.C. 5:70-2.3).",
+      "source_url": "https://barringtonboro.com/wp-content/uploads/2025/11/Barrington-Smoke-Doc-update-Fillable-pdf.pdf",
+      "verified": true
+     }
+    ],
+    "how_to_apply": "Fill out the Regional Fire Prevention Alliance smoke detector certification application and email it to firealliance@barringtonboro.com, or print it and drop it in the mailbox at 205 Haines Avenue, Barrington, NJ 08007. Include a check or money order payable to 'Regional Fire Prevention Alliance'. Walk-in office hours Tuesday to Friday 8am to 2pm.",
+    "application_url": "https://barringtonboro.com/wp-content/uploads/2025/11/Barrington-Smoke-Doc-update-Fillable-pdf.pdf",
+    "department_url": "https://barringtonboro.com/regional-fire-prevention-alliance/",
+    "phone": "856-547-0991",
+    "email": "firealliance@barringtonboro.com",
+    "evidence": [
+     {
+      "url": "https://barringtonboro.com/regional-fire-prevention-alliance/",
+      "quote": "The Regional Fire Prevention Alliance of Barrington, New Jersey serves the Municipalities of Barrington, Hi-Nella, Lawnside, Mt. Ephraim and Oaklyn.",
+      "doc_date": "",
+      "via": "page",
+      "verified": true
+     },
+     {
+      "url": "https://barringtonboro.com/wp-content/uploads/2025/11/Barrington-Smoke-Doc-update-Fillable-pdf.pdf",
+      "quote": "CERTIFICATIONS ARE VALID FOR 6 MONTHS and are Non transferable. FEES ARE NON-REFUNDABLE.",
+      "doc_date": "2025-11",
+      "via": "pdf",
+      "verified": true
+     },
+     {
+      "url": "https://web.archive.org/web/20211229005949/https://mountephraim-nj.com/wp-content/uploads/2021/10/Application-for-Resale-CO-inspection.pdf",
+      "quote": "APPLICANT MUST CONTACT THE REGIONAL FIRE ALLIANCE TO SCHEDULE A SMOKE DETECTOR, CO DETECTOR AND FIRE INSPECTION PRIOR TO SETTLEMENT. TO CONTACT THE REGIONAL FIRE ALLIANCE, CALL 856-547-0991.",
+      "doc_date": "2021-10",
+      "via": "pdf",
+      "verified": true
+     }
+    ],
+    "confidence": "high"
+   }
+  ],
+  "notes": "The Regional Fire Prevention Alliance is a shared fire prevention bureau run out of Barrington Borough; it is not a fire district. Its November 2025 application is titled 'Certificate of Smoke Alarm and Carbon Monoxide Alarm and Secondary Power Source Identification Label Compliance (CSACMASPSIL)' and no longer lists a fire extinguisher requirement; its December 2022 version required a 2-A:10-BC extinguisher and listed a $600 penalty. Certificates are valid 6 months and not transferable. Office moved from 219 Clements Bridge Road (2022 form) to 205 Haines Avenue, Barrington. Fire code questions: Fire Official Nick D'Alonzo, fireofficial@barringtonboro.com."
+ },
+ "other_items": [
+  {
+   "label": "Open permits must be closed",
+   "detail": "No CO will be issued until all open permits have been closed.",
+   "source_url": "https://web.archive.org/web/20211229005949/https://mountephraim-nj.com/wp-content/uploads/2021/10/Application-for-Resale-CO-inspection.pdf"
+  },
+  {
+   "label": "Temporary certificate of occupancy fee",
+   "detail": "Ordinance 2024-15 sets $30 for the first issuance and renewal of a temporary certificate of occupancy.",
+   "source_url": "https://web.archive.org/web/20241112171805/https://mountephraim-nj.com/wp-content/uploads/2021/02/Ord.-2024-15-Construction-Codes-Uniform.pdf"
+  }
+ ],
+ "open_questions": [
+  "Current resale CO page on www.mountephraim-nj.com could not be read (bot challenge); fee and process should be re-confirmed there or by phone.",
+  "Whether Ordinance 2024-15 was adopted as introduced (adoption date blank on the archived copy).",
+  "Fee and form for a 2-family resale (2021 application lists only single family resale).",
+  "Current direct link to the resale CO application on the new borough site."
+ ],
+ "verification": {
+  "fees": 9,
+  "fee_ok": 7,
+  "fee_bad": 0,
+  "fee_unchecked": 2,
+  "quotes": 6,
+  "q_ok": 5,
+  "q_bad": 0,
+  "q_unchecked": 1
+ }
+}

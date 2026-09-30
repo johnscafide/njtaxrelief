@@ -1,0 +1,177 @@
+{
+ "municipality_code": "0412",
+ "municipality": "Collingswood Borough",
+ "county": "CAMDEN",
+ "checked_at": "2026-09-30",
+ "resale_co": {
+  "status": "required",
+  "name": "Certificate of Occupancy (CO) Resale / Exterior Resale Certification (Exterior Housing Code Inspection, Borough Ordinance 227-3)",
+  "issued_by": "Collingswood Fire Department, Office of Fire Prevention & Inspection Bureau",
+  "lead_time": "",
+  "valid_for": "6 months from the date of inspection, or one change of ownership",
+  "requirements": [
+   "Exterior only: sidewalks, walkways, curbing, driveways and aprons, exterior stairs and handrails, house numbers",
+   "Sidewalks and walkways free of trip hazards (1/2 inch or more height difference between blocks, or cracks 1/4 inch or wider); bad blocks replaced, not patched; Public Works permit needed",
+   "Curbs free of disintegration and cracks over 1/2 inch",
+   "Driveways in good condition, at least 9 by 18 feet; dirt, grass, gravel, stone or shell surfaces not allowed",
+   "Exterior stairs with more than 4 risers or over 30 inches high need handrails and guards",
+   "House numbers at least 3 1/2 inches high, readable from the street",
+   "Repairs must be finished within 30 days of notice; a shade tree permit is needed if trees are in the curb strip",
+   "No open construction permits and no outstanding zoning violations (signed affidavits from the Construction Office and Zoning Office)"
+  ],
+  "fees": [
+   {
+    "label": "Exterior resale inspection",
+    "amount": "$ 50.00",
+    "quote": "Exterior Inspection Fee: $ 50.00",
+    "source_url": "https://www.collingswood.com/Residential%20Inspection%20for%20Sale%20of%20Property%20Application%202025.pdf?t=202504071408130",
+    "verified": true
+   },
+   {
+    "label": "Re-inspection (applies to all re-inspections)",
+    "amount": "$50.00",
+    "quote": "All re-inspections are an additional $50.00",
+    "source_url": "https://www.collingswood.com/Residential%20Inspection%20for%20Sale%20of%20Property%20Application%202025.pdf?t=202504071408130",
+    "verified": true
+   },
+   {
+    "label": "Returned check processing fee",
+    "amount": "$20.00",
+    "quote": "All returned checks require a $20.00 processing fee in addition to any bank fees.",
+    "source_url": "https://www.collingswood.com/Residential%20Inspection%20for%20Sale%20of%20Property%20Application%202025.pdf?t=202504071408130",
+    "verified": true
+   }
+  ],
+  "how_to_apply": "Use the combined 'Residential Inspection for Sale of Property Application' (covers both the exterior resale certificate and the fire CSACMAPFEC). Print, complete and deliver it with a check or money order payable to 'Borough of Collingswood' to the Fire Prevention & Inspection Bureau, 434 Haddon Avenue, Collingswood NJ 08108. One check may cover both inspections. Call 856-854-7447 to schedule (inspections Tuesday, Wednesday or Thursday, AM or PM). Get the Construction Permit Affidavit and Zoning Official Affidavit in the packet signed.",
+  "application_url": "https://www.collingswood.com/Residential%20Inspection%20for%20Sale%20of%20Property%20Application%202025.pdf?t=202504071408130",
+  "department_url": "https://www.collingswood.com/government/departments/property_maintenance_nuisance_cos.php",
+  "phone": "856-854-7447 x101",
+  "email": "fireprevention@collingswood.com",
+  "evidence": [
+   {
+    "url": "https://www.collingswood.com/government/departments/property_maintenance_nuisance_cos.php",
+    "quote": "There are several types of Certificates of Occupancy (COs). This type is required at the time of resale of any property in the Borough of Collingswood. The criteria for this CO are contained in Chapter 227-3 of the Collingswood Code",
+    "doc_date": "",
+    "via": "page",
+    "verified": true
+   },
+   {
+    "url": "https://www.collingswood.com/Residential%20Inspection%20for%20Sale%20of%20Property%20Application%202025.pdf?t=202504071408130",
+    "quote": "Borough Ordinance 227-3 requires an Exterior Housing Code Inspection for the sale and/or re-sale of residential and commercial properties with the boundaries of the Borough of Collingswood.",
+    "doc_date": "2025-04",
+    "via": "pdf",
+    "verified": true
+   },
+   {
+    "url": "https://www.collingswood.com/Residential%20Inspection%20for%20Sale%20of%20Property%20Application%202025.pdf?t=202504071408130",
+    "quote": "A property shall not be issued an exterior inspection certificate without proof that all Construction Permits or any Zoning concerns have been satisfied",
+    "doc_date": "2025-04",
+    "via": "pdf",
+    "verified": true
+   }
+  ],
+  "confidence": "high",
+  "notes": "A temporary CCO (up to 6 months) may be issued if weather or other circumstances prevent repairs before settlement; it needs a written, notarized application signed by buyer and seller, a repair estimate, and an escrow at settlement of twice the estimated repair cost. Rental COs are a separate program (all commercial units and units in triplexes and larger between tenants)."
+ },
+ "fire_cert": {
+  "requirements": [
+   "Working 10-year sealed battery smoke alarm in every bedroom and on every level (hardwired 110V alarms are exempt from the 10-year battery rule but must be tested to NFPA 72 with a test report at inspection)",
+   "Smoke alarms on the ceiling at least 4 inches from the wall, or on the wall 4 to 12 inches below the ceiling",
+   "CO alarm within 10 feet of each sleeping area",
+   "Homes with a secondary power source (generator, solar, battery storage) need a non-handwritten label within 18 inches of the main electrical panel and electric meter, such as 'CAUTION: MULTIPLE SOURCES OF POWER'",
+   "Fire extinguisher no longer required (removed February 2025 under P.L.2025, c.19)",
+   "A representative must be present to let the inspector in"
+  ],
+  "authorities": [
+   {
+    "name": "Collingswood Fire Department, Office of Fire Prevention & Inspection Bureau",
+    "type": "municipal_fire_bureau",
+    "area_served": "Entire borough",
+    "lead_time": "Apply more than 10 days before the inspection appointment for the lower fee",
+    "fees": [
+     {
+      "label": "Interior CSACMAPFEC, application more than 10 days before inspection appointment",
+      "amount": "$75.00",
+      "quote": ">10 days prior to Inspection appointment - $75.00",
+      "source_url": "https://www.collingswood.com/Residential%20Inspection%20for%20Sale%20of%20Property%20Application%202025.pdf?t=202504071408130",
+      "verified": true
+     },
+     {
+      "label": "Interior CSACMAPFEC, application less than 10 days before inspection appointment",
+      "amount": "$150.00",
+      "quote": "<10 days prior to Inspection Appointment - $150.00",
+      "source_url": "https://www.collingswood.com/Residential%20Inspection%20for%20Sale%20of%20Property%20Application%202025.pdf?t=202504071408130",
+      "verified": true
+     },
+     {
+      "label": "Re-inspection",
+      "amount": "$50.00",
+      "quote": "All re-inspections are an additional $50.00",
+      "source_url": "https://www.collingswood.com/Residential%20Inspection%20for%20Sale%20of%20Property%20Application%202025.pdf?t=202504071408130",
+      "verified": true
+     }
+    ],
+    "how_to_apply": "Same combined application as the exterior resale certificate. Submit with a check or money order payable to 'Borough of Collingswood' to 434 Haddon Avenue; fees are due at application. Call 856-854-7447 to schedule. Certificates are valid for one change of ownership or 6 months, whichever comes first.",
+    "application_url": "https://www.collingswood.com/Residential%20Inspection%20for%20Sale%20of%20Property%20Application%202025.pdf?t=202504071408130",
+    "department_url": "https://www.collingswood.com/government/departments/fire.php",
+    "phone": "856-854-7447",
+    "email": "fireprevention@collingswood.com",
+    "evidence": [
+     {
+      "url": "https://www.collingswood.com/Residential%20Inspection%20for%20Sale%20of%20Property%20Application%202025.pdf?t=202504071408130",
+      "quote": "Application for CSACMAPFEC & Exterior Resale Certification",
+      "doc_date": "2025-04",
+      "via": "pdf",
+      "verified": true
+     },
+     {
+      "url": "https://www.collingswood.com/Residential%20Inspection%20for%20Sale%20of%20Property%20Application%202025.pdf?t=202504071408130",
+      "quote": "All Certificates are valid for one change of ownership or six (6) months, whichever comes first.",
+      "doc_date": "2025-04",
+      "via": "pdf",
+      "verified": true
+     },
+     {
+      "url": "https://www.collingswood.com/government/departments/fire.php",
+      "quote": "Serve as the local enforcing agency to enforce the NJ Fire Code",
+      "doc_date": "",
+      "via": "page",
+      "verified": true
+     }
+    ],
+    "confidence": "high"
+   }
+  ],
+  "notes": "The 2025 packet states: 'Section no longer required after Governor Murphy signed P.L.2025, c.19 in to law on February 3, 2025' regarding fire extinguishers in one- and two-family homes. Fire Official: Deputy Chief Geoffrey T. Joyce (gjoyce@collingswood.com)."
+ },
+ "other_items": [
+  {
+   "label": "Construction Permit Affidavit",
+   "detail": "Construction Office must certify there are no open permits.",
+   "source_url": "https://www.collingswood.com/Residential%20Inspection%20for%20Sale%20of%20Property%20Application%202025.pdf?t=202504071408130"
+  },
+  {
+   "label": "Zoning Official Affidavit",
+   "detail": "Zoning Office must certify there are no outstanding zoning violations.",
+   "source_url": "https://www.collingswood.com/Residential%20Inspection%20for%20Sale%20of%20Property%20Application%202025.pdf?t=202504071408130"
+  },
+  {
+   "label": "Sidewalk/curb repair permit",
+   "detail": "Owner must get a Public Works permit before sidewalk or curb repairs; Shade Tree Commission permit if trees are in the curb strip. Public Works: 856-854-0533.",
+   "source_url": "https://www.collingswood.com/Residential%20Inspection%20for%20Sale%20of%20Property%20Application%202025.pdf?t=202504071408130"
+  }
+ ],
+ "open_questions": [
+  "No minimum lead time for scheduling is published beyond the 10-day fee cutoff."
+ ],
+ "verification": {
+  "fees": 6,
+  "fee_ok": 6,
+  "fee_bad": 0,
+  "fee_unchecked": 0,
+  "quotes": 6,
+  "q_ok": 6,
+  "q_bad": 0,
+  "q_unchecked": 0
+ }
+}

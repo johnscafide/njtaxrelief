@@ -1,0 +1,163 @@
+{
+ "municipality_code": "0801",
+ "municipality": "Clayton Borough",
+ "county": "GLOUCESTER",
+ "checked_at": "2026-09-30",
+ "resale_co": {
+  "status": "required",
+  "name": "Certificate of Occupancy (resale and rental)",
+  "issued_by": "Borough of Clayton Construction Office",
+  "lead_time": "No set lead time published. The form says not to schedule settlement until the CO is approved and returned, and the violation notice gives 90 days to correct items and says to allow ample time before settlement.",
+  "valid_for": "",
+  "requirements": [
+   "House number at least 4 inches, contrasting, visible for 911",
+   "Curb, sidewalk and driveway apron level and repaired",
+   "Roof, chimney, fireplace, HVAC and water heater may need certification if deficient (HVAC and water heater age base 15 years)",
+   "Exterior grounds cleared of debris and trailers, cars or trucks",
+   "Gutters, downspouts and splash blocks where needed",
+   "Electric service line, meter and panel in good repair",
+   "Steps, decks, porches, guardrails (4 inch spacing, 36 inches high) and graspable handrails built to code",
+   "Pool fence with self-closing gate",
+   "Smoke detectors on every floor including basement",
+   "Carbon monoxide detectors on all levels, including by bedrooms",
+   "Portable fire extinguisher, A:B:C type, no larger than 10 lb, wall mounted, visible, within 10 feet of the kitchen",
+   "Keyless exit deadbolts on exterior doors",
+   "Water heater relief valve discharge within 6 inches of floor",
+   "Bathroom, kitchen and dryer venting (dryer ducts 4 inch metal); GFI outlets in kitchen, bath, laundry and exterior",
+   "Stove anti-tip device; working windows and screens; sound walls, ceilings, floors; attic and basement not used as habitable space"
+  ],
+  "fees": [
+   {
+    "label": "Initial inspection (resale or rental)",
+    "amount": "$65",
+    "quote": "Fees: Initial Fee $65",
+    "source_url": "https://www.claytonnj.com/DocumentCenter/View/474/Certificate-of-Occupancy-Application-Form-PDF",
+    "verified": true
+   },
+   {
+    "label": "Third inspection",
+    "amount": "$25",
+    "quote": "Third Inspection $25",
+    "source_url": "https://www.claytonnj.com/DocumentCenter/View/474/Certificate-of-Occupancy-Application-Form-PDF",
+    "verified": true
+   }
+  ],
+  "how_to_apply": "Fill out the Certificate of Occupancy Application for Resales and Rentals (mark House Sale) and submit it to the Construction Office at 125 N. Delsea Drive, Clayton, with the fee paid by cash or check. Incomplete applications are not accepted.",
+  "application_url": "https://www.claytonnj.com/DocumentCenter/View/474/Certificate-of-Occupancy-Application-Form-PDF",
+  "department_url": "https://www.claytonnj.com/1266/Certificates-of-Occupancy",
+  "phone": "856-881-2882 ext. 118",
+  "email": "",
+  "evidence": [
+   {
+    "url": "https://www.claytonnj.com/1266/Certificates-of-Occupancy",
+    "quote": "Certificates are required for both residential and commercial properties each time there is a change in tenant and/or owner.",
+    "doc_date": "",
+    "via": "page",
+    "verified": true
+   },
+   {
+    "url": "https://www.claytonnj.com/DocumentCenter/View/474/Certificate-of-Occupancy-Application-Form-PDF",
+    "quote": "Certificate of Occupancy Application for Resales and Rentals",
+    "doc_date": "2025-06",
+    "via": "pdf",
+    "verified": true
+   },
+   {
+    "url": "https://www.claytonnj.com/DocumentCenter/View/474/Certificate-of-Occupancy-Application-Form-PDF",
+    "quote": "PLEASE DO NOT SCHEDULE A SETTLEMENT UNTIL CO IS APPROVED AND RETURNED",
+    "doc_date": "2025-06",
+    "via": "pdf",
+    "verified": true
+   },
+   {
+    "url": "https://www.claytonnj.com/DocumentCenter/View/476/Certificate-of-Occupancy-Violation-Notice-Checklist-here-PDF",
+    "quote": "YOU ARE HEREBY NOTIFIED TO CORRECT THE ABOVE VIOLATIONS WITHIN 90 DAYS FROM THE INITIAL INSPECTION. PLEASE ALLOW YOURSELF AMPLE TIME BEFORE SETTLEMENT DATE.",
+    "doc_date": "2022-08",
+    "via": "pdf",
+    "verified": true
+   }
+  ],
+  "confidence": "high",
+  "notes": "Application form title metadata says 'CO Application - UPDATED 6.18.25'. The same form is posted at DocumentCenter/View/773. The form header lists the Construction Office at (856) 881-5385; the Construction page lists 856-881-2882 Ext. 118. The inspection checklist is dated August 2022. Rentals also require landlord registration with the Borough."
+ },
+ "fire_cert": {
+  "requirements": [
+   "The CO checklist asks for an A:B:C residential fire extinguisher no larger than 10 pounds, mounted on the wall, visible, within 10 feet of the kitchen",
+   "The CO checklist asks for carbon monoxide detectors on all levels, basement, first floor and second floor by bedrooms"
+  ],
+  "authorities": [
+   {
+    "name": "Borough of Clayton (smoke alarm and CO alarm application handled through the Construction Office line, ext. 118)",
+    "type": "municipal_fire_bureau",
+    "area_served": "Entire borough",
+    "lead_time": "Fee is due at application. Inspections are Tuesday and Thursday, 11:30am to 2:30pm. Days are counted from the date the request is received to the closing date; applications after 4:00pm count from the next business day.",
+    "fees": [
+     {
+      "label": "Inspection or re-inspection",
+      "amount": "$125.00",
+      "quote": "Payment Schedule FEE: $125.00/Inspection/Re-Inspection",
+      "source_url": "https://www.claytonnj.com/DocumentCenter/View/5311/Smokes-and-CO-Applicaton",
+      "verified": true
+     }
+    ],
+    "how_to_apply": "Fill out the Borough of Clayton Application for Smoke Alarm, Carbon Monoxide Alarm and Secondary Power Source Identification Label Compliance with the closing date, and pay the fee when you apply at 125 N Delsea Drive.",
+    "application_url": "https://www.claytonnj.com/DocumentCenter/View/5311/Smokes-and-CO-Applicaton",
+    "department_url": "https://www.claytonnj.com/1219/Construction",
+    "phone": "856-881-2882 ext. 118",
+    "email": "",
+    "evidence": [
+     {
+      "url": "https://www.claytonnj.com/DocumentCenter/View/5311/Smokes-and-CO-Applicaton",
+      "quote": "BOROUGH OF CLAYTON 125 N Delsea Drive Clayton, NJ 08312 856-881-2882 ext:118 APPLICATION FOR SMOKE ALARM, CARBON MONOXIDE ALARM & SECONDARY POWER SOURCE IDENTIFICATION LABEL COMPLIANCE (CSACMASPICL)",
+      "doc_date": "2026-08",
+      "via": "pdf",
+      "verified": true
+     },
+     {
+      "url": "https://www.claytonnj.com/DocumentCenter/View/5311/Smokes-and-CO-Applicaton",
+      "quote": "*A CSAMASPSIL shall not be transferable, if the application for a CSAMASPSIL does not occur within six (6) months, a new application will be required.",
+      "doc_date": "2026-08",
+      "via": "pdf",
+      "verified": true
+     }
+    ],
+    "confidence": "medium"
+   }
+  ],
+  "notes": "The current Borough form (PDF created 2026-08-13) is titled for smoke alarm, carbon monoxide alarm and secondary power source identification label compliance; it does not name the portable fire extinguisher, but the Borough CO checklist does require one. The form does not show separate lead-time fee tiers even though it explains how days before closing are counted. The form gives only the Borough address and ext. 118 (Construction Code Official); it does not name a separate fire official or fire district. The DCA Uniform Fire Code LEA Registry (third quarter, July 2026, https://nj.gov/dca/dfs/pdf/ANNUAL%20REGISTRY/THIRD%20QUARTER%20LEA%20REGISTRY%202026.pdf) lists 'C Clayton Borough', and the Gloucester County Fire Marshal page (https://gloucestercountynj.gov/1139/County-Fire-Marshall) lists Clayton among the towns where the County Fire Marshal's Office is the local enforcing agency. Even so, the Borough posts and collects its own smoke/CO application, so apply to the Borough. Clayton has no fire district."
+ },
+ "other_items": [
+  {
+   "label": "Radio water meter check",
+   "detail": "CO checklist item 47 lists 'Radio Water Meter' and says to call DPW to replace the meter.",
+   "source_url": "https://www.claytonnj.com/DocumentCenter/View/476/Certificate-of-Occupancy-Violation-Notice-Checklist-here-PDF"
+  },
+  {
+   "label": "Sump pump discharge",
+   "detail": "CO checklist item 48 asks 'Sump Pump Discharge to Sewer?'",
+   "source_url": "https://www.claytonnj.com/DocumentCenter/View/476/Certificate-of-Occupancy-Violation-Notice-Checklist-here-PDF"
+  },
+  {
+   "label": "Recycling container",
+   "detail": "CO checklist item 46 lists 'Recycling Container'.",
+   "source_url": "https://www.claytonnj.com/DocumentCenter/View/476/Certificate-of-Occupancy-Violation-Notice-Checklist-here-PDF"
+  }
+ ],
+ "open_questions": [
+  "Whether the $65 CO fee covers a second inspection (form lists only 'Initial Fee $65' and 'Third Inspection $25').",
+  "How long a Clayton CO stays valid after approval is not published.",
+  "Whether the Construction Office or a separate fire official signs the smoke/CO certificate; the form only lists ext. 118.",
+  "Whether the $125 smoke/CO fee varies by days before closing; the form explains how days are counted but lists one fee.",
+  "Whether the Borough or the Gloucester County Fire Marshal (the fire code enforcing agency) actually performs the smoke/CO inspection after the Borough takes the application."
+ ],
+ "verification": {
+  "fees": 3,
+  "fee_ok": 3,
+  "fee_bad": 0,
+  "fee_unchecked": 0,
+  "quotes": 6,
+  "q_ok": 6,
+  "q_bad": 0,
+  "q_unchecked": 0
+ }
+}

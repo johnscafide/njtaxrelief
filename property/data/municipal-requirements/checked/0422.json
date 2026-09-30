@@ -1,0 +1,239 @@
+{
+ "municipality_code": "0422",
+ "municipality": "Lindenwold Borough",
+ "county": "CAMDEN",
+ "checked_at": "2026-09-30",
+ "resale_co": {
+  "status": "required",
+  "name": "Certificate of Continued Occupancy (CCO); Certificate of Transfer of Title (CTT) for vacant or rehab properties",
+  "issued_by": "Borough of Lindenwold Construction Office / Code Enforcement (Housing Clerk)",
+  "lead_time": "Not stated as a fixed deadline. The fee is lower if the inspection is scheduled 10 or more business days out. For a vacant CTT, call 5 to 7 business days before settlement for a pre-inspection.",
+  "valid_for": "",
+  "requirements": [
+   "No open building or zoning permits (must be closed with fees paid)",
+   "No work done without a required construction or zoning permit",
+   "No unsafe structures or unsafe conditions",
+   "10-year sealed battery smoke alarm on every level and outside each sleeping area",
+   "CO alarm within 10 feet of sleeping areas",
+   "2A-10B:C fire extinguisher under 10 lbs, mounted within 10 ft of kitchen, tagged with current receipt",
+   "House numbers at least 4 inches, contrasting, fixed to the house and visible from the street",
+   "Handrails on 3 or more risers; guardrails on porches/decks 30 inches or higher",
+   "GFCI within 6 ft of water; no bare-wire fixtures",
+   "Heat, appliances (anti-tip on range), hot and cold water and toilets working",
+   "Water heater relief valve discharge pipe 2 to 6 inches from floor",
+   "Bathroom window or exhaust fan",
+   "No holes, flaking paint or water stains on walls, ceilings, floors; no roof leaks",
+   "Yard free of trash, debris and junk vehicles; all code violations abated",
+   "Utilities on at time of inspection"
+  ],
+  "fees": [
+   {
+    "label": "CCO inspection, 1-2 units, scheduled over 10 days out (form: 10 or more business days), per unit",
+    "amount": "$75",
+    "quote": "(1) Inspection of property scheduled over 10 days: $75.",
+    "source_url": "https://www.lindenwoldnj.gov/DocumentCenter/View/140/Residential-Property-Sales---Inspection-Application--CCO-Certificate-of-Continued-Occupancy-PDF",
+    "verified": true
+   },
+   {
+    "label": "CCO inspection, scheduled less than 10 days out (form: 4 to 10 business days), per unit",
+    "amount": "$100",
+    "quote": "Inspection of property scheduled less than 10 days: $100.",
+    "source_url": "https://www.lindenwoldnj.gov/DocumentCenter/View/140/Residential-Property-Sales---Inspection-Application--CCO-Certificate-of-Continued-Occupancy-PDF",
+    "verified": true
+   },
+   {
+    "label": "Re-inspection, per unit",
+    "amount": "$50",
+    "quote": "(2) Re-inspection: $50.",
+    "source_url": "https://www.lindenwoldnj.gov/DocumentCenter/View/140/Residential-Property-Sales---Inspection-Application--CCO-Certificate-of-Continued-Occupancy-PDF",
+    "verified": true
+   },
+   {
+    "label": "Administration fee for changing inspection date or unit number more than once",
+    "amount": "$20",
+    "quote": "(3) Administration fee to be assessed for any change of inspection date or unit number more than once and that fees must be paid before a change is made: $20.",
+    "source_url": "https://www.lindenwoldnj.gov/DocumentCenter/View/140/Residential-Property-Sales---Inspection-Application--CCO-Certificate-of-Continued-Occupancy-PDF",
+    "verified": true
+   },
+   {
+    "label": "Certificate of Transfer of Title (vacant property), includes one re-inspection within 120 days",
+    "amount": "$125",
+    "quote": "(4) Property title transfer (Vacant): $125 includes one re-inspection fee within 120 days of new ownership.",
+    "source_url": "https://www.lindenwoldnj.gov/DocumentCenter/View/140/Residential-Property-Sales---Inspection-Application--CCO-Certificate-of-Continued-Occupancy-PDF",
+    "verified": true
+   }
+  ],
+  "how_to_apply": "Fill out the one-page CCO application and submit it to the Code Enforcement Office at 15 N. White Horse Pike with a check or money order payable to the Borough of Lindenwold. Fees are per unit and nonrefundable. The Borough calls the listed contact to schedule after the permit and zoning search is done. A failed inspection needs a new application and fee before reinspection. For vacant or rehab properties, file the CTT and the CCO at the same time.",
+  "application_url": "https://www.lindenwoldnj.gov/DocumentCenter/View/140/Residential-Property-Sales---Inspection-Application--CCO-Certificate-of-Continued-Occupancy-PDF",
+  "department_url": "https://www.lindenwoldnj.gov/178/Code-Enforcement-Housing",
+  "phone": "856-783-2121 ext. 224",
+  "email": "hprotich@lindenwold.net",
+  "evidence": [
+   {
+    "url": "https://www.lindenwoldnj.gov/178/Code-Enforcement-Housing",
+    "quote": "All sales of a property must file for a certificate of occupancy (C/O) inspection for smoke detectors, carbon monoxide detectors, fire extinguishers, and house numbers.",
+    "doc_date": "",
+    "via": "page",
+    "verified": true
+   },
+   {
+    "url": "https://www.lindenwoldnj.gov/DocumentCenter/View/140/Residential-Property-Sales---Inspection-Application--CCO-Certificate-of-Continued-Occupancy-PDF",
+    "quote": "The new inspection requirement is required for the sale or transfer of any Residential Dwelling.",
+    "doc_date": "2021-03 (created), modified 2023-08",
+    "via": "pdf",
+    "verified": true
+   },
+   {
+    "url": "https://www.lindenwoldnj.gov/DocumentCenter/View/140/Residential-Property-Sales---Inspection-Application--CCO-Certificate-of-Continued-Occupancy-PDF",
+    "quote": "ONE TO TWO UNITS - FAMILY DWELLING RESALE INSPECTION APPLICATION CONTINUED CERTIFICATION OF OCCUPANCY",
+    "doc_date": "2021-03 (created), modified 2023-08",
+    "via": "pdf",
+    "verified": true
+   },
+   {
+    "url": "https://www.lindenwoldnj.gov/DocumentCenter/View/141/Residential-Property-Sales---Inspection-Application--CTT-Certificate-of-Title-Transfer--for-Vacant-or-Rehab-Properties-PDF",
+    "quote": "When applying for the CTT (Certificate of Transfer of Title) you must also apply for the CCO (Continued Certification of Occupancy) at the same time.",
+    "doc_date": "2021-03 (created), modified 2023-08",
+    "via": "pdf",
+    "verified": true
+   }
+  ],
+  "confidence": "high",
+  "notes": "Program took effect October 1, 2020. Existing Watchdog fees ($75 per unit 10+ business days, $100 per unit 4 to 10 business days, $50 reinspection) are CONFIRMED by the current application form. The old Watchdog link (/code-enforcement-housing/files/...) now returns 404; the Borough site moved to CivicPlus and the form is now at DocumentCenter/View/140. Also found: $20 admin fee for rescheduling more than once and $125 CTT fee for vacant properties. The form lists no tier for under 4 business days. The Borough CCO checklist also covers smoke/CO alarms and extinguisher, separate from the Fire District certificate. The CCO is generally issued the next business day after passing; inspection takes about 15 to 30 minutes. Office manager contact is Heather Protich, ext. 225. Rental registration and new-tenant inspection are separate rental programs."
+ },
+ "fire_cert": {
+  "requirements": [
+   "10-year sealed battery smoke alarm on every level; hardwired alarms cannot be replaced with battery alarms",
+   "Basement alarm at bottom of stairwell on the ceiling, not between joists",
+   "Bedroom hallway smoke alarms within 10 feet of all bedroom doors",
+   "Smoke and CO alarms less than 10 years old and working",
+   "CO alarm in hallway within 10 feet of all bedrooms; not in switched outlets",
+   "Low-voltage alarm systems must be tested by an alarm contractor before the inspection, with the certificate shown to the inspector",
+   "House numbers at least 4 inches, contrasting, fixed to the house, visible from the street or 50 feet (Borough Ordinance No. 757)",
+   "Homes with a secondary power source (solar, generator, battery storage) need a permanent printed label at the main panel and meter, e.g. \"Caution: Multiple Sources of Power\""
+  ],
+  "authorities": [
+   {
+    "name": "Lindenwold Fire District No. 1, Bureau of Fire Prevention",
+    "type": "fire_district",
+    "area_served": "Borough of Lindenwold (Fire District No. 1)",
+    "lead_time": "Submit request 3 to 4 weeks before settlement",
+    "fees": [
+     {
+      "label": "Request received 8 or more calendar days before settlement",
+      "amount": "$45.00",
+      "quote": "Requests received eight (8) calendar days or more prior to the settlement date: $45.00",
+      "source_url": "https://www.lindenwoldfire.com/DocumentCenter/View/198/Residential-Resale-Requirements---",
+      "verified": "eye"
+     },
+     {
+      "label": "Request received 7 calendar days before settlement",
+      "amount": "$90.00",
+      "quote": "Requests received seven (7) calendar days prior to the settlement date: $90.00",
+      "source_url": "https://www.lindenwoldfire.com/DocumentCenter/View/198/Residential-Resale-Requirements---",
+      "verified": "eye"
+     },
+     {
+      "label": "Request received 3 calendar days or less before settlement",
+      "amount": "$161.00",
+      "quote": "Requests received three (3) calendar days or less prior to the settlement date: $161.00",
+      "source_url": "https://www.lindenwoldfire.com/DocumentCenter/View/198/Residential-Resale-Requirements---",
+      "verified": "eye"
+     },
+     {
+      "label": "Re-inspection",
+      "amount": "$50.00",
+      "quote": "Re-inspection Fee: $50.00",
+      "source_url": "https://www.lindenwoldfire.com/DocumentCenter/View/198/Residential-Resale-Requirements---",
+      "verified": "eye"
+     }
+    ],
+    "how_to_apply": "Submit the online Residential Inspection Request Form on lindenwoldfire.com. Pay at the time of inspection by check or money order (no cash). The certificate is issued at the inspection if the home passes and payment is received. No temporary certificates.",
+    "application_url": "https://www.lindenwoldfire.com/FormCenter/General-Forms-4/Residential-Inspection-Request-Form-46",
+    "department_url": "https://www.lindenwoldfire.com/182/Smoke-Carbon-Monoxide-Alarm-Compliance-C",
+    "phone": "856-346-0935",
+    "email": "firemarshal@lindenwoldfire.com",
+    "evidence": [
+     {
+      "url": "https://www.lindenwoldfire.com/182/Smoke-Carbon-Monoxide-Alarm-Compliance-C",
+      "quote": "When selling a one or two family home in Lindenwold, you must obtain a Certificate of Smoke Alarm and Carbon Monoxide Detector Compliance CSACMAPFEC 5:70-2.3 (a) prior to the settlement. Please submit your request for inspection 3 to 4 weeks prior to the settlement date.",
+      "doc_date": "",
+      "via": "page",
+      "verified": true
+     },
+     {
+      "url": "https://www.lindenwoldfire.com/182/Smoke-Carbon-Monoxide-Alarm-Compliance-C",
+      "quote": "Payment is due at the time of inspection - check or money order payable to Lindenwold Fire District. NO CASH IS ACCEPTED Temporary certificates are NOT issued.",
+      "doc_date": "",
+      "via": "page",
+      "verified": true
+     },
+     {
+      "url": "https://www.lindenwoldfire.com/DocumentCenter/View/198/Residential-Resale-Requirements---",
+      "quote": "Requests must be submitted using the online form located at www.lindenwoldfire.com, 3 to 4 weeks prior to the settlement date.",
+      "doc_date": "2026-07 (scan date)",
+      "via": "pdf",
+      "verified": "eye"
+     },
+     {
+      "url": "https://www.lindenwoldfire.com/DocumentCenter/View/198/Residential-Resale-Requirements---",
+      "quote": "Certificates are valid for 90 days.",
+      "doc_date": "2026-07 (scan date)",
+      "via": "pdf",
+      "verified": "eye"
+     },
+     {
+      "url": "https://nj.gov/dca/dfs/pdf/ANNUAL%20REGISTRY/THIRD%20QUARTER%20LEA%20REGISTRY%202026.pdf",
+      "quote": "D Lindenwold Borough",
+      "doc_date": "2026-07 (roster as of June 30, 2026)",
+      "via": "pdf",
+      "verified": true
+     },
+     {
+      "url": "https://www.nj.gov/dca/dfs/pdf/fire%20directory_county%20summary/fire_code_enforcement_director.pdf",
+      "quote": "SMOKE DETECTOR COMPLIANCE Name: Lindenwold Boro Addr: 2001 Egg Harbor Rd. Lindenwold NJ 08021 Phone (856) 783-2121",
+      "doc_date": "2026-09 (directory PDF; fire department survey 5/2026)",
+      "via": "pdf",
+      "verified": true
+     }
+    ],
+    "confidence": "medium"
+   }
+  ],
+  "notes": "DCA LEA Registry (July 2026) lists Lindenwold's fire code enforcing agency as 'D' (Fire District), with a single district listed. Existing Watchdog lead (fire district process, submit 3 to 4 weeks ahead, check or money order, no cash) is CONFIRMED, but the old lindenwoldnj.gov/code-enforcement-housing/files/... link is dead (404). Current source is the Fire District's own site, lindenwoldfire.com. Fee sheet was scanned July 2026. The web page says checks payable to 'Lindenwold Fire District'; the PDF says 'Lindenwold Fire Department'. The fee sheet does not state a fee for requests received 4 to 6 days before settlement (it lists 8+ days, 7 days, and 3 days or less); presumably the $90 tier, but unconfirmed. Certificate valid 90 days. Fire Official: Timothy Shannon (tshannon@lindenwoldfire.com). The Borough's own Smoke Instructions sheet (2020) also requires a 2A-10B:C extinguisher under 10 lbs, mounted within 10 ft of the kitchen in the path of egress. CONFLICT: the NJ DCA fire directory (September 2026 PDF, survey 5/26/2026) lists Lindenwold's smoke detector compliance contact as 'Lindenwold Boro', 2001 Egg Harbor Rd., (856) 783-2121 (the Borough number), not the Fire District. That address looks outdated (Borough offices are now at 15 N. White Horse Pike). The Fire District's own current page and July 2026 fee sheet say it issues the certificate, and the Borough CCO inspection also checks smoke/CO alarms, extinguisher and house numbers. Sellers should expect both the Borough CCO and the Fire District certificate."
+ },
+ "other_items": [
+  {
+   "label": "Open permits must be closed",
+   "detail": "No open building or zoning permits; must be fully satisfied with fees and inspections before the CCO is issued.",
+   "source_url": "https://www.lindenwoldnj.gov/DocumentCenter/View/140/Residential-Property-Sales---Inspection-Application--CCO-Certificate-of-Continued-Occupancy-PDF"
+  },
+  {
+   "label": "Work without permits",
+   "detail": "Unpermitted work (commonly finished basements, water heaters, furnaces) must be permitted and inspected before the CCO is issued.",
+   "source_url": "https://www.lindenwoldnj.gov/DocumentCenter/View/140/Residential-Property-Sales---Inspection-Application--CCO-Certificate-of-Continued-Occupancy-PDF"
+  },
+  {
+   "label": "Zoning check",
+   "detail": "The Borough runs a zoning approval and permit search before scheduling the CCO inspection.",
+   "source_url": "https://www.lindenwoldnj.gov/DocumentCenter/View/140/Residential-Property-Sales---Inspection-Application--CCO-Certificate-of-Continued-Occupancy-PDF"
+  }
+ ],
+ "open_questions": [
+  "Fire District fee for requests received 4 to 6 calendar days before settlement is not stated on the fee sheet.",
+  "Borough CCO fee for under 4 business days is not listed on the form.",
+  "Borough CCO validity period not stated.",
+  "Could not open the ordinance on ecode360 to confirm current codified fee amounts.",
+  "NJ DCA fire directory lists the Borough (not the Fire District) as Lindenwold's smoke detector compliance contact; confirm with the Fire District (856-346-0935) that its certificate is required in addition to the Borough CCO."
+ ],
+ "verification": {
+  "fees": 9,
+  "fee_ok": 9,
+  "fee_bad": 0,
+  "fee_unchecked": 0,
+  "quotes": 10,
+  "q_ok": 10,
+  "q_bad": 0,
+  "q_unchecked": 0
+ }
+}

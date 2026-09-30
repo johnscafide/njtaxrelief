@@ -1,0 +1,165 @@
+{
+ "municipality_code": "0427",
+ "municipality": "Pennsauken Township",
+ "county": "CAMDEN",
+ "checked_at": "2026-09-30",
+ "resale_co": {
+  "status": "required",
+  "name": "Housing Resale Certificate of Inspection (Housing Resale CO)",
+  "issued_by": "Department of Housing / Property Maintenance",
+  "lead_time": "No fixed number of days published. The town says to leave enough time between the inspection and settlement so the certificate is issued before settlement.",
+  "valid_for": "",
+  "requirements": [
+   "Interior and exterior housing resale inspection of every 1 and 2 family dwelling",
+   "Grading and drainage, sidewalks and driveways, accessory structures",
+   "Stumps from trees that caused sidewalk damage",
+   "Exterior structure: protective treatment, structural members, foundation walls, roofs and drainage",
+   "Roof certification and chimney certification (wood burning or gas) may be required",
+   "Stairways, decks, porches and balconies; handrails and guards",
+   "Interior surfaces, stairs and walking surfaces",
+   "Infestation / termite",
+   "Plumbing system hazards and plumbing certification",
+   "Mechanical appliances and mechanical certification",
+   "Electrical hazards and electrical certification; 2 outlets in every bedroom; GFCI style protection near sinks, sump pump, bathrooms, kitchen counters; weather resistant covered outdoor outlets",
+   "Smoke alarms, carbon monoxide detector, interior locked doors",
+   "Shed letter if there is a shed; grass or weeds",
+   "Rental registration if the property will be rented",
+   "New or open permits must be closed; no new occupancy until the final CO is issued"
+  ],
+  "fees": [
+   {
+    "label": "Housing Resale CO plus Fire Certificate, combined application fee",
+    "amount": "$175.00",
+    "quote": "The fee is $175.00 ($100 for the Housing Resale Certificate of Inspection & $75 for the Fire Certificate).",
+    "source_url": "https://www.pennsauken.gov/DocumentCenter/View/1116/Housing-Resale-And-Fire-Cert-Inspection-Application-PDF",
+    "verified": true
+   },
+   {
+    "label": "Housing Resale Certificate of Inspection portion",
+    "amount": "$100",
+    "quote": "The fee is $175.00 ($100 for the Housing Resale Certificate of Inspection & $75 for the Fire Certificate).",
+    "source_url": "https://www.pennsauken.gov/DocumentCenter/View/1116/Housing-Resale-And-Fire-Cert-Inspection-Application-PDF",
+    "verified": true
+   }
+  ],
+  "how_to_apply": "Complete the Housing Resale & Fire Certificate Inspection application (PDF) or apply online through the township's GovPilot portal. Submit the form with the $175 fee (cash, check or money order payable to Pennsauken Township) to the Municipal Building, Attn: Housing / Property Maintenance Dept., 5605 N. Crescent Blvd., Pennsauken, NJ 08110. The inspection is scheduled once the form and fee are received.",
+  "application_url": "https://www.pennsauken.gov/DocumentCenter/View/1116/Housing-Resale-And-Fire-Cert-Inspection-Application-PDF",
+  "department_url": "https://www.pennsauken.gov/194/Housing-Property-Maintenance",
+  "phone": "856-665-1000 ext. 1411",
+  "email": "spaul@pennsauken.gov",
+  "evidence": [
+   {
+    "url": "https://www.pennsauken.gov/194/Housing-Property-Maintenance",
+    "quote": "For Residential Housing Sales, A housing resale CO and fire certificate is required for every transfer of ownership for all one and/or two-family dwellings. To obtain the CO and fire certificate the property must pass a housing resale inspection.",
+    "doc_date": "",
+    "via": "page",
+    "verified": true
+   },
+   {
+    "url": "https://www.pennsauken.gov/DocumentCenter/View/1154/Housing-Resale-And-Fire-Cert-Inspection-Information-PDF",
+    "quote": "By Township Ordinance all one and/or two-family dwellings are required to have a housing resale inspection completed for the interior and exterior of the property and obtain a Certificate of Inspection prior to settlement.",
+    "doc_date": "2024-12",
+    "via": "pdf",
+    "verified": true
+   },
+   {
+    "url": "https://www.pennsauken.gov/DocumentCenter/View/1154/Housing-Resale-And-Fire-Cert-Inspection-Information-PDF",
+    "quote": "NOTE: The property must pass the housing inspection and all open permits must be closed before the Housing Resale Certificate of Inspection is issued.",
+    "doc_date": "2024-12",
+    "via": "pdf",
+    "verified": true
+   },
+   {
+    "url": "https://www.pennsauken.gov/DocumentCenter/View/1406/Housing-Resale-Inspection-Checklist-PDF",
+    "quote": "Housing Resale Inspection Checklist",
+    "doc_date": "2025-12",
+    "via": "pdf",
+    "verified": true
+   }
+  ],
+  "confidence": "high",
+  "notes": "Online application portal: https://main.govpilot.com/web/public/76ff6888-efb_Rental-Resale-Township-of-Pennsauken?uid=7081&ust=NJ&pu=1&id=0 . If the home fails, the report is sent about 2 to 3 days after the inspection. A buyer (only the buyer) may request a notarized Affidavit for a Temporary CO to take responsibility for listed violations; if the report says no occupancy until final CO, the Temporary CO is issued 'For Work Only'. Required construction permits (including work done without permits) must be obtained and pass inspection before the final certificate. Rental program is separate: 1 and 2 family rentals must register annually ($350) and pass a rental inspection. Application and info PDFs are dated December 2024; the info PDF lists older contacts (Patte Magro, ext. 133/145) while the current department page lists Manager Will Rivera (ext. 1410, wrivera@pennsauken.gov) and Housing & Property Maintenance Assistant Suzanne Paul (ext. 1411, spaul@pennsauken.gov). An ecode360 search result indicates reinspection fees are set in Chapter 140, Fees, but no reinspection amount was confirmed."
+ },
+ "fire_cert": {
+  "requirements": [
+   "Each level must have an AC hard wired or 10-year sealed battery smoke alarm; all smoke alarms must be within 10 years of manufacture date",
+   "Alarm type depends on original construction date: pre-1975 homes need 10-year sealed battery alarms on each level; newer homes need hard wired interconnected alarms per the era table",
+   "A smoke alarm is required in every bedroom regardless of the home's age, plus outside sleeping areas and on every level",
+   "Smoke alarm at the bottom of basement stairs (within 10 feet of the stairway, not in the stairway) and top of walk-up attic stairs",
+   "Carbon monoxide alarm within 10 feet of each sleeping area",
+   "Hard-wired proprietary fire alarm systems must be tested per NFPA 72 with a test report at inspection"
+  ],
+  "authorities": [
+   {
+    "name": "Pennsauken Township Department of Housing / Property Maintenance (Fire Certificate issued with the Housing Resale CO)",
+    "type": "municipal_fire_bureau",
+    "area_served": "Entire township",
+    "lead_time": "",
+    "fees": [
+     {
+      "label": "Fire Certificate portion of combined resale application",
+      "amount": "$75",
+      "quote": "The fee is $175.00 ($100 for the Housing Resale Certificate of Inspection & $75 for the Fire Certificate).",
+      "source_url": "https://www.pennsauken.gov/DocumentCenter/View/1116/Housing-Resale-And-Fire-Cert-Inspection-Application-PDF",
+      "verified": true
+     }
+    ],
+    "how_to_apply": "Same combined application as the Housing Resale CO. Submit the Housing Resale & Fire Certificate Inspection application with the $175 total fee to the Housing / Property Maintenance Dept., 5605 N. Crescent Blvd., or apply online via GovPilot.",
+    "application_url": "https://www.pennsauken.gov/DocumentCenter/View/1116/Housing-Resale-And-Fire-Cert-Inspection-Application-PDF",
+    "department_url": "https://www.pennsauken.gov/194/Housing-Property-Maintenance",
+    "phone": "856-665-1000 ext. 1411",
+    "email": "spaul@pennsauken.gov",
+    "evidence": [
+     {
+      "url": "https://www.pennsauken.gov/DocumentCenter/View/1154/Housing-Resale-And-Fire-Cert-Inspection-Information-PDF",
+      "quote": "The housing resale and fire inspections are completed by the township housing department inspectors.",
+      "doc_date": "2024-12",
+      "via": "pdf",
+      "verified": true
+     },
+     {
+      "url": "https://www.pennsauken.gov/DocumentCenter/View/1115/Smoke-Alarm-Carbon-Monoxide-Detector-Fire-Extinguisher-Instructions-PDF",
+      "quote": "All smoke alarms shall be within 10 years of the manufacture date.",
+      "doc_date": "2025-08",
+      "via": "pdf",
+      "verified": true
+     }
+    ],
+    "confidence": "high"
+   }
+  ],
+  "notes": "The fire certificate for resale is handled by the Housing / Property Maintenance Department together with the resale CO, not by the Pennsauken Fire Department Office of the Fire Marshal (2215 Merchantville Ave, 856-663-1208), which handles fire code permits and inspections. The township's smoke/CO/extinguisher instruction PDF has no published extinguisher specifics."
+ },
+ "other_items": [
+  {
+   "label": "Open and required construction permits must be closed",
+   "detail": "All permits must be obtained, inspected and pass inspection before the final Certificate of Inspection is issued. Construction dept: 856-665-1000 x129, building@pennsauken.gov.",
+   "source_url": "https://www.pennsauken.gov/DocumentCenter/View/1154/Housing-Resale-And-Fire-Cert-Inspection-Information-PDF"
+  },
+  {
+   "label": "Temporary CO by buyer affidavit",
+   "detail": "Buyer may sign a notarized Affidavit for a Temporary CO, accepting responsibility for violations; must be delivered to Housing before settlement.",
+   "source_url": "https://www.pennsauken.gov/DocumentCenter/View/1154/Housing-Resale-And-Fire-Cert-Inspection-Information-PDF"
+  },
+  {
+   "label": "Rental registration if buyer will rent",
+   "detail": "Checklist item 251.19 rental registration required; 1-2 family rentals register annually and are inspected.",
+   "source_url": "https://www.pennsauken.gov/DocumentCenter/View/1406/Housing-Resale-Inspection-Checklist-PDF"
+  }
+ ],
+ "open_questions": [
+  "Reinspection fee amount (set in Chapter 140, Fees) not confirmed from an official readable source.",
+  "No published minimum lead time or certificate validity period.",
+  "No published fire extinguisher size or mounting rule despite the PDF title."
+ ],
+ "verification": {
+  "fees": 3,
+  "fee_ok": 3,
+  "fee_bad": 0,
+  "fee_unchecked": 0,
+  "quotes": 6,
+  "q_ok": 6,
+  "q_bad": 0,
+  "q_unchecked": 0
+ }
+}

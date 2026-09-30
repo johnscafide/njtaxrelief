@@ -1,0 +1,112 @@
+{
+ "municipality_code": "0423",
+ "municipality": "Magnolia Borough",
+ "county": "CAMDEN",
+ "checked_at": "2026-09-30",
+ "resale_co": {
+  "status": "required",
+  "name": "Certificate of Change in Ownership (Chapter 112 Certificates of Occupancy)",
+  "issued_by": "Borough of Magnolia Construction Office",
+  "lead_time": "",
+  "valid_for": "",
+  "requirements": [],
+  "fees": [],
+  "how_to_apply": "",
+  "application_url": "",
+  "department_url": "https://www.magnolia-nj.org/construction/page/certificate-change-ownership",
+  "phone": "856-783-1520",
+  "email": "",
+  "evidence": [
+   {
+    "url": "https://www.magnolia-nj.org/construction/page/certificate-change-ownership",
+    "quote": "Certificate of Change in Ownership Inspections are required whenever a home is being sold",
+    "doc_date": "",
+    "via": "search_snippet",
+    "verified": null
+   },
+   {
+    "url": "https://www.magnolia-nj.org/municipal-clerk/page/notice-final-adoption-ordinance-12-2026",
+    "quote": "Notice of Final Adoption - Ordinance 12-2026",
+    "doc_date": "2026-09",
+    "via": "search_snippet",
+    "verified": null
+   }
+  ],
+  "confidence": "low",
+  "notes": "magnolia-nj.org is behind a Cloudflare bot check (HTTP 403 'Just a moment...') for curl and WebFetch, so no Borough page or form could be opened; the Borough code (ecode360) is also blocked. Evidence comes from search results only: an exact-phrase search for the quoted sentence returned the Borough's 'Certificate of Change in Ownership' page as the top result. Search summaries (not verified word for word) also said the form is turned in to the Construction Office with a $75.00 fee, and that Ordinance 12-2026 (introduced August 20, 2026, adopted September 2, 2026) amends Chapter 112 'Certificates of Occupancy' to discourage property transfers before CO compliance. No fee is recorded here because the exact text could not be confirmed. Construction Office phone is from the NJ DCA fire directory smoke detector compliance listing."
+ },
+ "fire_cert": {
+  "requirements": [],
+  "authorities": [
+   {
+    "name": "Borough of Magnolia Construction Office (smoke detector compliance)",
+    "type": "municipal_fire_bureau",
+    "area_served": "Entire borough",
+    "lead_time": "",
+    "fees": [],
+    "how_to_apply": "",
+    "application_url": "",
+    "department_url": "https://www.magnolia-nj.org/construction/page/certificate-change-ownership",
+    "phone": "856-783-1520",
+    "email": "",
+    "evidence": [
+     {
+      "url": "https://www.nj.gov/dca/dfs/pdf/fire%20directory_county%20summary/fire_code_enforcement_director.pdf",
+      "quote": "SMOKE DETECTOR COMPLIANCE Name: Magnolia Boro Constr Office Addr: 438 West Evesham Av Magnolia NJ 08049 Phone (856) 783-1520",
+      "doc_date": "2026-09 (directory PDF; fire department survey 5/2026)",
+      "via": "pdf",
+      "verified": true
+     },
+     {
+      "url": "https://www.nj.gov/dca/dfs/pdf/fire%20directory_county%20summary/fire_code_enforcement_director.pdf",
+      "quote": "Enf Auth. State Fire Official Louis Kilmer NJ Div Fire Safety",
+      "doc_date": "2026-09 (directory PDF; fire department survey 5/2026)",
+      "via": "pdf",
+      "verified": true
+     },
+     {
+      "url": "https://www.nj.gov/dca/dfs/pdf/fire%20directory_county%20summary/state_towns%207_17_26.pdf",
+      "quote": "MAGNOLIA BORO 0423",
+      "doc_date": "2026-07-17",
+      "via": "pdf",
+      "verified": true
+     },
+     {
+      "url": "https://www.nj.gov/dca/dfs/pdf/fire%20directory_county%20summary/state_towns%207_17_26.pdf",
+      "quote": "SC = Smoke Certs",
+      "doc_date": "2026-07-17",
+      "via": "pdf",
+      "verified": true
+     },
+     {
+      "url": "https://nj.gov/dca/dfs/pdf/ANNUAL%20REGISTRY/THIRD%20QUARTER%20LEA%20REGISTRY%202026.pdf",
+      "quote": "S Magnolia Borough",
+      "doc_date": "2026-07 (roster as of June 30, 2026)",
+      "via": "pdf",
+      "verified": true
+     }
+    ],
+    "confidence": "medium"
+   }
+  ],
+  "notes": "The NJ DCA Division of Fire Safety is Magnolia's Uniform Fire Code enforcing agency ('S' = State in the July 2026 LEA Registry; Fire Official Louis Kilmer, NJ Div Fire Safety). However, on the DCA 'State Enforced Towns' list (revised 7/17/2026), Magnolia is listed WITHOUT the 'SC' (Smoke Certs) mark, while nearby Stratford and Woodlynne have it. The DCA fire directory lists the smoke detector compliance contact for Magnolia as the Magnolia Borough Construction Office, 438 West Evesham Ave, (856) 783-1520. So the smoke/CO/extinguisher certificate appears to be issued locally by the Borough, not by DCA. Fees and the application form could not be read because the Borough website is behind a Cloudflare check. A search summary of the Borough code (ecode360, not verified word for word) described a certificate of smoke detector compliance from the Borough fire official before occupancy, with fees based on time remaining before the change of occupant."
+ },
+ "other_items": [],
+ "open_questions": [
+  "Resale CO fee: a search summary mentioned $75.00 paid to the Construction Office, but the exact text could not be confirmed (site blocked).",
+  "Smoke/CO/extinguisher certificate fees and form: not readable (Borough site and ecode360 both blocked).",
+  "What the Certificate of Change in Ownership inspection checks, lead time, and validity: not found.",
+  "Ordinance 12-2026 (adopted September 2, 2026) may change owner responsibilities after transfer; text not reviewed.",
+  "Confirm whether the Construction Office or a Borough fire official issues the smoke certificate (DCA directory says Construction Office)."
+ ],
+ "verification": {
+  "fees": 0,
+  "fee_ok": 0,
+  "fee_bad": 0,
+  "fee_unchecked": 0,
+  "quotes": 7,
+  "q_ok": 5,
+  "q_bad": 0,
+  "q_unchecked": 2
+ }
+}

@@ -1,0 +1,135 @@
+{
+ "municipality_code": "0807",
+ "municipality": "Greenwich Township",
+ "county": "GLOUCESTER",
+ "checked_at": "2026-09-30",
+ "resale_co": {
+  "status": "required",
+  "name": "Certificate of Occupancy (Certificate of Continued Occupancy) inspection",
+  "issued_by": "Housing Inspector / Housing Officer, Greenwich Township Construction Office",
+  "lead_time": "",
+  "valid_for": "",
+  "requirements": [
+   "Yard clean, no trash, debris, junk or junk cars; lawn mowed",
+   "Exterior in good repair, no chipped paint or corrosion",
+   "House numbers visible from the street (3 or 4 inch depending on setback)",
+   "Handrails and guards on all stairways; basement stair openings blocked so no fall-through",
+   "Doors and windows in good condition; windows open smoothly, have screens, stay open; no broken glass",
+   "Bathrooms have a window or mechanical ventilation",
+   "GFI outlets in bathrooms, kitchens and laundry rooms within 6 ft of a water source; at least two outlets per room",
+   "Metal dryer vent (no plastic)",
+   "Smoke alarm on each floor: 10-year sealed battery unit unless hard-wired with battery backup",
+   "Carbon monoxide alarm if heat or hot water is gas or oil fired",
+   "Fire extinguisher rated 2-A:10-B:C (ABC)",
+   "Water heater in good condition with relief valve discharge pipe ending 6 inches from floor; toilets and plumbing with no leaks; adequate water pressure",
+   "Oil-fired heater inspected within last 2 years; wood fireplaces or stoves cleaned and inspected by a licensed chimney sweep",
+   "Electric service in good condition, no bare wires or missing box covers; oil tanks not leaking",
+   "Sidewalks with no raised sections over 1 inch; sheds, garages and fences in good condition"
+  ],
+  "fees": [
+   {
+    "label": "Residential inspection fee",
+    "amount": "$60.00",
+    "quote": "$60.00 RESIDENTIAL INSPECTION FEE",
+    "source_url": "https://www.greenwichtwp.com/DocumentCenter/View/3009/CO-Inspection-Application-rev2025",
+    "verified": true
+   },
+   {
+    "label": "Re-inspection fee",
+    "amount": "$25.00",
+    "quote": "$25.00 RE-INSPECTION FEE",
+    "source_url": "https://www.greenwichtwp.com/DocumentCenter/View/3009/CO-Inspection-Application-rev2025",
+    "verified": true
+   }
+  ],
+  "how_to_apply": "Fill out the Application for Certificate of Occupancy (mark it Resale and give the settlement date) and submit it to the Construction Office at 420 Washington Street, Gibbstown, with the fee (form lists cash or check). The application is not complete until the owner or realtor calls the office to schedule the inspection: ext. 201 (Kay Hewes) or ext. 214 (inspection officer). Inspections are done Tuesdays and Thursdays, 10 AM to 2 PM. The Spring 2026 township newsletter says Certification of Continued Occupancy fees can also be paid online.",
+  "application_url": "https://www.greenwichtwp.com/DocumentCenter/View/3009/CO-Inspection-Application-rev2025",
+  "department_url": "https://www.greenwichtwp.com/2168/Construction-Code-Office",
+  "phone": "856-423-9129 ext. 201 or 214",
+  "email": "jgiordano@greenwichtwp.com",
+  "evidence": [
+   {
+    "url": "https://www.greenwichtwp.com/DocumentCenter/View/3009/CO-Inspection-Application-rev2025",
+    "quote": "RESALE: RENTAL: OTHER: SETTLEMENT/OCCUPANCY DATE: ... THIS DWELLING IS NOT TO BE OCCUPIED UNTIL A CERTIFICATE OF OCCUPANCY IS ISSUED BY THE HOUSING INSPECTOR OF GREENWICH TOWNSHIP.",
+    "doc_date": "2025 (file titled rev2025)",
+    "via": "pdf",
+    "verified": true
+   },
+   {
+    "url": "https://www.greenwichtwp.com/2168/Construction-Code-Office",
+    "quote": "Certificates of Occupancy Inspections CO inspections will be conducted on Tuesdays and Thursdays between 10AM and 2PM unless an emergent situation exists.",
+    "doc_date": "",
+    "via": "page",
+    "verified": true
+   },
+   {
+    "url": "https://www.greenwichtwp.com/DocumentCenter/View/933/CO-Inspection-Check-list",
+    "quote": "CO will not be issued if home has any open construction permits that are pending.",
+    "doc_date": "2021-06 (Rev. 6/14/21)",
+    "via": "pdf",
+    "verified": true
+   }
+  ],
+  "confidence": "medium",
+  "notes": "The township code (ecode360 GR0428) could not be opened, so the ordinance text requiring the CO on resale was not read directly. Requirement is shown by the official application form, which has a Resale option and says the dwelling may not be occupied until the Housing Inspector issues a CO. The township also has a landlord registration and rental property code (Ord. 21-2009) for rentals, and a lead paint ordinance (Ord. 2-2023). The checklist is dated Rev. 6/14/21. Online payment of CCO and fire inspection fees is announced in the Spring 2026 newsletter (Edmunds payment portal)."
+ },
+ "fire_cert": {
+  "requirements": [
+   "Township CO checklist (Rev. 6/14/21) asks for a 10-year sealed battery smoke alarm on each floor unless hard-wired with battery backup, and a 2-A:10-B:C extinguisher; these are CO checklist items, not a published fire bureau rule"
+  ],
+  "authorities": [
+   {
+    "name": "Greenwich Township Fire Official (municipal local enforcing agency)",
+    "type": "municipal_fire_bureau",
+    "area_served": "Entire township",
+    "lead_time": "",
+    "fees": [],
+    "how_to_apply": "Contact the township Fire Official. The Spring 2026 newsletter says fire inspection fees can be paid online through the township payment portal.",
+    "application_url": "",
+    "department_url": "https://www.greenwichtwp.com/DocumentCenter/View/3343/Spring-2026-Newsletter",
+    "phone": "856-423-1038 ext. 215",
+    "email": "",
+    "evidence": [
+     {
+      "url": "https://nj.gov/dca/dfs/pdf/ANNUAL%20REGISTRY/THIRD%20QUARTER%20LEA%20REGISTRY%202026.pdf",
+      "quote": "M Greenwich Township",
+      "doc_date": "2026-07",
+      "via": "pdf",
+      "verified": true
+     },
+     {
+      "url": "https://www.greenwichtwp.com/DocumentCenter/View/3343/Spring-2026-Newsletter",
+      "quote": "Fire Official William Angelini.................................. 856-423-1038 ext. 215",
+      "doc_date": "2026 (Spring 2026 newsletter)",
+      "via": "pdf",
+      "verified": true
+     }
+    ],
+    "confidence": "medium"
+   }
+  ],
+  "notes": "DCA LEA Registry (Third Quarter, July 2026) lists Greenwich Township, Gloucester County as 'M' (the municipality is the local enforcing agency). Key: 'M = Municipality'. The township website's Fire link redirects to the volunteer fire company site (gibbstownfire.com), which is behind a bot check and was not read. No published smoke/CO/extinguisher certificate fee or application form was found on an official source. Note: search results about Bridgeton being the LEA for 'Greenwich' refer to Greenwich Township in Cumberland County, not this town."
+ },
+ "other_items": [
+  {
+   "label": "Open construction permits must be closed",
+   "detail": "CO checklist: 'CO will not be issued if home has any open construction permits that are pending.'",
+   "source_url": "https://www.greenwichtwp.com/DocumentCenter/View/933/CO-Inspection-Check-list"
+  }
+ ],
+ "open_questions": [
+  "Smoke/CO/extinguisher certificate fee and application process for the Greenwich Township Fire Official were not published on any official page found.",
+  "Ordinance text for the resale CO (lead time, validity, late fees) is on ecode360 and could not be read.",
+  "Whether the Housing Inspector's CO inspection also serves as the fire certificate, or a separate Fire Official certificate is needed, is not stated."
+ ],
+ "verification": {
+  "fees": 2,
+  "fee_ok": 2,
+  "fee_bad": 0,
+  "fee_unchecked": 0,
+  "quotes": 5,
+  "q_ok": 5,
+  "q_bad": 0,
+  "q_unchecked": 0
+ }
+}

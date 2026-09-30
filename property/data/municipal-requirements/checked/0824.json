@@ -1,0 +1,137 @@
+{
+ "municipality_code": "0824",
+ "municipality": "Woolwich Township",
+ "county": "GLOUCESTER",
+ "checked_at": "2026-09-30",
+ "resale_co": {
+  "status": "not_found",
+  "name": "Resale Certificate of Occupancy (Housing Inspection)",
+  "issued_by": "Woolwich Township Construction Code Office",
+  "lead_time": "",
+  "valid_for": "",
+  "requirements": [
+   "All utilities connected and working so appliances and fixtures can be inspected",
+   "Homes on well or septic need well and septic approvals from the County Health Department"
+  ],
+  "fees": [
+   {
+    "label": "Housing inspection, initial (2022 form)",
+    "amount": "$45",
+    "quote": "An initial inspection fee is $45.",
+    "source_url": "https://woolwichtwp.org/wp-content/uploads/2022/06/Housing-Inspection-update-6-2022.pdf",
+    "verified": null
+   },
+   {
+    "label": "Re-inspection (2022 form)",
+    "amount": "$45",
+    "quote": "If a re-inspection is required, the fee shall also be $45.",
+    "source_url": "https://woolwichtwp.org/wp-content/uploads/2022/06/Housing-Inspection-update-6-2022.pdf",
+    "verified": null
+   },
+   {
+    "label": "Multi-family, per dwelling unit (2022 form)",
+    "amount": "$45",
+    "quote": "If the dwelling is a multi-family, a fee of $45 is required for each dwelling unit being inspected at that time.",
+    "source_url": "https://woolwichtwp.org/wp-content/uploads/2022/06/Housing-Inspection-update-6-2022.pdf",
+    "verified": null
+   }
+  ],
+  "how_to_apply": "Per the June 2022 form: apply in person or by mail at the Construction Code Office, 120 Village Green Drive, and pay at that time (cash or check payable to 'Township of Woolwich'). Inspections are Monday to Thursday, 11 to 3. Confirm the current form and fee with the office.",
+  "application_url": "https://woolwichtwp.org/wp-content/uploads/2022/06/Housing-Inspection-update-6-2022.pdf",
+  "department_url": "https://woolwichtwp.org/departments/code-enforcement-and-community-development/",
+  "phone": "856-467-2666 (Construction Office, menu option 1)",
+  "email": "kbarbato@woolwichtwp.org",
+  "evidence": [
+   {
+    "url": "https://woolwichtwp.org/wp-content/uploads/2020/02/2020-01.pdf",
+    "quote": "Prior to transferring title to such a property, the Buyer or Seller shall obtain a Housing Code Inspection from the Municipality, and all deficiencies noted in the resulting Inspection Report shall be addressed to the satisfaction of the inspector prior to the issuance of a Certificate of Occupancy.",
+    "doc_date": "2020-02",
+    "via": "pdf",
+    "verified": null
+   },
+   {
+    "url": "https://woolwichtwp.org/wp-content/uploads/2022/06/Housing-Inspection-update-6-2022.pdf",
+    "quote": "CO TYPE: RESALE",
+    "doc_date": "2022-06",
+    "via": "pdf",
+    "verified": null
+   }
+  ],
+  "confidence": "low",
+  "notes": "The Township has a resale CO housing inspection application (June 2022 form with a 'CO TYPE: RESALE' box and $45 fee), but no official text was found saying a CO is required on every sale of a 1-2 family home. The only code text found, Sec. 143-15 as replaced by Ord. 2020-01 (adopted February 18, 2020), applies to vacant buildings on abandoned or foreclosed property: before title transfer the buyer or seller must get a Housing Code Inspection, and title may transfer after the report is issued but before the CO. That ordinance says it removed the earlier rule that a CO be issued before sale. woolwichtwp.org is behind a bot check; the ordinance and form were read from Internet Archive copies of the official links (captured 2021-12 and 2022-06), so they may be out of date. Township code (ecode360 WO1602) could not be read."
+ },
+ "fire_cert": {
+  "requirements": [],
+  "authorities": [
+   {
+    "name": "Swedesboro Fire Bureau (Borough of Swedesboro fire official, the fire code enforcing agency for Woolwich)",
+    "type": "municipal_fire_bureau",
+    "area_served": "Entire township",
+    "lead_time": "",
+    "fees": [],
+    "how_to_apply": "No resale smoke certificate form or fee was found online. Contact the Swedesboro Fire Bureau, 1500 Kings Highway, Swedesboro (Fred Lock, Fire Official).",
+    "application_url": "",
+    "department_url": "https://www.historicswedesboro.com/sweedesboro-fire-bureau/",
+    "phone": "856-467-0202 ext. 109",
+    "email": "fm@swedesboro-nj.us",
+    "evidence": [
+     {
+      "url": "https://nj.gov/dca/dfs/pdf/ANNUAL%20REGISTRY/THIRD%20QUARTER%20LEA%20REGISTRY%202026.pdf",
+      "quote": "Swedesboro is the LEA for Woolwich",
+      "doc_date": "2026-07",
+      "via": "pdf",
+      "verified": true
+     },
+     {
+      "url": "https://nj.gov/dca/dfs/pdf/ANNUAL%20REGISTRY/THIRD%20QUARTER%20LEA%20REGISTRY%202026.pdf",
+      "quote": "M Woolwich Township",
+      "doc_date": "2026-07",
+      "via": "pdf",
+      "verified": true
+     },
+     {
+      "url": "https://www.historicswedesboro.com/sweedesboro-fire-bureau/",
+      "quote": "The Swedesboro Fire Bureau is located at 1500 Kings Hwy., Swedesboro, NJ 08085.",
+      "doc_date": "2026-06",
+      "via": "page",
+      "verified": true
+     }
+    ],
+    "confidence": "medium"
+   }
+  ],
+  "notes": "The DCA LEA Registry (July 2026) lists Woolwich as M with the note 'Swedesboro is the LEA for Woolwich'. The Swedesboro Fire Bureau page (June 2026) covers business registrations and inspections and does not mention resale smoke certificates. Woolwich's own 'Bureau of Fire Safety' page (2023 archive) only offered a business registration form. The Woolwich Fire Department (station 25-1) is the suppression company. The Woolwich site could not be read directly (bot check)."
+ },
+ "other_items": [
+  {
+   "label": "Well and septic approvals",
+   "detail": "If the home has a well or septic system, well and septic approvals must be obtained from the County Health Department and submitted to the township (2022 form).",
+   "source_url": "https://woolwichtwp.org/wp-content/uploads/2022/06/Housing-Inspection-update-6-2022.pdf"
+  },
+  {
+   "label": "Open permits",
+   "detail": "The 2022 form has an office field for open permits; unpermitted work on abandoned/foreclosed properties must be permitted and approved (Sec. 143-15).",
+   "source_url": "https://woolwichtwp.org/wp-content/uploads/2020/02/2020-01.pdf"
+  },
+  {
+   "label": "Township liens (abandoned/vacant/foreclosed properties)",
+   "detail": "A CO is not issued until all costs, assessments and liens owed to the Township are paid (Sec. 143-15).",
+   "source_url": "https://woolwichtwp.org/wp-content/uploads/2020/02/2020-01.pdf"
+  }
+ ],
+ "open_questions": [
+  "Does Woolwich require a resale CO for every 1-2 family sale, or only for abandoned, vacant or foreclosed properties (Sec. 143-15)? Current website and code could not be read.",
+  "Current resale inspection fee (the $45 figure is from a June 2022 form), lead time and validity.",
+  "Does the Swedesboro Fire Bureau issue resale smoke/CO/extinguisher certificates for Woolwich homes, and at what fee?"
+ ],
+ "verification": {
+  "fees": 3,
+  "fee_ok": 0,
+  "fee_bad": 0,
+  "fee_unchecked": 3,
+  "quotes": 5,
+  "q_ok": 3,
+  "q_bad": 0,
+  "q_unchecked": 2
+ }
+}

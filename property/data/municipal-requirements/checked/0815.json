@@ -1,0 +1,174 @@
+{
+ "municipality_code": "0815",
+ "municipality": "Pitman Borough",
+ "county": "GLOUCESTER",
+ "checked_at": "2026-09-30",
+ "resale_co": {
+  "status": "required",
+  "name": "Municipal Compliance for Housing and Fire Safety Inspection (sale); certificate issued by the Housing/Fire Safety Office",
+  "issued_by": "Borough of Pitman Construction Office (Housing Officer and Fire Safety Official)",
+  "lead_time": "",
+  "valid_for": "",
+  "requirements": [
+   "Smoke detectors present and working",
+   "Carbon monoxide detectors present and working",
+   "Handrails in place",
+   "Water heater relief valve with discharge pipe toward the floor",
+   "Appliance and exhaust venting",
+   "Emergency exit from a 3rd floor",
+   "Receptacles, electrical fixtures, GFI outlets, correct fuse/breaker size, no illegal extension cords",
+   "Windows open and lock; screens (April 1 to December 1)",
+   "Heating system, water heater and water pressure",
+   "Ceilings, walls, floors, interior doors, exterior door and lock",
+   "No infestation (mice, rats, roaches, ants); interior clean",
+   "Plumbing fixtures, water and drain pipes",
+   "Exterior: roof, deck, porch, steps, railings, chimney, fence, gutters/downspouts, siding, trim, paint, masonry, lighting, grounds, trash containers",
+   "House number posted",
+   "All utilities must be on for the inspection"
+  ],
+  "fees": [
+   {
+    "label": "Initial inspection, per unit (combined housing and fire safety inspection)",
+    "amount": "$75.00",
+    "quote": "INITIAL INSPECTION FEE: $75.00 (per unit)",
+    "source_url": "https://www.pitman.org/Construction/HOUSING-FIRE%20SAFETY%20INSPECTION%20APPLICATION.pdf",
+    "verified": true
+   },
+   {
+    "label": "Reinspection",
+    "amount": "$45.00",
+    "quote": "REINSPECTION FEE: $45.00",
+    "source_url": "https://www.pitman.org/Construction/HOUSING-FIRE%20SAFETY%20INSPECTION%20APPLICATION.pdf",
+    "verified": true
+   }
+  ],
+  "how_to_apply": "Fill out the Municipal Compliance for Housing and Fire Safety Inspection Application, including the Sale section (buyer, sales rep and realty company, settlement date, underground oil tank, open permits), and give a lock box number if there is one. Return it to the Construction Office at Borough Hall, 110 South Broadway, Pitman, with payment by check or cash, or contact construction@pitman.org or firesafety@pitman.org. The office then sets the inspection date and time slot.",
+  "application_url": "https://www.pitman.org/Construction/HOUSING-FIRE%20SAFETY%20INSPECTION%20APPLICATION.pdf",
+  "department_url": "https://www.pitman.org/departments/construction___zoning/index.php",
+  "phone": "856-589-2433",
+  "email": "construction@pitman.org",
+  "evidence": [
+   {
+    "url": "https://www.pitman.org/Construction/HOUSING-FIRE%20SAFETY%20INSPECTION%20APPLICATION.pdf",
+    "quote": "MUNICIPAL COMPLIANCE FOR HOUSING AND FIRE SAFETY INSPECTION APPLICATION",
+    "doc_date": "2025-01",
+    "via": "pdf",
+    "verified": true
+   },
+   {
+    "url": "https://www.pitman.org/Construction/Transfer%20of%20Title%20Agreement.pdf",
+    "quote": "The buyer(s) may only occupy the property once a certificate has been issued.",
+    "doc_date": "2024-05",
+    "via": "pdf",
+    "verified": true
+   },
+   {
+    "url": "https://www.pitman.org/Construction/Transfer%20of%20Title%20Agreement.pdf",
+    "quote": "For settlement to take place prior to the issuance of a certificate, the Housing/Fire Office may issue a “Transfer of Title Letter”.",
+    "doc_date": "2024-05",
+    "via": "pdf",
+    "verified": true
+   },
+   {
+    "url": "https://www.pitman.org/housing%20inspection%20checklist.pdf",
+    "quote": "An inspection was conducted at the above property. Listed below are the violations found. When corrections are complete, please contact this office for a reinspection appointment. All utilities must be on prior to inspection",
+    "doc_date": "2023-08",
+    "via": "pdf",
+    "verified": null
+   }
+  ],
+  "confidence": "medium",
+  "notes": "The Borough's Housing section of the Document Center (https://www.pitman.org/i_want_to/apply/applications___permits.php) posts the Housing Inspection Application (file dated January 2025), a Housing Inspection Checklist (scanned 'Housing Inspection Report', file dated August 2023, lists 'CCO' as a reason for inspection) and a Transfer of Title Agreement (May 2024). The application has separate Rental and Sale sections; the $40.00 per unit Lead Safe fee is in the Rental section only. If violations remain at settlement, the buyer can sign a notarized Transfer of Title Agreement (with hold harmless) agreeing not to occupy until violations are fixed and reinspected; the office may then issue a Transfer of Title Letter with a deadline. The Borough code (ecode360 PI1553) could not be opened, so the ordinance section and any lead-time or validity rule were not confirmed. Office hours per the Construction page: Monday 10:30am to 6:30pm, Tuesday to Friday 8am to 4pm (shorter Friday hours in summer)."
+ },
+ "fire_cert": {
+  "requirements": [
+   "Smoke and CO detectors are checked on the combined Housing and Fire Safety inspection (Pitman checklist items 1 and 2)"
+  ],
+  "authorities": [
+   {
+    "name": "Borough of Pitman Fire Safety Official (Pitman Fire Department is the municipal local enforcing agency; inspections run through the Construction Office)",
+    "type": "municipal_fire_bureau",
+    "area_served": "Entire borough",
+    "lead_time": "",
+    "fees": [
+     {
+      "label": "Combined Housing and Fire Safety Inspection, initial inspection per unit (one application and one payment block cover both)",
+      "amount": "$75.00",
+      "quote": "INITIAL INSPECTION FEE: $75.00 (per unit)",
+      "source_url": "https://www.pitman.org/Construction/HOUSING-FIRE%20SAFETY%20INSPECTION%20APPLICATION.pdf",
+      "verified": true
+     },
+     {
+      "label": "Combined Housing and Fire Safety Inspection, reinspection",
+      "amount": "$45.00",
+      "quote": "REINSPECTION FEE: $45.00",
+      "source_url": "https://www.pitman.org/Construction/HOUSING-FIRE%20SAFETY%20INSPECTION%20APPLICATION.pdf",
+      "verified": true
+     }
+    ],
+    "how_to_apply": "Use the same Municipal Compliance for Housing and Fire Safety Inspection Application as the resale inspection. No separate smoke/CO certificate form or fee was found on the Borough site. Fire inspections are 'Call for availability' per the Construction page.",
+    "application_url": "https://www.pitman.org/Construction/HOUSING-FIRE%20SAFETY%20INSPECTION%20APPLICATION.pdf",
+    "department_url": "https://www.pitman.org/departments/construction___zoning/index.php",
+    "phone": "856-589-2433",
+    "email": "firesafety@pitman.org",
+    "evidence": [
+     {
+      "url": "https://nj.gov/dca/dfs/pdf/ANNUAL%20REGISTRY/THIRD%20QUARTER%20LEA%20REGISTRY%202026.pdf",
+      "quote": "F Pitman Borough",
+      "doc_date": "2026-07",
+      "via": "pdf",
+      "verified": true
+     },
+     {
+      "url": "https://www.pitman.org/Construction/HOUSING-FIRE%20SAFETY%20INSPECTION%20APPLICATION.pdf",
+      "quote": "Emails: construction@pitman.org or firesafety@pitman.org",
+      "doc_date": "2025-01",
+      "via": "pdf",
+      "verified": true
+     },
+     {
+      "url": "https://www.law.cornell.edu/regulations/new-jersey/N-J-A-C-5-70-2-3",
+      "quote": "Where a municipality has existing inspection or approval requirements under a property maintenance or other municipal code, a CSACMAPFEC shall not be required; provided, however, that the agency responsible for the enforcement of that code shall not issue any certificate of inspection or occupancy or other approval under such municipal code until it has determined that the dwelling complies with the requirements of N.J.A.C. 5:70-4.19.",
+      "doc_date": "",
+      "via": "page",
+      "verified": true
+     }
+    ],
+    "confidence": "medium"
+   }
+  ],
+  "notes": "DCA LEA Registry (July 2026) code F = Fire Department for Pitman Borough. The Construction & Zoning page lists Ryan Pierson as Fire Sub code Official, Housing Officer and fire safety official (firesafety@pitman.org) and Clinton Carter as Fire Safety Inspector (clinton.carter@pitman.org); the Fire page lists Ryan Pierson as Chief of Department. Because the Borough runs one combined Housing and Fire Safety inspection, the $75.00 fee above is the same single fee shown under resale_co, not an extra charge. No portable fire extinguisher rule was found in the posted Pitman documents. N.J.A.C. 5:70-2.3 text was read from the Cornell LII copy of the NJ Administrative Code. Pitman has no fire district."
+ },
+ "other_items": [
+  {
+   "label": "Open permits",
+   "detail": "The Sale section of the application asks whether there are open permits and the permit number.",
+   "source_url": "https://www.pitman.org/Construction/HOUSING-FIRE%20SAFETY%20INSPECTION%20APPLICATION.pdf"
+  },
+  {
+   "label": "Underground oil tank",
+   "detail": "The Sale section asks whether there is an underground oil tank and for a DEP number.",
+   "source_url": "https://www.pitman.org/Construction/HOUSING-FIRE%20SAFETY%20INSPECTION%20APPLICATION.pdf"
+  },
+  {
+   "label": "Transfer of Title Agreement",
+   "detail": "If violations are not fixed by settlement, the buyer signs a notarized Transfer of Title Agreement and may not occupy until the certificate is issued.",
+   "source_url": "https://www.pitman.org/Construction/Transfer%20of%20Title%20Agreement.pdf"
+  }
+ ],
+ "open_questions": [
+  "Lead time before settlement and how long the certificate stays valid are not stated in the posted Pitman documents.",
+  "Pitman ordinance text (ecode360 PI1553) could not be opened to confirm the resale requirement and fee section.",
+  "Whether Pitman requires a portable fire extinguisher at resale was not found."
+ ],
+ "verification": {
+  "fees": 4,
+  "fee_ok": 4,
+  "fee_bad": 0,
+  "fee_unchecked": 0,
+  "quotes": 7,
+  "q_ok": 6,
+  "q_bad": 0,
+  "q_unchecked": 1
+ }
+}

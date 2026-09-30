@@ -1,0 +1,158 @@
+{
+ "municipality_code": "0816",
+ "municipality": "South Harrison Township",
+ "county": "GLOUCESTER",
+ "checked_at": "2026-09-30",
+ "resale_co": {
+  "status": "required",
+  "name": "Continued/Change of Occupancy and Certificate of Resale",
+  "issued_by": "South Harrison Township Construction / Code Enforcement Office (Construction Official/Housing Official)",
+  "lead_time": "",
+  "valid_for": "",
+  "requirements": [
+   "Visible 911 house number",
+   "Steps, walkways, ramps, guardrails and handrails (outside and inside)",
+   "No exterior obstructions or hazards; perimeter grading; gutters, downspouts and splash blocks",
+   "Basement or crawl space: foundation openings, secure and weatherproof access, vapor barrier intact",
+   "Sump pump electrical connection, backflow and discharge; no mold",
+   "No mice or insect infestation",
+   "Bathroom venting by fan or window",
+   "GFI receptacles in kitchen, bath and garage",
+   "Kitchen and bath flooring; switch and receptacle covers; electrical fixtures; panel box and panel covers intact; A/C disconnect",
+   "Window glass, working egress windows, window guards",
+   "Water heater chimney connection, relief valve and floor discharge",
+   "Water pipes, drain pipes, fixtures, toilet mounting, hot and cold water controls",
+   "Heating system and chimney connection",
+   "Smoke detectors and CO detectors",
+   "Fire extinguisher, size 2A-10BC, within 10 feet of the kitchen"
+  ],
+  "fees": [
+   {
+    "label": "Application fee (continued/change of occupancy and certificate of resale)",
+    "amount": "$100.00",
+    "quote": "APPLICATION FEE $100.00",
+    "source_url": "https://drive.google.com/file/d/16rJRY5Y3-o_2-_YT93zK1770XIzET5V_/view?usp=sharing",
+    "verified": null
+   }
+  ],
+  "how_to_apply": "Download the 'Certificate of Resale - Change of Occupancy' application from the Construction / Code Enforcement Office page, fill in owner, buyer, agent, appointment contact and settlement date, and submit it with the $100.00 fee to the Construction & Code Enforcement Office, 664 Harrisonville Road, Mullica Hill. Email TACO@southharrison-nj.org to schedule the inspection (inspections Tuesdays and Thursdays, 12:00 PM to 4:00 PM, upon request).",
+  "application_url": "https://drive.google.com/file/d/16rJRY5Y3-o_2-_YT93zK1770XIzET5V_/view?usp=sharing",
+  "department_url": "https://www.southharrison-nj.org/municipal-departments/construction-code-enforcement-office",
+  "phone": "856-769-3737 ext. 7805",
+  "email": "TACO@southharrison-nj.org",
+  "evidence": [
+   {
+    "url": "https://drive.google.com/file/d/16rJRY5Y3-o_2-_YT93zK1770XIzET5V_/view?usp=sharing",
+    "quote": "APPLICATION FOR CONTINUED/CHANGE OF OCCUPANCY & CERTIFICATE OF RESALE AND/OR RENTAL",
+    "doc_date": "",
+    "via": "pdf",
+    "verified": null
+   },
+   {
+    "url": "https://www.southharrison-nj.org/municipal-departments/construction-code-enforcement-office",
+    "quote": "Certificate of Resale - Change of Occupancy",
+    "doc_date": "",
+    "via": "page",
+    "verified": true
+   },
+   {
+    "url": "https://www.southharrison-nj.org/municipal-departments/construction-code-enforcement-office",
+    "quote": "Please email TACO@southharrison-nj.org to schedule inspections.",
+    "doc_date": "",
+    "via": "page",
+    "verified": true
+   }
+  ],
+  "confidence": "medium",
+  "notes": "Status is based on the Township posting a Certificate of Resale / Change of Occupancy application with a fee and an inspection checklist; the ordinance itself (ecode360 SO1812) could not be opened, so the exact legal wording was not confirmed. The form is undated and its header shows an older phone number (856-769-4444, ext. 116); the current Construction Office page lists (856) 769-3737 Ext. 7805. Construction Official/Housing Official: James McCall (ucc@southharrison-nj.org). Construction Clerk: Anita McCann (TACO@southharrison-nj.org). The same form is used for rentals. No reinspection fee, lead time or validity period is printed on the form."
+ },
+ "fire_cert": {
+  "requirements": [
+   "Township resale form checks for a fire extinguisher, size 2A-10BC, within 10 feet of the kitchen",
+   "If smoke detectors are tied into a security system, the alarm company must be notified before testing"
+  ],
+  "authorities": [
+   {
+    "name": "South Harrison Township Construction / Code Enforcement Office (smoke, CO and extinguisher checked on the resale inspection)",
+    "type": "municipal_fire_bureau",
+    "area_served": "Entire township",
+    "lead_time": "",
+    "fees": [],
+    "how_to_apply": "No separate smoke/CO certificate form was found on the Township site. The Township resale application lists Smoke Detectors, CO Detectors and Fire Extinguisher (2A-10BC, within 10 feet of kitchen) as inspection items, and its $100.00 fee is listed under resale_co. Under N.J.A.C. 5:70-2.3, where a town has its own resale inspection, a separate certificate is not required but the town may not approve until the home meets N.J.A.C. 5:70-4.19. Confirm with the Construction Office whether the County Fire Marshal also must issue a certificate.",
+    "application_url": "https://drive.google.com/file/d/16rJRY5Y3-o_2-_YT93zK1770XIzET5V_/view?usp=sharing",
+    "department_url": "https://www.southharrison-nj.org/municipal-departments/construction-code-enforcement-office",
+    "phone": "856-769-3737 ext. 7805",
+    "email": "TACO@southharrison-nj.org",
+    "evidence": [
+     {
+      "url": "https://drive.google.com/file/d/16rJRY5Y3-o_2-_YT93zK1770XIzET5V_/view?usp=sharing",
+      "quote": "IF SMOKE DETECTORS ARE TIED INTO A SECURITY SYTEM, THE ALARM COMPANY MUST BE NOTIFIED PRIOR TO TESTING!",
+      "doc_date": "",
+      "via": "pdf",
+      "verified": null
+     },
+     {
+      "url": "https://www.law.cornell.edu/regulations/new-jersey/N-J-A-C-5-70-2-3",
+      "quote": "Where a municipality has existing inspection or approval requirements under a property maintenance or other municipal code, a CSACMAPFEC shall not be required; provided, however, that the agency responsible for the enforcement of that code shall not issue any certificate of inspection or occupancy or other approval under such municipal code until it has determined that the dwelling complies with the requirements of N.J.A.C. 5:70-4.19.",
+      "doc_date": "",
+      "via": "page",
+      "verified": true
+     }
+    ],
+    "confidence": "medium"
+   },
+   {
+    "name": "Gloucester County Fire Marshal's Office (county local enforcing agency for the Uniform Fire Code)",
+    "type": "unknown",
+    "area_served": "Entire township",
+    "lead_time": "",
+    "fees": [],
+    "how_to_apply": "No County smoke/CO/extinguisher certificate form or fee for home sales was found on the County website. Call or email the County Fire Marshal's Office (212 County House Road, Clarksboro) and ask how to request the resale inspection for this town, and whether the town collects the application and fee.",
+    "application_url": "",
+    "department_url": "https://www.gloucestercountynj.gov/359/Office-of-the-Fire-Marshal",
+    "phone": "856-307-7912",
+    "email": "gcfmo@co.gloucester.nj.us",
+    "evidence": [
+     {
+      "url": "https://www.gloucestercountynj.gov/359/Office-of-the-Fire-Marshal",
+      "quote": "The County Fire Marshal's Office currently is the Local Enforcement Agency (LEA) for the following municipalities: Clayton East Greenwich Elk National Park Newfield Paulsboro South Harrison Wenonah West Deptford Woodbury Woodbury Heights",
+      "doc_date": "",
+      "via": "page",
+      "verified": true
+     },
+     {
+      "url": "https://nj.gov/dca/dfs/pdf/ANNUAL%20REGISTRY/THIRD%20QUARTER%20LEA%20REGISTRY%202026.pdf",
+      "quote": "C South Harrison Township",
+      "doc_date": "2026-07",
+      "via": "pdf",
+      "verified": true
+     }
+    ],
+    "confidence": "medium"
+   }
+  ],
+  "notes": "The DCA LEA Registry (July 2026) lists 'C South Harrison Township' (C = County), and the Gloucester County Office of the Fire Marshal page lists South Harrison among its LEA municipalities, so the County Fire Marshal's Office (856-307-7912, gcfmo@co.gloucester.nj.us) is the Uniform Fire Code enforcing agency. No County resale smoke certificate form or fee was found. The authority type list has no 'county' option, so the County entry uses 'unknown'. South Harrison has no fire district (not on the DCA list of Gloucester County fire districts). N.J.A.C. 5:70-2.3 text was read from the Cornell LII copy of the NJ Administrative Code."
+ },
+ "other_items": [
+  {
+   "label": "Trash and recycling cans",
+   "detail": "The resale form has check boxes for the number of trash cans and recycle cans.",
+   "source_url": "https://drive.google.com/file/d/16rJRY5Y3-o_2-_YT93zK1770XIzET5V_/view?usp=sharing"
+  }
+ ],
+ "open_questions": [
+  "Confirm the ordinance section requiring the Certificate of Resale for 1-2 family sales (ecode360 SO1812 could not be opened).",
+  "Reinspection fee, lead time before settlement and validity period are not printed on the form.",
+  "Does the Gloucester County Fire Marshal's Office also issue a separate smoke/CO/extinguisher certificate for South Harrison sales, or is the Township resale inspection enough?"
+ ],
+ "verification": {
+  "fees": 1,
+  "fee_ok": 0,
+  "fee_bad": 0,
+  "fee_unchecked": 1,
+  "quotes": 7,
+  "q_ok": 5,
+  "q_bad": 0,
+  "q_unchecked": 2
+ }
+}

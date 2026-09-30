@@ -1,0 +1,153 @@
+{
+ "municipality_code": "0804",
+ "municipality": "Elk Township",
+ "county": "GLOUCESTER",
+ "checked_at": "2026-09-30",
+ "resale_co": {
+  "status": "required",
+  "name": "Certificate of Occupancy (C/O inspection)",
+  "issued_by": "Elk Township Construction Office, Housing Official",
+  "lead_time": "30 days advance notice before settlement is required",
+  "valid_for": "3 months if the property is occupied, 6 months if vacant",
+  "requirements": [
+   "Well water: passing test by an NJDEP certified lab (Private Well Testing Act), or County Health letter for a new well",
+   "Septic: Gloucester County Health Dept letter of Compliance-No Further Action, or License to Operate for a new system",
+   "Cesspools, privies and outhouses must be replaced with a septic system before transfer (limited exceptions)",
+   "Smoke detector in each bedroom and on every level (10 year sealed device)",
+   "Smoke and CO detectors outside bedrooms, within 10 feet of bedrooms",
+   "General condition of interior, exterior, grounds and accessory buildings (sheds, barns, garages)",
+   "Roofing, siding, trim, window glass, screens and doors",
+   "Pipes and traps under sinks; heater and water heater",
+   "Chimney condition; chimney certification for wood fireplaces, wood stoves or pellet stoves",
+   "GFCI outlets within 6 feet of water in kitchens, bathrooms and laundry",
+   "4 inch reflective house numbers",
+   "Township-issued trash and recycling containers on the premises",
+   "No open construction permits"
+  ],
+  "fees": [
+   {
+    "label": "First and second inspection",
+    "amount": "$100.00",
+    "quote": "FEE: $100.00, 1 5t & 2nd inspection, (checks made payable to \"Elk Township\")",
+    "source_url": "https://www.elktownshipnj.gov/Documents/How%20Do%20I/Find%20Municipal%20Forms/Certificate-of-Occupancy-Application.pdf",
+    "verified": true
+   },
+   {
+    "label": "Each additional inspection request",
+    "amount": "$50.00",
+    "quote": "$50.00 each additional inspection request",
+    "source_url": "https://www.elktownshipnj.gov/Documents/How%20Do%20I/Find%20Municipal%20Forms/Certificate-of-Occupancy-Application.pdf",
+    "verified": true
+   }
+  ],
+  "how_to_apply": "Fill out the Certificate of Occupancy Application and give it to the Construction Office at 680 Whig Lane, Monroeville (in person, in the vestibule drop box, or by mail) with a check payable to 'Elk Township'. Apply at least 30 days before settlement. Inspections are Mondays and Wednesdays; late applications get no special treatment. If the home is sold 'as is', the buyer can sign the Township's notarized as-is letter agreeing to finish repairs within 60 days, and the Township then issues a Settlement Document.",
+  "application_url": "https://www.elktownshipnj.gov/Documents/How%20Do%20I/Find%20Municipal%20Forms/Certificate-of-Occupancy-Application.pdf",
+  "department_url": "https://www.elktownshipnj.gov/departments/construction.php",
+  "phone": "856-881-6525 ext. 118",
+  "email": "construction@elktownshipnj.gov",
+  "evidence": [
+   {
+    "url": "https://www.elktownshipnj.gov/Documents/How%20Do%20I/Find%20Municipal%20Forms/Certificate-of-Occupancy-Application.pdf",
+    "quote": "30 DAYS ADVANCE NOTICE, PRIOR TO SETTLEMENT OR ANY CHANGE OF OCCUPANCY IS REQUIRED FOR C/O INSPECTIONS",
+    "doc_date": "2025-03",
+    "via": "pdf",
+    "verified": true
+   },
+   {
+    "url": "https://www.elktownshipnj.gov/Documents/How%20Do%20I/Find%20Municipal%20Forms/Certificate-of-Occupancy-Application.pdf",
+    "quote": "CO is valid for 3 months if property is occupied, 6 months if vacant",
+    "doc_date": "2025-03",
+    "via": "pdf",
+    "verified": true
+   },
+   {
+    "url": "https://www.elktownshipnj.gov/Documents/How%20Do%20I/Find%20Municipal%20Forms/Certificate-of-Occupancy-Application.pdf",
+    "quote": "d) I also agree, that no one will occupy the premises until all repairs are completed, inspected and approved by the Township of Elk, and a Certificate of Occupancy is issued. Occupying without the required Certificate of Occupancy will result in monetary penalties.",
+    "doc_date": "2025-03",
+    "via": "pdf",
+    "verified": true
+   }
+  ],
+  "confidence": "high",
+  "notes": "Form is marked 'Revised: March 2025' (PDF modified 2025-10-31) and is linked from the Township 'Find Municipal Forms' page. The fee line prints '1 5t' (a typo for 1st). The old link https://elktownshipnj.gov/wp-content/uploads/2025/10/Certificate-of-Occupancy-Application.pdf now returns 404. The Construction page lists the Housing Inspector (Gene Sherban) hours as Mon, Wed, Thurs 9am to 12pm. Rentals built before 1978 also need a lead-based paint safe certification and landlord registration (rental only)."
+ },
+ "fire_cert": {
+  "requirements": [
+   "Township CO form: smoke detector in each bedroom and on every level of the house, 10 year sealed device",
+   "Township CO form: smoke and CO detectors outside bedrooms within 10 feet of bedrooms"
+  ],
+  "authorities": [
+   {
+    "name": "Elk Township Construction Office, Housing Official (smoke and CO alarms checked on the resale C/O inspection)",
+    "type": "municipal_fire_bureau",
+    "area_served": "Entire township",
+    "lead_time": "30 days before settlement (same as the C/O inspection)",
+    "fees": [],
+    "how_to_apply": "No separate smoke certificate application was found. The smoke and CO alarm check is part of the Township C/O inspection. Under N.J.A.C. 5:70-2.3(a)1, where a town has its own resale inspection, a separate certificate is not required but the town may not issue its CO until the home meets N.J.A.C. 5:70-4.19. Ask the Construction Office whether a portable fire extinguisher is also checked, since the form does not mention one.",
+    "application_url": "https://www.elktownshipnj.gov/Documents/How%20Do%20I/Find%20Municipal%20Forms/Certificate-of-Occupancy-Application.pdf",
+    "department_url": "https://www.elktownshipnj.gov/departments/construction.php",
+    "phone": "856-881-6525 ext. 118",
+    "email": "construction@elktownshipnj.gov",
+    "evidence": [
+     {
+      "url": "https://www.elktownshipnj.gov/Documents/How%20Do%20I/Find%20Municipal%20Forms/Certificate-of-Occupancy-Application.pdf",
+      "quote": "Smoke detector required in each bedroom and on every level of house (10 yr sealed device)",
+      "doc_date": "2025-03",
+      "via": "pdf",
+      "verified": true
+     },
+     {
+      "url": "https://www.law.cornell.edu/regulations/new-jersey/N-J-A-C-5-70-2-3",
+      "quote": "Where a municipality has existing inspection or approval requirements under a property maintenance or other municipal code, a CSACMAPFEC shall not be required; provided, however, that the agency responsible for the enforcement of that code shall not issue any certificate of inspection or occupancy or other approval under such municipal code until it has determined that the dwelling complies with the requirements of N.J.A.C. 5:70-4.19.",
+      "doc_date": "",
+      "via": "page",
+      "verified": true
+     }
+    ],
+    "confidence": "medium"
+   }
+  ],
+  "notes": "The Uniform Fire Code local enforcing agency for Elk is the Gloucester County Fire Marshal's Office (DCA LEA Registry, third quarter, July 2026: 'C Elk Township'; County page https://gloucestercountynj.gov/1139/County-Fire-Marshall also lists Elk; 212 County House Road, Clarksboro, 856-307-7912, gcfmo@co.gloucester.nj.us). No County resale smoke certificate form or fee was found. Elk has no fire district; its fire companies are Aura and Ferrell. The Elk CO form does not mention a portable fire extinguisher. N.J.A.C. 5:70-2.3 text was read from the Cornell LII copy of the NJ Administrative Code."
+ },
+ "other_items": [
+  {
+   "label": "Well water test",
+   "detail": "Passing well water test by an NJDEP certified lab (NJAC 7:9E, Private Well Testing Act), or County Health Dept approval letter for a new well.",
+   "source_url": "https://www.elktownshipnj.gov/Documents/How%20Do%20I/Find%20Municipal%20Forms/Certificate-of-Occupancy-Application.pdf"
+  },
+  {
+   "label": "Septic certification / cesspool replacement",
+   "detail": "Gloucester County Health Dept letter of Compliance-No Further Action (or License to Operate for new systems). Cesspools, privies and outhouses must be replaced with a septic system on transfer, with limited exceptions (NJAC 7:9A-3.16(b)).",
+   "source_url": "https://www.elktownshipnj.gov/Documents/How%20Do%20I/Find%20Municipal%20Forms/Certificate-of-Occupancy-Application.pdf"
+  },
+  {
+   "label": "No open construction permits",
+   "detail": "Open construction permits must be closed.",
+   "source_url": "https://www.elktownshipnj.gov/Documents/How%20Do%20I/Find%20Municipal%20Forms/Certificate-of-Occupancy-Application.pdf"
+  },
+  {
+   "label": "Township trash and recycling containers",
+   "detail": "Township-issued trash and recycle containers are required to be on the premises.",
+   "source_url": "https://www.elktownshipnj.gov/Documents/How%20Do%20I/Find%20Municipal%20Forms/Certificate-of-Occupancy-Application.pdf"
+  },
+  {
+   "label": "As-is sale buyer letter",
+   "detail": "For homes sold 'as is', the buyer signs a notarized letter agreeing to finish required repairs within 60 days; a Settlement Document is issued when the letter is received.",
+   "source_url": "https://www.elktownshipnj.gov/Documents/How%20Do%20I/Find%20Municipal%20Forms/Certificate-of-Occupancy-Application.pdf"
+  }
+ ],
+ "open_questions": [
+  "Whether a portable fire extinguisher is checked on the Elk resale inspection (not listed on the form).",
+  "Whether the Gloucester County Fire Marshal issues any separate smoke/CO/extinguisher certificate for Elk resales."
+ ],
+ "verification": {
+  "fees": 2,
+  "fee_ok": 2,
+  "fee_bad": 0,
+  "fee_unchecked": 0,
+  "quotes": 5,
+  "q_ok": 5,
+  "q_bad": 0,
+  "q_unchecked": 0
+ }
+}

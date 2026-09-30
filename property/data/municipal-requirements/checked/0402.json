@@ -1,0 +1,125 @@
+{
+ "municipality_code": "0402",
+ "municipality": "Audubon Park Borough",
+ "county": "CAMDEN",
+ "checked_at": "2026-09-30",
+ "resale_co": {
+  "status": "not_found",
+  "name": "",
+  "issued_by": "",
+  "lead_time": "",
+  "valid_for": "",
+  "requirements": [],
+  "fees": [],
+  "how_to_apply": "",
+  "application_url": "",
+  "department_url": "https://audubonparknj.org/",
+  "phone": "856-547-5236",
+  "email": "apclerk@audubonparknj.org",
+  "evidence": [],
+  "confidence": "low",
+  "notes": "No resale certificate of occupancy or housing resale inspection was found on the Borough website or in its posted ordinance list (2007 to 2026). The Borough site has no construction or code enforcement page. Third-party sources (not cited) say all homes in the borough are owned and administered by the Audubon Park Mutual Housing Corporation, so a home 'sale' may be a transfer handled by that corporation rather than a conventional deed sale; this is unverified. Contact the Borough Clerk (856-547-5236) to confirm."
+ },
+ "fire_cert": {
+  "requirements": [],
+  "authorities": [
+   {
+    "name": "Haddon Township Bureau of Fire Prevention, Office of the Fire Marshal (serving Audubon Park by shared services agreement)",
+    "type": "municipal_fire_bureau",
+    "area_served": "Entire borough",
+    "lead_time": "Apply more than 14 business days before the change of occupant for the lowest fee",
+    "fees": [
+     {
+      "label": "Smoke/CO certificate, request received more than 14 business days before change of occupant",
+      "amount": "$150.00",
+      "quote": "(a) Requests for a CSDCMAC received more than 14 business days prior to the change of occupant: $150.00; and",
+      "source_url": "https://audubonparknj.org/ordinances/2023/Ord_2023-01.pdf",
+      "verified": null
+     },
+     {
+      "label": "Smoke/CO certificate, request received 7 to under 14 business days before change of occupant",
+      "amount": "$175.00",
+      "quote": "(b) Requests for a CSDCMAC received 7 but less than 14 business days prior to the change of occupant: $175.00; and",
+      "source_url": "https://audubonparknj.org/ordinances/2023/Ord_2023-01.pdf",
+      "verified": null
+     },
+     {
+      "label": "Smoke/CO certificate, request received 4 to under 7 business days before change of occupant",
+      "amount": "$200.00",
+      "quote": "(c) Requests for a CSDCMAC received 4 but less than 7 business days prior to the change of occupant: $200.00.",
+      "source_url": "https://audubonparknj.org/ordinances/2023/Ord_2023-01.pdf",
+      "verified": null
+     },
+     {
+      "label": "Smoke/CO certificate, request received less than 4 days before change of occupant",
+      "amount": "$225.00",
+      "quote": "(d) Requests for CSDCMAC received less than 4 days prior to the change of occupant: $225.00; and",
+      "source_url": "https://audubonparknj.org/ordinances/2023/Ord_2023-01.pdf",
+      "verified": null
+     },
+     {
+      "label": "Smoke/CO certificate, request submitted after the change of occupant",
+      "amount": "$250",
+      "quote": "(e) Requests submitted after the date of change of occupant: $250.",
+      "source_url": "https://audubonparknj.org/ordinances/2023/Ord_2023-01.pdf",
+      "verified": null
+     }
+    ],
+    "how_to_apply": "Contact the Haddon Township Fire Marshal's Office, Township Annex Building, 10 Reeve Ave., Haddon Township. No Audubon Park specific application form was found.",
+    "application_url": "",
+    "department_url": "https://www.haddontwp.com/departmets/fire-marshall/",
+    "phone": "856-833-6276",
+    "email": "rsheppard@haddontwp.com",
+    "evidence": [
+     {
+      "url": "https://audubonparknj.org/ordinances/2023/Ord_2023-01.pdf",
+      "quote": "The local enforcing agency shall be the Office of the Fire Marshal in the Bureau of Fire Prevention of the Township of Haddon.",
+      "doc_date": "2023-03 (Ordinance 2023-01 adopted March 6, 2023)",
+      "via": "pdf",
+      "verified": null
+     },
+     {
+      "url": "https://audubonparknj.org/ordinances/2023/Ord_2023-01.pdf",
+      "quote": "Smoke Detector/Carbon Monoxide Detector inspections shall be conducted on all one- and two-family dwellings for resale or change of occupant.",
+      "doc_date": "2023-03",
+      "via": "pdf",
+      "verified": null
+     },
+     {
+      "url": "https://www.haddontwp.com/departmets/fire-marshall/",
+      "quote": "Haddon Township (Westmont, West Collingswood Heights, West Collingswood Extension) & Audubon Park",
+      "doc_date": "",
+      "via": "page",
+      "verified": true
+     },
+     {
+      "url": "https://nj.gov/dca/dfs/pdf/ANNUAL%20REGISTRY/THIRD%20QUARTER%20LEA%20REGISTRY%202026.pdf",
+      "quote": "Haddon Township is the LEA for Audubon Park Borough.",
+      "doc_date": "2026-07 (LEA registry as of June 30, 2026)",
+      "via": "pdf",
+      "verified": true
+     }
+    ],
+    "confidence": "high"
+   }
+  ],
+  "notes": "Ordinance 2023-01 (adopted March 6, 2023) replaced Ordinance 2012-05 and makes the Haddon Township Fire Marshal the local fire enforcing agency for Audubon Park under a shared services agreement. The ordinance calls the certificate a CSDCMAC (smoke detector and carbon monoxide alarm compliance). A certificate of fire code status is $25.00 under the same ordinance (not a resale item). The fire marshal contact details were read through a page summary tool because the Haddon Township site blocks plain downloads; staff listed were Chief Fire Marshal William Behnke (ext. 6269, wbehnke@haddontwp.com) and Fire Marshal Ryan Sheppard (ext. 6276, rsheppard@haddontwp.com). The volunteer Audubon Park Fire Company (856-546-6134) is a separate fire company, not the enforcing agency."
+ },
+ "other_items": [],
+ "open_questions": [
+  "Does Audubon Park require any borough resale inspection or certificate? None found; confirm with the Borough Clerk at 856-547-5236.",
+  "How home transfers work given the Audubon Park Mutual Housing Corporation ownership model (third-party lead only).",
+  "Whether the Haddon Township Fire Marshal uses its own Haddon Township resale form for Audubon Park requests; no Audubon Park specific form found.",
+  "Reinspection fee for Audubon Park smoke/CO certificates is not stated in Ordinance 2023-01."
+ ],
+ "verification": {
+  "fees": 5,
+  "fee_ok": 0,
+  "fee_bad": 0,
+  "fee_unchecked": 5,
+  "quotes": 4,
+  "q_ok": 2,
+  "q_bad": 0,
+  "q_unchecked": 2
+ }
+}

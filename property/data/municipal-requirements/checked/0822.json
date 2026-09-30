@@ -1,0 +1,161 @@
+{
+ "municipality_code": "0822",
+ "municipality": "Woodbury",
+ "county": "GLOUCESTER",
+ "checked_at": "2026-09-30",
+ "resale_co": {
+  "status": "required",
+  "name": "Certificate of Occupancy (housing inspection)",
+  "issued_by": "City of Woodbury Housing Department (Code Enforcement)",
+  "lead_time": "Allow 10 business days to get the initial inspection appointment and at least 5 business days for a re-inspection. Payment must be received before the inspection is scheduled.",
+  "valid_for": "",
+  "requirements": [
+   "Safe drinking water with adequate flow",
+   "Kitchen sink, toilet, bathroom sink, and tub or shower, all working with hot and cold water",
+   "Water heater working; hot water at least 120F",
+   "Approved garbage containers",
+   "Each room has 2 working outlets; no wiring hazards; bathroom light on a wall switch",
+   "Bathrooms ventilated (window or fan)",
+   "Heat working and able to keep 70F; space heaters vented",
+   "Safe, clear exits; basement bedrooms need proper egress",
+   "Foundation, roof, walls, windows and doors in good repair, no leaks or chronic dampness",
+   "Stairs, porches and balconies safe, with railings",
+   "No rodents or insects; window screens from May 1 to October 1",
+   "Yard free of trash; lawn, hedges and bushes trimmed; fences in good repair",
+   "Interior paint and wall coverings in good condition",
+   "Smoke detector on each level and in each bedroom; CO detector within 10 feet of sleeping areas",
+   "ABC fire extinguisher (2A:10B:C) mounted in or within 10 feet of the kitchen on the way to an exit"
+  ],
+  "fees": [
+   {
+    "label": "Initial inspection, per unit",
+    "amount": "$125",
+    "quote": "Initial Inspection fee: $125 per unit",
+    "source_url": "https://woodbury.nj.us/1191/Housing-Inspection-Landlord-Licensing",
+    "verified": true
+   },
+   {
+    "label": "Re-inspection (follow up), per unit, each",
+    "amount": "$50",
+    "quote": "Follow up to initial inspection: $50 per unit, each",
+    "source_url": "https://woodbury.nj.us/1191/Housing-Inspection-Landlord-Licensing",
+    "verified": true
+   },
+   {
+    "label": "Transfer of Ownership (option listed on the application form; not explained)",
+    "amount": "$50",
+    "quote": "$50 Transfer of Ownership",
+    "source_url": "https://woodbury.nj.us/DocumentCenter/View/2520/Application-for-Certificate-of-Occupancy-PDF",
+    "verified": true
+   }
+  ],
+  "how_to_apply": "Submit the Application for a Certificate of Occupancy Inspection (PDF) with the initial fee to the Housing Department, 33 Delaware Street, Woodbury. Inspections are Monday through Thursday, and payment must be received before an appointment is set. The owner or agent must go with the inspector.",
+  "application_url": "https://woodbury.nj.us/DocumentCenter/View/2520/Application-for-Certificate-of-Occupancy-PDF",
+  "department_url": "https://woodbury.nj.us/1191/Housing-Inspection-Landlord-Licensing",
+  "phone": "856-845-1300 ext. 127",
+  "email": "cmiller@woodbury.nj.us",
+  "evidence": [
+   {
+    "url": "https://woodbury.nj.us/1191/Housing-Inspection-Landlord-Licensing",
+    "quote": "All residential units must be inspected by the Housing Department and a Certificate of Occupancy issued prior to:",
+    "doc_date": "2026",
+    "via": "page",
+    "verified": true
+   },
+   {
+    "url": "https://woodbury.nj.us/1191/Housing-Inspection-Landlord-Licensing",
+    "quote": "The sale of a residential unit (both rental and owner-occupied)",
+    "doc_date": "2026",
+    "via": "page",
+    "verified": true
+   },
+   {
+    "url": "https://library.municode.com/nj/woodbury/codes/code_of_ordinances?nodeId=PTIIGELE_CH106HOST_ARTIINGE_S106-7INDWUNCEOC",
+    "quote": "No owner, agent, broker or person shall purchase, sell, rent, lease or use in such a manner as to result, permit or allow any person(s) to occupy, or to live in, as an owner, occupant, tenant or otherwise, any dwelling unit or apartment or structure unless a certificate of occupancy",
+    "doc_date": "2018 (codified through 2023-12)",
+    "via": "page",
+    "verified": null
+   }
+  ],
+  "confidence": "high",
+  "notes": "Fee conflict: City code Sec. 106-7(F) (Municode, codified through December 2023, last amended 2018) says $100.00 per unit for the initial inspection and $50.00 per re-inspection. The City's current web page and application form (file dated November 2025) say $125. The current page is used here; confirm with the office. Other contact: John Leech, Senior Housing Official, jleech@woodbury.nj.us, ext. 132. Checklist is Rev. 06/2023. Construction permits for Woodbury are processed by the West Deptford Construction Office (since January 2016), but housing CO applications stay with Woodbury Code Enforcement."
+ },
+ "fire_cert": {
+  "requirements": [
+   "Smoke detector on each level and inside each bedroom",
+   "CO detector within 10 feet of all sleeping areas",
+   "ABC fire extinguisher (2A:10B:C) mounted in the kitchen or within 10 feet of it on the way to an exit"
+  ],
+  "authorities": [
+   {
+    "name": "City of Woodbury Housing Department (takes the Smoke Detector/Carbon Monoxide Compliance application); Gloucester County Fire Marshal's Office is the registered fire code enforcing agency",
+    "type": "unknown",
+    "area_served": "Entire city",
+    "lead_time": "",
+    "fees": [],
+    "how_to_apply": "The City's housing page says to apply for Smoke Detector/Carbon Monoxide Compliance using the same Application for a Certificate of Occupancy Inspection. No separate smoke certificate fee is published.",
+    "application_url": "https://woodbury.nj.us/DocumentCenter/View/2520/Application-for-Certificate-of-Occupancy-PDF",
+    "department_url": "https://woodbury.nj.us/1191/Housing-Inspection-Landlord-Licensing",
+    "phone": "856-845-1300 ext. 127",
+    "email": "cmiller@woodbury.nj.us",
+    "evidence": [
+     {
+      "url": "https://woodbury.nj.us/1191/Housing-Inspection-Landlord-Licensing",
+      "quote": "Application for Smoke Detector/Carbon Monoxide Compliance - Download the Application for a Certificate of Occupancy Inspection (PDF).",
+      "doc_date": "2026",
+      "via": "page",
+      "verified": true
+     },
+     {
+      "url": "https://library.municode.com/nj/woodbury/codes/code_of_ordinances?nodeId=PTIIGELE_CH89FIPR_ARTIUNFISAAC_S89-2AGDE",
+      "quote": "The local enforcing agency shall be the Gloucester County Fire Marshal's Office.",
+      "doc_date": "2022-06",
+      "via": "page",
+      "verified": null
+     },
+     {
+      "url": "https://nj.gov/dca/dfs/pdf/ANNUAL%20REGISTRY/THIRD%20QUARTER%20LEA%20REGISTRY%202026.pdf",
+      "quote": "C Woodbury City",
+      "doc_date": "2026-07",
+      "via": "pdf",
+      "verified": true
+     }
+    ],
+    "confidence": "medium"
+   }
+  ],
+  "notes": "Woodbury code Sec. 89-2 (Ord. 2367-22, June 2022) makes the Gloucester County Fire Marshal's Office the fire code enforcing agency, and the DCA registry (July 2026) lists Woodbury City as C (County). The City's housing page routes the smoke/CO compliance application through the housing CO application, so it is unclear whether the County or the City housing inspector signs the certificate, or whether any separate county fee applies. County Fire Marshal: 212 County House Road, Clarksboro; 856-307-7912; gcfmo@co.gloucester.nj.us. The Woodbury Fire Department (29 Delaware Street) is the suppression department."
+ },
+ "other_items": [
+  {
+   "label": "Curbs and sidewalks",
+   "detail": "For any property sold or transferred, curbs and sidewalks must be installed if missing, or repaired/replaced if the Code Enforcement Official finds they need it, before the CO is issued (City code Sec. 167-20.2).",
+   "source_url": "https://library.municode.com/nj/woodbury/codes/code_of_ordinances?nodeId=PTIIGELE_CH167STSI_ARTIVLAOUSTSI_S167-20.2CEOCSATRPR"
+  },
+  {
+   "label": "Water/sewer account",
+   "detail": "The buyer must notify the City Water/Sewer and Tax Office of the change in ownership right away (City code Sec. 197-33).",
+   "source_url": "https://library.municode.com/nj/woodbury/codes/code_of_ordinances?nodeId=PTIIGELE_CH197WA_ARTIRURE_S197-33ADWACH"
+  },
+  {
+   "label": "Landlord registration (rental units)",
+   "detail": "For rental units, the Landlord Registration Form must be submitted at any change of ownership.",
+   "source_url": "https://woodbury.nj.us/1191/Housing-Inspection-Landlord-Licensing"
+  }
+ ],
+ "open_questions": [
+  "Current CO fee: $125 on the web page and form versus $100 in the codified ordinance (Sec. 106-7F). Was the ordinance amended after 2023?",
+  "Who signs the state smoke/CO/extinguisher certificate (City housing inspector or Gloucester County Fire Marshal) and whether it has its own fee.",
+  "What the '$50 Transfer of Ownership' option on the application form covers, and how long a CO stays valid."
+ ],
+ "verification": {
+  "fees": 3,
+  "fee_ok": 3,
+  "fee_bad": 0,
+  "fee_unchecked": 0,
+  "quotes": 6,
+  "q_ok": 4,
+  "q_bad": 0,
+  "q_unchecked": 2
+ }
+}

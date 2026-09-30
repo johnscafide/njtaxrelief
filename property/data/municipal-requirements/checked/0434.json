@@ -1,0 +1,178 @@
+{
+ "municipality_code": "0434",
+ "municipality": "Voorhees Township",
+ "county": "CAMDEN",
+ "checked_at": "2026-09-30",
+ "resale_co": {
+  "status": "required",
+  "name": "Residential Resale Certificate (Residential Change of Owner)",
+  "issued_by": "Voorhees Planning & Zoning Department",
+  "lead_time": "Fee depends on how soon the inspection is requested after the application is submitted: more than 10 business days is the lowest fee. Submit the signed and sealed survey early (one issued within the past 60 days is recommended).",
+  "valid_for": "60 days after issue if settlement or occupancy has not occurred",
+  "requirements": [
+   "Recent signed and sealed survey for all single family homes (not required for condos); one issued within the past 60 days is recommended",
+   "All open construction permits must be closed before the certificate is issued",
+   "House number on the building itself, at least 30 inches above ground, at least 3 inches tall, on a contrasting background, visible from the street; stick-on numbers not accepted",
+   "Carbon monoxide alarm outside and within 10 feet of every sleeping area; extra alarm if a bedroom is on another level or more than 10 feet away",
+   "Smoke alarms on every level including the basement and outside sleeping areas; battery-only alarms must be 10-year sealed units",
+   "A hardwired or monitored alarm system cannot be replaced with battery-only alarms; monitored systems must be put in test mode for the inspection",
+   "No zoning violations; any addition, shed, deck, fence or other improvement built without zoning or construction permits must be legalized first",
+   "Pool fencing and gates must meet Section 305 of the International Swimming Pool and Spa Code",
+   "Someone must be present unless the property is completely empty; inaccessible areas fail the inspection",
+   "Tax assessor property record card is checked during the inspection"
+  ],
+  "fees": [
+   {
+    "label": "Inspection requested more than 10 business days after application",
+    "amount": "$75.00",
+    "quote": "$75.00 When inspection is requested for more than 10 business days after submission of application, when available.",
+    "source_url": "https://voorheesnj.com/wp-content/uploads/2024/01/Residential-Resale-Application-7.02.2026.pdf",
+    "verified": true
+   },
+   {
+    "label": "Inspection requested 2 to 10 business days after application",
+    "amount": "$125.00",
+    "quote": "$125.00 When inspection is requested between 2 and 10 business days after submission of application, when available.",
+    "source_url": "https://voorheesnj.com/wp-content/uploads/2024/01/Residential-Resale-Application-7.02.2026.pdf",
+    "verified": true
+   },
+   {
+    "label": "Inspection requested 1 to 2 business days after application",
+    "amount": "$150.00",
+    "quote": "$150.00 When inspection is requested between 1 and 2 business days after submission of application, when available.",
+    "source_url": "https://voorheesnj.com/wp-content/uploads/2024/01/Residential-Resale-Application-7.02.2026.pdf",
+    "verified": true
+   },
+   {
+    "label": "Inspection requested the same day as application",
+    "amount": "$200.00",
+    "quote": "$200.00 When inspection is requested for the same day as submission of application, when available.",
+    "source_url": "https://voorheesnj.com/wp-content/uploads/2024/01/Residential-Resale-Application-7.02.2026.pdf",
+    "verified": true
+   },
+   {
+    "label": "First re-inspection (also charged when any part of the property is inaccessible)",
+    "amount": "$75",
+    "quote": "the inspector will deem the inspection as \"failed,\" and the $75 re-inspection fee will be required to be paid prior to the scheduling of the first re-inspection, and $150 for any re-inspection thereafter.",
+    "source_url": "https://voorheesnj.com/wp-content/uploads/2024/01/Residential-Resale-Application-7.02.2026.pdf",
+    "verified": true
+   },
+   {
+    "label": "Each later re-inspection",
+    "amount": "$150",
+    "quote": "the $75 re-inspection fee will be required to be paid prior to the scheduling of the first re-inspection, and $150 for any re-inspection thereafter.",
+    "source_url": "https://voorheesnj.com/wp-content/uploads/2024/01/Residential-Resale-Application-7.02.2026.pdf",
+    "verified": true
+   }
+  ],
+  "how_to_apply": "Fill out the Residential Resale Application and send it to the Planning & Zoning Department by email (resales@voorheesnj.com), through the SDL online portal, or in person at 2400 Voorhees Town Center. Pay by cash or check payable to Voorhees Township. Include the buyer, agent and certificate email, lock box details, and the survey.",
+  "application_url": "https://voorheesnj.com/wp-content/uploads/2024/01/Residential-Resale-Application-7.02.2026.pdf",
+  "department_url": "https://voorheesnj.com/departments/zoning/",
+  "phone": "856-429-0647",
+  "email": "resales@voorheesnj.com",
+  "evidence": [
+   {
+    "url": "https://voorheesnj.com/departments/zoning/",
+    "quote": "If you are selling your home, the presence of an unpermitted improvement (a violation) may delay settlement since a resale certificate cannot be issued for a transfer of ownership while a violation exists.",
+    "doc_date": "",
+    "via": "page",
+    "verified": true
+   },
+   {
+    "url": "https://voorheesnj.com/wp-content/uploads/2024/01/Residential-Resale-Application-7.02.2026.pdf",
+    "quote": "Per §156.037(C)(5)(a)(4) of the Voorhees Township ordinances, a Resale Certificate cannot be issued prior to the Township’ s review of a current signed and sealed survey.",
+    "doc_date": "2026-07-02 (form revision in file name)",
+    "via": "pdf",
+    "verified": true
+   },
+   {
+    "url": "https://voorheesnj.com/wp-content/uploads/2024/01/Residential-Resale-Application-7.02.2026.pdf",
+    "quote": "Resale Certificates shall become null and void sixty (60) days after a Certificate has been issued if settlement/occupancy has not occurred within that time.",
+    "doc_date": "2026-07-02 (form revision in file name)",
+    "via": "pdf",
+    "verified": true
+   },
+   {
+    "url": "https://voorheesnj.com/departments/construction/",
+    "quote": "The Construction Office does not schedule resale and rental inspections. Those inspections must be scheduled through the Zoning Department.",
+    "doc_date": "",
+    "via": "page",
+    "verified": true
+   },
+   {
+    "url": "https://www.vtfd66.org/wp-content/uploads/2023/10/townshipord2023.pdf",
+    "quote": "Certificate for Resale or Rental of existing buildings (change in ownership or tenancy).",
+    "doc_date": "2023 (Ordinance No. 420-23, Schedule of Fees for the Year 2023)",
+    "via": "pdf",
+    "verified": null
+   }
+  ],
+  "confidence": "high",
+  "notes": "Fees are from the current application form (revision 7.02.2026). The 2023 fee ordinance (No. 420-23, scanned PDF posted by the Voorhees Fire Department) shows the same $75 / $125 / $150 / $200 amounts but with slightly different windows ('between 3-10 business days' and 'within 24 hours') and a flat '$75.00 per re-inspection' for residential resale; the newer form adds $150 for the second and later re-inspections. The tiers count business days from submission of the application to the requested inspection date, not days before closing. Non-residential sales use a separate Change of Ownership packet. A Residential Rental Certificate and annual landlord registration exist separately for rentals."
+ },
+ "fire_cert": {
+  "requirements": [
+   "Battery-only smoke alarms must be 10-year sealed units (per Voorhees resale packet and Fire Department page)",
+   "Carbon monoxide alarm within 10 feet of each sleeping area",
+   "Hardwired or monitored alarm systems cannot be downgraded to battery-only alarms"
+  ],
+  "authorities": [
+   {
+    "name": "Voorhees Township Planning & Zoning Department (residential smoke/CO inspections, done with the resale certificate inspection)",
+    "type": "municipal_fire_bureau",
+    "area_served": "Entire township",
+    "lead_time": "Same as the resale certificate; see resale fee tiers",
+    "fees": [],
+    "how_to_apply": "Use the Residential Resale Application from the Zoning Department; the smoke and CO alarm check is part of that inspection.",
+    "application_url": "https://voorheesnj.com/wp-content/uploads/2024/01/Residential-Resale-Application-7.02.2026.pdf",
+    "department_url": "https://www.vtfd66.org/fire-prevention/inspection-bureau/",
+    "phone": "856-429-0647",
+    "email": "resales@voorheesnj.com",
+    "evidence": [
+     {
+      "url": "https://www.vtfd66.org/fire-prevention/inspection-bureau/",
+      "quote": "SMOKE DETECTOR INSPECTIONS FOR RESIDENTIAL PROPERTIES ARE COMPLETED THROUGH THE VOORHEES TOWNSHIP ZONING DEPARTMENT.",
+      "doc_date": "",
+      "via": "page",
+      "verified": true
+     },
+     {
+      "url": "https://www.nj.gov/dca/dfs/pdf/fire%20directory_county%20summary/fire_code_enforcement_director.pdf",
+      "quote": "Voorhees Twp Zoning Dept",
+      "doc_date": "2026-05-26 (survey date for Voorhees entry)",
+      "via": "pdf",
+      "verified": true
+     }
+    ],
+    "confidence": "high"
+   }
+  ],
+  "notes": "The Voorhees Township Fire Department (local enforcing agency, Fire Official Thomas O'Brien, 2002 S. Burnt Mill Road, 856-783-6630) handles commercial fire inspections, but its own page sends residential smoke detector inspections to the Township Zoning Department. The Voorhees fire district was abolished 1/1/2019 per the DCA directory, so there is one agency for the whole township. No separate smoke certificate fee was found; the 2023 fee ordinance lists only a '$25.00' Certificate of Fire Code Status, which is a different document. The resale packet does not mention the portable fire extinguisher required by state rule N.J.A.C. 5:70-2.3."
+ },
+ "other_items": [
+  {
+   "label": "Open permits must be closed",
+   "detail": "The resale form requires Township sign-off that all outstanding permits for the property have been closed and finalized before the certificate is issued.",
+   "source_url": "https://voorheesnj.com/wp-content/uploads/2024/01/Residential-Resale-Application-7.02.2026.pdf"
+  },
+  {
+   "label": "Survey",
+   "detail": "A current signed and sealed survey must be reviewed before the Resale Certificate can be issued (single family homes; not condos).",
+   "source_url": "https://voorheesnj.com/wp-content/uploads/2024/01/Residential-Resale-Application-7.02.2026.pdf"
+  }
+ ],
+ "open_questions": [
+  "Whether the Zoning resale inspection also verifies the portable fire extinguisher, and whether the Township issues the state-form smoke/CO/extinguisher certificate as a separate document.",
+  "The ordinance text of section 156.037 on amlegal could not be opened (bot check); requirement and fee details come from the Township form and 2023 fee ordinance."
+ ],
+ "verification": {
+  "fees": 6,
+  "fee_ok": 6,
+  "fee_bad": 0,
+  "fee_unchecked": 0,
+  "quotes": 7,
+  "q_ok": 6,
+  "q_bad": 0,
+  "q_unchecked": 1
+ }
+}

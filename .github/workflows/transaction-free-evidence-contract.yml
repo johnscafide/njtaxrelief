@@ -26,6 +26,9 @@ on:
       - 'property/scripts/publish_transaction_municipal_requirements.py'
       - 'supabase/migrations/20260930150000_municipal_requirements_hold_unchecked.sql'
       - 'property/tests/municipal-requirements-unchecked-contract.mjs'
+      - 'property/scripts/build_checked_municipal_requirements.py'
+      - 'property/data/municipal-requirements/**'
+      - 'supabase/migrations/20260930170000_checked_municipal_requirements_camden_gloucester.sql'
   workflow_dispatch:
 
 permissions:
@@ -53,6 +56,11 @@ jobs:
         run: |
           python property/scripts/publish_transaction_municipal_requirements.py --self-test
           node property/tests/municipal-requirements-unchecked-contract.mjs
+      - name: Person-checked town data matches its migration
+        run: |
+          python property/scripts/build_checked_municipal_requirements.py --self-test
+          python property/scripts/build_checked_municipal_requirements.py --out "$RUNNER_TEMP/checked.sql"
+          diff -q "$RUNNER_TEMP/checked.sql" supabase/migrations/20260930170000_checked_municipal_requirements_camden_gloucester.sql
       - name: Guard source semantics and privacy boundaries
         run: |
           set -euo pipefail

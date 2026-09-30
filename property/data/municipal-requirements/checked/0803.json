@@ -1,0 +1,171 @@
+{
+ "municipality_code": "0803",
+ "municipality": "East Greenwich Township",
+ "county": "GLOUCESTER",
+ "checked_at": "2026-09-30",
+ "resale_co": {
+  "status": "required",
+  "name": "Certificate of Occupancy for Resale and Rental Property (C.O. Inspection)",
+  "issued_by": "East Greenwich Township Construction Department (Construction Official / Building Housing Inspector)",
+  "lead_time": "",
+  "valid_for": "",
+  "requirements": [
+   "Housing code inspection of the whole home using the Township checklist (Property Maintenance Code based)",
+   "Smoke detectors on every level (basement, first and second floor) and outside each sleeping area",
+   "Since January 1, 2019, battery smoke detectors must be 10-year sealed battery units (hard-wired AC interconnected units do not need replacing)",
+   "Carbon monoxide alarms near sleeping areas; fire extinguisher in the proper place",
+   "All utilities on, all smoke and CO detectors working (they will be tested), pets restrained",
+   "Well certification and septic certification (Gloucester County approval) if applicable",
+   "Chimney certification if there is a wood-burning fireplace",
+   "Anti-tip bracket on the oven",
+   "All open construction permits must have passed inspections",
+   "Yard and grass maintained, house number posted, roof, gutters, walls, windows, screens, steps, porches, handrails and guardrails in good repair",
+   "Plumbing, heating, water heater and electric service working; bathroom ventilation; no junk or unregistered vehicles",
+   "Pool properly located and fenced"
+  ],
+  "fees": [
+   {
+    "label": "C.O. inspection, residential, per unit",
+    "amount": "$50.00",
+    "quote": "C.O. INSPECTION ($50.00) FOR RESIDENTIAL (PER UNIT)",
+    "source_url": "https://drive.google.com/file/d/1KFkcT1ccswtj1lABto9y31QmLIX_Qg9O/view?usp=sharing",
+    "verified": null
+   },
+   {
+    "label": "First re-inspection",
+    "amount": "$45.00",
+    "quote": "1ST RE-INSPECTION $45.00",
+    "source_url": "https://drive.google.com/file/d/1KFkcT1ccswtj1lABto9y31QmLIX_Qg9O/view?usp=sharing",
+    "verified": null
+   },
+   {
+    "label": "Each re-inspection after the first",
+    "amount": "$70.00",
+    "quote": "ALL RE-INSPECTIONS AFTER $70.00",
+    "source_url": "https://drive.google.com/file/d/1KFkcT1ccswtj1lABto9y31QmLIX_Qg9O/view?usp=sharing",
+    "verified": null
+   },
+   {
+    "label": "Fee stated on the Construction web page (conflicts with the form)",
+    "amount": "$45.00",
+    "quote": "The fee is $45.00 exact cash or check only, and inspections are Monday-Thursday (window tie frame of 8-10am)  based on availability mornings.",
+    "source_url": "https://www.eastgreenwichnj.com/government/construction",
+    "verified": true
+   }
+  ],
+  "how_to_apply": "Fill out the Application for Certificate of Occupancy (list the resale buyer and settlement date) and submit it to the Construction Department at 159 Democrat Road, Mickleton, which schedules the inspection. Pay by exact cash or check. Inspections are weekday mornings (the form says 8 to 11am; the web page says Monday to Thursday, 8 to 10am).",
+  "application_url": "https://drive.google.com/file/d/1KFkcT1ccswtj1lABto9y31QmLIX_Qg9O/view?usp=sharing",
+  "department_url": "https://www.eastgreenwichnj.com/government/construction",
+  "phone": "856-423-0654 ext. 8132",
+  "email": "rsnyder@eastgreenwichnj.com",
+  "evidence": [
+   {
+    "url": "https://www.eastgreenwichnj.com/government/construction",
+    "quote": "All changes of occupancy (commercial, residential and rental) will require an inspection before a new Certificate of Occupancy can be obtained. Applications are available at the construction office and inspections can be scheduled with them.",
+    "doc_date": "",
+    "via": "page",
+    "verified": true
+   },
+   {
+    "url": "https://drive.google.com/file/d/1KFkcT1ccswtj1lABto9y31QmLIX_Qg9O/view?usp=sharing",
+    "quote": "APPLICATION FOR CERTIFICATE OF OCCUPANCY",
+    "doc_date": "2026-01",
+    "via": "pdf",
+    "verified": null
+   },
+   {
+    "url": "https://drive.google.com/file/d/1fyG7txo9ueioQiCUTrqTHq5-3JPFfoIi/view?usp=sharing",
+    "quote": "ALL OPEN CONSTRUCTION PERMITS MUST HAVE INSPECTIONS AND MUST PASS INSPECTIONS.",
+    "doc_date": "2025-12",
+    "via": "pdf",
+    "verified": null
+   }
+  ],
+  "confidence": "high",
+  "notes": "Fee conflict: the application form (scanned PDF dated 2026-01-06, linked from the Township Forms page as 'C.O. Inspection Application for Residential Sale or Rental') lists $50.00 per residential unit, $45.00 first re-inspection and $70.00 for later re-inspections; the Construction web page still says $45.00. Quote the form and confirm with the office. The application and checklist PDFs are scanned images, so quotes were read from the page images. The form header lists telephone 856-423-0733; the web page lists 856-423-0654 ext. 8132 for the Construction Official. Rentals of homes built 1978 or earlier also need a $50.00 lead inspection and landlord registration (rental only)."
+ },
+ "fire_cert": {
+  "requirements": [
+   "Township checklist: as of January 1, 2019 all battery smoke detectors must be 10-year sealed battery single station alarms; AC interconnected alarms do not need replacing",
+   "Smoke detectors on every level including basement and outside each sleeping area; basement detector near the bottom of the basement stairs",
+   "Carbon monoxide alarms in the immediate vicinity of sleeping areas",
+   "Fire extinguisher placement is checked on the C.O. inspection"
+  ],
+  "authorities": [
+   {
+    "name": "East Greenwich Township Construction Department (checked as part of the resale C.O. housing inspection)",
+    "type": "municipal_fire_bureau",
+    "area_served": "Entire township",
+    "lead_time": "",
+    "fees": [],
+    "how_to_apply": "No separate smoke certificate application was found. The Township C.O. inspection checklist includes 'NJAC 5:70-4.19 Smoke detectors, carbon monoxide alarms, and fire extinguisher located in appropriate areas'. Under N.J.A.C. 5:70-2.3(a)1, where a town has its own resale inspection, a separate certificate is not required but the town may not issue its CO until the home meets 5:70-4.19. Confirm with the Construction Department.",
+    "application_url": "https://drive.google.com/file/d/1KFkcT1ccswtj1lABto9y31QmLIX_Qg9O/view?usp=sharing",
+    "department_url": "https://www.eastgreenwichnj.com/government/construction",
+    "phone": "856-423-0654 ext. 8132",
+    "email": "rsnyder@eastgreenwichnj.com",
+    "evidence": [
+     {
+      "url": "https://drive.google.com/file/d/1fyG7txo9ueioQiCUTrqTHq5-3JPFfoIi/view?usp=sharing",
+      "quote": "NJAC 5:70-4.19 Smoke detectors, carbon monoxide alarms, and fire extinguisher located in appropriate areas",
+      "doc_date": "2025-12",
+      "via": "pdf",
+      "verified": null
+     },
+     {
+      "url": "https://drive.google.com/file/d/1fyG7txo9ueioQiCUTrqTHq5-3JPFfoIi/view?usp=sharing",
+      "quote": "As of January 1, 2019 all smoke detectors must be a Ten-Year Sealed Battery Powered Single Station Smoke Alarm.",
+      "doc_date": "2025-12",
+      "via": "pdf",
+      "verified": null
+     },
+     {
+      "url": "https://www.law.cornell.edu/regulations/new-jersey/N-J-A-C-5-70-2-3",
+      "quote": "Where a municipality has existing inspection or approval requirements under a property maintenance or other municipal code, a CSACMAPFEC shall not be required; provided, however, that the agency responsible for the enforcement of that code shall not issue any certificate of inspection or occupancy or other approval under such municipal code until it has determined that the dwelling complies with the requirements of N.J.A.C. 5:70-4.19.",
+      "doc_date": "",
+      "via": "page",
+      "verified": true
+     }
+    ],
+    "confidence": "medium"
+   }
+  ],
+  "notes": "The Uniform Fire Code local enforcing agency for East Greenwich is the Gloucester County Fire Marshal's Office (DCA LEA Registry, third quarter, July 2026: 'C East Greenwich Township'; County page https://gloucestercountynj.gov/1139/County-Fire-Marshall lists East Greenwich; 212 County House Road, Clarksboro, 856-307-7912, gcfmo@co.gloucester.nj.us). No County smoke certificate form or fee for resales was found on the County site. East Greenwich has no fire district (not on the DCA list of Gloucester County fire districts). N.J.A.C. 5:70-2.3 text was read from the Cornell LII copy of the NJ Administrative Code."
+ },
+ "other_items": [
+  {
+   "label": "Well and septic certification",
+   "detail": "Well certification and septic certification required if applicable; septic needs Gloucester County approval.",
+   "source_url": "https://drive.google.com/file/d/1fyG7txo9ueioQiCUTrqTHq5-3JPFfoIi/view?usp=sharing"
+  },
+  {
+   "label": "Chimney certification",
+   "detail": "Application form: 'Woodburning fireplace: (chimney cert required)'.",
+   "source_url": "https://drive.google.com/file/d/1KFkcT1ccswtj1lABto9y31QmLIX_Qg9O/view?usp=sharing"
+  },
+  {
+   "label": "Open permits",
+   "detail": "All open construction permits must have inspections and must pass inspections.",
+   "source_url": "https://drive.google.com/file/d/1fyG7txo9ueioQiCUTrqTHq5-3JPFfoIi/view?usp=sharing"
+  },
+  {
+   "label": "Utilities on",
+   "detail": "All utilities must be turned on for the inspection.",
+   "source_url": "https://drive.google.com/file/d/1fyG7txo9ueioQiCUTrqTHq5-3JPFfoIi/view?usp=sharing"
+  }
+ ],
+ "open_questions": [
+  "Which fee is current: $50.00 per unit (2026 form) or $45.00 (Construction web page).",
+  "Lead time before closing and how long the C.O. stays valid are not published.",
+  "Whether the Gloucester County Fire Marshal (the UFC enforcing agency) issues any separate smoke/CO/extinguisher certificate for resales in East Greenwich; the Township checklist suggests it is handled in the C.O. inspection."
+ ],
+ "verification": {
+  "fees": 4,
+  "fee_ok": 1,
+  "fee_bad": 0,
+  "fee_unchecked": 3,
+  "quotes": 6,
+  "q_ok": 2,
+  "q_bad": 0,
+  "q_unchecked": 4
+ }
+}

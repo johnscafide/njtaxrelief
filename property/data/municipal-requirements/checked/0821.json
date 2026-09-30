@@ -1,0 +1,160 @@
+{
+ "municipality_code": "0821",
+ "municipality": "Westville Borough",
+ "county": "GLOUCESTER",
+ "checked_at": "2026-09-30",
+ "resale_co": {
+  "status": "required",
+  "name": "Certificate of Inspection (Residential)",
+  "issued_by": "Borough of Westville Housing & Code Enforcement",
+  "lead_time": "Schedule as far in advance as possible (the Borough says to allow about one week for scheduling).",
+  "valid_for": "",
+  "requirements": [
+   "Remove trash and debris inside and outside",
+   "Fix tripping hazards on sidewalks, walkways, steps and driveway",
+   "Cut high grass and weeds; no standing water",
+   "Exterior in good repair: siding, roof, flashing, gutters, foundation; scrape and paint peeling paint",
+   "Address numbers visible from the street",
+   "Handrail on steps with 3 or more risers; guardrails where the drop is 30 inches or more",
+   "Windows open and stay open, with tight screens and no broken glass",
+   "Bedrooms need two ways out (a door and a window)",
+   "Bathrooms need a window or an exhaust fan vented outside",
+   "Plumbing, heating and electrical safe and working; appliances on grounded outlets",
+   "Water heater gives at least 120 degree water and has a discharge pipe ending 2 to 6 inches from the floor",
+   "GFCI outlets at kitchen sink, utility sinks, bathrooms, sump pumps and outside",
+   "Work done without permits must get permits and pass final inspection",
+   "Proof of extermination if there are signs of insects or rodents",
+   "Smoke alarms, CO alarms and a fire extinguisher (see fire certificate section)"
+  ],
+  "fees": [
+   {
+    "label": "Certificate of Inspection, per unit",
+    "amount": "$100",
+    "quote": "Certificate of Inspection - $100 per unit",
+    "source_url": "https://westville-nj.com/departments/housing-code-enforcement/",
+    "verified": true
+   },
+   {
+    "label": "Re-inspection, 1st",
+    "amount": "$50",
+    "quote": "Reinspections - 1st - $50; 2nd - $60; 3rd - $75; 4th and subsequent - $100/per unit",
+    "source_url": "https://westville-nj.com/departments/housing-code-enforcement/",
+    "verified": true
+   },
+   {
+    "label": "Re-inspection, 2nd",
+    "amount": "$60",
+    "quote": "Reinspections - 1st - $50; 2nd - $60; 3rd - $75; 4th and subsequent - $100/per unit",
+    "source_url": "https://westville-nj.com/departments/housing-code-enforcement/",
+    "verified": true
+   },
+   {
+    "label": "Re-inspection, 3rd",
+    "amount": "$75",
+    "quote": "Reinspections - 1st - $50; 2nd - $60; 3rd - $75; 4th and subsequent - $100/per unit",
+    "source_url": "https://westville-nj.com/departments/housing-code-enforcement/",
+    "verified": true
+   },
+   {
+    "label": "Re-inspection, 4th and later, per unit",
+    "amount": "$100",
+    "quote": "Reinspections - 1st - $50; 2nd - $60; 3rd - $75; 4th and subsequent - $100/per unit",
+    "source_url": "https://westville-nj.com/departments/housing-code-enforcement/",
+    "verified": true
+   }
+  ],
+  "how_to_apply": "Fill out the Certificate of Inspection application online (Borough web form) or print the PDF and return it with the $100 fee to Borough of Westville, c/o Residential Application, 165 Broadway, Westville NJ 08093. Checks payable to 'Borough of Westville'. No credit cards in the office; cash must be exact; online payment needs a Customer ID and PIN from the Housing office. Inspections are Tuesdays and Thursdays, 9 to 12 or 1 to 3; call 856-456-0030 option 5 to schedule.",
+  "application_url": "https://westville-nj.com/wp-content/uploads/2026/03/CERTIFICATE-OF-INSPECTION-RESIDENTIAL-APPLICATION.pdf",
+  "department_url": "https://westville-nj.com/departments/housing-code-enforcement/",
+  "phone": "856-456-0030 option 5",
+  "email": "",
+  "evidence": [
+   {
+    "url": "https://westville-nj.com/departments/housing-code-enforcement/",
+    "quote": "When a property is sold, rented or a change of tenant occurs, the owner is required to complete a Certificate of Inspection application. Property owners should schedule this inspection as far in advance as possible.",
+    "doc_date": "2026",
+    "via": "page",
+    "verified": true
+   },
+   {
+    "url": "https://westville-nj.com/wp-content/uploads/2026/03/CERTIFICATE-OF-INSPECTION-RESIDENTIAL-APPLICATION.pdf",
+    "quote": "Certificate of Inspection-Residential $100.00",
+    "doc_date": "2026-03",
+    "via": "pdf",
+    "verified": null
+   },
+   {
+    "url": "https://westville-nj.com/departments/housing-code-enforcement/certificate-of-inspection-application/",
+    "quote": "Application costs $100.",
+    "doc_date": "2026",
+    "via": "page",
+    "verified": true
+   }
+  ],
+  "confidence": "high",
+  "notes": "Much of the Housing page is written for rentals, but the application form covers both sold and rented homes and asks for buyer and agent details. The Housing Inspection List (April 2023) says it is a courtesy list and not all-inclusive; the full standard is the 2024 International Property Maintenance Code. Search-engine summaries of Westville code (ecode360, Chapter 197 Housing Standards) mention a certificate of occupancy on change in ownership and a $175 fee; that text could not be opened or confirmed, and the Borough's current page and form say $100. Form phone: 856-456-0030 ext. 132."
+ },
+ "fire_cert": {
+  "requirements": [
+   "Smoke alarms (hardwired or 10-year sealed) must be less than 10 years old; locations that are hardwired must keep hardwired alarms",
+   "Smoke alarm on each level including the basement, within 10 feet outside bedrooms, and in every room used for sleeping",
+   "CO alarms (hardwired or battery) less than 10 years old, within 10 feet of each room used for sleeping",
+   "Fire extinguisher rated 2A:10B:C for residential use, within 10 feet of the kitchen on the way out, mounted no higher than 5 feet with its original hardware, not blocked",
+   "Low-voltage (monitored) smoke alarm systems need a letter from the alarm company showing a test in the last 30 days"
+  ],
+  "authorities": [
+   {
+    "name": "Westville Fire District #1 (Office of the Fire Marshal)",
+    "type": "fire_district",
+    "area_served": "Entire borough",
+    "lead_time": "",
+    "fees": [],
+    "how_to_apply": "No smoke certificate form or fee was found online. Call the Westville Fire District office at (856) 456-9432; the district lists a Housing Inspections contact at that number. The Borough's Certificate of Inspection also checks smoke alarms, CO alarms and the extinguisher.",
+    "application_url": "",
+    "department_url": "https://westvillefd.com/fire-district-contacts/",
+    "phone": "856-456-9432",
+    "email": "",
+    "evidence": [
+     {
+      "url": "https://nj.gov/dca/dfs/pdf/ANNUAL%20REGISTRY/THIRD%20QUARTER%20LEA%20REGISTRY%202026.pdf",
+      "quote": "D Westville Borough",
+      "doc_date": "2026-07",
+      "via": "pdf",
+      "verified": true
+     },
+     {
+      "url": "https://westvillefd.com/fire-district-contacts/",
+      "quote": "Westville Fire District #1 - 23 West Olive Street, Westville NJ",
+      "doc_date": "",
+      "via": "page",
+      "verified": true
+     }
+    ],
+    "confidence": "medium"
+   }
+  ],
+  "notes": "The DCA LEA Registry (July 2026) lists Westville under D (fire district is the fire code enforcing agency). The fire district contact page lists an Office of the Fire Marshal (Tim O'Donnell) and a Housing Inspections line, both at (856) 456-9432. It is not clear whether the Borough's Certificate of Inspection satisfies the state smoke certificate or the fire district issues it separately. Fire alarm and extinguisher rules above come from the Borough Housing page, which labels them new guidelines."
+ },
+ "other_items": [
+  {
+   "label": "Unpermitted work",
+   "detail": "Work done without the needed permits must be permitted and pass final inspection.",
+   "source_url": "https://westville-nj.com/wp-content/uploads/2023/04/HOUSING-INSPECTION-LIST.pdf"
+  }
+ ],
+ "open_questions": [
+  "Who issues the state smoke/CO/extinguisher certificate in Westville (Borough housing inspection or Westville Fire District #1) and its fee.",
+  "How long the Certificate of Inspection is valid for a sale.",
+  "Westville code text (ecode360 WE0471) could not be read to confirm the ordinance and whether the code fee differs from the $100 on the current page."
+ ],
+ "verification": {
+  "fees": 5,
+  "fee_ok": 5,
+  "fee_bad": 0,
+  "fee_unchecked": 0,
+  "quotes": 5,
+  "q_ok": 4,
+  "q_bad": 0,
+  "q_unchecked": 1
+ }
+}

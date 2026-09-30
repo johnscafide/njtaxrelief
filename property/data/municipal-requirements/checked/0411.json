@@ -1,0 +1,190 @@
+{
+ "municipality_code": "0411",
+ "municipality": "Clementon Borough",
+ "county": "CAMDEN",
+ "checked_at": "2026-09-30",
+ "resale_co": {
+  "status": "required",
+  "name": "Certificate of Continued Occupancy (CCO) for a Residential Resale",
+  "issued_by": "Code Enforcement Office",
+  "lead_time": "",
+  "valid_for": "",
+  "requirements": [
+   "House number at least 4 inches high, visible from the street",
+   "Steps and walkways without trip hazards; cracked sidewalk blocks with a height change replaced",
+   "Guardrails where a porch, landing or stairs is over 30 inches above grade; handrail on steps with 4 or more risers",
+   "Yard free of high grass, weeds, dead trees, debris and hazards",
+   "Gutters and downspouts attached and clear, with splash blocks or diverters",
+   "Basement/crawl space openings and exterior doors secure and weatherproof; sump pump discharge outside, not into the sanitary sewer",
+   "No signs of pests (otherwise a licensed pest control certification is needed)",
+   "Bathroom window or exhaust fan; GFI protection on existing bathroom, kitchen counter, garage and exterior outlets",
+   "Cover plates on all switches and outlets; electrical panel secure, labeled, no open breaker slots; A/C disconnect at the outdoor unit",
+   "Windows intact; bedroom windows open and close for emergency escape",
+   "Water heater relief valve with discharge pipe ending 2 to 6 inches above the floor; tight flue connections",
+   "No plumbing leaks; fixtures and toilets secure",
+   "Heating system working",
+   "Work done without permits will be cited; open permits must be closed out"
+  ],
+  "fees": [
+   {
+    "label": "1 and 2 family house or condo ($60 / $120; form does not spell out which applies to which, likely $60 for one unit and $120 for two)",
+    "amount": "$60/$120",
+    "quote": "1 & 2 FAMILY HOUSE/CONDO - $60/$120",
+    "source_url": "https://clementon-nj.com/wp-content/uploads/2021/04/RESALE-CO-INSPECTION-FORM.pdf",
+    "verified": true
+   },
+   {
+    "label": "3 and 4 family house, per unit",
+    "amount": "$60 per unit",
+    "quote": "3 & 4 FAMILY HOUSE - $60 per unit",
+    "source_url": "https://clementon-nj.com/wp-content/uploads/2021/04/RESALE-CO-INSPECTION-FORM.pdf",
+    "verified": true
+   },
+   {
+    "label": "Reinspection",
+    "amount": "$30",
+    "quote": "Reinspection - $30",
+    "source_url": "https://clementon-nj.com/wp-content/uploads/2021/04/RESALE-CO-INSPECTION-FORM.pdf",
+    "verified": true
+   }
+  ],
+  "how_to_apply": "Download the CCO Application for a Residential Resale, fill it out (seller, buyer, closing date, contacts) and submit it to Code Enforcement, Borough of Clementon, 101 Gibbsboro Road, Clementon, NJ 08021, with the fee (the form records a money order or check number).",
+  "application_url": "https://clementon-nj.com/wp-content/uploads/2025/03/certificate_of_occupancy.pdf",
+  "department_url": "https://clementon-nj.com/code-enforcement/",
+  "phone": "856-783-0284 ext. 127",
+  "email": "CodeEnforcePnZ@clementon-nj.com",
+  "evidence": [
+   {
+    "url": "https://clementon-nj.com/code-enforcement/",
+    "quote": "Certificate of Occupancy Certificate required for sales and rentals",
+    "doc_date": "",
+    "via": "page",
+    "verified": true
+   },
+   {
+    "url": "https://clementon-nj.com/wp-content/uploads/2025/03/certificate_of_occupancy.pdf",
+    "quote": "CCO APPLICATION FOR A RESIDENTIAL RESALE 1 & 2 FAMILY HOUSE/CONDO - $60/$120 3 & 4 FAMILY HOUSE - $60 per unit Reinspection - $30",
+    "doc_date": "2025-03 (scanned upload; same fees as the 2021-04 text version)",
+    "via": "pdf",
+    "verified": null
+   }
+  ],
+  "confidence": "high",
+  "notes": "Two versions of the same form are posted: a text PDF uploaded 2021-04 (linked from the Code Enforcement page) and a scanned copy uploaded 2025-03 (linked from the Forms page). Both show the same fees. The checklist says it explains the 'Borough Home Resale inspection requirements for Certificate of Occupancy'. No lead time or validity period is published. Rental CO and rental registration are separate programs."
+ },
+ "fire_cert": {
+  "requirements": [
+   "Homes built before 1977: 10-year sealed battery smoke alarms on each level and within 10 feet of bedrooms",
+   "Homes built after 1977: hardwired, interconnected smoke alarms on each level and within 10 feet of bedrooms; 1990s and newer also need battery backup and an alarm in each bedroom",
+   "All single-station smoke alarms must be 10-year sealed battery type (effective 01/01/2019)",
+   "CO alarm within 10 feet of sleeping areas",
+   "2A:10B:C fire extinguisher, not more than 10 pounds, mounted with the maker's hanger or bracket, visible and within 10 feet of the kitchen, with an inspection tag or a store receipt from the last 12 months",
+   "House number at least 3 inches, contrasting color, on the street side",
+   "A cottage or garage apartment being sold needs its own application and fee"
+  ],
+  "authorities": [
+   {
+    "name": "Borough of Clementon Bureau of Fire Safety",
+    "type": "municipal_fire_bureau",
+    "area_served": "Entire borough",
+    "lead_time": "More than 10 business days before closing for the lowest fee",
+    "fees": [
+     {
+      "label": "Request received more than 10 business days before change of occupants",
+      "amount": "$ 60.00",
+      "quote": "Request for certification received more than ten (10) business days prior to change of occupants .................$ 60.00",
+      "source_url": "https://clementon-nj.com/wp-content/uploads/2023/09/Fire-Safety.pdf",
+      "verified": "eye"
+     },
+     {
+      "label": "Request received 4 to 10 business days before",
+      "amount": "$ 100.00",
+      "quote": "Request for certification received four (4) to ten (10) business days prior to change of occupants................. $ 100.00",
+      "source_url": "https://clementon-nj.com/wp-content/uploads/2023/09/Fire-Safety.pdf",
+      "verified": "eye"
+     },
+     {
+      "label": "Request received 2 to 4 business days before",
+      "amount": "$ 161.00",
+      "quote": "Request for certification received two (2) to four (4) business days prior to change of occupants ................ $ 161.00",
+      "source_url": "https://clementon-nj.com/wp-content/uploads/2023/09/Fire-Safety.pdf",
+      "verified": "eye"
+     },
+     {
+      "label": "Same day of settlement or one day",
+      "amount": "$ 200.00",
+      "quote": "Request for certification same day of settlement and/or one day.........................................................................$ 200.00",
+      "source_url": "https://clementon-nj.com/wp-content/uploads/2023/09/Fire-Safety.pdf",
+      "verified": "eye"
+     },
+     {
+      "label": "Re-inspection after a failed initial inspection",
+      "amount": "$ 35.00",
+      "quote": "Premises which fail the initial inspection shall be subject to a re-inspection fee..................................................$ 35.00",
+      "source_url": "https://clementon-nj.com/wp-content/uploads/2023/09/Fire-Safety.pdf",
+      "verified": "eye"
+     }
+    ],
+    "how_to_apply": "Download the application, fill it out (closing date, bedrooms, year built, lockbox code) and submit it with the fee to the Bureau of Fire Safety, 101 Gibbsboro Road, Clementon. Applications sent by email or fax are not processed until payment is received. Certificates are valid for 6 months or until the date of closing/change in occupancy.",
+    "application_url": "https://clementon-nj.com/wp-content/uploads/2023/09/Fire-Safety.pdf",
+    "department_url": "https://clementon-nj.com/fire-safety/",
+    "phone": "856-783-0284 ext. 123",
+    "email": "jzuggi@clementon-nj.com",
+    "evidence": [
+     {
+      "url": "https://clementon-nj.com/wp-content/uploads/2023/09/Fire-Safety.pdf",
+      "quote": "No owner shall sell, lease or otherwise permit occupancy for residential purpose of any structure or intended for use as a single-family or two-family structure without obtaining a certificate of smoke alarm, carbon monoxide alarm and portable fire extinguisher compliance (CSACMAPFEC).",
+      "doc_date": "2023-09 (upload date)",
+      "via": "pdf",
+      "verified": "eye"
+     },
+     {
+      "url": "https://clementon-nj.com/wp-content/uploads/2023/09/Fire-Safety.pdf",
+      "quote": "Certificates are valid for 6 months or until the date of closing/change in occupancy.",
+      "doc_date": "2023-09",
+      "via": "pdf",
+      "verified": "eye"
+     },
+     {
+      "url": "https://clementon-nj.com/fire-safety/",
+      "quote": "Inspect all homes for sale to ensure smoke detectors, carbon monoxide alarms, and fire extinguishers are installed and operating",
+      "doc_date": "",
+      "via": "page",
+      "verified": true
+     },
+     {
+      "url": "https://nj.gov/dca/dfs/pdf/ANNUAL%20REGISTRY/THIRD%20QUARTER%20LEA%20REGISTRY%202026.pdf",
+      "quote": "M Clementon Borough",
+      "doc_date": "2026-07",
+      "via": "pdf",
+      "verified": true
+     }
+    ],
+    "confidence": "high"
+   }
+  ],
+  "notes": "The fire application is a scanned PDF uploaded September 2023; fee quotes were read from the scan (dot leaders shortened may differ slightly from the image). Contacts on the Fire Safety page: Fire Marshal John Zuggi (jzuggi@clementon-nj.com), Fire Inspector Timothy Shannon (tshannon@clementon-nj.com), clerical Philip Beehler (pbeehler@clementon-nj.com). The DCA registry lists Clementon as a municipal (M) fire code enforcing agency."
+ },
+ "other_items": [
+  {
+   "label": "Open permits must be closed",
+   "detail": "Any permits without final inspections or a Certificate of Approval must be closed out; contact the borough beforehand to ask if the address has anything open. Work done without permits will be cited.",
+   "source_url": "https://clementon-nj.com/wp-content/uploads/2021/04/RESALE-CO-INSPECTION-FORM.pdf"
+  }
+ ],
+ "open_questions": [
+  "The CCO form lists '$60/$120' for 1 and 2 family homes without saying which amount applies to which; confirm with Code Enforcement.",
+  "No CCO lead time or validity period is published.",
+  "Fire fee sheet is from a September 2023 upload; confirm it is still current."
+ ],
+ "verification": {
+  "fees": 8,
+  "fee_ok": 8,
+  "fee_bad": 0,
+  "fee_unchecked": 0,
+  "quotes": 6,
+  "q_ok": 5,
+  "q_bad": 0,
+  "q_unchecked": 1
+ }
+}

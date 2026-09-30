@@ -1,0 +1,145 @@
+{
+ "municipality_code": "0812",
+ "municipality": "National Park Borough",
+ "county": "GLOUCESTER",
+ "checked_at": "2026-09-30",
+ "resale_co": {
+  "status": "required",
+  "name": "Certificate of Occupancy for Change of Occupancy (resale inspection)",
+  "issued_by": "Housing Inspector, Property Maintenance and Rental Units Department",
+  "lead_time": "Apply at least three weeks before occupancy; the borough suggests applying when the house is listed",
+  "valid_for": "",
+  "requirements": [
+   "Exterior walls sound and weatherproof; house numbers at least 3 inches, readable from the street; yard maintained",
+   "Garages, fences, walls, stairs, decks, porches sound; driveways and sidewalks without tripping hazards; no big foundation cracks",
+   "Porches or landings 30 inches high need rails with openings no more than 4 inches",
+   "Roof and chimney sound (roof or chimney certification may be required); no broken glass",
+   "No double-keyed deadbolt on the main door (thumb latch required)",
+   "Pool fence with self-closing, self-latching gate that swings out (48 inch minimum, 6 ft for inground); no stagnant water; GFCI for pools",
+   "All utilities on at inspection",
+   "Smoke detector on each level and outside sleeping areas (battery allowed); CO detector outside sleeping area (battery allowed)",
+   "A:B:C fire extinguisher, no larger than 10 lb, mounted within 10 ft of the kitchen",
+   "Mechanical equipment working; no excessive peeling paint, loose plaster or decayed wood; no insect infestation",
+   "Handrail 30 to 38 inches on stairs of 5 or more steps; every room has an operable window with screen",
+   "Electrical free of hazards: no extension-cord wiring, covers on all boxes, at least 2 outlets per room and 1 per bathroom",
+   "Plumbing without leaks, toilets flush, tub and shower watertight; heat to all habitable rooms",
+   "Water heater and boiler relief valve pipe ending within 6 inches of the floor; flue pipes sealed",
+   "Satisfactory drinking water lab report if not on public water"
+  ],
+  "fees": [
+   {
+    "label": "Inspection fee, per unit",
+    "amount": "$ 50.00",
+    "quote": "A $ 50.00(per unit) fee must accompany the application for inspection.",
+    "source_url": "https://www.nationalparknj.com/Document%20Center/Departments/Property%20Maintenance/COApplication.pdf",
+    "verified": null
+   },
+   {
+    "label": "Re-inspection, per unit (charged for each inspection after the second)",
+    "amount": "$35.00",
+    "quote": "Re-inspections will require an additional fee of $35.00 (per unit) and a completed application form. NOTE: If more than two inspections are required, the $35.00 fee shall be charged for each sequential inspection.",
+    "source_url": "https://www.nationalparknj.com/Document%20Center/Departments/Property%20Maintenance/COApplication.pdf",
+    "verified": null
+   }
+  ],
+  "how_to_apply": "Fill out the Application for a Certificate of Occupancy for Change of Occupancy and submit it with the fee to the Inspection Office at Borough Hall, 7 S. Grove Ave, National Park, NJ 08063. Inspectors in the field do not accept applications or fees. The application is not complete until the owner or agent calls 856-845-3891 to schedule. Inspection appointments are only on Thursdays, 12:00 PM to 1:00 PM.",
+  "application_url": "https://www.nationalparknj.com/Document%20Center/Departments/Property%20Maintenance/COApplication.pdf",
+  "department_url": "https://www.nationalparknj.com/departments/property_maintenance/certificates_of_occupancy/index.php",
+  "phone": "856-845-3891",
+  "email": "ehagerty@nationalparknj.com",
+  "evidence": [
+   {
+    "url": "https://www.nationalparknj.com/Document%20Center/Departments/Property%20Maintenance/COApplication.pdf",
+    "quote": "A Certificate of Occupancy is required in the Borough of National Park every time a residential property changes occupants.",
+    "doc_date": "",
+    "via": "pdf",
+    "verified": null
+   },
+   {
+    "url": "https://www.nationalparknj.com/Document%20Center/Departments/Property%20Maintenance/COApplication.pdf",
+    "quote": "This dwelling is not to be occupied until a certificate of occupancy is issued by the Housing Inspector of the Borough of National Park.",
+    "doc_date": "",
+    "via": "pdf",
+    "verified": null
+   },
+   {
+    "url": "https://www.nationalparknj.com/departments/property_maintenance/index.php",
+    "quote": "inspect all residential properties when they are being sold",
+    "doc_date": "",
+    "via": "page",
+    "verified": true
+   },
+   {
+    "url": "https://www.nationalparknj.com/Document%20Center/Departments/Property%20Maintenance/COApplication.pdf",
+    "quote": "Because of scheduling and processing time, please apply for inspection a minimum of three weeks prior to occupancy.",
+    "doc_date": "",
+    "via": "pdf",
+    "verified": null
+   }
+  ],
+  "confidence": "high",
+  "notes": "The application PDF is a scanned document with no date, so the $50 / $35 fees could be old; confirm with the office. The same CO applies to any change of occupant, including rentals; the borough also has a rental unit annual registration and inspection program (Ordinance 3-07, Chapter 97). The borough does not inspect air conditioning, pools or spas (beyond electrical and fencing), termites, or lead-based paint. Property Maintenance contact: Ele Hagerty, 7 S. Grove Avenue, hours 7 am to 4 pm Monday to Wednesday, 7 am to 3 pm Thursday."
+ },
+ "fire_cert": {
+  "requirements": [],
+  "authorities": [
+   {
+    "name": "Gloucester County Fire Marshal's Office (county local enforcing agency)",
+    "type": "unknown",
+    "area_served": "Entire borough",
+    "lead_time": "",
+    "fees": [],
+    "how_to_apply": "Contact the Gloucester County Office of the Fire Marshal, 212 County House Road, Clarksboro, NJ 08020. No resale smoke/CO/extinguisher certificate form or fee is posted on the county website.",
+    "application_url": "",
+    "department_url": "https://www.gloucestercountynj.gov/1139/County-Fire-Marshall",
+    "phone": "856-307-7912",
+    "email": "",
+    "evidence": [
+     {
+      "url": "https://www.gloucestercountynj.gov/1139/County-Fire-Marshall",
+      "quote": "The County Fire Marshal's Office currently is the Local Enforcement Agency (LEA) for the following municipalities: Clayton East Greenwich Elk National Park Newfield Paulsboro South Harrison Wenonah West Deptford Woodbury Woodbury Heights",
+      "doc_date": "",
+      "via": "page",
+      "verified": true
+     },
+     {
+      "url": "https://nj.gov/dca/dfs/pdf/ANNUAL%20REGISTRY/THIRD%20QUARTER%20LEA%20REGISTRY%202026.pdf",
+      "quote": "C National Park Borough",
+      "doc_date": "2026-07",
+      "via": "pdf",
+      "verified": true
+     }
+    ],
+    "confidence": "high"
+   }
+  ],
+  "notes": "The authority is a county agency; the schema's type list has no county option, so type is set to 'unknown' (DCA registry key: 'C = County'). Authority identity is confirmed by both the county page and the DCA registry, but no fee schedule for the county's resale smoke certificates was found on an official page. A search-tool summary claimed National Park fees of $100 / $150 / $200 by lead time and $50 reinspection, citing an ecode360 page whose municipality could not be confirmed; not recorded. The borough's own CO checklist also checks smoke alarms, CO alarm and extinguisher. Chief County Fire Marshal: Shawn Layton, 856-307-7913; office fax 856-224-8284."
+ },
+ "other_items": [
+  {
+   "label": "Possible trade certifications",
+   "detail": "Roofing, chimney, structural, electrical, plumbing or heating certifications may be required by the inspector.",
+   "source_url": "https://www.nationalparknj.com/Document%20Center/Departments/Property%20Maintenance/COApplication.pdf"
+  },
+  {
+   "label": "Private water test",
+   "detail": "A satisfactory lab report is required for drinking water where public water is not supplied.",
+   "source_url": "https://www.nationalparknj.com/Document%20Center/Departments/Property%20Maintenance/COApplication.pdf"
+  }
+ ],
+ "open_questions": [
+  "Fee and application process for the Gloucester County Fire Marshal's resale smoke/CO/extinguisher certificate in National Park are not published on the county site.",
+  "Date of the borough CO application and fee sheet is unknown (scanned, undated).",
+  "Certificate validity period is not stated."
+ ],
+ "verification": {
+  "fees": 2,
+  "fee_ok": 0,
+  "fee_bad": 0,
+  "fee_unchecked": 2,
+  "quotes": 6,
+  "q_ok": 3,
+  "q_bad": 0,
+  "q_unchecked": 3
+ }
+}
