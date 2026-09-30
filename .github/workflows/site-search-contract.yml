@@ -1,0 +1,43 @@
+name: Site search contract
+
+on:
+  push:
+    branches: [main]
+    paths:
+      - 'property/js/watchdog-site-search.js'
+      - 'property/data/site-search.json'
+      - 'property/data/glossary.json'
+      - 'property/tests/site-search-contract.mjs'
+      - 'api/watchdog-index-page-contact-safe.js'
+      - 'property/js/app-shell-2027.js'
+      - 'property/js/watchdog-universal-menu.js'
+      - 'property/css/watchdog-universal-menu.css'
+      - 'property/js/public-nav.js'
+      - 'property/partials/nav.html'
+      - 'search/index.html'
+      - '.github/workflows/site-search-contract.yml'
+  pull_request:
+    paths:
+      - 'property/js/watchdog-site-search.js'
+      - 'property/data/site-search.json'
+      - 'property/data/glossary.json'
+      - 'property/tests/site-search-contract.mjs'
+      - 'api/watchdog-index-page-contact-safe.js'
+      - 'property/js/app-shell-2027.js'
+      - 'property/js/watchdog-universal-menu.js'
+      - 'property/css/watchdog-universal-menu.css'
+      - 'property/js/public-nav.js'
+      - 'property/partials/nav.html'
+      - 'search/index.html'
+      - '.github/workflows/site-search-contract.yml'
+
+jobs:
+  contract:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+      - name: Verify site search contract
+        run: node property/tests/site-search-contract.mjs

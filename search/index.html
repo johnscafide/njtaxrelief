@@ -38,7 +38,10 @@
         document.getElementById('watchdog-pagefind-search').textContent='Search is temporarily unavailable.';
         return;
       }
-      new PagefindUI({element:'#watchdog-pagefind-search',showSubResults:true,showImages:false,excerptLength:24,resetStyles:false});
+      var ui=new PagefindUI({element:'#watchdog-pagefind-search',showSubResults:true,showImages:false,excerptLength:24,resetStyles:false});
+      /* Site search (Ctrl/Cmd+K) links here as /search?q=... for full results. */
+      var q='';try{q=(new URLSearchParams(location.search).get('q')||'').trim().slice(0,120);}catch(_){}
+      if(q&&ui&&typeof ui.triggerSearch==='function')ui.triggerSearch(q);
     });
   </script>
 </body>

@@ -286,6 +286,47 @@
     }
 
     /* ==========================================================
+       SITE SEARCH BUTTON (next to Menu)
+       ========================================================== */
+
+    #wd-property-nav .wdn-actions {
+        align-items: center;
+        display: flex;
+        gap: 8px;
+        justify-content: flex-end;
+        min-width: 0;
+    }
+
+    #wd-property-nav .wdn-site-search {
+        align-items: center;
+        background: transparent;
+        border: 1px solid var(--wdn-border);
+        border-radius: 7px;
+        box-shadow: none;
+        color: var(--wdn-navy);
+        cursor: pointer;
+        display: inline-flex;
+        flex: 0 0 44px;
+        height: 44px;
+        justify-content: center;
+        margin: 0;
+        padding: 0;
+        width: 44px;
+    }
+
+    #wd-property-nav .wdn-site-search:hover,
+    #wd-property-nav .wdn-site-search:focus-visible {
+        background: #f0f5f5;
+        color: var(--wdn-teal);
+    }
+
+    #wd-property-nav .wdn-site-search i {
+        color: inherit;
+        font-size: 17px;
+        margin: 0;
+    }
+
+    /* ==========================================================
        RESPONSIVE
        ========================================================== */
 
@@ -358,6 +399,12 @@
             height: 44px;
             width: 44px;
         }
+
+        /* Phones keep the room for the address box; site search is the
+           first row of the Menu drawer. */
+        #wd-property-nav .wdn-site-search {
+            display: none;
+        }
     }
 
     @media (max-width: 400px) {
@@ -424,18 +471,32 @@
             </button>
         </div>
 
-        <!-- MENU: opens the one shared Watchdog drawer (watchdog-universal-menu.js),
-             the same menu used on the property index, Dashboard and Property Home. -->
-        <button
-            type="button"
-            class="wdn-mobile-button wdn-menu-button"
-            id="wdn-mobile-button"
-            data-wd-universal="open-menu"
-            aria-label="Open Watchdog menu"
-        >
-            <i class="fas fa-bars" aria-hidden="true"></i>
-            <span class="wdn-menu-label">Menu</span>
-        </button>
+        <div class="wdn-actions">
+            <!-- SITE SEARCH: pages, terms and addresses (watchdog-site-search.js,
+                 Ctrl/Cmd+K). The address box above stays address-only. -->
+            <button
+                type="button"
+                class="wdn-site-search"
+                data-wd-search="open"
+                aria-label="Search Watchdog"
+                title="Search Watchdog (Ctrl+K)"
+            >
+                <i class="fas fa-magnifying-glass" aria-hidden="true"></i>
+            </button>
+
+            <!-- MENU: opens the one shared Watchdog drawer (watchdog-universal-menu.js),
+                 the same menu used on the property index, Dashboard and Property Home. -->
+            <button
+                type="button"
+                class="wdn-mobile-button wdn-menu-button"
+                id="wdn-mobile-button"
+                data-wd-universal="open-menu"
+                aria-label="Open Watchdog menu"
+            >
+                <i class="fas fa-bars" aria-hidden="true"></i>
+                <span class="wdn-menu-label">Menu</span>
+            </button>
+        </div>
     </div>
 </div>
 
