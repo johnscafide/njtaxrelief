@@ -62,4 +62,4 @@ preview: com.watchdogindex.agent.preview  PreviewApp (window), DesktopPlatformSe
 - `core`: `./gradlew test` locally and in CI.
 - `preview`: `./gradlew test renderScreens` compiles all shared UI for the desktop and writes `build/screens/*.png`; `compareScreens -Pref=<dir>` writes side-by-side composites and prints a similarity score per screen.
 - Android: `.github/workflows/watchdog-android-build.yml` assembles debug and release, runs unit tests and lint, and uploads APKs.
-- Browser-level certification of the website is Playwright; for the app, the desktop renders plus the mockup reference renders (`tools/render-mockups.mjs`) are the visual evidence, and CI refreshes `preview/renders/` on every push.
+- Browser-level certification of the website is Playwright; for the app, the desktop renders plus the mockup reference renders (`tools/render-mockups.mjs`) are the visual evidence, and CI runs the headless comparison against `preview/reference/` on every push, uploading the renders and composites as workflow artifacts (nothing is committed back).

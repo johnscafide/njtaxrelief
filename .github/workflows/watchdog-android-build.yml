@@ -47,6 +47,9 @@ jobs:
         uses: gradle/actions/wrapper-validation@v4
       - name: Assemble debug APK
         run: ./gradlew --no-daemon --stacktrace :app:assembleDebug
+      - name: Core unit tests
+        working-directory: watchdogandroid/core
+        run: ./gradlew --no-daemon --stacktrace test
       - name: Unit tests
         run: ./gradlew --no-daemon --stacktrace :shared:testDebugUnitTest :app:testDebugUnitTest
       - name: Lint

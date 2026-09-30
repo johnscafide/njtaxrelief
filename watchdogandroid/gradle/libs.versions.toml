@@ -1,5 +1,5 @@
-# Single source of versions for the Android build. ./preview/gradle/libs.versions.toml mirrors the
-# Compose line (Compose 1.7 = Compose Multiplatform 1.7.3) so shared sources compile on both.
+# Single source of versions for the Android build. The separate preview build (./preview/build.gradle.kts)
+# pins the matching Compose line (Compose 1.7 = Compose Multiplatform 1.7.3) so shared sources compile on both.
 [versions]
 agp = "8.10.1"
 kotlin = "2.1.10"
