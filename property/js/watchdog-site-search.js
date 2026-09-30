@@ -182,7 +182,7 @@
   root.__wdSiteSearch = true;
 
   /* ---------- Runtime ---------- */
-  var VERSION = '20260930a';
+  var VERSION = '20260930b';
   var doc = root.document;
   var CSS_URL = '/property/css/watchdog-site-search.css';
   var DATA_URL = '/property/data/site-search.json?v=' + VERSION;
