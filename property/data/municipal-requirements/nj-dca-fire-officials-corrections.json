@@ -1,0 +1,19 @@
+{
+ "note": "Fields of the NJ DCA fire directory that a person found wrong or out of date against the town's or county's own current pages. The generator leaves these fields out of the 'Fire official in the NJ state directory' line; the correct contact comes from the town research. Add an entry only with the checked source.",
+ "corrections": [
+  {
+   "code": "1528",
+   "leaid": "1527-001",
+   "drop": ["phone"],
+   "reason": "Seaside Park: the directory prints (732) 340-7360 for the Ocean County Fire Marshal. The County's own page and every other Ocean County entry give (732) 370-7360.",
+   "checked_on": "2026-09-30"
+  },
+  {
+   "code": "1520",
+   "leaid": "1519-001",
+   "drop": ["phone"],
+   "reason": "Mantoloking: the directory entry was last surveyed 10/22/2019 and gives (732) 899-6600. The Borough's current pages and forms use 732-475-6983.",
+   "checked_on": "2026-09-30"
+  }
+ ]
+}

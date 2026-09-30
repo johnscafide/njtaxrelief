@@ -5,6 +5,7 @@ Inputs (all in property/data/municipal-requirements/):
   checked/<code>.json                 town research from official sources, every fee quoted
   approvals.json                      which towns a person approved in the tracker
   nj-dca-fire-officials-2026-09.json  fire official per town from the NJ DCA directory
+  nj-dca-fire-officials-corrections.json  directory fields a person found wrong (left out)
 
 Output: a migration that upserts two curated rows per approved town (resale_cco and
 smoke_fire_cert). Agents see these on the Transactions page as plain text lines, so
@@ -200,9 +201,22 @@ def fire_row(r: dict, officials: list[dict]) -> dict:
             "source_excerpt": clean(next((e.get("quote") for a in auths for e in a.get("evidence") or [] if e.get("quote")), ""), 900) or None}
 
 
+def directory_officials() -> dict:
+    """The NJ DCA fire directory by town, minus the fields a person found wrong (see the corrections file)."""
+    towns = json.loads((DATA / "nj-dca-fire-officials-2026-09.json").read_text())["towns"]
+    fixes = DATA / "nj-dca-fire-officials-corrections.json"
+    for fix in json.loads(fixes.read_text())["corrections"] if fixes.exists() else []:
+        matched = [a for a in (towns.get(fix["code"]) or {}).get("agencies") or [] if a.get("leaid") == fix["leaid"]]
+        assert matched, f"correction for {fix['code']} {fix['leaid']} matches no directory entry"
+        for a in matched:
+            for field in fix["drop"]:
+                a[field] = ""
+    return towns
+
+
 def build_rows() -> list[dict]:
     approvals = json.loads((DATA / "approvals.json").read_text())["towns"]
-    officials = json.loads((DATA / "nj-dca-fire-officials-2026-09.json").read_text())["towns"]
+    officials = directory_officials()
     rows = []
     for path in sorted((DATA / "checked").glob("*.json")):
         r = json.loads(path.read_text())

@@ -99,7 +99,7 @@ def from_research(folder: pathlib.Path, live_codes: set[str], officials: dict) -
 
 
 def build() -> dict:
-    officials = json.loads((DATA / "nj-dca-fire-officials-2026-09.json").read_text())["towns"]
+    officials = checked.directory_officials()
     towns = live_towns(officials)
     approved = {c for c, v in json.loads((DATA / "approvals.json").read_text())["towns"].items() if v.get("status") == "approved"}
     for t in json.loads(UNPUBLISHED.read_text())["towns"] if UNPUBLISHED.exists() else []:
@@ -119,7 +119,7 @@ def main() -> int:
     ap.add_argument("--check", action="store_true")
     args = ap.parse_args()
     if args.from_research:
-        officials = json.loads((DATA / "nj-dca-fire-officials-2026-09.json").read_text())["towns"]
+        officials = checked.directory_officials()
         live = {c for c, v in json.loads((DATA / "approvals.json").read_text())["towns"].items() if v.get("status") == "approved"}
         UNPUBLISHED.write_text(dump(from_research(args.from_research, live, officials)))
     data = build()
