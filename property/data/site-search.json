@@ -22,7 +22,12 @@
         "certficate of occupancy",
         "tco",
         "temporary co",
-        "temporary certificate of occupancy"
+        "temporary certificate of occupancy",
+        "co requirements",
+        "town co requirements",
+        "resale co requirements",
+        "co fee",
+        "co fees"
       ],
       "keywords": [
         "resale",
@@ -35,10 +40,10 @@
         "upload",
         "document"
       ],
-      "summary": "Town sign-off that a home is fit to live in, issued after new construction or major work. For a resale, many NJ towns require a CCO.",
-      "href": "/transaction?evidence=occupancy",
-      "where": "Transactions > Occupancy / resale",
-      "need": "agent",
+      "summary": "Town sign-off that a home is fit to live in. For a resale, many NJ towns require one. Property Home shows this town's rules, fees and who to call.",
+      "href": "/home#town-certificates",
+      "where": "Property Home > Closing > Town CO & fire certificate",
+      "need": "pro_plus",
       "icon": "fa-house-circle-check"
     },
     {
@@ -78,10 +83,10 @@
         "change of occupancy",
         "certificate of occupancy"
       ],
-      "summary": "A certificate some NJ towns require after a local inspection before a home is sold or re-rented.",
-      "href": "/transaction?evidence=occupancy",
-      "where": "Transactions > Occupancy / resale",
-      "need": "agent",
+      "summary": "A certificate some NJ towns require after a local inspection before a home is sold. Property Home shows this town's rules, fees and who to call.",
+      "href": "/home#town-certificates",
+      "where": "Property Home > Closing > Town CO & fire certificate",
+      "need": "pro_plus",
       "icon": "fa-clipboard-check"
     },
     {
@@ -114,10 +119,10 @@
         "one and two family",
         "fire code"
       ],
-      "summary": "NJ requires it before a one- or two-family home is sold or rented. The local fire official checks the smoke and CO alarms and extinguisher.",
-      "href": "/transaction?evidence=fire",
-      "where": "Transactions > Smoke / CO / fire",
-      "need": "agent",
+      "summary": "NJ requires it before a one- or two-family home is sold or rented. Property Home shows who issues it in this town, the fee and who to call.",
+      "href": "/home#town-certificates",
+      "where": "Property Home > Closing > Town CO & fire certificate",
+      "need": "pro_plus",
       "icon": "fa-fire-extinguisher"
     },
     {

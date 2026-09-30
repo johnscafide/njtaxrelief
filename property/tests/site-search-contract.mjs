@@ -47,8 +47,17 @@ const alarm = find((e) => e.aliases.includes('carbon monoxide') || e.aliases.inc
 
 assert.equal(co.kind, 'term');
 assert.match(co.label, /^CO - Certificate of Occupancy/, 'CO label reads "CO - Certificate of Occupancy"');
-assert.match(co.href, /^\/transaction\?evidence=occupancy/, 'CO opens the Transactions occupancy evidence');
-assert.ok(co.where && /Transactions/.test(co.where), 'CO says it lives in Transactions');
+// CO requirements live on Property Home (the town CO & fire certificate card).
+for (const e of [co, cco, alarm]) {
+  assert.equal(e.href, '/home#town-certificates', `${e.id} opens the town CO & fire certificate card on Property Home`);
+  assert.ok(e.where && /^Property Home > /.test(e.where), `${e.id} says it lives on Property Home`);
+}
+for (const f of ['property/js/home.js', 'property/js/dashboard/home/index.js']) {
+  const home = read(f);
+  assert.match(home, /hash === '#town-certificates'[\s\S]{0,200}window\.hmOpen\('diligence'\)/, `${f} opens the closing section for #town-certificates`);
+  assert.match(home, /function scrollToTownCertificates\(\)[\s\S]{0,400}'#sec-diligence\.open \.tcx-tool'/, `${f} scrolls to the town certificate card`);
+  assert.match(home, /\(OPEN\[sec\.k\] \? ' open' : ''\)/, `${f} keeps an opened section open when the report repaints`);
+}
 assert.equal(top('certif', 1)[0], co, '"certif" suggests CO - Certificate of Occupancy first');
 assert.equal(top('Certif', 1)[0], co, 'matching ignores case');
 assert.equal(top('certificate of occupancy', 1)[0], co, 'full name finds CO');

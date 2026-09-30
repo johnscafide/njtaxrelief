@@ -2628,7 +2628,8 @@ document.addEventListener('mouseover',e=>{var t=e.target.closest('[data-marker-i
     if (!sum) sum = sec.short || '';
     try { tone = sec.tone ? (sec.tone(r) || '') : ''; } catch (e) {}
     var catClass = String(sec.cat || 'Analysis').toLowerCase().replace(/[^a-z0-9]+/g, '-');
-    return '<section class="sec2 sec2-cat-' + catClass + ' ' + tone + '" data-min-plan="' + (sec.tier || 'standard') + '" id="sec-' + sec.k + '">' +
+    // A repaint (for example when saved details arrive) keeps an opened section open.
+    return '<section class="sec2 sec2-cat-' + catClass + ' ' + tone + (OPEN[sec.k] ? ' open' : '') + '" data-min-plan="' + (sec.tier || 'standard') + '" id="sec-' + sec.k + '">' +
       '<button class="sec2-h" onclick="hmToggle(\'' + sec.k + '\')">' +
         '<span class="sec2-icon-tile"><i class="fas ' + sec.icon + ' sec2-i"></i></span>' +
         '<span class="sec2-copy"><small class="sec2-kicker">' + esc(sec.cat || 'Analysis') + '</small><span class="sec2-t">' + sec.title + '</span>' +
@@ -2675,6 +2676,7 @@ document.addEventListener('mouseover',e=>{var t=e.target.closest('[data-marker-i
     host.innerHTML = html || '<div class="tl-note">Nothing to show here for this property.</div>';
     compactHomeSection(host, k);
     var e = el('sec-' + k); if (e) e.setAttribute('data-built', '1');
+    if (k === 'diligence') scrollToTownCertificates();
     initTips();
     if (el('tc-total') && typeof window.dbCost === 'function') window.dbCost();
   }
@@ -2719,6 +2721,44 @@ document.addEventListener('mouseover',e=>{var t=e.target.closest('[data-marker-i
     var e = el('sec-' + k);
     if (e && e.scrollIntoView) e.scrollIntoView({ behavior: 'smooth', block: 'start' });
   };
+
+  // Links into Property Home: #sec-<key> opens that section, and #town-certificates
+  // (where site search sends "CO", "CCO" and the smoke certificate) opens the closing
+  // section at the town CO & fire certificate card.
+  var userScrolled = false;
+  ['wheel', 'touchstart', 'keydown'].forEach(function (type) {
+    window.addEventListener(type, function () { userScrolled = true; }, { passive: true, once: true });
+  });
+  // The card loads after the section opens, and the report can repaint once more as details
+  // arrive, so the scroll happens each time the closing section finishes building, until the
+  // person starts scrolling on their own.
+  // Parts of the page above keep loading for a few seconds, so the position is checked again.
+  function scrollToTownCertificates() {
+    [0, 400, 1200, 2500, 4500].forEach(function (wait) {
+      setTimeout(function () {
+        if (location.hash !== '#town-certificates' || userScrolled) return;
+        var card = document.querySelector('#sec-diligence.open .tcx-tool');
+        if (card && card.scrollIntoView) card.scrollIntoView({ behavior: 'auto', block: 'start' });
+      }, wait);
+    });
+  }
+  function openFromHash() {
+    var hash = String(location.hash || '');
+    if (hash === '#town-certificates') {
+      if (!SECTIONS.some(function (section) { return section.k === 'diligence'; })) return;
+      userScrolled = false;
+      window.hmOpen('diligence');
+      scrollToTownCertificates();
+      return;
+    }
+    if (hash.indexOf('#sec-') === 0) {
+      var sectionKey = hash.slice(5);
+      if (SECTIONS.some(function (section) { return section.k === sectionKey; })) window.hmToggle(sectionKey);
+    }
+  }
+  window.addEventListener('hashchange', function () {
+    if (current && location.hash === '#town-certificates') openFromHash();
+  });
 
   window.hmExpandAll = function () {
     SECTIONS.forEach(function (x) { if (!OPEN[x.k]) window.hmToggle(x.k); });
@@ -3064,10 +3104,7 @@ document.addEventListener('mouseover',e=>{var t=e.target.closest('[data-marker-i
           loadMunicipalTaxEvidence(current).then(function () { paintReport(); paintHomeChrome(); }).catch(function(){});
           hydrateDetails().then(function () { paintReport(); paintHomeChrome(); }).catch(function(){});
         }
-        if (location.hash.indexOf('#sec-') === 0) {
-          var sectionKey = location.hash.slice(5);
-          if (SECTIONS.some(function (section) { return section.k === sectionKey; })) window.hmToggle(sectionKey);
-        }
+        openFromHash();
       }).catch(function (error) {
         console.error('Property report workspace failed:', error);
         el('hm-loading').style.display = 'none';
