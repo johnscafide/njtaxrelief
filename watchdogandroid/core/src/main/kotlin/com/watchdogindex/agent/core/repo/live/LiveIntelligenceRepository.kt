@@ -12,6 +12,8 @@ import com.watchdogindex.agent.core.model.Brief
 import com.watchdogindex.agent.core.model.BriefItem
 import com.watchdogindex.agent.core.model.FollowUp
 import com.watchdogindex.agent.core.repo.IntelligenceRepository
+import kotlinx.coroutines.CancellationException
+import kotlinx.datetime.Instant
 import kotlinx.datetime.toLocalDateTime
 
 /**
@@ -21,11 +23,16 @@ import kotlinx.datetime.toLocalDateTime
  * 2. Otherwise, when the plan can run the analyst (Pro or higher, or Agent with the add-on active), the
  *    "30-second professional brief" is requested over the sphere's pins and saved server-side.
  * 3. Otherwise the brief is built from this week's top three public-record changes, and the `forLabel` says so.
- * The plan gate stays on the server: the app only decides whether to make the call.
+ * The plan gate stays on the server: the app only decides whether to make the call. A run that fails (an error,
+ * `status: failed` or `refused`, an empty conclusion) is not tried again for [ANALYST_RETRY_MINUTES]; the digest
+ * brief covers that hour.
  */
 class LiveIntelligenceRepository(private val ctx: LiveContext, private val digest: LiveDigestRepository) : IntelligenceRepository {
 
     private var sessionId: String? = null
+
+    /** When the last analyst run for the brief failed; null once a run succeeds. */
+    private var lastAnalystAttempt: Instant? = null
 
     override suspend fun brief(): Brief {
         val account = runCatching { ctx.account() }.getOrNull()
@@ -34,19 +41,31 @@ class LiveIntelligenceRepository(private val ctx: LiveContext, private val diges
         val forBase = listOfNotNull(first?.let { "For $it" }, Format.longDate(today)).joinToString(" · ")
 
         runCatching { ctx.intelligence.savedBrief() }.getOrNull()?.let { saved ->
-            val age = Derived.parseInstant(saved.createdAt)?.let { (ctx.now() - it).inWholeHours } ?: Long.MAX_VALUE
-            if (age < 7 * 24 && saved.response.conclusion.isNotBlank()) return briefFrom(saved.response, forBase, saved.createdAt)
+            val createdAt = Derived.parseInstant(saved.createdAt)
+            val age = createdAt?.let { (ctx.now() - it).inWholeHours } ?: Long.MAX_VALUE
+            if (age < 7 * 24 && saved.response.conclusion.isNotBlank()) return briefFrom(saved.response, forBase, createdAt)
         }
 
         val eligible = runCatching { canRunAnalyst(account?.planTier) }.getOrDefault(false)
         if (eligible) {
             val pins = ctx.spherePins()
-            if (pins.isNotEmpty()) {
-                val result = runCatching { ctx.intelligence.ask(IntelligenceApi.BRIEF_PROMPT, pins, saveBrief = true) }.getOrNull()
+            val now = ctx.now()
+            val recentlyFailed = lastAnalystAttempt?.let { (now - it).inWholeMinutes < ANALYST_RETRY_MINUTES } == true
+            if (pins.isNotEmpty() && !recentlyFailed) {
+                val result = try {
+                    ctx.intelligence.ask(IntelligenceApi.BRIEF_PROMPT, pins, saveBrief = true)
+                } catch (e: CancellationException) {
+                    throw e
+                } catch (e: WatchdogException) {
+                    null
+                }
                 val response = result?.response
                 if (result != null && result.ok && result.status != "failed" && result.status != "refused" && response != null && response.conclusion.isNotBlank()) {
-                    return briefFrom(response, forBase, null)
+                    lastAnalystAttempt = null
+                    // A fresh run is dated now, so the time label is the real time and not the sender's 8:00 AM.
+                    return briefFrom(response, forBase, now)
                 }
+                lastAnalystAttempt = now
             }
         }
         return digestBrief(forBase, eligible)
@@ -58,7 +77,7 @@ class LiveIntelligenceRepository(private val ctx: LiveContext, private val diges
         return false
     }
 
-    private fun briefFrom(response: IntelligenceApi.AnalystResponse, forBase: String, createdAt: String?): Brief {
+    private fun briefFrom(response: IntelligenceApi.AnalystResponse, forBase: String, createdAt: Instant?): Brief {
         val items = if (response.cards.isNotEmpty()) {
             response.cards.take(3).map { card ->
                 BriefItem(
@@ -74,7 +93,7 @@ class LiveIntelligenceRepository(private val ctx: LiveContext, private val diges
         }
         val words = (response.conclusion + " " + items.joinToString(" ") { it.lead + it.text }).split(Regex("\\s+")).size
         val minutes = maxOf(1, Math.round(words / 200.0).toInt())
-        val time = Derived.parseInstant(createdAt)?.toLocalDateTime(Derived.NEW_JERSEY)?.let { Format.time12h(it.hour, it.minute) } ?: Format.time12h(8)
+        val time = createdAt?.toLocalDateTime(Derived.NEW_JERSEY)?.let { Format.time12h(it.hour, it.minute) } ?: Format.time12h(8)
         return Brief(
             kicker = "Watchdog Intelligence brief",
             timeLabel = "$time · $minutes min read",
@@ -142,6 +161,9 @@ class LiveIntelligenceRepository(private val ctx: LiveContext, private val diges
     }
 
     companion object {
+        /** How long a failed brief run keeps the analyst quiet. */
+        const val ANALYST_RETRY_MINUTES = 60L
+
         val DEFAULT_FOLLOW_UPS = listOf(
             FollowUp("chat_bubble", "Which clients should I call first?"),
             FollowUp("edit", "What changed in my farm this week?"),

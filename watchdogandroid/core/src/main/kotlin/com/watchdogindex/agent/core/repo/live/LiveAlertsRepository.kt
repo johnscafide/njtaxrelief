@@ -30,8 +30,8 @@ import java.util.UUID
  *
  * - Monday email and its delivery time come from `agent_digest_preferences`; no row means on, Mondays at 8:00 AM.
  * - The four channel switches, quiet hours and "also send it as a notification" are stored on the device (no
- *   server field exists). "Client home changes" and "Appeal deadlines" also fan out to `property_alert_preferences`
- *   for every saved and farm pin, and the displayed state follows those rows when they exist.
+ *   server field exists). "Client home changes" and "Appeal deadlines" also patch the `property_alert_preferences`
+ *   rows that already exist (never creating one), and the displayed state follows those rows when they exist.
  * - Push registration goes through the `push-device-register` edge function with a stable installation id; the
  *   function is still a proposal, so a missing function surfaces as a plain error and never blocks anything else.
  */
@@ -71,9 +71,11 @@ class LiveAlertsRepository(private val ctx: LiveContext) : AlertsRepository {
             quietStartHour = preferences.quietHours.startHour,
             quietEndHour = preferences.quietHours.endHour,
         ))
-        if (preferences.mondayEmail != before.mondayEmail || digestRow == null) {
+        if (preferences.mondayEmail != before.mondayEmail) {
             try {
                 ctx.alerts.saveDigestPreference(userId, preferences.mondayEmail, digestRow?.weekday, digestRow?.localHour, digestRow?.timezone, now)
+                // The row exists now, so the next flip is a change against this value rather than a rewrite on every update.
+                digestRow = (digestRow ?: AlertsApi.DigestPreference()).copy(enabled = preferences.mondayEmail)
             } catch (e: PlanRequiredException) {
                 // Free accounts have no digest row and the RLS says so; the switch stays local.
             }
@@ -81,9 +83,11 @@ class LiveAlertsRepository(private val ctx: LiveContext) : AlertsRepository {
         val homeChanges = preferences.channels[AlertChannel.ClientHomeChanges] ?: true
         val deadlines = preferences.channels[AlertChannel.AppealDeadlines] ?: true
         if (homeChanges != (before.channels[AlertChannel.ClientHomeChanges] ?: true) || deadlines != (before.channels[AlertChannel.AppealDeadlines] ?: true)) {
-            val pins = runCatching { ctx.digest.sphere().pins }.getOrDefault(emptyList())
+            // A category switch changes what the existing per-pin rows say; it never enrols the farm and sphere pins
+            // that have no row, so only pins with a preference row are patched.
+            val pins = runCatching { ctx.alerts.pinPreferences() }.getOrDefault(emptyList()).map { it.pamsPin }
             if (pins.isNotEmpty()) {
-                runCatching { ctx.alerts.savePinPreferences(userId, pins, alertTax = homeChanges, alertAssessment = homeChanges, alertScore = homeChanges, alertDeadline = deadlines, paused = null, now = now) }
+                runCatching { ctx.alerts.updatePinPreferences(userId, pins, alertTax = homeChanges, alertAssessment = homeChanges, alertScore = homeChanges, alertDeadline = deadlines, now = now) }
             }
         }
         state.value = preferences.copy(deliveryLabel = before.deliveryLabel, timeZone = before.timeZone)

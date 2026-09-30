@@ -267,4 +267,29 @@ class PropertyApiTest {
         assertIs<WatchdogException>(e)
         assertTrue(e.userMessage.contains("could not read"), e.userMessage)
     }
+
+    @Test
+    fun `a non-JSON 502 page maps by status to a retryable server failure`() = runBlocking {
+        val f = fake { respond("<!DOCTYPE html><html><body>502: Bad gateway</body></html>", HttpStatusCode.BadGateway, headersOf(HttpHeaders.ContentType, "text/html; charset=utf-8")) }
+        val e = assertFailsWith<HttpFailureException> { f.api.byPin("0904_9_20") }
+        assertEquals(502, e.status)
+        assertNull(e.code)
+        assertNull(e.serverError, "an HTML page is never shown or logged as the server's error text")
+        assertEquals("Watchdog could not reach the property intelligence service. Please try again.", e.userMessage)
+        assertFalse(e.userMessage.contains("could not read"), "a platform error page is a server failure, not an unreadable answer")
+    }
+
+    @Test
+    fun `a text 503 and a text 429 still reach their branches with Retry-After`() = runBlocking {
+        val f = fake { request ->
+            if (request.url.parameters["pin"] == "0904_9_20") respond("Service Unavailable", HttpStatusCode.ServiceUnavailable, headersOf(HttpHeaders.ContentType to listOf("text/plain"), HttpHeaders.RetryAfter to listOf("60")))
+            else respond("Too Many Requests", HttpStatusCode.TooManyRequests, headersOf(HttpHeaders.ContentType to listOf("text/plain"), HttpHeaders.RetryAfter to listOf("120")))
+        }
+        val unavailable = assertFailsWith<HttpFailureException> { f.api.byPin("0904_9_20") }
+        assertEquals(503, unavailable.status)
+        assertFalse(unavailable is QuotaException)
+        val limited = assertFailsWith<QuotaException> { f.api.byPin("0904_9_21") }
+        assertEquals(120, limited.retryAfterSeconds, "the Retry-After seconds survive a body that is not JSON")
+        assertNull(limited.resetAt)
+    }
 }

@@ -6,12 +6,16 @@ import com.watchdogindex.agent.core.model.AuthSession
 import com.watchdogindex.agent.core.model.AuthState
 import com.watchdogindex.agent.core.session.InMemorySessionStore
 import com.watchdogindex.agent.core.session.SessionManager
+import io.ktor.client.engine.mock.respond
+import io.ktor.http.HttpHeaders
 import io.ktor.http.HttpMethod
 import io.ktor.http.HttpStatusCode
+import io.ktor.http.headersOf
 import kotlinx.coroutines.runBlocking
 import kotlin.test.Test
 import kotlin.test.assertEquals
 import kotlin.test.assertFailsWith
+import kotlin.test.assertFalse
 import kotlin.test.assertIs
 import kotlin.test.assertNull
 import kotlin.test.assertTrue
@@ -131,6 +135,37 @@ class SupabaseAuthClientTest {
         manager.restore()
         manager.signOut()
         assertEquals("local", server.requestsTo("/auth/v1/logout").single().param("scope"))
+        assertIs<AuthState.SignedOut>(manager.state.value)
+        assertNull(store.load())
+    }
+
+    @Test
+    fun `a bodyless 401 or 403 on refresh is an error, not a dead session`() = runBlocking {
+        val server = FakeServer()
+        var status = HttpStatusCode.Unauthorized
+        server.on(HttpMethod.Post, "/auth/v1/token") { respond("", status, headersOf(HttpHeaders.ContentType, "text/html")) }
+        val store = InMemorySessionStore(AuthSession("stale", "r1", nowSeconds + 30, "user-1", "agent@example.com"))
+        val auth = SupabaseAuthClient(TestConfig.client(server, TokenProvider { null }), TestConfig.config) { nowSeconds }
+        val manager = SessionManager(auth, store) { nowSeconds }
+
+        manager.restore()
+        assertIs<AuthState.SignedIn>(manager.state.value, "a 401 without a body is not proof the refresh token is gone")
+        assertEquals("stale", store.load()?.accessToken, "the stored session is kept for the next attempt")
+        val unauthorized = assertFailsWith<WatchdogException> { auth.refresh("r1") }
+        assertFalse(unauthorized is InvalidGrantException, "the caller sees an error, not a sign-out")
+
+        status = HttpStatusCode.Forbidden
+        assertFalse(assertFailsWith<WatchdogException> { auth.refresh("r1") } is InvalidGrantException)
+        manager.restore()
+        assertIs<AuthState.SignedIn>(manager.state.value)
+        assertEquals("stale", manager.tokenProvider.accessToken(), "the request goes out with the token we have; the server decides")
+
+        // The body signals still end the session, whatever the status.
+        server.on(HttpMethod.Post, "/auth/v1/token") { json("""{"code":403,"error_code":"session_not_found","msg":"Session from session_id claim in JWT does not exist"}""", HttpStatusCode.Forbidden) }
+        assertFailsWith<InvalidGrantException> { auth.refresh("r1") }
+        server.on(HttpMethod.Post, "/auth/v1/token") { json("""{"error":"invalid_grant","error_description":"Invalid Refresh Token: Already Used"}""", HttpStatusCode.BadRequest) }
+        assertFailsWith<InvalidGrantException> { auth.refresh("r1") }
+        manager.restore()
         assertIs<AuthState.SignedOut>(manager.state.value)
         assertNull(store.load())
     }

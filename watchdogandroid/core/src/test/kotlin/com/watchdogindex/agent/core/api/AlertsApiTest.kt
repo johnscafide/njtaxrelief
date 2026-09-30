@@ -60,8 +60,9 @@ class AlertsApiTest {
         server.on(HttpMethod.Post, "/functions/v1/push-device-register") { json("""{"ok":true}""") }
         server.on(HttpMethod.Get, "/rest/v1/agent_digest_preferences") { json("[]") }
         server.on(HttpMethod.Post, "/rest/v1/agent_digest_preferences") { json("[]") }
-        server.on(HttpMethod.Get, "/rest/v1/property_alert_preferences") { json("[]") }
-        server.on(HttpMethod.Post, "/rest/v1/property_alert_preferences") { json("[]") }
+        // Only the saved pin has a preference row; the farm pin has none and must not get one from a category switch.
+        server.on(HttpMethod.Get, "/rest/v1/property_alert_preferences") { json("""[{"pams_pin":"0409_285.14_9","alert_score":true,"alert_tax":true,"alert_assessment":true,"alert_deadline":true,"paused":false}]""") }
+        server.on(HttpMethod.Patch, "/rest/v1/property_alert_preferences") { json("[]") }
         server.on(HttpMethod.Get, "/rest/v1/agent_farm_properties") { json("""[{"id":"f1","pams_pin":"0905_112_7","address":"27 HAMILTON ST","relationship":"past_client"}]""") }
         server.on(HttpMethod.Get, "/rest/v1/saved_properties") { json("""[{"pams_pin":"0409_285.14_9","address":"36 BIRCHWOOD DR","kind":"watch"}]""") }
         val set = TestConfig.liveSet(server)
@@ -77,13 +78,14 @@ class AlertsApiTest {
         val digest = (WatchdogHttp.parseJsonOrNull(digestPost.body) as kotlinx.serialization.json.JsonArray).single() as kotlinx.serialization.json.JsonObject
         assertEquals(false, digest.bool("enabled"))
         assertEquals("user-1", digest.str("user_id"))
-        val fanOut = server.requestsTo("/rest/v1/property_alert_preferences").last { it.method == HttpMethod.Post }
-        assertEquals("user_id,pams_pin", fanOut.param("on_conflict"))
-        val rows = WatchdogHttp.parseJsonOrNull(fanOut.body) as kotlinx.serialization.json.JsonArray
-        assertEquals(setOf("0905_112_7", "0409_285.14_9"), rows.map { (it as kotlinx.serialization.json.JsonObject).str("pams_pin") }.toSet())
-        assertEquals(false, (rows[0] as kotlinx.serialization.json.JsonObject).bool("alert_deadline"))
-        assertEquals(true, (rows[0] as kotlinx.serialization.json.JsonObject).bool("alert_tax"))
-        assertNull((rows[0] as kotlinx.serialization.json.JsonObject)["paused"], "a category switch never pauses a property")
+        val fanOut = server.requestsTo("/rest/v1/property_alert_preferences").last { it.method == HttpMethod.Patch }
+        assertEquals("in.(0409_285.14_9)", fanOut.param("pams_pin"), "only the pin that already has a row is touched; the farm pin is not enrolled")
+        assertEquals("eq.user-1", fanOut.param("user_id"))
+        val patch = fanOut.json()!!
+        assertEquals(false, patch.bool("alert_deadline"))
+        assertEquals(true, patch.bool("alert_tax"))
+        assertNull(patch["paused"], "a category switch never pauses a property")
+        assertTrue(server.requestsTo("/rest/v1/property_alert_preferences").none { it.method == HttpMethod.Post }, "a category switch never upserts, so it cannot create rows")
         val mirror = server.requestsTo("/functions/v1/push-device-register").last().json()!!
         assertEquals("update", mirror.str("action"))
         assertEquals(false, mirror.bool("digest_enabled"))

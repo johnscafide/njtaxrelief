@@ -113,6 +113,14 @@ val WatchdogAuth = createClientPlugin("WatchdogAuth", ::WatchdogAuthConfig) {
         val refresher = cfg.refresher ?: return@on call
         val fresh = refresher.refreshAfterUnauthorized(used) ?: return@on call
         if (fresh == used) return@on call
+        // Finish the first exchange before re-sending, so its body is drained and the connection is released.
+        try {
+            call.response.bodyAsText()
+        } catch (e: CancellationException) {
+            throw e
+        } catch (e: Exception) {
+            // The 401 body is not needed; a read failure changes nothing about the retry.
+        }
         request.headers.remove(HttpHeaders.Authorization)
         request.headers.append(HttpHeaders.Authorization, "Bearer $fresh")
         request.attributes.put(RetriedAfterRefresh, true)
@@ -258,7 +266,9 @@ object WatchdogHttp {
             if (lowerError.contains("origin") || lowerCode == "origin_not_allowed") {
                 return HttpFailureException(status, code, serverError, "Watchdog couldn't complete that request. Please try again.")
             }
-            return planException(feature, plain)
+            // Only a plan code, or a sentence about the plan, is a plan gate; any other 403 keeps the server's own sentence.
+            if (lowerCode in PLAN_CODES || (plain != null && PLAN_TEXT.containsMatchIn(plain))) return planException(feature, plain)
+            return HttpFailureException(status, code, serverError, plain ?: "This action is not available for your current plan.")
         }
         if (status == 429) {
             val message = plain ?: "Your current plan capacity has been reached. Reduce the request or upgrade to continue."
@@ -273,7 +283,7 @@ object WatchdogHttp {
             val message = confirmation?.get("body")?.stringOrNull()?.takeIf { it.isNotBlank() } ?: plain ?: "This action needs your confirmation first."
             return ConfirmationRequiredException(body, message)
         }
-        if (lowerCode == "plan_required" || lowerCode == "agent_plan_required" || lowerCode == "42501") return planException(feature, plain)
+        if (lowerCode in PLAN_CODES) return planException(feature, plain)
         if (lowerCode == "p0001" && plain != null) return HttpFailureException(status, code, serverError, plain)
         val fallback = when {
             status == 404 -> "Watchdog could not find that."
@@ -325,6 +335,9 @@ object WatchdogHttp {
     }
 
     private val AUTH_CODES = setOf("sign_in_required", "session_invalid", "auth_required", "sign_in_required.")
+    private val PLAN_CODES = setOf("plan_required", "agent_plan_required", "42501")
+    /** A 403 sentence that names the plan ("...is part of the Agent plan.", "Upgrade to Pro...") is a plan gate, not a permission error. */
+    private val PLAN_TEXT = Regex("\\bplan\\b|\\bagent\\b|\\bpro\\b|upgrade", RegexOption.IGNORE_CASE)
     private val AUTH_TEXT = Regex("^(sign in required|session invalid|authentication required|sign in again|not signed in|jwt expired|invalid jwt)")
     private val RAW_DB_ERROR = Regex("row.level|row-level|\\brls\\b|postgres|postgrest|pgrst\\d|relation |violates|constraint|permission denied|\\brpc\\b|sqlstate", RegexOption.IGNORE_CASE)
     private val KNOWN_CODE_MESSAGES = mapOf(

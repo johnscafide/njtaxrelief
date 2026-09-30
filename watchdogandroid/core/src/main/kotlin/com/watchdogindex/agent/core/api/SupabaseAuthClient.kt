@@ -164,13 +164,18 @@ class SupabaseAuthClient(
     private fun errorMessage(body: JsonObject): String? =
         body.str("msg") ?: body.str("error_description") ?: body.str("message") ?: body.str("error")
 
+    /**
+     * Only a body that names the grant or session as gone proves the refresh token is dead. A 401 or 403 without
+     * that signal (an empty body, a gateway page, a passing auth outage) falls through to [WatchdogHttp.failure]:
+     * the stored session is kept and the caller shows an error instead of signing the agent out.
+     */
     private fun isInvalidGrant(status: Int, body: JsonObject?): Boolean {
-        if (body == null) return status == 400 || status == 401 || status == 403
+        if (body == null) return status == 400
         val error = (body.str("error") ?: "").lowercase()
         val code = (body.str("error_code") ?: "").lowercase()
         val msg = (errorMessage(body) ?: "").lowercase()
-        return error == "invalid_grant" || code.startsWith("refresh_token") || code == "session_not_found" || code == "session_expired" ||
-            msg.contains("refresh token") || msg.contains("invalid grant") || status == 401 || status == 403
+        return error == "invalid_grant" || code.startsWith("refresh_token") || code.startsWith("session_") ||
+            msg.contains("refresh token") || msg.contains("invalid grant")
     }
 
     companion object {

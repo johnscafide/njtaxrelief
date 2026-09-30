@@ -9,6 +9,7 @@ import com.watchdogindex.agent.core.api.TokenProvider
 import com.watchdogindex.agent.core.api.TokenRefresher
 import com.watchdogindex.agent.core.model.AuthSession
 import com.watchdogindex.agent.core.model.AuthState
+import kotlinx.coroutines.CancellationException
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.flow.asStateFlow
@@ -46,7 +47,14 @@ class SessionManager(
         val current = session ?: return@TokenRefresher null
         // Another request may already have refreshed; hand back the newer token without a second round trip.
         if (current.accessToken != stale) return@TokenRefresher current.accessToken
-        runCatching { refreshNow(current) }.getOrNull()?.accessToken
+        try {
+            refreshNow(current).accessToken
+        } catch (e: CancellationException) {
+            throw e
+        } catch (e: WatchdogException) {
+            // A dead refresh token has already cleared the session; anything else leaves it for the next attempt.
+            null
+        }
     }
 
     /** Loads the stored session on launch and refreshes it when it is stale. Ends in SignedIn or SignedOut. */

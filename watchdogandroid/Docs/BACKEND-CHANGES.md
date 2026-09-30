@@ -83,6 +83,8 @@ Notes the app can rely on:
 
 All non-200 responses are `Cache-Control: private, no-store` unless the table says otherwise.
 
+Errors the platform sends from outside the function (Vercel's own 502/504 pages, a `text/html` or `text/plain` body) are not JSON. The app reads every error body null-tolerantly and maps those by status alone, so a gateway page is a retryable server failure in the app, never an "unreadable answer"; the `HEAD` probe, the two `400` bodies and the `429` `Retry-After` seconds are what the app's `PropertyApi` documents and tests against.
+
 ### Address resolution (Scan flow)
 
 Same as the browser extension, now in one shared function (`resolveAddress` in `api/watchdog-extension.js`): parse "102 Grant Ave, Harrison, NJ 07029" (a bare "102 Grant Ave Harrison NJ" also works), try the tax list's street spellings, keep exact street matches only, then prefer the candidate within 250 m of `lat`/`lon` when the app has them, then the named town, then a single statewide match. `confident: false` with `alternatives` means the app should ask the user to pick.
@@ -95,6 +97,6 @@ Same as the browser extension, now in one shared function (`resolveAddress` in `
 
 ### App-side contract test
 
-`watchdogandroid/core/src/test/kotlin/com/watchdogindex/agent/core/api/PropertyApiTest.kt` decodes the exact success body the route's contract test prints (`WATCHDOG_PROPERTY_SAMPLE=1 npm run test:watchdog-property-json`, checked in as `core/src/test/resources/watchdog-property-sample.json`) through `PropertyApi.Response` and `PropertyMapper`, and drives `PropertyApi` through Ktor's `MockEngine` for the 401 -> refresh -> retry path, the 404 with `alternatives`, the 429 with `Retry-After`, and the 503. When the route's shape changes, regenerate the fixture and re-run `cd watchdogandroid/core && ./gradlew test`.
+`watchdogandroid/core/src/test/kotlin/com/watchdogindex/agent/core/api/PropertyApiTest.kt` decodes the exact success body the route's contract test prints (`WATCHDOG_PROPERTY_SAMPLE=1 npm run test:watchdog-property-json`, checked in as `core/src/test/resources/watchdog-property-sample.json`) through `PropertyApi.Response` and `PropertyMapper`, and drives `PropertyApi` through Ktor's `MockEngine` for the 401 -> refresh -> retry path, the 404 with `alternatives`, the 429 with `Retry-After` (also from a body that is not JSON), the 503, and a non-JSON 502 page. When the route's shape changes, regenerate the fixture and re-run `cd watchdogandroid/core && ./gradlew test`.
 
 Nothing about plan gates, RLS, the billing gate or the Supabase schema changed. `usage_events.metric_key` is free text (no check constraint), so the new key needs no migration.

@@ -101,6 +101,26 @@ class AlertsApi(private val rest: SupabaseRest, private val edge: EdgeFunctions)
         }
     }
 
+    /**
+     * Patches the rows that already exist for [pins] (`PATCH ...?user_id=eq.<uid>&pams_pin=in.(...)`, in chunks of
+     * 100). Unlike [savePinPreferences] this never creates a row, so a category switch cannot enrol every farm and
+     * sphere pin. `paused` is left alone.
+     */
+    suspend fun updatePinPreferences(userId: String, pins: List<String>, alertTax: Boolean, alertAssessment: Boolean, alertScore: Boolean, alertDeadline: Boolean, now: Instant) {
+        val patch = buildJsonObject {
+            put("alert_tax", alertTax)
+            put("alert_assessment", alertAssessment)
+            put("alert_score", alertScore)
+            put("alert_deadline", alertDeadline)
+            put("updated_at", now.toString())
+        }
+        // A pin never contains the characters that would break a PostgREST `in.(...)` list; anything else is skipped.
+        val clean = pins.distinct().filter { pin -> pin.isNotBlank() && pin.none { c -> c == ',' || c == '(' || c == ')' || c == '"' } }
+        for (chunk in clean.chunked(100)) {
+            rest.update("property_alert_preferences", patch, listOf("user_id" to "eq.$userId", "pams_pin" to "in.(${chunk.joinToString(",")})"), feature = "alerts")
+        }
+    }
+
     fun registrationBody(action: String, registration: PushRegistration): JsonObject = buildJsonObject {
         put("action", action)
         put("installation_id", registration.installationId)

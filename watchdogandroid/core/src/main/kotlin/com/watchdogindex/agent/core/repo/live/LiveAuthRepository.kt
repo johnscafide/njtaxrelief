@@ -4,6 +4,7 @@ import com.watchdogindex.agent.core.WatchdogException
 import com.watchdogindex.agent.core.model.Account
 import com.watchdogindex.agent.core.model.AuthState
 import com.watchdogindex.agent.core.repo.AuthRepository
+import kotlinx.coroutines.CancellationException
 import kotlinx.coroutines.flow.StateFlow
 
 /**
@@ -25,7 +26,13 @@ class LiveAuthRepository(private val ctx: LiveContext, private val beforeSignOut
     }
 
     override suspend fun signOut() {
-        runCatching { beforeSignOut() }
+        try {
+            beforeSignOut()
+        } catch (e: CancellationException) {
+            throw e
+        } catch (e: Exception) {
+            // The hook (forgetting the push registration) is best effort and must never keep the agent signed in.
+        }
         try {
             ctx.session.signOut("local")
         } finally {

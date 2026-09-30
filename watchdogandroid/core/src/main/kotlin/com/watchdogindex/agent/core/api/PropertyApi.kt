@@ -4,6 +4,7 @@ import com.watchdogindex.agent.core.NotSignedInException
 import com.watchdogindex.agent.core.PlanRequiredException
 import com.watchdogindex.agent.core.WatchdogException
 import io.ktor.client.statement.HttpResponse
+import io.ktor.client.statement.bodyAsText
 import io.ktor.http.HttpHeaders
 import kotlinx.serialization.SerialName
 import kotlinx.serialization.Serializable
@@ -15,11 +16,19 @@ import kotlinx.serialization.json.jsonArray
 /**
  * The property row and the searches around it.
  *
- * - `GET {siteOrigin}/api/watchdog-property?pin=` and `?address=&lat=&lon=&price=`: the authenticated JSON
- *   route proposed in gap-answers.md section 7.3 (PROPOSED; it is being written to that exact shape). Headers
- *   `Authorization: Bearer <access token>` and `Accept: application/json` are added by the HTTP layer. Errors:
- *   401 `{error:'Sign in again.'}`, 400 `{error:'Unknown property.'}`, 404 `{error:'Not found on the New Jersey
- *   tax list.'}` (with `alternatives` for address lookups), 503 with `Retry-After`.
+ * - `GET {siteOrigin}/api/watchdog-property?pin=` and `?address=&lat=&lon=&price=`: the authenticated JSON route
+ *   (`api/watchdog-property.js`; Docs/BACKEND-CHANGES.md "the property row as JSON"). Headers `Authorization:
+ *   Bearer <access token>` and `Accept: application/json` are added by the HTTP layer. What the route answers:
+ *   - 401 `{error:'Sign in again.'}`;
+ *   - 400 `{error:'Unknown property.'}` for a bad `pin` or neither parameter, and 400 `{error:'Not a New Jersey
+ *     street address.'}` for an `address` that does not parse (no house number);
+ *   - 404 `{error:'Not found on the New Jersey tax list.'}`, with `alternatives` for address lookups;
+ *   - 429 `{error:'Daily lookup limit reached. It resets at midnight UTC.'}` with `Retry-After: <seconds to UTC
+ *     midnight>` (a plain number of seconds, never a timestamp; kept in [QuotaException.retryAfterSeconds]);
+ *   - 503 `{error:'Watchdog is unavailable right now. Try again in a minute.'}` with `Retry-After: 60`;
+ *   - `HEAD` answers 200 with headers only once the input and token checks pass: no lookup, no usage row.
+ *   Errors from outside the function (Vercel's own 502/504 pages) are `text/html`, not JSON; [parse] reads every
+ *   error body null-tolerantly and maps those by status alone.
  * - `GET {siteOrigin}/api/agent-property-search?q=&limit=` (site-api-contracts.md 3.6): Bearer + Agent plan;
  *   `rows[].zip` and `rows[].city` are never declared in the DTO, so they are dropped at parse time (MUST NOT DISPLAY).
  * - `GET {siteOrigin}/api/watchdog-true-cost?q=` (3.2): anonymous address search, `[{pin,address,town,county}]`.
@@ -250,7 +259,9 @@ class PropertyApi(private val site: SiteApi) {
             return runCatching { WatchdogHttp.json.decodeFromJsonElement(Response.serializer(), element) }
                 .getOrElse { throw WatchdogException("Bad property JSON: ${it.message}", it, "Watchdog sent back a property record the app could not read.") }
         }
-        val body = response.jsonBody() as? JsonObject
+        // Read null-tolerantly: a gateway page is text or HTML and must still reach the status mapping below.
+        val text = runCatching { response.bodyAsText() }.getOrNull().orEmpty()
+        val body = WatchdogHttp.parseJsonOrNull(text) as? JsonObject
         if (status == 404) {
             val alternatives = body?.arr("alternatives")?.mapNotNull { alt ->
                 (alt as? JsonObject)?.let { a -> a.str("pin")?.let { Alternative(it, a.str("address"), a.str("town")) } }
@@ -259,7 +270,7 @@ class PropertyApi(private val site: SiteApi) {
         }
         if (status == 401) throw NotSignedInException()
         // The route's 429 says when the day turns in Retry-After (seconds), so it travels with the exception.
-        throw WatchdogHttp.failure(status, body, feature = "property lookup", retryAfter = response.headers[HttpHeaders.RetryAfter])
+        throw WatchdogHttp.failure(status, body, rawText = text, feature = "property lookup", retryAfter = response.headers[HttpHeaders.RetryAfter])
     }
 
     /** Agent-plan address search. Throws [PlanRequiredException] on 403 so the caller can fall back to the public search. */

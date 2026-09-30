@@ -13,6 +13,7 @@ import kotlinx.serialization.json.put
 import kotlin.test.Test
 import kotlin.test.assertEquals
 import kotlin.test.assertFailsWith
+import kotlin.test.assertFalse
 import kotlin.test.assertIs
 import kotlin.test.assertNull
 import kotlin.test.assertTrue
@@ -117,5 +118,31 @@ class WatchdogHttpTest {
         assertEquals("Watchdog could not reach the property intelligence service. Please try again.", code.userMessage)
         val trigger = WatchdogHttp.failure(400, buildJsonObject { put("code", "P0001"); put("message", "You have reached the property workspace limit for your Agent plan. Remove properties or upgrade to continue.") })
         assertEquals("You have reached the property workspace limit for your Agent plan. Remove properties or upgrade to continue.", trigger.userMessage)
+    }
+
+    @Test
+    fun `a 403 that is not a plan gate keeps the server's sentence`() = runBlocking {
+        val owned = WatchdogHttp.failure(403, buildJsonObject { put("error", "This report belongs to another account.") })
+        assertIs<HttpFailureException>(owned)
+        assertFalse(owned is PlanRequiredException)
+        assertEquals(403, owned.status)
+        assertEquals("This report belongs to another account.", owned.userMessage)
+
+        val bare = WatchdogHttp.failure(403, buildJsonObject { put("error", "Forbidden") })
+        assertFalse(bare is PlanRequiredException)
+        assertEquals("This action is not available for your current plan.", bare.userMessage)
+        assertFalse(WatchdogHttp.failure(403, null, rawText = "<html>Forbidden</html>") is PlanRequiredException)
+
+        // A plan code or a sentence about the plan is still the plan gate.
+        assertIs<PlanRequiredException>(WatchdogHttp.failure(403, buildJsonObject { put("error", "Upgrade to Pro to export the workbook.") }))
+        assertIs<PlanRequiredException>(WatchdogHttp.failure(403, buildJsonObject { put("error", "The browser extension is part of the Agent plan.") }))
+        assertIs<PlanRequiredException>(WatchdogHttp.failure(403, buildJsonObject { put("error", "Forbidden"); put("code", "PLAN_REQUIRED") }))
+
+        // End to end: the sentence survives the REST helper and the plugin.
+        val server = FakeServer()
+        server.on(HttpMethod.Post, "/rest/v1/rpc/share_report") { json("""{"error":"This report belongs to another account."}""", HttpStatusCode.Forbidden) }
+        val e = assertFailsWith<HttpFailureException> { SupabaseRest(TestConfig.client(server), TestConfig.config).rpc("share_report") }
+        assertFalse(e is PlanRequiredException)
+        assertEquals("This report belongs to another account.", e.userMessage)
     }
 }

@@ -18,8 +18,8 @@ data class WatchdogConfig(
     companion object {
         const val PRODUCTION_SITE_ORIGIN = "https://www.watchdogindex.com"
         const val PRODUCTION_SUPABASE_URL = "https://uvkvaxljhhngydvlrzom.supabase.co"
-        const val PRODUCTION_SUPABASE_ANON_KEY =
-            "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InV2a3ZheGxqaGhuZ3lkdmxyem9tIiwicm9sZSI6ImFub24iLCJpYXQiOjE3ODE2Mzg0NjYsImV4cCI6MjA5NzIxNDQ2Nn0.5rTHWQk_4VXDChiU0wOW2BXmTNO-oYjBhUQzFtmA1Wg"
+        /** The publishable client key the production web clients send as `apikey`; the legacy JWT anon key is not used. */
+        const val PRODUCTION_SUPABASE_ANON_KEY = "sb_publishable_MYX59qCbK3d-21zDfJqkNw_fvmfnexa"
         val Production = WatchdogConfig()
     }
 }

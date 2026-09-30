@@ -3,6 +3,8 @@ package com.watchdogindex.agent.core.api
 import com.watchdogindex.agent.core.NotSignedInException
 import com.watchdogindex.agent.core.PlanRequiredException
 import com.watchdogindex.agent.core.WatchdogException
+import io.ktor.client.statement.bodyAsText
+import io.ktor.http.HttpHeaders
 import kotlinx.serialization.SerialName
 import kotlinx.serialization.Serializable
 import kotlinx.serialization.json.JsonElement
@@ -95,10 +97,16 @@ class IntelligenceApi(private val site: SiteApi, private val rest: SupabaseRest)
         }
         val response = site.post("/api/watchdog-intelligence-analyst", body)
         val status = response.status.value
-        val json = response.jsonBody()
+        // Read null-tolerantly: a Vercel 502/504 page is not JSON and must still reach the status mapping.
+        val text = runCatching { response.bodyAsText() }.getOrNull().orEmpty()
+        val json = WatchdogHttp.parseJsonOrNull(text)
         val obj = json as? JsonObject
         when (status) {
-            in 200..299 -> return WatchdogHttp.json.decodeFromJsonElement(AnalystResult.serializer(), json)
+            in 200..299 -> {
+                val element = json ?: throw WatchdogException("Unexpected response body", userMessage = UNREADABLE)
+                return runCatching { WatchdogHttp.json.decodeFromJsonElement(AnalystResult.serializer(), element) }
+                    .getOrElse { throw WatchdogException("Bad analyst JSON: ${it.message}", it, UNREADABLE) }
+            }
             401 -> throw NotSignedInException()
             403 -> {
                 if (obj?.containsKey("command_policy") == true) {
@@ -106,9 +114,8 @@ class IntelligenceApi(private val site: SiteApi, private val rest: SupabaseRest)
                 }
                 throw PlanRequiredException("Watchdog Intelligence")
             }
-            409 -> throw WatchdogHttp.failure(status, obj, feature = "Watchdog Intelligence")
-            429 -> throw WatchdogHttp.failure(status, obj, feature = "Watchdog Intelligence")
-            else -> throw WatchdogHttp.failure(status, obj, feature = "Watchdog Intelligence")
+            // 409 (confirmation required), 429 (quota, with `reset_at` or Retry-After) and everything else share the mapping.
+            else -> throw WatchdogHttp.failure(status, obj, rawText = text, feature = "Watchdog Intelligence", retryAfter = response.headers[HttpHeaders.RetryAfter])
         }
     }
 
@@ -133,6 +140,7 @@ class IntelligenceApi(private val site: SiteApi, private val rest: SupabaseRest)
 
     companion object {
         const val BRIEF_PROMPT = "Give me a 30-second professional brief."
+        private const val UNREADABLE = "Watchdog sent back something the app could not read. Please try again."
 
         /** The web's upsell copy for an Agent account without the add-on. */
         const val ADD_ON_COPY = "Your Agent plan can use Watchdog Intelligence when the Watchdog Intelligence add-on is active. It is included with Pro+ and Teams."

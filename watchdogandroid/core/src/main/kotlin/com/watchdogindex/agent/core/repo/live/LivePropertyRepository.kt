@@ -22,10 +22,11 @@ import kotlin.math.roundToInt
  *
  * - `detail(pin)` reads the JSON property route once and caches it briefly; the photo falls back to the NJ aerial
  *   from `/api/property-imagery` when the row has coordinates and no homeowner photo.
- * - Saved = a `saved_properties` row for the pin (written through `rpc save_property` with `kind:'watch'`, the
- *   validated path the site uses; this is also what makes the change producers watch the home).
- * - Watched = a `property_alert_preferences` row that is not paused. Watching also saves, because events are only
- *   produced for saved homes.
+ * - Saved = a `saved_properties` row with `kind:'watch'` for the pin (written through `rpc save_property`, the
+ *   validated path the site uses; this is also what makes the change producers watch the home). A `home` row the
+ *   owner claimed is not counted, because `setSaved(false)` only removes the watch row.
+ * - Watched = saved (as above) and a `property_alert_preferences` row that is not paused. A preference row alone is
+ *   not a watch, because events are only produced for saved homes.
  * - Search tries the Agent-plan route and falls back to the public address search when the plan says no.
  */
 class LivePropertyRepository(private val ctx: LiveContext) : PropertyRepository {
@@ -77,17 +78,21 @@ class LivePropertyRepository(private val ctx: LiveContext) : PropertyRepository 
         val response = fetch(pin)
         val row = response.property
         val saved = runCatching { isSaved(pin) }.getOrDefault(false)
-        val watched = runCatching { isWatched(pin) }.getOrDefault(false)
+        val watched = saved && runCatching { hasActivePreference(pin) }.getOrDefault(false)
         val image = response.photoUrl ?: if (row.lat != null && row.lon != null) {
             runCatching { ctx.property.imagery(row.lat, row.lon)?.aerial?.imageUrl }.getOrNull()
         } else null
         return ctx.mapper.detail(response, isSaved = saved, isWatched = watched, imageUrl = image)
     }
 
+    /** Only the `watch` row counts: it is the one [setSaved] creates and removes. */
     suspend fun isSaved(pin: PamsPin): Boolean =
-        ctx.rest.select("saved_properties", "pams_pin", listOf("pams_pin" to "eq.$pin"), limit = 1, feature = "saved homes").isNotEmpty()
+        ctx.rest.select("saved_properties", "pams_pin", listOf("pams_pin" to "eq.$pin", "kind" to "eq.watch"), limit = 1, feature = "saved homes").isNotEmpty()
 
-    suspend fun isWatched(pin: PamsPin): Boolean {
+    /** Saved and with a preference row that is not paused; a preference row for an unsaved home produces no events. */
+    suspend fun isWatched(pin: PamsPin): Boolean = isSaved(pin) && hasActivePreference(pin)
+
+    private suspend fun hasActivePreference(pin: PamsPin): Boolean {
         val row = ctx.rest.maybeSingle("property_alert_preferences", "paused", listOf("pams_pin" to "eq.$pin"), feature = "alerts") ?: return false
         return row["paused"]?.toString() != "true"
     }
