@@ -28,6 +28,10 @@ const PUBLIC_RATE_WINDOW_MS = 60 * 1000;
 const PUBLIC_RATE_MAX = 80;
 const BATCH_MAX_ROWS = 1000;
 const BATCH_CACHE_MS = 40 * 24 * 60 * 60 * 1000;
+// A batch page whose SR-1A subject evidence cannot be read is not scored at all
+// (a 40-day cache of degraded scores is worse than no score); the caller is told
+// to back off this long before retrying the same page.
+const BATCH_RETRY_AFTER_SECONDS = 60;
 const publicRate = new Map<string, { start: number; count: number }>();
 
 function cors(req) {
@@ -409,8 +413,16 @@ async function handleBatchPrecompute(req, body, admin, service) {
   if (error) return out(req, 503, { error: "Property warehouse unavailable", detail: clean(error.message, 200) });
   if (!rows?.length) return out(req, 200, { processed: 0, scored: 0, next_after: null, done: true, model_version: SCORE_MODEL });
   const src = await sources();
-  let subjects = new Map(), subjectEvidenceStatus = "available";
-  try { subjects = await subjectEvidence(admin, rows); } catch (err) { subjectEvidenceStatus = "unavailable"; console.error("Batch ROBUST subject evidence lookup failed", err); }
+  // Fail closed: when the SR-1A lookup fails, write nothing for this page and
+  // return 503 without advancing the cursor, so the job backs off and retries
+  // the same page instead of caching scores without subject evidence. On-demand
+  // scoring is unchanged and still degrades to "unavailable".
+  let subjects = new Map();
+  try { subjects = await subjectEvidence(admin, rows); } catch (err) {
+    console.error("Batch ROBUST subject evidence lookup failed; page not scored", err);
+    return out(req, 503, { error: "subject_evidence_unavailable", retry_after_seconds: BATCH_RETRY_AFTER_SECONDS, next_after: after || null });
+  }
+  const subjectEvidenceStatus = "available";
   const computedAt = new Date().toISOString(), expiresAt = new Date(Date.now() + BATCH_CACHE_MS).toISOString(), upserts = [];
   for (const raw of rows) {
     const row = { ...raw, pams_pin: String(raw.pams_pin) }, subject = subjects.get(row.pams_pin) || null;

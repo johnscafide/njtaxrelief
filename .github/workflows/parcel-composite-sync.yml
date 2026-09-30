@@ -36,11 +36,17 @@ on:
         type: boolean
         required: false
         default: true
+      refresh_days:
+        description: 'Scores: start a new full pass when the last one is older than this many days (0 = start one now)'
+        required: false
+        default: '25'
   pull_request:
     paths:
       - 'property/scripts/sync_parcel_composite.py'
       - 'property/scripts/precompute_scores.py'
+      - 'property/scripts/db_brake.py'
       - 'supabase/migrations/20260928200000_statewide_parcel_sync.sql'
+      - 'supabase/migrations/20260930132000_sync_parcel_batch_skip_unchanged.sql'
       - '.github/workflows/parcel-composite-sync.yml'
 
 concurrency:
@@ -63,8 +69,12 @@ jobs:
       - run: python -m pip install --disable-pip-version-check requests
       - name: Loader self-test (no network writes)
         run: python property/scripts/sync_parcel_composite.py --self-test
-      - name: Score precompute script parses
-        run: python -m py_compile property/scripts/precompute_scores.py
+      - name: Shared database brake self-test
+        run: python property/scripts/db_brake.py
+      - name: Score precompute self-test (retry, brake and stop rules, no network)
+        run: |
+          python -m py_compile property/scripts/precompute_scores.py
+          python property/scripts/precompute_scores.py --self-test
       - name: Migration keeps owner data out and writes service-only
         run: |
           python - <<'PY'
@@ -75,6 +85,35 @@ jobs:
           assert 'lookup_count = ' not in sql, 'sync never overwrites lookup_count'
           assert 'history = ' not in sql and 'effective_rate = ' not in sql
           print('migration contract ok')
+          PY
+      - name: Current sync_parcel_batch skips unchanged parcels
+        run: |
+          python - <<'PY'
+          import re
+          sql = open('supabase/migrations/20260930132000_sync_parcel_batch_skip_unchanged.sql').read()
+          low = sql.lower()
+          fn = low[low.index('create or replace function public.sync_parcel_batch(p_rows jsonb)'):]
+          body = fn[:fn.index('$$;')]
+          assert 'owner_name' not in low and 'st_address' not in low, 'no owner columns'
+          assert not re.search(r'\bzip\b', body), 'sync_parcel_batch neither accepts nor writes the mailing ZIP'
+          assert 'security definer' in body and 'set search_path = public, pg_temp' in body
+          assert 'revoke all on function public.sync_parcel_batch(jsonb) from public, anon, authenticated;' in sql
+          assert 'grant execute on function public.sync_parcel_batch(jsonb) to service_role;' in sql
+          assert 'grant execute on function public.sync_parcel_batch(jsonb) to anon' not in low and 'to authenticated' not in low
+          assert 'lookup_count = ' not in sql, 'sync never overwrites lookup_count'
+          assert 'history = ' not in sql and 'effective_rate = ' not in sql
+          assert not re.search(r'^\s*update public\.property_lookups', low, re.M), 'no bulk UPDATE'
+          upsert = body[body.index('on conflict (pams_pin) do update set'):body.index('returning 1')]
+          guard = upsert[upsert.index('source_synced_at = now()'):]
+          assert re.search(r'\bwhere\b', guard), 'ON CONFLICT DO UPDATE has a WHERE guard'
+          assert re.search(r'\)\s*is distinct from\s*\(', guard), 'rewrites only when a synced column would change'
+          assert 'source_synced_at is null' in guard
+          assert re.search(r"source_synced_at < now\(\) - interval '20 days'", guard), 'monthly refresh of source_synced_at'
+          for col in ('address', 'town', 'county', 'block', 'lot', 'qualifier', 'prop_class', 'year_built', 'acres',
+                      'dwelling_units', 'building_desc', 'land_value', 'improvement_value', 'assessed_value',
+                      'last_year_tax', 'last_sale_price', 'last_sale_year', 'last_sale_date', 'sales_code'):
+              assert f'p.{col},' in guard or f'p.{col}\n' in guard, f'guard compares {col}'
+          print('skip-unchanged migration contract ok')
           PY
 
   sync:
@@ -89,7 +128,11 @@ jobs:
       - run: python -m pip install --disable-pip-version-check requests
       - run: python property/scripts/sync_parcel_composite.py --self-test
       - name: Sync parcels
-        if: (github.event_name == 'schedule' && github.event.schedule == '17 7 3 * *') || inputs.what == 'parcels' || inputs.what == 'both' || inputs.what == ''
+        # Only the monthly schedule or a manual parcels/both run. On other
+        # schedules inputs.what is null, and null == '' is true in GitHub
+        # expressions: that made every 6-hourly run a full statewide rewrite
+        # and took the database down on 2026-09-30.
+        if: (github.event_name == 'schedule' && github.event.schedule == '17 7 3 * *') || (github.event_name == 'workflow_dispatch' && (inputs.what == 'parcels' || inputs.what == 'both'))
         env:
           SUPABASE_URL: https://uvkvaxljhhngydvlrzom.supabase.co
           SUPABASE_SERVICE_ROLE_KEY: ${{ secrets.SUPABASE_SERVICE_ROLE_KEY }}
@@ -113,9 +156,14 @@ jobs:
           MAX_PAGES: ${{ inputs.max_pages }}
           # Right after the monthly parcel sync every fact may have changed, so a
           # new full pass starts (an unfinished pass is always resumed first).
-          REFRESH_DAYS: ${{ (github.event_name == 'schedule' && github.event.schedule == '17 7 3 * *') && '0' || '25' }}
+          # Other schedules: 25 days. Manual runs: the refresh_days input (25 when blank).
+          REFRESH_DAYS: ${{ github.event_name == 'schedule' && (github.event.schedule == '17 7 3 * *' && '0' || '25') || (inputs.refresh_days || '25') }}
         run: |
           set -euo pipefail
+          if ! [[ "${REFRESH_DAYS}" =~ ^[0-9]+([.][0-9]+)?$ ]]; then
+            echo "::error::refresh_days must be a number of days (got '${REFRESH_DAYS}')"
+            exit 1
+          fi
           args=(--max-pages "${MAX_PAGES:-0}" --refresh-days "${REFRESH_DAYS}" --max-minutes 330 --summary score-precompute-summary.json)
           python property/scripts/precompute_scores.py "${args[@]}"
       - name: Run summary
