@@ -1,0 +1,164 @@
+{
+ "municipality_code": "0106",
+ "municipality": "Corbin City",
+ "county": "ATLANTIC",
+ "resale_co": {
+  "status": "not_required",
+  "name": "",
+  "issued_by": "",
+  "lead_time": "",
+  "valid_for": "",
+  "requirements": [],
+  "fees": [],
+  "how_to_apply": "",
+  "application_url": "",
+  "department_url": "https://sites.google.com/view/corbincitynj/municipal-services/zoningconstruction",
+  "phone": "609-701-0203",
+  "email": "Zoning@corbincitynj.com",
+  "contact_name": "Alexander Bauer",
+  "contact_title": "Zoning Officer",
+  "evidence": [
+   {
+    "url": "https://drive.google.com/uc?export=download&id=1YSBEuVwDPovVS3IY5l5guotF43xcQ8Ru",
+    "quote": "Selling Property: The city does not require any documentation or inspections to sell property.",
+    "doc_date": "2026-01 (City of Corbin City Land Use Administration fact sheet, PDF created January 28, 2026; linked from the Forms page)",
+    "via": "pdf",
+    "verified": true
+   },
+   {
+    "url": "https://sites.google.com/view/corbincitynj/municipal-services/city-clerk/forms",
+    "quote": "Selling or Renting Property in Corbin City",
+    "doc_date": "2026-09-30 (Forms page fetched; links the 2026 fact sheet)",
+    "via": "page",
+    "verified": true
+   },
+   {
+    "url": "https://sites.google.com/view/corbincitynj/municipal-services/zoningconstruction",
+    "quote": "Zoning Officer, Alexander Bauer (609) 701-0203 Email: Zoning@corbincitynj.com",
+    "doc_date": "2026-09-30 (page fetched)",
+    "via": "page",
+    "verified": true
+   }
+  ],
+  "confidence": "high",
+  "notes": "The City's January 2026 'Selling or Renting Property in Corbin City' fact sheet says in writing that the City does not require any documentation or inspections to sell property. An older March 2023 version of the fact sheet, still linked from the Zoning/Construction and Renting Property pages, said 'The city requires documentation of all inspections' and then listed only county septic, well testing and the State smoke/CO certificate; the newer sheet on the Forms page replaces it. Construction inspections are done by the NJ DCA State Construction Office in Hammonton, (609) 567-3653. The zoning ordinance quoted on the Zoning page (Section 102-21.6) sets a $35 fee for applications for certificates of occupancy and continuing certificates of occupancy, but nothing says one is needed for a sale. Rental units must be registered annually with the Zoning and Code Enforcement officer (rental program, Chapter 64). The 2026 fact sheet is linked from the Forms page as https://drive.google.com/file/d/1YSBEuVwDPovVS3IY5l5guotF43xcQ8Ru/view?usp=sharing; the direct-download address of the same file is cited."
+ },
+ "fire_cert": {
+  "requirements": [],
+  "authorities": [
+   {
+    "name": "NJ DCA Division of Fire Safety, Bureau of Fire Code Enforcement",
+    "type": "state_dca",
+    "area_served": "Entire city",
+    "lead_time": "Fee depends on how many business days before closing you apply (more than 10, 4 to 10, under 4).",
+    "fees": [
+     {
+      "label": "State smoke/CO certificate, applied more than 10 business days before closing",
+      "amount": "$45",
+      "quote": "If you are applying for a certificate more than ten business days from the closing date the fee is $45 dollars",
+      "source_url": "https://firesolutions.dca.nj.gov/ultra-fire-home/smoke-application-create/",
+      "verified": null
+     },
+     {
+      "label": "State smoke/CO certificate, applied 4 to 10 business days before closing",
+      "amount": "$90",
+      "quote": "if applying 4 to 10 business days from the closing date the fee is $90",
+      "source_url": "https://firesolutions.dca.nj.gov/ultra-fire-home/smoke-application-create/",
+      "verified": null
+     },
+     {
+      "label": "State smoke/CO certificate, closing less than 4 business days away",
+      "amount": "$161",
+      "quote": "if the closing date is less than four business days the fee is $161.",
+      "source_url": "https://firesolutions.dca.nj.gov/ultra-fire-home/smoke-application-create/",
+      "verified": null
+     }
+    ],
+    "how_to_apply": "Apply online through the NJ DCA Fire Safety portal ('Start Your Smoke Certification Application'). Pay by e-check or credit card before submitting; a valid email address is required. The certificate is emailed once the application is submitted, the fee is paid and any required inspections are done. Homes heated by electricity with no CO alarm requirement should also email BFCE_CSDCMAC@dca.nj.gov.",
+    "application_url": "https://firesolutions.dca.nj.gov/ultra-fire-home/smoke-application-create/",
+    "department_url": "https://www.nj.gov/dca/dfs/offices/bfce.shtml",
+    "phone": "609-633-6106",
+    "email": "BFCE_CSDCMAC@dca.nj.gov",
+    "contact_name": "Louis Kilmer",
+    "contact_title": "Bureau Chief, Bureau of Fire Code Enforcement (listed as the Fire Official for Corbin City in the state fire directory)",
+    "evidence": [
+     {
+      "url": "https://drive.google.com/uc?export=download&id=1YSBEuVwDPovVS3IY5l5guotF43xcQ8Ru",
+      "quote": "The smoke detector and/or carbon monoxide detector system must be inspected (CSDCMAC Certification) through the NJ Division of Fire Safety. You must schedule this inspection online at: https://firesolutions.dca.nj.gov/",
+      "doc_date": "2026-01",
+      "via": "pdf",
+      "verified": true
+     },
+     {
+      "url": "https://nj.gov/dca/dfs/pdf/ANNUAL%20REGISTRY/THIRD%20QUARTER%20LEA%20REGISTRY%202026.pdf",
+      "quote": "S Corbin City",
+      "doc_date": "2026-07",
+      "via": "pdf",
+      "verified": true
+     },
+     {
+      "url": "https://www.nj.gov/dca/dfs/pdf/fire%20directory_county%20summary/state_towns%207_17_26.pdf",
+      "quote": "CORBIN CITY 0106 SC",
+      "doc_date": "2026-07-17 (SC = Smoke Certs)",
+      "via": "pdf",
+      "verified": true
+     },
+     {
+      "url": "https://www.nj.gov/dca/dfs/pdf/fire%20directory_county%20summary/fire_code_enforcement_director.pdf",
+      "quote": "LEAID: 0106-999 Enf Auth. State Fire Official Louis Kilmer Phone (609)633-6132 Addr: PO Box 809 Trenton NJ 08625-0809",
+      "doc_date": "2026-07 (survey date 7/22/2026)",
+      "via": "state_directory",
+      "verified": true
+     },
+     {
+      "url": "https://firesolutions.dca.nj.gov/ultra-fire-home/smoke-application-create/",
+      "quote": "Please complete the following information to apply for a Certificate of Smoke Alarm, Carbon Monoxide Alarm, and Secondary Power Source Identification Label Compliance (CSACMASPSIL). You will be required to pay, via e-check or credit card, before you can submit this application. This application requires a valid email address.",
+      "doc_date": "2026-09-30 (page fetched)",
+      "via": "page",
+      "verified": null
+     },
+     {
+      "url": "https://firesolutions.dca.nj.gov/ultra-fire-home/smoke-application-create/",
+      "quote": "The Certificate will be sent automatically to the email address provided once the application has been submitted, the fee has been paid, and any required inspections have been completed.",
+      "doc_date": "2026-09-30 (page fetched)",
+      "via": "page",
+      "verified": null
+     },
+     {
+      "url": "https://www.nj.gov/dca/dfs/offices/bfce.shtml",
+      "quote": "Louis Kilmer, Bureau Chief CPM Address: P.O. Box 809, Trenton, NJ 08625-0809 Phone: (609) 633-6106",
+      "doc_date": "2026-09-30 (page fetched)",
+      "via": "page",
+      "verified": true
+     }
+    ],
+    "confidence": "high"
+   }
+  ],
+  "notes": "The State DCA is Corbin City's fire code enforcing agency (registry code S) and issues smoke certificates there ('SC' on the July 2026 state towns list). The City's own 2026 fact sheet sends sellers to the DCA Fire Safety portal. The DCA online form (CSACMASPSIL) no longer includes a fire extinguisher, in line with P.L.2025, c.19."
+ },
+ "other_items": [
+  {
+   "label": "Septic inspection",
+   "detail": "The Atlantic County Health Department may require a septic inspection; call (609) 645-5971 x4371 to verify.",
+   "source_url": "https://drive.google.com/uc?export=download&id=1YSBEuVwDPovVS3IY5l5guotF43xcQ8Ru"
+  },
+  {
+   "label": "Private well test",
+   "detail": "The well must be tested under the state Private Well Testing Act through a third-party vendor.",
+   "source_url": "https://drive.google.com/uc?export=download&id=1YSBEuVwDPovVS3IY5l5guotF43xcQ8Ru"
+  }
+ ],
+ "open_questions": [],
+ "checked_at": "2026-09-30",
+ "verification": {
+  "fees": 3,
+  "fee_ok": 0,
+  "fee_bad": 0,
+  "fee_unchecked": 3,
+  "quotes": 10,
+  "q_ok": 8,
+  "q_bad": 0,
+  "q_unchecked": 2
+ }
+}

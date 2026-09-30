@@ -1,0 +1,225 @@
+{
+ "municipality_code": "0121",
+ "municipality": "Somers Point",
+ "county": "ATLANTIC",
+ "checked_at": "2026-09-30",
+ "resale_co": {
+  "status": "required",
+  "name": "Land/Structure Compliance (Certificate of Occupancy) inspection",
+  "issued_by": "Construction, Zoning and Code Enforcement Office (Dept. of Construction Enforcement)",
+  "lead_time": "",
+  "valid_for": "",
+  "requirements": [
+   "Walks and driveways free of trip hazards",
+   "Yard free of weeds and debris, grass cut",
+   "House number at least 4 inches high, visible from the street",
+   "Paint not peeling or cracking, no untreated wood exposed",
+   "Service entry cable, gutters, downspouts, decks, steps and building exterior (foundation, walls, roof, glazing, basement hatch) in good condition; 3 or more risers need a graspable rail",
+   "Floor coverings without trip hazards; walls and ceilings in good condition",
+   "Smoke alarm within 10 feet of bedrooms and on every level including the basement; CO alarm within 10 feet of all sleeping rooms",
+   "Fire extinguisher 2A:10B:C, 10 lb maximum, mounted in the kitchen, visible and readily accessible, top no more than 5 feet above the floor",
+   "Graspable rails on all stairs including the basement",
+   "Bathrooms have an operable window or a fan exhausting outside",
+   "GFCI protection on outlets within 6 feet of a sink and in the garage, basement and outside",
+   "A light fixture in every hallway, interior stairway, bathroom, kitchen, laundry room, boiler or furnace room and basement",
+   "Plumbing fixtures working with hot and cold water and no visible leaks; water heater relief valve discharge within 6 inches of the floor",
+   "Gas appliances vented with combustion air and clearances; dryer vented outside with metal flex duct; washer drains to the drain system",
+   "Door locks meet code (no double keyed locks); at least one insect screen in every room"
+  ],
+  "fees": [
+   {
+    "label": "Inspection, per dwelling unit",
+    "amount": "$250.00",
+    "quote": "FEE: $250.00 PER DWELLING UNIT",
+    "source_url": "https://www.somerspointgov.org/pdfs/LAND%20STRUCTURE%20COMPLIANCE_0001.pdf",
+    "verified": null
+   },
+   {
+    "label": "Reinspection, each",
+    "amount": "$100.00",
+    "quote": "Reinspection fee $100.00 per reinspection",
+    "source_url": "https://www.somerspointgov.org/pdfs/LAND%20STRUCTURE%20COMPLIANCE_0001.pdf",
+    "verified": null
+   },
+   {
+    "label": "Reinspection appointment when smoke/CO alarms or extinguisher fail (older notice on page 2 of the same form, dated 2007)",
+    "amount": "$15",
+    "quote": "EFFECTIVE 6/14/2007, FAILURE TO HAVE WORKING SMOKE DETECTORS, CARBON MONOXIDE DETECTORS AND FIRE EXTINGUISHER WILL REQUIRE AN ADDITONAL FEE OF $15 FOR A REINSPECTION APPOINTMENT.",
+    "source_url": "https://www.somerspointgov.org/pdfs/LAND%20STRUCTURE%20COMPLIANCE_0001.pdf",
+    "verified": null
+   }
+  ],
+  "how_to_apply": "Fill out the Land/Structure Compliance Application (posted as 'Application Certificate of Occupancy' on the Construction, Zoning & Code Enforcement page) with the property use, occupancy, lockbox code, seller, agent, buyer, settlement date and whether the home will be rented, and submit it with the fee to the Construction Office (the form lists City Hall, 1 W. New Jersey Avenue; the web page lists 741 Shore Road), 9:00 am to 5:00 pm weekdays. The office-use section takes cash or check and records any open permits.",
+  "application_url": "https://www.somerspointgov.org/pdfs/LAND%20STRUCTURE%20COMPLIANCE_0001.pdf",
+  "department_url": "https://www.somerspointgov.org/mainpages/construction.asp",
+  "contact_name": "Mark McCrane",
+  "contact_title": "Construction Official (Construction/Zoning Official)",
+  "phone": "609-927-9088 x142",
+  "email": "mmccrane@spgov.org",
+  "evidence": [
+   {
+    "url": "https://www.somerspointgov.org/pdfs/LAND%20STRUCTURE%20COMPLIANCE_0001.pdf",
+    "quote": "LAND/STRUCTURE COMPLIANCE APPLICATION FEE: $250.00 PER DWELLING UNIT Reinspection fee $100.00 per reinspection ... SELLER: ... BUYER: ... SETTLEMENT DATE:",
+    "doc_date": "2023-04 (updated 4/14/23 per the Construction page; scanned, read visually)",
+    "via": "pdf",
+    "verified": null
+   },
+   {
+    "url": "https://www.somerspointgov.org/pdfs/LAND%20STRUCTURE%20COMPLIANCE_0001.pdf",
+    "quote": "Requirements for all resale and rental inspections",
+    "doc_date": "2023-04 (scanned, read visually)",
+    "via": "pdf",
+    "verified": null
+   },
+   {
+    "url": "https://www.somerspointgov.org/mainpages/construction.asp",
+    "quote": "Application Certificate of Occupancy (updated 4/14/23)",
+    "doc_date": "2026-09-30 (page fetched)",
+    "via": "page",
+    "verified": true
+   },
+   {
+    "url": "https://www.somerspointgov.org/mainpages/construction.asp",
+    "quote": "The office issues construction permits, makes inspections, and issues certificates of occupancy.",
+    "doc_date": "2026-09-30 (page fetched)",
+    "via": "page",
+    "verified": true
+   },
+   {
+    "url": "https://www.somerspointgov.org/mainpages/construction.asp",
+    "quote": "Telephone: 609-927-9088 X-142 Fax: 609-927-0177 Office Hours: 9:00am ~ 5:00pm Monday ~ Friday (Excluding Holidays) Mark McCrane email: mmccrane@spgov.org Construction Officer Construction/Zoning Official",
+    "doc_date": "2026-09-30 (page fetched)",
+    "via": "page",
+    "verified": true
+   }
+  ],
+  "confidence": "medium",
+  "notes": "The City's Land/Structure Compliance Application (the 'Application Certificate of Occupancy', updated 4/14/23) asks for seller, agent, buyer and settlement date, charges $250.00 per dwelling unit, and its checklist is titled 'Requirements for all resale and rental inspections'. The form does not quote the ordinance that makes the inspection mandatory and the City Code on ecode360 could not be opened, so confidence is medium. Page 2 of the same scanned form carries an older notice (effective 6/14/2007) of a $15 reinspection appointment fee when smoke/CO alarms or the extinguisher fail; the current $100 reinspection fee on page 1 may supersede it. The form's footer address (City Hall, 1 W. New Jersey Avenue, 609-927-9088 ext. 142) differs from the web page's Construction Office address (741 Shore Road). Other office staff: Roe Howell, Technical Assistant to the Construction Official, (609) 927-9088 ext. 148, rhowell@spgov.org. The form also asks whether the home will be a short-term (under 175 days) or long-term rental; rental licensing is a separate program."
+ },
+ "fire_cert": {
+  "requirements": [
+   "State online self-certification, now named the Certificate of Smoke Alarm, Carbon Monoxide Alarm, and Secondary Power Source Identification Label Compliance (CSACMASPSIL): smoke alarms, carbon monoxide alarms, and the secondary power source label for homes with solar, generators or batteries. The certificate name no longer includes the fire extinguisher, although the portal's checklist notice still refers to detectors and fire extinguishers",
+   "The City's resale inspection form (2023) also checks smoke alarms, CO alarms and a 2A:10B:C extinguisher of 10 lb or less mounted to the kitchen wall, and notes 10-year sealed lithium battery smoke alarms have been required since 1/1/2019 (existing hardwired alarms excepted)"
+  ],
+  "authorities": [
+   {
+    "name": "NJ DCA Division of Fire Safety, Bureau of Fire Code Enforcement",
+    "type": "state_dca",
+    "area_served": "Entire city",
+    "lead_time": "More than 10 business days before closing for the lowest fee",
+    "fees": [
+     {
+      "label": "More than 10 business days before closing",
+      "amount": "$45",
+      "quote": "If you are applying for a certificate more than ten business days from the closing date the fee is $45 dollars",
+      "source_url": "https://firesolutions.dca.nj.gov/ultra-fire-home/smoke-application-create/",
+      "verified": null
+     },
+     {
+      "label": "4 to 10 business days before closing",
+      "amount": "$90",
+      "quote": "if applying 4 to 10 business days from the closing date the fee is $90",
+      "source_url": "https://firesolutions.dca.nj.gov/ultra-fire-home/smoke-application-create/",
+      "verified": null
+     },
+     {
+      "label": "Less than 4 business days before closing",
+      "amount": "$161",
+      "quote": "if the closing date is less than four business days the fee is $161.",
+      "source_url": "https://firesolutions.dca.nj.gov/ultra-fire-home/smoke-application-create/",
+      "verified": null
+     }
+    ],
+    "how_to_apply": "Apply online through the NJ DCA Fire Safety portal ('Start Your Smoke Certification Application'). Pay by e-check or credit card before submitting; a valid email address is required. The certificate is emailed once the application is submitted, the fee is paid and any required inspections are done. Homes heated by electricity with no CO alarm requirement should also email BFCE_CSDCMAC@dca.nj.gov.",
+    "application_url": "https://firesolutions.dca.nj.gov/ultra-fire-home/smoke-application-create/",
+    "department_url": "https://www.nj.gov/dca/dfs/offices/bfce.shtml",
+    "contact_name": "Louis Kilmer",
+    "contact_title": "Bureau Chief, Bureau of Fire Code Enforcement (listed as the Fire Official in the state fire directory)",
+    "phone": "609-633-6106",
+    "email": "BFCE_CSDCMAC@dca.nj.gov",
+    "evidence": [
+     {
+      "url": "https://www.somerspointgov.org/mainpages/fire_inspect.asp",
+      "quote": "The City no longer maintains a Bureau of Fire Prevention and Inspection. This service is currently provided by the State of New Jersey.",
+      "doc_date": "2026-09-30 (page fetched)",
+      "via": "page",
+      "verified": true
+     },
+     {
+      "url": "https://www.nj.gov/dca/dfs/pdf/fire%20directory_county%20summary/fire_code_enforcement_director.pdf",
+      "quote": "NJ Division of Fire Safety BHI",
+      "doc_date": "2025 directory page (survey date 8/12/2025)",
+      "via": "state_directory",
+      "verified": true
+     },
+     {
+      "url": "https://nj.gov/dca/dfs/pdf/ANNUAL%20REGISTRY/THIRD%20QUARTER%20LEA%20REGISTRY%202026.pdf",
+      "quote": "S Somers Point City",
+      "doc_date": "2026-07",
+      "via": "pdf",
+      "verified": true
+     },
+     {
+      "url": "https://www.nj.gov/dca/dfs/pdf/fire%20directory_county%20summary/state_towns%207_17_26.pdf",
+      "quote": "SOMERS POINT 0121",
+      "doc_date": "2026-07-17 (listed without the SC = Smoke Certs flag)",
+      "via": "pdf",
+      "verified": true
+     },
+     {
+      "url": "https://www.nj.gov/dca/dfs/pdf/fire%20directory_county%20summary/fire_code_enforcement_director.pdf",
+      "quote": "LEAID: 0121-999 Enf Auth. State Fire Official Louis Kilmer Phone (609) 633-6132 Addr: PO Box 809",
+      "doc_date": "2025 directory page (survey date 8/12/2025)",
+      "via": "state_directory",
+      "verified": true
+     },
+     {
+      "url": "https://firesolutions.dca.nj.gov/ultra-fire-home/smoke-application-create/",
+      "quote": "Please complete the following information to apply for a Certificate of Smoke Alarm, Carbon Monoxide Alarm, and Secondary Power Source Identification Label Compliance (CSACMASPSIL). You will be required to pay, via e-check or credit card, before you can submit this application. This application requires a valid email address.",
+      "doc_date": "2026-09-30 (page fetched)",
+      "via": "page",
+      "verified": null
+     },
+     {
+      "url": "https://firesolutions.dca.nj.gov/ultra-fire-home/smoke-application-create/",
+      "quote": "if your property is heated with electricity and does not require a carbon monoxide alarm, check the fourth box and send an email to BFCE_CSDCMAC@dca.nj.gov stating that you are not subject to that requirement.",
+      "doc_date": "2026-09-30 (page fetched)",
+      "via": "page",
+      "verified": null
+     },
+     {
+      "url": "https://www.nj.gov/dca/dfs/offices/bfce.shtml",
+      "quote": "Louis Kilmer, Bureau Chief CPM Address: P.O. Box 809, Trenton, NJ 08625-0809 Phone: (609) 633-6106",
+      "doc_date": "2026-09-30 (page fetched)",
+      "via": "page",
+      "verified": true
+     }
+    ],
+    "confidence": "low"
+   }
+  ],
+  "notes": "The City says it no longer has a Bureau of Fire Prevention and that the service is provided by the State, and the state fire directory lists 'NJ Division of Fire Safety' for smoke detector compliance in Somers Point. However, the DCA's July 17, 2026 list of State-enforced towns shows Somers Point without the 'SC' (smoke certs) flag that it gives most other State-enforced Atlantic County towns, so it is not certain the DCA online certificate is the right one here. The City's own resale Land/Structure Compliance inspection also checks smoke alarms, CO alarms and the extinguisher. Confidence is low until someone confirms who issues the smoke/CO certificate for a Somers Point sale. The directory gives (609) 633-6132 for Louis Kilmer; the Bureau's own page gives (609) 633-6106, which is used here."
+ },
+ "other_items": [
+  {
+   "label": "Open permits",
+   "detail": "The office-use section of the application records open permits for the property.",
+   "source_url": "https://www.somerspointgov.org/pdfs/LAND%20STRUCTURE%20COMPLIANCE_0001.pdf"
+  }
+ ],
+ "open_questions": [
+  "Who issues the smoke/CO certificate for a Somers Point sale: the NJ DCA online portal (the City says the State provides fire inspection service), or the City's own resale inspection? DCA's 7/17/2026 list does not mark Somers Point 'SC'.",
+  "Lead time before closing and how long the Land/Structure Compliance certificate stays valid are not stated.",
+  "Whether the 2007 $15 smoke/CO reinspection fee on page 2 of the form still applies alongside the $100 reinspection fee."
+ ],
+ "verification": {
+  "fees": 6,
+  "fee_ok": 0,
+  "fee_bad": 0,
+  "fee_unchecked": 6,
+  "quotes": 13,
+  "q_ok": 9,
+  "q_bad": 0,
+  "q_unchecked": 4
+ }
+}

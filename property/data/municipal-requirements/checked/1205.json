@@ -1,0 +1,268 @@
+{
+ "municipality_code": "1205",
+ "municipality": "Edison Township",
+ "county": "MIDDLESEX",
+ "checked_at": "2026-09-30",
+ "resale_co": {
+  "status": "required",
+  "name": "Residential Resale Certificate (Edison Certificate for Change of Ownership/Tenancy)",
+  "issued_by": "Code Enforcement, Township of Edison",
+  "lead_time": "Have the inspection done at least 3 weeks before closing (the form); the instruction page says at least 4 weeks",
+  "valid_for": "",
+  "requirements": [
+   "Smoke certificate from Fire Prevention must be issued before the Resale Certificate",
+   "Check for open permits; any work that needed a permit must get a compliance permit, be inspected and closed",
+   "Additions, alterations, finished basements or attics, garage conversions, patios, decks, pools and spas must have zoning and building approvals",
+   "Pool or spa: fence and childproof gate required",
+   "Handrails and guardrails secure and proper height; stair riser openings under 4 inches",
+   "Water heater, furnace, air conditioner and boiler installed with permits and working",
+   "Water heater: pressure relief valve, bonding cable, relief pipe (not black pipe) ending 6 inches from the floor, unthreaded",
+   "Oil and gas flue connections secure; gas appliances have shut-off valves",
+   "Clothes dryer vented outside",
+   "No openings in garage ceilings or walls next to living space",
+   "House numbers on the front of the house, at least 4 inches high",
+   "Existing GFI outlets working",
+   "No junk or debris in basement, attic or yard",
+   "No keyed locks on bedrooms; exit doors without a keyed inside lock",
+   "No imminent hazards"
+  ],
+  "fees": [
+   {
+    "label": "Residential Resale Certificate (1 or 2 family)",
+    "amount": "$150",
+    "quote": "Fee: $150 payable to EDISON TOWNSHIP by: CERTIFIED check, credit card, or money order.",
+    "source_url": "https://www.edisonnj.org/Residential%20Resale%20Certificate%20Application.pdf?t=202606091615470",
+    "verified": true
+   }
+  ],
+  "how_to_apply": "Print the Residential Resale Certificate Application (Township Forms and Applications, Code Enforcement section), fill it out and email it to Resale@edisonnj.gov. Code Enforcement processes it and calls for payment by credit card. The form also accepts a certified check or money order; no cash, no personal checks, no refunds. Inspections are between 9:00 AM and 3:00 PM.",
+  "application_url": "https://www.edisonnj.org/Residential%20Resale%20Certificate%20Application.pdf?t=202606091615470",
+  "department_url": "https://www.edisonnj.org/document_center/index.php",
+  "phone": "732-248-7257",
+  "email": "Resale@edisonnj.gov",
+  "contact_name": "",
+  "contact_title": "",
+  "evidence": [
+   {
+    "url": "https://www.edisonnj.org/Residential%20Resale%20Certificate%20Application.pdf?t=202606091615470",
+    "quote": "Note: As per Edison Township Ordinance 14-1.6 a Certificate must be obtained prior to closing of the property. Failure to do so will result in penalties and fines up to $2,000 as per Township ordinance.",
+    "doc_date": "2026-06 (PDF created June 9, 2026)",
+    "via": "pdf",
+    "verified": true
+   },
+   {
+    "url": "https://www.edisonnj.org/Residential%20Resale%20Certificate%20Application.pdf?t=202606091615470",
+    "quote": "EDISON CERTIFICATE FOR CHANGE OF OWNERSHIP/TENANCY",
+    "doc_date": "2026-06",
+    "via": "pdf",
+    "verified": true
+   },
+   {
+    "url": "https://www.edisonnj.org/Residential%20Resale%20Certificate%20Application.pdf?t=202606091615470",
+    "quote": "Email forms to one of the two emails listed below: Resale@edisonnj.gov Code Enforcement will process and call for payments by credit card",
+    "doc_date": "2026-06",
+    "via": "pdf",
+    "verified": true
+   },
+   {
+    "url": "https://www.edisonnj.org/Residential%20Resale%20Certificate%20Application.pdf?t=202606091615470",
+    "quote": "Inspection should be completed a minimum 3 weeks prior to closing.",
+    "doc_date": "2026-06",
+    "via": "pdf",
+    "verified": true
+   },
+   {
+    "url": "https://www.edisonnj.org/Residential%20Resale%20Certificate%20Application.pdf?t=202606091615470",
+    "quote": "Inspection is required to be completed minimum of 4 weeks prior to closing date",
+    "doc_date": "2026-06",
+    "via": "pdf",
+    "verified": true
+   },
+   {
+    "url": "https://www.edisonnj.org/Residential%20Resale%20Certificate%20Application.pdf?t=202606091615470",
+    "quote": "No cash. No Personal Checks, No refunds.",
+    "doc_date": "2026-06",
+    "via": "pdf",
+    "verified": true
+   },
+   {
+    "url": "https://www.edisonnj.org/Residential%20Resale%20Certificate%20Application.pdf?t=202606091615470",
+    "quote": "Smoke Certificate Required before Resale Certificate can be issued.",
+    "doc_date": "2026-06",
+    "via": "pdf",
+    "verified": true
+   },
+   {
+    "url": "https://www.edisonnj.org/departments/engineering_department/code_enforcement.php",
+    "quote": "Phone: 732-248-7257",
+    "doc_date": "2026-09 (page checked 2026-09-30)",
+    "via": "page",
+    "verified": true
+   }
+  ],
+  "confidence": "high",
+  "notes": "Edison requires a Residential Resale Certificate before closing under Township Ordinance 14-1.6 (per the June 2026 application). The instruction page and the application give different lead times (4 weeks and 3 weeks); plan on 4 weeks. The application does not name a staff contact; it directs everything to Resale@edisonnj.gov. The phone number is the one listed on the Township Code Enforcement page (Division of Construction Code Enforcement); it is not printed on the resale form. The Township Officials List (September 15, 2026) names John Soltesz as Construction Official and James Ayotte as Supervisor of Compliance Enforcement (Zoning), but neither is named as the resale contact. Edison also has a separate Rental Reoccupancy application and a Commercial Tenancy/Resale application."
+ },
+ "fire_cert": {
+  "requirements": [
+   "Battery smoke alarms must be 10 year sealed battery type; existing hardwired alarms cannot be replaced with battery alarms",
+   "Smoke alarms no more than 10 years old",
+   "Smoke alarm on every level including the basement (3 or more steps counts as a separate level), within 10 feet of bedroom doors; basement alarm on the ceiling or beam at the base of the stairs; finished loft or attic living space needs an alarm",
+   "Alarm type follows the year the house was built (hardwired and interconnected rules for homes built after 1977, and alarms in each bedroom for homes built from March 1991)",
+   "CO alarm within 10 feet of sleeping areas; a bedroom with a fuel burning appliance needs its own CO alarm; bring the CO alarm instructions to the inspection",
+   "Secondary power sources (solar, battery storage, installed generator) must be labeled per P.L.2025, c.19",
+   "Supervised or monitored alarm systems must be kept working at change of occupancy"
+  ],
+  "authorities": [
+   {
+    "name": "Edison Division of Fire, Bureau of Fire Prevention (Fire Marshal's Office)",
+    "type": "municipal_fire_bureau",
+    "area_served": "Entire township",
+    "lead_time": "Fees are based on alternating business days (by zip code) before the inspection; more than 10 alternating business days gets the lowest fee",
+    "fees": [
+     {
+      "label": "Request received more than 10 alternating business days before inspection",
+      "amount": "$60.00",
+      "quote": "1. Request received more than ten (10) alternating business days prior to inspection: $ 60.00",
+      "source_url": "https://www.edisonnj.org/Departments/Fire%20Division/2026%20Smoke%20Inspection%20Application%202026.pdf?t=202604150853340",
+      "verified": true
+     },
+     {
+      "label": "Request received 5 to 10 alternating business days before inspection",
+      "amount": "$90.00",
+      "quote": "2. Request received five (5) to ten (10) alternating business days prior to inspection: $ 90.00",
+      "source_url": "https://www.edisonnj.org/Departments/Fire%20Division/2026%20Smoke%20Inspection%20Application%202026.pdf?t=202604150853340",
+      "verified": true
+     },
+     {
+      "label": "Request received 1 to 4 alternating business days before inspection",
+      "amount": "$140.00",
+      "quote": "3. Request received one (1) to four (4) alternating business days prior to inspection: $ 140.00",
+      "source_url": "https://www.edisonnj.org/Departments/Fire%20Division/2026%20Smoke%20Inspection%20Application%202026.pdf?t=202604150853340",
+      "verified": true
+     },
+     {
+      "label": "Failure to appear for a scheduled appointment without notice",
+      "amount": "$50.00",
+      "quote": "4. Failure to appear to a scheduled appointment without notification: ... $ 50.00",
+      "source_url": "https://www.edisonnj.org/Departments/Fire%20Division/2026%20Smoke%20Inspection%20Application%202026.pdf?t=202604150853340",
+      "verified": true
+     },
+     {
+      "label": "Re-inspection after a failed inspection",
+      "amount": "$20.00",
+      "quote": "5. Re-inspection Fee due to a failed inspection: ... $ 20.00",
+      "source_url": "https://www.edisonnj.org/Departments/Fire%20Division/2026%20Smoke%20Inspection%20Application%202026.pdf?t=202604150853340",
+      "verified": true
+     },
+     {
+      "label": "Demolition letter",
+      "amount": "$25.00",
+      "quote": "Demolition Letter $ 25.00",
+      "source_url": "https://www.edisonnj.org/Departments/Fire%20Division/2025%20Smoke%20Cert%20Requirements%20with%20dates.pdf?t=202509021201020",
+      "verified": true
+     }
+    ],
+    "how_to_apply": "Fill out the Application for Certificate of Fire Prevention Compliance (CSACMASPSIL) and submit it in person at the Bureau of Fire Prevention, 100 Municipal Boulevard, Edison. Checks payable to Township of Edison. All fees are non-refundable, and after two failures or no-shows the full fee must be paid again. Inspections are between 9:00 am and 1:00 pm; certificates are valid for 180 days. Closing before the certificate is issued carries a $500 penalty.",
+    "application_url": "https://www.edisonnj.org/Departments/Fire%20Division/2026%20Smoke%20Inspection%20Application%202026.pdf?t=202604150853340",
+    "department_url": "https://www.edisonnj.org/departments/fire_division/index.php",
+    "phone": "732-248-7558",
+    "email": "ddinuzzo@edisonfd.org",
+    "contact_name": "Daniel DiNuzzo",
+    "contact_title": "Fire Official / Fire Marshal (Bureau of Fire Prevention)",
+    "evidence": [
+     {
+      "url": "https://www.edisonnj.org/Departments/Fire%20Division/2026%20Smoke%20Inspection%20Application%202026.pdf?t=202604150853340",
+      "quote": "This form MUST be submitted in person.",
+      "doc_date": "2026-04 (form marked UPDATED April 2026)",
+      "via": "pdf",
+      "verified": true
+     },
+     {
+      "url": "https://www.edisonnj.org/Departments/Fire%20Division/2026%20Smoke%20Inspection%20Application%202026.pdf?t=202604150853340",
+      "quote": "PENALTY FOR CLOSING BEFORE CSACMASPSIL IS ISSUED WILL BE $500.00",
+      "doc_date": "2026-04",
+      "via": "pdf",
+      "verified": true
+     },
+     {
+      "url": "https://www.edisonnj.org/Departments/Fire%20Division/2026%20Smoke%20Inspection%20Application%202026.pdf?t=202604150853340",
+      "quote": "MAKE CHECKS PAYABLE TO: TOWNSHIP OF EDISON",
+      "doc_date": "2026-04",
+      "via": "pdf",
+      "verified": true
+     },
+     {
+      "url": "https://www.edisonnj.org/Departments/Fire%20Division/2026%20Smoke%20Inspection%20Application%202026.pdf?t=202604150853340",
+      "quote": "Starting February 1, 2022, we will be alternating days based on zip code. The fees will now be based on every other business day that your zip code falls on.",
+      "doc_date": "2026-04",
+      "via": "pdf",
+      "verified": true
+     },
+     {
+      "url": "https://www.edisonnj.org/Departments/Fire%20Division/2026%20Smoke%20Inspection%20Application%202026.pdf?t=202604150853340",
+      "quote": "$ 60.00 $ 90.00 $ 140.00 $ 50.00 $ 20.00",
+      "doc_date": "2026-04 (amount column as it appears in the PDF text layer)",
+      "via": "pdf",
+      "verified": true
+     },
+     {
+      "url": "https://www.edisonnj.org/Departments/Fire%20Division/2025%20Smoke%20Cert%20Requirements%20with%20dates.pdf?t=202509021201020",
+      "quote": "Edison Fire Marshal’s Office 100 Municipal Blvd Edison, NJ 08817 Phone (732) 248-7558",
+      "doc_date": "2025-09",
+      "via": "pdf",
+      "verified": true
+     },
+     {
+      "url": "https://www.edisonnj.org/Departments/Fire%20Division/2025%20Smoke%20Cert%20Requirements%20with%20dates.pdf?t=202509021201020",
+      "quote": "All Certificates are valid for 180 days",
+      "doc_date": "2025-09 (PDF modified September 2, 2025)",
+      "via": "pdf",
+      "verified": true
+     },
+     {
+      "url": "https://www.edisonnj.org/departments/fire_division/index.php",
+      "quote": "Fire Prevention can be reached by calling 732-248-7244.",
+      "doc_date": "2026-09 (page checked 2026-09-30)",
+      "via": "page",
+      "verified": true
+     },
+     {
+      "url": "https://nj.gov/dca/dfs/pdf/ANNUAL%20REGISTRY/THIRD%20QUARTER%20LEA%20REGISTRY%202026.pdf",
+      "quote": "F Edison Township",
+      "doc_date": "2026-07 (registry as of June 30, 2026)",
+      "via": "pdf",
+      "verified": true
+     },
+     {
+      "url": "https://www.nj.gov/dca/dfs/pdf/fire%20directory_county%20summary/fire_code_enforcement_director.pdf",
+      "quote": "LEAID: 1205-001 Enf Auth. Fire Dept Fire Official Daniel DiNuzzo Phone (732) 248-7244 Email ddinuzzo@edisonfd.org",
+      "doc_date": "2025-09-02 (survey date)",
+      "via": "state_directory",
+      "verified": true
+     }
+    ],
+    "confidence": "high"
+   }
+  ],
+  "notes": "Edison Division of Fire is the local fire enforcing agency (DCA registry code F). The April 2026 application prints the fee amounts in a separate column from the labels, so its text layer lists the labels first and the amounts after; the fee quotes above follow the visual layout (\"...\" marks the gap between the label and its amount column), and the 2025 requirements sheet shows the same amounts ($140 1-3 days, $90 4-10 days, $60 10+ days, $20 re-inspection, $50 failure to show). The application letterhead is an image with no text layer; read visually it names Captain Daniel DiNuzzo, Fire Marshal (DDINUZZO@EDISONFD.ORG), and phone 732-248-7558, the same number the requirements sheet gives for the Edison Fire Marshal's Office; the Fire Division page gives 732-248-7244 for Fire Prevention, which matches the state directory. No fire extinguisher requirement appears on the 2026 form."
+ },
+ "other_items": [
+  {
+   "label": "Open permits and assessed improvements",
+   "detail": "Before the resale inspection, check with the Building Department for open permits and with the Tax Assessor that all improvements are assessed; unrecorded items may need permits even if a prior owner installed them.",
+   "source_url": "https://www.edisonnj.org/Residential%20Resale%20Certificate%20Application.pdf?t=202606091615470"
+  }
+ ],
+ "open_questions": [],
+ "verification": {
+  "fees": 7,
+  "fee_ok": 7,
+  "fee_bad": 0,
+  "fee_unchecked": 0,
+  "quotes": 18,
+  "q_ok": 18,
+  "q_bad": 0,
+  "q_unchecked": 0
+ }
+}

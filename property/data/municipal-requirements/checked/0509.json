@@ -1,0 +1,181 @@
+{
+ "municipality_code": "0509",
+ "municipality": "Sea Isle City",
+ "county": "CAPE MAY",
+ "checked_at": "2026-09-30",
+ "resale_co": {
+  "status": "required",
+  "name": "Certificate of Compliance, Floodplain Venting Requirements (flood vent check at sale)",
+  "issued_by": "Construction Office (Construction Official)",
+  "contact_name": "Neil Byrne",
+  "contact_title": "Construction Official, Building Sub-code Official, Zoning Officer & Certified Floodplain Manager",
+  "lead_time": "",
+  "valid_for": "",
+  "requirements": [
+   "Construction Official visits the home to verify the required square inches of flood venting",
+   "Flood vents: at least one square inch of net open area per square foot of enclosed area (non-engineered vents), or one engineered inch per square foot for engineered vents",
+   "Required vents and crawl space access door(s) must be located; if they fall short, the owner is given a set number of days to meet the City venting requirements"
+  ],
+  "fees": [],
+  "how_to_apply": "Use the City's 'Smoke Detector, Extinguisher, CO Alarm & Venting application' packet from the Construction Forms page. Fill in the property address, owner's name and the mailing address for the certificate on the venting certificate page and return it to the Construction Office, City Hall 2nd floor, 233 John F. Kennedy Blvd. The Construction Official then inspects the flood venting.",
+  "application_url": "https://evocloud-prod3-public.s3.us-east-2.amazonaws.com/56/media/96877.pdf",
+  "department_url": "https://www.seaislecitynj.us/departments/ConstructionOffice",
+  "phone": "609-263-1166",
+  "email": "construction@seaislecitynj.us",
+  "evidence": [
+   {
+    "url": "https://www.seaislecitynj.us/departments/ConstructionOffice/ConstructionOfficeFAQs",
+    "quote": "What inspections do I need to sell my property? A self-inspection must be performed certifying that the smoke detectors, carbon monoxide alarms and fire extinguishers are placed properly throughout the house, are in working order, and are not expired.  The City Construction Official will go to the property to verify the number of required square inches of flood venting. Both of these forms are on the Construction Office page on the City’s municipal website.",
+    "doc_date": "2026-09-30 (page fetched)",
+    "via": "page",
+    "verified": true
+   },
+   {
+    "url": "https://evocloud-prod3-public.s3.us-east-2.amazonaws.com/56/media/96877.pdf",
+    "quote": "CITY OF SEA ISLE CITY CERTIFICATE OF COMPLIANCE FLOODPLAIN VENTING REQUIREMENTS ORDINANCE CHAPTER 14 SECTION 5.6 OF THE REVISED GENERAL ORDINANCE",
+    "doc_date": "",
+    "via": "pdf",
+    "verified": null
+   },
+   {
+    "url": "https://evocloud-prod3-public.s3.us-east-2.amazonaws.com/56/media/96877.pdf",
+    "quote": "A minimum of one square inch of net open area for each square foot of enclosed area for non-engineered openings OR a minimum of ONE engineered inch for each square foot of enclosed area for an engineered opening.",
+    "doc_date": "",
+    "via": "pdf",
+    "verified": null
+   },
+   {
+    "url": "https://www.seaislecitynj.us/departments/ConstructionOffice",
+    "quote": "Construction Official, Building Sub-code Official, Zoning Officer & Certified Floodplain Manager Neil Byrne 609-263-1166, Ext. 4",
+    "doc_date": "2026-09-30 (page fetched)",
+    "via": "page",
+    "verified": true
+   },
+   {
+    "url": "https://www.seaislecitynj.us/departments/ConstructionOffice",
+    "quote": "Email construction@seaislecitynj.us",
+    "doc_date": "2026-09-30 (page fetched)",
+    "via": "page",
+    "verified": true
+   },
+   {
+    "url": "https://www.seaislecitynj.us/media/Construction%20Office/Flood%20Protection%20Info..pdf",
+    "quote": "Please call the Construction Office at (609) 263- 1166 to make an appointment.",
+    "doc_date": "",
+    "via": "pdf",
+    "verified": true
+   }
+  ],
+  "confidence": "medium",
+  "notes": "Sea Isle City does not appear to run a full housing or Certificate of Continued Occupancy inspection on resale. Its Construction Office FAQ lists two things needed to sell: the owner's smoke/CO/extinguisher self-certification (see fire_cert) and a flood venting check by the Construction Official, documented on the City's 'Certificate of Compliance Floodplain Venting Requirements' form (Chapter 14 Section 5.6). No separate fee for the venting check was found; the only fee printed in the combined packet is the $45 per unit on the smoke certificate application page, and it is not clear whether that covers the venting check too. The FAQ does not say whether homes outside the flood zone are exempt. The Construction Office phone is 609-263-1166; the 609-263-1366 number shown on the staff page is the office fax. For reference, the City's construction fee ordinance (Ordinance 1598 of 2016, effective February 21, 2017, scanned) sets 'The fee for a Certificate of Continued Occupancy shall be one hundred twenty ($120.00) dollars', but no City page says a CCO is needed on an ordinary sale. City code (ecode360 SE4116) could not be opened."
+ },
+ "fire_cert": {
+  "requirements": [
+   "Owner or authorized representative does the inspection and signs a notarized self-certification; no inspector visit for the alarms",
+   "Smoke detector on each level including basements (not attic or crawl space), and a smoke detector and CO alarm outside each separate sleeping area, within ten feet of it",
+   "Homes built after January 1977: AC powered and/or interconnected smoke alarms must be kept in working order; a ten year sealed battery smoke detector is required if detectors are not hard wired",
+   "CO alarm required when the home has fuel-burning appliances, a fireplace or wood/coal stove, or an attached garage; battery alarms are acceptable",
+   "City form still lists a portable fire extinguisher: minimum rating 2A-10B:C, no more than 10 pounds, within ten feet of the kitchen area, on its bracket, top no more than 5 feet above the floor, near an exit (seasonal summer units exempt)"
+  ],
+  "authorities": [
+   {
+    "name": "City of Sea Isle City (Construction Office / Municipal Services, municipal fire code enforcing agency)",
+    "type": "municipal_fire_bureau",
+    "area_served": "Entire city",
+    "lead_time": "Certificate is mailed; allow processing time. If the sale does not happen within 6 months a new application is needed.",
+    "fees": [
+     {
+      "label": "Smoke, CO alarm and fire extinguisher certificate, per unit",
+      "amount": "$45",
+      "quote": "A check, made payable to the City of Sea Isle City, cash or money order in the amount of $45 per unit must accompany this application.",
+      "source_url": "https://evocloud-prod3-public.s3.us-east-2.amazonaws.com/56/media/96877.pdf",
+      "verified": null
+     }
+    ],
+    "how_to_apply": "Download the Application for Certificate of Smoke Detector, Carbon Monoxide Alarm, Portable Fire Extinguisher Compliance from the Construction Forms page. Check off each item, sign in front of a notary, and return it with a $45 per unit check (payable to the City of Sea Isle City), cash or money order to Municipal Services, 2nd floor, 233 John F. Kennedy Blvd., Sea Isle City, NJ 08243. The certificate is mailed to the mailing address on the form. Fees are non-refundable and the certificate is not transferable.",
+    "application_url": "https://evocloud-prod3-public.s3.us-east-2.amazonaws.com/56/media/96877.pdf",
+    "department_url": "https://www.seaislecitynj.us/departments/ConstructionOffice/constructionforms",
+    "contact_name": "Robert Wojcik",
+    "contact_title": "Fire Official (per NJ DCA fire directory)",
+    "phone": "609-263-4461",
+    "email": "rwojcik@seaislecitynj.us",
+    "evidence": [
+     {
+      "url": "https://evocloud-prod3-public.s3.us-east-2.amazonaws.com/56/media/96877.pdf",
+      "quote": "Application For Certificate of Smoke Detector Carbon Monoxide Alarm Portable Fire Extinguisher Compliance",
+      "doc_date": "undated (packet includes a 2019 DCA release)",
+      "via": "pdf",
+      "verified": null
+     },
+     {
+      "url": "https://evocloud-prod3-public.s3.us-east-2.amazonaws.com/56/media/96877.pdf",
+      "quote": "The owner or an authorized representative of the owner shall conduct an Inspection.",
+      "doc_date": "",
+      "via": "pdf",
+      "verified": null
+     },
+     {
+      "url": "https://evocloud-prod3-public.s3.us-east-2.amazonaws.com/56/media/96877.pdf",
+      "quote": "This Certificate is not transferable.  If the property transfer specified in this Certificate does not occur with 6 months, a new Application will be required.",
+      "doc_date": "",
+      "via": "pdf",
+      "verified": null
+     },
+     {
+      "url": "https://evocloud-prod3-public.s3.us-east-2.amazonaws.com/56/media/96877.pdf",
+      "quote": "Note #5: Portable Fire Extinguishers are required for 1&2 Family Dwelling R-3, R-4 & R-5 Use Groups",
+      "doc_date": "",
+      "via": "pdf",
+      "verified": null
+     },
+     {
+      "url": "https://www.seaislecitynj.us/departments/volunteerfiredepartment/firedepartmentfaqs",
+      "quote": "Does the fire department perform fire inspections or issue permits? No. All fire sub-code permits and inspections are handled by the city’s Construction Office.",
+      "doc_date": "2026-09-30 (page fetched)",
+      "via": "page",
+      "verified": true
+     },
+     {
+      "url": "https://nj.gov/dca/dfs/pdf/ANNUAL%20REGISTRY/THIRD%20QUARTER%20LEA%20REGISTRY%202026.pdf",
+      "quote": "M Sea Isle City",
+      "doc_date": "2026-07",
+      "via": "pdf",
+      "verified": true
+     },
+     {
+      "url": "https://www.nj.gov/dca/dfs/pdf/fire%20directory_county%20summary/fire_code_enforcement_director.pdf",
+      "quote": "LEAID: 0509-001 Enf Auth. Municipal Fire Official Robert Wojcik Phone (609) 263-1366 Addr: 233 JFK Blvd Sea Isle City NJ 08243 Phone (609) 263-4461",
+      "doc_date": "2024-02 (survey date 2/1/2024)",
+      "via": "state_directory",
+      "verified": true
+     },
+     {
+      "url": "https://www.nj.gov/dca/dfs/pdf/fire%20directory_county%20summary/fire_code_enforcement_director.pdf",
+      "quote": "Email rwojcik@seaislecitynj.us",
+      "doc_date": "2024-02 (survey date 2/1/2024)",
+      "via": "state_directory",
+      "verified": true
+     }
+    ],
+    "confidence": "high"
+   }
+  ],
+  "notes": "NJ DCA lists Sea Isle City as a municipal fire code enforcing agency (M). The City's fire department FAQ says the fire department does not do inspections; the Construction Office handles them. The smoke/CO certificate is a notarized owner self-certification filed with the City, not an on-site fire inspection. The form (undated, packaged with a 2019 DCA news release) still lists a fire extinguisher even though P.L.2025, c.19 dropped it from state law; confirm with the City whether it is still checked. The state directory (survey 2/1/2024) names Fire Official Robert Wojcik with phone (609) 263-1366 and email rwojcik@seaislecitynj.us, and lists 'Sea Isle City Fire Prev' at 233 JFK Blvd with (609) 263-4461 for smoke detector compliance. The City's own staff page shows 609-263-1366 as the Construction Office fax, so the City Hall number 609-263-4461 (printed on the form) is used here. Mr. Wojcik is not named on the City website."
+ },
+ "other_items": [],
+ "open_questions": [
+  "Fee, if any, for the Construction Official's flood venting check at sale, and whether it applies to homes outside the flood hazard area.",
+  "Whether the City still requires a fire extinguisher after P.L.2025, c.19 (form is undated).",
+  "Current fire official name (state directory from 2024 lists Robert Wojcik; not on City site)."
+ ],
+ "verification": {
+  "fees": 1,
+  "fee_ok": 0,
+  "fee_bad": 0,
+  "fee_unchecked": 1,
+  "quotes": 14,
+  "q_ok": 8,
+  "q_bad": 0,
+  "q_unchecked": 6
+ }
+}

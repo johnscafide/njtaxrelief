@@ -4,32 +4,126 @@
  "county": "GLOUCESTER",
  "checked_at": "2026-09-30",
  "resale_co": {
-  "status": "not_found",
-  "name": "",
-  "issued_by": "",
+  "status": "required",
+  "name": "Certificate of Occupancy (Application for Certificate of Occupancy Pursuant to Ordinance, resale)",
+  "issued_by": "Borough of Newfield Construction Office",
   "lead_time": "",
   "valid_for": "",
-  "requirements": [],
-  "fees": [],
-  "how_to_apply": "",
-  "application_url": "",
-  "department_url": "https://www.newfieldborough.org/",
-  "phone": "",
+  "requirements": [
+   "If the home has a private well, a copy of the well certification must be supplied before the CO can be issued",
+   "Form asks whether the dwelling is empty, the settlement date, buyer and both agents"
+  ],
+  "fees": [
+   {
+    "label": "Certificate of Occupancy application (resale, rental or annual; 2021 form)",
+    "amount": "$75.00",
+    "quote": "$75.00 Rental and Certificate of Occupancy Application",
+    "source_url": "https://web.archive.org/web/20210731031050/https://www.newfieldborough.org/wp-content/uploads/2021/07/Certificate-of-Occupancy.pdf",
+    "verified": null
+   },
+   {
+    "label": "Re-inspection (2021 form)",
+    "amount": "$30.00",
+    "quote": "$30.00 Re-inspection fee",
+    "source_url": "https://web.archive.org/web/20210731031050/https://www.newfieldborough.org/wp-content/uploads/2021/07/Certificate-of-Occupancy.pdf",
+    "verified": null
+   }
+  ],
+  "how_to_apply": "Fill out the Borough \"Application for Certificate of Occupancy Pursuant to Ordinance\" (check RESALE, give the settlement date, buyer and agents), sign it as the current owner and return it to Borough Hall, 18 Catawba Avenue (mail to PO Box 856, Newfield, NJ 08344) with the fee. Call the Construction Office to schedule. The Construction Official keeps office hours Wednesday 3:00 pm to 5:00 pm.",
+  "application_url": "https://www.newfieldborough.org/wp-content/uploads/2021/07/Certificate-of-Occupancy.pdf",
+  "department_url": "https://www.newfieldborough.org/contact-us/",
+  "phone": "856-697-1100 ext. 11 or 16 (the 2021 form lists ext. 10)",
   "email": "",
-  "evidence": [],
-  "confidence": "low",
-  "notes": "The official website (https://www.newfieldborough.org/) answered every request, including direct PDF links, with a SiteGround bot-check (captcha) page, so no page or form could be read. The town code on ecode360 cannot be opened. Web searches did not return any official page or form text about a resale certificate for this town. Status is unknown, not confirmed absent. A search-engine summary pointed to the Borough Hall at 18 Catawba Avenue and a main number of 856-697-1100, but that could not be confirmed on an official page, so it is not used."
+  "evidence": [
+   {
+    "url": "https://web.archive.org/web/20210731031050/https://www.newfieldborough.org/wp-content/uploads/2021/07/Certificate-of-Occupancy.pdf",
+    "quote": "APPLICATION FOR CERTIFICATE OF OCCUPANCY PURSUANT TO ORDINANCE",
+    "doc_date": "2021-07 (scanned form; capture 2021-07-31)",
+    "via": "pdf",
+    "verified": null
+   },
+   {
+    "url": "https://web.archive.org/web/20210731031050/https://www.newfieldborough.org/wp-content/uploads/2021/07/Certificate-of-Occupancy.pdf",
+    "quote": "RESALE",
+    "doc_date": "2021-07",
+    "via": "pdf",
+    "verified": null
+   },
+   {
+    "url": "https://web.archive.org/web/20210731031050/https://www.newfieldborough.org/wp-content/uploads/2021/07/Certificate-of-Occupancy.pdf",
+    "quote": "If this Property is supplied by a Private Well, a copy of the Well Certification must be supplied before a Certificate of Occupancy can be issued.",
+    "doc_date": "2021-07",
+    "via": "pdf",
+    "verified": null
+   },
+   {
+    "url": "https://web.archive.org/web/20260615041939/https://www.newfieldborough.org/forms/",
+    "quote": "Certificate of Occupancy form for applicable property transactions or occupancy requirements.",
+    "doc_date": "2026-06-15 (Internet Archive capture)",
+    "via": "page",
+    "verified": true
+   },
+   {
+    "url": "https://web.archive.org/web/20260516144035/https://www.newfieldborough.org/contact-us/",
+    "quote": "Construction Official Construction office, permits, and related inquiries. 856-697-1100 ext. 11 or 16",
+    "doc_date": "2026-05-16 (Internet Archive capture)",
+    "via": "page",
+    "verified": false
+   },
+   {
+    "url": "https://web.archive.org/web/20260516144035/https://www.newfieldborough.org/contact-us/",
+    "quote": "Construction Official, Derek Leary Wednesday · 3:00 PM, 5:00 PM",
+    "doc_date": "2026-05-16 (Internet Archive capture)",
+    "via": "page",
+    "verified": false
+   },
+   {
+    "url": "https://web.archive.org/web/20190311153043/http://www.newfieldborough.org/wp-content/uploads/2018/04/Application-for-Occupancy.pdf",
+    "quote": "Septic and Termite Certification Must Be Provided Prior To C/O Being Issued.",
+    "doc_date": "2018-04 (older form; capture 2019-03-11)",
+    "via": "pdf",
+    "verified": null
+   }
+  ],
+  "confidence": "medium",
+  "notes": "Round 3: the live site still shows a bot check, so Internet Archive copies of official Borough files were used. The Borough form \"Application for Certificate of Occupancy Pursuant to Ordinance\" (original https://www.newfieldborough.org/wp-content/uploads/2021/07/Certificate-of-Occupancy.pdf, scanned, captured 2021-07-31) has RESALE, ANNUAL and TENANT CHANGE boxes, a settlement date line and fees of $75.00 (application) and $30.00 (re-inspection). The Borough Forms page captured 2026-06-15 still links this same 2021 file as the \"Certificate of Occupancy form for applicable property transactions\". Status is set to required because the Borough's own form says the CO is issued pursuant to ordinance and covers resales; the ordinance text itself was not read (ecode360). An older 2018 version of the form (original http://www.newfieldborough.org/wp-content/uploads/2018/04/Application-for-Occupancy.pdf) showed $50.00 application and $25.00 re-inspection fees and also required septic and termite certification before a C/O; the 2021 form mentions only the well certification. Contact details come from the Borough Contact page captured 2026-05-16 (original https://www.newfieldborough.org/contact-us/). The Borough's May 2024 inspection request form has dphyder@newfieldboro.org written in by hand on a Northfield template, and the Borough contact page lists no email, so no email is shown to agents. Lead time and validity were not stated.",
+  "contact_name": "Derek Leary",
+  "contact_title": "Construction Official"
  },
  "fire_cert": {
   "requirements": [],
   "authorities": [
+   {
+    "name": "Newfield Borough Construction Office (smoke detector compliance contact listed in the state fire directory)",
+    "type": "unknown",
+    "area_served": "Entire borough",
+    "lead_time": "",
+    "fees": [],
+    "how_to_apply": "Call the Borough Construction Office at 856-697-1100 and ask whether the smoke/CO check is part of the resale CO inspection.",
+    "application_url": "",
+    "department_url": "https://www.newfieldborough.org/contact-us/",
+    "contact_name": "Derek Leary",
+    "contact_title": "Construction Official",
+    "phone": "856-697-1100",
+    "email": "",
+    "evidence": [
+     {
+      "url": "https://www.nj.gov/dca/dfs/pdf/fire%20directory_county%20summary/fire_code_enforcement_director.pdf",
+      "quote": "Addr: 18 Catawba Av Phone (856) 697-1100 SMOKE DETECTOR COMPLIANCE Newfield Boro Constr",
+      "doc_date": "2026 (survey date 6/16/2026)",
+      "via": "state_directory",
+      "verified": true
+     }
+    ],
+    "confidence": "low"
+   },
    {
     "name": "Gloucester County Fire Marshal's Office (county local enforcing agency for the Uniform Fire Code)",
     "type": "unknown",
     "area_served": "Entire borough",
     "lead_time": "",
     "fees": [],
-    "how_to_apply": "No County smoke/CO/extinguisher certificate form or fee for home sales was found on the County website. Call or email the County Fire Marshal's Office (212 County House Road, Clarksboro) and ask how to request the resale inspection for this town, and whether the town collects the application and fee.",
+    "how_to_apply": "The state directory lists the Newfield Borough Construction Office (18 Catawba Ave, 856-697-1100) as the smoke detector compliance contact, so start with the Borough. The County Fire Marshal's Office is the fire code enforcing agency.",
     "application_url": "",
     "department_url": "https://www.gloucestercountynj.gov/359/Office-of-the-Fire-Marshal",
     "phone": "856-307-7912",
@@ -48,27 +142,43 @@
       "doc_date": "2026-07",
       "via": "pdf",
       "verified": true
+     },
+     {
+      "url": "https://www.gloucestercountynj.gov/359/Office-of-the-Fire-Marshal",
+      "quote": "Shawn Layton Chief County Fire Marshal (CFM 1) Email Shawn Layton Phone: 856-307-7913",
+      "doc_date": "2026-09-30 (page fetched)",
+      "via": "page",
+      "verified": true
+     },
+     {
+      "url": "https://www.nj.gov/dca/dfs/pdf/fire%20directory_county%20summary/fire_code_enforcement_director.pdf",
+      "quote": "Newfield Borough0813 LEAID: 0813-001 Enf Auth. County Fire Official Shawn K Layton Phone (856) 307-7912 Addr: 18 Catawba Av Phone (856) 697-1100 SMOKE DETECTOR COMPLIANCE Email slayton@co.gloucester.nj.us Newfield Boro Constr",
+      "doc_date": "2026 (survey date 6/16/2026)",
+      "via": "state_directory",
+      "verified": true
      }
     ],
-    "confidence": "medium"
+    "confidence": "medium",
+    "contact_name": "Shawn Layton",
+    "contact_title": "Chief County Fire Marshal"
    }
   ],
-  "notes": "The DCA Division of Fire Safety LEA Registry (third quarter, July 2026, as of June 30, 2026) lists this town with code C (C = County), and the Gloucester County Office of the Fire Marshal page lists Newfield among the municipalities where the County Fire Marshal's Office is the local enforcing agency. The authority type list has no 'county' option, so type is set to 'unknown'. The town has no fire district (it is not on the DCA Division of Local Government Services list of Gloucester County fire districts: https://nj.gov/dca/divisions/dlgs/programs/lpcl_docs/cd_gloucester.docx). In other county-LEA towns (for example Clayton) the municipality itself posts the smoke/CO application and collects the fee, so the town office may be the place to apply; this could not be checked here because the town website is blocked. Under N.J.A.C. 5:70-2.3, if the town has its own resale inspection under a municipal code, a separate CSACMAPFEC is not required but the town cannot issue its approval until smoke/CO/extinguisher rules (N.J.A.C. 5:70-4.19) are met."
+  "notes": "The DCA LEA Registry (July 2026) lists Newfield as C (County) and the Gloucester County Fire Marshal page lists Newfield among its LEA towns. The state fire directory (survey 6/16/2026) names \"Newfield Boro Constr\" (18 Catawba Av, (856) 697-1100) in the smoke detector compliance column, so the Borough Construction Office appears to handle smoke/CO certification for sales, probably within the resale CO inspection (N.J.A.C. 5:70-2.3 lets a municipal resale inspection stand in for the separate certificate). No separate smoke certificate fee was found. The type list has no county option, so the county entry is \"unknown\"."
  },
  "other_items": [],
  "open_questions": [
-  "Does Newfield Borough require a resale certificate of occupancy or housing inspection for 1-2 family sales? The borough website is blocked by a bot check and ecode360 cannot be opened.",
-  "Who takes the smoke/CO/extinguisher certificate application and fee for Newfield Borough (the Borough office or the Gloucester County Fire Marshal's Office), and what are the fee tiers?",
-  "Confirm Newfield Borough construction/code enforcement contact (search summaries mention 856-697-1100; not verified on an official page)."
+  "Lead time and validity of the Newfield resale CO, and whether the $75.00 / $30.00 fees on the 2021 form are still current.",
+  "Whether the smoke/CO alarm check is part of the Borough resale CO inspection or a separate certificate (and fee).",
+  "Whether septic and termite certifications (on the 2018 form) are still required before a C/O."
  ],
  "verification": {
-  "fees": 0,
+  "fees": 2,
   "fee_ok": 0,
   "fee_bad": 0,
-  "fee_unchecked": 0,
-  "quotes": 2,
-  "q_ok": 2,
-  "q_bad": 0,
-  "q_unchecked": 0
+  "fee_unchecked": 2,
+  "quotes": 13,
+  "q_ok": 6,
+  "q_bad": 2,
+  "q_unchecked": 5
  }
 }

@@ -1,0 +1,261 @@
+{
+ "municipality_code": "1207",
+ "municipality": "Highland Park Borough",
+ "county": "MIDDLESEX",
+ "checked_at": "2026-09-30",
+ "resale_co": {
+  "status": "required",
+  "name": "Resale Certificate",
+  "issued_by": "Department of Code Enforcement, Borough of Highland Park",
+  "lead_time": "",
+  "valid_for": "Temporary Resale Certificate: up to 3 months (extension possible)",
+  "requirements": [
+   "All open building permits must be closed before closing",
+   "Smoke/CO certificate from the Middlesex County Fire Marshal must be submitted to Code Enforcement before the final Resale Certificate is issued",
+   "Final water meter reading scheduled and done with the Tax/Water Department before closing",
+   "A Temporary Resale Certificate is possible when the home is not habitable at closing or the buyer accepts existing violations; the buyer then schedules the resale inspection"
+  ],
+  "fees": [
+   {
+    "label": "Resale Application",
+    "amount": "$75",
+    "quote": "Both the Resale Application ($75) and Temporary Resale Application ($50) must be submitted and paid in full.",
+    "source_url": "https://web.archive.org/web/20260607053145/https://www.hpboro.com/departments/construction/housing-inspections-1167",
+    "verified": true
+   },
+   {
+    "label": "Temporary Resale Application (only when a Temporary Resale Certificate is used; in addition to the Resale Application)",
+    "amount": "$50",
+    "quote": "Both the Resale Application ($75) and Temporary Resale Application ($50) must be submitted and paid in full.",
+    "source_url": "https://web.archive.org/web/20260607053145/https://www.hpboro.com/departments/construction/housing-inspections-1167",
+    "verified": true
+   }
+  ],
+  "how_to_apply": "The owner or realtor submits the Resale Application (linked on the Borough Code Enforcement / Property Maintenance page) to the Department of Code Enforcement, 221 South 5th Avenue, Highland Park. Pay by check, cash (exact change) or money order payable to BOROUGH OF HIGHLAND PARK; no credit cards or online payment. Inspections are at the exact time the office gives; an adult 18 or older must be present to give access.",
+  "application_url": "https://www.hpboro.com/home/showpublisheddocument/214/639160866633730000",
+  "department_url": "https://www.hpboro.com/departments/construction/housing-inspections-1167",
+  "phone": "732-819-3797",
+  "email": "csumano@hpboro.com",
+  "contact_name": "Christian Sumano",
+  "contact_title": "Housing Inspector",
+  "evidence": [
+   {
+    "url": "https://web.archive.org/web/20260607053145/https://www.hpboro.com/departments/construction/housing-inspections-1167",
+    "quote": "The owner of any residential building or dwelling unit, whether single-family or multi-family, must obtain a Resale Certificate before the change/transfer in ownership.",
+    "doc_date": "2026-06 (Internet Archive capture June 7, 2026)",
+    "via": "page",
+    "verified": true
+   },
+   {
+    "url": "https://web.archive.org/web/20260607053145/https://www.hpboro.com/departments/construction/housing-inspections-1167",
+    "quote": "Failure to apply for a resale certificate may result in a fine of up to $500.00 per day.",
+    "doc_date": "2026-06",
+    "via": "page",
+    "verified": true
+   },
+   {
+    "url": "https://web.archive.org/web/20260607053145/https://www.hpboro.com/departments/construction/housing-inspections-1167",
+    "quote": "All open building permits must be closed prior to closing.",
+    "doc_date": "2026-06",
+    "via": "page",
+    "verified": true
+   },
+   {
+    "url": "https://web.archive.org/web/20260607053145/https://www.hpboro.com/departments/construction/housing-inspections-1167",
+    "quote": "The final Resale Certificate will NOT be issued until the Smoke/CO Certificate has been received and approved.",
+    "doc_date": "2026-06",
+    "via": "page",
+    "verified": true
+   },
+   {
+    "url": "https://web.archive.org/web/20260607053145/https://www.hpboro.com/departments/construction/housing-inspections-1167",
+    "quote": "The Temporary Resale Certificate is valid for up to 3 months. An extension may be granted upon proof that corrective work is in progress.",
+    "doc_date": "2026-06",
+    "via": "page",
+    "verified": true
+   },
+   {
+    "url": "https://web.archive.org/web/20260607053145/https://www.hpboro.com/departments/construction/housing-inspections-1167",
+    "quote": "All fees must be paid in full by check, cash (exact change), or money order. Credit cards and online payments are not accepted.",
+    "doc_date": "2026-06",
+    "via": "page",
+    "verified": true
+   },
+   {
+    "url": "https://web.archive.org/web/20260607053145/https://www.hpboro.com/departments/construction/housing-inspections-1167",
+    "quote": "Christian Sumano Housing Inspector csumano@hpboro.com (732) 819-3797",
+    "doc_date": "2026-06",
+    "via": "page",
+    "verified": true
+   }
+  ],
+  "confidence": "high",
+  "notes": "The live Borough site (hpboro.com) blocks automated access, so the Code Enforcement / Property Maintenance page was read from its Internet Archive copy captured June 7, 2026 (original URL: https://www.hpboro.com/departments/construction/housing-inspections-1167). The Resale Application PDF linked there could not be opened (not archived), so the resale inspection checklist and lead time are unknown; the application_url is the link as published. The inspector email is shown as csumano@hpboro.com but the link behind it points to csurmano@hpboro.com; the displayed address is recorded. The rental program (rental certificate, lead-based paint inspection $145, $50 re-inspection, $125 + $150 emergency inspection, rent control) is a rental requirement, not a resale fee."
+ },
+ "fire_cert": {
+  "requirements": [
+   "The affidavit option is no longer available; an inspection by the Middlesex County Office of the Fire Marshal is required",
+   "A copy of the valid Smoke/CO Certificate must be given to Borough Code Enforcement"
+  ],
+  "authorities": [
+   {
+    "name": "Middlesex County Office of the Fire Marshal (county fire code enforcing agency)",
+    "type": "unknown",
+    "area_served": "Entire borough (county agency)",
+    "lead_time": "",
+    "fees": [
+     {
+      "label": "Smoke/CO inspection, 10 or more business days before closing",
+      "amount": "$50.00",
+      "quote": "Ten (10) business days or more before closing/change of occupancy: $50.00",
+      "source_url": "https://www.southrivernj.org/DocumentCenter/View/856/Smoke-Detector--Carbon-Monoxide-Detector-Inspection-PDF",
+      "verified": "eye"
+     },
+     {
+      "label": "Smoke/CO inspection, less than 10 business days before closing",
+      "amount": "$75.00",
+      "quote": "Less than ten (10) business days before closing/change of occupancy: $75.00",
+      "source_url": "https://www.southrivernj.org/DocumentCenter/View/856/Smoke-Detector--Carbon-Monoxide-Detector-Inspection-PDF",
+      "verified": "eye"
+     },
+     {
+      "label": "Smoke/CO inspection, less than 4 business days before closing",
+      "amount": "$125.00",
+      "quote": "Less than (4) business days before closing/change of occupancy: $125.00",
+      "source_url": "https://www.southrivernj.org/DocumentCenter/View/856/Smoke-Detector--Carbon-Monoxide-Detector-Inspection-PDF",
+      "verified": "eye"
+     },
+     {
+      "label": "Reinspection after a failed inspection",
+      "amount": "$20.00",
+      "quote": "Re-inspection for failed inspection: $20.00",
+      "source_url": "https://www.southrivernj.org/DocumentCenter/View/856/Smoke-Detector--Carbon-Monoxide-Detector-Inspection-PDF",
+      "verified": "eye"
+     },
+     {
+      "label": "Not present for a scheduled inspection without notice",
+      "amount": "$75.00",
+      "quote": "Failure to be present for scheduled inspection without notification: $75.00",
+      "source_url": "https://www.southrivernj.org/DocumentCenter/View/856/Smoke-Detector--Carbon-Monoxide-Detector-Inspection-PDF",
+      "verified": "eye"
+     }
+    ],
+    "how_to_apply": "Request and register the Smoke/CO certificate with the Middlesex County Fire Marshal's Office, 1001 Fire Academy Drive, Sayreville (732-316-7171, firemarshal@co.middlesex.nj.us), then send a copy to Borough Code Enforcement. The Borough page links a smoke/CO document that could not be opened; the county website blocks automated access, so no fee schedule was found.",
+    "application_url": "",
+    "department_url": "https://www.hpboro.com/departments/construction/housing-inspections-1167",
+    "phone": "732-316-7171",
+    "email": "firemarshal@co.middlesex.nj.us",
+    "contact_name": "Michael Gallagher",
+    "contact_title": "Fire Official (Middlesex County Fire Marshal), per state directory",
+    "evidence": [
+     {
+      "url": "https://web.archive.org/web/20260607053145/https://www.hpboro.com/departments/construction/housing-inspections-1167",
+      "quote": "A Smoke Detector and Carbon Monoxide (CO) Inspection is required at the time of change in occupancy or ownership in accordance with the NJ Uniform Fire Code (N.J.A.C. 5:70-2.3) and Middlesex County Fire Marshal Ordinance 10-1811.",
+      "doc_date": "2026-06 (Internet Archive capture June 7, 2026)",
+      "via": "page",
+      "verified": true
+     },
+     {
+      "url": "https://web.archive.org/web/20260607053145/https://www.hpboro.com/departments/construction/housing-inspections-1167",
+      "quote": "Inspections are conducted by the Middlesex County Office of the Fire Marshal",
+      "doc_date": "2026-06",
+      "via": "page",
+      "verified": true
+     },
+     {
+      "url": "https://web.archive.org/web/20260607053145/https://www.hpboro.com/departments/construction/housing-inspections-1167",
+      "quote": "The affidavit option is no longer available",
+      "doc_date": "2026-06",
+      "via": "page",
+      "verified": true
+     },
+     {
+      "url": "https://web.archive.org/web/20260607053145/https://www.hpboro.com/departments/construction/housing-inspections-1167",
+      "quote": "Middlesex County Fire Marshal 1001 Fire Academy Drive Sayreville, NJ 08879 Phone: (732) 316-7171 Email: firemarshal@co.middlesex.nj.us",
+      "doc_date": "2026-06",
+      "via": "page",
+      "verified": true
+     },
+     {
+      "url": "https://nj.gov/dca/dfs/pdf/ANNUAL%20REGISTRY/THIRD%20QUARTER%20LEA%20REGISTRY%202026.pdf",
+      "quote": "C Highland Park Borough",
+      "doc_date": "2026-07 (registry as of June 30, 2026)",
+      "via": "pdf",
+      "verified": true
+     },
+     {
+      "url": "https://www.nj.gov/dca/dfs/pdf/fire%20directory_county%20summary/fire_code_enforcement_director.pdf",
+      "quote": "LEAID: 1207-001 Enf Auth. County Fire Official Michael Gallagher Phone (732) 316-7171 Email mike.gallagher@co.middlesex.nj.us",
+      "doc_date": "2026-01-16 (survey date)",
+      "via": "state_directory",
+      "verified": true
+     },
+     {
+      "url": "https://www.southrivernj.org/DocumentCenter/View/856/Smoke-Detector--Carbon-Monoxide-Detector-Inspection-PDF",
+      "quote": "Attached please find an application for a Smoke Detector/Carbon Monoxide Detector Inspection which is required pursuant to the NJ Uniform Fire Code N.J.A.C. 5:70-2.3 and the Middlesex County Fire Marshal Ordinance 10-1811 when a change in occupancy or ownership occurs.",
+      "doc_date": "2026-02 (PDF created 2026-02-02 on the South River site; County letter undated; scanned, read visually)",
+      "via": "pdf",
+      "verified": "eye"
+     },
+     {
+      "url": "https://www.southrivernj.org/DocumentCenter/View/856/Smoke-Detector--Carbon-Monoxide-Detector-Inspection-PDF",
+      "quote": "Make checks payable to the Office of the Fire Marshal.",
+      "doc_date": "2026-02 (PDF created 2026-02-02 on the South River site; County letter undated; scanned, read visually)",
+      "via": "pdf",
+      "verified": "eye"
+     },
+     {
+      "url": "https://www.southrivernj.org/DocumentCenter/View/856/Smoke-Detector--Carbon-Monoxide-Detector-Inspection-PDF",
+      "quote": "After inspection is complete, your certification is immediately issued. Each certificate is valid for six (6) months.",
+      "doc_date": "2026-02 (PDF created 2026-02-02 on the South River site; County letter undated; scanned, read visually)",
+      "via": "pdf",
+      "verified": "eye"
+     },
+     {
+      "url": "https://www.southrivernj.org/DocumentCenter/View/856/Smoke-Detector--Carbon-Monoxide-Detector-Inspection-PDF",
+      "quote": "Middlesex County Fire Marshal 1001 Fire Academy Drive Sayreville, NJ 08879 Email: firemarshal@co.middlesex.nj.us",
+      "doc_date": "undated application page in the same PDF",
+      "via": "pdf",
+      "verified": "eye"
+     },
+     {
+      "url": "https://www.southrivernj.org/DocumentCenter/View/856/Smoke-Detector--Carbon-Monoxide-Detector-Inspection-PDF",
+      "quote": "MIDDLESEX COUNTY FIRE MARSHAL 1001 Fire Academy Drive Sayreville, NJ 08872 732-316-7171 (office) 732-316-7638 (fax)",
+      "doc_date": "2026-02 (PDF created 2026-02-02 on the South River site; County letter undated; scanned, read visually)",
+      "via": "pdf",
+      "verified": "eye"
+     }
+    ],
+    "confidence": "medium",
+    "notes": "County fee schedule from the Middlesex County Fire Marshal's own letter and application (County Ordinance 10-1811, created February 2026), posted on South River Borough's site; it applies wherever the County is the fire code agency. Checked by Claude against the scanned letter on 2026-09-30."
+   }
+  ],
+  "notes": "Highland Park is county enforced (DCA registry code C). The Borough page names the Middlesex County Office of the Fire Marshal as the inspecting agency and gives its general phone and email; the state directory (survey 1/16/2026) names Michael Gallagher as Fire Official with email mike.gallagher@co.middlesex.nj.us. The Borough page gives the county ZIP as 08879 while the state directory gives 08872. No county fee or lead time was found. The Highland Park Fire Department (volunteer) is the suppression company, not the inspecting agency."
+ },
+ "other_items": [
+  {
+   "label": "Final water meter reading",
+   "detail": "Schedule and complete a final water meter reading with the Tax Collector/Water Department before closing (Maryann Auntenale, 732-819-3787).",
+   "source_url": "https://web.archive.org/web/20260607053145/https://www.hpboro.com/departments/construction/housing-inspections-1167"
+  },
+  {
+   "label": "Open building permits",
+   "detail": "All open building permits must be closed before closing; ask the Construction Department at 732-777-6013. Non-owners must file an OPRA request with the Clerk for permit records.",
+   "source_url": "https://web.archive.org/web/20260607053145/https://www.hpboro.com/departments/construction/housing-inspections-1167"
+  }
+ ],
+ "open_questions": [
+  "Middlesex County Fire Marshal smoke/CO certificate fees and lead time (not published on a reachable page).",
+  "Lead time and inspection checklist for the Borough Resale Certificate (the linked application PDF could not be opened)."
+ ],
+ "verification": {
+  "fees": 7,
+  "fee_ok": 7,
+  "fee_bad": 0,
+  "fee_unchecked": 0,
+  "quotes": 18,
+  "q_ok": 18,
+  "q_bad": 0,
+  "q_unchecked": 0
+ }
+}

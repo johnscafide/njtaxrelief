@@ -1,0 +1,270 @@
+{
+ "municipality_code": "0119",
+ "municipality": "Pleasantville",
+ "county": "ATLANTIC",
+ "checked_at": "2026-09-30",
+ "resale_co": {
+  "status": "required",
+  "name": "Certificate of Occupancy (Occupancy Permit, Change of Ownership) or Transfer of Ownership Permit",
+  "issued_by": "Code Enforcement Department (Housing Division)",
+  "lead_time": "All applications take 7 to 10 business days for processing and inspection dates.",
+  "valid_for": "",
+  "requirements": [
+   "Fire safety certificate (smoke alarms, CO alarms) from the Pleasantville Fire Department",
+   "Heat and hot water heater certificate from a licensed plumber or HVAC technician (electric units do not need one)",
+   "Fireplace certification if there is one: gas units by an HVAC technician or plumber, wood burning fireplaces by a licensed chimney sweep",
+   "All utilities on at the time of inspection",
+   "Home fit for habitation under the City Property Maintenance Code: no fire or accident hazards, adequate ventilation, light and sanitary facilities, no dilapidation, disrepair, structural defects or uncleanliness",
+   "Buyers using an LLC must give the owner's or property caregiver's name and contact information"
+  ],
+  "fees": [
+   {
+    "label": "Residential application (Occupancy Permit or Transfer of Ownership Permit), non-refundable",
+    "amount": "$60.00",
+    "quote": "For residential properties, a non-refundable fee of sixty dollars ($60.00) must be paid when application is submitted.",
+    "source_url": "https://www.pleasantville-nj.org/pdf/Certificate%20of%20Occupancy%20Form%20November%202023.pdf",
+    "verified": null
+   },
+   {
+    "label": "Re-inspection, each",
+    "amount": "$50.00",
+    "quote": "If a re-inspection is required to bring the unit into compliance a fifty dollar ($50.00) fee will be charged, and/or any additional inspections thereafter.",
+    "source_url": "https://www.pleasantville-nj.org/pdf/Certificate%20of%20Occupancy%20Form%20November%202023.pdf",
+    "verified": null
+   },
+   {
+    "label": "Late cancellation (after 4:00 pm the day before)",
+    "amount": "$50.00",
+    "quote": "Should you find it necessary to cancel an appointment, you must do so by 4:00 pm on the day prior to said appointment, or a fifty dollar ($50.00) fee shall be charged.",
+    "source_url": "https://www.pleasantville-nj.org/pdf/Certificate%20of%20Occupancy%20Form%20November%202023.pdf",
+    "verified": null
+   },
+   {
+    "label": "Inspection aborted because utilities are off",
+    "amount": "$50",
+    "quote": "All utilities MUST BE ON at time of inspection or the inspection shall be aborted and a $50 fee shall be required for re-inspection.",
+    "source_url": "https://www.pleasantville-nj.org/pdf/Certificate%20of%20Occupancy%20Form%20November%202023.pdf",
+    "verified": null
+   },
+   {
+    "label": "Reprint after a name change within 5 days of printing",
+    "amount": "$2.00",
+    "quote": "Should the current owner, new owners, tenant name, or name on application change within 5 days from when the Occupancy permit was printed, a new occupancy permit will be printed at an additional cost of $2.00",
+    "source_url": "https://www.pleasantville-nj.org/pdf/Certificate%20of%20Occupancy%20Form%20November%202023.pdf",
+    "verified": null
+   }
+  ],
+  "how_to_apply": "Download the Certificate of Occupancy packet from the City Forms page and complete the 'Occupancy Permit/Transfer of Ownership Permit' application (check 'Occupancy Permit - Change of Ownership', or 'Transfer of Ownership Permit' if the buyer will fix violations). Submit it to Code Enforcement (City Hall Annex, 132 West Washington Avenue; mailing address 18 N. First Street) with the $60 fee by check or money order payable to City of Pleasantville (no cash), plus the fire safety and heat/hot water certificates. A Transfer of Ownership Permit needs a signed, notarized statement from the new owner and does not allow occupancy. Inspectors take scheduling calls from 8:30 to 9:30 am and 4:00 to 4:30 pm.",
+  "application_url": "https://www.pleasantville-nj.org/pdf/Certificate%20of%20Occupancy%20Form%20November%202023.pdf",
+  "department_url": "https://www.pleasantville-nj.org/page.asp?var_incl=building.html",
+  "contact_name": "Ben Silkowitz",
+  "contact_title": "Construction/Zoning Official (Code Enforcement / Housing Division phone listed)",
+  "phone": "609-484-3633",
+  "email": "",
+  "evidence": [
+   {
+    "url": "https://www.pleasantville-nj.org/pdf/Certificate%20of%20Occupancy%20Form%20November%202023.pdf",
+    "quote": "The City of Pleasantville requires a Certificate of Occupancy and a Yearly Rental Registration Certificate prior to occupancy of any rental property or sale of property.",
+    "doc_date": "2023-11 (instruction page revised 11/03/23; application pages updated 10/03/2022; scanned, read visually)",
+    "via": "pdf",
+    "verified": null
+   },
+   {
+    "url": "https://www.pleasantville-nj.org/pdf/Certificate%20of%20Occupancy%20Form%20November%202023.pdf",
+    "quote": "TRANSFER OF OWNERSHIP PERMIT - A permit issued by the Code Enforcement Officer or designee for the exclusive and sole purpose of Changing Ownership of a dwelling unit or property.",
+    "doc_date": "2022-10 (application page updated 10/03/2022; scanned, read visually)",
+    "via": "pdf",
+    "verified": null
+   },
+   {
+    "url": "https://www.pleasantville-nj.org/pdf/Certificate%20of%20Occupancy%20Form%20November%202023.pdf",
+    "quote": "All applications require 7 - 10 business days for processing and inspection dates.",
+    "doc_date": "2023-11 (revised 11/03/23; scanned, read visually)",
+    "via": "pdf",
+    "verified": null
+   },
+   {
+    "url": "https://www.pleasantville-nj.org/services/fire.asp",
+    "quote": "Fire/Carbon Monoxide/Fire Extinguisher Certifications are required anytime a Certificate of Occupancy is obtained. That is whenever a residential dwelling is being rented or sold.",
+    "doc_date": "2026-09-30 (page fetched)",
+    "via": "page",
+    "verified": true
+   },
+   {
+    "url": "https://www.pleasantville-nj.org/page.asp?var_incl=building.html",
+    "quote": "Housing Division Telephone: 609.484.3633",
+    "doc_date": "2026-09-30 (page fetched)",
+    "via": "page",
+    "verified": true
+   },
+   {
+    "url": "https://www.pleasantville-nj.org/page.asp?var_incl=officials.html",
+    "quote": "Ben Silkowitz, Construction/Zoning Official Phone: (609) 677-4802",
+    "doc_date": "2026-09-30 (page fetched)",
+    "via": "page",
+    "verified": true
+   },
+   {
+    "url": "https://www.pleasantville-nj.org/government/forms.asp",
+    "quote": "Certificate of Occupancy",
+    "doc_date": "2026-09-30 (page fetched)",
+    "via": "page",
+    "verified": true
+   }
+  ],
+  "confidence": "high",
+  "notes": "The City's Certificate of Occupancy packet (instruction page revised 11/03/23) says a Certificate of Occupancy is required before occupancy after any sale. Two paths exist: an Occupancy Permit for a change of ownership, or a Transfer of Ownership Permit, where the new owner signs a notarized statement taking responsibility for code violations; that permit does not allow occupancy. If no certificate or permit is issued within 3 months of the application, the application becomes void. The application pages (updated 10/03/2022) name Kevin Cain as Construction Code Official; the City's current officials page names Ben Silkowitz as Construction/Zoning Official ((609) 677-4802), so he is listed, with the Code Enforcement / Housing Division number 609-484-3633 from the packet and the Building and Zoning page. City staff emails are hidden behind Cloudflare email protection and were not recorded. Lead-safe certification and insurance apply to rentals only; yearly rental registration is a separate program."
+ },
+ "fire_cert": {
+  "requirements": [
+   "Homes built before April 4, 1991: smoke alarm on each level including the basement (not attic or crawl space) and near each separate sleeping area",
+   "Homes built after April 4, 1991: smoke alarm on each level and in each bedroom, 110-volt interconnected with battery backup",
+   "Battery smoke alarms must be 10-year sealed (hardwired alarms excluded)",
+   "Carbon monoxide alarms in the immediate vicinity of the sleeping areas",
+   "Portable fire extinguisher: the 2025 application says it is required for multi-family properties only (excluding one- and two-family homes), 2.5 to 10 lb ABC dry chemical, mounted within 10 feet of the kitchen. The Fire Department web page still says extinguishers are required in 1, 2 and 3 family dwellings."
+  ],
+  "authorities": [
+   {
+    "name": "Pleasantville Fire Department, Office of Fire Prevention (Fire Prevention Bureau)",
+    "type": "municipal_fire_bureau",
+    "area_served": "Entire city",
+    "lead_time": "Inspections are on Mondays and Wednesdays; the expedited fee gets a same or next business day inspection. Cancel at least 48 hours before the inspection.",
+    "fees": [
+     {
+      "label": "Smoke/CO certificate application, non-refundable",
+      "amount": "$60",
+      "quote": "Application Fee: $60",
+      "source_url": "https://www.pleasantville-nj.org/pdf/Smoke%20Detector%20Carbon%20Monoxide%20Detector%20Fire%20Extinguisher%20Certification%20Application%20-%202025.pdf",
+      "verified": true
+     },
+     {
+      "label": "Expedited, same or next business day",
+      "amount": "$160",
+      "quote": "Expedited Fee: $160 (same or next business day)",
+      "source_url": "https://www.pleasantville-nj.org/pdf/Smoke%20Detector%20Carbon%20Monoxide%20Detector%20Fire%20Extinguisher%20Certification%20Application%20-%202025.pdf",
+      "verified": true
+     },
+     {
+      "label": "Duplicate certificate, each",
+      "amount": "$10.00",
+      "quote": "Any additional gold certificates of inspections duplicates will be a $10.00 fee for each.",
+      "source_url": "https://www.pleasantville-nj.org/services/fire.asp",
+      "verified": true
+     }
+    ],
+    "how_to_apply": "Complete the Application for Certification of Smoke Detector, Carbon Monoxide Detector, Portable Fire Extinguisher Compliance (check 'Sale') and bring it to the Office of Fire Prevention inside the Fire Department, 1 N. First Street (1st Street side door), 8:30 am to 4:30 pm on weekdays. Pay by check or money order payable to the City of Pleasantville; fees are non-refundable and mail-ins are not accepted.",
+    "application_url": "https://www.pleasantville-nj.org/pdf/Smoke%20Detector%20Carbon%20Monoxide%20Detector%20Fire%20Extinguisher%20Certification%20Application%20-%202025.pdf",
+    "department_url": "https://www.pleasantville-nj.org/services/fire.asp",
+    "contact_name": "Anton Brown",
+    "contact_title": "Captain, Fire Official (Fire Prevention/Investigations)",
+    "phone": "609-569-2042",
+    "email": "prevention@pleasantvillefd.net",
+    "evidence": [
+     {
+      "url": "https://www.pleasantville-nj.org/pdf/Smoke%20Detector%20Carbon%20Monoxide%20Detector%20Fire%20Extinguisher%20Certification%20Application%20-%202025.pdf",
+      "quote": "OFFICE: 609-569-2042",
+      "doc_date": "2025-07 (form modified July 8, 2025)",
+      "via": "pdf",
+      "verified": true
+     },
+     {
+      "url": "https://www.pleasantville-nj.org/pdf/Smoke%20Detector%20Carbon%20Monoxide%20Detector%20Fire%20Extinguisher%20Certification%20Application%20-%202025.pdf",
+      "quote": "E-mail: prevention@pleasantvillefd.net",
+      "doc_date": "2025-07 (form modified July 8, 2025)",
+      "via": "pdf",
+      "verified": true
+     },
+     {
+      "url": "https://www.pleasantville-nj.org/pdf/Smoke%20Detector%20Carbon%20Monoxide%20Detector%20Fire%20Extinguisher%20Certification%20Application%20-%202025.pdf",
+      "quote": "Captain Anton Brown, Fire Official",
+      "doc_date": "2025-07 (form modified July 8, 2025)",
+      "via": "pdf",
+      "verified": true
+     },
+     {
+      "url": "https://www.pleasantville-nj.org/pdf/Smoke%20Detector%20Carbon%20Monoxide%20Detector%20Fire%20Extinguisher%20Certification%20Application%20-%202025.pdf",
+      "quote": "Inspections are conducted on Monday's & Wednesday's",
+      "doc_date": "2025-07 (form modified July 8, 2025)",
+      "via": "pdf",
+      "verified": true
+     },
+     {
+      "url": "https://www.pleasantville-nj.org/pdf/Smoke%20Detector%20Carbon%20Monoxide%20Detector%20Fire%20Extinguisher%20Certification%20Application%20-%202025.pdf",
+      "quote": "CHECK OR MONEY ORDER ONLY",
+      "doc_date": "2025-07 (form modified July 8, 2025)",
+      "via": "pdf",
+      "verified": true
+     },
+     {
+      "url": "https://www.pleasantville-nj.org/pdf/Smoke%20Detector%20Carbon%20Monoxide%20Detector%20Fire%20Extinguisher%20Certification%20Application%20-%202025.pdf",
+      "quote": "*Portable Fire Extinguisher (MUST BE) 2 ½ to 10 lbs. ABC dry chemical within 10 ft. of the kitchen. *REQUIRED FOR MULTI-FAMILY PROPERTIES ONLY*",
+      "doc_date": "2025-07 (form modified July 8, 2025)",
+      "via": "pdf",
+      "verified": true
+     },
+     {
+      "url": "https://www.pleasantville-nj.org/services/fire.asp",
+      "quote": "The fee required is $60. Certifications requested within 24 hrs. require a $160 fee.",
+      "doc_date": "2026-09-30 (page fetched)",
+      "via": "page",
+      "verified": true
+     },
+     {
+      "url": "https://www.pleasantville-nj.org/services/fire.asp",
+      "quote": "Fire extinguishers are required in 1, 2 and 3 family dwellings only.",
+      "doc_date": "2026-09-30 (page fetched)",
+      "via": "page",
+      "verified": true
+     },
+     {
+      "url": "https://nj.gov/dca/dfs/pdf/ANNUAL%20REGISTRY/THIRD%20QUARTER%20LEA%20REGISTRY%202026.pdf",
+      "quote": "F Pleasantville City",
+      "doc_date": "2026-07",
+      "via": "pdf",
+      "verified": true
+     },
+     {
+      "url": "https://www.nj.gov/dca/dfs/pdf/fire%20directory_county%20summary/fire_code_enforcement_director.pdf",
+      "quote": "LEAID: 0119-001 Enf Auth. Fire Dept Fire Official Anton Brown Phone (609) 484-3670",
+      "doc_date": "2026 directory page (survey date 5/26/2026)",
+      "via": "state_directory",
+      "verified": true
+     }
+    ],
+    "confidence": "high"
+   }
+  ],
+  "notes": "The Pleasantville Fire Department is the local fire code enforcing agency (LEA code F). Its web page and 2025 application give the same fees ($60, $160 expedited). Phone numbers differ by source: the 2025 form gives OFFICE 609-569-2042 (used here), the Fire Department page lists the Fire Bureau at (609) 484-3625, and the City's CO packet and the state directory give 609-484-3670. The form also prints a cell number, which is not recorded. The state directory lists Abrown@pleasantvillefd.net for Anton Brown; the form's office email prevention@pleasantvillefd.net is used. The 2025 form's heading excludes one- and two-family homes from the extinguisher requirement, matching the 2025 state law change, while the web page text still lists 1, 2 and 3 family dwellings."
+ },
+ "other_items": [
+  {
+   "label": "Heat and hot water heater certificate",
+   "detail": "From any licensed plumber or HVAC technician; electric units do not need certification.",
+   "source_url": "https://www.pleasantville-nj.org/pdf/Certificate%20of%20Occupancy%20Form%20November%202023.pdf"
+  },
+  {
+   "label": "Fireplace certification",
+   "detail": "If there is a fireplace: gas units by an HVAC technician or plumber, wood burning fireplaces by a licensed chimney sweep.",
+   "source_url": "https://www.pleasantville-nj.org/pdf/Certificate%20of%20Occupancy%20Form%20November%202023.pdf"
+  },
+  {
+   "label": "Utilities on",
+   "detail": "All utilities must be on at inspection or the inspection is aborted and a $50 re-inspection fee applies.",
+   "source_url": "https://www.pleasantville-nj.org/pdf/Certificate%20of%20Occupancy%20Form%20November%202023.pdf"
+  }
+ ],
+ "open_questions": [
+  "How long the Certificate of Occupancy stays valid after issue is not stated.",
+  "Which Fire Prevention phone number is current (609-569-2042 on the 2025 form, 609-484-3625 on the web page, 609-484-3670 in the CO packet and state directory)."
+ ],
+ "verification": {
+  "fees": 8,
+  "fee_ok": 3,
+  "fee_bad": 0,
+  "fee_unchecked": 5,
+  "quotes": 17,
+  "q_ok": 14,
+  "q_bad": 0,
+  "q_unchecked": 3
+ }
+}

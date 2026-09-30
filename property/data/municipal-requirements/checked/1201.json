@@ -1,0 +1,234 @@
+{
+ "municipality_code": "1201",
+ "municipality": "Carteret Borough",
+ "county": "MIDDLESEX",
+ "checked_at": "2026-09-30",
+ "resale_co": {
+  "status": "required",
+  "name": "Certificate of Occupancy (Residential Certificate of Continued Occupancy)",
+  "issued_by": "Department of Code Enforcement (Building, Construction and Land Use Department)",
+  "lead_time": "",
+  "valid_for": "The form says the application is void 90 days from the date of issuance",
+  "requirements": [
+   "Smoke detector on each level of the home",
+   "Smoke detector and carbon monoxide alarm outside each sleeping area, within 10 feet",
+   "All smoke detectors and carbon monoxide alarms in working order",
+   "Battery powered detectors and alarms must have 10 year sealed batteries",
+   "2A:10BC fire extinguisher mounted within 10 feet of the kitchen (form dated March 2020, before the 2025 state change)",
+   "All utilities working: HVAC, water heater, furnace, electric, water and sewer",
+   "No work done that needed a construction (UCC) or zoning permit without one, and no open permits",
+   "Exterior of the house not in disrepair",
+   "Grounds trimmed and free of debris",
+   "Concrete, asphalt and masonry not in disrepair, with no tripping hazards",
+   "List the names and ages of all occupants on the application",
+   "Owner signs a notarized certification on the Addendum"
+  ],
+  "fees": [
+   {
+    "label": "Certificate of Occupancy inspection, 1-family",
+    "amount": "$100.00",
+    "quote": "Fee for Certificate of Occupancy Inspection is: $100.00 / 1 family $150.00 / 2 family (Cash, certified check, or attorney, or broker check)",
+    "source_url": "https://www.carteret.net/wp-content/uploads/2020/05/Application-for-Residential-Certificate-of-Continued-Occupancy.pdf",
+    "verified": true
+   },
+   {
+    "label": "Certificate of Occupancy inspection, 2-family",
+    "amount": "$150.00",
+    "quote": "Fee for Certificate of Occupancy Inspection is: $100.00 / 1 family $150.00 / 2 family (Cash, certified check, or attorney, or broker check)",
+    "source_url": "https://www.carteret.net/wp-content/uploads/2020/05/Application-for-Residential-Certificate-of-Continued-Occupancy.pdf",
+    "verified": true
+   },
+   {
+    "label": "Temporary Certificate of Occupancy",
+    "amount": "$75.00",
+    "quote": "Temporary Certificate of Occupancy is: ... $75.00 ... $50.00 / name change",
+    "source_url": "https://www.carteret.net/wp-content/uploads/2020/05/Application-for-Residential-Certificate-of-Continued-Occupancy.pdf",
+    "verified": true
+   },
+   {
+    "label": "Name change (as printed on the form)",
+    "amount": "$50.00",
+    "quote": "Temporary Certificate of Occupancy is: ... $75.00 ... $50.00 / name change",
+    "source_url": "https://www.carteret.net/wp-content/uploads/2020/05/Application-for-Residential-Certificate-of-Continued-Occupancy.pdf",
+    "verified": true
+   },
+   {
+    "label": "Each additional inspection after the initial and one follow-up (non-compliance or no-show)",
+    "amount": "$50.00",
+    "quote": "Fee covers initial inspection and follow-up inspection. If additional inspections are required because of non-compliance or no-show, an additional $50.00 will be charged to the applicant for each additional inspection.",
+    "source_url": "https://www.carteret.net/wp-content/uploads/2020/05/Application-for-Residential-Certificate-of-Continued-Occupancy.pdf",
+    "verified": true
+   }
+  ],
+  "how_to_apply": "Fill out the Application for Certificate of Occupancy and the notarized Addendum for Residential Certificate of Continued Occupancy (owner, purchaser, realtor, closing date, attorneys, occupants). Submit it with payment to the Department of Code Enforcement, 61 Cooke Avenue, Carteret. Payment by cash, certified check, or attorney or broker check. The Building, Construction and Land Use page also says to email forms to SolteszJ@carteret.net.",
+  "application_url": "https://www.carteret.net/wp-content/uploads/2020/05/Application-for-Residential-Certificate-of-Continued-Occupancy.pdf",
+  "department_url": "https://www.carteret.net/construction-office-3/",
+  "phone": "732-541-3925",
+  "email": "Building@carteret.net",
+  "contact_name": "Debbie Bialowarczuk",
+  "contact_title": "Inspector / Property Maintenance",
+  "evidence": [
+   {
+    "url": "https://www.carteret.net/wp-content/uploads/2020/05/Application-for-Residential-Certificate-of-Continued-Occupancy.pdf",
+    "quote": "APPLICATION FOR CERTIFICATE OF OCCUPANCY",
+    "doc_date": "2020-03 (PDF created March 2020)",
+    "via": "pdf",
+    "verified": true
+   },
+   {
+    "url": "https://www.carteret.net/wp-content/uploads/2020/05/Application-for-Residential-Certificate-of-Continued-Occupancy.pdf",
+    "quote": "Purchaser’s name",
+    "doc_date": "2020-03",
+    "via": "pdf",
+    "verified": true
+   },
+   {
+    "url": "https://www.carteret.net/wp-content/uploads/2020/05/Application-for-Residential-Certificate-of-Continued-Occupancy.pdf",
+    "quote": "ADDENDUM FOR RESIDENTIAL CERTIFICATE OF CONTINUED OCCUPANCY",
+    "doc_date": "2020-03",
+    "via": "pdf",
+    "verified": true
+   },
+   {
+    "url": "https://www.carteret.net/wp-content/uploads/2020/05/Application-for-Residential-Certificate-of-Continued-Occupancy.pdf",
+    "quote": "Closing date",
+    "doc_date": "2020-03",
+    "via": "pdf",
+    "verified": true
+   },
+   {
+    "url": "https://www.carteret.net/wp-content/uploads/2020/05/Application-for-Residential-Certificate-of-Continued-Occupancy.pdf",
+    "quote": "THIS APPLICATION VOID AFTER NINETY DAYS FROM THE DATE OF ISSUANCE",
+    "doc_date": "2020-03",
+    "via": "pdf",
+    "verified": true
+   },
+   {
+    "url": "https://www.carteret.net/building-construction-land-use-forms/",
+    "quote": "Certification of Occupancy Application (Electronic Form)",
+    "doc_date": "2026-09 (page checked 2026-09-30)",
+    "via": "page",
+    "verified": true
+   },
+   {
+    "url": "https://www.carteret.net/construction-office-3/",
+    "quote": "Debbie Bialowarczuk - 732-541-3925 Inspector / Property Maintenance",
+    "doc_date": "2026-09",
+    "via": "page",
+    "verified": true
+   },
+   {
+    "url": "https://www.carteret.net/construction-office-3/",
+    "quote": "Email Forms to SolteszJ@carteret.net",
+    "doc_date": "2026-09",
+    "via": "page",
+    "verified": true
+   },
+   {
+    "url": "https://www.carteret.net/construction-office-3/",
+    "quote": "John Soltesz Construction Department Head / Construction Official",
+    "doc_date": "2026-09",
+    "via": "page",
+    "verified": true
+   }
+  ],
+  "confidence": "medium",
+  "notes": "The Borough posts an Application for Certificate of Occupancy with purchaser, realtor, listed price and occupant fields, plus an Addendum for Residential Certificate of Continued Occupancy that asks for the closing date and the seller and buyer attorneys. That shows the certificate is issued on a sale of a 1 or 2 family home. The Borough code itself (ecode360 CA1020) could not be opened, so the ordinance wording was not seen; search summaries quoting a continuing occupancy ordinance could not be tied to Carteret and were not used. The form is from March 2020, so fees may have changed. The form lists a $50.00 fee for a name change next to the $75.00 temporary certificate; what the name change fee covers is not explained. The separate Certificate of Habitability ($50.00) on the same forms page is for lessees (rentals), not sales. The Addendum is a sworn owner self-certification and the Borough reserves the right to inspect later. In the fee quotes, \"...\" stands for the dotted leader lines printed on the form."
+ },
+ "fire_cert": {
+  "requirements": [
+   "Borough CO addendum: battery powered smoke and CO alarms must have 10 year sealed batteries"
+  ],
+  "authorities": [
+   {
+    "name": "Carteret Fire Department, Fire Prevention (Fire Official)",
+    "type": "municipal_fire_bureau",
+    "area_served": "Entire borough",
+    "lead_time": "",
+    "fees": [],
+    "how_to_apply": "No smoke and CO certificate application or fee schedule is posted on the Borough website. The state fire directory lists the Borough Building Department at 732-541-3810 as the smoke detector compliance contact, and the Borough page lists 732-541-3810 as Building Inspection Scheduling. Call to confirm how to request the certificate.",
+    "application_url": "",
+    "department_url": "https://www.carteret.net/fire-department/",
+    "phone": "732-541-8000",
+    "email": "wahle@carteret.net",
+    "contact_name": "Eric Wahl",
+    "contact_title": "Chief of Department/Fire Official",
+    "evidence": [
+     {
+      "url": "https://www.carteret.net/fire-department/",
+      "quote": "Chief of Department/Fire Official: Chief Eric Wahl",
+      "doc_date": "2026-09",
+      "via": "page",
+      "verified": true
+     },
+     {
+      "url": "https://www.carteret.net/fire-department/",
+      "quote": "Fire Prevention and Investigations: LT. Kevin Gomm",
+      "doc_date": "2026-09",
+      "via": "page",
+      "verified": true
+     },
+     {
+      "url": "https://www.carteret.net/fire-department/",
+      "quote": "Phone: (732) 541-8000",
+      "doc_date": "2026-09",
+      "via": "page",
+      "verified": true
+     },
+     {
+      "url": "https://nj.gov/dca/dfs/pdf/ANNUAL%20REGISTRY/THIRD%20QUARTER%20LEA%20REGISTRY%202026.pdf",
+      "quote": "F Carteret Borough",
+      "doc_date": "2026-07 (registry as of June 30, 2026)",
+      "via": "pdf",
+      "verified": true
+     },
+     {
+      "url": "https://www.nj.gov/dca/dfs/pdf/fire%20directory_county%20summary/fire_code_enforcement_director.pdf",
+      "quote": "LEAID: 1201-001 Enf Auth. Fire Dept Fire Official Eric Wahl Phone (732) 541-4387 Email wahle@carteret.net",
+      "doc_date": "2025-07-31 (survey date)",
+      "via": "state_directory",
+      "verified": true
+     },
+     {
+      "url": "https://www.nj.gov/dca/dfs/pdf/fire%20directory_county%20summary/fire_code_enforcement_director.pdf",
+      "quote": "Phone (732) 541-3810 SMOKE DETECTOR COMPLIANCE Carteret Boro Bldg Dept",
+      "doc_date": "2025-07-31 (survey date)",
+      "via": "state_directory",
+      "verified": true
+     },
+     {
+      "url": "https://www.carteret.net/construction-office-3/",
+      "quote": "Building Inspection Scheduling - 732-541-3810",
+      "doc_date": "2026-09",
+      "via": "page",
+      "verified": true
+     }
+    ],
+    "confidence": "low"
+   }
+  ],
+  "notes": "The NJ DCA registry (July 2026) lists the Carteret Fire Department as the local fire enforcing agency (code F). The state fire directory (survey 7/31/2025) names Eric Wahl as Fire Official, phone (732) 541-4387, email wahle@carteret.net (the same page also prints whale@carteret.net for the department, which looks like a typo), and names the Carteret Borough Building Department, (732) 541-3810, as the smoke detector compliance contact. The Borough CO addendum includes the smoke alarm, CO alarm and extinguisher checks as sworn owner statements, so the smoke and CO check may be handled with the Borough CO; this is not stated outright. No smoke certificate fee was found online. The addendum still lists a 2A:10BC extinguisher; that form predates P.L.2025, c.19."
+ },
+ "other_items": [
+  {
+   "label": "Open permits",
+   "detail": "The CO addendum requires the owner to certify there is no unpermitted work and no open permits.",
+   "source_url": "https://www.carteret.net/wp-content/uploads/2020/05/Application-for-Residential-Certificate-of-Continued-Occupancy.pdf"
+  }
+ ],
+ "open_questions": [
+  "Ordinance text for the resale Certificate of Occupancy (ecode360 CA1020) could not be opened; the requirement is inferred from the Borough application form.",
+  "Are the March 2020 CO fees ($100 1-family, $150 2-family) still current, and what is the lead time?",
+  "Who issues the smoke/CO certificate (Fire Department or Building Department at 732-541-3810), and what is the fee?"
+ ],
+ "verification": {
+  "fees": 5,
+  "fee_ok": 5,
+  "fee_bad": 0,
+  "fee_unchecked": 0,
+  "quotes": 16,
+  "q_ok": 16,
+  "q_bad": 0,
+  "q_unchecked": 0
+ }
+}

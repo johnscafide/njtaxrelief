@@ -1,0 +1,194 @@
+{
+ "municipality_code": "0109",
+ "municipality": "Estell Manor",
+ "county": "ATLANTIC",
+ "checked_at": "2026-09-30",
+ "resale_co": {
+  "status": "required",
+  "name": "Certificate of Occupancy - Sale (Housing Inspector's Certificate of Occupancy inspection)",
+  "issued_by": "City of Estell Manor Housing Inspector",
+  "lead_time": "",
+  "valid_for": "",
+  "requirements": [],
+  "fees": [
+   {
+    "label": "Certificate of Occupancy inspection (sale or rental)",
+    "amount": "$50.00",
+    "quote": "Inspection Fee: $50.00, Payable to the \"City of Estell Manor\"",
+    "source_url": "http://www.estellmanor.org/images/new_co_chase.pdf",
+    "verified": null
+   }
+  ],
+  "how_to_apply": "Fill out the City's Certificate of Occupancy Application, tick 'Certificate of Occupancy - Sale', list the settlement date and a contact person to set up the appointment, and submit it to the Housing Inspector at 148 Cumberland Avenue, Estell Manor, NJ 08319 with the $50.00 fee payable to the City of Estell Manor. The smoke/CO certificate is a separate application through the NJ DCA portal.",
+  "application_url": "http://www.estellmanor.org/images/new_co_chase.pdf",
+  "department_url": "http://www.estellmanor.org/departments.html",
+  "phone": "609-476-2692 ext. 104",
+  "email": "zoning@estellmanor.org",
+  "contact_name": "Chase Farabella",
+  "contact_title": "Housing Inspector (also Zoning Officer and Code Enforcement)",
+  "evidence": [
+   {
+    "url": "http://www.estellmanor.org/images/new_co_chase.pdf",
+    "quote": "Request for: ( ) Certificate of Occupancy, Sale ( ) Certificate of Occupancy, Rental",
+    "doc_date": "2025-08 (scan dated 2025-08-26)",
+    "via": "pdf",
+    "verified": null
+   },
+   {
+    "url": "http://www.estellmanor.org/images/new_co_chase.pdf",
+    "quote": "This is in addition to the Housing Inspector's Certificates of Occupancy inspection or Rental Certificate of Habitability inspection.",
+    "doc_date": "2025-08",
+    "via": "pdf",
+    "verified": null
+   },
+   {
+    "url": "http://www.estellmanor.org/images/new_co_chase.pdf",
+    "quote": "Chase Farabella, Housing Inspector 148 Cumberland Avenue Estell Manor, NJ 08319 (609) 476-2692",
+    "doc_date": "2025-08",
+    "via": "pdf",
+    "verified": null
+   },
+   {
+    "url": "http://www.estellmanor.org/formslinks.html",
+    "quote": "Certificate of Occupancy Application",
+    "doc_date": "2026-09-30 (page fetched)",
+    "via": "page",
+    "verified": true
+   },
+   {
+    "url": "http://www.estellmanor.org/contactus.html",
+    "quote": "Zoning Officer Chase Farabella (609) 476-2692 x104 zoning@estellmanor.org",
+    "doc_date": "2026-09-30 (page fetched)",
+    "via": "page",
+    "verified": true
+   },
+   {
+    "url": "http://www.estellmanor.org/departments.html",
+    "quote": "Housing Officer Chase Farabella",
+    "doc_date": "2026-09-30 (page fetched)",
+    "via": "page",
+    "verified": true
+   }
+  ],
+  "confidence": "medium",
+  "notes": "The City's Certificate of Occupancy Application (scanned 8/26/2025) offers a 'Certificate of Occupancy - Sale' with a $50.00 inspection fee, and its second page says the state smoke/CO certificate for a title transfer is 'in addition to the Housing Inspector's Certificates of Occupancy inspection'. The form does not list what is inspected, a lead time or how long the certificate is valid. The City code (ecode360 ES0890) could not be opened to confirm the ordinance wording. The same form covers rentals (Certificate of Occupancy - Rental), and the City also has a rental registration form."
+ },
+ "fire_cert": {
+  "requirements": [
+   "Secondary power source identification label for homes with solar, generators or batteries (the State application is now the CSACMASPSIL)",
+   "The City's CO form (August 2025) still describes the state certificate as covering a fire extinguisher"
+  ],
+  "authorities": [
+   {
+    "name": "NJ DCA Division of Fire Safety, Bureau of Fire Code Enforcement",
+    "type": "state_dca",
+    "area_served": "Entire city",
+    "lead_time": "More than 10 business days before closing for the lowest fee",
+    "fees": [
+     {
+      "label": "More than 10 business days before closing",
+      "amount": "$45",
+      "quote": "If you are applying for a certificate more than ten business days from the closing date the fee is $45 dollars",
+      "source_url": "https://firesolutions.dca.nj.gov/ultra-fire-home/smoke-application-create/",
+      "verified": null
+     },
+     {
+      "label": "4 to 10 business days before closing",
+      "amount": "$90",
+      "quote": "if applying 4 to 10 business days from the closing date the fee is $90",
+      "source_url": "https://firesolutions.dca.nj.gov/ultra-fire-home/smoke-application-create/",
+      "verified": null
+     },
+     {
+      "label": "Less than 4 business days before closing",
+      "amount": "$161",
+      "quote": "if the closing date is less than four business days the fee is $161.",
+      "source_url": "https://firesolutions.dca.nj.gov/ultra-fire-home/smoke-application-create/",
+      "verified": null
+     }
+    ],
+    "how_to_apply": "Apply online through the NJ DCA Fire Safety portal (Apply Smoke Certification). Pay by e-check or credit card before submitting; a valid email address is required. The City's instructions: complete the Smoke Cert data, submit, pay, and wait for the status 'Approved-Pending Inspection'. For help email BFCECodeAdmin@dca.nj.gov or call 609-633-6132.",
+    "application_url": "https://firesolutions.dca.nj.gov/ultra-fire-home/smoke-application-create/",
+    "department_url": "https://www.nj.gov/dca/dfs/offices/bfce.shtml",
+    "phone": "609-633-6132",
+    "email": "BFCECodeAdmin@dca.nj.gov",
+    "contact_name": "Louis Kilmer",
+    "contact_title": "Bureau Chief, Bureau of Fire Code Enforcement (listed as the Fire Official for Estell Manor in the state fire directory)",
+    "evidence": [
+     {
+      "url": "https://nj.gov/dca/dfs/pdf/ANNUAL%20REGISTRY/THIRD%20QUARTER%20LEA%20REGISTRY%202026.pdf",
+      "quote": "S Estell Manor City",
+      "doc_date": "2026-07",
+      "via": "pdf",
+      "verified": true
+     },
+     {
+      "url": "https://www.nj.gov/dca/dfs/pdf/fire%20directory_county%20summary/state_towns%207_17_26.pdf",
+      "quote": "ESTELLE MANOR 0109 SC",
+      "doc_date": "2026-07-17 (SC = Smoke Certs)",
+      "via": "pdf",
+      "verified": true
+     },
+     {
+      "url": "https://www.nj.gov/dca/dfs/pdf/fire%20directory_county%20summary/fire_code_enforcement_director.pdf",
+      "quote": "LEAID: 0109-999 Enf Auth. State Fire Official Louis Kilmer Phone (609)633-6132 Addr: PO Box 809 Trenton NJ 08625-0809",
+      "doc_date": "2026-01-27 (survey date)",
+      "via": "state_directory",
+      "verified": true
+     },
+     {
+      "url": "http://www.estellmanor.org/images/new_co_chase.pdf",
+      "quote": "An application for Smoke Detector and Carbon Monoxide Alarm and Fire Extinguisher Compliance must be obtained when transferring property title or renting to a new tenant for any premise.",
+      "doc_date": "2025-08",
+      "via": "pdf",
+      "verified": null
+     },
+     {
+      "url": "http://www.estellmanor.org/images/new_co_chase.pdf",
+      "quote": "Bureau of Fire Code Enforcement, for assistance with registrations, inspections, invoices, certificates, and residential smoke certificate inspections, please send a detailed email to BFCECodeAdmin@dca.nj.gov. Phone Number: 609-633-6132",
+      "doc_date": "2025-08",
+      "via": "pdf",
+      "verified": null
+     },
+     {
+      "url": "https://firesolutions.dca.nj.gov/ultra-fire-home/smoke-application-create/",
+      "quote": "Please complete the following information to apply for a Certificate of Smoke Alarm, Carbon Monoxide Alarm, and Secondary Power Source Identification Label Compliance (CSACMASPSIL). You will be required to pay, via e-check or credit card, before you can submit this application. This application requires a valid email address.",
+      "doc_date": "2026-09-30 (page fetched)",
+      "via": "page",
+      "verified": null
+     },
+     {
+      "url": "https://firesolutions.dca.nj.gov/ultra-fire-home/smoke-application-create/",
+      "quote": "if your property is heated with electricity and does not require a carbon monoxide alarm, check the fourth box and send an email to BFCE_CSDCMAC@dca.nj.gov stating that you are not subject to that requirement.",
+      "doc_date": "2026-09-30 (page fetched)",
+      "via": "page",
+      "verified": null
+     },
+     {
+      "url": "https://www.nj.gov/dca/dfs/offices/bfce.shtml",
+      "quote": "Louis Kilmer, Bureau Chief CPM Address: P.O. Box 809, Trenton, NJ 08625-0809 Phone: (609) 633-6106",
+      "doc_date": "2026-09-30 (page fetched)",
+      "via": "page",
+      "verified": true
+     }
+    ],
+    "confidence": "high"
+   }
+  ],
+  "notes": "NJ DCA lists Estell Manor as State enforced (S) and its July 17, 2026 list marks it 'SC' (the State issues smoke certificates). The City's own CO application tells sellers to get the fire safety certificate through the State system. The City's form (2025) names the certificate with a fire extinguisher; the current State application title (CSACMASPSIL) reflects P.L.2025, c.19, which replaced the extinguisher with a secondary power source label. The directory lists (609) 633-6132; the Bureau's page lists (609) 633-6106 for Louis Kilmer."
+ },
+ "other_items": [],
+ "open_questions": [
+  "What the City's sale CO inspection covers, how far ahead to apply and how long the certificate is valid are not stated on the form; confirm with the Housing Inspector at (609) 476-2692 ext. 104."
+ ],
+ "verification": {
+  "fees": 4,
+  "fee_ok": 0,
+  "fee_bad": 0,
+  "fee_unchecked": 4,
+  "quotes": 14,
+  "q_ok": 7,
+  "q_bad": 0,
+  "q_unchecked": 7
+ }
+}

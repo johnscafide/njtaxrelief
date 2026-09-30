@@ -5,18 +5,77 @@
  "checked_at": "2026-09-30",
  "resale_co": {
   "status": "required",
-  "name": "Certificate of Change in Ownership (Chapter 112 Certificates of Occupancy)",
-  "issued_by": "Borough of Magnolia Construction Office",
+  "name": "Certificate of Continued Occupancy (Certificate of Change in Ownership / Change in Occupancy), Borough Code Chapter 112",
+  "issued_by": "Borough of Magnolia Construction Office (building inspector or housing inspector)",
   "lead_time": "",
   "valid_for": "",
-  "requirements": [],
-  "fees": [],
-  "how_to_apply": "",
+  "requirements": [
+   "Home must meet the property maintenance standards the Borough adopted (BOCA National Property Maintenance Code, 1993) and all Borough ordinances",
+   "Hard-wired, interconnected smoke detectors with battery backup on or near the ceiling of each level",
+   "Battery smoke detectors in each bedroom or sleeping area",
+   "Smoke detectors must be certified by the fire official or other authorized person before the certificate is issued",
+   "Any repairs needed for the certificate are the current owner's responsibility, even if the problem was caused by a previous owner",
+   "Under Ordinance 12-2026 (adopted Sept 2, 2026) the owner stays responsible until the certificate is issued, no matter what the sale contract, settlement or escrow agreement says; each day of violation after notice is a separate offense"
+  ],
+  "fees": [
+   {
+    "label": "Certificate of Continued Occupancy inspection when a home is sold (Borough page; same as Code 15.112-11 \"Change of property ownership, Residential\")",
+    "amount": "$75.00",
+    "quote": "turn it into the Construction Office with the $75.00 fee",
+    "source_url": "https://web.archive.org/web/20260111210243/https://www.magnolia-nj.org/construction/page/certificate-change-occupancy",
+    "verified": true
+   }
+  ],
+  "how_to_apply": "Fill out the Certificate of Continued Occupancy Application (linked from the Borough's \"Certificate of Change in Occupancy\" page, with an inspection checklist) and turn it in to the Construction Office, 438 W. Evesham Ave, Magnolia, with the $75.00 fee. An inspector will contact you to schedule. The owner or the owner's agent must apply.",
   "application_url": "",
-  "department_url": "https://www.magnolia-nj.org/construction/page/certificate-change-ownership",
+  "department_url": "https://www.magnolia-nj.org/construction/page/certificate-change-occupancy",
+  "contact_name": "",
+  "contact_title": "Construction Office",
   "phone": "856-783-1520",
   "email": "",
   "evidence": [
+   {
+    "url": "https://web.archive.org/web/20260111210243/https://www.magnolia-nj.org/construction/page/certificate-change-occupancy",
+    "quote": "Pursuant to Borough Code 17.270-31 Certificate of Occupancy Inspections are required whenever a home is being sold.",
+    "doc_date": "2026-01 (Internet Archive capture of Jan 11, 2026; live page behind a Cloudflare check)",
+    "via": "page",
+    "verified": true
+   },
+   {
+    "url": "https://web.archive.org/web/20260111210243/https://www.magnolia-nj.org/construction/page/certificate-change-occupancy",
+    "quote": "To schedule a Certificate of Continued Occupancy inspection, please fill out the form below, and turn it into the Construction Office with the $75.00 fee.",
+    "doc_date": "2026-01 (Internet Archive capture)",
+    "via": "page",
+    "verified": true
+   },
+   {
+    "url": "https://library.municode.com/nj/magnolia/codes/code_of_ordinances?nodeId=TIT15BUCO_CH112CEOC",
+    "quote": "It is the intention of the governing body to require a certificate of occupancy not only for the initial occupancy of a given structure or part of a structure, but upon any change of occupancy or change from one tenant to another, or prior to occupancy after a change of ownership.",
+    "doc_date": "2026-03 (Municode, Supp. No. 9, codified through Ord. No. 4-2026)",
+    "via": "page",
+    "verified": null
+   },
+   {
+    "url": "https://library.municode.com/nj/magnolia/codes/code_of_ordinances?nodeId=TIT15BUCO_CH112CEOC_15.112-11FE",
+    "quote": "Change of property ownership ... Residential, R1, R2, R3, R4 and RS .....$75.00",
+    "doc_date": "2025-09 (Code 15.112-11 as amended through Ord. No. 2025-09, Sept 18, 2025)",
+    "via": "page",
+    "verified": null
+   },
+   {
+    "url": "https://library.municode.com/nj/magnolia/codes/code_of_ordinances?nodeId=TIT15BUCO_CH112CEOC",
+    "quote": "In cases regarding a change of ownership, any alterations, corrections, installations or the like that are required to be done for a certificate of occupancy or certificate of continued occupancy to be issued shall be the responsibility of the current owner of the property even if the change is made by a previous owner.",
+    "doc_date": "2026-03 (Municode, Code 15.112-4 A)",
+    "via": "page",
+    "verified": null
+   },
+   {
+    "url": "https://library.municode.com/nj/magnolia/ordinances/code_of_ordinances?nodeId=1442309",
+    "quote": "The obligations imposed by this Chapter shall remain the responsibility of the owner notwithstanding any contract of sale, settlement agreement, escrow agreement, private agreement, or other arrangement between the seller and purchaser.",
+    "doc_date": "2026-09-02 (Ordinance 12-2026, adopted Sept 2, 2026; scanned PDF in the Municode ordinance bank)",
+    "via": "pdf",
+    "verified": null
+   },
    {
     "url": "https://www.magnolia-nj.org/construction/page/certificate-change-ownership",
     "quote": "Certificate of Change in Ownership Inspections are required whenever a home is being sold",
@@ -32,8 +91,8 @@
     "verified": null
    }
   ],
-  "confidence": "low",
-  "notes": "magnolia-nj.org is behind a Cloudflare bot check (HTTP 403 'Just a moment...') for curl and WebFetch, so no Borough page or form could be opened; the Borough code (ecode360) is also blocked. Evidence comes from search results only: an exact-phrase search for the quoted sentence returned the Borough's 'Certificate of Change in Ownership' page as the top result. Search summaries (not verified word for word) also said the form is turned in to the Construction Office with a $75.00 fee, and that Ordinance 12-2026 (introduced August 20, 2026, adopted September 2, 2026) amends Chapter 112 'Certificates of Occupancy' to discourage property transfers before CO compliance. No fee is recorded here because the exact text could not be confirmed. Construction Office phone is from the NJ DCA fire directory smoke detector compliance listing."
+  "confidence": "high",
+  "notes": "Settled in round 3. The Borough code on Municode (Chapter 112, Certificates of Occupancy) requires a certificate before occupancy after a change of ownership, issued by the building or housing inspector, and Code 15.112-11 sets the fee for \"Change of property ownership\" of residential R1 to R4 and RS properties at $75.00. The Borough's own page (Internet Archive copy of Jan 11, 2026; live magnolia-nj.org is behind a Cloudflare check that was not bypassed) says the inspection is required whenever a home is sold and the form goes to the Construction Office with the $75.00 fee. The page moved from /certificate-change-ownership to /certificate-change-occupancy. Code 15.112-11 C: if violations are still not fixed after the first inspection and one reinspection, or the applicant misses the reinspection, the inspector may charge a reinspection fee equal to a new application. The Code also lists $150.00 for a \"Certificate of continued occupancy, UCC permits may be required\" and $50.00 per extension of a temporary CO; the $75.00 change-of-ownership fee is the one the Borough page quotes for home sales. Failure to comply: fine up to $500.00 per day (15.112-12). The application itself is an Adobe cloud link and the checklist file was not archived, so neither was read. Phone is the Borough Hall / Construction Office number listed in the DCA fire directory."
  },
  "fire_cert": {
   "requirements": [],
@@ -47,6 +106,8 @@
     "how_to_apply": "",
     "application_url": "",
     "department_url": "https://www.magnolia-nj.org/construction/page/certificate-change-ownership",
+    "contact_name": "",
+    "contact_title": "Construction Office (smoke detector compliance contact in the DCA directory)",
     "phone": "856-783-1520",
     "email": "",
     "evidence": [
@@ -89,24 +150,22 @@
     "confidence": "medium"
    }
   ],
-  "notes": "The NJ DCA Division of Fire Safety is Magnolia's Uniform Fire Code enforcing agency ('S' = State in the July 2026 LEA Registry; Fire Official Louis Kilmer, NJ Div Fire Safety). However, on the DCA 'State Enforced Towns' list (revised 7/17/2026), Magnolia is listed WITHOUT the 'SC' (Smoke Certs) mark, while nearby Stratford and Woodlynne have it. The DCA fire directory lists the smoke detector compliance contact for Magnolia as the Magnolia Borough Construction Office, 438 West Evesham Ave, (856) 783-1520. So the smoke/CO/extinguisher certificate appears to be issued locally by the Borough, not by DCA. Fees and the application form could not be read because the Borough website is behind a Cloudflare check. A search summary of the Borough code (ecode360, not verified word for word) described a certificate of smoke detector compliance from the Borough fire official before occupancy, with fees based on time remaining before the change of occupant."
+  "notes": "The NJ DCA Division of Fire Safety is Magnolia's Uniform Fire Code enforcing agency ('S' = State in the July 2026 LEA Registry; Fire Official Louis Kilmer, NJ Div Fire Safety). However, on the DCA 'State Enforced Towns' list (revised 7/17/2026), Magnolia is listed WITHOUT the 'SC' (Smoke Certs) mark, while nearby Stratford and Woodlynne have it. The DCA fire directory lists the smoke detector compliance contact for Magnolia as the Magnolia Borough Construction Office, 438 West Evesham Ave, (856) 783-1520. So the smoke/CO/extinguisher certificate appears to be issued locally by the Borough, not by DCA. Fees and the application form could not be read because the Borough website is behind a Cloudflare check. A search summary of the Borough code (ecode360, not verified word for word) described a certificate of smoke detector compliance from the Borough fire official before occupancy, with fees based on time remaining before the change of occupant. Round 3: the Borough Code on Municode still contains Chapter 142 Article II (Ord. 2018-05), which made the Regional Fire Prevention Alliance (then based in Magnolia) the local enforcing agency and lists smoke/CO certificate fees of $56.00 (14 or more business days before settlement), $64.00 (8 to 13 days), $96.00 (4 to 7 days) and $161.00 (3 days or less), one reinspection included, certificate valid 90 days. That arrangement no longer matches the July 2026 DCA registry (Magnolia = State; the Alliance is now run by Barrington and does not list Magnolia), so these amounts are not recorded as current fees. Code 15.112-2 also says the Borough CO is issued only after the fire official (or other authorized person) certifies the smoke detectors, so the smoke check may be part of the $75.00 Borough inspection; confirm with the Construction Office."
  },
  "other_items": [],
  "open_questions": [
-  "Resale CO fee: a search summary mentioned $75.00 paid to the Construction Office, but the exact text could not be confirmed (site blocked).",
-  "Smoke/CO/extinguisher certificate fees and form: not readable (Borough site and ecode360 both blocked).",
-  "What the Certificate of Change in Ownership inspection checks, lead time, and validity: not found.",
-  "Ordinance 12-2026 (adopted September 2, 2026) may change owner responsibilities after transfer; text not reviewed.",
-  "Confirm whether the Construction Office or a Borough fire official issues the smoke certificate (DCA directory says Construction Office)."
+  "Who issues the smoke/CO certificate for a Magnolia sale (Construction Office per the DCA directory) and whether it is included in the $75.00 Certificate of Continued Occupancy inspection or charged separately (old Code Chapter 142 fees: $56 / $64 / $96 / $161).",
+  "Lead time and how long the Certificate of Continued Occupancy is valid (not published).",
+  "Current application form (an Adobe cloud link on the Borough page) and inspection checklist were not read."
  ],
  "verification": {
-  "fees": 0,
-  "fee_ok": 0,
+  "fees": 1,
+  "fee_ok": 1,
   "fee_bad": 0,
   "fee_unchecked": 0,
-  "quotes": 7,
-  "q_ok": 5,
+  "quotes": 13,
+  "q_ok": 7,
   "q_bad": 0,
-  "q_unchecked": 2
+  "q_unchecked": 6
  }
 }

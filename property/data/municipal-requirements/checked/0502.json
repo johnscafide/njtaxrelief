@@ -1,0 +1,191 @@
+{
+ "municipality_code": "0502",
+ "municipality": "Cape May",
+ "county": "CAPE MAY",
+ "checked_at": "2026-09-30",
+ "resale_co": {
+  "status": "required",
+  "name": "Certificate of Zoning Compliance (transfer of title)",
+  "issued_by": "Construction & Zoning Office (Zoning Officer)",
+  "lead_time": "",
+  "valid_for": "",
+  "requirements": [
+   "Zoning compliance review of the property's use and number of units before transfer of title"
+  ],
+  "fees": [
+   {
+    "label": "Certificate of Zoning Compliance application",
+    "amount": "$85.00",
+    "quote": "Applicant's Signature: ____________________  Phone: ________________ Fee: $85.00",
+    "source_url": "https://evocloud-prod3-public.s3.us-east-2.amazonaws.com/3/media/734.pdf",
+    "verified": true
+   }
+  ],
+  "how_to_apply": "Fill out the Certificate of Zoning Compliance Application (block, lot, zoning district, current and new owners, use, number of units, settlement date) and submit it with the $85.00 fee to the Construction & Zoning Office, City Hall, 643 Washington Street, Cape May, NJ 08204.",
+  "application_url": "https://evocloud-prod3-public.s3.us-east-2.amazonaws.com/3/media/734.pdf",
+  "department_url": "https://www.capemaycity.com/departments/ConstructionZoning",
+  "phone": "609-884-9556",
+  "email": "bbritton@capemaycity.com",
+  "contact_name": "Bruce Britton",
+  "contact_title": "Zoning Officer",
+  "evidence": [
+   {
+    "url": "https://evocloud-prod3-public.s3.us-east-2.amazonaws.com/3/media/734.pdf",
+    "quote": "The information below is necessary for the issuance of a Certificate of Zoning Compliance for the transfer of title to any building, structure or unit, within the City of Cape May. The Certificate of Zoning Compliance will be issued in accordance with Section 199-5., of the City of Cape May Code.",
+    "doc_date": "2018-05 (form footer 05/2018)",
+    "via": "pdf",
+    "verified": true
+   },
+   {
+    "url": "https://www.capemaycity.com/forms-center",
+    "quote": "Certificate of Zoning Compliance Application",
+    "doc_date": "",
+    "via": "page",
+    "verified": true
+   },
+   {
+    "url": "https://www.capemaycity.com/departments/ConstructionZoning",
+    "quote": "Zoning Officer Bruce Britton 609-884-9556 bbritton@capemaycity.com",
+    "doc_date": "",
+    "via": "page",
+    "verified": true
+   },
+   {
+    "url": "https://www.capemaycity.com/departments/ConstructionZoning",
+    "quote": "***FOR PERMIT AND INSPECTION REQUEST - 609-884-9555***",
+    "doc_date": "",
+    "via": "page",
+    "verified": true
+   }
+  ],
+  "confidence": "medium",
+  "notes": "The City requires a Certificate of Zoning Compliance for the transfer of title to any building, structure or unit (City Code Section 199-5, per the City's own application form dated 05/2018, fee $85.00). This is a zoning certificate, not a building or housing inspection; no separate resale certificate of occupancy or housing inspection was found on the Construction & Zoning or Code Enforcement pages. The form lists phone 609-884-9561 for Construction & Zoning (the Construction page now lists 609-884-9561 for the Historic Preservation Commission and 609-884-9555 as the main office line). The Construction Official is Lou Vito Jr (Plumbing Subcode Official / Construction Official, 609-884-9560, louv@capemaycity.com); office email construction@capemaycity.com. The code itself (ecode360 CA1942) could not be opened, so lead time and whether an inspection is done are not confirmed. The Fire Prevention Bureau also runs annual rental/business fire inspections (Ord. No. 364-2018); that is a rental program, not a resale requirement."
+ },
+ "fire_cert": {
+  "requirements": [
+   "Sale of Property Form (created March 2025) still names the certificate as covering a portable fire extinguisher, but the Bureau's web page says fire extinguishers are no longer required in one- or two-family dwellings for sales or rentals; if one is kept it must be maintained (approved hanger, serviced within 12 months)",
+   "Smoke alarms no older than 10 years; battery-only smoke alarms must be the 10-year sealed battery type (listed on the Bureau page as top rental violations)",
+   "Carbon monoxide alarm near sleeping areas and on every level when there are fuel-burning appliances, an attached garage or a fireplace"
+  ],
+  "authorities": [
+   {
+    "name": "City of Cape May Bureau of Fire Prevention",
+    "type": "municipal_fire_bureau",
+    "area_served": "Entire city",
+    "lead_time": "Apply more than 10 business days before settlement for the lowest fee",
+    "fees": [
+     {
+      "label": "Smoke/CO certificate (1-2 family), application received more than 10 business days from settlement",
+      "amount": "$150",
+      "quote": "More than (10) business days - $150",
+      "source_url": "https://www.capemaycity.com/media/Fire%20Prevention/Sale%20of%20Property%20Form.pdf",
+      "verified": true
+     },
+     {
+      "label": "Smoke/CO certificate (1-2 family), application received 4 to 10 business days from settlement",
+      "amount": "$250",
+      "quote": "Four (4) to (10) business days - $250",
+      "source_url": "https://www.capemaycity.com/media/Fire%20Prevention/Sale%20of%20Property%20Form.pdf",
+      "verified": true
+     },
+     {
+      "label": "Smoke/CO certificate (1-2 family), application received fewer than 4 business days from settlement",
+      "amount": "$375",
+      "quote": "Fewer than (4) business days - $375",
+      "source_url": "https://www.capemaycity.com/media/Fire%20Prevention/Sale%20of%20Property%20Form.pdf",
+      "verified": true
+     }
+    ],
+    "how_to_apply": "Fill out the Sale of Property Form (check the Certificate of Smoke Alarm, Carbon Monoxide Alarm option for 1-2 family dwellings, give the closing date and agent/title contact) and send it to the Bureau of Fire Prevention, fireprevention@capemaycity.com, 609-884-9599. Do not send payment with the application; the fee is set when the form is received and the Bureau invoices it (fire invoices can be paid online through the City's Tyler portal).",
+    "application_url": "https://www.capemaycity.com/media/Fire%20Prevention/Sale%20of%20Property%20Form.pdf",
+    "department_url": "https://www.capemaycity.com/departments/FirePrevention",
+    "phone": "609-884-9587",
+    "email": "mbarham@capemaycity.com",
+    "contact_name": "Mark Barham",
+    "contact_title": "Fire Official",
+    "evidence": [
+     {
+      "url": "https://www.capemaycity.com/media/Fire%20Prevention/Sale%20of%20Property%20Form.pdf",
+      "quote": "Certificate of Smoke Alarm, Carbon Monoxide Alarm, and Portable Fire Extinguisher Compliance (Choose this option for 1 to 2 family dwellings)",
+      "doc_date": "2025-03-18 (PDF created)",
+      "via": "pdf",
+      "verified": true
+     },
+     {
+      "url": "https://www.capemaycity.com/media/Fire%20Prevention/Sale%20of%20Property%20Form.pdf",
+      "quote": "Do not send payment in with application.",
+      "doc_date": "2025-03-18",
+      "via": "pdf",
+      "verified": true
+     },
+     {
+      "url": "https://www.capemaycity.com/departments/FirePrevention",
+      "quote": "Fire Official Mark Barham 609-884-9587 mbarham@capemaycity.com",
+      "doc_date": "",
+      "via": "page",
+      "verified": true
+     },
+     {
+      "url": "https://www.capemaycity.com/departments/FirePrevention",
+      "quote": "Main Line/Scheduling # 609-884-9599",
+      "doc_date": "",
+      "via": "page",
+      "verified": true
+     },
+     {
+      "url": "https://www.capemaycity.com/departments/FirePrevention",
+      "quote": "Fire Extinguishers are no longer required in One- or Two Family Dwellings (For Sales and/or Rentals)",
+      "doc_date": "2026 (page mentions 1/12/26 invoices)",
+      "via": "page",
+      "verified": true
+     },
+     {
+      "url": "https://www.capemaycity.com/departments/staff_directory/FirePrevention/",
+      "quote": "Mohan, Nancy - Administrative Assistant Email: fireprevention@capemaycity.com Phone: 609-884-9599",
+      "doc_date": "",
+      "via": "page",
+      "verified": true
+     },
+     {
+      "url": "https://nj.gov/dca/dfs/pdf/ANNUAL%20REGISTRY/THIRD%20QUARTER%20LEA%20REGISTRY%202026.pdf",
+      "quote": "M Cape May City",
+      "doc_date": "2026-07 (registry as of June 30, 2026)",
+      "via": "pdf",
+      "verified": true
+     },
+     {
+      "url": "https://www.nj.gov/dca/dfs/pdf/fire%20directory_county%20summary/fire_code_enforcement_director.pdf",
+      "quote": "LEAID: 0502-001 Enf Auth. Municipal Fire Official Mark C Barham Phone (609) 884-9599",
+      "doc_date": "2026-07-22 (survey date)",
+      "via": "state_directory",
+      "verified": true
+     }
+    ],
+    "confidence": "high"
+   }
+  ],
+  "notes": "The City is the local fire enforcing agency (DCA registry code M). Fees are printed on the Bureau's Sale of Property Form (PDF created 2025-03-18). The form also lists a Status of Fire Code letter at $125.00 for other uses (multiple dwellings, hotels, businesses); that is not the 1-2 family certificate. The Bureau office is at 712 Washington Street in the fire house. Other staff: Administrative Clerk Nancy Mohan (609-884-9599, fireprevention@capemaycity.com); Fire Inspectors Chris Larcombe (609-957-5382) and Casey Hunt (609-957-5318)."
+ },
+ "other_items": [
+  {
+   "label": "Certificate of Zoning Compliance for transfer of title",
+   "detail": "$85.00 application to the Construction & Zoning Office (form dated 05/2018); see resale_co.",
+   "source_url": "https://evocloud-prod3-public.s3.us-east-2.amazonaws.com/3/media/734.pdf"
+  }
+ ],
+ "open_questions": [
+  "Lead time and processing time for the Certificate of Zoning Compliance, and whether the $85.00 fee (2018 form) is current.",
+  "Whether the zoning officer inspects the property for the Certificate of Zoning Compliance or reviews records only.",
+  "Whether any water/sewer final reading is required at sale (not found on the Water & Sewer page)."
+ ],
+ "verification": {
+  "fees": 4,
+  "fee_ok": 4,
+  "fee_bad": 0,
+  "fee_unchecked": 0,
+  "quotes": 12,
+  "q_ok": 12,
+  "q_bad": 0,
+  "q_unchecked": 0
+ }
+}

@@ -1,0 +1,190 @@
+{
+ "municipality_code": "0506",
+ "municipality": "Middle Township",
+ "county": "CAPE MAY",
+ "checked_at": "2026-09-30",
+ "resale_co": {
+  "status": "not_required",
+  "name": "",
+  "issued_by": "",
+  "lead_time": "",
+  "valid_for": "",
+  "requirements": [],
+  "fees": [],
+  "how_to_apply": "",
+  "application_url": "",
+  "department_url": "https://middletownship.com/departments/contruction/",
+  "phone": "609-465-8740",
+  "email": "dspeigel@middletownship.com",
+  "contact_name": "Daniel Speigel",
+  "contact_title": "Construction Official",
+  "evidence": [
+   {
+    "url": "https://middletownship.com/departments/contruction/",
+    "quote": "Please be advised that the Township of Middle DOES NOT issue a Certificate of Occupancy or a Zoning Certificate for the transfer of a property/business nor for the renting of a property. The only time a Certificate of Occupancy is issued is at the origination of the building, change of use, reconstruction or an addition per the Uniform Construction Code 5:23-2.24.",
+    "doc_date": "2026-03 (page updated 2026-03-17)",
+    "via": "page",
+    "verified": true
+   },
+   {
+    "url": "https://middletownship.com/departments/contruction/",
+    "quote": "Daniel Speigel, Construction Official",
+    "doc_date": "2026-03",
+    "via": "page",
+    "verified": true
+   },
+   {
+    "url": "https://middletownship.com/departments/contruction/",
+    "quote": "10 South Boyd Street Cape May Court House, NJ 08210 Phone: (609) 465-8740",
+    "doc_date": "2026-03",
+    "via": "page",
+    "verified": true
+   }
+  ],
+  "confidence": "high",
+  "notes": "The Construction page says in writing that the Township does not issue a Certificate of Occupancy or a Zoning Certificate for the transfer of a property or for renting. The Construction Official's email comes from the mailto link on his name. Zoning Office: Rachel Shepherd, Zoning Officer, (609) 465-8742, rmshepherd@middletownship.com. The only resale item found is the fire district Bureau of Fire Prevention certificate (see fire_cert)."
+ },
+ "fire_cert": {
+  "requirements": [
+   "Smoke alarms by year built: before 1977, 10-year sealed battery alarms on each level and outside each sleeping area; newer homes need AC-powered (hardwired) alarms per the construction code of their year, interconnected from August 1984, and in each bedroom with battery backup from March 1991",
+   "Do not replace AC-powered alarms with battery alarms; alarms over 10 years old (or with no date) must be replaced; no tape or velcro mounting",
+   "Low-voltage fire alarm systems in homes built 1977 or later must be kept and tested by a NJ licensed alarm contractor, with the passed report sent to the Bureau before the inspection; systems installed 2011 or later must be monitored",
+   "CO alarm (UL 2034) in the hallway within 10 feet of each sleeping area when there is a fuel-burning appliance or attached garage, plus one in any bedroom with a fuel-burning appliance; not more than 10 years old",
+   "Portable fire extinguisher 2-A:10-B:C, no larger than 10 lbs, new or tagged within 12 months, on the manufacturer's bracket within 10 feet of the kitchen, top no higher than 5 feet (still listed in the 2025 packet)",
+   "Secondary power source label within 18 inches of the main electrical panel and meter for homes with solar, backup generators or batteries",
+   "Certificate will not be issued if there are any open construction permits"
+  ],
+  "authorities": [
+   {
+    "name": "Bureau of Fire Prevention, Middle Township Fire Districts (run by Fire District #1)",
+    "type": "fire_district",
+    "area_served": "Entire township (Fire Districts 1, 2, 3 and 4; Fire District #2 closed its own bureau office on April 27, 2026 and sends inquiries to the District #1 bureau)",
+    "lead_time": "Apply more than 10 days before closing for the lowest fee; the certificate must be used within six months",
+    "fees": [
+     {
+      "label": "Certificate, application received more than 10 days prior to closing",
+      "amount": "$78.00",
+      "quote": "Received more than 10 Days Prior to Closing $78.00",
+      "source_url": "https://assets.zyrosite.com/m6LZvpK60zuj57RE/2025-csacmapfec-application-packet-1-mjEGJvOnNVH91QGq.pdf",
+      "verified": true
+     },
+     {
+      "label": "Certificate, application received 4 to 10 days prior to closing",
+      "amount": "$115.00",
+      "quote": "4-10 Days Prior to Closing $115.00",
+      "source_url": "https://assets.zyrosite.com/m6LZvpK60zuj57RE/2025-csacmapfec-application-packet-1-mjEGJvOnNVH91QGq.pdf",
+      "verified": true
+     },
+     {
+      "label": "Certificate, application received less than 4 days prior to closing",
+      "amount": "$210.00",
+      "quote": "Less than 4 days Prior to Closing $210.00",
+      "source_url": "https://assets.zyrosite.com/m6LZvpK60zuj57RE/2025-csacmapfec-application-packet-1-mjEGJvOnNVH91QGq.pdf",
+      "verified": true
+     },
+     {
+      "label": "Reinspection",
+      "amount": "$75.00",
+      "quote": "THERE WILL BE A FEE OF $75.00 FOR REINSPECTIONS",
+      "source_url": "https://assets.zyrosite.com/m6LZvpK60zuj57RE/2025-csacmapfec-application-packet-1-mjEGJvOnNVH91QGq.pdf",
+      "verified": true
+     }
+    ],
+    "how_to_apply": "Download the 2025 Home Sale Application Packet (CSACMAPFEC) from the Fire District 1 Forms page, complete and initial all 4 pages (seller must sign), and submit it with a check or money order payable to Bureau of Fire Prevention to 115 Mechanic Street, Cape May Court House, NJ 08210 (firebureau@cmchfire.com, 609-465-8710). Forms dated before August 2025 are not accepted. Applications left in the mailbox count as received the next business day. Office hours Monday to Thursday 8:00am to 4:00pm, Friday 8:00am to 1:00pm.",
+    "application_url": "https://assets.zyrosite.com/m6LZvpK60zuj57RE/2025-csacmapfec-application-packet-1-mjEGJvOnNVH91QGq.pdf",
+    "department_url": "https://middletownshipfiredistrict1.com/forms",
+    "phone": "609-465-8710",
+    "email": "firebureau@cmchfire.com",
+    "contact_name": "Douglas Greenberg",
+    "contact_title": "Fire Official (per state fire directory)",
+    "evidence": [
+     {
+      "url": "https://assets.zyrosite.com/m6LZvpK60zuj57RE/2025-csacmapfec-application-packet-1-mjEGJvOnNVH91QGq.pdf",
+      "quote": "BUREAU OF FIRE PREVENTION MIDDLE TOWNSHIP FIRE DISTRICTS #1, 3 & 4 115 Mechanic Street Cape May Court House, NJ 08210 O: 609.465.8710 F: 609.465.3851 firebureau@cmchfire.com",
+      "doc_date": "2025-08 or later (packet says forms dated before August 2025 are not accepted)",
+      "via": "pdf",
+      "verified": true
+     },
+     {
+      "url": "https://assets.zyrosite.com/m6LZvpK60zuj57RE/2025-csacmapfec-application-packet-1-mjEGJvOnNVH91QGq.pdf",
+      "quote": "Application forms dated prior to August 2025 will not be accepted",
+      "doc_date": "2025",
+      "via": "pdf",
+      "verified": true
+     },
+     {
+      "url": "https://assets.zyrosite.com/m6LZvpK60zuj57RE/2025-csacmapfec-application-packet-1-mjEGJvOnNVH91QGq.pdf",
+      "quote": "Certificate shall NOT be issued if there are any OPEN construction permits",
+      "doc_date": "2025",
+      "via": "pdf",
+      "verified": true
+     },
+     {
+      "url": "https://assets.zyrosite.com/m6LZvpK60zuj57RE/2025-csacmapfec-application-packet-1-mjEGJvOnNVH91QGq.pdf",
+      "quote": "If change of occupancy specified in the application for the certificate does not occur within six months, a new application and fee shall be required.",
+      "doc_date": "2025",
+      "via": "pdf",
+      "verified": true
+     },
+     {
+      "url": "https://assets.zyrosite.com/m6LZvpK60zuj57RE/2025-csacmapfec-application-packet-1-mjEGJvOnNVH91QGq.pdf",
+      "quote": "the owner (will, shall or may) be subject to a penalty of $500.00 as per Middle Twp. Ordinance § 142-8-B(5)",
+      "doc_date": "2025",
+      "via": "pdf",
+      "verified": true
+     },
+     {
+      "url": "https://middletownshipfiredistrict2.com/",
+      "quote": "We would like to inform you that the Middle Township Fire District #2 Fire Prevention Bureau Office will be permanently closing. For any inquiries, we kindly encourage you to visit the Middle Township Fire District #1 Fire Prevention Bureau Office located at 115 E Mechanic St, Cape May Court House.",
+      "doc_date": "2026-04-27",
+      "via": "page",
+      "verified": true
+     },
+     {
+      "url": "https://assets.zyrosite.com/m6LZvpK60zuj57RE/bureau-hours-door-sign-Y4LDBO7RJjIMXgol.pdf",
+      "quote": "Monday - Thursday 8:00am - 4:00pm",
+      "doc_date": "",
+      "via": "pdf",
+      "verified": true
+     },
+     {
+      "url": "https://nj.gov/dca/dfs/pdf/ANNUAL%20REGISTRY/THIRD%20QUARTER%20LEA%20REGISTRY%202026.pdf",
+      "quote": "Middle Township FD#1 is the LEA for Middle Township FD#3, Middle Township #2 and Middle Township FD#4.",
+      "doc_date": "2026-07 (registry as of June 30, 2026)",
+      "via": "pdf",
+      "verified": true
+     },
+     {
+      "url": "https://www.nj.gov/dca/dfs/pdf/fire%20directory_county%20summary/fire_code_enforcement_director.pdf",
+      "quote": "LEAID: 0506-004 Enf Auth. District Fire Official Douglas Greenberg Phone (609) 465-8710 Addr: 115 Mechanic St Cape May Courthouse NJ 08210 Email greenbergdm@cmchfire.com",
+      "doc_date": "2026-08-17 (survey date)",
+      "via": "state_directory",
+      "verified": true
+     }
+    ],
+    "confidence": "high"
+   }
+  ],
+  "notes": "The DCA registry lists four Middle Township fire districts (D) and notes that Fire District #1 is the local enforcing agency for Districts 2, 3 and 4, so one Bureau of Fire Prevention at 115 Mechanic Street handles smoke/CO certificates township-wide. The packet header still names Districts #1, 3 & 4 because District #2 had its own bureau office until April 27, 2026. The Fire Official's name comes from the state fire directory (Douglas Greenberg, greenbergdm@cmchfire.com); the Fire District 1 website names Keith P. Arenberg (609-780-3233, arenbergkp@cmchfire.com) as its general contact without a title. The 2025 packet still requires a portable fire extinguisher even though P.L.2025, c.19 removed it from the state requirement. A $500 penalty applies for transferring the property before the certificate is issued."
+ },
+ "other_items": [
+  {
+   "label": "Open construction permits",
+   "detail": "The fire bureau will not issue the smoke/CO certificate while any construction permit is open.",
+   "source_url": "https://assets.zyrosite.com/m6LZvpK60zuj57RE/2025-csacmapfec-application-packet-1-mjEGJvOnNVH91QGq.pdf"
+  }
+ ],
+ "open_questions": [
+  "Whether the fire bureau will keep enforcing the fire extinguisher item after P.L.2025, c.19."
+ ],
+ "verification": {
+  "fees": 4,
+  "fee_ok": 4,
+  "fee_bad": 0,
+  "fee_unchecked": 0,
+  "quotes": 12,
+  "q_ok": 12,
+  "q_bad": 0,
+  "q_unchecked": 0
+ }
+}

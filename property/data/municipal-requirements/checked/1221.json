@@ -1,0 +1,230 @@
+{
+ "municipality_code": "1221",
+ "municipality": "South Brunswick Township",
+ "county": "MIDDLESEX",
+ "checked_at": "2026-09-30",
+ "resale_co": {
+  "status": "required",
+  "name": "Residential Resale Certificate of Occupancy (RRCO)",
+  "issued_by": "Housing Officer, Planning and Zoning Office (Zoning Office)",
+  "lead_time": "",
+  "valid_for": "120 days (one extension of up to 30 days may be granted)",
+  "requirements": [
+   "General inspection of the visible parts of the home",
+   "No work done that needed a construction or zoning permit without one (for example replaced A/C, furnace or water heater, generator, radon system, addition, finished basement, fireplace or wood stove, shed over 200 sq ft, pool, hot tub, deck, gazebo)",
+   "No open permits or inspections on the property",
+   "No visible violations or unsafe conditions",
+   "Any unpermitted work must be permitted and inspected before the RRCO is issued, even if a prior owner did it"
+  ],
+  "fees": [
+   {
+    "label": "RRCO, detached homes (1- to 4-family)",
+    "amount": "$150.00",
+    "quote": "The fee for a residential resale certificate of occupancy (RRCO) for detached residential dwellings (including one-, two-, three-, and four-family dwellings) shall be $150.00.",
+    "source_url": "https://library.municode.com/nj/south_brunswick_township/codes/code_of_ordinances?nodeId=CH22BUBURE_ARTXIRECEOC_S22-426FE",
+    "verified": null
+   },
+   {
+    "label": "RRCO, townhome or condominium",
+    "amount": "$125.00",
+    "quote": "The fee for a residential resale certificate of occupancy for attached multifamily dwellings, commonly referred to as \"townhomes\" or \"condominiums,\" shall be $125.00.",
+    "source_url": "https://library.municode.com/nj/south_brunswick_township/codes/code_of_ordinances?nodeId=CH22BUBURE_ARTXIRECEOC_S22-426FE",
+    "verified": null
+   }
+  ],
+  "how_to_apply": "Apply online with the Township's Residential Resale Certificate of Occupancy form (pay by credit card or e-check), or use the PDF application and mail a check payable to South Brunswick Township to the Zoning Office, PO Box 190, Monmouth Junction, NJ 08852. The application is not processed until payment is received. After the home passes, call the Planning Office the next day for the certificate (certificates are not issued in the field).",
+  "application_url": "https://sobrunswick.forms.govos.com/f/ResidentialCCO",
+  "department_url": "https://southbrunswicknj.gov/planning/housing-forms/",
+  "phone": "732-329-4000 ext. 7228",
+  "email": "",
+  "contact_name": "Mike Proietti",
+  "contact_title": "Resale forms contact, Planning and Zoning (title not shown)",
+  "evidence": [
+   {
+    "url": "https://library.municode.com/nj/south_brunswick_township/codes/code_of_ordinances?nodeId=CH22BUBURE_ARTXIRECEOC_S22-425RERECEOCRRRE",
+    "quote": "No owner, agent or broker shall sell, transfer or grant with right of occupancy, whether or not for consideration, any residential dwelling, unit or premises on which a building is located and used for human occupancy, unless a residential resale certificate of occupancy is first obtained from the housing officer by use of the appropriate application and fees provided herein.",
+    "doc_date": "Ord. No. 2020-21 (5-26-2020), amended Ord. No. 2024-7 (4-17-2024)",
+    "via": "page",
+    "verified": null
+   },
+   {
+    "url": "https://library.municode.com/nj/south_brunswick_township/codes/code_of_ordinances?nodeId=CH22BUBURE_ARTXIRECEOC_S22-425RERECEOCRRRE",
+    "quote": "A residential resale certificate of occupancy shall be effective for a period of 120 days. One administrative extension of not more than 30 days may be granted by the housing officer.",
+    "doc_date": "2024-04",
+    "via": "page",
+    "verified": null
+   },
+   {
+    "url": "https://southbrunswicknj.gov/wp-content/uploads/2024/06/RRCO-application-060524.pdf",
+    "quote": "RESIDENTIAL RESALE CERTIFICATE OF OCCUPANCY APPLICATION (Chapter 22-425)",
+    "doc_date": "2024-06 (form marked Updated 060124)",
+    "via": "pdf",
+    "verified": true
+   },
+   {
+    "url": "https://southbrunswicknj.gov/wp-content/uploads/2024/06/RRCO-application-060524.pdf",
+    "quote": "Payment Required Condo/Townhome/Mobile Home ( ) $125.00 Single Family Dwelling: ( ) $150.00",
+    "doc_date": "2024-06",
+    "via": "pdf",
+    "verified": true
+   },
+   {
+    "url": "https://southbrunswicknj.gov/wp-content/uploads/2024/06/RRCO-application-060524.pdf",
+    "quote": "After your home has passed inspection by all our inspectors, the homeowner or agent may call the Planning Office the following day to obtain a certificate.",
+    "doc_date": "2024-06",
+    "via": "pdf",
+    "verified": true
+   },
+   {
+    "url": "https://southbrunswicknj.gov/planning/housing-forms/",
+    "quote": "Resale Forms, Mike Proietti 732-329-4000 x7228",
+    "doc_date": "2026-09 (page as fetched)",
+    "via": "page",
+    "verified": true
+   },
+   {
+    "url": "https://southbrunswicknj.gov/building/",
+    "quote": "While the Building Construction Department handles the permitting process, and issuing certificates of occupancy for new construction this department does not handle the procedure for resale of a home.",
+    "doc_date": "2026-09",
+    "via": "page",
+    "verified": true
+   },
+   {
+    "url": "https://southbrunswicknj.gov/building/",
+    "quote": "The information about any resale certificate of occupancy can be discussed with the Zoning department. Please contact them directly at 732-329-4000 x7240.",
+    "doc_date": "2026-09",
+    "via": "page",
+    "verified": true
+   },
+   {
+    "url": "https://sobrunswick.forms.govos.com/f/ResidentialCCO",
+    "quote": "If you prefer to send a check for the fee, it can be made payable to South Brunswick Township and mailed to South Brunswick Township, Zoning Office, PO Box 190, Monmouth Junction, NJ 08852.",
+    "doc_date": "2026-09",
+    "via": "page",
+    "verified": true
+   }
+  ],
+  "confidence": "high",
+  "notes": "Fees and rules are from Township Code sections 22-425 and 22-426 (Ord. 2020-21, amended by Ord. 2024-7 on April 17, 2024), read through the Municode library (Supplement 77), and match the June 2024 application. The Housing Forms page labels the online form 'Residential Certificate of Continued Occupancy (Sec 22-425)', but the form itself is titled Residential Resale Certificate of Occupancy. Exempt transfers include sales between spouses, divorce decrees, inheritance between family members, executor's deeds to class A beneficiaries, and court orders (Sec. 22-427). A buyer can take on the RRCO with a written waiver filed with the Housing Officer; the Township's sample waiver letter says the Fire Safety Bureau smoke/CO certificate is still required for the waiver. No lead time is published. Mike Proietti's title and email are not shown; the Zoning line on the Building page is 732-329-4000 x7240 and the application lists 732-329-4000 Ext. 7240."
+ },
+ "fire_cert": {
+  "requirements": [
+   "Owner or authorized representative self-certifies on a notarized form (Application and Certification in Lieu of Inspection); no fire inspection visit",
+   "Smoke alarms on each level including the basement (not attic or crawl space) and outside each separate sleeping area within 10 feet of bedrooms",
+   "CO alarm(s) outside sleeping areas",
+   "All alarms working and within the maker's warranty; battery smoke alarms must be the 10-year sealed battery type",
+   "AC powered or interconnected alarms in homes built after January 1977 must be kept working",
+   "Certificate is not transferable; a new application is needed if the change of occupancy does not happen within 6 months"
+  ],
+  "authorities": [
+   {
+    "name": "South Brunswick Township Fire Safety Bureau",
+    "type": "municipal_fire_bureau",
+    "area_served": "Entire township",
+    "lead_time": "",
+    "fees": [
+     {
+      "label": "Smoke/CO certificate application (non-refundable)",
+      "amount": "$50",
+      "quote": "Fee: $50 *** Application Fees are Non-refundable ***",
+      "source_url": "https://southbrunswicknj.gov/wp-content/uploads/2022/06/SMOKE_CERT_APP_AND_DIRECTIONS_2020_2-1.pdf",
+      "verified": true
+     },
+     {
+      "label": "Smoke/CO certificate application fee in Township Code",
+      "amount": "$50.00",
+      "quote": "The application fee for a Certificate of Smoke Detector and Carbon Monoxide Alarm Compliance (CSDCMAC) shall be $50.00 prior to any change of occupancy.",
+      "source_url": "https://library.municode.com/nj/south_brunswick_township/codes/code_of_ordinances?nodeId=CH46FIPRPR_ARTIVFICO_DIV1GE_S46-104ADREINFE",
+      "verified": null
+     }
+    ],
+    "how_to_apply": "Download the Application and Certification in Lieu of Inspection, check every box, have it notarized, and send it with a check or money order payable to 'South Brunswick Township' to the Fire Safety Bureau, 540 Ridge Road, P.O. Box 190, Monmouth Junction, NJ 08852. The certificate is emailed to the seller or the seller's representative.",
+    "application_url": "https://southbrunswicknj.gov/wp-content/uploads/2022/06/SMOKE_CERT_APP_AND_DIRECTIONS_2020_2-1.pdf",
+    "department_url": "https://southbrunswicknj.gov/fire-safety/residential-information/",
+    "phone": "732-329-4000 ext. 7214",
+    "email": "jfuncheo@sbtnj.net",
+    "contact_name": "John J. Funcheon",
+    "contact_title": "Fire Marshal",
+    "evidence": [
+     {
+      "url": "https://nj.gov/dca/dfs/pdf/ANNUAL%20REGISTRY/THIRD%20QUARTER%20LEA%20REGISTRY%202026.pdf",
+      "quote": "M South Brunswick Township",
+      "doc_date": "2026-07",
+      "via": "pdf",
+      "verified": true
+     },
+     {
+      "url": "https://southbrunswicknj.gov/fire-safety/residential-information/",
+      "quote": "If you are selling your home a Certificate of Smoke Detector Compliance (CSDC) is required for closing.",
+      "doc_date": "2026-09 (page as fetched)",
+      "via": "page",
+      "verified": true
+     },
+     {
+      "url": "https://southbrunswicknj.gov/wp-content/uploads/2022/06/SMOKE_CERT_APP_AND_DIRECTIONS_2020_2-1.pdf",
+      "quote": "APPLICATION AND CERTIFICATION IN LIEU OF INSPECTION FOR ONE- & TWO- FAMILY DWELLING Certificate of Smoke Alarm and Carbon Monoxide Alarm Compliance",
+      "doc_date": "2020 (file name SMOKE_CERT_APP_AND_DIRECTIONS_2020)",
+      "via": "pdf",
+      "verified": true
+     },
+     {
+      "url": "https://southbrunswicknj.gov/wp-content/uploads/2022/06/SMOKE_CERT_APP_AND_DIRECTIONS_2020_2-1.pdf",
+      "quote": "Battery operated smoke alarms shall be 10-year sealed battery type.",
+      "doc_date": "2020",
+      "via": "pdf",
+      "verified": true
+     },
+     {
+      "url": "https://southbrunswicknj.gov/fire-safety/",
+      "quote": "Fire Marshall John Funcheon 540 Ridge Road Monmouth Junction, NJ08852 732-329-4000 x7214",
+      "doc_date": "2026-09",
+      "via": "page",
+      "verified": true
+     },
+     {
+      "url": "https://southbrunswicknj.gov/fire-safety/",
+      "quote": "jfuncheo@sbtnj.net",
+      "doc_date": "2026-09",
+      "via": "page",
+      "verified": true
+     },
+     {
+      "url": "https://www.nj.gov/dca/dfs/pdf/fire%20directory_county%20summary/fire_code_enforcement_director.pdf",
+      "quote": "LEAID: 1221-001 Enf Auth. Municipal Fire Official John J Funcheon Phone (732) 329-4000",
+      "doc_date": "2026-06-04 (survey date)",
+      "via": "state_directory",
+      "verified": true
+     }
+    ],
+    "confidence": "high"
+   }
+  ],
+  "notes": "The smoke/CO application is a 2020 form (self-certification in lieu of inspection, notarized). The $50 fee also appears in Township Code section 46-104 (last amended by Ord. 2022-13, May 24, 2022), read through the Municode library. The 2020 form does not list a fire extinguisher. The Fire Safety Bureau sits within the Department of Code Enforcement (Code section 22-33)."
+ },
+ "other_items": [
+  {
+   "label": "Unpermitted work and open permits",
+   "detail": "The RRCO application asks about replaced A/C, furnace, water heater, generator, radon system, additions, finished basement, fireplace, sheds over 200 sq ft, pools, hot tubs, decks and gazebos; any done without permits must be permitted and inspected before the RRCO is issued, and permits and approvals are reported to the Tax Assessor.",
+   "source_url": "https://southbrunswicknj.gov/wp-content/uploads/2024/06/RRCO-application-060524.pdf"
+  },
+  {
+   "label": "Buyer waiver",
+   "detail": "A buyer may take on the RRCO obligation with a written waiver (sample letter from the buyer's attorney to the Housing Officer); the home cannot be occupied until the RRCO or a new CO is issued.",
+   "source_url": "https://southbrunswicknj.gov/wp-content/uploads/2024/06/Waiver-appl-ltr-060124.pdf"
+  }
+ ],
+ "open_questions": [
+  "How far ahead of closing to apply for the RRCO (not published).",
+  "Mike Proietti's title and a work email for the resale office."
+ ],
+ "verification": {
+  "fees": 4,
+  "fee_ok": 1,
+  "fee_bad": 0,
+  "fee_unchecked": 3,
+  "quotes": 16,
+  "q_ok": 14,
+  "q_bad": 0,
+  "q_unchecked": 2
+ }
+}

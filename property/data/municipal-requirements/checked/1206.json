@@ -1,0 +1,232 @@
+{
+ "municipality_code": "1206",
+ "municipality": "Helmetta Borough",
+ "county": "MIDDLESEX",
+ "checked_at": "2026-09-30",
+ "resale_co": {
+  "status": "required",
+  "name": "Certificate of continued occupancy (Certificate of Resale / Rental Compliance)",
+  "issued_by": "Borough of Helmetta Code Enforcement (Code Enforcer / Fire Marshal)",
+  "lead_time": "",
+  "valid_for": "90 days after issue date",
+  "requirements": [
+   "Smoke alarms on all levels including attic spaces and basements; 10 year sealed battery or hardwired interconnected, less than 10 years old",
+   "Smoke and CO alarms within 10 feet of all sleeping areas (the resale packet copy says CO alarms less than 7 years old; the separate checklist says less than 10)",
+   "Walls, floors and ceilings in good condition, no holes",
+   "Working kitchen and bathrooms: hot and cold water with shut-off valves, drain traps, toilets secured with shut-off valve",
+   "Anti-tip device on stoves",
+   "Outlets, junction boxes and electrical equipment working with cover plates; panel openings closed; service cable secured",
+   "Water heater, boiler, furnace and HVAC working and vented; replacements must have a construction permit",
+   "Fireplaces, wood stoves and chimneys maintained",
+   "Exit doors working; no double keyed deadbolts (thumb-latch locks)",
+   "Windows operate; no broken panes or torn or missing screens",
+   "Gutters, leaders, roof and foundation in good repair",
+   "No extension cords used as permanent wiring (garage door openers, sump pumps and appliances plugged directly into outlets)",
+   "All open construction permits finalized",
+   "House numbers at least 4 inches high, visible from the curb; handrails on stairs with 3 or more risers",
+   "Yard maintained; pools protected with fences and self-closing, self-latching gates"
+  ],
+  "fees": [
+   {
+    "label": "Certificate application (resale)",
+    "amount": "$100.00",
+    "quote": "PLEASE COMPLETE TOP PORTION AND RETURN WITH CHECK FOR $100.00 PAYABLE TO THE BOROUGH OF HELMETTA",
+    "source_url": "https://www.helmettaboro.com/FCpdf/Certificate%20of%20Occupancy%2Epdf",
+    "verified": null
+   }
+  ],
+  "how_to_apply": "Complete the top of the Borough Application for Certificate (block/lot, owner, selling price, closing date, requested by owner or agent) and return it with a $100.00 check payable to the Borough of Helmetta, 51 Main Street, Helmetta. The smoke/CO application is a separate form with its own fee. Realtors are asked to give the Resale and Rental Inspection Checklist to the homeowner before the inspection.",
+  "application_url": "https://www.helmettaboro.com/FCpdf/Certificate%20of%20Occupancy%2Epdf",
+  "department_url": "https://www.helmettaboro.com/cn/formcenter/?did=1718",
+  "phone": "732-521-4946 ext. 109",
+  "email": "G.Wallace@HelmettaBoro.com",
+  "contact_name": "George Wallace",
+  "contact_title": "Code Enforcer/Fire Marshal",
+  "evidence": [
+   {
+    "url": "https://www.helmettaboro.com/FCpdf/Certificate%20of%20Occupancy%2Epdf",
+    "quote": "PLEASE COMPLETE TOP PORTION AND RETURN WITH CHECK FOR $100.00 PAYABLE TO THE BOROUGH OF HELMETTA",
+    "doc_date": "2025-01 (scanned PDF created January 13, 2025)",
+    "via": "pdf",
+    "verified": null
+   },
+   {
+    "url": "https://www.helmettaboro.com/FCpdf/Certificate%20of%20Occupancy%2Epdf",
+    "quote": "Certification Expires 90 days after issue date",
+    "doc_date": "2025-01",
+    "via": "pdf",
+    "verified": null
+   },
+   {
+    "url": "https://www.helmettaboro.com/FCpdf/Certificate%20of%20Occupancy%2Epdf",
+    "quote": "This serves notice that based on a general inspection of the visible parts of the building there are no imminent hazards and the building is approved for continued occupancy.",
+    "doc_date": "2025-01",
+    "via": "pdf",
+    "verified": null
+   },
+   {
+    "url": "https://www.helmettaboro.com/FCpdf/Certificate%20of%20Occupancy%2Epdf",
+    "quote": "Closing Date",
+    "doc_date": "2025-01",
+    "via": "pdf",
+    "verified": null
+   },
+   {
+    "url": "https://www.helmettaboro.com/FCpdf/Code%20Enforcement%20Information%2Edocx",
+    "quote": "Housing Inspections are required in accordance with the Uniform Fire Code of the State of New Jersey, Helmetta Borough Ordinance for all persons who sell, rent or transfer ownership, change occupants of a residence - home, townhouse, condo, apartment, and must have a smoke detector, carbon monoxide detector, and fire extinguisher compliance test performed before any closing is executed.",
+    "doc_date": "2026-01 (document saved January 8, 2026)",
+    "via": "pdf",
+    "verified": true
+   },
+   {
+    "url": "https://www.helmettaboro.com/FCpdf/Residential%20Resale%20and%20Rental%20Inspection%20Checklist%281%29%2Epdf",
+    "quote": "All open construction permits shall be finalized before a Certificate of Resale / Rental Compliance will be issued.",
+    "doc_date": "2025-04 (PDF created April 25, 2025)",
+    "via": "pdf",
+    "verified": true
+   },
+   {
+    "url": "https://www.helmettaboro.com/FCpdf/Residential%20Resale%20and%20Rental%20Inspection%20Checklist%281%29%2Epdf",
+    "quote": "Realtors and Agents shall give a copy of these checklists to the homeowner to ensure compliance at time of inspection",
+    "doc_date": "2025-04",
+    "via": "pdf",
+    "verified": true
+   },
+   {
+    "url": "https://www.helmettaboro.com/cn/contactinfo/?did=1731",
+    "quote": "George Wallace, Code Enforcer/Fire Marshal",
+    "doc_date": "2026-09 (page checked 2026-09-30)",
+    "via": "page",
+    "verified": true
+   },
+   {
+    "url": "https://www.nj.gov/dca/dfs/pdf/fire%20directory_county%20summary/fire_code_enforcement_director.pdf",
+    "quote": "LEAID: 1206-001 Enf Auth. Fire Dept Fire Official George Wallace Phone (732) 521-4946 Email G.Wallace@HelmettaBoro.com",
+    "doc_date": "2025-02-13 (survey date)",
+    "via": "state_directory",
+    "verified": true
+   }
+  ],
+  "confidence": "medium",
+  "notes": "The Borough Building Dept. forms page posts an Application for Certificate (Code Enforcement / Construction Department, January 2025 scan) that asks for the selling price and closing date, charges $100.00 and issues a certificate approving continued occupancy, valid 90 days. The Borough Code Enforcement Information sheet (January 2026) says housing inspections are required by Borough ordinance for everyone who sells or transfers ownership. The ordinance text itself was not found online, so confidence is medium. The Borough resale and rental checklist refers to a \"Certificate of Resale / Rental Compliance\". Construction permits for Helmetta are handled by the NJ DCA construction office at Jamesburg Borough Hall (732-521-2222 ext. 106, Mondays and Wednesdays 8:30 AM to 12:00 PM). The contact page shows no email; the email is from the state fire directory. There is a separate rental smoke detector application (2020) with rental fees; it is not a resale item."
+ },
+ "fire_cert": {
+  "requirements": [
+   "Smoke alarms: 10 year sealed battery type or hardwired interconnected, less than 10 years old, on all levels including attics and basements",
+   "CO alarms within 10 feet of all sleeping areas (less than 7 years old per the resale packet checklist)",
+   "The Borough resale smoke/CO form (January 2025) and fire checklist still list a fire extinguisher; they were written before P.L.2025, c.19 removed the state extinguisher requirement, so confirm with the Fire Marshal"
+  ],
+  "authorities": [
+   {
+    "name": "Borough of Helmetta Bureau of Fire Prevention (Fire Marshal)",
+    "type": "municipal_fire_bureau",
+    "area_served": "Entire borough",
+    "lead_time": "Submit at least 7 days before the requested inspection date for the lowest fee; payment must be received before scheduling",
+    "fees": [
+     {
+      "label": "Smoke/CO inspection with seven days prior notice",
+      "amount": "$50.00",
+      "quote": "$50.00 - Required with seven days prior notice for inspection",
+      "source_url": "https://www.helmettaboro.com/FCpdf/Property%20Resale%281%29%2Epdf",
+      "verified": null
+     },
+     {
+      "label": "Less than seven days notice",
+      "amount": "$75.00",
+      "quote": "$75.00 - Required with less than seven days notice for inspection",
+      "source_url": "https://www.helmettaboro.com/FCpdf/Property%20Resale%281%29%2Epdf",
+      "verified": null
+     },
+     {
+      "label": "Less than 48 hours notice",
+      "amount": "$100.00",
+      "quote": "$100.00 - Required with less than 48 hours notice for inspection",
+      "source_url": "https://www.helmettaboro.com/FCpdf/Property%20Resale%281%29%2Epdf",
+      "verified": null
+     },
+     {
+      "label": "Re-inspection (inoperable, misplaced or missing smoke/CO detector)",
+      "amount": "$15.00",
+      "quote": "Re-inspections required due to inoperable, improperly located, or the absence of required smoke / and or carbon monoxide detector will result in a $15.00 re-inspection fee.",
+      "source_url": "https://www.helmettaboro.com/FCpdf/Property%20Resale%281%29%2Epdf",
+      "verified": null
+     }
+    ],
+    "how_to_apply": "Fill out the Property Resale Residential Smoke Detector, Carbon Monoxide Detector, Fire Extinguisher Compliance Application (Building Dept. forms page) and submit it with a check payable to \"BOROUGH OF HELMETTA\" to the Bureau of Fire Prevention, 51 Main Street. Payment must be received before an inspection is scheduled. Questions: Fire Marshal, 732-521-4946 ext. 109.",
+    "application_url": "https://www.helmettaboro.com/FCpdf/Property%20Resale%281%29%2Epdf",
+    "department_url": "https://www.helmettaboro.com/cn/formcenter/?did=1718",
+    "phone": "732-521-4946 ext. 109",
+    "email": "G.Wallace@HelmettaBoro.com",
+    "contact_name": "George Wallace",
+    "contact_title": "Code Enforcer/Fire Marshal",
+    "evidence": [
+     {
+      "url": "https://www.helmettaboro.com/FCpdf/Property%20Resale%281%29%2Epdf",
+      "quote": "PAYMENT MUST BE RECEIVED BEFORE ANY INSPECTION CAN BE SCHEDULED.",
+      "doc_date": "2025-01 (scanned PDF created January 13, 2025)",
+      "via": "pdf",
+      "verified": null
+     },
+     {
+      "url": "https://www.helmettaboro.com/FCpdf/Property%20Resale%281%29%2Epdf",
+      "quote": "PLEASE DIRECT ANY QUESTIONS TO THE FIRE MARSHAL, 732-521-4946, EXT: 109.",
+      "doc_date": "2025-01",
+      "via": "pdf",
+      "verified": null
+     },
+     {
+      "url": "https://www.helmettaboro.com/FCpdf/Fire%20Inspection%20Checklist%20%28Helmetta%29%2Edocx",
+      "quote": "Completed applications should be submitted in a timely manner at least seven (7) days in advance of requested date of inspection.",
+      "doc_date": "2025-12 (document saved December 20, 2025)",
+      "via": "pdf",
+      "verified": true
+     },
+     {
+      "url": "https://www.helmettaboro.com/cn/contactinfo/?did=1731",
+      "quote": "George Wallace, Code Enforcer/Fire Marshal",
+      "doc_date": "2026-09",
+      "via": "page",
+      "verified": true
+     },
+     {
+      "url": "https://nj.gov/dca/dfs/pdf/ANNUAL%20REGISTRY/THIRD%20QUARTER%20LEA%20REGISTRY%202026.pdf",
+      "quote": "F Helmetta Borough",
+      "doc_date": "2026-07 (registry as of June 30, 2026)",
+      "via": "pdf",
+      "verified": true
+     },
+     {
+      "url": "https://www.nj.gov/dca/dfs/pdf/fire%20directory_county%20summary/fire_code_enforcement_director.pdf",
+      "quote": "LEAID: 1206-001 Enf Auth. Fire Dept Fire Official George Wallace Phone (732) 521-4946 Email G.Wallace@HelmettaBoro.com",
+      "doc_date": "2025-02-13 (survey date)",
+      "via": "state_directory",
+      "verified": true
+     }
+    ],
+    "confidence": "high"
+   }
+  ],
+  "notes": "The DCA registry lists Helmetta as fire department enforced (code F); the Borough Bureau of Fire Prevention / Fire Marshal (George Wallace) runs the smoke/CO certificate. Fees are from the Borough Property Resale form scanned January 13, 2025. The state directory also lists a second Helmetta fire department page (an industrial brigade at a Princeton address), which is not a resale inspecting agency."
+ },
+ "other_items": [
+  {
+   "label": "Open construction permits",
+   "detail": "All open construction permits must be finalized before the Certificate of Resale / Rental Compliance is issued.",
+   "source_url": "https://www.helmettaboro.com/FCpdf/Residential%20Resale%20and%20Rental%20Inspection%20Checklist%281%29%2Epdf"
+  }
+ ],
+ "open_questions": [
+  "Ordinance section requiring the Helmetta resale certificate was not found online (ecode360 not reachable); requirement is from Borough forms and the Code Enforcement Information sheet.",
+  "Lead time for the $100 resale certificate is not stated."
+ ],
+ "verification": {
+  "fees": 5,
+  "fee_ok": 0,
+  "fee_bad": 0,
+  "fee_unchecked": 5,
+  "quotes": 15,
+  "q_ok": 9,
+  "q_bad": 0,
+  "q_unchecked": 6
+ }
+}

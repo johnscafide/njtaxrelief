@@ -1,0 +1,224 @@
+{
+ "municipality_code": "1213",
+ "municipality": "New Brunswick",
+ "county": "MIDDLESEX",
+ "checked_at": "2026-09-30",
+ "resale_co": {
+  "status": "required",
+  "name": "Certificate of Code Compliance (owner-occupied 1-2 family sold to an owner-occupant: Letter of Exemption instead)",
+  "issued_by": "Bureau of Housing Inspections, Division of Community Services",
+  "lead_time": "",
+  "valid_for": "",
+  "requirements": [
+   "Inspection checks for Building, Zoning and Property Maintenance Code violations; the seller must fix any violations before the sale",
+   "Required for all residential sales except owner-occupied 1-2 family homes",
+   "Owner-occupied 1-2 family home sold to a buyer who will live there: apply for a no-fee Letter of Exemption with a notarized Seller's Affidavit and Buyer's Affidavit",
+   "With the exemption, the buyer takes responsibility that all alterations, additions and renovations have zoning approval and valid construction permits; the seller must hand over those approvals and permits at closing",
+   "The smoke alarm/CO certificate is still required even with a Letter of Exemption"
+  ],
+  "fees": [
+   {
+    "label": "Code Compliance inspection, one- or two-family dwelling",
+    "amount": "$40.00",
+    "quote": "Fee for inspection of a one or two-family dwelling is $40.00. Each additional unit is $20.00.",
+    "source_url": "https://www.cityofnewbrunswick.org/Code%20Compliance%20Application%20with%20Fee%20-%20S%20Edit%202021-0908%20MASTER.pdf",
+    "verified": true
+   },
+   {
+    "label": "Code Compliance inspection, each additional unit",
+    "amount": "$20.00",
+    "quote": "Fee for inspection of a one or two-family dwelling is $40.00. Each additional unit is $20.00.",
+    "source_url": "https://www.cityofnewbrunswick.org/Code%20Compliance%20Application%20with%20Fee%20-%20S%20Edit%202021-0908%20MASTER.pdf",
+    "verified": true
+   },
+   {
+    "label": "Letter of Exemption (owner-occupied 1-2 family sold to an owner-occupant)",
+    "amount": "NO FEE",
+    "quote": "Residential Application for a Letter of Exemption - NO FEE Owner to Owner -",
+    "source_url": "https://www.cityofnewbrunswick.org/Code%20Compliance%20Application%20Owner%20to%20Owner%20NO%20FEE%20-%20S%20Edit%202021-0226%20-%20MASTER.pdf",
+    "verified": true
+   }
+  ],
+  "how_to_apply": "Download the Code Compliance application (or, for an owner-occupied 1-2 family home sold to an owner-occupant, the no-fee Letter of Exemption application plus the notarized Buyer's and Seller's Affidavits) from the Housing Inspection Forms page, fill in every field, and submit it to the Bureau of Housing Inspections, Civic Square, 25 Kirkpatrick Street, New Brunswick, NJ 08903, with a check (write your phone number on the check). Fees are non-refundable.",
+  "application_url": "https://www.cityofnewbrunswick.org/Code%20Compliance%20Application%20with%20Fee%20-%20S%20Edit%202021-0908%20MASTER.pdf",
+  "department_url": "https://www.cityofnewbrunswick.org/residents/services/housing_inspections.php",
+  "phone": "732-745-5075",
+  "email": "",
+  "contact_name": "Alex Adkins",
+  "contact_title": "Director of Inspections",
+  "evidence": [
+   {
+    "url": "https://www.cityofnewbrunswick.org/Code%20Compliance%20Application%20with%20Fee%20-%20S%20Edit%202021-0908%20MASTER.pdf",
+    "quote": "Chapter 15.12 of the Revised General Ordinance requires that all residential, other than single and two-family, owner-occupied dwellings must be inspected by the Bureau of Housing Inspections to verify if any Building, Zoning, or Property Maintenance Code Violations exist.",
+    "doc_date": "2021-09-08 (form edit date in file name)",
+    "via": "pdf",
+    "verified": true
+   },
+   {
+    "url": "https://www.cityofnewbrunswick.org/Code%20Compliance%20Application%20with%20Fee%20-%20S%20Edit%202021-0908%20MASTER.pdf",
+    "quote": "Should any such violations exist, it will be the responsibility of the Seller to abate those violations in accordance with all governing codes prior to the sale.",
+    "doc_date": "2021-09-08",
+    "via": "pdf",
+    "verified": true
+   },
+   {
+    "url": "https://www.cityofnewbrunswick.org/Code%20Compliance%20Application%20with%20Fee%20-%20S%20Edit%202021-0908%20MASTER.pdf",
+    "quote": "No refunds per Resolution: R-081125",
+    "doc_date": "2021-09-08",
+    "via": "pdf",
+    "verified": true
+   },
+   {
+    "url": "https://www.cityofnewbrunswick.org/Sellers%20Affidavit%20-%20S%20Edit%202021-0226%20-%20MASTER.pdf",
+    "quote": "I / We are making this Affidavit in order to induce the City of New Brunswick to issue a Letter of Exemption and not to require a Certificate of Code Compliance in connection with the sale of this property",
+    "doc_date": "2021-02-26 (form edit date in file name)",
+    "via": "pdf",
+    "verified": true
+   },
+   {
+    "url": "https://www.cityofnewbrunswick.org/Sellers%20Affidavit%20-%20S%20Edit%202021-0226%20-%20MASTER.pdf",
+    "quote": "Certificate of Smoke Detector and Carbon Monoxide Alarm Compliance is still required prior to sale of the property as per N.J.A.C 5:70-2.3 of the New Jersey State Fire Code.",
+    "doc_date": "2021-02-26",
+    "via": "pdf",
+    "verified": true
+   },
+   {
+    "url": "https://www.cityofnewbrunswick.org/Buyers%20Affidavit%20-%20S%20Edit%202021-0226%20-%20MASTER.pdf",
+    "quote": "I / We are the Contract Purchasers and will occupy property located at",
+    "doc_date": "2021-02-26",
+    "via": "pdf",
+    "verified": true
+   },
+   {
+    "url": "https://www.cityofnewbrunswick.org/residents/departments/forms.php",
+    "quote": "Code Compliance Residential Inspection Application - With Fee",
+    "doc_date": "2026-09 (page as fetched)",
+    "via": "page",
+    "verified": true
+   },
+   {
+    "url": "https://www.cityofnewbrunswick.org/residents/services/housing_inspections.php",
+    "quote": "Bureau of Housing Inspections Main: 732-745-5075",
+    "doc_date": "2026-09",
+    "via": "page",
+    "verified": true
+   },
+   {
+    "url": "https://www.cityofnewbrunswick.org/residents/services/housing_inspections.php",
+    "quote": "Alex Adkins, Director of Inspections: 732-745-5075",
+    "doc_date": "2026-09",
+    "via": "page",
+    "verified": true
+   }
+  ],
+  "confidence": "high",
+  "notes": "Under Chapter 15.12 of the City's ordinances (as quoted on the application), every residential sale needs a Certificate of Code Compliance except owner-occupied single and two-family homes. For those, the City issues a no-fee Letter of Exemption when the seller lives there and the buyer will live there, backed by notarized Seller's and Buyer's Affidavits. A 1-2 family home that is not owner-occupied (for example an investor sale or a fully rented two-family) needs the inspection at $40.00 for the first one or two units and $20.00 per additional unit. The forms are from 2021 (edit dates in the file names); the ordinance text itself (Municode) could not be opened. No lead time or validity period is printed. The City also runs a 3-year rental inspection program; that is separate from the sale requirement. No email is published for the Bureau of Housing Inspections. Housing inspector direct lines are listed on the Housing Inspections page."
+ },
+ "fire_cert": {
+  "requirements": [
+   "Smoke alarms no older than 10 years, on every level and within 10 feet of sleeping rooms; on the ceiling or on the wall within 6 inches of the ceiling, at least 3 feet from ceiling fan blades and heating/AC registers",
+   "CO alarms no older than 7 years, on every level with sleeping rooms and within 10 feet of those rooms",
+   "10-year sealed battery smoke alarms required in 1-2 family homes; AC-powered (hard-wired) alarms may never be replaced with 10-year sealed battery alarms",
+   "Failure to obtain the certificate carries a $500.00 penalty",
+   "The City's April 2025 sheet still uses the older certificate name that includes a portable fire extinguisher, but it lists no extinguisher item"
+  ],
+  "authorities": [
+   {
+    "name": "New Brunswick Fire Department, Division of Fire Safety",
+    "type": "municipal_fire_bureau",
+    "area_served": "Entire city (Rutgers University property has its own separate fire enforcing agency)",
+    "lead_time": "",
+    "fees": [],
+    "how_to_apply": "Apply online through the City's SDL Portal (create an account first, then use the Smoke Alarm request). The Division of Fire Safety is at 78 Bayard Street, New Brunswick, NJ 08901, 732-745-5086.",
+    "application_url": "https://www.sdlportal.com/towns/nj/middlesex/newbrunswick/requests/smokeAlarm",
+    "department_url": "https://www.cityofnewbrunswick.org/residents/public_safety/fire/fire_prevention.php",
+    "phone": "732-745-5086",
+    "email": "vortiz@cityofnewbrunswick.org",
+    "contact_name": "Victor Ortiz",
+    "contact_title": "Fire Official",
+    "evidence": [
+     {
+      "url": "https://www.cityofnewbrunswick.org/residents/public_safety/fire/fire_prevention.php",
+      "quote": "This Division also conducts SMOKE DETECTOR and CARBON MONOXIDE ALARM compliance inspections on all one and two family homes for sale or lease in the City.",
+      "doc_date": "2026-09 (page as fetched)",
+      "via": "page",
+      "verified": true
+     },
+     {
+      "url": "https://www.cityofnewbrunswick.org/residents/public_safety/fire/forms___information.php",
+      "quote": "You must first create an account to process your application online.",
+      "doc_date": "2026-09",
+      "via": "page",
+      "verified": true
+     },
+     {
+      "url": "https://www.cityofnewbrunswick.org/CSACMAPFECC%20info%20sheet%20-%20S%20edit%202025-0404%20MASTER.pdf",
+      "quote": "A CSACMAPFEC application shall be submitted online.",
+      "doc_date": "2025-04-04 (edit date in file name)",
+      "via": "pdf",
+      "verified": true
+     },
+     {
+      "url": "https://www.cityofnewbrunswick.org/CSACMAPFECC%20info%20sheet%20-%20S%20edit%202025-0404%20MASTER.pdf",
+      "quote": "Failure to obtain a CSACMAPFEC will result in a penalty of $500.00.",
+      "doc_date": "2025-04-04",
+      "via": "pdf",
+      "verified": true
+     },
+     {
+      "url": "https://www.cityofnewbrunswick.org/CSACMAPFECC%20info%20sheet%20-%20S%20edit%202025-0404%20MASTER.pdf",
+      "quote": "AC-powered (electric) smoke alarms SHALL NEVER BE REPLACED with TEN-year sealed smoke alarms.",
+      "doc_date": "2025-04-04",
+      "via": "pdf",
+      "verified": true
+     },
+     {
+      "url": "https://www.cityofnewbrunswick.org/residents/public_safety/fire/contact_information.php",
+      "quote": "Victor Ortiz Fire Official 732-745-5086 vortiz@cityofnewbrunswick.org",
+      "doc_date": "2026-09",
+      "via": "page",
+      "verified": true
+     },
+     {
+      "url": "https://nj.gov/dca/dfs/pdf/ANNUAL%20REGISTRY/THIRD%20QUARTER%20LEA%20REGISTRY%202026.pdf",
+      "quote": "F New Brunswick City",
+      "doc_date": "2026-07",
+      "via": "pdf",
+      "verified": true
+     },
+     {
+      "url": "https://www.nj.gov/dca/dfs/pdf/fire%20directory_county%20summary/fire_code_enforcement_director.pdf",
+      "quote": "LEAID: 1214-001 Enf Auth. Fire Dept Fire Official Victor Ortiz Phone (732) 745-5086 Addr: 78 Bayard St",
+      "doc_date": "2026-06-04 (survey date)",
+      "via": "state_directory",
+      "verified": true
+     },
+     {
+      "url": "https://www.nj.gov/dca/dfs/pdf/fire%20directory_county%20summary/fire_code_enforcement_director.pdf",
+      "quote": "Email vortiz@cityofnewbrunswick.org",
+      "doc_date": "2026-06-04",
+      "via": "state_directory",
+      "verified": true
+     }
+    ],
+    "confidence": "high"
+   }
+  ],
+  "notes": "The New Brunswick Fire Department is the local fire enforcing agency (DCA July 2026 registry code F). No smoke/CO certificate fee is published on the City site or the April 2025 info sheet; the application is only through the SDL Portal, which needs an account, so the fee could not be seen. The state fire directory also lists a separate enforcing agency for Rutgers University (LEAID 1226-001, William R Scott), which covers university property, not private 1-2 family homes. Other Division of Fire Safety contacts: Sheri Miller (732-745-5085), Robert Jolly (732-745-5079) and Molly Wright (732-745-5084), Fire Inspectors; general email firesafety@cityofnewbrunswick.org. Note: the state fire directory uses code 1214 for New Brunswick, which differs from the Watchdog code 1213."
+ },
+ "other_items": [],
+ "open_questions": [
+  "Smoke/CO certificate fee and lead time (only shown inside the SDL Portal, which needs an account).",
+  "Lead time and validity of the Certificate of Code Compliance; confirm the 2021 fee of $40.00 (1-2 family) is current."
+ ],
+ "verification": {
+  "fees": 3,
+  "fee_ok": 3,
+  "fee_bad": 0,
+  "fee_unchecked": 0,
+  "quotes": 18,
+  "q_ok": 18,
+  "q_bad": 0,
+  "q_unchecked": 0
+ }
+}

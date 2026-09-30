@@ -1,0 +1,269 @@
+{
+ "municipality_code": "1203",
+ "municipality": "Dunellen Borough",
+ "county": "MIDDLESEX",
+ "checked_at": "2026-09-30",
+ "resale_co": {
+  "status": "required",
+  "name": "Resale Certificate (new Certificate of Occupancy on change of ownership)",
+  "issued_by": "Construction Department, Borough of Dunellen",
+  "lead_time": "",
+  "valid_for": "",
+  "requirements": [
+   "All construction permits must be closed before a housing inspection can be scheduled",
+   "Application must be complete (closing date, block/lot, owner, buyer, agent, inspection contact, email for the certificate) or it will be denied",
+   "The Borough forms page lists this Resale Certificate as covering smoke and carbon monoxide compliance"
+  ],
+  "fees": [
+   {
+    "label": "Initial inspection, per unit",
+    "amount": "$125.00",
+    "quote": "These are per unit costs Initial Inspection: $125.00",
+    "source_url": "https://www.dunellen-nj.gov/Documents/Departments/Construction/Resale%20Certificate%20Registration.pdf?t=202606031344260",
+    "verified": null
+   },
+   {
+    "label": "Two-family / multi-family, per unit",
+    "amount": "$125.00 x unit",
+    "quote": "Multi-Fam: $125.00 x unit",
+    "source_url": "https://www.dunellen-nj.gov/Documents/Departments/Construction/Resale%20Certificate%20Registration.pdf?t=202606031344260",
+    "verified": null
+   },
+   {
+    "label": "Re-inspection",
+    "amount": "$80.00",
+    "quote": "Re-Inspection: $80.00",
+    "source_url": "https://www.dunellen-nj.gov/Documents/Departments/Construction/Resale%20Certificate%20Registration.pdf?t=202606031344260",
+    "verified": null
+   },
+   {
+    "label": "Emergency inspection (added to the original inspection fee)",
+    "amount": "$150.00",
+    "quote": "Emergency: $150.00 + original inspeciton",
+    "source_url": "https://www.dunellen-nj.gov/Documents/Departments/Construction/Resale%20Certificate%20Registration.pdf?t=202606031344260",
+    "verified": null
+   }
+  ],
+  "how_to_apply": "Fill out the Resale Certificate Registration form (closing date, location and unit, block/lot, owner, buyer, real estate agent, contact for inspection and email to send the certificate) and deliver it with payment to the Construction Department, second floor of Borough Hall, 355 North Avenue, Dunellen. The form has office fields for check or exact cash. Call the Construction Office to schedule.",
+  "application_url": "https://www.dunellen-nj.gov/Documents/Departments/Construction/Resale%20Certificate%20Registration.pdf?t=202606031344260",
+  "department_url": "https://www.dunellen-nj.gov/departments/construction/index.php",
+  "phone": "732-968-3323",
+  "email": "",
+  "contact_name": "Scott Brescher",
+  "contact_title": "Construction Official / Building Sub-Code",
+  "evidence": [
+   {
+    "url": "https://www.dunellen-nj.gov/Documents/Departments/Construction/Zoning_law__Chapter_115.pdf?t=202605131531450",
+    "quote": "A new certificate of occupancy shall be required for any and all changes of ownership, tenancy or use.",
+    "doc_date": "2005-08 (Zoning Chapter 115, section 115-10 E, amended August 8, 2005; compiled copy amended through October 2007)",
+    "via": "pdf",
+    "verified": null
+   },
+   {
+    "url": "https://www.dunellen-nj.gov/Documents/Departments/Construction/Zoning_law__Chapter_115.pdf?t=202605131531450",
+    "quote": "It shall be unlawful to use or permit the use of any building or premises or part thereof hereafter created, located, erected, changed, converted or enlarged wholly or partly until a certificate of occupancy has been issued by the Borough of Dunellen for the premises certifying that the structure complies with the provisions of this chapter.",
+    "doc_date": "2005-08",
+    "via": "pdf",
+    "verified": null
+   },
+   {
+    "url": "https://www.dunellen-nj.gov/Documents/Departments/Construction/Resale%20Certificate%20Registration.pdf?t=202606031344260",
+    "quote": "Resale Certificate Registration ***NO HOUSING INSPECTIONS CAN BE SCHEDULED UNTIL ALL CONSTRUCTION PERMITS ARE CLOSED***",
+    "doc_date": "2026-06 (scanned PDF created June 3, 2026)",
+    "via": "pdf",
+    "verified": null
+   },
+   {
+    "url": "https://www.dunellen-nj.gov/Documents/Departments/Construction/Resale%20Certificate%20Registration.pdf?t=202606031344260",
+    "quote": "This application will be DENIED if there is missing information.",
+    "doc_date": "2026-06",
+    "via": "pdf",
+    "verified": null
+   },
+   {
+    "url": "https://www.dunellen-nj.gov/forms/index.php",
+    "quote": "Resale Certificate - Smoke & Carbon Monoxide Compliance",
+    "doc_date": "2026-09 (page checked 2026-09-30)",
+    "via": "page",
+    "verified": true
+   },
+   {
+    "url": "https://www.dunellen-nj.gov/departments/construction/index.php",
+    "quote": "Construction Official / Building Sub-Code Scott Brescher",
+    "doc_date": "2026-09",
+    "via": "page",
+    "verified": true
+   },
+   {
+    "url": "https://www.dunellen-nj.gov/departments/construction/index.php",
+    "quote": "Construction Office 355 North Avenue Dunellen, NJ 08812 (732) 968-3323",
+    "doc_date": "2026-09",
+    "via": "page",
+    "verified": true
+   }
+  ],
+  "confidence": "high",
+  "notes": "Dunellen Zoning Chapter 115, section 115-10 E (posted on the Borough site as a scanned PDF) requires a new certificate of occupancy for any change of ownership, and the Construction Department posts a current Resale Certificate Registration form (June 2026) with closing date, buyer and agent fields. The resale form does not list the items inspected. The Borough posts a separate Rental Certificate Application with a Rental Inspection checklist (exterior, interior, egress, 10 year sealed battery smoke alarms, CO alarms within 10 feet of bedroom doors, and a 2A:10B:C extinguisher) for rentals; it is not quoted here as a resale checklist. Emails for Construction Office staff are shown only behind an email-protection link, so no email is recorded. The Construction Office number (732) 968-3323 is from the Construction page contact box; the Borough main number is 732-968-3033."
+ },
+ "fire_cert": {
+  "requirements": [],
+  "authorities": [
+   {
+    "name": "Middlesex County Fire Marshal (county fire code enforcing agency)",
+    "type": "unknown",
+    "area_served": "Entire borough (county agency)",
+    "lead_time": "",
+    "fees": [
+     {
+      "label": "Smoke/CO inspection, 10 or more business days before closing",
+      "amount": "$50.00",
+      "quote": "Ten (10) business days or more before closing/change of occupancy: $50.00",
+      "source_url": "https://www.southrivernj.org/DocumentCenter/View/856/Smoke-Detector--Carbon-Monoxide-Detector-Inspection-PDF",
+      "verified": "eye"
+     },
+     {
+      "label": "Smoke/CO inspection, less than 10 business days before closing",
+      "amount": "$75.00",
+      "quote": "Less than ten (10) business days before closing/change of occupancy: $75.00",
+      "source_url": "https://www.southrivernj.org/DocumentCenter/View/856/Smoke-Detector--Carbon-Monoxide-Detector-Inspection-PDF",
+      "verified": "eye"
+     },
+     {
+      "label": "Smoke/CO inspection, less than 4 business days before closing",
+      "amount": "$125.00",
+      "quote": "Less than (4) business days before closing/change of occupancy: $125.00",
+      "source_url": "https://www.southrivernj.org/DocumentCenter/View/856/Smoke-Detector--Carbon-Monoxide-Detector-Inspection-PDF",
+      "verified": "eye"
+     },
+     {
+      "label": "Reinspection after a failed inspection",
+      "amount": "$20.00",
+      "quote": "Re-inspection for failed inspection: $20.00",
+      "source_url": "https://www.southrivernj.org/DocumentCenter/View/856/Smoke-Detector--Carbon-Monoxide-Detector-Inspection-PDF",
+      "verified": "eye"
+     },
+     {
+      "label": "Not present for a scheduled inspection without notice",
+      "amount": "$75.00",
+      "quote": "Failure to be present for scheduled inspection without notification: $75.00",
+      "source_url": "https://www.southrivernj.org/DocumentCenter/View/856/Smoke-Detector--Carbon-Monoxide-Detector-Inspection-PDF",
+      "verified": "eye"
+     }
+    ],
+    "how_to_apply": "Not posted on the Borough site. The county office (1001 Fire Academy Drive, Sayreville) is listed by the state as the smoke detector compliance contact for Dunellen. Call to confirm the application and fee.",
+    "application_url": "",
+    "department_url": "",
+    "phone": "732-316-7174",
+    "email": "mike.gallagher@co.middlesex.nj.us",
+    "contact_name": "Michael Gallagher",
+    "contact_title": "Fire Official (Middlesex County Fire Marshal)",
+    "evidence": [
+     {
+      "url": "https://nj.gov/dca/dfs/pdf/ANNUAL%20REGISTRY/THIRD%20QUARTER%20LEA%20REGISTRY%202026.pdf",
+      "quote": "C Dunellen Borough",
+      "doc_date": "2026-07 (registry as of June 30, 2026)",
+      "via": "pdf",
+      "verified": true
+     },
+     {
+      "url": "https://www.nj.gov/dca/dfs/pdf/fire%20directory_county%20summary/fire_code_enforcement_director.pdf",
+      "quote": "LEAID: 1203-001 Enf Auth. County Fire Official Michael Gallagher Phone (732) 316-7174 Addr: 1001 Fire Academy Dr Sayreville NJ 08872 Email mike.gallagher@co.middlesex.nj.us",
+      "doc_date": "2026-01-12 (survey date)",
+      "via": "state_directory",
+      "verified": true
+     },
+     {
+      "url": "https://www.nj.gov/dca/dfs/pdf/fire%20directory_county%20summary/fire_code_enforcement_director.pdf",
+      "quote": "SMOKE DETECTOR COMPLIANCE Middlesex Co Fire Marshal",
+      "doc_date": "2026-01-12 (survey date)",
+      "via": "state_directory",
+      "verified": true
+     },
+     {
+      "url": "https://www.southrivernj.org/DocumentCenter/View/856/Smoke-Detector--Carbon-Monoxide-Detector-Inspection-PDF",
+      "quote": "Attached please find an application for a Smoke Detector/Carbon Monoxide Detector Inspection which is required pursuant to the NJ Uniform Fire Code N.J.A.C. 5:70-2.3 and the Middlesex County Fire Marshal Ordinance 10-1811 when a change in occupancy or ownership occurs.",
+      "doc_date": "2026-02 (PDF created 2026-02-02 on the South River site; County letter undated; scanned, read visually)",
+      "via": "pdf",
+      "verified": "eye"
+     },
+     {
+      "url": "https://www.southrivernj.org/DocumentCenter/View/856/Smoke-Detector--Carbon-Monoxide-Detector-Inspection-PDF",
+      "quote": "Make checks payable to the Office of the Fire Marshal.",
+      "doc_date": "2026-02 (PDF created 2026-02-02 on the South River site; County letter undated; scanned, read visually)",
+      "via": "pdf",
+      "verified": "eye"
+     },
+     {
+      "url": "https://www.southrivernj.org/DocumentCenter/View/856/Smoke-Detector--Carbon-Monoxide-Detector-Inspection-PDF",
+      "quote": "After inspection is complete, your certification is immediately issued. Each certificate is valid for six (6) months.",
+      "doc_date": "2026-02 (PDF created 2026-02-02 on the South River site; County letter undated; scanned, read visually)",
+      "via": "pdf",
+      "verified": "eye"
+     },
+     {
+      "url": "https://www.southrivernj.org/DocumentCenter/View/856/Smoke-Detector--Carbon-Monoxide-Detector-Inspection-PDF",
+      "quote": "Middlesex County Fire Marshal 1001 Fire Academy Drive Sayreville, NJ 08879 Email: firemarshal@co.middlesex.nj.us",
+      "doc_date": "undated application page in the same PDF",
+      "via": "pdf",
+      "verified": "eye"
+     },
+     {
+      "url": "https://www.southrivernj.org/DocumentCenter/View/856/Smoke-Detector--Carbon-Monoxide-Detector-Inspection-PDF",
+      "quote": "MIDDLESEX COUNTY FIRE MARSHAL 1001 Fire Academy Drive Sayreville, NJ 08872 732-316-7171 (office) 732-316-7638 (fax)",
+      "doc_date": "2026-02 (PDF created 2026-02-02 on the South River site; County letter undated; scanned, read visually)",
+      "via": "pdf",
+      "verified": "eye"
+     }
+    ],
+    "confidence": "medium",
+    "notes": "County fee schedule from the Middlesex County Fire Marshal's own letter and application (County Ordinance 10-1811, created February 2026), posted on South River Borough's site; it applies wherever the County is the fire code agency. Checked by Claude against the scanned letter on 2026-09-30."
+   },
+   {
+    "name": "Borough of Dunellen Construction Department (Resale Certificate - Smoke & Carbon Monoxide Compliance)",
+    "type": "unknown",
+    "area_served": "Entire borough",
+    "lead_time": "",
+    "fees": [],
+    "how_to_apply": "The Borough forms page labels its Resale Certificate Registration as \"Resale Certificate - Smoke & Carbon Monoxide Compliance\". Its fee ($125.00 per unit initial inspection) is listed under the town certificate; it is not a second charge.",
+    "application_url": "https://www.dunellen-nj.gov/Documents/Departments/Construction/Resale%20Certificate%20Registration.pdf?t=202606031344260",
+    "department_url": "https://www.dunellen-nj.gov/forms/index.php",
+    "phone": "732-968-3323",
+    "email": "",
+    "contact_name": "Scott Brescher",
+    "contact_title": "Construction Official / Building Sub-Code",
+    "evidence": [
+     {
+      "url": "https://www.dunellen-nj.gov/forms/index.php",
+      "quote": "Resale Certificate - Smoke & Carbon Monoxide Compliance",
+      "doc_date": "2026-09",
+      "via": "page",
+      "verified": true
+     }
+    ],
+    "confidence": "low"
+   }
+  ],
+  "notes": "Conflict to confirm by phone. The NJ DCA registry (July 2026) lists Dunellen as county-enforced (code C), and the state fire directory (survey 1/12/2026) lists the Middlesex County Fire Marshal (Michael Gallagher, (732) 316-7174) as the smoke detector compliance contact. The Borough forms page, however, labels its own Resale Certificate as \"Smoke & Carbon Monoxide Compliance\", which suggests the Borough resale inspection also checks smoke and CO alarms. The Borough page does not say that the Borough issues the state smoke/CO certificate itself, so it is not clear the two sources really differ. In neighboring county-enforced Highland Park, the Borough page says smoke/CO inspections are done by the Middlesex County Office of the Fire Marshal and must be registered with it; that page lists the county office at (732) 316-7171, firemarshal@co.middlesex.nj.us. No county fee schedule could be opened (the county website blocked automated access). The Dunellen Fire Department (volunteer, dunellenfd.com) is the suppression company, not an inspecting agency."
+ },
+ "other_items": [
+  {
+   "label": "Open construction permits",
+   "detail": "No housing inspection can be scheduled until all construction permits are closed.",
+   "source_url": "https://www.dunellen-nj.gov/Documents/Departments/Construction/Resale%20Certificate%20Registration.pdf?t=202606031344260"
+  }
+ ],
+ "open_questions": [
+  "Does the Borough Resale Certificate inspection satisfy the state smoke/CO certificate, or must the seller also get a certificate from the Middlesex County Fire Marshal? If the county, what are its fees?",
+  "What does the Borough resale inspection check, and how many days before closing should the application go in?"
+ ],
+ "verification": {
+  "fees": 9,
+  "fee_ok": 5,
+  "fee_bad": 0,
+  "fee_unchecked": 4,
+  "quotes": 16,
+  "q_ok": 12,
+  "q_bad": 0,
+  "q_unchecked": 4
+ }
+}

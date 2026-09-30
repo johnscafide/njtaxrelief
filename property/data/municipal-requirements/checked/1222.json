@@ -1,0 +1,261 @@
+{
+ "municipality_code": "1222",
+ "municipality": "South Plainfield Borough",
+ "county": "MIDDLESEX",
+ "checked_at": "2026-09-30",
+ "resale_co": {
+  "status": "required",
+  "name": "Certificate of Municipal Compliance (Residential Resale or Tenant), for smoke and CO detectors and Certificate of Occupancy",
+  "issued_by": "Borough of South Plainfield Building Department",
+  "lead_time": "Certificates are generated within 2 business days after the inspection; do not schedule the closing until the certificate is issued and all open permits and violations are cleared",
+  "valid_for": "",
+  "requirements": [
+   "Smoke detectors on each habitable level, on or within 6 inches of the ceiling (not in corners), and within 10 feet of the farthest bedroom door",
+   "10-year sealed battery smoke detectors; homes built after 1977 with AC or interwired detectors must keep that type; smoke detectors expire after 10 years",
+   "CO detectors near all bedrooms, no more than 10 feet from the farthest bedroom door (not inside a bedroom unless there is also one in the hall)",
+   "Alarm systems need annunciators within 10 feet of bedrooms and on each level; notify the alarm company before the test",
+   "2A-10B:C fire extinguisher, 10 lb. or less, within 10 feet of the kitchen in the path of egress, mounted with the maker's bracket, top no more than 5 feet above the floor (as printed on the June 2023 form)",
+   "Sump pump area open for inspection; sump pumps must not discharge into the sanitary sewer",
+   "Water heater/boiler discharge valve and any fire sprinkler system are checked",
+   "All open permits closed before the inspection; work found done without permits (pools, spas, decks, sheds, garage conversions, basement work, wood stoves, furnace or water heater replacement, central A/C, oil to gas, tank removal) carries a minimum $250 penalty",
+   "House Evaluation form: finished basement, A/C, furnace or boiler, generator, sump pump, water heater, deck, shed, pool and radon system (original or replaced)",
+   "Inspection may be refused if the property has health or safety issues; corrective action falls on the seller"
+  ],
+  "fees": [
+   {
+    "label": "1- to 4-family home or townhouse, per unit",
+    "amount": "$65.00",
+    "quote": "One (1) to four (4) family dwelling including townhouse - $65.00 per dwelling unit.",
+    "source_url": "https://www.southplainfieldnj.com/spnj/Departments/Departments/Building%20Department/Forms/Permit%20Applications%20%26%20Forms/Certificate%20of%20Municipal%20Compliance%20%28Residential%20Resale%20or%20Tenant%29%2002-25-2025.pdf",
+    "verified": null
+   },
+   {
+    "label": "Condominium or multi-family, per unit",
+    "amount": "$50.00",
+    "quote": "Multi-family dwelling including condominium - $50.00 per dwelling unit.",
+    "source_url": "https://www.southplainfieldnj.com/spnj/Departments/Departments/Building%20Department/Forms/Permit%20Applications%20%26%20Forms/Certificate%20of%20Municipal%20Compliance%20%28Residential%20Resale%20or%20Tenant%29%2002-25-2025.pdf",
+    "verified": null
+   },
+   {
+    "label": "1- to 4-family home or townhouse at a special time, per unit",
+    "amount": "$125.00",
+    "quote": "One (1) to four (4) family dwelling including townhouse at a special time - $125.00 per dwelling unit.",
+    "source_url": "https://www.southplainfieldnj.com/spnj/Departments/Departments/Building%20Department/Forms/Permit%20Applications%20%26%20Forms/Certificate%20of%20Municipal%20Compliance%20%28Residential%20Resale%20or%20Tenant%29%2002-25-2025.pdf",
+    "verified": null
+   },
+   {
+    "label": "Condominium or multi-family at a special time, per unit",
+    "amount": "$100.00",
+    "quote": "Multi-family dwelling including condominium at a special time - $100.00 per dwelling unit.",
+    "source_url": "https://www.southplainfieldnj.com/spnj/Departments/Departments/Building%20Department/Forms/Permit%20Applications%20%26%20Forms/Certificate%20of%20Municipal%20Compliance%20%28Residential%20Resale%20or%20Tenant%29%2002-25-2025.pdf",
+    "verified": null
+   },
+   {
+    "label": "Reprint of an issued certificate",
+    "amount": "$25.00",
+    "quote": "Reprint of any issued certificate - $25.00",
+    "source_url": "https://www.southplainfieldnj.com/spnj/Departments/Departments/Building%20Department/Forms/Permit%20Applications%20%26%20Forms/Certificate%20of%20Municipal%20Compliance%20%28Residential%20Resale%20or%20Tenant%29%2002-25-2025.pdf",
+    "verified": null
+   },
+   {
+    "label": "First reinspection for a failed or missed inspection, per unit",
+    "amount": "$35.00",
+    "quote": "First re-inspection for failed or missed inspection - $35.00 per dwelling unit.",
+    "source_url": "https://www.southplainfieldnj.com/spnj/Departments/Departments/Building%20Department/Forms/Permit%20Applications%20%26%20Forms/Certificate%20of%20Municipal%20Compliance%20%28Residential%20Resale%20or%20Tenant%29%2002-25-2025.pdf",
+    "verified": null
+   },
+   {
+    "label": "Second reinspection for a failed or missed inspection (same as the first inspection fee)",
+    "amount": "$50.00 to $125.00 per unit",
+    "quote": "Second re-inspection for failed or missed inspection, cost of initial inspection.",
+    "source_url": "https://www.southplainfieldnj.com/spnj/Departments/Departments/Building%20Department/Forms/Permit%20Applications%20%26%20Forms/Certificate%20of%20Municipal%20Compliance%20%28Residential%20Resale%20or%20Tenant%29%2002-25-2025.pdf",
+    "verified": null
+   }
+  ],
+  "how_to_apply": "Fill out the Certificate of Municipal Compliance packet (Inspection Request and House Evaluation forms) and submit it in person at the Building Department, 2480 Plainfield Avenue, with a check or money order payable to Borough of South Plainfield. Inspections are held 9:00 am to 12:00 pm, Monday to Friday. The certificate can be picked up or mailed.",
+  "application_url": "https://www.southplainfieldnj.com/spnj/Departments/Departments/Building%20Department/Forms/Permit%20Applications%20%26%20Forms/Certificate%20of%20Municipal%20Compliance%20%28Residential%20Resale%20or%20Tenant%29%2002-25-2025.pdf",
+  "department_url": "https://www.southplainfieldnj.com/spnj/Departments/Departments/Building%20Department/",
+  "phone": "908-226-7645",
+  "email": "schedulemyinspection@southplainfieldnj.com",
+  "contact_name": "Dominic Demico Jr",
+  "contact_title": "Construction Official",
+  "evidence": [
+   {
+    "url": "https://www.southplainfieldnj.com/spnj/Departments/Departments/Building%20Department/Forms/Permit%20Applications%20%26%20Forms/Certificate%20of%20Municipal%20Compliance%20%28Residential%20Resale%20or%20Tenant%29%2002-25-2025.pdf",
+    "quote": "CERTIFICATE OF MUNICIPAL COMPLIANCE For Smoke and Carbon Monoxide Detectors, Certificate of Occupancy",
+    "doc_date": "2023-06-22 (page 1 marked \"revised June 22, 2023\"; file name dated 02-25-2025; scanned, read visually)",
+    "via": "pdf",
+    "verified": null
+   },
+   {
+    "url": "https://www.southplainfieldnj.com/spnj/Departments/Departments/Building%20Department/Forms/Permit%20Applications%20%26%20Forms/Certificate%20of%20Municipal%20Compliance%20%28Residential%20Resale%20or%20Tenant%29%2002-25-2025.pdf",
+    "quote": "PLEASE DO NOT SCHEDULE REAL ESTATE CLOSING UNTIL CERTIFICATE ISSUED.",
+    "doc_date": "2023-06-22 (page 1 marked \"revised June 22, 2023\"; file name dated 02-25-2025; scanned, read visually)",
+    "via": "pdf",
+    "verified": null
+   },
+   {
+    "url": "https://www.southplainfieldnj.com/spnj/Departments/Departments/Building%20Department/Forms/Permit%20Applications%20%26%20Forms/Certificate%20of%20Municipal%20Compliance%20%28Residential%20Resale%20or%20Tenant%29%2002-25-2025.pdf",
+    "quote": "Homeowners and/or agents: It is your responsibility to see that all open permits are closed out prior to the inspection. Please DO NOT schedule real estate closings until all open permits and/or violations have been corrected. Certificates will be generated within two (2) business days.",
+    "doc_date": "2023-06-22 (page 1 marked \"revised June 22, 2023\"; file name dated 02-25-2025; scanned, read visually)",
+    "via": "pdf",
+    "verified": null
+   },
+   {
+    "url": "https://www.southplainfieldnj.com/spnj/Departments/Departments/Building%20Department/Forms/Permit%20Applications%20%26%20Forms/Certificate%20of%20Municipal%20Compliance%20%28Residential%20Resale%20or%20Tenant%29%2002-25-2025.pdf",
+    "quote": "****Payment by check or money order only. Payable to Borough of South Plainfield.**** Applications to be submitted in-person only.",
+    "doc_date": "2023-06-22 (page 1 marked \"revised June 22, 2023\"; file name dated 02-25-2025; scanned, read visually)",
+    "via": "pdf",
+    "verified": null
+   },
+   {
+    "url": "https://www.southplainfieldnj.com/spnj/Departments/Departments/Building%20Department/Forms/Permit%20Applications%20%26%20Forms/Certificate%20of%20Municipal%20Compliance%20%28Residential%20Resale%20or%20Tenant%29%2002-25-2025.pdf",
+    "quote": "BOROUGH OF SOUTH PLAINFIELD Building Department 2480 Plainfield Avenue South Plainfield, New Jersey 07080 Tel: 908-226-7640 Fax: 908-754-1179",
+    "doc_date": "2023-06-22 (page 1 marked \"revised June 22, 2023\"; file name dated 02-25-2025; scanned, read visually)",
+    "via": "pdf",
+    "verified": null
+   },
+   {
+    "url": "https://www.southplainfieldnj.com/spnj/Departments/Departments/Building%20Department/",
+    "quote": "Certificate of Municipal Compliance (Residential Resale or Tenant) 02-25-2025",
+    "doc_date": "2026-09 (page as fetched)",
+    "via": "page",
+    "verified": true
+   },
+   {
+    "url": "https://www.southplainfieldnj.com/spnj/Departments/Departments/Building%20Department/",
+    "quote": "Phone Number: 908-226-7640 for questions.",
+    "doc_date": "2026-09",
+    "via": "page",
+    "verified": true
+   },
+   {
+    "url": "https://www.southplainfieldnj.com/spnj/Departments/Departments/Construction%20Officer/",
+    "quote": "Dominic Demico Jr, Construction Officer 908-226-7645",
+    "doc_date": "2026-09",
+    "via": "page",
+    "verified": true
+   },
+   {
+    "url": "https://www.southplainfieldnj.com/spnj/Departments/Departments/Building%20Department/Forms/Smoke%20Detector%20Information.pdf",
+    "quote": "If you have any questions regarding this, please call Dominic Demico, Jr, Construction Official, at (908)226-7645.",
+    "doc_date": "undated (scanned, read visually)",
+    "via": "pdf",
+    "verified": null
+   }
+  ],
+  "confidence": "medium",
+  "notes": "South Plainfield combines the state smoke/CO certificate and a Borough resale check in one Building Department 'Certificate of Municipal Compliance (Residential Resale or Tenant)'. The form is subtitled 'Certificate of Occupancy', tells sellers not to schedule the closing until it is issued, checks open permits, unpermitted work and sump pumps, and includes a House Evaluation form, so it is recorded as a required town certificate. No Borough ordinance text was found online to confirm the local requirement (the code on ecode360 could not be opened), so confidence is medium. The PDF is a scan: page 1 is marked 'revised June 22, 2023' while the file name is dated 02-25-2025. The inspection-request email on the Building Department page (schedulemyinspection@southplainfieldnj.com) is used as the office email; the form itself says applications must be submitted in person. The same certificate is used for new tenants."
+ },
+ "fire_cert": {
+  "requirements": [
+   "Smoke detectors on each habitable level and within 10 feet of the farthest bedroom door; 10-year sealed battery units unless the home has AC or interwired detectors (homes built after 1977 must keep that type); detectors expire after 10 years",
+   "CO detectors within 10 feet of the farthest bedroom door",
+   "Alarm system annunciators within 10 feet of bedrooms and on each level",
+   "The June 2023 form still requires a 2A-10B:C extinguisher (10 lb. or less, within 10 feet of the kitchen, mounted, top no higher than 5 feet); P.L.2025, c.19 removed the state extinguisher requirement, so confirm with the Building Department"
+  ],
+  "authorities": [
+   {
+    "name": "Borough of South Plainfield Building Department (issues the smoke/CO Certificate of Municipal Compliance)",
+    "type": "municipal_fire_bureau",
+    "area_served": "Entire borough",
+    "lead_time": "Certificates are generated within 2 business days after the inspection",
+    "fees": [
+     {
+      "label": "1- to 4-family home or townhouse, per unit (same combined certificate as the town resale certificate; not charged twice)",
+      "amount": "$65.00",
+      "quote": "One (1) to four (4) family dwelling including townhouse - $65.00 per dwelling unit.",
+      "source_url": "https://www.southplainfieldnj.com/spnj/Departments/Departments/Building%20Department/Forms/Permit%20Applications%20%26%20Forms/Certificate%20of%20Municipal%20Compliance%20%28Residential%20Resale%20or%20Tenant%29%2002-25-2025.pdf",
+      "verified": null
+     },
+     {
+      "label": "Condominium or multi-family, per unit (same combined certificate as the town resale certificate; not charged twice)",
+      "amount": "$50.00",
+      "quote": "Multi-family dwelling including condominium - $50.00 per dwelling unit.",
+      "source_url": "https://www.southplainfieldnj.com/spnj/Departments/Departments/Building%20Department/Forms/Permit%20Applications%20%26%20Forms/Certificate%20of%20Municipal%20Compliance%20%28Residential%20Resale%20or%20Tenant%29%2002-25-2025.pdf",
+      "verified": null
+     },
+     {
+      "label": "1- to 4-family home or townhouse at a special time, per unit (same combined certificate as the town resale certificate; not charged twice)",
+      "amount": "$125.00",
+      "quote": "One (1) to four (4) family dwelling including townhouse at a special time - $125.00 per dwelling unit.",
+      "source_url": "https://www.southplainfieldnj.com/spnj/Departments/Departments/Building%20Department/Forms/Permit%20Applications%20%26%20Forms/Certificate%20of%20Municipal%20Compliance%20%28Residential%20Resale%20or%20Tenant%29%2002-25-2025.pdf",
+      "verified": null
+     }
+    ],
+    "how_to_apply": "Same packet and process as the town certificate: submit the Certificate of Municipal Compliance packet in person at the Building Department, 2480 Plainfield Avenue, with a check or money order.",
+    "application_url": "https://www.southplainfieldnj.com/spnj/Departments/Departments/Building%20Department/Forms/Permit%20Applications%20%26%20Forms/Certificate%20of%20Municipal%20Compliance%20%28Residential%20Resale%20or%20Tenant%29%2002-25-2025.pdf",
+    "department_url": "https://www.southplainfieldnj.com/spnj/Departments/Departments/Building%20Department/",
+    "phone": "908-226-7640",
+    "email": "schedulemyinspection@southplainfieldnj.com",
+    "contact_name": "Dominic Demico Jr",
+    "contact_title": "Construction Official",
+    "evidence": [
+     {
+      "url": "https://nj.gov/dca/dfs/pdf/ANNUAL%20REGISTRY/THIRD%20QUARTER%20LEA%20REGISTRY%202026.pdf",
+      "quote": "F South Plainfield Borough",
+      "doc_date": "2026-07",
+      "via": "pdf",
+      "verified": true
+     },
+     {
+      "url": "https://www.nj.gov/dca/dfs/pdf/fire%20directory_county%20summary/fire_code_enforcement_director.pdf",
+      "quote": "LEAID: 1222-001 Enf Auth. Fire Dept Fire Official Michael Pellegrino Phone (908) 756-4761 Addr: 2480 Plainfield Av South Plainfield NJ 07080 Phone (908) 226-7640",
+      "doc_date": "2026-01-20 (survey date)",
+      "via": "state_directory",
+      "verified": true
+     },
+     {
+      "url": "https://www.nj.gov/dca/dfs/pdf/fire%20directory_county%20summary/fire_code_enforcement_director.pdf",
+      "quote": "South Plainfield Boro Constr",
+      "doc_date": "2026-01-20",
+      "via": "state_directory",
+      "verified": true
+     },
+     {
+      "url": "https://www.southplainfieldnj.com/spnj/Departments/Departments/Building%20Department/Forms/Permit%20Applications%20%26%20Forms/Certificate%20of%20Municipal%20Compliance%20%28Residential%20Resale%20or%20Tenant%29%2002-25-2025.pdf",
+      "quote": "Applicant Waiver: The undersigned hereby requests a Smoke Detector / Carbon Monoxide and Fire Extinguisher Certification",
+      "doc_date": "2023-06-22 (page 1 marked \"revised June 22, 2023\"; file name dated 02-25-2025; scanned, read visually)",
+      "via": "pdf",
+      "verified": null
+     },
+     {
+      "url": "https://www.southplainfieldnj.com/spnj/Fire%20Marshal/",
+      "quote": "Michael Pellegrino, Fire Marshal/Fire Official",
+      "doc_date": "2026-09 (page as fetched)",
+      "via": "page",
+      "verified": true
+     }
+    ],
+    "confidence": "medium"
+   }
+  ],
+  "notes": "The state LEA registry lists the South Plainfield Fire Department (code F) as the fire code enforcing agency, with Fire Marshal/Fire Official Michael Pellegrino ((908) 756-4761; state directory email mpellegrino@southplainfieldnj.com). The state directory's smoke detector compliance block names 'South Plainfield Boro Constr' at 2480 Plainfield Av with phone (908) 226-7640, and the Borough's Building Department form issues the smoke/CO certification, so the Building Department is recorded as the issuing office. The Fire Marshal's web page lists no resale smoke certificate form. Fees are the same single certificate as in resale_co; only the main tiers are repeated here."
+ },
+ "other_items": [
+  {
+   "label": "Open permits and unpermitted work",
+   "detail": "All open permits must be closed before the inspection; work found done without permits carries a minimum $250 penalty.",
+   "source_url": "https://www.southplainfieldnj.com/spnj/Departments/Departments/Building%20Department/Forms/Permit%20Applications%20%26%20Forms/Certificate%20of%20Municipal%20Compliance%20%28Residential%20Resale%20or%20Tenant%29%2002-25-2025.pdf"
+  },
+  {
+   "label": "Owner mailing address update",
+   "detail": "The packet includes a form to update the owner's tax and sewer mailing address.",
+   "source_url": "https://www.southplainfieldnj.com/spnj/Departments/Departments/Building%20Department/Forms/Permit%20Applications%20%26%20Forms/Certificate%20of%20Municipal%20Compliance%20%28Residential%20Resale%20or%20Tenant%29%2002-25-2025.pdf"
+  }
+ ],
+ "open_questions": [
+  "Whether the Building Department still requires a fire extinguisher after P.L.2025, c.19 (the posted form is from June 2023).",
+  "The Borough ordinance that sets the Certificate of Municipal Compliance requirement and fees (not viewable online)."
+ ],
+ "verification": {
+  "fees": 10,
+  "fee_ok": 0,
+  "fee_bad": 0,
+  "fee_unchecked": 10,
+  "quotes": 14,
+  "q_ok": 7,
+  "q_bad": 0,
+  "q_unchecked": 7
+ }
+}

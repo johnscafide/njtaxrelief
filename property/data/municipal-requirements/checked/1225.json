@@ -1,0 +1,241 @@
+{
+ "municipality_code": "1225",
+ "municipality": "Woodbridge Township",
+ "county": "MIDDLESEX",
+ "checked_at": "2026-09-30",
+ "resale_co": {
+  "status": "required",
+  "name": "Certificate of Compliance (Residential Sale & Refinance), 'Smoke Detector Inspection'",
+  "issued_by": "Bureau of Housing (Housing Department), Department of Planning and Development, One Main Street",
+  "lead_time": "Apply more than 10 business days before the change of occupant for the lowest fee",
+  "valid_for": "60 days from the date of inspection",
+  "requirements": [
+   "Smoke detectors on every level, including at the foot of the basement stairs; UL listed; mounted with screws (no tape, Velcro, nails or picture hooks)",
+   "Battery smoke detectors must be the 10-year sealed-battery type (since 01/01/2019)",
+   "CO detectors within 10 feet of sleeping areas; UL listed; mounted with screws unless plug-in",
+   "Sanitary sewer discharge inspection: no floor drains (basement drains must be cemented over), sump pumps, or yard and driveway drains into the sanitary sewer; sewer trap caps not missing, loose or cracked",
+   "Fire extinguisher in or within 10 feet of the kitchen, mounted on the maker's bracket, 2 1/2 to 10 lb., rated 2A:10B:C or greater (as printed on the 2021 form)",
+   "All open building permits and violations closed before the inspector releases the certificate",
+   "Owner or a representative must be at the inspection; inspections are 9:00 am to 12:00 pm"
+  ],
+  "fees": [
+   {
+    "label": "Certificate of Compliance (smoke/CO/extinguisher), requested more than 10 business days before change of occupant, per unit",
+    "amount": "$50.00",
+    "quote": "Requests for a certificate of smoke detector, carbon monoxide alarm and portable fire extinguisher compliance received more than ten (10) business days prior to the change of occupant: fifty ($50.00} dollars per unit.",
+    "source_url": "https://www.twp.woodbridge.nj.us/DocumentCenter/View/15589/Certificate-of-Compliance-2021",
+    "verified": true
+   },
+   {
+    "label": "Certificate of Compliance, requested 4 to 10 business days before change of occupant, per unit",
+    "amount": "$70.00",
+    "quote": "Requests for a certificate of smoke detector, carbon monoxide alarm and portable fire extinguisher compliance received four (4) to ten (10) business days prior to the change of occupant: seventy ($70.00) dollars per unit.",
+    "source_url": "https://www.twp.woodbridge.nj.us/DocumentCenter/View/15589/Certificate-of-Compliance-2021",
+    "verified": true
+   },
+   {
+    "label": "Certificate of Compliance, requested fewer than 4 business days before change of occupant, per unit",
+    "amount": "$125.00",
+    "quote": "Requests for a certificate of smoke detector, carbon monoxide alarm and portable fire extinguisher compliance received fewer than four (4) business days prior to the change of occupant: one hundred twenty-five ($125.00} dollars per unit.",
+    "source_url": "https://www.twp.woodbridge.nj.us/DocumentCenter/View/15589/Certificate-of-Compliance-2021",
+    "verified": true
+   }
+  ],
+  "how_to_apply": "The form is not available online. Call the Bureau of Housing at 732-634-4500 ext. 6009 with the closing date, the buyer's name, current address, email and phone, the property address, and who will be at the inspection. You get an appointment date and an application number and are told how to pay; the 2021 sheet says exact cash or bank certified check only (no personal checks or money orders). The certificate is handed to the person who meets the inspector.",
+  "application_url": "",
+  "department_url": "https://www.twp.woodbridge.nj.us/982/Housing-Forms",
+  "phone": "732-634-4500 ext. 6009",
+  "email": "",
+  "contact_name": "Michael Logan",
+  "contact_title": "Head of Housing Department",
+  "evidence": [
+   {
+    "url": "https://www.twp.woodbridge.nj.us/DocumentCenter/View/15589/Certificate-of-Compliance-2021",
+    "quote": "Residential properties being sold or refinanced must meet all the requirements of the Township Smoke Detector, Carbon Monoxide Detector, Sanitary Sewer Discharge and Fire Extinguisher Ordinances.",
+    "doc_date": "2021-06 (PDF created 2021-06-10; fees cite Ord. #05-23 and #05-93)",
+    "via": "pdf",
+    "verified": true
+   },
+   {
+    "url": "https://www.twp.woodbridge.nj.us/DocumentCenter/View/15589/Certificate-of-Compliance-2021",
+    "quote": "Please be advised that the Township of Woodbridge does not require the issuance of a Certificate of Continued Occupancy; however, the Township does require a Smoke Detector inspection as per Ordinance adopted by the Township of Woodbridge on April 15, 1980 and a Sanitary Sewer Discharge Inspection as per Ordinance adopted March 3, 1998.",
+    "doc_date": "2021-06 (PDF created 2021-06-10; fees cite Ord. #05-23 and #05-93)",
+    "via": "pdf",
+    "verified": true
+   },
+   {
+    "url": "https://www.twp.woodbridge.nj.us/DocumentCenter/View/15589/Certificate-of-Compliance-2021",
+    "quote": "The Certificate of Compliance is valid for 60 days from the date of inspection.",
+    "doc_date": "2021-06 (PDF created 2021-06-10; fees cite Ord. #05-23 and #05-93)",
+    "via": "pdf",
+    "verified": true
+   },
+   {
+    "url": "https://www.twp.woodbridge.nj.us/DocumentCenter/View/15589/Certificate-of-Compliance-2021",
+    "quote": "Form NOT available on-line. Call 732-634-4500 x:6009 to schedule. Acceptable payments are Exact Cash or Bank Certified Check only. (No personal checks, no money orders).",
+    "doc_date": "2021-06 (PDF created 2021-06-10; fees cite Ord. #05-23 and #05-93)",
+    "via": "pdf",
+    "verified": true
+   },
+   {
+    "url": "https://www.twp.woodbridge.nj.us/DocumentCenter/View/15589/Certificate-of-Compliance-2021",
+    "quote": "All open building permits/violations must be closed for inspector to release the Certificate of Compliance on inspection date.",
+    "doc_date": "2021-06 (PDF created 2021-06-10; fees cite Ord. #05-23 and #05-93)",
+    "via": "pdf",
+    "verified": true
+   },
+   {
+    "url": "https://www.twp.woodbridge.nj.us/DocumentCenter/View/15497/Instructions-for-Residential-Resale-and-Rentals",
+    "quote": "Certificate of Compliance “Smoke Detector Inspection” (Residential Sale/Refinance) Applications for Certificate of Compliance are being taken over the phone by calling 732-634-4500 ext 6009",
+    "doc_date": "2021-05 (PDF created 2021-05-26)",
+    "via": "pdf",
+    "verified": true
+   },
+   {
+    "url": "https://www.twp.woodbridge.nj.us/DocumentCenter/View/15497/Instructions-for-Residential-Resale-and-Rentals",
+    "quote": "Bureau of Housing One Main Street • Woodbridge, New Jersey 07095 Tel: (732) 602-6009",
+    "doc_date": "2021-05 (PDF created 2021-05-26)",
+    "via": "pdf",
+    "verified": true
+   },
+   {
+    "url": "https://www.twp.woodbridge.nj.us/982/Housing-Forms",
+    "quote": "Certificate of Compliance Residential Sale & Refinance",
+    "doc_date": "2026-09 (page as fetched)",
+    "via": "page",
+    "verified": true
+   },
+   {
+    "url": "https://www.twp.woodbridge.nj.us/m/directory/department?did=47",
+    "quote": "Michael Logan Head of Housing Department 732-634-4500 Ext 4717",
+    "doc_date": "2026-09",
+    "via": "page",
+    "verified": true
+   }
+  ],
+  "confidence": "high",
+  "notes": "Woodbridge says in writing that it does NOT require a Certificate of Continued Occupancy, but it does require a Township 'Certificate of Compliance' for any residential sale or refinance: a smoke detector / CO / extinguisher inspection (Township ordinance of April 15, 1980) plus a sanitary sewer discharge inspection (ordinance of March 3, 1998), with open permits closed. It is recorded as required because the Township inspection and certificate are needed to close. The fee is the smoke/CO certificate fee (per unit). The posted forms are from 2021 and still list a fire extinguisher, which P.L.2025, c.19 removed from the state requirement. The Housing Department directory lists Michael Logan (Head of Housing Department, 732-634-4500 ext. 4717) and a department number of 732-602-6009; no email is shown. The same Bureau handles annual rental inspections (732-634-4500 ext. 6466), which are not a resale item."
+ },
+ "fire_cert": {
+  "requirements": [
+   "Smoke detectors on every level, including at the foot of the basement stairs; UL listed; mounted with screws; battery units must be 10-year sealed",
+   "CO detectors within 10 feet of sleeping areas; UL listed; mounted with screws unless plug-in",
+   "The 2021 Township form still lists a fire extinguisher (2A:10B:C, 2 1/2 to 10 lb., in or within 10 feet of the kitchen, mounted); P.L.2025, c.19 removed the state requirement, so confirm with the Bureau of Housing"
+  ],
+  "authorities": [
+   {
+    "name": "Woodbridge Township Bureau of Housing (issues the smoke/CO Certificate of Compliance township-wide)",
+    "type": "municipal_fire_bureau",
+    "area_served": "Entire township (all nine fire districts)",
+    "lead_time": "Apply more than 10 business days before the change of occupant for the lowest fee",
+    "fees": [
+     {
+      "label": "Certificate of Compliance (smoke/CO/extinguisher), requested more than 10 business days before change of occupant, per unit (same Certificate of Compliance as the town certificate; not charged twice)",
+      "amount": "$50.00",
+      "quote": "Requests for a certificate of smoke detector, carbon monoxide alarm and portable fire extinguisher compliance received more than ten (10) business days prior to the change of occupant: fifty ($50.00} dollars per unit.",
+      "source_url": "https://www.twp.woodbridge.nj.us/DocumentCenter/View/15589/Certificate-of-Compliance-2021",
+      "verified": true
+     },
+     {
+      "label": "Certificate of Compliance, requested 4 to 10 business days before change of occupant, per unit (same Certificate of Compliance as the town certificate; not charged twice)",
+      "amount": "$70.00",
+      "quote": "Requests for a certificate of smoke detector, carbon monoxide alarm and portable fire extinguisher compliance received four (4) to ten (10) business days prior to the change of occupant: seventy ($70.00) dollars per unit.",
+      "source_url": "https://www.twp.woodbridge.nj.us/DocumentCenter/View/15589/Certificate-of-Compliance-2021",
+      "verified": true
+     },
+     {
+      "label": "Certificate of Compliance, requested fewer than 4 business days before change of occupant, per unit (same Certificate of Compliance as the town certificate; not charged twice)",
+      "amount": "$125.00",
+      "quote": "Requests for a certificate of smoke detector, carbon monoxide alarm and portable fire extinguisher compliance received fewer than four (4) business days prior to the change of occupant: one hundred twenty-five ($125.00} dollars per unit.",
+      "source_url": "https://www.twp.woodbridge.nj.us/DocumentCenter/View/15589/Certificate-of-Compliance-2021",
+      "verified": true
+     }
+    ],
+    "how_to_apply": "Call the Bureau of Housing at 732-634-4500 ext. 6009 to schedule (the form is not online); pay by exact cash or bank certified check per the 2021 sheet.",
+    "application_url": "",
+    "department_url": "https://www.twp.woodbridge.nj.us/982/Housing-Forms",
+    "phone": "732-634-4500 ext. 6009",
+    "email": "",
+    "contact_name": "Michael Logan",
+    "contact_title": "Head of Housing Department",
+    "evidence": [
+     {
+      "url": "https://www.twp.woodbridge.nj.us/DocumentCenter/View/15589/Certificate-of-Compliance-2021",
+      "quote": "FEES: The request fee for a certificate of smoke detector, carbon monoxide alarm and portable fire extinguisher compliance as required by N.J.A.C. 5:70-2.3, shall be based upon the amount of time remaining before the change of occupants is expected as follows:",
+      "doc_date": "2021-06 (PDF created 2021-06-10; fees cite Ord. #05-23 and #05-93)",
+      "via": "pdf",
+      "verified": true
+     },
+     {
+      "url": "https://www.nj.gov/dca/dfs/pdf/fire%20directory_county%20summary/fire_code_enforcement_director.pdf",
+      "quote": "Woodbridge Twp Bldg Dept",
+      "doc_date": "2026-07-22 (survey date on the Colonia page)",
+      "via": "state_directory",
+      "verified": true
+     },
+     {
+      "url": "https://www.nj.gov/dca/dfs/pdf/fire%20directory_county%20summary/fire_code_enforcement_director.pdf",
+      "quote": "LEAID: 1225-012 Enf Auth. District Fire Official William R Schleck Phone (732) 388-6666 Addr: 1 Main St Woodbridge NJ 07095 Phone (732) 634-4500",
+      "doc_date": "2026-07-22",
+      "via": "state_directory",
+      "verified": true
+     },
+     {
+      "url": "https://nj.gov/dca/dfs/pdf/ANNUAL%20REGISTRY/THIRD%20QUARTER%20LEA%20REGISTRY%202026.pdf",
+      "quote": "D Woodbridge Township (1)",
+      "doc_date": "2026-07",
+      "via": "pdf",
+      "verified": true
+     },
+     {
+      "url": "https://nj.gov/dca/dfs/pdf/ANNUAL%20REGISTRY/THIRD%20QUARTER%20LEA%20REGISTRY%202026.pdf",
+      "quote": "No districts are designated with #’s 3, 6 or 10 in Woodbridge Township.",
+      "doc_date": "2026-07",
+      "via": "pdf",
+      "verified": true
+     },
+     {
+      "url": "https://www.avenelfire.org/index.php/2017-12-27-17-48-57/bureau-of-fire-prevention",
+      "quote": "The Bureau, consisting of the Fire Official and Fire Inspector Chris Neroda, conducts annual fire inspections for all businesses in the 5th Fire District.",
+      "doc_date": "2026-09 (page as fetched)",
+      "via": "page",
+      "verified": true
+     }
+    ],
+    "confidence": "high"
+   }
+  ],
+  "notes": "The DCA July 2026 registry lists nine fire districts as Woodbridge's fire code enforcing agencies (Districts 1, 2, 4, 5, 7, 8, 9, 11 and 12; there are no Districts 3, 6 or 10). For 1-2 family resales, however, the Township's own 2021 Certificate of Compliance sheet sets the smoke/CO certificate fee and the Bureau of Housing performs the inspection township-wide, and the state fire directory's smoke detector compliance block on every Woodbridge page names 'Woodbridge Twp Bldg Dept' at 1 Main St, (732) 634-4500. The fire districts' own bureaus (for example Avenel, District 5, Fire Official Cory S. Spillar, 732-855-9747) inspect businesses; no district site found posts a resale smoke certificate form or fee. The state directory lists every Woodbridge fire company under LEA 1225-012 (Colonia Fire Prevention, Fire Official William R Schleck, (732) 388-6666, fireprevention@coloniafd.org), which looks like a directory simplification; the Township's own documents are used here."
+ },
+ "other_items": [
+  {
+   "label": "Sanitary sewer discharge inspection",
+   "detail": "Part of the Township Certificate of Compliance: floor drains must be cemented over, and sump pumps, yard or driveway drains may not discharge into the sanitary sewer; sewer trap caps must be intact.",
+   "source_url": "https://www.twp.woodbridge.nj.us/DocumentCenter/View/15589/Certificate-of-Compliance-2021"
+  },
+  {
+   "label": "Open permits and violations",
+   "detail": "All open building permits and violations must be closed for the inspector to release the Certificate of Compliance.",
+   "source_url": "https://www.twp.woodbridge.nj.us/DocumentCenter/View/15589/Certificate-of-Compliance-2021"
+  },
+  {
+   "label": "Refinance",
+   "detail": "The same Certificate of Compliance is also required for a refinance.",
+   "source_url": "https://www.twp.woodbridge.nj.us/DocumentCenter/View/15589/Certificate-of-Compliance-2021"
+  }
+ ],
+ "open_questions": [
+  "Whether the 2021 payment rules (exact cash or bank certified check) and the fire extinguisher line are still current.",
+  "A work email for the Bureau of Housing (none is shown on the Township site)."
+ ],
+ "verification": {
+  "fees": 6,
+  "fee_ok": 6,
+  "fee_bad": 0,
+  "fee_unchecked": 0,
+  "quotes": 15,
+  "q_ok": 15,
+  "q_bad": 0,
+  "q_unchecked": 0
+ }
+}

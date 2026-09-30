@@ -1,0 +1,240 @@
+{
+ "municipality_code": "0514",
+ "municipality": "Wildwood",
+ "county": "CAPE MAY",
+ "checked_at": "2026-09-30",
+ "resale_co": {
+  "status": "required",
+  "name": "Certificate of Continued Occupancy (CCO) and Zoning Certification, via the combined Application for Transfer of Ownership",
+  "issued_by": "City of Wildwood Construction / Code Enforcement Office (CCO) and Zoning Office (zoning certification)",
+  "contact_name": "Kate Dunn",
+  "contact_title": "Technical Assistant to the Construction Official / Planning and Zoning Board Secretary",
+  "lead_time": "10 or more business days before settlement for the lowest zoning fee; reports take several days after the inspection to process",
+  "valid_for": "",
+  "requirements": [
+   "Continued Occupancy (CCO) inspection",
+   "Zoning certification",
+   "Smoke detector and carbon monoxide compliance inspection (see fire_cert)",
+   "Status of Fire Code report, only for properties that need a yearly fire inspection (single family homes do not)"
+  ],
+  "fees": [
+   {
+    "label": "CCO, residential property with 1 to 5 units",
+    "amount": "$95.00",
+    "quote": "Fees: Continued Occupancy - $95.00 for a residential property with 1 to 5 Units",
+    "source_url": "https://wildwoodnj.gov/files/Transfer-of-ownership.pdf",
+    "verified": true
+   },
+   {
+    "label": "Zoning certification, 10 or more business days before settlement",
+    "amount": "$50.00",
+    "quote": "Zoning Cert: $50.00 received 10 or more business days before settlement",
+    "source_url": "https://wildwoodnj.gov/files/Transfer-of-ownership.pdf",
+    "verified": true
+   },
+   {
+    "label": "Zoning certification, 4 to 10 business days before settlement",
+    "amount": "$70.00",
+    "quote": "$70.00 4 to 10 business days",
+    "source_url": "https://wildwoodnj.gov/files/Transfer-of-ownership.pdf",
+    "verified": true
+   },
+   {
+    "label": "Zoning certification, less than 4 business days before settlement",
+    "amount": "$125.00",
+    "quote": "$125.00 less than 4 business days before settlement",
+    "source_url": "https://wildwoodnj.gov/files/Transfer-of-ownership.pdf",
+    "verified": true
+   },
+   {
+    "label": "Status of Fire Code (only properties that need a yearly fire inspection)",
+    "amount": "$25.00",
+    "quote": "Status of Fire Code - $25.00 for properties that require a yearly fire inspection.",
+    "source_url": "https://wildwoodnj.gov/files/Transfer-of-ownership.pdf",
+    "verified": true
+   }
+  ],
+  "how_to_apply": "Fill out the one combined City of Wildwood Application for Transfer of Ownership (property, units, bedrooms, seasonal or year-round, settlement date, owner, buyer, agent) and turn it in with payment at City Hall, 4400 New Jersey Avenue. No application is accepted without payment; do not fax or mail it without payment. The current fire form says separate checks are required for the fire, CCO and zoning certificates. Reports are faxed or emailed when done.",
+  "application_url": "https://wildwoodnj.gov/files/Transfer-of-ownership.pdf",
+  "department_url": "https://wildwoodnj.gov/construction",
+  "phone": "609-522-2444 ext. 2910",
+  "email": "kdunn@wildwoodnj.gov",
+  "evidence": [
+   {
+    "url": "https://wildwoodnj.gov/files/Transfer-of-ownership.pdf",
+    "quote": "We have changed from 4 different applications to one combined application. You are still required to have the four different inspections, but only need to fill out the one form.",
+    "doc_date": "2018-01 (PDF created January 16, 2018)",
+    "via": "pdf",
+    "verified": true
+   },
+   {
+    "url": "https://wildwoodnj.gov/files/Transfer-of-ownership.pdf",
+    "quote": "Required Inspections: Single Family properties do not require Status of Fire Code",
+    "doc_date": "2018-01",
+    "via": "pdf",
+    "verified": true
+   },
+   {
+    "url": "https://wildwoodnj.gov/files/Transfer-of-ownership.pdf",
+    "quote": "No applications will be accepted without payment.",
+    "doc_date": "2018-01",
+    "via": "pdf",
+    "verified": true
+   },
+   {
+    "url": "https://wildwoodnj.gov/files/Transfer-of-ownership.pdf",
+    "quote": "It takes several days after the inspection to have it processed.",
+    "doc_date": "2018-01",
+    "via": "pdf",
+    "verified": true
+   },
+   {
+    "url": "https://wildwoodnj.gov/codeenforcement",
+    "quote": "Transfer of Ownership",
+    "doc_date": "2026-09-30 (page fetched; link to the application)",
+    "via": "page",
+    "verified": true
+   },
+   {
+    "url": "https://wildwoodnj.gov/construction",
+    "quote": "Kate Dunn, Technical Assistant to the Construction Official / Planning and Zoning Board Secretary kdunn@wildwoodnj.gov 609-522-2444 Ext. 2910",
+    "doc_date": "2026-09-30 (page fetched)",
+    "via": "page",
+    "verified": null
+   },
+   {
+    "url": "https://wildwoodnj.gov/firedepartment/images/CSACMAC%20Application%20FILLABLE.pdf",
+    "quote": "SEPARATE CHECKS (if applicable) ARE REQUIRED FOR FIRE, CCO, and ZONING CERTIFICATES!",
+    "doc_date": "2026-01 (Rev. 1/26)",
+    "via": "pdf",
+    "verified": null
+   }
+  ],
+  "confidence": "high",
+  "notes": "Wildwood requires a Continued Occupancy (CCO) inspection and a Zoning certification on a transfer of ownership, applied for on one combined form posted on the Code Enforcement page. The combined form dates from January 2018, and its smoke certificate fees ($45/$90/$161) have since been replaced by the Fire Prevention Bureau's January 2026 form (see fire_cert), so the CCO and zoning fees may also have changed; confirm before quoting. The form's two pages differ on large buildings (page 1 says over 10 units add $10.00 per unit, page 2 says over 5 units); this does not affect 1-2 family homes. The form gives Kate Dunn's email as kdunn@wildwoodnj.org; the current Construction page lists kdunn@wildwoodnj.gov. Zoning Officer: Steven Booy, 609-522-2444 ext. 2240, sbooy@wildwoodnj.org (Planning & Zoning page). The City's Construction Department also serves West Wildwood Borough. Wildwood also requires vacant property registration ($500), which is not a sale requirement."
+ },
+ "fire_cert": {
+  "requirements": [
+   "On-site inspection by the Wildwood Fire Prevention Bureau; do not apply until everything is in place",
+   "Smoke alarms in each sleeping room (City ordinance), outside (within 10 feet of) each sleeping area, and on every level",
+   "Hardwired smoke alarms must be replaced if more than 10 years past the manufacture date; battery smoke alarms must be sealed battery type",
+   "CO alarms outside (within 10 feet of) each sleeping area and on every level when there are fuel-burning appliances or an attached garage",
+   "Homes with a generator, solar panels, battery storage or other secondary power source need a printed label reading 'CAUTION: MULTIPLE SOURCES OF POWER.' within 18 inches of the main electrical panel and the electric meter (handwritten labels not accepted)",
+   "The January 2026 form does not list a fire extinguisher",
+   "Any outstanding fees on the property must be settled before the inspection"
+  ],
+  "authorities": [
+   {
+    "name": "City of Wildwood Fire Department, Fire Prevention Bureau",
+    "type": "municipal_fire_bureau",
+    "area_served": "Entire city",
+    "lead_time": "10 or more business days before settlement for the lower fee",
+    "fees": [
+     {
+      "label": "Application received 10 or more business days before settlement",
+      "amount": "$75.00",
+      "quote": "$75.00  if application is received 10 business days or more prior to settlement",
+      "source_url": "https://wildwoodnj.gov/firedepartment/images/CSACMAC%20Application%20FILLABLE.pdf",
+      "verified": null
+     },
+     {
+      "label": "Application received less than 10 business days before settlement",
+      "amount": "$150.00",
+      "quote": "$150.00    if application is received less than 10 business days prior to settlement",
+      "source_url": "https://wildwoodnj.gov/firedepartment/images/CSACMAC%20Application%20FILLABLE.pdf",
+      "verified": null
+     },
+     {
+      "label": "Penalty for failing to obtain the certificate (up to)",
+      "amount": "$2,000.00",
+      "quote": "Failure to obtain a CSAMAC certificate, the property owner is subject to a penalty up to $2,000.00.",
+      "source_url": "https://wildwoodnj.gov/firedepartment/images/CSACMAC%20Application%20FILLABLE.pdf",
+      "verified": null
+     }
+    ],
+    "how_to_apply": "Fill out the Application for a Certificate of Smoke Alarm and Carbon Monoxide Alarm Compliance (CSACMAC) for 1 or 2 family dwellings and submit it with payment (separate check from the CCO and zoning fees) to the Fire Prevention Bureau, 4400 New Jersey Avenue, Wildwood, NJ 08260, fax 609-522-4965 or email fireprev@wildwoodnj.gov. Credit cards are accepted with a 3% surcharge. The inspection is scheduled once the application is received; a failed inspection needs a re-inspection with a re-inspection fee (amount not stated).",
+    "application_url": "https://wildwoodnj.gov/firedepartment/images/CSACMAC%20Application%20FILLABLE.pdf",
+    "department_url": "https://wildwoodnj.gov/firedepartment/prevention-inspections",
+    "contact_name": "Jacob M. Spiegel",
+    "contact_title": "Fire Official",
+    "phone": "609-846-2031",
+    "email": "jspiegel@wildwoodnj.gov",
+    "evidence": [
+     {
+      "url": "https://wildwoodnj.gov/firedepartment/images/CSACMAC%20Application%20FILLABLE.pdf",
+      "quote": "Application for a Certificate of Smoke Alarm and Carbon Monoxide Alarm Compliance (CSACMAC), 1 or 2 Family Dwellings",
+      "doc_date": "2026-01 (Rev. 1/26)",
+      "via": "pdf",
+      "verified": null
+     },
+     {
+      "url": "https://wildwoodnj.gov/firedepartment/images/CSACMAC%20Application%20FILLABLE.pdf",
+      "quote": "Phone 609-846-2030 / Fax 609-522-4965 / Email: fireprev@wildwoodnj.gov",
+      "doc_date": "2026-01 (Rev. 1/26)",
+      "via": "pdf",
+      "verified": null
+     },
+     {
+      "url": "https://wildwoodnj.gov/firedepartment/images/CSACMAC%20Application%20FILLABLE.pdf",
+      "quote": "We accept credit cards which includes a 3% surcharge",
+      "doc_date": "2026-01 (Rev. 1/26)",
+      "via": "pdf",
+      "verified": null
+     },
+     {
+      "url": "https://wildwoodnj.gov/firedepartment/images/CSACMAC%20Application%20FILLABLE.pdf",
+      "quote": "If the property does not pass the initial inspection, a re-inspection must be scheduled and a re-inspection fee will be charged.",
+      "doc_date": "2026-01 (Rev. 1/26)",
+      "via": "pdf",
+      "verified": null
+     },
+     {
+      "url": "https://wildwoodnj.gov/firedepartment/prevention-inspections",
+      "quote": "Fire Official Jacob M. Spiegel jspiegel@wildwoodnj.gov 609-846-2031",
+      "doc_date": "2026-09-30 (page fetched)",
+      "via": "page",
+      "verified": null
+     },
+     {
+      "url": "https://wildwoodnj.gov/firedepartment/index",
+      "quote": "The Fire Prevention Bureau is headed by the Fire Official and has one full time and one part time inspector assigned.",
+      "doc_date": "2026-09-30 (page fetched)",
+      "via": "page",
+      "verified": true
+     },
+     {
+      "url": "https://nj.gov/dca/dfs/pdf/ANNUAL%20REGISTRY/THIRD%20QUARTER%20LEA%20REGISTRY%202026.pdf",
+      "quote": "F Wildwood City",
+      "doc_date": "2026-07",
+      "via": "pdf",
+      "verified": true
+     },
+     {
+      "url": "https://www.nj.gov/dca/dfs/pdf/fire%20directory_county%20summary/fire_code_enforcement_director.pdf",
+      "quote": "LEAID: 0514-001 Enf Auth. Fire Dept Fire Official Jacob Spiegel Phone (609) 846-2030 Addr: 4400 New Jersey Av",
+      "doc_date": "2024-08 (survey date 8/21/2024)",
+      "via": "state_directory",
+      "verified": true
+     }
+    ],
+    "confidence": "high"
+   }
+  ],
+  "notes": "NJ DCA lists Wildwood's fire code enforcing agency as its fire department (F). The Fire Prevention Bureau's CSACMAC form (Rev. 1/26) is current and already reflects P.L.2025, c.19: no fire extinguisher, and a secondary power source label. It replaces the older smoke fees printed on the 2018 Transfer of Ownership form ($45.00 / $90.00 / $161.00). Bureau administrative contact: Amelia Ianiro, (609) 846-2030, fireprev@wildwoodnj.gov."
+ },
+ "other_items": [],
+ "open_questions": [
+  "Whether the 2018 CCO ($95.00) and zoning certification ($50.00 / $70.00 / $125.00) fees are still current.",
+  "Amount of the smoke/CO re-inspection fee (not stated on the January 2026 form)."
+ ],
+ "verification": {
+  "fees": 8,
+  "fee_ok": 5,
+  "fee_bad": 0,
+  "fee_unchecked": 3,
+  "quotes": 15,
+  "q_ok": 8,
+  "q_bad": 0,
+  "q_unchecked": 7
+ }
+}

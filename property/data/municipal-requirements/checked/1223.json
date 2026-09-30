@@ -1,0 +1,294 @@
+{
+ "municipality_code": "1223",
+ "municipality": "South River Borough",
+ "county": "MIDDLESEX",
+ "checked_at": "2026-09-30",
+ "resale_co": {
+  "status": "required",
+  "name": "Residential Resale Certificate (Certificate of Continued Occupancy)",
+  "issued_by": "Code Enforcement / Property Maintenance, 48 Washington Street",
+  "lead_time": "Close out open permits and get the County smoke/CO certificate first; the smoke certificate must be provided before or by the inspection date",
+  "valid_for": "60 days",
+  "requirements": [
+   "Smoke/CO detector certificate from the fire prevention office provided before or by the inspection date",
+   "Electric, water and gas on; house numbers at least 4 inches with contrasting background",
+   "Metal dryer exhaust pipe with no screws; chimney certification for any fireplace or wood stove",
+   "Secure handrails and guards on stairs with 4 or more risers and landings over 30 inches; graspable handrail on one side",
+   "Steps, porches, sidewalks, curbs and aprons in safe condition; yard free of overgrowth",
+   "Interior clean (kitchen, cabinets, refrigerator, bath fixtures); stove anti-tip device; kitchen exhaust fan working",
+   "No plumbing leaks; sump pumps must not discharge into the sanitary sewer; water heater in good repair",
+   "Windows clean, uncracked, glazed, locking and operable with one hand, with screens; storm and screen doors with closers",
+   "Thumb-latch door locks only (no double-keyed deadbolts or hasps); privacy locks on bedrooms and bathrooms",
+   "No electrical hazards or extension cords as permanent wiring; covers on all switches and outlets; globes on light fixtures",
+   "Floor coverings secure and not worn; heating outlets and baseboard covers secured",
+   "Heating system safe and able to heat October 1 to May 1",
+   "Pools and pool barriers code compliant",
+   "Open Building/Construction permits inspected and closed; any work done without permits must be permitted and finaled before scheduling"
+  ],
+  "fees": [
+   {
+    "label": "Resale inspection, first inspection, per unit",
+    "amount": "$100.00",
+    "quote": "$100.00 per unit 1st inspection resale",
+    "source_url": "https://www.southrivernj.org/DocumentCenter/View/2296/Certificate-of-Continued-Occupancy-Application-PDF",
+    "verified": true
+   },
+   {
+    "label": "Resale inspection, second inspection, per unit",
+    "amount": "$100.00",
+    "quote": "$100.00 per unit 2nd inspection resale",
+    "source_url": "https://www.southrivernj.org/DocumentCenter/View/2296/Certificate-of-Continued-Occupancy-Application-PDF",
+    "verified": true
+   },
+   {
+    "label": "Resale inspection, third inspection, per unit",
+    "amount": "$125.00",
+    "quote": "$125.00 per unit 3rd inspection resale",
+    "source_url": "https://www.southrivernj.org/DocumentCenter/View/2296/Certificate-of-Continued-Occupancy-Application-PDF",
+    "verified": true
+   }
+  ],
+  "how_to_apply": "Complete the Borough's Application for Certificate of Continued Occupancy (check 'Resale', attach a property survey) and pay the non-refundable fee when you submit it, by check or money order payable to the Borough of South River (the older Residential Resale Certificate form also allows cash). Submit to Code Enforcement / Property Maintenance, 48 Washington Street, South River, NJ 08882.",
+  "application_url": "https://www.southrivernj.org/DocumentCenter/View/2296/Certificate-of-Continued-Occupancy-Application-PDF",
+  "department_url": "https://www.southrivernj.org/211/Code-Enforcement",
+  "phone": "732-257-1999 ext. 503",
+  "email": "clabella@southrivernj.org",
+  "contact_name": "Carolyn LaBella",
+  "contact_title": "Secretary, Zoning & Code Enforcement",
+  "evidence": [
+   {
+    "url": "https://www.southrivernj.org/458/Building-Department-FAQs",
+    "quote": "The Township of South River does require a Certificate of Occupancy (CO) for the resale of a property.",
+    "doc_date": "2026-09 (page as fetched)",
+    "via": "page",
+    "verified": true
+   },
+   {
+    "url": "https://www.southrivernj.org/DocumentCenter/View/2296/Certificate-of-Continued-Occupancy-Application-PDF",
+    "quote": "APPLICATION FOR CERTIFICATE OF CONTINUED OCCUPANCY",
+    "doc_date": "2026-01 (PDF created 2026-01-12)",
+    "via": "pdf",
+    "verified": true
+   },
+   {
+    "url": "https://www.southrivernj.org/DocumentCenter/View/2296/Certificate-of-Continued-Occupancy-Application-PDF",
+    "quote": "A CERTIFICATION OF CONTINUED OCCUPANCY NONREFUNDABLE FEE MUST BE PAID AT THE TIME OF APPLICATION SUBMITTAL.",
+    "doc_date": "2026-01",
+    "via": "pdf",
+    "verified": true
+   },
+   {
+    "url": "https://www.southrivernj.org/DocumentCenter/View/2296/Certificate-of-Continued-Occupancy-Application-PDF",
+    "quote": "A Certificate of Continued Occupancy is a prior approval and only after receiving one is occupancy permitted.",
+    "doc_date": "2026-01",
+    "via": "pdf",
+    "verified": true
+   },
+   {
+    "url": "https://www.southrivernj.org/DocumentCenter/View/2296/Certificate-of-Continued-Occupancy-Application-PDF",
+    "quote": "A smoke detector/carbon monoxide detector/ fire extinguisher certificate must be obtained from the Bureau of Fire Prevention. Smoke Certification must be provided before or by Inspection Date.",
+    "doc_date": "2026-01",
+    "via": "pdf",
+    "verified": true
+   },
+   {
+    "url": "https://www.southrivernj.org/DocumentCenter/View/2296/Certificate-of-Continued-Occupancy-Application-PDF",
+    "quote": "Contact: Carolyn Labella Ext. 503",
+    "doc_date": "2026-01",
+    "via": "pdf",
+    "verified": true
+   },
+   {
+    "url": "https://www.southrivernj.org/DocumentCenter/View/1960/Residential-Resale-Certificate-PDF",
+    "quote": "A RESIDENTIAL RESALE CERTIFICATE IS A PRIOR APPROVAL AND ONLY AFTER RECEIVING SUCH CERTIFICATE WILL OCCUPANCY BE PERMITTED.",
+    "doc_date": "2024-07 (PDF created 2024-07-26; scanned, read visually)",
+    "via": "pdf",
+    "verified": null
+   },
+   {
+    "url": "https://www.southrivernj.org/DocumentCenter/View/1960/Residential-Resale-Certificate-PDF",
+    "quote": "THIS CERTIFICATE IS GOOD FOR 60 DAYS!",
+    "doc_date": "2024-07",
+    "via": "pdf",
+    "verified": null
+   },
+   {
+    "url": "https://www.southrivernj.org/DocumentCenter/View/1960/Residential-Resale-Certificate-PDF",
+    "quote": "$100.00 per unit for 1st inspection resale $100.00 per unit for 2nd inspection resale $125.00 per unit for 3rd inspection resale",
+    "doc_date": "2024-07",
+    "via": "pdf",
+    "verified": null
+   },
+   {
+    "url": "https://www.southrivernj.org/211/Code-Enforcement",
+    "quote": "Carolyn LaBella Secretary - Zoning & Code Enforcement Email Carolyn LaBella Phone: 732-257-1999, ext. 503",
+    "doc_date": "2026-09",
+    "via": "page",
+    "verified": true
+   }
+  ],
+  "confidence": "high",
+  "notes": "The Borough's Forms & Permits page posts both a 'Residential Resale Certificate' packet (scanned, July 2024) and a newer 'Certificate of Continued Occupancy Application' (January 2026) that covers resale and rental; both list the same resale fees ($100 first, $100 second, $125 third inspection per unit). The 2026 form's fee table prints the $125 third-inspection resale line twice. The 2024 notice lists the contact phone as 732-257-1999 ext. 0; the 2026 form and the Code Enforcement page give ext. 503. No two-family specific fee: fees are per unit. Rentals also need this certificate (with different fees), which is not a resale item."
+ },
+ "fire_cert": {
+  "requirements": [
+   "Smoke alarms on every level (basement, first floor, second floor; not crawl spaces or unfinished attics) and outside sleeping areas within 10 feet; basement alarm near the bottom of the stairs",
+   "Smoke alarms no older than 10 years (or the maker's expiration date); wall-mounted alarms 6 to 12 inches below the ceiling",
+   "CO alarm outside each separate sleeping area; the County sheet says CO alarms must not be older than 5 years or the maker's expiration date",
+   "Detector type by year built (County criteria sheet): before 1977 battery; 1977-1983 electric; 1984-1989 electric interconnected; 1990 and later electric with battery backup, all interconnected, including one in each bedroom",
+   "House numbers at least 4 inches high and visible from the street (2 inches on both sides of a curbside mailbox)",
+   "The County application and guideline sheet still list a fire extinguisher (2A:10B:C, 10 lb. or less, within 10 feet of the kitchen, top no more than 5 feet above the floor, tagged within 12 months or with a purchase receipt); P.L.2025, c.19 removed the state requirement, so confirm with the Fire Marshal",
+   "Certificate is issued right after the inspection and is valid for 6 months"
+  ],
+  "authorities": [
+   {
+    "name": "Middlesex County Fire Marshal's Office",
+    "type": "unknown",
+    "area_served": "Entire borough (the County is the local fire enforcing agency for South River)",
+    "lead_time": "Apply 10 or more business days before closing for the lowest fee",
+    "fees": [
+     {
+      "label": "Smoke/CO inspection, 10 or more business days before closing",
+      "amount": "$50.00",
+      "quote": "Ten (10) business days or more before closing/change of occupancy: $50.00",
+      "source_url": "https://www.southrivernj.org/DocumentCenter/View/856/Smoke-Detector--Carbon-Monoxide-Detector-Inspection-PDF",
+      "verified": "eye"
+     },
+     {
+      "label": "Smoke/CO inspection, less than 10 business days before closing",
+      "amount": "$75.00",
+      "quote": "Less than ten (10) business days before closing/change of occupancy: $75.00",
+      "source_url": "https://www.southrivernj.org/DocumentCenter/View/856/Smoke-Detector--Carbon-Monoxide-Detector-Inspection-PDF",
+      "verified": "eye"
+     },
+     {
+      "label": "Smoke/CO inspection, less than 4 business days before closing",
+      "amount": "$125.00",
+      "quote": "Less than (4) business days before closing/change of occupancy: $125.00",
+      "source_url": "https://www.southrivernj.org/DocumentCenter/View/856/Smoke-Detector--Carbon-Monoxide-Detector-Inspection-PDF",
+      "verified": "eye"
+     },
+     {
+      "label": "Reinspection after a failed inspection",
+      "amount": "$20.00",
+      "quote": "Re-inspection for failed inspection: $20.00",
+      "source_url": "https://www.southrivernj.org/DocumentCenter/View/856/Smoke-Detector--Carbon-Monoxide-Detector-Inspection-PDF",
+      "verified": "eye"
+     },
+     {
+      "label": "Not present for a scheduled inspection without notice",
+      "amount": "$75.00",
+      "quote": "Failure to be present for scheduled inspection without notification: $75.00",
+      "source_url": "https://www.southrivernj.org/DocumentCenter/View/856/Smoke-Detector--Carbon-Monoxide-Detector-Inspection-PDF",
+      "verified": "eye"
+     }
+    ],
+    "how_to_apply": "Complete the Middlesex County Fire Marshal's Smoke & Carbon Monoxide Detector Application (posted on the Borough's Forms & Permits page) and send it to the County Fire Marshal, 1001 Fire Academy Drive, Sayreville (firemarshal@co.middlesex.nj.us, 732-316-7171). Make checks payable to the Office of the Fire Marshal. The certificate is issued right after a passed inspection.",
+    "application_url": "https://www.southrivernj.org/DocumentCenter/View/856/Smoke-Detector--Carbon-Monoxide-Detector-Inspection-PDF",
+    "department_url": "https://www.southrivernj.org/310/Forms-Permits",
+    "phone": "732-316-7171",
+    "email": "mike.gallagher@co.middlesex.nj.us",
+    "contact_name": "Michael Gallagher",
+    "contact_title": "Fire Official (Middlesex County Fire Marshal)",
+    "evidence": [
+     {
+      "url": "https://nj.gov/dca/dfs/pdf/ANNUAL%20REGISTRY/THIRD%20QUARTER%20LEA%20REGISTRY%202026.pdf",
+      "quote": "C South River Borough",
+      "doc_date": "2026-07",
+      "via": "pdf",
+      "verified": true
+     },
+     {
+      "url": "https://www.nj.gov/dca/dfs/pdf/fire%20directory_county%20summary/fire_code_enforcement_director.pdf",
+      "quote": "LEAID: 1223-001 Enf Auth. County Fire Official Michael Gallagher Phone (732) 316-7171 Addr: 1001 Fire Academy Dr Sayreville NJ 08872",
+      "doc_date": "2020-04-08 (survey date)",
+      "via": "state_directory",
+      "verified": true
+     },
+     {
+      "url": "https://www.nj.gov/dca/dfs/pdf/fire%20directory_county%20summary/fire_code_enforcement_director.pdf",
+      "quote": "Email mike.gallagher@co.middlesex.nj.us",
+      "doc_date": "2020-04-08",
+      "via": "state_directory",
+      "verified": true
+     },
+     {
+      "url": "https://www.southrivernj.org/310/Forms-Permits",
+      "quote": "Smoke Detector & Carbon Monoxide Detector Inspection (PDF)",
+      "doc_date": "2026-09 (page as fetched)",
+      "via": "page",
+      "verified": true
+     },
+     {
+      "url": "https://www.southrivernj.org/DocumentCenter/View/856/Smoke-Detector--Carbon-Monoxide-Detector-Inspection-PDF",
+      "quote": "Attached please find an application for a Smoke Detector/Carbon Monoxide Detector Inspection which is required pursuant to the NJ Uniform Fire Code N.J.A.C. 5:70-2.3 and the Middlesex County Fire Marshal Ordinance 10-1811 when a change in occupancy or ownership occurs.",
+      "doc_date": "2026-02 (PDF created 2026-02-02 on the South River site; County letter undated; scanned, read visually)",
+      "via": "pdf",
+      "verified": "eye"
+     },
+     {
+      "url": "https://www.southrivernj.org/DocumentCenter/View/856/Smoke-Detector--Carbon-Monoxide-Detector-Inspection-PDF",
+      "quote": "Make checks payable to the Office of the Fire Marshal.",
+      "doc_date": "2026-02 (PDF created 2026-02-02 on the South River site; County letter undated; scanned, read visually)",
+      "via": "pdf",
+      "verified": "eye"
+     },
+     {
+      "url": "https://www.southrivernj.org/DocumentCenter/View/856/Smoke-Detector--Carbon-Monoxide-Detector-Inspection-PDF",
+      "quote": "After inspection is complete, your certification is immediately issued. Each certificate is valid for six (6) months.",
+      "doc_date": "2026-02 (PDF created 2026-02-02 on the South River site; County letter undated; scanned, read visually)",
+      "via": "pdf",
+      "verified": "eye"
+     },
+     {
+      "url": "https://www.southrivernj.org/DocumentCenter/View/856/Smoke-Detector--Carbon-Monoxide-Detector-Inspection-PDF",
+      "quote": "Middlesex County Fire Marshal 1001 Fire Academy Drive Sayreville, NJ 08879 Email: firemarshal@co.middlesex.nj.us",
+      "doc_date": "undated application page in the same PDF",
+      "via": "pdf",
+      "verified": "eye"
+     },
+     {
+      "url": "https://www.southrivernj.org/DocumentCenter/View/856/Smoke-Detector--Carbon-Monoxide-Detector-Inspection-PDF",
+      "quote": "MIDDLESEX COUNTY FIRE MARSHAL 1001 Fire Academy Drive Sayreville, NJ 08872 732-316-7171 (office) 732-316-7638 (fax)",
+      "doc_date": "2026-02 (PDF created 2026-02-02 on the South River site; County letter undated; scanned, read visually)",
+      "via": "pdf",
+      "verified": "eye"
+     }
+    ],
+    "confidence": "high"
+   }
+  ],
+  "notes": "The DCA July 2026 registry lists the County (code C) as South River's fire enforcing agency. The fee schedule and application come from the Middlesex County Fire Marshal's own letter and forms, posted on the Borough's Forms & Permits page (PDF created February 2, 2026; the County letter itself is undated; scanned, read visually). The County site itself returned 403 Forbidden to plain requests. The state directory page for South River is from a 2020 survey. The Borough's CCO checklist calls the issuing office the 'Bureau of Fire Prevention' and still says 'smoke detector/carbon monoxide detector/ fire extinguisher certificate'. The County letterhead gives Sayreville, NJ 08872 and the application page gives 08879. Type is 'unknown' because the schema has no county option."
+ },
+ "other_items": [
+  {
+   "label": "Open permits and unpermitted work",
+   "detail": "Outstanding Building/Construction permits must be inspected and closed, and any work done without permits must be permitted and finaled, before scheduling the Resale Certificate.",
+   "source_url": "https://www.southrivernj.org/DocumentCenter/View/1960/Residential-Resale-Certificate-PDF"
+  },
+  {
+   "label": "Chimney certification",
+   "detail": "A chimney certification is required for any fireplace or wood burning stove.",
+   "source_url": "https://www.southrivernj.org/DocumentCenter/View/2296/Certificate-of-Continued-Occupancy-Application-PDF"
+  },
+  {
+   "label": "Property survey",
+   "detail": "Attach a copy of the property survey to a resale application.",
+   "source_url": "https://www.southrivernj.org/DocumentCenter/View/2296/Certificate-of-Continued-Occupancy-Application-PDF"
+  }
+ ],
+ "open_questions": [
+  "How far ahead of closing to apply for the Borough certificate (not published).",
+  "Whether the County Fire Marshal still requires a fire extinguisher after P.L.2025, c.19 (its posted forms still list one)."
+ ],
+ "verification": {
+  "fees": 8,
+  "fee_ok": 8,
+  "fee_bad": 0,
+  "fee_unchecked": 0,
+  "quotes": 19,
+  "q_ok": 16,
+  "q_bad": 0,
+  "q_unchecked": 3
+ }
+}
