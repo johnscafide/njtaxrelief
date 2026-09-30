@@ -4,21 +4,132 @@
  "county": "CAMDEN",
  "checked_at": "2026-09-30",
  "resale_co": {
-  "status": "not_found",
-  "name": "",
-  "issued_by": "",
+  "status": "required",
+  "name": "Residential Certificate of Occupancy (Housing Code Section 55-13)",
+  "issued_by": "Gloucester City Housing and Building Department (Housing Inspector / Code Enforcement Official)",
   "lead_time": "",
-  "valid_for": "",
-  "requirements": [],
-  "fees": [],
-  "how_to_apply": "",
-  "application_url": "",
-  "department_url": "",
-  "phone": "",
-  "email": "",
-  "evidence": [],
-  "confidence": "low",
-  "notes": "The city website (cityofgloucester.org) returns a Cloudflare 'Just a moment...' bot check (HTTP 403) to both curl and WebFetch, so no city page or form could be read. The city code is on ecode360, which is also blocked. Search results mention that the city has Housing Inspectors and has adopted the NJ State Housing Code, but nothing seen confirmed a resale CO rule, so status is left as not found. The DCA Fire Department/LEA Directory names a 'Gloucester City Housing' office at 512 Monmouth St (856-456-7689) as the city's smoke detector compliance contact; that office may also know whether a resale housing inspection applies."
+  "valid_for": "Until the next change of occupant or transfer of title; not transferable",
+  "requirements": [
+   "Home must meet the New Jersey State Housing Code (City Code 55-12)",
+   "Hard-wired, interconnected smoke detectors with battery backup on or near the ceiling of each level, certified by the Fire Official",
+   "Battery smoke detectors in each bedroom or sleeping area",
+   "All utilities must be on for the inspection",
+   "Warrant waiver from the Gloucester City Municipal Court (313 Monmouth St) showing no outstanding warrants for the buyer, owner and proposed occupants",
+   "Proof of identity for buyer and tenants; for an LLC, partnership or corporation, the record owner's name, address and phone",
+   "All outstanding Housing Office fees on the property (including vacant/abandoned property fees) must be paid first",
+   "Violations must be fixed and reinspected within 90 days of the first report (one extension to 120 days if asked in time), or a new application and fee are needed"
+  ],
+  "fees": [
+   {
+    "label": "Initial inspection including first re-inspection (2019 form)",
+    "amount": "$100.00",
+    "quote": "FEES: Initial Inspection including 1st re-inspection: $100.00",
+    "source_url": "https://web.archive.org/web/20190921055011/https://www.cityofgloucester.org/wp-content/uploads/2019/03/Res-CO-2019.pdf",
+    "verified": null
+   },
+   {
+    "label": "Second re-inspection (2019 form)",
+    "amount": "$15.00",
+    "quote": "2nd re-inspection: $15.00",
+    "source_url": "https://web.archive.org/web/20190921055011/https://www.cityofgloucester.org/wp-content/uploads/2019/03/Res-CO-2019.pdf",
+    "verified": null
+   },
+   {
+    "label": "Each later re-inspection (2019 form)",
+    "amount": "$50.00",
+    "quote": "All succeeding re-inspections: $50.00",
+    "source_url": "https://web.archive.org/web/20190921055011/https://www.cityofgloucester.org/wp-content/uploads/2019/03/Res-CO-2019.pdf",
+    "verified": null
+   },
+   {
+    "label": "Certificate for Transfer of Property Title, vacant property sale only (a CO application must follow within 90 days)",
+    "amount": "$75",
+    "quote": "The fee for said certificate for transfer is $75.",
+    "source_url": "https://web.archive.org/web/20150919155546/http://www.cityofgloucester.org/wp-content/uploads/2014/07/2015-Code-60-Chapter-55-Housing-Code.pdf",
+    "verified": null
+   }
+  ],
+  "how_to_apply": "Fill out the Application for Residential Certificate of Occupancy (check \"Sale\"), take a copy to the Municipal Court at 313 Monmouth St for the warrant waiver, and turn it in with payment (check or cash) to the Housing and Building Department, 700 Somerset St, Gloucester City, NJ 08030 (drop slot or mail also accepted). Incomplete applications are not accepted. A vacant property can instead get a Certificate for Transfer of Property Title ($75, valid 90 days) if a CO application is filed before it expires.",
+  "application_url": "https://www.cityofgloucester.org/code-enforcement-housing-department/files/residential-certificate-occupancy-application",
+  "department_url": "https://www.cityofgloucester.org/code-enforcement-housing-department",
+  "contact_name": "William Ackley",
+  "contact_title": "Chief Housing Inspector and Zoning Official",
+  "phone": "856-456-7689",
+  "email": "housing@cityofgloucester.org",
+  "evidence": [
+   {
+    "url": "https://web.archive.org/web/20240616023236/https://www.cityofgloucester.org/home/bulletins/building-permits",
+    "quote": "all property owners must obtain a Certificate of Occupancy in accordance with Gloucester City Code Section 55",
+    "doc_date": "2024-06 (Internet Archive capture of June 16, 2024; the bulletin text dates from 2020)",
+    "via": "page",
+    "verified": true
+   },
+   {
+    "url": "https://web.archive.org/web/20240616023236/https://www.cityofgloucester.org/home/bulletins/building-permits",
+    "quote": "Certificate of Occupancy and Transfer of Title inspections will be scheduled and performed effective October 1, 2020.",
+    "doc_date": "2024-06 (Internet Archive capture)",
+    "via": "page",
+    "verified": true
+   },
+   {
+    "url": "https://web.archive.org/web/20150919155546/http://www.cityofgloucester.org/wp-content/uploads/2014/07/2015-Code-60-Chapter-55-Housing-Code.pdf",
+    "quote": "the owner of any premises or that owner's agent shall obtain a certificate of occupancy from the Housing Inspector or Code Enforcement Official upon the occurrence of any one of the following events:",
+    "doc_date": "2014-12 (City Code Chapter 55 as supplemented 12-31-2014; PDF posted 2015; Internet Archive capture Sept 2015)",
+    "via": "pdf",
+    "verified": null
+   },
+   {
+    "url": "https://web.archive.org/web/20150919155546/http://www.cityofgloucester.org/wp-content/uploads/2014/07/2015-Code-60-Chapter-55-Housing-Code.pdf",
+    "quote": "Prior to the transfer of title, whether by purchase or other transfer, of any improved property from one individual or business entity to another individual or business entity.",
+    "doc_date": "2014-12 (City Code 55-13 A(2))",
+    "via": "pdf",
+    "verified": null
+   },
+   {
+    "url": "https://web.archive.org/web/20150919155546/http://www.cityofgloucester.org/wp-content/uploads/2014/07/2015-Code-60-Chapter-55-Housing-Code.pdf",
+    "quote": "A Certificate for Transfer of Property Title is required to transfer a vacant structure and/or property to a new owner without obtaining a certificate of occupancy.",
+    "doc_date": "2014-12 (City Code 55-13.1)",
+    "via": "pdf",
+    "verified": null
+   },
+   {
+    "url": "https://web.archive.org/web/20190921055011/https://www.cityofgloucester.org/wp-content/uploads/2019/03/Res-CO-2019.pdf",
+    "quote": "FEES: Initial Inspection including 1st re-inspection: $100.00; 2nd re-inspection: $15.00; All succeeding re-inspections: $50.00",
+    "doc_date": "2019-02 (form revised 2-26-19; Internet Archive capture Sept 2019)",
+    "via": "pdf",
+    "verified": null
+   },
+   {
+    "url": "https://web.archive.org/web/20220308014711/https://www.cityofgloucester.org/code-enforcement-housing-department/pages/forms-documents",
+    "quote": "Transfer of Title for Vacant Properties Only",
+    "doc_date": "2022-03 (Internet Archive capture of the Housing forms page)",
+    "via": "page",
+    "verified": true
+   },
+   {
+    "url": "https://web.archive.org/web/20200926060845/https://www.cityofgloucester.org/departments/housing/",
+    "quote": "Chief Housing Inspector & Zoning Official ... William Ackley",
+    "doc_date": "2020-09 (Internet Archive capture of the old Housing Department page)",
+    "via": "page",
+    "verified": true
+   },
+   {
+    "url": "https://web.archive.org/web/20200926060845/https://www.cityofgloucester.org/departments/housing/",
+    "quote": "P #(856) 456-7689",
+    "doc_date": "2020-09 (Internet Archive capture)",
+    "via": "page",
+    "verified": true
+   },
+   {
+    "url": "https://web.archive.org/web/20240616023236/https://www.cityofgloucester.org/home/bulletins/building-permits",
+    "quote": "Submit permits to housing@cityofgloucester.org",
+    "doc_date": "2024-06 (Internet Archive capture)",
+    "via": "page",
+    "verified": true
+   }
+  ],
+  "confidence": "medium",
+  "notes": "Settled in round 3 from official City documents saved by the Internet Archive (the live cityofgloucester.org returns a Cloudflare bot check, which was not bypassed). City Code 55-13 requires the owner to get a certificate of occupancy from the Housing Inspector or Code Enforcement Official before any new occupant moves in and before title to improved property is transferred by purchase or otherwise; the City's June 2024 building-permits bulletin says all property owners must obtain a CO under Section 55-13. The code text is from the 12-31-2014 supplement and the fee amounts are from the Feb 2019 application (the code states the same amounts in words: one hundred dollars, fifteen dollars, fifty dollars). A current search listing (lead only, not verified) shows that Ordinance O18-2024 changed the wording in 55-13 from \"Certificate of Occupancy\" to \"Certificate of Inspection\", and that the current application still requires the Municipal Court warrant waiver; the fee may have changed since 2019. No lead time or validity period is published. Commercial COs have separate fees. Contact: William Ackley signed a 2020 Housing Department notice as Chief Housing Inspector and Zoning Officer and is listed as a key contact on the 2022 forms page; confirm he is still in the role. Office: 700 Somerset St."
  },
  "fire_cert": {
   "requirements": [],
@@ -29,9 +140,11 @@
     "area_served": "Entire city",
     "lead_time": "",
     "fees": [],
-    "how_to_apply": "No application form or instructions could be read (city website behind a bot check). The DCA Fire Department/LEA Directory lists the smoke detector compliance contact as Gloucester City Housing, 512 Monmouth St, Gloucester City NJ 08030, phone (856) 456-7689. Fire Official: Patrick R. Hagan, (856) 456-2652, pat.hagan@gloucestercityfd.org.",
+    "how_to_apply": "The City handles smoke detector certification with the Housing CO: City Code 55-13 says the CO is issued upon the Fire Official's certification of the smoke detectors, and the DCA directory lists Gloucester City Housing, 700 Somerset St (DCA lists 512 Monmouth St), (856) 456-7689, as the smoke detector compliance contact. No separate smoke/CO application or fee was found. Fire Official: Patrick R. Hagan, (856) 456-2652.",
     "application_url": "",
     "department_url": "",
+    "contact_name": "Patrick R Hagan",
+    "contact_title": "Fire Official",
     "phone": "856-456-7689",
     "email": "pat.hagan@gloucestercityfd.org",
     "evidence": [
@@ -55,27 +168,57 @@
       "doc_date": "2026-05",
       "via": "pdf",
       "verified": true
+     },
+     {
+      "url": "https://web.archive.org/web/20150919155546/http://www.cityofgloucester.org/wp-content/uploads/2014/07/2015-Code-60-Chapter-55-Housing-Code.pdf",
+      "quote": "a certificate of occupancy shall be issued by the Housing Inspector or Code Enforcement Official upon the certification by the Fire Official, or other duly authorized personnel, of the satisfactory installation of hard wired interconnected battery backup smoke detectors",
+      "doc_date": "2014-12 (City Code 55-13 C(1), amended 2012)",
+      "via": "pdf",
+      "verified": null
+     },
+     {
+      "url": "https://www.nj.gov/dca/dfs/pdf/fire%20directory_county%20summary/fire_code_enforcement_director.pdf",
+      "quote": "LEAID: 0414-001 Enf Auth. Fire Dept Fire Official Patrick R Hagan Phone (856) 456-2652",
+      "doc_date": "2026-05-22 (fire department survey date)",
+      "via": "state_directory",
+      "verified": true
      }
     ],
     "confidence": "medium"
    }
   ],
-  "notes": "The NJ DCA Uniform Fire Code registry (July 2026) lists Gloucester City with code 'F' (Fire Department) as its local enforcing agency. The DCA Fire Department/LEA Directory (survey dated 5/22/2026) lists Fire Official Patrick R. Hagan (856-456-2652, pat.hagan@gloucestercityfd.org) and, under 'Smoke Detector Compliance', the contact 'Gloucester City Housing', 512 Monmouth St, phone (856) 456-7689. So the smoke/CO certificate may be handled through the city Housing office at City Hall; confirm before relying on it. Fees could not be confirmed: the city site is behind a bot check and the city code is on ecode360. Search engine summaries mentioned a $45 / $90 / $161 tier schedule and a $10 fee tied to Gloucester City Code section 55-13(C), but the $45/$90/$161 schedule matches the common state default and no raw official text was visible, so none of these amounts are recorded."
+  "notes": "The NJ DCA Uniform Fire Code registry (July 2026) lists Gloucester City with code F (Fire Department) as its local enforcing agency. City Code 55-13 C(1) ties the smoke detector certification to the Housing CO, and the DCA directory lists \"Gloucester City Housing\" (856-456-7689) as the smoke detector compliance contact, so in practice the smoke/CO certification appears to be done with the Housing CO inspection. The City's 2004 Fire Prevention chapter (Chapter 48, archived copy) lists annual registration fees and a $25.00 certificate of fire code status, but no smoke/CO certificate fee. A search summary in round 2 mentioned $45 / $90 / $161 and a $10 fee; no official text showing them was found, so none are recorded. A 2014 vacant-property Transfer of Title form required one battery smoke detector per level."
  },
- "other_items": [],
+ "other_items": [
+  {
+   "label": "Municipal Court warrant waiver",
+   "detail": "Take a copy of the CO application to the Gloucester City Municipal Court, 313 Monmouth St, for a warrant waiver for the buyer, owner and proposed occupants (City Code 55-13 D(4)).",
+   "source_url": "https://web.archive.org/web/20150919155546/http://www.cityofgloucester.org/wp-content/uploads/2014/07/2015-Code-60-Chapter-55-Housing-Code.pdf"
+  },
+  {
+   "label": "Outstanding Housing Office fees",
+   "detail": "Under Ordinance 019-2017, all fees owed to the City Housing Office on the property, including vacant or abandoned property fees, must be paid before a Certificate of Occupancy or Transfer of Title is issued (notice attached to the 2019 application).",
+   "source_url": "https://web.archive.org/web/20190921055011/https://www.cityofgloucester.org/wp-content/uploads/2019/03/Res-CO-2019.pdf"
+  },
+  {
+   "label": "Vacant property sale option",
+   "detail": "A vacant structure can be transferred with a Certificate for Transfer of Property Title ($75, valid 90 days, one battery smoke detector per level), but a CO application must be filed before it expires.",
+   "source_url": "https://web.archive.org/web/20150919155546/http://www.cityofgloucester.org/wp-content/uploads/2014/07/2015-Code-60-Chapter-55-Housing-Code.pdf"
+  }
+ ],
  "open_questions": [
-  "Does Gloucester City require a resale CO / housing inspection on sale of a 1-2 family home? City site blocked by bot check; confirm with the city directly.",
-  "Gloucester City smoke/CO certificate fees, lead time and application form could not be confirmed from an official source; call Gloucester City Housing at 856-456-7689 (DCA directory contact).",
-  "Search summaries suggested ecode360 pages https://ecode360.com/35212793 and https://ecode360.com/42887964 hold the city's fire prevention fees; they could not be opened."
+  "Current fee for the residential CO / Certificate of Inspection (2019 form: $100, $15, $50); did Ordinance O18-2024 change fees or only the name?",
+  "Lead time the Housing office needs before closing, and whether a separate smoke/CO certificate or fee applies in addition to the Housing CO.",
+  "Confirm William Ackley is still the Chief Housing Inspector."
  ],
  "verification": {
-  "fees": 0,
+  "fees": 4,
   "fee_ok": 0,
   "fee_bad": 0,
-  "fee_unchecked": 0,
-  "quotes": 3,
-  "q_ok": 3,
+  "fee_unchecked": 4,
+  "quotes": 15,
+  "q_ok": 10,
   "q_bad": 0,
-  "q_unchecked": 0
+  "q_unchecked": 5
  }
 }

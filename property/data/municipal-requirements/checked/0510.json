@@ -1,0 +1,260 @@
+{
+ "municipality_code": "0510",
+ "municipality": "Stone Harbor Borough",
+ "county": "CAPE MAY",
+ "checked_at": "2026-09-30",
+ "resale_co": {
+  "status": "required",
+  "name": "Certificate of Title Transfer (zoning and flood conformance inspection)",
+  "issued_by": "Office of Code Enforcement (Construction Office), Zoning Official / Flood Plain Administrator",
+  "contact_name": "Rick Allen",
+  "contact_title": "Construction Official and Flood Plain Administrator",
+  "lead_time": "",
+  "valid_for": "",
+  "requirements": [
+   "Zoning conformance inspection",
+   "Flood conformance inspection against the required design flood elevation (DFE + 2 or 11 feet), with the assessed value of the structure recorded",
+   "Inspector enters with the realtor's key; if no realtor or manager is listed, the owner must set an appointment during the inspection week"
+  ],
+  "fees": [
+   {
+    "label": "Zoning fee",
+    "amount": "$50.00",
+    "quote": "ZONING FEE: $50.00",
+    "source_url": "https://stoneharbornj.org/wp-content/uploads/2023/04/APPLICATION-FOR-CERTIFICATE-OF-TITLE-TRANSFER.pdf",
+    "verified": true
+   },
+   {
+    "label": "Flood inspection fee",
+    "amount": "$50.00",
+    "quote": "FLOOD INSPECTION FEE: $50.00",
+    "source_url": "https://stoneharbornj.org/wp-content/uploads/2023/04/APPLICATION-FOR-CERTIFICATE-OF-TITLE-TRANSFER.pdf",
+    "verified": true
+   },
+   {
+    "label": "Total due",
+    "amount": "$100.00",
+    "quote": "TOTAL DUE: $100.00",
+    "source_url": "https://stoneharbornj.org/wp-content/uploads/2023/04/APPLICATION-FOR-CERTIFICATE-OF-TITLE-TRANSFER.pdf",
+    "verified": true
+   }
+  ],
+  "how_to_apply": "Fill out the Application for Certificate of Title Transfer (property address, block and lot, seller, purchaser, agent, scheduled closing date) and submit it with payment (check or cash) to the Office of Code Enforcement, Borough Hall first floor, 9508 Second Avenue, Stone Harbor, NJ 08247. Listing a realtor lets the official use the realtor's key.",
+  "application_url": "https://stoneharbornj.org/wp-content/uploads/2023/04/APPLICATION-FOR-CERTIFICATE-OF-TITLE-TRANSFER.pdf",
+  "department_url": "https://stoneharbornj.org/departments/construction/",
+  "phone": "609-368-6814",
+  "email": "AllenR@shnj.org",
+  "evidence": [
+   {
+    "url": "https://stoneharbornj.org/wp-content/uploads/2023/04/APPLICATION-FOR-CERTIFICATE-OF-TITLE-TRANSFER.pdf",
+    "quote": "APPLICATION FOR CERTIFICATE OF TITLE TRANSFER THE BOROUGH OF STONE HARBOR OFFICE OF CODE ENFORCEMENT",
+    "doc_date": "2023-04",
+    "via": "pdf",
+    "verified": true
+   },
+   {
+    "url": "https://stoneharbornj.org/wp-content/uploads/2023/04/APPLICATION-FOR-CERTIFICATE-OF-TITLE-TRANSFER.pdf",
+    "quote": "This application authoriizes the Zoning Official/Flood Plain Administrator to enter your property for a transfer inspection.",
+    "doc_date": "2023-04",
+    "via": "pdf",
+    "verified": true
+   },
+   {
+    "url": "https://stoneharbornj.org/wp-content/uploads/2023/04/APPLICATION-FOR-CERTIFICATE-OF-TITLE-TRANSFER.pdf",
+    "quote": "Per Stone Harbor Municipal Code: Chapter 214",
+    "doc_date": "2023-04",
+    "via": "pdf",
+    "verified": true
+   },
+   {
+    "url": "https://web.archive.org/web/20250713195307/http://stoneharbornj.org/departments/construction/",
+    "quote": "Phone 609-368-6814",
+    "doc_date": "2025-07-13 (archive capture of the Construction page)",
+    "via": "page",
+    "verified": true
+   },
+   {
+    "url": "https://web.archive.org/web/20250713195307/http://stoneharbornj.org/departments/construction/",
+    "quote": "Flood Plain Administrator Rick Allen, AllenR@shnj.org",
+    "doc_date": "2025-07-13 (archive capture)",
+    "via": "page",
+    "verified": true
+   },
+   {
+    "url": "https://stoneharbornj.org/departments/construction/",
+    "quote": "Construction Official Rick Allen-",
+    "doc_date": "2026-09-30 (live page fetched; emails hidden by the site)",
+    "via": "page",
+    "verified": true
+   }
+  ],
+  "confidence": "medium",
+  "notes": "The Borough's Office of Code Enforcement posts an Application for Certificate of Title Transfer (April 2023) under Municipal Code Chapter 214: a zoning and flood conformance inspection tied to the scheduled closing date, $50 zoning plus $50 flood inspection, $100 total. The form itself does not use the word 'required', and the Borough code (ecode360 ST2163) could not be opened to confirm the exact rule, so confidence is medium. The form lists an older official (Ray Poudrier, PoudrierR@SHNJ.org); the current Construction page names Rick Allen as Construction Official and Flood Plain Administrator and Matthew Steich as Zoning Official/Code Officer/Community Development Director (his email is hidden on the live page and is not recorded). Rick Allen's email is from a July 2025 archive copy of the Construction page. Office hours: Monday to Friday 8:30 a.m. to 1:30 p.m. The live site's main pages sit behind a bot check; PDFs and the Construction page could still be read. Stone Harbor also runs a rental license and rental fire inspection program through the Fire Prevention Bureau (single family: rental license $200 plus fire inspection $100); that is for rentals only, not sales."
+ },
+ "fire_cert": {
+  "requirements": [
+   "On-site inspection by the Stone Harbor Bureau of Fire Prevention; closing or leasing before the certificate is issued carries a $500.00 penalty",
+   "Smoke alarms over ten years old must be replaced; battery alarms must be 10-year sealed battery type; wired alarms may not be replaced with battery alarms",
+   "Smoke alarm type and number depend on the year built or renovated (for example, homes from March 1991 on need wired, interconnected alarms on all levels and inside each sleeping room)",
+   "CO alarms on sleeping levels within 10 feet of every bedroom door when there is an attached garage, fuel-burning appliance or fireplace; CO alarms not more than 10 years old; homes built 2015 or later need hard-wired CO alarms",
+   "Low-voltage fire alarm systems must be tested by a NJ licensed alarm contractor with an NFPA 72 report sent to the Bureau",
+   "Form (October 2022) still requires a fire extinguisher: minimum 2A:40BC, not over 10 pounds, in or within 10 feet of the kitchen on its bracket, top no more than 5 feet up, serviced within the past year or bought within 6 months with receipt, manual left for the buyer",
+   "All open construction permits must be closed before settlement"
+  ],
+  "authorities": [
+   {
+    "name": "Stone Harbor Fire Prevention Bureau (Stone Harbor Bureau of Fire Prevention)",
+    "type": "municipal_fire_bureau",
+    "area_served": "Entire borough",
+    "lead_time": "More than 10 business days before the change of occupant for the lowest fee",
+    "fees": [
+     {
+      "label": "1 unit, request more than 10 business days before change of occupant",
+      "amount": "$50.00",
+      "quote": "$50.00 one unit in one (1) structure",
+      "source_url": "https://stoneharbornj.org/wp-content/uploads/2022/10/CSACMAPFEC-2022.pdf",
+      "verified": true
+     },
+     {
+      "label": "2 units in one structure, more than 10 business days before",
+      "amount": "$65.00",
+      "quote": "$65.00 two (2) units in one (1) structure",
+      "source_url": "https://stoneharbornj.org/wp-content/uploads/2022/10/CSACMAPFEC-2022.pdf",
+      "verified": true
+     },
+     {
+      "label": "1 unit, request 5 to 9 business days before change of occupant",
+      "amount": "$100.00",
+      "quote": "$100.00 one unit in one (1) structure",
+      "source_url": "https://stoneharbornj.org/wp-content/uploads/2022/10/CSACMAPFEC-2022.pdf",
+      "verified": true
+     },
+     {
+      "label": "2 units in one structure, 5 to 9 business days before",
+      "amount": "$115.00",
+      "quote": "$115.00 two (2) units in one (1) structure",
+      "source_url": "https://stoneharbornj.org/wp-content/uploads/2022/10/CSACMAPFEC-2022.pdf",
+      "verified": true
+     },
+     {
+      "label": "1 unit, request 4 or fewer business days before change of occupant",
+      "amount": "$155.00",
+      "quote": "$155.00 one unit in one (1) structure",
+      "source_url": "https://stoneharbornj.org/wp-content/uploads/2022/10/CSACMAPFEC-2022.pdf",
+      "verified": true
+     },
+     {
+      "label": "2 units in one structure, 4 or fewer business days before",
+      "amount": "$170.00",
+      "quote": "$170.00 two (2) units in one (1) structure",
+      "source_url": "https://stoneharbornj.org/wp-content/uploads/2022/10/CSACMAPFEC-2022.pdf",
+      "verified": true
+     },
+     {
+      "label": "Re-inspection after a failed inspection",
+      "amount": "$25.00",
+      "quote": "When units are found  to be noncompliant, a $25.00 re-inspection fee is applied.",
+      "source_url": "https://stoneharbornj.org/wp-content/uploads/2022/10/CSACMAPFEC-2022.pdf",
+      "verified": true
+     },
+     {
+      "label": "Penalty for closing or leasing before the certificate is issued",
+      "amount": "$500.00",
+      "quote": "THE PENALTY FOR CLOSING OR LEASING BEFORE CSACMAPFEC IS ISSUED IS $500.00.",
+      "source_url": "https://stoneharbornj.org/wp-content/uploads/2022/10/CSACMAPFEC-2022.pdf",
+      "verified": true
+     }
+    ],
+    "how_to_apply": "Fill out the CSACMAPFEC application (owner, buyer, block and lot, agent, settlement date, key or appointment details) and submit it with a check or money order payable to 'Borough of Stone Harbor' to the Stone Harbor Fire Prevention Bureau, 9508 Second Avenue, Stone Harbor, NJ 08247. The Bureau inspects before issuing the certificate.",
+    "application_url": "https://stoneharbornj.org/wp-content/uploads/2022/10/CSACMAPFEC-2022.pdf",
+    "department_url": "https://stoneharbornj.org/departments/stone-harbor-public-safety/stone-harbor-fire-prevention-bureau/",
+    "contact_name": "Mike Gihorski",
+    "contact_title": "Acting Fire Official",
+    "phone": "609-368-5102",
+    "email": "fireofficial@shnj.org",
+    "evidence": [
+     {
+      "url": "https://stoneharbornj.org/wp-content/uploads/2022/10/CSACMAPFEC-2022.pdf",
+      "quote": "I understand that a satisfactory inspection must be performed by the Stone Harbor Bureau of Fire Prevention prior to the issuance of the CSACMAPFEC",
+      "doc_date": "2022-10",
+      "via": "pdf",
+      "verified": true
+     },
+     {
+      "url": "https://stoneharbornj.org/wp-content/uploads/2022/10/CSACMAPFEC-2022.pdf",
+      "quote": "Request for CSDCMAC received more than ten (10) business days prior to change of occupant:",
+      "doc_date": "2022-10",
+      "via": "pdf",
+      "verified": true
+     },
+     {
+      "url": "https://stoneharbornj.org/wp-content/uploads/2022/10/CSACMAPFEC-2022.pdf",
+      "quote": "Note: check or money order made payable to “Borough of Stone Harbor” must accompany the application",
+      "doc_date": "2022-10",
+      "via": "pdf",
+      "verified": true
+     },
+     {
+      "url": "https://stoneharbornj.org/wp-content/uploads/2022/10/CSACMAPFEC-2022.pdf",
+      "quote": "All open Uniform Construction Code permits MUST BE CLOSED prior to settlement.",
+      "doc_date": "2022-10",
+      "via": "pdf",
+      "verified": true
+     },
+     {
+      "url": "https://stoneharbornj.org/departments/stone-harbor-public-safety/stone-harbor-fire-prevention-bureau/",
+      "quote": "Acting Fire Official Mike Gihorski",
+      "doc_date": "2026-09-30 (live page fetched)",
+      "via": "page",
+      "verified": true
+     },
+     {
+      "url": "https://nj.gov/dca/dfs/pdf/ANNUAL%20REGISTRY/THIRD%20QUARTER%20LEA%20REGISTRY%202026.pdf",
+      "quote": "F Stone Harbor Borough",
+      "doc_date": "2026-07",
+      "via": "pdf",
+      "verified": true
+     },
+     {
+      "url": "https://www.nj.gov/dca/dfs/pdf/fire%20directory_county%20summary/fire_code_enforcement_director.pdf",
+      "quote": "LEAID: 0510-001 Enf Auth. Fire Dept Fire Official Michael Gihorski Phone (609) 368-5102",
+      "doc_date": "2025-03 (survey date 3/6/2025)",
+      "via": "state_directory",
+      "verified": true
+     },
+     {
+      "url": "https://www.nj.gov/dca/dfs/pdf/fire%20directory_county%20summary/fire_code_enforcement_director.pdf",
+      "quote": "Email fireofficial@shnj.org",
+      "doc_date": "2025-03 (survey date 3/6/2025)",
+      "via": "state_directory",
+      "verified": true
+     }
+    ],
+    "confidence": "high"
+   }
+  ],
+  "notes": "NJ DCA lists Stone Harbor's fire code enforcing agency as its fire department (F). The Borough's Fire Prevention Bureau page (live, September 2026) names Acting Fire Official Mike Gihorski; a December 2025 archive copy named Fire Official Roger W. Stanford at (609) 368-5102 Ext 709. The Bureau page hides email addresses, so the email shown is from the NJ DCA fire directory (survey 3/6/2025). The application is dated October 2022 and still requires a fire extinguisher despite P.L.2025, c.19; confirm with the Bureau. Three-unit and larger tiers ($80.00, $130.00, $185.00, plus $15.00 per unit over 3) are on the form but not listed above because they do not apply to 1-2 family homes."
+ },
+ "other_items": [
+  {
+   "label": "Open permits closed",
+   "detail": "All open Uniform Construction Code permits must be closed before settlement (Fire Prevention Bureau guide).",
+   "source_url": "https://stoneharbornj.org/wp-content/uploads/2022/10/CSACMAPFEC-2022.pdf"
+  }
+ ],
+ "open_questions": [
+  "Exact wording of Borough Code Chapter 214 on when the Certificate of Title Transfer is required (ecode360 could not be opened).",
+  "Whether the April 2023 title transfer fees ($50 zoning, $50 flood) and the October 2022 smoke certificate fees are still current.",
+  "Whether the Fire Prevention Bureau still checks for a fire extinguisher after P.L.2025, c.19."
+ ],
+ "verification": {
+  "fees": 11,
+  "fee_ok": 11,
+  "fee_bad": 0,
+  "fee_unchecked": 0,
+  "quotes": 14,
+  "q_ok": 14,
+  "q_bad": 0,
+  "q_unchecked": 0
+ }
+}

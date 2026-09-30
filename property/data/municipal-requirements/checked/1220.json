@@ -1,0 +1,236 @@
+{
+ "municipality_code": "1220",
+ "municipality": "South Amboy",
+ "county": "MIDDLESEX",
+ "checked_at": "2026-09-30",
+ "resale_co": {
+  "status": "required",
+  "name": "Certificate of Occupancy for Sale (resale certificate)",
+  "issued_by": "City of South Amboy Building Department",
+  "lead_time": "",
+  "valid_for": "",
+  "requirements": [
+   "Full property maintenance inspection; the resale certificate is not issued unless the property is 100% compliant",
+   "Address numbers visible from the street; yard free of weeds and debris",
+   "Clear path to the electrical panel; all outlets, switches and junction boxes covered; no extension cords as permanent wiring",
+   "Combustibles at least 3 feet from furnace and water heater; access to the furnace room",
+   "Water heater with cold water shut-off and pressure relief valve with down spout; gas shut-off on gas heaters",
+   "Windows open easily and stay open; no cracked or broken glass; screens on door windows used for ventilation",
+   "Handrail on stairs more than 3 risers high; guardrails on open stairs, landings or balconies over 30 inches",
+   "Appliances and plumbing fixtures properly installed and working",
+   "Working smoke detector on each level including the basement; CO detector near all bedrooms",
+   "Work done without required permits must be permitted and all open permits finaled (fines up to $2,000 per week)",
+   "All utilities on at the time of inspection",
+   "Solid core door between garage and living area",
+   "Fire extinguisher (at least 2.5 lb.) mounted in the kitchen area (as printed on the City guideline sheet)"
+  ],
+  "fees": [],
+  "how_to_apply": "Complete the City's 'Certificate of Occupancy for Sale' form (property, seller, buyer, estimated closing date, and the attorney holding escrow for outstanding municipal charges) and return it to the Building Department, 140 North Broadway, South Amboy, NJ 08879 (phone 732-525-5927, fax 732-727-6139). The application fee line on the form is filled in by the City; no amount is printed.",
+  "application_url": "https://www.southamboynj.gov/_Content/pdf/forms/Certificate-of-Occupancy-for-Sale.pdf",
+  "department_url": "https://www.southamboynj.gov/departments/code-enforcement",
+  "phone": "732-525-5927",
+  "email": "",
+  "contact_name": "",
+  "contact_title": "",
+  "evidence": [
+   {
+    "url": "https://www.southamboynj.gov/_Content/pdf/forms/Certificate-of-Occupancy-for-Sale.pdf",
+    "quote": "THIS FORM MUST COMPLETED AND RETURNED BEFORE CERTIFICATE OF OCCUPANCY IS ISSUED",
+    "doc_date": "undated (scanned form, read visually; posted 2026-09)",
+    "via": "pdf",
+    "verified": null
+   },
+   {
+    "url": "https://www.southamboynj.gov/_Content/pdf/forms/Certificate-of-Occupancy-for-Sale.pdf",
+    "quote": "HOUSING INSPECTION GUIDELINES FOR OBTAINING A CERTIFICATE OF OCCUPANCY This is a list of the most common violations found. A full inspection of the property will be performed and a certificate for re-sale will not be issued if property is not 100% compliant with the current property maintenance code",
+    "doc_date": "undated",
+    "via": "pdf",
+    "verified": null
+   },
+   {
+    "url": "https://www.southamboynj.gov/_Content/pdf/forms/Certificate-of-Occupancy-for-Sale.pdf",
+    "quote": "City of South Amboy 140 North Broadway · South Amboy, New Jersey 08879 Building Dept. Phone: (732)525-5927 Fax: (732) 727-6139",
+    "doc_date": "undated",
+    "via": "pdf",
+    "verified": null
+   }
+  ],
+  "confidence": "medium",
+  "notes": "The City's Forms page (loaded from the site's forms data) lists 'Certificate of Occupancy for Sale' under Building. The 4-page PDF is a scan (read visually): page 1 is the application, page 2 a 'Fire Code' sheet on smoke detectors, CO alarms and fire extinguishers, page 3 the Housing Inspection Guidelines, and page 4 the Tax/Utility Collector's final sewer instructions. No fee amount, lead time or validity period is printed, and the City code (ecode360 SO0670) could not be opened. Search engine summaries mentioned a $50 fee for South Amboy but no official source showing the words was found, so no fee is recorded. No named Building Department contact was found on the City site; the Building Department email is not displayed on the site. The City also runs rental housing inspections (732-525-5936), which are not a resale item. The guideline sheet's fire extinguisher line is undated and may predate P.L.2025, c.19."
+ },
+ "fire_cert": {
+  "requirements": [
+   "City 'Fire Code' sheet (undated, in the CO for Sale packet): 10-year sealed battery smoke detector on each level including the basement, unless the home has original A/C powered single or multiple-station alarms",
+   "Smoke detectors in every separate sleeping area within 10 feet of each bedroom door; a loft or attic used as living space with 7 feet or more headroom often needs one",
+   "CO alarm near sleeping areas; combination smoke/CO units must be 10-year sealed battery units",
+   "Homes with a monitored alarm system: the owner must be able to give the alarm company name and silence and reset the alarm after the test",
+   "County Fire Marshal sheet: smoke alarms no older than 10 years; CO alarms no older than 5 years (or the maker's date); detector type depends on the year built (1990 and later: electric with battery backup, all interconnected, one in each bedroom); house numbers at least 4 inches; certificate valid 6 months",
+   "The same undated sheet lists fire extinguisher rules (2A-10B:C, 10 lb. or less, mounted within 10 feet of the kitchen, top no more than 5 feet above the floor, serviced or bought within 12 months); P.L.2025, c.19 removed the state extinguisher requirement, so confirm whether this still applies"
+  ],
+  "authorities": [
+   {
+    "name": "Middlesex County Fire Marshal's Office",
+    "type": "unknown",
+    "area_served": "Entire city (the County is the local fire enforcing agency for South Amboy)",
+    "lead_time": "Apply 10 or more business days before closing for the lowest County fee",
+    "fees": [
+     {
+      "label": "Smoke/CO inspection, 10 or more business days before closing (County Fire Marshal schedule, posted on the South River Borough site)",
+      "amount": "$50.00",
+      "quote": "Ten (10) business days or more before closing/change of occupancy: $50.00",
+      "source_url": "https://www.southrivernj.org/DocumentCenter/View/856/Smoke-Detector--Carbon-Monoxide-Detector-Inspection-PDF",
+      "verified": "eye"
+     },
+     {
+      "label": "Smoke/CO inspection, less than 10 business days before closing (County Fire Marshal schedule, posted on the South River Borough site)",
+      "amount": "$75.00",
+      "quote": "Less than ten (10) business days before closing/change of occupancy: $75.00",
+      "source_url": "https://www.southrivernj.org/DocumentCenter/View/856/Smoke-Detector--Carbon-Monoxide-Detector-Inspection-PDF",
+      "verified": "eye"
+     },
+     {
+      "label": "Smoke/CO inspection, less than 4 business days before closing (County Fire Marshal schedule, posted on the South River Borough site)",
+      "amount": "$125.00",
+      "quote": "Less than (4) business days before closing/change of occupancy: $125.00",
+      "source_url": "https://www.southrivernj.org/DocumentCenter/View/856/Smoke-Detector--Carbon-Monoxide-Detector-Inspection-PDF",
+      "verified": "eye"
+     },
+     {
+      "label": "Reinspection after a failed inspection (County Fire Marshal schedule, posted on the South River Borough site)",
+      "amount": "$20.00",
+      "quote": "Re-inspection for failed inspection: $20.00",
+      "source_url": "https://www.southrivernj.org/DocumentCenter/View/856/Smoke-Detector--Carbon-Monoxide-Detector-Inspection-PDF",
+      "verified": "eye"
+     },
+     {
+      "label": "Not present for a scheduled inspection without notice (County Fire Marshal schedule, posted on the South River Borough site)",
+      "amount": "$75.00",
+      "quote": "Failure to be present for scheduled inspection without notification: $75.00",
+      "source_url": "https://www.southrivernj.org/DocumentCenter/View/856/Smoke-Detector--Carbon-Monoxide-Detector-Inspection-PDF",
+      "verified": "eye"
+     }
+    ],
+    "how_to_apply": "Complete the Middlesex County Fire Marshal's Smoke & Carbon Monoxide Detector Application and send it to the County Fire Marshal, 1001 Fire Academy Drive, Sayreville (firemarshal@co.middlesex.nj.us, 732-316-7171); make checks payable to the Office of the Fire Marshal. The only copy of the current County form found online is posted on the South River Borough site; South Amboy's own site posts no smoke form.",
+    "application_url": "https://www.southrivernj.org/DocumentCenter/View/856/Smoke-Detector--Carbon-Monoxide-Detector-Inspection-PDF",
+    "department_url": "https://www.southamboynj.gov/Page/fire-prevention",
+    "phone": "732-316-7171",
+    "email": "mike.gallagher@co.middlesex.nj.us",
+    "contact_name": "Michael Gallagher",
+    "contact_title": "Fire Official (Middlesex County Fire Marshal)",
+    "evidence": [
+     {
+      "url": "https://nj.gov/dca/dfs/pdf/ANNUAL%20REGISTRY/THIRD%20QUARTER%20LEA%20REGISTRY%202026.pdf",
+      "quote": "C South Amboy City",
+      "doc_date": "2026-07",
+      "via": "pdf",
+      "verified": true
+     },
+     {
+      "url": "https://www.southamboynj.gov/Page/fire-prevention",
+      "quote": "All Fire Prevention services are furnished through an agreement with the Middlesex County Fire Marshal. Questions regarding their services can be directed to 732-316-7171",
+      "doc_date": "2026-09 (page as fetched)",
+      "via": "page",
+      "verified": true
+     },
+     {
+      "url": "https://www.southamboynj.gov/Departments/fire",
+      "quote": "Fire Prevention: Middlesex County Fire Bureau",
+      "doc_date": "2026-09",
+      "via": "page",
+      "verified": true
+     },
+     {
+      "url": "https://www.nj.gov/dca/dfs/pdf/fire%20directory_county%20summary/fire_code_enforcement_director.pdf",
+      "quote": "LEAID: 1220-001 Enf Auth. County Fire Official Michael Gallagher Phone (732) 316-7171 Addr: 1001 Fire Academy Dr Sayreville NJ 08872",
+      "doc_date": "2025-11-13 (survey date)",
+      "via": "state_directory",
+      "verified": true
+     },
+     {
+      "url": "https://www.nj.gov/dca/dfs/pdf/fire%20directory_county%20summary/fire_code_enforcement_director.pdf",
+      "quote": "Email mike.gallagher@co.middlesex.nj.us",
+      "doc_date": "2025-11-13",
+      "via": "state_directory",
+      "verified": true
+     },
+     {
+      "url": "https://web.archive.org/web/20201128112400/http://www.middlesexcountynj.gov/Government/Departments/PSH/Documents/Fire-Marshal/Residential%20Smoke%20Detector%20and%20Carbon%20Monoxide%20Inspection%20Info%20and%20Application.pdf",
+      "quote": "Remit $50 fee via mail by check or call number above to pay by credit.",
+      "doc_date": "2020 (archived 2020-11-28; older County self-inspection affidavit)",
+      "via": "pdf",
+      "verified": true
+     },
+     {
+      "url": "https://www.southrivernj.org/DocumentCenter/View/856/Smoke-Detector--Carbon-Monoxide-Detector-Inspection-PDF",
+      "quote": "Attached please find an application for a Smoke Detector/Carbon Monoxide Detector Inspection which is required pursuant to the NJ Uniform Fire Code N.J.A.C. 5:70-2.3 and the Middlesex County Fire Marshal Ordinance 10-1811 when a change in occupancy or ownership occurs.",
+      "doc_date": "2026-02 (PDF created 2026-02-02 on the South River site; County letter undated; scanned, read visually)",
+      "via": "pdf",
+      "verified": "eye"
+     },
+     {
+      "url": "https://www.southrivernj.org/DocumentCenter/View/856/Smoke-Detector--Carbon-Monoxide-Detector-Inspection-PDF",
+      "quote": "Make checks payable to the Office of the Fire Marshal.",
+      "doc_date": "2026-02 (PDF created 2026-02-02 on the South River site; County letter undated; scanned, read visually)",
+      "via": "pdf",
+      "verified": "eye"
+     },
+     {
+      "url": "https://www.southrivernj.org/DocumentCenter/View/856/Smoke-Detector--Carbon-Monoxide-Detector-Inspection-PDF",
+      "quote": "After inspection is complete, your certification is immediately issued. Each certificate is valid for six (6) months.",
+      "doc_date": "2026-02 (PDF created 2026-02-02 on the South River site; County letter undated; scanned, read visually)",
+      "via": "pdf",
+      "verified": "eye"
+     },
+     {
+      "url": "https://www.southrivernj.org/DocumentCenter/View/856/Smoke-Detector--Carbon-Monoxide-Detector-Inspection-PDF",
+      "quote": "Middlesex County Fire Marshal 1001 Fire Academy Drive Sayreville, NJ 08879 Email: firemarshal@co.middlesex.nj.us",
+      "doc_date": "undated application page in the same PDF",
+      "via": "pdf",
+      "verified": "eye"
+     },
+     {
+      "url": "https://www.southrivernj.org/DocumentCenter/View/856/Smoke-Detector--Carbon-Monoxide-Detector-Inspection-PDF",
+      "quote": "MIDDLESEX COUNTY FIRE MARSHAL 1001 Fire Academy Drive Sayreville, NJ 08872 732-316-7171 (office) 732-316-7638 (fax)",
+      "doc_date": "2026-02 (PDF created 2026-02-02 on the South River site; County letter undated; scanned, read visually)",
+      "via": "pdf",
+      "verified": "eye"
+     }
+    ],
+    "confidence": "medium"
+   }
+  ],
+  "notes": "The DCA July 2026 registry lists the County (code C) as South Amboy's fire enforcing agency, and the City's Fire Prevention page says all fire prevention services are provided by the Middlesex County Fire Marshal. The County's web pages returned 403 Forbidden to plain requests. The fee schedule used here is the County Fire Marshal's own letter to 'All Real Estate Agencies/Home Owners' (citing County Fire Marshal Ordinance 10-1811), found as a scanned PDF on the South River Borough site (created February 2026; letter undated). It is the County's schedule, not a South River fee, but South Amboy does not post it, so confirm it applies. An older County form (2020, Internet Archive copy of http://www.middlesexcountynj.gov/Government/Departments/PSH/Documents/Fire-Marshal/Residential Smoke Detector and Carbon Monoxide Inspection Info and Application.pdf) also showed a $50 fee. The City page's Fire Marshal email is hidden behind email protection and was not decoded; the Fire Official's email comes from the state directory. Type is 'unknown' because the schema has no county option. The City's CO for Sale packet also includes a 'Fire Code' sheet, so the Building Department's resale inspection may check alarms too. Oddity: the state directory's smoke detector compliance block on the Sayreville page names 'City of South Amboy Hg/Code Enf' at 140 N Broadway, while South Amboy's own page names the County Fire Marshal."
+ },
+ "other_items": [
+  {
+   "label": "Final sewer bill",
+   "detail": "If a final bill is needed for a closing, first final the water with Middlesex Water (732-634-1500), then send a copy of the final water bill with the attorney or title company contact to the Tax/Utility Collector (Joanne Katko, 732-525-5924); the final sewer takes 5 business days once all information is in.",
+   "source_url": "https://www.southamboynj.gov/_Content/pdf/forms/Certificate-of-Occupancy-for-Sale.pdf"
+  },
+  {
+   "label": "Outstanding municipal charges",
+   "detail": "The CO for Sale form asks for the attorney holding escrow for outstanding municipal charges (tax or sewer).",
+   "source_url": "https://www.southamboynj.gov/_Content/pdf/forms/Certificate-of-Occupancy-for-Sale.pdf"
+  },
+  {
+   "label": "Open permits",
+   "detail": "Work done without required permits must be permitted, and any outstanding permits must have final approvals.",
+   "source_url": "https://www.southamboynj.gov/_Content/pdf/forms/Certificate-of-Occupancy-for-Sale.pdf"
+  }
+ ],
+ "open_questions": [
+  "The City's fee for the Certificate of Occupancy for Sale, reinspection fee, lead time and validity.",
+  "Confirmation that the County Fire Marshal fee schedule posted on the South River site applies to South Amboy sales.",
+  "Whether the extinguisher lines on the City's undated guideline sheets still apply after P.L.2025, c.19."
+ ],
+ "verification": {
+  "fees": 5,
+  "fee_ok": 5,
+  "fee_bad": 0,
+  "fee_unchecked": 0,
+  "quotes": 14,
+  "q_ok": 11,
+  "q_bad": 0,
+  "q_unchecked": 3
+ }
+}

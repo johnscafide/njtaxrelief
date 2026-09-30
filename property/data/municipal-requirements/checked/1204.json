@@ -1,0 +1,308 @@
+{
+ "municipality_code": "1204",
+ "municipality": "East Brunswick Township",
+ "county": "MIDDLESEX",
+ "checked_at": "2026-09-30",
+ "resale_co": {
+  "status": "not_required",
+  "name": "",
+  "issued_by": "",
+  "lead_time": "",
+  "valid_for": "",
+  "requirements": [],
+  "fees": [],
+  "how_to_apply": "",
+  "application_url": "",
+  "department_url": "https://www.eastbrunswick.org/162/Continued-Certificate-of-Occupancy-Requi",
+  "phone": "732-390-6875",
+  "email": "scurtis@eastbrunswick.org",
+  "contact_name": "Steven R. Curtis",
+  "contact_title": "Construction Official",
+  "evidence": [
+   {
+    "url": "https://www.eastbrunswick.org/162/Continued-Certificate-of-Occupancy-Requi",
+    "quote": "Note: By Ordinance, East Brunswick Township does not require or issue a Certificate of Occupancy for residential resale or rentals.",
+    "doc_date": "2026-09 (page checked 2026-09-30)",
+    "via": "page",
+    "verified": true
+   },
+   {
+    "url": "https://www.eastbrunswick.org/162/Continued-Certificate-of-Occupancy-Requi",
+    "quote": "The Township has elected not to implement the permissive portion of the State Code which would require re-inspection before resale or refinancing of single, townhouse or condominium residential dwelling units.",
+    "doc_date": "2026-09",
+    "via": "page",
+    "verified": true
+   },
+   {
+    "url": "https://www.eastbrunswick.org/162/Continued-Certificate-of-Occupancy-Requi",
+    "quote": "If you have any questions, please call 732-390-6875.",
+    "doc_date": "2026-09",
+    "via": "page",
+    "verified": true
+   },
+   {
+    "url": "https://www.eastbrunswick.org/158/Construction-Inspection",
+    "quote": "Steven R. Curtis Construction Official scurtis@eastbrunswick.org",
+    "doc_date": "2026-09",
+    "via": "page",
+    "verified": true
+   }
+  ],
+  "confidence": "high",
+  "notes": "The Township says in writing that it does not require or issue a certificate of occupancy for residential resales or rentals. Commercial properties are different: a Resale Certificate / New Tenant Certificate is needed for any change of commercial tenant or ownership ($75 processing fee, then $200 and inspections by all 4 subcodes). The smoke/CO certificate from the fire district is still required on every sale."
+ },
+ "fire_cert": {
+  "requirements": [
+   "Districts 1 and 3: working hardwired or 10 year sealed battery smoke detector on each floor including the basement near the stairs, and within 10 feet of each bedroom; hardwired detectors must stay hardwired; detectors over 10 years old must be replaced; UL listed",
+   "Districts 1 and 3: a low voltage fire alarm system needs a passing inspection report from the alarm company, a NJ-certified fire protection contractor or a licensed electrician, shown to the inspector",
+   "Districts 1 and 3: CO detector in the hallway within 10 feet of any bedroom if the home has a fuel burning appliance or attached garage; stand-alone CO detectors no more than 7 years old, combination smoke/CO no more than 10 years old",
+   "Districts 1 and 3: house numbers at least 4 inches high (or at least 2 inches on both sides of a curbside mailbox), visible from the street and contrasting",
+   "District 2: alarm type depends on year built (before 1977 10 year sealed battery; 1977 to 1984 electric; 1984 to 1990 electric interconnected; after 1990 electric interconnected with battery back-up and one in each bedroom); CO alarm within 10 feet of each sleeping area",
+   "District 2: secondary power sources (solar, generator, etc.) must be properly labeled (new February 2025)",
+   "All districts: portable fire extinguisher recommended, not required (since February 2025)"
+  ],
+  "authorities": [
+   {
+    "name": "East Brunswick Bureau of Fire Safety, Fire Districts #1 and #3 (Fire Marshal's Office)",
+    "type": "fire_district",
+    "area_served": "Homes in East Brunswick Fire District #1 or Fire District #3 (District #1 is the enforcing agency for District #3). District #3 is described by its fire company as about 4 square miles in the western part of the township.",
+    "lead_time": "Request at least two weeks before the closing or rental date; lowest fee when scheduled more than 10 days before closing",
+    "fees": [
+     {
+      "label": "Smoke/CO inspection scheduled more than 10 days before closing",
+      "amount": "$50.00",
+      "quote": "The inspection fees are $50.00 when scheduled more than 10 days before closing. The fee increases to $75.00 4 to 10 days before closing and $125.00 if 4 days or less.",
+      "source_url": "https://www.ebfmo.org/smoke-form.php",
+      "verified": true
+     },
+     {
+      "label": "Scheduled 4 to 10 days before closing",
+      "amount": "$75.00",
+      "quote": "The inspection fees are $50.00 when scheduled more than 10 days before closing. The fee increases to $75.00 4 to 10 days before closing and $125.00 if 4 days or less.",
+      "source_url": "https://www.ebfmo.org/smoke-form.php",
+      "verified": true
+     },
+     {
+      "label": "Scheduled 4 days or less before closing",
+      "amount": "$125.00",
+      "quote": "The inspection fees are $50.00 when scheduled more than 10 days before closing. The fee increases to $75.00 4 to 10 days before closing and $125.00 if 4 days or less.",
+      "source_url": "https://www.ebfmo.org/smoke-form.php",
+      "verified": true
+     }
+    ],
+    "how_to_apply": "Use the online SMOKE/CO INSPECTION REQUEST form on the Fire Marshal's Office website (address, owner, buyer or tenant, requester email and phone, closing/rental date). Pay by credit card through the payment link on the site (debit cards not accepted). Questions: CSmith@ebfmo.org or 732-651-8806.",
+    "application_url": "https://www.ebfmo.org/smoke-form.php",
+    "department_url": "https://www.ebfmo.org/",
+    "phone": "732-651-8806",
+    "email": "JWhalen@ebfmo.org",
+    "contact_name": "Jaysen A. Whalen",
+    "contact_title": "Fire Marshal, Bureau of Fire Safety, East Brunswick Fire Dist. #1 & #3",
+    "evidence": [
+     {
+      "url": "https://www.ebfmo.org/",
+      "quote": "Residents of East Brunswick Fire District 1 and 3 selling or renting their home will need a “Certificate of Smoke alarm, carbon monoxide alarm” (CSACMAC).",
+      "doc_date": "2026-09 (page checked 2026-09-30)",
+      "via": "page",
+      "verified": true
+     },
+     {
+      "url": "https://www.ebfmo.org/",
+      "quote": "For further assistance email CSmith@ebfmo.org or call 732-651-8806",
+      "doc_date": "2026-09",
+      "via": "page",
+      "verified": true
+     },
+     {
+      "url": "https://www.ebfmo.org/",
+      "quote": "Jaysen A. Whalen, Fire Marshal Bureau of Fire Safety East Brunswick Fire Dist. #1 & #3 680 Old Bridge Turnpike East Brunswick, NJ 08816 732-651-8806",
+      "doc_date": "2026-09",
+      "via": "page",
+      "verified": true
+     },
+     {
+      "url": "https://www.ebfmo.org/",
+      "quote": "DEBIT CARD NOT ACCEPTED",
+      "doc_date": "2026-09",
+      "via": "page",
+      "verified": true
+     },
+     {
+      "url": "https://www.ebfmo.org/smoke-form.php",
+      "quote": "Please note requests for inspection should be done at least two weeks prior to your closing/rental date.",
+      "doc_date": "2026-09",
+      "via": "page",
+      "verified": true
+     },
+     {
+      "url": "https://www.ebfmo.org/form/SmokeCOExtinguisherGuidelines03.pdf",
+      "quote": "FIRE EXTINGUISHER- Recommended, not required as of February 24, 2025.",
+      "doc_date": "2025-12 (PDF modified December 12, 2025)",
+      "via": "pdf",
+      "verified": null
+     },
+     {
+      "url": "https://nj.gov/dca/dfs/pdf/ANNUAL%20REGISTRY/THIRD%20QUARTER%20LEA%20REGISTRY%202026.pdf",
+      "quote": "D East Brunswick Township (1)",
+      "doc_date": "2026-07 (registry as of June 30, 2026)",
+      "via": "pdf",
+      "verified": true
+     },
+     {
+      "url": "https://nj.gov/dca/dfs/pdf/ANNUAL%20REGISTRY/THIRD%20QUARTER%20LEA%20REGISTRY%202026.pdf",
+      "quote": "East Brunswick Township FD#1 is the LEA East Brunswick Township FD#3.",
+      "doc_date": "2026-07 (registry as of June 30, 2026)",
+      "via": "pdf",
+      "verified": true
+     },
+     {
+      "url": "https://www.nj.gov/dca/dfs/pdf/fire%20directory_county%20summary/fire_code_enforcement_director.pdf",
+      "quote": "LEAID: 1204-003 Enf Auth. District Fire Official Jaysen A Whalen Phone (732) 651-8806 Addr: 680 Old Bridge Turnpike Email fireofficial@ebfmo.com",
+      "doc_date": "2026-02-06 (survey date)",
+      "via": "state_directory",
+      "verified": true
+     },
+     {
+      "url": "https://www.brookviewfire.com/",
+      "quote": "The Brookview Volunteer Fire Company provides fire protection to residents of Fire District # 3, in East Brunswick Township, Middlesex County, New Jersey. Our response area is primarily residential, covering approximately 4 square miles in the western part of the township.",
+      "doc_date": "2026-09",
+      "via": "page",
+      "verified": true
+     }
+    ],
+    "confidence": "high"
+   },
+   {
+    "name": "East Brunswick Fire District #2 Bureau of Fire Prevention",
+    "type": "fire_district",
+    "area_served": "Homes in East Brunswick Fire District #2 (served by the East Brunswick Independent Fire Company)",
+    "lead_time": "Ten or more business days before closing for the lowest fee; certificate valid six months",
+    "fees": [
+     {
+      "label": "Smoke/CO inspection, ten or more business days before closing",
+      "amount": "$50.00",
+      "quote": "Ten (10) business days or more before closing/change of occupancy: $50.00",
+      "source_url": "https://firebasestorage.googleapis.com/v0/b/ebfd2-61921.appspot.com/o/forms%2FSmoke%20Alarm%20Inspection%20Application.pdf?alt=media&token=d21889d2-eeec-42d8-910e-a0c45b5440de",
+      "verified": true
+     },
+     {
+      "label": "Less than ten business days before closing",
+      "amount": "$75.00",
+      "quote": "Less than ten (10) business days before closing/change of occupancy: $75.00",
+      "source_url": "https://firebasestorage.googleapis.com/v0/b/ebfd2-61921.appspot.com/o/forms%2FSmoke%20Alarm%20Inspection%20Application.pdf?alt=media&token=d21889d2-eeec-42d8-910e-a0c45b5440de",
+      "verified": true
+     },
+     {
+      "label": "Less than four business days before closing",
+      "amount": "$125.00",
+      "quote": "Less than four (4) business days before closing/change of occupancy: $125.00",
+      "source_url": "https://firebasestorage.googleapis.com/v0/b/ebfd2-61921.appspot.com/o/forms%2FSmoke%20Alarm%20Inspection%20Application.pdf?alt=media&token=d21889d2-eeec-42d8-910e-a0c45b5440de",
+      "verified": true
+     },
+     {
+      "label": "Re-inspection for a failed inspection",
+      "amount": "$20.00",
+      "quote": "Re-inspection for failed inspection: $20.00",
+      "source_url": "https://firebasestorage.googleapis.com/v0/b/ebfd2-61921.appspot.com/o/forms%2FSmoke%20Alarm%20Inspection%20Application.pdf?alt=media&token=d21889d2-eeec-42d8-910e-a0c45b5440de",
+      "verified": true
+     },
+     {
+      "label": "No-show for a scheduled inspection without notice",
+      "amount": "$75.00",
+      "quote": "Failure to be present for scheduled inspection without notification $75.00",
+      "source_url": "https://firebasestorage.googleapis.com/v0/b/ebfd2-61921.appspot.com/o/forms%2FSmoke%20Alarm%20Inspection%20Application.pdf?alt=media&token=d21889d2-eeec-42d8-910e-a0c45b5440de",
+      "verified": true
+     }
+    ],
+    "how_to_apply": "Download the Smoke Alarm Inspection Application from the District #2 Fire Prevention Forms page. Email it to administrativeassistant@ebfd2.org or bring it to 216 Joseph Street (William Peck Annex), East Brunswick. Checks payable to E.B. Bureau of Fire Prevention, Dist. 2; credit cards accepted (the Payments page has a pay link; include your invoice number). Inspections are Monday, Wednesday and Friday, 4:00 to 6:00 PM, and the certificate is issued on the spot when the home passes.",
+    "application_url": "https://firebasestorage.googleapis.com/v0/b/ebfd2-61921.appspot.com/o/forms%2FSmoke%20Alarm%20Inspection%20Application.pdf?alt=media&token=d21889d2-eeec-42d8-910e-a0c45b5440de",
+    "department_url": "https://www.ebfd2.org/fireprevention",
+    "phone": "732-210-4582",
+    "email": "administrativeassistant@ebfd2.org",
+    "contact_name": "",
+    "contact_title": "",
+    "evidence": [
+     {
+      "url": "https://firebasestorage.googleapis.com/v0/b/ebfd2-61921.appspot.com/o/forms%2FSmoke%20Alarm%20Inspection%20Application.pdf?alt=media&token=d21889d2-eeec-42d8-910e-a0c45b5440de",
+      "quote": "Attached please find an application for a Smoke Alarm/Carbon Monoxide Inspection which is required pursuant to NJ Uniform Fire Code N.J.A.C. 5:70-4.19 and the East Brunswick Fire Safety Code Chapter 102 when a change of occupancy or ownership occurs.",
+      "doc_date": "2026-09 (PDF created September 10, 2026)",
+      "via": "pdf",
+      "verified": true
+     },
+     {
+      "url": "https://firebasestorage.googleapis.com/v0/b/ebfd2-61921.appspot.com/o/forms%2FSmoke%20Alarm%20Inspection%20Application.pdf?alt=media&token=d21889d2-eeec-42d8-910e-a0c45b5440de",
+      "quote": "After the initial inspection is complete and compliant, you are immediately issued your certificate, which is valid for six (6) months.",
+      "doc_date": "2026-09",
+      "via": "pdf",
+      "verified": true
+     },
+     {
+      "url": "https://firebasestorage.googleapis.com/v0/b/ebfd2-61921.appspot.com/o/forms%2FSmoke%20Alarm%20Inspection%20Application.pdf?alt=media&token=d21889d2-eeec-42d8-910e-a0c45b5440de",
+      "quote": "ALL INSPECTIONS ARE DONE ON MONDAY, WEDNESDAY AND FRIDAY BETWEEN 4:00-6:00PM",
+      "doc_date": "2026-09",
+      "via": "pdf",
+      "verified": true
+     },
+     {
+      "url": "https://firebasestorage.googleapis.com/v0/b/ebfd2-61921.appspot.com/o/forms%2FSmoke%20Alarm%20Inspection%20Application.pdf?alt=media&token=d21889d2-eeec-42d8-910e-a0c45b5440de",
+      "quote": "Please make checks payable to E.B. Bureau of Fire Prevention, Dist. 2",
+      "doc_date": "2026-09",
+      "via": "pdf",
+      "verified": true
+     },
+     {
+      "url": "https://www.ebfd2.org/fireprevention/about",
+      "quote": "A house cannot be sold or rented without the completion of this inspection.",
+      "doc_date": "2026-09",
+      "via": "page",
+      "verified": true
+     },
+     {
+      "url": "https://www.ebfd2.org/fireprevention/about",
+      "quote": "Phone: 732-210-4582",
+      "doc_date": "2026-09",
+      "via": "page",
+      "verified": true
+     },
+     {
+      "url": "https://www.ebfd2.org/fireprevention/forms",
+      "quote": "Completed forms can be emailed to: administrativeassistant@ebfd2.org",
+      "doc_date": "2026-09",
+      "via": "page",
+      "verified": true
+     },
+     {
+      "url": "https://www.ebfd2.org/district",
+      "quote": "Main Office 732-257-2846",
+      "doc_date": "2026-09",
+      "via": "page",
+      "verified": true
+     },
+     {
+      "url": "https://nj.gov/dca/dfs/pdf/ANNUAL%20REGISTRY/THIRD%20QUARTER%20LEA%20REGISTRY%202026.pdf",
+      "quote": "D East Brunswick Township (2)",
+      "doc_date": "2026-07 (registry as of June 30, 2026)",
+      "via": "pdf",
+      "verified": true
+     }
+    ],
+    "confidence": "high"
+   }
+  ],
+  "notes": "East Brunswick has three fire districts (DCA registry code D). District #1 runs the Bureau of Fire Safety for Districts #1 and #3 (registry note: FD#1 is the enforcing agency for FD#3). District #2 has its own Bureau of Fire Prevention at 216 Joseph Street. The state fire directory (surveys January to February 2026) lists Jaysen A Whalen and the District #1 office for all three district pages, including District #2; the District #2 website shows its own bureau, forms and fees, so the district's own site is used for District #2. The District #2 site does not name its Fire Marshal. Which district an address is in must be checked; the District #2 site links a Fire District Map (https://maphub.net/EBFD1/east-brunswick-fire-dist-1), which was not opened. The state directory prints the District #1 email as fireofficial@ebfmo.com; the District #1/#3 site (ebfmo.com now redirects to ebfmo.org) lists JWhalen@ebfmo.org, which is used. District #2 also posts a notice that all residences in District #2 need an inspection before any change of occupancy (rentals included)."
+ },
+ "other_items": [],
+ "open_questions": [
+  "Exact boundaries of Fire Districts #1, #2 and #3 (which addresses go to which bureau) were not confirmed from an official map.",
+  "Name of the District #2 Fire Marshal / Fire Official is not posted on the District #2 website."
+ ],
+ "verification": {
+  "fees": 8,
+  "fee_ok": 8,
+  "fee_bad": 0,
+  "fee_unchecked": 0,
+  "quotes": 23,
+  "q_ok": 22,
+  "q_bad": 0,
+  "q_unchecked": 1
+ }
+}

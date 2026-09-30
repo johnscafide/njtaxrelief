@@ -1,0 +1,215 @@
+{
+ "municipality_code": "1216",
+ "municipality": "Perth Amboy",
+ "county": "MIDDLESEX",
+ "checked_at": "2026-09-30",
+ "resale_co": {
+  "status": "required",
+  "name": "Certificate of Code Compliance",
+  "issued_by": "Department of Code Enforcement (Housing inspection) with the Fire Prevention inspection",
+  "lead_time": "If no violations are found, a permanent certificate can be issued within 7 to 10 days",
+  "valid_for": "",
+  "requirements": [
+   "Exterior: no flaking or peeling paint; street numbers at least 3 inches; no holes or cracks in foundation and walls; trim, chimneys, windows, handrails, guards, sidewalks and steps in good repair",
+   "Unused oil tanks removed or filled with a permit",
+   "All open permits must have final approval",
+   "GFI outlets outside and in kitchens, baths and laundry areas (within 6 feet of water); covers on all outlets and switches; globes on light fixtures",
+   "Interior walls, trim, floors, ceilings and carpets in good, clean condition; bath and kitchen floors non-porous",
+   "Windows operable, stay open and have locks; windows and doors weather tight",
+   "Furnace safe with a red-marked emergency shut-off; flue connections tight; water heater relief valve extension tube within 6 inches of the floor",
+   "Door from garage to living space must be fire rated",
+   "Plumbing fixtures and appliances working; cabinets secured with handles",
+   "No infestation; unit clean and ready for occupancy",
+   "Fireplaces and wood stoves certified by a certified chimney sweep",
+   "No keyed locks or deadbolts on interior doors",
+   "Buyer must give a notarized letter that the attic, basement and garage will not be used as sleeping rooms or rental units",
+   "Two-family or larger homes, or a one-family bought as a rental, must be registered as rental property by the buyer",
+   "Conditional 45-day certificate possible with the buyer's notarized letter taking responsibility for violations; not issued with any fire violations"
+  ],
+  "fees": [
+   {
+    "label": "Housing inspection, single dwelling unit",
+    "amount": "$40.00",
+    "quote": "SINGLE DWELLING UNIT……Housing $40.00……………….Fire Prevention $100.00",
+    "source_url": "https://www.perthamboynj.org/common/pages/GetFile.ashx?key=NpIQAdls",
+    "verified": true
+   },
+   {
+    "label": "Housing inspection, two dwelling units",
+    "amount": "$80.00",
+    "quote": "TWO DWELLING UNIT.……....Housing $80.00 …………..…..Fire Prevention $150.00",
+    "source_url": "https://www.perthamboynj.org/common/pages/GetFile.ashx?key=NpIQAdls",
+    "verified": true
+   },
+   {
+    "label": "Residential unit reinspection",
+    "amount": "$25.00",
+    "quote": "Residential Unit Re-Inspection…………………………………….….. $25.00/ UNIT",
+    "source_url": "https://www.perthamboynj.org/common/pages/GetFile.ashx?key=NpIQAdls",
+    "verified": true
+   }
+  ],
+  "how_to_apply": "Complete the Certificate of Code Compliance Application (with the emergency contact page) and submit it to the Department of Code Enforcement, 375 New Brunswick Avenue, Perth Amboy, NJ 08861, with a check or money order (cash is not accepted). Residents with a senior citizen exemption on their tax bill are exempt from the fees.",
+  "application_url": "https://www.perthamboynj.org/common/pages/GetFile.ashx?key=NpIQAdls",
+  "department_url": "https://www.perthamboynj.org/government/departments/code_enforcement",
+  "phone": "732-826-0183",
+  "email": "",
+  "contact_name": "Irving Lozada",
+  "contact_title": "Director of Code Enforcement",
+  "evidence": [
+   {
+    "url": "https://www.perthamboynj.org/common/pages/GetFile.ashx?key=NpIQAdls",
+    "quote": "CERTIFICATE OF CODE COMPLIANCE APPLICATION",
+    "doc_date": "2023 (file titled '2023 Certificate of Code Compliance Application', posted 2024-02-16)",
+    "via": "pdf",
+    "verified": true
+   },
+   {
+    "url": "https://www.perthamboynj.org/common/pages/GetFile.ashx?key=NpIQAdls",
+    "quote": "If no violation exists, a permanent Certificate of Code Compliance can be issued within (7) to (10) days.",
+    "doc_date": "2023",
+    "via": "pdf",
+    "verified": true
+   },
+   {
+    "url": "https://www.perthamboynj.org/common/pages/GetFile.ashx?key=NpIQAdls",
+    "quote": "Is this property for: [ ] Sale [ ] Lease",
+    "doc_date": "2023",
+    "via": "pdf",
+    "verified": true
+   },
+   {
+    "url": "https://www.perthamboynj.org/common/pages/GetFile.ashx?key=NpIQAdls",
+    "quote": "A NOTARIZED LETTER MUST BE PROVIDED BY THE BUYER STATING THAT ATTIC, BASEMENT, GARAGE IF APPLICABLE WILL NOT BE USED AS SLEEPING ROOMS OR AS A RENTAL UNIT(S)",
+    "doc_date": "2023",
+    "via": "pdf",
+    "verified": true
+   },
+   {
+    "url": "https://www.perthamboynj.org/common/pages/GetFile.ashx?key=NpIQAdls",
+    "quote": "If a conditional 45 day certificate of code compliance is being requested, a notarized letter must be provided by BUYER stating that buyer is assuming any/all responsibilities to correct any/all violations found.",
+    "doc_date": "2023",
+    "via": "pdf",
+    "verified": true
+   },
+   {
+    "url": "https://www.perthamboynj.org/common/pages/GetFile.ashx?key=NpIQAdls",
+    "quote": "PLEASE SUBMIT CHECKS OR MONEY ORDERS CASH NOT ACCEPTED",
+    "doc_date": "2023",
+    "via": "pdf",
+    "verified": true
+   },
+   {
+    "url": "https://www.perthamboynj.org/government/departments/code_enforcement",
+    "quote": "Irving Lozada, Director Department Phone Number (732) 826-0183",
+    "doc_date": "2026-09 (page as fetched)",
+    "via": "page",
+    "verified": true
+   }
+  ],
+  "confidence": "medium",
+  "notes": "The City's Certificate of Code Compliance application is for properties being sold or leased and covers 1, 2, 3+ family and commercial buildings; it lists both a Housing fee (Code Enforcement) and a Fire Prevention fee. No page or form says in plain words 'required on every sale', but the form's buyer letters, conditional 45-day certificate and fee schedule show it is the City's sale process, so the status is 'required' with medium confidence; the ordinance itself (ecode360 PE0514) could not be opened. The form is the '2023' version posted on the Code Enforcement Applications and Forms page (document list loads by script; file link taken from the City's own document list). The Department email is hidden behind email protection on the City page, so it is left blank. Zoning Officer Jamie Rios reviews applications (named on the form). Rental registration (2+ family, or 1 family bought as a rental) is handled by the Office of Housing & Social Services, 1 Olive Street, (732) 826-4300."
+ },
+ "fire_cert": {
+  "requirements": [
+   "The Code Compliance packet says smoke alarm, CO alarm and fire extinguisher rules are listed in the full packet; those pages were not in the online file",
+   "A conditional certificate will not be issued with any fire violations"
+  ],
+  "authorities": [
+   {
+    "name": "Perth Amboy Fire Department, Bureau of Fire Prevention",
+    "type": "municipal_fire_bureau",
+    "area_served": "Entire city",
+    "lead_time": "",
+    "fees": [
+     {
+      "label": "Fire Prevention inspection, single dwelling unit (paid with the Certificate of Code Compliance application)",
+      "amount": "$100.00",
+      "quote": "SINGLE DWELLING UNIT……Housing $40.00……………….Fire Prevention $100.00",
+      "source_url": "https://www.perthamboynj.org/common/pages/GetFile.ashx?key=NpIQAdls",
+      "verified": true
+     },
+     {
+      "label": "Fire Prevention inspection, two dwelling units (paid with the Certificate of Code Compliance application)",
+      "amount": "$150.00",
+      "quote": "TWO DWELLING UNIT.……....Housing $80.00 …………..…..Fire Prevention $150.00",
+      "source_url": "https://www.perthamboynj.org/common/pages/GetFile.ashx?key=NpIQAdls",
+      "verified": true
+     }
+    ],
+    "how_to_apply": "The Fire Prevention fee is listed on the City's Certificate of Code Compliance application, submitted to Code Enforcement at 375 New Brunswick Avenue (the same building as Fire Headquarters). The Fire Department's Fire Prevention Forms page also lists an 'FPB Resale Checklist' and a code compliance application, but those files did not download.",
+    "application_url": "https://www.perthamboynj.org/common/pages/GetFile.ashx?key=NpIQAdls",
+    "department_url": "https://www.perthamboynj.org/government/departments/fire",
+    "phone": "732-826-0183",
+    "email": "kmetz@perthamboynjfd.org",
+    "contact_name": "Kevin R Metz",
+    "contact_title": "Fire Official",
+    "evidence": [
+     {
+      "url": "https://www.perthamboynj.org/government/departments/fire",
+      "quote": "The Fire Department runs the Bureau of Fire Prevention.",
+      "doc_date": "2026-09 (page as fetched)",
+      "via": "page",
+      "verified": true
+     },
+     {
+      "url": "https://www.perthamboynj.org/government/departments/fire",
+      "quote": "Edward A. Mullen, Fire Chief Department Phone Number (732) 324-3500",
+      "doc_date": "2026-09",
+      "via": "page",
+      "verified": true
+     },
+     {
+      "url": "https://nj.gov/dca/dfs/pdf/ANNUAL%20REGISTRY/THIRD%20QUARTER%20LEA%20REGISTRY%202026.pdf",
+      "quote": "F Perth Amboy",
+      "doc_date": "2026-07",
+      "via": "pdf",
+      "verified": true
+     },
+     {
+      "url": "https://www.nj.gov/dca/dfs/pdf/fire%20directory_county%20summary/fire_code_enforcement_director.pdf",
+      "quote": "LEAID: 1216-001 Enf Auth. Fire Dept Fire Official Kevin R Metz Phone (732) 826-0183 Addr: 375 Newbrunswick Ave",
+      "doc_date": "2026-01-21 (survey date)",
+      "via": "state_directory",
+      "verified": true
+     },
+     {
+      "url": "https://www.nj.gov/dca/dfs/pdf/fire%20directory_county%20summary/fire_code_enforcement_director.pdf",
+      "quote": "Email kmetz@perthamboynjfd.org",
+      "doc_date": "2026-01-21",
+      "via": "state_directory",
+      "verified": true
+     }
+    ],
+    "confidence": "medium"
+   }
+  ],
+  "notes": "The Perth Amboy Fire Department is the local fire enforcing agency (DCA July 2026 registry code F). The Fire Prevention fee ($100.00 one unit, $150.00 two units) appears on the City's 2023 Certificate of Code Compliance application, so the smoke/CO inspection appears to be handled together with the City's resale inspection; confirm whether a separate smoke/CO certificate application is needed. The Fire Official's contact comes from the state fire directory (survey 1/21/2026); the City's Fire page shows only the Fire Chief and a protected email. The state directory phone for the Fire Official, (732) 826-0183, is the same number the City lists for Code Enforcement."
+ },
+ "other_items": [
+  {
+   "label": "Open permits",
+   "detail": "All open permits must have a completed, passed final inspection before the Certificate of Code Compliance is issued.",
+   "source_url": "https://www.perthamboynj.org/common/pages/GetFile.ashx?key=NpIQAdls"
+  },
+  {
+   "label": "Rental registration",
+   "detail": "Since November 1, 2018, all 2-family or larger properties, and any 1-family bought as a rental, must be registered by the buyer with the Office of Housing & Social Services, 1 Olive Street, (732) 826-4300.",
+   "source_url": "https://www.perthamboynj.org/common/pages/GetFile.ashx?key=NpIQAdls"
+  }
+ ],
+ "open_questions": [
+  "Confirm the Certificate of Code Compliance is required on every 1-2 family sale (including owner-occupied) and that the 2023 fees ($40/$80 Housing, $100/$150 Fire Prevention, $25 reinspection) are current.",
+  "Whether the Fire Prevention smoke/CO inspection needs its own application (the 'FPB Resale Checklist' file on the Fire Prevention Forms page did not download)."
+ ],
+ "verification": {
+  "fees": 5,
+  "fee_ok": 5,
+  "fee_bad": 0,
+  "fee_unchecked": 0,
+  "quotes": 12,
+  "q_ok": 12,
+  "q_bad": 0,
+  "q_unchecked": 0
+ }
+}

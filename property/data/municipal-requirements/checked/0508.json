@@ -1,0 +1,181 @@
+{
+ "municipality_code": "0508",
+ "municipality": "Ocean City",
+ "county": "CAPE MAY",
+ "checked_at": "2026-09-30",
+ "resale_co": {
+  "status": "required",
+  "name": "Zoning Compliance Certification (homes built after January 1, 1996 only)",
+  "issued_by": "City of Ocean City (requested on the same sale-of-property inspection application; Zoning Office)",
+  "lead_time": "",
+  "valid_for": "",
+  "requirements": [
+   "Zoning compliance check at the in-person sale inspection, for homes built after January 1, 1996"
+  ],
+  "fees": [],
+  "how_to_apply": "Use the City's Sale of Property inspection application (the same form as the smoke/CO certificate); give the date of the final CO (year built) so the City knows zoning certification is needed. Send it to 115 12th Street, Ocean City, NJ 08226, (609) 399-6111 x 9727, smokedetector@ocnj.us.",
+  "application_url": "https://www.ocnj.us/media/KnightBuilding/Smoke%20Detector/salecertapp2025.pdf",
+  "department_url": "https://www.ocnj.us/zoning",
+  "phone": "609-399-6111 ext 9759",
+  "email": "jfenton@ocnj.us",
+  "contact_name": "Jessica Fenton",
+  "contact_title": "Zoning Official",
+  "evidence": [
+   {
+    "url": "https://www.ocnj.us/media/KnightBuilding/Smoke%20Detector/salecertapp2025.pdf",
+    "quote": "Homes built after January 1, 1996 also require Zoning Compliance Certification.",
+    "doc_date": "2025-09-17 (PDF date)",
+    "via": "pdf",
+    "verified": true
+   },
+   {
+    "url": "https://www.ocnj.us/media/KnightBuilding/Smoke%20Detector/salecertapp2025.pdf",
+    "quote": "The inspection fee is $50 per unit for properties built before 1996 or $100 per unit if the property was built after 1996.",
+    "doc_date": "2025-09-17",
+    "via": "pdf",
+    "verified": true
+   },
+   {
+    "url": "https://www.ocnj.us/departments/staff_directory/Administration/",
+    "quote": "Fenton, Jessica - Zoning Official Email: jfenton@ocnj.us Phone: 609-399-6111;9759",
+    "doc_date": "",
+    "via": "page",
+    "verified": true
+   },
+   {
+    "url": "https://www.ocnj.us/zoning",
+    "quote": "609-399-6111 x9758 or zoning@ocnj.us",
+    "doc_date": "",
+    "via": "page",
+    "verified": true
+   }
+  ],
+  "confidence": "medium",
+  "notes": "The City's 2025 sale-of-property application says homes built after January 1, 1996 also require Zoning Compliance Certification, and the same form charges $100 per unit for post-1996 homes versus $50 for older homes. It appears to be one combined in-person inspection and one fee (recorded under fire_cert, not repeated here), but the form does not say how the $100 splits or whether the Zoning Office issues a separate certificate. Homes built before 1996 need only the smoke/CO certificate as far as the form shows. No other resale certificate of occupancy or housing inspection was found; the Zoning Fees sheet (2017) lists no resale item. Ocean City licenses rental properties (and requires lead-based paint inspections of pre-1978 rentals of 6 months or more); those are rental programs. Zoning Office general line 609-399-6111 x9758, zoning@ocnj.us."
+ },
+ "fire_cert": {
+  "requirements": [
+   "Homes built before 1977: 10-year sealed battery smoke alarms on each level and outside each sleeping area",
+   "Built January 1977 to February 21, 1983: hardwired (120 volt) smoke alarms on each level and near each sleeping area (interconnection not required)",
+   "Built February 22, 1983 to April 30, 1993: hardwired multi-station smoke alarms on each level and near each sleeping area, interconnected",
+   "Built May 1, 1993 to present: hardwired interconnected smoke alarms with battery backup in all bedrooms, outside each sleeping area and on every level",
+   "CO alarms (UL 2034) near sleeping areas when there are fuel-burning devices or an attached garage",
+   "Portable fire extinguisher 2A-10B:C for the sale of 1-2 family units, on its bracket within 10 feet of the kitchen in the path of egress, top no more than 5 feet up (City requirements sheet dated February 2024, before P.L.2025, c.19)",
+   "Inspections are in person only; self-certifications are no longer accepted",
+   "Individually owned condo units in multifamily buildings also need the certificate"
+  ],
+  "authorities": [
+   {
+    "name": "City of Ocean City Division of Fire Prevention (Municipal Code, Licensing and Fire Prevention, Knight Building)",
+    "type": "municipal_fire_bureau",
+    "area_served": "Entire city",
+    "lead_time": "Book before closing; inspections Monday to Friday 9am to 3pm at scheduled times",
+    "fees": [
+     {
+      "label": "Sale inspection, per unit, property built before 1996",
+      "amount": "$50",
+      "quote": "The inspection fee is $50 per unit for properties built before 1996 or $100 per unit if the property was built after 1996.",
+      "source_url": "https://www.ocnj.us/media/KnightBuilding/Smoke%20Detector/salecertapp2025.pdf",
+      "verified": true
+     },
+     {
+      "label": "Sale inspection, per unit, property built after 1996 (form also requires Zoning Compliance Certification for these homes)",
+      "amount": "$100",
+      "quote": "The inspection fee is $50 per unit for properties built before 1996 or $100 per unit if the property was built after 1996.",
+      "source_url": "https://www.ocnj.us/media/KnightBuilding/Smoke%20Detector/salecertapp2025.pdf",
+      "verified": true
+     }
+    ],
+    "how_to_apply": "Fill out the Inspection Request: Sale of Property Application for Certificate of Smoke Detector and Carbon Monoxide Alarm Compliance (closing date, requested inspection date and time, access: meet owner/agent/tenant or lock box code, buyer and agent details, year of final CO). Submit to 115 12th Street, Ocean City, NJ 08226, call 609-399-6111 ext. 9727, or email smokedetector@ocnj.us. Payment by mail, in person or online. The seller or the seller's agent must get it before the sale or transfer of title.",
+    "application_url": "https://www.ocnj.us/media/KnightBuilding/Smoke%20Detector/salecertapp2025.pdf",
+    "department_url": "https://www.ocnj.us/firepreventionfaq",
+    "phone": "609-399-6111 ext. 9727",
+    "email": "smokedetector@ocnj.us",
+    "contact_name": "",
+    "contact_title": "",
+    "evidence": [
+     {
+      "url": "https://www.ocnj.us/firepreventionfaq",
+      "quote": "Certification is required for all residential rental units in one- and two-family dwellings and for the sale or transfer of title of residential units in one- and two-family dwellings, and individually owned condo units in multiple dwellings.",
+      "doc_date": "",
+      "via": "page",
+      "verified": true
+     },
+     {
+      "url": "https://www.ocnj.us/firepreventionfaq",
+      "quote": "All inspections must be done in-person. Self-certifications are no longer being accepted. To schedule an inspection, please use the forms provided below, call 609-399-6111 ext. 9727, and/or email smokedetector@ocnj.us with any questions.",
+      "doc_date": "",
+      "via": "page",
+      "verified": true
+     },
+     {
+      "url": "https://www.ocnj.us/media/KnightBuilding/Smoke%20Detector/salecertapp2025.pdf",
+      "quote": "Certification must be obtained by the seller or their authorized agent prior to property sale or transfer of title for all residential units within 1 and 2 family dwellings, and individually-owned condo units within a multifamily structure.",
+      "doc_date": "2025-09-17 (PDF date)",
+      "via": "pdf",
+      "verified": true
+     },
+     {
+      "url": "https://www.ocnj.us/media/KnightBuilding/Smoke%20Detector/SmokeRequirements.pdf",
+      "quote": "Fire extinguishers are required in all yearly rentals and for the sale of all units within 1 and 2 family dwellings.",
+      "doc_date": "2024-02-16 (PDF date)",
+      "via": "pdf",
+      "verified": true
+     },
+     {
+      "url": "https://www.ocnj.us/municipalcodeandlicensing",
+      "quote": "Smoke Detector Certification: Apply for certificate of smoke detector and carbon monoxide alarm compliance. 609-399-6111 x9727 or smokedetector@ocnj.us",
+      "doc_date": "",
+      "via": "page",
+      "verified": true
+     },
+     {
+      "url": "https://nj.gov/dca/dfs/pdf/ANNUAL%20REGISTRY/THIRD%20QUARTER%20LEA%20REGISTRY%202026.pdf",
+      "quote": "S Ocean City",
+      "doc_date": "2026-07 (registry as of June 30, 2026)",
+      "via": "pdf",
+      "verified": true
+     },
+     {
+      "url": "https://www.nj.gov/dca/dfs/pdf/fire%20directory_county%20summary/state_towns%207_17_26.pdf",
+      "quote": "OCEAN CITY 0508",
+      "doc_date": "2026-07-17 (no SC mark: the State does not issue smoke certs here)",
+      "via": "pdf",
+      "verified": true
+     },
+     {
+      "url": "https://www.nj.gov/dca/dfs/pdf/fire%20directory_county%20summary/fire_code_enforcement_director.pdf",
+      "quote": "LEAID: 0508-999 Enf Auth. State Fire Official Louis Kilmer Phone (609)633-6132",
+      "doc_date": "2025-02-13 (survey date)",
+      "via": "state_directory",
+      "verified": true
+     }
+    ],
+    "confidence": "high"
+   }
+  ],
+  "notes": "Ocean City is state-enforced for the Uniform Fire Code (DCA registry code S), but the DCA's July 2026 list of state-enforced towns does not mark Ocean City 'SC', meaning the State does not issue smoke certificates there; the City's own Division of Fire Prevention issues them. The state fire directory (survey 2/13/2025) lists 'NJ Division Fire Safety' under Smoke Detector Compliance for Ocean City; the City's pages and 2025 form are newer and are followed here. No named fire prevention official was found on the City site; the Ocean City Fire Department (Chief Bernard Walker, 609-525-9182, bwalker@ocnj.us) is the fire/rescue department, not the smoke certificate office. The City's older 'Smoke Detector' page still links a 2020 self-certification form, but the Fire Prevention FAQ says self-certifications are no longer accepted. No late or rush fee tiers are shown on the 2025 form."
+ },
+ "other_items": [
+  {
+   "label": "Zoning Compliance Certification for homes built after January 1, 1996",
+   "detail": "Required on sale per the City's 2025 sale inspection form; see resale_co.",
+   "source_url": "https://www.ocnj.us/media/KnightBuilding/Smoke%20Detector/salecertapp2025.pdf"
+  }
+ ],
+ "open_questions": [
+  "Is the Zoning Compliance Certification issued by the Zoning Office as a separate certificate, and is it covered by the $100 per unit sale inspection fee or charged separately?",
+  "Whether the City still requires a fire extinguisher for sales after P.L.2025, c.19 (the requirements sheet is dated February 2024; the 2025 sale form does not mention one).",
+  "Name of the fire prevention official who signs the certificates."
+ ],
+ "verification": {
+  "fees": 2,
+  "fee_ok": 2,
+  "fee_bad": 0,
+  "fee_unchecked": 0,
+  "quotes": 12,
+  "q_ok": 12,
+  "q_bad": 0,
+  "q_unchecked": 0
+ }
+}

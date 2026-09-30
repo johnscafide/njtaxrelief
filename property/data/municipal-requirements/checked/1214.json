@@ -1,0 +1,264 @@
+{
+ "municipality_code": "1214",
+ "municipality": "North Brunswick Township",
+ "county": "MIDDLESEX",
+ "checked_at": "2026-09-30",
+ "resale_co": {
+  "status": "required",
+  "name": "Home Sale Certificate",
+  "issued_by": "Building Division (Construction Official), Department of Community Development",
+  "lead_time": "Start as early as possible before closing so open permits, inspections or unpermitted work can be cleared",
+  "valid_for": "120 days; one administrative extension of up to 30 days",
+  "requirements": [
+   "Township reviews the property's permit and inspection history",
+   "No open or outstanding construction permits or inspections",
+   "Permitted work must have its final approvals",
+   "Any work done without a required permit must be permitted and inspected (the form asks about A/C, furnace, boiler and water heater replacements in the past 10 years, plus generator, radon system, addition, finished basement, fireplace or wood stove, shed over 200 sq ft, pool, hot tub, deck and gazebo)",
+   "Owner signs a notarized certification on the application",
+   "Permits and Certificates of Approval issued through this process are sent to the Tax Assessor and can lead to an added assessment",
+   "If the seller will not do it, the buyer's attorney can request a waiver on law firm letterhead so the buyer takes on the Home Sale Certificate after closing; the home cannot be occupied during renovations (other than minor work) until the certificate is issued"
+  ],
+  "fees": [
+   {
+    "label": "Home Sale Certificate, single-family home",
+    "amount": "$150",
+    "quote": "Condo/Townhouse /Mobile Home: $125 Single Family Home: $150",
+    "source_url": "https://www.northbrunswicknj.gov/DocumentCenter/View/1219",
+    "verified": true
+   },
+   {
+    "label": "Home Sale Certificate, condo, townhouse or mobile home",
+    "amount": "$125",
+    "quote": "Condo/Townhouse /Mobile Home: $125 Single Family Home: $150",
+    "source_url": "https://www.northbrunswicknj.gov/DocumentCenter/View/1219",
+    "verified": true
+   }
+  ],
+  "how_to_apply": "Fill out the Application for a Home Sale Certificate (both sides), sign the certification in front of a notary, and submit it with the fee payable to the Township of North Brunswick to the Building Division, 710 Hermann Road, North Brunswick, NJ 08902 (732-247-0922 ext. 450, TWPNBcommdev@northbrunswicknj.gov).",
+  "application_url": "https://www.northbrunswicknj.gov/DocumentCenter/View/1219",
+  "department_url": "https://www.northbrunswicknj.gov/204/Selling-Your-Home",
+  "phone": "732-247-0922 ext. 450",
+  "email": "TWPNBcommdev@northbrunswicknj.gov",
+  "contact_name": "Tom Paun",
+  "contact_title": "Construction Official/Building Subcode",
+  "evidence": [
+   {
+    "url": "https://www.northbrunswicknj.gov/204/Selling-Your-Home",
+    "quote": "A Home Sale Certificate is required for residential property sales and helps ensure that permits and required inspections associated with the property have been properly completed before the sale.",
+    "doc_date": "2026-09 (page as fetched)",
+    "via": "page",
+    "verified": true
+   },
+   {
+    "url": "https://www.northbrunswicknj.gov/204/Selling-Your-Home",
+    "quote": "A Home Sale Certificate cannot be issued until applicable requirements have been satisfied.",
+    "doc_date": "2026-09",
+    "via": "page",
+    "verified": true
+   },
+   {
+    "url": "https://www.northbrunswicknj.gov/DocumentCenter/View/1219",
+    "quote": "I understand that a Home Sale Certificate shall be effective for a period of 120 days. One administrative extension of not more than 30 days may be granted.",
+    "doc_date": "",
+    "via": "pdf",
+    "verified": true
+   },
+   {
+    "url": "https://www.northbrunswicknj.gov/DocumentCenter/View/1219",
+    "quote": "Payment required to the Township of North Brunswick",
+    "doc_date": "",
+    "via": "pdf",
+    "verified": true
+   },
+   {
+    "url": "https://www.northbrunswicknj.gov/DocumentCenter/View/1221",
+    "quote": "Accordingly, we request that the township grant a waiver for the requirement of a Home Sale Certificate prior to closing to provide additional time to correct outstanding code issues.",
+    "doc_date": "",
+    "via": "pdf",
+    "verified": true
+   },
+   {
+    "url": "https://www.northbrunswicknj.gov/m/directory/department?did=35",
+    "quote": "Phone Number (732) 247-0922 Ext: 450",
+    "doc_date": "2026-09",
+    "via": "page",
+    "verified": true
+   },
+   {
+    "url": "https://www.northbrunswicknj.gov/m/directory/department?did=35",
+    "quote": "Tom Paun Construction Official/Building Subcode",
+    "doc_date": "2026-09",
+    "via": "page",
+    "verified": true
+   },
+   {
+    "url": "https://web.archive.org/web/20260903060730/https://northbrunswicknj.gov/wp-content/uploads/2026/07/FIRE-MARSHAL-HOME-SALE-REQUIREMENTS-JUL-2026.pdf",
+    "quote": "The Township of North Brunswick requires both a Home Sale Certificate from the Construction Official AND a Certificate of Compliance home inspection by the Fire Marshal.",
+    "doc_date": "2026-07 (archived copy captured 2026-09-03)",
+    "via": "pdf",
+    "verified": true
+   }
+  ],
+  "confidence": "high",
+  "notes": "The Home Sale Certificate is a permit-history review (open permits, missing final inspections, unpermitted work) rather than a full housing inspection. The application lists fees only for a single-family home ($150) and a condo/townhouse/mobile home ($125); no two-family fee is printed. The application and sample waiver letter carry no date. The Township moved to a new website in 2026; older Township PDFs on the previous site now return 'not found'. The Building Division email and phone come from the staff directory; Tom Paun's own phone and email are not shown."
+ },
+ "fire_cert": {
+  "requirements": [
+   "Smoke alarms on every level including basements (not attics or crawl spaces) and outside each sleeping area",
+   "Battery smoke alarms must be 10-year sealed battery alarms; existing hard-wired alarms must be kept and cannot be replaced by battery units",
+   "CO alarm within 10 feet of every bedroom (battery, hard-wired or plug-in; combination smoke/CO alarms are acceptable)",
+   "Fire extinguisher still required on the July 2026 sheet: listed, labeled, charged and operable, rated at least 2A:10BC (4, 5 or 6 lb ABC), under the kitchen sink or within 10 feet of the kitchen exit path; it does not need to be mounted",
+   "Application and payment must be made before an inspection is scheduled",
+   "Certificate valid for 60 days and not transferable"
+  ],
+  "authorities": [
+   {
+    "name": "North Brunswick Fire Prevention Bureau (Fire Marshal's Office)",
+    "type": "municipal_fire_bureau",
+    "area_served": "Entire township",
+    "lead_time": "Apply 10 or more business days before closing for the lowest fee; the certificate expires 60 days after issue",
+    "fees": [
+     {
+      "label": "Smoke/CO/extinguisher inspection, requested 10 business days ahead",
+      "amount": "$50",
+      "quote": "10 days: $50 6-9 days: $100 5 days: $150",
+      "source_url": "https://web.archive.org/web/20260903060730/https://northbrunswicknj.gov/wp-content/uploads/2026/07/FIRE-MARSHAL-HOME-SALE-REQUIREMENTS-JUL-2026.pdf",
+      "verified": true
+     },
+     {
+      "label": "Smoke/CO/extinguisher inspection, requested 6 to 9 business days ahead",
+      "amount": "$100",
+      "quote": "10 days: $50 6-9 days: $100 5 days: $150",
+      "source_url": "https://web.archive.org/web/20260903060730/https://northbrunswicknj.gov/wp-content/uploads/2026/07/FIRE-MARSHAL-HOME-SALE-REQUIREMENTS-JUL-2026.pdf",
+      "verified": true
+     },
+     {
+      "label": "Smoke/CO/extinguisher inspection, requested 5 business days ahead",
+      "amount": "$150",
+      "quote": "10 days: $50 6-9 days: $100 5 days: $150",
+      "source_url": "https://web.archive.org/web/20260903060730/https://northbrunswicknj.gov/wp-content/uploads/2026/07/FIRE-MARSHAL-HOME-SALE-REQUIREMENTS-JUL-2026.pdf",
+      "verified": true
+     },
+     {
+      "label": "Additional fee for a two-family home (and each additional unit in a multi-family home)",
+      "amount": "$50",
+      "quote": "$50 additional for a two-family home and each additional unit in a multi-family home.",
+      "source_url": "https://web.archive.org/web/20260903060730/https://northbrunswicknj.gov/wp-content/uploads/2026/07/FIRE-MARSHAL-HOME-SALE-REQUIREMENTS-JUL-2026.pdf",
+      "verified": true
+     },
+     {
+      "label": "Missed appointment or reinspection",
+      "amount": "$25",
+      "quote": "Missed appointments and re-inspections: $25",
+      "source_url": "https://web.archive.org/web/20260903060730/https://northbrunswicknj.gov/wp-content/uploads/2026/07/FIRE-MARSHAL-HOME-SALE-REQUIREMENTS-JUL-2026.pdf",
+      "verified": true
+     }
+    ],
+    "how_to_apply": "Complete the Fire Marshal's 'Application for a Certificate of Compliance of Smoke Alarms, Carbon Monoxide Alarms, and Portable Fire Extinguishers' (page 2 of the Fire Marshal Home Sale Requirements sheet) and pay in advance with a check payable to 'Township of North Brunswick'; the office then schedules the inspection. Fire Prevention Bureau, 710 Hermann Road, 732-247-0922 ext. 453. The current Township website does not post the sheet; the July 2026 version is available as an archived copy.",
+    "application_url": "https://web.archive.org/web/20260903060730/https://northbrunswicknj.gov/wp-content/uploads/2026/07/FIRE-MARSHAL-HOME-SALE-REQUIREMENTS-JUL-2026.pdf",
+    "department_url": "https://www.northbrunswicknj.gov/212/Fire-Prevention-Bureau",
+    "phone": "732-247-0922 ext. 290",
+    "email": "dmasters@northbrunswicknj.gov",
+    "contact_name": "Daryle Masters",
+    "contact_title": "Fire Marshal",
+    "evidence": [
+     {
+      "url": "https://www.northbrunswicknj.gov/212/Fire-Prevention-Bureau",
+      "quote": "The Office conducts inspections throughout the Township to ensure compliance with the New Jersey Uniform Fire Code",
+      "doc_date": "2026-09 (page as fetched)",
+      "via": "page",
+      "verified": true
+     },
+     {
+      "url": "https://www.northbrunswicknj.gov/212/Fire-Prevention-Bureau",
+      "quote": "Daryle Masters Fire Marshal Fire Prevention Bureau Phone: (732) 247-0922 Ext. 453",
+      "doc_date": "2026-09",
+      "via": "page",
+      "verified": true
+     },
+     {
+      "url": "https://www.northbrunswicknj.gov/m/directory/department?did=18",
+      "quote": "Daryle Masters Fire Marshal",
+      "doc_date": "2026-09",
+      "via": "page",
+      "verified": true
+     },
+     {
+      "url": "https://www.northbrunswicknj.gov/m/directory/department?did=18",
+      "quote": "(732) 247-0922 Ext 290",
+      "doc_date": "2026-09",
+      "via": "page",
+      "verified": true
+     },
+     {
+      "url": "https://nj.gov/dca/dfs/pdf/ANNUAL%20REGISTRY/THIRD%20QUARTER%20LEA%20REGISTRY%202026.pdf",
+      "quote": "M North Brunswick Township",
+      "doc_date": "2026-07",
+      "via": "pdf",
+      "verified": true
+     },
+     {
+      "url": "https://www.nj.gov/dca/dfs/pdf/fire%20directory_county%20summary/fire_code_enforcement_director.pdf",
+      "quote": "LEAID: 1215-001 Enf Auth. Municipal Fire Official Daryle F Masters Phone (732) 247-0922 Addr: 710 Hermann Rd",
+      "doc_date": "2026-01-21 (survey date)",
+      "via": "state_directory",
+      "verified": true
+     },
+     {
+      "url": "https://www.nj.gov/dca/dfs/pdf/fire%20directory_county%20summary/fire_code_enforcement_director.pdf",
+      "quote": "Email dmasters@northbrunswicknj.gov",
+      "doc_date": "2026-01-21",
+      "via": "state_directory",
+      "verified": true
+     },
+     {
+      "url": "https://web.archive.org/web/20260903060730/https://northbrunswicknj.gov/wp-content/uploads/2026/07/FIRE-MARSHAL-HOME-SALE-REQUIREMENTS-JUL-2026.pdf",
+      "quote": "Homeowners seeking a home inspection must complete a certification application and make payment in advance of scheduling an inspection appointment.",
+      "doc_date": "2026-07 (archived 2026-09-03)",
+      "via": "pdf",
+      "verified": true
+     },
+     {
+      "url": "https://web.archive.org/web/20260903060730/https://northbrunswicknj.gov/wp-content/uploads/2026/07/FIRE-MARSHAL-HOME-SALE-REQUIREMENTS-JUL-2026.pdf",
+      "quote": "A Certificate of Compliance is valid for 60 days once issued.",
+      "doc_date": "2026-07",
+      "via": "pdf",
+      "verified": true
+     },
+     {
+      "url": "https://web.archive.org/web/20260903060730/https://northbrunswicknj.gov/wp-content/uploads/2026/07/FIRE-MARSHAL-HOME-SALE-REQUIREMENTS-JUL-2026.pdf",
+      "quote": "A certificate is not transferable and expires 60 DAYS from issuance. Fees are non-refundable.",
+      "doc_date": "2026-07",
+      "via": "pdf",
+      "verified": true
+     },
+     {
+      "url": "https://web.archive.org/web/20260903060730/https://northbrunswicknj.gov/wp-content/uploads/2026/07/FIRE-MARSHAL-HOME-SALE-REQUIREMENTS-JUL-2026.pdf",
+      "quote": "For further information, call the Fire Marshal's office at 732-247-0922 x453.",
+      "doc_date": "2026-07",
+      "via": "pdf",
+      "verified": true
+     }
+    ],
+    "confidence": "high"
+   }
+  ],
+  "notes": "The Township is the local fire enforcing agency (DCA July 2026 registry code M); the Fire Marshal's Office (Fire Prevention Bureau) issues the Certificate of Compliance. Fees and rules come from the Township's 'Fire Marshal Home Sale Requirements' sheet dated July 2026, which was on the Township's former website (https://northbrunswicknj.gov/wp-content/uploads/2026/07/FIRE-MARSHAL-HOME-SALE-REQUIREMENTS-JUL-2026.pdf) and now returns 'not found' after the move to a new site; the cited copy is the Internet Archive capture of 2026-09-03. The tiers on the form read '10 days', '6-9 days' and '5 days' (business days before the requested inspection); the form does not say what applies to 4 days or fewer. The July 2026 sheet still requires a portable fire extinguisher even though P.L.2025, c.19 removed the state requirement. Search results also point to Ordinance 26-17 amending Chapter 176-21B (2026), which could not be opened. Deputy Fire Marshal: Brian Wright, bwright@northbrunswicknj.gov, (732) 247-0922 ext. 289. Note: the state fire directory uses code 1215 for North Brunswick, which differs from the Watchdog code 1214."
+ },
+ "other_items": [],
+ "open_questions": [
+  "Home Sale Certificate fee for a two-family home (only single-family and condo/townhouse/mobile home fees are printed).",
+  "Fire Marshal fee for requests made 4 or fewer business days ahead (the July 2026 form lists 10 days, 6-9 days and 5 days only), and whether the extinguisher rule has been dropped since P.L.2025, c.19.",
+  "Where the current Fire Marshal application is posted on the new Township website."
+ ],
+ "verification": {
+  "fees": 7,
+  "fee_ok": 7,
+  "fee_bad": 0,
+  "fee_unchecked": 0,
+  "quotes": 19,
+  "q_ok": 19,
+  "q_bad": 0,
+  "q_unchecked": 0
+ }
+}

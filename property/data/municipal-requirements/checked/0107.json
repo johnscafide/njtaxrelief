@@ -1,0 +1,203 @@
+{
+ "municipality_code": "0107",
+ "municipality": "Egg Harbor City",
+ "county": "ATLANTIC",
+ "resale_co": {
+  "status": "required",
+  "name": "Occupancy Transfer Certificate (Occupancy Transfer Inspection)",
+  "issued_by": "Egg Harbor City Building Department / Construction Office (Code Enforcement)",
+  "lead_time": "",
+  "valid_for": "",
+  "requirements": [
+   "Occupancy Transfer Inspection of the home before the sale (the form covers a rental or a sale)",
+   "Submit the Smoke and Carbon Monoxide Alarm Certificate Application together with it",
+   "Give owner, purchaser, tenant and lock box details and the building type, bedrooms, heat, sewer/septic and water/well on the form"
+  ],
+  "fees": [
+   {
+    "label": "Occupancy Transfer Inspection, per unit",
+    "amount": "$75.00",
+    "quote": "FEE: $75.00 per unit x # of Units",
+    "source_url": "https://app.membershipware.com/api/blob/viewBlob?rf=t&i=rw1asl38m%252BrXS5Vw72pTaPeCCtbucN6tPpPtqA%2FZ3wOk67lJc0pLvULrgKxm9TvE",
+    "verified": true
+   }
+  ],
+  "how_to_apply": "Download the Occupancy Transfer Inspection Form from Forms & Documents, mark it SALE, and submit it with the Smoke and Carbon Monoxide Alarm Certificate Application to the Egg Harbor City Construction Office, 500 London Ave., Egg Harbor City, NJ 08215. Pay with exact cash, money order or check made out to City of Egg Harbor City. Online payment is also possible through the City's WIPP portal (2.95% fee).",
+  "application_url": "https://app.membershipware.com/api/blob/viewBlob?rf=t&i=rw1asl38m%252BrXS5Vw72pTaPeCCtbucN6tPpPtqA%2FZ3wOk67lJc0pLvULrgKxm9TvE",
+  "department_url": "https://www.eggharborcity.org/building",
+  "phone": "609-965-1616",
+  "email": "donnah@eggharborcity.org",
+  "contact_name": "Donna Heffley",
+  "contact_title": "Land Use and Building Department Office Manager",
+  "evidence": [
+   {
+    "url": "https://app.membershipware.com/api/blob/viewBlob?rf=t&i=rw1asl38m%252BrXS5Vw72pTaPeCCtbucN6tPpPtqA%2FZ3wOk67lJc0pLvULrgKxm9TvE",
+    "quote": "OCCUPANCY TRANSFER INSPECTION: RENTAL: _____ SALE: ______",
+    "doc_date": "2022-12 (PDF created December 1, 2022; posted 2024-09)",
+    "via": "pdf",
+    "verified": true
+   },
+   {
+    "url": "https://app.membershipware.com/api/blob/viewBlob?rf=t&i=rw1asl38m%252BrXS5Vw72pTaPeCCtbucN6tPpPtqA%2FZ3wOk67lJc0pLvULrgKxm9TvE",
+    "quote": "Exact Cash, Money Order or Check made out to City of Egg Harbor City.",
+    "doc_date": "2022-12",
+    "via": "pdf",
+    "verified": true
+   },
+   {
+    "url": "https://app.membershipware.com/api/blob/viewBlob?rf=t&i=rw1asl38m%252BrXS5Vw72pTaPeCCtbucN6tPpPtqA%2FZ3wOk67lJc0pLvULrgKxm9TvE",
+    "quote": "Egg Harbor City Construction Office 500 London Ave. Egg Harbor City, NJ 08215 609-965-1616 Donnah@Eggharborcity.org",
+    "doc_date": "2022-12",
+    "via": "pdf",
+    "verified": true
+   },
+   {
+    "url": "https://www.eggharborcity.org/formsanddocuments",
+    "quote": "Must be submitted with Occupancy Transfer Inspection form for resale or new tentant.",
+    "doc_date": "2026-04 (description of the Smoke and Carbon Monoxide Alarm Certificate Application in the Forms & Documents list)",
+    "via": "page",
+    "verified": true
+   },
+   {
+    "url": "https://ecode360.com/8035021",
+    "quote": "PM-107.6 Occupancy Transfer Certificate: Responsibilities of property owners or leaseholders or their agents",
+    "doc_date": "",
+    "via": "search_snippet",
+    "verified": null
+   },
+   {
+    "url": "https://app.membershipware.com/api/public/mwjsPeople?et=DsEBpLP32xQDf9SDjaU%252BKg%3d%3d&eb=u32SQFY7Pxg4KbW4ofECYQ%3d%3d",
+    "quote": "Donna Heffley ... Land Use and Building Department Office Manager ... 6099651616 ... donnah@eggharborcity.org",
+    "doc_date": "2026-09-30 (staff list shown on the Planning, Zoning & Building page)",
+    "via": "page",
+    "verified": true
+   }
+  ],
+  "confidence": "high",
+  "notes": "The City's Occupancy Transfer Inspection form (rental or sale) and the Forms page note that the smoke/CO application 'must be submitted with Occupancy Transfer Inspection form for resale or new tentant' show the certificate is needed for a sale. The City code section is titled 'PM-107.6 Occupancy Transfer Certificate' (ecode360, not openable). Search engine summaries of that section describe a $25 charge for each inspection after one follow-up, but the exact words could not be confirmed, so only the form's $75.00 per unit is recorded. The Code Enforcement Officer is Robert McClain (codeenforcement2@eggharborcity.org). The City also schedules annual rental unit inspections online (rental program)."
+ },
+ "fire_cert": {
+  "requirements": [
+   "10-year sealed battery smoke alarm in every bedroom (depending on construction year)",
+   "Basement smoke alarm at the bottom of the stairwell at ceiling level (not between joists)",
+   "Hallway smoke alarms within 10 feet of all bedroom doors",
+   "Electric smoke alarms required by the building code cannot be replaced with battery alarms",
+   "Smoke detectors at least 3 feet from ceiling fan blade tips and air ducts; none in kitchens, bathrooms, dead air space, crawl spaces or attics",
+   "CO alarm in the hallway within 10 feet of all bedrooms; not plugged into a switched outlet",
+   "Fire extinguisher: residential 2A:10B:C, no larger than 10 lb, mounted within 10 feet of the kitchen (April 2026 form still lists it)"
+  ],
+  "authorities": [
+   {
+    "name": "Egg Harbor City Fire Official (Fire Marshal), Fire Prevention",
+    "type": "municipal_fire_bureau",
+    "area_served": "Entire city",
+    "lead_time": "Fee depends on how many days before the Certificate of Occupancy must be issued: more than 10 days, 4 to 10 days, or fewer than 4 days. Inspections are available Tuesdays and Thursdays from 2 to 6 pm.",
+    "fees": [
+     {
+      "label": "Smoke/CO inspection, requested more than 10 days before the certificate is needed (per unit)",
+      "amount": "$55",
+      "quote": "Initial inspections requested more than 10 days before the Certificate of Occupancy must be issued: $55 per unit.",
+      "source_url": "https://app.membershipware.com/api/blob/viewBlob?rf=t&i=mTuJlzExhzyqK3vbZ8XeAem7FEXaIzBDyP97NWQK82S%2FQ20zdH6b2vNSD%252BZxqSv7",
+      "verified": true
+     },
+     {
+      "label": "Smoke/CO inspection, requested 4 to 10 days before the certificate is needed (per unit)",
+      "amount": "$90",
+      "quote": "Initial inspections requested between 4 and 10 days before the Certificate of Occupancy must be issued: $90 per unit.",
+      "source_url": "https://app.membershipware.com/api/blob/viewBlob?rf=t&i=mTuJlzExhzyqK3vbZ8XeAem7FEXaIzBDyP97NWQK82S%2FQ20zdH6b2vNSD%252BZxqSv7",
+      "verified": true
+     },
+     {
+      "label": "Smoke/CO inspection, requested fewer than 4 days before the certificate is needed (per unit)",
+      "amount": "$160",
+      "quote": "Initial inspections requested fewer than 4 days before the Certificate of Occupancy must be issued: $160 per unit.",
+      "source_url": "https://app.membershipware.com/api/blob/viewBlob?rf=t&i=mTuJlzExhzyqK3vbZ8XeAem7FEXaIzBDyP97NWQK82S%2FQ20zdH6b2vNSD%252BZxqSv7",
+      "verified": true
+     },
+     {
+      "label": "First reinspection when more than one follow-up inspection is needed",
+      "amount": "$50",
+      "quote": "In the event more than one follow-up inspection is needed, there shall be an additional charge of $50 for the first reinspection.",
+      "source_url": "https://app.membershipware.com/api/blob/viewBlob?rf=t&i=mTuJlzExhzyqK3vbZ8XeAem7FEXaIzBDyP97NWQK82S%2FQ20zdH6b2vNSD%252BZxqSv7",
+      "verified": true
+     }
+    ],
+    "how_to_apply": "Fill out the Certificate of Smoke Detector and Carbon Monoxide Alarm Inspection Request (Smoke and Carbon Monoxide Alarm Certificate Application on Forms & Documents) and submit it with the Occupancy Transfer Inspection form to the City, 500 London Ave. Questions: EHCFirePrevention@eggharborcity.org. After a failed reinspection the process starts over with a new fee.",
+    "application_url": "https://app.membershipware.com/api/blob/viewBlob?rf=t&i=mTuJlzExhzyqK3vbZ8XeAem7FEXaIzBDyP97NWQK82S%2FQ20zdH6b2vNSD%252BZxqSv7",
+    "department_url": "https://www.eggharborcity.org/building",
+    "phone": "609-965-0081",
+    "email": "EHCFirePrevention@eggharborcity.org",
+    "contact_name": "Stephen Buchhofer",
+    "contact_title": "Fire Marshal (also Construction Official and Electric, Plumbing, Fire & Mechanical Subcode Official)",
+    "evidence": [
+     {
+      "url": "https://app.membershipware.com/api/blob/viewBlob?rf=t&i=mTuJlzExhzyqK3vbZ8XeAem7FEXaIzBDyP97NWQK82S%2FQ20zdH6b2vNSD%252BZxqSv7",
+      "quote": "City of Egg Harbor Fire Official EHCFireprevention@eggharborcity.org 500 London Ave Egg Harbor City, NJ 08215",
+      "doc_date": "2026-04 (PDF created April 15, 2026)",
+      "via": "pdf",
+      "verified": "eye"
+     },
+     {
+      "url": "https://app.membershipware.com/api/blob/viewBlob?rf=t&i=mTuJlzExhzyqK3vbZ8XeAem7FEXaIzBDyP97NWQK82S%2FQ20zdH6b2vNSD%252BZxqSv7",
+      "quote": "Certificate of Smoke Detector and Carbon Monoxide Alarm Inspection Request",
+      "doc_date": "2026-04",
+      "via": "pdf",
+      "verified": "eye"
+     },
+     {
+      "url": "https://app.membershipware.com/api/blob/viewBlob?rf=t&i=mTuJlzExhzyqK3vbZ8XeAem7FEXaIzBDyP97NWQK82S%2FQ20zdH6b2vNSD%252BZxqSv7",
+      "quote": "Residential Resale Requirements for 1 & 2 Family Dwelling",
+      "doc_date": "2026-04",
+      "via": "pdf",
+      "verified": "eye"
+     },
+     {
+      "url": "https://app.membershipware.com/api/blob/viewBlob?rf=t&i=mTuJlzExhzyqK3vbZ8XeAem7FEXaIzBDyP97NWQK82S%2FQ20zdH6b2vNSD%252BZxqSv7",
+      "quote": "Thereafter, the inspection process shall be considered to have recommenced with the fees of $55, $90, or $160 due depending upon the timing of the application as outlined above.",
+      "doc_date": "2026-04",
+      "via": "pdf",
+      "verified": true
+     },
+     {
+      "url": "https://app.membershipware.com/api/public/mwjsPeople?et=DsEBpLP32xQDf9SDjaU%252BKg%3d%3d&eb=u32SQFY7Pxg4KbW4ofECYQ%3d%3d",
+      "quote": "Stephen Buchhofer ... Fire Marshall ... Construction Official & Electric, Plumbing, Fire & Mechanical Subcode Official ... EHCFirePrevention@eggharborcity.org ... Inspections available Tuesdays & Thursdays from 2-6pm.",
+      "doc_date": "2026-09-30 (staff list shown on the Planning, Zoning & Building page)",
+      "via": "page",
+      "verified": true
+     },
+     {
+      "url": "https://nj.gov/dca/dfs/pdf/ANNUAL%20REGISTRY/THIRD%20QUARTER%20LEA%20REGISTRY%202026.pdf",
+      "quote": "F Egg Harbor City",
+      "doc_date": "2026-07",
+      "via": "pdf",
+      "verified": true
+     },
+     {
+      "url": "https://www.nj.gov/dca/dfs/pdf/fire%20directory_county%20summary/fire_code_enforcement_director.pdf",
+      "quote": "LEAID: 0107-001 Enf Auth. Fire Dept Fire Official Stephen Buchhofer ... Addr: 500 London Ave Egg Harbor City NJ 08215 ... Phone (609) 965-0081 ... Egg Harbor City Bldg Dept",
+      "doc_date": "2026-01 (survey date 1/27/2026)",
+      "via": "state_directory",
+      "verified": true
+     }
+    ],
+    "confidence": "high"
+   }
+  ],
+  "notes": "Egg Harbor City's fire code enforcing agency is its fire department (registry code F); the Fire Official, Stephen Buchhofer, is also the City's Construction Official. The office number recorded is City Hall's main line, (609) 965-0081, which the state directory lists under smoke detector compliance; the directory's separate 856 number and non-City email for the fire official are not recorded. Fees come from the City's April 2026 smoke/CO application. That form still lists a fire extinguisher even though the state law of February 3, 2025 (P.L.2025, c.19) removed it from the state requirement."
+ },
+ "other_items": [],
+ "open_questions": [
+  "Occupancy Transfer Inspection reinspection fee (search summaries of the code mention $25 per extra inspection; not confirmed) and how far ahead to apply."
+ ],
+ "checked_at": "2026-09-30",
+ "verification": {
+  "fees": 5,
+  "fee_ok": 5,
+  "fee_bad": 0,
+  "fee_unchecked": 0,
+  "quotes": 13,
+  "q_ok": 12,
+  "q_bad": 0,
+  "q_unchecked": 1
+ }
+}

@@ -112,7 +112,7 @@ def flag_reasons(r: dict) -> list[str]:
     if (r.get("resale_co") or {}).get("status") == "not_found":
         why.append("town certificate not confirmed online")
     if inferred_not_required(r.get("resale_co") or {}):
-        why.append("no town certificate listed, but not ruled out in writing")
+        why.append("probably not required, but not clearly stated in writing")
     fees = list((r.get("resale_co") or {}).get("fees") or [])
     fees += [f for a in (r.get("fire_cert") or {}).get("authorities") or [] for f in a.get("fees") or []]
     if not fees:
@@ -127,8 +127,8 @@ def co_row(r: dict, flags: list[str]) -> dict:
     if status == "not_found":
         lines.append(f"Not confirmed yet: Watchdog could not confirm online whether {town} requires a resale certificate. Call the office before closing.")
     elif inferred_not_required(co):
-        lines.append(f"Not confirmed yet: {town}'s official pages list no town resale certificate for sales, but they don't say in writing "
-                     "that none is needed. Call the office before closing.")
+        lines.append(f"Not confirmed yet: Watchdog found signs that {town} does not require a resale certificate for sales, "
+                     "but no clear, current written statement. Call the office before closing.")
     elif status == "not_required":
         lines.append(f"Not required for sales, per {clean(co.get('issued_by'), 160) or town}. Confirm with the office if the buyer's lender or title company asks.")
     if clean(co.get("issued_by")):

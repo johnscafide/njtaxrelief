@@ -1,0 +1,202 @@
+{
+ "municipality_code": "0102",
+ "municipality": "Atlantic City",
+ "county": "ATLANTIC",
+ "resale_co": {
+  "status": "required",
+  "name": "Occupancy Permit (Certificate of Occupancy)",
+  "issued_by": "Atlantic City Department of Licensing & Inspections",
+  "lead_time": "",
+  "valid_for": "",
+  "requirements": [
+   "Certificate of Land Use (zoning) from Planning, (609) 347-5404, or the CRDA Tourism District, (609) 347-0500",
+   "Smoke certification from Fire Prevention (single-family or duplex)",
+   "Pest certification: report from a licensed exterminator that the unit is free of bed bugs, other insects and rodents",
+   "All utilities turned on for the inspection",
+   "No rubbish, debris or bulk garbage left on the property before the new occupancy",
+   "Buyer details (and all members or principals if the buyer is an LLC, corporation or partnership)"
+  ],
+  "fees": [],
+  "how_to_apply": "Apply online with the City's GovPilot Occupancy Permit Application (choose the Sale application type, give the closing date and buyer details, and attach the Certificate of Land Use, smoke certification and pest certification). Questions go to the Licensing & Inspection Department, City Hall, 1301 Bacharach Blvd., 5th Floor, Suite 502.",
+  "application_url": "https://main.govpilot.com/web/public/efeba3a1-0cd_Occupancy-Permit-Application-atlanticcity?uid=6910&ust=NJ&pu=1&id=0",
+  "department_url": "https://www.acnj.gov/departments/licensing-and-inspection",
+  "phone": "609-347-5290",
+  "email": "",
+  "contact_name": "Dale L. Finch",
+  "contact_title": "Director of Licensing & Inspections",
+  "evidence": [
+   {
+    "url": "https://www.ecode360.com/15210509",
+    "quote": "The owner of any residential property shall obtain an occupancy permit prior to the sale of such property involving a new occupancy of any unit of dwelling space, provided that no occupancy permit shall be required for the sale of vacant properties, but shall be required prior to such time as a new occupancy occurs.",
+    "doc_date": "",
+    "via": "search_snippet",
+    "verified": null
+   },
+   {
+    "url": "https://main.govpilot.com/web/public/efeba3a1-0cd_Occupancy-Permit-Application-atlanticcity?uid=6910&ust=NJ&pu=1&id=0",
+    "quote": "Closing Date (If Applicable)",
+    "doc_date": "2026-09-30 (form fetched)",
+    "via": "page",
+    "verified": true
+   },
+   {
+    "url": "https://main.govpilot.com/web/public/efeba3a1-0cd_Occupancy-Permit-Application-atlanticcity?uid=6910&ust=NJ&pu=1&id=0",
+    "quote": "If the buyer is an LLC, Corporation or Partnership, the following information must be included: individual names of all members of the LLC, principals of the corporation or partners in the partnership.",
+    "doc_date": "2026-09-30 (form fetched)",
+    "via": "page",
+    "verified": true
+   },
+   {
+    "url": "https://main.govpilot.com/web/public/efeba3a1-0cd_Occupancy-Permit-Application-atlanticcity?uid=6910&ust=NJ&pu=1&id=0",
+    "quote": "Smoke Certification (single-family or duplex only) Contact: Fire Prevention - City Hall - Room 130 (609) 347-5595",
+    "doc_date": "2026-09-30 (form fetched)",
+    "via": "page",
+    "verified": true
+   },
+   {
+    "url": "https://main.govpilot.com/web/public/efeba3a1-0cd_Occupancy-Permit-Application-atlanticcity?uid=6910&ust=NJ&pu=1&id=0",
+    "quote": "**Please Note that All UTILITIES MUST BE TURNED ON for an inspection to be performed.",
+    "doc_date": "2026-09-30 (form fetched)",
+    "via": "page",
+    "verified": true
+   },
+   {
+    "url": "https://www.acnj.gov/api/data/GetPageContactInfo?tag=Licensing%20%26%20Inspection",
+    "quote": "Director of Licensing & Inspections Dale L. Finch ... Licensing & Inspection Department Main Telephone 609-347-5290 Address 1301 Bacharach Blvd., 5th Floor, Suite 502, Atlantic City, NJ 08401",
+    "doc_date": "2026-09-30 (site contact data behind the Licensing & Inspection page)",
+    "via": "page",
+    "verified": false
+   }
+  ],
+  "confidence": "medium",
+  "notes": "The ordinance text comes from ecode360 search results only (the page itself cannot be opened); both phrases of the quote were confirmed by exact-phrase searches that returned the Atlantic City code page ecode360.com/15210509. The City's live GovPilot Occupancy Permit Application offers Rental, Sale and Reissue application types and asks for the closing date and buyer, which matches the ordinance. The fee is shown only after the online form is filled out, so no fee is recorded; search engine summaries of the City code mention permit and reinspection fees, but the exact words could not be confirmed. The City's posted inspection checklist ('To secure a Certificate of Occupancy', April 2026) is written for residential rental units (exterior items such as trip hazards, railings, roof, paint; interior items such as deadbolt, smoke and CO alarms, 2A10BC extinguisher, GFCI in bathrooms, working appliances, heat at 68 F from October 1 to May 1); it likely reflects what inspectors look at, but it is labeled for rentals. The form also mentions a Lead Safe certification with a $45 fee, but that is for rental units built before 1978. Landlord registration is a separate rental program. The Licensing & Inspection staff are shown only as photos on the City page; no staff email was found."
+ },
+ "fire_cert": {
+  "requirements": [
+   "Notarized owner affidavit (Smoke Certificate Affidavit) attached to the online application",
+   "10-year sealed battery smoke alarm on each level, including basements (not attic or crawl space)",
+   "Smoke alarm and CO alarm outside each separate sleeping area, within 10 feet of it",
+   "Existing AC-powered or interconnected alarms in homes built after January 1977 must be kept working",
+   "Portable fire extinguisher 2A-10B:C, no more than 10 lb, on a hanger within 10 feet of the kitchen (2020 affidavit still lists it)"
+  ],
+  "authorities": [
+   {
+    "name": "Atlantic City Fire Department, Fire Prevention Bureau",
+    "type": "municipal_fire_bureau",
+    "area_served": "Entire city",
+    "lead_time": "Fee depends on timing: 10 or more days, 4 to 10 days, or under 4 days before the change of occupant. The inspection is scheduled only after payment.",
+    "fees": [
+     {
+      "label": "Smoke/CO certificate, 10 days before change of occupant (per unit)",
+      "amount": "$45",
+      "quote": "$45 per unit, 10 days prior to change of occupant",
+      "source_url": "https://www.acnj.gov/_Content/pdf/forms/Smoke-Certificate-Affidavit.pdf",
+      "verified": true
+     },
+     {
+      "label": "Smoke/CO certificate, 4 to 10 days before change of occupant (per unit)",
+      "amount": "$70",
+      "quote": "$70 per unit, 4 to 10 days prior to change of occupant",
+      "source_url": "https://www.acnj.gov/_Content/pdf/forms/Smoke-Certificate-Affidavit.pdf",
+      "verified": true
+     },
+     {
+      "label": "Smoke/CO certificate, less than 4 days before change of occupant (per unit)",
+      "amount": "$125",
+      "quote": "$125 per unit, less than 4 days prior to change of occupant",
+      "source_url": "https://www.acnj.gov/_Content/pdf/forms/Smoke-Certificate-Affidavit.pdf",
+      "verified": true
+     }
+    ],
+    "how_to_apply": "Submit the City's online GovPilot Smoke Detector Application and attach the Smoke Certificate Affidavit, filled out and notarized. Pay by check to the City of Atlantic City, cash or money order. Fees are non-refundable and an inspection cannot be scheduled until payment is made. Office: City Hall, 1301 Bacharach Blvd, Room 130.",
+    "application_url": "https://main.govpilot.com/web/public/60ccced5-73b_Smoke-Detector-Application-atlanticcity?uid=6910&ust=NJ&pu=1&id=0",
+    "department_url": "https://www.acnj.gov/departments/fire-prevention",
+    "phone": "609-347-5595",
+    "email": "kmunn@acnj.gov",
+    "contact_name": "Kevin Munn",
+    "contact_title": "Fire Official (state fire directory)",
+    "evidence": [
+     {
+      "url": "https://main.govpilot.com/web/public/60ccced5-73b_Smoke-Detector-Application-atlanticcity?uid=6910&ust=NJ&pu=1&id=0",
+      "quote": "The Compliance Certificate must be filled out, notarized and attached with this application.",
+      "doc_date": "2026-09-30 (form fetched)",
+      "via": "page",
+      "verified": true
+     },
+     {
+      "url": "https://main.govpilot.com/web/public/60ccced5-73b_Smoke-Detector-Application-atlanticcity?uid=6910&ust=NJ&pu=1&id=0",
+      "quote": "A (CSACMAPFEC) shall not be transferable. If the change of occupancy specified in the (CSACMAPFEC) does not occur within 90 days, a new application and fee shall be required.",
+      "doc_date": "2026-09-30 (form fetched)",
+      "via": "page",
+      "verified": true
+     },
+     {
+      "url": "https://main.govpilot.com/web/public/60ccced5-73b_Smoke-Detector-Application-atlanticcity?uid=6910&ust=NJ&pu=1&id=0",
+      "quote": "Please note an inspection cannot be scheduled until a payment has been made.",
+      "doc_date": "2026-09-30 (form fetched)",
+      "via": "page",
+      "verified": true
+     },
+     {
+      "url": "https://www.acnj.gov/_Content/pdf/forms/Smoke-Certificate-Affidavit.pdf",
+      "quote": "Atlantic City Fire Departments Fire Prevention Bureau",
+      "doc_date": "2020-07 (PDF created July 9, 2020)",
+      "via": "pdf",
+      "verified": true
+     },
+     {
+      "url": "https://www.acnj.gov/_Content/pdf/forms/Smoke-Certificate-Affidavit.pdf",
+      "quote": "Note #4: Application fees are non-refundable.",
+      "doc_date": "2020-07",
+      "via": "pdf",
+      "verified": true
+     },
+     {
+      "url": "https://nj.gov/dca/dfs/pdf/ANNUAL%20REGISTRY/THIRD%20QUARTER%20LEA%20REGISTRY%202026.pdf",
+      "quote": "F Atlantic City",
+      "doc_date": "2026-07",
+      "via": "pdf",
+      "verified": true
+     },
+     {
+      "url": "https://www.nj.gov/dca/dfs/pdf/fire%20directory_county%20summary/fire_code_enforcement_director.pdf",
+      "quote": "LEAID: 0102-001 Enf Auth. Fire Dept Fire Official Kevin Munn Phone (609) 347-5595 Addr: 1301 Bacharach Blvd RM 130 Atlantic City NJ 08401 ... Email kmunn@acnj.gov",
+      "doc_date": "2026-01 (survey date 1/27/2026)",
+      "via": "state_directory",
+      "verified": true
+     }
+    ],
+    "confidence": "high"
+   }
+  ],
+  "notes": "Fees come from the Fire Prevention Bureau's Smoke Certificate Affidavit (PDF created July 2020); the online GovPilot form computes the fee only after it is filled out, so the current amounts could not be seen there. The affidavit says a new application is needed if the change of occupancy does not happen within 6 months, while the current online form says 90 days; the online form is newer. The 2020 affidavit names Mohammad R. Hatefi as Fire Official; the state fire directory (survey 1/27/2026) lists Kevin Munn, so the directory name is recorded. The online form links the affidavit at cityofatlanticcity.org; the same file is posted at acnj.gov. The affidavit still requires a portable fire extinguisher; the state law of February 3, 2025 (P.L.2025, c.19) removed it from the state requirement."
+ },
+ "other_items": [
+  {
+   "label": "Certificate of Land Use (zoning)",
+   "detail": "Required attachment for the Occupancy Permit. Contact Planning, (609) 347-5404, or the CRDA Tourism District, (609) 347-0500.",
+   "source_url": "https://main.govpilot.com/web/public/efeba3a1-0cd_Occupancy-Permit-Application-atlanticcity?uid=6910&ust=NJ&pu=1&id=0"
+  },
+  {
+   "label": "Pest certification",
+   "detail": "Certified examination report from a licensed exterminator that the unit is free of bed bugs, other insects and rodents; required attachment for the Occupancy Permit.",
+   "source_url": "https://main.govpilot.com/web/public/efeba3a1-0cd_Occupancy-Permit-Application-atlanticcity?uid=6910&ust=NJ&pu=1&id=0"
+  }
+ ],
+ "open_questions": [
+  "Occupancy Permit fee for a 1-2 family sale, reinspection fee, lead time and how long the permit is valid (not shown until the online form is completed).",
+  "Are the 2020 smoke certificate fees ($45 / $70 / $125 per unit) still current?",
+  "Does the pest certification apply to sales as well as rentals?"
+ ],
+ "checked_at": "2026-09-30",
+ "verification": {
+  "fees": 3,
+  "fee_ok": 3,
+  "fee_bad": 0,
+  "fee_unchecked": 0,
+  "quotes": 13,
+  "q_ok": 11,
+  "q_bad": 1,
+  "q_unchecked": 1
+ }
+}

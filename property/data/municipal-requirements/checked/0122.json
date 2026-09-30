@@ -1,0 +1,208 @@
+{
+ "municipality_code": "0122",
+ "municipality": "Ventnor City",
+ "county": "ATLANTIC",
+ "checked_at": "2026-09-30",
+ "resale_co": {
+  "status": "required",
+  "name": "Sale Certificate of Occupancy and Certificate of Land Use Compliance",
+  "issued_by": "Code Enforcement / Building Department (Housing)",
+  "lead_time": "",
+  "valid_for": "",
+  "requirements": [
+   "Curb and sidewalk free of trip hazards",
+   "House address posted",
+   "All railings and spindles in place (36 inch rail height)",
+   "Grass cut",
+   "Window screens in place from May 15 to October 1",
+   "ABC fire extinguisher with the gauge in the green (required for sales)",
+   "Smoke alarms in each bedroom, on each level and within 10 feet of all bedrooms; CO alarm on each sleeping floor and near any major gas appliance",
+   "If smoke detectors are monitored, a certificate from the alarm company",
+   "Dryer vented to the exterior",
+   "Electric on and appliances working",
+   "Two outlets in each bedroom; bathroom outlet plus a fan or exhaust window",
+   "Water heater pressure relief valve discharge checked",
+   "Blanks in the electric panel",
+   "Unit clean: no mold in tub, clean rugs, no chipping paint"
+  ],
+  "fees": [
+   {
+    "label": "Sale Certificate of Occupancy, non-refundable (form updated 4/11/25)",
+    "amount": "$100",
+    "quote": "$100 FEE PAID (NON REFUNDABLE)",
+    "source_url": "https://www.ventnorcity.org/media/Documents/CodeEnforcement/SALE%201.26.pdf",
+    "verified": null
+   },
+   {
+    "label": "Certificate of Land Use Compliance",
+    "amount": "$100.00",
+    "quote": "FEE: $100.00",
+    "source_url": "https://www.ventnorcity.org/media/Documents/CodeEnforcement/LAND%201.26.pdf",
+    "verified": null
+   },
+   {
+    "label": "Each form, per Code Enforcement FAQ (older figure; conflicts with the current forms)",
+    "amount": "$50.00",
+    "quote": "In order to sell your home you will need a Land Use and Sale Certificate of Occupancy (per unit). Each form is $50.00 due at the time of scheduling.",
+    "source_url": "https://ventnorcity.org/departments/CodeEnforcement/code-enforcement-faq",
+    "verified": true
+   }
+  ],
+  "how_to_apply": "Submit two forms from the Housing page to the Building / Code Enforcement Department, City Hall, 6201 Atlantic Avenue: the Sale Certificate of Occupancy Application (buyer, agent, proposed settlement date, whether smoke detectors are monitored, and the adults and children who will live in each unit) and the Application Certificate of Land Use Compliance (seller, property, zoning and use). A Certificate of Occupancy is needed per unit. Pay when the inspection is scheduled (cash, check or card). Housing inspections run Monday to Friday, 9:30 am to 1 pm, every half hour. The Housing page also posts a Rental-Sale Affidavit and a 'Conditional Letter - Unoccupied' form.",
+  "application_url": "https://www.ventnorcity.org/media/Documents/CodeEnforcement/SALE%201.26.pdf",
+  "department_url": "https://www.ventnorcity.org/departments/CodeEnforcement/housing",
+  "contact_name": "Dino Cavalieri",
+  "contact_title": "Code/Construction Official",
+  "phone": "609-823-7987",
+  "email": "dcavalie@ventnorcity.org",
+  "evidence": [
+   {
+    "url": "https://ventnorcity.org/departments/CodeEnforcement/code-enforcement-faq",
+    "quote": "What paperwork is needed to sell a home? In order to sell your home you will need a Land Use and Sale Certificate of Occupancy (per unit). Each form is $50.00 due at the time of scheduling.",
+    "doc_date": "2026-09-30 (page fetched)",
+    "via": "page",
+    "verified": true
+   },
+   {
+    "url": "https://www.ventnorcity.org/media/Documents/CodeEnforcement/SALE%201.26.pdf",
+    "quote": "APPLICATION IS HEREBY MADE FOR INSPECTION, APPROVAL AND ISSUANCE OF CERTIFICATE OF OCCUPANCY as provided by Ventnor Ordinance 8333-Chapter 138.",
+    "doc_date": "2025-04-11 (form updated 4/11/25; file dated January 2026; scanned, read visually)",
+    "via": "pdf",
+    "verified": null
+   },
+   {
+    "url": "https://www.ventnorcity.org/media/Documents/CodeEnforcement/SALE%201.26.pdf",
+    "quote": "SMOKE DETECTORS MONITORED: YES: NO: IF YES, CERTIFICATE REQUIRED FROM ALARM COMPANY",
+    "doc_date": "2025-04-11 (scanned, read visually)",
+    "via": "pdf",
+    "verified": null
+   },
+   {
+    "url": "https://www.ventnorcity.org/media/Documents/CodeEnforcement/LAND%201.26.pdf",
+    "quote": "APPLICATION CERTIFICATE OF LAND USE COMPLIANCE ... FEE: $100.00",
+    "doc_date": "2026-01 (file dated January 30, 2026; scanned, read visually)",
+    "via": "pdf",
+    "verified": null
+   },
+   {
+    "url": "https://ventnorcity.org/departments/CodeEnforcement/code-enforcement-faq",
+    "quote": "Housing inspections are Monday- Friday 930am- 1pm ( every half hour)",
+    "doc_date": "2026-09-30 (page fetched)",
+    "via": "page",
+    "verified": true
+   },
+   {
+    "url": "https://www.ventnorcity.org/departments/staff_directory/CodeEnforcement/",
+    "quote": "Cavalieri, Dino - Code/Construction Official Email: dcavalie@ventnorcity.org Phone: 609-823-7987",
+    "doc_date": "2026-09-30 (page fetched)",
+    "via": "page",
+    "verified": true
+   }
+  ],
+  "confidence": "high",
+  "notes": "The Code Enforcement FAQ says a Land Use certificate and a Sale Certificate of Occupancy (per unit) are needed to sell a home. Fee conflict: the FAQ says each form is $50.00, but the current posted forms (Sale CO updated 4/11/25, both files dated January 2026) each show $100; the forms are probably current, but confirm. The Code Enforcement page sidebar lists cmalfara@ventnorcity.org for Housing and dmanera@ventnorcity.org for Building; Pam Learn is listed as Inspector (plearn@ventnorcity.org, 609-823-7987). Rentals need their own CO (monthly and yearly rentals) or a mercantile license (short-term); those are not resale items."
+ },
+ "fire_cert": {
+  "requirements": [
+   "Smoke alarms: one in each bedroom, one on each level, and one within 10 feet of all bedrooms (battery or hardwired accepted)",
+   "Carbon monoxide alarm on each sleeping floor and near any major gas burning appliance, per the manufacturer's instructions",
+   "Portable fire extinguisher, required for sales only: ABC type, no larger than 10 pounds, mounted within 10 feet of the kitchen, gauge in the green (City letter, 2008 scan, and current FAQ)"
+  ],
+  "authorities": [
+   {
+    "name": "Ventnor City Building / Code Enforcement Department (smoke, CO and extinguisher check within the Sale Certificate of Occupancy)",
+    "type": "municipal_fire_bureau",
+    "area_served": "Entire city",
+    "lead_time": "",
+    "fees": [],
+    "how_to_apply": "No separate smoke certificate application or fee was found. The City's Certificate of Occupancy requirements letter says smoke alarms, CO alarms and portable fire extinguishers are required before any Certificate of Occupancy is issued, and the state fire directory lists the Ventnor City Building Department for smoke detector compliance, so the check is made during the Sale Certificate of Occupancy inspection.",
+    "application_url": "https://www.ventnorcity.org/media/Documents/CodeEnforcement/SALE%201.26.pdf",
+    "department_url": "https://www.ventnorcity.org/departments/CodeEnforcement/housing",
+    "contact_name": "Dino Cavalieri",
+    "contact_title": "Code/Construction Official",
+    "phone": "609-823-7987",
+    "email": "dcavalie@ventnorcity.org",
+    "evidence": [
+     {
+      "url": "http://www.ventnorcity.org/media/Documents/CodeEnforcement/FillableForms/CERTIFICATE%20OF%20OCCUPANCY%20REQUIREMENTS.pdf",
+      "quote": "are now required prior to the issuance of any Certificate of Occupancy under the Uniform Construction Code Act 52:27D-133.3.",
+      "doc_date": "2008-05 (scanned letter, PDF created May 29, 2008)",
+      "via": "pdf",
+      "verified": true
+     },
+     {
+      "url": "http://www.ventnorcity.org/media/Documents/CodeEnforcement/FillableForms/CERTIFICATE%20OF%20OCCUPANCY%20REQUIREMENTS.pdf",
+      "quote": "PORTABLE FIRE EXTINGUISHERS: (REQUIRED FOR SALES ONLY)",
+      "doc_date": "2008-05 (PDF created May 29, 2008)",
+      "via": "pdf",
+      "verified": true
+     },
+     {
+      "url": "https://ventnorcity.org/departments/CodeEnforcement/code-enforcement-faq",
+      "quote": "Fire extinguisher ABC type the little tile must be in the green to see if it is full.",
+      "doc_date": "2026-09-30 (page fetched)",
+      "via": "page",
+      "verified": true
+     },
+     {
+      "url": "https://nj.gov/dca/dfs/pdf/ANNUAL%20REGISTRY/THIRD%20QUARTER%20LEA%20REGISTRY%202026.pdf",
+      "quote": "F Ventnor City",
+      "doc_date": "2026-07",
+      "via": "pdf",
+      "verified": true
+     },
+     {
+      "url": "https://www.nj.gov/dca/dfs/pdf/fire%20directory_county%20summary/fire_code_enforcement_director.pdf",
+      "quote": "LEAID: 0122-001 Enf Auth. Fire Dept Fire Official Joseph Iannuzzelli Phone (609) 823-7943",
+      "doc_date": "2026 directory page (survey date 5/26/2026)",
+      "via": "state_directory",
+      "verified": true
+     },
+     {
+      "url": "https://www.nj.gov/dca/dfs/pdf/fire%20directory_county%20summary/fire_code_enforcement_director.pdf",
+      "quote": "Ventnor City Bldg Dept BHI",
+      "doc_date": "2026 directory page (survey date 5/26/2026)",
+      "via": "state_directory",
+      "verified": true
+     },
+     {
+      "url": "https://www.ventnorcity.org/departments/Fire/fire-prevention",
+      "quote": "Fire Official/Fire Inspector Thomas Halpin 609-823-7943 609-823-7767 thalpin@ventnorcity.org",
+      "doc_date": "2026-09-30 (page fetched)",
+      "via": "page",
+      "verified": true
+     }
+    ],
+    "confidence": "medium"
+   }
+  ],
+  "notes": "Ventnor's fire code enforcing agency is the Ventnor City Fire Department (LEA code F), but its Fire Prevention page lists only business registration, rental property registration and permit forms, with nothing on resale smoke certificates. The state fire directory names the 'Ventnor City Bldg Dept' for smoke detector compliance, and the City's CO requirements letter ties the smoke/CO/extinguisher check to the Certificate of Occupancy, so the Building / Code Enforcement Department is listed. Fire Bureau contacts, if needed: the City web page lists Thomas Halpin, Fire Official/Fire Inspector, 609-823-7943, thalpin@ventnorcity.org; the Bureau's 2026 registration form and the state directory list Lt. Joseph Iannuzzelli as Fire Official (jiannuzzelli@ventnorcity.org)."
+ },
+ "other_items": [
+  {
+   "label": "Certificate of Land Use Compliance",
+   "detail": "A separate Land Use application (seller, property, zoning classification and use) is needed with the Sale CO.",
+   "source_url": "https://www.ventnorcity.org/media/Documents/CodeEnforcement/LAND%201.26.pdf"
+  },
+  {
+   "label": "Alarm company certificate",
+   "detail": "If smoke detectors are monitored, a certificate from the alarm company is required.",
+   "source_url": "https://www.ventnorcity.org/media/Documents/CodeEnforcement/SALE%201.26.pdf"
+  }
+ ],
+ "open_questions": [
+  "Current resale fee: $100 per form (current forms) or $50 per form (FAQ page)?",
+  "Does the Ventnor Fire Department also issue a separate smoke/CO certificate on sale, or is the check only part of the Sale CO inspection?",
+  "Lead time before closing and how long the Sale CO stays valid are not stated."
+ ],
+ "verification": {
+  "fees": 3,
+  "fee_ok": 1,
+  "fee_bad": 0,
+  "fee_unchecked": 2,
+  "quotes": 13,
+  "q_ok": 10,
+  "q_bad": 0,
+  "q_unchecked": 3
+ }
+}

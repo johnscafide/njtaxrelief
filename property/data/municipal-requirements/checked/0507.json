@@ -1,0 +1,219 @@
+{
+ "municipality_code": "0507",
+ "municipality": "North Wildwood",
+ "county": "CAPE MAY",
+ "checked_at": "2026-09-30",
+ "resale_co": {
+  "status": "required",
+  "name": "Certificate of Zoning Use Compliance",
+  "issued_by": "Planning & Zoning (Zoning Officer)",
+  "lead_time": "Apply more than 10 business days before the certificate is needed for the lowest fee",
+  "valid_for": "",
+  "requirements": [
+   "Zoning review that the current use (single family, two-family, multi-family and number of units) is permitted or a legal preexisting nonconforming use"
+  ],
+  "fees": [
+   {
+    "label": "Zoning certificate, requested more than 10 business days before needed",
+    "amount": "$50.00",
+    "quote": "$50.00 if requested more than 10 business days prior to date certificate is needed",
+    "source_url": "https://northwildwood.com/wp-content/uploads/2026/03/Forms-required-for-sale-of-properties.pdf",
+    "verified": true
+   },
+   {
+    "label": "Zoning certificate, requested 4 to 9 days before needed",
+    "amount": "$70.00",
+    "quote": "$70.00 if requested 4-9 days prior to date certificate is needed",
+    "source_url": "https://northwildwood.com/wp-content/uploads/2026/03/Forms-required-for-sale-of-properties.pdf",
+    "verified": true
+   },
+   {
+    "label": "Zoning certificate, requested less than 4 days before needed",
+    "amount": "$125.00",
+    "quote": "$125.00 if requested less than 4 days prior to date certificate is needed",
+    "source_url": "https://northwildwood.com/wp-content/uploads/2026/03/Forms-required-for-sale-of-properties.pdf",
+    "verified": true
+   }
+  ],
+  "how_to_apply": "Fill out the Application for Certificate of Zoning Use Compliance (page 1 of the City's 'Forms required for sale of properties'), with property, seller/agent, owner and buyer details, settlement date, current use and number of units, and key or access code. Pay by check (a separate check from the fire certificate), exact cash, or credit card with a 2.75% surcharge, at City Hall, 901 Atlantic Avenue, North Wildwood, NJ 08260.",
+  "application_url": "https://northwildwood.com/wp-content/uploads/2026/03/Forms-required-for-sale-of-properties.pdf",
+  "department_url": "https://northwildwood.com/departments/construction-office/",
+  "phone": "609-522-2030 Ext. 1562",
+  "email": "dspeigel@northwildwood.com",
+  "contact_name": "Daniel Speigel",
+  "contact_title": "Construction Official/Fire Official/Zoning Officer",
+  "evidence": [
+   {
+    "url": "https://northwildwood.com/wp-content/uploads/2026/03/Forms-required-for-sale-of-properties.pdf",
+    "quote": "Application for Certificate of Zoning Use Compliance",
+    "doc_date": "2026-03 (Rev: March 2026)",
+    "via": "pdf",
+    "verified": true
+   },
+   {
+    "url": "https://northwildwood.com/wp-content/uploads/2026/03/Forms-required-for-sale-of-properties.pdf",
+    "quote": "Fee Schedule: SEPARATE CHECKS (if applicable) ARE REQUIRED FOR FIRE & ZONING CERTIFICATES!",
+    "doc_date": "2026-03",
+    "via": "pdf",
+    "verified": true
+   },
+   {
+    "url": "https://northwildwood.com/public-safety/fire-housing-bureau/",
+    "quote": "Forms required for sale of properties",
+    "doc_date": "2026-03",
+    "via": "page",
+    "verified": true
+   },
+   {
+    "url": "https://ecode360.com/37124931",
+    "quote": "No person or entity having an ownership interest in real property shall sell or transfer any ownership interest in that real property until they have first obtained a certificate of zoning use compliance from the Zoning Officer of the City of North Wildwood.",
+    "doc_date": "2020-12-15 (Ord. No. 1820)",
+    "via": "search_snippet",
+    "verified": null
+   },
+   {
+    "url": "https://northwildwood.com/departments/construction-office/",
+    "quote": "Daniel Speigel, Construction Official/Fire Official/Zoning Officer Extension 1562",
+    "doc_date": "",
+    "via": "page",
+    "verified": true
+   }
+  ],
+  "confidence": "high",
+  "notes": "The City's Fire & Housing Bureau page links one PDF titled 'Forms required for sale of properties' (Rev. March 2026) holding both the zoning certificate and the fire certificate applications. The City code (added 12-15-2020 by Ord. No. 1820) bars selling or transferring an ownership interest until a certificate of zoning use compliance is obtained from the Zoning Officer; that wording comes from an ecode360 search result, since ecode360 cannot be opened. The same search result lists exemptions (transfers to new construction whose CO was issued within the prior 12 months, transfers between family members, court-ordered transfers and some estate transfers); those were not confirmed from the full text. The zoning certificate is a zoning use review, not a housing inspection. Construction Office main line 609-522-2030 Ext. 1560, construction@northwildwood.com; the Construction page lists Zoning at Ext. 1280. Emails were read from the pages' email-protection links."
+ },
+ "fire_cert": {
+  "requirements": [
+   "Smoke alarms in each sleeping room, within 10 feet outside each sleeping area, and on every level",
+   "Hardwired smoke alarms older than 10 years must be replaced; battery smoke alarms must be the 10-year sealed battery type",
+   "CO alarms within 10 feet outside each sleeping area and on every level when there are fuel-burning appliances or an attached garage",
+   "Fire extinguisher at least 2A:10BC, new (current year) or tagged by a licensed agent, for each cooking area, hung in a visible spot or labeled cabinet (still listed on the March 2026 form)"
+  ],
+  "authorities": [
+   {
+    "name": "North Wildwood Fire & Housing Bureau (Fire Prevention Bureau)",
+    "type": "municipal_fire_bureau",
+    "area_served": "Entire city",
+    "lead_time": "Apply more than 10 business days before settlement for the lowest fee; do not submit until all items are in place",
+    "fees": [
+     {
+      "label": "Smoke / CO alarm and extinguisher certificate, per unit, applied more than 10 business days before settlement",
+      "amount": "$45.00",
+      "quote": "$45.00 per unit if application is received more than 10 business days prior to settlement",
+      "source_url": "https://northwildwood.com/wp-content/uploads/2026/03/Forms-required-for-sale-of-properties.pdf",
+      "verified": true
+     },
+     {
+      "label": "Smoke / CO alarm and extinguisher certificate, per unit, applied 4 to 10 business days before settlement",
+      "amount": "$90.00",
+      "quote": "$90.00 per unit if application is received between 4 and 10 business days prior to settlement",
+      "source_url": "https://northwildwood.com/wp-content/uploads/2026/03/Forms-required-for-sale-of-properties.pdf",
+      "verified": true
+     },
+     {
+      "label": "Smoke / CO alarm and extinguisher certificate, per unit, applied less than 4 business days before settlement",
+      "amount": "$161.00",
+      "quote": "$161.00 per unit if application is received less than 4 business days prior to settlement",
+      "source_url": "https://northwildwood.com/wp-content/uploads/2026/03/Forms-required-for-sale-of-properties.pdf",
+      "verified": true
+     },
+     {
+      "label": "Re-inspection (same as the first inspection fee, by timing)",
+      "amount": "$45.00 to $161.00",
+      "quote": "Re-inspection fees are equal to the cost of the initial application inspection fee",
+      "source_url": "https://northwildwood.com/wp-content/uploads/2026/03/Forms-required-for-sale-of-properties.pdf",
+      "verified": true
+     },
+     {
+      "label": "Fire Code Status Report, for properties registered and inspected annually only",
+      "amount": "$25.00",
+      "quote": "$25.00 Fire Code Status Report for registered properties ONLY (pending violations/fees)",
+      "source_url": "https://northwildwood.com/wp-content/uploads/2026/03/Forms-required-for-sale-of-properties.pdf",
+      "verified": true
+     }
+    ],
+    "how_to_apply": "Fill out the Application for a Certificate of Smoke Alarm, Carbon Monoxide Alarm and Portable Fire Extinguisher Compliance (page 2 of 'Forms required for sale of properties'), note keys or lock box code, and submit with a separate check (or exact cash, or credit card with a 2.75% surcharge) to the Fire & Housing Bureau, 901 Atlantic Ave., North Wildwood (609-522-2160, fireinspector@northwildwood.com). Smoke detector applications are taken Monday to Friday 8AM to 4PM.",
+    "application_url": "https://northwildwood.com/wp-content/uploads/2026/03/Forms-required-for-sale-of-properties.pdf",
+    "department_url": "https://northwildwood.com/public-safety/fire-housing-bureau/",
+    "phone": "609-522-2160",
+    "email": "dspeigel@northwildwood.com",
+    "contact_name": "Daniel Speigel",
+    "contact_title": "Fire Official",
+    "evidence": [
+     {
+      "url": "https://northwildwood.com/public-safety/fire-housing-bureau/",
+      "quote": "Department Head: Daniel Speigel Fire Official",
+      "doc_date": "",
+      "via": "page",
+      "verified": true
+     },
+     {
+      "url": "https://northwildwood.com/public-safety/fire-housing-bureau/",
+      "quote": "Phone Directory: 609-522-2160",
+      "doc_date": "",
+      "via": "page",
+      "verified": true
+     },
+     {
+      "url": "https://northwildwood.com/public-safety/fire-housing-bureau/",
+      "quote": "Services: (permits/smoke detector applications Monday through Friday 8AM to 4PM)",
+      "doc_date": "",
+      "via": "page",
+      "verified": true
+     },
+     {
+      "url": "https://northwildwood.com/wp-content/uploads/2026/03/Forms-required-for-sale-of-properties.pdf",
+      "quote": "Application for a Certificate of Smoke Alarm, Carbon Monoxide Alarm and Portable Fire Extinguisher Compliance (CSACMAPFEC)",
+      "doc_date": "2026-03 (Rev. March, 2026)",
+      "via": "pdf",
+      "verified": true
+     },
+     {
+      "url": "https://northwildwood.com/wp-content/uploads/2026/03/Forms-required-for-sale-of-properties.pdf",
+      "quote": "Any property not registers and/or inspected annually will follow the fee schedule below",
+      "doc_date": "2026-03",
+      "via": "pdf",
+      "verified": true
+     },
+     {
+      "url": "https://nj.gov/dca/dfs/pdf/ANNUAL%20REGISTRY/THIRD%20QUARTER%20LEA%20REGISTRY%202026.pdf",
+      "quote": "F North Wildwood City",
+      "doc_date": "2026-07 (registry as of June 30, 2026)",
+      "via": "pdf",
+      "verified": true
+     },
+     {
+      "url": "https://www.nj.gov/dca/dfs/pdf/fire%20directory_county%20summary/fire_code_enforcement_director.pdf",
+      "quote": "LEAID: 0507-001 Enf Auth. Fire Dept Fire Official Daniel F Speigel Phone (609) 522-2030 Email dspeigel@northwildwood.com",
+      "doc_date": "2025-02-13 (survey date)",
+      "via": "state_directory",
+      "verified": true
+     }
+    ],
+    "confidence": "high"
+   }
+  ],
+  "notes": "The Fire Department is the local fire enforcing agency (DCA registry code F); smoke/CO certificates are handled by the City's Fire & Housing Bureau. If the property is a registered rental inspected annually, the form lists only a $25.00 Fire Code Status Report; other properties pay the $45 / $90 / $161 per-unit schedule. The March 2026 form still names a portable fire extinguisher even though P.L.2025, c.19 removed it from the state requirement. Other bureau staff: Fire Inspectors Michael Johnson (ext. 1564), James Burleigh (ext. 1561), Joseph Babore (ext. 1340); Administrative Staff Michele Spiegel (ext. 1565). Emails were read from the page's email-protection links; department email fireinspector@northwildwood.com."
+ },
+ "other_items": [
+  {
+   "label": "Certificate of Zoning Use Compliance",
+   "detail": "Required before a sale or transfer; separate application and check from the fire certificate. See resale_co.",
+   "source_url": "https://northwildwood.com/wp-content/uploads/2026/03/Forms-required-for-sale-of-properties.pdf"
+  }
+ ],
+ "open_questions": [
+  "Exact exemptions from the zoning use certificate (family, court and estate transfers, new construction) were seen only in a search-result summary of the ecode360 text; confirm with the Zoning Officer.",
+  "Whether the fire extinguisher item is still enforced after P.L.2025, c.19."
+ ],
+ "verification": {
+  "fees": 8,
+  "fee_ok": 8,
+  "fee_bad": 0,
+  "fee_unchecked": 0,
+  "quotes": 12,
+  "q_ok": 11,
+  "q_bad": 0,
+  "q_unchecked": 1
+ }
+}

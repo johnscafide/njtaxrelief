@@ -1,0 +1,196 @@
+{
+ "municipality_code": "0115",
+ "municipality": "Longport Borough",
+ "county": "ATLANTIC",
+ "checked_at": "2026-09-30",
+ "resale_co": {
+  "status": "required",
+  "name": "Land Use Compliance Certificate for a property sale (Certificate of Occupancy and/or Land Use Compliance Certificate)",
+  "issued_by": "Borough of Longport Building and Zoning Department",
+  "lead_time": "",
+  "valid_for": "",
+  "requirements": [
+   "Dwelling must comply with federal, state and local housing codes",
+   "Kept in a safe, sanitary condition with proper and adequate light and ventilation",
+   "Open permit review before the certificate is issued"
+  ],
+  "fees": [
+   {
+    "label": "Land Use Compliance application for a sale",
+    "amount": "$150.00",
+    "quote": "Application for Land Use Compliance of a Property for Sale Application Fee: $150.00",
+    "source_url": "https://www.longportnj.gov/_Content/pdf/forms/Sale-Application.pdf",
+    "verified": true
+   }
+  ],
+  "how_to_apply": "Complete the 'Application for Land Use Compliance of a Property for Sale' (Housing section of the Borough forms page) with the settlement date, a point of contact and access details, and submit it with the $150.00 fee, a current site survey, a flood elevation certificate, the sales contract or proof of sale price, and Form 1A (smoke detector certificate) to the Building and Zoning Department, 2305 Atlantic Avenue, Longport, NJ 08403. The Building Department inspects and then issues the certificate.",
+  "application_url": "https://www.longportnj.gov/_Content/pdf/forms/Sale-Application.pdf",
+  "department_url": "https://www.longportnj.gov/Departments/building-construction",
+  "phone": "609-823-2731 ext. 108, 109 or 120",
+  "email": "building@longport-nj.us",
+  "contact_name": "",
+  "contact_title": "",
+  "evidence": [
+   {
+    "url": "https://www.longportnj.gov/_Content/pdf/forms/Sale-Application.pdf",
+    "quote": "A Certificate of Occupancy and/or Land Use Compliance Certificate will be issued following an inspection by the Building Department.",
+    "doc_date": "2026-06 (PDF dated 2026-06-16)",
+    "via": "pdf",
+    "verified": true
+   },
+   {
+    "url": "https://www.longportnj.gov/_Content/pdf/forms/Sale-Application.pdf",
+    "quote": "Required documents to be submitted with this application Ordinance §70-2",
+    "doc_date": "2026-06",
+    "via": "pdf",
+    "verified": true
+   },
+   {
+    "url": "https://www.longportnj.gov/_Content/pdf/forms/Sale-Application.pdf",
+    "quote": "Building and Zoning Department 2305 Atlantic Avenue ∙ Longport, New Jersey 08403-1103 Office: 609.823.2731 ext. 108, 109, 120 ∙ Fax: 609.823.9480 Email: building@longport-nj.us",
+    "doc_date": "2026-06",
+    "via": "pdf",
+    "verified": true
+   },
+   {
+    "url": "https://www.longportnj.gov/api/data/GetFormsData",
+    "quote": "\"Department_Label\":\"Housing\",\"Links\":[{\"Label\":\"Sale Application\",\"EngPDF\":\"/_Content/pdf/forms/Sale-Application.pdf\"",
+    "doc_date": "2026-09-30 (forms list data behind https://www.longportnj.gov/forms)",
+    "via": "page",
+    "verified": true
+   },
+   {
+    "url": "https://www.longportnj.gov/api/data/GetDirectoryDepartmentsData",
+    "quote": "\"Label\":\"Building / Construction\",\"Phone\":\"(609) 823-2731 Ext. 109\",\"Email\":\"building@longport-nj.us\"",
+    "doc_date": "2026-09-30 (directory data behind https://www.longportnj.gov/directory)",
+    "via": "page",
+    "verified": true
+   }
+  ],
+  "confidence": "high",
+  "notes": "The Borough's sale packet (June 2026) is titled 'Application for Land Use Compliance of a Property for Sale' and cites Ordinance §70-2; the Building Department inspects and issues a Certificate of Occupancy and/or Land Use Compliance Certificate. The form gives no lead time or validity period. No named construction or zoning official is listed on the Borough website (forms and directory checked); the office numbers are ext. 108, 109 and 120 (Zoning/Flood ext. 120, zoning@longport-nj.us). The Borough code (ecode360 LO0700) could not be opened. A separate Rental Application exists for rentals."
+ },
+ "fire_cert": {
+  "requirements": [
+   "Smoke alarms on each level, in every bedroom, and outside each sleeping area within 10 feet of doorways",
+   "Since January 1, 2019: 10-year sealed lithium battery single-station smoke alarms; existing AC-powered alarms are accepted and must not be removed",
+   "Carbon monoxide alarms on each level and outside sleeping areas",
+   "Central-station monitored alarm systems must be inspected by a NJ certified fire protection contractor, with the report available at the fire inspection",
+   "Owner, agent or designee must be present; detectors mounted more than 9 feet up must be tested by the owner or agent",
+   "A penalty of up to $500.00 may apply if the sale closes before the certificate is received"
+  ],
+  "authorities": [
+   {
+    "name": "Longport Bureau of Fire Prevention",
+    "type": "municipal_fire_bureau",
+    "area_served": "Entire borough",
+    "lead_time": "",
+    "fees": [
+     {
+      "label": "Certificate of Smoke Detector Compliance application",
+      "amount": "$75.00",
+      "quote": "Application for Certificate of Smoke Detector Compliance Application Fee: $75.00 Each Reinspection; $30.00",
+      "source_url": "https://www.longportnj.gov/_Content/pdf/forms/Sale-Application.pdf",
+      "verified": true
+     },
+     {
+      "label": "Each reinspection",
+      "amount": "$30.00",
+      "quote": "Application for Certificate of Smoke Detector Compliance Application Fee: $75.00 Each Reinspection; $30.00",
+      "source_url": "https://www.longportnj.gov/_Content/pdf/forms/Sale-Application.pdf",
+      "verified": true
+     }
+    ],
+    "how_to_apply": "Complete Form 1A (Application for Certificate of Smoke Detector Compliance) in the Borough sale packet and submit it with the Land Use Compliance application. Inspection by the Longport Fire Official, by appointment only. Pay by check only, payable to Longport Bureau of Fire Prevention; no certificate is issued before the fee is paid.",
+    "application_url": "https://www.longportnj.gov/_Content/pdf/forms/Sale-Application.pdf",
+    "department_url": "https://www.longportnj.gov/Departments/volunteer-fire-department",
+    "phone": "609-822-9578",
+    "email": "firechief@longport-nj.us",
+    "contact_name": "Levon S Clayton",
+    "contact_title": "Fire Official (state fire directory)",
+    "evidence": [
+     {
+      "url": "https://www.longportnj.gov/_Content/pdf/forms/Sale-Application.pdf",
+      "quote": "Form “1A” to be completed in addition to the Land Use Compliance Form. Inspection conducted by the Longport Fire Official. Inspection conducted by appointment only. Additional Fee: $75.00 Payable to: Longport Bureau of Fire Prevention",
+      "doc_date": "2026-06",
+      "via": "pdf",
+      "verified": true
+     },
+     {
+      "url": "https://www.longportnj.gov/_Content/pdf/forms/Sale-Application.pdf",
+      "quote": "Only checks accepted for payment. Make Check Payable To: Longport Bureau of Fire Prevention",
+      "doc_date": "2026-06",
+      "via": "pdf",
+      "verified": true
+     },
+     {
+      "url": "https://www.longportnj.gov/_Content/pdf/forms/Sale-Application.pdf",
+      "quote": "Bureau of Fire Prevention 2305 Atlantic Avenue, Longport, NJ 08403 609-822-9578",
+      "doc_date": "2026-06",
+      "via": "pdf",
+      "verified": true
+     },
+     {
+      "url": "https://nj.gov/dca/dfs/pdf/ANNUAL%20REGISTRY/THIRD%20QUARTER%20LEA%20REGISTRY%202026.pdf",
+      "quote": "M Longport Borough",
+      "doc_date": "2026-07",
+      "via": "pdf",
+      "verified": true
+     },
+     {
+      "url": "https://www.nj.gov/dca/dfs/pdf/fire%20directory_county%20summary/fire_code_enforcement_director.pdf",
+      "quote": "LEAID: 0115-001 Enf Auth. Municipal Fire Official Levon S Clayton Phone (609) 822-9578 Addr: 2305 Atlantic Av Longport NJ 08403",
+      "doc_date": "2026 directory (Longport page)",
+      "via": "state_directory",
+      "verified": true
+     },
+     {
+      "url": "https://www.nj.gov/dca/dfs/pdf/fire%20directory_county%20summary/fire_code_enforcement_director.pdf",
+      "quote": "Email firechief@longport-nj.us",
+      "doc_date": "2026 directory",
+      "via": "state_directory",
+      "verified": true
+     }
+    ],
+    "confidence": "high"
+   }
+  ],
+  "notes": "DCA registry code M. Fees and rules come from the Borough's June 2026 sale packet (Form 1A and the smoke detector requirements page). The packet's requirement page does not list a fire extinguisher. The Fire Official's name and email come from the state fire directory only; the Borough site lists the Volunteer Fire Department at (609) 822-9578 without names."
+ },
+ "other_items": [
+  {
+   "label": "Current site survey",
+   "detail": "Required with the Land Use Compliance application for a sale.",
+   "source_url": "https://www.longportnj.gov/_Content/pdf/forms/Sale-Application.pdf"
+  },
+  {
+   "label": "Flood elevation certificate",
+   "detail": "Required with the application.",
+   "source_url": "https://www.longportnj.gov/_Content/pdf/forms/Sale-Application.pdf"
+  },
+  {
+   "label": "Sales contract, proof of sale price or interest conveyed",
+   "detail": "Required with the application.",
+   "source_url": "https://www.longportnj.gov/_Content/pdf/forms/Sale-Application.pdf"
+  },
+  {
+   "label": "Open permit review",
+   "detail": "The office checks for open permits and sends a copy to the Tax Assessor.",
+   "source_url": "https://www.longportnj.gov/_Content/pdf/forms/Sale-Application.pdf"
+  }
+ ],
+ "open_questions": [
+  "How far ahead of closing to apply and how long the Land Use Compliance Certificate is valid are not stated.",
+  "Named Construction/Zoning Official for Longport is not listed on the Borough site."
+ ],
+ "verification": {
+  "fees": 3,
+  "fee_ok": 3,
+  "fee_bad": 0,
+  "fee_unchecked": 0,
+  "quotes": 11,
+  "q_ok": 11,
+  "q_bad": 0,
+  "q_unchecked": 0
+ }
+}

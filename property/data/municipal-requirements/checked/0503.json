@@ -1,0 +1,175 @@
+{
+ "municipality_code": "0503",
+ "municipality": "Cape May Point Borough",
+ "county": "CAPE MAY",
+ "checked_at": "2026-09-30",
+ "resale_co": {
+  "status": "required",
+  "name": "Certificate of Compliance",
+  "issued_by": "Zoning Official, Borough of Cape May Point",
+  "lead_time": "",
+  "valid_for": "",
+  "requirements": [
+   "Interior inspection of the structure or unit by the Zoning Official before settlement (key or lock box code needed)"
+  ],
+  "fees": [
+   {
+    "label": "Certificate of Compliance inspection, per unit (capped at $300 per building)",
+    "amount": "$100.00",
+    "quote": "Enclosed is the $100.00 fee/unit (not to exceed $300 per building) for this inspection.",
+    "source_url": "https://capemaypoint.org/uploaded_files/document/Certificate%20of%20Compliance%20Application.pdf",
+    "verified": true
+   }
+  ],
+  "how_to_apply": "Fill out the Certificate of Compliance Application (name, mailing address, unit, street address, block, lot, date of settlement, and a key or lock box code for the interior inspection) and send it with the $100.00 per unit fee to the Office of the Zoning Official, Borough of Cape May Point, PO Box 490, Cape May Point, NJ 08212 (215 Lighthouse Avenue). Office hours are 4:00 PM to 6:00 PM Tuesday and Wednesday only.",
+  "application_url": "https://capemaypoint.org/uploaded_files/document/Certificate%20of%20Compliance%20Application.pdf",
+  "department_url": "https://capemaypoint.org/zoning.php",
+  "phone": "609-884-8468 x16",
+  "email": "bbritton@capemaypoint.org",
+  "contact_name": "Bruce Britton",
+  "contact_title": "Zoning Official",
+  "evidence": [
+   {
+    "url": "https://capemaypoint.org/uploaded_files/document/Certificate%20of%20Compliance%20Application.pdf",
+    "quote": "Certificate of Compliance Application",
+    "doc_date": "2025-01-15 (PDF date)",
+    "via": "pdf",
+    "verified": true
+   },
+   {
+    "url": "https://capemaypoint.org/uploaded_files/document/Certificate%20of%20Compliance%20Application.pdf",
+    "quote": "Please Inspect the following structure or unit:",
+    "doc_date": "2025-01-15",
+    "via": "pdf",
+    "verified": true
+   },
+   {
+    "url": "https://capemaypoint.org/uploaded_files/document/Certificate%20of%20Compliance%20Application.pdf",
+    "quote": "Date of Settlement:",
+    "doc_date": "2025-01-15",
+    "via": "pdf",
+    "verified": true
+   },
+   {
+    "url": "https://capemaypoint.org/zoning.php",
+    "quote": "Issues all Certificates of Compliance",
+    "doc_date": "",
+    "via": "page",
+    "verified": true
+   },
+   {
+    "url": "https://capemaypoint.org/zoning.php",
+    "quote": "Bruce Britton Zoning Official 609-884-8468 x16 bbritton@capemaypoint.org",
+    "doc_date": "",
+    "via": "page",
+    "verified": true
+   },
+   {
+    "url": "https://capemaypoint.org/documentcenter.php",
+    "quote": "Certificate of Compliance Application",
+    "doc_date": "",
+    "via": "page",
+    "verified": null
+   }
+  ],
+  "confidence": "medium",
+  "notes": "The Borough's Certificate of Compliance Application (dated January 2025) asks the Zoning Official to inspect a structure or unit, asks for the date of settlement and a key or lock box code, and charges $100.00 per unit (not over $300 per building). It is listed under 'Zoning and Construction Applications' in the Borough Document Center, and the Zoning page says the Zoning Official issues all Certificates of Compliance. The form is plainly built for sales, but the ordinance text itself (ecode360 CA0524) could not be read, so the exact legal requirement, lead time and what is checked are not confirmed. The Borough's construction code work is done by the City of Cape May Construction Office under a shared services contract (Construction Official Lou Vito, 609-884-9555 x7). Cape May Point requires annual rental fire inspections before a rental permit is issued (Code Enforcement / Rental Inspector Brady Schoenrock, 609-884-8468 x21); that is a rental program, not a resale requirement. The Borough website blocks rapid automated requests, so pages were fetched slowly."
+ },
+ "fire_cert": {
+  "requirements": [
+   "The State application certifies smoke alarms, carbon monoxide alarms and the secondary power source identification label (homes with solar, generators or battery systems); it no longer lists a fire extinguisher"
+  ],
+  "authorities": [
+   {
+    "name": "NJ DCA Division of Fire Safety, Bureau of Fire Code Enforcement (State is the fire code enforcing agency and issues smoke certificates)",
+    "type": "state_dca",
+    "area_served": "Entire borough",
+    "lead_time": "Apply more than 10 business days before closing for the lowest fee",
+    "fees": [
+     {
+      "label": "More than 10 business days before closing",
+      "amount": "$45",
+      "quote": "If you are applying for a certificate more than ten business days from the closing date the fee is $45 dollars",
+      "source_url": "https://firesolutions.dca.nj.gov/ultra-fire-home/smoke-application-create/",
+      "verified": null
+     },
+     {
+      "label": "4 to 10 business days before closing",
+      "amount": "$90",
+      "quote": "if applying 4 to 10 business days from the closing date the fee is $90",
+      "source_url": "https://firesolutions.dca.nj.gov/ultra-fire-home/smoke-application-create/",
+      "verified": null
+     },
+     {
+      "label": "Less than 4 business days before closing",
+      "amount": "$161",
+      "quote": "if the closing date is less than four business days the fee is $161.",
+      "source_url": "https://firesolutions.dca.nj.gov/ultra-fire-home/smoke-application-create/",
+      "verified": null
+     }
+    ],
+    "how_to_apply": "Apply online through the DCA Fire Safety portal ('Start Your Smoke Certification Application'). Payment by e-check or credit card is required before submitting, and a valid email address is required. Homes heated by electricity with no CO alarm requirement should also email BFCE_CSDCMAC@dca.nj.gov.",
+    "application_url": "https://firesolutions.dca.nj.gov/ultra-fire-home/smoke-application-create/",
+    "department_url": "https://www.nj.gov/dca/dfs/offices/bfce.shtml",
+    "phone": "609-633-6132",
+    "email": "BFCE_CSDCMAC@dca.nj.gov",
+    "contact_name": "Louis Kilmer",
+    "contact_title": "Bureau Chief, Bureau of Fire Code Enforcement (listed as Fire Official in the state fire directory)",
+    "evidence": [
+     {
+      "url": "https://nj.gov/dca/dfs/pdf/ANNUAL%20REGISTRY/THIRD%20QUARTER%20LEA%20REGISTRY%202026.pdf",
+      "quote": "S Cape May Point Borough",
+      "doc_date": "2026-07 (registry as of June 30, 2026)",
+      "via": "pdf",
+      "verified": true
+     },
+     {
+      "url": "https://www.nj.gov/dca/dfs/pdf/fire%20directory_county%20summary/state_towns%207_17_26.pdf",
+      "quote": "CAPE MAY POINT 0503 SC",
+      "doc_date": "2026-07-17 (SC = Smoke Certs)",
+      "via": "pdf",
+      "verified": true
+     },
+     {
+      "url": "https://www.nj.gov/dca/dfs/pdf/fire%20directory_county%20summary/fire_code_enforcement_director.pdf",
+      "quote": "LEAID: 0503-999 Enf Auth. State Fire Official Louis Kilmer Phone (609)633-6132",
+      "doc_date": "2026-07-31 (survey date)",
+      "via": "state_directory",
+      "verified": true
+     },
+     {
+      "url": "https://firesolutions.dca.nj.gov/ultra-fire-home/smoke-application-create/",
+      "quote": "Please complete the following information to apply for a Certificate of Smoke Alarm, Carbon Monoxide Alarm, and Secondary Power Source Identification Label Compliance (CSACMASPSIL). You will be required to pay, via e-check or credit card, before you can submit this application. This application requires a valid email address.",
+      "doc_date": "2026-09-30 (page fetched)",
+      "via": "page",
+      "verified": null
+     },
+     {
+      "url": "https://www.nj.gov/dca/dfs/offices/bfce.shtml",
+      "quote": "Louis Kilmer, Bureau Chief CPM",
+      "doc_date": "2026-09-30 (page fetched)",
+      "via": "page",
+      "verified": true
+     }
+    ],
+    "confidence": "high"
+   }
+  ],
+  "notes": "The DCA registry lists Cape May Point as 'S' (the State enforces the fire code) and DCA's July 17, 2026 list of state-enforced towns marks it 'SC' (the State issues smoke certificates). The DCA Bureau of Fire Code Enforcement page lists Louis Kilmer with phone (609) 633-6106; the state fire directory lists (609) 633-6132. The volunteer Cape May Point Fire Company is not the enforcing agency."
+ },
+ "other_items": [],
+ "open_questions": [
+  "Confirm with the Zoning Official that the Certificate of Compliance is required for every 1-2 family sale, what it checks, and how far ahead to apply.",
+  "Whether the $100 per unit Certificate of Compliance fee (January 2025 form) is current."
+ ],
+ "verification": {
+  "fees": 4,
+  "fee_ok": 1,
+  "fee_bad": 0,
+  "fee_unchecked": 3,
+  "quotes": 11,
+  "q_ok": 9,
+  "q_bad": 0,
+  "q_unchecked": 2
+ }
+}
