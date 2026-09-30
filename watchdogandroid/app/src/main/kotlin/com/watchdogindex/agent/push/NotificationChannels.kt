@@ -57,8 +57,5 @@ object NotificationChannels {
     }
 
     /** "Tax bills, assessments and permits. Property changes are not seller predictions." */
-    fun description(channel: AlertChannel): String {
-        val base = channel.description.trimEnd().trimEnd('.')
-        return "$base. ${AlertChannel.NOT_A_SELLER_PREDICTION}"
-    }
+    fun description(channel: AlertChannel): String = channel.fullDescription
 }

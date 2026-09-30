@@ -129,7 +129,7 @@ class TaxMathTest {
         val over = TaxMath.priceVerdict(TaxMath.priceCheck(300_000.0, 262_400.0, 11_284.0, 61.2, 70.38, 4.47), "Cherry Hill")
         assertEquals("Assessed high for this price", over.title)
         assertEquals(TaxMath.ASSESSED_HIGH_TITLE, over.title)
-        assertEquals(PriceCheckKind.HighTaxForPrice, over.kind)
+        assertEquals(PriceCheckKind.AssessedHigh, over.kind)
 
         val noPrice = TaxMath.priceVerdict(TaxMath.priceCheck(0.0, 262_400.0, 11_284.0, 61.2, 70.38, 4.47), "Cherry Hill")
         assertEquals(PriceCheckKind.Unknown, noPrice.kind)

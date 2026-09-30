@@ -36,8 +36,12 @@ import java.nio.file.Files
  * mail client through [Desktop], and everything is logged to stdout so a person driving the preview can see
  * what the app tried to do. Every AWT call is guarded for headless JVMs (the screenshot harness runs with
  * `java.awt.headless=true`) and never throws into the UI.
+ *
+ * [parkLabel] is the name the stylised farm map writes on its decorative park block, as the mockup does with
+ * "Birchwood Park". It is drawn text that describes no data, so only the screenshot harness sets it (it renders
+ * the sample farm the mockup shows); the interactive window leaves it null.
  */
-class DesktopPlatformServices : PlatformServices {
+class DesktopPlatformServices(private val parkLabel: String? = null) : PlatformServices {
 
     override fun share(title: String, text: String, url: String?, imagePngBytes: ByteArray?) {
         val body = buildString {
@@ -105,7 +109,7 @@ class DesktopPlatformServices : PlatformServices {
 
     @Composable
     override fun FarmMap(state: FarmMapState, modifier: Modifier) {
-        DesktopFarmMap(state, modifier)
+        DesktopFarmMap(state, modifier, parkLabel = parkLabel)
     }
 
     /**

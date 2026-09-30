@@ -156,6 +156,15 @@ object Derived {
         return date
     }
 
+    /**
+     * The week the Monday brief covers: since Monday 00:00 New Jersey time, except on a Monday itself, when the
+     * brief covers the week that just ended (the approved mockup dated Monday, September 28 reads "since Sep 21").
+     */
+    fun digestWeekStart(now: Instant, zone: TimeZone = NEW_JERSEY): LocalDate {
+        val start = weekStart(now, zone)
+        return if (now.toLocalDateTime(zone).date == start) start.minus(7, DateTimeUnit.DAY) else start
+    }
+
     fun startOfDay(date: LocalDate, zone: TimeZone = NEW_JERSEY): Instant = date.atStartOfDayIn(zone)
 
     fun parseInstant(text: String?): Instant? = text?.let { runCatching { Instant.parse(it) }.getOrNull() ?: runCatching { LocalDateTime.parse(it).let { ldt -> ldt.toInstantUtc() } }.getOrNull() }

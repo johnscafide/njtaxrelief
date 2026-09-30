@@ -285,10 +285,11 @@ private fun SettingsDialogs(ready: SettingsUiState.Ready, vm: SettingsViewModel,
             dismissButton = { TextButton(onClick = vm::closeDialog) { Text("Close") } },
             title = { Text(text = ready.account.displayName, style = t.sectionTitle) },
             text = {
-                Column {
-                    KeyValueRow(label = "Plan", value = ready.account.planLabel)
-                    KeyValueRow(label = "Email", value = ready.account.email, valueStyle = t.kvLabel)
-                    ready.account.brokerage?.let { KeyValueRow(label = "Brokerage", value = it, valueStyle = t.kvLabel) }
+                Column(verticalArrangement = Arrangement.spacedBy(10.dp)) {
+                    // Stacked rather than key/value: an email address is too long to share a line with its label.
+                    LabelledValue(label = "Plan", value = ready.account.planLabel)
+                    LabelledValue(label = "Email", value = ready.account.email)
+                    ready.account.brokerage?.let { LabelledValue(label = "Brokerage", value = it) }
                     Text(
                         text = "Plan changes and billing happen on the web. The app shows the plan the backend reports.",
                         modifier = Modifier.padding(top = 8.dp),
@@ -301,6 +302,17 @@ private fun SettingsDialogs(ready: SettingsUiState.Ready, vm: SettingsViewModel,
             titleContentColor = c.ink,
             textContentColor = c.ink,
         )
+    }
+}
+
+/** A 12 sp label over its value, for the account dialog. */
+@Composable
+private fun LabelledValue(label: String, value: String) {
+    val c = WatchdogTheme.colors
+    val t = WatchdogTheme.type
+    Column {
+        Text(text = label, color = c.muted, style = t.caption)
+        Text(text = value, color = c.ink, style = t.body)
     }
 }
 

@@ -1,6 +1,7 @@
 package com.watchdogindex.agent.core.model
 
-enum class PriceCheckKind { LowTaxForPrice, InLine, HighTaxForPrice, Unknown }
+/** AssessedHigh: the assessment is high for the asking price, which is good news for a buyer. */
+enum class PriceCheckKind { LowTaxForPrice, InLine, HighTaxForPrice, AssessedHigh, Unknown }
 
 data class PriceCheck(
     val kind: PriceCheckKind,

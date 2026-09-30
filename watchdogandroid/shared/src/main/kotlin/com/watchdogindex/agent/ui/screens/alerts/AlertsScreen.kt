@@ -362,7 +362,7 @@ private fun AlertSwitchesCard(preferences: AlertPreferences, onSettings: () -> U
             KeyValueRow(
                 label = AlertChannel.MondayBrief.title,
                 value = if (preferences.mondayNotification) "On" else "Off",
-                sublabel = "${AlertChannel.MondayBrief.description} · brief and Monday email",
+                sublabel = AlertChannel.MondayBrief.description,
             )
             preferences.channels.forEach { (channel, on) ->
                 KeyValueRow(label = channel.title, value = if (on) "On" else "Off", sublabel = channel.description)

@@ -135,9 +135,7 @@ object TaxMath {
      *
      * "Assessed high for this price" (assessment above the Chapter 123 limit) is GOOD news for a buyer: the site
      * (`verdictText` in `api/watchdog-true-cost.js`) gives it tone `good` because the assessment can be appealed after
-     * closing. The model has no kind for it yet, so it travels as [PriceCheckKind.HighTaxForPrice] with the title
-     * [ASSESSED_HIGH_TITLE]; the UI must not colour that title as a warning. Use [priceCheckTone] for the box tone
-     * rather than switching on the kind, until [PriceCheckKind] gains an `AssessedHigh` entry.
+     * closing. It travels as [PriceCheckKind.AssessedHigh]; screens take the box tone from [priceCheckTone].
      */
     fun priceVerdict(facts: PriceCheckFacts?, town: String): PriceCheck {
         if (facts == null) {
@@ -152,7 +150,7 @@ object TaxMath {
         val expected = typical?.roundToInt()
         if (facts.overLimit == true) {
             return PriceCheck(
-                PriceCheckKind.HighTaxForPrice,
+                PriceCheckKind.AssessedHigh,
                 ASSESSED_HIGH_TITLE,
                 "The assessment is ${Format.fixed(facts.assessedPercent!!, 0)}% of this price, above $town’s Chapter 123 limit of " +
                     "${Format.fixed(facts.limitPercent!!, 0)}%. At this price the assessment could be appealed.",
@@ -197,16 +195,13 @@ object TaxMath {
     /**
      * The tone a verdict box should use for a price check, as the site colours it: "In line" and "Assessed high"
      * are good for the buyer (the second because the assessment can be appealed after closing), "Low tax" and
-     * "On the high side" are warnings, and no comparison is neutral. "Assessed high" shares
-     * [PriceCheckKind.HighTaxForPrice] with "On the high side" until the model gains an `AssessedHigh` kind, so it is
-     * told apart by [ASSESSED_HIGH_TITLE], which only [priceVerdict] produces. Screens should call this instead of
-     * switching on [PriceCheck.kind] themselves.
+     * "On the high side" are warnings, and no comparison is neutral. Screens call this instead of switching on
+     * [PriceCheck.kind] themselves.
      */
-    fun priceCheckTone(check: PriceCheck): VerdictKind = when {
-        check.title == ASSESSED_HIGH_TITLE -> VerdictKind.Good
-        check.kind == PriceCheckKind.InLine -> VerdictKind.Good
-        check.kind == PriceCheckKind.LowTaxForPrice || check.kind == PriceCheckKind.HighTaxForPrice -> VerdictKind.Warn
-        else -> VerdictKind.Neutral
+    fun priceCheckTone(check: PriceCheck): VerdictKind = when (check.kind) {
+        PriceCheckKind.AssessedHigh, PriceCheckKind.InLine -> VerdictKind.Good
+        PriceCheckKind.LowTaxForPrice, PriceCheckKind.HighTaxForPrice -> VerdictKind.Warn
+        PriceCheckKind.Unknown -> VerdictKind.Neutral
     }
 
     // ------------------------------------------------------------------ holds-up floor (site 4.7)

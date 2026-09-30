@@ -22,7 +22,8 @@ import kotlin.math.roundToInt
 
 /**
  * Rebuilds the week the way the Monday email is built (edge-function-contracts.md 2.1; gap-answers.md
- * "property_update_events producer contract" 6): events since Monday 00:00 in New Jersey for the sphere, the
+ * "property_update_events producer contract" 6): events since Monday 00:00 in New Jersey (on a Monday, the week
+ * that just ended, see `Derived.digestWeekStart`) for the sphere, the
  * eight qualifying types, the sender's weights, grouped per `<home>:<type>`, the best reason per home, ten at most.
  * Counts by tile are taken from the grouped reasons, not only the top ten.
  *
@@ -40,7 +41,7 @@ class LiveDigestRepository(private val ctx: LiveContext) : DigestRepository {
     override suspend fun thisWeek(): WeekDigest {
         val now = ctx.now()
         val today = now.toLocalDateTime(Derived.NEW_JERSEY).date
-        val weekStart = Derived.weekStart(now)
+        val weekStart = Derived.digestWeekStart(now)
         val since = Derived.startOfDay(weekStart)
 
         val sphere = ctx.digest.sphere()
@@ -132,7 +133,7 @@ class LiveDigestRepository(private val ctx: LiveContext) : DigestRepository {
     }
 
     override suspend fun markTaskDone(taskId: String, done: Boolean) {
-        val week = Derived.weekStart(ctx.now()).toString()
+        val week = Derived.digestWeekStart(ctx.now()).toString()
         val current = doneIds(week)
         val next = if (done) current + taskId else current - taskId
         ctx.store.writeJson(LiveKeys.DONE_TASKS, StoredDoneTasks(week, next))

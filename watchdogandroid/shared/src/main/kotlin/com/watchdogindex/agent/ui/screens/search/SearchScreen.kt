@@ -28,13 +28,16 @@ import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
+import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
+import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.focus.FocusRequester
 import androidx.compose.ui.focus.focusRequester
 import androidx.compose.ui.graphics.SolidColor
+import androidx.compose.ui.layout.onGloballyPositioned
 import androidx.compose.ui.semantics.Role
 import androidx.compose.ui.semantics.contentDescription
 import androidx.compose.ui.semantics.semantics
@@ -87,8 +90,10 @@ fun SearchScreen(query: String, navigator: Navigator) {
     val c = WatchdogTheme.colors
     val t = WatchdogTheme.type
     val focus = remember { FocusRequester() }
-
-    LaunchedEffect(Unit) { focus.requestFocus() }
+    // Autofocus once the field is laid out: requesting focus before its node is attached throws, and the
+    // headless preview runs the first effects before attachment.
+    var fieldAttached by remember { mutableStateOf(false) }
+    LaunchedEffect(fieldAttached) { if (fieldAttached) focus.requestFocus() }
 
     Scaffold(containerColor = c.bg, contentWindowInsets = WindowInsets(0.dp)) { padding ->
         Column(modifier = Modifier.fillMaxSize().padding(padding).padding(top = statusBarTopPadding())) {
@@ -103,7 +108,9 @@ fun SearchScreen(query: String, navigator: Navigator) {
                     onValueChange = vm::setQuery,
                     onSearch = vm::searchNow,
                     onClear = vm::clearQuery,
-                    modifier = Modifier.weight(1f).focusRequester(focus),
+                    focusRequester = focus,
+                    onFieldAttached = { fieldAttached = true },
+                    modifier = Modifier.weight(1f),
                 )
             }
             val chromeBottom = bottomChromeInsets().asPaddingValues().calculateBottomPadding()
@@ -203,6 +210,8 @@ private fun SearchField(
     onValueChange: (String) -> Unit,
     onSearch: () -> Unit,
     onClear: () -> Unit,
+    focusRequester: FocusRequester,
+    onFieldAttached: () -> Unit,
     modifier: Modifier = Modifier,
 ) {
     val c = WatchdogTheme.colors
@@ -220,7 +229,11 @@ private fun SearchField(
         BasicTextField(
             value = value,
             onValueChange = onValueChange,
-            modifier = Modifier.weight(1f).semantics { contentDescription = SEARCH_HINT },
+            modifier = Modifier
+                .weight(1f)
+                .focusRequester(focusRequester)
+                .onGloballyPositioned { onFieldAttached() }
+                .semantics { contentDescription = SEARCH_HINT },
             textStyle = t.searchHint.copy(color = c.ink),
             keyboardOptions = KeyboardOptions(imeAction = ImeAction.Search),
             keyboardActions = KeyboardActions(onSearch = { onSearch() }),

@@ -88,7 +88,7 @@ class LiveIntelligenceRepository(private val ctx: LiveContext, private val diges
 
     /** The fallback: the week's top three reasons with their sources; the label says where it came from. */
     private suspend fun digestBrief(forBase: String, eligible: Boolean): Brief {
-        val week = runCatching { digest.thisWeek() }.getOrNull()
+        runCatching { digest.thisWeek() }
         val reasons = ctx.digest.top(digest.lastReasons, 3)
         val items = reasons.map { r ->
             val change = ctx.digest.change(r)
@@ -110,7 +110,7 @@ class LiveIntelligenceRepository(private val ctx: LiveContext, private val diges
             },
             items = items,
             followUps = DEFAULT_FOLLOW_UPS,
-            forLabel = "$forBase · $note" + (week?.let { "" } ?: ""),
+            forLabel = "$forBase · $note",
         )
     }
 

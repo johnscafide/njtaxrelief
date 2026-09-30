@@ -36,8 +36,8 @@ import androidx.compose.ui.text.TextStyle
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import com.watchdogindex.agent.core.model.CheckupSeason
+import com.watchdogindex.agent.core.math.TaxMath
 import com.watchdogindex.agent.core.model.PriceCheck
-import com.watchdogindex.agent.core.model.PriceCheckKind
 import com.watchdogindex.agent.core.model.Tint
 import com.watchdogindex.agent.core.model.ValueVerdict
 import com.watchdogindex.agent.core.model.VerdictKind
@@ -196,12 +196,8 @@ fun VerdictBox(verdict: ValueVerdict, modifier: Modifier = Modifier) {
 /** The scan price check as a verdict box: "in line" reads as good, high or low tax for the price as a warning. */
 @Composable
 fun VerdictBox(priceCheck: PriceCheck, modifier: Modifier = Modifier) {
-    val kind = when (priceCheck.kind) {
-        PriceCheckKind.InLine -> VerdictKind.Good
-        PriceCheckKind.LowTaxForPrice, PriceCheckKind.HighTaxForPrice -> VerdictKind.Warn
-        PriceCheckKind.Unknown -> VerdictKind.Neutral
-    }
-    VerdictBox(kind = kind, title = priceCheck.title, body = priceCheck.body, modifier = modifier)
+    // Tone comes from core so "Assessed high for this price" (good news for a buyer) is never coloured as a warning.
+    VerdictBox(kind = TaxMath.priceCheckTone(priceCheck), title = priceCheck.title, body = priceCheck.body, modifier = modifier)
 }
 
 /** Read box (`.readbox`): fill container, 16 dp radius, teal 22 dp icon and 13 sp ink2 text. */

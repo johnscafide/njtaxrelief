@@ -420,9 +420,19 @@ fun showsSoldDot(parcel: MapParcel, layer: MapLayer): Boolean =
  * The map composable behind [DesktopPlatformServices.FarmMap]. Drag pans (reported through
  * [FarmMapState.onMapMoved] when the drag ends), a tap selects the parcel under the pointer, and while
  * [FarmMapState.drawing] taps add vertices to the new area instead.
+ *
+ * [contentDescription] replaces the layer-derived description when the caller knows more, such as the farm's
+ * name (the design's semantics line: "Farm map of Birchwood Park with parcels colored by Watchdog Score").
+ * [parkLabel] names the decorative park block the way the mockup does ("Birchwood Park"). It is drawn text only
+ * and comes from no data, so it stays null unless the farm on screen is known to be the mockup's.
  */
 @Composable
-fun DesktopFarmMap(state: FarmMapState, modifier: Modifier = Modifier) {
+fun DesktopFarmMap(
+    state: FarmMapState,
+    modifier: Modifier = Modifier,
+    contentDescription: String? = null,
+    parkLabel: String? = null,
+) {
     val colors = WatchdogTheme.colors
     val type = WatchdogTheme.type
     val measurer = rememberTextMeasurer()
@@ -433,11 +443,22 @@ fun DesktopFarmMap(state: FarmMapState, modifier: Modifier = Modifier) {
     var pan by remember(state.center, state.zoom) { mutableStateOf(Offset.Zero) }
 
     val labelStyle = type.chip.copy(letterSpacing = 0.24.sp)
+    // The mockup's park label: 12 sp bold without the street labels' tracking.
+    val parkLabelStyle = type.chip
     val calloutTitle = type.supporting.copy(fontSize = 13.sp, fontWeight = FontWeight.ExtraBold, lineHeight = 17.sp)
     val calloutBody = type.caption.copy(fontWeight = FontWeight.SemiBold, lineHeight = 16.sp)
 
     val soldCount = state.parcels.count { it.soldInLast12Months }
-    val description = "Farm map with ${state.parcels.size} parcels colored by Watchdog Score, $soldCount sold in the last 12 months"
+    val permitCount = state.parcels.count { it.permitInLast90Days }
+    // Says what the layer shows, so a screen reader hears what the eye sees: the grey homes of the Sold and
+    // Permits layers are not "colored by Watchdog Score", and the gold dots only appear on Score and Sold.
+    val description = contentDescription ?: when (state.layer) {
+        MapLayer.Score -> "Farm map with parcels colored by Watchdog Score" +
+            if (soldCount > 0) ", $soldCount sold in the last 12 months" else ""
+        MapLayer.Residential -> "Farm map with homes colored by Watchdog Score"
+        MapLayer.SoldIn12Months -> "Farm map highlighting $soldCount homes sold in the last 12 months"
+        MapLayer.Permits -> "Farm map highlighting $permitCount homes with a permit in the last 90 days"
+    }
 
     // Pointer handlers and the draw pass must agree on the projection, so both build it from the same inputs;
     // [densityScale] is the px-per-dp of the scope that asks (PointerInputScope and DrawScope are both a Density).
@@ -452,7 +473,9 @@ fun DesktopFarmMap(state: FarmMapState, modifier: Modifier = Modifier) {
     Canvas(
         modifier = modifier
             .onSizeChanged { canvasSize = it }
-            .semantics { contentDescription = description }
+            // Both descriptions end on the same layout node (Canvas adds none of its own) and the outer modifier
+            // is applied last, so a description the Farm screen sets on the modifier it passes replaces this one.
+            .semantics { this.contentDescription = description }
             .pointerInput(state.parcels, state.drawing, state.onParcelTap, state.onDrawPoint) {
                 detectTapGestures { tap ->
                     val p = projectionAt(density)
@@ -479,7 +502,7 @@ fun DesktopFarmMap(state: FarmMapState, modifier: Modifier = Modifier) {
                 )
             },
     ) {
-        drawFarmMap(state, grid, projectionAt(density), colors, measurer, labelStyle, calloutTitle, calloutBody)
+        drawFarmMap(state, grid, projectionAt(density), colors, measurer, labelStyle, calloutTitle, calloutBody, parkLabel, parkLabelStyle)
     }
 }
 
@@ -492,11 +515,13 @@ private fun DrawScope.drawFarmMap(
     labelStyle: TextStyle,
     calloutTitle: TextStyle,
     calloutBody: TextStyle,
+    parkLabel: String?,
+    parkLabelStyle: TextStyle,
 ) {
     drawRect(colors.mapLand)
     val landStroke = 2.dp.toPx()
 
-    if (grid != null) drawStreetsAndSurroundings(grid, p, colors, landStroke)
+    if (grid != null) drawStreetsAndSurroundings(grid, p, colors, landStroke, parkLabel, measurer, parkLabelStyle)
 
     // Farm parcels from their real rings.
     val rings = state.parcels.map { parcel -> parcel.ring.map(p::toScreen) }
@@ -540,8 +565,16 @@ private fun DrawScope.drawFarmMap(
     }
 }
 
-/** Roads on the block grid, grey parcels outside the farm, and a park block east of it. */
-private fun DrawScope.drawStreetsAndSurroundings(grid: StreetGrid, p: MapProjection, colors: WatchdogColors, landStroke: Float) {
+/** Roads on the block grid, grey parcels outside the farm, and a park block east of it, named when [parkLabel] is given. */
+private fun DrawScope.drawStreetsAndSurroundings(
+    grid: StreetGrid,
+    p: MapProjection,
+    colors: WatchdogColors,
+    landStroke: Float,
+    parkLabel: String?,
+    measurer: TextMeasurer,
+    parkLabelStyle: TextStyle,
+) {
     val frame = grid.frame
     // Visible area in the local frame, padded by a block so partially visible blocks are drawn whole.
     val corners = listOf(Offset.Zero, Offset(size.width, 0f), Offset(size.width, size.height), Offset(0f, size.height))
@@ -581,6 +614,7 @@ private fun DrawScope.drawStreetsAndSurroundings(grid: StreetGrid, p: MapProject
 
     if (park != null) {
         drawLocalRoundRect(park, frame, p, colors.mapPark, 6.dp.toPx())
+        if (parkLabel != null) drawParkLabel(parkLabel, park, frame, p, colors, measurer, parkLabelStyle)
     }
 
     // Grey parcels in every block outside the farm.
@@ -632,6 +666,33 @@ private fun DrawScope.drawLocalRoundRect(r: Rect, frame: LocalFrame, p: MapProje
     val h = r.height * (up - centerScreen).getDistance()
     rotate(degrees = angle, pivot = centerScreen) {
         drawRoundRect(fill, topLeft = Offset(centerScreen.x - w / 2f, centerScreen.y - h / 2f), size = Size(w, h), cornerRadius = CornerRadius(radius, radius))
+    }
+}
+
+/**
+ * The park's name in the mint ink, centred in the block and turned a quarter further than the grid so it reads
+ * top to bottom along the block's long side, as the mockup's `rotate(90)` label does. Skipped when the block is
+ * too small for the text at this zoom rather than spilling onto the streets.
+ */
+private fun DrawScope.drawParkLabel(
+    text: String,
+    park: Rect,
+    frame: LocalFrame,
+    p: MapProjection,
+    colors: WatchdogColors,
+    measurer: TextMeasurer,
+    style: TextStyle,
+) {
+    val center = p.toScreen(frame.toLatLng(park.center))
+    val east = p.toScreen(frame.toLatLng(Offset(park.center.x + 1f, park.center.y))) - center
+    val pxPerMetre = east.getDistance()
+    val angle = atan2(east.y, east.x) * 180f / PI.toFloat()
+    val layout = measurer.measure(text = text, style = style)
+    val inset = 6.dp.toPx()
+    // After the extra quarter turn the text's length lies along the park's local height.
+    if (layout.size.width > park.height * pxPerMetre - 2 * inset || layout.size.height > park.width * pxPerMetre - 2 * inset) return
+    rotate(degrees = angle + 90f, pivot = center) {
+        drawText(layout, color = colors.mintInk, topLeft = Offset(center.x - layout.size.width / 2f, center.y - layout.size.height / 2f))
     }
 }
 

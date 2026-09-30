@@ -8,6 +8,7 @@ import androidx.compose.runtime.CompositionLocalProvider
 import androidx.compose.runtime.snapshots.Snapshot
 import androidx.compose.ui.ImageComposeScene
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.graphics.toArgb
 import androidx.compose.ui.graphics.toComposeImageBitmap
 import androidx.compose.ui.text.font.FontFamily
 import androidx.compose.ui.unit.Density
@@ -20,6 +21,7 @@ import androidx.lifecycle.ViewModelStoreOwner
 import androidx.lifecycle.compose.LocalLifecycleOwner
 import androidx.lifecycle.viewmodel.compose.LocalViewModelStoreOwner
 import com.watchdogindex.agent.app.SampleAppGraph
+import com.watchdogindex.agent.core.sample.SampleData
 import com.watchdogindex.agent.design.WatchdogDarkColors
 import com.watchdogindex.agent.design.WatchdogLightColors
 import com.watchdogindex.agent.ui.components.LocalBottomChromeInsets
@@ -48,9 +50,9 @@ import kotlin.system.exitProcess
  * (412 x 892 dp at 2.625 px/dp), in light and dark, and optionally compares the renders with the approved mockup
  * renders produced by tools/render-mockups.mjs.
  *
- *   ScreenshotsKt render  <outDir> [ids] [refDir]   writes <id>-<light|dark>.png, plus <id>-<theme>-full.png for
- *                                                   entries with fullHeightDp (the whole scrolling page)
- *   ScreenshotsKt compare <outDir> [ids] <refDir>   renders as above, then for each frame loads
+ *   ScreenshotsKt render  <outDir> [ids] [refDir]   writes <id>-<light|dark>.png, plus <id>-<theme>-full.png (the
+ *                                                   whole scrolling page) for the screens that have a full frame
+ *   ScreenshotsKt compare <outDir> [ids] [refDir]   renders as above, then for each frame loads
  *                                                   <refDir>/android-<id>-<theme>[-full].png, prints
  *                                                   "<id> <theme> similarity 93.1%" and a coarse text heat map of
  *                                                   where the render differs, writes compare-<id>-<theme>.jpg
@@ -59,12 +61,20 @@ import kotlin.system.exitProcess
  *
  * From Gradle (preview/):  ./gradlew renderScreens [-Pscreens=today,farm]        -> build/screens
  *                          ./gradlew compareScreens -Pref=reference [-Pscreens=…] -> build/compare
- * ids is a comma list of catalog ids; empty means every screen. refDir defaults to ./reference in compare mode.
+ * ids is a comma list of catalog ids; empty means every screen. refDir defaults to ./reference when that directory
+ * exists (in both modes); compare mode needs it.
+ *
+ * Full frames follow the reference folder, because the folder is the evidence: when
+ * <refDir>/android-<id>-<theme>-full.png exists, the full frame is rendered exactly as tall as that capture (its
+ * pixel height converted through its width, which is 412 dp, so 1x and 2x captures both work). A catalog
+ * entry's fullHeightDp is only the fallback when no reference folder is in use. A screen whose entry declares
+ * fullHeightDp but has no capture gets a note and the 892 dp frame only.
  *
  * A screen loads its data in a coroutine, so each frame is rendered repeatedly (50 ms apart, up to 3 s) until two
  * consecutive renders are pixel-identical, at least 600 ms have passed (the sample data answers after 150 ms per
- * call) and the scene has no pending invalidations. Similarity counts pixels
- * whose largest channel difference is at most 24 of 255, after scaling the reference to the render size.
+ * call) and the scene has no pending invalidations. Similarity counts pixels whose largest channel difference is
+ * at most 24 of 255, after scaling the reference uniformly to the render's width; rows below a shorter reference
+ * are left out of the count rather than stretched to fit.
  * Render mode always exits 0. Compare mode exits 1 only when a screen could not be rendered at all; visual
  * differences are reported, never fatal (the comparison is report-only until the baseline is stable).
  */
@@ -91,7 +101,7 @@ fun main(args: Array<String>) {
     val outDir = File(args.getOrNull(1)?.takeIf { it.isNotBlank() } ?: "build/screens").absoluteFile
     val ids = args.getOrNull(2).orEmpty().split(',').map { it.trim() }.filter { it.isNotEmpty() }
     val refDir = args.getOrNull(3)?.takeIf { it.isNotBlank() }?.let { File(it).absoluteFile }
-        ?: if (mode == "compare") File("reference").absoluteFile else null
+        ?: File("reference").absoluteFile.takeIf { it.isDirectory }
 
     val entries = selectEntries(ids)
     if (entries.isEmpty()) {
@@ -102,6 +112,9 @@ fun main(args: Array<String>) {
         System.err.println("Reference directory not found: $refDir (pass -Pref=<dir> or run from preview/ with ./reference present)")
         exitProcess(2)
     }
+    // Render mode without a folder falls back to the catalog's heights; a folder that is not a directory is ignored.
+    val references = refDir?.takeIf { it.isDirectory }
+    if (references != null) println("Frame heights follow the reference renders in ${references.path}")
     outDir.mkdirs()
 
     val fontFamily = DesktopFonts.plusJakartaSans()
@@ -109,7 +122,7 @@ fun main(args: Array<String>) {
     for (entry in entries) {
         for (dark in listOf(false, true)) {
             val theme = if (dark) "dark" else "light"
-            val heights = listOfNotNull(ScreenCatalog.HEIGHT_DP, entry.fullHeightDp?.takeIf { it > ScreenCatalog.HEIGHT_DP })
+            val heights = listOfNotNull(ScreenCatalog.HEIGHT_DP, fullFrameHeightDp(entry, theme, references))
             for (heightDp in heights) {
                 val full = heightDp != ScreenCatalog.HEIGHT_DP
                 val name = "${entry.id}-$theme" + if (full) "-full" else ""
@@ -119,7 +132,7 @@ fun main(args: Array<String>) {
                 } catch (t: Throwable) {
                     System.err.println("$name FAILED to render: $t")
                     t.printStackTrace()
-                    results += FrameResult(entry, theme, full, null, null)
+                    results += FrameResult(entry, theme, full, heightDp, null, null)
                     continue
                 }
                 File(outDir, "$name.png").writeBytes(frame.png)
@@ -127,19 +140,22 @@ fun main(args: Array<String>) {
                 println("$name rendered ${frame.width}x${frame.height} in $took ms" + if (frame.settled) "" else " (did not settle within ${SETTLE_MILLIS} ms)")
 
                 var similarity: Double? = null
-                if (mode == "compare" && refDir != null) {
-                    val refFile = File(refDir, "android-$name.png")
+                if (mode == "compare" && references != null) {
+                    val refFile = File(references, "android-$name.png")
                     if (!refFile.isFile) {
                         println("${entry.id} $theme${if (full) " full" else ""} no reference at ${refFile.path}")
                     } else {
                         val comparison = ScreenComparer.compare(frame, refFile)
                         similarity = comparison.similarity
                         println("${entry.id} $theme${if (full) " full" else ""} similarity ${"%.1f".format(Locale.ROOT, comparison.similarity)}%")
+                        if (comparison.comparedHeight < frame.height) {
+                            println("    reference covers ${comparison.comparedHeight} of ${frame.height} rows; the rest is not counted")
+                        }
                         comparison.heatMap.forEach { println("    $it") }
                         ScreenComparer.writeComposite(comparison, File(outDir, "compare-$name.jpg"))
                     }
                 }
-                results += FrameResult(entry, theme, full, frame, similarity)
+                results += FrameResult(entry, theme, full, heightDp, frame, similarity)
             }
         }
     }
@@ -158,20 +174,72 @@ private fun selectEntries(ids: List<String>): List<CatalogEntry> {
     return ids.mapNotNull { known[it] }
 }
 
-private class FrameResult(val entry: CatalogEntry, val theme: String, val full: Boolean, val frame: RenderedFrame?, val similarity: Double?)
+/**
+ * The height of [entry]'s full frame in dp, or null when there is none. The reference capture decides when a
+ * reference folder is in use: android-<id>-<theme>-full.png rendered at (pixel height x 412 / pixel width) dp,
+ * so the comparison is one to one instead of stretching the capture onto a guessed height. Without a folder the
+ * catalog's fullHeightDp applies.
+ */
+private fun fullFrameHeightDp(entry: CatalogEntry, theme: String, references: File?): Int? {
+    val declared = entry.fullHeightDp?.takeIf { it > ScreenCatalog.HEIGHT_DP }
+    if (references == null) return declared
+    val file = File(references, "android-${entry.id}-$theme-full.png")
+    if (!file.isFile) {
+        if (declared != null) {
+            println(
+                "${entry.id} $theme: the catalog declares fullHeightDp=$declared but ${references.path} has no ${file.name}; " +
+                    "only the ${ScreenCatalog.HEIGHT_DP} dp frame is rendered (drop fullHeightDp from the catalog entry when the " +
+                    "mockup does not scroll, or re-run tools/render-mockups.mjs)",
+            )
+        }
+        return null
+    }
+    val (width, height) = imageSize(file)
+    val heightDp = (height.toDouble() * ScreenCatalog.WIDTH_DP / width).roundToInt()
+    if (heightDp <= ScreenCatalog.HEIGHT_DP) {
+        println("${entry.id} $theme: ${file.name} is ${width}x$height, not taller than the ${ScreenCatalog.HEIGHT_DP} dp frame; ignored")
+        return null
+    }
+    return heightDp
+}
+
+/** Width and height of an image file from its header, without decoding the pixels. */
+private fun imageSize(file: File): Pair<Int, Int> {
+    val stream = ImageIO.createImageInputStream(file) ?: error("Cannot open $file")
+    return stream.use { input ->
+        val readers = ImageIO.getImageReaders(input)
+        if (!readers.hasNext()) error("Not an image: $file")
+        val reader = readers.next()
+        try {
+            reader.input = input
+            reader.getWidth(0) to reader.getHeight(0)
+        } finally {
+            reader.dispose()
+        }
+    }
+}
+
+private class FrameResult(
+    val entry: CatalogEntry,
+    val theme: String,
+    val full: Boolean,
+    val heightDp: Int,
+    val frame: RenderedFrame?,
+    val similarity: Double?,
+)
 
 private fun printSummary(results: List<FrameResult>) {
     println()
-    println("Screen          Theme  Frame        Similarity")
-    println("--------------  -----  -----------  ----------")
+    println("Screen          Theme  Frame         Similarity")
+    println("--------------  -----  ------------  ----------")
     for (r in results) {
-        val frameLabel = if (r.full) "full ${r.entry.fullHeightDp} dp" else "${ScreenCatalog.HEIGHT_DP} dp"
+        val frameLabel = if (r.full) "full ${r.heightDp} dp" else "${r.heightDp} dp"
         val value = when {
             r.frame == null -> "render failed"
             r.similarity == null -> "no reference"
             else -> "%.1f%%".format(Locale.ROOT, r.similarity)
         }
-        println("%-14s  %-5s  %-11s  %s".format(Locale.ROOT, r.entry.id, r.theme, frameLabel, value))
+        println("%-14s  %-5s  %-12s  %s".format(Locale.ROOT, r.entry.id, r.theme, frameLabel, value))
     }
     val measured = results.mapNotNull { it.similarity }
     if (measured.isNotEmpty()) {
@@ -190,6 +258,8 @@ class RenderedFrame(
     val pixels: IntArray,
     val png: ByteArray,
     val settled: Boolean,
+    /** The theme's page colour behind the screen, as ARGB, used to pad a shorter reference. */
+    val pageArgb: Int,
 )
 
 /** Owns the ViewModels and a resumed lifecycle for one headless scene, since ImageComposeScene provides neither. */
@@ -217,8 +287,10 @@ object ScreenRenderer {
         val density = ScreenCatalog.DENSITY
         val width = (ScreenCatalog.WIDTH_DP * density).roundToInt()
         val height = (heightDp * density).roundToInt()
-        // A new graph per frame: nothing an earlier screen toggled leaks into the next render.
-        val graph = SampleAppGraph(DesktopPlatformServices(), fontFamily)
+        // A new graph per frame: nothing an earlier screen toggled leaks into the next render. The harness renders
+        // the sample data set, whose farm is the mockup's Birchwood Park, so the stylised map gets the mockup's
+        // decorative park label (the interactive preview leaves it off).
+        val graph = SampleAppGraph(DesktopPlatformServices(parkLabel = SampleData.birchwoodFarm.name), fontFamily)
         val owner = HarnessOwner()
         // The theme's page colour behind the screen, as the Android window background would be: screens paint
         // their own Scaffold, so this only shows through where a screen leaves nothing, and it keeps the
@@ -260,7 +332,17 @@ object ScreenRenderer {
                 pixels = readPixels(image, width, height)
             }
             val png = image.encodeToData(EncodedImageFormat.PNG)?.bytes ?: error("Skia could not encode the render as PNG")
-            return RenderedFrame(entry.id, if (dark) "dark" else "light", heightDp != ScreenCatalog.HEIGHT_DP, width, height, pixels, png, settled)
+            return RenderedFrame(
+                id = entry.id,
+                theme = if (dark) "dark" else "light",
+                full = heightDp != ScreenCatalog.HEIGHT_DP,
+                width = width,
+                height = height,
+                pixels = pixels,
+                png = png,
+                settled = settled,
+                pageArgb = page.toArgb(),
+            )
         } finally {
             scene.close()
             owner.close()
@@ -277,23 +359,28 @@ object ScreenRenderer {
 /** The outcome of comparing one render with its reference. */
 class Comparison(
     val frame: RenderedFrame,
+    /** The reference at the render's size: scaled uniformly to its width, page colour below [comparedHeight]. */
     val reference: BufferedImage,
-    /** Percentage of pixels within [CHANNEL_TOLERANCE] on every channel. */
+    /** Percentage of compared pixels within [CHANNEL_TOLERANCE] on every channel. */
     val similarity: Double,
-    /** Per-pixel largest channel difference, 0..255. */
+    /** Per-pixel largest channel difference, 0..255; zero in the rows that were not compared. */
     val difference: IntArray,
+    /** Rows 0 until this were compared; below it the reference had no pixels because it is shorter than the render. */
+    val comparedHeight: Int,
     val heatMap: List<String>,
 )
 
 object ScreenComparer {
     fun compare(frame: RenderedFrame, referenceFile: File): Comparison {
         val loaded = ImageIO.read(referenceFile) ?: error("Not an image: $referenceFile")
-        val reference = fitTo(loaded, frame.width, frame.height)
+        val fitted = fitToWidth(loaded, frame.width, frame.height, frame.pageArgb)
+        val comparedHeight = fitted.coveredHeight
         val refPixels = IntArray(frame.width * frame.height)
-        reference.getRGB(0, 0, frame.width, frame.height, refPixels, 0, frame.width)
+        fitted.image.getRGB(0, 0, frame.width, frame.height, refPixels, 0, frame.width)
         val difference = IntArray(refPixels.size)
+        val compared = frame.width * comparedHeight
         var similar = 0
-        for (i in refPixels.indices) {
+        for (i in 0 until compared) {
             val a = refPixels[i]
             val b = frame.pixels[i]
             val d = maxOf(
@@ -304,28 +391,40 @@ object ScreenComparer {
             difference[i] = d
             if (d <= CHANNEL_TOLERANCE) similar++
         }
-        val similarity = similar * 100.0 / refPixels.size
-        return Comparison(frame, reference, similarity, difference, heatMap(difference, frame.width, frame.height))
+        val similarity = if (compared == 0) 0.0 else similar * 100.0 / compared
+        return Comparison(frame, fitted.image, similarity, difference, comparedHeight, heatMap(difference, frame.width, frame.height, comparedHeight))
     }
 
-    /** Bilinear resample when the reference was captured at another scale (1x or 2x versus the 2.625x render). */
-    private fun fitTo(image: BufferedImage, width: Int, height: Int): BufferedImage {
-        if (image.width == width && image.height == height && image.type == BufferedImage.TYPE_INT_RGB) return image
+    /** A reference resampled to the render's width, and how many rows of the render it covers. */
+    private class Fitted(val image: BufferedImage, val coveredHeight: Int)
+
+    /**
+     * Resamples the reference to the render's width keeping its aspect ratio (bilinear; references are 1x or 2x
+     * captures of the 2.625x render). Scaling both axes independently would stretch a 1323 px full-page capture
+     * onto whatever height the frame was rendered at and make every score meaningless, so the rows a shorter
+     * reference does not reach are filled with [pageArgb] and reported as uncovered; a taller reference is cut
+     * at the render's bottom edge.
+     */
+    private fun fitToWidth(image: BufferedImage, width: Int, height: Int, pageArgb: Int): Fitted {
+        val scaledHeight = max(1, (image.height.toDouble() * width / image.width).roundToInt())
         val out = BufferedImage(width, height, BufferedImage.TYPE_INT_RGB)
         val g = out.createGraphics()
+        g.color = java.awt.Color(pageArgb)
+        g.fillRect(0, 0, width, height)
         g.setRenderingHint(RenderingHints.KEY_INTERPOLATION, RenderingHints.VALUE_INTERPOLATION_BILINEAR)
         g.setRenderingHint(RenderingHints.KEY_RENDERING, RenderingHints.VALUE_RENDER_QUALITY)
-        g.drawImage(image, 0, 0, width, height, null)
+        g.drawImage(image, 0, 0, width, scaledHeight, null)
         g.dispose()
-        return out
+        return Fitted(out, min(height, scaledHeight))
     }
 
     /**
      * A coarse picture of where the render differs, for the job log: [HEAT_COLUMNS] cells across, square cells
      * unless the frame is so tall that more than [HEAT_MAX_ROWS] rows would be needed. Each cell shows the share
-     * of its pixels beyond tolerance: ' ' under 2%, '.' under 10%, ':' under 30%, '+' under 60%, '#' otherwise.
+     * of its compared pixels beyond tolerance: ' ' under 2%, '.' under 10%, ':' under 30%, '+' under 60%, '#'
+     * otherwise. Rows at or below [comparedHeight] were not compared and stay blank.
      */
-    fun heatMap(difference: IntArray, width: Int, height: Int): List<String> {
+    fun heatMap(difference: IntArray, width: Int, height: Int, comparedHeight: Int = height): List<String> {
         val cellW = max(1, width / HEAT_COLUMNS)
         val cols = (width + cellW - 1) / cellW
         val cellH = max(cellW, (height + HEAT_MAX_ROWS - 1) / HEAT_MAX_ROWS)
@@ -337,7 +436,7 @@ object ScreenComparer {
             for (c in 0 until cols) {
                 var bad = 0
                 var total = 0
-                val yEnd = min(height, (r + 1) * cellH)
+                val yEnd = min(min(height, comparedHeight), (r + 1) * cellH)
                 val xEnd = min(width, (c + 1) * cellW)
                 for (y in r * cellH until yEnd) {
                     val row = y * width
@@ -376,9 +475,13 @@ object ScreenComparer {
         g.dispose()
         out.setRGB(w + gap, 0, w, h, comparison.frame.pixels, 0, w)
         val heat = IntArray(w * h)
+        val compared = w * comparison.comparedHeight
         for (i in heat.indices) {
             val d = comparison.difference[i]
-            if (d > CHANNEL_TOLERANCE) {
+            if (i >= compared) {
+                // Not compared: the reference ends above this row. A flat mid grey, so it reads as "no data".
+                heat[i] = (0xFF shl 24) or (0x9E shl 16) or (0x9E shl 8) or 0x9E
+            } else if (d > CHANNEL_TOLERANCE) {
                 // Red, stronger the larger the difference.
                 val strength = 140 + (115 * min(255, d) / 255)
                 heat[i] = (0xFF shl 24) or (strength shl 16) or (0x20 shl 8) or 0x20

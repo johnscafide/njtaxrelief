@@ -214,10 +214,11 @@ private fun WelcomeHero() {
 private fun StepRow(number: Int, step: WelcomeStep, separator: Boolean) {
     val c = WatchdogTheme.colors
     val t = WatchdogTheme.type
+    // The CSS border-top adds 1 dp to every separated row; the separator here is drawn inside, so add it back.
     Row(
         modifier = Modifier
             .fillMaxWidth()
-            .then(if (separator) Modifier.topSeparator(c.separator) else Modifier)
+            .then(if (separator) Modifier.topSeparator(c.separator).padding(top = 1.dp) else Modifier)
             .padding(vertical = 10.dp),
         horizontalArrangement = Arrangement.spacedBy(12.dp),
         verticalAlignment = Alignment.Top,

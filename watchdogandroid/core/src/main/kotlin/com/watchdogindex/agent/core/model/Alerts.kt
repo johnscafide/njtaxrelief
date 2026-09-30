@@ -7,6 +7,9 @@ enum class AlertChannel(val id: String, val title: String, val description: Stri
     AppealDeadlines("appeal_deadlines", "Appeal deadlines", "30 and 7 days before"),
     MondayBrief("monday_brief", "Monday brief", "Your top ten changes, Mondays at 8:00 AM");
 
+    /** The channel description as shown to the system and in Settings: always ends with the privacy note. */
+    val fullDescription: String get() = "$description. $NOT_A_SELLER_PREDICTION"
+
     companion object {
         /** Carried into every channel description, as the privacy rules require. */
         const val NOT_A_SELLER_PREDICTION = "Property changes are not seller predictions."

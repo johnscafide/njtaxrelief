@@ -15,7 +15,6 @@ import kotlinx.datetime.DateTimeUnit
 import kotlinx.datetime.Instant
 import kotlinx.datetime.minus
 import kotlinx.datetime.toLocalDateTime
-import kotlin.math.abs
 import kotlin.math.roundToInt
 
 /**
@@ -185,6 +184,5 @@ class LiveFarmRepository(private val ctx: LiveContext) : FarmRepository {
             )
         }
 
-        internal fun close(a: Double, b: Double) = abs(a - b) < 1e-9
     }
 }
