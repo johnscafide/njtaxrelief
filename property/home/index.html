@@ -22,8 +22,8 @@ html,body{margin:0;min-height:100%;background:#f5f7fb;color:#10213f;font-family:
 .pl-spin{width:28px;height:28px;border:3px solid #dbe5f2;border-top-color:#1f6fff;border-radius:50%;animation:hmspin .8s linear infinite}
 @keyframes hmspin{to{transform:rotate(360deg)}}.hm-app{display:none}.gate{display:none}
 </style>
-<link rel="stylesheet" href="/property/css/home.css?v=20260922-single11">
-<link rel="stylesheet" href="/property/css/home/home-board.css?v=20260927b">
+<link rel="stylesheet" href="/property/css/home.css?v=20260929a">
+<link rel="stylesheet" href="/property/css/home/home-board.css?v=20260929-claim1">
   <meta name="twitter:card" content="summary_large_image">
   <meta property="og:image" content="https://www.watchdogindex.com/watchdog-social-share-20260913-v3.jpg">
   <meta property="og:image:secure_url" content="https://www.watchdogindex.com/watchdog-social-share-20260913-v3.jpg">
@@ -99,6 +99,12 @@ html,body{margin:0;min-height:100%;background:#f5f7fb;color:#10213f;font-family:
             <button class="hm27-action" type="button" onclick="window.print()"><i class="fas fa-print"></i> Print</button>
           </div>
         </div>
+      </div>
+
+      <div class="hm-claim-status" id="hm-claim-status" role="status" aria-live="polite" hidden>
+        <p data-claim-state="verified" hidden><i class="fas fa-circle-check" aria-hidden="true"></i><span><b>This home is verified as yours.</b> Thanks for confirming. Everything below is yours to follow.</span></p>
+        <p data-claim-state="pending" hidden><i class="fas fa-envelope-open-text" aria-hidden="true"></i><span><b>This home is saved as yours.</b> We mail a code on a postcard to the property. When it arrives, enter the code to finish verifying.</span><button class="hm-claim-action" type="button" data-claim-verify>Enter my code</button></p>
+        <p data-claim-state="unavailable" hidden><i class="fas fa-circle-info" aria-hidden="true"></i><span><b>We couldn't open that home just now.</b> Please try again in a moment.</span><button class="hm-claim-action" type="button" onclick="location.reload()">Try again</button></p>
       </div>
 
       <div id="hm-body"></div>
@@ -208,7 +214,7 @@ window.__homeBootWatch=setTimeout(function(){
 window.addEventListener('error',function(e){console.error('[Property Home boot]',e.error||e.message);});
 </script>
 <script src="/property/js/dashboard/home/home-tools.js?v=20260927a"></script>
-<script src="/property/js/home.js?v=20260927-score1" onload="clearTimeout(window.__homeBootWatch)" onerror="document.getElementById('hm-loading').innerHTML='<div><b>Property Home application failed to load.</b><span>The Home JavaScript asset could not be downloaded.</span></div>'"></script>
+<script src="/property/js/home.js?v=20260929-claim1" onload="clearTimeout(window.__homeBootWatch)" onerror="document.getElementById('hm-loading').innerHTML='<div><b>Property Home application failed to load.</b><span>The Home JavaScript asset could not be downloaded.</span></div>'"></script>
 <script src="/property/js/dashboard/home/home-board.js?v=20260927a" defer></script>
 </body>
 </html>

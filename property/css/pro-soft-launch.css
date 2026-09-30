@@ -16,13 +16,13 @@
   background:#151f2c;
   color:#eef4f8;
 }
-.pro-soft-launch-stamp{display:inline-flex;align-items:center;gap:8px;padding:7px 10px;border:1px solid rgba(128,221,209,.36);border-radius:999px;color:#9ce4dc;font:800 10px/1 "Plus Jakarta Sans",sans-serif;letter-spacing:.1em;text-transform:uppercase;white-space:nowrap}
+.pro-soft-launch-stamp{display:inline-flex;align-items:center;gap:8px;padding:7px 10px;border:1px solid rgba(128,221,209,.36);border-radius:999px;color:#9ce4dc;font:800 12px/1 "Plus Jakarta Sans",sans-serif;letter-spacing:.1em;text-transform:uppercase;white-space:nowrap}
 .pro-soft-launch-stamp i{width:7px;height:7px;border-radius:50%;background:#69cdbf;box-shadow:0 0 0 4px rgba(105,205,191,.12)}
 .pro-soft-launch-bar strong{font:800 14px/1.3 "Plus Jakarta Sans",sans-serif}
 .pro-soft-launch-bar small{color:#9eacba;font:650 12px/1.35 "Source Sans 3",sans-serif}
 
 .pro-cadence [data-cadence="lifetime"]{position:relative}
-.pro-cadence [data-cadence="lifetime"] span{display:inline-block;margin-inline-start:5px;padding:3px 6px;border-radius:999px;background:#ead79a;color:#493706;font-size:10px;font-weight:900;letter-spacing:.05em;text-transform:uppercase}
+.pro-cadence [data-cadence="lifetime"] span{display:inline-block;margin-inline-start:5px;padding:3px 6px;border-radius:999px;background:#ead79a;color:#493706;font-size:12px;font-weight:900;letter-spacing:.05em;text-transform:uppercase}
 .pro-cadence [data-cadence="lifetime"].active{background:#17365d;color:#fff;box-shadow:inset 0 0 0 1px rgba(128,221,209,.2)}
 .pro-cadence [data-cadence="lifetime"].active span{background:#f0d981;color:#3d2d04}
 
@@ -60,7 +60,7 @@
 .pro-price-reveal.is-lifetime-mode .pro-intel-plan b{color:#087f80}
 
 .pro-price-reveal.is-lifetime-mode .pro-price-number{text-align:right;color:#101820}
-.pro-price-reveal.is-lifetime-mode .pro-price-number .price-eyebrow{display:inline-flex;align-items:center;width:max-content;max-width:100%;padding:6px 9px;border:1px solid rgba(18,34,52,.18);border-radius:999px;background:rgba(255,255,255,.6);color:#657388;font:800 9px/1 "Plus Jakarta Sans",sans-serif;letter-spacing:.07em;text-transform:uppercase}
+.pro-price-reveal.is-lifetime-mode .pro-price-number .price-eyebrow{display:inline-flex;align-items:center;width:max-content;max-width:100%;padding:6px 9px;border:1px solid rgba(18,34,52,.18);border-radius:999px;background:rgba(255,255,255,.6);color:#657388;font:800 12px/1 "Plus Jakarta Sans",sans-serif;letter-spacing:.07em;text-transform:uppercase}
 .pro-price-reveal.is-lifetime-mode .pro-price-number>div{justify-content:flex-end;white-space:nowrap}
 .pro-price-reveal.is-lifetime-mode .pro-price-number sup,
 .pro-price-reveal.is-lifetime-mode .pro-price-number strong{color:#101820}
@@ -95,7 +95,7 @@
   .pro-price-reveal.is-lifetime-mode .pro-price-band{padding:26px 20px;border-radius:20px}
   .pro-price-reveal.is-lifetime-mode .pro-price-band::before{position:static;display:inline-flex;width:max-content;margin-bottom:-4px;grid-row:1}
   .pro-price-reveal.is-lifetime-mode .pro-price-number strong{font-size:60px}
-  .pro-price-reveal.is-lifetime-mode .pro-price-number .price-eyebrow{font-size:8px}
+  .pro-price-reveal.is-lifetime-mode .pro-price-number .price-eyebrow{font-size:12px}
   .pro-price-reveal.is-lifetime-mode .pro-price-cta{white-space:normal;text-align:center}
   .pro-price-reveal.is-lifetime-mode .pro-lifetime-terms{align-items:flex-start;justify-content:flex-start}
 }

@@ -125,6 +125,8 @@
     });
   }
 
+  var ZIP_PATTERN = /^[0-9]{5}(?:-[0-9]{4})?$/;
+
   function open(options) {
     options = options || {};
     var client = options.client;
@@ -134,11 +136,17 @@
     }
     var address = options.address || 'this property';
     var town = options.town || '';
-    var zip = options.zip || '';
+    var zip = String(options.zip || '').trim();
+    // The postcard goes to the property itself, so it needs the property's own
+    // ZIP. Parcel records only hold the owner's mailing ZIP, which is never used,
+    // so when no property ZIP is known the person types it here.
+    var needsZip = !ZIP_PATTERN.test(zip);
     options.modal('Verify you own this home',
       '<p>Owner names are not available reliably enough in the public property data to verify this automatically.</p>' +
       '<p><b>Request a six character postcard code for ' + text(address) + '.</b> The request goes to our mailing desk, and the postcard is mailed manually to the property address.</p>' +
-      '<div class="pl-form" style="grid-template-columns:1fr;"><button id="njptr-verify-request" type="button">Request postcard code</button></div>' +
+      '<div class="pl-form" style="grid-template-columns:1fr;">' +
+        (needsZip ? '<label for="njptr-verify-zip">ZIP code for this property</label><input id="njptr-verify-zip" type="text" inputmode="numeric" placeholder="Five digit ZIP code" maxlength="10" autocomplete="postal-code">' : '') +
+        '<button id="njptr-verify-request" type="button">Request postcard code</button></div>' +
       '<div class="auth-or"><span>already have a code</span></div>' +
       '<div class="pl-form" style="grid-template-columns:1fr;"><input id="njptr-verify-code" type="text" placeholder="Six character code" maxlength="8" autocomplete="one-time-code" style="text-transform:uppercase;letter-spacing:.15em;"><button id="njptr-verify-redeem" type="button">Verify ownership</button></div>' +
       '<button id="njptr-verify-later" class="plm-rbtn" type="button" style="margin-top:12px;">Not now</button>' +
@@ -148,8 +156,18 @@
     var redeemButton = document.getElementById('njptr-verify-redeem');
     var laterButton = document.getElementById('njptr-verify-later');
     var codeInput = document.getElementById('njptr-verify-code');
+    var zipInput = document.getElementById('njptr-verify-zip');
     if (laterButton) laterButton.addEventListener('click', function () { if (typeof options.close === 'function') options.close(); });
     if (requestButton) requestButton.addEventListener('click', function () {
+      if (zipInput) {
+        var typedZip = zipInput.value.trim();
+        if (!ZIP_PATTERN.test(typedZip)) {
+          if (typeof options.toast === 'function') options.toast('Enter the five digit ZIP code for this property');
+          zipInput.focus();
+          return;
+        }
+        zip = typedZip;
+      }
       requestButton.disabled = true; requestButton.textContent = 'Creating secure code...';
       client.functions.invoke('request-verify-code', { body: { pams_pin: options.pin, address_line1: address, city: town, postal_code: zip } }).then(function (result) {
         var data = (result && result.data) || {};

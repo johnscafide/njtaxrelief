@@ -1401,7 +1401,7 @@
   }
 
   window.hmSwitch = function (pin) {
-    history.replaceState({}, '', '/property/home?pin=' + encodeURIComponent(pin));
+    history.replaceState({}, '', location.pathname + '?pin=' + encodeURIComponent(pin));
     current = rows.filter(function (r) { return r.pams_pin === pin; })[0] || rows[0];
     municipalTaxEvidence = null;
     municipalTaxEvidencePin = current && current.pams_pin || '';

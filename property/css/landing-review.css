@@ -112,7 +112,7 @@ body.wd-consumer-mode .landing-faq-item summary:after{content:"+";position:absol
 body.wd-consumer-mode .landing-faq-item[open] summary:after{content:"−";transform:rotate(180deg)}
 body.wd-consumer-mode .landing-faq-item p{margin:0;padding:0 22px 22px;color:#5f6d75;font-size:16px;line-height:1.65}
 body.wd-consumer-mode .landing-faq-more{margin:24px 0 0;color:#5f6d75;font-size:16px;line-height:1.5}
-body.wd-consumer-mode .landing-faq-more a{color:#087f82!important;font-weight:800;text-decoration:none}
+body.wd-consumer-mode .landing-faq-more a{display:inline-flex;align-items:center;min-height:44px;color:#087f82!important;font-weight:800;text-decoration:none}
 body.wd-consumer-mode .landing-faq-more a:hover{text-decoration:underline;text-underline-offset:4px}
 
 body.wd-consumer-mode .section:has(.gt-banner){padding:12px 0 54px!important}

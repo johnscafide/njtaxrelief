@@ -70,7 +70,7 @@
 .pl-input::placeholder { color: #8a93a6; }
 .pl-geo {
   position: static; transform: none; flex-shrink: 0;
-  width: 42px; height: 42px; display: flex; align-items: center; justify-content: center;
+  width: 44px; height: 44px; display: flex; align-items: center; justify-content: center;
   border: none; border-radius: 50%; background: transparent;
   color: #5a6070; cursor: pointer; font-size: 17px; transition: background .15s, color .15s;
 }

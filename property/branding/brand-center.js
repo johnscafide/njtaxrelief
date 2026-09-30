@@ -11,7 +11,7 @@
   }
 
   function ensureIntelligenceCss(){
-    var href='/property/css/watchdog-intelligence-brand.css';
+    var href='/property/css/watchdog-intelligence-brand.css?v=20260929a';
     if(document.querySelector('link[href="'+href+'"]')) return;
     var link=document.createElement('link');
     link.rel='stylesheet';

@@ -288,4 +288,9 @@ for (const word of ['Agent Desk', 'Clients', 'Farm', 'Marketing', 'Research', 'D
 }
 assert.doesNotMatch(doc, /\]\(\/property\/|https:\/\/www\.watchdogindex\.com\/property\//, 'IA doc links use clean public URLs');
 
+// Every tool in the Agent Desk Marketing area is open to the Agent plan (Pro and above keep it too).
+for (const file of ['property/marketing-studio/index.html', 'property/marketing-studio/postcards/index.html', 'property/newsletter-studio/index.html', 'property/report-builder/index.html', 'property/report-studio/index.html', 'property/marketing-plan/index.html', 'property/growth/index.html', 'property/growth/run.html']) {
+  assert.match(read(file), /data-access-require="agent"/, `${file} must be open to the Agent plan`);
+}
+
 console.log('Navigation IA contract passed (4 personas, 5 agent areas, ' + (crumbPages.length + barFiles.length) + ' agent tool headers).');

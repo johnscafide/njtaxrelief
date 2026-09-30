@@ -38,8 +38,8 @@ await transform('property/partials/sidemenu.html', [
 await transform('property/pro/index.html', [
   {
     label: 'soft-launch stylesheet',
-    from: '  <link rel="stylesheet" href="/property/css/pro-buying-path.css">',
-    to: '  <link rel="stylesheet" href="/property/css/pro-buying-path.css">\n  <link rel="stylesheet" href="/property/css/pro-soft-launch.css?v=20260911c">'
+    from: '  <link rel="stylesheet" href="/property/css/pro-buying-path.css?v=20260929a">',
+    to: '  <link rel="stylesheet" href="/property/css/pro-buying-path.css?v=20260929a">\n  <link rel="stylesheet" href="/property/css/pro-soft-launch.css?v=20260929a">'
   },
   {
     label: 'hero billing note',

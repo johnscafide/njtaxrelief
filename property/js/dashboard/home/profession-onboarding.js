@@ -38,6 +38,8 @@ async function save(){
 }
 async function boot(){
  var db=sb();if(!db)return;
+ // A "Claim this home" visit opens ownership verification; ask about profession on a later visit instead of stacking dialogs.
+ if(window.WatchdogHomeClaim&&window.WatchdogHomeClaim.request())return;
  try{var auth=await db.auth.getUser();user=auth&&auth.data&&auth.data.user;if(!user||prompted())return;var pref=await db.from('professional_preferences').select('profession,onboarding_complete').eq('user_id',user.id).maybeSingle();if(!pref.error&&pref.data&&pref.data.onboarding_complete===true&&String(pref.data.profession||'').trim())return;setTimeout(open,500);}catch(_e){}
 }
 window.WatchdogProfessionOnboarding={open:open,close:close};

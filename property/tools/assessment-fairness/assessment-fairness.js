@@ -1,6 +1,6 @@
 (() => {
   'use strict';
-  const DATA_URL = '../../data/cod/cod-history.json';
+  const DATA_URL = '/property/data/cod/cod-history.json';
   const form = document.querySelector('#municipalityForm');
   const select = document.querySelector('#municipalitySelect');
   const report = document.querySelector('#report');
