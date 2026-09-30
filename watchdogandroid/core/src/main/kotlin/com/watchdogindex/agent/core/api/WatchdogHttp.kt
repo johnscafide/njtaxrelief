@@ -236,7 +236,7 @@ object WatchdogHttp {
             if (e is WatchdogException) throw e
             val name = e::class.simpleName ?: ""
             if (name.contains("Timeout") || name.contains("Connect") || name.contains("Socket")) throw NetworkException(e)
-            throw WatchdogException("Request failed: ${e.message}", e, "Watchdog couldn't complete that request. Please try again.")
+            throw WatchdogException("Request failed: ${e.message}", e, "Watchdog couldn’t complete that request. Please try again.")
         }
     }
 
@@ -264,7 +264,7 @@ object WatchdogHttp {
         if (status == 402) return PlanRequiredException(feature)
         if (status == 403) {
             if (lowerError.contains("origin") || lowerCode == "origin_not_allowed") {
-                return HttpFailureException(status, code, serverError, "Watchdog couldn't complete that request. Please try again.")
+                return HttpFailureException(status, code, serverError, "Watchdog couldn’t complete that request. Please try again.")
             }
             // Only a plan code, or a sentence about the plan, is a plan gate; any other 403 keeps the server's own sentence.
             if (lowerCode in PLAN_CODES || (plain != null && PLAN_TEXT.containsMatchIn(plain))) return planException(feature, plain)
@@ -288,7 +288,7 @@ object WatchdogHttp {
         val fallback = when {
             status == 404 -> "Watchdog could not find that."
             status >= 500 -> "Watchdog could not reach the property intelligence service. Please try again."
-            else -> "Watchdog couldn't complete that request. Please try again."
+            else -> "Watchdog couldn’t complete that request. Please try again."
         }
         return HttpFailureException(status, code, serverError, plain ?: KNOWN_CODE_MESSAGES[lowerCode] ?: KNOWN_CODE_MESSAGES[lowerError] ?: fallback)
     }
@@ -342,13 +342,13 @@ object WatchdogHttp {
     private val RAW_DB_ERROR = Regex("row.level|row-level|\\brls\\b|postgres|postgrest|pgrst\\d|relation |violates|constraint|permission denied|\\brpc\\b|sqlstate", RegexOption.IGNORE_CASE)
     private val KNOWN_CODE_MESSAGES = mapOf(
         "service_unavailable" to "Watchdog could not reach the property intelligence service. Please try again.",
-        "invalid_json" to "Watchdog couldn't complete that request. Please try again.",
-        "unknown_action" to "Watchdog couldn't complete that request. Please try again.",
-        "method_not_allowed" to "Watchdog couldn't complete that request. Please try again.",
-        "registration_failed" to "Push registration didn't go through. Try again later.",
-        "token_required" to "Push registration didn't go through. Try again later.",
-        "installation_id_required" to "Push registration didn't go through. Try again later.",
-        "platform_invalid" to "Push registration didn't go through. Try again later.",
+        "invalid_json" to "Watchdog couldn’t complete that request. Please try again.",
+        "unknown_action" to "Watchdog couldn’t complete that request. Please try again.",
+        "method_not_allowed" to "Watchdog couldn’t complete that request. Please try again.",
+        "registration_failed" to "Push registration didn’t go through. Try again later.",
+        "token_required" to "Push registration didn’t go through. Try again later.",
+        "installation_id_required" to "Push registration didn’t go through. Try again later.",
+        "platform_invalid" to "Push registration didn’t go through. Try again later.",
         "contacts_required" to "Add at least one address to import.",
         "location_not_found" to "That address could not be placed on the map.",
         "no_billing_account" to "No billing account exists yet.",

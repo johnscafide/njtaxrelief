@@ -121,6 +121,25 @@ class WatchdogHttpTest {
     }
 
     @Test
+    fun `friendly fallback messages use typographic apostrophes`() {
+        val messages = listOf(
+            WatchdogHttp.failure(400, buildJsonObject { put("error", "registration_failed") }).userMessage,
+            WatchdogHttp.failure(400, buildJsonObject { put("error", "token_required") }).userMessage,
+            WatchdogHttp.failure(400, buildJsonObject { put("error", "invalid_json") }).userMessage,
+            WatchdogHttp.failure(400, null).userMessage,
+            WatchdogHttp.failure(403, buildJsonObject { put("error", "origin_not_allowed") }).userMessage,
+            WatchdogHttp.failure(404, null).userMessage,
+            WatchdogHttp.failure(500, null).userMessage,
+            NetworkException().userMessage,
+        )
+        assertEquals("Push registration didn’t go through. Try again later.", messages[0])
+        assertEquals("Watchdog couldn’t complete that request. Please try again.", messages[2])
+        assertEquals("Watchdog couldn’t complete that request. Please try again.", messages[3])
+        assertEquals("Watchdog couldn’t complete that request. Please try again.", messages[4])
+        for (message in messages) assertFalse(message.contains('\''), "straight apostrophe in: $message")
+    }
+
+    @Test
     fun `a 403 that is not a plan gate keeps the server's sentence`() = runBlocking {
         val owned = WatchdogHttp.failure(403, buildJsonObject { put("error", "This report belongs to another account.") })
         assertIs<HttpFailureException>(owned)

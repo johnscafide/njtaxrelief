@@ -19,7 +19,9 @@ import kotlinx.serialization.json.put
  *   the only per-property switches the producers read. "Client home changes" fans out to the first three and
  *   "Appeal deadlines" to the fourth, over the agent's saved pins, with the web's upsert shape.
  * - `push-device-register` (PROPOSED edge function, not deployed yet): `register | heartbeat | update | unregister`
- *   with `installation_id`, `token`, `platform`, quiet hours and the two enable flags. Errors use the
+ *   with `installation_id`, `token`, `platform`, quiet hours and the two enable flags. The function patches only
+ *   the preference fields a body names (`preferencePatch`), so [heartbeat] sends none of them: the launch-time
+ *   heartbeat can never write the app's defaults over what the agent last saved. Errors use the
  *   `agent-contact-intelligence` vocabulary (`sign_in_required`, `token_required`, ...).
  *
  * There is no server field for per-channel switches, quiet hours or "also send it as a notification"; those are
@@ -139,6 +141,21 @@ class AlertsApi(private val rest: SupabaseRest, private val edge: EdgeFunctions)
     /** `register` on first contact, `heartbeat` afterwards (also when FCM rotates the token). Returns the token-free registration. */
     suspend fun register(registration: PushRegistration, heartbeat: Boolean): JsonObject =
         edge.post("push-device-register", registrationBody(if (heartbeat) "heartbeat" else "register", registration), feature = "notifications")
+
+    /**
+     * `heartbeat` with the installation, its current token and platform only: no flags, quiet hours or timezone,
+     * so the row keeps whatever the agent last saved through [updateRegistration].
+     */
+    suspend fun heartbeat(installationId: String, token: String, platform: String, appVersion: String? = null): JsonObject =
+        edge.post("push-device-register", heartbeatBody(installationId, token, platform, appVersion), feature = "notifications")
+
+    fun heartbeatBody(installationId: String, token: String, platform: String, appVersion: String? = null): JsonObject = buildJsonObject {
+        put("action", "heartbeat")
+        put("installation_id", installationId)
+        put("token", token)
+        put("platform", platform)
+        if (appVersion != null) put("app_version", appVersion)
+    }
 
     suspend fun updateRegistration(registration: PushRegistration): JsonObject =
         edge.post("push-device-register", registrationBody("update", registration), feature = "notifications")

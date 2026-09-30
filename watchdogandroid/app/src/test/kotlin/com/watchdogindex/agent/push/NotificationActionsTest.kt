@@ -62,7 +62,12 @@ class NotificationActionsTest {
 
     @Test
     fun `push-sender's action words map onto the app's kinds`() {
-        // actionsFor() in supabase/functions/push-sender/index.ts: a property event, a digest, a test push.
+        // actionsFor() in supabase/functions/push-sender/index.ts: a property event, a deed in the farm, a digest, a test push.
+        assertEquals(listOf(NotificationActionKind.Open, NotificationActionKind.Later), NotificationActions.parse("open,later").map { it.kind })
+        assertEquals(listOf(NotificationActionKind.ViewFarm, NotificationActionKind.Later), NotificationActions.parse("view_farm,later").map { it.kind })
+        assertEquals(listOf(NotificationActionKind.OpenBrief), NotificationActions.parse("open_brief").map { it.kind })
+        assertEquals(listOf(NotificationActionKind.Open), NotificationActions.parse("open").map { it.kind })
+        // The words its earlier shape sent still map, so an older deployment keeps working.
         assertEquals(listOf(NotificationActionKind.Open, NotificationActionKind.Later), NotificationActions.parse("open_property,mark_read").map { it.kind })
         assertEquals(listOf(NotificationActionKind.Open), NotificationActions.parse("open_desk").map { it.kind })
         assertEquals(listOf(NotificationActionKind.Open), NotificationActions.parse("open_app").map { it.kind })

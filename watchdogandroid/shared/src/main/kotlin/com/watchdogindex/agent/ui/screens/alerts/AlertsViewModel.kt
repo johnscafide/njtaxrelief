@@ -45,29 +45,19 @@ sealed interface AlertsUiState {
     data class Error(val userMessage: String) : AlertsUiState
 }
 
+/**
+ * The "notifications are off" banner follows [PlatformServices.notificationsEnabled], a read that never prompts:
+ * opening Alerts (or "Try again") asks the system nothing. The only prompt is the banner's own button
+ * ([requestPermission]), a deliberate tap.
+ */
 class AlertsViewModel(
     private val repos: Repositories,
     private val platform: PlatformServices,
-    /**
-     * Answers "may Watchdog show notifications right now?" without asking the system. [PlatformServices] has
-     * no such query yet, so the screen passes nothing and the first load of a visit falls back on
-     * [PlatformServices.requestNotificationPermission], which returns at once when the permission is held and
-     * is otherwise the app's only prompt. Once the platform can answer without asking, the screen passes that
-     * answer here and the only prompt left is the one the banner's button runs.
-     */
-    private val notificationsEnabled: (suspend () -> Boolean)? = null,
 ) : ViewModel() {
     private val _state = MutableStateFlow<AlertsUiState>(AlertsUiState.Loading)
     val state: StateFlow<AlertsUiState> = _state.asStateFlow()
 
     private var loadJob: Job? = null
-
-    /**
-     * Whether alerts may be shown, settled once per visit: "Try again" reloads the list without asking again.
-     * A platform failure (no activity to ask from, a dialog that could not open) counts as not granted, so the
-     * banner shows and its button, or the system settings, can put it right.
-     */
-    private var notificationsAllowed: Boolean? = null
 
     init {
         load()
@@ -101,13 +91,10 @@ class AlertsViewModel(
             _state.value = AlertsUiState.Ready(
                 notifications = notifications,
                 preferences = repos.alerts.preferences.value,
-                permissionGranted = notificationsAllowed ?: true,
+                permissionGranted = notificationsEnabled(),
                 resolvingPhones = callPins.isNotEmpty(),
             )
-            // The list is up; nothing below may take it down. The permission answer first (immediate once it
-            // is known), then the numbers behind "Call client".
-            val allowed = settleNotificationsAllowed()
-            _state.update { s -> if (s is AlertsUiState.Ready) s.copy(permissionGranted = allowed) else s }
+            // The list is up; nothing below may take it down: the numbers behind "Call client" follow.
             if (callPins.isNotEmpty()) {
                 val phones = clientPhones(callPins)
                 _state.update { s -> if (s is AlertsUiState.Ready) s.copy(clientPhones = phones, resolvingPhones = false) else s }
@@ -115,14 +102,16 @@ class AlertsViewModel(
         }
     }
 
-    /** The first load's answer, kept for the visit; see [notificationsAllowed] and [notificationsEnabled]. */
-    private suspend fun settleNotificationsAllowed(): Boolean {
-        notificationsAllowed?.let { return it }
-        val query = notificationsEnabled
-        val allowed = guarded(fallback = false, call = query ?: platform::requestNotificationPermission)
-        notificationsAllowed = allowed
-        return allowed
-    }
+    /**
+     * Whether the system shows Watchdog's notifications right now, read without prompting. A platform failure
+     * counts as not enabled, so the banner shows and its button, or the system settings, can put it right.
+     */
+    private fun notificationsEnabled(): Boolean =
+        try {
+            platform.notificationsEnabled()
+        } catch (e: Exception) {
+            false
+        }
 
     /**
      * A platform call guarded against platform exceptions (a missing activity, a system dialog that could not be
@@ -137,11 +126,14 @@ class AlertsViewModel(
             fallback
         }
 
-    /** The banner button: asks the system; a refusal (or a platform failure) keeps the banner and points at the system settings. */
+    /**
+     * The banner button, the app's only notification prompt: asks the system, then re-reads the switch, since a
+     * granted permission with the app's notifications turned off in the system settings is still "off". A refusal
+     * (or a platform failure) keeps the banner and points at the system settings.
+     */
     fun requestPermission() {
         viewModelScope.launch {
-            val granted = guarded(fallback = false, call = platform::requestNotificationPermission)
-            notificationsAllowed = granted
+            val granted = guarded(fallback = false, call = platform::requestNotificationPermission) && notificationsEnabled()
             _state.update { s ->
                 if (s !is AlertsUiState.Ready) {
                     s

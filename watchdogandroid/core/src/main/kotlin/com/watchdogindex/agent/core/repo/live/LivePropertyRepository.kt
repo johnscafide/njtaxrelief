@@ -6,6 +6,7 @@ import com.watchdogindex.agent.core.api.LiveKeys
 import com.watchdogindex.agent.core.api.PropertyApi
 import com.watchdogindex.agent.core.api.StoredLocalAlerts
 import com.watchdogindex.agent.core.api.readJson
+import com.watchdogindex.agent.core.api.bestEffort
 import com.watchdogindex.agent.core.format.Format
 import com.watchdogindex.agent.core.model.AlertChannel
 import com.watchdogindex.agent.core.model.PamsPin
@@ -80,10 +81,10 @@ class LivePropertyRepository(private val ctx: LiveContext) : PropertyRepository 
     override suspend fun detail(pin: PamsPin): PropertyDetail {
         val response = fetch(pin)
         val row = response.property
-        val saved = runCatching { isSaved(pin) }.getOrDefault(false)
-        val watched = saved && runCatching { hasActivePreference(pin) }.getOrDefault(false)
+        val saved = bestEffort { isSaved(pin) } ?: false
+        val watched = saved && (bestEffort { hasActivePreference(pin) } ?: false)
         val image = response.photoUrl ?: if (row.lat != null && row.lon != null) {
-            runCatching { ctx.property.imagery(row.lat, row.lon)?.aerial?.imageUrl }.getOrNull()
+            bestEffort { ctx.property.imagery(row.lat, row.lon)?.aerial?.imageUrl }
         } else null
         return ctx.mapper.detail(response, isSaved = saved, isWatched = watched, imageUrl = image)
     }
@@ -141,7 +142,7 @@ class LivePropertyRepository(private val ctx: LiveContext) : PropertyRepository 
 
     override suspend fun setWatched(pin: PamsPin, watched: Boolean) {
         val userId = ctx.userId()
-        if (watched) runCatching { saveProperty(pin) }
+        if (watched) bestEffort { saveProperty(pin) }
         val local = ctx.store.readJson<StoredLocalAlerts>(LiveKeys.LOCAL_ALERTS) ?: StoredLocalAlerts()
         val channels = local.channelMap()
         val homeChanges = channels[AlertChannel.ClientHomeChanges] ?: true
@@ -151,7 +152,7 @@ class LivePropertyRepository(private val ctx: LiveContext) : PropertyRepository 
 
     /** `https://www.watchdogindex.com/checkup?pin=<pin>&agent=<slug>`, the link the agent sends under their own name. */
     override suspend fun checkupLink(pin: PamsPin): String {
-        val slug = runCatching { ctx.account().vanitySlug }.getOrNull()
+        val slug = bestEffort { ctx.account().vanitySlug }
         return "${ctx.config.siteOrigin}/checkup?pin=${java.net.URLEncoder.encode(pin, "UTF-8")}" + (slug?.let { "&agent=${java.net.URLEncoder.encode(it, "UTF-8")}" } ?: "")
     }
 

@@ -10,19 +10,21 @@ import com.watchdogindex.agent.navigation.IntentRoutes
  * contract is unit-tested on the JVM: PushPayloadTest decodes exactly what the server's sender emits.
  *
  * Two shapes are accepted:
- *  - The app's own contract (Docs push proposal, section 8), a data-only message: `title`, `body`, `channel` (an
- *    [AlertChannel] id), `actions` (open_brief, call_client, view_farm, send_checkups, later, open), `pin` or
- *    `pams_pin`, `route` (a word IntentRoutes.fromExtras understands), `phone`, `event_id`.
- *  - What `supabase/functions/push-sender/index.ts` (`fcmMessage`) sends today: the text in a `notification` block
- *    and a data map of `route` ("pulse"), `pin`, `event_id`, `event_type`, `severity`, `channel` (its own names:
- *    property_alerts, property_alerts_action, digest, system), `actions` (open_property,mark_read / open_desk /
- *    open_app), `collapse_key` and `kind`. Its channel names are not device channels, so the channel comes from
- *    `event_type` through the mapping the in-app Alerts list already uses ([LiveAlertsRepository.channelFor]), and
- *    its action words map onto the app's kinds in [NotificationActions.kindOf].
+ *  - The contract `supabase/functions/push-sender/index.ts` (`fcmMessage`) emits, which is the app's own (Docs push
+ *    proposal, section 8): a data-only message with `title`, `body`, `channel` (an [AlertChannel] id), `actions`
+ *    (open_brief, call_client, view_farm, send_checkups, later, open), `pin` or `pams_pin`, `route` (a word
+ *    IntentRoutes.fromExtras understands: `pulse` for a property event, `brief` for a digest, `alerts` for a test
+ *    push), `phone`, `event_id`, plus `kind`, `event_type`, `severity`, `collapse_key` and `outbox_id`.
+ *  - What push-sender sent before that contract landed, still decoded so an older deployment keeps working: the
+ *    text in a `notification` block and a data map with its own channel names (property_alerts,
+ *    property_alerts_action, digest, system) and action words (open_property,mark_read / open_desk / open_app).
+ *    Those channel names are not device channels, so the channel comes from `event_type` through the mapping the
+ *    in-app Alerts list already uses ([LiveAlertsRepository.channelFor]), and the action words map onto the app's
+ *    kinds in [NotificationActions.kindOf].
  *
  * A message with a `notification` block that arrives while the app is in the background is rendered by the system
  * and never reaches WatchdogMessagingService; its tap delivers the data map as launcher-intent extras, which
- * MainActivity reads under [KEY_ROUTE], [KEY_PIN] and [KEY_PAMS_PIN].
+ * MainActivity reads under [KEY_ROUTE], [KEY_PIN] and [KEY_PAMS_PIN]. The data-only contract never takes that path.
  */
 data class PushPayload(
     val title: String,
@@ -52,7 +54,7 @@ data class PushPayload(
         /** Unknown or missing channels post as client home changes, which is also the manifest's default channel. */
         val DEFAULT_CHANNEL: AlertChannel = AlertChannel.ClientHomeChanges
 
-        /** push-sender's `channel` for a digest row (`channelFor` in index.ts); on the device that is the Monday brief. */
+        /** The `channel` push-sender's earlier shape sent for a digest row; on the device that is the Monday brief. */
         const val SERVER_CHANNEL_DIGEST = "digest"
 
         /**

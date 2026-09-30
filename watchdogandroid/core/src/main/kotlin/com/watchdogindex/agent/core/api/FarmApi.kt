@@ -21,8 +21,9 @@ import kotlinx.serialization.json.put
  *   `sales_code`). Its `owner_name`, `mailing_*` and `zip` fields are never declared in the DTO, so they are
  *   dropped when the JSON is parsed. No function returns parcel outlines.
  * - Scores come from the public RPC `get_public_realtime_watchdog_scores` (100 pins per call).
- * - `farm-workspace` adds `last_deed_year` per pin and the CRM match counts; `owner_name`, `owner_mails_elsewhere`
- *   and `postal_city` are not read.
+ * - `farm-workspace` adds `last_deed_year` per pin and the CRM match counts. It is asked with `owners: false`, so
+ *   `owner_name`, `owner_mails_elsewhere` and `postal_city` never leave the server for the app (the function honours
+ *   `body.owners !== false` and audit-logs the call as a non-owner read); the parsed [Workspace] has no owner field.
  */
 class FarmApi(private val rest: SupabaseRest, private val edge: EdgeFunctions) {
 
@@ -100,6 +101,7 @@ class FarmApi(private val rest: SupabaseRest, private val edge: EdgeFunctions) {
         val lon: Double? = null,
     )
 
+    /** What the app keeps from `farm-workspace`: deed years by pin and the CRM counts. Never an owner field. */
     data class Workspace(val lastDeedYear: Map<String, Int>, val crmMatched: Int, val crmPendingReview: Int)
 
     suspend fun lists(): List<ListRow> {
@@ -168,7 +170,10 @@ class FarmApi(private val rest: SupabaseRest, private val edge: EdgeFunctions) {
         return out
     }
 
-    /** Deed years and CRM match counts for up to 250 pins per call. Owner fields are not read. */
+    /**
+     * Deed years and CRM match counts for up to 250 pins per call. The request says `owners: false`: owner data is
+     * refused at the request, not dropped after it arrived, so it never crosses the wire into the app process.
+     */
     suspend fun workspace(pins: List<String>): Workspace {
         val years = HashMap<String, Int>()
         var matched = 0
@@ -176,7 +181,7 @@ class FarmApi(private val rest: SupabaseRest, private val edge: EdgeFunctions) {
         for (chunk in pins.distinct().chunked(250)) {
             val body = buildJsonObject {
                 put("pams_pins", buildJsonArray { chunk.forEach { add(JsonPrimitive(it)) } })
-                put("owners", true)
+                put("owners", false)
                 put("crm", true)
             }
             val response = edge.post("farm-workspace", body, feature = "farm")

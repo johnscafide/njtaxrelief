@@ -100,3 +100,49 @@ Same as the browser extension, now in one shared function (`resolveAddress` in `
 `watchdogandroid/core/src/test/kotlin/com/watchdogindex/agent/core/api/PropertyApiTest.kt` decodes the exact success body the route's contract test prints (`WATCHDOG_PROPERTY_SAMPLE=1 npm run test:watchdog-property-json`, checked in as `core/src/test/resources/watchdog-property-sample.json`) through `PropertyApi.Response` and `PropertyMapper`, and drives `PropertyApi` through Ktor's `MockEngine` for the 401 -> refresh -> retry path, the 404 with `alternatives`, the 429 with `Retry-After` (also from a body that is not JSON), the 503, and a non-JSON 502 page. When the route's shape changes, regenerate the fixture and re-run `cd watchdogandroid/core && ./gradlew test`.
 
 Nothing about plan gates, RLS, the billing gate or the Supabase schema changed. `usage_events.metric_key` is free text (no check constraint), so the new key needs no migration.
+
+## Push: what `push-sender` sends to the app
+
+Source only. `supabase/functions/push-sender/index.ts` follows the Git-first policy in
+`supabase/functions/DEPLOYMENT-POLICY.md`; nothing is deployed from the app branch, and the deployed function (if
+any) keeps its older shape until someone deploys this source by hand. `fcmMessage()` now emits what
+`app/push/PushPayload.kt` decodes:
+
+- **Data-only for Android** (`row.platform` other than `ios`): no `notification` block, `android.priority: "HIGH"`,
+  `android.collapse_key` per event. The app posts the notification itself (`WatchdogMessagingService`), so
+  `onMessageReceived` runs in the background too, the channel is one of the app's, the action buttons appear and
+  the per-channel switches in Settings apply. Every push is a user-visible alert, which is what FCM reserves high
+  priority for; a normal-priority data message can wait out Doze for hours (an 8:00 AM Monday brief at noon), and
+  quiet hours are already enforced before a row is claimed. An `ios` registration keeps a `notification` block and
+  the APNs headers, because APNs shows nothing for a data-only message (there is no iOS app yet).
+- **Data map** (all strings, empty values dropped): `title`, `body`, `kind`, `route`, `pin`, `event_id`,
+  `event_type`, `severity`, `channel`, `actions`, `collapse_key`, `outbox_id`.
+- **`channel`** is the app's `AlertChannel` id (`core/model/Alerts.kt`, one system channel each in
+  `app/push/NotificationChannels.kt`): digest rows `monday_brief`; `deed_change` `farm_sales_deeds`;
+  `municipal_change` `town_rates_revaluations`; `appeal_deadline` `appeal_deadlines`; every other event type, and a
+  test push, `client_home_changes`. This is the same `event_type` rule the in-app Alerts list uses
+  (`LiveAlertsRepository.channelFor`).
+- **`actions`** are words `NotificationActions.kindOf` understands: digest `open_brief`; test `open`;
+  `deed_change` `view_farm,later`; other property events `open,later`. Never `call_client`: the pipeline carries no
+  phone number, by design.
+- **`route`**: property events keep the outbox row's `pulse` (the home when a `pin` is present, else the Alerts
+  list); digest rows `brief` (the Monday brief on the Intelligence screen, where the "Open brief" button also lands;
+  a row may name another app route word such as `today`, but `pulse` is not honoured for a digest); test rows
+  `alerts`.
+- **Tolerance**: the app still decodes the previous shape (a `notification` block; channel names
+  `property_alerts`, `property_alerts_action`, `digest`, `system`; action words `open_property`, `mark_read`,
+  `open_desk`, `open_app`; route `pulse` for everything), so an already-deployed sender keeps working.
+
+Tests: `npm run test:push-notifications` (`property/tests/push-notifications-contract.mjs`) checks the source
+invariants and cross-checks the emitted channel ids against `core/model/Alerts.kt`, the action words against
+`app/push/NotificationActions.kt` and the route words against `app/navigation/IntentRoutes.kt`; `PushPayloadTest` in
+`app/src/test` decodes a reproduction of `fcmMessage()` output (current and previous shape) the way the phone does.
+
+## Contracts the app relies on in existing functions (no server change; recorded so they stay true)
+
+- `farm-workspace` (`supabase/functions/farm-workspace/index.ts`): the app's `FarmApi.workspace()` sends `owners: false` and reads only `properties[pin].last_deed_year` and `crm.matched` / `crm.pending_review`. The function honours `body.owners !== false` and records `owners: false` in its `integration_audit_log` row, so owner names, `owner_mails_elsewhere` and `postal_city` never leave the server for the app. `FarmApiTest` asserts the request body; if the function ever stopped honouring the flag, the app's privacy contract would depend on dropped fields instead of a refused request.
+- `push-device-register` (proposed, source only, `supabase/functions/push-device-register/index.ts`): `preferencePatch(body)` patches only the fields a body names. The app depends on that: its launch-time `heartbeat` sends `action`, `installation_id`, `token`, `platform` (and `app_version` when known) and none of `alerts_enabled`, `digest_enabled`, `quiet_hours_start`, `quiet_hours_end` or `timezone`, so a cold start can never write the app defaults over the switches the agent last saved. Only `register` (first contact, built from the switches stored on the device) and `update` (after an explicit change in Settings) carry the preference fields. If the function ever defaulted absent fields on `heartbeat`, every launch would reset the agent's settings; `AlertsApiTest` and `LiveAlertsRepositoryTest` pin the app's side of this.
+
+## Proposed producer change (source only, not deployed from here): the bill year on `tax_change` events
+
+The Today mockup titles a tax change "2026 bill up $612". The app (`DigestApi.taxBillTitle`) reads the bill year from the event payload, `payload.tax_year` (also accepted: `bill_year`, `year`; integers between 1990 and 2100), and falls back to "Tax bill up $612" when no year is present. Today's producer, `watchdog-automation` (`watchdog.saved-property-sync`), writes `payload: { change_id, source_key }` on `property_update_events` rows, so live titles read "Tax bill up $612" until a producer adds the year. Adding `tax_year` (the tax-list year the changed `last_year_tax` value belongs to) is additive: `payload` is `jsonb`, no migration is needed, unknown keys are ignored by every other reader, and per `supabase/functions/DEPLOYMENT-POLICY.md` the change is made in source here and deployed through the normal path, never from the app work.

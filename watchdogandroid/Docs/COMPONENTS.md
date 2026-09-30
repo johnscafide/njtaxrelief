@@ -26,12 +26,12 @@ Conventions
   to), and list rows start 1 dp in from the container edge (text at x 31, separators from x 67).
 - Bottom chrome (`WatchdogNavigationBar`, `BottomActionArea`, `IntelligenceComposer`, `SheetSurface`,
   `WdModalSheet`) pads itself with `bottomChromeInsets()`: `LocalBottomChromeInsets` when provided, otherwise
-  `WindowInsets.navigationBars`. The desktop preview should provide
-  `LocalBottomChromeInsets provides WindowInsets(bottom = 24.dp)` at its root to reproduce the mockups'
+  `WindowInsets.navigationBars`. The desktop preview (`PreviewApp`) and the screenshot harness (`Screenshots`)
+  provide `LocalBottomChromeInsets provides WindowInsets(bottom = 24.dp)` at their root to reproduce the mockups'
   24 dp gesture allowance (nav bar 104 dp, action area 146 dp, composer 98 dp, sheets padded 30 dp).
 - The top inset is `statusBarAllowance()` (alias `statusBarTopPadding()`): the real status bar on device,
-  the mockups' 40 dp wherever `LocalBottomChromeInsets` is provided (preview, screenshot harness). Screens
-  should call it rather than carry a private copy.
+  the mockups' 40 dp wherever `LocalBottomChromeInsets` is provided (preview, screenshot harness). Every
+  screen calls it; none carries a private copy.
 - One-line numbers the mockup sets on a `line-height: 1` box (the 46 sp weekly count, the 38 sp dial
   number and its 12 sp caption, the 34 sp true cost total) are pinned to that box with the internal
   `LineBox(lineHeight) { … }`, because the desktop harness keeps the font's natural height for a line height
@@ -125,13 +125,13 @@ Conventions
 | `@Composable fun WdIconButton(icon: ImageVector, contentDescription: String, onClick: () -> Unit, modifier: Modifier = Modifier, tint: Color = WatchdogTheme.colors.ink, enabled: Boolean = true)` | `.mib`: 48 dp round target, 24 dp icon. |
 | `@Composable fun WdRoundTonalIconButton(icon: ImageVector, contentDescription: String, onClick: () -> Unit, modifier: Modifier = Modifier, enabled: Boolean = true)` | `.btn.tint.rnd`: 48 dp tonal circle, 20 dp icon. |
 | `@Composable fun WdSwitch(checked: Boolean, onCheckedChange: ((Boolean) -> Unit)?, modifier: Modifier = Modifier, enabled: Boolean = true)` | `.sw-m`: Material 3 switch, primary track + onPrimary thumb with 18 dp check when on; `mHigh` track with a `muted` border and 16 dp thumb when off. Pass `null` when the row toggles. |
-| `@Composable fun WdRadioButton(selected: Boolean, onClick: (() -> Unit)?, modifier: Modifier = Modifier, enabled: Boolean = true)` | Material 3 radio button: primary when selected, `muted` ring when not. Pass `null` when the row is the selectable (picker sheets, theme rows). |
+| `@Composable fun WdRadioButton(selected: Boolean, onClick: (() -> Unit)?, modifier: Modifier = Modifier, enabled: Boolean = true)` | Material 3 radio button: primary when selected, `muted` ring when not. Pass `null` when the row is the selectable (picker sheets, theme rows). At the certification pass, Clients' sort sheet, Farm's picker sheet and Settings' theme rows still draw Material's `RadioButton` with `RadioButtonDefaults.colors(unselectedColor = mOutline)` rather than this component. |
 
 ## Fields.kt
 
 | Signature | Draws |
 |---|---|
-| `@Composable fun WdOutlinedField(label: String, value: String, onValueChange: (String) -> Unit, modifier: Modifier = Modifier, trailingIcon: ImageVector? = WdIcons.Cancel, trailingDescription: String = "Clear", onClear: (() -> Unit)? = null, placeholder: String? = null, enabled: Boolean = true, keyboardOptions: KeyboardOptions = KeyboardOptions.Default, keyboardActions: KeyboardActions = KeyboardActions.Default, autofill: WdAutofill? = null)` | `.mfield`: 2 dp ink border, 8 dp radius, floating 12 sp label, 15 sp single-line value, trailing 22 dp icon in a 48 dp target; the field is announced as `label`. A long value is ellipsised while the field is not focused (`.mfield .val`: nowrap + ellipsis) and scrolls once it is. `keyboardOptions` / `keyboardActions` set the keyboard the value needs and what its action key runs (the sweep table below lists each field's); `autofill` (`WdAutofill.EmailAddress` / `OneTimeCode` / `PostalAddress`, a plain enum so screens never opt in to the experimental autofill API) lets the platform offer a saved value while the field is focused, a no-op on the desktop. |
+| `@Composable fun WdOutlinedField(label: String, value: String, onValueChange: (String) -> Unit, modifier: Modifier = Modifier, trailingIcon: ImageVector? = WdIcons.Cancel, trailingDescription: String = "Clear", onClear: (() -> Unit)? = null, placeholder: String? = null, enabled: Boolean = true, keyboardOptions: KeyboardOptions = KeyboardOptions.Default, keyboardActions: KeyboardActions = KeyboardActions.Default, autofill: WdAutofill? = null)` | `.mfield`: 2 dp ink border, 8 dp radius, floating 12 sp label, 15 sp single-line value, trailing 22 dp icon in a 48 dp target; the field is announced as `label`. A long value is ellipsised while the field is not focused (`.mfield .val`: nowrap + ellipsis) and scrolls once it is. `keyboardOptions` / `keyboardActions` set the keyboard the value needs and what its action key runs (Welcome's email: `KeyboardType.Email` + `ImeAction.Send`, `autofill = WdAutofill.EmailAddress`; Welcome's code: `NumberPassword` + `Done`, `WdAutofill.OneTimeCode`; Scan's listing link: `Uri` + `Go`; Marketing's address: `Text` + `Search`, with no autofill hint on purpose; Farm's name: word capitalisation + `Done`; Search's field takes the `Search` action through `SearchTopBar`); `autofill` (`WdAutofill.EmailAddress` / `OneTimeCode` / `PostalAddress`, a plain enum so screens never opt in to the experimental autofill API) lets the platform offer a saved value while the field is focused, a no-op on the desktop. |
 | `enum class WdAutofill { EmailAddress, OneTimeCode, PostalAddress }` | The autofill hints a field can carry, mapped internally to the platform's types. |
 | `@Composable fun WdOutlinedTextArea(label: String, value: String, onValueChange: (String) -> Unit, modifier: Modifier = Modifier, placeholder: String? = null, enabled: Boolean = true, minLines: Int = 4, minHeight: Dp = 132.dp)` | The multi-line `.mfield` (paste box): same border, radius and floating label, a wrapping 15 sp 500 value from `minLines` lines up, min 132 dp, padding 18 / 20 / 12; announced as `label`. |
 | `@Composable fun SupportingText(text: String, modifier: Modifier = Modifier)` | `.msup`: 12 sp muted, padding 6 32 0. |
@@ -182,7 +182,7 @@ Conventions
 | `@Composable fun IntelligenceCard(modifier: Modifier = Modifier, contentPadding: PaddingValues = PaddingValues(horizontal = 18.dp, vertical = 16.dp), content: @Composable ColumnScope.() -> Unit)` | `.intel`: `Modifier.intelligenceSurface()` (rotating spectrum border, white in both themes), content inset by the 2 dp border before the padding, `IntelligenceInk`, soft fixed shadow. |
 | `@Composable fun MicButton(onClick: (() -> Unit)?, modifier: Modifier = Modifier, size: Dp = 44.dp, contentDescription: String = "Ask Watchdog Intelligence Voice")` | `.mic` / `.mic.lg`: fixed-navy circle, filled mic 24 dp, on a 48 dp overflow click node when interactive; decorative when `onClick` is null. |
 | `@Composable fun ListenPill(label: String, onClick: () -> Unit, modifier: Modifier = Modifier)` | `.play`: 44 dp tonal pill, filled play 22 dp, 14 sp 700, on a 48 dp overflow click node. |
-| `@Composable fun IntelligenceTeaserCard(text: String, onAsk: () -> Unit, onReadBrief: () -> Unit, modifier: Modifier = Modifier, askLabel: String = "Ask by voice", briefLabel: String = "Read the brief")` | Today's teaser: product name (spectrum word), 16 sp 600 text, mic + "Ask by voice", "Read the brief >". |
+| `@Composable fun IntelligenceTeaserCard(text: String, onAsk: () -> Unit, onReadBrief: () -> Unit, modifier: Modifier = Modifier, askLabel: String = "Ask by voice", briefLabel: String = "Read the brief", askContentDescription: String = "Open Watchdog Intelligence")` | Today's teaser: product name (spectrum word), 16 sp 600 text, mic + "Ask by voice", "Read the brief >". The mic row is one button announced as `askContentDescription`, which describes what `onAsk` does rather than repeating the visible label: the default fits Today, where the tap opens the Intelligence screen; a screen that starts Watchdog Intelligence Voice from the tap passes e.g. `"Ask by voice, Watchdog Intelligence Voice"`. Visuals do not change with it. |
 | `@Composable fun BriefCard(brief: Brief, onListen: () -> Unit, onVoice: () -> Unit, modifier: Modifier = Modifier, voiceCaption: String = "Ask a follow-up out loud, hands-free.")` | The Monday brief: kicker/time + listen pill, 21 sp heading, numbered items with 24 dp navy circles and 12 sp / 16.8 sources, then the Voice row: 6 dp, the separator, and 26 dp below it the 56 dp mic and "Watchdog Intelligence Voice" top-aligned (the approved render's geometry, measured on the 2x references: the sheet's "padding-top 14" plus the grid's 12 dp gap), the card closing 16 dp under the mic. |
 | `@Composable fun FollowUpRow(icon: ImageVector, text: String, onClick: () -> Unit, modifier: Modifier = Modifier)` | `.row.q`: 22 dp link icon, 15 sp 600 text, chevron, min 56 dp (separator inset 54). |
 | `@Composable fun FollowUpRow(followUp: FollowUp, onClick: () -> Unit, modifier: Modifier = Modifier)` | Same from a `FollowUp` (icon by name). |
@@ -197,7 +197,7 @@ Conventions
 | `@Composable fun CampaignCard(c: Campaign, onClick: () -> Unit, modifier: Modifier = Modifier)` | `.card.camp`: 12 dp padding, 106 dp thumb column, 15 sp 800 title, 13 sp subtitle, status chip. |
 | `@Composable fun TrueCostCardView(card: TrueCostCard, modifier: Modifier = Modifier)` | `.tc`: fixed navy, 20 dp logo + "TRUE COST CARD", address, 34 sp total on its 34 dp `LineBox` with gold underline + "a month at $…", 6 dp gold bars, white agent footer (36 dp teal avatar, "Prepared by <name>", brokerage · town); 223 dp of navy plus the 56 dp footer with three cost lines. |
 | `@Composable fun ShareSheetHeader(title: String, subtitle: String, onTrailing: () -> Unit, modifier: Modifier = Modifier, trailingIcon: ImageVector = WdIcons.ContentCopy, trailingDescription: String = "Copy link")` | `.shh`: 48 dp navy logo tile, title/subtitle, 44 dp round fill button on a 48 dp overflow click node, 1 dp line below. |
-| `@Composable fun ShareTargets(onMessages: () -> Unit, onMail: () -> Unit, onCopy: () -> Unit, onQr: () -> Unit, modifier: Modifier = Modifier)` | `.targets`: four 56 dp circles (teal, link, fill2, fill2) with 28 dp icons and 12 sp labels; each column is one button labelled by its text. |
+| `@Composable fun ShareTargets(onMessages: () -> Unit, onMail: () -> Unit, onCopy: () -> Unit, onQr: () -> Unit, modifier: Modifier = Modifier, showQr: Boolean = true, qrLabel: String = "QR code", qrIcon: ImageVector = WdIcons.QrCode2)` | `.targets`: four 56 dp circles (teal, link, fill2, fill2) with 28 dp icons and 12 sp labels; each column is one button labelled by its text. The fourth target should only say "QR code" when `onQr` shows one: a screen whose dialog shows the link as text relabels it (`qrLabel = "Show link"`, `qrIcon = WdIcons.Link`) or hides it (`showQr = false`, the other three then share the row equally). Defaults render the mockup state unchanged. |
 | `@Composable fun OptionRow(title: String, subtitle: String?, checked: Boolean, onChecked: (Boolean) -> Unit, modifier: Modifier = Modifier)` | `.optrow`: fill container, 18 dp radius, min 52 dp, title/subtitle, trailing switch; the row toggles. |
 
 ## Settings.kt
@@ -217,8 +217,8 @@ Conventions
   none carries a line-height override any more, so a screen that wants the same line uses the token too
   (Scan's `t.statSmall.sized(19, ExtraBold, 26.6, tabular = true)` is just `t.statSmall`).
 - `WatchdogColors.kt`: `WelcomeHero { gradientStart (= Spectrum.navy), gradientEnd (#11306a), gold (#e3c46a) }`,
-  the Welcome hero's fixed colors (spec §1.12 / §3.31), next to `Spectrum`. `WelcomeScreen` should read
-  `WelcomeHero.gradientEnd` and `WelcomeHero.gold` instead of its literal and the dark map dot.
+  the Welcome hero's fixed colors (spec §1.12 / §3.31), next to `Spectrum`. `WelcomeScreen` draws its hero
+  gradient from `WelcomeHero.gradientStart` / `gradientEnd` and its eyebrow from `WelcomeHero.gold`.
 - `WatchdogDimens.statusBarAllowance = 40.dp`, the mockups' status bar, behind `statusBarAllowance()`.
 - `Spectrum.textStops` / `Spectrum.textStopsOnDark` (`WatchdogColors.kt`): the spectrum as text, at AA.
   `Intelligence.productName(suffix)` is a composable that picks the set from the theme (`isDark`, which
@@ -226,21 +226,6 @@ Conventions
   `Intelligence.wordStyle(onDark)` are the plain variants. `Spectrum.cyan/blue/violet/magenta` stay the
   border's.
 - Light `mHigh` is #e9e5dd, the mockup's #e4e0d7 lifted six units, so `muted` hints on it are 4.6:1.
-
-## Promoting the screens' private copies (for the sweep)
-
-| Private copy | Shared replacement |
-|---|---|
-| `statusBarAllowance()` in Today, Clients, Farm, Marketing, Property, Scan, Alerts, Intelligence; `statusBarTopPadding()` in Welcome, Search, Settings | Delete the private function and import the same name from `ui.components` (both names exist; they are the same rule). |
-| `ClientsSheet(onDismiss) { … }`, `FarmModalSheet(onDismiss) { … }`, the hand-built `ModalBottomSheet` in Intelligence's history sheet and Marketing's share sheet | `WdModalSheet(onDismiss = …) { … }` (same content padding; the sheet no longer double-pads the gesture bar on device). |
-| Clients `RowListSegment(first, last) { … }` | Shared `RowListSegment(first, last) { … }` (content now sits 1 dp inside the border like `RowList`, which is where the mockup's `border-box` rows start). |
-| Clients `SearchTopBar(query, onQueryChange, onClose)` | `SearchTopBar(query, onQueryChange, onClose, placeholder = "Street, town or CRM reference", fieldDescription = "Search clients")`. |
-| Clients `CsvField(value, onValueChange, modifier, enabled)` | `WdOutlinedTextArea(label = "Pasted CSV", value, onValueChange, modifier, placeholder = "27 Hamilton St, Harrison, past client, 2019, CRM-104", enabled = enabled)`. |
-| Search `ResultRow(property, onClick)` | `WdRow(title = property.address, supporting = "${property.town} · ${property.county}", detail = <block/lot + " · " + "Score n" span in the verdict ink, bold, tnum>, tile = TileTint.Sky, icon = WdIcons.Home, onClick = onClick, maxLines = 1, contentDescription = <address, place, block/lot, "Watchdog Score n out of 100, verdict">)`. |
-| Intelligence `VoiceComposer(hint, value, onValueChange, onSend, onMic, listening)` | `IntelligenceComposer(hint = hint, onMic = onMic, value = value, onValueChange = onValueChange, onSend = onSend, listening = listening)`. |
-| Welcome `HeroGradientEnd = Color(0xFF11306A)`, `EyebrowGold = WatchdogDarkColors.mapDot` | `WelcomeHero.gradientEnd`, `WelcomeHero.gold` (and `WelcomeHero.gradientStart` for the start). |
-| `RadioButton(selected, onClick = null, colors = RadioButtonDefaults.colors(selectedColor = c.primary, unselectedColor = c.mOutline))` in Clients' sort sheet, Farm's picker sheet and Settings' theme rows | `WdRadioButton(selected = selected, onClick = null)`: the `muted` ring clears 3:1 in both themes; the row stays the selectable. |
-| `WdOutlinedField(...)` on the default keyboard | Give each field its keyboard and action key: Welcome email `keyboardOptions = KeyboardOptions(keyboardType = KeyboardType.Email, imeAction = ImeAction.Send)`, `keyboardActions = KeyboardActions(onSend = { if (canSend) onSendCode() })`, `autofill = WdAutofill.EmailAddress`; Welcome code `KeyboardType.NumberPassword` + `ImeAction.Done` running `onVerify` once six digits are in, `autofill = WdAutofill.OneTimeCode`; Scan's listing link `KeyboardType.Uri` + `ImeAction.Go` running the resolve; Marketing's address `ImeAction.Search`; Farm's name `ImeAction.Done` running the create. |
 
 ## Typical screen assembly
 

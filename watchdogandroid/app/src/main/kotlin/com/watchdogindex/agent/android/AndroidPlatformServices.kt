@@ -184,6 +184,9 @@ class AndroidPlatformServices(context: Context) : PlatformServices {
         return deferred.await()
     }
 
+    /** The app-wide system switch (which on Android 13+ also reflects POST_NOTIFICATIONS), read without prompting. */
+    override fun notificationsEnabled(): Boolean = NotificationManagerCompat.from(app).areNotificationsEnabled()
+
     override fun openNotificationSettings() {
         val intent = Intent(Settings.ACTION_APP_NOTIFICATION_SETTINGS).putExtra(Settings.EXTRA_APP_PACKAGE, app.packageName)
         launch(intent)

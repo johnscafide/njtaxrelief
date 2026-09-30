@@ -11,10 +11,12 @@ import com.watchdogindex.agent.core.model.NotificationActionKind
  * open_brief "Open brief", call_client "Call client", view_farm "View farm", send_checkups "Send checkups",
  * later "Later", open "Open". Android shows at most three actions, so the list is capped at three.
  *
- * The server's push-sender (`actionsFor` in supabase/functions/push-sender/index.ts) sends its own words, which
- * map onto these kinds: open_property, open_desk and open_app are [NotificationActionKind.Open] (the payload's
- * route decides the screen, the property when there is a pin); mark_read is [NotificationActionKind.Later],
- * which clears the alert on the device (the app sends no read receipt).
+ * The server's push-sender (`actionsFor` in supabase/functions/push-sender/index.ts) sends these words: open,later
+ * for a property event, view_farm,later for a deed in the farm, open_brief for the Monday brief, open for a test
+ * push. The words its earlier shape sent still map onto these kinds, so an older deployment keeps working:
+ * open_property, open_desk and open_app are [NotificationActionKind.Open] (the payload's route decides the screen,
+ * the property when there is a pin); mark_read is [NotificationActionKind.Later], which clears the alert on the
+ * device (the app sends no read receipt).
  */
 object NotificationActions {
     const val MAX_ACTIONS = 3

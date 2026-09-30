@@ -3,6 +3,7 @@ package com.watchdogindex.agent.core.repo
 import com.watchdogindex.agent.core.api.FakeServer
 import com.watchdogindex.agent.core.api.FakeServer.Companion.json
 import com.watchdogindex.agent.core.api.TestConfig
+import com.watchdogindex.agent.core.repo.live.LiveIntelligenceRepository
 import io.ktor.client.engine.mock.respond
 import io.ktor.http.HttpHeaders
 import io.ktor.http.HttpMethod
@@ -11,6 +12,7 @@ import io.ktor.http.headersOf
 import kotlinx.coroutines.runBlocking
 import kotlin.test.Test
 import kotlin.test.assertEquals
+import kotlin.test.assertFalse
 import kotlin.test.assertTrue
 import kotlin.time.Duration.Companion.minutes
 
@@ -21,9 +23,9 @@ class LiveIntelligenceRepositoryTest {
         "response":{"conclusion":"Two past clients have new tax bills this week; call Hamilton first.","cards":[],
                     "evidence":[{"text":"27 Hamilton St tax bill up ${'$'}612."}],"sources":[{"label":"NJ Division of Taxation"}]}}"""
 
-    private fun server(): FakeServer {
+    private fun server(planTier: String = "pro"): FakeServer {
         val server = FakeServer()
-        server.on(HttpMethod.Post, "/rest/v1/rpc/get_my_entitlement") { json("""[{"plan_tier":"pro","profession":"real_estate","subscription_status":"active","current_period_end":"2026-10-28T00:00:00Z","account_role":"user","billing_tier":"pro","property_capacity":100}]""") }
+        server.on(HttpMethod.Post, "/rest/v1/rpc/get_my_entitlement") { json("""[{"plan_tier":"$planTier","profession":"real_estate","subscription_status":"active","current_period_end":"2026-10-28T00:00:00Z","account_role":"user","billing_tier":"$planTier","property_capacity":100}]""") }
         server.on(HttpMethod.Post, "/rest/v1/rpc/has_watchdog_plan") { json("true") }
         server.on(HttpMethod.Post, "/rest/v1/rpc/get_agent_usage") { json("""{"plan":"pro","limits":{},"usage":{},"remaining":{}}""") }
         server.on(HttpMethod.Get, "/rest/v1/profiles") { json("""[{"id":"user-1","display_name":"Alex Moreno","full_name":"Alexandra Moreno","vanity_slug":"alex","pro_agent":null,"avatar_url":null}]""") }
@@ -63,12 +65,29 @@ class LiveIntelligenceRepositoryTest {
         analystStatus = HttpStatusCode.OK
         val brief = set.intelligence.brief()
         assertEquals(2, runs(), "the hour is over, so the analyst is asked again")
-        assertEquals("Watchdog Intelligence brief", brief.kicker)
+        assertEquals("Watchdog Intelligence Brief", brief.kicker, "the sub-feature keeps the master name and its capital B; the card uppercases it for display and reads this to screen readers")
         assertTrue(brief.timeLabel.startsWith("11:01 AM"), "a fresh run is dated now (15:01Z is 11:01 AM in New Jersey), not 8:00 AM: ${brief.timeLabel}")
         assertEquals("Two past clients have new tax bills this week; call Hamilton first.", brief.items.first().lead)
 
         analystStatus = HttpStatusCode.BadGateway
         set.intelligence.brief()
         assertEquals(3, runs(), "a success clears the back-off, so the next visit may run again")
+    }
+
+    @Test
+    fun `an Agent plan without the add-on gets the digest brief and is told which named features need it`() = runBlocking {
+        val server = server(planTier = "agent")
+        server.on(HttpMethod.Post, "/api/watchdog-intelligence-voice") { json("""{"ok":true,"enabled":false,"eligible":true,"addon_active":false,"plan":"agent","packaging":"add_on"}""") }
+        server.on(HttpMethod.Post, "/api/watchdog-intelligence-analyst") { json(success) }
+        val brief = TestConfig.liveSet(server).intelligence.brief()
+
+        assertEquals(0, server.requestsTo("/api/watchdog-intelligence-analyst").size, "the plan gate is respected on the server's word; the analyst is not asked")
+        assertEquals("Monday brief", brief.kicker, "the mockup's MONDAY BRIEF kicker")
+        assertTrue(brief.forLabel.endsWith("the written Watchdog Intelligence Brief and Watchdog Intelligence Voice need the Watchdog Intelligence add-on"), brief.forLabel)
+        assertEquals(LiveIntelligenceRepository.BRIEF_NAME, "Watchdog Intelligence Brief")
+        assertEquals(LiveIntelligenceRepository.VOICE_NAME, "Watchdog Intelligence Voice")
+        // Never a bare "Voice" or "Brief", and never "Intel".
+        val words = brief.forLabel.replace("Watchdog Intelligence Voice", "").replace("Watchdog Intelligence Brief", "")
+        assertFalse(Regex("\\bVoice\\b|\\bBrief\\b|\\bIntel\\b").containsMatchIn(words), brief.forLabel)
     }
 }

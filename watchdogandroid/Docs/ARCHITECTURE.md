@@ -8,10 +8,10 @@ This is the contract every engineer (human or agent) builds against. Read it bef
 |---|---|---|
 | `core/` | Pure Kotlin (JVM). Domain models, tax math, formatting, sample data, API clients, repositories. No Android, no Compose. Own Gradle build, included by the other two as a composite build (`com.watchdogindex.agent:core`). | Anywhere with a JDK: `cd core && ./gradlew test` |
 | `shared/` | Android library holding all Compose UI: design system, components, screens, navigation contract. Platform-neutral Compose only: **no `android.*` imports, no `R` references, no Android-only libraries.** | Android build (CI / Android Studio) and the desktop preview |
-| `app/` | The Android application: activity, Navigation Compose host, MapLibre map, CameraX + ML Kit scan, Credential Manager passkeys, Sharesheet, notifications and FCM, DataStore, DI wiring. | Android build |
+| `app/` | The Android application: activity, Navigation Compose host, MapLibre map, CameraX + ML Kit scan, Credential Manager passkeys, Watchdog Intelligence Voice over `android.speech.SpeechRecognizer`, Sharesheet, notifications and FCM, DataStore, DI wiring. | Android build |
 | `preview/` | Separate Gradle build: compiles `shared` sources against Compose for Desktop 1.7.3, opens the app in a window (`./gradlew run`), renders every screen to PNG (`./gradlew renderScreens`) and compares against reference renders (`compareScreens`). Needs no Android SDK. | Anywhere with a JDK 17+ |
 
-Versions: Kotlin 2.1.10, Compose BOM 2024.12.01 (Compose 1.7 / Material 3 1.3) on Android and Compose Multiplatform 1.7.3 on desktop, AGP 8.10.1, min SDK 26, target/compile SDK 36. The two Compose lines expose the same API; shared code must only use APIs present in both (avoid `PlatformTextStyle`, `Modifier.imePadding` edge cases, Android-only previews annotations in shared files).
+Versions: Kotlin 2.1.10, Compose BOM 2024.12.01 (Compose 1.7 / Material 3 1.3) on Android and Compose Multiplatform 1.7.3 on desktop, AGP 8.10.1, min SDK 26, target/compile SDK 36. The two Compose lines expose the same API; shared code must only use APIs present in both (avoid `PlatformTextStyle`, `Modifier.imePadding` edge cases, Android-only previews annotations in shared files). The soft-keyboard inset is applied only where a keyboard can exist: `WindowInsets.ime` when `LocalBottomChromeInsets` is not provided (a device), zero where it is (preview window, screenshot harness), the way `IntelligenceScreen.keyboardInsets()` does it.
 
 ## Package layout
 
@@ -21,11 +21,15 @@ core:   com.watchdogindex.agent.core
           model/                 Account, Property, Digest, Client, Scan, Farm, Marketing, Intelligence, Alerts, Settings, Ui
           repo/Repositories.kt   repository interfaces + Repositories + KeyValueStore
           math/                  TaxMath (monthly cost, price check, holds-up floor, appeal deadline, score bands)
-          format/                Money, dates, compact numbers
-          sample/                SampleData (the mockups' fictional data set) and SampleRepositories
-          api/                   Ktor clients: SupabaseAuthClient, EdgeFunctions, SiteApi, DTOs and mappers
-          session/               SessionStore, TokenRefresher
-          repo/live/             Live* repository implementations
+          format/                Format (money, compact money, numbers, percentages, rates, areas)
+          sample/                SampleData, SampleClients, SampleProperties, SampleTowns, SampleFarmGrid (the mockups'
+                                 fictional data set), StoredJson, InMemoryKeyValueStore and SampleRepositories
+          api/                   Ktor clients: SupabaseAuthClient; WatchdogHttp (client configuration, SupabaseRest,
+                                 EdgeFunctions, SiteApi, TokenProvider/TokenRefresher, the HTTP exceptions); one API per
+                                 area (AccountApi, AlertsApi, ClientsApi, DigestApi, FarmApi, IntelligenceApi, MarketingApi,
+                                 PropertyApi + PropertyMapper) with their DTOs; ListingLinks, Derived, BestEffort, LiveStorage
+          session/               SessionStore (+ InMemorySessionStore), SessionManager
+          repo/live/             LiveRepositories (wiring, LiveContext) and the Live* repository implementations
 shared: com.watchdogindex.agent
           design/                WatchdogColors, WatchdogTypography, WatchdogTheme, Intelligence, WatchdogMark, icons/WdIcons
           platform/              PlatformServices interface, FarmMapState, LocalPlatformServices
@@ -33,15 +37,24 @@ shared: com.watchdogindex.agent
           ui/nav/                Route, Tab, Navigator, ScreenHost
           ui/components/         reusable components (see COMPONENTS.md written by the components author)
           ui/screens/<screen>/   XScreen.kt (entry composable with the fixed signature in ScreenHost), XViewModel.kt, XUiState
-          ui/preview/            ScreenCatalog (what the harness renders)
-app:    com.watchdogindex.agent  MainActivity, WatchdogApplication, android/* implementations
-preview: com.watchdogindex.agent.preview  PreviewApp (window), DesktopPlatformServices, DesktopFonts, Screenshots
+                                 (where the state is its own file); intelligence/VoiceSession.kt holds the VoiceSession
+                                 contract, NoVoiceSession and LocalVoiceSession
+          ui/preview/            ScreenCatalog (what the harness renders), PreviewState
+app:    com.watchdogindex.agent  MainActivity, WatchdogApplication (AndroidAppGraph)
+          android/               AndroidPlatformServices, DataStoreStores, FarmMapView (MapLibre), ScanCameraView (CameraX +
+                                 ML Kit), Passkeys (Credential Manager), AndroidVoiceSession (SpeechRecognizer)
+          navigation/            WatchdogNavHost, IntentRoutes, RouteNames
+          push/                  NotificationChannels, PushRegistrar, WatchdogMessagingService, NotificationActions,
+                                 NotificationActionReceiver, PushPayload
+          voice/                 VoiceRecognition (the pure half of Voice: result and error mapping, JVM-tested)
+preview: com.watchdogindex.agent.preview  PreviewApp (window), DesktopPlatformServices, DesktopFonts, DesktopFarmMap, Screenshots
 ```
 
 ## Fixed signatures
 
-- Screen entry points (do not rename; `ScreenHost` calls them): `WelcomeScreen(navigator)`, `TodayScreen(navigator)`, `ClientsScreen(navigator)`, `FarmScreen(navigator)`, `MarketingScreen(navigator)`, `PropertyScreen(pin, navigator)`, `ScanScreen(initialUrl, navigator)`, `IntelligenceScreen(navigator)`, `AlertsScreen(navigator)`, `SettingsScreen(navigator)`, `SearchScreen(query, navigator)`.
+- Screen entry points (do not rename; `ScreenHost` calls them): `WelcomeScreen(navigator)`, `TodayScreen(navigator)`, `ClientsScreen(navigator, initialFilter)` (`Route.Clients.filter`, null for the tab's own state), `FarmScreen(navigator)`, `MarketingScreen(navigator)`, `PropertyScreen(pin, navigator)`, `ScanScreen(initialUrl, navigator)`, `IntelligenceScreen(navigator)`, `AlertsScreen(navigator)`, `SettingsScreen(navigator)`, `SearchScreen(query, navigator)`.
 - Screens get everything through `LocalAppGraph.current` (repositories, platform, font) and `LocalPlatformServices.current`. ViewModels: `val vm = screenViewModel { TodayViewModel(LocalAppGraph.current.repos) }` (capture the graph in a `val` first; `LocalAppGraph.current` is a composable read).
+- Watchdog Intelligence Voice: the Intelligence screen reads `LocalVoiceSession` (`ui/screens/intelligence/VoiceSession.kt`). A host provides its implementation at the root (`MainActivity` provides `AndroidVoiceSession`); a host without one keeps `NoVoiceSession`, whose mic says plainly that Voice is not ready on this device. Nothing in `shared` names a platform speech API.
 - Tab screens draw their own `Scaffold` with the shared navigation bar and FAB; pushed screens draw their own top app bar.
 - `Repositories` (core) is the only way to data. Every method throws `WatchdogException`; ViewModels turn that into a friendly state (`userMessage`).
 - Sample data lives in `core/sample`. `SampleRepositories` must reproduce the approved mockups exactly (same addresses, numbers and strings), because screenshots are compared against the mockups.
@@ -59,7 +72,7 @@ preview: com.watchdogindex.agent.preview  PreviewApp (window), DesktopPlatformSe
 
 ## Verification
 
-- `core`: `./gradlew test` locally and in CI.
+- `core`: `./gradlew test` locally and in CI (the Android job's `Core unit tests` step). `app/src/test` holds the JVM tests for the pure Android pieces (intent routes, push payloads and actions, voice result mapping); CI runs them through `:app:testDebugUnitTest`, and locally they run with kotlinc against the `core` jar and `shared`'s `Route.kt` under JUnit 4 without an Android SDK (see `Docs/VERIFICATION.md`).
 - `preview`: `./gradlew test renderScreens` compiles all shared UI for the desktop and writes `build/screens/*.png`; `compareScreens -Pref=<dir>` writes side-by-side composites and prints a similarity score per screen.
 - Android: `.github/workflows/watchdog-android-build.yml` assembles debug and release, runs unit tests and lint, and uploads APKs.
 - Browser-level certification of the website is Playwright; for the app, the desktop renders plus the mockup reference renders (`tools/render-mockups.mjs`) are the visual evidence, and CI runs the headless comparison against `preview/reference/` on every push, uploading the renders and composites as workflow artifacts (nothing is committed back).

@@ -84,7 +84,7 @@ private val ScrollBottomBeyondActions = 22.dp
 fun PropertyScreen(pin: String, navigator: Navigator) {
     val graph = LocalAppGraph.current
     val platform = LocalPlatformServices.current
-    val vm = screenViewModel(key = "property/$pin") { PropertyViewModel(graph.repos, platform, pin) }
+    val vm = screenViewModel(key = "property/$pin") { PropertyViewModel(graph.repos, platform, pin, graph.config.links) }
     val state by vm.state.collectAsState()
     val c = WatchdogTheme.colors
     val snackbar = remember { SnackbarHostState() }

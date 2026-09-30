@@ -149,10 +149,51 @@ assert.match(sender, /httpStatus === 429 \|\| httpStatus >= 500/, '429 and 5xx a
 for (const code of ['QUOTA_EXCEEDED', 'UNAVAILABLE', 'INTERNAL']) assert.ok(sender.includes(`"${code}"`), `${code} is treated as an outage`);
 assert.match(sender, /headers\.get\("retry-after"\)/, 'Retry-After is honoured');
 assert.match(sender, /if \(isOutage\(response\.status, err\)\) \{[\s\S]*?break;/, 'an outage stops the row loop');
-assert.match(sender, /priority = severity === "action" \? "HIGH" : "NORMAL"/);
-assert.match(sender, /collapse_key: collapse/);
-for (const key of ['route:', 'pin,', 'channel:', 'actions:']) assert.ok(sender.includes(key), `data map carries ${key.replace(/[:,]/, '')}`);
 assert.match(sender, /released, push_configured: true/);
+
+// --- push-sender: the message is what the Android app decodes (watchdogandroid app/push/PushPayload.kt). ---
+const alertsKt = read('watchdogandroid/core/src/main/kotlin/com/watchdogindex/agent/core/model/Alerts.kt');
+const actionsKt = read('watchdogandroid/app/src/main/kotlin/com/watchdogindex/agent/push/NotificationActions.kt');
+const routesKt = read('watchdogandroid/app/src/main/kotlin/com/watchdogindex/agent/navigation/IntentRoutes.kt');
+const fcm = between(sender, 'function fcmMessage(', '// --- FCM error classification ---');
+const iosAt = fcm.indexOf('if (row.platform === "ios")');
+assert.ok(iosAt > 0, 'only an ios registration gets an alert payload');
+assert.doesNotMatch(fcm.slice(0, iosAt), /\bnotification: \{/, 'Android messages are data-only: the app posts the notification itself');
+assert.doesNotMatch(fcm.slice(0, iosAt), /\bapns\b/, 'APNs headers only on the ios branch');
+assert.match(fcm, /android: \{ priority: "HIGH", collapse_key: collapse \}/, 'every push is a user-visible alert: high priority, collapsed per event');
+for (const key of ['title,', 'body,', 'kind:', 'route:', 'pin:', 'event_id:', 'event_type:', 'severity,', 'channel:', 'actions:', 'collapse_key:', 'outbox_id:']) assert.ok(fcm.includes(key), `data map carries ${key.replace(/[:,]/, '')}`);
+assert.match(fcm, /for \(const k of Object\.keys\(data\)\) if \(!data\[k\]\) delete data\[k\];/, 'FCM data values are non-empty strings');
+// Channel ids are the app's AlertChannel ids, one system notification channel each (NotificationChannels.ensure).
+const appChannels = [...alertsKt.matchAll(/^\s+[A-Za-z]+\("([a-z_]+)", "/gm)].map((m) => m[1]);
+assert.deepEqual(appChannels, ['client_home_changes', 'farm_sales_deeds', 'town_rates_revaluations', 'appeal_deadlines', 'monday_brief'], 'AlertChannel ids in core/model/Alerts.kt');
+const senderChannels = [...between(sender, 'const CHANNEL_IDS = {', '} as const;').matchAll(/"([a-z_]+)"/g)].map((m) => m[1]);
+assert.deepEqual(senderChannels, appChannels, 'push-sender CHANNEL_IDS must equal the app AlertChannel ids, in order');
+const channelRule = between(sender, 'function channelFor(', 'function actionsFor(');
+for (const [eventType, channel] of [['deed_change', 'farmSalesDeeds'], ['municipal_change', 'townRatesRevaluations'], ['appeal_deadline', 'appealDeadlines']]) {
+  assert.ok(channelRule.includes(`if (eventType === "${eventType}") return CHANNEL_IDS.${channel};`), `${eventType} posts on ${channel} (LiveAlertsRepository.channelFor)`);
+}
+assert.match(channelRule, /if \(kind === "digest"\) return CHANNEL_IDS\.mondayBrief;/);
+assert.match(channelRule, /return CHANNEL_IDS\.clientHomeChanges;\s*\}$/m, 'everything else is a client home change');
+// Action words are ones NotificationActions.kindOf understands; never call_client (no phone number in the pipeline).
+const appActionWords = new Set([...between(actionsKt, 'return when (key) {', 'else -> null').matchAll(/"([a-z_]+)"/g)].map((m) => m[1]));
+const senderActionWords = [...between(sender, 'function actionsFor(', 'function routeFor(').matchAll(/return "([a-z_,]+)"/g)].flatMap((m) => m[1].split(','));
+assert.ok(senderActionWords.length >= 4, 'actionsFor covers digest, test, deed and other property events');
+for (const word of senderActionWords) assert.ok(appActionWords.has(word), `the app understands the action word ${word}`);
+assert.ok(!senderActionWords.includes('call_client'), 'no call_client: the pipeline has no phone number');
+assert.ok(senderActionWords.filter((w) => w === 'later').length >= 2, 'property events offer Later');
+assert.match(between(sender, 'function actionsFor(', 'function routeFor('), /if \(kind === "digest"\) return "open_brief";/);
+// Route words are ones IntentRoutes.fromExtras understands; a digest lands on the brief, never on "pulse".
+const appRouteWords = new Set([...between(routesKt, 'return when (word) {', 'else -> cleanPin').matchAll(/"([a-z-]+)"/g)].map((m) => m[1]));
+const routeRule = between(sender, 'function routeFor(', 'function fcmMessage(');
+const senderRouteWords = [...routeRule.matchAll(/(?:\|\| |: )"([a-z-]+)"/g)].map((m) => m[1]);
+assert.deepEqual(senderRouteWords, ['brief', 'alerts', 'pulse'], 'digest -> brief, test -> alerts, property event -> pulse');
+for (const word of senderRouteWords) assert.ok(appRouteWords.has(word), `the app understands the route word ${word}`);
+assert.match(routeRule, /requested && requested !== "pulse" \? requested : "brief"/, 'a digest never routes to pulse');
+assert.ok(appRouteWords.has('brief') && appRouteWords.has('digest'), 'the app accepts both digest route words');
+// The earlier server words stay decodable on the phone (an older deployment of this function may still send them).
+for (const legacy of ['property_alerts_action', 'property_alerts', 'open_property', 'mark_read', 'open_desk', 'open_app']) {
+  assert.ok(actionsKt.includes(`"${legacy}"`) || read('watchdogandroid/app/src/main/kotlin/com/watchdogindex/agent/push/PushPayload.kt').includes(legacy), `the app still tolerates ${legacy}`);
+}
 assert.doesNotMatch(sender, /njpropertytaxrelief/i);
 
 // --- Config and scripts. ---

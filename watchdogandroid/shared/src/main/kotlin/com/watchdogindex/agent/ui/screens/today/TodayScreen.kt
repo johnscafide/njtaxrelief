@@ -237,11 +237,14 @@ private fun TodayContent(
         val teaser = digest.teaser
         if (teaser != null) {
             item(key = "intelligence") {
+                // Both footer controls open the Intelligence screen; the mic row says so rather than promising a voice
+                // session it does not start (Watchdog Intelligence Voice begins on that screen).
                 IntelligenceTeaserCard(
                     text = teaser.text,
                     onAsk = onIntelligence,
                     onReadBrief = onIntelligence,
                     modifier = Modifier.cardMargin(),
+                    askContentDescription = "Open Watchdog Intelligence",
                 )
             }
         }

@@ -46,6 +46,10 @@ class AlertsApiTest {
         assertEquals("heartbeat", second.str("action"))
         assertEquals(installation, second.str("installation_id"), "the installation id is stable per install")
         assertEquals("fcm-token-2", second.str("token"))
+        assertEquals("android", second.str("platform"))
+        for (key in listOf("digest_enabled", "alerts_enabled", "quiet_hours_start", "quiet_hours_end", "timezone")) {
+            assertNull(second[key], "a heartbeat carries no preference field, so it can never overwrite what the agent saved: $key")
+        }
 
         set.alerts.unregisterPushToken("fcm-token-2")
         val third = server.requestsTo("/functions/v1/push-device-register")[2].json()!!

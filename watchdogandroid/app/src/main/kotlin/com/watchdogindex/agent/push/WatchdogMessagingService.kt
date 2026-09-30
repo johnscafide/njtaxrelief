@@ -29,10 +29,10 @@ import kotlinx.coroutines.launch
  * Receives FCM messages and token rotations. Only runs when Firebase is configured (google-services.json present);
  * without it the service is declared but Firebase never starts it.
  *
- * The payload is decoded by [PushPayload], which documents both shapes it accepts: the app's data-only contract
- * (title, body, channel, actions, pin/pams_pin, route, phone, event_id) and what the server's push-sender emits
- * today (a `notification` block plus route, pin, event_id, event_type, severity, its own channel names and action
- * words). A message with a `notification` block reaches this service only while the app is in the foreground;
+ * The payload is decoded by [PushPayload], which documents both shapes it accepts: the data-only contract the
+ * server's push-sender emits (title, body, channel, actions, pin/pams_pin, route, phone, event_id) and the shape it
+ * sent before (a `notification` block plus route, pin, event_id, event_type, severity, its own channel names and
+ * action words). A message with a `notification` block reaches this service only while the app is in the foreground;
  * in the background the system renders it on the channel the server named (falling back to the manifest's default
  * channel) and its tap delivers the data keys as launcher-intent extras, which MainActivity reads too.
  * Push bodies come from privacy-reviewed sources; this service shows them as-is and never adds owner data.

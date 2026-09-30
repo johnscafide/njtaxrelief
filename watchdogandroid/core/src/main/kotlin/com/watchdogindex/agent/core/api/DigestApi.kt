@@ -50,6 +50,8 @@ class DigestApi(private val rest: SupabaseRest) {
         val pin: String? get() = (pamsPin ?: payload?.str("pams_pin"))?.trim()?.takeIf { it.isNotEmpty() }
         val payloadAddress: String? get() = (payload?.str("property_address") ?: payload?.str("address"))?.trim()?.takeIf { it.isNotEmpty() }
         val payloadTown: String? get() = payload?.str("municipality")?.trim()?.takeIf { it.isNotEmpty() }
+        /** The bill year a producer put on the event (`tax_year`, `bill_year` or `year` in the payload), when it did. */
+        val taxYear: Int? get() = listOf("tax_year", "bill_year", "year").firstNotNullOfOrNull { key -> payload?.int(key) }?.takeIf { it in 1990..2100 }
     }
 
     @Serializable
@@ -196,11 +198,15 @@ class DigestApi(private val rest: SupabaseRest) {
         )
     }
 
-    /** Plain titles from the event's numbers and type; the producers' raw titles ("last year tax changed") are never shown. */
+    /**
+     * Plain titles from the event's numbers and type; the producers' raw titles ("last year tax changed") are never
+     * shown. A tax change names its bill year when the producer put one on the event ("2026 bill up $612", the Today
+     * mockup's phrasing) and reads "Tax bill up $612" when it did not; see [taxBillTitle].
+     */
     fun title(event: EventRow): String {
         val delta = event.deltaNumeric?.roundToInt()
         return when (event.eventType) {
-            "tax_change" -> if (delta != null && delta != 0) "Tax bill ${Format.moneyChange(delta)}" else "Tax bill changed"
+            "tax_change" -> taxBillTitle(event)
             "assessment_change" -> if (delta != null && delta != 0) "Assessment ${Format.moneyChange(delta)}" else "Assessment changed"
             "deed_change" -> event.title?.takeIf { looksLikeSentence(it) } ?: "Deed recorded"
             "permit_change" -> event.title?.takeIf { looksLikeSentence(it) } ?: "Permit activity"
@@ -216,6 +222,17 @@ class DigestApi(private val rest: SupabaseRest) {
 
     companion object {
         const val EVENT_SELECT = "id,pams_pin,event_type,severity,title,summary,source_url,occurred_at,payload,marker_id,old_value,new_value,delta_numeric,read_at"
+
+        /**
+         * "2026 bill up $612" when the event carries its bill year ([EventRow.taxYear]), else "Tax bill up $612"; with
+         * no usable delta, "2026 bill changed" / "Tax bill changed". The Today task subtitle uses the same words after
+         * "Past client · ", so the two lines never disagree.
+         */
+        fun taxBillTitle(event: EventRow): String {
+            val delta = event.deltaNumeric?.roundToInt()
+            val subject = event.taxYear?.let { "$it bill" } ?: "Tax bill"
+            return if (delta != null && delta != 0) "$subject ${Format.moneyChange(delta)}" else "$subject changed"
+        }
         const val FARM_SELECT = "id,pams_pin,contact_ref,address,municipality,county,relationship,source,match_status,updated_at,created_at"
 
         /** `eventWeights` from the digest sender. */

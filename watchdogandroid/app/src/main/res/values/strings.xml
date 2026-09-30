@@ -2,6 +2,7 @@
 <resources>
     <string name="app_name">Watchdog</string>
     <string name="camera_purpose">Watchdog uses the camera only to read the QR rider on a For Sale sign so it can look up that home.</string>
+    <string name="microphone_purpose">Watchdog uses the microphone only while you ask Watchdog Intelligence Voice a question. Your phone’s speech recognizer turns it into text; Watchdog keeps only the text you send.</string>
 
     <!-- Notification channel groups (channels themselves are named from AlertChannel in core). -->
     <string name="notification_group_alerts">Alerts</string>

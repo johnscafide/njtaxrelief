@@ -3,8 +3,8 @@
 The native Android app for Watchdog (New Jersey property intelligence, https://www.watchdogindex.com), built for
 agents on the Agent plan and above. It is a new front end on the existing backend: the production Supabase
 project the website uses and the site's own `/api/*` routes. Screens: Welcome and sign-in, Today (the Monday
-digest as a living screen), Clients, Farm, Marketing, Property detail, Scan a listing, Watchdog Intelligence,
-Alerts and Settings. Jetpack Compose with Material 3, Kotlin 2.1.10, Android Gradle Plugin 8.10.1, Gradle 8.14.3,
+digest as a living screen), Clients, Farm, Marketing, Property detail, Scan a listing, Search, Watchdog
+Intelligence (with Watchdog Intelligence Voice), Alerts and Settings. Jetpack Compose with Material 3, Kotlin 2.1.10, Android Gradle Plugin 8.10.1, Gradle 8.14.3,
 min SDK 26 (Android 8.0), compile and target SDK 36 (Android 16). The approved design is `Docs/design-spec.md`
 and the mockup page under `Docs/mockups/`.
 
@@ -14,7 +14,7 @@ and the mockup page under `Docs/mockups/`.
 |---|---|---|
 | `core/` | Pure Kotlin (JVM). Models, tax math, formatting, API clients, session handling, repository interfaces, the `Live*` and `Sample*` repositories. Its own Gradle build, pulled into the other two as a composite build (`includeBuild("core")`). | Any JDK: `cd core && ./gradlew test` |
 | `shared/` | Android library with all Compose UI: design tokens, components, the ten screens, navigation contract, the screen catalog the harness renders. Platform-neutral Compose only: no `android.*` imports, no `R` references. | Android build and the desktop preview (which compiles the same source files) |
-| `app/` | The Android application: single activity, Navigation Compose host, deep links and share target, DataStore, Sharesheet, MapLibre farm map, CameraX + ML Kit QR scan, Credential Manager hook, notification channels and FCM. | Android build only |
+| `app/` | The Android application: single activity, Navigation Compose host, deep links and share target, DataStore, Sharesheet, MapLibre farm map, CameraX + ML Kit QR scan, Credential Manager hook, Watchdog Intelligence Voice over `android.speech.SpeechRecognizer`, notification channels and FCM. | Android build only |
 | `preview/` | Separate Gradle build that compiles `shared/src/main` against Compose Multiplatform 1.7.3 for the desktop: a phone-sized window, a headless screenshot renderer and the mockup comparison. Needs no Android SDK. | Any JDK 17+ |
 | `Docs/` | `design-spec.md`, `mockups/`, `mockup-css-to-compose.md`, `ARCHITECTURE.md` (the contract), `COMPONENTS.md`, `BACKEND-CHANGES.md`, `VERIFICATION.md`. | |
 | `tools/` | `render-mockups.mjs`: renders the mockup page to the reference PNGs in `preview/reference/` with Playwright. | Node with Playwright |
@@ -102,15 +102,17 @@ both on Temurin 17 with the Gradle cache (read-only off `main`). Nothing in it d
 
 | Job | Steps | Artifact |
 |---|---|---|
-| **Assemble, test and lint (Android)** | Installs `platform-tools`, `platforms;android-36` and `build-tools;36.0.0`; validates the Gradle wrapper; `:app:assembleDebug`; `:shared:testDebugUnitTest :app:testDebugUnitTest`; `:app:lintDebug`; `:app:assembleRelease` (unsigned). | `watchdog-android-apks` (debug and release APKs), `watchdog-android-reports` (test and lint reports) |
+| **Assemble, test and lint (Android)** | Installs `platform-tools`, `platforms;android-36` and `build-tools;36.0.0`; validates the Gradle wrapper; `:app:assembleDebug`; `cd core && ./gradlew test` (the `Core unit tests` step); `:shared:testDebugUnitTest :app:testDebugUnitTest`; `:app:lintDebug`; `:app:assembleRelease` (unsigned). | `watchdog-android-apks` (debug and release APKs), `watchdog-android-reports` (test and lint reports) |
 | **Desktop preview, tests and screen renders** | In `preview/`: `./gradlew test`, then `./gradlew compareScreens -Pref=reference`. The similarity lines and heat maps are in the job log. | `watchdog-screen-renders` (`build/screens/**` and `build/compare/**`) |
 
 Notes
 
 - The Android compile is verified in CI. The environment this branch was written in had no Android SDK, so
   `app/`, resources, manifest merge and lint are only checked when the workflow runs.
-- The workflow does not run `core`'s own tests. `core` is compiled through the composite build, but
-  `cd core && ./gradlew test` is a local step until the workflow gains one.
+- The workflow runs `core`'s own tests since run 7 (the Android job's `Core unit tests` step). Counts at the
+  certification pass (`Docs/VERIFICATION.md`): `core` 130 tests, 0 failures; `app/src/test` 39 tests (intent
+  routes, push payloads and actions, voice result mapping); `preview` 19 tests, of which the two smoke renders
+  are skipped on a machine without a working Skiko renderer; `shared/src/test` is empty.
 - Interim commits pushed while work was in flight carry `[skip ci]` in the subject. That is GitHub's built-in
   convention: a push whose head commit contains `[skip ci]` does not start push-triggered workflows. Commits meant
   to be checked do not carry it.
@@ -150,6 +152,14 @@ real record and nothing carries an owner name.
   (the property row as JSON, see below), `GET /api/agent-property-search`, `GET /api/watchdog-true-cost` (address
   search), `GET /api/property-imagery` (aerial fallback), `POST /api/watchdog-intelligence-analyst` and
   `POST /api/watchdog-intelligence-voice`.
+- Watchdog Intelligence Voice is implemented on Android: `AndroidVoiceSession` (`app/android/`) listens through
+  the phone's own `android.speech.SpeechRecognizer`, asks for `RECORD_AUDIO` at the first tap of the mic, keeps
+  partial results so a cut-off question is still asked, and hands the recognised text to the Intelligence screen
+  through `LocalVoiceSession` (`shared/ui/screens/intelligence/VoiceSession.kt`); the text is sent like a typed
+  question. Every way listening can end has one plain sentence that offers typing instead (`app/voice/
+  VoiceRecognition.kt`, unit-tested). A phone without a recognition service, and the desktop preview, keep
+  `NoVoiceSession`, whose mic says Voice is not ready on this device. Listening has not yet been exercised on a
+  phone; it is on the device list in `Docs/VERIFICATION.md`.
 
 `WatchdogApplication` builds the live set on every launch (`LiveRepositories.create` with the OkHttp engine,
 DataStore-backed session and key-value stores). A `SampleRepositories` fallback remains in that code path for a
@@ -201,7 +211,10 @@ Nothing in this branch has been deployed or applied. In particular:
   `app/push/NotificationChannels` uses verbatim.
 - Every number cites its public source (MOD-IV, SR-1A deeds, NJ Division of Taxation rates, Chapter 123 ratios,
   county boards, NJDEP).
-- Camera and location are used only for sign scanning, with the purpose strings in `app/src/main/res/values/strings.xml`.
+- The camera is used only to read the QR rider on a For Sale sign, and the microphone only while the agent asks
+  Watchdog Intelligence Voice a question; both purpose strings are in `app/src/main/res/values/strings.xml`. No
+  location permission is declared: a sign's QR rider carries the home's PIN, so the scan resolves the parcel
+  without coordinates.
 - Watchdog is the platform brand. The score is "The Watchdog Score, powered by the ROBUST Framework", never a
   "ROBUST Score". The product is **Watchdog Intelligence** (Watchdog Intelligence Voice, Watchdog Intelligence
   Brief); the shortened form is not used anywhere in the app. On screen, the rotating spectrum border sits on the

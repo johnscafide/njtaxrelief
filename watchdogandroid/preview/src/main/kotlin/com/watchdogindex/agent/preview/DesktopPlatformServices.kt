@@ -99,6 +99,13 @@ class DesktopPlatformServices(private val parkLabel: String? = null) : PlatformS
 
     override suspend fun requestNotificationPermission(): Boolean = true
 
+    /**
+     * True: a desktop has no notification switch that could be off, and false would make the Alerts screen show a
+     * "notifications are off" note whose remedy (the Android system settings) does not exist here. The renders
+     * then show the screen in the state the mockup shows.
+     */
+    override fun notificationsEnabled(): Boolean = true
+
     override fun openNotificationSettings() {
         log("notification settings are a system screen on Android; nothing to open here")
     }

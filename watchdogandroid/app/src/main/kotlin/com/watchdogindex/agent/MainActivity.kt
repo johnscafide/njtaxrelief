@@ -12,6 +12,7 @@ import androidx.activity.SystemBarStyle
 import androidx.activity.compose.setContent
 import androidx.activity.enableEdgeToEdge
 import androidx.compose.foundation.isSystemInDarkTheme
+import androidx.compose.runtime.CompositionLocalProvider
 import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
@@ -19,6 +20,7 @@ import androidx.compose.runtime.setValue
 import androidx.compose.ui.graphics.toArgb
 import androidx.core.splashscreen.SplashScreen.Companion.installSplashScreen
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
+import com.watchdogindex.agent.android.AndroidVoiceSession
 import com.watchdogindex.agent.android.PasskeyBridge
 import com.watchdogindex.agent.app.WatchdogApp
 import com.watchdogindex.agent.app.toThemeMode
@@ -31,6 +33,7 @@ import com.watchdogindex.agent.navigation.WatchdogNavHost
 import com.watchdogindex.agent.push.PushPayload
 import com.watchdogindex.agent.push.WatchdogMessagingService
 import com.watchdogindex.agent.ui.nav.Route
+import com.watchdogindex.agent.ui.screens.intelligence.LocalVoiceSession
 
 /**
  * The single activity. Installs the splash, goes edge to edge with bar icons and a window background that follow
@@ -38,10 +41,12 @@ import com.watchdogindex.agent.ui.nav.Route
  * Compose graph once the stored session has been restored. Incoming intents (share target, App Links, watchdog://
  * links, notification taps) become a pending [Route] that the host opens once the agent is signed in.
  * Notification intents also clear the alert they came from and, for a "Call client" action with a number, start
- * the dialer.
+ * the dialer. Watchdog Intelligence Voice ([AndroidVoiceSession]) is created per activity, because the microphone
+ * permission prompt needs this activity's result registry, and provided to the shared UI at the root.
  */
 class MainActivity : ComponentActivity() {
     private var pendingRoute by mutableStateOf<Route?>(null)
+    private var voiceSession: AndroidVoiceSession? = null
 
     override fun onCreate(savedInstanceState: Bundle?) {
         val splash = installSplashScreen()
@@ -50,6 +55,7 @@ class MainActivity : ComponentActivity() {
         val graph = app.graph
         graph.platform.attach(this)
         PasskeyBridge.attach(this)
+        val voice = AndroidVoiceSession(this).also { voiceSession = it }
         enableEdgeToEdge()
 
         // Hold the splash until the stored session has been restored, but never longer than 2.5 s.
@@ -86,13 +92,17 @@ class MainActivity : ComponentActivity() {
                 window.setBackgroundDrawable(ColorDrawable((if (dark) WatchdogDarkColors else WatchdogLightColors).bg.toArgb()))
             }
             WatchdogApp(graph = graph, themeMode = themeMode, reducedMotion = reducedMotion) {
-                WatchdogNavHost(
-                    graph = graph,
-                    pendingRoute = pendingRoute,
-                    onPendingRouteConsumed = { pendingRoute = null },
-                    onExit = { finish() },
-                    sessionRestored = sessionRestored,
-                )
+                // The Intelligence screen reads LocalVoiceSession; without a host value the shared default,
+                // NoVoiceSession, says Watchdog Intelligence Voice is not ready on this device.
+                CompositionLocalProvider(LocalVoiceSession provides voice) {
+                    WatchdogNavHost(
+                        graph = graph,
+                        pendingRoute = pendingRoute,
+                        onPendingRouteConsumed = { pendingRoute = null },
+                        onExit = { finish() },
+                        sessionRestored = sessionRestored,
+                    )
+                }
             }
         }
     }
@@ -107,6 +117,8 @@ class MainActivity : ComponentActivity() {
         val app = application as? WatchdogApplication
         app?.graph?.platform?.detach(this)
         PasskeyBridge.detach(this)
+        voiceSession?.release()
+        voiceSession = null
         super.onDestroy()
     }
 

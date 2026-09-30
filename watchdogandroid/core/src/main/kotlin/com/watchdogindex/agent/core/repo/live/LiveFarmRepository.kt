@@ -3,6 +3,7 @@ package com.watchdogindex.agent.core.repo.live
 import com.watchdogindex.agent.core.WatchdogException
 import com.watchdogindex.agent.core.api.Derived
 import com.watchdogindex.agent.core.api.FarmApi
+import com.watchdogindex.agent.core.api.bestEffort
 import com.watchdogindex.agent.core.format.Format
 import com.watchdogindex.agent.core.model.Farm
 import com.watchdogindex.agent.core.model.FarmStats
@@ -86,7 +87,7 @@ class LiveFarmRepository(private val ctx: LiveContext) : FarmRepository {
         val today = ctx.today()
         val yearAgo = today.minus(365, DateTimeUnit.DAY)
 
-        var pins = runCatching { ctx.farm.materializedPins(farmId) }.getOrDefault(emptyList())
+        var pins = bestEffort { ctx.farm.materializedPins(farmId) } ?: emptyList()
         val fromQuery = HashMap<String, FarmApi.MapRecord>()
         if (pins.isEmpty() && row.ring.size >= 4) {
             var offset = 0
@@ -108,7 +109,7 @@ class LiveFarmRepository(private val ctx: LiveContext) : FarmRepository {
         }
 
         val records = ctx.farm.hydrate(pins).associateBy { it.pamsPin }
-        val scores = runCatching { ctx.farm.scores(pins) }.getOrDefault(emptyMap())
+        val scores = bestEffort { ctx.farm.scores(pins) } ?: emptyMap()
         val soldPrices = ArrayList<Int>()
         val parcels = pins.mapNotNull { pin ->
             val rec = records[pin]
@@ -160,7 +161,7 @@ class LiveFarmRepository(private val ctx: LiveContext) : FarmRepository {
     override suspend fun createFarm(name: String, boundary: List<LatLng>): Farm {
         if (boundary.size < 3) throw WatchdogException("Boundary too small", userMessage = "Draw at least three points around the neighborhood.")
         val ring = if (boundary.first() == boundary.last()) boundary else boundary + boundary.first()
-        val count = runCatching { ctx.farm.mapQuery(ring, offset = 0, limit = 1).count?.toInt() }.getOrNull()
+        val count = bestEffort { ctx.farm.mapQuery(ring, offset = 0, limit = 1).count?.toInt() }
         val created = ctx.farm.createPolygonList(ctx.userId(), name.trim().ifEmpty { "Map-drawn farm" }, ring, count)
         lists = null
         return farm(created)

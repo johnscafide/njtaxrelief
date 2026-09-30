@@ -28,6 +28,14 @@ interface PlatformServices {
 
     /** Asks for notification permission if the platform needs it; returns whether alerts can be shown. */
     suspend fun requestNotificationPermission(): Boolean
+
+    /**
+     * Whether the system shows this app's notifications right now, read without prompting: false once the agent
+     * has turned them off in system settings or has not granted the Android 13+ permission. Screens describe that
+     * state (the Alerts screen's "notifications are off" note) and call [requestNotificationPermission] only on a
+     * deliberate tap. Platforms without a notification switch report true.
+     */
+    fun notificationsEnabled(): Boolean = true
     fun openNotificationSettings()
 
     /** Vibration for actions such as a successful scan. */

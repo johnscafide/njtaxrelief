@@ -54,7 +54,7 @@ class SupabaseAuthClientTest {
     }
 
     @Test
-    fun `verify posts type email and parses the session`() = runBlocking {
+    fun `verify posts type email and parses the session`(): Unit = runBlocking {
         val server = FakeServer()
         server.on(HttpMethod.Post, "/auth/v1/verify") { json(sessionJson("a1", "r1", expiresAt = nowSeconds + 3600)) }
         val auth = SupabaseAuthClient(TestConfig.client(server, TokenProvider { null }), TestConfig.config) { nowSeconds }

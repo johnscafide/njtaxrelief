@@ -51,6 +51,7 @@ import androidx.compose.ui.semantics.LiveRegionMode
 import androidx.compose.ui.semantics.Role
 import androidx.compose.ui.semantics.contentDescription
 import androidx.compose.ui.semantics.customActions
+import androidx.compose.ui.semantics.heading
 import androidx.compose.ui.semantics.liveRegion
 import androidx.compose.ui.semantics.semantics
 import androidx.compose.ui.text.font.FontWeight
@@ -164,8 +165,23 @@ fun ClientsScreen(navigator: Navigator, initialFilter: ClientFilter? = null) {
                         fieldDescription = "Search clients",
                     )
                 } else {
+                    // The bar's title is the page heading and, once the rows are up, carries a "Refresh" accessibility
+                    // action like Today's: pull to refresh is a gesture only, so TalkBack and switch-access users refresh
+                    // from the actions menu on the heading. The two icon buttons stay their own nodes.
+                    val headingModifier = Modifier.semantics(mergeDescendants = true) {
+                        heading()
+                        if (ready != null) {
+                            customActions = listOf(
+                                CustomAccessibilityAction(label = "Refresh") {
+                                    vm.refresh()
+                                    true
+                                },
+                            )
+                        }
+                    }
                     WatchdogTopBar(
                         title = "Clients",
+                        modifier = headingModifier,
                         // The actions arrive with the rows; on the skeleton and the error card they would act on nothing.
                         actions = if (ready == null) {
                             emptyList()

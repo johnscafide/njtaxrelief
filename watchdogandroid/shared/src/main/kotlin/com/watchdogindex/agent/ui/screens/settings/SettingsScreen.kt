@@ -45,7 +45,6 @@ import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.dp
 import com.watchdogindex.agent.app.LocalAppGraph
 import com.watchdogindex.agent.app.screenViewModel
-import com.watchdogindex.agent.core.WatchdogConfig
 import com.watchdogindex.agent.core.model.AlertChannel
 import com.watchdogindex.agent.core.model.AppThemeMode
 import com.watchdogindex.agent.core.model.QuietHours
@@ -78,13 +77,6 @@ import com.watchdogindex.agent.ui.nav.Route
 
 /** `.pb-sm` is 110 on the mockup device, whose gesture area is 24; the rest scales with the real inset. */
 private val ScrollBottomBeyondChrome = 86.dp
-
-/**
- * The Agent Desk is `/dashboard` on the configured site origin, so a staging or preview build opens its own host
- * rather than production. A clean root-level Watchdog route. `SiteLinks` does not name the dashboard yet; once it
- * does (`config.links.dashboard`), this helper goes.
- */
-private fun WatchdogConfig.dashboardUrl(): String = "${siteOrigin.trimEnd('/')}/dashboard"
 
 @Composable
 fun SettingsScreen(navigator: Navigator) {
@@ -133,7 +125,8 @@ fun SettingsScreen(navigator: Navigator) {
                         contentPadding = PaddingValues(bottom = ScrollBottomBeyondChrome + chromeBottom),
                         vm = vm,
                     )
-                    SettingsDialogs(ready = s, vm = vm, onOpenAgentDesk = { platform.openUrl(graph.config.dashboardUrl()) })
+                    // `SiteLinks.dashboard`: the Agent Desk on the configured site origin, so a staging build opens its own host.
+                    SettingsDialogs(ready = s, vm = vm, onOpenAgentDesk = { platform.openUrl(graph.config.links.dashboard) })
                 }
             }
         }

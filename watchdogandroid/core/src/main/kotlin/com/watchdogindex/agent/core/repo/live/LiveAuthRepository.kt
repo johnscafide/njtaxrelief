@@ -11,7 +11,12 @@ import kotlinx.coroutines.flow.StateFlow
  * Sign-in with the six-digit email code (auth-and-account.md 2, 14), session restore and the account. Passkeys
  * throw: the backend has no WebAuthn (gap-answers.md "Welcome CTAs" A1), so the Welcome screen hides the button.
  */
-class LiveAuthRepository(private val ctx: LiveContext, private val beforeSignOut: suspend () -> Unit = {}) : AuthRepository {
+class LiveAuthRepository(
+    private val ctx: LiveContext,
+    private val beforeSignOut: suspend () -> Unit = {},
+    /** Runs before the stored session is restored (loading the device settings), so the launch splash covers both. */
+    private val onRestore: suspend () -> Unit = {},
+) : AuthRepository {
     override val state: StateFlow<AuthState> = ctx.session.state
 
     override suspend fun sendCode(email: String) = ctx.session.sendCode(email)
@@ -42,5 +47,14 @@ class LiveAuthRepository(private val ctx: LiveContext, private val beforeSignOut
 
     override suspend fun account(): Account = ctx.account()
 
-    override suspend fun restore() = ctx.session.restore()
+    override suspend fun restore() {
+        try {
+            onRestore()
+        } catch (e: CancellationException) {
+            throw e
+        } catch (e: Exception) {
+            // The device settings are best effort here; a store that cannot be read must not keep the session from restoring.
+        }
+        ctx.session.restore()
+    }
 }

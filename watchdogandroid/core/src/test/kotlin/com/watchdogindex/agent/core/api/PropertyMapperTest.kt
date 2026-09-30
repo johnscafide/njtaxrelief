@@ -2,6 +2,8 @@ package com.watchdogindex.agent.core.api
 
 import com.watchdogindex.agent.core.WatchdogException
 import com.watchdogindex.agent.core.api.FakeServer.Companion.json
+import com.watchdogindex.agent.core.math.TaxMath
+import com.watchdogindex.agent.core.model.PriceCheck
 import com.watchdogindex.agent.core.model.PriceCheckKind
 import com.watchdogindex.agent.core.model.VerdictKind
 import io.ktor.http.HttpMethod
@@ -30,7 +32,7 @@ class PropertyMapperTest {
         assertEquals("Block 9, Lot 20", s.blockLot)
         assertEquals(78, s.score)
         assertEquals(9954, s.taxBill)
-        assertEquals("Class 2 · Residential", s.propertyClassLabel)
+        assertEquals("Class 2 residential", s.propertyClassLabel, "the header chip reads as the mockup and the sample do; the middle dot is the HOME row's")
         assertEquals(40.7449, s.lat)
     }
 
@@ -139,6 +141,34 @@ class PropertyMapperTest {
         assertEquals(PriceCheckKind.InLine, scan.priceCheck!!.kind)
         assertEquals(10753, scan.priceCheck!!.expectedTax)
         assertTrue(scan.priceCheck!!.body.startsWith("Homes that sell near"))
+    }
+
+    @Test
+    fun `server price-check labels map to the kinds and tones the local math produces`() {
+        // One set of facts per local verdict; each title must come back as the same kind, hence the same box tone.
+        val local = listOf(
+            TaxMath.PriceCheckFacts(650_000.0, 10_000.0, -3_000.0, 60.0, 80.0, false),
+            TaxMath.PriceCheckFacts(650_000.0, 10_000.0, 500.0, 60.0, 80.0, false),
+            TaxMath.PriceCheckFacts(650_000.0, 10_000.0, 3_000.0, 60.0, 80.0, false),
+            TaxMath.PriceCheckFacts(650_000.0, 10_000.0, 500.0, 85.0, 80.0, true),
+        ).map { TaxMath.priceVerdict(it, "Harrison") }
+        assertEquals(listOf(PriceCheckKind.LowTaxForPrice, PriceCheckKind.InLine, PriceCheckKind.HighTaxForPrice, PriceCheckKind.AssessedHigh), local.map { it.kind })
+        for (check in local) {
+            val fromServer = check.copy(kind = PropertyMapper.priceCheckKind(check.title))
+            assertEquals(check.kind, fromServer.kind, check.title)
+            assertEquals(TaxMath.priceCheckTone(check), TaxMath.priceCheckTone(fromServer), check.title)
+        }
+        assertEquals(PriceCheckKind.AssessedHigh, PropertyMapper.priceCheckKind(TaxMath.ASSESSED_HIGH_TITLE))
+        assertEquals(PriceCheckKind.Unknown, PropertyMapper.priceCheckKind("Comparison not available"))
+
+        // The same verdict from the route: good news for the buyer, as the site colours it, not a warning.
+        val assessedHigh = PropertyFixture.withPriceCheck(650_000).replace("In line for this price", TaxMath.ASSESSED_HIGH_TITLE)
+        val scan = mapper.scanResult(WatchdogHttp.json.decodeFromString(PropertyApi.Response.serializer(), assessedHigh), 650_000, "From the pasted link", null)
+        val check = assertNotNull(scan.priceCheck)
+        assertEquals(PriceCheckKind.AssessedHigh, check.kind)
+        assertEquals(TaxMath.ASSESSED_HIGH_TITLE, check.title)
+        assertEquals(VerdictKind.Good, TaxMath.priceCheckTone(check))
+        assertEquals(VerdictKind.Good, TaxMath.priceCheckTone(PriceCheck(PriceCheckKind.AssessedHigh, TaxMath.ASSESSED_HIGH_TITLE, "", null)))
     }
 
     @Test

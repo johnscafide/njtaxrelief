@@ -25,6 +25,8 @@ import androidx.compose.foundation.selection.selectable
 import androidx.compose.foundation.selection.selectableGroup
 import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.foundation.shape.RoundedCornerShape
+import androidx.compose.foundation.text.KeyboardActions
+import androidx.compose.foundation.text.KeyboardOptions
 import androidx.compose.foundation.verticalScroll
 import androidx.compose.material3.AlertDialog
 import androidx.compose.material3.Icon
@@ -59,6 +61,8 @@ import androidx.compose.ui.semantics.semantics
 import androidx.compose.ui.text.SpanStyle
 import androidx.compose.ui.text.buildAnnotatedString
 import androidx.compose.ui.text.font.FontWeight
+import androidx.compose.ui.text.input.ImeAction
+import androidx.compose.ui.text.input.KeyboardCapitalization
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.text.withStyle
@@ -870,6 +874,8 @@ private fun NameFarmDialog(state: FarmUiState.Ready, vm: FarmViewModel) {
                     color = c.ink2,
                     style = t.body.sized(14, FontWeight.Normal, 20.3),
                 )
+                // A neighborhood name: each word capitalised; Done creates the farm once there is a name, and until
+                // then only closes the keyboard.
                 WdOutlinedField(
                     label = "Farm name",
                     value = name,
@@ -882,6 +888,10 @@ private fun NameFarmDialog(state: FarmUiState.Ready, vm: FarmViewModel) {
                     },
                     placeholder = "Neighborhood name",
                     enabled = !state.creating,
+                    keyboardOptions = KeyboardOptions(capitalization = KeyboardCapitalization.Words, imeAction = ImeAction.Done),
+                    keyboardActions = KeyboardActions(
+                        onDone = { if (name.isNotBlank() && !state.creating) vm.createFarm() else defaultKeyboardAction(ImeAction.Done) },
+                    ),
                 )
             }
         },

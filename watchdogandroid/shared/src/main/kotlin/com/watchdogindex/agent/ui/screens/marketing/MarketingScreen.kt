@@ -24,6 +24,8 @@ import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.selection.selectable
 import androidx.compose.foundation.selection.selectableGroup
 import androidx.compose.foundation.shape.RoundedCornerShape
+import androidx.compose.foundation.text.KeyboardActions
+import androidx.compose.foundation.text.KeyboardOptions
 import androidx.compose.foundation.verticalScroll
 import androidx.compose.material3.AlertDialog
 import androidx.compose.material3.DropdownMenu
@@ -45,6 +47,7 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.focus.FocusRequester
 import androidx.compose.ui.focus.focusRequester
+import androidx.compose.ui.platform.LocalFocusManager
 import androidx.compose.ui.platform.LocalLayoutDirection
 import androidx.compose.ui.semantics.LiveRegionMode
 import androidx.compose.ui.semantics.Role
@@ -52,6 +55,8 @@ import androidx.compose.ui.semantics.contentDescription
 import androidx.compose.ui.semantics.liveRegion
 import androidx.compose.ui.semantics.semantics
 import androidx.compose.ui.text.font.FontWeight
+import androidx.compose.ui.text.input.ImeAction
+import androidx.compose.ui.text.input.KeyboardType
 import androidx.compose.ui.unit.dp
 import com.watchdogindex.agent.app.LocalAppGraph
 import com.watchdogindex.agent.app.screenViewModel
@@ -382,6 +387,7 @@ private fun CardsTab(
     onCard: (TrueCostCard) -> Unit,
 ) {
     val focusRequester = remember { FocusRequester() }
+    val focusManager = LocalFocusManager.current
     LaunchedEffect(state.focusCardSearch) {
         if (state.focusCardSearch) {
             runCatching { focusRequester.requestFocus() }
@@ -391,6 +397,10 @@ private fun CardsTab(
     LazyColumn(modifier = Modifier.fillMaxSize(), contentPadding = contentPadding) {
         item(key = "search") {
             Column(modifier = Modifier.fillMaxWidth()) {
+                // The results already follow the typing (the view model searches after a short pause), so the Search
+                // key only puts the keyboard away to show them. No autofill hint on purpose: a field hinted as a postal
+                // address invites the autofill service to save what is typed here, and what is typed here is a client's
+                // home, not the agent's own address.
                 WdOutlinedField(
                     label = "Address",
                     value = state.cardQuery,
@@ -398,6 +408,8 @@ private fun CardsTab(
                     modifier = Modifier.padding(start = 16.dp, end = 16.dp, top = 16.dp).focusRequester(focusRequester),
                     onClear = if (state.cardQuery.isNotEmpty()) ({ onQuery("") }) else null,
                     placeholder = "Street and town",
+                    keyboardOptions = KeyboardOptions(keyboardType = KeyboardType.Text, imeAction = ImeAction.Search),
+                    keyboardActions = KeyboardActions(onSearch = { focusManager.clearFocus() }),
                 )
                 SupportingText("Any NJ home. The card shows the real monthly cost, property tax included.")
             }
@@ -676,12 +688,16 @@ private fun TrueCostSheet(
                         Text(text = "Building the card…", color = c.muted, style = t.body)
                     }
                 }
+                // The fourth target opens [LinkDialog], which shows the card's link and offers the web page (where the
+                // QR code is generated); it is labelled for that, not as a QR code the app does not draw.
                 ShareTargets(
                     onMessages = withCard { platform.composeSms(null, it.shareText() + "\n" + it.shareUrl) },
                     onMail = withCard { platform.composeEmail(null, it.shareTitle(), it.shareText() + "\n\n" + it.shareUrl) },
                     onCopy = copyLink,
                     onQr = withCard { onQrOpen() },
                     modifier = Modifier.padding(top = 14.dp),
+                    qrLabel = "Show link",
+                    qrIcon = WdIcons.Link,
                 )
                 OptionRow(
                     title = "Include my contact card",
@@ -695,16 +711,19 @@ private fun TrueCostSheet(
         }
     }
     if (sheet.qrOpen && url != null) {
-        QrDialog(url = url, onDismiss = onQrClose, onOpenWeb = {
+        LinkDialog(url = url, onDismiss = onQrClose, onOpenWeb = {
             onQrClose()
             platform.openUrl(url)
         })
     }
 }
 
-/** The QR code lives on the web page for the card; this small dialog shows the link it opens and offers to go there. */
+/**
+ * "Show link": the card's link as text, with the way to its web page. The QR code itself lives on that page (the
+ * app does not draw one), which the copy says plainly.
+ */
 @Composable
-private fun QrDialog(url: String, onDismiss: () -> Unit, onOpenWeb: () -> Unit) {
+private fun LinkDialog(url: String, onDismiss: () -> Unit, onOpenWeb: () -> Unit) {
     val c = WatchdogTheme.colors
     val t = WatchdogTheme.type
     AlertDialog(
@@ -714,12 +733,12 @@ private fun QrDialog(url: String, onDismiss: () -> Unit, onOpenWeb: () -> Unit) 
         textContentColor = c.ink2,
         iconContentColor = c.ink,
         shape = RoundedCornerShape(28.dp),
-        icon = { Icon(imageVector = WdIcons.QrCode2, contentDescription = null) },
-        title = { Text(text = "QR code", style = t.verdict) },
+        icon = { Icon(imageVector = WdIcons.Link, contentDescription = null) },
+        title = { Text(text = "Link for this card", style = t.verdict) },
         text = {
             Column {
                 Text(
-                    text = "The QR code for this card is generated on the web, so a buyer’s phone opens the same page. This is the link it opens:",
+                    text = "The QR code for this card is generated on the web page, so a buyer’s phone opens the same page. This is the link it opens:",
                     style = t.body.sized(14, FontWeight.Normal, 20.3),
                 )
                 Text(text = url, modifier = Modifier.padding(top = 10.dp), color = c.link, style = t.body.sized(13, FontWeight.SemiBold, 18.2))

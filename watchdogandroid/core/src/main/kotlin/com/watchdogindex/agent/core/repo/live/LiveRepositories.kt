@@ -18,6 +18,7 @@ import com.watchdogindex.agent.core.api.SupabaseRest
 import com.watchdogindex.agent.core.api.TokenProvider
 import com.watchdogindex.agent.core.api.TokenRefresher
 import com.watchdogindex.agent.core.api.WatchdogHttp
+import com.watchdogindex.agent.core.api.bestEffort
 import com.watchdogindex.agent.core.model.Account
 import com.watchdogindex.agent.core.repo.KeyValueStore
 import com.watchdogindex.agent.core.repo.Repositories
@@ -138,7 +139,7 @@ class LiveContext(
     suspend fun spherePins(): List<String> {
         val cached = cachedPins
         if (cached != null && pinsAt?.let { (now() - it).inWholeSeconds < ACCOUNT_CACHE_SECONDS } == true) return cached
-        val pins = runCatching { digest.sphere().pins }.getOrDefault(emptyList())
+        val pins = bestEffort { digest.sphere().pins } ?: emptyList()
         cachedPins = pins
         pinsAt = now()
         return pins
@@ -160,7 +161,7 @@ class LiveContext(
 class LiveRepositorySet(val context: LiveContext) : Repositories {
     override val settings = LiveSettingsRepository(context)
     override val alerts = LiveAlertsRepository(context)
-    override val auth = LiveAuthRepository(context, beforeSignOut = { alerts.forgetPushRegistration() })
+    override val auth = LiveAuthRepository(context, beforeSignOut = { alerts.forgetPushRegistration() }, onRestore = { settings.load() })
     override val digest = LiveDigestRepository(context)
     override val properties = LivePropertyRepository(context)
     override val scan = LiveScanRepository(context, properties)

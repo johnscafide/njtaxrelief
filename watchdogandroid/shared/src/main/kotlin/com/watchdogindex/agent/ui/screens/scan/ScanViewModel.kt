@@ -98,6 +98,23 @@ class ScanViewModel(
         updateReady { it.copy(url = "", result = null, error = null, resolving = false) }
     }
 
+    /**
+     * The keyboard's Go key: looks the typed link up now rather than after the typing pause. Text that is not a
+     * listing yet gets the same friendly reason a pasted non-listing link gets, so the key never does nothing.
+     */
+    fun resolveUrlNow() {
+        val ready = ready() ?: return
+        val input = listingInput(ready.url)
+        if (input != null) {
+            resolve(input, fromCamera = false)
+            return
+        }
+        resolveJob?.cancel()
+        if (ready.url.isBlank()) return
+        val reason = unsupportedReason(ready.url) ?: "That isn’t a listing link. Paste a Zillow, Realtor.com or Redfin link to a home."
+        updateReady { it.copy(resolving = false, error = ScanError(ScanErrorKind.UnsupportedLink, reason)) }
+    }
+
     /** The retry on an error box: runs the last lookup again. */
     fun retry() {
         val input = lastInput ?: ready()?.let { listingInput(it.url) } ?: return

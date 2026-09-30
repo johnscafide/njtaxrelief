@@ -20,6 +20,8 @@ import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.foundation.shape.RoundedCornerShape
+import androidx.compose.foundation.text.KeyboardActions
+import androidx.compose.foundation.text.KeyboardOptions
 import androidx.compose.foundation.verticalScroll
 import androidx.compose.material3.Icon
 import androidx.compose.material3.Scaffold
@@ -45,6 +47,8 @@ import androidx.compose.ui.semantics.contentDescription
 import androidx.compose.ui.semantics.liveRegion
 import androidx.compose.ui.semantics.semantics
 import androidx.compose.ui.text.font.FontWeight
+import androidx.compose.ui.text.input.ImeAction
+import androidx.compose.ui.text.input.KeyboardType
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
@@ -150,7 +154,6 @@ fun ScanScreen(initialUrl: String?, navigator: Navigator) {
             )
             when (val s = state) {
                 ScanUiState.Loading -> Box(Modifier.fillMaxSize())
-                is ScanUiState.Error -> ScanFatalError(userMessage = s.userMessage, onClose = navigator::back)
                 is ScanUiState.Ready -> {
                     WdSegmentedButtons(
                         // The component swaps the selected segment's icon for the check; the options keep their own icons.
@@ -185,6 +188,7 @@ private fun PasteMode(state: ScanUiState.Ready, vm: ScanViewModel, onFullPage: (
             .padding(bottom = ScrollBottomBeyondChrome + chromeBottom),
     ) {
         // `.mfield` margin-top 18 is to the box; the field keeps 8 dp above the box for its floating label.
+        // The URL keyboard; its Go key looks the link up at once instead of after the typing pause.
         WdOutlinedField(
             label = "Listing link",
             value = state.url,
@@ -192,6 +196,8 @@ private fun PasteMode(state: ScanUiState.Ready, vm: ScanViewModel, onFullPage: (
             modifier = Modifier.padding(start = 16.dp, end = 16.dp, top = 10.dp),
             onClear = if (state.url.isNotEmpty()) vm::clearUrl else null,
             placeholder = "Paste a listing link",
+            keyboardOptions = KeyboardOptions(keyboardType = KeyboardType.Uri, imeAction = ImeAction.Go),
+            keyboardActions = KeyboardActions(onGo = { vm.resolveUrlNow() }),
         )
         SupportingText(SUPPORTING_TEXT)
         val result = state.result
@@ -652,13 +658,3 @@ private fun HistorySheet(state: ScanUiState.Ready, onDismiss: () -> Unit, onPick
     }
 }
 
-// ---------------------------------------------------------------------- errors and helpers
-
-/** The screen itself could not start (nothing to do with a single lookup). */
-@Composable
-private fun ScanFatalError(userMessage: String, onClose: () -> Unit) {
-    Column(modifier = Modifier.fillMaxWidth().padding(start = 16.dp, end = 16.dp, top = 14.dp)) {
-        ReadBox(icon = WdIcons.Error, text = userMessage)
-        WdTonalButton(label = "Close", onClick = onClose, modifier = Modifier.padding(top = 10.dp), icon = WdIcons.Close, small = true)
-    }
-}

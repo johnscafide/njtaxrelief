@@ -52,8 +52,10 @@ class PropertyMapper(private val today: () -> LocalDate = { Clock.System.now().t
             blockLot = Format.blockLot(row.block ?: "", row.lot ?: "", row.qualifier),
             score = row.score?.score?.roundToInt(),
             taxBill = row.lastYearTax?.roundToInt(),
+            // The header chip reads "Class 2 residential", as the mockup and the sample data do; the middle-dot form
+            // ("2 · Residential") belongs to the HOME facts row only (Derived.classLine).
             propertyClassLabel = when {
-                classLabel != null && !row.propClass.isNullOrBlank() -> "Class ${row.propClass} · $classLabel"
+                classLabel != null && !row.propClass.isNullOrBlank() -> "Class ${row.propClass} ${classLabel.lowercase()}"
                 classLabel != null -> classLabel
                 !row.propClass.isNullOrBlank() -> "Class ${row.propClass}"
                 else -> "Property"
@@ -242,11 +244,16 @@ class PropertyMapper(private val today: () -> LocalDate = { Clock.System.now().t
     }
 
     companion object {
-        /** The site's verdict titles map onto the app's kinds; "Assessed high" folds into HighTaxForPrice as TaxMath does. */
+        /**
+         * The site's verdict titles map onto the app's kinds one to one with [TaxMath.priceVerdict], so a check the
+         * server ran and one computed here colour the same way ([TaxMath.priceCheckTone]): "Assessed high" is its own
+         * kind and reads as good news for the buyer (the assessment can be appealed after closing), not as a warning.
+         */
         fun priceCheckKind(verdict: String): PriceCheckKind = when (verdict.trim().lowercase()) {
             "low tax for this price" -> PriceCheckKind.LowTaxForPrice
             "in line for this price" -> PriceCheckKind.InLine
-            "on the high side for this price", "assessed high for this price" -> PriceCheckKind.HighTaxForPrice
+            "on the high side for this price" -> PriceCheckKind.HighTaxForPrice
+            "assessed high for this price" -> PriceCheckKind.AssessedHigh
             else -> PriceCheckKind.Unknown
         }
     }

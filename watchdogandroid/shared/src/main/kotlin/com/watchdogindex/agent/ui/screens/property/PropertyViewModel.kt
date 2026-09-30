@@ -2,9 +2,8 @@ package com.watchdogindex.agent.ui.screens.property
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.watchdogindex.agent.core.WatchdogConfig
+import com.watchdogindex.agent.core.SiteLinks
 import com.watchdogindex.agent.core.WatchdogException
-import com.watchdogindex.agent.core.api.Derived
 import com.watchdogindex.agent.core.api.PropertyApi
 import com.watchdogindex.agent.core.format.Format
 import com.watchdogindex.agent.core.model.PamsPin
@@ -23,12 +22,14 @@ import kotlinx.coroutines.launch
  * Property detail: loads the parcel through [Repositories.properties], keeps the saved / watched toggles
  * optimistic (they revert with a notice when the repository refuses), and runs the three sharing flows
  * through [PlatformServices]: the true cost card (built by the marketing repository, then the share sheet),
- * the tax checkup (the public checkup link in an email draft) and the plain property link.
+ * the tax checkup (the public checkup link in an email draft) and the plain property link, which [links] builds
+ * on the configured site origin (the canonical `/nj/<town>/<address>/<pin>` page).
  */
 class PropertyViewModel(
     private val repos: Repositories,
     private val platform: PlatformServices,
     private val pin: PamsPin,
+    private val links: SiteLinks,
 ) : ViewModel() {
 
     private val _state = MutableStateFlow<PropertyUiState>(PropertyUiState.Loading)
@@ -110,7 +111,7 @@ class PropertyViewModel(
 
     fun closeMenu() = updateReady { it.copy(menuOpen = false) }
 
-    /** "Open on the web": the public property page on www.watchdogindex.com. */
+    /** "Open on the web": the public property page on the configured Watchdog site. */
     fun openOnWeb() {
         val detail = ready()?.detail ?: return
         updateReady { it.copy(menuOpen = false) }
@@ -182,8 +183,7 @@ class PropertyViewModel(
         _state.update { s -> if (s is PropertyUiState.Ready) transform(s) else s }
     }
 
-    private fun webUrl(detail: PropertyDetail): String =
-        WatchdogConfig.PRODUCTION_SITE_ORIGIN + Derived.propertyPath(detail.summary.town, detail.summary.address, pin)
+    private fun webUrl(detail: PropertyDetail): String = links.property(pin, detail.summary.town, detail.summary.address)
 
     private fun Exception.friendlyMessage(): String =
         (this as? WatchdogException)?.userMessage ?: "Something went wrong. Try again."

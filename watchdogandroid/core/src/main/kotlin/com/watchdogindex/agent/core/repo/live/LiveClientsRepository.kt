@@ -5,6 +5,7 @@ import com.watchdogindex.agent.core.WatchdogException
 import com.watchdogindex.agent.core.api.ClientsApi
 import com.watchdogindex.agent.core.api.Derived
 import com.watchdogindex.agent.core.api.DigestApi
+import com.watchdogindex.agent.core.api.bestEffort
 import com.watchdogindex.agent.core.format.Format
 import com.watchdogindex.agent.core.math.TaxMath
 import com.watchdogindex.agent.core.model.CheckupSeason
@@ -68,10 +69,10 @@ class LiveClientsRepository(private val ctx: LiveContext) : ClientsRepository {
         val today = now.toLocalDateTime(Derived.NEW_JERSEY).date
         val seasonYear = TaxMath.nextDeadline(today).date.year
         val farmRows = ctx.clients.clientRows()
-        val actions = runCatching { ctx.clients.actions() }.getOrDefault(emptyList()).associateBy { it.opportunityKey }
+        val actions = (bestEffort { ctx.clients.actions() } ?: emptyList()).associateBy { it.opportunityKey }
         val weekAgo = Instant.fromEpochSeconds(now.epochSeconds - 7 * 86_400L)
-        val events = runCatching { ctx.digest.events(weekAgo, limit = 500) }.getOrDefault(emptyList())
-        val crmPins = runCatching { ctx.clients.crmLinkedPins() }.getOrDefault(emptySet())
+        val events = bestEffort { ctx.digest.events(weekAgo, limit = 500) } ?: emptyList()
+        val crmPins = bestEffort { ctx.clients.crmLinkedPins() } ?: emptySet()
         val sphere = DigestApi.Sphere(farmRows, emptyList())
 
         val bestEvent = HashMap<String, Pair<DigestApi.EventRow, Int>>()
@@ -163,7 +164,7 @@ class LiveClientsRepository(private val ctx: LiveContext) : ClientsRepository {
     suspend fun checkupShare(clientId: String): CheckupShare {
         val row = ctx.clients.clientRows().firstOrNull { it.id == clientId } ?: throw WatchdogException("Unknown client", userMessage = "That client is no longer in your list.")
         val pin = row.pamsPin?.trim()?.takeIf { it.isNotEmpty() } ?: throw WatchdogException("No parcel", userMessage = "Match this home to a parcel before sending a checkup.")
-        val account = runCatching { ctx.account() }.getOrNull()
+        val account = bestEffort { ctx.account() }
         val slug = account?.vanitySlug
         val link = "${ctx.config.siteOrigin}/checkup?pin=${java.net.URLEncoder.encode(pin, "UTF-8")}" + (slug?.let { "&agent=${java.net.URLEncoder.encode(it, "UTF-8")}" } ?: "")
         val name = account?.displayName?.takeIf { it.isNotBlank() }

@@ -161,6 +161,10 @@ fun ListenPill(label: String, onClick: () -> Unit, modifier: Modifier = Modifier
 /**
  * The Today teaser (`.intel` teaser): "Watchdog Intelligence" (spectrum word), the 16 sp 600 sentence,
  * and a footer with the 44 dp mic + "Ask by voice" as one control and "Read the brief >" as a link.
+ *
+ * The mic control is announced as [askContentDescription], not as its visible label: what [onAsk]
+ * does is the screen's decision (Today opens the Intelligence screen, so the default says so), and
+ * a screen that really starts Watchdog Intelligence Voice passes a description that says that.
  */
 @Composable
 fun IntelligenceTeaserCard(
@@ -170,6 +174,7 @@ fun IntelligenceTeaserCard(
     modifier: Modifier = Modifier,
     askLabel: String = "Ask by voice",
     briefLabel: String = "Read the brief",
+    askContentDescription: String = "Open Watchdog Intelligence",
 ) {
     val t = WatchdogTheme.type
     IntelligenceCard(modifier = modifier) {
@@ -192,7 +197,7 @@ fun IntelligenceTeaserCard(
                     .overflowTouchTarget()
                     .clip(RoundedCornerShape(24.dp))
                     .clickable(role = Role.Button, onClick = onAsk)
-                    .semantics(mergeDescendants = true) { contentDescription = "$askLabel, Watchdog Intelligence Voice" }
+                    .semantics(mergeDescendants = true) { contentDescription = askContentDescription }
                     .padding(end = 4.dp),
                 horizontalArrangement = Arrangement.spacedBy(10.dp, Alignment.CenterHorizontally),
                 verticalAlignment = Alignment.CenterVertically,

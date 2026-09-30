@@ -41,6 +41,4 @@ sealed interface ScanUiState {
         /** A one-off message for the snackbar. */
         val notice: String? = null,
     ) : ScanUiState
-
-    data class Error(val userMessage: String) : ScanUiState
 }

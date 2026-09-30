@@ -21,6 +21,8 @@ import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.foundation.shape.RoundedCornerShape
+import androidx.compose.foundation.text.KeyboardActions
+import androidx.compose.foundation.text.KeyboardOptions
 import androidx.compose.foundation.verticalScroll
 import androidx.compose.material3.Icon
 import androidx.compose.material3.Scaffold
@@ -42,11 +44,12 @@ import androidx.compose.ui.semantics.Role
 import androidx.compose.ui.semantics.liveRegion
 import androidx.compose.ui.semantics.semantics
 import androidx.compose.ui.text.font.FontWeight
+import androidx.compose.ui.text.input.ImeAction
+import androidx.compose.ui.text.input.KeyboardType
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import com.watchdogindex.agent.app.LocalAppGraph
 import com.watchdogindex.agent.app.screenViewModel
-import com.watchdogindex.agent.core.WatchdogConfig
 import com.watchdogindex.agent.design.WatchdogDimens
 import com.watchdogindex.agent.design.WatchdogLogo
 import com.watchdogindex.agent.design.WatchdogTheme
@@ -54,6 +57,7 @@ import com.watchdogindex.agent.design.WelcomeHero
 import com.watchdogindex.agent.design.icons.WdIcons
 import com.watchdogindex.agent.platform.LocalPlatformServices
 import com.watchdogindex.agent.ui.components.SupportingText
+import com.watchdogindex.agent.ui.components.WdAutofill
 import com.watchdogindex.agent.ui.components.WdOutlinedButton
 import com.watchdogindex.agent.ui.components.WdOutlinedField
 import com.watchdogindex.agent.ui.components.WdPrimaryButton
@@ -90,13 +94,6 @@ import kotlin.math.sin
 /** `.logo` ring `rgba(255,255,255,.18)` and `.wel-p` ink `rgba(255,255,255,.8)` on the fixed-navy hero. */
 private val LogoRing = Color.White.copy(alpha = .18f)
 private val LedeInk = Color.White.copy(alpha = .8f)
-
-/**
- * "Create an account" opens `/onboarding` on the configured site origin, so a staging or preview build links to
- * its own host rather than to production. A clean root-level Watchdog route (no trailing slash, like the other
- * routes). `SiteLinks` does not name this page yet; once it does (`config.links.onboarding`), this helper goes.
- */
-private fun WatchdogConfig.onboardingUrl(): String = "${siteOrigin.trimEnd('/')}/onboarding"
 
 private class WelcomeStep(val title: String, val body: String)
 
@@ -168,7 +165,8 @@ fun WelcomeScreen(navigator: Navigator) {
                                 onEditEmail = vm::editEmail,
                             )
                         }
-                        FinePrint(onCreateAccount = { platform.openUrl(graph.config.onboardingUrl()) })
+                        // `SiteLinks.onboarding`: `/onboarding` on the configured site origin, so a staging build links to its own host.
+                        FinePrint(onCreateAccount = { platform.openUrl(graph.config.links.onboarding) })
                     }
                 }
             }
@@ -295,6 +293,7 @@ private fun CtaBlock(
                 InlineError(ready.inlineError)
             }
             SignInStep.Email -> {
+                // The email keyboard, whose Send key does what "Send code" does; the platform may offer a saved address.
                 WdOutlinedField(
                     label = "Email",
                     value = ready.email,
@@ -302,6 +301,9 @@ private fun CtaBlock(
                     placeholder = "you@yourbrokerage.com",
                     onClear = { onEmailChange("") },
                     enabled = !ready.busy,
+                    keyboardOptions = KeyboardOptions(keyboardType = KeyboardType.Email, imeAction = ImeAction.Send),
+                    keyboardActions = KeyboardActions(onSend = { if (!ready.busy && ready.email.isNotBlank()) onSendCode() }),
+                    autofill = WdAutofill.EmailAddress,
                 )
                 InlineError(ready.inlineError)
                 WdPrimaryButton(
@@ -314,6 +316,8 @@ private fun CtaBlock(
             }
             SignInStep.Code -> {
                 Column {
+                    // The number pad without suggestions; Done signs in once all six digits are there and otherwise just
+                    // closes the keyboard. The platform may offer the code straight from the message.
                     WdOutlinedField(
                         label = "Six-digit code",
                         value = ready.code,
@@ -321,6 +325,13 @@ private fun CtaBlock(
                         placeholder = "000000",
                         onClear = { onCodeChange("") },
                         enabled = !ready.busy,
+                        keyboardOptions = KeyboardOptions(keyboardType = KeyboardType.NumberPassword, imeAction = ImeAction.Done),
+                        keyboardActions = KeyboardActions(
+                            onDone = {
+                                if (!ready.busy && ready.code.length == WelcomeViewModel.CODE_LENGTH) onVerify() else defaultKeyboardAction(ImeAction.Done)
+                            },
+                        ),
+                        autofill = WdAutofill.OneTimeCode,
                     )
                     SupportingText(text = "We emailed a code to ${ready.email.trim()}. It expires in ten minutes.")
                 }

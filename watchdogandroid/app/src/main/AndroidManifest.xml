@@ -13,9 +13,28 @@
     -->
     <uses-permission android:name="android.permission.POST_NOTIFICATIONS" />
     <uses-permission android:name="android.permission.VIBRATE" />
+    <!--
+      Microphone: only while the agent asks Watchdog Intelligence Voice a question on the Intelligence screen
+      (android/AndroidVoiceSession; see @string/microphone_purpose). Requested at the first tap of the mic, never at
+      launch, and the composer keeps its keyboard when it is refused.
+    -->
+    <uses-permission android:name="android.permission.RECORD_AUDIO" />
 
     <!-- The app works without a camera (Scan opens in paste mode). -->
     <uses-feature android:name="android.hardware.camera.any" android:required="false" />
+    <!-- And without a microphone (the Intelligence composer is typed; the mic says Voice is not ready). -->
+    <uses-feature android:name="android.hardware.microphone" android:required="false" />
+
+    <!--
+      Package visibility (Android 11+): SpeechRecognizer.isRecognitionAvailable() looks for an installed
+      RecognitionService, and without this entry an app targeting API 30+ sees none, so Watchdog Intelligence Voice
+      would report itself unavailable on every phone.
+    -->
+    <queries>
+        <intent>
+            <action android:name="android.speech.RecognitionService" />
+        </intent>
+    </queries>
 
     <application
         android:name=".WatchdogApplication"

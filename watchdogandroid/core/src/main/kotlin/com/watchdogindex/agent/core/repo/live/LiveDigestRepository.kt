@@ -6,6 +6,7 @@ import com.watchdogindex.agent.core.api.StoredDoneTasks
 import com.watchdogindex.agent.core.api.readJson
 import com.watchdogindex.agent.core.api.writeJson
 import com.watchdogindex.agent.core.api.Derived
+import com.watchdogindex.agent.core.api.bestEffort
 import com.watchdogindex.agent.core.format.Format
 import com.watchdogindex.agent.core.math.TaxMath
 import com.watchdogindex.agent.core.model.AgentTask
@@ -67,11 +68,11 @@ class LiveDigestRepository(private val ctx: LiveContext) : DigestRepository {
         reasons.filter { it.event.eventType == "tax_change" && (it.event.deltaNumeric ?: 0.0) > 0 && it.home.model == Relationship.PastClient }
             .maxByOrNull { it.event.deltaNumeric ?: 0.0 }
             ?.let { best ->
-                val delta = best.event.deltaNumeric!!.roundToInt()
                 tasks += AgentTask(
                     id = "task-call-${best.home.key}",
                     title = "Call about ${Derived.titleCase(best.home.address)}",
-                    subtitle = "Past client · tax bill ${Format.moneyChange(delta)}",
+                    // "Past client · 2026 bill up $612": the same words as the change list, lowercased after the dot.
+                    subtitle = "Past client · ${DigestApi.taxBillTitle(best.event).replaceFirstChar { it.lowercase() }}",
                     action = TaskAction(TaskActionKind.Call, null, phone = null, route = best.home.pin?.let { "property/$it" }),
                 )
             }
@@ -107,14 +108,14 @@ class LiveDigestRepository(private val ctx: LiveContext) : DigestRepository {
 
     /** One RPC, then at most two status calls; a plan denial or any other failure just means no marketing task. */
     private suspend fun postcardTasks(): List<AgentTask> {
-        val campaigns = runCatching { ctx.marketing.postcardCampaigns() }.getOrNull() ?: return emptyList()
+        val campaigns = bestEffort { ctx.marketing.postcardCampaigns() } ?: return emptyList()
         val candidates = campaigns
             .filter { it.status !in setOf("completed", "mailed", "delivered", "canceled") }
             .sortedByDescending { it.updatedAt ?: "" }
             .take(2)
         val tasks = ArrayList<AgentTask>()
         for (campaign in candidates) {
-            val status = runCatching { ctx.marketing.postcardStatus(campaign.id) }.getOrNull() ?: continue
+            val status = bestEffort { ctx.marketing.postcardStatus(campaign.id) } ?: continue
             if (!status.needsApproval) continue
             val homes = status.recipients?.valid?.toInt() ?: campaign.audienceCount?.toInt()
             tasks += AgentTask(

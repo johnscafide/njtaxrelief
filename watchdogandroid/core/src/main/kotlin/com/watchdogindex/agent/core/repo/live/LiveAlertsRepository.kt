@@ -9,6 +9,7 @@ import com.watchdogindex.agent.core.api.HttpFailureException
 import com.watchdogindex.agent.core.api.LiveKeys
 import com.watchdogindex.agent.core.api.StoredLocalAlerts
 import com.watchdogindex.agent.core.api.StoredPushRegistration
+import com.watchdogindex.agent.core.api.bestEffort
 import com.watchdogindex.agent.core.api.readJson
 import com.watchdogindex.agent.core.api.writeJson
 import com.watchdogindex.agent.core.format.Format
@@ -18,6 +19,7 @@ import com.watchdogindex.agent.core.model.AppNotification
 import com.watchdogindex.agent.core.model.NotificationAction
 import com.watchdogindex.agent.core.model.NotificationActionKind
 import com.watchdogindex.agent.core.repo.AlertsRepository
+import kotlinx.coroutines.CancellationException
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.flow.asStateFlow
@@ -34,6 +36,10 @@ import java.util.UUID
  *   rows that already exist (never creating one), and the displayed state follows those rows when they exist.
  * - Push registration goes through the `push-device-register` edge function with a stable installation id; the
  *   function is still a proposal, so a missing function surfaces as a plain error and never blocks anything else.
+ *   The launch-time heartbeat carries no preference fields, so it can never overwrite the agent's saved switches.
+ *
+ * Saving is server first, device second: nothing is kept on the device until the rows the server owns have taken
+ * the change, so a switch the screen reports as not saved never comes back as saved on the next load.
  */
 class LiveAlertsRepository(private val ctx: LiveContext) : AlertsRepository {
 
@@ -46,7 +52,7 @@ class LiveAlertsRepository(private val ctx: LiveContext) : AlertsRepository {
         val digest = try { ctx.alerts.digestPreference() } catch (e: PlanRequiredException) { null } catch (e: HttpFailureException) { null }
         digestRow = digest
         val channels = local.channelMap().toMutableMap()
-        val pinRows = runCatching { ctx.alerts.pinPreferences() }.getOrDefault(emptyList())
+        val pinRows = bestEffort { ctx.alerts.pinPreferences() } ?: emptyList()
         if (pinRows.isNotEmpty()) {
             channels[AlertChannel.ClientHomeChanges] = pinRows.none { !it.alertTax || !it.alertAssessment }
             channels[AlertChannel.AppealDeadlines] = pinRows.none { !it.alertDeadline }
@@ -61,16 +67,16 @@ class LiveAlertsRepository(private val ctx: LiveContext) : AlertsRepository {
         )
     }
 
+    /**
+     * Server first, device second. The Monday email row and the per-pin rows are written before anything is kept on
+     * this device, so a failure leaves both sides where they were and the state the screen reverts to is the truth.
+     * When the per-pin patch fails after the Monday email saved, what did save is kept and published, only the two
+     * category switches stay as they were, and the error carries on to the screen.
+     */
     override suspend fun update(preferences: AlertPreferences) {
         val before = state.value
         val userId = ctx.userId()
         val now = ctx.now()
-        ctx.store.writeJson(LiveKeys.LOCAL_ALERTS, StoredLocalAlerts(
-            mondayNotification = preferences.mondayNotification,
-            channels = preferences.channels.entries.associate { (c, on) -> c.id to on },
-            quietStartHour = preferences.quietHours.startHour,
-            quietEndHour = preferences.quietHours.endHour,
-        ))
         if (preferences.mondayEmail != before.mondayEmail) {
             try {
                 ctx.alerts.saveDigestPreference(userId, preferences.mondayEmail, digestRow?.weekday, digestRow?.localHour, digestRow?.timezone, now)
@@ -82,22 +88,51 @@ class LiveAlertsRepository(private val ctx: LiveContext) : AlertsRepository {
         }
         val homeChanges = preferences.channels[AlertChannel.ClientHomeChanges] ?: true
         val deadlines = preferences.channels[AlertChannel.AppealDeadlines] ?: true
-        if (homeChanges != (before.channels[AlertChannel.ClientHomeChanges] ?: true) || deadlines != (before.channels[AlertChannel.AppealDeadlines] ?: true)) {
-            // A category switch changes what the existing per-pin rows say; it never enrols the farm and sphere pins
-            // that have no row, so only pins with a preference row are patched.
-            val pins = runCatching { ctx.alerts.pinPreferences() }.getOrDefault(emptyList()).map { it.pamsPin }
-            if (pins.isNotEmpty()) {
-                runCatching { ctx.alerts.updatePinPreferences(userId, pins, alertTax = homeChanges, alertAssessment = homeChanges, alertScore = homeChanges, alertDeadline = deadlines, now = now) }
+        val homeChangesBefore = before.channels[AlertChannel.ClientHomeChanges] ?: true
+        val deadlinesBefore = before.channels[AlertChannel.AppealDeadlines] ?: true
+        if (homeChanges != homeChangesBefore || deadlines != deadlinesBefore) {
+            try {
+                // A category switch changes what the existing per-pin rows say; it never enrols the farm and sphere pins
+                // that have no row, so only pins with a preference row are patched.
+                val pins = ctx.alerts.pinPreferences().map { it.pamsPin }
+                if (pins.isNotEmpty()) {
+                    ctx.alerts.updatePinPreferences(userId, pins, alertTax = homeChanges, alertAssessment = homeChanges, alertScore = homeChanges, alertDeadline = deadlines, now = now)
+                }
+            } catch (e: CancellationException) {
+                throw e
+            } catch (e: Exception) {
+                // The rows did not change, so the two category switches stay where they were (the display follows the
+                // rows when they exist); the rest of this update is kept, and the screen shows the error.
+                commit(preferences.copy(channels = preferences.channels + (AlertChannel.ClientHomeChanges to homeChangesBefore) + (AlertChannel.AppealDeadlines to deadlinesBefore)), before)
+                throw e
             }
         }
-        state.value = preferences.copy(deliveryLabel = before.deliveryLabel, timeZone = before.timeZone)
-        mirrorToPush(preferences)
+        commit(preferences, before)
+    }
+
+    /** Keeps the device-held switches, publishes the state and mirrors it to the push registration (best effort). */
+    private suspend fun commit(preferences: AlertPreferences, before: AlertPreferences) {
+        ctx.store.writeJson(LiveKeys.LOCAL_ALERTS, StoredLocalAlerts(
+            mondayNotification = preferences.mondayNotification,
+            channels = preferences.channels.entries.associate { (c, on) -> c.id to on },
+            quietStartHour = preferences.quietHours.startHour,
+            quietEndHour = preferences.quietHours.endHour,
+        ))
+        val published = preferences.copy(deliveryLabel = before.deliveryLabel, timeZone = before.timeZone)
+        state.value = published
+        mirrorToPush(published)
     }
 
     private suspend fun mirrorToPush(preferences: AlertPreferences) {
         val stored = ctx.store.readJson<StoredPushRegistration>(LiveKeys.PUSH) ?: return
         if (stored.token == null) return
-        runCatching { ctx.alerts.updateRegistration(registration(stored, preferences, stored.platform ?: "android")) }
+        bestEffort { ctx.alerts.updateRegistration(registration(stored, preferences, stored.platform ?: "android")) }
+    }
+
+    /** The switches as this device holds them, whether or not [refresh] has run yet in this process. */
+    private suspend fun storedPreferences(): AlertPreferences {
+        val local = ctx.store.readJson<StoredLocalAlerts>(LiveKeys.LOCAL_ALERTS) ?: return state.value
+        return state.value.copy(mondayNotification = local.mondayNotification, channels = local.channelMap(), quietHours = local.quietHours())
     }
 
     private fun registration(stored: StoredPushRegistration, preferences: AlertPreferences, platform: String) = AlertsApi.PushRegistration(
@@ -112,13 +147,20 @@ class LiveAlertsRepository(private val ctx: LiveContext) : AlertsRepository {
         digestEnabled = preferences.mondayNotification,
     )
 
+    /**
+     * `register` on first contact, `heartbeat` afterwards (every launch, and when FCM rotates the token). A heartbeat
+     * names only the installation, token and platform: the function patches just the fields a body carries, so the
+     * flags, quiet hours and timezone the agent last saved stay as they are. The first registration seeds the row
+     * from the switches stored on this device, not from the in-memory defaults that precede [refresh].
+     */
     override suspend fun registerPushToken(token: String, platform: String) {
         if (token.isBlank()) throw WatchdogException("Empty push token")
         val stored = ctx.store.readJson<StoredPushRegistration>(LiveKeys.PUSH) ?: StoredPushRegistration(UUID.randomUUID().toString().replace("-", ""))
         val heartbeat = stored.token != null
         val next = stored.copy(token = token, platform = platform)
         try {
-            ctx.alerts.register(registration(next, state.value, platform), heartbeat)
+            if (heartbeat) ctx.alerts.heartbeat(next.installationId, token, platform)
+            else ctx.alerts.register(registration(next, storedPreferences(), platform), heartbeat = false)
         } catch (e: HttpFailureException) {
             if (e.status == 404) throw WatchdogException("push-device-register missing", e, "Notifications aren’t switched on for this build yet.")
             throw e
@@ -138,7 +180,7 @@ class LiveAlertsRepository(private val ctx: LiveContext) : AlertsRepository {
     /** Called on sign-out: tells the server this installation is gone and forgets the token. Never throws. */
     suspend fun forgetPushRegistration() {
         val stored = ctx.store.readJson<StoredPushRegistration>(LiveKeys.PUSH) ?: return
-        if (stored.token != null) runCatching { ctx.alerts.unregister(stored.installationId) }
+        if (stored.token != null) bestEffort { ctx.alerts.unregister(stored.installationId) }
         ctx.store.writeJson(LiveKeys.PUSH, stored.copy(token = null, registeredAtEpochSeconds = null))
     }
 
@@ -147,7 +189,7 @@ class LiveAlertsRepository(private val ctx: LiveContext) : AlertsRepository {
         val now = ctx.now()
         val since = Instant.fromEpochSeconds(now.epochSeconds - 30 * 86_400L)
         val events = ctx.digest.events(since, limit = 100).filter { it.eventType in DigestApi.WEIGHTS }
-        val sphere = runCatching { ctx.digest.sphere() }.getOrNull()
+        val sphere = bestEffort { ctx.digest.sphere() }
         return events.take(50).map { event ->
             val home = sphere?.match(event)
             val address = home?.address?.let { Derived.titleCase(it) } ?: event.payloadAddress?.let { Derived.titleCase(it) }

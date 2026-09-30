@@ -6,6 +6,7 @@ import com.watchdogindex.agent.core.api.AccountApi
 import com.watchdogindex.agent.core.api.Derived
 import com.watchdogindex.agent.core.api.DigestApi
 import com.watchdogindex.agent.core.api.IntelligenceApi
+import com.watchdogindex.agent.core.api.bestEffort
 import com.watchdogindex.agent.core.format.Format
 import com.watchdogindex.agent.core.model.AnalystAnswer
 import com.watchdogindex.agent.core.model.Brief
@@ -35,18 +36,18 @@ class LiveIntelligenceRepository(private val ctx: LiveContext, private val diges
     private var lastAnalystAttempt: Instant? = null
 
     override suspend fun brief(): Brief {
-        val account = runCatching { ctx.account() }.getOrNull()
+        val account = bestEffort { ctx.account() }
         val first = account?.displayName?.substringBefore(' ')?.takeIf { it.isNotBlank() }
         val today = ctx.today()
         val forBase = listOfNotNull(first?.let { "For $it" }, Format.longDate(today)).joinToString(" · ")
 
-        runCatching { ctx.intelligence.savedBrief() }.getOrNull()?.let { saved ->
+        bestEffort { ctx.intelligence.savedBrief() }?.let { saved ->
             val createdAt = Derived.parseInstant(saved.createdAt)
             val age = createdAt?.let { (ctx.now() - it).inWholeHours } ?: Long.MAX_VALUE
             if (age < 7 * 24 && saved.response.conclusion.isNotBlank()) return briefFrom(saved.response, forBase, createdAt)
         }
 
-        val eligible = runCatching { canRunAnalyst(account?.planTier) }.getOrDefault(false)
+        val eligible = bestEffort { canRunAnalyst(account?.planTier) } ?: false
         if (eligible) {
             val pins = ctx.spherePins()
             val now = ctx.now()
@@ -73,7 +74,7 @@ class LiveIntelligenceRepository(private val ctx: LiveContext, private val diges
 
     private suspend fun canRunAnalyst(planTier: String?): Boolean {
         if (AccountApi.rank(planTier) >= 2) return true
-        if (planTier == "agent") return runCatching { ctx.intelligence.voiceStatus().addonActive }.getOrDefault(false)
+        if (planTier == "agent") return bestEffort { ctx.intelligence.voiceStatus().addonActive } ?: false
         return false
     }
 
@@ -95,7 +96,9 @@ class LiveIntelligenceRepository(private val ctx: LiveContext, private val diges
         val minutes = maxOf(1, Math.round(words / 200.0).toInt())
         val time = createdAt?.toLocalDateTime(Derived.NEW_JERSEY)?.let { Format.time12h(it.hour, it.minute) } ?: Format.time12h(8)
         return Brief(
-            kicker = "Watchdog Intelligence brief",
+            // The sub-feature keeps the master name with its capital B; the card uppercases it for display and reads
+            // this string to screen readers as written.
+            kicker = "Watchdog Intelligence Brief",
             timeLabel = "$time · $minutes min read",
             listenLabel = null,
             heading = if (items.size >= 3) "Three things worth your time this week" else "Worth your time this week",
@@ -107,7 +110,7 @@ class LiveIntelligenceRepository(private val ctx: LiveContext, private val diges
 
     /** The fallback: the week's top three reasons with their sources; the label says where it came from. */
     private suspend fun digestBrief(forBase: String, eligible: Boolean): Brief {
-        runCatching { digest.thisWeek() }
+        bestEffort { digest.thisWeek() }
         val reasons = ctx.digest.top(digest.lastReasons, 3)
         val items = reasons.map { r ->
             val change = ctx.digest.change(r)
@@ -117,7 +120,7 @@ class LiveIntelligenceRepository(private val ctx: LiveContext, private val diges
                 source = change.sourceNote ?: "Public records",
             )
         }
-        val note = if (eligible) "built from this week’s public-record changes" else "built from this week’s public-record changes · the written brief and Voice need the Watchdog Intelligence add-on"
+        val note = if (eligible) "built from this week’s public-record changes" else "built from this week’s public-record changes · the written $BRIEF_NAME and $VOICE_NAME need the Watchdog Intelligence add-on"
         return Brief(
             kicker = "Monday brief",
             timeLabel = "${Format.time12h(8)} · ${maxOf(1, items.size / 2)} min read",
@@ -163,6 +166,10 @@ class LiveIntelligenceRepository(private val ctx: LiveContext, private val diges
     companion object {
         /** How long a failed brief run keeps the analyst quiet. */
         const val ANALYST_RETRY_MINUTES = 60L
+
+        /** The canonical sub-feature names: the master name stays attached, never a bare "Brief" or "Voice". */
+        const val BRIEF_NAME = "Watchdog Intelligence Brief"
+        const val VOICE_NAME = "Watchdog Intelligence Voice"
 
         val DEFAULT_FOLLOW_UPS = listOf(
             FollowUp("chat_bubble", "Which clients should I call first?"),

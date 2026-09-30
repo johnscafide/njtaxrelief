@@ -4,6 +4,7 @@ import com.watchdogindex.agent.core.PlanRequiredException
 import com.watchdogindex.agent.core.WatchdogException
 import com.watchdogindex.agent.core.api.Derived
 import com.watchdogindex.agent.core.api.MarketingApi
+import com.watchdogindex.agent.core.api.bestEffort
 import com.watchdogindex.agent.core.format.Format
 import com.watchdogindex.agent.core.math.TaxMath
 import com.watchdogindex.agent.core.model.AgentCard
@@ -103,7 +104,7 @@ class LiveMarketingRepository(private val ctx: LiveContext) : MarketingRepositor
         val annualTax = if (current != null && !current.generalRateOnly && current.amount != null) current.amount else bill
         val monthly = TaxMath.monthlyCost(resolved, annualTax.roundToInt())
         val summary = ctx.mapper.summary(response)
-        val account = if (includeContactCard) runCatching { ctx.account() }.getOrNull() else null
+        val account = if (includeContactCard) bestEffort { ctx.account() } else null
         val agent = account?.let {
             AgentCard(
                 name = it.displayName,

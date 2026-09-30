@@ -284,6 +284,10 @@ fun ShareSheetHeader(
 /**
  * Share targets (`.targets`): four equal columns with 56 dp circles and 28 dp icons: Messages (fixed
  * teal), Mail (fixed link blue), Copy link and QR code (fill2 with ink icons), 12 sp 600 labels below.
+ *
+ * The fourth target is honest only when [onQr] really shows a QR code. A screen whose dialog shows
+ * the link some other way relabels it with [qrLabel] (and [qrIcon]), or drops it with `showQr = false`,
+ * in which case the three remaining targets share the row equally.
  */
 @Composable
 fun ShareTargets(
@@ -292,13 +296,18 @@ fun ShareTargets(
     onCopy: () -> Unit,
     onQr: () -> Unit,
     modifier: Modifier = Modifier,
+    showQr: Boolean = true,
+    qrLabel: String = "QR code",
+    qrIcon: ImageVector = WdIcons.QrCode2,
 ) {
     val c = WatchdogTheme.colors
     Row(modifier = modifier.fillMaxWidth(), horizontalArrangement = Arrangement.spacedBy(8.dp)) {
         ShareTarget(label = "Messages", icon = WdIcons.ChatBubbleFill, container = FixedInk.teal, tint = Color.White, onClick = onMessages, modifier = Modifier.weight(1f))
         ShareTarget(label = "Mail", icon = WdIcons.MailFill, container = FixedInk.link, tint = Color.White, onClick = onMail, modifier = Modifier.weight(1f))
         ShareTarget(label = "Copy link", icon = WdIcons.Link, container = c.fill2, tint = c.ink, onClick = onCopy, modifier = Modifier.weight(1f))
-        ShareTarget(label = "QR code", icon = WdIcons.QrCode2, container = c.fill2, tint = c.ink, onClick = onQr, modifier = Modifier.weight(1f))
+        if (showQr) {
+            ShareTarget(label = qrLabel, icon = qrIcon, container = c.fill2, tint = c.ink, onClick = onQr, modifier = Modifier.weight(1f))
+        }
     }
 }
 

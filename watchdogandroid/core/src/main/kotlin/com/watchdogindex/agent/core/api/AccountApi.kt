@@ -4,6 +4,7 @@ import com.watchdogindex.agent.core.NotSignedInException
 import com.watchdogindex.agent.core.WatchdogException
 import com.watchdogindex.agent.core.model.Account
 import com.watchdogindex.agent.core.model.AuthSession
+import kotlinx.coroutines.CancellationException
 import kotlinx.serialization.json.JsonArray
 import kotlinx.serialization.json.JsonObject
 import kotlinx.serialization.json.buildJsonObject
@@ -77,9 +78,17 @@ class AccountApi(private val rest: SupabaseRest, private val auth: SupabaseAuthC
     /** Everything the Account model needs, in the order the web resolves names (auth-and-account.md 7). */
     suspend fun account(session: AuthSession): Account {
         val entitlement = entitlement()
-        val agent = runCatching { hasPlan("agent") }.getOrElse { if (it is NotSignedInException) throw it else entitlement.looksLikeAgentPlan }
-        val profile = runCatching { profile(session.userId) }.getOrNull()
-        val user = runCatching { auth.getUser(session.accessToken) }.getOrNull()
+        val agent = try {
+            hasPlan("agent")
+        } catch (e: CancellationException) {
+            throw e
+        } catch (e: NotSignedInException) {
+            throw e
+        } catch (e: Exception) {
+            entitlement.looksLikeAgentPlan
+        }
+        val profile = bestEffort { profile(session.userId) }
+        val user = bestEffort { auth.getUser(session.accessToken) }
         val metadata = user?.obj("user_metadata")
         val watchdogProfile = metadata?.obj("watchdog_profile")
         val email = user?.str("email")?.takeIf { it.isNotBlank() } ?: session.email

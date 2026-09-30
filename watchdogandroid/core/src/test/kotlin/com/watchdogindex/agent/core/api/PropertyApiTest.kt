@@ -109,7 +109,8 @@ class PropertyApiTest {
         assertEquals("102 Grant Ave", detail.summary.address)
         assertEquals("Harrison Town", detail.summary.town)
         assertEquals("Hudson County", detail.summary.county)
-        assertEquals("Class 2 · Residential", detail.summary.propertyClassLabel)
+        assertEquals("Class 2 residential", detail.summary.propertyClassLabel)
+        assertEquals("2 · Residential", detail.facts.propertyClass, "the middle-dot form belongs to the HOME facts row")
         assertEquals(78, detail.summary.score)
         assertEquals(9954, detail.summary.taxBill)
 

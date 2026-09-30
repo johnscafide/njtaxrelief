@@ -18,7 +18,8 @@ import { createClient } from "npm:@supabase/supabase-js@2.95.0";
 //   and every unsent claimed row is released (release_push_outbox) without an
 //   attempt, to be retried after Retry-After (1 to 60 minutes). Per-row
 //   failures back off through complete_push_outbox (2, 4, 8, 16 minutes).
-// - The message carries only what the outbox row holds: title, body and a
+// - The message is data-only for Android (the app posts the notification, see
+//   fcmMessage) and carries only what the outbox row holds: title, body and a
 //   small string map (pin, route, event type, severity, channel, actions).
 //   Outbox rows are built from privacy-reviewed event columns only; no owner,
 //   mailing-address or CRM contact field exists anywhere in this pipeline.
@@ -113,46 +114,83 @@ function quietHoursEnd(row: Claimed, at = new Date()) {
 }
 
 // --- FCM message ---
-function channelFor(kind: string, severity: string) {
-  if (kind === "digest") return "digest";
-  if (kind === "test") return "system";
-  return severity === "action" ? "property_alerts_action" : "property_alerts";
+// The message is what the Android app decodes (watchdogandroid app/push/PushPayload.kt): data only, so the app
+// posts the notification itself on its own channel with its own action buttons, in the background too, and the
+// agent's per-channel switches apply. The app also still decodes the earlier shape (a notification block, channel
+// names property_alerts / property_alerts_action / digest / system, action words open_property / mark_read /
+// open_desk / open_app), so an older deployment of this function keeps working while this source waits.
+//
+// Device channel ids are the app's AlertChannel ids (core/model/Alerts.kt), one system notification channel each
+// (app/push/NotificationChannels.kt). Keep the two lists identical; the contract test compares them.
+const CHANNEL_IDS = {
+  clientHomeChanges: "client_home_changes",
+  farmSalesDeeds: "farm_sales_deeds",
+  townRatesRevaluations: "town_rates_revaluations",
+  appealDeadlines: "appeal_deadlines",
+  mondayBrief: "monday_brief",
+} as const;
+// event_type -> channel, the rule the in-app Alerts list uses (LiveAlertsRepository.channelFor).
+function channelFor(kind: string, eventType: string) {
+  if (kind === "digest") return CHANNEL_IDS.mondayBrief;
+  if (eventType === "deed_change") return CHANNEL_IDS.farmSalesDeeds;
+  if (eventType === "municipal_change") return CHANNEL_IDS.townRatesRevaluations;
+  if (eventType === "appeal_deadline") return CHANNEL_IDS.appealDeadlines;
+  return CHANNEL_IDS.clientHomeChanges;
 }
-function actionsFor(kind: string) {
-  if (kind === "digest") return "open_desk";
-  if (kind === "test") return "open_app";
-  return "open_property,mark_read";
+// Action words NotificationActions.kindOf understands (open_brief, call_client, view_farm, send_checkups, later,
+// open; at most three buttons). The content tap already opens the home, so a deed in the farm offers the farm
+// instead of repeating "open". Never call_client: the pipeline carries no phone number, by design.
+function actionsFor(kind: string, eventType: string) {
+  if (kind === "digest") return "open_brief";
+  if (kind === "test") return "open";
+  if (eventType === "deed_change") return "view_farm,later";
+  return "open,later";
+}
+// Route words IntentRoutes.fromExtras understands. A property event keeps the outbox row's "pulse" (the home when
+// a pin is present, else the Alerts list); a digest opens the Monday brief on the Intelligence screen, the same
+// place as its "Open brief" button, unless the row names another app route word; a test push opens Alerts.
+function routeFor(kind: string, requested: string) {
+  if (kind === "digest") return requested && requested !== "pulse" ? requested : "brief";
+  if (kind === "test") return requested || "alerts";
+  return requested || "pulse";
 }
 function fcmMessage(row: Claimed) {
   const d = (row.data || {}) as Obj;
+  const title = clean(row.title, 180);
+  const body = clean(row.body, 700);
   const severity = clean(d.severity, 20) || "info";
-  const pin = clean(d.pams_pin, 80);
   const eventType = clean(d.event_type, 40);
   const collapse = clean(row.collapse_key, 120) || `push:${row.kind}`;
-  const priority = severity === "action" ? "HIGH" : "NORMAL";
-  // FCM requires every data value to be a string.
+  // FCM requires every data value to be a string; empty ones are dropped below.
   const data: Record<string, string> = {
+    title,
+    body,
     kind: clean(row.kind, 20),
-    route: clean(d.route, 40) || "pulse",
-    pin,
+    route: routeFor(row.kind, clean(d.route, 40)),
+    pin: clean(d.pams_pin, 80),
     event_id: clean(d.event_id, 40),
     event_type: eventType,
     severity,
-    channel: channelFor(row.kind, severity),
-    actions: actionsFor(row.kind),
+    channel: channelFor(row.kind, eventType),
+    actions: actionsFor(row.kind, eventType),
     collapse_key: collapse,
     outbox_id: String(row.id),
   };
   for (const k of Object.keys(data)) if (!data[k]) delete data[k];
-  return {
-    message: {
-      token: row.token,
-      notification: { title: clean(row.title, 180), body: clean(row.body, 700) },
-      android: { priority, collapse_key: collapse, notification: { channel_id: data.channel } },
-      apns: { headers: { "apns-collapse-id": collapse, "apns-priority": priority === "HIGH" ? "10" : "5" } },
-      data,
-    },
+  // Every push is a user-visible alert the app posts on arrival, which is what FCM reserves high priority for; a
+  // normal-priority data message can wait out Doze for hours, and quiet hours are already enforced before a row
+  // is claimed. Collapsed per event so a resend replaces rather than repeats.
+  const message: Obj = {
+    token: row.token,
+    android: { priority: "HIGH", collapse_key: collapse },
+    data,
   };
+  if (row.platform === "ios") {
+    // No iOS app yet. APNs shows nothing for a data-only message, so an ios registration keeps an alert payload.
+    message.notification = { title, body };
+    message.apns = { headers: { "apns-collapse-id": collapse, "apns-priority": "10" } };
+  }
+  return { message };
 }
 
 // --- FCM error classification ---

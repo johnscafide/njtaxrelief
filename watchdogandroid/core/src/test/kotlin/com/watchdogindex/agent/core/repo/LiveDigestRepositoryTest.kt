@@ -1,5 +1,6 @@
 package com.watchdogindex.agent.core.repo
 
+import com.watchdogindex.agent.core.api.DigestApi
 import com.watchdogindex.agent.core.api.FakeServer
 import com.watchdogindex.agent.core.api.FakeServer.Companion.json
 import com.watchdogindex.agent.core.api.TestConfig
@@ -11,6 +12,8 @@ import io.ktor.http.HttpMethod
 import io.ktor.http.HttpStatusCode
 import kotlinx.coroutines.runBlocking
 import kotlinx.datetime.LocalDate
+import kotlinx.serialization.json.buildJsonObject
+import kotlinx.serialization.json.put
 import kotlin.test.Test
 import kotlin.test.assertEquals
 import kotlin.test.assertNotNull
@@ -22,19 +25,20 @@ import kotlin.test.assertTrue
  */
 class LiveDigestRepositoryTest {
 
-    private fun event(id: Int, type: String, pin: String?, occurred: String, delta: Double? = null, severity: String = "info", source: Boolean = true, payloadAddress: String? = null, title: String? = null) = buildString {
+    private fun event(id: Int, type: String, pin: String?, occurred: String, delta: Double? = null, severity: String = "info", source: Boolean = true, payloadAddress: String? = null, title: String? = null, taxYear: Int? = null) = buildString {
         append("{\"id\":$id,\"pams_pin\":${pin?.let { "\"$it\"" } ?: "null"},\"event_type\":\"$type\",\"severity\":\"$severity\",")
         append("\"title\":\"${title ?: "$type changed"}\",\"summary\":\"Watchdog recorded a sourced before-and-after change.\",")
         append("\"source_url\":${if (source) "\"https://www.nj.gov/treasury/taxation/lpt/statdata.shtml\"" else "null"},\"occurred_at\":\"$occurred\",")
-        append("\"payload\":{${payloadAddress?.let { "\"property_address\":\"$it\",\"municipality\":\"GLOUCESTER TWP\"" } ?: ""}},")
+        val payload = listOfNotNull(payloadAddress?.let { "\"property_address\":\"$it\",\"municipality\":\"GLOUCESTER TWP\"" }, taxYear?.let { "\"tax_year\":$it" })
+        append("\"payload\":{${payload.joinToString(",")}},")
         append("\"marker_id\":${if (type == "tax_change") "\"property.last_year_tax\"" else "null"},\"old_value\":null,\"new_value\":null,\"delta_numeric\":${delta ?: "null"},\"read_at\":null}")
     }
 
     private val farmPins = (1..6).map { "0409_285.14_$it" }
 
     private val events = listOf(
-        event(1, "tax_change", "0905_112_7", "2026-09-29T10:00:00Z", delta = 612.0, severity = "action"),
-        event(2, "tax_change", "0905_112_7", "2026-09-28T10:00:00Z", delta = 612.0, severity = "action", source = false),
+        event(1, "tax_change", "0905_112_7", "2026-09-29T10:00:00Z", delta = 612.0, severity = "action", taxYear = 2026),
+        event(2, "tax_change", "0905_112_7", "2026-09-28T10:00:00Z", delta = 612.0, severity = "action", source = false, taxYear = 2026),
         event(3, "assessment_change", "0905_112_7", "2026-09-28T09:00:00Z", delta = 4200.0, severity = "action", source = false),
         event(4, "permit_change", "1340_44_3", "2026-09-29T12:00:00Z", severity = "action", title = "Kitchen permit filed"),
         event(5, "deed_change", "0409_285.14_9", "2026-09-29T08:00:00Z", severity = "action", title = "Deed recorded"),
@@ -85,7 +89,7 @@ class LiveDigestRepositoryTest {
         val hamilton = week.changes.first()
         assertEquals("0905_112_7", hamilton.pin)
         assertEquals(ChangeKind.TaxBill, hamilton.kind)
-        assertEquals("Tax bill up $612", hamilton.title)
+        assertEquals("2026 bill up $612", hamilton.title, "the bill year the event carries, as the Today mockup reads")
         assertEquals("27 Hamilton St, Harrison Town · Past client", hamilton.subtitle)
         assertEquals(Relationship.PastClient, hamilton.relationship)
         assertEquals("receipt_long", hamilton.icon)
@@ -103,12 +107,25 @@ class LiveDigestRepositoryTest {
 
         val call = assertNotNull(week.tasks.firstOrNull { it.action.kind == TaskActionKind.Call })
         assertEquals("Call about 27 Hamilton St", call.title)
-        assertEquals("Past client · tax bill up $612", call.subtitle)
+        assertEquals("Past client · 2026 bill up $612", call.subtitle, "the task repeats the change list's words")
         assertEquals("property/0905_112_7", call.action.route)
         assertTrue(week.tasks.none { it.id == "task-send-checkups" }, "the checkup-season task is a February rule")
         assertTrue(week.tasks.none { it.id.startsWith("task-approve") }, "a marketing plan denial drops the task quietly")
         assertEquals(1, week.needsYouCount)
-        assertEquals("Tax bill up $612 at 27 Hamilton St, Harrison Town. Two homes in your sphere have new tax bills this week.", week.teaser!!.text)
+        assertEquals("2026 bill up $612 at 27 Hamilton St, Harrison Town. Two homes in your sphere have new tax bills this week.", week.teaser!!.text)
+    }
+
+    @Test
+    fun `a tax change names its bill year when the event carries one and falls back to Tax bill when it does not`() {
+        fun row(delta: Double?, payload: Map<String, Int>) = DigestApi.EventRow(eventType = "tax_change", deltaNumeric = delta, payload = buildJsonObject { payload.forEach { (k, v) -> put(k, v) } })
+        assertEquals("2026 bill up $612", DigestApi.taxBillTitle(row(612.0, mapOf("tax_year" to 2026))))
+        assertEquals("2026 bill down $210", DigestApi.taxBillTitle(row(-210.4, mapOf("bill_year" to 2026))))
+        assertEquals("Tax bill up $612", DigestApi.taxBillTitle(row(612.0, emptyMap())), "today's producers put no year on the event")
+        assertEquals("Tax bill up $612", DigestApi.taxBillTitle(row(612.0, mapOf("tax_year" to 20260))), "a value that is not a year is ignored")
+        assertEquals("2026 bill changed", DigestApi.taxBillTitle(row(0.0, mapOf("year" to 2026))))
+        assertEquals("Tax bill changed", DigestApi.taxBillTitle(row(null, emptyMap())))
+        val api = DigestApi(com.watchdogindex.agent.core.api.SupabaseRest(TestConfig.client(FakeServer()), TestConfig.config))
+        assertEquals("2026 bill up $612", api.title(row(612.0, mapOf("tax_year" to 2026))), "the change list title and the task subtitle share one source")
     }
 
     @Test
