@@ -13,7 +13,7 @@ const CONTACT_POLICY_SCRIPT = '<script src="/property/js/contact-routing-policy.
 const SUPABASE_GUARD_SCRIPT = '<script src="/property/js/supabase-client-singleton-guard.js" data-watchdog-supabase-singleton-guard="1"></script>';
 const SITE_EDITOR_LOADER_SCRIPT = '<script src="/property/js/site-editor-loader.js" data-watchdog-site-editor-loader="1" defer></script>';
 const GLASS_HEADER_TAGS = '<link rel="stylesheet" href="/property/css/watchdog-glass-header.css" data-watchdog-glass-header="1">\n<script src="/property/js/watchdog-glass-header.js" data-watchdog-glass-header="1" defer></script>';
-const SITE_SEARCH_SCRIPT = '<script src="/property/js/watchdog-site-search.js?v=20260930a" data-watchdog-site-search="1" defer></script>';
+const SITE_SEARCH_TAGS = '<link rel="stylesheet" href="/property/css/watchdog-site-search.css?v=20260930a" data-watchdog-site-search="1">\n<script src="/property/js/watchdog-site-search.js" data-watchdog-site-search="1" defer></script>';
 /* Client-facing shared surfaces (client room, collaborator upload link, shared
    report, open-house sign-in, agent public portals) do not get site search. */
 const SITE_SEARCH_OFF_PATH = /^\/(?:transaction\/shared|client-room|public-report|open-house|offline)(?:\/|$)/i;
@@ -231,8 +231,8 @@ function installSiteSearch(input, publicPath) {
   if (SITE_SEARCH_OFF_PATH.test(path)) return html;
   const portal = path.match(SITE_SEARCH_AGENT_PORTAL);
   if (portal && !SITE_SEARCH_AGENT_RESERVED.test(portal[1])) return html;
-  if (/watchdog-site-search\.js/i.test(html) || !/<\/body>/i.test(html)) return html;
-  return html.replace(/<\/body>/i, `${SITE_SEARCH_SCRIPT}\n</body>`);
+  if (/watchdog-site-search\.js/i.test(html) || !/<\/head>/i.test(html)) return html;
+  return html.replace(/<\/head>/i, `${SITE_SEARCH_TAGS}\n</head>`);
 }
 
 /* Developer-only site editor. The loader makes no request for signed-out

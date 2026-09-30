@@ -9,6 +9,7 @@ const read = (p) => fs.readFileSync(p, 'utf8');
 const require = createRequire(import.meta.url);
 const Engine = require('../js/watchdog-site-search.js');
 const js = read('property/js/watchdog-site-search.js');
+const css = read('property/css/watchdog-site-search.css');
 const dict = JSON.parse(read('property/data/site-search.json'));
 const glossary = JSON.parse(read('property/data/glossary.json'));
 
@@ -81,18 +82,27 @@ assert.match(js, /parcel\.until = Date\.now\(\) \+ 60000/, 'address search backs
 assert.match(js, /PARCEL_TIMEOUT = 3500/, 'address search has a timeout');
 assert.match(js, /if\(!byPath\[k\]\) byPath\[k\] = e;/, 'first menu row wins, so the Agent Desk areas do not overwrite the desk itself');
 assert.match(js, /transaction\\\/shared\|client-room\|public-report\|open-house/, 'client-facing shared pages are excluded');
-assert.match(js, /prefers-reduced-motion:no-preference/, 'animation respects reduced motion');
-assert.match(js, /@media print\{\.wdss,\.wdss-trigger\{display:none!important\}\}/, 'search chrome never prints');
-assert.match(js, /min-height:52px/, 'result rows are comfortable touch targets');
-assert.doesNotMatch(js, /font:[^;]*(?<![\d.])(?:[0-9]|1[01])(?:\.\d+)?px/, 'no text under 12px');
+// Presentation lives in the stylesheet, not in JavaScript.
+assert.match(js, /var CSS_URL = '\/property\/css\/watchdog-site-search\.css';/, 'runtime links the site search stylesheet');
+assert.doesNotMatch(js, /\.textContent\s*=\s*\n?\s*'\.wdss/, 'no CSS injected from JavaScript');
+assert.match(css, /@media \(prefers-reduced-motion:no-preference\)/, 'animation respects reduced motion');
+assert.match(css, /@media print\{\s*\.wdss,\.wdss-trigger\{display:none!important\}/, 'search chrome never prints');
+assert.match(css, /\.wdss-row\{[^}]*min-height:52px/, 'result rows are comfortable touch targets');
+assert.match(css, /\.wdss-trigger\{[^}]*min-width:44px;min-height:44px/, 'header buttons are 44px touch targets');
+assert.doesNotMatch(css, /font:[^;}]*(?<![\d.])(?:[0-9]|1[01])(?:\.\d+)?px/, 'no text under 12px');
 
 // ---------- wiring ----------
 const server = read('api/watchdog-index-page-contact-safe.js');
 assert.match(server, /safeBody = installSiteSearch\(safeBody, publicPath\);/, 'page server adds site search to every clean page');
 assert.match(server, /SITE_SEARCH_OFF_PATH = \/\^\\\/\(\?:transaction\\\/shared\|client-room/, 'page server skips client-facing pages');
-for (const f of ['property/js/app-shell-2027.js', 'property/js/watchdog-universal-menu.js', 'property/js/public-nav.js']) {
-  assert.match(read(f), /s\.src='\/property\/js\/watchdog-site-search\.js\?v=/, `${f} self-loads site search`);
+// One stable script URL, so every loader's dedupe check matches (no ?v=).
+for (const f of ['property/js/app-shell-2027.js', 'property/js/watchdog-universal-menu.js', 'property/js/public-nav.js', 'api/watchdog-index-page-contact-safe.js']) {
+  assert.doesNotMatch(read(f), /watchdog-site-search\.js\?/, `${f} loads site search without a version query`);
 }
+for (const f of ['property/js/app-shell-2027.js', 'property/js/watchdog-universal-menu.js', 'property/js/public-nav.js']) {
+  assert.match(read(f), /s\.src='\/property\/js\/watchdog-site-search\.js';/, `${f} self-loads site search`);
+}
+assert.match(server, /SITE_SEARCH_TAGS = '<link rel="stylesheet" href="\/property\/css\/watchdog-site-search\.css\?v=/, 'page server links the stylesheet next to the script');
 assert.match(read('property/js/watchdog-universal-menu.js'), /class="wd-universal-search" data-wd-search="open"/, 'the menu drawer opens site search');
 assert.match(read('property/css/watchdog-universal-menu.css'), /\.wd-universal-search\{/, 'the drawer search row is styled with the drawer');
 assert.match(read('property/partials/nav.html'), /class="wdn-site-search"\s+data-wd-search="open"/, 'the shared nav partial has a search button');

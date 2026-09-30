@@ -6,6 +6,7 @@ on:
     paths:
       - 'property/js/watchdog-site-search.js'
       - 'property/data/site-search.json'
+      - 'property/css/watchdog-site-search.css'
       - 'property/data/glossary.json'
       - 'property/tests/site-search-contract.mjs'
       - 'api/watchdog-index-page-contact-safe.js'
@@ -20,6 +21,7 @@ on:
     paths:
       - 'property/js/watchdog-site-search.js'
       - 'property/data/site-search.json'
+      - 'property/css/watchdog-site-search.css'
       - 'property/data/glossary.json'
       - 'property/tests/site-search-contract.mjs'
       - 'api/watchdog-index-page-contact-safe.js'

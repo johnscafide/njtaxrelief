@@ -184,6 +184,7 @@
   /* ---------- Runtime ---------- */
   var VERSION = '20260930a';
   var doc = root.document;
+  var CSS_URL = '/property/css/watchdog-site-search.css';
   var DATA_URL = '/property/data/site-search.json?v=' + VERSION;
   var GLOSSARY_URL = '/property/data/glossary.json?v=' + VERSION;
   var PAGEFIND_URL = '/pagefind/pagefind.js';
@@ -255,8 +256,13 @@
     var n = String(name || '');
     return /^fa-[a-z0-9-]+$/.test(n) ? n : 'fa-circle-dot';
   }
-  var SVG_SEARCH = '<svg viewBox="0 0 24 24" width="18" height="18" aria-hidden="true" focusable="false"><path fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" d="M10.5 18a7.5 7.5 0 1 1 0-15 7.5 7.5 0 0 1 0 15Zm5.4-2.1L21 21"/></svg>';
-  var SVG_CLOSE = '<svg viewBox="0 0 24 24" width="18" height="18" aria-hidden="true" focusable="false"><path fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" d="M6 6l12 12M18 6 6 18"/></svg>';
+  /* Inline icons (no icon font needed for the search and close glyphs). */
+  function svgIcon(d){
+    return '<svg viewBox="0 0 24 24" width="18" height="18" aria-hidden="true" focusable="false">' +
+      '<path fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" d="' + d + '"/></svg>';
+  }
+  var SVG_SEARCH = svgIcon('M10.5 18a7.5 7.5 0 1 1 0-15 7.5 7.5 0 0 1 0 15Zm5.4-2.1L21 21');
+  var SVG_CLOSE = svgIcon('M6 6l12 12M18 6 6 18');
 
   /* ---------- Plan gating (same ranks as the universal menu) ---------- */
   var RANK = {standard:0,agent:1,pro:2,pro_plus:3,teams:4,developer:5};
@@ -431,81 +437,33 @@
   var state = {q:'', props:null, propsState:'idle', address:'', content:null};
   var timers = {parcel:0, content:0, live:0};
 
+  /* Presentation lives in /property/css/watchdog-site-search.css. The page
+     server links it next to this script; pages that self-load the runtime get
+     it here. Header buttons mount once it has loaded, so they never flash
+     unstyled. */
+  var cssReady = false, cssWaiters = [];
   function css(){
-    if(doc.getElementById('wdss-style')) return;
-    var s = doc.createElement('style');
-    s.id = 'wdss-style';
-    s.textContent =
-      '.wdss{position:fixed;inset:0;z-index:100000;font-family:"Source Sans 3",system-ui,-apple-system,"Segoe UI",Arial,sans-serif;color:#192533;-webkit-text-size-adjust:100%}' +
-      '.wdss[hidden]{display:none!important}' +
-      '.wdss-backdrop{position:absolute;inset:0;background:rgba(8,22,40,.5)}' +
-      '.wdss-dialog{position:absolute;top:max(7vh,20px);left:50%;transform:translateX(-50%);width:min(680px,calc(100vw - 32px));max-height:min(660px,calc(100vh - 14vh));max-height:min(660px,calc(100dvh - 14vh));display:flex;flex-direction:column;background:#fff;border-radius:18px;box-shadow:0 28px 80px rgba(7,28,50,.32),0 2px 8px rgba(7,28,50,.12);overflow:hidden;box-sizing:border-box}' +
-      '.wdss-bar{display:flex;align-items:center;gap:10px;padding:8px 10px 8px 16px;border-bottom:1px solid #e1e8eb;flex:0 0 auto;box-shadow:inset 0 -2px 0 transparent}' +
-      '.wdss-bar:focus-within{box-shadow:inset 0 -2px 0 #078486}' +
-      '.wdss .wdss-input:focus,.wdss .wdss-input:focus-visible{outline:0!important;box-shadow:none!important;border:0!important}' +
-      '.wdss-bar>svg{flex:0 0 auto;color:#078486;width:20px;height:20px}' +
-      '.wdss-input{flex:1 1 auto;min-width:0;height:48px;border:0;outline:0;background:transparent;color:#10294b;font:500 17px/1.2 "Source Sans 3",system-ui,-apple-system,"Segoe UI",Arial,sans-serif;padding:0;margin:0;box-shadow:none;-webkit-appearance:none;appearance:none}' +
-      '.wdss-input::placeholder{color:#6a7a88;opacity:1}' +
-      '.wdss-input::-webkit-search-cancel-button,.wdss-input::-webkit-search-decoration{-webkit-appearance:none;appearance:none;display:none}' +
-      '.wdss-close{flex:0 0 auto;display:inline-flex;align-items:center;justify-content:center;min-width:44px;min-height:44px;padding:0 10px;border:1px solid #dbe4e8;border-radius:10px;background:#f6f9fa;color:#3d5163;font:700 12px/1 "Plus Jakarta Sans",system-ui,sans-serif;cursor:pointer}' +
-      '.wdss-close svg{display:none}' +
-      '.wdss-close:hover,.wdss-close:focus-visible{background:#eef4f6;color:#10294b}' +
-      '.wdss-body{flex:1 1 auto;overflow-y:auto;overscroll-behavior:contain;padding:4px 8px 10px;-webkit-overflow-scrolling:touch}' +
-      '.wdss-group{padding:12px 10px 6px;color:#5b6c7b;font:800 12px/1.2 "Plus Jakarta Sans",system-ui,sans-serif;letter-spacing:.08em;text-transform:uppercase}' +
-      '.wdss-row{display:grid;grid-template-columns:40px minmax(0,1fr) auto;align-items:center;gap:12px;min-height:52px;padding:8px 10px;border-radius:12px;color:#192533;text-decoration:none;cursor:pointer;box-sizing:border-box;outline:0}' +
-      '.wdss-row:hover,.wdss-row.active{background:#eef6f5}' +
-      '.wdss-row.active{box-shadow:inset 0 0 0 1px rgba(7,132,134,.28)}' +
-      '.wdss-ico{display:grid;place-items:center;width:40px;height:40px;border-radius:11px;background:#f1f5f7;color:#10294b;font-size:16px}' +
-      '.wdss-row.active .wdss-ico{background:#fff;color:#078486}' +
-      '.wdss-txt{min-width:0;display:grid;gap:2px}' +
-      '.wdss-txt b{display:block;font:700 15px/1.3 "Plus Jakarta Sans",system-ui,sans-serif;color:#10294b;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}' +
-      '.wdss-where{display:block;color:#066f71;font:700 12.5px/1.3 "Source Sans 3",system-ui,sans-serif;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}' +
-      '.wdss-sum{display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;overflow:hidden;color:#586977;font:400 13px/1.4 "Source Sans 3",system-ui,sans-serif}' +
-      '.wdss-sum mark,.wdss-txt b mark{background:rgba(7,132,134,.16);color:inherit;border-radius:3px;padding:0 1px}' +
-      '.wdss-end{display:flex;align-items:center;gap:8px}' +
-      '.wdss-need{font:700 12px/1 "Plus Jakarta Sans",system-ui,sans-serif;font-style:normal;padding:5px 8px;border-radius:999px;background:#fff6e5;color:#7a4f00;border:1px solid #f0d8a6;white-space:nowrap}' +
-      '.wdss-key{display:none;font:700 12px/1 "Plus Jakarta Sans",system-ui,sans-serif;color:#078486}' +
-      '.wdss-row.active .wdss-key{display:inline}' +
-      '.wdss-note{padding:14px 12px;color:#586977;font:400 14px/1.45 "Source Sans 3",system-ui,sans-serif}' +
-      '.wdss-note b{color:#10294b}' +
-      '.wdss-foot{display:flex;flex-wrap:wrap;gap:6px 16px;padding:9px 16px;border-top:1px solid #e1e8eb;color:#5b6c7b;font:600 12px/1.3 "Source Sans 3",system-ui,sans-serif;flex:0 0 auto}' +
-      '.wdss-foot kbd,.wdss-trigger-kbd{display:inline-block;min-width:12px;padding:2px 5px;margin-right:2px;border:1px solid #d3dde2;border-bottom-width:2px;border-radius:6px;background:#fff;color:#3d5163;font:700 12px/1.2 "Plus Jakarta Sans",system-ui,sans-serif;text-align:center}' +
-      '.wdss-sr{position:absolute!important;width:1px!important;height:1px!important;padding:0!important;margin:-1px!important;overflow:hidden!important;clip:rect(0 0 0 0)!important;white-space:nowrap!important;border:0!important}' +
-      'html.wdss-lock,html.wdss-lock body{overflow:hidden!important}' +
-      '@media (prefers-reduced-motion:no-preference){.wdss:not([hidden]) .wdss-dialog{animation:wdss-in .14s ease-out}@keyframes wdss-in{from{opacity:0;transform:translateX(-50%) translateY(-6px)}to{opacity:1;transform:translateX(-50%) translateY(0)}}}' +
-      '@media (max-width:640px){' +
-        '.wdss-dialog{top:0;left:0;transform:none;width:100%;height:100vh;height:100dvh;max-height:none;border-radius:0;padding-top:env(safe-area-inset-top)}' +
-        '.wdss:not([hidden]) .wdss-dialog{animation:none}' +
-        '.wdss-bar{padding:8px 8px 8px 16px}' +
-        '.wdss-close{padding:0;width:44px;border-radius:50%}' +
-        '.wdss-close span{display:none}.wdss-close svg{display:block}' +
-        '.wdss-body{padding:4px 8px calc(16px + env(safe-area-inset-bottom))}' +
-        '.wdss-foot{display:none}' +
-        '.wdss-txt b,.wdss-where{white-space:normal;overflow-wrap:anywhere}' +
-      '}' +
-      '@media (pointer:coarse){.wdss-foot{display:none}.wdss-row.active .wdss-key{display:none}}' +
-      /* Header buttons. App and Property Home bars get a round icon button
-         that becomes a labeled pill on wide screens; the public header reuses
-         its own .wd-public-trigger look. */
-      '.wdss-trigger{display:inline-flex;align-items:center;justify-content:center;gap:8px;flex:0 0 auto;min-width:44px;min-height:44px;cursor:pointer;font-family:inherit;text-decoration:none}' +
-      '.wdss-trigger svg{flex:0 0 auto}' +
-      '.wdss-trigger[data-wdss-variant="app"]{width:44px;height:44px;padding:0;border:1px solid rgba(16,41,75,.14);border-radius:50%;background:#fff;color:#10294b;box-sizing:border-box}' +
-      '.wdss-trigger[data-wdss-variant="app"]:hover,.wdss-trigger[data-wdss-variant="app"]:focus-visible{background:#f3f7f8;color:#078486}' +
-      '.hm27-top-right>.wdss-trigger{margin-left:9px}' +
-      '.wdss-trigger-label,.wdss-trigger-kbd{display:none}' +
-      '@media (min-width:1180px){' +
-        '.wdss-trigger[data-wdss-variant="app"]{width:auto;padding:0 10px 0 14px;border-radius:999px}' +
-        '.wdss-trigger[data-wdss-variant="app"] .wdss-trigger-label{display:inline;font:700 14px/1 "Plus Jakarta Sans",system-ui,sans-serif}' +
-        '.wdss-trigger[data-wdss-variant="app"] .wdss-trigger-kbd{display:inline-block;margin:0}' +
-      '}' +
-      '@media (min-width:941px){.wdss-trigger[data-wdss-variant="public"] .wdss-trigger-label{display:inline}}' +
-      /* Sit next to Sign in: the public profile button pushes itself right
-         with margin-left:auto, so the search button takes that role. */
-      '.wd-right>.wdss-trigger{margin-left:auto}.wd-right>.wdss-trigger~.wd-public-profile{margin-left:0}' +
-      '@media (max-width:560px){.wdss-trigger[data-wdss-variant="public"]{display:none!important}}' +
-      '@media print{.wdss,.wdss-trigger{display:none!important}}';
-    (doc.head || doc.documentElement).appendChild(s);
+    var link = doc.querySelector('link[href^="' + CSS_URL + '"]');
+    function ready(){
+      if(cssReady) return;
+      cssReady = true;
+      var list = cssWaiters; cssWaiters = [];
+      list.forEach(function(fn){ fn(); });
+    }
+    if(!link){
+      link = doc.createElement('link');
+      link.rel = 'stylesheet';
+      link.href = CSS_URL + '?v=' + VERSION;
+      (doc.head || doc.documentElement).appendChild(link);
+    }
+    if(link.sheet) ready();
+    else{
+      link.addEventListener('load',ready,{once:true});
+      link.addEventListener('error',ready,{once:true});
+      setTimeout(ready,3000);
+    }
   }
+  function whenCss(fn){ if(cssReady) fn(); else cssWaiters.push(fn); }
 
   function build(){
     if(ui) return ui;
@@ -841,6 +799,7 @@
   function mount(){
     if(!doc.body) return;
     css();
+    if(!cssReady){ whenCss(mount); return; }
     MOUNTS.forEach(function(m){
       var anchor = doc.querySelector(m.before);
       if(!anchor || !anchor.parentNode) return;
