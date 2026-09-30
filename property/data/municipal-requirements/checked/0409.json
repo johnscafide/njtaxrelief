@@ -1,0 +1,188 @@
+{
+ "municipality_code": "0409",
+ "municipality": "Cherry Hill Township",
+ "county": "CAMDEN",
+ "checked_at": "2026-09-30",
+ "resale_co": {
+  "status": "required",
+  "name": "Certificate of Continued Occupancy (CCO), Residential Resale Inspection",
+  "issued_by": "Community Development, Property Maintenance Department",
+  "lead_time": "No minimum lead time published. Inspections occur within 7 business days of receipt of application and fee.",
+  "valid_for": "",
+  "requirements": [
+   "Exterior-only inspection; no one needs to be home",
+   "Sidewalks, walkways, stairs and driveways in good repair, including sidewalk up to the curb line",
+   "Fences, detached garages and other accessory structures structurally sound",
+   "Dead or dying trees and hazardous limbs removed or trimmed",
+   "Weeds and grass under 10 inches",
+   "Property clean and sanitary",
+   "Grading and drainage: no ponding, no runoff onto neighbors",
+   "Sump pump and roof drain discharge not affecting neighbors or the roadway",
+   "Exhaust vents",
+   "No ground surface hazards such as holes or broken walks",
+   "No unregistered, uninsured or disassembled vehicles stored on the property"
+  ],
+  "fees": [
+   {
+    "label": "CCO exterior inspection",
+    "amount": "$100",
+    "quote": "The cost of inspection is $100, due prior to inspection.",
+    "source_url": "https://chnj.gov/893/Residential-Resale-Inspections",
+    "verified": true
+   }
+  ],
+  "how_to_apply": "Apply online (office approves first, then SDL Portal emails a payment request), or download the paper application and mail it or drop it off with a check or money order payable to Cherry Hill Township at 820 Mercer Street, Room 202, Cherry Hill, NJ 08002. Fee must be paid before the inspection. No refunds once paid.",
+  "application_url": "https://chnj.gov/1107/Online-CCO-Application",
+  "department_url": "https://chnj.gov/893/Residential-Resale-Inspections",
+  "phone": "856-834-3364",
+  "email": "",
+  "evidence": [
+   {
+    "url": "https://chnj.gov/893/Residential-Resale-Inspections",
+    "quote": "Cherry Hill homeowners are required to obtain a Certificate of Continued Occupancy prior to the resale of any single-family residential property in Cherry Hill.",
+    "doc_date": "",
+    "via": "page",
+    "verified": true
+   },
+   {
+    "url": "https://chnj.gov/893/Residential-Resale-Inspections",
+    "quote": "Before any single-family home sale can proceed to closing, the home's exterior property areas must be inspected by Cherry Hill's Property Maintenance Officer, to ensure that these areas comply with the township's property maintenance standards. Some condominiums and townhomes are excluded from this requirement.",
+    "doc_date": "",
+    "via": "page",
+    "verified": true
+   },
+   {
+    "url": "https://chnj.gov/DocumentCenter/View/2486",
+    "quote": "Inspections take place between 8:30 am and 3:00 pm and will occur within seven (7) business days of receipt of application and fee.  The inspection is solely of the exterior of the property, so there does not need to be someone home at the time of inspection.",
+    "doc_date": "",
+    "via": "pdf",
+    "verified": true
+   },
+   {
+    "url": "https://chnj.gov/DocumentCenter/View/2486",
+    "quote": "Fee: $100.00    made payable to: Cherry Hill Township",
+    "doc_date": "",
+    "via": "pdf",
+    "verified": true
+   }
+  ],
+  "confidence": "high",
+  "notes": "The township pages say the CCO applies to single-family homes. They do not say whether two-family homes need one. Some condominiums and townhomes (non-fee-simple) are exempt; the township publishes a list at https://chnj.gov/DocumentCenter/View/6561/Non-Fee-Simple-Properties. Paper application PDF: https://chnj.gov/DocumentCenter/View/2486. Rental inspections are a separate Community Development program (856-488-7870)."
+ },
+ "fire_cert": {
+  "requirements": [
+   "10-year sealed battery smoke alarm on every level, in every bedroom (on the ceiling), and within 10 feet of all bedroom doors; hardwired alarms cannot be swapped for battery alarms",
+   "Basement smoke alarm at the bottom of the stairwell, on the ceiling (not between joists)",
+   "Smoke and CO alarms must be less than 10 years old and working",
+   "CO alarm in the hallway within 10 feet of all bedrooms",
+   "House numbers at least 4 inches high, contrasting color, permanently on the house and visible from the street (mailbox or light post numbers not accepted)",
+   "Homes with a secondary power source (solar, generator, battery storage) need a permanent, non-handwritten label at the main electrical panel and the electric meter, such as 'Caution: Multiple Sources of Power'",
+   "Homes with a low-voltage fire alarm system must have it tested by an alarm contractor before the inspection and show the certification to the inspector",
+   "The township page says fire extinguishers are no longer required"
+  ],
+  "authorities": [
+   {
+    "name": "Cherry Hill Fire Department (Cherry Hill Fire District #13)",
+    "type": "fire_district",
+    "area_served": "Entire township",
+    "lead_time": "Submit the request 3 to 4 weeks before the settlement date",
+    "fees": [
+     {
+      "label": "Request received 8 or more calendar days before settlement",
+      "amount": "$100.00",
+      "quote": "Requests received eight (8) calendar days or more prior to the settlement date:  $100.00",
+      "source_url": "https://chnj.gov/DocumentCenter/View/400/Residential-Resale-Inspection-Requirements",
+      "verified": true
+     },
+     {
+      "label": "Request received 7 calendar days before settlement",
+      "amount": "$115.00",
+      "quote": "Requests received seven (7) calendar days prior to the settlement date: $115.00",
+      "source_url": "https://chnj.gov/DocumentCenter/View/400/Residential-Resale-Inspection-Requirements",
+      "verified": true
+     },
+     {
+      "label": "Request received 3 calendar days or less before settlement",
+      "amount": "$162.00",
+      "quote": "Requests received three (3) calendar days or less prior to the settlement date: $162.00",
+      "source_url": "https://chnj.gov/DocumentCenter/View/400/Residential-Resale-Inspection-Requirements",
+      "verified": true
+     },
+     {
+      "label": "Re-inspection",
+      "amount": "$35.00",
+      "quote": "Re-inspection Fee: $35.00",
+      "source_url": "https://chnj.gov/DocumentCenter/View/400/Residential-Resale-Inspection-Requirements",
+      "verified": true
+     },
+     {
+      "label": "Senior discount, sellers 62 and over (off initial fee, proof of age required)",
+      "amount": "$30.00",
+      "quote": "Sellers age 62 & over may deduct $30.00 from the initial inspection fee - PROOF OF AGE REQUIRED",
+      "source_url": "https://chnj.gov/DocumentCenter/View/400/Residential-Resale-Inspection-Requirements",
+      "verified": true
+     }
+    ],
+    "how_to_apply": "Submit the online Residential Inspection Request Form (not for re-inspections or rentals). Pay at the time of inspection by credit card, check or money order payable to CHFD; no cash. Certificate is issued at the inspection if the home passes and payment is received. Temporary certificates are not issued. Certificates are valid for 90 days.",
+    "application_url": "https://chnj.gov/forms.aspx?FID=107",
+    "department_url": "https://chnj.gov/232/Smoke-Carbon-Monoxide-Alarm-Compliance",
+    "phone": "856-429-7441",
+    "email": "sdi@chfd.org",
+    "evidence": [
+     {
+      "url": "https://chnj.gov/232/Smoke-Carbon-Monoxide-Alarm-Compliance",
+      "quote": "When selling a one or two family home in Cherry Hill, you must obtain a Certificate of Smoke Alarm and Carbon Monoxide Detector Compliance CSACMAPFEC 5:70-2.3 (a) prior to the settlement.",
+      "doc_date": "",
+      "via": "page",
+      "verified": true
+     },
+     {
+      "url": "https://chnj.gov/232/Smoke-Carbon-Monoxide-Alarm-Compliance",
+      "quote": "Fire extinguishers are NO longer required.",
+      "doc_date": "",
+      "via": "page",
+      "verified": true
+     },
+     {
+      "url": "https://chnj.gov/DocumentCenter/View/400/Residential-Resale-Inspection-Requirements",
+      "quote": "Requests must be submitted using the online form located at www.chnj.gov/fire, 3 to 4 weeks prior to the settlement date. Email questions to sdi@chfd.org or call 856-429-7441.",
+      "doc_date": "2026 (checklist marked Effective 1/1/2026 to 12/31/2026)",
+      "via": "pdf",
+      "verified": true
+     },
+     {
+      "url": "https://chnj.gov/ArchiveCenter/ViewFile/Item/2779",
+      "quote": "Cherry Hill Fire District #13",
+      "doc_date": "2025-12",
+      "via": "pdf",
+      "verified": true
+     }
+    ],
+    "confidence": "high"
+   }
+  ],
+  "notes": "The fire department is governed by a Board of Fire Commissioners (Cherry Hill Fire District #13, 1100 Marlkress Road). Fee sheet is marked effective 1/1/2026 to 12/31/2026. The PDF's middle tier reads 'seven (7) calendar days prior'; read together with the other tiers it appears to cover requests 4 to 7 days out, but the PDF does not say so explicitly. Certificates valid 90 days; no temporary certificates. The township page states extinguishers are no longer required, which differs from the older state baseline; confirm with CHFD if a buyer's lender or title company asks."
+ },
+ "other_items": [
+  {
+   "label": "Two separate inspections",
+   "detail": "The Property Maintenance CCO is in addition to the Cherry Hill Fire Department smoke alarm inspection.",
+   "source_url": "https://chnj.gov/893/Residential-Resale-Inspections"
+  }
+ ],
+ "open_questions": [
+  "Whether two-family homes need the Property Maintenance CCO (pages only mention single-family).",
+  "How long the CCO is valid is not stated.",
+  "Township ordinance on ecode360 not checked (site blocked)."
+ ],
+ "verification": {
+  "fees": 6,
+  "fee_ok": 6,
+  "fee_bad": 0,
+  "fee_unchecked": 0,
+  "quotes": 8,
+  "q_ok": 8,
+  "q_bad": 0,
+  "q_unchecked": 0
+ }
+}

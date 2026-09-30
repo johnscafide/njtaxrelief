@@ -1,0 +1,171 @@
+{
+ "municipality_code": "0426",
+ "municipality": "Oaklyn Borough",
+ "county": "CAMDEN",
+ "checked_at": "2026-09-30",
+ "resale_co": {
+  "status": "required",
+  "name": "Certificate of Compliance (resale property maintenance inspection)",
+  "issued_by": "Housing Code Department / Code Enforcement",
+  "lead_time": "",
+  "valid_for": "90 days, provided the seller has not changed",
+  "requirements": [
+   "Sidewalks, walkways, driveways and driveway aprons safe: no cracks, raised or deteriorated concrete (asphalt allowed for driveways only, not aprons or sidewalks)",
+   "Handrails where there are 3 or more steps; steps 30 inches above grade need a handrail on one side; spindles no more than 4 inches apart",
+   "Railings on porch or stoop perimeters that have none, with spindles no more than 4 inches apart",
+   "Peeling, chipping or unpainted exterior surfaces scraped and painted",
+   "Broken window panes repaired",
+   "Open electrical splices or improperly installed fixtures corrected",
+   "Gutters and downspouts connected and in place",
+   "Any obvious hazardous and maintenance conditions",
+   "Sump pump must not be connected to the sewer; Public Works inspects before settlement"
+  ],
+  "fees": [
+   {
+    "label": "Property maintenance inspection (2018 form)",
+    "amount": "$50.00",
+    "quote": "PROPERTY MAINTENANCE INSPECTION FEE: $50.00",
+    "source_url": "https://img1.wsimg.com/blobby/go/5cd08893-258d-4063-980b-adf6716d47d7/downloads/Resale%20Application.pdf",
+    "verified": null
+   }
+  ],
+  "how_to_apply": "The 2018 borough Certificate of Compliance form was submitted to Borough Hall, 500 White Horse Pike, Oaklyn, NJ 08107 (tel. 856-858-2457, fax 856-854-0180). Confirm the current form and process with Borough Hall, since the current borough website could not be read.",
+  "application_url": "https://img1.wsimg.com/blobby/go/5cd08893-258d-4063-980b-adf6716d47d7/downloads/Resale%20Application.pdf",
+  "department_url": "https://www.oaklyn-nj.net/",
+  "phone": "856-858-2457",
+  "email": "",
+  "evidence": [
+   {
+    "url": "https://img1.wsimg.com/blobby/go/5cd08893-258d-4063-980b-adf6716d47d7/downloads/Resale%20Application.pdf",
+    "quote": "According to the Borough of Oaklyn Ordinance 11-00, Chapter 101, Section 101-3. A Certificate of Compliance inspection is required upon the sale of all properties. The Certificate is good for (90) days provided the seller has not changed.",
+    "doc_date": "2018-10 (form marked 'Updated 10/10/18')",
+    "via": "pdf",
+    "verified": null
+   },
+   {
+    "url": "https://web.archive.org/web/20200808231550/https://oaklyn-nj.net/permits-%26-forms",
+    "quote": "Resale Application",
+    "doc_date": "2020-08 (archived copy of the borough's former Permits & Forms page linking the form above)",
+    "via": "page",
+    "verified": null
+   }
+  ],
+  "confidence": "medium",
+  "notes": "Evidence comes from the borough's Certificate of Compliance form updated 10/10/18, hosted on the file server of the borough's former website and linked from its Permits & Forms page (seen in a 2020 Internet Archive copy). The current site (www.oaklyn-nj.net) is behind a bot challenge and loads its content by script, so it could not be read, and ecode360 (Chapter 101) could not be opened. The fee may have changed since 2018. The same 2018 form listed borough fire code fees ($60 to $160) that are now superseded by the Regional Fire Prevention Alliance schedule; those old fire fees are not reported as current. The form also shows sign-off lines for the Fire Code Inspector, the Housing Code Department, and the Public Works Superintendent (sump pump)."
+ },
+ "fire_cert": {
+  "requirements": [
+   "Oaklyn ordinance 75-10A(4): at least one working smoke alarm inside each sleeping area, plus one outside each sleeping area enclosed by a door, within 10 feet (listed as 'Oaklyn Borough Residents Only' on the Alliance's 2022 form)",
+   "Smoke alarms by construction date: pre-1975 homes need 10-year sealed battery alarms on each level; newer homes need AC powered interconnected alarms per the era table",
+   "All smoke alarms must be less than 10 years old; undated alarms must be replaced",
+   "CO alarm within 10 feet of sleeping areas if there is a fuel burning appliance, fireplace or attached garage; CO alarms must be less than 7 years old",
+   "House numbers: Arabic numerals at least 3 inches tall, mounted at least 60 inches above ground, visible from the street",
+   "Secondary power source warning label within 18 inches of the main panel and meter where there is a generator, solar or battery storage",
+   "Alarm company systems must be tested by a contractor before inspection, with the certification shown to the inspector"
+  ],
+  "authorities": [
+   {
+    "name": "Regional Fire Prevention Alliance (Barrington)",
+    "type": "municipal_fire_bureau",
+    "area_served": "Entire borough (the Alliance serves Barrington, Hi-Nella, Lawnside, Mt. Ephraim and Oaklyn)",
+    "lead_time": "14 or more business days before the change of occupant for the lowest fee; weekends, holidays and the settlement date do not count",
+    "fees": [
+     {
+      "label": "Request received 14+ business days before change of occupant",
+      "amount": "$66.00",
+      "quote": "14+ business days prior to the change of occupant is $66.00.",
+      "source_url": "https://barringtonboro.com/wp-content/uploads/2025/11/Barrington-Smoke-Doc-update-Fillable-pdf.pdf",
+      "verified": true
+     },
+     {
+      "label": "Request received 8-13 business days before",
+      "amount": "$74.00",
+      "quote": "8-13 business days prior to the change of occupant is $74.00.",
+      "source_url": "https://barringtonboro.com/wp-content/uploads/2025/11/Barrington-Smoke-Doc-update-Fillable-pdf.pdf",
+      "verified": true
+     },
+     {
+      "label": "Request received 4-7 business days before",
+      "amount": "$106.00",
+      "quote": "4-7 business days prior to the change of occupant is $106.00.",
+      "source_url": "https://barringtonboro.com/wp-content/uploads/2025/11/Barrington-Smoke-Doc-update-Fillable-pdf.pdf",
+      "verified": true
+     },
+     {
+      "label": "Request received 3 business days or less before",
+      "amount": "$171.00",
+      "quote": "3 business days or less notice prior to change of occupant is $171.00.",
+      "source_url": "https://barringtonboro.com/wp-content/uploads/2025/11/Barrington-Smoke-Doc-update-Fillable-pdf.pdf",
+      "verified": true
+     },
+     {
+      "label": "Reinspection after a failed inspection",
+      "amount": "$50.00",
+      "quote": "ALL FAILED INSPECTIONS WILL REQUIRED A $50.00 RE INSPECTION FEE.",
+      "source_url": "https://barringtonboro.com/wp-content/uploads/2025/11/Barrington-Smoke-Doc-update-Fillable-pdf.pdf",
+      "verified": true
+     },
+     {
+      "label": "Penalty for change of ownership or occupancy without the certificate",
+      "amount": "$500",
+      "quote": "the owner will be subject to a penalty of $500 per occurrence (N.J.A.C. 5:70-2.3).",
+      "source_url": "https://barringtonboro.com/wp-content/uploads/2025/11/Barrington-Smoke-Doc-update-Fillable-pdf.pdf",
+      "verified": true
+     }
+    ],
+    "how_to_apply": "Fill out the Regional Fire Prevention Alliance smoke detector certification application and email it to firealliance@barringtonboro.com, or print it and drop it in the mailbox at 205 Haines Avenue, Barrington, NJ 08007. Include a check or money order payable to 'Regional Fire Prevention Alliance'. Walk-in office hours Tuesday to Friday 8am to 2pm.",
+    "application_url": "https://barringtonboro.com/wp-content/uploads/2025/11/Barrington-Smoke-Doc-update-Fillable-pdf.pdf",
+    "department_url": "https://barringtonboro.com/regional-fire-prevention-alliance/",
+    "phone": "856-547-0991",
+    "email": "firealliance@barringtonboro.com",
+    "evidence": [
+     {
+      "url": "https://barringtonboro.com/regional-fire-prevention-alliance/",
+      "quote": "The Regional Fire Prevention Alliance of Barrington, New Jersey serves the Municipalities of Barrington, Hi-Nella, Lawnside, Mt. Ephraim and Oaklyn.",
+      "doc_date": "",
+      "via": "page",
+      "verified": true
+     },
+     {
+      "url": "https://barringtonboro.com/wp-content/uploads/2025/11/Barrington-Smoke-Doc-update-Fillable-pdf.pdf",
+      "quote": "Inspection is required per NJ Fire Code 5:70-2.3 for the selling, renting, or change of occupancy in one or two family homes. Inspection Must occur Prior to Settlement or change of Occupancy",
+      "doc_date": "2025-11",
+      "via": "pdf",
+      "verified": true
+     },
+     {
+      "url": "https://web.archive.org/web/20230701064007/https://mountephraim-nj.com/wp-content/uploads/2023/06/Smoke-and-Carbon-Monoxide-Alarm-Packet.pdf",
+      "quote": "As per Oaklyn ordnance § 75-10A(4), \"All residential sleeping areas within the Borough shall have at least one fully operable smoke alarm located within each sleeping area.",
+      "doc_date": "2022-12 (version 12/2022)",
+      "via": "pdf",
+      "verified": null
+     }
+    ],
+    "confidence": "high"
+   }
+  ],
+  "notes": "The Regional Fire Prevention Alliance is a shared fire prevention bureau run out of Barrington Borough; it is not a fire district. Its November 2025 form no longer lists a fire extinguisher; the December 2022 version required a 2-A:10-BC extinguisher. The Oaklyn-only bedroom smoke alarm rule (ordinance 75-10A(4)) appears on the 2022 Alliance packet; it was not visible in the text of the 2025 form but the ordinance likely still applies. Certificates are valid 6 months and not transferable."
+ },
+ "other_items": [
+  {
+   "label": "Sump pump sewer connection inspection by Public Works",
+   "detail": "Per Oaklyn Ordinance 108-22 no sump pump can be connected to the sewer system; Public Works inspects before settlement.",
+   "source_url": "https://img1.wsimg.com/blobby/go/5cd08893-258d-4063-980b-adf6716d47d7/downloads/Resale%20Application.pdf"
+  }
+ ],
+ "open_questions": [
+  "Current Certificate of Compliance fee and form (last official copy found is dated 10/10/18); current borough site could not be read.",
+  "Whether the resale inspection is exterior only (search summaries of the code suggest an exterior housing and property area inspection) or includes interior items.",
+  "Who at the borough currently handles scheduling and the current email address."
+ ],
+ "verification": {
+  "fees": 7,
+  "fee_ok": 6,
+  "fee_bad": 0,
+  "fee_unchecked": 1,
+  "quotes": 5,
+  "q_ok": 2,
+  "q_bad": 0,
+  "q_unchecked": 3
+ }
+}

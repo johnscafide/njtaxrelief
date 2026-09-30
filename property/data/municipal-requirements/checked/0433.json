@@ -1,0 +1,88 @@
+{
+ "municipality_code": "0433",
+ "municipality": "Tavistock Borough",
+ "county": "CAMDEN",
+ "checked_at": "2026-09-30",
+ "resale_co": {
+  "status": "not_found",
+  "name": "",
+  "issued_by": "",
+  "lead_time": "",
+  "valid_for": "",
+  "requirements": [],
+  "fees": [],
+  "how_to_apply": "",
+  "application_url": "",
+  "department_url": "https://tavistocknj.org/whos-who/",
+  "phone": "856-429-0039",
+  "email": "clerk@tavistocknj.org",
+  "evidence": [
+   {
+    "url": "https://tavistocknj.org/wp-content/uploads/2025/05/2024-Tavistock-Minutes-12-19-2024.pdf",
+    "quote": "Resolution #34-2024 Authorizing Shared Service Agreement with Haddonfield - Construction",
+    "doc_date": "2024-12-19",
+    "via": "pdf",
+    "verified": true
+   }
+  ],
+  "confidence": "low",
+  "notes": "Tavistock is a 0.28 square mile borough (mostly the Tavistock Country Club) with almost no homes. Its website has no code book, no construction page and no resale CO information. Construction services are provided by the Borough of Haddonfield under a shared service agreement (Resolution #34-2024). No Tavistock ordinance requiring a resale CO was found, and Haddonfield's own resale rules apply to Haddonfield properties, not automatically to Tavistock. Office support is shared with Barrington (clerk Denise K. Moules)."
+ },
+ "fire_cert": {
+  "requirements": [],
+  "authorities": [
+   {
+    "name": "Borough of Haddonfield Bureau of Fire Prevention (serving Tavistock under a shared service agreement)",
+    "type": "municipal_fire_bureau",
+    "area_served": "Entire borough",
+    "lead_time": "",
+    "fees": [],
+    "how_to_apply": "Contact the Haddonfield Fire Official (Ernest F. Busch) or the Haddonfield Construction and Zoning Office, Room 104, Haddonfield Borough Hall, which receives smoke detector compliance forms and payment for Haddonfield. Confirm the Tavistock process and fee before applying.",
+    "application_url": "",
+    "department_url": "https://www.haddonfieldnj.org/government/departments/fire_department/smoke_detector___sidewalk_inspection_requests/index.php",
+    "phone": "856-429-4308",
+    "email": "ebusch@haddonfield-nj.gov",
+    "evidence": [
+     {
+      "url": "https://tavistocknj.org/wp-content/uploads/2025/05/2024-Tavistock-Minutes-12-19-2024.pdf",
+      "quote": "Resolution #33-2024 Authorizing Shared Service Agreement with Haddonfield - Fire Services",
+      "doc_date": "2024-12-19",
+      "via": "pdf",
+      "verified": true
+     },
+     {
+      "url": "https://www.nj.gov/dca/dfs/pdf/fire%20directory_county%20summary/fire_code_enforcement_director.pdf",
+      "quote": "LEAID: 0433-001 Enf Auth. Municipal Fire Official Ernest F Busch",
+      "doc_date": "2026-05-18 (survey date for Tavistock entry)",
+      "via": "pdf",
+      "verified": true
+     },
+     {
+      "url": "https://www.nj.gov/dca/dfs/pdf/fire%20directory_county%20summary/fire_code_enforcement_director.pdf",
+      "quote": "SSA with Haddonfield Boro",
+      "doc_date": "2026-05-18 (survey date for Tavistock entry)",
+      "via": "pdf",
+      "verified": true
+     }
+    ],
+    "confidence": "medium"
+   }
+  ],
+  "notes": "The DCA fire department directory lists Tavistock's local enforcing agency (LEAID 0433-001) as municipal, with Haddonfield's fire official Ernest F. Busch and a shared service agreement with Haddonfield. Tavistock is not on the DCA list of towns where the state issues smoke certs. Haddonfield's web page publishes a tiered smoke/CO certificate fee for Haddonfield properties under Haddonfield Borough Code section 114-8(B); no source was found showing that the same fee applies to Tavistock properties, so no fee is listed here. The directory text is extracted from a table layout, so the quotes are joined field labels and values from the Tavistock entry."
+ },
+ "other_items": [],
+ "open_questions": [
+  "Which fee Haddonfield charges for a smoke/CO/extinguisher certificate on a Tavistock property, and whether the Haddonfield form is used.",
+  "Whether Tavistock has any resale CO or inspection ordinance; no Tavistock code book was found online. Ask the Borough Clerk (clerk@tavistocknj.org)."
+ ],
+ "verification": {
+  "fees": 0,
+  "fee_ok": 0,
+  "fee_bad": 0,
+  "fee_unchecked": 0,
+  "quotes": 4,
+  "q_ok": 4,
+  "q_bad": 0,
+  "q_unchecked": 0
+ }
+}

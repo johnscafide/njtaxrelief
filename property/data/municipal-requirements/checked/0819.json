@@ -1,0 +1,118 @@
+{
+ "municipality_code": "0819",
+ "municipality": "Wenonah Borough",
+ "county": "GLOUCESTER",
+ "checked_at": "2026-09-30",
+ "resale_co": {
+  "status": "required",
+  "name": "Housing inspection (CO inspection) for home sales",
+  "issued_by": "Mantua Township Fire District, under a shared services agreement with the Borough (effective March 1, 2026)",
+  "lead_time": "Apply 10 or more business days before closing for the standard fee. 4 to 9 business days and 3 or fewer business days cost more. Payment in full is required before the inspection is scheduled.",
+  "valid_for": "",
+  "requirements": [],
+  "fees": [
+   {
+    "label": "Standard, application received 10 or more business days before closing",
+    "amount": "$90.00",
+    "quote": "Standard (Application received 10 or more business days prior to closing/occupancy): $90.00.",
+    "source_url": "https://boroughofwenonah.com/government/construction-code-enforcement/",
+    "verified": true
+   },
+   {
+    "label": "Expedited, application received 4 to 9 business days before closing",
+    "amount": "$140.00",
+    "quote": "Expedited (Application received 4 to 9 business days prior to closing/occupancy): $140.00.",
+    "source_url": "https://boroughofwenonah.com/government/construction-code-enforcement/",
+    "verified": true
+   },
+   {
+    "label": "Emergency, application received 3 or fewer business days before closing",
+    "amount": "$200.00",
+    "quote": "Emergency (Application received 3 or fewer business days prior to closing/occupancy) $200.00.",
+    "source_url": "https://boroughofwenonah.com/government/construction-code-enforcement/",
+    "verified": true
+   },
+   {
+    "label": "Re-inspection, each inspection after the first failed one",
+    "amount": "$40.00",
+    "quote": "Re-Inspection Fee (Required for each subsequent inspection after the first failed inspection): $40.00.",
+    "source_url": "https://boroughofwenonah.com/government/construction-code-enforcement/",
+    "verified": true
+   }
+  ],
+  "how_to_apply": "Fill out the Borough of Wenonah Fire Safety Application on the Mantua Township Fire District website, pay in full (check, money order, or the district's online payment link at https://www.velocitypayment.com/client/mtfd/index.html), then call the fire district at (856) 468-7222 ext. 102 and ask for Daniel Hauss, Fire Official, to schedule.",
+  "application_url": "https://mtfd22.com/wenonah-housing-insepctions/",
+  "department_url": "https://boroughofwenonah.com/government/construction-code-enforcement/",
+  "phone": "856-468-7222 ext. 102",
+  "email": "",
+  "evidence": [
+   {
+    "url": "https://boroughofwenonah.com/government/construction-code-enforcement/",
+    "quote": "Effective March 1, 2026, Mantua Township Fire District will handle Wenonah’s housing inspections (Co-Inspections) as part of a shared services agreement.",
+    "doc_date": "2026-05",
+    "via": "page",
+    "verified": true
+   },
+   {
+    "url": "https://boroughofwenonah.com/government/construction-code-enforcement/",
+    "quote": "This includes all inspections required for sales of homes and rental properties.",
+    "doc_date": "2026-05",
+    "via": "page",
+    "verified": true
+   }
+  ],
+  "confidence": "high",
+  "notes": "Borough page last updated May 8, 2026. It links to the application through an Outlook safelinks wrapper; the real address is mtfd22.com/wenonah-housing-insepctions/ (spelled that way on the site). The fire district website is behind a bot check and could not be read, so the pre-inspection checklist, what is inspected, and how long the certificate is valid were not confirmed. Construction permits and zoning for Wenonah go through Mantua Township (401 Main Street, Mantua, 856-468-1500)."
+ },
+ "fire_cert": {
+  "requirements": [],
+  "authorities": [
+   {
+    "name": "Mantua Township Fire District (handles Wenonah housing and fire safety inspections under a shared services agreement)",
+    "type": "fire_district",
+    "area_served": "Entire borough",
+    "lead_time": "Same tiers as the housing inspection: 10 or more business days before closing for the standard fee.",
+    "fees": [],
+    "how_to_apply": "Same application and scheduling as the housing inspection: the Borough of Wenonah Fire Safety Application on the fire district website, then call (856) 468-7222 ext. 102. No separate smoke certificate fee is published; the Borough lists one fee schedule (see resale_co fees).",
+    "application_url": "https://mtfd22.com/wenonah-housing-insepctions/",
+    "department_url": "https://boroughofwenonah.com/government/construction-code-enforcement/",
+    "phone": "856-468-7222 ext. 102",
+    "email": "",
+    "evidence": [
+     {
+      "url": "https://boroughofwenonah.com/government/construction-code-enforcement/",
+      "quote": "You will be required to complete a form that can be found online at Borough of Wenonah Fire Safety Application",
+      "doc_date": "2026-05",
+      "via": "page",
+      "verified": true
+     },
+     {
+      "url": "https://boroughofwenonah.com/government/construction-code-enforcement/",
+      "quote": "speak with Daniel Hauss (Fire Official)",
+      "doc_date": "2026-05",
+      "via": "page",
+      "verified": true
+     }
+    ],
+    "confidence": "low"
+   }
+  ],
+  "notes": "The Borough calls the fire district form a 'Fire Safety Application' and names a Fire Official as the contact, which suggests the smoke alarm, CO alarm and extinguisher check is part of the same inspection, but no official page says so directly. Conflict: the NJ DCA LEA Registry (July 2026, as of June 30, 2026) still lists 'C Wenonah Borough' (C = County, meaning the Gloucester County Fire Marshal's Office is the fire code enforcing agency), and the County Fire Marshal page also lists Wenonah. County Fire Marshal: 856-307-7912, gcfmo@co.gloucester.nj.us. The Wenonah Volunteer Fire Company is the suppression company, not an inspecting agency."
+ },
+ "other_items": [],
+ "open_questions": [
+  "Does the Mantua Township Fire District issue the state smoke/CO/extinguisher certificate for Wenonah, or does the Gloucester County Fire Marshal (still the registered LEA per DCA July 2026)? Is there a separate fee?",
+  "What the Wenonah CO inspection checks, and how long the certificate is valid (mtfd22.com checklist and form are behind a bot check).",
+  "Ordinance basis in Wenonah code (ecode360 WE0212) could not be read."
+ ],
+ "verification": {
+  "fees": 4,
+  "fee_ok": 4,
+  "fee_bad": 0,
+  "fee_unchecked": 0,
+  "quotes": 4,
+  "q_ok": 4,
+  "q_bad": 0,
+  "q_unchecked": 0
+ }
+}

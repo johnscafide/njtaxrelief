@@ -1,0 +1,90 @@
+{
+ "municipality_code": "0809",
+ "municipality": "Logan Township",
+ "county": "GLOUCESTER",
+ "checked_at": "2026-09-30",
+ "resale_co": {
+  "status": "required",
+  "name": "Certificate of Occupancy for change of occupancy / change of ownership (Change of Owner/Occupancy Inspection)",
+  "issued_by": "Construction Official / Municipal Housing Inspector, Construction and Code Enforcement Department",
+  "lead_time": "",
+  "valid_for": "",
+  "requirements": [],
+  "fees": [],
+  "how_to_apply": "Apply to the Construction Official on the township's form. Change of Owner/Occupancy inspections are reported to be held Monday to Thursday, 12:00 pm to 2:00 pm. Call the Construction Department to confirm the current form and fee.",
+  "application_url": "",
+  "department_url": "https://www.logan-twp.org/departments/construction-and-code-enforcement/",
+  "phone": "856-467-3424 ext. 5",
+  "email": "",
+  "evidence": [
+   {
+    "url": "https://ecode360.com/8046096",
+    "quote": "Certificates of occupancy are required for human habitation of all existing dwelling units in the Township of Logan before a change in occupancy of any such unit may be effected.",
+    "doc_date": "1978-10 (Adopted 10-11-1978 by Ord. No. 7-1978; later amendments unknown)",
+    "via": "search_snippet",
+    "verified": null
+   },
+   {
+    "url": "https://ecode360.com/8046096",
+    "quote": "Application for a certificate of occupancy for change in occupancy and/or change of ownership shall be made to the Construction Official of this Township on a form provided by said Construction Official.",
+    "doc_date": "1978-10 (Adopted 10-11-1978 by Ord. No. 7-1978)",
+    "via": "search_snippet",
+    "verified": null
+   },
+   {
+    "url": "https://www.logan-twp.org/departments/construction-and-code-enforcement/",
+    "quote": "Change of Owner/Occupancy Inspections are available Monday, Thursday from 12:00pm, 2:00pm.",
+    "doc_date": "",
+    "via": "search_snippet",
+    "verified": null
+   }
+  ],
+  "confidence": "low",
+  "notes": "The township website (logan-twp.org) is behind a bot check (captcha) for both curl and the fetch tool, and ecode360 cannot be opened. All three evidence quotes above were seen only as text inside search-tool results, not on the pages themselves, so the exact wording must be re-verified before quoting to clients. Search results for the department page also listed: Construction Official and Municipal Housing Inspector Ron Snyder; Code Enforcement Andre Butler, ext. 3030; fax 856-467-9260; municipal complex at 125 Main Street, Bridgeport, NJ 08014."
+ },
+ "fire_cert": {
+  "requirements": [],
+  "authorities": [
+   {
+    "name": "Logan Township Fire Official (municipal local enforcing agency)",
+    "type": "municipal_fire_bureau",
+    "area_served": "Entire township",
+    "lead_time": "",
+    "fees": [],
+    "how_to_apply": "Contact Logan Township municipal offices (125 Main Street, Bridgeport) for the smoke/CO/extinguisher certificate application.",
+    "application_url": "",
+    "department_url": "",
+    "phone": "856-467-3424",
+    "email": "",
+    "evidence": [
+     {
+      "url": "https://nj.gov/dca/dfs/pdf/ANNUAL%20REGISTRY/THIRD%20QUARTER%20LEA%20REGISTRY%202026.pdf",
+      "quote": "M Logan Township",
+      "doc_date": "2026-07",
+      "via": "pdf",
+      "verified": true
+     }
+    ],
+    "confidence": "medium"
+   }
+  ],
+  "notes": "DCA LEA Registry (Third Quarter, July 2026) lists Logan Township, Gloucester County as 'M' (Municipality is the local enforcing agency). The office name, fees and form were not found on any readable official source. The phone number is the municipal complex main line, not a confirmed fire office line."
+ },
+ "other_items": [],
+ "open_questions": [
+  "Logan Township website is behind a captcha; could not read the Construction and Code Enforcement page or its forms.",
+  "Resale CO fee not confirmed. A search summary of the 1978 ordinance (ecode360.com/8046096) mentioned a $40 application fee, but the exact text could not be seen and the amount is likely outdated, so it was not recorded.",
+  "A search-tool summary claimed Logan fire certificate fees of $150 / $250 / $375 by lead time, a $100 inspection / $50 reinspection, and 180-day validity; these could not be traced to a Logan source and may belong to other towns. Not recorded.",
+  "Name, office, form, fee and lead time for the Logan Township fire certificate are unconfirmed."
+ ],
+ "verification": {
+  "fees": 0,
+  "fee_ok": 0,
+  "fee_bad": 0,
+  "fee_unchecked": 0,
+  "quotes": 4,
+  "q_ok": 1,
+  "q_bad": 0,
+  "q_unchecked": 3
+ }
+}

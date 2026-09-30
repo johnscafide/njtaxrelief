@@ -1,0 +1,154 @@
+{
+ "municipality_code": "0419",
+ "municipality": "Hi-Nella Borough",
+ "county": "CAMDEN",
+ "checked_at": "2026-09-30",
+ "resale_co": {
+  "status": "not_found",
+  "name": "",
+  "issued_by": "",
+  "lead_time": "",
+  "valid_for": "",
+  "requirements": [],
+  "fees": [],
+  "how_to_apply": "",
+  "application_url": "",
+  "department_url": "https://www.hinellaboro.org/contact",
+  "phone": "856-784-6237 ext. 400",
+  "email": "clerkhinellaboro@comcast.net",
+  "evidence": [
+   {
+    "url": "https://www.hinellaboro.org/contact",
+    "quote": "Construction DCA (609) 567-3653",
+    "doc_date": "",
+    "via": "page",
+    "verified": true
+   }
+  ],
+  "confidence": "low",
+  "notes": "The Borough website (hibu site) has no resale, certificate of occupancy, or code enforcement pages or forms. The phone directory lists construction as handled by NJ DCA at (609) 567-3653, and the Borough calendar shows weekly 'Construction Official Hours'. The Borough code is not on the website and ecode360 could not be checked. Silence is not proof there is no resale CO requirement; call the Borough Clerk (856-784-6237 ext. 400) to confirm."
+ },
+ "fire_cert": {
+  "requirements": [
+   "All smoke alarms (hardwired and battery) must be less than 10 years old; take them down and check the date, replace if undated",
+   "Smoke alarm type by build year: pre-1975 homes need 10-year sealed battery alarms on each level; newer homes need hardwired, interconnected alarms per the year-built chart",
+   "Smoke alarm in each sleeping area plus one outside each sleeping area within 10 feet (local ordinance 172-8 B)",
+   "CO alarm outside of and near all sleeping areas if there is a fuel-burning appliance, fireplace or garage; CO alarms must be less than 7 years old",
+   "Low-voltage alarm systems must be tested by an alarm contractor before the inspection, with the certificate shown to the inspector",
+   "House numbers: Arabic numerals at least 3 inches, contrasting, at least 60 inches above ground, visible from the street",
+   "Homes with a secondary power source (solar, generator, battery storage) need a printed label within 18 inches of the main panel and meter, like \"CAUTION MULTIPLE SOURCES OF POWER\"",
+   "Fire extinguisher (June 2025 form): fully charged 2-A:10-BC in or within 10 feet of the kitchen, visible, mounted no higher than 5 feet, and either under 1 year old or tagged by a NJ certified fire equipment contractor"
+  ],
+  "authorities": [
+   {
+    "name": "Regional Fire Prevention Alliance (Borough of Barrington Bureau of Fire Prevention)",
+    "type": "municipal_fire_bureau",
+    "area_served": "Serves Barrington, Hi-Nella, Lawnside, Mt. Ephraim and Oaklyn; covers the entire borough",
+    "lead_time": "Lowest fee with 14 or more business days notice before the change of occupant (weekends, holidays and the settlement date do not count)",
+    "fees": [
+     {
+      "label": "Request received 14+ business days before change of occupant",
+      "amount": "$66.00",
+      "quote": "14+ business days prior to the change of occupant is $66.00.",
+      "source_url": "https://barringtonboro.com/wp-content/uploads/2025/11/Barrington-Smoke-Doc-update-Fillable-pdf.pdf",
+      "verified": true
+     },
+     {
+      "label": "Request received 8 to 13 business days before",
+      "amount": "$74.00",
+      "quote": "8-13 business days prior to the change of occupant is $74.00.",
+      "source_url": "https://barringtonboro.com/wp-content/uploads/2025/11/Barrington-Smoke-Doc-update-Fillable-pdf.pdf",
+      "verified": true
+     },
+     {
+      "label": "Request received 4 to 7 business days before",
+      "amount": "$106.00",
+      "quote": "4-7 business days prior to the change of occupant is $106.00.",
+      "source_url": "https://barringtonboro.com/wp-content/uploads/2025/11/Barrington-Smoke-Doc-update-Fillable-pdf.pdf",
+      "verified": true
+     },
+     {
+      "label": "3 business days or less notice",
+      "amount": "$171.00",
+      "quote": "3 business days or less notice prior to change of occupant is $171.00.",
+      "source_url": "https://barringtonboro.com/wp-content/uploads/2025/11/Barrington-Smoke-Doc-update-Fillable-pdf.pdf",
+      "verified": true
+     },
+     {
+      "label": "Re-inspection after a failed inspection",
+      "amount": "$50.00",
+      "quote": "ALL FAILED INSPECTIONS WILL REQUIRED A $50.00 RE INSPECTION FEE.",
+      "source_url": "https://barringtonboro.com/wp-content/uploads/2025/11/Barrington-Smoke-Doc-update-Fillable-pdf.pdf",
+      "verified": true
+     }
+    ],
+    "how_to_apply": "Fill out the Alliance's certificate application and email it to firealliance@barringtonboro.com, or print it and drop it in the mailbox or mail it to 205 Haines Avenue, Barrington, NJ 08007. A check or money order payable to 'Regional Fire Prevention Alliance' must go with the application. Fees are non-refundable.",
+    "application_url": "https://barringtonboro.com/wp-content/uploads/2025/11/Barrington-Smoke-Doc-update-Fillable-pdf.pdf",
+    "department_url": "https://barringtonboro.com/regional-fire-prevention-alliance/",
+    "phone": "856-547-0991",
+    "email": "firealliance@barringtonboro.com",
+    "evidence": [
+     {
+      "url": "https://barringtonboro.com/regional-fire-prevention-alliance/",
+      "quote": "The Regional Fire Prevention Alliance of Barrington, New Jersey serves the Municipalities of Barrington, Hi-Nella, Lawnside, Mt. Ephraim and Oaklyn.",
+      "doc_date": "",
+      "via": "page",
+      "verified": true
+     },
+     {
+      "url": "https://barringtonboro.com/wp-content/uploads/2025/11/Barrington-Smoke-Doc-update-Fillable-pdf.pdf",
+      "quote": "Inspection is required per NJ Fire Code 5:70-2.3 for the selling, renting, or change of occupancy in one or two family homes. Inspection Must occur Prior to Settlement or change of Occupancy",
+      "doc_date": "2025-11",
+      "via": "pdf",
+      "verified": true
+     },
+     {
+      "url": "https://barringtonboro.com/wp-content/uploads/2025/11/Barrington-Smoke-Doc-update-Fillable-pdf.pdf",
+      "quote": "A CHECK OR MONEY ORDER PAYABLE TO “REGIONAL FIRE PREVENTION ALLIANCE” MUST ACCOMPANY THIS APPLICATION.",
+      "doc_date": "2025-11",
+      "via": "pdf",
+      "verified": true
+     },
+     {
+      "url": "https://barringtonboro.com/wp-content/uploads/2025/11/Barrington-Smoke-Doc-update-Fillable-pdf.pdf",
+      "quote": "CERTIFICATIONS ARE VALID FOR 6 MONTHS and are Non transferable. FEES ARE NON-REFUNDABLE.",
+      "doc_date": "2025-11",
+      "via": "pdf",
+      "verified": true
+     },
+     {
+      "url": "https://nj.gov/dca/dfs/pdf/ANNUAL%20REGISTRY/THIRD%20QUARTER%20LEA%20REGISTRY%202026.pdf",
+      "quote": "Barrington Borough is the LEA for Hi Nella, Lawnside, Mt Ephraim and Oaklyn Boroughs.",
+      "doc_date": "2026-07 (roster as of June 30, 2026)",
+      "via": "pdf",
+      "verified": true
+     },
+     {
+      "url": "https://www.nj.gov/dca/dfs/pdf/fire%20directory_county%20summary/fire_code_enforcement_director.pdf",
+      "quote": "SMOKE DETECTOR COMPLIANCE Name: Regional Fire Prev Alliance Addr: 205 Haines Ave Barrington NJ 08007 Phone (856) 547-0991",
+      "doc_date": "2026-09 (directory PDF; fire department survey 5/2026)",
+      "via": "pdf",
+      "verified": true
+     }
+    ],
+    "confidence": "high"
+   }
+  ],
+  "notes": "Two versions of the Alliance form were found with the same fees. The Barrington-hosted November 2025 version is titled a Smoke Alarm, CO Alarm and Secondary Power Source Identification Label (CSACMASPSIL) application and omits the extinguisher section; it states a $500 penalty. The June 2025 version hosted by Lawnside is titled CSACMAPFEC, includes the extinguisher rules, and states a $600 penalty. Walk-in office hours Tuesday to Friday 8am to 2pm; inspections Monday to Friday 9am to 2pm. Fire Official Nick D'Alonzo, fireofficial@barringtonboro.com. DCA fire directory lists Fire Official Nicholas D'Alonzo for this borough."
+ },
+ "other_items": [],
+ "open_questions": [
+  "Whether Hi-Nella has a Borough resale certificate of occupancy or housing inspection ordinance could not be confirmed online.",
+  "Hi-Nella's own website does not mention the Regional Fire Prevention Alliance; authority is based on the Alliance's page and the DCA LEA registry."
+ ],
+ "verification": {
+  "fees": 5,
+  "fee_ok": 5,
+  "fee_bad": 0,
+  "fee_unchecked": 0,
+  "quotes": 7,
+  "q_ok": 7,
+  "q_bad": 0,
+  "q_unchecked": 0
+ }
+}

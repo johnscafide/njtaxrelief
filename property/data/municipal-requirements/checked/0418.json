@@ -1,0 +1,175 @@
+{
+ "municipality_code": "0418",
+ "municipality": "Haddon Heights Borough",
+ "county": "CAMDEN",
+ "checked_at": "2026-09-30",
+ "resale_co": {
+  "status": "required",
+  "name": "Certificate of Continued Occupancy (CCO) / Certificate of Compliance",
+  "issued_by": "Zoning Officer / Code Enforcement Officer (Zoning and Code Enforcement)",
+  "lead_time": "No application can be filed without a settlement date. All fees must be paid before scheduling an inspection.",
+  "valid_for": "",
+  "requirements": [],
+  "fees": [
+   {
+    "label": "Application filing fee",
+    "amount": "$11.00",
+    "quote": "Filing for the application: $11.00",
+    "source_url": "https://www.haddonhts.com/DocumentCenter/View/3128/Certification-of-Continued-Occupancy-Application-CCO",
+    "verified": true
+   },
+   {
+    "label": "First inspection",
+    "amount": "$50.00",
+    "quote": "First inspection: $50.00",
+    "source_url": "https://www.haddonhts.com/DocumentCenter/View/3128/Certification-of-Continued-Occupancy-Application-CCO",
+    "verified": true
+   },
+   {
+    "label": "Second inspection",
+    "amount": "no charge",
+    "quote": "Second inspection: no charge",
+    "source_url": "https://www.haddonhts.com/DocumentCenter/View/3128/Certification-of-Continued-Occupancy-Application-CCO",
+    "verified": true
+   },
+   {
+    "label": "Third or later inspection, each",
+    "amount": "$25.00",
+    "quote": "Third or more inspection: $25.00",
+    "source_url": "https://www.haddonhts.com/DocumentCenter/View/3128/Certification-of-Continued-Occupancy-Application-CCO",
+    "verified": true
+   }
+  ],
+  "how_to_apply": "Fill out the CCO application (needs a settlement date) and return it with payment (check or cash) to Zoning and Code Enforcement, 514 W. Atlantic Avenue, Haddon Heights. The applicant is responsible for scheduling all inspections and re-inspections after fees are paid.",
+  "application_url": "https://www.haddonhts.com/DocumentCenter/View/3128/Certification-of-Continued-Occupancy-Application-CCO",
+  "department_url": "https://www.haddonhts.com/1364/Certificate-of-Continued-Occupancy",
+  "phone": "856-546-2580",
+  "email": "zoning@haddonhts.com",
+  "evidence": [
+   {
+    "url": "https://www.haddonhts.com/1364/Certificate-of-Continued-Occupancy",
+    "quote": "Per Ordinance 2018:1453, no residential properties may change ownership or tenancy until a Certificate of Continued Occupancy (CCO) is issued by the Zoning Officer and a Smoke Detector/Carbon Monoxide Inspection is also required by the Fire Department.",
+    "doc_date": "",
+    "via": "page",
+    "verified": true
+   },
+   {
+    "url": "https://www.haddonhts.com/DocumentCenter/View/3128/Certification-of-Continued-Occupancy-Application-CCO",
+    "quote": "As per Ordinance 2018:1453 it is required to apply for and receive a Certificate of Compliance issued by the Code Enforcement Officer",
+    "doc_date": "2025-01",
+    "via": "pdf",
+    "verified": true
+   },
+   {
+    "url": "https://www.haddonhts.com/DocumentCenter/View/3128/Certification-of-Continued-Occupancy-Application-CCO",
+    "quote": "Please be aware that this inspection is DIFFERENT from the inspection the Fire Department conducts. You will need BOTH certificates in order to close.",
+    "doc_date": "2025-01",
+    "via": "pdf",
+    "verified": true
+   }
+  ],
+  "confidence": "high",
+  "notes": "Applies to change of ownership or tenancy of residential property. If an inspection fails, the property may close and/or be occupied without the certificate once the purchaser's agreement is accepted by the Enforcement Officer, for no more than 90 days while violations are abated (Sec. 262.2.1). The inspection checklist was not published online, so requirements are blank. Zoning Official and Code Enforcement Officer: Brian Kelly, zoning@haddonhts.com, 856-547-7164 ext. 33 (the form lists 856-546-2580). Current form is DocumentCenter/View/3128 (January 2025); an older 2021 copy (View/3121) has the same fees. Rental property registration and lead paint inspections are separate rental programs."
+ },
+ "fire_cert": {
+  "requirements": [
+   "One smoke detector on each level including basement and any attic reachable by stairs; each level of each unit in a two-family",
+   "Ceiling-mounted at least 4 inches from walls, at least 36 inches from cold air returns and bathroom doors, away from ceiling fans; wall-mounted 4 to 12 inches below ceiling",
+   "UL-approved CO detector in the vicinity of each sleeping area",
+   "House number visible from the street, Arabic numerals at least 3 inches",
+   "2-A:10-B:C extinguisher no more than 10 lbs, charged, in a conspicuous place no more than 10 feet from the kitchen, instructions visible"
+  ],
+  "authorities": [
+   {
+    "name": "Haddon Heights Fire Department, Bureau of Fire Prevention",
+    "type": "municipal_fire_bureau",
+    "area_served": "Entire borough",
+    "lead_time": "Lowest fee with 8 or more days advance notice; schedule early",
+    "fees": [
+     {
+      "label": "8 or more days advance notice",
+      "amount": "$75.00",
+      "quote": "Fee: $75.00 8 + days advance notice",
+      "source_url": "https://www.haddonhts.com/DocumentCenter/View/3225/Request-for-Smoke-Detector-and-Carbon-Monoxide-Inspection-3207-KB",
+      "verified": true
+     },
+     {
+      "label": "4 to 7 days advance notice",
+      "amount": "$100.00",
+      "quote": "$100.00 4 -7 days advance notice",
+      "source_url": "https://www.haddonhts.com/DocumentCenter/View/3225/Request-for-Smoke-Detector-and-Carbon-Monoxide-Inspection-3207-KB",
+      "verified": true
+     },
+     {
+      "label": "3 or fewer days advance notice",
+      "amount": "$140.00",
+      "quote": "$140.00 3 or less days advance notice",
+      "source_url": "https://www.haddonhts.com/DocumentCenter/View/3225/Request-for-Smoke-Detector-and-Carbon-Monoxide-Inspection-3207-KB",
+      "verified": true
+     },
+     {
+      "label": "Re-inspection",
+      "amount": "$35.00",
+      "quote": "$35.00 Reinspection Fee",
+      "source_url": "https://www.haddonhts.com/DocumentCenter/View/3225/Request-for-Smoke-Detector-and-Carbon-Monoxide-Inspection-3207-KB",
+      "verified": true
+     }
+    ],
+    "how_to_apply": "Fill out the Request for Inspection form and email it to one of the fire inspectors, fax it to 856-546-5340, or bring it to the office at 608 Station Avenue. Checks payable to Borough of Haddon Heights.",
+    "application_url": "https://www.haddonhts.com/DocumentCenter/View/3225/Request-for-Smoke-Detector-and-Carbon-Monoxide-Inspection-3207-KB",
+    "department_url": "https://www.haddonhts.com/1336/Fire-Prevention",
+    "phone": "856-546-7135 ext. 81",
+    "email": "",
+    "evidence": [
+     {
+      "url": "https://www.haddonhts.com/1336/Fire-Prevention",
+      "quote": "SELLING YOUR HOME? The Bureau of Fire Prevention also handles the Certificate of Smoke Detector and Carbon Monoxide Compliance (CSDCMAC). This inspection is required prior to selling your home.",
+      "doc_date": "",
+      "via": "page",
+      "verified": true
+     },
+     {
+      "url": "https://www.haddonhts.com/DocumentCenter/View/3225/Request-for-Smoke-Detector-and-Carbon-Monoxide-Inspection-3207-KB",
+      "quote": "Checks may be made payable to BOROUGH OF HADDON HEIGHTS",
+      "doc_date": "2022-08",
+      "via": "pdf",
+      "verified": true
+     },
+     {
+      "url": "https://nj.gov/dca/dfs/pdf/ANNUAL%20REGISTRY/THIRD%20QUARTER%20LEA%20REGISTRY%202026.pdf",
+      "quote": "F Haddon Heights Borough",
+      "doc_date": "2026-07 (roster as of June 30, 2026)",
+      "via": "pdf",
+      "verified": true
+     },
+     {
+      "url": "https://www.nj.gov/dca/dfs/pdf/fire%20directory_county%20summary/fire_code_enforcement_director.pdf",
+      "quote": "SMOKE DETECTOR COMPLIANCE Name: Haddon Hgts Boro Fire Prev Addr: Rear 608 Station Av Haddon Heights NJ 08035 Phone (856) 546-7135",
+      "doc_date": "2026-09 (directory PDF; fire department survey 5/2026)",
+      "via": "pdf",
+      "verified": true
+     }
+    ],
+    "confidence": "high"
+   }
+  ],
+  "notes": "DCA LEA Registry (July 2026) lists Haddon Heights' fire code enforcing agency as 'F' (Fire Department), consistent with the Haddon Heights Fire Department Bureau of Fire Prevention. Fee sheet is from August 2022 (PDF metadata); still the form linked on the current Fire Prevention page. The CCO form gives the Fire Department number as 856-547-7164 ext. 80, while the fire form gives 856-546-7135 (ext. 81). No inspector email addresses are published on the page. DCA fire directory lists Fire Official Benjamin Zwaska and the smoke compliance office at Rear 608 Station Ave."
+ },
+ "other_items": [],
+ "open_questions": [
+  "What the Borough CCO inspection checks is not published online.",
+  "CCO validity period not stated.",
+  "Fire fee sheet dated 2022; confirm fees are still current.",
+  "Fire inspector email addresses not listed on the website."
+ ],
+ "verification": {
+  "fees": 8,
+  "fee_ok": 8,
+  "fee_bad": 0,
+  "fee_unchecked": 0,
+  "quotes": 7,
+  "q_ok": 7,
+  "q_bad": 0,
+  "q_unchecked": 0
+ }
+}

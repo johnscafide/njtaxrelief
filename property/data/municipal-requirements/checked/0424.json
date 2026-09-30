@@ -1,0 +1,175 @@
+{
+ "municipality_code": "0424",
+ "municipality": "Merchantville Borough",
+ "county": "CAMDEN",
+ "checked_at": "2026-09-30",
+ "resale_co": {
+  "status": "required",
+  "name": "Resale Inspection / Resale Certificate",
+  "issued_by": "Borough of Merchantville Code Enforcement (Office of Code Enforcement and Rental Housing Inspection)",
+  "lead_time": "",
+  "valid_for": "6 months after passed inspection",
+  "requirements": [
+   "House numbers visible from the street",
+   "Fences, decks, sheds and accessory structures must have proper permits",
+   "Sidewalks and driveways level and free of trip hazards",
+   "Smoke alarm on each level including basement; 10-year sealed lithium battery type",
+   "CO detector within 10 feet of sleeping areas (plug-in or battery OK)",
+   "2A:10BC fire extinguisher in a cabinet or on a hanger within 10 feet of the kitchen",
+   "Handrail on stairs with more than 4 risers; guards on surfaces more than 30 inches above grade",
+   "Exterior surfaces painted or protected and in good repair",
+   "Yard free of excess weeds, rubbish and garbage",
+   "Accessory structures (garages, fences, walls) sound and in good repair",
+   "Pools clean; pools over 24 inches deep fenced at least 48 inches with self-closing, self-latching gates"
+  ],
+  "fees": [
+   {
+    "label": "Resale inspection",
+    "amount": "$50.00",
+    "quote": "Fee: $50.00 Re-Inspection Fee: $10.00",
+    "source_url": "https://www.merchantvillenj.gov/RESALE%20PAPERWORK%201-2026.pdf?t=202601211210300",
+    "verified": true
+   },
+   {
+    "label": "Resale re-inspection",
+    "amount": "$10.00",
+    "quote": "Fee: $50.00 Re-Inspection Fee: $10.00",
+    "source_url": "https://www.merchantvillenj.gov/RESALE%20PAPERWORK%201-2026.pdf?t=202601211210300",
+    "verified": true
+   }
+  ],
+  "how_to_apply": "Complete the Resale Inspection Application (includes the smoke detector certificate application) and bring it to the Borough Clerk's office at 1 W. Maple Avenue to pay the fee. Code Enforcement then contacts the applicant to schedule the inspection.",
+  "application_url": "https://www.merchantvillenj.gov/RESALE%20PAPERWORK%201-2026.pdf?t=202601211210300",
+  "department_url": "https://www.merchantvillenj.gov/government/code_enforcement_and_rental_inspection.php",
+  "phone": "609-413-0010",
+  "email": "codeenforcement@merchantvillenj.gov",
+  "evidence": [
+   {
+    "url": "https://www.merchantvillenj.gov/government/code_enforcement_and_rental_inspection.php",
+    "quote": "Before the sale of all residential properties, you are required to obtain a Resale Inspection, including smoke detector compliance. Please bring your completed application to the clerk's office with you to pay the required fee. The Applicant will be contacted to schedule an inspection.",
+    "doc_date": "",
+    "via": "page",
+    "verified": true
+   },
+   {
+    "url": "https://www.merchantvillenj.gov/RESALE%20PAPERWORK%201-2026.pdf?t=202601211210300",
+    "quote": "Resale Certificates are only valid for 6 months after passed inspection.",
+    "doc_date": "2026-01",
+    "via": "pdf",
+    "verified": true
+   }
+  ],
+  "confidence": "high",
+  "notes": "Application packet is titled 'RESALE PAPERWORK 1-2026' (PDF modified January 2026). It asks the intended use of the property, including whether it will be a Community Supervised Living Residence. Failing to comply may delay or deny the Certificate of Occupancy and fines may be issued. The older 'Resale-Paperwork-3-13-23.pdf' link is dead (404). Rental units need separate registration and a rental inspection/CO before each new tenant (Chapter 60B), which is a rental program, not resale. Vacant properties must be registered (fees $500 to $3,500 per 6-month term). Code Inspector email codeenforcement@merchantvillenj.gov; Property Maintenance Officer Kevin Patti, kpatti@merchantvillenj.gov. The resale checklist pages list office phone 856-662-2474."
+ },
+ "fire_cert": {
+  "requirements": [
+   "Each smoke alarm must be a 10-year sealed lithium battery detector, on every level including basements",
+   "CO detector within 10 feet of sleeping areas",
+   "2A:10BC extinguisher in an approved cabinet or on a hanger within 10 feet of the kitchen"
+  ],
+  "authorities": [
+   {
+    "name": "Borough of Merchantville Code Enforcement (Certificate of Smoke Detector Compliance)",
+    "type": "municipal_fire_bureau",
+    "area_served": "Entire borough",
+    "lead_time": "Fee is lowest if applied for more than 10 business days before settlement",
+    "fees": [
+     {
+      "label": "More than 10 business days before settlement",
+      "amount": "$35.00",
+      "quote": "More than 10 business days $35.00",
+      "source_url": "https://www.merchantvillenj.gov/RESALE%20PAPERWORK%201-2026.pdf?t=202601211210300",
+      "verified": true
+     },
+     {
+      "label": "Less than 10 days but more than 4 days",
+      "amount": "$70.00",
+      "quote": "Less than 10 days but more than 4 days $70.00",
+      "source_url": "https://www.merchantvillenj.gov/RESALE%20PAPERWORK%201-2026.pdf?t=202601211210300",
+      "verified": true
+     },
+     {
+      "label": "4 business days or fewer",
+      "amount": "$125.00",
+      "quote": "4 business days or fewer $125.00",
+      "source_url": "https://www.merchantvillenj.gov/RESALE%20PAPERWORK%201-2026.pdf?t=202601211210300",
+      "verified": true
+     },
+     {
+      "label": "Re-inspection, each",
+      "amount": "$10.00",
+      "quote": "Re-inspection required / per re-inspection $10.00",
+      "source_url": "https://www.merchantvillenj.gov/RESALE%20PAPERWORK%201-2026.pdf?t=202601211210300",
+      "verified": true
+     }
+    ],
+    "how_to_apply": "Fill out the Borough 'Application for Certificate of Smoke Detector Compliance' (page 3 of the resale packet) and submit it with the resale application at the Clerk's office with payment. The Code Enforcement Official schedules the inspection.",
+    "application_url": "https://www.merchantvillenj.gov/RESALE%20PAPERWORK%201-2026.pdf?t=202601211210300",
+    "department_url": "https://www.merchantvillenj.gov/government/code_enforcement_and_rental_inspection.php",
+    "phone": "856-662-2474 ext. 310",
+    "email": "codeenforcement@merchantvillenj.gov",
+    "evidence": [
+     {
+      "url": "https://www.merchantvillenj.gov/RESALE%20PAPERWORK%201-2026.pdf?t=202601211210300",
+      "quote": "BOROUGH OF MERCHANTVILLE APPLICATION FOR CERTIFICATE OF SMOKE DETECTOR COMPLIANCE",
+      "doc_date": "form marked 09/20, in packet dated 2026-01",
+      "via": "pdf",
+      "verified": true
+     },
+     {
+      "url": "https://www.merchantvillenj.gov/RESALE%20PAPERWORK%201-2026.pdf?t=202601211210300",
+      "quote": "The application fee for certificate of smoke detector, CO detector and fire extinguisher is:",
+      "doc_date": "form marked 09/20, in packet dated 2026-01",
+      "via": "pdf",
+      "verified": true
+     },
+     {
+      "url": "https://www.merchantvillenj.gov/government/code_enforcement_and_rental_inspection.php",
+      "quote": "Before the sale of all residential properties, you are required to obtain a Resale Inspection, including smoke detector compliance.",
+      "doc_date": "",
+      "via": "page",
+      "verified": true
+     },
+     {
+      "url": "https://nj.gov/dca/dfs/pdf/ANNUAL%20REGISTRY/THIRD%20QUARTER%20LEA%20REGISTRY%202026.pdf",
+      "quote": "F Merchantville Borough",
+      "doc_date": "2026-07 (roster as of June 30, 2026)",
+      "via": "pdf",
+      "verified": true
+     },
+     {
+      "url": "https://www.nj.gov/dca/dfs/pdf/fire%20directory_county%20summary/fire_code_enforcement_director.pdf",
+      "quote": "SMOKE DETECTOR COMPLIANCE Name: Merchantville Code Enf Addr: 1 West Maple Av Merchantville NJ 08109 Phone (856) 488-0404",
+      "doc_date": "2026-09 (directory PDF; fire department survey 5/2026)",
+      "via": "pdf",
+      "verified": true
+     }
+    ],
+    "confidence": "high"
+   }
+  ],
+  "notes": "DCA LEA Registry (July 2026) lists Merchantville's Uniform Fire Code enforcing agency as 'F' (Fire Department). The Borough's Property Maintenance Officer (Kevin Patti) works from the Niagara Fire Station at 22 E. Park Ave and the Fire Chief is also listed as Kevin Patti, so the Borough smoke certificate form appears to be processed through this combined office. The smoke/CO/extinguisher certificate is issued by the Borough (Code Enforcement Official), bundled with the resale inspection. The smoke form carries a '09/20' revision mark but is included in the January 2026 resale packet. The Merchantville Fire Department (Niagara Fire Company, 22 E. Park Ave, 856-488-0404) is the firefighting company; no separate fire district resale process was found."
+ },
+ "other_items": [
+  {
+   "label": "Permits for accessory structures",
+   "detail": "All fences, decks, sheds, and accessory structures must have proper permits.",
+   "source_url": "https://www.merchantvillenj.gov/RESALE%20PAPERWORK%201-2026.pdf?t=202601211210300"
+  }
+ ],
+ "open_questions": [
+  "No stated lead time for the resale inspection itself.",
+  "Could not open the Borough code on ecode360 to confirm the ordinance fee amounts."
+ ],
+ "verification": {
+  "fees": 6,
+  "fee_ok": 6,
+  "fee_bad": 0,
+  "fee_unchecked": 0,
+  "quotes": 7,
+  "q_ok": 7,
+  "q_bad": 0,
+  "q_unchecked": 0
+ }
+}

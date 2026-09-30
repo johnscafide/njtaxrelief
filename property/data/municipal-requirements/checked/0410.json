@@ -1,0 +1,145 @@
+{
+ "municipality_code": "0410",
+ "municipality": "Chesilhurst Borough",
+ "county": "CAMDEN",
+ "checked_at": "2026-09-30",
+ "resale_co": {
+  "status": "not_found",
+  "name": "",
+  "issued_by": "",
+  "lead_time": "",
+  "valid_for": "",
+  "requirements": [],
+  "fees": [],
+  "how_to_apply": "",
+  "application_url": "",
+  "department_url": "https://chesilhurstboro.org/departments/construction/",
+  "phone": "856-767-4153",
+  "email": "",
+  "evidence": [],
+  "confidence": "low",
+  "notes": "The borough website's Construction page only says 'Coming Soon' and no resale, CO or housing inspection page or form was found on chesilhurstboro.org. The borough code is on ecode360 (CH2676), which could not be opened, and no search snippet showed a resale CO rule. Phone listed is the borough main number (201 Grant Ave)."
+ },
+ "fire_cert": {
+  "requirements": [
+   "All battery (DC) smoke alarms must be 10-year sealed battery alarms",
+   "Smoke alarms must be less than 10 years old; the realtor, owner, seller or buyer must take each alarm down and check the date",
+   "Smoke alarm type and number follow the year the house was built (for example 1991 to present: hardwired alarms with battery backup on each level and in each bedroom, interconnected); hardwired alarms cannot be replaced with a single battery alarm",
+   "CO alarm within 10 feet of all sleeping areas if the home has a fuel-burning appliance, fireplace or attached garage",
+   "Homes with a secondary power source (solar, generator, battery storage) need a permanent, non-handwritten label at the main electrical panel and electric meter, such as 'Caution: Multiple Sources of Power'",
+   "Homes with a low-voltage fire alarm system must have it certified by an alarm contractor before the inspection",
+   "Electric power must be on; an adult (18+) must be present for the whole inspection; inspectors do not use lockboxes"
+  ],
+  "authorities": [
+   {
+    "name": "Winslow Township Fire Department, Fire Prevention Division (Winslow Township Fire District)",
+    "type": "fire_district",
+    "area_served": "Entire borough (Winslow Township fire district serves as the fire code enforcing agency for Chesilhurst)",
+    "lead_time": "Apply 3 to 4 weeks before the closing or move-in date",
+    "fees": [
+     {
+      "label": "8 or more days advance notice (instructions sheet)",
+      "amount": "$65.00",
+      "quote": "8+ days advance notice               $65.00",
+      "source_url": "https://winslowtwpfd.org/vertical/sites/%7B2458775F-59B7-4354-B7A0-12D3BE8EC490%7D/uploads/CSDCMACPFE_Instructions_4.15.2025.pdf",
+      "verified": true
+     },
+     {
+      "label": "4 to 7 days notice",
+      "amount": "$100.00",
+      "quote": "7-4 days advance notice           $100.00",
+      "source_url": "https://winslowtwpfd.org/vertical/sites/%7B2458775F-59B7-4354-B7A0-12D3BE8EC490%7D/uploads/CSDCMACPFE_Instructions_4.15.2025.pdf",
+      "verified": true
+     },
+     {
+      "label": "3 days or less notice",
+      "amount": "$150.00",
+      "quote": "3 or less days notice           $150.00",
+      "source_url": "https://winslowtwpfd.org/vertical/sites/%7B2458775F-59B7-4354-B7A0-12D3BE8EC490%7D/uploads/CSDCMACPFE_Instructions_4.15.2025.pdf",
+      "verified": true
+     },
+     {
+      "label": "Senior discount, 62 or older (proof of age)",
+      "amount": "$30.00",
+      "quote": "Senior Citizen's Discount (62- Or Older Proof of age attached)     $30.00",
+      "source_url": "https://winslowtwpfd.org/vertical/sites/%7B2458775F-59B7-4354-B7A0-12D3BE8EC490%7D/uploads/CSDCMACPFE_Instructions_4.15.2025.pdf",
+      "verified": true
+     },
+     {
+      "label": "Re-inspection, per visit",
+      "amount": "$35.00",
+      "quote": "Re-inspection (per visit)           $35.00",
+      "source_url": "https://winslowtwpfd.org/vertical/sites/%7B2458775F-59B7-4354-B7A0-12D3BE8EC490%7D/uploads/CSDCMACPFE_Instructions_4.15.2025.pdf",
+      "verified": true
+     },
+     {
+      "label": "Failure to keep appointment (no-show)",
+      "amount": "$35.00",
+      "quote": "Failure to keep appointment         $35.00",
+      "source_url": "https://winslowtwpfd.org/vertical/sites/%7B2458775F-59B7-4354-B7A0-12D3BE8EC490%7D/uploads/CSDCMACPFE_Instructions_4.15.2025.pdf",
+      "verified": true
+     }
+    ],
+    "how_to_apply": "Apply online through the Winslow Township Fire Department resale application, then pay through the Edmunds WIPP payment link; or download the packet and fax it to 609-561-5823; or apply in person at 9 Cedar Brook Road, Sicklerville (9 am to 5 pm weekdays). Pay by check (payable to Winslow Township Fire District), credit card, debit card or money order. Inspections are Tuesdays and Thursdays in a morning or afternoon block. All fees are non-refundable. Certificates are valid 90 days from the inspection date.",
+    "application_url": "https://winslowtwpfd.org/online-resale-application",
+    "department_url": "https://winslowtwpfd.org/fire-marshal-office",
+    "phone": "609-561-4225",
+    "email": "firedistrict@winslowtwpfd.org",
+    "evidence": [
+     {
+      "url": "https://nj.gov/dca/dfs/pdf/ANNUAL%20REGISTRY/THIRD%20QUARTER%20LEA%20REGISTRY%202026.pdf",
+      "quote": "Winslow Township is the LEA for Chesilhurst Borough.",
+      "doc_date": "2026-07 (as of June 30, 2026)",
+      "via": "pdf",
+      "verified": true
+     },
+     {
+      "url": "https://winslowtwpfd.org/fire-marshal-office",
+      "quote": "In January 2024, Joseph Hahn was sworn in as the Fire Official for Winslow Township and the Borough of Chesilhurst.",
+      "doc_date": "",
+      "via": "page",
+      "verified": true
+     },
+     {
+      "url": "https://winslowtwpfd.org/vertical/sites/%7B2458775F-59B7-4354-B7A0-12D3BE8EC490%7D/uploads/Smoke_Application_2025.pdf",
+      "quote": "RE:  RESIDENTIAL RESALES WINSLOW TOWNSHIP/CHESILHURST BOROUGH",
+      "doc_date": "2025-06 (Revised 06/05/25)",
+      "via": "pdf",
+      "verified": true
+     },
+     {
+      "url": "https://winslowtwpfd.org/vertical/sites/%7B2458775F-59B7-4354-B7A0-12D3BE8EC490%7D/uploads/Smoke_Application_2025.pdf",
+      "quote": "CERTIFICATIONS ARE VALID FOR 90 DAYS FROM THE DATE OF INSPECTION",
+      "doc_date": "2025-06",
+      "via": "pdf",
+      "verified": true
+     },
+     {
+      "url": "https://winslowtwpfd.org/vertical/sites/%7B2458775F-59B7-4354-B7A0-12D3BE8EC490%7D/uploads/Smoke_Application_2025.pdf",
+      "quote": "8-14 Days notice        $  65.00",
+      "doc_date": "2025-06 (application packet wording for the lowest tier)",
+      "via": "pdf",
+      "verified": true
+     }
+    ],
+    "confidence": "high"
+   }
+  ],
+  "notes": "Fee tiers are identical in the 2025 application packet (revised 06/05/25) and the instructions sheet dated 4/15/2025. The application packet labels the lowest tier '8-14 Days notice' while the instructions say '8+ days advance notice'. Neither document mentions a portable fire extinguisher requirement. Non-compliance penalty cited on the form: $100 to $2,500 per occurrence."
+ },
+ "other_items": [],
+ "open_questions": [
+  "Whether Chesilhurst requires any borough resale CO or zoning/housing inspection could not be confirmed; the borough code (ecode360 CH2676) could not be opened and the Construction page is 'Coming Soon'. Call the borough at 856-767-4153.",
+  "Whether the Winslow fire department requires a portable fire extinguisher at resale is not stated in its 2025 documents."
+ ],
+ "verification": {
+  "fees": 6,
+  "fee_ok": 6,
+  "fee_bad": 0,
+  "fee_unchecked": 0,
+  "quotes": 5,
+  "q_ok": 5,
+  "q_bad": 0,
+  "q_unchecked": 0
+ }
+}

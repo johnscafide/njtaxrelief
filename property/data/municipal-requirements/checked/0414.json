@@ -1,0 +1,81 @@
+{
+ "municipality_code": "0414",
+ "municipality": "Gloucester City",
+ "county": "CAMDEN",
+ "checked_at": "2026-09-30",
+ "resale_co": {
+  "status": "not_found",
+  "name": "",
+  "issued_by": "",
+  "lead_time": "",
+  "valid_for": "",
+  "requirements": [],
+  "fees": [],
+  "how_to_apply": "",
+  "application_url": "",
+  "department_url": "",
+  "phone": "",
+  "email": "",
+  "evidence": [],
+  "confidence": "low",
+  "notes": "The city website (cityofgloucester.org) returns a Cloudflare 'Just a moment...' bot check (HTTP 403) to both curl and WebFetch, so no city page or form could be read. The city code is on ecode360, which is also blocked. Search results mention that the city has Housing Inspectors and has adopted the NJ State Housing Code, but nothing seen confirmed a resale CO rule, so status is left as not found. The DCA Fire Department/LEA Directory names a 'Gloucester City Housing' office at 512 Monmouth St (856-456-7689) as the city's smoke detector compliance contact; that office may also know whether a resale housing inspection applies."
+ },
+ "fire_cert": {
+  "requirements": [],
+  "authorities": [
+   {
+    "name": "Gloucester City Fire Department (Fire Official Patrick R. Hagan); DCA directory lists 'Gloucester City Housing' as the smoke detector compliance contact",
+    "type": "municipal_fire_bureau",
+    "area_served": "Entire city",
+    "lead_time": "",
+    "fees": [],
+    "how_to_apply": "No application form or instructions could be read (city website behind a bot check). The DCA Fire Department/LEA Directory lists the smoke detector compliance contact as Gloucester City Housing, 512 Monmouth St, Gloucester City NJ 08030, phone (856) 456-7689. Fire Official: Patrick R. Hagan, (856) 456-2652, pat.hagan@gloucestercityfd.org.",
+    "application_url": "",
+    "department_url": "",
+    "phone": "856-456-7689",
+    "email": "pat.hagan@gloucestercityfd.org",
+    "evidence": [
+     {
+      "url": "https://nj.gov/dca/dfs/pdf/ANNUAL%20REGISTRY/THIRD%20QUARTER%20LEA%20REGISTRY%202026.pdf",
+      "quote": "F Gloucester City",
+      "doc_date": "2026-07 (as of June 30, 2026)",
+      "via": "pdf",
+      "verified": true
+     },
+     {
+      "url": "https://www.nj.gov/dca/dfs/pdf/fire%20directory_county%20summary/fire_code_enforcement_director.pdf",
+      "quote": "Gloucester City Housing",
+      "doc_date": "2026 (Fire Department Survey Date: 5/22/2026; listed under SMOKE DETECTOR COMPLIANCE with Addr: 512 Monmouth St, Phone (856) 456-7689)",
+      "via": "pdf",
+      "verified": true
+     },
+     {
+      "url": "https://www.nj.gov/dca/dfs/pdf/fire%20directory_county%20summary/fire_code_enforcement_director.pdf",
+      "quote": "Email pat.hagan@gloucestercityfd.org",
+      "doc_date": "2026-05",
+      "via": "pdf",
+      "verified": true
+     }
+    ],
+    "confidence": "medium"
+   }
+  ],
+  "notes": "The NJ DCA Uniform Fire Code registry (July 2026) lists Gloucester City with code 'F' (Fire Department) as its local enforcing agency. The DCA Fire Department/LEA Directory (survey dated 5/22/2026) lists Fire Official Patrick R. Hagan (856-456-2652, pat.hagan@gloucestercityfd.org) and, under 'Smoke Detector Compliance', the contact 'Gloucester City Housing', 512 Monmouth St, phone (856) 456-7689. So the smoke/CO certificate may be handled through the city Housing office at City Hall; confirm before relying on it. Fees could not be confirmed: the city site is behind a bot check and the city code is on ecode360. Search engine summaries mentioned a $45 / $90 / $161 tier schedule and a $10 fee tied to Gloucester City Code section 55-13(C), but the $45/$90/$161 schedule matches the common state default and no raw official text was visible, so none of these amounts are recorded."
+ },
+ "other_items": [],
+ "open_questions": [
+  "Does Gloucester City require a resale CO / housing inspection on sale of a 1-2 family home? City site blocked by bot check; confirm with the city directly.",
+  "Gloucester City smoke/CO certificate fees, lead time and application form could not be confirmed from an official source; call Gloucester City Housing at 856-456-7689 (DCA directory contact).",
+  "Search summaries suggested ecode360 pages https://ecode360.com/35212793 and https://ecode360.com/42887964 hold the city's fire prevention fees; they could not be opened."
+ ],
+ "verification": {
+  "fees": 0,
+  "fee_ok": 0,
+  "fee_bad": 0,
+  "fee_unchecked": 0,
+  "quotes": 3,
+  "q_ok": 3,
+  "q_bad": 0,
+  "q_unchecked": 0
+ }
+}

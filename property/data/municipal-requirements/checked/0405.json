@@ -1,0 +1,194 @@
+{
+ "municipality_code": "0405",
+ "municipality": "Berlin Borough",
+ "county": "CAMDEN",
+ "checked_at": "2026-09-30",
+ "resale_co": {
+  "status": "required",
+  "name": "Certificate of Continued Occupancy (CCO)",
+  "issued_by": "Borough of Berlin Construction Department",
+  "lead_time": "",
+  "valid_for": "",
+  "requirements": [
+   "All utilities on for the inspection; lockbox code if vacant",
+   "Trash and debris cleared inside and out",
+   "Walkways level and free of trip hazards",
+   "4 inch contrasting house number visible from the street",
+   "Graspable handrail on steps with more than four risers; guardrails on open stairs",
+   "Windows and doors operable, no cracked or broken glass",
+   "No pest or rodent infestation",
+   "Egress window or door in every bedroom; no bedrooms in basements",
+   "Bathroom window or exhaust fan",
+   "Dryer vent hard piped to the outside",
+   "Water heater discharge pipe ending 2 to 6 inches above the floor",
+   "Smoke detectors working on every level, under 10 years old, 10-year sealed battery if battery powered, hardwired units interconnected and not swapped for battery units",
+   "CO detector within 10 feet of each bedroom",
+   "Pools, fences, garages and decks safe; pool gates self-closing and self-latching",
+   "Wood-burning fireplace or stove needs a certificate showing it is in good working order",
+   "Thumb-turn locks (no keyed interior locks)",
+   "All open permits closed with final inspections; unpermitted work must be documented before the CCO is issued"
+  ],
+  "fees": [
+   {
+    "label": "Initial CCO inspection",
+    "amount": "$100",
+    "quote": "**Initial inspection fee is $100 and a re-inspection fee of $50 in the event a re-inspection is required**",
+    "source_url": "https://www.berlinnj.org/wp-content/uploads/2025/05/CCO-Application.pdf",
+    "verified": true
+   },
+   {
+    "label": "Re-inspection",
+    "amount": "$50",
+    "quote": "**Initial inspection fee is $100 and a re-inspection fee of $50 in the event a re-inspection is required**",
+    "source_url": "https://www.berlinnj.org/wp-content/uploads/2025/05/CCO-Application.pdf",
+    "verified": true
+   }
+  ],
+  "how_to_apply": "Fill out the Inspection Application for Certificate of Continued Occupancy (check 'House Sale') and submit it to the Construction Department, 59 S. White Horse Pike, Berlin. The Tax Collector must certify that taxes are current and there are no liens. Inspection requests can be emailed to construction@berlinnj.org.",
+  "application_url": "https://www.berlinnj.org/wp-content/uploads/2025/05/CCO-Application.pdf",
+  "department_url": "https://www.berlinnj.org/construction/",
+  "phone": "856-767-7777 ext. 316",
+  "email": "construction@berlinnj.org",
+  "evidence": [
+   {
+    "url": "https://www.berlinnj.org/wp-content/uploads/2025/05/CCO-Application.pdf",
+    "quote": "INSPECTION APPLICATION FOR CERTIFICATE OF CONTINUED OCCUPANCY",
+    "doc_date": "2025-05 (upload folder)",
+    "via": "pdf",
+    "verified": true
+   },
+   {
+    "url": "https://www.berlinnj.org/wp-content/uploads/2025/05/CCO-Application.pdf",
+    "quote": "**NOTE** ALL OPEN PERMITS MUST BE CLOSED WITH FINAL PASSING INSPECTIONS BEFORE A CCO CAN BE ISSUED.",
+    "doc_date": "2025-05",
+    "via": "pdf",
+    "verified": true
+   },
+   {
+    "url": "https://berlinnj.org/berlinnj/AGENDA%20%202020-07-09.pdf",
+    "quote": "RESOLUTION 2020 -078 - RESOLUTION OF THE BOROUGH OF BERLIN, COUNTY OF CAMDEN, STATE OF NEW JERSEY, AUTHORIZING REFUND OF RESALE INSPECTION FEE OF $100.",
+    "doc_date": "2020-07",
+    "via": "pdf",
+    "verified": true
+   }
+  ],
+  "confidence": "medium",
+  "notes": "The Borough runs a resale CCO inspection (the application has a 'House Sale' checkbox and council reports list 'Resale Inspection Fees'), but no Borough page or ordinance text found states in plain words that a CCO is mandatory before every sale; the ordinance on ecode360 could not be opened. The same application is used for rentals and commercial properties. Lead time and validity are not published."
+ },
+ "fire_cert": {
+  "requirements": [
+   "Battery smoke detectors must be 10-year sealed battery units (Bureau notice, 'Effective Immediately')",
+   "Hardwired smoke alarms from original construction may not be replaced with battery alarms",
+   "If the home has a monitored alarm system, notify the alarm company before the test and have the codes available at the inspection"
+  ],
+  "authorities": [
+   {
+    "name": "Berlin Borough Bureau of Fire Prevention",
+    "type": "municipal_fire_bureau",
+    "area_served": "Entire borough",
+    "lead_time": "Allow two to three weeks before settlement; over 10 business days for the lowest fee",
+    "fees": [
+     {
+      "label": "CSDCMAC, request received more than 10 business days before change of occupant",
+      "amount": "$45.00",
+      "quote": "Request for a CSDCMAC received more than 10 business days prior to the change of occupant: $45.00;",
+      "source_url": "https://www.berlinnj.org/CSDCMAC%20app.pdf",
+      "verified": true
+     },
+     {
+      "label": "CSDCMAC, request received 4 to 10 business days before change of occupant",
+      "amount": "$90.00",
+      "quote": "Request for a CSDCMAC received four to 10 business days prior to the change of occupant: $90.00;",
+      "source_url": "https://www.berlinnj.org/CSDCMAC%20app.pdf",
+      "verified": true
+     },
+     {
+      "label": "CSDCMAC, request received fewer than 4 business days before change of occupant",
+      "amount": "$161.00",
+      "quote": "Request for a CSDCMAC received fewer than four business days prior to the change of occupant: $161.00",
+      "source_url": "https://www.berlinnj.org/CSDCMAC%20app.pdf",
+      "verified": true
+     },
+     {
+      "label": "Additional fee if more than two visits are needed",
+      "amount": "$45.00",
+      "quote": "If more than two visits are required, an additional $45.00 fee will be charged.",
+      "source_url": "https://www.berlinnj.org/CSDCMAC%20app.pdf",
+      "verified": true
+     }
+    ],
+    "how_to_apply": "Fill out the Application for Certificate of Smoke Detector and Carbon Monoxide Alarm Compliance and mail it with a check payable to 'Borough of Berlin' to Berlin Bureau of Fire Prevention, PO Box 226, Berlin, NJ 08009. The property must be ready for inspection.",
+    "application_url": "https://www.berlinnj.org/CSDCMAC%20app.pdf",
+    "department_url": "https://www.berlinnj.org/bureau-of-fire-prevention/",
+    "phone": "856-767-7777 ext. 308",
+    "email": "",
+    "evidence": [
+     {
+      "url": "https://www.berlinnj.org/CSDCMAC%20app.pdf",
+      "quote": "The application fee for a certificate of smoke detector and carbon monoxide alarm compliance (CSDCMAC), as required by N.J.A.C. 5:70-2.3, shall be based upon the amount of time remaining before the change of occupant is expected, as follows:",
+      "doc_date": "2022-01 (PDF created January 31, 2022)",
+      "via": "pdf",
+      "verified": true
+     },
+     {
+      "url": "https://www.berlinnj.org/CSDCMAC%20app.pdf",
+      "quote": "Certificates are valid for (60) days from the date of the inspection.",
+      "doc_date": "2022-01",
+      "via": "pdf",
+      "verified": true
+     },
+     {
+      "url": "https://www.berlinnj.org/wp-content/uploads/2026/07/Battery-Smoke-Detector.pdf",
+      "quote": "All battery smoke detectors must be the 10-year sealed battery units.",
+      "doc_date": "2026-07 (upload folder)",
+      "via": "pdf",
+      "verified": true
+     },
+     {
+      "url": "https://nj.gov/dca/dfs/pdf/ANNUAL%20REGISTRY/THIRD%20QUARTER%20LEA%20REGISTRY%202026.pdf",
+      "quote": "F Berlin Borough",
+      "doc_date": "2026-07 (LEA registry as of June 30, 2026); key: F = Fire Department",
+      "via": "pdf",
+      "verified": true
+     },
+     {
+      "url": "https://nj.gov/dca/dfs/pdf/ANNUAL%20REGISTRY/THIRD%20QUARTER%20LEA%20REGISTRY%202026.pdf",
+      "quote": "Berlin Borough is the LEA for Waterford Township. AS OF APRIL2025 NO LONGER A SHARED SERVICE",
+      "doc_date": "2026-07 (LEA registry as of June 30, 2026)",
+      "via": "pdf",
+      "verified": true
+     }
+    ],
+    "confidence": "high"
+   }
+  ],
+  "notes": "Certificates are valid for 60 days from the inspection. Questions line on the form: 856-767-6839. Fire Official William Behnke; inspectors Joseph Cornforth and Dennis Rosenbaum. The fee sheet is dated January 2022 (PDF metadata); no newer fee sheet found. The PDF text extraction shows '$9 0.00' for the middle tier, which is a spacing artifact of $90.00. The Bureau's web page still says it is the fire code agency for Waterford Township under a 1996 agreement, but the DCA LEA Registry (July 2026) says that shared service ended in April 2025. The DCA registry codes Berlin Borough's LEA as 'F' (fire department)."
+ },
+ "other_items": [
+  {
+   "label": "Tax Collector certification",
+   "detail": "The CCO application includes a Tax Collector sign-off that taxes are current and there are no liens.",
+   "source_url": "https://www.berlinnj.org/wp-content/uploads/2025/05/CCO-Application.pdf"
+  },
+  {
+   "label": "Open permits closed",
+   "detail": "All open permits must be closed with final passing inspections before a CCO is issued.",
+   "source_url": "https://www.berlinnj.org/wp-content/uploads/2025/05/CCO-Application.pdf"
+  }
+ ],
+ "open_questions": [
+  "Ordinance text making the CCO mandatory on sale could not be confirmed (ecode360 blocked).",
+  "CCO lead time and validity period are not published.",
+  "The Borough code may set different smoke certificate fees than the 2022 application; not verified."
+ ],
+ "verification": {
+  "fees": 6,
+  "fee_ok": 6,
+  "fee_bad": 0,
+  "fee_unchecked": 0,
+  "quotes": 8,
+  "q_ok": 8,
+  "q_bad": 0,
+  "q_unchecked": 0
+ }
+}

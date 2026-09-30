@@ -16,6 +16,7 @@ assert.match(fn, /fees=checked&&Array\.isArray\(r\.fees\)\?r\.fees:\[\]/, 'unche
 assert.match(fn, /applicationUrl=checked\?usableLink\(r\.application_url\):null/, 'only a checked row has an application link');
 assert.match(fn, /filter\(\(s:Row\)=>usableLink\(s\?\.url\)\)/, 'official source links drop account and news pages');
 assert.match(fn, /details_checked:checked/, 'payload says whether a person checked the details');
+assert.match(fn, /const preserveExisting=!checked && \(/, 'a person-checked row always replaces older saved evidence');
 assert.doesNotMatch(fn, /application_url:r\.application_url/, 'raw application links never reach the payload');
 assert.doesNotMatch(fn, /r\.application_url\|\|/, 'raw application links never become the source link');
 

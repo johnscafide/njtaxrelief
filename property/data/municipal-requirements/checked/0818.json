@@ -1,0 +1,240 @@
+{
+ "municipality_code": "0818",
+ "municipality": "Washington Township",
+ "county": "GLOUCESTER",
+ "checked_at": "2026-09-30",
+ "resale_co": {
+  "status": "required",
+  "name": "Certificate of Occupancy - Sale (Certificate of Resale)",
+  "issued_by": "Washington Township Housing Office (Division of Community Development, in the Construction Office)",
+  "lead_time": "Have the inspection done at least 3 weeks before settlement (Housing FAQ). Expedited inspections are available for an added fee.",
+  "valid_for": "",
+  "requirements": [
+   "House number plainly visible from the street, at least 4 inches high",
+   "Sidewalk free of trip hazards",
+   "Roof drains, gutters and downspouts in good repair",
+   "Windows and doors open easily and stay in place",
+   "Stairs, decks, porches and balconies permitted and structurally sound; guards over 30 inches; graspable handrails",
+   "Pool fully fenced with self-closing, self-latching gates that open outward",
+   "Exit doors open from inside without a key (no double-keyed deadbolts)",
+   "No more than 2 persons per bedroom; lofts cannot be bedrooms",
+   "Smoke detector on every level; hardwired stays hardwired, otherwise 10-year sealed battery",
+   "Carbon monoxide detector near all sleeping rooms",
+   "All utilities (electric, water, gas) on for the inspection",
+   "Water heater with proper temperature/pressure relief valve and discharge pipe (permit required)",
+   "Safe electrical system and covers; no hazards",
+   "Dryer exhaust vented outside in non-combustible material; bath fan or window vented outdoors",
+   "No plumbing leaks; fire-rated walls and ceilings intact; attic access; all open permits closed"
+  ],
+  "fees": [
+   {
+    "label": "Initial inspection, sale (includes smoke certification and 1st reinspection)",
+    "amount": "$150",
+    "quote": "$150 - Initial Inspection Fee (includes smoke certification and 1st Re- Inspection)",
+    "source_url": "https://www.twp.washington.nj.us/Housing/Forms%20and%20Resources/Application%20Certificate%20of%20Occupancy%20July%202026.pdf",
+    "verified": true
+   },
+   {
+    "label": "Expedited inspection, within 2 days (added fee)",
+    "amount": "$100",
+    "quote": "$ 75- each addl'/ $100 for expedited within 2 days/ $75 3-5 days",
+    "source_url": "https://www.twp.washington.nj.us/Housing/Forms%20and%20Resources/Application%20Certificate%20of%20Occupancy%20July%202026.pdf",
+    "verified": true
+   },
+   {
+    "label": "Expedited inspection, 3-5 days (added fee)",
+    "amount": "$75",
+    "quote": "$ 75- each addl'/ $100 for expedited within 2 days/ $75 3-5 days",
+    "source_url": "https://www.twp.washington.nj.us/Housing/Forms%20and%20Resources/Application%20Certificate%20of%20Occupancy%20July%202026.pdf",
+    "verified": true
+   },
+   {
+    "label": "Fee ordinance: CO inspection portion, first two inspections (plus expedited add-ons)",
+    "amount": "$125",
+    "quote": "A. New certificates of occupancy (§ 179-27): $125 for the first two inspections. Expedited inspection additional $100 within two (2) business days or $75 within three (3) to four (4) business days.",
+    "source_url": "https://www.twp.washington.nj.us/O017-2026%20Ordinance%20Amending%20Chapter%2080%20Fees.pdf",
+    "verified": null
+   },
+   {
+    "label": "Reinspection, each (form: each additional after the included 1st reinspection)",
+    "amount": "$75",
+    "quote": "B. Reinspections (§ 179-27): $75 each. Expedited additional $75 within two (2) business days or $50 within three (3) to four (4) business days.",
+    "source_url": "https://www.twp.washington.nj.us/O017-2026%20Ordinance%20Amending%20Chapter%2080%20Fees.pdf",
+    "verified": null
+   },
+   {
+    "label": "Temporary certificate of occupancy (TCO) request, after initial inspection",
+    "amount": "$125",
+    "quote": "$125 after initial inspection.",
+    "source_url": "https://www.twp.washington.nj.us/O017-2026%20Ordinance%20Amending%20Chapter%2080%20Fees.pdf",
+    "verified": null
+   },
+   {
+    "label": "Penalty for occupying without a certificate of occupancy (listed under Change in occupancy, § 179-73)",
+    "amount": "$100",
+    "quote": "(1) $100 penalty for occupying without a certificate of occupancy.",
+    "source_url": "https://www.twp.washington.nj.us/O017-2026%20Ordinance%20Amending%20Chapter%2080%20Fees.pdf",
+    "verified": null
+   }
+  ],
+  "how_to_apply": "Fill out every field of the Application for Certificate of Occupancy - Sale and submit the original with a wet ink signature (DocuSign is not accepted) plus the fee by check or cash payable to Township of Washington, to the Housing Office, Municipal Building, 523 Egg Harbor Road, Sewell. The office assistant schedules an AM or PM inspection window. The seller's agent may apply. No one needs to be home if the inspector can get in (lock box code or key left on the property; no loose pets). Pass: the CO is emailed. Fail: the report is emailed; fix items and call to schedule the reinspection.",
+  "application_url": "https://www.twp.washington.nj.us/Housing/Forms%20and%20Resources/Application%20Certificate%20of%20Occupancy%20July%202026.pdf",
+  "department_url": "https://www.twp.washington.nj.us/departments/housing/index.php",
+  "phone": "856-589-0520 ext. 2231 or 2296",
+  "email": "vorr@twp.washington.nj.us",
+  "evidence": [
+   {
+    "url": "https://www.twp.washington.nj.us/departments/housing/index.php",
+    "quote": "179- 68. Certificates of occupancy shall be required for human habitation of all existing dwelling units in the Township of Washington before a change in occupancy or change of owner may be effected.",
+    "doc_date": "",
+    "via": "page",
+    "verified": true
+   },
+   {
+    "url": "https://www.twp.washington.nj.us/departments/housing/faqs.php",
+    "quote": "The inspection is a basic visual health and safety inspection per the International Property Maintenance Code, of your home, that is required per township ordinance when you plan on selling your home or renting it. The inspection should be done at least (3) three weeks before your settlement to allow for any repairs if necessary.",
+    "doc_date": "",
+    "via": "page",
+    "verified": true
+   },
+   {
+    "url": "https://www.twp.washington.nj.us/Housing/Forms%20and%20Resources/Application%20Certificate%20of%20Occupancy%20July%202026.pdf",
+    "quote": "APPLICATION FOR CERTIFICATE OF OCCUPANCY - SALE",
+    "doc_date": "2026-07",
+    "via": "pdf",
+    "verified": true
+   },
+   {
+    "url": "https://www.twp.washington.nj.us/O017-2026%20Ordinance%20Amending%20Chapter%2080%20Fees.pdf",
+    "quote": "SECTION 1. Chapter 80-16 entitled “Housing Inspections” shall be amended as follows:",
+    "doc_date": "2026-05",
+    "via": "pdf",
+    "verified": null
+   }
+  ],
+  "confidence": "high",
+  "notes": "Current fees come from the Application for Certificate of Occupancy - Sale (file dated July 2026) and Ordinance O017-2026 amending Chapter 80 Fees (scanned PDF; introduced May 6, 2026, adopted May 20, 2026, approved by the Mayor May 21, 2026). The $150 on the form equals the ordinance's $125 CO inspection plus the $25 Smoke Certificate. The form's expedited tiers read 'within 2 days' and '3-5 days', while the ordinance says 'within two (2) business days' and 'three (3) to four (4) business days'. The Housing FAQ page is older (footer copyright 2019) and still says the resale inspection costs $70 with a free first reinspection and $50 after; those figures are outdated and are not listed as fees. A Temporary Certificate of Occupancy can be issued if the buyer signs a notarized affidavit taking responsibility for repairs. Proof of liability insurance and lead-based paint certification apply to rentals, not sales. Contacts: Victoria Orr (ext. 2231, vorr@twp.washington.nj.us), Nicole Fach (ext. 2296, nfach@twp.washington.nj.us), Housing Inspector Joe Tarzaiski (ext. 2218)."
+ },
+ "fire_cert": {
+  "requirements": [
+   "Smoke detector on every level; hardwired alarms must stay hardwired; non-hardwired alarms must be 10-year sealed battery (Township checklist)",
+   "Carbon monoxide detector in the vicinity of all sleeping rooms",
+   "Homes with a generator, solar panels or battery storage need a 'multiple sources of power' label within 18 inches of the main electrical panel and meter (state law P.L.2025, c.19, posted by the Township, enforced at change of occupancy from 3/10/25)"
+  ],
+  "authorities": [
+   {
+    "name": "Washington Township Housing Office (smoke certification included in the Certificate of Occupancy - Sale)",
+    "type": "municipal_fire_bureau",
+    "area_served": "Entire township",
+    "lead_time": "At least 3 weeks before settlement (Housing FAQ)",
+    "fees": [
+     {
+      "label": "Smoke Certificate (fee ordinance)",
+      "amount": "$25",
+      "quote": "D. Smoke Certificate: $25.",
+      "source_url": "https://www.twp.washington.nj.us/O017-2026%20Ordinance%20Amending%20Chapter%2080%20Fees.pdf",
+      "verified": null
+     },
+     {
+      "label": "Sale CO initial inspection, which includes smoke certification",
+      "amount": "$150",
+      "quote": "$150 - Initial Inspection Fee (includes smoke certification and 1st Re- Inspection)",
+      "source_url": "https://www.twp.washington.nj.us/Housing/Forms%20and%20Resources/Application%20Certificate%20of%20Occupancy%20July%202026.pdf",
+      "verified": true
+     }
+    ],
+    "how_to_apply": "Apply for the Certificate of Occupancy - Sale with the Housing Office; the $150 initial fee includes the smoke certification. No separate smoke certificate application was found.",
+    "application_url": "https://www.twp.washington.nj.us/Housing/Forms%20and%20Resources/Application%20Certificate%20of%20Occupancy%20July%202026.pdf",
+    "department_url": "https://www.twp.washington.nj.us/departments/housing/index.php",
+    "phone": "856-589-0520 ext. 2231 or 2296",
+    "email": "vorr@twp.washington.nj.us",
+    "evidence": [
+     {
+      "url": "https://www.twp.washington.nj.us/Housing/Forms%20and%20Resources/Application%20Certificate%20of%20Occupancy%20July%202026.pdf",
+      "quote": "$150 - Initial Inspection Fee (includes smoke certification and 1st Re- Inspection)",
+      "doc_date": "2026-07",
+      "via": "pdf",
+      "verified": true
+     },
+     {
+      "url": "https://www.twp.washington.nj.us/Housing/Forms%20and%20Resources/Inspection%20Checklist%20July%202026.pdf",
+      "quote": "Must have one (1) per level; if hardwired, must stay hardwired; if not hardwired, must have 10-year sealed battery smoke detector.",
+      "doc_date": "2026-07",
+      "via": "pdf",
+      "verified": true
+     },
+     {
+      "url": "https://www.twp.washington.nj.us/Housing/Forms%20and%20Resources/Secondary%20Power%20Source%20Identification%20Label%20Memo.pdf",
+      "quote": "The requirements apply to one- or two-family and attached single family dwellings only, and will be enforced upon a change of occupancy.",
+      "doc_date": "2025-02",
+      "via": "pdf",
+      "verified": true
+     }
+    ],
+    "confidence": "medium"
+   },
+   {
+    "name": "Washington Township Fire District No. 1 (Washington Township Fire Department)",
+    "type": "fire_district",
+    "area_served": "Entire township (the only fire district in Washington Township)",
+    "lead_time": "",
+    "fees": [],
+    "how_to_apply": "Not found. The district website (wtfd10.com, linked from the Township site as Fire Department) returned a bot-check page and could not be read.",
+    "application_url": "",
+    "department_url": "https://www.wtfd10.com/",
+    "phone": "",
+    "email": "",
+    "evidence": [
+     {
+      "url": "https://nj.gov/dca/dfs/pdf/ANNUAL%20REGISTRY/THIRD%20QUARTER%20LEA%20REGISTRY%202026.pdf",
+      "quote": "D Washington Township",
+      "doc_date": "2026-07",
+      "via": "pdf",
+      "verified": true
+     },
+     {
+      "url": "https://nj.gov/dca/divisions/dlgs/programs/lpcl_docs/cd_gloucester.docx",
+      "quote": "Washington Township Fire District No. 1",
+      "doc_date": "",
+      "via": "page",
+      "verified": true
+     }
+    ],
+    "confidence": "low"
+   }
+  ],
+  "notes": "The DCA LEA Registry (July 2026) lists 'D Washington Township' (D = District), so Washington Township Fire District No. 1 is the registered Uniform Fire Code enforcing agency, and the DCA Division of Local Government Services list of Gloucester County fire districts shows only one district in the Township. In practice the Township's own sale CO fee includes smoke certification and the Township fee ordinance sets a $25 Smoke Certificate fee, so for a 1-2 family sale the Housing Office appears to handle the smoke/CO check. Whether the fire district issues any separate resale certificate could not be confirmed because its website is blocked by a bot check. The secondary power source label item is a statewide DCA rule (Division of Fire Safety memo dated February 13, 2025) that the Township posts on its Housing page."
+ },
+ "other_items": [
+  {
+   "label": "Open permits must be closed",
+   "detail": "Permits must be completed with the Construction Office in order to pass inspection; unpermitted work must be fixed before the CO is issued.",
+   "source_url": "https://www.twp.washington.nj.us/Housing/Forms%20and%20Resources/Inspection%20Checklist%20July%202026.pdf"
+  },
+  {
+   "label": "Temporary Certificate of Occupancy (TCO)",
+   "detail": "If the buyer agrees to take on repairs, a notarized Affidavit for TCO lets settlement go ahead; the fee ordinance lists $125 for a TCO request after the initial inspection.",
+   "source_url": "https://www.twp.washington.nj.us/departments/housing/faqs.php"
+  },
+  {
+   "label": "Well and septic",
+   "detail": "The sale application asks whether the home has a private well, private septic, Township water or Township sewer; the Housing page links to Gloucester County well and septic records. No sale-time well or septic test requirement was found.",
+   "source_url": "https://www.twp.washington.nj.us/Housing/Forms%20and%20Resources/Application%20Certificate%20of%20Occupancy%20July%202026.pdf"
+  }
+ ],
+ "open_questions": [
+  "The Chapter 80 zoning permit fee list in O017-2026 includes 'change of owner: $200 each unit' under item (5) with change of use/occupancy/business name; it is unclear whether this applies to residential resales, so it is not listed as a resale fee.",
+  "Does Washington Township Fire District No. 1 issue its own smoke/CO/extinguisher certificate for any 1-2 family sales, and does it require a portable fire extinguisher? Its website could not be read.",
+  "Validity period of the sale CO is not stated."
+ ],
+ "verification": {
+  "fees": 9,
+  "fee_ok": 4,
+  "fee_bad": 0,
+  "fee_unchecked": 5,
+  "quotes": 9,
+  "q_ok": 8,
+  "q_bad": 0,
+  "q_unchecked": 1
+ }
+}

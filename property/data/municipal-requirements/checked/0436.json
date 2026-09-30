@@ -1,0 +1,223 @@
+{
+ "municipality_code": "0436",
+ "municipality": "Winslow Township",
+ "county": "CAMDEN",
+ "checked_at": "2026-09-30",
+ "resale_co": {
+  "status": "required",
+  "name": "Resale Certificate / Certificate of Continued Occupancy (CCO)",
+  "issued_by": "Winslow Township Construction Office (Housing Office)",
+  "lead_time": "Payment must come with the application; check payments need a 10 working day hold before the inspection can be done",
+  "valid_for": "",
+  "requirements": [
+   "Well water: passing test by an NJDEP certified lab (Private Well Testing Act), or Camden County Health Dept. letter of approval for a new well",
+   "Septic: Camden County Health Dept. letter of compliance (no future action), or certificate of compliance for a new system",
+   "Property must comply with all Township and State codes and ordinances (the office links the 2015 International Property Maintenance Code)",
+   "Sidewalks and driveway aprons are the owner's responsibility and must meet Township ordinances",
+   "All open permits closed with final inspections (for example water heater, A/C, furnace, finished basement)",
+   "Dwelling must be fit for human habitation",
+   "Certificate issued only when all requirements are met",
+   "Separate fire (smoke/CO) certificate from the Winslow Township Fire District is also required"
+  ],
+  "fees": [
+   {
+    "label": "Residential inspection (includes 1 free re-inspection)",
+    "amount": "$100",
+    "quote": "Inspection Fees: Residential $100 (includes 1 free re-inspection) Commercial $200 (includes 1 free re-inspection)",
+    "source_url": "https://www.winslowtownship.com/filestorage/3308/3536/3538/3540/RESALECERTIFICATE.pdf",
+    "verified": "eye"
+   },
+   {
+    "label": "Commercial inspection (includes 1 free re-inspection)",
+    "amount": "$200",
+    "quote": "Inspection Fees: Residential $100 (includes 1 free re-inspection) Commercial $200 (includes 1 free re-inspection)",
+    "source_url": "https://www.winslowtownship.com/filestorage/3308/3536/3538/3540/RESALECERTIFICATE.pdf",
+    "verified": "eye"
+   },
+   {
+    "label": "Each re-inspection after the first free re-inspection",
+    "amount": "$50",
+    "quote": "Re-inspection fee: $50 each, after the first free re-inspection",
+    "source_url": "https://www.winslowtownship.com/filestorage/3308/3536/3538/3540/RESALECERTIFICATE.pdf",
+    "verified": "eye"
+   }
+  ],
+  "how_to_apply": "Complete the Resale Certificate Application (seller, buyer, both agents, settlement date, block and lot) and submit it with payment to the Housing Office, Township of Winslow, 125 South Route 73, Braddock, NJ 08037. Attach well and septic certifications if they apply. Schedule the inspection by calling 609-567-0700, option 5 (Monday to Friday, 8:30 am to 4:30 pm).",
+  "application_url": "https://www.winslowtownship.com/filestorage/3308/3536/3538/3540/RESALECERTIFICATE.pdf",
+  "department_url": "https://www.winslowtownship.com/content/3298/3503/default.aspx",
+  "phone": "609-567-0700 option 5",
+  "email": "construction@winslowtownship.com",
+  "evidence": [
+   {
+    "url": "https://www.winslowtownship.com/content/3298/3503/default.aspx",
+    "quote": "Our office also performs rental inspections and CCO inspections for resale property, Monday thru Friday.",
+    "doc_date": "",
+    "via": "page",
+    "verified": true
+   },
+   {
+    "url": "https://www.winslowtownship.com/filestorage/3308/3536/3538/3540/RESALECERTIFICATE.pdf",
+    "quote": "4. A Certificate of Occupancy will only be issued when all the requirements are met",
+    "doc_date": "2025-03-26 (upload date shown on Township page)",
+    "via": "pdf",
+    "verified": "eye"
+   },
+   {
+    "url": "https://www.winslowtownship.com/filestorage/3308/3536/3538/3540/RESALECERTIFICATE.pdf",
+    "quote": "CHECK PAYMENTS REQUIRE A 10-WORKING-DAY HOLD BEFORE INPECTION CAN BE PERFORMED TO VERIFY FUNDS.",
+    "doc_date": "2025-03-26 (upload date shown on Township page)",
+    "via": "pdf",
+    "verified": "eye"
+   },
+   {
+    "url": "https://www.ecode360.com/35704976",
+    "quote": "Certificates of continued occupancy shall be required for human habitation of all existing dwelling units in the Township of Winslow before a change in occupancy can occur.",
+    "doc_date": "",
+    "via": "search_snippet",
+    "verified": null
+   }
+  ],
+  "confidence": "high",
+  "notes": "Confirms the existing Watchdog data: residential $100 including 1 free re-inspection, commercial $200 including 1 free re-inspection, $50 for each re-inspection after the free one. The form is a scanned one-page PDF (uploaded 3/26/2025); quotes were read from the page image. A search snippet of the Township code (ecode360) says the fee was set by Ord. O-2019-018 (9-10-2019), but the code page itself could not be opened. The form does not state a validity period or a minimum lead time other than the 10 working day hold on checks. A separate rental registration and rental inspection program exists."
+ },
+ "fire_cert": {
+  "requirements": [
+   "Every smoke alarm must be less than 10 years old; take each alarm down and check the date on the back",
+   "Battery (DC) smoke alarms must be 10-year sealed units",
+   "Hardwired (110 volt) interconnected alarms must all sound when one is tested; AC power must be on or no inspection is done; replacing a hardwired alarm with a battery unit fails",
+   "Smoke alarm type and number depend on the year built (for example 1991 to present: hardwired with battery backup on each level and in each bedroom, interconnected)",
+   "CO alarm outside of but within 10 feet of all sleeping areas if there is any fuel-burning appliance, fireplace or attached garage",
+   "Homes with a secondary power source (solar, generator, battery storage) need a permanent, not handwritten, 'Caution: Multiple Sources of Power' label at the main panel and the electric meter (ANSI Z535.4)",
+   "Monitored low-voltage fire alarm systems must be tested and certified by an alarm contractor before the inspection; bring the certificate",
+   "An adult (18+) must be present for the whole inspection; no lockbox entry"
+  ],
+  "authorities": [
+   {
+    "name": "Winslow Township Fire District No. 1 (Winslow Township Fire Department), Fire Prevention Division / Office of the Fire Marshal",
+    "type": "fire_district",
+    "area_served": "Entire township (single fire district covering the Township of Winslow; also serves Chesilhurst Borough)",
+    "lead_time": "Apply 3 to 4 weeks before closing (recommended); fee depends on days of notice; certificate valid 90 days from inspection",
+    "fees": [
+     {
+      "label": "Application, 8 or more days advance notice",
+      "amount": "$65.00",
+      "quote": "8+ days advance notice $65.00",
+      "source_url": "https://winslowtwpfd.org/vertical/sites/%7B2458775F-59B7-4354-B7A0-12D3BE8EC490%7D/uploads/CSDCMACPFE_Instructions_4.15.2025.pdf",
+      "verified": true
+     },
+     {
+      "label": "Application, 4 to 7 days advance notice",
+      "amount": "$100.00",
+      "quote": "7-4 days advance notice $100.00",
+      "source_url": "https://winslowtwpfd.org/vertical/sites/%7B2458775F-59B7-4354-B7A0-12D3BE8EC490%7D/uploads/CSDCMACPFE_Instructions_4.15.2025.pdf",
+      "verified": true
+     },
+     {
+      "label": "Application, 3 or fewer days notice",
+      "amount": "$150.00",
+      "quote": "3 or less days notice $150.00",
+      "source_url": "https://winslowtwpfd.org/vertical/sites/%7B2458775F-59B7-4354-B7A0-12D3BE8EC490%7D/uploads/CSDCMACPFE_Instructions_4.15.2025.pdf",
+      "verified": true
+     },
+     {
+      "label": "Senior citizen (62 or older, proof of age attached) discount line",
+      "amount": "$30.00",
+      "quote": "Senior Citizen's Discount (62- Or Older Proof of age attached) $30.00",
+      "source_url": "https://winslowtwpfd.org/vertical/sites/%7B2458775F-59B7-4354-B7A0-12D3BE8EC490%7D/uploads/CSDCMACPFE_Instructions_4.15.2025.pdf",
+      "verified": true
+     },
+     {
+      "label": "Re-inspection (per visit)",
+      "amount": "$35.00",
+      "quote": "Re-inspection (per visit) $35.00",
+      "source_url": "https://winslowtwpfd.org/vertical/sites/%7B2458775F-59B7-4354-B7A0-12D3BE8EC490%7D/uploads/CSDCMACPFE_Instructions_4.15.2025.pdf",
+      "verified": true
+     },
+     {
+      "label": "Missed appointment",
+      "amount": "$35.00",
+      "quote": "Failure to keep appointment $35.00",
+      "source_url": "https://winslowtwpfd.org/vertical/sites/%7B2458775F-59B7-4354-B7A0-12D3BE8EC490%7D/uploads/CSDCMACPFE_Instructions_4.15.2025.pdf",
+      "verified": true
+     }
+    ],
+    "how_to_apply": "Apply online on the Fire District website and then pay through the linked Edmunds WIPP payment page, or download the packet and fax it to 609-561-5823, or apply in person at the Fire District Office, 9 Cedar Brook Road, Sicklerville (Monday to Friday, 9 am to 5 pm). Staff call within 24 hours to schedule. Inspections are on Tuesdays and Thursdays in a morning or afternoon block. Pay by check (payable to Winslow Township Fire District), credit card, debit card or money order. All fees are non-refundable.",
+    "application_url": "https://winslowtwpfd.org/online-resale-application",
+    "department_url": "https://winslowtwpfd.org/fire-marshal-office",
+    "phone": "609-561-4225",
+    "email": "firedistrict@winslowtwpfd.org",
+    "evidence": [
+     {
+      "url": "https://winslowtwpfd.org/vertical/sites/%7B2458775F-59B7-4354-B7A0-12D3BE8EC490%7D/uploads/Smoke_Application_2025.pdf",
+      "quote": "CERTIFICATIONS ARE VALID FOR 90 DAYS FROM THE DATE OF INSPECTION",
+      "doc_date": "2025-06-05 (revised)",
+      "via": "pdf",
+      "verified": true
+     },
+     {
+      "url": "https://winslowtwpfd.org/vertical/sites/%7B2458775F-59B7-4354-B7A0-12D3BE8EC490%7D/uploads/Smoke_Application_2025.pdf",
+      "quote": "it is recommended that the applicant and/or representative apply for this inspection 3, 4 weeks prior to an anticipated closing/move- in date.",
+      "doc_date": "2025-06-05 (revised)",
+      "via": "pdf",
+      "verified": true
+     },
+     {
+      "url": "https://www.winslowtownship.com/filestorage/3308/3536/3538/3540/RESALECERTIFICATE.pdf",
+      "quote": "Separate CO & Fire Cert Inspection required: Winslow Fire Dept 609-561-4225 online application www.winslowtwpfd.org",
+      "doc_date": "2025-03-26 (upload date shown on Township page)",
+      "via": "pdf",
+      "verified": "eye"
+     },
+     {
+      "url": "https://winslowtwpfd.org/history",
+      "quote": "the township voters were asked to vote on a referendum to establish a fire district that would be comprised of the boundaries of the Township of Winslow.",
+      "doc_date": "",
+      "via": "page",
+      "verified": true
+     },
+     {
+      "url": "https://winslowtwpfd.org/fire-marshal-office",
+      "quote": "In January 2024, Joseph Hahn was sworn in as the Fire Official for Winslow Township and the Borough of Chesilhurst.",
+      "doc_date": "",
+      "via": "page",
+      "verified": true
+     }
+    ],
+    "confidence": "high"
+   }
+  ],
+  "notes": "Winslow has one fire district, Winslow Township Fire District No. 1, whose boundaries are the whole township (formed 1989 from nine former station companies). The DCA fire directory lists a single local enforcing agency (LEAID 0436-001, district) for the township, covering both the Winslow Township Fire Department and the separate state-run Ancora Fire Department at Ancora Psychiatric Hospital; Ancora is not a separate fire district for home sales. The instructions PDF (4.15.2025) and application packet (revised 06/05/25) give the same amounts; the packet words the first tier as '8-14 Days notice'. The senior line reads 'Senior Citizen's Discount ... $30.00' and does not say whether $30 is the reduced fee or the amount taken off. The online form states a penalty of $100 to $2,500 per occurrence for a change of ownership or occupancy without the certificate (N.J.A.C. 5:70-2.3). The packet title and instructions do not mention the portable fire extinguisher, although the instructions file name references CSDCMACPFE."
+ },
+ "other_items": [
+  {
+   "label": "Well and septic certifications",
+   "detail": "If the property has a well or septic system, the certifications must accompany the Township resale application (NJDEP certified lab well test or County Health letter; County Health septic compliance letter).",
+   "source_url": "https://www.winslowtownship.com/filestorage/3308/3536/3538/3540/RESALECERTIFICATE.pdf"
+  },
+  {
+   "label": "Open permits must be closed",
+   "detail": "All open permits must be closed with final inspections before the Township issues the certificate.",
+   "source_url": "https://www.winslowtownship.com/filestorage/3308/3536/3538/3540/RESALECERTIFICATE.pdf"
+  },
+  {
+   "label": "Sidewalks and aprons",
+   "detail": "Sidewalks and driveway aprons are the homeowner's responsibility and must comply with Township ordinances.",
+   "source_url": "https://www.winslowtownship.com/filestorage/3308/3536/3538/3540/RESALECERTIFICATE.pdf"
+  }
+ ],
+ "open_questions": [
+  "Validity period of the Township CCO and any minimum lead time are not stated on the form.",
+  "Whether the $30.00 senior line is the senior fee or a discount amount.",
+  "Whether the Fire District inspection checks the portable fire extinguisher required by state rule."
+ ],
+ "verification": {
+  "fees": 9,
+  "fee_ok": 9,
+  "fee_bad": 0,
+  "fee_unchecked": 0,
+  "quotes": 9,
+  "q_ok": 8,
+  "q_bad": 0,
+  "q_unchecked": 1
+ }
+}

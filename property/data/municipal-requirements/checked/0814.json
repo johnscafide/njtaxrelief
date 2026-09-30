@@ -1,0 +1,74 @@
+{
+ "municipality_code": "0814",
+ "municipality": "Paulsboro Borough",
+ "county": "GLOUCESTER",
+ "checked_at": "2026-09-30",
+ "resale_co": {
+  "status": "not_found",
+  "name": "",
+  "issued_by": "",
+  "lead_time": "",
+  "valid_for": "",
+  "requirements": [],
+  "fees": [],
+  "how_to_apply": "",
+  "application_url": "",
+  "department_url": "https://paulsboronj.org/",
+  "phone": "",
+  "email": "",
+  "evidence": [],
+  "confidence": "low",
+  "notes": "The official website (https://paulsboronj.org/) answered every request, including direct PDF links, with a SiteGround bot-check (captcha) page, so no page or form could be read. The town code on ecode360 cannot be opened. Web searches did not return any official page or form text about a resale certificate for this town. Status is unknown, not confirmed absent. A search-engine summary of an ecode360 page (https://ecode360.com/12515159, 'Adopted 8-6-1991 by Ord. No. 629-91') described a Paulsboro certificate of continued occupancy rule that covers commercial, light industrial and industrial premises that are sold or relet. The raw snippet text could not be seen, so it is not used as evidence, and it would not settle whether 1-2 family homes need a resale certificate."
+ },
+ "fire_cert": {
+  "requirements": [],
+  "authorities": [
+   {
+    "name": "Gloucester County Fire Marshal's Office (county local enforcing agency for the Uniform Fire Code)",
+    "type": "unknown",
+    "area_served": "Entire borough",
+    "lead_time": "",
+    "fees": [],
+    "how_to_apply": "No County smoke/CO/extinguisher certificate form or fee for home sales was found on the County website. Call or email the County Fire Marshal's Office (212 County House Road, Clarksboro) and ask how to request the resale inspection for this town, and whether the town collects the application and fee.",
+    "application_url": "",
+    "department_url": "https://www.gloucestercountynj.gov/359/Office-of-the-Fire-Marshal",
+    "phone": "856-307-7912",
+    "email": "gcfmo@co.gloucester.nj.us",
+    "evidence": [
+     {
+      "url": "https://www.gloucestercountynj.gov/359/Office-of-the-Fire-Marshal",
+      "quote": "The County Fire Marshal's Office currently is the Local Enforcement Agency (LEA) for the following municipalities: Clayton East Greenwich Elk National Park Newfield Paulsboro South Harrison Wenonah West Deptford Woodbury Woodbury Heights",
+      "doc_date": "",
+      "via": "page",
+      "verified": true
+     },
+     {
+      "url": "https://nj.gov/dca/dfs/pdf/ANNUAL%20REGISTRY/THIRD%20QUARTER%20LEA%20REGISTRY%202026.pdf",
+      "quote": "C Paulsboro Borough",
+      "doc_date": "2026-07",
+      "via": "pdf",
+      "verified": true
+     }
+    ],
+    "confidence": "medium"
+   }
+  ],
+  "notes": "The DCA Division of Fire Safety LEA Registry (third quarter, July 2026, as of June 30, 2026) lists this town with code C (C = County), and the Gloucester County Office of the Fire Marshal page lists Paulsboro among the municipalities where the County Fire Marshal's Office is the local enforcing agency. The authority type list has no 'county' option, so type is set to 'unknown'. The town has no fire district (it is not on the DCA Division of Local Government Services list of Gloucester County fire districts: https://nj.gov/dca/divisions/dlgs/programs/lpcl_docs/cd_gloucester.docx). In other county-LEA towns (for example Clayton) the municipality itself posts the smoke/CO application and collects the fee, so the town office may be the place to apply; this could not be checked here because the town website is blocked. Under N.J.A.C. 5:70-2.3, if the town has its own resale inspection under a municipal code, a separate CSACMAPFEC is not required but the town cannot issue its approval until smoke/CO/extinguisher rules (N.J.A.C. 5:70-4.19) are met."
+ },
+ "other_items": [],
+ "open_questions": [
+  "Does Paulsboro Borough require a resale certificate of occupancy or housing inspection for 1-2 family sales? The borough website is blocked by a bot check and ecode360 cannot be opened.",
+  "Who takes the smoke/CO/extinguisher certificate application and fee for Paulsboro Borough (the Borough office or the Gloucester County Fire Marshal's Office), and what are the fee tiers?",
+  "Verify the Paulsboro ordinance on certificates of continued occupancy (Ord. No. 629-91 as amended) and whether it reaches 1-2 family residential sales or only commercial/industrial premises."
+ ],
+ "verification": {
+  "fees": 0,
+  "fee_ok": 0,
+  "fee_bad": 0,
+  "fee_unchecked": 0,
+  "quotes": 2,
+  "q_ok": 2,
+  "q_bad": 0,
+  "q_unchecked": 0
+ }
+}

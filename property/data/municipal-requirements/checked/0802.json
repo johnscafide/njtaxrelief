@@ -1,0 +1,141 @@
+{
+ "municipality_code": "0802",
+ "municipality": "Deptford Township",
+ "county": "GLOUCESTER",
+ "checked_at": "2026-09-30",
+ "resale_co": {
+  "status": "required",
+  "name": "Housing Change in Ownership inspection / Certificate of Occupancy (Continued Certificate of Occupancy)",
+  "issued_by": "Deptford Township Construction Office, Housing Inspector",
+  "lead_time": "Allow ten business days for the inspection to be completed",
+  "valid_for": "Inspections are valid for 60 days",
+  "requirements": [
+   "Inspection of the entire property under the International Property Maintenance Code, current edition",
+   "Inspection under Change in Occupancy rules N.J.A.C. 5:70-2.3 and 4.19 (smoke alarm, CO alarm and fire extinguisher rules) and Township Ordinance 0.2.15",
+   "All open construction permits must be completed and closed out before the certificate is issued",
+   "Any compliance order or notice of violation must be corrected before the home can be sold or rented",
+   "Homes on well or septic need a No Further Action letter from the Gloucester County Department of Health",
+   "Deptford Township MUA approval stamp on the application"
+  ],
+  "fees": [
+   {
+    "label": "Per unit, includes application, inspection and one re-inspection",
+    "amount": "$100 per unit",
+    "quote": "FEES: $100 per unit.  The fee includes application, inspection and one (1) re-inspection; an additional $75 per unit for an additional re-inspection.",
+    "source_url": "https://www.deptford-nj.org/filestorage/34753/35668/35670/37913/2025_CHANGE_IN_OCCUPANT_APPLICATION__-_final.pdf",
+    "verified": true
+   },
+   {
+    "label": "Each additional re-inspection, per unit",
+    "amount": "$75 per unit",
+    "quote": "an additional $75 per unit for an additional re-inspection",
+    "source_url": "https://www.deptford-nj.org/filestorage/34753/35668/35670/37913/2025_CHANGE_IN_OCCUPANT_APPLICATION__-_final.pdf",
+    "verified": true
+   }
+  ],
+  "how_to_apply": "Apply online through the Township's SDL portal (linked from the Construction page as the way to apply for a Housing Certificate of Occupancy), or complete the Application for Housing Change in Ownership (mark Resale) and leave it in the drop box outside the Municipal Building at 1011 Cooper Street. Get the Deptford Township MUA approval stamp on the form. Call (856) 845-5300 to schedule the inspection.",
+  "application_url": "https://www.deptford-nj.org/filestorage/34753/35668/35670/37913/2025_CHANGE_IN_OCCUPANT_APPLICATION__-_final.pdf",
+  "department_url": "https://www.deptford-nj.org/construction",
+  "phone": "856-845-5300",
+  "email": "constructioninspections@deptford-nj.org",
+  "evidence": [
+   {
+    "url": "https://www.deptford-nj.org/filestorage/34753/35668/35670/37913/2025_CHANGE_IN_OCCUPANT_APPLICATION__-_final.pdf",
+    "quote": "APPLICATION FOR HOUSING CHANGE IN OWNERSHIP",
+    "doc_date": "2026-01",
+    "via": "pdf",
+    "verified": true
+   },
+   {
+    "url": "https://www.deptford-nj.org/filestorage/34753/35668/35670/37913/2025_CHANGE_IN_OCCUPANT_APPLICATION__-_final.pdf",
+    "quote": "This dwelling is not to be occupied until a Certificate is issued by the Housing inspector of Deptford Township.  Inspections are valid for 60 days.",
+    "doc_date": "2026-01",
+    "via": "pdf",
+    "verified": true
+   },
+   {
+    "url": "https://www.deptford-nj.org/filestorage/34753/35668/35670/37913/2025_CHANGE_IN_OCCUPANT_APPLICATION__-_final.pdf",
+    "quote": "all work that is related to open construction permits must be completed and permit closed out prior to the issuance of a certificate",
+    "doc_date": "2026-01",
+    "via": "pdf",
+    "verified": true
+   },
+   {
+    "url": "https://www.deptford-nj.org/construction",
+    "quote": "Don't have an SDL Account? Or want to apply for a Housing Certificate of Occupancy, please use the link below:",
+    "doc_date": "",
+    "via": "page",
+    "verified": true
+   }
+  ],
+  "confidence": "high",
+  "notes": "The current form is named '2025 CHANGE IN OCCUPANT APPLICATION - final' and its PDF was created 2026-01-07. An older 2022 'Application of Continued Certificate of Occupancy' form is still posted with lower fees ($75.00 per unit, $50.00 additional reinspection); use the newer form. The online SDL portal (https://www.sdlportal.com/towns/nj/gloucester/deptfordtwp) opens a login page, so it is not given as the application link. The same form covers rentals; rentals also ask whether landlord registration is on file."
+ },
+ "fire_cert": {
+  "requirements": [],
+  "authorities": [
+   {
+    "name": "Deptford Township Construction Office, Housing Inspector (checked as part of the Housing Change in Ownership inspection)",
+    "type": "municipal_fire_bureau",
+    "area_served": "Entire township",
+    "lead_time": "",
+    "fees": [],
+    "how_to_apply": "No separate smoke certificate application was found. The Township resale housing application says the inspection is done under N.J.A.C. 5:70-2.3 and 4.19 (the state smoke alarm, carbon monoxide alarm and fire extinguisher rules). Under N.J.A.C. 5:70-2.3(a)1, where a town has its own resale inspection, a separate certificate is not required but the town may not issue its certificate until the home meets 5:70-4.19. Confirm with the Construction Office at (856) 845-5300.",
+    "application_url": "https://www.deptford-nj.org/filestorage/34753/35668/35670/37913/2025_CHANGE_IN_OCCUPANT_APPLICATION__-_final.pdf",
+    "department_url": "https://www.deptford-nj.org/construction",
+    "phone": "856-845-5300",
+    "email": "constructioninspections@deptford-nj.org",
+    "evidence": [
+     {
+      "url": "https://www.deptford-nj.org/filestorage/34753/35668/35670/37913/2025_CHANGE_IN_OCCUPANT_APPLICATION__-_final.pdf",
+      "quote": "An inspection of the entire property according to: Change in Occupancy Pursuant to N.J.A.C. 5:70 -2.3 and 4.19; Ordinance # 0.2.15 and International Property Maintenance Code, Current Edition",
+      "doc_date": "2026-01",
+      "via": "pdf",
+      "verified": true
+     },
+     {
+      "url": "https://www.law.cornell.edu/regulations/new-jersey/N-J-A-C-5-70-2-3",
+      "quote": "Where a municipality has existing inspection or approval requirements under a property maintenance or other municipal code, a CSACMAPFEC shall not be required; provided, however, that the agency responsible for the enforcement of that code shall not issue any certificate of inspection or occupancy or other approval under such municipal code until it has determined that the dwelling complies with the requirements of N.J.A.C. 5:70-4.19.",
+      "doc_date": "",
+      "via": "page",
+      "verified": true
+     }
+    ],
+    "confidence": "medium"
+   }
+  ],
+  "notes": "The DCA Uniform Fire Code LEA Registry (third quarter, July 2026, https://nj.gov/dca/dfs/pdf/ANNUAL%20REGISTRY/THIRD%20QUARTER%20LEA%20REGISTRY%202026.pdf) lists 'C Deptford Township', meaning the Gloucester County Fire Marshal's Office (212 County House Road, Clarksboro, 856-307-7912) is the fire code enforcing agency. The County's own page (https://gloucestercountynj.gov/1139/County-Fire-Marshall) does not list Deptford, so this may be a recent change. Deptford Township Fire District No. 1 also runs a Bureau of Fire Prevention / Fire Marshal's Office at 1370 Delsea Drive ((856) 848-3098 ex 104 per its 2023 fee schedule), but its website and its Uniform Fire Code fee ordinance O.20.23 (adopted December 2023) list no smoke/CO/extinguisher certificate. No fee specific to the smoke certificate was found; the $100 housing inspection fee is listed under resale_co. N.J.A.C. 5:70-2.3 text was read from the Cornell LII copy of the NJ Administrative Code."
+ },
+ "other_items": [
+  {
+   "label": "Deptford Township MUA approval",
+   "detail": "The resale application has a 'DEPTFORD TOWNSHIP MUA APPROVAL STAMP' box, and asks for the water meter location.",
+   "source_url": "https://www.deptford-nj.org/filestorage/34753/35668/35670/37913/2025_CHANGE_IN_OCCUPANT_APPLICATION__-_final.pdf"
+  },
+  {
+   "label": "Well or septic: County Health No Further Action letter",
+   "detail": "If the property has a well or septic, a No Further Action letter from the Gloucester County Department of Health is required before the certificate is issued.",
+   "source_url": "https://www.deptford-nj.org/filestorage/34753/35668/35670/37913/2025_CHANGE_IN_OCCUPANT_APPLICATION__-_final.pdf"
+  },
+  {
+   "label": "Open permits closed",
+   "detail": "All work on open construction permits must be completed and permits closed before the certificate of occupancy is issued.",
+   "source_url": "https://www.deptford-nj.org/filestorage/34753/35668/35670/37913/2025_CHANGE_IN_OCCUPANT_APPLICATION__-_final.pdf"
+  }
+ ],
+ "open_questions": [
+  "Confirm with the Construction Office that the housing change-in-ownership inspection satisfies the smoke/CO/extinguisher requirement and that no separate certificate (from the County Fire Marshal or the Fire District) is needed.",
+  "The DCA registry (July 2026) and the County Fire Marshal web page disagree on whether the County is the fire code enforcing agency for Deptford.",
+  "The Township web page that lists the current housing application could not be located; the PDFs are found only by direct link."
+ ],
+ "verification": {
+  "fees": 2,
+  "fee_ok": 2,
+  "fee_bad": 0,
+  "fee_unchecked": 0,
+  "quotes": 6,
+  "q_ok": 6,
+  "q_bad": 0,
+  "q_unchecked": 0
+ }
+}

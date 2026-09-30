@@ -1,0 +1,136 @@
+{
+ "municipality_code": "0437",
+ "municipality": "Woodlynne Borough",
+ "county": "CAMDEN",
+ "checked_at": "2026-09-30",
+ "resale_co": {
+  "status": "required",
+  "name": "Certificate of Inspection for Resale",
+  "issued_by": "Borough of Woodlynne Construction Official",
+  "lead_time": "",
+  "valid_for": "",
+  "requirements": [
+   "Inspection for resale is marked pass or fail by the Construction Official",
+   "Any building, plumbing, electrical or fire permits the Construction Official requires must be completed before the final Certificate of Occupancy"
+  ],
+  "fees": [
+   {
+    "label": "Application fee",
+    "amount": "$96.00",
+    "quote": "Application Fee $96.00",
+    "source_url": "https://www.woodlynnenj.org/_files/ugd/b7bd99_79e91dc4d3fa4e6a9fcbfd5848ff3881.pdf",
+    "verified": null
+   }
+  ],
+  "how_to_apply": "Fill out the Application for Certificate of Inspection for Resale (address, owner, agent, emergency contact) and return it to the Borough of Woodlynne, 200 Cooper Ave., Woodlynne, NJ 08107, or fax it to 856-962-8763. Contact David Munoz at 856-962-8300 ext. 219.",
+  "application_url": "https://www.woodlynnenj.org/_files/ugd/b7bd99_79e91dc4d3fa4e6a9fcbfd5848ff3881.pdf",
+  "department_url": "https://www.woodlynnenj.org/code-enforcement",
+  "phone": "856-962-8300 ext. 219",
+  "email": "woodlynnedavid@comcast.net",
+  "evidence": [
+   {
+    "url": "https://www.woodlynnenj.org/_files/ugd/b7bd99_79e91dc4d3fa4e6a9fcbfd5848ff3881.pdf",
+    "quote": "Application for Certificate of Inspection for Resale",
+    "doc_date": "",
+    "via": "pdf",
+    "verified": null
+   },
+   {
+    "url": "https://www.woodlynnenj.org/_files/ugd/b7bd99_79e91dc4d3fa4e6a9fcbfd5848ff3881.pdf",
+    "quote": "PERMIT(S) REQUIRED FOR FINAL CERTIFICATE OF OCCUPANCY",
+    "doc_date": "",
+    "via": "pdf",
+    "verified": null
+   },
+   {
+    "url": "https://www.woodlynnenj.org/code-enforcement",
+    "quote": "Resale Application",
+    "doc_date": "",
+    "via": "page",
+    "verified": true
+   }
+  ],
+  "confidence": "medium",
+  "notes": "The only source is the Borough's scanned, undated one-page resale application linked as 'Resale Application' on the Code Enforcement and Forms pages; quotes were read from the page image. It does not list inspection items, a validity period, a lead time, or re-inspection fees. The Borough code on ecode360 could not be opened, so the ordinance behind the form was not checked. The contact email is a comcast.net address printed on the official form. Woodlynne also runs a separate annual rental Fire / Housing inspection ($150 per unit, $30 late fee, $25 cancellation fee per unit) for rental properties; that is a rental program, not the resale certificate."
+ },
+ "fire_cert": {
+  "requirements": [],
+  "authorities": [
+   {
+    "name": "NJ Department of Community Affairs, Division of Fire Safety, Bureau of Fire Code Enforcement",
+    "type": "state_dca",
+    "area_served": "Entire borough",
+    "lead_time": "",
+    "fees": [
+     {
+      "label": "Smoke/CO certificate, application more than 10 business days before change of occupant (state fee rule, 2017)",
+      "amount": "$45.00",
+      "quote": "1. Requests for a CSDCMAC received more than 10 business days prior to the change of occupant: $45.00;",
+      "source_url": "https://www.nj.gov/dca/divisions/dfs/codes/regulations/adopted_amendment_5_10_2.9.pdf",
+      "verified": null
+     },
+     {
+      "label": "Smoke/CO certificate, application 4 to 10 business days before change of occupant (state fee rule, 2017)",
+      "amount": "$90.00",
+      "quote": "2. Requests for a CSDCMAC received four to 10 business days prior to the change of occupant: $90.00; and",
+      "source_url": "https://www.nj.gov/dca/divisions/dfs/codes/regulations/adopted_amendment_5_10_2.9.pdf",
+      "verified": null
+     },
+     {
+      "label": "Smoke/CO certificate, application fewer than 4 business days before change of occupant (state fee rule, 2017)",
+      "amount": "$161.00",
+      "quote": "3. Requests for a CSDCMAC received fewer than four business days prior to the change of occupant: $161.00.",
+      "source_url": "https://www.nj.gov/dca/divisions/dfs/codes/regulations/adopted_amendment_5_10_2.9.pdf",
+      "verified": null
+     }
+    ],
+    "how_to_apply": "Apply and pay online through the NJ DCA service portal using 'Apply for Smoke Certification'.",
+    "application_url": "https://firesolutions.dca.nj.gov/ultra-fire-home/smoke-application-create/",
+    "department_url": "https://www.nj.gov/dca/dfs/offices/bfce.shtml",
+    "phone": "609-633-6106",
+    "email": "",
+    "evidence": [
+     {
+      "url": "https://www.nj.gov/dca/dfs/pdf/fire%20directory_county%20summary/state_towns%207_17_26.pdf",
+      "quote": "WOODLYNNE BORO 0437 SC",
+      "doc_date": "2026-07-17",
+      "via": "pdf",
+      "verified": true
+     },
+     {
+      "url": "https://www.nj.gov/dca/dfs/pdf/fire%20directory_county%20summary/state_towns%207_17_26.pdf",
+      "quote": "SC = Smoke Certs",
+      "doc_date": "2026-07-17",
+      "via": "pdf",
+      "verified": true
+     },
+     {
+      "url": "https://www.nj.gov/dca/dfs/pdf/fire%20directory_county%20summary/fire_code_enforcement_director.pdf",
+      "quote": "LEAID: 0437-999 Enf Auth. State Fire Official Louis Kilmer",
+      "doc_date": "2023-03-14 (survey date for Woodlynne entry)",
+      "via": "pdf",
+      "verified": true
+     }
+    ],
+    "confidence": "high"
+   }
+  ],
+  "notes": "The DCA state-towns list (revised 7/17/2026) marks Woodlynne as a town where the state issues smoke certs, and the DCA fire directory lists the enforcing authority as the State (LEAID 0437-999). The Borough website has no smoke certificate page. The DCA fee figures come from the state rule N.J.A.C. 5:70-2.9(d) as published in the NJ Register on October 2, 2017 and posted on the DCA site; the DCA portal computes the fee at checkout and the current amount was not visible without applying. The phone number is the DCA Bureau of Fire Code Enforcement chief line listed on the DCA bureau page; the directory lists 609-633-6132 for the state fire official."
+ },
+ "other_items": [],
+ "open_questions": [
+  "What the Woodlynne resale inspection covers, how long the certificate is valid, lead time and re-inspection fees; the form lists none of these.",
+  "Date of the $96.00 resale application form (undated scan).",
+  "Confirm the current DCA smoke certificate fee charged at checkout on the DCA portal; the only DCA-published fee text found is the 2017 N.J.A.C. 5:70-2.9 amendment."
+ ],
+ "verification": {
+  "fees": 4,
+  "fee_ok": 0,
+  "fee_bad": 0,
+  "fee_unchecked": 4,
+  "quotes": 6,
+  "q_ok": 4,
+  "q_bad": 0,
+  "q_unchecked": 2
+ }
+}

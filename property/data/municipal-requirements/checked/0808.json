@@ -1,0 +1,163 @@
+{
+ "municipality_code": "0808",
+ "municipality": "Harrison Township",
+ "county": "GLOUCESTER",
+ "checked_at": "2026-09-30",
+ "resale_co": {
+  "status": "required",
+  "name": "Certificate of Transfer of Ownership / Occupancy (CTO)",
+  "issued_by": "Harrison Township Housing Department (Housing Code Official, Property Maintenance / Code Enforcement)",
+  "lead_time": "Apply at least 30 days before settlement. Inspections requested within 10 business days of the application are charged the expedited fee.",
+  "valid_for": "",
+  "requirements": [
+   "Passing inspection under the 2024 International Property Maintenance Code",
+   "Smoke detector certification from the fire department (Fire District #1)",
+   "Septic certification; if work is needed, written documentation or sealed correction plans, with 60 days to fix under a temporary certificate",
+   "Proper permits and inspections for any work done in the home",
+   "All utilities on and working at the time of inspection",
+   "Certifications may be required for chimneys, roof, electrical, structural and heating"
+  ],
+  "fees": [
+   {
+    "label": "Residential initial inspection (covers initial inspection and first re-inspection)",
+    "amount": "$100.00",
+    "quote": "A $100.00 fee must accompany the application for inspection.  This fee covers the initial inspection and the first re-inspection.",
+    "source_url": "https://harrisontwp.us/wp-content/uploads/2025/11/CTO-applicatiCertification-of-Tranfer-of-OwnershipOccupancy-Application-rev-11242025.pdf",
+    "verified": true
+   },
+   {
+    "label": "Residential expedited (inspection needed within 10 business days of application)",
+    "amount": "$150",
+    "quote": "There is a $150 expedited fee if inspection needs to be scheduled within 10 business days of the application date.",
+    "source_url": "https://harrisontwp.us/wp-content/uploads/2025/11/CTO-applicatiCertification-of-Tranfer-of-OwnershipOccupancy-Application-rev-11242025.pdf",
+    "verified": true
+   },
+   {
+    "label": "Third and each later inspection",
+    "amount": "$50.00",
+    "quote": "A $50.00 fee for the third and every subsequent inspection must be paid prior to scheduling the inspection.",
+    "source_url": "https://harrisontwp.us/wp-content/uploads/2025/11/CTO-applicatiCertification-of-Tranfer-of-OwnershipOccupancy-Application-rev-11242025.pdf",
+    "verified": true
+   }
+  ],
+  "how_to_apply": "Fill out the CTO application completely and submit it with the fee (cash or check) to the Housing Code Official's office, 114 Bridgeton Pike, Mullica Hill. Inspectors in the field will not accept applications or fees. After the application is processed, the owner or realtor must call or email the housing office to schedule the inspection. If the buyer is taking responsibility for the certificate, the office must be told in writing before the CTO is issued.",
+  "application_url": "https://harrisontwp.us/wp-content/uploads/2025/11/CTO-applicatiCertification-of-Tranfer-of-OwnershipOccupancy-Application-rev-11242025.pdf",
+  "department_url": "https://harrisontwp.us/department/property-maintenance-code-enforcement/",
+  "phone": "856-478-4111",
+  "email": "property_maintenance@harrisontwp.us",
+  "evidence": [
+   {
+    "url": "https://harrisontwp.us/wp-content/uploads/2025/11/CTO-applicatiCertification-of-Tranfer-of-OwnershipOccupancy-Application-rev-11242025.pdf",
+    "quote": "PROPERTY TYPE: ____House Sale / ____ House Rental / ____ Apartment Rental / _____ Commercial ... Please do not schedule a settlement date until the CTO is approved and returned.",
+    "doc_date": "2025-11 (rev 11/24/2025)",
+    "via": "pdf",
+    "verified": true
+   },
+   {
+    "url": "https://harrisontwp.us/wp-content/uploads/2025/11/CTO-applicatiCertification-of-Tranfer-of-OwnershipOccupancy-Application-rev-11242025.pdf",
+    "quote": "Because of scheduling and processing time, please apply for inspections a minimum of 30 days prior to settlement.",
+    "doc_date": "2025-11 (rev 11/24/2025)",
+    "via": "pdf",
+    "verified": true
+   }
+  ],
+  "confidence": "high",
+  "notes": "Form header reads 'RESALE/ RENTAL CTO REQUIREMENTS', so the same CTO applies to rentals. Commercial fees on the form are $200 (expedited $250). The form lists the email once as 'property_maintance@harrisontwp.us' (typo) and once as 'property_maintenance@harrisontwp.us'; the department page shows Property_Maintenance@harrisontwp.us. Department page (read through a fetch tool; direct download hit a bot check) lists Ralph Johnson, Housing Official and Code Enforcement Officer, ext. 6128, rjohnson@harrisontwp.us. The township code (ecode360 HA1928) was not read."
+ },
+ "fire_cert": {
+  "requirements": [],
+  "authorities": [
+   {
+    "name": "Bureau of Fire Prevention, Harrison Township Fire District #1",
+    "type": "fire_district",
+    "area_served": "Entire township",
+    "lead_time": "Lowest fee applies when the request is received 11 or more days before closing",
+    "fees": [
+     {
+      "label": "Request received 11 or more days before closing",
+      "amount": "$90.00",
+      "quote": "$90.00-Requests received 11 or more days from closing/change of occupancy.",
+      "source_url": "https://harrisontwp.us/wp-content/uploads/2024/01/Fire-inspection-revised-01032024.pdf",
+      "verified": true
+     },
+     {
+      "label": "Request received 5 to 10 days before closing",
+      "amount": "$160.00",
+      "quote": "$160.00-Requests received between 10 and 5 days from closing/change of occupancy.",
+      "source_url": "https://harrisontwp.us/wp-content/uploads/2024/01/Fire-inspection-revised-01032024.pdf",
+      "verified": true
+     },
+     {
+      "label": "Request received 4 days or less before closing",
+      "amount": "$200.00",
+      "quote": "$200.00-Requests received 4 days or less from closing/change of occupancy.",
+      "source_url": "https://harrisontwp.us/wp-content/uploads/2024/01/Fire-inspection-revised-01032024.pdf",
+      "verified": true
+     },
+     {
+      "label": "Re-inspection for failed inspection",
+      "amount": "$65.00",
+      "quote": "$65.00 - Re-inspection for failed inspection",
+      "source_url": "https://harrisontwp.us/wp-content/uploads/2024/01/Fire-inspection-revised-01032024.pdf",
+      "verified": true
+     }
+    ],
+    "how_to_apply": "Fill out the Certificate of Smoke Alarm, Carbon Monoxide Alarm and Portable Fire Extinguisher Compliance application (mark Sale, give closing date) and send it with a check payable to 'Bureau of Fire Prevention' to Harrison Township Fire District #1, 312 Ewan Rd, Mullica Hill, NJ 08062, or contact the office by email.",
+    "application_url": "https://harrisontwp.us/wp-content/uploads/2024/01/Fire-inspection-revised-01032024.pdf",
+    "department_url": "https://harrisontwp.us/department/fire-district/",
+    "phone": "856-478-0423",
+    "email": "matt@htfd23.com",
+    "evidence": [
+     {
+      "url": "https://harrisontwp.us/wp-content/uploads/2024/01/Fire-inspection-revised-01032024.pdf",
+      "quote": "Before any one- and two-family or attached single family structure is sold, leased, or otherwise made subject to a change of occupancy for residential purposes, the owner shall obtain a certificate or smoke alarm, carbon monoxide alarm, and portable fire extinguisher compliance CSACMAPFEC, evidencing compliance with N.J.A.C. 5:70-4.19, from [Bureau of Fire Prevention, Harrison Township Fire District#1].",
+      "doc_date": "2024-01 (Revised 01/01/24)",
+      "via": "pdf",
+      "verified": true
+     },
+     {
+      "url": "https://nj.gov/dca/dfs/pdf/ANNUAL%20REGISTRY/THIRD%20QUARTER%20LEA%20REGISTRY%202026.pdf",
+      "quote": "D Harrison Township",
+      "doc_date": "2026-07",
+      "via": "pdf",
+      "verified": true
+     }
+    ],
+    "confidence": "high"
+   }
+  ],
+  "notes": "DCA LEA Registry (July 2026) lists Harrison Township as 'D' (a fire district is the local enforcing agency). The township's Fire District page lists District Fire Chief Matthew Cardile, 856-478-0423, matt@htfd23.com, office address 4 South Main Street, Mullica Hill; the application form gives 312 Ewan Rd. The fire district's own website (htfd23.com) is behind a bot check and was not read. The CTO form lists 'Smoke Detector Certification from the Fire Department' as a requirement for the CTO."
+ },
+ "other_items": [
+  {
+   "label": "Septic certification",
+   "detail": "Required for issuance of the CTO; if the septic is not certified and work is needed, submit written documentation or sealed correction plans; 60 days to correct under a Temporary Certificate.",
+   "source_url": "https://harrisontwp.us/wp-content/uploads/2025/11/CTO-applicatiCertification-of-Tranfer-of-OwnershipOccupancy-Application-rev-11242025.pdf"
+  },
+  {
+   "label": "Open permits",
+   "detail": "Proper permits and inspections are required for any work completed in the home.",
+   "source_url": "https://harrisontwp.us/wp-content/uploads/2025/11/CTO-applicatiCertification-of-Tranfer-of-OwnershipOccupancy-Application-rev-11242025.pdf"
+  },
+  {
+   "label": "Utilities on",
+   "detail": "All utilities must be on and working at the time of inspection.",
+   "source_url": "https://harrisontwp.us/wp-content/uploads/2025/11/CTO-applicatiCertification-of-Tranfer-of-OwnershipOccupancy-Application-rev-11242025.pdf"
+  }
+ ],
+ "open_questions": [
+  "How long the CTO is valid is not stated on the form.",
+  "Fire certificate lead time beyond the fee tiers and certificate validity were not published.",
+  "An ecode360 search result (ecode360.com/11821137) mentions a $60 smoke certificate fee from 'the Bureau', but the town it belongs to could not be confirmed, so it was not used."
+ ],
+ "verification": {
+  "fees": 7,
+  "fee_ok": 7,
+  "fee_bad": 0,
+  "fee_unchecked": 0,
+  "quotes": 4,
+  "q_ok": 4,
+  "q_bad": 0,
+  "q_unchecked": 0
+ }
+}

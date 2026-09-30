@@ -1,0 +1,161 @@
+{
+ "municipality_code": "0820",
+ "municipality": "West Deptford Township",
+ "county": "GLOUCESTER",
+ "checked_at": "2026-09-30",
+ "resale_co": {
+  "status": "required",
+  "name": "Resale Housing Certificate of Occupancy",
+  "issued_by": "West Deptford Township Division of Housing (Construction & Inspection)",
+  "lead_time": "Not stated. The CO must be obtained before settlement.",
+  "valid_for": "",
+  "requirements": [
+   "Home must meet township housing rules (Chapters 115, 127 and 178), the NJ State Housing Code and the 2018 International Property Maintenance Code",
+   "All utilities on and working at the inspection",
+   "All open construction permits closed before the CO is issued",
+   "Vacant homes: a lock box is allowed; otherwise the owner or agent must meet the inspector",
+   "A separate fire inspection of smoke and CO alarms is required with every resale application (see fire certificate)"
+  ],
+  "fees": [
+   {
+    "label": "Housing inspection, initial",
+    "amount": "$60.00",
+    "quote": "Once the Division of Housing receives the Housing Inspection Application and required payment ($60.00 inspection fee & $40 for fire cert)",
+    "source_url": "https://www.westdeptford.com/services/departments/construction___inspection/housing_inspection.php",
+    "verified": true
+   },
+   {
+    "label": "Housing re-inspection",
+    "amount": "$30.00",
+    "quote": "the Division will contact the applicant to schedule the inspection or re-inspection ($30.00 housing re-inspection fee and/or $20 for fire re-inspection)",
+    "source_url": "https://www.westdeptford.com/services/departments/construction___inspection/housing_inspection.php",
+    "verified": true
+   },
+   {
+    "label": "Housing Certificate (for settlement only, with buyer affidavit)",
+    "amount": "$30.00",
+    "quote": "Housing Certificate $30.00",
+    "source_url": "https://www.westdeptford.com/Construction/Housing/WD%20Resale%20Housing%20Inspection%20Form.pdf",
+    "verified": true
+   }
+  ],
+  "how_to_apply": "Fill out the Resale Housing Inspection Application (West Deptford) and send it with payment (checks payable to West Deptford Township) to the Division of Housing, 400 Crown Point Road. The Division then contacts you to schedule. Include the fire inspection form and fee. Questions or scheduling: Alissa Visalli, Housing Inspection Coordinator.",
+  "application_url": "https://www.westdeptford.com/Construction/Housing/WD%20Resale%20Housing%20Inspection%20Form.pdf",
+  "department_url": "https://www.westdeptford.com/services/departments/construction___inspection/housing_inspection.php",
+  "phone": "856-845-4004 ext. 123",
+  "email": "avisalli@westdeptford.com",
+  "evidence": [
+   {
+    "url": "https://www.westdeptford.com/services/departments/construction___inspection/housing_inspection.php",
+    "quote": "A Resale Housing Certificate of Occupancy inspection is required for all for-sale dwelling units whenever there is a transfer of ownership. A Resale Housing Certificate of Occupancy must be secured by the owner prior to settlement.",
+    "doc_date": "2026",
+    "via": "page",
+    "verified": true
+   },
+   {
+    "url": "https://www.westdeptford.com/Construction/Housing/WD%20Resale%20Housing%20Inspection%20Form.pdf",
+    "quote": "Initial Inspection $60.00",
+    "doc_date": "2026-07",
+    "via": "pdf",
+    "verified": true
+   }
+  ],
+  "confidence": "high",
+  "notes": "If repairs are still open at closing, the Division issues a Housing Certificate for settlement purposes only. The buyer signs a notarized Housing Certificate Affidavit (2022 form) agreeing to get permits and make repairs within 30 days, and nobody may occupy the home until a permanent CO is issued. An initial inspection must happen first. Resale form date comes from its link timestamp (July 7, 2026). The same Division also handles Woodbury Heights under a shared services agreement. Code chapters on ecode360 (WE0745) could not be read."
+ },
+ "fire_cert": {
+  "requirements": [
+   "Ten-year sealed battery smoke alarms (UL 217); hardwired alarms from original construction cannot be replaced with battery alarms",
+   "Smoke alarm on every level; basement alarm at the bottom of the stairwell on the ceiling, not between joists",
+   "Hallway smoke alarms within 10 feet of all bedroom doors",
+   "No smoke alarms in kitchens, bathrooms, near forced air ducts or furnaces, in the dead-air space where ceiling meets wall, near ceiling fans, in crawl spaces or attics",
+   "CO alarms in the hallway within 10 feet of all bedroom doors, under 7 years old and working; plug-in, battery or hardwired are fine, but not in switched outlets or outlets at floor molding",
+   "House numbers: numerals at least 4 inches high, contrasting color, permanently attached and visible from the street; light post or mailbox numbers not accepted"
+  ],
+  "authorities": [
+   {
+    "name": "West Deptford Township Bureau of Fire Prevention",
+    "type": "municipal_fire_bureau",
+    "area_served": "Entire township",
+    "lead_time": "",
+    "fees": [
+     {
+      "label": "Smoke/CO certificate inspection, initial",
+      "amount": "$40",
+      "quote": "Once the Division of Housing receives the Housing Inspection Application and required payment ($60.00 inspection fee & $40 for fire cert)",
+      "source_url": "https://www.westdeptford.com/services/departments/construction___inspection/housing_inspection.php",
+      "verified": true
+     },
+     {
+      "label": "Smoke/CO re-inspection",
+      "amount": "$20",
+      "quote": "($30.00 housing re-inspection fee and/or $20 for fire re-inspection)",
+      "source_url": "https://www.westdeptford.com/services/departments/construction___inspection/housing_inspection.php",
+      "verified": true
+     }
+    ],
+    "how_to_apply": "Submit the Bureau's Smoke and Carbon Monoxide Detector Certification form (WD Fire Inspection Checklist) together with the resale housing application. Pay cash or check payable to West Deptford Twp. The Division of Housing schedules the inspection.",
+    "application_url": "https://www.westdeptford.com/WD%20Fire%20Inspection%20Checklist.pdf",
+    "department_url": "https://www.westdeptford.com/services/departments/construction___inspection/housing_inspection.php",
+    "phone": "856-845-4004",
+    "email": "",
+    "evidence": [
+     {
+      "url": "https://www.westdeptford.com/services/departments/construction___inspection/housing_inspection.php",
+      "quote": "ALL Rental / Resale Applications will require a Fire Inspection.",
+      "doc_date": "2026",
+      "via": "page",
+      "verified": true
+     },
+     {
+      "url": "https://nj.gov/dca/dfs/pdf/ANNUAL%20REGISTRY/THIRD%20QUARTER%20LEA%20REGISTRY%202026.pdf",
+      "quote": "M West Deptford Township",
+      "doc_date": "2026-07",
+      "via": "pdf",
+      "verified": true
+     },
+     {
+      "url": "https://www.westdeptford.com/WD%20Fire%20Inspection%20Checklist.pdf",
+      "quote": "BUREAU OF FIRE PREVENTION",
+      "doc_date": "2026-07",
+      "via": "pdf",
+      "verified": true
+     }
+    ],
+    "confidence": "high"
+   }
+  ],
+  "notes": "The DCA LEA Registry (July 2026) lists West Deptford as its own municipal fire code agency (M). The Gloucester County Fire Marshal web page still lists West Deptford among county LEA towns; that appears out of date. The checklist (link timestamp July 7, 2026) gives fees of $40.00 initial and $20.00 re-inspection, payable to West Deptford Twp. The checklist does not mention the portable fire extinguisher that the state resale rule requires; ask the Bureau. The township's old fire prevention web page now returns a 404 error."
+ },
+ "other_items": [
+  {
+   "label": "Open construction permits",
+   "detail": "All open construction permits must be closed before the CO is issued.",
+   "source_url": "https://www.westdeptford.com/services/departments/construction___inspection/housing_inspection.php"
+  },
+  {
+   "label": "Utilities",
+   "detail": "All utilities must be on and working for the inspection.",
+   "source_url": "https://www.westdeptford.com/services/departments/construction___inspection/housing_inspection.php"
+  },
+  {
+   "label": "Settlement-only Housing Certificate",
+   "detail": "Buyer affidavit (notarized) to finish repairs and permits within 30 days; no occupancy until the final CO.",
+   "source_url": "https://www.westdeptford.com/Construction/Housing/Housing%20Cert%20AFFIDAVIT%202022%20Fillable%20Form.pdf"
+  }
+ ],
+ "open_questions": [
+  "Recommended lead time before closing and how long the resale CO is valid are not stated.",
+  "Whether the Bureau also checks the portable fire extinguisher (not on its July 2026 checklist)."
+ ],
+ "verification": {
+  "fees": 5,
+  "fee_ok": 5,
+  "fee_bad": 0,
+  "fee_unchecked": 0,
+  "quotes": 5,
+  "q_ok": 5,
+  "q_bad": 0,
+  "q_unchecked": 0
+ }
+}

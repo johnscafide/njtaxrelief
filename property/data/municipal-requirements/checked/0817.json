@@ -1,0 +1,102 @@
+{
+ "municipality_code": "0817",
+ "municipality": "Swedesboro Borough",
+ "county": "GLOUCESTER",
+ "checked_at": "2026-09-30",
+ "resale_co": {
+  "status": "required",
+  "name": "Re-Sale Certificate of Occupancy (C/O)",
+  "issued_by": "Borough of Swedesboro (Borough office handles re-sale and rental C/O applications and inspections)",
+  "lead_time": "",
+  "valid_for": "",
+  "requirements": [],
+  "fees": [],
+  "how_to_apply": "Pick up a Certificate of Occupancy application at the Swedesboro Municipal Building, 1500 Kings Highway, and drop off the completed application there. Call 856-467-0202 ext. 101 for re-sale C/O applications and inspections. Office hours: Monday 8:00am to 6:30pm, Tuesday to Thursday 8:00am to 4:30pm, Friday 8:00am to noon. No online form was found.",
+  "application_url": "",
+  "department_url": "https://www.historicswedesboro.com/construction-co-inspections/",
+  "phone": "856-467-0202 ext. 101",
+  "email": "",
+  "evidence": [
+   {
+    "url": "https://www.historicswedesboro.com/construction-co-inspections/",
+    "quote": "1) Borough of Swedesboro handles all Rental C/O and Re-Sale C/O Applications/Inspections 856-467-0202 ext. 101",
+    "doc_date": "2026-01",
+    "via": "page",
+    "verified": true
+   },
+   {
+    "url": "https://www.historicswedesboro.com/construction-co-inspections/",
+    "quote": "2) Township of Greenwich handles ONLY New Construction C/O Inspections/Applications 856-423-1038 ext. 201",
+    "doc_date": "2026-01",
+    "via": "page",
+    "verified": true
+   },
+   {
+    "url": "https://www.historicswedesboro.com/construction-co-inspections/",
+    "quote": "Woolwich Twp. will no longer be handling Construction Permits or Housing Inspection for the The Borough of Swedesboro.",
+    "doc_date": "2026-01",
+    "via": "page",
+    "verified": true
+   }
+  ],
+  "confidence": "medium",
+  "notes": "The Construction/CO Inspections page (last updated January 2026) says the Borough now uses Greenwich Township (Gibbstown) as its Construction Code Office under a shared services agreement, but re-sale C/Os stay with the Borough. The C/O application form, fee and inspection checklist are not posted on the Borough website (the Borough keeps many documents on ecode360, which cannot be opened). Rental Facility Registrations are separate and due January 31 (contact Diane Branco, dbranco@swedesboro-nj.us). Older third-party or search-summary mentions of a Housing Inspector and Chapter 140 fees were not verifiable and are not used."
+ },
+ "fire_cert": {
+  "requirements": [],
+  "authorities": [
+   {
+    "name": "Swedesboro Fire Bureau (Borough fire official, municipal local enforcing agency)",
+    "type": "municipal_fire_bureau",
+    "area_served": "Entire borough (the Swedesboro Fire Bureau is also the LEA for Woolwich Township)",
+    "lead_time": "",
+    "fees": [],
+    "how_to_apply": "No smoke/CO/extinguisher certificate form or fee was found on the Borough site. Contact the Fire Official, or ask the Borough office (ext. 101) whether the smoke/CO check is part of the Re-Sale C/O inspection.",
+    "application_url": "",
+    "department_url": "https://www.historicswedesboro.com/sweedesboro-fire-bureau/",
+    "phone": "856-467-0202 ext. 109",
+    "email": "fm@swedesboro-nj.us",
+    "evidence": [
+     {
+      "url": "https://nj.gov/dca/dfs/pdf/ANNUAL%20REGISTRY/THIRD%20QUARTER%20LEA%20REGISTRY%202026.pdf",
+      "quote": "M Swedesboro Borough",
+      "doc_date": "2026-07",
+      "via": "pdf",
+      "verified": true
+     },
+     {
+      "url": "https://nj.gov/dca/dfs/pdf/ANNUAL%20REGISTRY/THIRD%20QUARTER%20LEA%20REGISTRY%202026.pdf",
+      "quote": "Swedesboro is the LEA for Woolwich",
+      "doc_date": "2026-07",
+      "via": "pdf",
+      "verified": true
+     },
+     {
+      "url": "https://www.historicswedesboro.com/sweedesboro-fire-bureau/",
+      "quote": "The Swedesboro Fire Bureau is located at 1500 Kings Hwy., Swedesboro, NJ 08085.",
+      "doc_date": "2026-06",
+      "via": "page",
+      "verified": true
+     }
+    ],
+    "confidence": "medium"
+   }
+  ],
+  "notes": "DCA LEA Registry (July 2026): 'M Swedesboro Borough' (M = Municipality). The Fire Bureau page (updated June 2026) names Fred Lock as Fire Official, fm@swedesboro-nj.us, (856) 467-0202 ext. 109, and covers business registrations and inspections; it does not mention resale smoke certificates. Fire suppression is provided by the Woolwich Fire Department. The Borough posted a Fire Inspector job ad in July 2026. Under N.J.A.C. 5:70-2.3, if the Borough's re-sale C/O inspection covers smoke/CO/extinguisher rules, a separate certificate is not required. Swedesboro has no fire district."
+ },
+ "other_items": [],
+ "open_questions": [
+  "Re-sale C/O fee, reinspection fee, lead time, validity and inspection checklist for Swedesboro were not found online.",
+  "Is the smoke/CO/extinguisher certificate issued by the Swedesboro Fire Bureau separately, or checked within the Borough re-sale C/O inspection? What is its fee?"
+ ],
+ "verification": {
+  "fees": 0,
+  "fee_ok": 0,
+  "fee_bad": 0,
+  "fee_unchecked": 0,
+  "quotes": 6,
+  "q_ok": 6,
+  "q_bad": 0,
+  "q_unchecked": 0
+ }
+}

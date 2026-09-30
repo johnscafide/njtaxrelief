@@ -83,7 +83,9 @@ Deno.serve(async(req:Request)=>{
 
       // Never downgrade hand-verified/local official evidence with a weaker or less
       // detailed statewide crawl. The registry observation is still preserved below.
-      const preserveExisting=prior.rank>registryRank || (prior.rank===registryRank && prior.count>requirements.length);
+      // A person-checked row is the reviewed source of truth, so it always replaces older
+      // saved evidence (for example Lindenwold's hand-typed items with dead links).
+      const preserveExisting=!checked && (prior.rank>registryRank || (prior.rank===registryRank && prior.count>requirements.length));
       const explicit=r.requirement_state==="explicit_required", process=r.requirement_state==="official_process_found", baseline=r.requirement_state==="statewide_baseline";
       const sourceUrl=applicationUrl||departmentUrl||ordinanceUrl||sources?.[0]?.url||null;
       const registryEvidence={requirement_key:key,requirement_state:r.requirement_state,details_checked:checked,requirements,fees,application_url:applicationUrl,department_url:departmentUrl,ordinance_url:ordinanceUrl,sources};

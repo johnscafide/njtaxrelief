@@ -1,0 +1,122 @@
+{
+ "municipality_code": "0810",
+ "municipality": "Mantua Township",
+ "county": "GLOUCESTER",
+ "checked_at": "2026-09-30",
+ "resale_co": {
+  "status": "required",
+  "name": "Housing Certificate (Rental/Resale Housing Inspection)",
+  "issued_by": "Construction Office (Uniform Construction Code Office), Construction Code Official",
+  "lead_time": "",
+  "valid_for": "",
+  "requirements": [
+   "Meets Township Housing Standards (Ordinance 95 / Chapter 120 property maintenance)",
+   "At least one UL-listed 10-year smoke detector on each floor",
+   "At least one carbon monoxide detector on each floor, within 10 feet of bedroom doors (depends on the year the house was built)",
+   "No open construction permits",
+   "Fireplace or wood stove certification and well or septic certification, if the home has them (listed on the form)",
+   "Utilities on (asked on the form)"
+  ],
+  "fees": [
+   {
+    "label": "Housing Certificate inspection (includes one free re-inspection)",
+    "amount": "$100",
+    "quote": "Housing Certificate (Includes One Free Re-Inspection) $100",
+    "source_url": "https://mantuatownship.com/wp-content/uploads/2025/10/2026-Housing-Information-Form-and-Application.pdf",
+    "verified": true
+   },
+   {
+    "label": "Each additional re-inspection",
+    "amount": "$30",
+    "quote": "Additional Re-Inspection $30",
+    "source_url": "https://mantuatownship.com/wp-content/uploads/2025/10/2026-Housing-Information-Form-and-Application.pdf",
+    "verified": true
+   }
+  ],
+  "how_to_apply": "Fill out the Rental/Resale Housing Inspection form (mark Resale, give settlement date) and submit it with a check payable to Mantua Township, in person, in the drop box outside the Construction Office, or by mail to 401 Main Street, Mantua, NJ 08051. If mailed, the applicant must call to schedule the inspection. The applicant must also call to schedule any re-inspection.",
+  "application_url": "https://mantuatownship.com/wp-content/uploads/2025/10/2026-Housing-Information-Form-and-Application.pdf",
+  "department_url": "https://mantuatownship.com/construction-department/",
+  "phone": "856-468-9050",
+  "email": "jgallagher@mantuatownship.com",
+  "evidence": [
+   {
+    "url": "https://mantuatownship.com/wp-content/uploads/2025/10/2026-Housing-Information-Form-and-Application.pdf",
+    "quote": "A HOUSING CERTIFICATE is required for any residential sale or change of tenant.",
+    "doc_date": "2026 (2026 Housing Information Form, uploaded 2025-10)",
+    "via": "pdf",
+    "verified": true
+   },
+   {
+    "url": "https://mantuatownship.com/construction-department/",
+    "quote": "Note: No Housing Certificates will be issued if a property has remaining open permits.",
+    "doc_date": "",
+    "via": "page",
+    "verified": true
+   }
+  ],
+  "confidence": "high",
+  "notes": "The housing fee does not cover the fire and smoke inspection: the form says 'Does not include the fire and smoke inspection they are handled by the fire district at their cost.' Not required for refinancing ('A Housing Certificate is not required for refinancing'). Same certificate applies to rentals (change of tenant). The PDF letterhead shows the main number as 865-468-1500, which appears to be a typo for 856-468-1500 (the number on the township website). Construction Code Official: James T. Gallagher, 856-468-1500 ext. 128; clerks ext. 126 or 127."
+ },
+ "fire_cert": {
+  "requirements": [],
+  "authorities": [
+   {
+    "name": "Mantua Township Fire District (fire and smoke inspection)",
+    "type": "fire_district",
+    "area_served": "Entire township",
+    "lead_time": "",
+    "fees": [],
+    "how_to_apply": "Contact the Mantua Township Fire District (township website links to mtfd22.com) for the smoke/CO/extinguisher certificate inspection.",
+    "application_url": "",
+    "department_url": "http://mtfd22.com/",
+    "phone": "",
+    "email": "",
+    "evidence": [
+     {
+      "url": "https://mantuatownship.com/wp-content/uploads/2025/10/2026-Housing-Information-Form-and-Application.pdf",
+      "quote": "(Does not include the fire and smoke inspection they are handled by the fire district at their cost.)",
+      "doc_date": "2026 (uploaded 2025-10)",
+      "via": "pdf",
+      "verified": true
+     },
+     {
+      "url": "https://nj.gov/dca/dfs/pdf/ANNUAL%20REGISTRY/THIRD%20QUARTER%20LEA%20REGISTRY%202026.pdf",
+      "quote": "M Mantua Township",
+      "doc_date": "2026-07",
+      "via": "pdf",
+      "verified": true
+     }
+    ],
+    "confidence": "medium"
+   }
+  ],
+  "notes": "Conflict to resolve: the township's 2026 housing form says the fire district handles the fire and smoke inspection, but the DCA LEA Registry (July 2026) lists Mantua Township as 'M' (municipality is the local enforcing agency). The fire district website (mtfd22.com) is behind a bot check and could not be read, so no fee, form, phone or email was confirmed."
+ },
+ "other_items": [
+  {
+   "label": "Open permits must be closed",
+   "detail": "No Housing Certificates will be issued if a property has remaining open permits.",
+   "source_url": "https://mantuatownship.com/construction-department/"
+  },
+  {
+   "label": "Fireplace / wood stove and well / septic certifications",
+   "detail": "The inspection form has checkboxes for 'Fireplace/Wood Burning Stove (Cert.)' and 'Well/Septic Tank (Cert.)'.",
+   "source_url": "https://mantuatownship.com/wp-content/uploads/2025/10/2026-Housing-Information-Form-and-Application.pdf"
+  }
+ ],
+ "open_questions": [
+  "Fire/smoke certificate fee, form and contact for the Mantua Township Fire District were not found on a readable official source.",
+  "Whether the fire district or the township is the formal fire enforcing agency (form vs. DCA registry disagree).",
+  "Housing Certificate validity period and recommended lead time are not stated."
+ ],
+ "verification": {
+  "fees": 2,
+  "fee_ok": 2,
+  "fee_bad": 0,
+  "fee_unchecked": 0,
+  "quotes": 4,
+  "q_ok": 4,
+  "q_bad": 0,
+  "q_unchecked": 0
+ }
+}

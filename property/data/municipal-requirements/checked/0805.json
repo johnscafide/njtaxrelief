@@ -1,0 +1,158 @@
+{
+ "municipality_code": "0805",
+ "municipality": "Franklin Township",
+ "county": "GLOUCESTER",
+ "checked_at": "2026-09-30",
+ "resale_co": {
+  "status": "required",
+  "name": "Resale Certificate / New Tenant Certificate (Certificate of Occupancy Transfer, Township Code Chapter 178)",
+  "issued_by": "Franklin Township Housing Code Official (Zoning and Land Use Department)",
+  "lead_time": "File at least 30 days before settlement (the information sheet says allow a minimum of three weeks and suggests applying when the house is listed)",
+  "valid_for": "Applications are non-transferable and expire after 60 days",
+  "requirements": [
+   "Passing water test and Gloucester County Board of Health septic approval",
+   "Reflective house numbers at least 3-1/2 inches high, readable from the street",
+   "Pool and yard fences with self-latching, out-swing gates (48 inch minimum height, 54 inch if latch at top)",
+   "Guardrails on landings or porches 30 inches or higher (36 inch minimum height, 4 inch spacing); sound stairs, decks, porches and balconies",
+   "No broken or missing glass; all windows with screens that open, close and lock",
+   "Stove anti-tilt device; all utilities on at inspection",
+   "Smoke detector on each level, in all bedrooms and outside each sleeping area (battery allowed)",
+   "Carbon monoxide detectors near sleeping areas (unless no fuel-burning device or attached garage)",
+   "ABC fire extinguisher at least 2A:10B:C, no more than 10 lbs, mounted in a visible, convenient spot",
+   "Handrails on stairs with four or more risers; bathroom window or exhaust fan",
+   "No electrical hazards or extension-cord wiring; GFCI at pools, spas, exterior, garage, kitchen, bath and within 5 feet of water",
+   "Plumbing vented and working; heat to all habitable rooms; water heater relief valve pipe ending within 6 inches of floor",
+   "Certifications may be required for roof, electrical, structural, heating or lead"
+  ],
+  "fees": [
+   {
+    "label": "Initial inspection",
+    "amount": "$100.00",
+    "quote": "A $100.00 fee must accompany the application for inspection. This fee covers the initial inspection.",
+    "source_url": "https://www.franklintownshipnj.org/DocumentCenter/View/6381/Resale-and-New-Tenant-Certificate-Information-and-Checklist-PDF",
+    "verified": true
+   },
+   {
+    "label": "Each re-inspection",
+    "amount": "$50.00",
+    "quote": "For each subsequent re-inspection, the applicant shall notify the Housing Code Official’s Office and submit a re-inspection fee of $50.00.",
+    "source_url": "https://www.franklintownshipnj.org/DocumentCenter/View/6381/Resale-and-New-Tenant-Certificate-Information-and-Checklist-PDF",
+    "verified": true
+   },
+   {
+    "label": "Fines for not getting approval within 30 days of initial inspection (per day)",
+    "amount": "$100.00 - $200.00 per day",
+    "quote": "Applications must be approved within 30 days on initial inspections. Violators will be subject to fines ($100.00 - $200.00 per day) as per the Township of Franklin Ordinance #178.10.",
+    "source_url": "https://www.franklintownshipnj.org/DocumentCenter/View/6381/Resale-and-New-Tenant-Certificate-Information-and-Checklist-PDF",
+    "verified": true
+   }
+  ],
+  "how_to_apply": "Fill out the Application for Resale Certificate or New Tenant Certificate and hand it in with the fee at the Housing Code Official's Office in the Municipal Building, 1571 Delsea Drive, Franklinville. Applications and fees are not accepted in the field. There is a box on the form for a Non-Occupy (AS IS SALE) certificate request. If the buyer is taking over responsibility for the certificate, notify the office in writing before it is issued.",
+  "application_url": "https://www.franklintownshipnj.org/DocumentCenter/View/6409/Application-for-Resale-Certificate-or-New-Tenant-Certificate-PDF",
+  "department_url": "https://www.franklintownshipnj.org/152/Code-Enforcement-Land-Use",
+  "phone": "856-694-1234",
+  "email": "housinginspector@franklintownship.com",
+  "evidence": [
+   {
+    "url": "https://www.franklintownshipnj.org/DocumentCenter/View/6381/Resale-and-New-Tenant-Certificate-Information-and-Checklist-PDF",
+    "quote": "A Resale Certificate / New Tenant Certificate is required in the Township of Franklin each time a residential dwelling unit changes occupant and tenant.",
+    "doc_date": "2024-03",
+    "via": "pdf",
+    "verified": true
+   },
+   {
+    "url": "https://www.franklintownshipnj.org/DocumentCenter/View/6409/Application-for-Resale-Certificate-or-New-Tenant-Certificate-PDF",
+    "quote": "Applications should be filed at least 30 days prior to the settlement date.",
+    "doc_date": "2024-05",
+    "via": "pdf",
+    "verified": null
+   },
+   {
+    "url": "https://www.franklintownshipnj.org/DocumentCenter/View/179/Ordinance-024-14---Amending-Chapter-178---Certificate-of-Occupancy-Transfer-PDF",
+    "quote": "Certificates of occupancy transfer shall hereafter be required for human habitation of all existing dwelling units in the Township of Franklin before a change in occupancy of any such unit.",
+    "doc_date": "2014",
+    "via": "pdf",
+    "verified": true
+   }
+  ],
+  "confidence": "high",
+  "notes": "Information sheet PDF dated 2024-03; application form is a scan dated 2024-05 (the form also lists a $100.00 inspection fee and a $50.00 re-inspection fee). Chapter 178 was amended by Ordinance O-24-14 (2014). The Code Enforcement page adds: 'All Certificates of Occupancy need well and septic approvals from the County, or certifications with the application.' All rental units must also be registered with the Clerk's Office (rental only)."
+ },
+ "fire_cert": {
+  "requirements": [
+   "Township checklist: ABC fire extinguisher no smaller than 2A:10B:C, no more than 10 lbs, mounted in a visible and convenient location",
+   "Township checklist: smoke detector on each level, in all bedrooms and outside each sleeping area; battery units allowed",
+   "Township checklist: CO detectors in the vicinity of sleeping areas"
+  ],
+  "authorities": [
+   {
+    "name": "Franklin Township (municipal fire code enforcing agency, Fire Marshals); alarms and extinguisher are checked on the Township Resale Certificate inspection",
+    "type": "municipal_fire_bureau",
+    "area_served": "Entire township (all five fire districts)",
+    "lead_time": "",
+    "fees": [],
+    "how_to_apply": "No separate smoke certificate application or fee was found. The smoke alarm, CO alarm and fire extinguisher items are on the Township Resale Certificate checklist. Under N.J.A.C. 5:70-2.3(a)1, where a town has its own resale inspection, a separate certificate is not required but the town may not issue its certificate until the home meets N.J.A.C. 5:70-4.19. Confirm with the Fire Marshals at 856-694-1234 ext. 6.",
+    "application_url": "https://www.franklintownshipnj.org/DocumentCenter/View/6409/Application-for-Resale-Certificate-or-New-Tenant-Certificate-PDF",
+    "department_url": "https://www.franklintownshipnj.org/151/Fire-Departments",
+    "phone": "856-694-1234 ext. 6",
+    "email": "",
+    "evidence": [
+     {
+      "url": "https://www.franklintownshipnj.org/DocumentCenter/View/6381/Resale-and-New-Tenant-Certificate-Information-and-Checklist-PDF",
+      "quote": "An ABC fire extinguisher must be no smaller than 2A:10B:C, weigh no more than 10lbs and mounted in a visible and convenient location.",
+      "doc_date": "2024-03",
+      "via": "pdf",
+      "verified": true
+     },
+     {
+      "url": "https://nj.gov/dca/dfs/pdf/ANNUAL%20REGISTRY/THIRD%20QUARTER%20LEA%20REGISTRY%202026.pdf",
+      "quote": "M Franklin Township",
+      "doc_date": "2026-07",
+      "via": "pdf",
+      "verified": true
+     },
+     {
+      "url": "https://www.law.cornell.edu/regulations/new-jersey/N-J-A-C-5-70-2-3",
+      "quote": "Where a municipality has existing inspection or approval requirements under a property maintenance or other municipal code, a CSACMAPFEC shall not be required; provided, however, that the agency responsible for the enforcement of that code shall not issue any certificate of inspection or occupancy or other approval under such municipal code until it has determined that the dwelling complies with the requirements of N.J.A.C. 5:70-4.19.",
+      "doc_date": "",
+      "via": "page",
+      "verified": true
+     }
+    ],
+    "confidence": "medium"
+   }
+  ],
+  "notes": "Franklin has five fire districts (Franklin Township Fire Districts Nos. 1 to 5 per the DCA Gloucester County list of agencies with elected officials), served by Franklinville 43-1, Janvier 43-2, Star Cross 43-3, Malaga 43-4 and Forest Grove 43-5. However, the DCA LEA Registry (July 2026) lists the Uniform Fire Code enforcing agency as the Municipality ('M Franklin Township'), and the Township site lists a 'Fire Marshals' office at 856-694-1234, ext. 6. So the district does not change who handles the resale check. A web search summary mentioned a 'Franklin Township Department of Fire Prevention' smoke certificate rule on ecode360, but it could not be tied to this Franklin Township (there are several in NJ) and was not used. N.J.A.C. 5:70-2.3 text was read from the Cornell LII copy of the NJ Administrative Code."
+ },
+ "other_items": [
+  {
+   "label": "Well water test and septic approval",
+   "detail": "A passing water test and Gloucester County Board of Health septic approval are required before a Resale Certificate is issued.",
+   "source_url": "https://www.franklintownshipnj.org/DocumentCenter/View/6381/Resale-and-New-Tenant-Certificate-Information-and-Checklist-PDF"
+  },
+  {
+   "label": "Records check",
+   "detail": "The office checks zoning, property, construction and violation records when processing the application (office-use section of the form).",
+   "source_url": "https://www.franklintownshipnj.org/DocumentCenter/View/6409/Application-for-Resale-Certificate-or-New-Tenant-Certificate-PDF"
+  },
+  {
+   "label": "Buyer assumption of certificate",
+   "detail": "Under Chapter 178-4 the buyer may waive the seller's responsibility and take over getting the certificate, in writing filed with the Housing Code Official.",
+   "source_url": "https://www.franklintownshipnj.org/DocumentCenter/View/179/Ordinance-024-14---Amending-Chapter-178---Certificate-of-Occupancy-Transfer-PDF"
+  }
+ ],
+ "open_questions": [
+  "Whether the Township Fire Marshals issue a separate smoke/CO/extinguisher certificate or fee in addition to the Resale Certificate.",
+  "Lead time is stated two ways: 30 days on the application form, a minimum of three weeks on the information sheet."
+ ],
+ "verification": {
+  "fees": 3,
+  "fee_ok": 3,
+  "fee_bad": 0,
+  "fee_unchecked": 0,
+  "quotes": 6,
+  "q_ok": 5,
+  "q_bad": 0,
+  "q_unchecked": 1
+ }
+}

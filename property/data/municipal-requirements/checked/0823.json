@@ -1,0 +1,166 @@
+{
+ "municipality_code": "0823",
+ "municipality": "Woodbury Heights Borough",
+ "county": "GLOUCESTER",
+ "checked_at": "2026-09-30",
+ "resale_co": {
+  "status": "required",
+  "name": "Resale Housing Certificate of Occupancy (Resale Housing Inspection)",
+  "issued_by": "West Deptford Township Division of Housing, under a shared services agreement with the Borough",
+  "lead_time": "Not stated. The CO must be obtained before settlement.",
+  "valid_for": "",
+  "requirements": [
+   "Home must meet the housing standards enforced by the West Deptford Division of Housing (NJ State Housing Code and 2018 International Property Maintenance Code)",
+   "All utilities on and working at the inspection",
+   "All open construction permits closed before the CO is issued",
+   "Vacant homes: a lock box is allowed; otherwise the owner or agent must meet the inspector",
+   "A fire inspection of smoke and CO alarms is required with every resale application (see fire certificate)"
+  ],
+  "fees": [
+   {
+    "label": "Initial inspection",
+    "amount": "$60.00",
+    "quote": "Initial Inspection $60.00",
+    "source_url": "https://www.bwhnj.com/DocumentCenter/View/2020/WOODBURY-HEIGHTS-RESALE-INSPECTION-FORM",
+    "verified": true
+   },
+   {
+    "label": "Housing Certificate (for settlement only)",
+    "amount": "$30.00",
+    "quote": "Housing Certificate $30.00",
+    "source_url": "https://www.bwhnj.com/DocumentCenter/View/2020/WOODBURY-HEIGHTS-RESALE-INSPECTION-FORM",
+    "verified": true
+   },
+   {
+    "label": "Re-inspection",
+    "amount": "$30.00",
+    "quote": "Re-Inspection $30.00",
+    "source_url": "https://www.bwhnj.com/DocumentCenter/View/2020/WOODBURY-HEIGHTS-RESALE-INSPECTION-FORM",
+    "verified": true
+   }
+  ],
+  "how_to_apply": "Fill out the Woodbury Heights Resale Housing Inspection form (include settlement date, lock box number, buyer and agent details) and send it with a check payable to West Deptford Township to the West Deptford Division of Housing, 400 Crown Point Road, West Deptford. To schedule, contact Alissa Visalli.",
+  "application_url": "https://www.bwhnj.com/DocumentCenter/View/2020/WOODBURY-HEIGHTS-RESALE-INSPECTION-FORM",
+  "department_url": "https://www.bwhnj.com/226/Construction-Zoning-Enforcement",
+  "phone": "856-845-4004 ext. 123",
+  "email": "avisalli@westdeptford.com",
+  "evidence": [
+   {
+    "url": "https://www.bwhnj.com/226/Construction-Zoning-Enforcement",
+    "quote": "The Borough of Woodbury Heights has entered into a Shared Services Agreement with West Deptford Township for Construction and UCC Code Inspection and Enforcement Services and for Zoning Official, Housing and General Code Inspection and Enforcement (Services)",
+    "doc_date": "2026",
+    "via": "page",
+    "verified": true
+   },
+   {
+    "url": "https://www.westdeptford.com/services/departments/construction___inspection/housing_inspection.php",
+    "quote": "A Resale Housing Certificate of Occupancy inspection is required for all for-sale dwelling units whenever there is a transfer of ownership.",
+    "doc_date": "2026",
+    "via": "page",
+    "verified": true
+   },
+   {
+    "url": "https://www.westdeptford.com/services/departments/construction___inspection/housing_inspection.php",
+    "quote": "Resale Housing Inspection Application (Woodbury Heights) HERE.",
+    "doc_date": "2026",
+    "via": "page",
+    "verified": true
+   },
+   {
+    "url": "https://www.bwhnj.com/DocumentCenter/View/2020/WOODBURY-HEIGHTS-RESALE-INSPECTION-FORM",
+    "quote": "Please make checks payable to West Deptford Township",
+    "doc_date": "2026-01",
+    "via": "pdf",
+    "verified": true
+   }
+  ],
+  "confidence": "high",
+  "notes": "Watchdog's hand-entered data is confirmed by the current form (file dated January 15, 2026): initial inspection $60, housing certificate $30, re-inspection $30, and the form link DocumentCenter/View/2020 is correct. The same form also lists the smoke/CO certificate at $40 initial and $20 re-inspection (see fire section). The Housing Certificate is for settlement only: the buyer signs an affidavit to finish repairs within 30 days and cannot occupy until a permanent CO is issued (West Deptford process). Borough code (ecode360 WO0450) could not be read."
+ },
+ "fire_cert": {
+  "requirements": [
+   "Smoke alarm on every level, less than 10 years old and working",
+   "Basement alarm at the bottom of the stairwell on the ceiling, not between joists",
+   "Hallway smoke alarms within 10 feet of all bedroom doors",
+   "Hardwired smoke alarms cannot be replaced with battery alarms",
+   "CO alarms in the hallway within 10 feet of all bedroom doors, less than 7 years old and working",
+   "House numbers at least 4 inches high, contrasting color, permanently attached and visible from the street; light post or mailbox numbers not accepted"
+  ],
+  "authorities": [
+   {
+    "name": "West Deptford Township Bureau of Fire Prevention (serving Woodbury Heights through the West Deptford shared services agreement)",
+    "type": "municipal_fire_bureau",
+    "area_served": "Entire borough",
+    "lead_time": "",
+    "fees": [
+     {
+      "label": "Smoke/CO certificate, initial inspection",
+      "amount": "$40",
+      "quote": "$40 initial inspection / $20 Re-Inspection",
+      "source_url": "https://www.bwhnj.com/DocumentCenter/View/2020/WOODBURY-HEIGHTS-RESALE-INSPECTION-FORM",
+      "verified": true
+     },
+     {
+      "label": "Smoke/CO certificate, re-inspection",
+      "amount": "$20",
+      "quote": "$40 initial inspection / $20 Re-Inspection",
+      "source_url": "https://www.bwhnj.com/DocumentCenter/View/2020/WOODBURY-HEIGHTS-RESALE-INSPECTION-FORM",
+      "verified": true
+     }
+    ],
+    "how_to_apply": "Mark the Smoke/Carbon Monoxide Certificate option on the Woodbury Heights resale form (or submit the Bureau's Smoke and Carbon Monoxide Detector Certification form posted on the Borough site) and pay it with the housing fees. Cash or check payable to West Deptford Twp.",
+    "application_url": "https://www.bwhnj.com/DocumentCenter/View/2095/WOODBURY-HEIGHTS-FIRE-APPLICATION-FOR-CERTIFICATE-OF-OCCUPANCY",
+    "department_url": "https://www.westdeptford.com/services/departments/construction___inspection/housing_inspection.php",
+    "phone": "856-845-4004",
+    "email": "",
+    "evidence": [
+     {
+      "url": "https://www.bwhnj.com/DocumentCenter/View/2020/WOODBURY-HEIGHTS-RESALE-INSPECTION-FORM",
+      "quote": "Smoke/Carbon Monoxide Certificate",
+      "doc_date": "2026-01",
+      "via": "pdf",
+      "verified": true
+     },
+     {
+      "url": "https://www.bwhnj.com/DocumentCenter/View/2095/WOODBURY-HEIGHTS-FIRE-APPLICATION-FOR-CERTIFICATE-OF-OCCUPANCY",
+      "quote": "BUREAU OF FIRE PREVENTION",
+      "doc_date": "",
+      "via": "pdf",
+      "verified": null
+     },
+     {
+      "url": "https://www.westdeptford.com/services/departments/construction___inspection/housing_inspection.php",
+      "quote": "ALL Rental / Resale Applications will require a Fire Inspection.",
+      "doc_date": "2026",
+      "via": "page",
+      "verified": true
+     }
+    ],
+    "confidence": "medium"
+   }
+  ],
+  "notes": "Conflict: the NJ DCA LEA Registry (July 2026) lists 'C Woodbury Heights Borough' (C = County, the Gloucester County Fire Marshal's Office), and the County Fire Marshal page also lists Woodbury Heights. The Borough's own forms send the smoke/CO certificate through West Deptford's Bureau of Fire Prevention, with fees paid to West Deptford. The fire form posted on the Borough site is an older, undated version (address 1 Firehouse Rd). West Deptford's newer checklist (July 2026) instead requires 10-year sealed battery smoke alarms. Neither form mentions the portable fire extinguisher that the state rule requires. Woodbury Heights Fire Dept/EMS is the volunteer suppression company, not the inspecting agency. County Fire Marshal: 856-307-7912."
+ },
+ "other_items": [
+  {
+   "label": "Open construction permits",
+   "detail": "All open construction permits must be closed before the CO is issued (West Deptford Division of Housing rule).",
+   "source_url": "https://www.westdeptford.com/services/departments/construction___inspection/housing_inspection.php"
+  }
+ ],
+ "open_questions": [
+  "Which agency signs the state smoke/CO/extinguisher certificate for Woodbury Heights: West Deptford Bureau of Fire Prevention (per Borough forms) or the Gloucester County Fire Marshal (per DCA registry)?",
+  "Whether the older Woodbury Heights fire form or West Deptford's July 2026 checklist (10-year sealed alarms) applies.",
+  "Recommended lead time and CO validity period are not stated."
+ ],
+ "verification": {
+  "fees": 5,
+  "fee_ok": 5,
+  "fee_bad": 0,
+  "fee_unchecked": 0,
+  "quotes": 7,
+  "q_ok": 6,
+  "q_bad": 0,
+  "q_unchecked": 1
+ }
+}

@@ -1,0 +1,186 @@
+{
+ "municipality_code": "0413",
+ "municipality": "Gibbsboro Borough",
+ "county": "CAMDEN",
+ "checked_at": "2026-09-30",
+ "resale_co": {
+  "status": "required",
+  "name": "Continuing Certificate of Occupancy (CCO), Borough Code Chapter 132",
+  "issued_by": "Code Enforcement Office (Code Enforcement Officer / Fire Official)",
+  "lead_time": "Inspections require 15 days notice",
+  "valid_for": "",
+  "requirements": [
+   "Yard",
+   "Sidewalks, curbing and driveway",
+   "Roof, rain spouts, chimneys and exterior",
+   "Windows",
+   "Stairs and handrails",
+   "Plumbing, heating and electrical",
+   "Attic, basement and foundation",
+   "Fireplaces",
+   "Handicap items",
+   "Outstanding building permits and zoning are checked on the application"
+  ],
+  "fees": [
+   {
+    "label": "Initial inspection (within 10 business days)",
+    "amount": "$125.00",
+    "quote": "$125.00  Initial Inspection (within 10 business days)",
+    "source_url": "https://gibbsborotownhall.com/wp-content/uploads/2023/06/CCO_APPLICATION_Residents_06212023.pdf",
+    "verified": true
+   },
+   {
+    "label": "Initial inspection (within 5 business days)",
+    "amount": "$150.00",
+    "quote": "$150.00  Initial Inspection (within 5 business days)",
+    "source_url": "https://gibbsborotownhall.com/wp-content/uploads/2023/06/CCO_APPLICATION_Residents_06212023.pdf",
+    "verified": true
+   },
+   {
+    "label": "Initial inspection (within 2 business days)",
+    "amount": "$175.00",
+    "quote": "$175.00  Initial Inspection (within 2 business days)",
+    "source_url": "https://gibbsborotownhall.com/wp-content/uploads/2023/06/CCO_APPLICATION_Residents_06212023.pdf",
+    "verified": true
+   },
+   {
+    "label": "Second and later reinspections (first reinspection free)",
+    "amount": "$  50.00",
+    "quote": "$  50.00 Second and subsequent reinspection (first reinspection is free)",
+    "source_url": "https://gibbsborotownhall.com/wp-content/uploads/2023/06/CCO_APPLICATION_Residents_06212023.pdf",
+    "verified": true
+   }
+  ],
+  "how_to_apply": "Download the CCO application, fill in seller, buyer and settlement date, sign, and submit with a check to the borough (49 Kirkwood Rd, Gibbsboro). Call or email to schedule; inspection times vary.",
+  "application_url": "https://gibbsborotownhall.com/wp-content/uploads/2023/06/CCO_APPLICATION_Residents_06212023.pdf",
+  "department_url": "https://gibbsborotownhall.com/code-enforcement/",
+  "phone": "856-783-6655 ext. 151",
+  "email": "codeenforcement@gibbsborotownhall.com",
+  "evidence": [
+   {
+    "url": "https://gibbsborotownhall.com/code-enforcement/",
+    "quote": "A CCO is required prior to the sale of all commercial and residential properties and whenever there is a change in tenant.",
+    "doc_date": "",
+    "via": "page",
+    "verified": true
+   },
+   {
+    "url": "https://gibbsborotownhall.com/wp-content/uploads/2023/06/CCO_APPLICATION_Residents_06212023.pdf",
+    "quote": "INSPECTIONS REQUIRE 15 DAYS NOTICE",
+    "doc_date": "2023-06-21",
+    "via": "pdf",
+    "verified": true
+   }
+  ],
+  "confidence": "high",
+  "notes": "Form dated 06/21/2023. The fee tiers read 'within 10/5/2 business days' and the form also says inspections require 15 days notice; the form does not explain further, but it appears the fee rises the sooner the inspection is needed. The same CCO fees appear on a second copy linked from the Code Enforcement page (https://gibbsborotownhall.com/wp-content/uploads/2023/06/CONTINUING_CERTIFICATE_OF_OCCUPANCY.pdf). The Construction Clerk (856-783-6655 ext. 107, construction@gibbsborotownhall.com) is also listed on the form."
+ },
+ "fire_cert": {
+  "requirements": [
+   "Smoke alarms on every level including the basement and within 10 feet of bedrooms; all smoke alarms, including hardwired, must be under 10 years old",
+   "10-year sealed battery smoke alarms required; non-sealed battery alarms not accepted; hardwired alarms must be replaced with hardwired",
+   "CO alarm on each level with a sleeping area, near the bedrooms; the form says CO alarms must be under 5 years old",
+   "Fire extinguisher (form dated 2023): at least 5 lb 2A:10BC and no larger than 10 lb 4A:60BC, charged, mounted in plain view within 10 feet of the kitchen, not behind doors or in a cabinet",
+   "Fire alarm systems must be put on test through the alarm company; owner must know codes to silence and reset",
+   "Someone over 18 must be present",
+   "If the change of occupancy does not occur within 6 months, a new application is required"
+  ],
+  "authorities": [
+   {
+    "name": "Gibbsboro Bureau of Fire Safety (Borough Fire Official)",
+    "type": "municipal_fire_bureau",
+    "area_served": "Entire borough",
+    "lead_time": "10 days advance notice needed to schedule; less than 10 days costs more",
+    "fees": [
+     {
+      "label": "10 or more days notice",
+      "amount": "$45.00",
+      "quote": "10 or more days  $45.00",
+      "source_url": "https://gibbsborotownhall.com/wp-content/uploads/2023/06/Smoke_Residents_06212023.pdf",
+      "verified": true
+     },
+     {
+      "label": "4 to 10 days notice",
+      "amount": "$90.00",
+      "quote": "4-10 days            $90.00",
+      "source_url": "https://gibbsborotownhall.com/wp-content/uploads/2023/06/Smoke_Residents_06212023.pdf",
+      "verified": true
+     },
+     {
+      "label": "4 days or less notice",
+      "amount": "$161.00",
+      "quote": "4 days or less    $161.00",
+      "source_url": "https://gibbsborotownhall.com/wp-content/uploads/2023/06/Smoke_Residents_06212023.pdf",
+      "verified": true
+     },
+     {
+      "label": "Failure / re-inspection",
+      "amount": "$  35.00",
+      "quote": "Failure/re-inspection fee: $  35.00",
+      "source_url": "https://gibbsborotownhall.com/wp-content/uploads/2023/06/Smoke_Residents_06212023.pdf",
+      "verified": true
+     },
+     {
+      "label": "Missed appointment or entry denied",
+      "amount": "$  15.00",
+      "quote": "and/or if entry is denied fee $  15.00",
+      "source_url": "https://gibbsborotownhall.com/wp-content/uploads/2023/06/Smoke_Residents_06212023.pdf",
+      "verified": true
+     }
+    ],
+    "how_to_apply": "Mail the application with a check or money order payable to 'Gibbsboro Bureau of Fire Safety' to 49 Kirkwood Rd, Gibbsboro, NJ 08026, or drop it in the lock box in front of the building. Payment must accompany the application; no cash, no payment on site.",
+    "application_url": "https://gibbsborotownhall.com/wp-content/uploads/2023/06/Smoke_Residents_06212023.pdf",
+    "department_url": "https://gibbsborotownhall.com/fire-official/",
+    "phone": "856-783-6655 ext. 151",
+    "email": "fireofficial@gibbsborotownhall.com",
+    "evidence": [
+     {
+      "url": "https://gibbsborotownhall.com/wp-content/uploads/2023/06/Smoke_Residents_06212023.pdf",
+      "quote": "Payment should be made to “Gibbsboro Bureau of Fire Safety” and must accompany this application.",
+      "doc_date": "2023-06-21",
+      "via": "pdf",
+      "verified": true
+     },
+     {
+      "url": "https://gibbsborotownhall.com/wp-content/uploads/2023/06/Smoke_Residents_06212023.pdf",
+      "quote": "If change of occupancy for CSDCMACFE does not OCCUR within 6 months, new application shall be required",
+      "doc_date": "2023-06-21",
+      "via": "pdf",
+      "verified": true
+     },
+     {
+      "url": "https://nj.gov/dca/dfs/pdf/ANNUAL%20REGISTRY/THIRD%20QUARTER%20LEA%20REGISTRY%202026.pdf",
+      "quote": "M Gibbsboro Borough",
+      "doc_date": "2026-07",
+      "via": "pdf",
+      "verified": true
+     }
+    ],
+    "confidence": "high"
+   }
+  ],
+  "notes": "Fire form is dated 06/21/2023, before the February 2025 state law (P.L.2025, c.19) that other Camden County bureaus cite as removing the extinguisher requirement for 1-2 family homes; the Gibbsboro form still lists an extinguisher. Confirm with the Fire Official. The same person (Craig Fallstick) is listed as both Code Enforcement Officer and Fire Official."
+ },
+ "other_items": [
+  {
+   "label": "Outstanding building permits and zoning",
+   "detail": "The CCO application has fields for outstanding building permits and zoning, which are reviewed as part of the CCO.",
+   "source_url": "https://gibbsborotownhall.com/wp-content/uploads/2023/06/CCO_APPLICATION_Residents_06212023.pdf"
+  }
+ ],
+ "open_questions": [
+  "CCO fee tiers ('within 10/5/2 business days') are not explained; confirm how the tier is chosen.",
+  "How long the CCO is valid is not stated.",
+  "Whether the fire extinguisher is still required after P.L.2025, c.19 (the 2023 form still lists it)."
+ ],
+ "verification": {
+  "fees": 9,
+  "fee_ok": 9,
+  "fee_bad": 0,
+  "fee_unchecked": 0,
+  "quotes": 5,
+  "q_ok": 5,
+  "q_bad": 0,
+  "q_unchecked": 0
+ }
+}

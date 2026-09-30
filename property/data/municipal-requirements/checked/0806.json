@@ -1,0 +1,192 @@
+{
+ "municipality_code": "0806",
+ "municipality": "Glassboro Borough",
+ "county": "GLOUCESTER",
+ "checked_at": "2026-09-30",
+ "resale_co": {
+  "status": "required",
+  "name": "Resale of Dwelling Certificate (Resale CO); Transfer of Title when violations remain at settlement",
+  "issued_by": "Borough of Glassboro Code Enforcement Office (Health & Housing)",
+  "lead_time": "",
+  "valid_for": "",
+  "requirements": [
+   "Address numbers at least 4 inches, contrasting, visible from the street",
+   "Curb, sidewalk, driveway and apron free of major cracks and tripping hazards",
+   "Roof, gutters, siding, masonry, exterior doors, windows and screens in good repair (roof, electrical, HVAC, water heater and plumbing certifications may be required)",
+   "Exterior steps, decks, porches, guardrails (36 inch) and graspable handrails in good repair; decks and sheds must have been permitted",
+   "Chimney in good repair; certification required if a wood burning appliance is present",
+   "Pools permitted, clean, with self-closing gate and 48 inch minimum enclosure",
+   "Smoke alarms hardwired or 10 year sealed lithium, working, on every level in a common area",
+   "Carbon monoxide alarms on each level in a common area",
+   "ABC fire extinguisher, 10 lbs or under, within 10 feet of the kitchen",
+   "Stove anti-tip device; bathroom, kitchen and dryer ventilation working",
+   "GFI outlets in bathroom, kitchen, laundry and within 6 feet of any water source",
+   "No double keyed exterior locks; no keyed locks on interior doors",
+   "Walls, ceilings and floors in good repair; exterior grounds clean, no unpermitted fire pits"
+  ],
+  "fees": [
+   {
+    "label": "Resale of Dwelling Certificate, single unit dwelling (includes one re-inspection)",
+    "amount": "$100.00",
+    "quote": "Single Unit Dwelling:$100.00 2nd Re-inspection: $35.00 (includes one re-inspection)",
+    "source_url": "https://www.glassboro.org/s/Resale-CO-App-2026-FILLABLE.pdf",
+    "verified": true
+   },
+   {
+    "label": "Second re-inspection (Resale of Dwelling Certificate)",
+    "amount": "$35.00",
+    "quote": "Single Unit Dwelling:$100.00 2nd Re-inspection: $35.00 (includes one re-inspection)",
+    "source_url": "https://www.glassboro.org/s/Resale-CO-App-2026-FILLABLE.pdf",
+    "verified": true
+   },
+   {
+    "label": "Transfer of Title (settlement before violations are fixed), single unit dwelling, includes one re-inspection",
+    "amount": "$125.00",
+    "quote": "Single Unit Dwelling:$125.00 (includes one re-inspection) 2nd Re-inspection: $35.00",
+    "source_url": "https://www.glassboro.org/s/Transfer-of-Title-App-2026-FILLABLE.pdf",
+    "verified": true
+   }
+  ],
+  "how_to_apply": "Fill out the Application for Resale of Dwelling Certificate (it includes the Bureau of Fire Prevention smoke/CO/extinguisher application and a rental acknowledgement the buyer must sign even if the home will not be rented) and return it to the Code Enforcement Office, 10 S. Poplar Street, Glassboro, or email Katy Harrell at Kharrell@glassboro.org. Inspections are by appointment only and all paperwork must be in before the certificate is issued. If the home sells with open violations, use the Application for Transfer of Title instead; the buyer signs a notarized hold harmless agreement to fix the violations within 90 days.",
+  "application_url": "https://www.glassboro.org/s/Resale-CO-App-2026-FILLABLE.pdf",
+  "department_url": "https://www.glassboro.org/housing-code",
+  "phone": "856-881-9230 ext. 88140",
+  "email": "kharrell@glassboro.org",
+  "evidence": [
+   {
+    "url": "https://www.glassboro.org/s/Transfer-of-Title-App-2026-FILLABLE.pdf",
+    "quote": "Properties are not permitted to go to settlement without proper Resale CO/Transfer of Title.",
+    "doc_date": "2026-02",
+    "via": "pdf",
+    "verified": true
+   },
+   {
+    "url": "https://www.glassboro.org/s/Resale-CO-App-2026-FILLABLE.pdf",
+    "quote": "Inspections are done by appointment only. All paperwork must be submitted before Certificate is issued.",
+    "doc_date": "2026-02",
+    "via": "pdf",
+    "verified": true
+   },
+   {
+    "url": "https://www.glassboro.org/s/Transfer-of-Title-App-2026-FILLABLE.pdf",
+    "quote": "In order for settlement to take place prior to the issuance of a Resale of Dwelling Certificate, the Glassboro Code Enforcement may issue a “Transfer of Title” only, based upon the specific violations noted being corrected within 90 days of the date of this letter.",
+    "doc_date": "2026-02",
+    "via": "pdf",
+    "verified": true
+   },
+   {
+    "url": "https://www.glassboro.org/s/Resale-CO-App-2026-FILLABLE.pdf",
+    "quote": "A Resale Certificate will not be issued without this form being completed.",
+    "doc_date": "2026-02",
+    "via": "pdf",
+    "verified": true
+   }
+  ],
+  "confidence": "high",
+  "notes": "The 2026 forms (PDF created 2026-02-11) are linked from the Housing & Code page. The Construction page still links an older 'ResaleCert.pdf' (2024-09) with the same $100 / $35 fees. Only a single-unit fee is printed; for more than one unit the form asks for a separate page, so ask the office about the fee for a 2-family home. The office checks RCA (Regional Contribution Agreement) and open permits before issuing ('RCA checked' and 'Permits checked' boxes). The checklist is from February 2024 ('Resale Violations', https://www.glassboro.org/s/Violation-Log.pdf). Rentals need a separate certificate of rental registration under Borough Code Chapter 379 (rental only). No lead time or validity period is published."
+ },
+ "fire_cert": {
+  "requirements": [
+   "Smoke alarms must be hardwired or 10 year sealed lithium, on every level of the home in a common area (Borough resale checklist)",
+   "Carbon monoxide alarms on each level of the home in a common area (Borough resale checklist)",
+   "ABC fire extinguisher, 10 lbs or under, within 10 feet of the kitchen (Borough resale checklist)"
+  ],
+  "authorities": [
+   {
+    "name": "Borough of Glassboro Bureau of Fire Prevention (Glassboro Fire Department)",
+    "type": "municipal_fire_bureau",
+    "area_served": "Entire borough",
+    "lead_time": "Request more than 10 business days before the change of occupant for the lowest fee",
+    "fees": [
+     {
+      "label": "Request more than 10 business days before change of occupant",
+      "amount": "$ 45.00",
+      "quote": "1. Request for a smoke certificate more than 10 business days prior to the change of occupant: $ 45.00",
+      "source_url": "https://www.glassboro.org/s/Resale-CO-App-2026-FILLABLE.pdf",
+      "verified": true
+     },
+     {
+      "label": "Request 4 to 10 business days before change of occupant",
+      "amount": "$ 90.00",
+      "quote": "2. Request for a smoke certificate received 4 to 10 business days prior to the change of occupant: $ 90.00",
+      "source_url": "https://www.glassboro.org/s/Resale-CO-App-2026-FILLABLE.pdf",
+      "verified": true
+     },
+     {
+      "label": "Request fewer than 4 business days before change of occupant",
+      "amount": "$ 160.00",
+      "quote": "3. Request for a smoke certificate received fewer than 4 business days prior to the change of occupant: $ 160.00",
+      "source_url": "https://www.glassboro.org/s/Resale-CO-App-2026-FILLABLE.pdf",
+      "verified": true
+     }
+    ],
+    "how_to_apply": "Complete page 2 of the Borough resale packet, 'Application for Smoke, CO Monitor & Fire Extinguisher Inspection', and submit it with the Resale of Dwelling Certificate application to 10 S. Poplar Street. The smoke, CO and extinguisher inspection is done at the same time as the resale inspection by the same inspector.",
+    "application_url": "https://www.glassboro.org/s/Resale-CO-App-2026-FILLABLE.pdf",
+    "department_url": "https://www.glassboro.org/fire-department",
+    "phone": "856-881-9230 ext. 88350",
+    "email": "kdamico@glassboro.org",
+    "evidence": [
+     {
+      "url": "https://www.glassboro.org/s/Resale-CO-App-2026-FILLABLE.pdf",
+      "quote": "The application fee for a certificate of smoke alarm, carbon monoxide alarm, and portable fire extinguisher compliance, as required by N.J.AC. 5:70-2.3 shall be based upon the amount of time remaining before the change of occupant is expected, as follows:",
+      "doc_date": "2026-02",
+      "via": "pdf",
+      "verified": true
+     },
+     {
+      "url": "https://www.glassboro.org/s/Resale-CO-App-2026-FILLABLE.pdf",
+      "quote": "Please note: the inspection for the smoke, carbon and fire extinguisher will happen at the same time as the Certificate of Resale inspection with the same inspector.",
+      "doc_date": "2026-02",
+      "via": "pdf",
+      "verified": true
+     },
+     {
+      "url": "https://nj.gov/dca/dfs/pdf/ANNUAL%20REGISTRY/THIRD%20QUARTER%20LEA%20REGISTRY%202026.pdf",
+      "quote": "F Glassboro Borough",
+      "doc_date": "2026-07",
+      "via": "pdf",
+      "verified": true
+     }
+    ],
+    "confidence": "high"
+   }
+  ],
+  "notes": "The DCA LEA Registry (July 2026) lists the Glassboro Fire Department ('F') as the fire code enforcing agency. Glassboro has no fire district. The smoke certificate fee applies in addition to the Resale of Dwelling Certificate fee. The same fee schedule appears in the Transfer of Title packet and the 2024 ResaleCert.pdf."
+ },
+ "other_items": [
+  {
+   "label": "Buyer rental acknowledgement",
+   "detail": "The buyer must sign the Acknowledgement for Rental Property and return it with the application, even if the home will not be rented; no Resale Certificate is issued without it.",
+   "source_url": "https://www.glassboro.org/s/Resale-CO-App-2026-FILLABLE.pdf"
+  },
+  {
+   "label": "Open permits and RCA check",
+   "detail": "The office-use section has 'RCA checked' and 'Permits checked' boxes, so open permits are reviewed before the certificate is issued.",
+   "source_url": "https://www.glassboro.org/s/Resale-CO-App-2026-FILLABLE.pdf"
+  },
+  {
+   "label": "Transfer of Title hold harmless agreement",
+   "detail": "For settlement before violations are fixed, buyers sign a notarized hold harmless agreement, may not occupy until health and safety violations are corrected, and must correct the listed violations within 90 days.",
+   "source_url": "https://www.glassboro.org/s/Transfer-of-Title-App-2026-FILLABLE.pdf"
+  },
+  {
+   "label": "Sewer or septic disclosure",
+   "detail": "The application asks whether the home is on public sewer or septic/cesspool.",
+   "source_url": "https://www.glassboro.org/s/Resale-CO-App-2026-FILLABLE.pdf"
+  }
+ ],
+ "open_questions": [
+  "Fee for a 2-family home (form lists only a single unit dwelling fee).",
+  "How far ahead to apply for the resale inspection and how long the certificate is valid are not published."
+ ],
+ "verification": {
+  "fees": 6,
+  "fee_ok": 6,
+  "fee_bad": 0,
+  "fee_unchecked": 0,
+  "quotes": 7,
+  "q_ok": 7,
+  "q_bad": 0,
+  "q_unchecked": 0
+ }
+}

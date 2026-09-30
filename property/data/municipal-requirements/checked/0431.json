@@ -1,0 +1,189 @@
+{
+ "municipality_code": "0431",
+ "municipality": "Somerdale Borough",
+ "county": "CAMDEN",
+ "checked_at": "2026-09-30",
+ "resale_co": {
+  "status": "required",
+  "name": "Certificate of Compliance / Certificate of Continued Occupancy (CCO), Residential Safety Inspection",
+  "issued_by": "Office of the Fire Marshal (Somerdale Fire Prevention Bureau)",
+  "lead_time": "Apply 11 or more working days before settlement for the lowest fee",
+  "valid_for": "",
+  "requirements": [
+   "A representative must be on location for the inspection",
+   "Lead paint certification for any house built before 1978 (application form; the guideline sheet labels this as for rental properties)",
+   "House numbers in Arabic lettering, 3 inches, on the front wall or porch, 30 inches above ground",
+   "Smoke alarm on each floor and in each bedroom; 10-year sealed battery alarms where none exist or when replacing battery alarms; hardwired alarms may not be replaced with battery alarms",
+   "Carbon monoxide detector on each floor",
+   "2A/10BC fire extinguisher, not over 10 lbs, wall mounted about 5 ft from the ground (waist level accepted), within 10 ft of the kitchen and in view",
+   "Sidewalks and driveways with no cracks or unevenness, no skim coating or ramping; must be visible and clear of snow, ice and parked cars",
+   "Front and rear porch or deck well maintained and sturdy",
+   "Windows operable and in decent condition",
+   "Firmly secured railing on stairs with 4 or more steps",
+   "Water check: toilets flush, drains work, hot water",
+   "Covers on all light switches and receptacles",
+   "No holes in walls, floors or ceilings; painted",
+   "Sump pump must not be tied into the sewer",
+   "Yard and property maintained (grass cut, trimmed)",
+   "Secondary power source labels on electric panel and meter if there is solar or a generator; solar panels and EV chargers must have been permitted",
+   "Any open permits must be closed / finalized"
+  ],
+  "fees": [
+   {
+    "label": "Single family, 11+ working days before settlement",
+    "amount": "$70.00",
+    "quote": "ELEVEN (11) + WORKING DAYS $70.00",
+    "source_url": "https://somerdale-nj.com/wp-content/uploads/2026/05/Single-Family-Dewelling.pdf",
+    "verified": "eye"
+   },
+   {
+    "label": "Single family, 4 to 10 working days before settlement",
+    "amount": "$90.00",
+    "quote": "FOUR (4) TO TEN (10) WORKING DAYS $90.00",
+    "source_url": "https://somerdale-nj.com/wp-content/uploads/2026/05/Single-Family-Dewelling.pdf",
+    "verified": "eye"
+   },
+   {
+    "label": "Single family, 1 to 3 working days before settlement",
+    "amount": "$161.00",
+    "quote": "THREE (3) TO ONE (1) WORKING DAYS $161.00",
+    "source_url": "https://somerdale-nj.com/wp-content/uploads/2026/05/Single-Family-Dewelling.pdf",
+    "verified": "eye"
+   },
+   {
+    "label": "Reinspection (each)",
+    "amount": "$25.00",
+    "quote": "A $25.00 FEE WILL BE REQUIRED FOR ALL REINSPECTIONS",
+    "source_url": "https://somerdale-nj.com/wp-content/uploads/2026/05/Single-Family-Dewelling.pdf",
+    "verified": "eye"
+   }
+  ],
+  "how_to_apply": "Fill out the Application for Certificate of Compliance, Single Family Dwelling completely and submit it with a check or money order payable to the Somerdale Fire Prevention Bureau. Contact the Fire Marshal's office at 856-783-6320 ext. 2100 or dmarx@somerdale-nj.com. Borough Hall is at 105 Kennedy Blvd, open Mon to Thu 8 AM to 5:15 PM, closed Friday.",
+  "application_url": "https://somerdale-nj.com/wp-content/uploads/2026/05/Single-Family-Dewelling.pdf",
+  "department_url": "https://somerdale-nj.com/departments/fire-marshal/",
+  "phone": "856-783-6320 ext. 2100",
+  "email": "dmarx@somerdale-nj.com",
+  "evidence": [
+   {
+    "url": "https://somerdale-nj.com/departments/fire-marshal/",
+    "quote": "The Office of the Fire Marshal is responsible for inspections not only for Special Events, but inspections prior to a new business opening as well as Certificate of Occupancy inspections prior to settlement on the purchase of a home or renting to a tenant.",
+    "doc_date": "",
+    "via": "page",
+    "verified": true
+   },
+   {
+    "url": "https://somerdale-nj.com/departments/construction/",
+    "quote": "If you are moving into Somerdale, or renting a property, you are required to have your property inspected before you move in.",
+    "doc_date": "",
+    "via": "page",
+    "verified": true
+   },
+   {
+    "url": "https://somerdale-nj.com/wp-content/uploads/2026/05/Single-Family-Dewelling.pdf",
+    "quote": "A CHECK OR MONEY ORDER PAYABLE TO THE SOMERDALE FIRE PREVENTION BUREAU MUST ACCOMPANY THIS APPLICATION AND MUST BE SUBMITTTED UNDER THE FOLLOWING PAY SCHEDULE:",
+    "doc_date": "2026-01 (form marked djm-01/7/2026; scanned PDF uploaded 2026-05)",
+    "via": "pdf",
+    "verified": "eye"
+   },
+   {
+    "url": "https://somerdale-nj.com/wp-content/uploads/2026/05/Guidelines.pdf",
+    "quote": "GUIDELINE FOR RESIDENTIAL SAFETY INSPECTION (CCO) (THIS IS ONLY A SAMPLE OF ITEMS THE INSPECTOR MAY CHECK FOR)",
+    "doc_date": "2026-05 (marked djm-5-20-26)",
+    "via": "pdf",
+    "verified": null
+   }
+  ],
+  "confidence": "high",
+  "notes": "In Somerdale one inspection by the Fire Marshal's office covers both the town resale certificate and the smoke/CO/extinguisher items. The application and guideline PDFs are scanned images, so quotes were transcribed from the page images (the fee column has alignment spaces between $ and the number). The published application is for a single family dwelling; no separate 2-family sale form was found. A separate rental Certificate of Compliance application (Word doc, same fee schedule) and landlord registration apply to rentals. Construction office (open permits): 856-783-6320 ext. 1500, mwadleigh@somerdale-nj.com."
+ },
+ "fire_cert": {
+  "requirements": [
+   "Smoke alarm on each floor and in each bedroom",
+   "10-year sealed battery alarms where no alarms exist or when replacing battery alarms; hardwired alarms must not be replaced with battery alarms",
+   "Carbon monoxide detector on each floor",
+   "2A/10BC fire extinguisher, not to exceed 10 lbs, wall mounted about 5 ft from the ground (waist level accepted), within 10 ft of the kitchen, in view",
+   "Secondary power source labels on electric panel and meter (as of 2/3/25) where solar or generators exist"
+  ],
+  "authorities": [
+   {
+    "name": "Somerdale Office of the Fire Marshal / Somerdale Fire Prevention Bureau",
+    "type": "municipal_fire_bureau",
+    "area_served": "Entire borough",
+    "lead_time": "11 or more working days before settlement for the lowest fee",
+    "fees": [
+     {
+      "label": "Combined CCO and smoke/CO/extinguisher inspection, 11+ working days before settlement",
+      "amount": "$70.00",
+      "quote": "ELEVEN (11) + WORKING DAYS $70.00",
+      "source_url": "https://somerdale-nj.com/wp-content/uploads/2026/05/Single-Family-Dewelling.pdf",
+      "verified": "eye"
+     },
+     {
+      "label": "Combined inspection, 4 to 10 working days",
+      "amount": "$90.00",
+      "quote": "FOUR (4) TO TEN (10) WORKING DAYS $90.00",
+      "source_url": "https://somerdale-nj.com/wp-content/uploads/2026/05/Single-Family-Dewelling.pdf",
+      "verified": "eye"
+     },
+     {
+      "label": "Combined inspection, 1 to 3 working days",
+      "amount": "$161.00",
+      "quote": "THREE (3) TO ONE (1) WORKING DAYS $161.00",
+      "source_url": "https://somerdale-nj.com/wp-content/uploads/2026/05/Single-Family-Dewelling.pdf",
+      "verified": "eye"
+     }
+    ],
+    "how_to_apply": "Same application as the CCO: submit the Single Family Dwelling Certificate of Compliance application with a check or money order payable to the Somerdale Fire Prevention Bureau.",
+    "application_url": "https://somerdale-nj.com/wp-content/uploads/2026/05/Single-Family-Dewelling.pdf",
+    "department_url": "https://somerdale-nj.com/departments/fire-marshal/",
+    "phone": "856-783-6320 ext. 2100",
+    "email": "dmarx@somerdale-nj.com",
+    "evidence": [
+     {
+      "url": "https://somerdale-nj.com/wp-content/uploads/2026/05/Guidelines.pdf",
+      "quote": "FIRE EXTINGUISHER (INSTALLED 5 FT. FROM GROUND, MOUNTED ON THE WALL, WITHIN 10 FT OF THE KITCHEN IN VIEW OF PUBLIC) (MOUNTED WAIST LEVEL IS ACCEPTED) MUST BE A 2A/10BC FIRE EXTINGUISHER, not to exceed 10lbs.",
+      "doc_date": "2026-05",
+      "via": "pdf",
+      "verified": null
+     },
+     {
+      "url": "https://somerdale-nj.com/wp-content/uploads/2026/05/Guidelines.pdf",
+      "quote": "SMOKE ALARMS (1 ON EACH FLOOR AND IN EACH BEDROOM) Ten Year Sealed battery-powered single station smoke alarms shall be installed where no smoke alarms exit or when replacing similar battery-powered single station smoke alarms.",
+      "doc_date": "2026-05",
+      "via": "pdf",
+      "verified": null
+     }
+    ],
+    "confidence": "high"
+   }
+  ],
+  "notes": "No separate smoke certificate fee was found; the fire safety items are part of the single CCO inspection run by the Fire Marshal's office. Somerdale's May 2026 guideline still requires a fire extinguisher."
+ },
+ "other_items": [
+  {
+   "label": "Open permits must be closed",
+   "detail": "Any open permits must be closed / finalized; solar panels and EV chargers must have been permitted.",
+   "source_url": "https://somerdale-nj.com/wp-content/uploads/2026/05/Guidelines.pdf"
+  },
+  {
+   "label": "Lead paint certification for pre-1978 homes",
+   "detail": "The single family application states any house built before 1978 must have a lead paint certification provided (citing N.J. P.L. 2021, c. 182, the rental lead law).",
+   "source_url": "https://somerdale-nj.com/wp-content/uploads/2026/05/Single-Family-Dewelling.pdf"
+  }
+ ],
+ "open_questions": [
+  "Which form and fee applies to a 2-family home sale (only a single family application is published).",
+  "Whether the pre-1978 lead paint certification is enforced on owner-occupied sales or only when the buyer will rent (the guideline sheet says rental properties).",
+  "Certificate validity period not published."
+ ],
+ "verification": {
+  "fees": 7,
+  "fee_ok": 7,
+  "fee_bad": 0,
+  "fee_unchecked": 0,
+  "quotes": 6,
+  "q_ok": 3,
+  "q_bad": 0,
+  "q_unchecked": 3
+ }
+}

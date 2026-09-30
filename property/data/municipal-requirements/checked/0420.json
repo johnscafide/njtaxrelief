@@ -1,0 +1,184 @@
+{
+ "municipality_code": "0420",
+ "municipality": "Laurel Springs Borough",
+ "county": "CAMDEN",
+ "checked_at": "2026-09-30",
+ "resale_co": {
+  "status": "required",
+  "name": "Certificate of Property Compliance (CPC)",
+  "issued_by": "Borough of Laurel Springs Office of Property Maintenance and Fire Prevention (Property Maintenance Officer / public officer)",
+  "lead_time": "Notify at least 10 days before the change in occupancy; higher fees for 4 to 9 days and 1 to 3 days notice",
+  "valid_for": "45 days from the date of inspection",
+  "requirements": [
+   "No refuse, garbage, abandoned vehicles, or overgrown brush, weeds or trees",
+   "Sidewalks and driveways free of holes; no standing stormwater",
+   "Foundation, walls, chimney, roof shingles and gutters in good repair",
+   "Porches, landings, stairs, balconies and railings safe",
+   "No broken glass or doors; windows and doors working",
+   "Working smoke detectors and CO detector",
+   "Central heating, air conditioning, kitchen, baths and light fixtures in working order",
+   "No fire or electrical hazards",
+   "Basement and crawl space condition",
+   "Property tax, sewer and property code fee balances are checked by Borough staff"
+  ],
+  "fees": [
+   {
+    "label": "CPC, home resale, 10+ days notice",
+    "amount": "$50",
+    "quote": "Certificate of Property Compliance - (Home Resale) - $50 for 10+ days; $70 for 4 to 9 days; $125 for 1 to 3 days.",
+    "source_url": "https://www.laurelsprings-nj.com/1213/Fire-Prevention-Property-Maintenance",
+    "verified": true
+   },
+   {
+    "label": "CPC, home resale, 4 to 9 days notice",
+    "amount": "$70",
+    "quote": "Certificate of Property Compliance - (Home Resale) - $50 for 10+ days; $70 for 4 to 9 days; $125 for 1 to 3 days.",
+    "source_url": "https://www.laurelsprings-nj.com/1213/Fire-Prevention-Property-Maintenance",
+    "verified": true
+   },
+   {
+    "label": "CPC, home resale, 1 to 3 days notice",
+    "amount": "$125",
+    "quote": "Certificate of Property Compliance - (Home Resale) - $50 for 10+ days; $70 for 4 to 9 days; $125 for 1 to 3 days.",
+    "source_url": "https://www.laurelsprings-nj.com/1213/Fire-Prevention-Property-Maintenance",
+    "verified": true
+   }
+  ],
+  "how_to_apply": "Fill out the Certificate of Property Compliance form (and the Fire Safety Certificate form for a sale) and pay at Borough Hall, 723 West Atlantic Avenue, payable to the Borough of Laurel Springs. Inspectors are notified by email only after payment is received. Fees are non-refundable. The inspector leaves a copy at the property.",
+  "application_url": "https://www.laurelsprings-nj.com/DocumentCenter/View/389/Certificate-of-Property-Compliance",
+  "department_url": "https://www.laurelsprings-nj.com/1213/Fire-Prevention-Property-Maintenance",
+  "phone": "856-784-0500",
+  "email": "dkrawchuk@laurelsprings-nj.com",
+  "evidence": [
+   {
+    "url": "https://www.laurelsprings-nj.com/1213/Fire-Prevention-Property-Maintenance",
+    "quote": "Whenever there shall occur a change in occupancy in any residential property, including one- and two-family homes and apartments, a new certificate of property compliance shall be required. A change in occupancy shall occur in an apartment by a change in tenant or by the execution of a new lease with a new tenant, and in all other dwelling units by sale or lease.",
+    "doc_date": "",
+    "via": "page",
+    "verified": true
+   },
+   {
+    "url": "https://www.laurelsprings-nj.com/1213/Fire-Prevention-Property-Maintenance",
+    "quote": "In the case of the resale of a property, both a Certificate of Property Compliance and Fire Safety are required.",
+    "doc_date": "",
+    "via": "page",
+    "verified": true
+   },
+   {
+    "url": "https://www.laurelsprings-nj.com/DocumentCenter/View/389/Certificate-of-Property-Compliance",
+    "quote": "Certificates of Property Compliance expire 45 days from the date of inspection",
+    "doc_date": "2026-08",
+    "via": "pdf",
+    "verified": true
+   }
+  ],
+  "confidence": "high",
+  "notes": "The page says to see the Annual Fee Schedule for pricing; the form leaves fee amounts blank for staff to fill in, so fees here come from the Fire Prevention / Property Maintenance page. The CPC form asks whether the owner has a valid lead-safe certificate. The Inspector may issue a Conditional CPC letter allowing construction permits first, with no occupancy during construction; both CPC and Fire Safety applications and fees must be filed first. Property Maintenance Officer: Dominic Krawchuk (dkrawchuk@laurelsprings-nj.com); Permit Clerk: Cindy Cheeseman (ccheeseman@laurelsprings-nj.com). Rental CPC has the same fee tiers (rental program)."
+ },
+ "fire_cert": {
+  "requirements": [
+   "Working smoke alarms on every level including basement and within 10 feet of bedroom doors; type depends on build year (hardwired and interconnected for newer homes, in every bedroom for 1991/1992 and later)",
+   "Hardwired smoke detectors may not be replaced with battery units; interconnected detectors must be replaced with compatible ones",
+   "Basement detector within 10 feet of the stairway, not in the stairway",
+   "Two-family homes: detectors at each landing of common hallways and stairs",
+   "Do not place detectors within 5 feet of a kitchen, 3 feet of fans, bathroom doors or supply vents, or 1 foot of a light fixture; detectors must not be painted",
+   "Central-station monitored alarm systems must be certified by a licensed NJ Fire Protection Contractor before the Fire Marshal's inspection",
+   "CO alarm on each sleeping level, in the hallway near every bedroom door, if there is a fuel-burning appliance or attached garage"
+  ],
+  "authorities": [
+   {
+    "name": "Borough of Laurel Springs Office of Fire Prevention and Property Maintenance (Fire Marshal)",
+    "type": "municipal_fire_bureau",
+    "area_served": "Entire borough",
+    "lead_time": "Ten days notice is required for all inspections",
+    "fees": [
+     {
+      "label": "Fire Safety Inspection, home resale, 10+ days notice",
+      "amount": "$45",
+      "quote": "Fire Safety Inspection - (Home Resale) - $45 for 10+ days; $90 for 4 to 9 days; $161 for 1 to 3 days.",
+      "source_url": "https://www.laurelsprings-nj.com/1213/Fire-Prevention-Property-Maintenance",
+      "verified": true
+     },
+     {
+      "label": "Fire Safety Inspection, home resale, 4 to 9 days notice",
+      "amount": "$90",
+      "quote": "Fire Safety Inspection - (Home Resale) - $45 for 10+ days; $90 for 4 to 9 days; $161 for 1 to 3 days.",
+      "source_url": "https://www.laurelsprings-nj.com/1213/Fire-Prevention-Property-Maintenance",
+      "verified": true
+     },
+     {
+      "label": "Fire Safety Inspection, home resale, 1 to 3 days notice",
+      "amount": "$161",
+      "quote": "Fire Safety Inspection - (Home Resale) - $45 for 10+ days; $90 for 4 to 9 days; $161 for 1 to 3 days.",
+      "source_url": "https://www.laurelsprings-nj.com/1213/Fire-Prevention-Property-Maintenance",
+      "verified": true
+     }
+    ],
+    "how_to_apply": "Fill out the Fire Safety Certificate of Compliance form and pay at Borough Hall (payable to the Borough of Laurel Springs) together with the CPC. The Fire Marshal is notified by email after payment.",
+    "application_url": "https://www.laurelsprings-nj.com/DocumentCenter/View/390/Fire-Safety-Certificate-of-Compliance-PDF",
+    "department_url": "https://www.laurelsprings-nj.com/1359/Fire-Safety-Requirements-Smoke-Detectors",
+    "phone": "856-784-0500 ext. 25",
+    "email": "kcheeseman@laurelsprings-nj.com",
+    "evidence": [
+     {
+      "url": "https://www.laurelsprings-nj.com/1213/Fire-Prevention-Property-Maintenance",
+      "quote": "In the case of the resale of a property, both a Certificate of Property Compliance and Fire Safety are required.",
+      "doc_date": "",
+      "via": "page",
+      "verified": true
+     },
+     {
+      "url": "https://www.laurelsprings-nj.com/DocumentCenter/View/390/Fire-Safety-Certificate-of-Compliance-PDF",
+      "quote": "Certifications of Compliance expire 45 days from the date of inspection",
+      "doc_date": "2026-08",
+      "via": "pdf",
+      "verified": true
+     },
+     {
+      "url": "https://nj.gov/dca/dfs/pdf/ANNUAL%20REGISTRY/THIRD%20QUARTER%20LEA%20REGISTRY%202026.pdf",
+      "quote": "F Laurel Springs Borough",
+      "doc_date": "2026-07 (roster as of June 30, 2026)",
+      "via": "pdf",
+      "verified": true
+     },
+     {
+      "url": "https://www.nj.gov/dca/dfs/pdf/fire%20directory_county%20summary/fire_code_enforcement_director.pdf",
+      "quote": "SMOKE DETECTOR COMPLIANCE Name: Laurel Springs Boro Addr: 723 West Atlantic Av Laurel Springs NJ 08021 Phone (856) 784-0500",
+      "doc_date": "2026-09 (directory PDF; fire department survey 5/2026)",
+      "via": "pdf",
+      "verified": true
+     }
+    ],
+    "confidence": "high"
+   }
+  ],
+  "notes": "Fire Marshal: Kenneth J. Cheeseman, 856-784-0500 ext. 25. The DCA LEA Registry (July 2026) lists Laurel Springs' enforcing agency type as 'F' (Fire Department); the Borough website runs it as the combined Office of Fire Prevention and Property Maintenance. The fire certificate expires 45 days from inspection, which is shorter than the usual state 6 months. The Fire Safety form only checks smoke and CO detectors; no extinguisher rules are published."
+ },
+ "other_items": [
+  {
+   "label": "Tax, sewer and code fee balances checked",
+   "detail": "Borough Hall staff record property tax, sewer utility fee and property code fee status on the CPC form.",
+   "source_url": "https://www.laurelsprings-nj.com/DocumentCenter/View/389/Certificate-of-Property-Compliance"
+  },
+  {
+   "label": "Lead-safe certificate question",
+   "detail": "The CPC form asks whether the owner has a valid lead-safe certificate.",
+   "source_url": "https://www.laurelsprings-nj.com/DocumentCenter/View/389/Certificate-of-Property-Compliance"
+  }
+ ],
+ "open_questions": [
+  "Re-inspection fees are not published.",
+  "The Annual Fee Schedule referenced on the page was not found online; fees come from the department web page.",
+  "Portable fire extinguisher requirement is not mentioned on the Borough's fire safety materials."
+ ],
+ "verification": {
+  "fees": 6,
+  "fee_ok": 6,
+  "fee_bad": 0,
+  "fee_unchecked": 0,
+  "quotes": 7,
+  "q_ok": 7,
+  "q_bad": 0,
+  "q_unchecked": 0
+ }
+}

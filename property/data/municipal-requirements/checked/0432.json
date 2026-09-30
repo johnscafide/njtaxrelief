@@ -1,0 +1,124 @@
+{
+ "municipality_code": "0432",
+ "municipality": "Stratford Borough",
+ "county": "CAMDEN",
+ "checked_at": "2026-09-30",
+ "resale_co": {
+  "status": "not_found",
+  "name": "",
+  "issued_by": "",
+  "lead_time": "",
+  "valid_for": "",
+  "requirements": [],
+  "fees": [],
+  "how_to_apply": "",
+  "application_url": "",
+  "department_url": "https://stratfordnj.org/code-enforcement/",
+  "phone": "856-783-0600",
+  "email": "codeenforcement@stratfordnj.org",
+  "evidence": [
+   {
+    "url": "https://library.municode.com/nj/stratford_borough/codes/code_of_ordinances",
+    "quote": "No person, group of persons, association, partnership or corporation or any combination thereof who owns, manages, conducts or operates a dwelling unit shall rent, lease, let, sublet or permit the same to be occupied or re-rented by another without first securing from the public officer of the borough a certificate of occupancy for said dwelling unit.",
+    "doc_date": "2016-09 (code codified through Ord. 2016:11; section 15.04.065)",
+    "via": "page",
+    "verified": null
+   },
+   {
+    "url": "https://stratfordnj.org/borough-forms/",
+    "quote": "Smoke and Fire Certificates of Occupancy General Information instructions (pdf) Application application (link)",
+    "doc_date": "",
+    "via": "page",
+    "verified": true
+   }
+  ],
+  "confidence": "low",
+  "notes": "No municipal resale CO for 1-2 family sales was found. The Borough code on Municode (codified only through 2016) has a certificate of occupancy for rental units (section 15.04.065, $40 fee) but no resale inspection. The Borough forms page lists only the smoke/fire certificate (handled by NJ DCA) for sales. A code search for 'resale', 'transfer of title' and 'prior to the sale' found only the fire code sections. Silence is not proof, so status is not_found. Sections 16.28.030 and 17.52.500 mention 'change of ownership' in a site plan context but expressly say 'A site plan is not required for single-family or two-dwelling unit buildings.'"
+ },
+ "fire_cert": {
+  "requirements": [],
+  "authorities": [
+   {
+    "name": "NJ Department of Community Affairs, Division of Fire Safety, Bureau of Fire Code Enforcement",
+    "type": "state_dca",
+    "area_served": "Entire borough",
+    "lead_time": "",
+    "fees": [
+     {
+      "label": "Smoke/CO certificate, application more than 10 business days before change of occupant (state fee rule, 2017)",
+      "amount": "$45.00",
+      "quote": "1. Requests for a CSDCMAC received more than 10 business days prior to the change of occupant: $45.00;",
+      "source_url": "https://www.nj.gov/dca/divisions/dfs/codes/regulations/adopted_amendment_5_10_2.9.pdf",
+      "verified": null
+     },
+     {
+      "label": "Smoke/CO certificate, application 4 to 10 business days before change of occupant (state fee rule, 2017)",
+      "amount": "$90.00",
+      "quote": "2. Requests for a CSDCMAC received four to 10 business days prior to the change of occupant: $90.00; and",
+      "source_url": "https://www.nj.gov/dca/divisions/dfs/codes/regulations/adopted_amendment_5_10_2.9.pdf",
+      "verified": null
+     },
+     {
+      "label": "Smoke/CO certificate, application fewer than 4 business days before change of occupant (state fee rule, 2017)",
+      "amount": "$161.00",
+      "quote": "3. Requests for a CSDCMAC received fewer than four business days prior to the change of occupant: $161.00.",
+      "source_url": "https://www.nj.gov/dca/divisions/dfs/codes/regulations/adopted_amendment_5_10_2.9.pdf",
+      "verified": null
+     }
+    ],
+    "how_to_apply": "Apply and pay online through the NJ DCA service portal: click 'Apply for Smoke Certification' at firesolutions.dca.nj.gov.",
+    "application_url": "https://firesolutions.dca.nj.gov/ultra-fire-home/smoke-application-create/",
+    "department_url": "https://www.nj.gov/dca/dfs/offices/bfce.shtml",
+    "phone": "609-633-6106",
+    "email": "",
+    "evidence": [
+     {
+      "url": "https://stratfordnj.org/pdf/forms/DCA-Smoke-Fire-CO.pdf",
+      "quote": "All Certificates of Occupancy for the Borough of Stratford will now be handled by the New Jersey Department of Community Affairs (DCA). You can access their service portal at: https://firesolutions.dca.nj.gov/",
+      "doc_date": "2025-06 (file last modified)",
+      "via": "pdf",
+      "verified": true
+     },
+     {
+      "url": "https://stratfordnj.org/pdf/forms/DCA-Smoke-Fire-CO.pdf",
+      "quote": "Click on “Apply for Smoke Certification” This will take you to the online form where you can schedule and pay for your Certificate of Occupancy.",
+      "doc_date": "2025-06 (file last modified)",
+      "via": "pdf",
+      "verified": true
+     },
+     {
+      "url": "https://www.nj.gov/dca/dfs/pdf/fire%20directory_county%20summary/state_towns%207_17_26.pdf",
+      "quote": "STRATFORD 0432 SC",
+      "doc_date": "2026-07-17",
+      "via": "pdf",
+      "verified": true
+     },
+     {
+      "url": "https://www.nj.gov/dca/dfs/pdf/fire%20directory_county%20summary/state_towns%207_17_26.pdf",
+      "quote": "SC = Smoke Certs",
+      "doc_date": "2026-07-17",
+      "via": "pdf",
+      "verified": true
+     }
+    ],
+    "confidence": "high"
+   }
+  ],
+  "notes": "The DCA state-towns list (revised 7/17/2026) marks Stratford as a town where the state handles smoke certs, matching the Borough's own notice. The Borough code (section 8.20.110, 2006 amendments) still shows an old local Bureau of Fire Safety fee schedule ($45 / $70 / $125); that local schedule appears superseded by the move to DCA and is not listed as a current fee. The DCA fee figures come from the state rule N.J.A.C. 5:70-2.9(d) as published in the NJ Register on October 2, 2017 and posted on the DCA site; the DCA portal computes the fee at checkout and the current portal amount was not visible without applying. DCA Bureau of Fire Code Enforcement phone is the bureau chief line listed on the DCA page."
+ },
+ "other_items": [],
+ "open_questions": [
+  "Confirm with Stratford Code Enforcement (856-783-0600) that no resale CO or resale inspection is required for 1-2 family sales; the online code is only current through 2016 and the Borough has adopted ordinances since.",
+  "Confirm the current DCA smoke certificate fee charged at checkout on the DCA portal; the only DCA-published fee text found is the 2017 N.J.A.C. 5:70-2.9 amendment."
+ ],
+ "verification": {
+  "fees": 3,
+  "fee_ok": 0,
+  "fee_bad": 0,
+  "fee_unchecked": 3,
+  "quotes": 6,
+  "q_ok": 5,
+  "q_bad": 0,
+  "q_unchecked": 1
+ }
+}
