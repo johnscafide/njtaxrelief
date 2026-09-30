@@ -1,4 +1,5 @@
 // Git-pinned production bootstrap: town CO and fire certificate requirements on the Transactions page.
 // Only person-checked towns show requirements, fees or an application link (PR #542).
+// A person-checked row always replaces older saved evidence (PR #544).
 import "jsr:@supabase/functions-js/edge-runtime.d.ts";
-await import("https://raw.githubusercontent.com/johnscafide/njtaxrelief/a7cfa78c2a9182b9a19c9d3e039b00597d38a5b1/supabase/functions/transaction-municipal-requirements/index.ts");
+await import("https://raw.githubusercontent.com/johnscafide/njtaxrelief/4e35cbd56379b55ba2c213188a23770b402f51d2/supabase/functions/transaction-municipal-requirements/index.ts");
