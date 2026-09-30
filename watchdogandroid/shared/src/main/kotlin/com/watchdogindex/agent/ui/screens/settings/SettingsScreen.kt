@@ -312,7 +312,7 @@ private fun LabelledValue(label: String, value: String) {
     val t = WatchdogTheme.type
     Column {
         Text(text = label, color = c.muted, style = t.caption)
-        Text(text = value, color = c.ink, style = t.body)
+        Text(text = value, color = c.ink, style = t.kvLabel)
     }
 }
 
