@@ -72,6 +72,15 @@ All actions require a Backoffice session except the four retired ones.
 
 The original BTC application remains at `/btc-legacy.html` while Open House, Property IQ and the remaining campaign helpers move over.
 
+## Town Info Reviews
+
+`/backoffice/town-info` (physical `property/backoffice/town-info/`) is the review queue for the public Town Needs page at `https://www.watchdogindex.com/town-needs`. Anyone with that link can send what they know about a red-flag town's resale CO or smoke / CO alarm certificate, with the town's document (PDF or photo, 10 MB max) or an https link. A typed answer alone is refused.
+
+- Only an account that is a Watchdog developer **and** in `backoffice_operators` can use the queue (`api/watchdog-backoffice-town-needs.js` checks both on the server).
+- Uploads land in the private `town-info-submissions` bucket through a one-time signed upload URL. `api/watchdog-town-needs.js` then checks the first bytes really are a PDF or an image and deletes anything else. Submissions are rate limited per client and capped at 100 a day overall.
+- **Approve** copies the file to the public `town-info-evidence` bucket (it becomes the source agents can open) and deletes the private copy. **Reject** deletes the private copy. Neither changes what agents see: approved info is added to `property/data/municipal-requirements/` and published with the next checked-requirements migration, which also removes the item from the Town Needs list.
+- The list itself is `property/data/municipal-requirements/town-needs.json`, built by `property/scripts/build_town_needs.py` from the live checked data plus `unpublished-needs.json` (red-flag towns researched but not published; only the missing items are kept).
+
 ## Server components
 
 - `backoffice-api` — session-checked lead reads/writes, pipeline, follow-ups, notes, contact log, assignment, Google validation, BoldTrail send and CSV export.

@@ -13,9 +13,10 @@ const shell = read('property/backoffice/backoffice-shell.js');
 const leadiq = read('property/backoffice/leadiq-tools.js');
 const api = read('supabase/functions/backoffice-api/index.ts');
 const gateway = read('api/watchdog-backoffice-gateway.js');
-const subpages = ['property/backoffice/reviews/index.html', 'property/backoffice/professional-verifications/index.html', 'property/backoffice/realestate/index.html'];
+const subpages = ['property/backoffice/reviews/index.html', 'property/backoffice/professional-verifications/index.html', 'property/backoffice/town-info/index.html', 'property/backoffice/realestate/index.html'];
 const backofficeHtml = [page, ...subpages.map(read)];
-const backofficeJs = [js, shell, leadiq];
+const townInfo = read('property/backoffice/town-info/town-info.js');
+const backofficeJs = [js, shell, leadiq, townInfo];
 
 // ---------- one auth flow ----------
 for (const retired of ['property/backoffice/backoffice-dev-auth.js', 'property/backoffice/backoffice-recovery.js', 'property/backoffice/backoffice-secure.css']) {
@@ -47,7 +48,7 @@ for (const source of [page, js, shell, leadiq, api]) {
 }
 must(!/data-access-require/.test(page.split('</head>')[0].split('<html')[1] || ''), 'Lead Intelligence is gated by the Backoffice session, not data-access-require.');
 must(!/normalizedPath === '\/backoffice'/.test(read('property/js/access-guard.js')), 'access-guard must not special-case /backoffice.');
-must(/data-access-require="developer"/.test(read('property/backoffice/reviews/index.html')) && /data-access-require="developer"/.test(read('property/backoffice/professional-verifications/index.html')), 'Developer tool pages keep their developer gate.');
+must(/data-access-require="developer"/.test(read('property/backoffice/reviews/index.html')) && /data-access-require="developer"/.test(read('property/backoffice/professional-verifications/index.html')) && /data-access-require="developer"/.test(read('property/backoffice/town-info/index.html')), 'Developer tool pages keep their developer gate.');
 must(/client\.rpc\('is_watchdog_developer'\)/.test(shell) && /if\(!developer\)return;\s*refreshBadges\(\);/.test(shell), 'Developer nav and review counts only appear after the server-side developer check.');
 must(!/set_google_key|rotate_access_key|name="google_key"|name="new_key"/.test(page + js), 'The dead Google-key and shared-key forms must be gone.');
 must(page.includes('data-s="google"') && page.includes('data-s="expires"') && page.includes('data-s="who"') && page.includes('id="bo-settings-boldtrail"'), 'Settings must be read-only status: Google, BoldTrail per operator, who is signed in, session expiry.');
@@ -72,7 +73,7 @@ must(/function computeDupes/.test(js), 'Leads sharing an email or phone must be 
 must(js.includes("'intent-high'") && js.includes("'benefit-1k-plus'"), 'Client hashtag preview must match the bucketed server tags.');
 
 // ---------- stylesheets: board design ----------
-for (const path of ['property/backoffice/backoffice-board.css', 'property/backoffice/backoffice.css', 'property/backoffice/leadiq-tools.css', 'property/backoffice/reviews/reviews.css', 'property/backoffice/professional-verifications/professional-verifications.css', 'property/backoffice/realestate/realestate.css']) {
+for (const path of ['property/backoffice/backoffice-board.css', 'property/backoffice/backoffice.css', 'property/backoffice/leadiq-tools.css', 'property/backoffice/reviews/reviews.css', 'property/backoffice/professional-verifications/professional-verifications.css', 'property/backoffice/town-info/town-info.css', 'property/backoffice/realestate/realestate.css']) {
   const css = read(path);
   must(/@media print/.test(css) && /prefers-reduced-motion:\s*reduce/.test(css), `${path} needs print and reduced-motion rules.`);
   must(!/border-left\s*:/.test(css), `${path}: the board design does not use border-left accents.`);

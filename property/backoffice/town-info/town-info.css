@@ -1,0 +1,47 @@
+/* Town Info Reviews (Backoffice owner only). Shell, tokens and buttons come from
+   /property/backoffice/backoffice-board.css. */
+.access-pending body{visibility:hidden}
+.ti-topbar{display:flex;align-items:flex-end;justify-content:space-between;gap:20px;flex-wrap:wrap;margin-bottom:20px}
+.ti-topbar h1{margin:8px 0 6px;font:800 clamp(28px,3vw,40px)/1.08 var(--bo-font);letter-spacing:-.035em}
+.ti-topbar p{margin:0;color:var(--bo-muted);font-size:15px;max-width:780px;line-height:1.5}
+.ti-topbar a{color:var(--bo-navy);font-weight:700}
+.ti-panel{margin-top:16px;border-radius:var(--bo-radius);background:var(--bo-surface);overflow:hidden}
+.ti-panel>header{display:flex;align-items:center;justify-content:space-between;gap:16px;padding:20px 22px;border-bottom:1px solid var(--bo-line)}
+.ti-panel>header h2{margin:6px 0 0;font:800 20px/1.2 var(--bo-font)}
+.ti-panel>header>b{display:grid;min-width:32px;height:32px;padding:0 10px;place-items:center;border-radius:999px;background:var(--bo-sky);color:var(--bo-navy);font:800 13px/1 var(--bo-font)}
+.ti-note{margin:0;padding:12px 22px;border-bottom:1px solid var(--bo-line);background:var(--bo-sand);color:var(--bo-ink);font-size:13px;line-height:1.5}
+.ti-list{display:grid}
+.ti-loading,.ti-empty{padding:24px 22px;color:var(--bo-muted);font-size:14px}
+.ti-empty b{display:block;color:var(--bo-navy);font:800 15px/1.3 var(--bo-font);margin-bottom:4px}
+.ti-empty span{display:block}
+.ti-card{padding:18px 22px;border-top:1px solid var(--bo-line)}
+.ti-card:first-child{border-top:0}
+.ti-card-head h3{margin:0;color:var(--bo-navy);font:800 17px/1.3 var(--bo-font)}
+.ti-card-head h3 small{color:var(--bo-muted);font-weight:700;font-size:13px}
+.ti-card-head p{margin:4px 0 0;color:var(--bo-muted);font-size:13px;overflow-wrap:anywhere}
+.ti-needs{display:flex;flex-wrap:wrap;gap:8px;margin:12px 0;padding:0;list-style:none}
+.ti-needs li{padding:6px 10px;border-radius:10px;background:var(--bo-sky);color:var(--bo-navy);font-size:13px;font-weight:700}
+.ti-answer{padding:12px 14px;border-radius:14px;background:#fff;border:1px solid var(--bo-line);color:var(--bo-ink);font-size:14px;line-height:1.5;white-space:pre-wrap;overflow-wrap:anywhere}
+.ti-muted{margin:0;color:var(--bo-muted);font-size:13px}
+.ti-sources{display:flex;flex-wrap:wrap;gap:10px;margin-top:12px}
+.ti-source{display:inline-flex;align-items:center;gap:8px;min-height:44px;padding:10px 14px;border-radius:12px;border:1px solid var(--bo-line);background:#fff;color:var(--bo-navy);font-weight:800;font-size:14px;text-decoration:none;max-width:100%}
+.ti-source small{color:var(--bo-muted);font-weight:600;font-size:12px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;max-width:260px}
+.ti-source.muted{color:var(--bo-muted);font-weight:600}
+.ti-controls{display:grid;grid-template-columns:minmax(0,1fr) auto;gap:12px;align-items:end;margin-top:14px}
+.ti-controls label{display:grid;gap:6px}
+.ti-controls label span{color:var(--bo-muted);font:800 12px/1.2 var(--bo-font);letter-spacing:.06em;text-transform:uppercase}
+.ti-controls textarea{min-height:44px;padding:10px 12px;border:1px solid var(--bo-line);border-radius:12px;font:500 14px/1.4 inherit;resize:vertical}
+.ti-actions{display:flex;gap:8px;flex-wrap:wrap}
+.ti-approve{background:var(--bo-navy);color:#fff}
+.ti-history{display:flex;justify-content:space-between;gap:12px;padding:14px 22px;border-top:1px solid var(--bo-line)}
+.ti-history:first-child{border-top:0}
+.ti-history b,.ti-history span{display:block}
+.ti-history b{color:var(--bo-navy);font:800 14px/1.3 var(--bo-font)}
+.ti-history span{color:var(--bo-muted);font-size:13px;overflow-wrap:anywhere}
+.ti-history-side{text-align:right;flex:0 0 auto}
+.ti-history-side a{color:var(--bo-navy);font-weight:800;font-size:13px}
+.ti-toast{position:fixed;left:50%;bottom:24px;transform:translate(-50%,20px);opacity:0;pointer-events:none;padding:12px 18px;border-radius:14px;background:var(--bo-navy);color:#fff;font:700 14px/1.3 var(--bo-font);transition:opacity .2s,transform .2s;z-index:50;max-width:calc(100% - 32px)}
+.ti-toast.show{opacity:1;transform:translate(-50%,0)}
+@media (max-width:760px){.ti-controls{grid-template-columns:1fr}.ti-actions .bo-btn{flex:1 1 120px}.ti-history{flex-direction:column}.ti-history-side{text-align:left}}
+@media (prefers-reduced-motion:reduce){.ti-toast{transition:none}}
+@media print{.bo-shell,.ti-controls,.ti-toast,#ti-refresh{display:none!important}.ti-panel{background:#fff}.ti-card,.ti-history{break-inside:avoid}}

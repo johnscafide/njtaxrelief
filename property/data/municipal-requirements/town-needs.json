@@ -1,0 +1,708 @@
+{
+ "generated_by": "property/scripts/build_town_needs.py",
+ "needs": {
+  "co_required": {
+   "label": "Is a resale CO required?",
+   "hint": "Does the town require a certificate or inspection before a one- or two-family home is sold? A town page, letter, form or ordinance that says yes or no."
+  },
+  "co_fee": {
+   "label": "Town certificate (CO) fee",
+   "hint": "The fee schedule or application that lists the resale inspection or certificate fee."
+  },
+  "co_contact": {
+   "label": "Who to call at the town",
+   "hint": "The office, phone number or email that handles resale certificates, from the town's site or a town form."
+  },
+  "fire_fee": {
+   "label": "Fire certificate fee",
+   "hint": "The smoke / CO alarm certificate fee, from the fire official's form or fee sheet."
+  },
+  "fire_contact": {
+   "label": "Who to call for the fire certificate",
+   "hint": "The fire official or bureau that issues the smoke / CO alarm certificate, with a phone number or email."
+  }
+ },
+ "towns": [
+  {
+   "code": "0103",
+   "town": "Brigantine",
+   "county": "Atlantic",
+   "live": false,
+   "needs": [
+    "co_required"
+   ]
+  },
+  {
+   "code": "0104",
+   "town": "Buena Borough",
+   "county": "Atlantic",
+   "live": false,
+   "needs": [
+    "co_required"
+   ]
+  },
+  {
+   "code": "0105",
+   "town": "Buena Vista Township",
+   "county": "Atlantic",
+   "live": false,
+   "needs": [
+    "co_required"
+   ]
+  },
+  {
+   "code": "0110",
+   "town": "Folsom Borough",
+   "county": "Atlantic",
+   "live": false,
+   "needs": [
+    "co_required"
+   ]
+  },
+  {
+   "code": "0111",
+   "town": "Galloway Township",
+   "county": "Atlantic",
+   "live": false,
+   "needs": [
+    "co_required"
+   ]
+  },
+  {
+   "code": "0112",
+   "town": "Hamilton Township",
+   "county": "Atlantic",
+   "live": false,
+   "needs": [
+    "co_required",
+    "fire_fee"
+   ]
+  },
+  {
+   "code": "0113",
+   "town": "Hammonton",
+   "county": "Atlantic",
+   "live": false,
+   "needs": [
+    "co_fee",
+    "fire_fee"
+   ]
+  },
+  {
+   "code": "0114",
+   "town": "Linwood",
+   "county": "Atlantic",
+   "live": false,
+   "needs": [
+    "co_required"
+   ]
+  },
+  {
+   "code": "0120",
+   "town": "Port Republic",
+   "county": "Atlantic",
+   "live": false,
+   "needs": [
+    "co_required"
+   ]
+  },
+  {
+   "code": "0302",
+   "town": "Beverly City",
+   "county": "Burlington",
+   "live": false,
+   "needs": [
+    "co_required"
+   ]
+  },
+  {
+   "code": "0310",
+   "town": "Delran Township",
+   "county": "Burlington",
+   "live": true,
+   "needs": [
+    "co_required"
+   ]
+  },
+  {
+   "code": "0314",
+   "town": "Fieldsboro Borough",
+   "county": "Burlington",
+   "live": false,
+   "needs": [
+    "co_required",
+    "fire_fee"
+   ]
+  },
+  {
+   "code": "0316",
+   "town": "Hainesport Township",
+   "county": "Burlington",
+   "live": false,
+   "needs": [
+    "co_required"
+   ]
+  },
+  {
+   "code": "0317",
+   "town": "Lumberton Township",
+   "county": "Burlington",
+   "live": false,
+   "needs": [
+    "co_required"
+   ]
+  },
+  {
+   "code": "0318",
+   "town": "Mansfield Township",
+   "county": "Burlington",
+   "live": false,
+   "needs": [
+    "co_required"
+   ]
+  },
+  {
+   "code": "0325",
+   "town": "New Hanover Township",
+   "county": "Burlington",
+   "live": false,
+   "needs": [
+    "co_required",
+    "fire_fee"
+   ]
+  },
+  {
+   "code": "0331",
+   "town": "Riverton Borough",
+   "county": "Burlington",
+   "live": false,
+   "needs": [
+    "co_required"
+   ]
+  },
+  {
+   "code": "0335",
+   "town": "Tabernacle Township",
+   "county": "Burlington",
+   "live": false,
+   "needs": [
+    "co_required"
+   ]
+  },
+  {
+   "code": "0339",
+   "town": "Woodland Township",
+   "county": "Burlington",
+   "live": false,
+   "needs": [
+    "co_required"
+   ]
+  },
+  {
+   "code": "0340",
+   "town": "Wrightstown Borough",
+   "county": "Burlington",
+   "live": false,
+   "needs": [
+    "co_required"
+   ]
+  },
+  {
+   "code": "0402",
+   "town": "Audubon Park Borough",
+   "county": "Camden",
+   "live": true,
+   "needs": [
+    "co_required"
+   ]
+  },
+  {
+   "code": "0406",
+   "town": "Berlin Township",
+   "county": "Camden",
+   "live": true,
+   "needs": [
+    "co_required",
+    "co_contact",
+    "fire_fee"
+   ]
+  },
+  {
+   "code": "0410",
+   "town": "Chesilhurst Borough",
+   "county": "Camden",
+   "live": true,
+   "needs": [
+    "co_required"
+   ]
+  },
+  {
+   "code": "0415",
+   "town": "Gloucester Township",
+   "county": "Camden",
+   "live": true,
+   "needs": [
+    "co_required"
+   ]
+  },
+  {
+   "code": "0419",
+   "town": "Hi-Nella Borough",
+   "county": "Camden",
+   "live": true,
+   "needs": [
+    "co_required"
+   ]
+  },
+  {
+   "code": "0428",
+   "town": "Pine Hill Borough",
+   "county": "Camden",
+   "live": true,
+   "needs": [
+    "co_required",
+    "co_contact"
+   ]
+  },
+  {
+   "code": "0432",
+   "town": "Stratford Borough",
+   "county": "Camden",
+   "live": true,
+   "needs": [
+    "co_required"
+   ]
+  },
+  {
+   "code": "0433",
+   "town": "Tavistock Borough",
+   "county": "Camden",
+   "live": true,
+   "needs": [
+    "co_required",
+    "fire_fee"
+   ]
+  },
+  {
+   "code": "0501",
+   "town": "Avalon Borough",
+   "county": "Cape May",
+   "live": false,
+   "needs": [
+    "co_required"
+   ]
+  },
+  {
+   "code": "0504",
+   "town": "Dennis Township",
+   "county": "Cape May",
+   "live": false,
+   "needs": [
+    "co_required"
+   ]
+  },
+  {
+   "code": "0505",
+   "town": "Lower Township",
+   "county": "Cape May",
+   "live": false,
+   "needs": [
+    "co_required"
+   ]
+  },
+  {
+   "code": "0512",
+   "town": "West Cape May Borough",
+   "county": "Cape May",
+   "live": false,
+   "needs": [
+    "co_required"
+   ]
+  },
+  {
+   "code": "0513",
+   "town": "West Wildwood Borough",
+   "county": "Cape May",
+   "live": false,
+   "needs": [
+    "co_required"
+   ]
+  },
+  {
+   "code": "0515",
+   "town": "Wildwood Crest Borough",
+   "county": "Cape May",
+   "live": false,
+   "needs": [
+    "co_required"
+   ]
+  },
+  {
+   "code": "0516",
+   "town": "Woodbine Borough",
+   "county": "Cape May",
+   "live": false,
+   "needs": [
+    "co_required"
+   ]
+  },
+  {
+   "code": "0809",
+   "town": "Logan Township",
+   "county": "Gloucester",
+   "live": true,
+   "needs": [
+    "co_fee",
+    "fire_fee"
+   ]
+  },
+  {
+   "code": "0814",
+   "town": "Paulsboro Borough",
+   "county": "Gloucester",
+   "live": true,
+   "needs": [
+    "co_required",
+    "co_contact",
+    "fire_fee"
+   ]
+  },
+  {
+   "code": "0817",
+   "town": "Swedesboro Borough",
+   "county": "Gloucester",
+   "live": true,
+   "needs": [
+    "co_fee",
+    "fire_fee"
+   ]
+  },
+  {
+   "code": "0824",
+   "town": "Woolwich Township",
+   "county": "Gloucester",
+   "live": true,
+   "needs": [
+    "co_required",
+    "fire_fee"
+   ]
+  },
+  {
+   "code": "0901",
+   "town": "Bayonne",
+   "county": "Hudson",
+   "live": false,
+   "needs": [
+    "co_fee",
+    "fire_fee"
+   ]
+  },
+  {
+   "code": "0905",
+   "town": "Hoboken",
+   "county": "Hudson",
+   "live": false,
+   "needs": [
+    "co_required"
+   ]
+  },
+  {
+   "code": "0910",
+   "town": "Union City",
+   "county": "Hudson",
+   "live": false,
+   "needs": [
+    "co_required",
+    "fire_fee"
+   ]
+  },
+  {
+   "code": "0911",
+   "town": "Weehawken Township",
+   "county": "Hudson",
+   "live": false,
+   "needs": [
+    "co_required"
+   ]
+  },
+  {
+   "code": "1101",
+   "town": "East Windsor Township",
+   "county": "Mercer",
+   "live": false,
+   "needs": [
+    "co_required"
+   ]
+  },
+  {
+   "code": "1105",
+   "town": "Hopewell Borough",
+   "county": "Mercer",
+   "live": false,
+   "needs": [
+    "co_required"
+   ]
+  },
+  {
+   "code": "1106",
+   "town": "Hopewell Township",
+   "county": "Mercer",
+   "live": false,
+   "needs": [
+    "co_required"
+   ]
+  },
+  {
+   "code": "1114",
+   "town": "Princeton",
+   "county": "Mercer",
+   "live": false,
+   "needs": [
+    "co_required"
+   ]
+  },
+  {
+   "code": "1113",
+   "town": "West Windsor Township",
+   "county": "Mercer",
+   "live": false,
+   "needs": [
+    "co_required"
+   ]
+  },
+  {
+   "code": "1202",
+   "town": "Cranbury Township",
+   "county": "Middlesex",
+   "live": false,
+   "needs": [
+    "co_required"
+   ]
+  },
+  {
+   "code": "1208",
+   "town": "Jamesburg Borough",
+   "county": "Middlesex",
+   "live": false,
+   "needs": [
+    "co_required"
+   ]
+  },
+  {
+   "code": "1209",
+   "town": "Metuchen Borough",
+   "county": "Middlesex",
+   "live": false,
+   "needs": [
+    "co_required"
+   ]
+  },
+  {
+   "code": "1211",
+   "town": "Milltown Borough",
+   "county": "Middlesex",
+   "live": false,
+   "needs": [
+    "co_required"
+   ]
+  },
+  {
+   "code": "1212",
+   "town": "Monroe Township",
+   "county": "Middlesex",
+   "live": false,
+   "needs": [
+    "co_required"
+   ]
+  },
+  {
+   "code": "1215",
+   "town": "Old Bridge Township",
+   "county": "Middlesex",
+   "live": false,
+   "needs": [
+    "co_required"
+   ]
+  },
+  {
+   "code": "1224",
+   "town": "Spotswood Borough",
+   "county": "Middlesex",
+   "live": false,
+   "needs": [
+    "co_required"
+   ]
+  },
+  {
+   "code": "2101",
+   "town": "Allamuchy Township",
+   "county": "Warren",
+   "live": false,
+   "needs": [
+    "co_required"
+   ]
+  },
+  {
+   "code": "2103",
+   "town": "Belvidere (Town)",
+   "county": "Warren",
+   "live": false,
+   "needs": [
+    "co_required"
+   ]
+  },
+  {
+   "code": "2104",
+   "town": "Blairstown Township",
+   "county": "Warren",
+   "live": false,
+   "needs": [
+    "co_required"
+   ]
+  },
+  {
+   "code": "2105",
+   "town": "Franklin Township (Warren County)",
+   "county": "Warren",
+   "live": false,
+   "needs": [
+    "co_required"
+   ]
+  },
+  {
+   "code": "2106",
+   "town": "Frelinghuysen Township",
+   "county": "Warren",
+   "live": false,
+   "needs": [
+    "co_required"
+   ]
+  },
+  {
+   "code": "2107",
+   "town": "Greenwich Township (Warren County)",
+   "county": "Warren",
+   "live": false,
+   "needs": [
+    "co_required"
+   ]
+  },
+  {
+   "code": "2108",
+   "town": "Hackettstown (Town)",
+   "county": "Warren",
+   "live": false,
+   "needs": [
+    "co_required"
+   ]
+  },
+  {
+   "code": "2109",
+   "town": "Hardwick Township",
+   "county": "Warren",
+   "live": false,
+   "needs": [
+    "co_required"
+   ]
+  },
+  {
+   "code": "2110",
+   "town": "Harmony Township",
+   "county": "Warren",
+   "live": false,
+   "needs": [
+    "co_required"
+   ]
+  },
+  {
+   "code": "2111",
+   "town": "Hope Township",
+   "county": "Warren",
+   "live": false,
+   "needs": [
+    "co_required"
+   ]
+  },
+  {
+   "code": "2112",
+   "town": "Independence Township",
+   "county": "Warren",
+   "live": false,
+   "needs": [
+    "co_required"
+   ]
+  },
+  {
+   "code": "2113",
+   "town": "Knowlton Township",
+   "county": "Warren",
+   "live": false,
+   "needs": [
+    "co_required"
+   ]
+  },
+  {
+   "code": "2114",
+   "town": "Liberty Township",
+   "county": "Warren",
+   "live": false,
+   "needs": [
+    "co_required"
+   ]
+  },
+  {
+   "code": "2115",
+   "town": "Lopatcong Township",
+   "county": "Warren",
+   "live": false,
+   "needs": [
+    "co_required"
+   ]
+  },
+  {
+   "code": "2116",
+   "town": "Mansfield Township",
+   "county": "Warren",
+   "live": false,
+   "needs": [
+    "co_required"
+   ]
+  },
+  {
+   "code": "2117",
+   "town": "Oxford Township",
+   "county": "Warren",
+   "live": false,
+   "needs": [
+    "co_required"
+   ]
+  },
+  {
+   "code": "2120",
+   "town": "Pohatcong Township",
+   "county": "Warren",
+   "live": false,
+   "needs": [
+    "co_required"
+   ]
+  },
+  {
+   "code": "2122",
+   "town": "Washington Township",
+   "county": "Warren",
+   "live": false,
+   "needs": [
+    "co_required"
+   ]
+  },
+  {
+   "code": "2123",
+   "town": "White Township",
+   "county": "Warren",
+   "live": false,
+   "needs": [
+    "co_required"
+   ]
+  }
+ ]
+}

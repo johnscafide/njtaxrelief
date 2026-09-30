@@ -31,6 +31,10 @@
     "api/watchdog-extension.js": {
       "includeFiles": "{tax-rates.json,equalization-ratios.json,chapter123-ratios-2026.json,property/revaluation-reassessment-2026.json}",
       "maxDuration": 10
+    },
+    "api/watchdog-town-needs.js": {
+      "includeFiles": "property/data/municipal-requirements/town-needs.json",
+      "maxDuration": 10
     }
   },
   "redirects": [
@@ -593,6 +597,18 @@
     {
       "source": "/backoffice/professional-verifications",
       "destination": "/property/backoffice/professional-verifications/index.html"
+    },
+    {
+      "source": "/backoffice/town-info/",
+      "destination": "/property/backoffice/town-info/index.html"
+    },
+    {
+      "source": "/backoffice/town-info",
+      "destination": "/property/backoffice/town-info/index.html"
+    },
+    {
+      "source": "/town-needs",
+      "destination": "/property/town-needs/index.html"
     },
     {
       "source": "/account/profile/",

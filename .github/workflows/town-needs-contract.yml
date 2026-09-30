@@ -1,0 +1,44 @@
+name: Town Needs contract
+
+on:
+  pull_request:
+    paths:
+      - '.github/workflows/town-needs-contract.yml'
+      - 'api/watchdog-town-needs.js'
+      - 'api/watchdog-backoffice-town-needs.js'
+      - 'property/town-needs/**'
+      - 'property/js/town-needs.js'
+      - 'property/css/town-needs.css'
+      - 'property/backoffice/**'
+      - 'property/data/municipal-requirements/**'
+      - 'property/scripts/build_town_needs.py'
+      - 'property/scripts/build_checked_municipal_requirements.py'
+      - 'property/tests/town-needs-contract.mjs'
+      - 'supabase/migrations/*_town_info_submissions.sql'
+      - 'vercel.json'
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  contract:
+    runs-on: ubuntu-latest
+    timeout-minutes: 8
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+      - name: Town list matches the checked data
+        run: python property/scripts/build_town_needs.py --check
+      - name: Submission and review rules
+        run: |
+          node --check api/watchdog-town-needs.js
+          node --check property/js/town-needs.js
+          node --check property/backoffice/town-info/town-info.js
+          node property/tests/town-needs-contract.mjs
+          node property/tests/backoffice-board-contract.mjs
