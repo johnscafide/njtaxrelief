@@ -16,9 +16,11 @@ import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.layout.width
+import androidx.compose.foundation.layout.wrapContentHeight
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.remember
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
@@ -27,6 +29,7 @@ import androidx.compose.ui.geometry.Offset
 import androidx.compose.ui.geometry.Size
 import androidx.compose.ui.graphics.StrokeCap
 import androidx.compose.ui.graphics.drawscope.Stroke
+import androidx.compose.ui.platform.LocalDensity
 import androidx.compose.ui.semantics.Role
 import androidx.compose.ui.semantics.clearAndSetSemantics
 import androidx.compose.ui.semantics.contentDescription
@@ -61,6 +64,22 @@ import kotlin.math.roundToInt
  * (300 units wide) scaled to the card's content width, so proportions match the reference renders at any
  * width. Every chart carries a spoken description; the numbers themselves are in the card text.
  */
+
+/**
+ * Pins a one-line text to the CSS line box it is given, centring the glyphs in it however tall the
+ * platform lays the line out. The mockup's big numbers use `line-height: 1` (a 46 sp line for the 46 sp
+ * count, 38 for the dial number, 12 for its caption); Android and the browser shrink the line to that, but
+ * the desktop harness keeps the font's natural height for a line height at or under the font size, which
+ * pushed the summary card 12 dp and the dial caption 5 dp off the reference. Glyphs may overflow the box
+ * by a few dp above and below, exactly as negative half-leading does in CSS.
+ */
+@Composable
+private fun LineBox(lineHeight: TextUnit, modifier: Modifier = Modifier, content: @Composable () -> Unit) {
+    val height = with(LocalDensity.current) { lineHeight.toDp() }
+    Box(modifier = modifier.height(height), contentAlignment = Alignment.Center) {
+        Box(modifier = Modifier.wrapContentHeight(align = Alignment.CenterVertically, unbounded = true)) { content() }
+    }
+}
 
 /**
  * The Watchdog Score dial: 118 dp, round-capped stroke of 9 SVG units (8.85 dp at 118 dp, scaled with the
@@ -108,9 +127,10 @@ fun ScoreDial(
                 )
             }
         }
+        // `.d-num`: 38 sp on a `line-height: 1` box, then `small` 4 below, also on a 12 sp line-height-1 box.
         Column(modifier = Modifier.padding(top = 4.dp), horizontalAlignment = Alignment.CenterHorizontally) {
-            TabularText(text = clamped.toString(), style = t.dialNumber, color = c.onNavy)
-            Text(text = "of 100", modifier = Modifier.padding(top = 4.dp), color = c.onNavy2, style = t.dialCaption)
+            LineBox(t.dialNumber.lineHeight) { TabularText(text = clamped.toString(), style = t.dialNumber, color = c.onNavy) }
+            LineBox(t.dialCaption.fontSize, modifier = Modifier.padding(top = 4.dp)) { Text(text = "of 100", color = c.onNavy2, style = t.dialCaption) }
         }
     }
 }
@@ -118,7 +138,8 @@ fun ScoreDial(
 /**
  * Score card (`.card.navy.score`): dial on the left, "WATCHDOG SCORE" label, 19 sp verdict and 13 sp
  * explanation on the right, and the fixed footer "The Watchdog Score, powered by the ROBUST Framework."
- * above nothing but below a 1 dp white-14% divider.
+ * below a 1 dp white-14% divider: the grid's 4 dp row gap and the footer's 10 dp margin above the line,
+ * the line itself and 10 dp of padding below it (CSS borders take space; [topSeparator] does not).
  */
 @Composable
 fun ScoreCardView(score: ScoreCard, modifier: Modifier = Modifier) {
@@ -146,9 +167,9 @@ fun ScoreCardView(score: ScoreCard, modifier: Modifier = Modifier) {
             text = ScoreCard.FOOTER,
             modifier = Modifier
                 .fillMaxWidth()
-                .padding(top = 10.dp)
+                .padding(top = 14.dp)
                 .topSeparator(FixedInk.navyDivider)
-                .padding(top = 10.dp),
+                .padding(top = 11.dp),
             color = c.onNavy2,
             style = t.caption.sized(12, FontWeight.SemiBold, 16.8),
         )
@@ -248,7 +269,7 @@ fun TaxCardView(tax: TaxCard, modifier: Modifier = Modifier) {
                     .fillMaxWidth()
                     .padding(top = 10.dp)
                     .topSeparator(c.separator)
-                    .padding(top = 10.dp),
+                    .padding(top = 11.dp),
             ) {
                 Row(modifier = Modifier.fillMaxWidth(), horizontalArrangement = Arrangement.spacedBy(8.dp)) {
                     Text(text = "Town rate per \$100", modifier = Modifier.weight(1f), color = c.skyInk, style = headerStyle)
@@ -354,7 +375,8 @@ fun ValueCheckCardView(v: ValueCheck, modifier: Modifier = Modifier) {
 /**
  * Sales nearby card (`.card.mint`): "SALES NEARBY", the count and median as a key-value line, one row per
  * sale (address, month in muted 13 sp, tabular price) separated by 1 dp lines, and the muted
- * "This home last sold" footer.
+ * "This home last sold" footer. [SalesNearby.sinceLabel] is the whole phrase ("since Jan 2026", blank when
+ * no first sale date is known) and is appended as is, so the line reads "7 similar sales since Jan 2026".
  */
 @Composable
 fun SalesCardView(s: SalesNearby, modifier: Modifier = Modifier) {
@@ -363,12 +385,13 @@ fun SalesCardView(s: SalesNearby, modifier: Modifier = Modifier) {
     WdCard(tint = Tint.Mint, modifier = modifier) {
         CardLabel("Sales nearby")
         KeyValueRow(
-            label = "${s.count} similar sales since ${s.sinceLabel}",
+            label = listOf(Format.count(s.count, "similar sale"), s.sinceLabel).filter { it.isNotBlank() }.joinToString(" "),
             value = s.median?.let { "median ${Format.money(it)}" } ?: "no median yet",
         )
         s.sales.forEach { sale ->
             Row(
-                modifier = Modifier.fillMaxWidth().topSeparator(c.separator).padding(vertical = 7.dp),
+                // `.sale`: padding 7 0 under a 1 dp border-top that takes its own row of space.
+                modifier = Modifier.fillMaxWidth().topSeparator(c.separator).padding(top = 8.dp, bottom = 7.dp),
                 horizontalArrangement = Arrangement.spacedBy(12.dp),
             ) {
                 Text(
@@ -439,13 +462,21 @@ fun FactsCardView(f: HomeFacts, modifier: Modifier = Modifier) {
 
 /**
  * ROBUST Framework card (`.rb`): one row per dimension with a 28 dp navy letter tile (8 dp radius),
- * a 104 dp name column at 13 sp 600, an 8 dp teal bar on a fill2 track and the right-aligned score.
+ * a name column at 13 sp 600 (the mockup's 104 dp, or the longest name when one needs more: CSS lets
+ * "Overassessment" spill a hair past 104 where Compose would ellipsise it), an 8 dp teal bar on a fill2
+ * track taking the remaining width, and the right-aligned score. Every bar starts at the same x.
  */
 @Composable
 fun RobustCardView(dims: List<RobustDimension>, modifier: Modifier = Modifier) {
     val c = WatchdogTheme.colors
     val t = WatchdogTheme.type
     val rowStyle = t.body.sized(13, FontWeight.SemiBold, 18.2)
+    val measurer = rememberTextMeasurer()
+    val density = LocalDensity.current
+    val nameWidth = remember(dims, rowStyle, density, measurer) {
+        val widest = dims.maxOfOrNull { measurer.measure(it.name, rowStyle, softWrap = false, maxLines = 1).size.width } ?: 0
+        with(density) { (widest + 1).toDp() }.coerceAtLeast(104.dp)
+    }
     WdCard(tint = Tint.Plain, modifier = modifier) {
         CardLabel("ROBUST Framework")
         Column(modifier = Modifier.padding(top = 10.dp), verticalArrangement = Arrangement.spacedBy(8.dp)) {
@@ -463,10 +494,11 @@ fun RobustCardView(dims: List<RobustDimension>, modifier: Modifier = Modifier) {
                     }
                     Text(
                         text = d.name,
-                        modifier = Modifier.width(104.dp),
+                        modifier = Modifier.width(nameWidth),
                         color = c.ink,
                         style = rowStyle,
                         maxLines = 1,
+                        softWrap = false,
                         overflow = TextOverflow.Ellipsis,
                     )
                     Box(
@@ -522,9 +554,10 @@ fun SummaryCard(
             horizontalArrangement = Arrangement.spacedBy(14.dp),
             verticalAlignment = Alignment.Bottom,
         ) {
-            // The underline spans the glyph box, so the column shrinks to the number's own width.
+            // The underline spans the glyph box, so the column shrinks to the number's own width; `.big` is
+            // 46 sp on a `line-height: 1` box.
             Column(modifier = Modifier.width(IntrinsicSize.Min)) {
-                TabularText(text = Format.number(digest.total), style = t.big, color = c.onNavy)
+                LineBox(t.big.lineHeight) { TabularText(text = Format.number(digest.total), style = t.big, color = c.onNavy) }
                 Spacer(Modifier.height(5.dp))
                 Box(Modifier.fillMaxWidth().height(2.dp).background(c.gold))
             }
@@ -540,12 +573,13 @@ fun SummaryCard(
                 .fillMaxWidth()
                 .padding(top = 12.dp)
                 .topSeparator(FixedInk.navyDivider)
-                .padding(top = 10.dp),
+                .padding(top = 11.dp),
         ) {
             cells.forEachIndexed { index, (count, label) ->
                 val divided = if (index > 0) Modifier.startSeparator(FixedInk.navyDivider).padding(start = 12.dp) else Modifier
                 Column(modifier = Modifier.weight(1f).then(divided)) {
-                    TabularText(text = Format.number(count), style = t.statSmall, color = c.onNavy)
+                    // `.sum-grid b` is 19 sp on the inherited 1.4 line (26.6); the statSmall token carries 23.
+                    TabularText(text = Format.number(count), style = t.statSmall.copy(lineHeight = 26.6.sp), color = c.onNavy)
                     Text(text = label, modifier = Modifier.padding(top = 1.dp), color = c.onNavy2, style = t.caption.sized(12, FontWeight.SemiBold, 16.8))
                 }
             }

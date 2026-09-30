@@ -3,6 +3,8 @@ package com.watchdogindex.agent.ui.components
 import androidx.compose.foundation.background
 import androidx.compose.foundation.border
 import androidx.compose.foundation.clickable
+import androidx.compose.foundation.interaction.MutableInteractionSource
+import androidx.compose.foundation.interaction.collectIsFocusedAsState
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
@@ -13,15 +15,20 @@ import androidx.compose.foundation.text.BasicTextField
 import androidx.compose.material3.Icon
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.getValue
+import androidx.compose.runtime.remember
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.draw.alpha
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.SolidColor
 import androidx.compose.ui.graphics.vector.ImageVector
 import androidx.compose.ui.semantics.Role
+import androidx.compose.ui.semantics.clearAndSetSemantics
 import androidx.compose.ui.semantics.contentDescription
 import androidx.compose.ui.semantics.semantics
 import androidx.compose.ui.text.font.FontWeight
+import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.unit.dp
 import com.watchdogindex.agent.design.WatchdogTheme
 import com.watchdogindex.agent.design.icons.WdIcons
@@ -29,7 +36,8 @@ import com.watchdogindex.agent.design.icons.WdIcons
 /**
  * Outlined text field as the mockup draws it (`.mfield`): 2 dp ink border, 8 dp radius, floating 12 sp 700
  * label cut into the border, 15 sp 500 single-line value, trailing 22 dp muted icon (clear) in a 48 dp
- * target. The 8 dp above the box is the label's overlap allowance.
+ * target. The 8 dp above the box is the label's overlap allowance. A long value is ellipsised while the
+ * field is not being edited (`.mfield .val`: nowrap + ellipsis); once focused it scrolls as a text field must.
  */
 @Composable
 fun WdOutlinedField(
@@ -47,6 +55,8 @@ fun WdOutlinedField(
     val t = WatchdogTheme.type
     val shape = RoundedCornerShape(8.dp)
     val showTrailing = trailingIcon != null && onClear != null
+    val interactionSource = remember { MutableInteractionSource() }
+    val focused by interactionSource.collectIsFocusedAsState()
     Box(modifier = modifier.fillMaxWidth()) {
         Box(
             modifier = Modifier
@@ -69,12 +79,26 @@ fun WdOutlinedField(
                 textStyle = t.fieldValue.copy(color = c.ink),
                 singleLine = true,
                 cursorBrush = SolidColor(c.ink),
+                interactionSource = interactionSource,
                 decorationBox = { innerTextField ->
                     Box {
                         if (value.isEmpty() && placeholder != null) {
                             Text(text = placeholder, color = c.muted, style = t.fieldValue, maxLines = 1)
                         }
-                        innerTextField()
+                        // The editable field can only scroll a long value, so until it is focused the value is
+                        // drawn as ellipsised text in the same style over the (invisible, still tappable) field.
+                        val ellipsised = !focused && value.isNotEmpty()
+                        Box(modifier = Modifier.alpha(if (ellipsised) 0f else 1f)) { innerTextField() }
+                        if (ellipsised) {
+                            Text(
+                                text = value,
+                                modifier = Modifier.clearAndSetSemantics { },
+                                color = c.ink,
+                                style = t.fieldValue,
+                                maxLines = 1,
+                                overflow = TextOverflow.Ellipsis,
+                            )
+                        }
                     }
                 },
             )

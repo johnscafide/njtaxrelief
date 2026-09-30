@@ -452,15 +452,16 @@ private fun ScoreTile(score: Int?, verdict: String?, modifier: Modifier = Modifi
             .clearAndSetSemantics { contentDescription = description },
     ) {
         CardLabel(text = "Watchdog Score", color = c.onNavy2)
-        // `.n`: margin-top 6, a 30 dp line box, 3 dp of padding and the 2 dp gold rule under it (41 dp in all).
+        // `.n`: margin-top 6, a 30 dp line box, 3 dp of padding and the 2 dp gold rule under it (41 dp in all);
+        // one of the six goes below so the figures sit on the mockup's baseline in both text engines.
         Row(
             modifier = Modifier
-                .padding(top = 6.dp)
+                .padding(top = 7.dp)
                 .drawBehind {
                     val rule = 2.dp.toPx()
                     drawRect(color = gold, topLeft = Offset(0f, size.height - rule), size = Size(size.width, rule))
                 }
-                .padding(bottom = 5.dp),
+                .padding(bottom = 4.dp),
         ) {
             TabularText(
                 text = score?.toString() ?: "–",

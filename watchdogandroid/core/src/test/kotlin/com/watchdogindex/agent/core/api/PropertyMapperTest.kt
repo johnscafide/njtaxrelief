@@ -100,6 +100,18 @@ class PropertyMapperTest {
     }
 
     @Test
+    fun `nearby sales carry the whole since phrase, and none without a first sale date`() {
+        // SalesNearby.sinceLabel is appended verbatim by the card ("7 similar sales since Jan 2026"), so it owns the "since".
+        assertTrue(mapper.detail(response).sales!!.sinceLabel.startsWith("since "))
+        val marker = "\"first_date\": \"2026-01-14\", "
+        assertTrue(PropertyFixture.json.contains(marker), "fixture drifted: sales_summary.first_date not found")
+        val noFirstDate = WatchdogHttp.json.decodeFromString(PropertyApi.Response.serializer(), PropertyFixture.json.replace(marker, ""))
+        val d = mapper.detail(noFirstDate)
+        assertEquals("", assertNotNull(d.sales).sinceLabel, "nothing to append: the card then reads '3 similar sales'")
+        assertNull(assertNotNull(d.valueCheck).salesSinceLabel)
+    }
+
+    @Test
     fun `scan result computes the price check locally when the server sent none`() {
         val scan = mapper.scanResult(response, listPrice = 650_000, priceSourceLabel = "From the pasted link", matchLabel = "Zillow listing · parcel matched")
         assertEquals(78, scan.score)

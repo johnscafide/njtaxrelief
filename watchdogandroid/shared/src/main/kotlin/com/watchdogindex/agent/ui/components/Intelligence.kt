@@ -42,6 +42,7 @@ import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.dp
 import com.watchdogindex.agent.core.model.Brief
 import com.watchdogindex.agent.core.model.FollowUp
+import com.watchdogindex.agent.design.Intelligence
 import com.watchdogindex.agent.design.IntelligenceInk
 import com.watchdogindex.agent.design.IntelligenceName
 import com.watchdogindex.agent.design.Spectrum
@@ -82,7 +83,8 @@ fun IntelligenceCard(
     ) {
         IntelligenceInk {
             CompositionLocalProvider(LocalContentColor provides Spectrum.ink) {
-                Column(modifier = Modifier.fillMaxWidth().padding(contentPadding), content = content)
+                // `.intel` keeps its 2 px border inside the box, so the padding starts after it.
+                Column(modifier = Modifier.fillMaxWidth().padding(Intelligence.borderWidth).padding(contentPadding), content = content)
             }
         }
     }
@@ -170,7 +172,8 @@ fun IntelligenceTeaserCard(
         IntelligenceName(style = productNameStyle(), color = Spectrum.ink)
         Text(
             text = text,
-            modifier = Modifier.padding(top = 4.dp),
+            // `.it-t`: margin-top 6, 16 sp / 23.2, 600.
+            modifier = Modifier.padding(top = 6.dp),
             color = Spectrum.ink,
             style = t.body.sized(16, FontWeight.SemiBold, 23.2),
         )

@@ -35,6 +35,7 @@ import androidx.compose.ui.text.AnnotatedString
 import androidx.compose.ui.text.TextStyle
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
+import androidx.compose.ui.unit.sp
 import com.watchdogindex.agent.core.model.CheckupSeason
 import com.watchdogindex.agent.core.math.TaxMath
 import com.watchdogindex.agent.core.model.PriceCheck
@@ -54,9 +55,12 @@ val LocalCardLabelColor = compositionLocalOf { Color.Unspecified }
 
 /**
  * The mockup card (`.card`): 24 dp radius, 16x18 padding, no elevation. Plain cards get the 1 dp line
- * border; Navy/Sky/Sand/Mint cards are filled and borderless. The caller adds the margin
- * ([Modifier.cardMargin]). Content color follows the tint (white on navy, ink elsewhere) and
- * [CardLabel] picks up the matching label ink automatically.
+ * border; Navy/Sky/Sand/Mint cards are filled and borderless. The CSS card keeps its 1 px border in the
+ * box even when the border is transparent, so the content is inset 1 dp on every side before the padding:
+ * every card is 2 dp taller than padding plus content and its content is 342 dp wide on the 412 dp frame,
+ * which is what the charts scale to. The caller adds the margin ([Modifier.cardMargin]). Content color
+ * follows the tint (white on navy, ink elsewhere) and [CardLabel] picks up the matching label ink
+ * automatically.
  */
 @Composable
 fun WdCard(
@@ -76,9 +80,12 @@ fun WdCard(
         LocalCardLabelColor provides palette.label,
         LocalContentColor provides palette.content,
     ) {
-        Column(modifier = surface.padding(contentPadding), content = content)
+        Column(modifier = surface.padding(CardBorderInset).padding(contentPadding), content = content)
     }
 }
+
+/** The 1 px `.card` / `.rows` / `.wpanel` border, which sits inside the box in CSS whether it is drawn or transparent. */
+private val CardBorderInset = 1.dp
 
 /** Card label (`.ch`): 12 sp, 700, tracked, upper case, in the card's label ink. Announced in its original case. */
 @Composable
@@ -150,7 +157,10 @@ fun KeyValueRow(
                 Text(text = sublabel, color = c.muted, style = t.caption.sized(12, FontWeight.Normal, 16.8))
             }
         }
-        TabularText(text = value, modifier = Modifier.alignByBaseline(), style = valueStyle, color = color, maxLines = 1)
+        // `.kv b` inherits the 1.4 line height (21 dp at 15 sp), which gives the row its 31 dp pitch; the kvValue
+        // token carries the 14 sp label's 19.6, so the default style is corrected here and a caller's own style is kept.
+        val valueLine = if (valueStyle == t.kvValue) valueStyle.copy(lineHeight = 21.sp) else valueStyle
+        TabularText(text = value, modifier = Modifier.alignByBaseline(), style = valueLine, color = color, maxLines = 1)
     }
 }
 
@@ -237,7 +247,7 @@ fun InfoPanel(
     val c = WatchdogTheme.colors
     val t = WatchdogTheme.type
     val shape = RoundedCornerShape(WatchdogDimens.cardRadius)
-    Column(modifier = modifier.fillMaxWidth().clip(shape).background(c.surface).border(1.dp, c.line, shape)) {
+    Column(modifier = modifier.fillMaxWidth().clip(shape).background(c.surface).border(1.dp, c.line, shape).padding(CardBorderInset)) {
         Row(
             modifier = Modifier.fillMaxWidth().background(FixedInk.navy).padding(horizontal = 14.dp, vertical = 10.dp),
             horizontalArrangement = Arrangement.spacedBy(10.dp),

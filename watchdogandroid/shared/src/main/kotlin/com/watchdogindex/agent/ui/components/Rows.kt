@@ -52,7 +52,8 @@ fun RowList(modifier: Modifier = Modifier, content: @Composable ColumnScope.() -
     val c = WatchdogTheme.colors
     val shape = RoundedCornerShape(WatchdogDimens.cardRadius)
     Column(
-        modifier = modifier.fillMaxWidth().clip(shape).background(c.surface).border(1.dp, c.line, shape),
+        // The 1 px border sits inside the CSS box, so the rows start 1 dp in from it.
+        modifier = modifier.fillMaxWidth().clip(shape).background(c.surface).border(1.dp, c.line, shape).padding(1.dp),
         content = content,
     )
 }

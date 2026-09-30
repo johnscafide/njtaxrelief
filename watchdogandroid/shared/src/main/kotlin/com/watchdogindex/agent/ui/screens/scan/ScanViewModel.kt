@@ -48,12 +48,20 @@ class ScanViewModel(
     private var lastInput: ScanInput? = null
 
     init {
-        val url = initialUrl?.let(::displayUrl).orEmpty()
+        val raw = initialUrl?.trim().orEmpty()
+        val url = displayUrl(raw)
         val hasCamera = platform.hasCamera
         val mode = if (url.isNotEmpty() || !hasCamera) ScanMode.Paste else ScanMode.Camera
         _state.value = ScanUiState.Ready(mode = mode, hasCamera = hasCamera, url = url)
-        val input = listingInput(url)
-        if (input != null && (url.isNotEmpty() || presetResolved)) resolve(input, fromCamera = false)
+        // The link is classified as it arrived (scheme and all); only the field shows the shortened form.
+        val input = listingInput(raw)
+        when {
+            input != null && (raw.isNotEmpty() || presetResolved) -> resolve(input, fromCamera = false)
+            // A shared link Watchdog cannot read still deserves an answer, not an empty field.
+            raw.isNotEmpty() -> unsupportedReason(raw)?.let { reason ->
+                updateReady { it.copy(error = ScanError(ScanErrorKind.UnsupportedLink, reason)) }
+            }
+        }
     }
 
     // ------------------------------------------------------------------ mode

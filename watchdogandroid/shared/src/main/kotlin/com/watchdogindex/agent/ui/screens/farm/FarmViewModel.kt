@@ -57,8 +57,14 @@ sealed interface FarmUiState {
         val stats: FarmStats? = null,
         /** The parcel the map outlines with its callout. */
         val selectedPin: String? = null,
+        /**
+         * The home the map opens on at street level: the first of the agent's known homes inside the farm.
+         * Taps move [selectedPin], never this, so selecting a parcel does not pan the map.
+         */
+        val spotlightPin: String? = null,
         /** True once the agent tapped a parcel; the sheet then shows the parcel row with its Open button. */
         val calloutOpen: Boolean = false,
+        /** Where the agent panned the map to; null until then, so the screen frames the spotlight home or the farm. */
         val center: LatLng? = null,
         val zoom: Double? = null,
         val sheetExpanded: Boolean = false,
@@ -83,6 +89,8 @@ sealed interface FarmUiState {
             }
 
         val selectedParcel: MapParcel? get() = selectedPin?.let { pin -> mapParcels.firstOrNull { it.pin == pin } }
+
+        val spotlightParcel: MapParcel? get() = spotlightPin?.let { pin -> parcels.firstOrNull { it.pin == pin } }
 
         /** Homes with a deed in the last 12 months, for the expanded sheet; neighborhood facts, never a prediction. */
         val recentDeeds: List<MapParcel> get() = mapParcels.filter { it.soldInLast12Months && it.residential }.take(8)
@@ -155,7 +163,7 @@ class FarmViewModel(private val repos: Repositories) : ViewModel() {
         val all = parcels.await()
         val pins = all.mapTo(HashSet()) { it.pin }
         val keepSelection = previous?.farm?.id == farm.id
-        val spotlight = if (keepSelection) previous?.selectedPin else known.await().firstOrNull { it.pin in pins }?.pin
+        val spotlight = if (keepSelection) previous?.spotlightPin else known.await().firstOrNull { it.pin in pins }?.pin
         FarmUiState.Ready(
             farms = farms,
             farm = farm,
@@ -163,10 +171,12 @@ class FarmViewModel(private val repos: Repositories) : ViewModel() {
             layerParcels = all,
             layer = MapLayer.Score,
             stats = stats.await(),
-            selectedPin = spotlight?.takeIf { it in pins },
+            selectedPin = if (keepSelection) previous?.selectedPin?.takeIf { it in pins } else spotlight?.takeIf { it in pins },
+            spotlightPin = (if (keepSelection) previous?.spotlightPin else spotlight)?.takeIf { it in pins },
             calloutOpen = keepSelection && (previous?.calloutOpen ?: false),
-            center = if (keepSelection) previous?.center ?: farm.center else farm.center,
-            zoom = if (keepSelection) previous?.zoom ?: farm.zoom else farm.zoom,
+            // Null until the agent pans: the screen then frames the spotlight home, or the whole farm.
+            center = if (keepSelection) previous?.center else null,
+            zoom = if (keepSelection) previous?.zoom else null,
             sheetExpanded = keepSelection && (previous?.sheetExpanded ?: false),
         )
     }

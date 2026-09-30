@@ -121,6 +121,7 @@ class PropertyMapper(private val today: () -> LocalDate = { Clock.System.now().t
         val sales = row.salesSummary?.let { s ->
             SalesNearby(
                 count = salesCount,
+                // The whole phrase the sales card appends ("since Jan 2026"); blank when the summary has no first sale date.
                 sinceLabel = firstSale?.let { Format.sinceMonthYear(it) } ?: "",
                 median = salesMedian,
                 sales = row.recentSales.filter { it.pamsPin != null && (it.price ?: 0.0) > 0 }.map { sale ->
