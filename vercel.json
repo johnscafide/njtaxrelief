@@ -8,6 +8,10 @@
       "includeFiles": "property/sales-*.json",
       "maxDuration": 10
     },
+    "api/watchdog-games.js": {
+      "includeFiles": "{property/sales-*.json,property/data/games/*.json,chapter123-ratios-2026.json}",
+      "maxDuration": 10
+    },
     "api/watchdog-index-entry.js": {
       "includeFiles": "property/index.html",
       "maxDuration": 10

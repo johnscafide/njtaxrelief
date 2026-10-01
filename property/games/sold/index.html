@@ -1,0 +1,127 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="robots" content="index,follow">
+<title>Sold! Guess What a Real NJ Home Sold For | Watchdog Games</title>
+<meta name="description" content="A daily Watchdog game. Guess what a real New Jersey home sold for in six tries, using the same public records the tax assessor uses.">
+<link rel="canonical" href="https://www.watchdogindex.com/games/sold">
+<meta property="og:title" content="Sold! A daily New Jersey home price game">
+<meta property="og:description" content="Guess what a real New Jersey home sold for in six tries. New puzzle every day.">
+<meta property="og:url" content="https://www.watchdogindex.com/games/sold">
+<meta property="og:type" content="website">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@600&family=Plus+Jakarta+Sans:wght@500;700;800&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="/property/css/watchdog-games.css?v=20261001a">
+<script type="application/ld+json">{"@context":"https://schema.org","@type":"WebApplication","name":"Sold! by Watchdog","url":"https://www.watchdogindex.com/games/sold","applicationCategory":"GameApplication","operatingSystem":"Any","isAccessibleForFree":true,"description":"A daily game: guess what a real New Jersey home sold for in six tries using public sale and assessment records.","publisher":{"@type":"Organization","name":"Watchdog","url":"https://www.watchdogindex.com/"}}</script>
+</head>
+<body class="wg" data-game="sold">
+<a class="wg-skip" href="#wg-main">Skip to the game</a>
+<header class="wg-bar"><div class="wg-bar-in">
+  <a class="wg-brand" href="/">Watchdog</a>
+  <nav class="wg-nav" aria-label="Games"><a href="/games" aria-current="page">Games</a><a href="/glossary">Glossary</a><a href="/">Look up a home</a></nav>
+</div></header>
+
+<main class="wg-main" id="wg-main"><div class="wg-narrow">
+  <div class="wg-head">
+    <div>
+      <p class="wg-kicker">Watchdog Games</p>
+      <h1>Sold!</h1>
+      <p class="wg-meta" id="wg-meta">Loading today's home</p>
+    </div>
+    <div class="wg-tools"><button class="wg-link-btn" id="wg-open-stats" type="button">Your stats</button></div>
+  </div>
+
+  <details class="wg-howto wg-card">
+    <summary>How to play</summary>
+    <ul>
+      <li>This is a real New Jersey home that sold recently. Guess the sale price.</li>
+      <li>You get six guesses. Each one tells you if you're too high or too low, and by how much.</li>
+      <li>Land within 5% of the real price to win. Within 15% shows up as close.</li>
+      <li>Every wrong guess unlocks a hint from the public record.</li>
+      <li>One new home every day at midnight. Everyone gets the same one.</li>
+    </ul>
+  </details>
+
+  <section class="wg-card" aria-labelledby="wg-home-title">
+    <h2 id="wg-home-title">The home</h2>
+    <dl class="wg-facts">
+      <div class="wg-wide"><dt>Town</dt><dd data-f="town">&nbsp;</dd></div>
+      <div class="wg-wide"><dt>Street</dt><dd data-f="street">&nbsp;</dd></div>
+      <div><dt>Sold</dt><dd data-f="sold">&nbsp;</dd></div>
+      <div><dt>Type</dt><dd data-f="kind">&nbsp;</dd></div>
+      <div><dt>Built</dt><dd data-f="built">&nbsp;</dd></div>
+      <div><dt>Living space</dt><dd data-f="sqft">&nbsp;</dd></div>
+    </dl>
+    <ol class="wg-hints" aria-label="Hints">
+      <li data-hint="1"><span class="wg-lock">Hint 1 opens after your first guess.</span><span class="wg-open" hidden>Homes in this town sold for a median of <b data-f="ppsf"></b> per square foot (<b data-f="sales"></b> recent sales).</span></li>
+      <li data-hint="2"><span class="wg-lock">Hint 2 opens after your second guess.</span><span class="wg-open" hidden>Assessed value: <b data-f="assessed"></b>. That's the number the town taxes this home on.</span></li>
+      <li data-hint="3"><span class="wg-lock">Hint 3 opens after your third guess.</span><span class="wg-open" hidden>This town assesses homes at about <b data-f="ratio"></b> of market value on average (the state's <b data-f="ratio-year"></b> Director's Ratio).</span></li>
+      <li data-hint="4"><span class="wg-lock">Hint 4 opens after your fourth guess.</span><span class="wg-open" hidden>Assessed value divided by that ratio is <b data-f="equalized"></b>. Real sales land near that number, not exactly on it.</span></li>
+    </ol>
+  </section>
+
+  <section class="wg-card" aria-labelledby="wg-guess-title">
+    <h2 id="wg-guess-title">Your guess</h2>
+    <form class="wg-form" id="wg-form" autocomplete="off" novalidate>
+      <label class="wg-sr" for="wg-input">Sale price in dollars</label>
+      <div class="wg-field has-prefix"><span class="wg-prefix" aria-hidden="true">$</span><input id="wg-input" inputmode="numeric" placeholder="450,000" aria-describedby="wg-form-note" disabled></div>
+      <button class="wg-btn" id="wg-submit" type="submit" disabled>Guess</button>
+    </form>
+    <p class="wg-form-note" id="wg-form-note" aria-live="polite"></p>
+    <ol class="wg-guesses" id="wg-guesses" aria-live="polite" aria-label="Your guesses"></ol>
+  </section>
+
+  <section class="wg-card wg-result" id="wg-result" hidden aria-live="polite">
+    <p class="wg-kicker" id="wg-result-kicker">Result</p>
+    <p class="wg-answer" id="wg-answer"></p>
+    <p class="wg-result-line" id="wg-result-line"></p>
+    <div class="wg-actions">
+      <button class="wg-btn" id="wg-share" type="button">Share your result</button>
+      <a class="wg-btn wg-btn-quiet" href="/games/town-shapes">Play Town Shapes</a>
+    </div>
+    <p class="wg-next" id="wg-next-wrap">Next home in <b id="wg-next">--:--:--</b></p>
+  </section>
+
+  <section class="wg-card wg-learn" id="wg-learn" hidden>
+    <h2>What this game teaches</h2>
+    <p>Towns don't tax your home on what it would sell for. They tax its assessed value, and every town assesses at a different share of market value. Divide the assessed value by the town's ratio and you land close to the sale price.</p>
+    <p>That same math is how you check whether your own assessment looks too high.</p>
+    <ul>
+      <li><a href="/">Look up your own home</a></li>
+      <li><a href="/glossary/directors-ratio">What a Director's Ratio is</a></li>
+      <li><a href="/glossary/true-value-vs-assessed-value">True value vs. assessed value</a></li>
+      <li><a href="/appeal-savings-estimator">Estimate what an appeal could save</a></li>
+    </ul>
+  </section>
+
+  <section class="wg-card">
+    <h2>Past puzzles</h2>
+    <form class="wg-archive" id="wg-archive">
+      <label for="wg-archive-date">Pick a day<input type="date" id="wg-archive-date"></label>
+      <button class="wg-btn wg-btn-quiet" type="submit">Play that day</button>
+    </form>
+    <p class="wg-note">Your progress is saved on this device. Past puzzles don't change your streak. Sale data comes from verified arm's-length sales on the state's SR-1A deed records; house numbers are never shown.</p>
+  </section>
+</div></main>
+
+<dialog class="wg-dialog" id="wg-stats-dialog" aria-labelledby="wg-stats-title">
+  <h2 id="wg-stats-title">Your Sold! stats</h2>
+  <button class="wg-link-btn wg-close" type="button">Close</button>
+  <dl class="wg-stats">
+    <div><dt>Played</dt><dd id="wg-stat-played">0</dd></div>
+    <div><dt>Win %</dt><dd id="wg-stat-pct">0</dd></div>
+    <div><dt>Streak</dt><dd id="wg-stat-streak">0</dd></div>
+    <div><dt>Best streak</dt><dd id="wg-stat-max">0</dd></div>
+  </dl>
+  <h3>Guesses to win</h3>
+  <ol class="wg-dist" id="wg-dist"></ol>
+</dialog>
+<div class="wg-toast" id="wg-toast" role="status" hidden></div>
+
+<footer class="wg-foot"><div class="wg-foot-in"><span>Watchdog Games</span><a href="/games">All games</a><a href="/glossary">Glossary</a><a href="/privacy">Privacy</a><a href="/terms">Terms</a></div></footer>
+<script src="/property/js/games/games-core.js?v=20261001a"></script>
+<script src="/property/js/games/sold.js?v=20261001a"></script>
+</body>
+</html>

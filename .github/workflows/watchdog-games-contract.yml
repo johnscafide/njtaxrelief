@@ -1,0 +1,45 @@
+name: Watchdog games contract
+
+on:
+  push:
+    branches: [main]
+    paths:
+      - 'api/watchdog-games.js'
+      - 'property/games/**'
+      - 'property/js/games/**'
+      - 'property/css/watchdog-games.css'
+      - 'property/data/games/**'
+      - 'scripts/build-games-data.mjs'
+      - 'Municipal_Boundaries_of_NJ.geojson'
+      - 'property/tax-rates.json'
+      - 'chapter123-ratios-2026.json'
+      - 'property/sales-*.json'
+      - 'api/watchdog-index-sitemap.js'
+      - 'property/tests/watchdog-games-contract.mjs'
+      - '.github/workflows/watchdog-games-contract.yml'
+  pull_request:
+    paths:
+      - 'api/watchdog-games.js'
+      - 'property/games/**'
+      - 'property/js/games/**'
+      - 'property/css/watchdog-games.css'
+      - 'property/data/games/**'
+      - 'scripts/build-games-data.mjs'
+      - 'Municipal_Boundaries_of_NJ.geojson'
+      - 'property/tax-rates.json'
+      - 'chapter123-ratios-2026.json'
+      - 'property/sales-*.json'
+      - 'api/watchdog-index-sitemap.js'
+      - 'property/tests/watchdog-games-contract.mjs'
+      - '.github/workflows/watchdog-games-contract.yml'
+
+jobs:
+  contract:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+      - name: Verify Watchdog games contract
+        run: node property/tests/watchdog-games-contract.mjs

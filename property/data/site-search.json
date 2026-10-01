@@ -1,6 +1,6 @@
 {
   "schema_version": 1,
-  "updated": "2026-09-30",
+  "updated": "2026-10-01",
   "entries": [
     {
       "id": "certificate-of-occupancy",
@@ -1816,6 +1816,75 @@
       "href": "/town-compare",
       "where": "Menu > Town Compare",
       "icon": "fa-code-compare"
+    },
+    {
+      "id": "games",
+      "kind": "page",
+      "label": "Watchdog Games",
+      "aliases": [
+        "games",
+        "daily games",
+        "puzzles",
+        "daily puzzle",
+        "watchdog games",
+        "nj games"
+      ],
+      "keywords": [
+        "play",
+        "streak",
+        "wordle",
+        "quiz",
+        "trivia"
+      ],
+      "summary": "Free daily puzzles about New Jersey homes, towns and taxes. New ones every day at midnight.",
+      "href": "/games",
+      "where": "Games",
+      "icon": "fa-puzzle-piece"
+    },
+    {
+      "id": "sold-game",
+      "kind": "page",
+      "label": "Sold! daily price game",
+      "aliases": [
+        "sold",
+        "sold game",
+        "guess the price",
+        "price guessing game",
+        "home price game"
+      ],
+      "keywords": [
+        "sale price",
+        "game",
+        "assessment",
+        "daily puzzle"
+      ],
+      "summary": "Guess what a real New Jersey home sold for in six tries. Each miss unlocks a hint from the public record.",
+      "href": "/games/sold",
+      "where": "Games > Sold!",
+      "icon": "fa-tag"
+    },
+    {
+      "id": "town-shapes-game",
+      "kind": "page",
+      "label": "Town Shapes daily game",
+      "aliases": [
+        "town shapes",
+        "guess the town",
+        "town outline game",
+        "nj town game",
+        "name the town"
+      ],
+      "keywords": [
+        "map",
+        "geography",
+        "municipality",
+        "game",
+        "daily puzzle"
+      ],
+      "summary": "Name the New Jersey town from its outline in six tries. Each miss shows how far off you are.",
+      "href": "/games/town-shapes",
+      "where": "Games > Town Shapes",
+      "icon": "fa-map"
     },
     {
       "id": "uniformity-index",
