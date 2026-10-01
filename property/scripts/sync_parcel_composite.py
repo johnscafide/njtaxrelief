@@ -106,12 +106,52 @@ def deed_date(value, today: date | None = None):
     return None
 
 
-def normalize(a: dict) -> dict | None:
+NJ_BOUNDS = (38.8, 41.4, -75.7, -73.8)  # lat min, lat max, lon min, lon max
+
+
+def centroid(geometry: dict | None) -> tuple[float, float] | None:
+    """Area centroid (lat, lon) of a parcel polygon returned in WGS84 (outSR 4326).
+
+    Uses the signed shoelace formula over every ring, so holes subtract and
+    multi-part parcels are weighted by area. A zero-area shape falls back to
+    the mean of its vertices. Anything outside New Jersey returns None, never
+    a guess. Rounded to 6 decimals (about 0.1 m), so an unchanged parcel gives
+    the same point every month and sync_parcel_batch() skips it.
+    """
+    rings = (geometry or {}).get("rings") or []
+    area = cx = cy = 0.0
+    xs, ys = [], []
+    for ring in rings:
+        pts = [(float(p[0]), float(p[1])) for p in ring if isinstance(p, (list, tuple)) and len(p) >= 2]
+        if len(pts) < 3:
+            continue
+        x0, y0 = pts[0]  # shift to the first vertex for floating point stability
+        for (xa, ya), (xb, yb) in zip(pts, pts[1:] + pts[:1]):
+            xa, ya, xb, yb = xa - x0, ya - y0, xb - x0, yb - y0
+            cross = xa * yb - xb * ya
+            area += cross
+            cx += (xa + xb + 3 * x0) * cross
+            cy += (ya + yb + 3 * y0) * cross
+        xs.extend(x for x, _ in pts)
+        ys.extend(y for _, y in pts)
+    if not xs:
+        return None
+    if abs(area) > 1e-14:
+        lon, lat = cx / (3 * area), cy / (3 * area)
+    else:
+        lon, lat = sum(xs) / len(xs), sum(ys) / len(ys)
+    if not (NJ_BOUNDS[0] <= lat <= NJ_BOUNDS[1] and NJ_BOUNDS[2] <= lon <= NJ_BOUNDS[3]):
+        return None
+    return round(lat, 6), round(lon, 6)
+
+
+def normalize(a: dict, geometry: dict | None = None) -> dict | None:
     pin = clean(a.get("PAMS_PIN"), 80)
     if not pin or len(pin) < 6 or not pin[:4].isdigit() or pin[4] != "_":
         return None
     sold = deed_date(a.get("DEED_DATE"))
     dwell = whole(a.get("DWELL"))
+    point = centroid(geometry)
     return {
         "pams_pin": pin,
         "address": clean(a.get("PROP_LOC")) or "",
@@ -133,6 +173,8 @@ def normalize(a: dict) -> dict | None:
         "last_sale_year": sold.year if sold else None,
         "last_sale_date": sold.isoformat() if sold else None,
         "sales_code": clean(a.get("SALES_CODE"), 20),
+        "lat": point[0] if point else None,
+        "lon": point[1] if point else None,
     }
 
 
@@ -312,7 +354,11 @@ def run(args, db: Supabase | None = None, fetch=fetch_json) -> dict:
                 "outFields": ",".join(OUT_FIELDS),
                 "orderByFields": "OBJECTID ASC",
                 "resultRecordCount": str(PAGE_SIZE),
-                "returnGeometry": "false",
+                # Parcel shapes in WGS84, only to compute each parcel's center
+                # point (lat/lon) for nearby sales and neighborhood lookups.
+                "returnGeometry": "true",
+                "outSR": "4326",
+                "geometryPrecision": "6",
                 "f": "json",
             })
             features = data.get("features") or []
@@ -325,7 +371,7 @@ def run(args, db: Supabase | None = None, fetch=fetch_json) -> dict:
             if leaked:
                 raise RuntimeError(f"owner fields returned unexpectedly: {sorted(leaked)}")
             page_last = max(int(a.get("OBJECTID") or 0) for a in attrs)
-            rows = [r for r in (normalize(a) for a in attrs) if r]
+            rows = [r for r in (normalize(f.get("attributes") or {}, f.get("geometry")) for f in features) if r]
             if db:
                 for i in range(0, len(rows), BATCH):
                     written += db.write_rows(rows[i:i + BATCH])
@@ -380,6 +426,26 @@ def self_test() -> None:
     assert normalize({"PAMS_PIN": ""}) is None and normalize({"PAMS_PIN": "BAD"}) is None
     assert not FORBIDDEN_FIELDS.intersection(OUT_FIELDS)
     assert "UPPER(COUNTY) = 'O''BRIEN'" in where_clause("o'brien", 5)
+
+    # Parcel center points: area centroid in WGS84, NJ only, stable to 6 decimals.
+    square = {"rings": [[[-74.0, 40.0], [-74.0, 40.002], [-73.998, 40.002], [-73.998, 40.0], [-74.0, 40.0]]]}
+    assert centroid(square) == (40.001, -73.999)
+    ell = {"rings": [[[-74.5, 40.5], [-74.5, 40.503], [-74.499, 40.503], [-74.499, 40.501], [-74.497, 40.501], [-74.497, 40.5], [-74.5, 40.5]]]}
+    # 1x3 bar (centroid 0.5, 1.5) plus 2x1 foot (2, 0.5), in 0.001-degree units:
+    # x = (3*0.5 + 2*2) / 5 = 1.1 and y = (3*1.5 + 2*0.5) / 5 = 1.1.
+    assert centroid(ell) == (40.5011, -74.4989), centroid(ell)
+    holed = {"rings": [square["rings"][0], [[-74.0, 40.0], [-73.999, 40.0], [-73.999, 40.001], [-74.0, 40.001], [-74.0, 40.0]]]}
+    hlat, hlon = centroid(holed)  # the hole (counter-clockwise) removes the south-west quarter
+    assert hlat > 40.001 and hlon > -73.999, (hlat, hlon)
+    two = {"rings": [square["rings"][0], [[-73.99, 40.0], [-73.99, 40.002], [-73.988, 40.002], [-73.988, 40.0], [-73.99, 40.0]]]}
+    assert centroid(two) == (40.001, -73.994), "multi-part parcels are weighted by area"
+    assert centroid({"rings": [[[-74.2, 40.1], [-74.2, 40.1], [-74.2, 40.1]]]}) == (40.1, -74.2), "zero-area shape: vertex mean"
+    assert centroid({"rings": [[[2.35, 48.85], [2.35, 48.86], [2.36, 48.86], [2.35, 48.85]]]}) is None, "outside NJ: none, never a guess"
+    assert centroid(None) is None and centroid({}) is None and centroid({"rings": [[[-74, 40]]]}) is None
+    with_point = normalize({"PAMS_PIN": "0904_9_20"}, square)
+    assert (with_point["lat"], with_point["lon"]) == (40.001, -73.999)
+    no_point = normalize({"PAMS_PIN": "0904_9_20"})
+    assert no_point["lat"] is None and no_point["lon"] is None, "no shape: blank, the stored point is kept"
 
     # Failed writes: classify, back off, never resend at once.
     timeout_500 = 'rpc sync_parcel_batch 500: {"code":"57014","message":"canceling statement due to statement timeout"}'

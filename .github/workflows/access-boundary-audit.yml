@@ -56,6 +56,8 @@ jobs:
         run: node property/tests/municipal-tax-evidence-cache-contract.mjs
       - name: Verify the property lookup uses town stats and keeps nearby answers
         run: node property/tests/property-lookup-warehouse-contract.mjs
+      - name: Verify nearby sales, neighborhood and neighbors read parcel points first
+        run: node property/tests/parcel-coordinates-contract.mjs
       - name: Verify free-first property imagery and photo contribution governance
         run: node property/tests/property-imagery-photo-library-contract.mjs
       - name: Verify Street View spend and free grid fallback
