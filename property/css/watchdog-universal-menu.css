@@ -526,6 +526,30 @@ html body .wd-universal-nav-head .wd-universal-brand>span{
 .wd-universal-lens-hint:hover{background:var(--wdum-warm)!important}
 .wd-universal-nav-rule{height:1px;background:var(--wdum-warm-line);margin:8px 6px}
 
+/* Locked "My work" tab (no paid Agent or Pro plan): a lock on the tab and a
+   short members-only note instead of the professional destinations. */
+.wd-universal-lens button[data-wd-locked="true"]:not([aria-selected="true"]){color:#7a8497}
+.wd-universal-lens button[data-wd-locked="true"] i{font-size:13px}
+.wd-universal-work-locked{
+  display:grid;justify-items:center;gap:8px;margin:4px 0 6px;padding:22px 18px 14px;
+  border:1px solid var(--wdum-warm-line);border-radius:16px;background:#fbfaf7;text-align:center;color:var(--wdum-navy-ink);
+}
+.wd-universal-work-locked-icon{width:46px;height:46px;border-radius:13px;display:grid;place-items:center;background:var(--wdum-sand);color:var(--wdum-sand-ink);font-size:18px}
+.wd-universal-work-locked b{font:800 17px/1.25 var(--wdum-head);letter-spacing:-.01em}
+.wd-universal-work-locked p{margin:0;max-width:30ch;font:600 14px/1.45 var(--wdum-font);color:#5b6879}
+.wd-universal-work-locked a.wd-universal-work-locked-cta{
+  display:inline-flex!important;align-items:center;justify-content:center;gap:8px;min-height:44px;margin-top:6px;padding:0 18px!important;
+  border-radius:12px!important;background:var(--wdum-navy)!important;color:#fff!important;font:800 14px/1 var(--wdum-head)!important;text-decoration:none!important;
+}
+.wd-universal-work-locked a.wd-universal-work-locked-cta:hover{background:#17336a!important;color:#fff!important}
+.wd-universal-work-locked a.wd-universal-work-locked-cta i{width:auto!important;flex:none!important;color:#fff!important;font-size:13px!important}
+.wd-universal-work-locked-link{
+  min-height:44px;padding:0 12px;border:0;background:transparent;cursor:pointer;
+  color:var(--wdum-board-blue);font:700 14px/1.2 var(--wdum-font);touch-action:manipulation;
+}
+.wd-universal-work-locked-link:hover{text-decoration:underline}
+.wd-universal-work-locked a:focus-visible,.wd-universal-work-locked-link:focus-visible{outline:3px solid var(--wdum-sky-line);outline-offset:2px}
+
 /* ---------- profile menu, board look ---------- */
 .wd-public-sheet.right.wd-universal-public-profile,
 #wd6-profile.wd-universal-profile,.hm27-pop.wd-universal-profile{

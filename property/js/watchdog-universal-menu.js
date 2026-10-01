@@ -10,11 +10,11 @@
   if(window.__WATCHDOG_UNIVERSAL_MENU__) return;
   window.__WATCHDOG_UNIVERSAL_MENU__ = true;
 
-  var VERSION = '20260930a';
+  var VERSION = '20261001a';
   /* CSS has a longer browser/CDN cache lifetime than this runtime. Keep a
      separate asset revision so interaction fixes can invalidate cached chrome
      immediately without coupling that cache key to the menu data contract. */
-  var CSS_VERSION = '20260930a';
+  var CSS_VERSION = '20261001a';
   var URL = 'https://uvkvaxljhhngydvlrzom.supabase.co';
   var KEY = 'sb_publishable_MYX59qCbK3d-21zDfJqkNw_fvmfnexa';
   var hostname = String(location.hostname || '').toLowerCase();
@@ -60,6 +60,14 @@
   function can(required){
     var rank = {standard:0,agent:1,pro:2,pro_plus:3,teams:4,developer:5};
     return rank[actualPlan()] >= rank[plan(required)];
+  }
+  /* "My work" holds the professional tools (Agent Desk, clients, farm,
+     marketing, research). Only paying members open it: Agent, Pro, Pro+,
+     Teams and developers. Everyone else (signed out, a free account, or an
+     agent profile without a paid plan) sees the tab locked, with a short note
+     on how to unlock it, and none of the professional destinations. */
+  function workUnlocked(){
+    return !!state.user && state.ready && can('agent');
   }
   function isAgent(){
     if(actualPlan() === 'developer') return true;
@@ -152,8 +160,8 @@
       {key:'robust',href:route('/robust/'),icon:'fa-gauge-high',label:'ROBUST Framework'},
       {key:'games',href:route('/games'),icon:'fa-puzzle-piece',label:'Games'}
     ];
-    if(state.ready && isAgent()){
-      /* Agents get their five Agent Desk areas. Transactions, Data Workbench,
+    if(state.ready && isAgent() && workUnlocked()){
+      /* Paying agents get their five Agent Desk areas. Transactions, Data Workbench,
          Data Center and the Appeal Scanner live inside Clients and Research. */
       AGENT_AREAS.forEach(function(area){ out.push({key:area.key,href:areaHref(area),icon:area.icon,label:area.label}); });
     } else {
@@ -190,12 +198,18 @@
     'account':{lens:'both',hint:'Profile, plan and billing'}
   };
   AGENT_AREAS.forEach(function(area){ META[area.key] = {lens:'work',hint:area.hint}; });
+  /* The public Data Center (NJW-98) stays discoverable for every visitor, so
+     while My work is locked it sits under Learn and compare instead. */
+  function metaFor(key){
+    if(key === 'data-center' && !workUnlocked()) return {lens:'home',group:'learn',hint:META[key].hint};
+    return META[key] || {lens:'home',hint:''};
+  }
   /* Professional tools the viewer cannot open yet. They appear only in the
      "My work" lens with the plan they need, so pros can discover them and
      homeowners never see them in their own lens. Agents find these tools
      inside their Agent Desk areas instead. */
   function lockedItems(){
-    if(!state.ready || isAgent()) return [];
+    if(!workUnlocked() || isAgent()) return [];
     var have = {};
     items().forEach(function(item){ have[item.key] = true; });
     var out = [];
@@ -208,6 +222,7 @@
   var LENS_KEY = 'wd_menu_lens_v1';
   function storedLens(){ try{ var v = localStorage.getItem(LENS_KEY); return v === 'home' || v === 'work' ? v : ''; }catch(_){ return ''; } }
   function defaultLens(){
+    if(!workUnlocked()) return 'home';
     if(agentAreaFor(location.pathname,location.hash)) return 'work';
     var page = currentPage();
     if(page === 'fairness') page = 'robust';
@@ -219,7 +234,8 @@
   }
   function setLens(lens){
     lens = lens === 'work' ? 'work' : 'home';
-    try{ localStorage.setItem(LENS_KEY,lens); }catch(_){}
+    /* A locked My work tab only shows how to unlock it; never remember it. */
+    if(workUnlocked() || lens === 'home'){ try{ localStorage.setItem(LENS_KEY,lens); }catch(_){} }
     var sheet = document.getElementById('wd-main-sheet');
     if(!sheet) return;
     var nav = sheet.querySelector('.wd-universal-nav-links');
@@ -285,7 +301,7 @@
      Agent Desk area (Farm Map -> Farm); everything else matches its page key. */
   function activeKey(){
     var area = agentAreaFor(location.pathname,location.hash);
-    if(area && state.ready && isAgent()) return area;
+    if(area && isAgent() && workUnlocked()) return area;
     return currentPage();
   }
   function activeFor(item,page){
@@ -293,7 +309,7 @@
     return item.key === page;
   }
   function navLinkHtml(item,page){
-    var meta = META[item.key] || {lens:'home',hint:''};
+    var meta = metaFor(item.key);
     var on = activeFor(item,page);
     var cls = 'wd-universal-link wd-universal-lens-' + meta.lens + (on ? ' active' : '');
     return '<a class="' + cls + '"' + (on ? ' aria-current="page"' : '') + ' data-wd-nav="' + item.key + '" href="' + item.href + '"><i class="fas ' + item.icon + '" aria-hidden="true"></i><span>' + item.label + (meta.hint ? '<small>' + meta.hint + '</small>' : '') + '</span></a>';
@@ -303,27 +319,42 @@
     var all = items();
     var account = all.filter(function(item){ return item.key === 'account'; });
     var main = all.filter(function(item){ return item.key !== 'account'; });
-    var home = main.filter(function(item){ var m = META[item.key] || {}; return m.lens !== 'work' && m.group !== 'learn'; });
-    var learn = main.filter(function(item){ return (META[item.key] || {}).group === 'learn'; });
-    var work = main.filter(function(item){ return (META[item.key] || {}).lens === 'work'; });
+    var unlocked = workUnlocked();
+    var home = main.filter(function(item){ var m = metaFor(item.key); return m.lens !== 'work' && m.group !== 'learn'; });
+    var learn = main.filter(function(item){ return metaFor(item.key).group === 'learn'; });
+    var work = unlocked ? main.filter(function(item){ return metaFor(item.key).lens === 'work'; }) : [];
     var locked = lockedItems().map(function(item){
       return '<a class="wd-universal-link wd-universal-lens-work wd-universal-locked" href="' + route('/pro#pricing') + '"><i class="fas ' + item.icon + '" aria-hidden="true"></i><span>' + item.label + '<small>Included with ' + item.need + '</small></span><em>' + item.need + '</em></a>';
     }).join('');
     var list = function(rows){ return rows.map(function(item){ return navLinkHtml(item,page); }).join(''); };
     return '<p class="wd-universal-lens-eyebrow wd-universal-lens-home">For your home</p>' + list(home) +
       (learn.length ? '<p class="wd-universal-lens-eyebrow wd-universal-lens-home wd-universal-group-learn">Learn and compare</p>' + list(learn) : '') +
-      '<button type="button" class="wd-universal-lens-hint wd-universal-lens-home" data-wd-universal="lens" data-wd-lens-to="work"><i class="fas fa-briefcase" aria-hidden="true"></i><span><b>Agent or pro?</b><small>Your professional tools are under My work</small></span><i class="fas fa-arrow-right" aria-hidden="true"></i></button>' +
-      '<p class="wd-universal-lens-eyebrow wd-universal-lens-work">' + (state.ready && isAgent() ? 'Your Agent Desk' : 'For your business') + '</p>' +
-      list(work) + locked +
+      '<button type="button" class="wd-universal-lens-hint wd-universal-lens-home" data-wd-universal="lens" data-wd-lens-to="work"><i class="fas ' + (unlocked ? 'fa-briefcase' : 'fa-lock') + '" aria-hidden="true"></i><span><b>Agent or pro?</b><small>' + (unlocked ? 'Your professional tools are under My work' : 'My work opens with an Agent or Pro membership') + '</small></span><i class="fas fa-arrow-right" aria-hidden="true"></i></button>' +
+      (unlocked ?
+        '<p class="wd-universal-lens-eyebrow wd-universal-lens-work">' + (isAgent() ? 'Your Agent Desk' : 'For your business') + '</p>' + list(work) + locked :
+        workLockedHtml()) +
       '<div class="wd-universal-nav-rule"></div>' +
       account.map(function(item){ return navLinkHtml(item,page); }).join('');
   }
+  /* What a locked My work tab shows: what it is and how to unlock it, with
+     no professional destinations listed. */
+  function workLockedHtml(){
+    return '<div class="wd-universal-work-locked wd-universal-lens-work" data-wd-work-locked="true">' +
+      '<span class="wd-universal-work-locked-icon"><i class="fas fa-lock" aria-hidden="true"></i></span>' +
+      '<b>My work is for members</b>' +
+      '<p>Tools for real estate agents and property pros. Unlock them with a Watchdog Agent or Pro membership.</p>' +
+      '<a class="wd-universal-work-locked-cta" href="' + route('/pro#pricing') + '">See membership plans <i class="fas fa-arrow-right" aria-hidden="true"></i></a>' +
+      (state.user ? '' : '<button type="button" class="wd-universal-work-locked-link" data-wd-universal="signin">Already a member? Sign in</button>') +
+      '<button type="button" class="wd-universal-work-locked-link" data-wd-universal="lens" data-wd-lens-to="home">Back to My home</button>' +
+    '</div>';
+  }
   function lensTabsHtml(lens){
-    var tab = function(key,icon,label){
+    var unlocked = workUnlocked();
+    var tab = function(key,icon,label,locked){
       var on = key === lens;
-      return '<button type="button" role="tab" data-wd-universal="lens" data-wd-lens="' + key + '" aria-selected="' + on + '" tabindex="' + (on ? 0 : -1) + '"><i class="fas ' + icon + '"></i><span>' + label + '</span></button>';
+      return '<button type="button" role="tab" data-wd-universal="lens" data-wd-lens="' + key + '"' + (locked ? ' data-wd-locked="true" aria-label="' + label + ', members only"' : '') + ' aria-selected="' + on + '" tabindex="' + (on ? 0 : -1) + '"><i class="fas ' + icon + '"></i><span>' + label + '</span></button>';
     };
-    return '<div class="wd-universal-lens" data-lens="' + lens + '" role="tablist" aria-label="Show tools for">' + tab('home','fa-house-chimney','My home') + tab('work','fa-briefcase','My work') + '<span class="wd-universal-lens-thumb" aria-hidden="true"></span></div>';
+    return '<div class="wd-universal-lens" data-lens="' + lens + '" role="tablist" aria-label="Show tools for">' + tab('home','fa-house-chimney','My home',false) + tab('work',unlocked ? 'fa-briefcase' : 'fa-lock','My work',!unlocked) + '<span class="wd-universal-lens-thumb" aria-hidden="true"></span></div>';
   }
   function brandHtml(){
     return '<a class="wd-universal-brand" href="' + route('/dashboard') + '"><span class="wd-universal-brand-mark"><i class="fas fa-dog"></i></span><span class="wd-universal-brand-copy"><strong>Watchdog</strong><small>PROPERTY INTELLIGENCE</small></span></a>';
