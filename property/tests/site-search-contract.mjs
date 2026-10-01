@@ -37,7 +37,7 @@ assert.ok(!/ROBUST Score/i.test(read('property/data/site-search.json')), 'never 
 assert.ok(!/Watchdog Intel\b/.test(read('property/data/site-search.json')), 'product name is "Watchdog Intelligence"');
 
 // ---------- ranking ----------
-const glossaryEntries = glossary.terms.map((g) => ({ id: `glossary-${g.slug}`, kind: 'term', label: g.term, aliases: [], keywords: [], href: `/glossary/${g.slug}/` }));
+const glossaryEntries = glossary.terms.map((g) => ({ id: `glossary-${g.slug}`, kind: 'term', label: g.term, aliases: Array.isArray(g.aliases) ? g.aliases : [], keywords: [], href: `/glossary/${g.slug}/` }));
 const prepared = Engine.prepare(dict.entries.concat(glossaryEntries));
 const top = (q, n = 3) => Engine.rank(prepared, q).slice(0, n).map((r) => r.entry);
 const find = (pred, msg) => { const e = dict.entries.find(pred); assert.ok(e, msg); return e; };
