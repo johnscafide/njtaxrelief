@@ -8,7 +8,8 @@
    - the GA4 event names the site already sends through window.gtag, including any
      sent before this file loaded (read back from window.dataLayer);
    - clicks on plan buttons ([data-billing-plan]) for checkout starts;
-   - return URLs from Stripe Checkout (/account?checkout=success, trial thank-you);
+   - return URLs from Stripe Checkout (/account?checkout=success, with &trial=1 for a
+     14-day trial start, and the agent trial thank-you page);
    - a first sign-in within two hours of account creation, for sign-ups.
    No email, name, phone or property data is sent to any ad platform from here. */
 (function(){
@@ -276,7 +277,7 @@
     var q=new URLSearchParams(location.search||'');
     var session=q.get('session_id')||'';
     if(LANDING_PATHS.indexOf(p)>=0&&onceKey('landing_'+p)) conversion('view_landing',{});
-    if(p==='/account'&&q.get('checkout')==='success'&&session) conversion('subscribe',{event_id:session,plan:q.get('plan'),cadence:q.get('cadence')});
+    if(p==='/account'&&q.get('checkout')==='success'&&session) conversion(q.get('trial')==='1'?'trial_started':'subscribe',{event_id:session,plan:q.get('plan'),cadence:q.get('cadence')});
     if(p==='/agents/trial/thanks'&&session) conversion('trial_started',{event_id:session,plan:'agent',cadence:'monthly'});
   }
   function planClicks(){

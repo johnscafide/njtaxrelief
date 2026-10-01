@@ -153,7 +153,7 @@ async function validateCheckout(key) {
       Authorization: `Bearer ${accessToken}`,
       'Content-Type': 'application/json'
     },
-    body: JSON.stringify({ tier: expected.tier, cadence: expected.cadence })
+    body: JSON.stringify({ tier: expected.tier, cadence: expected.cadence, trial: false })
   });
   if (!checkout.response.ok) {
     fail(`Staging Checkout ${key} failed (${checkout.response.status} ${checkout.payload?.code || ''}): ${checkout.payload?.error || 'unknown error'}`);
