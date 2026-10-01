@@ -1,0 +1,252 @@
+{
+ "municipality_code": "1530",
+ "municipality": "South Toms River Borough",
+ "county": "OCEAN",
+ "checked_at": "2026-09-30",
+ "resale_co": {
+  "status": "required",
+  "name": "Certificate of Continued Occupancy (Resale/Rental Certificate)",
+  "issued_by": "Borough Zoning & Code Enforcement office",
+  "lead_time": "Get the Ocean County Fire Marshal smoke/CO certificate first; the Borough schedules its own inspection only after it receives a copy",
+  "valid_for": "",
+  "requirements": [
+   "Since March 26, 2026, a smoke detector / carbon monoxide certificate from the Ocean County Fire Marshal must be obtained first and a copy sent to the Borough"
+  ],
+  "fees": [],
+  "how_to_apply": "Fill out the online Resale/Rental (Certificate of Continued Occupancy) form in the Borough's Munilogic portal (southtomsriver.egov.munilogic.com; you log in to an account there). First get the Ocean County Fire Marshal smoke/CO certificate (732-929-2088) and send the Borough a copy; the Borough then schedules its inspection. Borough Hall: 19 Double Trouble Rd., (732) 349-0403, 8:30 am to 4:00 pm Monday to Friday.",
+  "application_url": "",
+  "department_url": "https://www.southtomsriver.org/rentalsresalesapplications",
+  "phone": "(732) 349-0403",
+  "email": "",
+  "contact_name": "",
+  "contact_title": "",
+  "evidence": [
+   {
+    "url": "https://www.southtomsriver.org/zoningandcodeenforcement",
+    "quote": "If you are purchasing, selling or renting a home in South Toms River, please fill out the Online Certificate of Continued Occupancy form.",
+    "doc_date": "",
+    "via": "page",
+    "verified": true
+   },
+   {
+    "url": "https://www.southtomsriver.org/rentalsresalesapplications",
+    "quote": "Beginning March 26, 2026, the Borough of South Toms River will require all change in tenancy rental applications and all resale applications to obtain a Smoke Detector, Carbon Monoxide & Fire Extinguisher Compliance Certificate from the County Fire Marshal, 732-929-2088. After the County Fire Marshal completes the inspection, a copy of that certificate must be sent to the Borough before we will schedule our inspection.",
+    "doc_date": "",
+    "via": "page",
+    "verified": true
+   },
+   {
+    "url": "https://www.southtomsriver.org/contact",
+    "quote": "19 Double Trouble Rd. South Toms River, N.J. 08757 (732) 349-0403 8:30am - 4:00 pm Monday - Friday",
+    "doc_date": "",
+    "via": "page",
+    "verified": "eye"
+   }
+  ],
+  "confidence": "medium",
+  "notes": "The Borough site answers plain curl requests with HTTP 403, so its pages were read with the WebFetch tool; quotes are as returned by that tool (exact sentence wording, not raw HTML). The Borough clearly requires a Certificate of Continued Occupancy (online Resale/Rental form) for sales, but no Borough page shows the resale inspection fee, the inspection checklist or a named zoning/code contact. A search-engine summary of an ecode360 local law PDF (https://www.ecode360.com/SO4049/laws/LF1991889.pdf) mentioned a $100 resale inspection fee; that file could not be opened (ecode360 bot check) and the exact text was not visible, so it is not used. Ordinance 2022-07 on the Borough site sets vacant property registration fees ($250 initial), which are not resale fees. Building, electrical, plumbing and fire permits moved to the Toms River Building Department under a shared service (33 Washington Street, 732-341-1000 Ext. 8320). The portal is an account login page, so no direct application link is given. Borough Clerk (general contact on the Contact page): j.jubert@boroughofsouthtomsriver.com."
+ },
+ "fire_cert": {
+  "requirements": [
+   "Smoke alarms on every level including the basement; on bedroom levels within 10 feet of the bedrooms",
+   "Ceiling mounting preferred; wall alarms 4 to 12 inches below the ceiling, 4 inches from corners and at least 3 feet from air registers",
+   "All smoke alarms, including hardwired ones, must be under 10 years old",
+   "By year built: before 1978 at least one 10-year sealed battery alarm per level; 1978 to 1983 hardwired alarms on each level; 1984 to 1990 interconnected hardwired alarms with battery backup on each level; 1991 and later interconnected hardwired alarms with battery backup in bedrooms and on each level",
+   "Hardwired alarms that must be replaced for age must be replaced with hardwired alarms, not battery alarms",
+   "CO alarms in the immediate vicinity of sleeping areas when the home has a fuel-burning device or attached garage; battery-only and plug-in CO alarms under 5 years old; combination smoke/CO alarms under 10 years old",
+   "Homes with a generator, solar panels, battery storage or other secondary power source need a printed ANSI Z535.4 label (wording like 'CAUTION: MULTIPLE SOURCES OF POWER') within 18 inches of the main electrical panel and the electric meter",
+   "A primary low-voltage monitored fire alarm system needs a current NFPA 72 test report sent to the office before closing",
+   "Fire extinguisher no longer required (Ocean County Fire Marshal requirements sheet, updated February 2025)"
+  ],
+  "authorities": [
+   {
+    "name": "Ocean County Fire Marshal's Office (county fire code enforcing agency), Residential Resale & Rental Home Inspections",
+    "type": "unknown",
+    "area_served": "Entire borough (the County lists South Toms River for resales and rentals of 1-2 family buildings)",
+    "lead_time": "Apply more than 10 business days before closing for the lowest fee; the office calls to schedule after the online application is received",
+    "fees": [
+     {
+      "label": "Application received more than 10 business days before the change of occupancy",
+      "amount": "$45.00",
+      "quote": "$45.00- More than 10 business days from the time the application is received in our office, to the date of the change of occupancy.",
+      "source_url": "https://co.ocean.nj.us/OC/FireMarshal/frmSmokeDetector.aspx",
+      "verified": true
+     },
+     {
+      "label": "Application received 4 to 10 business days before the change of occupancy",
+      "amount": "$90.00",
+      "quote": "$90.00- 4 to 10 business days from the time the application is received in our office, to the date of the change of occupancy.",
+      "source_url": "https://co.ocean.nj.us/OC/FireMarshal/frmSmokeDetector.aspx",
+      "verified": true
+     },
+     {
+      "label": "Application received 3 business days or less before the change of occupancy",
+      "amount": "$161.00",
+      "quote": "$161.00- 3 business days or less from the time the application is received in our office, to the date of the change of occupancy.",
+      "source_url": "https://co.ocean.nj.us/OC/FireMarshal/frmSmokeDetector.aspx",
+      "verified": true
+     },
+     {
+      "label": "Missed appointment or no entry to the structure",
+      "amount": "$30.00",
+      "quote": "$30.00- Failure to maintain the scheduled appointment or entry to the structure will result in this fee.",
+      "source_url": "https://co.ocean.nj.us/OC/FireMarshal/frmSmokeDetector.aspx",
+      "verified": true
+     },
+     {
+      "label": "Re-inspection after a failed inspection (first re-inspection may be free; each additional one $30)",
+      "amount": "$30",
+      "quote": "In the event of a FAILED Inspection the first RE-INSPECTION may be conducted at no cost. Any additional RE-INSPECTIONS will be charged a fee of $30 per RE-INSPECTION there after.",
+      "source_url": "https://co.ocean.nj.us/OC/FireMarshal/frmSmokeDetector.aspx",
+      "verified": true
+     },
+     {
+      "label": "Credit card processing fee",
+      "amount": "$6.95",
+      "quote": "Please note there is a Credit Card fee of $6.95 and E-Check fee of $1.99.",
+      "source_url": "https://co.ocean.nj.us/OC/FireMarshal/frmSmokeDetector.aspx",
+      "verified": true
+     },
+     {
+      "label": "E-check processing fee",
+      "amount": "$1.99",
+      "quote": "Please note there is a Credit Card fee of $6.95 and E-Check fee of $1.99.",
+      "source_url": "https://co.ocean.nj.us/OC/FireMarshal/frmSmokeDetector.aspx",
+      "verified": true
+     },
+     {
+      "label": "Returned check processing fee",
+      "amount": "$15.00",
+      "quote": "Please note there is a $15.00 returned check processing fee",
+      "source_url": "https://co.ocean.nj.us/OC/FireMarshal/frmSmokeDetector.aspx",
+      "verified": true
+     }
+    ],
+    "how_to_apply": "Fill out the County's online application; the office then contacts you to schedule the inspection. Do not mail payment: pay at the inspection by paper check payable to Ocean County Fire Marshal (OCFM), credit card or e-check (no cash). Residential Resale & Rental Home Inspections office: 179 South Main St., Manahawkin, NJ 08050. The certificate is valid for 12 months from the inspection date.",
+    "application_url": "https://oceancounty.seamlessdocs.com/f/AppSDCO2FEComp",
+    "department_url": "https://co.ocean.nj.us/OC/FireMarshal/frmSmokeDetector.aspx",
+    "phone": "(732) 929-2088",
+    "email": "OCFMSmokeDetect@co.ocean.nj.us",
+    "contact_name": "Bree Dominguez",
+    "contact_title": "Residential Smoke CO Inspections staff, Ocean County Fire Marshal's Office",
+    "evidence": [
+     {
+      "url": "https://co.ocean.nj.us/OC/FireMarshal/frmSmokeDetector.aspx",
+      "quote": "Residential Resale & Rental Home Inspections 179 South Main St. Manahawkin, NJ 08050 Phone: (732) 929-2088 Fax: (732) 929-2077 Email: OCFMSmokeDetect@co.ocean.nj.us",
+      "doc_date": "",
+      "via": "page",
+      "verified": true
+     },
+     {
+      "url": "https://co.ocean.nj.us/OC/FireMarshal/frmSmokeDetector.aspx",
+      "quote": "AFTER YOU SUBMIT THE COMPLETED APPLICATION, WE WILL CONTACT YOU TO SCHEDULE YOUR APPOINTMENT. Please do not mail in your payment. Payment is made at the time of the inspection.",
+      "doc_date": "",
+      "via": "page",
+      "verified": true
+     },
+     {
+      "url": "https://co.ocean.nj.us/OC/FireMarshal/frmSmokeDetector.aspx",
+      "quote": "WE DO NOT ACCEPT CASH - Payment may be made by Paper Check, Credit Card or E-Check ONLY",
+      "doc_date": "",
+      "via": "page",
+      "verified": true
+     },
+     {
+      "url": "https://co.ocean.nj.us/OC/FireMarshal/frmSmokeDetector.aspx",
+      "quote": "The inspection certificate is valid for 12 months from the date of inspection.",
+      "doc_date": "",
+      "via": "page",
+      "verified": true
+     },
+     {
+      "url": "https://co.ocean.nj.us/OC/FireMarshal/frmStaff.aspx",
+      "quote": "Residential Smoke CO Inspections Bree Dominguez bdominguez@co.ocean.nj.us Lynda Saverino lyndasaverino@co.ocean.nj.us",
+      "doc_date": "",
+      "via": "page",
+      "verified": true
+     },
+     {
+      "url": "https://co.ocean.nj.us/OC/FireMarshal/frmStaff.aspx",
+      "quote": "Car 01 Chief Fire Marshal, Dennis M. Allen Email: dallen@co.ocean.nj.us",
+      "doc_date": "",
+      "via": "page",
+      "verified": true
+     },
+     {
+      "url": "https://co.ocean.nj.us/OC/FireMarshal/frmContact.aspx",
+      "quote": "Ocean County Fire Marshal's Office P.O. Box 2191 Toms River, NJ 08754-2191 Phone: 732-370-7360",
+      "doc_date": "",
+      "via": "page",
+      "verified": true
+     },
+     {
+      "url": "https://www.co.ocean.nj.us//WebContentFiles//0299689d-3e63-4678-ad90-3b7c04b233c3.pdf",
+      "quote": "As of February 3, 2025 , portable fire extinguishers are no longer required to obtain a CSACMAPFEC.",
+      "doc_date": "2025-02 (UPDATED FEBRUARY 2025)",
+      "via": "pdf",
+      "verified": true
+     },
+     {
+      "url": "https://co.ocean.nj.us/OC/FireMarshal/frmSmokeDetector.aspx",
+      "quote": "South Toms River Resales and Rentals of 1-2 family buildings",
+      "doc_date": "",
+      "via": "page",
+      "verified": true
+     },
+     {
+      "url": "https://www.southtomsriver.org/rentalsresalesapplications",
+      "quote": "Beginning March 26, 2026, the Borough of South Toms River will require all change in tenancy rental applications and all resale applications to obtain a Smoke Detector, Carbon Monoxide & Fire Extinguisher Compliance Certificate from the County Fire Marshal, 732-929-2088.",
+      "doc_date": "",
+      "via": "page",
+      "verified": true
+     },
+     {
+      "url": "https://www.southtomsriver.org/rentalsresalesapplications",
+      "quote": "Per the State of New Jersey unlicensed personnel are no longer authorized to conduct inspections related to smoke alarms, carbon monoxide alarms, and Secondary Power Source Identification Label compliance.",
+      "doc_date": "",
+      "via": "page",
+      "verified": true
+     },
+     {
+      "url": "https://nj.gov/dca/dfs/pdf/ANNUAL%20REGISTRY/THIRD%20QUARTER%20LEA%20REGISTRY%202026.pdf",
+      "quote": "C South Toms River Borough",
+      "doc_date": "2026-07 (as of June 30, 2026)",
+      "via": "pdf",
+      "verified": true
+     },
+     {
+      "url": "https://www.nj.gov/dca/dfs/pdf/fire%20directory_county%20summary/fire_code_enforcement_director.pdf",
+      "quote": "LEAID: 1529-001 Enf Auth. County Fire Official Dennis Allen Phone (732) 370-7360",
+      "doc_date": "2026 (survey date 6/17/2026)",
+      "via": "state_directory",
+      "verified": true
+     }
+    ],
+    "confidence": "high"
+   }
+  ],
+  "notes": "The Borough's Rentals, Resales & Applications page (read with WebFetch because curl gets HTTP 403) sends every resale to the Ocean County Fire Marshal for the smoke/CO certificate starting March 26, 2026, citing P.L.2025, c.19 (inspections only by licensed fire inspectors). The County's Resale & Rental Home Inspections page lists South Toms River for 'Resales and Rentals of 1-2 family buildings'. Fees are the County's published schedule (effective January 1, 2019, repeated on its requirements sheet updated February 2025). The Borough page still calls it a 'Fire Extinguisher Compliance Certificate', but the County's February 2025 sheet says extinguishers are no longer required. The state directory (South Toms River is code 1529 there) names Dennis Allen, county fire official, (732) 370-7360, dallen@co.ocean.nj.us. The County's resale unit is at 179 South Main St., Manahawkin; its staff page lists Bree Dominguez and Lynda Saverino (lyndasaverino@co.ocean.nj.us) for residential smoke/CO inspections."
+ },
+ "other_items": [
+  {
+   "label": "Fire Marshal certificate before Borough inspection",
+   "detail": "A copy of the Ocean County Fire Marshal smoke/CO certificate must be sent to the Borough before it will schedule the resale inspection.",
+   "source_url": "https://www.southtomsriver.org/rentalsresalesapplications"
+  }
+ ],
+ "open_questions": [
+  "Borough resale Certificate of Continued Occupancy fee, re-inspection fee and inspection checklist (not published on the Borough site; the ecode360 local law could not be opened).",
+  "Named zoning / code enforcement contact, phone extension and email for resales.",
+  "How long the Borough certificate is valid."
+ ],
+ "verification": {
+  "fees": 8,
+  "fee_ok": 8,
+  "fee_bad": 0,
+  "fee_unchecked": 0,
+  "quotes": 16,
+  "q_ok": 16,
+  "q_bad": 0,
+  "q_unchecked": 0
+ }
+}

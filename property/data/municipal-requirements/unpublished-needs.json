@@ -240,6 +240,43 @@
    ]
   },
   {
+   "code": "0603",
+   "town": "Deerfield Township",
+   "county": "Cumberland",
+   "live": false,
+   "needs": [
+    "fire_fee"
+   ]
+  },
+  {
+   "code": "0608",
+   "town": "Lawrence Township",
+   "county": "Cumberland",
+   "live": false,
+   "needs": [
+    "co_fee",
+    "fire_fee"
+   ]
+  },
+  {
+   "code": "0609",
+   "town": "Maurice River Township",
+   "county": "Cumberland",
+   "live": false,
+   "needs": [
+    "co_required"
+   ]
+  },
+  {
+   "code": "0610",
+   "town": "Millville",
+   "county": "Cumberland",
+   "live": false,
+   "needs": [
+    "co_required"
+   ]
+  },
+  {
    "code": "0901",
    "town": "Bayonne",
    "county": "Hudson",
@@ -380,6 +417,43 @@
    "code": "1224",
    "town": "Spotswood Borough",
    "county": "Middlesex",
+   "live": false,
+   "needs": [
+    "co_required"
+   ]
+  },
+  {
+   "code": "1502",
+   "town": "Barnegat Light Borough",
+   "county": "Ocean",
+   "live": false,
+   "needs": [
+    "co_required",
+    "fire_fee"
+   ]
+  },
+  {
+   "code": "1512",
+   "town": "Jackson Township",
+   "county": "Ocean",
+   "live": false,
+   "needs": [
+    "co_required"
+   ]
+  },
+  {
+   "code": "1515",
+   "town": "Lakewood Township",
+   "county": "Ocean",
+   "live": false,
+   "needs": [
+    "co_required"
+   ]
+  },
+  {
+   "code": "1521",
+   "town": "Ocean Township",
+   "county": "Ocean",
    "live": false,
    "needs": [
     "co_required"

@@ -1,0 +1,215 @@
+{
+ "municipality_code": "1708",
+ "municipality": "Penns Grove Borough",
+ "county": "SALEM",
+ "checked_at": "2026-09-30",
+ "resale_co": {
+  "status": "required",
+  "name": "Certificate of Occupancy (Sale/Transfer of Ownership)",
+  "issued_by": "Borough of Penns Grove Housing Office",
+  "lead_time": "Fee is due before the inspection is scheduled. Any re-inspection must be requested in writing within 30 days of the first inspection.",
+  "valid_for": "",
+  "requirements": [
+   "Home must comply with all Borough building, plumbing, electrical, zoning, health, safety, fire and minimum housing ordinances",
+   "All property taxes and water and sewer charges must be paid in full before the certificate is issued",
+   "Application must list all occupants (names and ages) and the buyer",
+   "Smoke detectors on each level including the basement (top of basement stairs), outside each sleeping area and inside all bedrooms; carbon monoxide detector within 10 feet of bedrooms",
+   "Mounted fire extinguisher in the kitchen (listed on the 2021 checklist)",
+   "GFCI protection for outlets within 6 feet of water; stove with anti-tilt device; bathroom exhaust fan if no window",
+   "Handrails and guardrails on stairs, decks, porches and basement stairs; pool fence at the pool entrance",
+   "House number, painted surfaces, gutters, soffit and fascia, sidewalks in good condition; no abandoned vehicles or standing water; all trash and debris removed",
+   "Roof, electrical service or chimney certification may be required; heating emergency shut-off switch",
+   "Exterior doors may not have a removable key on the inside"
+  ],
+  "fees": [
+   {
+    "label": "Certificate of occupancy application, covers the initial inspection and one re-inspection",
+    "amount": "$50.00",
+    "quote": "The $50.00 initial application fee for a Certificate of Occupancy covers the initial inspection and one (1) re-inspection.",
+    "source_url": "https://pennsgrove-nj.org/wp-content/uploads/2021/08/Certificate_of_Occupancy-min.pdf",
+    "verified": true
+   },
+   {
+    "label": "Each later inspection (a no-show without cancelling counts as an inspection)",
+    "amount": "$50.00",
+    "quote": "Each subsequent inspection is $50.00.",
+    "source_url": "https://pennsgrove-nj.org/wp-content/uploads/2021/08/Certificate_of_Occupancy-min.pdf",
+    "verified": true
+   },
+   {
+    "label": "Certificate of occupancy (Borough fee list)",
+    "amount": "$50.00",
+    "quote": "Certificate of Occupancy - $50.00",
+    "source_url": "https://pennsgrove-nj.org/housing-office/",
+    "verified": true
+   }
+  ],
+  "how_to_apply": "Fill out the Borough's Certificate of Occupancy Application (check 'Sale/Transfer of Ownership'; list the owner, all occupants, the buyer and the realtor), sign the re-inspection rules and ordinance acknowledgment pages, and pay the $50 fee (cash, check or money order) before the inspection is scheduled. Housing Office: 1 State Street, First Floor, Penns Grove, Monday to Friday 8am to 4pm, 856-299-0098 ext. 100.",
+  "application_url": "https://pennsgrove-nj.org/wp-content/uploads/2021/08/Certificate_of_Occupancy-min.pdf",
+  "department_url": "https://pennsgrove-nj.org/housing-office/",
+  "phone": "856-299-0098 ext 100",
+  "email": "housinginspector@pennsgrove-nj.org",
+  "contact_name": "Enid Reyes",
+  "contact_title": "Housing Office contact (also listed as a Code Enforcement officer)",
+  "evidence": [
+   {
+    "url": "https://pennsgrove-nj.org/wp-content/uploads/2021/08/Certificate_of_Occupancy-min.pdf",
+    "quote": "CERTIFICATE OF OCCUPANCY APPLICATION Fee: $50 Due (Cash, Check, Money Order) Prior to Scheduling Inspection",
+    "doc_date": "2021-08 (upload folder)",
+    "via": "pdf",
+    "verified": true
+   },
+   {
+    "url": "https://pennsgrove-nj.org/wp-content/uploads/2021/08/Certificate_of_Occupancy-min.pdf",
+    "quote": "Rental ☐ Sale/Transfer of Ownership ☐",
+    "doc_date": "2021-08",
+    "via": "pdf",
+    "verified": true
+   },
+   {
+    "url": "https://pennsgrove-nj.org/wp-content/uploads/2021/08/Certificate_of_Occupancy-min.pdf",
+    "quote": "No certificate of occupancy shall be issued for a dwelling unit or commercial institution unless all real property taxes for land and improvements upon which the dwelling unit or commercial institution is located and all water and sewer charges related thereto are paid in full.",
+    "doc_date": "2021-08 (quotes Borough code section 106-5 C)",
+    "via": "pdf",
+    "verified": true
+   },
+   {
+    "url": "https://pennsgrove-nj.org/wp-content/uploads/2021/08/Certificate_of_Occupancy-min.pdf",
+    "quote": "Any request for a Re-Inspection must be made to the Housing Office in writing no later than 30 days from the initial inspection.",
+    "doc_date": "2021-08",
+    "via": "pdf",
+    "verified": true
+   },
+   {
+    "url": "https://pennsgrove-nj.org/housing-office/",
+    "quote": "Enid Reyes: 856-299-0098 ext 100",
+    "doc_date": "2026-09-30 (page fetched)",
+    "via": "page",
+    "verified": true
+   },
+   {
+    "url": "https://pennsgrove-nj.org/housing-office/",
+    "quote": "The Housing Office handles a variety of situations such as Residential Certificates of Occupancy and Land Use Questions.",
+    "doc_date": "2026-09-30 (page fetched)",
+    "via": "page",
+    "verified": true
+   }
+  ],
+  "confidence": "high",
+  "notes": "The Borough application (uploaded August 2021) has a 'Sale/Transfer of Ownership' box and asks for the buyer's details, and quotes Borough code section 106-5. The Housing Office page lists 'Initial Inspection and Re-inspection - $50.00' and 'Zoning Permit Application - $10.00' alongside the $50.00 certificate fee; the zoning permit is for fences, pools, solar and similar projects, not resales. Enid Reyes's email is hidden on the Borough pages by an email-protection script; it decodes to housinginspector@pennsgrove-nj.org. The Borough gives no job title for her beyond listing her under the Housing Office and Code Enforcement officers. The 2021 form prints the Housing Office number as (856) 299-0098 ext. 101; the current website says ext. 100, which is used here. The checklist still lists a mounted fire extinguisher; P.L.2025, c.19 (February 3, 2025) removed it from the state smoke certificate rule, but it remains on this 2021 Borough list. No validity period is stated. The Borough code is on ecode360 (PE0949) and was not opened."
+ },
+ "fire_cert": {
+  "requirements": [],
+  "authorities": [
+   {
+    "name": "NJ DCA Division of Fire Safety, Bureau of Fire Code Enforcement",
+    "type": "state_dca",
+    "area_served": "Entire borough",
+    "lead_time": "Fee depends on how many business days before closing you apply (more than 10, 4 to 10, under 4).",
+    "fees": [
+     {
+      "label": "State smoke/carbon monoxide certificate, applied more than 10 business days before closing",
+      "amount": "$45",
+      "quote": "If you are applying for a certificate more than ten business days from the closing date the fee is $45 dollars",
+      "source_url": "https://firesolutions.dca.nj.gov/ultra-fire-home/smoke-application-create/",
+      "verified": null
+     },
+     {
+      "label": "State smoke/carbon monoxide certificate, applied 4 to 10 business days before closing",
+      "amount": "$90",
+      "quote": "if applying 4 to 10 business days from the closing date the fee is $90",
+      "source_url": "https://firesolutions.dca.nj.gov/ultra-fire-home/smoke-application-create/",
+      "verified": null
+     },
+     {
+      "label": "State smoke/carbon monoxide certificate, closing less than 4 business days away",
+      "amount": "$161",
+      "quote": "if the closing date is less than four business days the fee is $161.",
+      "source_url": "https://firesolutions.dca.nj.gov/ultra-fire-home/smoke-application-create/",
+      "verified": null
+     }
+    ],
+    "how_to_apply": "Apply online through the NJ DCA Fire Safety portal ('Start Your Smoke Certification Application'). Pay by e-check or credit card before submitting; a valid email address is required. The certificate is emailed once the application is submitted, the fee is paid and any required inspections are done. Homes heated by electricity that do not need a carbon monoxide alarm should also email BFCE_CSDCMAC@dca.nj.gov.",
+    "application_url": "https://firesolutions.dca.nj.gov/ultra-fire-home/smoke-application-create/",
+    "department_url": "https://www.nj.gov/dca/dfs/offices/bfce.shtml",
+    "phone": "(609) 633-6106",
+    "email": "BFCE_CSDCMAC@dca.nj.gov",
+    "contact_name": "Louis Kilmer",
+    "contact_title": "Bureau Chief, Bureau of Fire Code Enforcement (listed as the State Fire Official for Penns Grove in the state fire directory)",
+    "evidence": [
+     {
+      "url": "https://nj.gov/dca/dfs/pdf/ANNUAL%20REGISTRY/THIRD%20QUARTER%20LEA%20REGISTRY%202026.pdf",
+      "quote": "S Penns Grove Borough",
+      "doc_date": "2026-07",
+      "via": "pdf",
+      "verified": true
+     },
+     {
+      "url": "https://www.nj.gov/dca/dfs/pdf/fire%20directory_county%20summary/state_towns%207_17_26.pdf",
+      "quote": "PENNS GROVE 1707 SC",
+      "doc_date": "2026-07-17 (SC = Smoke Certs)",
+      "via": "pdf",
+      "verified": true
+     },
+     {
+      "url": "https://www.nj.gov/dca/dfs/pdf/fire%20directory_county%20summary/fire_code_enforcement_director.pdf",
+      "quote": "Penns Grove Township1707 LEAID: 1707-999 Enf Auth. State Fire Official Louis Kilmer Phone (609)633-6132 Addr: PO Box 809 Trenton NJ 08625-0809",
+      "doc_date": "2026-03 (survey date 3/20/2026)",
+      "via": "state_directory",
+      "verified": true
+     },
+     {
+      "url": "https://firesolutions.dca.nj.gov/_odata/firedistricts",
+      "quote": "\"ultra_name\":\"PENNS GROVE BORO-001\",\"ultra_firedistrictcode\":\"4008\" ... \"ultra_firejurisdiction\":{ \"Name\":\"State\",\"Value\":240000000 },\"ultra_smokecertexempt\":null",
+      "doc_date": "2026-09-30 (live portal data)",
+      "via": "page",
+      "verified": null
+     },
+     {
+      "url": "https://pennsgrove-nj.org/construction-code-office/",
+      "quote": "Fire Subcode Official - DCA",
+      "doc_date": "2026-09-30 (page fetched)",
+      "via": "page",
+      "verified": true
+     },
+     {
+      "url": "https://www.nj.gov/dca/dfs/offices/bfce.shtml",
+      "quote": "Louis Kilmer, Bureau Chief CPM Address: P.O. Box 809, Trenton, NJ 08625-0809 Phone: (609) 633-6106",
+      "doc_date": "2026-09-30 (page fetched)",
+      "via": "page",
+      "verified": true
+     }
+    ],
+    "confidence": "medium"
+   }
+  ],
+  "notes": "The State (NJ DCA Division of Fire Safety) is Penns Grove's fire code enforcing agency (registry code S; the state directory files it as 'Penns Grove Township', code 1707) and is marked 'SC' (the State issues smoke certificates) on the DCA's July 2026 state towns list; the DCA portal lists PENNS GROVE BORO-001 under the State and not smoke-certificate exempt. However, the Borough's 2021 Certificate of Occupancy packet includes its own page titled 'Certification for One & Two Family Dwelling, Certificate of Smoke Detector and Carbon Monoxide Alarm Compliance', initialed by the applicant and the Housing inspector. It is not clear whether the Borough still issues that certificate or whether buyers also need the State certificate; confidence is medium until confirmed. The DCA online form is the Certificate of Smoke Alarm, Carbon Monoxide Alarm, and Secondary Power Source Identification Label Compliance (CSACMASPSIL) and no longer includes a fire extinguisher (P.L.2025, c.19). Liberty Fire Company #1 (Chief Ed Brancard) is the volunteer fire company, not an inspecting agency."
+ },
+ "other_items": [
+  {
+   "label": "Taxes and water/sewer charges paid",
+   "detail": "No certificate of occupancy is issued until all property taxes and water and sewer charges are paid in full (Borough code section 106-5 C).",
+   "source_url": "https://pennsgrove-nj.org/wp-content/uploads/2021/08/Certificate_of_Occupancy-min.pdf"
+  },
+  {
+   "label": "Open permits",
+   "detail": "The application's office section checks for open permits and current taxes.",
+   "source_url": "https://pennsgrove-nj.org/wp-content/uploads/2021/08/Certificate_of_Occupancy-min.pdf"
+  }
+ ],
+ "open_questions": [
+  "Does the Borough Housing Office's smoke and carbon monoxide certification (page 3 of its 2021 CO packet) replace the State DCA certificate, or must sellers also apply to the DCA?",
+  "How far ahead of closing should the certificate of occupancy be requested, and how long is it valid?",
+  "Does the Borough still require a mounted kitchen fire extinguisher after P.L.2025, c.19?"
+ ],
+ "verification": {
+  "fees": 6,
+  "fee_ok": 3,
+  "fee_bad": 0,
+  "fee_unchecked": 3,
+  "quotes": 12,
+  "q_ok": 11,
+  "q_bad": 0,
+  "q_unchecked": 1
+ }
+}

@@ -1,0 +1,210 @@
+{
+ "municipality_code": "1511",
+ "municipality": "Island Heights Borough",
+ "county": "OCEAN",
+ "checked_at": "2026-09-30",
+ "resale_co": {
+  "status": "required",
+  "name": "Resale Certificate (Existing Structure Inspection); Transfer Certificate if the home cannot pass",
+  "issued_by": "Borough Office of Code Enforcement",
+  "lead_time": "",
+  "valid_for": "Resale Certificate: 1 year from issuance. Transfer Certificate: 180 days.",
+  "requirements": [
+   "All construction (UCC) permits closed and all property maintenance violations resolved before the inspection is scheduled",
+   "Chimney certification from a licensed chimney sweep or HVAC contractor",
+   "Heating system certification from a licensed HVAC contractor or plumber",
+   "Yard kept up, with no overgrown grass or weeds and no debris or trash",
+   "Reflective house numbers at least 2 inches tall on the front of the house",
+   "Secure handrails on every staircase of 4 or more steps",
+   "Plumbing working with water flowing from each faucet; electricity, gas and water on",
+   "Outlets working, with GFI outlets in bathrooms, kitchen and outdoors",
+   "Anti-tip device on range stoves",
+   "Smoke detectors in all bedrooms and in the hall outside the bedrooms, plus at least one smoke detector and one CO detector on each level",
+   "2A-10BC fire extinguisher mounted within 10 feet of the kitchen (Borough ordinance and August 2024 checklist)",
+   "Interior and exterior doors open and close properly, exterior doors lock, windows lock and stay open when raised"
+  ],
+  "fees": [
+   {
+    "label": "Resale Certificate inspection",
+    "amount": "$100.00",
+    "quote": "Upon making application for a Resale Certificate the property owner shall pay the inspection fee of $100.00, prior to the scheduling of an inspection.",
+    "source_url": "https://islandheightsborough.gov/wp-content/uploads/2024/09/Newsletter-240716.pdf",
+    "verified": true
+   },
+   {
+    "label": "Re-inspection after a failed inspection (request within 30 days)",
+    "amount": "$50.00",
+    "quote": "If the subject property fails inspection, the property owner may request a reinspection within thirty (30) days upon payment of a $50.00 reinspection fee.",
+    "source_url": "https://islandheightsborough.gov/wp-content/uploads/2024/09/Newsletter-240716.pdf",
+    "verified": true
+   },
+   {
+    "label": "Transfer Certificate application (home that cannot pass the resale inspection)",
+    "amount": "$100.00",
+    "quote": "An application for a Transfer Certificate shall be made on a form prescribed by the Borough and the application fee shall be $100.00.",
+    "source_url": "https://islandheightsborough.gov/wp-content/uploads/2024/09/Newsletter-240716.pdf",
+    "verified": true
+   }
+  ],
+  "how_to_apply": "Fill out the Existing Structure Inspection Application (check Resale Certificate, or Transfer Certificate if the home will not pass) and pay the $100 fee by cash or check to the Borough Office of Code Enforcement, PO Box 797, Island Heights (office at 1 East End Avenue). Close all permits, resolve violations and hand in the chimney and heating certifications before the inspection is scheduled. For a Transfer Certificate, include a letter from the buyer acknowledging the home may not be occupied until the new owner gets a Resale Certificate or a UCC Certificate of Occupancy.",
+  "application_url": "https://islandheightsborough.gov/wp-content/uploads/2024/07/Form-Structure-Certificate-Application-and-Checklist-08-2024.pdf",
+  "department_url": "https://islandheightsborough.gov/code/",
+  "phone": "732-270-6415",
+  "email": "codeenforcement@islandheightsborough.gov",
+  "contact_name": "Sean Asay",
+  "contact_title": "Code Enforcement Officer",
+  "evidence": [
+   {
+    "url": "https://islandheightsborough.gov/wp-content/uploads/2024/09/Newsletter-240716.pdf",
+    "quote": "12-1.4 Resale Certificate A. A Resale Certificate issued by the Borough Office of Code Enforcement shall be required: 1. Prior to the sale or transfer of any improved commercial or residential property in the Borough",
+    "doc_date": "2024-07-16 (Council minutes, Ordinance 2024-06 final reading and adoption)",
+    "via": "pdf",
+    "verified": true
+   },
+   {
+    "url": "https://islandheightsborough.gov/wp-content/uploads/2024/09/Newsletter-240716.pdf",
+    "quote": "G. A Resale Certificate shall be valid for one (1) year from the date of issuance.",
+    "doc_date": "2024-07-16",
+    "via": "pdf",
+    "verified": true
+   },
+   {
+    "url": "https://islandheightsborough.gov/wp-content/uploads/2024/09/Newsletter-240716.pdf",
+    "quote": "D. A Transfer Certificate shall be valid for the sale or transfer of a property for one hundred and eighty (180) days from the date of issuance.",
+    "doc_date": "2024-07-16",
+    "via": "pdf",
+    "verified": true
+   },
+   {
+    "url": "https://islandheightsborough.gov/wp-content/uploads/2024/09/Newsletter-240716.pdf",
+    "quote": "E. Upon taking ownership of a property that was the subject of a Transfer Certificate, the new owner shall have a maximum of one hundred and eighty (180) days to obtain a Resale Certificate or a Certificate of Occupancy under the UCC.",
+    "doc_date": "2024-07-16",
+    "via": "pdf",
+    "verified": true
+   },
+   {
+    "url": "https://islandheightsborough.gov/forms/",
+    "quote": "Application for Property Certificate (Rental or Sale)",
+    "doc_date": "2026-09 (page checked 2026-09-30)",
+    "via": "page",
+    "verified": true
+   },
+   {
+    "url": "https://islandheightsborough.gov/wp-content/uploads/2024/07/Form-Structure-Certificate-Application-and-Checklist-08-2024.pdf",
+    "quote": "INSPECTION TYPE (CHOOSE ONE): Rental Certificate Resale Certificate Transfer Certificate",
+    "doc_date": "2024-08 (file name 08-2024)",
+    "via": "pdf",
+    "verified": true
+   },
+   {
+    "url": "https://islandheightsborough.gov/wp-content/uploads/2024/07/Form-Structure-Certificate-Application-and-Checklist-08-2024.pdf",
+    "quote": "Email: codeenforcement@islandheightsborough.gov",
+    "doc_date": "2024-08",
+    "via": "pdf",
+    "verified": true
+   },
+   {
+    "url": "https://islandheightsborough.gov/code/",
+    "quote": "Code Enforcement Officer - Sean Asay, 732-270-6415 OFFICE HOURS: Monday Evenings 6pm-8pm",
+    "doc_date": "2026-09",
+    "via": "page",
+    "verified": true
+   },
+   {
+    "url": "https://islandheightsborough.gov/wp-content/uploads/2024/07/Form-Structure-Certificate-Application-and-Checklist-08-2024.pdf",
+    "quote": "FEE $100",
+    "doc_date": "2024-08 (file name 08-2024)",
+    "via": "pdf",
+    "verified": true
+   }
+  ],
+  "confidence": "high",
+  "notes": "Ordinance 2024-06 (repealing and replacing Borough Code 12-1.3 and adding 12-1.4 Resale Certificate and 12-1.5 Transfer Certificate) is printed in the July 16, 2024 Council minutes, which the Borough posted as a newsletter; the minutes show the final reading and motion to adopt. A Transfer Certificate ($100.00) lets a home that cannot pass be sold, but the new owner must then get a Resale Certificate or UCC Certificate of Occupancy within 180 days and may not occupy it until then. An older Certificate of Occupancy application (December 2023 upload) listed a $35.00 re-inspection fee; the current August 2024 form and the ordinance say $50.00. The Code Enforcement page gives Sean Asay as Code Enforcement Officer (Monday evenings 6 to 8 pm) and Gary Stocco as Zoning Officer, both at 732-270-6415; the email is the Office of Code Enforcement address printed on the form. The Borough also runs a separate Rental Certificate for rentals (valid 2 years or until tenants change). No lead time is published."
+ },
+ "fire_cert": {
+  "requirements": [
+   "Borough resale inspection (Ordinance 2024-06, August 2024 checklist) still lists a 2A-10BC fire extinguisher within 10 feet of the kitchen, although state law dropped the extinguisher on February 3, 2025"
+  ],
+  "authorities": [
+   {
+    "name": "Island Heights Borough Fire Official (municipal fire code enforcing agency)",
+    "type": "municipal_fire_bureau",
+    "area_served": "Entire borough",
+    "lead_time": "",
+    "fees": [],
+    "how_to_apply": "The Borough does not post a smoke and CO certificate application or fee. The Fire Official's office hours are by appointment; call the Borough office at 732-270-6415 or write to the Fire Official at PO Box 797, Island Heights, NJ 08732. The Borough's Resale Certificate inspection also checks smoke and CO detectors; ask whether it serves as the state certificate.",
+    "application_url": "",
+    "department_url": "https://islandheightsborough.gov/fire-official/",
+    "phone": "732-270-6415",
+    "email": "",
+    "contact_name": "William Richert",
+    "contact_title": "Fire Official (also Fire Sub-Code Official)",
+    "evidence": [
+     {
+      "url": "https://islandheightsborough.gov/fire-official/",
+      "quote": "Island Heights Fire Official William Richert Telephone - 732-270-6415, Fax - 732-270-8586 OFFICE HOURS: By Appointment",
+      "doc_date": "2026-09 (page checked 2026-09-30)",
+      "via": "page",
+      "verified": true
+     },
+     {
+      "url": "https://islandheightsborough.gov/fire-official/",
+      "quote": "The Fire Official is responsible for conducting fire prevention inspections of all commercial properties in the Borough.",
+      "doc_date": "2026-09",
+      "via": "page",
+      "verified": true
+     },
+     {
+      "url": "https://nj.gov/dca/dfs/pdf/ANNUAL%20REGISTRY/THIRD%20QUARTER%20LEA%20REGISTRY%202026.pdf",
+      "quote": "M Island Heights Borough",
+      "doc_date": "2026-07",
+      "via": "pdf",
+      "verified": true
+     },
+     {
+      "url": "https://www.nj.gov/dca/dfs/pdf/fire%20directory_county%20summary/fire_code_enforcement_director.pdf",
+      "quote": "LEAID: 1510-001 Enf Auth. Municipal Fire Official William Richert Phone (732) 270-0388 Addr: PO Box 797 Island Heights NJ 08752",
+      "doc_date": "2026-06-25 (survey date)",
+      "via": "state_directory",
+      "verified": true
+     },
+     {
+      "url": "https://islandheightsborough.gov/wp-content/uploads/2024/09/Newsletter-240716.pdf",
+      "quote": "That smoke detectors are mounted and functional in all bedrooms and that a smoke detector is present in the hallway outside of the bedrooms and that one functioning smoke detector and one functioning carbon monoxide detector is mounted on each level of the structure",
+      "doc_date": "2024-07-16",
+      "via": "pdf",
+      "verified": true
+     }
+    ],
+    "confidence": "medium"
+   }
+  ],
+  "notes": "Island Heights Borough is its own fire code enforcing agency (registry code M). The state directory lists it under directory code 1510 (Watchdog code 1511), LEA name 'Island Heights Boro Fire Prev', Fire Official William Richert, phone (732) 270-0388, with the Smoke Detector Compliance line printed as (908) 270-0388 (the area code looks like a typo). The directory's email for him is a personal Gmail address, so it is not used here; the Borough page gives the office phone 732-270-6415 and no email. The Borough's Fire Official page describes commercial inspections only and does not mention resale smoke certificates, so who issues the certificate for a home sale and at what fee is not published."
+ },
+ "other_items": [
+  {
+   "label": "Open permits and violations",
+   "detail": "All UCC permits must be closed and all property maintenance violations resolved before the resale inspection is scheduled.",
+   "source_url": "https://islandheightsborough.gov/wp-content/uploads/2024/07/Form-Structure-Certificate-Application-and-Checklist-08-2024.pdf"
+  },
+  {
+   "label": "Chimney and heating certifications",
+   "detail": "Chimney certification (licensed chimney sweep or HVAC contractor) and heating system certification (licensed HVAC contractor or plumber) are due before the inspection.",
+   "source_url": "https://islandheightsborough.gov/wp-content/uploads/2024/09/Newsletter-240716.pdf"
+  }
+ ],
+ "open_questions": [
+  "Who issues the smoke and CO alarm certificate for a sale (the Fire Official or the Code Enforcement resale inspection) and what it costs.",
+  "How far before closing to apply for the Resale Certificate."
+ ],
+ "verification": {
+  "fees": 3,
+  "fee_ok": 3,
+  "fee_bad": 0,
+  "fee_unchecked": 0,
+  "quotes": 14,
+  "q_ok": 14,
+  "q_bad": 0,
+  "q_unchecked": 0
+ }
+}

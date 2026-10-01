@@ -1,0 +1,203 @@
+{
+ "municipality_code": "1524",
+ "municipality": "Plumsted Township",
+ "county": "OCEAN",
+ "checked_at": "2026-09-30",
+ "resale_co": {
+  "status": "not_required",
+  "name": "",
+  "issued_by": "",
+  "lead_time": "",
+  "valid_for": "",
+  "requirements": [],
+  "fees": [],
+  "how_to_apply": "No separate Township Certificate of Occupancy is needed for a resale. The only resale requirement is the Township's smoke and carbon monoxide certification, issued by the Construction Office (see the fire certificate section).",
+  "application_url": "",
+  "department_url": "https://www.plumsted.gov/1252/Resale-RequirementsSmoke-Certification",
+  "phone": "609-758-2241 Ext: 107",
+  "email": "rthomas@plumsted.org",
+  "contact_name": "Robert Thomas",
+  "contact_title": "Resale/Rental Inspector",
+  "evidence": [
+   {
+    "url": "https://www.plumsted.gov/1252/Resale-RequirementsSmoke-Certification",
+    "quote": "Certification of Smoke and Carbon Monoxide Is the Only Inspection Required for a Resale in Plumsted Township",
+    "doc_date": "2026-09 (page read 2026-09-30)",
+    "via": "page",
+    "verified": true
+   },
+   {
+    "url": "https://www.plumsted.gov/1252/Resale-RequirementsSmoke-Certification",
+    "quote": "For the sale of any single-family home, multiple-unit home, or business, all we require is an inspection for smoke detectors and Carbon Monoxide.",
+    "doc_date": "2026-09",
+    "via": "page",
+    "verified": true
+   },
+   {
+    "url": "https://www.plumsted.gov/1202/Construction",
+    "quote": "Resale: Certificate of Smoke and Carbon Monoxide only - see Resale Requirements tab on the left.",
+    "doc_date": "2026-09",
+    "via": "page",
+    "verified": null
+   },
+   {
+    "url": "https://www.plumsted.gov/directory.aspx",
+    "quote": "Robert Thomas Plumbing/Mechanical Subcode/Inspector/Building Inspector/Resale/Rental Inspector",
+    "doc_date": "2026-09",
+    "via": "page",
+    "verified": true
+   },
+   {
+    "url": "https://www.plumsted.gov/directory.aspx",
+    "quote": "Robert Thomas 609-758-2241 Ext: 107",
+    "doc_date": "2026-09 (email from the directory's Email link: rthomas@plumsted.org)",
+    "via": "page",
+    "verified": true
+   }
+  ],
+  "confidence": "high",
+  "notes": "The Township says the smoke and carbon monoxide certification is the only inspection required for a resale, so there is no separate resale Certificate of Occupancy; the certification itself comes from Township Ordinance 2014-03 ('Smoke certification/Resale Inspection Ordinance 2014-03'). Rental units (one and two units only) need a separate rental inspection ($125) with heating certification and, for wells, a water certificate; that is rental-only. The Township site plumsted.org now redirects to plumsted.gov. Staff emails come from the Township staff directory's email links."
+ },
+ "fire_cert": {
+  "requirements": [
+   "Required for all resales, including uninhabitable bank-owned properties",
+   "Smoke alarms on each level including basements (not unfinished attic or crawl space) and within 10 feet of sleeping areas; less than 10 years old and at least 3 feet from vents",
+   "Battery smoke alarms must be 10-year sealed battery type; an alarm with a removable battery fails the inspection",
+   "Hardwired smoke alarms must be replaced with hardwired alarms",
+   "Carbon monoxide alarms within 10 feet of the sleeping area, not inside sleeping areas; hardwired, plug-in or battery",
+   "Certificate is valid only for a change in occupancy within 6 months of issue",
+   "The older Township form (updated 10/26/22) also required a portable ABC fire extinguisher mounted in the kitchen; the current form does not mention one"
+  ],
+  "authorities": [
+   {
+    "name": "Plumsted Township Construction Office (Resale/Rental Housing Inspector)",
+    "type": "municipal_fire_bureau",
+    "area_served": "Entire township",
+    "lead_time": "Schedule two weeks in advance",
+    "fees": [
+     {
+      "label": "Resale smoke and carbon monoxide certification, paid in advance",
+      "amount": "$75",
+      "quote": "An inspection of the property is conducted by this office for a fee $75 (payment in advance).",
+      "source_url": "https://www.plumsted.gov/1252/Resale-RequirementsSmoke-Certification",
+      "verified": true
+     },
+     {
+      "label": "Re-inspection",
+      "amount": "$50",
+      "quote": "Any Reinspection…………….$50",
+      "source_url": "https://www.plumsted.gov/1252/Resale-RequirementsSmoke-Certification",
+      "verified": true
+     }
+    ],
+    "how_to_apply": "Fill out the Application for Resale Certification completely and sign it. Mail it with a $75 check payable to Plumsted Township to the Municipal Office, 121 Evergreen Road, New Egypt, NJ 08533, or drop it off at the Construction Office (checks, cash and money orders accepted, exact change). Schedule at least two weeks ahead. The inspector does not call to set a time: an adult must be at the home or a lock box number given. The certificate is left at the home unless other arrangements are made. Fees are non-refundable.",
+    "application_url": "https://www.plumsted.gov/DocumentCenter/View/2103",
+    "department_url": "https://www.plumsted.gov/1252/Resale-RequirementsSmoke-Certification",
+    "phone": "609-758-2241 Ext: 107",
+    "email": "rthomas@plumsted.org",
+    "contact_name": "Robert Thomas",
+    "contact_title": "Resale/Rental Inspector",
+    "evidence": [
+     {
+      "url": "https://www.plumsted.gov/1252/Resale-RequirementsSmoke-Certification",
+      "quote": "Smoke and Carbon Monoxide detectors are required for the resale, rental, or change of occupancy to single-family houses, condos, townhouses, and mobile homes.",
+      "doc_date": "2026-09",
+      "via": "page",
+      "verified": true
+     },
+     {
+      "url": "https://www.plumsted.gov/1252/Resale-RequirementsSmoke-Certification",
+      "quote": "Please note that any smoke detector that exists at the time of inspections that has a removable battery will FAIL inspection, and no certificate of occupancy will be issued.",
+      "doc_date": "2026-09",
+      "via": "page",
+      "verified": true
+     },
+     {
+      "url": "https://www.plumsted.gov/1252/Resale-RequirementsSmoke-Certification",
+      "quote": "Check for $75 made payable to Plumsted Township",
+      "doc_date": "2026-09",
+      "via": "page",
+      "verified": true
+     },
+     {
+      "url": "https://www.plumsted.gov/1252/Resale-RequirementsSmoke-Certification",
+      "quote": "Inspections must be scheduled two weeks in advance.",
+      "doc_date": "2026-09",
+      "via": "page",
+      "verified": true
+     },
+     {
+      "url": "https://www.plumsted.gov/DocumentCenter/View/2103",
+      "quote": "APPLICATION FOR RESALE CERTIFICATION REQUIRED FOR ALL RESALES INCLUDING BANK OWNED UNINHABITABLE **SCHEDULE TWO (2) WEEKS IN ADVANCE** $75.00 fee PAID IN ADVANCE/$50.00 re-inspection fee CHECKS MADE PAYABLE TO PLUMSTED TOWNSHIP ALL FEES ARE NON-REFUNDABLE Inspections: Tuesday/Wednesday/Thursday 3-6 p.m.",
+      "doc_date": "undated (current form, names Robert Thomas)",
+      "via": "pdf",
+      "verified": null
+     },
+     {
+      "url": "https://www.plumsted.gov/DocumentCenter/View/2103",
+      "quote": "This certificate is valid only for a change in occupancy which occurs within six (6) months of this certificate issuance date.",
+      "doc_date": "undated",
+      "via": "pdf",
+      "verified": null
+     },
+     {
+      "url": "https://www.plumsted.gov/DocumentCenter/View/2103",
+      "quote": "ROBERT THOMAS, RESALE/RENTAL HOUSING INSPECTOR PLUMSTED TOWNSHIP",
+      "doc_date": "undated",
+      "via": "pdf",
+      "verified": null
+     },
+     {
+      "url": "https://www.nj.gov/dca/dfs/pdf/fire%20directory_county%20summary/fire_code_enforcement_director.pdf",
+      "quote": "Plumsted Twp Plumsted Twp Constr Office BHIName: Name:",
+      "doc_date": "survey date 6/25/2026 (smoke detector compliance listed as Plumsted Twp Constr Office)",
+      "via": "state_directory",
+      "verified": true
+     },
+     {
+      "url": "https://www.nj.gov/dca/dfs/pdf/fire%20directory_county%20summary/fire_code_enforcement_director.pdf",
+      "quote": "Addr: 121 Evergreen Rd New Egypt NJ 08533 Phone (609) 758-2241",
+      "doc_date": "survey date 6/25/2026",
+      "via": "state_directory",
+      "verified": true
+     },
+     {
+      "url": "https://www.plumsted.gov/directory.aspx",
+      "quote": "Robert Thomas 609-758-2241 Ext: 107",
+      "doc_date": "2026-09",
+      "via": "page",
+      "verified": true
+     }
+    ],
+    "confidence": "high"
+   }
+  ],
+  "notes": "Plumsted's fire code enforcing agency is Plumsted Township Fire District No. 1 (registry code D; the DCA directory lists Fire Official Mitchell Remig, (609) 758-3920, plumsted39FM@gmail.com, survey 6/25/2026), but resale smoke/CO certificates are issued by the Township Construction Office: the Township's Resale Requirements page says so and the DCA directory lists 'Plumsted Twp Constr Office' for smoke detector compliance. The Fire District's own site (plumstedfiredistrict.com; phone 609-758-2350) says nothing about resale certificates. Inspection days conflict: the Resale Requirements page says Mondays 4 to 6 pm, while the Construction page and the current application say Tuesday, Wednesday and Thursday 3 to 6 pm. An older application still on the site (DocumentCenter 1175, 'Update 10/26/22', inspector Matt Rack) lists Monday inspections and a fire extinguisher; the current form (DocumentCenter 2103) does not. The current application is a scanned PDF. The page says to contact Cyndi MacReynolds 'at ext.128' about abandoned-property fees, but the staff directory gives her Ext: 105 (TACO@plumsted.org). The current form does not mention the 2025 secondary power source label."
+ },
+ "other_items": [
+  {
+   "label": "Taxes, abandoned property fees and permits",
+   "detail": "The office checks that taxes are paid to date, abandoned property fees are paid and all permits are closed before issuing the certificate; unpaid Abandoned/Foreclosed property fees must be paid first.",
+   "source_url": "https://www.plumsted.gov/DocumentCenter/View/2103"
+  },
+  {
+   "label": "Uninhabitable or bank-owned resales",
+   "detail": "The Township has a TCO form for resales of uninhabitable / bank-owned uninhabitable property and an 'Affidavit instead of Permit for Resales'.",
+   "source_url": "https://www.plumsted.gov/1252/Resale-RequirementsSmoke-Certification"
+  }
+ ],
+ "open_questions": [
+  "Which inspection days are current for resale certifications (Monday 4-6 pm on the Resale page vs Tuesday-Thursday 3-6 pm on the Construction page and current form)?",
+  "Whether the Township now also checks the secondary power source label required since February 3, 2025 (not mentioned on the current form)."
+ ],
+ "verification": {
+  "fees": 2,
+  "fee_ok": 2,
+  "fee_bad": 0,
+  "fee_unchecked": 0,
+  "quotes": 15,
+  "q_ok": 11,
+  "q_bad": 0,
+  "q_unchecked": 4
+ }
+}

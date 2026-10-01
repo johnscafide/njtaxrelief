@@ -1,0 +1,227 @@
+{
+ "municipality_code": "1501",
+ "municipality": "Barnegat Township",
+ "county": "OCEAN",
+ "checked_at": "2026-09-30",
+ "resale_co": {
+  "status": "required",
+  "name": "Letter of No Interest (in lieu of resale inspection)",
+  "issued_by": "Barnegat Township Code Enforcement / Zoning Office (Construction Office)",
+  "lead_time": "Allow 14 days to process the request",
+  "valid_for": "",
+  "requirements": [
+   "Any open permits or violations on the property must be closed",
+   "The Township also checks for substantial damage, liens, and unpaid water, sewer and property taxes (office-use section of the form)"
+  ],
+  "fees": [
+   {
+    "label": "Letter of No Interest processing fee (paid when the request is made)",
+    "amount": "$100.00",
+    "quote": "There is a $100.00 processing fee for all Letters of No Interest.",
+    "source_url": "https://www.barnegat.net/wp-content/uploads/2024/12/Letter-of-No-Interest-12-2-24.pdf",
+    "verified": true
+   }
+  ],
+  "how_to_apply": "Fill out the Request for Letter of No Interest in Lieu of Resale Inspection (block, lot, address, owner, requester) and submit it to Barnegat Township, 900 West Bay Avenue, Barnegat, NJ 08005 with the $100.00 fee paid at the time of the request. Checks are payable to Barnegat Township (the office-use section also lists cash). Allow 14 days.",
+  "application_url": "https://www.barnegat.net/wp-content/uploads/2024/12/Letter-of-No-Interest-12-2-24.pdf",
+  "department_url": "https://www.barnegat.net/departments/building-department/home-re-sale-rentals/",
+  "phone": "609-698-0080 Ext. 159",
+  "email": "JohnD@barnegat.net",
+  "contact_name": "John Durasky",
+  "contact_title": "Code Enforcement Officer and Zoning Officer",
+  "evidence": [
+   {
+    "url": "https://www.barnegat.net/departments/code-enforcement-zoning-office/",
+    "quote": "Sale of House  - Letter of No Interest now required for resales.",
+    "doc_date": "2026-09-30 (page fetched)",
+    "via": "page",
+    "verified": true
+   },
+   {
+    "url": "https://www.barnegat.net/departments/building-department/home-re-sale-rentals/",
+    "quote": "Before selling or renting a home in Barnegat, you must obtain a Certificate of Occupancy. For Re-Sale, a “Letter of No Interest” is require. Fore additional questions please call: 698-0080 ext 153",
+    "doc_date": "2022-06-14 (page last updated)",
+    "via": "page",
+    "verified": true
+   },
+   {
+    "url": "https://www.barnegat.net/wp-content/uploads/2024/12/Letter-of-No-Interest-12-2-24.pdf",
+    "quote": "REQUEST FOR LETTER OF NO INTEREST IN LIEU OF RESALE INSPECTION",
+    "doc_date": "2024-12-02 (file name Letter-of-No-Interest-12-2-24)",
+    "via": "pdf",
+    "verified": true
+   },
+   {
+    "url": "https://www.barnegat.net/wp-content/uploads/2024/12/Letter-of-No-Interest-12-2-24.pdf",
+    "quote": "The fee must be paid at the time the request is made. Please allow 14 days to process your request.",
+    "doc_date": "2024-12-02",
+    "via": "pdf",
+    "verified": true
+   },
+   {
+    "url": "https://www.barnegat.net/wp-content/uploads/2024/12/Letter-of-No-Interest-12-2-24.pdf",
+    "quote": "ANY/ALL OPEN PERMITS OR VIOLATIONS WILL NEED TO BE CLOSED",
+    "doc_date": "2024-12-02",
+    "via": "pdf",
+    "verified": true
+   },
+   {
+    "url": "https://www.barnegat.net/wp-content/uploads/2024/12/Letter-of-No-Interest-12-2-24.pdf",
+    "quote": "All Checks must be made payable to Barnegat Township",
+    "doc_date": "2024-12-02",
+    "via": "pdf",
+    "verified": true
+   },
+   {
+    "url": "https://www.barnegat.net/departments/code-enforcement-zoning-office/",
+    "quote": "Code Enforcement Officer - John Durasky 609-698-0080 Ext. 159",
+    "doc_date": "2026-09-30 (page fetched)",
+    "via": "page",
+    "verified": true
+   },
+   {
+    "url": "https://www.barnegat.net/departments/building-department/",
+    "quote": "Rentals & Resales Ext. 159",
+    "doc_date": "2025-04-29 (page last updated)",
+    "via": "page",
+    "verified": true
+   },
+   {
+    "url": "https://www.barnegat.net/contact-us/",
+    "quote": "Code Enforcer Extension: 159 JohnD@barnegat.net",
+    "doc_date": "2026-07-14 (page last updated)",
+    "via": "page",
+    "verified": true
+   }
+  ],
+  "confidence": "high",
+  "notes": "Barnegat does not do an interior resale inspection for sales; the seller requests a Letter of No Interest in lieu of a resale inspection. The Township's Forms page lists it under 'Resale' (Complete Letter of No Interest, 12-2-24 version); an older 2013 version is still linked from the Home Re-Sale and Rentals page. Rental properties are separate: they need a rental Certificate of Occupancy before every new tenant and registration with the Municipal Clerk (Chapter 63B, Rental Inspection Required Upon Initial Occupancy or Change of Occupancy), and short rentals under 30 days need a yearly C.O. The Home Re-Sale page gives ext 153 for questions; the Construction Office page lists Rentals and Resales at ext. 159. The Township code (ecode360 BA0366) could not be opened, so the ordinance text behind the Letter of No Interest was not read."
+ },
+ "fire_cert": {
+  "requirements": [],
+  "authorities": [
+   {
+    "name": "NJ DCA Division of Fire Safety, Bureau of Fire Code Enforcement",
+    "type": "state_dca",
+    "area_served": "Entire township",
+    "lead_time": "Fee depends on how many business days before closing you apply (more than 10, 4 to 10, fewer than 4).",
+    "fees": [
+     {
+      "label": "State smoke alarm, carbon monoxide alarm and secondary power source label certificate, applied more than 10 business days before closing",
+      "amount": "$45",
+      "quote": "If you are applying for a certificate more than ten business days from the closing date the fee is $45 dollars",
+      "source_url": "https://firesolutions.dca.nj.gov/ultra-fire-home/smoke-application-create/",
+      "verified": null
+     },
+     {
+      "label": "State smoke alarm, carbon monoxide alarm and secondary power source label certificate, applied 4 to 10 business days before closing",
+      "amount": "$90",
+      "quote": "if applying 4 to 10 business days from the closing date the fee is $90",
+      "source_url": "https://firesolutions.dca.nj.gov/ultra-fire-home/smoke-application-create/",
+      "verified": null
+     },
+     {
+      "label": "State smoke alarm, carbon monoxide alarm and secondary power source label certificate, closing fewer than 4 business days away",
+      "amount": "$161",
+      "quote": "if the closing date is less than four business days the fee is $161.",
+      "source_url": "https://firesolutions.dca.nj.gov/ultra-fire-home/smoke-application-create/",
+      "verified": null
+     }
+    ],
+    "how_to_apply": "Apply online through the NJ DCA Fire Safety portal (Start Your Smoke Certification Application). Pay by e-check or credit card before submitting; a valid email address is required. The certificate is emailed once the application is submitted, the fee is paid and any required inspections are done. Homes heated by electricity that need no CO alarm should also email BFCE_CSDCMAC@dca.nj.gov.",
+    "application_url": "https://firesolutions.dca.nj.gov/ultra-fire-home/smoke-application-create/",
+    "department_url": "https://www.nj.gov/dca/dfs/offices/bfce.shtml",
+    "phone": "(609) 633-6106",
+    "email": "BFCE_CSDCMAC@dca.nj.gov",
+    "contact_name": "Louis Kilmer",
+    "contact_title": "Bureau Chief, Bureau of Fire Code Enforcement (listed as Fire Official for Barnegat Township in the state fire directory)",
+    "evidence": [
+     {
+      "url": "https://www.barnegat.net/forms/",
+      "quote": "State Fire Instructions Smoke detector and Carbon Monoxide certification to be sent to State",
+      "doc_date": "2026-08-06 (page last updated)",
+      "via": "page",
+      "verified": true
+     },
+     {
+      "url": "https://nj.gov/dca/dfs/pdf/ANNUAL%20REGISTRY/THIRD%20QUARTER%20LEA%20REGISTRY%202026.pdf",
+      "quote": "S Barnegat Township",
+      "doc_date": "2026-07",
+      "via": "pdf",
+      "verified": true
+     },
+     {
+      "url": "https://www.nj.gov/dca/dfs/pdf/fire%20directory_county%20summary/state_towns%207_17_26.pdf",
+      "quote": "BARNEGAT TWP 1533 SC",
+      "doc_date": "2026-07-17 (SC = smoke certificates issued by the State)",
+      "via": "pdf",
+      "verified": true
+     },
+     {
+      "url": "https://www.nj.gov/dca/dfs/pdf/fire%20directory_county%20summary/fire_code_enforcement_director.pdf",
+      "quote": "LEAID: 1533-999 Enf Auth. State Fire Official Louis Kilmer Phone (609)633-6132 Addr: PO Box 809 Trenton NJ 08625-0809 ... NJ Division Fire Safety",
+      "doc_date": "2025-08-20 (Barnegat Township page, survey date 8/20/2025; state directory code 1533)",
+      "via": "state_directory",
+      "verified": true
+     },
+     {
+      "url": "https://firesolutions.dca.nj.gov/ultra-fire-home/smoke-application-create/",
+      "quote": "Please complete the following information to apply for a Certificate of Smoke Alarm, Carbon Monoxide Alarm, and Secondary Power Source Identification Label Compliance (CSACMASPSIL). You will be required to pay, via e-check or credit card, before you can submit this application. This application requires a valid email address.",
+      "doc_date": "2026-09-30 (page fetched)",
+      "via": "page",
+      "verified": null
+     },
+     {
+      "url": "https://firesolutions.dca.nj.gov/ultra-fire-home/smoke-application-create/",
+      "quote": "Therefore, if your property is heated with electricity and does not require a carbon monoxide alarm, check the fourth box and send an email to BFCE_CSDCMAC@dca.nj.gov stating that you are not subject to that requirement.",
+      "doc_date": "2026-09-30 (page fetched)",
+      "via": "page",
+      "verified": null
+     },
+     {
+      "url": "https://www.nj.gov/dca/divisions/dfs/codes/regulations/adopted_amendment_5_10_2.9.pdf",
+      "quote": "1. Requests for a CSDCMAC received more than 10 business days prior to the change of occupant: $45.00; 2. Requests for a CSDCMAC received four to 10 business days prior to the change of occupant: $90.00; and 3. Requests for a CSDCMAC received fewer than four business days prior to the change of occupant: $161.00.",
+      "doc_date": "2017-10-02 (N.J.A.C. 5:70-2.9(d) adopted amendment, 49 N.J.R. 3358; scanned PDF)",
+      "via": "pdf",
+      "verified": null
+     },
+     {
+      "url": "https://www.nj.gov/dca/dfs/offices/bfce.shtml",
+      "quote": "Louis Kilmer, Bureau Chief CPM Address: P.O. Box 809, Trenton, NJ 08625-0809 Phone: (609) 633-6106",
+      "doc_date": "2026-09-30 (page fetched)",
+      "via": "page",
+      "verified": true
+     }
+    ],
+    "confidence": "high"
+   }
+  ],
+  "notes": "The State (NJ DCA Division of Fire Safety) is Barnegat Township's fire code enforcing agency (registry code S) and is marked SC (issues smoke certificates) on the DCA's July 2026 state towns list. The Township Forms page sends sellers to the State for the smoke and carbon monoxide certificate and links the DCA portal. The DCA online form is now the Certificate of Smoke Alarm, Carbon Monoxide Alarm, and Secondary Power Source Identification Label Compliance; it no longer includes a fire extinguisher (P.L.2025, c.19). An older Township page still links a 'Requirements for Fire Extinguishers in one and two family dwellings' sheet under Rentals, which is a rental item."
+ },
+ "other_items": [
+  {
+   "label": "Open permits and violations",
+   "detail": "Any and all open permits or violations must be closed before the Letter of No Interest is issued.",
+   "source_url": "https://www.barnegat.net/wp-content/uploads/2024/12/Letter-of-No-Interest-12-2-24.pdf"
+  },
+  {
+   "label": "Liens, water/sewer and property taxes",
+   "detail": "The Township's office-use section of the Letter of No Interest form checks liens, water/sewer and property taxes and whether the home has public water and sewer. Final water/sewer readings go through the Tax/Utility Collector (ext. 143 and 144).",
+   "source_url": "https://www.barnegat.net/wp-content/uploads/2024/12/Letter-of-No-Interest-12-2-24.pdf"
+  }
+ ],
+ "open_questions": [
+  "The ordinance section that requires the Letter of No Interest (ecode360 BA0366) could not be read; confirm whether any interior resale inspection can still be required.",
+  "How long the Letter of No Interest stays valid is not stated."
+ ],
+ "verification": {
+  "fees": 4,
+  "fee_ok": 1,
+  "fee_bad": 0,
+  "fee_unchecked": 3,
+  "quotes": 17,
+  "q_ok": 14,
+  "q_bad": 0,
+  "q_unchecked": 3
+ }
+}

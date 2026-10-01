@@ -1,0 +1,184 @@
+{
+ "municipality_code": "1712",
+ "municipality": "Quinton Township",
+ "county": "SALEM",
+ "checked_at": "2026-09-30",
+ "resale_co": {
+  "status": "required",
+  "name": "Certificate of Continued Occupancy",
+  "issued_by": "Housing Office (Department of Housing)",
+  "lead_time": "Applications can be turned in any time with the fee; call during office hours to schedule the first inspection. Inspections are on Wednesday evenings.",
+  "valid_for": "",
+  "requirements": [
+   "Water test meeting NJDEP and federal EPA chemical, bacteriological and gross alpha limits (not needed on public water)",
+   "Septic certification (not needed on public sewer)",
+   "Chimney certification for all fossil fuel systems",
+   "Fire extinguisher (Township packet includes the 2005 state extinguisher memo)",
+   "Carbon monoxide alarms",
+   "Smoke detectors",
+   "Electrical panel box labeled; 100 amp service",
+   "Corrections and re-inspections must be done before occupancy"
+  ],
+  "fees": [
+   {
+    "label": "Certificate of Continued Occupancy, initial inspection",
+    "amount": "$40.00",
+    "quote": "INITIAL INSPECTION FEE $40.00",
+    "source_url": "https://www.quintonnj.com/DocumentCenter/View/668/Certificate-Of-Occupancy-Application-PDF",
+    "verified": null
+   },
+   {
+    "label": "Re-inspection",
+    "amount": "$40.00",
+    "quote": "RE-INSPECTION FEE $40.00",
+    "source_url": "https://www.quintonnj.com/DocumentCenter/View/668/Certificate-Of-Occupancy-Application-PDF",
+    "verified": null
+   }
+  ],
+  "how_to_apply": "Fill in the Quinton Township Certificate of Continued Occupancy Application (Department of Housing, PO Box 65, Quinton, NJ 08072) and turn it in with the fee (the form records payment by check). Then call the Housing Office during office hours (Wednesdays 4 pm to 5:30 pm) to schedule the first inspection; inspections are held Wednesday evenings. Have the water test, septic certification and chimney certification ready before the certificate can be issued.",
+  "application_url": "https://www.quintonnj.com/DocumentCenter/View/668/Certificate-Of-Occupancy-Application-PDF",
+  "department_url": "https://www.quintonnj.com/204/Housing-Office",
+  "phone": "856-935-2325 Ext. 5",
+  "email": "zoning@quintonnj.com",
+  "contact_name": "Robert Schmid",
+  "contact_title": "Housing Officer",
+  "evidence": [
+   {
+    "url": "https://www.quintonnj.com/DocumentCenter/View/668/Certificate-Of-Occupancy-Application-PDF",
+    "quote": "CERTIFICATE OF CONTINUED OCCUPANCY APPLICATION QUINTON TOWNSHIP DEPARTMENT OF HOUSING ... OWNER/SELLER (CIRCLE ONE) ... BUYER/TENANT (CIRCLE ONE) ... PLEASE NOTE: CORRECTIONS AND REINSPECTIONS MUST BE MADE BEFORE OCCUPANCY.",
+    "doc_date": "undated; scanned, read visually",
+    "via": "pdf",
+    "verified": null
+   },
+   {
+    "url": "https://www.quintonnj.com/DocumentCenter/View/669/Certificate-Of-Occupancy-Guideline-PDF",
+    "quote": "The following must be provided before a certificate of continued occupancy will be issued: Water Test ... Septic Certification ... Chimney Certification ... Fire Extinguisher ... Carbon Monoxide Alarms ... Smoke Detectors ... Electrical Panel Box Labeled 100 Amp service",
+    "doc_date": "undated; scanned, read visually",
+    "via": "pdf",
+    "verified": null
+   },
+   {
+    "url": "https://www.quintonnj.com/204/Housing-Office",
+    "quote": "Certificate of Occupancy Applications may be turned in anytime, with the corresponding fee Applicants must call during office hours to schedule an initial inspection Inspections are conducted on Wednesday Evenings",
+    "doc_date": "2026-09-30 (page fetched)",
+    "via": "page",
+    "verified": true
+   },
+   {
+    "url": "https://www.quintonnj.com/204/Housing-Office",
+    "quote": "Robert Schmid Housing Officer Email Robert Schmid Phone: 856-935-2325 Ext. 5 Housing Office",
+    "doc_date": "2026-09-30 (page fetched; email from the page mailto link)",
+    "via": "page",
+    "verified": true
+   }
+  ],
+  "confidence": "medium",
+  "notes": "The Township Housing Office posts a Certificate of Continued Occupancy application that names an owner/seller and a buyer/tenant, with a $40.00 initial inspection fee and a $40.00 re-inspection fee, and a guideline listing what must be provided before the certificate is issued. The fee amounts are printed on an undated scanned form and were read visually. A web search summary of Township Code Chapter 150, Housing (ecode360, not opened and not quoted here) described a certificate of occupancy being required on a change of owner or tenant and not issued unless taxes, sewer charges and other municipal assessments are current; that wording is a lead only. The Housing Office page also says the certificate of occupancy fee for rental units built before 1979 will be $60 and a Certificate of Re-occupancy fee is $80 (including $20 for the NJ Lead Hazard Control Fund); those relate to the rental lead-safe program, not to a 1-2 family sale. The application form header prints 856-935-7482; the current Housing Office page lists Robert Schmid at 856-935-2325 Ext. 5 and the office line 856-935-0272. The email zoning@quintonnj.com is from the mailto link on the Housing Office page."
+ },
+ "fire_cert": {
+  "requirements": [
+   "Township CCO guideline requires smoke detectors, carbon monoxide alarms and a fire extinguisher before the certificate is issued; the extinguisher sheet in the Township packet is a 2005 state memo (2A:10B:C, no more than 10 pounds, within 10 feet of the kitchen, top no more than 5 feet above the floor)"
+  ],
+  "authorities": [
+   {
+    "name": "Not confirmed. Likely the Quinton Township Housing Office, which checks smoke detectors, CO alarms and the fire extinguisher for the Certificate of Continued Occupancy",
+    "type": "unknown",
+    "area_served": "Entire township",
+    "lead_time": "",
+    "fees": [],
+    "how_to_apply": "No separate smoke/CO certificate application or fee is published. The Township Certificate of Continued Occupancy guideline requires smoke detectors, CO alarms and a fire extinguisher before the certificate is issued. The NJ DCA online smoke certificate application does not offer Quinton (the DCA marks it smoke-certificate exempt), so ask the Housing Office who issues the smoke/CO certificate for a sale.",
+    "application_url": "",
+    "department_url": "https://www.quintonnj.com/204/Housing-Office",
+    "phone": "856-935-2325 Ext. 5",
+    "email": "zoning@quintonnj.com",
+    "contact_name": "Robert Schmid",
+    "contact_title": "Housing Officer",
+    "evidence": [
+     {
+      "url": "https://www.quintonnj.com/DocumentCenter/View/669/Certificate-Of-Occupancy-Guideline-PDF",
+      "quote": "The following must be provided before a certificate of continued occupancy will be issued: ... Fire Extinguisher Attachment enclosed Carbon Monoxide Alarms Attachment enclosed Smoke Detectors Attachment enclosed",
+      "doc_date": "undated; scanned, read visually",
+      "via": "pdf",
+      "verified": null
+     },
+     {
+      "url": "https://nj.gov/dca/dfs/pdf/ANNUAL%20REGISTRY/THIRD%20QUARTER%20LEA%20REGISTRY%202026.pdf",
+      "quote": "S Quinton Township",
+      "doc_date": "2026-07",
+      "via": "pdf",
+      "verified": true
+     },
+     {
+      "url": "https://www.nj.gov/dca/dfs/pdf/fire%20directory_county%20summary/state_towns%207_17_26.pdf",
+      "quote": "QUINTON 1711",
+      "doc_date": "2026-07-17 (listed without the SC = Smoke Certs flag)",
+      "via": "pdf",
+      "verified": true
+     },
+     {
+      "url": "https://firesolutions.dca.nj.gov/_odata/firedistricts",
+      "quote": "\"ultra_name\":\"QUINTON TWP-001\" ... \"Name\":\"QUINTON TWP\" ... \"ultra_firejurisdiction\":{ \"Name\":\"State\",\"Value\":240000000 },\"ultra_smokecertexempt\":true",
+      "doc_date": "2026-09-30 (data feed fetched)",
+      "via": "page",
+      "verified": null
+     },
+     {
+      "url": "https://firesolutions.dca.nj.gov/ultra-fire-home/smoke-application-create/",
+      "quote": "var stateFireDistrictsURL = \"/_odata/firedistricts?$filter=ultra_firejurisdiction/Value eq 240000000 and ultra_smokecertexempt ne true\"; //If State Property = No, display Jurisdiction = State AND smoke cert exempt != true",
+      "doc_date": "2026-09-30 (page script fetched)",
+      "via": "page",
+      "verified": null
+     },
+     {
+      "url": "https://www.nj.gov/dca/dfs/pdf/fire%20directory_county%20summary/fire_code_enforcement_director.pdf",
+      "quote": "LEAID: 1711-999 Enf Auth. State Fire Official Louis Kilmer Phone (609)633-6132 Addr: PO Box 809 Trenton NJ 08625-0809 ... NJ Division Fire Safety",
+      "doc_date": "2026-04 (survey date 4/6/2026; directory code 1711)",
+      "via": "state_directory",
+      "verified": true
+     },
+     {
+      "url": "https://www.quintonnj.com/204/Housing-Office",
+      "quote": "Robert Schmid Housing Officer Email Robert Schmid Phone: 856-935-2325 Ext. 5 Housing Office",
+      "doc_date": "2026-09-30 (page fetched; email from the page mailto link)",
+      "via": "page",
+      "verified": true
+     }
+    ],
+    "confidence": "low"
+   }
+  ],
+  "notes": "The NJ DCA Division of Fire Safety is Quinton's fire code enforcing agency (LEA registry code S), and the state fire directory (listed there as Quinton Township 1711) names \"NJ Division Fire Safety\" for smoke detector compliance. But the DCA does not issue smoke certificates for Quinton through its online route: the DCA's July 17, 2026 state towns list shows Quinton without the \"SC\" (smoke certs) flag, and the fire district feed used by the DCA online smoke application marks QUINTON TWP-001 as smoke-certificate exempt, which the application uses to leave it out of the list of districts a private home can choose. The Township's own Certificate of Continued Occupancy requires smoke detectors, CO alarms and a fire extinguisher, so the Housing Office inspection most likely covers the smoke/CO check, but no official page says who issues the certificate or what it costs. The Township's Fire Safety Memorandum is a 2005 DCA memo on extinguishers; the state removed the extinguisher from the state requirement by P.L.2025, c.19, but the Township guideline still lists it."
+ },
+ "other_items": [
+  {
+   "label": "Water test",
+   "detail": "Water test meeting NJDEP and federal EPA chemical, bacteriological and gross alpha limits, unless on a public water system.",
+   "source_url": "https://www.quintonnj.com/DocumentCenter/View/669/Certificate-Of-Occupancy-Guideline-PDF"
+  },
+  {
+   "label": "Septic certification",
+   "detail": "Septic certification unless on public sewer; the Township posts a septic certification guideline and a list of Salem County Department of Health recognized septic inspectors.",
+   "source_url": "https://www.quintonnj.com/DocumentCenter/View/667/Septic-Certification-Guideline-PDF"
+  },
+  {
+   "label": "Chimney certification",
+   "detail": "Chimney certification for all fossil fuel systems.",
+   "source_url": "https://www.quintonnj.com/DocumentCenter/View/669/Certificate-Of-Occupancy-Guideline-PDF"
+  }
+ ],
+ "open_questions": [
+  "Who issues the smoke/CO certificate for a Quinton sale, and at what fee? The DCA online application excludes Quinton (smoke-certificate exempt).",
+  "Are the $40.00 inspection and re-inspection fees on the undated form still current?",
+  "How long is the Certificate of Continued Occupancy valid?"
+ ],
+ "verification": {
+  "fees": 2,
+  "fee_ok": 0,
+  "fee_bad": 0,
+  "fee_unchecked": 2,
+  "quotes": 11,
+  "q_ok": 6,
+  "q_bad": 0,
+  "q_unchecked": 5
+ }
+}

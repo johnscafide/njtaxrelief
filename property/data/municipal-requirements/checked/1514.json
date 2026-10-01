@@ -1,0 +1,136 @@
+{
+ "municipality_code": "1514",
+ "municipality": "Lakehurst Borough",
+ "county": "OCEAN",
+ "checked_at": "2026-09-30",
+ "resale_co": {
+  "status": "required",
+  "name": "Inspection Certificate for Resale or New Tenant (Residential Dwelling Reoccupancy Inspection)",
+  "issued_by": "Lakehurst Borough Code Enforcement Officer (Construction Office, Borough Hall)",
+  "lead_time": "",
+  "valid_for": "",
+  "requirements": [
+   "Working, properly installed smoke detectors",
+   "Working, properly installed carbon monoxide alarms",
+   "Portable fire extinguisher (as listed on the Borough page)",
+   "Property maintenance review",
+   "House must match the tax assessor and building records"
+  ],
+  "fees": [
+   {
+    "label": "Residential reoccupancy inspection, 1- or 2-family (covers two inspections)",
+    "amount": "$100",
+    "quote": "The inspection fee is $100 for two inspections, $25 for a third inspection, if needed.",
+    "source_url": "https://www.lakehurst-nj.gov/department/construction.php",
+    "verified": true
+   },
+   {
+    "label": "Third inspection, if needed",
+    "amount": "$25",
+    "quote": "The inspection fee is $100 for two inspections, $25 for a third inspection, if needed.",
+    "source_url": "https://www.lakehurst-nj.gov/department/construction.php",
+    "verified": true
+   }
+  ],
+  "how_to_apply": "Contact the Construction Office at Borough Hall, 5 Union Avenue, 732-657-4141 (8:30 am to 4:00 pm, Monday to Friday) to arrange the inspection. No application form is posted online.",
+  "application_url": "",
+  "department_url": "https://www.lakehurst-nj.gov/department/construction.php",
+  "phone": "732-657-4141",
+  "email": "",
+  "contact_name": "",
+  "contact_title": "Code Enforcement Officer",
+  "evidence": [
+   {
+    "url": "https://www.lakehurst-nj.gov/department/construction.php",
+    "quote": "RESIDENTIAL DWELLING REOCCUPANCY INSPECTIONS: Before a 1- or 2-family residential dwelling is sold, leased or a change of occupancy occurs, the dwelling must be inspected. Inspections are carried out by the Lakehurst Borough Code Enforcement Officer.",
+    "doc_date": "2026-09 (page checked 2026-09-30)",
+    "via": "page",
+    "verified": true
+   },
+   {
+    "url": "https://www.lakehurst-nj.gov/department/construction.php",
+    "quote": "The purpose of the inspection is to ensure that the dwelling is equipped with properly installed and functioning smoke detectors, carbon monoxide alarms, a portable fire extinguisher, to review property maintenance, and to ensure that the structure is consistent with tax assessor and building records.",
+    "doc_date": "2026-09",
+    "via": "page",
+    "verified": true
+   },
+   {
+    "url": "https://www.lakehurst-nj.gov/department/construction.php",
+    "quote": "Contact the Construction Office from 8:30 until 4:00 pm, Monday to Friday, to schedule an inspection or for additional information at 732-657-4141.",
+    "doc_date": "2026-09",
+    "via": "page",
+    "verified": true
+   }
+  ],
+  "confidence": "high",
+  "notes": "The Borough's Construction page requires an inspection before any 1- or 2-family home is sold, leased or changes occupants, done by the Code Enforcement Officer. The page does not name the officer, give an email, post an application form, or say how far ahead to apply or how long the certificate lasts. Rentals built before 1978 also need a lead-safe certification (rental rule only). Commercial buildings have a separate $120 reoccupancy inspection by the Construction Official. Leads pointed only to ecode360 (LA4045), which could not be opened; the Borough site is lakehurst-nj.gov."
+ },
+ "fire_cert": {
+  "requirements": [
+   "Borough reoccupancy inspection checks smoke detectors, CO alarms and a portable fire extinguisher (the Borough page still lists the extinguisher after the February 2025 state change)"
+  ],
+  "authorities": [
+   {
+    "name": "Lakehurst Borough (municipal fire code enforcing agency); smoke and CO compliance handled by the Borough Housing Office through the reoccupancy inspection",
+    "type": "municipal_fire_bureau",
+    "area_served": "Entire borough",
+    "lead_time": "",
+    "fees": [],
+    "how_to_apply": "The Borough checks smoke detectors, CO alarms and the extinguisher as part of its $100 Residential Dwelling Reoccupancy Inspection (see the town certificate above). Call Borough Hall at 732-657-4141 to schedule. No separate smoke/CO certificate fee is posted.",
+    "application_url": "",
+    "department_url": "https://www.lakehurst-nj.gov/department/construction.php",
+    "phone": "732-657-4141",
+    "email": "dallen@co.ocean.nj.us",
+    "contact_name": "Dennis Allen",
+    "contact_title": "Fire Official (per state directory)",
+    "evidence": [
+     {
+      "url": "https://nj.gov/dca/dfs/pdf/ANNUAL%20REGISTRY/THIRD%20QUARTER%20LEA%20REGISTRY%202026.pdf",
+      "quote": "M Lakehurst Borough",
+      "doc_date": "2026-07",
+      "via": "pdf",
+      "verified": true
+     },
+     {
+      "url": "https://www.nj.gov/dca/dfs/pdf/fire%20directory_county%20summary/fire_code_enforcement_director.pdf",
+      "quote": "LEAID: 1513-001 Enf Auth. Municipal Fire Official Dennis Allen Phone (732) 657-4141 Addr: 5 Union Av Lakehurst NJ 08733 Email dallen@co.ocean.nj.us Lakehurst Boro Housing Office",
+      "doc_date": "2025-06-23 (survey date)",
+      "via": "state_directory",
+      "verified": true
+     },
+     {
+      "url": "https://www.lakehurst-nj.gov/department/construction.php",
+      "quote": "The purpose of the inspection is to ensure that the dwelling is equipped with properly installed and functioning smoke detectors, carbon monoxide alarms, a portable fire extinguisher",
+      "doc_date": "2026-09",
+      "via": "page",
+      "verified": true
+     }
+    ],
+    "confidence": "medium"
+   }
+  ],
+  "notes": "Lakehurst Borough is its own fire code enforcing agency (registry code M). The state directory lists it under directory code 1513 (Watchdog code 1514) with Fire Official Dennis Allen at the Borough Hall number (732) 657-4141 and his Ocean County email (he is also the Ocean County Chief Fire Marshal), and names the 'Lakehurst Boro Housing Office' as the smoke detector compliance office. The Borough's own page folds the smoke, CO and extinguisher check into the Code Enforcement reoccupancy inspection. Whether a separate state-format certificate is issued is not stated."
+ },
+ "other_items": [
+  {
+   "label": "Records check",
+   "detail": "The reoccupancy inspection confirms the house matches the tax assessor and building records.",
+   "source_url": "https://www.lakehurst-nj.gov/department/construction.php"
+  }
+ ],
+ "open_questions": [
+  "Name and email of the Code Enforcement Officer who does reoccupancy inspections.",
+  "How far before closing to schedule, and how long the inspection certificate is valid.",
+  "Whether the Borough still requires a fire extinguisher after the February 2025 state change."
+ ],
+ "verification": {
+  "fees": 2,
+  "fee_ok": 2,
+  "fee_bad": 0,
+  "fee_unchecked": 0,
+  "quotes": 6,
+  "q_ok": 6,
+  "q_bad": 0,
+  "q_unchecked": 0
+ }
+}

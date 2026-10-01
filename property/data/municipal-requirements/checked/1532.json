@@ -1,0 +1,225 @@
+{
+ "municipality_code": "1532",
+ "municipality": "Surf City Borough",
+ "county": "OCEAN",
+ "checked_at": "2026-09-30",
+ "resale_co": {
+  "status": "required",
+  "name": "Resale Certificate (continuing Certificate of Occupancy)",
+  "issued_by": "Zoning Office",
+  "lead_time": "",
+  "valid_for": "",
+  "requirements": [
+   "General interior and exterior condition of the structure",
+   "Visible house numbers",
+   "Final permit approval for all improvements on the lot (sheds, decks, additions, etc.)",
+   "Use of the property matches the tax records",
+   "Smoke and CO detectors installed and working on each floor and within 10 feet of bedrooms",
+   "Living space below base flood elevation checked (whether permitted, flood vents, etc.)",
+   "Bedroom egress: no double-keyed locks on interior egress doors",
+   "Proper fire separation between garage and living areas (solid core full-thickness door, drywall on walls and ceilings)",
+   "Permanent curb in place (curb permit from the Zoning Official)",
+   "Fire extinguisher mounted within 10 feet of the kitchen and not more than 5 feet off the floor",
+   "Sealed Flood Elevation Certificate in the new owner's name (not needed to start, needed for the C.O. for closing)",
+   "Sealed survey in the new owner's name (not needed to start, needed for the C.O. for closing)",
+   "All property taxes, water and sewer charges paid before approval; disaster placard returned (checklist item on the form)"
+  ],
+  "fees": [
+   {
+    "label": "Resale certificate, single-family home",
+    "amount": "$75",
+    "quote": "The fee is $75 for a single-family home and $150 for a duplex. Reinspection fees are $25 for each occurrence.",
+    "source_url": "https://surfcitynj.org/zoning-2/",
+    "verified": true
+   },
+   {
+    "label": "Resale certificate, duplex",
+    "amount": "$150",
+    "quote": "The fee is $75 for a single-family home and $150 for a duplex. Reinspection fees are $25 for each occurrence.",
+    "source_url": "https://surfcitynj.org/zoning-2/",
+    "verified": true
+   },
+   {
+    "label": "Re-inspection, each occurrence",
+    "amount": "$25",
+    "quote": "The fee is $75 for a single-family home and $150 for a duplex. Reinspection fees are $25 for each occurrence.",
+    "source_url": "https://surfcitynj.org/zoning-2/",
+    "verified": true
+   }
+  ],
+  "how_to_apply": "Fill out the Application for Resale Certificate (owner, prospective buyer, broker, list and sale data, key or lockbox code) and submit it to the Zoning Office at Borough Hall, 813 Long Beach Boulevard, with the fee. All taxes and water and sewer charges must be paid before approval. The sealed survey and Flood Elevation Certificate in the buyer's name can follow but are needed before the C.O. for closing. A permanent curb must be in place (separate curb permit).",
+  "application_url": "https://surfcitynj.org/wp-content/uploads/2026/02/Resale-CO-application-2025-updated.pdf",
+  "department_url": "https://surfcitynj.org/zoning-2/",
+  "phone": "(609)494-6448",
+  "email": "sgomez@surfcitynj.org",
+  "contact_name": "Sandi Gomez",
+  "contact_title": "Zoning Office (title not stated)",
+  "evidence": [
+   {
+    "url": "https://surfcitynj.org/zoning-2/",
+    "quote": "Resale Certificates The fee is $75 for a single-family home and $150 for a duplex. Reinspection fees are $25 for each occurrence.",
+    "doc_date": "",
+    "via": "page",
+    "verified": true
+   },
+   {
+    "url": "https://surfcitynj.org/zoning-2/",
+    "quote": "The Flood Elevation Certificate must be in the new owner’s name and sealed. This is not needed to start the process but will be needed to obtain a C.O. for closing.",
+    "doc_date": "",
+    "via": "page",
+    "verified": true
+   },
+   {
+    "url": "https://surfcitynj.org/wp-content/uploads/2026/02/Resale-CO-application-2025-updated.pdf",
+    "quote": "The Owner, or his Agent, hereby certifies that the above data correctly represents the essential characteristics of the property proposed for sale, and does hereby apply for a continuing Certificate of Occupancy.",
+    "doc_date": "2025 (file name 'Resale-CO-application-2025-updated', uploaded 2026-02)",
+    "via": "pdf",
+    "verified": true
+   },
+   {
+    "url": "https://surfcitynj.org/wp-content/uploads/2026/02/Resale-CO-application-2025-updated.pdf",
+    "quote": "All property taxes, water and sewer charges must be paid prior to approval",
+    "doc_date": "2025",
+    "via": "pdf",
+    "verified": true
+   },
+   {
+    "url": "https://surfcitynj.org/zoning-2/",
+    "quote": "Sandi Gomez sgomez@surfcitynj.org (609)494-6448",
+    "doc_date": "",
+    "via": "page",
+    "verified": true
+   }
+  ],
+  "confidence": "high",
+  "notes": "The Zoning page lists 'Resale Certificates' with fees and the inspection items; a second fee line on the same page is garbled ('Single-family home $75, Duplex $1S·OJ Re-inspection $25'), so the clear sentence was used. The page does not give Sandi Gomez's title. The Zoning page first answered with a 'Javascript is required' redirect page and loaded normally on a later plain request. Construction: building inspections by the Surf City Building Department ((609)494-6448); electric, plumbing and fire subcode inspections are done by Stafford Township ((609)597-1000 ext. 8532), whose Building Department serves Surf City. Rentals: yearly liability insurance registration ($5) and a yearly smoke/CO certificate for annual or seasonal rentals; these are rental programs, not resale requirements."
+ },
+ "fire_cert": {
+  "requirements": [
+   "Smoke detector on each level including basements (not attic or crawl space), and smoke detector and CO alarm outside each separate sleeping area within 10 feet of bedrooms, all working",
+   "10-year sealed battery smoke alarms (since January 1, 2019); A/C-powered alarms from original construction may not be replaced with battery alarms",
+   "CO alarms in the immediate vicinity of sleeping areas in homes with a fuel-burning device or attached garage (battery, hardwired or plug-in, UL 2034 listed)",
+   "Fire extinguisher still listed by the Borough (Zoning page for resales and the Borough's rental certification form): listed 2A-10B:C, no more than 10 pounds, within 10 feet of the kitchen in the path of egress, mounted on its bracket with the top no more than 5 feet above the floor, serviced and tagged within 12 months or a recent purchase receipt, manual left for the new occupant"
+  ],
+  "authorities": [
+   {
+    "name": "Borough of Surf City Borough Offices (municipal smoke alarm, CO alarm and extinguisher certificate of compliance)",
+    "type": "unknown",
+    "area_served": "Entire borough",
+    "lead_time": "Before any change of occupancy",
+    "fees": [
+     {
+      "label": "Single-family home",
+      "amount": "$45",
+      "quote": "This fee is $45 for a single-family home and $90 for a duplex.",
+      "source_url": "https://surfcitynj.org/zoning-2/",
+      "verified": true
+     },
+     {
+      "label": "Duplex",
+      "amount": "$90",
+      "quote": "This fee is $45 for a single-family home and $90 for a duplex.",
+      "source_url": "https://surfcitynj.org/zoning-2/",
+      "verified": true
+     }
+    ],
+    "how_to_apply": "For a sale, contact the Borough Offices, 813 Long Beach Boulevard, at (609)494-3064 or frontdesk@surfcitynj.org to apply for the smoke alarm, CO alarm and extinguisher inspection and certificate of compliance before the change of occupancy. The posted 'Fire CO and Liability Application' is a rental form ('Rental Application & Certification in Lieu of Inspection'), so it is not linked here as the resale application.",
+    "application_url": "",
+    "department_url": "https://surfcitynj.org/zoning-2/",
+    "phone": "(609)494-3064",
+    "email": "frontdesk@surfcitynj.org",
+    "contact_name": "Christine Hannemann",
+    "contact_title": "Municipal Clerk/Administrator/Registrar (Borough Offices)",
+    "evidence": [
+     {
+      "url": "https://surfcitynj.org/zoning-2/",
+      "quote": "Please be advised that if you are planning on selling, leasing, or renting your property, you must contact the Borough Offices to apply for a smoke alarm, carbon monoxide alarm, and portable fire extinguisher inspection in your residence and to obtain a certificate of compliance before any change of occupancy or the commencement of the lease or rental of your property as required by the Uniform Fire Safety Code, N.J.A.C.5:70-2.3.",
+      "doc_date": "",
+      "via": "page",
+      "verified": true
+     },
+     {
+      "url": "https://surfcitynj.org/zoning-2/",
+      "quote": "For more information about this process, please call (609)494-3064 or email frontdesk@surfcitynj.org. This fee is $45 for a single-family home and $90 for a duplex.",
+      "doc_date": "",
+      "via": "page",
+      "verified": true
+     },
+     {
+      "url": "https://surfcitynj.org/wp-content/uploads/2026/02/Both-apps.pdf",
+      "quote": "BOROUGH OF SURF CITY, COUNTY OF OCEAN, NJ 813 Long Beach Boulevard, 08008 Telephone (609)494-3064 Email Frontdesk@surfcitynj.org Rental Application & Certification in Lieu of Inspection Single Family Home Fees: $45.00 Duplex Fees: $90.00",
+      "doc_date": "uploaded 2026-02 (rental form)",
+      "via": "pdf",
+      "verified": "eye"
+     },
+     {
+      "url": "https://surfcitynj.org/municipal-clerk-administrators-office/",
+      "quote": "Christine Hannemann, RMC/CMR/QPA, Municipal Clerk/Administrator/Registrar Cathy Richter, Administrative Assistant Kim Maurus, Administrative Assistant Alexis Cuomo, Administrative Assistant (609)494-3064",
+      "doc_date": "",
+      "via": "page",
+      "verified": null
+     },
+     {
+      "url": "https://nj.gov/dca/dfs/pdf/ANNUAL%20REGISTRY/THIRD%20QUARTER%20LEA%20REGISTRY%202026.pdf",
+      "quote": "C Surf City Borough",
+      "doc_date": "2026-07 (as of June 30, 2026)",
+      "via": "pdf",
+      "verified": true
+     },
+     {
+      "url": "https://www.nj.gov/dca/dfs/pdf/fire%20directory_county%20summary/fire_code_enforcement_director.pdf",
+      "quote": "LEAID: 1531-001 Enf Auth. County Fire Official Dennis Allen Phone (732) 370-7360",
+      "doc_date": "2026 (survey date 8/17/2026)",
+      "via": "state_directory",
+      "verified": true
+     },
+     {
+      "url": "https://co.ocean.nj.us/OC/FireMarshal/frmSmokeDetector.aspx",
+      "quote": "The Ocean County Fire Marshal’s Office conducts residential Smoke Alarm/Carbon Monoxide Alarm inspections in the following municipalities only.",
+      "doc_date": "",
+      "via": "page",
+      "verified": true
+     }
+    ],
+    "confidence": "medium"
+   }
+  ],
+  "notes": "The Borough's Zoning page (section headed 'FIRE ALARM COMPLIANCE FOR RENTAL PROPERTIES') tells anyone selling, leasing or renting to apply to the Borough Offices for the smoke alarm, CO alarm and extinguisher certificate of compliance, $45 single-family or $90 duplex. The July 2026 LEA registry lists the Ocean County Fire Marshal (C) as Surf City's fire code enforcing agency, and the state directory (Surf City is code 1531 there) names county fire official Dennis Allen, but the County's resale/rental inspection page does not list Surf City. The only posted form is for rentals ('Rental Application & Certification in Lieu of Inspection', an owner self-certification, $45 single-family / $90 duplex) and it still includes the fire extinguisher; for sales the page says to apply for an inspection. South Toms River's site says P.L.2025, c.19 now requires these inspections to be done by licensed fire inspectors, so who inspects Surf City resales now should be confirmed. The Borough Offices contact is the Municipal Clerk & Administrative Office (same phone number); the page does not name a specific person for this certificate."
+ },
+ "other_items": [
+  {
+   "label": "Curb",
+   "detail": "Resales must have a permanent poured-concrete curb; curb, sidewalk and driveway permit fee $50.00 from the Zoning Office. Properties on Long Beach Boulevard, Central Boulevard or North 9th also need an Ocean County road opening permit.",
+   "source_url": "https://surfcitynj.org/zoning-2/"
+  },
+  {
+   "label": "Survey and flood elevation certificate in buyer's name",
+   "detail": "Sealed survey and sealed Flood Elevation Certificate in the new owner's name are needed to obtain the C.O. for closing.",
+   "source_url": "https://surfcitynj.org/zoning-2/"
+  },
+  {
+   "label": "Taxes, water and sewer paid",
+   "detail": "All property taxes, water and sewer charges must be paid before the resale certificate is approved.",
+   "source_url": "https://surfcitynj.org/wp-content/uploads/2026/02/Resale-CO-application-2025-updated.pdf"
+  },
+  {
+   "label": "Disaster placard",
+   "detail": "The resale application has a checklist line 'DISASTER PLACARD RETURNED'.",
+   "source_url": "https://surfcitynj.org/wp-content/uploads/2026/02/Resale-CO-application-2025-updated.pdf"
+  }
+ ],
+ "open_questions": [
+  "Who performs the resale smoke/CO inspection for the Borough after P.L.2025, c.19 (licensed inspector requirement), and the lead time for booking it.",
+  "Lead time and validity period for the resale certificate."
+ ],
+ "verification": {
+  "fees": 5,
+  "fee_ok": 5,
+  "fee_bad": 0,
+  "fee_unchecked": 0,
+  "quotes": 12,
+  "q_ok": 11,
+  "q_bad": 0,
+  "q_unchecked": 1
+ }
+}

@@ -1,0 +1,295 @@
+{
+ "municipality_code": "1503",
+ "municipality": "Bay Head Borough",
+ "county": "OCEAN",
+ "checked_at": "2026-09-30",
+ "resale_co": {
+  "status": "required",
+  "name": "Real Estate Transfer Certificate (transfer certificate of occupancy; Application for Realty Transfer Permit)",
+  "issued_by": "Bay Head Code Enforcement Officer (Code Enforcement / Construction Office)",
+  "lead_time": "",
+  "valid_for": "",
+  "requirements": [
+   "Current smoke alarm and carbon monoxide alarm requirements (the fire inspection certificate must be provided with the application)",
+   "Applicable zoning and property maintenance rules and the property's development approvals",
+   "A current survey must be provided with the application"
+  ],
+  "fees": [
+   {
+    "label": "Realty transfer inspection, per unit (2022 Borough form)",
+    "amount": "$100.00",
+    "quote": "Fee: $100.00 per unit, $15.00 per unit for re-inspection, if required.",
+    "source_url": "https://web.archive.org/web/20220525201637/https://www.bayheadnj.org/bhnj/Departments/Municipal%20Clerk/Forms%20%26%20Documents/Real%20Estate%20Transfer%20Application.pdf",
+    "verified": true
+   },
+   {
+    "label": "Re-inspection, per unit, if required (2022 Borough form)",
+    "amount": "$15.00",
+    "quote": "Fee: $100.00 per unit, $15.00 per unit for re-inspection, if required.",
+    "source_url": "https://web.archive.org/web/20220525201637/https://www.bayheadnj.org/bhnj/Departments/Municipal%20Clerk/Forms%20%26%20Documents/Real%20Estate%20Transfer%20Application.pdf",
+    "verified": true
+   }
+  ],
+  "how_to_apply": "The Borough's Code Enforcement page links 'Real Estate Transfer Certificate Application' to the Borough's SDL online portal (a free citizen account is needed). The older paper Application for Realty Transfer Permit asks for owner, purchaser, block and lot, closing attorney or agent and proposed closing date, and must include a current survey and the fire (smoke/CO) inspection certificate. Contact the office for an inspection appointment: 732-892-0638, 83 Bridge Ave, Bay Head.",
+  "application_url": "",
+  "department_url": "https://www.bayheadnj.org/code-enforcement",
+  "phone": "732-892-0638",
+  "email": "derbe@bayheadnj.us",
+  "contact_name": "Darren Erbe",
+  "contact_title": "Technical Assistant / Code Enforcement",
+  "evidence": [
+   {
+    "url": "https://www.ecode360.com/35236631",
+    "quote": "transfer certificate of occupancy, issued by the Code Enforcement Officer of the Borough of Bay Head",
+    "doc_date": "",
+    "via": "search_snippet",
+    "verified": null
+   },
+   {
+    "url": "https://web.archive.org/web/20240517233737/https://www.bayheadnj.org/code-enforcement",
+    "quote": "Real Estate Transfer Certificate Application",
+    "doc_date": "2024-05-17 (archive capture; link on the Code Enforcement page)",
+    "via": "page",
+    "verified": null
+   },
+   {
+    "url": "https://web.archive.org/web/20240517233737/https://www.bayheadnj.org/code-enforcement",
+    "quote": "Phone: 732-892-0638",
+    "doc_date": "2024-05-17 (archive capture)",
+    "via": "page",
+    "verified": null
+   },
+   {
+    "url": "https://web.archive.org/web/20240518000009/https://www.bayheadnj.org/construction-and-building",
+    "quote": "Technical Assistant / Code Enforcement Darren Erbe Monday - Friday: 7:00 a.m. to 2:00 p.m. (732) 892-0638",
+    "doc_date": "2024-05-18 (archive capture)",
+    "via": "page",
+    "verified": true
+   },
+   {
+    "url": "https://web.archive.org/web/20220525201637/https://www.bayheadnj.org/bhnj/Departments/Municipal%20Clerk/Forms%20%26%20Documents/Real%20Estate%20Transfer%20Application.pdf",
+    "quote": "APPLICATION FOR REALTY TRANSFER PERMIT",
+    "doc_date": "2022-05 (archive capture of the old Borough site)",
+    "via": "pdf",
+    "verified": true
+   },
+   {
+    "url": "https://web.archive.org/web/20220525201637/https://www.bayheadnj.org/bhnj/Departments/Municipal%20Clerk/Forms%20%26%20Documents/Real%20Estate%20Transfer%20Application.pdf",
+    "quote": "*MUST PROVIDE CURRENT SURVEY AND FIRE INSPECTION TO PROCESS APPLICATION*",
+    "doc_date": "2022-05",
+    "via": "pdf",
+    "verified": true
+   },
+   {
+    "url": "https://web.archive.org/web/20220525201637/https://www.bayheadnj.org/bhnj/Departments/Municipal%20Clerk/Forms%20%26%20Documents/Real%20Estate%20Transfer%20Application.pdf",
+    "quote": "Please contact this office for an appointment.",
+    "doc_date": "2022-05",
+    "via": "pdf",
+    "verified": true
+   }
+  ],
+  "confidence": "medium",
+  "notes": "The live Bay Head website (bayheadnj.org) shows a Cloudflare browser check to automated requests, so it was not opened; the Code Enforcement and Construction and Building pages were read from Internet Archive captures of May 2024 (original URLs https://www.bayheadnj.org/code-enforcement and https://www.bayheadnj.org/construction-and-building). The Real Estate Transfer Certificate Application link on the Code Enforcement page redirected (March 2023 capture) to https://www.sdlportal.com/towns/nj/ocean/bayhead/requests/certificate, which opens a citizen login, so it is not given as the application link. The fee and survey/fire-inspection rule come from the Borough's older paper form (archived May 2022); confirm the current fee. The ordinance wording (ecode360 BA1546, Borough code) is from a search result that matched the quoted phrase; ecode360 itself could not be opened. Darren Erbe's email derbe@bayheadnj.us is the mailto link on his name on the Construction and Building page. Bay Head also has a separate Rental Certificate of Occupancy (rental registration) for rentals, including seasonal rentals; that is not a resale item."
+ },
+ "fire_cert": {
+  "requirements": [
+   "Smoke alarms on every living level including the basement, and within 10 feet of bedrooms on levels with bedrooms",
+   "All smoke alarms, including hardwired, must be under 10 years old",
+   "Battery-only smoke alarms must be 10-year sealed battery units (since January 1, 2019); homes built before 1978 need at least one on each level",
+   "Homes built 1978 to 1983 need hardwired alarms on each level; 1984 to 1990 interconnected hardwired alarms with battery backup on each level; 1991 and later also in every bedroom",
+   "Hardwired alarms that need replacing must be replaced with hardwired alarms, not battery alarms",
+   "Carbon monoxide alarm near the sleeping areas if the home has a fuel-burning appliance or an attached garage; battery and plug-in CO alarms should be under 5 years old",
+   "Homes with a generator, solar panels or battery storage need a printed caution label (for example CAUTION: MULTIPLE SOURCES OF POWER) within 18 inches of the main electrical panel and the electric meter",
+   "A monitored low-voltage fire alarm system needs an NFPA 72 test report sent to the Fire Marshal before closing",
+   "Portable fire extinguishers are no longer required (as of February 3, 2025)",
+   "Do not mount alarms in unfinished attics, garages, stairwells, the top of basement stairs or kitchens"
+  ],
+  "authorities": [
+   {
+    "name": "Ocean County Fire Marshal's Office (county fire code enforcing agency), Residential Resale and Rental Home Inspections",
+    "type": "unknown",
+    "area_served": "Entire borough (the Fire Marshal inspects resales and rentals of 1-2 family buildings in Bay Head)",
+    "lead_time": "Apply more than 10 business days before closing for the lowest fee; the office calls to schedule the inspection after the application is submitted. The certificate is valid 12 months from the inspection.",
+    "fees": [
+     {
+      "label": "Smoke alarm, carbon monoxide alarm and secondary power source label certificate, application received more than 10 business days before the change of occupancy",
+      "amount": "$45.00",
+      "quote": "$45.00- More than 10 business days from the time the application is received in our office, to the date of the change of occupancy.",
+      "source_url": "https://co.ocean.nj.us/OC/FireMarshal/frmSmokeDetector.aspx",
+      "verified": true
+     },
+     {
+      "label": "Certificate, application received 4 to 10 business days before the change of occupancy",
+      "amount": "$90.00",
+      "quote": "$90.00- 4 to 10 business days from the time the application is received in our office, to the date of the change of occupancy.",
+      "source_url": "https://co.ocean.nj.us/OC/FireMarshal/frmSmokeDetector.aspx",
+      "verified": true
+     },
+     {
+      "label": "Certificate, application received 3 business days or less before the change of occupancy",
+      "amount": "$161.00",
+      "quote": "$161.00- 3 business days or less from the time the application is received in our office, to the date of the change of occupancy.",
+      "source_url": "https://co.ocean.nj.us/OC/FireMarshal/frmSmokeDetector.aspx",
+      "verified": true
+     },
+     {
+      "label": "Missed appointment or no entry to the home",
+      "amount": "$30.00",
+      "quote": "$30.00- Failure to maintain the scheduled appointment or entry to the structure will result in this fee.",
+      "source_url": "https://co.ocean.nj.us/OC/FireMarshal/frmSmokeDetector.aspx",
+      "verified": true
+     },
+     {
+      "label": "Reinspection (the first reinspection after a failed inspection may be free)",
+      "amount": "$30",
+      "quote": "In the event of a FAILED Inspection the first RE-INSPECTION may be conducted at no cost. Any additional RE-INSPECTIONS will be charged a fee of $30 per RE-INSPECTION there after.",
+      "source_url": "https://co.ocean.nj.us/OC/FireMarshal/frmSmokeDetector.aspx",
+      "verified": true
+     },
+     {
+      "label": "Returned check processing fee",
+      "amount": "$15.00",
+      "quote": "**Please note there is a $15.00 returned check processing fee",
+      "source_url": "https://co.ocean.nj.us/OC/FireMarshal/frmSmokeDetector.aspx",
+      "verified": true
+     },
+     {
+      "label": "Credit card convenience fee",
+      "amount": "$6.95",
+      "quote": "**Please note there is a Credit Card fee of $6.95 and E-Check fee of $1.99.",
+      "source_url": "https://co.ocean.nj.us/OC/FireMarshal/frmSmokeDetector.aspx",
+      "verified": true
+     },
+     {
+      "label": "E-check convenience fee",
+      "amount": "$1.99",
+      "quote": "**Please note there is a Credit Card fee of $6.95 and E-Check fee of $1.99.",
+      "source_url": "https://co.ocean.nj.us/OC/FireMarshal/frmSmokeDetector.aspx",
+      "verified": true
+     }
+    ],
+    "how_to_apply": "Fill out the online application (Ocean County SeamlessDocs form). The office then calls to schedule an inspection. Do not mail payment: pay at the inspection by paper check payable to Ocean County Fire Marshal (OCFM), credit card or e-check; no cash.",
+    "application_url": "https://oceancounty.seamlessdocs.com/f/AppSDCO2FEComp",
+    "department_url": "https://co.ocean.nj.us/OC/FireMarshal/frmSmokeDetector.aspx",
+    "phone": "(732) 929-2088",
+    "email": "OCFMSmokeDetect@co.ocean.nj.us",
+    "contact_name": "Bree Dominguez; Lynda Saverino",
+    "contact_title": "Residential Smoke CO Inspections staff (Chief Fire Marshal: Dennis M. Allen, dallen@co.ocean.nj.us)",
+    "evidence": [
+     {
+      "url": "https://co.ocean.nj.us/OC/FireMarshal/frmSmokeDetector.aspx",
+      "quote": "Bay Head Resales and Rentals of 1-2 family buildings",
+      "doc_date": "2026-09-30 (page fetched)",
+      "via": "page",
+      "verified": true
+     },
+     {
+      "url": "https://nj.gov/dca/dfs/pdf/ANNUAL%20REGISTRY/THIRD%20QUARTER%20LEA%20REGISTRY%202026.pdf",
+      "quote": "C Bay Head Borough",
+      "doc_date": "2026-07",
+      "via": "pdf",
+      "verified": true
+     },
+     {
+      "url": "https://co.ocean.nj.us/OC/FireMarshal/frmSmokeDetector.aspx",
+      "quote": "New Jersey State Law requires a Smoke Alarm/Carbon Monoxide Alarm if you sell rent your 1 or 2 family home.",
+      "doc_date": "2026-09-30 (page fetched)",
+      "via": "page",
+      "verified": true
+     },
+     {
+      "url": "https://co.ocean.nj.us/OC/FireMarshal/frmSmokeDetector.aspx",
+      "quote": "The inspection certificate is valid for 12 months from the date of inspection.",
+      "doc_date": "2026-09-30",
+      "via": "page",
+      "verified": true
+     },
+     {
+      "url": "https://co.ocean.nj.us/OC/FireMarshal/frmSmokeDetector.aspx",
+      "quote": "AFTER YOU SUBMIT THE COMPLETED APPLICATION, WE WILL CONTACT YOU TO SCHEDULE YOUR APPOINTMENT. Please do not mail in your payment. Payment is made at the time of the inspection.",
+      "doc_date": "2026-09-30",
+      "via": "page",
+      "verified": true
+     },
+     {
+      "url": "https://co.ocean.nj.us/OC/FireMarshal/frmSmokeDetector.aspx",
+      "quote": "Residential Resale & Rental Home Inspections 179 South Main St. Manahawkin, NJ 08050 Phone: (732) 929-2088 Fax: (732) 929-2077 Email: OCFMSmokeDetect@co.ocean.nj.us",
+      "doc_date": "2026-09-30",
+      "via": "page",
+      "verified": true
+     },
+     {
+      "url": "https://co.ocean.nj.us/OC/FireMarshal/frmSmokeDetector.aspx",
+      "quote": "WE DO NOT ACCEPT CASH - Payment may be made by Paper Check, Credit Card or E-Check ONLY",
+      "doc_date": "2026-09-30",
+      "via": "page",
+      "verified": true
+     },
+     {
+      "url": "https://www.co.ocean.nj.us//WebContentFiles//0299689d-3e63-4678-ad90-3b7c04b233c3.pdf",
+      "quote": "RESIDENTIAL SMOKE ALARM, CARBON MONOXIDE ALARM AND SECONDARY POWER SOURCE IDENTIFICATION UPDATED FEBRUARY 2025",
+      "doc_date": "2025-02",
+      "via": "pdf",
+      "verified": true
+     },
+     {
+      "url": "https://www.co.ocean.nj.us//WebContentFiles//0299689d-3e63-4678-ad90-3b7c04b233c3.pdf",
+      "quote": "REMINDER: Closing on a resale of a residential dwelling without a properly issued Certificate of Smoke Alarm, Carbon Monoxide Alarm and Secondary Power Source Identification (CSACMAPFEC) prior to closing subjects the seller to a minimum fine of $1000.00.",
+      "doc_date": "2025-02",
+      "via": "pdf",
+      "verified": true
+     },
+     {
+      "url": "https://co.ocean.nj.us/OC/FireMarshal/frmStaff.aspx",
+      "quote": "Residential Smoke CO Inspections Bree Dominguez bdominguez@co.ocean.nj.us Lynda Saverino lyndasaverino@co.ocean.nj.us",
+      "doc_date": "2026-09-30 (page fetched)",
+      "via": "page",
+      "verified": true
+     },
+     {
+      "url": "https://co.ocean.nj.us/OC/FireMarshal/frmStaff.aspx",
+      "quote": "Car 01 Chief Fire Marshal - Dennis M. AllenEmail: dallen@co.ocean.nj.us",
+      "doc_date": "2026-09-30 (page fetched)",
+      "via": "page",
+      "verified": true
+     },
+     {
+      "url": "https://www.nj.gov/dca/dfs/pdf/fire%20directory_county%20summary/fire_code_enforcement_director.pdf",
+      "quote": "15 Ocean Bay Head Borough1502 ... LEAID: 1502-001 Enf Auth. County Fire Official Dennis Allen Phone (732) 370-7360 ... Email dallen@co.ocean.nj.us ... Ocean County Fire Marshal BHIName: Name:",
+      "doc_date": "2026-08-05 (survey date 8/5/2026; state directory code 1502)",
+      "via": "state_directory",
+      "verified": true
+     }
+    ],
+    "confidence": "high"
+   }
+  ],
+  "notes": "The Ocean County Fire Marshal is Bay Head's fire code enforcing agency (registry code C) and its Resale and Rental Home Inspections page lists Bay Head for resales and rentals of 1-2 family buildings. The Borough's Code Enforcement page links to the Ocean County Fire Marshal, and the Borough's transfer application must include the fire inspection. The Fire Marshal's certificate is valid 12 months from the inspection. Its February 2025 requirements sheet says portable fire extinguishers are no longer required and adds the secondary power source label; the certificate is still called CSACMAPFEC on that sheet. The state directory lists a smoke detector compliance phone of (732) 331-8152 for Bay Head; the Fire Marshal's own page gives (732) 929-2088 for resale and rental inspections, which is used here."
+ },
+ "other_items": [
+  {
+   "label": "Current survey",
+   "detail": "The Borough's realty transfer application must include a current survey.",
+   "source_url": "https://web.archive.org/web/20220525201637/https://www.bayheadnj.org/bhnj/Departments/Municipal%20Clerk/Forms%20%26%20Documents/Real%20Estate%20Transfer%20Application.pdf"
+  },
+  {
+   "label": "Fire inspection certificate",
+   "detail": "The Ocean County Fire Marshal smoke/CO certificate must be provided with the Borough transfer application.",
+   "source_url": "https://web.archive.org/web/20220525201637/https://www.bayheadnj.org/bhnj/Departments/Municipal%20Clerk/Forms%20%26%20Documents/Real%20Estate%20Transfer%20Application.pdf"
+  }
+ ],
+ "open_questions": [
+  "Is the $100.00 per unit / $15.00 re-inspection fee on the 2022 form still current, and is there a lead time or validity period for the transfer certificate?",
+  "Is the SDL online portal the only way to apply now, or is a paper form still accepted?"
+ ],
+ "verification": {
+  "fees": 10,
+  "fee_ok": 10,
+  "fee_bad": 0,
+  "fee_unchecked": 0,
+  "quotes": 19,
+  "q_ok": 16,
+  "q_bad": 0,
+  "q_unchecked": 3
+ }
+}

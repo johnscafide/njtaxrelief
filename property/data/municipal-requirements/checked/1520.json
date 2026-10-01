@@ -1,0 +1,210 @@
+{
+ "municipality_code": "1520",
+ "municipality": "Mantoloking Borough",
+ "county": "OCEAN",
+ "checked_at": "2026-09-30",
+ "resale_co": {
+  "status": "required",
+  "name": "Transfer/Sale certification of inspection (Transfer/Sale & Rental Application)",
+  "issued_by": "Borough of Mantoloking Building Department and Fire Official",
+  "lead_time": "Application must be received 15 days before the home is occupied",
+  "valid_for": "",
+  "requirements": [
+   "Smoke alarms on all levels",
+   "Carbon monoxide alarms installed",
+   "Fire extinguisher (Borough checklist revised 4/2021)",
+   "All open permits must be closed out before the sale is approved"
+  ],
+  "fees": [
+   {
+    "label": "Transfer/Sale inspection (one inspection; the same fee covers the smoke, CO and extinguisher check)",
+    "amount": "$100",
+    "quote": "There is a fee of $100. Payment can be made by cash, check or money order. Make check payable to the Borough of Mantoloking.",
+    "source_url": "https://www.mantoloking.org/DocumentCenter/View/1413/Transfer-and-Rental-Application-",
+    "verified": true
+   },
+   {
+    "label": "Reinspection for violations",
+    "amount": "$25",
+    "quote": "If the property is to be re-inspected for violations, a fee of $25 is charged.",
+    "source_url": "https://www.mantoloking.org/DocumentCenter/View/1413/Transfer-and-Rental-Application-",
+    "verified": true
+   }
+  ],
+  "how_to_apply": "Download the Transfer/Sale & Rental Application, check 'Transfer/Sale' and give the closing date, owner, seller's attorney and agent, and buyer. Pay $100 by cash, check or money order payable to the Borough of Mantoloking. Submit at least 15 days before occupancy. The Construction Department asks for inspection requests in writing by email to building@mantoloking.org. Borough of Mantoloking, PO Box 247, 202 Downer Avenue, Mantoloking, NJ 08738; 732-475-6983 ext. 310.",
+  "application_url": "https://www.mantoloking.org/DocumentCenter/View/1413/Transfer-and-Rental-Application-",
+  "department_url": "https://www.mantoloking.org/1213/Construction-and-Building",
+  "phone": "732-475-6983 Ext. 310",
+  "email": "building@mantoloking.org",
+  "contact_name": "Todd Morgano",
+  "contact_title": "Construction Code Official",
+  "evidence": [
+   {
+    "url": "https://www.mantoloking.org/DocumentCenter/View/1413/Transfer-and-Rental-Application-",
+    "quote": "TRANSFER/SALE & RENTAL APPLICATION",
+    "doc_date": "2026-03 (Updated: 3/2026)",
+    "via": "pdf",
+    "verified": true
+   },
+   {
+    "url": "https://www.mantoloking.org/DocumentCenter/View/1413/Transfer-and-Rental-Application-",
+    "quote": "Failure to make application for inspection and obtain a certification of inspection for each dwelling is punishable by a fine not to exceed $1000.00. Applications must be received 15 days prior to premises being occupied.",
+    "doc_date": "2026-03",
+    "via": "pdf",
+    "verified": true
+   },
+   {
+    "url": "https://www.mantoloking.org/DocumentCenter/View/1413/Transfer-and-Rental-Application-",
+    "quote": "For the purpose of Sale/Rental of this property, all OPEN permits MUST be Closed out before Sale/Rental is Approved.",
+    "doc_date": "2026-03",
+    "via": "pdf",
+    "verified": true
+   },
+   {
+    "url": "https://www.mantoloking.org/1302/Forms-Permits",
+    "quote": "Transfer and Rental Application",
+    "doc_date": "2026-09 (page as fetched)",
+    "via": "page",
+    "verified": true
+   },
+   {
+    "url": "https://www.mantoloking.org/1230/Contact-Information",
+    "quote": "Todd Morgano - Construction Code Official",
+    "doc_date": "2026-09 (page as fetched)",
+    "via": "page",
+    "verified": true
+   },
+   {
+    "url": "https://www.mantoloking.org/1213/Construction-and-Building",
+    "quote": "Phone: 732-475-6983 Ext. 310",
+    "doc_date": "2026-09",
+    "via": "page",
+    "verified": true
+   },
+   {
+    "url": "https://www.mantoloking.org/1213/Construction-and-Building",
+    "quote": "As per NJ DCA regulations, all inspection requests must be in writing, email building",
+    "doc_date": "2026-09 (link goes to building@mantoloking.org)",
+    "via": "page",
+    "verified": true
+   }
+  ],
+  "confidence": "medium",
+  "notes": "Mantoloking's only published sale inspection is the Borough Transfer/Sale & Rental Application. Its checkoff list (signed by the Fire Official) covers smoke alarms, CO alarms and the fire extinguisher, and the form also requires open permits to be closed, so it works as both the Borough transfer certification and the smoke/CO certificate. It is listed here and under fire_cert, but it is one inspection and one $100 fee. The Borough code (ecode360 MA4063) could not be opened to confirm the ordinance section. The same form is used for summer, winter, monthly and annual rentals; the other CO forms on the Forms & Permits page are for construction. How long the certification is valid is not stated."
+ },
+ "fire_cert": {
+  "requirements": [
+   "Smoke alarms on each floor, including the basement and finished attics, within 10 feet of all bedrooms, and not in the stairway",
+   "Ceiling mounting at least 4 inches from the wall, or wall mounting with the top 4 to 12 inches below the ceiling's highest point",
+   "Homes built with electric interconnected smoke alarms must keep them; they cannot be replaced with battery units",
+   "CO alarms within 10 feet of all bedrooms",
+   "Fire extinguisher rated 2A:10BC, no more than 10 pounds, mounted within 10 feet of the kitchen and visible from it (not in a pantry or laundry room); the Borough sheet prints its height limit as 'no higher than 5\" from the floor'; the checklist (revised 4/2021) predates P.L.2025, c.19, which removed the extinguisher from the state requirement, and the packet still includes a 2005 DCA extinguisher memo"
+  ],
+  "authorities": [
+   {
+    "name": "Borough of Mantoloking Fire Official (Transfer/Sale inspection)",
+    "type": "municipal_fire_bureau",
+    "area_served": "Entire borough",
+    "lead_time": "Application must be received 15 days before the home is occupied",
+    "fees": [
+     {
+      "label": "Transfer/Sale inspection (same single inspection as the town certificate; not charged twice)",
+      "amount": "$100",
+      "quote": "There is a fee of $100. Payment can be made by cash, check or money order. Make check payable to the Borough of Mantoloking.",
+      "source_url": "https://www.mantoloking.org/DocumentCenter/View/1413/Transfer-and-Rental-Application-",
+      "verified": true
+     },
+     {
+      "label": "Reinspection for violations",
+      "amount": "$25",
+      "quote": "If the property is to be re-inspected for violations, a fee of $25 is charged.",
+      "source_url": "https://www.mantoloking.org/DocumentCenter/View/1413/Transfer-and-Rental-Application-",
+      "verified": true
+     }
+    ],
+    "how_to_apply": "Submit the Borough Transfer/Sale & Rental Application with the $100 fee (see the town certificate). The Fire Official inspects on Mondays and Wednesdays, 4 pm to 6 pm.",
+    "application_url": "https://www.mantoloking.org/DocumentCenter/View/1413/Transfer-and-Rental-Application-",
+    "department_url": "https://www.mantoloking.org/1230/Contact-Information",
+    "phone": "732-475-6983, ext. 310",
+    "email": "building@mantoloking.org",
+    "contact_name": "Ron Piszar",
+    "contact_title": "Fire Official",
+    "evidence": [
+     {
+      "url": "https://www.mantoloking.org/DocumentCenter/View/1413/Transfer-and-Rental-Application-",
+      "quote": "CHECKOFF LIST FOR TRANSFER/RENTAL APPLICATIONS",
+      "doc_date": "2021-04 (Revised 4/2021; scanned page 2, read visually)",
+      "via": "pdf",
+      "verified": "eye"
+     },
+     {
+      "url": "https://www.mantoloking.org/DocumentCenter/View/1413/Transfer-and-Rental-Application-",
+      "quote": "Rules for Smoke, Carbon Monoxide and Fire Extinguisher Certification",
+      "doc_date": "undated (scanned page 5, read visually)",
+      "via": "pdf",
+      "verified": "eye"
+     },
+     {
+      "url": "https://www.mantoloking.org/1230/Contact-Information",
+      "quote": "Ron Piszar - Fire Official (Inspection Days: Monday and Wednesday, 4 pm to 6 pm)",
+      "doc_date": "2026-09 (page as fetched)",
+      "via": "page",
+      "verified": true
+     },
+     {
+      "url": "https://www.mantoloking.org/1230/Contact-Information",
+      "quote": "Vanessa Faljean-Secretary to Fire Official (Telephone Number: 732-475-6983, ext. 310)",
+      "doc_date": "2026-09",
+      "via": "page",
+      "verified": true
+     },
+     {
+      "url": "https://nj.gov/dca/dfs/pdf/ANNUAL%20REGISTRY/THIRD%20QUARTER%20LEA%20REGISTRY%202026.pdf",
+      "quote": "M Mantoloking Borough",
+      "doc_date": "2026-07 (as of June 30, 2026)",
+      "via": "pdf",
+      "verified": true
+     },
+     {
+      "url": "https://www.nj.gov/dca/dfs/pdf/fire%20directory_county%20summary/fire_code_enforcement_director.pdf",
+      "quote": "LEAID: 1519-001 Fire Official Ronald J Piszar Phone (732) 899-6600",
+      "doc_date": "2019-10-22 (survey date; directory code 1519 = Mantoloking)",
+      "via": "state_directory",
+      "verified": true
+     },
+     {
+      "url": "https://www.nj.gov/dca/dfs/pdf/fire%20directory_county%20summary/fire_code_enforcement_director.pdf",
+      "quote": "Email building@mantoloking.org",
+      "doc_date": "2019-10-22",
+      "via": "state_directory",
+      "verified": true
+     }
+    ],
+    "confidence": "high"
+   }
+  ],
+  "notes": "Mantoloking is its own fire code enforcing agency (LEA registry code M). The state directory entry for Mantoloking was last surveyed 10/22/2019 and gives old numbers ((732) 899-6600 and (732) 899-6601 for smoke detector compliance); the Borough's current pages and forms use 732-475-6983, so those are used here. The phone given is the line for the Fire Official's secretary, Vanessa Faljean. Ron Piszar is also Little Egg Harbor Township's Construction Official and Fire Sub-Code Official."
+ },
+ "other_items": [
+  {
+   "label": "Open permits",
+   "detail": "All open permits must be closed out before the sale is approved.",
+   "source_url": "https://www.mantoloking.org/DocumentCenter/View/1413/Transfer-and-Rental-Application-"
+  }
+ ],
+ "open_questions": [
+  "Which Borough ordinance section requires the transfer certification (ecode360 not readable), and whether the Borough inspects anything beyond smoke, CO, extinguisher and open permits.",
+  "Whether the fire extinguisher is still checked on sales after P.L.2025, c.19.",
+  "How long the certification is valid."
+ ],
+ "verification": {
+  "fees": 4,
+  "fee_ok": 4,
+  "fee_bad": 0,
+  "fee_unchecked": 0,
+  "quotes": 14,
+  "q_ok": 14,
+  "q_bad": 0,
+  "q_unchecked": 0
+ }
+}
