@@ -1356,8 +1356,8 @@ body.est-verify-bar-open{padding-bottom:88px;}
 
         <div class="sn-intro">
           <div class="sn-intro-badge"><i class="fas fa-leaf"></i> Age 65+ Only</div>
-          <h3>Stay NJ: 50% Off Your Property Tax Bill</h3>
-          <p>Enter your annual tax bill and household income to see your estimated credit, up to <strong>$6,500/year</strong> paid in quarterly installments. Payments began February 2026.</p>
+          <h3>Stay NJ: Up to Half Your Property Tax Bill</h3>
+          <p>Enter your annual tax bill and household income to see your estimated credit. Stay NJ covers 50% of the bill, up to <strong>$4,000 to $6,500 a year</strong> depending on income, minus your ANCHOR and Senior Freeze benefits. The 2025 benefit is paid in February and May 2027.</p>
         </div>
 
         <div class="sn-inputs">
@@ -1382,7 +1382,7 @@ body.est-verify-bar-open{padding-bottom:88px;}
 
           <!-- Ineligible -->
           <div class="sn-ineligible" id="sn-ineligible" style="display:none;">
-            <p><i class="fas fa-circle-xmark" style="margin-right:6px;"></i>Income is over the ~$200,000 Stay NJ limit (FY2027 budget)</p>
+            <p><i class="fas fa-circle-xmark" style="margin-right:6px;"></i>Income is over the $200,000 Stay NJ limit (FY2027 budget)</p>
             <small>You may still qualify for ANCHOR, use the estimator tab above.</small>
           </div>
 
@@ -1390,19 +1390,19 @@ body.est-verify-bar-open{padding-bottom:88px;}
           <div id="sn-eligible-block">
             <div class="sn-result-cards">
               <div class="sn-result-card primary">
-                <div class="sn-result-card-label">Annual Credit</div>
+                <div class="sn-result-card-label">Stay NJ Credit</div>
                 <div class="sn-result-card-num" id="sn-annual">$0</div>
-                <div class="sn-result-card-sub">50% of bill, income-tiered cap</div>
+                <div class="sn-result-card-sub">Half the bill up to your cap, minus ANCHOR</div>
               </div>
               <div class="sn-result-card">
-                <div class="sn-result-card-label">Per Quarter</div>
+                <div class="sn-result-card-label">ANCHOR</div>
                 <div class="sn-result-card-num" id="sn-quarterly">$0</div>
-                <div class="sn-result-card-sub">Feb · May · Aug · Nov</div>
+                <div class="sn-result-card-sub">2025 homeowner benefit, counted first</div>
               </div>
               <div class="sn-result-card">
                 <div class="sn-result-card-label">You Still Pay</div>
                 <div class="sn-result-card-num" id="sn-remain">$0</div>
-                <div class="sn-result-card-sub">After credit applied</div>
+                <div class="sn-result-card-sub">After ANCHOR and Stay NJ</div>
               </div>
             </div>
 
@@ -1417,8 +1417,8 @@ body.est-verify-bar-open{padding-bottom:88px;}
 
             <ul class="sn-rules">
               <li class="sn-rule"><div class="sn-rule-check"><i class="fas fa-check" style="font-size:8px;"></i></div>Must be age 65 or older</li>
-              <li class="sn-rule"><div class="sn-rule-check"><i class="fas fa-check" style="font-size:8px;"></i></div>Household income at or below about $200,000 (FY2027)</li>
-              <li class="sn-rule"><div class="sn-rule-check"><i class="fas fa-check" style="font-size:8px;"></i></div>Credit = 50% of tax bill, capped by income ($6,500 / $5,000 / $4,000)</li>
+              <li class="sn-rule"><div class="sn-rule-check"><i class="fas fa-check" style="font-size:8px;"></i></div>Household income at or below $200,000 (FY2027)</li>
+              <li class="sn-rule"><div class="sn-rule-check"><i class="fas fa-check" style="font-size:8px;"></i></div>Credit = 50% of tax bill minus ANCHOR and Senior Freeze, capped by income ($6,500 / $5,000 / $4,000)</li>
               <li class="sn-rule"><div class="sn-rule-check"><i class="fas fa-check" style="font-size:8px;"></i></div>Apply via PAS-1 form, deadline November 2, 2026</li>
             </ul>
 
@@ -1463,7 +1463,7 @@ body.est-verify-bar-open{padding-bottom:88px;}
         <div class="est-downsize">
           <div class="est-downsize-badge"><i class="fas fa-house-chimney-window"></i></div>
           <h4>Planning to Retire or Age in Place in NJ? Read This Before You Apply.</h4>
-          <p>The Stay NJ credit is real money, but it caps out at $6,500 a year and follows your current tax bill. For a lot of seniors, the bigger savings come from the move itself: a lower-tax South Jersey town, a smaller single-story home, or both can cut your yearly costs well beyond what any state credit covers. And you keep your credit eligibility at the new place.</p>
+          <p>The Stay NJ credit is real money, but it caps out at $4,000 to $6,500 a year, depending on income, and follows your current tax bill. For a lot of seniors, the bigger savings come from the move itself: a lower-tax South Jersey town, a smaller single-story home, or both can cut your yearly costs well beyond what any state credit covers. And you keep your credit eligibility at the new place.</p>
           <p class="est-downsize-sub">John and Heather help seniors run both numbers side by side, what you'd save by staying versus what you'd save by moving, before you make any decision. No pressure either way.</p>
           <button class="est-downsize-cta" onclick="estDownsizeRequest()"><i class="fas fa-book-open"></i> Request the South Jersey Downsizing Playbook</button>
           <div class="est-downsize-sent" id="est-downsize-sent"><i class="fas fa-circle-check" style="margin-right:6px;"></i>Request received! John will send over the playbook and follow up within one business day.</div>
@@ -2253,20 +2253,26 @@ body.est-verify-bar-open{padding-bottom:88px;}
     if (ineligEl) ineligEl.style.display = 'none';
     if (eligEl)   eligEl.style.display   = 'block';
 
-    // FY2027 budget: max credit is tiered by income
+    // FY2027 budget: the maximum is tiered by income. Stay NJ pays 50% of
+    // the bill up to that maximum, less ANCHOR and the Senior Freeze
+    // (P.L.2024, c.88). 2025 ANCHOR for homeowners: $1,500 up to $150,000
+    // income, $1,000 above that. Senior Freeze needs a base year we don't
+    // have here, so it is left out and the note on the page says so.
     var cap       = incomeVal > 150000 ? 4000 : (incomeVal > 100000 ? 5000 : 6500);
-    var credit    = Math.min(taxVal * 0.5, cap);
-    var quarterly = Math.round(credit / 4);
-    var remain    = Math.max(taxVal - credit, 0);
-    var pct       = Math.min((credit / taxVal) * 100, 100);
+    var anchor    = incomeVal > 150000 ? 1000 : 1500;
+    var covered   = Math.min(Math.min(taxVal * 0.5, cap), taxVal);
+    var credit    = Math.max(covered - anchor, 0);
+    var total     = Math.min(credit + anchor, taxVal);
+    var remain    = Math.max(taxVal - total, 0);
+    var pct       = Math.min((total / taxVal) * 100, 100);
 
     function fmt(n){ return '$' + Math.round(n).toLocaleString(); }
 
     var annEl = document.getElementById('sn-annual');    if (annEl)  annEl.textContent  = fmt(credit);
-    var qEl   = document.getElementById('sn-quarterly'); if (qEl)    qEl.textContent    = fmt(quarterly);
+    var qEl   = document.getElementById('sn-quarterly'); if (qEl)    qEl.textContent    = fmt(anchor);
     var remEl = document.getElementById('sn-remain');    if (remEl)  remEl.textContent  = fmt(remain);
     var barEl = document.getElementById('sn-bar');       if (barEl)  barEl.style.width  = pct.toFixed(1) + '%';
-    var bcEl  = document.getElementById('sn-bar-credit-label'); if (bcEl) bcEl.textContent = 'Credit: ' + fmt(credit);
+    var bcEl  = document.getElementById('sn-bar-credit-label'); if (bcEl) bcEl.textContent = 'ANCHOR + Stay NJ: ' + fmt(total);
     var brEl  = document.getElementById('sn-bar-remain-label'); if (brEl) brEl.textContent = 'Remaining: ' + fmt(remain);
   };
 
