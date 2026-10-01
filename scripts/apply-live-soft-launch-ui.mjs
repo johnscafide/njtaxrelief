@@ -44,32 +44,32 @@ await transform('property/pro/index.html', [
   {
     label: 'hero billing note',
     from: '<p class="pro-fast-price-note">Annual plans cost the equivalent of ten monthly payments.</p>',
-    to: '<p class="pro-fast-price-note">Monthly, annual and limited Founding Lifetime options are available.</p>'
+    to: '<p class="pro-fast-price-note">14-day free trial on Agent, Pro and Pro+. Monthly, annual and limited Founding Lifetime options are available.</p>'
   },
   {
     label: 'pricing heading and cadence',
     from: '<div class="pro-price-head pro-reveal"><span class="pro-kicker">Professional plans</span><h2>Choose the level that fits your work.</h2><p>Annual billing includes two months free compared with monthly billing for 12 months.</p><div class="pro-cadence" role="group" aria-label="Billing cadence"><button type="button" class="active" data-cadence="yearly" aria-pressed="true">Annual <span>2 months free</span></button><button type="button" data-cadence="monthly" aria-pressed="false">Monthly</button></div></div>',
-    to: '<div class="pro-soft-launch-bar pro-reveal is-visible"><span class="pro-soft-launch-stamp"><i></i> Soft launch live</span><strong>Paid plans are open now.</strong><small>Founding Lifetime is limited and may be retired as Watchdog grows.</small></div><div class="pro-price-head pro-reveal"><span class="pro-kicker">Soft launch · enrollment open</span><h2>Choose how you want to pay.</h2><p>Monthly, annual, or a limited Founding Lifetime option. Same plan limits.</p><div class="pro-cadence" role="group" aria-label="Billing cadence"><button type="button" class="active" data-cadence="yearly" aria-pressed="true">Annual <span>2 months free</span></button><button type="button" data-cadence="monthly" aria-pressed="false">Monthly</button><button type="button" data-cadence="lifetime" aria-pressed="false">Lifetime <span>Founding</span></button></div></div>'
+    to: '<div class="pro-soft-launch-bar pro-reveal is-visible"><span class="pro-soft-launch-stamp"><i></i> Soft launch live</span><strong>Try any plan free for 14 days.</strong><small>Card required. Renews automatically on day 14 unless you cancel. Founding Lifetime is limited and may be retired as Watchdog grows.</small></div><div class="pro-price-head pro-reveal"><span class="pro-kicker">Soft launch · enrollment open</span><h2>Choose how you want to pay.</h2><p>Monthly, annual, or a limited Founding Lifetime option. Same plan limits.</p><div class="pro-cadence" role="group" aria-label="Billing cadence"><button type="button" class="active" data-cadence="yearly" aria-pressed="true">Annual <span>2 months free</span></button><button type="button" data-cadence="monthly" aria-pressed="false">Monthly</button><button type="button" data-cadence="lifetime" aria-pressed="false">Lifetime <span>Founding</span></button></div></div>'
   },
   {
     label: 'agent live checkout CTA',
     from: '<a class="pro-price-cta" href="#launch-list" data-demo-plan="agent" data-demo-cadence="yearly">Join Agent launch list <i class="fas fa-arrow-right"></i></a>',
-    to: '<a class="pro-price-cta" href="#" data-demo-plan="agent" data-demo-cadence="yearly" data-billing-plan="agent" data-billing-cadence="yearly">Choose Agent <i class="fas fa-arrow-right"></i></a>'
+    to: '<a class="pro-price-cta" href="#" data-demo-plan="agent" data-demo-cadence="yearly" data-billing-plan="agent" data-billing-cadence="yearly" data-billing-trial="1">Try Agent free for 14 days <i class="fas fa-arrow-right"></i></a>'
   },
   {
     label: 'pro live checkout CTA',
     from: '<a class="pro-price-cta" href="#launch-list" data-demo-plan="pro" data-demo-cadence="yearly">Join Pro launch list <i class="fas fa-arrow-right"></i></a>',
-    to: '<a class="pro-price-cta" href="#" data-demo-plan="pro" data-demo-cadence="yearly" data-billing-plan="pro" data-billing-cadence="yearly">Choose Pro <i class="fas fa-arrow-right"></i></a>'
+    to: '<a class="pro-price-cta" href="#" data-demo-plan="pro" data-demo-cadence="yearly" data-billing-plan="pro" data-billing-cadence="yearly" data-billing-trial="1">Try Pro free for 14 days <i class="fas fa-arrow-right"></i></a>'
   },
   {
     label: 'pro plus live checkout CTA',
     from: '<a class="pro-price-cta" href="#launch-list" data-demo-plan="pro_plus" data-demo-cadence="yearly">Join Pro+ launch list <i class="fas fa-arrow-right"></i></a>',
-    to: '<a class="pro-price-cta" href="#" data-demo-plan="pro_plus" data-demo-cadence="yearly" data-billing-plan="pro_plus" data-billing-cadence="yearly">Choose Pro+ <i class="fas fa-arrow-right"></i></a>'
+    to: '<a class="pro-price-cta" href="#" data-demo-plan="pro_plus" data-demo-cadence="yearly" data-billing-plan="pro_plus" data-billing-cadence="yearly" data-billing-trial="1">Try Pro+ free for 14 days <i class="fas fa-arrow-right"></i></a>'
   },
   {
     label: 'open enrollment note',
     from: '<p class="pro-checkout-note"><i class="fas fa-calendar-check"></i>Paid enrollment is scheduled to open September 16. Join the launch list to be notified.</p>',
-    to: '<p class="pro-checkout-note"><i class="fas fa-circle-check"></i>Paid enrollment is open for Agent, Pro and Pro+. Teams stays request-only.</p>'
+    to: '<p class="pro-checkout-note"><i class="fas fa-circle-check"></i>Paid enrollment is open for Agent, Pro and Pro+. Each starts with a 14-day free trial: card required, nothing charged during the trial, and the plan renews automatically on day 14 at the price you chose unless you cancel from Account first. One trial per account. Teams stays request-only.</p>'
   },
   {
     label: 'plan fit FAQ',
@@ -79,7 +79,7 @@ await transform('property/pro/index.html', [
   {
     label: 'trial FAQ',
     from: '<article class="pro-faq-card new-buyer-question pro-reveal" data-faq-added="trial"><i class="fas fa-hourglass-half"></i><h3>Is there a free trial?</h3><p>Not yet. Property lookup remains free.</p></article>',
-    to: '<article class="pro-faq-card new-buyer-question pro-reveal" data-faq-added="trial"><i class="fas fa-hourglass-half"></i><h3>Is there a free trial?</h3><p>Property lookup is free. Paid professional plans start when you check out.</p></article>'
+    to: '<article class="pro-faq-card new-buyer-question pro-reveal" data-faq-added="trial"><i class="fas fa-hourglass-half"></i><h3>Is there a free trial?</h3><p>Yes. Agent, Pro and Pro+ each start with a 14-day free trial. A card is required to start and nothing is charged during the trial. On day 14 your plan renews automatically at the monthly or annual price you picked, unless you cancel from Account before then. We email a reminder 7 days before the first charge. One trial per account; Founding Lifetime and Teams do not include a trial.</p></article>'
   },
   {
     label: 'plan help section copy',
