@@ -1,0 +1,195 @@
+{
+ "municipality_code": "1508",
+ "municipality": "Toms River Township",
+ "county": "OCEAN",
+ "checked_at": "2026-09-30",
+ "resale_co": {
+  "status": "not_required",
+  "name": "Municipal Certificate of Continued Use and Occupancy (MCCUO), repealed",
+  "issued_by": "Division of Code Enforcement (no longer issued for sales)",
+  "lead_time": "",
+  "valid_for": "",
+  "requirements": [],
+  "fees": [],
+  "how_to_apply": "Nothing to apply for. The Township stopped requiring the Municipal Certificate of Continued Use and Occupancy for home sales in January 2024. Sellers still need the smoke and carbon monoxide alarm certificate from the Toms River Bureau of Fire Prevention.",
+  "application_url": "",
+  "department_url": "https://www.tomsrivertownship.com/177/Property-MaintenanceRental-Application",
+  "phone": "732-341-1000, ext. 8532",
+  "email": "SFerriolo@tomsrivertownship.com",
+  "contact_name": "Stan Ferriolo",
+  "contact_title": "Division Supervisor, Division of Code Enforcement",
+  "evidence": [
+   {
+    "url": "https://www.tomsrivertownship.com/177/Property-MaintenanceRental-Application",
+    "quote": "Resale Inspections The Township no longer requires a Municipal Certificate of Continued Use and Occupancy for the sale of a home. You are still required to obtain a Residential Smoke Inspection with the Bureau of Fire Prevention.",
+    "doc_date": "2026-09 (page checked 2026-09-30)",
+    "via": "page",
+    "verified": true
+   },
+   {
+    "url": "https://www.tomsrivertownship.com/DocumentCenter/View/10369",
+    "quote": "an Ordinance was introduced repealing Chapter 253 of the Township Code entitled \"Continued Use and Occupancy of Residential Dwellings,\" which mandated that all residential dwellings in the Township obtain a municipal certificate of continued use and occupancy (\"MCCUO\") from the Division of Code Enforcement prior to being sold, re-sold, or transferred.",
+    "doc_date": "2024-01-02",
+    "via": "pdf",
+    "verified": null
+   },
+   {
+    "url": "https://www.tomsrivertownship.com/DocumentCenter/View/10369",
+    "quote": "The Division of Code Enforcement will cease accepting applications effective immediately, and residential real estate closings of properties located in Toms River Township may proceed without obtaining a certificate of continued use and occupancy.",
+    "doc_date": "2024-01-02",
+    "via": "pdf",
+    "verified": null
+   },
+   {
+    "url": "https://www.tomsrivertownship.com/m/directory/department?did=16",
+    "quote": "Stan Ferriolo | Division Supervisor | ... | 732-341-1000, ext. 8532",
+    "doc_date": "2026-09",
+    "via": "page",
+    "verified": true
+   }
+  ],
+  "confidence": "high",
+  "notes": "Toms River repealed its resale certificate program (Chapter 253, Continued Use and Occupancy of Residential Dwellings). The Mayor's letter of January 2, 2024 suspended enforcement pending the second reading on January 31, 2024, and the Township's Property Maintenance page now says the certificate is no longer required for the sale of a home. The Division of Code Enforcement still runs a Rental Certificate of Inspection and landlord registration program (rentals only, applied for through the SDL portal), lead-safe certification for pre-1978 rentals, and foreclosure/vacant property registration; none of these apply to an owner-occupied sale. Contact email is from the mailto link on the Township directory page (Email Stan Ferriolo). Division main line per the directory: 732-341-1000, ext. 8440."
+ },
+ "fire_cert": {
+  "requirements": [
+   "Someone 18 or older must be home for the inspection; inspections are scheduled between 9:00 a.m. and 12:00 p.m. and the inspector will not wait",
+   "Homes built before 1977: 10-year sealed battery smoke alarms on each level, including the basement, and within 10 feet of all bedrooms",
+   "Homes with hardwired (A/C powered) smoke alarms must keep them hardwired; they may not be swapped for battery alarms",
+   "Carbon monoxide alarms near all sleeping areas in homes with fuel-burning appliances or an attached garage (UL 2034 listed)",
+   "Homes with a generator, solar panels or battery storage need a printed (not handwritten) 'CAUTION: MULTIPLE SOURCES OF POWER' label within 18 inches of the main electrical panel and of the electric meter",
+   "Portable fire extinguisher no longer required as of February 3, 2025 (per the Bureau's February 2025 requirements sheet)"
+  ],
+  "authorities": [
+   {
+    "name": "Toms River Bureau of Fire Prevention (fire code agency for Toms River Fire Districts 1 and 2)",
+    "type": "fire_district",
+    "area_served": "Entire township (Fire Districts 1 and 2)",
+    "lead_time": "Submit at least 3 weeks before closing; certificate expires 6 months from issuance",
+    "fees": [
+     {
+      "label": "Initial smoke and carbon monoxide alarm inspection",
+      "amount": "$75.00",
+      "quote": "Initial Inspection: $75.00",
+      "source_url": "https://trfireprevention.com/residential-smoke-inspections/resale/",
+      "verified": true
+     },
+     {
+      "label": "First re-inspection",
+      "amount": "$0.00",
+      "quote": "First Re-Inspection - $0.00",
+      "source_url": "https://trfireprevention.com/residential-smoke-inspections/",
+      "verified": true
+     },
+     {
+      "label": "Each additional re-inspection after the first",
+      "amount": "$35",
+      "quote": "Additional Re-Inspections: $35 per re-inspection",
+      "source_url": "https://trfireprevention.com/residential-smoke-inspections/resale/",
+      "verified": true
+     },
+     {
+      "label": "Appointment no-show (on top of the inspection fee)",
+      "amount": "$75",
+      "quote": "Appointment No Show: $75 in addition to inspection fee",
+      "source_url": "https://trfireprevention.com/residential-smoke-inspections/resale/",
+      "verified": true
+     },
+     {
+      "label": "Duplicate copy of certificate",
+      "amount": "$30",
+      "quote": "Duplicate copy of Certificate: $30",
+      "source_url": "https://trfireprevention.com/residential-smoke-inspections/resale/",
+      "verified": true
+     },
+     {
+      "label": "Penalty for closing without the certificate",
+      "amount": "$500",
+      "quote": "It is a violation of the Uniform Fire Code (N.J.A.C. - 5:70-2.3) to close without a Certificate of Smoke & Carbon Monoxide Alarm Compliance. This violation is subject to a $500 penalty.",
+      "source_url": "https://trfireprevention.com/residential-smoke-inspections/resale/",
+      "verified": true
+     }
+    ],
+    "how_to_apply": "Apply online through the Township's SDL portal (create an account or log in, choose Fire/Smoke Detector Inspection, inspection reason Property Sold, enter the closing date, the address and the realtor's details), then pay the $75.00 by credit card. The Bureau then calls to schedule the inspection. The certificate can be emailed at the end of the inspection day. To cancel, call 732-240-5153.",
+    "application_url": "https://www.sdlportal.com/towns/nj/ocean/tomsriver/requests/smokeAlarm",
+    "department_url": "https://trfireprevention.com/residential-smoke-inspections/resale/",
+    "phone": "732-240-5153",
+    "email": "TRFirePrevention@trfire.org",
+    "contact_name": "Matthew Janora",
+    "contact_title": "Chief Inspector / Fire Official",
+    "evidence": [
+     {
+      "url": "https://trfireprevention.com/residential-smoke-inspections/resale/",
+      "quote": "If you are selling your home in Toms River, you are required to schedule an appointment with the Toms River Bureau of Fire Prevention for a resale inspection.",
+      "doc_date": "2026-09 (page checked 2026-09-30)",
+      "via": "page",
+      "verified": true
+     },
+     {
+      "url": "https://trfireprevention.com/residential-smoke-inspections/resale/",
+      "quote": "Due to high scheduling demand, applications should be submitted at least 3 weeks in advance of closing date. Certificates expire 6 months from the date of issuance. Certificates must be obtained every time there is a transfer of title.",
+      "doc_date": "2026-09",
+      "via": "page",
+      "verified": true
+     },
+     {
+      "url": "https://trfireprevention.com/wp-content/uploads/2025/02/Residential-Resale-Requirements-Feb-2025.pdf",
+      "quote": "As of February 3, 2025, portable fire extinguishers are no longer required to obtain a CSACMAPFEC.",
+      "doc_date": "2025-02 (Revised February 2025)",
+      "via": "pdf",
+      "verified": true
+     },
+     {
+      "url": "https://trfireprevention.com/wp-content/uploads/2024/01/STEP_BY_STEP_INSTRUCIONS_ON_HOW_TO_APPLY_FOR_AN_INSPECTIONFOR_THE_RESALE_OF_A_HOME.pdf",
+      "quote": "Click on Fire/Smoke Detector Inspection Inspection Reason: Property Sold",
+      "doc_date": "2024-01 (upload folder)",
+      "via": "pdf",
+      "verified": true
+     },
+     {
+      "url": "https://trfireprevention.com/about/employee-information/",
+      "quote": "Chief Inspector Fire Official Matthew Janora",
+      "doc_date": "2026-09",
+      "via": "page",
+      "verified": true
+     },
+     {
+      "url": "https://www.tomsrivertownship.com/442/Fire-Prevention",
+      "quote": "Toms River Bureau of Fire Prevention Office: (732) 240 - 5153 Email: TRFirePrevention@TRFire.org",
+      "doc_date": "2026-09",
+      "via": "page",
+      "verified": true
+     },
+     {
+      "url": "https://nj.gov/dca/dfs/pdf/ANNUAL%20REGISTRY/THIRD%20QUARTER%20LEA%20REGISTRY%202026.pdf",
+      "quote": "D** Toms Rive r Township (1,2) ... **The LEA enforces the Fire Code in all its districts.",
+      "doc_date": "2026-07",
+      "via": "pdf",
+      "verified": true
+     },
+     {
+      "url": "https://www.nj.gov/dca/dfs/pdf/fire%20directory_county%20summary/fire_code_enforcement_director.pdf",
+      "quote": "LEAID: 1507-001 Enf Auth. District Fire Official Matthew Janora Phone (732) 240-5153 ... Email mjanora@trfire.org ... Toms River Twp Fire Prev Bureau Toms River Twp Dist 1 & 2",
+      "doc_date": "2026 (survey date 1/12/2026)",
+      "via": "state_directory",
+      "verified": true
+     }
+    ],
+    "confidence": "high"
+   }
+  ],
+  "notes": "One fire code agency, the Toms River Bureau of Fire Prevention (33 Washington Street), serves both Toms River fire districts, so the fire district split does not change who issues the certificate. The state directory lists it under Toms River's directory code 1507 (Watchdog code 1508). Chief Janora's direct email, mjanora@trfire.org, appears on the Bureau's Employee Information page (mailto link) and in the state directory; the general office email TRFirePrevention@trfire.org is given above. Payment is due before the inspection is scheduled and the application fee is non-refundable. The Bureau also lists the re-inspection fee on its Residential Smoke Inspections page as 'Second Re-Inspection / Each Additional Re-Inspection - $35.00' and 'Closing Without an Inspection- $500.00'."
+ },
+ "other_items": [],
+ "open_questions": [],
+ "verification": {
+  "fees": 6,
+  "fee_ok": 6,
+  "fee_bad": 0,
+  "fee_unchecked": 0,
+  "quotes": 12,
+  "q_ok": 10,
+  "q_bad": 0,
+  "q_unchecked": 2
+ }
+}

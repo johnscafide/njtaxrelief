@@ -1,0 +1,284 @@
+{
+ "municipality_code": "1710",
+ "municipality": "Pilesgrove Township",
+ "county": "SALEM",
+ "checked_at": "2026-09-30",
+ "resale_co": {
+  "status": "required",
+  "name": "Certificate of Occupancy (CO), Sales",
+  "issued_by": "Zoning & Housing Office (Housing Official)",
+  "lead_time": "48 hours notice is required for the inspection; the application and fee must be in before an inspection is scheduled.",
+  "valid_for": "",
+  "requirements": [
+   "House numbers 5 inches high and visible from the street",
+   "GFI protected outlets within 6 feet of a water source and on all exterior outlets",
+   "Fire extinguisher mounted in the kitchen",
+   "Appliances installed properly and working, no extension cords; exhaust fan over the stove (ductless hood allowed) and anti-tip bracket on the stove",
+   "Adequate electric, heating and plumbing service; two separate outlets in each habitable room",
+   "Bathroom vented or with a working window",
+   "Screened window in each room; all windows working with locks; exterior doors and hardware working",
+   "Handrails on steps with more than 3 risers; rails around landings or porches 30 inches or higher",
+   "Water heater relief valve piped to within 6 inches of the floor; emergency shut-off at the top of the stairs for a basement heater",
+   "In-ground pool fenced at least 4 feet high with a self-latching gate",
+   "House free of insect infestation",
+   "No work done without permits and no open construction permits",
+   "Well water test, chimney inspection and smoke/CO inspection must pass"
+  ],
+  "fees": [
+   {
+    "label": "Certificate of Occupancy for a sale (initial inspection and one follow-up)",
+    "amount": "$50",
+    "quote": "Fee (initial and one follow-up) = $50",
+    "source_url": "https://www.pilesgrovenj.org/DocumentCenter/View/321/CO-Sales-Application",
+    "verified": true
+   },
+   {
+    "label": "Re-inspection",
+    "amount": "$75",
+    "quote": "Re-Inspection Fee = $75",
+    "source_url": "https://www.pilesgrovenj.org/DocumentCenter/View/321/CO-Sales-Application",
+    "verified": true
+   }
+  ],
+  "how_to_apply": "Fill in the Township of Pilesgrove Application for Certificate of Occupancy (CO), Sales Only (revised 5/13/2025) and submit it with the fee to the Zoning & Housing Office; the office form records payment by cash or check. The owner or agent then calls to schedule the inspection (48 hours notice). Office hours are Monday and Wednesday 8:30 am to 2 pm; inspections 12 pm to 2 pm.",
+  "application_url": "https://www.pilesgrovenj.org/DocumentCenter/View/321/CO-Sales-Application",
+  "department_url": "https://www.pilesgrovenj.org/230/Zoning-Housing",
+  "phone": "856-769-4814 Ext. 6",
+  "email": "zoning@PilesgroveNJ.org",
+  "contact_name": "Tanya Timberman",
+  "contact_title": "Zoning & Housing Officer (Housing Official)",
+  "evidence": [
+   {
+    "url": "https://www.pilesgrovenj.org/DocumentCenter/View/321/CO-Sales-Application",
+    "quote": "Township of Pilesgrove Application for Certificate of Occupancy (CO) SALES Only (Revised 5/13/2025)",
+    "doc_date": "2025-05-13",
+    "via": "pdf",
+    "verified": true
+   },
+   {
+    "url": "https://www.pilesgrovenj.org/DocumentCenter/View/321/CO-Sales-Application",
+    "quote": "Well, Chimney, Smoke/Carbon Monoxide Certificates are required PRIOR to issuing a CO. Pilesgrove Township does NOT issue Temporary CO's.",
+    "doc_date": "2025-05-13",
+    "via": "pdf",
+    "verified": true
+   },
+   {
+    "url": "https://www.pilesgrovenj.org/DocumentCenter/View/326/CO-Inspection-Checklist",
+    "quote": "An application along with the fee must be submitted prior to scheduling an inspection/re inspection. The owner or agent must call to schedule an inspection. Residential CO inspections require a fee of $50.00. NO Temporary CO's will be issued.",
+    "doc_date": "undated (approved by the Township Committee 2026-02-24)",
+    "via": "pdf",
+    "verified": true
+   },
+   {
+    "url": "https://www.pilesgrovenj.org/DocumentCenter/View/326/CO-Inspection-Checklist",
+    "quote": "Housing Official: Tanya Timberman 48 Hours notice is required for inspection.",
+    "doc_date": "undated",
+    "via": "pdf",
+    "verified": true
+   },
+   {
+    "url": "https://www.pilesgrovenj.org/AgendaCenter/ViewFile/Minutes/_02242026-33",
+    "quote": "Approval of the updated Certificate of Occupancy Inspection Checklist. Approval of the updated Application for Certificate of Occupancy for Sales of Homes.",
+    "doc_date": "2026-02-24",
+    "via": "pdf",
+    "verified": true
+   },
+   {
+    "url": "https://www.pilesgrovenj.org/230/Zoning-Housing",
+    "quote": "Tanya Timberman Officer Email Tanya Timberman Phone: 856-769-4814 Ext. 6 Zoning & Housing Phone: 856-769-4814 Ext. 6 Office Hours Monday and Wednesday 8:30 am to 2 pm Inspections 12 pm to 2 pm",
+    "doc_date": "2026-09-30 (page fetched; email from the page mailto link)",
+    "via": "page",
+    "verified": true
+   }
+  ],
+  "confidence": "high",
+  "notes": "The Township posts a CO application for sales only (revised 5/13/2025) and a separate one for rentals; the Township Committee approved updated sales and rental CO applications and the inspection checklist on February 24, 2026. The sales form fee covers the initial inspection and one follow-up; later visits are $75 each. The checklist says residential CO inspections are $50.00. A well test, chimney certificate and smoke/CO certificate are needed before the CO is issued. The Township does not inspect septic systems and does not issue temporary COs. A web search summary of Chapter 64 (ecode360, not opened and not quoted here) suggested a housing certificate may be issued within 90 days after the passing inspection; this is not confirmed from an official page. The Housing Officer email zoning@PilesgroveNJ.org comes from the mailto link on the Zoning & Housing page. Rentals also need a lead-safe certificate (homes built before 1979) and proof of liability insurance; those are rental-only items."
+ },
+ "fire_cert": {
+  "requirements": [
+   "Smoke alarms must be UL listed, less than 10 years old and 10-year sealed battery units; wired or interconnected systems must stay hardwired and interconnected",
+   "CO alarms on every occupiable level including the basement, within 10 feet of any sleeping area",
+   "Homes with a generator, solar panels or battery backup need a warning label within 18 inches of the main electrical panel and the electric meter",
+   "The Township CO checklist still lists a fire extinguisher mounted in the kitchen"
+  ],
+  "authorities": [
+   {
+    "name": "Pilesgrove Township Fire Inspector for CO Requirements (through the Zoning & Housing Office)",
+    "type": "unknown",
+    "area_served": "Entire township, as part of the Township Certificate of Occupancy for a sale (per 2026 Township actions; not yet reflected in state lists)",
+    "lead_time": "",
+    "fees": [],
+    "how_to_apply": "Not published. The Township CO application says the smoke/carbon monoxide certificate is needed before the CO is issued, and its checklist includes a smoke/CO inspection. Ask the Zoning & Housing Office whether the Township fire inspector issues the smoke/CO certificate or whether the seller should apply to the NJ DCA.",
+    "application_url": "",
+    "department_url": "https://www.pilesgrovenj.org/230/Zoning-Housing",
+    "phone": "856-769-4814 Ext. 6",
+    "email": "zoning@PilesgroveNJ.org",
+    "contact_name": "Leroy Pierce",
+    "contact_title": "Fire Inspector for CO Requirements (appointed by Resolution 26-027, February 10, 2026); no direct phone or email published, so the Zoning & Housing Office line is given",
+    "evidence": [
+     {
+      "url": "https://www.pilesgrovenj.org/AgendaCenter/ViewFile/Minutes/_02102026-32",
+      "quote": "Resolution 26-027, Resolution Appointing Leroy Pierce as Fire Inspector for CO Requirements.",
+      "doc_date": "2026-02-10",
+      "via": "pdf",
+      "verified": true
+     },
+     {
+      "url": "https://www.pilesgrovenj.org/AgendaCenter/ViewFile/Minutes/_02242026-33",
+      "quote": "Approval of the Certificate of Smoke Alarms and Carbon Monoxide Alarms Checklist.",
+      "doc_date": "2026-02-24",
+      "via": "pdf",
+      "verified": true
+     },
+     {
+      "url": "https://www.pilesgrovenj.org/DocumentCenter/View/326/CO-Inspection-Checklist",
+      "quote": "Smoke / Carbon Monoxide Inspection = PASS?",
+      "doc_date": "undated",
+      "via": "pdf",
+      "verified": true
+     },
+     {
+      "url": "https://www.pilesgrovenj.org/DocumentCenter/View/323/Smoke-Alarm-Info-Sheet-for-Co-Inspections",
+      "quote": "All smoke alarms must be less than ten (10) years since manufacture date and must be ten(10) year sealed battery units.",
+      "doc_date": "undated",
+      "via": "pdf",
+      "verified": true
+     }
+    ],
+    "confidence": "low"
+   },
+   {
+    "name": "NJ DCA Division of Fire Safety, Bureau of Fire Code Enforcement",
+    "type": "state_dca",
+    "area_served": "Entire township (per the state LEA registry, state towns list and fire directory)",
+    "lead_time": "Fee depends on how many business days before closing you apply (more than 10, 4 to 10, under 4).",
+    "fees": [
+     {
+      "label": "State smoke/CO certificate, applied more than 10 business days before closing",
+      "amount": "$45",
+      "quote": "If you are applying for a certificate more than ten business days from the closing date the fee is $45 dollars",
+      "source_url": "https://firesolutions.dca.nj.gov/ultra-fire-home/smoke-application-create/",
+      "verified": null
+     },
+     {
+      "label": "State smoke/CO certificate, applied 4 to 10 business days before closing",
+      "amount": "$90",
+      "quote": "if applying 4 to 10 business days from the closing date the fee is $90",
+      "source_url": "https://firesolutions.dca.nj.gov/ultra-fire-home/smoke-application-create/",
+      "verified": null
+     },
+     {
+      "label": "State smoke/CO certificate, closing less than 4 business days away",
+      "amount": "$161",
+      "quote": "if the closing date is less than four business days the fee is $161.",
+      "source_url": "https://firesolutions.dca.nj.gov/ultra-fire-home/smoke-application-create/",
+      "verified": null
+     }
+    ],
+    "how_to_apply": "Apply online through the NJ DCA Fire Safety portal (Certificate of Smoke Alarm, Carbon Monoxide Alarm, and Secondary Power Source Identification Label Compliance). Pay by e-check or credit card before submitting; a valid email address is required. The certificate is emailed once the application is submitted, the fee is paid and any required inspections are done. Homes heated by electricity with no CO alarm requirement should also email BFCE_CSDCMAC@dca.nj.gov.",
+    "application_url": "https://firesolutions.dca.nj.gov/ultra-fire-home/smoke-application-create/",
+    "department_url": "https://www.nj.gov/dca/dfs/offices/bfce.shtml",
+    "phone": "609-633-6106",
+    "email": "BFCE_CSDCMAC@dca.nj.gov",
+    "contact_name": "Louis Kilmer",
+    "contact_title": "Bureau Chief, Bureau of Fire Code Enforcement (listed as the Fire Official for Pilesgrove Township in the state fire directory)",
+    "evidence": [
+     {
+      "url": "https://nj.gov/dca/dfs/pdf/ANNUAL%20REGISTRY/THIRD%20QUARTER%20LEA%20REGISTRY%202026.pdf",
+      "quote": "S Pilesgrove Township",
+      "doc_date": "2026-07",
+      "via": "pdf",
+      "verified": true
+     },
+     {
+      "url": "https://www.nj.gov/dca/dfs/pdf/fire%20directory_county%20summary/state_towns%207_17_26.pdf",
+      "quote": "PILESGROVE 1709 SC",
+      "doc_date": "2026-07-17 (SC = Smoke Certs)",
+      "via": "pdf",
+      "verified": true
+     },
+     {
+      "url": "https://www.nj.gov/dca/dfs/pdf/fire%20directory_county%20summary/fire_code_enforcement_director.pdf",
+      "quote": "LEAID: 1709-999 Enf Auth. State Fire Official Louis Kilmer Phone (609)633-6132 Addr: PO Box 809 Trenton NJ 08625-0809 ... NJ Division Fire Safety",
+      "doc_date": "2026-05 (survey date 5/18/2026; directory code 1709)",
+      "via": "state_directory",
+      "verified": true
+     },
+     {
+      "url": "https://firesolutions.dca.nj.gov/_odata/firedistricts",
+      "quote": "\"ultra_name\":\"PILESGROVE TWP-001\" ... \"Name\":\"PILESGROVE TWP\" ... \"ultra_firejurisdiction\":{ \"Name\":\"State\",\"Value\":240000000 },\"ultra_smokecertexempt\":null",
+      "doc_date": "2026-09-30 (data feed fetched)",
+      "via": "page",
+      "verified": null
+     },
+     {
+      "url": "https://firesolutions.dca.nj.gov/ultra-fire-home/smoke-application-create/",
+      "quote": "var stateFireDistrictsURL = \"/_odata/firedistricts?$filter=ultra_firejurisdiction/Value eq 240000000 and ultra_smokecertexempt ne true\"; //If State Property = No, display Jurisdiction = State AND smoke cert exempt != true",
+      "doc_date": "2026-09-30 (page script fetched)",
+      "via": "page",
+      "verified": null
+     },
+     {
+      "url": "https://firesolutions.dca.nj.gov/ultra-fire-home/smoke-application-create/",
+      "quote": "Please complete the following information to apply for a Certificate of Smoke Alarm, Carbon Monoxide Alarm, and Secondary Power Source Identification Label Compliance (CSACMASPSIL). You will be required to pay, via e-check or credit card, before you can submit this application. This application requires a valid email address.",
+      "doc_date": "2026-09-30 (page fetched)",
+      "via": "page",
+      "verified": null
+     },
+     {
+      "url": "https://firesolutions.dca.nj.gov/ultra-fire-home/smoke-application-create/",
+      "quote": "The Certificate will be sent automatically to the email address provided once the application has been submitted, the fee has been paid, and any required inspections have been completed.",
+      "doc_date": "2026-09-30 (page fetched)",
+      "via": "page",
+      "verified": null
+     },
+     {
+      "url": "https://www.nj.gov/dca/dfs/offices/bfce.shtml",
+      "quote": "Louis Kilmer, Bureau Chief CPM Address: P.O. Box 809, Trenton, NJ 08625-0809 Phone: (609) 633-6106",
+      "doc_date": "2026-09-30 (page fetched)",
+      "via": "page",
+      "verified": true
+     }
+    ],
+    "confidence": "medium"
+   }
+  ],
+  "notes": "State records say the NJ DCA Division of Fire Safety is Pilesgrove's fire code enforcing agency (LEA registry code S), mark Pilesgrove \"SC\" (the state issues smoke certificates) on the July 17, 2026 state towns list, and name NJ Division Fire Safety for smoke detector compliance in the fire directory (listed there under code 1709). The DCA online smoke application's own fire district feed lists Pilesgrove as State jurisdiction and not smoke-certificate exempt, so Pilesgrove can be selected in the state's online application. However, on February 10, 2026 the Township Committee appointed Leroy Pierce as \"Fire Inspector for CO Requirements\" and on February 24, 2026 approved a \"Certificate of Smoke Alarms and Carbon Monoxide Alarms Checklist\", and the Township's CO application requires a smoke/CO certificate before the CO is issued. A web search summary of Township Code Chapter 64 (ecode360, not opened) described a Township Fire Safety Inspector who performs the smoke alarm, CO alarm and extinguisher certifications for 1-2 family homes. So it is not settled whether the Township inspector or the DCA issues the certificate for a sale; both are listed. The DCA fees are the state's own published online fees. The Township smoke info sheet (undated) names the secondary power source label that replaced the extinguisher in state law (P.L.2025, c.19), but the Township CO checklist still lists a fire extinguisher mounted in the kitchen."
+ },
+ "other_items": [
+  {
+   "label": "Well water test",
+   "detail": "A well certificate / passing water test is needed before the CO is issued.",
+   "source_url": "https://www.pilesgrovenj.org/DocumentCenter/View/321/CO-Sales-Application"
+  },
+  {
+   "label": "Chimney certificate",
+   "detail": "A chimney certificate is needed before the CO is issued.",
+   "source_url": "https://www.pilesgrovenj.org/DocumentCenter/View/321/CO-Sales-Application"
+  },
+  {
+   "label": "Septic",
+   "detail": "The Township does not inspect septic systems as part of the CO; a septic inspection is recommended but not required by the state.",
+   "source_url": "https://www.pilesgrovenj.org/DocumentCenter/View/321/CO-Sales-Application"
+  },
+  {
+   "label": "No open permits",
+   "detail": "The CO checklist checks for work done without permits and open construction permits.",
+   "source_url": "https://www.pilesgrovenj.org/DocumentCenter/View/326/CO-Inspection-Checklist"
+  }
+ ],
+ "open_questions": [
+  "Who issues the smoke/CO certificate for a Pilesgrove sale: the Township Fire Inspector for CO Requirements (appointed Feb 2026) or the NJ DCA (state lists)? If the Township, what is the fee?",
+  "How long is the Pilesgrove sales CO valid? (A search summary of Chapter 64 mentioned 90 days; not confirmed from an official source.)"
+ ],
+ "verification": {
+  "fees": 5,
+  "fee_ok": 2,
+  "fee_bad": 0,
+  "fee_unchecked": 3,
+  "quotes": 18,
+  "q_ok": 14,
+  "q_bad": 0,
+  "q_unchecked": 4
+ }
+}

@@ -1,0 +1,319 @@
+{
+ "municipality_code": "0605",
+ "municipality": "Fairfield Township",
+ "county": "CUMBERLAND",
+ "checked_at": "2026-09-30",
+ "resale_co": {
+  "status": "required",
+  "name": "Certificate of Continued Occupancy (Sales Inspection / Sales Registration)",
+  "issued_by": "Zoning Office / Housing (Code Enforcement / Housing Inspector)",
+  "lead_time": "The fee list warns there is a minimum waiting period to get a C/O on a previously owned home; the length is not stated.",
+  "valid_for": "",
+  "requirements": [
+   "Smoke detectors present and working",
+   "Carbon monoxide detectors present and working",
+   "Fire extinguisher mounted (on the 2023 form)",
+   "Water certification and sewer (septic) certification",
+   "Heating certification",
+   "Windows open, lock and have sound glass; doors in good condition",
+   "Plumbing pipes and fixtures, water pressure, water heater relief valve with floor discharge",
+   "Appliance venting and exhaust fans",
+   "Handrails and a 911 numbering pole",
+   "Emergency exit from a 3rd floor",
+   "Interior surfaces and interior and exterior paint; basement and firewalls; roof and chimney; porches, decks, stairs and railings",
+   "No mice, rats or roaches; clean property with a trash container",
+   "Electric wiring, outlets and GFCI outlets",
+   "Repairs found at inspection must be done within 30 days"
+  ],
+  "fees": [
+   {
+    "label": "Certificate of Continued Occupancy (sales form)",
+    "amount": "$75.00",
+    "quote": "Certificate of Continued Occupancy ( Click for SALES form ) $75.00",
+    "source_url": "http://fairfieldtownshipnj.org/departments/construction/printed-material-fee-list/",
+    "verified": true
+   },
+   {
+    "label": "Transfer of Ownership (listed separately on the same fee list; the page does not explain how it relates to the sales CCO)",
+    "amount": "$75.00",
+    "quote": "Transfer of Ownership $75.00",
+    "source_url": "http://fairfieldtownshipnj.org/departments/construction/printed-material-fee-list/",
+    "verified": true
+   },
+   {
+    "label": "Sales registration fee, includes 1 initial inspection and 1 re-inspection",
+    "amount": "$75",
+    "quote": "Sales registration fee of $75 includes 1 initial inspection and 1 re-inspection.",
+    "source_url": "http://fairfieldtownshipnj.org/wp-content/uploads/2023/06/20230622124137835-2.pdf",
+    "verified": null
+   },
+   {
+    "label": "Additional inspection after a failed re-inspection",
+    "amount": "$75",
+    "quote": "If/When the property fails a re-inspection. A $75 fee must be paid before additional inspections.",
+    "source_url": "http://fairfieldtownshipnj.org/wp-content/uploads/2023/06/20230622124137835-2.pdf",
+    "verified": null
+   }
+  ],
+  "how_to_apply": "Fill out the Fairfield Township Sales Inspection Form (owner, real estate agent, new owner's name, house / apartment / trailer, number of bedrooms) and pay the $75 sales registration fee to the Zoning Office, 70 Fairton Gouldtown Road, Bridgeton (mail: P.O. Box 240, Fairton, NJ 08320). Water and septic certifications are checked. To schedule or for questions call 856-451-9284 (the form says ext. 304, 8:30 AM to 12:30 PM, Monday to Friday).",
+  "application_url": "http://fairfieldtownshipnj.org/wp-content/uploads/2023/06/20230622124137835-2.pdf",
+  "department_url": "http://fairfieldtownshipnj.org/departments/construction/rental-registration/",
+  "phone": "856-451-9284 (ext. 309)",
+  "email": "MarkB@fairfieldtownshipnj.org",
+  "contact_name": "Mark Benjamin",
+  "contact_title": "Code Enforcement / Housing Inspector",
+  "evidence": [
+   {
+    "url": "http://fairfieldtownshipnj.org/departments/construction/printed-material-fee-list/",
+    "quote": "Transfer of Ownership $75.00 Certificate of Occupancy ( Click for RENTAL form ) $75.00 Certificate of Continued Occupancy ( Click for SALES form ) $75.00 Change of Occupancy $75.00",
+    "doc_date": "2026-09-30 (page fetched)",
+    "via": "page",
+    "verified": true
+   },
+   {
+    "url": "http://fairfieldtownshipnj.org/departments/construction/printed-material-fee-list/",
+    "quote": "ATTENTION Please be advised that there is a minimum waiting period to obtain a C/O on a new home or a previously owned home.",
+    "doc_date": "2026-09-30",
+    "via": "page",
+    "verified": true
+   },
+   {
+    "url": "http://fairfieldtownshipnj.org/departments/construction/rental-registration/",
+    "quote": "View Rental Registration Form View Sales Registration Form Please call 856-451-9284 for more information",
+    "doc_date": "2026-09-30",
+    "via": "page",
+    "verified": true
+   },
+   {
+    "url": "http://fairfieldtownshipnj.org/departments/construction/rental-registration/",
+    "quote": "Sellers of all mobile homes within the Township of Fairfield must first obtain a certificate of approval prior to sale from the Township Zoning Office.",
+    "doc_date": "2026-09-30",
+    "via": "page",
+    "verified": true
+   },
+   {
+    "url": "http://fairfieldtownshipnj.org/wp-content/uploads/2023/06/20230622124137835-2.pdf",
+    "quote": "FAIRFIELD TOWNSHIP SALES INSPECTION FORM",
+    "doc_date": "2023-06-22 (scanned form, read visually)",
+    "via": "pdf",
+    "verified": null
+   },
+   {
+    "url": "http://fairfieldtownshipnj.org/wp-content/uploads/2022/11/NewSales23.pdf",
+    "quote": "ANY REPAIRS INDICATED ARE TO BE COMPLETED WITH IN 30 DAYS OF INSPECTION DATE.",
+    "doc_date": "2023-08-28 (form marked REVISED (8/28/2023))",
+    "via": "pdf",
+    "verified": null
+   },
+   {
+    "url": "http://fairfieldtownshipnj.org/wp-content/uploads/2022/11/NewSales23.pdf",
+    "quote": "FOR MORE INFORMATION OR TO SCHEDULE YOUR RE- INSPECTION, CALL OUR OFFICE 8:30AM -12:30PM, MONDAY - FRIDAY (856) 451-9284 EXT. 304",
+    "doc_date": "2023-08-28",
+    "via": "pdf",
+    "verified": null
+   },
+   {
+    "url": "http://fairfieldtownshipnj.org/about-fairfield/township-directory/",
+    "quote": "Code Enforcement / Housing Inspector Mark Benjamin 856-451-9284 (ext. 309) MarkB@fairfieldtownshipnj.org",
+    "doc_date": "2026-09-30",
+    "via": "page",
+    "verified": true
+   },
+   {
+    "url": "http://fairfieldtownshipnj.org/about-fairfield/township-directory/",
+    "quote": "Planning / Zoning Board Secretary & Housing Assistant JoAnn Thompson ... Street 856-451-9284 (ext. 304) JoannT@fairfieldtownshipnj.org",
+    "doc_date": "2026-09-30",
+    "via": "page",
+    "verified": true
+   }
+  ],
+  "confidence": "medium",
+  "notes": "No Township page says in one sentence that every home sale needs a certificate, but the Zoning Office fee list charges $75.00 for a 'Certificate of Continued Occupancy (Click for SALES form)' and $75.00 for 'Transfer of Ownership', warns of a waiting period to get a C/O on a previously owned home, and links a Sales Inspection Form covering houses, apartments and trailers; mobile home sellers must get a certificate of approval before sale. The two sales forms are scans (June 2023, and November 2022 marked revised 8/28/2023) and were read visually. The Zoning Office page names Clarence Dixon as Enforcement Officer (Tuesday to Thursday, 9 AM to 2 PM) while the Township Directory lists Mark Benjamin as Code Enforcement / Housing Inspector; the Directory is used here. Rental units must be registered and inspected every year (revised Ordinance 9-4); that is a rental program. Construction permits are handled by the Upper Deerfield Township Construction Office (856-455-9591). The live site only answers over plain http."
+ },
+ "fire_cert": {
+  "requirements": [
+   "Smoke alarms (UL listed) on every level; battery-only alarms must be the 10-year sealed battery type, and hardwired alarms cannot be replaced with battery alarms",
+   "Basement smoke alarm at the bottom of the stairwell, on the ceiling (not between joists)",
+   "A 10-year sealed smoke alarm in every bedroom",
+   "Smoke alarms and CO alarms must be less than 10 years old and working",
+   "Carbon monoxide alarm in the hallway within 10 feet of all bedrooms",
+   "House numbers at least 4 inches high, contrasting color, permanently fixed and visible from the street",
+   "Homes with solar panels, a backup generator or battery storage need a permanent printed 'Caution: Multiple Sources of Power' label at the main electrical panel and the electric meter",
+   "If there is a fire alarm system, a report from the alarm company is required (per the online application form)"
+  ],
+  "authorities": [
+   {
+    "name": "City of Bridgeton Fire Department, Bureau of Fire Prevention",
+    "type": "municipal_fire_bureau",
+    "area_served": "Entire township (City of Bridgeton Fire Department under a shared service)",
+    "lead_time": "Submit the request 2 to 3 weeks before settlement; the lowest fee applies when the request is received 10 or more business days before settlement.",
+    "fees": [
+     {
+      "label": "Smoke/CO certificate, 1-2 family, request received 10 or more business days before settlement",
+      "amount": "$45.00",
+      "quote": "Requests received 10 business days or more prior to settlement date or change of occupant $45.00",
+      "source_url": "https://static1.squarespace.com/static/51cc4632e4b06e55251db119/t/691f23865714647f5f7c666a/1763648390990/Occupancy+%26+Smoke+Certificates.pdf",
+      "verified": true
+     },
+     {
+      "label": "Smoke/CO certificate, 1-2 family, request received 7 business days before settlement (source wording)",
+      "amount": "$90.00",
+      "quote": "Requests received 7 business days prior to settlement date or change of occupant $90.00",
+      "source_url": "https://static1.squarespace.com/static/51cc4632e4b06e55251db119/t/691f23865714647f5f7c666a/1763648390990/Occupancy+%26+Smoke+Certificates.pdf",
+      "verified": true
+     },
+     {
+      "label": "Smoke/CO certificate, 1-2 family, request received fewer than 4 business days before settlement",
+      "amount": "$161.00",
+      "quote": "Requests received fewer than 4 business days prior to settlement date or change of occupant $161.00",
+      "source_url": "https://static1.squarespace.com/static/51cc4632e4b06e55251db119/t/691f23865714647f5f7c666a/1763648390990/Occupancy+%26+Smoke+Certificates.pdf",
+      "verified": true
+     }
+    ],
+    "how_to_apply": "Fill out the online 'CO and Smoke Certification Application' (Google Form) linked from the Bridgeton Fire Department's Uniform Fire Code page, picking Fairfield Township as the municipality. Payment is due at the time of the inspection by check or money order payable to the City of Bridgeton Fire Department (the form says an online payment link will be on the invoice). Re-inspection for a failed or no-show inspection costs the same as the first inspection. The certificate is emailed to the address given and is valid for 90 days. Questions: firedepartment@cityofbridgeton.com or 856-451-0090 / 856-451-0091.",
+    "application_url": "https://forms.gle/oWLh33S1kuggYuRQ8",
+    "department_url": "http://www.bridgetonfire.com/uniform-fire-code",
+    "phone": "856-451-0091",
+    "email": "justicej@cityofbridgeton.com",
+    "contact_name": "Jack Justice Jr.",
+    "contact_title": "Fire Official and Chief of Department",
+    "evidence": [
+     {
+      "url": "http://www.bridgetonfire.com/uniform-fire-code",
+      "quote": "The City of Bridgeton Fire Department is the local enforcing agency who is responsible for the enforcement of the Uniform Fire Safety Act within the City of Bridgeton, Hopewell Township, Greenwich Township, Stow Creek Township, Shiloh Borough, Fairfield Township, Downe Township, and Alloway Township.",
+      "doc_date": "2026-09-30 (page fetched)",
+      "via": "page",
+      "verified": true
+     },
+     {
+      "url": "https://static1.squarespace.com/static/51cc4632e4b06e55251db119/t/691f23865714647f5f7c666a/1763648390990/Occupancy+%26+Smoke+Certificates.pdf",
+      "quote": "Residential, Resale and New Occupant requirements for one- & two-family dwellings. All requests must be submitted 2-3 weeks before the settlement date via the form on bridgetonfire.com.",
+      "doc_date": "2025-11-20 (PDF created)",
+      "via": "pdf",
+      "verified": true
+     },
+     {
+      "url": "https://static1.squarespace.com/static/51cc4632e4b06e55251db119/t/691f23865714647f5f7c666a/1763648390990/Occupancy+%26+Smoke+Certificates.pdf",
+      "quote": "Payment is due at the time of the inspection via check or money order made payable to The City of Bridgeton Fire Department.",
+      "doc_date": "2025-11-20",
+      "via": "pdf",
+      "verified": true
+     },
+     {
+      "url": "https://static1.squarespace.com/static/51cc4632e4b06e55251db119/t/691f23865714647f5f7c666a/1763648390990/Occupancy+%26+Smoke+Certificates.pdf",
+      "quote": "*Re-inspection for failed or no-show inspections shall be the same fee scheduled as initial inspection. * Certificate is valid for 90 days.",
+      "doc_date": "2025-11-20",
+      "via": "pdf",
+      "verified": true
+     },
+     {
+      "url": "https://docs.google.com/forms/d/e/1FAIpQLSd9PvQCoB-cH5v1UqIaPvFMeDzejV1zzNEnuFMw0yH7LAaFng/viewform",
+      "quote": "What municipality is the property located in? * Choose Alloway Township (Salem County) Bridgeton City Downe Township Fairfield Township Greenwich Township Hopewell Township Shiloh Borough Stow Creek Township",
+      "doc_date": "2026-09-30 (form fetched)",
+      "via": "page",
+      "verified": true
+     },
+     {
+      "url": "https://docs.google.com/forms/d/e/1FAIpQLSd9PvQCoB-cH5v1UqIaPvFMeDzejV1zzNEnuFMw0yH7LAaFng/viewform",
+      "quote": "Application for Certificate of Smoke Detector and Carbon Monoxide Alarm Compliance",
+      "doc_date": "2026-09-30 (form fetched)",
+      "via": "page",
+      "verified": true
+     },
+     {
+      "url": "http://www.bridgetonfire.com/uniform-fire-code",
+      "quote": "Fire Official Chief Jack Justice Jr.",
+      "doc_date": "2026-09-30",
+      "via": "page",
+      "verified": true
+     },
+     {
+      "url": "http://www.bridgetonfire.com/uniform-fire-code",
+      "quote": "if you need to contact them utilize their email or contact the Bureau of Fire Prevention at (856) 451-0091. The office is staffed Monday- Friday from 8:00am to 4:00pm.",
+      "doc_date": "2026-09-30",
+      "via": "page",
+      "verified": true
+     },
+     {
+      "url": "http://www.bridgetonfire.com/uniform-fire-code",
+      "quote": "Please email completed forms to firedepartment@cityofbridgeton.com",
+      "doc_date": "2026-09-30",
+      "via": "page",
+      "verified": true
+     },
+     {
+      "url": "https://www.nj.gov/dca/dfs/pdf/fire%20directory_county%20summary/fire_code_enforcement_director.pdf",
+      "quote": "Email justicej@cityofbridgeton.com",
+      "doc_date": "2026 (directory)",
+      "via": "state_directory",
+      "verified": true
+     },
+     {
+      "url": "http://fairfieldtownshipnj.org/departments/bureau-of-fire-protection/",
+      "quote": "The City of Bridgeton Fire Departments Fire Marshals Office conducts the Smoke/Carbon Monoxide Detector Certification inspections for properties in Fairfield Township. Please go to http://www.bridgetonfire.com/uniform-fire-code to obtain an inspection checklist as well to schedule your inspection by using the forms on the website.",
+      "doc_date": "2026-09-30 (page fetched)",
+      "via": "page",
+      "verified": true
+     },
+     {
+      "url": "http://fairfieldtownshipnj.org/departments/bureau-of-fire-protection/",
+      "quote": "Fire Official Chief Jack Justice Jr 856-451-0091",
+      "doc_date": "2026-09-30",
+      "via": "page",
+      "verified": true
+     },
+     {
+      "url": "https://nj.gov/dca/dfs/pdf/ANNUAL%20REGISTRY/THIRD%20QUARTER%20LEA%20REGISTRY%202026.pdf",
+      "quote": "F Fairfield Township",
+      "doc_date": "2026-07 (registry as of June 30, 2026)",
+      "via": "pdf",
+      "verified": true
+     },
+     {
+      "url": "https://nj.gov/dca/dfs/pdf/ANNUAL%20REGISTRY/THIRD%20QUARTER%20LEA%20REGISTRY%202026.pdf",
+      "quote": "Bridgeton City is the LEA for Downe, Fairfield, Greenwich, Hopewell Twp, Stowe Creek Township and Shiloh Borough.",
+      "doc_date": "2026-07",
+      "via": "pdf",
+      "verified": true
+     },
+     {
+      "url": "https://www.nj.gov/dca/dfs/pdf/fire%20directory_county%20summary/fire_code_enforcement_director.pdf",
+      "quote": "LEAID: 0605-001 Enf Auth. Fire Dept Fire Official Jack Justice, Jr. Phone (856) 451-0091 Addr: 181 E Commerce St Bridgeton NJ 08302 ... Email firedepartment@cityofbridgeton.com ... SSA with Bridgeton City",
+      "doc_date": "2025-07 (survey date 7/31/2025)",
+      "via": "state_directory",
+      "verified": true
+     }
+    ],
+    "confidence": "high"
+   }
+  ],
+  "notes": "The Township's Bureau of Fire Protection page says the City of Bridgeton Fire Department's Fire Marshal's Office does the smoke/CO certification inspections for Fairfield Township, and the Bridgeton online application lists Fairfield Township. Fees, lead time and 90-day validity come from the Bridgeton Bureau's guideline sheet (created November 20, 2025). The Township's own sales inspection also checks smoke and CO detectors and (on the 2023 form) a mounted fire extinguisher, although state law dropped the extinguisher from the fire certificate on February 3, 2025 (P.L.2025, c.19)."
+ },
+ "other_items": [
+  {
+   "label": "Water and septic certifications",
+   "detail": "The sales inspection form checks water certification and sewer certification; the form's back page records water and septic certifications received.",
+   "source_url": "http://fairfieldtownshipnj.org/wp-content/uploads/2022/11/NewSales23.pdf"
+  },
+  {
+   "label": "Heating certification",
+   "detail": "Listed as item 21 on the sales inspection form.",
+   "source_url": "http://fairfieldtownshipnj.org/wp-content/uploads/2023/06/20230622124137835-2.pdf"
+  }
+ ],
+ "open_questions": [
+  "How long is the minimum waiting period for a C/O on a previously owned home, and how long is it valid?",
+  "Is the $75 'Transfer of Ownership' fee charged in addition to the $75 sales Certificate of Continued Occupancy, or is it the same fee?",
+  "Does the Township still check for a fire extinguisher at the sales inspection after P.L.2025, c.19?"
+ ],
+ "verification": {
+  "fees": 7,
+  "fee_ok": 5,
+  "fee_bad": 0,
+  "fee_unchecked": 2,
+  "quotes": 24,
+  "q_ok": 21,
+  "q_bad": 0,
+  "q_unchecked": 3
+ }
+}

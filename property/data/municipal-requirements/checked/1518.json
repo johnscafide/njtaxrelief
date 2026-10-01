@@ -1,0 +1,244 @@
+{
+ "municipality_code": "1518",
+ "municipality": "Long Beach Township",
+ "county": "OCEAN",
+ "checked_at": "2026-09-30",
+ "resale_co": {
+  "status": "required",
+  "name": "Resale Certificate of Occupancy (RCO)",
+  "issued_by": "Long Beach Township Construction Office",
+  "lead_time": "",
+  "valid_for": "",
+  "requirements": [
+   "Fire extinguisher: at least 2A:10BC, within 10 feet of the kitchen, no more than 5 feet off the floor, visible and mounted",
+   "CO alarm within 10 feet of all sleeping areas if there is a fuel-fired appliance or attached garage",
+   "Smoke alarm in each living space; battery units must be 10-year sealed; hard-wired or interconnected alarms in homes built after January 1977 must be kept working",
+   "House number visible on the house (a mailbox does not count)",
+   "Handrails on all stairs with 4 or more risers",
+   "Flood vents free of obstructions",
+   "Concrete sidewalks and curbs where applicable (Boulevard)",
+   "Buffer on windows at stairs or landings where applicable",
+   "Water meter installed and activated",
+   "No open permits: all permits paid, inspected and closed out",
+   "All structures in the right-of-way removed before the certificate is issued",
+   "Property visually inspected for compliance with general Township ordinances"
+  ],
+  "fees": [
+   {
+    "label": "Single family",
+    "amount": "$75.00",
+    "quote": "Single Family: $75.00",
+    "source_url": "https://www.longbeachtownship.com/wp-content/uploads/2025/06/RESALE-CO-APP.pdf",
+    "verified": true
+   },
+   {
+    "label": "Duplex",
+    "amount": "$150.00",
+    "quote": "Duplex:  $150.00",
+    "source_url": "https://www.longbeachtownship.com/wp-content/uploads/2025/06/RESALE-CO-APP.pdf",
+    "verified": true
+   },
+   {
+    "label": "Reinspection",
+    "amount": "$25.00",
+    "quote": "Re-inspection: $25.00",
+    "source_url": "https://www.longbeachtownship.com/wp-content/uploads/2025/06/RESALE-CO-APP.pdf",
+    "verified": true
+   }
+  ],
+  "how_to_apply": "Fill out the top of the Resale Certificate of Occupancy application and bring or send it with a check payable to Long Beach Township ($75 single family, $150 duplex), lock box or access code, a current survey (to scale, within 1 year), a flood elevation certificate if built after 1984, condo certification if applicable, and the recorded Deed Restriction. At minimum an application, check, survey and entry information are needed to schedule. Call to schedule the inspection: Wednesdays for the South End, Thursdays for the North End, weather permitting, with a daily limit. Construction Office, 6805 Long Beach Blvd, Brant Beach, NJ 08008; 609-361-6679; Monday to Friday 8:30 am to 3 pm.",
+  "application_url": "https://www.longbeachtownship.com/wp-content/uploads/2025/06/RESALE-CO-APP.pdf",
+  "department_url": "https://www.longbeachtownship.com/construction-zoning/",
+  "phone": "(609) 361-1000 ext 6655",
+  "email": "",
+  "contact_name": "Kelly Phillips",
+  "contact_title": "Resale CO contact, Construction Office",
+  "evidence": [
+   {
+    "url": "https://www.longbeachtownship.com/construction-zoning/",
+    "quote": "Resale CO’s: questions please contact: Kelly Phillips (609) 361-1000 ext 6655",
+    "doc_date": "2026-09 (page as fetched)",
+    "via": "page",
+    "verified": true
+   },
+   {
+    "url": "https://www.longbeachtownship.com/construction-zoning/",
+    "quote": "Please refer to the Resale CO Checklist if you have any questions on what will be inspected and any required paperwork needed to obtain your certificate of occupancy.",
+    "doc_date": "2026-09",
+    "via": "page",
+    "verified": true
+   },
+   {
+    "url": "https://www.longbeachtownship.com/construction-zoning/",
+    "quote": "You will need to call and schedule your inspections for either a Wednesday (South End) or Thursday (North End); weather permitting.",
+    "doc_date": "2026-09",
+    "via": "page",
+    "verified": true
+   },
+   {
+    "url": "https://www.longbeachtownship.com/construction-zoning/",
+    "quote": "We have a limit on the number of inspections done on those days- an application, check, survey, and entry information at minimum are needed to schedule.",
+    "doc_date": "2026-09",
+    "via": "page",
+    "verified": true
+   },
+   {
+    "url": "https://www.longbeachtownship.com/wp-content/uploads/2025/06/RESALE-CO-APP.pdf",
+    "quote": "Resale Certificate of Occupancy",
+    "doc_date": "2023-12 (form code 12-23; posted 2025-06)",
+    "via": "pdf",
+    "verified": true
+   },
+   {
+    "url": "https://www.longbeachtownship.com/wp-content/uploads/2025/06/Resale-CO-Checklist.pdf",
+    "quote": "Deed Restriction (required on all homes. Must be recorded prior to release of RCO. This is done through the Ocean County Clerk’s office)",
+    "doc_date": "2025-01-03 (Updated as of 1/3/2025)",
+    "via": "pdf",
+    "verified": true
+   },
+   {
+    "url": "https://www.longbeachtownship.com/wp-content/uploads/2025/06/Resale-CO-Checklist.pdf",
+    "quote": "Check made out to Long Beach Township ($75 single family, $150 Duplex)",
+    "doc_date": "2025-01-03",
+    "via": "pdf",
+    "verified": true
+   },
+   {
+    "url": "https://www.longbeachtownship.com/construction-zoning/",
+    "quote": "Construction Office: 609-361-6679",
+    "doc_date": "2026-09",
+    "via": "page",
+    "verified": true
+   },
+   {
+    "url": "https://www.longbeachtownship.com/construction-zoning/",
+    "quote": "Construction Official: Anthony Pesic - 609-361-6680",
+    "doc_date": "2026-09",
+    "via": "page",
+    "verified": true
+   }
+  ],
+  "confidence": "high",
+  "notes": "The Resale CO also serves as the smoke, CO and extinguisher check for sales (see fire_cert). No construction office email is published; the Township general address is concierge@longbeachtownship.com. A second copy of the application (RESALE-CO-APP-1.pdf) is on the Online Forms page. Lead time and validity are not stated. Rentals: the Township has a Business-Rental application, and rental smoke/CO certificates in Long Beach Township are issued by the Ocean County Fire Marshal (see fire_cert notes); those are rental rules, not sale rules."
+ },
+ "fire_cert": {
+  "requirements": [
+   "Smoke alarm in each living space; battery units must be 10-year sealed; hard-wired or interconnected alarms in homes built after January 1977 must be kept working",
+   "CO alarm within 10 feet of all sleeping areas if there is a fuel-fired appliance or attached garage",
+   "Fire extinguisher at least 2A:10BC, within 10 feet of the kitchen, top no more than 5 feet off the floor, visible and mounted (Township checklist updated 1/3/2025, before P.L.2025, c.19 removed the extinguisher from the state rule)"
+  ],
+  "authorities": [
+   {
+    "name": "Long Beach Township Construction Office (smoke, CO and extinguisher checked in the Resale Certificate of Occupancy)",
+    "type": "municipal_fire_bureau",
+    "area_served": "Entire township, for sales",
+    "lead_time": "",
+    "fees": [
+     {
+      "label": "Resale CO inspection, single family (same single inspection as the town certificate; not charged twice)",
+      "amount": "$75.00",
+      "quote": "Single Family: $75.00",
+      "source_url": "https://www.longbeachtownship.com/wp-content/uploads/2025/06/RESALE-CO-APP.pdf",
+      "verified": true
+     },
+     {
+      "label": "Resale CO inspection, duplex (same single inspection as the town certificate)",
+      "amount": "$150.00",
+      "quote": "Duplex:  $150.00",
+      "source_url": "https://www.longbeachtownship.com/wp-content/uploads/2025/06/RESALE-CO-APP.pdf",
+      "verified": true
+     }
+    ],
+    "how_to_apply": "Apply for the Resale Certificate of Occupancy with the Construction Office (see the town certificate); the application has lines for smoke detectors, hard-wired alarms, CO detectors and the fire extinguisher.",
+    "application_url": "https://www.longbeachtownship.com/wp-content/uploads/2025/06/RESALE-CO-APP.pdf",
+    "department_url": "https://www.longbeachtownship.com/construction-zoning/",
+    "phone": "609-361-6680",
+    "email": "",
+    "contact_name": "Anthony Pesic",
+    "contact_title": "Construction Official",
+    "evidence": [
+     {
+      "url": "https://www.longbeachtownship.com/wp-content/uploads/2025/06/RESALE-CO-APP.pdf",
+      "quote": "Smoke Detectors: __________   Hard Wired: __________   CO Detectors: __________   Fire Extinguisher: __________",
+      "doc_date": "2023-12 (form code 12-23)",
+      "via": "pdf",
+      "verified": true
+     },
+     {
+      "url": "https://www.longbeachtownship.com/wp-content/uploads/2025/06/Resale-CO-Checklist.pdf",
+      "quote": "Smoke Detector- 1 on each living space, if battery operated, units need to be 10-year battery sealed.",
+      "doc_date": "2025-01-03",
+      "via": "pdf",
+      "verified": true
+     },
+     {
+      "url": "https://co.ocean.nj.us/OC/FireMarshal/frmSmokeDetector.aspx",
+      "quote": "Long Beach Twp. Rentals for 1-2 family buildings",
+      "doc_date": "2026-09 (page as fetched)",
+      "via": "page",
+      "verified": true
+     },
+     {
+      "url": "https://nj.gov/dca/dfs/pdf/ANNUAL%20REGISTRY/THIRD%20QUARTER%20LEA%20REGISTRY%202026.pdf",
+      "quote": "C Long Beach Township",
+      "doc_date": "2026-07 (as of June 30, 2026)",
+      "via": "pdf",
+      "verified": true
+     },
+     {
+      "url": "https://www.nj.gov/dca/dfs/pdf/fire%20directory_county%20summary/fire_code_enforcement_director.pdf",
+      "quote": "Addr: 6805 Long Beach Blvd Brant Beach NJ 08008 Phone (732) 361-1000",
+      "doc_date": "2026-08-17 (latest survey date; Smoke Detector Compliance block, 'Long Beach Twp Constr Office'; directory code 1517 = Long Beach Township)",
+      "via": "state_directory",
+      "verified": true
+     },
+     {
+      "url": "https://www.longbeachtownship.com/construction-zoning/",
+      "quote": "Construction Official: Anthony Pesic - 609-361-6680",
+      "doc_date": "2026-09",
+      "via": "page",
+      "verified": true
+     }
+    ],
+    "confidence": "high"
+   }
+  ],
+  "notes": "The Ocean County Fire Marshal is Long Beach Township's fire code enforcing agency (LEA registry code C; directory Fire Official Dennis Allen, (732) 370-7360, dallen@co.ocean.nj.us). The County Fire Marshal's resale and rental page says it inspects Long Beach Township for rentals only, and the state directory names 'Long Beach Twp Constr Office' at 6805 Long Beach Blvd for smoke detector compliance, so for a sale the Township Resale CO inspection covers the smoke, CO and extinguisher check. The directory prints that office's phone as (732) 361-1000; the Township's own number is 609-361-1000, so the 732 area code looks like a directory error. For rentals the County Fire Marshal charges $45 / $90 / $161 by lead time and its certificate is valid 12 months (not a sale requirement). Five volunteer fire companies serve the township; they do not issue certificates."
+ },
+ "other_items": [
+  {
+   "label": "Deed restriction",
+   "detail": "Required on all homes; must be recorded with the Ocean County Clerk before the Resale CO is released (2026 form on the Construction & Zoning page, notarized).",
+   "source_url": "https://www.longbeachtownship.com/wp-content/uploads/2025/06/Resale-CO-Checklist.pdf"
+  },
+  {
+   "label": "Survey and flood elevation certificate",
+   "detail": "Current survey to scale within 1 year; flood elevation certificate if built after 1984.",
+   "source_url": "https://www.longbeachtownship.com/wp-content/uploads/2025/06/Resale-CO-Checklist.pdf"
+  },
+  {
+   "label": "Water meter",
+   "detail": "Must be installed and activated.",
+   "source_url": "https://www.longbeachtownship.com/wp-content/uploads/2025/06/Resale-CO-Checklist.pdf"
+  },
+  {
+   "label": "Open permits",
+   "detail": "All permits must be paid for, inspected and closed out.",
+   "source_url": "https://www.longbeachtownship.com/wp-content/uploads/2025/06/Resale-CO-Checklist.pdf"
+  }
+ ],
+ "open_questions": [
+  "Lead time before closing and how long the Resale CO is valid.",
+  "Whether the Township still checks the fire extinguisher on sales after P.L.2025, c.19 (checklist dated 1/3/2025)."
+ ],
+ "verification": {
+  "fees": 5,
+  "fee_ok": 5,
+  "fee_bad": 0,
+  "fee_unchecked": 0,
+  "quotes": 15,
+  "q_ok": 15,
+  "q_bad": 0,
+  "q_unchecked": 0
+ }
+}

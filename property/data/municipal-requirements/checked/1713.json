@@ -1,0 +1,212 @@
+{
+ "municipality_code": "1713",
+ "municipality": "Salem",
+ "county": "SALEM",
+ "checked_at": "2026-09-30",
+ "resale_co": {
+  "status": "required",
+  "name": "Certificate of Occupancy (CO) for home sales",
+  "issued_by": "City of Salem Department of Inspections & Permits",
+  "lead_time": "",
+  "valid_for": "",
+  "requirements": [],
+  "fees": [
+   {
+    "label": "Certificate of Occupancy, initial inspection",
+    "amount": "$50.00",
+    "quote": "Initial Inspection Fee: $50.00",
+    "source_url": "https://cityofsalemnj.gov/wp-content/uploads/2026/04/certificate-of-occupancy-application-1.pdf",
+    "verified": true
+   },
+   {
+    "label": "Reinspection",
+    "amount": "$50.00",
+    "quote": "Reinspection Fee: $50.00",
+    "source_url": "https://cityofsalemnj.gov/wp-content/uploads/2026/04/certificate-of-occupancy-application-1.pdf",
+    "verified": true
+   },
+   {
+    "label": "Certificate of Occupancy (2026 packet; one free with a paid rental registration each year)",
+    "amount": "$50",
+    "quote": "Certificate of Occupancy $50 (one free CCO with paid Rental Reg. per year)",
+    "source_url": "https://cityofsalemnj.gov/wp-content/uploads/2026/07/COO_RENTAL-REG-APPLICATION_2026_Optimized.pdf",
+    "verified": true
+   }
+  ],
+  "how_to_apply": "Fill in the City of Salem Certificate of Occupancy & Landlord Rental Registration Application, mark \"Sell property\" as the purpose, and submit it with payment to the City of Salem Department of Inspections & Permits, 125 West Broadway, Salem. The Tax Collector signs off that taxes are paid, and the owner certifies there are no outstanding municipal charges. Applications are not processed without payment and complete documents.",
+  "application_url": "https://cityofsalemnj.gov/wp-content/uploads/2026/04/certificate-of-occupancy-application-1.pdf",
+  "department_url": "https://cityofsalemnj.gov/construction-office/",
+  "phone": "856-935-0372",
+  "email": "sbrown@cityofsalemnj.gov",
+  "contact_name": "Sean M. Brown, MPA",
+  "contact_title": "Director of Housing and Economic Development (Housing Office); the CO form names only the Department of Inspections & Permits",
+  "evidence": [
+   {
+    "url": "https://cityofsalemnj.gov/construction-office/",
+    "quote": "CO inspections for existing structures including rental unit occupancy change and home sales; existing housing code violations; tall grass and zoning issues are handled by the City's Department of Inspections & Permits, not the Construction Office",
+    "doc_date": "2026-09-30 (page fetched)",
+    "via": "page",
+    "verified": true
+   },
+   {
+    "url": "https://cityofsalemnj.gov/wp-content/uploads/2026/04/certificate-of-occupancy-application-1.pdf",
+    "quote": "Purpose of CO: ___ Sell property ___ Rent property to tenant ___ Get Certificate of Occupancy",
+    "doc_date": "2026-04 (upload folder)",
+    "via": "pdf",
+    "verified": true
+   },
+   {
+    "url": "https://cityofsalemnj.gov/wp-content/uploads/2026/04/certificate-of-occupancy-application-1.pdf",
+    "quote": "(Payable to the City of Salem - Department of Inspections & Permits)",
+    "doc_date": "2026-04",
+    "via": "pdf",
+    "verified": true
+   },
+   {
+    "url": "https://cityofsalemnj.gov/wp-content/uploads/2026/07/COO_RENTAL-REG-APPLICATION_2026_Optimized.pdf",
+    "quote": "City of Salem Department of Inspections and Permits 125 West Broadway Salem, New Jersey 08079 856-935-0372",
+    "doc_date": "2026-07 (upload folder)",
+    "via": "pdf",
+    "verified": true
+   },
+   {
+    "url": "https://cityofsalemnj.gov/housing-office/",
+    "quote": "Sean M. Brown, MPA Director of Housing and Economic Development 856-935-0372 ext 204",
+    "doc_date": "2026-09-30 (page fetched; email decoded from the page's email protection script)",
+    "via": "page",
+    "verified": true
+   },
+   {
+    "url": "https://cityofsalemnj.gov/code-enforcement/",
+    "quote": "Building Inspector 856-935-5510 Housing Department 856-935-0372 x 204",
+    "doc_date": "2026-09-30 (site footer)",
+    "via": "page",
+    "verified": true
+   }
+  ],
+  "confidence": "high",
+  "notes": "The City's Construction Office page says CO inspections for existing structures, including home sales, are handled by the City's Department of Inspections & Permits (the State DCA runs the construction office itself). The City's CO application (April 2026) has a \"Sell property\" purpose box and lists a $50.00 initial inspection and $50.00 reinspection fee; the July 2026 version of the combined CO and rental registration packet also shows \"Certificate of Occupancy $50\". No inspection checklist, lead time or validity period is published; the form has an expiration date field for office use. No named inspector is published for the Department of Inspections & Permits (its Code Enforcement page says \"Page under construction\"), so the Housing Office director is given as the named contact; the site footer lists a Building Inspector line, 856-935-5510, and a Housing Department line, 856-935-0372 x 204. The email sbrown@cityofsalemnj.gov was decoded from the Housing Office page's email protection script. Rentals also need an annual Landlord Rental Registration ($100 per unit) and a lead-safe certificate."
+ },
+ "fire_cert": {
+  "requirements": [],
+  "authorities": [
+   {
+    "name": "NJ DCA Division of Fire Safety, Bureau of Fire Code Enforcement",
+    "type": "state_dca",
+    "area_served": "Entire city",
+    "lead_time": "Fee depends on how many business days before closing you apply (more than 10, 4 to 10, under 4).",
+    "fees": [
+     {
+      "label": "State smoke/CO certificate, applied more than 10 business days before closing",
+      "amount": "$45",
+      "quote": "If you are applying for a certificate more than ten business days from the closing date the fee is $45 dollars",
+      "source_url": "https://firesolutions.dca.nj.gov/ultra-fire-home/smoke-application-create/",
+      "verified": null
+     },
+     {
+      "label": "State smoke/CO certificate, applied 4 to 10 business days before closing",
+      "amount": "$90",
+      "quote": "if applying 4 to 10 business days from the closing date the fee is $90",
+      "source_url": "https://firesolutions.dca.nj.gov/ultra-fire-home/smoke-application-create/",
+      "verified": null
+     },
+     {
+      "label": "State smoke/CO certificate, closing less than 4 business days away",
+      "amount": "$161",
+      "quote": "if the closing date is less than four business days the fee is $161.",
+      "source_url": "https://firesolutions.dca.nj.gov/ultra-fire-home/smoke-application-create/",
+      "verified": null
+     }
+    ],
+    "how_to_apply": "Apply online through the NJ DCA Fire Safety portal (Certificate of Smoke Alarm, Carbon Monoxide Alarm, and Secondary Power Source Identification Label Compliance). Pay by e-check or credit card before submitting; a valid email address is required. The certificate is emailed once the application is submitted, the fee is paid and any required inspections are done. Homes heated by electricity with no CO alarm requirement should also email BFCE_CSDCMAC@dca.nj.gov.",
+    "application_url": "https://firesolutions.dca.nj.gov/ultra-fire-home/smoke-application-create/",
+    "department_url": "https://www.nj.gov/dca/dfs/offices/bfce.shtml",
+    "phone": "609-633-6106",
+    "email": "BFCE_CSDCMAC@dca.nj.gov",
+    "contact_name": "Louis Kilmer",
+    "contact_title": "Bureau Chief, Bureau of Fire Code Enforcement (listed as the Fire Official for Salem City in the state fire directory)",
+    "evidence": [
+     {
+      "url": "https://nj.gov/dca/dfs/pdf/ANNUAL%20REGISTRY/THIRD%20QUARTER%20LEA%20REGISTRY%202026.pdf",
+      "quote": "S Salem City",
+      "doc_date": "2026-07",
+      "via": "pdf",
+      "verified": true
+     },
+     {
+      "url": "https://www.nj.gov/dca/dfs/pdf/fire%20directory_county%20summary/state_towns%207_17_26.pdf",
+      "quote": "SALEM CITY 1712 SC",
+      "doc_date": "2026-07-17 (SC = Smoke Certs)",
+      "via": "pdf",
+      "verified": true
+     },
+     {
+      "url": "https://www.nj.gov/dca/dfs/pdf/fire%20directory_county%20summary/fire_code_enforcement_director.pdf",
+      "quote": "LEAID: 1712-999 Enf Auth. State Fire Official Louis Kilmer Phone (609)633-6132 Addr: PO Box 809 Trenton NJ 08625-0809 ... NJ Division Fire Safety",
+      "doc_date": "2026-06 (survey date 6/25/2026; directory code 1712)",
+      "via": "state_directory",
+      "verified": true
+     },
+     {
+      "url": "https://firesolutions.dca.nj.gov/_odata/firedistricts",
+      "quote": "\"ultra_name\":\"SALEM CITY-001\" ... \"Name\":\"SALEM CITY\" ... \"ultra_firejurisdiction\":{ \"Name\":\"State\",\"Value\":240000000 },\"ultra_smokecertexempt\":null",
+      "doc_date": "2026-09-30 (data feed fetched)",
+      "via": "page",
+      "verified": null
+     },
+     {
+      "url": "https://firesolutions.dca.nj.gov/ultra-fire-home/smoke-application-create/",
+      "quote": "var stateFireDistrictsURL = \"/_odata/firedistricts?$filter=ultra_firejurisdiction/Value eq 240000000 and ultra_smokecertexempt ne true\"; //If State Property = No, display Jurisdiction = State AND smoke cert exempt != true",
+      "doc_date": "2026-09-30 (page script fetched)",
+      "via": "page",
+      "verified": null
+     },
+     {
+      "url": "https://firesolutions.dca.nj.gov/ultra-fire-home/smoke-application-create/",
+      "quote": "Please complete the following information to apply for a Certificate of Smoke Alarm, Carbon Monoxide Alarm, and Secondary Power Source Identification Label Compliance (CSACMASPSIL). You will be required to pay, via e-check or credit card, before you can submit this application. This application requires a valid email address.",
+      "doc_date": "2026-09-30 (page fetched)",
+      "via": "page",
+      "verified": null
+     },
+     {
+      "url": "https://firesolutions.dca.nj.gov/ultra-fire-home/smoke-application-create/",
+      "quote": "The Certificate will be sent automatically to the email address provided once the application has been submitted, the fee has been paid, and any required inspections have been completed.",
+      "doc_date": "2026-09-30 (page fetched)",
+      "via": "page",
+      "verified": null
+     },
+     {
+      "url": "https://www.nj.gov/dca/dfs/offices/bfce.shtml",
+      "quote": "Louis Kilmer, Bureau Chief CPM Address: P.O. Box 809, Trenton, NJ 08625-0809 Phone: (609) 633-6106",
+      "doc_date": "2026-09-30 (page fetched)",
+      "via": "page",
+      "verified": true
+     }
+    ],
+    "confidence": "high"
+   }
+  ],
+  "notes": "The NJ DCA Division of Fire Safety is Salem City's fire code enforcing agency (LEA registry code S), is marked \"SC\" (the state issues smoke certificates) for Salem City on the DCA's July 17, 2026 state towns list, and is named for smoke detector compliance in the state fire directory (listed there as Salem City 1712). The DCA online smoke application's fire district feed lists Salem City as State jurisdiction and not smoke-certificate exempt, so it can be selected in the state's online application. The city has its own fire department (Salem City Fire Dept), but it is not the fire code enforcing agency. Apply to the DCA online; the DCA fees are the state's own published online fees."
+ },
+ "other_items": [
+  {
+   "label": "Taxes and municipal charges paid",
+   "detail": "The Tax Collector signs off on the CO application, and the owner certifies there are no outstanding municipal charges, including real estate taxes, water/sewer, court fees or other assessments.",
+   "source_url": "https://cityofsalemnj.gov/wp-content/uploads/2026/04/certificate-of-occupancy-application-1.pdf"
+  }
+ ],
+ "open_questions": [
+  "What does the Salem City CO inspection check (no checklist published), how far ahead should sellers apply, and how long is the CO valid?",
+  "Who is the inspector in the Department of Inspections & Permits?"
+ ],
+ "verification": {
+  "fees": 6,
+  "fee_ok": 3,
+  "fee_bad": 0,
+  "fee_unchecked": 3,
+  "quotes": 14,
+  "q_ok": 10,
+  "q_bad": 0,
+  "q_unchecked": 4
+ }
+}

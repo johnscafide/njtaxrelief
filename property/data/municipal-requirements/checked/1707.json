@@ -1,0 +1,206 @@
+{
+ "municipality_code": "1707",
+ "municipality": "Oldmans Township",
+ "county": "SALEM",
+ "checked_at": "2026-09-30",
+ "resale_co": {
+  "status": "required",
+  "name": "Residential Certificate of Occupancy (Occupancy Certificate)",
+  "issued_by": "Oldmans Township Housing Office (Housing Officer)",
+  "lead_time": "",
+  "valid_for": "",
+  "requirements": [
+   "Needed whenever there is a change of ownership or residents; home must meet Township ordinances and the 2015 International Property Maintenance Code",
+   "All utilities on for the inspection; no open permits",
+   "Septic certification from the Salem County Department of Health for a transfer of ownership",
+   "Well water potable certification (not needed on public water)",
+   "Recent chimney certification if there is a fireplace",
+   "Address numbers at least 3 inches, contrasting, visible from the road (post at the driveway if the house is more than 100 feet from the street)",
+   "Roof, gutters, soffit, fascia, sidewalks and paint in good repair; no abandoned vehicles or standing water; pools fenced 4 feet with a self-closing, self-locking gate",
+   "Windows open, lock and have untorn screens; no broken glass; no double cylinder deadbolts or removable interior keys on exit doors",
+   "Handrails on stairs with more than 4 risers; guards on walking surfaces more than 30 inches above grade",
+   "Hot and cold water at all fixtures, no leaks, bathroom exhaust fan if no window; no gas water heater in a bedroom or bathroom; water heater relief down pipe",
+   "Working stove with exhaust hood and anti-tilt device; dryer vented outside; heating emergency shut-off switch",
+   "GFCI outlets in the garage, within 6 feet of sinks, in an unfinished basement (including sump pump) and outside; labeled electrical panel, 100 amps or more",
+   "10-year battery smoke alarms in each bedroom, outside each sleeping area within 10 feet of bedroom doors, and on each story including the basement",
+   "Carbon monoxide detector within 10 feet of bedrooms and one on each floor, including the basement",
+   "Fire extinguisher (at least 2A:10B:C, no more than 10 lbs) mounted in plain sight within 10 feet of the kitchen, top no higher than 5 feet"
+  ],
+  "fees": [
+   {
+    "label": "Occupancy certificate, first inspection (second inspection at no extra cost)",
+    "amount": "$50.00",
+    "quote": "The cost for the first inspection is $50.00. If a second inspection is required, there is no additional cost.",
+    "source_url": "https://oldmanstownship.com/housing-office/",
+    "verified": true
+   },
+   {
+    "label": "Third inspection",
+    "amount": "$50.00",
+    "quote": "For a third inspection, there is an additional $50.00 inspection fee.",
+    "source_url": "https://oldmanstownship.com/housing-office/",
+    "verified": true
+   }
+  ],
+  "how_to_apply": "Fill out the Township's Occupancy Application (Word form: address, block and lot, owner or seller, all buyers or tenants, realtor, flood hazard notice) and pay the $50.00 fee with the application before the inspection. Call the Housing Office at 856-299-0780 to make an appointment; CO inspections are Tuesday and Thursday 11:00 am to 2:00 pm. Office: Oldmans Township Municipal Complex, 40 Freed Road, PO Box 416, Pedricktown, NJ 08067.",
+  "application_url": "https://oldmanstownship.com/wp-content/uploads/2024/05/Housing-Occupancy-Certificate.docx",
+  "department_url": "https://oldmanstownship.com/housing-office/",
+  "phone": "856-299-0780",
+  "email": "clerk@oldmanstownship.com",
+  "contact_name": "Peter Voros",
+  "contact_title": "Housing Officer",
+  "evidence": [
+   {
+    "url": "https://oldmanstownship.com/housing-office/",
+    "quote": "An Occupancy Certificate is required whenever a change of ownership or residents takes place. In order to be eligible for an Occupancy Certificate, a dwelling unit must comply with all Township Ordinances, as well as the 2015 International Property Maintenance Code.",
+    "doc_date": "2026-09-30 (page fetched)",
+    "via": "page",
+    "verified": true
+   },
+   {
+    "url": "https://oldmanstownship.com/housing-office/",
+    "quote": "The building must be inspected by the Housing Officer prior to issuing an Occupancy Certificate. Call 856-299-0780 to make an appointment for an inspection.",
+    "doc_date": "2026-09-30 (page fetched)",
+    "via": "page",
+    "verified": true
+   },
+   {
+    "url": "https://oldmanstownship.com/housing-office/",
+    "quote": "Housing Officer - Peter Voros Deputy Housing Officer - Christine Pippet ... CO Inspections Tuesday and Thursday 11:00 am - 2:00 pm",
+    "doc_date": "2026-09-30 (page fetched)",
+    "via": "page",
+    "verified": true
+   },
+   {
+    "url": "https://oldmanstownship.com/wp-content/uploads/2024/05/Housing-Application-Checklist.pdf",
+    "quote": "$50.00 Fee due with Certificate of Occupancy Application prior to inspection",
+    "doc_date": "2024-05 (upload folder)",
+    "via": "pdf",
+    "verified": true
+   },
+   {
+    "url": "https://oldmanstownship.com/wp-content/uploads/2024/05/Housing-Application-Checklist.pdf",
+    "quote": "Septic certification from the Salem County Dept. of Health for real property transfer of ownership",
+    "doc_date": "2024-05 (upload folder)",
+    "via": "pdf",
+    "verified": true
+   }
+  ],
+  "confidence": "high",
+  "notes": "The Housing Officer's own email is not listed. The Deputy Housing Officer (Christine Pippet, also Township Clerk) has an email that the Township page hides with an email-protection script; it decodes to clerk@oldmanstownship.com, which is recorded here. The Township lists Peter Voros as Housing Officer and also as Construction Official and Plumbing Official. The checklist (uploaded May 2024) still requires a mounted kitchen fire extinguisher; P.L.2025, c.19 (February 3, 2025) removed the extinguisher from the state smoke certificate rule, but it remains on this Township housing list. A separate $75.00 total applies only to rentals built before 1979. The checklist also notes the state flood disclosure for sales. No lead time or validity period is stated. The Township code is on ecode360 (OL1609) and was not opened."
+ },
+ "fire_cert": {
+  "requirements": [
+   "Township occupancy checklist (Fire Safety section): 10-year battery smoke alarms in each bedroom, outside each sleeping area and on each story; carbon monoxide detector within 10 feet of bedrooms and on each floor; mounted kitchen fire extinguisher"
+  ],
+  "authorities": [
+   {
+    "name": "Oldmans Township Housing Office (smoke and carbon monoxide alarms checked in the Township occupancy inspection; not confirmed as the smoke certificate issuer)",
+    "type": "unknown",
+    "area_served": "Entire township",
+    "lead_time": "",
+    "fees": [],
+    "how_to_apply": "Unconfirmed. The Township's occupancy inspection has a Fire Safety section covering smoke alarms, carbon monoxide detectors and an extinguisher; call the Housing Office at 856-299-0780 to ask whether it also issues the state smoke and carbon monoxide certificate or whether to apply to the NJ DCA.",
+    "application_url": "",
+    "department_url": "https://oldmanstownship.com/housing-office/",
+    "phone": "856-299-0780",
+    "email": "clerk@oldmanstownship.com",
+    "contact_name": "Peter Voros",
+    "contact_title": "Housing Officer",
+    "evidence": [
+     {
+      "url": "https://oldmanstownship.com/wp-content/uploads/2024/05/Housing-Application-Checklist.pdf",
+      "quote": "Carbon Monoxide detector is required within ten feet of bedrooms AND one on each floor (including basement)",
+      "doc_date": "2024-05 (upload folder)",
+      "via": "pdf",
+      "verified": true
+     },
+     {
+      "url": "https://firesolutions.dca.nj.gov/_odata/firedistricts",
+      "quote": "\"ultra_name\":\"OLDMANS TWP-001\",\"ultra_firedistrictcode\":\"4007\" ... \"ultra_firejurisdiction\":{ \"Name\":\"State\",\"Value\":240000000 },\"ultra_smokecertexempt\":true",
+      "doc_date": "2026-09-30 (live portal data)",
+      "via": "page",
+      "verified": null
+     },
+     {
+      "url": "https://www.nj.gov/dca/dfs/pdf/fire%20directory_county%20summary/state_towns%207_17_26.pdf",
+      "quote": "OLDSMAN 1706",
+      "doc_date": "2026-07-17 (listed without the 'SC = Smoke Certs' mark)",
+      "via": "pdf",
+      "verified": true
+     }
+    ],
+    "confidence": "low"
+   },
+   {
+    "name": "NJ DCA Division of Fire Safety, Bureau of Fire Code Enforcement (State is the fire code enforcing agency)",
+    "type": "state_dca",
+    "area_served": "Entire township (fire code enforcement)",
+    "lead_time": "",
+    "fees": [],
+    "how_to_apply": "Do not rely on the State's online smoke certificate application for this town: the DCA portal data marks OLDMANS TWP-001 as smoke-certificate exempt, which means the town is not offered in the State's online application. Ask the Township who issues the certificate; the DCA Bureau of Fire Code Enforcement can confirm.",
+    "application_url": "",
+    "department_url": "https://www.nj.gov/dca/dfs/offices/bfce.shtml",
+    "phone": "(609) 633-6132",
+    "email": "",
+    "contact_name": "Louis Kilmer",
+    "contact_title": "State Fire Official listed for Oldmans Township in the state fire directory (DCA Bureau of Fire Code Enforcement)",
+    "evidence": [
+     {
+      "url": "https://nj.gov/dca/dfs/pdf/ANNUAL%20REGISTRY/THIRD%20QUARTER%20LEA%20REGISTRY%202026.pdf",
+      "quote": "S Oldmans Township",
+      "doc_date": "2026-07",
+      "via": "pdf",
+      "verified": true
+     },
+     {
+      "url": "https://www.nj.gov/dca/dfs/pdf/fire%20directory_county%20summary/fire_code_enforcement_director.pdf",
+      "quote": "Oldmans Township1706 LEAID: 1706-999 Enf Auth. State Fire Official Louis Kilmer Phone (609)633-6132 Addr: PO Box 809 Trenton NJ 08625-0809",
+      "doc_date": "2026-06 (survey dates 5/18/2026 and 6/25/2026)",
+      "via": "state_directory",
+      "verified": true
+     }
+    ],
+    "confidence": "low"
+   }
+  ],
+  "notes": "Who issues the smoke and carbon monoxide certificate in Oldmans is not settled. The State (NJ DCA) is the fire code enforcing agency (registry code S; state directory code 1706), and the directory lists 'NJ Division Fire Safety' under smoke detector compliance. But the DCA's state towns list (revised 7/17/2026, where the town is spelled 'OLDSMAN') shows it without the 'SC' (State issues smoke certs) mark, and the DCA portal marks OLDMANS TWP-001 as smoke-certificate exempt, which in other towns has meant the municipality issues the certificate itself. The Township's occupancy checklist has its own Fire Safety section, but no Township page says it issues the state certificate. No fees are recorded until the issuer is confirmed. The Logan (Pedricktown) and Auburn volunteer fire companies give out smoke detectors to residents; they are not inspecting agencies. The Construction Office's Fire Inspector (Robert King) is a construction fire subcode inspector. The DCA's online smoke application loads its town list from the same portal data feed; towns marked smoke-certificate exempt, as this one is, are not offered there, so the State's online route should not be given to agents for this town."
+ },
+ "other_items": [
+  {
+   "label": "Septic certification",
+   "detail": "Septic certification from the Salem County Department of Health for a transfer of ownership.",
+   "source_url": "https://oldmanstownship.com/wp-content/uploads/2024/05/Housing-Application-Checklist.pdf"
+  },
+  {
+   "label": "Well water potable certification",
+   "detail": "Needed unless the home is on a public water system (NJDEP and federal EPA chemical, bacteriological and gross alpha limits).",
+   "source_url": "https://oldmanstownship.com/wp-content/uploads/2024/05/Housing-Application-Checklist.pdf"
+  },
+  {
+   "label": "Open permits",
+   "detail": "No open permits allowed at the occupancy inspection.",
+   "source_url": "https://oldmanstownship.com/wp-content/uploads/2024/05/Housing-Application-Checklist.pdf"
+  },
+  {
+   "label": "Chimney certification",
+   "detail": "A recent chimney certification is needed if there is a fireplace.",
+   "source_url": "https://oldmanstownship.com/wp-content/uploads/2024/05/Housing-Application-Checklist.pdf"
+  }
+ ],
+ "open_questions": [
+  "Who issues the smoke and carbon monoxide certificate for Oldmans (the Township Housing Office or the NJ DCA), and what is the fee?",
+  "Does the Township still require a kitchen fire extinguisher after P.L.2025, c.19?",
+  "How far ahead of closing should the occupancy application be filed, and how long is the certificate valid?"
+ ],
+ "verification": {
+  "fees": 2,
+  "fee_ok": 2,
+  "fee_bad": 0,
+  "fee_unchecked": 0,
+  "quotes": 10,
+  "q_ok": 9,
+  "q_bad": 0,
+  "q_unchecked": 1
+ }
+}

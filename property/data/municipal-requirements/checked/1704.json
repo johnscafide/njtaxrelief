@@ -1,0 +1,193 @@
+{
+ "municipality_code": "1704",
+ "municipality": "Elsinboro Township",
+ "county": "SALEM",
+ "checked_at": "2026-09-30",
+ "resale_co": {
+  "status": "required",
+  "name": "Certificate of Occupancy for Change in Occupancy (Certificate of Continued Occupancy)",
+  "issued_by": "Elsinboro Township Housing and Zoning Officer",
+  "lead_time": "",
+  "valid_for": "",
+  "requirements": [
+   "Home may not be occupied until the Housing/Zoning Officer issues a certificate of occupancy",
+   "Water test (NJDEP and federal EPA chemical, bacteriological and gross alpha limits); not needed on a public water system",
+   "Chimney certification for all fossil fuel systems",
+   "Smoke detectors (each level, including the top of the basement stairs and a heated garage) and carbon monoxide alarms near bedrooms",
+   "Electrical panel labeled, 100 amp service or more",
+   "GFCI outlets in kitchen, bathrooms, laundry, garage and outside",
+   "Handrails on basement, porch and deck steps; emergency heater switch at the top of the stairs; heater serviced and inspected",
+   "Water heater relief pipe piped down",
+   "Roof, siding, windows, doors and screens in good repair; house numbered; trash, debris and abandoned vehicles removed",
+   "Fire-resistant door and walls between an attached garage and the house",
+   "Fire extinguisher (2A:10B:C) listed on the Township instructions, which predate P.L.2025, c.19"
+  ],
+  "fees": [
+   {
+    "label": "Certificate of occupancy (change in occupancy) inspection",
+    "amount": "$30.00",
+    "quote": "$30.00 INSPECTION FEE",
+    "source_url": "https://assets.zyrosite.com/Hk1eZdfjLtvdh0WU/coapplication-M5puFZ2iiXlZcJ53.pdf",
+    "verified": null
+   },
+   {
+    "label": "Re-inspection",
+    "amount": "$30.00",
+    "quote": "$30.00 REINSPECTION FEE",
+    "source_url": "https://assets.zyrosite.com/Hk1eZdfjLtvdh0WU/coapplication-M5puFZ2iiXlZcJ53.pdf",
+    "verified": null
+   }
+  ],
+  "how_to_apply": "Fill out the Township's Application for Certificate of Occupancy for Change in Occupancy (property, current owner, buyer, both realtors, type of dwelling and rooms) and have the seller's realtor or owner sign it. The application is not complete until the owner or realtor calls the Housing/Zoning Officer at 935-2200 to schedule the inspection. Housing and zoning hours are Thursday 3pm to 4pm at the Municipal Building, 619 Salem Ft-Elfsborg Rd, Salem.",
+  "application_url": "https://assets.zyrosite.com/Hk1eZdfjLtvdh0WU/coapplication-M5puFZ2iiXlZcJ53.pdf",
+  "department_url": "https://elsinborotownship.com/elsinboro-township-departments",
+  "phone": "856-935-2200",
+  "email": "inspector@elsinborotownship.com",
+  "contact_name": "Andy Hoglen",
+  "contact_title": "Zoning and Housing Official (also Construction and Building Subcode Official)",
+  "evidence": [
+   {
+    "url": "https://assets.zyrosite.com/Hk1eZdfjLtvdh0WU/coapplication-M5puFZ2iiXlZcJ53.pdf",
+    "quote": "APPLICATION FOR CERTIFICATE OF OCCUPANCY FOR CHANGE IN OCCUPANCY PURSUANT TO ORDINANCE # 77-9 & 79-3",
+    "doc_date": "undated scan",
+    "via": "pdf",
+    "verified": null
+   },
+   {
+    "url": "https://assets.zyrosite.com/Hk1eZdfjLtvdh0WU/coapplication-M5puFZ2iiXlZcJ53.pdf",
+    "quote": "APPLICATION IS NOT COMPLETE UNTIL THE OWNER/REALTOR CONTACTS THE HOUSING/ZONING OFFICER TO SCHEDULE THE INSPECTION. PLEASE CALL 935-2200 TO SCHEDULE THE INSPECTION/REINSPECTION. THIS DWELLING IS NOT TO BE OCCUPIED UNTIL A CERTIFICATE OF OCCUPANCY IS ISSUED BY THE HOUSING/ZONING OFFICER OF ELSINBORO TOWNSHIP.",
+    "doc_date": "undated scan",
+    "via": "pdf",
+    "verified": null
+   },
+   {
+    "url": "https://assets.zyrosite.com/Hk1eZdfjLtvdh0WU/coapplication-M5puFZ2iiXlZcJ53.pdf",
+    "quote": "The following must be provided before a certificate of continued occupancy will be issued:",
+    "doc_date": "undated scan (page 5, Instructions/Guidelines)",
+    "via": "pdf",
+    "verified": null
+   },
+   {
+    "url": "https://elsinborotownship.com/elsinboro-township-departments",
+    "quote": "Construction, Zoning and Housing Email: inspector@elsinborotownship.com Hours Construction - Thursday 12:00pm- 1:30pm Zoning and Housing - Thursday 3pm-4pm",
+    "doc_date": "2026-09-30 (page fetched)",
+    "via": "page",
+    "verified": true
+   },
+   {
+    "url": "https://assets.zyrosite.com/Hk1eZdfjLtvdh0WU/reorganization-2026-min-jgjLAaapjvJQWMij.pdf",
+    "quote": "BE IT RESOLVED that ANDY HOGLEN be appointed Zoning and Housing Official for the Township of Elsinboro",
+    "doc_date": "2026-01 (2026 reorganization minutes)",
+    "via": "pdf",
+    "verified": true
+   }
+  ],
+  "confidence": "medium",
+  "notes": "The application form is a scanned PDF with no text layer; Claude read it page by page (2026-09-30). It is undated and bundles a 2005 DCA memo on fire extinguishers. The instructions page has handwritten notes ('Deleted' next to the septic certification, '2A10BC' next to the extinguisher, 'Near Bedrooms' and 'Each Level' next to the alarms); handwritten notes are weak evidence, so septic is left out of requirements and the extinguisher is flagged as predating P.L.2025, c.19 (February 3, 2025). The Township website names no Housing/Zoning Officer; the 2026 reorganization minutes appoint Andy Hoglen as Zoning and Housing Official and as Construction and Building Subcode Official. No direct phone for him is listed; the Township's main number 856-935-2200 is the scheduling number on the form, and the Officials page lists 'Building Inspector/Zoning Officer 856-935-2200'. The Township code is on ecode360 (EL6582) and could not be opened, so Ordinances 77-9 and 79-3 were not read. No lead time or validity period is stated."
+ },
+ "fire_cert": {
+  "requirements": [
+   "Township certificate of occupancy checks smoke detectors on each level (including the top of the basement stairs and a heated garage) and carbon monoxide alarms near bedrooms"
+  ],
+  "authorities": [
+   {
+    "name": "Elsinboro Township Housing and Zoning Officer (smoke and carbon monoxide checked in the Township certificate of occupancy inspection; not confirmed as the smoke certificate issuer)",
+    "type": "unknown",
+    "area_served": "Entire township",
+    "lead_time": "",
+    "fees": [],
+    "how_to_apply": "Unconfirmed. The Township's certificate of occupancy inspection covers smoke detectors and carbon monoxide alarms; call the Township at 856-935-2200 to ask whether it also issues the state smoke and carbon monoxide certificate, or whether to apply to the NJ DCA.",
+    "application_url": "",
+    "department_url": "https://elsinborotownship.com/elsinboro-township-departments",
+    "phone": "856-935-2200",
+    "email": "inspector@elsinborotownship.com",
+    "contact_name": "Andy Hoglen",
+    "contact_title": "Zoning and Housing Official",
+    "evidence": [
+     {
+      "url": "https://assets.zyrosite.com/Hk1eZdfjLtvdh0WU/coapplication-M5puFZ2iiXlZcJ53.pdf",
+      "quote": "Carbon Monoxide Alarms Attachment enclosed ... Smoke Detectors Attachment enclosed",
+      "doc_date": "undated scan (page 5)",
+      "via": "pdf",
+      "verified": null
+     },
+     {
+      "url": "https://firesolutions.dca.nj.gov/_odata/firedistricts",
+      "quote": "\"ultra_name\":\"ELSINBORO TWP-001\",\"ultra_firedistrictcode\":\"4004\" ... \"ultra_firejurisdiction\":{ \"Name\":\"State\",\"Value\":240000000 },\"ultra_smokecertexempt\":true",
+      "doc_date": "2026-09-30 (live portal data)",
+      "via": "page",
+      "verified": null
+     },
+     {
+      "url": "https://www.nj.gov/dca/dfs/pdf/fire%20directory_county%20summary/state_towns%207_17_26.pdf",
+      "quote": "ELSINBORO 1703",
+      "doc_date": "2026-07-17 (listed without the 'SC = Smoke Certs' mark)",
+      "via": "pdf",
+      "verified": true
+     }
+    ],
+    "confidence": "low"
+   },
+   {
+    "name": "NJ DCA Division of Fire Safety, Bureau of Fire Code Enforcement (State is the fire code enforcing agency)",
+    "type": "state_dca",
+    "area_served": "Entire township (fire code enforcement)",
+    "lead_time": "",
+    "fees": [],
+    "how_to_apply": "Do not rely on the State's online smoke certificate application for this town: the DCA portal data marks ELSINBORO TWP-001 as smoke-certificate exempt, which means the town is not offered in the State's online application. Ask the Township who issues the certificate; the DCA Bureau of Fire Code Enforcement can confirm.",
+    "application_url": "",
+    "department_url": "https://www.nj.gov/dca/dfs/offices/bfce.shtml",
+    "phone": "(609) 633-6132",
+    "email": "",
+    "contact_name": "Louis Kilmer",
+    "contact_title": "State Fire Official listed for Elsinboro Township in the state fire directory (DCA Bureau of Fire Code Enforcement)",
+    "evidence": [
+     {
+      "url": "https://nj.gov/dca/dfs/pdf/ANNUAL%20REGISTRY/THIRD%20QUARTER%20LEA%20REGISTRY%202026.pdf",
+      "quote": "S Elsinboro Township",
+      "doc_date": "2026-07",
+      "via": "pdf",
+      "verified": true
+     },
+     {
+      "url": "https://www.nj.gov/dca/dfs/pdf/fire%20directory_county%20summary/fire_code_enforcement_director.pdf",
+      "quote": "Elsinboro Township1703 LEAID: 1703-999 Enf Auth. State Fire Official Louis Kilmer Phone (609)633-6132 Addr: PO Box 809 Trenton NJ 08625-0809",
+      "doc_date": "2026-03 (survey date 3/9/2026)",
+      "via": "state_directory",
+      "verified": true
+     }
+    ],
+    "confidence": "low"
+   }
+  ],
+  "notes": "Who issues the smoke and carbon monoxide certificate in Elsinboro is not settled. The State (NJ DCA) is the fire code enforcing agency (registry code S; state directory code 1703), and the state directory lists 'NJ Division Fire Safety' under smoke detector compliance. But the DCA's state towns list (revised 7/17/2026) shows Elsinboro without the 'SC' (State issues smoke certs) mark, and the DCA portal data marks ELSINBORO TWP-001 as smoke-certificate exempt, the same flags seen in towns where the municipality issues the certificate itself. The Township's own certificate of occupancy checks smoke detectors and carbon monoxide alarms, and under N.J.A.C. 5:70-2.3(a)1 a municipal resale inspection can stand in for the separate certificate, but no Township page says so. No fees are recorded for either authority until this is confirmed. The Elsinboro Fire Company (Chief Sean Elwell) is the volunteer fire company, not an inspecting agency. The DCA's online smoke application loads its town list from the same portal data feed; towns marked smoke-certificate exempt, as this one is, are not offered there, so the State's online route should not be given to agents for this town."
+ },
+ "other_items": [
+  {
+   "label": "Water test",
+   "detail": "A water test (NJDEP and federal EPA chemical, bacteriological and gross alpha limits) must be provided before the certificate is issued, unless the home is on a public water system.",
+   "source_url": "https://assets.zyrosite.com/Hk1eZdfjLtvdh0WU/coapplication-M5puFZ2iiXlZcJ53.pdf"
+  },
+  {
+   "label": "Chimney certification",
+   "detail": "Required for all fossil fuel systems; the visual inspection can be done by a heating contractor or chimney sweep.",
+   "source_url": "https://assets.zyrosite.com/Hk1eZdfjLtvdh0WU/coapplication-M5puFZ2iiXlZcJ53.pdf"
+  }
+ ],
+ "open_questions": [
+  "Who issues the smoke and carbon monoxide certificate for Elsinboro: the Township Housing/Zoning Officer as part of the certificate of occupancy, or the NJ DCA? What is the fee?",
+  "Is the septic certification still required (it is crossed out by hand as 'Deleted' on the instructions page)?",
+  "Does the Township still check for a fire extinguisher after P.L.2025, c.19?",
+  "How far ahead of closing should the certificate of occupancy be requested, and how long is it valid?"
+ ],
+ "verification": {
+  "fees": 2,
+  "fee_ok": 0,
+  "fee_bad": 0,
+  "fee_unchecked": 2,
+  "quotes": 10,
+  "q_ok": 5,
+  "q_bad": 0,
+  "q_unchecked": 5
+ }
+}

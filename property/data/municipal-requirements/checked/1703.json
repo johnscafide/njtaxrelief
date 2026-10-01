@@ -1,0 +1,214 @@
+{
+ "municipality_code": "1703",
+ "municipality": "Elmer Borough",
+ "county": "SALEM",
+ "checked_at": "2026-09-30",
+ "resale_co": {
+  "status": "required",
+  "name": "Certificate of Resale",
+  "issued_by": "Borough of Elmer Housing and Property Maintenance Office",
+  "lead_time": "",
+  "valid_for": "The application is void after 30 days.",
+  "requirements": [
+   "Sidewalks in proper condition under Borough ordinance",
+   "5-inch reflective house numbers",
+   "No trash, debris or unregistered vehicles",
+   "Roof, siding, gutters and downspouts in satisfactory condition; no structural damage or rotting wood",
+   "GFI outlets outside (including sheds and garages) and within 6 feet of all water sources",
+   "Graspable handrails on steps with 3 or more risers (handrails must turn in); guard rails on decks 30 inches or higher",
+   "Pools enclosed and GFI protected",
+   "No broken windows; windows open, lock and have screens; deadbolts not keyed on both sides",
+   "Walls, floors and ceilings without holes or damage and properly painted",
+   "Working appliances with an anti-tip range; hot and cold water, working toilets and shower; bathroom exhaust fan or opening window",
+   "Water heater relief valve pipe ending 2 to 6 inches from the floor; working heating system; oil heat needs an emergency shut-off at the top of the stairs",
+   "Electrical boxes covered, circuits labeled, working outlets, switches, cover plates and fixtures; no extension cords in place of hard wiring",
+   "10-year sealed smoke detectors, 1 per level and 1 in each bedroom; carbon monoxide detectors, 1 per level near bedrooms",
+   "Fire extinguisher (2A:10B:C) mounted in the kitchen (listed on the February 2025 checklist)",
+   "All required permits obtained and approved; real estate taxes paid to date"
+  ],
+  "fees": [
+   {
+    "label": "Certificate of Resale inspection, includes the initial inspection and 1 re-inspection",
+    "amount": "$50",
+    "quote": "Inspection Fee: $50 (includes Initial and 1 Re-inspection)",
+    "source_url": "http://www.elmerboroughnj.com/files/141100297.pdf",
+    "verified": true
+   },
+   {
+    "label": "Each additional re-inspection",
+    "amount": "$25",
+    "quote": "Additional Re-Inspections Fee: $25",
+    "source_url": "http://www.elmerboroughnj.com/files/141100297.pdf",
+    "verified": true
+   }
+  ],
+  "how_to_apply": "Fill out the Application for Certificate of Resale (address, block and lot, seller, buyer, realtor, settlement date, bedrooms and proposed occupants) and send it to the Housing and Property Maintenance Office at 120 S. Main Street, PO Box 882, Elmer, NJ 08318, or email housing@elmerboroughnj.com. Make checks payable to Borough of Elmer. The officer works Thursdays by appointment only. Real estate taxes must be paid to date before any certificate is issued, and the application is void after 30 days.",
+  "application_url": "http://www.elmerboroughnj.com/files/141100297.pdf",
+  "department_url": "http://www.elmerboroughnj.com/Officers.html",
+  "phone": "856-358-4010 X119",
+  "email": "housing@elmerboroughnj.com",
+  "contact_name": "David Elwell",
+  "contact_title": "Housing and Property Maintenance Officer",
+  "evidence": [
+   {
+    "url": "http://www.elmerboroughnj.com/files/141100296.pdf",
+    "quote": "No person shall occupy the dwelling without an approved Certificate of Resale or New Tenant Certificate for Rental Properties.",
+    "doc_date": "2025-02 (Rev. 2/25)",
+    "via": "pdf",
+    "verified": true
+   },
+   {
+    "url": "http://www.elmerboroughnj.com/files/141100297.pdf",
+    "quote": "APPLICATION FOR CERTIFICATE OF RESALE OR NEW TENANT CERTIFICATE OF RENTAL PROPERTIES",
+    "doc_date": "2025-02 (REV. 2/25)",
+    "via": "pdf",
+    "verified": true
+   },
+   {
+    "url": "http://www.elmerboroughnj.com/files/141100297.pdf",
+    "quote": "Real Estate Taxes must be paid to date before any certificate is issued and Landlord Registration & Lead Paint Certification must be current (if applicable)** RESALE/RENTAL APPLICATION VOID AFTER 30 Days",
+    "doc_date": "2025-02 (REV. 2/25)",
+    "via": "pdf",
+    "verified": true
+   },
+   {
+    "url": "http://www.elmerboroughnj.com/Officers.html",
+    "quote": "HOUSING and PROPERTY MAINTENANCE OFFICER David Elwell Hours: Thursdays, by appointment only Phone: 856-358-4010 X119 Fax: 856-358-8019 E-mail: housing@elmerboroughnj.com",
+    "doc_date": "2026-09-28 (page last updated)",
+    "via": "page",
+    "verified": true
+   }
+  ],
+  "confidence": "high",
+  "notes": "Elmer requires a Certificate of Resale from its Housing and Property Maintenance Office for sales (the same office issues New Tenant Certificates for rentals). The checklist and application are both marked Rev. 2/25. The checklist still lists a kitchen fire extinguisher even though P.L.2025, c.19 (February 3, 2025) removed it from the state smoke certificate rule; the Borough's own resale checklist is a local housing standard, so ask the office whether it still applies. No lead time is stated. Construction permits for Elmer are handled by the Pittsgrove Township Construction Office (856-358-2300 X6026). The Borough code is on ecode360 (EL4070) and was not opened."
+ },
+ "fire_cert": {
+  "requirements": [
+   "10-year sealed battery smoke alarm on every level, or hardwired where required; hardwired alarms cannot be replaced with battery alarms",
+   "Basement alarm at the bottom of the stairwell at ceiling level (not between joists)",
+   "A 10-year sealed smoke alarm in every bedroom",
+   "Smoke and carbon monoxide alarms must be less than 10 years old and working",
+   "Carbon monoxide alarm in the hallway within 10 feet of all bedrooms",
+   "A low voltage fire alarm system installed by an alarm company must be tested and certified by an alarm contractor before the inspection; bring the certification",
+   "House numbers at least 4 inches high, in a contrasting color, permanently fixed and visible from the street",
+   "Homes with solar panels, a backup generator or battery storage need a permanent, not handwritten, 'Caution: Multiple Sources of Power' style label at the main electrical panel and the electric meter"
+  ],
+  "authorities": [
+   {
+    "name": "Borough of Elmer Bureau of Fire Prevention",
+    "type": "municipal_fire_bureau",
+    "area_served": "Entire borough",
+    "lead_time": "Fee depends on how many business days of notice are given before settlement or change of occupant.",
+    "fees": [
+     {
+      "label": "Smoke and carbon monoxide certificate, 10 or more business days notice",
+      "amount": "$45.00",
+      "quote": "$45.00 - 10 business days or more notice",
+      "source_url": "http://www.elmerboroughnj.com/files/141730201.pdf",
+      "verified": true
+     },
+     {
+      "label": "Smoke and carbon monoxide certificate, 4 to 10 business days notice",
+      "amount": "$90.00",
+      "quote": "$90.00 - 4 to 10 business day notice",
+      "source_url": "http://www.elmerboroughnj.com/files/141730201.pdf",
+      "verified": true
+     },
+     {
+      "label": "Smoke and carbon monoxide certificate, less than 4 business days notice",
+      "amount": "$161.00",
+      "quote": "$161.00 - less than 4 business day notice",
+      "source_url": "http://www.elmerboroughnj.com/files/141730201.pdf",
+      "verified": true
+     },
+     {
+      "label": "Re-inspection for a failed or no-show inspection, same fee schedule as the initial inspection",
+      "amount": "$45.00 to $161.00",
+      "quote": "Requests received 10 business days or more prior to settlement date or change of occupant $45.00 ... Requests received fewer than 4 business days prior to settlement date or change of occupant $161.00 ... *Re-inspection for failed or no-show inspections shall be the same fee scheduled as initial inspection. *",
+      "source_url": "http://www.elmerboroughnj.com/files/141730200.pdf",
+      "verified": true
+     }
+    ],
+    "how_to_apply": "Fill out the Borough of Elmer Bureau of Fire Prevention 'Certificate of Smoke/Carbon Monoxide Detector Compliance' application (owner, property, block and lot, realtor) and send it to the Bureau at 120 South Main Street, PO Box 882, Elmer, NJ 08318, or email fireofficial@elmerboroughnj.com. Payment is by check or money order payable to Borough of Elmer Bureau of Fire Prevention and must be received at the time of the inspection.",
+    "application_url": "http://www.elmerboroughnj.com/files/141730201.pdf",
+    "department_url": "http://www.elmerboroughnj.com/Fire.html",
+    "phone": "856-358-4010 X113",
+    "email": "fireofficial@elmerboroughnj.com",
+    "contact_name": "Jack Justice, Jr.",
+    "contact_title": "Fire Safety Code Official",
+    "evidence": [
+     {
+      "url": "http://www.elmerboroughnj.com/files/141730199.pdf",
+      "quote": "Smoke detector and carbon monoxide alarms shall be inspected by the Bureau of Fire Prevention within the Borough of Elmer, in accordancewith N.J.A. C. 5:70-4. 19 et seq. and certificates of approval with respect to operation thereof shall be issued by the Bureau of Fire Prevention.",
+      "doc_date": "2025-10-08 (Ordinance No. 2025-12 adopted)",
+      "via": "pdf",
+      "verified": true
+     },
+     {
+      "url": "http://www.elmerboroughnj.com/files/141730201.pdf",
+      "quote": "Borough of Elmer Bureau of Fire Prevention 120 South Main Street, PO Box 882 Elmer, NJ 08318 Phone: 856-358-4010 Ext. 113, Email: fireofficial@elmerboroughnj.com Certificate of Smoke/Carbon Monoxide Detector Compliance",
+      "doc_date": "undated (posted with the October 2025 ordinance)",
+      "via": "pdf",
+      "verified": true
+     },
+     {
+      "url": "http://www.elmerboroughnj.com/files/141730201.pdf",
+      "quote": "Payment must be made in the form of check or money order made payable to Borough of Elmer Bureau of Fire Prevention and must be received at the time of the inspection.",
+      "doc_date": "undated",
+      "via": "pdf",
+      "verified": true
+     },
+     {
+      "url": "http://www.elmerboroughnj.com/Officers.html",
+      "quote": "FIRE SAFETY CODE OFFICIAL Jack Justice, Jr. Phone: 856-358-4010 X113 Fax: 856-358-3191",
+      "doc_date": "2026-09-28 (page last updated)",
+      "via": "page",
+      "verified": true
+     },
+     {
+      "url": "https://nj.gov/dca/dfs/pdf/ANNUAL%20REGISTRY/THIRD%20QUARTER%20LEA%20REGISTRY%202026.pdf",
+      "quote": "F Elmer Borough",
+      "doc_date": "2026-07",
+      "via": "pdf",
+      "verified": true
+     },
+     {
+      "url": "https://www.nj.gov/dca/dfs/pdf/fire%20directory_county%20summary/fire_code_enforcement_director.pdf",
+      "quote": "Elmer Borough1702 LEAID: 1702-001 Enf Auth. Fire Dept Fire Official Jack Justice Jr Phone (856) 358-4010 Addr: 120 S Main St - Box 882 Elmer NJ 08318",
+      "doc_date": "2026-03 (survey date 3/9/2026)",
+      "via": "state_directory",
+      "verified": true
+     }
+    ],
+    "confidence": "high"
+   }
+  ],
+  "notes": "Elmer's fire code enforcing agency is the Borough of Elmer Bureau of Fire Prevention, created by Ordinance No. 2025-12 (adopted October 8, 2025), which says the Bureau inspects smoke and carbon monoxide alarms and issues the certificates. The DCA registry lists Elmer as F and the DCA portal lists ELMER BORO-001 under an 'LEA'. The state directory (Elmer is code 1702 there) names Fire Official Jack Justice Jr at (856) 358-4010 and lists the 'Elmer Boro Housing Office' for smoke detector compliance; the Borough's own current forms name the Bureau of Fire Prevention at Ext. 113, which is used here. The directory's email for him is a personal-style address, so the Bureau's office email is recorded instead. The Borough's Officers page also names fire code inspectors Timothy O'Donnell and Matthew Repas. The guidelines sheet prints the middle tier as '7 business days prior', while the application form says '4 to 10 business day notice'. The fire checklist lists no fire extinguisher, in line with P.L.2025, c.19, but the Borough's separate housing resale checklist (Rev. 2/25) still asks for one."
+ },
+ "other_items": [
+  {
+   "label": "Real estate taxes paid to date",
+   "detail": "Real estate taxes must be paid to date before any Certificate of Resale is issued.",
+   "source_url": "http://www.elmerboroughnj.com/files/141100297.pdf"
+  },
+  {
+   "label": "Open permits",
+   "detail": "The resale checklist requires all required permits to be obtained and approved.",
+   "source_url": "http://www.elmerboroughnj.com/files/141100296.pdf"
+  }
+ ],
+ "open_questions": [
+  "How far ahead of settlement should the Certificate of Resale application be filed, and how long is the certificate valid once issued?",
+  "Does the Housing Office still require a kitchen fire extinguisher (listed on its February 2025 checklist)?"
+ ],
+ "verification": {
+  "fees": 6,
+  "fee_ok": 6,
+  "fee_bad": 0,
+  "fee_unchecked": 0,
+  "quotes": 10,
+  "q_ok": 10,
+  "q_bad": 0,
+  "q_unchecked": 0
+ }
+}

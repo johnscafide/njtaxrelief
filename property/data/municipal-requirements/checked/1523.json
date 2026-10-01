@@ -1,0 +1,231 @@
+{
+ "municipality_code": "1523",
+ "municipality": "Pine Beach Borough",
+ "county": "OCEAN",
+ "checked_at": "2026-09-30",
+ "resale_co": {
+  "status": "required",
+  "name": "Housing Certificate (Certificate of Occupancy) for resale",
+  "issued_by": "Pine Beach Borough Housing Department (Zoning Officer / CO Inspector / Code Enforcement)",
+  "lead_time": "Allow at least two weeks' processing time; the first inspection needs about ten business days to schedule",
+  "valid_for": "",
+  "requirements": [
+   "Heating system certification by a licensed contractor",
+   "Chimney certification by a licensed contractor if there is a wood-burning stove or fireplace",
+   "House number in place and visible from the street",
+   "Property free of debris and trash; exterior and interior in good repair (roof, siding, windows, paint, insect screens)",
+   "Handrails and guardrails on stairs and decks with three or more risers",
+   "Plumbing in working order and all utilities on (gas, electric, water, sewer)",
+   "Cooking appliance working, with the anti-tip bracket installed",
+   "GFCI outlets by all water sources, exterior outlets and washing machines",
+   "Water heater pressure relief valve to code",
+   "All open permits closed with final inspections",
+   "Comply with the International Property Maintenance Code",
+   "10-year sealed battery smoke alarms in every bedroom, one within 10 feet of each bedroom in the hallway, and one on every level (AC-powered interconnected alarms do not need to be replaced)",
+   "Carbon monoxide alarm on each level; plug-in or battery, 10-year model not required",
+   "Fire extinguisher, 2-A:10-B:C type, 2.5 to 10 lbs, wall-mounted and visible within 10 feet of the kitchen, top no higher than 5 feet, near an exit path, not blocked, with the owner's manual",
+   "Homes with a generator, solar panels or battery storage need a printed 'Caution: Multiple Sources of Power' label within 18 inches of the main electrical panel and meter (P.L.2025, c.19)"
+  ],
+  "fees": [
+   {
+    "label": "Resale Certificate of Occupancy inspection (exact cash or check)",
+    "amount": "$75.00",
+    "quote": "$75.00 inspection fee (exact cash or check payment only)",
+    "source_url": "https://www.pinebeachnj.gov/housingdepartment",
+    "verified": true
+   },
+   {
+    "label": "Re-inspection",
+    "amount": "$40.00",
+    "quote": "Re-inspections allow at least five business days for scheduling an appointment, plus a re-inspection fee of $40.00.",
+    "source_url": "https://www.pinebeachnj.gov/housingdepartment",
+    "verified": true
+   }
+  ],
+  "how_to_apply": "Bring the Borough Housing Certificate application (2026 COI application and checklist), the $75.00 fee and the heat and/or chimney certificate to Borough Hall, 599 Pennsylvania Avenue, Monday to Friday 9 am to 4 pm. The inspection is scheduled only after payment and all documents are received. The application has a box to request a water read and final utility bill. Inspections are on Wednesdays.",
+  "application_url": "https://www.pinebeachnj.gov/api/blob/viewBlob?i=H%2FRTLmPytu9f7Hz3G%2BvzzOQIyufDmVOZAnu3bSEffyaMssMczSf3Jm6wthLdOjvs",
+  "department_url": "https://www.pinebeachnj.gov/housingdepartment",
+  "phone": "(732) 349-6425",
+  "email": "GStocco@PineBeachNJ.gov",
+  "contact_name": "",
+  "contact_title": "Zoning Officer / CO Inspector / Code Enforcement (name not shown on the Borough site)",
+  "evidence": [
+   {
+    "url": "https://www.pinebeachnj.gov/housingdepartment",
+    "quote": "All residential and commercial units must be inspected by the Housing Department and a Certificate of Occupancy issued prior to: A change in occupancy for a rental unit The sale of a residential or commercial property (both rental and owner-occupied)",
+    "doc_date": "2026-09 (page read 2026-09-30)",
+    "via": "page",
+    "verified": true
+   },
+   {
+    "url": "https://www.pinebeachnj.gov/housingdepartment",
+    "quote": "Please set your schedule accordingly - the initial inspection allows ten business days for scheduling an appointment. Inspections are held on Wednesdays between 5-6pm.",
+    "doc_date": "2026-09",
+    "via": "page",
+    "verified": true
+   },
+   {
+    "url": "https://www.pinebeachnj.gov/resaleandrentalcertificates",
+    "quote": "The fee for the inspection is $75.00 (exact cash or check is required), and a heat certification is required prior to inspection and if there is a wood burning stove or fireplace, a chimney certification is also required.",
+    "doc_date": "2026-09",
+    "via": "page",
+    "verified": true
+   },
+   {
+    "url": "https://www.pinebeachnj.gov/api/blob/viewBlob?i=H%2FRTLmPytu9f7Hz3G%2BvzzOQIyufDmVOZAnu3bSEffyaMssMczSf3Jm6wthLdOjvs",
+    "quote": "Please allow a minimum of two weeks' processing time. All documents/certificates must be received, and fees must be paid prior to application review.",
+    "doc_date": "2026 (2026 COI application and checklist)",
+    "via": "pdf",
+    "verified": "eye"
+   },
+   {
+    "url": "https://www.pinebeachnj.gov/api/blob/viewBlob?i=H%2FRTLmPytu9f7Hz3G%2BvzzOQIyufDmVOZAnu3bSEffyaMssMczSf3Jm6wthLdOjvs",
+    "quote": "Inspection fee is $75 (resale must be paid cash, exact change). $40 re-inspection fee due before scheduling.",
+    "doc_date": "2026",
+    "via": "pdf",
+    "verified": "eye"
+   },
+   {
+    "url": "https://www.pinebeachnj.gov/api/blob/viewBlob?i=9dmdajZ6HNBoEgy/H%2BiMKyhOlB2tkA5OhZVvrzq6BMEs7SccYTfJ6zWfGzxyrK/A",
+    "quote": "Zoning Officer/CO Inspector/ Code Enforcement CO Appointments: Wednesday 5:00 PM - 6:00 PM",
+    "doc_date": "2026 (Borough of Pine Beach 2026 Official Directory)",
+    "via": "pdf",
+    "verified": "eye"
+   },
+   {
+    "url": "https://www.pinebeachnj.gov/api/blob/viewBlob?i=9dmdajZ6HNBoEgy/H%2BiMKyhOlB2tkA5OhZVvrzq6BMEs7SccYTfJ6zWfGzxyrK/A",
+    "quote": "(732) 349-6425 Fax: (732) 240-0533",
+    "doc_date": "2026",
+    "via": "pdf",
+    "verified": "eye"
+   },
+   {
+    "url": "https://www.pinebeachnj.gov/codeenforcement",
+    "quote": "Pine Beach has adopted the 2021 version of IPMC. For code related questions, please",
+    "doc_date": "2026-09 (the 'email' link that follows goes to GStocco@PineBeachNJ.gov)",
+    "via": "page",
+    "verified": true
+   }
+  ],
+  "confidence": "high",
+  "notes": "The Housing Department page and the Borough directory say resale inspections are Wednesdays 5-6 pm, but the Resale & Rental Certificates page says Wednesdays 2:00 to 3:00 PM. The Housing page and Resale page accept exact cash or check, while the 2026 application says resale must be paid cash, exact change, and the checklist says '$75.00 CASH' and '$40 CASH'; bring exact cash to be safe. The application is a scanned PDF served through the Borough site's file viewer (it may only open from the Housing Department page). The CO Inspector's name is not on the current Borough site; the Code Enforcement page's email link goes to GStocco@PineBeachNJ.gov. Rental certificates also need landlord and tenant registration, proof of $500,000 liability insurance, and a lead-safe certification plus a $20 State fee for pre-1978 rentals; those are rental-only. The Borough code (ecode360 PI1165) could not be opened."
+ },
+ "fire_cert": {
+  "requirements": [
+   "10-year sealed battery smoke alarms in every bedroom, one within 10 feet of each bedroom in the hallway, and one on every level (AC-powered interconnected alarms do not need to be replaced)",
+   "Carbon monoxide alarm on each level; plug-in or battery, 10-year model not required",
+   "Fire extinguisher, 2-A:10-B:C type, 2.5 to 10 lbs, wall-mounted and visible within 10 feet of the kitchen, top no higher than 5 feet, near an exit path, not blocked, with the owner's manual",
+   "Homes with a generator, solar panels or battery storage need a printed 'Caution: Multiple Sources of Power' label within 18 inches of the main electrical panel and meter (P.L.2025, c.19)",
+   "The Borough's 2026 checklist still lists a portable fire extinguisher even though P.L.2025, c.19 removed it from the state requirement"
+  ],
+  "authorities": [
+   {
+    "name": "Pine Beach Borough Housing Department (smoke, CO, extinguisher and power-source label checked in the Borough Housing Certificate inspection)",
+    "type": "municipal_fire_bureau",
+    "area_served": "Entire borough",
+    "lead_time": "Allow at least two weeks",
+    "fees": [
+     {
+      "label": "Combined Borough Housing Certificate inspection including the smoke/CO check (paid once)",
+      "amount": "$75.00",
+      "quote": "$75.00 inspection fee (exact cash or check payment only)",
+      "source_url": "https://www.pinebeachnj.gov/housingdepartment",
+      "verified": true
+     },
+     {
+      "label": "Re-inspection (same as the Housing Certificate re-inspection)",
+      "amount": "$40.00",
+      "quote": "Re-inspections allow at least five business days for scheduling an appointment, plus a re-inspection fee of $40.00.",
+      "source_url": "https://www.pinebeachnj.gov/housingdepartment",
+      "verified": true
+     }
+    ],
+    "how_to_apply": "Same application and inspection as the Borough Housing Certificate for resale: submit the 2026 application, $75.00 fee and heat/chimney certificate at Borough Hall. Not confirmed that the Borough issues a separate smoke/CO certificate; see notes.",
+    "application_url": "https://www.pinebeachnj.gov/api/blob/viewBlob?i=H%2FRTLmPytu9f7Hz3G%2BvzzOQIyufDmVOZAnu3bSEffyaMssMczSf3Jm6wthLdOjvs",
+    "department_url": "https://www.pinebeachnj.gov/housingdepartment",
+    "phone": "(732) 349-6425",
+    "email": "GStocco@PineBeachNJ.gov",
+    "contact_name": "",
+    "contact_title": "Zoning Officer / CO Inspector / Code Enforcement",
+    "evidence": [
+     {
+      "url": "https://www.pinebeachnj.gov/api/blob/viewBlob?i=H%2FRTLmPytu9f7Hz3G%2BvzzOQIyufDmVOZAnu3bSEffyaMssMczSf3Jm6wthLdOjvs",
+      "quote": "Smoke Alarms: 10-yr sealed battery smoke detectors are required in every bedroom, an additional smoke alarm is required within 10 feet of each bedroom in the hallway, as well as on every level within the structure.",
+      "doc_date": "2026",
+      "via": "pdf",
+      "verified": "eye"
+     },
+     {
+      "url": "https://www.pinebeachnj.gov/api/blob/viewBlob?i=H%2FRTLmPytu9f7Hz3G%2BvzzOQIyufDmVOZAnu3bSEffyaMssMczSf3Jm6wthLdOjvs",
+      "quote": "All residential and 2-Family structures with \"Secondary Power Sources\" such as: generators, solar panels, and battery storage systems must post a label stating \"Caution: Multiple Sources of Power\".",
+      "doc_date": "2026",
+      "via": "pdf",
+      "verified": "eye"
+     },
+     {
+      "url": "https://nj.gov/dca/dfs/pdf/ANNUAL%20REGISTRY/THIRD%20QUARTER%20LEA%20REGISTRY%202026.pdf",
+      "quote": "S Pine Beach Borough",
+      "doc_date": "2026-07 (as of June 30, 2026)",
+      "via": "pdf",
+      "verified": true
+     },
+     {
+      "url": "https://www.nj.gov/dca/dfs/pdf/fire%20directory_county%20summary/state_towns%207_17_26.pdf",
+      "quote": "PINE BEACH 1522",
+      "doc_date": "2026-07-17 (no 'SC' = Smoke Certs mark beside Pine Beach)",
+      "via": "pdf",
+      "verified": true
+     },
+     {
+      "url": "https://www.nj.gov/dca/dfs/pdf/fire%20directory_county%20summary/fire_code_enforcement_director.pdf",
+      "quote": "LEAID: 1522-999 Enf Auth. State Fire Official Louis Kilmer Phone (609)633-6132",
+      "doc_date": "survey date 6/13/2025",
+      "via": "state_directory",
+      "verified": true
+     },
+     {
+      "url": "https://www.nj.gov/dca/dfs/pdf/fire%20directory_county%20summary/fire_code_enforcement_director.pdf",
+      "quote": "Pine Beach Boro NJ Division Fire Safety BHIName: Name:",
+      "doc_date": "survey date 6/13/2025 (smoke detector compliance listed as NJ Division Fire Safety)",
+      "via": "state_directory",
+      "verified": true
+     }
+    ],
+    "confidence": "medium"
+   }
+  ],
+  "notes": "The NJ DCA is the fire code enforcing agency for Pine Beach (registry code S). The DCA's list of State-enforced towns (revised 7/17/2026) shows Pine Beach without the 'SC' (Smoke Certs) mark, meaning the State does not appear to issue smoke certificates there, while the older DCA fire directory (survey 6/13/2025) lists NJ Division Fire Safety under smoke detector compliance. The Borough's 2026 Housing Certificate checklist checks every item of the state smoke alarm / CO alarm / secondary power label certificate, so the Borough inspection appears to serve as the certificate (medium confidence). The Pine Beach Volunteer Fire Company (Chief David McKay) is the fire department, not a fire code office. If the DCA does handle it, its portal is https://firesolutions.dca.nj.gov/ultra-fire-home/smoke-application-create/, not confirmed for Pine Beach."
+ },
+ "other_items": [
+  {
+   "label": "Heat and/or chimney certificate",
+   "detail": "Heating system certification by a licensed contractor is required before the inspection; chimney certification too if there is a wood-burning stove or fireplace.",
+   "source_url": "https://www.pinebeachnj.gov/resaleandrentalcertificates"
+  },
+  {
+   "label": "Water read and final utility bill",
+   "detail": "The resale application has a box: 'Requesting water read & final utility bill'.",
+   "source_url": "https://www.pinebeachnj.gov/api/blob/viewBlob?i=H%2FRTLmPytu9f7Hz3G%2BvzzOQIyufDmVOZAnu3bSEffyaMssMczSf3Jm6wthLdOjvs"
+  },
+  {
+   "label": "Open permits and violations",
+   "detail": "The applicant certifies that all permits are obtained and closed and any code, zoning or complaint matters are resolved; the office searches for open construction, land use, code and zoning items.",
+   "source_url": "https://www.pinebeachnj.gov/api/blob/viewBlob?i=H%2FRTLmPytu9f7Hz3G%2BvzzOQIyufDmVOZAnu3bSEffyaMssMczSf3Jm6wthLdOjvs"
+  }
+ ],
+ "open_questions": [
+  "Confirm that the Borough Housing Certificate inspection is accepted as the smoke/CO alarm certificate for a sale (or whether the NJ DCA must issue it).",
+  "Which inspection time is current: Wednesdays 5-6 pm (Housing page, directory) or 2-3 pm (Resale & Rental Certificates page)?",
+  "Name of the Zoning Officer / CO Inspector (not shown on the Borough site)."
+ ],
+ "verification": {
+  "fees": 4,
+  "fee_ok": 4,
+  "fee_bad": 0,
+  "fee_unchecked": 0,
+  "quotes": 14,
+  "q_ok": 14,
+  "q_bad": 0,
+  "q_unchecked": 0
+ }
+}

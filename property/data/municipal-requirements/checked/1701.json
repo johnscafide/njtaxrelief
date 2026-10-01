@@ -1,0 +1,229 @@
+{
+ "municipality_code": "1701",
+ "municipality": "Alloway Township",
+ "county": "SALEM",
+ "checked_at": "2026-09-30",
+ "resale_co": {
+  "status": "required",
+  "name": "Resale Pre-Occupancy Certificate (Certificate of Occupancy)",
+  "issued_by": "Alloway Township Housing and Zoning Official (Housing Department)",
+  "lead_time": "",
+  "valid_for": "",
+  "requirements": [
+   "Completed Pre-Occupancy Application and payment",
+   "Well certificate (if the home has a well)",
+   "Septic certification (if the home has a septic system)",
+   "Smoke alarm and carbon monoxide alarm certificate from the City of Bridgeton Fire Department",
+   "Chimney certification if the home has a wood burning fireplace or woodstove",
+   "Bedrooms: at least 70 square feet for one occupant, and at least 50 square feet per person when more than one person sleeps in the room",
+   "Township checklist (undated, older staff name): smoke detector on every level (10-year sealed battery; hardwired alarms must stay hardwired)",
+   "Township checklist: carbon monoxide detector on the bedroom level if there are fuel burning appliances",
+   "Township checklist: handrails on steps with more than 4 risers",
+   "Township checklist: no broken glass in or around the house, such as windows",
+   "Township checklist: passing water test",
+   "Township checklist: fire extinguisher (2A10BC) in the kitchen"
+  ],
+  "fees": [
+   {
+    "label": "Pre-Occupancy (resale) application and inspection",
+    "amount": "$75.00",
+    "quote": "Fee/Payment - $75.00",
+    "source_url": "http://www.allowaytownship.com/downloads/Docs_Misc_Forms/PRE-OCCUPANCY%20APPLICATION.pdf",
+    "verified": true
+   }
+  ],
+  "how_to_apply": "Fill out the Pre-Occupancy Application (realtor or agent, property, block and lot, buyers, number of occupants, bedrooms, settlement date) and give it to the Housing and Zoning Official with the fee. Pay by check or money order made payable to Alloway Township; payment must be received at the time of the inspection. Also provide the well and septic certificates if they apply, the smoke and carbon monoxide certificate from the City of Bridgeton Fire Department, and a chimney certification if there is a wood burning fireplace or woodstove.",
+  "application_url": "http://www.allowaytownship.com/downloads/Docs_Misc_Forms/PRE-OCCUPANCY%20APPLICATION.pdf",
+  "department_url": "https://allowaytownship.com/?page_id=147",
+  "phone": "(856) 935-4080 x210",
+  "email": "housingzoning@allowaytownship.com",
+  "contact_name": "Brett Wolvin",
+  "contact_title": "Housing and Zoning Official",
+  "evidence": [
+   {
+    "url": "http://www.allowaytownship.com/downloads/Docs_Misc_Forms/PRE-OCCUPANCY%20APPLICATION.pdf",
+    "quote": "the following information MUST be submitted to this department prior to the issuance of the \"Certificate of Occupancy\".",
+    "doc_date": "2026-07 (form marked Rev. 07/2026)",
+    "via": "pdf",
+    "verified": true
+   },
+   {
+    "url": "http://www.allowaytownship.com/downloads/Docs_Misc_Forms/PRE-OCCUPANCY%20APPLICATION.pdf",
+    "quote": "Checklist for materials to be provided for Resale Pre-Occupancy Certificate",
+    "doc_date": "2026-07 (form marked Rev. 07/2026)",
+    "via": "pdf",
+    "verified": true
+   },
+   {
+    "url": "http://www.allowaytownship.com/downloads/Docs_Misc_Forms/PRE-OCCUPANCY%20APPLICATION.pdf",
+    "quote": "Payment must be made in the form of check or money order made payable to Alloway Township, Payment must be received at the time of the inspection.",
+    "doc_date": "2026-07 (form marked Rev. 07/2026)",
+    "via": "pdf",
+    "verified": true
+   },
+   {
+    "url": "https://allowaytownship.com/?page_id=147",
+    "quote": "Housing and Zoning Official Brett Wolvin (856) 935-4080 x210 phone (856) 935-0627 fax Email: housingzoning@allowaytownship.com Office Hours: Thursday 3:00 p.m. to 6:00 p.m.",
+    "doc_date": "2026-09-30 (page fetched)",
+    "via": "page",
+    "verified": true
+   },
+   {
+    "url": "http://www.allowaytownship.com/downloads/Housing/CORequirementsandChecklist.pdf",
+    "quote": "Certificate of Occupancy Check List/Requirement",
+    "doc_date": "undated (names a former Housing and Zoning Official)",
+    "via": "pdf",
+    "verified": true
+   }
+  ],
+  "confidence": "high",
+  "notes": "The Pre-Occupancy Application (Rev. 07/2026) covers both resale and rental, with separate checklists; the resale checklist is recorded here. Page 1 of the form gives Brett Wolvin's phone as (856) 935-4080 ext. 210, while page 2 prints 'EXT. 510'; the Township's Housing and Zoning page gives x210, which is used here. The separate 'Certificate of Occupancy Check List/Requirement' sheet on the Housing and Zoning page is undated and names a former official (Andy Hoglen, allowayzoning@allowaytownship.com); its items are included in requirements with that caveat. That older sheet still lists a kitchen fire extinguisher; the state law of February 3, 2025 (P.L.2025, c.19) removed the extinguisher from the state smoke certificate requirement, and the Bridgeton Fire Department checklist no longer lists one, so ask the Township whether it still checks for one. The Township code is on ecode360 (AL0617) and could not be opened; the form cites Township code section 69, 'Housing Standards'. No lead time or validity period is stated. Office hours are Thursday 3:00 p.m. to 6:00 p.m."
+ },
+ "fire_cert": {
+  "requirements": [
+   "10-year sealed battery smoke alarm on every level, or hardwired where required; hardwired alarms cannot be replaced with battery alarms",
+   "Basement alarm at the bottom of the stairwell at ceiling level (not between joists)",
+   "A 10-year sealed smoke alarm in every bedroom",
+   "Smoke and carbon monoxide alarms must be less than 10 years old and working",
+   "Carbon monoxide alarm in the hallway within 10 feet of all bedrooms",
+   "House numbers at least 4 inches high, in a contrasting color, permanently fixed and visible from the street",
+   "Homes with solar panels, a backup generator or battery storage need a permanent, not handwritten, 'Multiple Sources of Power' style label at the main electrical panel and the electric meter"
+  ],
+  "authorities": [
+   {
+    "name": "City of Bridgeton Fire Department, Bureau of Fire Prevention (Fire Marshal's Office), for Alloway Township under a shared services agreement",
+    "type": "municipal_fire_bureau",
+    "area_served": "Entire township",
+    "lead_time": "Submit the request 2 to 3 weeks before the settlement date. Certificate is valid for 90 days.",
+    "fees": [
+     {
+      "label": "Smoke and carbon monoxide certificate, request received 10 or more business days before settlement or change of occupant",
+      "amount": "$45.00",
+      "quote": "Requests received 10 business days or more prior to settlement date or change of occupant                 $45.00",
+      "source_url": "https://www.bridgetonfire.com/s/Occupancy-Smoke-Certificates.pdf",
+      "verified": true
+     },
+     {
+      "label": "Smoke and carbon monoxide certificate, request received 7 business days before settlement or change of occupant",
+      "amount": "$90.00",
+      "quote": "Requests received 7 business days prior to settlement date or change of occupant                  $90.00",
+      "source_url": "https://www.bridgetonfire.com/s/Occupancy-Smoke-Certificates.pdf",
+      "verified": true
+     },
+     {
+      "label": "Smoke and carbon monoxide certificate, request received fewer than 4 business days before settlement or change of occupant",
+      "amount": "$161.00",
+      "quote": "Requests received fewer than 4 business days prior to settlement date or change of occupant                $161.00",
+      "source_url": "https://www.bridgetonfire.com/s/Occupancy-Smoke-Certificates.pdf",
+      "verified": true
+     },
+     {
+      "label": "Re-inspection for a failed or no-show inspection, same fee schedule as the initial inspection",
+      "amount": "$45.00 to $161.00",
+      "quote": "Requests received 10 business days or more prior to settlement date or change of occupant $45.00 ... Requests received fewer than 4 business days prior to settlement date or change of occupant $161.00 ... *Re-inspection for failed or no-show inspections shall be the same fee scheduled as initial inspection. *",
+      "source_url": "https://www.bridgetonfire.com/s/Occupancy-Smoke-Certificates.pdf",
+      "verified": true
+     }
+    ],
+    "how_to_apply": "Fill out the City of Bridgeton Fire Department's online 'CO and Smoke Certification Application' (Google form) linked from bridgetonfire.com; the department contacts you to schedule the inspection. Payment is due at the inspection by check or money order payable to The City of Bridgeton Fire Department (the online form says an online payment link will be on the invoice). Questions: email firedepartment@cityofbridgeton.com or call 856-451-0090.",
+    "application_url": "https://docs.google.com/forms/d/e/1FAIpQLSd9PvQCoB-cH5v1UqIaPvFMeDzejV1zzNEnuFMw0yH7LAaFng/viewform",
+    "department_url": "https://www.bridgetonfire.com/uniform-fire-code",
+    "phone": "(856) 451-0091",
+    "email": "firedepartment@cityofbridgeton.com",
+    "contact_name": "Jack Justice Jr.",
+    "contact_title": "Fire Official (Chief), City of Bridgeton Fire Department",
+    "evidence": [
+     {
+      "url": "https://allowaytownship.com/bureau-of-fire-protection",
+      "quote": "The Alloway Township Bureau of Fire Prevention is administered by The City of Bridgeton Fire Department under a shared services agreement for inspections covered under the Uniform Fire Safety Act.",
+      "doc_date": "2026-09-30 (page fetched)",
+      "via": "page",
+      "verified": true
+     },
+     {
+      "url": "https://allowaytownship.com/bureau-of-fire-protection",
+      "quote": "The City of Bridgeton Fire Departments Fire Marshal's Office conducts the Commercial Fire Inspections and the Residential Smoke/Carbon Monoxide Detector Certification inspections for properties in Alloway Township.",
+      "doc_date": "2026-09-30 (page fetched)",
+      "via": "page",
+      "verified": true
+     },
+     {
+      "url": "https://www.bridgetonfire.com/uniform-fire-code",
+      "quote": "The City of Bridgeton Fire Department is the local enforcing agency who is responsible for the enforcement of the Uniform Fire Safety Act within the City of Bridgeton, Hopewell Township, Greenwich Township, Stow Creek Township, Shiloh Borough, Fairfield Township, Downe Township, and Alloway Township.",
+      "doc_date": "2026-09-30 (page fetched)",
+      "via": "page",
+      "verified": true
+     },
+     {
+      "url": "https://www.bridgetonfire.com/uniform-fire-code",
+      "quote": "Jack Justice Jr. serves as the appointed fire official overseeing a staff of 3 full time fire inspectors, as well as 4 part time fire inspectors. Inspectors work varying schedules, so if you need to contact them utilize their email or contact the Bureau of Fire Prevention at (856) 451-0091.",
+      "doc_date": "2026-09-30 (page fetched)",
+      "via": "page",
+      "verified": true
+     },
+     {
+      "url": "https://www.bridgetonfire.com/s/Occupancy-Smoke-Certificates.pdf",
+      "quote": "All requests must be submitted 2-3 weeks before the settlement date via the form on bridgetonfire.com. For any questions, please email firedepartment@cityofbridgeton.com or call The City of Bridgeton Fire Department at 856-451-0090 during normal business hours.",
+      "doc_date": "2025-11-20 (PDF creation date; includes the secondary power source label added in 2025)",
+      "via": "pdf",
+      "verified": true
+     },
+     {
+      "url": "https://www.bridgetonfire.com/s/Occupancy-Smoke-Certificates.pdf",
+      "quote": "Certificate is valid for 90 days.",
+      "doc_date": "2025-11-20 (PDF creation date; includes the secondary power source label added in 2025)",
+      "via": "pdf",
+      "verified": true
+     },
+     {
+      "url": "https://nj.gov/dca/dfs/pdf/ANNUAL%20REGISTRY/THIRD%20QUARTER%20LEA%20REGISTRY%202026.pdf",
+      "quote": "Bridgeton City (Cumberland County) is the LEA for Alloway Township.",
+      "doc_date": "2026-07",
+      "via": "pdf",
+      "verified": true
+     },
+     {
+      "url": "https://www.nj.gov/dca/dfs/pdf/fire%20directory_county%20summary/fire_code_enforcement_director.pdf",
+      "quote": "Alloway Township1701 LEAID: 1701-001 Enf Auth. Fire Dept Fire Official Jack Justic Jr Phone (856) 451-0091 Addr: 181 E Commerce St Bridgeton City NJ 08302 Email justicej@cityofbridgeton.com",
+      "doc_date": "2026-05 (survey date 5/18/2026)",
+      "via": "state_directory",
+      "verified": true
+     }
+    ],
+    "confidence": "high"
+   }
+  ],
+  "notes": "Alloway Township's fire code enforcing agency is the City of Bridgeton Fire Department (Cumberland County) under a shared services agreement (registry code F; the DCA portal lists ALLOWAY TWP-001 under an 'LEA', not the State). The Bridgeton guidelines' middle tier is printed as '7 business days prior'; the Bridgeton online form uses the same wording. The state fire directory spells the fire official's name 'Jack Justic Jr' and lists his work email as justicej@cityofbridgeton.com; the Bridgeton Fire Department page spells it 'Jack Justice Jr.' The directory lists Chief John Mahala (2026) for the Alloway Twp Fire Co, which is the volunteer fire company, not the inspecting agency. Bridgeton's current checklist lists no fire extinguisher, in line with P.L.2025, c.19. The Bridgeton guidelines PDF was created November 20, 2025."
+ },
+ "other_items": [
+  {
+   "label": "Well certificate",
+   "detail": "Required with the Resale Pre-Occupancy Certificate if the home has a well.",
+   "source_url": "http://www.allowaytownship.com/downloads/Docs_Misc_Forms/PRE-OCCUPANCY%20APPLICATION.pdf"
+  },
+  {
+   "label": "Septic certification",
+   "detail": "Required with the Resale Pre-Occupancy Certificate if the home has a septic system.",
+   "source_url": "http://www.allowaytownship.com/downloads/Docs_Misc_Forms/PRE-OCCUPANCY%20APPLICATION.pdf"
+  },
+  {
+   "label": "Chimney certification",
+   "detail": "Required if the home has a wood burning fireplace or woodstove.",
+   "source_url": "http://www.allowaytownship.com/downloads/Docs_Misc_Forms/PRE-OCCUPANCY%20APPLICATION.pdf"
+  }
+ ],
+ "open_questions": [
+  "How far ahead of closing should the Pre-Occupancy application be filed, and how long is the certificate valid?",
+  "Does the Township still check for a kitchen fire extinguisher (listed on its older, undated checklist) after P.L.2025, c.19?"
+ ],
+ "verification": {
+  "fees": 5,
+  "fee_ok": 5,
+  "fee_bad": 0,
+  "fee_unchecked": 0,
+  "quotes": 13,
+  "q_ok": 13,
+  "q_bad": 0,
+  "q_unchecked": 0
+ }
+}

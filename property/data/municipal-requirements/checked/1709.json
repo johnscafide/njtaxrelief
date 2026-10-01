@@ -1,0 +1,228 @@
+{
+ "municipality_code": "1709",
+ "municipality": "Pennsville Township",
+ "county": "SALEM",
+ "checked_at": "2026-09-30",
+ "resale_co": {
+  "status": "required",
+  "name": "Continued Certificate of Occupancy (Residential Resale housing inspection)",
+  "issued_by": "Housing Officer, Construction Code Office (Department of Code Enforcement / Bureau of Housing Inspections)",
+  "lead_time": "No minimum stated. The fee must be paid in full before an inspection is scheduled; the clerk calls to set an appointment within 5 working days of payment.",
+  "valid_for": "",
+  "requirements": [
+   "Smoke alarms on every level, in each bedroom and within 10 feet outside each sleeping area (10-year sealed battery type)",
+   "Carbon monoxide alarm in the hallway within 10 feet of the bedrooms",
+   "Fire extinguisher 2A-10BC, under 10 pounds, mounted within 10 feet of the kitchen in plain sight, tagged or with a current receipt, top no higher than 5 feet",
+   "House numbers at least 4 inches and visible from the street",
+   "Handrails on stairs with 3 or more risers; guardrails with spindles no more than 4 inches apart on porches or decks 30 inches or higher",
+   "GFCI outlets within 6 feet of any water source or the breaker panel",
+   "Electric properly installed with no bare wires; heat working",
+   "Water heater working, at least 110 F, with the relief valve pipe extended to within 6 inches of the floor",
+   "Chimney certificate for fireplaces",
+   "Walls, ceilings and floors free of holes, chipped paint, cracks or stains; no rubbish inside or out",
+   "Doors and windows working with locks, screens on opening windows, one egress window in each sleeping area",
+   "Globe covers on closet and shelf lights; bathroom window or exhaust fan",
+   "Gutters, downspouts and roof sound; all plumbing working",
+   "Appliances working with an anti-tip bracket on the range; key locks on entry doors only",
+   "All utilities on at the inspection and no open construction permits"
+  ],
+  "fees": [
+   {
+    "label": "Continued Certificate of Occupancy, residential resale (initial inspection)",
+    "amount": "$50",
+    "quote": "The fee for a Continued Certificate of Occupancy is $50. The fee must be paid in full before an inspection will be scheduled.",
+    "source_url": "https://www.pennsville.org/DocumentCenter/View/472/Residential-Resale-PDF",
+    "verified": null
+   },
+   {
+    "label": "Housing Officer inspection, house for sale (ordinance)",
+    "amount": "$50.00",
+    "quote": "Inspection of apartment unit, mobile home which is $50.00 per house/unit for sale, house for rent (for occupancy)",
+    "source_url": "https://www.pennsville.org/DocumentCenter/View/255/Chapter-07-Buildings-PDF",
+    "verified": true
+   },
+   {
+    "label": "Re-inspection (office form)",
+    "amount": "$50",
+    "quote": "RE-INSPECTION FEE: $50",
+    "source_url": "https://www.pennsville.org/DocumentCenter/View/472/Residential-Resale-PDF",
+    "verified": null
+   },
+   {
+    "label": "Second re-inspection (office form)",
+    "amount": "$50",
+    "quote": "2ND RE-INSPECTION FEE: $50",
+    "source_url": "https://www.pennsville.org/DocumentCenter/View/472/Residential-Resale-PDF",
+    "verified": null
+   },
+   {
+    "label": "Second or later inspection for the same certificate (ordinance; per house or unit)",
+    "amount": "$100.00",
+    "quote": "Second or subsequent inspection $100.00 per house/unit",
+    "source_url": "https://www.pennsville.org/DocumentCenter/View/255/Chapter-07-Buildings-PDF",
+    "verified": true
+   }
+  ],
+  "how_to_apply": "Fill in the Township of Pennsville Application for Continued Certificate of Occupancy, Residential Resale, and pay in full by certified check or money order payable to \"Township of Pennsville\" (or exact cash) at the Construction Code Office, 90 N Broadway. Applications can also be filed through the Township citizen portal (Apply for a Property Inspection, which needs a portal login). Inspections are Tuesday to Thursday, 3:00 to 5:30 PM.",
+  "application_url": "https://www.pennsville.org/DocumentCenter/View/472/Residential-Resale-PDF",
+  "department_url": "https://www.pennsville.org/175/Construction-Code-Office",
+  "phone": "856-678-3089 Ext: 1150",
+  "email": "housingofficer@pvtwp.com",
+  "contact_name": "Dave Curry",
+  "contact_title": "Housing Officer",
+  "evidence": [
+   {
+    "url": "https://pennsvillenj.portal.fasttrackgov.com/",
+    "quote": "Apply for a Certificate of Continued Occupancy inspection. This inspection is required when residential property is sold or for changes in tenancy for residential rental properties.",
+    "doc_date": "2026-09-30 (page fetched)",
+    "via": "page",
+    "verified": true
+   },
+   {
+    "url": "https://www.pennsville.org/DocumentCenter/View/255/Chapter-07-Buildings-PDF",
+    "quote": "nor shall any person, firm or corporation acquiring or purchasing, in any manner, occupy any such dwelling structure or allow, abet or permit same to be occupied by any other person without first securing such certificate of occupancy.",
+    "doc_date": "Chapters updated through 2025-12-31",
+    "via": "pdf",
+    "verified": true
+   },
+   {
+    "url": "https://www.pennsville.org/DocumentCenter/View/255/Chapter-07-Buildings-PDF",
+    "quote": "Application to secure a certificate of occupancy shall be made to the Housing Officer's Office upon approved form, submitting all required information.",
+    "doc_date": "Chapters updated through 2025-12-31",
+    "via": "pdf",
+    "verified": true
+   },
+   {
+    "url": "https://www.pennsville.org/DocumentCenter/View/472/Residential-Resale-PDF",
+    "quote": "TOWNSHIP OF PENNSVILLE CONSTRUCTION CODE DEPARTMENT APPLICATION FOR CONTINUED CERTIFICATE OF OCCUPANCY RESIDENTIAL RESALE",
+    "doc_date": "undated (listed Jun 22, 2026 in the Document Center); scanned, read visually",
+    "via": "pdf",
+    "verified": null
+   },
+   {
+    "url": "https://www.pennsville.org/DocumentCenter/View/472/Residential-Resale-PDF",
+    "quote": "All fees must be paid by Certified Check or Money Order Only and made payable to the \"Township of Pennsville\", or cash exact.",
+    "doc_date": "undated; scanned, read visually",
+    "via": "pdf",
+    "verified": null
+   },
+   {
+    "url": "https://www.pennsville.org/DocumentCenter/View/472/Residential-Resale-PDF",
+    "quote": "The assigned clerk will phone you for appointment within 5 working days of receipt of payment of all fees in full. Inspections are conducted Tuesdays, Wednesdays and Thursdays from 3:00 - 5:30 PM.",
+    "doc_date": "undated; scanned, read visually",
+    "via": "pdf",
+    "verified": null
+   },
+   {
+    "url": "https://www.pennsville.org/DocumentCenter/View/481/Minimum-CO-Requirements-For-Housing-Inspection-PDF",
+    "quote": "TOWNSHIP OF PENNSVILLE MINIMUM C/O REQUIREMENTS FOR HOUSING INSPECTION",
+    "doc_date": "undated; scanned, read visually",
+    "via": "pdf",
+    "verified": null
+   },
+   {
+    "url": "https://www.pennsville.org/Directory.aspx?EID=23",
+    "quote": "Dave Curry Housing Officer Construction Code Office Email Dave Curry For questions only: 856-678-3089 Ext: 1150",
+    "doc_date": "2026-09-30 (page fetched; email from the page mailto link)",
+    "via": "page",
+    "verified": true
+   }
+  ],
+  "confidence": "high",
+  "notes": "The Township citizen portal says the Certificate of Continued Occupancy inspection is required when residential property is sold, and Chapter 7 (Sec. 7.4B-5) bars a buyer from occupying a dwelling without a certificate of occupancy. Fees: the resale form and the ordinance both give $50 for the first inspection. For later inspections the office form shows $50 for the re-inspection and $50 for the 2nd re-inspection, while the ordinance (Sec. 7.4B-9) lists \"First inspection of above (for same certificate) $50.00\" and \"Second or subsequent inspection $100.00 per house/unit\"; confirm which applies. Chapter 7 also sets a $160 fee for a construction-code certificate of continued occupancy under N.J.A.C. 5:23; that is a building-code certificate, not the resale housing inspection. The Township's \"As Is\" Document for Settlement (revised 11/14/22) lets a home be sold as-is: the buyer signs and notarizes it and must bring the home into compliance before anyone occupies it; that document says it becomes invalid 60 days from issue if the property is not purchased in that time, and lists P (856) 678-3089 ext. 143 and pvfirecode@pvtwp.com under Housing Official David Curry. No temporary certificate of occupancy is issued. Housing Officer email housingofficer@pvtwp.com is taken from the mailto link on his staff directory page; that page gives his extension as 1150 \"for questions only\". Rentals built before 1978 also need a lead-safe certificate (rental only)."
+ },
+ "fire_cert": {
+  "requirements": [
+   "Township handout asks for 10-year sealed battery smoke alarms on each level, in each bedroom and within 10 feet outside each sleeping area",
+   "Carbon monoxide alarm in the hallway within 10 feet of the bedrooms",
+   "Township handout still lists a 2A-10BC fire extinguisher (under 10 pounds) mounted within 10 feet of the kitchen, tagged or with a current receipt, top no more than 5 feet above the floor"
+  ],
+  "authorities": [
+   {
+    "name": "Pennsville Township Bureau of Fire Prevention and Inspections",
+    "type": "municipal_fire_bureau",
+    "area_served": "Entire township",
+    "lead_time": "",
+    "fees": [],
+    "how_to_apply": "Not published separately. Smoke alarm, CO alarm and extinguisher checks are part of the Township resale housing inspection (Continued Certificate of Occupancy). Ask the Construction Code Office or the Fire Administrator whether a separate smoke/CO certificate and fee apply.",
+    "application_url": "",
+    "department_url": "https://www.pennsville.org/221/Pennsville-Township-Fire-Department",
+    "phone": "856-678-3089 ext. 1144",
+    "email": "pvfirecode@pvtwp.com",
+    "contact_name": "Eric Guglielmo",
+    "contact_title": "Fire Administrator (Fire Official in the state fire directory)",
+    "evidence": [
+     {
+      "url": "https://nj.gov/dca/dfs/pdf/ANNUAL%20REGISTRY/THIRD%20QUARTER%20LEA%20REGISTRY%202026.pdf",
+      "quote": "M Pennsville Township",
+      "doc_date": "2026-07",
+      "via": "pdf",
+      "verified": true
+     },
+     {
+      "url": "https://www.pennsville.org/DocumentCenter/View/247/Chapter-14-Protection-Of-Life-And-Property-Doc-PDF",
+      "quote": "The local enforcing agency shall be the Bureau of Fire Prevention and Inspections, which is hereby created as an administrative office of the Township of Pennsville.",
+      "doc_date": "Chapters updated through 2025-12-31",
+      "via": "pdf",
+      "verified": true
+     },
+     {
+      "url": "https://www.pennsville.org/221/Pennsville-Township-Fire-Department",
+      "quote": "Fire Administrator Eric Guglielmo Email: pvfirecode@pvtwp.com Phone: 856-678-3089 ext. 1144",
+      "doc_date": "2026-09-30 (page fetched)",
+      "via": "page",
+      "verified": true
+     },
+     {
+      "url": "https://www.nj.gov/dca/dfs/pdf/fire%20directory_county%20summary/fire_code_enforcement_director.pdf",
+      "quote": "LEAID: 1708-001 Enf Auth. Municipal Fire Official Eric Guglielmo Phone (856) 678-3089 Addr: 90 N Broadway Pennsville NJ 08070 ... Email pvfireofficial@pvtwp.com ... Pennsville Twp Fire Prev",
+      "doc_date": "2026-05 (survey date 5/19/2026; directory code 1708)",
+      "via": "state_directory",
+      "verified": true
+     },
+     {
+      "url": "https://www.pennsville.org/DocumentCenter/View/481/Minimum-CO-Requirements-For-Housing-Inspection-PDF",
+      "quote": "Smoke detectors / per level, each bedroom and within 10 feet outside each sleeping area(s) 10 years battery sealed. Must follow NFPA 5:70-4.19",
+      "doc_date": "undated; scanned, read visually",
+      "via": "pdf",
+      "verified": null
+     }
+    ],
+    "confidence": "medium"
+   }
+  ],
+  "notes": "Pennsville enforces the fire code itself (LEA registry code M; Chapter 14 names the Bureau of Fire Prevention and Inspections). The state fire directory (listed there as Pennsville Township 1708) names Fire Official Eric Guglielmo, (856) 678-3089, pvfireofficial@pvtwp.com, with \"Pennsville Twp Fire Prev\" for smoke detector compliance; the Township fire page lists him as Fire Administrator with pvfirecode@pvtwp.com and ext. 1144, which is used here as the newer official source. No separate smoke/CO certificate form or fee was found: the Township resale housing inspection checks smoke alarms, CO alarms and the extinguisher, and the Chapter 14 fee schedule covers only commercial and multi-unit inspections. The Township minimum requirements handout (undated) still includes the fire extinguisher and prints the pre-2025 text of N.J.A.C. 5:70-4.19; the state removed the extinguisher from the state requirement by P.L.2025, c.19, but the Township list still asks for it."
+ },
+ "other_items": [
+  {
+   "label": "Taxes, sewer and water current",
+   "detail": "No certificate of occupancy is issued unless Township taxes, sewer and water bills are current; for a change of ownership the Housing Officer may issue a conditional certificate with taxes paid by the settlement agent at closing.",
+   "source_url": "https://www.pennsville.org/DocumentCenter/View/255/Chapter-07-Buildings-PDF"
+  },
+  {
+   "label": "No open permits or violations",
+   "detail": "Documentation is needed that there are no outstanding open building permits, housing violations or court judgments barring occupancy; the resale form office section also checks open permits.",
+   "source_url": "https://www.pennsville.org/DocumentCenter/View/255/Chapter-07-Buildings-PDF"
+  },
+  {
+   "label": "As-is sale option",
+   "detail": "An \"As Is\" Document for Settlement (revised 11/14/22) lets the buyer take the home as-is, signed and notarized; the home must meet the property maintenance code before anyone occupies it.",
+   "source_url": "https://www.pennsville.org/DocumentCenter/View/499/As-Is-Document-for-Settlement-PDF"
+  }
+ ],
+ "open_questions": [
+  "Is the second re-inspection $50 (office form) or $100 (ordinance Sec. 7.4B-9)?",
+  "Does the Bureau of Fire Prevention issue a separate smoke/CO certificate (and fee) for a 1-2 family sale, or is it covered by the $50 Continued Certificate of Occupancy inspection?",
+  "How long is the Continued Certificate of Occupancy valid? Only the As-Is document states 60 days."
+ ],
+ "verification": {
+  "fees": 5,
+  "fee_ok": 2,
+  "fee_bad": 0,
+  "fee_unchecked": 3,
+  "quotes": 13,
+  "q_ok": 8,
+  "q_bad": 0,
+  "q_unchecked": 5
+ }
+}

@@ -1,0 +1,227 @@
+{
+ "municipality_code": "1525",
+ "municipality": "Point Pleasant Borough",
+ "county": "OCEAN",
+ "checked_at": "2026-09-30",
+ "resale_co": {
+  "status": "not_required",
+  "name": "",
+  "issued_by": "",
+  "lead_time": "",
+  "valid_for": "",
+  "requirements": [],
+  "fees": [],
+  "how_to_apply": "The Borough does not require a Certificate of Occupancy for a resale. The seller only needs the state smoke alarm / carbon monoxide alarm certificate from the Ocean County Fire Marshal (see the fire certificate section).",
+  "application_url": "",
+  "department_url": "https://ptboro.com/departments/building-code-enforcement/zoning-code-enforcement/",
+  "phone": "732-892-3434 ext. 120",
+  "email": "zoningcode@ptboro.com",
+  "contact_name": "Colleen Malvasio",
+  "contact_title": "Zoning & Code Enforcement Officer",
+  "evidence": [
+   {
+    "url": "https://ptboro.com/departments/building-code-enforcement/zoning-code-enforcement/",
+    "quote": "Our Borough does not require a Certificate of Occupancy (CO) for a resale or rental of a home.",
+    "doc_date": "2026-09 (page read 2026-09-30)",
+    "via": "page",
+    "verified": true
+   },
+   {
+    "url": "https://ptboro.com/departments/building-code-enforcement/",
+    "quote": "Our Borough does not require a Certificate of Occupancy (CO) for a resale or rental of a home. No dwelling shall be rented or leased for a term less than 30 days in the Borough of Point Pleasant.",
+    "doc_date": "2026-09",
+    "via": "page",
+    "verified": true
+   },
+   {
+    "url": "https://ptboro.com/contact/municipal-directory/",
+    "quote": "Zoning & Code Enforcement Officer Colleen Malvasio zoningcode@ptboro.com 732-892-3434 ext. 120",
+    "doc_date": "2026-09",
+    "via": "page",
+    "verified": true
+   }
+  ],
+  "confidence": "high",
+  "notes": "Rentals of less than 30 days are not allowed. Pre-1978 rentals need a lead-based paint inspection and a $20 per unit lead-safe or lead-free certification filing; that is rental-only. The Zoning & Code Enforcement Dept. office line is 732-892-3205 (zoningcode@ptboro.com); the Building Dept. is 732-892-7129 (construction@ptboro.com; Construction Official Andrew Rempfer). The Borough website ptboro.com carries many injected casino spam links on its pages (the site looks compromised), but the Borough content itself reads normally. The Borough code (ecode360 PO0252) could not be opened."
+ },
+ "fire_cert": {
+  "requirements": [
+   "Smoke alarms on every level including the basement; on levels with bedrooms, within 10 feet of the bedrooms",
+   "All smoke alarms, including hardwired ones, must be under 10 years old",
+   "Homes built before 1978: at least one 10-year sealed battery smoke alarm on each level",
+   "Homes built 1978 to 1983: hardwired alarms on each level; 1984 to 1990: interconnected hardwired alarms with battery backup on each level; 1991 and later: interconnected hardwired alarms with battery backup in bedrooms and on each level",
+   "Hardwired alarms that must be replaced because of age must be replaced with hardwired alarms, not battery alarms",
+   "Carbon monoxide alarm near the sleeping areas (not needed if no fuel-burning device and no attached garage); battery-only and plug-in CO alarms should be under 5 years old, combination smoke/CO alarms under 10 years",
+   "Homes with a generator, solar panels or battery storage need a printed 'CAUTION: MULTIPLE SOURCES OF POWER' label within 18 inches of the main electrical panel and the electric meter",
+   "Homes with a monitored low-voltage fire alarm system need an NFPA 72 test report from the alarm company before closing",
+   "No fire extinguisher is required since February 3, 2025",
+   "Certificate is valid for 12 months from the inspection date"
+  ],
+  "authorities": [
+   {
+    "name": "Ocean County Fire Marshal's Office, Residential Resale & Rental Home Inspections (county agency)",
+    "type": "unknown",
+    "area_served": "Entire borough",
+    "lead_time": "Apply more than 10 business days before closing for the lowest fee",
+    "fees": [
+     {
+      "label": "Smoke/CO certificate, application received more than 10 business days before the change of occupancy",
+      "amount": "$45.00",
+      "quote": "$45.00- More than 10 business days from the time the application is received in our office, to the date of the change of occupancy.",
+      "source_url": "https://co.ocean.nj.us/OC/FireMarshal/frmSmokeDetector.aspx",
+      "verified": true
+     },
+     {
+      "label": "Smoke/CO certificate, application received 4 to 10 business days before the change of occupancy",
+      "amount": "$90.00",
+      "quote": "$90.00- 4 to 10 business days from the time the application is received in our office, to the date of the change of occupancy.",
+      "source_url": "https://co.ocean.nj.us/OC/FireMarshal/frmSmokeDetector.aspx",
+      "verified": true
+     },
+     {
+      "label": "Smoke/CO certificate, application received 3 business days or less before the change of occupancy",
+      "amount": "$161.00",
+      "quote": "$161.00- 3 business days or less from the time the application is received in our office, to the date of the change of occupancy.",
+      "source_url": "https://co.ocean.nj.us/OC/FireMarshal/frmSmokeDetector.aspx",
+      "verified": true
+     },
+     {
+      "label": "Missed appointment or no entry",
+      "amount": "$30.00",
+      "quote": "$30.00- Failure to maintain the scheduled appointment or entry to the structure will result in this fee.",
+      "source_url": "https://co.ocean.nj.us/OC/FireMarshal/frmSmokeDetector.aspx",
+      "verified": true
+     },
+     {
+      "label": "Re-inspection after the first free re-inspection, each",
+      "amount": "$30",
+      "quote": "In the event of a FAILED Inspection the first RE-INSPECTION may be conducted at no cost. Any additional RE-INSPECTIONS will be charged a fee of $30 per RE-INSPECTION there after.",
+      "source_url": "https://co.ocean.nj.us/OC/FireMarshal/frmSmokeDetector.aspx",
+      "verified": true
+     },
+     {
+      "label": "Credit card convenience fee",
+      "amount": "$6.95",
+      "quote": "**Please note there is a Credit Card fee of $6.95 and E-Check fee of $1.99.",
+      "source_url": "https://co.ocean.nj.us/OC/FireMarshal/frmSmokeDetector.aspx",
+      "verified": true
+     },
+     {
+      "label": "E-check convenience fee",
+      "amount": "$1.99",
+      "quote": "**Please note there is a Credit Card fee of $6.95 and E-Check fee of $1.99.",
+      "source_url": "https://co.ocean.nj.us/OC/FireMarshal/frmSmokeDetector.aspx",
+      "verified": true
+     },
+     {
+      "label": "Returned check processing fee",
+      "amount": "$15.00",
+      "quote": "**Please note there is a $15.00 returned check processing fee",
+      "source_url": "https://co.ocean.nj.us/OC/FireMarshal/frmSmokeDetector.aspx",
+      "verified": true
+     }
+    ],
+    "how_to_apply": "Fill out the Ocean County Fire Marshal's online application (Fill Out Application link on the Resale & Rental Home Inspections page). The office then contacts you to schedule the inspection. Do not mail payment: pay at the inspection by paper check payable to Ocean County Fire Marshal (OCFM), credit card or e-check. Cash is not accepted. Office: 179 South Main St., Manahawkin, NJ 08050.",
+    "application_url": "https://oceancounty.seamlessdocs.com/f/AppSDCO2FEComp",
+    "department_url": "https://co.ocean.nj.us/OC/FireMarshal/frmSmokeDetector.aspx",
+    "phone": "(732) 929-2088",
+    "email": "OCFMSmokeDetect@co.ocean.nj.us",
+    "contact_name": "Dennis M. Allen",
+    "contact_title": "Chief Fire Marshal (phone and email shown are the resale inspections office)",
+    "evidence": [
+     {
+      "url": "https://ptboro.com/departments/building-code-enforcement/zoning-code-enforcement/",
+      "quote": "New Jersey State Law requires a smoke detector/carbon monoxide/fire extinguisher inspection if you sell or rent your 1 or 2 family home. Please reach out to the Ocean County Fire Marshal at 732-929-2088",
+      "doc_date": "2026-09",
+      "via": "page",
+      "verified": true
+     },
+     {
+      "url": "https://co.ocean.nj.us/OC/FireMarshal/frmSmokeDetector.aspx",
+      "quote": "The Ocean County Fire Marshal's Office conducts residential Smoke Alarm/Carbon Monoxide Alarm inspections in the following municipalities only.",
+      "doc_date": "2026-09 (page read 2026-09-30)",
+      "via": "page",
+      "verified": true
+     },
+     {
+      "url": "https://co.ocean.nj.us/OC/FireMarshal/frmSmokeDetector.aspx",
+      "quote": "Point Pleasant Boro. Resales and Rentals of 1-2 family buildings",
+      "doc_date": "2026-09",
+      "via": "page",
+      "verified": true
+     },
+     {
+      "url": "https://co.ocean.nj.us/OC/FireMarshal/frmSmokeDetector.aspx",
+      "quote": "A CERTIFICATE OF SMOKE ALARM/CARBON MONOXIDE ALARM COMPLIANCE IS VALID FOR A PERIOD OF 12 MONTHS FROM THE DATE OF INSPECTION.",
+      "doc_date": "2026-09",
+      "via": "page",
+      "verified": true
+     },
+     {
+      "url": "https://co.ocean.nj.us/OC/FireMarshal/frmSmokeDetector.aspx",
+      "quote": "Residential Resale & Rental Home Inspections 179 South Main St. Manahawkin, NJ 08050 Phone: (732) 929-2088 Fax: (732) 929-2077",
+      "doc_date": "2026-09 (email from the page: OCFMSmokeDetect@co.ocean.nj.us)",
+      "via": "page",
+      "verified": true
+     },
+     {
+      "url": "https://www.co.ocean.nj.us//WebContentFiles//0299689d-3e63-4678-ad90-3b7c04b233c3.pdf",
+      "quote": "As of February 3, 2025 , portable fire extinguishers are no longer required to obtain a",
+      "doc_date": "2025-02 (UPDATED FEBRUARY 2025)",
+      "via": "pdf",
+      "verified": true
+     },
+     {
+      "url": "https://www.co.ocean.nj.us//WebContentFiles//0299689d-3e63-4678-ad90-3b7c04b233c3.pdf",
+      "quote": "Closing on a resale of a residential dwelling without a properly issued Certificate of Smoke Alarm, Carbon Monoxide Alarm and Secondary Power Source Identification (CSACMAPFEC) prior to closing subjects the seller to a minimum fine of $1000.00.",
+      "doc_date": "2025-02",
+      "via": "pdf",
+      "verified": true
+     },
+     {
+      "url": "https://nj.gov/dca/dfs/pdf/ANNUAL%20REGISTRY/THIRD%20QUARTER%20LEA%20REGISTRY%202026.pdf",
+      "quote": "C Point Pleasant Borough",
+      "doc_date": "2026-07 (as of June 30, 2026)",
+      "via": "pdf",
+      "verified": true
+     },
+     {
+      "url": "https://www.nj.gov/dca/dfs/pdf/fire%20directory_county%20summary/fire_code_enforcement_director.pdf",
+      "quote": "LEAID: 1524-001 Enf Auth. County Fire Official Dennis Allen Phone (732) 370-7360",
+      "doc_date": "survey date 5/30/2025",
+      "via": "state_directory",
+      "verified": true
+     },
+     {
+      "url": "https://www.nj.gov/dca/dfs/pdf/fire%20directory_county%20summary/fire_code_enforcement_director.pdf",
+      "quote": "Email dallen@co.ocean.nj.us",
+      "doc_date": "survey date 5/30/2025",
+      "via": "state_directory",
+      "verified": true
+     },
+     {
+      "url": "https://co.ocean.nj.us/OC/FireMarshal/frmStaff.aspx",
+      "quote": "Car 01 Chief Fire Marshal - Dennis M. Allen",
+      "doc_date": "2026-09",
+      "via": "page",
+      "verified": true
+     }
+    ],
+    "confidence": "high"
+   }
+  ],
+  "notes": "The July 2026 LEA registry lists Point Pleasant Borough as county-enforced (C), and the Ocean County Fire Marshal's page lists 'Point Pleasant Boro.' among the only towns where it does resale and rental smoke/CO inspections. The authority type list has no county option, so type is 'unknown'. The Borough's page still says 'smoke detector/carbon monoxide/fire extinguisher inspection', but the Fire Marshal's February 2025 requirements say extinguishers are no longer required. Chief Fire Marshal Dennis M. Allen is named by the DCA directory (direct line (732) 370-7360, dallen@co.ocean.nj.us) and the county staff page; the resale office phone (732) 929-2088 and email OCFMSmokeDetect@co.ocean.nj.us are the right first contact. The county staff page also lists William Hollingsworth Jr., Coordinator of Inspections (whollingsworth@co.ocean.nj.us). The Point Pleasant Fire Company #1 is the fire department, not the code office."
+ },
+ "other_items": [],
+ "open_questions": [],
+ "verification": {
+  "fees": 8,
+  "fee_ok": 8,
+  "fee_bad": 0,
+  "fee_unchecked": 0,
+  "quotes": 14,
+  "q_ok": 14,
+  "q_bad": 0,
+  "q_unchecked": 0
+ }
+}

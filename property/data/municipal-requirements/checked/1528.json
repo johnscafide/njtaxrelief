@@ -1,0 +1,246 @@
+{
+ "municipality_code": "1528",
+ "municipality": "Seaside Park Borough",
+ "county": "OCEAN",
+ "checked_at": "2026-09-30",
+ "resale_co": {
+  "status": "required",
+  "name": "Title Transfer Permit (Certificate of Occupancy on title transfer)",
+  "issued_by": "Code Enforcement Office (Zoning / Code Enforcement)",
+  "lead_time": "",
+  "valid_for": "",
+  "requirements": [
+   "Close out all open construction permits and any existing violations",
+   "Property taxes and water and sewer bills paid up to date before the inspection can take place",
+   "A fireplace chimney needs a certification of its status from a licensed company before the title transfer is approved",
+   "Working smoke alarms (10-year sealed battery, hardwired or interconnected) in every bedroom, within 10 feet of sleeping areas and on each level",
+   "Working carbon monoxide detector on every level and within 10 feet of sleeping areas",
+   "All smoke and CO detectors replaced within the last 10 years",
+   "Portable fire extinguisher mounted in an exit path: ABC rated, 2.5 to 10 lbs, not blocked or enclosed, replaced every 7 years",
+   "GFCI outlets at every water source, including washing machine, bathrooms and exterior outlets",
+   "Plumbing fixtures working with hot and cold water; heating equipment properly installed and working",
+   "Exits safe and unobstructed; no double-keyed locks",
+   "Floors, foundation, walls, ceilings, doors and windows clean and in good condition; no rodents or insects",
+   "Window screens from May 15 to October 15; bathroom exhaust fan or operable window; all utilities on",
+   "House number easily visible from the road; trash and recycling in approved lidded containers (45 gallons max)",
+   "Roof, windows, siding, decks, porches, railings (handrail for 3 or more steps), fences, driveways, sidewalks, curbs and sheds in good repair",
+   "Yard free of litter and debris; vegetation trimmed back from sidewalks and curbs"
+  ],
+  "fees": [
+   {
+    "label": "Title transfer permit, per dwelling unit (office-use fee line on the application)",
+    "amount": "$100.00",
+    "quote": "No. of Dwelling Units ___________________ @ $100.00= Total",
+    "source_url": "https://www.seasideparknj.org/Documents/Resources/Forms/2025%20TITLE%20TRANSFER.pdf",
+    "verified": true
+   }
+  ],
+  "how_to_apply": "Fill out the Title Transfer Application (property, seller, buyer, realtors and a contact for scheduling the inspection) and bring it to the Code Enforcement Office at Seaside Park Elementary School, 313 SW Central Avenue (use the 4th Avenue entrance), phone 732-250-7569. The office-use section shows $100 per dwelling unit, paid by cash or check. After inspection the permit is approved, conditionally approved (repairs within 7, 14 or 30 days, with or without a re-inspection) or denied until the deficiencies are corrected.",
+  "application_url": "https://www.seasideparknj.org/Documents/Resources/Forms/2025%20TITLE%20TRANSFER.pdf",
+  "department_url": "https://www.seasideparknj.org/departments/code_enforcement.php",
+  "phone": "732-250-7569",
+  "email": "apalmieri@seasideparknj.org",
+  "contact_name": "Alexa Palmieri",
+  "contact_title": "Code Compliance Supervisor",
+  "evidence": [
+   {
+    "url": "https://www.seasideparknj.org/Documents/Departments/Code%20Enforcement/AS-IS-Letter-2014-11-21.pdf",
+    "quote": "In addition, I also stipulate that occupancy will not take place until an inspection by the Borough of Seaside Park has been completed, and an approved Certificate of Occupancy has been issued, as required by the Borough Code.",
+    "doc_date": "2014-11-21 (file name)",
+    "via": "pdf",
+    "verified": true
+   },
+   {
+    "url": "https://www.seasideparknj.org/Documents/Resources/Forms/2025%20TITLE%20TRANSFER.pdf",
+    "quote": "The Title Transfer Permit has been DENIED. These deficiencies must be corrected before the premises will be approved for Title Transfer.",
+    "doc_date": "form dated 09/15/2015; posted as '2025 TITLE TRANSFER'",
+    "via": "pdf",
+    "verified": true
+   },
+   {
+    "url": "https://www.seasideparknj.org/Documents/Resources/Forms/2025%20TITLE%20TRANSFER.pdf",
+    "quote": "IF UNIT HAS A FIREPLACE CHIMNEY, CERTIFICATION OF STATUS BY A LICENSED COMPANY IS NECESSARY FOR APPROVAL OF TITLE TRANSFER",
+    "doc_date": "form dated 09/15/2015",
+    "via": "pdf",
+    "verified": true
+   },
+   {
+    "url": "https://www.seasideparknj.org/Documents/Departments/Code%20Enforcement/HELPFUL-HINTS-2025.pdf",
+    "quote": "All Property Taxes and Water & Sewer must be paid up to date BEFORE the inspection can take place.",
+    "doc_date": "2024-11-01",
+    "via": "pdf",
+    "verified": true
+   },
+   {
+    "url": "https://www.seasideparknj.org/departments/code_enforcement.php",
+    "quote": "Alexa Palmieri Code Compliance Supervisor 313 SW Central Avenue Seaside Park, NJ 08752 732-250-7569 apalmieri@seasideparknj.org",
+    "doc_date": "",
+    "via": "page",
+    "verified": true
+   },
+   {
+    "url": "https://www.seasideparknj.org/departments/code_enforcement.php",
+    "quote": "Theresa Russo Code Enforcement Officer code.enforcement@seasideparknj.org 732-250-7569",
+    "doc_date": "",
+    "via": "page",
+    "verified": true
+   },
+   {
+    "url": "https://www.seasideparknj.org/departments/code_enforcement.php",
+    "quote": "Location: Seaside Park Elementary School 313 SW Central Avenue Seaside Park, NJ 08752 Please Use 4th Avenue Entrance",
+    "doc_date": "",
+    "via": "page",
+    "verified": true
+   }
+  ],
+  "confidence": "medium",
+  "notes": "The Borough posts a Title Transfer Application (Code Enforcement Office) and an 'As-Is' letter for buyers stating that occupancy cannot take place until a Borough inspection is done and a Certificate of Occupancy is issued 'as required by the Borough Code'. The ordinance itself (ecode360 SE0265) could not be opened. The only fee seen is on the office-use part of the application ('@ $100.00' per dwelling unit); the form's second page is dated 09/15/2015 although the file is named '2025 TITLE TRANSFER'. The same office-use section also has a line 'Flood Fee $100 ... Flood Elevation Certificate included'; when that applies is not explained, so it is not listed as a fee. The requirement list comes from the Borough's 'Housing Inspection Helpful Hints' sheet (dated 11/1/2024), which the Code Enforcement Office uses for its housing inspections; the sheet also mentions a re-inspection fee without an amount. Other code staff: Code Enforcement Officers Theresa Russo and Mike Gromlich (code.enforcement@seasideparknj.org, 732-250-7569). Rentals are separate: every rental needs a yearly Borough rental permit (summer seasonal or annual; $100 if inspected and approved early, then $150 and $200; $50 per unit re-inspection) plus the landlord registration; that is a rental program, not a resale requirement."
+ },
+ "fire_cert": {
+  "requirements": [
+   "10-year sealed battery smoke alarms required where battery alarms are used; hardwired (A/C) alarms from original construction may not be replaced with battery alarms (Borough letter of January 15, 2022)",
+   "Smoke alarms on each level including the basement, in each bedroom, and in the hallway within 10 feet outside each bedroom",
+   "CO alarms in the immediate vicinity of sleeping areas in homes with fuel-burning devices or an attached garage",
+   "Smoke and CO detectors replaced within the last 10 years (Borough housing inspection sheet, November 2024)",
+   "Portable fire extinguisher still listed on the Borough's November 2024 inspection sheet: ABC rated, 2.5 to 10 lbs, mounted in an exit path, replaced every 7 years"
+  ],
+  "authorities": [
+   {
+    "name": "Seaside Park Code Enforcement Office (checks smoke alarms, CO alarms and extinguisher during its housing and title transfer inspections; not confirmed as the issuer of the state smoke/CO certificate)",
+    "type": "unknown",
+    "area_served": "Entire borough",
+    "lead_time": "",
+    "fees": [],
+    "how_to_apply": "Not confirmed. The Code Enforcement Office enforces the smoke and CO alarm rules during its housing inspections; call 732-250-7569 to confirm who issues the Certificate of Smoke Alarm, Carbon Monoxide Alarm compliance for a sale and whether it is covered by the title transfer fee.",
+    "application_url": "",
+    "department_url": "https://www.seasideparknj.org/departments/code_enforcement.php",
+    "phone": "732-250-7569",
+    "email": "code.enforcement@seasideparknj.org",
+    "contact_name": "Theresa Russo",
+    "contact_title": "Code Enforcement Officer",
+    "evidence": [
+     {
+      "url": "https://www.seasideparknj.org/Documents/Departments/Code%20Enforcement/Smoke-Detector-Code-Update.pdf",
+      "quote": "Updates to the code regarding battery- operated smoke alarms and carbon monoxide alarms went into effect on January 1, 2019. Many homeowners are not aware of these new life safety requirements which are now being enforced on rental and housing inspections in 2022.",
+      "doc_date": "2022-01-15",
+      "via": "pdf",
+      "verified": true
+     },
+     {
+      "url": "https://www.seasideparknj.org/Documents/Departments/Code%20Enforcement/Smoke-Detector-Code-Update.pdf",
+      "quote": "10 YEAR SEALED BATTERY- POWERED SINGLE STATION SMOKE ALARMS ARE NOW REQUIRED.",
+      "doc_date": "2022-01-15",
+      "via": "pdf",
+      "verified": true
+     },
+     {
+      "url": "https://www.seasideparknj.org/Documents/Departments/Code%20Enforcement/HELPFUL-HINTS-2025.pdf",
+      "quote": "Working smoke alarms 10-year sealed battery type or hardwired or interconnected smoke alarm system are required in every bedroom, within 10 feet of sleeping areas, as well as on each level of the structure.",
+      "doc_date": "2024-11-01",
+      "via": "pdf",
+      "verified": true
+     },
+     {
+      "url": "https://www.seasideparknj.org/departments/code_enforcement.php",
+      "quote": "Theresa Russo Code Enforcement Officer code.enforcement@seasideparknj.org 732-250-7569",
+      "doc_date": "",
+      "via": "page",
+      "verified": true
+     }
+    ],
+    "confidence": "low"
+   },
+   {
+    "name": "Ocean County Fire Marshal's Office (county fire code enforcing agency of record for Seaside Park)",
+    "type": "unknown",
+    "area_served": "Registered fire code enforcing agency for the whole borough, but its resale and rental smoke/CO inspection list does not include Seaside Park",
+    "lead_time": "",
+    "fees": [],
+    "how_to_apply": "Not confirmed for Seaside Park sales: the County's smoke/CO inspection page says it inspects only in the municipalities it lists, and Seaside Park is not on that list.",
+    "application_url": "",
+    "department_url": "https://co.ocean.nj.us/OC/FireMarshal/frmSmokeDetector.aspx",
+    "phone": "732-370-7360",
+    "email": "dallen@co.ocean.nj.us",
+    "contact_name": "Dennis M. Allen",
+    "contact_title": "Chief Fire Marshal",
+    "evidence": [
+     {
+      "url": "https://nj.gov/dca/dfs/pdf/ANNUAL%20REGISTRY/THIRD%20QUARTER%20LEA%20REGISTRY%202026.pdf",
+      "quote": "C Seaside Park Borough",
+      "doc_date": "2026-07 (as of June 30, 2026)",
+      "via": "pdf",
+      "verified": true
+     },
+     {
+      "url": "https://www.nj.gov/dca/dfs/pdf/fire%20directory_county%20summary/fire_code_enforcement_director.pdf",
+      "quote": "LEAID: 1527-001 Enf Auth. County Fire Official Dennis Allen Phone (732) 340-7360",
+      "doc_date": "2025 (survey date 8/5/2025)",
+      "via": "state_directory",
+      "verified": true
+     },
+     {
+      "url": "https://co.ocean.nj.us/OC/FireMarshal/frmSmokeDetector.aspx",
+      "quote": "The Ocean County Fire Marshal’s Office conducts residential Smoke Alarm/Carbon Monoxide Alarm inspections in the following municipalities only.",
+      "doc_date": "",
+      "via": "page",
+      "verified": true
+     },
+     {
+      "url": "https://co.ocean.nj.us/OC/FireMarshal/frmStaff.aspx",
+      "quote": "Car 01 Chief Fire Marshal, Dennis M. Allen Email: dallen@co.ocean.nj.us",
+      "doc_date": "",
+      "via": "page",
+      "verified": true
+     },
+     {
+      "url": "https://co.ocean.nj.us/OC/FireMarshal/frmContact.aspx",
+      "quote": "Ocean County Fire Marshal's Office P.O. Box 2191 Toms River, NJ 08754-2191 Phone: 732-370-7360",
+      "doc_date": "",
+      "via": "page",
+      "verified": true
+     }
+    ],
+    "confidence": "low"
+   }
+  ],
+  "notes": "Who issues the resale smoke/CO certificate in Seaside Park is not settled online. The July 2026 LEA registry lists the Ocean County Fire Marshal (C) as the fire code enforcing agency, and the state directory (Seaside Park is code 1527 there) names Chief Fire Marshal Dennis Allen with phone (732) 340-7360; the County's own contact page gives 732-370-7360, which is used here. But the County's 'Resale & Rental Home Inspections' page says it does residential smoke/CO inspections only in Barnegat Light, Bay Head, Beach Haven, Harvey Cedars, Long Beach Township, Point Pleasant Borough, Ship Bottom and South Toms River, and Seaside Park is not listed. The Borough's Code Enforcement Office enforces the smoke and CO alarm rules on its rental and housing inspections (January 2022 letter; November 2024 helpful-hints sheet), so the Borough likely handles it with the title transfer inspection, but no page says so outright. If the County does inspect, its published fees are $45 (more than 10 business days), $90 (4 to 10 days) and $161 (3 days or less). South Toms River's site notes that P.L.2025, c.19 now requires these inspections to be done by licensed fire inspectors, which may have changed local practice. The Borough sheet still lists a fire extinguisher although P.L.2025, c.19 removed it from the state requirement."
+ },
+ "other_items": [
+  {
+   "label": "Open permits and violations",
+   "detail": "Close out all construction permits and any violations before the inspection to avoid a re-inspection.",
+   "source_url": "https://www.seasideparknj.org/Documents/Departments/Code%20Enforcement/HELPFUL-HINTS-2025.pdf"
+  },
+  {
+   "label": "Taxes and water/sewer paid",
+   "detail": "All property taxes and water and sewer charges must be paid up to date before the inspection can take place.",
+   "source_url": "https://www.seasideparknj.org/Documents/Departments/Code%20Enforcement/HELPFUL-HINTS-2025.pdf"
+  },
+  {
+   "label": "Chimney certification",
+   "detail": "If the unit has a fireplace chimney, a certification of its status by a licensed company is needed for title transfer approval.",
+   "source_url": "https://www.seasideparknj.org/Documents/Resources/Forms/2025%20TITLE%20TRANSFER.pdf"
+  },
+  {
+   "label": "Flood fee / elevation certificate line on the form",
+   "detail": "The office-use section of the title transfer form lists 'Flood Fee $100' next to 'Flood Elevation Certificate included'. When it applies is not stated.",
+   "source_url": "https://www.seasideparknj.org/Documents/Resources/Forms/2025%20TITLE%20TRANSFER.pdf"
+  }
+ ],
+ "open_questions": [
+  "Who issues the resale Certificate of Smoke Alarm and CO Alarm compliance in Seaside Park (Borough Code Enforcement with the title transfer inspection, or the Ocean County Fire Marshal), and what it costs.",
+  "Whether the $100 per dwelling unit on the title transfer form is still the current fee (form page dated 09/15/2015), and the re-inspection fee amount.",
+  "What the '$100 Flood Fee' on the title transfer form is for and when it applies.",
+  "How far ahead to apply for the title transfer inspection and how long the permit is valid (the ordinance on ecode360 could not be opened)."
+ ],
+ "verification": {
+  "fees": 1,
+  "fee_ok": 1,
+  "fee_bad": 0,
+  "fee_unchecked": 0,
+  "quotes": 16,
+  "q_ok": 16,
+  "q_bad": 0,
+  "q_unchecked": 0
+ }
+}

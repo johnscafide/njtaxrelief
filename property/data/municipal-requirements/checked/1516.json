@@ -1,0 +1,220 @@
+{
+ "municipality_code": "1516",
+ "municipality": "Lavallette Borough",
+ "county": "OCEAN",
+ "checked_at": "2026-09-30",
+ "resale_co": {
+  "status": "required",
+  "name": "Transfer Certificate of Occupancy (Application for Transfer of Title / Resale Inspection)",
+  "issued_by": "Lavallette Building Department (Construction Code Official or Code Enforcement Officer)",
+  "lead_time": "",
+  "valid_for": "",
+  "requirements": [
+   "General condition of the lot and the outside of the house",
+   "Porches, decks and stairs: handrails on stairs with 4 or more risers; guardrails on open sides more than 30 inches above grade, with openings under 4 inches and no horizontal rails",
+   "Smoke alarms within 10 feet of every bedroom and at least one on each level, including basements (battery alarms allowed)",
+   "Acceptable electrical and plumbing systems",
+   "Heating equipment properly vented",
+   "Relief valves on water heaters and boilers, piped downward to within 6 inches of the floor, full size, no plastic pipe",
+   "Approved separation between an attached garage and the living area, with solid wood or metal doors",
+   "General condition of the inside of the house",
+   "House numbers on the house, visible from the street, 3 inches high",
+   "Seller or agent signs a statement that the water heater and heating system are safe, and that the fireplace damper and flue meet code",
+   "Chimney caps on all fireplaces",
+   "Visual inspection only; not a full home inspection"
+  ],
+  "fees": [
+   {
+    "label": "Inspection fee, first unit (paid when the form is submitted)",
+    "amount": "$100.00",
+    "quote": "INSPECTION FEE: $ 100.00",
+    "source_url": "https://www.lavallette.org/forms/zoning/ZoningTitleTransfer.pdf",
+    "verified": true
+   },
+   {
+    "label": "Each additional unit",
+    "amount": "$100.00",
+    "quote": "$ 100.00 EACH ADDITIONAL UNIT",
+    "source_url": "https://www.lavallette.org/forms/zoning/ZoningTitleTransfer.pdf",
+    "verified": true
+   }
+  ],
+  "how_to_apply": "Download the Application for Transfer of Title from the Borough forms page, fill in owner, agent, buyer, sale price and number of occupants, sign the consent to inspection and the heating and fireplace certifications, and submit it with a check payable to the Borough of Lavallette. The fee is due when the form is submitted. Building Department, Municipal Building second floor, 1306 Grand Central Avenue, Lavallette, NJ 08735; 732-793-5105; open 8 AM to 3 PM weekdays.",
+  "application_url": "https://www.lavallette.org/forms/zoning/ZoningTitleTransfer.pdf",
+  "department_url": "https://www.lavallette.org/building.html",
+  "phone": "732-793-5105",
+  "email": "",
+  "contact_name": "Tom Brihn",
+  "contact_title": "Construction Official and Zoning Officer",
+  "evidence": [
+   {
+    "url": "https://ecode360.com/6676186",
+    "quote": "No residential property shall be sold and title transferred until the owner of the property to be sold obtains a transfer certificate of occupancy signed by the Construction Code Official or Code Enforcement Officer of the Borough of Lavallette demonstrating that the property complies as to current smoke and carbon monoxide detector requirements and all applicable zoning and property maintenance laws of this Borough",
+    "doc_date": "",
+    "via": "search_snippet",
+    "verified": null
+   },
+   {
+    "url": "https://www.lavallette.org/forms/zoning/ZoningTitleTransfer.pdf",
+    "quote": "BOROUGH OF LAVALLETTE APPLICATION FOR TRANSFER OF TITLE CHAPTER 17 OF THE BOROUGH CODE",
+    "doc_date": "undated (current form on Borough site, 2026-09)",
+    "via": "pdf",
+    "verified": true
+   },
+   {
+    "url": "https://www.lavallette.org/forms/zoning/ZoningTitleTransfer.pdf",
+    "quote": "CHECKS PAYABLE TO: BOROUGH OF LAVALLETTE FEE PAYABLE UPON SUBMISSION OF THIS FORM",
+    "doc_date": "undated",
+    "via": "pdf",
+    "verified": true
+   },
+   {
+    "url": "https://www.lavallette.org/forms/zoning/ZoningTitleTransfer.pdf",
+    "quote": "RESALE INSPECTION REQUIREMENTS",
+    "doc_date": "undated",
+    "via": "pdf",
+    "verified": true
+   },
+   {
+    "url": "https://www.lavallette.org/forms/zoning/ZoningTitleTransfer.pdf",
+    "quote": "INSPECTION BY BUILDING OFFICIAL CONSISTS OF A VISUAL INSPECTION ONLY.",
+    "doc_date": "undated",
+    "via": "pdf",
+    "verified": true
+   },
+   {
+    "url": "https://www.lavallette.org/forms.html",
+    "quote": "Application for Transfer of Title",
+    "doc_date": "2026-09 (page as fetched)",
+    "via": "page",
+    "verified": true
+   },
+   {
+    "url": "https://www.lavallette.org/building.html",
+    "quote": "Tom Brihn, Construction Official",
+    "doc_date": "2026-09 (page as fetched)",
+    "via": "page",
+    "verified": true
+   },
+   {
+    "url": "https://www.lavallette.org/building.html",
+    "quote": "Phone 732-793-5105",
+    "doc_date": "2026-09 (page as fetched)",
+    "via": "page",
+    "verified": true
+   },
+   {
+    "url": "https://www.lavallette.org/building.html",
+    "quote": "All inspections are done through the Lavallette Building Department.",
+    "doc_date": "2026-09 (page as fetched)",
+    "via": "page",
+    "verified": true
+   }
+  ],
+  "confidence": "high",
+  "notes": "The ordinance wording comes from an ecode360 search result for Lavallette's code (ecode360 cannot be opened); the search result also described the fee as $100 for one unit and $100 per additional unit, which matches the Borough's current Transfer of Title form. The form cites both Chapter 17 and Chapter 21 of the Borough Code. No email for the Building Department is published on the Borough pages. Lead time and how long the certificate is valid are not stated. Rentals: landlords file a Landlord/Business Owner Registration with proof of liability insurance ($50 filing fee); that is a rental rule, not a sale rule. Code Enforcement Officials are Frank Poerio and Joe Pepe (732-793-5105 x410 after 4 pm)."
+ },
+ "fire_cert": {
+  "requirements": [
+   "Smoke alarms within 10 feet of every bedroom and at least one on each level, including basements (checked in the Borough transfer inspection)",
+   "Carbon monoxide alarm compliance is part of the transfer certificate under the Borough ordinance",
+   "The Borough form still prints the old N.J.A.C. 5:70-4.19 portable fire extinguisher rule (2.5 to 10 lb ABC, within 10 feet of the kitchen, mounted with the top no more than 5 feet up); the form is undated, and P.L.2025, c.19 has since removed the extinguisher from the state requirement"
+  ],
+  "authorities": [
+   {
+    "name": "Lavallette Building Department (smoke and CO compliance checked in the Borough transfer certificate of occupancy)",
+    "type": "municipal_fire_bureau",
+    "area_served": "Entire borough",
+    "lead_time": "",
+    "fees": [
+     {
+      "label": "Transfer of Title inspection (same single inspection as the town certificate; not charged twice)",
+      "amount": "$100.00",
+      "quote": "INSPECTION FEE: $ 100.00",
+      "source_url": "https://www.lavallette.org/forms/zoning/ZoningTitleTransfer.pdf",
+      "verified": true
+     }
+    ],
+    "how_to_apply": "Apply for the Transfer of Title inspection with the Building Department (see the town certificate). Its checklist covers smoke alarms, and the Borough ordinance says the transfer certificate shows compliance with smoke and CO alarm requirements.",
+    "application_url": "https://www.lavallette.org/forms/zoning/ZoningTitleTransfer.pdf",
+    "department_url": "https://www.lavallette.org/building.html",
+    "phone": "732-793-5105",
+    "email": "",
+    "contact_name": "Tom Brihn",
+    "contact_title": "Construction Official",
+    "evidence": [
+     {
+      "url": "https://ecode360.com/6676186",
+      "quote": "demonstrating that the property complies as to current smoke and carbon monoxide detector requirements",
+      "doc_date": "",
+      "via": "search_snippet",
+      "verified": null
+     },
+     {
+      "url": "https://www.lavallette.org/forms/zoning/ZoningTitleTransfer.pdf",
+      "quote": "Smoke detectors required within 10' of any bedroom: minimum one detector each floor level (including basements) and can be battery operated (Minimum Requirements).",
+      "doc_date": "undated",
+      "via": "pdf",
+      "verified": true
+     },
+     {
+      "url": "https://nj.gov/dca/dfs/pdf/ANNUAL%20REGISTRY/THIRD%20QUARTER%20LEA%20REGISTRY%202026.pdf",
+      "quote": "S Lavallette Borough",
+      "doc_date": "2026-07 (as of June 30, 2026)",
+      "via": "pdf",
+      "verified": true
+     },
+     {
+      "url": "https://www.nj.gov/dca/dfs/pdf/fire%20directory_county%20summary/state_towns%207_17_26.pdf",
+      "quote": "LAVALLETTE 1515",
+      "doc_date": "2026-07-17 (listed without the SC 'Smoke Certs' flag)",
+      "via": "pdf",
+      "verified": true
+     },
+     {
+      "url": "https://www.nj.gov/dca/dfs/pdf/fire%20directory_county%20summary/fire_code_enforcement_director.pdf",
+      "quote": "LEAID: 1515-999 Enf Auth. State Fire Official Louis Kilmer Phone (609)633-6132",
+      "doc_date": "2026-07-22 (survey date; directory code 1515 = Lavallette)",
+      "via": "state_directory",
+      "verified": true
+     },
+     {
+      "url": "https://www.lavallette.org/building.html",
+      "quote": "Tom Brihn, Construction Official",
+      "doc_date": "2026-09 (page as fetched)",
+      "via": "page",
+      "verified": true
+     }
+    ],
+    "confidence": "medium"
+   }
+  ],
+  "notes": "The NJ DCA Division of Fire Safety is Lavallette's fire code enforcing agency (LEA registry code S; directory Fire Official Louis Kilmer, (609)633-6132, whose Smoke Detector Compliance block also names the Division). But the DCA state-towns list (revised 7/17/2026) shows Lavallette without the 'SC' flag, meaning the state does not issue smoke certificates here, and the Borough ordinance makes smoke and CO compliance part of its transfer certificate of occupancy. Under N.J.A.C. 5:70-2.3 a municipal resale inspection can stand in for the separate state certificate. The Building Department also lists a Fire Inspector, James Terry Moore (Wednesdays 12 to 3), for construction fire inspections. Confirm with the Building Department that no separate DCA certificate is needed."
+ },
+ "other_items": [
+  {
+   "label": "Seller or agent certification of heating, hot water and fireplace",
+   "detail": "The owner or agent signs that the hot water and heating system is safe and that the fireplace damper and flue meet code.",
+   "source_url": "https://www.lavallette.org/forms/zoning/ZoningTitleTransfer.pdf"
+  },
+  {
+   "label": "Tax Office confirmation",
+   "detail": "The form has a Tax Collector sign-off on the number of structures and use.",
+   "source_url": "https://www.lavallette.org/forms/zoning/ZoningTitleTransfer.pdf"
+  }
+ ],
+ "open_questions": [
+  "Whether a separate DCA smoke/CO certificate is ever needed in Lavallette, or whether the Borough transfer certificate covers it in all cases.",
+  "Lead time, how long the transfer certificate is valid, and any reinspection fee (none printed on the form)."
+ ],
+ "verification": {
+  "fees": 3,
+  "fee_ok": 3,
+  "fee_bad": 0,
+  "fee_unchecked": 0,
+  "quotes": 15,
+  "q_ok": 13,
+  "q_bad": 0,
+  "q_unchecked": 2
+ }
+}

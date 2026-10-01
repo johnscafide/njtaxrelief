@@ -1,0 +1,230 @@
+{
+ "municipality_code": "0607",
+ "municipality": "Hopewell Township",
+ "county": "CUMBERLAND",
+ "checked_at": "2026-09-30",
+ "resale_co": {
+  "status": "not_required",
+  "name": "",
+  "issued_by": "",
+  "lead_time": "",
+  "valid_for": "",
+  "requirements": [],
+  "fees": [],
+  "how_to_apply": "No Township Certificate of Occupancy is needed for a sale since January 1, 2026. The seller still needs the smoke / CO / 911 house numbering inspection from the City of Bridgeton Fire Department (see fire section) and County Health Department water and septic certifications, all at least 10 days before closing.",
+  "application_url": "",
+  "department_url": "https://hopewelltwp-nj.com/government/departments/housing-code-enforcement/",
+  "phone": "(856) 455-1230 x- 117",
+  "email": "zoninghousing@hopewelltwp-nj.com",
+  "contact_name": "Dave Elwell",
+  "contact_title": "Housing, Code Enforcement and Property Maintenance",
+  "evidence": [
+   {
+    "url": "https://hopewelltwp-nj.com/buying-or-selling-your-home-in-hopewell/",
+    "quote": "Please be advised that, effective January 1, 2026 , Hopewell Township, Cumberland County will no longer require local Certificate of Occupancy (CO) or Smoke Certification inspections in connection with the sale of residential properties.",
+    "doc_date": "2026-01-01 (effective date; page fetched 2026-09-30)",
+    "via": "page",
+    "verified": true
+   },
+   {
+    "url": "https://hopewelltwp-nj.com/buying-or-selling-your-home-in-hopewell/",
+    "quote": "Notwithstanding the above, compliance inspections for smoke detectors, carbon monoxide (CO) detectors, and 911 house numbering remain mandatory and must be completed satisfactorily prior to the closing of title .",
+    "doc_date": "2026-01-01",
+    "via": "page",
+    "verified": true
+   },
+   {
+    "url": "https://hopewelltwp-nj.com/government/departments/housing-code-enforcement/",
+    "quote": "Notwithstanding the above, certifications for drinking water quality and septic system functionality remain mandatory and must be completed to the satisfaction of the Cumberland County Health Department prior to the closing of title .",
+    "doc_date": "2026-09-30",
+    "via": "page",
+    "verified": true
+   },
+   {
+    "url": "https://hopewelltwp-nj.com/government/departments/housing-code-enforcement/",
+    "quote": "Dave Elwell Housing Code Enforcement Property Maintenance zoninghousing@hopewelltwp-nj.com (856) 455-1230 x- 117",
+    "doc_date": "2026-09-30",
+    "via": "page",
+    "verified": true
+   }
+  ],
+  "confidence": "high",
+  "notes": "Hopewell Township's 'Buying or Selling Your Home in Hopewell' notice and its Housing, Code Enforcement and Property Maintenance page both say that from January 1, 2026 the Township no longer requires a local Certificate of Occupancy or smoke certification inspection for residential sales. Smoke, CO and 911 house numbering inspections are still mandatory before closing and are now done by the City of Bridgeton Fire Department. Water quality and septic certifications from the Cumberland County Health Department are also still required, with records submitted at least 10 days before closing. Rentals remain under the Township's landlord registration and inspection rules (Ordinance 15-10), and vacant and foreclosed homes must be registered (Ordinance 2024-13); those are not resale items."
+ },
+ "fire_cert": {
+  "requirements": [
+   "Hopewell adds a 911 house numbering check to the Bridgeton smoke/CO inspection; inspections must be scheduled and passed at least 10 days before the closing date",
+   "Smoke alarms (UL listed) on every level; battery-only alarms must be the 10-year sealed battery type, and hardwired alarms cannot be replaced with battery alarms",
+   "Basement smoke alarm at the bottom of the stairwell, on the ceiling (not between joists)",
+   "A 10-year sealed smoke alarm in every bedroom",
+   "Smoke alarms and CO alarms must be less than 10 years old and working",
+   "Carbon monoxide alarm in the hallway within 10 feet of all bedrooms",
+   "House numbers at least 4 inches high, contrasting color, permanently fixed and visible from the street",
+   "Homes with solar panels, a backup generator or battery storage need a permanent printed 'Caution: Multiple Sources of Power' label at the main electrical panel and the electric meter",
+   "If there is a fire alarm system, a report from the alarm company is required (per the online application form)"
+  ],
+  "authorities": [
+   {
+    "name": "City of Bridgeton Fire Department, Bureau of Fire Prevention",
+    "type": "municipal_fire_bureau",
+    "area_served": "Entire township (City of Bridgeton Fire Department under a shared service)",
+    "lead_time": "Submit the request 2 to 3 weeks before settlement; the lowest fee applies when the request is received 10 or more business days before settlement.",
+    "fees": [
+     {
+      "label": "Smoke/CO certificate, 1-2 family, request received 10 or more business days before settlement",
+      "amount": "$45.00",
+      "quote": "Requests received 10 business days or more prior to settlement date or change of occupant $45.00",
+      "source_url": "https://static1.squarespace.com/static/51cc4632e4b06e55251db119/t/691f23865714647f5f7c666a/1763648390990/Occupancy+%26+Smoke+Certificates.pdf",
+      "verified": true
+     },
+     {
+      "label": "Smoke/CO certificate, 1-2 family, request received 7 business days before settlement (source wording)",
+      "amount": "$90.00",
+      "quote": "Requests received 7 business days prior to settlement date or change of occupant $90.00",
+      "source_url": "https://static1.squarespace.com/static/51cc4632e4b06e55251db119/t/691f23865714647f5f7c666a/1763648390990/Occupancy+%26+Smoke+Certificates.pdf",
+      "verified": true
+     },
+     {
+      "label": "Smoke/CO certificate, 1-2 family, request received fewer than 4 business days before settlement",
+      "amount": "$161.00",
+      "quote": "Requests received fewer than 4 business days prior to settlement date or change of occupant $161.00",
+      "source_url": "https://static1.squarespace.com/static/51cc4632e4b06e55251db119/t/691f23865714647f5f7c666a/1763648390990/Occupancy+%26+Smoke+Certificates.pdf",
+      "verified": true
+     }
+    ],
+    "how_to_apply": "Fill out the online 'CO and Smoke Certification Application' (Google Form) linked from the Bridgeton Fire Department's Uniform Fire Code page, picking Hopewell Township as the municipality. Payment is due at the time of the inspection by check or money order payable to the City of Bridgeton Fire Department (the form says an online payment link will be on the invoice). Re-inspection for a failed or no-show inspection costs the same as the first inspection. The certificate is emailed to the address given and is valid for 90 days. Questions: firedepartment@cityofbridgeton.com or 856-451-0090 / 856-451-0091.",
+    "application_url": "https://forms.gle/oWLh33S1kuggYuRQ8",
+    "department_url": "http://www.bridgetonfire.com/uniform-fire-code",
+    "phone": "856-451-0091",
+    "email": "justicej@cityofbridgeton.com",
+    "contact_name": "Jack Justice Jr.",
+    "contact_title": "Fire Official and Chief of Department",
+    "evidence": [
+     {
+      "url": "http://www.bridgetonfire.com/uniform-fire-code",
+      "quote": "The City of Bridgeton Fire Department is the local enforcing agency who is responsible for the enforcement of the Uniform Fire Safety Act within the City of Bridgeton, Hopewell Township, Greenwich Township, Stow Creek Township, Shiloh Borough, Fairfield Township, Downe Township, and Alloway Township.",
+      "doc_date": "2026-09-30 (page fetched)",
+      "via": "page",
+      "verified": true
+     },
+     {
+      "url": "https://static1.squarespace.com/static/51cc4632e4b06e55251db119/t/691f23865714647f5f7c666a/1763648390990/Occupancy+%26+Smoke+Certificates.pdf",
+      "quote": "Residential, Resale and New Occupant requirements for one- & two-family dwellings. All requests must be submitted 2-3 weeks before the settlement date via the form on bridgetonfire.com.",
+      "doc_date": "2025-11-20 (PDF created)",
+      "via": "pdf",
+      "verified": true
+     },
+     {
+      "url": "https://static1.squarespace.com/static/51cc4632e4b06e55251db119/t/691f23865714647f5f7c666a/1763648390990/Occupancy+%26+Smoke+Certificates.pdf",
+      "quote": "Payment is due at the time of the inspection via check or money order made payable to The City of Bridgeton Fire Department.",
+      "doc_date": "2025-11-20",
+      "via": "pdf",
+      "verified": true
+     },
+     {
+      "url": "https://static1.squarespace.com/static/51cc4632e4b06e55251db119/t/691f23865714647f5f7c666a/1763648390990/Occupancy+%26+Smoke+Certificates.pdf",
+      "quote": "*Re-inspection for failed or no-show inspections shall be the same fee scheduled as initial inspection. * Certificate is valid for 90 days.",
+      "doc_date": "2025-11-20",
+      "via": "pdf",
+      "verified": true
+     },
+     {
+      "url": "https://docs.google.com/forms/d/e/1FAIpQLSd9PvQCoB-cH5v1UqIaPvFMeDzejV1zzNEnuFMw0yH7LAaFng/viewform",
+      "quote": "What municipality is the property located in? * Choose Alloway Township (Salem County) Bridgeton City Downe Township Fairfield Township Greenwich Township Hopewell Township Shiloh Borough Stow Creek Township",
+      "doc_date": "2026-09-30 (form fetched)",
+      "via": "page",
+      "verified": true
+     },
+     {
+      "url": "https://docs.google.com/forms/d/e/1FAIpQLSd9PvQCoB-cH5v1UqIaPvFMeDzejV1zzNEnuFMw0yH7LAaFng/viewform",
+      "quote": "Application for Certificate of Smoke Detector and Carbon Monoxide Alarm Compliance",
+      "doc_date": "2026-09-30 (form fetched)",
+      "via": "page",
+      "verified": true
+     },
+     {
+      "url": "http://www.bridgetonfire.com/uniform-fire-code",
+      "quote": "Fire Official Chief Jack Justice Jr.",
+      "doc_date": "2026-09-30",
+      "via": "page",
+      "verified": true
+     },
+     {
+      "url": "http://www.bridgetonfire.com/uniform-fire-code",
+      "quote": "if you need to contact them utilize their email or contact the Bureau of Fire Prevention at (856) 451-0091. The office is staffed Monday- Friday from 8:00am to 4:00pm.",
+      "doc_date": "2026-09-30",
+      "via": "page",
+      "verified": true
+     },
+     {
+      "url": "http://www.bridgetonfire.com/uniform-fire-code",
+      "quote": "Please email completed forms to firedepartment@cityofbridgeton.com",
+      "doc_date": "2026-09-30",
+      "via": "page",
+      "verified": true
+     },
+     {
+      "url": "https://www.nj.gov/dca/dfs/pdf/fire%20directory_county%20summary/fire_code_enforcement_director.pdf",
+      "quote": "Email justicej@cityofbridgeton.com",
+      "doc_date": "2026 (directory)",
+      "via": "state_directory",
+      "verified": true
+     },
+     {
+      "url": "https://hopewelltwp-nj.com/buying-or-selling-your-home-in-hopewell/",
+      "quote": "Effective January 1, 2026 , these required inspections will be administered by the City of Bridgeton Fire Department Fire Marshall's Office . All inspections must be scheduled and successfully completed no less than 10 days prior to the anticipated closing date .",
+      "doc_date": "2026-01-01",
+      "via": "page",
+      "verified": true
+     },
+     {
+      "url": "https://nj.gov/dca/dfs/pdf/ANNUAL%20REGISTRY/THIRD%20QUARTER%20LEA%20REGISTRY%202026.pdf",
+      "quote": "F Hopewell Township",
+      "doc_date": "2026-07 (registry as of June 30, 2026)",
+      "via": "pdf",
+      "verified": true
+     },
+     {
+      "url": "https://nj.gov/dca/dfs/pdf/ANNUAL%20REGISTRY/THIRD%20QUARTER%20LEA%20REGISTRY%202026.pdf",
+      "quote": "Bridgeton City is the LEA for Downe, Fairfield, Greenwich, Hopewell Twp, Stowe Creek Township and Shiloh Borough.",
+      "doc_date": "2026-07",
+      "via": "pdf",
+      "verified": true
+     },
+     {
+      "url": "https://www.nj.gov/dca/dfs/pdf/fire%20directory_county%20summary/fire_code_enforcement_director.pdf",
+      "quote": "LEAID: 0607-001 Enf Auth. Fire Dept Fire Official Jack Justice, Jr. Phone (856) 451-0091 Addr: 181 E Commerce St Bridgeton City NJ 08302 ... Email firedepartment@cityofbridgeton.com ... SSA with Bridgeton City",
+      "doc_date": "2026-04 (survey date 4/30/2026)",
+      "via": "state_directory",
+      "verified": true
+     }
+    ],
+    "confidence": "high"
+   }
+  ],
+  "notes": "Since January 1, 2026 the City of Bridgeton Fire Department's Fire Marshal's Office runs the resale smoke / CO (and 911 house numbering) inspections for Hopewell Township; the Township says they must be passed at least 10 days before closing. The Bridgeton online application lists Hopewell Township. Fees, lead time and the 90-day validity come from the Bridgeton Bureau's guideline sheet (created November 20, 2025). The Hopewell / Stow Creek Fire Department (751 Roadstown Road) is the volunteer fire company and does not issue the certificate."
+ },
+ "other_items": [
+  {
+   "label": "Water and septic certifications",
+   "detail": "Drinking water quality and septic certifications from the Cumberland County Health Department are required before closing; records must reach the Health Department at least 10 days before closing.",
+   "source_url": "https://hopewelltwp-nj.com/government/departments/housing-code-enforcement/"
+  },
+  {
+   "label": "911 house numbering",
+   "detail": "Checked with the smoke/CO inspection before closing.",
+   "source_url": "https://hopewelltwp-nj.com/buying-or-selling-your-home-in-hopewell/"
+  }
+ ],
+ "open_questions": [],
+ "verification": {
+  "fees": 3,
+  "fee_ok": 3,
+  "fee_bad": 0,
+  "fee_unchecked": 0,
+  "quotes": 18,
+  "q_ok": 18,
+  "q_bad": 0,
+  "q_unchecked": 0
+ }
+}

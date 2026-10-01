@@ -1,0 +1,211 @@
+{
+ "municipality_code": "1507",
+ "municipality": "Brick Township",
+ "county": "OCEAN",
+ "checked_at": "2026-09-30",
+ "resale_co": {
+  "status": "not_required",
+  "name": "",
+  "issued_by": "",
+  "lead_time": "",
+  "valid_for": "",
+  "requirements": [],
+  "fees": [],
+  "how_to_apply": "No Township resale Certificate of Occupancy or resale inspection is required for a sale. The seller still needs the smoke alarm, carbon monoxide alarm and secondary power source certificate from the Brick Township Bureau of Fire Safety (732-458-4100).",
+  "application_url": "",
+  "department_url": "https://www.bricknj.gov/how_do_i/faq.php",
+  "phone": "732-262-1033",
+  "email": "codeenforcement@twp.brick.nj.us",
+  "contact_name": "",
+  "contact_title": "Code Enforcement Office (no named officer published)",
+  "evidence": [
+   {
+    "url": "https://www.bricknj.gov/how_do_i/faq.php",
+    "quote": "The Township of Brick does not require a Certificate of Occupancy (CO) for resale of a property.  You are however required to contact the Bureau of Fire Safety at (732) 458-4100 for the Certificate of Smoke Detector, Carbon Monoxide Detector, and Fire Extinguisher Compliance.",
+    "doc_date": "2026-09-30 (page fetched)",
+    "via": "page",
+    "verified": true
+   },
+   {
+    "url": "https://www.bricknj.gov/how_do_i/faq.php",
+    "quote": "No, The Township does not require a C/O inspection. However, the Bureau of Fire Safety does require a fire inspection. Please contact the Bureau at 732-458-4100",
+    "doc_date": "2026-09-30",
+    "via": "page",
+    "verified": true
+   },
+   {
+    "url": "https://www.bricknj.gov/departments/code_enforcement/index.php",
+    "quote": "To report a potential code violation, please call 732-262-1033 or send an email.",
+    "doc_date": "2026-09-30 (email link codeenforcement@twp.brick.nj.us)",
+    "via": "page",
+    "verified": true
+   },
+   {
+    "url": "https://www.bricknj.gov/departments/code_enforcement/index.php",
+    "quote": "The Township of Brick requires owners to register all rental properties and make application for a Rental Certificate of Occupancy. Inspections are performed by the Code Enforcement Officers prior to tenant occupancy.",
+    "doc_date": "2026-09-30",
+    "via": "page",
+    "verified": true
+   }
+  ],
+  "confidence": "high",
+  "notes": "Brick's official FAQ answers 'Do I need a Certificate of Occupancy to sell my home?' and 'Is a Certificate of Occupancy required for the resale of a residential home?' with no: the Township does not require a resale C/O inspection, only the Bureau of Fire Safety inspection. Rentals are different: landlords must register and get a Rental Certificate of Occupancy for every new tenant ($100.00 application fee per the FAQ), plus a yearly rental inspection ($100, $50 reinspection). The FAQ still calls the fire certificate the 'Certificate of Smoke Detector, Carbon Monoxide Detector, and Fire Extinguisher Compliance'; the Bureau's September 2026 requirements no longer list an extinguisher. The leads file website (bricktownship.net) now redirects to bricknj.gov."
+ },
+ "fire_cert": {
+  "requirements": [
+   "Smoke alarms on every level including the basement; on bedroom levels within 21 feet of the bedrooms (per the Bureau's September 2026 sheet)",
+   "All smoke alarms, including hardwired, must be under 10 years old",
+   "Homes built before 1978: at least one 10-year sealed battery smoke alarm on each level; 1978 to 1983 electric alarms on each level; 1984 to 1990 interconnected electric alarms with battery backup on each level; 1991 and later also in bedrooms",
+   "Hardwired alarms that are replaced must be replaced with hardwired alarms, not battery alarms",
+   "Carbon monoxide alarms on each level with sleeping areas, near the bedrooms; battery and plug-in CO alarms under 5 years old, combination smoke/CO alarms under 10 years old",
+   "Homes with a generator, solar panels or battery storage need a printed CAUTION: MULTIPLE SOURCES OF POWER label (ANSI Z535.4) within 18 inches of the main electrical panel and the electric meter",
+   "A monitored low-voltage fire alarm system still needs the inspection plus an NFPA 72 test report sent to the Bureau before closing",
+   "Ceiling mount preferred; wall mounts 4 to 12 inches from the ceiling, 4 inches from corners and 3 feet from air registers; not in unfinished attics, stairwells, top of basement stairs or kitchens"
+  ],
+  "authorities": [
+   {
+    "name": "Brick Township Bureau of Fire Safety (Brick Township Fire Districts 1, 2 and 3)",
+    "type": "fire_district",
+    "area_served": "Entire township: the Bureau is the fire code enforcing agency for all three Brick fire districts (Districts 1, 2 and 3)",
+    "lead_time": "Call to schedule 10 or more business days before the date you contact the Bureau for the lowest fee",
+    "fees": [
+     {
+      "label": "Smoke alarm, carbon monoxide alarm and secondary power source certificate, scheduled inspection day (10 or more business days from the contact date)",
+      "amount": "$45.00",
+      "quote": "The fee for an inspection and issuance of a certificate will be $45.00 on a scheduled inspection day (scheduled days are 10 business days or more from the contact date)",
+      "source_url": "https://www.brickfire.org/home-resale-detector-inspections",
+      "verified": true
+     },
+     {
+      "label": "Certificate, non-scheduled appointment 5 to 9 business days from the contact date",
+      "amount": "$90.00",
+      "quote": "$90.00 for a non-scheduled smoke alarm inspection appointment more than 4 business days but less than 10 business days (5 to 9 business days) from the contact date",
+      "source_url": "https://www.brickfire.org/home-resale-detector-inspections",
+      "verified": true
+     },
+     {
+      "label": "Certificate, non-scheduled appointment 1 to 4 business days from the contact date",
+      "amount": "$161.00",
+      "quote": "$161.00 for a non-scheduled smoke alarm inspection appointment less than 5 business days (1 to 4 business days) from the Bureau contact date.",
+      "source_url": "https://www.brickfire.org/home-resale-detector-inspections",
+      "verified": true
+     },
+     {
+      "label": "Re-inspection, missed appointment or no entry",
+      "amount": "$30.00",
+      "quote": "Any reinspection required for failure to have properly installed or operating alarms in accordance with the code will be subject to a reinspection fee of an additional $30.00. This fee will also be charged for failure to maintain the scheduled appointment or entry to the structure.",
+      "source_url": "https://www.brickfire.org/home-resale-detector-inspections",
+      "verified": true
+     }
+    ],
+    "how_to_apply": "There is no form: call the Bureau at 732-458-4100 (Monday to Friday, 8 a.m. to 4 p.m.) or email bureau@brickfire.org to be put on the inspection schedule. Have ready the contact name and daytime phone, property address, block and lot, owner's name, year built, renovations or additions, number of stories, basement (finished or not) and whether there is a secondary power source. Credit card payment is available by calling the office (a processing fee may apply).",
+    "application_url": "",
+    "department_url": "https://www.brickfire.org/home-resale-detector-inspections",
+    "phone": "732-458-4100",
+    "email": "bureau@brickfire.org",
+    "contact_name": "Kevin C. Batzel",
+    "contact_title": "Bureau Chief, Brick Bureau of Fire Safety",
+    "evidence": [
+     {
+      "url": "https://www.brickfire.org/home-resale-detector-inspections",
+      "quote": "Ordinance fee change effective 8/12/2026.",
+      "doc_date": "2026-09 (page UPDATED SEPTEMBER 2026)",
+      "via": "page",
+      "verified": true
+     },
+     {
+      "url": "https://www.brickfire.org/home-resale-detector-inspections",
+      "quote": "closing on a resale of a residential dwelling without a properly issued Certificate of Certificate of Smoke Alarm, Carbon Monoxide Alarm and Secondary Power Source Identification prior to closing subjects the seller to a minimum fine of $1000.00.",
+      "doc_date": "2026-09",
+      "via": "page",
+      "verified": true
+     },
+     {
+      "url": "https://www.brickfire.org/_files/ugd/d315f6_0d7bfccc453e43509b257edd7503b4da.pdf",
+      "quote": "RESIDENTIAL RESALE REQUIREMENTS FOR 1 TO 2 FAMILY HOMES Updated as of SEPTEMBER 1st, 2026",
+      "doc_date": "2026-09-01",
+      "via": "pdf",
+      "verified": true
+     },
+     {
+      "url": "https://www.brickfire.org/_files/ugd/d315f6_0d7bfccc453e43509b257edd7503b4da.pdf",
+      "quote": "$161.00 for a non-scheduled smoke alarm inspection appointment less than 4 business days (1 to 4 business days) from the Bureau contact date.",
+      "doc_date": "2026-09-01",
+      "via": "pdf",
+      "verified": true
+     },
+     {
+      "url": "https://www.brickfire.org/home-resale-detector-inspections",
+      "quote": "APPOINTMENTS: Call the Brick Bureau of Fire Safety 732-458-4100 between the hours of 8:00 a.m. and 4:00 p.m. or e-mail us at bureau@brickfire.org.",
+      "doc_date": "2026-09 (page UPDATED SEPTEMBER 2026)",
+      "via": "page",
+      "verified": true
+     },
+     {
+      "url": "https://www.brickfire.org/forms-applications",
+      "quote": "**As a reminder - there is no form for residential resale inspections - Please call the office at 732-458-4100 to be added to the schedule.",
+      "doc_date": "2026-09-30 (page fetched)",
+      "via": "page",
+      "verified": true
+     },
+     {
+      "url": "https://www.brickfire.org/bureau",
+      "quote": "The Brick Township Bureau of Fire Safety was created in August of 1985 as the local enforcing agency of the Township's fire service.",
+      "doc_date": "2026-09-30",
+      "via": "page",
+      "verified": true
+     },
+     {
+      "url": "https://www.brickfire.org/bureau",
+      "quote": "The office is open from 8 a.m. to 4 p.m. Monday to Friday, and can be reached by phone at 732-458-4100,",
+      "doc_date": "2026-09-30",
+      "via": "page",
+      "verified": true
+     },
+     {
+      "url": "https://www.brickfire.org/staff",
+      "quote": "Bureau Chief Kevin C. Batzel",
+      "doc_date": "2026-09-30",
+      "via": "page",
+      "verified": true
+     },
+     {
+      "url": "https://nj.gov/dca/dfs/pdf/ANNUAL%20REGISTRY/THIRD%20QUARTER%20LEA%20REGISTRY%202026.pdf",
+      "quote": "D** Bric k Township (1,2,3)",
+      "doc_date": "2026-07",
+      "via": "pdf",
+      "verified": true
+     },
+     {
+      "url": "https://nj.gov/dca/dfs/pdf/ANNUAL%20REGISTRY/THIRD%20QUARTER%20LEA%20REGISTRY%202026.pdf",
+      "quote": "**The LEA enforces the Fire Code in all its districts.",
+      "doc_date": "2026-07",
+      "via": "pdf",
+      "verified": true
+     },
+     {
+      "url": "https://www.nj.gov/dca/dfs/pdf/fire%20directory_county%20summary/fire_code_enforcement_director.pdf",
+      "quote": "15 Ocean Brick Township1506 ... LEAID: 1506-001 Enf Auth. District Fire Official Kevin C Batzel Phone (732) 458-4100 Addr: 253 Brick Blvd ... Email kbatzel@brickfire.org ... Brick Twp Dist #1,2,3 BHIName: Name:",
+      "doc_date": "2026-07-31 (survey date 7/31/2026; state directory code 1506)",
+      "via": "state_directory",
+      "verified": true
+     }
+    ],
+    "confidence": "high"
+   }
+  ],
+  "notes": "Brick Township has three fire districts (1, 2 and 3) under a Joint Board of Fire Commissioners; the registry marks them D** ('The LEA enforces the Fire Code in all its districts'), and the single Brick Township Bureau of Fire Safety at 253 Brick Blvd, 2nd floor, does the resale smoke/CO inspection township-wide, so the address does not change the issuer. Fees changed by ordinance effective 8/12/2026; the web page and the September 1, 2026 sheet give the same amounts, but the $161.00 tier reads 'less than 5 business days (1 to 4 business days)' on the web page and 'less than 4 business days (1 to 4 business days)' on the sheet; both mean 1 to 4 business days from the contact date. The Bureau's sheet no longer lists a fire extinguisher. The Fire Official's personal work email in the state directory is kbatzel@brickfire.org; the Bureau's published office email bureau@brickfire.org is used here. Fire District 1 board office: (732) 477-2285, district1@brickfire.org (a governing board, not the inspection office)."
+ },
+ "other_items": [],
+ "open_questions": [],
+ "verification": {
+  "fees": 4,
+  "fee_ok": 4,
+  "fee_bad": 0,
+  "fee_unchecked": 0,
+  "quotes": 16,
+  "q_ok": 16,
+  "q_bad": 0,
+  "q_unchecked": 0
+ }
+}

@@ -1,0 +1,186 @@
+{
+ "municipality_code": "1513",
+ "municipality": "Lacey Township",
+ "county": "OCEAN",
+ "checked_at": "2026-09-30",
+ "resale_co": {
+  "status": "not_required",
+  "name": "No resale Certificate of Occupancy; Letter of No Interest required instead",
+  "issued_by": "Construction Office, Department of Community Development",
+  "lead_time": "Allow 14 business days for the Letter of No Interest",
+  "valid_for": "",
+  "requirements": [
+   "No open construction permits (the Letter of No Interest confirms this for the buyer)"
+  ],
+  "fees": [
+   {
+    "label": "Letter of No Interest (required instead of a resale certificate of occupancy)",
+    "amount": "$50",
+    "quote": "Lacey Township does require a Letter of No Interest . The cost of the letter is $50 cash or check payable to Township of Lacey .",
+    "source_url": "https://www.laceytownship.org/1207/Building-Department",
+    "verified": true
+   }
+  ],
+  "how_to_apply": "Download the Request for Letter of No Interest, fill in the block, lot, address, requester and closing date, and submit it with the $50 fee (cash, or check payable to the Township of Lacey) to the Construction Office, 124 South Main Street, Forked River (mail to 818 Lacey Road). Faxed requests are not accepted. The letter can be mailed, picked up or emailed. Allow 14 business days.",
+  "application_url": "https://www.laceytownship.org/DocumentCenter/View/243",
+  "department_url": "https://www.laceytownship.org/1207/Building-Department",
+  "phone": "609-693-1100, ext. 2253",
+  "email": "lacey.commdev@laceytownship.org",
+  "contact_name": "Christopher Reid",
+  "contact_title": "Director, Community Development (department that runs the Construction Office)",
+  "evidence": [
+   {
+    "url": "https://www.laceytownship.org/1207/Building-Department",
+    "quote": "Lacey Township does not require a Certificate of Occupancy for resale. Lacey Township does require a Letter of No Interest .",
+    "doc_date": "2026-09 (page checked 2026-09-30)",
+    "via": "page",
+    "verified": true
+   },
+   {
+    "url": "https://www.laceytownship.org/1207/Building-Department",
+    "quote": "Download a Request for a Letter of No Interest (PDF) in lieu of a certificate of occupancy. This letter will assure the buyer that there are no open permits on the residence. Please allow 14 days for processing.",
+    "doc_date": "2026-09",
+    "via": "page",
+    "verified": true
+   },
+   {
+    "url": "https://www.laceytownship.org/DocumentCenter/View/243",
+    "quote": "Please allow 14 business days to process your request.",
+    "doc_date": "2016-10-07 (form dated 10-7-2016; PDF saved October 2019)",
+    "via": "pdf",
+    "verified": true
+   },
+   {
+    "url": "https://www.laceytownship.org/m/directory/department?did=11",
+    "quote": "Christopher Reid Director Community Development Director Community Development lacey.commdev@laceytownship.org",
+    "doc_date": "2026-09",
+    "via": "page",
+    "verified": true
+   },
+   {
+    "url": "https://www.laceytownship.org/m/directory/department?did=11",
+    "quote": "Community Development ... Phone Number 609-693-1100 Ext: 2253",
+    "doc_date": "2026-09",
+    "via": "page",
+    "verified": true
+   },
+   {
+    "url": "https://www.laceytownship.org/DocumentCenter/View/243",
+    "quote": "There is a $50.00 processing fee for all Letters of No Interest. The fee must be paid at the time the request is made.",
+    "doc_date": "2016-10-07 (form dated 10-7-2016)",
+    "via": "pdf",
+    "verified": true
+   }
+  ],
+  "confidence": "high",
+  "notes": "Lacey states plainly that it does not require a Certificate of Occupancy for a resale; instead it requires a $50 Letter of No Interest from the Construction Office confirming there are no open permits. The request form (dated 10-7-2016) lists the Construction Office at (609) 693-1100 ext. 2252/2253 and lacey.building@laceytownship.org. The Building Department page names two different Construction Officials (Doug Donohue in the text and Jim Peters in the inspector list), so neither is used as the contact; the directory's Director of Community Development is given instead. Code Enforcement (609-693-1100 ext. 2249, codeenforcement@laceytownship.org) handles rental/leased property maintenance, not sales."
+ },
+ "fire_cert": {
+  "requirements": [
+   "CO alarms within about 10 feet of sleeping areas when the home has a fuel-burning appliance or attached garage (battery, hardwired or plug-in allowed)",
+   "State online form (CSACMASPSIL) covers smoke alarms, CO alarms and the secondary power source label; no fire extinguisher"
+  ],
+  "authorities": [
+   {
+    "name": "NJ DCA Division of Fire Safety, Bureau of Fire Code Enforcement",
+    "type": "state_dca",
+    "area_served": "Entire township",
+    "lead_time": "More than 10 business days before closing for the lowest fee; a new application is needed if the change of occupant does not happen within 6 months",
+    "fees": [
+     {
+      "label": "More than 10 business days before closing",
+      "amount": "$45",
+      "quote": "If you are applying for a certificate more than ten business days from the closing date the fee is $45 dollars",
+      "source_url": "https://firesolutions.dca.nj.gov/ultra-fire-home/smoke-application-create/",
+      "verified": null
+     },
+     {
+      "label": "4 to 10 business days before closing",
+      "amount": "$90",
+      "quote": "if applying 4 to 10 business days from the closing date the fee is $90",
+      "source_url": "https://firesolutions.dca.nj.gov/ultra-fire-home/smoke-application-create/",
+      "verified": null
+     },
+     {
+      "label": "Less than 4 business days before closing",
+      "amount": "$161",
+      "quote": "if the closing date is less than four business days the fee is $161.",
+      "source_url": "https://firesolutions.dca.nj.gov/ultra-fire-home/smoke-application-create/",
+      "verified": null
+     }
+    ],
+    "how_to_apply": "Apply online on the NJ DCA Fire Safety portal (the Township's Building Department page links to it). The applicant checks off each smoke alarm, CO alarm and power source label requirement and pays by e-check or credit card before submitting. The certificate is emailed once the fee is paid and any required inspection is done. Homes heated by electricity with no CO requirement should email BFCE_CSDCMAC@dca.nj.gov.",
+    "application_url": "https://firesolutions.dca.nj.gov/ultra-fire-home/smoke-application-create/",
+    "department_url": "https://www.nj.gov/dca/dfs/offices/bfce.shtml",
+    "phone": "609-633-6132",
+    "email": "BFCE_CSDCMAC@dca.nj.gov",
+    "contact_name": "Louis Kilmer",
+    "contact_title": "Fire Official (NJ Division of Fire Safety, Deputy Division Director)",
+    "evidence": [
+     {
+      "url": "https://www.laceytownship.org/1207/Building-Department",
+      "quote": "Single-Family Dwelling Resale When selling your home, a smoke detector certification is required through the State of New Jersey.",
+      "doc_date": "2026-09 (page checked 2026-09-30)",
+      "via": "page",
+      "verified": true
+     },
+     {
+      "url": "https://www.laceytownship.org/1207/Building-Department",
+      "quote": "Note : Once issued, a Certificate is not transferable , nor is a fee refundable . If the change of occupant does not occur within 6 months, a new application shall be required.",
+      "doc_date": "2026-09",
+      "via": "page",
+      "verified": true
+     },
+     {
+      "url": "https://nj.gov/dca/dfs/pdf/ANNUAL%20REGISTRY/THIRD%20QUARTER%20LEA%20REGISTRY%202026.pdf",
+      "quote": "S Lacey Township",
+      "doc_date": "2026-07",
+      "via": "pdf",
+      "verified": true
+     },
+     {
+      "url": "https://www.nj.gov/dca/dfs/pdf/fire%20directory_county%20summary/state_towns%207_17_26.pdf",
+      "quote": "LACEY TWP 1512 SC",
+      "doc_date": "2026-07-17 (SC = Smoke Certs)",
+      "via": "pdf",
+      "verified": true
+     },
+     {
+      "url": "https://www.nj.gov/dca/dfs/pdf/fire%20directory_county%20summary/fire_code_enforcement_director.pdf",
+      "quote": "LEAID: 1512-999 Enf Auth. State Fire Official Louis Kilmer Phone (609)633-6132",
+      "doc_date": "2025-05-19 and 2026-07-22 (survey dates)",
+      "via": "state_directory",
+      "verified": true
+     },
+     {
+      "url": "https://firesolutions.dca.nj.gov/ultra-fire-home/smoke-application-create/",
+      "quote": "Please complete the following information to apply for a Certificate of Smoke Alarm, Carbon Monoxide Alarm, and Secondary Power Source Identification Label Compliance (CSACMASPSIL). You will be required to pay, via e-check or credit card, before you can submit this application.",
+      "doc_date": "2026-09",
+      "via": "page",
+      "verified": null
+     }
+    ],
+    "confidence": "high"
+   }
+  ],
+  "notes": "Lacey has no local fire code enforcing agency; the NJ DCA enforces the code (registry code S) and issues smoke certificates there ('SC' on the DCA state-towns list revised 7/17/2026, where Lacey is listed under directory code 1512; Watchdog code 1513). The Township's Building Department page links sellers to the DCA online application. The DCA fee sentence sits in the portal page's script rather than the visible text. The Forked River and Lanoka Harbor fire companies are volunteer fire companies, not the enforcing agency."
+ },
+ "other_items": [
+  {
+   "label": "Letter of No Interest (no open permits)",
+   "detail": "Required instead of a resale CO; $50, allow 14 business days; confirms there are no open permits on the house.",
+   "source_url": "https://www.laceytownship.org/1207/Building-Department"
+  }
+ ],
+ "open_questions": [],
+ "verification": {
+  "fees": 4,
+  "fee_ok": 1,
+  "fee_bad": 0,
+  "fee_unchecked": 3,
+  "quotes": 12,
+  "q_ok": 11,
+  "q_bad": 0,
+  "q_unchecked": 1
+ }
+}
