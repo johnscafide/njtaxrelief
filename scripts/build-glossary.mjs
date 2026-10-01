@@ -57,7 +57,7 @@ const html = `<!doctype html>
 <link rel="canonical" href="${ORIGIN}/glossary">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@600&family=Plus+Jakarta+Sans:wght@500;700;800&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="/property/css/watchdog-games.css?v=20261001b">
+<link rel="stylesheet" href="/property/css/watchdog-games.css?v=20261001c">
 <link rel="stylesheet" href="/property/css/watchdog-glossary.css?v=20261001a">
 <script type="application/ld+json">${json(schema)}</script>
 </head>

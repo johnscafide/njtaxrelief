@@ -298,6 +298,14 @@ function setCanonicalMetadata(html, canonicalUrl) {
   return output.replace(/<\/body>/i, `${cleanRouteRuntime()}\n</body>`);
 }
 
+function servedByOrigin(response, origin) {
+  try {
+    return !response.url || new URL(response.url).host === new URL(origin).host;
+  } catch (_error) {
+    return false;
+  }
+}
+
 async function fetchSource(publicPath) {
   const origins = deploymentOrigins();
   const candidates = pageSourceCandidates(publicPath);
@@ -317,6 +325,10 @@ async function fetchSource(publicPath) {
         });
         lastStatus = response.status;
         if (!response.ok) continue;
+        // A protected deployment URL answers with a redirect to vercel.com/login,
+        // whose HTML would otherwise pass as the page. Only accept a page that
+        // was actually served by the origin we asked.
+        if (!servedByOrigin(response, origin)) continue;
 
         const type = String(response.headers.get('content-type') || '').toLowerCase();
         if (!type.includes('text/html')) continue;

@@ -9,7 +9,11 @@
       "maxDuration": 10
     },
     "api/watchdog-games.js": {
-      "includeFiles": "{property/sales-*.json,property/data/games/*.json,chapter123-ratios-2026.json}",
+      "includeFiles": "{property/sales-*.json,property/data/games/*.json,property/data/games/private/*.json,chapter123-ratios-2026.json}",
+      "maxDuration": 10
+    },
+    "api/watchdog-games-board.js": {
+      "includeFiles": "{property/sales-*.json,property/data/games/*.json,property/data/games/private/*.json,chapter123-ratios-2026.json}",
       "maxDuration": 10
     },
     "api/watchdog-index-entry.js": {

@@ -5,6 +5,13 @@ on:
     branches: [main]
     paths:
       - 'api/watchdog-games.js'
+      - 'api/_watchdog-games-engine.js'
+      - 'api/watchdog-games-board.js'
+      - 'supabase/migrations/20261001200000_watchdog_games_leaderboard.sql'
+      - 'middleware.js'
+      - 'vercel.json'
+      - 'scripts/build-pin-drop-bank.mjs'
+      - 'property/data/glossary.json'
       - 'property/games/**'
       - 'property/js/games/**'
       - 'property/css/watchdog-games.css'
@@ -20,6 +27,13 @@ on:
   pull_request:
     paths:
       - 'api/watchdog-games.js'
+      - 'api/_watchdog-games-engine.js'
+      - 'api/watchdog-games-board.js'
+      - 'supabase/migrations/20261001200000_watchdog_games_leaderboard.sql'
+      - 'middleware.js'
+      - 'vercel.json'
+      - 'scripts/build-pin-drop-bank.mjs'
+      - 'property/data/glossary.json'
       - 'property/games/**'
       - 'property/js/games/**'
       - 'property/css/watchdog-games.css'

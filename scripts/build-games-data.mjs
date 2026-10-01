@@ -10,10 +10,15 @@
 //   town-shapes.json  a simplified SVG outline per municipality code. Only the
 //                     /api/watchdog-games function reads it, so the browser
 //                     never downloads every outline (or tomorrow's answer).
+//   private/town-stats.json  per-town sale statistics for Lineup: median sale
+//                     price and median price per square foot of verified
+//                     residential (class 2) sales since 2024, for towns with at
+//                     least 15 sales. middleware.js keeps private/ off the web.
 //
-// Sources: Municipal_Boundaries_of_NJ.geojson (NJOGIS, EPSG:4326) and
-// property/tax-rates.json (Division of Taxation general tax rates).
-import { readFileSync, writeFileSync, mkdirSync } from 'node:fs';
+// Sources: Municipal_Boundaries_of_NJ.geojson (NJOGIS, EPSG:4326),
+// property/tax-rates.json (Division of Taxation general tax rates) and the
+// SR-1A county sales files (property/sales-*.json).
+import { readFileSync, writeFileSync, mkdirSync, readdirSync } from 'node:fs';
 import path from 'node:path';
 
 const ROOT = process.cwd();
@@ -213,9 +218,41 @@ const townsDoc = {
 };
 const shapesDoc = { schema_version: 1, view_box: `0 0 ${VIEW} ${VIEW}`, shapes };
 
+// ---------- town sale statistics (Lineup) ----------
+const STATS_SINCE = 2024;
+const STATS_MIN_SALES = 15;
+const median = (values) => {
+  const s = values.slice().sort((a, b) => a - b);
+  const mid = s.length >> 1;
+  return s.length % 2 ? s[mid] : Math.round((s[mid - 1] + s[mid]) / 2);
+};
+const byTown = new Map();
+for (const file of readdirSync(path.join(ROOT, 'property')).filter((f) => /^sales-[a-z-]+\.json$/.test(f)).sort()) {
+  for (const row of JSON.parse(readFileSync(path.join(ROOT, 'property', file), 'utf8')).sales || []) {
+    if (row.c !== '2' || !(row.y >= STATS_SINCE) || !(row.p >= 50000)) continue;
+    if (!byTown.has(row.d)) byTown.set(row.d, { p: [], ppsf: [] });
+    byTown.get(row.d).p.push(row.p);
+    if (row.ppsf > 0) byTown.get(row.d).ppsf.push(row.ppsf);
+  }
+}
+const stats = {};
+for (const t of towns) {
+  const s = byTown.get(t.c);
+  if (!s || s.p.length < STATS_MIN_SALES) continue;
+  stats[t.c] = { med: median(s.p), ppsf: s.ppsf.length >= STATS_MIN_SALES ? median(s.ppsf) : null, n: s.p.length };
+}
+const statsDoc = {
+  schema_version: 1,
+  source: `NJ Division of Taxation SR-1A verified arm's-length sales, residential class 2, ${STATS_SINCE} onward`,
+  since: STATS_SINCE,
+  min_sales: STATS_MIN_SALES,
+  towns: stats
+};
+
 const files = [
   [path.join(OUT_DIR, 'towns.json'), JSON.stringify(townsDoc) + '\n'],
-  [path.join(OUT_DIR, 'town-shapes.json'), JSON.stringify(shapesDoc) + '\n']
+  [path.join(OUT_DIR, 'town-shapes.json'), JSON.stringify(shapesDoc) + '\n'],
+  [path.join(OUT_DIR, 'private', 'town-stats.json'), JSON.stringify(statsDoc) + '\n']
 ];
 
 if (process.argv.includes('--check')) {
@@ -228,7 +265,7 @@ if (process.argv.includes('--check')) {
   if (stale) { console.error('Run: node scripts/build-games-data.mjs'); process.exit(1); }
   console.log('Watchdog Games data is current.');
 } else {
-  mkdirSync(OUT_DIR, { recursive: true });
+  mkdirSync(path.join(OUT_DIR, 'private'), { recursive: true });
   for (const [file, body] of files) writeFileSync(file, body);
   const sizes = files.map(([f, b]) => path.relative(ROOT, f) + ' ' + Math.round(b.length / 1024) + ' KB').join(', ');
   console.log(`Wrote ${towns.length} towns (${sizes}).`);
