@@ -22,6 +22,13 @@ const keyExprs = [
 ];
 if (/property_count/i.test(sql)) {
   if (!/left\s+join\s+lateral\s*\(/i.test(sql)) throw new Error('SR-1A compact subject-match contract failed: property_count must come from a per-subject LATERAL count');
+  // Oct 1 2026: with the LATERAL on the subject x evidence join, a 755-unit
+  // Hoboken condo lot ran ~13,600 identical counts per call (17 s, over the 8 s
+  // timeout). Each compact parcel key must be counted once per call.
+  if (!/compact_keys\s+as\s*\(\s*select\s+distinct\s+ci\.district_code,\s*ci\.compact_block_key,\s*ci\.compact_lot_key/i.test(sql)) throw new Error('SR-1A compact subject-match contract failed: compact parcel keys must be de-duplicated before counting');
+  if (!/compact_counts\s+as\s+materialized\s*\(\s*select[\s\S]*?from\s+compact_keys\s+k\s+left\s+join\s+lateral\s*\(/i.test(sql)) throw new Error('SR-1A compact subject-match contract failed: property_count must be counted once per compact parcel key, in a MATERIALIZED CTE');
+  const compactCandidates = (sql.match(/compact_candidates\s+as\s*\(([\s\S]*?)\n  \),/i) || [, ''])[1];
+  if (/lateral/i.test(compactCandidates)) throw new Error('SR-1A compact subject-match contract failed: compact_candidates must join the per-key counts, not count per subject and evidence row');
   if (!/create\s+index\s+if\s+not\s+exists\s+property_lookups_compact_parcel_key_idx/i.test(sql)) throw new Error('SR-1A compact subject-match contract failed: the compact parcel key index must be created with the resolver');
   for (const expr of keyExprs) {
     if (!sql.includes(`(${expr})`)) throw new Error(`SR-1A compact subject-match contract failed: index is missing key ${expr}`);
