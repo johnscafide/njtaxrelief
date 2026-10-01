@@ -81,3 +81,6 @@
   .offer-terms{font-size:10.5px;line-height:15px}
   .bottom-trust>p{font-size:13.5px;line-height:20px}
 }
+
+/* Benefit row without the side quote (/agent): the four benefits use the full row. */
+.trust-content.trust-content--solo{grid-template-columns:1fr}
