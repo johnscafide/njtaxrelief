@@ -1,0 +1,38 @@
+name: Live soft-launch UI build step
+
+# The Vercel build runs scripts/apply-live-soft-launch-ui.mjs and then this
+# contract. If /pro copy changes without updating the script's expected text,
+# the production build fails. This runs the same two steps on pull requests.
+on:
+  push:
+    branches: [main]
+    paths:
+      - 'property/pro/index.html'
+      - 'property/js/pro.js'
+      - 'property/js/app-shell-2027.js'
+      - 'property/partials/sidemenu.html'
+      - 'scripts/apply-live-soft-launch-ui.mjs'
+      - 'property/tests/live-soft-launch-ui-contract.mjs'
+      - '.github/workflows/live-soft-launch-ui-contract.yml'
+  pull_request:
+    paths:
+      - 'property/pro/index.html'
+      - 'property/js/pro.js'
+      - 'property/js/app-shell-2027.js'
+      - 'property/partials/sidemenu.html'
+      - 'scripts/apply-live-soft-launch-ui.mjs'
+      - 'property/tests/live-soft-launch-ui-contract.mjs'
+      - '.github/workflows/live-soft-launch-ui-contract.yml'
+
+jobs:
+  contract:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+      - name: Apply the build-time soft-launch transform (as Vercel does)
+        run: node scripts/apply-live-soft-launch-ui.mjs
+      - name: Verify the soft-launch UI contract
+        run: node property/tests/live-soft-launch-ui-contract.mjs
