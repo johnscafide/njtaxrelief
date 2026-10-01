@@ -35,85 +35,9 @@ await transform('property/partials/sidemenu.html', [
   }
 ]);
 
-await transform('property/pro/index.html', [
-  {
-    label: 'soft-launch stylesheet',
-    from: '  <link rel="stylesheet" href="/property/css/pro-buying-path.css">',
-    to: '  <link rel="stylesheet" href="/property/css/pro-buying-path.css">\n  <link rel="stylesheet" href="/property/css/pro-soft-launch.css?v=20260911c">'
-  },
-  {
-    label: 'hero billing note',
-    from: '<p class="pro-fast-price-note">Annual plans cost the equivalent of ten monthly payments.</p>',
-    to: '<p class="pro-fast-price-note">14-day free trial on Agent, Pro and Pro+. Monthly, annual and limited Founding Lifetime options are available.</p>'
-  },
-  {
-    label: 'pricing heading and cadence',
-    from: '<div class="pro-price-head pro-reveal"><span class="pro-kicker">Professional plans</span><h2>Choose the level that fits your work.</h2><p>Annual billing includes two months free compared with monthly billing for 12 months.</p><div class="pro-cadence" role="group" aria-label="Billing cadence"><button type="button" class="active" data-cadence="yearly" aria-pressed="true">Annual <span>2 months free</span></button><button type="button" data-cadence="monthly" aria-pressed="false">Monthly</button></div></div>',
-    to: '<div class="pro-soft-launch-bar pro-reveal is-visible"><span class="pro-soft-launch-stamp"><i></i> Soft launch live</span><strong>Try any plan free for 14 days.</strong><small>Card required. Renews automatically on day 14 unless you cancel. Founding Lifetime is limited and may be retired as Watchdog grows.</small></div><div class="pro-price-head pro-reveal"><span class="pro-kicker">Soft launch · enrollment open</span><h2>Choose how you want to pay.</h2><p>Monthly, annual, or a limited Founding Lifetime option. Same plan limits.</p><div class="pro-cadence" role="group" aria-label="Billing cadence"><button type="button" class="active" data-cadence="yearly" aria-pressed="true">Annual <span>2 months free</span></button><button type="button" data-cadence="monthly" aria-pressed="false">Monthly</button><button type="button" data-cadence="lifetime" aria-pressed="false">Lifetime <span>Founding</span></button></div></div>'
-  },
-  {
-    label: 'agent live checkout CTA',
-    from: '<a class="pro-price-cta" href="#launch-list" data-demo-plan="agent" data-demo-cadence="yearly">Join Agent launch list <i class="fas fa-arrow-right"></i></a>',
-    to: '<a class="pro-price-cta" href="#" data-demo-plan="agent" data-demo-cadence="yearly" data-billing-plan="agent" data-billing-cadence="yearly" data-billing-trial="1">Try Agent free for 14 days <i class="fas fa-arrow-right"></i></a>'
-  },
-  {
-    label: 'pro live checkout CTA',
-    from: '<a class="pro-price-cta" href="#launch-list" data-demo-plan="pro" data-demo-cadence="yearly">Join Pro launch list <i class="fas fa-arrow-right"></i></a>',
-    to: '<a class="pro-price-cta" href="#" data-demo-plan="pro" data-demo-cadence="yearly" data-billing-plan="pro" data-billing-cadence="yearly" data-billing-trial="1">Try Pro free for 14 days <i class="fas fa-arrow-right"></i></a>'
-  },
-  {
-    label: 'pro plus live checkout CTA',
-    from: '<a class="pro-price-cta" href="#launch-list" data-demo-plan="pro_plus" data-demo-cadence="yearly">Join Pro+ launch list <i class="fas fa-arrow-right"></i></a>',
-    to: '<a class="pro-price-cta" href="#" data-demo-plan="pro_plus" data-demo-cadence="yearly" data-billing-plan="pro_plus" data-billing-cadence="yearly" data-billing-trial="1">Try Pro+ free for 14 days <i class="fas fa-arrow-right"></i></a>'
-  },
-  {
-    label: 'open enrollment note',
-    from: '<p class="pro-checkout-note"><i class="fas fa-calendar-check"></i>Paid enrollment is scheduled to open September 16. Join the launch list to be notified.</p>',
-    to: '<p class="pro-checkout-note"><i class="fas fa-circle-check"></i>Paid enrollment is open for Agent, Pro and Pro+. Each starts with a 14-day free trial: card required, nothing charged during the trial, and the plan renews automatically on day 14 at the price you chose unless you cancel from Account first. One trial per account. Teams stays request-only.</p>'
-  },
-  {
-    label: 'plan fit FAQ',
-    from: '<article class="pro-faq-card pro-reveal"><i class="fas fa-comments"></i><h3>Not sure which plan fits?</h3><p>Tell us your role and approximate property volume when you join the launch list.</p></article>',
-    to: '<article class="pro-faq-card pro-reveal"><i class="fas fa-comments"></i><h3>Not sure which plan fits?</h3><p>Start with your expected property volume, or send us a plan question below.</p></article>'
-  },
-  {
-    label: 'trial FAQ',
-    from: '<article class="pro-faq-card new-buyer-question pro-reveal" data-faq-added="trial"><i class="fas fa-hourglass-half"></i><h3>Is there a free trial?</h3><p>Not yet. Property lookup remains free.</p></article>',
-    to: '<article class="pro-faq-card new-buyer-question pro-reveal" data-faq-added="trial"><i class="fas fa-hourglass-half"></i><h3>Is there a free trial?</h3><p>Yes. Agent, Pro and Pro+ each start with a 14-day free trial. A card is required to start and nothing is charged during the trial. On day 14 your plan renews automatically at the monthly or annual price you picked, unless you cancel from Account before then. We email a reminder 7 days before the first charge. One trial per account; Founding Lifetime and Teams do not include a trial.</p></article>'
-  },
-  {
-    label: 'plan help section copy',
-    from: '<section class="pro-section pro-demo" id="demo"><div class="pro-wrap pro-demo-grid">\n      <div class="pro-demo-copy pro-reveal"><span class="pro-kicker">September 16 launch list</span><h2>Get the launch notice.</h2><p>Tell us your role and plan interest. We will email you when paid enrollment opens.</p><div class="pro-demo-proof"><span><i class="fas fa-lock"></i> No payment required</span><span><i class="fas fa-layer-group"></i> Agent · Pro · Pro+</span><span><i class="fas fa-envelope"></i> Launch notice by email</span></div><a href="/property/">Run a property first <i class="fas fa-arrow-right"></i></a></div>',
-    to: '<section class="pro-section pro-demo is-soft-launch" id="demo"><div class="pro-wrap pro-demo-grid">\n      <div class="pro-demo-copy pro-reveal"><span class="pro-kicker">Need help choosing?</span><h2>Ask a plan question.</h2><p>Tell us what you do and roughly how many properties you work with. We will point you to the closest fit.</p><div class="pro-demo-proof"><span><i class="fas fa-circle-info"></i> Straight answer</span><span><i class="fas fa-layer-group"></i> Agent · Pro · Pro+</span><span><i class="fas fa-envelope"></i> Reply by email</span></div><a href="/property/">Run a property first <i class="fas fa-arrow-right"></i></a></div>'
-  },
-  {
-    label: 'plan help source',
-    from: '<input type="hidden" name="source" value="paid-launch-list">',
-    to: '<input type="hidden" name="source" value="paid-soft-launch-plan-help">'
-  },
-  {
-    label: 'plan help submit',
-    from: '<button type="submit" class="pro-demo-submit">Join the launch list <i class="fas fa-arrow-right"></i></button>',
-    to: '<button type="submit" class="pro-demo-submit">Ask about plans <i class="fas fa-arrow-right"></i></button>'
-  },
-  {
-    label: 'plan help privacy',
-    from: '<p class="pro-form-privacy">By submitting, you agree to be contacted about Watchdog paid-plan availability. No payment information is collected here.</p>',
-    to: '<p class="pro-form-privacy">We use this only to reply about Watchdog plans. No payment information is collected here.</p>'
-  }
-]);
-
-await transform('property/js/pro.js', [
-  {
-    label: 'lifetime cadence owned by lifetime controller',
-    from: "buttons.forEach(function(b){b.addEventListener('click',function(){set(b.dataset.cadence,true);});});set('yearly',false);",
-    to: "buttons.forEach(function(b){b.addEventListener('click',function(){if(b.dataset.cadence==='lifetime')return;set(b.dataset.cadence,true);});});set('yearly',false);"
-  },
-  {
-    label: 'soft-launch plan question success',
-    from: "setStatus('You are on the launch list.','success');",
-    to: "setStatus('Thanks. We will reply about the best-fit plan.','success');"
-  }
-]);
+// /pro (property/pro/index.html and property/js/pro.js) used to be rewritten
+// here from launch-list copy to live-checkout copy. The 2026 page ships the
+// live copy in source, so there is nothing left to transform; the contract
+// (property/tests/live-soft-launch-ui-contract.mjs) still checks it.
 
 console.log('Live soft-launch UI prepared.');

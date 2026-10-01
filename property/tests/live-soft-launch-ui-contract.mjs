@@ -10,14 +10,18 @@ const [pro, appShell, sideMenu, proJs] = await Promise.all([
 ]);
 
 assert.doesNotMatch(pro, /September 16|Join Agent launch list|Join Pro launch list|Join Pro\+ launch list|Get the launch notice|Join the launch list/i);
-assert.match(pro, /Soft launch · enrollment open/);
+// Owner decision 2026-10-01: the pricing bar says only the trial terms, with no
+// "Soft launch" stamp or kicker.
+assert.doesNotMatch(pro, /Soft launch live|Soft launch · enrollment open/);
+assert.match(pro, /Try any plan free for 14 days\./);
+assert.match(pro, /Card required\. Renews automatically on day 14 unless you cancel\. Founding Lifetime is limited and may be retired as Watchdog grows\./);
 assert.match(pro, /data-cadence="lifetime"/);
 assert.match(pro, /Founding Lifetime/);
 assert.match(pro, /data-billing-plan="agent"/);
 assert.match(pro, /data-billing-plan="pro"/);
 assert.match(pro, /data-billing-plan="pro_plus"/);
 assert.match(pro, /Paid enrollment is open for Agent, Pro and Pro\+/);
-assert.match(pro, /pro-soft-launch\.css/);
+assert.match(pro, /\/property\/css\/pro-2026\.css/);
 
 // The app-shell logo still opens property lookup; it now uses the host-aware clean route ("/" on WatchdogIndex).
 assert.match(appShell, /class="wdx-brand" href="'\+route\('\/'\)\+'" aria-label="Watchdog property lookup"/);
