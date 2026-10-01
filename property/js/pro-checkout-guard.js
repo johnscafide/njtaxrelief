@@ -11,6 +11,7 @@
     pro_plus:{value:'9,999',amount:999900,label:'Pro+'}
   };
   var normalCadence='yearly';
+  var trialOffered=true;
   var busy=false;
 
   function ensureCss(){
@@ -41,8 +42,6 @@
       var title=head.querySelector('h2');if(title)title.textContent='Choose how you want to pay.';
       var copy=head.querySelector('p');if(copy)copy.textContent='Monthly, annual, or a limited Founding Lifetime option. Same plan limits.';
     }
-    var note=document.querySelector('.pro-checkout-note');
-    if(note)note.innerHTML='<i class="fas fa-circle-check"></i> Paid enrollment is open for Agent, Pro and Pro+. Teams stays request-only.';
 
     var demo=document.getElementById('demo');
     if(demo){
@@ -62,7 +61,6 @@
     document.querySelectorAll('.pro-faq-card').forEach(function(card){
       var h=card.querySelector('h3'),p=card.querySelector('p');if(!h||!p)return;
       if(/launch list|which plan/i.test(h.textContent||'')){h.textContent='Not sure which plan fits?';p.textContent='Start with your expected property volume, or send us a plan question below.';}
-      if(/free trial/i.test(h.textContent||'')){p.textContent='Property lookup is free. Paid professional plans start when you check out.';}
     });
   }
 
@@ -83,8 +81,10 @@
     ['agent','pro','pro_plus'].forEach(function(plan){
       var band=document.querySelector('[data-price-band="'+plan+'"]');var cta=band&&band.querySelector('.pro-price-cta');if(!cta)return;
       cta.removeAttribute('data-lifetime-plan');
-      cta.dataset.billingPlan=plan;cta.dataset.billingCadence=normalCadence;cta.href='#';
-      cta.innerHTML='Choose '+(plan==='pro_plus'?'Pro+':plan.charAt(0).toUpperCase()+plan.slice(1))+' <i class="fas fa-arrow-right"></i>';
+      cta.dataset.billingPlan=plan;cta.dataset.billingCadence=normalCadence;cta.dataset.billingTrial=trialOffered?'1':'0';cta.href='#';
+      var label=plan==='pro_plus'?'Pro+':plan.charAt(0).toUpperCase()+plan.slice(1);
+      // content-architecture: dynamic — the button reads as a trial or a plain plan choice depending on this account's trial eligibility from the checkout server.
+      cta.innerHTML=(trialOffered?'Try '+label+' free for 14 days':'Choose '+label)+' <i class="fas fa-arrow-right"></i>';
     });
     var pricing=document.getElementById('pricing');if(pricing)pricing.classList.remove('is-lifetime-mode');
   }
@@ -95,7 +95,7 @@
       var d=LIFETIME[plan];var v=document.querySelector('[data-price-value="'+plan+'"]'),u=document.querySelector('[data-price-unit="'+plan+'"]'),e=document.querySelector('[data-price-eyebrow="'+plan+'"]'),n=document.querySelector('[data-price-note="'+plan+'"]'),band=document.querySelector('[data-price-band="'+plan+'"]'),cta=band&&band.querySelector('.pro-price-cta');
       if(v)v.textContent=d.value;if(u)u.textContent=' once';if(e)e.textContent='Founding Lifetime';if(n)n.textContent='One payment. No renewal.';
       if(band)band.classList.add('is-founding-lifetime');
-      if(cta){cta.removeAttribute('data-billing-plan');cta.removeAttribute('data-billing-cadence');cta.dataset.lifetimePlan=plan;cta.href='#';cta.innerHTML='Get '+d.label+' Lifetime <i class="fas fa-arrow-right"></i>';}
+      if(cta){cta.removeAttribute('data-billing-plan');cta.removeAttribute('data-billing-cadence');cta.removeAttribute('data-billing-trial');cta.dataset.lifetimePlan=plan;cta.href='#';cta.innerHTML='Get '+d.label+' Lifetime <i class="fas fa-arrow-right"></i>';}
     });
     var pricing=document.getElementById('pricing');if(pricing)pricing.classList.add('is-lifetime-mode');
     var terms=document.querySelector('.pro-lifetime-terms');if(!terms&&pricing){terms=document.createElement('div');terms.className='pro-lifetime-terms';terms.innerHTML='<b>Founding Lifetime</b><span>Non-transferable. Same property limits. Usage-based services, direct mail, third-party data and overages are separate.</span>';var note=pricing.querySelector('.pro-checkout-note');if(note)note.insertAdjacentElement('beforebegin',terms);}
@@ -161,6 +161,17 @@
     },true);
   }
 
-  function init(){ensureCss();rewriteLaunchCopy();addLaunchBar();addLifetimeButton();setCtas('yearly');bindCadence();finalizeLifetimeReturn();}
+  /* The checkout server answers TRIAL_ALREADY_USED for accounts that already had
+     a subscription; from then on this page offers the plain plan instead. */
+  function bindTrialEligibility(){
+    window.addEventListener('watchdog:trial-ineligible',function(){
+      trialOffered=false;
+      var pricing=document.getElementById('pricing');
+      if(pricing&&pricing.classList.contains('is-lifetime-mode'))return;
+      setCtas(normalCadence);
+    });
+  }
+
+  function init(){ensureCss();rewriteLaunchCopy();addLaunchBar();addLifetimeButton();bindTrialEligibility();setCtas('yearly');bindCadence();finalizeLifetimeReturn();}
   if(document.readyState==='loading')document.addEventListener('DOMContentLoaded',function(){setTimeout(init,0);},{once:true});else setTimeout(init,0);
 })();

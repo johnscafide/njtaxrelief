@@ -5,12 +5,12 @@
 **Spec:** `property/docs/marketing/watchdog-agent-marketing-q4-2026/04-paid-ads/landing-page-specs.md`  
 **Decision:** `property/docs/marketing/watchdog-agent-marketing-q4-2026/01-strategy/trial-decision.md`
 
-> **Status, checked against production on 2026-10-01: the page is live, the card trial behind it is not.**
-> - Only the front end shipped (`agents/trial`, `agents/trial/thanks`, `agents-trial.js`, `agents-trial.css`).
-> - The server pieces described under "Planned function changes" were never committed or deployed. `supabase/functions/create-checkout-session/index.ts` (production v71) still has only the controlled 7-day no-card Agent trial (`controlled_agent_7d_v1`) and returns `CONTROLLED_TRIAL_UNAVAILABLE` while checkout is open. The `get_public_checkout_mode()` function and its migration do not exist.
-> - Result: every visitor sees variant B (Founding Agent invite request). Forcing `?variant=a` sends `trial: true`, the function refuses it, and the page flips back to variant B.
-> - Still on the page: the scheduler link is empty (`SCHEDULER_URL`, button falls back to `/contact`) and the invite thank-you text shows a literal "[N] business days".
-> - Owner decision 2026-10-01: offer a 14-day trial on **every** paid plan (Agent, Pro, Pro+), card required, renewing automatically after 14 days. Implementing it changes the trial rule in the billing checkout function and needs explicit owner approval for that change.
+> **Status, 2026-10-01 (owner-approved change).** The 14-day card trial now covers every paid plan.
+> - `create-checkout-session` offers `watchdog_14d_card_v1` on Agent, Pro and Pro+, monthly or yearly: card collected up front (`payment_method_collection: 'always'`), 14 days, renews automatically, plain-language terms with the date and price in the Checkout submit text. One trial per account (any earlier subscription on the entitlement row makes the account ineligible). A trial button never turns into an immediate charge: an ineligible account gets `TRIAL_ALREADY_USED`. Callers that do not say `trial: false` get the trial automatically when eligible. The release gate is unchanged: closed rejects, controlled needs a listed account, open needs the passed Live gate.
+> - `get_public_checkout_mode()` exists (migration `20261001150000_public_checkout_mode.sql`), so this page shows variant A while checkout is open.
+> - Trial checkouts started here return to `/agents/trial/thanks`; others return to `/account?checkout=success&trial=1`.
+> - Reminder: the page promises an email 7 days before the first charge. That is Stripe's built-in reminder and must be switched on in Stripe (Settings, Billing, Subscriptions and emails, "Send a reminder email 7 days before a free trial ends"). `customer.subscription.trial_will_end` is still only recorded as an ordinary subscription sync; no SMS is sent.
+> - Still open on the page: the scheduler link is empty (`SCHEDULER_URL`, falls back to `/contact`) and the invite thank-you text shows a literal "[N] business days".
 
 ## What it does
 
@@ -29,7 +29,7 @@ The variant comes from the new public read `get_public_checkout_mode()` (migrati
 4. The thank-you page requires a signed-in session, fires `trial_started` once per checkout session (deduplicated by `session_id`), reads `get_my_account_billing_state` for a status line, and shows the four first-20-minutes steps: Agent Academy lesson 1, add 5 past clients, draw a farm, book 15 minutes with John.
 5. Stripe's `customer.subscription.trial_will_end` (3 days before day 14) is now recorded by `stripe-webhook` as an `access_audit_log` event `billing.trial_will_end` with `trial_end`, so the day-11 reminder email and text key off Stripe's clock.
 
-## Planned function changes (not implemented; see status above)
+## Original function plan (superseded by the status above)
 
 `supabase/functions/create-checkout-session/index.ts`
 

@@ -21,8 +21,8 @@ NJPropertyTaxRelief.com is not affected: the runtime and the advertising choice 
 | `lead` | Plan question form sent (`pro_demo_success`), Founding Agent invite request | Lead | label | id | SubmitForm | event | Lead | lead | CUSTOM_EVENT_1 | event id |
 | `sign_up` | First sign-in within 2 hours of account creation | CompleteRegistration | label | id | CompleteRegistration | event | SignUp | signup | SIGN_UP | event id |
 | `checkout_started` | Plan button click, Lifetime checkout start, trial checkout start | InitiateCheckout | label | id | InitiateCheckout | event | Custom: CheckoutStarted | (none) | START_CHECKOUT | event id |
-| `trial_started` | `/agents/trial/thanks?session_id=…` | StartTrial | label | id | Subscribe | event | Custom: TrialStarted | signup | START_TRIAL | event id |
-| `subscribe` | `/account?checkout=success&session_id=…` | Subscribe | label | id | CompletePayment | event | Purchase | checkout | SUBSCRIBE | event id |
+| `trial_started` | `/agents/trial/thanks?session_id=…` or `/account?checkout=success&trial=1&session_id=…` | StartTrial | label | id | Subscribe | event | Custom: TrialStarted | signup | START_TRIAL | event id |
+| `subscribe` | `/account?checkout=success&session_id=…` (no `trial=1`) | Subscribe | label | id | CompletePayment | event | Purchase | checkout | SUBSCRIBE | event id |
 | `purchase` | Founding Lifetime purchase verified | Purchase (value) | label | id | CompletePayment | event | Purchase | checkout | PURCHASE | event id |
 
 "label", "id" and "event id" mean the conversion is sent only when you fill in that platform's label or ID for it in `AD_PIXELS`. Nextdoor loads its base pixel and page views; set its conversions as URL rules in Nextdoor Ads Manager (for example `/agents/trial/thanks` and `/account?checkout=success`).

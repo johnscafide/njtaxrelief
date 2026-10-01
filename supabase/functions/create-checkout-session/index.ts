@@ -27,7 +27,15 @@ const PRICE_CATALOG = {
   }
 } as const;
 const MOVE_PRICE = { lookup_key: 'watchdog_move_90_day', amount: 2900 } as const;
-const CONTROLLED_AGENT_TRIAL = { offer: 'controlled_agent_7d_v1', days: 7 } as const;
+/* First-use free trial on every paid plan (Agent, Pro, Pro+), owner decision
+   2026-10-01. A card is collected up front and the subscription renews
+   automatically on day 14 unless the customer cancels first. One trial per
+   account: any earlier Watchdog subscription (including a past trial or beta)
+   makes the account ineligible. The trial follows the same release control as
+   any paid checkout and never bypasses the live_billing_lifecycle gate. */
+const CARD_TRIAL = { offer: 'watchdog_14d_card_v1', days: 14 } as const;
+const TRIAL_OFFERS = new Set([CARD_TRIAL.offer, 'agent_14d_card_v1', 'controlled_agent_7d_v1']);
+const TRIAL_TIME_ZONE = 'America/New_York';
 const BETA_TRIAL_DAYS = new Set([30, 60]);
 const BETA_MAX_REDEMPTIONS = 100;
 const BETA_CODE_ALPHABET = 'ABCDEFGHJKLMNPQRSTUVWXYZ23456789';
@@ -110,8 +118,33 @@ function isStripeAuthError(error: unknown) {
   return Boolean(error && typeof error === 'object' && (error as any).type === 'StripeAuthenticationError');
 }
 
-function requestedControlledTrial(body: any) {
-  return body?.trial === true || String(body?.offer || '').trim().toLowerCase() === CONTROLLED_AGENT_TRIAL.offer;
+/* 'required': the visitor clicked a trial button, so never charge today.
+   'off': the caller asked for no trial. 'auto': give the trial when the
+   account is eligible, otherwise run a normal checkout. */
+function trialRequest(body: any): 'required' | 'off' | 'auto' {
+  if (body?.trial === false) return 'off';
+  if (body?.trial === true || TRIAL_OFFERS.has(String(body?.offer || '').trim().toLowerCase())) return 'required';
+  return 'auto';
+}
+
+function formatUsd(cents: number) {
+  return `$${(cents / 100).toLocaleString('en-US', { minimumFractionDigits: 2, maximumFractionDigits: 2 })}`;
+}
+
+function trialTerms(tier: Tier, cadence: Cadence, trialEnd: Date) {
+  const label = tier === 'pro_plus' ? 'Pro+' : tier === 'pro' ? 'Pro' : 'Agent';
+  const period = cadence === 'monthly' ? 'month' : 'year';
+  const price = `${formatUsd(PRICE_CATALOG[tier][cadence].amount)} per ${period}`;
+  const endDate = new Intl.DateTimeFormat('en-US', { timeZone: TRIAL_TIME_ZONE, month: 'long', day: 'numeric', year: 'numeric' }).format(trialEnd);
+  return `Your 14-day free trial of Watchdog ${label} starts today and you will not be charged today. On ${endDate} your plan renews automatically at ${price} plus any sales tax, and keeps renewing each ${period} until you cancel. Cancel anytime before ${endDate} from your Watchdog Account and you will not be charged.`;
+}
+
+function agentsTrialPaths(site: string) {
+  let watchdog = true;
+  try { watchdog = WATCHDOG_HOSTS.has(new URL(site).hostname.toLowerCase()); } catch (_) {}
+  return watchdog
+    ? { landing: '/agents/trial', thanks: '/agents/trial/thanks' }
+    : { landing: '/property/agents/trial/', thanks: '/property/agents/trial/thanks/' };
 }
 
 function normalizeTier(value: unknown): Tier | null {
@@ -416,7 +449,7 @@ async function resolveMovePrice(stripe: Stripe) {
 async function readEntitlement(admin: any, userId: string) {
   return admin
     .from('account_entitlements')
-    .select('plan_tier,billing_tier,provider,provider_customer_id,provider_subscription_id,provider_price_id,subscription_status')
+    .select('plan_tier,billing_tier,billing_interval,provider,provider_customer_id,provider_subscription_id,provider_price_id,subscription_status')
     .eq('user_id', userId)
     .maybeSingle();
 }
@@ -590,7 +623,7 @@ Deno.serve(async (req) => {
   const rawTier = String(body?.tier || body?.plan || '').toLowerCase();
   const isMove = requestedProduct === 'watchdog_move' || rawTier === 'move' || rawTier === 'watchdog_move';
   const betaRedeem = action === 'redeem_beta_trial';
-  const controlledTrial = !isMove && !betaRedeem && requestedControlledTrial(body);
+  const trialMode = isMove || betaRedeem ? 'off' : trialRequest(body);
 
   let control;
   try {
@@ -605,9 +638,6 @@ Deno.serve(async (req) => {
   }
   if (control.mode === 'open' && !control.liveGatePassed) {
     return json(req, { error: isMove ? 'Watchdog Move is awaiting final paid lifecycle acceptance.' : 'Paid enrollment is awaiting final Live billing acceptance.', code: isMove ? 'MOVE_GATE_NOT_PASSED' : 'BILLING_GATE_NOT_PASSED' }, 503);
-  }
-  if (controlledTrial && control.mode !== 'controlled') {
-    return json(req, { error: 'The Agent trial is only available inside the controlled launch.', code: 'CONTROLLED_TRIAL_UNAVAILABLE' }, 403);
   }
 
   const stripeKey = String(Deno.env.get('STRIPE_SECRET_KEY') || '').trim();
@@ -695,8 +725,7 @@ Deno.serve(async (req) => {
   if (rawTier === 'teams') return json(req, { error: 'Teams enrollment is not open yet.', code: 'TEAMS_ENROLLMENT_CLOSED' }, 409);
   if (!['agent', 'pro', 'pro_plus', 'pro+'].includes(rawTier)) return json(req, { error: 'Choose Agent, Pro, or Pro+.', code: 'INVALID_PLAN' }, 400);
   const tier = (rawTier === 'pro+' ? 'pro_plus' : rawTier) as Tier;
-  if (controlledTrial && tier !== 'agent') return json(req, { error: 'The controlled trial is limited to Agent.', code: 'CONTROLLED_TRIAL_AGENT_ONLY' }, 400);
-  const cadence: Cadence = controlledTrial ? 'monthly' : (String(body?.cadence || 'yearly').toLowerCase() === 'monthly' ? 'monthly' : 'yearly');
+  const cadence: Cadence = String(body?.cadence || 'yearly').toLowerCase() === 'monthly' ? 'monthly' : 'yearly';
 
   const { data: entitlement, error: entitlementError } = await readEntitlement(admin, user.id);
   if (entitlementError) return json(req, { error: 'Could not read billing state.', code: 'ENTITLEMENT_READ_FAILED' }, 500);
@@ -728,20 +757,20 @@ Deno.serve(async (req) => {
     }
   }
 
-  if (controlledTrial) {
-    if (entitlement?.provider_subscription_id) {
-      return json(req, { error: 'This account is not eligible for the first-use Agent trial.', code: 'CONTROLLED_TRIAL_NOT_ELIGIBLE' }, 409);
-    }
-    const priorTrial = await admin
-      .from('access_audit_log')
-      .select('id')
-      .eq('user_id', user.id)
-      .eq('event_type', 'billing.controlled_agent_trial_checkout_created')
-      .limit(1)
-      .maybeSingle();
-    if (priorTrial.error) return json(req, { error: 'Could not verify trial eligibility.', code: 'CONTROLLED_TRIAL_ELIGIBILITY_FAILED' }, 500);
-    if (priorTrial.data) return json(req, { error: 'This account has already used the controlled Agent trial.', code: 'CONTROLLED_TRIAL_ALREADY_USED' }, 409);
+  if (entitlement?.billing_interval === 'lifetime' && entitlement?.subscription_status === 'active') {
+    return json(req, { error: 'Founding Lifetime is already active on this account.', code: 'LIFETIME_ALREADY_ACTIVE' }, 409);
   }
+
+  /* One trial per account. Any earlier subscription (paid, trial or beta,
+     active or canceled) leaves provider_subscription_id on the entitlement
+     row, which only the signed Stripe webhook writes. An abandoned Checkout
+     creates no subscription, so the visitor can try again. */
+  const trialEligible = !entitlement?.provider_subscription_id;
+  if (trialMode === 'required' && !trialEligible) {
+    return json(req, { error: 'This account has already used its free trial. Choose a plan to subscribe without a trial.', code: 'TRIAL_ALREADY_USED' }, 409);
+  }
+  const trial = trialMode !== 'off' && trialEligible;
+  const trialEnd = new Date(Date.now() + CARD_TRIAL.days * 24 * 60 * 60 * 1000);
 
   let price: Stripe.Price;
   try {
@@ -759,6 +788,11 @@ Deno.serve(async (req) => {
   const priceId = price.id;
 
   const account = accountPath(site);
+  const agentsTrial = trial && String(body?.return_to || '') === 'agents_trial' ? agentsTrialPaths(site) : null;
+  const successUrl = agentsTrial
+    ? `${site}${agentsTrial.thanks}?checkout=trial&session_id={CHECKOUT_SESSION_ID}`
+    : `${site}${account}?checkout=success${trial ? '&trial=1' : ''}&session_id={CHECKOUT_SESSION_ID}`;
+  const cancelUrl = agentsTrial ? `${site}${agentsTrial.landing}?checkout=cancelled` : `${site}${account}?checkout=cancelled`;
   const customerId = entitlement?.provider === 'stripe' ? entitlement.provider_customer_id : null;
   const metadata = {
     supabase_user_id: user.id,
@@ -768,10 +802,10 @@ Deno.serve(async (req) => {
     plan_tier: tier,
     billing_interval: cadence,
     property_capacity: String(CAPACITY[tier]),
-    ...(controlledTrial ? {
-      trial_offer: CONTROLLED_AGENT_TRIAL.offer,
-      trial_days: String(CONTROLLED_AGENT_TRIAL.days),
-      trial_requires_payment_method: 'false'
+    ...(trial ? {
+      trial_offer: CARD_TRIAL.offer,
+      trial_days: String(CARD_TRIAL.days),
+      trial_requires_payment_method: 'true'
     } : {})
   };
 
@@ -783,22 +817,25 @@ Deno.serve(async (req) => {
       ...(customerId ? { customer_update: { address: 'auto' } } : {}),
       client_reference_id: user.id,
       metadata,
-      subscription_data: controlledTrial ? {
+      subscription_data: trial ? {
         metadata,
-        trial_period_days: CONTROLLED_AGENT_TRIAL.days,
+        trial_period_days: CARD_TRIAL.days,
         trial_settings: { end_behavior: { missing_payment_method: 'cancel' } }
       } : { metadata },
-      ...(controlledTrial ? { payment_method_collection: 'if_required' as const } : {}),
+      ...(trial ? {
+        payment_method_collection: 'always' as const,
+        custom_text: { submit: { message: trialTerms(tier, cadence, trialEnd) } }
+      } : {}),
       automatic_tax: { enabled: true },
-      success_url: `${site}${account}?checkout=success&session_id={CHECKOUT_SESSION_ID}`,
-      cancel_url: `${site}${account}?checkout=cancelled`,
+      success_url: successUrl,
+      cancel_url: cancelUrl,
       billing_address_collection: 'required',
       integration_identifier: 'watchdog_web_kqrmxpta'
     });
 
     await admin.from('access_audit_log').insert({
       user_id: user.id,
-      event_type: controlledTrial ? 'billing.controlled_agent_trial_checkout_created' : 'billing.checkout_created',
+      event_type: trial ? 'billing.trial_checkout_created' : 'billing.checkout_created',
       resource_type: 'checkout_session',
       resource_id: session.id,
       required_plan: tier,
@@ -808,11 +845,13 @@ Deno.serve(async (req) => {
         checkout_mode: control.mode, checkout_control_source: control.source,
         stripe_mode: liveMode ? 'live' : 'test', return_site: site,
         automatic_tax: true,
-        ...(controlledTrial ? {
-          trial_offer: CONTROLLED_AGENT_TRIAL.offer,
-          trial_days: CONTROLLED_AGENT_TRIAL.days,
-          payment_method_collection: 'if_required',
-          missing_payment_method_end_behavior: 'cancel'
+        ...(trial ? {
+          trial_offer: CARD_TRIAL.offer,
+          trial_days: CARD_TRIAL.days,
+          trial_end_estimate: trialEnd.toISOString(),
+          payment_method_collection: 'always',
+          missing_payment_method_end_behavior: 'cancel',
+          trial_request: trialMode
         } : {})
       }
     });
@@ -820,7 +859,8 @@ Deno.serve(async (req) => {
     return json(req, {
       provider: 'stripe', destination: 'checkout', url: session.url,
       session_id: session.id, tier, cadence, stripe_mode: liveMode ? 'live' : 'test',
-      ...(controlledTrial ? { trial: true, trial_days: CONTROLLED_AGENT_TRIAL.days, auto_cancel_without_payment_method: true } : {})
+      trial,
+      ...(trial ? { trial_days: CARD_TRIAL.days, payment_method_required_to_start: true, renews_automatically: true } : {})
     });
   } catch (error) {
     console.error('STRIPE_CHECKOUT_ERROR', error);

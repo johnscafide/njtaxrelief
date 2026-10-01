@@ -94,7 +94,7 @@ const checkout = await jsonFetch(`${supabaseUrl}/functions/v1/create-checkout-se
     Authorization: `Bearer ${accessToken}`,
     'Content-Type': 'application/json'
   },
-  body: JSON.stringify({ tier: 'agent', cadence: 'monthly' })
+  body: JSON.stringify({ tier: 'agent', cadence: 'monthly', trial: false })
 });
 if (!checkout.response.ok) {
   fail(`Staging Checkout creation failed (${checkout.response.status} ${checkout.payload?.code || ''}): ${checkout.payload?.error || 'unknown error'}`);

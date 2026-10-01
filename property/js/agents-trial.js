@@ -19,7 +19,7 @@
   var isTrial = Boolean(TRIAL_PATHS[path]);
   if (!isThanks && !isTrial) return;
 
-  var TRIAL_OFFER = 'agent_14d_card_v1';
+  var TRIAL_OFFER = 'watchdog_14d_card_v1';
   var PRODUCTION_FUNCTIONS = 'https://uvkvaxljhhngydvlrzom.supabase.co/functions/v1/';
   var PRODUCTION_KEY = 'sb_publishable_MYX59qCbK3d-21zDfJqkNw_fvmfnexa';
   /* 15-minute onboarding call. Leave empty until the scheduler link is
@@ -115,7 +115,7 @@
     if (code === 'BILLING_ENROLLMENT_CLOSED' || code === 'BILLING_CONTROLLED_ONLY' || code === 'BILLING_GATE_NOT_PASSED' || code === 'CONTROLLED_TRIAL_UNAVAILABLE') {
       return { text: 'Public enrollment is not open yet. Request a Founding Agent invite below and we will email you the day it opens.', flip: true };
     }
-    if (code === 'CONTROLLED_TRIAL_ALREADY_USED' || code === 'CONTROLLED_TRIAL_NOT_ELIGIBLE') {
+    if (code === 'TRIAL_ALREADY_USED' || code === 'CONTROLLED_TRIAL_ALREADY_USED' || code === 'CONTROLLED_TRIAL_NOT_ELIGIBLE') {
       return { text: 'This account has already used its Agent trial. Open Account to choose a plan.', flip: false, account: true };
     }
     if (code === 'LEGACY_SUBSCRIPTION_MIGRATION_REQUIRED') return { text: 'This account has legacy billing that must be migrated before starting Stripe. Contact Watchdog support so you are not charged twice.', flip: false };
@@ -131,7 +131,7 @@
     notice('');
     ga('checkout_started', { plan: 'agent', cadence: 'monthly', variant: currentVariant() });
     wd('checkout_started', { plan: 'agent', billing_period: 'monthly', source: 'agents_trial' });
-    window.WatchdogBilling.invoke('create-checkout-session', { plan: 'agent', tier: 'agent', cadence: 'monthly', trial: true, offer: TRIAL_OFFER })
+    window.WatchdogBilling.invoke('create-checkout-session', { plan: 'agent', tier: 'agent', cadence: 'monthly', trial: true, offer: TRIAL_OFFER, return_to: 'agents_trial' })
       .then(function (p) {
         if (!p || !p.url) throw new Error('Stripe did not return a secure checkout URL.');
         location.href = p.url;
