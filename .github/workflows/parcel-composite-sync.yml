@@ -47,6 +47,7 @@ on:
       - 'property/scripts/db_brake.py'
       - 'supabase/migrations/20260928200000_statewide_parcel_sync.sql'
       - 'supabase/migrations/20260930132000_sync_parcel_batch_skip_unchanged.sql'
+      - 'supabase/migrations/20261001230000_parcel_coordinates.sql'
       - '.github/workflows/parcel-composite-sync.yml'
 
 concurrency:
@@ -89,8 +90,12 @@ jobs:
       - name: Current sync_parcel_batch skips unchanged parcels
         run: |
           python - <<'PY'
-          import re
-          sql = open('supabase/migrations/20260930132000_sync_parcel_batch_skip_unchanged.sql').read()
+          import glob, re
+          # The newest migration that defines sync_parcel_batch is the one in production.
+          path = [f for f in sorted(glob.glob('supabase/migrations/*.sql'))
+                  if 'create or replace function public.sync_parcel_batch(p_rows jsonb)' in open(f).read().lower()][-1]
+          print('checking', path)
+          sql = open(path).read()
           low = sql.lower()
           fn = low[low.index('create or replace function public.sync_parcel_batch(p_rows jsonb)'):]
           body = fn[:fn.index('$$;')]
@@ -111,7 +116,7 @@ jobs:
           assert re.search(r"source_synced_at < now\(\) - interval '20 days'", guard), 'monthly refresh of source_synced_at'
           for col in ('address', 'town', 'county', 'block', 'lot', 'qualifier', 'prop_class', 'year_built', 'acres',
                       'dwelling_units', 'building_desc', 'land_value', 'improvement_value', 'assessed_value',
-                      'last_year_tax', 'last_sale_price', 'last_sale_year', 'last_sale_date', 'sales_code'):
+                      'last_year_tax', 'last_sale_price', 'last_sale_year', 'last_sale_date', 'sales_code', 'lat', 'lon'):
               assert f'p.{col},' in guard or f'p.{col}\n' in guard, f'guard compares {col}'
           print('skip-unchanged migration contract ok')
           PY

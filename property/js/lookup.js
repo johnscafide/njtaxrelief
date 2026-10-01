@@ -1934,7 +1934,33 @@ function assessorAddressAlias(display, assessor) {
     return persisted(geoKey(lat, lon, 'sales' + meters + (muni || '')), 864e5,
       function () { return nearbySalesRaw(lat, lon, meters, muni); });
   }
+
+  // Nearby sales, neighborhood medians and the neighbors map read our own
+  // parcel table first (property_lookups, with each parcel's center point from
+  // the monthly state parcel sync). When the area has no parcel points yet, the
+  // call fails, or there is no database client, they ask the state layer as before.
+  function warehouseNear(fn, args) {
+    if (!authReady() || !sb || typeof sb.rpc !== 'function') return Promise.resolve(null);
+    return Promise.resolve(sb.rpc(fn, args))
+      .then(function (res) {
+        var d = res && !res.error ? res.data : null;
+        return d && typeof d === 'object' && d.covered === true ? d : null;
+      }, function () { return null; });
+  }
+
   function nearbySalesRaw(lat, lon, meters, muni) {
+    return warehouseNear('get_public_nearby_sales', { p_lat: lat, p_lon: lon, p_meters: meters, p_town: muni || null })
+      .then(function (d) {
+        if (!d || !Array.isArray(d.sales)) return nearbySalesFromParcels(lat, lon, meters, muni);
+        return d.sales.map(function (s) {
+          return { addr: s.address || '', price: +s.price || 0, year: +s.year || null,
+                   assessed: +s.assessed || 0, built: +s.built || 0,
+                   acres: +s.acres || 0, town: s.town || '', dist: s.dist == null ? null : +s.dist };
+        })
+        .sort(function (a, b) { return b.year - a.year || b.price - a.price; });
+      });
+  }
+  function nearbySalesFromParcels(lat, lon, meters, muni) {
     var dLat = meters / 111320, dLon = meters / (111320 * Math.cos(lat * Math.PI / 180));
     var env = { xmin: lon - dLon, ymin: lat - dLat, xmax: lon + dLon, ymax: lat + dLat,
                 spatialReference: { wkid: 4326 } };
@@ -1981,6 +2007,20 @@ function assessorAddressAlias(display, assessor) {
       function () { return neighborhoodStatsRaw(lat, lon, meters); });
   }
   function neighborhoodStatsRaw(lat, lon, meters) {
+    return warehouseNear('get_public_neighborhood_stats', { p_lat: lat, p_lon: lon, p_meters: meters })
+      .then(function (d) {
+        if (!d) return neighborhoodStatsFromParcels(lat, lon, meters);
+        if (!(+d.n >= 8)) return null;
+        var num = function (v) { return v == null ? null : +v; };
+        return {
+          n: +d.n,
+          medAssessed: num(d.med_assessed), medTax: num(d.med_tax),
+          medYear: d.med_year == null ? null : Math.round(+d.med_year),
+          medAcres: num(d.med_acres)
+        };
+      });
+  }
+  function neighborhoodStatsFromParcels(lat, lon, meters) {
     var dLat = meters / 111320, dLon = meters / (111320 * Math.cos(lat * Math.PI / 180));
     var env = { xmin: lon - dLon, ymin: lat - dLat, xmax: lon + dLon, ymax: lat + dLat,
                 spatialReference: { wkid: 4326 } };
@@ -2804,6 +2844,25 @@ buildOpinion(hasCase, overBy, saving, target) + rows +
 
   // Every residential parcel around the subject, with its public figures.
   function hoodParcels(lat, lon, meters) {
+    return warehouseNear('get_public_neighbor_parcels', { p_lat: lat, p_lon: lon, p_meters: meters })
+      .then(function (d) {
+        if (!d || !Array.isArray(d.parcels) || !d.parcels.length) return hoodParcelsFromLayer(lat, lon, meters);
+        return d.parcels.map(function (x) {
+          var av = +x.assessed || 0, tax = +x.tax || 0;
+          return {
+            pin: x.pin, addr: x.address || '', town: x.town || '',
+            county: x.county || '', zip: '',
+            block: x.block, lot: x.lot,
+            assessed: av, tax: tax, built: +x.built || null,
+            acres: +x.acres || null, sale: +x.sale || 0,
+            saleYear: x.sale_year == null ? null : +x.sale_year,
+            lat: +x.lat, lon: +x.lon, dist: +x.dist,
+            rate: av ? (tax / av) * 100 : null
+          };
+        });
+      });
+  }
+  function hoodParcelsFromLayer(lat, lon, meters) {
     var dLat = meters / 111320, dLon = meters / (111320 * Math.cos(lat * Math.PI / 180));
     var p = new URLSearchParams({
       geometry: JSON.stringify({ xmin: lon - dLon, ymin: lat - dLat, xmax: lon + dLon, ymax: lat + dLat,
