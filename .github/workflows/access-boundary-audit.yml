@@ -54,6 +54,8 @@ jobs:
         run: node property/tests/public-score-details-parts-contract.mjs
       - name: Verify the official tax-bill lookup is cached
         run: node property/tests/municipal-tax-evidence-cache-contract.mjs
+      - name: Verify the property lookup uses town stats and keeps nearby answers
+        run: node property/tests/property-lookup-warehouse-contract.mjs
       - name: Verify free-first property imagery and photo contribution governance
         run: node property/tests/property-imagery-photo-library-contract.mjs
       - name: Verify Street View spend and free grid fallback
