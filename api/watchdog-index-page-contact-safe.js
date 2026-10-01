@@ -76,7 +76,12 @@ function privateRouteRevision() {
 }
 
 function looksLikeVercelAuth(body) {
-  const sample = String(body || '').slice(0, 240000);
+  const text = String(body || '');
+  // The login page is large and its markers can sit past the sample window,
+  // so check its title first.
+  const title = (text.match(/<title[^>]*>([^<]*)<\/title>/i) || [])[1] || '';
+  if (/\bvercel\b/i.test(title) && /\blog ?in\b/i.test(title)) return true;
+  const sample = text.slice(0, 240000);
   return VERCEL_AUTH_MARKERS.some((pattern) => pattern.test(sample));
 }
 
