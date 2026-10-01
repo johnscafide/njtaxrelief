@@ -71,7 +71,7 @@ async function runMenu({ persona = null, host = 'www.watchdogindex.com', path = 
   return { api, keys: items.map((i) => i.key), items, drawer: sheet ? sheet.innerHTML : '' };
 }
 
-const HOME = ['dashboard', 'lookup', 'home', 'pulse', 'anchor', 'town-compare', 'robust'];
+const HOME = ['dashboard', 'lookup', 'home', 'pulse', 'anchor', 'town-compare', 'robust', 'games'];
 const visitor = await runMenu({ persona: PERSONAS.visitor });
 assert.deepEqual(visitor.keys, [...HOME, 'data-center', 'pro', 'account'], 'Signed-out visitors see the homeowner destinations, the public Data Center and plans');
 const homeowner = await runMenu({ persona: PERSONAS.homeowner, path: '/dashboard', sidebarPage: 'dashboard' });
@@ -283,7 +283,7 @@ for (const m of consentCss.matchAll(/font(?:-size)?:[^;{}]*?(\d+(?:\.\d+)?)px/g)
 for (const m of consentCss.matchAll(/\.wd-consent-banner button[^{]*\{[^}]*min-height:(\d+)px/g)) assert.ok(Number(m[1]) >= 44, `Cookie banner buttons must be at least 44px tall (found ${m[1]}px)`);
 
 /* ---------- 5. The IA doc names the structure ---------- */
-for (const word of ['Agent Desk', 'Clients', 'Farm', 'Marketing', 'Research', 'Dashboard', 'Property Lookup', 'Property Home', 'Property Pulse', 'ANCHOR Applications', 'Town Compare', 'ROBUST Framework', 'Plans & Pricing']) {
+for (const word of ['Agent Desk', 'Clients', 'Farm', 'Marketing', 'Research', 'Dashboard', 'Property Lookup', 'Property Home', 'Property Pulse', 'ANCHOR Applications', 'Town Compare', 'ROBUST Framework', 'Games', 'Plans & Pricing']) {
   assert.ok(doc.includes(word), `IA doc must describe "${word}"`);
 }
 assert.doesNotMatch(doc, /\]\(\/property\/|https:\/\/www\.watchdogindex\.com\/property\//, 'IA doc links use clean public URLs');
