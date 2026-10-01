@@ -1,118 +1,1926 @@
 {
   "schema_version": 1,
-  "generated_at": "2026-08-13",
+  "generated_at": "2026-10-01",
+  "categories": [
+    {
+      "id": "tax-bills",
+      "label": "Your tax bill",
+      "blurb": "What's on the bill, when it's due, and what happens if it's late."
+    },
+    {
+      "id": "assessments-appeals",
+      "label": "Assessments and appeals",
+      "blurb": "How your home gets its assessed value and how to challenge it."
+    },
+    {
+      "id": "relief-programs",
+      "label": "Tax relief programs",
+      "blurb": "State and local programs that cut or pay back part of your property tax."
+    },
+    {
+      "id": "town-finance",
+      "label": "Town and school budgets",
+      "blurb": "Where the money on your bill goes and the rules towns and schools follow."
+    },
+    {
+      "id": "buying-selling",
+      "label": "Buying and selling",
+      "blurb": "Fees, forms and inspections that come up when a New Jersey home changes hands."
+    },
+    {
+      "id": "mortgages-insurance",
+      "label": "Mortgages and insurance",
+      "blurb": "Loan and insurance terms every buyer and owner runs into."
+    },
+    {
+      "id": "renting",
+      "label": "Renting",
+      "blurb": "Your rights and your landlord's duties under New Jersey law."
+    }
+  ],
   "terms": [
     {
       "slug": "chapter-123",
       "term": "Chapter 123",
       "definition": "New Jersey's statutory assessment-ratio framework used by county tax boards to compare an assessment with true value and the municipality's common level range.",
       "example": "A $400,000 supported true value in Gloucester Township at a 56.95% 2026 Director's Ratio has a common-level assessment of about $227,800 before applying the certified lower and upper range.",
-      "source": "https://www.nj.gov/treasury/taxation/pdf/lpt/chap123/2026CH123.pdf"
+      "source": "https://www.nj.gov/treasury/taxation/pdf/lpt/chap123/2026CH123.pdf",
+      "category": "assessments-appeals",
+      "aliases": [
+        "chapter 123",
+        "ch 123",
+        "common level"
+      ]
     },
     {
       "slug": "directors-ratio",
       "term": "Director's Ratio / equalization ratio",
       "definition": "The state-certified average ratio of assessed value to true value for a municipality.",
       "example": "At 54.32%, a $300,000 assessment corresponds to roughly $552,283 of equalized value before other evidence is considered.",
-      "source": "https://www.nj.gov/treasury/taxation/pdf/lpt/chap123/2026CH123.pdf"
+      "source": "https://www.nj.gov/treasury/taxation/pdf/lpt/chap123/2026CH123.pdf",
+      "category": "assessments-appeals",
+      "aliases": [
+        "director's ratio",
+        "equalization ratio",
+        "average ratio"
+      ]
     },
     {
       "slug": "coefficient-of-deviation",
       "term": "Coefficient of deviation",
       "definition": "A state measure of assessment uniformity showing how tightly individual assessment-to-sale ratios cluster around the municipality's average.",
       "example": "A lower coefficient generally indicates a more uniform assessment roll; it does not prove one parcel is correctly assessed.",
-      "source": "https://www.nj.gov/treasury/taxation/lpt/localtax.shtml"
+      "source": "https://www.nj.gov/treasury/taxation/lpt/localtax.shtml",
+      "category": "assessments-appeals",
+      "aliases": [
+        "cod",
+        "assessment uniformity"
+      ]
     },
     {
       "slug": "added-assessment",
       "term": "Added assessment",
       "definition": "An additional assessment imposed when taxable new construction or an improvement is completed after the regular assessment date.",
       "example": "A completed addition can create an added assessment for the portion of the tax year after completion, so the seller's old bill may not represent the future carrying cost.",
-      "source": "https://www.nj.gov/treasury/taxation/lpt/localtax.shtml"
+      "source": "https://www.nj.gov/treasury/taxation/lpt/localtax.shtml",
+      "category": "assessments-appeals",
+      "aliases": [
+        "added assessment",
+        "added tax bill"
+      ]
     },
     {
       "slug": "omitted-assessment",
       "term": "Omitted assessment",
       "definition": "An assessment used when taxable property or an improvement should have been assessed but was omitted from the regular roll.",
       "example": "An omitted improvement can create a later bill even though it did not appear on the original annual assessment notice.",
-      "source": "https://www.nj.gov/treasury/taxation/lpt/localtax.shtml"
+      "source": "https://www.nj.gov/treasury/taxation/lpt/localtax.shtml",
+      "category": "assessments-appeals",
+      "aliases": [
+        "omitted assessment",
+        "omitted tax"
+      ]
     },
     {
       "slug": "revaluation-vs-reassessment",
       "term": "Revaluation vs. reassessment",
       "definition": "Both update assessments toward current value, but New Jersey uses distinct administrative processes and terminology for municipal-wide assessment maintenance.",
       "example": "A townwide reset can materially change assessed values while the final tax burden still depends on the new rate and total ratable base.",
-      "source": "https://www.nj.gov/treasury/taxation/lpt/localtax.shtml"
+      "source": "https://www.nj.gov/treasury/taxation/lpt/localtax.shtml",
+      "category": "assessments-appeals",
+      "aliases": [
+        "revaluation",
+        "reassessment",
+        "reval"
+      ]
     },
     {
       "slug": "true-value-vs-assessed-value",
       "term": "True value vs. assessed value",
       "definition": "True value is market-value concept; assessed value is the taxable value carried on the municipal assessment roll.",
       "example": "A $300,000 assessment in a municipality assessed near 54% of true value should not be read as a $300,000 market-value opinion.",
-      "source": "https://www.nj.gov/treasury/taxation/lpt/localtax.shtml"
+      "source": "https://www.nj.gov/treasury/taxation/lpt/localtax.shtml",
+      "category": "assessments-appeals",
+      "aliases": [
+        "true value",
+        "market value",
+        "assessed value"
+      ]
     },
     {
       "slug": "common-level-range",
       "term": "Common level range",
       "definition": "The Chapter 123 corridor around a municipality's certified ratio, generally 15% above and below the average ratio.",
       "example": "Gloucester Township's 56.95% ratio produces a certified range approximately 48.41% to 65.49% for tax year 2026.",
-      "source": "https://www.nj.gov/treasury/taxation/pdf/lpt/chap123/2026CH123.pdf"
+      "source": "https://www.nj.gov/treasury/taxation/pdf/lpt/chap123/2026CH123.pdf",
+      "category": "assessments-appeals",
+      "aliases": [
+        "common level range",
+        "15 percent corridor"
+      ]
     },
     {
       "slug": "senior-freeze-base-year",
       "term": "Senior Freeze base year",
       "definition": "The tax year used as the comparison point for an eligible Senior Freeze applicant's future property-tax reimbursement calculation.",
       "example": "The actionable number is the eligible base-year tax amount, not simply the homeowner's current age or current bill.",
-      "source": "https://www.nj.gov/treasury/taxation/ptr/"
+      "source": "https://www.nj.gov/treasury/taxation/ptr/",
+      "category": "relief-programs",
+      "aliases": [
+        "base year",
+        "senior freeze base year"
+      ]
     },
     {
       "slug": "pilot-agreement",
       "term": "PILOT agreement",
       "definition": "A payment-in-lieu-of-taxes arrangement in which an approved project makes negotiated payments under an applicable redevelopment or tax-exemption program instead of ordinary property taxes.",
       "example": "A PILOT payment cannot be compared directly with a conventional parcel tax bill without reviewing the governing agreement and program.",
-      "source": "https://www.nj.gov/dca/"
+      "source": "https://www.nj.gov/dca/",
+      "category": "town-finance",
+      "aliases": [
+        "pilot",
+        "payment in lieu of taxes"
+      ]
     },
     {
       "slug": "abatement-vs-exemption",
       "term": "Abatement vs. exemption",
       "definition": "An exemption removes qualifying value from taxation while an abatement generally reduces or phases the taxable obligation under a specific legal program.",
       "example": "The words are often used loosely in marketing; the actual ordinance, approval and tax treatment control.",
-      "source": "https://www.nj.gov/treasury/taxation/lpt/localtax.shtml"
+      "source": "https://www.nj.gov/treasury/taxation/lpt/localtax.shtml",
+      "category": "relief-programs",
+      "aliases": [
+        "tax abatement",
+        "tax exemption"
+      ]
     },
     {
       "slug": "sr1a",
       "term": "SR-1A",
       "definition": "New Jersey's property-transfer and sales-ratio record used by the Division of Taxation in equalization and assessment analysis.",
       "example": "Watchdog uses state-verified usable sales rather than treating every recorded transfer as an arm's-length comparable.",
-      "source": "https://www.nj.gov/treasury/taxation/lpt/lptvalue.shtml"
+      "source": "https://www.nj.gov/treasury/taxation/lpt/lptvalue.shtml",
+      "category": "buying-selling",
+      "aliases": [
+        "sr-1a",
+        "deed sales record"
+      ]
     },
     {
       "slug": "mod-iv",
       "term": "MOD-IV",
       "definition": "New Jersey's standardized local property-tax assessment data format used to transmit municipal assessment-roll information.",
       "example": "Parcel assessment, class, tax and many physical fields in Watchdog originate from MOD-IV-derived public records.",
-      "source": "https://www.nj.gov/treasury/taxation/lpt/localtax.shtml"
+      "source": "https://www.nj.gov/treasury/taxation/lpt/localtax.shtml",
+      "category": "assessments-appeals",
+      "aliases": [
+        "mod iv",
+        "mod 4",
+        "assessment roll data"
+      ]
     },
     {
       "slug": "farmland-assessment",
       "term": "Farmland assessment",
       "definition": "A preferential assessment program for qualifying actively devoted agricultural or horticultural land, subject to statutory requirements and possible rollback taxes after disqualifying changes in use.",
       "example": "A low farmland assessment should not be treated as ordinary residential market-value evidence.",
-      "source": "https://www.nj.gov/treasury/taxation/lpt/farmlandassessment.shtml"
+      "source": "https://www.nj.gov/treasury/taxation/lpt/farmlandassessment.shtml",
+      "category": "assessments-appeals",
+      "aliases": [
+        "farmland assessment",
+        "farm tax",
+        "rollback taxes"
+      ]
     },
     {
       "slug": "tax-rate-vs-effective-tax-rate",
       "term": "Tax rate vs. effective tax rate",
       "definition": "The municipal tax rate is applied to assessed value; an effective tax rate expresses tax relative to estimated true market value, making cross-town comparisons more meaningful.",
       "example": "Two towns can show very different nominal rates simply because their assessment levels differ.",
-      "source": "https://www.nj.gov/treasury/taxation/lpt/localtax.shtml"
+      "source": "https://www.nj.gov/treasury/taxation/lpt/localtax.shtml",
+      "category": "tax-bills",
+      "aliases": [
+        "effective tax rate",
+        "general tax rate vs effective"
+      ]
     },
     {
       "slug": "improvement-ratio",
       "term": "Improvement ratio",
       "definition": "The share of a parcel's total assessment allocated to improvements rather than land.",
       "example": "If improvements are $240,000 of a $300,000 total assessment, the improvement share is 80%; that describes the assessment split, not construction quality or market value.",
-      "source": "https://www.nj.gov/treasury/taxation/lpt/localtax.shtml"
+      "source": "https://www.nj.gov/treasury/taxation/lpt/localtax.shtml",
+      "category": "assessments-appeals",
+      "aliases": [
+        "improvement ratio",
+        "land vs improvement"
+      ]
+    },
+    {
+      "slug": "property-tax-bill",
+      "term": "Property tax bill",
+      "category": "tax-bills",
+      "definition": "The bill for the yearly tax on your home or land. Your town collects it, but the money is split among your county, your school district and your town, plus any special district such as a fire district.",
+      "example": "Say your total property tax for the year is $8,000. You pay it all to your town, but it is made up of separate shares, for example $4,200 for your school district, $2,400 for your town and $1,400 for your county. Each share comes from that body's budget, spread over the assessed value of all taxable property.",
+      "source": "https://www.nj.gov/treasury/taxation/pdf/assessorshandbook.pdf",
+      "source_title": "Handbook for New Jersey Assessors (NJ Division of Taxation, revised July 2024)",
+      "aliases": [
+        "property tax bill",
+        "nj tax bill",
+        "what is on my property tax bill",
+        "where do my property taxes go",
+        "tax bill breakdown"
+      ]
+    },
+    {
+      "slug": "quarterly-tax-installments",
+      "term": "Quarterly tax installments",
+      "category": "tax-bills",
+      "definition": "New Jersey property taxes are paid in four installments each year, due February 1, May 1, August 1 and November 1. The dates are set by state law, so they are the same in every town.",
+      "example": "Say your yearly property tax is $10,000 and it didn't change from last year. You would owe $2,500 on each due date: February 1, May 1, August 1 and November 1. Towns on a calendar year are due to mail the year's final bills by June 14.",
+      "source": "https://www.nj.gov/treasury/taxation/pdf/pubs/workcalendar.pdf",
+      "source_title": "2026 Work Calendar for Assessors and Collectors, County Boards of Taxation, and Finance Officers of New Jersey (NJ Division of Taxation and Division of Local Government Services)",
+      "aliases": [
+        "property tax due dates",
+        "quarterly property taxes",
+        "when are nj property taxes due",
+        "tax installment dates",
+        "quarterly tax payments"
+      ]
+    },
+    {
+      "slug": "preliminary-tax-bill",
+      "term": "Preliminary tax bill",
+      "category": "tax-bills",
+      "definition": "The bill for the first two quarters of the year, due February 1 and May 1. The new tax rate isn't set yet, so each of those payments is normally one-quarter of your total tax for the year before.",
+      "example": "Say your total tax last year was $8,000. Your February 1 and May 1 payments would normally be $2,000 each. Once this year's rate is set, the August 1 and November 1 payments cover the rest, so if this year's tax is $8,400, each is $2,200. By resolution, a town can instead make each early payment half of last year's second-half tax.",
+      "source": "https://www.nj.gov/dca/dlgs/programs/tax_collector_docs/guidetocalcesttaxes.pdf",
+      "source_title": "A Guide to Chapter 72 of the Laws of 1994 (estimated tax bills), NJ Division of Local Government Services",
+      "aliases": [
+        "preliminary tax bill",
+        "first half tax bill",
+        "preliminary taxes",
+        "1st and 2nd quarter taxes",
+        "february and may tax bill"
+      ]
+    },
+    {
+      "slug": "estimated-tax-bill",
+      "term": "Estimated tax bill",
+      "category": "tax-bills",
+      "definition": "A bill a town may send, by resolution, when the county tax board hasn't certified all the tax rates by the mailing date. It uses an estimated levy, and a later reconciled bill corrects the amount once final rates are set.",
+      "example": "Say the county hasn't certified rates by the June 14 mailing date. Your town can send an estimated August bill using levies generally set within 5% above or below last year's. When final rates arrive, your November bill is the full year's tax minus what you already paid. If a bill is mailed late, you get at least 25 days after mailing to pay before interest.",
+      "source": "https://www.nj.gov/dca/dlgs/programs/tax_collector_docs/guidetocalcesttaxes.pdf",
+      "source_title": "A Guide to Chapter 72 of the Laws of 1994 (estimated tax bills), NJ Division of Local Government Services",
+      "aliases": [
+        "estimated tax bill",
+        "estimated property tax bill",
+        "reconciled tax bill",
+        "why is my tax bill estimated",
+        "estimated third quarter bill"
+      ]
+    },
+    {
+      "slug": "tax-grace-period",
+      "term": "Tax grace period",
+      "category": "tax-bills",
+      "definition": "The short window after a due date when you can pay without interest. A town may choose to offer one, but state law caps the normal grace period at 10 calendar days. Longer interest-free periods are allowed only in special cases.",
+      "example": "Say a quarterly payment is due and your town offers the full grace period. Pay within 10 calendar days after the due date and no interest is charged. Pay after that and the town can charge interest all the way back to the due date. After certain declared natural disasters, a town can let you pay without interest until the first day of the next month.",
+      "source": "https://pub.njleg.state.nj.us/Bills/2020/PL20/34_.PDF",
+      "source_title": "P.L.2020, Chapter 34 (amends R.S.54:4-67, interest and grace period on property taxes)",
+      "aliases": [
+        "property tax grace period",
+        "10 day grace period",
+        "grace period nj taxes",
+        "late property tax payment",
+        "interest free period"
+      ]
+    },
+    {
+      "slug": "delinquent-tax-interest",
+      "term": "Delinquent tax interest",
+      "category": "tax-bills",
+      "definition": "Interest your town charges on late property taxes. State law caps it at 8% a year on the first $1,500 overdue and 18% a year above that. A town may also add a year-end penalty of up to 6% if over $10,000 is still unpaid.",
+      "example": "Say you're $4,000 behind and your town uses the maximum rates. Interest runs at 8% on the first $1,500 ($120 a year) and 18% on the other $2,500 ($450 a year), about $570 a year, counted from the due date. The overdue total includes all unpaid taxes and town charges on the property, not just one quarter.",
+      "source": "https://pub.njleg.state.nj.us/Bills/2020/PL20/34_.PDF",
+      "source_title": "P.L.2020, Chapter 34 (amends R.S.54:4-67, interest and grace period on property taxes)",
+      "aliases": [
+        "late property tax interest",
+        "18 percent interest property taxes",
+        "delinquent property taxes",
+        "year end penalty",
+        "property tax penalty"
+      ]
+    },
+    {
+      "slug": "tax-sale",
+      "term": "Tax sale",
+      "category": "tax-bills",
+      "definition": "An auction a town holds at least once a year when property taxes or town charges go unpaid. The buyer pays what is owed and gets a tax sale certificate, which is a lien. The property itself is not sold.",
+      "example": "Say a home has $4,000 in unpaid taxes and interest. At the tax sale, bidders compete by offering to accept a lower interest rate, and a certificate can earn no more than 18%. The winner pays the town the $4,000 and gets the certificate. If the rate is bid all the way down, bidders offer a cash premium instead. The owner still owns the home but must pay off the certificate to clear the lien.",
+      "source": "https://www.nj.gov/dca/dlgs/programs/tax_collector_docs/elements_of_tax_sales_nj.pdf",
+      "source_title": "Elements of Tax Sales in New Jersey, NJ Division of Local Government Services",
+      "aliases": [
+        "tax sale",
+        "tax lien sale",
+        "tax lien auction",
+        "unpaid property taxes auction",
+        "municipal tax sale"
+      ]
+    },
+    {
+      "slug": "tax-sale-certificate",
+      "term": "Tax sale certificate",
+      "category": "tax-bills",
+      "definition": "The lien a buyer gets at a tax sale for paying a property's overdue taxes. The owner can clear it by redeeming, which means paying the amount plus interest and a 2%, 4% or 6% penalty. If it isn't redeemed, the holder can seek foreclosure.",
+      "example": "Say an investor buys a certificate on your home at 9% interest. Taxes keep coming due, and if the holder pays them, those amounts earn interest too. To redeem, you pay the certificate amount, the interest and a 2%, 4% or 6% penalty based on the certificate's size. After two years, the holder can start a foreclosure case in Superior Court.",
+      "source": "https://www.nj.gov/dca/dlgs/programs/tax_collector_docs/elements_of_tax_sales_nj.pdf",
+      "source_title": "Elements of Tax Sales in New Jersey, NJ Division of Local Government Services",
+      "aliases": [
+        "tax sale certificate",
+        "tax lien certificate",
+        "redeem tax lien",
+        "tax lien redemption",
+        "tsc"
+      ]
+    },
+    {
+      "slug": "tax-collector",
+      "term": "Tax collector",
+      "category": "tax-bills",
+      "definition": "The town official who figures out how much tax each owner owes, sends the bills, takes in payments and enforces late taxes through interest, tax liens and tax sales.",
+      "example": "Say you missed a payment and want the exact amount due with interest. You'd contact your town's tax collector, not the tax assessor. The collector handles billing, payments and late-tax enforcement, working with the assessor and the county board of taxation. The state's Division of Local Government Services certifies tax collectors after an exam.",
+      "source": "https://www.nj.gov/dca/dlgs/programs/certification_docs/Requirements/ctcreqs.pdf",
+      "source_title": "Information for Candidates Applying for a Certified Tax Collector Certificate and Duties of a Certified Tax Collector (N.J.A.C. 5:32-3.1), NJ Division of Local Government Services",
+      "aliases": [
+        "tax collector",
+        "municipal tax collector",
+        "who collects property taxes",
+        "certified tax collector",
+        "tax collector office"
+      ]
+    },
+    {
+      "slug": "general-tax-rate",
+      "term": "General tax rate",
+      "category": "tax-bills",
+      "definition": "The rate your town uses to figure each property's tax bill, stated per $100 of assessed value. Multiply your assessment by the rate to get your yearly tax. It is not the same as the effective tax rate.",
+      "example": "Say your home is assessed at $150,000 and your town's general tax rate is 3.758 per $100 of assessed value (0.03758 as a decimal). Your yearly tax is $150,000 x 0.03758 = $5,637. Don't use the effective tax rate for this; the state publishes that one only for comparing towns.",
+      "source": "https://www.nj.gov/treasury/taxation/lpt/statdata.shtml",
+      "source_title": "NJ Division of Taxation - Statistical Information",
+      "aliases": [
+        "general tax rate",
+        "property tax rate",
+        "tax rate per 100",
+        "nj tax rate",
+        "town tax rate"
+      ]
+    },
+    {
+      "slug": "municipal-tax-levy",
+      "term": "Municipal tax levy",
+      "category": "tax-bills",
+      "definition": "The total dollars a town plans to raise from property taxes for its own budget. It is what is left after the town subtracts the other revenue it expects from what its budget needs.",
+      "example": "Say your town's budget needs $30 million and it expects $8 million from other sources. Its municipal tax levy is $22 million. If all taxable property in town is assessed at $2 billion, the town's part of the tax rate is $1.10 per $100 of assessed value ($22 million / $2 billion x 100). County and school levies are added to get the full rate.",
+      "source": "https://www.nj.gov/treasury/taxation/pdf/assessorshandbook.pdf",
+      "source_title": "Handbook for New Jersey Assessors (NJ Division of Taxation, revised July 2024)",
+      "aliases": [
+        "municipal tax levy",
+        "tax levy",
+        "amount to be raised by taxation",
+        "town tax levy",
+        "municipal purpose tax"
+      ]
+    },
+    {
+      "slug": "county-tax",
+      "term": "County tax",
+      "category": "tax-bills",
+      "definition": "The part of your property tax that pays for county government. The county's tax need is split among its towns based on each town's equalized value, which is the state's measure of the total market value of the town's property.",
+      "example": "Say your county needs $200 million from property taxes and your town holds 4% of the county's total equalized value. Your town's share of the county tax is $8 million. That amount is then spread across property owners in your town as the county part of the tax rate.",
+      "source": "https://www.nj.gov/treasury/taxation/lpt/genlpt.shtml",
+      "source_title": "NJ Division of Taxation - General Property Tax Information (How My Property is Valued)",
+      "aliases": [
+        "county tax",
+        "county property tax",
+        "county share of tax bill",
+        "county tax apportionment",
+        "county purpose tax"
+      ]
+    },
+    {
+      "slug": "school-tax",
+      "term": "School tax",
+      "category": "tax-bills",
+      "definition": "The part of your property tax that pays for public schools. Most school districts match one town, but some towns belong to a regional district whose costs are split among member towns by property value, enrollment or a mix.",
+      "example": "Say your town shares a regional high school district that needs $40 million from property taxes, split by enrollment. If 30% of the students come from your town, your town's share is $12 million. That is added to your local school district's levy, if your town has one, and collected from owners in your town.",
+      "source": "https://www.nj.gov/treasury/taxation/pdf/assessorshandbook.pdf",
+      "source_title": "Handbook for New Jersey Assessors (NJ Division of Taxation, revised July 2024)",
+      "aliases": [
+        "school tax",
+        "school property tax",
+        "regional school tax",
+        "local school tax",
+        "school levy"
+      ]
+    },
+    {
+      "slug": "fire-district-tax",
+      "term": "Fire district tax",
+      "category": "tax-bills",
+      "definition": "A tax on property inside a fire district, a separate local unit run by elected fire commissioners to provide fire protection. Your town assesses and collects it with your other property taxes, then pays it over to the district.",
+      "example": "Say your township has two fire districts and your home is in District No. 2. Your bill includes District 2's tax, figured on your assessment. Districts that hold their election on the third Saturday in February let voters there decide how much the district raises. Other districts hold their election with the November general election.",
+      "source": "https://www.nj.gov/dca/dlgs/programs/au_docs/Statutes/Fire%20District%20Law%20(as%20of%205-15-2026).PDF",
+      "source_title": "Fire District Law, N.J.S.A. 40A:14-70 et seq. (posted by NJ Division of Local Government Services, as of 5-15-2026)",
+      "aliases": [
+        "fire district tax",
+        "fire tax",
+        "fire district",
+        "board of fire commissioners",
+        "fire district budget vote"
+      ]
+    },
+    {
+      "slug": "open-space-tax",
+      "term": "Open space tax",
+      "category": "tax-bills",
+      "definition": "An extra property tax that voters approve to buy and care for parks and open land, preserve farmland and protect historic sites. Counties and towns can each have one, and the money must go into a dedicated trust fund.",
+      "example": "Say voters in your town approved an open space tax at a fixed rate, and it comes to $60 a year on your home. That money goes into the town's open space trust fund and can only be used for the purposes voters approved. Raising the rate later takes another public vote. A county open space tax is shared among towns like other county taxes.",
+      "source": "https://www.nj.gov/dca/divisions/dlgs/lfns/98/mc98-2.pdf",
+      "source_title": "Local Finance Notice MC-98-2: Open Space, Recreation, Farmland and Historic Preservation Trust Fund Taxing Districts, NJ Division of Local Government Services",
+      "aliases": [
+        "open space tax",
+        "open space trust fund",
+        "county open space tax",
+        "municipal open space tax",
+        "farmland preservation tax"
+      ]
+    },
+    {
+      "slug": "special-improvement-district",
+      "term": "Special improvement district (SID)",
+      "category": "tax-bills",
+      "definition": "A defined business area, usually a downtown, where the town charges a special assessment on commercial properties or businesses. The money goes to a nonprofit management group that runs district programs, and the town approves its budget yearly.",
+      "example": "Say your town creates an improvement district along its Main Street business area. Commercial property owners there pay a yearly special assessment, and the money goes to a district management corporation that handles things like marketing, events and upkeep. A home outside the district doesn't pay it.",
+      "source": "https://nj.gov/dca/dlps/idp_faq.shtml",
+      "source_title": "Frequently Asked Questions - Improvement District (ID) Programs, NJ Department of Community Affairs",
+      "aliases": [
+        "special improvement district",
+        "sid",
+        "business improvement district",
+        "bid assessment",
+        "downtown improvement district"
+      ]
+    },
+    {
+      "slug": "property-tax-levy-cap",
+      "term": "2% property tax levy cap",
+      "category": "tax-bills",
+      "definition": "A state limit that keeps a town, county or fire district from raising its total property tax levy more than 2% a year, with exclusions for things like debt service, capital spending, some pension and health cost increases, and declared emergencies.",
+      "example": "Say your town's levy was $20 million last year. The cap generally allows up to $20.4 million this year, plus value from new construction and any allowed exclusions. Going higher needs more than 50% of voters to approve. The cap limits the total levy, not your own bill, which can still change with your assessment. Schools have a separate 2% cap.",
+      "source": "https://pub.njleg.state.nj.us/Bills/2010/PL10/44_.PDF",
+      "source_title": "P.L.2010, Chapter 44 (calculation of the local tax levy cap)",
+      "aliases": [
+        "2 percent cap",
+        "property tax levy cap",
+        "2% tax cap",
+        "levy cap referendum",
+        "tax levy cap exclusions"
+      ]
+    },
+    {
+      "slug": "tax-assessor",
+      "term": "Tax assessor",
+      "category": "assessments-appeals",
+      "definition": "The local official who sets the assessed value of every property in town for tax purposes. The town appoints the assessor, but the duties are set by state law, and the assessor must hold a state Tax Assessor Certificate.",
+      "example": "Each New Jersey town has one assessor position. The assessor values your home as of October 1 and puts it on the town's assessment list. If your value looks wrong, call the assessor's office first. Once the list is filed with the county board of taxation, the assessor can no longer change it alone, so a formal appeal may be needed.",
+      "source": "https://www.nj.gov/treasury/taxation/pdf/assessorshandbook.pdf",
+      "source_title": "Handbook for New Jersey Assessors (NJ Division of Taxation, revised July 2024)",
+      "aliases": [
+        "tax assessor",
+        "municipal assessor",
+        "town assessor",
+        "who sets my assessment",
+        "assessor's office"
+      ]
+    },
+    {
+      "slug": "notice-of-assessment",
+      "term": "Notice of assessment",
+      "category": "assessments-appeals",
+      "definition": "A yearly notice, often a postcard, that your assessor mails to show your property's current assessment and the previous year's taxes. It must also tell you how to appeal.",
+      "example": "Outside Burlington, Gloucester and Monmouth counties, the assessor must mail it before February 1. Those three counties use an alternate calendar, with notices due by November 15 of the year before. The day your town finishes mailing these notices can push your appeal deadline later. If your assessment changes afterward, you get a new notice and have 45 days from its issue date to appeal.",
+      "source": "https://www.nj.gov/treasury/taxation/pdf/assessorshandbook.pdf",
+      "source_title": "Handbook for New Jersey Assessors (NJ Division of Taxation, revised July 2024)",
+      "aliases": [
+        "assessment notice",
+        "assessment postcard",
+        "notification of assessment",
+        "tax assessment letter",
+        "notice of change in assessment"
+      ]
+    },
+    {
+      "slug": "assessment-date",
+      "term": "Assessment date (October 1)",
+      "category": "assessments-appeals",
+      "definition": "The date New Jersey uses to value property for taxes: October 1 of the year before the tax year. Your assessment is meant to reflect what your property would sell for on that date.",
+      "example": "Say you are reading your 2027 tax bill. The assessed value on it is based on what a willing, knowledgeable buyer would have paid a willing, knowledgeable seller for your home on October 1, 2026, not what it is worth on the day the bill arrives. Qualified farmland is the exception: it is valued on what it can produce.",
+      "source": "https://www.nj.gov/treasury/taxation/lpt/genlpt.shtml",
+      "source_title": "NJ Division of Taxation - General Property Tax Information (How My Property is Valued)",
+      "aliases": [
+        "october 1 assessment date",
+        "valuation date",
+        "pretax year",
+        "assessment date",
+        "as of october 1"
+      ]
+    },
+    {
+      "slug": "county-board-of-taxation",
+      "term": "County board of taxation",
+      "category": "assessments-appeals",
+      "definition": "A board in each of New Jersey's 21 counties that supervises local assessors and hears property tax appeals. For most owners, it is the first place to file if you want to challenge your assessment.",
+      "example": "If you think your assessment is too high, you file the appeal with your county board of taxation, not with your town. Board members, also called commissioners, are appointed by the Governor. A board has five members, or seven in counties with more than 510,000 people. If you disagree with the board's judgment, you can take the case to the Tax Court.",
+      "source": "https://www.nj.gov/treasury/taxation/pdf/assessorshandbook.pdf",
+      "source_title": "Handbook for New Jersey Assessors (NJ Division of Taxation, revised July 2024)",
+      "aliases": [
+        "county tax board",
+        "county board of taxation",
+        "tax board",
+        "county tax administrator",
+        "where to file a tax appeal"
+      ]
+    },
+    {
+      "slug": "tax-court-of-new-jersey",
+      "term": "Tax Court of New Jersey",
+      "category": "assessments-appeals",
+      "definition": "The state court for tax cases. For property taxes, it reviews county tax board decisions, and owners of property assessed above $1,000,000 can file there directly instead of going to the county board first.",
+      "example": "Say the county board rules on your appeal and you still think your assessment is too high. You have 45 days from the date of the board's judgment to file with the Tax Court. If your property were assessed at $1.2 million, you could skip the county board and file with the Tax Court from the start.",
+      "source": "https://www.nj.gov/treasury/taxation/lpt/lpt-appeal.shtml",
+      "source_title": "NJ Division of Taxation - Assessment and Appeals",
+      "aliases": [
+        "tax court",
+        "nj tax court",
+        "state tax court",
+        "appeal county board decision",
+        "tax court appeal"
+      ]
+    },
+    {
+      "slug": "property-tax-appeal",
+      "term": "Property tax appeal",
+      "category": "assessments-appeals",
+      "definition": "A request to your county board of taxation to change your property's assessed value. You can appeal the assessment, but not the tax bill itself, because the taxes come from local budgets.",
+      "example": "In the state's appeal guide example, a home worth $100,000 is assessed at $110,000 in a town whose average ratio is 95.41%. That assessment is 110% of value, above the county's 100% level, so the board applies the average ratio: $100,000 x 95.41% = $95,410. The burden of proof is on the taxpayer, so you need evidence.",
+      "source": "https://www.nj.gov/treasury/taxation/pdf/lpt/ptappeal.pdf",
+      "source_title": "A Guide to Tax Appeal Hearings (NJ Division of Taxation)",
+      "aliases": [
+        "tax appeal",
+        "appeal my assessment",
+        "property tax appeal",
+        "lower my assessment",
+        "assessment appeal",
+        "form a-1"
+      ]
+    },
+    {
+      "slug": "tax-appeal-deadline",
+      "term": "Tax appeal deadline",
+      "category": "assessments-appeals",
+      "definition": "Your appeal must reach the county tax board by April 1 or 45 days after your town finishes mailing assessment notices, whichever is later. In a town that put a townwide revaluation or reassessment into effect that year, the deadline is May 1.",
+      "example": "Say your town finished mailing assessment notices on March 1. Forty-five days later is April 15, which is later than April 1, so your appeal must be received by April 15. A postmark is not enough. In Burlington, Gloucester and Monmouth counties, January 15 takes the place of April 1. A deadline that falls on a weekend or legal holiday moves to the next business day.",
+      "source": "https://www.nj.gov/treasury/taxation/pdf/other_forms/lpt/petappl.pdf",
+      "source_title": "Form A-1 Petition of Appeal and Instructions (NJ Division of Taxation, Form A-1 (6-26))",
+      "aliases": [
+        "appeal deadline",
+        "april 1 deadline",
+        "may 1 deadline",
+        "january 15 deadline",
+        "when to file tax appeal",
+        "45 days"
+      ]
+    },
+    {
+      "slug": "freeze-act",
+      "term": "Freeze Act",
+      "category": "assessments-appeals",
+      "definition": "A New Jersey law that keeps an assessment set by a final appeal judgment in place for that tax year and the next two. It stops a town from forcing an owner to appeal again every year.",
+      "example": "Say the county board lowers your assessment from $400,000 to $360,000 and nobody appeals further. The $360,000 generally stays for that tax year and the next two. The exceptions are a full townwide revaluation or reassessment, or the assessor showing at appeal that the property's value changed after the assessment date.",
+      "source": "https://www.nj.gov/treasury/taxation/pdf/assessorshandbook.pdf",
+      "source_title": "Handbook for New Jersey Assessors (NJ Division of Taxation, revised July 2024)",
+      "aliases": [
+        "freeze act",
+        "assessment freeze",
+        "frozen assessment",
+        "two year freeze",
+        "after tax appeal judgment"
+      ]
+    },
+    {
+      "slug": "comparable-sales",
+      "term": "Comparable sales (comps)",
+      "category": "assessments-appeals",
+      "definition": "Sales of properties similar to yours that you use as evidence of your property's market value in an appeal. Sale prices count as evidence; other properties' assessments do not.",
+      "example": "The state's appeal guide says to attach 3 to 5 comparable sales to your appeal when you file, and the assessor and county board must get copies at least 7 days before the hearing. Use sales from before the October 1 assessment date, and add photos of your home and the comps.",
+      "source": "https://www.nj.gov/treasury/taxation/pdf/lpt/ptappeal.pdf",
+      "source_title": "A Guide to Tax Appeal Hearings (NJ Division of Taxation)",
+      "aliases": [
+        "comps",
+        "comparable sales",
+        "comparable properties",
+        "similar home sales",
+        "sales comparison"
+      ]
+    },
+    {
+      "slug": "presumption-of-correctness",
+      "term": "Presumption of correctness",
+      "category": "assessments-appeals",
+      "definition": "The legal starting point in an appeal: your assessment is treated as correct until proven wrong. The person appealing, usually the owner, carries the burden of proof.",
+      "example": "Telling the county board that your taxes feel too high will not lower your assessment. You need evidence of what your home was worth on the assessment date, such as sales of similar homes. If your evidence does not overcome the presumption, the assessment stays as it is.",
+      "source": "https://www.nj.gov/treasury/taxation/pdf/assessorshandbook.pdf",
+      "source_title": "Handbook for New Jersey Assessors (NJ Division of Taxation, revised July 2024)",
+      "aliases": [
+        "presumption of correctness",
+        "burden of proof",
+        "assessment presumed correct",
+        "who has to prove value"
+      ]
+    },
+    {
+      "slug": "equalized-value",
+      "term": "Equalized value",
+      "category": "assessments-appeals",
+      "definition": "Assessed value divided by the town's average ratio of assessed value to true value. It turns an assessment into an estimate of full market value, even in towns that assess below 100%.",
+      "example": "The state's 2026 Table of Equalized Valuations lists Absecon's real property at $726,249,200 assessed, with an average ratio of 58.24%. Dividing gives $1,246,993,819 of true value. Say a home in Absecon is assessed at $300,000: $300,000 divided by 0.5824 is about $515,110.",
+      "source": "https://www.nj.gov/treasury/taxation/pdf/lptval/2026/2026TEV.pdf",
+      "source_title": "Table of Equalized Valuations 2026 (NJ Division of Taxation, published October 1, 2026)",
+      "aliases": [
+        "equalized value",
+        "equalized valuation",
+        "true value",
+        "assessed value divided by ratio",
+        "market value estimate"
+      ]
+    },
+    {
+      "slug": "net-valuation-taxable",
+      "term": "Net valuation taxable",
+      "category": "assessments-appeals",
+      "definition": "The total assessed value of all taxable property in a town, after partial exemptions and abatements are subtracted. It is the base that the town's general tax rate is applied to.",
+      "example": "Union County's 2025 Abstract of Ratables lists Berkeley Heights' net valuation taxable at $1,862,695,565, with a general tax rate of 4.401 per $100 of assessed value. Say a home there was assessed at $500,000: $500,000 x 4.401 / 100 = $22,005 in taxes for the year.",
+      "source": "https://www.nj.gov/treasury/taxation/pdf/lpt/ratables/Union2025.pdf",
+      "source_title": "Abstract of Ratables, Union County 2025 (Union County Board of Taxation, via NJ Division of Taxation)",
+      "aliases": [
+        "net valuation taxable",
+        "total taxable value",
+        "town ratable base",
+        "ratables",
+        "tax base"
+      ]
+    },
+    {
+      "slug": "property-class",
+      "term": "Property class",
+      "category": "assessments-appeals",
+      "definition": "A code the assessor gives every parcel based on its use, such as 1 for vacant land, 2 for residential, 3A or 3B for farms, 4A for commercial, 4B for industrial, 4C for apartments, and 15A to 15F for exempt property.",
+      "example": "A one to four family house is Class 2. An apartment building is Class 4C. On a farm that qualifies for farmland assessment, the land is Class 3B, while barns and silos are assessed under Class 3A. A public school is Class 15A. Railroad property uses 5A or 5B.",
+      "source": "https://www.nj.gov/treasury/taxation/pdf/lpt/modIVmanual.pdf",
+      "source_title": "MOD IV User Manual (NJ Division of Taxation, Property Administration, 2024 updates)",
+      "aliases": [
+        "property class",
+        "class 2",
+        "class 4a",
+        "property class code",
+        "tax class",
+        "class 15"
+      ]
+    },
+    {
+      "slug": "block-and-lot",
+      "term": "Block and lot",
+      "category": "assessments-appeals",
+      "definition": "The pair of numbers that identifies a parcel on a town's tax map. Each block bounded by public roads gets a block number, and each parcel inside the block gets a lot number.",
+      "example": "Say your property is Block 12, Lot 7. That pair points to one parcel on your town's tax map and matches the parcel ID on the town's assessment list, so you can use it to look up your assessment. Every town must keep a tax map, except townships with fewer than 2,500 people, which may choose to.",
+      "source": "https://www.nj.gov/treasury/taxation/pdf/assessorshandbook.pdf",
+      "source_title": "Handbook for New Jersey Assessors (NJ Division of Taxation, revised July 2024)",
+      "aliases": [
+        "block and lot",
+        "tax map",
+        "parcel number",
+        "lot number",
+        "block number"
+      ]
+    },
+    {
+      "slug": "condo-qualifier",
+      "term": "Condo qualifier",
+      "category": "assessments-appeals",
+      "definition": "A code added after the block and lot to tell apart units that share the same parcel. For a condo unit it is the letter C followed by the unit number, such as C0001.",
+      "example": "Say a condo building sits on Block 1, Lot 1. Every unit shares that block and lot, so each gets its own qualifier. Unit 1 could be listed as Block 1, Lot 1, C0001, with leading zeros. When you look up a condo's assessment, include the qualifier, because the block and lot alone match every unit. Other qualifiers include QFARM for qualified farmland.",
+      "source": "https://www.nj.gov/treasury/taxation/pdf/lpt/modIVmanual.pdf",
+      "source_title": "MOD IV User Manual (NJ Division of Taxation, Property Administration, 2024 updates)",
+      "aliases": [
+        "qualifier",
+        "condo qualifier",
+        "c0001",
+        "block lot qualifier",
+        "qualification code"
+      ]
+    },
+    {
+      "slug": "exempt-property",
+      "term": "Exempt property",
+      "category": "assessments-appeals",
+      "definition": "Property that pays no property tax because of who owns it and how it is used, such as public schools, government property, church and charitable property, and cemeteries. Assessors code it as Class 15.",
+      "example": "A town-owned public library is Class 15C, public property. A building owned by a church and used in its work is Class 15D. Religious, charitable and other nonprofit owners file an Initial Statement to claim the exemption and a Further Statement every third year to keep it. Government owners do not file these.",
+      "source": "https://www.nj.gov/treasury/taxation/pdf/assessorshandbook.pdf",
+      "source_title": "Handbook for New Jersey Assessors (NJ Division of Taxation, revised July 2024)",
+      "aliases": [
+        "exempt property",
+        "tax exempt property",
+        "class 15",
+        "church property tax",
+        "nonprofit exemption"
+      ]
+    },
+    {
+      "slug": "anchor-program",
+      "term": "ANCHOR program",
+      "category": "relief-programs",
+      "definition": "ANCHOR is New Jersey's yearly property tax relief payment for people who own or rent their main home. For the 2025 benefit, homeowners qualify with income up to $250,000 and renters with income up to $150,000.",
+      "example": "From the state's 2025 table: a homeowner with income of, say, $120,000 gets $1,500, and one with $200,000 gets $1,000. A renter gets $450, or $700 if 65 or older by December 31, 2025. Payments roll out starting September 15, usually within 90 days of filing.",
+      "source": "https://www.nj.gov/treasury/taxation/anchor/calculated.shtml",
+      "source_title": "NJ Division of Taxation - How ANCHOR Benefits Are Calculated",
+      "aliases": [
+        "anchor",
+        "anchor benefit",
+        "anchor rebate",
+        "anchor payment",
+        "affordable new jersey communities for homeowners and renters"
+      ]
+    },
+    {
+      "slug": "senior-freeze",
+      "term": "Senior Freeze (Property Tax Reimbursement)",
+      "category": "relief-programs",
+      "definition": "Senior Freeze, officially called Property Tax Reimbursement, pays eligible homeowners back for property tax increases above their base year. It is for people 65 or older or getting Social Security or Railroad Retirement disability benefits.",
+      "example": "For the 2025 application, you must have owned and lived in the home since December 31, 2022, and household income must be $168,268 or less for 2024 and $172,475 or less for 2025. Made-up numbers: if your base-year bill was $8,000 and your 2025 bill is $8,450, the reimbursement is $450.",
+      "source": "https://www.nj.gov/treasury/taxation/ptr/eligibility.shtml",
+      "source_title": "NJ Division of Taxation - Senior Freeze (Property Tax Reimbursement) | Eligibility Requirements",
+      "aliases": [
+        "senior freeze",
+        "property tax reimbursement",
+        "ptr",
+        "senior tax freeze",
+        "nj senior freeze income limit"
+      ]
+    },
+    {
+      "slug": "stay-nj",
+      "term": "Stay NJ",
+      "category": "relief-programs",
+      "definition": "Stay NJ is a property tax benefit for homeowners 65 or older. You claim it on the same PAS-1 form as ANCHOR and Senior Freeze, and the amount depends on your tax bill and those other benefits. Renters and mobile home owners cannot get it.",
+      "example": "For the 2025 tax year, the state lists a top yearly benefit of $6,500 for income up to $100,000, $5,000 for $100,000.01 to $150,000, and $4,000 for $150,000.01 to $200,000. Over $200,000 gets $0. You must have owned and lived in the home for all of 2025. The 2025 benefit is set to be paid in February and May 2027.",
+      "source": "https://www.nj.gov/treasury/taxation/staynj/index.shtml",
+      "source_title": "NJ Division of Taxation - Stay NJ - Property Tax Relief for Senior Citizens",
+      "aliases": [
+        "stay nj",
+        "staynj",
+        "stay nj property tax credit",
+        "senior property tax credit",
+        "stay nj income limit"
+      ]
+    },
+    {
+      "slug": "pas-1-application",
+      "term": "PAS-1 application",
+      "category": "relief-programs",
+      "definition": "Form PAS-1 is one combined application that New Jersey homeowners and renters who are 65 or older, or getting Social Security or Railroad Retirement disability benefits, use to claim Senior Freeze, ANCHOR and Stay NJ.",
+      "example": "The 2025 PAS-1 is due November 2, 2026, online or on paper, and you do not send proof of property taxes paid. It asks for both 2024 and 2025 income because Senior Freeze checks both years. The state decides which programs you get and sends a letter in autumn 2026 with each amount.",
+      "source": "https://www.nj.gov/treasury/taxation/pdf/25-pas1in.pdf",
+      "source_title": "2025 Form PAS-1 Application for Property Tax Relief Instructions",
+      "aliases": [
+        "pas-1",
+        "pas1",
+        "pas-1 form",
+        "combined property tax relief application",
+        "senior property tax relief application"
+      ]
+    },
+    {
+      "slug": "senior-disabled-deduction",
+      "term": "$250 senior citizen or disabled person deduction",
+      "category": "relief-programs",
+      "definition": "A $250 yearly cut in the property tax bill for a homeowner who is 65 or older or permanently and totally disabled, or an unmarried surviving spouse 55 or older. Income can be no more than $10,000, not counting Social Security or certain pensions.",
+      "example": "Made-up example: a 70-year-old Trenton homeowner gets Social Security plus $6,000 a year from a part-time job. Social Security is left out, so her counted income is $6,000, under the $10,000 limit. If she meets the October 1 residency and ownership rules and files Form PTD, her bill drops by $250. She must also file a yearly income statement with the tax collector.",
+      "source": "https://www.nj.gov/treasury/taxation/pdf/lpt/ptbenefitsbrochure.pdf",
+      "source_title": "$250 Real Property Tax Deduction For Senior Citizens, Disabled Persons or Surviving Spouse",
+      "aliases": [
+        "senior citizen deduction",
+        "$250 senior deduction",
+        "disabled person deduction",
+        "ptd form",
+        "senior property tax deduction"
+      ]
+    },
+    {
+      "slug": "veteran-deduction",
+      "term": "$250 veteran deduction",
+      "category": "relief-programs",
+      "definition": "A $250 yearly cut in the property tax bill for an honorably discharged veteran with active duty service who owns the property and is a New Jersey resident on October 1 of the year before the tax year. Some surviving spouses and partners also qualify.",
+      "example": "Made-up numbers: a Cherry Hill veteran whose DD 214 shows active duty and an honorable discharge files Form V.S.S. with the assessor or tax collector. A bill that would have been $9,800 drops to $9,550. Reserve or National Guard service counts only if called to active duty; active duty for training does not count.",
+      "source": "https://www.nj.gov/treasury/taxation/lpt/lpt-veterans.shtml",
+      "source_title": "NJ Division of Taxation - $250 Veterans Property Tax Deduction",
+      "aliases": [
+        "veteran deduction",
+        "$250 veteran deduction",
+        "veterans property tax deduction",
+        "vss form",
+        "military property tax deduction"
+      ]
+    },
+    {
+      "slug": "disabled-veteran-exemption",
+      "term": "100% disabled veteran exemption",
+      "category": "relief-programs",
+      "definition": "A full property tax exemption on the main home of an honorably discharged veteran certified by the U.S. Department of Veterans Affairs as 100% permanently and totally disabled from active duty service. Unremarried surviving spouses or partners may qualify.",
+      "example": "Made-up example: a Toms River veteran has a VA letter certifying a service-connected disability from active duty as 100% permanent and total. He owns and lives in the home, so he files Form D.V.S.S.E. and his proofs with the local assessor. If denied, he can appeal to the County Board of Taxation by April 1 (January 15 in Burlington, Gloucester and Monmouth counties).",
+      "source": "https://www.nj.gov/treasury/taxation/lpt/lpt-disabledvet.shtml",
+      "source_title": "NJ Division of Taxation - 100% Disabled Veteran Property Tax Exemption",
+      "aliases": [
+        "disabled veteran exemption",
+        "100% disabled veteran",
+        "dvsse form",
+        "totally disabled veteran property tax",
+        "veteran full property tax exemption"
+      ]
+    },
+    {
+      "slug": "property-tax-deduction",
+      "term": "NJ income tax property tax deduction and credit",
+      "category": "relief-programs",
+      "definition": "On the New Jersey income tax return, a homeowner or renter can deduct property taxes paid on the main home, up to $15,000, or take a $50 refundable credit instead. You can claim only one, so pick whichever helps more.",
+      "example": "Made-up numbers: Maria paid $11,000 in property tax on her Edison home, so she can deduct $11,000. Her neighbor paid $18,000 but can deduct only $15,000. A renter paying $2,000 a month ($24,000 a year) counts 18% of rent, or $4,320, as property taxes paid. The deduction lowers taxable income; the credit comes straight off the tax owed.",
+      "source": "https://www.nj.gov/treasury/taxation/njit35.shtml",
+      "source_title": "NJ Division of Taxation - Property Tax Deduction/Credit for Homeowners and Renters",
+      "aliases": [
+        "property tax deduction",
+        "nj property tax deduction",
+        "property tax credit",
+        "$50 property tax credit",
+        "$15,000 property tax deduction"
+      ]
+    },
+    {
+      "slug": "homestead-benefit",
+      "term": "Homestead Benefit",
+      "category": "relief-programs",
+      "definition": "The Homestead Benefit was New Jersey's earlier state property tax relief program. ANCHOR replaced it starting with the 2019 tax year, and ANCHOR covers both homeowners and renters.",
+      "example": "The last Homestead Benefit was for the 2018 tax year, and its filing deadline was November 30, 2021. So if you are looking up state relief for 2018 or earlier, look for Homestead Benefit records. For 2019 and later, look for ANCHOR.",
+      "source": "https://www.nj.gov/treasury/taxation/pdf/assessorshandbook.pdf",
+      "source_title": "Handbook for New Jersey Assessors (July 2024), Section 437.01",
+      "aliases": [
+        "homestead benefit",
+        "homestead rebate",
+        "homestead credit",
+        "nj homestead benefit",
+        "homestead benefit replaced by anchor"
+      ]
+    },
+    {
+      "slug": "home-improvement-exemption",
+      "term": "Home improvement exemption",
+      "category": "relief-programs",
+      "definition": "Under the Five-Year Exemption and Abatement Law, a town's ordinance can treat the first $5,000, $15,000 or $25,000 of value from improving a home more than 20 years old as not raising its value for five years, in areas declared in need of rehabilitation.",
+      "example": "Made-up numbers: your town's ordinance picks $25,000, and the assessor values the new kitchen and bath on your 70-year-old house at $40,000. For five years, the first $25,000 is treated as adding no value, so only $15,000 can be added. You must apply with the assessor within 30 days of finishing the work, counting Saturdays and Sundays.",
+      "source": "https://www.nj.gov/dca/dlgs/misc_docs/Five-Year%20Exemption%20and%20Abatement%20Law.PDF",
+      "source_title": "Five-Year Exemption and Abatement Law, N.J.S.A. 40A:21-1 et seq. (NJ Division of Local Government Services)",
+      "aliases": [
+        "home improvement exemption",
+        "dwelling improvement exemption",
+        "improvement exemption older home",
+        "$25,000 improvement exemption",
+        "five year home improvement exemption"
+      ]
+    },
+    {
+      "slug": "five-year-exemption-and-abatement",
+      "term": "Five-Year Exemption and Abatement",
+      "category": "relief-programs",
+      "definition": "A state law that lets a town, by ordinance, give a five-year property tax exemption, abatement or both for new construction, improvements or conversions in areas it has declared in need of rehabilitation. Without a town ordinance, it is not available.",
+      "example": "Made-up example: a city declares its downtown in need of rehabilitation and adopts an ordinance. A shop owner there finishes renovating her store. She must file Form E/A-1 with the tax assessor within 30 days of completion, counting Saturdays and Sundays. Late applications are denied.",
+      "source": "https://www.nj.gov/treasury/taxation/pdf/lpt/ea1.pdf",
+      "source_title": "Form E/A-1, Application for Five-Year Exemption and/or Abatement (NJ Division of Taxation)",
+      "aliases": [
+        "five year exemption",
+        "five year abatement",
+        "5 year tax abatement",
+        "e/a-1",
+        "area in need of rehabilitation tax break"
+      ]
+    },
+    {
+      "slug": "municipal-budget",
+      "term": "Municipal budget",
+      "category": "town-finance",
+      "definition": "A town's yearly spending plan. The governing body, such as the town council, must first introduce and approve it and then formally adopt it, by deadlines set in state law.",
+      "example": "For towns on a calendar-year budget, a law signed December 23, 2025 (P.L.2025, c.185) wrote into law deadlines of March 31 to introduce and approve the budget and April 30 to adopt it, or the next regular meeting after those dates. Governing body members who fail or refuse to follow the budget law can face a personal penalty of $100 a day.",
+      "source": "https://www.nj.gov/dca/dlgs/lfns/2026/2026-05.pdf",
+      "source_title": "Local Finance Notice 2026-05: Impact of P.L. 2025, c.185 on Local Budgets, Financial Administration, Statutory Positions, and Estimated Tax Bills",
+      "aliases": [
+        "town budget",
+        "municipal budget adoption",
+        "budget introduction deadline",
+        "local budget law",
+        "when is the town budget adopted"
+      ]
+    },
+    {
+      "slug": "user-friendly-budget",
+      "term": "User-Friendly Budget (UFB)",
+      "category": "town-finance",
+      "definition": "A summary section that every New Jersey town must prepare with its budget. It is shown to the public as part of the introduced budget and filed with the state Division of Local Government Services.",
+      "example": "A town cannot adopt this year's budget until it has sent the state the user-friendly budget section for last year's adopted budget. One required page lists the unused sick, vacation and other leave time employees have built up, broken down by type in days and dollar value.",
+      "source": "https://www.nj.gov/dca/dlgs/lfns/2023-21.pdf",
+      "source_title": "Local Finance Notice 2023-21: N.J.A.C. 5:30 Readoption, Budget & Financial Administration",
+      "aliases": [
+        "ufb",
+        "user friendly budget",
+        "municipal budget summary",
+        "budget summary for residents"
+      ]
+    },
+    {
+      "slug": "ratables",
+      "term": "Ratables (ratable base)",
+      "category": "town-finance",
+      "definition": "The taxable property in a town, measured by its total assessed value. The amount a town must raise in property taxes is spread across this base, so a bigger base can mean a lower tax rate.",
+      "example": "Made-up numbers: a town must raise $15 million and its ratables total $600 million, so the rate is $2.50 per $100 of assessed value. If a new warehouse adds $20 million in ratables and the amount to raise stays $15 million, the rate falls to about $2.42.",
+      "source": "https://www.nj.gov/treasury/taxation/pdf/assessorshandbook.pdf",
+      "source_title": "Handbook for New Jersey Assessors (Revised July 2024)",
+      "aliases": [
+        "ratable",
+        "tax base",
+        "new ratables",
+        "ratable base",
+        "net valuation taxable"
+      ]
+    },
+    {
+      "slug": "municipal-surplus",
+      "term": "Municipal surplus (fund balance)",
+      "category": "town-finance",
+      "definition": "What a town has left when its cash and other quick assets are greater than its liabilities. A town can use some of it as revenue in next year's budget, which lowers the amount it must raise from property taxes.",
+      "example": "Made-up numbers, simplified: a town plans $30 million of spending and expects $8 million from other revenue. If it uses $2 million of surplus, it must raise $20 million from property taxes instead of $22 million. Unless the state Director agrees, the surplus used can't be more than the town held in cash or quick assets at the start of the year.",
+      "source": "https://www.nj.gov/dca/dlgs/resources/misc_publications/local_budget_law_10-10.pdf",
+      "source_title": "New Jersey Local Budget Law, N.J.S.A. 40A:4-1 et seq. (Division of Local Government Services compilation)",
+      "aliases": [
+        "surplus",
+        "fund balance",
+        "surplus anticipated",
+        "using surplus to lower taxes",
+        "municipal reserves"
+      ]
+    },
+    {
+      "slug": "debt-service",
+      "term": "Debt service",
+      "category": "town-finance",
+      "definition": "The payments a town makes on money it has borrowed through bonds and notes, covering both principal and interest. Each year's budget must include a separate line for it.",
+      "example": "Made-up case: a town sells bonds to pay for a new firehouse. Every year until the bonds are paid off, its budget must include the principal and interest due. Debt service is an exception to the 1977 spending cap, and increases in it are excluded from the property tax levy cap.",
+      "source": "https://www.nj.gov/dca/dlgs/resources/misc_publications/local_budget_law_10-10.pdf",
+      "source_title": "New Jersey Local Budget Law, N.J.S.A. 40A:4-1 et seq. (Division of Local Government Services compilation)",
+      "aliases": [
+        "bond payments",
+        "principal and interest",
+        "municipal debt payments",
+        "debt redemption charges"
+      ]
+    },
+    {
+      "slug": "bond-referendum",
+      "term": "School bond referendum",
+      "category": "town-finance",
+      "definition": "A ballot question asking voters in a Type II school district to approve school bonds for a building project. In Type I districts and Type II districts with a board of school estimate, that board approves the borrowing instead of voters.",
+      "example": "Made-up case: a Type II district without a board of school estimate wants to borrow for a new wing. Its board of education writes the ballot question for an annual or special school election. The question must name the project and the amount to be raised. Several projects can share one question or be split into separate questions.",
+      "source": "https://www.nj.gov/education/code/current/title6a/chap26.pdf",
+      "source_title": "N.J.A.C. 6A:26, Educational Facilities",
+      "aliases": [
+        "school referendum",
+        "bond referendum",
+        "school construction vote",
+        "special school election",
+        "board of school estimate"
+      ]
+    },
+    {
+      "slug": "appropriations-cap",
+      "term": "Appropriations cap (1977 cap law)",
+      "category": "town-finance",
+      "definition": "A 1977 state law that limits how much a town can raise its budget spending, called final appropriations, from one year to the next. It is separate from the 2010 property tax levy cap, and towns must follow both.",
+      "example": "For 2026 budgets, the state set the cost-of-living adjustment at 2%. A town can pass an ordinance to allow up to 3.5% and bank unused room for up to two years. Made-up numbers: on $20 million of capped spending, that is $400,000 at 2% or up to $700,000 at 3.5%. Part of health insurance increases falls outside the cap.",
+      "source": "https://www.nj.gov/dca/dlgs/lfns/2025/2025-14.pdf",
+      "source_title": "Local Finance Notice 2025-14: Calendar Year 2026 Municipal & County Budget Cap Information",
+      "aliases": [
+        "1977 cap",
+        "spending cap",
+        "cola ordinance",
+        "cap bank",
+        "appropriation cap"
+      ]
+    },
+    {
+      "slug": "state-school-aid",
+      "term": "State school aid",
+      "category": "town-finance",
+      "definition": "Money the state gives school districts under the School Funding Reform Act (SFRA). Its biggest piece, equalization aid, gives more to districts with higher student needs and fewer local resources, measured by income and property values.",
+      "example": "The state fully funded the SFRA formula for the first time in its fiscal year 2025 budget. The formula estimates a \"local share\" each district can pay. If local incomes or property values rise, that share can go up and equalization aid can drop, putting more pressure on the school tax levy.",
+      "source": "https://www.nj.gov/education/stateaid/docs/FY2026%20Resolution%201378_School%20Funding%20Report_Final_12.1.2025_AE.pdf",
+      "source_title": "Examination of School Funding Policies (New Jersey Department of Education, December 2025)",
+      "aliases": [
+        "school aid",
+        "sfra",
+        "school funding formula",
+        "equalization aid",
+        "local fair share"
+      ]
+    },
+    {
+      "slug": "school-budget",
+      "term": "School budget",
+      "category": "town-finance",
+      "definition": "A school district's yearly spending plan. The board of education adopts it and sends it to the state Education Commissioner for approval, and the school tax amount it sets is collected through local property tax bills.",
+      "example": "Type II districts hold their annual school election on the third Tuesday in April or, if they moved it, in November. Under P.L.2023, c.289, signed January 16, 2024, neither group votes on the budget's general fund tax levy. On the budget, voters decide only separate proposals to raise extra money.",
+      "source": "https://pub.njleg.state.nj.us/Bills/2022/PL23/289_.HTM",
+      "source_title": "P.L. 2023, c.289 (S4209 2R): An Act concerning school elections",
+      "aliases": [
+        "school district budget",
+        "school budget vote",
+        "april school election",
+        "november school election",
+        "separate proposal"
+      ]
+    },
+    {
+      "slug": "affordable-housing-obligation",
+      "term": "Affordable housing obligation (Mount Laurel)",
+      "category": "town-finance",
+      "definition": "Under the Mount Laurel court rulings and state law, a town must use its zoning to give a realistic chance for its fair share of the region's need for low- and moderate-income homes. Towns must plan for it but are not required to build it.",
+      "example": "Under a 2024 law (P.L.2024, c.2), obligations run in 10-year rounds, starting with the fourth round on July 1, 2025. For that round, each town had to set its number by binding resolution by January 31, 2025 and adopt a housing element and fair share plan by June 30, 2025. The law also abolished COAH.",
+      "source": "https://pub.njleg.state.nj.us/Bills/2024/PL24/2_.HTM",
+      "source_title": "P.L. 2024, c.2 (A4 2R): An Act concerning affordable housing",
+      "aliases": [
+        "mount laurel",
+        "fair share housing",
+        "affordable housing obligation",
+        "coah",
+        "fourth round"
+      ]
+    },
+    {
+      "slug": "redevelopment-area",
+      "term": "Area in need of redevelopment",
+      "category": "town-finance",
+      "definition": "An area a town has formally declared \"in need of redevelopment\" under the Local Redevelopment and Housing Law, based on conditions such as unsafe or abandoned buildings. The label gives the town special redevelopment powers.",
+      "example": "The governing body first asks the planning board to investigate and must say whether the area would be a Condemnation area, where the town can use eminent domain, or a Non-Condemnation area. The board holds a public hearing and makes a recommendation, then the governing body decides. In a Condemnation area, owners have 45 days after notice to challenge it.",
+      "source": "https://pub.njleg.state.nj.us/Bills/2012/PL13/159_.HTM",
+      "source_title": "P.L. 2013, c.159 (A3615 2R): An Act concerning procedures and powers under the Local Redevelopment and Housing Law",
+      "aliases": [
+        "redevelopment area",
+        "area in need of redevelopment",
+        "blight designation",
+        "condemnation redevelopment area",
+        "lrhl"
+      ]
+    },
+    {
+      "slug": "county-equalization-table",
+      "term": "County equalization table",
+      "category": "town-finance",
+      "definition": "A yearly county table that converts each town's total assessed value into true value, using its average assessment ratio. It lets the county split county taxes fairly among towns that assess at different levels.",
+      "example": "Made-up numbers: Town A has $1 billion in assessments at a 50% ratio, so its true value is $2 billion. Town B has $1.5 billion at 100%, so $1.5 billion. In a two-town county, Town A would carry about 57% of the county tax even though its assessments are lower. A town can appeal the table to the Tax Court within 45 days.",
+      "source": "https://www.nj.gov/treasury/taxation/pdf/assessorshandbook.pdf",
+      "source_title": "Handbook for New Jersey Assessors (Revised July 2024)",
+      "aliases": [
+        "county equalization",
+        "equalization table",
+        "county tax apportionment",
+        "equalized value",
+        "apportionment valuation"
+      ]
+    },
+    {
+      "slug": "municipal-audit",
+      "term": "Municipal audit and Annual Financial Statement (AFS)",
+      "category": "town-finance",
+      "definition": "Two yearly checkups on a town's finances: the Annual Financial Statement (AFS) the town files with the state, and the annual audit done by an auditor.",
+      "example": "Under a 2025 law (P.L.2025, c.185), calendar-year towns must file the AFS with the state by March 10 and finish the annual audit by August 31. The audit goes to the state through its FAST system within five days of being filed with the town, and the governing body has 45 days to certify that it reviewed the audit.",
+      "source": "https://www.nj.gov/dca/dlgs/lfns/2026/2026-05.pdf",
+      "source_title": "Local Finance Notice 2026-05: Impact of P.L. 2025, c.185 on Local Budgets, Financial Administration, Statutory Positions, and Estimated Tax Bills",
+      "aliases": [
+        "annual financial statement",
+        "afs",
+        "municipal audit",
+        "annual audit",
+        "corrective action plan"
+      ]
+    },
+    {
+      "slug": "realty-transfer-fee",
+      "term": "Realty transfer fee (RTF)",
+      "category": "buying-selling",
+      "definition": "A New Jersey state fee the seller pays when the deed for a sale is recorded. It is based on the sale price, with lower rates for qualifying senior citizens, blind or disabled sellers, and low and moderate income housing.",
+      "example": "Made-up example: a seller with no exemption sells a house for $325,000. For sales not over $350,000, the fee is $2.00 per $500 on the first $150,000 ($600), $3.35 per $500 on the next $50,000 ($335), and $3.90 per $500 on the last $125,000 ($975). Total: $1,910.",
+      "source": "https://www.nj.gov/treasury/taxation/realty.shtml",
+      "source_title": "NJ Division of Taxation - Property Sale Realty Transfer Fee",
+      "aliases": [
+        "realty transfer fee",
+        "rtf",
+        "nj transfer tax",
+        "seller transfer fee",
+        "deed recording fee"
+      ]
+    },
+    {
+      "slug": "mansion-tax",
+      "term": "Mansion tax (Graduated Percent Fee)",
+      "category": "buying-selling",
+      "definition": "New Jersey's extra fee on certain sales over $1 million, now called the Graduated Percent Fee. For deeds submitted for recording on or after July 10, 2025, the seller pays it, at 1% to 3.5% of the full price. Before that, buyers paid a flat 1%.",
+      "example": "Rates by total price: over $1M up to $2M, 1%; up to $2.5M, 2%; up to $3M, 2.5%; up to $3.5M, 3%; over $3.5M, 3.5%. The rate applies to the whole price, not just the part over $1M. The state's own example: a $2.75 million sale owes 2.5% of $2.75 million, or $68,750, on top of the seller's other transfer fees.",
+      "source": "https://www.nj.gov/treasury/taxation/pdf/lpt/GraduatedPercentFeeNotice.pdf",
+      "source_title": "Amendments to Graduated Percent Fee on Realty Transfers over $1 Million (NJ Division of Taxation memo, July 2, 2025)",
+      "aliases": [
+        "mansion tax",
+        "graduated percent fee",
+        "1 percent fee",
+        "million dollar sale fee",
+        "nj mansion tax seller"
+      ]
+    },
+    {
+      "slug": "attorney-review-period",
+      "term": "Attorney review period",
+      "category": "buying-selling",
+      "definition": "When a real estate agent or broker prepares a New Jersey home sale contract, it must include an attorney review clause. The buyer and seller then have three business days from delivery of the fully signed contract to have a lawyer review it.",
+      "example": "Made-up example: a buyer and seller sign a contract their agents prepared, and fully signed copies reach both sides. For the next three business days, either side's lawyer can propose changes or cancel the deal. If the parties instead have a lawyer write the contract, it may or may not include this review period.",
+      "source": "https://www.nj.gov/dobi/division_consumers/pdf/buyingahome.pdf",
+      "source_title": "Buying a home: consumer guide, New Jersey Department of Banking and Insurance",
+      "aliases": [
+        "attorney review",
+        "three day attorney review",
+        "3 day review",
+        "attorney review clause",
+        "contract review period"
+      ]
+    },
+    {
+      "slug": "certificate-of-occupancy",
+      "term": "Certificate of occupancy (CO)",
+      "category": "buying-selling",
+      "definition": "The local construction official's approval to use a new building, an addition, or a building whose use is changing. Under New Jersey's Uniform Construction Code, these cannot be used until the CO is issued.",
+      "example": "Made-up example: a builder finishes a new house in Jackson, and no one can move in until the construction official issues a CO. Buying an older house is different. The state code lets an existing building's legal use continue, except where a property or fire safety maintenance code or housing standard says otherwise, so resale checks come from those codes, not a new CO.",
+      "source": "https://www.nj.gov/dca/codes/codreg/pdf_regs/njac_5_23_2.pdf",
+      "source_title": "N.J.A.C. 5:23-2, Uniform Construction Code administration and enforcement (NJ DCA courtesy copy, through Aug. 17, 2026)",
+      "aliases": [
+        "co",
+        "certificate of occupancy",
+        "occupancy permit",
+        "new construction co",
+        "building co"
+      ]
+    },
+    {
+      "slug": "certificate-of-continued-occupancy",
+      "term": "Certificate of continued occupancy (CCO)",
+      "category": "buying-selling",
+      "definition": "A certificate for an existing building, issued at the owner's request after a general inspection of its visible parts finds no code violations or unsafe conditions. Some towns inspect homes for resale, and local fees for these certificates vary by town.",
+      "example": "Made-up example: a seller in a town with a resale ordinance books the town inspection before closing. The inspector looks only at the visible parts of the house, so a CCO is not a full report on hidden wiring or pipes. The fee is set by the town's ordinance and can differ from one town to the next.",
+      "source": "https://www.nj.gov/dca/codes/publications/pdf_licensing/co_comment.pdf",
+      "source_title": "Uniform Construction Code: Construction Official Commentary (NJ DCA, code reference update June 2023)",
+      "aliases": [
+        "cco",
+        "certificate of continued occupancy",
+        "continued occupancy",
+        "resale inspection",
+        "town resale inspection",
+        "resale certificate"
+      ]
+    },
+    {
+      "slug": "smoke-co-alarm-certificate",
+      "term": "Smoke alarm, CO alarm and fire extinguisher certificate (CSACMAPFEC)",
+      "category": "buying-selling",
+      "definition": "A certificate the owner must get from the local enforcing agency before a one- or two-family home is sold or leased. It shows the home has the required smoke alarms, carbon monoxide alarms where needed, and a portable fire extinguisher.",
+      "example": "Made-up example: before closing on a 1950s house, the seller applies to the local enforcing agency. The inspector checks for 10-year sealed battery smoke alarms (or hardwired ones), CO alarms because the house has a gas furnace, and an extinguisher within 10 feet of the kitchen. The certificate can't be transferred, and if the sale doesn't happen within six months, the seller must reapply.",
+      "source": "https://www.nj.gov/dca/divisions/dfs/codes/regulations/r.2018%20d.074%20(50%20n.j.r.%20729(a)).pdf",
+      "source_title": "Uniform Fire Code, N.J.A.C. 5:70, readoption with amendments (New Jersey Register, Feb. 5, 2018, 50 N.J.R. 729(a)), NJ DCA Division of Fire Safety",
+      "aliases": [
+        "smoke certificate",
+        "smoke detector certification",
+        "csacmapfec",
+        "fire extinguisher certificate",
+        "co alarm certificate",
+        "smoke cert for sale"
+      ]
+    },
+    {
+      "slug": "git-rep-forms",
+      "term": "GIT/REP forms",
+      "category": "buying-selling",
+      "definition": "New Jersey income tax forms that must be filed to record the deed when property is sold. Residents file GIT/REP-3. Nonresident sellers generally prepay estimated tax at closing: 10.75% of the gain or 2% of the price, whichever is more.",
+      "example": "Made-up example: a seller who lives in Pennsylvania sells a Cherry Hill rental house for $300,000 with a $50,000 gain. 10.75% of the gain is $5,375, but the minimum is 2% of the price, $6,000, so $6,000 is paid at closing. If that is more than the tax owed, the seller can claim the extra back on Form A-3128 or the NJ-1040NR return.",
+      "source": "https://www.nj.gov/treasury/taxation/gitrepfaqs.shtml",
+      "source_title": "NJ Division of Taxation - FAQs on GIT Forms Requirements for Sale/Transfer of Real Property in New Jersey",
+      "aliases": [
+        "git/rep",
+        "gitrep",
+        "git rep 1",
+        "git rep 3",
+        "nonresident seller tax",
+        "estimated tax at closing"
+      ]
+    },
+    {
+      "slug": "deed",
+      "term": "Deed",
+      "category": "buying-selling",
+      "definition": "The signed legal document that transfers ownership of real estate. In New Jersey, deeds are recorded by the county recording officer (the county clerk or, in some counties, the register of deeds and mortgages) in the county where the property sits.",
+      "example": "Made-up example: after a closing in Toms River, the deed goes to the Ocean County recording office. To be recorded, it must show the lot and block number from the town's tax map, the name of the person who prepared it, and the buyer's mailing address.",
+      "source": "https://pub.njleg.state.nj.us/Bills/2010/PL11/217_.PDF",
+      "source_title": "P.L. 2011, Chapter 217 (New Jersey recording law, N.J.S.A. 46:26A), New Jersey Legislature",
+      "aliases": [
+        "deed",
+        "property deed",
+        "recording a deed",
+        "county clerk deed",
+        "register of deeds",
+        "deed recording"
+      ]
+    },
+    {
+      "slug": "title-insurance",
+      "term": "Title insurance",
+      "category": "buying-selling",
+      "definition": "Insurance that protects the buyer and the lender, up to the purchase price, if the title to the property turns out to be invalid. It is a one-time fee paid at closing, and lenders require it in nearly all financed purchases.",
+      "example": "Made-up example: a buyer finances a $400,000 house in Edison. Before closing, a title search checks ownership records for liens, judgments and other claims. The lender requires title insurance, paid once at closing. If the title is later found invalid, the policy protects the buyer and the lender up to the $400,000 price.",
+      "source": "https://www.nj.gov/dobi/division_consumers/pdf/buyingahome.pdf",
+      "source_title": "Buying a home: consumer guide, New Jersey Department of Banking and Insurance",
+      "aliases": [
+        "title insurance",
+        "owner's title policy",
+        "lender's title policy",
+        "title search",
+        "title policy"
+      ]
+    },
+    {
+      "slug": "earnest-money-deposit",
+      "term": "Earnest money deposit",
+      "category": "buying-selling",
+      "definition": "Money a buyer puts down with an offer to show they are serious about buying. An escrow agent named in the contract holds it, and at closing it is usually applied toward the down payment.",
+      "example": "Made-up example: a buyer offers $350,000 on a townhouse with a $3,500 deposit, then adds $14,000 more on the date set in the contract. The escrow agent holds the $17,500. If the sale falls through, the contract's terms on returning or forfeiting the deposit decide who gets it, and a dispute can end up in court.",
+      "source": "https://www.nj.gov/dobi/division_consumers/pdf/buyingahome.pdf",
+      "source_title": "Buying a home: consumer guide, New Jersey Department of Banking and Insurance",
+      "aliases": [
+        "earnest money",
+        "deposit",
+        "escrow deposit",
+        "good faith deposit",
+        "initial deposit"
+      ]
+    },
+    {
+      "slug": "home-inspection",
+      "term": "Home inspection",
+      "category": "buying-selling",
+      "definition": "A paid check of a house's condition, often hired by a buyer before closing, that ends in a written report. New Jersey licenses home inspectors under the Home Inspection Professional Licensing Act, passed in 1997.",
+      "example": "Made-up example: after signing a contract on a house in Clifton, a buyer hires a licensed home inspector, who looks the house over and sends a written report. The licensing law also created a Home Inspection Advisory Committee in the state Division of Consumer Affairs and sets grounds to deny, suspend or revoke a license.",
+      "source": "https://www.njcourts.gov/system/files/court-opinions/2019/a5686-17.pdf",
+      "source_title": "Shaw v. Shand, A-5686-17T1 (N.J. App. Div. Aug. 15, 2019, published), NJ Courts",
+      "aliases": [
+        "home inspection",
+        "home inspector",
+        "licensed home inspector",
+        "house inspection",
+        "inspection report"
+      ]
+    },
+    {
+      "slug": "appraisal",
+      "term": "Appraisal",
+      "category": "buying-selling",
+      "definition": "An independent expert's opinion of a home's fair market value, meaning the price a willing buyer and seller would agree to. It is separate from your tax assessment, the assessor's value as of October 1 that your property tax is based on.",
+      "example": "Made-up example: a homeowner who thinks the assessment is too high appeals to the Tax Court using an independent appraisal. A copy must be submitted no later than 20 days before trial, and the appraiser must testify, or the evidence could be dismissed. Assessments on other homes cannot be used to prove value.",
+      "source": "https://www.njcourts.gov/self-help/tax-court",
+      "source_title": "Tax Court Self-Help | NJ Courts",
+      "aliases": [
+        "appraisal",
+        "appraised value",
+        "home appraisal",
+        "appraisal vs assessment",
+        "independent appraisal"
+      ]
+    },
+    {
+      "slug": "closing-costs",
+      "term": "Closing costs",
+      "category": "buying-selling",
+      "definition": "One-time fees paid at closing, separate from the price itself, such as loan application, credit report, appraisal, inspection, title insurance and survey fees. New Jersey's banking department tells buyers to expect about 3 to 4 percent of the sale price.",
+      "example": "Made-up example: on a $400,000 house, 3 to 4 percent works out to about $12,000 to $16,000 in closing costs, on top of the down payment. The lender's estimate is only an estimate, so compare it with the actual charges before closing and ask the lender about any differences.",
+      "source": "https://www.nj.gov/dobi/division_consumers/pdf/buyingahome.pdf",
+      "source_title": "Buying a home: consumer guide, New Jersey Department of Banking and Insurance",
+      "aliases": [
+        "closing costs",
+        "settlement costs",
+        "buyer closing costs",
+        "cash to close",
+        "closing fees"
+      ]
+    },
+    {
+      "slug": "arms-length-sale",
+      "term": "Arm's-length sale",
+      "category": "buying-selling",
+      "definition": "A sale on the open market between a willing buyer and a willing seller, with no force or pressure on either side. New Jersey assessors use SR-1A sale reports to judge whether a sale meets this test.",
+      "example": "Made-up example: one house sells to a stranger after a normal listing; another changes hands under financial duress or as part of a property trade. Assessors set the second kind aside for review. A sale marked non-usable for the state's ratio study can still be a fair comparable, like a new home that was improved after its last assessment.",
+      "source": "https://www.nj.gov/treasury/taxation/pdf/lpt/realpropertyappraisal.pdf",
+      "source_title": "Real Property Appraisal Manual for New Jersey Assessors, Third Edition, 2021 update (NJ Division of Taxation)",
+      "aliases": [
+        "arms length sale",
+        "arm's length transaction",
+        "usable sale",
+        "non-usable sale",
+        "fair market sale"
+      ]
+    },
+    {
+      "slug": "heating-oil-tank",
+      "term": "Residential heating oil tank (UHOT)",
+      "category": "buying-selling",
+      "definition": "A home heating oil tank that is 10 percent or more underground is an \"unregulated heating oil tank system\" under NJDEP rules. If one leaks, the owner must report it to DEP right away and clean it up under state rules.",
+      "example": "Made-up example: a buyer's inspection turns up an old buried oil tank behind a house in Teaneck, and soil tests show it leaked. The owner must call DEP's hotline, 1-877-WARNDEP (1-877-927-6337), right away. DEP certifies the contractors who close these tanks, and a state fund offers financial help for eligible cleanups.",
+      "source": "https://dep.nj.gov/wp-content/uploads/rules/rules/njac7_26f.pdf",
+      "source_title": "N.J.A.C. 7:26F, Heating Oil Tank System Remediation Rules (NJDEP courtesy copy, last amended Feb. 15, 2026)",
+      "aliases": [
+        "oil tank",
+        "buried oil tank",
+        "underground oil tank",
+        "uhot",
+        "heating oil tank leak",
+        "oil tank removal"
+      ]
+    },
+    {
+      "slug": "radon",
+      "term": "Radon",
+      "category": "buying-selling",
+      "definition": "An invisible, odorless radioactive gas from uranium in soil and rock that can build up in homes and raise lung cancer risk. NJDEP recommends testing all homes and fixing levels of 4 pCi/L or more.",
+      "example": "Made-up example: a buyer's contract allows a radon test. A New Jersey certified company must place and pick up the device, since the buyer, seller and agents can't do any part of it. A 2 to 7 day test reads 6 pCi/L, above the 4 pCi/L level. A buyer who would rather test after closing can have the seller set aside escrow funds for mitigation. The most common system averages about $1,300.",
+      "source": "https://www.nj.gov/dep/rpp/radon/download/mitbas.pdf",
+      "source_title": "Radon Testing and Mitigation: The Basics (NJDEP Radon Section)",
+      "aliases": [
+        "radon",
+        "radon test",
+        "radon mitigation",
+        "radon in nj homes",
+        "pci/l",
+        "radon real estate"
+      ]
+    },
+    {
+      "slug": "flood-disclosure",
+      "term": "Flood risk disclosure",
+      "category": "buying-selling",
+      "definition": "Since March 20, 2024, New Jersey sellers must answer flood risk questions on the seller's property condition disclosure statement before a buyer signs a sales contract, including FEMA flood zone status and known flood history.",
+      "example": "Made-up example: before listing a house, a seller searches the address in DEP's Flood Risk Notification Tool at flooddisclosure.nj.gov and sees part of the lot is in FEMA's 100-year floodplain. In the form's Flood Risk section, the seller answers yes, notes the basement had pooled water after heavy rain, and says whether federal law requires flood insurance there.",
+      "source": "https://www.nj.gov/dca/news/news/2023/approved/20231221.shtml",
+      "source_title": "Murphy Administration Announces Tools to Protect New Jerseyans from Increasing Flood Risks Brought by Climate Change (NJ DCA, Dec. 21, 2023)",
+      "aliases": [
+        "flood disclosure",
+        "flood risk disclosure",
+        "seller flood disclosure",
+        "fema flood zone disclosure",
+        "property condition disclosure flood"
+      ]
+    },
+    {
+      "slug": "mortgage-escrow-account",
+      "term": "Mortgage escrow account",
+      "category": "mortgages-insurance",
+      "definition": "A mortgage escrow account is an account your lender sets up to collect extra money with each monthly payment, then uses it to pay bills like your property taxes and insurance when they come due.",
+      "example": "Say your yearly property tax bill is a made-up $10,800 and homeowners insurance is $1,800. Your lender could add $900 for taxes and $150 for insurance to your monthly principal and interest payment, so $1,050 a month goes into escrow. Lenders often collect several months of escrow payments at closing, too.",
+      "source": "https://www.nj.gov/dobi/division_consumers/pdf/buyingahome.pdf",
+      "source_title": "Everything You Wanted to Know About Buying a Home (NJ Department of Banking and Insurance)",
+      "aliases": [
+        "escrow account",
+        "mortgage escrow",
+        "escrow payment",
+        "taxes and insurance escrow",
+        "impound account"
+      ]
+    },
+    {
+      "slug": "private-mortgage-insurance",
+      "term": "Private mortgage insurance (PMI)",
+      "category": "mortgages-insurance",
+      "definition": "Private mortgage insurance (PMI) protects the lender, not you, if you stop paying your mortgage. Lenders generally require it when your down payment is less than 20 percent of the price.",
+      "example": "Say you buy a $400,000 home in Union County with 10% down (made-up numbers). Your $360,000 loan would generally need PMI. Under federal law, PMI on most loans made on or after July 29, 1999 ends automatically once the loan is paid down to 78% of the home's original value, which here is $312,000.",
+      "source": "https://www.nj.gov/dobi/division_consumers/pdf/buyingahome.pdf",
+      "source_title": "Everything You Wanted to Know About Buying a Home (NJ Department of Banking and Insurance)",
+      "aliases": [
+        "pmi",
+        "mortgage insurance",
+        "private mortgage insurance",
+        "pmi removal",
+        "when does pmi end"
+      ]
+    },
+    {
+      "slug": "annual-percentage-rate",
+      "term": "Annual percentage rate (APR)",
+      "category": "mortgages-insurance",
+      "definition": "The annual percentage rate (APR) is the overall yearly cost of a loan, counting the interest rate plus the loan's other costs. Comparing it with the quoted interest rate shows how much the fees add.",
+      "example": "Say a lender quotes a made-up 6.50% interest rate on a Cherry Hill home loan, but the APR is 7.40%. That 0.90 point gap falls in the .75 to 1 point range that New Jersey's banking department calls a sign that significant fees are being added, so it's worth asking what each fee is for.",
+      "source": "https://www.nj.gov/dobi/division_consumers/pdf/buyingahome.pdf",
+      "source_title": "Everything You Wanted to Know About Buying a Home (NJ Department of Banking and Insurance)",
+      "aliases": [
+        "apr",
+        "apr vs interest rate",
+        "annual percentage rate",
+        "true cost of a mortgage",
+        "interest rate vs apr"
+      ]
+    },
+    {
+      "slug": "mortgage-points",
+      "term": "Mortgage points (discount points)",
+      "category": "mortgages-insurance",
+      "definition": "Mortgage points are a one-time fee you pay the lender, either to cover the cost of making the loan or to lower your interest rate. One point equals 1 percent of the loan amount.",
+      "example": "On a made-up $350,000 loan for a Bergen County home, paying 2 points to lower the rate would cost $7,000, which is 2% of $350,000. A rate lock agreement usually spells out how many points you will pay at closing.",
+      "source": "https://www.nj.gov/dca/hmfa/homebuyers-and-renters/docs/FTHBG.pdf",
+      "source_title": "The Road Home New Jersey: A Guide for the New Jersey Homebuyer (NJ Housing and Mortgage Finance Agency)",
+      "aliases": [
+        "discount points",
+        "mortgage points",
+        "buying down the rate",
+        "points on a mortgage",
+        "loan points"
+      ]
+    },
+    {
+      "slug": "mortgage-pre-approval",
+      "term": "Mortgage pre-approval",
+      "category": "mortgages-insurance",
+      "definition": "Mortgage pre-approval is when a lender reviews your official loan application, finances and credit, then tells you the specific amount you are approved to borrow and the interest rate. It goes further than pre-qualification.",
+      "example": "A buyer house hunting in Morris County first gets pre-qualified by phone, usually at no cost, which does not include a credit report review. Next they file a mortgage application, pay the fee and get pre-approved for a specific amount. Sellers see they are serious, and they can still take the final loan from a different lender.",
+      "source": "https://www.nj.gov/dca/hmfa/homebuyers-and-renters/docs/FTHBG.pdf",
+      "source_title": "The Road Home New Jersey: A Guide for the New Jersey Homebuyer (NJ Housing and Mortgage Finance Agency)",
+      "aliases": [
+        "pre-approval",
+        "preapproval letter",
+        "mortgage preapproval",
+        "pre-qualification vs pre-approval",
+        "prequalified"
+      ]
+    },
+    {
+      "slug": "debt-to-income-ratio",
+      "term": "Debt-to-income ratio (DTI)",
+      "category": "mortgages-insurance",
+      "definition": "Your debt-to-income ratio (DTI) is your monthly debt payments divided by your monthly income before taxes. Lenders use it to decide how large a mortgage you qualify for.",
+      "example": "Say you earn a made-up $9,000 a month before taxes. A $2,400 house payment (principal, interest, taxes and insurance) is 26.7% of that. Add a $450 car loan and $150 in card payments and your total is $3,000, or 33.3%. Both are under the common 28/36 guideline, though some lenders allow higher ratios.",
+      "source": "https://www.nj.gov/dobi/division_consumers/pdf/buyingahome.pdf",
+      "source_title": "Everything You Wanted to Know About Buying a Home (NJ Department of Banking and Insurance)",
+      "aliases": [
+        "dti",
+        "debt to income",
+        "28/36 rule",
+        "how much mortgage can i afford",
+        "qualifying ratio"
+      ]
+    },
+    {
+      "slug": "loan-to-value-ratio",
+      "term": "Loan-to-value ratio (LTV)",
+      "category": "mortgages-insurance",
+      "definition": "Loan-to-value ratio (LTV) compares your mortgage balance with the home's appraised value, or the sale price if that is lower, shown as a percentage.",
+      "example": "Say you buy a made-up $400,000 home in Edison that appraises at $400,000, and you put $40,000 down. Your $360,000 loan has an LTV of 90%. New Jersey's housing finance agency notes that most lenders generally require mortgage insurance when the LTV is above 80%.",
+      "source": "https://www.nj.gov/dca/hmfa/homebuyers-and-renters/docs/FTHBG.pdf",
+      "source_title": "The Road Home New Jersey: A Guide for the New Jersey Homebuyer (NJ Housing and Mortgage Finance Agency)",
+      "aliases": [
+        "ltv",
+        "loan to value",
+        "ltv ratio",
+        "80 percent ltv"
+      ]
+    },
+    {
+      "slug": "fixed-rate-mortgage",
+      "term": "Fixed-rate mortgage",
+      "category": "mortgages-insurance",
+      "definition": "A fixed-rate mortgage has an interest rate that stays the same for the entire life of the loan, so the principal and interest part of your payment does not change.",
+      "example": "Say you take out a made-up 30-year fixed-rate loan at 6.5% on a Toms River home. The rate stays 6.5% for the whole term, which is 360 monthly payments. Even if market rates jump in later years, your principal and interest payment stays the same.",
+      "source": "https://www.nj.gov/dca/hmfa/homebuyers-and-renters/docs/FTHBG.pdf",
+      "source_title": "The Road Home New Jersey: A Guide for the New Jersey Homebuyer (NJ Housing and Mortgage Finance Agency)",
+      "aliases": [
+        "fixed rate mortgage",
+        "frm",
+        "30-year fixed",
+        "15-year fixed",
+        "fixed vs adjustable"
+      ]
+    },
+    {
+      "slug": "adjustable-rate-mortgage",
+      "term": "Adjustable-rate mortgage (ARM)",
+      "category": "mortgages-insurance",
+      "definition": "An adjustable-rate mortgage (ARM) has an interest rate that changes at a set future date, usually after one, three or five years. The starting rate is usually lower than a fixed rate, but you take the risk it goes up.",
+      "example": "Say a made-up ARM on a Montclair condo starts at 5.75% and first adjusts after five years. At that point the new rate is an index plus a margin. If the index is 4.00% and the margin is 2.75%, the rate becomes 6.75%, subject to any caps in the loan.",
+      "source": "https://www.nj.gov/dca/hmfa/homebuyers-and-renters/docs/FTHBG.pdf",
+      "source_title": "The Road Home New Jersey: A Guide for the New Jersey Homebuyer (NJ Housing and Mortgage Finance Agency)",
+      "aliases": [
+        "arm",
+        "adjustable rate mortgage",
+        "variable rate mortgage",
+        "5/1 arm",
+        "arm index and margin"
+      ]
+    },
+    {
+      "slug": "home-equity-line-of-credit",
+      "term": "Home equity line of credit (HELOC)",
+      "category": "mortgages-insurance",
+      "definition": "A home equity line of credit (HELOC) is a loan, usually a second mortgage, that lets you borrow against your home equity as you need it, up to a limit based on a percentage of that equity.",
+      "example": "Say a Hamilton homeowner has a made-up $150,000 in equity and opens a HELOC with a $60,000 limit. They draw $15,000 for a new roof and later $10,000 more, leaving $35,000 they can still borrow. Because a HELOC is a mortgage, the house is pledged as security for it.",
+      "source": "https://www.nj.gov/dca/hmfa/homebuyers-and-renters/docs/FTHBG.pdf",
+      "source_title": "The Road Home New Jersey: A Guide for the New Jersey Homebuyer (NJ Housing and Mortgage Finance Agency)",
+      "aliases": [
+        "heloc",
+        "home equity line",
+        "equity line of credit",
+        "borrow against my house",
+        "second mortgage"
+      ]
+    },
+    {
+      "slug": "homeowners-insurance",
+      "term": "Homeowners insurance",
+      "category": "mortgages-insurance",
+      "definition": "Homeowners insurance pays for covered damage to your house and belongings, like from a fire, and protects you if someone sues over an injury or damage tied to you or your home. Your mortgage lender won't let you close without it.",
+      "example": "Say a Princeton home has a made-up $300,000 dwelling limit. Other structures like a detached garage are typically covered at 10% ($30,000) and belongings at 50% ($150,000). Flood damage is excluded, and there is no grace period in New Jersey if a premium payment is late.",
+      "source": "https://www.nj.gov/dobi/division_consumers/pdf/buyingahome.pdf",
+      "source_title": "Everything You Wanted to Know About Buying a Home (NJ Department of Banking and Insurance)",
+      "aliases": [
+        "homeowners insurance",
+        "home insurance",
+        "hazard insurance",
+        "ho-3 policy",
+        "dwelling coverage"
+      ]
+    },
+    {
+      "slug": "flood-insurance",
+      "term": "Flood insurance",
+      "category": "mortgages-insurance",
+      "definition": "Flood insurance is a separate policy that pays for flood damage, which standard homeowners policies do not cover. You can buy it through the National Flood Insurance Program or from a private insurer.",
+      "example": "A Little Falls homeowner who buys flood insurance the week a storm is forecast likely won't be covered for that storm, because there is normally a 30-day waiting period before a new flood policy takes effect. The homeowners policy won't pay for the flooding either, even if the flood comes with a hurricane.",
+      "source": "https://www.nj.gov/dobi/division_consumers/insurance/extremeweather.html",
+      "source_title": "NJDOBI | Consumer Information - Preparing for Extreme Weather",
+      "aliases": [
+        "flood insurance",
+        "nfip",
+        "does homeowners insurance cover flooding",
+        "flood policy waiting period",
+        "private flood insurance"
+      ]
+    },
+    {
+      "slug": "special-flood-hazard-area",
+      "term": "Special Flood Hazard Area (SFHA)",
+      "category": "mortgages-insurance",
+      "definition": "The Special Flood Hazard Area is the area FEMA's flood insurance rate maps show as the 100-year floodplain, meaning land with a 1% chance of flooding in any given year.",
+      "example": "The Flood Risk Notice New Jersey landlords use for rentals, such as an apartment in Lambertville, asks whether the property is wholly or partly in the Special Flood Hazard Area on FEMA's current maps, and whether that is based on an effective or a preliminary map. It also asks about the Moderate Risk Flood Hazard Area, the 500-year floodplain with a 0.2% annual chance.",
+      "source": "https://www.nj.gov/dca/codes/offices/pdf/Flood_Risk_Notice.pdf",
+      "source_title": "Flood Risk Notice (NJ Department of Community Affairs model notice under N.J.S.A. 46:8-50)",
+      "aliases": [
+        "sfha",
+        "flood zone",
+        "100-year floodplain",
+        "1% annual chance flood",
+        "fema flood map",
+        "is my house in a flood zone"
+      ]
+    },
+    {
+      "slug": "foreclosure",
+      "term": "Foreclosure",
+      "category": "mortgages-insurance",
+      "definition": "Foreclosure is the legal process a lender uses to sell a home when the borrower falls behind on the mortgage. New Jersey is a judicial foreclosure state, so every case goes through the court.",
+      "example": "Say a Paterson homeowner falls behind. The lender must first send a Notice of Intent to Foreclose, and the owner has 30 days to pay the amount needed to cure the debt or make other arrangements. They can ask for free foreclosure mediation, where a neutral mediator guides both sides but does not decide the case. Once served with a complaint, they have 35 days to answer.",
+      "source": "https://www.njcourts.gov/self-help/foreclosure",
+      "source_title": "Foreclosure Self-Help | NJ Courts",
+      "aliases": [
+        "foreclosure",
+        "nj foreclosure process",
+        "foreclosure mediation",
+        "sheriff sale",
+        "notice of intent to foreclose"
+      ]
+    },
+    {
+      "slug": "home-equity",
+      "term": "Home equity",
+      "category": "mortgages-insurance",
+      "definition": "Home equity is the share of your home's value that you own outright: the home's fair market value minus what you still owe on the mortgage.",
+      "example": "Say a made-up Ocean County home would sell for $500,000 and $320,000 is still owed on the mortgage. The owner has $180,000 in equity. Paying down the loan builds equity, and a rise or drop in the home's value moves it up or down too.",
+      "source": "https://www.nj.gov/dca/hmfa/homebuyers-and-renters/docs/FTHBG.pdf",
+      "source_title": "The Road Home New Jersey: A Guide for the New Jersey Homebuyer (NJ Housing and Mortgage Finance Agency)",
+      "aliases": [
+        "home equity",
+        "equity",
+        "how much equity do i have",
+        "equity in my house"
+      ]
+    },
+    {
+      "slug": "security-deposit",
+      "term": "Security deposit",
+      "category": "renting",
+      "definition": "Money a landlord holds to cover damage or unpaid rent. For most New Jersey rentals it can't be more than 1.5 times one month's rent, it must earn interest that belongs to you, and it's due back within 30 days after your tenancy ends.",
+      "example": "Made-up numbers: your Hoboken rent is $2,000 a month, so the deposit can be no more than $3,000 (1.5 x $2,000). If your lease ends June 30, the landlord has until July 30 to return it with interest, minus any itemized deductions for damage beyond normal wear and tear. If the landlord wrongly keeps it, a court may award you double the amount withheld.",
+      "source": "https://www.nj.gov/dca/codes/publications/pdf_lti/t_i_r.pdf",
+      "source_title": "Truth in Renting: A guide to the rights and responsibilities of residential tenants and landlords in New Jersey (NJ Department of Community Affairs)",
+      "aliases": [
+        "security deposit limit",
+        "how much can a landlord charge for a deposit",
+        "security deposit return deadline",
+        "security deposit interest",
+        "get my deposit back"
+      ]
+    },
+    {
+      "slug": "truth-in-renting",
+      "term": "Truth in Renting",
+      "category": "renting",
+      "definition": "A free guide from the NJ Department of Community Affairs that explains the main legal rights of renters and landlords. Landlords of buildings with more than two units, or more than three if the owner lives in one, must give it to their tenants.",
+      "example": "If you rent in a six-unit building in Montclair, your landlord must give you a copy of Truth in Renting at or before the time you sign your lease. DCA posts the guide in English and Spanish on its website. A landlord who violates the Truth in Renting Act can face a penalty of up to $100 per offense.",
+      "source": "https://www.nj.gov/dca/codes/publications/pdf_lti/t_i_r.pdf",
+      "source_title": "Truth in Renting: A guide to the rights and responsibilities of residential tenants and landlords in New Jersey (NJ Department of Community Affairs)",
+      "aliases": [
+        "truth in renting guide",
+        "truth in renting statement",
+        "nj tenant rights booklet",
+        "dca renters guide"
+      ]
+    },
+    {
+      "slug": "residential-lease",
+      "term": "Residential lease",
+      "category": "renting",
+      "definition": "The agreement that lets you live in a rental home in exchange for rent. In New Jersey a lease can be written or oral, and a written lease must use plain language that the average person can understand.",
+      "example": "You sign a one-year lease for a Paterson apartment. If the year ends and the lease isn't renewed, it becomes a month-to-month lease that renews each month. If the building is sold, the new owner must honor your lease until it expires. If a lease term breaks state law, you can ask the Special Civil Part court to remove it.",
+      "source": "https://www.nj.gov/dca/codes/publications/pdf_lti/t_i_r.pdf",
+      "source_title": "Truth in Renting: A guide to the rights and responsibilities of residential tenants and landlords in New Jersey (NJ Department of Community Affairs)",
+      "aliases": [
+        "lease agreement",
+        "rental agreement",
+        "oral lease",
+        "month to month lease",
+        "what goes in a lease"
+      ]
+    },
+    {
+      "slug": "anti-eviction-act",
+      "term": "Anti-Eviction Act",
+      "category": "renting",
+      "definition": "A New Jersey law that lets most landlords evict a tenant, or refuse to renew a lease, only for a \"good cause\" listed in the law, such as unpaid rent or damaging the property. A lease simply ending is not a good cause.",
+      "example": "A tenant in a 40-unit Clifton complex can't be evicted just because the lease ran out. The Act also covers single-family rentals and mobile homes. It may not apply when the owner lives in a two- or three-unit building with two or fewer rental units, or to short-stay hotel and motel guests. Tenants in those owner-occupied buildings can still be removed only by court order.",
+      "source": "https://www.nj.gov/dca/codes/publications/pdf_lti/t_i_r.pdf",
+      "source_title": "Truth in Renting: A guide to the rights and responsibilities of residential tenants and landlords in New Jersey (NJ Department of Community Affairs)",
+      "aliases": [
+        "good cause eviction",
+        "nj anti eviction act",
+        "can my landlord refuse to renew my lease",
+        "eviction protections",
+        "just cause eviction"
+      ]
+    },
+    {
+      "slug": "rent-control",
+      "term": "Rent control",
+      "category": "renting",
+      "definition": "Local limits on how much a landlord can raise the rent. New Jersey has no statewide rent control law, so it only exists in towns that pass their own ordinance, and many newer buildings are exempt.",
+      "example": "DCA's 2026 Rent Control Survey reviews all 564 New Jersey towns. It lists Jersey City's limit for covered buildings of 5 or more units as the lesser of 4% or a CPI-based figure. Units completed after June 25, 1987 are exempt for 30 years after construction. Your municipal clerk can confirm whether your town has rent control.",
+      "source": "https://www.nj.gov/dca/home/misc/Rent_Control_Survey.xlsx",
+      "source_title": "2026 Rent Control Survey (NJ Department of Community Affairs)",
+      "aliases": [
+        "rent control nj",
+        "rent leveling",
+        "rent stabilization",
+        "does my town have rent control",
+        "rent control survey"
+      ]
+    },
+    {
+      "slug": "rent-increase",
+      "term": "Rent increase",
+      "category": "renting",
+      "definition": "New Jersey has no state cap on rent increases, but a landlord can't raise rent in the middle of a lease. They must end the current lease with proper written notice and offer a new one, and the increase can't be unconscionable, meaning shockingly unfair.",
+      "example": "Made-up numbers: your one-year lease ends August 31 in a town without rent control, and your landlord wants to raise rent from $1,800 to $1,950 ($150 more). They must give written notice ending the old lease and offering a new one at $1,950. To evict for nonpayment of the increase, they need a notice to quit served at least one month before filing, and a judge decides if it's unconscionable.",
+      "source": "https://www.nj.gov/dca/codes/publications/pdf_lti/t_i_r.pdf",
+      "source_title": "Truth in Renting: A guide to the rights and responsibilities of residential tenants and landlords in New Jersey (NJ Department of Community Affairs)",
+      "aliases": [
+        "how much can my landlord raise the rent",
+        "rent increase notice",
+        "unconscionable rent increase",
+        "raise rent mid lease",
+        "rent hike"
+      ]
+    },
+    {
+      "slug": "landlord-registration-statement",
+      "term": "Landlord registration statement",
+      "category": "renting",
+      "definition": "A form New Jersey landlords file that lists the owner, managing agent, an emergency contact, and mortgage holders. Non-owner-occupied one- and two-unit rentals file with the town clerk; buildings with three or more units file with DCA.",
+      "example": "Your landlord owns a two-family house in Camden and doesn't live there, so they must file a registration statement with the city clerk and give you a copy in writing. If they file to evict you without registering, the court must hold the case for up to 90 days so they can comply, then dismiss it if they don't.",
+      "source": "https://www.nj.gov/dca/codes/publications/pdf_lti/t_i_r.pdf",
+      "source_title": "Truth in Renting: A guide to the rights and responsibilities of residential tenants and landlords in New Jersey (NJ Department of Community Affairs)",
+      "aliases": [
+        "landlord registration",
+        "rental registration nj",
+        "who owns my building",
+        "certificate of registration",
+        "landlord identity law"
+      ]
+    },
+    {
+      "slug": "warranty-of-habitability",
+      "term": "Warranty of habitability",
+      "category": "renting",
+      "definition": "A promise built into New Jersey residential leases, written or not, that the landlord will keep your home safe, sanitary, and fit to live in, with basics like heat, water, and working plumbing.",
+      "example": "Your Elizabeth apartment has had no heat for a week in January. The DCA guide says to tell the landlord in writing by certified mail, return receipt requested, and give them reasonable time to fix it. If they don't, the guide lists options like asking a court for a rent reduction, but any rent you withhold should be saved in case a judge orders you to pay it.",
+      "source": "https://www.nj.gov/dca/codes/publications/pdf_lti/t_i_r.pdf",
+      "source_title": "Truth in Renting: A guide to the rights and responsibilities of residential tenants and landlords in New Jersey (NJ Department of Community Affairs)",
+      "aliases": [
+        "habitability",
+        "landlord wont fix",
+        "no heat apartment",
+        "rent withholding",
+        "repair and deduct",
+        "unsafe apartment"
+      ]
+    },
+    {
+      "slug": "fair-chance-in-housing-act",
+      "term": "Fair Chance in Housing Act",
+      "category": "renting",
+      "definition": "A 2021 New Jersey law that stops most landlords from asking about your criminal record until after they make you a conditional offer, and limits which records they can consider. Owner-occupied buildings with four or fewer units are exempt.",
+      "example": "You apply for an apartment in a large Newark building. The application can't ask about criminal history. After a conditional offer, the landlord can consider only certain convictions, such as a fourth-degree conviction from within the past year, and can never count an arrest without a conviction, or an expunged or juvenile record. Complaints go to the NJ Division on Civil Rights.",
+      "source": "https://pub.njleg.state.nj.us/Bills/2020/PL21/110_.PDF",
+      "source_title": "P.L.2021, Chapter 110: Fair Chance in Housing Act (New Jersey Legislature)",
+      "aliases": [
+        "fair chance housing",
+        "criminal background check rental",
+        "can a landlord ask about my record",
+        "ban the box housing",
+        "conditional offer"
+      ]
+    },
+    {
+      "slug": "lead-safe-certification",
+      "term": "Lead-safe certification",
+      "category": "renting",
+      "definition": "A certificate showing a pre-1978 rental home passed a lead-based paint hazard inspection under New Jersey's 2021 rental lead law. Inspections are due every three years or at tenant turnover, and a certificate is valid for two years.",
+      "example": "Made-up case: a landlord rents out a 1920s single-family house in Trenton. The first inspection was due by July 22, 2024, or at the first tenant turnover if that came sooner. When a new tenant moves in, the landlord needs a new inspection unless the lead-safe certificate (good for two years) is still valid. Homes built in 1978 or later are exempt.",
+      "source": "https://www.nj.gov/dca/codes/resources/leadpaint.shtml",
+      "source_title": "Lead-Based Paint Inspections in Rental Dwelling Units (NJ Department of Community Affairs)",
+      "aliases": [
+        "lead paint inspection rental",
+        "lead safe certificate",
+        "rental lead law",
+        "lead inspection tenant turnover",
+        "p.l. 2021 c. 182"
+      ]
+    },
+    {
+      "slug": "housing-discrimination",
+      "term": "Housing discrimination",
+      "category": "renting",
+      "definition": "Treating a renter unfairly because of who they are. New Jersey's Law Against Discrimination bars landlords from doing this based on traits like race, creed, national origin, sex, gender identity, disability, familial status, or source of lawful income.",
+      "example": "An apartment manager in Newark turns away an applicant because her income comes from disability benefits instead of a paycheck, or says a unit isn't for families with kids. Both can violate the LAD. Complaints about state law violations can go to the NJ Division on Civil Rights, and a landlord can face a penalty of up to $10,000 for a first offense.",
+      "source": "https://www.nj.gov/dca/codes/publications/pdf_lti/t_i_r.pdf",
+      "source_title": "Truth in Renting: A guide to the rights and responsibilities of residential tenants and landlords in New Jersey (NJ Department of Community Affairs)",
+      "aliases": [
+        "law against discrimination",
+        "fair housing nj",
+        "source of income discrimination",
+        "landlord discrimination",
+        "lad housing"
+      ]
+    },
+    {
+      "slug": "renters-insurance",
+      "term": "Renters insurance",
+      "category": "renting",
+      "definition": "A policy that protects a renter's own belongings and covers you if you're found legally responsible for someone else's injury or property damage. Your landlord's insurance covers the building's structure, not your things.",
+      "example": "A kitchen fire in your New Brunswick apartment ruins your furniture, and you stay in a hotel while it's repaired. Renters insurance can pay for your damaged belongings (Coverage C) and your extra living costs (Coverage D), minus your deductible. It does not cover flooding. Flood insurance is available through the National Flood Insurance Program.",
+      "source": "https://www.nj.gov/dobi/division_consumers/insurance/renters.pdf",
+      "source_title": "A Consumer Guide to Renters Insurance (NJ Department of Banking and Insurance)",
+      "aliases": [
+        "renters insurance nj",
+        "tenant insurance",
+        "does renters insurance cover flood",
+        "contents insurance apartment"
+      ]
+    },
+    {
+      "slug": "notice-to-quit",
+      "term": "Notice to quit",
+      "category": "renting",
+      "definition": "A written notice from a landlord that ends the tenancy and tells the tenant to leave. In New Jersey it does not force you out on its own; a court must enter a judgment for possession before you have to move.",
+      "example": "Say a Jersey City tenant keeps breaking reasonable building rules. The landlord first sends a notice to cease. If it keeps happening, the landlord must serve a notice to quit at least one month before filing for eviction. Other causes have other notice periods, like three days for disorderly conduct. An eviction for nonpayment of rent needs no notice to quit.",
+      "source": "https://www.nj.gov/dca/codes/publications/pdf_lti/t_i_r.pdf",
+      "source_title": "Truth in Renting: A guide to the rights and responsibilities of residential tenants and landlords in New Jersey (NJ Department of Community Affairs)",
+      "aliases": [
+        "notice to quit nj",
+        "notice to vacate",
+        "notice to cease",
+        "eviction notice",
+        "how much notice to move out"
+      ]
+    },
+    {
+      "slug": "eviction",
+      "term": "Eviction",
+      "category": "renting",
+      "definition": "The court process a New Jersey landlord must use to remove a tenant. The landlord sues in the Special Civil Part, must win a judgment for possession, then gets a warrant of removal, and only a court officer can carry it out.",
+      "example": "Made-up timeline: a judge grants the landlord a judgment for possession. The warrant of removal can't be issued until three business days pass. Once a Special Civil Part officer serves it, a residential tenant has at least three business days to move. A landlord who changes the locks or shuts off water or electricity to force a tenant out is breaking the law.",
+      "source": "https://www.njcourts.gov/self-help/landlord-tenant",
+      "source_title": "Landlord/Tenant | NJ Courts",
+      "aliases": [
+        "eviction process nj",
+        "landlord tenant court",
+        "warrant of removal",
+        "illegal lockout",
+        "judgment for possession",
+        "self help eviction"
+      ]
+    },
+    {
+      "slug": "housing-choice-voucher",
+      "term": "Housing Choice Voucher (Section 8)",
+      "category": "renting",
+      "definition": "A federally funded rent subsidy, often called Section 8, that helps low- and very low-income households rent private homes. In New Jersey, DCA and local housing agencies run it and pay part of the rent directly to the landlord.",
+      "example": "The program is built on the idea that rent plus utilities should not exceed 30% of household income. Made-up numbers: for a household earning $3,000 a month, that benchmark is $900 ($3,000 x 0.30). The subsidy is paid straight to the landlord. DCA posts 2026 income limits by county, such as $38,100 for one person in Atlantic County.",
+      "source": "https://www.nj.gov/dca/dhcr/offices/section8hcv.shtml",
+      "source_title": "Section 8 Housing Choice Voucher (NJ Department of Community Affairs)",
+      "aliases": [
+        "section 8",
+        "housing choice voucher",
+        "hcv program nj",
+        "rental assistance voucher",
+        "section 8 income limits"
+      ]
+    },
+    {
+      "slug": "rental-flood-notice",
+      "term": "Rental flood risk notice",
+      "category": "renting",
+      "definition": "A written notice that a 2023 New Jersey law requires covered landlords to give before a lease is signed or renewed. It says whether the rental is in a FEMA flood hazard area and whether the landlord knows it has flooded.",
+      "example": "Before you sign a lease in a 30-unit Hoboken building, the landlord must give you a written flood notice. It says whether the property is in FEMA's 100-year or 500-year floodplain and whether the landlord knows of past flooding in the unit or its parking areas. Buildings with two or fewer units are exempt. If the landlord failed to disclose a FEMA flood zone, you can end the lease with written notice.",
+      "source": "https://pub.njleg.state.nj.us/Bills/2022/PL23/93_.PDF",
+      "source_title": "P.L.2023, Chapter 93: flood risk notification law (New Jersey Legislature)",
+      "aliases": [
+        "flood disclosure rental",
+        "flood risk notice",
+        "landlord flood zone disclosure",
+        "fema flood zone apartment",
+        "flood notice lease"
+      ]
     }
   ]
 }

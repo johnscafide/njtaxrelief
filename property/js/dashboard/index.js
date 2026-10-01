@@ -2157,7 +2157,7 @@ function brief() {
       grp('money', 'Income and housing costs',
         'Exact figures, because every benefit here turns on a threshold',
         '<p class="pf-say">New Jersey\u2019s programs cut off at specific numbers. ANCHOR changes at $150,000. ' +
-        'Stay NJ stops at $500,000. The Senior Freeze has its own limit that moves each year. A range cannot ' +
+        'Stay NJ stops at $200,000. The Senior Freeze has its own limit that moves each year. A range cannot ' +
         'tell you which side of a line you are on, so this asks for the real figure.</p>' +
         '<div class="pf-grid">' +
           mny('gross_income', 'Gross annual income', '112,000', 'Total household, before tax') +

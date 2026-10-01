@@ -38,7 +38,7 @@ For **other professionals** (attorneys, appraisers, lenders, investors) and sign
 | Property Pulse | `/pulse` | Updates | What is changing near your home |
 | ANCHOR Applications | `/anchor/applications/` | Relief | NJ property tax relief applications and results |
 
-Below them, a quieter **Learn and compare** group: Town Compare (`/town-compare`) and ROBUST Framework (`/robust/`, how the Watchdog Score works; Fairness at `/fairness` lights up this row).
+Below them, a quieter **Learn and compare** group: Town Compare (`/town-compare`), ROBUST Framework (`/robust/`, how the Watchdog Score works; Fairness at `/fairness` lights up this row) and Games (`/games`, the free daily puzzles; every `/games/*` page lights up this row).
 
 **Account** (`/account`) sits under both lenses. The profile menu (avatar) holds Edit profile & role, Invite others, Account & billing, Training Center (agents and paid plans only), Property Home, and Developer tools for Developer accounts.
 

@@ -182,7 +182,7 @@
   root.__wdSiteSearch = true;
 
   /* ---------- Runtime ---------- */
-  var VERSION = '20260930b';
+  var VERSION = '20261001a';
   var doc = root.document;
   var CSS_URL = '/property/css/watchdog-site-search.css';
   var DATA_URL = '/property/data/site-search.json?v=' + VERSION;
@@ -340,7 +340,7 @@
         if(!g || !g.slug || !g.term) return;
         var href = '/glossary/' + encodeURIComponent(g.slug) + '/';
         if(seen[pathKey(href)]) return;
-        list.push({id:'glossary-' + g.slug, kind:'term', label:g.term, aliases:[], keywords:[], summary:shortText(g.definition,140), href:href, where:'Glossary', icon:'fa-book'});
+        list.push({id:'glossary-' + g.slug, kind:'term', label:g.term, aliases:(Array.isArray(g.aliases) ? g.aliases : []), keywords:[], summary:shortText(g.definition,140), href:href, where:'Glossary', icon:'fa-book'});
       });
       entries = list;
       rebuild();

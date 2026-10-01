@@ -12,14 +12,20 @@ on:
       - 'sitemap*.xml'
       - 'scripts/validate-seo-content.js'
       - 'scripts/validate-static-seo.js'
+      - 'scripts/build-glossary.mjs'
+      - 'property/glossary/**'
   pull_request:
     paths:
       - 'property/data/play-catalog.json'
       - 'property/data/glossary.json'
       - 'property/plays/**'
+      - 'api/glossary.js'
       - 'vercel.json'
       - 'robots.txt'
       - 'sitemap*.xml'
+      - 'scripts/validate-seo-content.js'
+      - 'scripts/build-glossary.mjs'
+      - 'property/glossary/**'
 jobs:
   validate:
     runs-on: ubuntu-latest

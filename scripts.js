@@ -1068,19 +1068,24 @@
 
     if (!tax || !income) { res.style.display = 'none'; return; }
 
-    // FY2027 budget: income limit ~$200,000, benefit tiered by income.
+    // FY2027 budget: income limit $200,000, maximum tiered by income. Stay NJ
+    // pays 50% of the bill up to that maximum, less ANCHOR and the Senior
+    // Freeze (P.L.2024, c.88). 2025 ANCHOR for homeowners: $1,500 up to
+    // $150,000 income, $1,000 above that.
     let cap;
     if      (income > 200000) cap = 0;
     else if (income > 150000) cap = 4000;
     else if (income > 100000) cap = 5000;
     else                      cap = 6500;
+    const anchor = income > 150000 ? 1000 : 1500;
 
     if (cap === 0) {
       if (amtEl) amtEl.textContent = 'Not eligible';
-      if (lblEl) lblEl.textContent = 'Income over ~$200,000 — no longer eligible (FY2027 budget)';
+      if (lblEl) lblEl.textContent = 'Income over $200,000, so not eligible (FY2027 budget)';
     } else {
-      if (amtEl) amtEl.textContent = '$' + Math.round(Math.min(tax * 0.5, cap)).toLocaleString();
-      if (lblEl) lblEl.textContent = 'Estimated Stay NJ annual credit (50% of tax bill, capped at $' + cap.toLocaleString() + ' for your income)';
+      const credit = Math.max(0, Math.round(Math.min(tax * 0.5, cap) - anchor));
+      if (amtEl) amtEl.textContent = '$' + credit.toLocaleString();
+      if (lblEl) lblEl.textContent = 'Estimated Stay NJ credit: 50% of your bill up to $' + cap.toLocaleString() + ' for your income, minus your $' + anchor.toLocaleString() + ' ANCHOR benefit. A Senior Freeze payment would lower it further.';
     }
     res.style.display = 'block';
   }

@@ -1088,22 +1088,26 @@
   // Verified against the Division of Taxation, August 2026.
   // ══════════════════════════════════════════════
   var NJ = {
-    asOf: 'August 2026',
+    asOf: 'October 2026',
     stayNJ: {
       // The FY2027 Appropriations Act, signed 30 June 2026, cut the income
-      // limit from $500,000 to $200,000. A great many sites still quote the
-      // old figure, which would tell a household earning $300,000 it qualifies
-      // when it no longer does.
+      // limit from $500,000 to $200,000 and capped the 2025 benefit (paid
+      // February and May 2027) by income. The state publishes the caps on a
+      // yearly basis. The credit itself is 50% of the tax bill, less ANCHOR
+      // and the Senior Freeze, under P.L.2024, c.88. A great many sites still
+      // quote the old $500,000 limit and a flat $6,500 cap.
       incomeLimit: 200000,
       minAge: 65,
       share: 0.50,            // 50% of the property tax bill
-      taxCap: 13000,          // applied to the first $13,000 of tax
-      benefitCap: 6500,
+      caps: [[100000, 6500], [150000, 5000], [200000, 4000]],
+      benefitCap: 6500,       // the top cap, for income up to $100,000
       homeownersOnly: true
     },
     anchor: {
       // Homeowners, by age and NJ-1040 line 29 income.
-      senior:  [[150000, 1750], [250000, 1250]],
+      // 2025 benefit year: homeowners 65+ get the same amounts as everyone
+      // else. Only renters 65+ still get an extra $250.
+      senior:  [[150000, 1500], [250000, 1000]],
       under65: [[150000, 1500], [250000, 1000]],
       renter:  [[150000, 700]],
       hardLimit: 250000
@@ -1111,8 +1115,9 @@
     freeze: {
       incomeLimit: 172475,    // 2025 filing year
       minAge: 65,
-      minYearsOwned: 10,
-      minYearsResident: 10
+      // 2025 application: owned and lived in the home since 31 December 2022.
+      minYearsOwned: 3,
+      minYearsResident: 3
     },
     deduction: {
       senior: 250,            // annual, age 65+ or permanently disabled

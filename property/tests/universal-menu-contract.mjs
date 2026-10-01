@@ -35,6 +35,7 @@ const canonical = [
   ['anchor', 'ANCHOR Applications'],
   ['town-compare', 'Town Compare'],
   ['robust', 'ROBUST Framework'],
+  ['games', 'Games'],
   ['pulse', 'Property Pulse'],
   ['agent-desk', 'Agent Desk'],
   ['clients', 'Clients'],

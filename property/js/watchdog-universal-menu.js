@@ -149,7 +149,8 @@
       {key:'pulse',href:route('/pulse'),icon:'fa-wave-square',label:'Property Pulse'},
       {key:'anchor',href:route('/anchor/applications/'),icon:'fa-file-circle-check',label:'ANCHOR Applications'},
       {key:'town-compare',href:route('/town-compare'),icon:'fa-code-compare',label:'Town Compare'},
-      {key:'robust',href:route('/robust/'),icon:'fa-gauge-high',label:'ROBUST Framework'}
+      {key:'robust',href:route('/robust/'),icon:'fa-gauge-high',label:'ROBUST Framework'},
+      {key:'games',href:route('/games'),icon:'fa-puzzle-piece',label:'Games'}
     ];
     if(state.ready && isAgent()){
       /* Agents get their five Agent Desk areas. Transactions, Data Workbench,
@@ -180,6 +181,7 @@
     'anchor':{lens:'home',hint:'NJ property tax relief applications'},
     'town-compare':{lens:'home',group:'learn',hint:'Compare taxes between towns'},
     'robust':{lens:'home',group:'learn',hint:'How the Watchdog Score works'},
+    'games':{lens:'home',group:'learn',hint:'Daily home and town puzzles'},
     'scan':{lens:'work',hint:'Find homes that look over-assessed'},
     'transaction':{lens:'work',hint:'Closing checklist and documents'},
     'data-workbench':{lens:'work',hint:'Build and export property lists'},
