@@ -20,7 +20,8 @@ const PERSONAS = {
   visitor: null,
   homeowner: { profile: { display_name: 'Pat', roles: ['homeowner'], plan_tier: 'standard' }, entitlement: { plan_tier: 'standard', subscription_status: 'none' } },
   agent: { profile: { display_name: 'Jamie', roles: ['real_estate_agent'], role: 'agent', plan_tier: 'agent' }, entitlement: { plan_tier: 'agent', subscription_status: 'active' } },
-  pro: { profile: { display_name: 'Lee', roles: ['appraiser'], role: 'appraiser', plan_tier: 'pro_plus' }, entitlement: { plan_tier: 'pro_plus', subscription_status: 'active' } }
+  pro: { profile: { display_name: 'Lee', roles: ['appraiser'], role: 'appraiser', plan_tier: 'pro_plus' }, entitlement: { plan_tier: 'pro_plus', subscription_status: 'active' } },
+  unpaidAgent: { profile: { display_name: 'Sam', roles: ['real_estate_agent'], role: 'agent', plan_tier: 'standard' }, entitlement: { plan_tier: 'standard', subscription_status: 'none' } }
 };
 
 async function runMenu({ persona = null, host = 'www.watchdogindex.com', path = '/', hash = '', sidebarPage = '' } = {}) {
@@ -98,6 +99,33 @@ assert.equal(Object.fromEntries(preview.items.map((i) => [i.key, i.href])).farm,
 
 const pro = await runMenu({ persona: PERSONAS.pro, path: '/data-center', sidebarPage: 'data-center' });
 assert.deepEqual(pro.keys, [...HOME, 'scan', 'transaction', 'data-workbench', 'data-center', 'pro', 'account'], 'Non-agent professionals keep their research tools');
+
+/* ---------- 1a. My work is for paying members only ----------
+   Signed-out visitors, free accounts and agent profiles without a paid plan see
+   the My work tab locked, a members-only note, and no professional destination
+   anywhere in the drawer, even on an agent tool page or with "work" remembered.
+   The public Data Center stays in Learn and compare. */
+const WORK_KEYS = ['agent-desk', 'clients', 'farm', 'marketing', 'research', 'scan', 'transaction', 'data-workbench', 'pro'];
+const unpaidAgent = await runMenu({ persona: PERSONAS.unpaidAgent, path: '/farm-map' });
+assert.deepEqual(unpaidAgent.keys, [...HOME, 'data-center', 'pro', 'account'], 'An agent profile without a paid plan gets no Agent Desk areas (dashboard sidebar and search use this list too)');
+for (const [name, run] of [['visitor', visitor], ['homeowner', homeowner], ['unpaid agent', unpaidAgent]]) {
+  const d = run.drawer;
+  assert.match(d, /data-wd-lens="work" data-wd-locked="true" aria-label="My work, members only" aria-selected="false"[^>]*><i class="fas fa-lock"><\/i><span>My work<\/span>/, `${name}: My work tab is locked`);
+  assert.match(d, /data-wd-lens="home" aria-selected="true"/, `${name}: the menu opens on My home`);
+  assert.match(d, /<div class="wd-universal-work-locked wd-universal-lens-work" data-wd-work-locked="true">[\s\S]*My work is for members[\s\S]*href="\/pro#pricing">See membership plans/, `${name}: the locked tab explains membership and links to plans`);
+  for (const key of WORK_KEYS) assert.ok(!d.includes(`data-wd-nav="${key}"`), `${name}: no ${key} row in the drawer`);
+  assert.doesNotMatch(d, /Farm|Neighborhoods you want to own|Agent Desk|Included with/, `${name}: no professional tool names at all`);
+  assert.match(d, /wd-universal-group-learn">Learn and compare<\/p>(?:<a [^>]*>[\s\S]*?<\/a>)*?<a class="wd-universal-link wd-universal-lens-home[^"]*"[^>]* data-wd-nav="data-center"/, `${name}: the public Data Center stays under Learn and compare`);
+  assert.match(d, /data-wd-lens-to="work"><i class="fas fa-lock"[^>]*><\/i><span><b>Agent or pro\?<\/b><small>My work opens with an Agent or Pro membership<\/small>/, `${name}: the home nudge says My work needs a membership`);
+}
+assert.match(visitor.drawer, /data-wd-universal="signin">Already a member\? Sign in<\/button>/, 'Signed-out visitors can sign in from the locked note');
+assert.doesNotMatch(homeowner.drawer, /Already a member\? Sign in/, 'Signed-in people are not asked to sign in again');
+for (const [name, run] of [['agent', agent], ['pro', pro]]) {
+  assert.doesNotMatch(run.drawer, /data-wd-locked|data-wd-work-locked/, `${name}: paying members get an unlocked My work`);
+  assert.match(run.drawer, /data-wd-lens="work" aria-selected="(?:true|false)"[^>]*><i class="fas fa-briefcase"><\/i><span>My work<\/span>/, `${name}: normal My work tab`);
+}
+assert.match(pro.drawer, /class="wd-universal-link wd-universal-lens-work active" aria-current="page" data-wd-nav="data-center"/, 'Paying members keep Data Center among their work tools');
+assert.match(menuJs, /function workUnlocked\(\)\{\s*return !!state\.user && state\.ready && can\('agent'\);\s*\}/, 'Only a paid Agent plan or higher unlocks My work');
 
 const areaFor = agent.api.areaFor;
 for (const [path, hash, area] of [
