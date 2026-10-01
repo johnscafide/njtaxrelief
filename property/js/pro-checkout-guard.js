@@ -1,5 +1,8 @@
-/* Watchdog Pro soft-launch pricing controller.
-   Public Agent / Pro / Pro+ checkout is open. Teams remains request-only. */
+/* Watchdog Pro pricing controller.
+   Public Agent / Pro / Pro+ checkout is open. Teams remains request-only.
+   The page ships the Annual / Monthly / Lifetime toggle and plan buttons;
+   this script switches the buttons between trial, plain plan and Founding
+   Lifetime checkout. */
 (function(){
   'use strict';
   var path=(window.location.pathname||'').replace(/\/+$/,'');
@@ -14,13 +17,6 @@
   var trialOffered=true;
   var busy=false;
 
-  function ensureCss(){
-    if(document.querySelector('link[href="/property/css/pro-soft-launch.css"]'))return;
-    var link=document.createElement('link');
-    link.rel='stylesheet';link.href='/property/css/pro-soft-launch.css';
-    document.head.appendChild(link);
-  }
-
   function track(name,params){if(typeof window.gtag==='function')window.gtag('event',name,params||{});}
 
   function toast(message){
@@ -33,47 +29,6 @@
     try{
       var u=new URL(location.href);u.searchParams.delete('checkout');u.searchParams.delete('session_id');history.replaceState({},'',u.pathname+(u.searchParams.toString()?'?'+u.searchParams.toString():'')+u.hash);
     }catch(_){ }
-  }
-
-  function rewriteLaunchCopy(){
-    var head=document.querySelector('.pro-price-head');
-    if(head){
-      var kicker=head.querySelector('.pro-kicker');if(kicker)kicker.textContent='Soft launch · enrollment open';
-      var title=head.querySelector('h2');if(title)title.textContent='Choose how you want to pay.';
-      var copy=head.querySelector('p');if(copy)copy.textContent='Monthly, annual, or a limited Founding Lifetime option. Same plan limits.';
-    }
-
-    var demo=document.getElementById('demo');
-    if(demo){
-      demo.classList.add('is-soft-launch');
-      var copyBox=demo.querySelector('.pro-demo-copy');
-      if(copyBox){
-        var dk=copyBox.querySelector('.pro-kicker');if(dk)dk.textContent='Need help choosing?';
-        var dh=copyBox.querySelector('h2');if(dh)dh.textContent='Ask a plan question.';
-        var dp=copyBox.querySelector('p');if(dp)dp.textContent='Tell us what you do and roughly how many properties you work with. We will point you to the closest fit.';
-        var proof=copyBox.querySelector('.pro-demo-proof');if(proof)proof.innerHTML='<span><i class="fas fa-circle-info"></i> Straight answer</span><span><i class="fas fa-layer-group"></i> Agent · Pro · Pro+</span><span><i class="fas fa-envelope"></i> Reply by email</span>';
-      }
-      var source=demo.querySelector('input[name="source"]');if(source)source.value='paid-soft-launch-plan-help';
-      var submit=demo.querySelector('button[type="submit"]');if(submit)submit.innerHTML='Ask about plans <i class="fas fa-arrow-right"></i>';
-      var privacy=demo.querySelector('.pro-form-privacy');if(privacy)privacy.textContent='We use this only to reply about Watchdog plans. No payment information is collected here.';
-    }
-
-    document.querySelectorAll('.pro-faq-card').forEach(function(card){
-      var h=card.querySelector('h3'),p=card.querySelector('p');if(!h||!p)return;
-      if(/launch list|which plan/i.test(h.textContent||'')){h.textContent='Not sure which plan fits?';p.textContent='Start with your expected property volume, or send us a plan question below.';}
-    });
-  }
-
-  function addLaunchBar(){
-    var pricing=document.getElementById('pricing');var wrap=pricing&&pricing.querySelector('.pro-wrap');if(!wrap||wrap.querySelector('.pro-soft-launch-bar'))return;
-    var bar=document.createElement('div');bar.className='pro-soft-launch-bar pro-reveal is-visible';
-    bar.innerHTML='<span class="pro-soft-launch-stamp"><i></i> Soft launch live</span><strong>Paid plans are open now.</strong><small>Founding Lifetime is limited and may be retired as Watchdog grows.</small>';
-    wrap.insertBefore(bar,wrap.firstChild);
-  }
-
-  function addLifetimeButton(){
-    var group=document.querySelector('.pro-cadence');if(!group||group.querySelector('[data-cadence="lifetime"]'))return;
-    var b=document.createElement('button');b.type='button';b.dataset.cadence='lifetime';b.setAttribute('aria-pressed','false');b.innerHTML='Lifetime <span>Founding</span>';group.appendChild(b);
   }
 
   function setCtas(cadence){
@@ -154,8 +109,7 @@
     document.addEventListener('click',function(ev){
       var lifetime=ev.target.closest('[data-lifetime-plan]');if(lifetime){ev.preventDefault();ev.stopPropagation();lifetimeCheckout(lifetime.dataset.lifetimePlan);return;}
       var cadence=ev.target.closest('[data-cadence]');if(!cadence)return;
-      /* The Lifetime button may ship in the page HTML (soft-launch build) or be
-         added above; either way this one handler owns it. */
+      /* The Lifetime button ships in the page HTML; this one handler owns it. */
       if(cadence.dataset.cadence==='lifetime'){ev.preventDefault();setLifetime(true);return;}
       setTimeout(function(){document.querySelectorAll('.pro-price-band').forEach(function(b){b.classList.remove('is-founding-lifetime');});var lt=document.querySelector('.pro-cadence [data-cadence="lifetime"]');if(lt){lt.classList.remove('active');lt.setAttribute('aria-pressed','false');}setCtas(cadence.dataset.cadence);},0);
     },true);
@@ -172,6 +126,6 @@
     });
   }
 
-  function init(){ensureCss();rewriteLaunchCopy();addLaunchBar();addLifetimeButton();bindTrialEligibility();setCtas('yearly');bindCadence();finalizeLifetimeReturn();}
+  function init(){bindTrialEligibility();setCtas('yearly');bindCadence();finalizeLifetimeReturn();}
   if(document.readyState==='loading')document.addEventListener('DOMContentLoaded',function(){setTimeout(init,0);},{once:true});else setTimeout(init,0);
 })();
