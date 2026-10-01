@@ -1,6 +1,8 @@
 # Watchdog public paid launch: external controls
 
-_Last reconciled: 2026-08-27_
+_Last reconciled: 2026-08-27 · production reality check 2026-10-01_
+
+> **2026-10-01 production reality check.** Production release evidence shows the owner opened paid checkout as a soft launch on 2026-09-11 (`checkout_mode=open`, Agent / Pro / Pro+; Teams closed). The external controls below are unchanged and still pending: counsel review, insurance decision, written NJ tax classification and a verified NJ tax calculation. The tables and the cutover-state file in this packet still describe the pre-soft-launch posture and were not rewritten, because doing so changes the launch checker. Public legal pages now name **Watchdog Property Intelligence LLC** as the operator (Terms and Privacy updated 2026-10-01); the Refund Policy still carries its "commercial policy draft" label pending counsel.
 
 ## Current release posture
 

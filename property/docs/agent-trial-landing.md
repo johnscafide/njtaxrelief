@@ -5,6 +5,13 @@
 **Spec:** `property/docs/marketing/watchdog-agent-marketing-q4-2026/04-paid-ads/landing-page-specs.md`  
 **Decision:** `property/docs/marketing/watchdog-agent-marketing-q4-2026/01-strategy/trial-decision.md`
 
+> **Status, checked against production on 2026-10-01: the page is live, the card trial behind it is not.**
+> - Only the front end shipped (`agents/trial`, `agents/trial/thanks`, `agents-trial.js`, `agents-trial.css`).
+> - The server pieces described under "Planned function changes" were never committed or deployed. `supabase/functions/create-checkout-session/index.ts` (production v71) still has only the controlled 7-day no-card Agent trial (`controlled_agent_7d_v1`) and returns `CONTROLLED_TRIAL_UNAVAILABLE` while checkout is open. The `get_public_checkout_mode()` function and its migration do not exist.
+> - Result: every visitor sees variant B (Founding Agent invite request). Forcing `?variant=a` sends `trial: true`, the function refuses it, and the page flips back to variant B.
+> - Still on the page: the scheduler link is empty (`SCHEDULER_URL`, button falls back to `/contact`) and the invite thank-you text shows a literal "[N] business days".
+> - Owner decision 2026-10-01: offer a 14-day trial on **every** paid plan (Agent, Pro, Pro+), card required, renewing automatically after 14 days. Implementing it changes the trial rule in the billing checkout function and needs explicit owner approval for that change.
+
 ## What it does
 
 One page, one action. Two variants in one file:
@@ -22,7 +29,7 @@ The variant comes from the new public read `get_public_checkout_mode()` (migrati
 4. The thank-you page requires a signed-in session, fires `trial_started` once per checkout session (deduplicated by `session_id`), reads `get_my_account_billing_state` for a status line, and shows the four first-20-minutes steps: Agent Academy lesson 1, add 5 past clients, draw a farm, book 15 minutes with John.
 5. Stripe's `customer.subscription.trial_will_end` (3 days before day 14) is now recorded by `stripe-webhook` as an `access_audit_log` event `billing.trial_will_end` with `trial_end`, so the day-11 reminder email and text key off Stripe's clock.
 
-## Function changes in this change set
+## Planned function changes (not implemented; see status above)
 
 `supabase/functions/create-checkout-session/index.ts`
 

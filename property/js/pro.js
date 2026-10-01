@@ -67,7 +67,7 @@
       if(demoCadence)demoCadence.value=cad;
       if(shouldTrack)trackEvent('pro_billing_toggle',{cadence:cad});
     }
-    buttons.forEach(function(b){b.addEventListener('click',function(){set(b.dataset.cadence,true);});});set('yearly',false);
+    buttons.forEach(function(b){b.addEventListener('click',function(){if(b.dataset.cadence==='lifetime')return;set(b.dataset.cadence,true);});});set('yearly',false);
   }
 
   /* content-architecture: dynamic. This wording reflects the live billing catalog and promotion state. */
@@ -148,7 +148,7 @@
       trackEvent('pro_demo_submit',{plan:payload.plan,cadence:payload.cadence,role:payload.role});
       fetch(DEMO_ENDPOINT,{method:'POST',headers:{'Content-Type':'application/json','apikey':SUPABASE_PUBLISHABLE_KEY},body:JSON.stringify(payload)})
         .then(function(r){return r.json().catch(function(){return{};}).then(function(body){if(!r.ok)throw new Error(body.error||'Request could not be sent.');return body;});})
-        .then(function(){setStatus('You are on the launch list.','success');trackEvent('pro_demo_success',{plan:payload.plan,cadence:payload.cadence,role:payload.role});form.reset();var c=document.getElementById('demo-cadence');if(c)c.value=payload.cadence;})
+        .then(function(){setStatus('Thanks. We will reply about the best-fit plan.','success');trackEvent('pro_demo_success',{plan:payload.plan,cadence:payload.cadence,role:payload.role});form.reset();var c=document.getElementById('demo-cadence');if(c)c.value=payload.cadence;})
         .catch(function(err){console.error('Pro demo request failed',err);setStatus('Could not send your request. Please try again.','error');trackEvent('pro_demo_error',{message:(err&&err.message)||'unknown'});})
         .finally(function(){if(submit)submit.disabled=false;});
     });

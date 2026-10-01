@@ -1,0 +1,29 @@
+name: Ad pixels contract
+
+on:
+  push:
+    branches: [main]
+    paths:
+      - 'property/js/watchdog-consent.js'
+      - 'property/js/watchdog-ad-pixels.js'
+      - 'property/privacy/index.html'
+      - 'property/tests/ad-pixels-contract.mjs'
+      - '.github/workflows/ad-pixels-contract.yml'
+  pull_request:
+    paths:
+      - 'property/js/watchdog-consent.js'
+      - 'property/js/watchdog-ad-pixels.js'
+      - 'property/privacy/index.html'
+      - 'property/tests/ad-pixels-contract.mjs'
+      - '.github/workflows/ad-pixels-contract.yml'
+
+jobs:
+  contract:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+      - name: Verify ad pixels contract
+        run: node property/tests/ad-pixels-contract.mjs
