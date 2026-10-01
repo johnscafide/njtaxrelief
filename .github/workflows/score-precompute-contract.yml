@@ -9,6 +9,7 @@ on:
       - 'property/scripts/db_brake.py'
       - 'property/tests/score-precompute-contract.mjs'
       - 'property/tests/watchdog-score-certified-ratio-contract.mjs'
+      - 'property/tests/public-score-cache-integrity-contract.mjs'
       - 'chapter123-ratios-2026.json'
       - '.github/workflows/score-precompute-contract.yml'
       - '.github/workflows/parcel-composite-sync.yml'
@@ -19,6 +20,7 @@ on:
       - 'property/scripts/db_brake.py'
       - 'property/tests/score-precompute-contract.mjs'
       - 'property/tests/watchdog-score-certified-ratio-contract.mjs'
+      - 'property/tests/public-score-cache-integrity-contract.mjs'
       - 'chapter123-ratios-2026.json'
       - '.github/workflows/score-precompute-contract.yml'
       - '.github/workflows/parcel-composite-sync.yml'
@@ -35,6 +37,7 @@ jobs:
         run: |
           node property/tests/score-precompute-contract.mjs
           node property/tests/watchdog-score-certified-ratio-contract.mjs
+          node property/tests/public-score-cache-integrity-contract.mjs
           node property/tests/prelaunch-audit-78-contract.mjs
       - uses: actions/setup-python@v5
         with:

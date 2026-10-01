@@ -46,18 +46,38 @@ function currentTaxSummary(annual:Row,assessed:number|null){
   return{tax_year:complete,annual_tax:tax,assessment_year:yearAssessed!==null?complete:null,assessed_value:yearAssessed,current_assessment_snapshot:snapshotAssessed,effective_rate:effective_rate_from_same_year(effective),tax_rate:num(x.tax_rate),status:"official_municipal_complete_year",revaluation_mismatch:yearAssessed===null};
 }
 
+// Per-instance caches. Official tax records change a few times a year, but Property Home
+// and the anchor application asked Edmunds again (3-4 calls) on every page load. A matched
+// record is reused for 12 hours, a definite miss for 1 hour, a town's WIPP metadata for a
+// day. Transient provider failures are never cached. Sign-in is still checked first.
+const RESULT_TTL_MS=12*60*60*1000,MISS_TTL_MS=60*60*1000,META_TTL_MS=24*60*60*1000,CACHE_MAX=500;
+const resultCache=new Map<string,{until:number;body:Row}>(),metaCache=new Map<string,{until:number;res:any}>();
+function remember<T>(m:Map<string,T>,key:string,value:T){if(m.has(key))m.delete(key);else if(m.size>=CACHE_MAX)m.delete(m.keys().next().value as string);m.set(key,value)}
+function recall<T extends {until:number}>(m:Map<string,T>,key:string){const hit=m.get(key);if(!hit)return null;if(hit.until<=Date.now()){m.delete(key);return null}return hit}
+async function getMeta(id:string){const hit=recall(metaCache,id);if(hit)return hit.res;const res=await get(id,`/metadata/${id}`);if(res.ok&&res.data)remember(metaCache,id,{until:Date.now()+META_TTL_MS,res});return res}
+const CACHEABLE_MISSES=new Set(["no_exact_match","matched_no_account"]);
+
+async function lookup(code:string,address:string,block:string,lot:string):Promise<Row>{
+  let wid=code,meta=await getMeta(code);const alt=NJ_CODE_ALT[code];
+  if(alt&&!(meta.ok&&meta.data&&sameTown(meta.data.cityName,alt[1],alt[2]))){const m2=await getMeta(alt[0]);if(m2.ok&&m2.data&&sameTown(m2.data.cityName,alt[1],alt[2])){wid=alt[0];meta=m2}else return{ok:true,status:"provider_not_available",reason:"town_not_confirmed",municipality_code:code,provider:"edmunds_wipp"}}
+  if(!meta.ok||!meta.data)return{ok:true,status:"provider_not_available",municipality_code:code,provider:"edmunds_wipp"};
+  const term=searchTerm(address);const sr=await get(wid,`/wippPropInfo/search?propertyLoc=${encodeURIComponent(term)}&size=25`);if(!sr.ok||!Array.isArray(sr.data?.content))return{ok:true,status:"provider_search_unavailable",municipality_code:code,provider:"edmunds_wipp"};
+  const match=pickMatch(sr.data.content,address,block,lot);if(!match)return{ok:true,status:"no_exact_match",municipality_code:code,provider:"edmunds_wipp",candidate_count:sr.data.content.length};
+  const account=clean(match.accountId,100);if(!account)return{ok:true,status:"matched_no_account",municipality_code:code,provider:"edmunds_wipp"};const detail=await get(wid,`/wippTaxes/${encodeURIComponent(account)}`);if(!detail.ok||!detail.data)return{ok:true,status:"detail_unavailable",municipality_code:code,provider:"edmunds_wipp"};
+  const d=safe(detail.data),property=safe(d.propertyInfo),annual=annualTax(d),parcel=splitBlq(match.blqId||property.blqId);const checkedAt=new Date().toISOString();const land=num(findValue(property,["landValue","landAssessment"])),improvement=num(findValue(property,["improvementValue","improvementAssessment"])),exempt=num(findValue(property,["exemptValue","exemptionValue"])),assessed=num(findValue(property,["totalAssessedValue","totalAssessment","assessedValue"])),current=currentTaxSummary(annual,assessed);
+  return{ok:true,status:"exact_match",provider:"edmunds_wipp",provider_label:`${clean(meta.data.cityName,160)||"Municipality"} · Edmunds GovTech WIPP`,municipality_code:code,wipp_id:wid,checked_at:checkedAt,match:{property_location:clean(match.propertyLoc,240)||null,account_id:account,owner_name:clean(property.ownerName||match.ownerName,240)||null,parcel},property:{property_class:clean(property.propertyClass||property.propClass,120)||null,land_value:land,improvement_value:improvement,exempt_value:exempt,total_assessed_value:assessed},current,annual,source:{url:portal(wid,account),semantics:"Exact official municipal WIPP address match. Values are public tax-account evidence and should be reviewed before filing; Watchdog does not infer missing values or overwrite user-entered application answers."}};
+}
+
 Deno.serve(async(req:Request)=>{
   if(req.method==="OPTIONS")return new Response("ok",{headers:cors(req)});if(req.method!=="POST")return respond(req,405,{error:"POST required"});
   const auth=req.headers.get("authorization")||"";if(!auth.startsWith("Bearer "))return respond(req,401,{error:"Sign in required"});
   const url=Deno.env.get("SUPABASE_URL")||"",anon=Deno.env.get("SUPABASE_ANON_KEY")||"";if(!url||!anon)return respond(req,503,{error:"Configuration unavailable"});const client=createClient(url,anon,{global:{headers:{Authorization:auth}},auth:{persistSession:false,autoRefreshToken:false}});const {data:who}=await client.auth.getUser();if(!who?.user)return respond(req,401,{error:"Session invalid"});
   let body:Row={};try{body=await req.json()}catch{return respond(req,400,{error:"Invalid JSON"})}
   const code=clean(body.municipality_code,4).replace(/\D/g,"");const address=clean(body.address,240),block=clean(body.block,50),lot=clean(body.lot,50);if(!/^\d{4}$/.test(code)||!address)return respond(req,400,{error:"municipality_code and address required"});
-  let wid=code,meta=await get(code,`/metadata/${code}`);const alt=NJ_CODE_ALT[code];
-  if(alt&&!(meta.ok&&meta.data&&sameTown(meta.data.cityName,alt[1],alt[2]))){const m2=await get(alt[0],`/metadata/${alt[0]}`);if(m2.ok&&m2.data&&sameTown(m2.data.cityName,alt[1],alt[2])){wid=alt[0];meta=m2}else return respond(req,200,{ok:true,status:"provider_not_available",reason:"town_not_confirmed",municipality_code:code,provider:"edmunds_wipp"})}
-  if(!meta.ok||!meta.data)return respond(req,200,{ok:true,status:"provider_not_available",municipality_code:code,provider:"edmunds_wipp"});
-  const term=searchTerm(address);const sr=await get(wid,`/wippPropInfo/search?propertyLoc=${encodeURIComponent(term)}&size=25`);if(!sr.ok||!Array.isArray(sr.data?.content))return respond(req,200,{ok:true,status:"provider_search_unavailable",municipality_code:code,provider:"edmunds_wipp"});
-  const match=pickMatch(sr.data.content,address,block,lot);if(!match)return respond(req,200,{ok:true,status:"no_exact_match",municipality_code:code,provider:"edmunds_wipp",candidate_count:sr.data.content.length});
-  const account=clean(match.accountId,100);if(!account)return respond(req,200,{ok:true,status:"matched_no_account",municipality_code:code,provider:"edmunds_wipp"});const detail=await get(wid,`/wippTaxes/${encodeURIComponent(account)}`);if(!detail.ok||!detail.data)return respond(req,200,{ok:true,status:"detail_unavailable",municipality_code:code,provider:"edmunds_wipp"});
-  const d=safe(detail.data),property=safe(d.propertyInfo),annual=annualTax(d),parcel=splitBlq(match.blqId||property.blqId);const checkedAt=new Date().toISOString();const land=num(findValue(property,["landValue","landAssessment"])),improvement=num(findValue(property,["improvementValue","improvementAssessment"])),exempt=num(findValue(property,["exemptValue","exemptionValue"])),assessed=num(findValue(property,["totalAssessedValue","totalAssessment","assessedValue"])),current=currentTaxSummary(annual,assessed);
-  return respond(req,200,{ok:true,status:"exact_match",provider:"edmunds_wipp",provider_label:`${clean(meta.data.cityName,160)||"Municipality"} · Edmunds GovTech WIPP`,municipality_code:code,wipp_id:wid,checked_at:checkedAt,match:{property_location:clean(match.propertyLoc,240)||null,account_id:account,owner_name:clean(property.ownerName||match.ownerName,240)||null,parcel},property:{property_class:clean(property.propertyClass||property.propClass,120)||null,land_value:land,improvement_value:improvement,exempt_value:exempt,total_assessed_value:assessed},current,annual,source:{url:portal(wid,account),semantics:"Exact official municipal WIPP address match. Values are public tax-account evidence and should be reviewed before filing; Watchdog does not infer missing values or overwrite user-entered application answers."}});
+  const key=[code,normStreet(address),compact(block),compact(lot)].join("|"),hit=recall(resultCache,key);
+  if(hit)return respond(req,200,{...hit.body,cache:"hit"});
+  const result=await lookup(code,address,block,lot);
+  const ttl=result.status==="exact_match"?RESULT_TTL_MS:CACHEABLE_MISSES.has(String(result.status))?MISS_TTL_MS:0;
+  if(ttl)remember(resultCache,key,{until:Date.now()+ttl,body:result});
+  return respond(req,200,result);
 });
