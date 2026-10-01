@@ -1,7 +1,7 @@
 /* Watchdog Games shared runtime: puzzle dates, saved progress, streaks,
    splash screen, help and results sheets, toasts, sharing and the
-   next-puzzle countdown. Each game script (sold.js, town-shapes.js) and the
-   /games hub use it.
+   next-puzzle countdown. Every game script in /property/js/games/ and the
+   /games hub use it; games-board.js adds the signed-in leaderboard.
 
    Progress lives in this browser only (localStorage, wrapped so private
    windows and blocked storage still play). A day's puzzle counts toward the
@@ -16,6 +16,33 @@
   var KEY = 'wd-games:v1:';
   var DAY = 86400000;
   var calm = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+  // Every game, in hub order. streak: 'win' counts days won in a row, 'play'
+  // counts days played in a row (games scored in points). dist: the buckets
+  // the stats sheet charts.
+  var GAMES = [
+    { id: 'pin-drop', name: 'Pin Drop', streak: 'play', avg: true, dist: ['0-19', '20-39', '40-59', '60-79', '80-100'] },
+    { id: 'sold', name: 'Sold!', streak: 'win', dist: ['1', '2', '3', '4', '5', '6'] },
+    { id: 'blocks', name: 'Blocks', streak: 'win', dist: ['0', '1', '2', '3'] },
+    { id: 'town-shapes', name: 'Town Shapes', streak: 'win', dist: ['1', '2', '3', '4', '5', '6'] },
+    { id: 'lineup', name: 'Lineup', streak: 'win', dist: ['1', '2', '3', '4'] },
+    { id: 'fair-or-unfair', name: 'Fair or Unfair', streak: 'play', avg: true, dist: ['0', '1', '2', '3', '4', '5'] }
+  ];
+  var SIX_TRY_POINTS = [100, 85, 70, 55, 40, 25];
+  function config(game) { return GAMES.filter(function (g) { return g.id === game; })[0] || GAMES[1]; }
+  // Points (0-100) for a finished day, the same scale the leaderboard uses.
+  function pointsOf(game, day) {
+    if (!day || !day.done) return 0;
+    if (typeof day.points === 'number') return day.points;
+    if (game === 'sold' || game === 'town-shapes') return day.won ? SIX_TRY_POINTS[day.guesses.length - 1] || 0 : 0;
+    return 0;
+  }
+  // Which stats bucket a finished day lands in (0-based), or -1.
+  function bucketOf(game, day) {
+    if (typeof day.bucket === 'number') return day.bucket;
+    if ((game === 'sold' || game === 'town-shapes') && day.won) return day.guesses.length - 1;
+    return -1;
+  }
 
   function dateIn(zone, when) {
     return new Intl.DateTimeFormat('en-CA', { timeZone: zone, year: 'numeric', month: '2-digit', day: '2-digit' }).format(when || new Date());
@@ -49,30 +76,57 @@
     record.live = Boolean(prev.live || date === today());
     data.days[date] = record;
     write(game, data);
+    if (record.done && !prev.done) {
+      setTimeout(function () {
+        document.dispatchEvent(new CustomEvent('wd-game:finished', { detail: { game: game, date: date } }));
+      }, 0);
+    }
     return record;
+  }
+  function markDay(game, date, fields) {
+    var data = read(game);
+    if (!data.days[date]) return;
+    Object.keys(fields).forEach(function (k) { data.days[date][k] = fields[k]; });
+    write(game, data);
   }
 
   function stats(game) {
+    var cfg = config(game);
     var days = read(game).days;
     var live = Object.keys(days).filter(function (d) { return days[d].done && days[d].live; }).sort();
+    var counts = function (d) { return cfg.streak === 'play' ? true : days[d].won; };
     var wins = live.filter(function (d) { return days[d].won; });
-    var dist = [0, 0, 0, 0, 0, 0];
-    wins.forEach(function (d) { var n = days[d].guesses.length; if (n >= 1 && n <= MAX_GUESSES) dist[n - 1]++; });
+    var dist = cfg.dist.map(function () { return 0; });
+    live.forEach(function (d) { var b = bucketOf(game, days[d]); if (b >= 0 && b < dist.length) dist[b]++; });
     var max = 0, run = 0, prev = null;
     live.forEach(function (d) {
-      if (days[d].won) { run = prev && addDays(prev, 1) === d && days[prev].won ? run + 1 : 1; max = Math.max(max, run); }
+      if (counts(d)) { run = prev && addDays(prev, 1) === d && counts(prev) ? run + 1 : 1; max = Math.max(max, run); }
       else run = 0;
       prev = d;
     });
     var current = 0;
     var cursor = days[today()] && days[today()].done ? today() : addDays(today(), -1);
-    while (days[cursor] && days[cursor].live && days[cursor].won) { current++; cursor = addDays(cursor, -1); }
-    return { played: live.length, wins: wins.length, pct: live.length ? Math.round(wins.length / live.length * 100) : 0, current: current, max: max, dist: dist };
+    while (days[cursor] && days[cursor].done && days[cursor].live && counts(cursor)) { current++; cursor = addDays(cursor, -1); }
+    var total = live.reduce(function (sum, d) { return sum + pointsOf(game, days[d]); }, 0);
+    return {
+      played: live.length,
+      wins: wins.length,
+      pct: live.length ? Math.round(wins.length / live.length * 100) : 0,
+      avg: live.length ? Math.round(total / live.length) : 0,
+      current: current,
+      max: max,
+      dist: dist
+    };
   }
 
   // The API sends answers reversed and base64 encoded (a spoiler guard only).
   function decode(k) {
     try { return window.atob(k).split('.')[0].split('').reverse().join(''); } catch (e) { return ''; }
+  }
+
+  // Structured answers: reversed ASCII JSON, base64 encoded.
+  function decodeData(k) {
+    try { return JSON.parse(window.atob(k).split('').reverse().join('')); } catch (e) { return null; }
   }
 
   function el(tag, cls, text) {
@@ -157,25 +211,51 @@
     d.addEventListener('click', function (e) { if (e.target === d) closeSheet(d); });
   });
 
+  // highlight: the 1-based bucket today's result landed in, if any.
   function renderStats(game, highlight) {
+    var cfg = config(game);
     var s = stats(game);
     var set = function (id, v) { var n = document.getElementById(id); if (n) n.textContent = String(v); };
     set('gm-stat-played', s.played);
-    set('gm-stat-pct', s.pct);
+    set('gm-stat-pct', cfg.avg ? s.avg : s.pct);
+    set('gm-stat-pct-label', cfg.avg ? 'Avg score' : 'Win %');
     set('gm-stat-streak', s.current);
     set('gm-stat-max', s.max);
     var list = document.getElementById('gm-dist');
-    if (!list) return;
-    list.textContent = '';
-    var top = Math.max.apply(null, s.dist.concat([1]));
-    s.dist.forEach(function (count, i) {
-      var li = el('li', highlight === i + 1 ? 'is-today' : '');
-      li.appendChild(el('b', '', String(i + 1)));
-      var bar = el('span', '', String(count));
-      bar.style.width = Math.max(8, Math.round(count / top * 100)) + '%';
-      li.appendChild(bar);
-      list.appendChild(li);
-    });
+    if (list) {
+      list.textContent = '';
+      var top = Math.max.apply(null, s.dist.concat([1]));
+      s.dist.forEach(function (count, i) {
+        var li = el('li', highlight === i + 1 ? 'is-today' : '');
+        li.appendChild(el('b', '', cfg.dist[i]));
+        var bar = el('span', '', String(count));
+        bar.style.width = Math.max(8, Math.round(count / top * 100)) + '%';
+        li.appendChild(bar);
+        list.appendChild(li);
+      });
+      list.classList.toggle('is-wide', cfg.dist[0].length > 2);
+    }
+    wireNextGame(game);
+    document.dispatchEvent(new CustomEvent('wd-game:results', { detail: { game: game } }));
+  }
+
+  // "Up next" on the results sheet: the first game not finished today.
+  function nextGame(game) {
+    var d = today();
+    var open = GAMES.filter(function (g) { var day = getDay(g.id, d); return g.id !== game && !(day && day.done); });
+    return open[0] || null;
+  }
+  function wireNextGame(game) {
+    var link = document.getElementById('gm-next-game');
+    if (!link) return;
+    var next = nextGame(game);
+    if (next) {
+      link.href = '/games/' + next.id;
+      link.textContent = 'Play ' + next.name;
+    } else {
+      link.href = '/games';
+      link.textContent = 'All games';
+    }
   }
 
   // ---------- splash ----------
@@ -224,7 +304,7 @@
     var date = requestedDate();
     var url = '/api/watchdog-games?game=' + encodeURIComponent(game) + (date ? '&date=' + date : '');
     return fetch(url, { headers: { Accept: 'application/json' } }).then(function (r) {
-      if (r.ok) return r.json();
+      if (r.ok) return r.json().then(function (p) { window.WatchdogGames.current = p; return p; });
       if (r.status === 404 && date) { window.location.search = ''; }
       throw new Error('puzzle ' + r.status);
     });
@@ -239,6 +319,11 @@
   }
 
   window.WatchdogGames = {
+    GAMES: GAMES,
+    config: config,
+    pointsOf: pointsOf,
+    nextGame: nextGame,
+    markDay: markDay,
     LAUNCH: LAUNCH,
     MAX_GUESSES: MAX_GUESSES,
     calm: calm,
@@ -251,6 +336,7 @@
     stats: stats,
     renderStats: renderStats,
     decode: decode,
+    decodeData: decodeData,
     el: el,
     icon: icon,
     replay: replay,

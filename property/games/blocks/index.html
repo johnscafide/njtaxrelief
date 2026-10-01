@@ -1,0 +1,120 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<meta name="robots" content="index,follow">
+<meta name="theme-color" content="#0e2248">
+<title>Blocks: Sort 16 NJ Words Into 4 Groups | Watchdog Games</title>
+<meta name="description" content="A daily Watchdog word game. Sort sixteen tiles into four groups of four: New Jersey towns, rivers, tax terms and more. Four mistakes allowed.">
+<link rel="canonical" href="https://www.watchdogindex.com/games/blocks">
+<meta property="og:title" content="Blocks: a daily New Jersey word game">
+<meta property="og:description" content="Sort sixteen tiles into four groups of four. New Jersey towns, tax words and more. New board every day.">
+<meta property="og:url" content="https://www.watchdogindex.com/games/blocks">
+<meta property="og:type" content="website">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700;800&family=Plus+Jakarta+Sans:wght@500;600;700;800&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="/property/css/watchdog-games.css?v=20261001c">
+<script type="application/ld+json">{"@context":"https://schema.org","@type":"WebApplication","name":"Blocks by Watchdog","url":"https://www.watchdogindex.com/games/blocks","applicationCategory":"GameApplication","operatingSystem":"Any","isAccessibleForFree":true,"description":"A daily word game: sort sixteen New Jersey and property tax tiles into four groups of four.","publisher":{"@type":"Organization","name":"Watchdog","url":"https://www.watchdogindex.com/"}}</script>
+</head>
+<body class="wg gm" data-game="blocks">
+<a class="wg-skip" href="#gm-stage">Skip to the game</a>
+
+<div class="gm-splash" id="gm-splash" hidden>
+  <div class="gm-splash-in">
+    <svg class="gm-mark" viewBox="0 0 100 100" aria-hidden="true"><rect x="12" y="12" width="34" height="34" rx="7" fill="#b8972a"/><rect x="54" y="12" width="34" height="34" rx="7" fill="#0f766e"/><rect x="12" y="54" width="34" height="34" rx="7" fill="#1456a0"/><rect x="54" y="54" width="34" height="34" rx="7" fill="#fff"/></svg>
+    <p class="gm-splash-title">Blocks</p>
+    <p>Sort sixteen tiles into four groups of four.</p>
+    <div class="gm-splash-actions">
+      <button class="wg-btn" id="gm-play" type="button">Play</button>
+      <button class="wg-btn wg-btn-quiet" id="gm-splash-help" type="button">How to play</button>
+    </div>
+    <p class="gm-splash-date" id="gm-splash-date">&nbsp;</p>
+    <p class="gm-splash-no" id="gm-splash-no">&nbsp;</p>
+  </div>
+</div>
+
+<header class="gm-bar"><div class="gm-bar-in">
+  <div><a class="gm-icon" href="/games" aria-label="All games"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M15 18l-6-6 6-6"/></svg></a></div>
+  <h1 class="gm-title">Blocks</h1>
+  <div class="gm-bar-end">
+    <button class="gm-icon" id="gm-help-btn" type="button" aria-label="How to play"><svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="9.5"/><path d="M9.3 9.2a2.8 2.8 0 0 1 5.4 1c0 1.9-2.7 2.5-2.7 4"/><path d="M12 17.6v.1"/></svg></button>
+    <button class="gm-icon" id="gm-stats-btn" type="button" aria-label="Your stats"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M5 20v-8M12 20V5M19 20v-5"/></svg></button>
+  </div>
+</div></header>
+
+<main class="gm-stage" id="gm-stage">
+  <p class="gm-meta" id="gm-meta">Loading today's board</p>
+  <p class="bk-ask">Make four groups of four</p>
+  <div class="bk-solved" id="bk-solved"></div>
+  <div class="bk-grid" id="bk-grid" role="group" aria-label="Tiles"></div>
+  <div class="bk-lives"><span>Mistakes left</span><ol id="bk-lives" aria-label="Mistakes left"></ol></div>
+  <p class="wg-sr" id="gm-live" aria-live="polite"></p>
+  <div class="bk-actions" id="gm-dock">
+    <button class="wg-btn wg-btn-quiet" id="bk-shuffle" type="button">Shuffle</button>
+    <button class="wg-btn wg-btn-quiet" id="bk-clear" type="button" disabled>Deselect</button>
+    <button class="wg-btn" id="bk-submit" type="button" disabled>Submit</button>
+  </div>
+  <div class="gm-done" id="gm-done" hidden><p><span id="gm-done-sub">Your score</span><b id="gm-done-answer"></b></p><button type="button" id="gm-done-btn">See results</button></div>
+</main>
+
+<section class="gm-extra" aria-labelledby="gm-extra-title">
+  <h2 class="wg-sr" id="gm-extra-title">Past puzzles</h2>
+  <form class="gm-archive" id="gm-archive">
+    <label for="gm-archive-date">Play a past puzzle<input type="date" id="gm-archive-date"></label>
+    <button class="wg-btn wg-btn-quiet" type="submit">Go</button>
+  </form>
+  <p class="wg-note">Town groups come straight from the state's list of all 564 New Jersey municipalities. Tax and housing words come from the <a href="/glossary">Watchdog glossary</a>, where every term cites an official source. Every board has exactly one solution.</p>
+</section>
+
+<dialog class="gm-sheet" id="gm-help" aria-labelledby="gm-help-title"><div class="gm-sheet-in">
+  <button class="gm-icon gm-close" type="button" aria-label="Close"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M18 6L6 18M6 6l12 12"/></svg></button>
+  <h2 id="gm-help-title">How to play</h2>
+  <p>Find four groups of four tiles that share something.</p>
+  <ul>
+    <li>Pick four tiles and hit Submit.</li>
+    <li>Three of four right? You'll hear "One away."</li>
+    <li>You can make four mistakes. Watch for tiles that look like they fit two groups. Only one way works for all sixteen.</li>
+  </ul>
+  <h3>Groups, easiest to hardest</h3>
+  <ol class="bk-legend">
+    <li class="bk-tier-1">Everyday words</li>
+    <li class="bk-tier-2">Tax and housing words</li>
+    <li class="bk-tier-3">Fill in the blank to make a NJ town</li>
+    <li class="bk-tier-4">Towns in one county</li>
+  </ol>
+  <p class="wg-note">A new board drops every day at midnight. Everyone plays the same one.</p>
+</div></dialog>
+
+<dialog class="gm-sheet" id="gm-results" aria-labelledby="gm-results-title"><div class="gm-sheet-in">
+  <button class="gm-icon gm-close" type="button" aria-label="Close"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M18 6L6 18M6 6l12 12"/></svg></button>
+  <h2 id="gm-results-title">Results</h2>
+  <p class="gm-answer-sub" id="gm-r-sub"></p>
+  <ol class="bk-recap" id="bk-recap" aria-label="Your guesses at a glance"></ol>
+  <div class="gm-board" id="gm-board" hidden></div>
+  <h3>Your stats</h3>
+  <dl class="gm-stats">
+    <div><dt>Played</dt><dd id="gm-stat-played">0</dd></div>
+    <div><dt id="gm-stat-pct-label">Win %</dt><dd id="gm-stat-pct">0</dd></div>
+    <div><dt>Streak</dt><dd id="gm-stat-streak">0</dd></div>
+    <div><dt>Best</dt><dd id="gm-stat-max">0</dd></div>
+  </dl>
+  <h3>Mistakes in a win</h3>
+  <ol class="gm-dist" id="gm-dist"></ol>
+  <div class="gm-sheet-actions">
+    <button class="wg-btn" id="gm-share" type="button">Share</button>
+    <a class="wg-btn wg-btn-quiet" id="gm-next-game" href="/games">All games</a>
+  </div>
+  <p class="gm-next" id="gm-next-wrap">Next board in<b id="gm-next">--:--:--</b></p>
+  <div class="gm-learn">
+    <h3>Today's groups</h3>
+    <ul class="bk-learn" id="bk-learn"></ul>
+  </div>
+</div></dialog>
+
+<div class="gm-toast" id="gm-toast" role="status" hidden></div>
+<script src="/property/js/games/games-core.js?v=20261001c"></script>
+<script src="/property/js/games/games-board.js?v=20261001c"></script>
+<script src="/property/js/games/blocks.js?v=20261001c"></script>
+</body>
+</html>

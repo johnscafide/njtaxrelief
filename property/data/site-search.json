@@ -1887,6 +1887,117 @@
       "icon": "fa-map"
     },
     {
+      "id": "pin-drop-game",
+      "kind": "page",
+      "label": "Pin Drop daily map game",
+      "aliases": [
+        "pin drop",
+        "map game",
+        "find the house",
+        "geoguessr",
+        "guess the location",
+        "where is this home"
+      ],
+      "keywords": [
+        "map",
+        "property lines",
+        "parcel",
+        "game",
+        "daily puzzle"
+      ],
+      "summary": "Find a real sold New Jersey home on the map, down to the exact property. Three clues free, more for 5 points.",
+      "href": "/games/pin-drop",
+      "where": "Games > Pin Drop",
+      "icon": "fa-location-dot"
+    },
+    {
+      "id": "blocks-game",
+      "kind": "page",
+      "label": "Blocks daily word game",
+      "aliases": [
+        "blocks",
+        "connections",
+        "word groups",
+        "group the words",
+        "nj word game"
+      ],
+      "keywords": [
+        "word game",
+        "groups",
+        "towns",
+        "tax words",
+        "daily puzzle"
+      ],
+      "summary": "Sort sixteen New Jersey and tax tiles into four groups of four. Four mistakes allowed.",
+      "href": "/games/blocks",
+      "where": "Games > Blocks",
+      "icon": "fa-table-cells-large"
+    },
+    {
+      "id": "lineup-game",
+      "kind": "page",
+      "label": "Lineup daily ranking game",
+      "aliases": [
+        "lineup",
+        "rank the towns",
+        "order the towns",
+        "town ranking game"
+      ],
+      "keywords": [
+        "tax rate",
+        "median price",
+        "population",
+        "ranking",
+        "daily puzzle"
+      ],
+      "summary": "Put five New Jersey towns in order by a real public number. Four tries.",
+      "href": "/games/lineup",
+      "where": "Games > Lineup",
+      "icon": "fa-arrow-down-wide-short"
+    },
+    {
+      "id": "fair-or-unfair-game",
+      "kind": "page",
+      "label": "Fair or Unfair assessment game",
+      "aliases": [
+        "fair or unfair",
+        "over assessed game",
+        "assessment game",
+        "is my assessment fair game"
+      ],
+      "keywords": [
+        "assessment",
+        "common level range",
+        "chapter 123",
+        "appeal",
+        "daily puzzle"
+      ],
+      "summary": "Five real New Jersey sales next to their assessments. Call each one over-assessed, fair or under-assessed.",
+      "href": "/games/fair-or-unfair",
+      "where": "Games > Fair or Unfair",
+      "icon": "fa-scale-balanced"
+    },
+    {
+      "id": "games-leaderboard",
+      "kind": "page",
+      "label": "Watchdog Games leaderboard",
+      "aliases": [
+        "leaderboard",
+        "game scores",
+        "top players",
+        "high scores"
+      ],
+      "keywords": [
+        "games",
+        "scores",
+        "ranking"
+      ],
+      "summary": "Today's and this week's top Watchdog Games players. Sign in with a free Watchdog account to join.",
+      "href": "/games/leaderboard",
+      "where": "Games > Leaderboard",
+      "icon": "fa-trophy"
+    },
+    {
       "id": "uniformity-index",
       "kind": "page",
       "label": "Assessment Uniformity Index",

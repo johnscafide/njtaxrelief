@@ -1,0 +1,127 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<meta name="robots" content="index,follow">
+<meta name="theme-color" content="#1e8a4a">
+<title>Lineup: Rank Five NJ Towns by the Numbers | Watchdog Games</title>
+<meta name="description" content="A daily Watchdog game. Put five New Jersey towns in order by tax rate, home prices, population or assessment ratio. Four tries.">
+<link rel="canonical" href="https://www.watchdogindex.com/games/lineup">
+<meta property="og:title" content="Lineup: a daily New Jersey town ranking game">
+<meta property="og:description" content="Rank five New Jersey towns by a real public number. Four tries. New lineup every day.">
+<meta property="og:url" content="https://www.watchdogindex.com/games/lineup">
+<meta property="og:type" content="website">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700;800&family=Plus+Jakarta+Sans:wght@500;600;700;800&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="/property/css/watchdog-games.css?v=20261001c">
+<script type="application/ld+json">{"@context":"https://schema.org","@type":"WebApplication","name":"Lineup by Watchdog","url":"https://www.watchdogindex.com/games/lineup","applicationCategory":"GameApplication","operatingSystem":"Any","isAccessibleForFree":true,"description":"A daily game: rank five New Jersey towns by a public statistic in four tries.","publisher":{"@type":"Organization","name":"Watchdog","url":"https://www.watchdogindex.com/"}}</script>
+</head>
+<body class="wg gm" data-game="lineup">
+<a class="wg-skip" href="#gm-stage">Skip to the game</a>
+
+<div class="gm-splash" id="gm-splash" hidden>
+  <div class="gm-splash-in">
+    <svg class="gm-mark" viewBox="0 0 100 100" aria-hidden="true"><rect x="16" y="14" width="68" height="14" rx="7" fill="#fff"/><rect x="16" y="35" width="54" height="14" rx="7" fill="#fff" opacity=".85"/><rect x="16" y="56" width="40" height="14" rx="7" fill="#fff" opacity=".7"/><rect x="16" y="77" width="26" height="14" rx="7" fill="#fff" opacity=".55"/></svg>
+    <p class="gm-splash-title">Lineup</p>
+    <p>Put five New Jersey towns in order. Four tries.</p>
+    <div class="gm-splash-actions">
+      <button class="wg-btn" id="gm-play" type="button">Play</button>
+      <button class="wg-btn wg-btn-quiet" id="gm-splash-help" type="button">How to play</button>
+    </div>
+    <p class="gm-splash-date" id="gm-splash-date">&nbsp;</p>
+    <p class="gm-splash-no" id="gm-splash-no">&nbsp;</p>
+  </div>
+</div>
+
+<header class="gm-bar"><div class="gm-bar-in">
+  <div><a class="gm-icon" href="/games" aria-label="All games"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M15 18l-6-6 6-6"/></svg></a></div>
+  <h1 class="gm-title">Lineup</h1>
+  <div class="gm-bar-end">
+    <button class="gm-icon" id="gm-help-btn" type="button" aria-label="How to play"><svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="9.5"/><path d="M9.3 9.2a2.8 2.8 0 0 1 5.4 1c0 1.9-2.7 2.5-2.7 4"/><path d="M12 17.6v.1"/></svg></button>
+    <button class="gm-icon" id="gm-stats-btn" type="button" aria-label="Your stats"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M5 20v-8M12 20V5M19 20v-5"/></svg></button>
+  </div>
+</div></header>
+
+<main class="gm-stage" id="gm-stage">
+  <section class="lu-prompt" aria-labelledby="lu-metric">
+    <p class="gm-no" id="gm-meta">Loading today's lineup</p>
+    <p class="lu-ask">Rank these <span id="lu-county">New Jersey</span> towns by</p>
+    <h2 class="lu-metric" id="lu-metric">&nbsp;</h2>
+    <p class="lu-unit" id="lu-unit">&nbsp;</p>
+  </section>
+
+  <div class="lu-board">
+    <p class="lu-end"><span>Highest</span></p>
+    <ol class="lu-list" id="lu-list" aria-label="Your order, highest first"></ol>
+    <p class="lu-end"><span>Lowest</span></p>
+  </div>
+
+  <div class="lu-tries" aria-label="Tries used">
+    <ol id="lu-tries"></ol>
+    <span id="lu-tries-text">4 tries left</span>
+  </div>
+  <p class="wg-sr" id="gm-live" aria-live="polite"></p>
+
+  <div class="gm-done" id="gm-done" hidden><p><span id="gm-done-sub">Final order</span><b id="gm-done-answer"></b></p><button type="button" id="gm-done-btn">See results</button></div>
+</main>
+
+<div class="gm-dock" id="gm-dock">
+  <div class="gm-entry"><button class="wg-btn lu-check" id="lu-check" type="button">Check my order</button></div>
+</div>
+
+<section class="gm-extra" aria-labelledby="gm-extra-title">
+  <h2 class="wg-sr" id="gm-extra-title">Past puzzles</h2>
+  <form class="gm-archive" id="gm-archive">
+    <label for="gm-archive-date">Play a past puzzle<input type="date" id="gm-archive-date"></label>
+    <button class="wg-btn wg-btn-quiet" type="submit">Go</button>
+  </form>
+  <p class="wg-note">Tax rates are the state's 2025 general tax rates. Sale prices come from verified arm's-length residential sales since 2024. Assessment ratios are the state's 2026 Chapter 123 average ratios. Populations are from the 2020 Census.</p>
+</section>
+
+<dialog class="gm-sheet" id="gm-help" aria-labelledby="gm-help-title"><div class="gm-sheet-in">
+  <button class="gm-icon gm-close" type="button" aria-label="Close"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M18 6L6 18M6 6l12 12"/></svg></button>
+  <h2 id="gm-help-title">How to play</h2>
+  <p>Five towns, one real number. Put them in order from highest to lowest. You get four tries.</p>
+  <ul>
+    <li>Drag a town by its handle, or use the arrows to move it up or down.</li>
+    <li>Hit Check. Green means the right spot, and it locks in place. Gold means one spot off. Slate means further away.</li>
+    <li>Each day ranks a different number: tax rate, median sale price, price per square foot, population or assessment ratio.</li>
+  </ul>
+  <p class="wg-note">A new lineup drops every day at midnight. Everyone plays the same one.</p>
+</div></dialog>
+
+<dialog class="gm-sheet" id="gm-results" aria-labelledby="gm-results-title"><div class="gm-sheet-in">
+  <button class="gm-icon gm-close" type="button" aria-label="Close"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M18 6L6 18M6 6l12 12"/></svg></button>
+  <h2 id="gm-results-title">Results</h2>
+  <p class="gm-answer-sub" id="gm-r-sub"></p>
+  <ol class="lu-final" id="lu-final" aria-label="The right order"></ol>
+  <div class="gm-board" id="gm-board" hidden></div>
+  <h3>Your stats</h3>
+  <dl class="gm-stats">
+    <div><dt>Played</dt><dd id="gm-stat-played">0</dd></div>
+    <div><dt id="gm-stat-pct-label">Win %</dt><dd id="gm-stat-pct">0</dd></div>
+    <div><dt>Streak</dt><dd id="gm-stat-streak">0</dd></div>
+    <div><dt>Best</dt><dd id="gm-stat-max">0</dd></div>
+  </dl>
+  <h3>Tries to win</h3>
+  <ol class="gm-dist" id="gm-dist"></ol>
+  <div class="gm-sheet-actions">
+    <button class="wg-btn" id="gm-share" type="button">Share</button>
+    <a class="wg-btn wg-btn-quiet" id="gm-next-game" href="/games">All games</a>
+  </div>
+  <p class="gm-next" id="gm-next-wrap">Next lineup in<b id="gm-next">--:--:--</b></p>
+  <div class="gm-learn">
+    <h3>What this teaches</h3>
+    <p id="lu-note">Every town sets its own budget and tax rate, so neighbors can look nothing alike on paper.</p>
+    <p><a id="lu-learn" href="/town-compare">Compare towns</a> &middot; <a href="/">Look up your home</a></p>
+  </div>
+</div></dialog>
+
+<div class="gm-toast" id="gm-toast" role="status" hidden></div>
+<template id="lu-item-tpl"><li class="lu-item"><span class="lu-rank"></span><span class="lu-name"></span><span class="lu-value"></span><span class="lu-move"><button type="button" class="lu-up" aria-label="Move up"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M6 15l6-6 6 6"/></svg></button><button type="button" class="lu-down" aria-label="Move down"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M6 9l6 6 6-6"/></svg></button></span><span class="lu-grip" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M9 6h.01M15 6h.01M9 12h.01M15 12h.01M9 18h.01M15 18h.01"/></svg></span></li></template>
+<script src="/property/js/games/games-core.js?v=20261001c"></script>
+<script src="/property/js/games/games-board.js?v=20261001c"></script>
+<script src="/property/js/games/lineup.js?v=20261001c"></script>
+</body>
+</html>

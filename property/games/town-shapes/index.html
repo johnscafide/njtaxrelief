@@ -14,7 +14,7 @@
 <meta property="og:type" content="website">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700;800&family=Plus+Jakarta+Sans:wght@500;600;700;800&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="/property/css/watchdog-games.css?v=20261001b">
+<link rel="stylesheet" href="/property/css/watchdog-games.css?v=20261001c">
 <script type="application/ld+json">{"@context":"https://schema.org","@type":"WebApplication","name":"Town Shapes by Watchdog","url":"https://www.watchdogindex.com/games/town-shapes","applicationCategory":"GameApplication","operatingSystem":"Any","isAccessibleForFree":true,"description":"A daily game: name the New Jersey municipality from its outline in six tries.","publisher":{"@type":"Organization","name":"Watchdog","url":"https://www.watchdogindex.com/"}}</script>
 </head>
 <body class="wg gm" data-game="town-shapes">
@@ -114,10 +114,11 @@
   <p class="gm-answer" id="gm-r-answer"></p>
   <p class="gm-answer-sub" id="gm-r-sub"></p>
   <ol class="gm-recap" id="gm-r-recap" aria-label="Your guesses at a glance"></ol>
+  <div class="gm-board" id="gm-board" hidden></div>
   <h3>Your stats</h3>
   <dl class="gm-stats">
     <div><dt>Played</dt><dd id="gm-stat-played">0</dd></div>
-    <div><dt>Win %</dt><dd id="gm-stat-pct">0</dd></div>
+    <div><dt id="gm-stat-pct-label">Win %</dt><dd id="gm-stat-pct">0</dd></div>
     <div><dt>Streak</dt><dd id="gm-stat-streak">0</dd></div>
     <div><dt>Best</dt><dd id="gm-stat-max">0</dd></div>
   </dl>
@@ -125,7 +126,7 @@
   <ol class="gm-dist" id="gm-dist"></ol>
   <div class="gm-sheet-actions">
     <button class="wg-btn" id="gm-share" type="button">Share</button>
-    <a class="wg-btn wg-btn-quiet" href="/games/sold">Play Sold!</a>
+    <a class="wg-btn wg-btn-quiet" id="gm-next-game" href="/games">All games</a>
   </div>
   <p class="gm-next" id="gm-next-wrap">Next town in<b id="gm-next">--:--:--</b></p>
   <div class="gm-learn">
@@ -139,7 +140,8 @@
 <template id="gm-row-tpl"><li class="gm-row"><span class="gm-row-n"></span><span class="gm-row-v"></span><span class="gm-row-r"></span><span class="gm-row-r gm-row-pct"></span></li></template>
 <template id="gm-ico-arrow"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 19V5M5 12l7-7 7 7"/></svg></template>
 <template id="gm-ico-check"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M20 6L9 17l-5-5"/></svg></template>
-<script src="/property/js/games/games-core.js?v=20261001b"></script>
-<script src="/property/js/games/town-shapes.js?v=20261001b"></script>
+<script src="/property/js/games/games-core.js?v=20261001c"></script>
+<script src="/property/js/games/games-board.js?v=20261001c"></script>
+<script src="/property/js/games/town-shapes.js?v=20261001c"></script>
 </body>
 </html>

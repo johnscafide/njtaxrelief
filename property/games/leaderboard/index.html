@@ -1,0 +1,78 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="robots" content="index,follow">
+<title>Watchdog Games Leaderboard: Today and This Week</title>
+<meta name="description" content="Today's and this week's top Watchdog Games players across Pin Drop, Sold!, Blocks, Town Shapes, Lineup and Fair or Unfair. Sign in with a free Watchdog account to join.">
+<link rel="canonical" href="https://www.watchdogindex.com/games/leaderboard">
+<meta property="og:title" content="Watchdog Games Leaderboard">
+<meta property="og:description" content="Who knows New Jersey homes and towns best? Today's and this week's top players.">
+<meta property="og:url" content="https://www.watchdogindex.com/games/leaderboard">
+<meta property="og:type" content="website">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700;800&family=Plus+Jakarta+Sans:wght@500;600;700;800&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="/property/css/watchdog-games.css?v=20261001c">
+</head>
+<body class="wg">
+<a class="wg-skip" href="#wg-main">Skip to the leaderboard</a>
+<header class="wg-bar"><div class="wg-bar-in">
+  <a class="wg-brand" href="/">Watchdog</a>
+  <nav class="wg-nav" aria-label="Learn"><a href="/games">Games</a><a href="/games/leaderboard" aria-current="page">Leaderboard</a><a href="/glossary">Glossary</a></nav>
+</div></header>
+
+<main class="wg-main lb-main" id="wg-main">
+  <p class="wg-kicker">Watchdog Games</p>
+  <h1>Leaderboard</h1>
+  <p class="wg-lede">Every game is worth up to 100 points a day. Only today's puzzles count, and only your first finished play.</p>
+
+  <section class="lb-me" id="lb-me" aria-live="polite">
+    <p class="lb-me-text">Checking whether you're signed in...</p>
+  </section>
+
+  <div class="lb-controls">
+    <div class="lb-period" role="group" aria-label="Time period">
+      <button type="button" data-period="today" aria-pressed="true">Today</button>
+      <button type="button" data-period="week" aria-pressed="false">This week</button>
+    </div>
+    <label class="lb-game">Game
+      <select id="lb-game">
+        <option value="all">All games</option>
+        <option value="pin-drop">Pin Drop</option>
+        <option value="sold">Sold!</option>
+        <option value="blocks">Blocks</option>
+        <option value="town-shapes">Town Shapes</option>
+        <option value="lineup">Lineup</option>
+        <option value="fair-or-unfair">Fair or Unfair</option>
+      </select>
+    </label>
+  </div>
+
+  <section class="lb-table-wrap" aria-labelledby="lb-caption">
+    <h2 class="wg-sr" id="lb-caption">Top players</h2>
+    <p class="lb-range" id="lb-range">&nbsp;</p>
+    <ol class="lb-table" id="lb-table"></ol>
+    <p class="lb-empty" id="lb-empty" hidden>No scores yet. Finish a puzzle and claim the top spot.</p>
+  </section>
+
+  <section class="wg-card lb-how">
+    <h2>How points work</h2>
+    <ul>
+      <li><b>Sold!</b> and <b>Town Shapes</b>: 100 for a first-try win, 15 less for each extra guess.</li>
+      <li><b>Pin Drop</b>: 100 for the exact property, less with distance, minus 5 for each extra clue.</li>
+      <li><b>Lineup</b>: 100, 75, 50 or 25 depending on how many tries you need.</li>
+      <li><b>Blocks</b>: 100 for a clean solve, 20 less for each mistake.</li>
+      <li><b>Fair or Unfair</b>: 20 for each right call.</li>
+    </ul>
+    <p class="wg-note">Only your leaderboard name is shown. Playing never needs an account; joining the board does.</p>
+    <a class="wg-btn wg-btn-quiet" href="/games">Play today's games</a>
+  </section>
+</main>
+
+<footer class="wg-foot"><div class="wg-foot-in"><span>Watchdog Games</span><a href="/games">Games</a><a href="/glossary">Glossary</a><a href="/privacy">Privacy</a><a href="/terms">Terms</a></div></footer>
+<script src="/property/js/games/games-core.js?v=20261001c"></script>
+<script src="/property/js/games/games-board.js?v=20261001c"></script>
+<script src="/property/js/games/leaderboard.js?v=20261001c"></script>
+</body>
+</html>
