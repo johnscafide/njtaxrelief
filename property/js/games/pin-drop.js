@@ -172,7 +172,7 @@
         if (i === newest) G.replay(li, 'is-new');
       } else {
         value.textContent = 'Locked';
-        if (i !== state.clues) { buy.disabled = true; buy.textContent = 'Open the one above first'; }
+        if (i !== state.clues) { buy.disabled = true; buy.textContent = buy.getAttribute('data-wait'); }
         buy.addEventListener('click', function () { buyClue(i, buy); });
       }
       list.appendChild(li);
@@ -185,9 +185,10 @@
     if (state.done || i !== state.clues) return;
     if (armed !== i) {
       armed = i;
-      button.textContent = 'Tap again to open (-5)';
+      var label = button.textContent;
+      button.textContent = button.getAttribute('data-confirm');
       button.classList.add('is-armed');
-      setTimeout(function () { if (armed === i && button.isConnected) { armed = null; button.textContent = 'Open for 5 points'; button.classList.remove('is-armed'); } }, 3500);
+      setTimeout(function () { if (armed === i && button.isConnected) { armed = null; button.textContent = label; button.classList.remove('is-armed'); } }, 3500);
       return;
     }
     armed = null;

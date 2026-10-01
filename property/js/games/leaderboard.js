@@ -14,6 +14,7 @@
   var period = params.get('period') === 'week' ? 'week' : 'today';
   var me = { token: null, nickname: null };
   var count = new Intl.NumberFormat('en-US');
+  var offline = $('lb-range').getAttribute('data-offline');
 
   if (!G.GAMES.some(function (g) { return g.id === game; })) game = 'all';
   $('lb-game').value = game;
@@ -91,9 +92,9 @@
     var url = '?game=' + encodeURIComponent(game) + '&period=' + period;
     $('lb-range').textContent = 'Loading...';
     return B.api('GET', url, null, me.token && me.nickname ? me.token : null).then(function (data) {
-      if (data.status !== 200) { $('lb-range').textContent = data.error || 'The leaderboard is not available right now.'; $('lb-table').textContent = ''; return; }
+      if (data.status !== 200) { $('lb-range').textContent = data.error || offline; $('lb-table').textContent = ''; return; }
       renderBoard(data);
-    }, function () { $('lb-range').textContent = 'The leaderboard is not available right now.'; });
+    }, function () { $('lb-range').textContent = offline; });
   }
 
   function setUrl() {
