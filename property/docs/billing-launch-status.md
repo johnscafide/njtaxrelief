@@ -1,6 +1,6 @@
 # Watchdog billing launch status
 
-**Current authority updated:** 2026-08-22  
+**Current authority updated:** 2026-08-22 (production reality check added 2026-10-01)  
 **Launch issue:** NJW-42  
 **Launch umbrella:** NJW-271
 
@@ -30,6 +30,17 @@ Current server authority:
 - `platform_release_gates.live_billing_lifecycle` as the public paid-enrollment gate.
 
 The remaining Paddle path is retained only to manage the existing legacy Paddle subscriber. It must not create new Paddle subscriptions and cannot satisfy the current Live billing launch gate.
+
+## Production reality check (2026-10-01)
+
+Read from production Supabase on 2026-10-01; this replaces older statements below where they disagree.
+
+- `platform_release_gates.live_billing_lifecycle` is `passed` (Live purchase, upgrade, downgrade, cancel and reactivation, refund, failed payment, duplicate and out-of-order webhooks all recorded 2026-08-25).
+- The owner opened paid checkout as a **soft launch on 2026-09-11** (`checkout_mode=open`, `public_cutover_status=soft_launch_open`). Agent, Pro and Pro+ can be bought from `/pro`; Teams stays closed.
+- Counsel review, the E&O/cyber insurance decision, the written NJ sales-tax classification and the first verified NJ Stripe Tax calculation are still **pending**. The only post-2026-09-16 invoice on record was a $0 renewal covered by account credit, so no NJ tax calculation has been verified yet.
+- Trials in production: `create-checkout-session` (v71) has only the controlled 7-day, no-card Agent trial, and refuses it while checkout is open. Closed-beta invite trials (30 or 60 days, no card) work; one Pro+ beta trial was redeemed on 2026-09-22. A public 14-day card trial is **not** implemented (see `agent-trial-landing.md`).
+- Paying customers: none. The active Stripe Agent subscription and the canceled one are owner test accounts. The one remaining legacy Paddle subscriber is the owner's own account.
+- The machine-readable launch packet (`public-paid-launch-cutover-state.json`, checked by `scripts/verify_public_paid_launch_counsel_insurance_checklist_contract.js`) still records the stricter pre-soft-launch posture (`checkout_mode=controlled`). Updating it means changing that checker and needs an explicit owner decision; it was left as is.
 
 ## Current launch state
 

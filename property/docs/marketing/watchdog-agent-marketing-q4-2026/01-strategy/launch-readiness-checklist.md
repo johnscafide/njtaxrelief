@@ -1,23 +1,23 @@
 # Launch readiness checklist: what must be true before October 12
 
-Owner column: John, Engineering, Legal, Coordinator, Designer. Status column is for you to fill in. Nothing here weakens the billing release gate; the gate decides whether the card door opens, and the invite door works either way.
+Owner column: John, Engineering, Legal, Coordinator, Designer. Status column is for you to fill in. Engineering statuses were checked against the repo and production on 2026-10-01; the other sections are outside the repo and still need the owner's update. Nothing here weakens the billing release gate; the gate decides whether the card door opens, and the invite door works either way.
 
 ## Engineering (due Fri Oct 9)
 
 | # | Item | Owner | Status |
 | --- | --- | --- | --- |
-| E1 | Controlled Agent trial changed to 14 days with payment method always collected (see 01-strategy/trial-decision.md) | Engineering | |
-| E2 | Stripe Checkout custom text states the trial terms in plain words | Engineering | |
-| E3 | Webhook handles `customer.subscription.trial_will_end` and triggers the day-11 email and SMS | Engineering | |
-| E4 | Customer Portal allows immediate cancel during trial; Account page has a one-click "Cancel trial" | Engineering | |
-| E5 | SMS consent checkbox at signup, stored with timestamp; no consent, no text | Engineering | |
-| E6 | `/agents/trial` landing page live with variant B (invite-only) ready to switch on | Engineering | |
-| E7 | Thank-you page: Academy lesson 1, add 5 clients, draw a farm, book a 15-minute call | Engineering | |
-| E8 | GA4 events, Meta pixel and Conversions API, Google Ads conversion import, LinkedIn Insight Tag (spec: 04-paid-ads/utm-and-tracking.md) | Engineering | |
-| E9 | Invite-code beta path tested end to end for an Agent-tier 30-day invite | Engineering | |
-| E10 | Referral card on the Account page shows the invite link and the reward in plain words | Engineering | |
-| E11 | Plans page FAQ updated from "Is there a free trial? Not yet." once E1 ships | Engineering | |
-| E12 | Founding Agent badge on the verified share page (optional, can ship in November) | Engineering | |
+| E1 | Controlled Agent trial changed to 14 days with payment method always collected (see 01-strategy/trial-decision.md) | Engineering | Not done. Production checkout has only the controlled 7-day no-card trial. Owner decided 2026-10-01: 14-day card trial on every plan; the billing-function change awaits explicit owner approval. |
+| E2 | Stripe Checkout custom text states the trial terms in plain words | Engineering | Not done (depends on E1). |
+| E3 | Webhook handles `customer.subscription.trial_will_end` and triggers the day-11 email and SMS | Engineering | Partly. The webhook receives `trial_will_end` as an ordinary subscription sync; no separate event, email or SMS is triggered. |
+| E4 | Customer Portal allows immediate cancel during trial; Account page has a one-click "Cancel trial" | Engineering | Not verified (Stripe Portal setting). No "Cancel trial" button on Account. |
+| E5 | SMS consent checkbox at signup, stored with timestamp; no consent, no text | Engineering | Not done. No SMS consent checkbox found. |
+| E6 | `/agents/trial` landing page live with variant B (invite-only) ready to switch on | Engineering | Done. Live, but always shows variant B because the trial and `get_public_checkout_mode()` do not exist. |
+| E7 | Thank-you page: Academy lesson 1, add 5 clients, draw a farm, book a 15-minute call | Engineering | Built. Scheduler link empty (falls back to /contact); invite text shows a literal "[N] business days". |
+| E8 | GA4 events, Meta pixel and Conversions API, Google Ads conversion import, LinkedIn Insight Tag (spec: 04-paid-ads/utm-and-tracking.md) | Engineering | Partly. GA4 events fire on /agents/trial. Meta, Google Ads, LinkedIn, TikTok, Microsoft, Reddit, Pinterest, Snapchat, X and Nextdoor pixels built 2026-10-01 and switched off until IDs and the Privacy Policy update (property/docs/ad-tracking-setup.md). Conversions API not built. |
+| E9 | Invite-code beta path tested end to end for an Agent-tier 30-day invite | Engineering | Partly. Beta invite path works in production (a 30-day Pro+ invite was redeemed 2026-09-22); an Agent-tier 30-day run was not verified. |
+| E10 | Referral card on the Account page shows the invite link and the reward in plain words | Engineering | Not verified. An invite modal exists in the profile menu; reward wording not confirmed. |
+| E11 | Plans page FAQ updated from "Is there a free trial? Not yet." once E1 ships | Engineering | Partly. FAQ no longer says "Not yet"; it says plans start at checkout. Switch to the trial answer when E1 ships. |
+| E12 | Founding Agent badge on the verified share page (optional, can ship in November) | Engineering | Not started (optional). |
 
 ## Legal and policy (due Fri Oct 9)
 
