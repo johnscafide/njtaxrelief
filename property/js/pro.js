@@ -4,12 +4,15 @@
   var path=(window.location.pathname||'').replace(/\/+$/,'');
   if(path!=='/property/pro'&&path!=='/pro')return;
 
+  document.documentElement.classList.add('p26-js');
+
   var DEMO_ENDPOINT='https://uvkvaxljhhngydvlrzom.supabase.co/functions/v1/pro-demo-request';
   var INTELLIGENCE_CATALOG_ENDPOINT='https://uvkvaxljhhngydvlrzom.supabase.co/functions/v1/billing-price-catalog';
   var SUPABASE_PUBLISHABLE_KEY='sb_publishable_MYX59qCbK3d-21zDfJqkNw_fvmfnexa';
-  var INTELLIGENCE_STYLES='/property/css/pro-intelligence-offer.css';
+  var reduceMotion=!!(window.matchMedia&&window.matchMedia('(prefers-reduced-motion: reduce)').matches);
 
   function trackEvent(name,params){if(typeof window.gtag==='function')window.gtag('event',name,params||{});}
+  function all(sel,root){return Array.prototype.slice.call((root||document).querySelectorAll(sel));}
 
   function loadFragment(id,url){
     return fetch(url).then(function(r){if(!r.ok)throw new Error(url+' '+r.status);return r.text();}).then(function(html){
@@ -18,46 +21,78 @@
     }).catch(function(e){console.error('Fragment load failed',e);});
   }
 
-  function ensureStylesheet(href){if(document.querySelector('link[href="'+href+'"]'))return;var link=document.createElement('link');link.rel='stylesheet';link.href=href;document.head.appendChild(link);}
-
+  /* Fade sections in as they scroll into view. */
   function reveal(){
-    var nodes=Array.prototype.slice.call(document.querySelectorAll('.pro-reveal'));
+    var nodes=all('.p26-reveal');
     if(!nodes.length)return;
-    if(!('IntersectionObserver' in window)||(window.matchMedia&&window.matchMedia('(prefers-reduced-motion: reduce)').matches)){nodes.forEach(function(n){n.classList.add('is-visible');});return;}
-    var io=new IntersectionObserver(function(entries){entries.forEach(function(entry){if(!entry.isIntersecting)return;entry.target.classList.add('is-visible');io.unobserve(entry.target);});},{threshold:.12,rootMargin:'0px 0px -7% 0px'});
+    if(reduceMotion||!('IntersectionObserver' in window)){nodes.forEach(function(n){n.classList.add('is-in');});return;}
+    var io=new IntersectionObserver(function(entries){entries.forEach(function(entry){if(!entry.isIntersecting)return;entry.target.classList.add('is-in');io.unobserve(entry.target);});},{threshold:.15,rootMargin:'0px 0px -6% 0px'});
     nodes.forEach(function(n){io.observe(n);});
   }
 
-  function story(){
-    var section=document.querySelector('.pro-story');
-    var steps=Array.prototype.slice.call(document.querySelectorAll('[data-pro-screen]'));
-    var panels=Array.prototype.slice.call(document.querySelectorAll('[data-pro-panel]'));
-    var tabs=Array.prototype.slice.call(document.querySelectorAll('.pro-app-tabs span'));
-    var pathLabel=document.getElementById('pro-app-path');
-    if(!section||!steps.length||!panels.length)return;
-    var labels=['watchdog / property intelligence','watchdog / score + evidence','watchdog / watchlist','watchdog / professional research','watchdog / action'];
-    var active=-1,ticking=false;
-    function set(index){index=Math.max(0,Math.min(panels.length-1,index));if(index===active)return;active=index;steps.forEach(function(n,i){n.classList.toggle('active',i===index);});panels.forEach(function(n,i){n.classList.toggle('active',i===index);});tabs.forEach(function(n,i){n.classList.toggle('active',i===index);});if(pathLabel)pathLabel.textContent=labels[index]||labels[0];}
-    function nearest(){if(window.innerWidth<=1100)return active<0?0:active;var r=section.getBoundingClientRect();if(r.bottom<0||r.top>window.innerHeight)return -1;var target=Math.min(window.innerHeight-130,Math.max(150,window.innerHeight*.47));var best=0,dist=Infinity;steps.forEach(function(step,i){var x=step.getBoundingClientRect(),c=x.top+x.height/2,d=Math.abs(c-target);if(d<dist){dist=d;best=i;}});return best;}
-    function onScroll(){if(ticking)return;ticking=true;requestAnimationFrame(function(){ticking=false;var i=nearest();if(i>=0)set(i);});}
-    window.addEventListener('scroll',onScroll,{passive:true});window.addEventListener('resize',onScroll);set(0);onScroll();
+  /* Count the stat numbers up once they are on screen. */
+  function countUp(){
+    var nodes=all('[data-count]');
+    if(!nodes.length||reduceMotion||!('IntersectionObserver' in window))return;
+    function run(el){
+      var target=Number(el.dataset.count)||0,start=null,duration=1100;
+      function step(ts){if(start===null)start=ts;var t=Math.min(1,(ts-start)/duration),eased=1-Math.pow(1-t,3);el.textContent=String(Math.round(target*eased));if(t<1)requestAnimationFrame(step);}
+      el.textContent='0';requestAnimationFrame(step);
+    }
+    var io=new IntersectionObserver(function(entries){entries.forEach(function(entry){if(!entry.isIntersecting)return;run(entry.target);io.unobserve(entry.target);});},{threshold:.6});
+    nodes.forEach(function(n){io.observe(n);});
   }
 
-  function roleTabs(){
-    var tabs=Array.prototype.slice.call(document.querySelectorAll('[data-role-tab]'));
-    var panels=Array.prototype.slice.call(document.querySelectorAll('[data-role-panel]'));
-    if(!tabs.length)return;
-    function set(key){tabs.forEach(function(t){var on=t.dataset.roleTab===key;t.classList.toggle('active',on);t.setAttribute('aria-selected',on?'true':'false');});panels.forEach(function(p){p.classList.toggle('active',p.dataset.rolePanel===key);});}
-    tabs.forEach(function(t){t.addEventListener('click',function(){set(t.dataset.roleTab);});});set('agent');
+  /* The hero screenshot settles into place as the page scrolls. */
+  function heroScroll(){
+    var shot=document.getElementById('p26-hero-shot');
+    if(!shot)return;
+    if(reduceMotion){shot.style.setProperty('--p26-hero-p','1');return;}
+    var ticking=false;
+    function update(){ticking=false;var r=shot.getBoundingClientRect(),vh=window.innerHeight||1;var p=Math.max(0,Math.min(1,(vh-r.top)/(vh*0.9)));shot.style.setProperty('--p26-hero-p',p.toFixed(3));}
+    function onScroll(){if(ticking)return;ticking=true;requestAnimationFrame(update);}
+    window.addEventListener('scroll',onScroll,{passive:true});window.addEventListener('resize',onScroll);update();
+  }
+
+  /* Type out the sample Watchdog Intelligence answer once it is visible. */
+  function chat(){
+    var answer=document.querySelector('#p26-chat-answer .p26-chat-text');
+    if(!answer||reduceMotion||!('IntersectionObserver' in window))return;
+    var full=answer.textContent,started=false;
+    answer.style.minHeight=answer.offsetHeight+'px';
+    var io=new IntersectionObserver(function(entries){
+      if(started||!entries.some(function(e){return e.isIntersecting;}))return;
+      started=true;io.disconnect();
+      var i=0;answer.textContent='';
+      var timer=setInterval(function(){i+=2;answer.textContent=full.slice(0,i);if(i>=full.length){clearInterval(timer);answer.textContent=full;}},22);
+    },{threshold:.5});
+    io.observe(answer);
+  }
+
+  /* Floating "try free" button: shows after the hero, hides over pricing,
+     the final call to action and the cookie banner. */
+  function dock(){
+    var btn=document.getElementById('p26-dock'),hero=document.querySelector('.p26-hero'),pricing=document.getElementById('pricing'),final=document.querySelector('.p26-final');
+    if(!btn||!hero||!pricing)return;
+    var ticking=false;
+    function onScreen(el){if(!el)return false;var r=el.getBoundingClientRect();return r.top<window.innerHeight&&r.bottom>0;}
+    function bannerOpen(){var b=document.getElementById('wd-cookie-banner');return !!(b&&!b.hidden&&b.offsetParent!==null);}
+    function update(){
+      ticking=false;
+      var show=hero.getBoundingClientRect().bottom<80&&!onScreen(pricing)&&!onScreen(final)&&!bannerOpen();
+      btn.classList.toggle('is-on',show);btn.setAttribute('aria-hidden',show?'false':'true');btn.tabIndex=show?0:-1;
+    }
+    function onScroll(){if(ticking)return;ticking=true;requestAnimationFrame(update);}
+    window.addEventListener('scroll',onScroll,{passive:true});window.addEventListener('resize',onScroll);update();
   }
 
   var priceData={
-    yearly:{agent:{value:'590',unit:'/ year',eyebrow:'Annual',note:'Two months free. Save $118 vs 12 monthly payments.'},pro:{value:'1,290',unit:'/ year',eyebrow:'Annual',note:'Two months free. Save $258 vs 12 monthly payments.'},pro_plus:{value:'3,990',unit:'/ year',eyebrow:'Annual',note:'Two months free. Save $798 vs 12 monthly payments.'}},
-    monthly:{agent:{value:'59',unit:'/ month',eyebrow:'Monthly',note:'Pay month to month.'},pro:{value:'129',unit:'/ month',eyebrow:'Monthly',note:'Pay month to month.'},pro_plus:{value:'399',unit:'/ month',eyebrow:'Monthly',note:'Pay month to month.'}}
+    yearly:{agent:{value:'590',unit:'/ year',eyebrow:'Annual',note:'2 months free. Save $118.'},pro:{value:'1,290',unit:'/ year',eyebrow:'Annual',note:'2 months free. Save $258.'},pro_plus:{value:'3,990',unit:'/ year',eyebrow:'Annual',note:'2 months free. Save $798.'}},
+    monthly:{agent:{value:'59',unit:'/ month',eyebrow:'Monthly',note:'Cancel anytime.'},pro:{value:'129',unit:'/ month',eyebrow:'Monthly',note:'Cancel anytime.'},pro_plus:{value:'399',unit:'/ month',eyebrow:'Monthly',note:'Cancel anytime.'}}
   };
 
   function pricing(){
-    var buttons=Array.prototype.slice.call(document.querySelectorAll('[data-cadence]'));
+    var buttons=all('.pro-cadence [data-cadence]');
     var demoCadence=document.getElementById('demo-cadence');
     if(!buttons.length)return;
     function set(cad,shouldTrack){
@@ -70,67 +105,38 @@
     buttons.forEach(function(b){b.addEventListener('click',function(){if(b.dataset.cadence==='lifetime')return;set(b.dataset.cadence,true);});});set('yearly',false);
   }
 
-  /* content-architecture: dynamic. This wording reflects the live billing catalog and promotion state. */
   function renderIntelligenceOffer(catalog){
     var intelligence=catalog&&catalog.intelligence||{};
     var promo=intelligence.promotion||{};
     var regular=Number(intelligence.regular_add_on_monthly||12);
     if(!Number.isFinite(regular)||regular<=0)regular=12;
     var eligible=Array.isArray(promo.eligible_plans)?promo.eligible_plans:['agent','pro'];
-    var included=Array.isArray(intelligence.included_plans)?intelligence.included_plans:['pro_plus','teams'];
     var promoActive=promo.active===true;
-    var promoLabel=String(promo.label||'Limited time');
-    ensureStylesheet(INTELLIGENCE_STYLES);
-
-    var priceHead=document.querySelector('.pro-price-head');
-    if(priceHead){
-      var promoBox=document.getElementById('pro-intelligence-promo');
-      if(!promoBox){promoBox=document.createElement('div');promoBox.className='pro-intelligence-promo pro-reveal';promoBox.id='pro-intelligence-promo';var cadence=priceHead.querySelector('.pro-cadence');if(cadence)cadence.insertAdjacentElement('afterend',promoBox);else priceHead.appendChild(promoBox);}
-      promoBox.innerHTML='<div class="pro-intelligence-promo-inner"><div class="pro-intelligence-promo-label">Watchdog Intelligence · '+(promoActive?promoLabel:'Add-on')+'</div><div><strong>'+(promoActive?'Included for a limited time.':'Available for Agent and Pro.')+'</strong><p>'+(promoActive?'Agent and Pro normally add it for $'+regular+'/month. Pro+ includes it.':'Agent and Pro can add it for $'+regular+'/month. Pro+ includes it.')+'</p></div><div class="pro-intelligence-promo-price"><b>'+(promoActive?'Included':'$'+regular+'/month')+'</b><small>'+(promoActive?'Agent + Pro · limited time':'Agent + Pro add-on')+'</small></div></div>';
-    }
-
-    ['agent','pro','pro_plus'].forEach(function(plan){
-      var band=document.querySelector('[data-price-band="'+plan+'"]');if(!band)return;
-      var who=band.querySelector('.pro-price-who');if(!who)return;
-      var note=who.querySelector('.pro-intel-plan');if(!note){note=document.createElement('div');note.className='pro-intel-plan';var featureList=who.querySelector('div');if(featureList)featureList.insertAdjacentElement('beforebegin',note);else who.appendChild(note);}
-      if(included.indexOf(plan)>=0)note.innerHTML='<b>Watchdog Intelligence</b>Included with '+(plan==='pro_plus'?'Pro+':'this plan')+'.';
-      else if(eligible.indexOf(plan)>=0&&promoActive)note.innerHTML='<b>Watchdog Intelligence · '+promoLabel+'</b>Normally +$'+regular+'/month. Included for a limited time.';
-      else if(eligible.indexOf(plan)>=0)note.innerHTML='<b>Watchdog Intelligence</b>Optional +$'+regular+'/month add-on.';
-      else note.remove();
+    var brand='Watchdog <span class="wd-intelligence-brand-word">Intelligence</span>';
+    // content-architecture: dynamic. This wording follows the live billing catalog and promotion state.
+    var offer=promoActive?'Free for a limited time on Agent and Pro. Pro+ always includes it.':'Add it to Agent or Pro for $'+regular+'/month. Pro+ includes it.';
+    var promoNode=document.querySelector('[data-intel-promo]');if(promoNode)promoNode.textContent=offer;
+    all('[data-intel-line]').forEach(function(li){
+      if(eligible.indexOf(li.dataset.intelLine)<0)return;
+      li.innerHTML=brand+(promoActive?', free for now':', +$'+regular+'/month');
     });
-
-    var compare=document.querySelector('.pro-compare-shell');
-    if(compare){
-      var row=compare.querySelector('.pro-intelligence-row');
-      if(!row){row=document.createElement('div');row.className='pro-compare-row pro-intelligence-row';var groups=compare.querySelectorAll('.pro-compare-group');var target=groups.length>1?groups[1]:null;if(target)target.insertAdjacentElement('beforebegin',row);else compare.appendChild(row);}
-      row.innerHTML='<div>Watchdog Intelligence</div><div class="dim">Not included</div><div class="yes">'+(promoActive?'Included for a limited time':'$'+regular+'/mo add-on')+'</div><div class="yes">'+(promoActive?'Included for a limited time':'$'+regular+'/mo add-on')+'</div><div class="yes">Included</div>';
-    }
-
-    var faqCard=document.querySelector('.pro-faq-card[data-intelligence-faq]');
-    if(faqCard){var heading=faqCard.querySelector('h3');if(heading)heading.textContent='How is Watchdog Intelligence priced?';var icon=faqCard.querySelector('i');if(icon)icon.className='fas fa-wand-magic-sparkles';var copy=faqCard.querySelector('p');if(copy)copy.textContent=promoActive?'Agent and Pro normally add it for $'+regular+'/month. It is included for a limited time. Pro+ includes it.':'Agent and Pro can add it for $'+regular+'/month. Pro+ includes it.';}
+    all('[data-intel-cell]').forEach(function(td){td.textContent=promoActive?'Free for now':'$'+regular+'/mo add-on';});
+    // content-architecture: dynamic. FAQ answer follows the live billing catalog and promotion state.
+    var faq=document.querySelector('[data-intel-faq]');if(faq)faq.textContent=promoActive?'Agent and Pro normally add it for $'+regular+'/month. It is free for a limited time. Pro+ includes it.':'Agent and Pro can add it for $'+regular+'/month. Pro+ includes it.';
   }
 
   function intelligencePricing(){
-    var fallback={intelligence:{regular_add_on_monthly:12,included_plans:['pro_plus','teams'],promotion:{active:true,label:'Limited time',eligible_plans:['agent','pro']}}};
-    renderIntelligenceOffer(fallback);
     fetch(INTELLIGENCE_CATALOG_ENDPOINT,{method:'GET',headers:{Accept:'application/json'},cache:'no-store'})
       .then(function(r){if(!r.ok)throw new Error('Billing catalog '+r.status);return r.json();})
       .then(function(catalog){if(catalog&&catalog.provider==='stripe')renderIntelligenceOffer(catalog);})
-      .catch(function(err){console.warn('Watchdog Intelligence pricing catalog unavailable; using verified fallback.',err);});
-  }
-
-  function heroMotion(){
-    var orbit=document.querySelector('.pro-orbit');
-    if(!orbit||window.matchMedia('(prefers-reduced-motion: reduce)').matches)return;
-    orbit.addEventListener('pointermove',function(e){var r=orbit.getBoundingClientRect(),x=(e.clientX-r.left)/r.width-.5,y=(e.clientY-r.top)/r.height-.5;orbit.style.transform='perspective(1000px) rotateY('+(x*2.2)+'deg) rotateX('+(-y*2)+'deg)';});
-    orbit.addEventListener('pointerleave',function(){orbit.style.transform='';});
+      .catch(function(err){console.warn('Watchdog Intelligence pricing catalog unavailable; keeping the published wording.',err);});
   }
 
   function demoPrefill(){
-    var planSelect=document.getElementById('demo-plan');
+    var planInput=document.getElementById('demo-plan');
     var cadence=document.getElementById('demo-cadence');
-    document.querySelectorAll('[data-demo-plan]').forEach(function(link){link.addEventListener('click',function(){if(planSelect)planSelect.value=link.dataset.demoPlan||'unsure';if(cadence)cadence.value=link.dataset.demoCadence||'yearly';trackEvent('pro_plan_explore',{plan:link.dataset.demoPlan||'unsure',cadence:link.dataset.demoCadence||'yearly'});});});
-    document.querySelectorAll('[data-demo-trigger]').forEach(function(link){link.addEventListener('click',function(){trackEvent('pro_demo_start',{location:link.dataset.demoTrigger||'page'});});});
+    all('[data-demo-plan]').forEach(function(link){link.addEventListener('click',function(){if(planInput)planInput.value=link.dataset.demoPlan||'unsure';if(cadence)cadence.value=link.dataset.demoCadence||'yearly';trackEvent('pro_plan_explore',{plan:link.dataset.demoPlan||'unsure',cadence:link.dataset.demoCadence||'yearly'});});});
+    all('[data-price-jump]').forEach(function(link){link.addEventListener('click',function(){trackEvent('pro_price_jump',{location:link.dataset.priceJump||'page'});});});
   }
 
   function demoForm(){
@@ -148,13 +154,13 @@
       trackEvent('pro_demo_submit',{plan:payload.plan,cadence:payload.cadence,role:payload.role});
       fetch(DEMO_ENDPOINT,{method:'POST',headers:{'Content-Type':'application/json','apikey':SUPABASE_PUBLISHABLE_KEY},body:JSON.stringify(payload)})
         .then(function(r){return r.json().catch(function(){return{};}).then(function(body){if(!r.ok)throw new Error(body.error||'Request could not be sent.');return body;});})
-        .then(function(){setStatus('Thanks. We will reply about the best-fit plan.','success');trackEvent('pro_demo_success',{plan:payload.plan,cadence:payload.cadence,role:payload.role});form.reset();var c=document.getElementById('demo-cadence');if(c)c.value=payload.cadence;})
+        .then(function(){setStatus('Thanks. We will reply about the best-fit plan.','success');trackEvent('pro_demo_success',{plan:payload.plan,cadence:payload.cadence,role:payload.role});form.reset();var c=document.getElementById('demo-cadence');if(c)c.value=payload.cadence;var p=document.getElementById('demo-plan');if(p)p.value='unsure';})
         .catch(function(err){console.error('Pro demo request failed',err);setStatus('Could not send your request. Please try again.','error');trackEvent('pro_demo_error',{message:(err&&err.message)||'unknown'});})
         .finally(function(){if(submit)submit.disabled=false;});
     });
   }
 
-  function sampleTracking(){document.querySelectorAll('a[href="/property/"],a[href="/"]').forEach(function(link){link.addEventListener('click',function(){trackEvent('pro_sample_click',{location:link.closest('.pro-hero')?'hero':link.closest('.pro-demo')?'demo':'page'});});});}
+  function sampleTracking(){all('a[href="/property/"],a[href="/"]').forEach(function(link){link.addEventListener('click',function(){trackEvent('pro_sample_click',{location:link.closest('.p26-hero')?'hero':link.closest('.p26-pricing')?'pricing':'page'});});});}
 
   function loadOutcomeGuidance(){
     var src='/property/js/plan-outcomes.js';
@@ -163,6 +169,6 @@
     var script=document.createElement('script');script.src=src;script.defer=true;document.body.appendChild(script);
   }
 
-  function init(){loadFragment('main-footer','/property/partials/footer.html');reveal();story();roleTabs();pricing();intelligencePricing();heroMotion();demoPrefill();demoForm();sampleTracking();loadOutcomeGuidance();}
+  function init(){loadFragment('main-footer','/property/partials/footer.html');reveal();countUp();heroScroll();chat();dock();pricing();intelligencePricing();demoPrefill();demoForm();sampleTracking();loadOutcomeGuidance();}
   if(document.readyState==='loading')document.addEventListener('DOMContentLoaded',init,{once:true});else init();
 })();
