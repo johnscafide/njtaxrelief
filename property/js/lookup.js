@@ -129,6 +129,34 @@
     if (hit && (Date.now() - hit.t) < (ms || 6e5)) return Promise.resolve(hit.v);
     return fn().then(function (v) { reqCache[key] = { t: Date.now(), v: v }; return v; });
   }
+
+  // Same as cached(), but the answer also survives a page reload for a day, so a
+  // second look at the same street does not ask the state parcel server again.
+  // The parcel layer changes monthly. Empty answers are never stored, and only the
+  // newest PERSIST_MAX answers are kept so localStorage stays small.
+  var PERSIST_PREFIX = 'pl_px_', PERSIST_INDEX = 'pl_px_index', PERSIST_MAX = 20;
+  function persisted(key, ms, fn) {
+    var hit = reqCache[key];
+    if (hit && (Date.now() - hit.t) < ms) return Promise.resolve(hit.v);
+    try {
+      var raw = JSON.parse(localStorage.getItem(PERSIST_PREFIX + key) || 'null');
+      if (raw && (Date.now() - raw.t) < ms) { reqCache[key] = raw; return Promise.resolve(raw.v); }
+    } catch (e) {}
+    return fn().then(function (v) {
+      // A failed or empty answer is retried next time, never remembered.
+      if (v == null || (Array.isArray(v) && !v.length)) return v;
+      var entry = { t: Date.now(), v: v };
+      reqCache[key] = entry;
+      try {
+        var index = JSON.parse(localStorage.getItem(PERSIST_INDEX) || '[]').filter(function (k) { return k !== key; });
+        index.push(key);
+        while (index.length > PERSIST_MAX) localStorage.removeItem(PERSIST_PREFIX + index.shift());
+        localStorage.setItem(PERSIST_PREFIX + key, JSON.stringify(entry));
+        localStorage.setItem(PERSIST_INDEX, JSON.stringify(index));
+      } catch (e) {}
+      return v;
+    });
+  }
   function geoKey(lat, lon, extra) {
     return (extra || '') + '|' + lat.toFixed(3) + ',' + lon.toFixed(3);
   }
@@ -1903,7 +1931,7 @@ function assessorAddressAlias(display, assessor) {
   // list prices, but these are actual recorded transfers next door.
   // ══════════════════════════════════════════════
   function nearbySales(lat, lon, meters, muni) {
-    return cached(geoKey(lat, lon, 'sales' + meters + (muni || '')), 6e5,
+    return persisted(geoKey(lat, lon, 'sales' + meters + (muni || '')), 864e5,
       function () { return nearbySalesRaw(lat, lon, meters, muni); });
   }
   function nearbySalesRaw(lat, lon, meters, muni) {
@@ -1949,7 +1977,7 @@ function assessorAddressAlias(display, assessor) {
   // NEIGHBOURHOOD CONTEXT
   // ══════════════════════════════════════════════
   function neighborhoodStats(lat, lon, meters) {
-    return cached(geoKey(lat, lon, 'hood' + meters), 6e5,
+    return persisted(geoKey(lat, lon, 'hood' + meters), 864e5,
       function () { return neighborhoodStatsRaw(lat, lon, meters); });
   }
   function neighborhoodStatsRaw(lat, lon, meters) {
@@ -3938,6 +3966,21 @@ buildOpinion(hasCase, overBy, saving, target) + rows +
   // ══════════════════════════════════════════════
   var townRateCache = {};
 
+  // The town's median residential tax / assessment, precomputed monthly from the same
+  // statewide MOD-IV parcels (get_public_town_tax_rate). Every parcel in a town pays the
+  // same general rate on its assessment, so this median divided by the town ratio's
+  // implied market value is the effective rate. Null when unavailable; the caller then
+  // measures it from the state parcel layer as before.
+  function townTaxRateFromWarehouse(town, county) {
+    if (!authReady() || !sb || typeof sb.rpc !== 'function') return Promise.resolve(null);
+    return Promise.resolve(sb.rpc('get_public_town_tax_rate', { p_town: town, p_county: county }))
+      .then(function (res) {
+        var row = res && !res.error && Array.isArray(res.data) ? res.data[0] : null;
+        if (!row || !(+row.rate_peers >= 20) || !(+row.median_tax_rate > 0)) return null;
+        return row;
+      }, function () { return null; });
+  }
+
   function townEffectiveRate(town, county) {
     var key = (town + '|' + county).toUpperCase();
     if (townRateCache[key]) return Promise.resolve(townRateCache[key]);
@@ -3945,6 +3988,21 @@ buildOpinion(hasCase, overBy, saving, target) + rows +
     var offR = officialRatio(town, county);
     if (!offR) return Promise.resolve(null);
 
+    return townTaxRateFromWarehouse(town, county).then(function (row) {
+      if (row) {
+        // tax / (assessed / ratio) = (tax / assessed) * ratio; the median scales the same way.
+        var rate = +row.median_tax_rate * offR.ratio;
+        if (isFinite(rate) && rate > 0.002 && rate < 0.10) {
+          var fromStats = { rate: rate, n: +row.rate_peers, ratio: offR.ratio, source: 'town_stats' };
+          townRateCache[key] = fromStats;
+          return fromStats;
+        }
+      }
+      return townEffectiveRateFromParcels(town, county, key, offR);
+    });
+  }
+
+  function townEffectiveRateFromParcels(town, county, key, offR) {
     var where = "MUN_NAME = '" + String(town).replace(/'/g, "''") + "'" +
                 " AND COUNTY = '" + String(county).replace(/'/g, "''") + "'" +
                 " AND PROP_CLASS = '2' AND NET_VALUE > 10000 AND LAST_YR_TX > 100";

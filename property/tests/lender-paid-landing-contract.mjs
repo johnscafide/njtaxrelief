@@ -19,7 +19,7 @@ const billing=read('property/js/billing-client.js');
 
 function expect(value,message){if(!value)throw new Error(message)}
 
-expect(page.includes('<title>Watchdog for New Jersey Lenders — Founding Lifetime</title>'),'lender landing title missing');
+expect(page.includes('<title>Watchdog for New Jersey Lenders | Founding Lifetime</title>'),'lender landing title missing');
 expect(page.includes('<link rel="canonical" href="https://www.watchdogindex.com/lender">'),'canonical Watchdog lender route missing');
 expect(page.includes('<link rel="stylesheet" href="/agent/agent.css">'),'lender must attach the polished Agent CSS directly');
 expect(page.includes('<link rel="stylesheet" href="/lender/lender.css">'),'lender pricing refinement CSS missing');
@@ -43,8 +43,8 @@ expect(sharedCss.includes("url('/agent/assets/founding-coast.webp')"),'shared Ag
 expect(sharedJs.includes("'/agent/assets/platform-live.png'")&&sharedJs.includes("'/agent/assets/platform-illustrative.png'"),'shared Agent product-tour graphics missing');
 
 expect(page.includes('<h1 id="hero-title">Lend smarter<br><span><em>know</em> the property.</span></h1>'),'lender-specific two-word hero headline missing');
-expect(page.includes('Watchdog gives New Jersey mortgage lenders and loan officers'),'lender-specific hero copy missing');
-expect(page.includes('Built for the way<br>New Jersey lenders work.'),'lender-specific positioning missing');
+expect(page.includes('Look up the property behind any New Jersey loan'),'lender-specific hero copy missing');
+expect(page.includes('Made for<br>New Jersey lenders.'),'lender-specific positioning missing');
 expect(page.includes('Lender Founding Lifetime'),'lender Founding Lifetime heading missing');
 expect(page.includes('$3,499')&&page.includes('$9,999'),'Pro and Pro+ lifetime prices missing');
 expect(page.includes('250-property capacity')&&page.includes('2,500-property capacity'),'Pro and Pro+ capacities missing');

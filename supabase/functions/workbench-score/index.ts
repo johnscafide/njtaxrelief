@@ -296,6 +296,16 @@ async function hashPublicFacts(row) {
   const digest = await crypto.subtle.digest("SHA-256", new TextEncoder().encode(value));
   return Array.from(new Uint8Array(digest)).map(b => b.toString(16).padStart(2, "0")).join("");
 }
+/* Parcel facts from property_lookups, normalized exactly as the batch pass hashes them,
+   so an on-demand request for a precomputed parcel hits its cached row. */
+function warehouseFacts(raw) {
+  return {
+    pams_pin: String(raw.pams_pin),
+    town: clean(raw.town, 100), county: clean(raw.county, 60),
+    block: clean(raw.block, 30), lot: clean(raw.lot, 30), qualifier: clean(raw.qualifier, 30),
+    assessed_value: num(raw.assessed_value), last_year_tax: num(raw.last_year_tax)
+  };
+}
 function sanitizePublicRow(raw) {
   const pams_pin = canonicalPin(raw?.pams_pin);
   if (!pams_pin) return null;
@@ -321,12 +331,23 @@ async function handlePublicScore(req, body, admin) {
   if (!req.headers.get("apikey")) return out(req, 401, { error: "API key required" });
   if (!publicRateAllowed(req)) return out(req, 429, { error: "Too many score requests" });
   const input = Array.isArray(body?.rows) ? body.rows.slice(0, PUBLIC_MAX_ROWS) : [];
-  const rows = input.map(sanitizePublicRow).filter(Boolean);
-  if (!rows.length) return out(req, 200, { rows: [], framework: "ROBUST", model_version: SCORE_MODEL, checked_at: new Date().toISOString() });
+  const requested = input.map(sanitizePublicRow).filter(Boolean);
+  if (!requested.length) return out(req, 200, { rows: [], framework: "ROBUST", model_version: SCORE_MODEL, checked_at: new Date().toISOString() });
+
+  // The shared cache is keyed by PIN, so it may only hold scores computed from our own
+  // parcel facts. For parcels in property_lookups the caller's assessed value and tax are
+  // ignored; parcels we do not hold are scored from the caller's facts but never cached.
+  const requestedPins = [...new Set(requested.map(row => row.pams_pin))];
+  const { data: warehouse, error: warehouseError } = await admin.from("property_lookups")
+    .select("pams_pin,town,county,block,lot,qualifier,assessed_value,last_year_tax")
+    .in("pams_pin", requestedPins);
+  if (warehouseError) return out(req, 503, { error: "Property warehouse unavailable" });
+  const ownFacts = new Map((warehouse || []).map(raw => [String(raw.pams_pin), warehouseFacts(raw)]));
+  const rows = requested.map(row => ownFacts.get(row.pams_pin) || row);
 
   const hashes = new Map();
   await Promise.all(rows.map(async row => hashes.set(row.pams_pin, await hashPublicFacts(row))));
-  const pins = [...new Set(rows.map(row => row.pams_pin))];
+  const pins = requestedPins;
   const { data: cached, error: cacheError } = await admin.from("public_watchdog_score_cache_v1")
     .select("pams_pin,score,evidence_coverage,confidence,verdict,inputs,model_version,facts_hash,expires_at,computed_at")
     .in("pams_pin", pins);
@@ -358,13 +379,16 @@ async function handlePublicScore(req, body, admin) {
         continue;
       }
       const inputs = { canonical_pams_pin: row.pams_pin, town: row.town, county: row.county, framework: "ROBUST", components: wd.detail, coverage_weight: wd.coverage, confidence: wd.confidence, verdict: wd.verdict, market: wd.market, chapter123: wd.chapter, subject_evidence_status: subjectEvidenceStatus };
+      result.set(row.pams_pin, { pams_pin: row.pams_pin, watchdog_score: wd.score, evidence_coverage: wd.coverage, confidence: wd.confidence, verdict: wd.verdict, model_version: SCORE_MODEL, components: wd.detail, observed_at: computedAt, source: "robust_on_demand" });
+      // Cache only scores built from our own facts with SR-1A evidence, so a caller can
+      // never replace a stored score and a degraded score never replaces a complete one.
+      if (!ownFacts.has(row.pams_pin) || subjectEvidenceStatus !== "available") continue;
       upserts.push({
         pams_pin: row.pams_pin, model_version: SCORE_MODEL, score: wd.score, evidence_coverage: wd.coverage,
         confidence: wd.confidence, verdict: wd.verdict, inputs,
         formula: "ROBUST-v1: Recourse 10 + Overassessment Position 20 + Burden 30 + Uniformity 15 + Stability 15 + Trajectory 10. Missing dimensions are omitted and remaining weights are renormalized; evidence coverage is reported separately. O may use governed SR-1A subject living area with municipal verified-sale PPSF when available. Trajectory requires governed SR-1A verified subject-sale evidence and fails closed when unavailable.",
         facts_hash: hashes.get(row.pams_pin), computed_at: computedAt, expires_at: expiresAt
       });
-      result.set(row.pams_pin, { pams_pin: row.pams_pin, watchdog_score: wd.score, evidence_coverage: wd.coverage, confidence: wd.confidence, verdict: wd.verdict, model_version: SCORE_MODEL, components: wd.detail, observed_at: computedAt, source: "robust_on_demand" });
     }
     if (upserts.length) {
       const { error } = await admin.from("public_watchdog_score_cache_v1").upsert(upserts, { onConflict: "pams_pin" });
