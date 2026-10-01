@@ -9,19 +9,18 @@
 
   var GAME = 'town-shapes';
   var CLOSE_MILES = 10;
+  var SPAN_MILES = 170; // roughly Cape May Point to High Point
   var MAX_SUGGEST = 8;
-  var POINTS = ['N', 'NE', 'E', 'SE', 'S', 'SW', 'W', 'NW'];
+  var PRAISE = ['Local legend', 'Map reader', 'Well traveled', 'Right on', 'Found it', 'Just made it'];
   var number = new Intl.NumberFormat('en-US');
   var $ = function (id) { return document.getElementById(id); };
-  var form = $('wg-form');
-  var input = $('wg-input');
-  var submit = $('wg-submit');
-  var note = $('wg-form-note');
-  var list = $('wg-guesses');
-  var suggest = $('wg-suggest');
+  var form = $('gm-form');
+  var input = $('gm-input');
+  var submit = $('gm-submit');
+  var rows = $('gm-rows');
+  var suggest = $('gm-suggest');
   var towns = [], byCode = {}, matches = [], active = -1, picked = null;
-  var puzzle, answer, state;
-  var showStats = G.wireStats(GAME);
+  var puzzle, answer, state, busy = false;
 
   function fill(field, value) {
     document.querySelectorAll('[data-f="' + field + '"]').forEach(function (node) { node.textContent = value; });
@@ -35,20 +34,18 @@
     var h = Math.sin(dLat / 2) * Math.sin(dLat / 2) + Math.cos(a.lat * r) * Math.cos(b.lat * r) * Math.sin(dLon / 2) * Math.sin(dLon / 2);
     return 3958.8 * 2 * Math.atan2(Math.sqrt(h), Math.sqrt(1 - h));
   }
-  function direction(from, to) {
+  function bearing(from, to) {
     var r = Math.PI / 180;
     var y = Math.sin((to.lon - from.lon) * r) * Math.cos(to.lat * r);
     var x = Math.cos(from.lat * r) * Math.sin(to.lat * r) - Math.sin(from.lat * r) * Math.cos(to.lat * r) * Math.cos((to.lon - from.lon) * r);
-    var deg = (Math.atan2(y, x) / r + 360) % 360;
-    return POINTS[Math.round(deg / 45) % 8];
+    return (Math.atan2(y, x) / r + 360) % 360;
   }
+  var POINTS = ['north', 'northeast', 'east', 'southeast', 'south', 'southwest', 'west', 'northwest'];
   function feedback(code) {
-    if (code === answer.c) return { text: 'Got it', win: true, close: false, short: 'Got it' };
+    if (code === answer.c) return { win: true, close: false, d: 0, pct: 100 };
     var guess = byCode[code];
     var d = Math.max(1, Math.round(miles(guess, answer)));
-    var where = d + ' mi ' + direction(guess, answer);
-    var same = guess.k === answer.k ? ', same county' : '';
-    return { text: where + same, win: false, close: d <= CLOSE_MILES, short: where };
+    return { win: false, close: d <= CLOSE_MILES, d: d, deg: bearing(guess, answer), pct: Math.max(0, Math.round((1 - d / SPAN_MILES) * 100)) };
   }
 
   // ---------- suggestions ----------
@@ -89,7 +86,7 @@
     if (!matches.length) { closeSuggest(); return; }
     matches.forEach(function (t, i) {
       var li = G.el('li', '', t.n);
-      li.id = 'wg-opt-' + i;
+      li.id = 'gm-opt-' + i;
       li.setAttribute('role', 'option');
       li.setAttribute('aria-selected', 'false');
       li.appendChild(G.el('span', '', t.k));
@@ -122,77 +119,114 @@
   }
 
   // ---------- render ----------
-  function renderGuesses() {
-    list.textContent = '';
+  function rowNode(i) {
+    var row = $('gm-row-tpl').content.firstElementChild.cloneNode(true);
+    row.querySelector('.gm-row-n').textContent = String(i + 1);
+    var code = state.guesses[i];
+    if (code == null) {
+      if (i === state.guesses.length && !state.done) row.classList.add('is-next');
+      return row;
+    }
+    var t = byCode[code], f = feedback(code);
+    row.classList.add(f.win ? 'is-win' : f.close ? 'is-close' : 'is-miss');
+    var v = row.querySelector('.gm-row-v');
+    v.textContent = t.n;
+    v.appendChild(G.el('small', '', t.k + ' County'));
+    var parts = row.querySelectorAll('.gm-row-r');
+    if (f.win) {
+      parts[0].textContent = 'Got it';
+      parts[1].appendChild(G.icon('gm-ico-check'));
+      parts[1].setAttribute('aria-label', 'Correct');
+    } else {
+      parts[0].textContent = f.d + ' mi';
+      var arrow = G.icon('gm-ico-arrow');
+      arrow.style.transform = 'rotate(' + Math.round(f.deg) + 'deg)';
+      parts[1].appendChild(arrow);
+      parts[1].appendChild(document.createTextNode(f.pct + '%'));
+      parts[1].setAttribute('aria-label', f.d + ' miles, head ' + POINTS[Math.round(f.deg / 45) % 8] + ', ' + f.pct + ' percent close');
+    }
+    return row;
+  }
+
+  function renderRows(revealIndex) {
+    rows.textContent = '';
     for (var i = 0; i < G.MAX_GUESSES; i++) {
-      var code = state.guesses[i];
-      var row = G.el('li', 'wg-guess');
-      row.appendChild(G.el('span', 'wg-guess-n', String(i + 1)));
-      if (code == null) {
-        row.className += ' is-empty';
-        row.appendChild(G.el('span', 'wg-guess-v', ''));
-        row.appendChild(G.el('span', 'wg-guess-r', ''));
-      } else {
-        var f = feedback(code);
-        if (f.win) row.className += ' is-win';
-        else if (f.close) row.className += ' is-close';
-        row.appendChild(G.el('span', 'wg-guess-v', label(byCode[code])));
-        row.appendChild(G.el('span', 'wg-guess-r', f.text));
-      }
-      list.appendChild(row);
+      var row = rowNode(i);
+      if (i === revealIndex) row.classList.add('is-reveal');
+      rows.appendChild(row);
     }
   }
 
-  function renderHints() {
+  function renderClues(newest) {
     var open = state.done ? 5 : Math.min(5, state.guesses.length);
-    document.querySelectorAll('[data-hint]').forEach(function (li) {
-      var on = Number(li.getAttribute('data-hint')) <= open;
-      li.classList.toggle('is-open', on);
-      li.querySelector('.wg-lock').hidden = on;
-      li.querySelector('.wg-open').hidden = !on;
+    document.querySelectorAll('[data-clue]').forEach(function (chip) {
+      var n = Number(chip.getAttribute('data-clue'));
+      var on = n <= open;
+      chip.classList.toggle('is-open', on);
+      var b = chip.querySelector('b');
+      b.textContent = on ? b.getAttribute('data-value') : '?';
+      if (n === newest && on) G.replay(chip, 'is-new');
     });
   }
 
   function shareText() {
-    var lines = ['Watchdog Town Shapes #' + puzzle.number + ': ' + (state.won ? state.guesses.length : 'X') + '/' + G.MAX_GUESSES];
-    state.guesses.forEach(function (c, i) { lines.push((i + 1) + '. ' + feedback(c).short); });
+    var lines = ['Watchdog Town Shapes No. ' + puzzle.number + ': ' + (state.won ? state.guesses.length : 'X') + '/' + G.MAX_GUESSES];
+    state.guesses.forEach(function (c, i) {
+      var f = feedback(c);
+      lines.push((i + 1) + '. ' + (f.win ? 'Got it' : f.d + ' mi, ' + f.pct + '% close'));
+    });
     lines.push('https://www.watchdogindex.com/games/town-shapes');
     return lines.join('\n');
   }
 
-  function renderResult() {
+  function renderDone() {
     var done = state.done;
-    $('wg-result').hidden = !done;
-    $('wg-learn').hidden = !done;
-    $('wg-shape-box').classList.toggle('is-done', done);
+    $('gm-done').hidden = !done;
+    $('gm-dock').hidden = done;
+    $('gm-map').classList.toggle('is-done', done);
+    $('gm-map-label').hidden = !done;
     input.disabled = submit.disabled = done;
-    form.hidden = done;
     if (!done) return;
-    $('wg-result-kicker').textContent = state.won ? 'Solved' : 'Out of guesses';
-    $('wg-answer').textContent = 'It was ' + label(answer) + '.';
-    $('wg-shape').setAttribute('aria-label', 'Outline of ' + answer.n);
-    if (state.won) {
-      $('wg-result-line').textContent = 'You got it in ' + state.guesses.length + ' of ' + G.MAX_GUESSES + ' guesses.';
-    } else {
+    $('gm-map-label').textContent = answer.n;
+    $('gm-done-answer').textContent = answer.n;
+    $('gm-outline').parentNode.setAttribute('aria-label', 'Outline of ' + answer.n);
+    $('gm-results-title').textContent = state.won ? 'You found it.' : 'Not this time.';
+    $('gm-r-answer').textContent = answer.n;
+    var facts = answer.k + ' County. ' + number.format(answer.pop) + ' people.';
+    if (state.won) $('gm-r-sub').textContent = 'Solved in ' + state.guesses.length + ' of ' + G.MAX_GUESSES + '. ' + facts;
+    else {
       var best = Math.min.apply(null, state.guesses.map(function (c) { return miles(byCode[c], answer); }));
-      $('wg-result-line').textContent = 'Your closest guess was ' + Math.max(1, Math.round(best)) + ' miles away.';
+      $('gm-r-sub').textContent = 'Closest guess: ' + Math.max(1, Math.round(best)) + ' miles away. ' + facts;
     }
-    $('wg-next-wrap').hidden = puzzle.date !== G.today();
+    var recap = $('gm-r-recap');
+    recap.textContent = '';
+    for (var i = 0; i < G.MAX_GUESSES; i++) {
+      var c = state.guesses[i];
+      var f = c == null ? null : feedback(c);
+      recap.appendChild(G.el('li', !f ? '' : f.win ? 'is-win' : f.close ? 'is-close' : 'is-miss'));
+    }
+    $('gm-next-wrap').hidden = puzzle.date !== G.today();
   }
 
-  function render() {
-    renderGuesses();
-    renderHints();
-    renderResult();
+  function showResults() {
+    G.renderStats(GAME, state.won && puzzle.date === G.today() ? state.guesses.length : null);
+    G.openSheet('gm-results');
+  }
+
+  function render(revealIndex, newestClue) {
+    renderRows(revealIndex);
+    renderClues(newestClue);
+    renderDone();
   }
 
   form.addEventListener('submit', function (e) {
     e.preventDefault();
-    if (!puzzle || state.done) return;
+    if (!puzzle || state.done || busy) return;
     var t = resolveTyped();
-    if (!t) { note.textContent = 'Pick a town from the list.'; return; }
-    if (state.guesses.indexOf(t.c) > -1) { note.textContent = 'You already guessed that one.'; return; }
-    note.textContent = '';
+    var activeRow = rows.children[state.guesses.length];
+    if (!t) { G.replay(activeRow, 'is-shake'); G.toast(input.value ? 'Pick a town from the list' : 'Type a town first'); return; }
+    if (state.guesses.indexOf(t.c) > -1) { G.replay(activeRow, 'is-shake'); G.toast('Already guessed'); return; }
+    busy = true;
     state.guesses.push(t.c);
     state.won = t.c === answer.c;
     state.done = state.won || state.guesses.length >= G.MAX_GUESSES;
@@ -200,16 +234,22 @@
     input.value = '';
     picked = null;
     closeSuggest();
-    render();
-    if (state.done) {
-      $('wg-result').scrollIntoView({ behavior: 'smooth', block: 'start' });
-      if (puzzle.date === G.today()) setTimeout(function () { showStats(state.won ? state.guesses.length : null); }, 900);
-    } else {
-      input.focus();
-    }
+    var index = state.guesses.length - 1;
+    render(index, state.done ? 0 : state.guesses.length);
+    var f = feedback(t.c);
+    $('gm-live').textContent = t.n + '. ' + (f.win ? 'Correct.' : f.d + ' miles away. Head ' + POINTS[Math.round(f.deg / 45) % 8] + '.');
+    G.wait(420).then(function () {
+      if (state.done && !state.won) G.toast('It was ' + answer.n, 2600);
+      else G.toast(f.win ? PRAISE[index] : f.close ? 'So close' : 'Head ' + POINTS[Math.round(f.deg / 45) % 8]);
+      if (!state.done) { busy = false; input.focus(); return; }
+      if (state.won) G.replay(rows.children[index], 'is-bounce');
+      return G.wait(1400).then(function () { busy = false; showResults(); });
+    });
   });
 
-  $('wg-share').addEventListener('click', function () { G.share(shareText()); });
+  $('gm-share').addEventListener('click', function () { G.share(shareText()); });
+  $('gm-done-btn').addEventListener('click', showResults);
+  G.wireBar(GAME);
 
   Promise.all([
     G.loadPuzzle(GAME),
@@ -220,24 +260,39 @@
     answer = byCode[G.decode(puzzle.k)];
     if (!answer) throw new Error('bad answer');
     var hints = puzzle.hints;
-    $('wg-shape').setAttribute('viewBox', puzzle.view_box);
-    $('wg-shape').querySelector('path').setAttribute('d', puzzle.path);
-    fill('type', hints.type.toLowerCase());
-    fill('county', hints.county);
-    fill('population', number.format(hints.population));
-    fill('sq', String(hints.sq_miles));
-    fill('rate-year', String(hints.rate_year));
-    fill('rate', hints.tax_rate == null ? 'not on file' : '$' + hints.tax_rate.toFixed(3));
-    fill('letter', hints.first_letter);
+    $('gm-outline').setAttribute('d', puzzle.path);
+    var values = {
+      type: hints.type,
+      county: hints.county,
+      population: number.format(hints.population),
+      rate: hints.tax_rate == null ? 'n/a' : '$' + hints.tax_rate.toFixed(2),
+      letter: hints.first_letter
+    };
+    Object.keys(values).forEach(function (k) { document.querySelector('[data-f="' + k + '"]').setAttribute('data-value', values[k]); });
     var past = puzzle.date !== G.today();
-    $('wg-meta').textContent = (past ? 'Past puzzle #' : 'Puzzle #') + puzzle.number + ', ' + G.prettyDate(puzzle.date);
+    $('gm-meta').textContent = (past ? 'Archive No. ' : 'No. ') + puzzle.number + ' · ' + G.prettyDate(puzzle.date);
     state = G.getDay(GAME, puzzle.date) || { guesses: [], done: false, won: false };
     state.guesses = state.guesses.filter(function (c) { return byCode[c]; });
     input.disabled = submit.disabled = state.done;
     G.wireArchive(puzzle.date);
-    G.countdown($('wg-next'));
-    render();
+    G.countdown($('gm-next'));
+    render(-1, 0);
+    var start = past || state.done ? Promise.resolve() : G.splash(puzzle, state.guesses.length > 0);
+    return start.then(function () {
+      if (state.done && !past && !seenThisVisit()) showResults();
+      else if (!state.done && window.matchMedia('(pointer: fine)').matches) input.focus();
+    });
   }).catch(function () {
-    $('wg-meta').textContent = 'Today\'s town did not load. Refresh to try again.';
+    $('gm-meta').textContent = 'Today\'s town did not load. Refresh to try again.';
   });
+
+  // Open the results sheet once per visit for a finished puzzle, not on every reload.
+  function seenThisVisit() {
+    try {
+      var key = 'wd-games:seen:' + GAME + ':' + puzzle.date;
+      if (window.sessionStorage.getItem(key)) return true;
+      window.sessionStorage.setItem(key, '1');
+    } catch (e) { /* fine */ }
+    return false;
+  }
 })();

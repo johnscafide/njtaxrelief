@@ -1,10 +1,11 @@
 /* Watchdog Games shared runtime: puzzle dates, saved progress, streaks,
-   stats dialog, sharing and the next-puzzle countdown. Each game script
-   (sold.js, town-shapes.js) and the /games hub use it.
+   splash screen, help and results sheets, toasts, sharing and the
+   next-puzzle countdown. Each game script (sold.js, town-shapes.js) and the
+   /games hub use it.
 
    Progress lives in this browser only (localStorage, wrapped so private
    windows and blocked storage still play). A day's puzzle counts toward the
-   streak only when it was finished on that day; archive plays are kept but
+   streak only when it was played on that day; archive plays are kept but
    never change streaks. */
 (function () {
   'use strict';
@@ -14,6 +15,7 @@
   var MAX_GUESSES = 6;
   var KEY = 'wd-games:v1:';
   var DAY = 86400000;
+  var calm = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
 
   function dateIn(zone, when) {
     return new Intl.DateTimeFormat('en-CA', { timeZone: zone, year: 'numeric', month: '2-digit', day: '2-digit' }).format(when || new Date());
@@ -21,10 +23,14 @@
   function today() { return dateIn(ZONE); }
   function addDays(date, n) { return new Date(Date.parse(date + 'T00:00:00Z') + n * DAY).toISOString().slice(0, 10); }
   function numberFor(date) { return Math.round((Date.parse(date + 'T00:00:00Z') - Date.parse(LAUNCH + 'T00:00:00Z')) / DAY) + 1; }
-  function prettyDate(date) {
-    return new Intl.DateTimeFormat('en-US', { timeZone: 'UTC', month: 'long', day: 'numeric', year: 'numeric' }).format(new Date(date + 'T00:00:00Z'));
+  function prettyDate(date, withDay) {
+    var opts = { timeZone: 'UTC', month: 'long', day: 'numeric', year: 'numeric' };
+    if (withDay) opts.weekday = 'long';
+    return new Intl.DateTimeFormat('en-US', opts).format(new Date(date + 'T00:00:00Z'));
   }
+  function wait(ms) { return new Promise(function (r) { setTimeout(r, calm ? 0 : ms); }); }
 
+  // ---------- saved progress ----------
   function read(game) {
     try {
       var raw = window.localStorage.getItem(KEY + game);
@@ -75,15 +81,26 @@
     if (text != null) node.textContent = text;
     return node;
   }
+  function icon(id) {
+    var tpl = document.getElementById(id);
+    return tpl ? tpl.content.firstElementChild.cloneNode(true) : null;
+  }
+  function replay(node, cls) {
+    if (!node || calm) return;
+    node.classList.remove(cls);
+    void node.offsetWidth;
+    node.classList.add(cls);
+  }
 
   var toastTimer;
-  function toast(message) {
-    var node = document.getElementById('wg-toast');
+  function toast(message, ms) {
+    var node = document.getElementById('gm-toast');
     if (!node) return;
     node.textContent = message;
     node.hidden = false;
+    replay(node, 'is-in');
     clearTimeout(toastTimer);
-    toastTimer = setTimeout(function () { node.hidden = true; }, 2400);
+    toastTimer = setTimeout(function () { node.hidden = true; }, ms || 1800);
   }
 
   function share(text) {
@@ -114,8 +131,10 @@
       .formatToParts(new Date()).forEach(function (p) { parts[p.type] = Number(p.value); });
     return Math.max(0, 86400 - ((parts.hour % 24) * 3600 + parts.minute * 60 + parts.second));
   }
+  var countdownStarted = false;
   function countdown(node) {
-    if (!node) return;
+    if (!node || countdownStarted) return;
+    countdownStarted = true;
     var tick = function () {
       var s = secondsToMidnight();
       var pad = function (n) { return String(n).padStart(2, '0'); };
@@ -125,14 +144,27 @@
     setInterval(tick, 1000);
   }
 
+  // ---------- sheets (help, results) ----------
+  function openSheet(id) {
+    var d = document.getElementById(id);
+    if (!d) return;
+    if (typeof d.showModal === 'function') { if (!d.open) d.showModal(); } else d.setAttribute('open', '');
+  }
+  function closeSheet(d) { if (d.close) d.close(); else d.removeAttribute('open'); }
+  document.querySelectorAll('.gm-sheet').forEach(function (d) {
+    var close = d.querySelector('.gm-close');
+    if (close) close.addEventListener('click', function () { closeSheet(d); });
+    d.addEventListener('click', function (e) { if (e.target === d) closeSheet(d); });
+  });
+
   function renderStats(game, highlight) {
     var s = stats(game);
     var set = function (id, v) { var n = document.getElementById(id); if (n) n.textContent = String(v); };
-    set('wg-stat-played', s.played);
-    set('wg-stat-pct', s.pct);
-    set('wg-stat-streak', s.current);
-    set('wg-stat-max', s.max);
-    var list = document.getElementById('wg-dist');
+    set('gm-stat-played', s.played);
+    set('gm-stat-pct', s.pct);
+    set('gm-stat-streak', s.current);
+    set('gm-stat-max', s.max);
+    var list = document.getElementById('gm-dist');
     if (!list) return;
     list.textContent = '';
     var top = Math.max.apply(null, s.dist.concat([1]));
@@ -146,24 +178,31 @@
     });
   }
 
-  function wireStats(game) {
-    var dialog = document.getElementById('wg-stats-dialog');
-    var open = document.getElementById('wg-open-stats');
-    if (!dialog || !open) return function () {};
-    var show = function (highlight) {
-      renderStats(game, highlight);
-      if (typeof dialog.showModal === 'function') dialog.showModal(); else dialog.setAttribute('open', '');
-    };
-    open.addEventListener('click', function () { show(); });
-    dialog.querySelector('.wg-close').addEventListener('click', function () { dialog.close ? dialog.close() : dialog.removeAttribute('open'); });
-    dialog.addEventListener('click', function (e) { if (e.target === dialog && dialog.close) dialog.close(); });
-    return show;
+  // ---------- splash ----------
+  // Shown on a fresh visit to today's puzzle. Resolves when the player taps Play.
+  function splash(puzzle, inProgress) {
+    var node = document.getElementById('gm-splash');
+    if (!node) return Promise.resolve();
+    document.getElementById('gm-splash-date').textContent = prettyDate(puzzle.date, true);
+    document.getElementById('gm-splash-no').textContent = 'No. ' + puzzle.number;
+    var play = document.getElementById('gm-play');
+    if (inProgress) play.textContent = 'Continue';
+    node.hidden = false;
+    document.documentElement.style.overflow = 'hidden';
+    document.getElementById('gm-splash-help').addEventListener('click', function () { openSheet('gm-help'); });
+    return new Promise(function (resolve) {
+      play.addEventListener('click', function () {
+        node.hidden = true;
+        document.documentElement.style.overflow = '';
+        resolve();
+      }, { once: true });
+    });
   }
 
   // Archive picker: any day from launch through today.
   function wireArchive(current) {
-    var input = document.getElementById('wg-archive-date');
-    var form = document.getElementById('wg-archive');
+    var input = document.getElementById('gm-archive-date');
+    var form = document.getElementById('gm-archive');
     if (!input || !form) return;
     input.min = LAUNCH;
     input.max = today();
@@ -191,21 +230,36 @@
     });
   }
 
+  // Wire the app bar buttons every game page shares.
+  function wireBar(game) {
+    var help = document.getElementById('gm-help-btn');
+    var statsBtn = document.getElementById('gm-stats-btn');
+    if (help) help.addEventListener('click', function () { openSheet('gm-help'); });
+    if (statsBtn) statsBtn.addEventListener('click', function () { renderStats(game); openSheet('gm-results'); });
+  }
+
   window.WatchdogGames = {
     LAUNCH: LAUNCH,
     MAX_GUESSES: MAX_GUESSES,
+    calm: calm,
     today: today,
     numberFor: numberFor,
     prettyDate: prettyDate,
+    wait: wait,
     getDay: getDay,
     saveDay: saveDay,
     stats: stats,
+    renderStats: renderStats,
     decode: decode,
     el: el,
+    icon: icon,
+    replay: replay,
     toast: toast,
     share: share,
     countdown: countdown,
-    wireStats: wireStats,
+    openSheet: openSheet,
+    splash: splash,
+    wireBar: wireBar,
     wireArchive: wireArchive,
     loadPuzzle: loadPuzzle
   };

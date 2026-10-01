@@ -12,38 +12,44 @@
 <meta property="og:url" content="https://www.watchdogindex.com/games">
 <meta property="og:type" content="website">
 <link rel="preconnect" href="https://fonts.googleapis.com">
-<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@600&family=Plus+Jakarta+Sans:wght@500;700;800&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="/property/css/watchdog-games.css?v=20261001a">
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700;800&family=Plus+Jakarta+Sans:wght@500;600;700;800&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="/property/css/watchdog-games.css?v=20261001b">
 <script type="application/ld+json">{"@context":"https://schema.org","@type":"CollectionPage","name":"Watchdog Games","url":"https://www.watchdogindex.com/games","description":"Free daily puzzles about New Jersey homes, towns and property taxes.","hasPart":[{"@type":"WebApplication","name":"Sold!","url":"https://www.watchdogindex.com/games/sold","applicationCategory":"GameApplication"},{"@type":"WebApplication","name":"Town Shapes","url":"https://www.watchdogindex.com/games/town-shapes","applicationCategory":"GameApplication"}],"publisher":{"@type":"Organization","name":"Watchdog","url":"https://www.watchdogindex.com/"}}</script>
 </head>
 <body class="wg">
 <a class="wg-skip" href="#wg-main">Skip to the games</a>
 <header class="wg-bar"><div class="wg-bar-in">
   <a class="wg-brand" href="/">Watchdog</a>
-  <nav class="wg-nav" aria-label="Games"><a href="/games" aria-current="page">Games</a><a href="/glossary">Glossary</a><a href="/">Look up a home</a></nav>
+  <nav class="wg-nav" aria-label="Learn"><a href="/games" aria-current="page">Games</a><a href="/glossary">Glossary</a><a href="/">Look up a home</a></nav>
 </div></header>
 
 <main class="wg-main" id="wg-main">
-  <p class="wg-kicker">Free daily puzzles</p>
-  <h1>Watchdog Games</h1>
-  <p class="wg-lede">Quick puzzles about New Jersey homes, towns and taxes, built from real public records. Everyone gets the same puzzle, and new ones drop at midnight. No account needed.</p>
+  <section class="gh-hero">
+    <p class="gh-date" id="gh-date">Daily puzzles</p>
+    <h1>Watchdog Games</h1>
+    <p>Quick daily puzzles about New Jersey homes, towns and taxes, built from real public records. New ones at midnight.</p>
+  </section>
 
-  <div class="wg-games">
-    <a class="wg-game" href="/games/sold" data-game-card="sold">
-      <div class="wg-game-art" aria-hidden="true"><span class="wg-price">$???,???</span></div>
-      <h2>Sold!</h2>
-      <p>A real New Jersey home just sold. Guess the price in six tries.</p>
-      <div class="wg-game-foot"><span data-card-number>Today's puzzle</span><span class="wg-pill-status" data-card-status>Play</span></div>
+  <div class="gh-grid">
+    <a class="gh-tile" href="/games/sold" data-game-card="sold">
+      <div class="gh-art" aria-hidden="true"><svg viewBox="0 0 100 100"><g transform="rotate(-12 50 50)"><path d="M32 22h50a6 6 0 0 1 6 6v44a6 6 0 0 1-6 6H32L12 50z" fill="#0e2248"/><circle cx="27" cy="50" r="5" fill="#b8972a"/><path d="M45 55l13-12 13 12M49 52v14h18V52" fill="none" stroke="#b8972a" stroke-width="5" stroke-linecap="round" stroke-linejoin="round"/></g></svg></div>
+      <div class="gh-body">
+        <h2>Sold!</h2>
+        <p>A real New Jersey home just sold. Guess the price in six tries, with clues from the public record.</p>
+        <div class="gh-foot"><span class="gh-status" data-card-status>No account needed</span><span class="gh-play" data-card-play>Play</span></div>
+      </div>
     </a>
-    <a class="wg-game" href="/games/town-shapes" data-game-card="town-shapes">
-      <div class="wg-game-art" aria-hidden="true"><svg viewBox="0 0 100 100"><path d="M18 30L46 12L58 26L84 22L80 52L90 70L62 88L40 76L22 82L28 58Z" fill="#0e2248"/></svg></div>
-      <h2>Town Shapes</h2>
-      <p>Name the New Jersey town from its outline. Each miss tells you how far off you are.</p>
-      <div class="wg-game-foot"><span data-card-number>Today's puzzle</span><span class="wg-pill-status" data-card-status>Play</span></div>
+    <a class="gh-tile" href="/games/town-shapes" data-game-card="town-shapes">
+      <div class="gh-art" aria-hidden="true"><svg viewBox="0 0 100 100"><path d="M20 32l26-16 12 12 26-4-4 28 10 20-28 14-20-12-22 6 6-24z" fill="#fff"/><circle cx="56" cy="50" r="9" fill="#0f766e"/><circle cx="56" cy="50" r="3.5" fill="#fff"/></svg></div>
+      <div class="gh-body">
+        <h2>Town Shapes</h2>
+        <p>Name the New Jersey town from its outline. Every miss tells you how far off you are and which way to go.</p>
+        <div class="gh-foot"><span class="gh-status" data-card-status>564 towns to learn</span><span class="gh-play" data-card-play>Play</span></div>
+      </div>
     </a>
   </div>
 
-  <div class="wg-more">
+  <div class="gh-more">
     <section class="wg-card">
       <h2>Brush up first</h2>
       <p>Plain-English definitions for the words on your tax bill, your lease and your closing papers.</p>
@@ -55,11 +61,11 @@
       <a class="wg-btn wg-btn-quiet" href="/">Look up a home</a>
     </section>
   </div>
-  <p class="wg-note">Your streaks are saved on this device. More games are on the way.</p>
+  <p class="wg-note gh-small">Streaks are saved on this device. More games are on the way.</p>
 </main>
 
 <footer class="wg-foot"><div class="wg-foot-in"><span>Watchdog Games</span><a href="/glossary">Glossary</a><a href="/privacy">Privacy</a><a href="/terms">Terms</a></div></footer>
-<script src="/property/js/games/games-core.js?v=20261001a"></script>
-<script src="/property/js/games/hub.js?v=20261001a"></script>
+<script src="/property/js/games/games-core.js?v=20261001b"></script>
+<script src="/property/js/games/hub.js?v=20261001b"></script>
 </body>
 </html>
