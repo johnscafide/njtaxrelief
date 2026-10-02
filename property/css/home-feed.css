@@ -23,20 +23,15 @@
 }
 
 /* ---------- hero (keeps the photo hero so the shared glass header reads the same) ---------- */
-body.wd-consumer-mode .pl-hero.wdh-hero{min-height:0;padding:104px 20px 48px}
+body.wd-consumer-mode .pl-hero.wdh-hero{min-height:0;padding:112px 20px 64px}
 .wdh-hero .wdh-hero-inner{max-width:820px}
-.wdh-hero .wdh-hero-kicker{margin:0 0 10px;color:rgba(255,255,255,.88);font:800 12px/1.2 var(--wdh-font);letter-spacing:.11em;text-transform:uppercase;text-shadow:0 1px 12px rgba(0,0,0,.45)}
 body.wd-consumer-mode .pl-hero.wdh-hero h1.wdh-hero-title{margin:0 auto 10px;max-width:780px;font-size:clamp(2rem,4.4vw,3.1rem);line-height:1.06;letter-spacing:-.04em}
 .wdh-hero .wdh-hero-sub{max-width:640px;margin:0 auto 22px;color:rgba(255,255,255,.94);font:500 17px/1.5 var(--wdh-font);text-shadow:0 1px 14px rgba(0,0,0,.5)}
-.wdh-town-bar{display:flex;align-items:center;justify-content:center;gap:10px 14px;flex-wrap:wrap;margin-top:16px}
-.wdh-town-label{color:#fff;font:600 14px/1.4 var(--wdh-font);text-shadow:0 1px 12px rgba(0,0,0,.55)}
-.wdh-town-btn{display:inline-flex;align-items:center;gap:8px;min-height:44px;padding:0 16px;border:1px solid rgba(255,255,255,.65);border-radius:999px;background:rgba(17,29,56,.42);color:#fff;font:700 14px/1 var(--wdh-font);cursor:pointer;backdrop-filter:blur(6px);-webkit-backdrop-filter:blur(6px)}
-.wdh-town-btn:hover{background:rgba(17,29,56,.62)}
-.wdh-town-btn:focus-visible{outline:3px solid #fff;outline-offset:2px}
+.wdh-hero .wdh-hero-sub[hidden]+.pl-search-card{margin-top:18px}
 
 /* ---------- feed shell ---------- */
 .wdh,.wdh *,.wdh-picker,.wdh-picker *,.wdh-explore,.wdh-explore *{box-sizing:border-box}
-.wdh{background:var(--wdh-bg);color:var(--wdh-text);font-family:var(--wdh-font);font-size:15px;line-height:1.55;padding:28px 0 56px}
+.wdh{background:var(--wdh-bg);color:var(--wdh-text);font-family:var(--wdh-font);font-size:15px;line-height:1.55;padding:8px 0 56px}
 .wdh [hidden],.wdh-picker[hidden]{display:none!important}
 .wdh h2,.wdh h3,.wdh h4,.wdh p,.wdh ul,.wdh ol,.wdh dl,.wdh dd,.wdh figure,.wdh-picker h2,.wdh-picker ul,.wdh-explore h2,.wdh-explore p,.wdh-explore ul{margin:0;padding:0}
 .wdh ul,.wdh ol,.wdh-picker ul,.wdh-explore ul{list-style:none}
@@ -44,6 +39,17 @@ body.wd-consumer-mode .pl-hero.wdh-hero h1.wdh-hero-title{margin:0 auto 10px;max
 .wdh a{color:var(--wdh-link)}
 .wdh a:hover{color:var(--wdh-primary-dark)}
 .wdh :focus-visible,.wdh-picker :focus-visible,.wdh-explore :focus-visible{outline:3px solid rgba(47,109,246,.55);outline-offset:2px}
+/* Date and town: quiet, gray, one line. "(change)" is plain text that only
+   underlines on hover or focus. */
+.wdh .wdh-where{max-width:1240px;margin:0 auto;padding:14px 32px 12px;font-size:14px;line-height:1.5;font-weight:500;color:var(--wdh-muted)}
+.wdh-where-sep{margin:0 2px}
+/* The pseudo-element gives "(change)" a 44px-tall tap area without making the line taller. */
+.wdh-where-change{position:relative;display:inline;padding:0;border:0;background:none;color:inherit;font:inherit;line-height:inherit;cursor:pointer;white-space:nowrap}
+.wdh-where-change:after{content:"";position:absolute;inset:-13px -8px}
+/* A site-wide touch rule gives buttons a 44px minimum height, which would make
+   this inline link stretch the line; the :after above already covers the tap area. */
+.wdh .wdh-where .wdh-where-change{min-height:0!important;height:auto!important;vertical-align:baseline}
+.wdh-where-change:hover,.wdh-where-change:focus-visible{text-decoration:underline;text-underline-offset:3px;color:var(--wdh-ink)}
 .wdh-shell{display:grid;grid-template-columns:minmax(0,1fr) 344px;gap:28px;max-width:1240px;margin:0 auto;padding:0 32px;align-items:start}
 .wdh-main{min-width:0;display:flex;flex-direction:column;gap:20px}
 .wdh-rail{min-width:0;display:flex;flex-direction:column;gap:18px}
@@ -122,7 +128,19 @@ body.wd-consumer-mode .pl-hero.wdh-hero h1.wdh-hero-title{margin:0 auto 10px;max
 @keyframes wdh-shimmer{from{transform:translateX(-100%)}to{transform:translateX(100%)}}
 @media (prefers-reduced-motion:reduce){.wdh-skel:after{animation:none}}
 
-/* ---------- 30 seconds ---------- */
+/* ---------- Watchdog Intelligence Brief ----------
+   Same signature as Dashboard and Property Home: a rotating cyan, blue,
+   violet, magenta border on the outer card, and only the word
+   "Intelligence" in spectrum text. */
+@property --wdh-intel-angle{syntax:'<angle>';initial-value:0deg;inherits:false}
+@keyframes wdh-intel-rotate{to{--wdh-intel-angle:360deg}}
+.wdh .wdh-intel{border:2px solid transparent;border-radius:18px;background:linear-gradient(#fff,#fff) padding-box,conic-gradient(from var(--wdh-intel-angle),#15b7c9 0deg,#2478ff 90deg,#7857ff 170deg,#e84bc4 260deg,#15b7c9 360deg) border-box;animation:wdh-intel-rotate 7s linear infinite;box-shadow:0 14px 36px rgba(30,57,91,.07)}
+.wdh-intel-title{font-size:22px;line-height:1.2;font-weight:800;letter-spacing:-.025em;color:var(--wdh-ink)}
+.wdh .wd-intelligence-brand-word{display:inline;margin:0;padding:0;border:0;border-radius:0;box-shadow:none;color:transparent;-webkit-text-fill-color:transparent;background:linear-gradient(90deg,#0aaeb8 0%,#2478ff 34%,#7857ff 67%,#e84bc4 100%);-webkit-background-clip:text;background-clip:text;font:inherit}
+.wdh-week .wdh-meta{margin-top:2px;font-size:14px}
+@media (prefers-reduced-motion:reduce){.wdh .wdh-intel{animation:none}}
+@media (forced-colors:active){.wdh .wd-intelligence-brand-word{color:CanvasText;-webkit-text-fill-color:CanvasText;background:none}}
+@media print{.wdh .wdh-intel{animation:none;border-color:var(--wdh-line);background:#fff}.wdh .wd-intelligence-brand-word{color:#087f83;-webkit-text-fill-color:#087f83;background:none}}
 .wdh-week-head{display:flex;justify-content:space-between;align-items:flex-start;gap:12px;flex-wrap:wrap}
 .wdh-week-list{margin-top:10px!important}
 .wdh-week-list li{display:grid;grid-template-columns:28px minmax(0,1fr);gap:10px;padding:12px 0;border-top:1px solid var(--wdh-soft);font-size:15px;line-height:1.55;color:var(--wdh-text)}
@@ -133,10 +151,14 @@ body.wd-consumer-mode .pl-hero.wdh-hero h1.wdh-hero-title{margin:0 auto 10px;max
 /* ---------- feed head + tabs ---------- */
 .wdh-feed{display:flex;flex-direction:column;gap:14px}
 .wdh-feed-head{display:flex;justify-content:space-between;align-items:baseline;gap:6px 12px;flex-wrap:wrap}
-.wdh-tabs{display:flex;gap:8px;flex-wrap:wrap}
-.wdh-tab{min-height:44px;padding:0 16px;border-radius:999px;border:1px solid var(--wdh-line-strong);background:#fff;color:var(--wdh-text);font:700 14px/1 var(--wdh-font);cursor:pointer}
-.wdh-tab:hover{border-color:var(--wdh-primary);color:var(--wdh-primary-dark)}
-.wdh-tab.is-on{background:var(--wdh-ink);border-color:var(--wdh-ink);color:#fff}
+/* Flat text tabs with an underline on the active one, like Facebook's tab bar. */
+.wdh-tabs{display:flex;flex-wrap:nowrap;overflow-x:auto;border-bottom:1px solid var(--wdh-line-strong);scrollbar-width:none}
+.wdh-tabs::-webkit-scrollbar{display:none}
+.wdh-tab{position:relative;flex:1 0 0;min-width:max-content;min-height:48px;padding:0 14px;border:0;border-radius:0;background:transparent;color:var(--wdh-muted);font:700 15px/1 var(--wdh-font);cursor:pointer}
+.wdh-tab:hover{color:var(--wdh-ink)}
+.wdh-tab.is-on{color:var(--wdh-primary)}
+.wdh-tab.is-on:after{content:"";position:absolute;left:0;right:0;bottom:-1px;height:3px;border-radius:3px 3px 0 0;background:var(--wdh-primary)}
+.wdh .wdh-tab:focus-visible{outline-offset:-3px}
 
 /* ---------- rows, stats, bars, chart ---------- */
 .wdh-more{margin-top:18px}
@@ -173,11 +195,31 @@ body.wd-consumer-mode .pl-hero.wdh-hero h1.wdh-hero-title{margin:0 auto 10px;max
 .wdh-check li{display:flex;align-items:center;gap:12px;padding:12px 0;border-top:1px solid var(--wdh-soft);font-size:15px;font-weight:600;color:var(--wdh-ink)}
 .wdh-check-mark{width:28px;height:28px;flex:0 0 28px;border-radius:999px;background:var(--wdh-primary-soft);color:var(--wdh-primary-dark);display:inline-flex;align-items:center;justify-content:center;font-size:13px}
 .wdh-tag{margin-left:auto;padding:4px 10px;border-radius:999px;background:var(--wdh-primary-soft);color:var(--wdh-primary-dark);font-size:12px;font-weight:800;white-space:nowrap}
+/* Games: the same art and colors as the /games hub, today's real puzzle in
+   one line, and a check once you have played it on this device. */
 .wdh-games{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:12px;margin-top:16px}
-.wdh-game{display:flex;flex-direction:column;gap:6px;padding:16px;border:1px solid var(--wdh-line);border-radius:12px;background:#fbfcfe;text-decoration:none;color:inherit}
-.wdh-game:hover{border-color:var(--wdh-primary)}
-.wdh-game-t{font-size:16px;font-weight:800;color:var(--wdh-ink)}
-.wdh-game-go{margin-top:auto;padding-top:6px;font-size:14px;font-weight:700;color:var(--wdh-link)}
+.wdh .wdh-game{position:relative;display:flex;flex-direction:column;overflow:hidden;border:1px solid var(--wdh-line);border-radius:14px;background:#fff;color:inherit;text-decoration:none;transition:border-color .15s ease,box-shadow .15s ease,transform .15s ease}
+.wdh .wdh-game:hover{color:inherit;border-color:var(--wdh-line-strong);box-shadow:0 10px 24px rgba(17,29,56,.08);transform:translateY(-2px)}
+.wdh-game-art{position:relative;display:grid;place-items:center;height:104px;overflow:hidden}
+.wdh-game-art svg{width:64px;height:64px;transition:transform .2s ease}
+.wdh-game-art.is-pin svg{position:absolute;inset:0;width:100%;height:100%}
+.wdh-game:hover .wdh-game-art svg{transform:translateY(-3px)}
+.wdh-game-art.is-sold{background:#b8972a}
+.wdh-game-art.is-pin{background:#1456a0}
+.wdh-game-art.is-fair{background:#b42318}
+.wdh-game-done{position:absolute;top:10px;left:10px;width:28px;height:28px;border-radius:50%;background:#fff;color:#1e8a4a;display:grid;place-items:center;font-size:14px;box-shadow:0 2px 6px rgba(0,0,0,.16)}
+.wdh-game-body{display:flex;flex:1;flex-direction:column;gap:3px;padding:14px 14px 10px}
+.wdh-game-t{font-size:17px;line-height:1.25;font-weight:800;letter-spacing:-.01em;color:var(--wdh-ink)}
+.wdh-game-d{font-size:14px;line-height:1.4;color:var(--wdh-text)}
+.wdh-game-fact{margin-top:4px;font-size:13px;line-height:1.4;font-weight:600;color:var(--wdh-muted)}
+.wdh-game-foot{display:flex;align-items:center;justify-content:space-between;gap:8px;margin-top:auto;padding-top:10px}
+.wdh-game-status{font-size:13px;font-weight:600;color:var(--wdh-muted)}
+.wdh-game.is-done .wdh-game-status{color:#1e7a43}
+.wdh-game-go{font-size:14px;font-weight:700;color:var(--wdh-link);white-space:nowrap}
+.wdh .wdh-games-more{display:flex;flex-wrap:wrap;align-items:center;gap:0 18px;margin-top:8px}
+.wdh-games-more span{flex:1 1 260px}
+.wdh-games-more a{display:inline-flex;align-items:center;min-height:44px;font-weight:700;text-decoration:none}
+@media (prefers-reduced-motion:reduce){.wdh .wdh-game,.wdh-game-art svg{transition:none}.wdh .wdh-game:hover,.wdh-game:hover .wdh-game-art svg{transform:none}}
 .wdh-empty{text-align:center}
 .wdh-caught{display:flex;flex-direction:column;align-items:center;text-align:center;gap:6px;padding:24px 16px 4px}
 .wdh-caught-ico{width:44px;height:44px;border-radius:999px;background:var(--wdh-primary-soft);color:var(--wdh-primary-dark);display:inline-flex;align-items:center;justify-content:center;font-size:18px}
@@ -194,6 +236,19 @@ body.wd-consumer-mode .pl-hero.wdh-hero h1.wdh-hero-title{margin:0 auto 10px;max
    (html.wd-index-mapless hides every .leaflet-container). The feed map is the
    one deliberate exception; the overlay maps stay hidden. */
 html.wd-index-mapless .wdh .wdh-map.leaflet-container{display:block!important;visibility:visible!important;pointer-events:auto!important;max-height:none!important;overflow:hidden!important}
+/* lookup/07-search-corrections.css sets every .leaflet-pane to z-index:auto for
+   the neighborhood view. That lets the tile layer (z-index 1) paint over the
+   popup pane, so pin popups were invisible. Restore Leaflet's own pane order
+   inside the feed map only (an open popup sits above the zoom buttons).
+   .wdh-map is its own stacking context (z-index:0),
+   so none of this can rise above the header or menus. */
+.wdh .wdh-map .leaflet-pane{z-index:400}
+.wdh .wdh-map .leaflet-tile-pane{z-index:200}
+.wdh .wdh-map .leaflet-shadow-pane{z-index:500}
+.wdh .wdh-map .leaflet-marker-pane{z-index:600}
+.wdh .wdh-map .leaflet-tooltip-pane{z-index:650}
+.wdh .wdh-map .leaflet-popup-pane{z-index:850}
+.wdh .wdh-map .leaflet-control{z-index:800}
 .wdh-legend{margin-top:10px!important}
 .wdh-legend li{display:flex;align-items:center;gap:10px;padding:6px 0;font-size:14px;font-weight:600;color:var(--wdh-text)}
 .wdh-legend b{margin-left:auto;color:var(--wdh-ink)}
@@ -203,10 +258,27 @@ html.wd-index-mapless .wdh .wdh-map.leaflet-container{display:block!important;vi
 .wdh-mk-permit{border-radius:3px;background:var(--wdh-permit)}
 .wdh-mk-home{border-radius:50%;background:#fff;border:4px solid var(--wdh-ink);box-shadow:0 0 0 2px #fff}
 .wdh-mk-wrap .wdh-mk{width:18px;height:18px}
-.wdh-pop{display:flex;flex-direction:column;gap:4px;font-family:var(--wdh-font);min-width:170px}
-.wdh-pop b{font-size:14px;color:var(--wdh-ink)}
-.wdh-pop span{font-size:13px;color:var(--wdh-text)}
-.wdh-pop-open{margin-top:6px;min-height:36px;border:1px solid var(--wdh-line-strong);border-radius:8px;background:#fff;color:var(--wdh-link);font:700 13px var(--wdh-font);cursor:pointer}
+/* Pin quick-facts card: on hover (floating on <body>) and in the tap popup. */
+.wdh-hover{position:fixed;z-index:2000;pointer-events:none;border:1px solid var(--wdh-line);border-radius:12px;background:#fff;box-shadow:0 12px 32px rgba(17,29,56,.18)}
+.wdh-hover[hidden]{display:none}
+.wdh-hover,.wdh-hover *{box-sizing:border-box}
+.wdh-pin{display:grid;grid-template-columns:64px minmax(0,1fr);gap:10px;align-items:start;width:256px;padding:10px;font-family:var(--wdh-font);text-align:left}
+.wdh-pin.is-solo{grid-template-columns:minmax(0,1fr)}
+.wdh-pin-img{display:block;width:64px;height:64px;border-radius:8px;object-fit:cover;background:var(--wdh-soft)}
+.wdh-pin-main{display:flex;flex-direction:column;gap:1px;min-width:0}
+.wdh-pin-k{font-size:12px;line-height:1.3;font-weight:700;color:var(--wdh-muted)}
+.wdh-pin-k:before{content:"";display:inline-block;width:8px;height:8px;margin-right:6px;border-radius:50%;background:var(--wdh-primary);vertical-align:0}
+.wdh-pin-k-permit:before{border-radius:2px;background:var(--wdh-permit)}
+.wdh-pin-k-home:before{width:8px;height:8px;background:#fff;box-shadow:inset 0 0 0 2px var(--wdh-ink)}
+.wdh-pin-t{font-size:14px;line-height:1.3;font-weight:800;color:var(--wdh-ink);overflow-wrap:anywhere}
+.wdh-pin-v{margin-top:2px;font-size:17px;line-height:1.2;font-weight:800;letter-spacing:-.01em;color:var(--wdh-ink)}
+.wdh-pin-f{font-size:12px;line-height:1.4;color:var(--wdh-muted)}
+.wdh-pop-open{grid-column:1/-1;width:100%;min-height:44px;margin-top:2px;border:1px solid var(--wdh-line-strong);border-radius:10px;background:#fff;color:var(--wdh-link);font:700 14px var(--wdh-font);cursor:pointer}
+.wdh-pop-open:hover{background:var(--wdh-primary-soft)}
+.wdh-popup .leaflet-popup-content-wrapper{padding:0;border-radius:12px;box-shadow:0 12px 32px rgba(17,29,56,.18)}
+.wdh-popup .leaflet-popup-content{margin:0;line-height:1.3}
+.wdh-popup .wdh-pin{padding-right:34px}
+.wdh-popup a.leaflet-popup-close-button{top:4px;right:4px;width:30px;height:30px;font:22px/30px var(--wdh-font);color:var(--wdh-muted)}
 .wdh-up{margin-top:8px!important}
 .wdh-up li{display:flex;gap:12px;align-items:flex-start;padding:10px 0;border-top:1px solid var(--wdh-soft)}
 .wdh-up li:first-child{border-top:0}
@@ -275,9 +347,9 @@ body.hood-on .wdh,body.hood-on .wdh-explore,body.hood-on .landing-faq{display:no
   .wdh-counties{grid-template-columns:repeat(3,minmax(0,1fr))}
 }
 @media (max-width:760px){
-  body.wd-consumer-mode .pl-hero.wdh-hero{padding:92px 16px 36px}
+  body.wd-consumer-mode .pl-hero.wdh-hero{padding:96px 16px 44px}
   .wdh-hero .wdh-hero-sub{font-size:16px;margin-bottom:18px}
-  .wdh{padding:20px 0 40px}
+  .wdh{padding:4px 0 40px}
   .wdh-shell{padding:0 16px;gap:18px}
   .wdh-tiles{grid-template-columns:repeat(2,minmax(0,1fr));gap:10px}
   .wdh-tile{min-height:0;padding:14px}
@@ -285,7 +357,12 @@ body.hood-on .wdh,body.hood-on .wdh-explore,body.hood-on .landing-faq{display:no
   .wdh-card{padding:18px}
   .wdh-card-row{grid-template-columns:minmax(0,1fr);gap:0}
   .wdh-thumb{order:-1;height:170px;margin-bottom:14px}
-  .wdh-stats,.wdh-games{grid-template-columns:minmax(0,1fr)}
+  .wdh-stats{grid-template-columns:minmax(0,1fr)}
+  .wdh .wdh-where{padding:12px 16px 10px}
+  .wdh-games{display:flex;gap:10px;overflow-x:auto;scroll-snap-type:x mandatory;scroll-padding:0 18px;margin:16px -18px 0;padding:0 18px 4px;scrollbar-width:none}
+  .wdh-games::-webkit-scrollbar{display:none}
+  .wdh .wdh-game{flex:0 0 74%;scroll-snap-align:start}
+  .wdh-game-art{height:92px}
   .wdh-rail{grid-template-columns:minmax(0,1fr)}
   .wdh-h2{font-size:23px}
   .wdh-h3{font-size:19px}
@@ -295,9 +372,8 @@ body.hood-on .wdh,body.hood-on .wdh-explore,body.hood-on .landing-faq{display:no
   .wdh-picker-panel{max-height:calc(100vh - 32px)}
 }
 @media (max-width:480px){
-  .wdh-tabs{flex-wrap:nowrap;overflow-x:auto;margin:0 -16px;padding:2px 16px 4px;scrollbar-width:none}
-  .wdh-tabs::-webkit-scrollbar{display:none}
-  .wdh-tab{flex:0 0 auto}
+  .wdh-tabs{margin:0 -16px;padding:0 4px}
+  .wdh-tab{padding:0 12px}
   .wdh-bar-row{grid-template-columns:92px minmax(0,1fr) 70px}
   .wdh-actions .wdh-btn{flex:1 1 auto}
   .wdh-share{margin-left:0}

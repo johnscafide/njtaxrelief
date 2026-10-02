@@ -1,6 +1,6 @@
 /* Watchdog home feed (the reimagined Watchdog home page).
    Reads /api/watchdog-home-feed for one town and renders the summary tiles,
-   the "your town in 30 seconds" list, the feed cards, the map and the rail.
+   the Watchdog Intelligence Brief, the feed cards, the map and the rail.
    The property search, the overlay, both menus and the footer are owned by
    lookup.js and the shared navigation runtimes; this file never touches them,
    it only calls plLookup() when someone opens a property from a card. */
@@ -16,7 +16,6 @@
   var TOWNS_URL = '/property/data/home-feed-towns.json';
   var PAS1_DEADLINE = '2026-11-02';
   var KEY_TOWN = 'wdh:town';
-  var KEY_LAST = 'wdh:lastVisit';
   var KEY_SEEN = 'wdh:seen:';
   var KEY_HOME = 'wdh:home:';
   var MONTHS = ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December'];
@@ -32,11 +31,12 @@
     townsPromise: null,
     map: null,
     mapLayer: null,
-    lastVisit: null,
     seen: null,
     seenFor: '',
     seenSaved: {},
     homePrev: null,
+    games: null,
+    gamesPromise: null,
     requestId: 0
   };
 
@@ -309,29 +309,21 @@
 
   function renderHero() {
     var feed = state.feed, town = feed && feed.town;
-    var title = $('wdh-hero-title'), sub = $('wdh-hero-sub'), kicker = $('wdh-hero-kicker');
-    var label = $('wdh-town-label'), btn = $('wdh-town-btn-text');
-    var now = new Date();
-    if (kicker) kicker.textContent = ['Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday'][now.getDay()] + ', ' + MONTHS[now.getMonth()] + ' ' + now.getDate();
-    if (!town) {
-      if (title) title.textContent = state.user ? greeting() : "What's happening around your home";
-      if (sub) sub.textContent = 'Pick your town to see recent home sales, building permits, tax rates and town rules, from public records.';
-      if (label) label.textContent = 'Pick your town to see what is happening there.';
-      if (btn) btn.textContent = 'Choose a town';
-      return;
-    }
-    if (title) title.textContent = state.user ? greeting() : "What's happening in " + town.name;
-    var since = state.lastVisit ? ' since your last visit on ' + dayLabel(new Date(state.lastVisit), false) : '';
-    if (sub) {
-      sub.textContent = state.home && state.home.code === town.code
-        ? "Here's what's new around your home and in " + town.name + since + '.'
-        : "Here's what's new in " + town.name + since + ', from public records.';
-    }
-    if (label) {
-      label.textContent = 'Showing ' + town.name + ', ' + town.county + ' County' +
-        (feed.source === 'ip' ? ' (based on your location)' : '');
-    }
-    if (btn) btn.textContent = 'Change town';
+    var title = $('wdh-hero-title'), sub = $('wdh-hero-sub');
+    if (title) title.textContent = state.user ? greeting() : town ? "What's happening in " + town.name : "What's happening around your home";
+    /* The intro line only helps before a town is picked; with a town the feed speaks for itself. */
+    if (sub) sub.hidden = !!town;
+    renderWhere();
+  }
+
+  /* The quiet "date · town (change)" line between the hero and the feed. */
+  function renderWhere() {
+    var now = new Date(), town = state.feed && state.feed.town;
+    var date = $('wdh-where-date'), sep = $('wdh-where-sep'), where = $('wdh-where-town'), change = $('wdh-town-change');
+    if (date) date.textContent = ['Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday'][now.getDay()] + ', ' + MONTHS[now.getMonth()] + ' ' + now.getDate();
+    if (sep) sep.hidden = false;
+    if (where) where.textContent = town ? town.name + ', ' + town.county + ' County' : 'New Jersey';
+    if (change) change.setAttribute('aria-label', town ? 'Change town, now ' + town.name : 'Choose your town');
   }
 
   function isNewSales() {
@@ -441,8 +433,8 @@
     var items = weekItems();
     if (!items.length) { host.hidden = true; return; }
     host.hidden = false;
-    var title = $('wdh-week-title');
-    if (title) title.textContent = townName() + ' in 30 seconds';
+    var meta = $('wdh-week-meta');
+    if (meta) meta.textContent = townName() + ' in 30 seconds';
     // content-architecture: dynamic. Each sentence is computed from this town's feed data (sales, permits, tax rate, deadlines).
     list.innerHTML = items.map(function (html, i) { return '<li><span class="wdh-num" aria-hidden="true">' + (i + 1) + '</span><span>' + html + '</span></li>'; }).join('');
     var listen = $('wdh-listen');
@@ -469,12 +461,12 @@
     return d != null && d <= Number(state.radius);
   }
 
-  function aerialUrl(item) {
+  function aerialUrl(item, square) {
     if (!item || item.lat == null || item.lon == null) return '';
-    var dx = 0.0016, dy = 0.0011;
+    var dx = square ? 0.0009 : 0.0016, dy = square ? 0.0007 : 0.0011;
     var params = [
       'bbox=' + [item.lon - dx, item.lat - dy, item.lon + dx, item.lat + dy].join(','),
-      'bboxSR=4326', 'imageSR=3857', 'size=480,330', 'format=jpg', 'transparent=false', 'f=image'
+      'bboxSR=4326', 'imageSR=3857', square ? 'size=160,160' : 'size=480,330', 'format=jpg', 'transparent=false', 'f=image'
     ].join('&');
     return 'https://maps.nj.gov/arcgis/rest/services/Basemap/Orthos_Natural_2020_NJ_WM/MapServer/export?' + params;
   }
@@ -615,7 +607,7 @@
     }
     var headline = !previous ? 'Here is where your home stands' : changes.length ? 'Your home record changed' : 'Quiet week for your home. Nothing changed.';
     var body = !previous ? 'We will flag it here when your assessment, tax record or Watchdog Score changes.'
-      : changes.length ? 'Since your last visit: ' + changes.join('; ') + '.' : 'Your assessment, tax record and Watchdog Score are the same as your last visit.';
+      : changes.length ? 'Since your last visit: ' + changes.join('; ') + '.' : '';
     var stats = [];
     if (home.score != null) stats.push(['Watchdog Score', String(home.score), '']);
     if (home.assessed) stats.push(['Assessment', money(home.assessed), '']);
@@ -629,7 +621,7 @@
     }
     return '<article class="wdh-card wdh-feed-card" data-tabs="home">' +
       kicker('house', home.isHome ? 'Your home' : 'Your saved home', home.address) +
-      '<h3 class="wdh-h3">' + esc(headline) + '</h3><p class="wdh-body">' + esc(body) + '</p>' +
+      '<h3 class="wdh-h3">' + esc(headline) + '</h3>' + (body ? '<p class="wdh-body">' + esc(body) + '</p>' : '') +
       (stats.length ? '<div class="wdh-stats">' + stats.map(function (s) { return '<div class="wdh-stat"><p class="wdh-stat-l">' + esc(s[0]) + '</p><p class="wdh-stat-v">' + esc(s[1]) + '</p>' + (s[2] ? '<p class="wdh-meta">' + esc(s[2]) + '</p>' : '') + '</div>'; }).join('') + '</div>' : '') +
       bars +
       (home.score != null ? '<p class="wdh-meta wdh-note">The Watchdog Score, powered by the ROBUST Framework.</p>' : '') +
@@ -719,6 +711,90 @@
 
   function gamesCard() { return tpl('wdh-tpl-games'); }
 
+  /* Games card: this browser's progress (the same localStorage the games use)
+     and a one-line peek at today's real puzzle from /api/watchdog-games. */
+  var GAME_IDS = ['pin-drop', 'sold', 'blocks', 'town-shapes', 'lineup', 'fair-or-unfair'];
+  var GAME_LAUNCH = '2026-10-01';
+  var SIX_TRY_POINTS = [100, 85, 70, 55, 40, 25];
+  function gamesToday() {
+    try {
+      return new Intl.DateTimeFormat('en-CA', { timeZone: 'America/New_York', year: 'numeric', month: '2-digit', day: '2-digit' }).format(new Date());
+    } catch (_error) {
+      var d = new Date();
+      return d.getFullYear() + '-' + String(d.getMonth() + 1).padStart(2, '0') + '-' + String(d.getDate()).padStart(2, '0');
+    }
+  }
+  function gameDay(id, date) {
+    var data = store('wd-games:v1:' + id);
+    return data && data.days ? data.days[date] || null : null;
+  }
+  function gamePoints(id, day) {
+    if (typeof day.points === 'number') return day.points;
+    if ((id === 'sold' || id === 'town-shapes') && day.won && day.guesses) return SIX_TRY_POINTS[day.guesses.length - 1] || 0;
+    return 0;
+  }
+  function gameStarted(day) {
+    return !!(day && ((day.guesses && day.guesses.length) || (day.orders && day.orders.length) || (day.picks && day.picks.length) || day.clues));
+  }
+  function gameFact(id, puzzle) {
+    if (!puzzle) return '';
+    var h = puzzle.home || {};
+    if (id === 'sold') return [h.sqft ? count(h.sqft) + ' sq ft' : '', h.year_built ? 'built ' + h.year_built : '', h.town || ''].filter(Boolean).join(' · ');
+    if (id === 'pin-drop') {
+      var price = puzzle.free && puzzle.free.price;
+      return [price ? shortMoney(price) + ' ' + String(h.kind || 'home').toLowerCase() : '', h.year_built ? 'built ' + h.year_built : ''].filter(Boolean).join(' · ');
+    }
+    if (id === 'fair-or-unfair' && Array.isArray(puzzle.homes) && puzzle.homes.length) {
+      var counties = puzzle.homes.map(function (x) { return x.county; }).filter(function (c, i, all) { return c && all.indexOf(c) === i; });
+      return puzzle.homes.length + ' homes · ' + (counties.length === 1 ? counties[0] + ' County' : counties.length + ' counties');
+    }
+    return '';
+  }
+  function loadGamePeeks() {
+    if (state.gamesPromise) return state.gamesPromise;
+    var date = gamesToday();
+    state.gamesPromise = Promise.all(['sold', 'pin-drop', 'fair-or-unfair'].map(function (id) {
+      return fetch('/api/watchdog-games?game=' + id + '&date=' + date, { credentials: 'same-origin' })
+        .then(function (r) { return r.ok ? r.json() : null; })
+        .then(function (puzzle) { return [id, puzzle]; }, function () { return [id, null]; });
+    })).then(function (pairs) {
+      state.games = {};
+      pairs.forEach(function (p) { state.games[p[0]] = p[1]; });
+      return state.games;
+    });
+    return state.gamesPromise;
+  }
+  function hydrateGames() {
+    var card = document.querySelector('#wdh-cards .wdh-games-card');
+    if (!card) return;
+    var date = gamesToday();
+    var played = 0;
+    GAME_IDS.forEach(function (id) { var d = gameDay(id, date); if (d && d.done) played += 1; });
+    var number = Math.round((Date.parse(date + 'T00:00:00Z') - Date.parse(GAME_LAUNCH + 'T00:00:00Z')) / 864e5) + 1;
+    var dayEl = card.querySelector('[data-games-day]');
+    if (dayEl && number > 0) dayEl.textContent = 'Puzzle No. ' + number;
+    var head = card.querySelector('[data-games-head]');
+    if (head && played) head.textContent = played === GAME_IDS.length ? 'All 6 done today. See where you rank.' : "You've played " + played + ' of 6 today';
+    Array.prototype.forEach.call(card.querySelectorAll('[data-game]'), function (tile) {
+      var id = tile.getAttribute('data-game');
+      var day = gameDay(id, date);
+      var status = tile.querySelector('[data-game-status]'), go = tile.querySelector('[data-game-go]'), done = tile.querySelector('[data-game-done]');
+      if (day && day.done) {
+        tile.classList.add('is-done');
+        if (done) done.hidden = false;
+        if (status) status.textContent = gamePoints(id, day) + ' points today';
+        if (go) go.textContent = 'See results';
+      } else if (gameStarted(day)) {
+        if (status) status.textContent = 'In progress';
+        if (go) go.textContent = 'Continue';
+      }
+      var fact = tile.querySelector('[data-game-fact]');
+      var text = state.games ? gameFact(id, state.games[id]) : '';
+      if (fact && text) { fact.textContent = 'Today: ' + text; fact.hidden = false; }
+    });
+    if (!state.games) loadGamePeeks().then(function () { if (state.games) hydrateGames(); });
+  }
+
   function pickTownCard() { return tpl('wdh-tpl-pick'); }
 
   function caughtUp() { return tpl('wdh-tpl-caught'); }
@@ -744,11 +820,11 @@
     if (radiusEmpty) cards.push(emptyRadiusCard());
     cards.push(deadlineCard());
     cards.push(homeCard(feed));
+    cards.push(gamesCard());
     if (permits[1]) cards.push(permitCard(permits[1], feed));
     cards.push(pulseCard(feed));
     if (permits.length > 2) cards.push(permitListCard(permits.slice(2), feed));
     cards.push(rulesCard(feed));
-    cards.push(gamesCard());
     if (feed.sales && feed.sales.available === false && feed.sales.reason === 'withheld') {
       cards.push(tpl('wdh-tpl-withheld'));
     }
@@ -760,6 +836,7 @@
     if (!host) return;
     host.innerHTML = buildCards().join('') + caughtUp();
     applyTab();
+    hydrateGames();
   }
 
   function applyTab() {
@@ -813,6 +890,86 @@
   function markerIcon(kind) {
     return window.L.divIcon({ className: 'wdh-mk-wrap', html: '<span class="wdh-mk wdh-mk-' + kind + '"></span>', iconSize: [18, 18], iconAnchor: [9, 9], popupAnchor: [0, -8] });
   }
+
+  /* Quick facts for one map pin. The same card shows on hover (no button)
+     and in the tap/click popup (with "Open property"). */
+  function pinCard(kind, item, withButton) {
+    var label, title, value, facts, address = '';
+    if (kind === 'sale') {
+      label = 'Home sale · ' + MONTHS[item.month - 1] + ' ' + item.year;
+      title = item.address;
+      value = money(item.price);
+      facts = [item.sqft ? count(item.sqft) + ' sq ft' : '', item.yearBuilt ? 'Built ' + item.yearBuilt : '', item.ppsf ? money(item.ppsf) + '/sq ft' : ''];
+      address = item.address;
+    } else if (kind === 'permit') {
+      label = 'Building permit · ' + dayLabel(item.date, false);
+      title = item.address || blockLot(item.pin);
+      value = item.cost ? 'Est. ' + shortMoney(item.cost) : '';
+      facts = [item.type === 'New' ? 'New ' + (item.useLabel || 'building') : item.type, item.sqft ? count(item.sqft) + ' sq ft' : ''];
+      address = item.address || '';
+    } else {
+      label = 'Your home';
+      title = item.address || '';
+      value = item.assessed ? money(item.assessed) + ' assessed' : '';
+      facts = [item.tax ? money(item.tax) + ' tax last year' : ''];
+    }
+    var dist = kind !== 'home' ? distanceText(item) : '';
+    var img = kind !== 'home' ? aerialUrl(item, true) : '';
+    // content-architecture: dynamic. Every value below comes from this pin's sale, permit or saved-home record.
+    return '<div class="wdh-pin' + (img ? '' : ' is-solo') + '">' +
+      (img ? '<img class="wdh-pin-img" src="' + esc(img) + '" alt="" width="64" height="64" onerror="this.parentNode.classList.add(\'is-solo\');this.remove()">' : '') +
+      '<span class="wdh-pin-main"><span class="wdh-pin-k wdh-pin-k-' + kind + '">' + esc(label) + '</span>' +
+      '<b class="wdh-pin-t">' + esc(title) + '</b>' +
+      (value ? '<span class="wdh-pin-v">' + esc(value) + '</span>' : '') +
+      '<span class="wdh-pin-f">' + esc(facts.filter(Boolean).join(' · ')) + '</span>' +
+      (dist ? '<span class="wdh-pin-f">' + esc(dist) + '</span>' : '') + '</span>' +
+      (withButton && address ? '<button type="button" class="wdh-pop-open" data-open="' + esc(address) + '">Open property</button>' : '') +
+      '</div>';
+  }
+  /* The hover card lives on <body>, not inside the small map, so it is never
+     clipped by the map edge. Pointer devices get it on hover; keyboard users
+     get it on focus. Tapping or clicking a pin still opens the popup. */
+  var canHover = !!(window.matchMedia && window.matchMedia('(hover: hover) and (pointer: fine)').matches);
+  var hoverEl = null;
+  function showHover(marker, html) {
+    var anchor = marker.getElement();
+    if (!anchor || marker.isPopupOpen()) return;
+    if (!hoverEl) {
+      hoverEl = document.createElement('div');
+      hoverEl.className = 'wdh-hover';
+      hoverEl.setAttribute('aria-hidden', 'true');
+      document.body.appendChild(hoverEl);
+    }
+    hoverEl.innerHTML = html;
+    hoverEl.hidden = false;
+    var r = anchor.getBoundingClientRect(), w = hoverEl.offsetWidth, h = hoverEl.offsetHeight;
+    var left = Math.max(8, Math.min(r.left + r.width / 2 - w / 2, window.innerWidth - w - 8));
+    var top = r.top - h - 10, below = top < 72;
+    if (below) top = r.bottom + 10;
+    hoverEl.style.left = Math.round(left) + 'px';
+    hoverEl.style.top = Math.round(top) + 'px';
+    hoverEl.classList.toggle('is-below', below);
+  }
+  function hideHover() { if (hoverEl) hoverEl.hidden = true; }
+  window.addEventListener('scroll', hideHover, { passive: true });
+  function pinMarker(kind, item, latlng, options, name) {
+    var marker = window.L.marker(latlng, options);
+    var hover = pinCard(kind, item, false);
+    marker.bindPopup(pinCard(kind, item, true), { className: 'wdh-popup', maxWidth: 300, minWidth: 240 });
+    marker.on('popupopen', hideHover);
+    if (canHover) {
+      marker.on('mouseover', function () { showHover(marker, hover); });
+      marker.on('mouseout', hideHover);
+    }
+    marker.on('add', function () {
+      var el = marker.getElement();
+      if (!el) return;
+      el.setAttribute('aria-label', name);
+      el.addEventListener('focus', function () { showHover(marker, hover); });
+      el.addEventListener('blur', hideHover);
+    });
+    return marker;
+  }
   function renderMap() {
     var card = $('wdh-map-card'), feed = state.feed, L = window.L;
     if (!card) return;
@@ -831,6 +988,7 @@
     try {
       if (!state.map) {
         state.map = L.map('wdh-map', { scrollWheelZoom: false, zoomControl: true, attributionControl: true });
+        state.map.on('movestart zoomstart', hideHover);
         /* Esri light gray canvas, same tile host as the site's aerial layer
            (the CARTO raster URLs used elsewhere now require an API key). */
         L.tileLayer('https://server.arcgisonline.com/ArcGIS/rest/services/Canvas/World_Light_Gray_Base/MapServer/tile/{z}/{y}/{x}', {
@@ -842,20 +1000,15 @@
       }
       if (state.mapLayer) state.map.removeLayer(state.mapLayer);
       var group = L.featureGroup();
-      function popup(title, line, address) {
-        return '<div class="wdh-pop"><b>' + esc(title) + '</b><span>' + esc(line) + '</span>' + (address ? '<button type="button" class="wdh-pop-open" data-open="' + esc(address) + '">Open property</button>' : '') + '</div>';
-      }
+      /* No marker "title": the hover card replaces the browser's plain tooltip. */
       sales.forEach(function (i) {
-        L.marker([i.lat, i.lon], { icon: markerIcon('sale'), title: i.address, keyboard: true })
-          .bindPopup(popup(i.address, 'Sold for ' + money(i.price) + ' in ' + MONTHS[i.month - 1] + ' ' + i.year, i.address)).addTo(group);
+        pinMarker('sale', i, [i.lat, i.lon], { icon: markerIcon('sale'), keyboard: true }, 'Home sale: ' + i.address).addTo(group);
       });
       permits.forEach(function (i) {
-        L.marker([i.lat, i.lon], { icon: markerIcon('permit'), title: i.address || blockLot(i.pin), keyboard: true })
-          .bindPopup(popup(i.address || blockLot(i.pin), permitHeadline(i).replace(/ (planned )?at .*$/, '') + (i.cost ? ', ' + shortMoney(i.cost) : '') + ', filed ' + dayLabel(i.date, false), i.address)).addTo(group);
+        pinMarker('permit', i, [i.lat, i.lon], { icon: markerIcon('permit'), keyboard: true }, 'Building permit: ' + (i.address || blockLot(i.pin))).addTo(group);
       });
       if (hasHome) {
-        L.marker([state.home.lat, state.home.lon], { icon: markerIcon('home'), title: 'Your home', keyboard: true, zIndexOffset: 500 })
-          .bindPopup(popup('Your home', state.home.address || '', '')).addTo(group);
+        pinMarker('home', state.home, [state.home.lat, state.home.lon], { icon: markerIcon('home'), keyboard: true, zIndexOffset: 500 }, 'Your home').addTo(group);
       }
       group.addTo(state.map);
       state.mapLayer = group;
@@ -899,6 +1052,7 @@
     var host = $('wdh-cards');
     if (host) {
       host.innerHTML = tpl('wdh-tpl-error') + gamesCard();
+      hydrateGames();
     }
   }
 
@@ -959,7 +1113,7 @@
       return;
     }
     if ((el = target.closest('#wdh-radius .wdh-chip'))) { state.radius = el.getAttribute('data-radius') || 'town'; renderRadius(); renderCards(); renderMap(); return; }
-    if (target.closest('#wdh-town-btn') || target.closest('[data-pick-town]')) { openPicker(); return; }
+    if (target.closest('#wdh-town-change') || target.closest('[data-pick-town]')) { openPicker(); return; }
     if (target.closest('[data-wdh-close]')) { closePicker(); return; }
     if ((el = target.closest('[data-town]'))) { chooseTown(el.getAttribute('data-town')); closePicker(); return; }
     if (target.closest('#wdh-picker-locate')) { locateTown(); return; }
@@ -994,7 +1148,7 @@
   }
 
   function boot() {
-    state.lastVisit = store(KEY_LAST);
+    renderWhere();
     renderUpcoming();
     loadHome().then(function (home) {
       state.home = home;
@@ -1008,7 +1162,6 @@
       }) : Promise.resolve();
       return Promise.all([feedLoad, scoreLoad]);
     }).then(function () {
-      store(KEY_LAST, Date.now());
       if (state.home && state.home.pin) {
         store(KEY_HOME + state.home.pin, { assessed: state.home.assessed, tax: state.home.tax, score: state.home.score });
       }
