@@ -96,6 +96,8 @@
     return (d < 0.1 ? 'Under 0.1' : d.toFixed(1)) + ' mi from your home';
   }
   function icon(name) { return '<i class="fas fa-' + name + '" aria-hidden="true"></i>'; }
+  /* Static cards live as <template>s in the page so their copy stays in HTML. */
+  function tpl(id) { var t = document.getElementById(id); return t ? t.innerHTML : ''; }
   function blockLot(pin) {
     var parts = String(pin || '').split('_');
     return parts.length >= 3 ? 'Block ' + parts[1] + ', Lot ' + parts[2] : 'this parcel';
@@ -441,6 +443,7 @@
     host.hidden = false;
     var title = $('wdh-week-title');
     if (title) title.textContent = townName() + ' in 30 seconds';
+    // content-architecture: dynamic. Each sentence is computed from this town's feed data (sales, permits, tax rate, deadlines).
     list.innerHTML = items.map(function (html, i) { return '<li><span class="wdh-num" aria-hidden="true">' + (i + 1) + '</span><span>' + html + '</span></li>'; }).join('');
     var listen = $('wdh-listen');
     if (listen) listen.hidden = !('speechSynthesis' in window && typeof window.SpeechSynthesisUtterance === 'function');
@@ -599,21 +602,8 @@
 
   function homeCard(feed) {
     var home = state.home;
-    if (!state.user) {
-      return '<article class="wdh-card wdh-feed-card wdh-claim" data-tabs="home">' +
-        kicker('house', 'Your home', 'Free with a Watchdog account') +
-        '<h3 class="wdh-h3">Track your home and get a weekly recap</h3>' +
-        '<p class="wdh-body">Save your home to see how its tax compares with the town, get a heads-up when its assessment record changes, and make this feed about your street.</p>' +
-        '<div class="wdh-actions"><button type="button" class="wdh-btn wdh-btn-primary" data-focus-search>' + icon('magnifying-glass') + 'Find my home</button>' +
-        '<button type="button" class="wdh-btn wdh-btn-secondary" data-signin>Sign in</button></div></article>';
-    }
-    if (!home) {
-      return '<article class="wdh-card wdh-feed-card wdh-claim" data-tabs="home">' +
-        kicker('house', 'Your home') +
-        '<h3 class="wdh-h3">Add your home to personalize this feed</h3>' +
-        '<p class="wdh-body">Search your address and save it as your home. Your feed will show distances from your street and how your tax compares with the town.</p>' +
-        '<div class="wdh-actions"><button type="button" class="wdh-btn wdh-btn-primary" data-focus-search>' + icon('magnifying-glass') + 'Find my home</button></div></article>';
-    }
+    if (!state.user) return tpl('wdh-tpl-claim-out');
+    if (!home) return tpl('wdh-tpl-claim-in');
     var medianTax = feed.stats && feed.stats.available && home.code === feed.town.code ? feed.stats.medianTax : null;
     var previous = state.homePrev;
     var current = { assessed: home.assessed, tax: home.tax, score: home.score };
@@ -674,6 +664,7 @@
       if (i !== 0 && i !== last && i % 2 !== 0) return '';
       return '<text class="wdh-c-axis wdh-c-mid" x="' + x(i).toFixed(1) + '" y="' + (H - 6) + '">' + p[0] + '</text>';
     }).join('');
+    // content-architecture: dynamic. Screen-reader summary of the chart, built from the town's tax-rate series.
     var summary = 'General tax rate from ' + pts[0][0] + ' to ' + pts[last][0] + ': from ' + vals[0].toFixed(3) + ' to ' + vals[last].toFixed(3) + (minIdx !== 0 && minIdx !== last ? ', with a low of ' + min.toFixed(3) + ' in ' + pts[minIdx][0] : '') + '.';
     return '<svg class="wdh-chart" viewBox="0 0 ' + W + ' ' + H + '" role="img" aria-label="' + esc(summary) + '">' + grid +
       '<polyline class="wdh-c-line" points="' + line + '"></polyline>' + dots + labels + hits + years + '</svg>';
@@ -726,32 +717,11 @@
       '<p class="wdh-source">' + icon('shield-halved') + '<span><strong>Official source.</strong> ' + esc(feed.town.name) + ', ' + esc(feed.town.county) + ' County.' + (source ? ' <a href="' + esc(source) + '" target="_blank" rel="noopener">View source</a>' : '') + '</span></p></article>';
   }
 
-  function gamesCard() {
-    var games = [['tag', 'Sold!', 'Guess what a real home sold for.', '/games/sold'], ['location-dot', 'Pin Drop', 'Find the home on the map.', '/games/pin-drop'], ['scale-balanced', 'Fair or Unfair', 'Judge a real assessment.', '/games/fair-or-unfair']];
-    return '<article class="wdh-card wdh-feed-card" data-tabs="games">' +
-      kicker('table-cells-large', 'Watchdog Games', 'New puzzles every day') +
-      '<h3 class="wdh-h3">Three quick puzzles built from real New Jersey records</h3>' +
-      '<div class="wdh-games">' + games.map(function (g) {
-        return '<a class="wdh-game" href="' + g[3] + '"><span class="wdh-ico">' + icon(g[0]) + '</span><span class="wdh-game-t">' + g[1] + '</span><span class="wdh-meta">' + g[2] + '</span><span class="wdh-game-go">Play ' + icon('arrow-right') + '</span></a>';
-      }).join('') + '</div>' +
-      '<p class="wdh-meta wdh-note">Signed-in scores count on today\'s leaderboard. <a href="/games">See all games</a></p></article>';
-  }
+  function gamesCard() { return tpl('wdh-tpl-games'); }
 
-  function pickTownCard() {
-    return '<article class="wdh-card wdh-feed-card wdh-pick" data-tabs="all">' +
-      kicker('location-dot', 'Start here') +
-      '<h3 class="wdh-h3">Pick your town to start your feed</h3>' +
-      '<p class="wdh-body">Watchdog will show the latest home sales, building permits, tax-rate changes and town rules for any of New Jersey\'s 564 towns.</p>' +
-      '<div class="wdh-actions"><button type="button" class="wdh-btn wdh-btn-primary" data-pick-town>' + icon('location-dot') + 'Choose my town</button>' +
-      '<button type="button" class="wdh-btn wdh-btn-secondary" data-focus-search>' + icon('magnifying-glass') + 'Search an address</button></div></article>';
-  }
+  function pickTownCard() { return tpl('wdh-tpl-pick'); }
 
-  function caughtUp() {
-    return '<div class="wdh-caught" data-tabs="all">' +
-      '<span class="wdh-caught-ico">' + icon('check') + '</span>' +
-      '<p class="wdh-caught-t">You\'re all caught up.</p>' +
-      '<p class="wdh-meta">The state publishes new sale and permit records about once a month. Check back, or save your home to follow it.</p></div>';
-  }
+  function caughtUp() { return tpl('wdh-tpl-caught'); }
 
   function emptyRadiusCard() {
     return '<div class="wdh-card wdh-feed-card wdh-empty" data-tabs="all"><p class="wdh-body">Nothing within ' + esc(state.radius) + ' ' + plural(Number(state.radius), 'mile', 'miles') + ' of your home in the latest records. Try a wider distance.</p></div>';
@@ -780,7 +750,7 @@
     cards.push(rulesCard(feed));
     cards.push(gamesCard());
     if (feed.sales && feed.sales.available === false && feed.sales.reason === 'withheld') {
-      cards.push('<div class="wdh-card wdh-feed-card wdh-empty" data-tabs="sales"><p class="wdh-body">Sale records are paused for a moment because of heavy traffic from your connection. Refresh in a minute to see them.</p></div>');
+      cards.push(tpl('wdh-tpl-withheld'));
     }
     return cards.filter(Boolean);
   }
@@ -928,9 +898,7 @@
     if (tiles) tiles.hidden = true;
     var host = $('wdh-cards');
     if (host) {
-      host.innerHTML = '<div class="wdh-card wdh-feed-card"><h3 class="wdh-h3">Your town feed did not load</h3>' +
-        '<p class="wdh-body">Something went wrong reaching the public records. You can still search any address above or open a <a href="/towns/">town report</a>.</p>' +
-        '<div class="wdh-actions"><button type="button" class="wdh-btn wdh-btn-secondary" data-retry>Try again</button></div></div>' + gamesCard();
+      host.innerHTML = tpl('wdh-tpl-error') + gamesCard();
     }
   }
 
