@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" data-wd-home-feed="1">
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -29,7 +29,7 @@
 
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://images.unsplash.com">
-  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;600;700&family=Plus+Jakarta+Sans:wght@500;600;700;800&family=Source+Sans+3:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;600;700&family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=Source+Sans+3:wght@400;500;600;700;800&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.9.4/leaflet.min.css">
   <link rel="stylesheet" href="/styles.css">
@@ -41,16 +41,9 @@
   <link rel="stylesheet" href="/property/css/shared.css">
   <link rel="stylesheet" href="/property/css/lookup.css">
 
-  <!-- NJW override: drop the lift+shadow hover on grid cards, keep the rest (border/icon states) as-is -->
-  <style>
-    .lp-tool:hover,
-    .lp-path:hover {
-      transform: none;
-      box-shadow: none;
-    }
-  </style>
   <link rel="stylesheet" href="/property/css/public-mobile-nav.css">
   <link rel="stylesheet" href="/property/css/landing-review.css?v=20260928a">
+  <link rel="stylesheet" href="/property/css/home-feed.css?v=20261002a">
 
 <script type="application/ld+json">
 {
@@ -106,7 +99,7 @@
 }
 </script>
 </head>
-<body>
+<body data-wd-home-feed="1">
 <!-- SITE NAV -->
 <header class="wd-nav" id="wd-nav">
   <div class="wd-nav-in">
@@ -204,26 +197,26 @@
   </div>
 </div>
 
-<div class="pl-hero">
+<!-- ============================================================
+     HERO: greeting + the same property search that opens the overlay
+     ============================================================ -->
+<div class="pl-hero wdh-hero">
   <div class="pl-hero-bg"></div>
   <div class="pl-hero-wash"></div>
-  <div class="pl-hero-inner">
-    <h1>Check Property Data on <br><span class="pl-type" id="pl-type">any NJ home</span></h1>
-    
+  <div class="pl-hero-inner wdh-hero-inner">
+    <p class="wdh-hero-kicker" id="wdh-hero-kicker">Watchdog for New Jersey homeowners</p>
+    <h1 class="wdh-hero-title" id="wdh-hero-title">What's happening around your home</h1>
+    <p class="wdh-hero-sub" id="wdh-hero-sub">Home sales, building permits, tax rates and town rules for every New Jersey town, from public records.</p>
+
     <div class="pl-search-card">
       <div class="pl-search-row">
         <div class="pl-input-wrap">
-          <!-- Left: Geolocation Icon Button -->
           <button class="pl-geo" id="pl-geo" onclick="plLocate()" title="Use my current location" aria-label="Use my current location">
-            <i class="fas fa-paper-plane"></i> <!-- Changed to paper-plane to match screenshot arrow icon -->
+            <i class="fas fa-paper-plane"></i>
           </button>
-
-          <!-- Middle: Text Input -->
-          <input class="pl-input" id="pl-addr" type="text" autocomplete="off"
+          <input class="pl-input" id="pl-addr" type="text" autocomplete="off" aria-label="Search a New Jersey address"
                  placeholder="123 Main Street, Williamstown, NJ 08094"
                  onkeydown="if(event.key==='Enter')plLookup()">
-
-          <!-- Right: Search Icon Button -->
           <button class="pl-search-btn" id="pl-btn" onclick="plLookup()" title="Search" aria-label="Search">
             <i class="fas fa-magnifying-glass"></i>
           </button>
@@ -231,317 +224,191 @@
       </div>
       <div class="pl-inline-status" id="pl-inline" aria-live="polite"></div>
     </div>
-  </div>
-</div>
 
-<section class="lp-proof-strip" aria-label="New Jersey property data coverage and sources">
-  <div class="lp-proof-inner">
-    <div class="lp-proof-stat"><strong>564</strong><span>NJ municipalities</span></div>
-    <div class="lp-proof-stat"><strong>131,244</strong><span>SR1A verified sales on file</span></div>
-    <div class="lp-proof-stat"><strong>55.2%</strong><span>Statewide median assessment ratio</span></div>
-    <div class="lp-proof-source"><span>Built from New Jersey public records, including Division of Taxation sales and equalization data.</span><a href="/property/data-methodology">See the methodology <i class="fas fa-arrow-right"></i></a></div>
-  </div>
-</section>
-
-<!-- TOOLS GRID -->
-<section class="section" style="padding-top:50px;padding-bottom:18px;">
-  <div class="section-inner">
-    <div class="lp-tools">
-
-      <a class="lp-tool feat" href="#pl-addr" onclick="document.getElementById('pl-addr').focus();return false;">
-        <div class="lp-photo" style="background-image:url('https://images.unsplash.com/photo-1772325652571-f1406f80ee01?fm=jpg&q=74&w=1400&auto=format&fit=crop')">
-          <span class="lp-tag gold">Most popular</span>
-          <div class="lp-over">
-            <h3>Look up any address</h3>
-            <p>Assessment, tax bill, block and lot, real lot lines, and our read on whether that assessment holds up.</p>
-            <span class="lp-go light">Search a property <i class="fas fa-arrow-right"></i></span>
-          </div>
-        </div>
-      </a>
-
-      <a class="lp-tool" href="/anchor-estimator.html">
-        <div class="lp-photo short" style="background-image:url('https://images.unsplash.com/photo-1758691031749-607d43c14f63?fm=jpg&q=74&w=900&auto=format&fit=crop')">
-          <span class="lp-tag green right">Up to $6,500</span>
-        </div>
-        <div class="lp-body">
-          <h3>ANCHOR &amp; Stay NJ estimator</h3>
-          <p>$1,500 for homeowners, $700 for renters, $6,500 for seniors. Most who qualify never claim it.</p>
-          <span class="lp-go">Check eligibility <i class="fas fa-arrow-right"></i></span>
-        </div>
-      </a>
-
-      <a class="lp-tool" href="#pl-addr" onclick="document.getElementById('pl-addr').focus();return false;">
-        <div class="lp-photo short audit" style="background-image:url('https://images.unsplash.com/photo-1758304480340-cb2c43aafd4f?fm=jpg&q=74&w=900&auto=format&fit=crop&sat=-60')">
-          <span class="lp-tag">Chapter 123</span>
-          <i class="fas fa-scale-unbalanced-flip lp-ghost"></i>
-        </div>
-        <div class="lp-body">
-          <h3>Appeal screener</h3>
-          <p>We audit your assessment against comparable homes and your own sale history, the way a county board decides it.</p>
-          <span class="lp-go">See if you have a case <i class="fas fa-arrow-right"></i></span>
-        </div>
-      </a>
-
-      <a class="lp-tool" href="/property/fairness">
-        <div class="lp-photo short audit"><i class="fas fa-ranking-star lp-ghost"></i></div>
-        <div class="lp-body"><h3>NJ Fairness Index</h3><p>See how consistently every New Jersey municipality assesses its residential properties.</p>
-          <span class="lp-go">Explore statewide rankings <i class="fas fa-arrow-right"></i></span></div>
-      </a>
-
-      <a class="lp-tool" href="/property/town-compare">
-        <div class="lp-photo short"><i class="fas fa-code-compare lp-ghost"></i></div>
-        <div class="lp-body"><h3>Compare municipalities</h3><p>Put fairness, assessment currency and tax-rate direction side by side for up to four towns.</p>
-          <span class="lp-go">Compare towns <i class="fas fa-arrow-right"></i></span></div>
-      </a>
-
-      <a class="lp-tool agent" href="https://johnscafide.com" target="_blank" rel="noopener">
-        <div class="lp-photo short agentbg">
-          <span class="lp-tag gold">Thinking of moving?</span>
-          <div class="lp-faces">
-            <img src="/johnprofile.jpg" alt="John Scafide, Licensed NJ Real Estate Agent" loading="lazy" width="74" height="74">
-            <img src="/heatherheadshot.png" alt="Heather Scafide, Licensed NJ Real Estate Agent" loading="lazy" width="74" height="74">
-          </div>
-        </div>
-        <div class="lp-body">
-          <h3>Your local real estate agents</h3>
-          <p class="lp-agent-role">South Jersey real estate</p>
-          <p>Most agents can tell you what your home is worth. We also read the assessment and bring more than 15 years of New Jersey tax-return preparation experience to the conversation.</p>
-          <span class="lp-go">Work with us <i class="fas fa-arrow-right"></i></span>
-          <p class="lp-agent-lic">John Scafide, NJ License #2079591 &middot; Heather Scafide, NJ License #2192318 &middot; The McKenty Team at Opus Elite Real Estate</p>
-        </div>
-      </a>
-
-      <a class="lp-tool span3" href="#pl-addr" onclick="document.getElementById('pl-addr').focus();return false;">
-        <div class="lp-photo band" style="background-image:url('https://images.unsplash.com/photo-1758523670969-dd1b1254062d?fm=jpg&q=74&w=1600&auto=format&fit=crop')">
-          <span class="lp-tag right">Sellers</span>
-          <div class="lp-over band-over">
-            <h3>Net proceeds &amp; trade-up</h3>
-            <p>What you walk away with after commission and the NJ transfer fee, and what the tax bill looks like in the town you are moving to.</p>
-            <span class="lp-go light">Run the numbers <i class="fas fa-arrow-right"></i></span>
-          </div>
-        </div>
-      </a>
-
-      <a class="lp-tool" href="/property/dashboard">
-        <div class="lp-photo short" style="background-image:url('https://images.unsplash.com/photo-1758304480340-cb2c43aafd4f?fm=jpg&q=74&w=900&auto=format&fit=crop')">
-          <!-- <span class="lp-tag green">Free account</span> -->
-        </div>
-        <div class="lp-body">
-          <h3>Track your home</h3>
-          <p>Claim your property and watch the assessment year over year. We flag it the moment it drifts out of line.</p>
-          <span class="lp-go">Open my dashboard <i class="fas fa-arrow-right"></i></span>
-        </div>
-      </a>
-
-
-      <a class="lp-tool" href="/property-tax-appeal.html">
-        <div class="lp-photo short" style="background-image:url('https://images.unsplash.com/photo-1758691031749-607d43c14f63?fm=jpg&q=74&w=900&auto=format&fit=crop&sat=-45')">
-          <!-- <span class="lp-tag">Guide</span> -->
-        </div>
-        <div class="lp-body">
-          <h3>How NJ appeals work</h3>
-          <p>Deadlines, the Chapter 123 test, what evidence a county board actually wants, and when not to bother filing.</p>
-          <span class="lp-go">Read the guide <i class="fas fa-arrow-right"></i></span>
-        </div>
-      </a>
-
-      <a class="lp-tool" href="#pl-addr" onclick="document.getElementById('pl-addr').focus();return false;">
-        <div class="lp-photo short" style="background-image:url('https://images.unsplash.com/photo-1772325652571-f1406f80ee01?fm=jpg&q=74&w=900&auto=format&fit=crop&sat=-25')">
-          <!-- <span class="lp-tag">168 towns</span> -->
-        </div>
-        <div class="lp-body">
-          <h3>Compare your town</h3>
-          <p>Effective tax rate, equalization ratio, and median assessment for every municipality in South Jersey, side by side.</p>
-          <span class="lp-go">Compare towns <i class="fas fa-arrow-right"></i></span>
-        </div>
-      </a>
+    <div class="wdh-town-bar">
+      <span class="wdh-town-label" id="wdh-town-label">Pick your town to see what's happening there.</span>
+      <button type="button" class="wdh-town-btn" id="wdh-town-btn" aria-haspopup="dialog" aria-controls="wdh-picker"><i class="fas fa-location-dot" aria-hidden="true"></i><span id="wdh-town-btn-text">Choose a town</span></button>
     </div>
   </div>
-</section>
-
+</div>
 
 <!-- NEIGHBORHOOD VIEW -->
 <div class="pl-hood" id="pl-hood"></div>
 
-<!-- BROKERAGE ATTRIBUTION -->
-<section class="section" style="padding-top:30px;padding-bottom:6px;">
-  <div class="section-inner">
-    <div class="pl-brokerband">
-      <img src="/opuslogo.jpg" alt="Opus Elite Real Estate" onerror="this.style.display='none'">
-      <div class="pl-brokerband-txt">
-        <p>This site provides New Jersey property tax information. If a property shown here is for sale and listed by
-        a licensed real estate agent, nothing on this page is intended as a direct solicitation of business.
-        For full sales information on this and other properties, visit
-        <a href="https://johnscafide.opuselitesj.com/index.php?advanced=1" target="_blank" rel="noopener">opuselitesj.com</a>.</p>
-      </div>
+<!-- ============================================================
+     HOME FEED (filled by /property/js/home-feed.js from /api/watchdog-home-feed)
+     ============================================================ -->
+<main class="wdh" id="wdh" data-state="loading" aria-labelledby="wdh-feed-title">
+  <div class="wdh-shell">
+    <div class="wdh-main">
+
+      <section class="wdh-tiles" id="wdh-tiles" aria-label="This month around your town">
+        <div class="wdh-tile wdh-skel" aria-hidden="true"></div>
+        <div class="wdh-tile wdh-skel" aria-hidden="true"></div>
+        <div class="wdh-tile wdh-skel" aria-hidden="true"></div>
+        <div class="wdh-tile wdh-skel" aria-hidden="true"></div>
+      </section>
+
+      <section class="wdh-card wdh-week" id="wdh-week" aria-labelledby="wdh-week-title" hidden>
+        <div class="wdh-week-head">
+          <div>
+            <h2 id="wdh-week-title" class="wdh-h2s">Your town in 30 seconds</h2>
+            <p class="wdh-meta" id="wdh-week-meta">Built from the public records in your feed.</p>
+          </div>
+          <button type="button" class="wdh-btn wdh-btn-secondary" id="wdh-listen" hidden><i class="fas fa-volume-high" aria-hidden="true"></i><span>Listen</span></button>
+        </div>
+        <ol class="wdh-week-list" id="wdh-week-list"></ol>
+      </section>
+
+      <section class="wdh-feed" aria-labelledby="wdh-feed-title">
+        <div class="wdh-feed-head">
+          <h2 id="wdh-feed-title" class="wdh-h2">Your feed</h2>
+          <p class="wdh-meta">Each card shows when it happened and when the public record came out.</p>
+        </div>
+        <div class="wdh-tabs" id="wdh-tabs" role="group" aria-label="Filter your feed">
+          <button type="button" class="wdh-tab is-on" data-tab="all" aria-pressed="true">For you</button>
+          <button type="button" class="wdh-tab" data-tab="sales" aria-pressed="false">Sales</button>
+          <button type="button" class="wdh-tab" data-tab="permits" aria-pressed="false">Permits</button>
+          <button type="button" class="wdh-tab" data-tab="town" aria-pressed="false">Town</button>
+          <button type="button" class="wdh-tab" data-tab="home" aria-pressed="false">My home</button>
+          <button type="button" class="wdh-tab" data-tab="games" aria-pressed="false">Games</button>
+        </div>
+        <div class="wdh-cards" id="wdh-cards">
+          <div class="wdh-card wdh-skel wdh-skel-card" aria-hidden="true"></div>
+          <div class="wdh-card wdh-skel wdh-skel-card" aria-hidden="true"></div>
+        </div>
+        <noscript>
+          <div class="wdh-card">
+            <h3 class="wdh-h3">Turn on JavaScript to see your town feed</h3>
+            <p class="wdh-body">You can still browse <a href="/towns/">every New Jersey town report</a> or search any address above.</p>
+          </div>
+        </noscript>
+      </section>
     </div>
+
+    <aside class="wdh-rail" aria-label="Around your town">
+      <section class="wdh-card wdh-rail-card" id="wdh-map-card" aria-labelledby="wdh-map-title" hidden>
+        <div class="wdh-rail-head">
+          <h2 id="wdh-map-title" class="wdh-h2s">Around your town</h2>
+          <span class="wdh-meta" id="wdh-map-count"></span>
+        </div>
+        <div class="wdh-seg" id="wdh-radius" role="group" aria-label="Distance from your home" hidden>
+          <button type="button" class="wdh-chip" data-radius="1" aria-pressed="false">1 mi</button>
+          <button type="button" class="wdh-chip" data-radius="2" aria-pressed="false">2 mi</button>
+          <button type="button" class="wdh-chip is-on" data-radius="town" aria-pressed="true">Town</button>
+        </div>
+        <div class="wdh-map" id="wdh-map" role="region" aria-label="Map of recent sales and permits"></div>
+        <ul class="wdh-legend" id="wdh-legend">
+          <li><span class="wdh-mk wdh-mk-sale" aria-hidden="true"></span>Home sales<b id="wdh-legend-sales">0</b></li>
+          <li><span class="wdh-mk wdh-mk-permit" aria-hidden="true"></span>Building permits<b id="wdh-legend-permits">0</b></li>
+          <li id="wdh-legend-home" hidden><span class="wdh-mk wdh-mk-home" aria-hidden="true"></span>Your home</li>
+        </ul>
+      </section>
+
+      <section class="wdh-card wdh-rail-card" aria-labelledby="wdh-up-title">
+        <h2 id="wdh-up-title" class="wdh-h2s">Coming up</h2>
+        <ul class="wdh-up" id="wdh-upcoming">
+          <li><span class="wdh-date"><span class="wdh-date-m">NOV</span><span class="wdh-date-d">1</span></span><span><span class="wdh-up-t">Q4 property tax due</span><span class="wdh-meta">Many towns allow a 10-day grace period.</span></span></li>
+          <li><span class="wdh-date"><span class="wdh-date-m">FEB</span><span class="wdh-date-d">1</span></span><span><span class="wdh-up-t">Assessment notices arrive</span><span class="wdh-meta">Check yours for errors.</span></span></li>
+          <li><span class="wdh-date"><span class="wdh-date-m">APR</span><span class="wdh-date-d">1</span></span><span><span class="wdh-up-t">Tax appeal deadline</span><span class="wdh-meta">May 1 in towns with a revaluation.</span></span></li>
+        </ul>
+      </section>
+
+      <section class="wdh-card wdh-rail-card" id="wdh-glance-card" aria-labelledby="wdh-glance-title" hidden>
+        <p class="wdh-kicker wdh-kicker-muted">Your town</p>
+        <h2 id="wdh-glance-title" class="wdh-h2s">Your town</h2>
+        <p class="wdh-meta" id="wdh-glance-county"></p>
+        <dl class="wdh-glance" id="wdh-glance"></dl>
+        <a class="wdh-btn wdh-btn-secondary wdh-btn-block" id="wdh-glance-link" href="/towns/">Open the town report</a>
+      </section>
+
+      <section class="wdh-card wdh-rail-card" aria-labelledby="wdh-news-title">
+        <h2 id="wdh-news-title" class="wdh-h2s">From Watchdog</h2>
+        <div class="wdh-news">
+          <a class="wdh-article" href="/property/insights/south-jersey-housing-market-summer-2026.html"><span class="wdh-kicker wdh-kicker-muted">Housing market</span><span class="wdh-article-t">South Jersey home prices are still rising, but the market is starting to look different</span></a>
+          <a class="wdh-article" href="/property/insights/anchor-benefit-confirmation-letter-2026.html"><span class="wdh-kicker wdh-kicker-muted">2025 ANCHOR</span><span class="wdh-article-t">Got an ANCHOR confirmation letter? Here is what it means</span></a>
+          <a class="wdh-article" href="/property/insights/2026-revaluation-reassessment-list.html"><span class="wdh-kicker wdh-kicker-muted">2026 assessments</span><span class="wdh-article-t">140 New Jersey towns are on the 2026 revaluation or reassessment list</span></a>
+        </div>
+        <a class="wdh-link" href="/property/insights/">All Watchdog Insights <i class="fas fa-arrow-right" aria-hidden="true"></i></a>
+      </section>
+
+      <section class="wdh-card wdh-rail-card wdh-pros" aria-labelledby="wdh-pros-title">
+        <p class="wdh-kicker wdh-kicker-muted">Thinking of moving?</p>
+        <h2 id="wdh-pros-title" class="wdh-h2s">Your local real estate agents</h2>
+        <div class="wdh-pros-faces">
+          <img src="/johnprofile.jpg" alt="John Scafide, Licensed NJ Real Estate Agent" loading="lazy" width="56" height="56">
+          <img src="/heatherheadshot.png" alt="Heather Scafide, Licensed NJ Real Estate Agent" loading="lazy" width="56" height="56">
+        </div>
+        <p class="wdh-meta wdh-pros-copy">Most agents can tell you what your home is worth. We also read the assessment and bring more than 15 years of New Jersey tax-return preparation experience to the conversation.</p>
+        <a class="wdh-btn wdh-btn-secondary wdh-btn-block" href="https://johnscafide.com" target="_blank" rel="noopener">Work with us</a>
+        <p class="wdh-fine">John Scafide, NJ License #2079591 &middot; Heather Scafide, NJ License #2192318 &middot; The McKenty Team at Opus Elite Real Estate</p>
+      </section>
+
+      <section class="wdh-card wdh-rail-card wdh-ad" aria-label="Advertisement">
+        <a href="https://johnvarano.com/" target="_blank" rel="noopener" class="wdh-ad-link">
+          <span class="wdh-kicker wdh-kicker-muted">Advertisement</span>
+          <span class="wdh-ad-row">
+            <img src="/johnvarano.jpg" alt="John Varano, Branch Manager, Greentree Mortgage an HMA Company" loading="lazy" width="56" height="56" onerror="this.style.display='none'">
+            <span class="wdh-ad-eyebrow">Greentree Mortgage an HMA Company &middot; John Varano, Branch Manager</span>
+          </span>
+          <span class="wdh-ad-headline">Know the payment before you fall in love with the house.</span>
+          <span class="wdh-meta">Taxes are only half of what you pay every month. John Varano, Branch Manager at Greentree Mortgage, an HMA Company, will tell you what the real number looks like, including escrow, before you make a move.</span>
+          <span class="wdh-link">Talk financing <i class="fas fa-arrow-right" aria-hidden="true"></i></span>
+        </a>
+        <p class="wdh-fine">Advertisement. Greentree Mortgage, an HMA Company, is a separate company and is not affiliated with Opus Elite Real Estate. You are never required to use any particular lender, and you are free to shop for a mortgage. Nothing here is a loan commitment, an offer of credit, or a guarantee of terms.</p>
+      </section>
+    </aside>
+  </div>
+</main>
+
+<!-- TOWN PICKER -->
+<div class="wdh-picker" id="wdh-picker" role="dialog" aria-modal="true" aria-labelledby="wdh-picker-title" hidden>
+  <div class="wdh-picker-backdrop" data-wdh-close></div>
+  <div class="wdh-picker-panel">
+    <div class="wdh-picker-head">
+      <h2 id="wdh-picker-title" class="wdh-h2s">Choose your town</h2>
+      <button type="button" class="wdh-icon-btn" data-wdh-close aria-label="Close town picker"><i class="fas fa-xmark" aria-hidden="true"></i></button>
+    </div>
+    <label class="wdh-label" for="wdh-picker-q">Search all 564 New Jersey towns</label>
+    <input class="wdh-input" id="wdh-picker-q" type="search" autocomplete="off" placeholder="Type a town name" aria-controls="wdh-picker-list">
+    <ul class="wdh-picker-list" id="wdh-picker-list" aria-label="Matching towns"></ul>
+    <button type="button" class="wdh-btn wdh-btn-ghost" id="wdh-picker-locate"><i class="fas fa-location-crosshairs" aria-hidden="true"></i>Use my location</button>
+  </div>
+</div>
+
+<!-- EXPLORE NEW JERSEY: crawlable county directory -->
+<section class="wdh-explore" aria-labelledby="wdh-explore-title">
+  <div class="wdh-explore-in">
+    <p class="wdh-kicker">Explore New Jersey</p>
+    <h2 id="wdh-explore-title" class="wdh-h2">Property information, town by town</h2>
+    <p class="wdh-body">Start with your county, then open the local property-tax report for any of New Jersey's 564 municipalities.</p>
+    <ul class="wdh-counties">
+      <li><a href="/towns/atlantic/">Atlantic County</a></li>
+      <li><a href="/towns/bergen/">Bergen County</a></li>
+      <li><a href="/towns/burlington/">Burlington County</a></li>
+      <li><a href="/towns/camden/">Camden County</a></li>
+      <li><a href="/towns/cape-may/">Cape May County</a></li>
+      <li><a href="/towns/cumberland/">Cumberland County</a></li>
+      <li><a href="/towns/essex/">Essex County</a></li>
+      <li><a href="/towns/gloucester/">Gloucester County</a></li>
+      <li><a href="/towns/hudson/">Hudson County</a></li>
+      <li><a href="/towns/hunterdon/">Hunterdon County</a></li>
+      <li><a href="/towns/mercer/">Mercer County</a></li>
+      <li><a href="/towns/middlesex/">Middlesex County</a></li>
+      <li><a href="/towns/monmouth/">Monmouth County</a></li>
+      <li><a href="/towns/morris/">Morris County</a></li>
+      <li><a href="/towns/ocean/">Ocean County</a></li>
+      <li><a href="/towns/passaic/">Passaic County</a></li>
+      <li><a href="/towns/salem/">Salem County</a></li>
+      <li><a href="/towns/somerset/">Somerset County</a></li>
+      <li><a href="/towns/sussex/">Sussex County</a></li>
+      <li><a href="/towns/union/">Union County</a></li>
+      <li><a href="/towns/warren/">Warren County</a></li>
+    </ul>
+    <p class="wdh-explore-more"><a class="wdh-link" href="/fairness">NJ Fairness Index</a> <a class="wdh-link" href="/town-compare">Compare towns</a> <a class="wdh-link" href="/games">Watchdog Games</a> <a class="wdh-link" href="/towns/">All town reports</a></p>
   </div>
 </section>
 
- 
-<!-- WHO IT HELPS -->
-<section class="section" style="padding-top:46px;">
-  <div class="section-inner">
-    <h2 class="lp-h2">Where do you fit?</h2>
-    <div class="lp-paths">
-      <a class="lp-path" href="#pl-addr" onclick="document.getElementById('pl-addr').focus();return false;">
-        <div class="lp-photo tall" style="background-image:url('https://images.unsplash.com/photo-1772325652571-f1406f80ee01?fm=jpg&q=74&w=900&auto=format&fit=crop')">
-          <div class="lp-over">
-            <h3>I think I'm overpaying</h3>
-            <p>Test your assessment against comparable homes and what you paid. </p>
-            <span class="lp-go light">Check my assessment <i class="fas fa-arrow-right"></i></span>
-          </div>
-        </div>
-      </a>
-      <a class="lp-path" href="#pl-addr" onclick="document.getElementById('pl-addr').focus();return false;">
-        <div class="lp-photo tall" style="background-image:url('https://images.unsplash.com/photo-1758523670991-ee93bc48d81d?fm=jpg&q=74&w=900&auto=format&fit=crop')">
-          <div class="lp-over">
-            <h3>I might sell</h3>
-            <span class="lp-go light">Run my numbers <i class="fas fa-arrow-right"></i></span>
-          </div>
-        </div>
-      </a>
-      <a class="lp-path" href="/anchor-estimator.html">
-        <div class="lp-photo tall" style="background-image:url('https://images.unsplash.com/photo-1771013015913-427262101338?fm=jpg&q=74&w=900&auto=format&fit=crop')">
-          <span class="lp-tag green">65+</span>
-          <div class="lp-over">
-            <h3>I'm 65 or older</h3>
-            <p>Stay NJ can cover up to half your bill, to $6,500, and it stacks with ANCHOR and the Senior Freeze.</p>
-            <span class="lp-go light">See senior benefits <i class="fas fa-arrow-right"></i></span>
-          </div>
-        </div>
-      </a>
-    </div>
-  </div>
-</section>
-
-<!-- HOW IT WORKS -->
-<section class="section section-alt">
-  <div class="section-inner">
-    <h2 class="lp-h2">How it works</h2>
-    <div class="lp-steps">
-      <div class="lp-step">
-        <div class="lp-step-n">1</div>
-        <h3>Type an address</h3>
-        <p>Any property in New Jersey. Yours, your parents', the one down the street. No account needed to look.</p>
-      </div>
-      <div class="lp-step">
-        <div class="lp-step-n">2</div>
-        <h3>See the real record</h3>
-        <p>Assessment, tax bill, lot lines, sale history, and how it compares to the homes around it. Straight from state records.</p>
-      </div>
-      <div class="lp-step">
-        <div class="lp-step-n">3</div>
-        <h3>Find out if you have a case</h3>
-        <p>We apply the same Chapter 123 test a county board uses. If it's worth appealing, we'll show you what it's worth in dollars.</p>
-      </div>
-    </div>
-  </div>
-</section>
-
-<!-- HOW WE VALUE -->
-<section class="section section-alt">
-  <div class="section-inner">
-<h2 class="lp-h2">How we value your home</h2>
-
-    <div class="hv-grid">
-
-      <div class="hv-card">
-        <div class="hv-visual hv-v1">
-          <div class="hv-bar-row"><span class="hv-bar-lbl">Market value</span><div class="hv-bar"><i style="width:100%"></i></div><b>$385k</b></div>
-          <div class="hv-bar-row"><span class="hv-bar-lbl">Assessed</span><div class="hv-bar"><i class="alt" style="width:58%"></i></div><b>$223k</b></div>
-          <div class="hv-ratio">58% ratio</div>
-        </div>
-        <div class="hv-body">
-          <h3>Equalized Assessments</h3>
-          <p>Since most NJ towns don't assess at full market value, we apply the state’s equalization ratio to reveal your home's true implied value.</p>
-        </div>
-      </div>
-
-      <div class="hv-card">
-        <div class="hv-visual hv-v2">
-          <div class="hv-sales">
-            <div class="hv-sale"><span>328 Elm St</span><b>$405,000</b></div>
-            <div class="hv-sale"><span>105 Rutgers Dr</span><b>$397,900</b></div>
-            <div class="hv-sale muted"><span>84 Pine Rd</span><b>$1 &nbsp;<i>family transfer</i></b></div>
-          </div>
-          <!-- <div class="hv-strike">filtered out</div> -->
-        </div>
-        <div class="hv-body">
-          <h3>Verified Real Sales</h3>
-          <p>We use actual recorded deeds, strictly filtering out distorted data like dollar deeds, estate transfers, and distressed sales.</p>
-        </div>
-      </div>
-
-      <div class="hv-card">
-        <div class="hv-visual hv-v3">
-          <svg viewBox="0 0 200 96" role="img" aria-label="Prices carried forward to today">
-            <defs><linearGradient id="hvg" x1="0" y1="0" x2="0" y2="1">
-              <stop offset="0%" stop-color="#b8972a" stop-opacity=".38"/><stop offset="100%" stop-color="#b8972a" stop-opacity="0"/>
-            </linearGradient></defs>
-            <path d="M10 78 L60 66 L110 48 L160 26 L190 18 L190 88 L10 88 Z" fill="url(#hvg)"/>
-            <path d="M10 78 L60 66 L110 48 L160 26 L190 18" fill="none" stroke="#b8972a" stroke-width="2.6" stroke-linecap="round"/>
-            <circle cx="190" cy="18" r="5" fill="#0e2248" stroke="#fff" stroke-width="2.5"/>
-            <text x="10" y="94" font-size="8.5" fill="#8a93a6">2022</text>
-            <text x="176" y="94" font-size="8.5" fill="#8a93a6">now</text>
-          </svg>
-          <div class="hv-caption">Every sale carried forward to today</div>
-        </div>
-        <div class="hv-body">
-          <h3>Time-Adjusted Accuracy</h3>
-          <p>A sale from 18 months ago isn't relevant today. We adjust past sales to reflect your town's current market conditions.</p>
-        </div>
-      </div>
-
-      <div class="hv-card">
-        <div class="hv-visual hv-v4">
-          <div class="hv-scale">
-            <div class="hv-scale-side"><span>Your assessment</span><b class="over">$240k</b></div>
-            <div class="hv-scale-mid"><i class="fas fa-scale-unbalanced-flip"></i></div>
-            <div class="hv-scale-side"><span>Neighbors</span><b>$170k</b></div>
-          </div>
-          <div class="hv-flag">Chapter 123 case</div>
-        </div>
-        <div class="hv-body">
-          <h3>Meaningful Comparisons</h3>
-          <p>We build your case using what matters to the county board: genuinely comparable local sales and your neighbors' assessments.</p>
-        </div>
-      </div>
-
-      <div class="hv-card">
-        <div class="hv-visual hv-v5">
-          <div class="hv-conf"><span class="dot hi"></span>High<em>40+ local sales, tight spread</em></div>
-          <div class="hv-conf"><span class="dot md"></span>Medium<em>enough to work with</em></div>
-          <div class="hv-conf"><span class="dot lo"></span>Low<em>thin data, treat as rough</em></div>
-          <div class="hv-conf none"><span class="dot"></span>No number<em>we decline rather than guess</em></div>
-        </div>
-        <div class="hv-body">
-          <h3>Honest Confidence Ratings</h3>
-          <p>Every result includes a confidence score based on available data. If there isn't enough local sales history, we tell you instead of guessing.</p>
-        </div>
-      </div>
-
-      <div class="hv-card hv-card-warn ">
-        <div class="hv-visual hv-v6">
-          <div class="hv-blind"><i class="fas fa-kitchen-set"></i><span>Your kitchen</span></div>
-          <div class="hv-blind"><i class="fas fa-house-chimney-crack"></i><span>Roof condition</span></div>
-          <div class="hv-blind"><i class="fas fa-stairs"></i><span>Finished basement</span></div>
-          <div class="hv-blind"><i class="fas fa-paint-roller"></i><span>Any renovation</span></div>
-        </div>
-        <div class="hv-body">
-          <h3>Smart Screening</h3>
-          <p>Public records stop at the front door. Because we cannot see interior conditions or recent upgrades, this is designed as a powerful screening tool rather than a formal appraisal.</p>
-        </div>
-      </div>
-
-    </div>
-
-    <div class="info-box" style="margin-top:34px; border:none;">
-      <h3><i class="fas fa-lightbulb"></i> The number that decides an appeal</h3>
-      <p>New Jersey's Chapter 123 rule sets a permitted range around the common level ratio, and your assessment either falls inside that range or it doesn't. Watchdog shows you the published ratio, the sales evidence behind it, and where you land. Before you file, double check the current numbers against the county's official instructions, and if the case is close, get a second set of eyes from someone who does this for a living.</p>
-    </div>
-  </div>
-</section>
 
 <!-- FAQ TEASER -->
 <section class="landing-faq" aria-labelledby="landing-faq-title">
@@ -591,72 +458,18 @@
 .faq-teaser-btn i{font-size:12px;}
 </style>
 
-
-<!-- INSIGHTS -->
-<section class="section" style="padding-top:52px;">
+<!-- BROKERAGE ATTRIBUTION -->
+<section class="section" style="padding-top:30px;padding-bottom:6px;">
   <div class="section-inner">
-    <h2 class="lp-h2">Latest Watchdog insights</h2>
-    <div class="ins-grid">
-
-      <a class="ins-lead" href="/property/insights/south-jersey-housing-market-summer-2026.html" aria-label="Read the South Jersey housing market Insight">
-        <div class="ins-photo" style="background-image:url('https://images.unsplash.com/photo-1560518883-ce09059eeffa?auto=format&fit=crop&w=1800&q=82')"></div>
-        <span class="ins-kicker">Housing Market</span>
-        <h3>South Jersey home prices are still rising, but the market is starting to look different</h3>
-        <p>Prices remain elevated, but the pace, inventory and negotiating environment are changing. See the South Jersey signals homeowners, buyers and sellers should be watching.</p>
-        <em>Read Insight</em>
-      </a>
-
-      <div class="ins-list">
-        <a href="/property/insights/anchor-benefit-confirmation-letter-2026.html">
-          <div class="ins-thumb" style="background-image:url('https://images.unsplash.com/photo-1716065145743-62b57bf0d3b8?auto=format&fit=crop&w=1800&q=82')"></div>
-          <div><span class="ins-kicker">2025 ANCHOR</span>
-            <h4>Got an ANCHOR confirmation letter? Here is what it means before payments start September 15</h4>
-            <em>Read Insight</em></div>
-        </a>
-        <a href="/property/insights/2026-revaluation-reassessment-list.html">
-          <div class="ins-thumb" style="background-image:url('https://images.unsplash.com/photo-1564013799919-ab600027ffc6?auto=format&fit=crop&w=1800&q=82')"></div>
-          <div><span class="ins-kicker">2026 Assessments</span>
-            <h4>140 New Jersey towns are on the 2026 revaluation or reassessment list. Here is what homeowners should watch next</h4>
-            <em>Read Insight</em></div>
-        </a>
-        <div class="ins-more"><a href="/property/insights/">All Watchdog Insights</a></div>
+    <div class="pl-brokerband">
+      <img src="/opuslogo.jpg" alt="Opus Elite Real Estate" onerror="this.style.display='none'">
+      <div class="pl-brokerband-txt">
+        <p>This site provides New Jersey property tax information. If a property shown here is for sale and listed by
+        a licensed real estate agent, nothing on this page is intended as a direct solicitation of business.
+        For full sales information on this and other properties, visit
+        <a href="https://johnscafide.opuselitesj.com/index.php?advanced=1" target="_blank" rel="noopener">opuselitesj.com</a>.</p>
       </div>
     </div>
-
-    <div class="ins-glance">
-      <div class="ins-glance-h">
-        <b>New Jersey property tax at a glance</b>
-        <span id="ins-asof">From the state’s own records</span>
-      </div>
-      <div class="ins-stats">
-        <div><i class="fas fa-building-columns"></i><div><b>564</b><span>Municipalities</span></div></div>
-        <div><i class="fas fa-file-signature"></i><div><b>131,244</b><span>Verified sales on file</span></div></div>
-        <div><i class="fas fa-percent"></i><div><b>55.2%</b><span>Median assessment to market ratio</span></div></div>
-        <div><i class="fas fa-calendar-day"></i><div><b id="ins-days">Apr 1</b><span>General appeal deadline</span></div></div>
-      </div>
-      <div class="ins-src">Source: NJ Division of Taxation SR1A verified sales and the Table of Equalized Valuations.
-        <a href="/property/">Check your own address</a></div>
-    </div>
-  </div>
-</section>
-
-<!-- GREENTREE MORTGAGE -->
-<section class="section" style="padding-top:8px;padding-bottom:34px;">
-  <div class="section-inner">
-    <a href="https://johnvarano.com/" target="_blank" rel="noopener" class="gt-banner">
-      <div class="gt-banner-inner">
-        <div class="gt-photo">
-          <img src="/johnvarano.jpg" alt="John Varano, Branch Manager, Greentree Mortgage an HMA Company" loading="lazy" onerror="this.parentNode.style.display='none'">
-        </div>
-        <div class="gt-text">
-          <div class="gt-eyebrow">Greentree Mortgage an HMA Company &middot; John Varano, Branch Manager</div>
-          <div class="gt-headline">Know the payment before you fall in love with the house.</div>
-          <div class="gt-sub">Taxes are only half of what you pay every month. John Varano, Branch Manager at Greentree Mortgage, an HMA Company, will tell you what the real number looks like, including escrow, before you make a move.</div>
-        </div>
-        <div class="gt-cta">Talk Financing <i class="fas fa-arrow-right"></i></div>
-      </div>
-      <div class="gt-disc">Advertisement. Greentree Mortgage, an HMA Company, is a separate company and is not affiliated with Opus Elite Real Estate. You are never required to use any particular lender, and you are free to shop for a mortgage. Nothing here is a loan commitment, an offer of credit, or a guarantee of terms.</div>
-    </a>
   </div>
 </section>
 
@@ -1610,5 +1423,6 @@
 <script src="/property/js/public-nav.js"></script>
 <script src="/property/js/ownership-verification.js"></script>
 <script src="/property/js/lookup.js?v=20261002a"></script>
+<script src="/property/js/home-feed.js?v=20261002a"></script>
 </body>
 </html>

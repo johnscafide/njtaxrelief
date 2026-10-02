@@ -38,6 +38,7 @@
 
   function loadLandingRecentIntelligence(){
     if(!isPropertyLanding())return;
+    if(document.documentElement.getAttribute('data-wd-home-feed')==='1')return;
     if(window.__WATCHDOG_LANDING_RECENT_INTELLIGENCE__)return;
     loadScript('watchdog-landing-recent-intelligence','/property/js/landing-recent-intelligence.js?v=20260927a');
   }

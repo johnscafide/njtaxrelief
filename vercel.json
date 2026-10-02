@@ -43,6 +43,10 @@
     "api/watchdog-town-needs.js": {
       "includeFiles": "property/data/municipal-requirements/town-needs.json",
       "maxDuration": 10
+    },
+    "api/watchdog-home-feed.js": {
+      "includeFiles": "{property/data/home-feed-towns.json,property/sales-*.json,property/tax-rates.json,property/uniformity.json,chapter123-ratios-2026.json}",
+      "maxDuration": 10
     }
   },
   "redirects": [

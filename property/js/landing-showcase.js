@@ -638,6 +638,13 @@
   }
 
   function init() {
+    if (document.documentElement.getAttribute('data-wd-home-feed') === '1') {
+      document.body.classList.add('wd-consumer-mode');
+      upgradeDesktopNav();
+      fixFaqLinks();
+      handleSignupQuery();
+      return;
+    }
     placeSections();
     loadRecent();
     loadInsights();

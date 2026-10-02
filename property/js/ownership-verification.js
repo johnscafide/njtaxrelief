@@ -255,6 +255,7 @@
   }
 
   function bootLanding() {
+    if (document.documentElement.getAttribute('data-wd-home-feed') === '1') return;
     var existing = document.getElementById('wd-landing-showcase-loader');
     if (existing) {
       if (existing.dataset.loaded === '1') bootIntelligence();

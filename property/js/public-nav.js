@@ -168,6 +168,19 @@
   /* Keep the index surface lean: each runtime here owns one visible concern. */
   function loadIndexEnhancements(){
     if(!isPropertyIndex())return;
+    /* Feed home (data-wd-home-feed): keep only what the header, both menus,
+       the property search/overlay and the NJPTR ANCHOR handoff need. The old
+       landing sections are gone, so their runtimes are not loaded. */
+    if(document.documentElement.getAttribute('data-wd-home-feed')==='1'){
+      ensureStylesheet('wd-anchor-home-funnel-style','/property/css/anchor-home-funnel.css');
+      loadScript('wd-showcase-script','/property/js/landing-showcase.js');
+      loadScript('wd-public-score-on-demand-script','/property/js/public-score-on-demand.js');
+      loadScript('wd-robust-brand-script','/property/js/robust-public-brand.js');
+      loadScript('wd-nj-address-autocomplete-script','/property/js/nj-address-autocomplete.js?v=20260928a');
+      loadScript('wd-anchor-home-funnel-script','/property/js/anchor-home-funnel.js');
+      loadScript('wd-anchor-rating-summary-script','/property/js/anchor-rating-summary.js');
+      return;
+    }
     ensureStylesheet('wd-index-runtime-polish','/property/css/index-runtime-polish.css?v=20260911-hero2');
     ensureStylesheet('wd-anchor-home-funnel-style','/property/css/anchor-home-funnel.css');
     ensureStylesheet('wd-landing-anchor-jump-style','/property/css/landing-anchor-jump.css?v=20260912a');
