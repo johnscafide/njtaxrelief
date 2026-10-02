@@ -58,8 +58,8 @@ const OTHER_STATE = ',\\s+(?:MD|Md\\.|Maryland|NY|N\\.Y\\.|New York|PA|Pa\\.|Pen
 /* The home feed is about places: what is being built, opening, closing or
    decided near you. Crime, deaths, obituaries, opinion, sports and paid posts
    stay on the reporter's site. A source can opt out with "allTopics": true. */
-const SKIP_TOPIC = /\b(?:obituar\w*|police|blotter|crimes?|public safety|sponsor\w*|opinion|editorials?|letters? to the editor|lottery|courts?|giveaways?|recipes?|horoscopes?|sports?)\b/i;
-const SKIP_HEADLINE = /\b(?:arrest(?:ed|s)?|charged|indicted|sentenced|convicted|pleads? guilty|pleaded guilty|shooting|stabb(?:ed|ing)|murder(?:ed|s)?|homicide|manslaughter|fatal(?:ly)?|killed|dead|injur(?:ed|ies|y)|crash(?:es|ed)?|overdose|obituary|dies|died|death|DWI|DUI|missing|sexual assault|police say)\b/i;
+const SKIP_TOPIC = /\b(?:obituar\w*|obits?|legal notices?|public notices?|police|blotter|crimes?|public safety|sponsor\w*|opinion|editorials?|letters? to the editor|lottery|courts?|giveaways?|recipes?|horoscopes?|sports?)\b/i;
+const SKIP_HEADLINE = /\b(?:arrest(?:ed|s)?|charged|indicted|sentenced|convicted|pleads? guilty|pleaded guilty|shooting|stabb(?:ed|ing)|murder(?:ed|s)?|homicide|manslaughter|fatal(?:ly)?|killed|killings?|dead|injur(?:ed|ies|y)|crash(?:es|ed)?|overdose|obituary|dies|died|death|DWI|DUI|missing|sexual assault|police say)\b/i;
 
 const memo = new Map();
 let staticData = null;
@@ -306,16 +306,48 @@ function labelsFor(source, taxonomy) {
 }
 
 /* The photo size closest to a 480px-wide landscape card. */
+function bestSize(sizeList, source) {
+  const sizes = (sizeList || []).filter(size => size && size.source_url && size.width && size.height && allowedImage(size.source_url, source));
+  const landscape = sizes.filter(size => size.width / size.height >= 1.1 && size.width / size.height <= 2.1);
+  const pool = landscape.length ? landscape : sizes;
+  return pool.filter(size => size.width >= 480).sort((a, b) => a.width - b.width)[0] || pool.sort((a, b) => b.width - a.width)[0] || null;
+}
 function imageFor(post, source) {
   const media = post._embedded && post._embedded['wp:featuredmedia'] && post._embedded['wp:featuredmedia'][0];
   if (!media || media.code) return { url: '', alt: '' };
-  const sizes = Object.values((media.media_details && media.media_details.sizes) || {})
-    .filter(size => size && size.source_url && size.width && size.height && allowedImage(size.source_url, source));
-  const landscape = sizes.filter(size => size.width / size.height >= 1.1 && size.width / size.height <= 2.1);
-  const pool = landscape.length ? landscape : sizes;
-  const pick = pool.filter(size => size.width >= 480).sort((a, b) => a.width - b.width)[0] || pool.sort((a, b) => b.width - a.width)[0];
+  const pick = bestSize(Object.values((media.media_details && media.media_details.sizes) || {}), source);
   const url = pick ? pick.source_url : (allowedImage(media.source_url, source) ? media.source_url : '');
   return { url: url || '', alt: plain(media.alt_text || '') };
+}
+
+/* "2026/10/photo" for a WordPress upload URL, whatever its size suffix
+   ("-150x150", "-scaled"), so the sync can look up a card-sized copy. */
+function wpUploadPath(url, source) {
+  if (!allowedImage(url, source)) return null;
+  const m = /\/wp-content\/uploads\/(\d{4}\/\d{2}\/)(.+?)(?:-scaled)?(?:-\d+x\d+)?\.(?:jpe?g|png|webp|gif)$/i.exec(String(url).split('?')[0]);
+  return m ? { path: `${m[1]}${m[2]}`, base: m[2] } : null;
+}
+/* A WordPress thumbnail under 300px on both sides is too small for a card. */
+const TINY_THUMB = /-(\d{2,3})x(\d{2,3})\.(?:jpe?g|png|webp|gif)(?:\?|$)/i;
+function isTinyThumb(url) {
+  const m = TINY_THUMB.exec(String(url || ''));
+  return !!m && Number(m[1]) < 300 && Number(m[2]) < 300;
+}
+/* Photo CDNs that size by URL (TownNews BLOX "resize=300,170") are asked for
+   the source's "imageWidth" instead, keeping the shape. */
+function resized(url, source) {
+  if (!source.imageWidth) return url;
+  return String(url).replace(/([?&]resize=)(\d+)(%2C|,)(\d+)/i, (_, key, w, comma, h) =>
+    `${key}${source.imageWidth}${comma}${Math.round(Number(h) * source.imageWidth / Number(w))}`);
+}
+
+/* Town labels some sites put in the link: 70and73.com/mount_laurel/... */
+function urlLabels(link) {
+  try {
+    return new URL(link).pathname.split('/').filter(Boolean).slice(0, -1).map(part => decodeURIComponent(part).replace(/[_-]+/g, ' ')).filter(part => part.split(' ').length <= 4);
+  } catch (_error) {
+    return [];
+  }
 }
 
 function shapePost(post, source) {
@@ -396,7 +428,10 @@ function shapeRssItem(item, source) {
   const imgs = Array.from(`${item.content} ${item.description}`.matchAll(/<img\b[^>]*\bsrc="([^"]+)"[^>]*>/gi))
     .filter(r => !/\b(?:width|height)="1"/.test(r[0]) && !/gravatar|pixel|feeds\.feedburner/i.test(r[1]))
     .map(r => decode(r[1]));
-  const image = [item.media].concat(imgs).find(url => allowedImage(url, source)) || '';
+  const allowed = [item.media].concat(imgs).filter(url => allowedImage(url, source));
+  let image = resized(allowed.find(url => !isTinyThumb(url)) || allowed[0] || '', source);
+  /* "imageOriginal": the upload behind a 150px feed thumbnail. */
+  if (source.imageOriginal && isTinyThumb(image)) image = image.replace(/-\d{2,3}x\d{2,3}(\.(?:jpe?g|png|webp|gif))(?=\?|$)/i, '$1');
   const alt = image && !item.media ? (/<img\b[^>]*\balt="([^"]*)"/i.exec(html) || [])[1] : '';
   return {
     id: `${source.id}:${externalId}`,
@@ -455,5 +490,6 @@ module.exports = {
   USER_AGENT, MAX_AGE_DAYS, POST_FIELDS,
   loadStatic, getJson, getText, labelsFor, wordpressContext, townIndex, placeStory, skipStory,
   shapePost, rssItems, shapeRssItem, uploadsPlaylist, shapeYoutubeItem,
+  bestSize, wpUploadPath, isTinyThumb, urlLabels,
   addressesIn, streetKey, youtubeIn, clip, decode, plain, baseName
 };

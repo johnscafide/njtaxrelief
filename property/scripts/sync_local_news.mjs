@@ -63,6 +63,49 @@ async function upsert(rows) {
   }
 }
 
+/* Photos already stored for these stories, so a re-run does not look them up again. */
+async function storedImages(sourceId, externalIds) {
+  const out = new Map();
+  if (dryRun || !externalIds.length) return out;
+  for (let i = 0; i < externalIds.length; i += 80) {
+    const ids = externalIds.slice(i, i + 80).map(id => `"${String(id).replace(/"/g, '')}"`).join(',');
+    const response = await fetch(`${SUPABASE_URL}/rest/v1/local_news_items?source_id=eq.${encodeURIComponent(sourceId)}&external_id=in.(${encodeURIComponent(ids)})&select=external_id,image_url`, {
+      headers: { apikey: SERVICE_KEY, Authorization: `Bearer ${SERVICE_KEY}` }
+    });
+    if (response.ok) (await response.json()).forEach(row => { if (row.image_url) out.set(row.external_id, row.image_url); });
+  }
+  return out;
+}
+
+/* Some feeds only carry a 150px thumbnail or the full upload (often 700 KB).
+   For "imageLookup": "wp-media" sources the site's public WordPress media
+   list gives the card-sized copy (looked up by slug), newest stories first,
+   at most "imageLookupMax" lookups a run (default 120). */
+async function upgradeImages(source, rows) {
+  const delay = Math.max(1, source.crawlDelaySec || 1) * 1000;
+  const cap = source.imageLookupMax || 120;
+  const wanted = rows.filter(row => row.image_url && news.wpUploadPath(row.image_url, source));
+  const stored = await storedImages(source.id, wanted.map(row => row.external_id));
+  let looked = 0;
+  for (const row of wanted) {
+    const prior = stored.get(row.external_id);
+    if (prior && /-\d+x\d+\.\w+$/.test(prior) && !news.isTinyThumb(prior)) { row.image_url = prior; continue; }
+    if (looked >= cap) continue;
+    looked += 1;
+    await sleep(delay);
+    /* The upload's slug is usually its file name; the path check makes sure
+       it is the same file and not an older one with the same name. */
+    const file = news.wpUploadPath(row.image_url, source);
+    const slug = file.base.toLowerCase().replace(/[^a-z0-9_-]+/g, '-');
+    const list = await news.getJson(`${source.api}/media?slug=${encodeURIComponent(slug)}&_fields=source_url,media_details`, 15000).catch(() => []);
+    const media = (Array.isArray(list) ? list : []).find(m => m && m.media_details &&
+      String(m.media_details.file || '').replace(/\.\w+$/, '').replace(/-scaled$/, '') === file.path);
+    const best = media && news.bestSize(Object.values(media.media_details.sizes || {}), source);
+    if (best) row.image_url = best.source_url;
+  }
+  return looked;
+}
+
 /* Stories in the window this run did not refresh. The window starts a day
    later than the fetch so a time zone difference at the edge never removes a
    story the run simply did not ask for. */
@@ -131,10 +174,20 @@ async function syncWordPress(source, index, since, pages) {
   return { fetched, skipped, rows, complete };
 }
 
-/* RSS feeds carry the latest 10 to 20 stories; WordPress-backed feeds page
-   back with ?paged=N, which the backfill uses. */
+/* RSS feeds carry the latest 10 to 25 stories. WordPress-backed feeds page
+   back with ?paged=N, which the backfill uses; "pageParam" and "pageStep"
+   cover feeds that page by offset (TownNews BLOX: o=25, o=50 ...), and
+   "noPaging" feeds only ever show their latest items. */
+function rssPageUrl(source, page) {
+  if (page === 1) return source.feed;
+  const param = source.pageParam || 'paged';
+  const value = source.pageStep ? (page - 1) * source.pageStep : page;
+  return `${source.feed}${source.feed.includes('?') ? '&' : '?'}${param}=${value}`;
+}
+
 async function syncRss(source, index, since, pages) {
   const delay = (source.crawlDelaySec || 0) * 1000;
+  if (source.noPaging) pages = 1;
   const rows = [];
   const seen = new Set();
   let fetched = 0, skipped = 0, complete = false;
@@ -142,7 +195,7 @@ async function syncRss(source, index, since, pages) {
     if (delay && page > 1) await sleep(delay);
     let xml;
     try {
-      xml = await news.getText(page === 1 ? source.feed : `${source.feed}${source.feed.includes('?') ? '&' : '?'}paged=${page}`, 30000);
+      xml = await news.getText(rssPageUrl(source, page), 30000);
     } catch (error) {
       if (page > 1) break;
       throw error;
@@ -158,13 +211,15 @@ async function syncRss(source, index, since, pages) {
       if (new Date(item.publishedAt) < since) { older = true; return; }
       fetched += 1;
       if (news.skipStory(source, item.title, raw.categories)) { skipped += 1; return; }
-      const towns = news.placeStory(source, index, item.title, source.townsFrom === 'categories' ? raw.categories : []);
+      const labels = source.townsFrom === 'categories' ? raw.categories : source.townsFrom === 'url' ? news.urlLabels(item.url) : [];
+      const towns = news.placeStory(source, index, item.title, labels);
       if (towns.length) rows.push(toRow(item, towns));
     });
     /* Only an item older than the window proves the whole window was read. */
     if (older) { complete = true; break; }
     if (!fresh) break;
   }
+  if (source.imageLookup === 'wp-media') await upgradeImages(source, rows);
   return { fetched, skipped, rows, complete };
 }
 

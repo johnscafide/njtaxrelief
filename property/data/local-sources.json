@@ -1,5 +1,5 @@
 {
-  "_comment": "Independent local reporters whose stories appear in the Watchdog home feed (synced hourly by property/scripts/sync_local_news.mjs). Set enabled to false to remove a source everywhere at once. type is wordpress (api = the site's /wp-json/wp/v2), rss (feed = its RSS URL) or youtube (channelId = the UC... id; read through the YouTube Data API with the YOUTUBE_API_KEY secret). A story is placed by the reporter's own town labels (townsFrom: categories, tags or none), then by a town named in the headline (titleMatch) or, with matchDescription, the start of a video description, then defaultTowns. Names are matched within counties (\"all\" = statewide); labelTowns pins label or headline names to a municipality code. query adds WordPress filters, perPage lowers the page size for sites with very large posts, imageHosts allows a photo CDN, maxPages and crawlDelaySec keep requests within the site's robots.txt.",
+  "_comment": "Independent local reporters whose stories appear in the Watchdog home feed (synced hourly by property/scripts/sync_local_news.mjs). Set enabled to false to remove a source everywhere at once. type is wordpress (api = the site's /wp-json/wp/v2), rss (feed = its RSS URL) or youtube (channelId = the UC... id; read through the YouTube Data API with the YOUTUBE_API_KEY secret). A story is placed by the reporter's own town labels (townsFrom: categories, tags, url (a town in the link path) or none), then by a town named in the headline (titleMatch) or, with matchDescription, the start of a video description, then defaultTowns. Names are matched within counties (\"all\" = statewide); labelTowns pins label or headline names to a municipality code. query adds WordPress filters, perPage lowers the page size for sites with very large posts, imageHosts allows a photo CDN, imageWidth asks a resizing CDN for that width, imageLookup wp-media swaps feed photos for card-sized copies from the site's media list, imageOriginal uses the upload behind a 150px feed thumbnail, pageParam/pageStep/noPaging describe how an RSS feed pages, maxPages and crawlDelaySec keep requests within the site's robots.txt.",
   "sources": [
     {
       "id": "42freeway",
@@ -472,6 +472,313 @@
       "titleMatch": true,
       "defaultTowns": [
         "1213"
+      ]
+    },
+    {
+      "id": "70and73",
+      "name": "70and73",
+      "badge": "70",
+      "site": "https://www.70and73.com",
+      "about": "Burlington and Camden County development and town news",
+      "type": "rss",
+      "feed": "https://www.70and73.com/search/?f=rss&t=article&l=25&s=start_time&sd=desc",
+      "enabled": true,
+      "counties": [
+        "Burlington",
+        "Camden"
+      ],
+      "townsFrom": "url",
+      "titleMatch": true,
+      "labelTowns": {
+        "evesham marlton": "0313",
+        "Marlton": "0313"
+      },
+      "imageHosts": [
+        "bloximages.newyork1.vip.townnews.com"
+      ],
+      "imageWidth": 640,
+      "pageParam": "o",
+      "pageStep": 25,
+      "note": "TownNews BLOX feed: the town is the first part of each link (/mount_laurel/, /cherry_hill/); photos are asked for at 640px."
+    },
+    {
+      "id": "njpen",
+      "name": "NJ Pen",
+      "badge": "NP",
+      "site": "https://www.njpen.com",
+      "about": "Camden County town news",
+      "type": "wordpress",
+      "api": "https://www.njpen.com/wp-json/wp/v2",
+      "enabled": true,
+      "counties": [
+        "Camden"
+      ],
+      "townsFrom": "categories",
+      "titleMatch": true,
+      "labelTowns": {
+        "Haddon Twp": "0416"
+      }
+    },
+    {
+      "id": "shorelocal",
+      "name": "Shore Local",
+      "badge": "SL",
+      "site": "https://shorelocalnews.com",
+      "about": "Atlantic and Cape May County news",
+      "type": "wordpress",
+      "api": "https://shorelocalnews.com/wp-json/wp/v2",
+      "enabled": true,
+      "counties": [
+        "Atlantic",
+        "Cape May"
+      ],
+      "townsFrom": "categories",
+      "titleMatch": true,
+      "labelTowns": {
+        "Egg Harbor Twp": "0108",
+        "Mays Landing": "0112"
+      },
+      "query": "categories_exclude=39,9,3049",
+      "note": "query leaves out the Entertainment, Casinos and Calendars categories (mostly press releases)."
+    },
+    {
+      "id": "ocsentinel",
+      "name": "Ocean City Sentinel",
+      "badge": "OS",
+      "site": "https://ocnjsentinel.com",
+      "about": "Ocean City and nearby shore towns",
+      "type": "wordpress",
+      "api": "https://ocnjsentinel.com/wp-json/wp/v2",
+      "enabled": true,
+      "counties": [
+        "Cape May",
+        "Atlantic"
+      ],
+      "townsFrom": "tags",
+      "titleMatch": true,
+      "defaultTowns": [
+        "0508"
+      ]
+    },
+    {
+      "id": "sandpaper",
+      "name": "The SandPaper",
+      "badge": "SP",
+      "site": "https://www.thesandpaper.net",
+      "about": "Long Beach Island and southern Ocean County news",
+      "type": "rss",
+      "api": "https://www.thesandpaper.net/wp-json/wp/v2",
+      "feed": "https://www.thesandpaper.net/feed/",
+      "enabled": true,
+      "counties": [
+        "Ocean"
+      ],
+      "townsFrom": "categories",
+      "titleMatch": true,
+      "imageOriginal": true,
+      "maxPages": 30,
+      "note": "Articles are a custom type the WordPress API keeps private (their photos too), so the RSS feed is used and its 150px thumbnails are swapped for the original upload."
+    },
+    {
+      "id": "pinebarrens",
+      "name": "Pine Barrens Tribune",
+      "badge": "PB",
+      "site": "https://www.pinebarrenstribune.com",
+      "about": "Pinelands town news",
+      "type": "rss",
+      "api": "https://www.pinebarrenstribune.com/wp-json/wp/v2",
+      "feed": "https://www.pinebarrenstribune.com/feed/",
+      "enabled": true,
+      "counties": [
+        "Burlington",
+        "Ocean"
+      ],
+      "townsFrom": "none",
+      "titleMatch": true,
+      "labelTowns": {
+        "Tabernacle": "0335",
+        "Woodland": "0339",
+        "Pemberton": "0329"
+      },
+      "imageLookup": "wp-media",
+      "note": "RSS feed (articles are a private custom type); full-size photos are swapped for card-sized copies from the public media list."
+    },
+    {
+      "id": "jerseyshoreonline",
+      "name": "Jersey Shore Online",
+      "badge": "JS",
+      "site": "https://www.jerseyshoreonline.com",
+      "about": "Southern Ocean County news",
+      "type": "wordpress",
+      "api": "https://www.jerseyshoreonline.com/wp-json/wp/v2",
+      "enabled": true,
+      "counties": [
+        "Ocean"
+      ],
+      "townsFrom": "none",
+      "titleMatch": true,
+      "query": "categories=25",
+      "fetchLabels": false,
+      "maxPages": 6,
+      "crawlDelaySec": 60,
+      "note": "Southern Ocean edition only (category 25). robots.txt asks for 60 seconds between requests: one request per hourly run."
+    },
+    {
+      "id": "frontrunner",
+      "name": "Front Runner New Jersey",
+      "badge": "FR",
+      "site": "https://frontrunnernewjersey.com",
+      "about": "South Jersey community news, including Salem and Cumberland",
+      "type": "wordpress",
+      "api": "https://frontrunnernewjersey.com/wp-json/wp/v2",
+      "enabled": true,
+      "counties": [
+        "Camden",
+        "Gloucester",
+        "Burlington",
+        "Salem",
+        "Cumberland",
+        "Atlantic",
+        "Cape May"
+      ],
+      "townsFrom": "tags",
+      "titleMatch": true,
+      "crawlDelaySec": 10
+    },
+    {
+      "id": "sjclimate",
+      "name": "SJ Climate",
+      "badge": "SC",
+      "site": "https://sjclimate.news",
+      "about": "South Jersey land use and climate news",
+      "type": "wordpress",
+      "api": "https://sjclimate.news/wp-json/wp/v2",
+      "enabled": true,
+      "counties": [
+        "Camden",
+        "Gloucester",
+        "Burlington",
+        "Salem",
+        "Cumberland",
+        "Atlantic",
+        "Cape May"
+      ],
+      "townsFrom": "none",
+      "titleMatch": true,
+      "query": "categories_exclude=781",
+      "crawlDelaySec": 6,
+      "note": "query leaves out \"From our News Partners\" (stories republished from other outlets)."
+    },
+    {
+      "id": "sjfoodscene",
+      "name": "South Jersey Food Scene",
+      "badge": "FS",
+      "site": "https://southjerseyfoodscene.substack.com",
+      "about": "South Jersey restaurant openings and closings",
+      "type": "rss",
+      "feed": "https://southjerseyfoodscene.substack.com/feed",
+      "enabled": true,
+      "counties": [
+        "Camden",
+        "Burlington",
+        "Gloucester"
+      ],
+      "townsFrom": "none",
+      "titleMatch": true,
+      "imageHosts": [
+        "substack-post-media.s3.amazonaws.com",
+        "substackcdn.com"
+      ],
+      "noPaging": true
+    },
+    {
+      "id": "acfocus",
+      "name": "Atlantic City Focus",
+      "badge": "AF",
+      "site": "https://www.atlanticcityfocus.com",
+      "about": "Atlantic City civic and business news",
+      "type": "rss",
+      "feed": "https://www.atlanticcityfocus.com/rss/",
+      "enabled": true,
+      "counties": [
+        "Atlantic"
+      ],
+      "townsFrom": "none",
+      "titleMatch": true,
+      "imageHosts": [
+        "storage.ghost.io"
+      ],
+      "noPaging": true
+    },
+    {
+      "id": "yt-wildwood",
+      "name": "Wildwood Video Archive",
+      "badge": "WV",
+      "site": "https://www.youtube.com/@WildwoodVideoArchive",
+      "about": "The Wildwoods: boardwalk, new businesses, local meetings",
+      "type": "youtube",
+      "channelId": "UCrYxDbtRMIlan1GoMTt8W8w",
+      "enabled": true,
+      "counties": [
+        "Cape May"
+      ],
+      "townsFrom": "none",
+      "titleMatch": true,
+      "matchDescription": true
+    },
+    {
+      "id": "yt-capemay",
+      "name": "The Cape May Channel",
+      "badge": "CM",
+      "site": "https://www.youtube.com/@CapeMayChannel",
+      "about": "Cape May businesses and town happenings",
+      "type": "youtube",
+      "channelId": "UCZpQDalkgsisKs7hTs8VFrw",
+      "enabled": true,
+      "counties": [
+        "Cape May"
+      ],
+      "townsFrom": "none",
+      "titleMatch": true,
+      "matchDescription": true,
+      "defaultTowns": [
+        "0502"
+      ]
+    },
+    {
+      "id": "yt-nuyawk",
+      "name": "Nu Yawk",
+      "badge": "NY",
+      "site": "https://www.youtube.com/@NuYawk",
+      "about": "Atlantic City boardwalk and casino walkthroughs",
+      "type": "youtube",
+      "channelId": "UCTs0UjvWeIeU3CUfZQU0gaw",
+      "enabled": true,
+      "counties": [
+        "Atlantic"
+      ],
+      "townsFrom": "none",
+      "titleMatch": true,
+      "defaultTowns": [
+        "0102"
+      ]
+    },
+    {
+      "id": "yt-accesshammonton",
+      "name": "Access Hammonton",
+      "badge": "AH",
+      "site": "https://www.youtube.com/@AccessHammonton",
+      "about": "Hammonton's local access channel",
+      "type": "youtube",
+      "channelId": "UCOwDFB8RNcbMUBuWiP26Tkw",
+      "enabled": true,
+      "counties": [
+        "Atlantic"
+      ],
+      "townsFrom": "none",
+      "titleMatch": true,
+      "defaultTowns": [
+        "0113"
       ]
     }
   ]
