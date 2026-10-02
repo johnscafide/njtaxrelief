@@ -43,7 +43,7 @@
 
   <link rel="stylesheet" href="/property/css/public-mobile-nav.css">
   <link rel="stylesheet" href="/property/css/landing-review.css?v=20260928a">
-  <link rel="stylesheet" href="/property/css/home-feed.css?v=20261002c">
+  <link rel="stylesheet" href="/property/css/home-feed.css?v=20261002d">
 
 <script type="application/ld+json">
 {
@@ -233,7 +233,7 @@
      HOME FEED (filled by /property/js/home-feed.js from /api/watchdog-home-feed)
      ============================================================ -->
 <main class="wdh" id="wdh" data-state="loading" data-tab="all" aria-labelledby="wdh-feed-title">
-  <p class="wdh-where" id="wdh-where"><span id="wdh-where-date"></span> <span class="wdh-where-sep" id="wdh-where-sep" aria-hidden="true" hidden>&middot;</span> <span id="wdh-where-town">New Jersey</span>&nbsp;<button type="button" class="wdh-where-change" id="wdh-town-change" aria-haspopup="dialog" aria-controls="wdh-picker" aria-label="Change town">(change)</button></p>
+  <p class="wdh-where" id="wdh-where"><span id="wdh-where-date"></span> <span class="wdh-where-sep" id="wdh-where-sep" aria-hidden="true" hidden>&middot;</span> <span class="wdh-where-place"><span id="wdh-where-town">New Jersey</span>&nbsp;<button type="button" class="wdh-where-change" id="wdh-town-change" aria-haspopup="dialog" aria-controls="wdh-picker" aria-label="Change town">(change)</button></span><button type="button" class="wdh-where-pin" id="wdh-where-pin" aria-label="Use my phone's location to pick my town"><i class="fas fa-location-dot" aria-hidden="true"></i></button></p>
   <div class="wdh-shell">
     <div class="wdh-main">
 
@@ -253,6 +253,7 @@
           <button type="button" class="wdh-btn wdh-btn-secondary" id="wdh-listen" hidden><i class="fas fa-volume-high" aria-hidden="true"></i><span>Listen</span></button>
         </div>
         <ol class="wdh-week-list" id="wdh-week-list"></ol>
+        <button type="button" class="wdh-week-more" id="wdh-week-more" aria-expanded="false" aria-controls="wdh-week-list" hidden><span class="wdh-week-more-closed">Show more</span><span class="wdh-week-more-open">Show less</span><i class="fas fa-chevron-down" aria-hidden="true"></i></button>
       </section>
 
       <section class="wdh-feed" aria-labelledby="wdh-feed-title">
@@ -1495,6 +1496,6 @@
 <script src="/property/js/public-nav.js"></script>
 <script src="/property/js/ownership-verification.js"></script>
 <script src="/property/js/lookup.js?v=20261002a"></script>
-<script src="/property/js/home-feed.js?v=20261002c"></script>
+<script src="/property/js/home-feed.js?v=20261002d"></script>
 </body>
 </html>
