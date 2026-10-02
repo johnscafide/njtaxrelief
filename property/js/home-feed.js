@@ -842,6 +842,8 @@
   function applyTab() {
     var host = $('wdh-cards');
     if (!host) return;
+    /* On phones the Brief sits inside the feed, so CSS hides it outside "For you". */
+    root.setAttribute('data-tab', state.tab);
     var shown = 0;
     Array.prototype.forEach.call(host.children, function (card) {
       var tabs = String(card.getAttribute('data-tabs') || '').split(/\s+/);
