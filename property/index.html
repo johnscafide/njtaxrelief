@@ -43,7 +43,7 @@
 
   <link rel="stylesheet" href="/property/css/public-mobile-nav.css">
   <link rel="stylesheet" href="/property/css/landing-review.css?v=20260928a">
-  <link rel="stylesheet" href="/property/css/home-feed.css?v=20261002a">
+  <link rel="stylesheet" href="/property/css/home-feed.css?v=20261002c">
 
 <script type="application/ld+json">
 {
@@ -204,7 +204,6 @@
   <div class="pl-hero-bg"></div>
   <div class="pl-hero-wash"></div>
   <div class="pl-hero-inner wdh-hero-inner">
-    <p class="wdh-hero-kicker" id="wdh-hero-kicker">Watchdog for New Jersey homeowners</p>
     <h1 class="wdh-hero-title" id="wdh-hero-title">What's happening around your home</h1>
     <p class="wdh-hero-sub" id="wdh-hero-sub">Home sales, building permits, tax rates and town rules for every New Jersey town, from public records.</p>
 
@@ -224,11 +223,6 @@
       </div>
       <div class="pl-inline-status" id="pl-inline" aria-live="polite"></div>
     </div>
-
-    <div class="wdh-town-bar">
-      <span class="wdh-town-label" id="wdh-town-label">Pick your town to see what's happening there.</span>
-      <button type="button" class="wdh-town-btn" id="wdh-town-btn" aria-haspopup="dialog" aria-controls="wdh-picker"><i class="fas fa-location-dot" aria-hidden="true"></i><span id="wdh-town-btn-text">Choose a town</span></button>
-    </div>
   </div>
 </div>
 
@@ -238,7 +232,8 @@
 <!-- ============================================================
      HOME FEED (filled by /property/js/home-feed.js from /api/watchdog-home-feed)
      ============================================================ -->
-<main class="wdh" id="wdh" data-state="loading" aria-labelledby="wdh-feed-title">
+<main class="wdh" id="wdh" data-state="loading" data-tab="all" aria-labelledby="wdh-feed-title">
+  <p class="wdh-where" id="wdh-where"><span id="wdh-where-date"></span> <span class="wdh-where-sep" id="wdh-where-sep" aria-hidden="true" hidden>&middot;</span> <span id="wdh-where-town">New Jersey</span>&nbsp;<button type="button" class="wdh-where-change" id="wdh-town-change" aria-haspopup="dialog" aria-controls="wdh-picker" aria-label="Change town">(change)</button></p>
   <div class="wdh-shell">
     <div class="wdh-main">
 
@@ -249,11 +244,11 @@
         <div class="wdh-tile wdh-skel" aria-hidden="true"></div>
       </section>
 
-      <section class="wdh-card wdh-week" id="wdh-week" aria-labelledby="wdh-week-title" hidden>
+      <section class="wdh-card wdh-week wdh-intel" id="wdh-week" aria-labelledby="wdh-week-title" hidden>
         <div class="wdh-week-head">
           <div>
-            <h2 id="wdh-week-title" class="wdh-h2s">Your town in 30 seconds</h2>
-            <p class="wdh-meta" id="wdh-week-meta">Built from the public records in your feed.</p>
+            <h2 id="wdh-week-title" class="wdh-intel-title">Watchdog <span class="wd-intelligence-brand-word">Intelligence</span> Brief</h2>
+            <p class="wdh-meta" id="wdh-week-meta">Your town in 30 seconds</p>
           </div>
           <button type="button" class="wdh-btn wdh-btn-secondary" id="wdh-listen" hidden><i class="fas fa-volume-high" aria-hidden="true"></i><span>Listen</span></button>
         </div>
@@ -263,7 +258,6 @@
       <section class="wdh-feed" aria-labelledby="wdh-feed-title">
         <div class="wdh-feed-head">
           <h2 id="wdh-feed-title" class="wdh-h2">Your feed</h2>
-          <p class="wdh-meta">Each card shows when it happened and when the public record came out.</p>
         </div>
         <div class="wdh-tabs" id="wdh-tabs" role="group" aria-label="Filter your feed">
           <button type="button" class="wdh-tab is-on" data-tab="all" aria-pressed="true">For you</button>
@@ -295,15 +289,39 @@
           </article>
         </template>
         <template id="wdh-tpl-games">
-          <article class="wdh-card wdh-feed-card" data-tabs="games">
-            <div class="wdh-krow"><span class="wdh-ico"><i class="fas fa-table-cells-large" aria-hidden="true"></i></span><span class="wdh-kicker">Watchdog Games</span><span class="wdh-dot" aria-hidden="true">&middot;</span><span class="wdh-meta">New puzzles every day</span></div>
-            <h3 class="wdh-h3">Three quick puzzles built from real New Jersey records</h3>
+          <article class="wdh-card wdh-feed-card wdh-games-card" data-tabs="games">
+            <div class="wdh-krow"><span class="wdh-ico"><i class="fas fa-table-cells-large" aria-hidden="true"></i></span><span class="wdh-kicker">Watchdog Games</span><span class="wdh-dot" aria-hidden="true">&middot;</span><span class="wdh-meta" data-games-day>New puzzles every day</span></div>
+            <h3 class="wdh-h3" data-games-head>Today's puzzles are built from real New Jersey records</h3>
             <div class="wdh-games">
-              <a class="wdh-game" href="/games/sold"><span class="wdh-ico"><i class="fas fa-tag" aria-hidden="true"></i></span><span class="wdh-game-t">Sold!</span><span class="wdh-meta">Guess what a real home sold for.</span><span class="wdh-game-go">Play <i class="fas fa-arrow-right" aria-hidden="true"></i></span></a>
-              <a class="wdh-game" href="/games/pin-drop"><span class="wdh-ico"><i class="fas fa-location-dot" aria-hidden="true"></i></span><span class="wdh-game-t">Pin Drop</span><span class="wdh-meta">Find the home on the map.</span><span class="wdh-game-go">Play <i class="fas fa-arrow-right" aria-hidden="true"></i></span></a>
-              <a class="wdh-game" href="/games/fair-or-unfair"><span class="wdh-ico"><i class="fas fa-scale-balanced" aria-hidden="true"></i></span><span class="wdh-game-t">Fair or Unfair</span><span class="wdh-meta">Judge a real assessment.</span><span class="wdh-game-go">Play <i class="fas fa-arrow-right" aria-hidden="true"></i></span></a>
+              <a class="wdh-game" href="/games/sold" data-game="sold">
+                <span class="wdh-game-art is-sold" aria-hidden="true"><svg viewBox="0 0 100 100"><g transform="rotate(-12 50 50)"><path d="M32 22h50a6 6 0 0 1 6 6v44a6 6 0 0 1-6 6H32L12 50z" fill="#0e2248"/><circle cx="27" cy="50" r="5" fill="#b8972a"/><path d="M45 55l13-12 13 12M49 52v14h18V52" fill="none" stroke="#b8972a" stroke-width="5" stroke-linecap="round" stroke-linejoin="round"/></g></svg><span class="wdh-game-done" data-game-done hidden><i class="fas fa-check"></i></span></span>
+                <span class="wdh-game-body">
+                  <span class="wdh-game-t">Sold!</span>
+                  <span class="wdh-game-d">Guess what a real home sold for.</span>
+                  <span class="wdh-game-fact" data-game-fact hidden></span>
+                  <span class="wdh-game-foot"><span class="wdh-game-status" data-game-status>Six tries</span><span class="wdh-game-go"><span data-game-go>Play</span> <i class="fas fa-arrow-right" aria-hidden="true"></i></span></span>
+                </span>
+              </a>
+              <a class="wdh-game" href="/games/pin-drop" data-game="pin-drop">
+                <span class="wdh-game-art is-pin" aria-hidden="true"><svg viewBox="0 0 320 200" preserveAspectRatio="xMidYMid slice"><g fill="none" stroke="#fff" stroke-opacity=".22" stroke-width="2"><path d="M0 40h320M0 90h320M0 140h320M60 0v200M130 0v200M200 0v200M270 0v200"/><path d="M60 40h70v50H60zM200 90h70v50h-70z" stroke-opacity=".45"/></g><path d="M165 28c-21 0-38 17-38 38 0 28 38 70 38 70s38-42 38-70c0-21-17-38-38-38z" fill="#fff"/><path d="M150 72l15-14 15 14M155 68v16h20V68" fill="none" stroke="#1456a0" stroke-width="6" stroke-linecap="round" stroke-linejoin="round"/><ellipse cx="165" cy="150" rx="26" ry="7" fill="#0e2248" opacity=".35"/></svg><span class="wdh-game-done" data-game-done hidden><i class="fas fa-check"></i></span></span>
+                <span class="wdh-game-body">
+                  <span class="wdh-game-t">Pin Drop</span>
+                  <span class="wdh-game-d">Drop a pin on the exact home.</span>
+                  <span class="wdh-game-fact" data-game-fact hidden></span>
+                  <span class="wdh-game-foot"><span class="wdh-game-status" data-game-status>3 free clues</span><span class="wdh-game-go"><span data-game-go>Play</span> <i class="fas fa-arrow-right" aria-hidden="true"></i></span></span>
+                </span>
+              </a>
+              <a class="wdh-game" href="/games/fair-or-unfair" data-game="fair-or-unfair">
+                <span class="wdh-game-art is-fair" aria-hidden="true"><svg viewBox="0 0 100 100"><path d="M50 16v66M32 84h36M20 30h60" fill="none" stroke="#fff" stroke-width="6" stroke-linecap="round"/><path d="M20 32L10 54h20zM80 32L70 54h20z" fill="#fff"/></svg><span class="wdh-game-done" data-game-done hidden><i class="fas fa-check"></i></span></span>
+                <span class="wdh-game-body">
+                  <span class="wdh-game-t">Fair or Unfair</span>
+                  <span class="wdh-game-d">Spot the over-assessed homes.</span>
+                  <span class="wdh-game-fact" data-game-fact hidden></span>
+                  <span class="wdh-game-foot"><span class="wdh-game-status" data-game-status>Five homes</span><span class="wdh-game-go"><span data-game-go>Play</span> <i class="fas fa-arrow-right" aria-hidden="true"></i></span></span>
+                </span>
+              </a>
             </div>
-            <p class="wdh-meta wdh-note">Signed-in scores count on today's leaderboard. <a href="/games">See all games</a></p>
+            <p class="wdh-meta wdh-games-more"><span>Signed-in scores count on today's leaderboard.</span><a href="/games">All 6 games</a><a href="/games/leaderboard">Leaderboard</a></p>
           </article>
         </template>
         <template id="wdh-tpl-pick">
@@ -1477,6 +1495,6 @@
 <script src="/property/js/public-nav.js"></script>
 <script src="/property/js/ownership-verification.js"></script>
 <script src="/property/js/lookup.js?v=20261002a"></script>
-<script src="/property/js/home-feed.js?v=20261002a"></script>
+<script src="/property/js/home-feed.js?v=20261002c"></script>
 </body>
 </html>
