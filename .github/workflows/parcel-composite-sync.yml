@@ -3,10 +3,16 @@ name: Statewide parcel sync
 # Copies the NJ Office of GIS Parcels and MOD-IV Composite into
 # property_lookups so town comparisons cover the whole state.
 # Runs monthly (3rd of the month) as a full statewide refresh so new sales and
-# assessment changes flow in; can also be run by hand for one county.
+# assessment changes flow in (paused for now, see the schedule below); can also
+# be run by hand for one county.
 on:
   schedule:
-    - cron: '17 7 3 * *'
+    # PAUSED (2026-10-02): the monthly full pass, cron '17 7 3 * *'. On Oct 1
+    # the parcel point backfill (#565) used up the database's daily disk budget
+    # on Micro compute and the API was down for hours. The next monthly pass
+    # would rewrite the ~1.78M parcels that still have no point, then start a
+    # full score pass the same day. Put the line back once the backfill is
+    # finished (run by hand, paced) and the database is healthy.
     # Every 6 hours: keep scoring until every property has a Watchdog Score,
     # then only start a new full pass when the last one is 25 days old.
     - cron: '41 */6 * * *'
