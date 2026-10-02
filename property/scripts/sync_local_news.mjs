@@ -10,7 +10,9 @@
      node property/scripts/sync_local_news.mjs --only jerseydigs,renj
      node property/scripts/sync_local_news.mjs --days 365 --prune
 
-   Writes need SUPABASE_URL and SUPABASE_SERVICE_ROLE_KEY. Re-running is safe:
+   Writes need SUPABASE_URL and SUPABASE_SERVICE_ROLE_KEY. YouTube channels
+   also need YOUTUBE_API_KEY (YouTube Data API v3); without it they are skipped
+   with a note. Re-running is safe:
    rows upsert on (source_id, external_id), and the per-story "hidden" switch is
    never overwritten. --prune is for re-syncing after a rule change: when a
    source's whole window was read, its stories in that window that this run
@@ -41,6 +43,7 @@ if (!dryRun && (!SUPABASE_URL || !SERVICE_KEY)) {
   process.exit(1);
 }
 
+const YOUTUBE_KEY = process.env.YOUTUBE_API_KEY || '';
 const sleep = ms => new Promise(resolve => setTimeout(resolve, ms));
 
 async function upsert(rows) {
@@ -165,11 +168,40 @@ async function syncRss(source, index, since, pages) {
   return { fetched, skipped, rows, complete };
 }
 
+/* A YouTube channel's uploads, newest first, through the official Data API
+   (playlistItems.list costs 1 quota unit per 50 videos). */
+async function syncYoutube(source, index, since, pages) {
+  const playlist = news.uploadsPlaylist(source.channelId);
+  if (!playlist) throw new Error('channelId must be a UC... channel id');
+  const rows = [];
+  let fetched = 0, skipped = 0, complete = false, pageToken = '';
+  for (let page = 1; page <= pages; page += 1) {
+    const url = `https://www.googleapis.com/youtube/v3/playlistItems?part=snippet,contentDetails&maxResults=50&playlistId=${playlist}${pageToken ? `&pageToken=${encodeURIComponent(pageToken)}` : ''}&key=${encodeURIComponent(YOUTUBE_KEY)}`;
+    const data = await news.getJson(url, 20000);
+    const entries = Array.isArray(data && data.items) ? data.items : [];
+    let older = false;
+    entries.forEach(entry => {
+      const item = news.shapeYoutubeItem(entry, source);
+      if (!item) return;
+      if (new Date(item.publishedAt) < since) { older = true; return; }
+      fetched += 1;
+      if (news.skipStory(source, item.title, [])) { skipped += 1; return; }
+      const towns = news.placeStory(source, index, item.title, [], item.description);
+      if (towns.length) rows.push(toRow(item, towns));
+    });
+    pageToken = data && data.nextPageToken;
+    if (older || !pageToken) { complete = true; break; }
+  }
+  return { fetched, skipped, rows, complete };
+}
+
 async function syncSource(source, towns) {
   const index = news.townIndex(source, towns);
   const since = new Date(Date.now() - days * 864e5);
   const pages = Math.min(maxPagesArg, source.maxPages || 50);
-  const result = source.type === 'rss' ? await syncRss(source, index, since, pages) : await syncWordPress(source, index, since, pages);
+  const result = source.type === 'rss' ? await syncRss(source, index, since, pages)
+    : source.type === 'youtube' ? await syncYoutube(source, index, since, pages)
+      : await syncWordPress(source, index, since, pages);
   if (!dryRun && result.rows.length) await upsert(result.rows);
   const removed = prune && result.complete && !dryRun ? await pruneStale(source, since) : null;
   return {
@@ -183,7 +215,10 @@ async function syncSource(source, towns) {
 }
 
 const { sources, towns } = news.loadStatic();
-const selected = sources.filter(source => !only.size || only.has(source.id));
+const wanted = sources.filter(source => !only.size || only.has(source.id));
+const waiting = wanted.filter(source => source.type === 'youtube' && !YOUTUBE_KEY);
+if (waiting.length) console.log(`::notice::YouTube channels skipped until the YOUTUBE_API_KEY secret is set: ${waiting.map(source => source.id).join(', ')}`);
+const selected = wanted.filter(source => !waiting.includes(source));
 let failed = 0;
 for (const source of selected) {
   try {
@@ -195,6 +230,6 @@ for (const source of selected) {
     console.error(`::warning::${source.id}: ${error && error.message ? error.message : error}`);
   }
 }
-if (!selected.length) console.log('No enabled local sources.');
+if (!wanted.length) console.log('No enabled local sources.');
 /* One unreachable site should not stop the others; fail the run only when every source failed. */
 process.exit(selected.length && failed === selected.length ? 1 : 0);

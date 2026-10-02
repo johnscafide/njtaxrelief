@@ -37,6 +37,7 @@ jobs:
         env:
           SUPABASE_URL: https://uvkvaxljhhngydvlrzom.supabase.co
           SUPABASE_SERVICE_ROLE_KEY: ${{ secrets.SUPABASE_SERVICE_ROLE_KEY }}
+          YOUTUBE_API_KEY: ${{ secrets.YOUTUBE_API_KEY }}
           DAYS: ${{ inputs.days || '3' }}
           DRY_RUN: ${{ inputs.dry_run }}
           PRUNE: ${{ inputs.prune }}

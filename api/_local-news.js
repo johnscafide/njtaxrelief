@@ -6,10 +6,13 @@
    reporter's own headline, short excerpt, featured photo and link; the full
    story always stays on their site. Files starting with "_" are not routes.
 
-   Sources are WordPress sites (read through their public REST API) or plain
-   RSS feeds. A story is placed in a town by, in order: the reporter's own town
-   label (category or tag), a town named in the headline, or the source's home
-   town when it only covers one place. */
+   Sources are WordPress sites (read through their public REST API), plain RSS
+   feeds, or YouTube channels (read through the official YouTube Data API with
+   the YOUTUBE_API_KEY secret; YouTube's robots.txt rules out its RSS feeds).
+   A story is placed in a town by, in order: the reporter's own town label
+   (category or tag), a town named in the headline (or, for sources that opt
+   in, the start of a video description), or the source's home town when it
+   only covers one place. */
 const fs = require('fs');
 const path = require('path');
 
@@ -69,7 +72,7 @@ function loadStatic() {
   if (staticData) return staticData;
   staticData = {
     towns: readJson('property/data/home-feed-towns.json').towns || {},
-    sources: (readJson('property/data/local-sources.json').sources || []).filter(s => s && s.enabled && (s.type === 'wordpress' || s.type === 'rss'))
+    sources: (readJson('property/data/local-sources.json').sources || []).filter(s => s && s.enabled && ['wordpress', 'rss', 'youtube'].includes(s.type))
   };
   return staticData;
 }
@@ -239,13 +242,16 @@ function townsInHeadline(title, index) {
   return codes;
 }
 
-/* Label codes first, then headline names, then the source's home town. */
-function placeStory(source, index, title, labelNames) {
+/* Label codes first, then headline names, then (for sources with
+   "matchDescription") the opening of the description, then the source's home
+   town. */
+function placeStory(source, index, title, labelNames, description) {
   let codes = new Set();
   if (source.townsFrom && source.townsFrom !== 'none') {
     labelNames.forEach(name => { const code = labelCode(name, index); if (code) codes.add(code); });
   }
   if (!codes.size && source.titleMatch !== false) codes = townsInHeadline(title, index);
+  if (!codes.size && source.matchDescription && description) codes = townsInHeadline(String(description).slice(0, 400), index);
   if (!codes.size && Array.isArray(source.defaultTowns)) source.defaultTowns.forEach(code => codes.add(code));
   return Array.from(codes);
 }
@@ -407,8 +413,47 @@ function shapeRssItem(item, source) {
   };
 }
 
+/* ---------- YouTube ---------- */
+/* A channel's uploads playlist id is its channel id with "UC" swapped for "UU". */
+function uploadsPlaylist(channelId) {
+  return /^UC[\w-]{22}$/.test(String(channelId || '')) ? `UU${channelId.slice(2)}` : '';
+}
+
+/* One playlistItems.list entry (part=snippet,contentDetails) as a story. The
+   picture is YouTube's own 480x360 thumbnail; the link and Watch button go to
+   the video on YouTube. */
+function shapeYoutubeItem(entry, source) {
+  const snippet = entry && entry.snippet;
+  const details = (entry && entry.contentDetails) || {};
+  const id = details.videoId || (snippet && snippet.resourceId && snippet.resourceId.videoId) || '';
+  if (!snippet || !/^[\w-]{11}$/.test(id)) return null;
+  const title = plain(snippet.title);
+  if (!title || /^(?:private|deleted) video$/i.test(title)) return null;
+  const when = new Date(details.videoPublishedAt || snippet.publishedAt);
+  if (Number.isNaN(when.getTime())) return null;
+  const description = String(snippet.description || '');
+  const thumbs = snippet.thumbnails || {};
+  const thumb = (thumbs.high || thumbs.standard || thumbs.medium || {}).url || '';
+  const video = { id, url: `https://www.youtube.com/watch?v=${id}`, thumb: `https://i.ytimg.com/vi/${id}/hqdefault.jpg` };
+  return {
+    id: `${source.id}:${id}`,
+    externalId: id,
+    source: source.id,
+    title,
+    url: video.url,
+    publishedAt: when.toISOString(),
+    excerpt: clip(description.split(/\n\s*\n/)[0].replace(/\s+/g, ' ').trim(), 220),
+    image: /^https:\/\/i\d?\.ytimg\.com\//.test(thumb) ? thumb : video.thumb,
+    imageAlt: '',
+    video,
+    description,
+    addresses: addressesIn(`${title}. ${description}`)
+  };
+}
+
 module.exports = {
   USER_AGENT, MAX_AGE_DAYS, POST_FIELDS,
   loadStatic, getJson, getText, labelsFor, wordpressContext, townIndex, placeStory, skipStory,
-  shapePost, rssItems, shapeRssItem, addressesIn, streetKey, youtubeIn, clip, decode, plain, baseName
+  shapePost, rssItems, shapeRssItem, uploadsPlaylist, shapeYoutubeItem,
+  addressesIn, streetKey, youtubeIn, clip, decode, plain, baseName
 };
