@@ -180,10 +180,11 @@
       "about": "New Jersey commercial real estate news",
       "type": "wordpress",
       "api": "https://re-nj.com/wp-json/wp/v2",
-      "enabled": true,
+      "enabled": false,
       "counties": "all",
       "townsFrom": "none",
-      "titleMatch": true
+      "titleMatch": true,
+      "note": "Off: the site answers the sync with HTTP 403 (it blocks automated requests), so it is not fetched."
     },
     {
       "id": "planetprinceton",
@@ -267,13 +268,14 @@
         "Atlantic",
         "Cape May"
       ],
-      "townsFrom": "categories",
+      "townsFrom": "none",
       "titleMatch": true,
       "labelTowns": {
-        "Toms River News": "1508"
+        "Toms River News": "1508",
+        "Jackson": "1512"
       },
       "query": "categories=3,117,38,10389,10,4,97130,15760,54044,53065,111836,111830,111792,111875,111947,111890,111891&categories_exclude=9,15775,19741,59432,94348,71,10357,11483,53584,10977,11093,53490,11098,11541,53484,10976,54381,11495,10982,10984,11131,11644,10979,10980,10981,10978,11499,55350,90829,11719,11677,90669,111814,111831,111933,111815,111888,111945,94847,12008",
-      "note": "query keeps local community, government, business, food, schools and town categories and leaves out police blotter, national and out-of-state categories."
+      "note": "query keeps local community, government, business, food, schools and town categories and leaves out police blotter, national and out-of-state categories. Its town categories are also put on statewide stories, so stories are placed by the headline instead; \"Jackson\" there means Jackson Township."
     },
     {
       "id": "morristowngreen",
