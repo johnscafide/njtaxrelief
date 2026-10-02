@@ -1,6 +1,7 @@
 name: Local news sync
 # Pulls each enabled local reporter's recent stories (property/data/local-sources.json)
 # into public.local_news_items so the home feed reads them from the database.
+# A full backfill (days=365) across every source takes several minutes.
 on:
   workflow_dispatch:
     inputs:
@@ -22,7 +23,7 @@ concurrency:
 jobs:
   sync:
     runs-on: ubuntu-latest
-    timeout-minutes: 10
+    timeout-minutes: 25
     steps:
       - uses: actions/checkout@v4
       - uses: actions/setup-node@v4
