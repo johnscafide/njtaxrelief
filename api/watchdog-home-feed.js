@@ -508,7 +508,11 @@ function settle(result, label) {
 
 /* Local reporters' stories for this town, from public.local_news_items (filled
    hourly by property/scripts/sync_local_news.mjs). Turning a source off in
-   property/data/local-sources.json removes its stories here too. */
+   property/data/local-sources.json removes its stories here too. The newest
+   six are kept, at most three per site, so one busy site cannot crowd out the
+   others; a story two sites both ran shows once. */
+const NEWS_LIMIT = 6;
+const NEWS_PER_SOURCE = 3;
 const TEN_MINUTES = 10 * 60 * 1000;
 async function newsFor(code, config) {
   const sources = loadStatic().newsSources;
@@ -522,9 +526,21 @@ async function newsFor(code, config) {
       source_id: `in.(${sources.map(source => source.id).join(',')})`,
       published_at: `gte.${since}`,
       order: 'published_at.desc',
-      limit: '6'
+      limit: '30'
     });
-    const items = (Array.isArray(rows) ? rows : []).map(row => ({
+    const perSource = new Map();
+    const seen = new Set();
+    const picked = (Array.isArray(rows) ? rows : []).filter(row => {
+      const titleKey = String(row.title || '').toLowerCase().replace(/[^a-z0-9]+/g, ' ').trim();
+      if (seen.has(row.url) || seen.has(titleKey)) return false;
+      const n = perSource.get(row.source_id) || 0;
+      if (n >= NEWS_PER_SOURCE) return false;
+      perSource.set(row.source_id, n + 1);
+      seen.add(row.url);
+      seen.add(titleKey);
+      return true;
+    }).slice(0, NEWS_LIMIT);
+    const items = picked.map(row => ({
       id: `${row.source_id}:${row.external_id}`,
       source: row.source_id,
       title: row.title,
@@ -538,7 +554,7 @@ async function newsFor(code, config) {
     }));
     return {
       available: items.length > 0,
-      sources: sources.map(source => ({ id: source.id, name: source.name, badge: source.badge || '', site: source.site, about: source.about || '' })),
+      sources: sources.filter(source => items.some(item => item.source === source.id)).map(source => ({ id: source.id, name: source.name, badge: source.badge || '', site: source.site, about: source.about || '' })),
       items
     };
   });

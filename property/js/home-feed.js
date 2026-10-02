@@ -20,7 +20,10 @@
   var KEY_HOME = 'wdh:home:';
   var KEY_FEED = 'wdh:feed:';
   var KEY_LAST = 'wdh:lastTown';
+  var KEY_WX = 'wdh:wx:';
   var FEED_TIMEOUT = 9000;
+  var WEATHER_API = '/api/watchdog-town-weather';
+  var WX_ICONS = /^(?:sun|moon|cloud|cloud-sun|cloud-moon|cloud-rain|cloud-showers-heavy|cloud-bolt|snowflake|smog|wind)$/;
   var MONTHS = ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December'];
   var SHORT = ['JAN', 'FEB', 'MAR', 'APR', 'MAY', 'JUN', 'JUL', 'AUG', 'SEP', 'OCT', 'NOV', 'DEC'];
 
@@ -42,7 +45,8 @@
     gamesPromise: null,
     briefOpen: false,
     places: [],
-    requestId: 0
+    requestId: 0,
+    wxFor: ''
   };
 
   /* ---------- small helpers ---------- */
@@ -362,14 +366,44 @@
     renderWhere();
   }
 
-  /* The quiet "date · town (change)" line between the hero and the feed. */
+  /* The quiet line between the hero and the feed: the date on the left, the
+     weather and "town (change)" on the right. */
   function renderWhere() {
     var now = new Date(), town = state.feed && state.feed.town;
-    var date = $('wdh-where-date'), sep = $('wdh-where-sep'), where = $('wdh-where-town'), change = $('wdh-town-change');
+    var date = $('wdh-where-date'), where = $('wdh-where-town'), change = $('wdh-town-change');
     if (date) date.textContent = ['Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday'][now.getDay()] + ', ' + MONTHS[now.getMonth()] + ' ' + now.getDate();
-    if (sep) sep.hidden = false;
     if (where) where.textContent = town ? town.name + ', ' + town.county + ' County' : 'New Jersey';
     if (change) change.setAttribute('aria-label', town ? 'Change town, now ' + town.name : 'Choose your town');
+    if (town) loadWeather(town.code);
+  }
+
+  /* "Sunny 77°" from /api/watchdog-town-weather. It loads after the feed and never
+     holds it up; a reading under 20 minutes old is reused, and one under 3
+     hours old shows while a fresh one loads. */
+  function renderWeather(wx) {
+    var box = $('wdh-wx'), text = $('wdh-wx-text'), ico = $('wdh-wx-icon'), sep = $('wdh-where-sep');
+    var ok = !!(wx && wx.text && isFinite(wx.temp));
+    if (box) box.hidden = !ok;
+    if (sep) sep.hidden = !ok;
+    if (!ok || !text) return;
+    if (ico) ico.className = 'fas fa-' + (WX_ICONS.test(wx.icon) ? wx.icon : 'cloud-sun');
+    text.textContent = wx.text + ' ' + Math.round(wx.temp) + '\u00B0';
+  }
+  function loadWeather(code) {
+    if (!code || state.wxFor === code) return;
+    state.wxFor = code;
+    var saved = store(KEY_WX + code);
+    var age = saved && saved.wx ? Date.now() - saved.at : Infinity;
+    renderWeather(age < 3 * 3600 * 1000 ? saved.wx : null);
+    if (age < 20 * 60 * 1000) return;
+    fetch(WEATHER_API + '?town=' + encodeURIComponent(code), { credentials: 'same-origin', headers: { Accept: 'application/json' } })
+      .then(function (r) { return r.ok ? r.json() : null; })
+      .then(function (wx) {
+        if (state.wxFor !== code || !wx || !wx.text) return;
+        store(KEY_WX + code, { at: Date.now(), wx: wx });
+        renderWeather(wx);
+      })
+      .catch(function () {});
   }
 
   function isNewSales() {
@@ -449,7 +483,7 @@
     var news = state.feed && state.feed.news;
     return news && news.available && Array.isArray(news.items) ? news.items : [];
   }
-  /* Same keys as api/watchdog-local-news.js: "303 white horse pike", "53 route 73". */
+  /* Same keys as api/_local-news.js: "303 white horse pike", "53 route 73". */
   var STREET_TYPES = { road: 'rd', rd: 'rd', pike: 'pike', avenue: 'ave', ave: 'ave', street: 'st', st: 'st', boulevard: 'blvd', blvd: 'blvd', drive: 'dr', dr: 'dr', lane: 'ln', ln: 'ln', highway: 'hwy', hwy: 'hwy', parkway: 'pkwy', pkwy: 'pkwy', way: 'way', court: 'ct', ct: 'ct', place: 'pl', pl: 'pl', circle: 'cir', cir: 'cir', terrace: 'ter', ter: 'ter' };
   function addressKey(address) {
     var text = String(address || '').trim();

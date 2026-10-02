@@ -7,6 +7,7 @@
      node property/scripts/sync_local_news.mjs              # last 3 days (hourly job)
      node property/scripts/sync_local_news.mjs --days 365   # backfill a year
      node property/scripts/sync_local_news.mjs --dry-run    # fetch and print, write nothing
+     node property/scripts/sync_local_news.mjs --only jerseydigs,renj
 
    Writes need SUPABASE_URL and SUPABASE_SERVICE_ROLE_KEY. Re-running is safe:
    rows upsert on (source_id, external_id), and the per-story "hidden" switch is
@@ -24,7 +25,8 @@ const value = (name, fallback) => {
 };
 const days = Math.max(1, Math.min(Number(value('--days', '3')) || 3, news.MAX_AGE_DAYS));
 const dryRun = flag('--dry-run');
-const maxPages = Math.max(1, Math.min(Number(value('--max-pages', '20')) || 20, 50));
+const maxPagesArg = Math.max(1, Math.min(Number(value('--max-pages', '20')) || 20, 50));
+const only = new Set(String(value('--only', '')).split(',').map(s => s.trim()).filter(Boolean));
 
 const SUPABASE_URL = (process.env.SUPABASE_URL || '').replace(/\/+$/, '');
 const SERVICE_KEY = process.env.SUPABASE_SERVICE_ROLE_KEY || '';
@@ -32,6 +34,8 @@ if (!dryRun && (!SUPABASE_URL || !SERVICE_KEY)) {
   console.error('SUPABASE_URL and SUPABASE_SERVICE_ROLE_KEY are required (or pass --dry-run).');
   process.exit(1);
 }
+
+const sleep = ms => new Promise(resolve => setTimeout(resolve, ms));
 
 async function upsert(rows) {
   for (let i = 0; i < rows.length; i += 100) {
@@ -50,16 +54,40 @@ async function upsert(rows) {
   }
 }
 
-async function syncSource(source, towns) {
-  const tags = await news.tagsFor(source);
-  const ctx = news.tagContext(source, tags, towns);
-  const after = new Date(Date.now() - days * 864e5).toISOString().slice(0, 19);
+function toRow(item, towns) {
+  return {
+    source_id: item.source,
+    external_id: item.externalId,
+    title: item.title,
+    url: item.url,
+    published_at: item.publishedAt,
+    excerpt: item.excerpt || null,
+    image_url: item.image || null,
+    image_alt: item.imageAlt || null,
+    video_id: item.video ? item.video.id : null,
+    town_codes: towns,
+    address_keys: item.addresses,
+    fetched_at: new Date().toISOString()
+  };
+}
+
+/* Sites with large posts can fail on 100-post pages; "perPage" lowers it and
+   the page budget grows to cover the same number of stories. */
+async function syncWordPress(source, index, since, pages) {
+  const delay = (source.crawlDelaySec || 0) * 1000;
+  const perPage = Math.max(10, Math.min(source.perPage || 100, 100));
+  pages = Math.min(Math.ceil(pages * 100 / perPage), 100);
+  const categories = source.fetchLabels === false ? [] : await news.labelsFor(source, 'categories');
+  const tags = source.townsFrom === 'tags' ? await news.labelsFor(source, 'tags') : [];
+  const ctx = news.wordpressContext(source, categories, tags);
+  const after = since.toISOString().slice(0, 19);
   const rows = [];
-  let fetched = 0;
-  for (let page = 1; page <= maxPages; page += 1) {
+  let fetched = 0, skipped = 0;
+  for (let page = 1; page <= pages; page += 1) {
+    if (delay && (page > 1 || categories.length || tags.length)) await sleep(delay);
     let posts;
     try {
-      posts = await news.getJson(`${source.api}/posts?per_page=100&page=${page}&after=${after}&orderby=date&order=desc&${news.POST_FIELDS}`, 20000);
+      posts = await news.getJson(`${source.api}/posts?per_page=${perPage}&page=${page}&after=${after}&orderby=date&order=desc${source.query ? `&${source.query}` : ''}&${news.POST_FIELDS}`, 30000);
     } catch (error) {
       /* WordPress answers past the last page with HTTP 400. */
       if (page > 1 && /http 400/.test(String(error && error.message))) break;
@@ -68,41 +96,80 @@ async function syncSource(source, towns) {
     if (!Array.isArray(posts) || !posts.length) break;
     fetched += posts.length;
     posts.forEach(post => {
-      const towns = news.townsForPost(post, ctx);
-      const item = towns.length ? news.shapePost(post, source) : null;
+      const item = news.shapePost(post, source);
       if (!item) return;
-      const published = post.date_gmt ? `${String(post.date_gmt).slice(0, 19)}Z` : `${item.date}Z`;
-      rows.push({
-        source_id: source.id,
-        external_id: String(post.id),
-        title: item.title,
-        url: item.url,
-        published_at: published,
-        excerpt: item.excerpt || null,
-        image_url: item.image || null,
-        image_alt: item.imageAlt || null,
-        video_id: item.video ? item.video.id : null,
-        town_codes: towns,
-        address_keys: item.addresses,
-        fetched_at: new Date().toISOString()
-      });
+      if (news.skipStory(source, item.title, ctx.topicNames(post))) { skipped += 1; return; }
+      const towns = news.placeStory(source, index, item.title, ctx.labelNames(post));
+      if (towns.length) rows.push(toRow(item, towns));
     });
-    if (posts.length < 100) break;
+    if (posts.length < perPage) break;
   }
-  if (!dryRun && rows.length) await upsert(rows);
-  return { source: source.id, tags: tags.length, fetched, stored: rows.length, sample: rows.slice(0, 3).map(r => `${r.published_at.slice(0, 10)} ${r.town_codes.join('/')} ${r.title}`) };
+  return { fetched, skipped, rows };
+}
+
+/* RSS feeds carry the latest 10 to 20 stories; WordPress-backed feeds page
+   back with ?paged=N, which the backfill uses. */
+async function syncRss(source, index, since, pages) {
+  const delay = (source.crawlDelaySec || 0) * 1000;
+  const rows = [];
+  const seen = new Set();
+  let fetched = 0, skipped = 0;
+  for (let page = 1; page <= pages; page += 1) {
+    if (delay && page > 1) await sleep(delay);
+    let xml;
+    try {
+      xml = await news.getText(page === 1 ? source.feed : `${source.feed}${source.feed.includes('?') ? '&' : '?'}paged=${page}`, 30000);
+    } catch (error) {
+      if (page > 1) break;
+      throw error;
+    }
+    const items = news.rssItems(xml);
+    if (!items.length) break;
+    let older = false, fresh = 0;
+    items.forEach(raw => {
+      const item = news.shapeRssItem(raw, source);
+      if (!item || seen.has(item.externalId)) return;
+      seen.add(item.externalId);
+      fresh += 1;
+      if (new Date(item.publishedAt) < since) { older = true; return; }
+      fetched += 1;
+      if (news.skipStory(source, item.title, raw.categories)) { skipped += 1; return; }
+      const towns = news.placeStory(source, index, item.title, source.townsFrom === 'categories' ? raw.categories : []);
+      if (towns.length) rows.push(toRow(item, towns));
+    });
+    if (older || !fresh) break;
+  }
+  return { fetched, skipped, rows };
+}
+
+async function syncSource(source, towns) {
+  const index = news.townIndex(source, towns);
+  const since = new Date(Date.now() - days * 864e5);
+  const pages = Math.min(maxPagesArg, source.maxPages || 50);
+  const result = source.type === 'rss' ? await syncRss(source, index, since, pages) : await syncWordPress(source, index, since, pages);
+  if (!dryRun && result.rows.length) await upsert(result.rows);
+  return {
+    source: source.id,
+    fetched: result.fetched,
+    skipped: result.skipped,
+    stored: result.rows.length,
+    sample: result.rows.slice(0, dryRun ? 12 : 3).map(r => `${r.published_at.slice(0, 10)} ${r.town_codes.join('/')} ${r.image_url ? '[photo]' : '[no photo]'} ${r.title}`)
+  };
 }
 
 const { sources, towns } = news.loadStatic();
-let failed = false;
-for (const source of sources) {
+const selected = sources.filter(source => !only.size || only.has(source.id));
+let failed = 0;
+for (const source of selected) {
   try {
     const result = await syncSource(source, towns);
     console.log(JSON.stringify({ ...result, days, dryRun }));
   } catch (error) {
-    failed = true;
-    console.error(`${source.id}: ${error && error.message ? error.message : error}`);
+    failed += 1;
+    /* "::warning::" shows up as an annotation on the GitHub Actions run. */
+    console.error(`::warning::${source.id}: ${error && error.message ? error.message : error}`);
   }
 }
-if (!sources.length) console.log('No enabled local sources.');
-process.exit(failed ? 1 : 0);
+if (!selected.length) console.log('No enabled local sources.');
+/* One unreachable site should not stop the others; fail the run only when every source failed. */
+process.exit(selected.length && failed === selected.length ? 1 : 0);
