@@ -8,10 +8,14 @@
      node property/scripts/sync_local_news.mjs --days 365   # backfill a year
      node property/scripts/sync_local_news.mjs --dry-run    # fetch and print, write nothing
      node property/scripts/sync_local_news.mjs --only jerseydigs,renj
+     node property/scripts/sync_local_news.mjs --days 365 --prune
 
    Writes need SUPABASE_URL and SUPABASE_SERVICE_ROLE_KEY. Re-running is safe:
    rows upsert on (source_id, external_id), and the per-story "hidden" switch is
-   never overwritten. */
+   never overwritten. --prune is for re-syncing after a rule change: when a
+   source's whole window was read, its stories in that window that this run
+   no longer keeps (now filtered out or no longer placed in a town) are
+   removed. Hidden stories are always kept. */
 import { createRequire } from 'node:module';
 
 const require = createRequire(import.meta.url);
@@ -27,6 +31,8 @@ const days = Math.max(1, Math.min(Number(value('--days', '3')) || 3, news.MAX_AG
 const dryRun = flag('--dry-run');
 const maxPagesArg = Math.max(1, Math.min(Number(value('--max-pages', '20')) || 20, 50));
 const only = new Set(String(value('--only', '')).split(',').map(s => s.trim()).filter(Boolean));
+const prune = flag('--prune');
+const runStart = new Date().toISOString();
 
 const SUPABASE_URL = (process.env.SUPABASE_URL || '').replace(/\/+$/, '');
 const SERVICE_KEY = process.env.SUPABASE_SERVICE_ROLE_KEY || '';
@@ -54,6 +60,20 @@ async function upsert(rows) {
   }
 }
 
+/* Stories in the window this run did not refresh. The window starts a day
+   later than the fetch so a time zone difference at the edge never removes a
+   story the run simply did not ask for. */
+async function pruneStale(source, since) {
+  const from = new Date(since.getTime() + 864e5).toISOString();
+  const query = `source_id=eq.${encodeURIComponent(source.id)}&published_at=gte.${encodeURIComponent(from)}&fetched_at=lt.${encodeURIComponent(runStart)}&hidden=eq.false&select=id`;
+  const response = await fetch(`${SUPABASE_URL}/rest/v1/local_news_items?${query}`, {
+    method: 'DELETE',
+    headers: { apikey: SERVICE_KEY, Authorization: `Bearer ${SERVICE_KEY}`, Prefer: 'return=representation' }
+  });
+  if (!response.ok) throw new Error(`prune http ${response.status}: ${(await response.text()).slice(0, 300)}`);
+  return (await response.json()).length;
+}
+
 function toRow(item, towns) {
   return {
     source_id: item.source,
@@ -74,6 +94,7 @@ function toRow(item, towns) {
 /* Sites with large posts can fail on 100-post pages; "perPage" lowers it and
    the page budget grows to cover the same number of stories. */
 async function syncWordPress(source, index, since, pages) {
+  let complete = false;
   const delay = (source.crawlDelaySec || 0) * 1000;
   const perPage = Math.max(10, Math.min(source.perPage || 100, 100));
   pages = Math.min(Math.ceil(pages * 100 / perPage), 100);
@@ -90,10 +111,10 @@ async function syncWordPress(source, index, since, pages) {
       posts = await news.getJson(`${source.api}/posts?per_page=${perPage}&page=${page}&after=${after}&orderby=date&order=desc${source.query ? `&${source.query}` : ''}&${news.POST_FIELDS}`, 30000);
     } catch (error) {
       /* WordPress answers past the last page with HTTP 400. */
-      if (page > 1 && /http 400/.test(String(error && error.message))) break;
+      if (page > 1 && /http 400/.test(String(error && error.message))) { complete = true; break; }
       throw error;
     }
-    if (!Array.isArray(posts) || !posts.length) break;
+    if (!Array.isArray(posts) || !posts.length) { complete = true; break; }
     fetched += posts.length;
     posts.forEach(post => {
       const item = news.shapePost(post, source);
@@ -102,9 +123,9 @@ async function syncWordPress(source, index, since, pages) {
       const towns = news.placeStory(source, index, item.title, ctx.labelNames(post));
       if (towns.length) rows.push(toRow(item, towns));
     });
-    if (posts.length < perPage) break;
+    if (posts.length < perPage) { complete = true; break; }
   }
-  return { fetched, skipped, rows };
+  return { fetched, skipped, rows, complete };
 }
 
 /* RSS feeds carry the latest 10 to 20 stories; WordPress-backed feeds page
@@ -113,7 +134,7 @@ async function syncRss(source, index, since, pages) {
   const delay = (source.crawlDelaySec || 0) * 1000;
   const rows = [];
   const seen = new Set();
-  let fetched = 0, skipped = 0;
+  let fetched = 0, skipped = 0, complete = false;
   for (let page = 1; page <= pages; page += 1) {
     if (delay && page > 1) await sleep(delay);
     let xml;
@@ -137,9 +158,11 @@ async function syncRss(source, index, since, pages) {
       const towns = news.placeStory(source, index, item.title, source.townsFrom === 'categories' ? raw.categories : []);
       if (towns.length) rows.push(toRow(item, towns));
     });
-    if (older || !fresh) break;
+    /* Only an item older than the window proves the whole window was read. */
+    if (older) { complete = true; break; }
+    if (!fresh) break;
   }
-  return { fetched, skipped, rows };
+  return { fetched, skipped, rows, complete };
 }
 
 async function syncSource(source, towns) {
@@ -148,11 +171,13 @@ async function syncSource(source, towns) {
   const pages = Math.min(maxPagesArg, source.maxPages || 50);
   const result = source.type === 'rss' ? await syncRss(source, index, since, pages) : await syncWordPress(source, index, since, pages);
   if (!dryRun && result.rows.length) await upsert(result.rows);
+  const removed = prune && result.complete && !dryRun ? await pruneStale(source, since) : null;
   return {
     source: source.id,
     fetched: result.fetched,
     skipped: result.skipped,
     stored: result.rows.length,
+    removed,
     sample: result.rows.slice(0, dryRun ? 12 : 3).map(r => `${r.published_at.slice(0, 10)} ${r.town_codes.join('/')} ${r.image_url ? '[photo]' : '[no photo]'} ${r.title}`)
   };
 }

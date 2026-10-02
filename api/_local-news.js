@@ -53,9 +53,9 @@ const PLACE_WORDS = 'Road|Rd|Pike|Avenue|Ave|Street|St|Boulevard|Blvd|Drive|Dr|L
 const OTHER_STATE = ',\\s+(?:MD|Md\\.|Maryland|NY|N\\.Y\\.|New York|PA|Pa\\.|Penn\\.|Pennsylvania|DE|Del\\.|Delaware|CT|Conn\\.|Connecticut|FL|Fla\\.|Florida|OH|Ohio|CA|Calif\\.|California|MA|Mass\\.|Massachusetts|VA|Va\\.|Virginia|IL|Ill\\.|Illinois)(?!\\w)';
 
 /* The home feed is about places: what is being built, opening, closing or
-   decided near you. Crime, deaths, obituaries, opinion and paid posts stay on
-   the reporter's site. A source can opt out with "allTopics": true. */
-const SKIP_TOPIC = /\b(?:obituar\w*|police|blotter|crimes?|public safety|sponsor\w*|opinion|editorials?|letters? to the editor|lottery|courts?|giveaways?|recipes?|horoscopes?)\b/i;
+   decided near you. Crime, deaths, obituaries, opinion, sports and paid posts
+   stay on the reporter's site. A source can opt out with "allTopics": true. */
+const SKIP_TOPIC = /\b(?:obituar\w*|police|blotter|crimes?|public safety|sponsor\w*|opinion|editorials?|letters? to the editor|lottery|courts?|giveaways?|recipes?|horoscopes?|sports?)\b/i;
 const SKIP_HEADLINE = /\b(?:arrest(?:ed|s)?|charged|indicted|sentenced|convicted|pleads? guilty|pleaded guilty|shooting|stabb(?:ed|ing)|murder(?:ed|s)?|homicide|manslaughter|fatal(?:ly)?|killed|dead|injur(?:ed|ies|y)|crash(?:es|ed)?|overdose|obituary|dies|died|death|DWI|DUI|missing|sexual assault|police say)\b/i;
 
 const memo = new Map();
