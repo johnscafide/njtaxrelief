@@ -49,6 +49,11 @@ body.wd-consumer-mode .pl-hero.wdh-hero h1.wdh-hero-title{margin:0 auto 10px;max
 /* A site-wide touch rule gives buttons a 44px minimum height, which would make
    this inline link stretch the line; the :after above already covers the tap area. */
 .wdh .wdh-where .wdh-where-change{min-height:0!important;height:auto!important;vertical-align:baseline}
+/* Phones show a location pin in place of the town name (see the 760px block). */
+.wdh-where-pin{display:none}
+@keyframes wdh-pin-pulse{50%{opacity:.35}}
+/* Watchdog Intelligence Brief expand toggle: phones only. */
+.wdh-week-more{display:none}
 .wdh-where-change:hover,.wdh-where-change:focus-visible{text-decoration:underline;text-underline-offset:3px;color:var(--wdh-ink)}
 .wdh-shell{display:grid;grid-template-columns:minmax(0,1fr) 344px;gap:28px;max-width:1240px;margin:0 auto;padding:0 32px;align-items:start}
 .wdh-main{min-width:0;display:flex;flex-direction:column;gap:20px}
@@ -138,7 +143,7 @@ body.wd-consumer-mode .pl-hero.wdh-hero h1.wdh-hero-title{margin:0 auto 10px;max
 .wdh-intel-title{font-size:22px;line-height:1.2;font-weight:800;letter-spacing:-.025em;color:var(--wdh-ink)}
 .wdh .wd-intelligence-brand-word{display:inline;margin:0;padding:0;border:0;border-radius:0;box-shadow:none;color:transparent;-webkit-text-fill-color:transparent;background:linear-gradient(90deg,#0aaeb8 0%,#2478ff 34%,#7857ff 67%,#e84bc4 100%);-webkit-background-clip:text;background-clip:text;font:inherit}
 .wdh-week .wdh-meta{margin-top:2px;font-size:14px}
-@media (prefers-reduced-motion:reduce){.wdh .wdh-intel{animation:none}}
+@media (prefers-reduced-motion:reduce){.wdh .wdh-intel,.wdh-where-pin.is-busy i{animation:none}.wdh-week-more i{transition:none}}
 @media (forced-colors:active){.wdh .wd-intelligence-brand-word{color:CanvasText;-webkit-text-fill-color:CanvasText;background:none}}
 @media print{.wdh .wdh-intel{animation:none;border-color:var(--wdh-line);background:#fff}.wdh .wd-intelligence-brand-word{color:#087f83;-webkit-text-fill-color:#087f83;background:none}}
 .wdh-week-head{display:flex;justify-content:space-between;align-items:flex-start;gap:12px;flex-wrap:wrap}
@@ -262,9 +267,7 @@ html.wd-index-mapless .wdh .wdh-map.leaflet-container{display:block!important;vi
 .wdh-hover{position:fixed;z-index:2000;pointer-events:none;border:1px solid var(--wdh-line);border-radius:12px;background:#fff;box-shadow:0 12px 32px rgba(17,29,56,.18)}
 .wdh-hover[hidden]{display:none}
 .wdh-hover,.wdh-hover *{box-sizing:border-box}
-.wdh-pin{display:grid;grid-template-columns:64px minmax(0,1fr);gap:10px;align-items:start;width:256px;padding:10px;font-family:var(--wdh-font);text-align:left}
-.wdh-pin.is-solo{grid-template-columns:minmax(0,1fr)}
-.wdh-pin-img{display:block;width:64px;height:64px;border-radius:8px;object-fit:cover;background:var(--wdh-soft)}
+.wdh-pin{display:grid;grid-template-columns:minmax(0,1fr);gap:10px;align-items:start;width:232px;padding:12px;font-family:var(--wdh-font);text-align:left}
 .wdh-pin-main{display:flex;flex-direction:column;gap:1px;min-width:0}
 .wdh-pin-k{font-size:12px;line-height:1.3;font-weight:700;color:var(--wdh-muted)}
 .wdh-pin-k:before{content:"";display:inline-block;width:8px;height:8px;margin-right:6px;border-radius:50%;background:var(--wdh-primary);vertical-align:0}
@@ -371,7 +374,18 @@ body.hood-on .wdh,body.hood-on .wdh-explore,body.hood-on .landing-faq{display:no
   .wdh-card-row{grid-template-columns:minmax(0,1fr);gap:0}
   .wdh-thumb{order:-1;height:170px;margin-bottom:14px}
   .wdh-stats{grid-template-columns:minmax(0,1fr)}
-  .wdh .wdh-where{padding:12px 16px 10px}
+  .wdh .wdh-where{padding:12px 16px 10px;font-size:13px}
+  .wdh-where-place{display:none}
+  .wdh .wdh-where .wdh-where-pin{position:relative;display:inline-block;min-height:0!important;height:auto!important;padding:0 4px;border:0;background:none;color:var(--wdh-muted);font-size:15px;line-height:1;vertical-align:-1px;cursor:pointer}
+  .wdh-where-pin:after{content:"";position:absolute;inset:-14px -12px}
+  .wdh-where-pin:hover,.wdh-where-pin:focus-visible{color:var(--wdh-ink)}
+  .wdh-where-pin.is-located{color:var(--wdh-primary)}
+  .wdh-where-pin.is-busy i{animation:wdh-pin-pulse 1s ease-in-out infinite}
+  .wdh-week:not(.is-open) .wdh-week-list li:nth-child(n+2){display:none}
+  .wdh-week-more:not([hidden]){display:inline-flex;align-items:center;gap:8px;min-height:44px;margin-top:2px;padding:0;border:0;background:none;color:var(--wdh-link);font:700 14px/1 var(--wdh-font);cursor:pointer}
+  .wdh-week-more[aria-expanded="true"] .wdh-week-more-closed,.wdh-week-more[aria-expanded="false"] .wdh-week-more-open{display:none}
+  .wdh-week-more i{font-size:12px;transition:transform .15s ease}
+  .wdh-week-more[aria-expanded="true"] i{transform:rotate(180deg)}
   .wdh-games{display:flex;gap:10px;overflow-x:auto;scroll-snap-type:x mandatory;scroll-padding:0 18px;margin:16px -18px 0;padding:0 18px 4px;scrollbar-width:none}
   .wdh-games::-webkit-scrollbar{display:none}
   .wdh .wdh-game{flex:0 0 74%;scroll-snap-align:start}

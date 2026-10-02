@@ -37,6 +37,7 @@
     homePrev: null,
     games: null,
     gamesPromise: null,
+    briefOpen: false,
     requestId: 0
   };
 
@@ -250,25 +251,48 @@
       return '<li><button type="button" class="wdh-picker-item" data-town="' + esc(t.code) + '"><span>' + esc(t.name) + '</span><small>' + esc(t.county) + ' County</small></button></li>';
     }).join('') + (hits.length > 60 ? '<li class="wdh-picker-empty">Keep typing to narrow ' + hits.length + ' towns.</li>' : '');
   }
+  /* Nearest town centroid to a device position, or null when outside New Jersey. */
+  function nearestTown(pos) {
+    return loadTowns().then(function (towns) {
+      var here = { lat: pos.coords.latitude, lon: pos.coords.longitude };
+      var best = null, bestD = Infinity;
+      towns.forEach(function (t) {
+        var d = miles(here, t);
+        if (d != null && d < bestD) { bestD = d; best = t; }
+      });
+      /* 12 miles covers the edge of New Jersey's largest townships from their center. */
+      return best && bestD < 12 ? best : null;
+    });
+  }
   function locateTown() {
     var button = $('wdh-picker-locate');
     if (!navigator.geolocation) { if (button) button.textContent = 'Location is not available in this browser'; return; }
     if (button) button.disabled = true;
     navigator.geolocation.getCurrentPosition(function (pos) {
-      loadTowns().then(function (towns) {
-        var here = { lat: pos.coords.latitude, lon: pos.coords.longitude };
-        var best = null, bestD = Infinity;
-        towns.forEach(function (t) {
-          var d = miles(here, t);
-          if (d != null && d < bestD) { bestD = d; best = t; }
-        });
+      nearestTown(pos).then(function (best) {
         if (button) button.disabled = false;
-        if (best && bestD < 25) { chooseTown(best.code); closePicker(); }
+        if (best) { chooseTown(best.code); closePicker(); }
         else if (button) button.innerHTML = icon('location-crosshairs') + 'You seem to be outside New Jersey';
       });
     }, function () {
       if (button) { button.disabled = false; button.innerHTML = icon('location-crosshairs') + 'Location permission was not granted'; }
     }, { timeout: 8000, maximumAge: 600000 });
+  }
+  /* Phones show only a pin for the town: tapping it uses the phone's location.
+     If location is off, denied or outside New Jersey, the town list opens instead. */
+  function locateFromPin() {
+    var pin = $('wdh-where-pin');
+    if (!navigator.geolocation) { openPicker(); return; }
+    if (pin) { pin.classList.add('is-busy'); pin.setAttribute('aria-busy', 'true'); }
+    var done = function () { if (pin) { pin.classList.remove('is-busy'); pin.removeAttribute('aria-busy'); } };
+    navigator.geolocation.getCurrentPosition(function (pos) {
+      nearestTown(pos).then(function (best) {
+        done();
+        if (!best) { openPicker(); return; }
+        if (pin) pin.classList.add('is-located');
+        if (!state.feed || !state.feed.town || state.feed.town.code !== best.code) chooseTown(best.code);
+      });
+    }, function () { done(); openPicker(); }, { timeout: 10000, maximumAge: 300000 });
   }
   function chooseTown(code) {
     store(KEY_TOWN, code);
@@ -435,6 +459,13 @@
     host.hidden = false;
     var meta = $('wdh-week-meta');
     if (meta) meta.textContent = townName() + ' in 30 seconds';
+    /* Phones show the first point and a "Show more" toggle; wider screens show everything. */
+    var more = $('wdh-week-more');
+    if (more) {
+      more.hidden = items.length < 2;
+      more.setAttribute('aria-expanded', state.briefOpen ? 'true' : 'false');
+      host.classList.toggle('is-open', !!state.briefOpen);
+    }
     // content-architecture: dynamic. Each sentence is computed from this town's feed data (sales, permits, tax rate, deadlines).
     list.innerHTML = items.map(function (html, i) { return '<li><span class="wdh-num" aria-hidden="true">' + (i + 1) + '</span><span>' + html + '</span></li>'; }).join('');
     var listen = $('wdh-listen');
@@ -461,20 +492,24 @@
     return d != null && d <= Number(state.radius);
   }
 
-  function aerialUrl(item, square) {
+  /* Address-centered NJOGIS light map, the site's standard property preview.
+     free-imagery-grid-runtime.js swaps NJ aerial thumbnails for this map
+     everywhere, so the feed asks for the map directly. */
+  function previewUrl(item) {
     if (!item || item.lat == null || item.lon == null) return '';
-    var dx = square ? 0.0009 : 0.0016, dy = square ? 0.0007 : 0.0011;
+    var dy = 0.0022, dx = dy * (480 / 330) / Math.max(0.45, Math.cos(item.lat * Math.PI / 180));
     var params = [
       'bbox=' + [item.lon - dx, item.lat - dy, item.lon + dx, item.lat + dy].join(','),
-      'bboxSR=4326', 'imageSR=3857', square ? 'size=160,160' : 'size=480,330', 'format=jpg', 'transparent=false', 'f=image'
+      'bboxSR=4326', 'imageSR=3857', 'size=480,330', 'format=jpg', 'transparent=false', 'f=image'
     ].join('&');
-    return 'https://maps.nj.gov/arcgis/rest/services/Basemap/Orthos_Natural_2020_NJ_WM/MapServer/export?' + params;
+    return 'https://maps.nj.gov/arcgis/rest/services/Basemap/LtGray_NJ_WM/MapServer/export?' + params;
   }
 
   function thumb(item, label) {
-    var url = aerialUrl(item);
+    var url = previewUrl(item);
     if (!url) return '';
-    return '<div class="wdh-thumb"><img src="' + esc(url) + '" alt="Aerial photo of ' + esc(label) + '" loading="lazy" width="480" height="330" onerror="this.parentNode.remove()"><span class="wdh-thumb-pin" aria-hidden="true"></span><span class="wdh-thumb-credit">NJOGIS 2020 aerial</span></div>';
+    // content-architecture: dynamic. The map image, its label and position come from this record's coordinates.
+    return '<div class="wdh-thumb"><img src="' + esc(url) + '" alt="Map of ' + esc(label) + '" loading="lazy" width="480" height="330" onerror="this.parentNode.remove()"><span class="wdh-thumb-pin" aria-hidden="true"></span><span class="wdh-thumb-credit">NJOGIS map</span></div>';
   }
 
   function kicker(iconName, label, extra, warn) {
@@ -916,10 +951,8 @@
       facts = [item.tax ? money(item.tax) + ' tax last year' : ''];
     }
     var dist = kind !== 'home' ? distanceText(item) : '';
-    var img = kind !== 'home' ? aerialUrl(item, true) : '';
     // content-architecture: dynamic. Every value below comes from this pin's sale, permit or saved-home record.
-    return '<div class="wdh-pin' + (img ? '' : ' is-solo') + '">' +
-      (img ? '<img class="wdh-pin-img" src="' + esc(img) + '" alt="" width="64" height="64" onerror="this.parentNode.classList.add(\'is-solo\');this.remove()">' : '') +
+    return '<div class="wdh-pin">' +
       '<span class="wdh-pin-main"><span class="wdh-pin-k wdh-pin-k-' + kind + '">' + esc(label) + '</span>' +
       '<b class="wdh-pin-t">' + esc(title) + '</b>' +
       (value ? '<span class="wdh-pin-v">' + esc(value) + '</span>' : '') +
@@ -1122,6 +1155,14 @@
     if (target.closest('[data-focus-search]')) { focusSearch(); return; }
     if (target.closest('[data-signin]')) { if (typeof window.plSignInPrompt === 'function') window.plSignInPrompt(); else if (window.WatchdogPublicNav) window.WatchdogPublicNav.open('profile'); return; }
     if (target.closest('[data-retry]')) { load(state.feed && state.feed.town ? state.feed.town.code : initialTown(), 'retry'); return; }
+    if (target.closest('#wdh-where-pin')) { locateFromPin(); return; }
+    if ((el = target.closest('#wdh-week-more'))) {
+      state.briefOpen = !state.briefOpen;
+      el.setAttribute('aria-expanded', state.briefOpen ? 'true' : 'false');
+      var week = $('wdh-week');
+      if (week) week.classList.toggle('is-open', state.briefOpen);
+      return;
+    }
     if (target.closest('#wdh-listen')) { speakWeek(); }
   });
   document.addEventListener('keydown', function (event) {
