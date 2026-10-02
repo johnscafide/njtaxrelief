@@ -482,7 +482,7 @@
       "about": "Burlington and Camden County development and town news",
       "type": "rss",
       "feed": "https://www.70and73.com/search/?f=rss&t=article&l=25&s=start_time&sd=desc",
-      "enabled": true,
+      "enabled": false,
       "counties": [
         "Burlington",
         "Camden"
@@ -499,7 +499,7 @@
       "imageWidth": 640,
       "pageParam": "o",
       "pageStep": 25,
-      "note": "TownNews BLOX feed: the town is the first part of each link (/mount_laurel/, /cherry_hill/); photos are asked for at 640px."
+      "note": "Off: the site answers the sync (GitHub Actions servers) with HTTP 429 on the first request, twice, so it is not fetched. TownNews BLOX feed: the town is the first part of each link (/mount_laurel/, /cherry_hill/); photos are asked for at 640px."
     },
     {
       "id": "njpen",
@@ -677,7 +677,7 @@
       "about": "South Jersey restaurant openings and closings",
       "type": "rss",
       "feed": "https://southjerseyfoodscene.substack.com/feed",
-      "enabled": true,
+      "enabled": false,
       "counties": [
         "Camden",
         "Burlington",
@@ -689,7 +689,8 @@
         "substack-post-media.s3.amazonaws.com",
         "substackcdn.com"
       ],
-      "noPaging": true
+      "noPaging": true,
+      "note": "Off: Substack answers the sync (GitHub Actions servers) with HTTP 403, so it is not fetched."
     },
     {
       "id": "acfocus",
