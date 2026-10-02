@@ -18,6 +18,9 @@
   var KEY_TOWN = 'wdh:town';
   var KEY_SEEN = 'wdh:seen:';
   var KEY_HOME = 'wdh:home:';
+  var KEY_FEED = 'wdh:feed:';
+  var KEY_LAST = 'wdh:lastTown';
+  var FEED_TIMEOUT = 9000;
   var MONTHS = ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December'];
   var SHORT = ['JAN', 'FEB', 'MAR', 'APR', 'MAY', 'JUN', 'JUL', 'AUG', 'SEP', 'OCT', 'NOV', 'DEC'];
 
@@ -38,6 +41,7 @@
     games: null,
     gamesPromise: null,
     briefOpen: false,
+    places: [],
     requestId: 0
   };
 
@@ -94,7 +98,7 @@
   function distanceText(item) {
     var d = state.home ? miles(state.home, item) : null;
     if (d == null) return '';
-    return (d < 0.1 ? 'Under 0.1' : d.toFixed(1)) + ' mi from your home';
+    return (d < 0.1 ? 'Under 0.1' : d.toFixed(1)) + ' mi away';
   }
   function icon(name) { return '<i class="fas fa-' + name + '" aria-hidden="true"></i>'; }
   /* Static cards live as <template>s in the page so their copy stays in HTML. */
@@ -129,13 +133,14 @@
       });
   }
 
+  /* "Coming up" lives in the left feed menu on wide desktops and in the right
+     rail otherwise; CSS shows one copy. */
   function renderUpcoming() {
-    var host = $('wdh-upcoming');
-    if (!host) return;
-    host.innerHTML = deadlines(new Date()).slice(0, 4).map(function (d) {
+    var html = deadlines(new Date()).slice(0, 4).map(function (d) {
       return '<li><span class="wdh-date' + (d.soon ? ' is-soon' : '') + '"><span class="wdh-date-m">' + SHORT[d.date.getMonth()] + '</span><span class="wdh-date-d">' + d.date.getDate() + '</span></span>' +
-        '<span><span class="wdh-up-t">' + esc(d.title) + '</span><span class="wdh-meta">' + esc(d.note) + (d.soon ? ' ' + d.days + ' ' + plural(d.days, 'day', 'days') + ' left.' : '') + '</span></span></li>';
+        '<span><span class="wdh-up-t">' + esc(d.title) + '</span><span class="wdh-meta">' + (d.soon ? d.days + ' ' + plural(d.days, 'day', 'days') + ' left' : esc(shortDay(d.date))) + '</span></span></li>';
     }).join('');
+    Array.prototype.forEach.call(document.querySelectorAll('[data-wdh-upcoming]'), function (host) { host.innerHTML = html; });
   }
 
   /* ---------- auth + saved home ---------- */
@@ -169,6 +174,9 @@
         .order('created_at', { ascending: true })
         .limit(25), 3500).then(function (res) {
           var rows = res && Array.isArray(res.data) ? res.data : [];
+          state.places = rows.filter(function (r) { return r.address; }).slice(0, 5).map(function (r) {
+            return { address: r.address, town: r.town || '', label: r.nickname || (r.kind === 'home' ? 'My home' : r.kind === 'watch' ? 'Watching' : 'Saved'), isHome: r.kind === 'home' };
+          });
           if (!rows.length) return null;
           var home = rows.filter(function (r) { return r.kind === 'home'; })[0] || rows[0];
           var pin = String(home.pams_pin || '');
@@ -304,23 +312,37 @@
     root.setAttribute('data-state', 'loading');
     root.setAttribute('aria-busy', 'true');
   }
+  /* "refresh" means a remembered copy is already on screen: keep it if the
+     network is slow or fails, and swap in fresh data when it arrives. */
   function load(code, reason) {
     var id = ++state.requestId;
-    setLoading();
+    var refreshing = reason === 'refresh' && !!state.feed;
+    if (!refreshing) setLoading();
     var url = API + (code ? '?town=' + encodeURIComponent(code) : '');
-    return fetch(url, { credentials: 'same-origin', headers: { Accept: 'application/json' } })
+    var controller = typeof window.AbortController === 'function' ? new window.AbortController() : null;
+    var timer = controller ? setTimeout(function () { controller.abort(); }, FEED_TIMEOUT) : 0;
+    return fetch(url, { credentials: 'same-origin', headers: { Accept: 'application/json' }, signal: controller ? controller.signal : undefined })
       .then(function (r) { if (!r.ok) throw new Error('feed http ' + r.status); return r.json(); })
       .then(function (feed) {
+        clearTimeout(timer);
         if (id !== state.requestId) return;
         state.feed = feed;
         var code = feed && feed.town ? feed.town.code : '';
         if (code && state.seenFor !== code) { state.seen = store(KEY_SEEN + code); state.seenFor = code; }
         render(reason);
+        if (code) { store(KEY_FEED + code, { at: Date.now(), feed: feed }); store(KEY_LAST, code); }
       })
       .catch(function () {
-        if (id !== state.requestId) return;
+        clearTimeout(timer);
+        if (id !== state.requestId || refreshing) return;
         renderError();
       });
+  }
+
+  /* The last feed this browser saw for a town, if it is under 12 hours old. */
+  function rememberedFeed(code) {
+    var saved = code ? store(KEY_FEED + code) : null;
+    return saved && saved.feed && saved.feed.town && saved.feed.town.code === code && Date.now() - saved.at < 12 * 3600 * 1000 ? saved.feed : null;
   }
 
   /* ---------- rendering ---------- */
@@ -359,14 +381,14 @@
     return !!(p && p.available && state.seen && state.seen.permits && state.seen.permits !== p.dataThrough);
   }
 
-  function tile(tab, iconName, value, label, sub, isNew, warn) {
-    return '<button type="button" class="wdh-tile" data-go="' + tab + '">' +
-      '<span class="wdh-tile-top"><span class="wdh-ico' + (warn ? ' is-warn' : '') + '">' + icon(iconName) + '</span>' + (isNew ? '<span class="wdh-new">New</span>' : '') + '</span>' +
-      '<span class="wdh-tile-num">' + esc(value) + '</span>' +
-      '<span class="wdh-tile-label">' + esc(label) + '</span>' +
-      '<span class="wdh-meta">' + esc(sub) + '</span></button>';
+  /* Thin summary chips: a colored icon and "22 Home sales". The detail line
+     ("Sold in May 2026") is the tooltip and part of the spoken label. */
+  function tile(tab, tone, iconName, value, label, sub, isNew) {
+    return '<button type="button" class="wdh-tile is-' + tone + '" data-go="' + tab + '" title="' + esc(sub) + '" aria-label="' + esc(value + ' ' + label + '. ' + sub) + '">' +
+      '<span class="wdh-tile-ico" aria-hidden="true">' + icon(iconName) + '</span>' +
+      '<span class="wdh-tile-text" aria-hidden="true"><span class="wdh-tile-num">' + esc(value) + '</span><span class="wdh-tile-label">' + esc(label) + '</span></span>' +
+      (isNew ? '<span class="wdh-new" aria-hidden="true">New</span>' : '') + '</button>';
   }
-
   function renderTiles() {
     var host = $('wdh-tiles'), feed = state.feed;
     if (!host) return;
@@ -377,15 +399,15 @@
     var next = deadlines(new Date())[0];
     var html = '';
     html += s && s.available
-      ? tile('sales', 'tag', count(s.batchCount), plural(s.batchCount, 'Home sale', 'Home sales'), 'Sold in ' + s.batch.label, isNewSales())
-      : tile('sales', 'tag', '-', 'Home sales', 'Sale records are loading slowly', false);
+      ? tile('sales', 'sales', 'tag', count(s.batchCount), plural(s.batchCount, 'Home sale', 'Home sales'), 'Sold in ' + s.batch.label, isNewSales())
+      : tile('sales', 'sales', 'tag', '-', 'Home sales', 'Sale records are loading slowly', false);
     html += p && p.available
-      ? tile('permits', 'helmet-safety', count(p.notableCount), plural(p.notableCount, 'Larger permit', 'Larger permits'), 'Filed ' + monthRange(p.window), isNewPermits())
-      : tile('permits', 'helmet-safety', '0', 'Larger permits', 'None in recent state data', false);
+      ? tile('permits', 'permits', 'helmet-safety', count(p.notableCount), plural(p.notableCount, 'Permit', 'Permits'), 'Larger permits filed ' + monthRange(p.window), isNewPermits())
+      : tile('permits', 'permits', 'helmet-safety', '0', 'Permits', 'None in recent state data', false);
     html += t && t.available
-      ? tile('town', 'building-columns', t.rate.toFixed(3), t.year + ' tax rate', t.changePct != null ? (t.changePct >= 0 ? 'Up ' : 'Down ') + pct(t.changePct) + ' from ' + t.priorYear : 'Per $100 of assessed value', false)
-      : tile('town', 'building-columns', '-', 'Tax rate', 'Not published for this town', false);
-    html += tile('home', 'calendar-day', String(soon.length), plural(soon.length, 'Deadline', 'Deadlines'), next ? 'Next: ' + dayLabel(next.date, false) + ', ' + next.title.replace(' due', '') : 'In the next 45 days', false, soon.length > 0);
+      ? tile('town', 'tax', 'building-columns', t.rate.toFixed(3), 'Tax rate', t.year + ' rate' + (t.changePct != null ? ', ' + (t.changePct >= 0 ? 'up ' : 'down ') + pct(t.changePct) + ' from ' + t.priorYear : ''), false)
+      : tile('town', 'tax', 'building-columns', '-', 'Tax rate', 'Not published for this town', false);
+    html += tile('home', 'dates', 'calendar-day', String(soon.length), plural(soon.length, 'Deadline', 'Deadlines'), next ? 'Next: ' + dayLabel(next.date, false) + ', ' + next.title.replace(' due', '') : 'None in the next 45 days', false);
     host.innerHTML = html;
   }
 
@@ -402,52 +424,74 @@
   function permitHeadline(item) {
     var where = item.address || blockLot(item.pin);
     var type = String(item.type || '').toLowerCase();
-    if (type === 'new') {
-      if (item.useLabel === 'home') return 'New home planned at ' + where;
-      return 'New ' + item.useLabel + ' planned at ' + where;
-    }
-    if (type === 'addition') return (item.sqft ? count(item.sqft) + ' sq ft addition' : 'Addition') + ' planned at ' + where;
-    if (type === 'demolition') return 'Demolition permit at ' + where;
+    if (type === 'new') return 'New ' + (item.useLabel || 'building') + ' at ' + where;
+    if (type === 'addition') return (item.sqft ? count(item.sqft) + ' sq ft addition' : 'Addition') + ' at ' + where;
+    if (type === 'demolition') return 'Demolition at ' + where;
     if (type === 'alteration') return (item.cost ? shortMoney(item.cost) + ' renovation' : 'Renovation') + ' at ' + where;
     return item.type + ' permit at ' + where;
   }
+  function lowerFirst(text) { return String(text || '').replace(/^(\w)/, function (m) { return m.toLowerCase(); }); }
+  function upperFirst(text) { return String(text || '').replace(/^(\w)/, function (m) { return m.toUpperCase(); }); }
+  var SHORT_MONTH = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'];
+  function shortDay(value) {
+    var d = value instanceof Date ? value : parseDay(value);
+    return d ? SHORT_MONTH[d.getMonth()] + ' ' + d.getDate() : '';
+  }
+  function signed(value) { var n = num(value); return n == null ? '' : (n >= 0 ? '+' : '−') + pct(n); }
 
+  /* ---------- local reporters (stored hourly; served with the feed) ---------- */
+  function newsSource(id) {
+    var news = state.feed && state.feed.news;
+    var list = news && news.sources ? news.sources : [];
+    return list.filter(function (s) { return s.id === id; })[0] || { id: id, name: id, badge: '', site: '' };
+  }
+  function newsItems() {
+    var news = state.feed && state.feed.news;
+    return news && news.available && Array.isArray(news.items) ? news.items : [];
+  }
+  /* Same keys as api/watchdog-local-news.js: "303 white horse pike", "53 route 73". */
+  var STREET_TYPES = { road: 'rd', rd: 'rd', pike: 'pike', avenue: 'ave', ave: 'ave', street: 'st', st: 'st', boulevard: 'blvd', blvd: 'blvd', drive: 'dr', dr: 'dr', lane: 'ln', ln: 'ln', highway: 'hwy', hwy: 'hwy', parkway: 'pkwy', pkwy: 'pkwy', way: 'way', court: 'ct', ct: 'ct', place: 'pl', pl: 'pl', circle: 'cir', cir: 'cir', terrace: 'ter', ter: 'ter' };
+  function addressKey(address) {
+    var text = String(address || '').trim();
+    var m = text.match(/^(\d{1,5})\s+(?:(?:north|south|east|west|[nsew]\.?)\s+)?(?:route|rt\.?|rte\.?|state highway|us|u\.s\.)\s*(\d{1,3})\b/i);
+    if (m) return m[1] + ' route ' + Number(m[2]);
+    m = text.match(/^(\d{1,5})\s+(?:(?:north|south|east|west|[nsew]\.?)\s+)?(.+?)\s+(road|rd|pike|avenue|ave|street|st|boulevard|blvd|drive|dr|lane|ln|highway|hwy|parkway|pkwy|way|court|ct|place|pl|circle|cir|terrace|ter)\b\.?/i);
+    if (!m) return '';
+    var street = m[2].toLowerCase().replace(/[-/]/g, ' ').replace(/[^a-z0-9 ]/g, '').replace(/\s+/g, ' ').trim();
+    return m[1] + ' ' + street + ' ' + (STREET_TYPES[m[3].toLowerCase().replace('.', '')] || m[3].toLowerCase());
+  }
+  function storyFor(permit, news) {
+    var key = addressKey(permit.address);
+    if (!key) return null;
+    return news.filter(function (n) { return (n.addresses || []).indexOf(key) !== -1; })[0] || null;
+  }
+
+  /* ---------- Watchdog Intelligence Brief ---------- */
   function weekItems() {
     var feed = state.feed, out = [];
     if (!feed || !feed.town) return out;
-    var town = feed.town, s = feed.sales, p = feed.permits, t = feed.tax;
+    var s = feed.sales, p = feed.permits, t = feed.tax;
     if (s && s.available) {
-      var w = s.window, line = '<strong>' + count(s.batchCount) + ' ' + plural(s.batchCount, 'home sold', 'homes sold') + '</strong> in ' + esc(town.name) + ' in ' + esc(MONTHS[s.batch.month - 1]) + ', according to the latest state records.';
-      if (w && w.median) {
-        line += ' The ' + esc(w.label) + ' median was <strong>' + money(w.median) + '</strong>';
-        line += w.changePct != null ? ', ' + pct(w.changePct) + ' ' + (w.changePct >= 0 ? 'higher' : 'lower') + ' than a year earlier.' : '.';
-      }
-      out.push(line);
+      var w = s.window;
+      out.push('<strong>' + count(s.batchCount) + ' ' + plural(s.batchCount, 'home sold', 'homes sold') + '</strong> in ' + esc(MONTHS[s.batch.month - 1]) + '.' +
+        (w && w.median ? ' Median <strong>' + shortMoney(w.median) + '</strong>' + (w.changePct != null ? ', ' + (w.changePct >= 0 ? 'up ' : 'down ') + pct(w.changePct) + ' from last year.' : '.') : ''));
     }
     if (p && p.available && p.items && p.items.length) {
       var top = p.items[0];
-      out.push('The largest recent project: <strong>' + esc(permitHeadline(top).replace(/^(\w)/, function (m) { return m.toLowerCase(); })) + '</strong>' +
-        (top.cost ? ', with an estimated cost of ' + money(top.cost) : '') + '.');
+      out.push('Biggest project: <strong>' + esc(lowerFirst(permitHeadline(top))) + '</strong>' + (top.cost ? ' (' + shortMoney(top.cost) + ')' : '') + '.');
     }
+    var fresh = newsItems().filter(function (n) { return Date.now() - Date.parse(n.date) < 14 * 864e5; })[0];
+    if (fresh) out.push('<strong>Local news:</strong> ' + esc(fresh.title) + ' <span class="wdh-week-src">' + esc(newsSource(fresh.source).name) + '</span>');
     var home = state.home;
-    if (home && home.code === town.code && (home.assessed || home.tax)) {
+    if (home && home.code === feed.town.code && home.tax) {
       var medianTax = feed.stats && feed.stats.available ? feed.stats.medianTax : null;
-      var text = '<strong>Your home:</strong> ';
-      if (home.tax) {
-        text += 'last year\'s tax was ' + money(home.tax);
-        if (medianTax) {
-          var diff = (home.tax / medianTax - 1) * 100;
-          text += ', ' + (Math.abs(diff) < 1 ? 'about the same as' : pct(diff) + ' ' + (diff > 0 ? 'above' : 'below')) + ' the town median of ' + money(medianTax);
-        }
-        text += '.';
-      } else {
-        text += 'assessed at ' + money(home.assessed) + '.';
-      }
-      out.push(text);
+      var diff = medianTax ? (home.tax / medianTax - 1) * 100 : null;
+      out.push('<strong>Your home:</strong> ' + money(home.tax) + ' tax last year' +
+        (diff == null ? '.' : Math.abs(diff) < 1 ? ', about the town median.' : ', ' + pct(diff) + (diff > 0 ? ' above' : ' below') + ' the town median.'));
     }
     var next = deadlines(new Date())[0];
-    var tax = t && t.available ? 'The ' + t.year + ' tax rate is ' + t.rate.toFixed(3) + (t.changePct != null ? ', ' + (t.changePct >= 0 ? 'up ' : 'down ') + pct(t.changePct) + ' from ' + t.priorYear : '') + '. ' : '';
-    if (tax || next) out.push(tax + (next ? 'Next deadline: <strong>' + esc(next.title) + '</strong> on ' + esc(dayLabel(next.date, false)) + '.' : ''));
+    var tax = t && t.available ? 'Tax rate <strong>' + t.rate.toFixed(3) + '</strong>' + (t.changePct != null ? ', ' + (t.changePct >= 0 ? 'up ' : 'down ') + pct(t.changePct) + '.' : '.') : '';
+    if (tax || next) out.push(tax + (next ? (tax ? ' ' : '') + 'Next due: <strong>' + esc(next.title.replace(' due', '')) + ', ' + esc(shortDay(next.date)) + '</strong>.' : ''));
     return out;
   }
 
@@ -466,7 +510,7 @@
       more.setAttribute('aria-expanded', state.briefOpen ? 'true' : 'false');
       host.classList.toggle('is-open', !!state.briefOpen);
     }
-    // content-architecture: dynamic. Each sentence is computed from this town's feed data (sales, permits, tax rate, deadlines).
+    // content-architecture: dynamic. Each sentence is computed from this town's feed data (sales, permits, tax rate, deadlines, local news).
     list.innerHTML = items.map(function (html, i) { return '<li><span class="wdh-num" aria-hidden="true">' + (i + 1) + '</span><span>' + html + '</span></li>'; }).join('');
     var listen = $('wdh-listen');
     if (listen) listen.hidden = !('speechSynthesis' in window && typeof window.SpeechSynthesisUtterance === 'function');
@@ -497,114 +541,150 @@
      everywhere, so the feed asks for the map directly. */
   function previewUrl(item) {
     if (!item || item.lat == null || item.lon == null) return '';
-    var dy = 0.0022, dx = dy * (480 / 330) / Math.max(0.45, Math.cos(item.lat * Math.PI / 180));
+    var dy = 0.0022, dx = dy * (480 / 360) / Math.max(0.45, Math.cos(item.lat * Math.PI / 180));
     var params = [
       'bbox=' + [item.lon - dx, item.lat - dy, item.lon + dx, item.lat + dy].join(','),
-      'bboxSR=4326', 'imageSR=3857', 'size=480,330', 'format=jpg', 'transparent=false', 'f=image'
+      'bboxSR=4326', 'imageSR=3857', 'size=480,360', 'format=jpg', 'transparent=false', 'f=image'
     ].join('&');
     return 'https://maps.nj.gov/arcgis/rest/services/Basemap/LtGray_NJ_WM/MapServer/export?' + params;
   }
 
-  function thumb(item, label) {
+  /* ---------- quick-read feed cards ----------
+     Every card reads in a glance: one line for what, when and how far, a
+     headline, one line of key facts and one picture. The headline opens the
+     detail (the property overlay or the reporter's story) and the whole card
+     is its tap target. Longer explanations live behind those taps. */
+  /* Post-style header: badge, label, then when and how far. Phones stack the
+     label over the details, like the author and time on a social post. */
+  function metaRow(badge, label, parts, warn) {
+    var sub = parts.filter(Boolean).map(function (part, i) { return (i ? '<span class="wdh-dot" aria-hidden="true">&middot;</span>' : '') + '<span class="wdh-meta">' + esc(part) + '</span>'; }).join('');
+    return '<div class="wdh-krow wdh-post-head">' + badge + '<span class="wdh-post-text"><span class="wdh-kicker' + (warn ? ' is-warn' : '') + '">' + esc(label) + '</span>' +
+      (sub ? '<span class="wdh-post-sub">' + sub + '</span>' : '') + '</span></div>';
+  }
+  function iconBadge(name, warn) { return '<span class="wdh-ico' + (warn ? ' is-warn' : '') + '">' + icon(name) + '</span>'; }
+  function sourceBadge(src) { return '<span class="wdh-ico is-src" aria-hidden="true">' + esc(src.badge || String(src.name || '').charAt(0)) + '</span>'; }
+  function openTitle(address, text) {
+    if (!address) return esc(text);
+    return '<button type="button" class="wdh-fc-link" data-open="' + esc(address) + '">' + esc(text) + '</button>';
+  }
+  function mapMedia(item, label) {
     var url = previewUrl(item);
     if (!url) return '';
-    // content-architecture: dynamic. The map image, its label and position come from this record's coordinates.
-    return '<div class="wdh-thumb"><img src="' + esc(url) + '" alt="Map of ' + esc(label) + '" loading="lazy" width="480" height="330" onerror="this.parentNode.remove()"><span class="wdh-thumb-pin" aria-hidden="true"></span><span class="wdh-thumb-credit">NJOGIS map</span></div>';
+    // content-architecture: dynamic. The map image and its label come from this record's coordinates and address.
+    return '<div class="wdh-fc-media is-map"><img src="' + esc(url) + '" alt="Map of ' + esc(label) + '" loading="lazy" width="480" height="360" onerror="this.parentNode.remove()"><span class="wdh-fc-pin" aria-hidden="true"></span></div>';
+  }
+  function photoMedia(item, src) {
+    var url = item.image || (item.video ? item.video.thumb : '');
+    if (!url) return '';
+    // content-architecture: dynamic. The reporter's own photo, alt text and credit for this story.
+    return '<div class="wdh-fc-media is-photo"><img src="' + esc(url) + '" alt="' + esc(item.imageAlt || item.title) + '" loading="lazy" referrerpolicy="no-referrer" onerror="this.parentNode.remove()">' +
+      (item.video && !item.image ? '<span class="wdh-fc-play" aria-hidden="true">' + icon('play') + '</span>' : '') +
+      '<span class="wdh-fc-credit">Photo: ' + esc(src.name) + '</span></div>';
+  }
+  function sourceLine(text, iconName) { return '<span class="wdh-src">' + icon(iconName || 'shield-halved') + '<span>' + esc(text) + '</span></span>'; }
+  function shareButton(address, title, url) {
+    if (!address && !url) return '';
+    return '<button type="button" class="wdh-icon-btn wdh-share" data-share="' + esc(address || '') + '"' + (url ? ' data-share-url="' + esc(url) + '"' : '') + ' data-share-title="' + esc(title) + '" aria-label="Share ' + esc(title) + '">' + icon('share-nodes') + '</button>';
+  }
+  function feedCard(o) {
+    var media = o.media || '';
+    // content-architecture: dynamic. Layout shell for one feed item; every part is computed from that item's record.
+    return '<article class="wdh-card wdh-feed-card wdh-fc' + (media ? (media.indexOf('is-photo') !== -1 ? ' has-photo' : ' has-map') : ' no-media') + (o.cls ? ' ' + o.cls : '') + '" data-tabs="' + o.tabs + '"' + (o.extraOnly ? ' data-feed-extra="1"' : '') + '>' +
+      '<div class="wdh-fc-main">' + o.meta + '<h3 class="wdh-h3 wdh-fc-title">' + o.title + '</h3>' +
+      (o.facts && o.facts.filter(Boolean).length ? '<p class="wdh-fc-facts">' + o.facts.filter(Boolean).map(function (f) { return '<span>' + f + '</span>'; }).join('') + '</p>' : '') +
+      (o.note ? '<p class="wdh-fc-note">' + o.note + '</p>' : '') + '</div>' + media +
+      (o.extra ? '<div class="wdh-fc-extra">' + o.extra + '</div>' : '') +
+      '<div class="wdh-fc-foot">' + (o.source || '') + (o.actions || '') + '</div></article>';
   }
 
-  function kicker(iconName, label, extra, warn) {
-    return '<div class="wdh-krow"><span class="wdh-ico' + (warn ? ' is-warn' : '') + '">' + icon(iconName) + '</span><span class="wdh-kicker' + (warn ? ' is-warn' : '') + '">' + esc(label) + '</span>' +
-      (extra ? '<span class="wdh-dot" aria-hidden="true">&middot;</span><span class="wdh-meta">' + esc(extra) + '</span>' : '') + '</div>';
+  function coverageRow(story) {
+    var src = newsSource(story.source);
+    // content-architecture: dynamic. A local reporter's story about this exact address, credited and linked.
+    return '<a class="wdh-cov" href="' + esc(story.url) + '" target="_blank" rel="noopener">' +
+      (story.image ? '<img src="' + esc(story.image) + '" alt="" loading="lazy" referrerpolicy="no-referrer" onerror="this.remove()">' : '') +
+      '<span class="wdh-cov-text"><span class="wdh-cov-src">' + sourceBadge(src) + 'Also covered by ' + esc(src.name) + '</span><span class="wdh-cov-title">' + esc(story.title) + '</span></span>' +
+      icon('arrow-up-right-from-square') + '</a>';
   }
 
-  function openButton(address, label) {
-    if (!address) return '';
-    return '<button type="button" class="wdh-btn wdh-btn-secondary" data-open="' + esc(address) + '">' + icon('magnifying-glass-location') + esc(label || 'Open property') + '</button>';
-  }
-  function shareButton(address, title) {
-    if (!address) return '';
-    return '<button type="button" class="wdh-icon-btn wdh-share" data-share="' + esc(address) + '" data-share-title="' + esc(title) + '" aria-label="Share ' + esc(address) + '">' + icon('share-nodes') + '</button>';
-  }
-
-  function permitCard(item, feed) {
-    var p = feed.permits, headline = permitHeadline(item);
-    var dist = distanceText(item);
-    var subject = item.propertyLabel === 'vacant land' ? 'vacant lot' : (item.propertyLabel || item.useLabel || 'property');
-    var typeWord = item.type === 'New' ? 'new construction' : String(item.type || 'construction').toLowerCase();
-    var facts = [
-      ['Work', item.type === 'New' ? 'New construction' : item.type],
-      ['Use', item.useLabel ? item.useLabel.charAt(0).toUpperCase() + item.useLabel.slice(1) : ''],
-      ['Size', item.sqft ? count(item.sqft) + ' sq ft' : ''],
-      ['Est. cost', item.cost ? shortMoney(item.cost) : ''],
-      ['Filed', dayLabel(item.date)]
-    ].filter(function (f) { return f[1]; }).slice(0, 4);
-    var permitThumb = thumb(item, item.address || headline);
-    return '<article class="wdh-card wdh-feed-card" data-tabs="permits">' +
-      '<div class="wdh-card-row' + (permitThumb ? '' : ' is-solo') + '"><div class="wdh-card-main">' +
-      kicker('helmet-safety', 'Building permit', dist || ('Filed ' + dayLabel(item.date, false))) +
-      '<h3 class="wdh-h3">' + esc(headline) + '</h3>' +
-      '<p class="wdh-body">' + esc(feed.town.name) + ' issued ' + (/^[aeiou]/i.test(typeWord) ? 'an ' : 'a ') + esc(typeWord) + ' permit for this ' + esc(subject) + ' on ' + esc(dayLabel(item.date)) + '.' +
-      (item.cost ? ' Estimated construction cost: ' + money(item.cost) + '.' : '') + (item.related ? ' ' + item.related + ' related ' + plural(item.related, 'permit was', 'permits were') + ' filed the same day.' : '') + '</p>' +
-      '</div>' + permitThumb + '</div>' +
-      '<dl class="wdh-facts">' + facts.map(function (f) { return '<div><dt>' + esc(f[0]) + '</dt><dd>' + esc(f[1]) + '</dd></div>'; }).join('') + '</dl>' +
-      '<p class="wdh-source">' + icon('shield-halved') + '<span><strong>Verified record.</strong> NJ DCA construction permits, matched to the county tax list.' +
-      (p.publishedAt ? ' State data updated ' + esc(dayLabel(p.publishedAt)) + '.' : '') + ' Permit costs are the estimates filed with the town.</span></p>' +
-      '<div class="wdh-actions">' + openButton(item.address, 'Open property') + shareButton(item.address, headline) + '</div>' +
-      '</article>';
+  function permitCard(item, feed, story) {
+    var where = item.address || blockLot(item.pin);
+    var type = item.type;
+    return feedCard({
+      tabs: 'permits' + (story ? ' news' : ''),
+      meta: metaRow(iconBadge('helmet-safety'), 'Building permit', ['Filed ' + shortDay(item.date), distanceText(item)]),
+      title: openTitle(item.address, permitHeadline(item)),
+      facts: [
+        type !== 'New' && item.useLabel ? esc(upperFirst(item.useLabel)) : '',
+        type !== 'Addition' && item.sqft ? count(item.sqft) + ' sq ft' : '',
+        type !== 'Alteration' && item.cost ? shortMoney(item.cost) + ' est.' : '',
+        item.related ? '+' + item.related + ' related' : ''
+      ],
+      media: mapMedia(item, where),
+      extra: story ? coverageRow(story) : '',
+      source: sourceLine('NJ permit record' + (feed.permits.publishedAt ? ', updated ' + shortDay(feed.permits.publishedAt) : '')),
+      actions: shareButton(item.address, permitHeadline(item))
+    });
   }
 
   function permitListCard(items, feed) {
     if (!items.length) return '';
-    return '<article class="wdh-card wdh-feed-card" data-tabs="permits">' +
-      kicker('list-check', 'More permits', monthRange(feed.permits.window)) +
-      '<h3 class="wdh-h3">Other larger projects in ' + esc(feed.town.name) + '</h3>' +
-      '<ul class="wdh-rows">' + items.map(function (item) {
+    return feedCard({
+      tabs: 'permits',
+      meta: metaRow(iconBadge('list-check'), 'More permits', [monthRange(feed.permits.window)]),
+      title: count(items.length) + ' more larger ' + plural(items.length, 'project', 'projects'),
+      extra: '<ul class="wdh-rows">' + items.map(function (item) {
         var where = item.address || blockLot(item.pin);
-        return '<li><span class="wdh-row-main"><span class="wdh-row-addr">' + esc(where) + '</span><span class="wdh-meta">' + esc(item.type === 'New' ? 'New construction' : item.type) + ' &middot; ' + esc(item.useLabel) + ' &middot; ' + esc(dayLabel(item.date, false)) + '</span></span>' +
+        return '<li><span class="wdh-row-main"><span class="wdh-row-addr">' + esc(where) + '</span><span class="wdh-meta">' + esc(item.type === 'New' ? 'New ' + item.useLabel : item.type + ', ' + item.useLabel) + ' &middot; ' + esc(shortDay(item.date)) + '</span></span>' +
           '<span class="wdh-row-val">' + esc(item.cost ? shortMoney(item.cost) : '') + '</span>' +
           (item.address ? '<button type="button" class="wdh-row-open" data-open="' + esc(item.address) + '" aria-label="Open ' + esc(item.address) + '">' + icon('chevron-right') + '</button>' : '<span></span>') + '</li>';
-      }).join('') + '</ul>' +
-      '<p class="wdh-meta wdh-note">' + count(feed.permits.total) + ' permits of all sizes were filed in ' + esc(feed.town.name) + ' in this period. Most are small jobs like water heaters, roofs and decks.</p>' +
-      '</article>';
+      }).join('') + '</ul>',
+      source: sourceLine(count(feed.permits.total) + ' permits of all sizes in this period')
+    });
   }
 
   function saleCard(items, feed) {
-    var s = feed.sales, top = items[0], w = s.window;
-    var dist = distanceText(top);
-    var facts = [
-      ['Size', top.sqft ? count(top.sqft) + ' sq ft' : ''],
-      ['Built', top.yearBuilt ? String(top.yearBuilt) : ''],
-      ['Per sq ft', top.ppsf ? money(top.ppsf) : ''],
-      ['Assessed', top.assessed ? money(top.assessed) : '']
-    ].filter(function (f) { return f[1]; });
-    var callout = '';
+    var s = feed.sales, top = items[0], w = s.window, rest = items.slice(1, 5);
+    var vsMedian = '';
     if (top.ppsf && w && w.ppsfMedian) {
       var diff = (top.ppsf / w.ppsfMedian - 1) * 100;
-      callout = '<p class="wdh-callout">' + icon('chart-line') + '<span>At ' + money(top.ppsf) + ' per sq ft, it sold ' +
-        (Math.abs(diff) < 1 ? '<strong>right at</strong>' : '<strong>' + pct(diff) + ' ' + (diff > 0 ? 'above' : 'below') + '</strong>') +
-        ' the town median of ' + money(w.ppsfMedian) + ' for ' + esc(w.label) + '.</span></p>';
+      vsMedian = Math.abs(diff) < 1 ? 'at town median' : pct(diff) + (diff > 0 ? ' above' : ' below') + ' median';
     }
-    var rest = items.slice(1, 5);
-    var saleThumb = thumb(top, top.address);
-    return '<article class="wdh-card wdh-feed-card" data-tabs="sales">' +
-      '<div class="wdh-card-row' + (saleThumb ? '' : ' is-solo') + '"><div class="wdh-card-main">' +
-      kicker('tag', 'Home sale', dist) +
-      '<h3 class="wdh-h3">' + esc(top.address) + ' sold for ' + money(top.price) + '</h3>' +
-      '<p class="wdh-meta wdh-when">Sold in ' + esc(MONTHS[top.month - 1] + ' ' + top.year) + ' &middot; New Jersey state sale record</p>' +
-      callout + '</div>' + saleThumb + '</div>' +
-      (facts.length ? '<dl class="wdh-facts">' + facts.map(function (f) { return '<div><dt>' + esc(f[0]) + '</dt><dd>' + esc(f[1]) + '</dd></div>'; }).join('') + '</dl>' : '') +
-      (rest.length ? '<div class="wdh-more"><h4 class="wdh-h4">More ' + esc(MONTHS[s.batch.month - 1]) + ' sales in ' + esc(feed.town.name) + '</h4><ul class="wdh-rows">' + rest.map(function (row) {
+    return feedCard({
+      tabs: 'sales',
+      meta: metaRow(iconBadge('tag'), 'Home sale', [MONTHS[top.month - 1] + ' ' + top.year, distanceText(top)]),
+      title: openTitle(top.address, top.address + ' sold for ' + money(top.price)),
+      facts: [
+        top.sqft ? count(top.sqft) + ' sq ft' : '',
+        top.yearBuilt ? 'Built ' + top.yearBuilt : '',
+        top.ppsf ? money(top.ppsf) + '/sq ft' + (vsMedian ? ' (' + esc(vsMedian) + ')' : '') : ''
+      ],
+      media: mapMedia(top, top.address),
+      extra: rest.length ? '<details class="wdh-fc-more"><summary>' + rest.length + ' more ' + esc(MONTHS[s.batch.month - 1]) + ' ' + plural(rest.length, 'sale', 'sales') + icon('chevron-down') + '</summary><ul class="wdh-rows">' + rest.map(function (row) {
         return '<li><span class="wdh-row-main"><span class="wdh-row-addr">' + esc(row.address) + '</span><span class="wdh-meta">' +
           esc([row.sqft ? count(row.sqft) + ' sq ft' : '', row.yearBuilt ? 'built ' + row.yearBuilt : '', distanceText(row)].filter(Boolean).join(' · ')) + '</span></span>' +
           '<span class="wdh-row-val">' + money(row.price) + '</span>' +
           '<button type="button" class="wdh-row-open" data-open="' + esc(row.address) + '" aria-label="Open ' + esc(row.address) + '">' + icon('chevron-right') + '</button></li>';
-      }).join('') + '</ul></div>' : '') +
-      '<p class="wdh-source">' + icon('shield-halved') + '<span><strong>Verified record.</strong> NJ Division of Taxation SR1A sales file. Only sales the state marks usable are shown. ' +
-      count(s.batchCount) + ' ' + plural(s.batchCount, 'sale', 'sales') + ' were recorded for ' + esc(s.batch.label) + '.</span></p>' +
-      '<div class="wdh-actions">' + openButton(top.address, 'Open property') +
-      (feed.town.townPage ? '<a class="wdh-btn wdh-btn-ghost" href="' + esc(feed.town.townPage) + '">' + esc(feed.town.name) + ' report</a>' : '') +
-      shareButton(top.address, top.address + ' sold for ' + money(top.price)) + '</div>' +
-      '</article>';
+      }).join('') + '</ul></details>' : '',
+      source: sourceLine('NJ state sale record'),
+      actions: shareButton(top.address, top.address + ' sold for ' + money(top.price))
+    });
+  }
+
+  function newsCard(story, extraOnly) {
+    var src = newsSource(story.source);
+    return feedCard({
+      tabs: 'news town',
+      extraOnly: extraOnly,
+      cls: 'wdh-news',
+      meta: metaRow(sourceBadge(src), src.name, [shortDay(story.date), story.video ? 'Video' : '']),
+      // content-architecture: dynamic. The reporter's own headline, linked to their story.
+      title: '<a class="wdh-fc-link" href="' + esc(story.url) + '" target="_blank" rel="noopener">' + esc(story.title) + '</a>',
+      media: photoMedia(story, src),
+      source: sourceLine('Story by ' + src.name, 'newspaper'),
+      actions: (story.video ? '<a class="wdh-fc-act" href="' + esc(story.video.url) + '" target="_blank" rel="noopener">' + icon('play') + 'Watch</a>' : '') +
+        '<a class="wdh-fc-act" href="' + esc(story.url) + '" target="_blank" rel="noopener">Read ' + icon('arrow-up-right-from-square') + '</a>' +
+        shareButton('', story.title, story.url)
+    });
   }
 
   function deadlineCard() {
@@ -613,18 +693,18 @@
     var tax = list.filter(function (d) { return d.kind === 'tax'; })[0];
     var lead = pas1 && pas1.days <= 60 ? pas1 : list[0];
     if (!lead) return '';
-    var body = lead.kind === 'pas1'
-      ? 'One form covers ANCHOR, Stay NJ and the Senior Freeze. Homeowners can get up to $1,500 from ANCHOR, and seniors up to $6,500 with Stay NJ.'
-      : lead.note;
-    var also = lead !== tax && tax && tax.days <= 60 ? '<p class="wdh-callout">' + icon('clock') + '<span>Also due: your ' + esc(tax.title.replace(' due', '').toLowerCase().replace('q', 'Q')) + ' payment, <strong>' + esc(dayLabel(tax.date, false)) + '</strong>.</span></p>' : '';
-    return '<article class="wdh-card wdh-feed-card" data-tabs="home town">' +
-      kicker('calendar-day', 'Deadline', lead.days === 0 ? 'Today' : lead.days + ' ' + plural(lead.days, 'day', 'days') + ' left', lead.soon) +
-      '<h3 class="wdh-h3">' + esc(lead.kind === 'pas1' ? 'File your PAS-1 by ' + dayLabel(lead.date, false) : lead.title + ' on ' + dayLabel(lead.date, false)) + '</h3>' +
-      '<p class="wdh-body">' + esc(body) + '</p>' + also +
-      '<div class="wdh-actions">' +
-      (lead.kind === 'pas1' || lead.kind === 'tax' ? '<a class="wdh-btn wdh-btn-primary" href="https://njpropertytaxrelief.com/anchor-estimator.html">Check what I qualify for</a>' : '') +
-      (lead.kind === 'appeal' || lead.kind === 'notice' ? '<a class="wdh-btn wdh-btn-primary" href="/property-tax-appeal.html">How NJ appeals work</a>' : '') +
-      '</div><p class="wdh-source"><span>Source: NJ Division of Taxation</span></p></article>';
+    var also = lead !== tax && tax && tax.days <= 60 ? tax.title.replace(' due', '') + ' due ' + shortDay(tax.date) : '';
+    var cta = lead.kind === 'pas1' || lead.kind === 'tax'
+      ? '<a class="wdh-fc-act" href="https://njpropertytaxrelief.com/anchor-estimator.html">Check what I qualify for ' + icon('arrow-right') + '</a>'
+      : '<a class="wdh-fc-act" href="/property-tax-appeal.html">How appeals work ' + icon('arrow-right') + '</a>';
+    return feedCard({
+      tabs: 'home town',
+      meta: metaRow(iconBadge('calendar-day', lead.soon), 'Deadline', [lead.days === 0 ? 'Today' : lead.days + ' ' + plural(lead.days, 'day', 'days') + ' left'], lead.soon),
+      title: esc(lead.kind === 'pas1' ? 'File your PAS-1 by ' + shortDay(lead.date) : lead.title + ', ' + shortDay(lead.date)),
+      facts: lead.kind === 'pas1' ? ['ANCHOR, Stay NJ and Senior Freeze', esc(also)] : [esc(lead.note), esc(also)],
+      source: sourceLine('NJ Division of Taxation'),
+      actions: cta
+    });
   }
 
   function homeCard(feed) {
@@ -636,112 +716,91 @@
     var current = { assessed: home.assessed, tax: home.tax, score: home.score };
     var changes = [];
     if (previous) {
-      if (previous.assessed && current.assessed && previous.assessed !== current.assessed) changes.push('assessment ' + money(previous.assessed) + ' to ' + money(current.assessed));
-      if (previous.tax && current.tax && previous.tax !== current.tax) changes.push('tax ' + money(previous.tax) + ' to ' + money(current.tax));
-      if (previous.score != null && current.score != null && previous.score !== current.score) changes.push('Watchdog Score ' + previous.score + ' to ' + current.score);
+      if (previous.assessed && current.assessed && previous.assessed !== current.assessed) changes.push('Assessment ' + money(previous.assessed) + ' → ' + money(current.assessed));
+      if (previous.tax && current.tax && previous.tax !== current.tax) changes.push('Tax ' + money(previous.tax) + ' → ' + money(current.tax));
+      if (previous.score != null && current.score != null && previous.score !== current.score) changes.push('Watchdog Score ' + previous.score + ' → ' + current.score);
     }
-    var headline = !previous ? 'Here is where your home stands' : changes.length ? 'Your home record changed' : 'Quiet week for your home. Nothing changed.';
-    var body = !previous ? 'We will flag it here when your assessment, tax record or Watchdog Score changes.'
-      : changes.length ? 'Since your last visit: ' + changes.join('; ') + '.' : '';
-    var stats = [];
-    if (home.score != null) stats.push(['Watchdog Score', String(home.score), '']);
-    if (home.assessed) stats.push(['Assessment', money(home.assessed), '']);
-    if (home.tax) stats.push(['Last year\'s tax', money(home.tax), medianTax ? 'Town median ' + money(medianTax) : '']);
-    var bars = '';
-    if (home.tax && medianTax) {
-      var max = Math.max(home.tax, medianTax);
-      bars = '<figure class="wdh-bars"><figcaption class="wdh-h4">Your tax compared with the town</figcaption>' +
-        '<div class="wdh-bar-row"><span>Your home</span><span class="wdh-bar-track"><span class="wdh-bar is-home" style="width:' + Math.round(home.tax / max * 100) + '%"></span></span><b>' + money(home.tax) + '</b></div>' +
-        '<div class="wdh-bar-row"><span>Town median</span><span class="wdh-bar-track"><span class="wdh-bar is-town" style="width:' + Math.round(medianTax / max * 100) + '%"></span></span><b>' + money(medianTax) + '</b></div></figure>';
-    }
-    return '<article class="wdh-card wdh-feed-card" data-tabs="home">' +
-      kicker('house', home.isHome ? 'Your home' : 'Your saved home', home.address) +
-      '<h3 class="wdh-h3">' + esc(headline) + '</h3>' + (body ? '<p class="wdh-body">' + esc(body) + '</p>' : '') +
-      (stats.length ? '<div class="wdh-stats">' + stats.map(function (s) { return '<div class="wdh-stat"><p class="wdh-stat-l">' + esc(s[0]) + '</p><p class="wdh-stat-v">' + esc(s[1]) + '</p>' + (s[2] ? '<p class="wdh-meta">' + esc(s[2]) + '</p>' : '') + '</div>'; }).join('') + '</div>' : '') +
-      bars +
-      (home.score != null ? '<p class="wdh-meta wdh-note">The Watchdog Score, powered by the ROBUST Framework.</p>' : '') +
-      '<div class="wdh-actions"><a class="wdh-btn wdh-btn-primary" href="/home">Open my property home</a>' + openButton(home.address + (home.town ? ', ' + home.town : ''), 'Check my appeal odds') + '</div></article>';
+    return feedCard({
+      tabs: 'home',
+      meta: metaRow(iconBadge('house'), home.isHome ? 'Your home' : 'Your saved home', [home.address]),
+      title: esc(changes.length ? 'Your home record changed' : previous ? 'No changes to your home' : 'Where your home stands'),
+      facts: [
+        home.score != null ? 'Watchdog Score ' + home.score : '',
+        home.assessed ? 'Assessed ' + shortMoney(home.assessed) : '',
+        home.tax ? 'Tax ' + money(home.tax) + (medianTax ? ' (town ' + money(medianTax) + ')' : '') : ''
+      ],
+      note: changes.length ? esc(changes.join(' · ')) : '',
+      actions: '<a class="wdh-fc-act" href="/home">Open my home ' + icon('arrow-right') + '</a>'
+    });
   }
 
   function chartSvg(series) {
     var pts = series.slice(-10);
     if (pts.length < 2) return '';
-    var W = 600, H = 160, L = 44, R = 16, T = 22, B = 30;
+    var W = 600, H = 120, L = 44, R = 16, T = 18, B = 26;
     var vals = pts.map(function (p) { return p[1]; });
     var min = Math.min.apply(null, vals), max = Math.max.apply(null, vals);
     var pad = Math.max((max - min) * 0.15, 0.05);
     var lo = min - pad, hi = max + pad;
     function x(i) { return L + i * (W - L - R) / (pts.length - 1); }
     function y(v) { return T + (hi - v) * (H - T - B) / (hi - lo); }
-    var step = (hi - lo) / 3, grid = '';
-    for (var g = 0; g <= 3; g += 1) {
+    var step = (hi - lo) / 2, grid = '';
+    for (var g = 0; g <= 2; g += 1) {
       var gv = lo + step * g;
       grid += '<line class="wdh-c-grid" x1="' + L + '" x2="' + (W - R) + '" y1="' + y(gv).toFixed(1) + '" y2="' + y(gv).toFixed(1) + '"></line>' +
         '<text class="wdh-c-axis" x="0" y="' + (y(gv) + 4).toFixed(1) + '">' + gv.toFixed(2) + '</text>';
     }
     var line = pts.map(function (p, i) { return x(i).toFixed(1) + ',' + y(p[1]).toFixed(1); }).join(' ');
-    var minIdx = vals.indexOf(min), last = pts.length - 1;
-    var labels = '<text class="wdh-c-val" x="' + (x(0) + 6).toFixed(1) + '" y="' + (y(vals[0]) - 9).toFixed(1) + '">' + vals[0].toFixed(3) + '</text>' +
-      '<text class="wdh-c-val wdh-c-end" x="' + (x(last) - 2).toFixed(1) + '" y="' + (y(vals[last]) - 10).toFixed(1) + '">' + vals[last].toFixed(3) + '</text>';
-    if (minIdx !== 0 && minIdx !== last) labels += '<text class="wdh-c-val wdh-c-mid" x="' + x(minIdx).toFixed(1) + '" y="' + (y(min) + 18).toFixed(1) + '">' + min.toFixed(3) + '</text>';
-    var dots = '<circle class="wdh-c-pt" cx="' + x(0).toFixed(1) + '" cy="' + y(vals[0]).toFixed(1) + '" r="5"></circle>' +
-      '<circle class="wdh-c-pt" cx="' + x(last).toFixed(1) + '" cy="' + y(vals[last]).toFixed(1) + '" r="5"></circle>';
+    var last = pts.length - 1;
+    var labels = '<text class="wdh-c-val wdh-c-end" x="' + (x(last) - 2).toFixed(1) + '" y="' + (y(vals[last]) - 10).toFixed(1) + '">' + vals[last].toFixed(3) + '</text>';
+    var dots = '<circle class="wdh-c-pt" cx="' + x(last).toFixed(1) + '" cy="' + y(vals[last]).toFixed(1) + '" r="5"></circle>';
     var hits = pts.map(function (p, i) { return '<circle class="wdh-c-hit" cx="' + x(i).toFixed(1) + '" cy="' + y(p[1]).toFixed(1) + '" r="14"><title>' + p[0] + ': ' + p[1].toFixed(3) + '</title></circle>'; }).join('');
     var years = pts.map(function (p, i) {
-      if (i !== 0 && i !== last && i % 2 !== 0) return '';
-      return '<text class="wdh-c-axis wdh-c-mid" x="' + x(i).toFixed(1) + '" y="' + (H - 6) + '">' + p[0] + '</text>';
+      if (i !== 0 && i !== last && i % 3 !== 0) return '';
+      return '<text class="wdh-c-axis wdh-c-mid" x="' + x(i).toFixed(1) + '" y="' + (H - 4) + '">' + p[0] + '</text>';
     }).join('');
     // content-architecture: dynamic. Screen-reader summary of the chart, built from the town's tax-rate series.
-    var summary = 'General tax rate from ' + pts[0][0] + ' to ' + pts[last][0] + ': from ' + vals[0].toFixed(3) + ' to ' + vals[last].toFixed(3) + (minIdx !== 0 && minIdx !== last ? ', with a low of ' + min.toFixed(3) + ' in ' + pts[minIdx][0] : '') + '.';
+    var summary = 'General tax rate from ' + pts[0][0] + ' to ' + pts[last][0] + ': from ' + vals[0].toFixed(3) + ' to ' + vals[last].toFixed(3) + '.';
     return '<svg class="wdh-chart" viewBox="0 0 ' + W + ' ' + H + '" role="img" aria-label="' + esc(summary) + '">' + grid +
       '<polyline class="wdh-c-line" points="' + line + '"></polyline>' + dots + labels + hits + years + '</svg>';
   }
 
   function pulseCard(feed) {
-    var s = feed.sales, t = feed.tax, f = feed.fairness, r = feed.ratio;
-    var stats = [];
-    if (s && s.available && s.window && s.window.median) {
-      stats.push(['Median sale, ' + s.window.label.replace(/ \d{4}$/, ''), money(s.window.median),
-        (s.window.changePct != null ? pct(s.window.changePct) + ' ' + (s.window.changePct >= 0 ? 'higher' : 'lower') + ' than a year earlier · ' : '') + count(s.window.count) + ' sales']);
-      if (s.window.ppsfMedian) stats.push(['Price per sq ft', money(s.window.ppsfMedian), 'Median, ' + s.window.label]);
-    }
-    if (t && t.available) stats.push([t.year + ' tax rate', t.rate.toFixed(3), t.changePct != null ? pct(t.changePct) + ' ' + (t.changePct >= 0 ? 'higher' : 'lower') + ' than ' + t.priorYear : 'Per $100 of assessed value']);
-    if (!stats.length) return '';
-    var headline;
+    var s = feed.sales, t = feed.tax, f = feed.fairness;
     var price = s && s.available && s.window && s.window.changePct != null ? s.window.changePct : null;
-    if (price != null && t && t.available && t.changePct != null) {
-      headline = (Math.abs(price) < 3 ? 'Prices held steady' : price > 0 ? 'Prices rose' : 'Prices dipped') + ' this spring. The tax rate ' + (t.changePct > 0 ? 'kept climbing.' : t.changePct < 0 ? 'came down.' : 'held flat.');
-    } else {
-      headline = 'How ' + feed.town.name + ' is trending';
-    }
-    var fair = '';
-    if (f && f.available) {
-      var band = String(f.band).toLowerCase();
-      var phrase = band === 'excellent' || band === 'good' ? 'Assessments here are fairly consistent.' : band === 'fair' || band === 'moderate' ? 'Assessments here are somewhat uneven.' : 'Assessments here are uneven.';
-      fair = '<p class="wdh-callout">' + icon('scale-balanced') + '<span>' + phrase + ' Watchdog rates the town\'s assessment uniformity as <strong>' + esc(band.charAt(0).toUpperCase() + band.slice(1)) + '</strong>' + (f.year ? ' for ' + f.year : '') + '.' +
-        (r && r.available ? ' Homes are assessed at about ' + Math.round(r.average) + '% of market value on average (2026 state ratio).' : '') + '</span></p>';
-    }
-    return '<article class="wdh-card wdh-feed-card" data-tabs="town sales">' +
-      kicker('chart-line', 'Town pulse', feed.town.name) +
-      '<h3 class="wdh-h3">' + esc(headline) + '</h3>' +
-      '<div class="wdh-stats">' + stats.map(function (st) { return '<div class="wdh-stat"><p class="wdh-stat-l">' + esc(st[0]) + '</p><p class="wdh-stat-v">' + esc(st[1]) + '</p><p class="wdh-meta">' + esc(st[2]) + '</p></div>'; }).join('') + '</div>' +
-      (t && t.available && t.series && t.series.length > 2 ? '<figure class="wdh-fig"><figcaption class="wdh-h4">General tax rate, ' + t.series.slice(-10)[0][0] + ' to ' + t.year + '</figcaption><p class="wdh-meta">Dollars per $100 of assessed value. Hover a point to see its value.</p>' + chartSvg(t.series) + '</figure>' : '') +
-      fair +
-      '<p class="wdh-source"><span>Sources: NJ Division of Taxation SR1A sales, general tax rates, assessment ratios and coefficient of dispersion.</span></p>' +
-      '<div class="wdh-actions"><a class="wdh-btn wdh-btn-secondary" href="/town-compare">Compare with nearby towns</a><a class="wdh-btn wdh-btn-ghost" href="/fairness">How fairness is rated</a></div></article>';
+    var facts = [];
+    if (s && s.available && s.window && s.window.median) facts.push('Median ' + shortMoney(s.window.median) + (price != null ? ' (' + signed(price) + ')' : ''));
+    if (s && s.available && s.window && s.window.ppsfMedian) facts.push(money(s.window.ppsfMedian) + '/sq ft');
+    if (t && t.available) facts.push('Tax rate ' + t.rate.toFixed(3) + (t.changePct != null ? ' (' + signed(t.changePct) + ')' : ''));
+    if (f && f.available) facts.push('Fairness: ' + esc(upperFirst(String(f.band).toLowerCase())));
+    if (!facts.length) return '';
+    var headline = price != null && t && t.available && t.changePct != null
+      ? (Math.abs(price) < 3 ? 'Prices held steady.' : price > 0 ? 'Prices rose.' : 'Prices dipped.') + ' ' + (t.changePct > 0 ? 'Taxes kept climbing.' : t.changePct < 0 ? 'Taxes came down.' : 'Taxes held flat.')
+      : 'How ' + feed.town.name + ' is trending';
+    return feedCard({
+      tabs: 'town sales',
+      meta: metaRow(iconBadge('chart-line'), 'Town pulse', [feed.town.name]),
+      title: esc(headline),
+      facts: facts,
+      extra: t && t.available && t.series && t.series.length > 2 ? chartSvg(t.series) : '',
+      source: sourceLine('NJ sales, tax rates and assessment ratios'),
+      actions: '<a class="wdh-fc-act" href="/town-compare">Compare towns ' + icon('arrow-right') + '</a>'
+    });
   }
 
   function rulesCard(feed) {
     var rules = feed.rules;
     if (!rules || !rules.available || !rules.items.length) return '';
-    var verified = rules.items.map(function (r) { return r.verifiedAt; }).filter(Boolean).sort().pop();
     var source = rules.items.map(function (r) { return r.sourceUrl; }).filter(Boolean)[0];
-    return '<article class="wdh-card wdh-feed-card" data-tabs="town">' +
-      kicker('building-columns', 'Town rules', 'Official source') +
-      '<h3 class="wdh-h3">Selling in ' + esc(feed.town.name) + '? Plan for ' + (rules.items.length === 1 ? 'this certificate' : rules.items.length === 2 ? 'two certificates' : 'these certificates') + '.</h3>' +
-      '<p class="wdh-body">Before closing, the town requires the items below.' + (verified ? ' Watchdog re-checked the town\'s rules on ' + esc(dayLabel(verified)) + '.' : '') + '</p>' +
-      '<ul class="wdh-check">' + rules.items.map(function (r) { return '<li><span class="wdh-check-mark">' + icon('check') + '</span><span>' + esc(r.title) + '</span><span class="wdh-tag">Required</span></li>'; }).join('') + '</ul>' +
-      '<p class="wdh-source">' + icon('shield-halved') + '<span><strong>Official source.</strong> ' + esc(feed.town.name) + ', ' + esc(feed.town.county) + ' County.' + (source ? ' <a href="' + esc(source) + '" target="_blank" rel="noopener">View source</a>' : '') + '</span></p></article>';
+    var n = rules.items.length;
+    return feedCard({
+      tabs: 'town',
+      meta: metaRow(iconBadge('building-columns'), 'Town rules', ['Selling a home']),
+      title: esc('Selling? Plan for ' + (n === 1 ? 'one certificate' : n === 2 ? 'two certificates' : n + ' certificates')),
+      extra: '<ul class="wdh-check">' + rules.items.map(function (r) { return '<li><span class="wdh-check-mark">' + icon('check') + '</span><span>' + esc(r.title) + '</span></li>'; }).join('') + '</ul>',
+      source: sourceLine(feed.town.name + ' official rules'),
+      actions: source ? '<a class="wdh-fc-act" href="' + esc(source) + '" target="_blank" rel="noopener">Source ' + icon('arrow-up-right-from-square') + '</a>' : ''
+    });
   }
 
   function gamesCard() { return tpl('wdh-tpl-games'); }
@@ -825,7 +884,7 @@
       }
       var fact = tile.querySelector('[data-game-fact]');
       var text = state.games ? gameFact(id, state.games[id]) : '';
-      if (fact && text) { fact.textContent = 'Today: ' + text; fact.hidden = false; }
+      if (fact && text) { fact.textContent = 'Today: ' + text; fact.hidden = false; tile.classList.add('has-fact'); }
     });
     if (!state.games) loadGamePeeks().then(function () { if (state.games) hydrateGames(); });
   }
@@ -850,16 +909,28 @@
     var permits = feed.permits && feed.permits.available ? feed.permits.items.filter(inRadius) : [];
     var sales = feed.sales && feed.sales.available ? feed.sales.items.filter(inRadius) : [];
     var radiusEmpty = state.radius !== 'town' && !permits.length && !sales.length;
-    if (permits[0]) cards.push(permitCard(permits[0], feed));
+    /* A reporter's story about a permit's exact address rides on that permit
+       card; the rest are their own cards (three in "For you", all in "News"). */
+    var news = newsItems(), stories = {}, used = {};
+    permits.forEach(function (p, i) { var story = storyFor(p, news); if (story && !used[story.id]) { stories[i] = story; used[story.id] = true; } });
+    var loose = news.filter(function (n) { return !used[n.id]; });
+    var take = function (i) { return loose[i] ? newsCard(loose[i], i > 2) : ''; };
+    if (permits[0]) cards.push(permitCard(permits[0], feed, stories[0]));
+    cards.push(take(0));
     if (sales.length) cards.push(saleCard(sales, feed));
     if (radiusEmpty) cards.push(emptyRadiusCard());
     cards.push(deadlineCard());
+    cards.push(take(1));
     cards.push(homeCard(feed));
     cards.push(gamesCard());
-    if (permits[1]) cards.push(permitCard(permits[1], feed));
+    if (permits[1]) cards.push(permitCard(permits[1], feed, stories[1]));
+    cards.push(take(2));
     cards.push(pulseCard(feed));
-    if (permits.length > 2) cards.push(permitListCard(permits.slice(2), feed));
+    permits.slice(2).forEach(function (p, i) { if (stories[i + 2]) cards.push(permitCard(p, feed, stories[i + 2])); });
+    var rest = permits.slice(2).filter(function (p, i) { return !stories[i + 2]; });
+    if (rest.length) cards.push(permitListCard(rest, feed));
     cards.push(rulesCard(feed));
+    for (var n = 3; n < loose.length; n += 1) cards.push(take(n));
     if (feed.sales && feed.sales.available === false && feed.sales.reason === 'withheld') {
       cards.push(tpl('wdh-tpl-withheld'));
     }
@@ -882,7 +953,7 @@
     var shown = 0;
     Array.prototype.forEach.call(host.children, function (card) {
       var tabs = String(card.getAttribute('data-tabs') || '').split(/\s+/);
-      var show = state.tab === 'all' || tabs.indexOf('all') !== -1 || tabs.indexOf(state.tab) !== -1;
+      var show = state.tab === 'all' ? card.getAttribute('data-feed-extra') !== '1' : tabs.indexOf('all') !== -1 || tabs.indexOf(state.tab) !== -1;
       card.hidden = !show;
       if (show && !card.classList.contains('wdh-caught')) shown += 1;
     });
@@ -894,7 +965,7 @@
       div.innerHTML = '<p class="wdh-body">Nothing in this part of the feed yet for ' + esc(townName() || 'your town') + '.</p>';
       host.insertBefore(div, host.firstChild);
     }
-    Array.prototype.forEach.call(document.querySelectorAll('#wdh-tabs .wdh-tab'), function (b) {
+    Array.prototype.forEach.call(document.querySelectorAll('#wdh-tabs .wdh-tab, #wdh-feednav .wdh-nav-item'), function (b) {
       var on = b.getAttribute('data-tab') === state.tab;
       b.classList.toggle('is-on', on);
       b.setAttribute('aria-pressed', on ? 'true' : 'false');
@@ -1066,7 +1137,41 @@
     });
   }
 
-  function render() {
+  /* Wide desktop: the left menu and right rail stay put under the site header
+     (and the sticky search bar when it shows) while only the feed scrolls. */
+  var stickyFrame = 0;
+  function syncStickyTop() {
+    stickyFrame = 0;
+    var top = 0;
+    ['wd-nav', 'ssearch'].forEach(function (id) {
+      var el = $(id);
+      if (!el) return;
+      var cs = window.getComputedStyle(el);
+      if (cs.display === 'none' || cs.visibility === 'hidden' || (cs.position !== 'fixed' && cs.position !== 'sticky')) return;
+      var r = el.getBoundingClientRect();
+      if (r.height > 0 && r.top <= 4 && r.bottom > top && r.bottom < 240) top = r.bottom;
+    });
+    root.style.setProperty('--wdh-sticky-top', Math.round(top + 16) + 'px');
+  }
+  function queueStickyTop() { if (!stickyFrame) stickyFrame = window.requestAnimationFrame(syncStickyTop); }
+  window.addEventListener('scroll', queueStickyTop, { passive: true });
+  window.addEventListener('resize', queueStickyTop);
+
+  /* Left feed menu (wide desktop): the signed-in person's saved places. */
+  function renderPlaces() {
+    var list = $('wdh-places-list'), empty = $('wdh-places-empty');
+    if (!list || !empty) return;
+    var places = state.places || [];
+    empty.hidden = places.length > 0;
+    list.hidden = !places.length;
+    list.innerHTML = places.map(function (p) {
+      var full = p.address + (p.town ? ', ' + p.town : '');
+      return '<li><button type="button" class="wdh-place" data-open="' + esc(full) + '"><span class="wdh-ico">' + icon(p.isHome ? 'house' : 'building') + '</span>' +
+        '<span class="wdh-place-t"><span class="wdh-place-a">' + esc(p.address) + '</span><span class="wdh-meta">' + esc(p.label) + '</span></span></button></li>';
+    }).join('');
+  }
+
+  function render(reason) {
     root.setAttribute('data-state', 'ready');
     root.removeAttribute('aria-busy');
     renderHero();
@@ -1074,9 +1179,10 @@
     renderWeek();
     renderCards();
     renderGlance();
+    renderPlaces();
     renderRadius();
     renderMap();
-    rememberSeen();
+    if (reason !== 'cache') rememberSeen();
   }
 
   function renderError() {
@@ -1111,9 +1217,9 @@
     input.value = full;
     window.plLookup();
   }
-  function share(address, title, button) {
+  function share(address, title, button, external) {
     var town = townName();
-    var url = window.location.origin + '/?address=' + encodeURIComponent(address + (town ? ', ' + town : '') + ', NJ');
+    var url = external || window.location.origin + '/?address=' + encodeURIComponent(address + (town ? ', ' + town : '') + ', NJ');
     if (navigator.share) {
       navigator.share({ title: title, text: title + ' (Watchdog)', url: url }).catch(function () {});
       return;
@@ -1122,7 +1228,7 @@
       if (!button) return;
       button.classList.add('is-done');
       button.setAttribute('aria-label', 'Link copied');
-      setTimeout(function () { button.classList.remove('is-done'); button.setAttribute('aria-label', 'Share ' + address); }, 1800);
+      setTimeout(function () { button.classList.remove('is-done'); button.setAttribute('aria-label', 'Share ' + title); }, 1800);
     };
     if (navigator.clipboard && navigator.clipboard.writeText) navigator.clipboard.writeText(url).then(done, function () {});
   }
@@ -1138,8 +1244,14 @@
     if (!target) return;
     var el;
     if ((el = target.closest('[data-open]'))) { event.preventDefault(); openProperty(el.getAttribute('data-open')); return; }
-    if ((el = target.closest('[data-share]'))) { event.preventDefault(); share(el.getAttribute('data-share'), el.getAttribute('data-share-title'), el); return; }
-    if ((el = target.closest('#wdh-tabs .wdh-tab'))) { state.tab = el.getAttribute('data-tab') || 'all'; applyTab(); return; }
+    if ((el = target.closest('[data-share]'))) { event.preventDefault(); share(el.getAttribute('data-share'), el.getAttribute('data-share-title'), el, el.getAttribute('data-share-url') || ''); return; }
+    if ((el = target.closest('#wdh-tabs .wdh-tab, #wdh-feednav .wdh-nav-item'))) {
+      state.tab = el.getAttribute('data-tab') || 'all';
+      applyTab();
+      /* From the left menu, jump back to the top of the feed. */
+      if (el.classList.contains('wdh-nav-item')) { var top = $('wdh-cards'); if (top && top.getBoundingClientRect().top < 0) top.scrollIntoView({ behavior: 'smooth', block: 'start' }); }
+      return;
+    }
     if ((el = target.closest('#wdh-tiles .wdh-tile'))) {
       state.tab = el.getAttribute('data-go') || 'all';
       applyTab();
@@ -1191,13 +1303,23 @@
   }
 
   function boot() {
+    syncStickyTop();
     renderWhere();
     renderUpcoming();
+    /* Paint the remembered feed right away, then refresh it from the network. */
+    var guess = initialTown() || store(KEY_LAST);
+    var remembered = rememberedFeed(typeof guess === 'string' ? guess : '');
+    if (remembered) {
+      state.feed = remembered;
+      state.seen = store(KEY_SEEN + remembered.town.code);
+      state.seenFor = remembered.town.code;
+      render('cache');
+    }
     loadHome().then(function (home) {
       state.home = home;
       var code = initialTown();
       if (home && home.pin) state.homePrev = store(KEY_HOME + home.pin);
-      var feedLoad = load(code, 'boot');
+      var feedLoad = load(code, remembered && (!code || code === remembered.town.code) ? 'refresh' : 'boot');
       var scoreLoad = home ? loadScore(home).then(function (score) {
         if (score == null || !state.home) return;
         state.home.score = score;

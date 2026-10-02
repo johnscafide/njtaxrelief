@@ -43,7 +43,7 @@
 
   <link rel="stylesheet" href="/property/css/public-mobile-nav.css">
   <link rel="stylesheet" href="/property/css/landing-review.css?v=20260928a">
-  <link rel="stylesheet" href="/property/css/home-feed.css?v=20261002d">
+  <link rel="stylesheet" href="/property/css/home-feed.css?v=20261002e">
 
 <script type="application/ld+json">
 {
@@ -235,6 +235,30 @@
 <main class="wdh" id="wdh" data-state="loading" data-tab="all" aria-labelledby="wdh-feed-title">
   <p class="wdh-where" id="wdh-where"><span id="wdh-where-date"></span> <span class="wdh-where-sep" id="wdh-where-sep" aria-hidden="true" hidden>&middot;</span> <span class="wdh-where-place"><span id="wdh-where-town">New Jersey</span>&nbsp;<button type="button" class="wdh-where-change" id="wdh-town-change" aria-haspopup="dialog" aria-controls="wdh-picker" aria-label="Change town">(change)</button></span><button type="button" class="wdh-where-pin" id="wdh-where-pin" aria-label="Use my phone's location to pick my town"><i class="fas fa-location-dot" aria-hidden="true"></i></button></p>
   <div class="wdh-shell">
+    <!-- Wide desktop only: the feed's own menu (not the site menu). It stays put while the feed scrolls. -->
+    <aside class="wdh-left" aria-label="Feed menu">
+      <nav class="wdh-left-card wdh-feednav" id="wdh-feednav" aria-label="Feed sections">
+        <button type="button" class="wdh-nav-item is-on" data-tab="all" aria-pressed="true"><i class="fas fa-house" aria-hidden="true"></i><span>For you</span></button>
+        <button type="button" class="wdh-nav-item" data-tab="news" aria-pressed="false"><i class="fas fa-newspaper" aria-hidden="true"></i><span>Local news</span></button>
+        <button type="button" class="wdh-nav-item" data-tab="sales" aria-pressed="false"><i class="fas fa-tag" aria-hidden="true"></i><span>Sales</span></button>
+        <button type="button" class="wdh-nav-item" data-tab="permits" aria-pressed="false"><i class="fas fa-helmet-safety" aria-hidden="true"></i><span>Permits</span></button>
+        <button type="button" class="wdh-nav-item" data-tab="town" aria-pressed="false"><i class="fas fa-building-columns" aria-hidden="true"></i><span>Town</span></button>
+        <button type="button" class="wdh-nav-item" data-tab="home" aria-pressed="false"><i class="fas fa-house-user" aria-hidden="true"></i><span>My home</span></button>
+        <button type="button" class="wdh-nav-item" data-tab="games" aria-pressed="false"><i class="fas fa-table-cells-large" aria-hidden="true"></i><span>Games</span></button>
+      </nav>
+      <section class="wdh-left-card" aria-labelledby="wdh-places-title">
+        <h2 class="wdh-left-h" id="wdh-places-title">My places</h2>
+        <ul class="wdh-places" id="wdh-places-list" hidden></ul>
+        <div id="wdh-places-empty">
+          <p class="wdh-meta">Save your home to follow it here.</p>
+          <button type="button" class="wdh-left-link" data-focus-search><i class="fas fa-magnifying-glass" aria-hidden="true"></i>Find my home</button>
+        </div>
+      </section>
+      <section class="wdh-left-card" aria-labelledby="wdh-up-title-left">
+        <h2 class="wdh-left-h" id="wdh-up-title-left">Coming up</h2>
+        <ul class="wdh-up" data-wdh-upcoming></ul>
+      </section>
+    </aside>
     <div class="wdh-main">
 
       <section class="wdh-tiles" id="wdh-tiles" aria-label="This month around your town">
@@ -262,6 +286,7 @@
         </div>
         <div class="wdh-tabs" id="wdh-tabs" role="group" aria-label="Filter your feed">
           <button type="button" class="wdh-tab is-on" data-tab="all" aria-pressed="true">For you</button>
+          <button type="button" class="wdh-tab" data-tab="news" aria-pressed="false">News</button>
           <button type="button" class="wdh-tab" data-tab="sales" aria-pressed="false">Sales</button>
           <button type="button" class="wdh-tab" data-tab="permits" aria-pressed="false">Permits</button>
           <button type="button" class="wdh-tab" data-tab="town" aria-pressed="false">Town</button>
@@ -274,19 +299,23 @@
         </div>
         <!-- Static feed cards. home-feed.js clones these so their copy stays in HTML. -->
         <template id="wdh-tpl-claim-out">
-          <article class="wdh-card wdh-feed-card wdh-claim" data-tabs="home">
-            <div class="wdh-krow"><span class="wdh-ico"><i class="fas fa-house" aria-hidden="true"></i></span><span class="wdh-kicker">Your home</span><span class="wdh-dot" aria-hidden="true">&middot;</span><span class="wdh-meta">Free with a Watchdog account</span></div>
-            <h3 class="wdh-h3">Track your home and get a weekly recap</h3>
-            <p class="wdh-body">Save your home to see how its tax compares with the town, get a heads-up when its assessment record changes, and make this feed about your street.</p>
-            <div class="wdh-actions"><button type="button" class="wdh-btn wdh-btn-primary" data-focus-search><i class="fas fa-magnifying-glass" aria-hidden="true"></i>Find my home</button><button type="button" class="wdh-btn wdh-btn-secondary" data-signin>Sign in</button></div>
+          <article class="wdh-card wdh-feed-card wdh-fc no-media" data-tabs="home">
+            <div class="wdh-fc-main">
+              <div class="wdh-krow"><span class="wdh-ico"><i class="fas fa-house" aria-hidden="true"></i></span><span class="wdh-kicker">Your home</span><span class="wdh-dot" aria-hidden="true">&middot;</span><span class="wdh-meta">Free account</span></div>
+              <h3 class="wdh-h3 wdh-fc-title">Follow your home</h3>
+              <p class="wdh-fc-facts"><span>Your tax vs. the town</span><span>Record changes</span><span>Distances from your street</span></p>
+            </div>
+            <div class="wdh-fc-foot"><button type="button" class="wdh-btn wdh-btn-primary wdh-btn-sm" data-focus-search><i class="fas fa-magnifying-glass" aria-hidden="true"></i>Find my home</button><button type="button" class="wdh-btn wdh-btn-secondary wdh-btn-sm" data-signin>Sign in</button></div>
           </article>
         </template>
         <template id="wdh-tpl-claim-in">
-          <article class="wdh-card wdh-feed-card wdh-claim" data-tabs="home">
-            <div class="wdh-krow"><span class="wdh-ico"><i class="fas fa-house" aria-hidden="true"></i></span><span class="wdh-kicker">Your home</span></div>
-            <h3 class="wdh-h3">Add your home to personalize this feed</h3>
-            <p class="wdh-body">Search your address and save it as your home. Your feed will show distances from your street and how your tax compares with the town.</p>
-            <div class="wdh-actions"><button type="button" class="wdh-btn wdh-btn-primary" data-focus-search><i class="fas fa-magnifying-glass" aria-hidden="true"></i>Find my home</button></div>
+          <article class="wdh-card wdh-feed-card wdh-fc no-media" data-tabs="home">
+            <div class="wdh-fc-main">
+              <div class="wdh-krow"><span class="wdh-ico"><i class="fas fa-house" aria-hidden="true"></i></span><span class="wdh-kicker">Your home</span></div>
+              <h3 class="wdh-h3 wdh-fc-title">Add your home</h3>
+              <p class="wdh-fc-facts"><span>Search your address, then save it</span></p>
+            </div>
+            <div class="wdh-fc-foot"><button type="button" class="wdh-btn wdh-btn-primary wdh-btn-sm" data-focus-search><i class="fas fa-magnifying-glass" aria-hidden="true"></i>Find my home</button></div>
           </article>
         </template>
         <template id="wdh-tpl-games">
@@ -322,22 +351,24 @@
                 </span>
               </a>
             </div>
-            <p class="wdh-meta wdh-games-more"><span>Signed-in scores count on today's leaderboard.</span><a href="/games">All 6 games</a><a href="/games/leaderboard">Leaderboard</a></p>
+            <p class="wdh-meta wdh-games-more"><a href="/games">All 6 games</a><a href="/games/leaderboard">Leaderboard</a></p>
           </article>
         </template>
         <template id="wdh-tpl-pick">
-          <article class="wdh-card wdh-feed-card wdh-pick" data-tabs="all">
-            <div class="wdh-krow"><span class="wdh-ico"><i class="fas fa-location-dot" aria-hidden="true"></i></span><span class="wdh-kicker">Start here</span></div>
-            <h3 class="wdh-h3">Pick your town to start your feed</h3>
-            <p class="wdh-body">Watchdog will show the latest home sales, building permits, tax-rate changes and town rules for any of New Jersey's 564 towns.</p>
-            <div class="wdh-actions"><button type="button" class="wdh-btn wdh-btn-primary" data-pick-town><i class="fas fa-location-dot" aria-hidden="true"></i>Choose my town</button><button type="button" class="wdh-btn wdh-btn-secondary" data-focus-search><i class="fas fa-magnifying-glass" aria-hidden="true"></i>Search an address</button></div>
+          <article class="wdh-card wdh-feed-card wdh-fc no-media wdh-pick" data-tabs="all">
+            <div class="wdh-fc-main">
+              <div class="wdh-krow"><span class="wdh-ico"><i class="fas fa-location-dot" aria-hidden="true"></i></span><span class="wdh-kicker">Start here</span></div>
+              <h3 class="wdh-h3 wdh-fc-title">Pick your town</h3>
+              <p class="wdh-fc-facts"><span>Sales</span><span>Permits</span><span>Taxes</span><span>Local news</span></p>
+            </div>
+            <div class="wdh-fc-foot"><button type="button" class="wdh-btn wdh-btn-primary wdh-btn-sm" data-pick-town><i class="fas fa-location-dot" aria-hidden="true"></i>Choose my town</button><button type="button" class="wdh-btn wdh-btn-secondary wdh-btn-sm" data-focus-search><i class="fas fa-magnifying-glass" aria-hidden="true"></i>Search an address</button></div>
           </article>
         </template>
         <template id="wdh-tpl-caught">
           <div class="wdh-caught" data-tabs="all">
             <span class="wdh-caught-ico"><i class="fas fa-check" aria-hidden="true"></i></span>
             <p class="wdh-caught-t">You're all caught up.</p>
-            <p class="wdh-meta">The state publishes new sale and permit records about once a month. Check back, or save your home to follow it.</p>
+            <p class="wdh-meta">New state records land about once a month.</p>
           </div>
         </template>
         <template id="wdh-tpl-withheld">
@@ -378,9 +409,9 @@
         </ul>
       </section>
 
-      <section class="wdh-card wdh-rail-card" aria-labelledby="wdh-up-title">
+      <section class="wdh-card wdh-rail-card wdh-up-rail" aria-labelledby="wdh-up-title">
         <h2 id="wdh-up-title" class="wdh-h2s">Coming up</h2>
-        <ul class="wdh-up" id="wdh-upcoming">
+        <ul class="wdh-up" data-wdh-upcoming>
           <li><span class="wdh-date"><span class="wdh-date-m">NOV</span><span class="wdh-date-d">1</span></span><span><span class="wdh-up-t">Q4 property tax due</span><span class="wdh-meta">Many towns allow a 10-day grace period.</span></span></li>
           <li><span class="wdh-date"><span class="wdh-date-m">FEB</span><span class="wdh-date-d">1</span></span><span><span class="wdh-up-t">Assessment notices arrive</span><span class="wdh-meta">Check yours for errors.</span></span></li>
           <li><span class="wdh-date"><span class="wdh-date-m">APR</span><span class="wdh-date-d">1</span></span><span><span class="wdh-up-t">Tax appeal deadline</span><span class="wdh-meta">May 1 in towns with a revaluation.</span></span></li>
@@ -1496,6 +1527,6 @@
 <script src="/property/js/public-nav.js"></script>
 <script src="/property/js/ownership-verification.js"></script>
 <script src="/property/js/lookup.js?v=20261002a"></script>
-<script src="/property/js/home-feed.js?v=20261002d"></script>
+<script src="/property/js/home-feed.js?v=20261002e"></script>
 </body>
 </html>
