@@ -37,7 +37,8 @@ function loadStatic() {
     towns: readJson('property/data/home-feed-towns.json').towns || {},
     rates: readJson('property/tax-rates.json').rates || {},
     uniformity: readJson('property/uniformity.json').districts || {},
-    ratios: readJson('chapter123-ratios-2026.json').districts || {}
+    ratios: readJson('chapter123-ratios-2026.json').districts || {},
+    newsSources: (readJson('property/data/local-sources.json').sources || []).filter(source => source && source.enabled)
   };
   return staticData;
 }
@@ -505,6 +506,44 @@ function settle(result, label) {
   return { available: false, reason: 'unavailable' };
 }
 
+/* Local reporters' stories for this town, from public.local_news_items (filled
+   hourly by property/scripts/sync_local_news.mjs). Turning a source off in
+   property/data/local-sources.json removes its stories here too. */
+const TEN_MINUTES = 10 * 60 * 1000;
+async function newsFor(code, config) {
+  const sources = loadStatic().newsSources;
+  if (!config || !sources.length) return { available: false };
+  return cached(`news:${code}`, TEN_MINUTES, async () => {
+    const since = new Date(Date.now() - 365 * 24 * 60 * 60 * 1000).toISOString();
+    const rows = await rest(config, 'local_news_items', {
+      select: 'source_id,external_id,title,url,published_at,excerpt,image_url,image_alt,video_id,address_keys',
+      town_codes: `cs.{${code}}`,
+      hidden: 'eq.false',
+      source_id: `in.(${sources.map(source => source.id).join(',')})`,
+      published_at: `gte.${since}`,
+      order: 'published_at.desc',
+      limit: '6'
+    });
+    const items = (Array.isArray(rows) ? rows : []).map(row => ({
+      id: `${row.source_id}:${row.external_id}`,
+      source: row.source_id,
+      title: row.title,
+      url: row.url,
+      date: row.published_at,
+      excerpt: row.excerpt || '',
+      image: row.image_url || '',
+      imageAlt: row.image_alt || '',
+      video: row.video_id ? { id: row.video_id, url: `https://www.youtube.com/watch?v=${row.video_id}`, thumb: `https://i.ytimg.com/vi/${row.video_id}/hqdefault.jpg` } : null,
+      addresses: row.address_keys || []
+    }));
+    return {
+      available: items.length > 0,
+      sources: sources.map(source => ({ id: source.id, name: source.name, badge: source.badge || '', site: source.site, about: source.about || '' })),
+      items
+    };
+  });
+}
+
 module.exports = async function handler(req, res) {
   res.setHeader('Content-Type', 'application/json; charset=utf-8');
   res.setHeader('Cache-Control', 'private, max-age=300');
@@ -547,12 +586,13 @@ module.exports = async function handler(req, res) {
 
   const town = data.towns[code];
   const allowSales = await salesAllowed(req, config);
-  const [sales, permits, meta, stats, rules] = await Promise.allSettled([
+  const [sales, permits, meta, stats, rules, news] = await Promise.allSettled([
     allowSales ? salesFor(code, town.c, config) : Promise.resolve({ available: false, reason: 'withheld' }),
     permitsFor(code, config),
     permitsMeta(),
     statsFor(town, config),
-    rulesFor(code, config)
+    rulesFor(code, config),
+    newsFor(code, config)
   ]);
 
   const permitBlock = settle(permits, 'permits');
@@ -580,7 +620,8 @@ module.exports = async function handler(req, res) {
     fairness: fairnessFor(code),
     ratio: ratioFor(code),
     stats: settle(stats, 'stats'),
-    rules: settle(rules, 'rules')
+    rules: settle(rules, 'rules'),
+    news: settle(news, 'news')
   };
   return res.end(JSON.stringify(body));
 };
