@@ -509,8 +509,9 @@ function settle(result, label) {
 /* Local reporters' stories for this town, from public.local_news_items (filled
    hourly by property/scripts/sync_local_news.mjs). Turning a source off in
    property/data/local-sources.json removes its stories here too. The newest
-   six are kept, at most three per site, so one busy site cannot crowd out the
-   others; a story two sites both ran shows once. */
+   six are kept, at most three per site while other sites have stories to fill
+   the rest, so one busy site cannot crowd out the others; a story two sites
+   both ran shows once. */
 const NEWS_LIMIT = 6;
 const NEWS_PER_SOURCE = 3;
 const TEN_MINUTES = 10 * 60 * 1000;
@@ -528,18 +529,22 @@ async function newsFor(code, config) {
       order: 'published_at.desc',
       limit: '30'
     });
-    const perSource = new Map();
     const seen = new Set();
-    const picked = (Array.isArray(rows) ? rows : []).filter(row => {
+    const unique = (Array.isArray(rows) ? rows : []).filter(row => {
       const titleKey = String(row.title || '').toLowerCase().replace(/[^a-z0-9]+/g, ' ').trim();
       if (seen.has(row.url) || seen.has(titleKey)) return false;
-      const n = perSource.get(row.source_id) || 0;
-      if (n >= NEWS_PER_SOURCE) return false;
-      perSource.set(row.source_id, n + 1);
       seen.add(row.url);
       seen.add(titleKey);
       return true;
+    });
+    const perSource = new Map();
+    const first = unique.filter(row => {
+      const n = perSource.get(row.source_id) || 0;
+      perSource.set(row.source_id, n + 1);
+      return n < NEWS_PER_SOURCE;
     }).slice(0, NEWS_LIMIT);
+    const picked = first.concat(unique.filter(row => !first.includes(row)).slice(0, NEWS_LIMIT - first.length))
+      .sort((a, b) => String(b.published_at).localeCompare(String(a.published_at)));
     const items = picked.map(row => ({
       id: `${row.source_id}:${row.external_id}`,
       source: row.source_id,
@@ -621,7 +626,8 @@ module.exports = async function handler(req, res) {
     source,
     town: {
       code,
-      name: town.n,
+      /* The state list doubles some city names ("Jersey City City"). */
+      name: String(town.n).replace(/ City City$/, ' City'),
       county: town.c,
       countySlug: slug(town.c),
       townPage: town.p ? `/${town.p}` : null,
