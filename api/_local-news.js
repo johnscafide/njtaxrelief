@@ -6,10 +6,13 @@
    reporter's own headline, short excerpt, featured photo and link; the full
    story always stays on their site. Files starting with "_" are not routes.
 
-   Sources are WordPress sites (read through their public REST API) or plain
-   RSS feeds. A story is placed in a town by, in order: the reporter's own town
-   label (category or tag), a town named in the headline, or the source's home
-   town when it only covers one place. */
+   Sources are WordPress sites (read through their public REST API), plain RSS
+   feeds, or YouTube channels (read through the official YouTube Data API with
+   the YOUTUBE_API_KEY secret; YouTube's robots.txt rules out its RSS feeds).
+   A story is placed in a town by, in order: the reporter's own town label
+   (category or tag), a town named in the headline (or, for sources that opt
+   in, the start of a video description), or the source's home town when it
+   only covers one place. */
 const fs = require('fs');
 const path = require('path');
 
@@ -55,8 +58,8 @@ const OTHER_STATE = ',\\s+(?:MD|Md\\.|Maryland|NY|N\\.Y\\.|New York|PA|Pa\\.|Pen
 /* The home feed is about places: what is being built, opening, closing or
    decided near you. Crime, deaths, obituaries, opinion, sports and paid posts
    stay on the reporter's site. A source can opt out with "allTopics": true. */
-const SKIP_TOPIC = /\b(?:obituar\w*|police|blotter|crimes?|public safety|sponsor\w*|opinion|editorials?|letters? to the editor|lottery|courts?|giveaways?|recipes?|horoscopes?|sports?)\b/i;
-const SKIP_HEADLINE = /\b(?:arrest(?:ed|s)?|charged|indicted|sentenced|convicted|pleads? guilty|pleaded guilty|shooting|stabb(?:ed|ing)|murder(?:ed|s)?|homicide|manslaughter|fatal(?:ly)?|killed|dead|injur(?:ed|ies|y)|crash(?:es|ed)?|overdose|obituary|dies|died|death|DWI|DUI|missing|sexual assault|police say)\b/i;
+const SKIP_TOPIC = /\b(?:obituar\w*|obits?|legal notices?|public notices?|police|blotter|crimes?|public safety|sponsor\w*|opinion|editorials?|letters? to the editor|lottery|courts?|giveaways?|recipes?|horoscopes?|sports?)\b/i;
+const SKIP_HEADLINE = /\b(?:arrest(?:ed|s)?|charged|indicted|sentenced|convicted|pleads? guilty|pleaded guilty|shooting|stabb(?:ed|ing)|murder(?:ed|s)?|homicide|manslaughter|fatal(?:ly)?|killed|killings?|dead|injur(?:ed|ies|y)|crash(?:es|ed)?|overdose|obituary|dies|died|death|DWI|DUI|missing|sexual assault|police say)\b/i;
 
 const memo = new Map();
 let staticData = null;
@@ -69,7 +72,7 @@ function loadStatic() {
   if (staticData) return staticData;
   staticData = {
     towns: readJson('property/data/home-feed-towns.json').towns || {},
-    sources: (readJson('property/data/local-sources.json').sources || []).filter(s => s && s.enabled && (s.type === 'wordpress' || s.type === 'rss'))
+    sources: (readJson('property/data/local-sources.json').sources || []).filter(s => s && s.enabled && ['wordpress', 'rss', 'youtube'].includes(s.type))
   };
   return staticData;
 }
@@ -239,13 +242,16 @@ function townsInHeadline(title, index) {
   return codes;
 }
 
-/* Label codes first, then headline names, then the source's home town. */
-function placeStory(source, index, title, labelNames) {
+/* Label codes first, then headline names, then (for sources with
+   "matchDescription") the opening of the description, then the source's home
+   town. */
+function placeStory(source, index, title, labelNames, description) {
   let codes = new Set();
   if (source.townsFrom && source.townsFrom !== 'none') {
     labelNames.forEach(name => { const code = labelCode(name, index); if (code) codes.add(code); });
   }
   if (!codes.size && source.titleMatch !== false) codes = townsInHeadline(title, index);
+  if (!codes.size && source.matchDescription && description) codes = townsInHeadline(String(description).slice(0, 400), index);
   if (!codes.size && Array.isArray(source.defaultTowns)) source.defaultTowns.forEach(code => codes.add(code));
   return Array.from(codes);
 }
@@ -300,16 +306,48 @@ function labelsFor(source, taxonomy) {
 }
 
 /* The photo size closest to a 480px-wide landscape card. */
+function bestSize(sizeList, source) {
+  const sizes = (sizeList || []).filter(size => size && size.source_url && size.width && size.height && allowedImage(size.source_url, source));
+  const landscape = sizes.filter(size => size.width / size.height >= 1.1 && size.width / size.height <= 2.1);
+  const pool = landscape.length ? landscape : sizes;
+  return pool.filter(size => size.width >= 480).sort((a, b) => a.width - b.width)[0] || pool.sort((a, b) => b.width - a.width)[0] || null;
+}
 function imageFor(post, source) {
   const media = post._embedded && post._embedded['wp:featuredmedia'] && post._embedded['wp:featuredmedia'][0];
   if (!media || media.code) return { url: '', alt: '' };
-  const sizes = Object.values((media.media_details && media.media_details.sizes) || {})
-    .filter(size => size && size.source_url && size.width && size.height && allowedImage(size.source_url, source));
-  const landscape = sizes.filter(size => size.width / size.height >= 1.1 && size.width / size.height <= 2.1);
-  const pool = landscape.length ? landscape : sizes;
-  const pick = pool.filter(size => size.width >= 480).sort((a, b) => a.width - b.width)[0] || pool.sort((a, b) => b.width - a.width)[0];
+  const pick = bestSize(Object.values((media.media_details && media.media_details.sizes) || {}), source);
   const url = pick ? pick.source_url : (allowedImage(media.source_url, source) ? media.source_url : '');
   return { url: url || '', alt: plain(media.alt_text || '') };
+}
+
+/* "2026/10/photo" for a WordPress upload URL, whatever its size suffix
+   ("-150x150", "-scaled"), so the sync can look up a card-sized copy. */
+function wpUploadPath(url, source) {
+  if (!allowedImage(url, source)) return null;
+  const m = /\/wp-content\/uploads\/(\d{4}\/\d{2}\/)(.+?)(?:-scaled)?(?:-\d+x\d+)?\.(?:jpe?g|png|webp|gif)$/i.exec(String(url).split('?')[0]);
+  return m ? { path: `${m[1]}${m[2]}`, base: m[2] } : null;
+}
+/* A WordPress thumbnail under 300px on both sides is too small for a card. */
+const TINY_THUMB = /-(\d{2,3})x(\d{2,3})\.(?:jpe?g|png|webp|gif)(?:\?|$)/i;
+function isTinyThumb(url) {
+  const m = TINY_THUMB.exec(String(url || ''));
+  return !!m && Number(m[1]) < 300 && Number(m[2]) < 300;
+}
+/* Photo CDNs that size by URL (TownNews BLOX "resize=300,170") are asked for
+   the source's "imageWidth" instead, keeping the shape. */
+function resized(url, source) {
+  if (!source.imageWidth) return url;
+  return String(url).replace(/([?&]resize=)(\d+)(%2C|,)(\d+)/i, (_, key, w, comma, h) =>
+    `${key}${source.imageWidth}${comma}${Math.round(Number(h) * source.imageWidth / Number(w))}`);
+}
+
+/* Town labels some sites put in the link: 70and73.com/mount_laurel/... */
+function urlLabels(link) {
+  try {
+    return new URL(link).pathname.split('/').filter(Boolean).slice(0, -1).map(part => decodeURIComponent(part).replace(/[_-]+/g, ' ')).filter(part => part.split(' ').length <= 4);
+  } catch (_error) {
+    return [];
+  }
 }
 
 function shapePost(post, source) {
@@ -390,7 +428,10 @@ function shapeRssItem(item, source) {
   const imgs = Array.from(`${item.content} ${item.description}`.matchAll(/<img\b[^>]*\bsrc="([^"]+)"[^>]*>/gi))
     .filter(r => !/\b(?:width|height)="1"/.test(r[0]) && !/gravatar|pixel|feeds\.feedburner/i.test(r[1]))
     .map(r => decode(r[1]));
-  const image = [item.media].concat(imgs).find(url => allowedImage(url, source)) || '';
+  const allowed = [item.media].concat(imgs).filter(url => allowedImage(url, source));
+  let image = resized(allowed.find(url => !isTinyThumb(url)) || allowed[0] || '', source);
+  /* "imageOriginal": the upload behind a 150px feed thumbnail. */
+  if (source.imageOriginal && isTinyThumb(image)) image = image.replace(/-\d{2,3}x\d{2,3}(\.(?:jpe?g|png|webp|gif))(?=\?|$)/i, '$1');
   const alt = image && !item.media ? (/<img\b[^>]*\balt="([^"]*)"/i.exec(html) || [])[1] : '';
   return {
     id: `${source.id}:${externalId}`,
@@ -407,8 +448,48 @@ function shapeRssItem(item, source) {
   };
 }
 
+/* ---------- YouTube ---------- */
+/* A channel's uploads playlist id is its channel id with "UC" swapped for "UU". */
+function uploadsPlaylist(channelId) {
+  return /^UC[\w-]{22}$/.test(String(channelId || '')) ? `UU${channelId.slice(2)}` : '';
+}
+
+/* One playlistItems.list entry (part=snippet,contentDetails) as a story. The
+   picture is YouTube's own 480x360 thumbnail; the link and Watch button go to
+   the video on YouTube. */
+function shapeYoutubeItem(entry, source) {
+  const snippet = entry && entry.snippet;
+  const details = (entry && entry.contentDetails) || {};
+  const id = details.videoId || (snippet && snippet.resourceId && snippet.resourceId.videoId) || '';
+  if (!snippet || !/^[\w-]{11}$/.test(id)) return null;
+  const title = plain(snippet.title);
+  if (!title || /^(?:private|deleted) video$/i.test(title)) return null;
+  const when = new Date(details.videoPublishedAt || snippet.publishedAt);
+  if (Number.isNaN(when.getTime())) return null;
+  const description = String(snippet.description || '');
+  const thumbs = snippet.thumbnails || {};
+  const thumb = (thumbs.high || thumbs.standard || thumbs.medium || {}).url || '';
+  const video = { id, url: `https://www.youtube.com/watch?v=${id}`, thumb: `https://i.ytimg.com/vi/${id}/hqdefault.jpg` };
+  return {
+    id: `${source.id}:${id}`,
+    externalId: id,
+    source: source.id,
+    title,
+    url: video.url,
+    publishedAt: when.toISOString(),
+    excerpt: clip(description.split(/\n\s*\n/)[0].replace(/\s+/g, ' ').trim(), 220),
+    image: /^https:\/\/i\d?\.ytimg\.com\//.test(thumb) ? thumb : video.thumb,
+    imageAlt: '',
+    video,
+    description,
+    addresses: addressesIn(`${title}. ${description}`)
+  };
+}
+
 module.exports = {
   USER_AGENT, MAX_AGE_DAYS, POST_FIELDS,
   loadStatic, getJson, getText, labelsFor, wordpressContext, townIndex, placeStory, skipStory,
-  shapePost, rssItems, shapeRssItem, addressesIn, streetKey, youtubeIn, clip, decode, plain, baseName
+  shapePost, rssItems, shapeRssItem, uploadsPlaylist, shapeYoutubeItem,
+  bestSize, wpUploadPath, isTinyThumb, urlLabels,
+  addressesIn, streetKey, youtubeIn, clip, decode, plain, baseName
 };

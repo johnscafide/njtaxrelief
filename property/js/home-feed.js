@@ -479,6 +479,8 @@
     var list = news && news.sources ? news.sources : [];
     return list.filter(function (s) { return s.id === id; })[0] || { id: id, name: id, badge: '', site: '' };
   }
+  /* A YouTube channel's item is the video itself: play button, "Video by", Watch. */
+  function isVideoSource(src) { return src && src.kind === 'video'; }
   function newsItems() {
     var news = state.feed && state.feed.news;
     return news && news.available && Array.isArray(news.items) ? news.items : [];
@@ -611,9 +613,10 @@
     var url = item.image || (item.video ? item.video.thumb : '');
     if (!url) return '';
     // content-architecture: dynamic. The reporter's own photo, alt text and credit for this story.
+    var videoOnly = item.video && (!item.image || isVideoSource(src));
     return '<div class="wdh-fc-media is-photo"><img src="' + esc(url) + '" alt="' + esc(item.imageAlt || item.title) + '" loading="lazy" referrerpolicy="no-referrer" onerror="this.parentNode.remove()">' +
-      (item.video && !item.image ? '<span class="wdh-fc-play" aria-hidden="true">' + icon('play') + '</span>' : '') +
-      '<span class="wdh-fc-credit">Photo: ' + esc(src.name) + '</span></div>';
+      (videoOnly ? '<span class="wdh-fc-play" aria-hidden="true">' + icon('play') + '</span>' : '') +
+      '<span class="wdh-fc-credit">' + (videoOnly ? 'Video: ' : 'Photo: ') + esc(src.name) + '</span></div>';
   }
   function sourceLine(text, iconName) { return '<span class="wdh-src">' + icon(iconName || 'shield-halved') + '<span>' + esc(text) + '</span></span>'; }
   function shareButton(address, title, url) {
@@ -636,8 +639,8 @@
     // content-architecture: dynamic. A local reporter's story about this exact address, credited and linked.
     return '<a class="wdh-cov" href="' + esc(story.url) + '" target="_blank" rel="noopener">' +
       (story.image ? '<img src="' + esc(story.image) + '" alt="" loading="lazy" referrerpolicy="no-referrer" onerror="this.remove()">' : '') +
-      '<span class="wdh-cov-text"><span class="wdh-cov-src">' + sourceBadge(src) + 'Also covered by ' + esc(src.name) + '</span><span class="wdh-cov-title">' + esc(story.title) + '</span></span>' +
-      icon('arrow-up-right-from-square') + '</a>';
+      '<span class="wdh-cov-text"><span class="wdh-cov-src">' + sourceBadge(src) + (isVideoSource(src) ? 'Video by ' : 'Also covered by ') + esc(src.name) + '</span><span class="wdh-cov-title">' + esc(story.title) + '</span></span>' +
+      icon(isVideoSource(src) ? 'play' : 'arrow-up-right-from-square') + '</a>';
   }
 
   function permitCard(item, feed, story) {
@@ -714,9 +717,9 @@
       // content-architecture: dynamic. The reporter's own headline, linked to their story.
       title: '<a class="wdh-fc-link" href="' + esc(story.url) + '" target="_blank" rel="noopener">' + esc(story.title) + '</a>',
       media: photoMedia(story, src),
-      source: sourceLine('Story by ' + src.name, 'newspaper'),
+      source: isVideoSource(src) ? sourceLine('Video by ' + src.name, 'circle-play') : sourceLine('Story by ' + src.name, 'newspaper'),
       actions: (story.video ? '<a class="wdh-fc-act" href="' + esc(story.video.url) + '" target="_blank" rel="noopener">' + icon('play') + 'Watch</a>' : '') +
-        '<a class="wdh-fc-act" href="' + esc(story.url) + '" target="_blank" rel="noopener">Read ' + icon('arrow-up-right-from-square') + '</a>' +
+        (isVideoSource(src) ? '' : '<a class="wdh-fc-act" href="' + esc(story.url) + '" target="_blank" rel="noopener">Read ' + icon('arrow-up-right-from-square') + '</a>') +
         shareButton('', story.title, story.url)
     });
   }

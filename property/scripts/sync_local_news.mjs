@@ -10,7 +10,9 @@
      node property/scripts/sync_local_news.mjs --only jerseydigs,renj
      node property/scripts/sync_local_news.mjs --days 365 --prune
 
-   Writes need SUPABASE_URL and SUPABASE_SERVICE_ROLE_KEY. Re-running is safe:
+   Writes need SUPABASE_URL and SUPABASE_SERVICE_ROLE_KEY. YouTube channels
+   also need YOUTUBE_API_KEY (YouTube Data API v3); without it they are skipped
+   with a note. Re-running is safe:
    rows upsert on (source_id, external_id), and the per-story "hidden" switch is
    never overwritten. --prune is for re-syncing after a rule change: when a
    source's whole window was read, its stories in that window that this run
@@ -41,6 +43,7 @@ if (!dryRun && (!SUPABASE_URL || !SERVICE_KEY)) {
   process.exit(1);
 }
 
+const YOUTUBE_KEY = process.env.YOUTUBE_API_KEY || '';
 const sleep = ms => new Promise(resolve => setTimeout(resolve, ms));
 
 async function upsert(rows) {
@@ -58,6 +61,49 @@ async function upsert(rows) {
     });
     if (!response.ok) throw new Error(`upsert http ${response.status}: ${(await response.text()).slice(0, 300)}`);
   }
+}
+
+/* Photos already stored for these stories, so a re-run does not look them up again. */
+async function storedImages(sourceId, externalIds) {
+  const out = new Map();
+  if (dryRun || !externalIds.length) return out;
+  for (let i = 0; i < externalIds.length; i += 80) {
+    const ids = externalIds.slice(i, i + 80).map(id => `"${String(id).replace(/"/g, '')}"`).join(',');
+    const response = await fetch(`${SUPABASE_URL}/rest/v1/local_news_items?source_id=eq.${encodeURIComponent(sourceId)}&external_id=in.(${encodeURIComponent(ids)})&select=external_id,image_url`, {
+      headers: { apikey: SERVICE_KEY, Authorization: `Bearer ${SERVICE_KEY}` }
+    });
+    if (response.ok) (await response.json()).forEach(row => { if (row.image_url) out.set(row.external_id, row.image_url); });
+  }
+  return out;
+}
+
+/* Some feeds only carry a 150px thumbnail or the full upload (often 700 KB).
+   For "imageLookup": "wp-media" sources the site's public WordPress media
+   list gives the card-sized copy (looked up by slug), newest stories first,
+   at most "imageLookupMax" lookups a run (default 120). */
+async function upgradeImages(source, rows) {
+  const delay = Math.max(1, source.crawlDelaySec || 1) * 1000;
+  const cap = source.imageLookupMax || 120;
+  const wanted = rows.filter(row => row.image_url && news.wpUploadPath(row.image_url, source));
+  const stored = await storedImages(source.id, wanted.map(row => row.external_id));
+  let looked = 0;
+  for (const row of wanted) {
+    const prior = stored.get(row.external_id);
+    if (prior && /-\d+x\d+\.\w+$/.test(prior) && !news.isTinyThumb(prior)) { row.image_url = prior; continue; }
+    if (looked >= cap) continue;
+    looked += 1;
+    await sleep(delay);
+    /* The upload's slug is usually its file name; the path check makes sure
+       it is the same file and not an older one with the same name. */
+    const file = news.wpUploadPath(row.image_url, source);
+    const slug = file.base.toLowerCase().replace(/[^a-z0-9_-]+/g, '-');
+    const list = await news.getJson(`${source.api}/media?slug=${encodeURIComponent(slug)}&_fields=source_url,media_details`, 15000).catch(() => []);
+    const media = (Array.isArray(list) ? list : []).find(m => m && m.media_details &&
+      String(m.media_details.file || '').replace(/\.\w+$/, '').replace(/-scaled$/, '') === file.path);
+    const best = media && news.bestSize(Object.values(media.media_details.sizes || {}), source);
+    if (best) row.image_url = best.source_url;
+  }
+  return looked;
 }
 
 /* Stories in the window this run did not refresh. The window starts a day
@@ -128,10 +174,20 @@ async function syncWordPress(source, index, since, pages) {
   return { fetched, skipped, rows, complete };
 }
 
-/* RSS feeds carry the latest 10 to 20 stories; WordPress-backed feeds page
-   back with ?paged=N, which the backfill uses. */
+/* RSS feeds carry the latest 10 to 25 stories. WordPress-backed feeds page
+   back with ?paged=N, which the backfill uses; "pageParam" and "pageStep"
+   cover feeds that page by offset (TownNews BLOX: o=25, o=50 ...), and
+   "noPaging" feeds only ever show their latest items. */
+function rssPageUrl(source, page) {
+  if (page === 1) return source.feed;
+  const param = source.pageParam || 'paged';
+  const value = source.pageStep ? (page - 1) * source.pageStep : page;
+  return `${source.feed}${source.feed.includes('?') ? '&' : '?'}${param}=${value}`;
+}
+
 async function syncRss(source, index, since, pages) {
   const delay = (source.crawlDelaySec || 0) * 1000;
+  if (source.noPaging) pages = 1;
   const rows = [];
   const seen = new Set();
   let fetched = 0, skipped = 0, complete = false;
@@ -139,7 +195,7 @@ async function syncRss(source, index, since, pages) {
     if (delay && page > 1) await sleep(delay);
     let xml;
     try {
-      xml = await news.getText(page === 1 ? source.feed : `${source.feed}${source.feed.includes('?') ? '&' : '?'}paged=${page}`, 30000);
+      xml = await news.getText(rssPageUrl(source, page), 30000);
     } catch (error) {
       if (page > 1) break;
       throw error;
@@ -155,12 +211,41 @@ async function syncRss(source, index, since, pages) {
       if (new Date(item.publishedAt) < since) { older = true; return; }
       fetched += 1;
       if (news.skipStory(source, item.title, raw.categories)) { skipped += 1; return; }
-      const towns = news.placeStory(source, index, item.title, source.townsFrom === 'categories' ? raw.categories : []);
+      const labels = source.townsFrom === 'categories' ? raw.categories : source.townsFrom === 'url' ? news.urlLabels(item.url) : [];
+      const towns = news.placeStory(source, index, item.title, labels);
       if (towns.length) rows.push(toRow(item, towns));
     });
     /* Only an item older than the window proves the whole window was read. */
     if (older) { complete = true; break; }
     if (!fresh) break;
+  }
+  if (source.imageLookup === 'wp-media') await upgradeImages(source, rows);
+  return { fetched, skipped, rows, complete };
+}
+
+/* A YouTube channel's uploads, newest first, through the official Data API
+   (playlistItems.list costs 1 quota unit per 50 videos). */
+async function syncYoutube(source, index, since, pages) {
+  const playlist = news.uploadsPlaylist(source.channelId);
+  if (!playlist) throw new Error('channelId must be a UC... channel id');
+  const rows = [];
+  let fetched = 0, skipped = 0, complete = false, pageToken = '';
+  for (let page = 1; page <= pages; page += 1) {
+    const url = `https://www.googleapis.com/youtube/v3/playlistItems?part=snippet,contentDetails&maxResults=50&playlistId=${playlist}${pageToken ? `&pageToken=${encodeURIComponent(pageToken)}` : ''}&key=${encodeURIComponent(YOUTUBE_KEY)}`;
+    const data = await news.getJson(url, 20000);
+    const entries = Array.isArray(data && data.items) ? data.items : [];
+    let older = false;
+    entries.forEach(entry => {
+      const item = news.shapeYoutubeItem(entry, source);
+      if (!item) return;
+      if (new Date(item.publishedAt) < since) { older = true; return; }
+      fetched += 1;
+      if (news.skipStory(source, item.title, [])) { skipped += 1; return; }
+      const towns = news.placeStory(source, index, item.title, [], item.description);
+      if (towns.length) rows.push(toRow(item, towns));
+    });
+    pageToken = data && data.nextPageToken;
+    if (older || !pageToken) { complete = true; break; }
   }
   return { fetched, skipped, rows, complete };
 }
@@ -169,7 +254,9 @@ async function syncSource(source, towns) {
   const index = news.townIndex(source, towns);
   const since = new Date(Date.now() - days * 864e5);
   const pages = Math.min(maxPagesArg, source.maxPages || 50);
-  const result = source.type === 'rss' ? await syncRss(source, index, since, pages) : await syncWordPress(source, index, since, pages);
+  const result = source.type === 'rss' ? await syncRss(source, index, since, pages)
+    : source.type === 'youtube' ? await syncYoutube(source, index, since, pages)
+      : await syncWordPress(source, index, since, pages);
   if (!dryRun && result.rows.length) await upsert(result.rows);
   const removed = prune && result.complete && !dryRun ? await pruneStale(source, since) : null;
   return {
@@ -183,7 +270,10 @@ async function syncSource(source, towns) {
 }
 
 const { sources, towns } = news.loadStatic();
-const selected = sources.filter(source => !only.size || only.has(source.id));
+const wanted = sources.filter(source => !only.size || only.has(source.id));
+const waiting = wanted.filter(source => source.type === 'youtube' && !YOUTUBE_KEY);
+if (waiting.length) console.log(`::notice::YouTube channels skipped until the YOUTUBE_API_KEY secret is set: ${waiting.map(source => source.id).join(', ')}`);
+const selected = wanted.filter(source => !waiting.includes(source));
 let failed = 0;
 for (const source of selected) {
   try {
@@ -195,6 +285,6 @@ for (const source of selected) {
     console.error(`::warning::${source.id}: ${error && error.message ? error.message : error}`);
   }
 }
-if (!selected.length) console.log('No enabled local sources.');
+if (!wanted.length) console.log('No enabled local sources.');
 /* One unreachable site should not stop the others; fail the run only when every source failed. */
 process.exit(selected.length && failed === selected.length ? 1 : 0);

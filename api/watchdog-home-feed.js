@@ -529,18 +529,25 @@ async function newsFor(code, config) {
       order: 'published_at.desc',
       limit: '30'
     });
+    const list = Array.isArray(rows) ? rows : [];
+    /* A video a reporter's article already embeds shows once, with the article. */
+    const isChannel = new Set(sources.filter(source => source.type === 'youtube').map(source => source.id));
+    const inArticles = new Set(list.filter(row => row.video_id && !isChannel.has(row.source_id)).map(row => row.video_id));
     const seen = new Set();
-    const unique = (Array.isArray(rows) ? rows : []).filter(row => {
+    const unique = list.filter(row => !(isChannel.has(row.source_id) && inArticles.has(row.video_id))).filter(row => {
       const titleKey = String(row.title || '').toLowerCase().replace(/[^a-z0-9]+/g, ' ').trim();
       if (seen.has(row.url) || seen.has(titleKey)) return false;
       seen.add(row.url);
       seen.add(titleKey);
       return true;
     });
+    /* A reporter's site and their YouTube channel share one name and one cap. */
+    const nameOf = new Map(sources.map(source => [source.id, source.name || source.id]));
     const perSource = new Map();
     const first = unique.filter(row => {
-      const n = perSource.get(row.source_id) || 0;
-      perSource.set(row.source_id, n + 1);
+      const key = nameOf.get(row.source_id) || row.source_id;
+      const n = perSource.get(key) || 0;
+      perSource.set(key, n + 1);
       return n < NEWS_PER_SOURCE;
     }).slice(0, NEWS_LIMIT);
     const picked = first.concat(unique.filter(row => !first.includes(row)).slice(0, NEWS_LIMIT - first.length))
@@ -559,7 +566,7 @@ async function newsFor(code, config) {
     }));
     return {
       available: items.length > 0,
-      sources: sources.filter(source => items.some(item => item.source === source.id)).map(source => ({ id: source.id, name: source.name, badge: source.badge || '', site: source.site, about: source.about || '' })),
+      sources: sources.filter(source => items.some(item => item.source === source.id)).map(source => ({ id: source.id, name: source.name, badge: source.badge || '', site: source.site, about: source.about || '', kind: source.type === 'youtube' ? 'video' : 'story' })),
       items
     };
   });
