@@ -32,6 +32,10 @@ on:
         description: 'Stop after this many pages of 1,000 (0 = no limit)'
         required: false
         default: '0'
+      rps:
+        description: 'Parcels: pages of 1,000 per second at most (lower paces database writes; 0.2 = one page every 5 s)'
+        required: false
+        default: '3'
       dry_run:
         description: 'Read from the state service only; write nothing'
         type: boolean
@@ -151,9 +155,14 @@ jobs:
           MAX_PAGES: ${{ inputs.max_pages }}
           DRY_RUN: ${{ inputs.dry_run }}
           RESUME: ${{ inputs.resume }}
+          RPS: ${{ inputs.rps || '3' }}
         run: |
           set -euo pipefail
-          args=(--rps 3 --max-pages "${MAX_PAGES:-0}" --summary parcel-sync-summary.json)
+          if ! [[ "${RPS}" =~ ^[0-9]+([.][0-9]+)?$ ]]; then
+            echo "::error::rps must be a number (got '${RPS}')"
+            exit 1
+          fi
+          args=(--rps "${RPS}" --max-pages "${MAX_PAGES:-0}" --summary parcel-sync-summary.json)
           if [ -n "${COUNTY}" ]; then args+=(--county "${COUNTY}"); fi
           if [ "${DRY_RUN}" = "true" ]; then args+=(--dry-run); fi
           if [ "${RESUME}" = "true" ]; then args+=(--resume); fi
