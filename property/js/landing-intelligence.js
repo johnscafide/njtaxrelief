@@ -7,6 +7,7 @@
   var isIndex = path === '/property' || path === '/property/index.html' || cleanWatchdogRoot;
   var isPro = path === '/property/pro' || path === '/pro';
   if (!isIndex && !isPro) return;
+  if (isIndex && document.documentElement.getAttribute('data-wd-home-feed') === '1') return;
 
   var attempts = 0;
   var client = null;
