@@ -38,6 +38,13 @@ from db_brake import Brake, Breaker, Overloaded
 SERVICE = "https://maps.nj.gov/arcgis/rest/services/Framework/Cadastral/MapServer/0/query"
 SOURCE = "NJ Office of GIS Parcels and MOD-IV Composite"
 PAGE_SIZE = 1000
+# The state service answers some 1,000-parcel pages with complex shapes with an
+# error after ~50 s (HTTP 200, {"error": {"code": 500}}); the same parcels load
+# in smaller pages. A failed page is retried smaller, and the size steps back up
+# after SMALL_PAGES_BEFORE_GROWING good pages. The cursor (OBJECTID > last) is
+# unchanged, so a smaller page only means more pages.
+PAGE_SIZES = (PAGE_SIZE, 250, 50)
+SMALL_PAGES_BEFORE_GROWING = 20
 BATCH = 500
 MIN_BATCH = 50
 # A write that timed out may still be running on the server. On 2026-09-30
@@ -299,6 +306,23 @@ def fetch_json(session: requests.Session, params: dict, tries: int = 5):
     raise RuntimeError("unreachable")
 
 
+def fetch_page(fetch, http, base: dict, level: int) -> tuple[dict, int]:
+    """One page at PAGE_SIZES[level], falling back to smaller pages on failure.
+
+    Returns (data, level used). Larger sizes get 2 tries each, the smallest the
+    full 5, so a page that cannot be read at any size still fails the run.
+    """
+    while True:
+        last = level == len(PAGE_SIZES) - 1
+        try:
+            return fetch(http, {**base, "resultRecordCount": str(PAGE_SIZES[level])}, tries=5 if last else 2), level
+        except RuntimeError as exc:
+            if last:
+                raise
+            print(f"[sync] state service failed on a page of {PAGE_SIZES[level]} ({str(exc)[:120]}); retrying with pages of {PAGE_SIZES[level + 1]}", flush=True)
+            level += 1
+
+
 def save_progress(db, run_row, patch: dict) -> None:
     """Best effort: a failed save must not hide why the run stopped.
 
@@ -339,6 +363,7 @@ def run(args, db: Supabase | None = None, fetch=fetch_json) -> dict:
     received = int(run_row.get("rows_received") or 0) if run_row else 0
     written = int(run_row.get("rows_written") or 0) if run_row else 0
     gap = 1.0 / max(args.rps, 0.1)
+    level, good_small = 0, 0
     started = time.time()
     overloaded = None
     try:
@@ -349,18 +374,23 @@ def run(args, db: Supabase | None = None, fetch=fetch_json) -> dict:
                     db.update_run(run_row["id"], {"status": "stopped", "last_objectid": after, "pages": pages, "rows_received": received, "rows_written": written})
                 break
             t0 = time.time()
-            data = fetch(http, {
+            data, level = fetch_page(fetch, http, {
                 "where": where_clause(args.county, after),
                 "outFields": ",".join(OUT_FIELDS),
                 "orderByFields": "OBJECTID ASC",
-                "resultRecordCount": str(PAGE_SIZE),
                 # Parcel shapes in WGS84, only to compute each parcel's center
                 # point (lat/lon) for nearby sales and neighborhood lookups.
                 "returnGeometry": "true",
                 "outSR": "4326",
                 "geometryPrecision": "6",
                 "f": "json",
-            })
+            }, level)
+            if level:
+                good_small += 1
+                if good_small >= SMALL_PAGES_BEFORE_GROWING:
+                    level, good_small = level - 1, 0
+            else:
+                good_small = 0
             features = data.get("features") or []
             if not features:
                 if db:
@@ -553,7 +583,7 @@ def self_test() -> None:
     def page(first, n):
         return {"features": [{"attributes": {"OBJECTID": first + i, "PAMS_PIN": f"0904_9_{first + i}", "PROP_LOC": f"{first + i} GRANT AVE"}} for i in range(n)]}
 
-    def fake_fetch(session, params):
+    def fake_fetch(session, params, tries=5):
         if params.get("returnCountOnly"):
             return {"count": 6}
         after = int(params["where"].split("OBJECTID > ")[1].split()[0])
@@ -586,6 +616,43 @@ def self_test() -> None:
     assert last["status"] == "stopped" and last["error"].startswith("database overloaded: database still busy"), last
     assert last["last_objectid"] == 3 and last["pages"] == 1 and last["rows_received"] == 3 and last["rows_written"] == 3, "cursor stays at the last fully written page"
     assert summary["last_objectid"] == 3 and summary["stopped"].startswith("database overloaded"), summary
+
+    # A page the state service cannot return at 1,000 (complex shapes time out
+    # there) is retried at 250, the size steps back up after good pages, and no
+    # parcel is skipped or read twice.
+    seen = []
+    def flaky_fetch(session, params, tries=5):
+        if params.get("returnCountOnly"):
+            return {"count": 3000}
+        after = int(params["where"].split("OBJECTID > ")[1].split()[0])
+        size = int(params["resultRecordCount"])
+        seen.append((after, size, tries))
+        if 1000 <= after < 1500 and size > 250:
+            raise RuntimeError("state parcel service failed: {'code': 500, 'message': 'Error performing query operation'}")
+        return page(after + 1, max(0, min(size, 3000 - after)))
+
+    class CalmDb(RunDb):
+        def __init__(self):
+            super().__init__()
+            self.brake = FakeBrake(self.log, None)
+
+    db = CalmDb()
+    saved_small = SMALL_PAGES_BEFORE_GROWING
+    globals()["SMALL_PAGES_BEFORE_GROWING"] = 2
+    try:
+        args = argparse.Namespace(county=None, max_pages=0, rps=1000.0, resume=False, dry_run=False, summary=None)
+        summary = run(args, db=db, fetch=flaky_fetch)
+    finally:
+        globals()["SMALL_PAGES_BEFORE_GROWING"] = saved_small
+    assert [(a, n) for a, n, _ in seen] == [(0, 1000), (1000, 1000), (1000, 250), (1250, 250), (1500, 1000), (2500, 1000), (3000, 1000)], seen
+    assert [t for a, n, t in seen if n == 1000] == [2] * 5 and seen[2][2] == 2, "larger pages get 2 tries before shrinking"
+    assert summary["rows_received"] == 3000 and summary["last_objectid"] == 3000 and db.patches[-1]["status"] == "complete", summary
+    assert db.rpcs() == [500, 500, 250, 250, 500, 500, 500], "every parcel written exactly once"
+    try:
+        fetch_page(lambda s, p, tries=5: (_ for _ in ()).throw(RuntimeError("state parcel service failed: down")), None, {}, 0)
+        raise AssertionError("a page that fails at every size must fail the run")
+    except RuntimeError as exc:
+        assert "down" in str(exc)
     print("sync_parcel_composite self-test passed")
 
 
