@@ -3,184 +3,134 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>NJ CO Lookup | Resale Certificate of Occupancy Rules by Town</title>
-<meta name="description" content="Type a New Jersey address or town and see what the town needs for a resale Certificate of Occupancy and the smoke and CO alarm certificate.">
-<link rel="canonical" href="https://njpropertytaxrelief.com/co/">
-<meta property="og:title" content="NJ CO Lookup">
-<meta property="og:description" content="Type a New Jersey address or town and see its resale Certificate of Occupancy rules.">
-<meta property="og:url" content="https://njpropertytaxrelief.com/co/">
+<title>CO Requirements by Town | Watchdog</title>
+<meta name="description" content="Type a New Jersey address or town to see its resale Certificate of Occupancy and smoke / CO alarm certificate requirements.">
+<link rel="canonical" href="https://www.watchdogindex.com/co">
+<meta property="og:title" content="CO Requirements by Town | Watchdog">
+<meta property="og:description" content="Type a New Jersey address or town to see its resale CO requirements.">
+<meta property="og:url" content="https://www.watchdogindex.com/co">
 <meta property="og:type" content="website">
-<link rel="icon" href="/favicon.svg" type="image/svg+xml">
-<link rel="icon" href="/favicon.ico" sizes="any">
-<link rel="apple-touch-icon" href="/apple-touch-icon.png">
+<link rel="icon" type="image/png" href="/favicon-96x96.png" sizes="96x96">
+<link rel="icon" type="image/svg+xml" href="/favicon.svg">
+<link rel="shortcut icon" href="/favicon.ico">
+<link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
 <link rel="preconnect" href="https://fonts.googleapis.com">
-<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700&family=Source+Sans+3:wght@400;500;600&display=swap" rel="stylesheet">
-<script async src="https://www.googletagmanager.com/gtag/js?id=G-ENP9182L0J"></script>
-<script>window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments);}gtag('js',new Date());gtag('config','G-ENP9182L0J');</script>
+<link href="https://fonts.googleapis.com/css2?family=Source+Sans+3:wght@400;600&display=swap" rel="stylesheet">
 <style>
   :root {
-    --navy: #1a3a6b;
-    --navy-dark: #0e2248;
-    --gold: #b8972a;
-    --text: #202124;
-    --muted: #5f6368;
-    --line: #dfe1e5;
-    --soft: #f8f9fa;
-    --link: #1a3a6b;
-    --ok: #1e7a3c;
-    --warn: #9a6700;
+    --blue: #0d3dbe;
+    --ink: #1b2430;
+    --muted: #5f6b7a;
+    --line: #e3e7ec;
+    --soft: #f5f7fa;
   }
   * { box-sizing: border-box; }
   html, body { margin: 0; }
-  body {
-    min-height: 100vh; display: flex; flex-direction: column;
-    background: #fff; color: var(--text);
-    font-family: 'Source Sans 3', Arial, sans-serif; font-size: 16px; line-height: 1.5;
-  }
-  a { color: var(--link); }
-  main { flex: 1; width: 100%; }
+  body { min-height: 100vh; background: #fff; color: var(--ink); font-family: 'Source Sans 3', Arial, sans-serif; font-size: 16px; line-height: 1.5; }
+  a { color: var(--blue); }
+  .logo { display: inline-flex; align-items: center; min-height: 44px; }
+  .logo img { display: block; height: auto; }
 
-  /* Home: a wordmark and one box, centered like a search engine homepage. */
-  .home { display: flex; flex-direction: column; align-items: center; padding: 22vh 16px 40px; }
-  .wordmark { margin: 0 0 26px; font-family: 'Playfair Display', Georgia, serif; font-weight: 700; font-size: clamp(48px, 11vw, 84px); line-height: 1; letter-spacing: -1px; color: var(--navy); text-decoration: none; white-space: nowrap; }
-  .wordmark .nj { color: var(--gold); }
-  .tagline { margin: -12px 0 26px; color: var(--muted); font-size: 15px; text-align: center; }
+  /* Home: the logo and one search box, centered. */
+  .home { display: flex; flex-direction: column; align-items: center; padding: 24vh 16px 40px; }
+  .home .logo img { width: min(340px, 78vw); }
+  .home .logo { margin-bottom: 32px; }
 
   .search { position: relative; width: 100%; max-width: 584px; }
-  .box {
-    display: flex; align-items: center; gap: 4px;
-    min-height: 48px; padding: 0 6px 0 16px;
-    border: 1px solid var(--line); border-radius: 24px; background: #fff;
-    transition: box-shadow .15s, border-color .15s;
-  }
-  .box:hover, .box:focus-within { box-shadow: 0 1px 6px rgba(32,33,36,.28); border-color: rgba(223,225,229,0); }
-  .search.open .box { border-radius: 24px 24px 0 0; box-shadow: 0 1px 6px rgba(32,33,36,.28); border-color: transparent; }
+  .box { display: flex; align-items: center; gap: 4px; min-height: 48px; padding: 0 6px 0 16px; border: 1px solid #dfe1e5; border-radius: 24px; background: #fff; transition: box-shadow .15s; }
+  .box:hover, .box:focus-within { box-shadow: 0 1px 6px rgba(32,33,36,.24); border-color: transparent; }
+  .search.open .box { border-radius: 24px 24px 0 0; box-shadow: 0 1px 6px rgba(32,33,36,.24); border-color: transparent; }
   .box svg { flex: none; color: #9aa0a6; }
-  .box input {
-    flex: 1; min-width: 0; height: 46px; border: 0; outline: 0; background: transparent;
-    font: inherit; font-size: 16px; color: var(--text);
-  }
+  .box input { flex: 1; min-width: 0; height: 46px; border: 0; outline: 0; background: transparent; font: inherit; color: var(--ink); }
   .clear { display: none; flex: none; width: 44px; height: 44px; border: 0; border-radius: 50%; background: transparent; color: var(--muted); font-size: 24px; line-height: 1; cursor: pointer; }
   .clear:hover { background: var(--soft); }
   .search.has-text .clear { display: block; }
-
-  .suggest {
-    display: none; position: absolute; z-index: 5; left: 0; right: 0; top: 100%;
-    margin: 0; padding: 4px 0 10px; list-style: none; background: #fff;
-    border-radius: 0 0 24px 24px; box-shadow: 0 4px 6px rgba(32,33,36,.28); overflow: hidden;
-  }
+  .suggest { display: none; position: absolute; z-index: 5; left: 0; right: 0; top: 100%; margin: 0; padding: 4px 0 10px; list-style: none; background: #fff; border-radius: 0 0 24px 24px; box-shadow: 0 4px 6px rgba(32,33,36,.24); overflow: hidden; }
   .suggest::before { content: ""; display: block; height: 1px; margin: 0 16px 4px; background: #e8eaed; }
   .search.open .suggest { display: block; }
   .suggest li { display: flex; align-items: baseline; gap: 8px; min-height: 44px; padding: 10px 20px; cursor: pointer; }
   .suggest li[aria-selected="true"], .suggest li:hover { background: #eef0f3; }
-  .suggest .s-name { font-weight: 500; }
+  .suggest .s-name { font-weight: 600; }
   .suggest .s-meta { color: var(--muted); font-size: 14px; }
-
   .buttons { display: flex; justify-content: center; margin-top: 28px; }
-  .btn {
-    min-height: 44px; padding: 0 18px; border: 1px solid var(--soft); border-radius: 6px;
-    background: var(--soft); color: #3c4043; font: inherit; font-size: 15px; cursor: pointer;
-  }
-  .btn:hover { border-color: var(--line); box-shadow: 0 1px 1px rgba(0,0,0,.1); }
-  .btn:focus-visible, .clear:focus-visible, .choice:focus-visible { outline: 2px solid var(--navy); outline-offset: 2px; }
+  .btn { min-height: 44px; padding: 0 20px; border: 1px solid var(--soft); border-radius: 6px; background: var(--soft); color: #3c4043; font: inherit; font-size: 15px; cursor: pointer; }
+  .btn:hover { border-color: #dadce0; }
+  .btn:focus-visible, .clear:focus-visible, .choice:focus-visible, .logo:focus-visible { outline: 2px solid var(--blue); outline-offset: 2px; }
 
-  /* Results: the box moves to a top bar and the answer shows below it. */
-  .top { display: none; align-items: center; gap: 28px; padding: 20px 24px 18px; border-bottom: 1px solid #ebebeb; }
-  .top .wordmark { margin: 0; font-size: 30px; letter-spacing: 0; }
-  .top .search { max-width: 690px; }
+  /* Results: logo and box move to a top row, facts below. */
+  .top { display: none; align-items: center; gap: 28px; padding: 16px 24px; border-bottom: 1px solid var(--line); }
+  .top .logo img { width: 150px; }
+  .top .search { max-width: 640px; }
   body.results .home { display: none; }
   body.results .top { display: flex; }
-  .out { max-width: 720px; padding: 18px 24px 56px 178px; }
+  .out { max-width: 680px; padding: 20px 24px 64px 202px; }
   body:not(.results) .out { display: none; }
 
   .msg { color: var(--muted); }
-  .town { margin: 6px 0 2px; font-size: 28px; font-weight: 600; line-height: 1.25; }
-  .county { margin: 0 0 14px; color: var(--muted); }
-  .answer { display: flex; gap: 10px; align-items: flex-start; margin: 0 0 18px; padding: 14px 16px; border-radius: 10px; background: var(--soft); font-size: 18px; font-weight: 600; }
-  .answer .dot { flex: none; width: 12px; height: 12px; margin-top: 8px; border-radius: 50%; background: var(--navy); }
-  .answer.no .dot { background: var(--ok); }
-  .answer.unsure .dot { background: var(--warn); }
-  .answer small { display: block; margin-top: 2px; font-size: 15px; font-weight: 400; color: var(--muted); }
-  .note { margin: 0 0 18px; padding: 10px 14px; border-left: 3px solid var(--gold); background: #fdf9ec; font-size: 15px; }
-
-  section.part { margin: 0 0 26px; }
-  section.part h2 { margin: 0 0 4px; font-size: 20px; font-weight: 600; color: var(--navy-dark); }
-  .sub { margin: 0 0 10px; color: var(--muted); font-size: 15px; }
-  h3 { margin: 16px 0 6px; font-size: 15px; font-weight: 600; text-transform: uppercase; letter-spacing: .04em; color: var(--muted); }
+  .town { margin: 4px 0 0; font-size: 26px; font-weight: 600; line-height: 1.25; }
+  .meta { margin: 2px 0 20px; color: var(--muted); font-size: 15px; }
+  .status { display: inline-block; margin: 0 0 6px; font-size: 18px; font-weight: 600; }
+  .status.req { color: var(--blue); }
+  .status.no { color: #1e7a3c; }
+  .status.unsure { color: #9a6700; }
+  section.part { margin: 0 0 28px; padding-top: 18px; border-top: 1px solid var(--line); }
+  section.part:first-of-type { border-top: 0; padding-top: 0; }
+  section.part h2 { margin: 0 0 4px; font-size: 19px; font-weight: 600; }
+  .sub { margin: 0 0 8px; color: var(--muted); font-size: 15px; }
+  dl.facts { margin: 10px 0 0; }
+  dl.facts dt { margin-top: 14px; font-size: 13px; font-weight: 600; text-transform: uppercase; letter-spacing: .05em; color: var(--muted); }
+  dl.facts dd { margin: 4px 0 0; }
   ul.items { margin: 0; padding-left: 20px; }
-  ul.items li { margin: 4px 0; }
+  ul.items li { margin: 3px 0; }
   .fees { width: 100%; border-collapse: collapse; font-size: 15px; }
-  .fees td { padding: 7px 0; border-bottom: 1px solid #ebebeb; vertical-align: top; }
+  .fees td { padding: 6px 0; border-bottom: 1px solid #eef0f3; vertical-align: top; }
   .fees td.amt { width: 1%; padding-left: 16px; font-weight: 600; white-space: nowrap; text-align: right; }
-  .links { display: flex; flex-wrap: wrap; gap: 10px; margin-top: 12px; }
-  .links a { display: inline-flex; align-items: center; min-height: 44px; padding: 0 16px; border: 1px solid var(--line); border-radius: 22px; text-decoration: none; font-weight: 500; }
+  .links { display: flex; flex-wrap: wrap; gap: 8px; margin-top: 14px; }
+  .links a { display: inline-flex; align-items: center; min-height: 44px; padding: 0 16px; border: 1px solid var(--line); border-radius: 22px; text-decoration: none; font-weight: 600; }
   .links a:hover { background: var(--soft); }
-  .links a.primary { background: var(--navy); border-color: var(--navy); color: #fff; }
-  .links a.primary:hover { background: var(--navy-dark); }
-  .office { margin-top: 10px; font-size: 15px; color: var(--muted); }
-  .authority { margin-top: 14px; padding-top: 12px; border-top: 1px solid #ebebeb; }
-  .authority:first-of-type { border-top: 0; padding-top: 0; }
-  .authority h4 { margin: 0 0 4px; font-size: 16px; }
-  .fine { margin-top: 30px; padding-top: 14px; border-top: 1px solid #ebebeb; color: var(--muted); font-size: 14px; }
-  .fine details { margin-top: 8px; }
+  .authority { margin-top: 16px; }
+  .authority h3 { margin: 0; font-size: 16px; font-weight: 600; }
+  .fine { margin-top: 8px; color: var(--muted); font-size: 14px; }
   .fine summary { min-height: 44px; display: inline-flex; align-items: center; cursor: pointer; }
-  .fine ol { margin: 4px 0 0; padding-left: 20px; word-break: break-all; }
-
+  .fine ol { margin: 0; padding-left: 20px; word-break: break-all; }
   .choices { display: grid; gap: 8px; margin-top: 12px; }
   .choice { display: flex; justify-content: space-between; gap: 12px; min-height: 48px; padding: 10px 16px; border: 1px solid var(--line); border-radius: 10px; background: #fff; font: inherit; text-align: left; cursor: pointer; }
   .choice:hover { background: var(--soft); }
   .choice span { color: var(--muted); }
-
-  footer { padding: 14px 24px; background: #f2f2f2; color: var(--muted); font-size: 14px; display: flex; flex-wrap: wrap; justify-content: space-between; gap: 8px 24px; }
-  footer a { color: var(--muted); text-decoration: none; display: inline-flex; align-items: center; min-height: 44px; }
-  footer a:hover { text-decoration: underline; }
-
   .sr { position: absolute; width: 1px; height: 1px; overflow: hidden; clip: rect(0 0 0 0); white-space: nowrap; }
 
-  @media (max-width: 900px) {
-    .out { padding-left: 24px; }
-  }
+  @media (max-width: 900px) { .out { padding-left: 24px; } }
   @media (max-width: 640px) {
-    .home { padding-top: 16vh; }
-    .top { flex-direction: column; align-items: stretch; gap: 12px; padding: 14px 16px; }
-    .top .wordmark { font-size: 26px; text-align: center; }
-    .out { padding: 14px 16px 48px; }
-    .town { font-size: 24px; }
-    footer { padding: 6px 16px; }
+    .home { padding-top: 18vh; }
+    .top { flex-direction: column; align-items: center; gap: 10px; padding: 12px 16px; }
+    .top .logo img { width: 130px; }
+    .out { padding: 16px 16px 48px; }
+    .town { font-size: 23px; }
   }
-  @media print {
-    .top, .home, footer, .links { display: none !important; }
-    .out { padding: 0; }
-  }
+  @media print { .top, .home, .links { display: none !important; } .out { padding: 0; } }
 </style>
 </head>
 <body>
 <main>
   <header class="top">
-    <a class="wordmark" href="/co/" data-home><span class="nj">NJ</span> CO Lookup</a>
+    <a class="logo" href="/"><img src="/property/branding/watchdog-logo-horizontal.svg" alt="Watchdog" width="150" height="35"></a>
     <div class="search" data-search></div>
   </header>
 
   <div class="home">
-    <a class="wordmark" href="/co/" data-home><span class="nj">NJ</span> CO Lookup</a>
-    <p class="tagline">What does a New Jersey town need before you sell a home?</p>
+    <a class="logo" href="/"><img src="/property/branding/watchdog-logo-horizontal.svg" alt="Watchdog" width="340" height="79"></a>
     <form class="search" data-search role="search" id="home-form"></form>
-    <div class="buttons"><button class="btn" type="submit" form="home-form">Look it up</button></div>
+    <div class="buttons"><button class="btn" type="submit" form="home-form">Search</button></div>
   </div>
 
   <div class="out" id="out" aria-live="polite"></div>
 </main>
 
-<footer>
-  <span>From <a href="/">NJ Property Tax Relief</a></span>
-  <span><a href="/#contact">Questions? Send us a message</a></span>
-</footer>
-
 <template id="search-tpl">
   <div class="box">
     <svg width="20" height="20" viewBox="0 0 24 24" aria-hidden="true"><path fill="currentColor" d="M15.5 14h-.79l-.28-.27A6.47 6.47 0 0 0 16 9.5 6.5 6.5 0 1 0 9.5 16c1.61 0 3.09-.59 4.23-1.57l.27.28v.79l5 4.99L20.49 19l-4.99-5zm-6 0C7.01 14 5 11.99 5 9.5S7.01 5 9.5 5 14 7.01 14 9.5 11.99 14 9.5 14z"/></svg>
     <label class="sr">Address or town</label>
-    <input type="text" autocomplete="off" spellcheck="false" placeholder="Type an address or town" role="combobox" aria-autocomplete="list" aria-expanded="false" enterkeyhint="search">
+    <input type="text" autocomplete="off" spellcheck="false" placeholder="Address or town for CO requirements" role="combobox" aria-autocomplete="list" aria-expanded="false" enterkeyhint="search">
     <button class="clear" type="button" aria-label="Clear">&times;</button>
   </div>
   <ul class="suggest" role="listbox"></ul>
@@ -263,7 +213,7 @@
     aliasList.forEach(function (a) {
       if (a.key.indexOf(n) === 0 && items.length < 8) {
         var names = a.codes.map(function (c) { return byCode[c].name; });
-        items.push({ kind: 'alias', alias: a, label: a.name, meta: 'mailing name for ' + names.join(' or ') });
+        items.push({ kind: 'alias', alias: a, label: a.name, meta: names.join(', ') });
       }
     });
     return items.slice(0, 8);
@@ -352,8 +302,7 @@
     if (it.kind === 'zip') return run(it.zip);
   }
   function aliasIntro(name, codes) {
-    if (codes.length === 1) return '';
-    return '“' + esc(name) + '” is a mailing name, not a town. Homes with that mailing address can be in any of these towns, and the town is what sets the rules. Pick one, or type the full street address and we’ll find it.';
+    return codes.length === 1 ? '' : esc(name) + ' is a mailing name. Pick the town:';
   }
 
   // ---------- running a search ----------
@@ -377,35 +326,35 @@
       }
       if (codes.length > 1) {
         var intro = aliases.length && !hits.length ? aliasIntro(aliases[0].name, codes)
-          : 'More than one New Jersey town goes by that name. Which one?';
+          : 'Pick a town:';
         return showChoices(codes, intro);
       }
       var sug = suggestions(s).filter(function (x) { return x.kind === 'town'; }).map(function (x) { return x.code; });
-      if (sug.length) return showChoices(sug, 'We couldn’t find that exact town. Did you mean one of these?');
-      render('<p class="msg">We couldn’t find a New Jersey town called “' + esc(q) + '”. Check the spelling, or type the full street address.</p>');
+      if (sug.length) return showChoices(sug, 'Did you mean:');
+      render('<p class="msg">No New Jersey town found for “' + esc(q) + '”.</p>');
     });
   }
   function runAddress(q, s, mine) {
-    render('<p class="msg">Finding that address…</p>');
+    render('<p class="msg">Searching…</p>');
     geocode(/\bnj\b|new jersey/i.test(q) ? q : q + ', NJ').then(function (g) {
       if (mine !== seq) return;
       if (g) return showTown(g.town, { city: g.city, address: g.matched });
       var zip = /\b(\d{5})(-\d{4})?\s*$/.exec(s);
-      if (zip && data.zips[zip[1]]) return showZip(zip[1], 'We couldn’t pin down that exact address, so here are the towns in that ZIP code.');
+      if (zip && data.zips[zip[1]]) return showZip(zip[1], 'Address not found. Towns in ZIP ' + zip[1] + ':');
       var tail = s.split(',').slice(1).join(',').trim();
       if (tail) {
         var hits = townsByName(tail).map(function (t) { return t.code; });
         aliasByName(tail).forEach(function (a) { a.codes.forEach(function (c) { if (hits.indexOf(c) < 0) hits.push(c); }); });
-        if (hits.length) return showChoices(hits, 'We couldn’t pin down that exact address. Which town is the home in?');
+        if (hits.length) return showChoices(hits, 'Address not found. Pick a town:');
       }
-      render('<p class="msg">We couldn’t find that address. Try adding the town (like “12 Main St, Haddonfield”) or just type the town name.</p>');
+      render('<p class="msg">Address not found. Try adding the town, or type just the town.</p>');
     });
   }
   function showZip(zip, intro) {
     var codes = data.zips[zip];
-    if (!codes) return render('<p class="msg">We don’t have ZIP code ' + esc(zip) + ' on file for New Jersey. Try the town name or full address.</p>');
+    if (!codes) return render('<p class="msg">No New Jersey towns found for ZIP ' + esc(zip) + '.</p>');
     if (codes.length === 1) return showTown(byCode[codes[0]], { zip: zip });
-    showChoices(codes, intro || 'ZIP code ' + esc(zip) + ' covers more than one town, and the town is what sets the rules. Which one is the home in? (Typing the full street address will find it for you.)');
+    showChoices(codes, intro || 'ZIP ' + esc(zip) + ' covers more than one town. Pick one:');
   }
   function showChoices(codes, intro) {
     var html = '<p>' + intro + '</p><div class="choices">' + codes.map(function (c) {
@@ -421,27 +370,25 @@
   // ---------- one town ----------
   function showTown(t, ctx) {
     var mine = ++seq;
-    render('<p class="msg">Loading ' + esc(t.name) + '…</p>');
+    render('<p class="msg">Loading…</p>');
     setUrl(t.code);
     fetch('/api/co-lookup?code=' + encodeURIComponent(t.code))
       .then(function (r) { return r.json(); })
       .catch(function () { return { status: 'error' }; })
       .then(function (d) {
         if (mine !== seq) return;
-        document.title = t.name + ' CO Requirements | NJ CO Lookup';
+        document.title = t.name + ' CO Requirements | Watchdog';
         if (d.status === 'ok') return render(townHtml(t, d, ctx || {}));
         if (d.status === 'not_available') return render(head(t, ctx) +
-          '<div class="answer unsure"><span class="dot"></span><div>We haven’t checked ' + esc(t.name) + ' yet.<small>More towns are being added. If you need this one sooner, <a href="/#contact">send us a message</a>.</small></div></div>');
-        render(head(t, ctx) + '<p class="msg">Something went wrong loading this town. Please try again in a minute.</p>');
+          '<p>Not available yet.</p><p class="fine"><a href="/contact">Contact us</a></p>');
+        render(head(t, ctx) + '<p class="msg">Couldn’t load this town. Try again.</p>');
       });
   }
   function head(t, ctx) {
-    var html = '<h1 class="town">' + esc(t.name) + '</h1><p class="county">' + esc(countyLabel(t.county)) + '</p>';
+    var meta = esc(countyLabel(t.county));
     var city = ctx && ctx.city;
-    if (city && norm(city) !== t.full && norm(city) !== t.base) {
-      html += '<p class="note">The mailing address says <strong>' + esc(city) + '</strong>, but the home is in <strong>' + esc(t.name) + '</strong>. The town sets the CO rules, so ' + esc(t.name) + '’s rules apply.</p>';
-    }
-    return html;
+    if (city && norm(city) !== t.full && norm(city) !== t.base) meta += ' · Mailing address: ' + esc(city);
+    return '<h1 class="town">' + esc(t.name) + '</h1><p class="meta">' + meta + '</p>';
   }
   function feeTable(fees) {
     if (!fees.length) return '';
@@ -463,43 +410,35 @@
     return bits.length ? '<ul class="items">' + bits.join('') + '</ul>' : '';
   }
 
+  function fact(label, html) { return html ? '<dt>' + label + '</dt><dd>' + html + '</dd>' : ''; }
+
   function townHtml(t, d, ctx) {
     var co = d.co, fire = d.fire;
-    var answer = {
-      required: ['', 'Yes, ' + esc(t.name) + ' requires a resale CO.', esc(co.name || '')],
-      not_required: ['no', 'No town CO is needed for a resale in ' + esc(t.name) + '.', 'You still need the smoke and CO alarm certificate below.'],
-      not_found: ['unsure', 'We couldn’t confirm whether ' + esc(t.name) + ' requires a resale CO.', 'Here’s what we found. Check with the town before you list.']
-    }[co.status];
-    var html = head(t, ctx) +
-      '<div class="answer ' + answer[0] + '"><span class="dot"></span><div>' + answer[1] + (answer[2] ? '<small>' + answer[2] + '</small>' : '') + '</div></div>';
+    var st = { required: ['req', 'Required'], not_required: ['no', 'Not required'], not_found: ['unsure', 'Not confirmed'] }[co.status];
+    var html = head(t, ctx);
 
-    var coBody = '';
-    if (co.issued_by) coBody += '<p class="sub">Issued by ' + esc(co.issued_by) + '</p>';
-    if (co.requirements.length) coBody += '<h3>What you’ll need</h3>' + items(co.requirements);
-    if (co.fees.length) coBody += '<h3>Fees</h3>' + feeTable(co.fees);
-    if (co.lead_time || co.valid_for) coBody += '<h3>Timing</h3>' + timing(co.lead_time, co.valid_for);
-    if (co.how_to_apply) coBody += '<h3>' + (co.status === 'not_required' ? 'What the town says' : 'How to apply') + '</h3><p>' + esc(co.how_to_apply) + '</p>';
-    coBody += links(co.application_url, co.department_url);
-    if (co.phone) coBody += '<p class="office">Town office: ' + esc(co.phone) + '</p>';
-    if (coBody) html += '<section class="part"><h2>Town certificate of occupancy</h2>' + coBody + '</section>';
+    html += '<section class="part"><h2>Certificate of Occupancy</h2><span class="status ' + st[0] + '">' + st[1] + '</span><dl class="facts">' +
+      fact('Certificate', esc(co.name)) +
+      fact('Issued by', esc(co.issued_by)) +
+      fact('Requirements', items(co.requirements)) +
+      fact('Fees', feeTable(co.fees)) +
+      fact('Timing', esc(co.lead_time)) +
+      fact('Valid for', esc(co.valid_for)) +
+      fact('Phone', esc(co.phone)) +
+      '</dl>' + links(co.application_url, co.department_url) + '</section>';
 
-    var fireBody = '<p class="sub">New Jersey requires this certificate for every one- and two-family home sale.</p>';
-    if (fire.requirements.length) fireBody += '<h3>What the inspector checks</h3>' + items(fire.requirements);
+    var fireHtml = '<section class="part"><h2>Smoke and CO alarm certificate</h2><span class="status req">Required</span><dl class="facts">' +
+      fact('Requirements', items(fire.requirements)) + '</dl>';
     fire.authorities.forEach(function (a) {
-      fireBody += '<div class="authority"><h4>' + esc(a.name) + '</h4>' +
-        (a.area_served && fire.authorities.length > 1 ? '<p class="sub">Covers: ' + esc(a.area_served) + '</p>' : '') +
-        (a.fees.length ? feeTable(a.fees) : '') +
-        (a.lead_time ? '<p><strong>Timing:</strong> ' + esc(a.lead_time) + '</p>' : '') +
-        (a.how_to_apply ? '<p>' + esc(a.how_to_apply) + '</p>' : '') +
-        links(a.application_url, a.department_url) +
-        (a.phone ? '<p class="office">Fire official: ' + esc(a.phone) + '</p>' : '') +
-        '</div>';
+      fireHtml += '<div class="authority"><h3>' + esc(a.name) + '</h3>' +
+        (a.area_served && fire.authorities.length > 1 ? '<p class="sub">' + esc(a.area_served) + '</p>' : '') +
+        '<dl class="facts">' + fact('Fees', feeTable(a.fees)) + fact('Timing', esc(a.lead_time)) + fact('Phone', esc(a.phone)) + '</dl>' +
+        links(a.application_url, a.department_url) + '</div>';
     });
-    html += '<section class="part"><h2>Smoke and CO alarm certificate</h2>' + fireBody + '</section>';
+    html += fireHtml + '</section>';
 
     var when = fmtDate(d.checked_at);
-    html += '<div class="fine">' + (when ? 'Checked against official town sources on ' + esc(when) + '. ' : '') +
-      'Rules and fees change, so confirm with the town before you list or close.' +
+    html += '<div class="fine">' + (when ? 'Last checked ' + esc(when) : '') +
       (d.sources.length ? '<details><summary>Sources</summary><ol>' + d.sources.map(function (u) { return '<li><a href="' + esc(u) + '" target="_blank" rel="noopener">' + esc(u) + '</a></li>'; }).join('') + '</ol></details>' : '') +
       '</div>';
     return html;
@@ -511,18 +450,8 @@
     out.innerHTML = html;
   }
   function setUrl(code) {
-    try { history.replaceState(null, '', '/co/?town=' + code); } catch (_) {}
+    try { history.replaceState(null, '', '/co?town=' + code); } catch (_) {}
   }
-  Array.prototype.forEach.call(document.querySelectorAll('[data-home]'), function (a) {
-    a.addEventListener('click', function (e) {
-      e.preventDefault(); seq++;
-      document.body.classList.remove('results'); out.innerHTML = ''; setText('');
-      document.title = 'NJ CO Lookup | Resale Certificate of Occupancy Rules by Town';
-      try { history.replaceState(null, '', '/co/'); } catch (_) {}
-      boxes[1].input.focus();
-    });
-  });
-
   var start = new URLSearchParams(location.search);
   var startCode = start.get('town'), startQ = start.get('q');
   if (startCode && /^\d{4}$/.test(startCode)) {
