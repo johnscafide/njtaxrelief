@@ -1,0 +1,163 @@
+{
+ "municipality_code": "1613",
+ "municipality": "Wanaque Borough",
+ "county": "PASSAIC",
+ "checked_at": "2026-10-02",
+ "resale_co": {
+  "status": "required",
+  "name": "Residential resale certificate (Certificate of Smoke Alarm and Carbon Monoxide Alarm Compliance, issued by the Building Department)",
+  "issued_by": "Borough of Wanaque Building & Zoning Department",
+  "lead_time": "Payment must reach the office before the inspection day; inspections are Monday 1pm to 3pm and Wednesday 7am to 9am",
+  "valid_for": "",
+  "requirements": [
+   "Smoke alarms listed to UL217 on each level, including the basement (not required in attics or crawl spaces), and within 10 feet of any sleeping area",
+   "Battery-only smoke alarms must have a 10-year sealed battery; units with changeable batteries are no longer allowed",
+   "Existing hardwired (110 volt) smoke alarms must be maintained; any over 10 years old must be replaced before the inspection",
+   "Carbon monoxide alarms listed to UL2034 within 10 feet of any bedroom (battery, plug-in or combination); hardwired CO alarms must stay hardwired",
+   "Homes with solar panels, a standby generator or battery storage need permanent weatherproof, UV-resistant labels (ANSI Z535.4) within 18 inches of the electrical panel and the meter pan"
+  ],
+  "fees": [
+   {
+    "label": "Resale certificate application fee (the same single Building Department certificate as the smoke/CO certificate; not charged twice)",
+    "amount": "$200",
+    "quote": "APPLICATION FEE: $200 - PAYABLE BY EXACT CASH OR CHECK MADE OUT TO “WANAQUE BOROUGH” - PAYMENT MUST BE RECEIVED BY THE OFFICE PRIOR TO THE INSPECTION DAY.",
+    "source_url": "https://www.wanaqueborough.com/vertical/Sites/%7B685BAF4D-C434-4DFB-94F4-1C8D180E9776%7D/uploads/CCO_Requirements_-_March_2025(1).pdf",
+    "verified": true
+   },
+   {
+    "label": "Certificate of smoke alarm and carbon monoxide alarm compliance, application fee (same combined certificate as the town resale certificate; not charged twice)",
+    "amount": "$200",
+    "quote": "APPLICATION FEE: $200 - PAYABLE BY EXACT CASH OR CHECK MADE OUT TO “WANAQUE BOROUGH”",
+    "source_url": "https://www.wanaqueborough.com/vertical/Sites/%7B685BAF4D-C434-4DFB-94F4-1C8D180E9776%7D/uploads/CCO_Requirements_-_March_2025(1).pdf",
+    "verified": true
+   }
+  ],
+  "how_to_apply": "Call the Building Department at 973-839-3000 x 7120 to schedule, and pay the $200 fee in exact cash or by check made out to 'Wanaque Borough' before the inspection day. Inspections are Monday 1pm to 3pm or Wednesday 7am to 9am with no set appointment time; the certificate is issued at the inspection.",
+  "application_url": "https://www.wanaqueborough.com/vertical/Sites/%7B685BAF4D-C434-4DFB-94F4-1C8D180E9776%7D/uploads/CCO_Requirements_-_March_2025(1).pdf",
+  "department_url": "https://www.wanaqueborough.com/buildingzoning",
+  "phone": "973-839-3000 x 7120",
+  "email": "jennifer@wanaquenj.gov",
+  "contact_name": "Jennifer Fiorito",
+  "contact_title": "Technical Assistant (Building & Zoning)",
+  "evidence": [
+   {
+    "url": "https://www.wanaqueborough.com/buildingzoning",
+    "quote": "This Department also issues Certificates for resale of single-family homes, two-family homes and change of tenancy in rental units.",
+    "doc_date": "",
+    "via": "page",
+    "verified": true
+   },
+   {
+    "url": "https://www.wanaqueborough.com/buildingzoning",
+    "quote": "Residential - Resale, Rental, New Tenant Certificate",
+    "doc_date": "",
+    "via": "page",
+    "verified": true
+   },
+   {
+    "url": "https://www.wanaqueborough.com/vertical/Sites/%7B685BAF4D-C434-4DFB-94F4-1C8D180E9776%7D/uploads/CCO_Requirements_-_March_2025(1).pdf",
+    "quote": "Updated March 1, 2025 BOROUGH OF WANAQUE CERTIFICATE OF SMOKE ALARM and CARBON MONOXIDE ALARM COMPLIANCE",
+    "doc_date": "2025-03-01",
+    "via": "pdf",
+    "verified": true
+   },
+   {
+    "url": "https://www.wanaqueborough.com/vertical/Sites/%7B685BAF4D-C434-4DFB-94F4-1C8D180E9776%7D/uploads/CCO_Requirements_-_March_2025(1).pdf",
+    "quote": "AVAILABLE INSPECTION DAYS ARE MONDAY BETWEEN 1pm AND 3pm; WEDNESDAY BETWEEN 7am AND 9am (NO SET APPOINTMENT TIME MADE) THE APPROVAL CERTIFICATE WILL BE ISSUED AT THE TIME OF INSPECTION. CALL 973-839-3000 x 7120 TO SCHEDULE AN APPOINTMENT",
+    "doc_date": "2025-03-01",
+    "via": "pdf",
+    "verified": true
+   },
+   {
+    "url": "https://www.wanaqueborough.com/buildingzoning",
+    "quote": "To schedule any Inspections Please Call Technical Assistant: Jennifer Fiorito x7120 Email: jennifer@wanaquenj.gov Construction Official - Michael Hafner x7128",
+    "doc_date": "",
+    "via": "page",
+    "verified": true
+   }
+  ],
+  "confidence": "medium",
+  "notes": "The Building & Zoning page says the department issues certificates for resale of single-family and two-family homes and for change of tenancy, and its 'Residential - Resale, Rental, New Tenant Certificate' link opens the March 1, 2025 Certificate of Smoke Alarm and Carbon Monoxide Alarm Compliance sheet ($200). No separate building or housing inspection checklist for resale is posted, so the resale certificate appears to be this one smoke/CO certificate; the same $200 is listed under the fire certificate and is not a second fee. The Municipal Code chapter on certificates could not be opened (ecode360 is blocked). Main office: (973) 839-3000, building@wanaquenj.gov. Construction Official and Fire Subcode Official: Michael Hafner (x7128). Zoning Officer/Property Maintenance: Mack Azer (x7121); the page lists his email both as mazer@wanaqueborough.com and mazer@wanaquenj.gov. The certificate also covers change of tenancy in rentals."
+ },
+ "fire_cert": {
+  "requirements": [
+   "Smoke alarms listed to UL217 on each level, including the basement (not required in attics or crawl spaces), and within 10 feet of any sleeping area",
+   "Battery-only smoke alarms must have a 10-year sealed battery; units with changeable batteries are no longer allowed",
+   "Existing hardwired (110 volt) smoke alarms must be maintained; any over 10 years old must be replaced before the inspection",
+   "Carbon monoxide alarms listed to UL2034 within 10 feet of any bedroom (battery, plug-in or combination); hardwired CO alarms must stay hardwired",
+   "Homes with solar panels, a standby generator or battery storage need permanent weatherproof, UV-resistant labels (ANSI Z535.4) within 18 inches of the electrical panel and the meter pan",
+   "The March 2025 Borough sheet does not list a fire extinguisher"
+  ],
+  "authorities": [
+   {
+    "name": "Wanaque Building Department (Construction Office), which issues the smoke alarm and carbon monoxide alarm certificate",
+    "type": "municipal_fire_bureau",
+    "area_served": "Entire borough",
+    "lead_time": "Pay before the inspection day; the certificate is issued at the inspection",
+    "fees": [
+     {
+      "label": "Certificate of smoke alarm and carbon monoxide alarm compliance, application fee (same combined certificate as the town resale certificate; not charged twice)",
+      "amount": "$200",
+      "quote": "APPLICATION FEE: $200 - PAYABLE BY EXACT CASH OR CHECK MADE OUT TO “WANAQUE BOROUGH”",
+      "source_url": "https://www.wanaqueborough.com/vertical/Sites/%7B685BAF4D-C434-4DFB-94F4-1C8D180E9776%7D/uploads/CCO_Requirements_-_March_2025(1).pdf",
+      "verified": true
+     }
+    ],
+    "how_to_apply": "Call 973-839-3000 x 7120 to schedule and pay $200 in exact cash or by check to 'Wanaque Borough' before the inspection day.",
+    "application_url": "https://www.wanaqueborough.com/vertical/Sites/%7B685BAF4D-C434-4DFB-94F4-1C8D180E9776%7D/uploads/CCO_Requirements_-_March_2025(1).pdf",
+    "department_url": "https://www.wanaqueborough.com/buildingzoning",
+    "phone": "973-839-3000 x 7120",
+    "email": "jennifer@wanaquenj.gov",
+    "contact_name": "Jennifer Fiorito",
+    "contact_title": "Technical Assistant (Building & Zoning)",
+    "evidence": [
+     {
+      "url": "https://www.wanaqueborough.com/vertical/Sites/%7B685BAF4D-C434-4DFB-94F4-1C8D180E9776%7D/uploads/CCO_Requirements_-_March_2025(1).pdf",
+      "quote": "CERTIFICATE OF SMOKE ALARM and CARBON MONOXIDE ALARM COMPLIANCE",
+      "doc_date": "2025-03-01",
+      "via": "pdf",
+      "verified": true
+     },
+     {
+      "url": "https://www.wanaqueborough.com/buildingzoning",
+      "quote": "Fire Subcode Official - Michael Hafner",
+      "doc_date": "",
+      "via": "page",
+      "verified": true
+     },
+     {
+      "url": "https://www.nj.gov/dca/dfs/pdf/fire%20directory_county%20summary/fire_code_enforcement_director.pdf",
+      "quote": "LEAID: 1613-001 Enf Auth. Fire Dept Fire Official Kevin L Platt Phone (973) 831-9752 ... Phone (973) 839-6405 ... Email wfpb@optonline.net ... Wanaque Constr Office",
+      "doc_date": "2026 (survey date 1/12/2026)",
+      "via": "state_directory",
+      "verified": true
+     },
+     {
+      "url": "https://nj.gov/dca/dfs/pdf/ANNUAL%20REGISTRY/THIRD%20QUARTER%20LEA%20REGISTRY%202026.pdf",
+      "quote": "F Wanaque Borough",
+      "doc_date": "2026-07",
+      "via": "pdf",
+      "verified": true
+     }
+    ],
+    "confidence": "high"
+   }
+  ],
+  "notes": "The state LEA registry lists Wanaque as fire department enforced (code F), and the state fire directory names Fire Official Kevin L Platt ((973) 831-9752, fax (973)831-1092, email wfpb@optonline.net), but its Smoke Detector Compliance block names the 'Wanaque Constr Office' at 579 Ringwood Av, phone (973) 839-6405. The Borough's own Building & Zoning page and its March 2025 sheet confirm the Building Department issues the certificate, so the Building Department contact (from the Borough page) is recorded. The directory's (973) 839-6405 number and Kevin Platt's optonline address are not on any Borough page. The Borough's Fire Department page lists only the volunteer chiefs (Chief Mark A. Olivieri, fdchief@wanaqueborough.com)."
+ },
+ "other_items": [],
+ "open_questions": [
+  "Whether the Building Department's resale certificate includes anything beyond the smoke/CO alarm and secondary power label check (no separate resale checklist is posted)",
+  "Reinspection fee and validity period"
+ ],
+ "verification": {
+  "fees": 2,
+  "fee_ok": 2,
+  "fee_bad": 0,
+  "fee_unchecked": 0,
+  "quotes": 9,
+  "q_ok": 9,
+  "q_bad": 0,
+  "q_unchecked": 0
+ }
+}

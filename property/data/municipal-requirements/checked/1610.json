@@ -1,0 +1,277 @@
+{
+ "municipality_code": "1610",
+ "municipality": "Prospect Park Borough",
+ "county": "PASSAIC",
+ "checked_at": "2026-10-02",
+ "resale_co": {
+  "status": "required",
+  "name": "Certificate of Compliance (for sale)",
+  "issued_by": "Borough of Prospect Park Housing Department / Building Department (Code Enforcement), under Borough Code Chapter 90-33",
+  "lead_time": "",
+  "valid_for": "",
+  "requirements": [
+   "Working smoke alarms and carbon monoxide alarms (the Housing Department inspects for both)",
+   "Ten-year sealed battery smoke alarms on each floor, including the basement and attic, and within 10 feet of all bedrooms",
+   "Battery smoke alarms cannot replace hardwired smoke alarms; hardwired systems must work",
+   "Carbon monoxide alarm within 10 feet of all bedrooms (plug-in, battery or combination units); the Housing Department page says one per floor",
+   "Fire extinguisher (4 to 10 lb) in every kitchen, wall-mounted no higher than 5 feet above the floor (listed on the fire safety sheet bundled with the 2026 sale form)",
+   "Compliance with the Borough's unfit buildings and housing standards ordinances"
+  ],
+  "fees": [
+   {
+    "label": "Certificate of Compliance inspection, 1 family house",
+    "amount": "$75.00",
+    "quote": "1 Family House: $ 75.00",
+    "source_url": "https://www.prospectpark.net/departments/housing_department/index.php",
+    "verified": true
+   },
+   {
+    "label": "Certificate of Compliance inspection, 2 family house",
+    "amount": "$150.00",
+    "quote": "2 Family House: $ 150.00",
+    "source_url": "https://www.prospectpark.net/departments/housing_department/index.php",
+    "verified": true
+   },
+   {
+    "label": "Certificate of Compliance inspection, 3 family house",
+    "amount": "$225.00",
+    "quote": "3 Family House: $ 225.00",
+    "source_url": "https://www.prospectpark.net/departments/housing_department/index.php",
+    "verified": true
+   },
+   {
+    "label": "Certificate of Compliance application for sale, 1 family / 2 family / 3 family (form)",
+    "amount": "$75.00 / $150.00 / 225.00",
+    "quote": "Cost: 1Family $75.00 ( ) 2Family $150.00 ( ) 3Family 225.00 ( )",
+    "source_url": "https://www.prospectpark.net/Departments/Housing/Certificate%20of%20Compliance%20for%20Sale.pdf",
+    "verified": true
+   },
+   {
+    "label": "State online certificate, more than 10 business days before closing (only if the State issues the certificate for Prospect Park; the portal marks the Borough smoke-certificate exempt)",
+    "amount": "$45",
+    "quote": "If you are applying for a certificate more than ten business days from the closing date the fee is $45 dollars",
+    "source_url": "https://firesolutions.dca.nj.gov/ultra-fire-home/smoke-application-create/",
+    "verified": null
+   },
+   {
+    "label": "State online certificate, 4 to 10 business days before closing (same caveat)",
+    "amount": "$90",
+    "quote": "if applying 4 to 10 business days from the closing date the fee is $90",
+    "source_url": "https://firesolutions.dca.nj.gov/ultra-fire-home/smoke-application-create/",
+    "verified": null
+   },
+   {
+    "label": "State online certificate, less than 4 business days before closing (same caveat)",
+    "amount": "$161",
+    "quote": "if the closing date is less than four business days the fee is $161.",
+    "source_url": "https://firesolutions.dca.nj.gov/ultra-fire-home/smoke-application-create/",
+    "verified": null
+   }
+  ],
+  "how_to_apply": "Fill out the Certificate of Compliance Application for Sale (owner, buyer, rooms, signature) and file it with the Building Department at Borough Hall, 106 Brown Avenue, with payment by cash, check or money order. Call for an inspection appointment. Certificate of Occupancy inspections are held Monday 1:30 to 2:30 pm and Tuesday and Thursday 2:00 to 2:30 pm.",
+  "application_url": "https://www.prospectpark.net/Departments/Housing/Certificate%20of%20Compliance%20for%20Sale.pdf",
+  "department_url": "https://www.prospectpark.net/departments/housing_department/index.php",
+  "phone": "(973) 790-7902 .ext 524",
+  "email": "code@prospectpark.net",
+  "contact_name": "Nathaniel Hernandez",
+  "contact_title": "Housing Inspector / Code Enforcement Officer",
+  "evidence": [
+   {
+    "url": "https://www.prospectpark.net/departments/housing_department/index.php",
+    "quote": "A Certificate of Compliance is required when a house or business is about to be sold. We inspect for working smoke detectors and carbon monoxide detectors. Smoke detectors work best one in every bedroom. Carbon monoxide is required one per floor.",
+    "doc_date": "",
+    "via": "page",
+    "verified": true
+   },
+   {
+    "url": "https://www.prospectpark.net/departments/housing_department/index.php",
+    "quote": "Cash, checks or money orders are the accepted payment options.",
+    "doc_date": "",
+    "via": "page",
+    "verified": true
+   },
+   {
+    "url": "https://www.prospectpark.net/Departments/Housing/Certificate%20of%20Compliance%20for%20Sale.pdf",
+    "quote": "Chapter 90-33 of the Borough Ordinances requires a certificate of compliance. A certificate of compliance certifying compliance with Borough Ordinances entitled “Buildings, Unfit, and Housing Standards, and inspection of smoke detector & carbon monoxide alarm compliance.",
+    "doc_date": "2026-06-09 (PDF last modified)",
+    "via": "pdf",
+    "verified": true
+   },
+   {
+    "url": "https://www.prospectpark.net/Departments/Housing/Certificate%20of%20Compliance%20for%20Sale.pdf",
+    "quote": "CERTIFICATE OF COMPLIANCE APPLICATION - FOR SALE",
+    "doc_date": "2026-06-09",
+    "via": "pdf",
+    "verified": true
+   },
+   {
+    "url": "https://www.prospectpark.net/Departments/Housing/Certificate%20of%20Compliance%20for%20Sale.pdf",
+    "quote": "ALL HOMES MUST HAVE TEN-YEAR SEALED BATTERY-POWERED SMOKE DETECTORS.",
+    "doc_date": "2026-06-09",
+    "via": "pdf",
+    "verified": true
+   },
+   {
+    "url": "https://www.prospectpark.net/Departments/Housing/Certificate%20of%20Compliance%20for%20Sale.pdf",
+    "quote": "A FIRE EXTINGUISHER (4TO 10 LBS INTERIOR WEIGHT) IS REQUIRED:",
+    "doc_date": "2026-06-09",
+    "via": "pdf",
+    "verified": true
+   },
+   {
+    "url": "https://www.prospectpark.net/Departments/Housing/Certificate%20of%20Compliance%20for%20Sale.pdf",
+    "quote": "James Booth Construction Official (973) 790-7902, Ext. 524 Construction@prospectpark.net Code Enforcement Officer (973) 790-7902, Ext. 524",
+    "doc_date": "2026-06-09",
+    "via": "pdf",
+    "verified": true
+   },
+   {
+    "url": "https://www.prospectpark.net/contacts/index.php",
+    "quote": "Nathaniel Hernandez Housing Inspector / Code Enforcement Officer code@prospectpark.net (973) 790-7902 .ext 524",
+    "doc_date": "",
+    "via": "page",
+    "verified": true
+   },
+   {
+    "url": "https://www.prospectpark.net/departments/housing_department/index.php",
+    "quote": "Please call 201-249-1189 for appointments.",
+    "doc_date": "",
+    "via": "page",
+    "verified": true
+   }
+  ],
+  "confidence": "high",
+  "notes": "The Housing Department page and the Certificate of Compliance Application for Sale (PDF last modified June 9, 2026) both require a Certificate of Compliance when a house is sold, with the inspection covering smoke and carbon monoxide alarms; fees are $75.00 (1 family), $150.00 (2 family), $225.00 (3 family); the page also lists $100.00 for commercial. No reinspection fee, lead time or validity period is published. The sale form is bundled with a fire safety sheet headed 'Fire Safety Inspection Requirements - For Rental' that lists the smoke, CO and fire extinguisher rules; the page and the sheet differ on CO placement (one per floor vs within 10 feet of bedrooms). Appointments: the Housing Department page says to call 201-249-1189 (the form labels it the Code Enforcement Officer's mobile number), so the office line (973) 790-7902 ext. 524 is given as the main phone. Construction Official James Booth shares ext. 524 (Construction@prospectpark.net). Rental programs are separate: a $50.00 Certificate of Occupancy for every change of tenant, and absentee landlords register yearly for $100.00."
+ },
+ "fire_cert": {
+  "requirements": [
+   "Ten-year sealed battery smoke alarms on each floor, including the basement and attic, and within 10 feet of all bedrooms (Borough sheet)",
+   "Carbon monoxide alarm within 10 feet of all bedrooms (Borough sheet)",
+   "Fire extinguisher (4 to 10 lb) mounted in the kitchen no higher than 5 feet (still listed on the Borough's 2026 sheet even though the state dropped it from the state certificate in February 2025)"
+  ],
+  "authorities": [
+   {
+    "name": "Borough of Prospect Park Housing Department / Building Department (Certificate of Compliance includes the smoke and carbon monoxide alarm inspection)",
+    "type": "unknown",
+    "area_served": "Entire borough",
+    "lead_time": "",
+    "fees": [],
+    "how_to_apply": "Covered by the Borough Certificate of Compliance for sale: file the application for sale with the Building Department and call for an inspection appointment. See the town certificate section for fees.",
+    "application_url": "https://www.prospectpark.net/Departments/Housing/Certificate%20of%20Compliance%20for%20Sale.pdf",
+    "department_url": "https://www.prospectpark.net/departments/housing_department/index.php",
+    "phone": "(973) 790-7902 .ext 524",
+    "email": "code@prospectpark.net",
+    "contact_name": "Nathaniel Hernandez",
+    "contact_title": "Housing Inspector / Code Enforcement Officer",
+    "evidence": [
+     {
+      "url": "https://www.prospectpark.net/Departments/Housing/Certificate%20of%20Compliance%20for%20Sale.pdf",
+      "quote": "Chapter 90-33 of the Borough Ordinances requires a certificate of compliance. A certificate of compliance certifying compliance with Borough Ordinances entitled “Buildings, Unfit, and Housing Standards, and inspection of smoke detector & carbon monoxide alarm compliance.",
+      "doc_date": "2026-06-09",
+      "via": "pdf",
+      "verified": true
+     },
+     {
+      "url": "https://firesolutions.dca.nj.gov/_odata/firedistricts",
+      "quote": "\"ultra_name\":\"PROSPECT PARK BORO-001\",\"ultra_firedistrictcode\":\"3995\" ... \"ultra_firejurisdiction\":{ \"Name\":\"State\",\"Value\":240000000 },\"ultra_smokecertexempt\":true",
+      "doc_date": "2026-10-02 (live portal data)",
+      "via": "page",
+      "verified": "eye"
+     },
+     {
+      "url": "https://www.nj.gov/dca/dfs/pdf/fire%20directory_county%20summary/state_towns%207_17_26.pdf",
+      "quote": "PROSPECT PARK 1610",
+      "doc_date": "2026-07-17 (listed without the SC = Smoke Certs mark)",
+      "via": "pdf",
+      "verified": true
+     },
+     {
+      "url": "https://www.prospectpark.net/contacts/index.php",
+      "quote": "Nathaniel Hernandez Housing Inspector / Code Enforcement Officer code@prospectpark.net (973) 790-7902 .ext 524",
+      "doc_date": "",
+      "via": "page",
+      "verified": true
+     }
+    ],
+    "confidence": "medium"
+   },
+   {
+    "name": "NJ DCA Division of Fire Safety, Bureau of Fire Code Enforcement (State is the fire code enforcing agency)",
+    "type": "state_dca",
+    "area_served": "Entire borough (State enforces the fire code; whether the State issues resale smoke certificates here is doubtful, see notes)",
+    "lead_time": "More than 10 business days before closing for the lowest state fee",
+    "fees": [
+     {
+      "label": "State online certificate, more than 10 business days before closing (only if the State issues the certificate for Prospect Park; the portal marks the Borough smoke-certificate exempt)",
+      "amount": "$45",
+      "quote": "If you are applying for a certificate more than ten business days from the closing date the fee is $45 dollars",
+      "source_url": "https://firesolutions.dca.nj.gov/ultra-fire-home/smoke-application-create/",
+      "verified": null
+     },
+     {
+      "label": "State online certificate, 4 to 10 business days before closing (same caveat)",
+      "amount": "$90",
+      "quote": "if applying 4 to 10 business days from the closing date the fee is $90",
+      "source_url": "https://firesolutions.dca.nj.gov/ultra-fire-home/smoke-application-create/",
+      "verified": null
+     },
+     {
+      "label": "State online certificate, less than 4 business days before closing (same caveat)",
+      "amount": "$161",
+      "quote": "if the closing date is less than four business days the fee is $161.",
+      "source_url": "https://firesolutions.dca.nj.gov/ultra-fire-home/smoke-application-create/",
+      "verified": null
+     }
+    ],
+    "how_to_apply": "For towns where the State issues the certificate, apply online on the DCA Fire Safety portal and pay by e-check or credit card. The portal data flags Prospect Park as smoke-certificate exempt, so confirm with DCA or the Borough before applying there.",
+    "application_url": "https://firesolutions.dca.nj.gov/ultra-fire-home/smoke-application-create/",
+    "department_url": "https://www.nj.gov/dca/dfs/offices/bfce.shtml",
+    "phone": "(609) 633-6132",
+    "email": "",
+    "contact_name": "Louis Kilmer",
+    "contact_title": "Fire Official (NJ Division of Fire Safety)",
+    "evidence": [
+     {
+      "url": "https://nj.gov/dca/dfs/pdf/ANNUAL%20REGISTRY/THIRD%20QUARTER%20LEA%20REGISTRY%202026.pdf",
+      "quote": "S Prospect Park Borough",
+      "doc_date": "2026-07",
+      "via": "pdf",
+      "verified": true
+     },
+     {
+      "url": "https://www.nj.gov/dca/dfs/pdf/fire%20directory_county%20summary/fire_code_enforcement_director.pdf",
+      "quote": "LEAID: 1610-999 Enf Auth. State Fire Official Louis Kilmer Phone (609)633-6132 Addr: PO Box 809 Trenton NJ 08625-0809 Phone (609) 633-6132",
+      "doc_date": "2026 (survey date 1/12/2026)",
+      "via": "state_directory",
+      "verified": true
+     },
+     {
+      "url": "https://firesolutions.dca.nj.gov/ultra-fire-home/smoke-application-create/",
+      "quote": "Please complete the following information to apply for a Certificate of Smoke Alarm, Carbon Monoxide Alarm, and Secondary Power Source Identification Label Compliance (CSACMASPSIL). You will be required to pay, via e-check or credit card, before you can submit this application.",
+      "doc_date": "",
+      "via": "page",
+      "verified": null
+     }
+    ],
+    "confidence": "low"
+   }
+  ],
+  "notes": "Prospect Park is the only town in this group where the State (NJ DCA) is the fire code enforcing agency (registry code S). The state fire directory (survey 1/12/2026) still names the NJ Division of Fire Safety, (609) 633-6132, under Smoke Detector Compliance. But the DCA list of state-enforced towns (revised 7/17/2026) lists PROSPECT PARK 1610 without the 'SC = Smoke Certs' mark, and the DCA smoke certificate portal data (read 2026-10-02) lists PROSPECT PARK BORO-001 with jurisdiction State and smoke-certificate exempt = true, the same flags used for towns that issue the certificate themselves. The Borough's own Certificate of Compliance for sale explicitly includes the smoke detector and carbon monoxide alarm inspection. So the smoke/CO check most likely happens through the Borough's Certificate of Compliance ($75 / $150), and the state portal fees ($45 / $90 / $161) are recorded only as the current DCA source. Confirm with the Borough before relying on either. The Prospect Park Volunteer Fire Department (Chief Douglas Struyk, 973-790-7902 ext. 526) and Fire Safety Director Daniel Cabrera (ext. 522 per the Borough directory) handle emergency response and fire safety, not resale certificates as far as the site shows. The directory email for DCA is blank; DCA's portal page lists BFCE_CSDCMAC@dca.nj.gov only for homes not subject to the CO requirement."
+ },
+ "other_items": [],
+ "open_questions": [
+  "Whether the Borough's Certificate of Compliance is accepted as the state smoke/CO alarm certificate at closing, or whether a separate certificate from NJ DCA is still needed (DCA portal flags Prospect Park as smoke-certificate exempt)",
+  "Lead time, reinspection fee and validity period for the Certificate of Compliance",
+  "Whether the fire extinguisher is still required at sale"
+ ],
+ "verification": {
+  "fees": 7,
+  "fee_ok": 4,
+  "fee_bad": 0,
+  "fee_unchecked": 3,
+  "quotes": 16,
+  "q_ok": 15,
+  "q_bad": 0,
+  "q_unchecked": 1
+ }
+}
