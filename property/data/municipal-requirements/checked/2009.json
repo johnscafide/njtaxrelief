@@ -1,0 +1,244 @@
+{
+ "municipality_code": "2009",
+ "municipality": "Linden City",
+ "county": "UNION",
+ "checked_at": "2026-10-02",
+ "resale_co": {
+  "status": "required",
+  "name": "Continued Certificate of Occupancy (CCO), residential sale",
+  "issued_by": "Linden Health Department (residential Certificate of Occupancy inspections); the Construction Code office handles commercial CCOs",
+  "lead_time": "",
+  "valid_for": "",
+  "requirements": [
+   "Owner certifies the dwelling and all other structures meet the City's zoning requirements",
+   "No rubbish, debris or bulk garbage may be left on the property before the new occupancy"
+  ],
+  "fees": [],
+  "how_to_apply": "Apply online with the City's GovPilot 'Residential Sale CCO Application' (Residential Sale Only), linked from the City's Continued Certificate of Occupancy Application page. The form asks for the buyer, the agent and who to contact for inspections, and offers Pay Now or Submit & Pay Later. Questions go to the Health Department, 605 South Wood Avenue, (908) 474-8409.",
+  "application_url": "https://main.govpilot.com/web/public/f18dd71d-989_CCO-Linden?uid=6947&ust=NJ&pu=1&id=0",
+  "department_url": "https://linden-nj.gov/directory/health-department/",
+  "phone": "(908) 474-8409",
+  "email": "health@linden-nj.gov",
+  "contact_name": "",
+  "contact_title": "Health Department (no named staff published)",
+  "evidence": [
+   {
+    "url": "https://linden-nj.gov/documents/continued-certificate-of-occupancy-application/",
+    "quote": "Click here for the Residential Sale CCO Application.",
+    "doc_date": "2026-10-02 (page fetched)",
+    "via": "page",
+    "verified": true
+   },
+   {
+    "url": "https://main.govpilot.com/web/public/f18dd71d-989_CCO-Linden?uid=6947&ust=NJ&pu=1&id=0",
+    "quote": "Residential Sale Only",
+    "doc_date": "2026-10-02 (form fetched)",
+    "via": "page",
+    "verified": true
+   },
+   {
+    "url": "https://main.govpilot.com/web/public/f18dd71d-989_CCO-Linden?uid=6947&ust=NJ&pu=1&id=0",
+    "quote": "I certify that this dwelling and all other structures on the property meet the zoning requirements of the",
+    "doc_date": "2026-10-02",
+    "via": "page",
+    "verified": true
+   },
+   {
+    "url": "https://main.govpilot.com/web/public/f18dd71d-989_CCO-Linden?uid=6947&ust=NJ&pu=1&id=0",
+    "quote": "I attest to the fact that no rubbish/debris/bulk garbage will be left on this property prior to new occupancy. I understand that failure to comply will result in retraction of the",
+    "doc_date": "2026-10-02",
+    "via": "page",
+    "verified": true
+   },
+   {
+    "url": "https://main.govpilot.com/web/public/f18dd71d-989_CCO-Linden?uid=6947&ust=NJ&pu=1&id=0",
+    "quote": "301 North Wood Avenue Linden, NJ 07036 (908) 474-8409",
+    "doc_date": "2026-10-02",
+    "via": "page",
+    "verified": true
+   },
+   {
+    "url": "https://linden-nj.gov/directory/health-department/",
+    "quote": "Certificate of Occupancy Inspections (Residential)",
+    "doc_date": "2026-10-02 (page fetched)",
+    "via": "page",
+    "verified": true
+   },
+   {
+    "url": "https://linden-nj.gov/directory/health-department/",
+    "quote": "(908) 474-8409 health@linden-nj.gov 605 South Wood Avenue Linden, NJ 07036",
+    "doc_date": "2026-10-02",
+    "via": "page",
+    "verified": true
+   },
+   {
+    "url": "https://linden-nj.gov/directory/construction-code/",
+    "quote": "C/Os may be obtained through Housing ... for Residential; Construction Code ... for Commercial.",
+    "doc_date": "2026-10-02 (page fetched)",
+    "via": "page",
+    "verified": true
+   },
+   {
+    "url": "https://linden-nj.gov/wp-content/uploads/2025/09/Application-CSDCMAC-9-2025.pdf",
+    "quote": "THE CERTIFICATE OF SMOKE DETECTOR AND CARBON MONOXIDE ALARM COMPLIANCE (CSDCMAC) REQUIRES A SINGLE APPROVED INSPECTION PRIOR TO A FINAL APPROVAL FOR OCCUPANCY WHENEVER A HOME IS SOLD.",
+    "doc_date": "2025-09 (Rev. September 2025)",
+    "via": "pdf",
+    "verified": true
+   }
+  ],
+  "confidence": "medium",
+  "notes": "Linden runs a residential-sale Continued Certificate of Occupancy through its Health Department (the Construction Code page says residential C/Os come through Housing). No residential fee, inspection checklist, lead time or validity was found on an official page, and the GovPilot form computes the fee only at checkout. The City's code is on ecode360 (LI4062), which could not be opened. The $200 fee on the City's 2020 'Application for Continued Certificate of Occupancy' is the Construction Code (commercial/business) CCO, not the residential sale CCO. Linden also has Rental Property Registration and a lead hazard program for pre-1978 rentals through the Health Department; those are rental programs, not resale requirements."
+ },
+ "fire_cert": {
+  "requirements": [
+   "Smoke alarms must be 10-year sealed battery or hardwired, on each level including basements (not attics or crawl spaces) and outside each separate sleeping area within 10 feet of the bedrooms",
+   "Carbon monoxide alarms outside each sleeping area",
+   "All alarms must work",
+   "Hardwired (A/C-powered) smoke alarms from the original construction may not be replaced with battery alarms",
+   "Homes with a secondary power source (generator, solar panels, battery storage) need a 'CAUTION: MULTIPLE SOURCES OF POWER' label (not handwritten) within 18 inches of the main electrical panel and the electric meter",
+   "A property representative or homeowner must be present at the inspection; a no-show counts as a failure"
+  ],
+  "authorities": [
+   {
+    "name": "City of Linden Fire Department, Fire Prevention Bureau",
+    "type": "municipal_fire_bureau",
+    "area_served": "Entire city",
+    "lead_time": "Apply more than 10 business days before the change of occupancy for the lowest fee. A new application is required if the sale does not happen within six months.",
+    "fees": [
+     {
+      "label": "Certificate of smoke detector and carbon monoxide alarm compliance, request received more than 10 business days before the change of occupancy",
+      "amount": "$50.00",
+      "quote": "1). Requests for a CSDCMAC received more than 10 business days prior to the change of occupancy: $50.00",
+      "source_url": "https://linden-nj.gov/wp-content/uploads/2025/09/Application-CSDCMAC-9-2025.pdf",
+      "verified": true
+     },
+     {
+      "label": "Certificate, request received 4 to 10 business days before the change of occupancy",
+      "amount": "$90.00",
+      "quote": "2). Requests for a CSDCMAC received 4 to 10 business days prior to the change of occupancy: $90.00",
+      "source_url": "https://linden-nj.gov/wp-content/uploads/2025/09/Application-CSDCMAC-9-2025.pdf",
+      "verified": true
+     },
+     {
+      "label": "Certificate, request received fewer than 4 business days before the change of occupancy (cash only)",
+      "amount": "$170.00",
+      "quote": "3). Requests for a CSDCMAC received fewer than four business days prior to the change of occupancy: $170.00(CASH ONLY)",
+      "source_url": "https://linden-nj.gov/wp-content/uploads/2025/09/Application-CSDCMAC-9-2025.pdf",
+      "verified": true
+     }
+    ],
+    "how_to_apply": "Download the Smoke Detector & Carbon Monoxide Application Form from the City website, fill it out and mail it or drop it in the bin outside the Fire Prevention entrance, 302 South Wood Avenue, Monday to Friday 9 am to 5 pm. Checks payable to City of Linden (the under-4-business-days fee is cash only). The bureau schedules the inspection as soon as possible after it gets the application.",
+    "application_url": "https://linden-nj.gov/wp-content/uploads/2025/09/Application-CSDCMAC-9-2025.pdf",
+    "department_url": "https://linden-nj.gov/directory/fire-prevention/",
+    "phone": "(908)-474-4560",
+    "email": "whasko@lindenfd-nj.gov",
+    "contact_name": "Christopher Rooney",
+    "contact_title": "Deputy Chief/Fire Official (the Fire Prevention page's email belongs to Fire Chief William M. Hasko, Jr.)",
+    "evidence": [
+     {
+      "url": "https://linden-nj.gov/directory/fire-prevention/",
+      "quote": "The Fire Prevention Department reports to the Fire Chief and provides inspection of business and home locations to insure fire prevention safety and Smoke Detector, Carbon Monoxide and Fire Extinguisher Inspections for building and home sales in accordance with the New Jersey State Uniform Fire Codes.",
+      "doc_date": "2026-10-02 (page fetched)",
+      "via": "page",
+      "verified": true
+     },
+     {
+      "url": "https://linden-nj.gov/directory/fire-prevention/",
+      "quote": "Once the forms are filled out, they can either be mailed or dropped into the bin that will be outside Fire Prevention entrance during regular business hours Monday through Friday 9am to 5pm.",
+      "doc_date": "2026-10-02",
+      "via": "page",
+      "verified": true
+     },
+     {
+      "url": "https://linden-nj.gov/directory/fire-prevention/",
+      "quote": "(908) 474-4560 whasko@lindenfd-nj.gov (908) 474-0318 302 South Wood Avenue Linden, NJ 07036",
+      "doc_date": "2026-10-02",
+      "via": "page",
+      "verified": true
+     },
+     {
+      "url": "https://linden-nj.gov/document-category/fire-prevention/",
+      "quote": "Smoke Detector & Carbon Monoxide Application Form",
+      "doc_date": "2026-10-02 (page fetched)",
+      "via": "page",
+      "verified": true
+     },
+     {
+      "url": "https://linden-nj.gov/wp-content/uploads/2025/09/Application-CSDCMAC-9-2025.pdf",
+      "quote": "CITY OF LINDEN FIRE DEPARTMENT FIRE PREVENTION BUREAU 302 South Wood Avenue Linden New Jersey 07036 Phone: (908)-474-4560 Fax: (908)-474-0318 Christopher Rooney William M. Hasko, Jr. Deputy Chief/Fire Official Fire Chief",
+      "doc_date": "2025-09 (Rev. September 2025)",
+      "via": "pdf",
+      "verified": true
+     },
+     {
+      "url": "https://linden-nj.gov/wp-content/uploads/2025/09/Application-CSDCMAC-9-2025.pdf",
+      "quote": "APPLICATION FOR ONE FAMILY AND TWO-FAMILY DWELLING AND CERTIFICATE OF SMOKE DETECTOR AND CARBON MONOXIDE ALARM COMPLIANCE",
+      "doc_date": "2025-09",
+      "via": "pdf",
+      "verified": true
+     },
+     {
+      "url": "https://linden-nj.gov/wp-content/uploads/2025/09/Application-CSDCMAC-9-2025.pdf",
+      "quote": "5). After two failures, for any reason, the applicant must submit a new application and must also pay the appropriate fee as if it was an original inspection despite any previous failures.",
+      "doc_date": "2025-09",
+      "via": "pdf",
+      "verified": true
+     },
+     {
+      "url": "https://linden-nj.gov/wp-content/uploads/2025/09/Application-CSDCMAC-9-2025.pdf",
+      "quote": "6). If the change in occupancy specified in the application does not occur within six months a new application is required.",
+      "doc_date": "2025-09",
+      "via": "pdf",
+      "verified": true
+     },
+     {
+      "url": "https://linden-nj.gov/wp-content/uploads/2025/09/Application-CSDCMAC-9-2025.pdf",
+      "quote": "Make checks payable to: “CITY OF LINDEN”",
+      "doc_date": "2025-09",
+      "via": "pdf",
+      "verified": true
+     },
+     {
+      "url": "https://linden-nj.gov/wp-content/uploads/2025/09/Application-CSDCMAC-9-2025.pdf",
+      "quote": "Rev. September 2025",
+      "doc_date": "2025-09",
+      "via": "pdf",
+      "verified": true
+     },
+     {
+      "url": "https://nj.gov/dca/dfs/pdf/ANNUAL%20REGISTRY/THIRD%20QUARTER%20LEA%20REGISTRY%202026.pdf",
+      "quote": "F Linden City",
+      "doc_date": "2026-07",
+      "via": "pdf",
+      "verified": true
+     },
+     {
+      "url": "https://www.nj.gov/dca/dfs/pdf/fire%20directory_county%20summary/fire_code_enforcement_director.pdf",
+      "quote": "Linden City2009 LEAID: 2009-001 Enf Auth. Fire Dept Fire Official Christopher D Rooney Phone (908) 474-4560 Email crooney@lindenfs-nj.gov Linden City Fire Prev",
+      "doc_date": "2025-08-12 (survey date)",
+      "via": "state_directory",
+      "verified": true
+     }
+    ],
+    "confidence": "high"
+   }
+  ],
+  "notes": "Fees are from the City's application form revised September 2025. The Fire Prevention page still mentions fire extinguisher inspections for home sales, but the September 2025 form lists only smoke alarms, CO alarms and the secondary power source label. The state fire directory lists the fire official's email as crooney@lindenfs-nj.gov (the department's other addresses use lindenfd-nj.gov, so 'lindenfs' may be a typo); the City's Fire Prevention page gives whasko@lindenfd-nj.gov (Fire Chief), which is used here."
+ },
+ "other_items": [],
+ "open_questions": [
+  "What is the fee for Linden's residential-sale Continued Certificate of Occupancy (per unit, reinspection, rush)?",
+  "What does the Health Department inspect for the residential CCO, how far ahead should sellers apply, and how long is it valid?",
+  "Who is the named Health Department / housing inspector contact for residential CCOs?"
+ ],
+ "verification": {
+  "fees": 3,
+  "fee_ok": 3,
+  "fee_bad": 0,
+  "fee_unchecked": 0,
+  "quotes": 21,
+  "q_ok": 21,
+  "q_bad": 0,
+  "q_unchecked": 0
+ }
+}

@@ -1,0 +1,221 @@
+{
+ "municipality_code": "1615",
+ "municipality": "West Milford Township",
+ "county": "PASSAIC",
+ "checked_at": "2026-10-02",
+ "resale_co": {
+  "status": "not_required",
+  "name": "No resale Certificate of Continued Occupancy (optional letter stating a CCO is not required)",
+  "issued_by": "West Milford Building Department",
+  "lead_time": "For the optional letter: request in writing and allow ample time before closing",
+  "valid_for": "",
+  "requirements": [],
+  "fees": [
+   {
+    "label": "Optional letter stating that a Certificate of Continued Occupancy is not required",
+    "amount": "$40",
+    "quote": "If you need a letter stating that a CCO is not required you must request it in writing and there is a $40 fee.",
+    "source_url": "https://westmilford.org/cn/faq/?did=435",
+    "verified": true
+   },
+   {
+    "label": "Certification requested more than 10 business days before closing",
+    "amount": "$55.00",
+    "quote": "A fee of $55.00 will be charged for certifications requested more than 10 business days prior to closing.",
+    "source_url": "https://westmilford.org/FCpdf/Smoke%20Detector%20instructions%2D2%2D26%2D25%2Epdf",
+    "verified": true
+   },
+   {
+    "label": "Certification requested 4 to 10 business days before closing",
+    "amount": "$100.00",
+    "quote": "fee of $100.00 will be charged for certifications requested four to ten business days before closing",
+    "source_url": "https://westmilford.org/FCpdf/Smoke%20Detector%20instructions%2D2%2D26%2D25%2Epdf",
+    "verified": true
+   },
+   {
+    "label": "Certification requested less than 4 business days before closing",
+    "amount": "$165.00",
+    "quote": "a fee of $165.00 will be charged for certification requests less than four business days before closing as per Township Ordinance 2020-20",
+    "source_url": "https://westmilford.org/FCpdf/Smoke%20Detector%20instructions%2D2%2D26%2D25%2Epdf",
+    "verified": true
+   },
+   {
+    "label": "Re-inspection (additional fee)",
+    "amount": "$50.00",
+    "quote": "There will be an additional $50.00 fee for any re-inspections.",
+    "source_url": "https://westmilford.org/FCpdf/Smoke%20Detector%20instructions%2D2%2D26%2D25%2Epdf",
+    "verified": true
+   }
+  ],
+  "how_to_apply": "No resale certificate is needed. If a letter confirming that is wanted, send a written request with the $40 fee to the Building Department, 1480 Union Valley Road.",
+  "application_url": "",
+  "department_url": "https://westmilford.org/cn/faq/?did=435",
+  "phone": "973-728-2725",
+  "email": "",
+  "contact_name": "Adam Slufik",
+  "contact_title": "Construction Official, Building Inspector",
+  "evidence": [
+   {
+    "url": "https://westmilford.org/cn/faq/?did=435",
+    "quote": "Does West Milford require an inspection on resale of a home? No. We do not require a Certificate of Continued Occupancy on the resale of home. A Smoke Detector Certification is required and is performed by the Fire Prevention Department; Please call 973-728-2840 to schedule an appointment.",
+    "doc_date": "",
+    "via": "page",
+    "verified": true
+   },
+   {
+    "url": "https://westmilford.org/cn/faq/?did=435",
+    "quote": "No. Codes are updated every three years, there is no requirement that existing buildings conform to new codes unless work is being done.",
+    "doc_date": "",
+    "via": "page",
+    "verified": true
+   },
+   {
+    "url": "https://westmilford.org/cn/contactinfo/?did=435",
+    "quote": "Adam Slufik, Construction Official, Building Inspector 1480 Union Valley Road, West Milford, NJ 07480 Tel Adam Slufik's 973-728-2725",
+    "doc_date": "",
+    "via": "page",
+    "verified": true
+   },
+   {
+    "url": "https://westmilford.org/cn/contactinfo/?did=435",
+    "quote": "Alana Dille, Technical Assistant to the Construction Official 1480 Union Valley Road, West Milford, NJ 07480 Tel Alana Dille's 973-728-2780",
+    "doc_date": "",
+    "via": "page",
+    "verified": true
+   }
+  ],
+  "confidence": "high",
+  "notes": "The Building and Zoning FAQ says West Milford does not require a Certificate of Continued Occupancy on resale; only the smoke alarm and carbon monoxide alarm certification from the Fire Prevention Bureau is needed. An optional letter confirming no CCO is required costs $40 by written request. Underground oil tanks in use and not leaking may stay. No staff email addresses are published on the Township contact page; the Technical Assistant to the Construction Official is Alana Dille (973-728-2780)."
+ },
+ "fire_cert": {
+  "requirements": [
+   "Minimum 4-inch house numbers visible from the street (Township Ordinance 2009-021); no certificate without them",
+   "Smoke and CO alarms must be UL listed, less than 10 years old, and tested by the owner or agent before the inspection",
+   "Single-station battery smoke alarms must be 10-year sealed units; existing hardwired alarms must work and cannot be replaced with battery alarms",
+   "Hardwired requirements by build date: before 1977 sealed battery alarms on each level; 1977 to Feb 21, 1983 hardwired on sleeping levels and basement; Feb 22, 1983 to Apr 30, 1993 interconnected hardwired on every level; May 1, 1993 and later also inside every bedroom",
+   "Smoke alarm on each level within 10 feet of every bedroom door; basement alarm on the ceiling within 3 feet of the stairwell; wall-mounted alarms 6 to 12 inches below the ceiling; cathedral ceilings need an alarm within 12 inches of the peak",
+   "CO alarms required with any fuel-burning appliance, fireplace, woodstove or attached garage, centrally outside each sleeping area within 10 feet of every bedroom door (UL 2034)",
+   "A central-station monitored fire alarm installed at construction must be kept working; an NFPA 72 test report and proof of monitoring are required",
+   "Homes with solar, a backup generator or battery storage need a durable label (for example 'CAUTION: MULTIPLE SOURCES OF POWER') within 18 inches of the main panel and the meter",
+   "Fire extinguishers no longer required (since February 3, 2025)",
+   "Units opening onto a common hallway (for example Bald Eagle Commons) need working self-closers"
+  ],
+  "authorities": [
+   {
+    "name": "West Milford Fire Prevention Bureau (Office of the Fire Marshal)",
+    "type": "municipal_fire_bureau",
+    "area_served": "Entire township, including Bald Eagle Commons units on Richmond Road",
+    "lead_time": "More than 10 business days before closing for the lowest fee; certifications are done on Wednesdays, 9:00 a.m. to 3:30 p.m. Certificates are valid 6 months from issue and are not transferable.",
+    "fees": [
+     {
+      "label": "Certification requested more than 10 business days before closing",
+      "amount": "$55.00",
+      "quote": "A fee of $55.00 will be charged for certifications requested more than 10 business days prior to closing.",
+      "source_url": "https://westmilford.org/FCpdf/Smoke%20Detector%20instructions%2D2%2D26%2D25%2Epdf",
+      "verified": true
+     },
+     {
+      "label": "Certification requested 4 to 10 business days before closing",
+      "amount": "$100.00",
+      "quote": "fee of $100.00 will be charged for certifications requested four to ten business days before closing",
+      "source_url": "https://westmilford.org/FCpdf/Smoke%20Detector%20instructions%2D2%2D26%2D25%2Epdf",
+      "verified": true
+     },
+     {
+      "label": "Certification requested less than 4 business days before closing",
+      "amount": "$165.00",
+      "quote": "a fee of $165.00 will be charged for certification requests less than four business days before closing as per Township Ordinance 2020-20",
+      "source_url": "https://westmilford.org/FCpdf/Smoke%20Detector%20instructions%2D2%2D26%2D25%2Epdf",
+      "verified": true
+     },
+     {
+      "label": "Re-inspection (additional fee)",
+      "amount": "$50.00",
+      "quote": "There will be an additional $50.00 fee for any re-inspections.",
+      "source_url": "https://westmilford.org/FCpdf/Smoke%20Detector%20instructions%2D2%2D26%2D25%2Epdf",
+      "verified": true
+     }
+    ],
+    "how_to_apply": "Apply through the Fire Prevention citizen services portal ('Apply for a Smoke Detector Cert', registration required) or call the Fire Prevention Bureau at 973-728-2840 to schedule; the office is at 13 Edgar Drive. Checks are payable to the Township of West Milford Fire Marshal. Scheduling hours are 8:30 a.m. to 4:30 p.m., Monday through Friday.",
+    "application_url": "https://westmilfordfireprevention.prophoenix.com/Default.aspx",
+    "department_url": "https://westmilford.org/cn/webpage.cfm?tpid=16166",
+    "phone": "973-728-2840",
+    "email": "fireoffice2@westmilford.org",
+    "contact_name": "Michael Moscatello",
+    "contact_title": "Fire Marshal / Fire Investigator (Fire Official)",
+    "evidence": [
+     {
+      "url": "https://westmilford.org/cn/webpage.cfm?tpid=16166",
+      "quote": "The public can apply for a certificate of smoke alarm and carbon monoxide alarm compliance inspections, apply for permits, make payments, file complaints, by registering for the citizen services account by clicking the link below.",
+      "doc_date": "",
+      "via": "page",
+      "verified": true
+     },
+     {
+      "url": "https://westmilford.org/cn/webpage.cfm?tpid=16166",
+      "quote": "Appointments may be scheduled by calling the Fire Prevention Bureau at 973-728-2840. If making an appointment in person please note the Fire Prevention Bureau office is located at 13 Edgar Drive.",
+      "doc_date": "",
+      "via": "page",
+      "verified": true
+     },
+     {
+      "url": "https://westmilford.org/FCpdf/Smoke%20Detector%20instructions%2D2%2D26%2D25%2Epdf",
+      "quote": "Certificate of Smoke Alarm and Carbon Monoxide Alarm Compliance Revised February 26, 2025",
+      "doc_date": "2025-02-26",
+      "via": "pdf",
+      "verified": true
+     },
+     {
+      "url": "https://westmilford.org/FCpdf/Smoke%20Detector%20instructions%2D2%2D26%2D25%2Epdf",
+      "quote": "Checks are to be made payable to the Township of West Milford Fire Marshal. Certificates are valid for six months from the date of issue and are not transferable.",
+      "doc_date": "2025-02-26",
+      "via": "pdf",
+      "verified": true
+     },
+     {
+      "url": "https://westmilford.org/FCpdf/Smoke%20Detector%20instructions%2D2%2D26%2D25%2Epdf",
+      "quote": "Certifications are scheduled for Wednesday's, 9:00 a.m. to 3:30 p.m.",
+      "doc_date": "2025-02-26",
+      "via": "pdf",
+      "verified": true
+     },
+     {
+      "url": "https://westmilford.org/cn/contactinfo/?did=435",
+      "quote": "Michael Moscatello, Fire Marshal / Fire Investigator Location: 13 Edgar Drive, Mailing Address: 1480 Union Valley Road, West Milford, NJ 07480 Tel Michael Moscatello's 973-728-2840 Fax 973-728-2880",
+      "doc_date": "",
+      "via": "page",
+      "verified": true
+     },
+     {
+      "url": "https://www.nj.gov/dca/dfs/pdf/fire%20directory_county%20summary/fire_code_enforcement_director.pdf",
+      "quote": "LEAID: 1615-001 Enf Auth. Municipal Fire Official Michael J Moscatello Phone (973) 728-2840 ... Email fireoffice2@westmilford.org",
+      "doc_date": "2026 (survey dates 2022 to 2026)",
+      "via": "state_directory",
+      "verified": true
+     },
+     {
+      "url": "https://nj.gov/dca/dfs/pdf/ANNUAL%20REGISTRY/THIRD%20QUARTER%20LEA%20REGISTRY%202026.pdf",
+      "quote": "M West Milford Township",
+      "doc_date": "2026-07",
+      "via": "pdf",
+      "verified": true
+     }
+    ],
+    "confidence": "high"
+   }
+  ],
+  "notes": "Fees come from the Fire Marshal's instruction sheet revised February 26, 2025, which cites Township Ordinance 2020-20 ($55.00 / $100.00 / $165.00, plus $50.00 per re-inspection). Failure to get the certificate can bring a fine up to $2500.00. The email fireoffice2@westmilford.org comes from the state fire directory; the Township contact page publishes no staff emails. Fire Inspector Kevin Townsend and Fire Prevention Secretary Tara Ariola share 973-728-2840. The six volunteer fire companies handle emergency response only."
+ },
+ "other_items": [],
+ "open_questions": [],
+ "verification": {
+  "fees": 5,
+  "fee_ok": 5,
+  "fee_bad": 0,
+  "fee_unchecked": 0,
+  "quotes": 12,
+  "q_ok": 12,
+  "q_bad": 0,
+  "q_unchecked": 0
+ }
+}

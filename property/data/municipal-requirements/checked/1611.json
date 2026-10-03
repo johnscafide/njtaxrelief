@@ -1,0 +1,234 @@
+{
+ "municipality_code": "1611",
+ "municipality": "Ringwood Borough",
+ "county": "PASSAIC",
+ "checked_at": "2026-10-02",
+ "resale_co": {
+  "status": "not_required",
+  "name": "No resale Certificate of Continued Occupancy (optional letter stating a CCO is not required)",
+  "issued_by": "Ringwood Building Department",
+  "lead_time": "For the optional letter: request in writing and allow ample time before closing",
+  "valid_for": "",
+  "requirements": [],
+  "fees": [
+   {
+    "label": "Optional letter stating that a Certificate of Continued Occupancy is not required",
+    "amount": "$15.00",
+    "quote": "If you need a letter stating that a CCO is not required, you must request it in writing and include the fee of $15.00, payable to Borough of Ringwood.",
+    "source_url": "https://ringwoodnj.net/content/2347/2355/14086.aspx",
+    "verified": true
+   },
+   {
+    "label": "More than 10 business days between application and inspection date",
+    "amount": "$50.00",
+    "quote": "More than 10 business days between application and inspection date ........................ $50.00",
+    "source_url": "https://www.ringwoodnj.net/filestorage/2347/20840/Fire_inspection_application_and_instructions_-09-2023_revision.pdf",
+    "verified": true
+   },
+   {
+    "label": "Four to 10 business days between application and inspection date",
+    "amount": "$85.00",
+    "quote": "Four to 10 business days between application and inspection date ............................ $85.00",
+    "source_url": "https://www.ringwoodnj.net/filestorage/2347/20840/Fire_inspection_application_and_instructions_-09-2023_revision.pdf",
+    "verified": true
+   },
+   {
+    "label": "Three business days or less between application and inspection date",
+    "amount": "$140.00",
+    "quote": "Three business days or less between application and inspection date ...................... $140.00",
+    "source_url": "https://www.ringwoodnj.net/filestorage/2347/20840/Fire_inspection_application_and_instructions_-09-2023_revision.pdf",
+    "verified": true
+   },
+   {
+    "label": "Re-inspection: same rate as the initial inspection fee",
+    "amount": "$50.00 to $140.00",
+    "quote": "More than 10 business days between application and inspection date ... $50.00 ... Three business days or less between application and inspection date ... $140.00 (counting from the next business day after the application and fee are received) The fee for a re-inspection shall be at the same rate as the initial inspection fee.",
+    "source_url": "https://www.ringwoodnj.net/filestorage/2347/20840/Fire_inspection_application_and_instructions_-09-2023_revision.pdf",
+    "verified": true
+   }
+  ],
+  "how_to_apply": "No resale certificate is needed. If a closing attorney or lender wants a letter saying no CCO is required, send a written request with a $15.00 payment to the Borough of Ringwood Building Department, 60 Margaret King Avenue, 1st floor.",
+  "application_url": "",
+  "department_url": "https://www.ringwoodnj.net/content/2347/2355/default.aspx",
+  "phone": "973-962-7880",
+  "email": "building@ringwoodnj.net",
+  "contact_name": "Michael Hafner",
+  "contact_title": "Construction Official/Building Subcode Official/Zoning Officer/Code Enforcement Officer",
+  "evidence": [
+   {
+    "url": "https://ringwoodnj.net/content/2347/2355/14086.aspx",
+    "quote": "Does Ringwood require a CCO inspection upon resale of a home? No, but you ARE required to have the smoke alarm devices inspected.",
+    "doc_date": "",
+    "via": "page",
+    "verified": true
+   },
+   {
+    "url": "https://ringwoodnj.net/content/2347/2355/14086.aspx",
+    "quote": "Ringwood does not have a Certificate of Continued Occupancy program for the sale of a residential home [Ordinance 40-17.3 (b)] .",
+    "doc_date": "",
+    "via": "page",
+    "verified": true
+   },
+   {
+    "url": "https://ringwoodnj.net/content/2347/2355/14086.aspx",
+    "quote": "An existing building that conformed to the code when it was built is not required to conform to newer building codes.",
+    "doc_date": "",
+    "via": "page",
+    "verified": true
+   },
+   {
+    "url": "https://www.ringwoodnj.net/content/2347/2355/default.aspx",
+    "quote": "The Building Department is located at 60 Margaret King Avenue, 1st floor Phone 973-962-7880 Fax 973-962-7823 Email building@ringwoodnj.net Michael Hafner Construction Official/Building Subcode Official/Zoning Officer/Code Enforcement Officer",
+    "doc_date": "",
+    "via": "page",
+    "verified": true
+   }
+  ],
+  "confidence": "high",
+  "notes": "The Building Department's 'Buying or Selling a Home?' page says Ringwood has no Certificate of Continued Occupancy program for the sale of a home (Ordinance 40-17.3(b)); only the smoke alarm and carbon monoxide alarm certificate from the Fire Prevention Bureau is needed. An optional letter confirming no CCO is required costs $15.00 by written request. The page also says underground oil tanks in use and not leaking may stay, and that septic and well questions go to the Health Department (973-962-7079) through an OPRA request. Technical Assistant to the Construction Official: Audrey Schaffner."
+ },
+ "fire_cert": {
+  "requirements": [
+   "All smoke alarms must be less than 10 years old and UL listed; battery-only alarms must be sealed 10-year units; NEST battery alarms are not accepted",
+   "Homes with 110-volt interconnected smoke alarms must keep that system working and cannot switch to battery alarms",
+   "Older homes without hardwired alarms need at least one battery smoke alarm on every level, including the basement and a habitable attic",
+   "Any low-voltage fire alarm system must be active and monitored by an alarm company at the inspection",
+   "Smoke alarms in the hallway within 10 feet of all bedroom doors; basement alarm within 10 feet of the bottom of the stairs, not in the stairwell",
+   "Alarms mounted on the ceiling (or on the wall 4 to 12 inches from the ceiling), at least 4 inches from the wall-ceiling corner and at least 3 feet from steamy bathrooms, ceiling fan blades and HVAC supply vents",
+   "Carbon monoxide alarms on every level with sleeping areas, within 10 feet of bedroom doors (not inside bedrooms), less than 7 years old",
+   "Homes with solar panels, generators or battery backup need a durable printed label (letters at least 3/8 inch) within 18 inches of the main panel and the outside meter; handwritten labels are not accepted",
+   "Fire extinguishers are no longer required",
+   "Dogs must be contained when the inspector arrives"
+  ],
+  "authorities": [
+   {
+    "name": "Ringwood Fire Prevention Bureau (Borough Fire Official)",
+    "type": "municipal_fire_bureau",
+    "area_served": "Entire borough",
+    "lead_time": "More than 10 business days between application and inspection for the lowest fee; inspections are on Wednesdays. The certificate is issued on site and is valid for 6 months or until another change of occupancy.",
+    "fees": [
+     {
+      "label": "More than 10 business days between application and inspection date",
+      "amount": "$50.00",
+      "quote": "More than 10 business days between application and inspection date ........................ $50.00",
+      "source_url": "https://www.ringwoodnj.net/filestorage/2347/20840/Fire_inspection_application_and_instructions_-09-2023_revision.pdf",
+      "verified": true
+     },
+     {
+      "label": "Four to 10 business days between application and inspection date",
+      "amount": "$85.00",
+      "quote": "Four to 10 business days between application and inspection date ............................ $85.00",
+      "source_url": "https://www.ringwoodnj.net/filestorage/2347/20840/Fire_inspection_application_and_instructions_-09-2023_revision.pdf",
+      "verified": true
+     },
+     {
+      "label": "Three business days or less between application and inspection date",
+      "amount": "$140.00",
+      "quote": "Three business days or less between application and inspection date ...................... $140.00",
+      "source_url": "https://www.ringwoodnj.net/filestorage/2347/20840/Fire_inspection_application_and_instructions_-09-2023_revision.pdf",
+      "verified": true
+     },
+     {
+      "label": "Re-inspection: same rate as the initial inspection fee",
+      "amount": "$50.00 to $140.00",
+      "quote": "More than 10 business days between application and inspection date ... $50.00 ... Three business days or less between application and inspection date ... $140.00 (counting from the next business day after the application and fee are received) The fee for a re-inspection shall be at the same rate as the initial inspection fee.",
+      "source_url": "https://www.ringwoodnj.net/filestorage/2347/20840/Fire_inspection_application_and_instructions_-09-2023_revision.pdf",
+      "verified": true
+     }
+    ],
+    "how_to_apply": "Fill out page 1 of the Fire Prevention Bureau application (Application for Change of Residential Occupancy, revised 07/2026) and bring or mail it to the Ringwood Municipal Building, 60 Margaret King Avenue, with the fee in exact cash or a check payable to the Borough of Ringwood. Fees count from the next business day after the application and fee are received. A failed inspection needs a new application and fee.",
+    "application_url": "https://www.ringwoodnj.net/filestorage/2347/20840/Fire_inspection_application_and_instructions_-09-2023_revision.pdf",
+    "department_url": "https://ringwoodnj.net/content/2347/2355/14098.aspx",
+    "phone": "(973) 475-7132",
+    "email": "sconley@ringwoodnj.net",
+    "contact_name": "Scott Conley",
+    "contact_title": "Fire Official",
+    "evidence": [
+     {
+      "url": "https://ringwoodnj.net/content/2347/2355/14098.aspx",
+      "quote": "Scott Conley, Fire Official (973) 475-7132; sconley@ringwoodnj.net Office Hours: Wednesdays & Thursdays from 8:30am - 4:30pm",
+      "doc_date": "",
+      "via": "page",
+      "verified": true
+     },
+     {
+      "url": "https://ringwoodnj.net/content/2347/2355/14098.aspx",
+      "quote": "Inspections are performed by the Borough's Fire Official every Wednesday from 10:00am to 2:00pm. Certificates are issued on site at the time of inspection, and are valid for six (6) months or until another change in occupancy occurs, whichever comes first.",
+      "doc_date": "",
+      "via": "page",
+      "verified": true
+     },
+     {
+      "url": "https://ringwoodnj.net/content/2347/2355/14098.aspx",
+      "quote": "STEP 2: Mail or bring your application to the Building Department, along with the applicable fee in exact cash or check payable to Borough of Ringwood.",
+      "doc_date": "",
+      "via": "page",
+      "verified": true
+     },
+     {
+      "url": "https://www.ringwoodnj.net/filestorage/2347/20840/Fire_inspection_application_and_instructions_-09-2023_revision.pdf",
+      "quote": "Application for Change of Residential Occupancy Revised 07/2026",
+      "doc_date": "2026-07 (form revision; file name says 09-2023)",
+      "via": "pdf",
+      "verified": true
+     },
+     {
+      "url": "https://www.ringwoodnj.net/filestorage/2347/20840/Fire_inspection_application_and_instructions_-09-2023_revision.pdf",
+      "quote": "Application for inspection is made at the Ringwood Municipal Building, Fire Prevention Bureau in person or by mail. A fee is required for each compliance certificate inspection, to be paid with exact cash or check payable to the Borough of Ringwood.",
+      "doc_date": "2026-07",
+      "via": "pdf",
+      "verified": true
+     },
+     {
+      "url": "https://www.ringwoodnj.net/filestorage/2347/20840/Fire_inspection_application_and_instructions_-09-2023_revision.pdf",
+      "quote": "Inspections are performed on Wednesdays between 10:00 am and 4:00 pm. Specific appointment times are not provided or available.",
+      "doc_date": "2026-07",
+      "via": "pdf",
+      "verified": true
+     },
+     {
+      "url": "https://www.ringwoodnj.net/filestorage/2347/20840/Fire_inspection_application_and_instructions_-09-2023_revision.pdf",
+      "quote": "The State of New Jersey has repealed the law requiring fire extinguishers in 1 and 2 family dwellings to obtain a certificate of Smoke Alarm and Carbon Monoxide Compliance. No longer required.",
+      "doc_date": "2026-07",
+      "via": "pdf",
+      "verified": true
+     },
+     {
+      "url": "https://www.nj.gov/dca/dfs/pdf/fire%20directory_county%20summary/fire_code_enforcement_director.pdf",
+      "quote": "LEAID: 1611-001 Enf Auth. Municipal Fire Official Scott R Conley Phone (973) 475-7132 ... Email sconley@ringwoodnj.net",
+      "doc_date": "2026 (survey date 1/12/2026)",
+      "via": "state_directory",
+      "verified": true
+     },
+     {
+      "url": "https://nj.gov/dca/dfs/pdf/ANNUAL%20REGISTRY/THIRD%20QUARTER%20LEA%20REGISTRY%202026.pdf",
+      "quote": "M Ringwood Borough",
+      "doc_date": "2026-07",
+      "via": "pdf",
+      "verified": true
+     }
+    ],
+    "confidence": "high"
+   }
+  ],
+  "notes": "The Fire Prevention Bureau page says inspections are Wednesdays 10:00am to 2:00pm and to bring the application to the Building Department, while the current application form (revised 07/2026) says Wednesdays 10:00 am to 4:00 pm and to apply at the Fire Prevention Bureau (Municipal Building, 1st floor); no set appointment times are given. A change of occupancy without a certificate can bring a penalty of up to $500.00 to the seller. The form fax is (973) 962-6028. An older 5/2021 version of the form (same $50 / $85 / $140 fees, still listing fire extinguishers) also sits on the site. Ringwood's volunteer fire companies (Erskine Lakes, Ringwood Vol Fire Co #1, Skyline Lakes) handle emergency response only."
+ },
+ "other_items": [
+  {
+   "label": "Open building permits",
+   "detail": "The fire inspection form's office section asks whether there are open building permits; the Building Department offers a 'Do I Have Any Open Permits?' email link (building@ringwoodnj.net).",
+   "source_url": "https://www.ringwoodnj.net/content/2347/2355/default.aspx"
+  }
+ ],
+ "open_questions": [],
+ "verification": {
+  "fees": 5,
+  "fee_ok": 5,
+  "fee_bad": 0,
+  "fee_unchecked": 0,
+  "quotes": 13,
+  "q_ok": 13,
+  "q_bad": 0,
+  "q_unchecked": 0
+ }
+}

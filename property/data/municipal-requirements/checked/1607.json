@@ -1,0 +1,240 @@
+{
+ "municipality_code": "1607",
+ "municipality": "Passaic City",
+ "county": "PASSAIC",
+ "checked_at": "2026-10-02",
+ "resale_co": {
+  "status": "required",
+  "name": "Occupancy Certificate (Continued Occupancy Certificate)",
+  "issued_by": "City of Passaic Inspections & Code, Division of Housing",
+  "lead_time": "Apply at least 2 weeks before closing. If the inspection passes and all final approvals are in, the Continued Occupancy Certificate is issued in 5 to 7 business days; expedited service (5 days or less) costs $300.00 extra.",
+  "valid_for": "",
+  "requirements": [
+   "Inspection for compliance with Passaic's property maintenance and zoning laws",
+   "Buyer's full contact information on the application (otherwise it is put on hold); the certificate is issued in the buyer's name",
+   "Companies buying must give the registered agent's name and a copy of the certificate of formation",
+   "Buyer signs a notarized Purchaser's Form agreeing that the cellar is used only for storage (no sleeping, dwelling or rooming use, no partition walls)",
+   "Fire Prevention smoke detector and carbon monoxide alarm certification is part of the occupancy certificate requirements",
+   "Vacant properties are inspected even without utilities and must stay vacant until violations are fixed and permits are finalized with the Building Department",
+   "Cancel inspections at least 24 hours ahead; open applications are voided 60 days after the compliance date"
+  ],
+  "fees": [
+   {
+    "label": "Occupancy Certificate, one family",
+    "amount": "$65.00",
+    "quote": "CERTIFICATE FEE: $65.00",
+    "source_url": "https://www.cityofpassaic.com/DocumentCenter/View/12159/One-Family---OC-Application",
+    "verified": true
+   },
+   {
+    "label": "Occupancy Certificate, two family",
+    "amount": "$100.00",
+    "quote": "CERTIFICATE FEE: $100.00",
+    "source_url": "https://www.cityofpassaic.com/DocumentCenter/View/12160/Two-Family---OC-Application",
+    "verified": true
+   },
+   {
+    "label": "Expedited certificate (5 days or less), in addition to the certificate fee",
+    "amount": "$300.00",
+    "quote": "Expedited Certificates ( for Continued OC or TCO): o This service fee is $300.00 and completed within five (5) days or less.",
+    "source_url": "https://www.cityofpassaic.com/DocumentCenter/View/10397/Guidelines-to-Apply-for-Occupancy--Temporary-Occupancy-Certificates",
+    "verified": "eye"
+   },
+   {
+    "label": "Re-inspection after a missed appointment or when fewer than 60% of units can be inspected ($50 or $20 per unit, whichever is less)",
+    "amount": "$50 or $20 per unit, whichever is less",
+    "quote": "the applicant will be required to pay a re-inspection fee of $50 or $20 per unit, whichever is less.",
+    "source_url": "https://www.cityofpassaic.com/DocumentCenter/View/10397/Guidelines-to-Apply-for-Occupancy--Temporary-Occupancy-Certificates",
+    "verified": "eye"
+   },
+   {
+    "label": "Smoke detector and carbon monoxide alarm certification, initial inspection",
+    "amount": "$45.00",
+    "quote": "INITIAL INSPECTION FEE: $45.00",
+    "source_url": "https://www.cityofpassaic.com/DocumentCenter/View/12581/Application-for-Fire-Certification-",
+    "verified": "eye"
+   },
+   {
+    "label": "Re-inspection",
+    "amount": "$25.00",
+    "quote": "RE-INSPECTION FEE: $25.00",
+    "source_url": "https://www.cityofpassaic.com/DocumentCenter/View/12581/Application-for-Fire-Certification-",
+    "verified": "eye"
+   }
+  ],
+  "how_to_apply": "Fill out the Division of Housing Occupancy Certificate Application for a one family or two family home (seller, buyer and room details, signed affidavit), plus the notarized Purchaser's Form and the Fire Prevention Application for Fire Certification. Submit to the Division of Housing, City Hall, 330 Passaic Street, with the fee by money order, check or cash. Inspection and violation reports are emailed to the seller and buyer.",
+  "application_url": "https://www.cityofpassaic.com/DocumentCenter/View/12159/One-Family---OC-Application",
+  "department_url": "https://www.cityofpassaic.com/248/Housing",
+  "phone": "973-365-5615",
+  "email": "jcruz@cityofpassaicnj.gov",
+  "contact_name": "Jacqueline Cruz",
+  "contact_title": "Housing Secretary (Director of Inspection & Code: Joe Colon, 973-365-5551, jcolon@cityofpassaicnj.gov)",
+  "evidence": [
+   {
+    "url": "https://www.cityofpassaic.com/DocumentCenter/View/10397/Guidelines-to-Apply-for-Occupancy--Temporary-Occupancy-Certificates",
+    "quote": "Occupancy Certificate (OC): Recommended to apply at least two (2) weeks prior to closing date.",
+    "doc_date": "2025-03 (PDF created March 21, 2025)",
+    "via": "pdf",
+    "verified": "eye"
+   },
+   {
+    "url": "https://www.cityofpassaic.com/DocumentCenter/View/10397/Guidelines-to-Apply-for-Occupancy--Temporary-Occupancy-Certificates",
+    "quote": "If the property inspection passes and all final approvals obtained, a Continued Occupancy Certificate is issued within five (5) to seven (7) business days.",
+    "doc_date": "2025-03",
+    "via": "pdf",
+    "verified": "eye"
+   },
+   {
+    "url": "https://www.cityofpassaic.com/DocumentCenter/View/12159/One-Family---OC-Application",
+    "quote": "NOTE: THIS OCCUPANCY CERTIFICATE CERTIFIES THAT THE ABOVE REFERENCED PROPERTY IS IN COMPLIANCE WITH PASSAIC’S PROPERTY MAINTENANCE AND ZONING LAWS.",
+    "doc_date": "2026-03 (PDF modified March 13, 2026)",
+    "via": "pdf",
+    "verified": true
+   },
+   {
+    "url": "https://www.cityofpassaic.com/DocumentCenter/View/12159/One-Family---OC-Application",
+    "quote": "BUYER’S INFORMATION, NOTE: OCCUPANCY CERTIFICATE WILL BE ISSUED UNDER BUYER’S NAME",
+    "doc_date": "2026-03",
+    "via": "pdf",
+    "verified": true
+   },
+   {
+    "url": "https://www.cityofpassaic.com/DocumentCenter/View/12080/1-Family-Purchaser-Form",
+    "quote": "This form must be completed by the Buyer, it must be notarized and the original must be returned to this office.",
+    "doc_date": "",
+    "via": "pdf",
+    "verified": true
+   },
+   {
+    "url": "https://www.cityofpassaic.com/248/Housing",
+    "quote": "Jacqueline Cruz Housing Secretary Email Jacqueline Cruz Phone: 973-365-5615",
+    "doc_date": "2026-10-02 (page fetched; email from the page's mailto link)",
+    "via": "page",
+    "verified": true
+   },
+   {
+    "url": "https://www.cityofpassaic.com/248/Housing",
+    "quote": "Joe Colon Director of Inspection & Code Email Joe Colon Phone: 973-365-5551",
+    "doc_date": "2026-10-02 (page fetched; email from the page's mailto link)",
+    "via": "page",
+    "verified": true
+   }
+  ],
+  "confidence": "high",
+  "notes": "Passaic's Division of Housing issues an Occupancy Certificate (Continued Occupancy Certificate) on sale, checking property maintenance and zoning; it does not replace construction permits. Fees are from the City's current application forms (one family $65.00, two family $100.00; forms modified March 2026); the condo application is separate. A search result described Ordinance No. 2515-26 (final adoption February 17, 2026) as setting $65 for the first unit and $35 for each unit 2 through 20, which matches the forms, but the ordinance PDF links on the City site now return 'not found', so the ordinance text itself was not read. A Temporary Occupancy Certificate (escrow based on violations, issued in 2 to 3 business days, valid 30 days) is available. Changing the buyer's name after 30 days needs a new application and fees. Rentals are separate: tenant registrations with the Division of Housing (fee waived within 30 days of the certificate, otherwise $25.00 per unit), and a yearly heating system inspection certification (Ordinance 2339-22). Emails are taken from the mailto links on the Housing page."
+ },
+ "fire_cert": {
+  "requirements": [
+   "Smoke detectors and CO detectors on each level (basement, first and second floors; not crawl spaces or unfinished attics), battery or AC powered",
+   "Smoke and CO detectors outside each sleeping area and within 10 feet of bedrooms",
+   "Basement smoke detector as close to the stairwell as possible, not near the furnace; smoke detector in the stairwell to a finished attic",
+   "Smoke detectors in the common areas of two family homes",
+   "Occupied attics (where permitted): exterior flashing strobe connected to the smoke detectors at the roof peak on the street side (City Ordinance 125-3 L)",
+   "The City's current requirements sheet and form still call for a mounted, charged 2A-10BC fire extinguisher in or within 10 feet of the kitchen"
+  ],
+  "authorities": [
+   {
+    "name": "City of Passaic Fire Prevention Bureau (Passaic Fire Department)",
+    "type": "municipal_fire_bureau",
+    "area_served": "Entire city",
+    "lead_time": "Submitted with the Occupancy Certificate application (apply at least 2 weeks before closing). The certification is valid 3 months after approval.",
+    "fees": [
+     {
+      "label": "Smoke detector and carbon monoxide alarm certification, initial inspection",
+      "amount": "$45.00",
+      "quote": "INITIAL INSPECTION FEE: $45.00",
+      "source_url": "https://www.cityofpassaic.com/DocumentCenter/View/12581/Application-for-Fire-Certification-",
+      "verified": "eye"
+     },
+     {
+      "label": "Re-inspection",
+      "amount": "$25.00",
+      "quote": "RE-INSPECTION FEE: $25.00",
+      "source_url": "https://www.cityofpassaic.com/DocumentCenter/View/12581/Application-for-Fire-Certification-",
+      "verified": "eye"
+     }
+    ],
+    "how_to_apply": "Fill out the Application for Certification of Smoke Detector and Carbon Monoxide Alarm Compliance (buyer's name and contact) and file it with the Occupancy Certificate package; the certification is part of the occupancy certificate and cannot be used alone for closing.",
+    "application_url": "https://www.cityofpassaic.com/DocumentCenter/View/12581/Application-for-Fire-Certification-",
+    "department_url": "https://www.cityofpassaic.com/165/Fire-Prevention-Bureau",
+    "phone": "973-365-5687",
+    "email": "Hrawls@cityofpassaicnj.gov",
+    "contact_name": "Capt. Hershel Rawls IV",
+    "contact_title": "Fire Prevention - Fire Official (Bureau office email: FIREPREVENTION@CITYOFPASSAICNJ.GOV)",
+    "evidence": [
+     {
+      "url": "https://www.cityofpassaic.com/DocumentCenter/View/12581/Application-for-Fire-Certification-",
+      "quote": "NOTE: CERTIFICATION IS VALID FOR THREE (3) MONTHS AFTER APPROVAL DATE AND ONLY APPROVED FOR USE BY THE INDIVIDUAL LISTED ABOVE. THIS CERTIFICATION IS PART OF THE OCCUPANCY CERTIFICATE REQUIREMENTS FOR THE SALE/PURCHASE OF A PROPERTY AND NOT TO BE USED AS A STANDALONE DOCUMENT FOR CLOSING PURPOSES.",
+      "doc_date": "2026-05 (PDF created April 13, 2026, modified May 4, 2026)",
+      "via": "pdf",
+      "verified": "eye"
+     },
+     {
+      "url": "https://www.cityofpassaic.com/DocumentCenter/View/12581/Application-for-Fire-Certification-",
+      "quote": "CITY OF PASSAIC | FIRE PREVENTION BUREAU OFFICE: 973-365-5687  | EMAIL: FIREPREVENTION@CITYOFPASSAICNJ.GOV",
+      "doc_date": "2026-05",
+      "via": "pdf",
+      "verified": "eye"
+     },
+     {
+      "url": "https://www.cityofpassaic.com/DocumentCenter/View/12580/Requirements-for-Smoke-Detector-Carbon-Monoxide--Fire-Extinguisher",
+      "quote": "FIRE EXTINGUISHERS (2A-10BC FIRE EXTINGUISHER) MUST BE MOUNTED IN THE KITCHEN OR WITHIN 10 FEET OF THE KITCHEN, FULLY CHARGED AND ACCESSIBLE AT ALL TIMES.",
+      "doc_date": "2026 (posted with the 2026 forms; undated)",
+      "via": "pdf",
+      "verified": "eye"
+     },
+     {
+      "url": "https://www.cityofpassaic.com/165/Fire-Prevention-Bureau",
+      "quote": "If you have any additional questions regarding the fire safety of your premises, please contact Capt. Hershel Rawls IV, call him 973-365-5687 or email him at Hrawls@cityofpassaicnj.gov",
+      "doc_date": "2026-10-02 (page fetched)",
+      "via": "page",
+      "verified": true
+     },
+     {
+      "url": "https://nj.gov/dca/dfs/pdf/ANNUAL%20REGISTRY/THIRD%20QUARTER%20LEA%20REGISTRY%202026.pdf",
+      "quote": "F Passaic City",
+      "doc_date": "2026-07",
+      "via": "pdf",
+      "verified": true
+     },
+     {
+      "url": "https://www.nj.gov/dca/dfs/pdf/fire%20directory_county%20summary/fire_code_enforcement_director.pdf",
+      "quote": "16 Passaic Passaic City1607 ... LEAID: 1607-001 Enf Auth. Fire Dept Fire Official Hershel Rawls Phone (973) 365-5687 Addr: 330 Passaic St Passaic NJ 07055 ... Email hrawls@cityofpassaicnj.gov ... Passaic City Fire Prev",
+      "doc_date": "2026-01-12 (survey date)",
+      "via": "state_directory",
+      "verified": true
+     }
+    ],
+    "confidence": "high"
+   }
+  ],
+  "notes": "The Passaic Fire Department's Fire Prevention Bureau is the fire code enforcing agency and inspects smoke and CO alarms as part of the Occupancy Certificate process; its fee ($45.00 initial, $25.00 re-inspection) is separate from the Division of Housing certificate fee. A 90-day temporary certification can be issued. The City's 2026 fire certification form and requirements sheet still check for a fire extinguisher even though P.L.2025, c.19 removed it from the state sale certificate; confirm with the Bureau. Three-family and larger buildings need a hardwired common-area fire alarm system with an NFPA 72 report."
+ },
+ "other_items": [
+  {
+   "label": "Cellar use affidavit",
+   "detail": "Buyer signs a notarized Purchaser's Form that the cellar will be used only for storage, not sleeping or dwelling use.",
+   "source_url": "https://www.cityofpassaic.com/DocumentCenter/View/12080/1-Family-Purchaser-Form"
+  },
+  {
+   "label": "Permits for violations",
+   "detail": "Vacant properties must stay vacant until violations are fixed and permit paperwork is finalized with the Building Department.",
+   "source_url": "https://www.cityofpassaic.com/DocumentCenter/View/10397/Guidelines-to-Apply-for-Occupancy--Temporary-Occupancy-Certificates"
+  }
+ ],
+ "open_questions": [
+  "How long is the Continued Occupancy Certificate valid after issue?",
+  "Is the fire extinguisher still required at the Fire Prevention inspection after P.L.2025, c.19?",
+  "Confirm the adopted text of Ordinance No. 2515-26 (the City's PDF links return not found)."
+ ],
+ "verification": {
+  "fees": 6,
+  "fee_ok": 6,
+  "fee_bad": 0,
+  "fee_unchecked": 0,
+  "quotes": 13,
+  "q_ok": 13,
+  "q_bad": 0,
+  "q_unchecked": 0
+ }
+}

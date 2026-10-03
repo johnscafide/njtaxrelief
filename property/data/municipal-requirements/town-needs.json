@@ -606,6 +606,64 @@
    ]
   },
   {
+   "code": "1608",
+   "town": "Paterson City",
+   "county": "Passaic",
+   "live": false,
+   "needs": [
+    "co_required",
+    "fire_fee"
+   ]
+  },
+  {
+   "code": "1614",
+   "town": "Wayne Township",
+   "county": "Passaic",
+   "live": false,
+   "needs": [
+    "co_required",
+    "co_contact"
+   ]
+  },
+  {
+   "code": "2005",
+   "town": "Fanwood Borough",
+   "county": "Union",
+   "live": false,
+   "needs": [
+    "co_required"
+   ]
+  },
+  {
+   "code": "2016",
+   "town": "Scotch Plains Township",
+   "county": "Union",
+   "live": false,
+   "needs": [
+    "co_required",
+    "fire_fee"
+   ]
+  },
+  {
+   "code": "2017",
+   "town": "Springfield Township",
+   "county": "Union",
+   "live": false,
+   "needs": [
+    "co_required"
+   ]
+  },
+  {
+   "code": "2021",
+   "town": "Winfield Township",
+   "county": "Union",
+   "live": false,
+   "needs": [
+    "co_required",
+    "fire_fee"
+   ]
+  },
+  {
    "code": "2101",
    "town": "Allamuchy Township",
    "county": "Warren",

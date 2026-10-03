@@ -1,0 +1,287 @@
+{
+ "municipality_code": "2015",
+ "municipality": "Roselle Park Borough",
+ "county": "UNION",
+ "checked_at": "2026-10-02",
+ "resale_co": {
+  "status": "required",
+  "name": "Resale Certificate (residential)",
+  "issued_by": "Borough Code Enforcement Officer (Department of Code Enforcement)",
+  "lead_time": "Inspections are normally scheduled within 10 days after the application is submitted and the fee is paid",
+  "valid_for": "",
+  "requirements": [
+   "All open construction permits closed and any Construction Code Official violation notice fully resolved",
+   "Compliance with the Borough Property Maintenance Code (Chapter 19) and Fire Prevention and Protection chapter (Chapter 22)",
+   "Compliance with the Borough lead-based paint inspection and rental housing sections where they apply to the building",
+   "Smoke alarm and carbon monoxide alarm certificate from the Fire Prevention Official",
+   "Sump pumps must discharge outside the home or into the street gutter line, never into the sanitary sewer",
+   "House numbers clearly visible from the street, at least 4 inches high, block numbers (no script), on a contrasting background",
+   "A temporary resale certificate (up to 90 days) is possible when the buyer signs an affidavit agreeing to fix listed deficiencies"
+  ],
+  "fees": [
+   {
+    "label": "Resale Certificate (residential), first dwelling unit (Ordinance 2863, adopted August 20, 2026)",
+    "amount": "$60",
+    "quote": "Resale Certificate (residential) $60 for first dwelling unit, then $20 for each additional unit",
+    "source_url": "https://www.rosellepark.gov/DocumentCenter/View/795/Posted-08-26-2026-Notice-of-Adoption-Ordinance-No-2863",
+    "verified": true
+   },
+   {
+    "label": "Resale Certificate (residential), each additional dwelling unit (Ordinance 2863)",
+    "amount": "$20",
+    "quote": "Resale Certificate (residential) $60 for first dwelling unit, then $20 for each additional unit",
+    "source_url": "https://www.rosellepark.gov/DocumentCenter/View/795/Posted-08-26-2026-Notice-of-Adoption-Ordinance-No-2863",
+    "verified": true
+   },
+   {
+    "label": "Smoke detector certificate, single family (Fire Department fee schedule, Ordinance 2863)",
+    "amount": "$70",
+    "quote": "Single family smoke detector certificate $70",
+    "source_url": "https://www.rosellepark.gov/DocumentCenter/View/795/Posted-08-26-2026-Notice-of-Adoption-Ordinance-No-2863",
+    "verified": true
+   },
+   {
+    "label": "Smoke detector certificate, multi-family, up to 4 dwelling units (applies to a two-family home)",
+    "amount": "$100",
+    "quote": "Multi-family smoke detector certificate $100 for up to 4 dwelling units, then $25 for each additional unit",
+    "source_url": "https://www.rosellepark.gov/DocumentCenter/View/795/Posted-08-26-2026-Notice-of-Adoption-Ordinance-No-2863",
+    "verified": true
+   },
+   {
+    "label": "Smoke detector certificate, each additional unit above 4",
+    "amount": "$25",
+    "quote": "Multi-family smoke detector certificate $100 for up to 4 dwelling units, then $25 for each additional unit",
+    "source_url": "https://www.rosellepark.gov/DocumentCenter/View/795/Posted-08-26-2026-Notice-of-Adoption-Ordinance-No-2863",
+    "verified": true
+   }
+  ],
+  "how_to_apply": "The Borough website still posts the 2024 'Application for Resale Certificate (Residential Sales Only)' from the Department of Code Enforcement: fill in the closing date, block and lot, property type and owner details, and pay by check, money order or exact cash to 'Borough of Roselle Park'. Inspections are scheduled Monday to Thursday. Code Enforcement is on the 2nd floor of the Municipal Complex, 110 E Westfield Ave, phone 908-245-2721. Ordinance 2863 (August 2026) says new forms may be set up, including online submission, so call to confirm which form and fee apply now.",
+  "application_url": "https://www.rosellepark.gov/DocumentCenter/View/134/Residential-Resale-Certificate-Application-PDF",
+  "department_url": "https://www.rosellepark.gov/directory.aspx?did=16",
+  "phone": "908-245-6222 Ext 1201",
+  "email": "",
+  "contact_name": "Judy Mack",
+  "contact_title": "Deputy Code Enforcement Officer",
+  "evidence": [
+   {
+    "url": "https://www.rosellepark.gov/DocumentCenter/View/795/Posted-08-26-2026-Notice-of-Adoption-Ordinance-No-2863",
+    "quote": "Resale Certificate required.  Unless otherwise exempted pursuant to this Chapter, no property owner shall sell any building or structure within the Borough of Roselle Park unless that property owner first obtains a resale certificate pursuant to the procedures established in this Chapter.",
+    "doc_date": "2026-08-20 (adopted; notice published 2026-08-26)",
+    "via": "pdf",
+    "verified": true
+   },
+   {
+    "url": "https://www.rosellepark.gov/DocumentCenter/View/795/Posted-08-26-2026-Notice-of-Adoption-Ordinance-No-2863",
+    "quote": "Issuing authority.  A resale certificate shall be issued by the Borough’s Code Enforcement Officer, or such other official as be designated by the Borough’s Administrator",
+    "doc_date": "2026-08-20",
+    "via": "pdf",
+    "verified": true
+   },
+   {
+    "url": "https://www.rosellepark.gov/DocumentCenter/View/795/Posted-08-26-2026-Notice-of-Adoption-Ordinance-No-2863",
+    "quote": "Certificate of Smoke Alarm and Carbon Monoxide Alarm Compliance (generally known as a “smoke detector certificate”) where required, to be issued by the Fire Prevention Official.",
+    "doc_date": "2026-08-20",
+    "via": "pdf",
+    "verified": true
+   },
+   {
+    "url": "https://www.rosellepark.gov/DocumentCenter/View/795/Posted-08-26-2026-Notice-of-Adoption-Ordinance-No-2863",
+    "quote": "No resale certificate may be issued if the property is subject to an open permit from the Construction Code Official or any violation notice issued by the Construction Code Official has not been fully and finally resolved.",
+    "doc_date": "2026-08-20",
+    "via": "pdf",
+    "verified": true
+   },
+   {
+    "url": "https://www.rosellepark.gov/DocumentCenter/View/795/Posted-08-26-2026-Notice-of-Adoption-Ordinance-No-2863",
+    "quote": "Inspections shall normally be scheduled within ten (10) days after the application is submitted and required fees paid.",
+    "doc_date": "2026-08-20",
+    "via": "pdf",
+    "verified": true
+   },
+   {
+    "url": "https://www.rosellepark.gov/DocumentCenter/View/795/Posted-08-26-2026-Notice-of-Adoption-Ordinance-No-2863",
+    "quote": "The Issuing Authority may issue a temporary resale certificate for a period not to exceed ninety (90) days",
+    "doc_date": "2026-08-20",
+    "via": "pdf",
+    "verified": true
+   },
+   {
+    "url": "https://www.rosellepark.gov/DocumentCenter/View/134/Residential-Resale-Certificate-Application-PDF",
+    "quote": "This certificate will cover the smoke, carbon monoxide, and fire extinguisher requirement which must be obtained prior to the closing of the property.",
+    "doc_date": "2024-09-18 (PDF creation date)",
+    "via": "pdf",
+    "verified": true
+   },
+   {
+    "url": "https://www.rosellepark.gov/DocumentCenter/View/134/Residential-Resale-Certificate-Application-PDF",
+    "quote": "$70.00 for Single-Family, $100.00 for Two-Family,",
+    "doc_date": "2024-09-18 (PDF creation date)",
+    "via": "pdf",
+    "verified": true
+   },
+   {
+    "url": "https://www.rosellepark.gov/DocumentCenter/View/723/Resale-Certificate-Requirements-Smoke-Detectors-PDF",
+    "quote": "NO SUMP PUMP SHALL DISCHARGE INTO THE SANITARY SEWER SYSTEM",
+    "doc_date": "2026-05-26 (PDF creation date)",
+    "via": "pdf",
+    "verified": true
+   },
+   {
+    "url": "https://www.rosellepark.gov/directory.aspx?did=16",
+    "quote": "Judy Mack Deputy Code Enforcement Officer",
+    "doc_date": "",
+    "via": "page",
+    "verified": true
+   },
+   {
+    "url": "https://www.rosellepark.gov/directory.aspx?did=16",
+    "quote": "908-245-6222 Ext 1201",
+    "doc_date": "",
+    "via": "page",
+    "verified": true
+   }
+  ],
+  "confidence": "medium",
+  "notes": "Ordinance No. 2863 (introduced June 18, 2026, adopted August 20, 2026, effective on publication of the adoption notice, posted 08-26-2026) creates a Borough Resale Certificate that every seller of a building must obtain before the sale, issued by the Code Enforcement Officer after a general visual inspection. It is exempt when the property is sold within 3 months after a Certificate of Occupancy with an affidavit that no rehabilitation work was done. Penalties are $100 to $2,000 per violation, each day a separate violation. The same ordinance deleted the old smoke detector fee from section 40-3103H and moved the smoke certificate fee to the Fire Department fee schedule. The Borough website still posts the older 2024 'Application for Resale Certificate' (Department of Code Enforcement, citing Code section 40-3103H) whose fee box reads '$70.00 for Single-Family, $100.00 for Two-Family, and $25.00 for each additional unit in Multi-Family'; that form says the certificate covers the smoke, CO and fire extinguisher requirement. The form and the new ordinance disagree on what the Resale Certificate costs, so the ordinance amounts are used and the town is on the call sheet. The Code Enforcement directory lists a second number for Judy Mack, 908-245-6706, which is also the smoke detector compliance number in the state fire directory. Her email is shown on the Borough site only behind email protection and was not decoded. Kim Brown (Technical Assistant to the Construction Official, Zoning Officer, 908-245-6222 Ext 1200) also works in this office. Rental housing (Chapter 18) is a separate program. The old domain rosellepark.net now redirects to rosellepark.gov."
+ },
+ "fire_cert": {
+  "requirements": [
+   "Ten-year sealed battery or hardwired interconnected smoke alarms on each level and in the bedroom area, including basements and finished attics",
+   "CO detection outside all sleeping areas; with any fuel-burning appliance, also on the floor below, the floor where the appliance is, and the floor above",
+   "Fire extinguisher still listed on the Borough's May 2026 requirements sheet: at least one 2A:10BC, no more than 10 pounds, visible within 10 feet of the kitchen near an exit path, mounted no more than 5 feet off the floor, not in a cabinet or behind a closed door"
+  ],
+  "authorities": [
+   {
+    "name": "Roselle Park Fire Prevention Bureau (Fire Official)",
+    "type": "municipal_fire_bureau",
+    "area_served": "Entire borough",
+    "lead_time": "",
+    "fees": [
+     {
+      "label": "Smoke detector certificate, single family (Fire Department fee schedule, Ordinance 2863)",
+      "amount": "$70",
+      "quote": "Single family smoke detector certificate $70",
+      "source_url": "https://www.rosellepark.gov/DocumentCenter/View/795/Posted-08-26-2026-Notice-of-Adoption-Ordinance-No-2863",
+      "verified": true
+     },
+     {
+      "label": "Smoke detector certificate, multi-family, up to 4 dwelling units (applies to a two-family home)",
+      "amount": "$100",
+      "quote": "Multi-family smoke detector certificate $100 for up to 4 dwelling units, then $25 for each additional unit",
+      "source_url": "https://www.rosellepark.gov/DocumentCenter/View/795/Posted-08-26-2026-Notice-of-Adoption-Ordinance-No-2863",
+      "verified": true
+     },
+     {
+      "label": "Smoke detector certificate, each additional unit above 4",
+      "amount": "$25",
+      "quote": "Multi-family smoke detector certificate $100 for up to 4 dwelling units, then $25 for each additional unit",
+      "source_url": "https://www.rosellepark.gov/DocumentCenter/View/795/Posted-08-26-2026-Notice-of-Adoption-Ordinance-No-2863",
+      "verified": true
+     }
+    ],
+    "how_to_apply": "Call the Fire Prevention Clerk at 908-245-6222 x1200; Fire Prevention Bureau staff are part-time and have no set office hours, so leave a message if routed to voicemail. Until a new form is posted, the Borough's posted resale application (Department of Code Enforcement, 2024) is the form that covers the smoke, CO and extinguisher requirement; pay by check, money order or exact cash to 'Borough of Roselle Park'.",
+    "application_url": "https://www.rosellepark.gov/DocumentCenter/View/134/Residential-Resale-Certificate-Application-PDF",
+    "department_url": "https://www.rosellepark.gov/193/Fire-Prevention-Bureau",
+    "phone": "908-245-6222 x1200",
+    "email": "jkopf@rosellepark.net",
+    "contact_name": "Joseph Kopf",
+    "contact_title": "Fire Official",
+    "evidence": [
+     {
+      "url": "https://www.rosellepark.gov/DocumentCenter/View/795/Posted-08-26-2026-Notice-of-Adoption-Ordinance-No-2863",
+      "quote": "Certificate of Smoke Alarm and Carbon Monoxide Alarm Compliance (generally known as a “smoke detector certificate”) where required, to be issued by the Fire Prevention Official.",
+      "doc_date": "2026-08-20",
+      "via": "pdf",
+      "verified": true
+     },
+     {
+      "url": "https://www.rosellepark.gov/193/Fire-Prevention-Bureau",
+      "quote": "The Fire Prevention Bureau is the local enforcing agency for the State Uniform Fire Safety Code.",
+      "doc_date": "",
+      "via": "page",
+      "verified": true
+     },
+     {
+      "url": "https://www.rosellepark.gov/193/Fire-Prevention-Bureau",
+      "quote": "those who have questions or concerns can call the Fire Prevention Clerk at 908-245-6222 x1200",
+      "doc_date": "",
+      "via": "page",
+      "verified": true
+     },
+     {
+      "url": "https://www.rosellepark.gov/194/Permit-Forms-Public-Documents",
+      "quote": "Joseph Kopf Fire Official",
+      "doc_date": "",
+      "via": "page",
+      "verified": true
+     },
+     {
+      "url": "https://www.rosellepark.gov/194/Permit-Forms-Public-Documents",
+      "quote": "Kimberly Brown Fire Prevention Clerk",
+      "doc_date": "",
+      "via": "page",
+      "verified": true
+     },
+     {
+      "url": "https://www.nj.gov/dca/dfs/pdf/fire%20directory_county%20summary/fire_code_enforcement_director.pdf",
+      "quote": "20 Union Roselle Park Borough2015 ... LEAID: 2015-001 Enf Auth. Fire Dept Fire Official Joseph E. Kopf III Phone (908) 245-6222 ... Email jkopf@rosellepark.net ... Roselle Park Boro Constr Office",
+      "doc_date": "survey 2026-06-03",
+      "via": "state_directory",
+      "verified": true
+     },
+     {
+      "url": "https://www.rosellepark.gov/DocumentCenter/View/723/Resale-Certificate-Requirements-Smoke-Detectors-PDF",
+      "quote": "SMOKE DETECTION: Ten-year sealed Battery or Hard-wired Interconnected smoke detection devices are required to be installed on each level of the home and in the area of the bedrooms. This includes basements and finished attics.",
+      "doc_date": "2026-05-26 (PDF creation date)",
+      "via": "pdf",
+      "verified": true
+     },
+     {
+      "url": "https://www.rosellepark.gov/DocumentCenter/View/723/Resale-Certificate-Requirements-Smoke-Detectors-PDF",
+      "quote": "the detection shall be on the floor below, the floor where the appliance is located and the floor above.",
+      "doc_date": "2026-05-26",
+      "via": "pdf",
+      "verified": true
+     },
+     {
+      "url": "https://www.rosellepark.gov/DocumentCenter/View/723/Resale-Certificate-Requirements-Smoke-Detectors-PDF",
+      "quote": "At least one functional portable fire extinguisher, with a minimum rating of 2A: 10BC and not weighing more than 10 pounds.",
+      "doc_date": "2026-05-26",
+      "via": "pdf",
+      "verified": true
+     }
+    ],
+    "confidence": "medium"
+   }
+  ],
+  "notes": "The NJ DCA July 2026 registry lists the Roselle Park Fire Department as the fire code enforcing agency. Ordinance 2863 (August 2026) says the smoke detector certificate is issued by the Fire Prevention Official and puts its fee in the Fire Department fee schedule ($70 single family; multi-family $100 for up to 4 units, then $25 per extra unit). Before that change the smoke certificate was handled through the Department of Code Enforcement as the 'Resale Certificate' ($70 single family, $100 two-family on the 2024 form), and the state fire directory still lists the Construction Office (phone (908) 245-6706) for smoke detector compliance. The Fire Official's email is from the state fire directory (rosellepark.net domain); the Borough site shows his email only behind email protection, which was not decoded. Fire Chief: Steven A. Thompson."
+ },
+ "other_items": [
+  {
+   "label": "Open building permits closed",
+   "detail": "All building permits must be closed by scheduling the final inspection with the Building Department (908-245-2721); the 2024 form says all building permits must be closed before the certificate is issued.",
+   "source_url": "https://www.rosellepark.gov/DocumentCenter/View/723/Resale-Certificate-Requirements-Smoke-Detectors-PDF"
+  },
+  {
+   "label": "Sump pump discharge",
+   "detail": "Sump pumps must discharge outside or into the street gutter, never into the sanitary sewer.",
+   "source_url": "https://www.rosellepark.gov/DocumentCenter/View/723/Resale-Certificate-Requirements-Smoke-Detectors-PDF"
+  }
+ ],
+ "open_questions": [
+  "Which form and fee the Borough now uses for the new Code Enforcement Resale Certificate ($60 first unit plus $20 per extra unit under Ordinance 2863) versus the still-posted 2024 form ($70 / $100)",
+  "Whether the smoke detector certificate now needs a separate application to the Fire Prevention Bureau",
+  "Lead time before closing and how long the certificates stay valid",
+  "Reinspection fee for either certificate"
+ ],
+ "verification": {
+  "fees": 5,
+  "fee_ok": 5,
+  "fee_bad": 0,
+  "fee_unchecked": 0,
+  "quotes": 20,
+  "q_ok": 20,
+  "q_bad": 0,
+  "q_unchecked": 0
+ }
+}

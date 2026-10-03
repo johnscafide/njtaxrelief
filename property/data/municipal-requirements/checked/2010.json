@@ -1,0 +1,154 @@
+{
+ "municipality_code": "2010",
+ "municipality": "Mountainside Borough",
+ "county": "UNION",
+ "checked_at": "2026-10-02",
+ "resale_co": {
+  "status": "not_required",
+  "name": "",
+  "issued_by": "",
+  "lead_time": "",
+  "valid_for": "",
+  "requirements": [],
+  "fees": [],
+  "how_to_apply": "No Borough resale Certificate of Occupancy. The only Borough document needed for the sale of a home is the smoke detector / carbon monoxide re-sale certification (see fire certificate).",
+  "application_url": "",
+  "department_url": "https://www.mountainside-nj.com/department/buildingzoningengineering/",
+  "phone": "908-232-2919",
+  "email": "jeger@mountainside-nj.com",
+  "contact_name": "Jerry Eger",
+  "contact_title": "Construction Official",
+  "evidence": [
+   {
+    "url": "https://www.mountainside-nj.com/department/buildingzoningengineering/",
+    "quote": "** Please note: this is the only document the Borough of Mountainside requires for sale of a home - we do not perform CO Inspections",
+    "doc_date": "2026-10-02 (page fetched)",
+    "via": "page",
+    "verified": true
+   },
+   {
+    "url": "https://www.mountainside-nj.com/department/buildingzoningengineering/",
+    "quote": "Mr. Jerry Eger Construction Official",
+    "doc_date": "2026-10-02",
+    "via": "page",
+    "verified": true
+   },
+   {
+    "url": "https://www.mountainside-nj.com/department/buildingzoningengineering/",
+    "quote": "Ms. Deanna Andre Technical Assistant to the Construction Official 908-232-2919",
+    "doc_date": "2026-10-02",
+    "via": "page",
+    "verified": true
+   }
+  ],
+  "confidence": "high",
+  "notes": "The Borough's Building/Zoning/Engineering page says the smoke detector re-sale certification is the only document the Borough requires for the sale of a home and that it does not perform CO (Certificate of Occupancy) inspections. Contact emails are taken from the mailto links on that page (Jerry Eger: jeger@mountainside-nj.com; Deanna Andre: dandre@mountainside-nj.com)."
+ },
+ "fire_cert": {
+  "requirements": [
+   "Smoke alarm on each level and outside each separate sleeping area",
+   "Battery-only smoke alarms must be 10-year sealed battery units (listed to ANSI/UL 217); hardwired alarms from original construction or rehabilitation may not be replaced with battery alarms",
+   "Carbon monoxide alarm in the immediate vicinity of the sleeping areas (battery, hardwired or plug-in)",
+   "Portable fire extinguisher within 10 feet of the kitchen, listed and labeled, rated at least 2A-10B:C and no more than 10 pounds (still listed on the Borough page as of October 2026, although the state dropped it from the sale certificate in February 2025)"
+  ],
+  "authorities": [
+   {
+    "name": "Borough of Mountainside Construction Department, Smoke Detector Re-Sale Certification (fire code enforcing agency: Scotch Plains Township under a shared service)",
+    "type": "municipal_fire_bureau",
+    "area_served": "Entire borough",
+    "lead_time": "After the fee is paid and the online form is submitted, the Borough sends an inspection date. Inspections are Tuesday 3 to 6 pm and Thursday 1:30 to 4:30 pm.",
+    "fees": [
+     {
+      "label": "Smoke detector, carbon monoxide alarm and portable fire extinguisher re-sale certification (residential)",
+      "amount": "$100.00",
+      "quote": "Once you have paid the $100.00 fee, completed and submitted the form you will be notified with an inspection date.",
+      "source_url": "https://www.mountainside-nj.com/department/buildingzoningengineering/",
+      "verified": true
+     }
+    ],
+    "how_to_apply": "Request the inspection online through the SDL Portal (www.sdlportal.com, Mountainside), pay the $100.00 fee and submit the form; the Borough then gives an inspection date. For online payment help call the construction office at 908.232.2919.",
+    "application_url": "",
+    "department_url": "https://www.mountainside-nj.com/department/buildingzoningengineering/",
+    "phone": "908-232-2919",
+    "email": "jeger@mountainside-nj.com",
+    "contact_name": "Jerry Eger",
+    "contact_title": "Construction Official (Technical Assistant: Ms. Deanna Andre, dandre@mountainside-nj.com)",
+    "evidence": [
+     {
+      "url": "https://www.mountainside-nj.com/department/buildingzoningengineering/",
+      "quote": "SMOKE DETECTOR RE-SALE/RE-LEASING CERTIFICATION (RESIDENTIAL ONLY) Smoke Detector/Carbon Monoxide and Portable Fire Extinguisher inspection requests can be made online through the SDL Portal.",
+      "doc_date": "2026-10-02 (page fetched)",
+      "via": "page",
+      "verified": true
+     },
+     {
+      "url": "https://www.mountainside-nj.com/department/buildingzoningengineering/",
+      "quote": "Once you have paid the $100.00 fee, completed and submitted the form you will be notified with an inspection date. Inspections take place: Tuesday, 3 to 6pm and Thursday, 1:30 to 4:30pm",
+      "doc_date": "2026-10-02",
+      "via": "page",
+      "verified": true
+     },
+     {
+      "url": "https://www.mountainside-nj.com/department/buildingzoningengineering/",
+      "quote": "A portable fire extinguisher shall be within 10 feet of the kitchen and shall be an approved listed and labeled type with a minimum rating of 2A-10B:C and no more than 10 pounds.",
+      "doc_date": "2026-10-02",
+      "via": "page",
+      "verified": true
+     },
+     {
+      "url": "https://www.mountainside-nj.com/department/buildingzoningengineering/",
+      "quote": "Requests for online payments must be made through the construction office by calling 908.232.2919.",
+      "doc_date": "2026-10-02",
+      "via": "page",
+      "verified": true
+     },
+     {
+      "url": "https://www.mountainside-nj.com/department/buildingzoningengineering/",
+      "quote": "Mr. Jerry Eger Construction Official",
+      "doc_date": "2026-10-02",
+      "via": "page",
+      "verified": true
+     },
+     {
+      "url": "https://nj.gov/dca/dfs/pdf/ANNUAL%20REGISTRY/THIRD%20QUARTER%20LEA%20REGISTRY%202026.pdf",
+      "quote": "Scotch Plains Township is the LEA for Mountainside Borough.",
+      "doc_date": "2026-07",
+      "via": "pdf",
+      "verified": true
+     },
+     {
+      "url": "https://nj.gov/dca/dfs/pdf/ANNUAL%20REGISTRY/THIRD%20QUARTER%20LEA%20REGISTRY%202026.pdf",
+      "quote": "F Mountainside Borough",
+      "doc_date": "2026-07",
+      "via": "pdf",
+      "verified": true
+     },
+     {
+      "url": "https://www.nj.gov/dca/dfs/pdf/fire%20directory_county%20summary/fire_code_enforcement_director.pdf",
+      "quote": "Mountainside Borough2010 LEAID: 2010-001 Enf Auth. Fire Dept Fire Official Rutland B Paal Jr Phone (908) 232-6700 Email spaal@scotchplainsnj.com Scotch Plains Inspections Dept",
+      "doc_date": "2025-01-14 (survey date)",
+      "via": "state_directory",
+      "verified": true
+     }
+    ],
+    "confidence": "high"
+   }
+  ],
+  "notes": "The Borough's own page runs the resale smoke/CO certification through its Construction Department and the SDL Portal for a $100.00 fee. The NJ DCA LEA registry (July 2026) says Scotch Plains Township is the fire code enforcing agency for Mountainside, and the state fire directory lists Scotch Plains fire official Rutland B Paal Jr (spaal@scotchplainsnj.com) for Mountainside, with phone (908) 232-6700 on one line and (908) 322-6700 on the smoke detector compliance line; the Borough office (908-232-2919) is the practical contact. The Borough page still lists a portable fire extinguisher, which state law (P.L.2025, c.19) removed from the sale certificate in February 2025; confirm with the office. No application form link is given apart from the SDL Portal (account sign-up required), so application_url is left blank."
+ },
+ "other_items": [],
+ "open_questions": [
+  "Does Mountainside still require the portable fire extinguisher at resale after P.L.2025, c.19?",
+  "Is there a higher fee for short-notice requests, or a reinspection fee? None is published."
+ ],
+ "verification": {
+  "fees": 1,
+  "fee_ok": 1,
+  "fee_bad": 0,
+  "fee_unchecked": 0,
+  "quotes": 11,
+  "q_ok": 11,
+  "q_bad": 0,
+  "q_unchecked": 0
+ }
+}

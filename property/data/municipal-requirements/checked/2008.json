@@ -1,0 +1,360 @@
+{
+ "municipality_code": "2008",
+ "municipality": "Kenilworth Borough",
+ "county": "UNION",
+ "checked_at": "2026-10-02",
+ "resale_co": {
+  "status": "required",
+  "name": "Certificate of Compliance / Certificate of Continued Occupancy (CCO), sale of property",
+  "issued_by": "Kenilworth Building Department (Construction Official / Zoning Official)",
+  "lead_time": "",
+  "valid_for": "",
+  "requirements": [],
+  "fees": [
+   {
+    "label": "Certificate of Continued Occupancy, residential (Ordinance 2026-11, adopted April 15, 2026; the old $175/$80 is struck out and replaced)",
+    "amount": "$200.00",
+    "quote": "CCO -Residential / reinspection $175/$80 200.00/85.00",
+    "source_url": "https://www.kenilworthborough.com/DocumentCenter/View/1604/2026-11-Ordinance-Amending-UCC-Fees-",
+    "verified": true
+   },
+   {
+    "label": "Certificate of Continued Occupancy, residential reinspection (Ordinance 2026-11; the September 2026 application form instead shows $85.00 for each additional unit)",
+    "amount": "$85.00",
+    "quote": "CCO -Residential / reinspection $175/$80 200.00/85.00",
+    "source_url": "https://www.kenilworthborough.com/DocumentCenter/View/1604/2026-11-Ordinance-Amending-UCC-Fees-",
+    "verified": true
+   },
+   {
+    "label": "Smoke and carbon monoxide alarm inspection, sale of single-family home, requested two or more weeks in advance (Ordinance 2026-08, which sets the sale fee equal to the annual inspection fee)",
+    "amount": "$100.00",
+    "quote": "a. Single family home $100.00 b. Two family home $160.00",
+    "source_url": "https://www.kenilworthborough.com/DocumentCenter/View/1605/2026-08-Fire-Prevention-Inspection-Fees",
+    "verified": true
+   },
+   {
+    "label": "Smoke and carbon monoxide alarm inspection, sale of two-family home, requested two or more weeks in advance (Ordinance 2026-08)",
+    "amount": "$160.00",
+    "quote": "a. Single family home $100.00 b. Two family home $160.00",
+    "source_url": "https://www.kenilworthborough.com/DocumentCenter/View/1605/2026-08-Fire-Prevention-Inspection-Fees",
+    "verified": true
+   },
+   {
+    "label": "Sale of single-family home, requested less than 1 week ahead, with 1 re-inspection (application form, November 2025; not in Ordinance 2026-08)",
+    "amount": "$150.00",
+    "quote": "Inspection Fee - Sale of single family home $150.00 Requested less than time period of 1 week with 1 re-inspection",
+    "source_url": "https://www.kenilworthborough.com/DocumentCenter/View/797/Fire-Prevention-Application",
+    "verified": "eye"
+   },
+   {
+    "label": "Sale of two-family home, requested less than 1 week ahead, with 1 re-inspection (application form, November 2025; not in Ordinance 2026-08)",
+    "amount": "$210.00",
+    "quote": "Inspection Fee - Sale of 2 family home $210.00 Requested less than time period of 1 week with 1 re-inspection",
+    "source_url": "https://www.kenilworthborough.com/DocumentCenter/View/797/Fire-Prevention-Application",
+    "verified": "eye"
+   }
+  ],
+  "how_to_apply": "Fill out the Borough's Application for Certificate of Compliance (check Sale of Property) and file it with the Building Department at 567 Boulevard, Kenilworth. The Building Department takes cash or a check payable to Borough of Kenilworth.",
+  "application_url": "https://www.kenilworthborough.com/DocumentCenter/View/120/Certificate-of-Compliance-Application-Form-SALE-OF-PROPERTY-CCO",
+  "department_url": "https://www.kenilworthborough.com/183/Construction-Building-Department",
+  "phone": "908-276-5802",
+  "email": "zoningofficer@kenilworthnj.org",
+  "contact_name": "Anthony Monguso",
+  "contact_title": "Construction Official / Building Subcode Official / Zoning Official (also Code Enforcement Official)",
+  "evidence": [
+   {
+    "url": "https://www.kenilworthborough.com/184/Forms-Applications",
+    "quote": "Certificate of Compliance Application Form (SALE OF PROPERTY, CCO)",
+    "doc_date": "2026-10-02 (page fetched)",
+    "via": "page",
+    "verified": true
+   },
+   {
+    "url": "https://www.kenilworthborough.com/DocumentCenter/View/120/Certificate-of-Compliance-Application-Form-SALE-OF-PROPERTY-CCO",
+    "quote": "Borough of Kenilworth Application for Certificate of Compliance September 15,2026",
+    "doc_date": "2026-09-15 (form update date)",
+    "via": "pdf",
+    "verified": true
+   },
+   {
+    "url": "https://www.kenilworthborough.com/DocumentCenter/View/120/Certificate-of-Compliance-Application-Form-SALE-OF-PROPERTY-CCO",
+    "quote": "TYPE OF APPLICATION [ ] Sale of Property [ ] New Business [ ] Sale of Business",
+    "doc_date": "2026-09-15",
+    "via": "pdf",
+    "verified": true
+   },
+   {
+    "url": "https://www.kenilworthborough.com/DocumentCenter/View/120/Certificate-of-Compliance-Application-Form-SALE-OF-PROPERTY-CCO",
+    "quote": "Two Family Residence $200.00",
+    "doc_date": "2026-09-15",
+    "via": "pdf",
+    "verified": true
+   },
+   {
+    "url": "https://www.kenilworthborough.com/DocumentCenter/View/120/Certificate-of-Compliance-Application-Form-SALE-OF-PROPERTY-CCO",
+    "quote": "(Each Additional Unit) $ 85.00",
+    "doc_date": "2026-09-15",
+    "via": "pdf",
+    "verified": true
+   },
+   {
+    "url": "https://www.kenilworthborough.com/DocumentCenter/View/120/Certificate-of-Compliance-Application-Form-SALE-OF-PROPERTY-CCO",
+    "quote": "Commercial, Industrial, Business $300.00",
+    "doc_date": "2026-09-15",
+    "via": "pdf",
+    "verified": true
+   },
+   {
+    "url": "https://www.kenilworthborough.com/DocumentCenter/View/120/Certificate-of-Compliance-Application-Form-SALE-OF-PROPERTY-CCO",
+    "quote": "Anthony Monguso",
+    "doc_date": "2026-09-15",
+    "via": "pdf",
+    "verified": true
+   },
+   {
+    "url": "https://www.kenilworthborough.com/DocumentCenter/View/120/Certificate-of-Compliance-Application-Form-SALE-OF-PROPERTY-CCO",
+    "quote": "Phone (908) 276-5802",
+    "doc_date": "2026-09-15",
+    "via": "pdf",
+    "verified": true
+   },
+   {
+    "url": "https://www.kenilworthborough.com/DocumentCenter/View/1604/2026-11-Ordinance-Amending-UCC-Fees-",
+    "quote": "(16) The fee for certificates of continued occupancy shall be as follows: CCO -Residential / reinspection $175/$80 200.00/85.00 CCO- Commercial $ 275.00 300.00",
+    "doc_date": "2026-04-15 (final adoption)",
+    "via": "pdf",
+    "verified": true
+   },
+   {
+    "url": "https://www.kenilworthborough.com/DocumentCenter/View/1604/2026-11-Ordinance-Amending-UCC-Fees-",
+    "quote": "Final Adoption: April 15, 2026",
+    "doc_date": "2026-04-15",
+    "via": "pdf",
+    "verified": true
+   },
+   {
+    "url": "https://www.kenilworthborough.com/400/FEE-CHANGES-2025",
+    "quote": "CERTIFICATE CONTINUED OCCUPANCY ( SALE OF PROPERTY, SALE OF BUSINESS, NEW BUSINESS ) : RESIDENTIAL: 2 FAMILY - $175.00 (ADDITIONAL $50.00 PER UNIT ) REINSPECTION - $80.00",
+    "doc_date": "2025-07 (page titled FEE CHANGES 2025; superseded by Ordinance 2026-11)",
+    "via": "page",
+    "verified": true
+   },
+   {
+    "url": "https://www.kenilworthborough.com/183/Construction-Building-Department",
+    "quote": "Anthony Monguso Construction Official / Building Subcode Official / Zoning Official",
+    "doc_date": "2026-10-02 (page fetched)",
+    "via": "page",
+    "verified": true
+   },
+   {
+    "url": "https://www.kenilworthborough.com/183/Construction-Building-Department",
+    "quote": "Phone: 908-276-5802",
+    "doc_date": "2026-10-02",
+    "via": "page",
+    "verified": true
+   },
+   {
+    "url": "https://www.kenilworthborough.com/183/Construction-Building-Department",
+    "quote": "Anthony Monguso Code Enforcement Official zoningofficer@kenilworthnj.org",
+    "doc_date": "2026-10-02",
+    "via": "page",
+    "verified": true
+   },
+   {
+    "url": "https://www.kenilworthborough.com/183/Construction-Building-Department",
+    "quote": "Our form of payments are cash or a check made payable to: Borough of Kenilworth.",
+    "doc_date": "2026-10-02",
+    "via": "page",
+    "verified": true
+   },
+   {
+    "url": "https://www.kenilworthborough.com/183/Construction-Building-Department",
+    "quote": "Monday - Friday 8:30 A.M. to 4:30 P.M.",
+    "doc_date": "2026-10-02",
+    "via": "page",
+    "verified": true
+   }
+  ],
+  "confidence": "medium",
+  "notes": "The Borough's forms page lists the 'Certificate of Compliance Application Form (SALE OF PROPERTY, CCO)', and the application (updated September 15, 2026) has a 'Sale of Property' box, so a Borough certificate is part of a sale. The published fees are written for a two-family residence ($200.00, each additional unit $85.00 on the form), so it is not confirmed in writing whether a single-family sale needs this certificate or only the fire certificate; ask the office. Fees: Ordinance 2026-11 (adopted April 15, 2026) set CCO residential $200.00 and reinspection $85.00 (commercial $300.00). The Borough's 'FEE CHANGES 2025' web page still shows the older amounts ($175.00 two family, additional $50.00 per unit, reinspection $80.00), and the form labels the $85.00 as 'each additional unit' while the ordinance calls it reinspection. The ordinance amounts are used here. The form does not list what is inspected, lead time or validity. Office: 567 Boulevard, Kenilworth; Borough main number 908-276-9090 (on the form). Kenilworth also inspects non-owner-occupied rentals yearly through the Bureau of Fire Prevention (Ordinance 2026-08); that is a rental program, not a resale requirement."
+ },
+ "fire_cert": {
+  "requirements": [
+   "Battery-only smoke and carbon monoxide alarms must be 10-year sealed battery units (since January 1, 2019), on each level and outside all bedroom areas",
+   "Hardwired (electric) smoke and CO alarms may not be replaced with battery alarms, and must be replaced after 10 years (date of manufacture is on the underside)",
+   "Electric CO alarms or combination smoke/CO alarms are required on each level and next to any fuel-burning appliance",
+   "Homes with a permanently installed generator, solar panels, battery storage or other secondary power source need a label (not handwritten) within 18 inches of the main electrical panel and the electric meter saying there are multiple power sources",
+   "The fire inspector contacts the applicant to review requirements before the inspection"
+  ],
+  "authorities": [
+   {
+    "name": "Kenilworth Fire Department, Bureau of Fire Prevention",
+    "type": "municipal_fire_bureau",
+    "area_served": "Entire borough",
+    "lead_time": "The form's base fee is for a 1 week turnaround (higher fee if requested on less than 1 week); Ordinance 2026-08 sets the base sale fee for requests made two or more weeks in advance",
+    "fees": [
+     {
+      "label": "Smoke and carbon monoxide alarm inspection, sale of single-family home, requested two or more weeks in advance (Ordinance 2026-08, which sets the sale fee equal to the annual inspection fee)",
+      "amount": "$100.00",
+      "quote": "a. Single family home $100.00 b. Two family home $160.00",
+      "source_url": "https://www.kenilworthborough.com/DocumentCenter/View/1605/2026-08-Fire-Prevention-Inspection-Fees",
+      "verified": true
+     },
+     {
+      "label": "Smoke and carbon monoxide alarm inspection, sale of two-family home, requested two or more weeks in advance (Ordinance 2026-08)",
+      "amount": "$160.00",
+      "quote": "a. Single family home $100.00 b. Two family home $160.00",
+      "source_url": "https://www.kenilworthborough.com/DocumentCenter/View/1605/2026-08-Fire-Prevention-Inspection-Fees",
+      "verified": true
+     },
+     {
+      "label": "Sale of single-family home, requested less than 1 week ahead, with 1 re-inspection (application form, November 2025; not in Ordinance 2026-08)",
+      "amount": "$150.00",
+      "quote": "Inspection Fee - Sale of single family home $150.00 Requested less than time period of 1 week with 1 re-inspection",
+      "source_url": "https://www.kenilworthborough.com/DocumentCenter/View/797/Fire-Prevention-Application",
+      "verified": "eye"
+     },
+     {
+      "label": "Sale of two-family home, requested less than 1 week ahead, with 1 re-inspection (application form, November 2025; not in Ordinance 2026-08)",
+      "amount": "$210.00",
+      "quote": "Inspection Fee - Sale of 2 family home $210.00 Requested less than time period of 1 week with 1 re-inspection",
+      "source_url": "https://www.kenilworthborough.com/DocumentCenter/View/797/Fire-Prevention-Application",
+      "verified": "eye"
+     }
+    ],
+    "how_to_apply": "Download and print the Residential Fire Prevention application, then mail it or drop it in the white mailbox at Kenilworth Fire Headquarters, 491 Washington Ave, Kenilworth NJ 07033, with a check or money order (no cash) payable to Kenilworth Fire Prevention Bureau. The fire inspector calls to review requirements before the inspection.",
+    "application_url": "https://www.kenilworthborough.com/DocumentCenter/View/797/Fire-Prevention-Application",
+    "department_url": "https://www.kenilworthborough.com/185/Fire-Department",
+    "phone": "(908) 276-8935",
+    "email": "cgiordino@kenilworthfire.org",
+    "contact_name": "Carmen Giordino",
+    "contact_title": "Fire Official (state fire directory)",
+    "evidence": [
+     {
+      "url": "https://www.kenilworthborough.com/185/Fire-Department",
+      "quote": "Smoke Detector Application Form: This form is used when there is a change of occupancy (sale or rental) for a single family, two-family, or rental apartment. This form must be download, printed, and mailed (along with the appropriate fee) to: Kenilworth Fire Department Attn: Bureau of Fire Prevention 491 Washington Avenue Kenilworth, NJ 07033",
+      "doc_date": "2026-10-02 (page fetched)",
+      "via": "page",
+      "verified": true
+     },
+     {
+      "url": "https://www.kenilworthborough.com/DocumentCenter/View/797/Fire-Prevention-Application",
+      "quote": "Kenilworth Fire Department Bureau of Fire Prevention 491 Washington Ave. Kenilworth, NJ 07033 (908) 276-8935 Fax (908) 276-1771 Application for Fire Inspection",
+      "doc_date": "2025-11 (scanned form, marked 2025 Nov)",
+      "via": "pdf",
+      "verified": "eye"
+     },
+     {
+      "url": "https://www.kenilworthborough.com/DocumentCenter/View/797/Fire-Prevention-Application",
+      "quote": "Inspection from the Fire Prevention Bureau for all 1 and 2 family dwellings prior to change of ownership and or occupancy.",
+      "doc_date": "2025-11",
+      "via": "pdf",
+      "verified": "eye"
+     },
+     {
+      "url": "https://www.kenilworthborough.com/DocumentCenter/View/797/Fire-Prevention-Application",
+      "quote": "Inspection Fee - Sale of single family home $100.00 1 week turnaround time with 1 re-inspection",
+      "doc_date": "2025-11",
+      "via": "pdf",
+      "verified": "eye"
+     },
+     {
+      "url": "https://www.kenilworthborough.com/DocumentCenter/View/797/Fire-Prevention-Application",
+      "quote": "Inspection Fee - Sale of 2 family home $160.00 1 week turnaround time with 1 re-inspection",
+      "doc_date": "2025-11",
+      "via": "pdf",
+      "verified": "eye"
+     },
+     {
+      "url": "https://www.kenilworthborough.com/DocumentCenter/View/797/Fire-Prevention-Application",
+      "quote": "Inspections requiring more than 1 re-inspection will be required to pay a second fee.",
+      "doc_date": "2025-11",
+      "via": "pdf",
+      "verified": "eye"
+     },
+     {
+      "url": "https://www.kenilworthborough.com/DocumentCenter/View/797/Fire-Prevention-Application",
+      "quote": "Check / Money order (NO CASH) for the above to be made payable to: Kenilworth Fire Prevention Bureau",
+      "doc_date": "2025-11",
+      "via": "pdf",
+      "verified": "eye"
+     },
+     {
+      "url": "https://www.kenilworthborough.com/DocumentCenter/View/797/Fire-Prevention-Application",
+      "quote": "Completed applications and payment are to be dropped off in the white mailbox at Kenilworth Fire Headquarters 491 Washington Ave, Kenilworth NJ 07033.",
+      "doc_date": "2025-11",
+      "via": "pdf",
+      "verified": "eye"
+     },
+     {
+      "url": "https://www.kenilworthborough.com/DocumentCenter/View/1605/2026-08-Fire-Prevention-Inspection-Fees",
+      "quote": "2) The fee schedule for the sale or transfer of title if requested two or more weeks in advance shall be equal to the fee set forth in the preceding paragraph",
+      "doc_date": "2026-04-15 (final adoption)",
+      "via": "pdf",
+      "verified": true
+     },
+     {
+      "url": "https://www.kenilworthborough.com/DocumentCenter/View/1605/2026-08-Fire-Prevention-Inspection-Fees",
+      "quote": "4) In the event that a structure fails to comply with the fire code when inspected, the owner shall be entitle to one re-inspection at no additional cost.",
+      "doc_date": "2026-04-15",
+      "via": "pdf",
+      "verified": true
+     },
+     {
+      "url": "https://www.kenilworthborough.com/DocumentCenter/View/1605/2026-08-Fire-Prevention-Inspection-Fees",
+      "quote": "Final Adoption: April 15, 2026",
+      "doc_date": "2026-04-15",
+      "via": "pdf",
+      "verified": true
+     },
+     {
+      "url": "https://nj.gov/dca/dfs/pdf/ANNUAL%20REGISTRY/THIRD%20QUARTER%20LEA%20REGISTRY%202026.pdf",
+      "quote": "F Kenilworth Borough",
+      "doc_date": "2026-07",
+      "via": "pdf",
+      "verified": true
+     },
+     {
+      "url": "https://www.nj.gov/dca/dfs/pdf/fire%20directory_county%20summary/fire_code_enforcement_director.pdf",
+      "quote": "Kenilworth Borough2008 LEAID: 2008-001 Enf Auth. Fire Dept Fire Official Carmen Giordino Phone (908) 276-8935 Email cgiordino@kenilworthfire.org Kenilworth Boro Fire Prev",
+      "doc_date": "2026-01-27 (survey date)",
+      "via": "state_directory",
+      "verified": true
+     },
+     {
+      "url": "https://www.kenilworthborough.com/Directory.aspx?did=13",
+      "quote": "Staff Directory • Fire Prevention Office ... Phone Number 908-276-8935",
+      "doc_date": "2026-10-02 (page fetched)",
+      "via": "page",
+      "verified": true
+     }
+    ],
+    "confidence": "high"
+   }
+  ],
+  "notes": "The Borough's fire application (scanned, dated November 2025) lists $100.00 / $160.00 for a 1 week turnaround and $150.00 / $210.00 when requested on less than 1 week, each with 1 re-inspection; inspections needing more than 1 re-inspection pay a second fee (the same fee again). Ordinance 2026-08 (adopted April 15, 2026) sets the sale fee at the annual-inspection amount ($100.00 single family, $160.00 two family) when requested two or more weeks in advance and gives one free re-inspection; it does not list a rush fee for sales (only a $50.00 expedited fee for landlords). The fire official's name and email come only from the state fire directory (survey 1/27/2026); the Borough site lists only the Fire Prevention Office number 908-276-8935. The form does not list a portable fire extinguisher."
+ },
+ "other_items": [
+  {
+   "label": "Open construction permits",
+   "detail": "The Building Department follows up on all open permits with Notices of Violations and, in some cases, penalties; schedule final inspections to close them.",
+   "source_url": "https://www.kenilworthborough.com/183/Construction-Building-Department"
+  }
+ ],
+ "open_questions": [
+  "Does a single-family sale need the Borough Certificate of Compliance / Continued Occupancy, or only a two-family or larger sale? The fees are written for a two-family residence.",
+  "Is the $85.00 a reinspection fee (Ordinance 2026-11) or an each-additional-unit fee (September 2026 form)? The FEE CHANGES 2025 web page still shows $175.00 / $80.00.",
+  "What does the Borough CCO inspection cover, and how far before closing should it be requested?",
+  "Are the fire bureau's rush fees ($150.00 / $210.00 for less than 1 week) still charged after Ordinance 2026-08, which only sets the two-weeks-ahead sale fee?"
+ ],
+ "verification": {
+  "fees": 6,
+  "fee_ok": 6,
+  "fee_bad": 0,
+  "fee_unchecked": 0,
+  "quotes": 30,
+  "q_ok": 30,
+  "q_bad": 0,
+  "q_unchecked": 0
+ }
+}
