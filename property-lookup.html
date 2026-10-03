@@ -1013,8 +1013,6 @@ body.plm-locked { overflow: hidden; }
         "name": "John Scafide",
         "jobTitle": "Licensed NJ Real Estate Agent and Tax Professional",
         "identifier": "NJ License #2079591",
-        "telephone": "856-404-1098",
-        "email": "john@johnscafide.com",
         "worksFor": { "@type": "Organization", "name": "Opus Elite Real Estate" },
         "areaServed": { "@type": "State", "name": "New Jersey" }
       }
@@ -1361,8 +1359,6 @@ body.plm-locked { overflow: hidden; }
       title: 'Licensed NJ Agent and Tax Professional',
       lic: 'NJ License #2079591',
       team: 'The McKenty Team / Opus Elite Real Estate',
-      phone: '856-404-1098',
-      email: 'john@johnscafide.com',
       photo: 'johnprofile.jpg',
       logo: 'opuslogo.jpg',
       stars: '5.0', reviews: '2', sales: '4', salesNear: '4',
@@ -1374,8 +1370,6 @@ body.plm-locked { overflow: hidden; }
       title: 'Licensed NJ Real Estate Agent',
       lic: 'NJ License #2192318',
       team: 'The McKenty Team / Opus Elite Real Estate',
-      phone: '856-310-6746',
-      email: 'heather@heatherscafide.com',
       photo: 'heatherheadshot.png',
       logo: 'opuslogo.jpg',
       stars: '5.0', reviews: 'New', sales: '0', salesNear: '0',
@@ -4356,7 +4350,7 @@ body.plm-locked { overflow: hidden; }
         '<div style="font-size:44px;color:var(--green);margin-bottom:12px;"><i class="fas fa-circle-check"></i></div>' +
         '<h3>Your proposal is on the way</h3>' +
         '<p>I will have it to you <b>within one business day</b>, covering ' + esc(current.address) +
-        '. If anything is urgent, call me directly at <b>' + esc(a.phone) + '</b>.</p>' +
+        '. If anything is urgent, send a note through the <a href="index.html#contact">contact form</a>.</p>' +
         '<button class="plm-rbtn" onclick="plCloseNote()">Close</button>' +
       '</div>';
   };
@@ -4373,8 +4367,6 @@ body.plm-locked { overflow: hidden; }
   function buildAgentRail() {
     var a = AGENTS[activeAgentKey];
     var bio = a.bio.replace('{COUNTY}', (current && current.county) ? esc(current.county) : 'South Jersey');
-    var phone = a.phone
-      ? '<a href="tel:' + a.phone.replace(/\D/g, '') + '" class="gold"><i class="fas fa-phone"></i> ' + esc(a.phone) + '</a>' : '';
     return '<div class="plm-agent">' +
       '<div class="plm-agent-toggle">' +
         '<button class="' + (activeAgentKey === 'john' ? 'active' : '') + '" onclick="plSetAgent(\'john\')">John</button>' +
@@ -4402,9 +4394,8 @@ body.plm-locked { overflow: hidden; }
         '<button class="plm-proposal-btn" onclick="plProposal()">View proposal</button>' +
         '<div class="plm-proposal-fine">Free, no commitment. Pricing, net proceeds, and marketing plan, delivered within one business day.</div>' +
       '</div>' +
-      '<div class="plm-agent-btns">' + phone +
-        '<a href="mailto:' + esc(a.email) + '"><i class="fas fa-envelope"></i> Email ' + esc(a.name.split(' ')[0]) + '</a>' +
-        '<a href="index.html#contact"><i class="fas fa-calendar-check"></i> Book a call</a>' +
+      '<div class="plm-agent-btns">' +
+        '<a href="index.html#contact" class="gold"><i class="fas fa-message"></i> Message ' + esc(a.name.split(' ')[0]) + '</a>' +
       '</div>' +
       '<img class="plm-agent-logo" src="' + a.logo + '" alt="Opus Elite Real Estate" onerror="this.style.display=\'none\'">' +
     '</div>';

@@ -1684,14 +1684,8 @@ body.est-verify-bar-open{padding-bottom:88px;}
     }
   };
 
-  // TODO: replace with John's real cell number, digits only, include country code (e.g. '16095551234')
-  var JOHN_CELL = '18564041098';
-
   window.estTextMeNow = function() {
-    var address = ((document.getElementById('est-address') || {}).value || '').trim();
-    var body = "I'm ready to sell, my address is " + (address || '___');
-    var smsUrl = 'sms:' + JOHN_CELL + '?&body=' + encodeURIComponent(body);
-    window.location.href = smsUrl;
+    window.location.href = '/#contact';
   };
 
   window.estCloseTextWidget = function() {
@@ -2355,8 +2349,8 @@ body.est-verify-bar-open{padding-bottom:88px;}
     <button class="est-text-widget-close" onclick="estCloseTextWidget()" aria-label="Close">✕</button>
   </div>
   <div class="est-text-widget-body">
-    <div class="est-text-widget-msg">Ready to sell? I'm available right now, text me your address and I'll get back to you personally today.</div>
-    <button class="est-text-widget-btn" onclick="estTextMeNow()"><i class="fas fa-comment-dots"></i> Text Me My Address</button>
+    <div class="est-text-widget-msg">Ready to sell? Send me your address through the contact form and I'll get back to you personally.</div>
+    <button class="est-text-widget-btn" onclick="estTextMeNow()"><i class="fas fa-comment-dots"></i> Send My Address</button>
   </div>
 </div>
 
