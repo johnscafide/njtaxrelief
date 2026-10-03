@@ -40,6 +40,10 @@
       "includeFiles": "{tax-rates.json,equalization-ratios.json,chapter123-ratios-2026.json,property/revaluation-reassessment-2026.json}",
       "maxDuration": 10
     },
+    "api/co-lookup.js": {
+      "includeFiles": "property/data/municipal-requirements/{approvals.json,checked/*.json}",
+      "maxDuration": 10
+    },
     "api/watchdog-town-needs.js": {
       "includeFiles": "property/data/municipal-requirements/town-needs.json",
       "maxDuration": 10
