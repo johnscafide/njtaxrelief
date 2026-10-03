@@ -35,7 +35,7 @@ for (const k of KEYS) assert.ok(migration.includes(`'${k}'`), `migration allows 
 // ---------- routing ----------
 assert.ok(vercel.rewrites.some((r) => r.source === '/backoffice/town-info' && r.destination === '/property/backoffice/town-info/index.html'), 'review page route');
 assert.ok(vercel.rewrites.some((r) => r.source === '/town-needs'), 'public page route');
-assert.equal(vercel.functions['api/watchdog-town-needs.js'].includeFiles, 'property/data/municipal-requirements/town-needs.json', 'the submission route ships with the town list');
+assert.equal(vercel.functions['api/watchdog-town-needs.js'].includeFiles, '{property/data/municipal-requirements/town-needs.json,co/towns.json}', 'the submission route ships with the needs list and the full NJ town list');
 
 // ---------- public page ----------
 assert.match(page, /<link rel="canonical" href="https:\/\/www\.watchdogindex\.com\/town-needs">/, 'canonical clean URL');
@@ -120,6 +120,20 @@ assert.deepEqual(state.rows[0].need_keys, [town.needs[0]], 'only this town\'s ne
 assert.equal(state.rows[0].file_status, 'none');
 assert.equal(state.rows[0].municipality_name, town.town, 'town name comes from the list, not the request');
 assert.equal(state.rows[0].client_hash.length, 64, 'client is stored as a keyed hash, not an IP');
+
+// /co: any NJ town can get a submission, even one not on the needs list yet.
+const coTowns = JSON.parse(read('co/towns.json')).towns;
+const unlisted = coTowns.find((x) => !needs.towns.some((n) => n.code === x.c));
+reset();
+t = reqRes(Object.assign({}, base, { code: unlisted.c, needs: KEYS.concat(['not_a_need']), source_url: 'https://www.example-town.gov/co' }));
+await submit(t.req, t.res);
+assert.equal(t.res.statusCode, 201, 'a town not on the needs list is accepted');
+assert.deepEqual(state.rows[0].need_keys, KEYS, 'every real need is kept for it, nothing else');
+assert.equal(state.rows[0].municipality_name, unlisted.n, 'its name comes from the full town list');
+reset();
+t = reqRes(Object.assign({}, base, { code: '9999', source_url: 'https://x.gov/y' }));
+await submit(t.req, t.res);
+assert.equal(t.res.statusCode, 422, 'a code that is no NJ town is refused');
 
 reset();
 t = reqRes(Object.assign({}, base, { website: 'spam.example' , source_url: 'https://x.gov/y' }));

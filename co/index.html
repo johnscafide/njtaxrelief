@@ -97,6 +97,29 @@
   .choice { display: flex; justify-content: space-between; gap: 12px; min-height: 48px; padding: 10px 16px; border: 1px solid var(--line); border-radius: 10px; background: #fff; font: inherit; text-align: left; cursor: pointer; }
   .choice:hover { background: var(--soft); }
   .choice span { color: var(--muted); }
+  .add { display: inline-flex; align-items: center; min-height: 44px; margin-top: 10px; padding: 0 18px; border: 0; border-radius: 22px; background: var(--blue); color: #fff; font: inherit; font-weight: 600; cursor: pointer; }
+  .add:hover { background: #0a2f94; }
+  .add:focus-visible, dialog button:focus-visible { outline: 2px solid var(--blue); outline-offset: 2px; }
+  dialog { width: min(520px, calc(100vw - 32px)); max-height: calc(100vh - 32px); padding: 0; border: 0; border-radius: 16px; box-shadow: 0 12px 40px rgba(16,24,40,.25); color: var(--ink); }
+  dialog::backdrop { background: rgba(16,24,40,.45); }
+  .dlg { padding: 22px 22px 18px; }
+  .dlg h2 { margin: 0; font-size: 20px; font-weight: 600; }
+  .dlg .sub { margin: 2px 0 14px; }
+  .dlg label { display: block; margin: 12px 0 0; font-size: 14px; font-weight: 600; }
+  .dlg label small { font-weight: 400; color: var(--muted); }
+  .dlg input:not([type=file]), .dlg textarea, .dlg select { display: block; width: 100%; margin-top: 5px; padding: 10px 12px; border: 1px solid #cfd6de; border-radius: 10px; font: inherit; font-weight: 400; color: var(--ink); background: #fff; }
+  .dlg input[type=file] { display: block; margin-top: 6px; font: inherit; font-weight: 400; max-width: 100%; }
+  .dlg textarea { min-height: 90px; resize: vertical; }
+  .dlg .two { display: grid; grid-template-columns: 1fr 1fr; gap: 0 12px; }
+  .dlg .hp { position: absolute; left: -10000px; width: 1px; height: 1px; overflow: hidden; }
+  .dlg .formstatus { min-height: 22px; margin: 12px 0 0; font-size: 14px; }
+  .dlg .formstatus.error { color: #b42318; }
+  .dlg .actions { display: flex; gap: 8px; justify-content: flex-end; margin-top: 10px; }
+  .dlg .actions button { min-height: 44px; padding: 0 18px; border-radius: 22px; font: inherit; font-weight: 600; cursor: pointer; }
+  .dlg .send { border: 0; background: var(--blue); color: #fff; }
+  .dlg .send:disabled { opacity: .6; cursor: default; }
+  .dlg .cancel { border: 1px solid var(--line); background: #fff; color: var(--ink); }
+  @media (max-width: 480px) { .dlg .two { grid-template-columns: 1fr; } }
   .sr { position: absolute; width: 1px; height: 1px; overflow: hidden; clip: rect(0 0 0 0); white-space: nowrap; }
 
   @media (max-width: 900px) { .out { padding-left: 24px; } }
@@ -125,6 +148,44 @@
 
   <div class="out" id="out" aria-live="polite"></div>
 </main>
+
+<dialog id="add-dlg" aria-labelledby="add-title">
+  <form class="dlg" id="add-form" method="dialog" novalidate>
+    <h2 id="add-title">Add CO Requirements</h2>
+    <p class="sub" id="add-town"></p>
+    <label>Town document <small>(form, fee sheet or letter; PDF or photo, up to 10 MB)</small>
+      <input name="file" type="file" accept="application/pdf,image/jpeg,image/png,image/webp,image/heic,image/heif,.pdf,.jpg,.jpeg,.png,.webp,.heic,.heif">
+    </label>
+    <label>Or link to the town's page
+      <input name="source_url" type="url" inputmode="url" placeholder="https://" maxlength="1000">
+    </label>
+    <label>Requirements and fees <small>(optional)</small>
+      <textarea name="answer" maxlength="2000"></textarea>
+    </label>
+    <div class="two">
+      <label>Name <small>(optional)</small><input name="name" autocomplete="name" maxlength="120"></label>
+      <label>Email <small>(optional)</small><input name="email" type="email" autocomplete="email" maxlength="254"></label>
+    </div>
+    <label>You are <small>(optional)</small>
+      <select name="role">
+        <option value="">Choose one</option>
+        <option>Real estate agent</option>
+        <option>Attorney</option>
+        <option>Title or closing company</option>
+        <option>Town or fire office staff</option>
+        <option>Home inspector</option>
+        <option>Homeowner, buyer or seller</option>
+        <option>Other</option>
+      </select>
+    </label>
+    <label class="hp" aria-hidden="true">Website <input name="website" tabindex="-1" autocomplete="off"></label>
+    <p class="formstatus" role="status" aria-live="polite"></p>
+    <div class="actions">
+      <button class="cancel" type="button" value="cancel">Cancel</button>
+      <button class="send" type="submit">Send</button>
+    </div>
+  </form>
+</dialog>
 
 <template id="search-tpl">
   <div class="box">
@@ -370,6 +431,7 @@
   // ---------- one town ----------
   function showTown(t, ctx) {
     var mine = ++seq;
+    addTown = t;
     render('<p class="msg">Loading…</p>');
     setUrl(t.code);
     fetch('/api/co-lookup?code=' + encodeURIComponent(t.code))
@@ -380,7 +442,7 @@
         document.title = t.name + ' CO Requirements | Watchdog';
         if (d.status === 'ok') return render(townHtml(t, d, ctx || {}));
         if (d.status === 'not_available') return render(head(t, ctx) +
-          '<p>Not available yet.</p><p class="fine"><a href="/contact">Contact us</a></p>');
+          '<p>Not available yet.</p>' + addButton());
         render(head(t, ctx) + '<p class="msg">Couldn’t load this town. Try again.</p>');
       });
   }
@@ -417,7 +479,7 @@
     var st = { required: ['req', 'Required'], not_required: ['no', 'Not required'], not_found: ['unsure', 'Not confirmed'] }[co.status];
     var html = head(t, ctx);
 
-    html += '<section class="part"><h2>Certificate of Occupancy</h2><span class="status ' + st[0] + '">' + st[1] + '</span><dl class="facts">' +
+    html += '<section class="part"><h2>Certificate of Occupancy</h2><span class="status ' + st[0] + '">' + st[1] + '</span>' + (co.status === 'not_found' ? '<div>' + addButton() + '</div>' : '') + '<dl class="facts">' +
       fact('Certificate', esc(co.name)) +
       fact('Issued by', esc(co.issued_by)) +
       fact('Requirements', items(co.requirements)) +
@@ -443,6 +505,70 @@
       '</div>';
     return html;
   }
+
+
+  // ---------- Add CO Requirements (goes to the Back Office town-info queue) ----------
+  var NEED_KEYS = ['co_required', 'co_fee', 'co_contact', 'fire_fee', 'fire_contact'];
+  var EXT_TYPES = { pdf: 'application/pdf', jpg: 'image/jpeg', jpeg: 'image/jpeg', png: 'image/png', webp: 'image/webp', heic: 'image/heic', heif: 'image/heif' };
+  var MAX_BYTES = 10 * 1024 * 1024;
+  var dlg = document.getElementById('add-dlg'), addForm = document.getElementById('add-form');
+  var addTown = null, openedAt = 0;
+  function addButton() { return '<button class="add" type="button" data-add>Add CO Requirements</button>'; }
+  function fileType(file) {
+    var t = String(file.type || '').toLowerCase();
+    if (t && Object.keys(EXT_TYPES).some(function (k) { return EXT_TYPES[k] === t; })) return t;
+    return EXT_TYPES[String(file.name || '').split('.').pop().toLowerCase()] || '';
+  }
+  function formStatus(msg, kind) { var el = addForm.querySelector('.formstatus'); el.textContent = msg; el.className = 'formstatus' + (kind ? ' ' + kind : ''); }
+  function postNeeds(body) {
+    return fetch('/api/watchdog-town-needs', { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify(body) })
+      .then(function (r) { return r.json().catch(function () { return {}; }).then(function (j) { if (!r.ok) throw new Error(j.error || 'Something went wrong. Please try again.'); return j; }); });
+  }
+  function uploadFile(url, file, type) {
+    var fd = new FormData();
+    fd.append('cacheControl', '3600');
+    fd.append('', new Blob([file], { type: type }), file.name || 'document');
+    return fetch(url, { method: 'PUT', headers: { 'x-upsert': 'false' }, body: fd }).then(function (r) { if (!r.ok) throw new Error('The upload didn’t finish. Please try again.'); });
+  }
+  function openAdd(t) {
+    addTown = t; openedAt = Date.now();
+    addForm.reset(); formStatus('', '');
+    addForm.querySelector('.send').disabled = false;
+    document.getElementById('add-town').textContent = t.name + ', ' + countyLabel(t.county);
+    if (dlg.showModal) dlg.showModal(); else dlg.setAttribute('open', '');
+  }
+  function closeAdd() { if (dlg.close) dlg.close(); else dlg.removeAttribute('open'); }
+  out.addEventListener('click', function (e) { if (e.target.closest('[data-add]') && addTown) openAdd(addTown); });
+  addForm.querySelector('.cancel').addEventListener('click', closeAdd);
+  addForm.addEventListener('submit', function (e) {
+    e.preventDefault();
+    var f = addForm.elements, t = addTown;
+    var file = f.file.files && f.file.files[0] || null;
+    var link = String(f.source_url.value || '').trim();
+    if (!file && !link) return formStatus('Add the town’s document or a link to the town’s page.', 'error');
+    if (link && !/^https:\/\/[^\s]+\.[^\s]+/i.test(link)) return formStatus('The link must start with https://.', 'error');
+    var type = file ? fileType(file) : '';
+    if (file && !type) return formStatus('Upload a PDF or a photo (JPG, PNG, WebP or HEIC).', 'error');
+    if (file && file.size > MAX_BYTES) return formStatus('The file must be 10 MB or smaller.', 'error');
+    var send = addForm.querySelector('.send');
+    send.disabled = true;
+    formStatus(file ? 'Uploading…' : 'Sending…', '');
+    postNeeds({
+      action: 'start', code: t.code, needs: NEED_KEYS, answer: f.answer.value, source_url: link,
+      file: file ? { name: file.name, type: type, size: file.size } : null,
+      name: f.name.value, email: f.email.value, role: f.role.value,
+      website: f.website.value, elapsed_ms: Date.now() - openedAt
+    }).then(function (res) {
+      if (!file || !res.upload_url) return res;
+      return uploadFile(res.upload_url, file, type).then(function () { return postNeeds({ action: 'finish', id: res.id }); });
+    }).then(function () {
+      formStatus('Thanks, it’s in. We’ll check it before it goes live.', '');
+      setTimeout(closeAdd, 1800);
+    }).catch(function (err) {
+      send.disabled = false;
+      formStatus(err.message || 'Something went wrong. Please try again.', 'error');
+    });
+  });
 
   // ---------- page state ----------
   function render(html) {

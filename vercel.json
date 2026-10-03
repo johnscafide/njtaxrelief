@@ -45,7 +45,7 @@
       "maxDuration": 10
     },
     "api/watchdog-town-needs.js": {
-      "includeFiles": "property/data/municipal-requirements/town-needs.json",
+      "includeFiles": "{property/data/municipal-requirements/town-needs.json,co/towns.json}",
       "maxDuration": 10
     },
     "api/watchdog-home-feed.js": {
