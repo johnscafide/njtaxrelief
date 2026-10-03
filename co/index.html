@@ -16,6 +16,12 @@
 <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link href="https://fonts.googleapis.com/css2?family=Source+Sans+3:wght@400;600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+<!-- Watchdog measurement: Google Analytics and Microsoft Clarity load through the shared consent runtime
+     (cookie banner, GA only after opt-in); first-party product analytics and AI-referral tracking as on other Watchdog pages. -->
+<script src="/property/js/watchdog-consent.js" defer></script>
+<script src="/property/js/product-analytics.js" defer></script>
+<script src="/property/js/ai-referral-analytics.js" defer></script>
 <style>
   :root {
     --blue: #0d3dbe;
@@ -357,6 +363,7 @@
 
   function pick(it) {
     if (!it) return;
+    measure('search', { search_term: String(it.label).slice(0, 100), search_type: it.kind === 'zip' ? 'zip' : 'town', via: 'suggestion' });
     setText(it.label);
     if (it.kind === 'town') return showTown(byCode[it.code]);
     if (it.kind === 'alias') return showChoices(it.alias.codes, aliasIntro(it.alias.name, it.alias.codes));
@@ -366,11 +373,51 @@
     return codes.length === 1 ? '' : esc(name) + ' is a mailing name. Pick the town:';
   }
 
+
+  // ---------- measurement ----------
+  // What people search for and what they get back. Google Analytics gets the standard `search`
+  // event (Reports > Engagement > Events > search > search_term) once a visitor accepts cookies;
+  // Clarity gets the same as custom tags; Watchdog's first-party analytics counts lookups by town.
+  // House numbers are dropped from address searches so no full street address is sent.
+  function searchTerm(q, kind) {
+    var t = String(q || '').trim().replace(/\s+/g, ' ');
+    if (kind === 'address') t = t.replace(/^\s*\d+[a-z]?(-\d+)?\s+/i, '');
+    return t.slice(0, 100);
+  }
+  function kindOf(q) {
+    var s = stripState(String(q || '').trim());
+    if (/^\d{5}(-\d{4})?$/.test(s)) return 'zip';
+    if (/\d/.test(s) && /[a-z]/i.test(s)) return 'address';
+    return 'town';
+  }
+  function measure(name, params) {
+    try { if (typeof window.gtag === 'function') window.gtag('event', name, params); } catch (_) {}
+    try {
+      if (typeof window.clarity === 'function') {
+        window.clarity('event', name);
+        Object.keys(params).forEach(function (k) { if (params[k] !== '' && params[k] != null) window.clarity('set', 'co_' + k, String(params[k])); });
+      }
+    } catch (_) {}
+  }
+  function trackSearch(q) {
+    var kind = kindOf(q);
+    measure('search', { search_term: searchTerm(q, kind), search_type: kind });
+  }
+  function trackTown(t, status) {
+    measure('co_town_result', { town: t.name, county: countyLabel(t.county), town_code: t.code, result: status });
+    try { if (window.WatchdogAnalytics) window.WatchdogAnalytics.track('tool_open', { tool: 'co_lookup', action: 'town_result', scope: t.code, status: status }); } catch (_) {}
+  }
+  function trackMiss(q) {
+    var kind = kindOf(q);
+    measure('co_search_no_result', { search_term: searchTerm(q, kind), search_type: kind });
+  }
+
   // ---------- running a search ----------
   var seq = 0;
   function run(raw) {
     var q = String(raw || '').trim();
     if (!q) return;
+    trackSearch(q);
     var mine = ++seq;
     dataReady.then(function () {
       if (mine !== seq) return;
@@ -392,6 +439,7 @@
       }
       var sug = suggestions(s).filter(function (x) { return x.kind === 'town'; }).map(function (x) { return x.code; });
       if (sug.length) return showChoices(sug, 'Did you mean:');
+      trackMiss(q);
       render('<p class="msg">No New Jersey town found for “' + esc(q) + '”.</p>');
     });
   }
@@ -408,6 +456,7 @@
         aliasByName(tail).forEach(function (a) { a.codes.forEach(function (c) { if (hits.indexOf(c) < 0) hits.push(c); }); });
         if (hits.length) return showChoices(hits, 'Address not found. Pick a town:');
       }
+      trackMiss(q);
       render('<p class="msg">Address not found. Try adding the town, or type just the town.</p>');
     });
   }
@@ -440,6 +489,7 @@
       .then(function (d) {
         if (mine !== seq) return;
         document.title = t.name + ' CO Requirements | Watchdog';
+        trackTown(t, d.status === 'ok' ? d.co.status : d.status);
         if (d.status === 'ok') return render(townHtml(t, d, ctx || {}));
         if (d.status === 'not_available') return render(head(t, ctx) +
           '<p>Not available yet.</p>' + addButton());
@@ -532,6 +582,7 @@
   }
   function openAdd(t) {
     addTown = t; openedAt = Date.now();
+    measure('co_add_requirements_open', { town: t.name, town_code: t.code });
     addForm.reset(); formStatus('', '');
     addForm.querySelector('.send').disabled = false;
     document.getElementById('add-town').textContent = t.name + ', ' + countyLabel(t.county);
@@ -563,6 +614,7 @@
       return uploadFile(res.upload_url, file, type).then(function () { return postNeeds({ action: 'finish', id: res.id }); });
     }).then(function () {
       formStatus('Thanks, it’s in. We’ll check it before it goes live.', '');
+      measure('co_requirements_submitted', { town: t.name, town_code: t.code });
       setTimeout(closeAdd, 1800);
     }).catch(function (err) {
       send.disabled = false;
