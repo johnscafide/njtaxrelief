@@ -1,0 +1,182 @@
+{
+ "municipality_code": "0712",
+ "municipality": "Millburn Township",
+ "county": "ESSEX",
+ "checked_at": "2026-10-03",
+ "resale_co": {
+  "status": "not_required",
+  "name": "",
+  "issued_by": "",
+  "lead_time": "",
+  "valid_for": "",
+  "requirements": [],
+  "fees": [],
+  "how_to_apply": "No Township Certificate of Occupancy is needed to sell a home. The seller needs the smoke detector certification from the Millburn Fire Department (see fire certificate). The Township recommends calling the Building Department at 973-564-7055 well before closing to check for open permits.",
+  "application_url": "",
+  "department_url": "https://twp.millburn.nj.us/150/Building",
+  "phone": "973-564-7055",
+  "email": "",
+  "contact_name": "Frank Catanese",
+  "contact_title": "Construction and Building Sub-Code Official",
+  "evidence": [
+   {
+    "url": "https://twp.millburn.nj.us/Faq.aspx?QID=341",
+    "quote": "Is a C.O (Certificate of Occupancy) required for sale of my home?",
+    "doc_date": "2026-10-03 (page fetched)",
+    "via": "page",
+    "verified": true
+   },
+   {
+    "url": "https://twp.millburn.nj.us/Faq.aspx?QID=341",
+    "quote": "No. You will need a smoke detector certification, which you can obtain by calling the Millburn Fire Department at 973-564-7043.",
+    "doc_date": "2026-10-03 (page fetched)",
+    "via": "page",
+    "verified": true
+   },
+   {
+    "url": "https://twp.millburn.nj.us/Faq.aspx?QID=341",
+    "quote": "However, we recommend that you call the Building Department at 973-564-7055 to determine if there are open permits on your property, which could slow the process of selling your home.",
+    "doc_date": "2026-10-03 (page fetched)",
+    "via": "page",
+    "verified": true
+   },
+   {
+    "url": "https://twp.millburn.nj.us/150/Building",
+    "quote": "Construction and Building Sub-Code Official",
+    "doc_date": "2026-10-03 (page fetched)",
+    "via": "page",
+    "verified": true
+   }
+  ],
+  "confidence": "high",
+  "notes": "The Township's own FAQ answers 'No' to whether a C.O. is required for the sale of a home and points sellers to the Fire Department smoke detector certification. The Building page lists Frank Catanese (Construction and Building Sub-Code Official), Building Department phone 973-564-7055, fax 973-379-3927; his email is only a link on the page. Town Hall is listed at 22 East Willow Street (temporary location). The official site is twp.millburn.nj.us (www.millburntwp.org did not load). Permit records can be checked on the SDL Portal."
+ },
+ "fire_cert": {
+  "requirements": [
+   "10-year sealed battery smoke alarm on every level, or hardwired as required; basement alarm at the bottom of the stairwell on the ceiling",
+   "Smoke alarms within 10 feet of all bedroom doors and a smoke alarm in every bedroom on the ceiling",
+   "Hardwired smoke alarms cannot be replaced with battery alarms; existing hardwired or monitored systems kept to original level",
+   "Smoke and CO alarms less than 10 years old, UL listed and working",
+   "Carbon monoxide alarms in hallways within 10 feet of all bedrooms and sleeping areas; plug-in, battery or hardwired accepted (not in switched outlets)",
+   "Secondary power source label 'CAUTION: Multiple Power Sources' by the electrical panel and meter if the home has solar, a generator, battery storage or other secondary power; label may not be handwritten (ANSI Z535.4)",
+   "House numbers at least 4 inches high, contrasting color, permanently fixed to the house and visible from the street (light post or mailbox numbers not accepted)"
+  ],
+  "authorities": [
+   {
+    "name": "Millburn Fire Department, Fire Prevention Division",
+    "type": "municipal_fire_bureau",
+    "area_served": "Entire township",
+    "lead_time": "Fee depends on business days before closing: 10 or more for the lowest fee. Appointments based on inspector availability. Certificates are valid for 6 months from date of issue.",
+    "fees": [
+     {
+      "label": "Certificate of inspection, request received 10 or more business days before closing",
+      "amount": "$100.00",
+      "quote": "INSPECTION REQUESTS RECEIVED 10 or more business days prior to closing = $100.00",
+      "source_url": "https://twp.millburn.nj.us/DocumentCenter/View/17841/CO-inspection-Info-2026",
+      "verified": null
+     },
+     {
+      "label": "Request received 4 to 10 business days before closing",
+      "amount": "$125.00",
+      "quote": "INSPECTION REQUESTS RECEIVED 4-10 business days prior to closing = $125.00",
+      "source_url": "https://twp.millburn.nj.us/DocumentCenter/View/17841/CO-inspection-Info-2026",
+      "verified": null
+     },
+     {
+      "label": "Request received fewer than 4 business days before closing",
+      "amount": "$175.00",
+      "quote": "INSPECTION REQUESTS RECEIVED fewer than 4 business days = $175.00",
+      "source_url": "https://twp.millburn.nj.us/DocumentCenter/View/17841/CO-inspection-Info-2026",
+      "verified": null
+     },
+     {
+      "label": "Reinspection",
+      "amount": "$50.00",
+      "quote": "REINSPECTION FEE is $50.00",
+      "source_url": "https://twp.millburn.nj.us/DocumentCenter/View/17841/CO-inspection-Info-2026",
+      "verified": null
+     }
+    ],
+    "how_to_apply": "Call 973-564-7043 to schedule (email ngerner@millburntwp.org). Pay before the inspection is completed, preferably online through the Township system (by calling the office or through the SDL Portal when scheduling), or by check payable to Township of Millburn delivered to Fire Headquarters, 459 Essex St, Administration Office (rear of building). Payments are not accepted in the field. A late or no-show owner or agent is charged a reinspection fee.",
+    "application_url": "https://www.sdlportal.com/towns/nj/essex/millburntwp",
+    "department_url": "https://twp.millburn.nj.us/258/Fire-Prevention-Forms",
+    "phone": "973-564-7043",
+    "email": "ngerner@millburntwp.org",
+    "contact_name": "",
+    "contact_title": "Fire Prevention Division scheduling",
+    "evidence": [
+     {
+      "url": "https://twp.millburn.nj.us/DocumentCenter/View/17841/CO-inspection-Info-2026",
+      "quote": "MILLBURN FIRE PREVENTION DIVISION RESIDENTIAL REQUIREMENTS FOR SALE OR LEASE OF 1 & 2 FAMILY DWELLINGS CSACMAPFEC 5:70-2.3 (a)",
+      "doc_date": "2026-09-30 (PDF date)",
+      "via": "pdf",
+      "verified": null
+     },
+     {
+      "url": "https://twp.millburn.nj.us/DocumentCenter/View/17841/CO-inspection-Info-2026",
+      "quote": "Certificates are valid for 6 months from date of issue.",
+      "doc_date": "2026-09-30",
+      "via": "pdf",
+      "verified": null
+     },
+     {
+      "url": "https://twp.millburn.nj.us/DocumentCenter/View/17841/CO-inspection-Info-2026",
+      "quote": "To schedule an inspection, call 973-564-7043. Email: ngerner@millburntwp.org",
+      "doc_date": "2026-09-30",
+      "via": "pdf",
+      "verified": null
+     },
+     {
+      "url": "https://twp.millburn.nj.us/DocumentCenter/View/17841/CO-inspection-Info-2026",
+      "quote": "Payments are not accepted in the field.",
+      "doc_date": "2026-09-30",
+      "via": "pdf",
+      "verified": null
+     },
+     {
+      "url": "https://www.nj.gov/dca/dfs/pdf/fire%20directory_county%20summary/fire_code_enforcement_director.pdf",
+      "quote": "LEAID: 0712-001 Millburn Twp SMOKE DETECTOR COMPLIANCE Name: Millburn Twp Fire Dept Enf Auth. Fire Dept Addr: 459 Essex St Millburn NJ 07041 Phone (973) 564-7036",
+      "doc_date": "survey date 1/16/2026",
+      "via": "state_directory",
+      "verified": null
+     },
+     {
+      "url": "https://nj.gov/dca/dfs/pdf/ANNUAL%20REGISTRY/THIRD%20QUARTER%20LEA%20REGISTRY%202026.pdf",
+      "quote": "F Millburn Township",
+      "doc_date": "JULY 2026",
+      "via": "pdf",
+      "verified": true
+     }
+    ],
+    "confidence": "high"
+   }
+  ],
+  "notes": "Fees and rules come from the Fire Prevention Division's 'CO inspection Info 2026' PDF (dated September 30, 2026). The PDF has no text layer, so its quotes were read from the page images and a text-matching script will not find them. It does not list a fire extinguisher, consistent with P.L.2025, c.19, and it adds the secondary power source label. The Township FAQ gives 973-564-7043 for the smoke certification; the state fire directory lists the smoke detector compliance phone as (973) 564-7036 and the fire official line as (973) 564-7041."
+ },
+ "other_items": [
+  {
+   "label": "Open permits check",
+   "detail": "The Township recommends calling the Building Department (973-564-7055) well ahead of closing to find out about open permits, which could slow the sale. Permit records are also on the SDL Portal. Failing to get final inspections can bring a $2,000 penalty.",
+   "source_url": "https://twp.millburn.nj.us/Faq.aspx?QID=341"
+  },
+  {
+   "label": "House numbering",
+   "detail": "The fire inspection checks the house numbering ordinance: numbers at least 4 inches high, contrasting, fixed to the house and visible from the street.",
+   "source_url": "https://twp.millburn.nj.us/DocumentCenter/View/17841/CO-inspection-Info-2026"
+  }
+ ],
+ "open_questions": [
+  "Are 'business days prior to closing' counted from the request date or the inspection date?",
+  "Is there anything else the Township needs at sale, such as a final water or sewer reading? None was found online."
+ ],
+ "verification": {
+  "fees": 4,
+  "fee_ok": 0,
+  "fee_bad": 0,
+  "fee_unchecked": 4,
+  "quotes": 10,
+  "q_ok": 5,
+  "q_bad": 0,
+  "q_unchecked": 5
+ }
+}

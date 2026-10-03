@@ -1,0 +1,201 @@
+{
+ "municipality_code": "2001",
+ "municipality": "Berkeley Heights Township",
+ "county": "UNION",
+ "checked_at": "2026-10-02",
+ "resale_co": {
+  "status": "not_required",
+  "name": "",
+  "issued_by": "",
+  "lead_time": "",
+  "valid_for": "",
+  "requirements": [],
+  "fees": [],
+  "how_to_apply": "No Township certificate of occupancy is needed to sell a home. The seller needs only the fire certificate (smoke alarm, carbon monoxide alarm and fire extinguisher certificate of approval) from the Fire Prevention Bureau before closing.",
+  "application_url": "",
+  "department_url": "https://www.berkeleyheights.gov/156/Building",
+  "phone": "908-464-2700 x2138",
+  "email": "jpopolo@bhtwp.com",
+  "contact_name": "Joe Popolo",
+  "contact_title": "Construction Official, Fire Official",
+  "evidence": [
+   {
+    "url": "https://www.berkeleyheights.gov/Faq.aspx?QID=80",
+    "quote": "The Township of Berkeley Heights does NOT require a CO (Certificate of Occupancy) prior to selling your home.",
+    "doc_date": "",
+    "via": "page",
+    "verified": true
+   },
+   {
+    "url": "https://www.berkeleyheights.gov/Faq.aspx?QID=80",
+    "quote": "Prior to selling your home you must obtain a Certificate of Approval for a Smoke Inspection/Fire Extinguisher Inspection. This Certificate is required prior to the Closing.",
+    "doc_date": "",
+    "via": "page",
+    "verified": true
+   },
+   {
+    "url": "https://library.municode.com/nj/berkeley_heights_township/codes/code_of_ordinances?nodeId=TIT15BUCO_CH15.32CECOOCNOPR",
+    "quote": "No nonresidential building, structure or land, or portion thereof, shall be occupied, used, rented or sold until a certificate of occupancy or certificate of continued occupancy is issued by the construction official.",
+    "doc_date": "2026-08 (Supp. 43)",
+    "via": "page",
+    "verified": "eye"
+   },
+   {
+    "url": "https://www.berkeleyheights.gov/156/Building",
+    "quote": "Joe Popolo Construction Official, Fire Official jpopolo@bhtwp.com Phone: 908-464-2700 x2138",
+    "doc_date": "",
+    "via": "page",
+    "verified": true
+   }
+  ],
+  "confidence": "high",
+  "notes": "The Township FAQ says plainly that no CO is required to sell a home. The Township's certificate of continued occupancy chapter (Code Chapter 15.32) covers nonresidential property only. An older land use clause (Code Appendix A, Section 17.1.3 D, readopted 12-19-2024) says no certificate of occupancy is needed for an existing building except where the ownership, character, use or occupancy is changed; the Township's own FAQ treats home sales as not needing a CO, so that clause is not treated as a resale program here. Rental-only items: the Township has an online Landlord Registration for 1 and 2 unit dwellings and a Vacant Property Registration; these are not resale requirements. Code text was read through the municode library (library.municode.com, Berkeley Heights Code of Ordinances, Supplement 43)."
+ },
+ "fire_cert": {
+  "requirements": [
+   "Smoke alarms on each level including basements (not crawl spaces or attics without habitable space), and outside each separate sleeping area",
+   "All smoke alarms must be listed to UL 217, in working order and less than 10 years old",
+   "Battery-only smoke alarms must be 10-year sealed battery units (since January 1, 2019)",
+   "Homes built or altered after 1977 with AC powered or interconnected alarms must keep them working; they cannot be replaced with battery units",
+   "Two-family homes also need a smoke alarm at the highest level of each common stairwell",
+   "Carbon monoxide alarm outside the sleeping area, within 10 feet of bedroom doors, if the home has a fuel-burning appliance, a fireplace or an attached garage",
+   "Alarms must be mounted securely; double-sided tape is not allowed",
+   "Fire extinguisher (still listed on the 2019 Township form): one ABC extinguisher, 2A:10BC to 10 pounds, on its bracket within 10 feet of the kitchen, top no more than 5 feet above the floor, with the owner's manual; a new extinguisher needs proof of purchase",
+   "Required fire protection systems such as sprinklers must stay fully working",
+   "The owner or the owner's representative must be at the home for the inspection"
+  ],
+  "authorities": [
+   {
+    "name": "Berkeley Heights Fire Prevention Bureau (Township Bureau of Fire Prevention)",
+    "type": "municipal_fire_bureau",
+    "area_served": "Entire township",
+    "lead_time": "Apply more than 10 business days before the change of occupant for the lowest fee. Inspections are Tuesday and Thursday, 9 a.m. to noon. The certificate is valid for 6 months from the date of issue.",
+    "fees": [
+     {
+      "label": "Smoke alarm, carbon monoxide alarm and fire extinguisher certificate, request received more than 10 business days before change of occupant",
+      "amount": "$45.00",
+      "quote": "Requests for a CSDCMAFEC received more than 10 business days prior to change of occupant $45.00",
+      "source_url": "https://www.berkeleyheights.gov/DocumentCenter/View/832/Property-Fire-Inspection-Required-for-Change-of-Occupancy",
+      "verified": true
+     },
+     {
+      "label": "Request received 4 to 10 business days before change of occupant",
+      "amount": "$90.00",
+      "quote": "received 4 to 10 business days prior to change of occupant; $90.00",
+      "source_url": "https://www.berkeleyheights.gov/DocumentCenter/View/832/Property-Fire-Inspection-Required-for-Change-of-Occupancy",
+      "verified": true
+     },
+     {
+      "label": "Request received fewer than 4 business days before change of occupant",
+      "amount": "$161.00",
+      "quote": "received fewer than 4 business days prior to change of occupant; $161.00",
+      "source_url": "https://www.berkeleyheights.gov/DocumentCenter/View/832/Property-Fire-Inspection-Required-for-Change-of-Occupancy",
+      "verified": true
+     }
+    ],
+    "how_to_apply": "Fill out the Application for Carbon Monoxide / Smoke Detector Fire Extinguisher Certificate of Approval (PDF on the Township Forms page, or pick one up from the Township Clerk at the Municipal Building, 29 Park Avenue), pay the fee and schedule the inspection. The Township also lists an online Form Center version. One re-inspection is allowed per application after a failure. To cancel, call 908-464-2700 ext. 1 at least 48 hours ahead.",
+    "application_url": "https://www.berkeleyheights.gov/DocumentCenter/View/832/Property-Fire-Inspection-Required-for-Change-of-Occupancy",
+    "department_url": "http://www.berkeleyheightsfire.com/fire-dept.html",
+    "phone": "908-464-0800 ext. 13",
+    "email": "jpopolo@bhtwp.com",
+    "contact_name": "Joe Popolo",
+    "contact_title": "Construction Official, Fire Official",
+    "evidence": [
+     {
+      "url": "https://www.berkeleyheights.gov/DocumentCenter/View/832/Property-Fire-Inspection-Required-for-Change-of-Occupancy",
+      "quote": "A Certificate of Smoke Detector, Carbon Monoxide Alarm and Fire Extinguisher Compliance (CSDCMAFEC) is required before any \"Use Group R-3 or R-4\" dwelling unit is sold, leased or otherwise made subject to change of occupancy for residential purposes.",
+      "doc_date": "2019-05 (PDF created 5/14/2019)",
+      "via": "pdf",
+      "verified": true
+     },
+     {
+      "url": "https://www.berkeleyheights.gov/DocumentCenter/View/832/Property-Fire-Inspection-Required-for-Change-of-Occupancy",
+      "quote": "Inspections are conducted between the hours of 9 a.m. and noon Tuesday and Thursday.",
+      "doc_date": "2019-05",
+      "via": "pdf",
+      "verified": true
+     },
+     {
+      "url": "https://www.berkeleyheights.gov/DocumentCenter/View/832/Property-Fire-Inspection-Required-for-Change-of-Occupancy",
+      "quote": "The CSDCMAFEC will remain valid for a period of six (6) months from the date of issue unless the occupancy or ownership of the dwelling changes in the interim.",
+      "doc_date": "2019-05",
+      "via": "pdf",
+      "verified": true
+     },
+     {
+      "url": "https://www.berkeleyheights.gov/DocumentCenter/View/832/Property-Fire-Inspection-Required-for-Change-of-Occupancy",
+      "quote": "Call the Fire Prevention Office at 908-464-0800 ext. 13",
+      "doc_date": "2019-05",
+      "via": "pdf",
+      "verified": true
+     },
+     {
+      "url": "https://www.berkeleyheights.gov/DocumentCenter/View/832/Property-Fire-Inspection-Required-for-Change-of-Occupancy",
+      "quote": "You must call the office at 908-464-2700 ext. 1 during normal business hours to cancel. 48 hours' notice is required for cancellations.",
+      "doc_date": "2019-05",
+      "via": "pdf",
+      "verified": true
+     },
+     {
+      "url": "https://www.berkeleyheights.gov/DocumentCenter/View/832/Property-Fire-Inspection-Required-for-Change-of-Occupancy",
+      "quote": "One re-inspection will be allowed for non-compliance per application.",
+      "doc_date": "2019-05",
+      "via": "pdf",
+      "verified": true
+     },
+     {
+      "url": "http://www.berkeleyheightsfire.com/images/pdf/SmokeDetInspectionRequirmentsNew.pdf",
+      "quote": "Fee Schedule: Requests for a CSDCMAFEC received more than 10 business days prior to change of occupant $45.00",
+      "doc_date": "2019-10 (same form on the Fire Department site)",
+      "via": "pdf",
+      "verified": true
+     },
+     {
+      "url": "https://www.berkeleyheights.gov/171/Forms-Permits-Licenses",
+      "quote": "Apply for Home Sale / Rental Change of Occupancy (PDF)",
+      "doc_date": "",
+      "via": "page",
+      "verified": true
+     },
+     {
+      "url": "https://www.berkeleyheights.gov/156/Building",
+      "quote": "Joe Popolo Construction Official, Fire Official jpopolo@bhtwp.com",
+      "doc_date": "",
+      "via": "page",
+      "verified": true
+     },
+     {
+      "url": "https://www.nj.gov/dca/dfs/pdf/fire%20directory_county%20summary/fire_code_enforcement_director.pdf",
+      "quote": "LEAID: 2001-001 Enf Auth. Fire Dept Fire Official Joseph Popolo Phone (908) 464-0800 Addr: 411 Hamilton Av Berkeley Hgts NJ 07922 ... Email jpopolo@bhtwp.com",
+      "doc_date": "2026-01 (survey date 1/7/2026)",
+      "via": "state_directory",
+      "verified": true
+     },
+     {
+      "url": "https://nj.gov/dca/dfs/pdf/ANNUAL%20REGISTRY/THIRD%20QUARTER%20LEA%20REGISTRY%202026.pdf",
+      "quote": "F Berkeley Heights Township",
+      "doc_date": "2026-07",
+      "via": "pdf",
+      "verified": true
+     }
+    ],
+    "confidence": "medium"
+   }
+  ],
+  "notes": "The only published fee schedule is on the Township's fire certificate application, a scanned form dated May 2019 (the same form, dated October 2019, is on the Fire Department website). It still lists the portable fire extinguisher, which the state dropped from the sale certificate in February 2025 (P.L.2025, c.19), so confirm current fees and the extinguisher rule with the Fire Prevention Bureau. The Township Code (Chapter 8.20) does not set the smoke certificate fee. The online Form Center version of the application asks visitors to sign in, so the PDF is listed here. The Fire Official also serves as Construction Official; his Township directory line is 908-464-2700 x2138."
+ },
+ "other_items": [],
+ "open_questions": [
+  "Is the 2019 fee schedule ($45.00 / $90.00 / $161.00) still current, and does the Bureau still require a fire extinguisher after P.L.2025, c.19?"
+ ],
+ "verification": {
+  "fees": 3,
+  "fee_ok": 3,
+  "fee_bad": 0,
+  "fee_unchecked": 0,
+  "quotes": 15,
+  "q_ok": 15,
+  "q_bad": 0,
+  "q_unchecked": 0
+ }
+}

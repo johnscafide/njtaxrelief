@@ -1,0 +1,255 @@
+{
+ "municipality_code": "1602",
+ "municipality": "Clifton City",
+ "county": "PASSAIC",
+ "checked_at": "2026-10-02",
+ "resale_co": {
+  "status": "required",
+  "name": "Dwelling Certificate (Certificate of Inspection for 1 & 2 family dwellings, sale)",
+  "issued_by": "Clifton Fire Department, Fire Prevention Bureau, after Building, Tax and Zoning Department sign-off",
+  "lead_time": "Standard certificate: call the office 7 business days after the inspection; inspections are on Wednesdays 9am to 12 noon. Faster certificates cost more (within 4 to 20 days, or within 4 business days).",
+  "valid_for": "6 months after the Fire Department inspection",
+  "requirements": [
+   "No open permits on the property (Building Department check and stamp on the application)",
+   "Tax and Zoning Department approval (the Zoning Officer reviews and approves all Dwelling Certificates)",
+   "Smoke alarms on every level (basement, each floor), excluding crawl spaces and unfinished attics with pull-down stairs",
+   "Smoke alarm within 10 feet of the bedroom doors on any floor with bedrooms",
+   "All smoke alarms less than 10 years old; battery-only alarms must be 10-year sealed battery units; existing hardwired systems must be kept",
+   "Carbon monoxide alarms within 10 feet outside all sleeping areas, with more on each floor that has sleeping areas",
+   "Central station fire alarm must be tested beforehand by a Division of Fire Safety certified company; bring the test record or the inspection fails",
+   "Multiple sources of power label within 18 inches of the electrical panel and meter for homes with a generator, solar or battery storage (the Bureau supplies and installs the label at the inspection)",
+   "An adult over 18 must be present and all areas (unit, basement, attic, common areas) must be accessible"
+  ],
+  "fees": [
+   {
+    "label": "Dwelling certificate, sale, per unit (one certificate covers the town requirement and the smoke and carbon monoxide certificate; paid once)",
+    "amount": "$125.00 per unit",
+    "quote": "Sale - $125.00 per unit",
+    "source_url": "https://www.cliftonnj.org/DocumentCenter/View/127/Dwelling-Application-Packet-PDF",
+    "verified": true
+   },
+   {
+    "label": "Expedited: certificate available within 4 to 20 days, per unit (paid instead of the standard fee)",
+    "amount": "$200 per unit",
+    "quote": "Certificate available within 4-20 days - $200 per unit",
+    "source_url": "https://www.cliftonnj.org/DocumentCenter/View/127/Dwelling-Application-Packet-PDF",
+    "verified": true
+   },
+   {
+    "label": "Expedited: certificate available within 4 business days, per unit (paid instead of the standard fee)",
+    "amount": "$300 per unit",
+    "quote": "Certificate available within 4 business days - $300 per unit",
+    "source_url": "https://www.cliftonnj.org/DocumentCenter/View/127/Dwelling-Application-Packet-PDF",
+    "verified": true
+   },
+   {
+    "label": "Dwelling certificate (smoke and carbon monoxide compliance), sale, per unit (same certificate and fee as the town requirement; paid once)",
+    "amount": "$125.00 per unit",
+    "quote": "Sale - $125.00 per unit",
+    "source_url": "https://www.cliftonnj.org/DocumentCenter/View/127/Dwelling-Application-Packet-PDF",
+    "verified": true
+   },
+   {
+    "label": "Expedited: certificate available within 4 to 20 days, per unit",
+    "amount": "$200 per unit",
+    "quote": "Certificate available within 4-20 days - $200 per unit",
+    "source_url": "https://www.cliftonnj.org/DocumentCenter/View/127/Dwelling-Application-Packet-PDF",
+    "verified": true
+   },
+   {
+    "label": "Expedited: certificate available within 4 business days, per unit",
+    "amount": "$300 per unit",
+    "quote": "Certificate available within 4 business days - $300 per unit",
+    "source_url": "https://www.cliftonnj.org/DocumentCenter/View/127/Dwelling-Application-Packet-PDF",
+    "verified": true
+   }
+  ],
+  "how_to_apply": "Fill out the Application for Dwelling Smoke Detector and Carbon Monoxide Compliance completely (check Sale), signed by both seller and buyer. Call the Building Department (973-470-5809) to make sure there are no open permits and ask when and where to get the application stamped. Bring the stamped application, the fee (payable to the City of Clifton) and, if digital signatures are not verified, a copy of the sales contract to Clifton Fire Headquarters (Yellow House on the City Hall property, 900 Clifton Avenue). After-hours drop-off is available in the Fire Headquarters drop box. Certificates must be picked up in person.",
+  "application_url": "https://www.cliftonnj.org/DocumentCenter/View/127/Dwelling-Application-Packet-PDF",
+  "department_url": "https://www.cliftonnj.org/174/Fire-Department",
+  "phone": "(973) 470-5801",
+  "email": "mpressler@cliftonnj.org",
+  "contact_name": "Michael Pressler",
+  "contact_title": "Fire Marshal (Building Department open-permit check: Ernest Tedesco, Construction Official, 973-470-5809)",
+  "evidence": [
+   {
+    "url": "https://www.cliftonnj.org/DocumentCenter/View/127/Dwelling-Application-Packet-PDF",
+    "quote": "No closing shall take place without a VALID Certificate of Inspection. No tenant rental shall take occupancy without a VALID Certificate of Inspection. CERTIFICATES ARE CONTINGENT ON PASSING BUILDING, TAX & ZONING DEPTS.",
+    "doc_date": "2025-05 (PDF created May 5, 2025)",
+    "via": "pdf",
+    "verified": true
+   },
+   {
+    "url": "https://www.cliftonnj.org/DocumentCenter/View/127/Dwelling-Application-Packet-PDF",
+    "quote": "Call the Building Dept. at 973-470-5809 to ensure there are no open permits on the property.   Ask them when and where to go to get your application stamped.",
+    "doc_date": "2025-05",
+    "via": "pdf",
+    "verified": true
+   },
+   {
+    "url": "https://www.cliftonnj.org/DocumentCenter/View/127/Dwelling-Application-Packet-PDF",
+    "quote": "Inspections are scheduled on Wednesdays between 9am-12noon.  An adult over 18 years old must be present at the time of inspection.  All areas of the structure must be accessible.",
+    "doc_date": "2025-05",
+    "via": "pdf",
+    "verified": true
+   },
+   {
+    "url": "https://www.cliftonnj.org/DocumentCenter/View/127/Dwelling-Application-Packet-PDF",
+    "quote": "*CERTIFICATE EXPIRES 6 MONTHS AFTER FIRE DEPARTMENT INSPECTION*",
+    "doc_date": "2025-05",
+    "via": "pdf",
+    "verified": true
+   },
+   {
+    "url": "https://www.cliftonnj.org/DocumentCenter/View/127/Dwelling-Application-Packet-PDF",
+    "quote": "Michael Pressler Fire Marshal ... DEPARTMENT OF FIRE FIRE PREVENTION BUREAU 900 CLIFTON AVENUE CLIFTON, NEW JERSEY 07013 Office (973) 470-5801 Fax (973) 470-5844 mpressler@cliftonnj.org",
+    "doc_date": "2025-05",
+    "via": "pdf",
+    "verified": true
+   },
+   {
+    "url": "https://www.cliftonnj.org/242/Zoning",
+    "quote": "Review, investigate and approve all Dwelling Certificates",
+    "doc_date": "2026-10-02 (page fetched)",
+    "via": "page",
+    "verified": true
+   },
+   {
+    "url": "https://www.cliftonnj.org/227/Building",
+    "quote": "Ernest Tedesco Construction Official Building Department Phone: 973-470-5809 Fax: 973-470-0617 Hours Monday through Friday 8:15 AM to 4:15 PM",
+    "doc_date": "2026-10-02 (page fetched)",
+    "via": "page",
+    "verified": true
+   }
+  ],
+  "confidence": "high",
+  "notes": "Clifton's resale requirement is the Fire Prevention Bureau's Dwelling Certificate (Certificate of Inspection). The same certificate is the state smoke and carbon monoxide alarm certificate, and it is only issued after the Building (open permits), Tax and Zoning Departments sign off, so the fee is paid once; the fees are repeated under fire_cert. The packet (May 2025) also lists rental certificates at $75.00 per unit. Standard fees may be paid by personal check, money order, cashier's check, exact cash or credit card (transaction fee); expedited fees cannot be paid by personal check. Cash and card payments must be made in person; make payments to the City of Clifton. The City code (ecode360) could not be opened; web search summaries mention a different tiered fee schedule ($150 / $250 / $375) and a 180-day validity attributed to an ordinance, but no snippet showing exact Clifton code text was found, so those amounts are not used. The Building Department separately handles Certificates of Business Compliance for commercial sales. Rental dwellings also need a lead-based paint inspection (separate Lead Division program)."
+ },
+ "fire_cert": {
+  "requirements": [
+   "Smoke alarms on every level and within 10 feet of bedroom doors; all under 10 years old",
+   "Battery-only smoke alarms must be 10-year sealed battery units; existing hardwired systems must be maintained",
+   "CO alarms (UL 2034) within 10 feet outside all sleeping areas, on each floor with sleeping areas",
+   "Central station fire alarm test record from a Division of Fire Safety certified company is required at the inspection; inspectors will not test it",
+   "Multiple sources of power label for homes with a generator, solar or battery storage (supplied and installed by the Bureau at the inspection)",
+   "The City's Fire Department FAQ still says a dry chemical fire extinguisher, at least 10BC rated and no more than 10 pounds, is needed for the dwelling inspection; the May 2025 packet does not list one"
+  ],
+  "authorities": [
+   {
+    "name": "Clifton Fire Department, Fire Prevention Bureau",
+    "type": "municipal_fire_bureau",
+    "area_served": "Entire city",
+    "lead_time": "Standard: certificate ready about 7 business days after the Wednesday inspection. Expedited options: within 4 to 20 days, or within 4 business days, at higher fees.",
+    "fees": [
+     {
+      "label": "Dwelling certificate (smoke and carbon monoxide compliance), sale, per unit (same certificate and fee as the town requirement; paid once)",
+      "amount": "$125.00 per unit",
+      "quote": "Sale - $125.00 per unit",
+      "source_url": "https://www.cliftonnj.org/DocumentCenter/View/127/Dwelling-Application-Packet-PDF",
+      "verified": true
+     },
+     {
+      "label": "Expedited: certificate available within 4 to 20 days, per unit",
+      "amount": "$200 per unit",
+      "quote": "Certificate available within 4-20 days - $200 per unit",
+      "source_url": "https://www.cliftonnj.org/DocumentCenter/View/127/Dwelling-Application-Packet-PDF",
+      "verified": true
+     },
+     {
+      "label": "Expedited: certificate available within 4 business days, per unit",
+      "amount": "$300 per unit",
+      "quote": "Certificate available within 4 business days - $300 per unit",
+      "source_url": "https://www.cliftonnj.org/DocumentCenter/View/127/Dwelling-Application-Packet-PDF",
+      "verified": true
+     }
+    ],
+    "how_to_apply": "Same application as the Dwelling Certificate: get the Building Department stamp, then bring the application and payment to Fire Headquarters (Yellow House, City Hall property, 900 Clifton Avenue) or use the after-hours drop box with a contact name and phone number on the envelope.",
+    "application_url": "https://www.cliftonnj.org/DocumentCenter/View/127/Dwelling-Application-Packet-PDF",
+    "department_url": "https://www.cliftonnj.org/174/Fire-Department",
+    "phone": "(973) 470-5801",
+    "email": "mpressler@cliftonnj.org",
+    "contact_name": "Michael Pressler",
+    "contact_title": "Fire Marshal",
+    "evidence": [
+     {
+      "url": "https://www.cliftonnj.org/DocumentCenter/View/127/Dwelling-Application-Packet-PDF",
+      "quote": "APPLICATION FOR DWELLING SMOKE DETECTOR & CARBON MONOXIDE COMPLIANCE THE CITY OF CLIFTON | 900 CLIFTON AVENUE, CLIFTON, NJ 07013 PHONE: 973-470-5801 | FAX: 973-470-5844",
+      "doc_date": "2025-05",
+      "via": "pdf",
+      "verified": true
+     },
+     {
+      "url": "https://www.cliftonnj.org/DocumentCenter/View/127/Dwelling-Application-Packet-PDF",
+      "quote": "Call our office 7 business days after inspection to ensure your certificate is available. Dwelling Certificates must be picked up in person.",
+      "doc_date": "2025-05",
+      "via": "pdf",
+      "verified": true
+     },
+     {
+      "url": "https://www.cliftonnj.org/DocumentCenter/View/127/Dwelling-Application-Packet-PDF",
+      "quote": "Must be paid by Personal Check, Money Order, Cashier’s Check, Cash (Exact Change) or Credit Card (Transaction fee applied)",
+      "doc_date": "2025-05",
+      "via": "pdf",
+      "verified": true
+     },
+     {
+      "url": "https://www.cliftonnj.org/Faq.aspx?QID=110",
+      "quote": "What size fire extinguisher do I need for my dwelling inspection? A dry chemical extinguisher with a minimum of 10BC rated and no larger than 10 pounds in weight is needed.",
+      "doc_date": "2026-10-02 (page fetched; undated FAQ)",
+      "via": "page",
+      "verified": true
+     },
+     {
+      "url": "https://www.cliftonnj.org/174/Fire-Department",
+      "quote": "880 Clifton Avenue Clifton NJ 07013 Directions Phone: 973-470-5801 Fax: 973-470-5844 Emergency Phone: 911 Hours Monday through Friday: 8:00 AM to 4:00 PM",
+      "doc_date": "2026-10-02 (page fetched)",
+      "via": "page",
+      "verified": true
+     },
+     {
+      "url": "https://nj.gov/dca/dfs/pdf/ANNUAL%20REGISTRY/THIRD%20QUARTER%20LEA%20REGISTRY%202026.pdf",
+      "quote": "F Clifton City",
+      "doc_date": "2026-07",
+      "via": "pdf",
+      "verified": true
+     },
+     {
+      "url": "https://www.nj.gov/dca/dfs/pdf/fire%20directory_county%20summary/fire_code_enforcement_director.pdf",
+      "quote": "16 Passaic Clifton City1602 ... LEAID: 1602-001 Enf Auth. Fire Dept Fire Official Micahel K Pressler Phone (973) 470-5804 Addr: 900 Clifton Av Clifton NJ 07013 ... Email MPressler@Cliftonnj.org ... Clifton City Fire Prev",
+      "doc_date": "2026-01-12 (survey date)",
+      "via": "state_directory",
+      "verified": true
+     }
+    ],
+    "confidence": "high"
+   }
+  ],
+  "notes": "The Clifton Fire Department (Fire Prevention Bureau) is the fire code enforcing agency and issues the dwelling smoke and carbon monoxide certificate, which is also the City's resale Dwelling Certificate. The state directory lists Fire Official Michael Pressler (name misspelled 'Micahel' there) at (973) 470-5804; the City packet gives the office line (973) 470-5801, which is used here. The Fire Department FAQ still asks for a fire extinguisher at dwelling inspections although P.L.2025, c.19 removed it from the state sale certificate; confirm with the Bureau."
+ },
+ "other_items": [
+  {
+   "label": "Open permits",
+   "detail": "Call the Building Department (973-470-5809) to make sure there are no open permits; the application needs the Building Department stamp.",
+   "source_url": "https://www.cliftonnj.org/DocumentCenter/View/127/Dwelling-Application-Packet-PDF"
+  },
+  {
+   "label": "Tax and zoning sign-off",
+   "detail": "Certificates are contingent on passing the Building, Tax and Zoning Departments.",
+   "source_url": "https://www.cliftonnj.org/DocumentCenter/View/127/Dwelling-Application-Packet-PDF"
+  }
+ ],
+ "open_questions": [
+  "Does the City fee ordinance (code not viewable on ecode360) match the May 2025 packet fees ($125 sale per unit, $200 and $300 expedited)?",
+  "Is a fire extinguisher still required at the dwelling inspection after P.L.2025, c.19 (the FAQ says yes, the 2025 packet is silent)?"
+ ],
+ "verification": {
+  "fees": 6,
+  "fee_ok": 6,
+  "fee_bad": 0,
+  "fee_unchecked": 0,
+  "quotes": 14,
+  "q_ok": 14,
+  "q_bad": 0,
+  "q_unchecked": 0
+ }
+}

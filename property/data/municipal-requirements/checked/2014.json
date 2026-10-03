@@ -1,0 +1,216 @@
+{
+ "municipality_code": "2014",
+ "municipality": "Roselle Borough",
+ "county": "UNION",
+ "checked_at": "2026-10-02",
+ "resale_co": {
+  "status": "required",
+  "name": "Residential Occupancy Certificate (ROC)",
+  "issued_by": "Borough of Roselle Division of Code Enforcement",
+  "lead_time": "Open construction permits must be finaled before the ROC inspection is scheduled; if no violations are found the certificate can be issued within 10 business days",
+  "valid_for": "Temporary certificate: up to 60 days (instructions page 1) or 90 days (checklist item 23)",
+  "requirements": [
+   "10-year sealed battery smoke detectors on all levels including basements and attics over 7 feet high, within 10 feet outside bedrooms; existing hardwired alarms kept",
+   "Carbon monoxide detectors in basements and within 10 feet outside bedrooms, plus inside any bedroom directly above a garage",
+   "2A10BC fire extinguisher within 10 feet of the kitchen (1 and 2 family)",
+   "Bedroom windows open and close; windows and doors in good repair with proper hardware",
+   "Holes in walls, floors and ceilings repaired; missing tiles replaced and grouted",
+   "Hot and cold water with shut-off valves at kitchen and bath fixtures; toilets secure with shut-offs",
+   "GFI outlets within 6 feet of water and in all bathrooms; cover plates on all outlets, switches and junction boxes; dead wiring removed",
+   "Main electrical service line strapped to the building",
+   "Fireplaces and wood stoves with proper clearances and screens",
+   "Water heaters, boilers and furnaces working; relief valve discharge pipe within 4 inches of the floor; vents secured; gas shut-off in the same room",
+   "Sump pumps discharge outside, not into sanitary lines; garage door openers plugged directly into an outlet",
+   "Roofs, gutters and downspouts in good repair; handrails on stairs with 3 or more risers",
+   "House numbers at least 4 inches high, contrasting and visible from the curb",
+   "Yard cut, trimmed and free of debris; all utilities on",
+   "All open construction permits finalized; work done without permits must get permits"
+  ],
+  "fees": [
+   {
+    "label": "Residential Occupancy Certificate, 1 and 2 family",
+    "amount": "$100.00",
+    "quote": "1 AND 2 FAMILY RESIDENTIAL $100.00",
+    "source_url": "https://www.boroughofroselle.com/Document%20Center/How%20do%20i/Form/Local%20Code%20Enforcement/Instructions-and-Checklist-for-CO.pdf",
+    "verified": true
+   },
+   {
+    "label": "Temporary Residential Occupancy Certificate (at the inspector's discretion)",
+    "amount": "$200.00",
+    "quote": "TEMP ROC $200.00",
+    "source_url": "https://www.boroughofroselle.com/Document%20Center/How%20do%20i/Form/Local%20Code%20Enforcement/Instructions-and-Checklist-for-CO.pdf",
+    "verified": true
+   },
+   {
+    "label": "Each inspection beyond the second",
+    "amount": "$75.00",
+    "quote": "Additional inspections over two (2) will be surcharged at $75.00 per inspection, (no exceptions.)",
+    "source_url": "https://www.boroughofroselle.com/Document%20Center/How%20do%20i/Form/Local%20Code%20Enforcement/Instructions-and-Checklist-for-CO.pdf",
+    "verified": true
+   }
+  ],
+  "how_to_apply": "Fill out the Application for Residential Occupancy Certificate (Borough forms page, Local Code Enforcement) and return it with the fee to the Division of Code Enforcement, 210 Chestnut Street, Roselle. Company checks or money orders only; personal checks are not accepted. Confirm with the Building Department that all construction permits have final inspections, then schedule the ROC inspection. The buyer's name must be given before the certificate is issued.",
+  "application_url": "https://www.boroughofroselle.com/Document%20Center/How%20do%20i/Form/Local%20Code%20Enforcement/RCO%20Application.pdf",
+  "department_url": "https://www.boroughofroselle.com/departments/local_code_enforcement.php",
+  "phone": "(908) 259-3023",
+  "email": "",
+  "contact_name": "",
+  "contact_title": "Division of Code Enforcement (no ROC contact named; the application header lists (908) 259-3059)",
+  "evidence": [
+   {
+    "url": "https://www.boroughofroselle.com/_how_do_i/apply_for/forms.php",
+    "quote": "Residential Occupancy Certificate Application",
+    "doc_date": "2026-10-02 (page fetched)",
+    "via": "page",
+    "verified": true
+   },
+   {
+    "url": "https://www.boroughofroselle.com/Document%20Center/How%20do%20i/Form/Local%20Code%20Enforcement/Instructions-and-Checklist-for-CO.pdf",
+    "quote": "INSTRUCTIONS FOR ISSUANCE OF RESIDENTIAL OCCUPANCY CERTIFICATE",
+    "doc_date": "undated (file dated 2021-10 on the forms page)",
+    "via": "pdf",
+    "verified": true
+   },
+   {
+    "url": "https://www.boroughofroselle.com/Document%20Center/How%20do%20i/Form/Local%20Code%20Enforcement/Instructions-and-Checklist-for-CO.pdf",
+    "quote": "Division of Code Enforcement 210 Chestnut Street, Roselle, New Jersey 07203 Telephone (908) 259-3023",
+    "doc_date": "undated",
+    "via": "pdf",
+    "verified": true
+   },
+   {
+    "url": "https://www.boroughofroselle.com/Document%20Center/How%20do%20i/Form/Local%20Code%20Enforcement/Instructions-and-Checklist-for-CO.pdf",
+    "quote": "*Company checks or money orders only, personal checks are not accepted*",
+    "doc_date": "undated",
+    "via": "pdf",
+    "verified": true
+   },
+   {
+    "url": "https://www.boroughofroselle.com/Document%20Center/How%20do%20i/Form/Local%20Code%20Enforcement/Instructions-and-Checklist-for-CO.pdf",
+    "quote": "More than four (4) family residential is $250.00 plus $25.00 for each additional unit.",
+    "doc_date": "undated",
+    "via": "pdf",
+    "verified": true
+   },
+   {
+    "url": "https://www.boroughofroselle.com/Document%20Center/How%20do%20i/Form/Local%20Code%20Enforcement/Instructions-and-Checklist-for-CO.pdf",
+    "quote": "If there are open permits, you must schedule and pass inspections prior to the ROC inspection.",
+    "doc_date": "undated",
+    "via": "pdf",
+    "verified": true
+   },
+   {
+    "url": "https://www.boroughofroselle.com/Document%20Center/How%20do%20i/Form/Local%20Code%20Enforcement/Instructions-and-Checklist-for-CO.pdf",
+    "quote": "The inspector will visit the site and if NO Violations are found, a Certificate can be issued within ten (10) business days.",
+    "doc_date": "undated",
+    "via": "pdf",
+    "verified": true
+   },
+   {
+    "url": "https://www.boroughofroselle.com/Document%20Center/How%20do%20i/Form/Local%20Code%20Enforcement/Instructions-and-Checklist-for-CO.pdf",
+    "quote": "YOU CANNOT OCCUPY A PROPERTY WITH A TEMPORARY CERTIFICATE, HOMES MUST HAVE A FINAL CERTIFICATE FOR OCCUPANCY (NO EXCEPTIONS)!",
+    "doc_date": "undated",
+    "via": "pdf",
+    "verified": true
+   },
+   {
+    "url": "https://www.boroughofroselle.com/Document%20Center/How%20do%20i/Form/Local%20Code%20Enforcement/RCO%20Application.pdf",
+    "quote": "APPLICATION FOR RESIDENTIAL OCCUPANCY CERTIFICATE",
+    "doc_date": "2023-09 (file dated on the forms page)",
+    "via": "pdf",
+    "verified": true
+   },
+   {
+    "url": "https://www.boroughofroselle.com/Document%20Center/How%20do%20i/Form/Local%20Code%20Enforcement/RCO%20Application.pdf",
+    "quote": "I understand that I must supply the name of the buyer, before an Occupancy Certificate is issued.",
+    "doc_date": "2023-09",
+    "via": "pdf",
+    "verified": true
+   },
+   {
+    "url": "https://www.boroughofroselle.com/Document%20Center/How%20do%20i/Form/Local%20Code%20Enforcement/RCO%20Application.pdf",
+    "quote": "BOROUGH OF ROSELLE 210 Chestnut Street, 2nd Floor Roselle, NJ 07203 (908) 259-3059",
+    "doc_date": "2023-09",
+    "via": "pdf",
+    "verified": true
+   }
+  ],
+  "confidence": "medium",
+  "notes": "The Borough's Residential Occupancy Certificate application asks for the buyer and says the buyer's name must be supplied before the certificate is issued, and the instructions say homes must have a final certificate for occupancy; the ordinance section requiring it on sale was not seen (Roselle's code is on ecode360). Fees for 3 family are $150.00 and 4 family $250.00. The instructions give a temporary certificate as valid up to 60 days while the checklist says 90 days; temporary certificates are only for bank-owned or uninhabitable homes being brought up to code. Code Enforcement officers listed on the Borough page: Valerie Watson (908-259-4509, vwatson@boroughofroselle.com), Walter Wimbush (908-259-3003, wwimbush@boroughofroselle.com), Rawle Jones (908-259-3032, jonesr@boroughofroselle.com); it does not say which one handles ROCs. Rentals: annual rental licensing ($50 per unit, Ordinance 2484-2014) and a Certificate of Use on each change of tenancy (Section 90-10); those are rental requirements."
+ },
+ "fire_cert": {
+  "requirements": [
+   "The Borough ROC checklist covers 10-year sealed battery smoke alarms, CO alarms and a 2A10BC extinguisher within 10 feet of the kitchen; whether this replaces a separate fire certificate is not stated"
+  ],
+  "authorities": [
+   {
+    "name": "Roselle Fire Department, Fire Official (fire code enforcing agency)",
+    "type": "municipal_fire_bureau",
+    "area_served": "Entire borough",
+    "lead_time": "",
+    "fees": [],
+    "how_to_apply": "No smoke / CO certificate application or fee is published on the Borough site; contact the Fire Official.",
+    "application_url": "",
+    "department_url": "https://www.boroughofroselle.com/departments/fire_department.php",
+    "phone": "908-245-8600, ex. 3106",
+    "email": "jbenjamin@boroughofroselle.com",
+    "contact_name": "Jarelle Benjamin",
+    "contact_title": "Fire Official",
+    "evidence": [
+     {
+      "url": "https://www.boroughofroselle.com/departments/fire_department.php",
+      "quote": "Fire Official Jarelle Benjamin (Email) jbenjamin@boroughofroselle.com (Office) 908-245-8600, ex. 3106 (Fax) 908-245-7260",
+      "doc_date": "2026-10-02 (page fetched)",
+      "via": "page",
+      "verified": true
+     },
+     {
+      "url": "https://www.boroughofroselle.com/departments/fire_department.php",
+      "quote": "Fire Department Headquarters 725 Chestnut St. Roselle, NJ 07203",
+      "doc_date": "2026-10-02",
+      "via": "page",
+      "verified": true
+     },
+     {
+      "url": "https://nj.gov/dca/dfs/pdf/ANNUAL%20REGISTRY/THIRD%20QUARTER%20LEA%20REGISTRY%202026.pdf",
+      "quote": "F Roselle Borough",
+      "doc_date": "2026-07",
+      "via": "pdf",
+      "verified": true
+     },
+     {
+      "url": "https://www.nj.gov/dca/dfs/pdf/fire%20directory_county%20summary/fire_code_enforcement_director.pdf",
+      "quote": "Roselle Borough2014 LEAID: 2014-001 Enf Auth. Fire Dept Fire Official Jarell Benjamin Phone (908) 245-8600 Email jbenjamin@boroughofroselle.com Roselle Boro Bldg Dept",
+      "doc_date": "2026-01-12 (survey date)",
+      "via": "state_directory",
+      "verified": true
+     }
+    ],
+    "confidence": "medium"
+   }
+  ],
+  "notes": "The state fire directory lists the smoke detector compliance line as (908) 634-4530 and the address 725 Chestnut St; the Borough page spells the fire official's first name Jarelle, the directory Jarell. The only fire form on the Borough forms page is an October 2005 DCA memo on fire extinguishers at resale (outdated). The ROC checklist still requires a fire extinguisher; state law (P.L.2025, c.19) removed it from the state sale certificate in February 2025."
+ },
+ "other_items": [
+  {
+   "label": "Open construction permits",
+   "detail": "All open construction permits must be finalized before the ROC inspection; unpermitted work needs permits.",
+   "source_url": "https://www.boroughofroselle.com/Document%20Center/How%20do%20i/Form/Local%20Code%20Enforcement/Instructions-and-Checklist-for-CO.pdf"
+  }
+ ],
+ "open_questions": [
+  "Who issues the smoke / CO alarm certificate for a Roselle sale (Fire Official or the ROC inspection), and what is the fee and lead time?",
+  "Which ordinance section requires the Residential Occupancy Certificate on sale, and is the $100.00 fee current?",
+  "Which Code Enforcement staff member handles ROC applications, and is the temporary certificate valid 60 or 90 days?"
+ ],
+ "verification": {
+  "fees": 3,
+  "fee_ok": 3,
+  "fee_bad": 0,
+  "fee_unchecked": 0,
+  "quotes": 15,
+  "q_ok": 15,
+  "q_bad": 0,
+  "q_unchecked": 0
+ }
+}

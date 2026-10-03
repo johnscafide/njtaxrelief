@@ -1,0 +1,140 @@
+{
+ "municipality_code": "0713",
+ "municipality": "Montclair Township",
+ "county": "ESSEX",
+ "resale_co": {
+  "status": "not_required",
+  "name": "",
+  "issued_by": "",
+  "lead_time": "",
+  "valid_for": "",
+  "requirements": [],
+  "fees": [],
+  "how_to_apply": "No Township resale Certificate of Occupancy. Montclair does not require a new C.O. for a sale, mortgage or refinance, but all current construction permits and open violations must be closed out before closing (call the Building Department at 973-509-4951 after getting the permit history by OPRA request). The smoke/CO certificate is still required (see fire certificate).",
+  "application_url": "",
+  "department_url": "https://www.montclairnjusa.org/Government/Departments/Building-Office",
+  "phone": "973-509-4951",
+  "email": "",
+  "contact_name": "",
+  "contact_title": "",
+  "evidence": [
+   {
+    "url": "https://www.montclairnjusa.org/Government/Departments/Building-Office",
+    "quote": "The Township of Montclair does not require the issuance of a new C.O. as a condition for the sale, mortgage, or refinancing of any property.",
+    "doc_date": "2025-06 (notice); 2026-10-03 (page fetched)",
+    "via": "page",
+    "verified": null
+   },
+   {
+    "url": "https://www.montclairnjusa.org/Government/Departments/Building-Office",
+    "quote": "all current construction permits and any open violations for the property must be closed out prior to closing",
+    "doc_date": "2025-06 (notice)",
+    "via": "page",
+    "verified": null
+   }
+  ],
+  "confidence": "high",
+  "notes": "The Building Office page carries a June 2025 notice that no new C.O. is required for a sale, mortgage or refinance, while open permits and violations must be closed before closing. Building Office: Municipal Building, 2nd Floor, 205 Claremont Avenue, Montclair, NJ 07042, 973-509-4951. Rental programs (rent control, landlord registration) are not resale requirements. The Montclair site blocks scripted fetches, so pages were read with a browser-style fetch tool."
+ },
+ "fire_cert": {
+  "requirements": [
+   "Smoke alarms on the ceiling at the bottom of each stair level, centrally located no more than 10 feet from outside each bedroom door, and in an open finished attic; a two-family with a common stairwell needs extra alarms at the highest level",
+   "Hardwired (A/C) smoke alarms from original construction or rehab cannot be replaced with battery-only alarms; a certified letter or report from a licensed electrician or licensed alarm technician that they were tested and work must come with the application",
+   "Battery-only smoke alarms must be 10-year sealed battery units listed to ANSI/UL 217",
+   "CO alarms (battery, hard-wired or plug-in, UL 2034, not past expiration) centrally located no more than 10 feet from outside each bedroom door, in all units except buildings with no fuel-burning device and no attached garage",
+   "Access to all units, the basement, attic and common areas"
+  ],
+  "authorities": [
+   {
+    "name": "Montclair Fire Department, Fire Prevention Bureau (Township of Montclair LEA)",
+    "type": "municipal_fire_bureau",
+    "area_served": "Entire township",
+    "lead_time": "Submit all documents at least 10 days before closing. After emailing the application, call the office to make an appointment. The certificate expires 6 months after the inspection and is non-transferable.",
+    "fees": [
+     {
+      "label": "Certificate of smoke alarm and carbon monoxide alarm compliance (due at the inspection the home passes)",
+      "amount": "$75.00",
+      "quote": "A fee of $75.00 is due at the time of inspection, or whenever the occupancy passes the inspection.",
+      "source_url": "https://www.montclairnjusa.org/Government/Departments/Fire-Department/Inspections",
+      "verified": null
+     }
+    ],
+    "how_to_apply": "Read the Requirements for Certificate of Compliance, fill out the Application for Dwelling Smoke Detector & Carbon Monoxide Certification, and email all documents as PDFs (no pictures) to fireprevention@montclairnjusa.org at least 10 days before closing, then call to book the inspection. Pay by exact cash, check or money order to \"Township of Montclair, LEA\" at the final inspection; fees are non-refundable.",
+    "application_url": "https://www.montclairnjusa.org/files/sharedassets/public/v/1/government/departments/fire-department/fire-prevention/application-for-dwelling-smoke-detector-revised_fillable.pdf",
+    "department_url": "https://www.montclairnjusa.org/Government/Departments/Fire-Department/Inspections",
+    "phone": "973-509-4769",
+    "email": "fireprevention@montclairnjusa.org",
+    "contact_name": "Justin Thompson",
+    "contact_title": "Fire Official (NJ DCA fire directory)",
+    "evidence": [
+     {
+      "url": "https://www.montclairnjusa.org/Government/Departments/Fire-Department/Inspections",
+      "quote": "Submit all documents at least 10 days before closing to be reviewed for approval",
+      "doc_date": "2026-10-03 (page fetched)",
+      "via": "page",
+      "verified": null
+     },
+     {
+      "url": "https://www.montclairnjusa.org/Government/Departments/Fire-Department/Inspections",
+      "quote": "The fee is payable by cash (exact amount), or a check or money order made out to the \"Township of Montclair, LEA\", and is non-refundable.",
+      "doc_date": "2026-10-03 (page fetched)",
+      "via": "page",
+      "verified": null
+     },
+     {
+      "url": "https://www.montclairnjusa.org/files/sharedassets/public/v/1/government/departments/fire-department/fire-prevention/application-for-dwelling-smoke-detector-revised_fillable.pdf",
+      "quote": "CERTIFICATE IS NON-TRANSFERABLE AND EXPIRES 6 MONTHS AFTER FIRE DEPARTMENT INSPECTION",
+      "doc_date": "2026-02-05 (file modified)",
+      "via": "pdf",
+      "verified": null
+     },
+     {
+      "url": "https://www.montclairnjusa.org/files/sharedassets/public/v/1/government/departments/fire-department/fire-prevention/application-for-dwelling-smoke-detector-revised_fillable.pdf",
+      "quote": "PHONE: 973-509-4769 FAX: 973-744-2897",
+      "doc_date": "2026-02-05 (file modified)",
+      "via": "pdf",
+      "verified": null
+     },
+     {
+      "url": "https://www.montclairnjusa.org/files/sharedassets/public/v/1/residents/documents/requirements-for-certificate-of-smoke-compliance.pdf",
+      "quote": "A certified letter/report from either a licensed electrician or licensed alarm technician must be provided with the application stating the smoke alarms have been tested, are functioning properly.",
+      "doc_date": "",
+      "via": "pdf",
+      "verified": null
+     },
+     {
+      "url": "https://www.nj.gov/dca/dfs/pdf/fire%20directory_county%20summary/fire_code_enforcement_director.pdf",
+      "quote": "jthompson@montclairnjusa.org",
+      "doc_date": "2025-09 (survey date 9/5/2025)",
+      "via": "state_directory",
+      "verified": null
+     }
+    ],
+    "confidence": "high"
+   }
+  ],
+  "notes": "The Fire Department page still names the certificate with \"Portable Fire Extinguisher\" in its title, but the current Requirements document and application (revised early 2026) list only smoke and CO alarms; the application keeps an \"# EXTINGUISHER\" box in the office-use area. Fire Headquarters: 1 Pine Street, Montclair, NJ 07042. The NJ DCA directory lists Fire Official Justin Thompson, (973) 509-4760, jthompson@montclairnjusa.org; the Fire Prevention office line on the forms is 973-509-4769."
+ },
+ "other_items": [
+  {
+   "label": "Open permits and violations",
+   "detail": "All current construction permits and any open violations must be closed out before closing. Get the permit history by OPRA request, then call the Building Department at 973-509-4951.",
+   "source_url": "https://www.montclairnjusa.org/Government/Departments/Building-Office"
+  }
+ ],
+ "open_questions": [
+  "Is there a higher fee for short-notice requests or a reinspection fee? Only the $75.00 fee is published.",
+  "Does the Fire Prevention Bureau still check for a portable fire extinguisher at resale?"
+ ],
+ "checked_at": "2026-10-03",
+ "verification": {
+  "fees": 1,
+  "fee_ok": 0,
+  "fee_bad": 0,
+  "fee_unchecked": 1,
+  "quotes": 8,
+  "q_ok": 0,
+  "q_bad": 0,
+  "q_unchecked": 8
+ }
+}

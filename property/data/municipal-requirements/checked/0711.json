@@ -1,0 +1,237 @@
+{
+ "municipality_code": "0711",
+ "municipality": "Maplewood Township",
+ "county": "ESSEX",
+ "resale_co": {
+  "status": "required",
+  "name": "Certificate of Continued Use and Occupancy (CCU)",
+  "issued_by": "Township of Maplewood Building Department (Construction Official)",
+  "lead_time": "Apply at least 10 business days before closing for the base fee; the Township allows 10 business days for the inspection unless expedited. Applications received after 4:00 pm count as the next business day.",
+  "valid_for": "180 days from the date issued, and only for the buyer named on the application (a new buyer needs a new application)",
+  "requirements": [
+   "Inspection of the premises by the Construction Official or his representative",
+   "All open permits must be closed",
+   "A smoke certificate (smoke/CO certificate from the Fire Department) must be issued first",
+   "Full payment of fees",
+   "Current and prospective owners must be listed as individuals (not an LLC or other entity); the new owner's driver's license number is required",
+   "Estate or trust sellers must show an original court document with a raised seal appointing the executor, trustee or power of attorney",
+   "The seller must personally sign a receipt for the certificate",
+   "If violations are found, the owner fixes them, or for sales only the buyer may submit a notarized letter accepting responsibility for the violations"
+  ],
+  "fees": [
+   {
+    "label": "CCU inspection, per unit, applied for at least 10 business days before closing",
+    "amount": "$150",
+    "quote": "Fee for certificate. The fee for a certificate of continued use and occupancy shall be $150 per dwelling unit or commercial space if applied for at least 10 business days before the closing date.",
+    "source_url": "https://ecode360.com/9420421",
+    "verified": null
+   },
+   {
+    "label": "Expedited, filed 6 to 9 business days before closing, per unit",
+    "amount": "$300",
+    "quote": "If an application is filed six to nine business days' prior to a closing day, a fee of $300 per dwelling unit is due in order to expedite processing.",
+    "source_url": "https://ecode360.com/9420421",
+    "verified": null
+   },
+   {
+    "label": "Expedited, filed 5 or fewer business days before closing, per unit",
+    "amount": "$500",
+    "quote": "If an application is filed five or fewer business days' prior to a closing date, a fee of $500 per dwelling unit is due in order to expedite processing.",
+    "source_url": "https://ecode360.com/9420421",
+    "verified": null
+   },
+   {
+    "label": "Reinspection",
+    "amount": "$100",
+    "quote": "Reinspection fee. A reinspection fee of $100 if the residence or commercial space is not in compliance on the initial or subsequent inspection.",
+    "source_url": "https://ecode360.com/9420421",
+    "verified": null
+   }
+  ],
+  "how_to_apply": "Download the Certificate of Continued Use and Occupancy form from the Township's CCU page, fill it out completely and submit it to the Maplewood Building Department, 574 Valley Street, Second Floor, at least 10 business days before closing. An inspector then contacts the applicant to set the inspection. Get the smoke/CO certificate from the Fire Department as well, since the CCU is not issued without it.",
+  "application_url": "https://www.maplewoodnj.gov/home/showpublisheddocument/96/639256016314670000",
+  "department_url": "https://www.maplewoodnj.gov/business/certificate-of-continued-use-occupancy",
+  "phone": "973-762-8120 ext. 3700",
+  "email": "",
+  "contact_name": "Darius Pokoj",
+  "contact_title": "Construction Official (signs the CCU instructions)",
+  "evidence": [
+   {
+    "url": "https://ecode360.com/9420421",
+    "quote": "Each time there is a transfer of ownership of property, or in the case of a rental property a change in tenancy, within the Township of Maplewood, a seller or lessor of such property must obtain from the Construction Official of the Township of Maplewood prior to the transfer of ownership or change of tenancy a certificate of continued use and occupancy",
+    "doc_date": "2025-05-20 (Ord. No. 3153-25)",
+    "via": "page",
+    "verified": null
+   },
+   {
+    "url": "https://ecode360.com/9420421",
+    "quote": "The issued certificate is only recognized for the buyer listed on the application form and for a period of 180 days from the date issued.",
+    "doc_date": "2026-10-03 (page fetched)",
+    "via": "page",
+    "verified": null
+   },
+   {
+    "url": "https://ecode360.com/9420421",
+    "quote": "In the event that the seller or lessor of property within the Township of Maplewood fails to obtain a certificate of continued use and occupancy prior to transferring ownership or permitting occupancy of a rental unit, the seller or lessor shall be subject to a fine of $1,000.",
+    "doc_date": "2026-10-03 (page fetched)",
+    "via": "page",
+    "verified": null
+   },
+   {
+    "url": "https://www.maplewoodnj.gov/home/showpublisheddocument/96/639256016314670000",
+    "quote": "A CCU will not be issued until inspections are satisfactorily completed, all open permits on the property are closed, a Smoke Cert is issued, and full payment of fees is made.",
+    "doc_date": "9/21/2026",
+    "via": "pdf",
+    "verified": null
+   },
+   {
+    "url": "https://www.maplewoodnj.gov/home/showpublisheddocument/96/639256016314670000",
+    "quote": "The inspection fee is $150 per unit in any property if you submit the Application at least 10 business days prior to the closing.",
+    "doc_date": "9/21/2026",
+    "via": "pdf",
+    "verified": null
+   },
+   {
+    "url": "https://www.maplewoodnj.gov/home/showpublisheddocument/2694/639238604361170000",
+    "quote": "FOR PROPERTY SALES ONLY: PROPSECTIVE OWNER SUBMITS NOTARIZED LETTER ACCEPTING RESPONSIBILITY FOR VIOLATIONS",
+    "doc_date": "JUNE 10, 2026",
+    "via": "pdf",
+    "verified": null
+   },
+   {
+    "url": "https://www.maplewoodnj.gov/business/certificate-of-continued-use-occupancy",
+    "quote": "For more information about Certificate of Continued Use and Occupancy, please contact the Building Department at (973) 762-8120 ext. 3700.",
+    "doc_date": "2026-10-03 (page fetched)",
+    "via": "page",
+    "verified": null
+   }
+  ],
+  "confidence": "high",
+  "notes": "The Township website blocks automated fetches; pages and PDFs were read through a text reader and the ecode360 code (Chapter 204) the same way. Fees are the same in the code (Ord. No. 3153-25, May 20, 2025), the CCU instructions dated 9/21/2026 and the CCU flow chart dated June 10, 2026. Older fee lines elsewhere in the code's fee chapter (a $250 'certificate of continued occupancy' line in the building fees and a $25 line under Chapter 204) appear out of date. The CCU also covers new tenancies of rental units; rental registration is a separate rental-only program."
+ },
+ "fire_cert": {
+  "requirements": [
+   "Smoke alarms and carbon monoxide alarms inspected by the Maplewood Fire Department before the home is sold, leased or reoccupied",
+   "Portable fire extinguishers are no longer required in Maplewood for this certificate",
+   "Payment to the fire inspector at the inspection (cash, check or money order only)"
+  ],
+  "authorities": [
+   {
+    "name": "Maplewood Fire Department, Fire Prevention Bureau",
+    "type": "municipal_fire_bureau",
+    "area_served": "Entire township",
+    "lead_time": "Fee depends on how many days before the inspection date it is scheduled: at least 10 days ahead for the lowest fee. Cancel at least 24 hours ahead to avoid charges.",
+    "fees": [
+     {
+      "label": "Smoke/CO inspection, scheduled at least 10 days before the inspection date",
+      "amount": "$100",
+      "quote": "(a) If scheduled at least 10 days prior to inspection date: $100.",
+      "source_url": "https://ecode360.com/9419747",
+      "verified": null
+     },
+     {
+      "label": "Scheduled 4 to 9 days before the inspection date",
+      "amount": "$125",
+      "quote": "(b) If scheduled four days to nine days prior to inspection date: $125.",
+      "source_url": "https://ecode360.com/9419747",
+      "verified": null
+     },
+     {
+      "label": "Scheduled less than 4 days before the inspection date",
+      "amount": "$175",
+      "quote": "(c) If scheduled less than four days prior to inspection date: $175.",
+      "source_url": "https://ecode360.com/9419747",
+      "verified": null
+     },
+     {
+      "label": "Recheck inspection",
+      "amount": "$100",
+      "quote": "(2)Recheck inspection fee: $100 per recheck inspection.",
+      "source_url": "https://ecode360.com/9419747",
+      "verified": null
+     }
+    ],
+    "how_to_apply": "Schedule the inspection online with the Township's POS Fire Inspections form (GovPilot), linked from the Fire Department's 'Home Inspection at Time of Sale' page. Pay the fire inspector at the site on the inspection date by cash, check or money order payable to the 'Township of Maplewood'; online payments are not accepted.",
+    "application_url": "https://main.govpilot.com/web/public/70ceaeaa-30c_POS-Fire-Inspections-Township-of-Maplewood?uid=7127&ust=NJ&pu=1&id=0",
+    "department_url": "https://www.maplewoodnj.gov/government/public-safety/fire-department/home-inspection-at-time-of-sale",
+    "phone": "973-762-6501",
+    "email": "szatko@maplewoodnj.gov",
+    "contact_name": "Steve Zatko Jr.",
+    "contact_title": "Fire Official",
+    "evidence": [
+     {
+      "url": "https://www.maplewoodnj.gov/government/public-safety/fire-department/home-inspection-at-time-of-sale",
+      "quote": "A Certificate of Smoke Detector, Carbon Monoxide Alarm Compliance (CSDCMAC) is required before any \"Use Group R-3 or R-4\" dwelling unit is sold, leased or otherwise made subject to change of occupancy for residential purposes.",
+      "doc_date": "2026-10-03 (page fetched)",
+      "via": "page",
+      "verified": null
+     },
+     {
+      "url": "https://www.maplewoodnj.gov/government/public-safety/fire-department/home-inspection-at-time-of-sale",
+      "quote": "Payment is made TO THE FIRE INSPECTOR AT THE SITE OF THE INSPECTION on the inspection date. On-line payments are NOT accepted.",
+      "doc_date": "2026-10-03 (page fetched)",
+      "via": "page",
+      "verified": null
+     },
+     {
+      "url": "https://ecode360.com/9419747",
+      "quote": "Recheck inspection fee: $100 per recheck inspection. Cancellation must be made at least 24 hours in advance to avoid charges.",
+      "doc_date": "2026-05-19 (Ord. No. 4003-26)",
+      "via": "page",
+      "verified": null
+     },
+     {
+      "url": "https://www.maplewoodnj.gov/government/public-safety/fire-department/bureau-of-training-and-fire-safety",
+      "quote": "Steve Zatko Jr. Fire Official",
+      "doc_date": "2026-10-03 (page fetched)",
+      "via": "page",
+      "verified": null
+     },
+     {
+      "url": "https://www.nj.gov/dca/dfs/pdf/fire%20directory_county%20summary/fire_code_enforcement_director.pdf",
+      "quote": "LEAID: 0711-001 Maplewood Twp ... Name: Maplewood Twp Fire Dept Addr: 129 Boyden Ave ... Fire Official Steve Zatko Phone (973) 762-6500 ... Email szatko@maplewoodnj.gov",
+      "doc_date": "survey date 1/12/2026",
+      "via": "state_directory",
+      "verified": null
+     },
+     {
+      "url": "https://nj.gov/dca/dfs/pdf/ANNUAL%20REGISTRY/THIRD%20QUARTER%20LEA%20REGISTRY%202026.pdf",
+      "quote": "F Maplewood Township",
+      "doc_date": "2026-07",
+      "via": "pdf",
+      "verified": true
+     }
+    ],
+    "confidence": "high"
+   }
+  ],
+  "notes": "The fire page itself says portable fire extinguishers are NO LONGER required in Maplewood, in line with P.L.2025, c.19, although the GovPilot link text still mentions a portable fire extinguisher. Fees are from Township Code Chapter 127 fee schedule (Ord. No. 4003-26, May 19, 2026) read on ecode360; the fire page itself no longer lists fees. Tiers count days between scheduling and the inspection date, not days before closing. Contacts: Fire Prevention page lists (973) 762-6501 at 105 Dunnell Road; the Fire Prevention Division page lists Steve Zatko Jr., Fire Official, at (973) 762-8120 ext. 7013 and the bureau at 129 Boyden Avenue; the state directory lists 129 Boyden Ave, (973) 762-6500. The email is from the state fire directory."
+ },
+ "other_items": [
+  {
+   "label": "Open permits",
+   "detail": "All open permits must be closed before the CCU is issued.",
+   "source_url": "https://ecode360.com/9420421"
+  },
+  {
+   "label": "Smoke/CO certificate before CCU",
+   "detail": "The Building Department will not issue the CCU until the Fire Department's smoke certificate is issued.",
+   "source_url": "https://www.maplewoodnj.gov/home/showpublisheddocument/96/639256016314670000"
+  }
+ ],
+ "open_questions": [
+  "Which Fire Prevention address and phone are current for scheduling questions: 105 Dunnell Road (973-762-6501) or 129 Boyden Avenue (973-762-8120 ext. 7013)?",
+  "Is there a fee for a buyer's notarized letter accepting violations, or a temporary CCU? None is published."
+ ],
+ "checked_at": "2026-10-03",
+ "verification": {
+  "fees": 8,
+  "fee_ok": 0,
+  "fee_bad": 0,
+  "fee_unchecked": 8,
+  "quotes": 13,
+  "q_ok": 1,
+  "q_bad": 0,
+  "q_unchecked": 12
+ }
+}

@@ -1,0 +1,166 @@
+{
+ "municipality_code": "1810",
+ "municipality": "Hillsborough Township",
+ "county": "SOMERSET",
+ "resale_co": {
+  "status": "not_required",
+  "name": "",
+  "issued_by": "",
+  "lead_time": "",
+  "valid_for": "",
+  "requirements": [],
+  "fees": [],
+  "how_to_apply": "No resale Certificate of Occupancy. The Hillsborough Building Department does not issue a CO for the resale of a residential property. Call the Fire Safety office to schedule the smoke detector certification (see fire certificate) and check with the Building Department that there are no open permits.",
+  "application_url": "",
+  "department_url": "https://hillsboroughnj.gov/departments/construction",
+  "phone": "(908) 369-4313",
+  "email": "",
+  "contact_name": "",
+  "contact_title": "",
+  "evidence": [
+   {
+    "url": "https://hillsboroughnj.gov/news-announcements/708-no-c-o-needed-for-residential-resale",
+    "quote": "The Hillsborough Building Department does not issue a CO for the resale of a residential property.",
+    "doc_date": "2021-10-27",
+    "via": "page",
+    "verified": true
+   },
+   {
+    "url": "https://hillsboroughnj.gov/news-announcements/587-do-you-need-a-certificate-of-occupancy-for-resale-of-residential-property",
+    "quote": "\"NO\" The Hillsborough Building Department does not issue a CO for the resale of a residential property.",
+    "doc_date": "2021-06-23",
+    "via": "page",
+    "verified": true
+   },
+   {
+    "url": "https://hillsboroughnj.gov/news-announcements/1163-selling-your-home",
+    "quote": "verify with the Building Department that you have no open permits",
+    "doc_date": "2023-03-29",
+    "via": "page",
+    "verified": true
+   }
+  ],
+  "confidence": "high",
+  "notes": "Three Township announcements (June 23, 2021; October 27, 2021; March 29, 2023) say the Building Department does not issue a Certificate of Occupancy for the resale of a residential property and point sellers to the Fire Safety office for the smoke certification. A November 1, 2024 memo from Construction Official John Fiedler says the same for commercial resales. Township offices: 379 South Branch Road, Hillsborough, NJ 08844, (908) 369-4313."
+ },
+ "fire_cert": {
+  "requirements": [
+   "Smoke alarms and carbon monoxide alarms for one and two family dwellings per the NJ Uniform Fire Code",
+   "No fire extinguisher needed since the 2025 state change (Hillsborough Fire District notice, February 2, 2025)"
+  ],
+  "authorities": [
+   {
+    "name": "Hillsborough Fire District, Bureau of Fire & Safety (Hillsborough Bureau of Fire Safety)",
+    "type": "fire_district",
+    "area_served": "Entire township",
+    "lead_time": "Fee depends on how many business days before the change of occupant the request is received (more than 10 business days for the lowest fee, per the Township code seen in search results). The fee covers the first inspection and one reinspection.",
+    "fees": [
+     {
+      "label": "Smoke/CO certificate, request received more than 10 business days before the change of occupant",
+      "amount": "$50",
+      "quote": "received more than 10 business days prior to the change of occupant: $50",
+      "source_url": "https://ecode360.com/10253736",
+      "verified": null
+     },
+     {
+      "label": "Request received four to 10 business days before the change of occupant",
+      "amount": "$90",
+      "quote": "received four business days to 10 business days prior to the change of occupant: $90",
+      "source_url": "https://ecode360.com/10253736",
+      "verified": null
+     },
+     {
+      "label": "Request received fewer than four business days before the change of occupant",
+      "amount": "$160",
+      "quote": "received fewer than four business days prior to the change of occupant: $160",
+      "source_url": "https://ecode360.com/10253736",
+      "verified": null
+     },
+     {
+      "label": "Each additional reinspection after the first reinspection",
+      "amount": "$35",
+      "quote": "an additional fee of $35 required for any additional reinspections",
+      "source_url": "https://ecode360.com/10253736",
+      "verified": null
+     }
+    ],
+    "how_to_apply": "Apply on the Hillsborough Bureau of Fire Safety form and call the Fire Safety office to schedule the smoke detector certification inspection. Office: 48 East Mountain Road, Hillsborough, NJ 08844, open Monday to Friday 8:00 AM to 4:00 PM.",
+    "application_url": "",
+    "department_url": "https://hillsboroughfiresafety.com/smoke-detector-certification-inspections/",
+    "phone": "908-271-5140",
+    "email": "FireSafety@htfd.us",
+    "contact_name": "John Yanko",
+    "contact_title": "Fire Official (NJ DCA fire directory)",
+    "evidence": [
+     {
+      "url": "https://hillsboroughfiresafety.com/",
+      "quote": "FireSafety@htfd.us",
+      "doc_date": "2026-10-03 (page fetched)",
+      "via": "page",
+      "verified": null
+     },
+     {
+      "url": "https://hillsboroughfiresafety.com/",
+      "quote": "Monday through Friday 8:00 AM to 4:00 PM",
+      "doc_date": "2026-10-03 (page fetched)",
+      "via": "page",
+      "verified": null
+     },
+     {
+      "url": "https://hillsboroughfiresafety.com/news/smoke-alarm-certification-requirement-change/",
+      "quote": "Due to a change in the New Jersey Uniform Fire Code, a fire extinguisher is no longer required in residential properties when obtaining a Certificate of Smoke and Carbon Monoxide Alarm for a change of ownership or tenancy.",
+      "doc_date": "2025-02-02",
+      "via": "page",
+      "verified": null
+     },
+     {
+      "url": "https://hillsboroughnj.gov/news-announcements/587-do-you-need-a-certificate-of-occupancy-for-resale-of-residential-property",
+      "quote": "You must call the Fire Safety Department at 908-369-5856 to schedule a Smoke Detector Certification inspection.",
+      "doc_date": "2021-06-23",
+      "via": "page",
+      "verified": true
+     },
+     {
+      "url": "https://ecode360.com/10253736",
+      "quote": "The owner or the authorized agent of the owner shall apply for a CSACMAPFEC on a form provided by the Hillsborough Bureau of Fire Safety.",
+      "doc_date": "",
+      "via": "search_snippet",
+      "verified": null
+     },
+     {
+      "url": "https://www.nj.gov/dca/dfs/pdf/fire%20directory_county%20summary/fire_code_enforcement_director.pdf",
+      "quote": "jyanko@htfd.us",
+      "doc_date": "2026-06 (survey date 6/4/2026)",
+      "via": "state_directory",
+      "verified": null
+     }
+    ],
+    "confidence": "medium"
+   }
+  ],
+  "notes": "Hillsborough is served by a fire district (NJ DCA LEA code D). The fees come from the Township code (Chapter 166, Fire Prevention) as seen only through ecode360 search results, so they need a check; the Fire District's own Smoke Detector Certification Inspections page blocks scripted reads and could not be read. Phone numbers differ by source: the Fire District site lists 908-271-5140; the 2021 Township notice and the NJ DCA directory list 908-369-5856 (Fire Official John Yanko). A search result for another ecode360 page showed much higher tiers ($150 / $250 / $375) attributed to \"Hillsborough\" but could not be tied to this township, so it is not used."
+ },
+ "other_items": [
+  {
+   "label": "Open permits",
+   "detail": "The Township advises sellers to verify with the Building Department that there are no open permits before selling.",
+   "source_url": "https://hillsboroughnj.gov/news-announcements/1163-selling-your-home"
+  }
+ ],
+ "open_questions": [
+  "What are the Fire District's current smoke/CO certificate fees? The Township code (search snippet) shows $50 / $90 / $160, but the Fire District's own page could not be read.",
+  "Is there an online application form, and how long is the certificate valid?",
+  "Which phone is current for scheduling: 908-271-5140 or 908-369-5856?"
+ ],
+ "checked_at": "2026-10-03",
+ "verification": {
+  "fees": 4,
+  "fee_ok": 0,
+  "fee_bad": 0,
+  "fee_unchecked": 4,
+  "quotes": 9,
+  "q_ok": 4,
+  "q_bad": 0,
+  "q_unchecked": 5
+ }
+}

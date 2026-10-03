@@ -1,0 +1,224 @@
+{
+ "municipality_code": "1811",
+ "municipality": "Manville Borough",
+ "county": "SOMERSET",
+ "resale_co": {
+  "status": "required",
+  "name": "Certificate for Home Sale",
+  "issued_by": "Borough of Manville Division of Code Enforcement (housing inspector), on a combined application with the Bureau of Fire Safety smoke/CO certificate",
+  "lead_time": "",
+  "valid_for": "",
+  "requirements": [
+   "Owner or agent applies on the Borough's combined Application for Smoke Alarm/Carbon Monoxide Alarm/Portable Fire Extinguisher Compliance and Certificate for Home Sale",
+   "Inspection appointment made by phone with the office",
+   "Housing inspector signs off on the home sale certificate; Fire Marshal signs off on the smoke/CO part",
+   "Application asks for buyer, owner's attorney, closing date, year built and whether the home is owner occupied, rental or bank owned"
+  ],
+  "fees": [
+   {
+    "label": "Certificate for Home Sale",
+    "amount": "$50.00",
+    "quote": "FEE FOR HOME SALE CERTIFICATE: - $ 50.00",
+    "source_url": "https://www.manvillenj.org/DocumentCenter/View/7595/CSDCMAC-Application-2025",
+    "verified": null
+   }
+  ],
+  "how_to_apply": "Fill out the combined application (pick up at the Construction Department window in Borough Hall or download it), pay by check payable to Borough of Manville, and make the inspection appointment by calling (908) 725-9478 Ext. 117. Division of Code Enforcement, 325 North Main Street, Manville, NJ 08835.",
+  "application_url": "https://www.manvillenj.org/DocumentCenter/View/7595/CSDCMAC-Application-2025",
+  "department_url": "https://www.manvillenj.org/597/Code-Enforcement",
+  "phone": "908-725-9478 ext. 117",
+  "email": "hhaney@manvillenj.org",
+  "contact_name": "Heather Haney",
+  "contact_title": "Technical Assistant to Construction Official",
+  "evidence": [
+   {
+    "url": "https://www.manvillenj.org/DocumentCenter/View/7595/CSDCMAC-Application-2025",
+    "quote": "APPLICATION FOR SMOKE ALARM/CARBON MONOXIDE ALARM/ PORTABLE FIRE EXTINGUISHER COMPLIANCE AND CERTIFICATE FOR HOME SALE",
+    "doc_date": "",
+    "via": "pdf",
+    "verified": null
+   },
+   {
+    "url": "https://www.manvillenj.org/DocumentCenter/View/7595/CSDCMAC-Application-2025",
+    "quote": "FEE FOR HOME SALE CERTIFICATE: - $ 50.00",
+    "doc_date": "",
+    "via": "pdf",
+    "verified": null
+   },
+   {
+    "url": "https://www.manvillenj.org/DocumentCenter/View/7595/CSDCMAC-Application-2025",
+    "quote": "(The Owner / Agent must make an appointment for this inspection by calling (908) 725-9478 Ext. 117)",
+    "doc_date": "",
+    "via": "pdf",
+    "verified": null
+   },
+   {
+    "url": "https://www.manvillenj.org/DocumentCenter/View/7595/CSDCMAC-Application-2025",
+    "quote": "HOUSING INSPECTOR:",
+    "doc_date": "",
+    "via": "pdf",
+    "verified": null
+   },
+   {
+    "url": "https://www.manvillenj.org/597/Code-Enforcement",
+    "quote": "Heather Haney",
+    "doc_date": "2026-10-03 (page fetched)",
+    "via": "page",
+    "verified": true
+   },
+   {
+    "url": "https://www.manvillenj.org/597/Code-Enforcement",
+    "quote": "Phone: 908-725-9478 Ext. 117",
+    "doc_date": "2026-10-03 (page fetched)",
+    "via": "page",
+    "verified": true
+   }
+  ],
+  "confidence": "medium",
+  "notes": "The application PDF is a scanned image, so its quotes were read by eye and may not be machine-checkable. The form shows a separate $50.00 Certificate for Home Sale with a Housing Inspector sign-off, but no ordinance or web page explaining what the home sale inspection covers or how long it is valid was found online, so confidence is medium. Manville also has a rental housing registration and inspection ordinance (2020-1232, amended 2021-1271) for rentals only. The zoning fee ordinance 2023-1308 mentions a 'continuing occupancy application' only under commercial permits."
+ },
+ "fire_cert": {
+  "requirements": [
+   "10-year sealed single-station smoke alarms (Borough says no other battery alarms accepted); hardwired interconnected alarms must all sound when one is tested and cannot be swapped for battery units",
+   "Smoke alarm on every level including the basement (at the base of basement steps), near steps to the second floor, at the top of fixed attic stairs, and within 10 feet of bedrooms",
+   "Carbon monoxide alarm near sleeping rooms in homes with a fuel-burning appliance, fireplace or attached garage (all-electric homes with none of these are exempt)",
+   "Portable 2A-10B:C fire extinguisher within 10 feet of the kitchen in the path of egress, mounted with bracket, serviced/tagged within 12 months or with a recent receipt, manual left for the buyer (Borough Ordinance still requires it)",
+   "Home security alarm systems are not tested"
+  ],
+  "authorities": [
+   {
+    "name": "Manville Bureau of Fire Safety (Office of the Fire Marshal)",
+    "type": "municipal_fire_bureau",
+    "area_served": "Entire borough",
+    "lead_time": "Fee depends on business days before the change of occupant: more than 10 business days for the lowest fee. Certificate is good for six months. Cancellations need 48 hours notice.",
+    "fees": [
+     {
+      "label": "Smoke/CO/extinguisher certificate, request more than 10 business days before change of occupant",
+      "amount": "$45.00",
+      "quote": "change of occupant: $ 45.00;",
+      "source_url": "https://www.manvillenj.org/DocumentCenter/View/6595/2023-1306-Fire-Safety-Ordinance-",
+      "verified": true
+     },
+     {
+      "label": "Request 4 to 10 business days before change of occupant",
+      "amount": "$90.00",
+      "quote": "Requests for a CSACMAPFEC received four to 10 business days prior to the change",
+      "source_url": "https://www.manvillenj.org/DocumentCenter/View/6595/2023-1306-Fire-Safety-Ordinance-",
+      "verified": true
+     },
+     {
+      "label": "Request fewer than 4 business days before change of occupant",
+      "amount": "$161.00",
+      "quote": "of occupant: $161.00.",
+      "source_url": "https://www.manvillenj.org/DocumentCenter/View/6595/2023-1306-Fire-Safety-Ordinance-",
+      "verified": true
+     },
+     {
+      "label": "Reinspection",
+      "amount": "$35.00",
+      "quote": "Re-inspection fee for a CSACMAPFEC shall be thirty-five ($ 35.00)",
+      "source_url": "https://www.manvillenj.org/DocumentCenter/View/6595/2023-1306-Fire-Safety-Ordinance-",
+      "verified": true
+     }
+    ],
+    "how_to_apply": "Use the combined Borough application (Certificate of Smoke Alarm, Carbon Monoxide Alarm and Portable Fire Extinguisher Compliance plus Certificate for Home Sale), pay by check payable to Borough of Manville, and schedule the inspection by phone. Questions: Fire Marshal, 908-725-9478 ext. 112.",
+    "application_url": "https://www.manvillenj.org/DocumentCenter/View/7595/CSDCMAC-Application-2025",
+    "department_url": "https://www.manvillenj.org/578/Bureau-of-Fire-Safety",
+    "phone": "908-725-9478 ext. 112",
+    "email": "RConnolly@manvillenj.org",
+    "contact_name": "Rick Connolly",
+    "contact_title": "Fire Marshal",
+    "evidence": [
+     {
+      "url": "https://www.manvillenj.org/578/Bureau-of-Fire-Safety",
+      "quote": "The Bureau of Fire Safety also enforces the Smoke Alarm Carbon Monoxide Alarm Portable Fire Extinguisher Law (CSACMAPFEC) on the sale or change of tenancy of a one or two family residence .",
+      "doc_date": "2026-10-03 (page fetched)",
+      "via": "page",
+      "verified": true
+     },
+     {
+      "url": "https://www.manvillenj.org/578/Bureau-of-Fire-Safety",
+      "quote": "Rick Connolly, Fire Marshal",
+      "doc_date": "2026-10-03 (page fetched)",
+      "via": "page",
+      "verified": true
+     },
+     {
+      "url": "https://www.manvillenj.org/578/Bureau-of-Fire-Safety",
+      "quote": "(908) 725-9478 Ext. 112",
+      "doc_date": "2026-10-03 (page fetched)",
+      "via": "page",
+      "verified": true
+     },
+     {
+      "url": "https://www.manvillenj.org/DocumentCenter/View/6595/2023-1306-Fire-Safety-Ordinance-",
+      "quote": "A CSACMAPFEC shall not be transferable. If a change of occupancy does not",
+      "doc_date": "Ordinance 2023-1306",
+      "via": "pdf",
+      "verified": true
+     },
+     {
+      "url": "https://www.manvillenj.org/DocumentCenter/View/6595/2023-1306-Fire-Safety-Ordinance-",
+      "quote": "Requests for a CSACMAPFEC received fewer than four business days prior to the",
+      "doc_date": "Ordinance 2023-1306",
+      "via": "pdf",
+      "verified": true
+     },
+     {
+      "url": "https://www.manvillenj.org/DocumentCenter/View/6595/2023-1306-Fire-Safety-Ordinance-",
+      "quote": "Borough of Manville requires all R-3 Residential one & two family structures being sold",
+      "doc_date": "Ordinance 2023-1306",
+      "via": "pdf",
+      "verified": true
+     },
+     {
+      "url": "https://www.manvillenj.org/DocumentCenter/View/7595/CSDCMAC-Application-2025",
+      "quote": "Note: Fire extinguisher inspection is still part of the Certification of Smoke Alarm/Carbon Monoxide Alarm Compliance as required per Borough Ordinance.",
+      "doc_date": "",
+      "via": "pdf",
+      "verified": null
+     },
+     {
+      "url": "https://www.manvillenj.org/DocumentCenter/View/7595/CSDCMAC-Application-2025",
+      "quote": "Call the Borough of Manville Fire Marshal at 908-725-9478 ext. 112",
+      "doc_date": "",
+      "via": "pdf",
+      "verified": null
+     },
+     {
+      "url": "https://www.nj.gov/dca/dfs/pdf/fire%20directory_county%20summary/fire_code_enforcement_director.pdf",
+      "quote": "LEAID: 1811-001 ... Name: Manville Fire Prev ... Enf Auth. Municipal ... Fire Official Richard J Connolly III Phone (908) 725-9478",
+      "doc_date": "2026-01 (survey date 1/29/2026)",
+      "via": "state_directory",
+      "verified": null
+     },
+     {
+      "url": "https://nj.gov/dca/dfs/pdf/ANNUAL%20REGISTRY/THIRD%20QUARTER%20LEA%20REGISTRY%202026.pdf",
+      "quote": "M Manville Borough",
+      "doc_date": "2026-07",
+      "via": "pdf",
+      "verified": true
+     }
+    ],
+    "confidence": "high"
+   }
+  ],
+  "notes": "Fees come from Fire Safety Ordinance 2023-1306 (Section 14) and match the 2025 fee letter in the application packet ($45.00 / $90.00 / $161.00, reinspection $35.00). The Borough keeps the fire extinguisher as a local requirement by ordinance (Section 15) even though P.L.2025, c.19 dropped it from the state sale certificate; the 2025 packet says so in writing. Ordinance quotes are split across PDF lines, so short line fragments are quoted."
+ },
+ "other_items": [],
+ "open_questions": [
+  "What does the $50 Certificate for Home Sale inspection check, how long does it take, and how long is it valid?",
+  "Is the home sale certificate required for every 1-2 family sale, or only certain ones (for example rentals or bank-owned homes)?"
+ ],
+ "checked_at": "2026-10-03",
+ "verification": {
+  "fees": 5,
+  "fee_ok": 4,
+  "fee_bad": 0,
+  "fee_unchecked": 1,
+  "quotes": 16,
+  "q_ok": 9,
+  "q_bad": 0,
+  "q_unchecked": 7
+ }
+}

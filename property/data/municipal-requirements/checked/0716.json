@@ -1,0 +1,216 @@
+{
+ "municipality_code": "0716",
+ "municipality": "Nutley Township",
+ "county": "ESSEX",
+ "checked_at": "2026-10-03",
+ "resale_co": {
+  "status": "required",
+  "name": "Continued Certificate of Occupancy (Zoning Certificate)",
+  "issued_by": "Township of Nutley Code Enforcement Department",
+  "lead_time": "Inspection requests must be in writing (SDL Portal or request form) at least 24 hours in advance. Transfer of real estate inspections: Building/Zoning Monday to Friday 8:00am to 3:30pm; Fire/Zoning Monday, Wednesday and Thursday 11:00am to 3:00pm.",
+  "valid_for": "",
+  "requirements": [
+   "Safety inspection by Code Enforcement before the sale, conveyance or rental (not a home inspection)",
+   "No work done without permits; all open building permits closed through final inspections before the Zoning Certificate is issued",
+   "Working smoke detectors on each level, including basement and walk-up attic, and within 10 feet of each bedroom",
+   "Carbon monoxide detector in the common area outside bedrooms, within 10 feet of each bedroom, where there is a fuel burning appliance or attached garage",
+   "Relief valves on the water heater and boiler piped to within 6 inches of the floor",
+   "Sump pump (if present) discharging outside, not into the sanitary sewer or onto adjoining property",
+   "Handrails/guardrails for anything over four steps; stairs in good shape inside and out",
+   "Switch and outlet covers in place; electric panel with no openings; no exposed wires or open boxes",
+   "Attached garage with no holes in walls or ceilings; toilets and faucets working; hot water at least 110 degrees with hot on the left",
+   "Proper fit and venting of furnace/boiler and water heater to the chimney; metal or UL listed foil dryer vents; bathroom ventilation (window or mechanical vent)",
+   "No broken windows or glass, no illegal conversions or living areas, no other visible safety faults",
+   "House numbers 4 to 8 inches high, visible from the street",
+   "Compliance with zoning regulations for the area"
+  ],
+  "fees": [
+   {
+    "label": "Certificate of Continued Occupancy filing fee, per dwelling unit up to a 3 family (stated in the 2018 rental change-of-occupancy notice; confirm it applies to sales)",
+    "amount": "$75",
+    "quote": "A Certificate of Continued Occupancy application needs to be completed each time there is a change along with a filing fee of $75 per dwelling unit up to a 3 family and $35 per dwelling unit for a multi-family.",
+    "source_url": "https://www.nutleynj.org/media/Forms-Permits-Applications/Code%20Enforcement%20/Information%20Updates/Important%20Update%20for%20Homeowners%20-%20Use%20and%20Occupancy%20-%20Web.pdf",
+    "verified": true
+   }
+  ],
+  "how_to_apply": "Apply to the Code Enforcement Department, 2nd floor of the Municipal Building, 1 Kennedy Drive (office hours Monday to Friday 8:00 a.m. to 4:00 p.m., closed 12:30 to 1:30). Since July 1, 2026 inspection requests must be in writing through the SDL Portal (Nutley) or the Township's inspection request form, at least 24 hours ahead. The smoke/CO certificate is a separate application to Nutley Fire Prevention.",
+  "application_url": "https://www.sdlportal.com/towns/nj/essex/nutley",
+  "department_url": "https://www.nutleynj.org/code-enforcement",
+  "phone": "(973) 284-4957",
+  "email": "",
+  "contact_name": "",
+  "contact_title": "",
+  "evidence": [
+   {
+    "url": "https://www.nutleynj.org/media/Forms-Permits-Applications/Code%20Enforcement%20/CO_Requirements.pdf",
+    "quote": "A Continued Certificate of Occupancy or “Zoning Certificate” is required on all resales, rentals, and/or changes or tenancy.",
+    "doc_date": "2025-07-21 (PDF modified)",
+    "via": "pdf",
+    "verified": true
+   },
+   {
+    "url": "https://www.nutleynj.org/media/Forms-Permits-Applications/Code%20Enforcement%20/CO_Requirements.pdf",
+    "quote": "The Township of Nutley, Chapter 700, Article XVII Section 700-116, requires that a Certificate of Occupancy shall be applied for and issued prior to the sale, conveyance or rental of any property within the Township.",
+    "doc_date": "2025-07-21",
+    "via": "pdf",
+    "verified": true
+   },
+   {
+    "url": "https://www.nutleynj.org/media/Forms-Permits-Applications/Code%20Enforcement%20/CO_Requirements.pdf",
+    "quote": "No Zoning Certificate will be issued until all open building permits are closed.",
+    "doc_date": "2025-07-21",
+    "via": "pdf",
+    "verified": true
+   },
+   {
+    "url": "https://www.nutleynj.org/code-enforcement",
+    "quote": "Inspection requests must now be in writing as per the New Jersey Administrative Code 5:23-2.18(c).",
+    "doc_date": "2026-10-03 (page fetched)",
+    "via": "page",
+    "verified": true
+   },
+   {
+    "url": "https://www.nutleynj.org/code-enforcement",
+    "quote": "Building/Zoning (Transfer of Real Estate)",
+    "doc_date": "2026-10-03 (page fetched)",
+    "via": "page",
+    "verified": true
+   },
+   {
+    "url": "https://www.nutleynj.org/media/Forms-Permits-Applications/Code%20Enforcement%20/Information%20Updates/Important%20Update%20for%20Homeowners%20-%20Use%20and%20Occupancy%20-%20Web.pdf",
+    "quote": "(973) 284-4957 Phone | (973) 284-0071 Fax",
+    "doc_date": "2018-10-02",
+    "via": "pdf",
+    "verified": true
+   }
+  ],
+  "confidence": "high",
+  "notes": "The Code Enforcement CO Requirements sheet (July 2025) says a Continued Certificate of Occupancy or Zoning Certificate is required on all resales and cites Code Section 700-116. The only published fee ($75 per dwelling unit up to a 3 family) comes from a 2018 information sheet in the section on rental changes of occupancy, so confirm the current resale fee. The 2018 sheet names David Berry as Construction Official; no current named contact was found on the Code Enforcement page, so contact_name is left blank. The Zoning Officer phone on the CO sheet is 973-284-4957. The CO sheet's smoke and CO detector items overlap with the separate fire certificate."
+ },
+ "fire_cert": {
+  "requirements": [
+   "UL approved smoke detectors on every level (excluding crawl spaces and unfinished attics with pull-down stairs), on the ceiling and within 10 feet of every bedroom, or within 10 feet of the stairway on levels without bedrooms",
+   "All battery smoke detectors must be 10-year sealed battery type; all existing hardwired systems must be maintained",
+   "Carbon monoxide alarms (UL 2034, dated) within 10 feet of all sleeping areas, with more on each floor that has sleeping areas",
+   "Homes with secondary power sources need a printed label (such as CAUTION: MULTIPLE SOURCES OF POWER) within 18 inches of the main electrical panel and electric meter (P.L.2025, c.19)",
+   "Homes with a monitored central station fire alarm must have it tested beforehand by a Division of Fire Safety certified company and give the test record to the inspector",
+   "Incomplete items at inspection mean automatic failure and a re-inspection; no specific inspection times are given"
+  ],
+  "authorities": [
+   {
+    "name": "Nutley Fire Department, Fire Prevention Bureau (Department of Public Safety)",
+    "type": "municipal_fire_bureau",
+    "area_served": "Entire township",
+    "lead_time": "Fee depends on how many business days before the inspection date the application is received: more than 10 business days for the lowest fee.",
+    "fees": [
+     {
+      "label": "Smoke detector and CO certificate, application received more than 10 business days before inspection",
+      "amount": "$45",
+      "quote": "An application received more than 10 business days from date of inspection: $45",
+      "source_url": "https://www.nutleynj.org/media/Forms-Permits-Applications/Fire%20Department%20/Residential%20Smoke%20Detector%20and%20Carbon%20Monoxide%20Application.pdf",
+      "verified": true
+     },
+     {
+      "label": "Application received 4 to 10 business days before inspection",
+      "amount": "$90",
+      "quote": "An application received from 4 to 10 business days from date of inspection: $90",
+      "source_url": "https://www.nutleynj.org/media/Forms-Permits-Applications/Fire%20Department%20/Residential%20Smoke%20Detector%20and%20Carbon%20Monoxide%20Application.pdf",
+      "verified": true
+     },
+     {
+      "label": "Application received fewer than 4 business days before inspection",
+      "amount": "$161",
+      "quote": "An application received fewer than 4 business days from date of inspection: $161",
+      "source_url": "https://www.nutleynj.org/media/Forms-Permits-Applications/Fire%20Department%20/Residential%20Smoke%20Detector%20and%20Carbon%20Monoxide%20Application.pdf",
+      "verified": true
+     }
+    ],
+    "how_to_apply": "Fill out the Residential Certificate of Smoke Detector and Carbon Monoxide Compliance Application (owner/seller and agent details, block and lot, sale or rental) and submit it with the fee payable to the Nutley Fire Department, 228 Chestnut Street. Read all four pages; the inspection must pass before the certificate is issued.",
+    "application_url": "https://www.nutleynj.org/media/Forms-Permits-Applications/Fire%20Department%20/Residential%20Smoke%20Detector%20and%20Carbon%20Monoxide%20Application.pdf",
+    "department_url": "",
+    "phone": "(973) 284-4937",
+    "email": "pcafone@nutleynj.org",
+    "contact_name": "Paul Cafone",
+    "contact_title": "Chief (Fire Official per state directory)",
+    "evidence": [
+     {
+      "url": "https://www.nutleynj.org/media/Forms-Permits-Applications/Fire%20Department%20/Residential%20Smoke%20Detector%20and%20Carbon%20Monoxide%20Application.pdf",
+      "quote": "before any residential dwelling is leased, sold, or subject to change in occupancy for residential purposes, the owner shall obtain a certificate of compliance from Nutley Fire Prevention.",
+      "doc_date": "2026-02-24 (PDF modified)",
+      "via": "pdf",
+      "verified": true
+     },
+     {
+      "url": "https://www.nutleynj.org/media/Forms-Permits-Applications/Fire%20Department%20/Residential%20Smoke%20Detector%20and%20Carbon%20Monoxide%20Application.pdf",
+      "quote": "I UNDERSTAND NO SPECIFIC INSPECTION TIMES WILL BE GIVEN.",
+      "doc_date": "2026-02-24",
+      "via": "pdf",
+      "verified": true
+     },
+     {
+      "url": "https://www.nutleynj.org/media/Forms-Permits-Applications/Fire%20Department%20/Residential%20Smoke%20Detector%20and%20Carbon%20Monoxide%20Application.pdf",
+      "quote": "NOTE: ALL battery-operated detectors must be a 10-year sealed battery type.",
+      "doc_date": "2026-02-24",
+      "via": "pdf",
+      "verified": true
+     },
+     {
+      "url": "https://www.nutleynj.org/media/Forms-Permits-Applications/Fire%20Department%20/Residential%20Smoke%20Detector%20and%20Carbon%20Monoxide%20Application.pdf",
+      "quote": "Nutley Fire Inspectors WILL NOT test central station fire alarms.",
+      "doc_date": "2026-02-24",
+      "via": "pdf",
+      "verified": true
+     },
+     {
+      "url": "https://www.nj.gov/dca/dfs/pdf/fire%20directory_county%20summary/fire_code_enforcement_director.pdf",
+      "quote": "LEAID: 0716-001 Nutley Twp ... Fire Official Paul Cafone Phone (973) 284-4937 ... Email pcafone@nutleynj.org",
+      "doc_date": "survey date 5/22/2026",
+      "via": "state_directory",
+      "verified": null
+     },
+     {
+      "url": "https://nj.gov/dca/dfs/pdf/ANNUAL%20REGISTRY/THIRD%20QUARTER%20LEA%20REGISTRY%202026.pdf",
+      "quote": "F Nutley Township",
+      "doc_date": "2026-07",
+      "via": "pdf",
+      "verified": true
+     }
+    ],
+    "confidence": "high"
+   }
+  ],
+  "notes": "The February 2026 application is already updated for P.L.2025, c.19: it adds the secondary power source label and does not list a fire extinguisher. The form header lists Chief Paul Cafone at (973) 284-4936; the state directory lists him as Fire Official at (973) 284-4937 with pcafone@nutleynj.org. No Fire Prevention web page was found on the Township site, so department_url is blank. The Code Enforcement page shows Fire/Zoning transfer-of-real-estate inspections on Monday, Wednesday and Thursday, 11:00am to 3:00pm."
+ },
+ "other_items": [
+  {
+   "label": "Final water reading",
+   "detail": "Contact the Water Department at (973) 284-4962, schedule online, or email waterbilling@nutleynj.org at least 24 hours in advance to schedule a final water reading.",
+   "source_url": "https://www.nutleynj.org/media/Forms-Permits-Applications/Code%20Enforcement%20/Information%20Updates/Important%20Update%20for%20Homeowners%20-%20Use%20and%20Occupancy%20-%20Web.pdf"
+  },
+  {
+   "label": "Open building permits",
+   "detail": "All open building permits must be closed by scheduling final inspections before the Zoning Certificate is issued.",
+   "source_url": "https://www.nutleynj.org/media/Forms-Permits-Applications/Code%20Enforcement%20/CO_Requirements.pdf"
+  },
+  {
+   "label": "Sump pump discharge",
+   "detail": "A sump pump must discharge outside the structure, not into the sanitary sewer or onto adjoining property; checked at the CO inspection.",
+   "source_url": "https://www.nutleynj.org/media/Forms-Permits-Applications/Code%20Enforcement%20/CO_Requirements.pdf"
+  }
+ ],
+ "open_questions": [
+  "What is the current fee for a resale Continued Certificate of Occupancy for a 1 or 2 family home (the only published $75 per unit figure is from a 2018 rental notice)?",
+  "Where is the Continued CO application form, and how long is the certificate valid?",
+  "Who is the current Construction Official / Zoning Officer and their email?"
+ ],
+ "verification": {
+  "fees": 4,
+  "fee_ok": 4,
+  "fee_bad": 0,
+  "fee_unchecked": 0,
+  "quotes": 12,
+  "q_ok": 11,
+  "q_bad": 0,
+  "q_unchecked": 1
+ }
+}

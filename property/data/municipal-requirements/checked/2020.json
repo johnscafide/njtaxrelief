@@ -1,0 +1,168 @@
+{
+ "municipality_code": "2020",
+ "municipality": "Westfield Town",
+ "county": "UNION",
+ "checked_at": "2026-10-02",
+ "resale_co": {
+  "status": "not_required",
+  "name": "",
+  "issued_by": "",
+  "lead_time": "",
+  "valid_for": "",
+  "requirements": [],
+  "fees": [],
+  "how_to_apply": "No town Certificate of Occupancy or Continued Certificate of Occupancy is needed to sell a home in Westfield. The seller only needs the Certificate of Smoke Detector and Carbon Monoxide Alarm Compliance from the Fire Prevention Bureau.",
+  "application_url": "",
+  "department_url": "https://www.westfieldnj.gov/547/Building-Construction",
+  "phone": "908-789-4125",
+  "email": "fvuoso@westfieldnj.gov",
+  "contact_name": "Frank Vuoso",
+  "contact_title": "Construction Official",
+  "evidence": [
+   {
+    "url": "https://www.westfieldnj.gov/Faq.aspx?QID=224",
+    "quote": "Westfield does not require these items to sell a home or to open/transfer a business. There is a requirement to have a Certificate of Smoke Detector & Carbon Monoxide Alarm Compliance Inspection completed for a home sale",
+    "doc_date": "",
+    "via": "page",
+    "verified": true
+   },
+   {
+    "url": "https://www.westfieldnj.gov/547/Building-Construction",
+    "quote": "Frank Vuoso Construction Official",
+    "doc_date": "",
+    "via": "page",
+    "verified": true
+   },
+   {
+    "url": "https://www.westfieldnj.gov/547/Building-Construction",
+    "quote": "Phone: 908-789-4125, ext. 4622",
+    "doc_date": "",
+    "via": "page",
+    "verified": true
+   }
+  ],
+  "confidence": "high",
+  "notes": "Building Department FAQ: 'Does Westfield require a Certificate of Occupancy (CO) or Continued Certificate of Occupancy (CCO) when I sell my home or to open my business?' Answer: Westfield does not require these items to sell a home. Open construction permits still matter: the Fire Prevention Bureau notifies the Building Department and permits must be closed before the smoke certificate is issued. Construction Official Frank Vuoso's direct line is 908-789-4125, ext. 4622; his email is a mailto link on the Building & Construction page. Building Department: 959 North Avenue W."
+ },
+ "fire_cert": {
+  "requirements": [
+   "Ten-year sealed battery smoke alarms; A/C-powered alarms from original construction may not be replaced with battery alarms",
+   "Smoke detectors on every level (basement, first floor, second floor, excluding crawl spaces and unfinished attics) and outside sleeping areas",
+   "CO detectors outside each sleeping area in the hallway; two are needed if bedrooms are on different levels or wings; plug-in CO detectors are allowed",
+   "Homes with a central station fire alarm need a letter from the monitoring company stating the system works",
+   "Open construction permits must be closed before the certificate is issued",
+   "Fire extinguisher no longer required as of March 14, 2025"
+  ],
+  "authorities": [
+   {
+    "name": "Westfield Fire Department, Bureau of Fire Prevention",
+    "type": "municipal_fire_bureau",
+    "area_served": "Entire town",
+    "lead_time": "Lowest fee when the inspection is scheduled more than 10 business days after payment is received; inspections Tuesdays and Thursdays, 9:00am to 12:00pm",
+    "fees": [
+     {
+      "label": "Inspection scheduled more than 10 business days after payment received",
+      "amount": "$100.00",
+      "quote": "Inspection Scheduled more than 10 business days after payment received $100.00",
+      "source_url": "https://www.westfieldnj.gov/DocumentCenter/View/8456/Smoke-Detector-Application",
+      "verified": true
+     },
+     {
+      "label": "Inspection scheduled 4 to 10 business days after payment received",
+      "amount": "$125.00",
+      "quote": "Inspection scheduled four to 10 business days after payment received $125.00",
+      "source_url": "https://www.westfieldnj.gov/DocumentCenter/View/8456/Smoke-Detector-Application",
+      "verified": true
+     },
+     {
+      "label": "Inspection scheduled fewer than 4 business days after payment received",
+      "amount": "$150.00",
+      "quote": "Inspection scheduled fewer than four business days after payment received $150.00",
+      "source_url": "https://www.westfieldnj.gov/DocumentCenter/View/8456/Smoke-Detector-Application",
+      "verified": true
+     }
+    ],
+    "how_to_apply": "Apply online with the Town's Smoke Detector Application form, or download the PDF application and send it with a check payable to 'WESTFIELD FIRE DEPARTMENT' to the Bureau of Fire Prevention, 1029 Central Ave., Westfield, NJ 07090. Online payment by credit card or e-check is also accepted. An adult (18 or older) must be present; the engine company arrives between 9am and 12pm on Tuesday or Thursday. The certificate is emailed to the one email address given on the application.",
+    "application_url": "https://www.westfieldnj.gov/FormCenter/Fire-Department-Forms-22/Smoke-Detector-Application-134",
+    "department_url": "https://www.westfieldnj.gov/2041/Smoke-Detector-Application",
+    "phone": "908-789-4145",
+    "email": "fireprevention@westfieldnj.gov",
+    "contact_name": "Thomas Bottini",
+    "contact_title": "Fire Official",
+    "evidence": [
+     {
+      "url": "https://www.westfieldnj.gov/2041/Smoke-Detector-Application",
+      "quote": "before any one- or two-family dwelling is sold, leased, or otherwise made subject to change in occupancy for residential purposes, the owner shall obtain a certificate of compliance from the Westfield Fire Department, Bureau of Fire Prevention. Failure to obtain this certificate prior to change in occupancy shall result in a $200.00 fine.",
+      "doc_date": "",
+      "via": "page",
+      "verified": true
+     },
+     {
+      "url": "https://www.westfieldnj.gov/DocumentCenter/View/8456/Smoke-Detector-Application",
+      "quote": "Checks made payable to: WESTFIELD FIRE DEPARTMENT",
+      "doc_date": "2025-03-13 (PDF creation date)",
+      "via": "pdf",
+      "verified": true
+     },
+     {
+      "url": "https://www.westfieldnj.gov/2041/Smoke-Detector-Application",
+      "quote": "The fire extinguisher is no longer required as of March 14, 2025, after approval from the Town of Westfield and passing of the New Jersey's Assembly Bill A3894.",
+      "doc_date": "",
+      "via": "page",
+      "verified": true
+     },
+     {
+      "url": "https://www.westfieldnj.gov/2041/Smoke-Detector-Application",
+      "quote": "What happens if I have open construction permits? The building department will be notified and permits need to be closed prior to issuance of certificate.",
+      "doc_date": "",
+      "via": "page",
+      "verified": true
+     },
+     {
+      "url": "https://www.westfieldnj.gov/2041/Smoke-Detector-Application",
+      "quote": "A letter from the monitoring company needs to be presented stating that the system is operational.",
+      "doc_date": "",
+      "via": "page",
+      "verified": true
+     },
+     {
+      "url": "https://www.westfieldnj.gov/DocumentCenter/View/8456/Smoke-Detector-Application",
+      "quote": "TEL: (908) 789-4145 FAX: (908) 789-4137 Email: fireprevention@westfieldnj.gov",
+      "doc_date": "2025-03-13",
+      "via": "pdf",
+      "verified": true
+     },
+     {
+      "url": "https://www.nj.gov/dca/dfs/pdf/fire%20directory_county%20summary/fire_code_enforcement_director.pdf",
+      "quote": "20 Union Westfield Town2020 ... LEAID: 2020-001 Enf Auth. Fire Dept Fire Official Thomas Bottini Phone (908) 789-4146 ... Phone (908) 789-4145 ... Email tbottini@westfieldnj.gov",
+      "doc_date": "survey 2026-01-08",
+      "via": "state_directory",
+      "verified": true
+     }
+    ],
+    "confidence": "high"
+   }
+  ],
+  "notes": "The NJ DCA July 2026 registry lists the Westfield Fire Department as the fire code enforcing agency. Fees match on the Smoke Detector Application web page and the PDF application (created March 13, 2025); the tiers count business days between payment and the inspection date. The Town site lists no named Fire Prevention staff; Fire Official Thomas Bottini's name, direct phone (908) 789-4146 and email tbottini@westfieldnj.gov come from the state fire directory. Fire Prevention office hours: Monday through Friday 9am to 12pm and 1pm to 4pm. The certificate is also required when the house will be demolished."
+ },
+ "other_items": [
+  {
+   "label": "Open construction permits",
+   "detail": "The Fire Prevention Bureau notifies the Building Department of open permits; they must be closed before the smoke/CO certificate is issued.",
+   "source_url": "https://www.westfieldnj.gov/2041/Smoke-Detector-Application"
+  }
+ ],
+ "open_questions": [
+  "Reinspection fee if the smoke/CO inspection fails"
+ ],
+ "verification": {
+  "fees": 3,
+  "fee_ok": 3,
+  "fee_bad": 0,
+  "fee_unchecked": 0,
+  "quotes": 10,
+  "q_ok": 10,
+  "q_bad": 0,
+  "q_unchecked": 0
+ }
+}

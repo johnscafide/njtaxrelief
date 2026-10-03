@@ -1,0 +1,243 @@
+{
+ "municipality_code": "1604",
+ "municipality": "Hawthorne Borough",
+ "county": "PASSAIC",
+ "checked_at": "2026-10-02",
+ "resale_co": {
+  "status": "required",
+  "name": "Certificate of Continuing Compliance (Continued Certificate of Compliance, Transfer of Ownership)",
+  "issued_by": "Borough of Hawthorne Fire Prevention Bureau (combined with the smoke detector and carbon monoxide alarm certificate)",
+  "lead_time": "Apply at least 14 days before closing; an inspection is required. Applications made less than 5 days before closing pay an extra rush fee.",
+  "valid_for": "",
+  "requirements": [
+   "Inspection for compliance with NJ State fire codes and Borough ordinances for continued use",
+   "Smoke detector on every level of the home",
+   "Carbon monoxide alarm within 10 feet of each sleeping room",
+   "Attic and basement may not be used as sleeping rooms or separate dwelling units unless noted on the certificate",
+   "In-person appointment inspection (remote or picture inspections ended July 1, 2022)"
+  ],
+  "fees": [
+   {
+    "label": "Residential resale, per unit (one combined certificate with the smoke and CO certificate; paid once)",
+    "amount": "$75",
+    "quote": "Per Unit (i.e. 1 family home $75; 2 family home $150, etc.) $75 14 days Prior to Closing Inspection Required",
+    "source_url": "https://www.hawthornenj.org/DocumentCenter/View/6243/Fee-Schedule",
+    "verified": true
+   },
+   {
+    "label": "Residential resale, two family home",
+    "amount": "$150",
+    "quote": "Per Unit (i.e. 1 family home $75; 2 family home $150, etc.)",
+    "source_url": "https://www.hawthornenj.org/DocumentCenter/View/6243/Fee-Schedule",
+    "verified": true
+   },
+   {
+    "label": "Rush: applied less than 5 days before closing (additional)",
+    "amount": "$125",
+    "quote": "Applied LESS than 5 days prior $125 Additional Rush",
+    "source_url": "https://www.hawthornenj.org/DocumentCenter/View/6243/Fee-Schedule",
+    "verified": true
+   },
+   {
+    "label": "Reinspection, per unit (application form)",
+    "amount": "$ 20.00 per unit",
+    "quote": "FEE:   $ 75.00 PER UNIT                                                 Reinspection fee   $ 20.00 per unit",
+    "source_url": "https://www.hawthornenj.org/DocumentCenter/View/6245/Smoke-Cert_COC-Transfer-Resale-",
+    "verified": "eye"
+   },
+   {
+    "label": "Residential resale smoke and carbon monoxide certificate, per unit (same combined certificate as the town requirement; paid once)",
+    "amount": "$75",
+    "quote": "Per Unit (i.e. 1 family home $75; 2 family home $150, etc.) $75 14 days Prior to Closing Inspection Required",
+    "source_url": "https://www.hawthornenj.org/DocumentCenter/View/6243/Fee-Schedule",
+    "verified": true
+   },
+   {
+    "label": "Two family home",
+    "amount": "$150",
+    "quote": "Per Unit (i.e. 1 family home $75; 2 family home $150, etc.)",
+    "source_url": "https://www.hawthornenj.org/DocumentCenter/View/6243/Fee-Schedule",
+    "verified": true
+   },
+   {
+    "label": "Rush: applied less than 5 days before closing (additional)",
+    "amount": "$125",
+    "quote": "Applied LESS than 5 days prior $125 Additional Rush",
+    "source_url": "https://www.hawthornenj.org/DocumentCenter/View/6243/Fee-Schedule",
+    "verified": true
+   },
+   {
+    "label": "Reinspection, per unit",
+    "amount": "$ 20.00 per unit",
+    "quote": "Reinspection fee   $ 20.00 per unit",
+    "source_url": "https://www.hawthornenj.org/DocumentCenter/View/6245/Smoke-Cert_COC-Transfer-Resale-",
+    "verified": "eye"
+   }
+  ],
+  "how_to_apply": "Fill out the Continued Certificate of Compliance / Transfer of Ownership / Smoke Detector and Carbon Monoxide Alarm Certificate residential resale application (all seller, buyer and attorney details are required or it is rejected). Bring it with the fee to the Fire Prevention office, 445 Lafayette Avenue, 2nd Floor, where you also schedule the inspection.",
+  "application_url": "https://www.hawthornenj.org/DocumentCenter/View/6245/Smoke-Cert_COC-Transfer-Resale-",
+  "department_url": "https://www.hawthornenj.org/268/Fire-Prevention",
+  "phone": "973-427-7544",
+  "email": "lsingle@hawthornenj.org",
+  "contact_name": "Laura Single",
+  "contact_title": "Clerk, Fire Prevention (Fire Official / Fire Subcode Official: Christopher DiBella, 973-427-4590, cdibella@hawthornenj.org)",
+  "evidence": [
+   {
+    "url": "https://www.hawthornenj.org/415/Building-DeptConstruction-Inspection",
+    "quote": "PROPERTY RESALES/Certificate of Continuing Compliance - A Certificate of Continuing Compliance (COO) is required for all property sales in the Borough. This includes residential as well as commercial properties.",
+    "doc_date": "2026-10-02 (page fetched)",
+    "via": "page",
+    "verified": true
+   },
+   {
+    "url": "https://www.hawthornenj.org/DocumentCenter/View/6245/Smoke-Cert_COC-Transfer-Resale-",
+    "quote": "Fire Prevention Bureau 973-427-4889 CONTINUED CERTIFICATE of COMPLIANCE TRANSFER OF OWNERSHIP SMOKE DETECTOR & CARBON MONOXIDE ALARM CERTIFICATE RESIDENTIAL RESALE APPLICATION",
+    "doc_date": "2025-03-17 (form code 031725; PDF created March 27, 2025)",
+    "via": "pdf",
+    "verified": "eye"
+   },
+   {
+    "url": "https://www.hawthornenj.org/DocumentCenter/View/6245/Smoke-Cert_COC-Transfer-Resale-",
+    "quote": "The above-described building or structure has been inspected for compliance with applicable NJ State Fire Codes as well as Borough Ordinances, for continued use as same.",
+    "doc_date": "2025-03",
+    "via": "pdf",
+    "verified": "eye"
+   },
+   {
+    "url": "https://www.hawthornenj.org/DocumentCenter/View/6243/Fee-Schedule",
+    "quote": "Borough of Hawthorne Fire Prevention Bureau 445 Lafayette Ave., 2nd Floor Hawthorne, New Jersey 07506-2551 Bureau Chief Christopher Di Bella, Fire Official Phone: 973.427.7544",
+    "doc_date": "2025-03-28 (fee schedule marked 3.28.25)",
+    "via": "pdf",
+    "verified": true
+   },
+   {
+    "url": "https://www.hawthornenj.org/268/Fire-Prevention",
+    "quote": "Bring the completed form to the Fire Prevention office (with required fees), where you will also schedule your inspection.",
+    "doc_date": "2026-10-02 (page fetched)",
+    "via": "page",
+    "verified": true
+   },
+   {
+    "url": "https://www.hawthornenj.org/268/Fire-Prevention",
+    "quote": "Laura Single Clerk, Fire Prevention Email Laura Single Phone: 973-427-7544",
+    "doc_date": "2026-10-02 (page fetched; email from the page's mailto link)",
+    "via": "page",
+    "verified": true
+   }
+  ],
+  "confidence": "high",
+  "notes": "Hawthorne's resale certificate is one combined Fire Prevention Bureau certificate: the Continued Certificate of Compliance (Transfer of Ownership) and the state smoke detector and carbon monoxide alarm certificate are on the same application and fee, so the fees are repeated under fire_cert and paid once. The Building Department page calls it the Certificate of Continuing Compliance ('COO'). The application form says the attic and basement are not approved as sleeping rooms or separate units unless noted, and the certificate can be revoked for unpaid Borough fines or restitution. The form header phone (973-427-4889) is the Building Department / Fire Prevention office main number listed on the Building page; the Fire Prevention page lists the clerk at 973-427-7544. Rentals are separate: landlords of non owner-occupied 1-2 unit rentals must register with the Borough Clerk, and rental smoke certificates are $30 per unit without inspection or $40 with inspection. Emails are taken from the mailto links on the Borough pages."
+ },
+ "fire_cert": {
+  "requirements": [
+   "Smoke detector on every level of the home",
+   "Carbon monoxide alarm within 10 feet of each sleeping room",
+   "Portable fire extinguisher no longer required as of February 15, 2025 (per the Fire Prevention page)"
+  ],
+  "authorities": [
+   {
+    "name": "Borough of Hawthorne Fire Prevention Bureau",
+    "type": "municipal_fire_bureau",
+    "area_served": "Entire borough",
+    "lead_time": "Apply at least 14 days before closing; less than 5 days before closing adds a $125 rush fee.",
+    "fees": [
+     {
+      "label": "Residential resale smoke and carbon monoxide certificate, per unit (same combined certificate as the town requirement; paid once)",
+      "amount": "$75",
+      "quote": "Per Unit (i.e. 1 family home $75; 2 family home $150, etc.) $75 14 days Prior to Closing Inspection Required",
+      "source_url": "https://www.hawthornenj.org/DocumentCenter/View/6243/Fee-Schedule",
+      "verified": true
+     },
+     {
+      "label": "Two family home",
+      "amount": "$150",
+      "quote": "Per Unit (i.e. 1 family home $75; 2 family home $150, etc.)",
+      "source_url": "https://www.hawthornenj.org/DocumentCenter/View/6243/Fee-Schedule",
+      "verified": true
+     },
+     {
+      "label": "Rush: applied less than 5 days before closing (additional)",
+      "amount": "$125",
+      "quote": "Applied LESS than 5 days prior $125 Additional Rush",
+      "source_url": "https://www.hawthornenj.org/DocumentCenter/View/6243/Fee-Schedule",
+      "verified": true
+     },
+     {
+      "label": "Reinspection, per unit",
+      "amount": "$ 20.00 per unit",
+      "quote": "Reinspection fee   $ 20.00 per unit",
+      "source_url": "https://www.hawthornenj.org/DocumentCenter/View/6245/Smoke-Cert_COC-Transfer-Resale-",
+      "verified": "eye"
+     }
+    ],
+    "how_to_apply": "Bring the completed resale application and fee to the Fire Prevention office, 445 Lafayette Avenue, 2nd Floor, and schedule the inspection there.",
+    "application_url": "https://www.hawthornenj.org/DocumentCenter/View/6245/Smoke-Cert_COC-Transfer-Resale-",
+    "department_url": "https://www.hawthornenj.org/268/Fire-Prevention",
+    "phone": "973-427-4590",
+    "email": "cdibella@hawthornenj.org",
+    "contact_name": "Christopher DiBella",
+    "contact_title": "Fire Official / Fire Subcode Official (Bureau Chief); clerk Laura Single, 973-427-7544, lsingle@hawthornenj.org",
+    "evidence": [
+     {
+      "url": "https://www.hawthornenj.org/268/Fire-Prevention",
+      "quote": "Another task performed by Fire Prevention is the certification of the operation of smoke detectors required by the State of New Jersey when a home is sold or there is a change of tenant.",
+      "doc_date": "2026-10-02 (page fetched)",
+      "via": "page",
+      "verified": true
+     },
+     {
+      "url": "https://www.hawthornenj.org/268/Fire-Prevention",
+      "quote": "As of February 15, 2025, the portable fire extinguisher requirement has been removed.",
+      "doc_date": "2026-10-02 (page fetched)",
+      "via": "page",
+      "verified": true
+     },
+     {
+      "url": "https://www.hawthornenj.org/268/Fire-Prevention",
+      "quote": "Christopher DiBella Fire Official / Fire Subcode Official Email Christopher DiBella Phone: 973-427-4590",
+      "doc_date": "2026-10-02 (page fetched; email from the page's mailto link)",
+      "via": "page",
+      "verified": true
+     },
+     {
+      "url": "https://www.hawthornenj.org/DocumentCenter/View/6245/Smoke-Cert_COC-Transfer-Resale-",
+      "quote": "Required Smoke Detector all levels of home Required Carbon Monoxide Alarm within 10’ of each sleeping room",
+      "doc_date": "2025-03",
+      "via": "pdf",
+      "verified": "eye"
+     },
+     {
+      "url": "https://nj.gov/dca/dfs/pdf/ANNUAL%20REGISTRY/THIRD%20QUARTER%20LEA%20REGISTRY%202026.pdf",
+      "quote": "F Hawthorne Borough",
+      "doc_date": "2026-07",
+      "via": "pdf",
+      "verified": true
+     },
+     {
+      "url": "https://www.nj.gov/dca/dfs/pdf/fire%20directory_county%20summary/fire_code_enforcement_director.pdf",
+      "quote": "16 Passaic Hawthorne Borough1604 ... LEAID: 1604-001 Enf Auth. Fire Dept Fire Official Christopher Di Bella, Sr. Phone (973) 427-7544 Addr: 445 Lafayette Av Hawthorne NJ 07506 ... Email cdibella@hawthornenj.org ... Hawthorne Boro Fire Prev",
+      "doc_date": "2025-08-25 (survey date)",
+      "via": "state_directory",
+      "verified": true
+     }
+    ],
+    "confidence": "high"
+   }
+  ],
+  "notes": "The Hawthorne Fire Department (Fire Prevention Bureau) is the fire code enforcing agency and issues the combined resale certificate. The fee schedule is dated March 28, 2025 and the application March 17, 2025. The Fire Official's direct line on the Fire Prevention page is 973-427-4590; the fee schedule and state directory give 973.427.7544, which the page lists for the Fire Prevention clerk."
+ },
+ "other_items": [],
+ "open_questions": [
+  "How long is the Certificate of Continuing Compliance valid after the inspection?"
+ ],
+ "verification": {
+  "fees": 8,
+  "fee_ok": 8,
+  "fee_bad": 0,
+  "fee_unchecked": 0,
+  "quotes": 12,
+  "q_ok": 12,
+  "q_bad": 0,
+  "q_unchecked": 0
+ }
+}

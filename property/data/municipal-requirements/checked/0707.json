@@ -1,0 +1,213 @@
+{
+ "municipality_code": "0707",
+ "municipality": "Fairfield Township",
+ "county": "ESSEX",
+ "resale_co": {
+  "status": "required",
+  "name": "Certificate of Reoccupancy (Residential Application, Certificate of Re-Occupancy)",
+  "issued_by": "Township of Fairfield (the code says the \"Township Official\"); the residential application is posted on the Fire Prevention Bureau forms page",
+  "lead_time": "The code says the Township Official shall inspect and issue within 10 days of receipt (search snippet)",
+  "valid_for": "One year once issued (code, search snippet)",
+  "requirements": [
+   "Application with the $125.00 fee; mark Sale or Rental and give the date and time the premises can be inspected",
+   "Buyer's name, phone and email, number of new occupants and bedrooms, and names and relationship of the people moving in",
+   "Seller's name, phone and email and signature",
+   "Possible inspections by the Zoning Officer (zoning compliance) and the Construction Official (apparent Construction Code violations); the code also lists Tax Assessor, Board of Health, Fire Prevention, Property Maintenance Officer and Engineer",
+   "Violations found are noted on the certificate"
+  ],
+  "fees": [
+   {
+    "label": "Residential Certificate of Re-Occupancy (sale or rental)",
+    "amount": "$125.00",
+    "quote": "FEE OF $125.00 MUST ACCOMPANY THIS APPLICATION",
+    "source_url": "https://www.fairfieldtownshipnj.gov/DocumentCenter/View/290/Residential-Application-Certificate-of-Re-Occupancy-PDF",
+    "verified": true
+   }
+  ],
+  "how_to_apply": "Fill out the Residential Application, Certificate of Re-Occupancy (PDF on the Fire Prevention forms page), mark Sale, and send it with the $125.00 fee. The form does not say where to file it; the Fire Prevention office (973-882-2700 ext. 2506, fireprevention@fairfieldnj.org) posts it, and the Building Department is at ext. 2503.",
+  "application_url": "https://www.fairfieldtownshipnj.gov/DocumentCenter/View/290/Residential-Application-Certificate-of-Re-Occupancy-PDF",
+  "department_url": "https://www.fairfieldtownshipnj.gov/177/Forms-Documents",
+  "phone": "973-882-2700 ext. 2506",
+  "email": "fireprevention@fairfieldnj.org",
+  "contact_name": "",
+  "contact_title": "",
+  "evidence": [
+   {
+    "url": "https://www.fairfieldtownshipnj.gov/DocumentCenter/View/290/Residential-Application-Certificate-of-Re-Occupancy-PDF",
+    "quote": "RESIDENTIAL APPLICATION - CERTICATE OF RE-OCCUPANCY",
+    "doc_date": "",
+    "via": "pdf",
+    "verified": true
+   },
+   {
+    "url": "https://www.fairfieldtownshipnj.gov/DocumentCenter/View/290/Residential-Application-Certificate-of-Re-Occupancy-PDF",
+    "quote": "FEE OF $125.00 MUST ACCOMPANY THIS APPLICATION",
+    "doc_date": "",
+    "via": "pdf",
+    "verified": true
+   },
+   {
+    "url": "https://ecode360.com/35316176",
+    "quote": "Before the occupancy or possession of any building or structure may pass from one person to another, the owner of the building or structure shall apply for and obtain a Certificate of Reoccupancy from the Township Official.",
+    "doc_date": "",
+    "via": "search_snippet",
+    "verified": null
+   },
+   {
+    "url": "https://ecode360.com/35316176",
+    "quote": "Once issued, a Certificate of Reoccupancy shall be valid for one year.",
+    "doc_date": "",
+    "via": "search_snippet",
+    "verified": null
+   },
+   {
+    "url": "https://www.fairfieldtownshipnj.gov/177/Forms-Documents",
+    "quote": "Residential-Application-Certificate-of-Re-Occupancy (PDF)",
+    "doc_date": "2026-10-03 (page fetched)",
+    "via": "page",
+    "verified": true
+   },
+   {
+    "url": "https://www.fairfieldtownshipnj.gov/164/Fire-Prevention",
+    "quote": "Email Fire Prevention Office",
+    "doc_date": "2026-10-03 (page fetched)",
+    "via": "page",
+    "verified": null
+   }
+  ],
+  "confidence": "medium",
+  "notes": "The Township posts a Residential Application for a Certificate of Re-Occupancy ($125.00, Sale or Rental) on its Fire Prevention forms page. The ordinance (Chapter 45, Zoning, section 45-69.2, Ord. No. 2009-28) could only be seen through search results because ecode360 blocks direct reads; the snippets say the owner must get a Certificate of Reoccupancy before occupancy or possession passes, the fee is $125 for a residential structure, the Township Official inspects and issues within 10 days, and the certificate is valid one year. Which office runs the residential inspection is not stated on the form. Building Department: Wadson Lopes, Construction Official, 973-882-2700 ext. 2503. Short-term rental rules are not resale requirements."
+ },
+ "fire_cert": {
+  "requirements": [
+   "Smoke alarms on each level of the home within 10 feet of every bedroom door between the door and the living area (not crawl spaces or unfinished attics with pull-down stairs); photoelectric type if within 10 feet of a kitchen",
+   "Basement alarm on the basement ceiling within three feet of the stairwell; alarms fixed with screws, not tape or Velcro",
+   "CO alarms required in units with a fuel-burning appliance, fireplace, woodstove or attached garage, centrally located outside each sleeping area within 10 feet of every bedroom door; UL 2034",
+   "Smoke and CO alarms must be less than 10 years old; single-station battery smoke alarms must be 10-year sealed battery alarms; existing hardwired alarms may not be replaced with battery alarms",
+   "Central station monitored fire alarm systems need an NFPA 72 test report and proof of monitoring, or the inspection fails",
+   "Secondary power source (solar PV, backup generator, home battery) warning label within 18 inches of the main electrical panel and electric meter (effective February 3, 2025)",
+   "Portable fire extinguisher (older Township form and the Smoke Detectors page still list it; the newer CSACMASPIL form does not)"
+  ],
+  "authorities": [
+   {
+    "name": "Fairfield Fire Prevention Bureau (Township of Fairfield)",
+    "type": "municipal_fire_bureau",
+    "area_served": "Entire township",
+    "lead_time": "Fee depends on how many business days before the change of occupancy the request is received: more than 10 business days for the lowest fee. No specific inspection times are given.",
+    "fees": [
+     {
+      "label": "Smoke/CO certificate, request received more than ten business days before the change of occupancy",
+      "amount": "$70",
+      "quote": "There shall be a fee of $70 for a certificate of smoke detector, carbon monoxide and portable fire extinguisher compliance (CSDCMAPFEC) received more than ten business days prior to the change of occupancy.",
+      "source_url": "https://www.fairfieldtownshipnj.gov/184/Smoke-Detectors",
+      "verified": true
+     },
+     {
+      "label": "Request received four to ten business days before the change of occupancy",
+      "amount": "$95",
+      "quote": "A $95 fee for a CSACMAPFEC received four to ten business days prior to the change of occupancy.",
+      "source_url": "https://www.fairfieldtownshipnj.gov/184/Smoke-Detectors",
+      "verified": true
+     },
+     {
+      "label": "Request received fewer than four business days before the change of occupancy",
+      "amount": "$161",
+      "quote": "A $161 fee for a CSACMAPFEC received fewer than four business days prior to the change of occupancy.",
+      "source_url": "https://www.fairfieldtownshipnj.gov/184/Smoke-Detectors",
+      "verified": true
+     }
+    ],
+    "how_to_apply": "Fill out the Application for Certificate of Smoke Alarm, Carbon Monoxide Alarm and Secondary Power Source Identification Label Compliance (CSACMASPIL) with the closing date, block and lot, and owner contact, and pay the fee to the Township of Fairfield. When calling for the inspection have the owner's name as on the deed, address, block and lot, buyer's name and a contact phone. Fire Prevention, 230 Fairfield Road, Fairfield, NJ 07004, 973-882-2700 ext. 2506.",
+    "application_url": "https://www.fairfieldtownshipnj.gov/DocumentCenter/View/3095/Certificate-of-Smoke-Alarm-Carbon-Monoxide-Alarm-and-Secondary-Power-Source-Identification-Label-Compliance-CSACMASPILpdf",
+    "department_url": "https://www.fairfieldtownshipnj.gov/184/Smoke-Detectors",
+    "phone": "973-882-2700 ext. 2506",
+    "email": "jprzybylinski@fairfieldnj.org",
+    "contact_name": "Joe Przybylinski",
+    "contact_title": "Fire Official",
+    "evidence": [
+     {
+      "url": "https://www.fairfieldtownshipnj.gov/184/Smoke-Detectors",
+      "quote": "Fee payable to Township of Fairfield.",
+      "doc_date": "2026-10-03 (page fetched)",
+      "via": "page",
+      "verified": true
+     },
+     {
+      "url": "https://www.fairfieldtownshipnj.gov/184/Smoke-Detectors",
+      "quote": "Information needed when calling for the inspection Property Owner's name as listed on the deed.",
+      "doc_date": "2026-10-03 (page fetched)",
+      "via": "page",
+      "verified": true
+     },
+     {
+      "url": "https://www.fairfieldtownshipnj.gov/DocumentCenter/View/3095/Certificate-of-Smoke-Alarm-Carbon-Monoxide-Alarm-and-Secondary-Power-Source-Identification-Label-Compliance-CSACMASPILpdf",
+      "quote": "Fee is payable to Township of Fairfield.",
+      "doc_date": "",
+      "via": "pdf",
+      "verified": true
+     },
+     {
+      "url": "https://www.fairfieldtownshipnj.gov/DocumentCenter/View/3095/Certificate-of-Smoke-Alarm-Carbon-Monoxide-Alarm-and-Secondary-Power-Source-Identification-Label-Compliance-CSACMASPILpdf",
+      "quote": "I UNDERSTAND NO SPECIFIC INSPECTION TIMES WILL BE GIVEN.",
+      "doc_date": "",
+      "via": "pdf",
+      "verified": true
+     },
+     {
+      "url": "https://www.fairfieldtownshipnj.gov/DocumentCenter/View/3095/Certificate-of-Smoke-Alarm-Carbon-Monoxide-Alarm-and-Secondary-Power-Source-Identification-Label-Compliance-CSACMASPILpdf",
+      "quote": "Effective February 3, 2025: Where Solar PV Systems, Backup Generators, Residential Battery Back Up Systems and other Secondary Power Sources exist, labels shall be made of sufficient durability to withstand the environment involved.",
+      "doc_date": "",
+      "via": "pdf",
+      "verified": true
+     },
+     {
+      "url": "https://www.fairfieldtownshipnj.gov/DocumentCenter/View/280/Cert-Smoke-Detector-Cm-Fire-Ext-PDF",
+      "quote": "At least one (1) portable fire extinguisher shall be installed in all kitchens or within 10 feet of the stove and located in the path of egress to the exterior.",
+      "doc_date": "",
+      "via": "pdf",
+      "verified": true
+     },
+     {
+      "url": "https://www.fairfieldtownshipnj.gov/164/Fire-Prevention",
+      "quote": "Email Joe Przybylinski",
+      "doc_date": "2026-10-03 (page fetched)",
+      "via": "page",
+      "verified": null
+     },
+     {
+      "url": "https://www.nj.gov/dca/dfs/pdf/fire%20directory_county%20summary/fire_code_enforcement_director.pdf",
+      "quote": "jprzybylinski@fairfieldnj.org",
+      "doc_date": "2026-01 (survey date 1/12/2026)",
+      "via": "state_directory",
+      "verified": null
+     }
+    ],
+    "confidence": "high"
+   }
+  ],
+  "notes": "The Township's newer form (CSACMASPIL) reflects the 2025 state change: it lists the secondary power source label and drops the fire extinguisher. The Smoke Detectors page and the older application still mention a portable fire extinguisher, which P.L.2025, c.19 removed from the sale certificate in February 2025. Fees are the same $70 / $95 / $161 on both. The NJ DCA directory lists Fire Official Joseph Przybylinski, Sr., (973) 882-2735, enforcing authority Municipal. Note: the packs file flagged an ambiguous LEA name because there is also a Fairfield Township in Cumberland County; this is the Essex County township (Fairfield, NJ 07004)."
+ },
+ "other_items": [
+  {
+   "label": "Zoning and construction check under the Certificate of Reoccupancy",
+   "detail": "The Zoning Officer may check zoning compliance and the Construction Official may check for apparent Construction Code violations as part of the Certificate of Reoccupancy (code text seen only through search results).",
+   "source_url": "https://ecode360.com/35316176"
+  }
+ ],
+ "open_questions": [
+  "Which office receives and inspects the Residential Certificate of Re-Occupancy (Fire Prevention, Zoning or Building), and how long does it take?",
+  "Is the Certificate of Re-Occupancy needed for every sale of a one or two family home, or only in some cases?",
+  "Does Fire Prevention still ask for a fire extinguisher, as the Smoke Detectors page says?"
+ ],
+ "checked_at": "2026-10-03",
+ "verification": {
+  "fees": 4,
+  "fee_ok": 4,
+  "fee_bad": 0,
+  "fee_unchecked": 0,
+  "quotes": 14,
+  "q_ok": 9,
+  "q_bad": 0,
+  "q_unchecked": 5
+ }
+}

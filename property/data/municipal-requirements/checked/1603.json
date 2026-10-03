@@ -1,0 +1,199 @@
+{
+ "municipality_code": "1603",
+ "municipality": "Haledon Borough",
+ "county": "PASSAIC",
+ "checked_at": "2026-10-02",
+ "resale_co": {
+  "status": "required",
+  "name": "Certificate of Occupancy for sale (Certificate of Sale; Selling of Property Certificate of Compliance)",
+  "issued_by": "Borough of Haledon Construction Department, Office of Code Enforcement",
+  "lead_time": "",
+  "valid_for": "",
+  "requirements": [],
+  "fees": [
+   {
+    "label": "Selling of property certificate of compliance, one family",
+    "amount": "$100.00",
+    "quote": "Selling of Property Certificates of Compliance : $100.00 for one family, $200.00 for two family, $250.00 for three family and $250.00 for a four family.",
+    "source_url": "https://www.haledonboronj.com/building",
+    "verified": true
+   },
+   {
+    "label": "Selling of property certificate of compliance, two family",
+    "amount": "$200.00",
+    "quote": "Selling of Property Certificates of Compliance : $100.00 for one family, $200.00 for two family, $250.00 for three family and $250.00 for a four family.",
+    "source_url": "https://www.haledonboronj.com/building",
+    "verified": true
+   },
+   {
+    "label": "Certificate of Sale application fee, one family / two families (form)",
+    "amount": "$100.00 for one family, $200.00 for two families",
+    "quote": "$100.00 for one family, $200.00 for two families, $250.00 for three families and $250.00 for four families.",
+    "source_url": "https://www.haledonboronj.com/s/CO-sale-new.pdf",
+    "verified": true
+   },
+   {
+    "label": "Smoke and carbon monoxide inspection, added to the sale certificate (separate check)",
+    "amount": "$85",
+    "quote": "Smoke & Carbon monoxide $85 Additional fee",
+    "source_url": "https://www.haledonboronj.com/s/CO-sale-new.pdf",
+    "verified": true
+   },
+   {
+    "label": "Smoke and carbon monoxide, per alarm with a minimum fee (Building/Code Department fee list)",
+    "amount": "$6.00 each (Min fee of $85.00)",
+    "quote": "Smoke & Carbon monoxide : $6.00 each (Min fee of $85.00)",
+    "source_url": "https://www.haledonboronj.com/building",
+    "verified": true
+   }
+  ],
+  "how_to_apply": "Fill out the Certificate of Sale Application (Construction Department, Office of Code Enforcement) and bring it with payment (cash or check) to the Municipal Building, 510 Belmont Avenue. Write one check for the sale certificate and a separate check for the smoke and carbon monoxide inspection ($85). Inspections are held 11 to 1, Tuesday to Thursday.",
+  "application_url": "https://www.haledonboronj.com/s/CO-sale-new.pdf",
+  "department_url": "https://www.haledonboronj.com/building",
+  "phone": "973-595-7766, Ext: 133",
+  "email": "amanla@haledonboronj.com",
+  "contact_name": "Arianna Manla",
+  "contact_title": "Code Enforcement Officer (Construction and Building Subcode Official and Zoning Officer: Jim Booth, jbooth@haledonboronj.com, 973-595-7766, Ext 140)",
+  "evidence": [
+   {
+    "url": "https://www.haledonboronj.com/building",
+    "quote": "Certificate of Occupancy Requirements A Certificate of Occupancy (CO) is required for: All residential property sales All residential rentals All commercial property sales All commercial rentals",
+    "doc_date": "2026-10-02 (page fetched)",
+    "via": "page",
+    "verified": true
+   },
+   {
+    "url": "https://www.haledonboronj.com/building",
+    "quote": "One check is needed for C.O rental or sale & One needed for Smoke & Carbon inspection $85",
+    "doc_date": "2026-10-02 (page fetched)",
+    "via": "page",
+    "verified": true
+   },
+   {
+    "url": "https://www.haledonboronj.com/s/CO-sale-new.pdf",
+    "quote": "BOROUGH OF HALEDON Construction Department Office of Code Enforcement 510 Belmont Avenue | Haledon, New Jersey 07508 CERTIFICATE OF SALE APPLICATION Inspections are between 11-1 Tuesday, Thursday",
+    "doc_date": "2026-06 (PDF created June 10, 2026)",
+    "via": "pdf",
+    "verified": true
+   },
+   {
+    "url": "https://www.haledonboronj.com/building",
+    "quote": "Code Enforcement Officer: Arianna Manla Hours: Monday-Friday: 8:30am-4:30pm Email: amanla@haledonboronj.com Office: 973-595-7766, Ext: 133",
+    "doc_date": "2026-10-02 (page fetched)",
+    "via": "page",
+    "verified": true
+   },
+   {
+    "url": "https://www.haledonboronj.com/building",
+    "quote": "Zoning Officer: Jim Booth Email: jbooth@haledonboronj.com Office: 973-595-7766, Ext 140",
+    "doc_date": "2026-10-02 (page fetched)",
+    "via": "page",
+    "verified": true
+   },
+   {
+    "url": "https://www.haledonboronj.com/building",
+    "quote": "Construction Office Assistant/Planning Board Secretary Angelique Jones The telephone number is (973) 595-7766 x132",
+    "doc_date": "2026-10-02 (page fetched)",
+    "via": "page",
+    "verified": true
+   }
+  ],
+  "confidence": "high",
+  "notes": "The Building/Code Department page says a Certificate of Occupancy is required for all residential property sales and rentals. The Borough site does not publish a list of what the sale inspection covers, a lead time, or how long the certificate is valid. The sale application (created June 2026) asks whether the home will be rented (landlord registration required) and for bedroom, bathroom, kitchen, finished basement and attic counts. Rental certificates use a separate Certificate of New Rental form; the page says rental COs should have a lead inspection, and lists absentee landlord registration at $100.00 and lead paint abatement at $150.00. The Borough code on ecode360 was not opened (bot check)."
+ },
+ "fire_cert": {
+  "requirements": [],
+  "authorities": [
+   {
+    "name": "Borough of Haledon Construction Department / Office of Code Enforcement (smoke and carbon monoxide inspection for the Haledon Fire Department enforcing agency)",
+    "type": "municipal_fire_bureau",
+    "area_served": "Entire borough",
+    "lead_time": "",
+    "fees": [
+     {
+      "label": "Smoke and carbon monoxide inspection, added to the sale certificate (separate check)",
+      "amount": "$85",
+      "quote": "Smoke & Carbon monoxide $85 Additional fee",
+      "source_url": "https://www.haledonboronj.com/s/CO-sale-new.pdf",
+      "verified": true
+     },
+     {
+      "label": "Smoke and carbon monoxide, per alarm with a minimum fee (Building/Code Department fee list)",
+      "amount": "$6.00 each (Min fee of $85.00)",
+      "quote": "Smoke & Carbon monoxide : $6.00 each (Min fee of $85.00)",
+      "source_url": "https://www.haledonboronj.com/building",
+      "verified": true
+     }
+    ],
+    "how_to_apply": "Requested on the same Certificate of Sale Application at the Construction / Code Enforcement office, 510 Belmont Avenue; pay the $85 smoke and carbon monoxide fee with a separate check.",
+    "application_url": "https://www.haledonboronj.com/s/CO-sale-new.pdf",
+    "department_url": "https://www.haledonboronj.com/building",
+    "phone": "973-595-7766, Ext: 133",
+    "email": "amanla@haledonboronj.com",
+    "contact_name": "Arianna Manla",
+    "contact_title": "Code Enforcement Officer",
+    "evidence": [
+     {
+      "url": "https://www.haledonboronj.com/fire-prevention-bureau",
+      "quote": "The Haledon Fire Prevention Bureau is responsible for enforcing the New Jersey Uniform Fire Code in all buildings except owner occupied 1 and 2 family homes.",
+      "doc_date": "2026-10-02 (page fetched)",
+      "via": "page",
+      "verified": true
+     },
+     {
+      "url": "https://www.haledonboronj.com/fire-prevention-bureau",
+      "quote": "Fire Prevention Bureau 510 Belmont Ave Haledon NJ 07508 Office (973) 595-7766 Ext 135 Fax (973) 790-4781 FIRE PREVENTION CHIEF/FIRE SAFETY OFFICIAL Robert DeVirgilio FIRE PREVENTION INSPECTOR FIRE SUBCODE OFFICIAL James Booth 973-595-7766, ext. 132",
+      "doc_date": "2026-10-02 (page fetched)",
+      "via": "page",
+      "verified": true
+     },
+     {
+      "url": "https://www.haledonboronj.com/building",
+      "quote": "Smoke & Carbon monoxide : $6.00 each (Min fee of $85.00)",
+      "doc_date": "2026-10-02 (page fetched)",
+      "via": "page",
+      "verified": true
+     },
+     {
+      "url": "https://nj.gov/dca/dfs/pdf/ANNUAL%20REGISTRY/THIRD%20QUARTER%20LEA%20REGISTRY%202026.pdf",
+      "quote": "F Haledon Borough",
+      "doc_date": "2026-07",
+      "via": "pdf",
+      "verified": true
+     },
+     {
+      "url": "https://www.nj.gov/dca/dfs/pdf/fire%20directory_county%20summary/fire_code_enforcement_director.pdf",
+      "quote": "16 Passaic Haledon Borough1603 ... LEAID: 1603-001 Enf Auth. Fire Dept Fire Official Shawn Allen Phone (973) 595-7766 Addr: 510 Belmont Av Haledon NJ 07508 ... Email Sallen@haledonboronj.com ... Haledon Boro Bldg Dept",
+      "doc_date": "2025-02-04 (survey date)",
+      "via": "state_directory",
+      "verified": true
+     }
+    ],
+    "confidence": "medium"
+   }
+  ],
+  "notes": "The NJ DCA registry lists the Haledon Fire Department as the fire code enforcing agency, but the Borough's Fire Prevention Bureau page says the Bureau enforces the fire code in all buildings except owner-occupied 1 and 2 family homes, and the state directory puts smoke detector compliance with the Haledon Borough Building Department. The Borough's sale application and fee list charge the smoke and carbon monoxide inspection through the Construction / Code Enforcement office, so that office is recorded as the issuer. Fee wording differs slightly: the 2026 sale form says a flat $85 additional fee; the Building page says $6.00 per alarm with an $85.00 minimum. No Borough list of local smoke or CO alarm extras was found. Fire Official names differ: the state directory (survey February 2025) lists Shawn Allen (Sallen@haledonboronj.com); the Borough Fire Prevention Bureau page lists Robert DeVirgilio as Fire Prevention Chief / Fire Safety Official."
+ },
+ "other_items": [
+  {
+   "label": "Landlord registration",
+   "detail": "If the home will be rented, landlord registration is required (the sale form asks); absentee landlord registration is $100.00.",
+   "source_url": "https://www.haledonboronj.com/s/CO-sale-new.pdf"
+  }
+ ],
+ "open_questions": [
+  "What does the Borough's sale inspection check, how far ahead should it be booked, and how long is the certificate valid?",
+  "Is the smoke and carbon monoxide fee a flat $85 or $6.00 per alarm with an $85.00 minimum?",
+  "Who is the current Fire Official (Shawn Allen per the state directory, or Robert DeVirgilio per the Borough page)?"
+ ],
+ "verification": {
+  "fees": 5,
+  "fee_ok": 5,
+  "fee_bad": 0,
+  "fee_unchecked": 0,
+  "quotes": 11,
+  "q_ok": 11,
+  "q_bad": 0,
+  "q_unchecked": 0
+ }
+}

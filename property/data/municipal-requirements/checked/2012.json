@@ -1,0 +1,433 @@
+{
+ "municipality_code": "2012",
+ "municipality": "Plainfield City",
+ "county": "UNION",
+ "checked_at": "2026-10-02",
+ "resale_co": {
+  "status": "required",
+  "name": "Certificate of Compliance (sale)",
+  "issued_by": "City of Plainfield Division of Inspections, Property Maintenance Unit (Department of Public Works and Urban Development)",
+  "lead_time": "Schedule the inspection before closing; inspections are 10 am to 12:30 pm and someone must be there to let the inspector in",
+  "valid_for": "",
+  "requirements": [
+   "Exterior walls, roofs, porches, stairs, railings and accessory structures",
+   "Yards, driveways, vegetation, trash and abandoned vehicles",
+   "Kitchens, bathrooms, bedrooms and other habitable rooms",
+   "Basements, cellars and crawlspaces",
+   "Common hallways, stairs and exits",
+   "Plumbing, water and hot water service; heating equipment and required temperatures",
+   "Electrical fixtures, switches and outlets",
+   "Smoke and carbon monoxide detectors",
+   "Windows, doors, walls, ceilings and floors; signs of leaks, moisture, vermin or unsafe conditions",
+   "Legal number of units and occupancy matching zoning and construction records",
+   "Open permits or work that looks like it was done without permits",
+   "Heating system / heating unit certificate on the licensed certifier's letterhead with license number",
+   "Smoke detector, carbon monoxide and fire extinguisher certificate from the Fire Division",
+   "For 3 or more units, a current Certificate of Inspection from the NJ Bureau of Housing Inspection"
+  ],
+  "fees": [
+   {
+    "label": "Certificate of Compliance for sale, first residential unit",
+    "amount": "$50",
+    "quote": "First residential unit: $50",
+    "source_url": "https://www.plainfieldnj.gov/residents/household/code_enforcement_and_inspections_division/index.php",
+    "verified": true
+   },
+   {
+    "label": "Each additional residential unit at the same property",
+    "amount": "$25",
+    "quote": "Each additional residential unit at the same property: $25",
+    "source_url": "https://www.plainfieldnj.gov/residents/household/code_enforcement_and_inspections_division/index.php",
+    "verified": true
+   },
+   {
+    "label": "Missed appointment or no-show fee",
+    "amount": "$25",
+    "quote": "Missed appointment or no-show fee: $25",
+    "source_url": "https://www.plainfieldnj.gov/residents/household/code_enforcement_and_inspections_division/index.php",
+    "verified": true
+   },
+   {
+    "label": "Certificate of Compliance exemption application",
+    "amount": "$75",
+    "quote": "Certificate of Compliance exemption application: $75",
+    "source_url": "https://www.plainfieldnj.gov/residents/household/code_enforcement_and_inspections_division/index.php",
+    "verified": true
+   },
+   {
+    "label": "Escrow when closing with a temporary Certificate of Compliance, per unit",
+    "amount": "$500",
+    "quote": "The $500-per-unit escrow applies when the City approves a property sale using a temporary Certificate of Compliance rather than a clear certificate.",
+    "source_url": "https://www.plainfieldnj.gov/residents/household/code_enforcement_and_inspections_division/index.php",
+    "verified": true
+   },
+   {
+    "label": "One family, application received 11+ business days before the inspection",
+    "amount": "$45",
+    "quote": "$45: App. rec'd 11+ bus. days prior to Insp.",
+    "source_url": "https://www.govpaynow.com/gps/user/cyg/plc/a0045L",
+    "verified": true
+   },
+   {
+    "label": "One family, application received 4 to 10 business days before the inspection",
+    "amount": "$90",
+    "quote": "$90:  App. rec'd 4-10 bus. days prior to Insp.",
+    "source_url": "https://www.govpaynow.com/gps/user/cyg/plc/a0045L",
+    "verified": true
+   },
+   {
+    "label": "One family, expedited, 1 to 3 business days before the inspection",
+    "amount": "$161",
+    "quote": "$161: Expedited 1-3 bus. days prior to Insp.",
+    "source_url": "https://www.govpaynow.com/gps/user/cyg/plc/a0045L",
+    "verified": true
+   },
+   {
+    "label": "One family, reinspection on the next available Wednesday",
+    "amount": "$45",
+    "quote": "$45: Re-insp. next available Wed.",
+    "source_url": "https://www.govpaynow.com/gps/user/cyg/plc/a0045L",
+    "verified": true
+   },
+   {
+    "label": "Two family, application received 11+ business days before the inspection",
+    "amount": "$90",
+    "quote": "TWO Family Dwelling Fees: Select... $90: App. rec'd 11+ bus. days prior to Insp.",
+    "source_url": "https://www.govpaynow.com/gps/user/cyg/plc/a0045L",
+    "verified": true
+   },
+   {
+    "label": "Two family, application received 4 to 10 business days before the inspection",
+    "amount": "$180",
+    "quote": "$180: App. rec'd 4-10 bus. days prior to Insp.2",
+    "source_url": "https://www.govpaynow.com/gps/user/cyg/plc/a0045L",
+    "verified": true
+   },
+   {
+    "label": "Two family, expedited inspection, application received 1 to 3 business days before",
+    "amount": "$322",
+    "quote": "$322: Expedited Insp. (App. rec'd 1-3 bus. days prior to Insp.)",
+    "source_url": "https://www.govpaynow.com/gps/user/cyg/plc/a0045L",
+    "verified": true
+   },
+   {
+    "label": "Two family, reinspection on the next Wednesday",
+    "amount": "$90",
+    "quote": "$90: Re-insp. next Wed.",
+    "source_url": "https://www.govpaynow.com/gps/user/cyg/plc/a0045L",
+    "verified": true
+   },
+   {
+    "label": "Returned check charge",
+    "amount": "$20.00",
+    "quote": "(There will be a charge of $20.00 for any returned check, in addition to the inspection fees.)",
+    "source_url": "https://www.plainfieldnj.gov/Document_Center/Applications%20Documents/Fire/ApplicationforInspectionCertificationofSmokeAlarm.Revised12.2021.pdf",
+    "verified": true
+   }
+  ],
+  "how_to_apply": "Complete the Certificate of Compliance for Sale Application (on the City's Get a Permit or License page, Inspections Division forms) and schedule an inspection before closing. Submit it to the Division of Inspections, 515 Watchung Avenue. The application asks about the property, legal occupancy, buyer, closing date, permits and smoke/CO detectors. An LLC applicant must also give its Certificate of Formation. To close on a temporary certificate, the buyer signs a notarized affidavit and $500 per unit escrow is posted by certified check or money order.",
+  "application_url": "https://www.plainfieldnj.gov/C%20OF%20C%20SALE%20APPLICATION.12.22.docx",
+  "department_url": "https://www.plainfieldnj.gov/residents/household/code_enforcement_and_inspections_division/index.php",
+  "phone": "908-753-3384",
+  "email": "athenee.wright@plainfieldnj.gov",
+  "contact_name": "Athenee Wright",
+  "contact_title": "General assistance, Inspections-Property Maintenance Unit (Spanish: Stephanie Hidalgo-Mendez, 908-753-2526, stephanie.mendez@plainfieldnj.gov)",
+  "evidence": [
+   {
+    "url": "https://www.plainfieldnj.gov/residents/household/code_enforcement_and_inspections_division/index.php",
+    "quote": "For a sale or rental, the City verifies compliance through a Certificate of Compliance inspection conducted by the Property Maintenance Unit.",
+    "doc_date": "2026-10-02 (page fetched; refers to June 2026 applications)",
+    "via": "page",
+    "verified": true
+   },
+   {
+    "url": "https://www.plainfieldnj.gov/residents/household/code_enforcement_and_inspections_division/index.php",
+    "quote": "Complete the Certificate of Compliance for Sale Application and schedule an inspection before closing.",
+    "doc_date": "2026-10-02",
+    "via": "page",
+    "verified": true
+   },
+   {
+    "url": "https://www.plainfieldnj.gov/residents/household/code_enforcement_and_inspections_division/index.php",
+    "quote": "The current June 2026 sale and rental applications list the following fees: First residential unit: $50 Each additional residential unit at the same property: $25 Commercial unit: $300 Missed appointment or no-show fee: $25 Certificate of Compliance exemption application: $75",
+    "doc_date": "2026-06",
+    "via": "page",
+    "verified": true
+   },
+   {
+    "url": "https://www.plainfieldnj.gov/residents/household/code_enforcement_and_inspections_division/index.php",
+    "quote": "A heating-system or heating-unit certification on the licensed professional's letterhead, including the license number",
+    "doc_date": "2026-10-02",
+    "via": "page",
+    "verified": true
+   },
+   {
+    "url": "https://www.plainfieldnj.gov/residents/household/code_enforcement_and_inspections_division/index.php",
+    "quote": "A smoke-alarm, carbon-monoxide-alarm, and portable-fire-extinguisher compliance certificate from the Fire Division",
+    "doc_date": "2026-10-02",
+    "via": "page",
+    "verified": true
+   },
+   {
+    "url": "https://www.plainfieldnj.gov/residents/household/code_enforcement_and_inspections_division/index.php",
+    "quote": "A Certificate of Compliance will not be issued until the applicable requirements are satisfied.",
+    "doc_date": "2026-10-02",
+    "via": "page",
+    "verified": true
+   },
+   {
+    "url": "https://www.plainfieldnj.gov/residents/household/code_enforcement_and_inspections_division/index.php",
+    "quote": "A property for which the Construction Official issued a Certificate of Occupancy or Continued Occupancy within 90 days before the sale, transfer, or occupancy",
+    "doc_date": "2026-10-02",
+    "via": "page",
+    "verified": true
+   },
+   {
+    "url": "https://www.plainfieldnj.gov/residents/household/code_enforcement_and_inspections_division/index.php",
+    "quote": "Athenee Wright Phone: 908-753-3384 Email: athenee.wright@plainfieldnj.gov",
+    "doc_date": "2026-10-02",
+    "via": "page",
+    "verified": true
+   },
+   {
+    "url": "https://www.plainfieldnj.gov/C%20OF%20C%20SALE%20APPLICATION.12.22.docx",
+    "quote": "Pursuant to Section 6:5-2 of the Plainfield Municipal Code, a Certificate of Compliance is required prior to the sale, transfer, rent or lease of property.",
+    "doc_date": "2022-12 (file C OF C SALE APPLICATION.12.22)",
+    "via": "page",
+    "verified": true
+   },
+   {
+    "url": "https://www.plainfieldnj.gov/C%20OF%20C%20SALE%20APPLICATION.12.22.docx",
+    "quote": "FIRST RESIDENTIAL UNIT $50.00 EACH ADDITIONAL UNIT (at same location) $25.00",
+    "doc_date": "2022-12",
+    "via": "page",
+    "verified": true
+   },
+   {
+    "url": "https://www.plainfieldnj.gov/C%20OF%20C%20SALE%20APPLICATION.12.22.docx",
+    "quote": "Inspection time is from 10am",
+    "doc_date": "2022-12",
+    "via": "page",
+    "verified": true
+   },
+   {
+    "url": "https://www.plainfieldnj.gov/C%20OF%20C%20SALE%20APPLICATION.12.22.docx",
+    "quote": "DIVISION OF INSPECTIONS LETICIA VELEZ, DIRECTOR 515 WATCHUNG AVENUE PLAINFIELD, NJ 07061 Phone: (908) 753-3386",
+    "doc_date": "2022-12",
+    "via": "page",
+    "verified": true
+   },
+   {
+    "url": "https://www.plainfieldnj.gov/residents/get_a_permit_or_license.php",
+    "quote": "Certificate of Compliance for Sale Application",
+    "doc_date": "2026-10-02 (page fetched)",
+    "via": "page",
+    "verified": true
+   }
+  ],
+  "confidence": "high",
+  "notes": "Plainfield requires a Certificate of Compliance before the sale, transfer, rent or lease of property (Municipal Code Section 6:5-2). The City's FAQ page quotes the June 2026 sale application fees; the sale application linked on the forms page is dated December 2022 and shows the same residential fees ($50.00 first unit, $25.00 each additional). A temporary Certificate of Compliance may be approved in some sales when the property is in substantial compliance (buyer's notarized affidavit, $500 per unit escrow, life-safety items fixed first). Exemptions (for example a Certificate of Occupancy issued within 90 days, a refinance with no change in ownership) need an exemption application and the $75 fee. The 2022 form names Division of Inspections Director Leticia Velez (leticia.velez@plainfieldnj.gov, 908-753-3386); the current page lists Athenee Wright for general assistance. Rentals need their own Certificate of Compliance for Rental; that is a rental requirement."
+ },
+ "fire_cert": {
+  "requirements": [
+   "Smoke alarm on each level including basements (not attics unless finished, or crawl spaces)",
+   "Smoke alarm and carbon monoxide alarm near any flame-producing device, outside each sleeping area and within 10 feet of all bedroom doors",
+   "Battery-only smoke alarms must be 10-year sealed battery type; combination smoke/CO 10-year sealed alarms are acceptable",
+   "Homes with a low-voltage alarm system need an alarm test report from a NJ certified fire protection contractor",
+   "Portable fire extinguisher (2A:10BC, no more than 10 pounds) in the kitchen, no more than 5 feet above the floor, new with receipt or serviced and tagged within 12 months (2021 form; the City payment notice still names the extinguisher certificate)",
+   "Only one- and two-family dwellings are inspected; inspections are on Wednesdays"
+  ],
+  "authorities": [
+   {
+    "name": "City of Plainfield Fire Department, Bureau of Fire Prevention",
+    "type": "municipal_fire_bureau",
+    "area_served": "Entire city",
+    "lead_time": "Pay 11 or more business days before the inspection for the lowest fee. Inspections are on Wednesdays. A failed or missed inspection needs a new application and full payment.",
+    "fees": [
+     {
+      "label": "One family, application received 11+ business days before the inspection",
+      "amount": "$45",
+      "quote": "$45: App. rec'd 11+ bus. days prior to Insp.",
+      "source_url": "https://www.govpaynow.com/gps/user/cyg/plc/a0045L",
+      "verified": true
+     },
+     {
+      "label": "One family, application received 4 to 10 business days before the inspection",
+      "amount": "$90",
+      "quote": "$90:  App. rec'd 4-10 bus. days prior to Insp.",
+      "source_url": "https://www.govpaynow.com/gps/user/cyg/plc/a0045L",
+      "verified": true
+     },
+     {
+      "label": "One family, expedited, 1 to 3 business days before the inspection",
+      "amount": "$161",
+      "quote": "$161: Expedited 1-3 bus. days prior to Insp.",
+      "source_url": "https://www.govpaynow.com/gps/user/cyg/plc/a0045L",
+      "verified": true
+     },
+     {
+      "label": "One family, reinspection on the next available Wednesday",
+      "amount": "$45",
+      "quote": "$45: Re-insp. next available Wed.",
+      "source_url": "https://www.govpaynow.com/gps/user/cyg/plc/a0045L",
+      "verified": true
+     },
+     {
+      "label": "Two family, application received 11+ business days before the inspection",
+      "amount": "$90",
+      "quote": "TWO Family Dwelling Fees: Select... $90: App. rec'd 11+ bus. days prior to Insp.",
+      "source_url": "https://www.govpaynow.com/gps/user/cyg/plc/a0045L",
+      "verified": true
+     },
+     {
+      "label": "Two family, application received 4 to 10 business days before the inspection",
+      "amount": "$180",
+      "quote": "$180: App. rec'd 4-10 bus. days prior to Insp.2",
+      "source_url": "https://www.govpaynow.com/gps/user/cyg/plc/a0045L",
+      "verified": true
+     },
+     {
+      "label": "Two family, expedited inspection, application received 1 to 3 business days before",
+      "amount": "$322",
+      "quote": "$322: Expedited Insp. (App. rec'd 1-3 bus. days prior to Insp.)",
+      "source_url": "https://www.govpaynow.com/gps/user/cyg/plc/a0045L",
+      "verified": true
+     },
+     {
+      "label": "Two family, reinspection on the next Wednesday",
+      "amount": "$90",
+      "quote": "$90: Re-insp. next Wed.",
+      "source_url": "https://www.govpaynow.com/gps/user/cyg/plc/a0045L",
+      "verified": true
+     },
+     {
+      "label": "Returned check charge",
+      "amount": "$20.00",
+      "quote": "(There will be a charge of $20.00 for any returned check, in addition to the inspection fees.)",
+      "source_url": "https://www.plainfieldnj.gov/Document_Center/Applications%20Documents/Fire/ApplicationforInspectionCertificationofSmokeAlarm.Revised12.2021.pdf",
+      "verified": true
+     }
+    ],
+    "how_to_apply": "Pay online through the City's 'Smoke Home Inspections' GovPayNow page (card or e-check; a processing fee applies) or fill out the Application for Inspection Certification of Smoke Alarm, Carbon Monoxide Alarm and Portable Fire Extinguisher Compliance and e-mail it to fireinspection@plainfieldnj.gov. Then call (908) 753-3446 to confirm payment; the bureau e-mails the inspection date. By mail or in person, checks are payable to Plainfield Fire Department (personal checks only for the $45.00 fee).",
+    "application_url": "https://www.govpaynow.com/gps/user/cyg/plc/a0045L",
+    "department_url": "https://www.plainfieldnj.gov/departments/fire/index.php",
+    "phone": "(908) 753-3446",
+    "email": "fireinspection@plainfieldnj.gov",
+    "contact_name": "Anthony Pineda",
+    "contact_title": "Fire Official (state fire directory, survey July 2026); Fire Prevention is headed by Deputy Chief Joseph Franklin (City fire page)",
+    "evidence": [
+     {
+      "url": "https://www.plainfieldnj.gov/departments/fire/index.php",
+      "quote": "Fire Prevention - Deputy Chief Joseph Franklin",
+      "doc_date": "2026-10-02 (page fetched)",
+      "via": "page",
+      "verified": true
+     },
+     {
+      "url": "https://www.plainfieldnj.gov/departments/fire/index.php",
+      "quote": "Bureau of Fire Prevention 9 AM-5 PM - 908) 753-3446",
+      "doc_date": "2026-10-02",
+      "via": "page",
+      "verified": true
+     },
+     {
+      "url": "https://www.plainfieldnj.gov/departments/fire/index.php",
+      "quote": "Please fill out the applicable application and e-mail it to fireinspection@plainfieldnj.gov",
+      "doc_date": "2026-10-02",
+      "via": "page",
+      "verified": true
+     },
+     {
+      "url": "https://www.govpaynow.com/gps/user/cyg/plc/a0045L",
+      "quote": "plainfield fire department For: smoke home inspections Phone: 908-753-3446",
+      "doc_date": "2026-10-02 (payment page fetched)",
+      "via": "page",
+      "verified": true
+     },
+     {
+      "url": "https://www.govpaynow.com/gps/user/cyg/plc/a0045L",
+      "quote": "Inspections are scheduled for Wednesdays. Fees based on the number of business days between payment and the inspection",
+      "doc_date": "2026-10-02",
+      "via": "page",
+      "verified": true
+     },
+     {
+      "url": "https://www.govpaynow.com/gps/user/cyg/plc/a0045L",
+      "quote": "Failed/Missed Inspections will require a new application and full payment.",
+      "doc_date": "2026-10-02",
+      "via": "page",
+      "verified": true
+     },
+     {
+      "url": "https://www.plainfieldnj.gov/Document_Center/Applications%20Documents/Fire/ApplicationforInspectionCertificationofSmokeAlarm.Revised12.2021.pdf",
+      "quote": "Request for a CSACMAPFEC received more than 10 business days prior to the change of occupant: $45.00",
+      "doc_date": "2021-12 (Revised 12.2021)",
+      "via": "pdf",
+      "verified": true
+     },
+     {
+      "url": "https://www.plainfieldnj.gov/Document_Center/Applications%20Documents/Fire/ApplicationforInspectionCertificationofSmokeAlarm.Revised12.2021.pdf",
+      "quote": "Personal Check ... only accepted for the $45.00 fee (not accepted for the $90.00 or $161.00 fees) Make Checks payable to Plainfield Fire Department",
+      "doc_date": "2021-12",
+      "via": "pdf",
+      "verified": true
+     },
+     {
+      "url": "https://www.plainfieldnj.gov/Document_Center/Applications%20Documents/Fire/ApplicationforInspectionCertificationofSmokeAlarm.Revised12.2021.pdf",
+      "quote": "Deputy Chief Joseph Franklin Fire Official Taheem Muslim",
+      "doc_date": "2021-12",
+      "via": "pdf",
+      "verified": true
+     },
+     {
+      "url": "https://nj.gov/dca/dfs/pdf/ANNUAL%20REGISTRY/THIRD%20QUARTER%20LEA%20REGISTRY%202026.pdf",
+      "quote": "F Plainfield City",
+      "doc_date": "2026-07",
+      "via": "pdf",
+      "verified": true
+     },
+     {
+      "url": "https://www.nj.gov/dca/dfs/pdf/fire%20directory_county%20summary/fire_code_enforcement_director.pdf",
+      "quote": "Plainfield City2012 LEAID: 2012-001 Enf Auth. Fire Dept Fire Official Anthony Pineda Phone (908) 753-3446 Email anthony.pineda@plainfieldnj.gov Plainfield City Fire Prev",
+      "doc_date": "2026-07-22 (survey date)",
+      "via": "state_directory",
+      "verified": true
+     }
+    ],
+    "confidence": "high"
+   }
+  ],
+  "notes": "Fees are from the City's current GovPayNow 'smoke home inspections' page (linked from the City fire page and the City's 2023 payment notice), which adds two-family and reinspection amounts. The City's application form (revised December 2021) lists the one-family amounts ($45.00 / $90.00 / $161.00) and still requires a portable fire extinguisher; state law (P.L.2025, c.19) removed the extinguisher from the sale certificate in February 2025, so confirm with the bureau. The 2021 form names Fire Official Taheem Muslim; the state directory (July 2026) lists Anthony Pineda (anthony.pineda@plainfieldnj.gov) as Fire Official, so Pineda is used. The Fire Department contact page also lists fire.prevention@plainfieldnj.gov."
+ },
+ "other_items": [
+  {
+   "label": "Heating system certification",
+   "detail": "A heating system / heating unit certificate on the licensed certifier's letterhead with license number is required for the Certificate of Compliance.",
+   "source_url": "https://www.plainfieldnj.gov/residents/household/code_enforcement_and_inspections_division/index.php"
+  },
+  {
+   "label": "Multiple dwellings",
+   "detail": "For 3 or more units, a current Certificate of Inspection from the NJ Bureau of Housing Inspection.",
+   "source_url": "https://www.plainfieldnj.gov/residents/household/code_enforcement_and_inspections_division/index.php"
+  },
+  {
+   "label": "Open permits",
+   "detail": "Permits needed for work found during inspection must be obtained and inspected by the subcode officials before a clear certificate.",
+   "source_url": "https://www.plainfieldnj.gov/residents/household/code_enforcement_and_inspections_division/index.php"
+  }
+ ],
+ "open_questions": [
+  "Does the Fire Bureau still require a portable fire extinguisher at resale after P.L.2025, c.19?",
+  "Is Leticia Velez still Director of the Division of Inspections?"
+ ],
+ "verification": {
+  "fees": 14,
+  "fee_ok": 14,
+  "fee_bad": 0,
+  "fee_unchecked": 0,
+  "quotes": 24,
+  "q_ok": 24,
+  "q_bad": 0,
+  "q_unchecked": 0
+ }
+}

@@ -1,0 +1,176 @@
+{
+ "municipality_code": "1606",
+ "municipality": "North Haledon Borough",
+ "county": "PASSAIC",
+ "checked_at": "2026-10-02",
+ "resale_co": {
+  "status": "required",
+  "name": "Certificate of Sale (Certificate of Re-occupancy)",
+  "issued_by": "Borough of North Haledon, Office of the Construction Official",
+  "lead_time": "",
+  "valid_for": "",
+  "requirements": [
+   "Address clearly marked on the house and mailbox",
+   "Smoke detector on every level and within 10 feet of sleeping areas (a room with a door counts as a bedroom)",
+   "Carbon monoxide detector within 10 feet of sleeping areas",
+   "Portable fire extinguisher (2 1/2 to 10 pound ABC) mounted within 10 feet of the kitchen near an exit, top no higher than 5 feet (still listed on the Borough checklist)",
+   "Copy of a survey of the property",
+   "Clean private well test (within six months on the single family checklist) if not on public water, or the certificate will not be issued",
+   "Check for open permits and illegal construction",
+   "Check for illegal two family or multiple family use",
+   "Gas-fired appliance vents installed properly",
+   "All meters installed (gas, electric, water)",
+   "Pools fenced with working gates; fences 4 feet high, 5 feet around in-ground pools"
+  ],
+  "fees": [
+   {
+    "label": "Certificate of Sale, single family",
+    "amount": "$100.00",
+    "quote": "CERTIFICATE OF SALE REQUIREMENTS. RESIDENTIAL $100.00 Fee",
+    "source_url": "https://www.northhaledon.com/Document%20Center/Forms/Construction%20Permits%20and%20Applications/CERTIFICATE%20OF%20SAFE%20-%20ONE%20FAMILY.pdf",
+    "verified": true
+   },
+   {
+    "label": "Certificate of Sale, two family dwelling",
+    "amount": "$150.00",
+    "quote": "Certificate of Sale REQUIREMENTS RESIDENTIAL-TWO FAMILY $150.00 Fee",
+    "source_url": "https://www.northhaledon.com/Document%20Center/Forms/Construction%20Permits%20and%20Applications/Certificate%20of%20sale%20%20-%20Two%20Family%20(1).pdf",
+    "verified": true
+   }
+  ],
+  "how_to_apply": "Fill out the Borough Certificate of Sale application for a single family or two family dwelling (buyer details, new occupants, sewer or septic, well or public water) and the notarized smoke detector and carbon monoxide alarm certification in the same packet. Submit it with a survey, a clean well test if on a private well, and a check payable to the Borough of North Haledon to the Construction Office, 103 Overlook Avenue.",
+  "application_url": "https://www.northhaledon.com/Document%20Center/Forms/Construction%20Permits%20and%20Applications/CERTIFICATE%20OF%20SAFE%20-%20ONE%20FAMILY.pdf",
+  "department_url": "https://www.northhaledon.com/departments/construction_department/index.php",
+  "phone": "973-423-9422",
+  "email": "jbooth@northhaledon.gov",
+  "contact_name": "Jim Booth",
+  "contact_title": "Construction Official / Electrical Sub-Code / Fire Sub-Code Official and Code Enforcement Officer (Technical Assistant / Zoning Review Officer: Emine Hani, ehani@northhaledon.gov)",
+  "evidence": [
+   {
+    "url": "https://www.northhaledon.com/Document%20Center/Forms/Construction%20Permits%20and%20Applications/Certificate%20of%20sale%20%20-%20Two%20Family%20(1).pdf",
+    "quote": "NOTE: Chapter 600-78 of the Borough Ordinances requires that before the occupancy or possession of any building or structure may pass from one person to another a Certificate of Re-occupancy is required.",
+    "doc_date": "2024-04 (PDF modified April 2, 2024; scanned form)",
+    "via": "pdf",
+    "verified": "eye"
+   },
+   {
+    "url": "https://www.northhaledon.com/Document%20Center/Forms/Construction%20Permits%20and%20Applications/CERTIFICATE%20OF%20SAFE%20-%20ONE%20FAMILY.pdf",
+    "quote": "CERTIFICATE OF SALE SINGLE FAMILY HOUSE BOROUGH OF NORTH HALEDON OFFICE OF THE CONSTRUCTION OFFICIAL",
+    "doc_date": "2025-07 (PDF modified July 18, 2025)",
+    "via": "pdf",
+    "verified": true
+   },
+   {
+    "url": "https://www.northhaledon.com/Document%20Center/Forms/Construction%20Permits%20and%20Applications/CERTIFICATE%20OF%20SAFE%20-%20ONE%20FAMILY.pdf",
+    "quote": "A copy of your COMPLETE well test if you are not on a public system. THE WELL TEST THAT IS SUBMITTED MUST BE WITHING SIX MONTHS AND MUST BE CLEAN OR THE CCO WILL NOT BE ISSUED.",
+    "doc_date": "2025-07",
+    "via": "pdf",
+    "verified": true
+   },
+   {
+    "url": "https://www.northhaledon.com/departments/construction_department/index.php",
+    "quote": "Phone Number: 973-423-9422/9432 Plumbing Sub-Code: Anthony D'Ascoli Construction Official/ Electrical Sub-Code/Fire Sub-Code Official: Jim Booth Code Enforcement Officer: Jim Booth Email: jbooth@northhaledon.gov Technical Assistant / Zoning Review Officer: Emine Hani Email: ehani@northhaledon.gov",
+    "doc_date": "2026-10-02 (page fetched)",
+    "via": "page",
+    "verified": true
+   }
+  ],
+  "confidence": "high",
+  "notes": "North Haledon requires a Certificate of Sale (Certificate of Re-occupancy, Chapter 600-78) from the Construction Official before a home changes hands. The single family checklist (modified July 2025) and the two family checklist (modified April 2024) still require a mounted portable fire extinguisher, although P.L.2025, c.19 removed the extinguisher from the state sale certificate; confirm with the office. The Construction page shows Jim Booth's email as jbooth@northhaledon.gov, but the link behind it points to jbooth@northhaledon.com (also the address in the state directory); the displayed .gov address is used. The page lists the phone as 973-423-9422/9432. The two family packet includes a Rental Housing Registration form (Ordinance 8-2008) for non owner-occupied one and two unit rentals, and the forms page has a separate Certificate of Rentals; those are rental requirements, not resale. Vacant properties must register with the property maintenance officer (since September 1, 2016)."
+ },
+ "fire_cert": {
+  "requirements": [
+   "Smoke detector on each level including basements (not unfinished attics or crawl spaces), outside each sleeping area and within 10 feet of bedrooms",
+   "Carbon monoxide alarm outside each sleeping area, within 10 feet of bedrooms",
+   "The Borough's certification form says detectors need not be interconnected and battery alarms are acceptable, but AC powered or interconnected alarms in homes built after January 1977 must be kept working",
+   "The Borough sale checklists still list a mounted 2 1/2 to 10 pound ABC portable fire extinguisher within 10 feet of the kitchen"
+  ],
+  "authorities": [
+   {
+    "name": "Borough of North Haledon Office of the Construction Official (smoke detector and carbon monoxide alarm compliance for the North Haledon Fire Department enforcing agency)",
+    "type": "municipal_fire_bureau",
+    "area_served": "Entire borough",
+    "lead_time": "",
+    "fees": [],
+    "how_to_apply": "The Borough's Certificate of Sale packet includes an 'Application and Certification for Certificate of Smoke Detector and Carbon Monoxide Alarm Compliance' that the owner signs before a notary; it is filed with the Certificate of Sale at the Construction Office, 103 Overlook Avenue. No separate fee is shown.",
+    "application_url": "https://www.northhaledon.com/Document%20Center/Forms/Construction%20Permits%20and%20Applications/CERTIFICATE%20OF%20SAFE%20-%20ONE%20FAMILY.pdf",
+    "department_url": "https://www.northhaledon.com/departments/construction_department/index.php",
+    "phone": "973-423-9422",
+    "email": "jbooth@northhaledon.gov",
+    "contact_name": "Jim Booth",
+    "contact_title": "Construction Official / Fire Sub-Code Official (state directory: Fire Official James Booth)",
+    "evidence": [
+     {
+      "url": "https://www.northhaledon.com/Document%20Center/Forms/Construction%20Permits%20and%20Applications/CERTIFICATE%20OF%20SAFE%20-%20ONE%20FAMILY.pdf",
+      "quote": "APPLICATION AND CERTIFICATION FOR CERTIFICATE OF SMOKE DETECTOR AND CARBON MONOXIDE ALARM COMPLIANCE",
+      "doc_date": "2025-07",
+      "via": "pdf",
+      "verified": true
+     },
+     {
+      "url": "https://www.northhaledon.com/Document%20Center/Forms/Construction%20Permits%20and%20Applications/CERTIFICATE%20OF%20SAFE%20-%20ONE%20FAMILY.pdf",
+      "quote": "An inspection shall be conducted by the owner or an authorized representative of the owner.",
+      "doc_date": "2025-07",
+      "via": "pdf",
+      "verified": true
+     },
+     {
+      "url": "https://www.northhaledon.com/Document%20Center/Forms/Construction%20Permits%20and%20Applications/CERTIFICATE%20OF%20SAFE%20-%20ONE%20FAMILY.pdf",
+      "quote": "5:70 2.3 requires certificate of CSDCMAPFEC",
+      "doc_date": "2025-07",
+      "via": "pdf",
+      "verified": true
+     },
+     {
+      "url": "https://nj.gov/dca/dfs/pdf/ANNUAL%20REGISTRY/THIRD%20QUARTER%20LEA%20REGISTRY%202026.pdf",
+      "quote": "F North Haledon Borough",
+      "doc_date": "2026-07",
+      "via": "pdf",
+      "verified": true
+     },
+     {
+      "url": "https://www.nj.gov/dca/dfs/pdf/fire%20directory_county%20summary/fire_code_enforcement_director.pdf",
+      "quote": "16 Passaic North Haledon Borough1606 ... LEAID: 1606-001 Enf Auth. Fire Dept Fire Official James Booth Phone (973) 423-9422 Addr: 103 Overlook Av North Haledon NJ 07508 ... Email jbooth@northhaledon.com ... North Haledon Bldg",
+      "doc_date": "2020-01-30 (survey date; old)",
+      "via": "state_directory",
+      "verified": true
+     }
+    ],
+    "confidence": "medium"
+   }
+  ],
+  "notes": "The NJ DCA registry lists the North Haledon Fire Department as the fire code enforcing agency; the state directory (2020 survey) names James Booth as Fire Official and puts smoke detector compliance with the North Haledon Building office, and Jim Booth is the Borough's Construction Official and Fire Sub-Code Official. The smoke and CO certificate is part of the Borough's Certificate of Sale packet as an owner certification signed before a notary, with no separate fee shown; whether the Borough also inspects alarms for the $100 / $150 sale certificate (the checklist lists smoke, CO and extinguisher items) should be confirmed. The North Haledon Fire Department website (northhaledonfire.com) showed a captcha page and was not used."
+ },
+ "other_items": [
+  {
+   "label": "Private well test",
+   "detail": "Homes on a private well need a clean well test (Private Well Testing Act) with the application, or a letter from buyer's and seller's attorneys noting the well condition.",
+   "source_url": "https://www.northhaledon.com/Document%20Center/Forms/Construction%20Permits%20and%20Applications/CERTIFICATE%20OF%20SAFE%20-%20ONE%20FAMILY.pdf"
+  },
+  {
+   "label": "Survey",
+   "detail": "A copy of a survey of the property is required with the Certificate of Sale.",
+   "source_url": "https://www.northhaledon.com/Document%20Center/Forms/Construction%20Permits%20and%20Applications/CERTIFICATE%20OF%20SAFE%20-%20ONE%20FAMILY.pdf"
+  },
+  {
+   "label": "Open permits and illegal construction",
+   "detail": "The office checks for open permits, illegal construction and illegal two family or multiple family use.",
+   "source_url": "https://www.northhaledon.com/Document%20Center/Forms/Construction%20Permits%20and%20Applications/CERTIFICATE%20OF%20SAFE%20-%20ONE%20FAMILY.pdf"
+  }
+ ],
+ "open_questions": [
+  "Is there any separate fee for the smoke detector and carbon monoxide alarm certificate, or is it covered by the Certificate of Sale fee?",
+  "Does the Borough still require a portable fire extinguisher at resale after P.L.2025, c.19?",
+  "How far ahead should the Certificate of Sale be requested, and how long is it valid?"
+ ],
+ "verification": {
+  "fees": 2,
+  "fee_ok": 2,
+  "fee_bad": 0,
+  "fee_unchecked": 0,
+  "quotes": 9,
+  "q_ok": 9,
+  "q_bad": 0,
+  "q_unchecked": 0
+ }
+}

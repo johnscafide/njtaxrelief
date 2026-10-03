@@ -1,0 +1,212 @@
+{
+ "municipality_code": "1807",
+ "municipality": "Far Hills Borough",
+ "county": "SOMERSET",
+ "checked_at": "2026-10-03",
+ "resale_co": {
+  "status": "required",
+  "name": "Certificate of Construction Records Clearance (CRC)",
+  "issued_by": "Borough of Far Hills Construction / Code Enforcement Office",
+  "lead_time": "Fee depends on business days before closing or change of occupancy: more than 10 business days for the lowest fee.",
+  "valid_for": "",
+  "requirements": [
+   "Records review before the sale of any residential structure (Ordinance 2020-14)",
+   "Application lists closing date (required), year built, swimming pool and pool fence, finished basement, and any second kitchen, basement, pool house or similar",
+   "Office checks for open construction permits, open zoning permits, certificates of occupancy/approvals issued, and zoning approval",
+   "The CRC may be approved, approved with conditions, or denied"
+  ],
+  "fees": [
+   {
+    "label": "Construction Records Clearance, request more than 10 business days before change of occupancy or closing",
+    "amount": "$45.00",
+    "quote": "$45.00 REQUESTS MORE THAN TEN (10) BUSINESS DAYS FROM CHANGE OF OCCUPANCY OR CLOSING",
+    "source_url": "https://www.farhillsnj.org/Construction%20Records%20Clearance%20Application%20r.%2092420.pdf",
+    "verified": true
+   },
+   {
+    "label": "Construction Records Clearance, request within 10 business days",
+    "amount": "$90.00",
+    "quote": "$90.00 REQUESTS WITHIN TEN (10) BUSINESS DAYS FROM CHANGE OF OCCUPANCY OR CLOSING",
+    "source_url": "https://www.farhillsnj.org/Construction%20Records%20Clearance%20Application%20r.%2092420.pdf",
+    "verified": true
+   },
+   {
+    "label": "Construction Records Clearance, request within 4 business days",
+    "amount": "$161.00",
+    "quote": "$161.00 REQUESTS WITHIN FOUR (4) BUSINESS DAYS FROM CHANGE OF OCCUPANCY OR CLOSING",
+    "source_url": "https://www.farhillsnj.org/Construction%20Records%20Clearance%20Application%20r.%2092420.pdf",
+    "verified": true
+   },
+   {
+    "label": "Duplicate Construction Records Clearance certificate",
+    "amount": "$25.00",
+    "quote": "$25.00 EACH FOR DUPLICATE CONSTRUCTION RECORDS CLEARANCE CERTIFICATE",
+    "source_url": "https://www.farhillsnj.org/Construction%20Records%20Clearance%20Application%20r.%2092420.pdf",
+    "verified": true
+   }
+  ],
+  "how_to_apply": "Fill out the Construction Records Clearance Application (closing date required) and submit it with the fee to the Code Enforcement Office, Borough Hall, 6 Prospect Street, Far Hills, or contact Code Enforcement Officer Stephen Mahoney (smahoney@farhillsnj.org, 908.234.0611 ext. 26). The certificate is mailed or held for pickup. The smoke/CO certificate is a separate application to the Fire Official.",
+  "application_url": "https://www.farhillsnj.org/Construction%20Records%20Clearance%20Application%20r.%2092420.pdf",
+  "department_url": "https://www.farhillsnj.org/how_do_i_/sell_my_home/index.php",
+  "phone": "908.234.0611 ext. 26",
+  "email": "smahoney@farhillsnj.org",
+  "contact_name": "Stephen Mahoney",
+  "contact_title": "Code Enforcement Officer",
+  "evidence": [
+   {
+    "url": "https://www.farhillsnj.org/how_do_i_/sell_my_home/index.php",
+    "quote": "There are two requirements for selling a home in the Borough of Far Hills.",
+    "doc_date": "2026-10-03 (page fetched)",
+    "via": "page",
+    "verified": true
+   },
+   {
+    "url": "https://www.farhillsnj.org/how_do_i_/sell_my_home/index.php",
+    "quote": "A CRC shall be required prior to the sale of any residential or commercial structure and prior to the rental of any tenant space in a commercial structure within the Borough per",
+    "doc_date": "2026-10-03 (page fetched)",
+    "via": "page",
+    "verified": true
+   },
+   {
+    "url": "https://www.farhillsnj.org/how_do_i_/sell_my_home/index.php",
+    "quote": "or by phone at 908.234.0611 extension 26.",
+    "doc_date": "2026-10-03 (page fetched)",
+    "via": "page",
+    "verified": true
+   },
+   {
+    "url": "https://www.farhillsnj.org/Construction%20Records%20Clearance%20Application%20r.%2092420.pdf",
+    "quote": "PLEASE SUBMIT COMPLETED APPLICATION WITH PAYMENT TO THE CODE ENFORCEMENT OFFICE",
+    "doc_date": "r. 9/2020 (PDF modified 2022-03-16)",
+    "via": "pdf",
+    "verified": true
+   },
+   {
+    "url": "https://www.farhillsnj.org/how_do_i_/sell_my_home/index.php",
+    "quote": "As no building or structure shall be occupied in whole or in part prior to the issuance of a certificate of construction records clearance (CRC).",
+    "doc_date": "2026-10-03 (page fetched)",
+    "via": "page",
+    "verified": true
+   }
+  ],
+  "confidence": "high",
+  "notes": "Far Hills does not do a resale CO inspection; instead a Construction Records Clearance (CRC) certificate is required before the sale of any residential structure (Ordinance 2020-14). It is a records check for open construction and zoning permits and issued COs/approvals. The ordinance PDF (2020-14 - Authorizing Construction Records Clearance.pdf, September 2020) is a scanned image with no searchable text, so it was not quoted. The CRC application form says fees are subject to change under N.J.A.C. 5:70-2.9(d). The Code Enforcement Officer's email is a mailto link on the Sell My Home page. A landlord registration program exists for rentals; it is not a resale requirement."
+ },
+ "fire_cert": {
+  "requirements": [
+   "Smoke alarms on each level and within 10 feet of each separate sleeping area; basement alarms near the stairway to the floor above; listed to UL 217 (combination smoke/CO allowed)",
+   "Ten-year sealed battery alarms where none exist or when replacing battery units; original AC-powered alarms may not be replaced with battery alarms",
+   "Replace smoke alarms older than 10 years",
+   "Age-based rules: before 1977 battery alarms on each level and near bedrooms; 1977 to 8-5-1984 AC alarms outside sleeping areas and basement plus battery on first floor; 8-6-1984 to 4-30-1993 interconnected AC alarms on each level; 5-1-1993 on, interconnected AC alarms in each bedroom and on each level with battery backup",
+   "Homes with a monitored NFPA 72 system instead of AC smoke alarms need an inspection and certificate of compliance from a certified alarm contractor or electrician",
+   "Carbon monoxide alarms (UL 2034) within 10 feet of each separate sleeping area; replace when 5 to 7 years old per manufacturer",
+   "Secondary power source label (such as CAUTION: MULTIPLE SOURCES OF POWER, not handwritten) within 18 inches of the main electrical panel and electric meter; the office can supply labels"
+  ],
+  "authorities": [
+   {
+    "name": "Borough of Far Hills Fire Official (Far Hills Boro Fire Prevention)",
+    "type": "municipal_fire_bureau",
+    "area_served": "Entire borough",
+    "lead_time": "Fee depends on business days before the change of occupancy or ownership: more than 10 business days for the lowest fee. Closing date is required on the application.",
+    "fees": [
+     {
+      "label": "Smoke detector/CO certificate, application more than 10 business days before change of occupancy",
+      "amount": "$45.00",
+      "quote": "$45.00 – MORE THAN TEN (10) BUSINESS DAYS",
+      "source_url": "https://www.farhillsnj.org/Smoke%20Detector-CO%20Alarm%20Permit%20Application%20r.%204-2025%20-%20FILLABLE.pdf",
+      "verified": true
+     },
+     {
+      "label": "Application fewer than 10 business days before",
+      "amount": "$70.00",
+      "quote": "$70.00 – FEWER THAN TEN",
+      "source_url": "https://www.farhillsnj.org/Smoke%20Detector-CO%20Alarm%20Permit%20Application%20r.%204-2025%20-%20FILLABLE.pdf",
+      "verified": true
+     },
+     {
+      "label": "Application fewer than 4 business days before",
+      "amount": "$125.00",
+      "quote": "$125.00 – FEWER THAN FOUR (4) BUSINESS DAYS",
+      "source_url": "https://www.farhillsnj.org/Smoke%20Detector-CO%20Alarm%20Permit%20Application%20r.%204-2025%20-%20FILLABLE.pdf",
+      "verified": true
+     }
+    ],
+    "how_to_apply": "Fill out the Smoke Detector/Carbon Monoxide Application (check SALE, give the closing date and note any central alarm or secondary power) and submit it with a check payable to Borough of Far Hills to the Fire Official, Steven Dill (sdill@farhillsnj.org, 908.234.0611 ext. 29), Borough Hall, 6 Prospect Street. The fee must accompany the application. A failed inspection can mean added re-inspection fees.",
+    "application_url": "https://www.farhillsnj.org/Smoke%20Detector-CO%20Alarm%20Permit%20Application%20r.%204-2025%20-%20FILLABLE.pdf",
+    "department_url": "https://www.farhillsnj.org/how_do_i_/sell_my_home/index.php",
+    "phone": "908.234.0611 ext. 29",
+    "email": "sdill@farhillsnj.org",
+    "contact_name": "Steven Dill",
+    "contact_title": "Fire Official",
+    "evidence": [
+     {
+      "url": "https://www.farhillsnj.org/how_do_i_/sell_my_home/index.php",
+      "quote": "the owner shall obtain a certificate of smoke detector and carbon monoxide alarm compliance (CSDCMAC) with the Borough Fire Official per",
+      "doc_date": "2026-10-03 (page fetched)",
+      "via": "page",
+      "verified": true
+     },
+     {
+      "url": "https://www.farhillsnj.org/how_do_i_/sell_my_home/index.php",
+      "quote": "or by phone at 908.234.0611 extension 29.",
+      "doc_date": "2026-10-03 (page fetched)",
+      "via": "page",
+      "verified": true
+     },
+     {
+      "url": "https://www.farhillsnj.org/Smoke%20Detector-CO%20Alarm%20Permit%20Application%20r.%204-2025%20-%20FILLABLE.pdf",
+      "quote": "MAKE CHECK PAYABLE TO BOROUGH OF FAR HILLS",
+      "doc_date": "r. 4/2025",
+      "via": "pdf",
+      "verified": true
+     },
+     {
+      "url": "https://www.farhillsnj.org/Smoke%20Detector-CO%20Alarm%20Permit%20Application%20r.%204-2025%20-%20FILLABLE.pdf",
+      "quote": "INSPECTION FAILURE COULD RESULT IN ADDITIONAL RE-INSPECTION FEES",
+      "doc_date": "r. 4/2025",
+      "via": "pdf",
+      "verified": true
+     },
+     {
+      "url": "https://www.nj.gov/dca/dfs/pdf/fire%20directory_county%20summary/fire_code_enforcement_director.pdf",
+      "quote": "LEAID: 1807-001 Far Hills Boro ... Name: Far Hills Boro Fire Prev ... Enf Auth. Municipal ... Fire Official Steven T Dill Phone (908) 234-0611 ... Email sdill@farhillsnj.org",
+      "doc_date": "survey date 1/21/2026",
+      "via": "state_directory",
+      "verified": null
+     },
+     {
+      "url": "https://nj.gov/dca/dfs/pdf/ANNUAL%20REGISTRY/THIRD%20QUARTER%20LEA%20REGISTRY%202026.pdf",
+      "quote": "M Far Hills Borough",
+      "doc_date": "2026-07",
+      "via": "pdf",
+      "verified": true
+     }
+    ],
+    "confidence": "high"
+   }
+  ],
+  "notes": "The Borough is its own fire code enforcing agency (municipal). The April 2025 application already follows P.L.2025, c.19: it adds the secondary power label and does not list a fire extinguisher. The middle fee tier says FEWER THAN TEN (10) BUSINESS DAYS, so $70.00 applies from 4 to 10 business days. The amount of any re-inspection fee is not published. Fee quotes come from a fillable PDF where the fee line wraps, so some text may be split across lines."
+ },
+ "other_items": [
+  {
+   "label": "Open construction and zoning permits",
+   "detail": "The Construction Records Clearance review checks for open construction permits, open zoning permits, and whether COs or approvals were issued for work on the property.",
+   "source_url": "https://www.farhillsnj.org/Construction%20Records%20Clearance%20Application%20r.%2092420.pdf"
+  }
+ ],
+ "open_questions": [
+  "What happens at closing if the CRC finds open permits (conditions imposed vs. denial)?",
+  "How much is a smoke/CO re-inspection fee?",
+  "How long are the CRC and smoke/CO certificates valid if closing is delayed?"
+ ],
+ "verification": {
+  "fees": 7,
+  "fee_ok": 7,
+  "fee_bad": 0,
+  "fee_unchecked": 0,
+  "quotes": 11,
+  "q_ok": 10,
+  "q_bad": 0,
+  "q_unchecked": 1
+ }
+}

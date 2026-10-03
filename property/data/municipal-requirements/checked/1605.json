@@ -1,0 +1,254 @@
+{
+ "municipality_code": "1605",
+ "municipality": "Little Falls Township",
+ "county": "PASSAIC",
+ "checked_at": "2026-10-02",
+ "resale_co": {
+  "status": "required",
+  "name": "Township Certificate of Compliance (Code Enforcement, resale)",
+  "issued_by": "Township of Little Falls Code Enforcement (Building Department)",
+  "lead_time": "The Township code says the inspection is made within 7 business days after a complete application and fees are submitted (search snippet).",
+  "valid_for": "",
+  "requirements": [
+   "Inspection for compliance with the Township code and the Property Maintenance Code (Chapter 163)",
+   "All violations and open permits must be closed before the certificate is issued",
+   "The property record card is attached and checked during the inspection",
+   "Access must be provided to the entire structure and property"
+  ],
+  "fees": [
+   {
+    "label": "Certificate of Compliance, single family",
+    "amount": "$100.00",
+    "quote": "SINGLE FAMILY___________ $100.00",
+    "source_url": "https://littlefallsnj.gov/uploads/dm/23207/Residential%20Certificate%20of%20Compliance%202025.pdf",
+    "verified": "eye"
+   },
+   {
+    "label": "Certificate of Compliance, two family",
+    "amount": "$100.00",
+    "quote": "TWO FAMILY_____________ $100.00",
+    "source_url": "https://littlefallsnj.gov/uploads/dm/23207/Residential%20Certificate%20of%20Compliance%202025.pdf",
+    "verified": "eye"
+   },
+   {
+    "label": "Certificate of Compliance, multiple family, resale only (first 3 units, plus each additional unit)",
+    "amount": "$300.00 1st 3 units + $30.00 Every Additional Unit",
+    "quote": "$300.00 1st 3 units + $30.00 Every Additional Unit (Resale Only)",
+    "source_url": "https://littlefallsnj.gov/uploads/dm/23207/Residential%20Certificate%20of%20Compliance%202025.pdf",
+    "verified": true
+   },
+   {
+    "label": "Smoke detector and carbon monoxide alarm certificate, 10 business days before change of occupant",
+    "amount": "$45.00",
+    "quote": "10 business days prior to change of occupant: $45.00",
+    "source_url": "https://littlefallsnj.gov/uploads/dm/22746/One%20and%20Two%20Family%20Dwelling%20SACMA%20Application%202025.pdf",
+    "verified": "eye"
+   },
+   {
+    "label": "4 to 10 business days before change of occupant",
+    "amount": "$90.00",
+    "quote": "4 to 10 business days prior to change of occupant: $90.00",
+    "source_url": "https://littlefallsnj.gov/uploads/dm/22746/One%20and%20Two%20Family%20Dwelling%20SACMA%20Application%202025.pdf",
+    "verified": "eye"
+   },
+   {
+    "label": "Fewer than 4 days before change of occupant",
+    "amount": "$161.00",
+    "quote": "Fewer than 4 days prior to change of occupant: $161.00",
+    "source_url": "https://littlefallsnj.gov/uploads/dm/22746/One%20and%20Two%20Family%20Dwelling%20SACMA%20Application%202025.pdf",
+    "verified": "eye"
+   },
+   {
+    "label": "Re-inspection after a failed inspection because areas were not accessible",
+    "amount": "$20.00",
+    "quote": "If areas are inaccessible, the inspection will fail and a re-inspection date shall be set up by calling the Fire Prevention Bureau office and an additional $20.00 fee will be charged.",
+    "source_url": "https://littlefallsnj.gov/uploads/dm/22746/One%20and%20Two%20Family%20Dwelling%20SACMA%20Application%202025.pdf",
+    "verified": "eye"
+   }
+  ],
+  "how_to_apply": "Fill out the Township Code Enforcement Certificate of Compliance form (check Resale and Single or Two Family), with current owner, new owner, closing date, inspection contact and new occupant details, signed by the applicant and current owner. File it with the fee (check) at Code Enforcement, Town Hall, 225 Main Street, 2nd floor.",
+  "application_url": "https://littlefallsnj.gov/uploads/dm/23207/Residential%20Certificate%20of%20Compliance%202025.pdf",
+  "department_url": "https://littlefallsnj.gov/building-department",
+  "phone": "(973) 256-6182 Ext. 2",
+  "email": "DWARNET@LITTLEFALLSNJ.GOV",
+  "contact_name": "Donald Warnet",
+  "contact_title": "Code Enforcement (property maintenance, code enforcement and lead inspections); Building Department head: James DiMaria",
+  "evidence": [
+   {
+    "url": "https://ecode360.com/6921129",
+    "quote": "No person shall use, occupy, rent, lease, or otherwise occupy any building or land without first obtaining a Township certificate of compliance.",
+    "doc_date": "",
+    "via": "search_snippet",
+    "verified": null
+   },
+   {
+    "url": "https://ecode360.com/6921129",
+    "quote": "An inspection shall be made within seven business days after completed application and fees are submitted to the Code Enforcement office.",
+    "doc_date": "",
+    "via": "search_snippet",
+    "verified": null
+   },
+   {
+    "url": "https://littlefallsnj.gov/uploads/dm/23207/Residential%20Certificate%20of%20Compliance%202025.pdf",
+    "quote": "TOWNSHIP OF LITTLE FALLS CODE ENFORCEMENT CERTIFICATE OF COMPLIANCE 225 MAIN STREET LITTLE FALLS, NJ 07424 973-256-6182",
+    "doc_date": "2025 (file 'Residential Certificate of Compliance 2025', posted April 14, 2025; PDF modified March 27, 2025)",
+    "via": "pdf",
+    "verified": "eye"
+   },
+   {
+    "url": "https://littlefallsnj.gov/uploads/dm/23207/Residential%20Certificate%20of%20Compliance%202025.pdf",
+    "quote": "OFFICE NOTE: PROPERTY RECORD CARD SHALL BE ATTACHED AND VERIFIED DURING INSPECTION. ALL VIOLATIONS AND OPEN PERMITS SHALL BE CLOSED PRIOR TO ISSUANCE",
+    "doc_date": "2025",
+    "via": "pdf",
+    "verified": true
+   },
+   {
+    "url": "https://littlefallsnj.gov/building-department",
+    "quote": "For any matters related to property maintenance, code enforcement, or lead inspections, please contact Donald Warnet. You can reach him by phone at (973) 256-6182 Ext. 2 or via email at DWARNET@LITTLEFALLSNJ.GOV",
+    "doc_date": "2026-10-02 (page fetched)",
+    "via": "page",
+    "verified": true
+   },
+   {
+    "url": "https://littlefallsnj.gov/building-department",
+    "quote": "Department Head: James DiMaria Phone: (973) 256-6182 Office Hours: Monday - Thursday: 8:00AM - 4:00PM Friday: 8:00AM - 1:00PM",
+    "doc_date": "2026-10-02 (page fetched)",
+    "via": "page",
+    "verified": true
+   }
+  ],
+  "confidence": "medium",
+  "notes": "The Township code (ecode360, seen only as search result text) requires a Township certificate of compliance before anyone uses or occupies a building, and the Code Enforcement Certificate of Compliance form has a Resale option with fees of $100.00 for a single or two family home. The same form covers rentals ($100.00 for an individual rental unit within a multiple dwelling). Search summaries also mention a temporary certificate for up to 30 days and fees set in Chapter 71, but the Chapter 71 amounts could not be seen in exact words, so only the form amounts are used. The form does not state the payment method beyond a check number line, or how long the certificate is valid. The Building Department page shows Township emails as @LITTLEFALLSNJ.GOV, while the underlying page links point to older @lfnj.com addresses; the displayed addresses are used here. Lead paint inspections for rentals are a separate Township application."
+ },
+ "fire_cert": {
+  "requirements": [
+   "Smoke alarms on each level including the basement and outside each separate sleeping area; a photoelectric smoke alarm if a bedroom is within 10 feet of the kitchen",
+   "Smoke alarms permanently mounted on the ceiling or within 12 inches of the ceiling on the wall",
+   "Battery-only smoke alarms must be 10-year sealed battery units (UL 217); hardwired alarms may not be replaced with battery alarms",
+   "Smoke alarms in service more than 10 years must be replaced",
+   "Central station fire alarm systems must be tested before the inspection and a test report submitted, or the inspection fails",
+   "CO alarm within 10 feet of each sleeping area when the home has a fuel-burning appliance or attached garage (battery, hardwired or plug-in)",
+   "Secondary power source label (for example CAUTION: MULTIPLE SOURCES OF POWER, not handwritten) within 18 inches of the main electrical panel and meter",
+   "Fire extinguishers are no longer required to pass inspection and are optional"
+  ],
+  "authorities": [
+   {
+    "name": "Little Falls Bureau of Fire Prevention (Little Falls Fire Department, local enforcing agency)",
+    "type": "municipal_fire_bureau",
+    "area_served": "Entire township",
+    "lead_time": "Apply 10 or more business days before the change of occupant for the lowest fee.",
+    "fees": [
+     {
+      "label": "Smoke detector and carbon monoxide alarm certificate, 10 business days before change of occupant",
+      "amount": "$45.00",
+      "quote": "10 business days prior to change of occupant: $45.00",
+      "source_url": "https://littlefallsnj.gov/uploads/dm/22746/One%20and%20Two%20Family%20Dwelling%20SACMA%20Application%202025.pdf",
+      "verified": "eye"
+     },
+     {
+      "label": "4 to 10 business days before change of occupant",
+      "amount": "$90.00",
+      "quote": "4 to 10 business days prior to change of occupant: $90.00",
+      "source_url": "https://littlefallsnj.gov/uploads/dm/22746/One%20and%20Two%20Family%20Dwelling%20SACMA%20Application%202025.pdf",
+      "verified": "eye"
+     },
+     {
+      "label": "Fewer than 4 days before change of occupant",
+      "amount": "$161.00",
+      "quote": "Fewer than 4 days prior to change of occupant: $161.00",
+      "source_url": "https://littlefallsnj.gov/uploads/dm/22746/One%20and%20Two%20Family%20Dwelling%20SACMA%20Application%202025.pdf",
+      "verified": "eye"
+     },
+     {
+      "label": "Re-inspection after a failed inspection because areas were not accessible",
+      "amount": "$20.00",
+      "quote": "If areas are inaccessible, the inspection will fail and a re-inspection date shall be set up by calling the Fire Prevention Bureau office and an additional $20.00 fee will be charged.",
+      "source_url": "https://littlefallsnj.gov/uploads/dm/22746/One%20and%20Two%20Family%20Dwelling%20SACMA%20Application%202025.pdf",
+      "verified": "eye"
+     }
+    ],
+    "how_to_apply": "Get the One and Two Family Dwelling application packet from the Fire Prevention Bureau (Town Hall, 2nd floor) or the Township website. Complete it in full, signed by both seller and buyer, and return it in person to the Fire Prevention Bureau with the fee; check or money order payable to Township of Little Falls only. The inspection date is set then; someone 18 or older must be present.",
+    "application_url": "https://littlefallsnj.gov/uploads/dm/22746/One%20and%20Two%20Family%20Dwelling%20SACMA%20Application%202025.pdf",
+    "department_url": "https://littlefallsnj.gov/fire-prevention-bureau",
+    "phone": "(973) 890-4524",
+    "email": "TBERTINO@LITTLEFALLSNJ.GOV",
+    "contact_name": "Antonia Bertino",
+    "contact_title": "Office Staff, Fire Prevention Bureau (Fire Official: James DiMaria)",
+    "evidence": [
+     {
+      "url": "https://littlefallsnj.gov/uploads/dm/22746/One%20and%20Two%20Family%20Dwelling%20SACMA%20Application%202025.pdf",
+      "quote": "The application fee for a certificate of smoke detector and carbon monoxide alarm as required by N.J.A.C. 5:70-2.3, shall be based upon the amount of time remaining before the lease or sale date of the dwelling unit is as follows:",
+      "doc_date": "2025 (file 'One and Two Family Dwelling SACMA Application 2025', posted April 3, 2025)",
+      "via": "pdf",
+      "verified": "eye"
+     },
+     {
+      "url": "https://littlefallsnj.gov/uploads/dm/22746/One%20and%20Two%20Family%20Dwelling%20SACMA%20Application%202025.pdf",
+      "quote": "Check or Money Order made Payable to \"Township of Little Falls\" is the only acceptable method of payment",
+      "doc_date": "2025",
+      "via": "pdf",
+      "verified": "eye"
+     },
+     {
+      "url": "https://littlefallsnj.gov/uploads/dm/22746/One%20and%20Two%20Family%20Dwelling%20SACMA%20Application%202025.pdf",
+      "quote": "*Fire Extinguishers are no longer a requirement to pass inspection and are optional*",
+      "doc_date": "2025",
+      "via": "pdf",
+      "verified": "eye"
+     },
+     {
+      "url": "https://littlefallsnj.gov/fire-prevention-bureau",
+      "quote": "If you have any questions or need to file a complaint, please call Antonia Bertino at (973) 890-4524 or email TBERTINO@LITTLEFALLSNJ.GOV",
+      "doc_date": "2026-10-02 (page fetched)",
+      "via": "page",
+      "verified": true
+     },
+     {
+      "url": "https://littlefallsnj.gov/fire-prevention-bureau",
+      "quote": "Office Staff Antonia Bertino TBERTINO@LITTLEFALLSNJ.GOV Office: (973) 890-4524 Fax: (973) 256-8017 Fire Official: James DiMaria Fire Inspector: Donald Warnet Fire Inspector: Nick Gencarelli",
+      "doc_date": "2026-10-02 (page fetched)",
+      "via": "page",
+      "verified": true
+     },
+     {
+      "url": "https://nj.gov/dca/dfs/pdf/ANNUAL%20REGISTRY/THIRD%20QUARTER%20LEA%20REGISTRY%202026.pdf",
+      "quote": "F Little Falls Township",
+      "doc_date": "2026-07",
+      "via": "pdf",
+      "verified": true
+     },
+     {
+      "url": "https://www.nj.gov/dca/dfs/pdf/fire%20directory_county%20summary/fire_code_enforcement_director.pdf",
+      "quote": "16 Passaic Little Falls Township1605 ... LEAID: 1605-001 Enf Auth. Fire Dept Fire Official James R Di Maria Phone (973) 890-4524 Addr: 225 Main St Little Falls NJ 07424 ... Email JDiMaria@lfnj.com ... Little Falls Twp Fire Prev",
+      "doc_date": "2026-07-16 (survey date)",
+      "via": "state_directory",
+      "verified": true
+     }
+    ],
+    "confidence": "high"
+   }
+  ],
+  "notes": "The Little Falls Fire Department (Bureau of Fire Prevention) is the fire code enforcing agency and issues the resale smoke and carbon monoxide alarm certificate; this is separate from the Township Code Enforcement Certificate of Compliance and has its own fee. The packet's cover form is titled for smoke detector, carbon monoxide and fire extinguisher certification, but its instructions say extinguishers are no longer required and are optional. The packet says an owner who sells or rents without the inspection will be fined. The Fire Prevention page displays Township emails as @LITTLEFALLSNJ.GOV while its links point to @lfnj.com; the state directory still lists JDiMaria@lfnj.com."
+ },
+ "other_items": [
+  {
+   "label": "Open permits and violations",
+   "detail": "All violations and open permits must be closed before the Township Certificate of Compliance is issued.",
+   "source_url": "https://littlefallsnj.gov/uploads/dm/23207/Residential%20Certificate%20of%20Compliance%202025.pdf"
+  }
+ ],
+ "open_questions": [
+  "How long is the Township Certificate of Compliance valid, and how far before closing should it be requested?",
+  "Does the Chapter 71 fee ordinance match the form's $100.00 resale fee for single and two family homes?"
+ ],
+ "verification": {
+  "fees": 7,
+  "fee_ok": 7,
+  "fee_bad": 0,
+  "fee_unchecked": 0,
+  "quotes": 13,
+  "q_ok": 11,
+  "q_bad": 0,
+  "q_unchecked": 2
+ }
+}
