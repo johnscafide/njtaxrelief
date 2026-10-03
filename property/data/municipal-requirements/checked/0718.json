@@ -1,0 +1,200 @@
+{
+ "municipality_code": "0718",
+ "municipality": "Roseland Borough",
+ "county": "ESSEX",
+ "resale_co": {
+  "status": "required",
+  "name": "Residential Resale Certificate",
+  "issued_by": "Borough of Roseland Code Enforcement Department (Code Enforcement Officer)",
+  "lead_time": "",
+  "valid_for": "180 days",
+  "requirements": [
+   "Inspection by Code Enforcement, with review for UCC, housing and zoning compliance",
+   "Working smoke detector on each level including the basement; 10-year sealed battery units allowed but may not replace required hardwired detectors",
+   "Carbon monoxide detector in the vicinity of all sleeping rooms",
+   "Explosive natural gas alarm installed per the manufacturer's specifications",
+   "Smoke, CO and explosive gas detectors no older than 10 years",
+   "No loose or missing stair treads, risers, handrails or guardrails",
+   "No loose or missing electrical panel covers, switch/receptacle plates or junction box covers",
+   "Sump pump (if any) piped outside, not into the sanitary sewer",
+   "Proper fit and venting of furnace/boiler and water heater to the chimney; water heater relief valve discharging 2 to 6 inches above the floor",
+   "No unsealed penetrations, holes or missing sheetrock or plaster in attached garage walls or ceilings",
+   "Seller must close all permits before the sale",
+   "Final water meter reading must be scheduled and completed before the certificate is released",
+   "Buyer's name and phone number must be given"
+  ],
+  "fees": [
+   {
+    "label": "Residential resale certificate, per dwelling unit",
+    "amount": "$200",
+    "quote": "Residential (R-2 through R-5) Resale, per dwelling unit: $200.",
+    "source_url": "https://ecode360.com/34521931",
+    "verified": null
+   },
+   {
+    "label": "Residential resale application fee (as printed on the application)",
+    "amount": "$200",
+    "quote": "Fee: $ 200",
+    "source_url": "https://www.roselandnj.org/361/Residential-Resale-Application-PDF",
+    "verified": true
+   }
+  ],
+  "how_to_apply": "Complete the Residential Resale Application (Borough website, Forms & Applications) and submit it with the $200 fee to the Code Enforcement Department, 300 Eagle Rock Avenue, Roseland (cash or check). Check the box for a resale certificate, or for a temporary resale certificate, which needs a letter of request from the buyer's attorney. Schedule the final water meter reading separately.",
+  "application_url": "https://www.roselandnj.org/361/Residential-Resale-Application-PDF",
+  "department_url": "https://www.roselandnj.org/Directory.aspx",
+  "phone": "973-403-6046",
+  "email": "codeenforcement@roselandnj.org",
+  "contact_name": "",
+  "contact_title": "",
+  "evidence": [
+   {
+    "url": "https://ecode360.com/34521931",
+    "quote": "No owner, agent, or any person or entity, shall rent, lease, sell, transfer ownership, or in any way deliver up for use, change of use, or occupancy any business, building, dwelling unit, lodging unit, rooming unit, or boarding unit, until a residential resale certificate, residential rental certificate, commercial rental certificate, or commercial resale certificate has been issued by the Code Enforcement Officer",
+    "doc_date": "2025-09-16 (Ord. No. 27-2025)",
+    "via": "page",
+    "verified": null
+   },
+   {
+    "url": "https://ecode360.com/34521931",
+    "quote": "A Temporary certificate will only be considered upon receipt of a written request setting forth the reason for the request and a time schedule setting forth the unfinished items and when they will be completed.",
+    "doc_date": "2026-10-03 (page fetched)",
+    "via": "page",
+    "verified": null
+   },
+   {
+    "url": "https://www.roselandnj.org/361/Residential-Resale-Application-PDF",
+    "quote": "Certificate is valid for 180 days.",
+    "doc_date": "2025-09-19",
+    "via": "pdf",
+    "verified": true
+   },
+   {
+    "url": "https://www.roselandnj.org/361/Residential-Resale-Application-PDF",
+    "quote": "Seller is responsible for closure of all permits prior to selling this property;",
+    "doc_date": "2025-09-19",
+    "via": "pdf",
+    "verified": true
+   },
+   {
+    "url": "https://www.roselandnj.org/361/Residential-Resale-Application-PDF",
+    "quote": "TEMPORARY RESALE CERTIFICATE - Buyers Attorney must provide a letter of request",
+    "doc_date": "2025-09-19",
+    "via": "pdf",
+    "verified": true
+   },
+   {
+    "url": "https://www.roselandnj.org/361/Residential-Resale-Application-PDF",
+    "quote": "Certificate will not be issued unless the buyers name and phone number have been received.",
+    "doc_date": "2025-09-19",
+    "via": "pdf",
+    "verified": true
+   },
+   {
+    "url": "https://www.roselandnj.org/Directory.aspx",
+    "quote": "Code Enforcement 973-403-6046",
+    "doc_date": "2026-10-03 (page fetched)",
+    "via": "page",
+    "verified": true
+   }
+  ],
+  "confidence": "high",
+  "notes": "Borough Code Chapter 10 (Building and Housing) was read on ecode360; the resale fee is under the Non UCC Certificate of Continued Occupancy fees, payment due at application. The Code Enforcement Department Head position is listed as 'To Be Determined' in the Borough directory, so no contact name is given; Heidi Levine, Senior Technical Assistant, is at 973-403-6051 and the Zoning Officer, James Campbell, at 973-403-6071. The department email was taken from the directory's protected mailto link. Rental certificates ($100 per unit) and landlord registration are rental-only programs."
+ },
+ "fire_cert": {
+  "requirements": [
+   "Smoke detector on each level, including the basement (10-year sealed battery units allowed; hardwired units may not be replaced with battery units)",
+   "Carbon monoxide detector in the vicinity of all sleeping rooms",
+   "Explosive natural gas alarm (Borough requirement)",
+   "Detectors no older than 10 years",
+   "A fire extinguisher is not required in one- and two-family homes (Borough code); the application's office checklist still has a fire extinguisher box"
+  ],
+  "authorities": [
+   {
+    "name": "Borough of Roseland Code Enforcement Department (smoke/CO inspection is part of the Residential Resale Certificate)",
+    "type": "municipal_fire_bureau",
+    "area_served": "Entire borough",
+    "lead_time": "",
+    "fees": [],
+    "how_to_apply": "There is no separate smoke/CO application on the Borough site. The smoke, CO and explosive gas alarm inspection is done as part of the Residential Resale Certificate inspection, applied for on the Residential Resale Application.",
+    "application_url": "https://www.roselandnj.org/361/Residential-Resale-Application-PDF",
+    "department_url": "https://www.roselandnj.org/Directory.aspx",
+    "phone": "973-226-0512",
+    "email": "fireprevention@roselandnj.org",
+    "contact_name": "Allen Bell",
+    "contact_title": "Fire Prevention Official",
+    "evidence": [
+     {
+      "url": "https://ecode360.com/34521931",
+      "quote": "A residential resale certificate, residential rental certificate, commercial rental certificate, and or a commercial resale certificate shall not be issued until an inspection and/or test of all smoke detection devices, carbon monoxide devices, and explosive gas alarms within the building or structure shall have been performed by the Code Enforcement Officer",
+      "doc_date": "2026-10-03 (page fetched)",
+      "via": "page",
+      "verified": null
+     },
+     {
+      "url": "https://ecode360.com/34521931",
+      "quote": "A fire extinguisher shall not be required to be equipped in one- and two-family dwellings, but shall be required in all other occupied structures.",
+      "doc_date": "2026-10-03 (page fetched)",
+      "via": "page",
+      "verified": null
+     },
+     {
+      "url": "https://www.roselandnj.org/Directory.aspx",
+      "quote": "Allen Bell Fire Prevention Official",
+      "doc_date": "2026-10-03 (page fetched)",
+      "via": "page",
+      "verified": true
+     },
+     {
+      "url": "https://www.nj.gov/dca/dfs/pdf/fire%20directory_county%20summary/fire_code_enforcement_director.pdf",
+      "quote": "LEAID: 0718-001 Roseland Boro ... Name: Roseland Constr Office Addr: 300 Eagle Rock Av ... Enf Auth. Municipal ... Fire Official Allen Bell, Jr Phone (973) 226-6565 ... Email fireprevention@roselandnj.org",
+      "doc_date": "survey date 1/19/2023",
+      "via": "state_directory",
+      "verified": null
+     },
+     {
+      "url": "https://nj.gov/dca/dfs/pdf/ANNUAL%20REGISTRY/THIRD%20QUARTER%20LEA%20REGISTRY%202026.pdf",
+      "quote": "M Roseland Borough",
+      "doc_date": "2026-07",
+      "via": "pdf",
+      "verified": true
+     }
+    ],
+    "confidence": "high"
+   }
+  ],
+  "notes": "Roseland folds the state smoke/CO certificate into its Residential Resale Certificate; no separate smoke certificate fee is published, so the $200 resale fee appears to cover it (confirm). The state fire directory (survey 1/19/2023) lists Allen Bell, Jr as fire official with phone (973) 226-0512 and the smoke detector compliance office as the Roseland Construction Office at (973) 226-6565; the Borough directory lists Allen Bell, Fire Prevention Official, at 973-226-0512 and 862-469-9047, under Code Enforcement. The fireprevention@roselandnj.org email is from the state directory."
+ },
+ "other_items": [
+  {
+   "label": "Final water meter reading",
+   "detail": "The seller or seller's attorney must schedule the final water meter reading with the Borough Water Department before closing; the certificate is not released until it is done. A $150.00 final water meter read fee is added to the final water bill.",
+   "source_url": "https://www.roselandnj.org/361/Residential-Resale-Application-PDF"
+  },
+  {
+   "label": "Open permits",
+   "detail": "The seller must close all permits before selling.",
+   "source_url": "https://www.roselandnj.org/361/Residential-Resale-Application-PDF"
+  },
+  {
+   "label": "Zoning compliance",
+   "detail": "The resale certificate is issued only if the use complies with zoning or is a valid preexisting nonconforming use.",
+   "source_url": "https://ecode360.com/34521931"
+  }
+ ],
+ "open_questions": [
+  "Is a separate fee charged for the smoke/CO part of the inspection, or is it covered by the $200 resale fee?",
+  "How many days ahead should the resale application be filed, and is there an expedite fee? None is published.",
+  "Is there a reinspection fee? None was found in the resale fee section."
+ ],
+ "checked_at": "2026-10-03",
+ "verification": {
+  "fees": 2,
+  "fee_ok": 1,
+  "fee_bad": 0,
+  "fee_unchecked": 1,
+  "quotes": 12,
+  "q_ok": 7,
+  "q_bad": 0,
+  "q_unchecked": 5
+ }
+}

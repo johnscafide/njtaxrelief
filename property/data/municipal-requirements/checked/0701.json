@@ -1,0 +1,202 @@
+{
+ "municipality_code": "0701",
+ "municipality": "Belleville Township",
+ "county": "ESSEX",
+ "checked_at": "2026-10-03",
+ "resale_co": {
+  "status": "required",
+  "name": "Residential Resale Certificate (Continued Certificate of Occupancy)",
+  "issued_by": "Township of Belleville Code Enforcement Department (Department of Community Development)",
+  "lead_time": "",
+  "valid_for": "",
+  "requirements": [
+   "Inspection by Code Enforcement (the form has spaces for an inspection date and a re-inspection date)",
+   "Zoning permit, Residential-Resale type ($100.00), included in the resale application packet",
+   "Smoke detector / carbon monoxide compliance application (Ordinance #2572), included in the resale application packet",
+   "Smoke alarms on every level and outside each separate sleeping area; existing hardwired systems kept; 10-year sealed battery alarms where not hardwired; alarms no more than 10 years old",
+   "Carbon monoxide alarms within 10 feet of sleeping areas (checklist says on all levels); not required if no fuel-burning appliances and no attached garage",
+   "Portable fire extinguisher within 10 feet of the kitchen, 2A-10B:C, no more than 10 pounds, mounted with top no more than 5 feet off the floor, tagged within 12 months or with a recent purchase receipt (form still lists it)",
+   "Exterior free of trash, debris, high grass and weeds; foundation and exterior walls in good repair; gutters and downspouts working",
+   "Fences, sheds, pools and decks in good condition with a permit on file",
+   "Handrails on 4 or more risers; guardrails on open stairs, landings, balconies and decks",
+   "Water heater relief tail pipe no more than 6 inches off the ground; outlet and switch covers secured; GFCI outlets in kitchens and baths; hard metal dryer duct",
+   "Basement renovations, additions and remodels without township records are subject to permits and inspections",
+   "Application asks for buyer name and contact and the purchase price"
+  ],
+  "fees": [
+   {
+    "label": "Residential resale certificate, one-family or condo",
+    "amount": "$225.00",
+    "quote": "ONE-FAMILY/CONDO $225.00",
+    "source_url": "https://www.bellevillenj.org/_Content/pdf/forms/RESIDENTIAL-RESALE-CERTIFICATE-APPLICATION.pdf",
+    "verified": null
+   },
+   {
+    "label": "Residential resale certificate, two-family",
+    "amount": "$300.00",
+    "quote": "TWO-FAMILY $300.00",
+    "source_url": "https://www.bellevillenj.org/_Content/pdf/forms/RESIDENTIAL-RESALE-CERTIFICATE-APPLICATION.pdf",
+    "verified": null
+   },
+   {
+    "label": "Residential resale certificate, each additional unit",
+    "amount": "$50.00",
+    "quote": "**EACH ADDITIONAL UNIT $50.00",
+    "source_url": "https://www.bellevillenj.org/_Content/pdf/forms/RESIDENTIAL-RESALE-CERTIFICATE-APPLICATION.pdf",
+    "verified": null
+   },
+   {
+    "label": "Zoning permit (Residential-Resale), part of the resale packet",
+    "amount": "$100.00",
+    "quote": "FEE - $100.00 TYPE OF APPLICATION-CHECK ONE:",
+    "source_url": "https://www.bellevillenj.org/_Content/pdf/forms/RESIDENTIAL-RESALE-CERTIFICATE-APPLICATION.pdf",
+    "verified": null
+   }
+  ],
+  "how_to_apply": "Download the Residential Resale Certificate Application from the Township forms page (Department of Community Development). The packet includes the resale certificate application, a Residential-Resale zoning permit and the smoke detector / carbon monoxide compliance application. Submit to the Code Enforcement Department, 152 Washington Avenue, Belleville, NJ 07109, with payment by money order or check (the form has an M.O. or Check # line). Extended hours for submission and pick up of the Continued Certificate of Occupancy were announced for the 2nd and 4th Wednesday of each month until 6:00 PM (2019 notice).",
+  "application_url": "https://www.bellevillenj.org/_Content/pdf/forms/RESIDENTIAL-RESALE-CERTIFICATE-APPLICATION.pdf",
+  "department_url": "https://www.bellevillenj.org/Departments/department-of-community-development",
+  "phone": "973-450-3410",
+  "email": "ndeangelis@bellevillenj.org",
+  "contact_name": "Nicholas DeAngelis",
+  "contact_title": "Director of Community Development (Construction Official: Chris Souza; Zoning Official: Brian Banda)",
+  "evidence": [
+   {
+    "url": "https://www.bellevillenj.org/_Content/pdf/forms/RESIDENTIAL-RESALE-CERTIFICATE-APPLICATION.pdf",
+    "quote": "CODE ENFORCEMENT DEPARTMENT APPLICATION FOR A RESIDENTIAL RESALE CERTIFICATE",
+    "doc_date": "2026-08-20 (PDF scan date)",
+    "via": "pdf",
+    "verified": null
+   },
+   {
+    "url": "https://www.bellevillenj.org/_Content/pdf/forms/RESIDENTIAL-RESALE-CERTIFICATE-APPLICATION.pdf",
+    "quote": "Before selling, leasing, or transferring a home, owners must pass an inspection to obtain a Certificate of Compliance for smoke alarms, carbon monoxide alarms, and portable fire extinguishers.",
+    "doc_date": "2026-08-20",
+    "via": "pdf",
+    "verified": null
+   },
+   {
+    "url": "https://www.bellevillenj.org/_Content/pdf/forms/RESIDENTIAL-RESALE-CERTIFICATE-APPLICATION.pdf",
+    "quote": "All basement renovations, additions, re-models are subject to permits and inspections if there are no township records.",
+    "doc_date": "2026-08-20",
+    "via": "pdf",
+    "verified": null
+   },
+   {
+    "url": "https://www.bellevillenj.org/News/View/1008/extended-night-hours-for-the-building-and-code-enforcement-department",
+    "quote": "Submission/ pick up of Continued Certificate of Occupancy",
+    "doc_date": "March 11, 2019",
+    "via": "page",
+    "verified": true
+   },
+   {
+    "url": "https://ecode360.com/36464465",
+    "quote": "no person shall sell, re-rent, or re-lease without first obtaining from the Construction Code Official a certificate of inspection for re-sale or re-rental",
+    "doc_date": "",
+    "via": "search_snippet",
+    "verified": null
+   }
+  ],
+  "confidence": "high",
+  "notes": "The resale application PDF is a scanned image (no text layer), so the quotes were read from the page images and a text-matching script will not find them. The forms list comes from the Township's forms data (Department of Community Development: 'Residential Resale Certificate Application'). The ecode360 Chapter 12 (Building and Housing) wording came only from a search-engine summary because ecode360 blocks direct reads; treat it as a lead. The Department of Community Development page itself has no resale text, and the old building department page returns an error. A Residential Rental / New Tenant certificate also exists but is for rentals only."
+ },
+ "fire_cert": {
+  "requirements": [
+   "Smoke alarms on every level (including basements and finished attics) and outside each separate sleeping area; unfinished attics and crawl spaces excluded",
+   "Keep existing hardwired or interconnected systems; 10-year sealed battery single-station alarms where not hardwired; alarms no more than 10 years old",
+   "Carbon monoxide alarms within 10 feet of all sleeping areas; not required if there are no fuel-burning appliances and no attached garage",
+   "Portable fire extinguisher within 10 feet of the kitchen, UL listed 2A-10B:C, no more than 10 pounds, mounted on its bracket with the top no more than 5 feet off the floor, serviced and tagged by a certified NJ contractor within 12 months or with a recent purchase receipt (form still lists it)"
+  ],
+  "authorities": [
+   {
+    "name": "Township of Belleville Code Enforcement Department (Smoke Detector/Carbon Monoxide Compliance, Ordinance #2572)",
+    "type": "municipal_fire_bureau",
+    "area_served": "Entire township",
+    "lead_time": "",
+    "fees": [
+     {
+      "label": "Smoke detector / carbon monoxide compliance certificate, one-family",
+      "amount": "$25.00",
+      "quote": "USE GROUP: (1) FAMILY $25.00",
+      "source_url": "https://www.bellevillenj.org/_Content/pdf/forms/RESIDENTIAL-RESALE-CERTIFICATE-APPLICATION.pdf",
+      "verified": null
+     },
+     {
+      "label": "Smoke detector / carbon monoxide compliance certificate, two-family",
+      "amount": "$50.00",
+      "quote": "(2) FAMILY $50.00",
+      "source_url": "https://www.bellevillenj.org/_Content/pdf/forms/RESIDENTIAL-RESALE-CERTIFICATE-APPLICATION.pdf",
+      "verified": null
+     }
+    ],
+    "how_to_apply": "Fill out the Smoke Detector/Carbon Monoxide Compliance Application (Ordinance #2572) that is part of the Residential Resale Certificate Application packet and submit it to the Code Enforcement Department, 152 Washington Avenue, (973) 450-3410. The owner or the purchaser may request it.",
+    "application_url": "https://www.bellevillenj.org/_Content/pdf/forms/RESIDENTIAL-RESALE-CERTIFICATE-APPLICATION.pdf",
+    "department_url": "https://www.bellevillenj.org/Departments/department-of-community-development",
+    "phone": "973-450-3410",
+    "email": "",
+    "contact_name": "",
+    "contact_title": "",
+    "evidence": [
+     {
+      "url": "https://www.bellevillenj.org/_Content/pdf/forms/RESIDENTIAL-RESALE-CERTIFICATE-APPLICATION.pdf",
+      "quote": "SMOKE DETECTOR/CARBON MONOXIDE COMPLIANCE APPLICATION ORDINANCE #2572",
+      "doc_date": "2026-08-20 (PDF scan date)",
+      "via": "pdf",
+      "verified": null
+     },
+     {
+      "url": "https://www.bellevillenj.org/_Content/pdf/forms/RESIDENTIAL-RESALE-CERTIFICATE-APPLICATION.pdf",
+      "quote": "Certification: Must be tagged and serviced by a certified New Jersey Division of Fire Safety contractor within the past 12 months, or accompanied by a recent retail receipt of purchase.",
+      "doc_date": "2026-08-20",
+      "via": "pdf",
+      "verified": null
+     },
+     {
+      "url": "https://www.nj.gov/dca/dfs/pdf/fire%20directory_county%20summary/fire_code_enforcement_director.pdf",
+      "quote": "LEAID: 0701-001 Belleville Twp SMOKE DETECTOR COMPLIANCE Name: Belleville Constr Enf Auth. Fire Dept Addr: 152 Washington Av Fire Official John Olivieri Phone (973) 450-3410 ... Email jolivieri@bellevillenj.org",
+      "doc_date": "survey date 9/30/2025",
+      "via": "state_directory",
+      "verified": null
+     },
+     {
+      "url": "https://nj.gov/dca/dfs/pdf/ANNUAL%20REGISTRY/THIRD%20QUARTER%20LEA%20REGISTRY%202026.pdf",
+      "quote": "F Belleville Township",
+      "doc_date": "2026-07",
+      "via": "pdf",
+      "verified": true
+     }
+    ],
+    "confidence": "high"
+   }
+  ],
+  "notes": "Belleville's own resale packet places the smoke/CO certificate with the Code Enforcement Department under Ordinance #2572, at $25.00 (one-family) and $50.00 (two-family). The state fire directory lists 'Belleville Constr' (152 Washington Av, (973) 450-3410) as the smoke detector compliance office, which matches the Township packet. The NJ DCA LEA registry lists the Belleville Fire Department as the fire code enforcing agency, and the state fire directory lists Fire Official John Olivieri, (973) 450-3366, jolivieri@bellevillenj.org; the Township directory lists the Fire Department at 973-450-3368. The Fire Department's posted forms do not include a resale smoke certificate. The packet still lists the portable fire extinguisher, which P.L.2025, c.19 dropped from the state sale requirement. The form is a scanned image, so quotes cannot be text-matched."
+ },
+ "other_items": [
+  {
+   "label": "Zoning permit (Residential-Resale)",
+   "detail": "The resale packet includes a Zoning Permit application with the Residential-Resale type checked, fee $100.00, reviewed by the Zoning Official.",
+   "source_url": "https://www.bellevillenj.org/_Content/pdf/forms/RESIDENTIAL-RESALE-CERTIFICATE-APPLICATION.pdf"
+  },
+  {
+   "label": "Permits on file for fences, sheds, pools, decks and basement work",
+   "detail": "The resale checklist says fences, sheds, pools and decks must have a permit on file, and basement renovations, additions and remodels without township records are subject to permits and inspections.",
+   "source_url": "https://www.bellevillenj.org/_Content/pdf/forms/RESIDENTIAL-RESALE-CERTIFICATE-APPLICATION.pdf"
+  }
+ ],
+ "open_questions": [
+  "How many days ahead of closing should the resale inspection be scheduled, and how long is the certificate valid?",
+  "Is there a re-inspection fee? The form has a re-inspection line but no amount.",
+  "Is the $100.00 zoning permit charged on top of the $225.00 / $300.00 resale fee for every sale?",
+  "Does the smoke/CO certificate come from Code Enforcement or from the Fire Department (the state LEA)? Does the Township still require the fire extinguisher after P.L.2025, c.19?"
+ ],
+ "verification": {
+  "fees": 6,
+  "fee_ok": 0,
+  "fee_bad": 0,
+  "fee_unchecked": 6,
+  "quotes": 9,
+  "q_ok": 2,
+  "q_bad": 0,
+  "q_unchecked": 7
+ }
+}

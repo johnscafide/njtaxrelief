@@ -1,0 +1,197 @@
+{
+ "municipality_code": "1808",
+ "municipality": "Franklin Township",
+ "county": "SOMERSET",
+ "resale_co": {
+  "status": "not_required",
+  "name": "",
+  "issued_by": "",
+  "lead_time": "",
+  "valid_for": "",
+  "requirements": [],
+  "fees": [],
+  "how_to_apply": "No Township resale Certificate of Occupancy or continued occupancy inspection for selling a home. The only Township certificate needed is the smoke alarm and carbon monoxide alarm certificate (CSACMAC) from the Fire Prevention Department (see fire certificate). The Certificate of Continued Building Compliance (CCBC) applies to commercial sales and new commercial tenants.",
+  "application_url": "",
+  "department_url": "https://www.franklintwpnj.org/departments/construction-code",
+  "phone": "732-873-7283",
+  "email": "",
+  "contact_name": "Barry Wilbur",
+  "contact_title": "Construction Official",
+  "evidence": [
+   {
+    "url": "https://www.franklintwpnj.org/departments/construction-code",
+    "quote": "A Certificate Continued Occupancy inspection is not required in Franklin Township when selling a residential home; what is required is an inspection from the Fire Prevention Department",
+    "doc_date": "2026-10-03 (page fetched)",
+    "via": "page",
+    "verified": null
+   },
+   {
+    "url": "https://www.franklintwpnj.org/departments/construction-code",
+    "quote": "A CCBC (Certificate Of Continued Building Compliance) is required if you are selling commercial building or if a new tenant is acquiring the space.",
+    "doc_date": "2026-10-03 (page fetched)",
+    "via": "page",
+    "verified": null
+   },
+   {
+    "url": "https://ecode360.com/6343588",
+    "quote": "The requirements of Article IV, with respect to the issuance of a certificate of continued building compliance for residential premises and structures, shall not be effective until such time that an ordinance is adopted by the Township which provides such effective date.",
+    "doc_date": "2026-10-03 (page fetched)",
+    "via": "page",
+    "verified": null
+   },
+   {
+    "url": "https://www.franklintwpnj.org/departments/construction-code",
+    "quote": "Main Construction Numbers: 732-873-7283",
+    "doc_date": "2026-10-03 (page fetched)",
+    "via": "page",
+    "verified": null
+   }
+  ],
+  "confidence": "high",
+  "notes": "The Construction Code page FAQ says no continued occupancy inspection is needed to sell a residential home, only the Fire Prevention inspection. Township Code Chapter 183 (Property Maintenance), read on ecode360, has a Certificate of Continued Building Compliance (CCBC) in Article IV, but its residential part is not in effect until a later ordinance sets a date; the Township's CCBC instructions (revised 10/3/14) also say it currently applies only to non-residential structures. The pages were read through a text reader because the Township site blocks automated fetches. Rental registration ($10 per unit) is a rental-only program."
+ },
+ "fire_cert": {
+  "requirements": [
+   "Smoke alarm on every level and within 10 feet of every bedroom door; alarms must be less than 10 years old",
+   "Battery-only smoke alarms must be 10-year sealed units; electric alarms may not be replaced with battery alarms, and the required type depends on when the house was built or renovated",
+   "Carbon monoxide alarm (UL 2034) in the hallway within 10 feet of every bedroom door on sleeping levels, unless the home has no fuel-burning appliances or attached garage",
+   "Homes with a residential sprinkler system need a satisfactory inspection report from a NJ licensed contractor",
+   "Homes with a secondary power source (generator, solar, battery storage) need 'CAUTION: MULTIPLE SOURCES OF POWER' labels within 18 inches of the main panel and electric meter",
+   "No fire extinguisher is listed on the Township's application or guide"
+  ],
+  "authorities": [
+   {
+    "name": "Franklin Township Fire Prevention Department",
+    "type": "municipal_fire_bureau",
+    "area_served": "Entire township",
+    "lead_time": "One week (7 days) notice from receipt of the application and fee; otherwise the rush fee applies. Inspections are Tuesdays and Thursdays, 8:00 am to 5:00 pm. The certificate is not transferable, and a new application is needed if the sale does not happen within six months.",
+    "fees": [
+     {
+      "label": "Smoke/CO certificate, initial inspection plus one reinspection",
+      "amount": "$50.00",
+      "quote": "Fees: $50.00 for initial inspection plus 1 re-inspection, if required.",
+      "source_url": "https://www.franklintwpnj.org/home/showpublisheddocument/30823/638816112785830000",
+      "verified": null
+     },
+     {
+      "label": "Each additional reinspection",
+      "amount": "$50.00",
+      "quote": "Any additional inspections require $50.00 for each additional re-inspection.",
+      "source_url": "https://www.franklintwpnj.org/home/showpublisheddocument/30823/638816112785830000",
+      "verified": null
+     },
+     {
+      "label": "Rush, less than one week (7 days) notice",
+      "amount": "$150.00",
+      "quote": "If one week/7 day’s advanced notice is not provided, inspection is $150.00 fee.",
+      "source_url": "https://www.franklintwpnj.org/home/showpublisheddocument/30823/638816112785830000",
+      "verified": null
+     },
+     {
+      "label": "No-show inspection",
+      "amount": "$50.00",
+      "quote": "*“No Show” inspections require an additional $50.00 fee.",
+      "source_url": "https://www.franklintwpnj.org/home/showpublisheddocument/30823/638816112785830000",
+      "verified": null
+     },
+     {
+      "label": "Residential fire suppression (sprinkler) system inspection at the time of the smoke/CO inspection",
+      "amount": "$25.00",
+      "quote": "A $25.00 fee for automatic residential fire suppression system inspection done at time of CSACMAC inspection, $25.00 for each re-inspection.",
+      "source_url": "https://www.franklintwpnj.org/home/showpublisheddocument/30823/638816112785830000",
+      "verified": null
+     }
+    ],
+    "how_to_apply": "Download and print the Smoke Detector Application from the Fire Prevention page, fill it out and submit it with the prepaid fee (checks payable to 'Franklin Township') to the Fire Prevention Department, 475 DeMott Lane, Somerset. The inspection is scheduled only after the completed application and fee are received.",
+    "application_url": "https://www.franklintwpnj.org/home/showpublisheddocument/30823/638816112785830000",
+    "department_url": "https://www.franklintwpnj.org/departments/fire-prevention",
+    "phone": "732-873-2500 ext. 6303",
+    "email": "john.hauss@twp.franklin.nj.us",
+    "contact_name": "John J. Hauss",
+    "contact_title": "Director of Fire Prevention",
+    "evidence": [
+     {
+      "url": "https://ecode360.com/6342791",
+      "quote": "Before any Use Group R-3, R-4 or R-5 structure in Franklin Township is sold, leased, or otherwise made subject to a change of occupancy for residential purposes, the owner shall obtain a certificate of smoke detector and carbon monoxide alarm compliance (CSDCMAC) compliance evidencing compliance with N.J.A.C. 5:70-4.19, from the Franklin Township Department of Fire Prevention.",
+      "doc_date": "2003-12-11 (Ord. 3414)",
+      "via": "page",
+      "verified": null
+     },
+     {
+      "url": "https://ecode360.com/6342795",
+      "quote": "If the change of occupancy specified on the application for a CSDCMAC does not occur within six months, a new application shall be required.",
+      "doc_date": "2026-10-03 (page fetched)",
+      "via": "page",
+      "verified": null
+     },
+     {
+      "url": "https://ecode360.com/6342807",
+      "quote": "For rush inspections scheduled with less than seven days' notice: $150.",
+      "doc_date": "2010-07-13 (Ord. No. 3888)",
+      "via": "page",
+      "verified": null
+     },
+     {
+      "url": "https://www.franklintwpnj.org/home/showpublisheddocument/30823/638816112785830000",
+      "quote": "**** INSPECTIONS: TUESDAYS AND THURSDAYS 8:00 AM TO 5:00 PM ****",
+      "doc_date": "Updated 4/24/25",
+      "via": "pdf",
+      "verified": null
+     },
+     {
+      "url": "https://www.franklintwpnj.org/home/showpublisheddocument/30823/638816112785830000",
+      "quote": "THE PENALTY FOR CLOSING OR LEASING BEFORE CSACMAC IS ISSUED - $500.00.",
+      "doc_date": "Updated 4/24/25",
+      "via": "pdf",
+      "verified": null
+     },
+     {
+      "url": "https://www.franklintwpnj.org/departments/fire-prevention",
+      "quote": "John J. Hauss, Director of Fire Prevention",
+      "doc_date": "2026-10-03 (page fetched)",
+      "via": "page",
+      "verified": null
+     },
+     {
+      "url": "https://www.franklintwpnj.org/departments/fire-prevention",
+      "quote": "732-873-2500 x6303",
+      "doc_date": "2026-10-03 (page fetched)",
+      "via": "page",
+      "verified": null
+     },
+     {
+      "url": "https://www.nj.gov/dca/dfs/pdf/fire%20directory_county%20summary/fire_code_enforcement_director.pdf",
+      "quote": "LEAID: 1808-001 Franklin Twp ... Name: Franklin Twp Fire Prev Addr: 475 De Mott Ln ... Enf Auth. Municipal ... Fire Official John J Hauss Phone (732) 873-2500 ... Email john.hauss@twp.franklin.nj.us",
+      "doc_date": "survey date 1/21/2026",
+      "via": "state_directory",
+      "verified": null
+     },
+     {
+      "url": "https://nj.gov/dca/dfs/pdf/ANNUAL%20REGISTRY/THIRD%20QUARTER%20LEA%20REGISTRY%202026.pdf",
+      "quote": "M Franklin Township",
+      "doc_date": "2026-07",
+      "via": "pdf",
+      "verified": true
+     }
+    ],
+    "confidence": "high"
+   }
+  ],
+  "notes": "Fees are the same in the Township's application (updated 4/24/25) and Township Code Section 132-18 (Ord. No. 3888, 2010). The rush tier is based on notice before the inspection, not days before closing. The Township's form already drops the fire extinguisher (it is a CSACMAC, not a CSACMAPFEC), in line with P.L.2025, c.19. The NJ DCA LEA registry lists Franklin Township (Somerset) as a municipal (M) agency that also serves Millstone Borough; packs.json flagged the LEA name as ambiguous because several NJ towns are named Franklin Township, and the Somerset County entry is the one used here. Contact email is from the state fire directory."
+ },
+ "other_items": [],
+ "open_questions": [
+  "Does the Township require a final water meter reading or Water Department notice on a residential sale? The code ties that to the CCBC, which is not in effect for homes."
+ ],
+ "checked_at": "2026-10-03",
+ "verification": {
+  "fees": 5,
+  "fee_ok": 0,
+  "fee_bad": 0,
+  "fee_unchecked": 5,
+  "quotes": 13,
+  "q_ok": 1,
+  "q_bad": 0,
+  "q_unchecked": 12
+ }
+}

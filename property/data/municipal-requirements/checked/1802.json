@@ -1,0 +1,224 @@
+{
+ "municipality_code": "1802",
+ "municipality": "Bernards Township",
+ "county": "SOMERSET",
+ "resale_co": {
+  "status": "required",
+  "name": "Construction Records Clearance (CRC)",
+  "issued_by": "Bernards Township Code Enforcement Division (Construction Code office)",
+  "lead_time": "Owner or agent must apply at least 10 business days before the change of ownership; the fee rises inside 10 and 4 calendar days of closing.",
+  "valid_for": "",
+  "requirements": [
+   "Records check (not a physical inspection) that there are no open construction or zoning permits",
+   "If permits are open, all final inspections and approvals must be done and certificates issued before the CRC",
+   "Application lists the closing date (required), home type, approximate year built, and whether there is a pool, pool fence, finished basement or second kitchen, and whether the address is displayed on the building",
+   "Exempt if there is no change in physical occupancy for deed corrections, transfers between spouses, estate distributions, refinancing and similar transfers; rentals are exempt"
+  ],
+  "fees": [
+   {
+    "label": "CRC, request more than 10 calendar days before closing",
+    "amount": "$40",
+    "quote": "Requests more than 10 calendar days from change of occupancy or closing: $40.",
+    "source_url": "https://ecode360.com/11919082",
+    "verified": null
+   },
+   {
+    "label": "CRC, request within 10 calendar days of closing",
+    "amount": "$75",
+    "quote": "Requests within 10 calendar days from change of occupancy or closing: $75.",
+    "source_url": "https://ecode360.com/11919082",
+    "verified": null
+   },
+   {
+    "label": "CRC, request within 4 calendar days of closing",
+    "amount": "$125",
+    "quote": "Requests within four calendar days from change of occupancy or closing: $125.",
+    "source_url": "https://ecode360.com/11919082",
+    "verified": null
+   }
+  ],
+  "how_to_apply": "Use the Construction Records Clearance Application in the Township's 'Selling or Renting Your Home' packet, or apply online, and mail or bring it with payment (cash or check) to Bernards Township Code Enforcement, 277 S. Maple Ave., Basking Ridge, NJ 07920, ATTN: CRC Certificate. The certificate is emailed to the owner or agent.",
+  "application_url": "https://www.bernards.org/government/forms/construction/documents-1/1149-selling-your-home-pdf/file",
+  "department_url": "https://www.bernards.org/departments/construction",
+  "phone": "908-204-3173",
+  "email": "",
+  "contact_name": "Dennis Bettler",
+  "contact_title": "Construction Official",
+  "evidence": [
+   {
+    "url": "https://ecode360.com/11919082",
+    "quote": "A CRC shall be required prior to the sale of any residential structure within the Township.",
+    "doc_date": "2021-04-27 (Ord. #2467)",
+    "via": "page",
+    "verified": null
+   },
+   {
+    "url": "https://ecode360.com/11919082",
+    "quote": "The owner or his authorized agent shall submit a written application and payment of fees at least 10 business days prior to the change of ownership on the form provided by the Township.",
+    "doc_date": "2026-10-03 (page fetched)",
+    "via": "page",
+    "verified": null
+   },
+   {
+    "url": "https://www.bernards.org/departments/construction",
+    "quote": "Bernards Township requires a Construction Records Clearance for all property sales in addition to the Smoke Detector/Carbon Monoxide/Fire Extinguisher Certificate from the Fire Prevention Bureau for sales and rentals. There is no Certificate of Occupancy required for a sale or rental.",
+    "doc_date": "2026-10-03 (page fetched)",
+    "via": "page",
+    "verified": true
+   },
+   {
+    "url": "https://www.bernards.org/government/forms/construction/documents-1/1149-selling-your-home-pdf/file",
+    "quote": "A Construction Records Clearance from the Code Enforcement Division. Questions call 908-204-3173.",
+    "doc_date": "Revised June 2026",
+    "via": "pdf",
+    "verified": true
+   },
+   {
+    "url": "https://www.bernards.org/government/forms/construction/documents-1/1149-selling-your-home-pdf/file",
+    "quote": "[ ] $40.00 Requests received more than 10 calendar days from change of occupancy/closing.",
+    "doc_date": "Revised 06/2026",
+    "via": "pdf",
+    "verified": true
+   },
+   {
+    "url": "https://www.bernards.org/departments/construction",
+    "quote": "Dennis Bettler Construction Official (908) 204-3030",
+    "doc_date": "2026-10-03 (page fetched)",
+    "via": "page",
+    "verified": true
+   }
+  ],
+  "confidence": "high",
+  "notes": "Bernards does not require a resale Certificate of Occupancy inspection; its Construction page says so. What it does require on every residential sale is a Construction Records Clearance, a desk check for open construction and zoning permits, from the Code Enforcement Division (Township Code Section 12-2, read on ecode360; the same text and fees are printed in the June 2026 'Selling or Renting Your Home' packet). Owners and buyers are jointly responsible; violations can bring a fine up to $1,000. Code Enforcement questions: 908-204-3173 (from the packet). Construction Official Dennis Bettler, (908) 204-3030, dbettler@bernards.org (Construction page). Landlord registration is a rental-only program."
+ },
+ "fire_cert": {
+  "requirements": [
+   "Smoke alarms located per N.J.A.C. 5:70-4.19 and maintained per NFPA 72",
+   "Carbon monoxide alarms located per N.J.A.C. 5:70-4.19 and maintained per NFPA 720",
+   "Portable fire extinguisher installed per N.J.A.C. 5:70-4.19(e) (Township code and Bureau page still list it)",
+   "Homes with an installed fire alarm system may need to show testing and maintenance records",
+   "New owners or tenants may not move in before the inspection"
+  ],
+  "authorities": [
+   {
+    "name": "Bernards Township Fire Prevention Bureau",
+    "type": "municipal_fire_bureau",
+    "area_served": "Entire township",
+    "lead_time": "Fee depends on how close to the change of occupancy the inspection is requested: more than 10 days for the lowest fee. Pay within 24 hours of booking if paying in person or the time slot is not held.",
+    "fees": [
+     {
+      "label": "Smoke alarm, CO alarm and extinguisher certificate, standard",
+      "amount": "$50",
+      "quote": "A fee of $50 shall be paid by the owner prior to each inspection.",
+      "source_url": "https://ecode360.com/11919168",
+      "verified": null
+     },
+     {
+      "label": "Requested within 10 days of the change of occupancy",
+      "amount": "$100",
+      "quote": "If the inspection is requested within 10 days of the change of occupancy or ownership, a fee of $100 shall be paid.",
+      "source_url": "https://ecode360.com/11919168",
+      "verified": null
+     },
+     {
+      "label": "Requested within 4 days of the change of occupancy",
+      "amount": "$150",
+      "quote": "If the inspection is requested within four days of the change of occupancy or ownership, a fee of $150 shall be paid.",
+      "source_url": "https://ecode360.com/11919168",
+      "verified": null
+     }
+    ],
+    "how_to_apply": "Create a free SDL Portal account and fill out the Township's smoke detector certification form online (link in the 'Selling or Renting Your Home' packet), choose an inspection date and time, and pay online (surcharge) or in person at 277 South Maple Avenue within 24 hours. Questions: 908-204-2511.",
+    "application_url": "https://www.sdlportal.com/towns/nj/somerset/bernardstwp/forms/7471cf56-d2e1-4ce7-9e5b-d489858433cf?wf=1",
+    "department_url": "https://www.bernards.org/departments/fire-prevention",
+    "phone": "908-204-2511",
+    "email": "rvondensteinen@bernards.org",
+    "contact_name": "Richard Von den Steinen",
+    "contact_title": "Fire Official",
+    "evidence": [
+     {
+      "url": "https://www.bernards.org/departments/fire-prevention",
+      "quote": "If you are planning to sell, rent/lease or otherwise change occupancy of your home, you are required to obtain a Certificate of Smoke Alarm, Carbon Monoxide and Portable Fire Extinguisher Compliance from the Bernards Township Fire Prevention Bureau.",
+      "doc_date": "2026-10-03 (page fetched)",
+      "via": "page",
+      "verified": true
+     },
+     {
+      "url": "https://www.bernards.org/departments/fire-prevention",
+      "quote": "Please be aware that any sale, rental, or change of occupancy that occurs without a CSACMAPFEC (Smoke Cert) from Bernards Township Fire Prevention is subject to penalty of up to $500.00.",
+      "doc_date": "2026-10-03 (page fetched)",
+      "via": "page",
+      "verified": true
+     },
+     {
+      "url": "https://ecode360.com/11919166",
+      "quote": "no owner shall sell, lease or otherwise permit occupancy for residential purposes of that building without first obtaining a certificate evidencing compliance with this section.",
+      "doc_date": "2026-10-03 (page fetched)",
+      "via": "page",
+      "verified": null
+     },
+     {
+      "url": "https://www.bernards.org/government/forms/construction/documents-1/1149-selling-your-home-pdf/file",
+      "quote": "An inspection and Certification of Smoke & Carbon Monoxide Detectors and Fire Extinguisher from the Bureau of Fire Prevention. Questions call 908-204-2511.",
+      "doc_date": "Revised June 2026",
+      "via": "pdf",
+      "verified": true
+     },
+     {
+      "url": "https://www.bernards.org/government/documents/forms-documents/department-documents/fire-prevention/fire-prevention-forms/fire-prevention-documents/4719-selling-or-renting-a-home-in-bernards-twp-2025-guidelines/file",
+      "quote": "Pay in person- Please make payment within 24 hours - We cannot hold the time slot without payment.",
+      "doc_date": "2026-09-28 (PDF modified)",
+      "via": "pdf",
+      "verified": true
+     },
+     {
+      "url": "https://www.bernards.org/departments/fire-prevention",
+      "quote": "Richard Von den Steinen Fire Official",
+      "doc_date": "2026-10-03 (page fetched)",
+      "via": "page",
+      "verified": true
+     },
+     {
+      "url": "https://www.nj.gov/dca/dfs/pdf/fire%20directory_county%20summary/fire_code_enforcement_director.pdf",
+      "quote": "LEAID: 1802-001 Bernards Twp ... Name: Bernards Twp Fire Prev Addr: 277 S Maple Av ... Enf Auth. Municipal ... Fire Official Richard Von Den Steine Phone (908) 204-2511 ... Email rvondensteinen@bernards.org",
+      "doc_date": "survey date 1/14/2026",
+      "via": "state_directory",
+      "verified": null
+     },
+     {
+      "url": "https://nj.gov/dca/dfs/pdf/ANNUAL%20REGISTRY/THIRD%20QUARTER%20LEA%20REGISTRY%202026.pdf",
+      "quote": "M Bernards Township",
+      "doc_date": "2026-07",
+      "via": "pdf",
+      "verified": true
+     }
+    ],
+    "confidence": "high"
+   }
+  ],
+  "notes": "Fees are from Township Code Section 14-3A.6 (Ord. #2334, 3-29-2016), read on ecode360; the tiers count days before the change of occupancy or ownership. The code's penalty section says a fine of not less than $500 per offense, while the Bureau page says a penalty of up to $500.00. The Township code, the Bureau page and the packet still list a portable fire extinguisher, which state law (P.L.2025, c.19) dropped from the sale certificate in February 2025; confirm with the Bureau."
+ },
+ "other_items": [
+  {
+   "label": "Open construction and zoning permits",
+   "detail": "All open construction or zoning permits must be finaled before the Construction Records Clearance is issued.",
+   "source_url": "https://ecode360.com/11919082"
+  }
+ ],
+ "open_questions": [
+  "Does the Fire Prevention Bureau still require a portable fire extinguisher at resale after P.L.2025, c.19?",
+  "Is there a reinspection fee for the smoke certificate? The code says the fee is paid before each inspection.",
+  "What is the online surcharge for paying through the SDL Portal?"
+ ],
+ "checked_at": "2026-10-03",
+ "verification": {
+  "fees": 6,
+  "fee_ok": 0,
+  "fee_bad": 0,
+  "fee_unchecked": 6,
+  "quotes": 14,
+  "q_ok": 10,
+  "q_bad": 0,
+  "q_unchecked": 4
+ }
+}

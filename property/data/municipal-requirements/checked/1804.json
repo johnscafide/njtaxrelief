@@ -1,0 +1,183 @@
+{
+ "municipality_code": "1804",
+ "municipality": "Bound Brook Borough",
+ "county": "SOMERSET",
+ "resale_co": {
+  "status": "required",
+  "name": "Certificate of Smoke Alarm Carbon Monoxide Fire Extinguisher Housing Compliance (CSACMFEHC), formerly the Re-Sale / Re-Rent Certificate of Occupancy",
+  "issued_by": "Borough of Bound Brook Bureau of Fire Prevention (Fire Official / Fire Marshal)",
+  "lead_time": "Fee must be paid before the inspection is scheduled; the certificate is issued within six business days of the inspection if the property complies",
+  "valid_for": "",
+  "requirements": [
+   "Inspection by the Fire Marshal or designee for compliance with Borough regulations, including Property Maintenance (Chapter 17), and construction and fire codes",
+   "Application pages 1 and 2 complete for every unit in the building on a sale (buyer name and contact, property type, bedrooms, baths, occupants)",
+   "Smoke alarms, carbon monoxide alarms and fire extinguisher compliance (the certificate name still includes a fire extinguisher)",
+   "Hot water heater must be grounded (re-sales)",
+   "House address must be on the front of the house and visible from the road (re-sales)",
+   "Affidavits are no longer accepted"
+  ],
+  "fees": [
+   {
+    "label": "CSACMFEHC (resale/re-rent housing and smoke/CO certificate), per inspection",
+    "amount": "$125",
+    "quote": "FEES: $125 PER INSPECTION",
+    "source_url": "https://boundbrook-nj.org/wp-content/uploads/2022/03/Re-rent-Sale-CO-Application-No-affidavit.pdf",
+    "verified": true
+   },
+   {
+    "label": "Rescheduling a no-show inspection",
+    "amount": "$75",
+    "quote": "In addition, the fee to reschedule a no-show inspection or shall be $75.",
+    "source_url": "https://boundbrook-nj.org/wp-content/uploads/2022/03/Re-rent-Sale-CO-Application-No-affidavit.pdf",
+    "verified": true
+   }
+  ],
+  "how_to_apply": "Fill out the Application for CSACMFEHC (seller completes page 2 for every unit), pay $125 per unit before the inspection is scheduled, and submit to the Bureau of Fire Prevention. The office emails the certificate after the home passes. Fire Prevention, 230 Hamilton Street, Bound Brook, NJ 08805.",
+  "application_url": "https://boundbrook-nj.org/wp-content/uploads/2022/03/Re-rent-Sale-CO-Application-No-affidavit.pdf",
+  "department_url": "https://boundbrook-nj.org/permits-and-forms/",
+  "phone": "(732) 356-0833",
+  "email": "emickelson@boundbrook-nj.org",
+  "contact_name": "Erik J Mickelsen",
+  "contact_title": "Fire Official (NJ DCA fire directory)",
+  "evidence": [
+   {
+    "url": "https://boundbrook-nj.org/wp-content/uploads/2022/03/Re-rent-Sale-CO-Application-No-affidavit.pdf",
+    "quote": "Certificate of Smoke Alarm Carbon Monoxide Fire Extinguisher Housing Compliance (formerly Re-Rent or Re-Sale)",
+    "doc_date": "2022-03 (upload folder)",
+    "via": "pdf",
+    "verified": true
+   },
+   {
+    "url": "https://boundbrook-nj.org/wp-content/uploads/2022/03/Re-rent-Sale-CO-Application-No-affidavit.pdf",
+    "quote": "When the inspection is completed and passed the office will EMAIL you the Certificate of Occupancy",
+    "doc_date": "2022-03",
+    "via": "pdf",
+    "verified": true
+   },
+   {
+    "url": "https://boundbrook-nj.org/wp-content/uploads/2022/03/Re-rent-Sale-CO-Application-No-affidavit.pdf",
+    "quote": "AFFIDAVITS ARE NO LONGER ACCEPTED",
+    "doc_date": "2022-03",
+    "via": "pdf",
+    "verified": true
+   },
+   {
+    "url": "https://boundbrook-nj.org/wp-content/uploads/2022/03/Re-rent-Sale-CO-Application-No-affidavit.pdf",
+    "quote": "1) Hot Water heater MUST be grounded",
+    "doc_date": "2022-03",
+    "via": "pdf",
+    "verified": true
+   },
+   {
+    "url": "https://ecode360.com/32680961",
+    "quote": "The inspection fee for a CSACMFEHC shall be $125 per dwelling unit and includes re-rents.",
+    "doc_date": "",
+    "via": "search_snippet",
+    "verified": null
+   },
+   {
+    "url": "https://ecode360.com/32680961",
+    "quote": "Before a CSACMFEHC shall be issued the Fire Marshal or designee shall make an inspection of the premises to determine whether the certificate may or may not be issued.",
+    "doc_date": "",
+    "via": "search_snippet",
+    "verified": null
+   },
+   {
+    "url": "https://www.nj.gov/dca/dfs/pdf/fire%20directory_county%20summary/fire_code_enforcement_director.pdf",
+    "quote": "emickelson@boundbrook-nj.org",
+    "doc_date": "2026-05 (survey date 5/27/2026)",
+    "via": "state_directory",
+    "verified": null
+   }
+  ],
+  "confidence": "high",
+  "notes": "Bound Brook uses one Fire Prevention certificate (CSACMFEHC) for both the resale housing inspection and the state smoke/CO certificate. The application quotes Borough ordinance 18-8.3: each transfer of ownership or rental of single family, two family or multi-family residences needs a CSACMFEHC from the Fire Official certifying compliance with Borough regulations including Property Maintenance (Chapter 17), plus construction and fire codes. The current ecode360 text (seen only through search results) says $125 per dwelling unit. The Borough website blocks scripted fetches; the form was read from the Permits and Forms page. Rental licensing and vacant property registration are separate programs and not resale requirements. The NJ DCA directory email reads \"emickelson\" while the name is spelled Mickelsen."
+ },
+ "fire_cert": {
+  "requirements": [
+   "Smoke alarms and carbon monoxide alarms per the Uniform Fire Code (checklist on pages 3 and 4 of the Borough application, which are images)",
+   "Fire extinguisher (still in the certificate name and ordinance; the state dropped it from the sale certificate in February 2025)",
+   "Hot water heater grounded and address visible from the road (Borough re-sale items checked at the same inspection)"
+  ],
+  "authorities": [
+   {
+    "name": "Borough of Bound Brook Bureau of Fire Prevention",
+    "type": "municipal_fire_bureau",
+    "area_served": "Entire borough",
+    "lead_time": "Pay before scheduling; certificate issued within six business days of the inspection if compliant. No tiered short-notice fee is published.",
+    "fees": [
+     {
+      "label": "CSACMFEHC (resale/re-rent housing and smoke/CO certificate), per inspection",
+      "amount": "$125",
+      "quote": "FEES: $125 PER INSPECTION",
+      "source_url": "https://boundbrook-nj.org/wp-content/uploads/2022/03/Re-rent-Sale-CO-Application-No-affidavit.pdf",
+      "verified": true
+     },
+     {
+      "label": "Rescheduling a no-show inspection",
+      "amount": "$75",
+      "quote": "In addition, the fee to reschedule a no-show inspection or shall be $75.",
+      "source_url": "https://boundbrook-nj.org/wp-content/uploads/2022/03/Re-rent-Sale-CO-Application-No-affidavit.pdf",
+      "verified": true
+     }
+    ],
+    "how_to_apply": "Same application as the resale certificate (Application for CSACMFEHC); one inspection covers both.",
+    "application_url": "https://boundbrook-nj.org/wp-content/uploads/2022/03/Re-rent-Sale-CO-Application-No-affidavit.pdf",
+    "department_url": "https://boundbrook-nj.org/permits-and-forms/",
+    "phone": "(732) 356-0833",
+    "email": "emickelson@boundbrook-nj.org",
+    "contact_name": "Erik J Mickelsen",
+    "contact_title": "Fire Official",
+    "evidence": [
+     {
+      "url": "https://boundbrook-nj.org/wp-content/uploads/2022/03/Re-rent-Sale-CO-Application-No-affidavit.pdf",
+      "quote": "BOROUGH OF BOUND BROOK ­ Bureau of Fire Prevention - Application for CSACMFEHC",
+      "doc_date": "2022-03",
+      "via": "pdf",
+      "verified": true
+     },
+     {
+      "url": "https://boundbrook-nj.org/wp-content/uploads/2022/03/Re-rent-Sale-CO-Application-No-affidavit.pdf",
+      "quote": "Inspection Fees are due prior to scheduling inspection.",
+      "doc_date": "2022-03",
+      "via": "pdf",
+      "verified": true
+     },
+     {
+      "url": "https://www.nj.gov/dca/dfs/pdf/fire%20directory_county%20summary/fire_code_enforcement_director.pdf",
+      "quote": "Fire Official Erik J Mickelsen",
+      "doc_date": "2026-05 (survey date 5/27/2026)",
+      "via": "state_directory",
+      "verified": null
+     },
+     {
+      "url": "https://www.nj.gov/dca/dfs/pdf/fire%20directory_county%20summary/fire_code_enforcement_director.pdf",
+      "quote": "Bound Brook Boro Fire Prev",
+      "doc_date": "2026-05 (survey date 5/27/2026)",
+      "via": "state_directory",
+      "verified": null
+     }
+    ],
+    "confidence": "high"
+   }
+  ],
+  "notes": "The fire certificate and the resale housing certificate are the same Borough document. The NJ DCA LEA registry code for Bound Brook is M (multiple); the state fire directory lists Bound Brook Boro Fire Prev, 230 Hamilton St, as the smoke detector compliance office. The ordinance and certificate name still include a fire extinguisher, which P.L.2025, c.19 removed from the state sale certificate; confirm whether the Borough still checks for one."
+ },
+ "other_items": [],
+ "open_questions": [
+  "Is the CSACMFEHC fee still $125 per unit, and is there an online way to apply or pay?",
+  "How far ahead of closing should the application be filed, and how long is the certificate good for?",
+  "Does the Borough still require a fire extinguisher for the certificate after P.L.2025, c.19?"
+ ],
+ "checked_at": "2026-10-03",
+ "verification": {
+  "fees": 4,
+  "fee_ok": 4,
+  "fee_bad": 0,
+  "fee_unchecked": 0,
+  "quotes": 11,
+  "q_ok": 6,
+  "q_bad": 0,
+  "q_unchecked": 5
+ }
+}

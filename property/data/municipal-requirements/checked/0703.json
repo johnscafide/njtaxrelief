@@ -1,0 +1,198 @@
+{
+ "municipality_code": "0703",
+ "municipality": "Caldwell Borough",
+ "county": "ESSEX",
+ "resale_co": {
+  "status": "required",
+  "name": "Certificate of Continued Occupancy (CCO)",
+  "issued_by": "Borough of Caldwell Construction Department (Property Maintenance / Zoning Official / Code Enforcement)",
+  "lead_time": "Application must be submitted at least 10 days before closing",
+  "valid_for": "90 days after issuance (Borough code, seen through search results)",
+  "requirements": [
+   "Inspection of the home by the Borough before sale or transfer of title",
+   "All open permits must be closed before the certificate is issued",
+   "Smoke alarm, carbon monoxide alarm and fire extinguisher check is done as part of the CCO inspection (see fire certificate)",
+   "Borough also requires an explosive gas detector on each occupied level",
+   "Certificate is not issued until final payment is received and cleared"
+  ],
+  "fees": [
+   {
+    "label": "Certificate of Continued Occupancy (CCO), per unit",
+    "amount": "$100",
+    "quote": "Fee: $100 per unit; No. Units",
+    "source_url": "https://caldwell-nj.com/vertical/sites/%7B6BAC054F-223B-4082-A606-DE1D76D33F98%7D/uploads/CCO_Applicantion.pdf",
+    "verified": null
+   }
+  ],
+  "how_to_apply": "Fill out the Borough's Application for Certificate of Occupancy/CCO (current owner, prospective owner, number of units, tentative closing date) and submit it with the fee to the Construction Department at Borough Hall, 80 Bloomfield Avenue, at least 10 days before closing. Pay by check.",
+  "application_url": "https://caldwell-nj.com/vertical/sites/%7B6BAC054F-223B-4082-A606-DE1D76D33F98%7D/uploads/CCO_Applicantion.pdf",
+  "department_url": "https://caldwell-nj.com/construction",
+  "phone": "973-403-4629",
+  "email": "fireofficial@caldwell-nj.com",
+  "contact_name": "Mark Guiliano",
+  "contact_title": "Property Maintenance / Zoning Official / Code Enforcement (also the Borough fire official)",
+  "evidence": [
+   {
+    "url": "https://ecode360.com/28506499",
+    "quote": "No owner of any building, dwelling, or dwelling unit shall sell or transfer title of same without first obtaining a certificate of continued occupancy from the Construction Department of the Borough of Caldwell.",
+    "doc_date": "Amended 6-22-2021 by Ord. No. 1412-21",
+    "via": "search_snippet",
+    "verified": null
+   },
+   {
+    "url": "https://ecode360.com/28506499",
+    "quote": "A certificate of continued occupancy shall be valid 90 days after date of the issuance of the certificate, after which the certificate will expire.",
+    "doc_date": "Amended 6-22-2021 by Ord. No. 1412-21",
+    "via": "search_snippet",
+    "verified": null
+   },
+   {
+    "url": "https://caldwell-nj.com/vertical/sites/%7B6BAC054F-223B-4082-A606-DE1D76D33F98%7D/uploads/CCO_Applicantion.pdf",
+    "quote": "(Application must be submitted at last 10 days prior to closing)",
+    "doc_date": "",
+    "via": "pdf",
+    "verified": null
+   },
+   {
+    "url": "https://caldwell-nj.com/vertical/sites/%7B6BAC054F-223B-4082-A606-DE1D76D33F98%7D/uploads/CCO_Applicantion.pdf",
+    "quote": "ALL OPEN PERMITS MUST BE CLOSED PRIOR TO A CERTIFICATE OF APPROVAL BEING ISSUED!",
+    "doc_date": "",
+    "via": "pdf",
+    "verified": null
+   },
+   {
+    "url": "https://caldwell-nj.com/vertical/sites/%7B6BAC054F-223B-4082-A606-DE1D76D33F98%7D/uploads/CCO_Applicantion.pdf",
+    "quote": "Certificates are not issued until final payment is received/ cleared",
+    "doc_date": "",
+    "via": "pdf",
+    "verified": null
+   },
+   {
+    "url": "https://caldwell-nj.com/vertical/sites/%7B6BAC054F-223B-4082-A606-DE1D76D33F98%7D/uploads/Uniform_fire_code_Required_Certificate_for_1_2_family_Dwellings.pdf",
+    "quote": "In addition to the \"Certificate of Continued Occupancy\" for the sale of any building within the Borough of Caldwell",
+    "doc_date": "",
+    "via": "pdf",
+    "verified": true
+   },
+   {
+    "url": "https://caldwell-nj.com/construction",
+    "quote": "Property Maintenance / Zoning Official / Code Enforcement",
+    "doc_date": "2026-10-03 (page fetched)",
+    "via": "page",
+    "verified": true
+   },
+   {
+    "url": "https://caldwell-nj.com/construction",
+    "quote": "Mark Guiliano, 973-403-4629",
+    "doc_date": "2026-10-03 (page fetched)",
+    "via": "page",
+    "verified": true
+   }
+  ],
+  "confidence": "high",
+  "notes": "The Borough application PDF (two versions are posted; the Construction page links CCO_App(1).pdf with the old Smull Avenue address, the Municipal Forms page links CCO_Applicantion.pdf with 80 Bloomfield Avenue) is a scanned image, so its quotes are read by eye and may not be machine-checkable. The form says 'at last 10 days', a typo for 'at least'. The code section (ecode360, Amended 6-22-2021 by Ord. No. 1412-21) could only be read through search results; a search snippet also mentioned a $100 application fee and $25 reinspection fee for certificates of continued occupancy, but it could not be tied to Caldwell's page, so only the form fee is listed. Rental licensing and landlord registration are separate rental programs, not resale items. A 'Certificate of Occupancy Upon Vacancy' form is also posted on the Municipal Forms page for vacated units."
+ },
+ "fire_cert": {
+  "requirements": [
+   "Smoke alarm on each level including the basement (not unfinished attics), outside sleeping areas; 10-year sealed battery units where no hardwired system is required",
+   "Hardwired, interconnected systems required at construction or renovation must be in place and working; battery alarms not accepted in that case",
+   "Carbon monoxide alarm outside sleeping rooms on each level with bedrooms; combination smoke/CO allowed",
+   "Alarms must be within service life, UL approved, with fresh batteries; mounted with proper fasteners (no Velcro or tape)",
+   "Explosive gas detector on each occupied level (Borough requirement)",
+   "Two family homes also need smoke alarms at the top of each common stairwell",
+   "Class A-B-C fire extinguisher, no more than 10 lbs, mounted no higher than 48 inches in or within 10 feet of the kitchen (form still lists it)",
+   "Monitored low-voltage alarm systems must be put on test with the monitoring company before the inspection"
+  ],
+  "authorities": [
+   {
+    "name": "Borough of Caldwell Fire Prevention Bureau (Fire Official Mark Guiliano), done as part of the CCO inspection",
+    "type": "municipal_fire_bureau",
+    "area_served": "Entire borough",
+    "lead_time": "Done during the CCO inspection; CCO application must be in at least 10 days before closing. Fire inspections are scheduled Wednesday 10:00am-12:00pm per the Construction page.",
+    "fees": [],
+    "how_to_apply": "No separate application. The smoke detector, carbon monoxide, explosive gas and fire extinguisher certificate is issued with the CCO, at no additional cost. Questions: Fire Prevention Bureau, 973-403-4629.",
+    "application_url": "https://caldwell-nj.com/vertical/sites/%7B6BAC054F-223B-4082-A606-DE1D76D33F98%7D/uploads/CCO_Applicantion.pdf",
+    "department_url": "https://caldwell-nj.com/construction",
+    "phone": "973-403-4629",
+    "email": "fireofficial@caldwell-nj.com",
+    "contact_name": "Mark Guiliano",
+    "contact_title": "Fire Official",
+    "evidence": [
+     {
+      "url": "https://caldwell-nj.com/vertical/sites/%7B6BAC054F-223B-4082-A606-DE1D76D33F98%7D/uploads/Uniform_fire_code_Required_Certificate_for_1_2_family_Dwellings.pdf",
+      "quote": "In Caldwell, a \"Certificate Of Smoke Detector, Carbon Monoxide, Explosive Gas, and Portable Fire Extinguisher Compliance\" is included as part of your CCO inspection at no additional cost.",
+      "doc_date": "",
+      "via": "pdf",
+      "verified": true
+     },
+     {
+      "url": "https://caldwell-nj.com/vertical/sites/%7B6BAC054F-223B-4082-A606-DE1D76D33F98%7D/uploads/Uniform_fire_code_Required_Certificate_for_1_2_family_Dwellings.pdf",
+      "quote": "Caldwell requires an “EXPLOSIVE GAS DETECTOR” be present on each occupied level.",
+      "doc_date": "",
+      "via": "pdf",
+      "verified": true
+     },
+     {
+      "url": "https://caldwell-nj.com/vertical/sites/%7B6BAC054F-223B-4082-A606-DE1D76D33F98%7D/uploads/Uniform_fire_code_Required_Certificate_for_1_2_family_Dwellings.pdf",
+      "quote": "If you have any questions, please contact the Fire Prevention Bureau at 973-403-4629",
+      "doc_date": "",
+      "via": "pdf",
+      "verified": true
+     },
+     {
+      "url": "https://caldwell-nj.com/faq",
+      "quote": "Contact Mark Guiliano at 973-403-4629, or at fireofficial@caldwell-nj.org . There is a fee for this service.",
+      "doc_date": "2026-10-03 (page fetched)",
+      "via": "page",
+      "verified": true
+     },
+     {
+      "url": "https://www.nj.gov/dca/dfs/pdf/fire%20directory_county%20summary/fire_code_enforcement_director.pdf",
+      "quote": "LEAID: 0703-001 Caldwell Boro ... Enf Auth. Municipal ... Fire Official Mark Guiliano ... Phone (973) 661-1820 ... Email fireofficial@caldwell-nj.com",
+      "doc_date": "2025-07 (survey date 7/26/2025)",
+      "via": "state_directory",
+      "verified": null
+     },
+     {
+      "url": "https://nj.gov/dca/dfs/pdf/ANNUAL%20REGISTRY/THIRD%20QUARTER%20LEA%20REGISTRY%202026.pdf",
+      "quote": "M Caldwell Borough",
+      "doc_date": "2026-07",
+      "via": "pdf",
+      "verified": true
+     }
+    ],
+    "confidence": "high"
+   }
+  ],
+  "notes": "The Borough's handout says the smoke/CO certificate is part of the CCO inspection at no additional cost, while the FAQ says 'There is a fee for this service' for a smoke detector inspection; in practice the $100 per unit CCO fee appears to cover both. The FAQ gives the email as fireofficial@caldwell-nj.org while the state directory lists fireofficial@caldwell-nj.com. The state directory lists (973) 661-1820 for the fire official; Borough pages use 973-403-4629. The handout still lists a fire extinguisher, which the state dropped from the sale certificate in February 2025 (P.L.2025, c.19), and adds a Borough-only explosive gas detector requirement."
+ },
+ "other_items": [
+  {
+   "label": "Open permits",
+   "detail": "All open permits must be closed before the CCO is issued.",
+   "source_url": "https://caldwell-nj.com/vertical/sites/%7B6BAC054F-223B-4082-A606-DE1D76D33F98%7D/uploads/CCO_Applicantion.pdf"
+  },
+  {
+   "label": "Explosive gas detector",
+   "detail": "Caldwell requires a UL-listed explosive gas detector on each occupied level, checked at the CCO inspection.",
+   "source_url": "https://caldwell-nj.com/vertical/sites/%7B6BAC054F-223B-4082-A606-DE1D76D33F98%7D/uploads/Uniform_fire_code_Required_Certificate_for_1_2_family_Dwellings.pdf"
+  }
+ ],
+ "open_questions": [
+  "Is there a reinspection fee if the CCO inspection fails, and how much?",
+  "Does the Borough still require the portable fire extinguisher after P.L.2025, c.19?",
+  "Is any separate fee charged for the smoke/CO part (the FAQ mentions a fee; the handout says no additional cost)?",
+  "Confirm the correct fire official email (.com or .org)."
+ ],
+ "checked_at": "2026-10-03",
+ "verification": {
+  "fees": 1,
+  "fee_ok": 0,
+  "fee_bad": 0,
+  "fee_unchecked": 1,
+  "quotes": 14,
+  "q_ok": 8,
+  "q_bad": 0,
+  "q_unchecked": 6
+ }
+}
