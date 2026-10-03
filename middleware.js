@@ -10,6 +10,8 @@ const TYPED_SITEMAP_FILE = /^\/sitemap-[a-z0-9-]+\.xml$/i;
 const BULK_SALES_FILE = /^\/property\/sales-[a-z-]+\.json$/i;
 // Watchdog Games answer banks and group lists: read only by /api/watchdog-games, never public.
 const GAMES_PRIVATE_FILE = /^\/property\/data\/games\/private\//i;
+// Repository working notes for code editors, never a public page on either site.
+const REPO_NOTES_FILE = /^\/agents\.md$/i;
 const AGENT_PORTAL_PATH = /^\/agent\/([a-z0-9](?:[a-z0-9-]{1,38}[a-z0-9]))\/?$/i;
 const LEGACY_AGENT_PORTAL_PATH = /^\/property\/agent\/([a-z0-9](?:[a-z0-9-]{1,38}[a-z0-9]))\/?$/i;
 // Agent portal addresses are /agent/<slug>. These names are real /agent/* pages or kept
@@ -45,6 +47,7 @@ if(LEGACY_NJPTR_HOSTS.has(host)&&(url.pathname==='/property'||url.pathname==='/p
 if(LEGACY_NJPTR_HOSTS.has(host)&&LEGACY_WATCHDOG_PROMO_PATHS.has(url.pathname))return rewriteLegacyAcquisitionPage(request,url.pathname);
 if(BULK_SALES_FILE.test(url.pathname)){console.warn('watchdog-data-edge',JSON.stringify({event:'bulk_sales_blocked',path:url.pathname}));await recordEdgeSecurityEvent(request,'bulk_sales_blocked',url.pathname,AUTOMATION_UA.test(userAgent));return blockedDataResponse(404,'Bulk sales files are not a public delivery surface.','public, max-age=300, s-maxage=86400');}
 if(GAMES_PRIVATE_FILE.test(url.pathname))return blockedDataResponse(404,'Not found.','public, max-age=300, s-maxage=86400');
+if(REPO_NOTES_FILE.test(url.pathname))return blockedDataResponse(404,'Not found.','public, max-age=300, s-maxage=86400');
 if(url.pathname===SALES_API_PATH&&AUTOMATION_UA.test(userAgent)){console.warn('watchdog-data-edge',JSON.stringify({event:'automation_client_blocked',path:url.pathname}));await recordEdgeSecurityEvent(request,'automation_client_blocked',url.pathname,true);return blockedDataResponse(403,'Automated bulk extraction is not permitted on this endpoint.','no-store');}
 if(host!==WATCHDOG_HOST)return next();
 if(WATCHDOG_TOOL_REDIRECTS.has(url.pathname))return redirectCanonical(request,url,WATCHDOG_TOOL_REDIRECTS.get(url.pathname));
