@@ -34,6 +34,8 @@ assert(consent.includes('GA_ID'), 'Google Analytics consent implementation is mi
 assert(consent.includes('CLARITY_ID'), 'Microsoft Clarity consent implementation is missing');
 assert(consent.includes("watchdog:'G-EDW7CZV66M'"), 'Watchdog GA4 measurement ID is missing');
 assert(consent.includes("legacy:'G-ENP9182L0J'"), 'Legacy NJPropertyTaxRelief GA4 measurement ID is missing');
+assert(consent.includes("'G-EDW7CZV66M':'GT-PZ6GJ8Z4'"), 'Watchdog GA4 must load through its combined Google tag (gtag/js?id=G-EDW7CZV66M returns 404)');
+assert(consent.includes("routed.send_to=GA_ID"), 'Watchdog GA4 events must be routed to the Watchdog stream only');
 assert(consent.includes("host==='watchdogindex.com'||host==='www.watchdogindex.com'"), 'Watchdog GA4 host routing is missing');
 assert(consent.includes("host==='njpropertytaxrelief.com'||host==='www.njpropertytaxrelief.com'"), 'Legacy GA4 host routing is missing');
 assert(consent.includes("if(!GA_ID) return;"), 'Unknown and preview hosts must fail closed instead of loading GA4');

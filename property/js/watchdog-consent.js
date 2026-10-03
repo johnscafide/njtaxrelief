@@ -18,6 +18,11 @@
     watchdog:'G-EDW7CZV66M',
     legacy:'G-ENP9182L0J'
   });
+  /* Google combined the Watchdog stream into the Google tag that also serves the
+     NJPTR property, so gtag/js?id=G-EDW7CZV66M 404s and configuring it alone sends
+     nothing. Load and configure that Google tag instead, and route events to the
+     Watchdog stream only with send_to. */
+  var GA_GOOGLE_TAG = Object.freeze({'G-EDW7CZV66M':'GT-PZ6GJ8Z4'});
   var CLARITY_IDS = Object.freeze({
     watchdog:'y8g1uivano',
     legacy:'wjeklv0exl'
@@ -114,6 +119,18 @@
   function ensureGoogleQueue(){
     window.dataLayer=window.dataLayer||[];
     if(typeof window.gtag!=='function') window.gtag=function(){window.dataLayer.push(arguments);};
+    if(GA_ID&&GA_GOOGLE_TAG[GA_ID]&&!window.gtag.__watchdogSendTo){
+      var base=window.gtag;
+      window.gtag=function(cmd,name,params){
+        if(cmd==='event'&&!(params&&params.send_to)){
+          var routed={};for(var k in (params||{})) if(Object.prototype.hasOwnProperty.call(params,k)) routed[k]=params[k];
+          routed.send_to=GA_ID;
+          return base(cmd,name,routed);
+        }
+        return base.apply(this,arguments);
+      };
+      window.gtag.__watchdogSendTo=true;
+    }
   }
   function ensureClarityQueue(){
     if(typeof window.clarity!=='function') window.clarity=function(){(window.clarity.q=window.clarity.q||[]).push(arguments);};
@@ -158,10 +175,16 @@
     if(!window.__watchdogGaConfigured){
       window.__watchdogGaConfigured=true;
       window.gtag('js',new Date());
-      window.gtag('config',GA_ID,{anonymize_ip:true});
+      if(GA_GOOGLE_TAG[GA_ID]){
+        window.gtag('config',GA_GOOGLE_TAG[GA_ID],{anonymize_ip:true,send_page_view:false});
+        window.gtag('event','page_view',{send_to:GA_ID});
+      }else{
+        window.gtag('config',GA_ID,{anonymize_ip:true});
+      }
     }
-    if(document.querySelector('script[data-watchdog-consent-ga],script[src*="googletagmanager.com/gtag/js?id='+GA_ID+'"]')) return;
-    var script=document.createElement('script');script.async=true;script.src='https://www.googletagmanager.com/gtag/js?id='+encodeURIComponent(GA_ID);script.setAttribute('data-watchdog-consent-ga','1');
+    var tagId=GA_GOOGLE_TAG[GA_ID]||GA_ID;
+    if(document.querySelector('script[data-watchdog-consent-ga],script[src*="googletagmanager.com/gtag/js?id='+tagId+'"]')) return;
+    var script=document.createElement('script');script.async=true;script.src='https://www.googletagmanager.com/gtag/js?id='+encodeURIComponent(tagId);script.setAttribute('data-watchdog-consent-ga','1');
     document.head.appendChild(script);
   }
   function loadClarity(analytics){
