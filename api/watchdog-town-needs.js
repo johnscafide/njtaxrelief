@@ -21,6 +21,9 @@ const BUDGETS = [
 const GLOBAL_BUDGET = { bucket: 'town_needs_all_day', seconds: 86400, limit: 100 };
 const UUID = /^[0-9a-f]{8}-[0-9a-f]{4}-4[0-9a-f]{3}-[89ab][0-9a-f]{3}-[0-9a-f]{12}$/i;
 const TOWNS = new Map((NEEDS.towns || []).map((t) => [t.code, t]));
+// The /co lookup lets visitors add CO requirements for any NJ town, including towns not
+// researched yet. Those aren't in town-needs.json, so every need is open for them.
+const ALL_TOWNS = new Map((require('../co/towns.json').towns || []).map((t) => [t.c, { code: t.c, town: t.n, needs: Object.keys(NEEDS.needs || {}) }]));
 
 function backend() {
   const url = process.env.SUPABASE_URL || process.env.NEXT_PUBLIC_SUPABASE_URL;
@@ -95,7 +98,7 @@ async function start(req, res, c, hash, body) {
   if (clean(body.website, 200)) return res.status(200).json({ ok: true, id: crypto.randomUUID() });
   if (Number(body.elapsed_ms) < 3000) return res.status(422).json({ error: 'Please take a moment to fill in the form, then send it again.' });
   const code = clean(body.code, 4);
-  const town = TOWNS.get(code);
+  const town = TOWNS.get(code) || ALL_TOWNS.get(code);
   if (!town) return res.status(422).json({ error: 'Pick a town from the list.' });
   const needKeys = Array.from(new Set((Array.isArray(body.needs) ? body.needs : []).map((k) => clean(k, 20)))).filter((k) => town.needs.includes(k));
   if (!needKeys.length) return res.status(422).json({ error: 'Pick at least one item you can help with.' });
