@@ -1,0 +1,248 @@
+{
+ "municipality_code": "0719",
+ "municipality": "South Orange Village",
+ "county": "ESSEX",
+ "checked_at": "2026-10-03",
+ "resale_co": {
+  "status": "required",
+  "name": "Certificate of Continued Occupancy (CCO)",
+  "issued_by": "South Orange Fire Prevention Bureau (Fire Official), within the Building and Code Enforcement Department",
+  "lead_time": "Expedited fees apply when the request comes 10 business days or less before closing; apply at least 11 business days ahead to avoid them.",
+  "valid_for": "",
+  "requirements": [
+   "Inspection by the Fire Official or inspector for compliance with N.J.A.C. 5:70-4.19 (smoke alarms, carbon monoxide alarms); smoke detector inspection is part of the CCO",
+   "Owner certifies all structures have valid zoning and building permits, registrations and certificates; the CCO verifies there are no open permits or violations unless a separate written agreement is attached",
+   "The CCO does not confirm zoning compliance; that needs a zoning verification letter, zoning permit or Certificate of Legal Nonconformity",
+   "No rubbish, debris or bulk garbage left on the property before the new occupancy",
+   "Application asks for buyer details, proposed closing date, realtor, room counts, accessory structures, house number visibility and any secondary power source (solar, generator, battery storage)",
+   "Secondary power source warning label within 18 inches of the main electric panel and meter, not handwritten",
+   "Monitored or low-voltage alarm systems need a current full NFPA 72 report from an alarm contractor or certified electrician",
+   "Someone must be at the property to give the inspector access (missed appointment fee otherwise)"
+  ],
+  "fees": [
+   {
+    "label": "CCO inspection, one-family",
+    "amount": "$150.00",
+    "quote": "One-Family § 157-4C $150.00",
+    "source_url": "https://s3-us-west-2.amazonaws.com/municipalcodeonline.com-new/southorange/ordinances/documents/1780929121_2026-10%20%5BADOPT%5D%20Ordinance%20Amendment%20to%20Village%20Code%20157%20re%20Fire%20Inspection%20Fees.pdf",
+    "verified": true
+   },
+   {
+    "label": "CCO inspection, two-family",
+    "amount": "$200.00",
+    "quote": "Two-Family § 157-4C $200.00",
+    "source_url": "https://s3-us-west-2.amazonaws.com/municipalcodeonline.com-new/southorange/ordinances/documents/1780929121_2026-10%20%5BADOPT%5D%20Ordinance%20Amendment%20to%20Village%20Code%20157%20re%20Fire%20Inspection%20Fees.pdf",
+    "verified": true
+   },
+   {
+    "label": "CCO, single family or condo/townhouse (online application)",
+    "amount": "$150",
+    "quote": "Single Family Residence & Condo/Townhouse ($150)",
+    "source_url": "https://main.govpilot.com/web/public/b2d0482d-1a2_CCO-Application-southorangevillage?uid=6977&ust=NJ&pu=1&id=0",
+    "verified": true
+   },
+   {
+    "label": "CCO, two-family (online application)",
+    "amount": "$200",
+    "quote": "Two-Family Residence ($200)",
+    "source_url": "https://main.govpilot.com/web/public/b2d0482d-1a2_CCO-Application-southorangevillage?uid=6977&ust=NJ&pu=1&id=0",
+    "verified": true
+   },
+   {
+    "label": "CCO first re-inspection",
+    "amount": "$50.00",
+    "quote": "First Re-Inspection § 157-4C $50.00",
+    "source_url": "https://s3-us-west-2.amazonaws.com/municipalcodeonline.com-new/southorange/ordinances/documents/1780929121_2026-10%20%5BADOPT%5D%20Ordinance%20Amendment%20to%20Village%20Code%20157%20re%20Fire%20Inspection%20Fees.pdf",
+    "verified": true
+   },
+   {
+    "label": "CCO second re-inspection",
+    "amount": "$50.00",
+    "quote": "Second Re-Inspection § 157-4C $50.00",
+    "source_url": "https://s3-us-west-2.amazonaws.com/municipalcodeonline.com-new/southorange/ordinances/documents/1780929121_2026-10%20%5BADOPT%5D%20Ordinance%20Amendment%20to%20Village%20Code%20157%20re%20Fire%20Inspection%20Fees.pdf",
+    "verified": true
+   },
+   {
+    "label": "CCO third or later re-inspection",
+    "amount": "$75.00",
+    "quote": "Third or more Re-Inspection § 157-4C $75.00",
+    "source_url": "https://s3-us-west-2.amazonaws.com/municipalcodeonline.com-new/southorange/ordinances/documents/1780929121_2026-10%20%5BADOPT%5D%20Ordinance%20Amendment%20to%20Village%20Code%20157%20re%20Fire%20Inspection%20Fees.pdf",
+    "verified": true
+   },
+   {
+    "label": "Expedited fee, request 5 to 10 business days before closing (added to inspection fee)",
+    "amount": "$50",
+    "quote": "5-10 Business Days - $50 Additional Fee",
+    "source_url": "https://main.govpilot.com/web/public/b2d0482d-1a2_CCO-Application-southorangevillage?uid=6977&ust=NJ&pu=1&id=0",
+    "verified": true
+   },
+   {
+    "label": "Expedited fee, request 4 or fewer business days before closing (added to inspection fee)",
+    "amount": "$100",
+    "quote": "4 or Less Business Days - $100 Additional Fee",
+    "source_url": "https://main.govpilot.com/web/public/b2d0482d-1a2_CCO-Application-southorangevillage?uid=6977&ust=NJ&pu=1&id=0",
+    "verified": true
+   },
+   {
+    "label": "Missed appointment fee",
+    "amount": "$50",
+    "quote": "Missed Appointment Fee - $50",
+    "source_url": "https://main.govpilot.com/web/public/b2d0482d-1a2_CCO-Application-southorangevillage?uid=6977&ust=NJ&pu=1&id=0",
+    "verified": true
+   }
+  ],
+  "how_to_apply": "Apply online with the Village's Certificate of Continued Occupancy Application (GovPilot), linked from the Fire Prevention Bureau page and the Permit & License Application Forms page, and pay online. The owner, realtor or other contact can apply. Expedited fees count business days between receiving the request and the closing date, not counting the day the application is submitted. Fees are not refunded if the submission is incorrect. Office: 76 South Orange Avenue, Suite 302, (973) 378-7715.",
+  "application_url": "https://main.govpilot.com/web/public/b2d0482d-1a2_CCO-Application-southorangevillage?uid=6977&ust=NJ&pu=1&id=0",
+  "department_url": "https://www.southorange.org/697/Fire-Prevention-Bureau-Inspections",
+  "phone": "973-378-7715 x7703",
+  "email": "firebureau@southorange.org",
+  "contact_name": "Anthony Grenci",
+  "contact_title": "Fire Official (also listed as Building Official)",
+  "evidence": [
+   {
+    "url": "https://www.southorange.org/697/Fire-Prevention-Bureau-Inspections",
+    "quote": "The issuance of CCO certificates for the change of ownership for both commercial and residential properties",
+    "doc_date": "2026-10-03 (page fetched)",
+    "via": "page",
+    "verified": true
+   },
+   {
+    "url": "https://www.southorange.org/697/Fire-Prevention-Bureau-Inspections",
+    "quote": "Fire Official: Anthony Grenci, 973.378.7715 x7703",
+    "doc_date": "2026-10-03 (page fetched)",
+    "via": "page",
+    "verified": true
+   },
+   {
+    "url": "https://www.southorange.org/498/Code-Enforcement",
+    "quote": "The division is also responsible for inspections relating to issuing certificates of continued occupancy (for home sales) or habitability (for rentals).",
+    "doc_date": "2026-10-03 (page fetched)",
+    "via": "page",
+    "verified": null
+   },
+   {
+    "url": "https://s3-us-west-2.amazonaws.com/municipalcodeonline.com-new/southorange/ordinances/documents/1780929121_2026-10%20%5BADOPT%5D%20Ordinance%20Amendment%20to%20Village%20Code%20157%20re%20Fire%20Inspection%20Fees.pdf",
+    "quote": "A Certificate of Continued Occupancy shall be issued by the inspecting Official attesting that the residence, dwelling unit, room, suite or area meets or exceeds the requirements of N.J.A.C. 5:70-4.19.",
+    "doc_date": "April 13, 2026 (Ordinance #2026-10 adopted)",
+    "via": "pdf",
+    "verified": true
+   },
+   {
+    "url": "https://main.govpilot.com/web/public/b2d0482d-1a2_CCO-Application-southorangevillage?uid=6977&ust=NJ&pu=1&id=0",
+    "quote": "I understand that receiving this CCO certificate verifies that there are no open permits or violations, unless a separate written agreement is attached.",
+    "doc_date": "",
+    "via": "page",
+    "verified": true
+   },
+   {
+    "url": "https://main.govpilot.com/web/public/b2d0482d-1a2_CCO-Application-southorangevillage?uid=6977&ust=NJ&pu=1&id=0",
+    "quote": "Expedited Fees - Based on the number of business days between receiving the request and closing date(not counting date application is submitted).",
+    "doc_date": "",
+    "via": "page",
+    "verified": true
+   }
+  ],
+  "confidence": "high",
+  "notes": "Fees come from Ordinance #2026-10 (adopted April 13, 2026), which restates Village Code 157-4 and 143-10, and match the online CCO application. The ordinance PDF is a scan with a text layer, so spacing in the quotes follows pdftotext output and minor OCR errors exist elsewhere in it. The Building Department page lists Anthony Grenci as Building Official (agrenci@southorange.org, ext. 7700) and the Fire Prevention Bureau page lists him as Fire Official (ext. 7703, firebureau@southorange.org). The ordinance also lists a separate 'Smoke Detector Compliance Certificate Fee' of $50.00 (see fire certificate). A Certificate of Habitability ($125.00 per unit online, $175.00 in the ordinance) is for rentals only and needs annual rental registration. Fee quotes from the ordinance are table rows from the pdftotext -layout output with spacing collapsed."
+ },
+ "fire_cert": {
+  "requirements": [
+   "Smoke alarms UL 217 listed, no more than 10 years old; standalone battery alarms must be 10-year sealed",
+   "Smoke alarms on each level and outside each sleeping area; hardwired, interconnected and in-bedroom alarms depending on the year the house was built",
+   "Hardwired alarms stay hardwired; basement alarm within 10 feet of the base of the stairs",
+   "Carbon monoxide alarm on each level, and on sleeping levels within 10 feet of bedroom doors; UL 2034; battery, plug-in or hardwired",
+   "Secondary power source label within 18 inches of the main electric panel and meter",
+   "Monitored or low-voltage fire alarm systems need a current full NFPA 72 report"
+  ],
+  "authorities": [
+   {
+    "name": "South Orange Fire Prevention Bureau",
+    "type": "municipal_fire_bureau",
+    "area_served": "Entire village",
+    "lead_time": "Smoke detector inspection is done as part of the CCO; request at least 11 business days before closing to avoid expedited fees.",
+    "fees": [
+     {
+      "label": "Smoke detector compliance certificate fee (Village Code 157-12F)",
+      "amount": "$50.00",
+      "quote": "Smoke Detector Compliance Certificate Fee § 157-12F $50.00",
+      "source_url": "https://s3-us-west-2.amazonaws.com/municipalcodeonline.com-new/southorange/ordinances/documents/1780929121_2026-10%20%5BADOPT%5D%20Ordinance%20Amendment%20to%20Village%20Code%20157%20re%20Fire%20Inspection%20Fees.pdf",
+      "verified": true
+     }
+    ],
+    "how_to_apply": "For a sale, the smoke and CO alarm inspection is part of the Certificate of Continued Occupancy: apply online with the CCO application (GovPilot). Questions: Fire Prevention Bureau, 76 South Orange Avenue, Suite 302, 973-378-7715, firebureau@southorange.org.",
+    "application_url": "https://main.govpilot.com/web/public/b2d0482d-1a2_CCO-Application-southorangevillage?uid=6977&ust=NJ&pu=1&id=0",
+    "department_url": "https://www.southorange.org/697/Fire-Prevention-Bureau-Inspections",
+    "phone": "973-378-7715 x7703",
+    "email": "firebureau@southorange.org",
+    "contact_name": "Anthony Grenci",
+    "contact_title": "Fire Official",
+    "evidence": [
+     {
+      "url": "https://www.southorange.org/697/Fire-Prevention-Bureau-Inspections",
+      "quote": "The Fire Prevention Bureau is also responsible to make sure that each time there is a change of occupancy in a residence the Seller or Landlord complies with the current laws on smoke detector and Carbon monoxide detector compliance.",
+      "doc_date": "2026-10-03 (page fetched)",
+      "via": "page",
+      "verified": true
+     },
+     {
+      "url": "https://s3-us-west-2.amazonaws.com/municipalcodeonline.com-new/southorange/ordinances/documents/1780929121_2026-10%20%5BADOPT%5D%20Ordinance%20Amendment%20to%20Village%20Code%20157%20re%20Fire%20Inspection%20Fees.pdf",
+      "quote": "shall be part of the inspection and issuance of a Certificate of Continued Occupancy.",
+      "doc_date": "April 13, 2026",
+      "via": "pdf",
+      "verified": true
+     },
+     {
+      "url": "https://www.southorange.org/DocumentCenter/View/8891/Residential-Inspection-Requirements-PDF",
+      "quote": "As of 1/1/2019, all standalone battery operated detectors must be 10-year sealed battery type.",
+      "doc_date": "2025-04-16 (PDF date)",
+      "via": "pdf",
+      "verified": true
+     },
+     {
+      "url": "https://www.nj.gov/dca/dfs/pdf/fire%20directory_county%20summary/fire_code_enforcement_director.pdf",
+      "quote": "LEAID: 0719-001 South Orange Village SMOKE DETECTOR COMPLIANCE Name: South Orange Fire Bureau Enf Auth. Municipal Fire Official Anthony Grenci Phone (973) 378-7715",
+      "doc_date": "survey date 1/12/2026",
+      "via": "state_directory",
+      "verified": null
+     },
+     {
+      "url": "https://nj.gov/dca/dfs/pdf/ANNUAL%20REGISTRY/THIRD%20QUARTER%20LEA%20REGISTRY%202026.pdf",
+      "quote": "F South Orange Village",
+      "doc_date": "JULY 2026",
+      "via": "pdf",
+      "verified": true
+     }
+    ],
+    "confidence": "high"
+   }
+  ],
+  "notes": "In South Orange the smoke/CO alarm check for a sale is done inside the CCO inspection by the Fire Prevention Bureau, so most sellers pay the CCO fee. The ordinance also lists a separate $50.00 Smoke Detector Compliance Certificate Fee (157-12F); it is unclear when that applies instead of, or on top of, the CCO. The April 2025 residential requirements do not list a fire extinguisher, though the online CCO form has a 'Smoke Detector/Extinguisher Guidelines' tab whose text did not load."
+ },
+ "other_items": [
+  {
+   "label": "Open permits and violations",
+   "detail": "The CCO verifies there are no open permits or violations; the owner certifies all structures have valid zoning and building permits.",
+   "source_url": "https://main.govpilot.com/web/public/b2d0482d-1a2_CCO-Application-southorangevillage?uid=6977&ust=NJ&pu=1&id=0"
+  },
+  {
+   "label": "Zoning verification (optional)",
+   "detail": "The CCO does not confirm zoning compliance. Zoning compliance can only be confirmed with a zoning verification letter or zoning permit from the Zoning Officer, or a Certificate of Legal Nonconformity from the Zoning Board.",
+   "source_url": "https://main.govpilot.com/web/public/b2d0482d-1a2_CCO-Application-southorangevillage?uid=6977&ust=NJ&pu=1&id=0"
+  }
+ ],
+ "open_questions": [
+  "How long is the CCO valid after issue?",
+  "When does the separate $50.00 Smoke Detector Compliance Certificate Fee apply, if the smoke check is already part of the CCO?",
+  "Does the Village still check for a portable fire extinguisher (the online form has an extinguisher guidelines tab)?"
+ ],
+ "verification": {
+  "fees": 11,
+  "fee_ok": 11,
+  "fee_bad": 0,
+  "fee_unchecked": 0,
+  "quotes": 11,
+  "q_ok": 9,
+  "q_bad": 0,
+  "q_unchecked": 2
+ }
+}

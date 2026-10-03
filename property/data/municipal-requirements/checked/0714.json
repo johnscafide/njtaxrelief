@@ -1,0 +1,198 @@
+{
+ "municipality_code": "0714",
+ "municipality": "Newark City",
+ "county": "ESSEX",
+ "resale_co": {
+  "status": "required",
+  "name": "Certificate of Code Compliance (CCC, also called Certificate of Continued Compliance)",
+  "issued_by": "City of Newark Code Enforcement Division (Department of Engineering, Division of Enforcement and Inspections), with a Zoning review",
+  "lead_time": "",
+  "valid_for": "90 days from the date of issuance",
+  "requirements": [
+   "Inspection for compliance with City ordinance plus a zoning review",
+   "Separate Fire Department fire safety (smoke/CO) inspection and certificate",
+   "No open building or construction permits",
+   "Only the property owner or the owner's agent can request it (buyer only for auction or sheriff sale purchases)",
+   "If violations remain, the buyer may take responsibility by notarized affidavit with the signed contract, violations report and buyer ID (corrections after closing)"
+  ],
+  "fees": [
+   {
+    "label": "Certificate of Code Compliance, 1-2 dwelling units",
+    "amount": "$400",
+    "quote": "1-2 Dwelling Units $400",
+    "source_url": "https://newarkportal.us/Home/CCC",
+    "verified": true
+   },
+   {
+    "label": "Fire certificate (smoke/CO), 1-2 dwelling units",
+    "amount": "$35",
+    "quote": "1-2 Dwelling Units $35",
+    "source_url": "https://newarkportal.us/Home/CCC",
+    "verified": true
+   }
+  ],
+  "how_to_apply": "Create an account on the City's one-stop portal (newarkportal.us), submit the Certificate of Code Compliance application and pay the fees; the Fire inspection can be requested and paid on the same portal (the portal adds a service fee). Review the fire checklist and close any open permits before the inspection. Certificates are released only to the seller or the seller's agent.",
+  "application_url": "https://newarkportal.us/Home/CCC",
+  "department_url": "https://newarkportal.us/Home/CCC",
+  "phone": "973-733-3706",
+  "email": "",
+  "contact_name": "",
+  "contact_title": "",
+  "evidence": [
+   {
+    "url": "https://newarkportal.us/Home/CCC",
+    "quote": "As per City Ordinance prior to the transfer of ownership of a residential or mixed used property a code compliance certificate and a fire department certificate of must be obtained.",
+    "doc_date": "2026-10-03 (page fetched)",
+    "via": "page",
+    "verified": true
+   },
+   {
+    "url": "https://newarkportal.us/Home/CCC",
+    "quote": "A Certificate of Continued Compliance (CCC) is required when selling or transferring the ownership of a residential and mixed used properties.",
+    "doc_date": "2026-10-03 (page fetched)",
+    "via": "page",
+    "verified": true
+   },
+   {
+    "url": "https://newarkportal.us/Home/CCC",
+    "quote": "A CCC is good for 90 days from the date of issuance. The Fire Certificate expires after six months from the date of issuance.",
+    "doc_date": "2026-10-03 (page fetched)",
+    "via": "page",
+    "verified": true
+   },
+   {
+    "url": "https://newarkportal.us/Home/CCC",
+    "quote": "Use of this one-stop portal will significantly speed up the processing time and carries an additional service fee",
+    "doc_date": "2026-10-03 (page fetched)",
+    "via": "page",
+    "verified": true
+   },
+   {
+    "url": "https://newarkportal.us/Home/CCC",
+    "quote": "The certificate fee is refundable prior to the inspection. After the inspection has occurred, the fee is not refundable.",
+    "doc_date": "2026-10-03 (page fetched)",
+    "via": "page",
+    "verified": true
+   },
+   {
+    "url": "https://newarkportal.us/Home/CCC",
+    "quote": "Code Enforcement 973-733-3706",
+    "doc_date": "2026-10-03 (page fetched)",
+    "via": "page",
+    "verified": true
+   },
+   {
+    "url": "https://ecode360.com/36690942",
+    "quote": "a certification that such residence conforms to the housing and zoning ordinances of the City of Newark",
+    "doc_date": "Ord. 6PSF-F, 6-15-2016; Ord. No. 6PSF-E, 11-01-2023",
+    "via": "search_snippet",
+    "verified": null
+   }
+  ],
+  "confidence": "high",
+  "notes": "Fees come from the City's portal page (newarkportal.us, branded City of Newark). The code text (Title 15 housing code, application to the Director, Department of Engineering) could only be seen through search results. The portal says it carries an additional service fee but does not state the amount. Phones on the portal: Code Enforcement 973-733-3706, Fire 973-733-7495, Zoning 973-733-3714. Larger buildings pay more (3-10 units $500, and up). Rental registration and lead-safe rental inspections are separate rental programs."
+ },
+ "fire_cert": {
+  "requirements": [
+   "Smoke alarms and carbon monoxide alarms as required by N.J.A.C. 5:70-2.3 (the City's fire checklist was not found online)",
+   "Fire safety inspection by the Newark Fire Department is part of the transfer process alongside the CCC"
+  ],
+  "authorities": [
+   {
+    "name": "Newark Fire Department, Fire Prevention",
+    "type": "municipal_fire_bureau",
+    "area_served": "Entire city",
+    "lead_time": "Fire certificate expires six months after issuance. No rush tiers published on the portal.",
+    "fees": [
+     {
+      "label": "Fire certificate (smoke/CO), 1-2 dwelling units",
+      "amount": "$35",
+      "quote": "1-2 Dwelling Units $35",
+      "source_url": "https://newarkportal.us/Home/CCC",
+      "verified": true
+     }
+    ],
+    "how_to_apply": "Request and pay for the Fire inspection on the City's one-stop CCC portal (newarkportal.us) together with the Certificate of Code Compliance, or contact Fire at 973-733-7495.",
+    "application_url": "https://newarkportal.us/Home/CCC",
+    "department_url": "https://newarkportal.us/Home/CCC",
+    "phone": "973-733-7495",
+    "email": "saleemg@ci.newark.nj.us",
+    "contact_name": "Gwendolyn Saleem",
+    "contact_title": "Fire Official",
+    "evidence": [
+     {
+      "url": "https://newarkportal.us/Home/CCC",
+      "quote": "you will be able to request and pay for the Fire Inspection as well.",
+      "doc_date": "2026-10-03 (page fetched)",
+      "via": "page",
+      "verified": true
+     },
+     {
+      "url": "https://newarkportal.us/Home/CCC",
+      "quote": "Fire 973-733-7495",
+      "doc_date": "2026-10-03 (page fetched)",
+      "via": "page",
+      "verified": true
+     },
+     {
+      "url": "https://newarkportal.us/Home/CCC",
+      "quote": "Prior to scheduling your inspection be sure to review the fire checklist of items the inspector will be checking – this will save you time and re-inspection fees.",
+      "doc_date": "2026-10-03 (page fetched)",
+      "via": "page",
+      "verified": true
+     },
+     {
+      "url": "https://www.nj.gov/dca/dfs/pdf/fire%20directory_county%20summary/fire_code_enforcement_director.pdf",
+      "quote": "LEAID: 0714-001 Newark City ... Name: City of Newark Fire Prev ... Enf Auth. Fire Dept ... Addr: 1010 18th Av Newark NJ 07106 ... Fire Official Gwendolyn Saleem Phone (973) 733-7495",
+      "doc_date": "2025-10 (survey date 10/7/2025)",
+      "via": "state_directory",
+      "verified": null
+     },
+     {
+      "url": "https://nj.gov/dca/dfs/pdf/ANNUAL%20REGISTRY/THIRD%20QUARTER%20LEA%20REGISTRY%202026.pdf",
+      "quote": "F Newark City",
+      "doc_date": "2026-07",
+      "via": "pdf",
+      "verified": true
+     }
+    ],
+    "confidence": "high"
+   }
+  ],
+  "notes": "Fire Official name and email come from the NJ DCA fire directory (survey 10/7/2025); the City portal gives only the Fire phone 973-733-7495, which matches. The portal mentions re-inspection fees but does not list them. The fire checklist referenced on the portal was not found online, so it is unknown whether Newark still asks for a fire extinguisher after P.L.2025, c.19."
+ },
+ "other_items": [
+  {
+   "label": "Open permits",
+   "detail": "Make sure there are no open building or construction permits before the CCC inspection.",
+   "source_url": "https://newarkportal.us/Home/CCC"
+  },
+  {
+   "label": "Zoning review",
+   "detail": "A zoning review is part of the Certificate of Code Compliance (Zoning 973-733-3714).",
+   "source_url": "https://newarkportal.us/Home/CCC"
+  },
+  {
+   "label": "Buyer affidavit for violations",
+   "detail": "If violations remain, the buyer can accept responsibility with a notarized affidavit, signed contract, violations report copy and buyer ID (plus LLC/corporate formation papers if applicable).",
+   "source_url": "https://newarkportal.us/Home/CCC"
+  }
+ ],
+ "open_questions": [
+  "What is the portal service fee amount?",
+  "What are the re-inspection fees for the CCC and the fire certificate?",
+  "Typical lead time from application to inspection?",
+  "Does the fire checklist still require a fire extinguisher after P.L.2025, c.19?"
+ ],
+ "checked_at": "2026-10-03",
+ "verification": {
+  "fees": 3,
+  "fee_ok": 3,
+  "fee_bad": 0,
+  "fee_unchecked": 0,
+  "quotes": 12,
+  "q_ok": 10,
+  "q_bad": 0,
+  "q_unchecked": 2
+ }
+}

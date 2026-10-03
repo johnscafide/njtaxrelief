@@ -1,0 +1,182 @@
+{
+ "municipality_code": "0710",
+ "municipality": "Livingston Township",
+ "county": "ESSEX",
+ "checked_at": "2026-10-03",
+ "resale_co": {
+  "status": "not_required",
+  "name": "",
+  "issued_by": "",
+  "lead_time": "",
+  "valid_for": "",
+  "requirements": [],
+  "fees": [],
+  "how_to_apply": "No Township resale Certificate of Occupancy. The Township's FAQ says a C.O. is not required for the sale of a home; you need the smoke detector certification from the Livingston Fire Department (see fire certificate). The Building Department recommends calling well ahead of closing to check for open permits.",
+  "application_url": "",
+  "department_url": "https://www.livingstonnj.org/1776/Building",
+  "phone": "973-992-5000 ext. 5200",
+  "email": "building@livingstonnj.org",
+  "contact_name": "Martin J. Chiarolanzio",
+  "contact_title": "Construction Code Official",
+  "evidence": [
+   {
+    "url": "https://www.livingstonnj.org/Faq.aspx?QID=65",
+    "quote": "No, a C.O. is not required.",
+    "doc_date": "2026-10-03 (page fetched)",
+    "via": "page",
+    "verified": true
+   },
+   {
+    "url": "https://www.livingstonnj.org/Faq.aspx?QID=65",
+    "quote": "Is a C.O. (Certificate of Occupancy) required for the sale of my home?",
+    "doc_date": "2026-10-03 (page fetched)",
+    "via": "page",
+    "verified": true
+   },
+   {
+    "url": "https://www.livingstonnj.org/1776/Building",
+    "quote": "Construction Code Official",
+    "doc_date": "2026-10-03 (page fetched)",
+    "via": "page",
+    "verified": true
+   }
+  ],
+  "confidence": "high",
+  "notes": "The Township FAQ (Building Department) says a C.O. is not required for the sale of a home, recommends calling the Building Department at 973-992-5000 ext. #5200 well before closing to check for open permits, and says a smoke detector certification from the Fire Department is needed. Martin J. Chiarolanzio's direct line is ext. #5201 (Building page; email is a mailto link, mchiarolanzio@livingstonnj.org). The Zoning page lists a $75 Zoning Confirmation Letter, which is optional and not described as a sale requirement. The Fire Prevention Bureau also inspects rental re-occupancy; that is a rental item, not a resale CO."
+ },
+ "fire_cert": {
+  "requirements": [
+   "Smoke detector on each level: basement at the bottom of the stairs, and each floor at the stairs or within 10 feet of bedrooms; attic not required",
+   "Battery smoke detectors must be 10-year sealed units; homes built with hardwired interconnected detectors cannot substitute battery or wireless units",
+   "Carbon monoxide detector(s) within 10 feet of all bedroom areas; battery, hardwired or plug-in allowed",
+   "All detectors UL listed and mounted with screws (no tape, Velcro, nails or picture hooks), except plug-in CO units",
+   "One ABC fire extinguisher, 2A:10B:C or greater, wall mounted about 5 feet off the floor in a visible spot in or within 10 feet of the kitchen, not in a cabinet or behind a door; one per kitchen (form still lists it)"
+  ],
+  "authorities": [
+   {
+    "name": "Livingston Fire Department, Fire Prevention Bureau",
+    "type": "municipal_fire_bureau",
+    "area_served": "Entire township",
+    "lead_time": "Call to schedule at least 10 days before closing. Fees are paid at the inspection.",
+    "fees": [
+     {
+      "label": "Smoke detector and CO alarm certificate, 1 and 2 family, initial inspection",
+      "amount": "$75",
+      "quote": "There is a required $75 fee for each initial inspection.",
+      "source_url": "https://www.livingstonnj.org/2046/Smoke-Detector-Requirements-for-Resident",
+      "verified": true
+     },
+     {
+      "label": "Re-inspection after an unsuccessful initial inspection",
+      "amount": "$35",
+      "quote": "For each re-inspection required following an unsuccessful initial inspection, there is an additional charge of $35.",
+      "source_url": "https://www.livingstonnj.org/2046/Smoke-Detector-Requirements-for-Resident",
+      "verified": true
+     },
+     {
+      "label": "Waiver in lieu of smoke detector inspection (demolition properties only)",
+      "amount": "$25",
+      "quote": "Waiver in Lieu of Smoke Detector Inspection (demolition properties only): $25",
+      "source_url": "https://livingstonnj.org/DocumentCenter/View/35803/Fire-Prevention-Fees-PDF",
+      "verified": true
+     }
+    ],
+    "how_to_apply": "Call the Livingston Fire Prevention Bureau at 973-992-2373, Monday through Friday (8:30 a.m. to 4:00 p.m.), to schedule the inspection at least 10 days before closing. Pay at the time of inspection by cash or check payable to the Township of Livingston (no credit cards). A Smoke Detector Waiver Request Form is posted for demolition properties.",
+    "application_url": "",
+    "department_url": "https://www.livingstonnj.org/2046/Smoke-Detector-Requirements-for-Resident",
+    "phone": "973-992-2373",
+    "email": "lfd@livingstonnj.org",
+    "contact_name": "Christopher C. Mullin",
+    "contact_title": "Fire Chief/Fire Official",
+    "evidence": [
+     {
+      "url": "https://www.livingstonnj.org/2046/Smoke-Detector-Requirements-for-Resident",
+      "quote": "This is required, and you will not be able to sell your home or allow a renter to occupy the premises until the property has passed the inspection.",
+      "doc_date": "2026-10-03 (page fetched)",
+      "via": "page",
+      "verified": true
+     },
+     {
+      "url": "https://www.livingstonnj.org/2046/Smoke-Detector-Requirements-for-Resident",
+      "quote": "We kindly ask that you call to schedule an inspection at least 10 days prior to your closing.",
+      "doc_date": "2026-10-03 (page fetched)",
+      "via": "page",
+      "verified": true
+     },
+     {
+      "url": "https://www.livingstonnj.org/2046/Smoke-Detector-Requirements-for-Resident",
+      "quote": "All fees are to be paid during the inspection by cash or check.",
+      "doc_date": "2026-10-03 (page fetched)",
+      "via": "page",
+      "verified": true
+     },
+     {
+      "url": "https://livingstonnj.org/DocumentCenter/View/35803/Fire-Prevention-Fees-PDF",
+      "quote": "ORDINANCE NO. 25-2026",
+      "doc_date": "2026-08-19 (PDF created)",
+      "via": "pdf",
+      "verified": true
+     },
+     {
+      "url": "https://livingstonnj.org/DocumentCenter/View/35803/Fire-Prevention-Fees-PDF",
+      "quote": "(a) $75 per initial inspection",
+      "doc_date": "2026-08-19",
+      "via": "pdf",
+      "verified": true
+     },
+     {
+      "url": "https://livingstonnj.org/DocumentCenter/View/35802/Residential-Smoke-Detector-Requirements-PDF",
+      "quote": "One ABC rated fire extinguisher with a classification code of 2A:10B:C or greater shall be wall mounted",
+      "doc_date": "updated Aug. 2026",
+      "via": "pdf",
+      "verified": true
+     },
+     {
+      "url": "https://livingstonnj.org/DocumentCenter/View/35802/Residential-Smoke-Detector-Requirements-PDF",
+      "quote": "Fire Chief/Fire Official",
+      "doc_date": "updated Aug. 2026",
+      "via": "pdf",
+      "verified": true
+     },
+     {
+      "url": "https://www.nj.gov/dca/dfs/pdf/fire%20directory_county%20summary/fire_code_enforcement_director.pdf",
+      "quote": "LEAID: 0710-001 Livingston Twp ... Fire Official Christopher Mullin Phone (973) 992-2373 ... Email cmullin@livingstonnj.org",
+      "doc_date": "survey date 1/21/2026",
+      "via": "state_directory",
+      "verified": null
+     },
+     {
+      "url": "https://nj.gov/dca/dfs/pdf/ANNUAL%20REGISTRY/THIRD%20QUARTER%20LEA%20REGISTRY%202026.pdf",
+      "quote": "F Livingston Township",
+      "doc_date": "2026-07",
+      "via": "pdf",
+      "verified": true
+     }
+    ],
+    "confidence": "high"
+   }
+  ],
+  "notes": "Fees ($75 initial, $35 per re-inspection) match on the Township page, the August 2026 requirements sheet and the fire fee ordinance (Ordinance No. 25-2026, Chapter 141). The requirements sheet, updated August 2026, still requires a 2A:10B:C fire extinguisher even though the state dropped it from the sale certificate in February 2025 (P.L.2025, c.19); confirm with the Bureau. The Fire Chief's direct email in the state directory is cmullin@livingstonnj.org; the Department's general email is lfd@livingstonnj.org."
+ },
+ "other_items": [
+  {
+   "label": "Open permits check",
+   "detail": "The Building Department recommends calling 973-992-5000 ext. #5200 well before closing to find any open permits, which could slow the sale.",
+   "source_url": "https://www.livingstonnj.org/Faq.aspx?QID=65"
+  }
+ ],
+ "open_questions": [
+  "Does the Fire Prevention Bureau still require the fire extinguisher at resale after P.L.2025, c.19 (the August 2026 sheet still lists it)?",
+  "How long is the smoke/CO certificate valid if closing is delayed?"
+ ],
+ "verification": {
+  "fees": 3,
+  "fee_ok": 3,
+  "fee_bad": 0,
+  "fee_unchecked": 0,
+  "quotes": 12,
+  "q_ok": 11,
+  "q_bad": 0,
+  "q_unchecked": 1
+ }
+}

@@ -277,6 +277,53 @@
    ]
   },
   {
+   "code": "0704",
+   "town": "Cedar Grove Township",
+   "county": "Essex",
+   "live": false,
+   "needs": [
+    "co_required",
+    "fire_fee"
+   ]
+  },
+  {
+   "code": "0709",
+   "town": "Irvington Township",
+   "county": "Essex",
+   "live": false,
+   "needs": [
+    "co_fee",
+    "fire_fee"
+   ]
+  },
+  {
+   "code": "0715",
+   "town": "North Caldwell Borough",
+   "county": "Essex",
+   "live": false,
+   "needs": [
+    "co_required"
+   ]
+  },
+  {
+   "code": "0720",
+   "town": "Verona Township",
+   "county": "Essex",
+   "live": false,
+   "needs": [
+    "co_required"
+   ]
+  },
+  {
+   "code": "0721",
+   "town": "West Caldwell Township",
+   "county": "Essex",
+   "live": false,
+   "needs": [
+    "co_required"
+   ]
+  },
+  {
    "code": "0901",
    "town": "Bayonne",
    "county": "Hudson",
@@ -477,6 +524,116 @@
    "needs": [
     "co_required",
     "co_contact"
+   ]
+  },
+  {
+   "code": "1801",
+   "town": "Bedminster Township",
+   "county": "Somerset",
+   "live": false,
+   "needs": [
+    "co_required"
+   ]
+  },
+  {
+   "code": "1803",
+   "town": "Bernardsville Borough",
+   "county": "Somerset",
+   "live": false,
+   "needs": [
+    "co_fee",
+    "fire_fee"
+   ]
+  },
+  {
+   "code": "1805",
+   "town": "Branchburg Township",
+   "county": "Somerset",
+   "live": false,
+   "needs": [
+    "co_required"
+   ]
+  },
+  {
+   "code": "1806",
+   "town": "Bridgewater Township",
+   "county": "Somerset",
+   "live": false,
+   "needs": [
+    "co_required"
+   ]
+  },
+  {
+   "code": "1809",
+   "town": "Green Brook Township",
+   "county": "Somerset",
+   "live": false,
+   "needs": [
+    "co_required"
+   ]
+  },
+  {
+   "code": "1812",
+   "town": "Millstone Borough",
+   "county": "Somerset",
+   "live": false,
+   "needs": [
+    "co_required",
+    "fire_fee"
+   ]
+  },
+  {
+   "code": "1813",
+   "town": "Montgomery Township",
+   "county": "Somerset",
+   "live": false,
+   "needs": [
+    "co_required"
+   ]
+  },
+  {
+   "code": "1815",
+   "town": "Peapack-Gladstone Borough",
+   "county": "Somerset",
+   "live": false,
+   "needs": [
+    "co_required"
+   ]
+  },
+  {
+   "code": "1816",
+   "town": "Raritan Borough",
+   "county": "Somerset",
+   "live": false,
+   "needs": [
+    "co_required"
+   ]
+  },
+  {
+   "code": "1817",
+   "town": "Rocky Hill Borough",
+   "county": "Somerset",
+   "live": false,
+   "needs": [
+    "co_required"
+   ]
+  },
+  {
+   "code": "1818",
+   "town": "Somerville Borough",
+   "county": "Somerset",
+   "live": false,
+   "needs": [
+    "co_required"
+   ]
+  },
+  {
+   "code": "1821",
+   "town": "Watchung Borough",
+   "county": "Somerset",
+   "live": false,
+   "needs": [
+    "co_required"
    ]
   },
   {

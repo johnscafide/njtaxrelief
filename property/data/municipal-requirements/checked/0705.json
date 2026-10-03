@@ -1,0 +1,250 @@
+{
+ "municipality_code": "0705",
+ "municipality": "East Orange City",
+ "county": "ESSEX",
+ "resale_co": {
+  "status": "required",
+  "name": "Certificate of Conformity (resale housing inspection)",
+  "issued_by": "City of East Orange Department of Code Enforcement, Division of Housing & Inspections (Public Officer)",
+  "lead_time": "The City inspects within 15 days of the request; the application says all inspections must be completed fifteen (15) working days prior to the closing date.",
+  "valid_for": "If violations will not be fixed before closing, a nonrenewable temporary certificate of conformity may be issued, valid for up to six months from the date of conveyance",
+  "requirements": [
+   "Inspection by a City housing inspector for compliance with Chapter 159 (Housing Standards; Property Maintenance) before the sale closes",
+   "Building Division checks that there are no open permits and no elevator violations",
+   "All utilities must be operational at the time of inspection",
+   "Applicant affirms the property is connected to the public water supply through an East Orange Water Commission meter (or explains why not in writing)",
+   "If an LLC is the seller or buyer, the managing member's name is required; no P.O. boxes",
+   "As-is sales: attach the agreement of sale, signed by both seller and buyer, and acknowledge the violations to get a temporary certificate",
+   "Fees by certified check or money order"
+  ],
+  "fees": [
+   {
+    "label": "Certificate of conformity inspection, 1 and 2 dwelling units",
+    "amount": "$250",
+    "quote": "1- and 2-dwelling units $250 $100 $150",
+    "source_url": "https://ecode360.com/9564316",
+    "verified": null
+   },
+   {
+    "label": "Second reinspection, 1 and 2 dwelling units",
+    "amount": "$100",
+    "quote": "Second re-inspection $ 100 *",
+    "source_url": "https://www.eastorange-nj.gov/DocumentCenter/View/3559/Application-for-Certificate-of-Conformity-2026-Updated",
+    "verified": true
+   },
+   {
+    "label": "Third and subsequent reinspections, 1 and 2 dwelling units",
+    "amount": "$150",
+    "quote": "Third and subsequent re-inspections $ 150 *",
+    "source_url": "https://www.eastorange-nj.gov/DocumentCenter/View/3559/Application-for-Certificate-of-Conformity-2026-Updated",
+    "verified": true
+   }
+  ],
+  "how_to_apply": "Fill out the City's Application for Certificate of Conformity (Forms & Permits page, Housing & Inspections) and file it with the Department of Code Enforcement, Division of Housing & Inspections, 44 City Hall Plaza, East Orange. Pay by certified check or money order. Either the seller or the buyer may pay; the form asks who paid. Apply early enough for the inspection to be done 15 working days before closing.",
+  "application_url": "https://www.eastorange-nj.gov/DocumentCenter/View/3559/Application-for-Certificate-of-Conformity-2026-Updated",
+  "department_url": "https://www.eastorange-nj.gov/355/Forms-Permits",
+  "phone": "973-266-5320",
+  "email": "Hassan.Mateen@eastorange-nj.gov",
+  "contact_name": "Hassan Mateen",
+  "contact_title": "Acting Director, Department of Code Enforcement",
+  "evidence": [
+   {
+    "url": "https://ecode360.com/9564316",
+    "quote": "It shall henceforth be unlawful for any owner and/or prospective purchaser of real property to sell, convey, deliver or transfer and for any purchaser to purchase, take title or possession of any building, premises or unoccupied/vacant lot until a certificate of conformity has been issued",
+    "doc_date": "2026-06-08 (fee section amended by Ord. No. 19-2026)",
+    "via": "page",
+    "verified": null
+   },
+   {
+    "url": "https://ecode360.com/9564316",
+    "quote": "The responsibility and/or liability for obtaining the certificate of conformity is both with the property owner and/or prospective purchaser.",
+    "doc_date": "2026-10-03 (page fetched)",
+    "via": "page",
+    "verified": null
+   },
+   {
+    "url": "https://ecode360.com/9564316",
+    "quote": "then the Public Officer or his designee may issue a nonrenewable temporary certificate of conformity, which certificate will be valid for a period not in excess of six months from the date of conveyance or transfer of possession.",
+    "doc_date": "2026-10-03 (page fetched)",
+    "via": "page",
+    "verified": null
+   },
+   {
+    "url": "https://ecode360.com/9564316",
+    "quote": "Wherever a transfer, conveyance or delivery of building, premises or unoccupied/vacant lot is made between immediate members of a family, including but not limited to husband and wife, and, in the case of a building or premises, same contains less than four dwelling units.",
+    "doc_date": "2026-10-03 (page fetched)",
+    "via": "page",
+    "verified": null
+   },
+   {
+    "url": "https://www.eastorange-nj.gov/DocumentCenter/View/3559/Application-for-Certificate-of-Conformity-2026-Updated",
+    "quote": "All inspections must be completed fifteen (15) working days prior to the closing date.",
+    "doc_date": "July 7, 2026",
+    "via": "pdf",
+    "verified": true
+   },
+   {
+    "url": "https://www.eastorange-nj.gov/DocumentCenter/View/3559/Application-for-Certificate-of-Conformity-2026-Updated",
+    "quote": "* FEES MUST BE PAID BY CERTIFIED CHECK OR MONEY ORDER *",
+    "doc_date": "July 7, 2026",
+    "via": "pdf",
+    "verified": true
+   },
+   {
+    "url": "https://www.eastorange-nj.gov/DocumentCenter/View/3559/Application-for-Certificate-of-Conformity-2026-Updated",
+    "quote": "Effective July 1, 2026: Ordinance 19: Chapter 159-52. Amended to revise fees for inspections, re-inspections, and subsequent inspections.",
+    "doc_date": "July 7, 2026",
+    "via": "pdf",
+    "verified": true
+   },
+   {
+    "url": "https://www.eastorange-nj.gov/DocumentCenter/View/3559/Application-for-Certificate-of-Conformity-2026-Updated",
+    "quote": "Building Division must verify that there are NO OPEN PERMITS and NO ELEVATOR VIOLATIONS.",
+    "doc_date": "July 7, 2026",
+    "via": "pdf",
+    "verified": true
+   },
+   {
+    "url": "https://www.eastorange-nj.gov/Directory.aspx",
+    "quote": "Hassan Mateen Acting Director",
+    "doc_date": "2026-10-03 (page fetched)",
+    "via": "page",
+    "verified": true
+   },
+   {
+    "url": "https://www.eastorange-nj.gov/Directory.aspx",
+    "quote": "973-266-5320",
+    "doc_date": "2026-10-03 (page fetched)",
+    "via": "page",
+    "verified": true
+   }
+  ],
+  "confidence": "high",
+  "notes": "City Code Chapter 159, Article V (Sections 159-50 to 159-52) was read on ecode360. The fee table there (1- and 2-dwelling units $250; second reinspection $100; third and later $150) reflects Ord. No. 19-2026 (June 8, 2026, effective July 1, 2026 per the application). The City still posts an older 'Certificate Of Conformity_Fees' sheet showing $200 (Ord. 6-2014); that sheet is out of date. The first reinspection is free. Exemptions in the code include transfers between immediate family members (under four units), purchases for demolition, and probate transfers to heirs. Judicial sale buyers must apply within 30 days after taking title. Directory contacts: Hassan Mateen, Acting Director (973-266-5332, Hassan.Mateen@eastorange-nj.gov); department line 973-266-5320. The separate certificate of habitability ($100) is for rentals and is not a resale requirement."
+ },
+ "fire_cert": {
+  "requirements": [
+   "Smoke alarms, carbon monoxide alarms and a portable fire extinguisher as listed in the City code's certificate name (CSACMAPFEC) under N.J.A.C. 5:70-2.3 (the code still names the extinguisher)",
+   "Inspection by the East Orange Fire Prevention Bureau before the change of occupant"
+  ],
+  "authorities": [
+   {
+    "name": "East Orange Fire Department, Fire Prevention Bureau",
+    "type": "municipal_fire_bureau",
+    "area_served": "Entire city",
+    "lead_time": "Fee depends on business days between the request and the change of occupant: more than 10 business days for the lowest fee. Smoke/CO inspections are scheduled Monday to Thursday, 9:30am to 3:30pm.",
+    "fees": [
+     {
+      "label": "Smoke alarm, CO alarm and extinguisher certificate, request more than 10 business days before the change of occupant",
+      "amount": "$100",
+      "quote": "Request for a CSACMAPFEC received more than 10 business days prior to the change of occupant: $100.",
+      "source_url": "https://ecode360.com/45291038",
+      "verified": null
+     },
+     {
+      "label": "Request 4 to 10 business days before the change of occupant",
+      "amount": "$125",
+      "quote": "Request for a CSACMAPFEC received four to 10 business days prior to the change of occupant: $125.",
+      "source_url": "https://ecode360.com/45291038",
+      "verified": null
+     },
+     {
+      "label": "Request fewer than 4 business days before the change of occupant",
+      "amount": "$175",
+      "quote": "Request for a CSACMAPFEC received fewer than four business days prior to the change of occupant: $175.",
+      "source_url": "https://ecode360.com/45291038",
+      "verified": null
+     },
+     {
+      "label": "Recheck inspection",
+      "amount": "$50",
+      "quote": "Recheck inspection: $50 per inspection.",
+      "source_url": "https://ecode360.com/45291038",
+      "verified": null
+     }
+    ],
+    "how_to_apply": "Apply online through the Fire Department's portal (linked from the City's Forms & Permits page as 'Fire Dept. Inspections, Business/Property Registration, Permits & Fees') and choose 'New Smoke/CO Application'. For questions call the Fire Prevention Bureau at 973-266-5520.",
+    "application_url": "https://geo.muniverse.us/prod1/portal/portal.jsp?c=127134&p=149980&g=149982",
+    "department_url": "https://www.eastorange-nj.gov/161/Fire-Department",
+    "phone": "973-266-5520",
+    "email": "joseph.simmons@eastorange-nj.gov",
+    "contact_name": "Joseph Simmons",
+    "contact_title": "Fire Official (NJ DCA fire directory)",
+    "evidence": [
+     {
+      "url": "https://ecode360.com/45291038",
+      "quote": "Certificate of smoke alarm, carbon monoxide alarm and portable fire extinguisher compliance (CSACMAPFEC). The application fee for a CSACMAPFEC, as required by N.J.S.A. 5:70-2.3, shall be based upon the amount of time remaining before the change of occupant is expected, as follows:",
+      "doc_date": "2024-03-11 (Ord. No. 4-2024)",
+      "via": "page",
+      "verified": null
+     },
+     {
+      "url": "https://geo.muniverse.us/prod1/portal/portal.jsp?c=127134&p=149980&g=149982",
+      "quote": "Smoke/CO: M – Th 9:30am – 3:30pm",
+      "doc_date": "2026-10-03 (page fetched)",
+      "via": "page",
+      "verified": true
+     },
+     {
+      "url": "https://geo.muniverse.us/prod1/portal/portal.jsp?c=127134&p=149980&g=149982",
+      "quote": "New Smoke/CO Application",
+      "doc_date": "2026-10-03 (page fetched)",
+      "via": "page",
+      "verified": true
+     },
+     {
+      "url": "https://www.eastorange-nj.gov/161/Fire-Department",
+      "quote": "Fire Prevention Bureau/Fire inspections: 973-266-5520",
+      "doc_date": "2026-10-03 (page fetched)",
+      "via": "page",
+      "verified": true
+     },
+     {
+      "url": "https://www.nj.gov/dca/dfs/pdf/fire%20directory_county%20summary/fire_code_enforcement_director.pdf",
+      "quote": "LEAID: 0705-001 East Orange City ... Enf Auth. Fire Dept ... Fire Official Joseph Simmons Phone (973) 266-5519 ... Email joseph.simmons@eastorange-nj.gov",
+      "doc_date": "survey date 4/15/2024",
+      "via": "state_directory",
+      "verified": null
+     },
+     {
+      "url": "https://nj.gov/dca/dfs/pdf/ANNUAL%20REGISTRY/THIRD%20QUARTER%20LEA%20REGISTRY%202026.pdf",
+      "quote": "F East Orange City",
+      "doc_date": "2026-07",
+      "via": "pdf",
+      "verified": true
+     }
+    ],
+    "confidence": "high"
+   }
+  ],
+  "notes": "Fees come from City Code Section 146-1J (Ord. No. 4-2024), read on ecode360; they are counted in business days before the change of occupant. The state fire directory (survey 4/15/2024) lists the smoke detector compliance office as East Orange Fire Prev, 60 Main Street, (973) 266-5519; the City's Fire Department page lists the Fire Prevention Bureau at 973-266-5520. The City code still names the portable fire extinguisher; the state dropped it from the sale certificate in February 2025 (P.L.2025, c.19), so confirm with the Bureau."
+ },
+ "other_items": [
+  {
+   "label": "Open permits and elevator violations",
+   "detail": "The Building Division checks for open permits and elevator violations as part of the certificate of conformity application.",
+   "source_url": "https://www.eastorange-nj.gov/DocumentCenter/View/3559/Application-for-Certificate-of-Conformity-2026-Updated"
+  },
+  {
+   "label": "Public water connection",
+   "detail": "The applicant affirms the home is connected to the City's public water supply through an East Orange Water Commission meter, or explains in writing why not.",
+   "source_url": "https://www.eastorange-nj.gov/DocumentCenter/View/3559/Application-for-Certificate-of-Conformity-2026-Updated"
+  }
+ ],
+ "open_questions": [
+  "Does the Fire Prevention Bureau still require a portable fire extinguisher for the smoke/CO certificate after P.L.2025, c.19?",
+  "Is there a fee for a temporary certificate of conformity on an as-is sale? None is published.",
+  "How far ahead should the certificate of conformity be requested to meet the 15 working day rule?"
+ ],
+ "checked_at": "2026-10-03",
+ "verification": {
+  "fees": 7,
+  "fee_ok": 2,
+  "fee_bad": 0,
+  "fee_unchecked": 5,
+  "quotes": 16,
+  "q_ok": 10,
+  "q_bad": 0,
+  "q_unchecked": 6
+ }
+}

@@ -1,0 +1,230 @@
+{
+ "municipality_code": "1820",
+ "municipality": "Warren Township",
+ "county": "SOMERSET",
+ "resale_co": {
+  "status": "required",
+  "name": "Construction Records Clearance Certificate (CRCC)",
+  "issued_by": "Warren Township Construction Office (Construction Official)",
+  "lead_time": "Apply at least 10 days before the change of ownership; filing less than 10 days before the certificate is needed costs the expedited fee.",
+  "valid_for": "90 days, and only for permits issued before the CRCC application",
+  "requirements": [
+   "Records check (not a physical inspection) for open construction permits",
+   "If permits are open, all final inspections and approvals must be done and certificates issued before the CRCC; the applicant must close all permits and notify the office",
+   "Application must list the closing date",
+   "Exempt if there is no change in physical occupancy for deed corrections, transfers between spouses, new construction needing a CO, estate distributions, refinancing and similar transfers"
+  ],
+  "fees": [
+   {
+    "label": "CRCC, request more than 10 calendar days before closing",
+    "amount": "$75.00",
+    "quote": "[ ] $75.00 Requests received more than 10 calendar days from change of occupancy/closing.",
+    "source_url": "https://warrennj.org/DocumentCenter/View/9091/CRCC-application-2024-PDF",
+    "verified": true
+   },
+   {
+    "label": "CRCC, expedited, request within 10 calendar days of closing",
+    "amount": "$150.00",
+    "quote": "[ ] $150.00 Expedited requests received within 10 calendar days from change of occupancy/closing.",
+    "source_url": "https://warrennj.org/DocumentCenter/View/9091/CRCC-application-2024-PDF",
+    "verified": true
+   },
+   {
+    "label": "CRCC application fee (Township code)",
+    "amount": "$75",
+    "quote": "The application fee for the CRCC shall be $75.",
+    "source_url": "https://ecode360.com/45379552",
+    "verified": null
+   },
+   {
+    "label": "CRCC expedited review (Township code)",
+    "amount": "$150",
+    "quote": "If an application is filed less than 10 days before the CRCC is needed by the applicant, the fee for the expedited review shall be $150.",
+    "source_url": "https://ecode360.com/45379552",
+    "verified": null
+   }
+  ],
+  "how_to_apply": "Fill out the Construction Records Clearance Certificate application (Township Forms & Permits page) and submit it with the fee to the Construction Office, 46 Mountain Boulevard, Warren (temporary in-person location: Municipal Complex, 3 Mountainview Road). Questions: 908-753-8000 ext. 240, 241 or 242.",
+  "application_url": "https://warrennj.org/DocumentCenter/View/9091/CRCC-application-2024-PDF",
+  "department_url": "https://warrennj.org/153/Construction-Code",
+  "phone": "908-753-8000 ext. 240",
+  "email": "jheiss@warrennj.org",
+  "contact_name": "Jeffrey Heiss",
+  "contact_title": "Construction Official/Building Subcode",
+  "evidence": [
+   {
+    "url": "https://ecode360.com/45379552",
+    "quote": "A CRCC shall be required prior to the sale of any residential or commercial structure.",
+    "doc_date": "2024-05-09 (Ord. No. 24-09)",
+    "via": "page",
+    "verified": null
+   },
+   {
+    "url": "https://ecode360.com/45379552",
+    "quote": "The owner or his authorized agent shall submit a written application and payment of fees at least 10 days' prior to the change of ownership on the form available in the Construction Code Office.",
+    "doc_date": "2024-05-09 (Ord. No. 24-09)",
+    "via": "page",
+    "verified": null
+   },
+   {
+    "url": "https://ecode360.com/45379552",
+    "quote": "The CRCC shall only be valid for a period of 90 days and shall only apply to any permits issued prior to the CRCC application and shall not apply to any permit applications submitted after the CRCC application.",
+    "doc_date": "2024-05-09 (Ord. No. 24-09)",
+    "via": "page",
+    "verified": null
+   },
+   {
+    "url": "https://warrennj.org/DocumentCenter/View/9091/CRCC-application-2024-PDF",
+    "quote": "If open permits are found, applicant MUST close all permits & notify our office to obtain issuance of CRCC.",
+    "doc_date": "Revised 05/22/2024",
+    "via": "pdf",
+    "verified": true
+   },
+   {
+    "url": "https://warrennj.org/411",
+    "quote": "Application for Construction Records Clearance Certificate",
+    "doc_date": "2026-10-03 (page fetched)",
+    "via": "page",
+    "verified": true
+   },
+   {
+    "url": "https://warrennj.org/153/Construction-Code",
+    "quote": "Jeffrey Heiss Construction Official/Building Subcode",
+    "doc_date": "2026-10-03 (page fetched)",
+    "via": "page",
+    "verified": null
+   }
+  ],
+  "confidence": "high",
+  "notes": "Township Code Section 8-13 (added May 9, 2024 by Ord. No. 24-09), read on ecode360, requires a Construction Records Clearance Certificate before the sale of any residential structure. It is a records check for open permits, not a physical inspection or resale CO. The code says the expedite fee applies to filings less than 10 days before the certificate is needed; the application (revised 05/22/2024) says within 10 calendar days of closing. Owners and buyers are jointly responsible. The Township also has a Commercial Property Transfer Certificate for commercial property. Lead-safe certification in Section 8-12 applies to rentals only."
+ },
+ "fire_cert": {
+  "requirements": [
+   "Smoke detectors on every level (basement, first and second floors) and in every separate sleeping area; basement detector at the bottom of the basement stairs; detectors over 10 years old must be replaced",
+   "Battery-only smoke and CO units must be 10-year sealed battery models",
+   "Carbon monoxide alarms (UL 2034) within 10 feet of bedroom doors; CO alarms over 7 years old must be replaced unless the manufacturer says otherwise",
+   "Portable fire extinguisher (2A:10B:C, no more than 10 lbs) mounted within 10 feet of the kitchen, less than one year old or tagged within one year (Township form and code still list it)"
+  ],
+  "authorities": [
+   {
+    "name": "Warren Township Fire Prevention Bureau (Fire Marshal's Office, Warren Township Fire Department)",
+    "type": "municipal_fire_bureau",
+    "area_served": "Entire township",
+    "lead_time": "Fee depends on when the request is made: more than 10 business days before the change of occupant for the lowest fee (per the application). No specific inspection dates or times are given; the inspector coordinates the inspection. The inspector waits only 10 minutes; a missed inspection forfeits the fee.",
+    "fees": [
+     {
+      "label": "Smoke/CO/extinguisher certificate, request more than 10 business days before the change of occupant",
+      "amount": "$50.00",
+      "quote": "requests for a CSDCMAPFEC received more than 10 business days prior to the change of occupant: $50.00",
+      "source_url": "https://warrennj.org/DocumentCenter/View/346/Application-for-Certificate-of-Smoke-Detector-Carbon-Monoxide-and-Portable-Fire-Extinguisher-Compliance-PDF",
+      "verified": true
+     },
+     {
+      "label": "Request fewer than 10 business days before the change of occupant",
+      "amount": "$80.00",
+      "quote": "requests for a CSDCMAPFEC received fewer than 10 business prior to the change of occupant $80.00",
+      "source_url": "https://warrennj.org/DocumentCenter/View/346/Application-for-Certificate-of-Smoke-Detector-Carbon-Monoxide-and-Portable-Fire-Extinguisher-Compliance-PDF",
+      "verified": true
+     },
+     {
+      "label": "Reinspection before the change of occupant",
+      "amount": "$35.00",
+      "quote": "requests for a CSDCMAPFEC for re-inspection prior to the change of occupant $35.00",
+      "source_url": "https://warrennj.org/DocumentCenter/View/346/Application-for-Certificate-of-Smoke-Detector-Carbon-Monoxide-and-Portable-Fire-Extinguisher-Compliance-PDF",
+      "verified": true
+     }
+    ],
+    "how_to_apply": "Print the Application for Certificate of Smoke Detector, Carbon Monoxide and Portable Fire Extinguisher Compliance, then email it to Fire Secretary Meagan Rivenbark (mrivenbark@warrennj.org) or mail or drop it off at Town Hall. Pay by credit card through MuniciPay (smoke detector applications only), or by cash or check payable to Warren Township.",
+    "application_url": "https://warrennj.org/DocumentCenter/View/346/Application-for-Certificate-of-Smoke-Detector-Carbon-Monoxide-and-Portable-Fire-Extinguisher-Compliance-PDF",
+    "department_url": "https://warrennj.org/193/Residential-Smoke-Detector-Inspection-In",
+    "phone": "908-753-8000 ext. 274",
+    "email": "mrivenbark@warrennj.org",
+    "contact_name": "Meagan Rivenbark",
+    "contact_title": "Fire Secretary (Fire Marshal: Al Shjarback, ext. 259, ashjarback@warrennj.org)",
+    "evidence": [
+     {
+      "url": "https://warrennj.org/193/Residential-Smoke-Detector-Inspection-In",
+      "quote": "For residential smoke detector inspection and permit application questions, please call 908-753-8000, ext. 274",
+      "doc_date": "2026-10-03 (page fetched)",
+      "via": "page",
+      "verified": true
+     },
+     {
+      "url": "https://warrennj.org/DocumentCenter/View/346/Application-for-Certificate-of-Smoke-Detector-Carbon-Monoxide-and-Portable-Fire-Extinguisher-Compliance-PDF",
+      "quote": "I understand that if the above property is sold or leased before the CSDCMAPFEC is obtained, it WILL result in the issuance of a penalty of up to $500.00",
+      "doc_date": "2026-09-17 (PDF date)",
+      "via": "pdf",
+      "verified": true
+     },
+     {
+      "url": "https://warrennj.org/DocumentCenter/View/346/Application-for-Certificate-of-Smoke-Detector-Carbon-Monoxide-and-Portable-Fire-Extinguisher-Compliance-PDF",
+      "quote": "I UNDERSTAND NO SPECIFIC INSPECTION DATES AND TIMES WILL BE GIVEN.",
+      "doc_date": "2026-09-17 (PDF date)",
+      "via": "pdf",
+      "verified": true
+     },
+     {
+      "url": "https://warrennj.org/DocumentCenter/View/345/Application-for-Certificate-of-Smoke-Detector-Carbon-Monoxide-and-Portable-Fire-Extinguisher-Compliance-Requirements-PDF",
+      "quote": "At least one portable fire extinguisher shall be installed in all one- and two-family dwellings upon change of occupancy;",
+      "doc_date": "",
+      "via": "pdf",
+      "verified": true
+     },
+     {
+      "url": "https://ecode360.com/35228017",
+      "quote": "The cost of this inspection, to be paid at the time of ordering the same, shall be $50 if the ordering of the inspection and payment of the fee due is completed at least five days before the time of the requested inspection.",
+      "doc_date": "2026-10-03 (page fetched)",
+      "via": "page",
+      "verified": null
+     },
+     {
+      "url": "https://warrennj.org/187/Fire-Prevention-Bureau",
+      "quote": "Al Shjarback Fire Marshal",
+      "doc_date": "2026-10-03 (page fetched)",
+      "via": "page",
+      "verified": true
+     },
+     {
+      "url": "https://www.nj.gov/dca/dfs/pdf/fire%20directory_county%20summary/fire_code_enforcement_director.pdf",
+      "quote": "LEAID: 1820-001 Warren Twp Fire ... Name: Warren Twp Fire Dept Addr: 46 Mountain Blvd ... Enf Auth. Fire Dept ... Fire Official Alfred E Shjarback Phone (908) 753-8000 ... Email ashjarback@warrennj.org",
+      "doc_date": "survey date 2/6/2026",
+      "via": "state_directory",
+      "verified": null
+     },
+     {
+      "url": "https://nj.gov/dca/dfs/pdf/ANNUAL%20REGISTRY/THIRD%20QUARTER%20LEA%20REGISTRY%202026.pdf",
+      "quote": "F Warren Township",
+      "doc_date": "2026-07",
+      "via": "pdf",
+      "verified": true
+     }
+    ],
+    "confidence": "high"
+   }
+  ],
+  "notes": "The application (dated September 2026) cites Township Ordinance 2-4.18 and sets $50.00 (more than 10 business days before the change of occupant), $80.00 (fewer than 10 business days) and $35.00 for a reinspection. The code text of Section 2-4.18 on ecode360 uses a different cutoff: $50 if ordered at least five days before the requested inspection, $80 if four days or less, $35 reinspection. Confirm which cutoff the Bureau uses. Both the form and the code still require a portable fire extinguisher, which state law (P.L.2025, c.19) dropped from the sale certificate in February 2025. Township Code Section 10-8.2 says the local fire agency does not enforce the fire code in owner-occupied one and two family homes, but the resale smoke/CO/extinguisher certificate is still issued by the Township under Section 2-4.18."
+ },
+ "other_items": [
+  {
+   "label": "Open construction permits",
+   "detail": "All open construction permits must be closed before the Construction Records Clearance Certificate is issued.",
+   "source_url": "https://ecode360.com/45379552"
+  }
+ ],
+ "open_questions": [
+  "Does the Fire Prevention Bureau still require a portable fire extinguisher at resale after P.L.2025, c.19?",
+  "Which fee cutoff applies for the smoke/CO certificate: 10 business days before the change of occupant (application) or 5 days before the inspection (code)?",
+  "Is the CRCC expedite cutoff counted in calendar days before closing (application) or days before the certificate is needed (code)?"
+ ],
+ "checked_at": "2026-10-03",
+ "verification": {
+  "fees": 7,
+  "fee_ok": 5,
+  "fee_bad": 0,
+  "fee_unchecked": 2,
+  "quotes": 14,
+  "q_ok": 8,
+  "q_bad": 0,
+  "q_unchecked": 6
+ }
+}

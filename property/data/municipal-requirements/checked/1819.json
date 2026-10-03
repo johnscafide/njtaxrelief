@@ -1,0 +1,171 @@
+{
+ "municipality_code": "1819",
+ "municipality": "South Bound Brook Borough",
+ "county": "SOMERSET",
+ "checked_at": "2026-10-03",
+ "resale_co": {
+  "status": "required",
+  "name": "Certificate of Legal Use (combined with Smoke Detector and Carbon Monoxide Alarm Compliance)",
+  "issued_by": "Borough of South Bound Brook Bureau of Fire Prevention (Fire Prevention Officer)",
+  "lead_time": "The Bureau asks for at least two weeks' notice from receipt of the application and fee. Inspections are Tuesdays and Thursdays between 4pm and 6pm, by appointment.",
+  "valid_for": "",
+  "requirements": [
+   "Inspection for a Certificate of Legal Use for continued use of the property, requested with the new owner's name, block and lot, number of dwelling units and an appointment date",
+   "Same inspection covers smoke alarms, carbon monoxide alarms and the secondary power source label (see fire certificate)"
+  ],
+  "fees": [
+   {
+    "label": "Certificate of Legal Use / smoke and CO compliance inspection, per unit",
+    "amount": "$150.00",
+    "quote": "Enclosed is a fee for $150.00 per unit.",
+    "source_url": "https://sbbnj.com/wp-content/uploads/Documents/BuildingDept/CertificateOfLegalUseRev08_2026.pdf",
+    "verified": null
+   },
+   {
+    "label": "Re-inspection",
+    "amount": "$100.00",
+    "quote": "Reinspection fee is $100.00",
+    "source_url": "https://sbbnj.com/wp-content/uploads/Documents/BuildingDept/CertificateOfLegalUseRev08_2026.pdf",
+    "verified": null
+   }
+  ],
+  "how_to_apply": "Download the Certificate of Legal Use application from the Building Department page, fill in the property, new owner, present owner, contact and number of units, and send it with a check for $150.00 per unit to Fire Prevention, 2 Main Street, South Bound Brook, NJ 08880 (732-356-0258 x 105). Appointments are required.",
+  "application_url": "https://sbbnj.com/wp-content/uploads/Documents/BuildingDept/CertificateOfLegalUseRev08_2026.pdf",
+  "department_url": "https://sbbnj.com/departments/building-department/",
+  "phone": "732-356-0258 x 105",
+  "email": "rpinnella@southboundbrook.com",
+  "contact_name": "Ryan Pinnella",
+  "contact_title": "Fire Marshal",
+  "evidence": [
+   {
+    "url": "https://sbbnj.com/wp-content/uploads/Documents/BuildingDept/CertificateOfLegalUseRev08_2026.pdf",
+    "quote": "I hereby request you to make an inspection for a Certificate of Legal Use for continued use of the above property.",
+    "doc_date": "Rev. 08/2026 (PDF created 2026-08-03)",
+    "via": "pdf",
+    "verified": null
+   },
+   {
+    "url": "https://sbbnj.com/wp-content/uploads/Documents/BuildingDept/CertificateOfLegalUseRev08_2026.pdf",
+    "quote": "CERTIFICATE OF LEGAL USE SMOKE DETECTOR AND CARBON MONOXIDE ALARM COMPLIANCE",
+    "doc_date": "Rev. 08/2026",
+    "via": "pdf",
+    "verified": null
+   },
+   {
+    "url": "https://sbbnj.com/departments/building-department/",
+    "quote": "Certificate of Legal Use Application",
+    "doc_date": "2026-10-03 (page fetched)",
+    "via": "page",
+    "verified": null
+   }
+  ],
+  "confidence": "medium",
+  "notes": "The Borough's Building Department page links a Certificate of Legal Use application (revised August 2026). The form asks for the new owner and requests an inspection for continued use, and it doubles as the smoke detector and CO alarm compliance certificate, handled by Fire Prevention. No ordinance text was found online (ecode360 SO4087 blocked), so it is not confirmed in writing that the Certificate of Legal Use is mandatory for every sale beyond the state smoke/CO requirement; status is set to required from the form, with medium confidence. The PDF is a scanned image, so its quotes were read visually and may not be machine-findable. The Building Department page lists Stephen Rodzinak, Building Construction Officer/Sub-Code Official/Fire Sub-Code Official, (732) 356-0258. The site sits behind a bot check, so plain fetches can fail. A Lead Paint Form is also linked; the state lead-safe inspection law applies to pre-1978 rentals, not sales of owner-occupied homes."
+ },
+ "fire_cert": {
+  "requirements": [
+   "Smoke alarms per the age of the home (Table B): before January 1977 10-year sealed battery alarms on all levels; later homes need electric, then interconnected, then interconnected with battery backup in sleeping areas, matching original construction",
+   "Replace smoke alarms older than 10 years or past the replacement date; electric alarms may not be replaced with battery alarms; defective interconnected alarms must be replaced with compatible units",
+   "Basement and non-sleeping levels: alarm near the stairway to the floor above; two-family common hallways and stairways need alarms at each landing",
+   "Alarms listed to UL 217 or ETL, mounted flush, not painted, not within 5 feet of a kitchen or 3 feet of a bathroom door, fan or air vent",
+   "Homes relying on a fire alarm system need a contractor report showing it is fully operational; the Bureau will not test alarm systems",
+   "Carbon monoxide alarms (UL 2034) on sleeping levels within 10 feet outside every sleeping area",
+   "Secondary power source label (such as CAUTION: MULTIPLE SOURCES OF POWER, not handwritten) within 18 inches of the main panel and meter if the home has a secondary power source; labels available at the counter",
+   "Portable fire extinguisher, 2A-10B:C, no more than 10 lbs, mounted within 10 feet of the kitchen (older 2020 instruction sheet still lists it)"
+  ],
+  "authorities": [
+   {
+    "name": "Borough of South Bound Brook Bureau of Fire Prevention",
+    "type": "municipal_fire_bureau",
+    "area_served": "Entire borough",
+    "lead_time": "At least two weeks' notice from receipt of the application and fee. Inspections Tuesdays and Thursdays 4pm to 6pm, by appointment.",
+    "fees": [
+     {
+      "label": "Certificate of Legal Use / smoke and CO alarm compliance inspection, per unit",
+      "amount": "$150.00",
+      "quote": "Enclosed is a fee for $150.00 per unit.",
+      "source_url": "https://sbbnj.com/wp-content/uploads/Documents/BuildingDept/CertificateOfLegalUseRev08_2026.pdf",
+      "verified": null
+     },
+     {
+      "label": "Re-inspection",
+      "amount": "$100.00",
+      "quote": "ALL RE-INSPECTIONS HAVE A FEE OF $100.00",
+      "source_url": "https://sbbnj.com/wp-content/uploads/Documents/BuildingDept/CertificateOfLegalUseRev08_2026.pdf",
+      "verified": null
+     }
+    ],
+    "how_to_apply": "Send the Certificate of Legal Use application with the fee to Fire Prevention, 2 Main Street, South Bound Brook (732-356-0258 x 105, rpinnella@southboundbrook.com) at least two weeks ahead and book a Tuesday or Thursday 4pm to 6pm appointment. Read the guidelines first; a failed inspection costs $100.00 to re-inspect.",
+    "application_url": "https://sbbnj.com/wp-content/uploads/Documents/BuildingDept/CertificateOfLegalUseRev08_2026.pdf",
+    "department_url": "https://sbbnj.com/departments/building-department/",
+    "phone": "732-356-0258 x 105",
+    "email": "rpinnella@southboundbrook.com",
+    "contact_name": "Ryan Pinnella",
+    "contact_title": "Fire Marshal",
+    "evidence": [
+     {
+      "url": "https://sbbnj.com/wp-content/uploads/Documents/BuildingDept/CertificateOfLegalUseRev08_2026.pdf",
+      "quote": "The Bureau requires a minimum of two (2) weeks' notice from the time we receive the application and fee.",
+      "doc_date": "Rev. 08/2026",
+      "via": "pdf",
+      "verified": null
+     },
+     {
+      "url": "https://sbbnj.com/wp-content/uploads/Documents/BuildingDept/CertificateOfLegalUseRev08_2026.pdf",
+      "quote": "The South Bound Brook Bureau of Fire Prevention conducts inspections on Tuesdays and Thursdays between the hours of 4pm and 6pm.",
+      "doc_date": "Rev. 08/2026",
+      "via": "pdf",
+      "verified": null
+     },
+     {
+      "url": "https://sbbnj.com/wp-content/uploads/Documents/BuildingDept/CertificateOfLegalUseRev08_2026.pdf",
+      "quote": "Email: rpinnella@southboundbrook.com",
+      "doc_date": "Rev. 08/2026",
+      "via": "pdf",
+      "verified": null
+     },
+     {
+      "url": "https://sbbnj.com/wp-content/uploads/Documents/BuildingDept/Instructions-CLU.pdf",
+      "quote": "At least one portable fire extinguisher shall be mounted within 10 feet of the kitchen area & located in the path of egress.",
+      "doc_date": "2020-07-07 (PDF created)",
+      "via": "pdf",
+      "verified": null
+     },
+     {
+      "url": "https://www.nj.gov/dca/dfs/pdf/fire%20directory_county%20summary/fire_code_enforcement_director.pdf",
+      "quote": "LEAID: 1819-001 South Bound Brook Boro ... Enf Auth. Fire Dept ... Fire Official Ryan Pinnella Phone (732) 356-0258 ... Email rpinnella@southboundbrook.com",
+      "doc_date": "survey date 5/27/2025",
+      "via": "state_directory",
+      "verified": null
+     },
+     {
+      "url": "https://nj.gov/dca/dfs/pdf/ANNUAL%20REGISTRY/THIRD%20QUARTER%20LEA%20REGISTRY%202026.pdf",
+      "quote": "F South Bound Brook Borough",
+      "doc_date": "2026-07",
+      "via": "pdf",
+      "verified": true
+     }
+    ],
+    "confidence": "high"
+   }
+  ],
+  "notes": "The Borough charges a flat $150.00 per unit (re-inspection $100.00) on its August 2026 application rather than the state's tiered days-before-closing fees; whether a short-notice surcharge applies is not stated. The August 2026 guidelines follow P.L.2025, c.19 (secondary power label, no extinguisher), but the older 2020 Smoke/CO instruction sheet linked on the same page still requires a fire extinguisher; confirm with the Bureau. Both PDFs are scanned images, so quotes were read visually. Ryan Pinnella is also the Montgomery Township fire official."
+ },
+ "other_items": [],
+ "open_questions": [
+  "Is the Certificate of Legal Use required for every 1-2 family sale by ordinance, and is it only the smoke/CO inspection or also a zoning/legal-use review?",
+  "Is the fee the same $150.00 per unit regardless of how close to closing the request is made?",
+  "Is a portable fire extinguisher still checked (the 2020 instruction sheet lists it)?",
+  "How long is the certificate valid?"
+ ],
+ "verification": {
+  "fees": 4,
+  "fee_ok": 0,
+  "fee_bad": 0,
+  "fee_unchecked": 4,
+  "quotes": 9,
+  "q_ok": 1,
+  "q_bad": 0,
+  "q_unchecked": 8
+ }
+}

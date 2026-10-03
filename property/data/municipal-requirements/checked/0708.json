@@ -1,0 +1,179 @@
+{
+ "municipality_code": "0708",
+ "municipality": "Glen Ridge Borough",
+ "county": "ESSEX",
+ "resale_co": {
+  "status": "required",
+  "name": "Certificate of Occupancy / Zoning Compliance Certificate for residential property transfer",
+  "issued_by": "Borough of Glen Ridge, Director of Planning and Development",
+  "lead_time": "",
+  "valid_for": "",
+  "requirements": [
+   "Seller or owner only must request it by email to the Director of Planning and Development",
+   "Zoning compliance inspection of the property before the sale",
+   "Smoke detector certification is handled on the same Borough page (see fire certificate)"
+  ],
+  "fees": [
+   {
+    "label": "Zoning Compliance Certificate, residential property transfer",
+    "amount": "$175.00",
+    "quote": "Residential Property Transfers $175.00",
+    "source_url": "https://www.glenridgenj.org/wp-content/uploads/2026/01/Resolution-18-26-Fee-Schedule.pdf",
+    "verified": true
+   },
+   {
+    "label": "Smoke detector certification (Borough fee schedule, Zoning section)",
+    "amount": "$75.00",
+    "quote": "Smoke Detector Certification $75.00",
+    "source_url": "https://www.glenridgenj.org/wp-content/uploads/2026/01/Resolution-18-26-Fee-Schedule.pdf",
+    "verified": true
+   }
+  ],
+  "how_to_apply": "The seller or owner (only) emails the Director of Planning and Development at eideline@glenridgenj.org to request the Certificate of Occupancy for the sale. The office is at the Glen Ridge Municipal Building, 825 Bloomfield Avenue, Room 101.",
+  "application_url": "",
+  "department_url": "https://www.glenridgenj.org/zoningcomp/",
+  "phone": "973-748-8400 ext. 240",
+  "email": "eideline@glenridgenj.org",
+  "contact_name": "Erik DeLine",
+  "contact_title": "Director of Planning & Development",
+  "evidence": [
+   {
+    "url": "https://www.glenridgenj.org/zoningcomp/",
+    "quote": "To obtain a Certificate of Occupancy for the sale of a house or transfer of a tenant, the SELLER / OWNER ONLY is to EMAIL the Director of Planning and Development at:",
+    "doc_date": "2026-10-03 (page fetched)",
+    "via": "page",
+    "verified": true
+   },
+   {
+    "url": "https://www.glenridgenj.org/zoningcomp/",
+    "quote": "Zoning Compliance & Smoke Certificate Requirements",
+    "doc_date": "2026-10-03 (page fetched)",
+    "via": "page",
+    "verified": true
+   },
+   {
+    "url": "https://www.glenridgenj.org/wp-content/uploads/2026/01/Resolution-18-26-Fee-Schedule.pdf",
+    "quote": "Residential Property Transfers $175.00",
+    "doc_date": "Tuesday, January 20, 2026 (Resolution No. 18-26)",
+    "via": "pdf",
+    "verified": true
+   },
+   {
+    "url": "https://www.glenridgenj.org/wp-content/uploads/2026/01/Resolution-18-26-Fee-Schedule.pdf",
+    "quote": "Smoke Detector Certification $75.00",
+    "doc_date": "Tuesday, January 20, 2026 (Resolution No. 18-26)",
+    "via": "pdf",
+    "verified": true
+   },
+   {
+    "url": "https://www.glenridgenj.org/planning-development/",
+    "quote": "Erik DeLine, AICP, PP",
+    "doc_date": "2026-10-03 (page fetched)",
+    "via": "page",
+    "verified": true
+   },
+   {
+    "url": "https://www.glenridgenj.org/planning-development/",
+    "quote": "973-748-8400 ext 240",
+    "doc_date": "2026-10-03 (page fetched)",
+    "via": "page",
+    "verified": true
+   }
+  ],
+  "confidence": "high",
+  "notes": "The email address is shown on the Borough page through an obfuscated mailto link that decodes to eideline@glenridgenj.org. The 2026 fee schedule (Resolution No. 18-26, January 20, 2026) lists the Zoning Compliance Certificate for Residential Property Transfers at $175.00, change of tenant 1-3 family at $175.00 per unit, and an Annual Rental License at $300.00 (rental only). The Construction Department section also lists a Certificate of Continued Occupancy at $50.00 and Certificate of Occupancy at $150.00; those appear to be Uniform Construction Code items, not the resale certificate, so they are not counted here. No online form or written list of inspection items was found."
+ },
+ "fire_cert": {
+  "requirements": [
+   "Smoke alarms and carbon monoxide alarms as required by N.J.A.C. 5:70-2.3 for a 1-2 family sale (no Borough checklist found online)",
+   "Montclair Fire Prevention Bureau (the fire code agency for Glen Ridge) says fire extinguishers are no longer required"
+  ],
+  "authorities": [
+   {
+    "name": "Borough of Glen Ridge Planning and Development / Zoning (smoke certificate requested through the same Borough page); fire code enforcing agency is the Montclair Township Fire Department under a shared service",
+    "type": "municipal_fire_bureau",
+    "area_served": "Entire borough",
+    "lead_time": "Montclair's process asks for documents at least 10 days before closing; Glen Ridge did not post a lead time.",
+    "fees": [
+     {
+      "label": "Smoke detector certification (Borough fee schedule, Zoning section)",
+      "amount": "$75.00",
+      "quote": "Smoke Detector Certification $75.00",
+      "source_url": "https://www.glenridgenj.org/wp-content/uploads/2026/01/Resolution-18-26-Fee-Schedule.pdf",
+      "verified": true
+     }
+    ],
+    "how_to_apply": "Start with the Borough: the seller emails the Director of Planning and Development (eideline@glenridgenj.org), whose page covers both the zoning compliance and smoke certificate. The Montclair Fire Prevention Bureau (fireprevention@montclairnjusa.org, 973-509-4760 per state directory) is the listed fire code agency and can confirm who inspects.",
+    "application_url": "",
+    "department_url": "https://www.glenridgenj.org/zoningcomp/",
+    "phone": "973-748-8400 ext. 240",
+    "email": "eideline@glenridgenj.org",
+    "contact_name": "Justin Thompson",
+    "contact_title": "Fire Official (Montclair Fire Department, shared service for Glen Ridge)",
+    "evidence": [
+     {
+      "url": "https://www.glenridgenj.org/zoningcomp/",
+      "quote": "Zoning Compliance & Smoke Certificate Requirements",
+      "doc_date": "2026-10-03 (page fetched)",
+      "via": "page",
+      "verified": true
+     },
+     {
+      "url": "https://www.glenridgenj.org/wp-content/uploads/2026/01/Resolution-18-26-Fee-Schedule.pdf",
+      "quote": "Smoke Detector Certification $75.00",
+      "doc_date": "Tuesday, January 20, 2026 (Resolution No. 18-26)",
+      "via": "pdf",
+      "verified": true
+     },
+     {
+      "url": "https://nj.gov/dca/dfs/pdf/ANNUAL%20REGISTRY/THIRD%20QUARTER%20LEA%20REGISTRY%202026.pdf",
+      "quote": "Montclair Township is the LEA for Glen Ridge Borough.",
+      "doc_date": "2026-07",
+      "via": "pdf",
+      "verified": true
+     },
+     {
+      "url": "https://www.nj.gov/dca/dfs/pdf/fire%20directory_county%20summary/fire_code_enforcement_director.pdf",
+      "quote": "LEAID: 0708-001 Glen Ridge Boro ... Name: Monclair Twp Fire Dept ... Fire Official Justin Thompson Phone (973) 509-4769 ... SSA with Montclair Twp ... Phone (973) 509-4760",
+      "doc_date": "2025-09 (survey date 9/5/2025)",
+      "via": "state_directory",
+      "verified": null
+     },
+     {
+      "url": "https://www.montclairnjusa.org/Government/Departments/Fire-Department/Inspections",
+      "quote": "Fire extinguishers are no longer required.",
+      "doc_date": "2026-10-03 (page fetched)",
+      "via": "page",
+      "verified": null
+     },
+     {
+      "url": "https://www.montclairnjusa.org/Government/Departments/Fire-Department/Inspections",
+      "quote": "A fee of $75.00 is due at the time of inspection, or whenever the occupancy passes the inspection.",
+      "doc_date": "2026-10-03 (page fetched)",
+      "via": "page",
+      "verified": null
+     }
+    ],
+    "confidence": "medium"
+   }
+  ],
+  "notes": "Glen Ridge's 2026 fee schedule lists a $75.00 Smoke Detector Certification under Zoning, and its zoning page title covers the smoke certificate, so the Borough appears to take the request. The NJ DCA registry says Montclair Township is the fire code enforcing agency for Glen Ridge, and the state directory lists Montclair Fire Official Justin Thompson (jthompson@montclairnjusa.org; phones (973) 509-4760 and (973) 509-4769). Montclair's own inspections page (which does not mention Glen Ridge) charges $75.00, asks for documents 10 days before closing, says the certificate is good for six months, and says fire extinguishers are no longer required. Montclair's page was read with a fetch tool because the site blocks plain downloads. Confirm with the Borough whether its inspector or Montclair Fire Prevention does the smoke/CO inspection."
+ },
+ "other_items": [],
+ "open_questions": [
+  "Who actually performs the smoke/CO inspection in Glen Ridge: Borough zoning staff or Montclair Fire Prevention?",
+  "Is the $75.00 smoke fee paid to Glen Ridge or to Montclair, and are there rush or reinspection fees?",
+  "What does the zoning compliance inspection check, how long does it take, and how long is the certificate valid?"
+ ],
+ "checked_at": "2026-10-03",
+ "verification": {
+  "fees": 3,
+  "fee_ok": 3,
+  "fee_bad": 0,
+  "fee_unchecked": 0,
+  "quotes": 12,
+  "q_ok": 9,
+  "q_bad": 0,
+  "q_unchecked": 3
+ }
+}

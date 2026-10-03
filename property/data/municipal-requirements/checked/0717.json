@@ -1,0 +1,256 @@
+{
+ "municipality_code": "0717",
+ "municipality": "City of Orange Township",
+ "county": "ESSEX",
+ "checked_at": "2026-10-03",
+ "resale_co": {
+  "status": "required",
+  "name": "Certificate of Habitability (Certificate for Sales or Transfer of Title)",
+  "issued_by": "City of Orange Township Code Enforcement Division",
+  "lead_time": "",
+  "valid_for": "",
+  "requirements": [
+   "Inspection by the Code Enforcement Division before the sale or transfer of title",
+   "Copy of the sales agreement attached to the application, signed by both seller and purchaser",
+   "No work done without permits",
+   "Working smoke detector on each level, including basement",
+   "Carbon monoxide detector, one per unit, usually in the sleeping area or level",
+   "Relief valves on the hot water heater and boiler piped to within 8 inches of the floor",
+   "Sump pump (if present) piped to the outside, not connected to the sanitary sewer",
+   "Handrails for anything over two steps; stairs in good shape inside and out",
+   "All switch and outlet covers in place; electric panel in good shape; no exposed wires or open electrical boxes",
+   "Attached garage with no holes in walls or ceilings",
+   "All toilets and faucets working; hot water at least 110 degrees with hot faucet on the left",
+   "Proper fit and venting of furnace/boiler and water heater to the chimney",
+   "No broken windows or glass, and no other visible safety faults"
+  ],
+  "fees": [
+   {
+    "label": "Certificate of Habitability, one unit, initial inspection (first reinspection no fee)",
+    "amount": "$200",
+    "quote": "One $200 No Fee $100",
+    "source_url": "https://www.orangenj.gov/176/Code-Enforcement-Division",
+    "verified": true
+   },
+   {
+    "label": "Certificate of Habitability, one unit, second reinspection",
+    "amount": "$100",
+    "quote": "One $200 No Fee $100",
+    "source_url": "https://www.orangenj.gov/176/Code-Enforcement-Division",
+    "verified": true
+   },
+   {
+    "label": "Certificate of Habitability, two units, initial inspection (first reinspection no fee)",
+    "amount": "$300",
+    "quote": "Two $300 No Fee $200",
+    "source_url": "https://www.orangenj.gov/176/Code-Enforcement-Division",
+    "verified": true
+   },
+   {
+    "label": "Certificate of Habitability, two units, second reinspection",
+    "amount": "$200",
+    "quote": "Two $300 No Fee $200",
+    "source_url": "https://www.orangenj.gov/176/Code-Enforcement-Division",
+    "verified": true
+   }
+  ],
+  "how_to_apply": "Fill out the City's Certificate for Sales or Transfer of Title form, attach a copy of the contract signed by both seller and purchaser, and return it to the Code Enforcement Division, Room 305, City Hall, 29 North Day Street, Orange. The form asks for a certified check or money order payable to City of Orange Township. The fire certificate (smoke/CO) is a separate application to the Fire Prevention Bureau.",
+  "application_url": "https://www.orangenj.gov/DocumentCenter/View/162/Certificate-for-Sales-or-Transfer-of-Title-PDF",
+  "department_url": "https://www.orangenj.gov/176/Code-Enforcement-Division",
+  "phone": "(973) 952-6066",
+  "email": "kalleyne@orangenj.gov",
+  "contact_name": "Khalfani Alleyne",
+  "contact_title": "Chief Code Enforcement Inspector/Zoning Officer (Code Enforcement Assistant: Linda Drummond, ldrummond@orangenj.gov, (973) 952-6066)",
+  "evidence": [
+   {
+    "url": "https://www.orangenj.gov/176/Code-Enforcement-Division",
+    "quote": "Certificate of Habitability Fees for Residential Property Sales",
+    "doc_date": "2026-10-03 (page fetched)",
+    "via": "page",
+    "verified": true
+   },
+   {
+    "url": "https://www.orangenj.gov/176/Code-Enforcement-Division",
+    "quote": "Items generally looked at for Certificate of Habitability Inspections:",
+    "doc_date": "2026-10-03 (page fetched)",
+    "via": "page",
+    "verified": true
+   },
+   {
+    "url": "https://www.orangenj.gov/176/Code-Enforcement-Division",
+    "quote": "Chief Code Enforcement Inspector/Zoning Officer",
+    "doc_date": "2026-10-03 (page fetched)",
+    "via": "page",
+    "verified": true
+   },
+   {
+    "url": "https://www.orangenj.gov/DocumentCenter/View/162/Certificate-for-Sales-or-Transfer-of-Title-PDF",
+    "quote": "REQUEST IS HEREBY MADE FOR A SPECIAL INSPECTION OF PROPERTY LOCATED AT",
+    "doc_date": "2015-02-23",
+    "via": "pdf",
+    "verified": true
+   },
+   {
+    "url": "https://www.orangenj.gov/DocumentCenter/View/162/Certificate-for-Sales-or-Transfer-of-Title-PDF",
+    "quote": "CERTIFIED CHECK OR MONEY ORDER ONLY MADE PAYABLE TO: CITY OF ORANGE TOWNSHIP",
+    "doc_date": "2015-02-23",
+    "via": "pdf",
+    "verified": true
+   },
+   {
+    "url": "https://ecode360.com/34548261",
+    "quote": "until a certificate of habitability is issued by the Division of Code Enforcement",
+    "doc_date": "amended 10-17-2023 by Ord. No. 62-2023 (per search result title)",
+    "via": "search_snippet",
+    "verified": null
+   }
+  ],
+  "confidence": "high",
+  "notes": "The City's Code Enforcement page posts a Certificate of Habitability fee table for residential property sales and an inspection checklist. The older Certificate for Sales or Transfer of Title form (2015) shows the same one and two unit fees ($200.00 and $300.00, first reinspection no fee) but a different table for five or more units, so use the web page table. The City code (ecode360 OR0804) could not be opened directly; search results show a section saying it is unlawful to sell or transfer residential property until a certificate of habitability is issued by the Division of Code Enforcement, that owner and purchaser share responsibility, and that transfers between immediate family members, or within six months of a prior certificate, are exempt. Those points are from search snippets only and the section's link to Orange is inferred from the search, so confirm. Phone numbers and emails come from the Code Enforcement page (Khalfani Alleyne (973) 952-6075; Linda Drummond, Code Enforcement Assistant, (973) 952-6066). Landlord registration is a rental program, not a resale requirement."
+ },
+ "fire_cert": {
+  "requirements": [
+   "Smoke detector on each level, including the basement and attic (the placement sheet says no detector is needed if the attic is not finished), and outside each separate sleeping area, on or near the ceiling",
+   "Ten-year sealed battery single station smoke detectors listed to UL 217; proof of purchase (box or receipt) required the day of inspection",
+   "Carbon monoxide detectors on each floor used for sleeping, outside bedrooms within 10 feet of bedroom doors",
+   "Existing hardwired systems installed under a building permit must be kept at the same level; battery detectors are not acceptable replacements",
+   "No double sided tape for mounting equipment",
+   "ABC fire extinguisher, minimum 2A:10B:C, no more than 10 lb, mounted on the wall within 10 feet of the kitchen in an open, easily accessible spot (form still lists it)",
+   "Copy of the sales contract; LLC buyers or sellers must provide a certificate of registration or organization",
+   "If the property is vacant or needs rehabilitation, a letter from the attorney to the Fire Official (template enclosed in the packet)"
+  ],
+  "authorities": [
+   {
+    "name": "City of Orange Township Fire Department, Fire Prevention Bureau",
+    "type": "municipal_fire_bureau",
+    "area_served": "Entire city",
+    "lead_time": "Fee depends on how many business days before the inspection the request is received: more than 10 business days for the lowest fee. An inspection date is given only once all required documents are received.",
+    "fees": [
+     {
+      "label": "Smoke detector certificate, 1 and 2 family/condo, request received more than 10 business days prior",
+      "amount": "$100.00",
+      "quote": "Received more than 10 business days prior: $100.00",
+      "source_url": "https://www.orangenj.gov/DocumentCenter/View/5570/Fire-Certification-Application",
+      "verified": null
+     },
+     {
+      "label": "Request received four to ten business days prior",
+      "amount": "$125.00",
+      "quote": "Received four to ten business days prior: $125.00",
+      "source_url": "https://www.orangenj.gov/DocumentCenter/View/5570/Fire-Certification-Application",
+      "verified": null
+     },
+     {
+      "label": "Request received fewer than four business days prior",
+      "amount": "$175.00",
+      "quote": "Received fewer than four business days: $175.00",
+      "source_url": "https://www.orangenj.gov/DocumentCenter/View/5570/Fire-Certification-Application",
+      "verified": null
+     },
+     {
+      "label": "Reinspection fee",
+      "amount": "$50.00",
+      "quote": "A $50.00 fee will be added to all property re-inspections",
+      "source_url": "https://www.orangenj.gov/DocumentCenter/View/5570/Fire-Certification-Application",
+      "verified": null
+     }
+    ],
+    "how_to_apply": "Download the Fire Certification Application, fill in all owner, buyer, address and appointment details, attach the sales contract (and LLC papers or an attorney letter if they apply), and pay by certified check or money order payable to City of Orange, or online through the City's online bill pay (Fire Department) and attach the receipt. Call (973) 952-6129 or (973) 952-6130 for appointments. The office is at 419 Central Avenue, 2nd floor. A no-show is charged the full inspection cost; fees are non refundable and certificates are non-transferable.",
+    "application_url": "https://www.orangenj.gov/DocumentCenter/View/5570/Fire-Certification-Application",
+    "department_url": "https://www.orangenj.gov/241/Fire-Prevention",
+    "phone": "(973) 952-6129",
+    "email": "sjennings@orangenj.gov",
+    "contact_name": "Sharif Jennings",
+    "contact_title": "Fire Official (Office Administrator: Tonia Whidbee, 973-346-2300 ext 6130)",
+    "evidence": [
+     {
+      "url": "https://www.orangenj.gov/DocumentCenter/View/5570/Fire-Certification-Application",
+      "quote": "Attach a copy of the sales contract with application",
+      "doc_date": "2025-09-30 (PDF modified)",
+      "via": "pdf",
+      "verified": null
+     },
+     {
+      "url": "https://www.orangenj.gov/DocumentCenter/View/5570/Fire-Certification-Application",
+      "quote": "An inspection date will be given only when office has received all required documents",
+      "doc_date": "2025-09-30",
+      "via": "pdf",
+      "verified": null
+     },
+     {
+      "url": "https://www.orangenj.gov/DocumentCenter/View/5570/Fire-Certification-Application",
+      "quote": "Note: Application for 1 & 2 family houses only",
+      "doc_date": "2025-09-30",
+      "via": "pdf",
+      "verified": null
+     },
+     {
+      "url": "https://www.orangenj.gov/DocumentCenter/View/5570/Fire-Certification-Application",
+      "quote": "New fee schedule is effective March 14, 2024",
+      "doc_date": "2025-09-30",
+      "via": "pdf",
+      "verified": null
+     },
+     {
+      "url": "https://www.orangenj.gov/DocumentCenter/View/5570/Fire-Certification-Application",
+      "quote": "Contact (973) 952-6129 or (973) 952-6130 for appointments.",
+      "doc_date": "2025-09-30",
+      "via": "pdf",
+      "verified": null
+     },
+     {
+      "url": "https://www.orangenj.gov/241/Fire-Prevention",
+      "quote": "The City of Orange Township Fire Prevention office is supervised by Fire Official Sharif Jennings.",
+      "doc_date": "2026-10-03 (page fetched)",
+      "via": "page",
+      "verified": true
+     },
+     {
+      "url": "https://www.nj.gov/dca/dfs/pdf/fire%20directory_county%20summary/fire_code_enforcement_director.pdf",
+      "quote": "LEAID: 0717-001 Orange City ... Name: City of Orange Twp Fire Dept ... Fire Official Sharif Jennings ... Email sjennings@orangenj.gov",
+      "doc_date": "survey date 7/15/2026",
+      "via": "state_directory",
+      "verified": null
+     },
+     {
+      "url": "https://nj.gov/dca/dfs/pdf/ANNUAL%20REGISTRY/THIRD%20QUARTER%20LEA%20REGISTRY%202026.pdf",
+      "quote": "F Orange City",
+      "doc_date": "2026-07",
+      "via": "pdf",
+      "verified": true
+     }
+    ],
+    "confidence": "high"
+   }
+  ],
+  "notes": "Pages 2 to 8 of the City's Fire Certification Application PDF are scanned images, so the fee and requirement quotes from those pages (fee table, extinguisher, $50.00 reinspection) may not be machine-findable; they were read visually. The fee tiers count business days before the request, per the March 14, 2024 schedule. The PDF still requires a 2A:10B:C fire extinguisher; the state dropped it from the sale certificate in February 2025 (P.L.2025, c.19), so confirm with the Bureau. The Fire Prevention page lists Sharif Jennings at (973) 952-6129 and 973-706-4902; the PDF header lists (973) 346-2300 ext. 6129; the state directory lists (973) 266-4235 and (973) 266-4234. Online payment link given on the PDF: https://www.govpaynow.com/gps/user/cyg/plc/a003jg."
+ },
+ "other_items": [
+  {
+   "label": "Open permits / work without permits",
+   "detail": "Work done without permits is one of the items checked at the Certificate of Habitability inspection.",
+   "source_url": "https://www.orangenj.gov/176/Code-Enforcement-Division"
+  },
+  {
+   "label": "Sump pump discharge",
+   "detail": "A sump pump, if present, must be piped to the outside and not connected to the sanitary sewer line; checked at the Certificate of Habitability inspection.",
+   "source_url": "https://www.orangenj.gov/176/Code-Enforcement-Division"
+  }
+ ],
+ "open_questions": [
+  "How long does the Code Enforcement Division take to schedule the Certificate of Habitability inspection, and how long is the certificate valid?",
+  "Is the Certificate of Habitability fee table on the website (one unit $200, two units $300) the current ordinance amount, and can it be paid online?",
+  "Is an as-is sale with buyer responsibility allowed, and on what terms (the form has an AS IS line)?",
+  "Does the Fire Prevention Bureau still require the portable fire extinguisher after P.L.2025, c.19?"
+ ],
+ "verification": {
+  "fees": 8,
+  "fee_ok": 4,
+  "fee_bad": 0,
+  "fee_unchecked": 4,
+  "quotes": 14,
+  "q_ok": 7,
+  "q_bad": 0,
+  "q_unchecked": 7
+ }
+}

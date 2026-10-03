@@ -1,0 +1,164 @@
+{
+ "municipality_code": "0706",
+ "municipality": "Essex Fells Borough",
+ "county": "ESSEX",
+ "checked_at": "2026-10-03",
+ "resale_co": {
+  "status": "required",
+  "name": "Continued Certificate of Occupancy (CCO) on a Re-Sale of a Residential Dwelling",
+  "issued_by": "Borough of Essex Fells Code Enforcement Department (Building and Zoning)",
+  "lead_time": "",
+  "valid_for": "",
+  "requirements": [
+   "Inspection by the Borough (the form has a date of inspection line for office use)",
+   "Smoke detectors on each level including the basement near the stairs and within 10 feet of each bedroom; habitable attics need detection; replace if older than 10 years; UL listed",
+   "Carbon monoxide detectors on each level with bedrooms, outside of and within 10 feet of each bedroom, if the home has a fuel burning appliance and/or attached garage (checklist says replace if older than 5 years)",
+   "Portable ABC fire extinguisher, 2A:10B:C, 2 to 10 pounds, within 10 feet of the kitchen, mounted on its bracket with the top no higher than 5 feet (form still lists it)",
+   "Sump pump must discharge outside; storm water may not go into the sanitary sewer or onto a neighbor's property",
+   "Zoning compliance; no zoning certificate until all open building permits are closed",
+   "House numbers 4 to 8 inches high, Arabic, visible from the street, mounted 4 to 10 feet above grade on a contrasting background",
+   "Exterior free of trash, debris, high grass and weeds; foundation and exterior walls in good repair",
+   "Fences, sheds, pools and decks in good condition with a permit on file",
+   "Handrails on 3 or more risers; guardrails on open stairs, landings, balconies and decks",
+   "Water heater relief tail pipe no more than 6 inches off the ground; outlet and switch plate covers secured",
+   "Self-closing door from an attached garage to the house",
+   "Basement renovations, additions and remodels without township records are subject to permits and inspections",
+   "Application asks for buyer name and address, purchase price and closing date"
+  ],
+  "fees": [
+   {
+    "label": "Continued certificate of occupancy on resale, one or two family",
+    "amount": "$125",
+    "quote": "ONE TWO $125 FEE",
+    "source_url": "https://www.essexfellsboro.com/_Content/pdf/forms/CCO-Home-Sale-Application.pdf",
+    "verified": null
+   }
+  ],
+  "how_to_apply": "Download the CCO - Home Sale Application from the Borough forms page (Building and Zoning) and submit it with a check to the Code Enforcement Department, 255 Roseland Avenue, Essex Fells, NJ 07021, (973) 226-3400, fax (973) 228-4439. The Building Department is part time; questions go to the Certified Technical Assistant at BuildingTA@essexfellsboro.com. Inspections cannot be scheduled by voice mail; call during regular business hours.",
+  "application_url": "https://www.essexfellsboro.com/_Content/pdf/forms/CCO-Home-Sale-Application.pdf",
+  "department_url": "https://www.essexfellsboro.com/Departments/building-and-zoning",
+  "phone": "973-226-3400",
+  "email": "BuildingTA@essexfellsboro.com",
+  "contact_name": "",
+  "contact_title": "Certified Technical Assistant, Building Department",
+  "evidence": [
+   {
+    "url": "https://www.essexfellsboro.com/_Content/pdf/forms/CCO-Home-Sale-Application.pdf",
+    "quote": "APPLICATION FOR A CONTINUED CERTIFICATE OF OCCUPANCY ON A RE-SALE OF A RESIDENTIAL DWELLING",
+    "doc_date": "2024-05-21 (PDF creation date)",
+    "via": "pdf",
+    "verified": null
+   },
+   {
+    "url": "https://www.essexfellsboro.com/_Content/pdf/forms/CCO-Home-Sale-Application.pdf",
+    "quote": "The Township of Essex Fells, Chapter 700, Article XVII Section 700-116, requires that a Certificate of Occupancy shall be applied for and used prior to the sale, conveyance or rental of any property within the Township.",
+    "doc_date": "2024-05-21",
+    "via": "pdf",
+    "verified": null
+   },
+   {
+    "url": "https://www.essexfellsboro.com/_Content/pdf/forms/CCO-Home-Sale-Application.pdf",
+    "quote": "No Zoning certificate will be issued until all open building permits are closed.",
+    "doc_date": "2024-05-21",
+    "via": "pdf",
+    "verified": null
+   },
+   {
+    "url": "https://www.essexfellsboro.com/Departments/building-and-zoning",
+    "quote": "Any questions please contact the Certified Technical Assistant at BuildingTA@essexfellsboro.com or by calling the office at 973-226-3400.",
+    "doc_date": "2026-10-03 (page fetched)",
+    "via": "page",
+    "verified": true
+   },
+   {
+    "url": "https://www.essexfellsboro.com/Departments/building-and-zoning",
+    "quote": "Please note the Building Department is Part-Time, all inquiries will be addressed within a timely manner.",
+    "doc_date": "2026-10-03 (page fetched)",
+    "via": "page",
+    "verified": true
+   }
+  ],
+  "confidence": "high",
+  "notes": "The CCO home sale application is a scanned image (no text layer), so its quotes were read from the page images and a text-matching script will not find them. The form cites Chapter 700, Article XVII, Section 700-116 (it says 'Township' though Essex Fells is a borough). ecode360 could not be read directly to confirm the section text. The $125 fee appears once next to the ONE / TWO family check boxes, so it seems to apply to both. A separate lead-safe rental inspection ordinance (Ord. 2024-1110) applies to rentals only."
+ },
+ "fire_cert": {
+  "requirements": [
+   "Smoke alarms on each level and outside each sleeping area (Borough CCO checklist covers these)",
+   "Carbon monoxide alarms near sleeping areas where there is a fuel burning appliance or attached garage",
+   "Portable fire extinguisher near the kitchen (the Borough CCO form still lists it)"
+  ],
+  "authorities": [
+   {
+    "name": "NJ Department of Community Affairs, Division of Fire Safety (state is the fire code enforcing agency for Essex Fells)",
+    "type": "state_dca",
+    "area_served": "Entire borough",
+    "lead_time": "",
+    "fees": [],
+    "how_to_apply": "The state fire directory lists the NJ Division of Fire Safety, PO Box 809, Trenton NJ 08625-0809, (609) 633-6132, as the smoke detector compliance office for Essex Fells. Call the Division to request the certificate. Also ask the Borough Code Enforcement office whether its CCO inspection, which checks smoke and CO alarms, is accepted in place of a separate state certificate.",
+    "application_url": "",
+    "department_url": "https://www.nj.gov/dca/dfs/pdf/fire%20directory_county%20summary/fire_code_enforcement_director.pdf",
+    "phone": "609-633-6132",
+    "email": "",
+    "contact_name": "Louis Kilmer",
+    "contact_title": "Fire Official (NJ Division of Fire Safety), per state fire directory",
+    "evidence": [
+     {
+      "url": "https://www.nj.gov/dca/dfs/pdf/fire%20directory_county%20summary/fire_code_enforcement_director.pdf",
+      "quote": "LEAID: 0706-999 Essex Fells Boro SMOKE DETECTOR COMPLIANCE Name: NJ Division Fire Safety Enf Auth. State Addr: PO Box 809 Trenton NJ 08625-0809 Fire Official Louis Kilmer Phone (609) 633-6132",
+      "doc_date": "survey date 9/10/2025",
+      "via": "state_directory",
+      "verified": null
+     },
+     {
+      "url": "https://nj.gov/dca/dfs/pdf/ANNUAL%20REGISTRY/THIRD%20QUARTER%20LEA%20REGISTRY%202026.pdf",
+      "quote": "S Essex Fells Borough",
+      "doc_date": "JULY 2026",
+      "via": "pdf",
+      "verified": true
+     },
+     {
+      "url": "https://www.nj.gov/dca/dfs/pdf/ANNOUNCEMENTS/DCA%20Advisory%20Bulletin%20for%20Licensure.pdf",
+      "quote": "Municipalities that conduct CSACMASPSIL or municipal certificate of occupancy inspections pursuant to a local ordinance are not exempt from the fire inspector licensing requirements.",
+      "doc_date": "January 13, 2026",
+      "via": "pdf",
+      "verified": true
+     }
+    ],
+    "confidence": "medium"
+   }
+  ],
+  "notes": "Essex Fells is a state-enforced fire code town (LEA code S). No state fee schedule for the certificate was found on an official page, so no fee is listed. The Borough's own CCO resale inspection checks smoke alarms, CO alarms and the extinguisher; whether the seller also needs a separate state smoke/CO certificate was not confirmed online. The CCO form still lists a portable fire extinguisher, which P.L.2025, c.19 dropped from the state sale requirement. A January 13, 2026 DCA bulletin renames the state certificate CSACMASPSIL (adds secondary power source identification labels) and requires licensed fire inspectors for municipal CO inspections that cover smoke alarms."
+ },
+ "other_items": [
+  {
+   "label": "Final water meter reading",
+   "detail": "The Borough Water Department charges for a final reading of the meter for a house sale: 'Final reading of a meter for house sale: $100'.",
+   "source_url": "https://www.essexfellsboro.com/Departments/water"
+  },
+  {
+   "label": "Open building permits",
+   "detail": "Open building permits must be closed by scheduling final inspections; no zoning certificate is issued until all open permits are closed.",
+   "source_url": "https://www.essexfellsboro.com/_Content/pdf/forms/CCO-Home-Sale-Application.pdf"
+  },
+  {
+   "label": "Sump pump discharge",
+   "detail": "If the house has a sump pump it must discharge outside; storm water may not go into the sanitary sewer or onto adjoining property. Checked as part of the CCO.",
+   "source_url": "https://www.essexfellsboro.com/_Content/pdf/forms/CCO-Home-Sale-Application.pdf"
+  }
+ ],
+ "open_questions": [
+  "Does the seller need a separate smoke/CO certificate from the NJ Division of Fire Safety, or does the Borough CCO cover it? If the state issues it, what is the fee and lead time?",
+  "How far ahead of closing should the CCO be requested, how long is it valid, and is there a re-inspection fee?",
+  "Does the Borough still require the fire extinguisher after P.L.2025, c.19?"
+ ],
+ "verification": {
+  "fees": 1,
+  "fee_ok": 0,
+  "fee_bad": 0,
+  "fee_unchecked": 1,
+  "quotes": 8,
+  "q_ok": 4,
+  "q_bad": 0,
+  "q_unchecked": 4
+ }
+}
