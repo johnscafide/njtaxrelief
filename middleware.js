@@ -22,7 +22,7 @@ const SALES_API_PATH = '/api/sales-by-district';
 // Public property pages: /nj/<town>/<address>/<pams_pin> (or /nj/property/<pin>, redirected to the full form).
 const PROPERTY_PAGE_PATH = /^\/nj\/[^/]+\/[^/]+(?:\/[^/]+)?\/?$/i;
 const AUTOMATION_UA = /\b(?:curl|wget|python-requests|scrapy|go-http-client|libwww-perl|httpclient)\b/i;
-const ROOT_STATIC_PAGES = new Set(['/move', '/contact', '/search', '/agent', '/lender', '/attorney', '/investor', '/developer/communications', '/transaction', '/transaction/shared', '/account/profile', '/account/professional-profile', '/agent/listing-prep', '/agent/buyers', '/agent/open-house', '/agent/training', '/open-house', '/client-room', '/preview', '/preview/home']);
+const ROOT_STATIC_PAGES = new Set(['/move', '/contact', '/search', '/agent', '/lender', '/attorney', '/investor', '/developer/communications', '/transaction', '/transaction/shared', '/account/profile', '/account/professional-profile', '/agent/listing-prep', '/agent/buyers', '/agent/open-house', '/agent/training', '/open-house', '/client-room', '/preview', '/preview/home', '/co']);
 const ROOT_COMPAT_REDIRECTS = new Map([['/contact.html', '/contact']]);
 const LEGACY_FAQ_PATHS = new Set(['/property/faq','/property/faq/','/property/faq.html','/property/faq/index.html']);
 const LEGACY_PUBLIC_REDIRECTS = new Map([
@@ -42,6 +42,8 @@ async function edgeClientHash(request,key){const forwarded=String(request.header
 async function recordEdgeSecurityEvent(request,eventType,route,automationHint=false){try{const config=securityBackend();const clientHash=await edgeClientHash(request,config.key);const response=await fetch(`${config.url}/rest/v1/rpc/record_public_request_security_event`,{method:'POST',headers:{apikey:config.key,Authorization:`Bearer ${config.key}`,'Content-Type':'application/json',Accept:'application/json'},body:JSON.stringify({p_event_type:eventType,p_client_hash:clientHash||null,p_route:route,p_scope:null,p_automation_hint:Boolean(automationHint),p_detail:{}})});if(!response.ok)throw new Error(`security event http ${response.status}`);}catch(error){console.error('watchdog-data-edge telemetry',error&&error.message||error);}}
 export default async function middleware(request){const url=new URL(request.url);const host=url.hostname.toLowerCase();const userAgent=request.headers.get('user-agent')||'';
 if(LEGACY_NJPTR_HOSTS.has(host)&&(url.pathname==='/property'||url.pathname==='/property/'||url.pathname.startsWith('/property/')))return redirectLegacyWatchdogHost(request,url);
+// The CO lookup is a Watchdog page; send NJPropertyTaxRelief visitors to it on the Watchdog host.
+if(LEGACY_NJPTR_HOSTS.has(host)&&(url.pathname==='/co'||url.pathname==='/co/'||url.pathname==='/co/index.html')){const destination=new URL('/co',`https://${WATCHDOG_HOST}`);destination.search=url.search;return Response.redirect(destination,308);}
 if(LEGACY_NJPTR_HOSTS.has(host)&&LEGACY_WATCHDOG_PROMO_PATHS.has(url.pathname))return rewriteLegacyAcquisitionPage(request,url.pathname);
 if(BULK_SALES_FILE.test(url.pathname)){console.warn('watchdog-data-edge',JSON.stringify({event:'bulk_sales_blocked',path:url.pathname}));await recordEdgeSecurityEvent(request,'bulk_sales_blocked',url.pathname,AUTOMATION_UA.test(userAgent));return blockedDataResponse(404,'Bulk sales files are not a public delivery surface.','public, max-age=300, s-maxage=86400');}
 if(GAMES_PRIVATE_FILE.test(url.pathname))return blockedDataResponse(404,'Not found.','public, max-age=300, s-maxage=86400');

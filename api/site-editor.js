@@ -24,7 +24,7 @@ const ALLOWED_HOSTS = new Set(['www.watchdogindex.com', 'watchdogindex.com', 'nj
 /* Mirrors ROOT_STATIC_PAGES in middleware.js: on the Watchdog host these clean
    paths are served from the repository root instead of /property/.
    property/tests/site-editor-contract.mjs keeps the two lists in sync. */
-const ROOT_STATIC_PAGES = new Set(['/move', '/contact', '/search', '/agent', '/lender', '/attorney', '/investor', '/developer/communications', '/transaction', '/transaction/shared', '/account/profile', '/account/professional-profile', '/agent/listing-prep', '/agent/buyers', '/agent/open-house', '/agent/training', '/open-house', '/client-room', '/preview', '/preview/home']);
+const ROOT_STATIC_PAGES = new Set(['/move', '/contact', '/search', '/agent', '/lender', '/attorney', '/investor', '/developer/communications', '/transaction', '/transaction/shared', '/account/profile', '/account/professional-profile', '/agent/listing-prep', '/agent/buyers', '/agent/open-house', '/agent/training', '/open-house', '/client-room', '/preview', '/preview/home', '/co']);
 const EDITABLE_ATTRS = new Set(['href', 'target', 'rel', 'title', 'src', 'alt', 'srcset', 'sizes']);
 const URL_ATTRS = new Set(['href', 'src', 'action', 'formaction', 'poster', 'xlink:href', 'background', 'cite']);
 const BLOCKED_TAGS = new Set(['script', 'style', 'iframe', 'frame', 'frameset', 'object', 'embed', 'applet', 'link', 'meta', 'base', 'form', 'input', 'textarea', 'select', 'option', 'template', 'svg', 'math', 'noscript']);

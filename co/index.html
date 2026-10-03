@@ -1,0 +1,467 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>CO Requirements by Town | Watchdog</title>
+<meta name="description" content="Type a New Jersey address or town to see its resale Certificate of Occupancy and smoke / CO alarm certificate requirements.">
+<link rel="canonical" href="https://www.watchdogindex.com/co">
+<meta property="og:title" content="CO Requirements by Town | Watchdog">
+<meta property="og:description" content="Type a New Jersey address or town to see its resale CO requirements.">
+<meta property="og:url" content="https://www.watchdogindex.com/co">
+<meta property="og:type" content="website">
+<link rel="icon" type="image/png" href="/favicon-96x96.png" sizes="96x96">
+<link rel="icon" type="image/svg+xml" href="/favicon.svg">
+<link rel="shortcut icon" href="/favicon.ico">
+<link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Source+Sans+3:wght@400;600&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --blue: #0d3dbe;
+    --ink: #1b2430;
+    --muted: #5f6b7a;
+    --line: #e3e7ec;
+    --soft: #f5f7fa;
+  }
+  * { box-sizing: border-box; }
+  html, body { margin: 0; }
+  body { min-height: 100vh; background: #fff; color: var(--ink); font-family: 'Source Sans 3', Arial, sans-serif; font-size: 16px; line-height: 1.5; }
+  a { color: var(--blue); }
+  .logo { display: inline-flex; align-items: center; min-height: 44px; }
+  .logo img { display: block; height: auto; }
+
+  /* Home: the logo and one search box, centered. */
+  .home { display: flex; flex-direction: column; align-items: center; padding: 24vh 16px 40px; }
+  .home .logo img { width: min(340px, 78vw); }
+  .home .logo { margin-bottom: 32px; }
+
+  .search { position: relative; width: 100%; max-width: 584px; }
+  .box { display: flex; align-items: center; gap: 4px; min-height: 48px; padding: 0 6px 0 16px; border: 1px solid #dfe1e5; border-radius: 24px; background: #fff; transition: box-shadow .15s; }
+  .box:hover, .box:focus-within { box-shadow: 0 1px 6px rgba(32,33,36,.24); border-color: transparent; }
+  .search.open .box { border-radius: 24px 24px 0 0; box-shadow: 0 1px 6px rgba(32,33,36,.24); border-color: transparent; }
+  .box svg { flex: none; color: #9aa0a6; }
+  .box input { flex: 1; min-width: 0; height: 46px; border: 0; outline: 0; background: transparent; font: inherit; color: var(--ink); }
+  .clear { display: none; flex: none; width: 44px; height: 44px; border: 0; border-radius: 50%; background: transparent; color: var(--muted); font-size: 24px; line-height: 1; cursor: pointer; }
+  .clear:hover { background: var(--soft); }
+  .search.has-text .clear { display: block; }
+  .suggest { display: none; position: absolute; z-index: 5; left: 0; right: 0; top: 100%; margin: 0; padding: 4px 0 10px; list-style: none; background: #fff; border-radius: 0 0 24px 24px; box-shadow: 0 4px 6px rgba(32,33,36,.24); overflow: hidden; }
+  .suggest::before { content: ""; display: block; height: 1px; margin: 0 16px 4px; background: #e8eaed; }
+  .search.open .suggest { display: block; }
+  .suggest li { display: flex; align-items: baseline; gap: 8px; min-height: 44px; padding: 10px 20px; cursor: pointer; }
+  .suggest li[aria-selected="true"], .suggest li:hover { background: #eef0f3; }
+  .suggest .s-name { font-weight: 600; }
+  .suggest .s-meta { color: var(--muted); font-size: 14px; }
+  .buttons { display: flex; justify-content: center; margin-top: 28px; }
+  .btn { min-height: 44px; padding: 0 20px; border: 1px solid var(--soft); border-radius: 6px; background: var(--soft); color: #3c4043; font: inherit; font-size: 15px; cursor: pointer; }
+  .btn:hover { border-color: #dadce0; }
+  .btn:focus-visible, .clear:focus-visible, .choice:focus-visible, .logo:focus-visible { outline: 2px solid var(--blue); outline-offset: 2px; }
+
+  /* Results: logo and box move to a top row, facts below. */
+  .top { display: none; align-items: center; gap: 28px; padding: 16px 24px; border-bottom: 1px solid var(--line); }
+  .top .logo img { width: 150px; }
+  .top .search { max-width: 640px; }
+  body.results .home { display: none; }
+  body.results .top { display: flex; }
+  .out { max-width: 680px; padding: 20px 24px 64px 202px; }
+  body:not(.results) .out { display: none; }
+
+  .msg { color: var(--muted); }
+  .town { margin: 4px 0 0; font-size: 26px; font-weight: 600; line-height: 1.25; }
+  .meta { margin: 2px 0 20px; color: var(--muted); font-size: 15px; }
+  .status { display: inline-block; margin: 0 0 6px; font-size: 18px; font-weight: 600; }
+  .status.req { color: var(--blue); }
+  .status.no { color: #1e7a3c; }
+  .status.unsure { color: #9a6700; }
+  section.part { margin: 0 0 28px; padding-top: 18px; border-top: 1px solid var(--line); }
+  section.part:first-of-type { border-top: 0; padding-top: 0; }
+  section.part h2 { margin: 0 0 4px; font-size: 19px; font-weight: 600; }
+  .sub { margin: 0 0 8px; color: var(--muted); font-size: 15px; }
+  dl.facts { margin: 10px 0 0; }
+  dl.facts dt { margin-top: 14px; font-size: 13px; font-weight: 600; text-transform: uppercase; letter-spacing: .05em; color: var(--muted); }
+  dl.facts dd { margin: 4px 0 0; }
+  ul.items { margin: 0; padding-left: 20px; }
+  ul.items li { margin: 3px 0; }
+  .fees { width: 100%; border-collapse: collapse; font-size: 15px; }
+  .fees td { padding: 6px 0; border-bottom: 1px solid #eef0f3; vertical-align: top; }
+  .fees td.amt { width: 1%; padding-left: 16px; font-weight: 600; white-space: nowrap; text-align: right; }
+  .links { display: flex; flex-wrap: wrap; gap: 8px; margin-top: 14px; }
+  .links a { display: inline-flex; align-items: center; min-height: 44px; padding: 0 16px; border: 1px solid var(--line); border-radius: 22px; text-decoration: none; font-weight: 600; }
+  .links a:hover { background: var(--soft); }
+  .authority { margin-top: 16px; }
+  .authority h3 { margin: 0; font-size: 16px; font-weight: 600; }
+  .fine { margin-top: 8px; color: var(--muted); font-size: 14px; }
+  .fine summary { min-height: 44px; display: inline-flex; align-items: center; cursor: pointer; }
+  .fine ol { margin: 0; padding-left: 20px; word-break: break-all; }
+  .choices { display: grid; gap: 8px; margin-top: 12px; }
+  .choice { display: flex; justify-content: space-between; gap: 12px; min-height: 48px; padding: 10px 16px; border: 1px solid var(--line); border-radius: 10px; background: #fff; font: inherit; text-align: left; cursor: pointer; }
+  .choice:hover { background: var(--soft); }
+  .choice span { color: var(--muted); }
+  .sr { position: absolute; width: 1px; height: 1px; overflow: hidden; clip: rect(0 0 0 0); white-space: nowrap; }
+
+  @media (max-width: 900px) { .out { padding-left: 24px; } }
+  @media (max-width: 640px) {
+    .home { padding-top: 18vh; }
+    .top { flex-direction: column; align-items: center; gap: 10px; padding: 12px 16px; }
+    .top .logo img { width: 130px; }
+    .out { padding: 16px 16px 48px; }
+    .town { font-size: 23px; }
+  }
+  @media print { .top, .home, .links { display: none !important; } .out { padding: 0; } }
+</style>
+</head>
+<body>
+<main>
+  <header class="top">
+    <a class="logo" href="/"><img src="/property/branding/watchdog-logo-horizontal.svg" alt="Watchdog" width="150" height="35"></a>
+    <div class="search" data-search></div>
+  </header>
+
+  <div class="home">
+    <a class="logo" href="/"><img src="/property/branding/watchdog-logo-horizontal.svg" alt="Watchdog" width="340" height="79"></a>
+    <form class="search" data-search role="search" id="home-form"></form>
+    <div class="buttons"><button class="btn" type="submit" form="home-form">Search</button></div>
+  </div>
+
+  <div class="out" id="out" aria-live="polite"></div>
+</main>
+
+<template id="search-tpl">
+  <div class="box">
+    <svg width="20" height="20" viewBox="0 0 24 24" aria-hidden="true"><path fill="currentColor" d="M15.5 14h-.79l-.28-.27A6.47 6.47 0 0 0 16 9.5 6.5 6.5 0 1 0 9.5 16c1.61 0 3.09-.59 4.23-1.57l.27.28v.79l5 4.99L20.49 19l-4.99-5zm-6 0C7.01 14 5 11.99 5 9.5S7.01 5 9.5 5 14 7.01 14 9.5 11.99 14 9.5 14z"/></svg>
+    <label class="sr">Address or town</label>
+    <input type="text" autocomplete="off" spellcheck="false" placeholder="Address or town for CO requirements" role="combobox" aria-autocomplete="list" aria-expanded="false" enterkeyhint="search">
+    <button class="clear" type="button" aria-label="Clear">&times;</button>
+  </div>
+  <ul class="suggest" role="listbox"></ul>
+</template>
+
+<script>
+(function () {
+  'use strict';
+
+  var NJ_GEOCODE = 'https://geo.nj.gov/arcgis/rest/services/Tasks/NJ_Geocode/GeocodeServer/findAddressCandidates';
+  var TYPES = /\s+(township|borough|city|town|village)$/;
+  var out = document.getElementById('out');
+  var data = null, towns = [], byCode = {}, aliasList = [];
+  var dataReady = fetch('/co/towns.json').then(function (r) { return r.json(); }).then(function (d) {
+    data = d;
+    towns = d.towns.map(function (t) {
+      var o = { code: t.c, name: t.n, county: t.k, full: norm(t.n), base: base(t.n) };
+      byCode[t.c] = o;
+      return o;
+    });
+    aliasList = Object.keys(d.aliases).map(function (name) { return { name: name, key: norm(name), codes: d.aliases[name] }; });
+  });
+
+  // ---------- text helpers ----------
+  function norm(s) {
+    return String(s || '').toLowerCase()
+      .replace(/[.'’]/g, '').replace(/[^a-z0-9]+/g, ' ')
+      .replace(/\btwp\b/g, 'township').replace(/\bboro\b/g, 'borough').replace(/\bmt\b/g, 'mount')
+      .replace(/\bft\b/g, 'fort').replace(/\bpt\b/g, 'point').replace(/\s+/g, ' ').trim();
+  }
+  function base(s) {
+    var n = norm(s).replace(/^(township|borough|city|town|village) of /, '');
+    return n.replace(TYPES, '').trim() || n;
+  }
+  function stripState(q) { return q.replace(/,?\s*(nj|new jersey)\s*(\d{5}(-\d{4})?)?\s*$/i, function (m, s, zip) { return zip ? ' ' + zip : ''; }).trim(); }
+  function esc(s) { return String(s == null ? '' : s).replace(/[&<>"']/g, function (c) { return { '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' }[c]; }); }
+  function countyLabel(c) { return String(c || '').toLowerCase().replace(/\b[a-z]/g, function (m) { return m.toUpperCase(); }) + ' County'; }
+  function fmtDate(iso) {
+    var m = /^(\d{4})-(\d{2})-(\d{2})/.exec(iso || '');
+    if (!m) return '';
+    return new Date(+m[1], +m[2] - 1, +m[3]).toLocaleDateString('en-US', { month: 'long', day: 'numeric', year: 'numeric' });
+  }
+
+  // ---------- matching ----------
+  function townsByName(q) {
+    var county = null, k = q;
+    var parts = q.split(',');
+    if (parts.length > 1) {
+      var tail = norm(parts.slice(1).join(' ')).replace(/\s*county$/, '');
+      if (towns.some(function (t) { return norm(t.county) === tail; })) { county = tail; k = parts[0]; }
+    }
+    var full = norm(k);
+    var b = base(k);
+    var pool = county ? towns.filter(function (t) { return norm(t.county) === county; }) : towns;
+    var exact = pool.filter(function (t) { return t.full === full; });
+    if (exact.length) return exact;
+    return pool.filter(function (t) { return t.base === b; });
+  }
+  function aliasByName(q) {
+    var key = norm(q.split(',')[0]);
+    return aliasList.filter(function (a) { return a.key === key; });
+  }
+  function suggestions(q) {
+    q = stripState(q);
+    var n = norm(q);
+    if (!n) return [];
+    if (/^\d{3,5}$/.test(n)) {
+      return Object.keys(data.zips).filter(function (z) { return z.indexOf(n) === 0; }).slice(0, 6).map(function (z) {
+        var list = data.zips[z].map(function (c) { return byCode[c].name; });
+        return { kind: 'zip', zip: z, label: z, meta: list.slice(0, 3).join(', ') + (list.length > 3 ? '…' : '') };
+      });
+    }
+    if (/\d/.test(n)) return [];
+    var starts = [], contains = [];
+    towns.forEach(function (t) {
+      if (t.full.indexOf(n) === 0 || t.base.indexOf(n) === 0) starts.push(t);
+      else if (n.length > 2 && t.full.indexOf(' ' + n) > -1) contains.push(t);
+    });
+    var items = starts.concat(contains).slice(0, 7).map(function (t) { return { kind: 'town', code: t.code, label: t.name, meta: countyLabel(t.county) }; });
+    aliasList.forEach(function (a) {
+      if (a.key.indexOf(n) === 0 && items.length < 8) {
+        var names = a.codes.map(function (c) { return byCode[c].name; });
+        items.push({ kind: 'alias', alias: a, label: a.name, meta: names.join(', ') });
+      }
+    });
+    return items.slice(0, 8);
+  }
+
+  function geocode(address) {
+    var p = new URLSearchParams({ SingleLine: address, outFields: 'City,Zone,Subregion', outSR: '4326', maxLocations: '1', f: 'json' });
+    var ctrl = window.AbortController ? new AbortController() : null;
+    var timer = ctrl ? setTimeout(function () { ctrl.abort(); }, 9000) : null;
+    return fetch(NJ_GEOCODE + '?' + p, ctrl ? { signal: ctrl.signal } : undefined)
+      .then(function (r) { return r.json(); })
+      .then(function (d) {
+        if (timer) clearTimeout(timer);
+        var c = d && d.candidates && d.candidates[0];
+        if (!c || Number(c.score) < 80) return null;
+        var a = c.attributes || {};
+        var county = norm(a.Subregion), zone = norm(a.Zone);
+        var pool = towns.filter(function (t) { return norm(t.county) === county; });
+        var hit = pool.filter(function (t) { return t.full === zone; });
+        if (hit.length !== 1) hit = pool.filter(function (t) { return t.base === base(a.Zone); });
+        if (hit.length !== 1) return null;
+        return { town: hit[0], city: a.City || '', matched: c.address || '' };
+      })
+      .catch(function () { if (timer) clearTimeout(timer); return null; });
+  }
+
+  // ---------- search boxes (home and top bar share the same text) ----------
+  var boxes = [];
+  Array.prototype.forEach.call(document.querySelectorAll('[data-search]'), function (el, i) {
+    el.appendChild(document.getElementById('search-tpl').content.cloneNode(true));
+    var input = el.querySelector('input'), list = el.querySelector('.suggest'), clear = el.querySelector('.clear');
+    var id = 'q' + i;
+    input.id = id; el.querySelector('label').setAttribute('for', id);
+    list.id = 'sug' + i; input.setAttribute('aria-controls', list.id);
+    var b = { el: el, input: input, list: list, items: [], active: -1 };
+    boxes.push(b);
+
+    function close() { el.classList.remove('open'); input.setAttribute('aria-expanded', 'false'); input.removeAttribute('aria-activedescendant'); b.active = -1; }
+    function paint() {
+      list.innerHTML = b.items.map(function (it, j) {
+        return '<li role="option" id="' + list.id + '-' + j + '" aria-selected="' + (j === b.active) + '" data-j="' + j + '"><span class="s-name">' + esc(it.label) + '</span><span class="s-meta">' + esc(it.meta) + '</span></li>';
+      }).join('');
+      if (b.active > -1) input.setAttribute('aria-activedescendant', list.id + '-' + b.active); else input.removeAttribute('aria-activedescendant');
+    }
+    function refresh() {
+      el.classList.toggle('has-text', !!input.value);
+      if (!data) return;
+      b.items = suggestions(input.value);
+      b.active = -1;
+      if (!b.items.length || document.activeElement !== input) return close();
+      paint();
+      el.classList.add('open'); input.setAttribute('aria-expanded', 'true');
+    }
+    b.close = close;
+    input.addEventListener('input', function () { boxes.forEach(function (o) { if (o !== b) { o.input.value = input.value; o.el.classList.toggle('has-text', !!input.value); } }); refresh(); });
+    input.addEventListener('focus', refresh);
+    input.addEventListener('blur', function () { setTimeout(close, 150); });
+    input.addEventListener('keydown', function (e) {
+      var open = el.classList.contains('open');
+      if (e.key === 'ArrowDown' && open) { b.active = (b.active + 1) % b.items.length; paint(); e.preventDefault(); }
+      else if (e.key === 'ArrowUp' && open) { b.active = b.active <= 0 ? b.items.length - 1 : b.active - 1; paint(); e.preventDefault(); }
+      else if (e.key === 'Escape') { close(); }
+      else if (e.key === 'Enter') {
+        e.preventDefault();
+        if (open && b.active > -1) pick(b.items[b.active]); else run(input.value);
+        close();
+      }
+    });
+    list.addEventListener('mousedown', function (e) {
+      var li = e.target.closest('li');
+      if (!li) return;
+      e.preventDefault();
+      pick(b.items[+li.getAttribute('data-j')]);
+      close();
+    });
+    clear.addEventListener('click', function () { setText(''); input.focus(); });
+    if (el.tagName === 'FORM') el.addEventListener('submit', function (e) { e.preventDefault(); run(input.value); close(); });
+  });
+  function setText(v) { boxes.forEach(function (b) { b.input.value = v; b.el.classList.toggle('has-text', !!v); }); }
+
+  function pick(it) {
+    if (!it) return;
+    setText(it.label);
+    if (it.kind === 'town') return showTown(byCode[it.code]);
+    if (it.kind === 'alias') return showChoices(it.alias.codes, aliasIntro(it.alias.name, it.alias.codes));
+    if (it.kind === 'zip') return run(it.zip);
+  }
+  function aliasIntro(name, codes) {
+    return codes.length === 1 ? '' : esc(name) + ' is a mailing name. Pick the town:';
+  }
+
+  // ---------- running a search ----------
+  var seq = 0;
+  function run(raw) {
+    var q = String(raw || '').trim();
+    if (!q) return;
+    var mine = ++seq;
+    dataReady.then(function () {
+      if (mine !== seq) return;
+      var s = stripState(q);
+      var zipOnly = /^(\d{5})(-\d{4})?$/.exec(s);
+      if (zipOnly) return showZip(zipOnly[1]);
+      if (/\d/.test(s) && /[a-z]/i.test(s)) return runAddress(q, s, mine);
+      var hits = townsByName(s), aliases = aliasByName(s);
+      var codes = hits.map(function (t) { return t.code; });
+      aliases.forEach(function (a) { a.codes.forEach(function (c) { if (codes.indexOf(c) < 0) codes.push(c); }); });
+      if (codes.length === 1) {
+        var only = byCode[codes[0]];
+        return showTown(only, aliases.length && !hits.length ? { city: aliases[0].name } : null);
+      }
+      if (codes.length > 1) {
+        var intro = aliases.length && !hits.length ? aliasIntro(aliases[0].name, codes)
+          : 'Pick a town:';
+        return showChoices(codes, intro);
+      }
+      var sug = suggestions(s).filter(function (x) { return x.kind === 'town'; }).map(function (x) { return x.code; });
+      if (sug.length) return showChoices(sug, 'Did you mean:');
+      render('<p class="msg">No New Jersey town found for “' + esc(q) + '”.</p>');
+    });
+  }
+  function runAddress(q, s, mine) {
+    render('<p class="msg">Searching…</p>');
+    geocode(/\bnj\b|new jersey/i.test(q) ? q : q + ', NJ').then(function (g) {
+      if (mine !== seq) return;
+      if (g) return showTown(g.town, { city: g.city, address: g.matched });
+      var zip = /\b(\d{5})(-\d{4})?\s*$/.exec(s);
+      if (zip && data.zips[zip[1]]) return showZip(zip[1], 'Address not found. Towns in ZIP ' + zip[1] + ':');
+      var tail = s.split(',').slice(1).join(',').trim();
+      if (tail) {
+        var hits = townsByName(tail).map(function (t) { return t.code; });
+        aliasByName(tail).forEach(function (a) { a.codes.forEach(function (c) { if (hits.indexOf(c) < 0) hits.push(c); }); });
+        if (hits.length) return showChoices(hits, 'Address not found. Pick a town:');
+      }
+      render('<p class="msg">Address not found. Try adding the town, or type just the town.</p>');
+    });
+  }
+  function showZip(zip, intro) {
+    var codes = data.zips[zip];
+    if (!codes) return render('<p class="msg">No New Jersey towns found for ZIP ' + esc(zip) + '.</p>');
+    if (codes.length === 1) return showTown(byCode[codes[0]], { zip: zip });
+    showChoices(codes, intro || 'ZIP ' + esc(zip) + ' covers more than one town. Pick one:');
+  }
+  function showChoices(codes, intro) {
+    var html = '<p>' + intro + '</p><div class="choices">' + codes.map(function (c) {
+      var t = byCode[c];
+      return '<button class="choice" type="button" data-code="' + c + '"><strong>' + esc(t.name) + '</strong><span>' + esc(countyLabel(t.county)) + '</span></button>';
+    }).join('') + '</div>';
+    render(html);
+    Array.prototype.forEach.call(out.querySelectorAll('.choice'), function (btn) {
+      btn.addEventListener('click', function () { var t = byCode[btn.getAttribute('data-code')]; setText(t.name); showTown(t); });
+    });
+  }
+
+  // ---------- one town ----------
+  function showTown(t, ctx) {
+    var mine = ++seq;
+    render('<p class="msg">Loading…</p>');
+    setUrl(t.code);
+    fetch('/api/co-lookup?code=' + encodeURIComponent(t.code))
+      .then(function (r) { return r.json(); })
+      .catch(function () { return { status: 'error' }; })
+      .then(function (d) {
+        if (mine !== seq) return;
+        document.title = t.name + ' CO Requirements | Watchdog';
+        if (d.status === 'ok') return render(townHtml(t, d, ctx || {}));
+        if (d.status === 'not_available') return render(head(t, ctx) +
+          '<p>Not available yet.</p><p class="fine"><a href="/contact">Contact us</a></p>');
+        render(head(t, ctx) + '<p class="msg">Couldn’t load this town. Try again.</p>');
+      });
+  }
+  function head(t, ctx) {
+    var meta = esc(countyLabel(t.county));
+    var city = ctx && ctx.city;
+    if (city && norm(city) !== t.full && norm(city) !== t.base) meta += ' · Mailing address: ' + esc(city);
+    return '<h1 class="town">' + esc(t.name) + '</h1><p class="meta">' + meta + '</p>';
+  }
+  function feeTable(fees) {
+    if (!fees.length) return '';
+    return '<table class="fees"><tbody>' + fees.map(function (f) {
+      return '<tr><td>' + esc(f.label) + '</td><td class="amt">' + esc(f.amount) + '</td></tr>';
+    }).join('') + '</tbody></table>';
+  }
+  function links(applyUrl, pageUrl) {
+    var h = '';
+    if (applyUrl) h += '<a class="primary" href="' + esc(applyUrl) + '" target="_blank" rel="noopener">Application</a>';
+    if (pageUrl) h += '<a href="' + esc(pageUrl) + '" target="_blank" rel="noopener">Official page</a>';
+    return h ? '<div class="links">' + h + '</div>' : '';
+  }
+  function items(list) { return list.length ? '<ul class="items">' + list.map(function (x) { return '<li>' + esc(x) + '</li>'; }).join('') + '</ul>' : ''; }
+  function timing(lead, valid) {
+    var bits = [];
+    if (lead) bits.push('<li><strong>Timing:</strong> ' + esc(lead) + '</li>');
+    if (valid) bits.push('<li><strong>Good for:</strong> ' + esc(valid) + '</li>');
+    return bits.length ? '<ul class="items">' + bits.join('') + '</ul>' : '';
+  }
+
+  function fact(label, html) { return html ? '<dt>' + label + '</dt><dd>' + html + '</dd>' : ''; }
+
+  function townHtml(t, d, ctx) {
+    var co = d.co, fire = d.fire;
+    var st = { required: ['req', 'Required'], not_required: ['no', 'Not required'], not_found: ['unsure', 'Not confirmed'] }[co.status];
+    var html = head(t, ctx);
+
+    html += '<section class="part"><h2>Certificate of Occupancy</h2><span class="status ' + st[0] + '">' + st[1] + '</span><dl class="facts">' +
+      fact('Certificate', esc(co.name)) +
+      fact('Issued by', esc(co.issued_by)) +
+      fact('Requirements', items(co.requirements)) +
+      fact('Fees', feeTable(co.fees)) +
+      fact('Timing', esc(co.lead_time)) +
+      fact('Valid for', esc(co.valid_for)) +
+      fact('Phone', esc(co.phone)) +
+      '</dl>' + links(co.application_url, co.department_url) + '</section>';
+
+    var fireHtml = '<section class="part"><h2>Smoke and CO alarm certificate</h2><span class="status req">Required</span><dl class="facts">' +
+      fact('Requirements', items(fire.requirements)) + '</dl>';
+    fire.authorities.forEach(function (a) {
+      fireHtml += '<div class="authority"><h3>' + esc(a.name) + '</h3>' +
+        (a.area_served && fire.authorities.length > 1 ? '<p class="sub">' + esc(a.area_served) + '</p>' : '') +
+        '<dl class="facts">' + fact('Fees', feeTable(a.fees)) + fact('Timing', esc(a.lead_time)) + fact('Phone', esc(a.phone)) + '</dl>' +
+        links(a.application_url, a.department_url) + '</div>';
+    });
+    html += fireHtml + '</section>';
+
+    var when = fmtDate(d.checked_at);
+    html += '<div class="fine">' + (when ? 'Last checked ' + esc(when) : '') +
+      (d.sources.length ? '<details><summary>Sources</summary><ol>' + d.sources.map(function (u) { return '<li><a href="' + esc(u) + '" target="_blank" rel="noopener">' + esc(u) + '</a></li>'; }).join('') + '</ol></details>' : '') +
+      '</div>';
+    return html;
+  }
+
+  // ---------- page state ----------
+  function render(html) {
+    document.body.classList.add('results');
+    out.innerHTML = html;
+  }
+  function setUrl(code) {
+    try { history.replaceState(null, '', '/co?town=' + code); } catch (_) {}
+  }
+  var start = new URLSearchParams(location.search);
+  var startCode = start.get('town'), startQ = start.get('q');
+  if (startCode && /^\d{4}$/.test(startCode)) {
+    dataReady.then(function () { var t = byCode[startCode]; if (t) { setText(t.name); showTown(t); } });
+  } else if (startQ) {
+    setText(startQ); run(startQ);
+  } else if (window.matchMedia('(min-width: 641px)').matches) {
+    boxes[1].input.focus();
+  }
+})();
+</script>
+</body>
+</html>
