@@ -93,24 +93,24 @@
     "lead_time": "State fee tiers count business days between DCA's receipt and the closing date: more than ten business days for the lowest fee. Certificate must be used within 6 months (per the DCA form).",
     "fees": [
      {
-      "label": "State certificate of smoke detector, CO alarm and extinguisher compliance, closing more than ten business days after receipt (DCA form SD-41, rev. 10/02)",
-      "amount": "$35",
-      "quote": "If closing date above follows the date of receipt by the Division of Fire Safety by more than ten business days, the fee is $35",
-      "source_url": "https://www.nj.gov/dca/divisions/dfs/forms/bfce/certificationinlieu.pdf",
+      "label": "State smoke/CO certificate (N.J.A.C. 5:70-2.9(d)), received more than 10 business days before the change of occupant",
+      "amount": "$45.00",
+      "quote": "Requests for a CSACMAPFEC received more than 10 business days prior to the change of occupant: $45.00",
+      "source_url": "https://www.nj.gov/dca/divisions/dfs/codes/regulations/r.2018%20d.074%20(50%20n.j.r.%20729(a)).pdf",
       "verified": true
      },
      {
-      "label": "Received fewer than ten but more than four business days before closing",
-      "amount": "$70",
-      "quote": "if received fewer than ten but more than four business days before closing, $70",
-      "source_url": "https://www.nj.gov/dca/divisions/dfs/forms/bfce/certificationinlieu.pdf",
+      "label": "Received four to 10 business days before",
+      "amount": "$90.00",
+      "quote": "Requests for a CSACMAPFEC received four to 10 business days prior to the change of occupant: $90.00",
+      "source_url": "https://www.nj.gov/dca/divisions/dfs/codes/regulations/r.2018%20d.074%20(50%20n.j.r.%20729(a)).pdf",
       "verified": true
      },
      {
-      "label": "Received four business days or fewer before closing",
-      "amount": "$125",
-      "quote": "and if four business days or fewer, $125.",
-      "source_url": "https://www.nj.gov/dca/divisions/dfs/forms/bfce/certificationinlieu.pdf",
+      "label": "Received fewer than four business days before",
+      "amount": "$161.00",
+      "quote": "Requests for a CSACMAPFEC received fewer than four business days prior to the change of occupant: $161.00",
+      "source_url": "https://www.nj.gov/dca/divisions/dfs/codes/regulations/r.2018%20d.074%20(50%20n.j.r.%20729(a)).pdf",
       "verified": true
      }
     ],
@@ -161,7 +161,7 @@
     "confidence": "medium"
    }
   ],
-  "notes": "Harding is a state-enforced municipality (LEA code S), so the smoke/CO certificate comes from the NJ Division of Fire Safety, not the Township. The only state fee schedule found is on DCA form SD-41 (revised 10/02, an application and certification in lieu of inspection), which may be outdated; the current state portal does not publish fees publicly. Confirm the current state fee and process with the Division of Fire Safety at (609) 633-6132."
+  "notes": "Harding is a state-enforced municipality (LEA code S), so the smoke/CO certificate comes from the NJ Division of Fire Safety, not the Township. The only state fee schedule found is on DCA form SD-41 (revised 10/02, an application and certification in lieu of inspection), which may be outdated; the current state portal does not publish fees publicly. Confirm the current state fee and process with the Division of Fire Safety at (609) 633-6132. Update: the current state fees are $45 / $90 / $161, set by N.J.A.C. 5:70-2.9(d) (50 N.J.R. 729(a)) (more than 10, 4 to 10, and under 4 business days before closing). The $35 / $70 / $125 on the older DCA paper form are out of date."
  },
  "other_items": [
   {
