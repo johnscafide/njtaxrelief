@@ -46,6 +46,11 @@
   var AD_RUNTIME_URL = '/property/js/watchdog-ad-pixels.js';
   var CSS_URL = '/property/css/watchdog-consent.css';
   var CONTACT_POLICY_URL = '/property/js/contact-routing-policy.js';
+  /* Temporary: the cookie banner is hidden on the ANCHOR/PAS-1 application pages so it
+     doesn't cover the start of the application. To bring it back, set this to [].
+     Hiding the banner never turns optional cookies on: they stay off until the visitor
+     chooses, and Cookie settings in the footer still works. */
+  var HIDE_BANNER_PATHS = ['/anchor/application'];
   var stored = readStored();
   var lastFocus = null;
   var analyticsLoadQueued = false;
@@ -259,8 +264,12 @@
     if(ADS_AVAILABLE) return '<div class="wd-consent-copy"><span class="wd-consent-mark" aria-hidden="true"><i class="fas fa-dog"></i></span><div><strong>Choose your cookie preferences</strong><p>Watchdog uses cookies to keep you signed in and remember preferences. Optional measurement cookies help us understand product use. Optional advertising cookies let ad platforms measure Watchdog ads and show you Watchdog ads on other sites. Both stay off unless you turn them on. <a href="'+privacyHref()+'">Privacy Policy</a></p></div></div><div class="wd-consent-actions"><button type="button" class="wd-consent-settings" data-wd-consent-action="settings">Cookie settings</button><button type="button" class="wd-consent-secondary" data-wd-consent-action="reject">Reject optional cookies</button><button type="button" class="wd-consent-primary" data-wd-consent-action="accept">Accept all cookies</button></div>';
     return '<div class="wd-consent-copy"><span class="wd-consent-mark" aria-hidden="true"><i class="fas fa-dog"></i></span><div><strong>Choose your cookie preferences</strong><p>Watchdog uses cookies to keep you signed in and remember preferences. Optional measurement cookies help us understand product use and whether Watchdog ads lead to sign-ups or purchases. We do not sell personal information or enable ad personalization on Watchdog. <a href="'+privacyHref()+'">Privacy Policy</a></p></div></div><div class="wd-consent-actions"><button type="button" class="wd-consent-settings" data-wd-consent-action="settings">Cookie settings</button><button type="button" class="wd-consent-secondary" data-wd-consent-action="reject">Reject optional cookies</button><button type="button" class="wd-consent-primary" data-wd-consent-action="accept">Accept all cookies</button></div>';
   }
+  function bannerHiddenHere(){
+    var path=String(location.pathname||'').replace(/^\/property(?=\/)/,'');
+    return HIDE_BANNER_PATHS.some(function(prefix){return path===prefix||path.indexOf(prefix)===0;});
+  }
   function ensureBanner(){
-    if(!needsChoice() || document.getElementById('wd-cookie-banner')) return;
+    if(bannerHiddenHere() || !needsChoice() || document.getElementById('wd-cookie-banner')) return;
     var banner=document.createElement('section');banner.id='wd-cookie-banner';banner.className='wd-consent-banner';banner.setAttribute('role','region');banner.setAttribute('aria-label','Cookie preferences');banner.innerHTML=bannerMarkup();document.body.appendChild(banner);
   }
   function hideBanner(){ var banner=document.getElementById('wd-cookie-banner');if(banner) banner.remove(); }
