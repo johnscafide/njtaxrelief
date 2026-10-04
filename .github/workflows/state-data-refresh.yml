@@ -24,6 +24,7 @@ jobs:
         with:
           name: nj-state-data-freshness
           path: property/data/data-freshness.json
+          retention-days: 14
       - name: Stop on coverage or parser failure
         if: env.refresh_failed == '1'
         run: exit 1

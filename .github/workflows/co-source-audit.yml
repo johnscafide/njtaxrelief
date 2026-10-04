@@ -38,4 +38,4 @@ jobs:
           path: |
             co-source-audit.json
             co-source-audit.md
-          retention-days: 90
+          retention-days: 14

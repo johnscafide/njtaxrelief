@@ -183,7 +183,7 @@ jobs:
           name: hosted-visual-acceptance-evidence
           path: visual-acceptance-evidence
           if-no-files-found: warn
-          retention-days: 30
+          retention-days: 5
 
       - name: Show local server log on failure
         if: failure()

@@ -93,4 +93,4 @@ jobs:
           name: wdd-geometry-acceptance-evidence
           path: visual-acceptance-evidence
           if-no-files-found: warn
-          retention-days: 30
+          retention-days: 14
