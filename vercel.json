@@ -84,6 +84,11 @@
       "permanent": true
     },
     {
+      "source": "/tax-chat.html",
+      "destination": "/",
+      "permanent": true
+    },
+    {
       "source": "/btc-old.html",
       "destination": "/btc.html",
       "permanent": true

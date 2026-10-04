@@ -32,6 +32,8 @@ async function jsonFetch(url, options = {}) {
   }
   return data;
 }
+const STUDIO_SITE_DAILY_LIMIT = 300;
+
 async function adminSelect(table, params) {
   const q = params instanceof URLSearchParams ? params : new URLSearchParams(params || {});
   return jsonFetch(`${SUPABASE_URL}/rest/v1/${table}?${q.toString()}`, { headers: adminHeaders({ Accept: 'application/json' }) });
@@ -199,6 +201,16 @@ module.exports = async function handler(req, res) {
     const maxVariant = plan === 'developer' ? 8 : 2;
     if (activeRows.length >= maxBrief) return res.status(429).json({ error: `Studio preview limit reached for this creative brief (${maxBrief}).` });
     if (activeRows.filter(x => Number(x.variant_index) === variantIndex).length >= maxVariant) return res.status(429).json({ error: `Studio preview limit reached for this concept (${maxVariant}).` });
+    // Daily caps on paid image generation: per account, and for the whole site.
+    // Failed attempts don't count; in-flight ones do.
+    const since = new Date(Date.now() - 24 * 60 * 60 * 1000).toISOString();
+    const maxUserDay = plan === 'developer' ? 100 : 20;
+    const userDayQ = new URLSearchParams({ select: 'id', user_id: `eq.${user.id}`, status: 'neq.failed', created_at: `gte.${since}`, limit: String(maxUserDay) });
+    const userDay = await adminSelect('marketing_intelligence_visual_assets', userDayQ);
+    if (Array.isArray(userDay) && userDay.length >= maxUserDay) return res.status(429).json({ error: `Daily Studio preview limit reached (${maxUserDay}). Try again tomorrow.` });
+    const siteDayQ = new URLSearchParams({ select: 'id', status: 'neq.failed', created_at: `gte.${since}`, limit: String(STUDIO_SITE_DAILY_LIMIT) });
+    const siteDay = await adminSelect('marketing_intelligence_visual_assets', siteDayQ);
+    if (Array.isArray(siteDay) && siteDay.length >= STUDIO_SITE_DAILY_LIMIT) return res.status(429).json({ error: 'Studio preview generation is paused for today. Try again tomorrow.' });
 
     const prompt = stylePrompt(campaign, briefRow, variant, preset);
     const promptHash = sha256(prompt);

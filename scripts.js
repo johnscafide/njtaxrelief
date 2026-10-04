@@ -692,6 +692,16 @@
     if (!name)  { nameEl.focus();  alert('Please enter your name.');  return; }
     if (!email) { emailEl.focus(); alert('Please enter your email.'); return; }
 
+    // Hidden field people never see. Bots that fill every field get a quiet
+    // fake success and nothing is sent.
+    const trapEl = $('cf-website');
+    if (trapEl && trapEl.value.trim()) {
+      const form = $('contact-form'), success = $('form-success');
+      if (form) form.style.display = 'none';
+      if (success) success.style.display = 'block';
+      return;
+    }
+
     const btn = document.querySelector('#contact-form .submit-btn') ||
                 document.querySelector('.btn-contact-submit');
     if (btn) { btn.textContent = 'Sending...'; btn.disabled = true; }
