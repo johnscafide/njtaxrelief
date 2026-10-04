@@ -8,7 +8,7 @@ const { ORIGIN, SHARE_IMAGE, esc, countyLabel, fmtDate, STATUS } = T;
 const LOGO = '/property/branding/watchdog-logo-horizontal.svg';
 const MARK = '/property/branding/watchdog-mark.svg';
 const ASSET_V = '20261004c';
-// Tip line at the bottom of town pages and /co (co/index.html has the same link).
+// Tip line at the bottom of town pages.
 const TIP_URL = 'https://account.venmo.com/u/John-Scafide';
 
 // Inline icons, so the buttons never depend on an icon font loading.

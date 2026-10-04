@@ -162,7 +162,6 @@ dialog::backdrop { background: rgba(16,24,40,.45); }
 .tip { margin: 28px 0 0; font-size: 12px; }
 .tip a { color: var(--muted); }
 .tip a:hover { color: var(--ink); }
-.home .tip { margin-top: 20px; text-align: center; }
 
 /* County pages and the "Browse by county" list on /co. */
 .countylist { display: grid; grid-template-columns: repeat(auto-fill, minmax(150px, 1fr)); gap: 2px 16px; margin: 8px 0 0; padding: 0; list-style: none; }
