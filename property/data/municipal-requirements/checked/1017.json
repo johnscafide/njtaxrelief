@@ -1,0 +1,229 @@
+{
+  "municipality_code": "1017",
+  "municipality": "Lambertville City",
+  "county": "HUNTERDON",
+  "resale_co": {
+    "status": "required",
+    "name": "Construction Records Clearance (CRC)",
+    "issued_by": "City of Lambertville Construction Office",
+    "lead_time": "",
+    "valid_for": "",
+    "requirements": [
+      "Records search showing no open construction permits (building, electric, plumbing, mechanical or fire) or violations on the property",
+      "Application lists the property address, block and lot, owner, agent and closing date"
+    ],
+    "fees": [
+      {
+        "label": "Construction Records Clearance application",
+        "amount": "$50.00",
+        "quote": "Application fee is $50.00.",
+        "source_url": "https://docs.google.com/document/d/15QrzNLkkW5n7eKRU1ys54iSEyqODBTPc/edit?usp=sharing&ouid=101551011737263940262&rtpof=true&sd=true",
+        "verified": null
+      }
+    ],
+    "how_to_apply": "Fill out the City's Construction Records Clearance Application (linked on the Construction page) and submit it with the $50.00 fee to the Construction Office, City Hall, Second Floor, 18 York Street, Lambertville, NJ 08530. Pay by check payable to the City of Lambertville or online (credit card or e-check). Office hours are weekdays 9:00 a.m. to 4:30 p.m. (Tuesday to 7:30 p.m., Friday to 12:30 p.m.).",
+    "application_url": "https://docs.google.com/document/d/15QrzNLkkW5n7eKRU1ys54iSEyqODBTPc/edit?usp=sharing&ouid=101551011737263940262&rtpof=true&sd=true",
+    "department_url": "https://www.lambertvillenj.org/departments/construction",
+    "phone": "609-397-0110 x223",
+    "email": "construction@lambertvillenj.org",
+    "contact_name": "Paul Hardifer, Jr.",
+    "contact_title": "Construction Official (also Zoning Officer)",
+    "evidence": [
+      {
+        "url": "https://www.lambertvillenj.org/departments/construction",
+        "quote": "Here's what you will need prior to sale:",
+        "doc_date": "2026-10-04 (page fetched)",
+        "via": "page",
+        "verified": true
+      },
+      {
+        "url": "https://www.lambertvillenj.org/departments/construction",
+        "quote": "This is required to verify that there are no open permits on the property.",
+        "doc_date": "2026-10-04 (page fetched)",
+        "via": "page",
+        "verified": true
+      },
+      {
+        "url": "https://www.lambertvillenj.org/departments/construction",
+        "quote": "and payment should be submitted to the Construction Office.",
+        "doc_date": "2026-10-04 (page fetched)",
+        "via": "page",
+        "verified": true
+      },
+      {
+        "url": "https://www.lambertvillenj.org/departments/construction",
+        "quote": "Please call 609-397-0110 x223 with any questions you may have about permits.",
+        "doc_date": "2026-10-04 (page fetched)",
+        "via": "page",
+        "verified": true
+      },
+      {
+        "url": "https://www.lambertvillenj.org/departments/construction",
+        "quote": "Paul serves as the Zoning Officer for both Lambertville and Frenchtown.",
+        "doc_date": "2026-10-04 (page fetched)",
+        "via": "page",
+        "verified": true
+      },
+      {
+        "url": "https://docs.google.com/document/d/15QrzNLkkW5n7eKRU1ys54iSEyqODBTPc/edit?usp=sharing&ouid=101551011737263940262&rtpof=true&sd=true",
+        "quote": "Search revealed the following open permits:",
+        "doc_date": "2026-10-04 (page fetched)",
+        "via": "page",
+        "verified": null
+      }
+    ],
+    "confidence": "medium",
+    "notes": "Lambertville does not appear to do a resale housing inspection: a search of the City code on ecode360 found no resale or change-of-ownership certificate of occupancy for homes. The City's Construction page lists three things a seller needs before a sale: the smoke certification from the Lambertville Fire Department, a Construction Records Clearance (CRC) from the Construction Office to confirm there are no open permits, and a sump pump inspection from the Lambertville Municipal Utilities Authority. The CRC is a records check, not an inspection of the house. The CRC form is a Google document linked from the City page. Emails come from the Construction page (constructionofficial@lambertvillenj.org for Paul Hardifer, Jr.; construction@lambertvillenj.org for the office). The office's main line is 609-397-0110, press 2."
+  },
+  "fire_cert": {
+    "requirements": [
+      "Smoke alarms per the year the home was built (for example, before January 1977 battery alarms on all levels; March 2016 to present hardwired, interconnected alarms with battery backup on every level, near and in each sleeping area); battery-only alarms must be 10-year sealed, UL 217 listed, and no older than 10 years",
+      "Basement battery smoke alarms within 10 feet of the base of the stairs",
+      "Low voltage/central alarm systems need a full NFPA 72 inspection report from a certified contractor",
+      "Carbon monoxide alarms (UL 2034) in the immediate vicinity of the sleeping areas, within 10 feet of sleeping room doors",
+      "Portable fire extinguisher, ABC type rated at least 2A-10B:C and no more than 10 pounds, within 10 feet of the kitchen in the path of egress, mounted on the manufacturer's bracket, serviced and tagged within 12 months or with a recent purchase receipt (form says still required per municipal ordinance 11-1.8) (form still lists it)",
+      "Secondary power source label (CAUTION: MULTIPLE SOURCES OF POWER) within 18 inches of the main electrical panel and meter, if the home has a generator, solar panels or battery storage",
+      "A representative must be on site; snow and ice must be cleared; power must be on"
+    ],
+    "authorities": [
+      {
+        "name": "Lambertville Fire District #1, Bureau of Fire Safety (Fire Marshal's Office)",
+        "type": "fire_district",
+        "area_served": "Entire city",
+        "lead_time": "Fee depends on business days before the change of occupancy: more than 10 business days for the lowest fee; same-day inspection costs more. Allow at least 1 to 2 weeks if mailing. The appointment time range cannot be narrowed down.",
+        "fees": [
+          {
+            "label": "Smoke alarm, CO alarm and fire extinguisher certificate, received more than 10 business days before the change of occupancy",
+            "amount": "$75.00",
+            "quote": "$ 75.00 Received more than 10 business days before the change of occupancy",
+            "source_url": "https://lambertvillefirestation.com/wp-content/uploads/2026/02/Aplication-Smoke-DetectorCarbon-Monoxide-Detector-Fire-Extinguisher-Compliance.pdf",
+            "verified": true
+          },
+          {
+            "label": "Received 4 to 10 business days before the change of occupancy",
+            "amount": "$125.00",
+            "quote": "$ 125.00 Received 4 - 10 business days before the change of occupancy",
+            "source_url": "https://lambertvillefirestation.com/wp-content/uploads/2026/02/Aplication-Smoke-DetectorCarbon-Monoxide-Detector-Fire-Extinguisher-Compliance.pdf",
+            "verified": true
+          },
+          {
+            "label": "Received fewer than 4 business days before the change of occupancy",
+            "amount": "$175.00",
+            "quote": "$ 175.00 Received fewer than 4 business days before the change of occupancy",
+            "source_url": "https://lambertvillefirestation.com/wp-content/uploads/2026/02/Aplication-Smoke-DetectorCarbon-Monoxide-Detector-Fire-Extinguisher-Compliance.pdf",
+            "verified": true
+          },
+          {
+            "label": "Same day inspection",
+            "amount": "$225.00",
+            "quote": "$ 225.00 SAME DAY Inspection",
+            "source_url": "https://lambertvillefirestation.com/wp-content/uploads/2026/02/Aplication-Smoke-DetectorCarbon-Monoxide-Detector-Fire-Extinguisher-Compliance.pdf",
+            "verified": true
+          },
+          {
+            "label": "Reinspection",
+            "amount": "$50.00",
+            "quote": "Re-inspection fee for CSDCMAC shall be $50.00",
+            "source_url": "https://lambertvillefirestation.com/wp-content/uploads/2026/02/Aplication-Smoke-DetectorCarbon-Monoxide-Detector-Fire-Extinguisher-Compliance.pdf",
+            "verified": true
+          }
+        ],
+        "how_to_apply": "Download the Application for Smoke Alarm, Carbon Monoxide Alarm & Fire Extinguisher Compliance from the Fire Marshal page, fill it out completely and send it with the fee (checks payable to Lambertville Fire District # 1), or pay online through the District's electronic payment link. Incomplete applications or improper payments are rejected and need new fees.",
+        "application_url": "https://lambertvillefirestation.com/wp-content/uploads/2026/02/Aplication-Smoke-DetectorCarbon-Monoxide-Detector-Fire-Extinguisher-Compliance.pdf",
+        "department_url": "https://lambertvillefirestation.com/permits/",
+        "phone": "609-397-2084",
+        "email": "firemarshal17@lfddistrict1.com",
+        "contact_name": "Frank J Ur",
+        "contact_title": "Fire Official (per the state directory)",
+        "evidence": [
+          {
+            "url": "https://www.lambertvillenj.org/departments/construction",
+            "quote": "from the Lambertville Fire Department",
+            "doc_date": "2026-10-04 (page fetched)",
+            "via": "page",
+            "verified": true
+          },
+          {
+            "url": "https://lambertvillefirestation.com/permits/",
+            "quote": "Application - Smoke Detector, Carbon Monoxide Detector, & Fire Extinguisher Compliance",
+            "doc_date": "2026-10-04 (page fetched)",
+            "via": "page",
+            "verified": true
+          },
+          {
+            "url": "https://lambertvillefirestation.com/wp-content/uploads/2026/02/Aplication-Smoke-DetectorCarbon-Monoxide-Detector-Fire-Extinguisher-Compliance.pdf",
+            "quote": "Lambertville Fire District # 1",
+            "doc_date": "2026-02 (upload date)",
+            "via": "pdf",
+            "verified": true
+          },
+          {
+            "url": "https://lambertvillefirestation.com/wp-content/uploads/2026/02/Aplication-Smoke-DetectorCarbon-Monoxide-Detector-Fire-Extinguisher-Compliance.pdf",
+            "quote": "Please allow a minimum of 1 to 2 weeks in anticipation of potential mailing delays and other applications.",
+            "doc_date": "2026-02",
+            "via": "pdf",
+            "verified": true
+          },
+          {
+            "url": "https://lambertvillefirestation.com/wp-content/uploads/2026/02/Aplication-Smoke-DetectorCarbon-Monoxide-Detector-Fire-Extinguisher-Compliance.pdf",
+            "quote": "STILL REQUIRED PER MUNICIPAL ORDINANCE § 11-1.8",
+            "doc_date": "2026-02",
+            "via": "pdf",
+            "verified": true
+          },
+          {
+            "url": "https://lambertvillefirestation.com/wp-content/uploads/2026/02/Aplication-Smoke-DetectorCarbon-Monoxide-Detector-Fire-Extinguisher-Compliance.pdf",
+            "quote": "Inspectors cannot enter a building without a representative present on site.",
+            "doc_date": "2026-02",
+            "via": "pdf",
+            "verified": true
+          },
+          {
+            "url": "https://nj.gov/dca/dfs/pdf/ANNUAL%20REGISTRY/THIRD%20QUARTER%20LEA%20REGISTRY%202026.pdf",
+            "quote": "M Lambertville City",
+            "doc_date": "2026-07",
+            "via": "pdf",
+            "verified": true
+          },
+          {
+            "url": "https://www.nj.gov/dca/dfs/pdf/fire%20directory_county%20summary/fire_code_enforcement_director.pdf",
+            "quote": "LEAID: 1017-001 Lambertville City SMOKE DETECTOR COMPLIANCE Name: City Lambertville Enf Auth. District ... Fire Official Frank J Ur ... Phone (609) 397-0110 ... Email firemarshal17@lfddistrict1.com",
+            "doc_date": "2026-07 (survey date 7/13/2026)",
+            "via": "state_directory",
+            "verified": null
+          }
+        ],
+        "confidence": "high"
+      }
+    ],
+    "notes": "The City's Construction page sends sellers to the Lambertville Fire Department for the smoke certification; the fire district's Fire Marshal page posts the application with the fee tiers. The form still requires a portable fire extinguisher, citing municipal ordinance 11-1.8, even though the state dropped it from the sale certificate in February 2025 (P.L.2025, c.19). The state directory lists the Fire Official as Frank J Ur, phone (609) 397-0110 (City Hall main line) and smoke detector compliance phone (609) 397-0803; the fire station number on the district website is 609-397-2084."
+  },
+  "other_items": [
+    {
+      "label": "Sump pump inspection (Lambertville Municipal Utilities Authority)",
+      "detail": "All properties need an LMUA sump pump inspection before a sale or transfer of ownership. Sump pumps, dehumidifiers and other groundwater or surface drains may not be connected to the sewer; any found must be removed and capped, then reinspected. Inspections are 9 a.m. to 12 p.m. and 1 to 3 p.m.; book with the LMUA at 609-397-1496 (8 a.m. to 4 p.m., Monday to Friday) or by email to mparsons@lambertvillemua.com.",
+      "source_url": "https://lambertvillemua.com/about-us/inspections/"
+    },
+    {
+      "label": "Construction Records Clearance",
+      "detail": "Covered under the resale certificate: the Construction Office confirms there are no open permits before the sale.",
+      "source_url": "https://www.lambertvillenj.org/departments/construction"
+    }
+  ],
+  "open_questions": [
+    "Is there a fee for the LMUA sump pump inspection, and how far ahead must it be booked? None is posted.",
+    "How long does the Construction Office take to issue the CRC, and what happens if open permits are found?",
+    "Does the fire district still require the fire extinguisher at resale under local ordinance 11-1.8 after P.L.2025, c.19? The form says yes."
+  ],
+  "checked_at": "2026-10-04",
+  "verification": {
+    "fees": 6,
+    "fee_ok": 5,
+    "fee_bad": 0,
+    "fee_unchecked": 1,
+    "quotes": 14,
+    "q_ok": 12,
+    "q_bad": 0,
+    "q_unchecked": 2
+  }
+}

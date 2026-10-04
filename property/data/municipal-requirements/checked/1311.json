@@ -1,0 +1,251 @@
+{
+  "municipality_code": "1311",
+  "municipality": "Deal Borough",
+  "county": "MONMOUTH",
+  "resale_co": {
+    "status": "required",
+    "name": "Resale Certificate of Inspection / Certificate of Occupancy (Real Property Transfer Permit)",
+    "issued_by": "Borough of Deal Code Enforcement (Building Department / Construction Official)",
+    "lead_time": "Inspectors are part-time and inspection space is limited; plan ahead. Under the code, the permit is issued or denied within 10 days of a complete application and inspection.",
+    "valid_for": "A temporary transfer permit may be issued for up to 90 days",
+    "requirements": [
+      "Complete Rental/Resale Certificate of Inspection & Fire Safety application with all buyer and occupant names and ages",
+      "All construction permits and violations must be closed out",
+      "All taxes must be paid up to date",
+      "Estates must provide executor documentation; corporations must provide formation documents",
+      "Exterior and interior inspection checklist (paint, street numbers, foundation, windows and screens, handrails, sidewalks and stairs, GFCI outlets, gutters, debris, cleanliness, no infestation)",
+      "Oil tanks not in use must be removed or filled under the Uniform Construction Code (demolition permit required)",
+      "Smoke and carbon monoxide inspection is required with every code enforcement inspection (separate fire fee)",
+      "First reinspection is free; there is a fee for the second; missing the inspection is an automatic failure"
+    ],
+    "fees": [
+      {
+        "label": "Resale certificate of inspection, single and two family homes",
+        "amount": "$200",
+        "quote": "$200            – Single & Two Family Homes",
+        "source_url": "https://dealnj.gov/wp-content/uploads/2025/07/Rental-Resale-Certificate-Inspection-Application-2025.pdf",
+        "verified": true
+      },
+      {
+        "label": "Certification fee, single and two family homes (Borough Code §11-3.5b)",
+        "amount": "$200",
+        "quote": "| Single and Two Family Homes | $200 |",
+        "source_url": "https://ecode360.com/49108720",
+        "verified": null
+      },
+      {
+        "label": "Transfer of Ownership/Title only application (no occupancy allowed until a CO is issued)",
+        "amount": "$65.00",
+        "quote": "A non-refundable fee of $65.00 must be paid at the time of the application.",
+        "source_url": "https://dealnj.gov/wp-content/uploads/2025/04/Transfer-of-Ownership-Application.pdf",
+        "verified": true
+      }
+    ],
+    "how_to_apply": "Fill out the Borough's Rental/Resale Certificate of Inspection & Fire Safety Application (check Resale), with the buyer and occupant information, and deliver it with the certificate fee and the smoke/CO fee (checks payable to the Borough of Deal) to Code Enforcement, 190 Norwood Ave. Faxed or emailed applications are not accepted. If title will transfer before the home is ready to occupy, a separate Transfer of Ownership (title only) application with a notarized buyer affidavit is available.",
+    "application_url": "https://dealnj.gov/wp-content/uploads/2025/07/Rental-Resale-Certificate-Inspection-Application-2025.pdf",
+    "department_url": "https://dealnj.gov/departments/building/",
+    "phone": "(732) 531-1454",
+    "email": "Building@dealborough.com",
+    "contact_name": "",
+    "contact_title": "",
+    "evidence": [
+      {
+        "url": "https://dealnj.gov/wp-content/uploads/2025/07/Rental-Resale-Certificate-Inspection-Application-2025.pdf",
+        "quote": "RENTAL / RESALE CERTIFICATE OF INSPECTION & FIRE SAFETY APPLICATION",
+        "doc_date": "2025-07 (upload date)",
+        "via": "pdf",
+        "verified": true
+      },
+      {
+        "url": "https://dealnj.gov/wp-content/uploads/2025/07/Rental-Resale-Certificate-Inspection-Application-2025.pdf",
+        "quote": "All construction permits and violations must be closed out",
+        "doc_date": "2025-07",
+        "via": "pdf",
+        "verified": true
+      },
+      {
+        "url": "https://dealnj.gov/wp-content/uploads/2025/07/Rental-Resale-Certificate-Inspection-Application-2025.pdf",
+        "quote": "FIRST REINSPECTION IS FREE SECOND REINSPECTION THERE IS A FEE",
+        "doc_date": "2025-07",
+        "via": "pdf",
+        "verified": true
+      },
+      {
+        "url": "https://dealnj.gov/wp-content/uploads/2025/07/Rental-Resale-Certificate-Inspection-Application-2025.pdf",
+        "quote": "Oil tanks not in use must be removed or filled in accordance with the Uniform Construction Code",
+        "doc_date": "2025-07",
+        "via": "pdf",
+        "verified": true
+      },
+      {
+        "url": "https://ecode360.com/49109216",
+        "quote": "No person, firm or corporation shall convey, grant or otherwise transfer title to real property with a residential, business or commercial structure or improvement thereon or permit the same to be sold without first obtaining a Real Property Transfer Permit",
+        "doc_date": "Ord. No. 848",
+        "via": "page",
+        "verified": null
+      },
+      {
+        "url": "https://ecode360.com/49109216",
+        "quote": "The fee to apply for a Real Property Transfer Permit shall be one hundred twenty-five ($125.00) dollars.",
+        "doc_date": "Ord. No. 848; Ord. No. 1118",
+        "via": "page",
+        "verified": null
+      },
+      {
+        "url": "https://ecode360.com/49108720",
+        "quote": "Certification Fee Schedule.",
+        "doc_date": "Added 5-9-2025 by Ord. No. 2025-14",
+        "via": "page",
+        "verified": null
+      },
+      {
+        "url": "https://dealnj.gov/wp-content/uploads/2025/04/Transfer-of-Ownership-Application.pdf",
+        "quote": "I fully understand that the property is not to be occupied until an inspection is conducted and the approval for the issuance of a CERTIFICATE OF OCCUPANCY for this location.",
+        "doc_date": "2025-04 (upload date)",
+        "via": "pdf",
+        "verified": true
+      },
+      {
+        "url": "https://dealnj.gov/departments/building/",
+        "quote": "(All Inspectors are part-time, Inspection space is limited – please plan accordingly)",
+        "doc_date": "2026-10-04 (page fetched)",
+        "via": "page",
+        "verified": true
+      }
+    ],
+    "confidence": "high",
+    "notes": "Borough Code §12-4 (Real Property Transfer Permit) requires a permit and inspection before any sale; its fee section still says $125 with a $25 reinspection, but the newer §11-3.5 (Ord. No. 2025-14, May 9, 2025) and the 2025 application set the certification fee at $200 for single and two family homes, so $200 is used here. Code text was read through ecode360's print view. The Building Department page lists Construction Official Eric Sudia and Technical Assistant Kevin Diaz; the application lists Building@dealborough.com and the Building page shows building@DealNJ.gov. Rental certificates and landlord registration are rental-only."
+  },
+  "fire_cert": {
+    "requirements": [
+      "10-year sealed battery smoke detectors on each level, including basements (not attic or crawl space), and outside each separate sleeping area",
+      "Homes built after 1977 with AC powered and/or interconnected detectors must keep them in working order",
+      "Carbon monoxide detector in the common area of any floor with a bedroom or garage",
+      "All detectors in working order"
+    ],
+    "authorities": [
+      {
+        "name": "Borough of Deal Code Enforcement / Deal Borough Fire Prevention (fee collected with the resale application)",
+        "type": "municipal_fire_bureau",
+        "area_served": "Entire borough",
+        "lead_time": "Fee depends on how many days before the occupancy change the request is made: more than 10 days for the lowest fee.",
+        "fees": [
+          {
+            "label": "Smoke and carbon monoxide inspection, more than 10 days before the occupancy change",
+            "amount": "$45",
+            "quote": "$45 – More than TEN days prior to occupancy change",
+            "source_url": "https://dealnj.gov/wp-content/uploads/2025/07/Rental-Resale-Certificate-Inspection-Application-2025.pdf",
+            "verified": true
+          },
+          {
+            "label": "Smoke and carbon monoxide inspection, 4 to 10 days before the occupancy change",
+            "amount": "$90",
+            "quote": "$90 – 4 to 10 days prior to occupancy change",
+            "source_url": "https://dealnj.gov/wp-content/uploads/2025/07/Rental-Resale-Certificate-Inspection-Application-2025.pdf",
+            "verified": true
+          },
+          {
+            "label": "Smoke and carbon monoxide inspection, less than 4 days before the occupancy change",
+            "amount": "$161",
+            "quote": "$161 – Less than 4 days prior to occupancy change",
+            "source_url": "https://dealnj.gov/wp-content/uploads/2025/07/Rental-Resale-Certificate-Inspection-Application-2025.pdf",
+            "verified": true
+          }
+        ],
+        "how_to_apply": "Pay the smoke and carbon monoxide fee on the same Rental/Resale Certificate of Inspection & Fire Safety Application as the resale certificate; checks payable to the Borough of Deal. Fire inspections are booked by email with the Building Department (Tuesdays and Wednesdays, 11:00 am to 1:30 pm).",
+        "application_url": "https://dealnj.gov/wp-content/uploads/2025/07/Rental-Resale-Certificate-Inspection-Application-2025.pdf",
+        "department_url": "https://dealnj.gov/departments/building/",
+        "phone": "(732) 531-1454",
+        "email": "nsimons@dealborough.com",
+        "contact_name": "Nicholas Simons",
+        "contact_title": "Fire Official (per NJ DCA fire directory)",
+        "evidence": [
+          {
+            "url": "https://dealnj.gov/wp-content/uploads/2025/07/Rental-Resale-Certificate-Inspection-Application-2025.pdf",
+            "quote": "PLEASE NOTE ALL CODE ENFORCEMENT INSPECTIONS ARE REQUIRED TO HAVE A SMOKE & CARBON INSPECTION INCLUDING ALL MULTIPLE DWELLINGS",
+            "doc_date": "2025-07",
+            "via": "pdf",
+            "verified": true
+          },
+          {
+            "url": "https://dealnj.gov/wp-content/uploads/2025/07/Rental-Resale-Certificate-Inspection-Application-2025.pdf",
+            "quote": "Carbon Monoxide detector installed in the common area of any",
+            "doc_date": "2025-07",
+            "via": "pdf",
+            "verified": true
+          },
+          {
+            "url": "https://ecode360.com/49108720",
+            "quote": "Requests for a CSACMAPFEC received more than 10 business days prior to the change of occupant: $45.00;",
+            "doc_date": "Added 5-9-2025 by Ord. No. 2025-14",
+            "via": "page",
+            "verified": null
+          },
+          {
+            "url": "https://ecode360.com/49108720",
+            "quote": "Requests for a CSACMAPFEC received fewer than four business days prior to the change of occupant: $161.00",
+            "doc_date": "Added 5-9-2025 by Ord. No. 2025-14",
+            "via": "page",
+            "verified": null
+          },
+          {
+            "url": "https://dealnj.gov/departments/building/",
+            "quote": "Tuesdays & Wednesdays",
+            "doc_date": "2026-10-04 (page fetched)",
+            "via": "page",
+            "verified": true
+          },
+          {
+            "url": "https://www.nj.gov/dca/dfs/pdf/fire%20directory_county%20summary/fire_code_enforcement_director.pdf",
+            "quote": "LEAID: 1310-001 Deal Borough SMOKE DETECTOR COMPLIANCE Name: Deal Boro Fire Prev Enf Auth. Municipal Addr: 120 Brighton Av Deal NJ 07723 Fire Official Nicholas Simons Phone (732) 531-1994 ... Email nsimons@dealborough.com",
+            "doc_date": "7/1/2026 (survey date)",
+            "via": "state_directory",
+            "verified": null
+          },
+          {
+            "url": "https://nj.gov/dca/dfs/pdf/ANNUAL%20REGISTRY/THIRD%20QUARTER%20LEA%20REGISTRY%202026.pdf",
+            "quote": "M Deal Borough",
+            "doc_date": "2026-07",
+            "via": "pdf",
+            "verified": true
+          }
+        ],
+        "confidence": "high"
+      }
+    ],
+    "notes": "The 2025 application and Borough Code §11-3.5 (Ord. No. 2025-14) both use the current state tiers of $45 / $90 / $161. An older section, §15-1.9, still lists $35 / $70 / $120 for the smoke/CO certificate; the newer amounts are used. The fire directory lists Fire Official Nicholas Simons (smoke compliance phone (732) 531-1994, fire official phone (732) 567-8254); the Borough's own pages route the application through Code Enforcement at (732) 531-1454. The 2025 form does not list a fire extinguisher, consistent with P.L.2025, c.19."
+  },
+  "other_items": [
+    {
+      "label": "Open permits and taxes",
+      "detail": "All construction permits and violations must be closed and all taxes paid before the certificate is issued.",
+      "source_url": "https://dealnj.gov/wp-content/uploads/2025/07/Rental-Resale-Certificate-Inspection-Application-2025.pdf"
+    },
+    {
+      "label": "Unused oil tanks",
+      "detail": "Oil tanks not in use must be removed or filled under the Uniform Construction Code (demolition permit required).",
+      "source_url": "https://dealnj.gov/wp-content/uploads/2025/07/Rental-Resale-Certificate-Inspection-Application-2025.pdf"
+    },
+    {
+      "label": "Sidewalks, driveway aprons and curbs",
+      "detail": "The transfer permit inspection requires sidewalks, driveway aprons and curbs to be in good repair and safe.",
+      "source_url": "https://ecode360.com/49109216"
+    }
+  ],
+  "open_questions": [
+    "Confirm the resale certificate fee is $200 and not the $125 still in Code §12-4.4.",
+    "What is the fee for a second reinspection?",
+    "How long is a resale certificate valid?"
+  ],
+  "checked_at": "2026-10-04",
+  "verification": {
+    "fees": 6,
+    "fee_ok": 5,
+    "fee_bad": 0,
+    "fee_unchecked": 1,
+    "quotes": 16,
+    "q_ok": 10,
+    "q_bad": 0,
+    "q_unchecked": 6
+  }
+}

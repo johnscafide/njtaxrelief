@@ -1,0 +1,254 @@
+{
+  "municipality_code": "1349",
+  "municipality": "Tinton Falls Borough",
+  "county": "MONMOUTH",
+  "resale_co": {
+    "status": "required",
+    "name": "Resale/Rental Certificate of Occupancy (R/R-CO), also called Certificate of Continued Occupancy (CCO)",
+    "issued_by": "Borough of Tinton Falls Code Enforcement (Code Enforcement Official)",
+    "lead_time": "Applications are processed within 15 business days; inspections are scheduled once the application is complete. The smoke/CO certificate and the CCO are picked up 36 to 72 hours after a passed inspection.",
+    "valid_for": "90 days. Applications without a CCO within 120 days of the first inspection are closed and need a new application and fee.",
+    "requirements": [
+      "Property taxes must be current before applying",
+      "Resale inspection is limited to zoning compliance and the exterior of the property under the Property Maintenance Code",
+      "Separate smoke detector and carbon monoxide alarm application and inspection (Fire Prevention)",
+      "Supplemental Information form; application lists number of bedrooms, buyer name and names and ages of all occupants",
+      "Heat certification by a licensed HVAC technician or licensed plumber, issued no more than 6 months before the application",
+      "Wood burning stove or fireplace chimney certification by a CSIA certified chimney sweep, if applicable",
+      "Gas fireplace certification, if applicable",
+      "Well water certification by a state certified lab and septic certification (NJDEP format report) if applicable; well and septic reports go to the Freehold Township Health Department for review",
+      "Fire sprinkler report and elevator certification, if applicable",
+      "No open zoning or building permits or zoning violations; no transfer of title with unabated zoning violations"
+    ],
+    "fees": [
+      {
+        "label": "Resale/Rental CO, detached single family dwelling",
+        "amount": "$150",
+        "quote": "Detached single family dwelling- $150 per dwelling",
+        "source_url": "https://www.tintonfalls.com/construction-page-list/313-cco",
+        "verified": true
+      },
+      {
+        "label": "Resale/Rental CO, attached multi-family dwelling (condos, townhomes, apartments), per unit",
+        "amount": "$75",
+        "quote": "Attached multi-family dwelling (i.e. condominiums, townhomes, apartments)- $75 per unit",
+        "source_url": "https://www.tintonfalls.com/construction-page-list/313-cco",
+        "verified": true
+      },
+      {
+        "label": "R/R-CO reinspection, after the first free reinspection",
+        "amount": "$50.00",
+        "quote": "re-inspection fee of $50.00 per reinspection thereafter.",
+        "source_url": "https://www.tintonfalls.com/construction-page-list/313-cco",
+        "verified": true
+      },
+      {
+        "label": "Surcharge for an R/R-CO application not submitted through the online portal",
+        "amount": "$15",
+        "quote": "There shall be a fee of $15 for each",
+        "source_url": "https://www.tintonfalls.com/construction-page-list/313-cco",
+        "verified": true
+      }
+    ],
+    "how_to_apply": "Submit the R/R-CO application and the Smoke Detector application online through the Borough's SDL portal, along with the Supplemental Information form and any required certifications. Paper applications cost $15 more.",
+    "application_url": "https://www.sdlportal.com/towns/nj/monmouth/tintonfalls/requests/certificate",
+    "department_url": "https://www.tintonfalls.com/departments/code-enforcement",
+    "phone": "732-542-3400 Ext. 267",
+    "email": "code-zoning@tintonfalls.com",
+    "contact_name": "Cary Costa",
+    "contact_title": "Code Enforcement Official",
+    "evidence": [
+      {
+        "url": "https://www.tintonfalls.com/construction-page-list/313-cco",
+        "quote": "The Borough of Tinton Falls requires a ‘R/R-CO’ for all rentals, transfers of title, and changes in occupancy",
+        "doc_date": "2026-10-04 (page fetched)",
+        "via": "page",
+        "verified": true
+      },
+      {
+        "url": "https://www.tintonfalls.com/construction-page-list/313-cco",
+        "quote": "Applications shall be processed within 15 business days; after the application is deemed complete, inspections may be scheduled.",
+        "doc_date": "2026-10-04 (page fetched)",
+        "via": "page",
+        "verified": true
+      },
+      {
+        "url": "https://www.tintonfalls.com/construction-page-list/313-cco",
+        "quote": "Effective July 22, 2019: Inspections of residential re-sale properties shall be limited to the property complying with the Zoning Regulations and exterior property complying with the Property Maintenance Code.",
+        "doc_date": "2026-10-04 (page fetched)",
+        "via": "page",
+        "verified": true
+      },
+      {
+        "url": "https://www.tintonfalls.com/government/documents/department-documents/code-enforcement-1/473-certificates-of-continued-occupancy-cco-required-residential-dwellings/file",
+        "quote": "A certificate of continued occupancy (\"CCO\") shall be required for any change in occupancy, change in ownership, or change in title of any existing residential dwelling.",
+        "doc_date": "",
+        "via": "pdf",
+        "verified": true
+      },
+      {
+        "url": "https://www.tintonfalls.com/government/documents/department-documents/code-enforcement-1/473-certificates-of-continued-occupancy-cco-required-residential-dwellings/file",
+        "quote": "Property taxes shall be current prior to submitting any application for CCO.",
+        "doc_date": "",
+        "via": "pdf",
+        "verified": true
+      },
+      {
+        "url": "https://www.tintonfalls.com/government/documents/department-documents/code-enforcement-1/473-certificates-of-continued-occupancy-cco-required-residential-dwellings/file",
+        "quote": "A residential certificate of continued occupancy shall be effective for a period of 90 days.",
+        "doc_date": "",
+        "via": "pdf",
+        "verified": true
+      },
+      {
+        "url": "https://www.tintonfalls.com/government/documents/department-documents/code-enforcement-1/473-certificates-of-continued-occupancy-cco-required-residential-dwellings/file",
+        "quote": "There shall be no transfer of title if unabated zoning violations exist on the property.",
+        "doc_date": "",
+        "via": "pdf",
+        "verified": true
+      },
+      {
+        "url": "https://www.tintonfalls.com/departments/code-enforcement",
+        "quote": "Certificate of Continued Occupancy- The Borough requires a “CCO” be obtained for all residential and commercial property sales, rentals, transfer of title, or change in occupancy.",
+        "doc_date": "2026-10-04 (page fetched)",
+        "via": "page",
+        "verified": true
+      },
+      {
+        "url": "https://www.tintonfalls.com/departments/code-enforcement",
+        "quote": "Phone: 732-542-3400 Ext. 267",
+        "doc_date": "2026-10-04 (page fetched)",
+        "via": "page",
+        "verified": true
+      }
+    ],
+    "confidence": "high",
+    "notes": "The Borough uses both names: the current page calls it the Resale/Rental Certificate of Occupancy (R/R-CO), and the code section (Section 11-4.2, posted as a PDF on the Borough site) and Code Enforcement page call it a Certificate of Continued Occupancy (CCO). The fee table lists detached single family at $150 and attached multi-family at $75 per unit; it does not say which rate applies to a detached two-family house, so confirm. The first reinspection after a failed R/R-CO inspection is free. Email is the mailto link on the Code Enforcement page. Lead-safe certification applies only to pre-1978 homes that will be rented, so it is not a resale item for owner-occupied sales."
+  },
+  "fire_cert": {
+    "requirements": [
+      "Smoke alarms and carbon monoxide alarms per the Borough's posted Residential Smoke Alarm and Carbon Monoxide Alarm Requirements documents",
+      "Portable fire extinguisher (form still lists it; the Borough page says extinguishers are still required by local ordinance regardless of state law)"
+    ],
+    "authorities": [
+      {
+        "name": "Tinton Falls Fire Prevention Bureau (Fire Marshal)",
+        "type": "municipal_fire_bureau",
+        "area_served": "Entire borough",
+        "lead_time": "After the application and fee, the applicant receives an inspection date; inspections are weekday mornings. The certificate is picked up with the CCO 36 to 72 hours after a passed inspection and expires 90 days from the inspection date.",
+        "fees": [
+          {
+            "label": "Smoke detector and carbon monoxide certificate, per dwelling",
+            "amount": "$50",
+            "quote": "The fee for a Smoke Detector and Carbon Monoxide certificate is $50 per dwelling.",
+            "source_url": "https://www.tintonfalls.com/construction-page-list/313-cco",
+            "verified": true
+          },
+          {
+            "label": "Smoke/CO reinspection, each",
+            "amount": "$35",
+            "quote": "A re-inspection fee of $35 shall be paid for each re-inspection.",
+            "source_url": "https://www.tintonfalls.com/construction-page-list/313-cco",
+            "verified": true
+          }
+        ],
+        "how_to_apply": "Submit the residential Smoke Detector application on the Borough's SDL portal and pay by credit card, exact cash, or check payable to Borough of Tinton Falls. The Bureau sets an inspection date. After a failed inspection, fix the items and call the office to schedule a reinspection.",
+        "application_url": "https://www.sdlportal.com/towns/nj/monmouth/tintonfalls/requests/smokealarm",
+        "department_url": "https://www.tintonfalls.com/departments/fire-prevention",
+        "phone": "732-542-3400 Ext. 238",
+        "email": "firemarshal@tintonfalls.com",
+        "contact_name": "Cary Costa",
+        "contact_title": "Fire Marshal (Fire Inspector: David Boehning, Ext. 235)",
+        "evidence": [
+          {
+            "url": "https://www.tintonfalls.com/departments/fire-prevention",
+            "quote": "Smoke Detection Certificate expires 90 days from date of inspection.",
+            "doc_date": "2026-10-04 (page fetched)",
+            "via": "page",
+            "verified": true
+          },
+          {
+            "url": "https://www.tintonfalls.com/departments/fire-prevention",
+            "quote": "All inspections are done weekday mornings.",
+            "doc_date": "2026-10-04 (page fetched)",
+            "via": "page",
+            "verified": true
+          },
+          {
+            "url": "https://www.tintonfalls.com/departments/fire-prevention",
+            "quote": "Phone: 732-542-3400 Ext. 238",
+            "doc_date": "2026-10-04 (page fetched)",
+            "via": "page",
+            "verified": true
+          },
+          {
+            "url": "https://www.tintonfalls.com/construction-page-list/313-cco",
+            "quote": "FIRE EXTINGUISHERS ARE STILL REQUIRED IN TINTON FALLS PER ORDINANCE REGARDLESS OF STATE LAW",
+            "doc_date": "2026-10-04 (page fetched)",
+            "via": "page",
+            "verified": true
+          },
+          {
+            "url": "https://nj.gov/dca/dfs/pdf/ANNUAL%20REGISTRY/THIRD%20QUARTER%20LEA%20REGISTRY%202026.pdf",
+            "quote": "M Tinton Falls Borough",
+            "doc_date": "2026-07",
+            "via": "pdf",
+            "verified": true
+          },
+          {
+            "url": "https://www.nj.gov/dca/dfs/pdf/fire%20directory_county%20summary/fire_code_enforcement_director.pdf",
+            "quote": "LEAID: 1336-001 Tinton Falls Boro Enf Auth. Municipal Fire Official Cary Costa Phone (732) 542-3400 Email ccosta@tintonfalls.com",
+            "doc_date": "2022-04-21 (survey date)",
+            "via": "state_directory",
+            "verified": null
+          }
+        ],
+        "confidence": "high"
+      }
+    ],
+    "notes": "The Borough's CCO page says fire extinguishers are still required in Tinton Falls by local ordinance regardless of state law, even though P.L.2025, c.19 (February 2025) dropped the extinguisher from the state sale certificate. The Fire Prevention page lists Cary Costa as Fire Marshal (firemarshal@tintonfalls.com, Ext. 238); he is also the Code Enforcement Official. No rush or tiered fee by days before closing is published."
+  },
+  "other_items": [
+    {
+      "label": "Heat certification",
+      "detail": "Heating system certified by a licensed HVAC technician or licensed plumber, issued no more than six months before the CCO application.",
+      "source_url": "https://www.tintonfalls.com/construction-page-list/313-cco"
+    },
+    {
+      "label": "Chimney / fireplace certification",
+      "detail": "Wood burning stove or fireplace chimney certification by a CSIA certified chimney sweep, and gas fireplace certification by a licensed HVAC technician or plumber, if present.",
+      "source_url": "https://www.tintonfalls.com/construction-page-list/313-cco"
+    },
+    {
+      "label": "Well and septic certification",
+      "detail": "Homes on a well or septic system need a certified lab well water test and a septic cleaning and certification (NJDEP format report), submitted to the Freehold Township Health Department for review.",
+      "source_url": "https://www.tintonfalls.com/construction-page-list/313-cco"
+    },
+    {
+      "label": "Property taxes current",
+      "detail": "Property taxes must be current before the CCO application is submitted.",
+      "source_url": "https://www.tintonfalls.com/government/documents/department-documents/code-enforcement-1/473-certificates-of-continued-occupancy-cco-required-residential-dwellings/file"
+    },
+    {
+      "label": "Open permits and zoning violations",
+      "detail": "No CCO is issued with outstanding zoning or building permits or violations, and title may not transfer with unabated zoning violations.",
+      "source_url": "https://www.tintonfalls.com/government/documents/department-documents/code-enforcement-1/473-certificates-of-continued-occupancy-cco-required-residential-dwellings/file"
+    }
+  ],
+  "open_questions": [
+    "Which CCO fee applies to a detached two-family house: $150 per dwelling or $75 per unit?",
+    "Is the portable fire extinguisher still enforced at every resale smoke/CO inspection, and which ordinance section requires it?",
+    "Is any rush or short-notice fee charged for the smoke/CO inspection?"
+  ],
+  "checked_at": "2026-10-04",
+  "verification": {
+    "fees": 6,
+    "fee_ok": 6,
+    "fee_bad": 0,
+    "fee_unchecked": 0,
+    "quotes": 15,
+    "q_ok": 14,
+    "q_bad": 0,
+    "q_unchecked": 1
+  }
+}

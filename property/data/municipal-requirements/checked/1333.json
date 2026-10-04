@@ -1,0 +1,220 @@
+{
+  "municipality_code": "1333",
+  "municipality": "Millstone Township",
+  "county": "MONMOUTH",
+  "checked_at": "2026-10-04",
+  "resale_co": {
+    "status": "required",
+    "name": "Certificate of Inspection (COI) for residential resale",
+    "issued_by": "Millstone Township Construction Department (Construction Official)",
+    "lead_time": "Submit the written application at least ten business days before the change of ownership; the Township says to allow about twenty business days to complete the certificate process. Permits for any unpermitted work must be filed, inspected and closed before a resale inspection can be booked.",
+    "valid_for": "The Township page says certificates are valid up to six months from issuance; the Township code says up to 60 days, extendable by the Construction Official for up to 120 more days (180 days total).",
+    "requirements": [
+      "Records check that there are no open construction permits; any work done without a permit must be permitted, inspected and closed before the resale inspection appointment",
+      "Visual inspection by the Construction Official (4 inch house numbers within 10 feet of the road, railings, washer/dryer discharge and metal dryer vent, no garbage disposals, working HVAC, garage door and sheetrock, roof, stove anti-tip device, plumbing, covered electrical and GFI protection, clean yard, pool fence code)",
+      "Chimney caps, and a Level 1 inspection by a certified chimney sweep for wood burning fireplaces",
+      "Millstone Township Fire Department smoke/CO certificate before the final COI is issued",
+      "Homes on well or septic: the Health Officer reviews the water supply and septic (septic pumped within the last three years or less than five years old)",
+      "Certificate of Construction Records Closure (CRC) required before the sale of any residential structure"
+    ],
+    "fees": [
+      {
+        "label": "Certificate of Inspection (residential, rental or resale)",
+        "amount": "$250",
+        "quote": "FEE $250",
+        "source_url": "https://storage.googleapis.com/juniper-media-library/232/2026/05/APPLICATION%20CHECKLIST%20FOR%20RESIDENTIAL%20CERTIFICATE%20OF%20INSPECTION%2005-22-26.pdf",
+        "verified": true
+      },
+      {
+        "label": "Certificate of Inspection (Township page)",
+        "amount": "$250",
+        "quote": "The applicant shall submit the written application at least ten business days prior to the change of ownership and/or occupancy on the form provided by the Township with a two hundred fifty-dollar ($250) fee, made payable to Millstone Township to cover administrative costs.",
+        "source_url": "https://www.millstonenj.gov/departments/construction-department",
+        "verified": true
+      },
+      {
+        "label": "Reinspection (Township Code 5-14)",
+        "amount": "$50",
+        "quote": "b. A fee of $50 shall be prepaid for reinspections.",
+        "source_url": "https://ecode360.com/35717185",
+        "verified": null
+      },
+      {
+        "label": "Residential temporary certificate (Township Code 5-14)",
+        "amount": "$75",
+        "quote": "c. A fee of $75 for residential temporary certificate or certificate of occupancy and $125 for commercial sites after initial certificate.",
+        "source_url": "https://ecode360.com/35717185",
+        "verified": null
+      }
+    ],
+    "how_to_apply": "Fill out the Application, Checklist for Residential, Rental, Resale Certificate of Inspection (check RESALE, give the approximate closing date and a contact person) and file it with the Construction Department, 470 Stagecoach Road, Millstone Township, with the $250 fee payable to Millstone Township (check or Visa/MasterCard). Also arrange the Fire Department smoke/CO inspection (609-259-2560). No inspection is scheduled until all required items are received.",
+    "application_url": "https://storage.googleapis.com/juniper-media-library/232/2026/05/APPLICATION%20CHECKLIST%20FOR%20RESIDENTIAL%20CERTIFICATE%20OF%20INSPECTION%2005-22-26.pdf",
+    "department_url": "https://www.millstonenj.gov/departments/construction-department",
+    "phone": "732-917-2953",
+    "email": "",
+    "contact_name": "",
+    "contact_title": "Construction Department",
+    "evidence": [
+      {
+        "url": "https://www.millstonenj.gov/departments/construction-department",
+        "quote": "The Ordinance states that a COI (Certificate of Inspection) certificate shall be required prior to the sale of any building and prior to the rental of any building within Millstone Township.",
+        "doc_date": "2026-10-04 (page fetched)",
+        "via": "page",
+        "verified": true
+      },
+      {
+        "url": "https://www.millstonenj.gov/departments/construction-department",
+        "quote": "Certificates are valid up to six (6) months from date of issuance.",
+        "doc_date": "2026-10-04 (page fetched)",
+        "via": "page",
+        "verified": true
+      },
+      {
+        "url": "https://www.millstonenj.gov/departments/construction-department",
+        "quote": "Certificate of Occupancy is required for any resale of a single family dwelling.",
+        "doc_date": "2026-10-04 (page fetched)",
+        "via": "page",
+        "verified": true
+      },
+      {
+        "url": "https://storage.googleapis.com/juniper-media-library/232/2026/05/APPLICATION%20CHECKLIST%20FOR%20RESIDENTIAL%20CERTIFICATE%20OF%20INSPECTION%2005-22-26.pdf",
+        "quote": "ALLOW APPROXIMATELY TWENTY (20) BUSINESS DAYS TO COMPLETE THE CERTIFICATE PROCESS",
+        "doc_date": "2026-05 (Rev. 5/26)",
+        "via": "pdf",
+        "verified": true
+      },
+      {
+        "url": "https://ecode360.com/35725152",
+        "quote": "A Certificate of Inspection issued hereunder shall be valid for a period not to exceed 60 days from the date of issuance.",
+        "doc_date": "2026-10-04 (page fetched)",
+        "via": "page",
+        "verified": null
+      },
+      {
+        "url": "https://ecode360.com/35725152",
+        "quote": "A CRC shall be required prior to the sale of any residential or commercial structure and prior to the rental of any tenant space in a commercial structure within the Township.",
+        "doc_date": "2026-10-04 (page fetched)",
+        "via": "page",
+        "verified": null
+      }
+    ],
+    "confidence": "high",
+    "notes": "Township Code Chapter 14 (Section 14-5 Certificate of Inspection, Section 14-8 Construction Records Closure), Chapter 5 fees and Chapter 13 (Fire District) were read in full through the ecode360 print view (code MI0357, confirmed as Millstone Township, Monmouth). The pack's town site link (millstoneboro.org) is Millstone Borough in Somerset County, a different town; the correct site is millstonenj.gov. The Township page (6 months) and code (60 days, extendable to 180) differ on how long the COI is valid. No separate CRC fee was found. Landlord registration, county Board of Health rental inspections and lead-safe certificates for pre-1978 rentals apply to rentals only."
+  },
+  "fire_cert": {
+    "requirements": [
+      "Smoke alarms, carbon monoxide alarms and portable fire extinguisher compliance per N.J.A.C. 5:70-4.19 (code still lists the extinguisher)",
+      "Fire Department certificate is needed before the final COI is issued"
+    ],
+    "authorities": [
+      {
+        "name": "Millstone Township Fire District No. 1, Bureau of Fire Prevention (Millstone Township Fire Company)",
+        "type": "fire_district",
+        "area_served": "Entire township",
+        "lead_time": "Fee depends on business days before the change of occupant: more than 10 business days for the lowest fee.",
+        "fees": [
+          {
+            "label": "CSACMAPFEC requested more than 10 business days before the change of occupant",
+            "amount": "$45",
+            "quote": "Requests for a CSACMAPFEC received more than 10 business days prior to the change of occupant: $45;",
+            "source_url": "https://ecode360.com/35725077",
+            "verified": null
+          },
+          {
+            "label": "Requested 4 to 10 business days before",
+            "amount": "$90",
+            "quote": "Requests for a CSACMAPFEC received four to 10 business days prior to the change of occupant: $90; and",
+            "source_url": "https://ecode360.com/35725077",
+            "verified": null
+          },
+          {
+            "label": "Requested fewer than 4 business days before",
+            "amount": "$161",
+            "quote": "Requests for a CSACMAPFEC received fewer than four business days prior to the change of occupant: $161.",
+            "source_url": "https://ecode360.com/35725077",
+            "verified": null
+          },
+          {
+            "label": "Reinspection",
+            "amount": "$30",
+            "quote": "A fee of $30 shall be paid per reinspection of premises.",
+            "source_url": "https://ecode360.com/35725077",
+            "verified": null
+          }
+        ],
+        "how_to_apply": "Call the Millstone Township Fire Department at 609-259-2560 to request the resale smoke/CO inspection. No online form was found on the Township or Fire Company websites.",
+        "application_url": "",
+        "department_url": "https://www.millstonenj.gov/departments/fire-prevention",
+        "phone": "609-259-2560",
+        "email": "Nkrauss@millstonefire.com",
+        "contact_name": "Nicholas Krauss",
+        "contact_title": "Fire Official (per NJ DCA fire directory)",
+        "evidence": [
+          {
+            "url": "https://ecode360.com/35725077",
+            "quote": "Before any one- and two-family or attached single-family structure is sold, leased or otherwise made subject to a change of occupancy for residential purposes, the owner shall obtain a certificate of smoke alarm, carbon monoxide alarm, and portable fire extinguisher compliance (CSACMAPFEC), evidencing compliance with N.J.A.C. 5:70-4.19.",
+            "doc_date": "2026-10-04 (page fetched)",
+            "via": "page",
+            "verified": null
+          },
+          {
+            "url": "https://storage.googleapis.com/juniper-media-library/232/2026/05/APPLICATION%20CHECKLIST%20FOR%20RESIDENTIAL%20CERTIFICATE%20OF%20INSPECTION%2005-22-26.pdf",
+            "quote": "MILLSTONE TOWNSHIP FIRE DEPT 609-259-2560: INSPECTION REQUIRED ON ALL RESIDENTIAL RESALE AND RENTALS. FIRE DEPARTMENT CERTIFICATE IS REQUIRED BEFORE FINAL COI CERTIFICATE IS ISSUED.",
+            "doc_date": "2026-05 (Rev. 5/26)",
+            "via": "pdf",
+            "verified": true
+          },
+          {
+            "url": "https://www.nj.gov/dca/dfs/pdf/fire%20directory_county%20summary/fire_code_enforcement_director.pdf",
+            "quote": "LEAID: 1332-001 Enf Auth. District Fire Official Nicholas Krauss Phone (609) 259-2560 ... Email Nkrauss@millstonefire.com",
+            "doc_date": "2026 (survey date 7/1/2026)",
+            "via": "state_directory",
+            "verified": null
+          },
+          {
+            "url": "https://nj.gov/dca/dfs/pdf/ANNUAL%20REGISTRY/THIRD%20QUARTER%20LEA%20REGISTRY%202026.pdf",
+            "quote": "D Millstone Township",
+            "doc_date": "2026-07",
+            "via": "pdf",
+            "verified": true
+          }
+        ],
+        "confidence": "high"
+      }
+    ],
+    "notes": "Township Code Chapter 13 (Fire District) sets the state fee tiers ($45/$90/$161) and a $30 reinspection fee. It still names the portable fire extinguisher, which the state dropped from the sale certificate in February 2025 (P.L.2025, c.19). The Fire Official's name and email come from the NJ DCA fire directory."
+  },
+  "other_items": [
+    {
+      "label": "Construction Records Closure (CRC)",
+      "detail": "A Certificate of Construction Records Closure is required before the sale of any residential structure.",
+      "source_url": "https://ecode360.com/35725152"
+    },
+    {
+      "label": "Well and septic review",
+      "detail": "For homes on a well or septic, the Health Officer reviews water supply and the septic system; proof the septic was pumped within three years (or is under five years old) is required.",
+      "source_url": "https://ecode360.com/35725152"
+    },
+    {
+      "label": "Chimney inspection",
+      "detail": "Chimney caps are required, and wood burning fireplaces need at least a Level 1 inspection by a certified chimney sweep.",
+      "source_url": "https://storage.googleapis.com/juniper-media-library/232/2026/05/APPLICATION%20CHECKLIST%20FOR%20RESIDENTIAL%20CERTIFICATE%20OF%20INSPECTION%2005-22-26.pdf"
+    }
+  ],
+  "open_questions": [
+    "Is the COI valid for 60 days (code) or six months (Township page)?",
+    "Is the CRC a separate certificate or fee, or is it covered by the COI records check?",
+    "How does the Fire District take resale smoke/CO requests (phone only, form, or online)?",
+    "What well water testing does the Health Officer currently require at resale?"
+  ],
+  "verification": {
+    "fees": 8,
+    "fee_ok": 2,
+    "fee_bad": 0,
+    "fee_unchecked": 6,
+    "quotes": 10,
+    "q_ok": 6,
+    "q_bad": 0,
+    "q_unchecked": 4
+  }
+}

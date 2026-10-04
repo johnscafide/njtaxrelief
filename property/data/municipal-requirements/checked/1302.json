@@ -1,0 +1,205 @@
+{
+  "municipality_code": "1302",
+  "municipality": "Allenhurst Borough",
+  "county": "MONMOUTH",
+  "resale_co": {
+    "status": "required",
+    "name": "Certificate of Occupancy (Home Sale)",
+    "issued_by": "Borough of Allenhurst Code Official (Zoning / Code Officer)",
+    "lead_time": "The Borough code says a Certificate of Occupancy is granted or denied within ten days of the application.",
+    "valid_for": "",
+    "requirements": [
+      "Borough inspection of the home for compliance with all Borough ordinances",
+      "Applications for sales must include a current survey of the property",
+      "List all people who will occupy the home (each adult may need an affidavit as a member of a single family unit), school-age and pre-school children, and pets",
+      "Certificate of Smoke Alarm, Carbon Monoxide Alarm and Portable Fire Extinguisher Compliance (CSACMAPFEC) is required for all residential CO applications",
+      "All fees paid and all ordinances complied with before an inspection is scheduled"
+    ],
+    "fees": [
+      {
+        "label": "Certificate of occupancy inspection and reinspection, houses (Borough code 9-3.3, Section 307.3)",
+        "amount": "$125.00 per unit",
+        "quote": "Houses $125.00 per unit",
+        "source_url": "https://ecode360.com/34651658",
+        "verified": null
+      },
+      {
+        "label": "Certificate of occupancy, houses (Borough application form)",
+        "amount": "$125.00",
+        "quote": "Houses 125.00",
+        "source_url": "https://www.allenhurstnj.org/DocumentCenter/View/210/Certificate-of-Occupancy---Home-Sale",
+        "verified": null
+      }
+    ],
+    "how_to_apply": "Complete the Borough's Application for Certificate of Occupancy (check Sale), attach a current survey, sign under oath and pay the fee to the Borough of Allenhurst, 125 Corlies Avenue, Allenhurst, NJ 07711. The form says to call 732-413-8911 or email zoning@allenhurstnj.org to set up the inspection. Borough Hall: 732-531-2757.",
+    "application_url": "https://www.allenhurstnj.org/DocumentCenter/View/210/Certificate-of-Occupancy---Home-Sale",
+    "department_url": "https://www.allenhurstnj.org/230/Zoning-BoardCode-Enforcement",
+    "phone": "732-531-2757",
+    "email": "code@allenhurstnj.org",
+    "contact_name": "Matt Mariano",
+    "contact_title": "Zoning / Code Officer",
+    "evidence": [
+      {
+        "url": "https://ecode360.com/34651658",
+        "quote": "No owner, owner of rental properties, agent of owner, real estate agent or broker, firm, company, partnership, corporation or person or persons, shall sell, rent, transfer or occupy",
+        "doc_date": "2026-10-04 (Code 9-3.3, Section 307.1, read via ecode360 print view)",
+        "via": "page",
+        "verified": null
+      },
+      {
+        "url": "https://ecode360.com/34651658",
+        "quote": "Such a Certificate of Occupancy shall be granted or denied within ten days from the date of the application for same.",
+        "doc_date": "2026-10-04 (Code 9-3.3)",
+        "via": "page",
+        "verified": null
+      },
+      {
+        "url": "https://ecode360.com/34651658",
+        "quote": "These fees shall become a dedicated fee to the Bureau of Fire Safety.",
+        "doc_date": "2026-10-04 (Code 9-3.3)",
+        "via": "page",
+        "verified": null
+      },
+      {
+        "url": "https://www.allenhurstnj.org/DocumentCenter/View/210/Certificate-of-Occupancy---Home-Sale",
+        "quote": "APPLICATIONS FOR SALES MUST INCLUDE A CURRENT SURVEY OF THE PROPERTY",
+        "doc_date": "Updated 6-27-2019",
+        "via": "pdf",
+        "verified": null
+      },
+      {
+        "url": "https://www.allenhurstnj.org/DocumentCenter/View/210/Certificate-of-Occupancy---Home-Sale",
+        "quote": "An inspection will not be scheduled and a Certificate of Occupancy will not be issued unless the applicant has complied with all ordinances, including, but not limited to, payment of applicable fees.",
+        "doc_date": "Updated 6-27-2019",
+        "via": "pdf",
+        "verified": null
+      },
+      {
+        "url": "https://www.allenhurstnj.org/DocumentCenter/View/210/Certificate-of-Occupancy---Home-Sale",
+        "quote": "This is required for all Residential CO Applications",
+        "doc_date": "Updated 6-27-2019",
+        "via": "pdf",
+        "verified": null
+      },
+      {
+        "url": "https://www.allenhurstnj.org/303/Forms",
+        "quote": "Certificate of Occupancy - Home Sale",
+        "doc_date": "2026-10-04 (page fetched)",
+        "via": "page",
+        "verified": true
+      },
+      {
+        "url": "https://www.allenhurstnj.org/230/Zoning-BoardCode-Enforcement",
+        "quote": "Zoning / Code Officer",
+        "doc_date": "2026-10-04 (page fetched)",
+        "via": "page",
+        "verified": true
+      }
+    ],
+    "confidence": "high",
+    "notes": "Borough Code 9-3.3 adds Section 307 (Certificate of Occupancy) to the Borough's property maintenance code: no one may sell or transfer a dwelling without first getting a Certificate of Occupancy from the Code Official. The fee table is Commercial $150.00, Houses $125.00 and Apartments $100.00 per unit. The code text was read through the ecode360 print view. The home sale application (updated 6-27-2019) is a scanned PDF, so its quotes cannot be machine-checked; it lists the same fees and asks inspections to be set up at 732-413-8911 or zoning@allenhurstnj.org (the phone number is hard to read on the scan). The code officer's email (code@allenhurstnj.org) comes from the protected mailto link on the Zoning Board/Code Enforcement page. Construction permits for Allenhurst are handled by the City of Long Branch Building Department, and there is a construction moratorium from July 1 through Labor Day; neither is a resale step. Rental licenses and landlord registration are rental-only."
+  },
+  "fire_cert": {
+    "requirements": [
+      "Smoke alarms on each level of the home, including basements (not attics or crawl spaces)",
+      "Smoke alarm and carbon monoxide alarm outside each separate sleeping area, within 10 feet of bedrooms",
+      "10-year sealed battery smoke alarms, unless the home has 110 volt alarms or a low voltage fire alarm system (low voltage systems need an annual certification)",
+      "Fire extinguisher rated 2A-10B:C, no more than 10 lbs, mounted within 10 feet of the kitchen in the path of egress, tagged or newly purchased with a receipt (form still lists it)"
+    ],
+    "authorities": [
+      {
+        "name": "NJ Department of Community Affairs, Division of Fire Safety (state-enforced)",
+        "type": "state_dca",
+        "area_served": "Entire borough",
+        "lead_time": "",
+        "fees": [
+          {
+            "label": "State smoke/CO certificate (N.J.A.C. 5:70-2.9(d)), received more than 10 business days before the change of occupant",
+            "amount": "$45.00",
+            "quote": "Requests for a CSACMAPFEC received more than 10 business days prior to the change of occupant: $45.00",
+            "source_url": "https://www.nj.gov/dca/divisions/dfs/codes/regulations/r.2018%20d.074%20(50%20n.j.r.%20729(a)).pdf",
+            "verified": true
+          },
+          {
+            "label": "Received four to 10 business days before",
+            "amount": "$90.00",
+            "quote": "Requests for a CSACMAPFEC received four to 10 business days prior to the change of occupant: $90.00",
+            "source_url": "https://www.nj.gov/dca/divisions/dfs/codes/regulations/r.2018%20d.074%20(50%20n.j.r.%20729(a)).pdf",
+            "verified": true
+          },
+          {
+            "label": "Received fewer than four business days before",
+            "amount": "$161.00",
+            "quote": "Requests for a CSACMAPFEC received fewer than four business days prior to the change of occupant: $161.00",
+            "source_url": "https://www.nj.gov/dca/divisions/dfs/codes/regulations/r.2018%20d.074%20(50%20n.j.r.%20729(a)).pdf",
+            "verified": true
+          }
+        ],
+        "how_to_apply": "Allenhurst is state-enforced for the fire code. Apply through the NJ DCA Division of Fire Safety (DCA service portal, 'Apply For Smoke Certification', choosing Monmouth County and Allenhurst) or call (609) 633-6132. The Borough's home sale CO packet also includes a smoke/CO certification application and says the certificate is required for every residential CO application.",
+        "application_url": "",
+        "department_url": "https://firesolutions.dca.nj.gov",
+        "phone": "(609) 633-6132",
+        "email": "",
+        "contact_name": "Louis Kilmer",
+        "contact_title": "Fire Official (NJ Division of Fire Safety), per state directory",
+        "evidence": [
+          {
+            "url": "https://nj.gov/dca/dfs/pdf/ANNUAL%20REGISTRY/THIRD%20QUARTER%20LEA%20REGISTRY%202026.pdf",
+            "quote": "S Allenhurst Borough",
+            "doc_date": "2026-07",
+            "via": "pdf",
+            "verified": true
+          },
+          {
+            "url": "https://www.nj.gov/dca/dfs/pdf/fire%20directory_county%20summary/fire_code_enforcement_director.pdf",
+            "quote": "LEAID: 1301-999 Allenhurst Boro SMOKE DETECTOR COMPLIANCE Name: Allenhurst Boro Fire Prev Enf Auth. State Addr: 125 Corlies Av Allenhurst NJ 07711 Fire Official Louis Kilmer Phone (732) 531-2757",
+            "doc_date": "6/26/2026 (survey date)",
+            "via": "state_directory",
+            "verified": null
+          },
+          {
+            "url": "https://www.nj.gov/dca/dfs/pdf/fire%20directory_county%20summary/fire_code_enforcement_director.pdf",
+            "quote": "NJ Division of Fire Safety PO Box 809 Phone (609) 633-6132",
+            "doc_date": "6/26/2026 (survey date)",
+            "via": "state_directory",
+            "verified": null
+          },
+          {
+            "url": "https://www.allenhurstnj.org/DocumentCenter/View/211/Certification-Smoke-Co-Detector-Application",
+            "quote": "SMOKE DETECTOR CERTIFICATES ARE VALID FOR SIX (6) MONTHS",
+            "doc_date": "2011-01-08 (PDF date)",
+            "via": "pdf",
+            "verified": null
+          },
+          {
+            "url": "https://ecode360.com/34651658",
+            "quote": "$35.00—request received more than 10 business days prior to the change of occupancy",
+            "doc_date": "2026-10-04 (Code 9-3.3, outdated amounts)",
+            "via": "page",
+            "verified": null
+          }
+        ],
+        "confidence": "high"
+      }
+    ],
+    "notes": "The July 2026 LEA registry lists Allenhurst as state-enforced (S), and the state fire directory lists NJ Division of Fire Safety fire official Louis Kilmer, with Borough Hall (125 Corlies Ave, 732-531-2757) as the local smoke detector compliance contact. Current state fees under N.J.A.C. 5:70-2.9(d) are $45 / $90 / $161. Borough Code 9-3.3 still prints the older $35 / $70 / $125 smoke/CO fees 'dedicated to the Bureau of Fire Safety', and the Borough's smoke form is the old DCA paper form (2011), which says certificates are valid for six months; both are out of date. The Borough CO packet (2019) still requires a fire extinguisher; the state dropped it from the sale certificate in February 2025 (P.L.2025, c.19), so confirm."
+  },
+  "other_items": [],
+  "open_questions": [
+    "Does the Borough take the smoke/CO application and fee at Borough Hall, or must sellers apply directly to the NJ DCA portal?",
+    "Does the Borough still require a fire extinguisher for the CO after P.L.2025, c.19?",
+    "Is 732-413-8911 the right number to schedule the resale inspection (the scanned form is hard to read)?",
+    "How long is the Borough resale CO valid, and is there a reinspection fee?"
+  ],
+  "checked_at": "2026-10-04",
+  "verification": {
+    "fees": 5,
+    "fee_ok": 3,
+    "fee_bad": 0,
+    "fee_unchecked": 2,
+    "quotes": 13,
+    "q_ok": 3,
+    "q_bad": 0,
+    "q_unchecked": 10
+  }
+}

@@ -1,0 +1,238 @@
+{
+  "municipality_code": "1348",
+  "municipality": "Spring Lake Heights Borough",
+  "county": "MONMOUTH",
+  "resale_co": {
+    "status": "required",
+    "name": "Certificate of Inspection for Transfer of Title (Certificate of Occupancy on sale)",
+    "issued_by": "Borough of Spring Lake Heights Zoning / Code Enforcement Officer (Public Officer)",
+    "lead_time": "The Borough code adds a surcharge when the application is filed less than 10 calendar days before occupancy.",
+    "valid_for": "",
+    "requirements": [
+      "Inspection of the home before transfer of title or occupancy",
+      "Signed owner certification that smoke and CO alarms are installed and working, plus the smoke/CO inspection (see fire certificate)",
+      "Exterior: roof, gutters, siding, fences, windows, screens and doors in good condition; handrails on stairs with three or more risers; guardrail gaps no more than 5 inches; house number at least 3 inches visible from the street; no debris",
+      "Driveway must have an apron and a paved, brick, paver or stone surface; sidewalk, curb, driveway and apron free of cracks, trip hazards or standing water",
+      "No open construction permits; all work done during ownership must have been permitted and passed final inspection",
+      "Municipal taxes, water and sewer should be paid up to date",
+      "Interior: no bedrooms in basements or more than 2 feet below grade; bedroom size minimums; GFI outlets within 6 feet of water; stove anti-tip bracket and gas shut off valves; emergency furnace switch; keyless interior deadbolts; no sump pump discharge into the sewer",
+      "Wood burning fireplaces and stoves certified by a certified chimney sweep company",
+      "Secondary power source warning label within 18 inches of the electric panel and meter for homes with a generator, solar or battery storage (P.L.2025, c.19)",
+      "Zoning permit also required for transfer of title of anything other than a single family home",
+      "Application lists sale price, closing and occupancy dates, buyer and all occupants with dates of birth"
+    ],
+    "fees": [
+      {
+        "label": "Certificate of Inspection, transfer of title for a single family dwelling",
+        "amount": "$200.00",
+        "quote": "Transfer of Title for Single Family Dwelling $200.00 per dwelling",
+        "source_url": "https://springlakehts.com/wp-content/uploads/2026/02/2026-Certificate-of-INSPECTION-Application-NEW-fillable.pdf",
+        "verified": true
+      },
+      {
+        "label": "Certificate of Inspection, transfer of title for a two-family, multi-family or apartment building",
+        "amount": "$15 per unit + $200.00 per building",
+        "quote": "Transfer of Title for Two-family, Multi-Family or Apartment Building $15 per unit + $200.00 /bldg.",
+        "source_url": "https://springlakehts.com/wp-content/uploads/2026/02/2026-Certificate-of-INSPECTION-Application-NEW-fillable.pdf",
+        "verified": true
+      },
+      {
+        "label": "Zoning permit for transfer of title (all uses except single family)",
+        "amount": "$100.00",
+        "quote": "Zoning Permit also required for Transfer of Title for all uses except Single Family $100.00",
+        "source_url": "https://springlakehts.com/wp-content/uploads/2026/02/2026-Certificate-of-INSPECTION-Application-NEW-fillable.pdf",
+        "verified": true
+      },
+      {
+        "label": "Reinspection, per dwelling unit or building",
+        "amount": "$50.00",
+        "quote": "Re-Inspection if necessary $50.00 per dwelling unit or bldg",
+        "source_url": "https://springlakehts.com/wp-content/uploads/2026/02/2026-Certificate-of-INSPECTION-Application-NEW-fillable.pdf",
+        "verified": true
+      },
+      {
+        "label": "Late filing surcharge, 6 to 9 calendar days before occupancy (Borough code)",
+        "amount": "$50 additional",
+        "quote": "Additional fee required from applicants seeking a Certificate of Occupancy with no more than 6 days but less than 10 calendar days prior to occupancy$50 additional",
+        "source_url": "https://ecode360.com/36505324",
+        "verified": null
+      },
+      {
+        "label": "Late filing surcharge, 5 calendar days or less before occupancy (Borough code)",
+        "amount": "$100 additional",
+        "quote": "Additional fee required from applicants seeking a Certificate of Occupancy with 5 calendar days or less prior to occupancy$100 additional",
+        "source_url": "https://ecode360.com/36505324",
+        "verified": null
+      }
+    ],
+    "how_to_apply": "Fill out the Borough's 2026 Certificate of Inspection Application (Rental and Transfer of Title), including the signed smoke detector and carbon monoxide alarm certification, and file it with the fee at the Municipal Building, 555 Brighton Avenue (Zoning/Code Enforcement office hours Monday and Wednesday, 9:00 AM to 4:30 PM). Fees are non-refundable and non-transferable.",
+    "application_url": "https://springlakehts.com/wp-content/uploads/2026/02/2026-Certificate-of-INSPECTION-Application-NEW-fillable.pdf",
+    "department_url": "https://springlakehts.com/departments/construction-zoning-code-enforcement/",
+    "phone": "732-449-3500",
+    "email": "code@springlakehts.com",
+    "contact_name": "Barbara Van Wagner",
+    "contact_title": "Zoning / Code Enforcement Officer",
+    "evidence": [
+      {
+        "url": "https://ecode360.com/36505324",
+        "quote": "Prior to the rental, transfer of title or occupancy of any dwelling house or houses or any dwelling unit or units provided for in this subsection, application for a Certificate of Occupancy shall be made in writing to the Public Officer of the Borough",
+        "doc_date": "Ord. No. 2018-09 (latest amendment listed)",
+        "via": "page",
+        "verified": null
+      },
+      {
+        "url": "https://springlakehts.com/wp-content/uploads/2026/02/2026-Certificate-of-INSPECTION-Application-NEW-fillable.pdf",
+        "quote": "APPLICATION IS HEREBY MADE FOR INSPECTION, APPROVAL, AND ISSUANCE OF A CERTIFICATE OF INSPECTION",
+        "doc_date": "2026-02 (upload folder)",
+        "via": "pdf",
+        "verified": true
+      },
+      {
+        "url": "https://springlakehts.com/wp-content/uploads/2026/02/2026-Certificate-of-INSPECTION-Application-NEW-fillable.pdf",
+        "quote": "Certificate of Inspection Fees Are Non-Refundable and Non-Transferable",
+        "doc_date": "2026-02 (upload folder)",
+        "via": "pdf",
+        "verified": true
+      },
+      {
+        "url": "https://springlakehts.com/wp-content/uploads/2026/02/2026-Certificate-of-INSPECTION-Application-NEW-fillable.pdf",
+        "quote": "No Open Construction Permits – require final approval for all work requiring permits.",
+        "doc_date": "2026-02 (upload folder)",
+        "via": "pdf",
+        "verified": true
+      },
+      {
+        "url": "https://springlakehts.com/departments/construction-zoning-code-enforcement/",
+        "quote": "Zoning / Code Enforcement Officer – Barbara Van Wagner",
+        "doc_date": "2026-04-27 (page date)",
+        "via": "page",
+        "verified": true
+      },
+      {
+        "url": "https://springlakehts.com/departments/construction-zoning-code-enforcement/",
+        "quote": "Monday & Wednesday 9:00 AM to 4:30 PM in the Municipal Building, 555 Brighton Avenue, Spring Lake Heights, NJ.",
+        "doc_date": "2026-04-27 (page date)",
+        "via": "page",
+        "verified": true
+      }
+    ],
+    "confidence": "high",
+    "notes": "Building and Housing Section 10-2.7 (read in full through the ecode360 print view; last amendment listed Ord. No. 2018-09) requires a Certificate of Occupancy before any sale or transfer of title and lists older fees: Title transfers (sales) $100, sales of multi-family dwellings $15 per unit and $100 per building, reinspection $25, plus late filing surcharges of $50 (6 to 9 days) and $100 (5 days or less). The Borough's 2026 application shows higher fees ($200.00 single family, $15 per unit + $200.00 per building for two-family and larger, $50.00 reinspection); the newer form is listed as the main fee, and the code surcharges are listed because the form does not mention them. Confirm which apply. Rental-only items (landlord registration, liability insurance, lead-safe certificate with a $20 state fee, short-term rental license) are not resale requirements."
+  },
+  "fire_cert": {
+    "requirements": [
+      "Smoke alarms tested by push button; homes built before 1978 need at least battery alarms on each level and near bedrooms; 1978 to 1983 hardwired with battery backup; 1984 to 1990 also interconnected; 1991 and later also one in each bedroom",
+      "Battery-only smoke alarms must be 10-year sealed units; detectors over 10 years old are not accepted",
+      "Monitored systems need a letter from the owner, agent or monitoring company",
+      "Carbon monoxide alarms outside each separate sleeping area where there are fuel burning appliances or an attached garage; not older than 5 years or past the maker's expiration date",
+      "Fire extinguisher of the correct size, properly mounted within 10 feet of the kitchen (form still lists it)",
+      "Owner signs a certification that the smoke and CO alarms are installed and working"
+    ],
+    "authorities": [
+      {
+        "name": "Spring Lake Heights Bureau of Fire Prevention (with the Zoning Office, as part of the Certificate of Inspection)",
+        "type": "municipal_fire_bureau",
+        "area_served": "Entire borough",
+        "lead_time": "",
+        "fees": [],
+        "how_to_apply": "The smoke detector and carbon monoxide alarm certification is a page of the Borough's Certificate of Inspection application and is checked at that inspection; no separate smoke/CO fee is published. Questions go to the Fire Official, Chris Willms (firemarshal@springlakehts.com).",
+        "application_url": "https://springlakehts.com/wp-content/uploads/2026/02/2026-Certificate-of-INSPECTION-Application-NEW-fillable.pdf",
+        "department_url": "https://springlakehts.com/departments/bureau-of-fire-prevention/",
+        "phone": "732-449-9433 ex. 118",
+        "email": "firemarshal@springlakehts.com",
+        "contact_name": "Chris Willms",
+        "contact_title": "Fire Official",
+        "evidence": [
+          {
+            "url": "https://springlakehts.com/departments/bureau-of-fire-prevention/",
+            "quote": "Chris Willms, Fire Official",
+            "doc_date": "2026-01-28 (page date)",
+            "via": "page",
+            "verified": true
+          },
+          {
+            "url": "https://springlakehts.com/departments/bureau-of-fire-prevention/",
+            "quote": "Phone: 732-449-9433 ex. 118",
+            "doc_date": "2026-01-28 (page date)",
+            "via": "page",
+            "verified": true
+          },
+          {
+            "url": "https://springlakehts.com/wp-content/uploads/2026/02/2026-Certificate-of-INSPECTION-Application-NEW-fillable.pdf",
+            "quote": "CERTIFICATE OF SMOKE DETECTOR AND CARBON MONOXIDE ALARMS",
+            "doc_date": "2026-02 (upload folder)",
+            "via": "pdf",
+            "verified": true
+          },
+          {
+            "url": "https://springlakehts.com/wp-content/uploads/2026/02/2026-Certificate-of-INSPECTION-Application-NEW-fillable.pdf",
+            "quote": "Any Detectors Greater Than 10 Years of Age Shall Not Be Accepted.",
+            "doc_date": "2026-02 (upload folder)",
+            "via": "pdf",
+            "verified": true
+          },
+          {
+            "url": "https://nj.gov/dca/dfs/pdf/ANNUAL%20REGISTRY/THIRD%20QUARTER%20LEA%20REGISTRY%202026.pdf",
+            "quote": "M Spring Lake Heights Borough",
+            "doc_date": "2026-07",
+            "via": "pdf",
+            "verified": true
+          },
+          {
+            "url": "https://www.nj.gov/dca/dfs/pdf/fire%20directory_county%20summary/fire_code_enforcement_director.pdf",
+            "quote": "LEAID: 1349-001 Spring Lakes Hgts Boro SMOKE DETECTOR COMPLIANCE Name: Spring Lake Hgts Zoning Office Enf Auth. Municipal Fire Official Christopher Willms Phone (732) 449-3500 Email firemarshal@springlakehts.com",
+            "doc_date": "2026-06-25 (survey date)",
+            "via": "state_directory",
+            "verified": null
+          }
+        ],
+        "confidence": "medium"
+      }
+    ],
+    "notes": "The state fire directory lists the Spring Lake Heights Zoning Office as the smoke detector compliance office, with Christopher Willms as fire official. The Fire Prevention page phone (732-449-9433 ex. 118) is the same number Sea Girt lists for him, while the Borough's main number is 732-449-3500. The 2026 form still lists a fire extinguisher even though P.L.2025, c.19 dropped it from the state sale certificate in February 2025; the same form adds the new secondary power source label from that law."
+  },
+  "other_items": [
+    {
+      "label": "Sidewalk, curb, driveway and apron",
+      "detail": "Must be in good condition, free of cracks, trip hazards or standing water; driveways need an apron and a finished surface. Checked at the Certificate of Inspection.",
+      "source_url": "https://springlakehts.com/wp-content/uploads/2026/02/2026-Certificate-of-INSPECTION-Application-NEW-fillable.pdf"
+    },
+    {
+      "label": "Open permits",
+      "detail": "All open construction permits must have a passed final inspection on file before the inspection.",
+      "source_url": "https://springlakehts.com/wp-content/uploads/2026/02/2026-Certificate-of-INSPECTION-Application-NEW-fillable.pdf"
+    },
+    {
+      "label": "Taxes, water and sewer",
+      "detail": "Municipal taxes, water and sewer should be paid up to date.",
+      "source_url": "https://springlakehts.com/wp-content/uploads/2026/02/2026-Certificate-of-INSPECTION-Application-NEW-fillable.pdf"
+    },
+    {
+      "label": "Chimney certification",
+      "detail": "Wood burning fireplaces and stoves must be certified safe by a certified chimney sweep company.",
+      "source_url": "https://springlakehts.com/wp-content/uploads/2026/02/2026-Certificate-of-INSPECTION-Application-NEW-fillable.pdf"
+    },
+    {
+      "label": "Zoning permit for non single family sales",
+      "detail": "A $100.00 zoning permit is also required for transfer of title of anything other than a single family home (so a two-family sale needs one).",
+      "source_url": "https://springlakehts.com/wp-content/uploads/2026/02/2026-Certificate-of-INSPECTION-Application-NEW-fillable.pdf"
+    }
+  ],
+  "open_questions": [
+    "Do the code's late filing surcharges ($50 under 10 days, $100 at 5 days or less) still apply with the 2026 fee schedule?",
+    "Is any separate fee charged for the smoke/CO certificate?",
+    "How long is the Certificate of Inspection valid?",
+    "Is the fire extinguisher still required after P.L.2025, c.19?"
+  ],
+  "checked_at": "2026-10-04",
+  "verification": {
+    "fees": 6,
+    "fee_ok": 4,
+    "fee_bad": 0,
+    "fee_unchecked": 2,
+    "quotes": 12,
+    "q_ok": 10,
+    "q_bad": 0,
+    "q_unchecked": 2
+  }
+}

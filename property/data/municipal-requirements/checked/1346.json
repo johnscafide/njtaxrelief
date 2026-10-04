@@ -1,0 +1,186 @@
+{
+  "municipality_code": "1346",
+  "municipality": "Lake Como Borough",
+  "county": "MONMOUTH",
+  "resale_co": {
+    "status": "required",
+    "name": "Residential Certificate of Inspection (CI), Sale of Property",
+    "issued_by": "Borough of Lake Como Code Enforcement Officer",
+    "lead_time": "Submit the form and fee at least 7 days before the desired inspection date (sale form).",
+    "valid_for": "",
+    "requirements": [
+      "Residential Certificate of Inspection Form, Sale of Property, signed by the owner or agent and the buyer or agent, with the closing date",
+      "Inspection by the Code Enforcement Officer; no certificate is issued while violations exist",
+      "Someone must be present to give the inspector entry",
+      "The home must comply with all other Borough ordinances and requirements"
+    ],
+    "fees": [
+      {
+        "label": "Certificate of Inspection, sale or transfer of title of each dwelling (Code 9-4.8a)",
+        "amount": "$120",
+        "quote": "The fee for the issuance of a Certificate of Inspection as provided for herein shall be the sum of $120 relative to the sale or transfer of title of each dwelling house",
+        "source_url": "https://ecode360.com/34677147",
+        "verified": null
+      },
+      {
+        "label": "Second (complete) inspection, per dwelling (Code 9-4.8c)",
+        "amount": "$250",
+        "quote": "if a complete reinspection is required, the fee for the second inspection shall be $250 for each dwelling house or unit.",
+        "source_url": "https://ecode360.com/34677147",
+        "verified": null
+      },
+      {
+        "label": "Each reinspection after the first and second, per dwelling (Code 9-4.8d)",
+        "amount": "$500",
+        "quote": "Any reinspection required after the first and second inspection shall be $500 for each dwelling house or unit.",
+        "source_url": "https://ecode360.com/34677147",
+        "verified": null
+      },
+      {
+        "label": "Sale of property inspection form fee",
+        "amount": "$120.00",
+        "quote": "PLEASE SUBMIT THIS COMPLETED FORM ALONG WITH A CHECK OR CASH FOR $120.00",
+        "source_url": "https://lakecomonj.org/useruploads//Sale_of_Property_Inspection_Form.pdf",
+        "verified": null
+      }
+    ],
+    "how_to_apply": "Download the 'Application for the Sale of Property' from the Building & Code Dept page, complete it with the owner, buyer and closing date, and submit it with a check or cash for $120.00 at least 7 days before the inspection date to the Code Enforcement office, Lake Como Borough Hall, 1740 Main Street, Lake Como, NJ 07719.",
+    "application_url": "https://lakecomonj.org/useruploads//Sale_of_Property_Inspection_Form.pdf",
+    "department_url": "https://lakecomonj.org/home/page/9",
+    "phone": "732-681-3232",
+    "email": "fcinelli@lakecomonj.org",
+    "contact_name": "Frank Cinelli",
+    "contact_title": "Code Enforcement Office (Code Enforcement Assistant: Dawn Dayton, ddayton@lakecomonj.org)",
+    "evidence": [
+      {
+        "url": "https://lakecomonj.org/home/page/9",
+        "quote": "NOTE: A Certificate of Inspection (CI) is required for all property Sales & Rentals in the Borough of Lake Como.",
+        "doc_date": "2026-10-04 (page fetched)",
+        "via": "page",
+        "verified": true
+      },
+      {
+        "url": "https://lakecomonj.org/home/page/9",
+        "quote": "Application for the Sale of Property",
+        "doc_date": "2026-10-04 (page fetched)",
+        "via": "page",
+        "verified": true
+      },
+      {
+        "url": "https://lakecomonj.org/home/page/9",
+        "quote": "Frank Cinelli - Code Enforcement Office",
+        "doc_date": "2026-10-04 (page fetched)",
+        "via": "page",
+        "verified": true
+      },
+      {
+        "url": "https://lakecomonj.org/useruploads//Sale_of_Property_Inspection_Form.pdf",
+        "quote": "PLEASE SUBMIT THIS COMPLETED FORM ALONG WITH A CHECK OR CASH FOR $120.00",
+        "doc_date": "Updated 9/2023 (forms list)",
+        "via": "pdf",
+        "verified": null
+      },
+      {
+        "url": "https://lakecomonj.org/useruploads//Sale_of_Property_Inspection_Form.pdf",
+        "quote": "AT LEAST 7 DAY BEFORE DESIRED INSPECTION DATE",
+        "doc_date": "Updated 9/2023 (forms list)",
+        "via": "pdf",
+        "verified": null
+      },
+      {
+        "url": "https://ecode360.com/34658523",
+        "quote": "or to occupy as any new owner, resale owner or cotenant or co-owner or occupant, any dwelling house or houses or dwelling unit or units",
+        "doc_date": "Ord. No. 2009-839",
+        "via": "page",
+        "verified": null
+      },
+      {
+        "url": "https://ecode360.com/34677147",
+        "quote": "The fee or fees shall be submitted with the application for the Certificate of Inspection or request for reinspection.",
+        "doc_date": "2-16-2016 (Ord. No. 2016-909)",
+        "via": "page",
+        "verified": null
+      }
+    ],
+    "confidence": "high",
+    "notes": "Borough Code 9-4 (read through the ecode360 print view) requires a Certificate of Inspection before a new or resale owner occupies a dwelling. The sale form is a scanned PDF (forms list 'Updated 9/2023'), so its quotes cannot be machine-checked. The Borough office line is 732-681-3232 (ext 212 for construction inspections; ext 0 for zoning). The Borough also posts a separate 'Application for Change of Occupancy Inspection' and rental forms; rental licenses and the summer rental program are not resale requirements."
+  },
+  "fire_cert": {
+    "requirements": [
+      "Smoke detectors on each floor and the basement, UL listed (Code 16-6.8)",
+      "Carbon monoxide detectors in homes with fuel-burning appliances or an attached garage, one per sleeping area (Code 16-6.8)"
+    ],
+    "authorities": [
+      {
+        "name": "Borough of Belmar Bureau of Fire Prevention (local enforcing agency for Lake Como)",
+        "type": "municipal_fire_bureau",
+        "area_served": "Entire borough (shared service with Belmar)",
+        "lead_time": "",
+        "fees": [],
+        "how_to_apply": "Contact the Belmar Fire Prevention office (Fire Marshal Edward Ratyniak) at 732.681.3700 x 239 to request the smoke/CO certificate for a Lake Como sale. No Lake Como or Belmar application form or fee for this certificate was found online.",
+        "application_url": "",
+        "department_url": "https://www.belmar.com/departments/fire-prevention",
+        "phone": "732-681-3700 x 239",
+        "email": "firemarshal@belmar.com",
+        "contact_name": "Edward Ratyniak",
+        "contact_title": "Fire Marshal",
+        "evidence": [
+          {
+            "url": "https://ecode360.com/34659289",
+            "quote": "The local enforcing agency shall be the Borough of Belmar Bureau of Fire Prevention (\"Bureau of Fire Prevention\").",
+            "doc_date": "2-26-2019 (Ord. No. 2019-938)",
+            "via": "page",
+            "verified": null
+          },
+          {
+            "url": "https://www.belmar.com/departments/fire-prevention",
+            "quote": "Edward Ratyniak",
+            "doc_date": "2026-10-04 (page fetched)",
+            "via": "page",
+            "verified": true
+          },
+          {
+            "url": "https://www.belmar.com/departments/fire-prevention",
+            "quote": "732.681.3700 x 239",
+            "doc_date": "2026-10-04 (page fetched)",
+            "via": "page",
+            "verified": true
+          },
+          {
+            "url": "https://nj.gov/dca/dfs/pdf/ANNUAL%20REGISTRY/THIRD%20QUARTER%20LEA%20REGISTRY%202026.pdf",
+            "quote": "Belmar Borough is the LEA for Lake Como Boroughs.",
+            "doc_date": "2026-07",
+            "via": "pdf",
+            "verified": true
+          },
+          {
+            "url": "https://www.nj.gov/dca/dfs/pdf/fire%20directory_county%20summary/fire_code_enforcement_director.pdf",
+            "quote": "LEAID: 1347-001 Lake Como Boro SMOKE DETECTOR COMPLIANCE Name: Lake Como Boro Fire Prev Enf Auth. Municipal Fire Official Edward Ratyniak Phone (732) 681-3232 Email firemarshal@belmar.com",
+            "doc_date": "state directory (no survey date shown)",
+            "via": "state_directory",
+            "verified": null
+          }
+        ],
+        "confidence": "medium"
+      }
+    ],
+    "notes": "Lake Como Code 16-1.3 names the Borough of Belmar Bureau of Fire Prevention as the local fire code enforcing agency, and the July 2026 LEA registry agrees. The state fire directory lists the smoke detector compliance office as 'Lake Como Boro Fire Prev' at 1740 Main Street, phone (732) 681-3232 (Lake Como Borough Hall), so requests may start at Lake Como Borough Hall. Neither Borough posts a smoke/CO certificate fee; no fee is recorded."
+  },
+  "other_items": [],
+  "open_questions": [
+    "Who takes the smoke/CO certificate request for a Lake Como sale (Lake Como Borough Hall or Belmar Fire Prevention), and what is the fee?",
+    "Is the smoke/CO inspection done together with the Borough Certificate of Inspection?",
+    "How long is the Certificate of Inspection valid after it is issued?"
+  ],
+  "checked_at": "2026-10-04",
+  "verification": {
+    "fees": 4,
+    "fee_ok": 0,
+    "fee_bad": 0,
+    "fee_unchecked": 4,
+    "quotes": 12,
+    "q_ok": 6,
+    "q_bad": 0,
+    "q_unchecked": 6
+  }
+}

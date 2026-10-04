@@ -1,0 +1,278 @@
+{
+  "municipality_code": "1324",
+  "municipality": "Keyport Borough",
+  "county": "MONMOUTH",
+  "resale_co": {
+    "status": "required",
+    "name": "Housing and Building Code Change of Occupancy & Transfer of Title (Change of Occupancy CO)",
+    "issued_by": "Borough of Keyport Code Enforcement Office",
+    "lead_time": "Fee depends on business days before the inspection: 10 or more business days for the lowest fee. Payment is due when the appointment is scheduled.",
+    "valid_for": "",
+    "requirements": [
+      "Application for Housing and Building Code Change of Occupancy & Transfer of Title, with owner, buyer and all occupants listed",
+      "Separate smoke detector, carbon monoxide alarm and fire extinguisher certificate from the Keyport Fire Prevention Bureau (smoke fee added to the CO fee)",
+      "Property should be vacant for the inspection; unlock the door and wait outside",
+      "GFI outlets in every bathroom and at kitchen counter outlets within six feet of a sink before a Certificate of Occupancy is issued (Code 12-12.1)",
+      "Fire extinguisher, minimum 5 lb. ABC, mounted in the kitchen (form still lists it)"
+    ],
+    "fees": [
+      {
+        "label": "Change of occupancy (resale), 10 or more business days",
+        "amount": "$110.00",
+        "quote": "10+ Business Days $110.00 +Smoke fee",
+        "source_url": "https://keyportonline.com/wp-content/uploads/2025/08/Change_of_Occupancy_Residential_Sale_-_fillable.pdf",
+        "verified": true
+      },
+      {
+        "label": "Change of occupancy (resale), 4 to 10 business days",
+        "amount": "$190.00",
+        "quote": "4-10 Business Days $190.00 + Smoke fee",
+        "source_url": "https://keyportonline.com/wp-content/uploads/2025/08/Change_of_Occupancy_Residential_Sale_-_fillable.pdf",
+        "verified": true
+      },
+      {
+        "label": "Change of occupancy (resale), less than 4 business days",
+        "amount": "$245.00",
+        "quote": "Less than 4 Business Days $245.00 + Smoke fee",
+        "source_url": "https://keyportonline.com/wp-content/uploads/2025/08/Change_of_Occupancy_Residential_Sale_-_fillable.pdf",
+        "verified": true
+      },
+      {
+        "label": "Certificate of Occupancy application fee for a dwelling unit (Code 12-2.3, older amount)",
+        "amount": "$75",
+        "quote": "an applicant shall pay a non-refundable application fee of $75 for a dwelling or lodging unit or for a commercial unit",
+        "source_url": "https://ecode360.com/35073717",
+        "verified": null
+      },
+      {
+        "label": "Expedited CO, four to 10 days (Code 12-2.3, older amount)",
+        "amount": "$155",
+        "quote": "$155 Certificate of Occupancy to be performed between four and 10 days from the date of the application.",
+        "source_url": "https://ecode360.com/35073717",
+        "verified": null
+      },
+      {
+        "label": "Expedited CO, less than four days (Code 12-2.3, older amount)",
+        "amount": "$210",
+        "quote": "$210 Certificate of Occupancy to be performed less than four days from the date of the application.",
+        "source_url": "https://ecode360.com/35073717",
+        "verified": null
+      },
+      {
+        "label": "Smoke detector, CO alarm and fire extinguisher certificate, received more than 10 business days before the change of occupant",
+        "amount": "$45.00",
+        "quote": "$45.00 – if received over ten (10) business days prior to change of occupant.",
+        "source_url": "https://keyportonline.com/wp-content/uploads/2025/08/Change_of_Occupancy_Residential_Sale_-_fillable.pdf",
+        "verified": true
+      },
+      {
+        "label": "Received four to 10 business days before",
+        "amount": "$90.00",
+        "quote": "$90.00 – if received four (4) to ten (10) business days prior to change of occupant.",
+        "source_url": "https://keyportonline.com/wp-content/uploads/2025/08/Change_of_Occupancy_Residential_Sale_-_fillable.pdf",
+        "verified": true
+      },
+      {
+        "label": "Received less than four business days before",
+        "amount": "$161.00",
+        "quote": "$161.00 – if received less than four (4) business days prior to change of occupant.",
+        "source_url": "https://keyportonline.com/wp-content/uploads/2025/08/Change_of_Occupancy_Residential_Sale_-_fillable.pdf",
+        "verified": true
+      }
+    ],
+    "how_to_apply": "Bring the completed Change of Occupancy Residential Sale application (with the Fire Prevention Bureau smoke/CO page) and payment to the Code Enforcement office at Borough Hall, 70 West Front Street. Payment is due when the appointment is scheduled. Have the house vacant and unlocked for the inspector; if it passes, the CO is left on the kitchen counter, and if not, the report is emailed.",
+    "application_url": "https://keyportonline.com/wp-content/uploads/2025/08/Change_of_Occupancy_Residential_Sale_-_fillable.pdf",
+    "department_url": "https://keyportonline.com/government/building/",
+    "phone": "732-739-5157",
+    "email": "dquinn@keyportonline.com",
+    "contact_name": "David Quinn",
+    "contact_title": "Property Maintenance Official/Code Enforcement Official",
+    "evidence": [
+      {
+        "url": "https://keyportonline.com/government/building/",
+        "quote": "Change of Occupancy (CO) inspections are being conducted",
+        "doc_date": "2026-10-04 (page fetched)",
+        "via": "page",
+        "verified": true
+      },
+      {
+        "url": "https://keyportonline.com/government/building/",
+        "quote": "To schedule a Change of Occupancy (CO) inspection, please bring completed paperwork",
+        "doc_date": "2026-10-04 (page fetched)",
+        "via": "page",
+        "verified": true
+      },
+      {
+        "url": "https://keyportonline.com/government/building/",
+        "quote": "Payment must be made at the time appointment is scheduled.",
+        "doc_date": "2026-10-04 (page fetched)",
+        "via": "page",
+        "verified": true
+      },
+      {
+        "url": "https://keyportonline.com/government/building/",
+        "quote": "If there are no code violations the inspector will leave the CO on the kitchen counter.",
+        "doc_date": "2026-10-04 (page fetched)",
+        "via": "page",
+        "verified": true
+      },
+      {
+        "url": "https://keyportonline.com/wp-content/uploads/2025/08/Change_of_Occupancy_Residential_Sale_-_fillable.pdf",
+        "quote": "Change of Occupancy & Transfer of Title",
+        "doc_date": "2025-08 (upload folder)",
+        "via": "pdf",
+        "verified": true
+      },
+      {
+        "url": "https://keyportonline.com/wp-content/uploads/2025/08/Change_of_Occupancy_Residential_Sale_-_fillable.pdf",
+        "quote": "BOROUGH OF KEYPORT – Code Enforcement Office",
+        "doc_date": "2025-08 (upload folder)",
+        "via": "pdf",
+        "verified": true
+      },
+      {
+        "url": "https://ecode360.com/35073717",
+        "quote": "No owner shall occupy or let an occupant, nor shall any person lease or occupy, any vacant dwelling, lodging or commercial unit unless a Certificate of Occupancy, which certifies that the unit is fit for human habitation as set forth in this Code, shall first be obtained from the Code Official.",
+        "doc_date": "2-21-2023 (Ord. No. 1-23)",
+        "via": "page",
+        "verified": null
+      },
+      {
+        "url": "https://keyportonline.com/government/building/",
+        "quote": "Property Maintenance Official/Code Enforcement Official",
+        "doc_date": "2026-10-04 (page fetched)",
+        "via": "page",
+        "verified": true
+      }
+    ],
+    "confidence": "high",
+    "notes": "The Borough's August 2025 fillable form for a residential sale charges $110.00 / $190.00 / $245.00 plus the smoke fee, by business days. The Code (12-2.3, PM-105.12, amended by Ord. No. 1-23 in 2023, read through the ecode360 print view) still lists $75 / $155 / $210; the newer form amounts are probably current, but confirm. The form gives the Code Enforcement Office phone as 732-739-5135 (Administrative Assistant Jessi Antenucci, jantenucci@keyportonline.com). Code 12-6 (Ord. No. 21-98) also has an older $20 smoke detector inspection fee; the Fire Prevention Bureau form uses the state $45 / $90 / $161 schedule. Landlord registration is a rental-only requirement."
+  },
+  "fire_cert": {
+    "requirements": [
+      "Smoke alarms on each level, including basements, and within 10 feet outside each sleeping area",
+      "Ten-year sealed battery single station smoke alarms listed to ANSI/UL 217; AC powered alarms from original construction may not be replaced with battery alarms",
+      "Carbon monoxide alarm within 10 feet of all sleeping areas",
+      "Minimum 5 lb. ABC fire extinguisher in the kitchen, visible, unblocked and mounted with the manufacturer's bracket (form still lists it)"
+    ],
+    "authorities": [
+      {
+        "name": "Keyport Fire Prevention Bureau",
+        "type": "municipal_fire_bureau",
+        "area_served": "Entire borough",
+        "lead_time": "Fee depends on business days before the change of occupant: more than 10 business days for the lowest fee. Office hours vary; leave a message.",
+        "fees": [
+          {
+            "label": "Smoke detector, CO alarm and fire extinguisher certificate, received more than 10 business days before the change of occupant",
+            "amount": "$45.00",
+            "quote": "$45.00 – if received over ten (10) business days prior to change of occupant.",
+            "source_url": "https://keyportonline.com/wp-content/uploads/2025/08/Change_of_Occupancy_Residential_Sale_-_fillable.pdf",
+            "verified": true
+          },
+          {
+            "label": "Received four to 10 business days before",
+            "amount": "$90.00",
+            "quote": "$90.00 – if received four (4) to ten (10) business days prior to change of occupant.",
+            "source_url": "https://keyportonline.com/wp-content/uploads/2025/08/Change_of_Occupancy_Residential_Sale_-_fillable.pdf",
+            "verified": true
+          },
+          {
+            "label": "Received less than four business days before",
+            "amount": "$161.00",
+            "quote": "$161.00 – if received less than four (4) business days prior to change of occupant.",
+            "source_url": "https://keyportonline.com/wp-content/uploads/2025/08/Change_of_Occupancy_Residential_Sale_-_fillable.pdf",
+            "verified": true
+          }
+        ],
+        "how_to_apply": "Complete the 'Application for Certificate of Smoke Detector, Carbon Monoxide Alarm & Fire Extinguisher Compliance' page of the Borough's Change of Occupancy sale packet and submit it with the fee to Borough Hall, 70 West Front Street. Call the Fire Prevention Bureau at 732-739-5269 with questions.",
+        "application_url": "https://keyportonline.com/wp-content/uploads/2025/08/Change_of_Occupancy_Residential_Sale_-_fillable.pdf",
+        "department_url": "https://keyportonline.com/government/building/",
+        "phone": "732-739-5269",
+        "email": "tvecchio@keyportonline.com",
+        "contact_name": "Tony Vecchio",
+        "contact_title": "Housing Official/Fire Marshall/Fire Subcode Official (Fire Inspector: Nick Vecchio, nvecchio@keyportonline.com, 732-739-5269)",
+        "evidence": [
+          {
+            "url": "https://keyportonline.com/wp-content/uploads/2025/08/Change_of_Occupancy_Residential_Sale_-_fillable.pdf",
+            "quote": "APPLICATION FOR CERTIFICATE OF SMOKE DETECTOR, CARBON MONOXIDE",
+            "doc_date": "2025-08 (upload folder)",
+            "via": "pdf",
+            "verified": true
+          },
+          {
+            "url": "https://keyportonline.com/wp-content/uploads/2025/08/Change_of_Occupancy_Residential_Sale_-_fillable.pdf",
+            "quote": "Keyport Fire Prevention Bureau",
+            "doc_date": "2025-08 (upload folder)",
+            "via": "pdf",
+            "verified": true
+          },
+          {
+            "url": "https://keyportonline.com/wp-content/uploads/2025/08/Change_of_Occupancy_Residential_Sale_-_fillable.pdf",
+            "quote": "A minimum of a 5 lb. ABC Fire Extinguisher shall be installed in the kitchen",
+            "doc_date": "2025-08 (upload folder)",
+            "via": "pdf",
+            "verified": true
+          },
+          {
+            "url": "https://keyportonline.com/government/building/",
+            "quote": "732-739-3900 ext 5269, Fax: 732-739-3479",
+            "doc_date": "2026-10-04 (page fetched)",
+            "via": "page",
+            "verified": true
+          },
+          {
+            "url": "https://keyportonline.com/government/building/",
+            "quote": "Housing Official/Fire Marshall/Fire Subcode Official",
+            "doc_date": "2026-10-04 (page fetched)",
+            "via": "page",
+            "verified": true
+          },
+          {
+            "url": "https://nj.gov/dca/dfs/pdf/ANNUAL%20REGISTRY/THIRD%20QUARTER%20LEA%20REGISTRY%202026.pdf",
+            "quote": "F Keyport Borough",
+            "doc_date": "2026-07",
+            "via": "pdf",
+            "verified": true
+          },
+          {
+            "url": "https://www.nj.gov/dca/dfs/pdf/fire%20directory_county%20summary/fire_code_enforcement_director.pdf",
+            "quote": "LEAID: 1322-001 Keyport Boro SMOKE DETECTOR COMPLIANCE Name: Keyport Boro Fire Prev Enf Auth. Fire Dept Fire Official Anthony P Vecchio Phone (732) 739-3900 Email Firebureau@keyportonline.com",
+            "doc_date": "7/14/2026 (survey date)",
+            "via": "state_directory",
+            "verified": null
+          }
+        ],
+        "confidence": "high"
+      }
+    ],
+    "notes": "Keyport is its own fire code enforcing agency (LEA code F). The smoke/CO page is part of the Borough's August 2025 sale packet and uses the current state fee schedule ($45 / $90 / $161). The state directory lists Fire Official Anthony P Vecchio with the bureau email Firebureau@keyportonline.com; the Borough page lists Tony Vecchio, tvecchio@keyportonline.com, 732-739-5130. The form still requires a fire extinguisher, which state law (P.L.2025, c.19) dropped from the sale certificate in February 2025; confirm with the Bureau."
+  },
+  "other_items": [
+    {
+      "label": "GFI outlets",
+      "detail": "Every dwelling to be sold must have GFI outlets in every bathroom and at every kitchen counter outlet within six feet of a sink before a Certificate of Occupancy is issued.",
+      "source_url": "https://ecode360.com/35073883"
+    },
+    {
+      "label": "Smoke detector inspection before transfer",
+      "detail": "Code 12-6 says no one-, two- or three-family residence may be sold unless inspected and approved for smoke detectors; the Tax Collector reminds anyone ordering a tax search.",
+      "source_url": "https://ecode360.com/35073832"
+    }
+  ],
+  "open_questions": [
+    "Are the form fees ($110 / $190 / $245) current, given the Code still lists $75 / $155 / $210?",
+    "Is there a reinspection fee, and how long is the CO valid?",
+    "Does the Fire Prevention Bureau still require the fire extinguisher after P.L.2025, c.19?"
+  ],
+  "checked_at": "2026-10-04",
+  "verification": {
+    "fees": 12,
+    "fee_ok": 9,
+    "fee_bad": 0,
+    "fee_unchecked": 3,
+    "quotes": 15,
+    "q_ok": 13,
+    "q_bad": 0,
+    "q_unchecked": 2
+  }
+}

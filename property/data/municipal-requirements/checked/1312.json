@@ -1,0 +1,247 @@
+{
+  "municipality_code": "1312",
+  "municipality": "Eatontown Borough",
+  "county": "MONMOUTH",
+  "resale_co": {
+    "status": "required",
+    "name": "Certificate of Occupancy / Certificate of Continued Use (combined certificate of smoke alarm, carbon monoxide alarm and compliance, CSDCMAC)",
+    "issued_by": "Borough of Eatontown inspector (Housing Official, Code Enforcement Officer, Fire Marshal or Fire Inspector)",
+    "lead_time": "Fees rise when the request is made 10 or fewer business days before the change of occupancy. All fees are paid with the application before any inspection.",
+    "valid_for": "60 days (Code §116-6B); the code also says CSDCMAC inspections are valid for six months",
+    "requirements": [
+      "Inspection for fitness for habitation under Borough Code §116-8 before the home is sold",
+      "Any outstanding permit issues must be closed; Zoning Officer certifies compliance",
+      "Smoke detectors on each level and within 10 feet of sleeping quarters, working and under 10 years old; 10-year sealed battery units; AC powered units cannot be swapped for battery units",
+      "Carbon monoxide detectors within 10 feet of sleeping quarters, working, under 7 years old (standalone) or 10 years (combination)",
+      "Monitored fire alarm systems must be made available for testing, with a certificate of inspection",
+      "Checklist items include working doors and keyless deadbolts, GFCI in bathrooms, covered electrical boxes and plates, 4-inch house numbers, handrails on stairs over four risers, unbroken operable windows, safe sidewalk/driveway/apron/foundation, heating system and flue, water heater overflow pipe, metal dryer vent, minimum 60 amp service, sump pump on a dedicated receptacle",
+      "Application states the future owner's name and address and who will allow entry"
+    ],
+    "fees": [
+      {
+        "label": "Certificate of occupancy and inspection (combined with smoke/CO certificate), one and two family, more than 10 business days before the change of occupancy",
+        "amount": "$100",
+        "quote": "More than 10 business days prior to the change of occupancy: $100.",
+        "source_url": "https://ecode360.com/7639663",
+        "verified": null
+      },
+      {
+        "label": "One and two family, 4 to 10 business days before",
+        "amount": "$135",
+        "quote": "Four to 10 business days prior to the change of occupancy: $135.",
+        "source_url": "https://ecode360.com/7639663",
+        "verified": null
+      },
+      {
+        "label": "One and two family, fewer than 4 business days before",
+        "amount": "$200",
+        "quote": "Fewer than four business days prior to the change of occupancy: $200.",
+        "source_url": "https://ecode360.com/7639663",
+        "verified": null
+      },
+      {
+        "label": "Reinspection, each",
+        "amount": "$35",
+        "quote": "Subsequent reinspection(s): $35.",
+        "source_url": "https://ecode360.com/7639663",
+        "verified": null
+      },
+      {
+        "label": "Transfer of residential properties (lawful two-family homes charged separately)",
+        "amount": "$200",
+        "quote": "$200 for transfer of residential properties (lawful two-family homes charged separately).",
+        "source_url": "https://ecode360.com/7639663",
+        "verified": null
+      },
+      {
+        "label": "Buyer backs out and a new buyer purchases before occupancy (updated application)",
+        "amount": "$35",
+        "quote": "A $35 fee if a tenant/buyer backs out of lease/purchase prior to occupancy",
+        "source_url": "https://ecode360.com/7639663",
+        "verified": null
+      }
+    ],
+    "how_to_apply": "Apply in writing to the Borough inspector (Housing Division, 47 Broad Street) with the buyer's information and pay the fee with the application. The inspector issues the certificate if no violations exist; otherwise the owner is told in writing what must be fixed. No online application form was found on the Borough website.",
+    "application_url": "",
+    "department_url": "https://www.eatontownnj.com/Directory.aspx",
+    "phone": "732-389-7616",
+    "email": "housing@eatontownnj.com",
+    "contact_name": "Nicholas Cosentino",
+    "contact_title": "Housing Official",
+    "evidence": [
+      {
+        "url": "https://ecode360.com/7639663",
+        "quote": "Eatontown Borough shall perform inspections in accordance with the New Jersey Uniform Fire Code before any one- and two-family or attached single-family structure is sold, leased, or otherwise made subject to a change of occupancy for residential purposes.",
+        "doc_date": "2026-08-26 (Ord. No. 17-2026)",
+        "via": "page",
+        "verified": null
+      },
+      {
+        "url": "https://ecode360.com/7639663",
+        "quote": "A certificate of occupancy/continued use will be valid for 60 days. If after 60 days a tenant/buyer has not occupied the property, then a new certificate must be applied for.",
+        "doc_date": "2026-08-26 (Ord. No. 17-2026)",
+        "via": "page",
+        "verified": null
+      },
+      {
+        "url": "https://ecode360.com/7639663",
+        "quote": "All fees shall be paid upon application before any inspection may be conducted and the issuance of a certificate of occupancy.",
+        "doc_date": "2026-08-26 (Ord. No. 17-2026)",
+        "via": "page",
+        "verified": null
+      },
+      {
+        "url": "https://ecode360.com/7639663",
+        "quote": "Applicants shall satisfy that the structure meets all code requirements, and any outstanding permit issues must be closed.",
+        "doc_date": "2026-08-26 (Ord. No. 17-2026)",
+        "via": "page",
+        "verified": null
+      },
+      {
+        "url": "https://www.eatontownnj.com/Directory.aspx",
+        "quote": "housing@eatontownnj.com",
+        "doc_date": "2026-10-04 (page fetched)",
+        "via": "page",
+        "verified": true
+      },
+      {
+        "url": "https://www.eatontownnj.com/Directory.aspx",
+        "quote": "732-389-7616",
+        "doc_date": "2026-10-04 (page fetched)",
+        "via": "page",
+        "verified": true
+      }
+    ],
+    "confidence": "high",
+    "notes": "Chapter 116 was rewritten by Ord. No. 17-2026, adopted August 26, 2026 (read in full through ecode360's print view). It combines the town habitability inspection and the state smoke/CO certificate into one certificate. The fee section lists both a timing-based one and two family schedule ($100 / $135 / $200) and a flat '$200 for transfer of residential properties (lawful two-family homes charged separately)'; it is unclear which applies to a sale, so confirm with the Housing Division. The code also gives two validity periods (60 days in §116-6B and six months for CSDCMAC inspections in §116-6A). Housing Officers Nicholas Cosentino and John Bowen share housing@eatontownnj.com and 732-389-7616 (Borough directory). Fire extinguishers and lead-based paint certifications are listed for rentals only."
+  },
+  "fire_cert": {
+    "requirements": [
+      "Smoke detectors on each level and within 10 feet of sleeping quarters, working and less than 10 years old",
+      "10-year sealed battery single station smoke alarms (ANSI/UL 217); AC powered alarms from original construction or rehabilitation stay AC powered",
+      "Carbon monoxide detectors within 10 feet of sleeping quarters, working, under 7 years old (standalone) or 10 years (combination)",
+      "No fire extinguisher for owner sales; the code lists extinguishers for rental and apartment units only"
+    ],
+    "authorities": [
+      {
+        "name": "Eatontown Housing Division and Bureau of Fire Safety (combined certificate of occupancy and CSDCMAC)",
+        "type": "municipal_fire_bureau",
+        "area_served": "Entire borough",
+        "lead_time": "Combined with the certificate of occupancy inspection; fee depends on business days before the change of occupancy.",
+        "fees": [
+          {
+            "label": "Certificate of occupancy and inspection (combined with smoke/CO certificate), one and two family, more than 10 business days before the change of occupancy",
+            "amount": "$100",
+            "quote": "More than 10 business days prior to the change of occupancy: $100.",
+            "source_url": "https://ecode360.com/7639663",
+            "verified": null
+          },
+          {
+            "label": "One and two family, 4 to 10 business days before",
+            "amount": "$135",
+            "quote": "Four to 10 business days prior to the change of occupancy: $135.",
+            "source_url": "https://ecode360.com/7639663",
+            "verified": null
+          },
+          {
+            "label": "One and two family, fewer than 4 business days before",
+            "amount": "$200",
+            "quote": "Fewer than four business days prior to the change of occupancy: $200.",
+            "source_url": "https://ecode360.com/7639663",
+            "verified": null
+          },
+          {
+            "label": "Reinspection, each",
+            "amount": "$35",
+            "quote": "Subsequent reinspection(s): $35.",
+            "source_url": "https://ecode360.com/7639663",
+            "verified": null
+          }
+        ],
+        "how_to_apply": "The smoke/CO certificate is not applied for separately: Eatontown issues one combined certificate after its habitability inspection (see resale certificate).",
+        "application_url": "",
+        "department_url": "https://www.eatontownnj.com/194/Bureau-of-Fire-Safety",
+        "phone": "732-389-7620",
+        "email": "prenaldi@eatontownnj.com",
+        "contact_name": "Patrick A. Renaldi",
+        "contact_title": "Fire Marshal",
+        "evidence": [
+          {
+            "url": "https://ecode360.com/7639663",
+            "quote": "To protect the health, safety, and wellness of all residents and first responders, the owner shall obtain a combined certificate of smoke alarm, carbon monoxide alarm, and compliance.",
+            "doc_date": "2026-08-26 (Ord. No. 17-2026)",
+            "via": "page",
+            "verified": null
+          },
+          {
+            "url": "https://ecode360.com/7639663",
+            "quote": "The certificate of smoke alarm, carbon monoxide alarm and compliance (CSDCMAC) inspections are designed to efficiently accomplish this purpose and are valid for a six-month period from the date issued.",
+            "doc_date": "2026-08-26 (Ord. No. 17-2026)",
+            "via": "page",
+            "verified": null
+          },
+          {
+            "url": "https://ecode360.com/7639663",
+            "quote": "Fire extinguishers shall be installed in all rental and apartment units with a minimum rating of 2A-10B:C",
+            "doc_date": "2026-08-26 (Ord. No. 17-2026)",
+            "via": "page",
+            "verified": null
+          },
+          {
+            "url": "https://www.eatontownnj.com/194/Bureau-of-Fire-Safety",
+            "quote": "Fire Marshal",
+            "doc_date": "2026-10-04 (page fetched)",
+            "via": "page",
+            "verified": true
+          },
+          {
+            "url": "https://www.eatontownnj.com/194/Bureau-of-Fire-Safety",
+            "quote": "Phone: 732-389-7620",
+            "doc_date": "2026-10-04 (page fetched)",
+            "via": "page",
+            "verified": true
+          },
+          {
+            "url": "https://www.nj.gov/dca/dfs/pdf/fire%20directory_county%20summary/fire_code_enforcement_director.pdf",
+            "quote": "LEAID: 1311-001 Eatontown Boro SMOKE DETECTOR COMPLIANCE Name: Eatontown Boro Housing Enf Auth. Fire Dept Addr: 47 Broad St Eatontown NJ 07724 Fire Official Patrick Renaldi Phone (732) 389-7615",
+            "doc_date": "10/2/2024 (survey date)",
+            "via": "state_directory",
+            "verified": null
+          },
+          {
+            "url": "https://nj.gov/dca/dfs/pdf/ANNUAL%20REGISTRY/THIRD%20QUARTER%20LEA%20REGISTRY%202026.pdf",
+            "quote": "F Eatontown Borough",
+            "doc_date": "2026-07",
+            "via": "pdf",
+            "verified": true
+          }
+        ],
+        "confidence": "high"
+      }
+    ],
+    "notes": "The state fire directory lists the Eatontown Housing office (47 Broad St, (732) 389-7615) as the smoke detector compliance office, with Fire Marshal Patrick Renaldi as fire official. Under the August 2026 ordinance the smoke/CO certificate is issued together with the certificate of occupancy, so the fees shown are the same combined fees. The Bureau of Fire Safety page says it inspects commercial and industrial properties."
+  },
+  "other_items": [
+    {
+      "label": "Open permits and zoning",
+      "detail": "Outstanding permit issues must be closed and the Zoning Officer must certify compliance before the certificate is issued.",
+      "source_url": "https://ecode360.com/7639663"
+    }
+  ],
+  "open_questions": [
+    "For a one or two family sale, does the Borough charge the timing-based fee ($100/$135/$200) or the flat $200 'transfer of residential properties' fee, and how are two-family homes charged?",
+    "Is the certificate valid 60 days or six months?",
+    "Is there an online or PDF application for the new Chapter 116 process?"
+  ],
+  "checked_at": "2026-10-04",
+  "verification": {
+    "fees": 10,
+    "fee_ok": 0,
+    "fee_bad": 0,
+    "fee_unchecked": 10,
+    "quotes": 13,
+    "q_ok": 5,
+    "q_bad": 0,
+    "q_unchecked": 8
+  }
+}

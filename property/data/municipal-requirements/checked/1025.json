@@ -1,0 +1,168 @@
+{
+  "municipality_code": "1025",
+  "municipality": "Union Township",
+  "county": "HUNTERDON",
+  "resale_co": {
+    "status": "not_required",
+    "name": "",
+    "issued_by": "",
+    "lead_time": "",
+    "valid_for": "",
+    "requirements": [],
+    "fees": [],
+    "how_to_apply": "No Township resale Certificate of Occupancy. The Township's Zoning page says a certificate of occupancy is not required for a home sale; only the state Smoke Detector Fire Safety Certification is needed (see fire certificate).",
+    "application_url": "",
+    "department_url": "https://uniontwp-hcnj.gov/zoning",
+    "phone": "908-735-8027 x19",
+    "email": "zoning@uniontwp-hcnj.org",
+    "contact_name": "Michael Mullin",
+    "contact_title": "Zoning Officer",
+    "evidence": [
+      {
+        "url": "https://uniontwp-hcnj.gov/zoning",
+        "quote": "If you are selling your home, a Smoke Detector Fire Safety Certification from the State is required.",
+        "doc_date": "2026-10-04 (page fetched)",
+        "via": "page",
+        "verified": true
+      },
+      {
+        "url": "https://uniontwp-hcnj.gov/zoning",
+        "quote": "A certificate of occupancy is not required for a home sale.",
+        "doc_date": "2026-10-04 (page fetched)",
+        "via": "page",
+        "verified": true
+      },
+      {
+        "url": "https://uniontwp-hcnj.gov/zoning",
+        "quote": "Michael Mullin Zoning Officer 908-735-8027 x19",
+        "doc_date": "2026-10-04 (page fetched)",
+        "via": "page",
+        "verified": true
+      }
+    ],
+    "confidence": "high",
+    "notes": "The Township Zoning page states in writing that no certificate of occupancy is needed for a home sale. Union Township transferred enforcement of the Uniform Construction Code to the NJ Department of Community Affairs (Code Chapter 10), so building and construction inspections are handled by DCA (908-713-0722 per the Township's Departments page). Landlord registration (Township Clerk) applies only to rentals."
+  },
+  "fire_cert": {
+    "requirements": [
+      "Smoke alarm on each level, including basements (not crawl spaces or unfinished attics), and outside each separate sleeping area",
+      "Carbon monoxide alarm outside each separate sleeping area, within 10 feet of bedrooms",
+      "All alarms in working order; AC powered or interconnected alarms in homes built after January 1977 must be kept working",
+      "Portable fire extinguisher within 10 feet of the kitchen (form still lists it)"
+    ],
+    "authorities": [
+      {
+        "name": "NJ Department of Community Affairs, Division of Fire Safety, Bureau of Fire Code Enforcement (state-enforced town)",
+        "type": "state_dca",
+        "area_served": "Entire township",
+        "lead_time": "State fee tiers count business days between the Division's receipt of the application and the closing date: more than ten business days for the lowest fee. Per the DCA form, a new application is needed if the change of occupant does not happen within 6 months.",
+        "fees": [
+          {
+            "label": "State smoke/CO certificate (N.J.A.C. 5:70-2.9(d)), received more than 10 business days before the change of occupant",
+            "amount": "$45.00",
+            "quote": "Requests for a CSACMAPFEC received more than 10 business days prior to the change of occupant: $45.00",
+            "source_url": "https://www.nj.gov/dca/divisions/dfs/codes/regulations/r.2018%20d.074%20(50%20n.j.r.%20729(a)).pdf",
+            "verified": true
+          },
+          {
+            "label": "Received four to 10 business days before",
+            "amount": "$90.00",
+            "quote": "Requests for a CSACMAPFEC received four to 10 business days prior to the change of occupant: $90.00",
+            "source_url": "https://www.nj.gov/dca/divisions/dfs/codes/regulations/r.2018%20d.074%20(50%20n.j.r.%20729(a)).pdf",
+            "verified": true
+          },
+          {
+            "label": "Received fewer than four business days before",
+            "amount": "$161.00",
+            "quote": "Requests for a CSACMAPFEC received fewer than four business days prior to the change of occupant: $161.00",
+            "source_url": "https://www.nj.gov/dca/divisions/dfs/codes/regulations/r.2018%20d.074%20(50%20n.j.r.%20729(a)).pdf",
+            "verified": true
+          }
+        ],
+        "how_to_apply": "Apply to the NJ Division of Fire Safety online through DCA RIMS / firesolutions.dca.nj.gov ('Apply for a CSDCMAC (Smoke Detector) Certification'), as registered or non-registered user. The older paper form SD-41 goes to PO Box 809, Trenton, NJ 08625-0809 with a check or money order payable to Treasurer, State of New Jersey. Phone (609) 633-6132.",
+        "application_url": "https://firesolutions.dca.nj.gov/ultra-fire-home/smoke-application-create/",
+        "department_url": "https://uniontwp-hcnj.gov/zoning",
+        "phone": "(609) 633-6132",
+        "email": "",
+        "contact_name": "Louis Kilmer",
+        "contact_title": "Fire Official of record for state-enforced towns (NJ Division of Fire Safety), per the state directory",
+        "evidence": [
+          {
+            "url": "https://uniontwp-hcnj.gov/zoning",
+            "quote": "If you are selling your home, a Smoke Detector Fire Safety Certification from the State is required.",
+            "doc_date": "2026-10-04 (page fetched)",
+            "via": "page",
+            "verified": true
+          },
+          {
+            "url": "https://uniontwp-hcnj.gov/fire",
+            "quote": "for a Smoke Detector Fire Safety Certification.",
+            "doc_date": "2026-10-04 (page fetched)",
+            "via": "page",
+            "verified": true
+          },
+          {
+            "url": "https://uniontwp-hcnj.gov/departments",
+            "quote": "Smoke Detectors: NJ Department of Community Affairs - 908-713-0722",
+            "doc_date": "2026-10-04 (page fetched)",
+            "via": "page",
+            "verified": true
+          },
+          {
+            "url": "https://www.nj.gov/dca/dfs/pdf/fire%20directory_county%20summary/fire_code_enforcement_director.pdf",
+            "quote": "LEAID: 1025-999 Enf Auth. State Fire Official Louis Kilmer Phone (609)633-6132",
+            "doc_date": "2023-02-22 (survey date 2/22/2023)",
+            "via": "state_directory",
+            "verified": null
+          },
+          {
+            "url": "https://nj.gov/dca/dfs/pdf/ANNUAL%20REGISTRY/THIRD%20QUARTER%20LEA%20REGISTRY%202026.pdf",
+            "quote": "S Union Township",
+            "doc_date": "2026-07",
+            "via": "pdf",
+            "verified": true
+          },
+          {
+            "url": "https://www.nj.gov/dca/divisions/RIMSHELP/bfce_public/bfce_-_public_-_apply_for_csdcmac_help.htm",
+            "quote": "Bureau of Fire Code Enforcement – CSDCMAC (Smoke Cert) Application",
+            "doc_date": "2026-10-04 (page fetched)",
+            "via": "page",
+            "verified": true
+          },
+          {
+            "url": "https://www.nj.gov/dca/divisions/dfs/forms/bfce/certificationinlieu.pdf",
+            "quote": "If the change of occupant does not occur within 6 months, a new application shall be required.",
+            "doc_date": "10/02 (form revision SD-41)",
+            "via": "pdf",
+            "verified": true
+          },
+          {
+            "url": "https://www.nj.gov/dca/divisions/dfs/forms/bfce/certificationinlieu.pdf",
+            "quote": "Note: A check or money order made payable to “Treasurer, State of New Jersey” must accompany this form.",
+            "doc_date": "10/02",
+            "via": "pdf",
+            "verified": true
+          }
+        ],
+        "confidence": "medium"
+      }
+    ],
+    "notes": "Union Township (Hunterdon) is state-enforced for the fire code (LEA registry code S; the state directory lists it as Enf Auth. State, LEAID 1025-999). The Township's Zoning and Fire pages link to the state's online application at firesolutions.dca.nj.gov, and its Departments page lists NJ DCA at 908-713-0722 for smoke detectors. Note the registry also lists a different Union Township (Union County, code F); the S entry is the Hunterdon one. The only published state fee schedule found is on DCA form SD-41 (revised 10/02, an application and certification in lieu of inspection), which also still lists a portable fire extinguisher; the state dropped the extinguisher from the sale certificate in February 2025 (P.L.2025, c.19). The current online portal does not show fees publicly. Confirm the current state fee and process with the Division of Fire Safety at (609) 633-6132. Update: the current state fees are $45 / $90 / $161, set by N.J.A.C. 5:70-2.9(d) (50 N.J.R. 729(a)) (more than 10, 4 to 10, and under 4 business days before closing). The $35 / $70 / $125 on the older DCA paper form are out of date."
+  },
+  "other_items": [],
+  "open_questions": [
+    "What is the current state smoke/CO certificate fee, and is the extinguisher still checked after P.L.2025, c.19?",
+    "Should agents call the DCA regional number on the Township page (908-713-0722) or the Division of Fire Safety in Trenton ((609) 633-6132) to schedule?"
+  ],
+  "checked_at": "2026-10-04",
+  "verification": {
+    "fees": 3,
+    "fee_ok": 3,
+    "fee_bad": 0,
+    "fee_unchecked": 0,
+    "quotes": 11,
+    "q_ok": 10,
+    "q_bad": 0,
+    "q_unchecked": 1
+  }
+}

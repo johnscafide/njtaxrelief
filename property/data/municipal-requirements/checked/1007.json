@@ -1,0 +1,254 @@
+{
+  "municipality_code": "1007",
+  "municipality": "Delaware Township",
+  "county": "HUNTERDON",
+  "resale_co": {
+    "status": "required",
+    "name": "Certificate of Construction Records Clearance (CRC)",
+    "issued_by": "Delaware Township Office of the Construction Code Official",
+    "lead_time": "Submit the application and fee at least 10 business days before the change of ownership; the Township processes timely requests within 10 business days",
+    "valid_for": "Six months from the date of issue unless a change in occupancy has occurred",
+    "requirements": [
+      "Records inspection for open construction permits and pending, open, unabated violations; all must be closed or cured before the CRC is issued",
+      "House number clearly displayed at the end of the driveway (listed on the form)",
+      "Form asks about swimming pool and pool fence (at least 4 feet high with self-closing and latching gates)",
+      "Form asks about finished basement, space above garage, hot tub, deck and alarm system, and asks the seller to list all outbuildings with approximate size",
+      "A provisional CRC may be issued when there is not enough time to close open permits, if owner and buyer acknowledge them in writing and agree on a plan"
+    ],
+    "fees": [
+      {
+        "label": "CRC, request more than 10 business days before change of occupancy",
+        "amount": "$75",
+        "quote": "Requests received more than 10 business days prior to change of occupancy - $75",
+        "source_url": "https://delawaretwpnj.org/government/forms/construction/700-construction-records-clearance-application-residential/file",
+        "verified": true
+      },
+      {
+        "label": "CRC, request 10 or fewer business days before change of occupancy",
+        "amount": "$100",
+        "quote": "Requests received 10 or less business days prior to change of occupancy - $100",
+        "source_url": "https://delawaretwpnj.org/government/forms/construction/700-construction-records-clearance-application-residential/file",
+        "verified": true
+      },
+      {
+        "label": "Update request for same premises within 6 months of prior issuance",
+        "amount": "$50",
+        "quote": "Update request for same premise within 6 months of prior issuance - $50",
+        "source_url": "https://delawaretwpnj.org/government/forms/construction/700-construction-records-clearance-application-residential/file",
+        "verified": true
+      }
+    ],
+    "how_to_apply": "The seller or seller's agent completes the Construction Records Clearance Application - Residential (one per address) and submits it with cash or a check payable to Delaware Township to the Construction Office, 570 Rosemont Ringoes Road, Sergeantsville (PO Box 500).",
+    "application_url": "https://delawaretwpnj.org/government/forms/construction/700-construction-records-clearance-application-residential/file",
+    "department_url": "https://delawaretwpnj.org/departments/construction",
+    "phone": "(609) 397-3240 ext. 201",
+    "email": "construction@delawaretwpnj.org",
+    "contact_name": "Debbi Hutton",
+    "contact_title": "Technical Assistant to the Construction Code Official",
+    "evidence": [
+      {
+        "url": "https://delawaretwpnj.org/departments/construction",
+        "quote": "The Construction Records Clearance is the responsibility of the seller or agent for the seller. One application per address is needed at the closing of the property.",
+        "doc_date": "2026-10-04 (page fetched)",
+        "via": "page",
+        "verified": true
+      },
+      {
+        "url": "https://delawaretwpnj.org/departments/construction",
+        "quote": "Debbi Hutton, Technical Assistant to the Construction Code Official",
+        "doc_date": "2026-10-04 (page fetched)",
+        "via": "page",
+        "verified": true
+      },
+      {
+        "url": "https://delawaretwpnj.org/government/forms/construction/700-construction-records-clearance-application-residential/file",
+        "quote": "Construction Records Clearance Application - Residential",
+        "doc_date": "8/12/2026 (form revised)",
+        "via": "pdf",
+        "verified": true
+      },
+      {
+        "url": "https://delawaretwpnj.org/government/forms/construction/700-construction-records-clearance-application-residential/file",
+        "quote": "609-397-3240 Ext. 201 | construction@delawaretwpnj.org",
+        "doc_date": "8/12/2026 (form revised)",
+        "via": "pdf",
+        "verified": true
+      },
+      {
+        "url": "https://ecode360.com/51506728",
+        "quote": "A CRC shall be required prior to the sale of any residential or commercial structure.",
+        "doc_date": "2026-08-10 (Ord. No. 2026-14)",
+        "via": "page",
+        "verified": null
+      },
+      {
+        "url": "https://ecode360.com/13582718",
+        "quote": "The owner and/or authorized agent shall submit a written application and payment of fees at least 10 business days prior to the change of ownership and/or occupancy on the form provided by the Township.",
+        "doc_date": "2006-02-27 (Ord. No. 2006-05)",
+        "via": "page",
+        "verified": null
+      },
+      {
+        "url": "https://ecode360.com/13582729",
+        "quote": "CRC certificates are valid for six months from the date of issue unless a change in occupancy has occurred and must be renewed for each occupancy change.",
+        "doc_date": "2006-02-27 (Ord. No. 2006-05)",
+        "via": "page",
+        "verified": null
+      }
+    ],
+    "confidence": "high",
+    "notes": "Township Code Chapter 162 (fees amended 4-14-2025 by Ord. No. 2025-05 and 8-10-2026 by Ord. No. 2026-14) requires a CRC before the sale of any residential structure. The current form (revised 8/12/2026) matches the ordinance fees of $75 / $100 / $50. Older third-party listings and search snippets of the Township page mention a $35 fee and filing the smoke certificate with the State; both are out of date. Exemptions include deed corrections, transfers between spouses, estate distributions, refinancing and transfers to a bankruptcy trustee. Construction Official is Thomas Petto (inspections Tuesday and Thursday)."
+  },
+  "fire_cert": {
+    "requirements": [
+      "Smoke alarm on each level of the home and outside each separate sleeping area",
+      "Battery-only smoke alarms must be 10-year sealed battery units; hardwired alarms from original construction may not be replaced with battery alarms",
+      "Carbon monoxide alarm in the immediate vicinity of the sleeping areas (where there is a fuel-burning appliance or attached garage)",
+      "Secondary power source identification label, if the home has a secondary power source (Code 197-6, P.L.2025, c.19)",
+      "Portable fire extinguisher in date and in compliance (the fire district form still lists it, and Code 197-6E(7) lists an out-of-date extinguisher as a failure reason)"
+    ],
+    "authorities": [
+      {
+        "name": "Lambertville Fire District #1 Bureau of Fire Safety (shared service with Delaware Township since July 1, 2026)",
+        "type": "fire_district",
+        "area_served": "Entire municipality",
+        "lead_time": "Allow at least 1 to 2 weeks for mailed applications; fees step up at 10 and 4 business days before the change of occupancy",
+        "fees": [
+          {
+            "label": "Smoke/CO certificate, request more than 10 business days before change of occupancy",
+            "amount": "$75",
+            "quote": "Requests for CSACMASPSIL received more than 10 business days prior to change of occupancy shall be $75.",
+            "source_url": "https://ecode360.com/51506748",
+            "verified": null
+          },
+          {
+            "label": "Request 4 to 10 business days before change of occupancy",
+            "amount": "$125",
+            "quote": "Requests for CSACMASPSIL received four to 10 business days prior to the change of occupancy shall be $125.",
+            "source_url": "https://ecode360.com/51506749",
+            "verified": null
+          },
+          {
+            "label": "Request fewer than 4 business days before change of occupancy",
+            "amount": "$175",
+            "quote": "Requests for CSACMASPSIL received fewer than four business days prior to the change of occupancy shall be $175.",
+            "source_url": "https://ecode360.com/51506750",
+            "verified": null
+          },
+          {
+            "label": "Same-day inspection (ordinance)",
+            "amount": "$250",
+            "quote": "Same day only. Requests for CSACMASPSIL for the same day as the application is turned in or of the original inspection date, the fee shall be $250.",
+            "source_url": "https://ecode360.com/51506751",
+            "verified": null
+          },
+          {
+            "label": "Same-day inspection (fire district form)",
+            "amount": "$225.00",
+            "quote": "$ 225.00 SAME DAY Inspection",
+            "source_url": "https://delawaretwpnj.org/government/forms/fire-prevention/2327-application-for-smoke-alarm-carbon-monoxide-alarm-fire-extinguisher-compliance/file",
+            "verified": true
+          },
+          {
+            "label": "Re-inspection (failed inspection, no-show or incomplete application)",
+            "amount": "$50.00",
+            "quote": "Re-inspection fee for CSDCMAC shall be $50.00",
+            "source_url": "https://delawaretwpnj.org/government/forms/fire-prevention/2327-application-for-smoke-alarm-carbon-monoxide-alarm-fire-extinguisher-compliance/file",
+            "verified": true
+          }
+        ],
+        "how_to_apply": "Complete the Lambertville Fire District #1 application for smoke alarm, carbon monoxide alarm and fire extinguisher compliance and submit it with a check payable to Lambertville Fire District # 1, 230 N. Main St., Lambertville, NJ 08530. Forms and payments can also be submitted electronically on the fire district website.",
+        "application_url": "https://delawaretwpnj.org/government/forms/fire-prevention/2327-application-for-smoke-alarm-carbon-monoxide-alarm-fire-extinguisher-compliance/file",
+        "department_url": "https://delawaretwpnj.org/departments/fire-prevention",
+        "phone": "609-397-2084",
+        "email": "firemarshal17@lfddistrict1.com",
+        "contact_name": "Frank Ur",
+        "contact_title": "Fire Official (per state directory)",
+        "evidence": [
+          {
+            "url": "https://delawaretwpnj.org/departments/fire-prevention",
+            "quote": "Fire Prevention services are provided through a shared service agreement between the Township of Delaware and Lambertville Fire District #1.",
+            "doc_date": "2026-10-04 (page fetched)",
+            "via": "page",
+            "verified": true
+          },
+          {
+            "url": "https://delawaretwpnj.org/departments/fire-prevention",
+            "quote": "Forms and payments can also be submitted electronically on their website.",
+            "doc_date": "2026-10-04 (page fetched)",
+            "via": "page",
+            "verified": true
+          },
+          {
+            "url": "https://delawaretwpnj.org/departments/construction",
+            "quote": "This application is filed with Lambertville Fire District #1.",
+            "doc_date": "2026-10-04 (page fetched)",
+            "via": "page",
+            "verified": true
+          },
+          {
+            "url": "https://ecode360.com/13582752",
+            "quote": "Before any one- or two-family or attached single-family dwelling is sold, leased, or otherwise made subject to a change of occupancy for residential purposes, the owner shall apply for a Certificate of Smoke Alarm, Carbon Monoxide Alarm, and Secondary Power Source Identification Label Compliance (CSACMASPSIL).",
+            "doc_date": "2026-07-13 (Ord. No. 2026-13)",
+            "via": "page",
+            "verified": null
+          },
+          {
+            "url": "https://delawaretwpnj.org/government/forms/fire-prevention/2327-application-for-smoke-alarm-carbon-monoxide-alarm-fire-extinguisher-compliance/file",
+            "quote": "Lambertville Fire District # 1",
+            "doc_date": "2026 (form posted)",
+            "via": "pdf",
+            "verified": true
+          },
+          {
+            "url": "https://lambertvillefirestation.com/permits/",
+            "quote": "Call: 609-397-2084",
+            "doc_date": "2026-10-04 (page fetched)",
+            "via": "page",
+            "verified": true
+          },
+          {
+            "url": "https://nj.gov/dca/dfs/pdf/ANNUAL%20REGISTRY/THIRD%20QUARTER%20LEA%20REGISTRY%202026.pdf",
+            "quote": "D Delaware Township",
+            "doc_date": "2026-07",
+            "via": "pdf",
+            "verified": true
+          },
+          {
+            "url": "https://nj.gov/dca/dfs/pdf/ANNUAL%20REGISTRY/THIRD%20QUARTER%20LEA%20REGISTRY%202026.pdf",
+            "quote": "Lambertville Fire Dist 1 is the SAA for Delaware Twp. (Delaware moved from State to District)",
+            "doc_date": "2026-07",
+            "via": "pdf",
+            "verified": true
+          },
+          {
+            "url": "https://www.nj.gov/dca/dfs/pdf/fire%20directory_county%20summary/fire_code_enforcement_director.pdf",
+            "quote": "Delaware Township1007 LEAID: 1007-001 Enf Auth. District Fire Official Frank Ur Phone (609) 681-7913 Email firemarshal17@lfddistrict1.com",
+            "doc_date": "2/12/2021 (survey date)",
+            "via": "state_directory",
+            "verified": null
+          }
+        ],
+        "confidence": "high"
+      }
+    ],
+    "notes": "Delaware Township moved from State fire code enforcement to Lambertville Fire District #1 (LEA code D; July 2026 registry), and the Township Fire Prevention page says the shared service started July 1, 2026. Code 197-6 (amended 7-13-2026 by Ord. No. 2026-13) renames the certificate CSACMASPSIL (smoke alarm, CO alarm and secondary power source ID label) and sets $75 / $125 / $175 and $250 for same-day requests. The fire district application posted on the Township site lists the same first three fees but $225.00 for same-day inspections, and it still lists a portable fire extinguisher, which P.L.2025, c.19 dropped from the state sale certificate; the ordinance itself still lists an out-of-date extinguisher as a failure reason. The state fire directory entry (survey 2/12/2021) still shows the NJ Division of Fire Safety address with Frank Ur as fire official and phone (609) 681-7913; the fire district station line is 609-397-2084."
+  },
+  "other_items": [],
+  "open_questions": [
+    "Is the same-day smoke/CO inspection fee $250 (Code 197-6D) or $225 (fire district form)?",
+    "Does Lambertville Fire District #1 still require a portable fire extinguisher at resale for Delaware Township homes?",
+    "What is the best direct contact (phone and email) for the fire district's Delaware Township inspections?"
+  ],
+  "checked_at": "2026-10-04",
+  "verification": {
+    "fees": 9,
+    "fee_ok": 5,
+    "fee_bad": 0,
+    "fee_unchecked": 4,
+    "quotes": 16,
+    "q_ok": 11,
+    "q_bad": 0,
+    "q_unchecked": 5
+  }
+}

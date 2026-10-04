@@ -1,0 +1,219 @@
+{
+  "municipality_code": "1316",
+  "municipality": "Freehold Borough",
+  "county": "MONMOUTH",
+  "resale_co": {
+    "status": "required",
+    "name": "Residential Certificate of Continued Occupancy (CCO)",
+    "issued_by": "Freehold Borough Code Enforcement Office",
+    "lead_time": "Standard inspections are scheduled by the office; an expedited inspection (3 days or less) costs a $100 surcharge, pending availability.",
+    "valid_for": "90 days from the initial inspection for sales (30 days for rentals)",
+    "requirements": [
+      "No open permits (checked on the application)",
+      "Exterior: property clean and free of rubbish; grass and bushes trimmed; sidewalks, driveway and driveway apron free of cracks, raised sections and trip hazards; garages, sheds, fences, retaining walls and pools sound",
+      "Exterior structure weathertight with no peeling paint or rotting boards; chimney caps on fireplace chimneys; handrails on 4 or more risers and guardrails over 30 inches; house numbers at least 4 inches tall",
+      "Windows open, stay open and have screens; exit doors and windows open without a key or tool",
+      "Interior surfaces clean and sound; bathrooms without windows need mechanical ventilation; tubs and showers need shower rods",
+      "Plumbing working with hot water able to reach 110 degrees F",
+      "Electrical: required outlets and light fixtures; GFI outlets in bathrooms, laundry rooms and within 6 feet of a sink",
+      "Dryer transition duct must be a single listed UL 2158A duct, 8 feet or less, not concealed",
+      "Heating and Hot Water Heater Certification signed by a licensed plumber or certified heating contractor; heat able to keep 68 degrees F",
+      "Chimney certification for all fireplaces",
+      "For homes built before 1978: a lead Certification of Clearance from the Freehold Area Health Department before the CCO is issued (see other items)"
+    ],
+    "fees": [
+      {
+        "label": "CCO inspection, 1 and 2 family dwellings (including condo and townhouse)",
+        "amount": "$100",
+        "quote": "$100 1&2 Family Dwellings (including Condo/Townhouse)",
+        "source_url": "https://www.freeholdboroughnj.gov/government/forms/forms-documents/department-documents/code-enforcement/799-residential-cco-application-checklist-1/file",
+        "verified": true
+      },
+      {
+        "label": "CCO inspection, apartments (multiple dwelling units)",
+        "amount": "$75",
+        "quote": "$75 Apartments (Multiple Dwelling Units)",
+        "source_url": "https://www.freeholdboroughnj.gov/government/forms/forms-documents/department-documents/code-enforcement/799-residential-cco-application-checklist-1/file",
+        "verified": true
+      },
+      {
+        "label": "Expedited CCO inspection (3 days or less), surcharge",
+        "amount": "$100",
+        "quote": "Expedited Inspection (3 days or less) $100 SURCHARGE Pending Availability",
+        "source_url": "https://www.freeholdboroughnj.gov/government/forms/forms-documents/department-documents/code-enforcement/799-residential-cco-application-checklist-1/file",
+        "verified": true
+      },
+      {
+        "label": "Second and later CCO re-inspections (first re-inspection free)",
+        "amount": "$150",
+        "quote": "Subsequent Re-Inspections: $150 per re-inspection",
+        "source_url": "https://www.freeholdboroughnj.gov/government/forms/forms-documents/department-documents/code-enforcement/799-residential-cco-application-checklist-1/file",
+        "verified": true
+      }
+    ],
+    "how_to_apply": "Fill out the Application for Residential Certificate of Continued Occupancy and Smoke Detector Certificate (one combined Borough packet), give the tentative closing date, and pay by cash, check or money order payable to \"Borough of Freehold\" at the Code Enforcement Office, 30 Mechanic Street, Freehold. Include the heating and hot water heater certification from a licensed contractor. An adult must be present for the inspection.",
+    "application_url": "https://www.freeholdboroughnj.gov/government/forms/forms-documents/department-documents/code-enforcement/799-residential-cco-application-checklist-1/file",
+    "department_url": "https://www.freeholdboroughnj.gov/departments/code",
+    "phone": "732-462-5812",
+    "email": "",
+    "contact_name": "Julissa Gelpi",
+    "contact_title": "Director of Code Enforcement",
+    "evidence": [
+      {
+        "url": "https://www.freeholdboroughnj.gov/government/forms/forms-documents/department-documents/code-enforcement/799-residential-cco-application-checklist-1/file",
+        "quote": "APPLICATION FOR RESIDENTIAL CERTIFICATE OF CONTINUED OCCUPANCY & SMOKE DETECTOR CERTIFICATE",
+        "doc_date": "2026-10-04 (page fetched)",
+        "via": "pdf",
+        "verified": true
+      },
+      {
+        "url": "https://www.freeholdboroughnj.gov/government/forms/forms-documents/department-documents/code-enforcement/799-residential-cco-application-checklist-1/file",
+        "quote": "-C/O Expiration Dates: 90 days from initial inspection for sales; 30 days for rentals",
+        "doc_date": "2026-10-04 (page fetched)",
+        "via": "pdf",
+        "verified": true
+      },
+      {
+        "url": "https://freeholdboroughnj.gov/government/news/307-important-update-from-the-freehold-area-health-department",
+        "quote": "This new ordinance requires a Certification of Clearance issued by the Freehold Area Health Department prior to issuances of a Continued Certificate of Occupancy for resale, rental or change of occupancy on all residential properties.",
+        "doc_date": "December 5, 2022",
+        "via": "page",
+        "verified": true
+      },
+      {
+        "url": "https://www.freeholdboroughnj.gov/departments/code",
+        "quote": "(732) 462-5812",
+        "doc_date": "2026-10-04 (page fetched)",
+        "via": "page",
+        "verified": true
+      },
+      {
+        "url": "https://www.freeholdboroughnj.gov/departments/code",
+        "quote": "Director of Code Enforcement",
+        "doc_date": "2026-10-04 (page fetched)",
+        "via": "page",
+        "verified": true
+      }
+    ],
+    "confidence": "high",
+    "notes": "The Borough code is on municode, which could not be read here, so the requirement rests on the Borough's own CCO application (which lists \"Sale\" as a reason for the change of occupancy and a 90-day sale expiration) and the 2022 Borough notice about the Freehold Area Health Department lead clearance before a resale CCO. The application PDF is a scan; quotes are taken from its text layer. The Code Enforcement page hides staff emails behind a protection script, so no email is listed; the decoded mailto for the Director slot pointed to a different name, so it was left out. Other Code Enforcement staff: Michael Mulcahy and Anas Sohail (Code Enforcement Officers), Rebecca Ponder (Code Enforcement Clerk). The landlord registration program and the LEW Environmental lead-safe program for rentals are rental-only."
+  },
+  "fire_cert": {
+    "requirements": [
+      "Smoke alarms per the date the home was built or renovated (10-year sealed battery alarms on all levels for homes before January 1977, up to hardwired, interconnected alarms with battery backup on all levels and in each bedroom for homes from March 1991); AC-powered alarms from original construction may not be replaced with battery alarms",
+      "Carbon monoxide alarms outside every separate sleeping area",
+      "Secondary power source label (\"CAUTION: MULTIPLE SOURCES OF POWER\", not handwritten) within 18 inches of the main electrical panel and electric meter if the home has a generator, solar panels, battery storage or another supplemental source",
+      "An adult 18 or older must be present for the inspection"
+    ],
+    "authorities": [
+      {
+        "name": "Freehold Borough Fire Bureau (Bureau of Fire Prevention)",
+        "type": "municipal_fire_bureau",
+        "area_served": "Entire borough",
+        "lead_time": "Lowest fee when the request comes in more than 3 business days before the change of occupancy. Allow up to 5 business days from a passed inspection to the certificate. The certificate is valid for 6 months.",
+        "fees": [
+          {
+            "label": "Smoke, CO and secondary power source certificate, request more than 3 business days before the change of occupancy",
+            "amount": "$50.00",
+            "quote": "$50.00 - Requests for a CSDCMACreceived more than 3 business days prior to the change of occupancy,",
+            "source_url": "https://www.freeholdboroughnj.gov/government/forms/forms-documents/department-documents/code-enforcement/799-residential-cco-application-checklist-1/file",
+            "verified": true
+          },
+          {
+            "label": "Request less than 3 business days before the change of occupancy (pending availability)",
+            "amount": "$100.00",
+            "quote": "$100.00 - Requests for a CSDCMACreceived less than 3 business days (pending availability).",
+            "source_url": "https://www.freeholdboroughnj.gov/government/forms/forms-documents/department-documents/code-enforcement/799-residential-cco-application-checklist-1/file",
+            "verified": true
+          },
+          {
+            "label": "Second and later re-inspections (first re-inspection free)",
+            "amount": "$150",
+            "quote": "re-inspections will be charged $150.",
+            "source_url": "https://www.freeholdboroughnj.gov/government/forms/forms-documents/department-documents/code-enforcement/799-residential-cco-application-checklist-1/file",
+            "verified": true
+          }
+        ],
+        "how_to_apply": "Fill out the Application for Certificate of Smoke Detector, Carbon Monoxide Alarm, and Secondary Power Source Compliance (part of the Borough's CCO packet) with the closing date and email addresses for the certificate, and submit it to the Freehold Borough Fire Bureau, 30 Mechanic St, Freehold. After a failed inspection the applicant must call to request a new appointment.",
+        "application_url": "https://www.freeholdboroughnj.gov/government/forms/forms-documents/department-documents/code-enforcement/799-residential-cco-application-checklist-1/file",
+        "department_url": "https://www.freeholdboroughnj.gov/departments/fire-prevention",
+        "phone": "732-462-3626",
+        "email": "kvolkman@freeholdboro.org",
+        "contact_name": "Ken Volkmann",
+        "contact_title": "Fire Official (listed as Kenneth Volkman in the state fire directory)",
+        "evidence": [
+          {
+            "url": "https://www.freeholdboroughnj.gov/government/forms/forms-documents/department-documents/code-enforcement/799-residential-cco-application-checklist-1/file",
+            "quote": "Email: kvolkman@freeholdboro.org",
+            "doc_date": "2026-10-04 (page fetched)",
+            "via": "pdf",
+            "verified": true
+          },
+          {
+            "url": "https://www.freeholdboroughnj.gov/departments/fire-prevention",
+            "quote": "The Bureau of Fire Prevention is responsible for enforcement of the New Jersey Uniform Fire Code.",
+            "doc_date": "2026-10-04 (page fetched)",
+            "via": "page",
+            "verified": true
+          },
+          {
+            "url": "https://www.freeholdboroughnj.gov/departments/fire-prevention",
+            "quote": "Please contact Fire Official Ken Volkmann at 732 462-3626 to schedule an appointment to obtain the smoke alarm.",
+            "doc_date": "2026-10-04 (page fetched)",
+            "via": "page",
+            "verified": true
+          },
+          {
+            "url": "https://www.nj.gov/dca/dfs/pdf/fire%20directory_county%20summary/fire_code_enforcement_director.pdf",
+            "quote": "LEAID: 1315-001 Freehold Boro ... Name: Freehold Boro Code Enf ... Fire Official Kenneth Volkman Phone (732) 462-4903 ... Phone (732) 462-3626 ... Email kvolkman@freeholdboro.org",
+            "doc_date": "2026-07-31 (survey date)",
+            "via": "state_directory",
+            "verified": null
+          },
+          {
+            "url": "https://nj.gov/dca/dfs/pdf/ANNUAL%20REGISTRY/THIRD%20QUARTER%20LEA%20REGISTRY%202026.pdf",
+            "quote": "M Freehold Borough",
+            "doc_date": "2026-07",
+            "via": "pdf",
+            "verified": true
+          }
+        ],
+        "confidence": "high"
+      }
+    ],
+    "notes": "Fees come from the Fire Bureau application inside the Borough's scanned CCO packet; the scan's text layer runs \"CSDCMAC\" and \"received\" together, and quotes copy it as is. The 3-business-day tier is the Borough's own schedule, not the state's 10-day tiers. The packet's checklist lists smoke and CO rules under \"Rental use only\" and mentions an NFPA-recommended fire extinguisher, but the Fire Bureau application itself covers smoke alarms, CO alarms and secondary power labels only, consistent with P.L.2025, c.19."
+  },
+  "other_items": [
+    {
+      "label": "Lead Certification of Clearance (homes built before 1978)",
+      "detail": "Under Freehold Borough Ordinance 8.56.285, owners of homes built before 1978 that are changing ownership or occupancy must get a certification of clearance from the Freehold Area Health Department (1 Municipal Plaza, 732-294-2060) before the CCO is issued. The Health Department's certified inspectors inspect free of charge on Tuesdays and Thursdays, 9 am to 12 pm, or a NJ licensed private lead inspector may be used; lead-free documentation is also accepted.",
+      "source_url": "https://freeholdboroughnj.gov/component/fileman/?view=file&routed=1&name=2%20Lead-Safe-Certificate-Announcement.pdf&folder=2022/12&container=fileman-files"
+    },
+    {
+      "label": "Heating and hot water heater certification",
+      "detail": "A licensed plumber or certified heating contractor must fill out the Borough's Heating System and Hot Water Heater Certification for the CCO; fireplaces need a chimney certification.",
+      "source_url": "https://www.freeholdboroughnj.gov/government/forms/forms-documents/department-documents/code-enforcement/799-residential-cco-application-checklist-1/file"
+    },
+    {
+      "label": "Sidewalks and driveway aprons",
+      "detail": "The CCO checklist requires sidewalks, driveways and driveway aprons to be free of cracks, raised sections or trip hazards; the Borough posts a separate sidewalk and apron replacement permit.",
+      "source_url": "https://www.freeholdboroughnj.gov/government/forms/department-documents/code-enforcement"
+    }
+  ],
+  "open_questions": [
+    "Is the lead Certification of Clearance from the Freehold Area Health Department still required for every pre-1978 owner-occupied sale, and how long does it take?",
+    "What is the usual wait for a standard (non-expedited) CCO inspection?",
+    "Confirm the Code Enforcement director's email address."
+  ],
+  "checked_at": "2026-10-04",
+  "verification": {
+    "fees": 7,
+    "fee_ok": 7,
+    "fee_bad": 0,
+    "fee_unchecked": 0,
+    "quotes": 10,
+    "q_ok": 9,
+    "q_bad": 0,
+    "q_unchecked": 1
+  }
+}

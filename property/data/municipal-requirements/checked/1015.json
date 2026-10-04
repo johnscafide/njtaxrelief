@@ -1,0 +1,241 @@
+{
+  "municipality_code": "1015",
+  "municipality": "Holland Township",
+  "county": "HUNTERDON",
+  "resale_co": {
+    "status": "required",
+    "name": "Continued Certificate of Occupancy (CCO) for change in ownership",
+    "issued_by": "Holland Township Zoning Officer",
+    "lead_time": "Contact the Zoning Officer two weeks before closing. By code, the Zoning Officer inspects within 14 days of notice and issues the certificate within one business day of a passed inspection.",
+    "valid_for": "",
+    "requirements": [
+      "Notify the Zoning Officer of the impending change in ownership and pay the inspection fee",
+      "Inspection for obvious noncompliance with Township Board of Health ordinances, Chapter 135 (Sewers) and the Zoning chapter",
+      "Smoke and carbon monoxide alarms in the right locations and working at the time of inspection (the CCO fee includes the smoke/CO inspection)",
+      "Fire extinguisher (the Township's Smoke & Carbon Monoxide Detectors & Fire Extinguishers handout is linked from the CCO section) (form still lists it)",
+      "The inspection does not cover the septic, sewage disposal, well, plumbing, electric or other systems"
+    ],
+    "fees": [
+      {
+        "label": "CCO inspection (includes smoke and CO alarm inspection)",
+        "amount": "$75.00",
+        "quote": "The fee is $75.00 checks made payable to the Township of Holland.",
+        "source_url": "https://www.hollandtownshipnj.gov/departments/zoning-department",
+        "verified": true
+      },
+      {
+        "label": "Second inspection",
+        "amount": "$75.00",
+        "quote": "if a second inspection is required a second fee of $75.00 shall be paid to the Township of Holland.",
+        "source_url": "https://www.hollandtownshipnj.gov/departments/zoning-department",
+        "verified": true
+      },
+      {
+        "label": "Certificate of occupancy first inspection fee (Code Chapter 83)",
+        "amount": "$75",
+        "quote": "First inspection fee $75",
+        "source_url": "https://ecode360.com/14104236",
+        "verified": null
+      },
+      {
+        "label": "Certificate of occupancy reinspection fee (Code Chapter 83)",
+        "amount": "$75",
+        "quote": "Reinspection fee $75",
+        "source_url": "https://ecode360.com/14104236",
+        "verified": null
+      }
+    ],
+    "how_to_apply": "Call the Zoning Officer about two weeks before closing to arrange the inspection, and pay $75.00 by check payable to the Township of Holland. The Zoning Officer may ask for an application form. Township offices are at 61 Church Road, Milford, NJ 08848.",
+    "application_url": "",
+    "department_url": "https://www.hollandtownshipnj.gov/departments/zoning-department",
+    "phone": "",
+    "email": "",
+    "contact_name": "",
+    "contact_title": "Zoning Officer",
+    "evidence": [
+      {
+        "url": "https://www.hollandtownshipnj.gov/departments/zoning-department",
+        "quote": "Holland Township requires that you obtain a Continued Certificate of Occupany (CCO) prior to selling, renting or buying a home.",
+        "doc_date": "2026-10-04 (page fetched)",
+        "via": "page",
+        "verified": true
+      },
+      {
+        "url": "https://www.hollandtownshipnj.gov/departments/zoning-department",
+        "quote": "Please contact the Zoning Officer TWO weeks prior to closing to arrange for an inspection.",
+        "doc_date": "2026-10-04 (page fetched)",
+        "via": "page",
+        "verified": true
+      },
+      {
+        "url": "https://www.hollandtownshipnj.gov/departments/zoning-department",
+        "quote": "No Attempt will be made by this inspection to examine the Septic, Sewage Disposal, Well, Plumbing, Electric, or other systems of the property or the construction of any structure on it.",
+        "doc_date": "2026-10-04 (page fetched)",
+        "via": "page",
+        "verified": true
+      },
+      {
+        "url": "https://ecode360.com/10268466",
+        "quote": "Such certificate shall be obtained prior to the closing of title on any such change of ownership and prior to any actual change in tenancy of the affected building.",
+        "doc_date": "2026-08-04 (code current to)",
+        "via": "page",
+        "verified": null
+      },
+      {
+        "url": "https://ecode360.com/10268466",
+        "quote": "The foregoing fee shall include an inspection as to a smoke detector and carbon monoxide alarm where such devices are required by state law.",
+        "doc_date": "2026-08-04 (code current to; Ord. No. 2010-12A)",
+        "via": "page",
+        "verified": null
+      },
+      {
+        "url": "https://ecode360.com/10268466",
+        "quote": "The Tax Search Officer of this Township shall provide a notice of this certificate of occupancy requirement on all issued tax searches for residential property in the Township.",
+        "doc_date": "2026-08-04 (code current to)",
+        "via": "page",
+        "verified": null
+      }
+    ],
+    "confidence": "high",
+    "notes": "Holland Township Code Chapter 115 (read in full through the ecode360 page) requires a certificate of occupancy for any existing 1 or 2 dwelling-unit home on a change in ownership, obtained before closing of title. The Zoning Officer inspects for obvious noncompliance with Board of Health ordinances, the Sewers chapter and Zoning. The Township page calls it a Continued Certificate of Occupancy (CCO) and says the $75.00 fee covers the inspection; Code Chapter 83 also sets $75 for the first inspection and $75 for a reinspection. No phone, email or name for the Zoning Officer is posted on the Zoning page; the Township's online directory lists the Municipal Clerk at 908-995-4847, ext. 210 (Clerk@hollandtownship.org) and the Land Use Board at 908-995-0057. Construction permits are handled by the NJ DCA Bureau of Code Enforcement in Asbury, (908) 713-0722."
+  },
+  "fire_cert": {
+    "requirements": [
+      "Smoke alarms and carbon monoxide alarms in the appropriate locations and working at the time of the CCO inspection",
+      "Fire extinguisher (listed on the Township handout linked from the CCO section) (form still lists it)"
+    ],
+    "authorities": [
+      {
+        "name": "Holland Township Zoning Officer (smoke and CO alarm check done as part of the CCO inspection)",
+        "type": "municipal_building_department",
+        "area_served": "Entire township",
+        "lead_time": "Contact the Zoning Officer two weeks before closing.",
+        "fees": [
+          {
+            "label": "CCO inspection, which includes the smoke and carbon monoxide alarm inspection",
+            "amount": "$75.00",
+            "quote": "The fee is $75.00 checks made payable to the Township of Holland.",
+            "source_url": "https://www.hollandtownshipnj.gov/departments/zoning-department",
+            "verified": true
+          }
+        ],
+        "how_to_apply": "Part of the CCO request: call the Zoning Officer and pay $75.00 by check payable to the Township of Holland.",
+        "application_url": "",
+        "department_url": "https://www.hollandtownshipnj.gov/departments/zoning-department",
+        "phone": "",
+        "email": "",
+        "contact_name": "",
+        "contact_title": "Zoning Officer",
+        "evidence": [
+          {
+            "url": "https://ecode360.com/10268466",
+            "quote": "The foregoing fee shall include an inspection as to a smoke detector and carbon monoxide alarm where such devices are required by state law.",
+            "doc_date": "2026-08-04 (code current to)",
+            "via": "page",
+            "verified": null
+          },
+          {
+            "url": "https://www.hollandtownshipnj.gov/departments/zoning-department",
+            "quote": "The following items will be required to be in the appropriate location and working at time of inspection, if a second inspection is required a second fee of $75.00 shall be paid to the Township of Holland.",
+            "doc_date": "2026-10-04 (page fetched)",
+            "via": "page",
+            "verified": true
+          },
+          {
+            "url": "https://www.hollandtownshipnj.gov/departments/zoning-department",
+            "quote": "Smoke & Carbon Monoxide Detectors & Fire Extinguishers",
+            "doc_date": "2026-10-04 (page fetched)",
+            "via": "page",
+            "verified": true
+          }
+        ],
+        "confidence": "medium"
+      },
+      {
+        "name": "NJ Department of Community Affairs, Division of Fire Safety (State is the fire code enforcing agency for Holland)",
+        "type": "state_dca",
+        "area_served": "Entire township (State-enforced, LEA code S)",
+        "lead_time": "State fee tiers count business days between DCA's receipt and the closing date: more than ten business days for the lowest fee. A new application is needed if the change of occupant does not happen within 6 months (per the DCA form).",
+        "fees": [
+          {
+            "label": "State smoke/CO certificate (N.J.A.C. 5:70-2.9(d)), received more than 10 business days before the change of occupant",
+            "amount": "$45.00",
+            "quote": "Requests for a CSACMAPFEC received more than 10 business days prior to the change of occupant: $45.00",
+            "source_url": "https://www.nj.gov/dca/divisions/dfs/codes/regulations/r.2018%20d.074%20(50%20n.j.r.%20729(a)).pdf",
+            "verified": true
+          },
+          {
+            "label": "Received four to 10 business days before",
+            "amount": "$90.00",
+            "quote": "Requests for a CSACMAPFEC received four to 10 business days prior to the change of occupant: $90.00",
+            "source_url": "https://www.nj.gov/dca/divisions/dfs/codes/regulations/r.2018%20d.074%20(50%20n.j.r.%20729(a)).pdf",
+            "verified": true
+          },
+          {
+            "label": "Received fewer than four business days before",
+            "amount": "$161.00",
+            "quote": "Requests for a CSACMAPFEC received fewer than four business days prior to the change of occupant: $161.00",
+            "source_url": "https://www.nj.gov/dca/divisions/dfs/codes/regulations/r.2018%20d.074%20(50%20n.j.r.%20729(a)).pdf",
+            "verified": true
+          }
+        ],
+        "how_to_apply": "If a State certificate is needed, apply to the NJ Division of Fire Safety online (DCA RIMS, Apply for a CSDCMAC) or with the DCA form mailed to PO Box 809, Trenton, NJ 08625-0809, with a check payable to Treasurer, State of New Jersey. Confirm with the Township first, since its CCO inspection already covers smoke and CO alarms.",
+        "application_url": "https://www.nj.gov/dca/divisions/RIMSHELP/bfce_public/bfce_-_public_-_apply_for_csdcmac_help.htm",
+        "department_url": "https://www.nj.gov/dca/dfs/offices/bfce.shtml",
+        "phone": "(609) 633-6132",
+        "email": "",
+        "contact_name": "Louis Kilmer",
+        "contact_title": "Fire Official of record for Holland (NJ Division of Fire Safety), per the state directory",
+        "evidence": [
+          {
+            "url": "https://nj.gov/dca/dfs/pdf/ANNUAL%20REGISTRY/THIRD%20QUARTER%20LEA%20REGISTRY%202026.pdf",
+            "quote": "S Holland Township",
+            "doc_date": "2026-07",
+            "via": "pdf",
+            "verified": true
+          },
+          {
+            "url": "https://www.nj.gov/dca/dfs/pdf/fire%20directory_county%20summary/fire_code_enforcement_director.pdf",
+            "quote": "LEAID: 1015-999 Holland Twp SMOKE DETECTOR COMPLIANCE Name: NJ Division Fire Safety Enf Auth. State ... Fire Official Louis Kilmer Phone (609) 633-6132",
+            "doc_date": "2025-09 (survey date 9/12/2025)",
+            "via": "state_directory",
+            "verified": null
+          },
+          {
+            "url": "https://www.nj.gov/dca/divisions/dfs/forms/bfce/certificationinlieu.pdf",
+            "quote": "Note: A check or money order made payable to “Treasurer, State of New Jersey” must accompany this form.",
+            "doc_date": "10/02 (form revision)",
+            "via": "pdf",
+            "verified": true
+          }
+        ],
+        "confidence": "low"
+      }
+    ],
+    "notes": "Holland is State-enforced for the fire code (LEA code S in the July 2026 registry), and the state directory lists the NJ Division of Fire Safety for smoke detector compliance. But the Township's own code says the CCO fee includes the smoke detector and carbon monoxide alarm inspection, and the Zoning page lists smoke/CO alarms and fire extinguishers as items checked at the CCO inspection. In practice the Township CCO inspection seems to cover the alarms; whether a separate State certificate is also needed should be confirmed. The linked handout (Smoke-Carbon.pdf) is a scanned image, so its contents could not be read. The fire extinguisher is still listed by the Township even though the state dropped it from the sale certificate in February 2025 (P.L.2025, c.19). Update: the current state fees are $45 / $90 / $161, set by N.J.A.C. 5:70-2.9(d) (50 N.J.R. 729(a)) (more than 10, 4 to 10, and under 4 business days before closing). The $35 / $70 / $125 on the older DCA paper form are out of date."
+  },
+  "other_items": [
+    {
+      "label": "Tax search notice",
+      "detail": "The Tax Search Officer puts a notice of the CCO requirement on every tax search for residential property, so the CCO shows up in title work.",
+      "source_url": "https://ecode360.com/10268466"
+    }
+  ],
+  "open_questions": [
+    "What is the Zoning Officer's direct phone and email for scheduling the CCO? None is posted on the Zoning page.",
+    "Does the Township CCO inspection fully replace the State smoke/CO certificate, or does the State (DCA) also need to issue one?",
+    "Does Holland still require a fire extinguisher at resale after P.L.2025, c.19?",
+    "How long is the CCO valid after it is issued?"
+  ],
+  "checked_at": "2026-10-04",
+  "verification": {
+    "fees": 8,
+    "fee_ok": 6,
+    "fee_bad": 0,
+    "fee_unchecked": 2,
+    "quotes": 12,
+    "q_ok": 7,
+    "q_bad": 0,
+    "q_unchecked": 5
+  }
+}

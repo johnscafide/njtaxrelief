@@ -1,0 +1,216 @@
+{
+  "municipality_code": "1308",
+  "municipality": "Bradley Beach Borough",
+  "county": "MONMOUTH",
+  "resale_co": {
+    "status": "required",
+    "name": "Certificate of Continued Occupancy (CCO) / certificate of inspection",
+    "issued_by": "Borough of Bradley Beach Office of Code Enforcement (Department of Community Development)",
+    "lead_time": "Apply more than 10 days before closing to avoid late surcharges. Inspection windows on the form are 10-12 and 12-2.",
+    "valid_for": "",
+    "requirements": [
+      "Inspection of the home by the Code Enforcement Officer for compliance with Borough ordinances and the property maintenance code (CCO inspection checklist)",
+      "Smoke alarms, carbon monoxide alarms and a 2A:10BC fire extinguisher are checked as part of the CCO inspection (checklist revised October 2022; the state dropped the extinguisher from the sale requirement in February 2025, but the form still lists it)",
+      "Heating system and water heater certification by a qualified technician (form included with the CCO application packet)",
+      "Application must list the buyer and the closing date and be signed by both the owner/agent and the buyer",
+      "Occupancy is not permitted until the certificate is issued"
+    ],
+    "fees": [
+      {
+        "label": "Certificate of inspection (CCO), sale or transfer of a single-family home",
+        "amount": "$100",
+        "quote": "The fee for a certificate of inspection issued in reference to a sale or other transfer of title of a property containing a single-family dwelling structure shall be $100.",
+        "source_url": "https://ecode360.com/7043039",
+        "verified": null
+      },
+      {
+        "label": "Certificate of inspection (CCO), sale or transfer of a two-family home or single-family home with an accessory unit",
+        "amount": "$150",
+        "quote": "or consisting of a two-family dwelling structure, shall be $150.",
+        "source_url": "https://ecode360.com/7043039",
+        "verified": null
+      },
+      {
+        "label": "Reinspection, per unit",
+        "amount": "$50",
+        "quote": "The fee for a reinspection in connection with any certificate of inspection shall be $50 per unit.",
+        "source_url": "https://ecode360.com/7043039",
+        "verified": null
+      },
+      {
+        "label": "Late application surcharge, application made 10 to 5 days before the sale (added to the base fee)",
+        "amount": "$50",
+        "quote": "For all applications made within 10 to five days prior to any such occupancy, rental, sale, transfer of title or other act, occurrence or circumstance, in addition to the fees described herein, the Borough shall assess an additional fee of $50.",
+        "source_url": "https://ecode360.com/7043039",
+        "verified": null
+      },
+      {
+        "label": "Late application surcharge, application made 4 days or less before the sale (added to the base fee)",
+        "amount": "$75",
+        "quote": "For all applications made within four days or less prior to any occupancy, rental, sale, transfer of title or other act, occurrence or circumstance, in addition to the fees described herein, the Borough shall assess an additional fee of $75.",
+        "source_url": "https://ecode360.com/7043039",
+        "verified": null
+      }
+    ],
+    "how_to_apply": "Fill out the Borough's CCO application (choose SALE and give the closing date and buyer details), attach the heating system and water heater certification, and submit it with the fee to the Office of Code Enforcement, 701 Main Street, Bradley Beach. The Code Enforcement Officer then inspects; if minor violations remain, a temporary certificate may be issued with a letter of intent to fix them within 20 days.",
+    "application_url": "https://www.bradleybeachnj.gov/wp-content/uploads/2023/04/CCO-APPLICATION-1022.pdf",
+    "department_url": "https://www.bradleybeachnj.gov/community-development/",
+    "phone": "732-776-2999 ext. 1033",
+    "email": "code@bradleybeachnj.gov",
+    "contact_name": "Bill Young",
+    "contact_title": "Code Enforcement Officer (wyoung@bradleybeachnj.gov, ext. 1034)",
+    "evidence": [
+      {
+        "url": "https://ecode360.com/7043039",
+        "quote": "unless such person first obtains from the Code Enforcement Officer of the Borough a certificate of occupancy and permit authorizing any of the foregoing and when any of the foregoing shall take place.",
+        "doc_date": "Code includes Ord. No. 2025-21 (7-15-2025)",
+        "via": "page",
+        "verified": null
+      },
+      {
+        "url": "https://ecode360.com/7043039",
+        "quote": "Prior to the rental, transfer of title or occupancy of any dwelling, dwelling unit or commercial use, application for a certificate of occupancy shall be made in writing to the Code Enforcement Officer",
+        "doc_date": "",
+        "via": "page",
+        "verified": null
+      },
+      {
+        "url": "https://ecode360.com/7043039",
+        "quote": "a temporary certificate of occupancy may be issued permitting occupancy, provided a letter of intent is supplied by the applicant to the Code Enforcement Officer stating that the cited violations shall be abated within a twenty-day period from the date of the violation notification.",
+        "doc_date": "",
+        "via": "page",
+        "verified": null
+      },
+      {
+        "url": "https://www.bradleybeachnj.gov/wp-content/uploads/2023/04/CCO-APPLICATION-1022.pdf",
+        "quote": "OCCUPANCY IS NOT PERMITTED UNTIL CERTIFICATE IS ISSUED.",
+        "doc_date": "Revised October, 2022",
+        "via": "pdf",
+        "verified": true
+      },
+      {
+        "url": "https://www.bradleybeachnj.gov/wp-content/uploads/2023/04/CCO-APPLICATION-1022.pdf",
+        "quote": "The fee for a certificate of occupancy issued in reference to a sale or other transfer of title of a property containing a single-family dwelling structure shall be $90.",
+        "doc_date": "Revised October, 2022 (older fee text)",
+        "via": "pdf",
+        "verified": true
+      },
+      {
+        "url": "https://www.bradleybeachnj.gov/wp-content/uploads/2023/04/CCO-APPLICATION-1022.pdf",
+        "quote": "HEATING SYSTEM & WATER HEATER CERTIFICATION",
+        "doc_date": "Revised April, 2023",
+        "via": "pdf",
+        "verified": true
+      },
+      {
+        "url": "https://www.bradleybeachnj.gov/community-development/",
+        "quote": "issues certificates of Continued Occupancy, and performs all related inspections.",
+        "doc_date": "2026-09-24",
+        "via": "page",
+        "verified": true
+      },
+      {
+        "url": "https://www.bradleybeachnj.gov/community-development/",
+        "quote": "Code Enforcement Officer – wyoung@bradleybeachnj.gov",
+        "doc_date": "2026-10-04 (page fetched)",
+        "via": "page",
+        "verified": true
+      },
+      {
+        "url": "https://www.bradleybeachnj.gov/community-development/",
+        "quote": "Administrative Assistant – code@bradleybeachnj.gov",
+        "doc_date": "2026-10-04 (page fetched)",
+        "via": "page",
+        "verified": true
+      }
+    ],
+    "confidence": "high",
+    "notes": "Borough Code Chapter 160 (read in full through ecode360's print view) requires a certificate before any sale or transfer of title of a dwelling. Section 160-4 was amended by Ord. No. 2025-21 (July 15, 2025) to $100 (single family) and $150 (two family), $50 reinspection, and late surcharges of $50 and $75. The Borough's posted CCO application (revised October 2022) still prints the older fees ($90 single family, $100 two family, $25 reinspection, $25/$50 late surcharges); the newer ordinance amounts are used here, but confirm with the office. Phone extensions: code office ext. 1033 on the heating form page, administrative assistant ext. 1032 and Code Enforcement Officer ext. 1034 per the Community Development page. Rental CCOs (yearly, seasonal and short-term) are a separate rental requirement and not part of the resale process."
+  },
+  "fire_cert": {
+    "requirements": [
+      "Smoke alarms on each level and outside each sleeping area; homes built before 1977 need 10-year sealed battery alarms, newer homes keep their hardwired (and interconnected, where built that way) alarms",
+      "Carbon monoxide alarms near all sleeping areas on all floors if the home has fuel-burning appliances or an attached garage",
+      "Fire extinguisher, type 2A:10BC, mounted within 10 feet of the kitchen, not higher than 5 feet (still listed on the Borough checklist)"
+    ],
+    "authorities": [
+      {
+        "name": "Bradley Beach Office of Code Enforcement / Fire Marshal (Department of Community Development), checked during the CCO inspection",
+        "type": "municipal_fire_bureau",
+        "area_served": "Entire borough",
+        "lead_time": "Handled with the CCO inspection; no separate smoke certificate schedule is published.",
+        "fees": [],
+        "how_to_apply": "The smoke alarm, carbon monoxide alarm and extinguisher items are inspected as part of the Borough CCO inspection (see resale certificate). No separate smoke/CO certificate application or fee was found online; call the office to confirm whether a separate certificate or fee applies.",
+        "application_url": "https://www.bradleybeachnj.gov/wp-content/uploads/2023/04/CCO-APPLICATION-1022.pdf",
+        "department_url": "https://www.bradleybeachnj.gov/community-development/",
+        "phone": "732-776-2999",
+        "email": "firemarshal@bradleybeachnj.gov",
+        "contact_name": "Jeffrey Spengler",
+        "contact_title": "Fire Marshal",
+        "evidence": [
+          {
+            "url": "https://www.bradleybeachnj.gov/wp-content/uploads/2022/10/CCO-CHECKLIST-1022.pdf",
+            "quote": "10 year sealed battery operated smoke detectors are installed on each level of the structure and outside each sleeping area in the immediate vicinity of the bedrooms.",
+            "doc_date": "Revised October, 2022",
+            "via": "pdf",
+            "verified": true
+          },
+          {
+            "url": "https://www.bradleybeachnj.gov/wp-content/uploads/2022/10/CCO-CHECKLIST-1022.pdf",
+            "quote": "A fire extinguisher of type 2A:10BC is required to be installed using the manufacturer’s hardware, in a clearly visible and readily accessible location within 10 feet of the kitchen",
+            "doc_date": "Revised October, 2022",
+            "via": "pdf",
+            "verified": true
+          },
+          {
+            "url": "https://www.bradleybeachnj.gov/community-development/",
+            "quote": "Fire Marshal – firemarshal@bradleybeachnj.gov",
+            "doc_date": "2026-10-04 (page fetched)",
+            "via": "page",
+            "verified": true
+          },
+          {
+            "url": "https://www.nj.gov/dca/dfs/pdf/fire%20directory_county%20summary/fire_code_enforcement_director.pdf",
+            "quote": "LEAID: 1307-001 Bradley Beach Boro SMOKE DETECTOR COMPLIANCE Name: Bradley Beach Boro Code Enf Enf Auth. Municipal Addr: 701 Main St Bradley Beach NJ 07720 Fire Official Jeffrey Spengler Phone (732) 776-2975 ... Email firemarshal@bradleybeachnj.gov",
+            "doc_date": "",
+            "via": "state_directory",
+            "verified": null
+          },
+          {
+            "url": "https://nj.gov/dca/dfs/pdf/ANNUAL%20REGISTRY/THIRD%20QUARTER%20LEA%20REGISTRY%202026.pdf",
+            "quote": "M Bradley Beach Borough",
+            "doc_date": "2026-07",
+            "via": "pdf",
+            "verified": true
+          }
+        ],
+        "confidence": "medium"
+      }
+    ],
+    "notes": "The state fire directory lists the Bradley Beach Code Enforcement office as the smoke detector compliance office, and the Borough's CCO checklist includes the smoke, CO and extinguisher checks, so the smoke/CO certificate appears to be issued through the CCO process. No separate CSACMAPFEC fee is in the Borough code or on a posted form. The checklist (October 2022) still lists a fire extinguisher; state law (P.L.2025, c.19) dropped it from the sale certificate in February 2025, so confirm. The fire directory gives (732) 776-2975 for the smoke compliance office and (732) 776-2999 as the fire official's phone."
+  },
+  "other_items": [
+    {
+      "label": "Heating system and water heater certification",
+      "detail": "A qualified technician must certify the heating system and water heater on the Borough form that comes with the CCO application.",
+      "source_url": "https://www.bradleybeachnj.gov/wp-content/uploads/2023/04/CCO-APPLICATION-1022.pdf"
+    }
+  ],
+  "open_questions": [
+    "Is there a separate smoke/CO (CSACMAPFEC) fee, or is it covered by the CCO fee?",
+    "Does the Borough still require the fire extinguisher at resale after P.L.2025, c.19?",
+    "Confirm current CCO fees: the posted application still shows the pre-2025 amounts ($90/$100).",
+    "How long is a resale CCO valid, and how far ahead must inspections be booked?"
+  ],
+  "checked_at": "2026-10-04",
+  "verification": {
+    "fees": 5,
+    "fee_ok": 0,
+    "fee_bad": 0,
+    "fee_unchecked": 5,
+    "quotes": 14,
+    "q_ok": 10,
+    "q_bad": 0,
+    "q_unchecked": 4
+  }
+}

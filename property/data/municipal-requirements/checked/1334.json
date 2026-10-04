@@ -1,0 +1,182 @@
+{
+  "municipality_code": "1334",
+  "municipality": "Monmouth Beach Borough",
+  "county": "MONMOUTH",
+  "checked_at": "2026-10-04",
+  "resale_co": {
+    "status": "required",
+    "name": "Certificate of Code Compliance (residential occupancy certificate for sale)",
+    "issued_by": "Borough of Monmouth Beach Housing Official (also the Fire Official)",
+    "lead_time": "The Borough code says the certificate is granted or denied within 10 days of the application. Inspections are Tuesdays and Thursdays, 4:00 pm to 7:00 pm.",
+    "valid_for": "",
+    "requirements": [
+      "Housing inspection showing the building and premises comply with all Borough ordinances (Chapter 15 Housing and Property Maintenance)",
+      "Checklist items include accessible common areas, clean and pest-free unit, lidded trash containers, house numbers at least 3 inches, working doors and windows, handrails on stairs with five or more risers, no key-operated locks from inside, trimmed yard, poison ivy and ragweed removed, paint and surfaces in good repair, no plumbing leaks, water heater relief pipe to within 6 inches of the floor, heat and screens in season",
+      "Smoke detectors on each level and within 10 feet of each bedroom, and CO alarms, checked at the same request",
+      "Fire extinguisher, ten lbs. or less (2019 checklist still lists it)"
+    ],
+    "fees": [
+      {
+        "label": "Housing inspection, sale of property",
+        "amount": "$100",
+        "quote": "SALE OF PROPERTY: $100",
+        "source_url": "https://www.monmouthbeach.org/government/departments/housing-department/",
+        "verified": true
+      },
+      {
+        "label": "Certificate of Code Compliance, each single family resale (Borough Code 15-4.1c)",
+        "amount": "$100",
+        "quote": "A charge of $100 in the case of each single family rental unit, and $100 in the case of each single family resale, and a charge of $100 for each commercial rental shall be charged to cover the cost of inspection in connection with such application",
+        "source_url": "https://ecode360.com/32002803",
+        "verified": null
+      }
+    ],
+    "how_to_apply": "Apply online through the Borough's SDL Portal link 'Apply for a Residential Certificate of Code Compliance'; the same request covers the occupancy certificate for a sale and the fire, smoke and carbon monoxide detector inspection. All fees are paid at the time of application and are not refundable. Questions go to Housing Official Dave Olsen, 732-229-2204 ext. 1009.",
+    "application_url": "https://www.sdlportal.com/towns/nj/monmouth/monmouthbeach/requests/smokeAlarm",
+    "department_url": "https://www.monmouthbeach.org/government/departments/housing-department/",
+    "phone": "732-229-2204 ext. 1009",
+    "email": "dolsen@monmouthbeach.org",
+    "contact_name": "Dave Olsen",
+    "contact_title": "Housing Official",
+    "evidence": [
+      {
+        "url": "https://www.monmouthbeach.org/government/departments/housing-department/",
+        "quote": "requires that prior to the sale, rental, or lease of any single family, multi-family dwellings, or dwelling space, a Certificate of Code Compliance must first be obtained from the",
+        "doc_date": "2026-10-04 (page fetched)",
+        "via": "page",
+        "verified": true
+      },
+      {
+        "url": "https://www.monmouthbeach.org/government/departments/housing-department/",
+        "quote": "NOTE: This form is used to request inspections for an OCCUPANCY CERTIFICATE for a sale, rental, or any transfer of title, as well as for inspections on Fire, Smoke, and Carbon Monoxide Detectors.",
+        "doc_date": "2026-10-04 (page fetched)",
+        "via": "page",
+        "verified": true
+      },
+      {
+        "url": "https://www.monmouthbeach.org/government/departments/housing-department/",
+        "quote": "Inspections are Tuesdays and Thursdays 4:00pm – 7:00pm",
+        "doc_date": "2026-10-04 (page fetched)",
+        "via": "page",
+        "verified": true
+      },
+      {
+        "url": "https://ecode360.com/32002803",
+        "quote": "Such a Certificate of Code Compliance shall be granted or denied within 10 days from the date of the application for the same.",
+        "doc_date": "2025-04-23 (Ord. No. O-04-25)",
+        "via": "page",
+        "verified": null
+      },
+      {
+        "url": "https://www.monmouthbeach.org/wp-content/uploads/2019/09/2019-Housing-Checklist.pdf",
+        "quote": "Smoke detectors are required on each level and within 10 feet of each bedroom.",
+        "doc_date": "2019-09",
+        "via": "pdf",
+        "verified": true
+      }
+    ],
+    "confidence": "high",
+    "notes": "Borough Code Chapter 15 (Section 15-4, amended 4-23-2025 by Ord. No. O-04-25) and Chapter 16 were read in full through the ecode360 print view. Code and Housing page agree on $100 for a single family resale; no two-family resale fee is stated (ask whether it is $100 per unit). Dave Olsen is both Housing Official and Fire Official. The 2019 Housing Checklist (Office of Fire Marshal) still lists a fire extinguisher. Short-term rental registration (Chapter 23) and rental certificates are rental programs only."
+  },
+  "fire_cert": {
+    "requirements": [
+      "Smoke alarms on each level and outside each separate sleeping area (within 10 feet of each bedroom); 10-year sealed battery alarms unless hardwired alarms from original construction",
+      "Carbon monoxide alarms near sleeping areas in homes with a fuel-burning device or attached garage",
+      "Portable fire extinguisher within 10 feet of the kitchen (2019 checklist still lists it)"
+    ],
+    "authorities": [
+      {
+        "name": "Monmouth Beach Fire Prevention Bureau",
+        "type": "municipal_fire_bureau",
+        "area_served": "Entire borough",
+        "lead_time": "Fee depends on business days before the change of occupant: four business days or more for the lower fee. Inspections are Tuesdays and Thursdays, 4:00 pm to 7:00 pm.",
+        "fees": [
+          {
+            "label": "Smoke detector and CO alarm certificate (CSDCMAC), received four business days or more before the change of occupant",
+            "amount": "$100",
+            "quote": "Requests for a CSDCMAC received four business days or more prior to the change of occupant: $100.",
+            "source_url": "https://ecode360.com/32003024",
+            "verified": null
+          },
+          {
+            "label": "Received fewer than four business days before the change of occupant",
+            "amount": "$161",
+            "quote": "Requests for a CSDCMAC received fewer than four business days prior to the change of occupant: $161.",
+            "source_url": "https://ecode360.com/32003024",
+            "verified": null
+          }
+        ],
+        "how_to_apply": "Use the same SDL Portal request (Application for Inspection Certificate & Smoke Certification) linked from the Fire Prevention Bureau and Housing pages.",
+        "application_url": "https://www.sdlportal.com/towns/nj/monmouth/monmouthbeach/requests/smokeAlarm",
+        "department_url": "https://www.monmouthbeach.org/public-safety/fire-prevention-bureau/",
+        "phone": "732-229-2204 ext. 1009",
+        "email": "dolsen@monmouthbeach.org",
+        "contact_name": "Dave Olsen",
+        "contact_title": "Fire Official",
+        "evidence": [
+          {
+            "url": "https://www.monmouthbeach.org/public-safety/fire-prevention-bureau/",
+            "quote": "Application for Inspection Certificate & Smoke Certification",
+            "doc_date": "2026-10-04 (page fetched)",
+            "via": "page",
+            "verified": true
+          },
+          {
+            "url": "https://www.monmouthbeach.org/public-safety/fire-prevention-bureau/",
+            "quote": "Resale and rental inspections",
+            "doc_date": "2026-10-04 (page fetched)",
+            "via": "page",
+            "verified": true
+          },
+          {
+            "url": "https://www.monmouthbeach.org/public-safety/fire-prevention-bureau/",
+            "quote": "Fire Official: Dave Olsen",
+            "doc_date": "2026-10-04 (page fetched)",
+            "via": "page",
+            "verified": true
+          },
+          {
+            "url": "https://ecode360.com/32003024",
+            "quote": "For the issuance of a Certificate of Smoke Detector and Carbon Monoxide Alarm Compliance (CSDCMAC) per N.J.A.C. 5:70-2.3 the fee shall be as follows:",
+            "doc_date": "2025-04-23 (Ord. No. O-04-25)",
+            "via": "page",
+            "verified": null
+          },
+          {
+            "url": "https://www.nj.gov/dca/dfs/pdf/fire%20directory_county%20summary/fire_code_enforcement_director.pdf",
+            "quote": "LEAID: 1333-001 Enf Auth. Fire Dept Fire Official David C Olsen Phone (732) 229-2204 ... Email dolsen@monmouthbeach.org",
+            "doc_date": "2026 (survey date 7/28/2026)",
+            "via": "state_directory",
+            "verified": null
+          },
+          {
+            "url": "https://nj.gov/dca/dfs/pdf/ANNUAL%20REGISTRY/THIRD%20QUARTER%20LEA%20REGISTRY%202026.pdf",
+            "quote": "F Monmouth Beach Borough",
+            "doc_date": "2026-07",
+            "via": "pdf",
+            "verified": true
+          }
+        ],
+        "confidence": "high"
+      }
+    ],
+    "notes": "Borough Code 16-9b (added 4-23-2025 by Ord. No. O-04-25) uses two tiers only ($100 at four business days or more, $161 under four). It is not clear online whether the $100 housing fee and the $100 smoke certificate fee are both charged on a sale, or whether one SDL request covers both; confirm with the office. The Fire Prevention page shows the email as dolsen@monmoutbeach.org (missing an 'h'); the Housing page and state directory show dolsen@monmouthbeach.org. The 2019 checklist still lists a fire extinguisher, which the state dropped from the sale certificate in February 2025 (P.L.2025, c.19)."
+  },
+  "other_items": [],
+  "open_questions": [
+    "On a sale, is the total $100 (housing) plus $100 or $161 (smoke/CO), or does one fee cover both?",
+    "What is the fee for a two-family resale?",
+    "How long is the Certificate of Code Compliance valid?",
+    "Is the fire extinguisher still checked after P.L.2025, c.19?"
+  ],
+  "verification": {
+    "fees": 4,
+    "fee_ok": 1,
+    "fee_bad": 0,
+    "fee_unchecked": 3,
+    "quotes": 11,
+    "q_ok": 8,
+    "q_bad": 0,
+    "q_unchecked": 3
+  }
+}

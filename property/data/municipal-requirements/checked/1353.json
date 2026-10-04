@@ -1,0 +1,292 @@
+{
+  "municipality_code": "1353",
+  "municipality": "West Long Branch Borough",
+  "county": "MONMOUTH",
+  "resale_co": {
+    "status": "required",
+    "name": "Certificate of Occupancy for sale (residential housing inspection)",
+    "issued_by": "Borough of West Long Branch Housing Department (Housing Inspector)",
+    "lead_time": "After payment is processed, the Housing Department contacts the applicant within 7 business days to schedule the inspection. No inspection is scheduled until all building permits are closed.",
+    "valid_for": "Valid while the occupant it was issued to stays in possession. Occupant names may only be changed within ten days of the inspection; after that a new application is needed.",
+    "requirements": [
+      "Online application with the required forms and payment",
+      "Home inspection by the Housing Inspector using the Borough's Housing Inspection Checklist (working doors, windows and locks, handrails on stairs with four or more risers, hot water at all fixtures, relief valve discharge pipe, house numbers at least 3 inches, clean and free of debris, sidewalks and driveways in good repair, and more)",
+      "All building permits closed out with the Building Department",
+      "Level II chimney certification for a sale for any wood-burning fireplace, or an invoice showing the fireplace was properly sealed",
+      "Smoke and carbon monoxide alarm certificate (fee added to the online CO application); 10-year sealed smoke alarms in all bedrooms and sleeping areas",
+      "If the home has an alarm system, it must be registered with the Police Department (alarm monitoring certificate if monitored)",
+      "No temporary or \"as is\" sale certificates are issued"
+    ],
+    "fees": [
+      {
+        "label": "Certificate of Occupancy for a sale (Borough web page)",
+        "amount": "$100.00",
+        "quote": "($100.00 for a sale or $225.00 for a rental)",
+        "source_url": "https://www.westlongbranch.org/1306/Certificate-of-Occupancy-residential-pro",
+        "verified": true
+      },
+      {
+        "label": "Certificate of Occupancy, single-family dwelling (Borough Code 9-2.10, amended 9-17-2025)",
+        "amount": "$200",
+        "quote": "Single-Family Dwellings — $200 per unit, which fees shall also include rentals of single-family homes.",
+        "source_url": "https://ecode360.com/36233505",
+        "verified": null
+      },
+      {
+        "label": "Apartments or multi-family dwellings, per unit (Borough Code 9-2.10)",
+        "amount": "$200",
+        "quote": "Apartments or Multi-Family Dwellings — $200 per unit or apartment.",
+        "source_url": "https://ecode360.com/36233505",
+        "verified": null
+      },
+      {
+        "label": "Second and later reinspections",
+        "amount": "$100",
+        "quote": "The second reinspection, as well as any additional reinspections, shall require a fee to be paid in the amount of $100.",
+        "source_url": "https://ecode360.com/36233505",
+        "verified": null
+      }
+    ],
+    "how_to_apply": "Apply online with the Borough's Certificate of Occupancy application (WebGeo portal). Print the application when prompted, then pay online or mail it with a check or money order to Borough of West Long Branch, 965 Broadway, West Long Branch, NJ 07764, Attn: Housing. If paying by check, the smoke/CO certificate fee must be a separate check. Submit the Level II chimney certification and close all permits first; the Housing Department then calls to schedule the inspection.",
+    "application_url": "https://webgeo.co/prod1/portal/portal.jsp?c=3777464&p=131401733&g=131401735",
+    "department_url": "https://www.westlongbranch.org/1219/Housing-Residential-Certificate-of-Occup",
+    "phone": "732-229-1756 ext. 119",
+    "email": "housing@westlongbranch.org",
+    "contact_name": "Christopher Neyhart",
+    "contact_title": "Housing Inspector",
+    "evidence": [
+      {
+        "url": "https://www.westlongbranch.org/1306/Certificate-of-Occupancy-residential-pro",
+        "quote": "A Certificate of Occupancy is required for a change of occupancy in a residential property, whether it be a change in tenancy or owner re-occupancy.",
+        "doc_date": "2026-10-04 (page fetched)",
+        "via": "page",
+        "verified": true
+      },
+      {
+        "url": "https://www.westlongbranch.org/1306/Certificate-of-Occupancy-residential-pro",
+        "quote": "Once payment is received and processed, our Housing Dept. will contact you within 7 business days to schedule your inspection.",
+        "doc_date": "2026-10-04 (page fetched)",
+        "via": "page",
+        "verified": true
+      },
+      {
+        "url": "https://www.westlongbranch.org/1219/Housing-Residential-Certificate-of-Occup",
+        "quote": "West Long Branch requires a Certificate of Occupancy upon the resident occupying the home, ref: 9-2.5 (a)",
+        "doc_date": "2026-10-04 (page fetched)",
+        "via": "page",
+        "verified": true
+      },
+      {
+        "url": "https://www.westlongbranch.org/1219/Housing-Residential-Certificate-of-Occup",
+        "quote": "West Long Branch does not issue any Temporary Certificate of Occupancy.",
+        "doc_date": "2026-10-04 (page fetched)",
+        "via": "page",
+        "verified": true
+      },
+      {
+        "url": "https://www.westlongbranch.org/1219/Housing-Residential-Certificate-of-Occup",
+        "quote": "No Inspections will be scheduled until all permits are closed out.",
+        "doc_date": "2026-10-04 (page fetched)",
+        "via": "page",
+        "verified": true
+      },
+      {
+        "url": "https://www.westlongbranch.org/1219/Housing-Residential-Certificate-of-Occup",
+        "quote": "A Sale requires a Level II Certification.",
+        "doc_date": "2026-10-04 (page fetched)",
+        "via": "page",
+        "verified": true
+      },
+      {
+        "url": "https://www.westlongbranch.org/1300/Required-forms-prior-to-application-subm",
+        "quote": "NAMES OF OCCUPANTS MAY ONLY BE CHANGED WITHIN TEN DAYS FROM THE DATE OF INSPECTION.",
+        "doc_date": "2026-10-04 (page fetched)",
+        "via": "page",
+        "verified": true
+      },
+      {
+        "url": "https://www.westlongbranch.org/DocumentCenter/View/347/wlb_housing_prep_for_inspec",
+        "quote": "The following should help in preparing your residence for inspection for a Sale and / or Rental Certificate of Occupancy.",
+        "doc_date": "",
+        "via": "pdf",
+        "verified": true
+      },
+      {
+        "url": "https://www.westlongbranch.org/DocumentCenter/View/347/wlb_housing_prep_for_inspec",
+        "quote": "732-229-1756 ext. 119",
+        "doc_date": "",
+        "via": "pdf",
+        "verified": true
+      },
+      {
+        "url": "https://ecode360.com/36233496",
+        "quote": "No such vacated room, dwelling, apartment, or the like shall be transferred, rented or occupied by any new tenant or owner until an inspection has been made by the Inspector",
+        "doc_date": "",
+        "via": "page",
+        "verified": null
+      },
+      {
+        "url": "https://ecode360.com/36233505",
+        "quote": "All applications for a Certificate of Occupancy and the inspection required thereby shall be accompanied by the appropriate filing fee designated to cover the cost of inspection in connection with the aforesaid application, which fee shall be paid upon filing the application and shall not be refundable.",
+        "doc_date": "amended 9-17-2025 by Ord. No. O-25-17",
+        "via": "page",
+        "verified": null
+      }
+    ],
+    "confidence": "high",
+    "notes": "The Borough page says a sale \"as is\" does not need a CO under state law, but the Borough requires one before anyone occupies the home (Code 9-2.5). Fee conflict: the Borough web page still says $100.00 for a sale ($225.00 rental), while Borough Code 9-2.10, amended 9-17-2025 by Ord. No. O-25-17 (read through the ecode360 print view), sets $200 per single-family unit with one reinspection included. Confirm the current fee. The checklist PDF names Christopher Neyhart (Housing Inspector) and James Miller (Deputy Housing Inspector). The housing email comes from the mailto link on the Housing page. Building permits are handled by the Building Department at 344 Broadway, Long Branch, NJ 07740, 732-571-5690, building@longbranch.org. Landlord registration and lead-safe certification apply to rentals only."
+  },
+  "fire_cert": {
+    "requirements": [
+      "Smoke and carbon monoxide alarm certificate when a 1 or 2 family home is sold (Borough Code 9-2.5f); the obligation is on the owner or seller",
+      "10-year sealed smoke detectors in all bedrooms or potential sleeping areas and guest rooms",
+      "Newly installed smoke alarms must be photoelectric type (NFPA 72, January 1, 2022)",
+      "Carbon monoxide alarms as required by N.J.A.C. 5:70-4.19(d) and 5:70-2.3"
+    ],
+    "authorities": [
+      {
+        "name": "Borough of West Long Branch Housing Department / Fire Prevention Bureau (smoke and CO certificate is added to the online CO application)",
+        "type": "municipal",
+        "area_served": "Entire borough",
+        "lead_time": "Fee depends on business days before the change of occupancy: more than 10 business days for the lowest fee.",
+        "fees": [
+          {
+            "label": "Smoke and CO certificate, request more than 10 business days before change of occupancy (Borough web page)",
+            "amount": "$45.00",
+            "quote": "Requests received more than 10 business days before a change of occupancy--$45.00.",
+            "source_url": "https://www.westlongbranch.org/1306/Certificate-of-Occupancy-residential-pro",
+            "verified": true
+          },
+          {
+            "label": "Request 4 to 10 business days before change of occupancy (Borough web page)",
+            "amount": "$90.00",
+            "quote": "Requests received four to 10 business days before a change of occupancy--$90.00.",
+            "source_url": "https://www.westlongbranch.org/1306/Certificate-of-Occupancy-residential-pro",
+            "verified": true
+          },
+          {
+            "label": "Request fewer than 4 business days before change of occupancy (Borough web page)",
+            "amount": "$161.00",
+            "quote": "Requests received fewer than four business days before a change of occupancy--$161.00.",
+            "source_url": "https://www.westlongbranch.org/1306/Certificate-of-Occupancy-residential-pro",
+            "verified": true
+          },
+          {
+            "label": "Smoke and CO inspection, request more than 10 business days before change of occupancy (Borough Code 9-2.15, amended 9-17-2025)",
+            "amount": "$100",
+            "quote": "Requests received more than 10 business days prior to a change of occupancy--$100.",
+            "source_url": "https://ecode360.com/36233515",
+            "verified": null
+          },
+          {
+            "label": "Request 4 to 10 business days before change of occupancy (Borough Code)",
+            "amount": "$150",
+            "quote": "Requests received four to 10 business days prior to a change of occupancy--$150.",
+            "source_url": "https://ecode360.com/36233515",
+            "verified": null
+          },
+          {
+            "label": "Request fewer than 4 business days before change of occupancy (Borough Code)",
+            "amount": "$250",
+            "quote": "Requests received fewer than four business days prior to a change of occupancy--$250.",
+            "source_url": "https://ecode360.com/36233515",
+            "verified": null
+          }
+        ],
+        "how_to_apply": "The smoke and CO certificate fee is added automatically when you complete the online Certificate of Occupancy application. If paying by check or money order, pay it separately from the CO fee.",
+        "application_url": "https://webgeo.co/prod1/portal/portal.jsp?c=3777464&p=131401733&g=131401735",
+        "department_url": "https://www.westlongbranch.org/1306/Certificate-of-Occupancy-residential-pro",
+        "phone": "732-229-1756 ext. 119",
+        "email": "housing@westlongbranch.org",
+        "contact_name": "James Miller",
+        "contact_title": "Fire Official (also Deputy Housing Inspector)",
+        "evidence": [
+          {
+            "url": "https://www.westlongbranch.org/1306/Certificate-of-Occupancy-residential-pro",
+            "quote": "The Smoke and Carbon Monoxide Detector Certificate fee will be added to your initial application automatically when you complete the application online.",
+            "doc_date": "2026-10-04 (page fetched)",
+            "via": "page",
+            "verified": true
+          },
+          {
+            "url": "https://www.westlongbranch.org/1219/Housing-Residential-Certificate-of-Occup",
+            "quote": "NFPA CH 29.5.1.1: 10-year sealed Smoke detectors must be in all bedrooms or potential sleeping areas, and guest rooms.",
+            "doc_date": "2026-10-04 (page fetched)",
+            "via": "page",
+            "verified": true
+          },
+          {
+            "url": "https://ecode360.com/36233481",
+            "quote": "A carbon monoxide alarm compliance application shall be submitted, and a carbon monoxide alarm inspection certificate obtained, when any one- or two-family home is sold, leased or otherwise made subject to a change of occupancy.",
+            "doc_date": "",
+            "via": "page",
+            "verified": null
+          },
+          {
+            "url": "https://ecode360.com/36233515",
+            "quote": "One- and Two-Family Homes—Forty-five dollars per property, and not per dwelling unit.",
+            "doc_date": "amended 9-17-2025 by Ord. No. O-25-17",
+            "via": "page",
+            "verified": null
+          },
+          {
+            "url": "https://www.westlongbranch.org/1221/Fire-Prevention-Bureau-Fire-Permit-Appli",
+            "quote": "James Miller, Fire Official",
+            "doc_date": "2026-10-04 (page fetched)",
+            "via": "page",
+            "verified": true
+          },
+          {
+            "url": "https://www.nj.gov/dca/dfs/pdf/fire%20directory_county%20summary/fire_code_enforcement_director.pdf",
+            "quote": "LEAID: 1353-001 West Long Branch Boro SMOKE DETECTOR COMPLIANCE Name: West Long Branch Constr Enf Auth. Municipal Fire Official James Miller Phone (732) 229-1756 ... Email jmiller@westlongbranch.org",
+            "doc_date": "2024-03 (survey date 3/11/2024)",
+            "via": "state_directory",
+            "verified": null
+          },
+          {
+            "url": "https://nj.gov/dca/dfs/pdf/ANNUAL%20REGISTRY/THIRD%20QUARTER%20LEA%20REGISTRY%202026.pdf",
+            "quote": "M West Long Branch Township",
+            "doc_date": "2026-07",
+            "via": "pdf",
+            "verified": true
+          }
+        ],
+        "confidence": "medium"
+      }
+    ],
+    "notes": "Fee conflict: the Borough web pages list the state fees ($45 / $90 / $161), but Borough Code 9-2.15 (amended 9-17-2025 by Ord. No. O-25-17) says $45 per property for 1 and 2 family homes in one paragraph and $100 / $150 / $250 by days before the change of occupancy in another, plus $50 for the second and later reinspections. Confirm which amount the online application charges. The LEA registry lists the Borough as \"West Long Branch Township\" (code M). The Fire Prevention Bureau page lists James Miller at 732-571-5957 ext. 115 and the bureau email fireprevention@westlongbranch.org (mailto link); the DCA directory lists jmiller@westlongbranch.org. The Borough pages do not mention a fire extinguisher."
+  },
+  "other_items": [
+    {
+      "label": "Open permits",
+      "detail": "All building permits must be closed out with the Building Department (344 Broadway, Long Branch, 732-571-5690) before the housing inspection is scheduled.",
+      "source_url": "https://www.westlongbranch.org/1219/Housing-Residential-Certificate-of-Occup"
+    },
+    {
+      "label": "Chimney Level II certification",
+      "detail": "A sale requires a Level II chimney certification for wood-burning fireplaces (direct-vent and ventless units are exempt), or an invoice from a certified chimney company showing the fireplace is sealed top and bottom.",
+      "source_url": "https://www.westlongbranch.org/1219/Housing-Residential-Certificate-of-Occup"
+    },
+    {
+      "label": "Alarm system registration",
+      "detail": "If the home has an alarm, it must be registered with the Police Department; a monitored alarm needs an Alarm Monitoring Certificate.",
+      "source_url": "https://www.westlongbranch.org/DocumentCenter/View/347/wlb_housing_prep_for_inspec"
+    }
+  ],
+  "open_questions": [
+    "Is the CO fee for a sale $100 (web page) or $200 (Borough Code as amended 9-17-2025)?",
+    "Which smoke/CO fee does the online application charge: $45 / $90 / $161 (web page) or $100 / $150 / $250 (Borough Code)?",
+    "Is a 2 family home charged per unit for the CO?"
+  ],
+  "checked_at": "2026-10-04",
+  "verification": {
+    "fees": 10,
+    "fee_ok": 4,
+    "fee_bad": 0,
+    "fee_unchecked": 6,
+    "quotes": 18,
+    "q_ok": 13,
+    "q_bad": 0,
+    "q_unchecked": 5
+  }
+}

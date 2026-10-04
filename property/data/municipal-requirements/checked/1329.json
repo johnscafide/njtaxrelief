@@ -1,0 +1,213 @@
+{
+  "municipality_code": "1329",
+  "municipality": "Manasquan Borough",
+  "county": "MONMOUTH",
+  "checked_at": "2026-10-04",
+  "resale_co": {
+    "status": "required",
+    "name": "Real Property Transfer Permit (Transfer Certificate of Occupancy)",
+    "issued_by": "Borough of Manasquan Code Enforcement Official",
+    "lead_time": "The code says a permit or a written denial is issued within 10 days of a complete application, fee and the inspection being scheduled. Applying within 3 business days of the inspection costs more.",
+    "valid_for": "Not stated. A temporary transfer permit may be issued for up to 90 days when the home substantially complies.",
+    "requirements": [
+      "Inspection showing the home is fit for occupancy under the Borough Property Maintenance Code (Chapter 13)",
+      "Adequate toilet and bathing facilities",
+      "Fire-rated door between the house and garage, and fire code sheetrock in a garage that adjoins or sits under living space",
+      "No fire hazards or electrical hazards",
+      "Smoke detectors on each floor and in the basement; carbon monoxide detectors where there are fuel-burning appliances or an attached garage",
+      "Portable fire extinguisher per N.J.S.A. 52:27D-198.1 (code still lists it)",
+      "Sidewalks, driveway aprons and curbs in good repair and safe condition",
+      "The inspection report records water meters and remote readers, number of units and kitchens, and any sump pump and where it discharges",
+      "Application in affidavit form with owner, buyer, representative, number of future occupants and sale price",
+      "A separate fee for each unit on the property"
+    ],
+    "fees": [
+      {
+        "label": "Real property transfer permit, initial inspection (per unit)",
+        "amount": "$175",
+        "quote": "Initial inspection | $175 each unit",
+        "source_url": "https://ecode360.com/MA0368",
+        "verified": null
+      },
+      {
+        "label": "Initial inspection applied for within 3 business days of the inspection (per unit)",
+        "amount": "$250",
+        "quote": "Initial inspection applied for within 3 business days (prior to inspection) | $250 each unit",
+        "source_url": "https://ecode360.com/MA0368",
+        "verified": null
+      },
+      {
+        "label": "Reinspection (per unit)",
+        "amount": "$300",
+        "quote": "Reinspection fee | $300 each unit",
+        "source_url": "https://ecode360.com/MA0368",
+        "verified": null
+      }
+    ],
+    "how_to_apply": "Apply online through the Borough's SDL Portal (Rental Certificate & Real Estate Transfer), linked from the Code Enforcement page; an SDL account is needed. The fee is paid when the application is filed and is not refundable. The real estate agent must tell the seller and buyer in writing, within 10 days of the agreement of sale, that a transfer permit is needed. Borough Hall: 201 East Main Street, Manasquan NJ 08736, 732-223-0544.",
+    "application_url": "https://www.sdlportal.com/towns/nj/monmouth/manasquan/requests/certificate",
+    "department_url": "https://www.manasquan-nj.gov/codeenforcement",
+    "phone": "732-223-0544",
+    "email": "",
+    "contact_name": "",
+    "contact_title": "",
+    "evidence": [
+      {
+        "url": "https://ecode360.com/MA0368",
+        "quote": "No person, firm or corporation shall convey, grant or otherwise transfer title to real property with a residential, business or commercial structure or improvement thereon or permit the same to be sold without first obtaining a real property transfer permit",
+        "doc_date": "2026-10-04 (page fetched)",
+        "via": "page",
+        "verified": null
+      },
+      {
+        "url": "https://ecode360.com/MA0368",
+        "quote": "The application fee for a real property transfer permit shall be paid at the time the application is filed and shall not be refundable. A separate fee shall be paid for each residential, business or commercial unit on the real property.",
+        "doc_date": "2026-10-04 (page fetched)",
+        "via": "page",
+        "verified": null
+      },
+      {
+        "url": "https://ecode360.com/MA0368",
+        "quote": "Sidewalks, driveway aprons and curbs shall be in good repair and in a safe condition.",
+        "doc_date": "2026-10-04 (page fetched)",
+        "via": "page",
+        "verified": null
+      },
+      {
+        "url": "https://ecode360.com/MA0368",
+        "quote": "The Code Enforcement Official shall have the discretion to issue a temporary real property transfer permit for a period not to exceed 90 days if the structure substantially complies with the criteria established in this section.",
+        "doc_date": "2026-10-04 (page fetched)",
+        "via": "page",
+        "verified": null
+      },
+      {
+        "url": "https://www.manasquan-nj.gov/codeenforcement",
+        "quote": "Rental Certificate & Real Estate Transfer: SDL Portal",
+        "doc_date": "2026-10-04 (page fetched)",
+        "via": "page",
+        "verified": true
+      }
+    ],
+    "confidence": "high",
+    "notes": "Borough Code Chapter 14, Section 14-11 (Real Property Transfer Permit) and the Chapter 16 fee table (14-11.4, amended 5-17-2021 by Ord. No. 2349-21) were read in full through the ecode360 print view. The old Borough page 'Transfer Certificate of Occupancy' (manasquan-nj.gov/node/222) no longer loads after the site redesign. The Code Enforcement page lists staff in a script-loaded block that could not be read, so no name or email is given; the Borough Hall number is used. The ordinance code still lists a portable fire extinguisher. Rental certificates are a separate rental program."
+  },
+  "fire_cert": {
+    "requirements": [
+      "Smoke detectors on each floor and in the basement, UL listed",
+      "Carbon monoxide detectors in homes with fuel-burning appliances or an attached garage",
+      "Portable fire extinguisher (Borough code still lists it)"
+    ],
+    "authorities": [
+      {
+        "name": "Borough of Manasquan Code Enforcement (smoke and CO detectors are checked in the Real Property Transfer Permit inspection)",
+        "type": "municipal_code_enforcement",
+        "area_served": "Entire borough",
+        "lead_time": "Same as the transfer permit inspection.",
+        "fees": [],
+        "how_to_apply": "Part of the Real Estate Transfer request on the Borough's SDL Portal. Confirm with Code Enforcement whether a separate smoke/CO certificate (CSACMAPFEC) and fee apply.",
+        "application_url": "https://www.sdlportal.com/towns/nj/monmouth/manasquan/requests/certificate",
+        "department_url": "https://www.manasquan-nj.gov/codeenforcement",
+        "phone": "732-223-0544",
+        "email": "",
+        "contact_name": "",
+        "contact_title": "",
+        "evidence": [
+          {
+            "url": "https://ecode360.com/MA0368",
+            "quote": "Smoke detectors capable of sensing visible and invisible particles of combustion shall be required on each floor and the basement area in all principal structures on a lot.",
+            "doc_date": "2026-10-04 (page fetched)",
+            "via": "page",
+            "verified": null
+          },
+          {
+            "url": "https://ecode360.com/MA0368",
+            "quote": "this chapter shall be enforced by the Board of Fire Commissioners of Manasquan Fire District #1, County of Monmouth and State of New Jersey, which shall be known for the purposes of the Act as the Bureau of Fire Prevention.",
+            "doc_date": "2026-10-04 (page fetched)",
+            "via": "page",
+            "verified": null
+          },
+          {
+            "url": "https://ecode360.com/MA0368",
+            "quote": "within the Borough of Manasquan, other than owner-occupied one-family and two-family dwellings",
+            "doc_date": "2026-10-04 (page fetched)",
+            "via": "page",
+            "verified": null
+          }
+        ],
+        "confidence": "medium"
+      },
+      {
+        "name": "Manasquan Fire District No. 1, Bureau of Fire Prevention (Fire Marshal)",
+        "type": "fire_district",
+        "area_served": "Entire borough",
+        "lead_time": "",
+        "fees": [],
+        "how_to_apply": "No smoke/CO resale certificate form or fee is posted on the Fire District's Fire Bureau page. Call the Fire Bureau at (732) 223-1599 to confirm who issues the certificate.",
+        "application_url": "",
+        "department_url": "https://www.manasquanfire.org/fire-bureau",
+        "phone": "(732) 223-1599",
+        "email": "squanfiremarshal@yahoo.com",
+        "contact_name": "Christopher Barkalow",
+        "contact_title": "Fire Official",
+        "evidence": [
+          {
+            "url": "https://www.manasquanfire.org/",
+            "quote": "The Manasquan Fire Bureau’s job is to enforce the New Jersey Uniform Fire Code and all local codes throughout the borough.",
+            "doc_date": "2026-10-04 (page fetched)",
+            "via": "page",
+            "verified": true
+          },
+          {
+            "url": "https://www.nj.gov/dca/dfs/pdf/fire%20directory_county%20summary/fire_code_enforcement_director.pdf",
+            "quote": "LEAID: 1327-001 Enf Auth. District Fire Official Christopher Barkalow Phone (732) 223-1599 ... Email squanfiremarshal@yahoo.com",
+            "doc_date": "2026 (survey date 2/5/2026)",
+            "via": "state_directory",
+            "verified": null
+          },
+          {
+            "url": "https://nj.gov/dca/dfs/pdf/ANNUAL%20REGISTRY/THIRD%20QUARTER%20LEA%20REGISTRY%202026.pdf",
+            "quote": "D Manasquan Borough (1)",
+            "doc_date": "2026-07",
+            "via": "pdf",
+            "verified": true
+          }
+        ],
+        "confidence": "low"
+      }
+    ],
+    "notes": "Who issues the smoke/CO certificate is not clear online. The NJ DCA LEA registry lists Manasquan Fire District No. 1 as the fire code enforcing agency, but the Borough code says the district bureau covers buildings other than owner-occupied one and two family homes, and the Borough's transfer permit inspection checks smoke and CO detectors and an extinguisher. The state fire directory lists Manasquan Borough Code Enforcement next to the Fire District in its compliance columns. No fee for a smoke/CO certificate was found on any official page. The extinguisher was dropped from the state sale certificate in February 2025 (P.L.2025, c.19)."
+  },
+  "other_items": [
+    {
+      "label": "Sidewalks, aprons and curbs",
+      "detail": "The transfer permit inspection requires sidewalks, driveway aprons and curbs to be in good repair and safe.",
+      "source_url": "https://ecode360.com/MA0368"
+    },
+    {
+      "label": "Water meters and sump pump",
+      "detail": "The transfer inspection report records the water meters and remote reading devices and any sump pump and where it discharges.",
+      "source_url": "https://ecode360.com/MA0368"
+    },
+    {
+      "label": "Agent notice",
+      "detail": "The real estate agent must notify the seller and buyer in writing within 10 days of the agreement of sale that a transfer permit is needed.",
+      "source_url": "https://ecode360.com/MA0368"
+    }
+  ],
+  "open_questions": [
+    "Does Borough Code Enforcement issue the smoke/CO certificate as part of the transfer permit, or does the buyer or seller also need one from Manasquan Fire District No. 1? What is the fee?",
+    "How long is a transfer permit valid, and how far out are inspections booking?",
+    "Is a fire extinguisher still checked after P.L.2025, c.19?",
+    "Is a final water meter reading needed before closing?"
+  ],
+  "verification": {
+    "fees": 3,
+    "fee_ok": 0,
+    "fee_bad": 0,
+    "fee_unchecked": 3,
+    "quotes": 11,
+    "q_ok": 3,
+    "q_bad": 0,
+    "q_unchecked": 8
+  }
+}

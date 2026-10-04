@@ -1,0 +1,236 @@
+{
+  "municipality_code": "1304",
+  "municipality": "Asbury Park",
+  "county": "MONMOUTH",
+  "resale_co": {
+    "status": "required",
+    "name": "Certificate of Resale Compliance (formerly Transfer of Title certificate, TOT)",
+    "issued_by": "City of Asbury Park Department of Community Development / Code Enforcement",
+    "lead_time": "",
+    "valid_for": "",
+    "requirements": [
+      "Application and inspection before the closing of title",
+      "Inspection against the City's Property Maintenance Code (interior and exterior checklist: paint, windows and screens, handrails, GFI outlets, heating, plumbing, sidewalks and steps, house numbers and more)",
+      "Smoke detector on each level and within 10 feet of every bedroom; photoelectric within 5 feet of a kitchen or bathroom",
+      "Carbon monoxide detectors outside all bedrooms, within 10 feet of every bedroom",
+      "All open construction (UCC) permits must have a passed final inspection on file before the inspection",
+      "Fireplaces and wood stoves certified by a certified chimney sweep",
+      "The office checks open permits, available COs and the number of units with the Tax Assessor, Clerk, Code Enforcement and Construction offices",
+      "A buyer of a property with an open compliance order or notice of violation must sign a notarized statement accepting responsibility for the repairs (Code PM-106.5)",
+      "Application by someone other than the owner or registered agent needs a notarized authorization letter"
+    ],
+    "fees": [
+      {
+        "label": "Certificate of Resale Compliance, sale of a single-family dwelling or condo unit",
+        "amount": "$125.00",
+        "quote": "Sale of a Single Family or a",
+        "source_url": "https://www.cityofasburypark.com/DocumentCenter/View/187/Certificate-or-Resale-Compliance-Application-PDF",
+        "verified": true
+      },
+      {
+        "label": "Certificate of Resale Compliance, sale of a two-family dwelling or two dwellings on one lot",
+        "amount": "$150.00",
+        "quote": "Sale of a Two-Family/Two",
+        "source_url": "https://www.cityofasburypark.com/DocumentCenter/View/187/Certificate-or-Resale-Compliance-Application-PDF",
+        "verified": true
+      },
+      {
+        "label": "Transfer of title, sale of a single-family dwelling (City Code 12-7.8b)",
+        "amount": "$125.00",
+        "quote": "Sale of a Single-Family Dwelling $125.00",
+        "source_url": "https://ecode360.com/34670931",
+        "verified": null
+      },
+      {
+        "label": "Transfer of title, sale of a two-family dwelling or two dwellings on one lot (City Code 12-7.8b)",
+        "amount": "$150.00",
+        "quote": "Sale of a Two-Family Dwelling or Two Dwellings on One Lot $150.00",
+        "source_url": "https://ecode360.com/34670931",
+        "verified": null
+      },
+      {
+        "label": "Transfer of title certificate, single family or condo (Ordinance 3042 fee schedule)",
+        "amount": "$125.00",
+        "quote": "$125.00 Sale of a Single Family or a Condo Unit",
+        "source_url": "https://www.cityofasburypark.com/DocumentCenter/View/191/Code-Enforcement-Fee-Schedule-PDF",
+        "verified": true
+      },
+      {
+        "label": "Transfer of title certificate, two-family (Ordinance 3042 fee schedule)",
+        "amount": "$150.00",
+        "quote": "$150.00 Sale of a Two-Family or Two Dwelling Units on One Lot",
+        "source_url": "https://www.cityofasburypark.com/DocumentCenter/View/191/Code-Enforcement-Fee-Schedule-PDF",
+        "verified": true
+      }
+    ],
+    "how_to_apply": "Create an account on the SDL Portal (www.sdlportal.com, town Asbury Park, Monmouth County), choose Requests, then Certificate Registration, upload the City's fillable Certificate of Resale Compliance application and pay online. Or file the application at Code Enforcement, City Hall, 1 Municipal Plaza, Asbury Park, NJ 07712, with a non-refundable check or money order (no cash).",
+    "application_url": "https://www.cityofasburypark.com/DocumentCenter/View/187/Certificate-or-Resale-Compliance-Application-PDF",
+    "department_url": "https://www.cityofasburypark.com/239/Code-Enforcement",
+    "phone": "732-502-5742",
+    "email": "tamica.smith@cityofasburypark.com",
+    "contact_name": "Tamica Smith",
+    "contact_title": "Code Enforcement contact named on the City's Code Enforcement page (no title shown)",
+    "evidence": [
+      {
+        "url": "https://www.cityofasburypark.com/239/Code-Enforcement",
+        "quote": "To purchase or sell a property, a Certificate of Resale Compliance application must be completed before closing.",
+        "doc_date": "2026-10-04 (page fetched)",
+        "via": "page",
+        "verified": true
+      },
+      {
+        "url": "https://www.cityofasburypark.com/239/Code-Enforcement",
+        "quote": "Certificates of Resale Compliance (formerly known as Transfer of Title)",
+        "doc_date": "2026-10-04 (page fetched)",
+        "via": "page",
+        "verified": true
+      },
+      {
+        "url": "https://www.cityofasburypark.com/DocumentCenter/View/187/Certificate-or-Resale-Compliance-Application-PDF",
+        "quote": "For all resales of residential or commercial properties, as per Ordinance 12-7.1 et seq., a proposed sale requires an application and inspection for a T.O.T. prior to the closing of title.",
+        "doc_date": "2025-08-11 (PDF modified)",
+        "via": "pdf",
+        "verified": true
+      },
+      {
+        "url": "https://www.cityofasburypark.com/DocumentCenter/View/187/Certificate-or-Resale-Compliance-Application-PDF",
+        "quote": "A non-refundable fee must be paid at the time of application. The payment can be made by CHECK or MONEY ORDER, cash will not be accepted.",
+        "doc_date": "2025-08-11 (PDF modified)",
+        "via": "pdf",
+        "verified": true
+      },
+      {
+        "url": "https://www.cityofasburypark.com/DocumentCenter/View/187/Certificate-or-Resale-Compliance-Application-PDF",
+        "quote": "All open UCC permits must have a completed, passed final inspection on file in the Construction Department prior to inspection",
+        "doc_date": "2025-08-11 (PDF modified)",
+        "via": "pdf",
+        "verified": true
+      },
+      {
+        "url": "https://www.cityofasburypark.com/DocumentCenter/View/187/Certificate-or-Resale-Compliance-Application-PDF",
+        "quote": "Please take notice that the approved Certificate of Resale Compliance is acceptable as a Certificate of Rental Compliance for an Owner/Occupant.",
+        "doc_date": "2025-08-11 (PDF modified)",
+        "via": "pdf",
+        "verified": true
+      },
+      {
+        "url": "https://ecode360.com/34670913",
+        "quote": "Transfers of title may take place after application of a certificate of inspection for occupancy, but no occupancy",
+        "doc_date": "2026-10-04 (City Code 12-7.1, read via ecode360 print view)",
+        "via": "page",
+        "verified": null
+      },
+      {
+        "url": "https://www.cityofasburypark.com/DocumentCenter/View/3412/How-to-Open-an-SDL-Account-and-Submit-CO-and-TOT-Applications",
+        "quote": "Property Owners have the capability to fill out, submit an application and pay online for Certificates of Occupancy and Transfer of Titles.",
+        "doc_date": "2026-10-04 (page fetched)",
+        "via": "pdf",
+        "verified": null
+      },
+      {
+        "url": "https://www.cityofasburypark.com/239/Code-Enforcement",
+        "quote": "Contact the Department of Code Enforcement Monday to Friday from 9 a.m. to 5 p.m. at 732-502-5742",
+        "doc_date": "2026-10-04 (page fetched)",
+        "via": "page",
+        "verified": true
+      }
+    ],
+    "confidence": "high",
+    "notes": "City Code 12-7.1 bars transfer of title or occupancy of any dwelling without a certificate of inspection permitting occupancy, and says title may transfer once the application is filed but no one may occupy until the certificate is issued. The current application (modified August 2025) and the Code Enforcement page call it a Certificate of Resale Compliance (formerly Transfer of Title). Fees match across the application, City Code 12-7.8 and the Ordinance 3042 fee schedule (2013): $125.00 single family or condo, $150.00 two-family or two dwellings on one lot. The $20 Lead Hazard Assistance Fund fee and $30 municipal fee on the form apply to lead-safe certificates for rental units, which are rental-only. Rental certificates, short-term rental permits and landlord registration are rental-only. The checklist also says to avoid a re-inspection fee by fixing problems first; no re-inspection fee amount for sales is published."
+  },
+  "fire_cert": {
+    "requirements": [
+      "Smoke detector on each level of the unit and within ten feet of every bedroom",
+      "Smoke detectors within 5 feet of a kitchen or bathroom must be photoelectric",
+      "Carbon monoxide detectors outside all bedrooms, within ten feet of every bedroom"
+    ],
+    "authorities": [
+      {
+        "name": "City of Asbury Park Code Enforcement Department (CSDCMAC inspections), for the Asbury Park Fire Department local enforcing agency",
+        "type": "municipal_building_department",
+        "area_served": "Entire city",
+        "lead_time": "",
+        "fees": [],
+        "how_to_apply": "City Code says smoke detector and carbon monoxide alarm compliance (CSDCMAC) inspections are done by the City's Code Enforcement Department. No separate smoke/CO application or fee schedule was found online; ask Code Enforcement (732-502-5742) whether it is part of the resale compliance inspection or a separate application.",
+        "application_url": "",
+        "department_url": "https://www.cityofasburypark.com/239/Code-Enforcement",
+        "phone": "732-502-5742",
+        "email": "",
+        "contact_name": "Tawheshia M Gates",
+        "contact_title": "Fire Official, per state directory (Inspector Tee Gates on the Fire Department page)",
+        "evidence": [
+          {
+            "url": "https://ecode360.com/50586684",
+            "quote": "Certificate of smoke detector and carbon monoxide alarm compliance (CSDCMAC) inspections shall be conducted by the City's Code Enforcement Department.",
+            "doc_date": "2026-10-04 (City Code 14-1.7i, read via ecode360 print view)",
+            "via": "page",
+            "verified": null
+          },
+          {
+            "url": "https://nj.gov/dca/dfs/pdf/ANNUAL%20REGISTRY/THIRD%20QUARTER%20LEA%20REGISTRY%202026.pdf",
+            "quote": "F Asbury Park City",
+            "doc_date": "2026-07",
+            "via": "pdf",
+            "verified": true
+          },
+          {
+            "url": "https://www.nj.gov/dca/dfs/pdf/fire%20directory_county%20summary/fire_code_enforcement_director.pdf",
+            "quote": "LEAID: 1303-001 Asbury Park City SMOKE DETECTOR COMPLIANCE Name: Asbury Park City Code Enf Enf Auth. Fire Dept Addr: 1 Municipal Pl Asbury Park NJ 07712 Fire Official Tawheshia M Gates Phone (732) 775-2100",
+            "doc_date": "1/14/2025 (survey date)",
+            "via": "state_directory",
+            "verified": null
+          },
+          {
+            "url": "https://www.nj.gov/dca/dfs/pdf/fire%20directory_county%20summary/fire_code_enforcement_director.pdf",
+            "quote": "Phone (732) 774-7400 Fax (732)775-7681 Email tee.gates@cityofasburypark.com",
+            "doc_date": "1/14/2025 (survey date)",
+            "via": "state_directory",
+            "verified": null
+          },
+          {
+            "url": "https://www.cityofasburypark.com/171/Fire-Department",
+            "quote": "For questions, contact Inspector Tee Gates at 732-774-7400",
+            "doc_date": "2026-10-04 (page fetched)",
+            "via": "page",
+            "verified": true
+          }
+        ],
+        "confidence": "medium"
+      }
+    ],
+    "notes": "Asbury Park's fire code LEA is the Fire Department (registry code F), but City Code 14-1.7i assigns smoke detector and carbon monoxide alarm compliance (CSDCMAC) inspections to the City's Code Enforcement Department, and the state directory lists 'Asbury Park City Code Enf' at 1 Municipal Plaza, (732) 775-2100, as the smoke detector compliance office. The resale compliance checklist includes smoke and CO detectors, so the smoke/CO check may be done during the resale inspection, but no separate CSDCMAC fee was found in the City Code or on the City's site. The Fire Department page lists Inspector Tee Gates at 732-774-7400 and fire@cityofasburypark.com. The City's materials do not mention a fire extinguisher; the state dropped it from the sale certificate in February 2025 (P.L.2025, c.19)."
+  },
+  "other_items": [
+    {
+      "label": "Open permits",
+      "detail": "All open construction (UCC) permits must have a passed final inspection on file with the Construction Department before the resale inspection, and work done without permits must be permitted and inspected.",
+      "source_url": "https://www.cityofasburypark.com/DocumentCenter/View/187/Certificate-or-Resale-Compliance-Application-PDF"
+    },
+    {
+      "label": "Open violations (Code PM-106.5)",
+      "detail": "If the owner has a compliance order or notice of violation, the property cannot be sold until it is fixed or the buyer signs a notarized statement accepting responsibility for the repairs.",
+      "source_url": "https://www.cityofasburypark.com/DocumentCenter/View/187/Certificate-or-Resale-Compliance-Application-PDF"
+    },
+    {
+      "label": "Multiple dwellings (3 or more units)",
+      "detail": "A buyer of a hotel or multiple dwelling must register with the NJ DCA Bureau of Housing Inspection within 30 days of the transfer.",
+      "source_url": "https://www.cityofasburypark.com/DocumentCenter/View/187/Certificate-or-Resale-Compliance-Application-PDF"
+    }
+  ],
+  "open_questions": [
+    "Is the smoke/CO certificate (CSDCMAC) issued as part of the Certificate of Resale Compliance inspection, or is there a separate application and fee?",
+    "How long before closing should sellers apply, and how long is the Certificate of Resale Compliance valid?",
+    "What is the re-inspection fee for a failed resale inspection?"
+  ],
+  "checked_at": "2026-10-04",
+  "verification": {
+    "fees": 6,
+    "fee_ok": 4,
+    "fee_bad": 0,
+    "fee_unchecked": 2,
+    "quotes": 14,
+    "q_ok": 9,
+    "q_bad": 0,
+    "q_unchecked": 5
+  }
+}

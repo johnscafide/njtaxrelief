@@ -1,0 +1,231 @@
+{
+  "municipality_code": "1306",
+  "municipality": "Avon-by-the-Sea Borough",
+  "county": "MONMOUTH",
+  "resale_co": {
+    "status": "required",
+    "name": "Certificate of Occupancy for Title Transfer (certificate of inspection, sale or transfer)",
+    "issued_by": "Borough of Avon-by-the-Sea Fire Bureau / housing inspection (Code Enforcement)",
+    "lead_time": "Apply at least 14 days ahead; requests under 14 days may be charged an additional fee.",
+    "valid_for": "",
+    "requirements": [
+      "Housing inspection by the Fire Bureau; no Certificate of Occupancy is issued while any violations remain",
+      "Both the Certificate of Occupancy and Transfer of Title application and the smoke detector / carbon monoxide alarm compliance application must be submitted",
+      "Smoke detectors (10-year sealed if not hard wired) and carbon monoxide detector",
+      "Outside conditions such as porches, landings, sidewalks and driveway may need repair before the certificate is issued"
+    ],
+    "fees": [
+      {
+        "label": "Certificate of inspection, sale or transfer, one family dwelling (Code 88-4)",
+        "amount": "$75.00",
+        "quote": "One family dwelling $75.00",
+        "source_url": "https://ecode360.com/35035920",
+        "verified": null
+      },
+      {
+        "label": "Certificate of inspection, sale or transfer, multifamily or apartments (Code 88-4)",
+        "amount": "$90.00",
+        "quote": "Multifamily or apartments $90.00",
+        "source_url": "https://ecode360.com/35035920",
+        "verified": null
+      },
+      {
+        "label": "Reinspection if necessary (Code 88-4)",
+        "amount": "$25.00",
+        "quote": "Reinspection if necessary $25.00",
+        "source_url": "https://ecode360.com/35035920",
+        "verified": null
+      }
+    ],
+    "how_to_apply": "Pick up the Certificate of Occupancy & Transfer of Title application and the smoke/CO compliance application at the Borough Municipal Building, 301 Main Street (8:30 am to 4:30 pm), fill out both, and drop off or mail them with a check for the right amount; the inspection is then scheduled. Questions: firebureau@avonbytheseanj.com.",
+    "application_url": "",
+    "department_url": "https://www.avonbytheseanj.com/departments/code_enforcement/code_fire_marshal.php",
+    "phone": "(732) 502-4518",
+    "email": "firebureau@avonbytheseanj.com",
+    "contact_name": "Paul Murphy",
+    "contact_title": "House inspection (Fire Bureau); listed as Fire Official Paul A Murphy, Jr in the state directory",
+    "evidence": [
+      {
+        "url": "https://www.avonbytheseanj.com/departments/code_enforcement/code_fire_marshal.php",
+        "quote": "Housing License - Title Transfer - Yearly Rentals - Winter/Summer Rentals",
+        "doc_date": "2026-10-04 (page fetched)",
+        "via": "page",
+        "verified": true
+      },
+      {
+        "url": "https://www.avonbytheseanj.com/departments/code_enforcement/code_fire_marshal.php",
+        "quote": "Certificate of Occupancy Inspection, Sales and Rentals:",
+        "doc_date": "2026-10-04 (page fetched)",
+        "via": "page",
+        "verified": true
+      },
+      {
+        "url": "https://www.avonbytheseanj.com/departments/code_enforcement/code_fire_marshal.php",
+        "quote": "A period of 14 days is a minimum that will be required for this office, due to the limited scheduled office hours.",
+        "doc_date": "2026-10-04 (page fetched)",
+        "via": "page",
+        "verified": true
+      },
+      {
+        "url": "https://www.avonbytheseanj.com/departments/code_enforcement/code_fire_marshal.php",
+        "quote": "No housing unit will be issued a Certificate of Occupancy while any outstanding violations exist, and no housing unit will be allowed to be occupied prior to the issuance of a Certificate of Occupancy.",
+        "doc_date": "2026-10-04 (page fetched)",
+        "via": "page",
+        "verified": true
+      },
+      {
+        "url": "https://www.avonbytheseanj.com/departments/code_enforcement/code_fire_marshal.php",
+        "quote": "Note: both forms below must be submitted before a C of O can be issued.",
+        "doc_date": "2026-10-04 (page fetched)",
+        "via": "page",
+        "verified": true
+      },
+      {
+        "url": "https://www.avonbytheseanj.com/departments/code_enforcement/code_fire_marshal.php",
+        "quote": "Paul Murphy, House inspection only",
+        "doc_date": "2026-10-04 (page fetched)",
+        "via": "page",
+        "verified": true
+      },
+      {
+        "url": "https://ecode360.com/35035920",
+        "quote": "The fees for certificates of inspection shall be as follows:",
+        "doc_date": "2026-10-04 (Code 88-4, Ord. 29-1997, read via ecode360 print view)",
+        "via": "page",
+        "verified": null
+      },
+      {
+        "url": "https://www.nj.gov/dca/dfs/pdf/fire%20directory_county%20summary/fire_code_enforcement_director.pdf",
+        "quote": "LEAID: 1305-001 Avon By The Sea Boro SMOKE DETECTOR COMPLIANCE Name: Avon By the Sea Boro Enf Auth. Fire Dept Addr: 301 Main St Avon NJ 07717 Fire Official Paul A Murphy, Jr Phone (732) 502-4518",
+        "doc_date": "2/6/2026 (survey date)",
+        "via": "state_directory",
+        "verified": null
+      }
+    ],
+    "confidence": "high",
+    "notes": "The Borough's Fire Bureau/Rental & Resale CO page covers Title Transfer and says both the C of O / Transfer of Title application and the smoke/CO application must be submitted before a C of O is issued. Fees come from Borough Code 88-4 (added 1997): sale or transfer $75.00 one family, $90.00 multifamily or apartments, $25.00 reinspection; the code text was read through the ecode360 print view. The page's link to the combined application form ('CO Form.pdf') returned an error when checked, so application_url is blank. The page lists no phone; (732) 502-4518 is the Fire Bureau number from the state fire directory. Rental certificates, landlord registration and the business/rental insurance registration are rental-only."
+  },
+  "fire_cert": {
+    "requirements": [
+      "Smoke detectors required; 10-year sealed detectors if not hard wired",
+      "Carbon monoxide detector",
+      "Fire extinguisher on all sales and rentals: 5 to 10 lb ABC, on the manufacturer's bracket, within 10 feet of the kitchen, top no higher than 5 feet, near an exit path, with the manual and instructions visible (page still lists it)"
+    ],
+    "authorities": [
+      {
+        "name": "Avon-by-the-Sea Fire Bureau (Borough fire official)",
+        "type": "municipal_fire_bureau",
+        "area_served": "Entire borough",
+        "lead_time": "Fee depends on business days before the change of occupant. The office asks for at least 14 days for inspections.",
+        "fees": [
+          {
+            "label": "Smoke/CO certificate (CSDCMAC), more than 10 business days before the change of occupant",
+            "amount": "$45.00",
+            "quote": "1. Requests for a CSDCMAC received more than 10 business days prior to the change of occupant: $ 45.00",
+            "source_url": "https://www.avonbytheseanj.com/departments/code_enforcement/code_fire_marshal.php",
+            "verified": true
+          },
+          {
+            "label": "Four to 10 business days before",
+            "amount": "$90.00",
+            "quote": "2. Requests for a CSDCMAC received four to 10 business days prior to the change of occupant: $ 90.00",
+            "source_url": "https://www.avonbytheseanj.com/departments/code_enforcement/code_fire_marshal.php",
+            "verified": true
+          },
+          {
+            "label": "Fewer than four business days before",
+            "amount": "$161.00",
+            "quote": "3. Requests for a CSDCMAC received fewer than four business days prior to the change of occupant: $ 161.00",
+            "source_url": "https://www.avonbytheseanj.com/departments/code_enforcement/code_fire_marshal.php",
+            "verified": true
+          },
+          {
+            "label": "Smoke detector and CO inspection, R-3 dwellings, more than 10 business days (Code 100-8C)",
+            "amount": "$45",
+            "quote": "Applications received more than 10 business days prior to change of occupant: $45.",
+            "source_url": "https://ecode360.com/35036177",
+            "verified": null
+          },
+          {
+            "label": "Four to 10 business days (Code 100-8C)",
+            "amount": "$90",
+            "quote": "Applications received four to 10 business days prior to the change of occupant: $90.",
+            "source_url": "https://ecode360.com/35036177",
+            "verified": null
+          },
+          {
+            "label": "Fewer than four business days (Code 100-8C)",
+            "amount": "$161",
+            "quote": "Applications received fewer than four business days prior to the change of occupant: $161.",
+            "source_url": "https://ecode360.com/35036177",
+            "verified": null
+          }
+        ],
+        "how_to_apply": "Submit the Certificate of Smoke Detector Carbon Monoxide Alarm Compliance application together with the C of O / Transfer of Title application at the Borough Municipal Building, 301 Main Street, with a check. Questions: firebureau@avonbytheseanj.com.",
+        "application_url": "",
+        "department_url": "https://www.avonbytheseanj.com/departments/code_enforcement/code_fire_marshal.php",
+        "phone": "(732) 502-4518",
+        "email": "firebureau@avonbytheseanj.com",
+        "contact_name": "Paul A Murphy, Jr",
+        "contact_title": "Fire Official, per state directory",
+        "evidence": [
+          {
+            "url": "https://www.avonbytheseanj.com/departments/code_enforcement/code_fire_marshal.php",
+            "quote": "Also, the sale or rental of any housing unit without a Smoke Defector or Carbon Monoxide Compliance Certificate is punishable by a $500.00 fine, according to the NJ Uniform Fire Code.",
+            "doc_date": "2026-10-04 (page fetched)",
+            "via": "page",
+            "verified": true
+          },
+          {
+            "url": "https://www.avonbytheseanj.com/departments/code_enforcement/code_fire_marshal.php",
+            "quote": "10 Year sealed detectors are required if not hard wired.",
+            "doc_date": "2026-10-04 (page fetched)",
+            "via": "page",
+            "verified": true
+          },
+          {
+            "url": "https://ecode360.com/35036177",
+            "quote": "Inspections of smoke detectors and carbon monoxide alarms in all R-3 dwellings as per the Uniform Fire Code as follows:",
+            "doc_date": "2026-10-04 (Code 100-8C, read via ecode360 print view)",
+            "via": "page",
+            "verified": null
+          },
+          {
+            "url": "https://nj.gov/dca/dfs/pdf/ANNUAL%20REGISTRY/THIRD%20QUARTER%20LEA%20REGISTRY%202026.pdf",
+            "quote": "F Avon-by-the-Sea Borough",
+            "doc_date": "2026-07",
+            "via": "pdf",
+            "verified": true
+          },
+          {
+            "url": "https://www.nj.gov/dca/dfs/pdf/fire%20directory_county%20summary/fire_code_enforcement_director.pdf",
+            "quote": "Email firebureau@avonbytheseanj.com",
+            "doc_date": "2/6/2026 (survey date)",
+            "via": "state_directory",
+            "verified": null
+          }
+        ],
+        "confidence": "high"
+      }
+    ],
+    "notes": "The Borough's Fire Bureau page and Borough Code 100-8C both list the state tiers $45 / $90 / $161. Code 100-9B also lists 'Smoke Detector Application and Certificate. $45.' The page still lists a fire extinguisher requirement for all sales and rentals; the state dropped it from the sale certificate in February 2025 (P.L.2025, c.19), so confirm with the Fire Bureau."
+  },
+  "other_items": [],
+  "open_questions": [
+    "Where is the current combined C of O / Transfer of Title and smoke/CO application form (the website link is broken)?",
+    "What extra fee applies to inspection requests made less than 14 days ahead?",
+    "Does the Borough still require a fire extinguisher at sale after P.L.2025, c.19?",
+    "How long is the title transfer C of O valid, and is a final water/sewer reading needed at closing (the Borough runs its own water/sewer utility)?"
+  ],
+  "checked_at": "2026-10-04",
+  "verification": {
+    "fees": 9,
+    "fee_ok": 3,
+    "fee_bad": 0,
+    "fee_unchecked": 6,
+    "quotes": 13,
+    "q_ok": 9,
+    "q_bad": 0,
+    "q_unchecked": 4
+  }
+}

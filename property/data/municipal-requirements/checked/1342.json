@@ -1,0 +1,159 @@
+{
+  "municipality_code": "1342",
+  "municipality": "Sea Bright Borough",
+  "county": "MONMOUTH",
+  "resale_co": {
+    "status": "required",
+    "name": "Certificate of Occupancy on resale (Residential, sale)",
+    "issued_by": "Borough of Sea Bright Code Enforcement Officer (C. O. Inspector)",
+    "lead_time": "",
+    "valid_for": "The certificate applies only to the occupancy for which it is issued. No new fee is charged for an inspection within three months of a previous paid application for the same unit.",
+    "requirements": [
+      "Inspection showing the dwelling is fit for human habitation under the New Jersey State Housing Code and complies with all other Borough ordinances",
+      "Dwelling must meet the Borough occupancy standards (minimum floor area per occupant and per sleeping room)",
+      "Fee paid to the Borough Clerk when the application is filed; not refundable",
+      "Smoke alarm / carbon monoxide alarm certificate for the sale (see fire certificate)"
+    ],
+    "fees": [
+      {
+        "label": "Certificate of occupancy, residential sale",
+        "amount": "$100",
+        "quote": "Residential, sale $100",
+        "source_url": "https://ecode360.com/8056032",
+        "verified": null
+      },
+      {
+        "label": "Certificate of occupancy reinspection, each",
+        "amount": "$25",
+        "quote": "Reinspection fee $25 (per reinspection)",
+        "source_url": "https://ecode360.com/8056032",
+        "verified": null
+      }
+    ],
+    "how_to_apply": "Get the certificate of occupancy application from the Borough (forms are kept at the office of the Borough Clerk, Borough Hall, 1099 Ocean Avenue) and file it with the $100 fee. The Code Enforcement Officer inspects the home. No online form is posted on the Borough website; call the office to schedule.",
+    "application_url": "",
+    "department_url": "https://www.seabrightnj.org/sbnj/Departments/Building%20Department/",
+    "phone": "732-842-0099 Ext. 130",
+    "email": "thaege@seabrightnj.org",
+    "contact_name": "Thomas Haege",
+    "contact_title": "Fire Marshal, Construction Official, Fire Subcode Official, C. O. Inspector and Code Enforcement Officer",
+    "evidence": [
+      {
+        "url": "https://ecode360.com/8056032",
+        "quote": "Certificates of occupancy required upon resale of existing homes for which a certificate of occupancy has previously been issued or required upon rental of homes or individual apartment units for which a certificate of occupancy has previously been issued shall be issued upon application to the Code Enforcement Officer.",
+        "doc_date": "",
+        "via": "page",
+        "verified": null
+      },
+      {
+        "url": "https://ecode360.com/8056032",
+        "quote": "No owner shall occupy or let to an occupant or occupants, nor shall any person or persons lease or occupy any vacant apartment, dwelling or lodging unit unless a certificate of occupancy, certifying that the apartment, dwelling or lodging unit is fit for human habitation under the standards set forth in the New Jersey State Housing Code, and that there is compliance with all other ordinances of the Borough, shall first be obtained from the Code Enforcement Officer.",
+        "doc_date": "",
+        "via": "page",
+        "verified": null
+      },
+      {
+        "url": "https://ecode360.com/8056032",
+        "quote": "The Code Enforcement Officer shall cause to be prepared appropriate application forms for such a certificate of occupancy, which forms shall be available to the applicants at the office of the Clerk of the Borough of Sea Bright.",
+        "doc_date": "",
+        "via": "page",
+        "verified": null
+      },
+      {
+        "url": "https://ecode360.com/8056032",
+        "quote": "no fee shall be charged for inspections made within a three-month period of a previous application with fee as to any particular apartment, dwelling or lodging unit.",
+        "doc_date": "2025-10-21 (fees last amended by Ord. No. 12-2025)",
+        "via": "page",
+        "verified": null
+      },
+      {
+        "url": "https://www.seabrightnj.org/sbnj/Departments/Borough%20Directory/",
+        "quote": "Haege, Thomas Fire Marshal Construction Official Fire Subcode Official C. O. Inspector Code Enforcement Officer Ext. 130",
+        "doc_date": "2026-10-04 (page fetched)",
+        "via": "page",
+        "verified": true
+      }
+    ],
+    "confidence": "high",
+    "notes": "Land Use chapter 130 (Sections 130-73, 130-74 and 130-79) was read in full through the ecode360 print view. The fee table (Section 130-74, last amended October 21, 2025 by Ord. No. 12-2025) lists certificates of occupancy: Residential, sale $100; Residential, rental $50; Reinspection $25; Commercial $100. The code says forms are at the Borough Clerk's office and the fee is paid to the Borough Clerk. The Borough website has no posted resale CO form or process page. Borough Hall main line is (732) 842-0099; Building Department Ext. 110. Rental CO, short-term rental registration and lead-safe inspections of rentals (Chapter 161) are rental programs, not resale requirements."
+  },
+  "fire_cert": {
+    "requirements": [
+      "Smoke alarms, carbon monoxide alarms and fire extinguisher per N.J.A.C. 5:70-2.3; the Borough publishes no local checklist"
+    ],
+    "authorities": [
+      {
+        "name": "Sea Bright Bureau of Fire Prevention (Office of the Fire Marshal)",
+        "type": "municipal_fire_bureau",
+        "area_served": "Entire borough",
+        "lead_time": "",
+        "fees": [],
+        "how_to_apply": "No online application or fee schedule is posted. Contact the Fire Marshal at Borough Hall, 1099 Ocean Avenue (732-842-0099 Ext. 130) to request the smoke and carbon monoxide alarm certificate inspection.",
+        "application_url": "",
+        "department_url": "https://www.seabrightnj.org/sbnj/Departments/Borough%20Directory/",
+        "phone": "732-842-0099 Ext. 130",
+        "email": "thaege@seabrightnj.org",
+        "contact_name": "Thomas Haege",
+        "contact_title": "Fire Marshal",
+        "evidence": [
+          {
+            "url": "https://ecode360.com/8055801",
+            "quote": "The Office of the Sea Bright Fire Marshal shall enforce this article. The local enforcing agency shall be the Bureau of Fire Prevention for the Borough of Sea Bright which is hereby created.",
+            "doc_date": "",
+            "via": "page",
+            "verified": null
+          },
+          {
+            "url": "https://ecode360.com/8055801",
+            "quote": "Fees required pursuant to the Uniform Fire Safety Act are on file in the office of the Construction Official, located at Borough Hall.",
+            "doc_date": "",
+            "via": "page",
+            "verified": null
+          },
+          {
+            "url": "https://www.seabrightnj.org/sbnj/Departments/Borough%20Directory/",
+            "quote": "Haege, Thomas Fire Marshal Construction Official Fire Subcode Official C. O. Inspector Code Enforcement Officer Ext. 130",
+            "doc_date": "2026-10-04 (page fetched)",
+            "via": "page",
+            "verified": true
+          },
+          {
+            "url": "https://nj.gov/dca/dfs/pdf/ANNUAL%20REGISTRY/THIRD%20QUARTER%20LEA%20REGISTRY%202026.pdf",
+            "quote": "M Sea Bright Borough",
+            "doc_date": "2026-07",
+            "via": "pdf",
+            "verified": true
+          },
+          {
+            "url": "https://www.nj.gov/dca/dfs/pdf/fire%20directory_county%20summary/fire_code_enforcement_director.pdf",
+            "quote": "LEAID: 1343-001 Sea Bright Boro SMOKE DETECTOR COMPLIANCE Name: Sea Bright Boro Housing Dept Enf Auth. Municipal Fire Official Tom Haege Phone (732) 842-0099 Email thaege.otfm@verizon.net",
+            "doc_date": "2013-09-09 (survey date)",
+            "via": "state_directory",
+            "verified": null
+          }
+        ],
+        "confidence": "medium"
+      }
+    ],
+    "notes": "Chapter 108 (Fire Prevention) makes the Bureau of Fire Prevention, headed by the Fire Marshal, the local enforcing agency, and says Uniform Fire Safety Act fees are on file in the Construction Official's office; no smoke/CO certificate fee is published online. The state fire directory entry is old (survey 9/9/2013) and lists a Verizon email for Tom Haege; the Borough directory lists thaege@seabrightnj.org. The state directory names the smoke detector compliance office as the Sea Bright Housing Dept. P.L.2025, c.19 dropped the fire extinguisher from the state sale certificate in February 2025; ask whether the Borough still checks for one."
+  },
+  "other_items": [],
+  "open_questions": [
+    "What is the smoke/CO certificate fee, and is it tiered by how close to closing the request is made?",
+    "Is the resale CO and smoke/CO inspection done together in one visit by the same inspector?",
+    "Typical lead time to schedule the resale CO inspection, and how long the certificate is honored before closing?",
+    "Is there a written application form (or online portal) for the resale CO?",
+    "Does the Borough still require a fire extinguisher at resale after P.L.2025, c.19?"
+  ],
+  "checked_at": "2026-10-04",
+  "verification": {
+    "fees": 2,
+    "fee_ok": 0,
+    "fee_bad": 0,
+    "fee_unchecked": 2,
+    "quotes": 10,
+    "q_ok": 3,
+    "q_bad": 0,
+    "q_unchecked": 7
+  }
+}

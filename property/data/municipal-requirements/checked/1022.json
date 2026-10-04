@@ -1,0 +1,302 @@
+{
+  "municipality_code": "1022",
+  "municipality": "Readington Township",
+  "county": "HUNTERDON",
+  "resale_co": {
+    "status": "required",
+    "name": "Construction Records Clearance (CRC)",
+    "issued_by": "Readington Township Construction Code Office (enforcing agency)",
+    "lead_time": "Code says to apply with the fee at least 10 business days before the change of ownership or occupancy; the fee is lower when filed 6 to 12 business days ahead.",
+    "valid_for": "6 months from the date of issue, unless a change in occupancy has occurred",
+    "requirements": [
+      "Records check by the construction office: no open construction permits on the property",
+      "Any open permits must get final inspections and the proper Uniform Construction Code certificates before the CRC is issued",
+      "Exempt transfers (for example spouse to spouse, parent and child, estate distribution, refinancing, deed corrections) do not need a CRC as long as no change in physical occupancy occurs"
+    ],
+    "fees": [
+      {
+        "label": "Construction Records Clearance, 6 to 12 business days",
+        "amount": "$40.00",
+        "quote": "$ 40.00 6 -12 business days",
+        "source_url": "https://www.readington.gov/government/forms/construction/56-construction-record-clearance-crc/file",
+        "verified": true
+      },
+      {
+        "label": "Construction Records Clearance, 1 to 5 business days",
+        "amount": "$70.00",
+        "quote": "$ 70.00 1 - 5 business days",
+        "source_url": "https://www.readington.gov/government/forms/construction/56-construction-record-clearance-crc/file",
+        "verified": true
+      }
+    ],
+    "how_to_apply": "Submit the Application for Construction Records Clearance (seller name, property address, block and lot, closing date, residential or commercial) with the fee to the Readington Township Code Enforcement / Construction office, 509 Route 523, Whitehouse Station, or use the Township's online CRC submission form linked on the Construction page. Choose pick-up or mail to owner/agent.",
+    "application_url": "https://www.readington.gov/government/forms/construction/56-construction-record-clearance-crc/file",
+    "department_url": "https://www.readington.gov/departments/construction",
+    "phone": "(908) 534-2164",
+    "email": "KChin@readington.gov",
+    "contact_name": "Thomas Petto",
+    "contact_title": "Construction Official (Code Office / Technical Assistant Kristina Chin, ext. 244)",
+    "evidence": [
+      {
+        "url": "https://ecode360.com/26808204",
+        "quote": "A construction records clearance (CRC) shall be required prior to the sale of any residential or commercial structure.",
+        "doc_date": "2012-10-15 (Ord. No. 22-2012)",
+        "via": "page",
+        "verified": null
+      },
+      {
+        "url": "https://ecode360.com/26808204",
+        "quote": "The owner or his authorized agent shall submit a written application and payment of fees at least 10 business days prior to the change of ownership and/or occupancy on the form provided by the Township.",
+        "doc_date": "2012-10-15",
+        "via": "page",
+        "verified": null
+      },
+      {
+        "url": "https://ecode360.com/26808204",
+        "quote": "Prior to the issuance of any such certificate for any transaction, the enforcing agency shall conduct a records inspection to ensure that there are no open construction permits on subject premises.",
+        "doc_date": "2012-10-15",
+        "via": "page",
+        "verified": null
+      },
+      {
+        "url": "https://ecode360.com/26808204",
+        "quote": "One to five business days: $70.",
+        "doc_date": "2012-10-15",
+        "via": "page",
+        "verified": null
+      },
+      {
+        "url": "https://ecode360.com/26808204",
+        "quote": "Six to 12 business days: $40.",
+        "doc_date": "2012-10-15",
+        "via": "page",
+        "verified": null
+      },
+      {
+        "url": "https://ecode360.com/26808204",
+        "quote": "Certificates are valid for six months from the date of issue unless a change in occupancy has occurred, and must be renewed for each occupancy change.",
+        "doc_date": "2012-10-15",
+        "via": "page",
+        "verified": null
+      },
+      {
+        "url": "https://www.readington.gov/government/forms/construction/56-construction-record-clearance-crc/file",
+        "quote": "Application for Construction Records Clearance",
+        "doc_date": "Revised 7/2017 (scanned form)",
+        "via": "pdf",
+        "verified": true
+      },
+      {
+        "url": "https://www.readington.gov/departments/construction",
+        "quote": "Construction Record Clearance (CRC) – Online Submission",
+        "doc_date": "2026-10-04 (page fetched)",
+        "via": "page",
+        "verified": true
+      },
+      {
+        "url": "https://www.readington.gov/departments/construction",
+        "quote": "Thomas Petto Construction Official",
+        "doc_date": "2026-10-04 (page fetched)",
+        "via": "page",
+        "verified": true
+      },
+      {
+        "url": "https://www.readington.gov/departments/zoning-department",
+        "quote": "is required for any change in use or in tenant for an existing non-residential space or building.",
+        "doc_date": "2026-10-04 (page fetched)",
+        "via": "page",
+        "verified": true
+      }
+    ],
+    "confidence": "high",
+    "notes": "Readington does not do a physical resale inspection. Its sale requirement is a Construction Records Clearance under Code Section 96-6 (added October 15, 2012, Ord. No. 22-2012, read through the ecode360 print view), which checks for open permits. The posted form is a scanned 2017 PDF with the same $40 / $70 fees as the code. The online CRC submission link on the Construction page points to a Google Form. The Zoning Certificate of Continual Occupancy ($100) is only for non-residential space. Construction staff emails are mailto links on the Construction page (Thomas Petto: Tpetto@readington.gov; Kristina Chin: KChin@readington.gov; Jeanine Caruso: Jcaruso@readington.gov)."
+  },
+  "fire_cert": {
+    "requirements": [
+      "Smoke alarms as required for the year the home was built or renovated (for example, homes before 1977 need 10-year sealed battery alarms on all levels including the basement and within 10 feet outside all bedrooms; later homes must keep hardwired and interconnected alarms)",
+      "Hardwired smoke alarms may not be replaced with battery alarms; the most recent approved configuration must be kept",
+      "Carbon monoxide alarms within 10 feet outside every bedroom; battery or plug-in units allowed for homes built before 2016; alarms no older than 10 years",
+      "All alarms must be UL listed and replaced at end-of-life signal or 10 years from manufacture; smoke alarms at least 36 inches from ceiling fans and vents",
+      "Homes with a generator, solar panels, battery storage or other secondary power source need reflective 'CAUTION MULTIPLE SOURCES OF POWER' labels (ANSI Z535.4) within 18 inches of the main electrical panel and meter",
+      "House numbers at least 4 inches high, reflective or high-contrast, facing the access road",
+      "A fire alarm or combined burglar/fire alarm system that does not meet the listed requirements will not pass; finished basements are reported to the building department"
+    ],
+    "authorities": [
+      {
+        "name": "Raritan Township Department of Fire Safety Services (Fire Marshal's Office)",
+        "type": "municipal_fire_bureau",
+        "area_served": "Entire township (under a shared service agreement with Raritan Township)",
+        "lead_time": "Fee depends on business days between receipt of the completed application and fee and the closing date: 11 or more business days for the lowest fee. Inspections are on Wednesdays. The Township page recommends applying a couple of weeks before closing and says the certificate is good for 90 days.",
+        "fees": [
+          {
+            "label": "Smoke alarm and CO alarm certificate, completed application and fee received 11 or more business days before closing",
+            "amount": "$55.00",
+            "quote": "FEE: $55.00 ... When completed application and fee are received 11 or more BUSINESS days prior to closing date",
+            "source_url": "https://www.raritantwpnj.gov/media/attachments/2026/07/06/residential-inspection-application-fillable-7.6.2026.pdf",
+            "verified": true
+          },
+          {
+            "label": "Received 10 or fewer and at least 4 business days before closing",
+            "amount": "$100.00",
+            "quote": "FEE: $100.00 ... When completed application and fee are received 10 or less and up to 4 BUSINESS days prior to closing date",
+            "source_url": "https://www.raritantwpnj.gov/media/attachments/2026/07/06/residential-inspection-application-fillable-7.6.2026.pdf",
+            "verified": true
+          },
+          {
+            "label": "Received less than 4 business days before closing",
+            "amount": "$160.00",
+            "quote": "FEE: $160.00 ... When completed application and fee are received less than 4 BUSINESS days prior to closing date",
+            "source_url": "https://www.raritantwpnj.gov/media/attachments/2026/07/06/residential-inspection-application-fillable-7.6.2026.pdf",
+            "verified": true
+          },
+          {
+            "label": "Re-inspection, per re-inspection",
+            "amount": "$55.00",
+            "quote": "Re-Inspection FEE: $55.00* *Per Re-Inspection",
+            "source_url": "https://www.raritantwpnj.gov/media/attachments/2026/07/06/residential-inspection-application-fillable-7.6.2026.pdf",
+            "verified": true
+          }
+        ],
+        "how_to_apply": "Apply online through the Township's SDL portal smoke detector application, or send the paper application with a check or money order payable to Raritan Township to the Department of Fire Safety Services, One Municipal Drive, Flemington, NJ 08822 (firesafety@raritantwpnj.gov). Fees must be paid before the certificate is issued. Inspections are done on Wednesdays; the office calls the Monday before with a time slot and takes no special requests.",
+        "application_url": "https://www.sdlportal.com/towns/nj/hunterdon/raritantwp/forms/793b5cf4-0801-4827-a196-2d7a394cc3df?&mobile=1&embedded=7fb156eb-b206-4814-8b6b-fe7f17dea4a6",
+        "department_url": "https://www.raritantwpnj.gov/departments/fire",
+        "phone": "908-806-6314",
+        "email": "firesafety@raritantwpnj.gov",
+        "contact_name": "Dennis B. Concannon",
+        "contact_title": "Chief Fire Marshal (administrative assistant Suanne Traynor, (908) 806-6100 ext. 2280)",
+        "evidence": [
+          {
+            "url": "https://www.raritantwpnj.gov/departments/fire",
+            "quote": "Our primary responsibility is enforcement of the New Jersey Uniform Fire Code and other local fire safety regulations to over 150 square miles of Hunterdon County including the Townships of Raritan, Readington, Kingwood, and Tewksbury.",
+            "doc_date": "2026-10-04 (page fetched)",
+            "via": "page",
+            "verified": true
+          },
+          {
+            "url": "https://www.raritantwpnj.gov/departments/fire",
+            "quote": "Dennis B. Concannon, CFI, CFEI Chief Fire Marshal (908) 806-6100 ext. 2286",
+            "doc_date": "2026-10-04 (page fetched)",
+            "via": "page",
+            "verified": true
+          },
+          {
+            "url": "https://www.raritantwpnj.gov/media/attachments/2026/07/06/residential-inspection-application-fillable-7.6.2026.pdf",
+            "quote": "SERVING THE TOWNSHIPS OF RARITAN, KINGWOOD, READINGTON & TEWKSBURY",
+            "doc_date": "2026-07-06 (form revision 7.6.2026)",
+            "via": "pdf",
+            "verified": true
+          },
+          {
+            "url": "https://www.raritantwpnj.gov/media/attachments/2026/07/06/residential-inspection-application-fillable-7.6.2026.pdf",
+            "quote": "Inspections are completed on Wednesdays. You will be contacted the Monday before with a timeslot. No special requests accepted",
+            "doc_date": "2026-07-06",
+            "via": "pdf",
+            "verified": true
+          },
+          {
+            "url": "https://www.raritantwpnj.gov/fire-prevention-page-list/251-certificate-of-smoke-detector",
+            "quote": "If the change of occupancy does not occur withing 90 days, a new application shall be required.",
+            "doc_date": "2026-10-04 (page fetched)",
+            "via": "page",
+            "verified": true
+          },
+          {
+            "url": "https://www.raritantwpnj.gov/fire-prevention-page-list/251-certificate-of-smoke-detector",
+            "quote": "We recommend that you apply a couple of weeks before your closing date - we prefer one week to process your Certificate.",
+            "doc_date": "2026-10-04 (page fetched)",
+            "via": "page",
+            "verified": true
+          },
+          {
+            "url": "https://www.raritantwpnj.gov/forms-documents/forms/department-documents/fire-prevention/494-updated-residental-home-inspection-guide-with-labels-9-24-25/file",
+            "quote": "HARDWIRED SMOKE DETECTORS ARE NOT TO BE REPLACED WITH BATTERY OPERATED SMOKE DETECTORS",
+            "doc_date": "Revised 9.2025",
+            "via": "pdf",
+            "verified": true
+          },
+          {
+            "url": "https://www.raritantwpnj.gov/forms-documents/forms/department-documents/fire-prevention/494-updated-residental-home-inspection-guide-with-labels-9-24-25/file",
+            "quote": "CARBON MONOXIDE ALARMS ARE REQUIRED WITHIN 10 FEET OUTSIDE OF EVERY BEDROOM",
+            "doc_date": "Revised 9.2025",
+            "via": "pdf",
+            "verified": true
+          },
+          {
+            "url": "https://ecode360.com/44451557",
+            "quote": "Requests for a CSACMASPSIL received more than 10 business days' prior to the change of occupancy: $55.",
+            "doc_date": "2026-05-05 (Ord. No. 26-14)",
+            "via": "page",
+            "verified": null
+          },
+          {
+            "url": "https://ecode360.com/44451557",
+            "quote": "A reinspection fee of $55 will be charged for all failed CSACMASPSIL inspections.",
+            "doc_date": "2026-05-05 (Ord. No. 26-14)",
+            "via": "page",
+            "verified": null
+          },
+          {
+            "url": "https://www.readington.gov/departments/fire-prevention",
+            "quote": "Please visit the Raritan Township Fire Marshals Office webpage at",
+            "doc_date": "2026-10-04 (page fetched)",
+            "via": "page",
+            "verified": true
+          },
+          {
+            "url": "https://www.readington.gov/departments/fire-prevention",
+            "quote": "Any questions regarding fire related issues, please do not hesitate to call us at 908-534-4051 ext. 263.",
+            "doc_date": "2026-10-04 (page fetched)",
+            "via": "page",
+            "verified": true
+          },
+          {
+            "url": "https://ecode360.com/8746189",
+            "quote": "The local enforcing agency shall be the Raritan Township Department of Fire Safety, pursuant to the terms of a Shared Service Agreement",
+            "doc_date": "SSA from July 1, 2024 to June 30, 2028",
+            "via": "page",
+            "verified": null
+          },
+          {
+            "url": "https://www.nj.gov/dca/dfs/pdf/fire%20directory_county%20summary/fire_code_enforcement_director.pdf",
+            "quote": "LEAID: 1022-001 Enf Auth. Municipal Fire Official Dennis B Concannon II Phone (908) 534-4051",
+            "doc_date": "2021-10-25 (survey date 10/25/2021)",
+            "via": "state_directory",
+            "verified": null
+          },
+          {
+            "url": "https://nj.gov/dca/dfs/pdf/ANNUAL%20REGISTRY/THIRD%20QUARTER%20LEA%20REGISTRY%202026.pdf",
+            "quote": "M Readington Township",
+            "doc_date": "2026-07",
+            "via": "pdf",
+            "verified": true
+          },
+          {
+            "url": "https://nj.gov/dca/dfs/pdf/ANNUAL%20REGISTRY/THIRD%20QUARTER%20LEA%20REGISTRY%202026.pdf",
+            "quote": "Raritan Township is the LEA for Kingwood Township, Tewksbury Twp.& Readington Twp.",
+            "doc_date": "2026-07",
+            "via": "pdf",
+            "verified": true
+          }
+        ],
+        "confidence": "high"
+      }
+    ],
+    "notes": "Readington's Fire Prevention page sends all inquiries to the Raritan Township Fire Safety office, and Readington Code Section 123-2 names the Raritan Township Department of Fire Safety as the local enforcing agency under a shared service agreement (July 1, 2024 to June 30, 2028). The current Raritan application (July 6, 2026) lists Readington and uses the $55 / $100 / $160 tiers. Readington's page still gives a local line, 908-534-4051 ext. 263, and fireofficial@readington.gov. The form and guide list no fire extinguisher."
+  },
+  "other_items": [],
+  "open_questions": [
+    "Does the Construction office accept the online (Google Form) CRC submission with online payment, or must the fee be paid in person or by check?",
+    "Which number should agents use for smoke certificate scheduling: Raritan Fire Safety (908) 806-6314 or Readington's 908-534-4051 ext. 263?"
+  ],
+  "checked_at": "2026-10-04",
+  "verification": {
+    "fees": 6,
+    "fee_ok": 6,
+    "fee_bad": 0,
+    "fee_unchecked": 0,
+    "quotes": 26,
+    "q_ok": 16,
+    "q_bad": 0,
+    "q_unchecked": 10
+  }
+}

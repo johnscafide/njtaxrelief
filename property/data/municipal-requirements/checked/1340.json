@@ -1,0 +1,208 @@
+{
+  "municipality_code": "1340",
+  "municipality": "Roosevelt Borough",
+  "county": "MONMOUTH",
+  "resale_co": {
+    "status": "required",
+    "name": "Certificate of Occupancy (resale)",
+    "issued_by": "Borough of Roosevelt Housing Inspector (Zoning Officer / Housing Inspector)",
+    "lead_time": "The Housing Inspector grants or denies the C/O within 10 days of the application. The inspector keeps limited evening hours (normally Monday office hours 5 to 6 p.m. and inspections 6 to 7 p.m.; temporarily Tuesdays from 9/21/26 to 11/19/26).",
+    "valid_for": "The inspection can be waived if the building was inspected within six months before the change in occupancy.",
+    "requirements": [
+      "Visual inspection under the International Property Maintenance Code: no garbage, sidewalk and driveway in good repair, house number at least 6 inches, grass under 6 inches, exterior in good repair",
+      "Interior: no peeling paint, secure handrails, working windows and doors with screens, GFI outlets within 6 feet of sinks, working heating and cooking equipment, stove anti-tip bracket",
+      "Smoke detectors on each level and outside each sleeping area (10-year battery if battery powered); carbon monoxide detector near each sleeping area",
+      "Fire extinguisher 2A10BC, 10 lb max, mounted near the kitchen with an inspection date within 1 year (form still lists it)",
+      "Chimney certification by a certified chimney sweep for wood-burning fireplaces",
+      "Applicant certifies the dwelling complies with municipal ordinances and health and safety codes"
+    ],
+    "fees": [
+      {
+        "label": "Certificate of Occupancy application and one inspection",
+        "amount": "$100",
+        "quote": "A charge of $100 to cover the cost in connection with such application and one inspection, shall be paid to the Borough of Roosevelt at the time the application is filed.",
+        "source_url": "https://ecode360.com/35766163",
+        "verified": null
+      },
+      {
+        "label": "Filing fee (in addition)",
+        "amount": "$15",
+        "quote": "Additionally, there shall be paid a filing fee of $15.",
+        "source_url": "https://ecode360.com/35766163",
+        "verified": null
+      },
+      {
+        "label": "Reinspection, each",
+        "amount": "$10",
+        "quote": "Any and all reinspections shall be at a charge of $10 each.",
+        "source_url": "https://ecode360.com/35766163",
+        "verified": null
+      },
+      {
+        "label": "Certificate of Occupancy, total on Borough form",
+        "amount": "$115.00",
+        "quote": "SUBMIT WITH CHECK FOR $115.00 MADE PAYABLE TO",
+        "source_url": "https://casite-785122.cloudaccess.net/images/forms/co-inspection-application.pdf",
+        "verified": null
+      }
+    ],
+    "how_to_apply": "Complete the Borough's Certificate of Occupancy form (mark RESALE, give the approximate closing date) and submit it with a $115.00 check payable to Borough of Roosevelt at Borough Hall, 33 N. Rochdale Avenue (P.O. Box 128), Roosevelt, NJ 08555, 609-448-0539. Contact the Housing Inspector during his evening office hours to schedule.",
+    "application_url": "https://casite-785122.cloudaccess.net/images/forms/co-inspection-application.pdf",
+    "department_url": "https://www.rooseveltnj.us/departments/zoning-officer-housing-inspector",
+    "phone": "609-448-0539",
+    "email": "",
+    "contact_name": "Jeremy Kuipers",
+    "contact_title": "Zoning Officer & Housing Inspector",
+    "evidence": [
+      {
+        "url": "https://ecode360.com/35766163",
+        "quote": "No person shall sell, transfer, assign, rent, lease or sublet to another, or suffer or permit any change in occupancy of use of any building or a part thereof, without first obtaining from the Housing Inspector a Certificate of Occupancy stating that, at the time of the proposed sale transfer, assignment, rental, lease or subletting by such other persons, the premises comply with all ordinances of the Borough of Roosevelt.",
+        "doc_date": "2004-02-09 (Ord. 89-2); fees Ord. No. 16-006",
+        "via": "page",
+        "verified": null
+      },
+      {
+        "url": "https://ecode360.com/35766163",
+        "quote": "The Certificate of Occupancy shall be granted or denied by the Housing Inspector within 10 days from the date of application for same.",
+        "doc_date": "2026-10-04 (page fetched)",
+        "via": "page",
+        "verified": null
+      },
+      {
+        "url": "https://ecode360.com/35766163",
+        "quote": "When there is a transfer of title, and it is certified to the Housing Inspector of the Borough of Roosevelt that the required repairs or alterations will be completed by the purchaser within 90 days",
+        "doc_date": "2026-10-04 (page fetched)",
+        "via": "page",
+        "verified": null
+      },
+      {
+        "url": "https://casite-785122.cloudaccess.net/images/forms/co-inspection-application.pdf",
+        "quote": "REASON FOR C/O: ____RENTAL ____RESALE",
+        "doc_date": "revised January 2021",
+        "via": "pdf",
+        "verified": null
+      },
+      {
+        "url": "https://casite-785122.cloudaccess.net/images/forms/co-inspection-application.pdf",
+        "quote": "RE-INSPECTIONS ARE $10.00 EACH. (revised January 2021)",
+        "doc_date": "revised January 2021",
+        "via": "pdf",
+        "verified": null
+      },
+      {
+        "url": "https://www.rooseveltnj.us/departments/zoning-officer-housing-inspector",
+        "quote": "Inspection Hours - Mondays 6:00 pm - 7:00 pm",
+        "doc_date": "2026-10-04 (page fetched)",
+        "via": "page",
+        "verified": true
+      },
+      {
+        "url": "https://www.rooseveltnj.us/departments/zoning-officer-housing-inspector",
+        "quote": "Jeremy Kuipers",
+        "doc_date": "2026-10-04 (page fetched)",
+        "via": "page",
+        "verified": null
+      }
+    ],
+    "confidence": "high",
+    "notes": "Borough Code Chapter 10 (Housing) requires a Certificate of Occupancy from the Housing Inspector before any sale or change in occupancy; the fee is $100 plus a $15 filing fee (Ord. No. 16-006), matching the $115.00 on the Borough form (revised January 2021). The form PDF is hosted on the Borough's older website host (casite-785122.cloudaccess.net); the current site's Forms page did not list it, so confirm it is still the current form. If repairs remain at closing, the buyer can certify they will finish them within 90 days and the C/O is issued. The inspection can be waived for a building inspected within the prior six months or bought for demolition within 60 days of closing. No Housing Inspector email was published. Landlord licensing in the same chapter applies to rentals only."
+  },
+  "fire_cert": {
+    "requirements": [
+      "Smoke alarms on each level and outside each separate sleeping area (N.J.A.C. 5:70-4.19); battery units 10-year sealed",
+      "Carbon monoxide alarm near the sleeping areas in homes with a fuel-burning appliance or attached garage",
+      "The Borough C/O form also lists a fire extinguisher; the state dropped it from the sale certificate in February 2025 (P.L.2025, c.19)"
+    ],
+    "authorities": [
+      {
+        "name": "NJ Department of Community Affairs, Division of Fire Safety (state-enforced; State LEA for Roosevelt)",
+        "type": "state_dca",
+        "area_served": "Entire borough",
+        "lead_time": "State fee tiers count business days before the change of occupant: more than 10 business days for the lowest fee.",
+        "fees": [
+          {
+            "label": "State smoke/CO certificate (N.J.A.C. 5:70-2.9(d)), received more than 10 business days before the change of occupant",
+            "amount": "$45.00",
+            "quote": "Requests for a CSACMAPFEC received more than 10 business days prior to the change of occupant: $45.00",
+            "source_url": "https://www.nj.gov/dca/divisions/dfs/codes/regulations/r.2018%20d.074%20(50%20n.j.r.%20729(a)).pdf",
+            "verified": true
+          },
+          {
+            "label": "Received four to 10 business days before",
+            "amount": "$90.00",
+            "quote": "Requests for a CSACMAPFEC received four to 10 business days prior to the change of occupant: $90.00",
+            "source_url": "https://www.nj.gov/dca/divisions/dfs/codes/regulations/r.2018%20d.074%20(50%20n.j.r.%20729(a)).pdf",
+            "verified": true
+          },
+          {
+            "label": "Received fewer than four business days before",
+            "amount": "$161.00",
+            "quote": "Requests for a CSACMAPFEC received fewer than four business days prior to the change of occupant: $161.00",
+            "source_url": "https://www.nj.gov/dca/divisions/dfs/codes/regulations/r.2018%20d.074%20(50%20n.j.r.%20729(a)).pdf",
+            "verified": true
+          }
+        ],
+        "how_to_apply": "Apply online through the NJ DCA Fire Safety Service Portal (firesolutions.dca.nj.gov): choose Apply for Smoke Certification, enter the property and closing details and pay. Questions: 609-633-6132.",
+        "application_url": "https://firesolutions.dca.nj.gov/",
+        "department_url": "https://firesolutions.dca.nj.gov/ultra-fire-home/first-time-user-guide/",
+        "phone": "609-633-6132",
+        "email": "",
+        "contact_name": "Louis Kilmer",
+        "contact_title": "Fire Official of record for Roosevelt (NJ Division of Fire Safety), per the state directory",
+        "evidence": [
+          {
+            "url": "https://firesolutions.dca.nj.gov/ultra-fire-home/first-time-user-guide/",
+            "quote": "Click Apply for Smoke Certification",
+            "doc_date": "2026-10-04 (page fetched)",
+            "via": "page",
+            "verified": true
+          },
+          {
+            "url": "https://www.nj.gov/dca/dfs/pdf/fire%20directory_county%20summary/fire_code_enforcement_director.pdf",
+            "quote": "LEAID: 1341-999 Roosevelt Boro ... SMOKE DETECTOR COMPLIANCE ... Name: NJ Division Fire Safety ... Enf Auth. State ... Fire Official Louis Kilmer ... Phone (609) 633-6132",
+            "doc_date": "2026-07 (survey date 7/1/2026)",
+            "via": "state_directory",
+            "verified": null
+          },
+          {
+            "url": "https://nj.gov/dca/dfs/pdf/ANNUAL%20REGISTRY/THIRD%20QUARTER%20LEA%20REGISTRY%202026.pdf",
+            "quote": "S         Roosevelt Borough",
+            "doc_date": "2026-07",
+            "via": "pdf",
+            "verified": true
+          }
+        ],
+        "confidence": "high"
+      }
+    ],
+    "notes": "Roosevelt is state-enforced for the fire code (LEA code S), so the smoke/CO certificate comes from the NJ Division of Fire Safety, not the Borough. The Borough's fire prevention chapter and website do not describe a local certificate; fire protection is provided by Millstone Township Fire Company. The Borough C/O inspection separately checks smoke detectors, CO detectors and an extinguisher. State fees are from the NJ Register adoption of N.J.A.C. 5:70-2.9(d)."
+  },
+  "other_items": [
+    {
+      "label": "Chimney certification",
+      "detail": "Wood-burning fireplaces need a chimney certification from a certified chimney sweep for the C/O.",
+      "source_url": "https://casite-785122.cloudaccess.net/images/forms/co-inspection-application.pdf"
+    },
+    {
+      "label": "Buyer repair certification",
+      "detail": "On a transfer of title the buyer can certify repairs will be completed within 90 days, and the C/O is issued; failure to finish is a violation.",
+      "source_url": "https://ecode360.com/35766163"
+    }
+  ],
+  "open_questions": [
+    "Is the $115 form (revised January 2021, hosted on the old website) still the current application, and can it be emailed?",
+    "Does the Housing Inspector still require a fire extinguisher at the C/O inspection after P.L.2025, c.19?",
+    "Is there a Housing Inspector email or a way to schedule outside the one-hour weekly window?"
+  ],
+  "checked_at": "2026-10-04",
+  "verification": {
+    "fees": 7,
+    "fee_ok": 3,
+    "fee_bad": 0,
+    "fee_unchecked": 4,
+    "quotes": 10,
+    "q_ok": 3,
+    "q_bad": 0,
+    "q_unchecked": 7
+  }
+}

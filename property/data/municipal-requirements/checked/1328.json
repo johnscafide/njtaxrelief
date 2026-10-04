@@ -1,0 +1,194 @@
+{
+  "municipality_code": "1328",
+  "municipality": "Manalapan Township",
+  "county": "MONMOUTH",
+  "checked_at": "2026-10-04",
+  "resale_co": {
+    "status": "required",
+    "name": "Housing Certification (formerly Certificate of Continued Occupancy, CCO)",
+    "issued_by": "Manalapan Township Construction Code Department, Office of Housing",
+    "lead_time": "Inspections are scheduled by availability; apply well before closing and close out open permits first to avoid a re-inspection.",
+    "valid_for": "90 days from the date of issuance",
+    "requirements": [
+      "Housing inspection of the home against the Township checklist (6 inch house numbers, steps, railings, window screens, doors, heating, roof, stove anti-tip device, plumbing, electrical covers, no extension cords, clean yard, pool fence code compliant)",
+      "All existing open permits must be closed out before the inspection",
+      "Smoke and carbon monoxide certification, inspected at the same visit (see fire certificate)",
+      "Fire extinguisher, 2A-10BC type, no larger than 10 lbs, under the kitchen sink or within 10 feet of the kitchen (form still lists it)",
+      "Homes with well and septic systems need Health Department approval before the certification is issued"
+    ],
+    "fees": [
+      {
+        "label": "Housing Certification (housing inspection)",
+        "amount": "$150",
+        "quote": "One in the amount of $150 for the Housing Certification, and one for the Smoke Certificate in the amount of $75, payable to Manalapan Township.",
+        "source_url": "https://mtnj.org/departments/construction/housing/certificate_of_continued_occupancy/",
+        "verified": true
+      },
+      {
+        "label": "Total to apply (Housing Certification plus smoke certificate)",
+        "amount": "$225",
+        "quote": "The cost to apply for a Housing Certification is $225.",
+        "source_url": "https://mtnj.org/departments/construction/housing/certificate_of_continued_occupancy/",
+        "verified": true
+      }
+    ],
+    "how_to_apply": "Fill out the Application for Housing Certification (PDF) and bring or mail it to the Construction Code Department, Office of Housing, 120 Route 522, Manalapan, NJ 07726, with two checks or money orders payable to Manalapan Township ($150 housing inspection and $75 smoke detector), or exact cash. The form asks for block and lot, approximate closing date, occupancy type, whether the home is vacant, and whether it has municipal sewer and water or septic and well. The Township never asks for wire transfers.",
+    "application_url": "https://mtnj.org/wp-content/uploads/2024/07/Housing-Application_.pdf",
+    "department_url": "https://mtnj.org/departments/construction/housing/certificate_of_continued_occupancy/",
+    "phone": "732-446-8320",
+    "email": "",
+    "contact_name": "Richard W. Hogan",
+    "contact_title": "Construction Code/Fire Official",
+    "evidence": [
+      {
+        "url": "https://mtnj.org/departments/construction/housing/certificate_of_continued_occupancy/",
+        "quote": "A Housing Certification is required when selling or renting a home and is the responsibility of the seller.",
+        "doc_date": "2026-10-04 (page fetched)",
+        "via": "page",
+        "verified": true
+      },
+      {
+        "url": "https://mtnj.org/departments/construction/housing/certificate_of_continued_occupancy/",
+        "quote": "A Housing Certification is good for 90 days from the date of issuance. The Smoke Detector Certification expires after six months from the date of issuance.",
+        "doc_date": "2026-10-04 (page fetched)",
+        "via": "page",
+        "verified": true
+      },
+      {
+        "url": "https://mtnj.org/departments/construction/housing/certificate_of_continued_occupancy/",
+        "quote": "All homes with well and septic systems must have approval from the Health Department in order for a Housing Certification to be issued.",
+        "doc_date": "2026-10-04 (page fetched)",
+        "via": "page",
+        "verified": true
+      },
+      {
+        "url": "https://mtnj.org/wp-content/uploads/2024/07/Housing-Application_.pdf",
+        "quote": "REASON FOR CHANGE OF OCCUPANCY:         RENTAL – RESALE – OTHER",
+        "doc_date": "2024-07 (upload folder)",
+        "via": "pdf",
+        "verified": true
+      },
+      {
+        "url": "https://mtnj.org/departments/construction/housing/refinancing/",
+        "quote": "Chapter 123, Article I of Manalapan Township’s Housing Code requires that a Certificate of Continued Occupancy be obtained prior to the change of occupancy in any dwelling or dwelling unit.",
+        "doc_date": "2026-10-04 (page fetched)",
+        "via": "page",
+        "verified": true
+      },
+      {
+        "url": "https://mtnj.org/departments/construction/",
+        "quote": "(732) 446-8320 Construction Department",
+        "doc_date": "2026-10-04 (page fetched)",
+        "via": "page",
+        "verified": true
+      }
+    ],
+    "confidence": "high",
+    "notes": "Manalapan renamed the CCO to Housing Certification. The housing application PDF lists the Office of Housing at 732-446-8320 (fax 732-446-1366). The Construction page lists Richard Hogan as Construction Code Official and the office lines 732-446-8319 and 732-446-8320; no general housing email is posted. The Township page still requires a fire extinguisher, which state law (P.L.2025, c.19) removed from the sale certificate in February 2025. A CCO and smoke certificate are not needed for a refinance. Lead-safe certificates apply to pre-1978 rental properties only. The Township code (Chapter 123) was not read directly."
+  },
+  "fire_cert": {
+    "requirements": [
+      "Working smoke detectors on each level, including basements and crawl spaces, and within 10 feet of any sleeping area",
+      "Original systems must be kept (interconnected systems cannot be replaced with stand-alone battery units); battery smoke alarms must have a ten-year sealed battery",
+      "At least one carbon monoxide detector in the vicinity of all sleeping areas, more if bedrooms are on more than one level; leave the instruction booklet for the new owner",
+      "Fire extinguisher, 2A-10BC type, no more than 10 lbs (form still lists it)"
+    ],
+    "authorities": [
+      {
+        "name": "Manalapan Township Fire Bureau (Fire Prevention, Construction Code Department)",
+        "type": "municipal_fire_bureau",
+        "area_served": "Entire township",
+        "lead_time": "Done at the same visit as the Housing Certification inspection; scheduled by availability. The certificate is good for six months.",
+        "fees": [
+          {
+            "label": "Smoke detector / carbon monoxide compliance certificate",
+            "amount": "$75.00",
+            "quote": "The cost of the Smoke Detector/CO Detector Compliance Certificate is $75.00.",
+            "source_url": "https://mtnj.org/departments/construction/fire_prevention/residential_smoke_co_detector_certification/",
+            "verified": true
+          }
+        ],
+        "how_to_apply": "Apply on the same Application for Housing Certification and include a separate $75 check or money order payable to Manalapan Township (smoke detector). Cash or money order are listed as acceptable on the fire page.",
+        "application_url": "https://mtnj.org/wp-content/uploads/2024/07/Housing-Application_.pdf",
+        "department_url": "https://mtnj.org/departments/construction/fire_prevention/residential_smoke_co_detector_certification/",
+        "phone": "732-446-8318",
+        "email": "rhogan@twp.manalapan.nj.us",
+        "contact_name": "Richard W. Hogan",
+        "contact_title": "Construction Code/Fire Official (Fire Inspector: Michael Lennox, 732-446-8369, MLennox@mtnj.org)",
+        "evidence": [
+          {
+            "url": "https://mtnj.org/departments/construction/fire_prevention/residential_smoke_co_detector_certification/",
+            "quote": "A residential Smoke/CO Detector Certification inspection is performed in conjunction with the CCO (Certificate of Continued Occupancy) inspection.",
+            "doc_date": "2026-10-04 (page fetched)",
+            "via": "page",
+            "verified": true
+          },
+          {
+            "url": "https://mtnj.org/departments/construction/fire_prevention/residential_smoke_co_detector_certification/",
+            "quote": "The Certificate issued is good for six months from the date of issuance.",
+            "doc_date": "2026-10-04 (page fetched)",
+            "via": "page",
+            "verified": true
+          },
+          {
+            "url": "https://mtnj.org/departments/construction/fire_prevention/residential_smoke_co_detector_certification/",
+            "quote": "All residential units must have a fire extinguisher rated for residential use.",
+            "doc_date": "2026-10-04 (page fetched)",
+            "via": "page",
+            "verified": true
+          },
+          {
+            "url": "https://mtnj.org/departments/construction/",
+            "quote": "Michael Lennox, Fire Inspector 732-446-8369 MLennox@mtnj.org",
+            "doc_date": "2026-10-04 (page fetched)",
+            "via": "page",
+            "verified": true
+          },
+          {
+            "url": "https://www.nj.gov/dca/dfs/pdf/fire%20directory_county%20summary/fire_code_enforcement_director.pdf",
+            "quote": "LEAID: 1326-001 Enf Auth. Municipal Fire Official Richard W Hogan Phone (732) 446-8318 ... Email rhogan@twp.manalapan.nj.us",
+            "doc_date": "2026 (survey date 6/25/2026)",
+            "via": "state_directory",
+            "verified": null
+          },
+          {
+            "url": "https://nj.gov/dca/dfs/pdf/ANNUAL%20REGISTRY/THIRD%20QUARTER%20LEA%20REGISTRY%202026.pdf",
+            "quote": "M Manalapan Township",
+            "doc_date": "2026-07",
+            "via": "pdf",
+            "verified": true
+          }
+        ],
+        "confidence": "high"
+      }
+    ],
+    "notes": "The Township (LEA code M, municipality) is its own fire code enforcing agency and runs the smoke/CO inspection together with the Housing Certification. The refinancing page refers to the certificate as issued by the Manalapan Township Fire Bureau. The state fire directory email is rhogan@twp.manalapan.nj.us; Township pages now use @mtnj.org addresses. The extinguisher is still listed on Township pages although the state dropped it from the sale certificate in February 2025 (P.L.2025, c.19). No tiered fees by days before closing are published."
+  },
+  "other_items": [
+    {
+      "label": "Open permits",
+      "detail": "All existing open permits must be closed out before the Housing Certification inspection.",
+      "source_url": "https://mtnj.org/departments/construction/housing/certificate_of_continued_occupancy/"
+    },
+    {
+      "label": "Well and septic approval",
+      "detail": "Homes with well and septic systems need Health Department approval before the Housing Certification is issued.",
+      "source_url": "https://mtnj.org/departments/construction/housing/certificate_of_continued_occupancy/"
+    }
+  ],
+  "open_questions": [
+    "Does Manalapan still require the fire extinguisher at resale after P.L.2025, c.19?",
+    "What is the re-inspection fee, if any, and how far out are inspections currently booking?",
+    "What does the Health Department need for well and septic approval, and what does it cost?"
+  ],
+  "verification": {
+    "fees": 3,
+    "fee_ok": 3,
+    "fee_bad": 0,
+    "fee_unchecked": 0,
+    "quotes": 12,
+    "q_ok": 11,
+    "q_bad": 0,
+    "q_unchecked": 1
+  }
+}

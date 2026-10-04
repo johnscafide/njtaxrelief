@@ -1,0 +1,226 @@
+{
+  "municipality_code": "1339",
+  "municipality": "Red Bank Borough",
+  "county": "MONMOUTH",
+  "resale_co": {
+    "status": "required",
+    "name": "Certificate of Occupancy on sale or transfer (Property Maintenance Code Section 102.1A); not required for owner-occupied single-family sales",
+    "issued_by": "Borough of Red Bank Department of Code Enforcement (Fire Marshal's Office)",
+    "lead_time": "The owner must give at least 14 calendar days notice to Code Enforcement for the compliance inspection.",
+    "valid_for": "A certificate issued within the prior six months can be reused (a copy of the prior certificate suffices).",
+    "requirements": [
+      "Applies to the sale or transfer of 2-family homes and of single-family homes that will not be owner-occupied; owner-occupied single-family sales need only the smoke/CO certificate",
+      "Compliance inspection under the International Property Maintenance Code (address numbers at least 4 inches, no double cylinder locks, heating and water heater safety, garage fire door, floors, roof, range, plumbing)",
+      "All open permits must have a final inspection before a C.O. can be issued",
+      "Smoke and carbon monoxide certificate (CSDCMAC)",
+      "A conditional C.O. may be issued for owner-occupied 2- or 3-unit buildings if all defects are disclosed to the buyer and conditions are met"
+    ],
+    "fees": [
+      {
+        "label": "C.O. on sale or transfer, one- or two-family dwelling (per dwelling unit)",
+        "amount": "$100",
+        "quote": "One- or two-family dwellings: $100 a dwelling unit.",
+        "source_url": "https://ecode360.com/14163455",
+        "verified": null
+      },
+      {
+        "label": "Reinspection after second reinspection and failure, residential",
+        "amount": "$50",
+        "quote": "Upon second reinspection and failure, the fee shall be $50 for residential (R-1, R-2, R-3), $100 for all other use groups.",
+        "source_url": "https://ecode360.com/14163455",
+        "verified": null
+      }
+    ],
+    "how_to_apply": "Contact the Fire Marshal's Office / Code Enforcement at 90 Monmouth Street, 3rd Floor (732-530-2764, Monday to Friday 8 a.m. to 4 p.m.) at least 14 calendar days before the transfer. Applications with checks can be left in the drop box outside the office. Close any open permits first. No online C.O. application was found.",
+    "application_url": "",
+    "department_url": "https://www.redbanknj.org/183/Fire-Marshals-Office",
+    "phone": "732-530-2764",
+    "email": "jfenn@redbanknj.org",
+    "contact_name": "James E Fenn",
+    "contact_title": "Fire Marshal",
+    "evidence": [
+      {
+        "url": "https://ecode360.com/14163455",
+        "quote": "This Section 102.1A shall not apply to the sale or transfer of single-family dwellings that are owner-occupied or to be owner-occupied upon sale or transfer.",
+        "doc_date": "2019 (Ord. No. 2019-04)",
+        "via": "page",
+        "verified": null
+      },
+      {
+        "url": "https://ecode360.com/14163455",
+        "quote": "For the sale or transfer of owner-occupied single-family dwellings, only a certificate of CSDCMAC under Borough Code § shall be required.",
+        "doc_date": "2019 (Ord. No. 2019-04)",
+        "via": "page",
+        "verified": null
+      },
+      {
+        "url": "https://ecode360.com/14163455",
+        "quote": "Notice by owner required. The owner of any dwelling or dwelling unit or part thereof subject to the provisions of this paragraph, Section 102.1A, (1), (2), shall be required to give a minimum notice of 14 calendar days to the Department of Code Enforcement for the purpose of a compliance inspection prior to the issuance of a certificate of occupancy.",
+        "doc_date": "2026-10-04 (page fetched)",
+        "via": "page",
+        "verified": null
+      },
+      {
+        "url": "https://ecode360.com/14163455",
+        "quote": "If a certificate of compliance has been issued within the six months period immediately prior to a request for such certificate, a copy of the prior certificate will suffice to meet the requirements of this section.",
+        "doc_date": "2026-10-04 (page fetched)",
+        "via": "page",
+        "verified": null
+      },
+      {
+        "url": "https://www.redbanknj.org/DocumentCenter/View/9339/2019-04-Final",
+        "quote": "REPLACE CERTIFICATE OF OCCUPANCY REQUIREMENT",
+        "doc_date": "2019 (Ordinance No. 2019-04)",
+        "via": "pdf",
+        "verified": true
+      },
+      {
+        "url": "https://www.redbanknj.org/DocumentCenter/View/17726/2026---Fire-Marshals-Office-Certificate-of-Ocupancy-Check-List-IPMC",
+        "quote": "AND ALL OPEN PERMITS MUST HAVE A FINAL INSPECTION BEFORE A C.O. CAN BE ISSUED.",
+        "doc_date": "2026",
+        "via": "pdf",
+        "verified": true
+      },
+      {
+        "url": "https://www.redbanknj.org/DocumentCenter/View/17730/2026---Fire-Marshals-Office-CO-and-Smoke-Inspection-Requirements",
+        "quote": "There is also a drop box outside the office door where you can leave applications with checks only (no cash)",
+        "doc_date": "2026",
+        "via": "pdf",
+        "verified": true
+      },
+      {
+        "url": "https://www.redbanknj.org/directory.aspx?did=9",
+        "quote": "732-530-2764",
+        "doc_date": "2026-10-04 (page fetched)",
+        "via": "page",
+        "verified": true
+      }
+    ],
+    "confidence": "high",
+    "notes": "Red Bank's Property Maintenance Code (Chapter 505, Section 505-3, adding IPMC Section 102.1A) makes it unlawful to sell or transfer a dwelling without a certificate of occupancy from Code Enforcement. Ordinance 2019-04 carved out owner-occupied single-family homes: for those sales only the smoke/CO certificate (CSDCMAC) is needed. So a C.O. is required for 2-family homes and for single-family homes bought by investors or for rental, but not for a typical owner-occupied single-family sale. Code Enforcement sits within the Fire Marshal's Office (90 Monmouth Street, 3rd Floor). The Borough also requires rental C.O.s every 60 months and at tenant changes; those are rental items, not resale ones."
+  },
+  "fire_cert": {
+    "requirements": [
+      "Ten-year sealed battery smoke alarms or A/C powered hardwired smoke detectors in each bedroom and on each level within ten feet of the bedrooms (basement, first floor, second floor), excluding crawl spaces and unfinished attics",
+      "Smoke detectors properly mounted (ceiling at least 4 inches from the wall; wall mount 4 to 12 inches from the ceiling), UL listed with a test button; A/C powered alarms may not be replaced with battery units",
+      "Carbon monoxide alarm on each level within ten feet of the bedrooms (battery, plug-in or part of a central station system), UL listed",
+      "Central station fire alarms need a letter from the monitoring company that the system works",
+      "An adult (18 or older) must be present; pets secured",
+      "Fire extinguisher no longer required (Fire Marshal's 2026 handout, citing the February 2025 change)"
+    ],
+    "authorities": [
+      {
+        "name": "Red Bank Fire Marshal's Office (Fire Prevention)",
+        "type": "municipal_fire_bureau",
+        "area_served": "Entire borough (the office is also the fire code LEA for Little Silver)",
+        "lead_time": "Fee depends on business days before the change of occupant: more than 10 business days for the lowest fee. Inspections are done 10 a.m. to 2 p.m., Monday to Friday.",
+        "fees": [
+          {
+            "label": "CSDCMAC, request more than 10 business days before change of occupant",
+            "amount": "$100",
+            "quote": "Requests for CSDCMAC received more than 10 business days prior to the change of occupant: $100;",
+            "source_url": "https://ecode360.com/33067147",
+            "verified": null
+          },
+          {
+            "label": "Request four to 10 business days before",
+            "amount": "$125",
+            "quote": "Requests for a CSDCMAC received four to 10 business days prior to the change of occupant: $125; and",
+            "source_url": "https://ecode360.com/33067147",
+            "verified": null
+          },
+          {
+            "label": "Request fewer than four business days before",
+            "amount": "$150",
+            "quote": "Requests for a CSDCMAC received fewer than four business days prior to change of occupant: $150.",
+            "source_url": "https://ecode360.com/33067147",
+            "verified": null
+          }
+        ],
+        "how_to_apply": "Apply to the Fire Marshal's Office, 90 Monmouth Street, 3rd Floor, Red Bank (732-530-2764), Monday to Friday 8:00 a.m. to 4:00 p.m.; applications with checks (no cash) can go in the drop box outside the office door. The 2026 smoke and CO inspection requirements are posted on the Fire Marshal's Office page.",
+        "application_url": "",
+        "department_url": "https://www.redbanknj.org/183/Fire-Marshals-Office",
+        "phone": "732-530-2764",
+        "email": "jfenn@redbanknj.org",
+        "contact_name": "James E Fenn",
+        "contact_title": "Fire Marshal",
+        "evidence": [
+          {
+            "url": "https://www.redbanknj.org/DocumentCenter/View/17730/2026---Fire-Marshals-Office-CO-and-Smoke-Inspection-Requirements",
+            "quote": "INSPECTION REQUIREMENTS for Certificate of Smoke Detector & Carbon Monoxide",
+            "doc_date": "2026",
+            "via": "pdf",
+            "verified": true
+          },
+          {
+            "url": "https://www.redbanknj.org/DocumentCenter/View/17730/2026---Fire-Marshals-Office-CO-and-Smoke-Inspection-Requirements",
+            "quote": "No. NJ Assembly Bill A3894 (February 2025) eliminates the requirement for portable fire extinguishers for a",
+            "doc_date": "2026",
+            "via": "pdf",
+            "verified": true
+          },
+          {
+            "url": "https://www.redbanknj.org/DocumentCenter/View/17730/2026---Fire-Marshals-Office-CO-and-Smoke-Inspection-Requirements",
+            "quote": "The inspections are performed between the hours of 10am and 2pm Monday-Friday",
+            "doc_date": "2026",
+            "via": "pdf",
+            "verified": true
+          },
+          {
+            "url": "https://www.redbanknj.org/DocumentCenter/View/17730/2026---Fire-Marshals-Office-CO-and-Smoke-Inspection-Requirements",
+            "quote": "jfenn@redbanknj.org",
+            "doc_date": "2026",
+            "via": "pdf",
+            "verified": true
+          },
+          {
+            "url": "https://www.redbanknj.org/DocumentCenter/View/9339/2019-04-Final",
+            "quote": "Requests for CSDCMAC received more than 10 business days prior to the change",
+            "doc_date": "2019 (Ordinance No. 2019-04)",
+            "via": "pdf",
+            "verified": true
+          },
+          {
+            "url": "https://www.nj.gov/dca/dfs/pdf/fire%20directory_county%20summary/fire_code_enforcement_director.pdf",
+            "quote": "LEAID: 1340-001 Red Bank Boro ... SMOKE DETECTOR COMPLIANCE ... Name: Red Bank Boro Code Enf ... Enf Auth. Municipal ... Fire Official James Fenn ... Phone (732) 530-2760 ... Email jfenn@redbanknj.org",
+            "doc_date": "2026-06 (survey date 6/24/2026)",
+            "via": "state_directory",
+            "verified": null
+          },
+          {
+            "url": "https://nj.gov/dca/dfs/pdf/ANNUAL%20REGISTRY/THIRD%20QUARTER%20LEA%20REGISTRY%202026.pdf",
+            "quote": "Red Bank Borough is the LEA for Little Silver Borough.",
+            "doc_date": "2026-07",
+            "via": "pdf",
+            "verified": true
+          }
+        ],
+        "confidence": "high"
+      }
+    ],
+    "notes": "Borough Code Section 361-8(K), as raised by Ordinance 2019-04, sets the smoke/CO certificate fees at $100 / $125 / $150, which differ from the state schedule. The LEA registry lists Red Bank as code M (multiple), and the state directory numbers Red Bank's LEA as 1340-001. The Fire Marshal's 2026 handout says the extinguisher is no longer required; it cites Assembly Bill A3894, which became P.L.2025, c.19. The state directory lists the Fire Official's phone as (732) 530-2748 and the smoke compliance office phone as (732) 530-2760; the Borough pages use 732-530-2764."
+  },
+  "other_items": [
+    {
+      "label": "Open permits",
+      "detail": "All open permits must have a final inspection before a C.O. can be issued.",
+      "source_url": "https://www.redbanknj.org/DocumentCenter/View/17726/2026---Fire-Marshals-Office-Certificate-of-Ocupancy-Check-List-IPMC"
+    }
+  ],
+  "open_questions": [
+    "Is there an application form for the resale C.O. and the CSDCMAC (none is posted online), and can it be submitted by email?",
+    "How long is the smoke/CO certificate valid if the closing moves?",
+    "For a 2-family sale, are the C.O. inspection and the smoke/CO inspection done on the same visit?"
+  ],
+  "checked_at": "2026-10-04",
+  "verification": {
+    "fees": 5,
+    "fee_ok": 0,
+    "fee_bad": 0,
+    "fee_unchecked": 5,
+    "quotes": 15,
+    "q_ok": 10,
+    "q_bad": 0,
+    "q_unchecked": 5
+  }
+}

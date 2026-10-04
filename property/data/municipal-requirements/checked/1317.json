@@ -1,0 +1,232 @@
+{
+  "municipality_code": "1317",
+  "municipality": "Freehold Township",
+  "county": "MONMOUTH",
+  "resale_co": {
+    "status": "required",
+    "name": "Certificate of Continued Occupancy (C.C.O.)",
+    "issued_by": "Freehold Township Department of Zoning and Housing Enforcement (Housing Department)",
+    "lead_time": "The ordinance says the certificate is granted or denied within 10 days of the application. The inspection can be scheduled only after both the CCO and fire applications are submitted with payment.",
+    "valid_for": "A CCO issued for a resale is valid up to 120 calendar days from issuance or until a change of occupancy, whichever comes first",
+    "requirements": [
+      "Submit the CCO application and the separate Fire (smoke and carbon monoxide) application together, each with its own check or money order",
+      "All permits must be closed; work done without construction or zoning permits (water heaters, furnaces, AC, decks, sheds, fences, finished basements) must be permitted and closed before the CCO is issued",
+      "Well or septic properties need Health Department approval",
+      "All utilities on; house number 6 inches high, visible from the street and contrasting; property in good condition and free of debris",
+      "Windows working with no broken seals and with screens; no double-keyed deadbolts or slide bolts on entry doors; interior doors working",
+      "Handrails on 4 or more risers; appliances, sinks, tubs, showers and toilets working; bathroom vent fan if no operable window",
+      "GFCI outlets within 6 feet of all sinks; outlets, switches and junction boxes covered",
+      "Solid core wood or steel, 20-minute rated door from an attached garage; garage door opener and sump pump on their own outlets (no extension cords)",
+      "Metal dryer vent; washer discharges into drainage; sump pump discharges outside, not into the sewer",
+      "Pool gates self-closing and self-latching; pool running or closed",
+      "If the home will be rented and was built before 1978, a lead-safe certificate is required (rentals only)"
+    ],
+    "fees": [
+      {
+        "label": "CCO inspection, single family home, townhouse or condominium",
+        "amount": "$150.00",
+        "quote": "$150.00 - Single Family Homes, Townhouses, Condominiums",
+        "source_url": "https://www.twp.freehold.nj.us/DocumentCenter/View/219",
+        "verified": true
+      },
+      {
+        "label": "CCO inspection, Silvermead and apartments",
+        "amount": "$75.00",
+        "quote": "$75.00 – Silvermead and Apartments",
+        "source_url": "https://www.twp.freehold.nj.us/DocumentCenter/View/219",
+        "verified": true
+      },
+      {
+        "label": "Each additional inspection date after the two included",
+        "amount": "$65.00",
+        "quote": "If additional inspections are required, there is a fee of $65.00 per inspection date.",
+        "source_url": "https://www.twp.freehold.nj.us/DocumentCenter/View/219",
+        "verified": true
+      },
+      {
+        "label": "Continued certificate of occupancy, single-family homes or condominiums (Code Section 150-62D)",
+        "amount": "$150",
+        "quote": "Single-family homes or condominiums (rental or sale): $150.",
+        "source_url": "https://ecode360.com/9100866",
+        "verified": null
+      },
+      {
+        "label": "Residential reinspection after second inspection (Code Section 150-62D)",
+        "amount": "$65",
+        "quote": "Residential reinspection fee after second inspection: $65 per inspection.",
+        "source_url": "https://ecode360.com/9100866",
+        "verified": null
+      }
+    ],
+    "how_to_apply": "Mail or deliver the CCO application and the Fire application, each with its own check or money order payable to \"Township of Freehold\" (no cash or cards), to the Township of Freehold, Attn: Housing Department, 1 Municipal Plaza (Construction Building), Freehold, NJ 07728. Then call to schedule the joint CCO and fire inspection. Results and the certificate are emailed. If the home cannot pass before closing, the buyer's attorney can request a \"Transfer of Title - No Occupancy\" letter once the fire inspection passes; the buyer may not occupy until the CCO is issued.",
+    "application_url": "https://www.twp.freehold.nj.us/DocumentCenter/View/219",
+    "department_url": "https://www.twp.freehold.nj.us/225/Department-of-Zoning-Housing-Enforcement",
+    "phone": "732-294-2066",
+    "email": "Housing@twp.freehold.nj.us",
+    "contact_name": "",
+    "contact_title": "",
+    "evidence": [
+      {
+        "url": "https://www.twp.freehold.nj.us/226/Forms",
+        "quote": "A Certificate of Continued Occupancy (CCO) inspection and Fire inspection are required when selling or renting a residential property in Freehold Township.",
+        "doc_date": "2026-10-04 (page fetched)",
+        "via": "page",
+        "verified": true
+      },
+      {
+        "url": "https://www.twp.freehold.nj.us/225/Department-of-Zoning-Housing-Enforcement",
+        "quote": "Inspect all residential properties prior to sale or rental for compliance with construction code, property maintenance code, and all other applicable Township codes.",
+        "doc_date": "2026-10-04 (page fetched)",
+        "via": "page",
+        "verified": true
+      },
+      {
+        "url": "https://www.twp.freehold.nj.us/225/Department-of-Zoning-Housing-Enforcement",
+        "quote": "Call the Department of Zoning and Housing Enforcement at 732-294-2066 or 732-294-5109.",
+        "doc_date": "2026-10-04 (page fetched)",
+        "via": "page",
+        "verified": true
+      },
+      {
+        "url": "https://ecode360.com/9101756",
+        "quote": "A certificate of occupancy issued hereunder for the resale of a property shall be valid for a period not to exceed 120 calendar days from the date of issuance or until there occurs a change of occupancy, whichever first occurs.",
+        "doc_date": "2014-06-24 (Ord. No. O-14-8)",
+        "via": "page",
+        "verified": null
+      },
+      {
+        "url": "https://ecode360.com/9101756",
+        "quote": "Such a certificate of occupancy shall be granted or denied within 10 days from the date of the application for same.",
+        "doc_date": "2026-10-04 (page fetched)",
+        "via": "page",
+        "verified": null
+      },
+      {
+        "url": "https://www.twp.freehold.nj.us/DocumentCenter/View/220",
+        "quote": "For Resale and Rental of ALL Residential Homes",
+        "doc_date": "2026-10-04 (page fetched)",
+        "via": "pdf",
+        "verified": true
+      },
+      {
+        "url": "https://www.twp.freehold.nj.us/DocumentCenter/View/227",
+        "quote": "After closing, the buyer is responsible to handle the outstanding deficiencies.",
+        "doc_date": "2026-10-04 (page fetched)",
+        "via": "pdf",
+        "verified": true
+      }
+    ],
+    "confidence": "high",
+    "notes": "Township code Chapters 150 (Fees) and 182 (Housing Standards) were read through the ecode360 print view. Section 182-15A requires a certificate of occupancy from the Code Administrator before a single-family residence is sold or resold with a change of occupancy. The application fee on the CCO form ($150 single family, townhouse or condo) matches Code Section 150-62D. The Zoning page lists 732-294-2068 for the Zoning office (Zoning Official Todd Brown, zoning@twp.freehold.nj.us) and also says to call 294-2068 to schedule a CCO; the FAQ and forms list 732-294-2066 for the Housing Department. Rental-only items (rental registration, lead-safe certificate for pre-1978 rentals) are not sale requirements."
+  },
+  "fire_cert": {
+    "requirements": [
+      "Working smoke alarms on every level including the basement, and within 10 feet of all bedrooms",
+      "Smoke and CO alarms replaced every 10 years; homes built before 1981 with only battery alarms need 10-year sealed battery units",
+      "Carbon monoxide alarm within 10 feet of all bedrooms in the hallway (two if bedrooms are more than 10 feet apart)",
+      "Fire extinguisher in the kitchen, 2A-10B:C, 10 lb or less, tagged or newly bought, mounted no higher than 5 feet (form still lists it; the Township checklist now says this applies to apartments in rental complexes only)"
+    ],
+    "authorities": [
+      {
+        "name": "Freehold Township Fire Prevention (Department of Fire Prevention); inspections done with the Housing Department CCO inspection",
+        "type": "municipal_fire_bureau",
+        "area_served": "Entire township",
+        "lead_time": "Submitted together with the CCO application; inspected at the same appointment. No tiered rush fees are published.",
+        "fees": [
+          {
+            "label": "Smoke detector, carbon monoxide detector and fire extinguisher certification",
+            "amount": "$45.00",
+            "quote": "It is a separate application and separate check or money order for $45.00.",
+            "source_url": "https://www.twp.freehold.nj.us/DocumentCenter/View/219",
+            "verified": true
+          }
+        ],
+        "how_to_apply": "Fill out the Fire Application (Smoke-Carbon Monoxide) and submit it with a separate $45.00 check or money order payable to \"Township of Freehold\", together with the CCO application, to the Housing Department, 1 Municipal Plaza, Freehold. Schedule the inspection after both are in.",
+        "application_url": "https://www.twp.freehold.nj.us/DocumentCenter/View/230",
+        "department_url": "https://www.twp.freehold.nj.us/226/Forms",
+        "phone": "732-294-2066",
+        "email": "Housing@twp.freehold.nj.us",
+        "contact_name": "Shaun Reilly",
+        "contact_title": "Fire Official (state fire directory: (732) 294-2083, sreilly@twp.freehold.nj.us)",
+        "evidence": [
+          {
+            "url": "https://www.twp.freehold.nj.us/226/Forms",
+            "quote": "Each application requires its own check or money order (no cash or credit/debit cards).",
+            "doc_date": "2026-10-04 (page fetched)",
+            "via": "page",
+            "verified": true
+          },
+          {
+            "url": "https://www.twp.freehold.nj.us/DocumentCenter/View/230",
+            "quote": "Please make this a separate Check or Money Order payable to “Township of Freehold”.",
+            "doc_date": "Rev 2/2020",
+            "via": "pdf",
+            "verified": true
+          },
+          {
+            "url": "https://www.twp.freehold.nj.us/DocumentCenter/View/227",
+            "quote": "It is a New Jersey State requirement for all properties to pass the Fire inspection prior to the sale.",
+            "doc_date": "2026-10-04 (page fetched)",
+            "via": "pdf",
+            "verified": true
+          },
+          {
+            "url": "https://www.nj.gov/dca/dfs/pdf/fire%20directory_county%20summary/fire_code_enforcement_director.pdf",
+            "quote": "LEAID: 1316-001 Freehold Twp ... Name: Freehold Twp Fire Prev ... Fire Official Shaun Reilly Phone (732) 294-2050 ... Phone (732) 294-2083 ... Email sreilly@twp.freehold.nj.us",
+            "doc_date": "2026-01-26 (survey date)",
+            "via": "state_directory",
+            "verified": null
+          },
+          {
+            "url": "https://nj.gov/dca/dfs/pdf/ANNUAL%20REGISTRY/THIRD%20QUARTER%20LEA%20REGISTRY%202026.pdf",
+            "quote": "M Freehold Township",
+            "doc_date": "2026-07",
+            "via": "pdf",
+            "verified": true
+          }
+        ],
+        "confidence": "high"
+      }
+    ],
+    "notes": "The $45.00 fee comes from the Fire application form (Rev 2/2020) and the current CCO application. It is a flat fee; no rush tiers are published. The fire form still certifies an ABC fire extinguisher in the kitchen, which P.L.2025, c.19 dropped from the state sale certificate in February 2025; the inspection checklist marks the extinguisher rule as applying to apartments in rental complexes only. Confirm with the office."
+  },
+  "other_items": [
+    {
+      "label": "Open permits",
+      "detail": "All construction permits must be closed, and any work done without construction or zoning permits must be permitted and closed, before the CCO is issued. Check with the Construction Department at 732-294-2050.",
+      "source_url": "https://www.twp.freehold.nj.us/DocumentCenter/View/220"
+    },
+    {
+      "label": "Well or septic approval",
+      "detail": "Homes with a well or septic system need Health Department approval as part of the CCO (Health Department, 732-294-2060).",
+      "source_url": "https://www.twp.freehold.nj.us/DocumentCenter/View/220"
+    },
+    {
+      "label": "Transfer of Title - No Occupancy",
+      "detail": "If the home cannot pass the CCO before closing, the buyer's attorney can submit the Township's sample letter; after the fire inspection passes the Township emails a Transfer of Title - No Occupancy document for closing. The buyer may not occupy until the CCO passes.",
+      "source_url": "https://www.twp.freehold.nj.us/DocumentCenter/View/227"
+    },
+    {
+      "label": "Rental registration deactivation",
+      "detail": "If the home being sold was a registered rental, the landlord registration is deactivated when the sale CCO is processed.",
+      "source_url": "https://www.twp.freehold.nj.us/DocumentCenter/View/219"
+    }
+  ],
+  "open_questions": [
+    "Is the fire extinguisher still checked on 1 and 2 family resales after P.L.2025, c.19?",
+    "Is the $45.00 fire fee still current, and is there a rush or reinspection fee for the fire certificate?",
+    "How far ahead of closing should the joint inspection be booked?",
+    "The Freehold Area Health Department requires a lead clearance for pre-1978 homes before a resale CCO in Freehold Borough (Borough ordinance). Does the Township apply anything similar to owner-occupied sales? The Township checklist only mentions lead-safe certificates for rentals."
+  ],
+  "checked_at": "2026-10-04",
+  "verification": {
+    "fees": 6,
+    "fee_ok": 4,
+    "fee_bad": 0,
+    "fee_unchecked": 2,
+    "quotes": 12,
+    "q_ok": 9,
+    "q_bad": 0,
+    "q_unchecked": 3
+  }
+}

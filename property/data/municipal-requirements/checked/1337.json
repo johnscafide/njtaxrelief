@@ -1,0 +1,366 @@
+{
+  "municipality_code": "1337",
+  "municipality": "Ocean Township",
+  "county": "MONMOUTH",
+  "resale_co": {
+    "status": "required",
+    "name": "Code Compliance Inspection Certificate (CCIC) for sales",
+    "issued_by": "Township of Ocean Division of Housing, Code Enforcement and Clean Communities (Housing Inspector / Code Enforcement Official)",
+    "lead_time": "The Township must inspect and issue the CCIC or a notice of violation within 10 business days of the application.",
+    "valid_for": "If a Certificate of Transfer of Title is used first, a CCIC inspection within 90 days of the original inspection is billed as a reinspection; after 90 days a new application is needed.",
+    "requirements": [
+      "Exterior and interior inspection under the International Property Maintenance Code (paint and siding, gutters, house number at least 4 inches, Township garbage and recycling containers, handrails, pool barriers, GFCI outlets, egress locks, bedroom doors)",
+      "All building permits must be closed before calling for the CCIC inspection",
+      "Smoke certification from your fire district must be submitted to the housing office before the certificate is issued",
+      "Septic or well report from the Monmouth County Health Department where the home is on a septic system or well; certified lab water test for wells",
+      "Level 1 fireplace or chimney inspection by a licensed chimney sweep",
+      "All utilities on at the time of inspection",
+      "Cracked sidewalks along the street must be repaired to the Municipal Engineer's requirements",
+      "Garage apartments or 2-family use need paperwork showing they are legal; finished third floors or attics will not pass without it"
+    ],
+    "fees": [
+      {
+        "label": "CCIC for resale of a detached dwelling, applied and paid online",
+        "amount": "$150",
+        "quote": "A nonrefundable fee of $150 shall be charged to cover the cost of application which is filled out and paid for online, which includes an inspection in connection with a resale of a detached dwelling unit.",
+        "source_url": "https://ecode360.com/35337996",
+        "verified": null
+      },
+      {
+        "label": "CCIC for resale of an attached single-family dwelling, applied and paid online",
+        "amount": "$125",
+        "quote": "A nonrefundable fee of $125 shall be charged to cover the cost of application which is filled out and paid for online, which includes an inspection, in connection with a resale of an attached single-family dwelling unit.",
+        "source_url": "https://ecode360.com/35337996",
+        "verified": null
+      },
+      {
+        "label": "CCIC for resale of a detached dwelling, paper application",
+        "amount": "$175",
+        "quote": "A nonrefundable fee of $175 shall be charged to cover the cost of inspection in connection with a resale of a detached dwelling unit.",
+        "source_url": "https://ecode360.com/35337996",
+        "verified": null
+      },
+      {
+        "label": "CCIC for resale of an attached single-family dwelling, paper application",
+        "amount": "$150",
+        "quote": "A nonrefundable fee of $150 shall be charged to cover the cost of inspection in connection with a resale of an attached single-family dwelling unit.",
+        "source_url": "https://ecode360.com/35337996",
+        "verified": null
+      },
+      {
+        "label": "Reinspection when utilities are off, and second or later reinspections (first reinspection is free if utilities are on)",
+        "amount": "$75",
+        "quote": "A reinspection fee of $75 shall be required for all reinspections where the utilities are not operational and for all second and subsequent reinspections for sales, rentals, and reoccupancy of single-family dwellings and/or title only transfers.",
+        "source_url": "https://ecode360.com/35337996",
+        "verified": null
+      },
+      {
+        "label": "Extra charge if utilities are not on at the inspection (Township checklist)",
+        "amount": "$75.00",
+        "quote": "charged an additional $75.00 fee",
+        "source_url": "https://oceantwp.qscendcms.com/ckfinder/connector?command=Proxy&lang=en&type=Files&currentFolder=%2F&hash=c245c263ce0eced480effe66bbede6b4d46c15ae&fileName=sales%20Checklist%206-2024.pdf",
+        "verified": true
+      }
+    ],
+    "how_to_apply": "Apply online (cheaper) or on paper through the Township's Community Portal link on the Housing Forms page, then schedule with the Housing Division (732-531-5000 ext. 3392, oceancode@oceantwp.org). Close all building permits first. Before the certificate is issued, submit the smoke/CO certificate from your fire district, any septic/well report, and the Level 1 chimney inspection report. Post-dated checks are not accepted. Office: 399 Monmouth Road, Oakhurst, Monday to Friday 8:30 a.m. to 4:30 p.m.",
+    "application_url": "https://webgeo.co/prod1/portal/portal.jsp?c=3668658&p=264317679&g=277480433",
+    "department_url": "https://www.oceantwp.org/p/division-of-housing-1",
+    "phone": "732-531-5000 ext. 3392",
+    "email": "oceancode@oceantwp.org",
+    "contact_name": "Ken Pieslak",
+    "contact_title": "Code Enforcement Administrator (ext. 3378); Toni Severini, Administrative Secretary (ext. 3392)",
+    "evidence": [
+      {
+        "url": "https://www.oceantwp.org/p/division-of-housing-1",
+        "quote": "The Housing Division is responsible for conducting Code Compliance Inspection Certificate inspections on all new sales of homes, condos and townhouses and any rentals that change occupancy.",
+        "doc_date": "2026-10-04 (page fetched)",
+        "via": "page",
+        "verified": true
+      },
+      {
+        "url": "https://www.oceantwp.org/p/housing-forms-1",
+        "quote": "No one is allowed to occupy or move in without a Code Compliance Inspection Certificate being issued.",
+        "doc_date": "2026-10-04 (page fetched)",
+        "via": "page",
+        "verified": true
+      },
+      {
+        "url": "https://www.oceantwp.org/p/housing-forms-1",
+        "quote": "All permits (SALES) must be closed prior to calling for a Code Compliance Inspection Certificate inspection.",
+        "doc_date": "2026-10-04 (page fetched)",
+        "via": "page",
+        "verified": true
+      },
+      {
+        "url": "https://www.oceantwp.org/p/housing-forms-1",
+        "quote": "We cannot accept post-dated checks...they will be returned to you.",
+        "doc_date": "2026-10-04 (page fetched)",
+        "via": "page",
+        "verified": true
+      },
+      {
+        "url": "https://ecode360.com/35337988",
+        "quote": "A new Code Compliance Inspection Certificate is required for every change in ownership or change in occupancy for every dwelling, apartment and/or there alike.",
+        "doc_date": "2024-06-06 (Ord. No. 2465)",
+        "via": "page",
+        "verified": null
+      },
+      {
+        "url": "https://ecode360.com/35337993",
+        "quote": "An inspection pursuant to this section shall be made and either a Code Compliance Inspection Certificate or a notice of violation shall be issued within 10 business days from the date of application.",
+        "doc_date": "2024-06-06 (Ord. No. 2465)",
+        "via": "page",
+        "verified": null
+      },
+      {
+        "url": "https://ecode360.com/35922344",
+        "quote": "Should the inspection be completed subsequent to the 90 days, a new application will be required to be completed for a Code Compliance Inspection Certificate.",
+        "doc_date": "2024-06-06 (Ord. No. 2465)",
+        "via": "page",
+        "verified": null
+      },
+      {
+        "url": "https://oceantwp.qscendcms.com/ckfinder/connector?command=Proxy&lang=en&type=Files&currentFolder=%2F&hash=c245c263ce0eced480effe66bbede6b4d46c15ae&fileName=sales%20Checklist%206-2024.pdf",
+        "quote": "Smoke certification (performed by your fire district)",
+        "doc_date": "6-2024",
+        "via": "pdf",
+        "verified": true
+      },
+      {
+        "url": "https://oceantwp.qscendcms.com/ckfinder/connector?command=Proxy&lang=en&type=Files&currentFolder=%2F&hash=c245c263ce0eced480effe66bbede6b4d46c15ae&fileName=sales%20Checklist%206-2024.pdf",
+        "quote": "Office: 732-531-5000 Ext 3392 - oceancode@oceantwp.org",
+        "doc_date": "6-2024",
+        "via": "pdf",
+        "verified": true
+      },
+      {
+        "url": "https://oceantwp.qscendcms.com/ckfinder/connector?command=Proxy&lang=en&type=Files&currentFolder=%2F&hash=c245c263ce0eced480effe66bbede6b4d46c15ae&fileName=sales%20Checklist%206-2024.pdf",
+        "quote": "Unless paperwork can be provided, garage apartments or 2-family houses are illegal, and finished",
+        "doc_date": "6-2024",
+        "via": "pdf",
+        "verified": true
+      },
+      {
+        "url": "https://www.oceantwp.org/p/housing-code-enforcement-and-clean-communities-personnel",
+        "quote": "Code Enforcement Administrator",
+        "doc_date": "2026-10-04 (page fetched)",
+        "via": "page",
+        "verified": true
+      }
+    ],
+    "confidence": "high",
+    "notes": "Township Code Section 7-3.3 (amended by Ord. No. 2465, June 6, 2024) requires a new Code Compliance Inspection Certificate for every change in ownership. Fees under Section 7-3.9 are lower when you apply and pay online ($150 detached, $125 attached) than on paper ($175 / $150). The code has no separate fee line for a 2-family resale, and the Township checklist says 2-family houses are illegal unless paperwork shows otherwise, so ask the Housing Division how a legal 2-family is billed. A Certificate of Transfer of Title (Section 7-3.12) lets a property transfer without occupancy. Staff names, titles and extensions are from the Housing personnel page; the Division page lists Toni Severini's extension 3392 with a typo in the area code (731). Ken Pieslak's email appears as Kpieslak@oceantwp.org. Landlord registration and the lead-safe program apply to rentals only."
+  },
+  "fire_cert": {
+    "requirements": [
+      "Smoke alarms no older than 10 years; battery units must be 10-year sealed; UL listed",
+      "By construction year (Fire District #1 handout): before 1978 battery alarms on each level; 1978-1983 hardwired on each level; 1984-1990 interconnected hardwired with battery backup on each level; 1991 on interconnected hardwired with battery backup on each level and in all bedrooms",
+      "Smoke alarms within 10 feet of bedroom doors, near stairs; in 2-family homes in common hallways and at each stair landing",
+      "Carbon monoxide alarms on each sleeping level near bedroom doors in homes with fuel-burning devices or an attached garage",
+      "Central station alarm systems must be audible and testable and cannot replace required alarms",
+      "Secondary power source label (\"CAUTION: MULTIPLE SOURCES OF POWER\") within 18 inches of the main panel and meter for homes with generators, solar or batteries",
+      "Fire extinguisher no longer required in Ocean Township (Fire District #1 handout, 9-2025); the Township Code fee section still names it"
+    ],
+    "authorities": [
+      {
+        "name": "Township of Ocean Fire District #1 Bureau of Fire Prevention (Oakhurst)",
+        "type": "fire_district",
+        "area_served": "Fire District #1 area of the township (Ordinance No. 510 boundaries)",
+        "lead_time": "Fee is set by business days between the request and the change of occupant: more than 10 business days for the lowest fee. Inspections are closed out in the system by the end of the inspection day.",
+        "fees": [
+          {
+            "label": "Smoke/CO certificate, request more than 10 business days before change of occupant",
+            "amount": "$35",
+            "quote": "Request received more than 10 business days prior to change of occupant: $35.",
+            "source_url": "https://ecode360.com/35335884",
+            "verified": null
+          },
+          {
+            "label": "Request four to 10 business days before",
+            "amount": "$70",
+            "quote": "Request received four to 10 business days prior to change of occupant: $70.",
+            "source_url": "https://ecode360.com/35335884",
+            "verified": null
+          },
+          {
+            "label": "Request fewer than four business days before",
+            "amount": "$125",
+            "quote": "Request received fewer than four business days prior to change of occupant: $125.",
+            "source_url": "https://ecode360.com/35335884",
+            "verified": null
+          },
+          {
+            "label": "Reinspection",
+            "amount": "$20",
+            "quote": "Reinspection fee: $20.",
+            "source_url": "https://ecode360.com/35335884",
+            "verified": null
+          }
+        ],
+        "how_to_apply": "Call the Fire Marshal's Office at 732-222-2624 to schedule, or use the online smoke/CO form for Fire District #1 and #2 linked on the Township Housing Forms page (www.oceantwp.org or www.tofd1.org). Send the passed certificate to the Housing Division with the CCIC.",
+        "application_url": "https://webgeo.co/prod1/portal/portal.jsp?c=3668658&p=557697639&g=557697648",
+        "department_url": "https://www.oceantwp.org/p/housing-forms-1",
+        "phone": "732-222-2624",
+        "email": "",
+        "contact_name": "Craig Flannigan",
+        "contact_title": "Fire Marshal, Fire District #1",
+        "evidence": [
+          {
+            "url": "https://oceantwp.qscendcms.com/ckfinder/connector?command=Proxy&lang=en&type=Files&currentFolder=%2F&hash=c245c263ce0eced480effe66bbede6b4d46c15ae&fileName=fire%20inspection%20requirements%20FD1%209-24-25.pdf",
+            "quote": "The owner/seller or realtor must contact the Fire Marshal's Office at (732) 222-2624 to schedule",
+            "doc_date": "9-2025 (scanned PDF)",
+            "via": "pdf",
+            "verified": null
+          },
+          {
+            "url": "https://oceantwp.qscendcms.com/ckfinder/connector?command=Proxy&lang=en&type=Files&currentFolder=%2F&hash=c245c263ce0eced480effe66bbede6b4d46c15ae&fileName=fire%20inspection%20requirements%20FD1%209-24-25.pdf",
+            "quote": "Fire Extinguisher Compliance - NO LONGER REQUIRED IN OCEAN TWP.",
+            "doc_date": "9-2025 (scanned PDF)",
+            "via": "pdf",
+            "verified": null
+          },
+          {
+            "url": "https://www.oceantwp.org/p/housing-forms-1",
+            "quote": "ONLINE Form for Fire District #1 and #2",
+            "doc_date": "2026-10-04 (page fetched)",
+            "via": "page",
+            "verified": true
+          },
+          {
+            "url": "https://ecode360.com/35335759",
+            "quote": "Fire District #1. The local enforcing agency shall be the bureau of fire prevention which shall be operated under the supervision of a fire marshal under the board of fire commissioners, Fire District #1, within the limits established by Ordinance No. 510 of the Township of Ocean.",
+            "doc_date": "2026-01-08 (code current through)",
+            "via": "page",
+            "verified": null
+          },
+          {
+            "url": "https://ecode360.com/35335884",
+            "quote": "The application fee for a certificate of smoke detector, carbon monoxide and fire extinguisher compliance is as follows:",
+            "doc_date": "2026-01-08 (code current through)",
+            "via": "page",
+            "verified": null
+          },
+          {
+            "url": "https://nj.gov/dca/dfs/pdf/ANNUAL%20REGISTRY/THIRD%20QUARTER%20LEA%20REGISTRY%202026.pdf",
+            "quote": "D         Ocean Township (1)",
+            "doc_date": "2026-07",
+            "via": "pdf",
+            "verified": true
+          }
+        ],
+        "confidence": "high"
+      },
+      {
+        "name": "Township of Ocean Fire District #2 Bureau of Fire Prevention (Wanamassa)",
+        "type": "fire_district",
+        "area_served": "Fire District #2 area of the township (Ordinance No. 506 boundaries)",
+        "lead_time": "Same fee tiers as District #1 under Township Code Section 6-5.6.",
+        "fees": [
+          {
+            "label": "Smoke/CO certificate, request more than 10 business days before change of occupant",
+            "amount": "$35",
+            "quote": "Request received more than 10 business days prior to change of occupant: $35.",
+            "source_url": "https://ecode360.com/35335884",
+            "verified": null
+          },
+          {
+            "label": "Request four to 10 business days before",
+            "amount": "$70",
+            "quote": "Request received four to 10 business days prior to change of occupant: $70.",
+            "source_url": "https://ecode360.com/35335884",
+            "verified": null
+          },
+          {
+            "label": "Request fewer than four business days before",
+            "amount": "$125",
+            "quote": "Request received fewer than four business days prior to change of occupant: $125.",
+            "source_url": "https://ecode360.com/35335884",
+            "verified": null
+          },
+          {
+            "label": "Reinspection",
+            "amount": "$20",
+            "quote": "Reinspection fee: $20.",
+            "source_url": "https://ecode360.com/35335884",
+            "verified": null
+          }
+        ],
+        "how_to_apply": "Use the online smoke/CO form for Fire District #1 and #2 linked on the Township Housing Forms page, or call the District #2 fire official at (732) 988-0880.",
+        "application_url": "https://webgeo.co/prod1/portal/portal.jsp?c=3668658&p=557697639&g=557697648",
+        "department_url": "https://www.oceantwp.org/p/housing-forms-1",
+        "phone": "(732) 988-0880",
+        "email": "thaege.otfm@verizon.net",
+        "contact_name": "Tom Haege",
+        "contact_title": "Fire Official, Ocean Twp Fire District #2 (state directory)",
+        "evidence": [
+          {
+            "url": "https://ecode360.com/35335759",
+            "quote": "Fire District #2. The local enforcing agency shall be the bureau of fire prevention which shall be operated under the supervision of a fire marshal under the board of fire commissioners, Fire District #2, within the limits established by Ordinance No. 506 of the Township of Ocean.",
+            "doc_date": "2026-01-08 (code current through)",
+            "via": "page",
+            "verified": null
+          },
+          {
+            "url": "https://www.nj.gov/dca/dfs/pdf/fire%20directory_county%20summary/fire_code_enforcement_director.pdf",
+            "quote": "Ocean Twp Dist #2 ... SMOKE DETECTOR COMPLIANCE ... Name: Ocean Twp Fire Dist #2 ... Addr: 2001 Sunset Av ... Fire Official Tom Haege ... Phone (732) 988-0880 ... Email thaege.otfm@verizon.net",
+            "doc_date": "2026-07 (survey date 7/22/2026)",
+            "via": "state_directory",
+            "verified": null
+          },
+          {
+            "url": "https://nj.gov/dca/dfs/pdf/ANNUAL%20REGISTRY/THIRD%20QUARTER%20LEA%20REGISTRY%202026.pdf",
+            "quote": "D         Ocean Township (2)",
+            "doc_date": "2026-07",
+            "via": "pdf",
+            "verified": true
+          }
+        ],
+        "confidence": "medium"
+      }
+    ],
+    "notes": "Ocean Township has two fire districts, each its own LEA (registry code D for Ocean Township (1) and (2)). Township Code Section 6-5.6 sets the smoke/CO certificate fees at $35 / $70 / $125 plus a $20 reinspection, lower than the state schedule; ecode360 shows the chapter amended as recently as Ord. No. 2529 (12-11-2025). Fire District #1's 9-2025 requirements handout (a scanned PDF, so its quotes cannot be machine-checked) names Craig Flannigan as Fire Marshal at 72 Larkin Place, office 732-222-2624, and says the fire extinguisher is no longer required in Ocean Township, consistent with P.L.2025, c.19; the Township Code fee section title still names the extinguisher. The state directory shows the District #2 entry (Tom Haege) on both Ocean Township pages, which looks like a directory quirk. The registry also lists an 'Ocean Township' with code S, which is Ocean Township in Ocean County, not this town."
+  },
+  "other_items": [
+    {
+      "label": "Open building permits",
+      "detail": "All permits must be closed before calling for the CCIC inspection; the Township reviews for open permits before issuing the certificate.",
+      "source_url": "https://www.oceantwp.org/p/housing-forms-1"
+    },
+    {
+      "label": "Septic and well",
+      "detail": "Homes on septic or well need a Monmouth County Health Department report; well water must be tested by a certified lab and meet NJDEP standards.",
+      "source_url": "https://oceantwp.qscendcms.com/ckfinder/connector?command=Proxy&lang=en&type=Files&currentFolder=%2F&hash=c245c263ce0eced480effe66bbede6b4d46c15ae&fileName=sales%20Checklist%206-2024.pdf"
+    },
+    {
+      "label": "Chimney inspection",
+      "detail": "A Level 1 fireplace/chimney inspection report from a licensed chimney sweep must be submitted before the CCIC is issued.",
+      "source_url": "https://oceantwp.qscendcms.com/ckfinder/connector?command=Proxy&lang=en&type=Files&currentFolder=%2F&hash=c245c263ce0eced480effe66bbede6b4d46c15ae&fileName=sales%20Checklist%206-2024.pdf"
+    },
+    {
+      "label": "Sidewalks",
+      "detail": "Cracked sidewalks and public access along the street are the owner's responsibility and must be repaired to the Municipal Engineer's requirements (CCIC checklist item).",
+      "source_url": "https://oceantwp.qscendcms.com/ckfinder/connector?command=Proxy&lang=en&type=Files&currentFolder=%2F&hash=c245c263ce0eced480effe66bbede6b4d46c15ae&fileName=sales%20Checklist%206-2024.pdf"
+    },
+    {
+      "label": "Certificate of Transfer of Title",
+      "detail": "A transfer-of-title certificate allows the sale without occupancy; a CCIC is still needed before anyone moves in.",
+      "source_url": "https://ecode360.com/35922344"
+    }
+  ],
+  "open_questions": [
+    "What fee applies to the resale of a legal 2-family home (Section 7-3.9 lists only detached and attached single-family resales)?",
+    "Which fire district serves the property address, and does District #2 also use the online form and the same procedure as District #1?",
+    "How long is the CCIC valid if closing is delayed?"
+  ],
+  "checked_at": "2026-10-04",
+  "verification": {
+    "fees": 14,
+    "fee_ok": 1,
+    "fee_bad": 0,
+    "fee_unchecked": 13,
+    "quotes": 20,
+    "q_ok": 11,
+    "q_bad": 0,
+    "q_unchecked": 9
+  }
+}

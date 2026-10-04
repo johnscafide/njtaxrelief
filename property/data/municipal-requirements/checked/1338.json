@@ -1,0 +1,246 @@
+{
+  "municipality_code": "1338",
+  "municipality": "Oceanport Borough",
+  "county": "MONMOUTH",
+  "resale_co": {
+    "status": "required",
+    "name": "Rental/Resale/New Tenant Certificate (resale certificate)",
+    "issued_by": "Borough of Oceanport Housing Inspector (Code Enforcement)",
+    "lead_time": "The certificate is granted or denied within 21 days of the application. Open permits or violations must be resolved before an inspection is scheduled. An expedited certificate is available for $125 where eligible.",
+    "valid_for": "",
+    "requirements": [
+      "Inspection by the Housing Inspector for compliance with Borough zoning and property maintenance laws, site plans, building permits and Tax Assessor records",
+      "Smoke/CO certificate from the Fire Official must be secured before the resale certificate is issued",
+      "All permits must be closed before the inspection",
+      "All utilities on; grass cut; exterior in good condition; house numbers at least 3 inches",
+      "Smoke detector in every sleeping room, within 10 feet of each sleeping area and on each floor; hardwired units no older than 10 years, battery units 10-year sealed",
+      "CO detector within 10 feet of each sleeping area",
+      "Fire extinguisher 2A10BC in the kitchen with receipt or third-party inspection (checklist still lists it)",
+      "GFCI outlets near water and outside; handrails on steps over 3 risers; solid core or fire rated door from attached garage"
+    ],
+    "fees": [
+      {
+        "label": "Resale or transfer of ownership certificate",
+        "amount": "$65",
+        "quote": "Rentals/resales and transfers of ownership: $65.",
+        "source_url": "https://ecode360.com/45429930",
+        "verified": null
+      },
+      {
+        "label": "Reinspection, each time",
+        "amount": "$50",
+        "quote": "Reinspection, each time: $50.",
+        "source_url": "https://ecode360.com/45429930",
+        "verified": null
+      },
+      {
+        "label": "Eligible expedited certificate",
+        "amount": "$125",
+        "quote": "Eligible expedited certificate: $125.",
+        "source_url": "https://ecode360.com/45429930",
+        "verified": null
+      }
+    ],
+    "how_to_apply": "Apply online with the Borough's Rental/Resale (Real Estate) Certificate Application on the SDL portal and pay the fee at application. Resolve any open permits with the Construction Department first. Separately apply for the Smoke/CO certificate from the Fire Official (also on the SDL portal); the resale certificate is not issued until the fire certificate is secured. Borough Hall: 910 Oceanport Way, (732) 222-8221.",
+    "application_url": "https://www.sdlportal.com/towns/nj/monmouth/oceanport/requests/certificate?rq=1",
+    "department_url": "https://www.oceanportboro.com/departments/code",
+    "phone": "732-222-8221",
+    "email": "codeenforcement@oceanportboro.com",
+    "contact_name": "Timothy P. Griffin",
+    "contact_title": "Housing Inspector / Code Enforcement (also Fire Official)",
+    "evidence": [
+      {
+        "url": "https://www.oceanportboro.com/departments/code",
+        "quote": "All dwellings or commercial buildings being offered for resale in the Borough of Oceanport must be inspected and approved by the Housing Inspector/Construction Official.",
+        "doc_date": "2026-10-04 (page fetched)",
+        "via": "page",
+        "verified": true
+      },
+      {
+        "url": "https://ecode360.com/45429899",
+        "quote": "A rental/resale/new tenant certificate is required for rental/resale and transfer of title for all residential and commercial units.",
+        "doc_date": "2024-05-16 (Ord. No. 1094)",
+        "via": "page",
+        "verified": null
+      },
+      {
+        "url": "https://ecode360.com/45429899",
+        "quote": "Such rental/resale/new tenant certificate shall be granted or denied within 21 days from the date of the application for same.",
+        "doc_date": "2024-05-16 (Ord. No. 1094)",
+        "via": "page",
+        "verified": null
+      },
+      {
+        "url": "https://ecode360.com/45429899",
+        "quote": "The owner, or their agent, shall be responsible for resolving any open permits with the construction department prior to submitting an application for a rental/resale/new tenant certificate.",
+        "doc_date": "2024-05-16 (Ord. No. 1094)",
+        "via": "page",
+        "verified": null
+      },
+      {
+        "url": "https://www.oceanportboro.com/media/attachments/2021/06/01/housing-inspection-check-list.pdf",
+        "quote": "All permits must be closed prior to inspection",
+        "doc_date": "2021-06 (posted)",
+        "via": "pdf",
+        "verified": true
+      },
+      {
+        "url": "https://www.oceanportboro.com/media/attachments/2021/06/01/housing-inspection-check-list.pdf",
+        "quote": "Timothy Griffin (Housing Inspector)",
+        "doc_date": "2021-06 (posted)",
+        "via": "pdf",
+        "verified": true
+      },
+      {
+        "url": "https://www.oceanportboro.com/government/directory",
+        "quote": "Code Enforcement",
+        "doc_date": "2026-10-04 (page fetched)",
+        "via": "page",
+        "verified": true
+      },
+      {
+        "url": "https://www.oceanportboro.com/government/directory",
+        "quote": "Housing Inspector",
+        "doc_date": "2026-10-04 (page fetched)",
+        "via": "page",
+        "verified": true
+      }
+    ],
+    "confidence": "high",
+    "notes": "Borough Code Chapter 295, Article V (adopted 2021 by Ord. No. 1043, amended in its entirety 5-16-2024 by Ord. No. 1094) requires a rental/resale/new tenant certificate for every resale and transfer of title. The $65 fee applies per certificate; the code does not set a different fee for 2-family homes. Section 295-20F allows a conditional certificate when a buyer signs a letter accepting non-safety violations. The Borough directory lists Timothy P. Griffin as Code Enforcement (codeenforcement@oceanportboro.com, 732-222-8221) and as Housing Inspector (tgriffin@oceanportboro.com, 732-222-0641). Landlord registration and insurance rules in the same article apply to rentals only."
+  },
+  "fire_cert": {
+    "requirements": [
+      "Ten-year sealed battery smoke alarms (or existing A/C powered alarms) for any residential property transfer; combination smoke/CO units included",
+      "Smoke detector in every sleeping room, within 10 feet of each sleeping area and on each floor (Borough checklist)",
+      "CO detector within 10 feet of each sleeping area",
+      "Portable fire extinguisher 2A-10B:C, 10 lb or less, within 10 feet of the kitchen, serviced and tagged within 12 months or with a purchase receipt (Borough pages and checklist still list it)"
+    ],
+    "authorities": [
+      {
+        "name": "Oceanport Bureau of Fire Prevention (Fire Official / Fire Marshal)",
+        "type": "municipal_fire_bureau",
+        "area_served": "Entire borough",
+        "lead_time": "Fee depends on business days before the change of occupant: more than 10 business days for the lowest fee.",
+        "fees": [
+          {
+            "label": "Smoke/CO certificate (CSACMAPFEC), request more than 10 business days before change of occupant",
+            "amount": "$45",
+            "quote": "Requests for a CSACMAPFEC received more than 10 business days prior to the change of occupant: $45.",
+            "source_url": "https://ecode360.com/11274750",
+            "verified": null
+          },
+          {
+            "label": "Request four to 10 business days before",
+            "amount": "$90",
+            "quote": "Requests for a CSACMAPFEC received four to 10 business days prior to the change of occupant: $90.",
+            "source_url": "https://ecode360.com/11274750",
+            "verified": null
+          },
+          {
+            "label": "Request fewer than four business days before",
+            "amount": "$161",
+            "quote": "Requests for a CSACMAPFEC received fewer than four business days prior to the change of occupant: $161.",
+            "source_url": "https://ecode360.com/11274750",
+            "verified": null
+          },
+          {
+            "label": "Reinspection",
+            "amount": "$35",
+            "quote": "Reinspection fee shall be $35.",
+            "source_url": "https://ecode360.com/11274750",
+            "verified": null
+          }
+        ],
+        "how_to_apply": "Apply online with the Smoke/CO Certificate Application on the Borough's SDL portal. All sales and rentals must apply for a Smoke/CO certificate inspection by the Fire Official. An extension form is posted on the Fire Prevention page.",
+        "application_url": "https://www.sdlportal.com/towns/nj/monmouth/oceanport/requests/smokeAlarm",
+        "department_url": "https://www.oceanportboro.com/departments/fire-prevention",
+        "phone": "732-222-8221",
+        "email": "tgriffin@oceanportboro.com",
+        "contact_name": "Timothy P. Griffin",
+        "contact_title": "Fire Marshal / Fire Official",
+        "evidence": [
+          {
+            "url": "https://www.oceanportboro.com/departments/fire-prevention",
+            "quote": "Effective October 18, 2021 ALL Sales/rentals shall be required to apply for a Smoke/CO certificate inspection by the Fire Official.",
+            "doc_date": "2026-10-04 (page fetched)",
+            "via": "page",
+            "verified": true
+          },
+          {
+            "url": "https://www.oceanportboro.com/departments/fire-prevention",
+            "quote": "Also, whenever a residential property changes hands, a special inspection is required.",
+            "doc_date": "2026-10-04 (page fetched)",
+            "via": "page",
+            "verified": true
+          },
+          {
+            "url": "https://ecode360.com/45429899",
+            "quote": "A rental/resale/new tenant certificate in accordance with Subsections A and B above shall not be issued until a certificate is secured from the Fire Official, verifying that the property is in compliance with Ch. 223, Fire Prevention, requirements.",
+            "doc_date": "2024-05-16 (Ord. No. 1094)",
+            "via": "page",
+            "verified": null
+          },
+          {
+            "url": "https://www.oceanportboro.com/departments/code",
+            "quote": "Ten-year sealed battery-powered single station smoke alarms are now required for any residential property transfer.",
+            "doc_date": "2026-10-04 (page fetched)",
+            "via": "page",
+            "verified": true
+          },
+          {
+            "url": "https://www.oceanportboro.com/government/directory",
+            "quote": "Fire Marshal/Fire Official",
+            "doc_date": "2026-10-04 (page fetched)",
+            "via": "page",
+            "verified": true
+          },
+          {
+            "url": "https://www.nj.gov/dca/dfs/pdf/fire%20directory_county%20summary/fire_code_enforcement_director.pdf",
+            "quote": "LEAID: 1338-001 Oceanport Boro ... SMOKE DETECTOR COMPLIANCE ... Name: Oceanport Boro Code Enf ... Enf Auth. Fire Dept ... Fire Official Timothy P Griffin ... Phone (732) 222-8221 ... Email tgriffin@oceanportboro.com",
+            "doc_date": "2026-07 (survey date 7/1/2026)",
+            "via": "state_directory",
+            "verified": null
+          },
+          {
+            "url": "https://nj.gov/dca/dfs/pdf/ANNUAL%20REGISTRY/THIRD%20QUARTER%20LEA%20REGISTRY%202026.pdf",
+            "quote": "F         Oceanport Borough",
+            "doc_date": "2026-07",
+            "via": "pdf",
+            "verified": true
+          }
+        ],
+        "confidence": "high"
+      }
+    ],
+    "notes": "Borough Code Chapter 223 (amended 4-15-2021 by Ord. No. 1033) sets the CSACMAPFEC fees at the state amounts ($45 / $90 / $161) plus a $35 reinspection. The ecode360 chapter page was read in full; individual section numbers were not shown, so the chapter link is cited. The Code Enforcement page and the housing checklist still require a 2A-10B:C fire extinguisher, but the state dropped the extinguisher from the sale certificate in February 2025 (P.L.2025, c.19), so confirm with the Fire Official. The state directory lists the smoke detector compliance office as Oceanport Borough Code Enforcement with Fire Official Timothy P Griffin, (732) 222-8221, tgriffin@oceanportboro.com, and notes a shared service agreement with Long Branch City."
+  },
+  "other_items": [
+    {
+      "label": "Open permits and violations",
+      "detail": "Open construction permits and outstanding violations must be resolved before the resale certificate application and inspection.",
+      "source_url": "https://ecode360.com/45429899"
+    },
+    {
+      "label": "Zoning and records match",
+      "detail": "The resale certificate verifies the property matches Borough zoning, site plans, building permits and Tax Assessor records.",
+      "source_url": "https://ecode360.com/45429899"
+    }
+  ],
+  "open_questions": [
+    "Does the Fire Official still require a portable fire extinguisher for the smoke/CO certificate after P.L.2025, c.19?",
+    "How long are the resale certificate and the smoke/CO certificate valid before closing?",
+    "Which sales qualify for the $125 expedited certificate, and how fast is it issued?"
+  ],
+  "checked_at": "2026-10-04",
+  "verification": {
+    "fees": 7,
+    "fee_ok": 0,
+    "fee_bad": 0,
+    "fee_unchecked": 7,
+    "quotes": 15,
+    "q_ok": 10,
+    "q_bad": 0,
+    "q_unchecked": 5
+  }
+}

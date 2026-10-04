@@ -1,0 +1,246 @@
+{
+  "municipality_code": "1014",
+  "municipality": "High Bridge Borough",
+  "county": "HUNTERDON",
+  "resale_co": {
+    "status": "required",
+    "name": "Continuing Certificate of Occupancy (CCO), which includes the smoke/CO/secondary power inspection; plus a Construction Records Clearance (CRC)",
+    "issued_by": "Borough of High Bridge CCO Officer (smoke/CO part enforced by the Fire Marshal); CRC by the Borough construction enforcing agency",
+    "lead_time": "The CCO Officer inspects within 10 working days of a complete application and fee, and issues the CCO (or a written violation list) within three working days after. The CRC application and fee are due at least 25 business days before the change of ownership.",
+    "valid_for": "CRC: six months from issuance. CCO: not stated.",
+    "requirements": [
+      "CCO inspection: property fit for habitation and in line with Borough ordinances and state safety, health, maintenance and building codes",
+      "Smoke alarms (UL listed, under 10 years old, per the code when built, NFPA 72), carbon monoxide alarms (UL 2034) and a secondary power source label if the home has one, checked as part of the CCO",
+      "Corrections followed by a reinspection ($50); a new owner may get a CCO with an approved written repair plan",
+      "Construction Records Clearance: records check for open construction permits; open permits need final inspections and certificates first"
+    ],
+    "fees": [
+      {
+        "label": "CCO with smoke/CO/secondary power inspection, request received more than 10 business days before the change of occupant",
+        "amount": "$100",
+        "quote": "Requests for CSACMAPFEC received more than 10 business days prior to the change of occupant: $100;",
+        "source_url": "https://ecode360.com/14101071",
+        "verified": null
+      },
+      {
+        "label": "CCO with smoke/CO inspection, request received four to 10 business days before",
+        "amount": "$200",
+        "quote": "requests for a CSACMAPFEC received four to 10 business days prior to the change of occupant: $200;",
+        "source_url": "https://ecode360.com/14101071",
+        "verified": null
+      },
+      {
+        "label": "Reinspection for a TCO or CCO",
+        "amount": "$50",
+        "quote": "The reinspection fee for a temporary certificate of occupancy (TCO) or a certificate of occupancy (CCO) shall be $50.",
+        "source_url": "https://ecode360.com/14101071",
+        "verified": null
+      },
+      {
+        "label": "CCO reinspection after violations are corrected",
+        "amount": "$50",
+        "quote": "the applicant shall notify the CCO Officer and submit a reinspection fee of $50.",
+        "source_url": "https://ecode360.com/14100924",
+        "verified": null
+      },
+      {
+        "label": "Construction Records Clearance, submitted within 25 days",
+        "amount": "$100",
+        "quote": "CRC fee: $100 (submitted within 25 days).",
+        "source_url": "https://ecode360.com/37514622",
+        "verified": null
+      },
+      {
+        "label": "Construction Records Clearance, submitted within 10 days",
+        "amount": "$150",
+        "quote": "CRC fee: $150 (submitted within 10 days).",
+        "source_url": "https://ecode360.com/37514622",
+        "verified": null
+      }
+    ],
+    "how_to_apply": "File the CCO application at the Borough of High Bridge administrative office (97 West Main Street) on the Borough's form, with the fee for the time left before the change of occupancy. File the CRC application and fee on the Borough's form at least 25 business days before closing. The Borough website (highbridge.org) blocked automated access, so the forms could not be checked online.",
+    "application_url": "",
+    "department_url": "https://highbridge.org/",
+    "phone": "908-638-6455",
+    "email": "fireofficial@highbridge.org",
+    "contact_name": "Fredrick C Roll",
+    "contact_title": "Fire Official (per the NJ DCA fire directory); the Borough code assigns the smoke/CO part of the CCO to the Fire Marshal",
+    "evidence": [
+      {
+        "url": "https://ecode360.com/14100924",
+        "quote": "A continuing certificate of occupancy, hereinafter referred to as a \"CCO,\" shall be required for all existing dwelling units, auxiliary structures, commercial buildings and industrial buildings in the Borough of High Bridge before a change in occupancy or change of use of any such structure may occur.",
+        "doc_date": "5-28-2026 (Ord. No. 2026-009, latest amendment)",
+        "via": "page",
+        "verified": null
+      },
+      {
+        "url": "https://ecode360.com/14100924",
+        "quote": "The property owner or agent thereof shall obtain a CCO prior to any change in occupancy, use or tenancy of an existing structure.",
+        "doc_date": "2026-10-04 (page fetched)",
+        "via": "page",
+        "verified": null
+      },
+      {
+        "url": "https://ecode360.com/14100924",
+        "quote": "The CCO Officer shall cause an inspection to be made within 10 working days of the receipt of a fully completed application and fee",
+        "doc_date": "2026-10-04 (page fetched)",
+        "via": "page",
+        "verified": null
+      },
+      {
+        "url": "https://ecode360.com/14101071",
+        "quote": "Before any residential property is sold, leased, or otherwise made subject to a change of occupancy for residential purposes, the owner shall obtain a continuing certificate of occupancy",
+        "doc_date": "6-11-2026 (Ord. No. 2026-011)",
+        "via": "page",
+        "verified": null
+      },
+      {
+        "url": "https://ecode360.com/37514622",
+        "quote": "A CRC shall be required prior to the sale of any residential or commercial structure.",
+        "doc_date": "5-28-2020 (Ord. No. 2020-025)",
+        "via": "page",
+        "verified": null
+      },
+      {
+        "url": "https://ecode360.com/37514622",
+        "quote": "The completed certificate of construction records clearance shall be valid for six months from the date of issuance.",
+        "doc_date": "4-11-2024 (Ord. No. 2024-011)",
+        "via": "page",
+        "verified": null
+      },
+      {
+        "url": "https://ecode360.com/37514622",
+        "quote": "The owner or his authorized agent shall submit a written application and payment of fees at least 25 business days prior to the change of ownership and/or occupancy on the form provided by the Borough.",
+        "doc_date": "2026-10-04 (page fetched)",
+        "via": "page",
+        "verified": null
+      }
+    ],
+    "confidence": "high",
+    "notes": "All High Bridge requirements here come from the Borough Code on ecode360 (Chapters 147, 149, 180, 303 and 407, read through the print view), since highbridge.org blocked automated access. Since Ordinances 2026-009 and 2026-011 (May and June 2026), the smoke alarm, CO alarm and secondary power source check is done as part of the CCO, and the CCO fee is the Chapter 180-18 fee. Section 180-18 lists only two tiers ($100 for more than 10 business days, $200 for 4 to 10 business days); no fee is given for fewer than 4 business days. Section 149-4D also mentions an extra $50 for a CCO issued after a reinspection. The CCO Officer's name is not on any page we could read. Rental unit registration (Chapter 284) is a rental item."
+  },
+  "fire_cert": {
+    "requirements": [
+      "Smoke detectors UL listed, no older than 10 years, meeting the code in force when the home was built, installed and maintained per NFPA 72, not recalled",
+      "Carbon monoxide alarms listed to UL 2034, installed per the Uniform Fire Code and NFPA 720",
+      "Secondary power source label (ANSI Z535.4) within 18 inches of the main electrical panel and meter, if the home has a generator, solar or battery system",
+      "No portable fire extinguisher listed in the June 2026 Article III (the 2024 fee section title still mentions one)"
+    ],
+    "authorities": [
+      {
+        "name": "High Bridge Borough Fire Marshal / Fire Official (Bureau of Fire Prevention), as part of the Continuing Certificate of Occupancy",
+        "type": "municipal_fire_bureau",
+        "area_served": "Entire borough",
+        "lead_time": "Fee depends on business days before the change of occupant: more than 10 business days for the lower fee. Inspection within 10 working days of a complete application.",
+        "fees": [
+          {
+            "label": "Smoke/CO/secondary power compliance (with CCO), more than 10 business days before",
+            "amount": "$100",
+            "quote": "Requests for CSACMAPFEC received more than 10 business days prior to the change of occupant: $100;",
+            "source_url": "https://ecode360.com/14101071",
+            "verified": null
+          },
+          {
+            "label": "Four to 10 business days before",
+            "amount": "$200",
+            "quote": "requests for a CSACMAPFEC received four to 10 business days prior to the change of occupant: $200;",
+            "source_url": "https://ecode360.com/14101071",
+            "verified": null
+          },
+          {
+            "label": "Reinspection",
+            "amount": "$50",
+            "quote": "The reinspection fee for a temporary certificate of occupancy (TCO) or a certificate of occupancy (CCO) shall be $50.",
+            "source_url": "https://ecode360.com/14101071",
+            "verified": null
+          }
+        ],
+        "how_to_apply": "Apply for the Continuing Certificate of Occupancy at the Borough administrative office, 97 West Main Street, High Bridge; the smoke/CO/secondary power inspection is part of it. Contact the Fire Official at 908-638-6455 or fireofficial@highbridge.org.",
+        "application_url": "",
+        "department_url": "https://highbridge.org/",
+        "phone": "908-638-6455",
+        "email": "fireofficial@highbridge.org",
+        "contact_name": "Fredrick C Roll",
+        "contact_title": "Fire Official (NJ DCA fire directory, survey 7/28/2025)",
+        "evidence": [
+          {
+            "url": "https://ecode360.com/14101071",
+            "quote": "Fees for certificate of smoke alarm and carbon monoxide alarm and portable fire extinguisher compliance (CSACMAPFEC) as required by N.J.A.C. 5:70-2.3, shall be based upon the amount of time remaining before the change of occupant is expected, as follows:",
+            "doc_date": "9-12-2024 (Ord. No. 2024-033)",
+            "via": "page",
+            "verified": null
+          },
+          {
+            "url": "https://ecode360.com/14101071",
+            "quote": "Each one- or two-family residence that contains a secondary power source shall have a label installed within 18 inches of the main electrical panel and electrical meter warning of the danger associated with secondary power sources.",
+            "doc_date": "2026-10-04 (page fetched)",
+            "via": "page",
+            "verified": null
+          },
+          {
+            "url": "https://ecode360.com/14101071",
+            "quote": "The enforcement of the provisions of this article is hereby delegated to the Fire Marshall or his designee.",
+            "doc_date": "2026-10-04 (page fetched)",
+            "via": "page",
+            "verified": null
+          },
+          {
+            "url": "https://www.nj.gov/dca/dfs/pdf/fire%20directory_county%20summary/fire_code_enforcement_director.pdf",
+            "quote": "LEAID: 1014-001 High Bridge Boro ... Name: High Bridge Boro ... Enf Auth. Municipal ... Fire Official Fredrick C Roll Phone (908) 638-6455 97 West Main St ... Email fireofficial@highbridge.org",
+            "doc_date": "survey date 7/28/2025",
+            "via": "state_directory",
+            "verified": null
+          },
+          {
+            "url": "https://nj.gov/dca/dfs/pdf/ANNUAL%20REGISTRY/THIRD%20QUARTER%20LEA%20REGISTRY%202026.pdf",
+            "quote": "M High Bridge Borough",
+            "doc_date": "2026-07",
+            "via": "pdf",
+            "verified": true
+          }
+        ],
+        "confidence": "high"
+      }
+    ],
+    "notes": "High Bridge runs its own fire code enforcement (LEA code M). Under Article III (rewritten by Ord. 2026-011 on June 11, 2026) the smoke/CO/secondary power check is part of the Continuing Certificate of Occupancy, so there is one combined application and fee. The fee section (180-18, Ord. 2024-033) has no tier for requests fewer than 4 business days before the change of occupant. The LEA registry spells the name 'High Bridge Bor ough'. The Borough website blocked automated access, so no application form or office hours could be confirmed."
+  },
+  "other_items": [
+    {
+      "label": "Sump pump certificate",
+      "detail": "Before any property is sold, the owner must get a certificate from the Director of Public Works that no sump pump or groundwater drain is connected to the sanitary sewer. The seller files the application at least 10 days before the change in ownership (Chapter 303). No fee amount was found.",
+      "source_url": "https://ecode360.com/14102231"
+    },
+    {
+      "label": "Final water reading",
+      "detail": "Notify the Borough Clerk three days before closing for a final meter reading and give the new owner's name; the amount owed goes to the closing attorney (Chapter 407).",
+      "source_url": "https://ecode360.com/14104695"
+    },
+    {
+      "label": "Private well potability certificate",
+      "detail": "Before transfer of title of a home on a private well, a certificate of potability is needed from the Hunterdon County Health Department (Chapter 407).",
+      "source_url": "https://ecode360.com/14104695"
+    },
+    {
+      "label": "Open permits (CRC)",
+      "detail": "The Construction Records Clearance requires open construction permits to be finaled before closing; CRC fee $100 if filed 25 days ahead, $150 within 10 days.",
+      "source_url": "https://ecode360.com/37514622"
+    }
+  ],
+  "open_questions": [
+    "Who is the CCO Officer, and where are the CCO and CRC application forms (highbridge.org blocked automated access)?",
+    "What is the fee for a CCO/smoke request made fewer than 4 business days before closing? Section 180-18 lists none.",
+    "Is there a fee for the sump pump certificate?",
+    "Is the CRC filed with the Borough or with a shared construction office?"
+  ],
+  "checked_at": "2026-10-04",
+  "verification": {
+    "fees": 9,
+    "fee_ok": 0,
+    "fee_bad": 0,
+    "fee_unchecked": 9,
+    "quotes": 12,
+    "q_ok": 1,
+    "q_bad": 0,
+    "q_unchecked": 11
+  }
+}

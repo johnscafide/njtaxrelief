@@ -1,0 +1,240 @@
+{
+  "municipality_code": "1352",
+  "municipality": "Wall Township",
+  "county": "MONMOUTH",
+  "resale_co": {
+    "status": "not_required",
+    "name": "",
+    "issued_by": "",
+    "lead_time": "",
+    "valid_for": "",
+    "requirements": [],
+    "fees": [],
+    "how_to_apply": "No Township resale Certificate of Continued Occupancy. The Township's building FAQ says only the smoke detector, carbon monoxide (and fire extinguisher) certification from the Fire Bureau is needed for the resale of a home (see fire certificate).",
+    "application_url": "",
+    "department_url": "https://www.wallnj.gov/284/Building-Department",
+    "phone": "732-449-8444 ext. 2225",
+    "email": "rtorrance@wallnj.gov",
+    "contact_name": "Robert Torrance",
+    "contact_title": "Construction Official",
+    "evidence": [
+      {
+        "url": "https://www.wallnj.gov/DocumentCenter/View/538",
+        "quote": "Does Wall Township require an inspection by the building department on resale of a home?",
+        "doc_date": "",
+        "via": "pdf",
+        "verified": true
+      },
+      {
+        "url": "https://www.wallnj.gov/DocumentCenter/View/538",
+        "quote": "No. We do not require a Certificate of Continued Occupancy on the resale of home.",
+        "doc_date": "",
+        "via": "pdf",
+        "verified": true
+      },
+      {
+        "url": "https://www.wallnj.gov/DocumentCenter/View/538",
+        "quote": "No. As long as the tank is still being used and it is not leaking it may remain in place.",
+        "doc_date": "",
+        "via": "pdf",
+        "verified": true
+      },
+      {
+        "url": "https://www.wallnj.gov/284/Building-Department",
+        "quote": "Robert Torrance Construction Official / Inspector",
+        "doc_date": "2026-10-04 (page fetched)",
+        "via": "page",
+        "verified": true
+      },
+      {
+        "url": "https://www.wallnj.gov/284/Building-Department",
+        "quote": "Phone: (732)449-8444 Ext. 2225",
+        "doc_date": "2026-10-04 (page fetched)",
+        "via": "page",
+        "verified": true
+      }
+    ],
+    "confidence": "high",
+    "notes": "The Building Department's \"Selling your home\" FAQ (PDF linked from the Building Department page) says the Township does not require a Certificate of Continued Occupancy on resale and that only the smoke detector, carbon monoxide and fire extinguisher certification is needed. The same FAQ says the Township will not make a seller remove a working, non-leaking underground oil tank and will not make a seller bring the house up to current code. The FAQ's fire phone (732-449-8444 x 254) is older; the Fire Bureau now lists (732) 820-4854. Landlord registration and the transient rental license apply to rentals only."
+  },
+  "fire_cert": {
+    "requirements": [
+      "Smoke Detector and Carbon Monoxide Alarm Certificate of Compliance before any residential unit is sold or changes occupancy",
+      "Battery-only smoke alarms must be 10-year sealed units; hardwired alarms cannot be replaced with battery alarms",
+      "Smoke alarm type depends on the year built (for example, homes from March 1991 on need interconnected hardwired alarms on all levels and in each bedroom with battery back-up)",
+      "Smoke alarm near every bedroom door; basement and non-sleeping levels near the stairway to the floor above",
+      "Carbon monoxide alarm on each sleeping level near every bedroom door in homes with a fuel-burning appliance or attached garage",
+      "Central station monitored alarm systems must be certified by a licensed NJ Fire Protection Contractor before the inspection",
+      "Secondary power source (for example solar or battery storage) labeling checked under P.L.2025, c.19 when applicable",
+      "Portable fire extinguisher (the Township FAQ and the uninhabitable transfer form still list it)"
+    ],
+    "authorities": [
+      {
+        "name": "Wall Township Fire Bureau (Fire Prevention Bureau, governed by the Joint Board of Fire Commissioners of Fire Districts 1, 2 and 3)",
+        "type": "fire_district",
+        "area_served": "Entire township (all three fire districts)",
+        "lead_time": "Fee depends on business days before closing: more than 5 business days for the lower fee. Staff call within one business day after an online application to schedule.",
+        "fees": [
+          {
+            "label": "Smoke/CO certificate, initial inspection more than 5 business days before closing",
+            "amount": "$75",
+            "quote": "More than 5 business days before closing: $75.",
+            "source_url": "https://wallfirebureau.com/smoke-detector-inspection-application-2/",
+            "verified": true
+          },
+          {
+            "label": "Initial inspection 5 or fewer days before closing",
+            "amount": "$125",
+            "quote": "Five or fewer days before closing: $125.",
+            "source_url": "https://wallfirebureau.com/smoke-detector-inspection-application-2/",
+            "verified": true
+          },
+          {
+            "label": "First reinspection (more than 5 days / 5 or fewer days before closing)",
+            "amount": "$30 / $40",
+            "quote": "First reinspection | $30 | $40",
+            "source_url": "https://ecode360.com/9593155",
+            "verified": null
+          },
+          {
+            "label": "Second and later reinspections",
+            "amount": "$40",
+            "quote": "Second and subsequent re-inspections | $40 | $40",
+            "source_url": "https://ecode360.com/9593155",
+            "verified": null
+          },
+          {
+            "label": "Missed appointment or no entry",
+            "amount": "$30",
+            "quote": "A fee of $30 will be charged for failure to maintain the scheduled appointment or entry to the structure.",
+            "source_url": "https://ecode360.com/9593155",
+            "verified": null
+          },
+          {
+            "label": "Secondary power source label inspection, when needed",
+            "amount": "$20",
+            "quote": "An additional fee of $20 will be assessed in the event such an inspection is deemed necessary.",
+            "source_url": "https://ecode360.com/9593155",
+            "verified": null
+          }
+        ],
+        "how_to_apply": "Apply online with the Fire Bureau's Smoke Detector Inspection Application (or email a printed application to inspection@wallfirebureau.com). Have the block, lot, address, owner, buyer, closing date and an inspection contact ready. Checks are payable to Wall Township Fire Bureau. Office: 1612 Route 71, Wall Township, NJ 07719, Monday to Friday 8am to 4pm.",
+        "application_url": "https://wallfirebureau.com/smoke-detector-inspection-application-2/",
+        "department_url": "https://wallfirebureau.com/smoke-detector-inspection/",
+        "phone": "732-820-4854",
+        "email": "inspection@wallfirebureau.com",
+        "contact_name": "William Newberry",
+        "contact_title": "Fire Marshal",
+        "evidence": [
+          {
+            "url": "https://wallfirebureau.com/smoke-detector-inspection/",
+            "quote": "Pursuant to the New Jersey Uniform Fire Code, before any residential structure/unit is sold, leased, or otherwise made subject to change of occupancy the owner shall obtain a Smoke Detector & Carbon Monoxide Alarm Certificate of Compliance.",
+            "doc_date": "2026-10-04 (page fetched)",
+            "via": "page",
+            "verified": true
+          },
+          {
+            "url": "https://wallfirebureau.com/smoke-detector-inspection-application-2/",
+            "quote": "Once received, a staff member will contact you within one business day to schedule the inspection.",
+            "doc_date": "2026-10-04 (page fetched)",
+            "via": "page",
+            "verified": true
+          },
+          {
+            "url": "http://wallfirebureau.com/",
+            "quote": "Completed applications can be emailed to inspection@wallfirebureau.com",
+            "doc_date": "2026-10-04 (page fetched)",
+            "via": "page",
+            "verified": true
+          },
+          {
+            "url": "http://wallfirebureau.com/",
+            "quote": "Fire Marshal William Newberry",
+            "doc_date": "2026-10-04 (page fetched)",
+            "via": "page",
+            "verified": true
+          },
+          {
+            "url": "https://ecode360.com/9593155",
+            "quote": "The fee for any CSACMAC and issuance of a certificate, as defined and required by N.J.A.C. 5:70-2.3, will be indexed to the scheduled inspection date as it relates to the anticipated contract closing date as follows:",
+            "doc_date": "amended 6-23-2026 by Ord. No. 15-2026",
+            "via": "page",
+            "verified": null
+          },
+          {
+            "url": "https://ecode360.com/9593155",
+            "quote": "Initial inspection | $75 | $125",
+            "doc_date": "amended 6-23-2026 by Ord. No. 15-2026",
+            "via": "page",
+            "verified": null
+          },
+          {
+            "url": "https://www.wallnj.gov/DocumentCenter/View/538",
+            "quote": "A Smoke Detector, Carbon Monoxide and Fire Extinguisher Certification is required and is performed by the Fire Prevention Department",
+            "doc_date": "",
+            "via": "pdf",
+            "verified": true
+          },
+          {
+            "url": "https://www.wallnj.gov/461/Fire-Districts",
+            "quote": "The Joint Board of Fire Commissioners governs the Wall Township Fire Bureau.",
+            "doc_date": "2026-10-04 (page fetched)",
+            "via": "page",
+            "verified": true
+          },
+          {
+            "url": "http://wallfirebureau.com/wp-content/uploads/Uninhabitable-Transfer-of-Title-for-Residence.pdf",
+            "quote": "Fee $75/$125 (please make checks payable to: Wall Township Fire Bureau)",
+            "doc_date": "",
+            "via": "pdf",
+            "verified": true
+          },
+          {
+            "url": "https://www.nj.gov/dca/dfs/pdf/fire%20directory_county%20summary/fire_code_enforcement_director.pdf",
+            "quote": "LEAID: 1352-003 Wall Twp SMOKE DETECTOR COMPLIANCE Name: Wall Twp Fire Prev Enf Auth. District Addr: 1612 Route 71 Wall NJ 07719 Fire Official William G Newberry ... Phone (732) 820-4854 ... Email wnewberry@wtfd1.com",
+            "doc_date": "2026-07 (survey date 7/29/2026)",
+            "via": "state_directory",
+            "verified": null
+          },
+          {
+            "url": "https://nj.gov/dca/dfs/pdf/ANNUAL%20REGISTRY/THIRD%20QUARTER%20LEA%20REGISTRY%202026.pdf",
+            "quote": "D Wall Township",
+            "doc_date": "2026-07",
+            "via": "pdf",
+            "verified": true
+          }
+        ],
+        "confidence": "high"
+      }
+    ],
+    "notes": "Fees are in Township Code 113-3G(2)(b) (Fire Prevention), last amended 6-23-2026 by Ord. No. 15-2026, read through the ecode360 print view; the code's fee table counts days between the scheduled inspection and the anticipated closing date. Active volunteer firefighters and first aid members selling their primary residence can be exempt from the certificate fee (not reinspections). The Fire Bureau's current pages do not mention a fire extinguisher, but the Township FAQ and the uninhabitable transfer of title form still do; the state dropped the extinguisher from the sale certificate in February 2025 (P.L.2025, c.19), so confirm with the Bureau. The LEA registry notes \"Wall Twp is now part of Dist 3\"; the DCA directory shows one Fire Bureau (LEAID 1352-003) for all three districts. The Fire Bureau website (wallfirebureau.com) is linked from the Township's Code Enforcement page."
+  },
+  "other_items": [
+    {
+      "label": "Final water/sewer meter reading",
+      "detail": "The Township's forms page offers a Final Meter Reading Request for sales and tenant changes (online form).",
+      "source_url": "https://www.wallnj.gov/422/Township-Forms-Applications"
+    },
+    {
+      "label": "Uninhabitable home transfer of title",
+      "detail": "If the house is uninhabitable, the Fire Bureau has a Transfer of Title for a Residential Property form ($75/$125); the home cannot be occupied until the Building Department issues a Certificate of Occupancy.",
+      "source_url": "http://wallfirebureau.com/wp-content/uploads/Uninhabitable-Transfer-of-Title-for-Residence.pdf"
+    }
+  ],
+  "open_questions": [
+    "Does the Fire Bureau still require a portable fire extinguisher for the sale certificate after P.L.2025, c.19?",
+    "Is the final meter reading request required before closing, and is there a fee?",
+    "How long is the smoke/CO certificate valid?"
+  ],
+  "checked_at": "2026-10-04",
+  "verification": {
+    "fees": 6,
+    "fee_ok": 2,
+    "fee_bad": 0,
+    "fee_unchecked": 4,
+    "quotes": 16,
+    "q_ok": 13,
+    "q_bad": 0,
+    "q_unchecked": 3
+  }
+}

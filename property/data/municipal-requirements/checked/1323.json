@@ -1,0 +1,267 @@
+{
+  "municipality_code": "1323",
+  "municipality": "Keansburg Borough",
+  "county": "MONMOUTH",
+  "resale_co": {
+    "status": "required",
+    "name": "Certificate of Housing Inspection (Housing Occupancy Certificate)",
+    "issued_by": "Borough of Keansburg Code Enforcement and Construction Office",
+    "lead_time": "The inspection must be scheduled before the sale or occupancy.",
+    "valid_for": "",
+    "requirements": [
+      "Certificate of Housing Inspection application signed by the owner, buyer or agent, with seller and buyer details, number of bedrooms and occupants",
+      "Inspection by a municipal inspector; all violations corrected before occupancy unless written arrangements are made",
+      "Smoke and carbon monoxide detector inspection is done with the housing inspection (extra fee)",
+      "Smoke detector on each floor (Code 11-5)",
+      "Close all UCC permits (listed as a violation item on the form)",
+      "Fire extinguisher (form still lists it as a violation item)",
+      "By signing for a sale, the owner or agent attests that no adjoining property is owned by the same person that may require a formal subdivision"
+    ],
+    "fees": [
+      {
+        "label": "Housing inspection application, covers two inspections (2023 application)",
+        "amount": "$75.00",
+        "quote": "a fee of $75.00, which entitles the applicant to two inspections and an additional $45 fee for smoke",
+        "source_url": "https://keansburgnj.gov/wp-content/uploads/2023/01/Certificate-of-Housing-Inspection-Application-1.2023.pdf",
+        "verified": true
+      },
+      {
+        "label": "Inspection fee for two inspections (Construction Office page)",
+        "amount": "$120",
+        "quote": "$120 will entitle the applicant to 2 (two) inspections.",
+        "source_url": "https://keansburgnj.gov/development/construction-office/",
+        "verified": true
+      },
+      {
+        "label": "Housing occupancy certificate, initial inspection and first reinspection (Code 11-3.1b)",
+        "amount": "$75",
+        "quote": "A fee of $75 shall be paid to the enforcing agency for initial inspections and first reinspection of the premises required prior to the issuance of a housing occupancy certificate",
+        "source_url": "https://ecode360.com/35677685",
+        "verified": null
+      },
+      {
+        "label": "Each second or later reinspection (Code 11-3.1b)",
+        "amount": "$20",
+        "quote": "An additional $20 fee shall be paid for any second or subsequent reinspection of the premises which is required prior to the issuance of a housing occupancy certificate.",
+        "source_url": "https://ecode360.com/35677685",
+        "verified": null
+      },
+      {
+        "label": "Smoke and carbon monoxide detector inspection, added to the housing inspection fee (2023 application)",
+        "amount": "$45",
+        "quote": "a fee of $75.00, which entitles the applicant to two inspections and an additional $45 fee for smoke",
+        "source_url": "https://keansburgnj.gov/wp-content/uploads/2023/01/Certificate-of-Housing-Inspection-Application-1.2023.pdf",
+        "verified": true
+      },
+      {
+        "label": "CSDCMAC, more than 10 business days before the change of occupancy (Code 11-5d)",
+        "amount": "$35",
+        "quote": "More than 10 business days: $35.",
+        "source_url": "https://ecode360.com/35677762",
+        "verified": null
+      },
+      {
+        "label": "CSDCMAC, between four and 10 business days (Code 11-5d)",
+        "amount": "$75",
+        "quote": "Between four and 10 business days: $75.",
+        "source_url": "https://ecode360.com/35677762",
+        "verified": null
+      },
+      {
+        "label": "CSDCMAC, less than four business days (Code 11-5d)",
+        "amount": "$125",
+        "quote": "Less than four business days: $125.",
+        "source_url": "https://ecode360.com/35677762",
+        "verified": null
+      }
+    ],
+    "how_to_apply": "Fill out the Certificate of Housing Inspection Application and bring or mail it with payment to the Code Enforcement and Construction Office, Borough Hall, 29 Church Street, Keansburg, NJ 07734 (open Monday to Friday, 8:30 a.m. to 4:00 p.m.). Applications must be submitted in person or by mail; no electronic submissions. Schedule the inspection before the sale or occupancy.",
+    "application_url": "https://keansburgnj.gov/wp-content/uploads/2023/01/Certificate-of-Housing-Inspection-Application-1.2023.pdf",
+    "department_url": "https://keansburgnj.gov/development/construction-office/",
+    "phone": "732-787-0215 ext. 220",
+    "email": "",
+    "contact_name": "Chris Hoff",
+    "contact_title": "Code Enforcement Officer (Ext. 222)",
+    "evidence": [
+      {
+        "url": "https://ecode360.com/35677685",
+        "quote": "Whenever there is a proposed change of ownership of any dwelling unit, such change of ownership shall not be made nor shall the subsequent owner occupy or permit occupancy of, nor shall any person rent, lease or occupy, the dwelling unit, without first complying with the requirements of this section.",
+        "doc_date": "Ord. #1330",
+        "via": "page",
+        "verified": null
+      },
+      {
+        "url": "https://keansburgnj.gov/wp-content/uploads/2023/01/Certificate-of-Housing-Inspection-Application-1.2023.pdf",
+        "quote": "The applicant shall schedule the required inspection PRIOR to the sale or occupancy of",
+        "doc_date": "1.2023 (file name)",
+        "via": "pdf",
+        "verified": true
+      },
+      {
+        "url": "https://keansburgnj.gov/wp-content/uploads/2023/01/Certificate-of-Housing-Inspection-Application-1.2023.pdf",
+        "quote": "CERTIFICATE OF HOUSING INSPECTION APPLICATION",
+        "doc_date": "1.2023 (file name)",
+        "via": "pdf",
+        "verified": true
+      },
+      {
+        "url": "https://keansburgnj.gov/wp-content/uploads/2023/01/Certificate-of-Housing-Inspection-Application-1.2023.pdf",
+        "quote": "please contact the Code Enforcement Office at 732-787-0215 ext. 220 for clarification",
+        "doc_date": "1.2023 (file name)",
+        "via": "pdf",
+        "verified": true
+      },
+      {
+        "url": "https://keansburgnj.gov/development/construction-office/",
+        "quote": "All Applications MUST BE SUBMITTED in person or via mail",
+        "doc_date": "2026-10-04 (page fetched)",
+        "via": "page",
+        "verified": true
+      },
+      {
+        "url": "https://keansburgnj.gov/development/construction-office/",
+        "quote": "The Borough of Keansburg's Certificate of Housing Inspection Application",
+        "doc_date": "2026-10-04 (page fetched)",
+        "via": "page",
+        "verified": true
+      },
+      {
+        "url": "https://keansburgnj.gov/development/construction-office/",
+        "quote": "Code Enforcement Officer",
+        "doc_date": "2026-10-04 (page fetched)",
+        "via": "page",
+        "verified": true
+      },
+      {
+        "url": "https://keansburgnj.gov/development/contact-development/",
+        "quote": "Questions about building or property development, please contact the Construction and Zoning Offices at 732-787-0215 x220",
+        "doc_date": "2026-10-04 (page fetched)",
+        "via": "page",
+        "verified": true
+      }
+    ],
+    "confidence": "high",
+    "notes": "Borough Code 11-3.1 (read through the ecode360 print view) requires a housing occupancy certificate before a change of ownership. Fee sources disagree: the 2023 application says $75.00 for two inspections plus $45 for the smoke/CO inspection (total $120); the Construction Office page lists '$120 will entitle the applicant to 2 (two) inspections' under its landlord registration section, with later reinspections at $30, $40, $70 and $100 per unit; the Code (11-3.1b) still says $75 plus $20 per later reinspection, and an older section (11-2.6) says $25. Confirm the current total with the office. Staff emails on the Borough page are hidden behind protected links. Staff listed: Paul Durnien, Construction Official (Ext. 220); Kathy Burgess, Zoning Official (Ext. 220); Chris Hoff, Code Enforcement Officer (Ext. 222); Arthur Boden, Fire Official (Ext. 224). The Borough moved its website to keansburgnj.gov; the old keansburg-nj.us address now shows a parked page. Landlord registration, vacant property registration and rooming house licensing are not resale requirements."
+  },
+  "fire_cert": {
+    "requirements": [
+      "Smoke detector on each floor of a one- or two-family house (Code 11-5)",
+      "Carbon monoxide detectors as required by the Uniform Construction Code",
+      "Smoke and carbon monoxide inspection is part of the housing inspection; the form lists 'Provide Fire Extinguisher' as a possible violation (form still lists it)"
+    ],
+    "authorities": [
+      {
+        "name": "Keansburg Fire Official (Code Enforcement and Construction Office)",
+        "type": "municipal_fire_bureau",
+        "area_served": "Entire borough",
+        "lead_time": "Code 11-5 bases the fee on business days before the change of occupancy; the 2023 application charges a flat $45 added to the housing inspection fee.",
+        "fees": [
+          {
+            "label": "Smoke and carbon monoxide detector inspection, added to the housing inspection fee (2023 application)",
+            "amount": "$45",
+            "quote": "a fee of $75.00, which entitles the applicant to two inspections and an additional $45 fee for smoke",
+            "source_url": "https://keansburgnj.gov/wp-content/uploads/2023/01/Certificate-of-Housing-Inspection-Application-1.2023.pdf",
+            "verified": true
+          },
+          {
+            "label": "CSDCMAC, more than 10 business days before the change of occupancy (Code 11-5d)",
+            "amount": "$35",
+            "quote": "More than 10 business days: $35.",
+            "source_url": "https://ecode360.com/35677762",
+            "verified": null
+          },
+          {
+            "label": "CSDCMAC, between four and 10 business days (Code 11-5d)",
+            "amount": "$75",
+            "quote": "Between four and 10 business days: $75.",
+            "source_url": "https://ecode360.com/35677762",
+            "verified": null
+          },
+          {
+            "label": "CSDCMAC, less than four business days (Code 11-5d)",
+            "amount": "$125",
+            "quote": "Less than four business days: $125.",
+            "source_url": "https://ecode360.com/35677762",
+            "verified": null
+          }
+        ],
+        "how_to_apply": "The smoke and carbon monoxide inspection is requested on the same Certificate of Housing Inspection Application and paid with it at the Code Enforcement and Construction Office, 29 Church Street.",
+        "application_url": "https://keansburgnj.gov/wp-content/uploads/2023/01/Certificate-of-Housing-Inspection-Application-1.2023.pdf",
+        "department_url": "https://keansburgnj.gov/development/construction-office/",
+        "phone": "732-787-0215 ext. 224",
+        "email": "arthur.boden@keansburg-nj.us",
+        "contact_name": "Arthur Boden",
+        "contact_title": "Fire Official",
+        "evidence": [
+          {
+            "url": "https://ecode360.com/35677762",
+            "quote": "An application fee for a certificate of smoke detector and carbon monoxide alarm compliance (CSDCMAC), as required by N.J.S.A. 5:70-2.3, shall be based upon the amount of time remaining before the changing of occupancy:",
+            "doc_date": "Ord. #1437",
+            "via": "page",
+            "verified": null
+          },
+          {
+            "url": "https://keansburgnj.gov/wp-content/uploads/2023/01/Certificate-of-Housing-Inspection-Application-1.2023.pdf",
+            "quote": "and carbon monoxide detector inspection.",
+            "doc_date": "1.2023 (file name)",
+            "via": "pdf",
+            "verified": true
+          },
+          {
+            "url": "https://keansburgnj.gov/development/construction-office/",
+            "quote": "Fire Official",
+            "doc_date": "2026-10-04 (page fetched)",
+            "via": "page",
+            "verified": true
+          },
+          {
+            "url": "https://nj.gov/dca/dfs/pdf/ANNUAL%20REGISTRY/THIRD%20QUARTER%20LEA%20REGISTRY%202026.pdf",
+            "quote": "F Keansburg Borough",
+            "doc_date": "2026-07",
+            "via": "pdf",
+            "verified": true
+          },
+          {
+            "url": "https://www.nj.gov/dca/dfs/pdf/fire%20directory_county%20summary/fire_code_enforcement_director.pdf",
+            "quote": "LEAID: 1321-001 Keansburg Boro SMOKE DETECTOR COMPLIANCE Name: Keansburg Boro Code Enf Enf Auth. Fire Dept Fire Official Arthur V Boden Phone (732) 787-0215 Email arthur.boden@keansburg-nj.us",
+            "doc_date": "6/13/2025 (survey date)",
+            "via": "state_directory",
+            "verified": null
+          }
+        ],
+        "confidence": "medium"
+      }
+    ],
+    "notes": "Keansburg is its own fire code enforcing agency (LEA code F). The smoke/CO check is handled with the Borough housing inspection through the Code Enforcement and Construction Office, where Fire Official Arthur Boden is listed at Ext. 224. The 2023 application charges a flat $45 for the smoke/CO inspection, while Code 11-5 still lists $35 / $75 / $125 by business days before the change of occupancy; confirm which applies. The email comes from the state fire directory and uses the old keansburg-nj.us domain, which now shows a parked page, so it may not work. The form lists a fire extinguisher as a possible violation; the state dropped it from the sale certificate in February 2025 (P.L.2025, c.19)."
+  },
+  "other_items": [
+    {
+      "label": "Open permits",
+      "detail": "The housing inspection form lists 'Close all UCC Permits' as a violation that must be corrected before occupancy.",
+      "source_url": "https://keansburgnj.gov/wp-content/uploads/2023/01/Certificate-of-Housing-Inspection-Application-1.2023.pdf"
+    },
+    {
+      "label": "Adjoining lots",
+      "detail": "For a sale, the person signing the application attests that no adjoining property is owned by the same person that may require a formal subdivision before the sale.",
+      "source_url": "https://keansburgnj.gov/wp-content/uploads/2023/01/Certificate-of-Housing-Inspection-Application-1.2023.pdf"
+    }
+  ],
+  "open_questions": [
+    "What is the current total fee for a resale housing inspection plus smoke/CO check ($120 per the form and page, or the Code amounts)?",
+    "Is the smoke/CO fee tiered by days before closing as Code 11-5 says, or a flat $45?",
+    "How far ahead must the inspection be scheduled, and how long is the certificate good for?",
+    "Is the fire extinguisher still required after P.L.2025, c.19?",
+    "Is arthur.boden@keansburg-nj.us still a working email?"
+  ],
+  "checked_at": "2026-10-04",
+  "verification": {
+    "fees": 12,
+    "fee_ok": 4,
+    "fee_bad": 0,
+    "fee_unchecked": 8,
+    "quotes": 13,
+    "q_ok": 10,
+    "q_bad": 0,
+    "q_unchecked": 3
+  }
+}

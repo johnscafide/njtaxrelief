@@ -1,0 +1,223 @@
+{
+  "municipality_code": "1332",
+  "municipality": "Middletown Township",
+  "county": "MONMOUTH",
+  "checked_at": "2026-10-04",
+  "resale_co": {
+    "status": "required",
+    "name": "Residential Certificate of Occupancy (CO) for sale",
+    "issued_by": "Middletown Township Building & Inspection Department (Housing)",
+    "lead_time": "Inspection timing depends on the inspector's daily workload. The CO must be issued before transfer of title or occupancy.",
+    "valid_for": "",
+    "requirements": [
+      "Housing inspection under the International Property Maintenance Code (4 inch address numbers, no double cylinder locks, working heat, water heater relief line, combustion air louvers, solid core or steel garage fire door, roof, range, plumbing, no extension cords, GFCI outlets, handrails and guards, neat yard, metal dryer hose, pool barriers)",
+      "All open permits must have a final inspection, and permits and approvals are needed for recent construction",
+      "Smoke detector and carbon monoxide compliance certificate from the Fire Prevention Office, sent to the Building Department as part of the CO",
+      "If the home is occupied, an adult must be present at the inspection",
+      "A 60-day conditional CO is available if the buyer signs and notarizes an agreement to close open permits and fix violations and not move in until the Township allows it"
+    ],
+    "fees": [
+      {
+        "label": "Certificate of Occupancy, each sale of a house",
+        "amount": "$150",
+        "quote": "A NON-REFUNDABLE FEE OF $150 FOR EACH RENTAL UNIT & SALE OF EACH HOUSE MUST BE PAID TO: THE TOWNSHIP OF MIDDLETOWN.",
+        "source_url": "https://middletownnj.org/DocumentCenter/View/7789/Application-for-Inspection-and-Assurance-of-a-Certificate-of-Occupancy-PDF",
+        "verified": true
+      },
+      {
+        "label": "Filing fee (separate check)",
+        "amount": "$15",
+        "quote": "FILING FEE: $15",
+        "source_url": "https://middletownnj.org/DocumentCenter/View/7789/Application-for-Inspection-and-Assurance-of-a-Certificate-of-Occupancy-PDF",
+        "verified": true
+      },
+      {
+        "label": "Reinspection (3rd inspection)",
+        "amount": "$75",
+        "quote": "REINSPECTION FEE: $75",
+        "source_url": "https://middletownnj.org/DocumentCenter/View/7789/Application-for-Inspection-and-Assurance-of-a-Certificate-of-Occupancy-PDF",
+        "verified": true
+      }
+    ],
+    "how_to_apply": "Fill out the Application for Residential Certificate of Occupancy (check SALE and give the prospective transfer date) and submit it to the Housing Department, Building & Inspection, 1 Kings Highway, Middletown, NJ 07748, with two separate checks payable to the Township of Middletown ($150 CO fee and $15 filing fee). Then apply separately to Fire Prevention for the smoke/CO certificate, giving them your CO inspection date.",
+    "application_url": "https://middletownnj.org/DocumentCenter/View/7789/Application-for-Inspection-and-Assurance-of-a-Certificate-of-Occupancy-PDF",
+    "department_url": "https://middletownnj.org/150/Certificate-of-Occupancy",
+    "phone": "732-615-2106",
+    "email": "",
+    "contact_name": "Paul Durnien",
+    "contact_title": "Construction Official (732-615-2000 ext. 2185)",
+    "evidence": [
+      {
+        "url": "https://middletownnj.org/150/Certificate-of-Occupancy",
+        "quote": "Before an owner/tenant can occupy or change the title of a house or apartment it must meet certain requirements.",
+        "doc_date": "2026-10-04 (page fetched)",
+        "via": "page",
+        "verified": true
+      },
+      {
+        "url": "https://middletownnj.org/DocumentCenter/View/7789/Application-for-Inspection-and-Assurance-of-a-Certificate-of-Occupancy-PDF",
+        "quote": "A Certiﬁcate of Occupancy is to be issued BEFORE Transfer of Title and/or occupancy.",
+        "doc_date": "2025-10-10",
+        "via": "pdf",
+        "verified": true
+      },
+      {
+        "url": "https://middletownnj.org/DocumentCenter/View/7851/Residential-Certificate-of-Occupancy-Check-List-PDF",
+        "quote": "ALL OPEN PERMITS MUST HAVE A FINAL INSPECTION BEFORE A C.O. CAN BE ISSUED.",
+        "doc_date": "",
+        "via": "pdf",
+        "verified": true
+      },
+      {
+        "url": "https://middletownnj.org/150/Certificate-of-Occupancy",
+        "quote": "The CO will be issued by the Building & Inspection Department once all requirements are met.",
+        "doc_date": "2026-10-04 (page fetched)",
+        "via": "page",
+        "verified": true
+      },
+      {
+        "url": "https://www.middletownnj.org/DocumentCenter/View/5205/Sixty-Day-Conditional-CO",
+        "quote": "I, THE CONTRACT PURCHASER, AGREE TO ASSUME RESPONSIBILITY FOR CLOSING ANY OPEN PERMITS AND CORRECTING THE CODE VIOLATIONS",
+        "doc_date": "",
+        "via": "pdf",
+        "verified": true
+      },
+      {
+        "url": "https://middletownnj.org/150/Certificate-of-Occupancy",
+        "quote": "Paul Durnien Construction Official 732-615-2000 ext. 2185",
+        "doc_date": "2026-10-04 (page fetched)",
+        "via": "page",
+        "verified": true
+      }
+    ],
+    "confidence": "high",
+    "notes": "The application footer reads 'CO APP:10/10/2025'. The CO page lists Building & Inspection at 732-615-2106; the checklist letterhead shows (732) 615-2104. The application header says Housing Department. No validity period for the CO is published. The Township code (municode) was not read. Landlord registration and lead-safe visual inspections every 3 years apply to rentals only."
+  },
+  "fire_cert": {
+    "requirements": [
+      "Ten-year sealed battery or hardwired smoke alarms in each bedroom and on each level within ten feet of the bedrooms (crawl spaces and unfinished attics excluded); UL listed with a test button; hardwired alarms from original construction may not be replaced with battery units",
+      "Carbon monoxide alarm on each level and within ten feet of the bedrooms (battery, plug-in or part of a central station system)",
+      "Central station alarm systems need a letter from the monitoring company that the system works",
+      "An adult (18 or older) must be present; pets secured",
+      "No fire extinguisher needed (the Township FAQ says the February 2025 law removed it)"
+    ],
+    "authorities": [
+      {
+        "name": "Middletown Township Bureau of Fire Prevention (Fire Prevention Office)",
+        "type": "municipal_fire_bureau",
+        "area_served": "Entire township",
+        "lead_time": "Fee depends on business days between receipt of the application and the closing/change of occupancy date: more than 10 business days for the lowest fee. Inspections are done between 8:30 am and 2:30 pm Monday to Friday on the same day as the CO inspection (not at the same time); no call ahead.",
+        "fees": [
+          {
+            "label": "Smoke detector and CO certificate, received more than 10 business days before closing",
+            "amount": "$100",
+            "quote": "Received more than ten (10) business days prior to closing/change of occupancy date: $100",
+            "source_url": "https://middletownnj.org/DocumentCenter/View/11670",
+            "verified": true
+          },
+          {
+            "label": "Received 4 to 10 business days before closing",
+            "amount": "$125",
+            "quote": "Received four (4) to ten (10) business days prior to closing/change of occupancy date: $125",
+            "source_url": "https://middletownnj.org/DocumentCenter/View/11670",
+            "verified": true
+          },
+          {
+            "label": "Received less than 4 business days before closing",
+            "amount": "$150",
+            "quote": "Received less than four (4) business days prior to closing/change of occupancy date: $150",
+            "source_url": "https://middletownnj.org/DocumentCenter/View/11670",
+            "verified": true
+          }
+        ],
+        "how_to_apply": "First apply for the residential CO with the Building Department and schedule the CO inspection. Then submit the Application for Certificate of Smoke Detector & Carbon Monoxide Compliance in person or by mail to Middletown Fire Prevention, 1 Kings Highway (Johnson Gill Annex), with a check or money order payable to Middletown Fire Prevention or exact cash. A drop box outside the office takes applications with checks. The certificate is sent to the Building Department as part of the CO.",
+        "application_url": "https://middletownnj.org/DocumentCenter/View/11670",
+        "department_url": "https://www.middletownnj.org/fireprevention",
+        "phone": "732-615-2270",
+        "email": "bskelly@middletownnj.org",
+        "contact_name": "Edward Skelly",
+        "contact_title": "Fire Official",
+        "evidence": [
+          {
+            "url": "https://www.middletownnj.org/fireprevention",
+            "quote": "Due to a change in the State law, smoke detector and carbon monoxide compliance certificates are now inspected and issued through the Middletown Township Fire Prevention Office.",
+            "doc_date": "2026-10-04 (page fetched)",
+            "via": "page",
+            "verified": true
+          },
+          {
+            "url": "https://middletownnj.org/DocumentCenter/View/11670",
+            "quote": "before any one- or two-family dwelling is sold, leased, or otherwise made subject to change in occupancy for residential purposes, the owner shall obtain a certificate of compliance from the Township of Middletown Bureau of Fire Prevention",
+            "doc_date": "",
+            "via": "pdf",
+            "verified": true
+          },
+          {
+            "url": "https://middletownnj.org/DocumentCenter/View/11669",
+            "quote": "No. NJ Assembly Bill A3894 (February 2025) eliminates the requirement for portable ﬁre extinguishers for a Certiﬁcate of Occupancy in residential structures.",
+            "doc_date": "",
+            "via": "pdf",
+            "verified": true
+          },
+          {
+            "url": "https://middletownnj.org/DocumentCenter/View/11669",
+            "quote": "The inspections are performed between the hours of 8:30am and 2:30pm Monday-Friday.",
+            "doc_date": "",
+            "via": "pdf",
+            "verified": true
+          },
+          {
+            "url": "https://middletownnj.org/DocumentCenter/View/11670",
+            "quote": "Edward Skelly, Fire Offical",
+            "doc_date": "",
+            "via": "pdf",
+            "verified": true
+          },
+          {
+            "url": "https://www.nj.gov/dca/dfs/pdf/fire%20directory_county%20summary/fire_code_enforcement_director.pdf",
+            "quote": "LEAID: 1331-001 Enf Auth. Fire Dept Fire Official Edward Skelly Phone (732) 615-2270 ... Email bskelly@middletownnj.org",
+            "doc_date": "2024 (survey date 3/8/2024)",
+            "via": "state_directory",
+            "verified": null
+          },
+          {
+            "url": "https://nj.gov/dca/dfs/pdf/ANNUAL%20REGISTRY/THIRD%20QUARTER%20LEA%20REGISTRY%202026.pdf",
+            "quote": "F Middletown Township",
+            "doc_date": "2026-07",
+            "via": "pdf",
+            "verified": true
+          }
+        ],
+        "confidence": "high"
+      }
+    ],
+    "notes": "The certificate is not needed for a conditional or transfer-of-title-only CO, since those do not allow occupancy; it must be obtained before anyone moves in. The Fire Official's email comes from the NJ DCA fire directory, not a Township page. The Township FAQ confirms no fire extinguisher is needed after the February 2025 law."
+  },
+  "other_items": [
+    {
+      "label": "Open permits",
+      "detail": "All open permits must have a final inspection before the CO is issued; recent construction needs permits and approvals.",
+      "source_url": "https://middletownnj.org/DocumentCenter/View/7851/Residential-Certificate-of-Occupancy-Check-List-PDF"
+    },
+    {
+      "label": "60-day conditional CO",
+      "detail": "If violations or open permits remain, the buyer can sign a notarized 60-day conditional CO agreement to take responsibility for them and not occupy until the Township authorizes it.",
+      "source_url": "https://www.middletownnj.org/DocumentCenter/View/5205/Sixty-Day-Conditional-CO"
+    }
+  ],
+  "open_questions": [
+    "How long is a resale CO valid once issued?",
+    "Is a two-family home charged $150 per unit?",
+    "Does the Township Sewerage Authority need a final reading or sewer certification at sale?"
+  ],
+  "verification": {
+    "fees": 6,
+    "fee_ok": 6,
+    "fee_bad": 0,
+    "fee_unchecked": 0,
+    "quotes": 13,
+    "q_ok": 12,
+    "q_bad": 0,
+    "q_unchecked": 1
+  }
+}
