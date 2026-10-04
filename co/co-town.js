@@ -133,8 +133,7 @@
       b.setAttribute('aria-pressed', on ? 'true' : 'false');
     });
     if (counts) {
-      votesEl.querySelector('[data-count="up"]').textContent = counts.up > 0 ? counts.up : '';
-      votesEl.querySelector('[data-count="down"]').textContent = counts.down > 0 ? counts.down : '';
+      votesEl.querySelector('[data-score]').textContent = counts.up - counts.down;
       if (summaryEl) summaryEl.textContent = counts.up > 0 ? ' · ' + counts.up + (counts.up === 1 ? ' person' : ' people') + ' found this helpful' : '';
     }
   }
@@ -158,8 +157,8 @@
       }
       mine = next;
       paint(counts, mine);
-      var thanks = votesEl.querySelector('[data-thanks]');
-      if (thanks) thanks.textContent = next === 1 ? 'Thanks! Glad it helped.' : next === -1 ? 'Thanks. Tell us what’s off with Report a correction.' : '';
+      if (next === 1) toast('Thanks! Glad it helped.');
+      else if (next === -1) toast('Thanks. Tell us what’s off with Report a correction.');
       fetch('/api/co-feedback', { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify({ code: town.code, vote: next, client: clientId() }) })
         .then(function (r) { return r.ok ? r.json() : null; })
         .then(function (d) {
