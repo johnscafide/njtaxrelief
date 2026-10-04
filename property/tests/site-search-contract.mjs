@@ -47,14 +47,12 @@ const alarm = find((e) => e.aliases.includes('carbon monoxide') || e.aliases.inc
 
 assert.equal(co.kind, 'term');
 assert.match(co.label, /^CO - Certificate of Occupancy/, 'CO label reads "CO - Certificate of Occupancy"');
-// The CO entry opens the public CO Requirements by Town page.
-assert.equal(co.href, '/co', 'CO opens the CO Requirements by Town page');
-assert.ok(!co.need, 'the CO page is public, so the CO entry has no plan badge');
-// CCO and alarm certificates live on Property Home (the town CO & fire certificate card).
-for (const e of [cco, alarm]) {
-  assert.equal(e.href, '/home#town-certificates', `${e.id} opens the town CO & fire certificate card on Property Home`);
-  assert.ok(e.where && /^Property Home > /.test(e.where), `${e.id} says it lives on Property Home`);
+// CO, CCO and smoke / CO alarm certificate entries open the public CO Requirements by Town page.
+for (const e of [co, cco, alarm]) {
+  assert.equal(e.href, '/co', `${e.id} opens the CO Requirements by Town page`);
+  assert.ok(!e.need, `${e.id} has no plan badge since the CO page is public`);
 }
+// Property Home still deep-links to its town CO & fire certificate card.
 for (const f of ['property/js/home.js', 'property/js/dashboard/home/index.js']) {
   const home = read(f);
   assert.match(home, /hash === '#town-certificates'[\s\S]{0,200}window\.hmOpen\('diligence'\)/, `${f} opens the closing section for #town-certificates`);

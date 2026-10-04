@@ -82,10 +82,9 @@
         "change of occupancy",
         "certificate of occupancy"
       ],
-      "summary": "A certificate some NJ towns require after a local inspection before a home is sold. Property Home shows this town's rules, fees and who to call.",
-      "href": "/home#town-certificates",
-      "where": "Property Home > Closing > Town CO & fire certificate",
-      "need": "pro_plus",
+      "summary": "A certificate some NJ towns require after a local inspection before a home is sold. Type an address or town to see its rules, fees and who to call.",
+      "href": "/co",
+      "where": "CO Requirements by Town",
       "icon": "fa-clipboard-check"
     },
     {
@@ -118,10 +117,9 @@
         "one and two family",
         "fire code"
       ],
-      "summary": "NJ requires it before a one- or two-family home is sold or rented. Property Home shows who issues it in this town, the fee and who to call.",
-      "href": "/home#town-certificates",
-      "where": "Property Home > Closing > Town CO & fire certificate",
-      "need": "pro_plus",
+      "summary": "NJ requires it before a one- or two-family home is sold or rented. Type an address or town to see who issues it, the fee and who to call.",
+      "href": "/co",
+      "where": "CO Requirements by Town",
       "icon": "fa-fire-extinguisher"
     },
     {
