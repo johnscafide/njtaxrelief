@@ -23,6 +23,11 @@ const WATCHDOG_TOOL_REDIRECTS = new Map([['/resources.html','/glossary'],['/reso
 const SALES_API_PATH = '/api/sales-by-district';
 // Public property pages: /nj/<town>/<address>/<pams_pin> (or /nj/property/<pin>, redirected to the full form).
 const PROPERTY_PAGE_PATH = /^\/nj\/[^/]+\/[^/]+(?:\/[^/]+)?\/?$/i;
+// Free CO lookup pages: /co/<county>/<town> (and /print, the client checklist), /co/<county>,
+// /co/website (embed setup) and /co/embed/<county>/<town> (one town inside the embed).
+// /co itself, /co/embed and the files under /co/ are static.
+const CO_EMBED_TOWN_PATH = /^\/co\/embed\/([a-z0-9-]{1,80})\/([a-z0-9-]{1,80})\/?$/;
+const CO_PAGE_PATH = /^\/co\/([a-z0-9-]{1,80})(?:\/([a-z0-9-]{1,80})(?:\/(print))?)?\/?$/;
 const AUTOMATION_UA = /\b(?:curl|wget|python-requests|scrapy|go-http-client|libwww-perl|httpclient)\b/i;
 const ROOT_STATIC_PAGES = new Set(['/move', '/contact', '/search', '/agent', '/lender', '/attorney', '/investor', '/developer/communications', '/transaction', '/transaction/shared', '/account/profile', '/account/professional-profile', '/agent/listing-prep', '/agent/buyers', '/agent/open-house', '/agent/training', '/open-house', '/client-room', '/preview', '/preview/home', '/co']);
 const ROOT_COMPAT_REDIRECTS = new Map([['/contact.html', '/contact']]);
@@ -36,6 +41,9 @@ function cameFromLegacyNjptr(request){const referrer=request.headers.get('refere
 function redirectLegacyWatchdogHost(request,url){const destination=new URL(legacyWatchdogPath(url.pathname),`https://${WATCHDOG_HOST}`);destination.search=url.search;if(cameFromLegacyNjptr(request)&&!destination.searchParams.has('utm_source')){destination.searchParams.set('utm_source','njpropertytaxrelief');destination.searchParams.set('utm_medium','referral');destination.searchParams.set('utm_campaign','watchdog_cross_site');destination.searchParams.set('utm_content','legacy_property_link');}return Response.redirect(destination,308);}
 function rewriteLegacyAcquisitionPage(request,pathname){const destination=new URL('/api/njptr-watchdog-acquisition-page',request.url);destination.searchParams.set('path',pathname);return rewrite(destination);}
 function rewriteCleanPage(request,publicPath){const destination=new URL('/api/watchdog-index-page-contact-safe',request.url);destination.searchParams.set('path',publicPath);return rewrite(destination);}
+function coPageRewrite(request,url){const p=url.pathname;if(p==='/co/embed'||p==='/co/embed/')return null;const city=url.searchParams.get('city');let m=p.match(CO_EMBED_TOWN_PATH);if(m){const d=new URL('/api/co-embed-page',request.url);d.searchParams.set('county',m[1]);d.searchParams.set('town',m[2]);if(city)d.searchParams.set('city',city);return rewrite(d);}
+if(p==='/co/website'||p==='/co/website/'){const d=new URL('/api/co-town-page',request.url);d.searchParams.set('view','website');return rewrite(d);}
+m=p.match(CO_PAGE_PATH);if(!m||m[1]==='embed')return null;const d=new URL('/api/co-town-page',request.url);d.searchParams.set('county',m[1]);if(m[2])d.searchParams.set('town',m[2]);if(m[3])d.searchParams.set('view','print');if(city)d.searchParams.set('city',city);return rewrite(d);}
 function rewriteWatchdogSystemFile(request,apiPath){return rewrite(new URL(apiPath,request.url));}
 function redirectCanonical(request,url,pathname){const destination=new URL(pathname,request.url);destination.search=url.search;return Response.redirect(destination,308);}
 function blockedDataResponse(status,message,cacheControl){return new Response(JSON.stringify({error:message}),{status,headers:{'Content-Type':'application/json; charset=utf-8','Cache-Control':cacheControl,'X-Robots-Tag':'noindex, nofollow, noarchive','X-Watchdog-Data-Access':'scoped-only'}});}
@@ -46,11 +54,15 @@ export default async function middleware(request){const url=new URL(request.url)
 if(LEGACY_NJPTR_HOSTS.has(host)&&(url.pathname==='/property'||url.pathname==='/property/'||url.pathname.startsWith('/property/')))return redirectLegacyWatchdogHost(request,url);
 // The CO lookup is a Watchdog page; send NJPropertyTaxRelief visitors to it on the Watchdog host.
 if(LEGACY_NJPTR_HOSTS.has(host)&&(url.pathname==='/co'||url.pathname==='/co/'||url.pathname==='/co/index.html')){const destination=new URL('/co',`https://${WATCHDOG_HOST}`);destination.search=url.search;return Response.redirect(destination,308);}
+if(LEGACY_NJPTR_HOSTS.has(host)&&url.pathname.startsWith('/co/')&&!STATIC_FILE.test(url.pathname)){const destination=new URL(url.pathname,`https://${WATCHDOG_HOST}`);destination.search=url.search;return Response.redirect(destination,308);}
 if(LEGACY_NJPTR_HOSTS.has(host)&&LEGACY_WATCHDOG_PROMO_PATHS.has(url.pathname))return rewriteLegacyAcquisitionPage(request,url.pathname);
 if(BULK_SALES_FILE.test(url.pathname)){console.warn('watchdog-data-edge',JSON.stringify({event:'bulk_sales_blocked',path:url.pathname}));await recordEdgeSecurityEvent(request,'bulk_sales_blocked',url.pathname,AUTOMATION_UA.test(userAgent));return blockedDataResponse(404,'Bulk sales files are not a public delivery surface.','public, max-age=300, s-maxage=86400');}
 if(GAMES_PRIVATE_FILE.test(url.pathname))return blockedDataResponse(404,'Not found.','public, max-age=300, s-maxage=86400');
 if(REPO_NOTES_FILE.test(url.pathname))return blockedDataResponse(404,'Not found.','public, max-age=300, s-maxage=86400');
 if(url.pathname===SALES_API_PATH&&AUTOMATION_UA.test(userAgent)){console.warn('watchdog-data-edge',JSON.stringify({event:'automation_client_blocked',path:url.pathname}));await recordEdgeSecurityEvent(request,'automation_client_blocked',url.pathname,true);return blockedDataResponse(403,'Automated bulk extraction is not permitted on this endpoint.','no-store');}
+// CO town pages work on the Watchdog host and on preview deployments (NJPropertyTaxRelief was redirected above).
+// Files like /co/co.css never match the page patterns, so coPageRewrite leaves them to the static checks below.
+if(url.pathname.startsWith('/co/')){if(url.pathname==='/co/embed'||url.pathname==='/co/embed/')return next();const co=coPageRewrite(request,url);if(co)return co;}
 if(host!==WATCHDOG_HOST)return next();
 if(WATCHDOG_TOOL_REDIRECTS.has(url.pathname))return redirectCanonical(request,url,WATCHDOG_TOOL_REDIRECTS.get(url.pathname));
 if(url.pathname==='/anchor-estimator.html'||url.pathname==='/anchor-estimator'){const destination=new URL('/anchor-estimator.html','https://njpropertytaxrelief.com');destination.search=url.search;return Response.redirect(destination,308);}

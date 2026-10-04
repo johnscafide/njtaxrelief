@@ -72,7 +72,7 @@ async function runMenu({ persona = null, host = 'www.watchdogindex.com', path = 
   return { api, keys: items.map((i) => i.key), items, drawer: sheet ? sheet.innerHTML : '' };
 }
 
-const HOME = ['dashboard', 'lookup', 'home', 'pulse', 'anchor', 'town-compare', 'robust', 'games'];
+const HOME = ['dashboard', 'lookup', 'home', 'pulse', 'anchor', 'town-compare', 'co', 'robust', 'games'];
 const visitor = await runMenu({ persona: PERSONAS.visitor });
 assert.deepEqual(visitor.keys, [...HOME, 'data-center', 'pro', 'account'], 'Signed-out visitors see the homeowner destinations, the public Data Center and plans');
 const homeowner = await runMenu({ persona: PERSONAS.homeowner, path: '/dashboard', sidebarPage: 'dashboard' });

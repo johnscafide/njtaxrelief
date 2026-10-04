@@ -1,3 +1,5 @@
+const { sitemapRows: coSitemapRows } = require('./_co-town');
+
 const CANONICAL_HOST = 'www.watchdogindex.com';
 const CANONICAL_ORIGIN = `https://${CANONICAL_HOST}`;
 const LEGACY_HOSTS = new Set(['njpropertytaxrelief.com', 'www.njpropertytaxrelief.com']);
@@ -96,7 +98,37 @@ const CURATED_PUBLIC_ROUTES = [
   { path: '/robust/burden', lastmod: '2026-08-22', changefreq: 'monthly', priority: '0.72' },
   { path: '/robust/uniformity', lastmod: '2026-08-22', changefreq: 'monthly', priority: '0.72' },
   { path: '/robust/stability', lastmod: '2026-08-22', changefreq: 'monthly', priority: '0.72' },
-  { path: '/robust/trajectory', lastmod: '2026-08-22', changefreq: 'monthly', priority: '0.72' }
+  { path: '/robust/trajectory', lastmod: '2026-08-22', changefreq: 'monthly', priority: '0.72' },
+  // Public pages added since the last sitemap update (2026-10-04). The free CO lookup's town and
+  // county pages come from coSitemapRows() below.
+  { path: '/co', lastmod: '2026-10-04', changefreq: 'weekly', priority: '0.86' },
+  { path: '/co/website', lastmod: '2026-10-04', changefreq: 'monthly', priority: '0.70' },
+  { path: '/true-cost', lastmod: '2026-10-01', changefreq: 'monthly', priority: '0.80' },
+  { path: '/agent', lastmod: '2026-10-01', changefreq: 'monthly', priority: '0.80' },
+  { path: '/lender', lastmod: '2026-10-01', changefreq: 'monthly', priority: '0.76' },
+  { path: '/attorney', lastmod: '2026-10-01', changefreq: 'monthly', priority: '0.76' },
+  { path: '/investor', lastmod: '2026-10-01', changefreq: 'monthly', priority: '0.76' },
+  { path: '/for/real-estate-agents', lastmod: '2026-10-01', changefreq: 'monthly', priority: '0.80' },
+  { path: '/teams', lastmod: '2026-10-01', changefreq: 'monthly', priority: '0.76' },
+  { path: '/free', lastmod: '2026-10-01', changefreq: 'monthly', priority: '0.76' },
+  { path: '/benefit-stacking', lastmod: '2026-10-01', changefreq: 'monthly', priority: '0.80' },
+  { path: '/added-assessment-forecaster', lastmod: '2026-10-01', changefreq: 'monthly', priority: '0.78' },
+  { path: '/realty-transfer-fee-calculator', lastmod: '2026-10-01', changefreq: 'monthly', priority: '0.80' },
+  { path: '/mortgage-calculator', lastmod: '2026-10-01', changefreq: 'monthly', priority: '0.74' },
+  { path: '/home-value', lastmod: '2026-10-01', changefreq: 'monthly', priority: '0.74' },
+  { path: '/home-improvement-abatement', lastmod: '2026-10-01', changefreq: 'monthly', priority: '0.74' },
+  { path: '/search-homes', lastmod: '2026-10-01', changefreq: 'monthly', priority: '0.70' },
+  { path: '/hiring-a-real-estate-agent', lastmod: '2026-10-01', changefreq: 'monthly', priority: '0.76' },
+  { path: '/exempt-pilot', lastmod: '2026-10-01', changefreq: 'monthly', priority: '0.70' },
+  { path: '/insights/watchdog-brief-001', lastmod: '2026-10-01', changefreq: 'monthly', priority: '0.72' },
+  { path: '/help/professional-tools', lastmod: '2026-10-01', changefreq: 'monthly', priority: '0.66' },
+  { path: '/help/why-property-cannot-be-tested', lastmod: '2026-10-01', changefreq: 'monthly', priority: '0.60' },
+  { path: '/anchor/application/2025', lastmod: '2026-10-01', changefreq: 'monthly', priority: '0.70' },
+  { path: '/contact', lastmod: '2026-10-01', changefreq: 'yearly', priority: '0.50' },
+  { path: '/support', lastmod: '2026-10-01', changefreq: 'yearly', priority: '0.50' },
+  { path: '/privacy', lastmod: '2026-10-01', changefreq: 'yearly', priority: '0.30' },
+  { path: '/terms', lastmod: '2026-10-01', changefreq: 'yearly', priority: '0.30' },
+  { path: '/refunds', lastmod: '2026-10-01', changefreq: 'yearly', priority: '0.30' }
 ];
 
 function requestHost(req) {
@@ -261,6 +293,14 @@ module.exports = async function handler(req, res) {
       changefreq: item.changefreq,
       priority: item.priority
     });
+  }
+
+  try {
+    for (const item of coSitemapRows()) {
+      addRow(byLoc, { loc: `${CANONICAL_ORIGIN}${item.path}`, lastmod: item.lastmod || '', changefreq: item.changefreq, priority: item.priority });
+    }
+  } catch (error) {
+    console.warn('WATCHDOG_SITEMAP_CO_ROWS_FAILED', String(error?.message || error));
   }
 
   const rows = Array.from(byLoc.values()).sort((a, b) => {

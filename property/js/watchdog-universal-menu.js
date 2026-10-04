@@ -157,6 +157,7 @@
       {key:'pulse',href:route('/pulse'),icon:'fa-wave-square',label:'Property Pulse'},
       {key:'anchor',href:route('/anchor/applications/'),icon:'fa-file-circle-check',label:'ANCHOR Applications'},
       {key:'town-compare',href:route('/town-compare'),icon:'fa-code-compare',label:'Town Compare'},
+      {key:'co',href:'/co',icon:'fa-house-circle-check',label:'CO Requirements'},
       {key:'robust',href:route('/robust/'),icon:'fa-gauge-high',label:'ROBUST Framework'},
       {key:'games',href:route('/games'),icon:'fa-puzzle-piece',label:'Games'}
     ];
@@ -188,6 +189,7 @@
     'pulse':{lens:'home',hint:'What is changing near your home'},
     'anchor':{lens:'home',hint:'NJ property tax relief applications'},
     'town-compare':{lens:'home',group:'learn',hint:'Compare taxes between towns'},
+    'co':{lens:'home',group:'learn',hint:'Free resale CO rules for NJ towns'},
     'robust':{lens:'home',group:'learn',hint:'How the Watchdog Score works'},
     'games':{lens:'home',group:'learn',hint:'Daily home and town puzzles'},
     'scan':{lens:'work',hint:'Find homes that look over-assessed'},

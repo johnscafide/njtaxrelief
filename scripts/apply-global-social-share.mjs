@@ -14,6 +14,9 @@ const LEGACY_IMAGE_URLS = [
 const IMAGE_ALT = 'Watchdog Property Intelligence across New Jersey';
 const EXCLUDED_DIRS = new Set(['.git', '.vercel', 'node_modules', 'coverage']);
 
+// A page with <meta name="watchdog:social-image" content="page"> keeps its own preview image
+// (for example /co, whose card is about the free CO lookup). It still needs exactly one og:image.
+const pageImagePattern = /<meta\b[^>]*name\s*=\s*(["'])watchdog:social-image\1[^>]*content\s*=\s*(["'])page\2[^>]*>/i;
 const imageMetaPattern = /<meta\b[^>]*(?:property|name)\s*=\s*(["'])(?:og:image(?::(?:secure_url|type|width|height|alt))?|twitter:image(?::alt)?)\1[^>]*>\s*/gi;
 const twitterCardPattern = /<meta\b[^>]*name\s*=\s*(["'])twitter:card\1[^>]*>/i;
 
@@ -52,6 +55,7 @@ async function walk(dir, files = []) {
 function normalizeHtml(input) {
   let html = String(input || '');
   if (!/<head\b/i.test(html) || !/<\/head>/i.test(html)) return html;
+  if (pageImagePattern.test(html)) return html;
 
   html = html.replace(imageMetaPattern, '');
 
@@ -122,6 +126,14 @@ async function normalizeServerAdapters() {
 }
 
 function assertSocialMeta(html, file) {
+  if (pageImagePattern.test(html)) {
+    const head = html.match(/<head\b[\s\S]*?<\/head>/i)?.[0] || '';
+    const ogImageTags = head.match(/<meta\b[^>]*property\s*=\s*(["'])og:image\1[^>]*>/gi) || [];
+    if (ogImageTags.length !== 1 || !/content\s*=\s*["']https:\/\/www\.watchdogindex\.com\//i.test(ogImageTags[0]) || !head.includes('name="twitter:card" content="summary_large_image"')) {
+      throw new Error(`Watchdog social share verification failed for ${relative(ROOT, file)}: a page with its own preview image needs exactly one Watchdog og:image and a large twitter card.`);
+    }
+    return;
+  }
   const required = [
     IMAGE_URL,
     `property="og:image:width" content="${IMAGE_WIDTH}"`,

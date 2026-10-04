@@ -1,0 +1,37 @@
+name: CO town pages contract
+
+on:
+  pull_request:
+    paths:
+      - '.github/workflows/co-town-pages-contract.yml'
+      - 'api/_co-town.js'
+      - 'api/_co-pages.js'
+      - 'api/co-town-page.js'
+      - 'api/co-embed-page.js'
+      - 'api/co-feedback.js'
+      - 'api/co-lookup.js'
+      - 'api/watchdog-index-sitemap.js'
+      - 'co/**'
+      - 'middleware.js'
+      - 'property/data/municipal-requirements/**'
+      - 'property/tests/co-town-pages-contract.mjs'
+      - 'supabase/migrations/*_co_town_votes.sql'
+      - 'vercel.json'
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  contract:
+    runs-on: ubuntu-latest
+    timeout-minutes: 8
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+      - name: Town pages, checklist, embed and votes
+        run: |
+          for f in co/co-search.js co/co-town.js co/co-embed-frame.js co/co-website.js co/embed.js api/co-feedback.js api/co-town-page.js api/co-embed-page.js; do node --check "$f"; done
+          node property/tests/co-town-pages-contract.mjs

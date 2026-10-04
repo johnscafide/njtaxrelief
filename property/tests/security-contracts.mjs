@@ -146,6 +146,16 @@ for (const key of [
 }
 assert.equal(responseHeaders.get('X-Content-Type-Options'), 'nosniff');
 assert.equal(responseHeaders.get('X-Frame-Options'), 'SAMEORIGIN');
+// The only routes other sites may frame are the embedded CO lookup (/co/embed...) and the function
+// behind its town pages. They keep every other security header.
+assert.equal(vercel.headers[0].source, '/((?!co/embed|api/co-embed-page).*)', 'Only the embedded CO lookup is left out of the global header rule.');
+for (const source of ['/co/embed(.*)', '/api/co-embed-page(.*)']) {
+  const rule = vercel.headers.find((h) => h.source === source);
+  assert.ok(rule, `${source} needs its own header rule.`);
+  const keys = new Set(rule.headers.map((h) => h.key));
+  for (const key of ['X-Content-Type-Options', 'Referrer-Policy', 'Permissions-Policy', 'Strict-Transport-Security']) assert.ok(keys.has(key), `${source} keeps ${key}.`);
+  assert.ok(!keys.has('X-Frame-Options'), `${source} can be framed by other sites.`);
+}
 
 for (const relative of [
   'property/js/lookup.js',

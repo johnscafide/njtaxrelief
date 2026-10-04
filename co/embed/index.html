@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>NJ CO Requirements Lookup | Watchdog</title>
+<meta name="description" content="The free Watchdog CO lookup, embedded on another site.">
+<meta name="robots" content="noindex,follow">
+<link rel="canonical" href="https://www.watchdogindex.com/co">
+<link rel="icon" type="image/svg+xml" href="/favicon.svg">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Source+Sans+3:wght@400;600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+<link rel="stylesheet" href="/co/co.css?v=20261004">
+<!-- Embedded on other sites: first-party counts only, no cookie banner, Google Analytics or Clarity. -->
+<script src="/property/js/product-analytics.js" defer></script>
+</head>
+<body class="embed">
+<main>
+  <header class="top">
+    <a class="logo" href="https://www.watchdogindex.com/co?utm_source=embed&amp;utm_medium=referral&amp;utm_campaign=co_embed" target="_blank" rel="noopener"><img src="/property/branding/watchdog-logo-horizontal.svg" alt="Watchdog" width="110" height="26"></a>
+    <div class="search" data-search></div>
+  </header>
+
+  <div class="home">
+    <a class="logo" href="https://www.watchdogindex.com/co?utm_source=embed&amp;utm_medium=referral&amp;utm_campaign=co_embed" target="_blank" rel="noopener"><img src="/property/branding/watchdog-logo-horizontal.svg" alt="Watchdog" width="220" height="51"></a>
+    <form class="search" data-search role="search" id="home-form"></form>
+    <div class="buttons"><button class="btn" type="submit" form="home-form">Search CO requirements</button></div>
+  </div>
+
+  <div class="out" id="out" aria-live="polite"></div>
+  <footer class="embed-foot"><a href="https://www.watchdogindex.com/co?utm_source=embed&amp;utm_medium=referral&amp;utm_campaign=co_embed" target="_blank" rel="noopener">Free NJ CO lookup by Watchdog</a><a href="https://www.watchdogindex.com/co/website?utm_source=embed&amp;utm_medium=referral&amp;utm_campaign=co_embed" target="_blank" rel="noopener">Add it to your site</a></footer>
+</main>
+
+<template id="search-tpl">
+  <div class="box">
+    <svg width="20" height="20" viewBox="0 0 24 24" aria-hidden="true"><path fill="currentColor" d="M15.5 14h-.79l-.28-.27A6.47 6.47 0 0 0 16 9.5 6.5 6.5 0 1 0 9.5 16c1.61 0 3.09-.59 4.23-1.57l.27.28v.79l5 4.99L20.49 19l-4.99-5zm-6 0C7.01 14 5 11.99 5 9.5S7.01 5 9.5 5 14 7.01 14 9.5 11.99 14 9.5 14z"/></svg>
+    <label class="sr">Address or town</label>
+    <input type="text" autocomplete="off" spellcheck="false" placeholder="Address or town for CO requirements" role="combobox" aria-autocomplete="list" aria-expanded="false" enterkeyhint="search">
+    <button class="clear" type="button" aria-label="Clear">&times;</button>
+  </div>
+  <ul class="suggest" role="listbox"></ul>
+</template>
+
+<script>window.CO_BASE = '/co/embed';</script>
+<script src="/co/co-search.js?v=20261004" defer></script>
+<script src="/co/co-embed-frame.js?v=20261004" defer></script>
+</body>
+</html>
