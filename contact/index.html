@@ -130,5 +130,6 @@
 <script>
 (function(){var el=document.getElementById('contact-footer');if(!el)return;fetch('/property/partials/footer.html').then(function(r){if(!r.ok)throw new Error(String(r.status));return r.text();}).then(function(html){el.innerHTML=html;el.querySelectorAll('script').forEach(function(old){var s=document.createElement('script');Array.from(old.attributes).forEach(function(a){s.setAttribute(a.name,a.value);});s.textContent=old.textContent;old.replaceWith(s);});}).catch(function(){el.innerHTML='';});})();
 </script>
+<script src="/property/js/watchdog-easter-eggs.js?v=20261004a" defer></script>
 </body>
 </html>
