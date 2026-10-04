@@ -105,7 +105,7 @@ assert.match(co, /og:image" content="https:\/\/www\.watchdogindex\.com\/co\/co-s
 assert.ok(fs.statSync('co/co-share.png').size > 20000, 'the CO preview image exists');
 assert.match(read('property/js/watchdog-universal-menu.js'), /key:'co',href:'\/co'/, 'CO is in the Watchdog menu');
 const tipUrl = /const TIP_URL = '(https:\/\/account\.venmo\.com\/u\/[A-Za-z0-9-]+)'/.exec(read('api/_co-pages.js'))[1];
-assert.ok(co.includes(`<p class="tip"><a href="${tipUrl}"`), '/co has the same tip link as the town pages');
+assert.ok(!co.includes('class="tip"'), 'no tip link on the /co home page');
 r = await call(page, { county: 'essex', town: 'montclair-township' });
 assert.ok(r.body.includes(`<p class="tip"><a href="${tipUrl}"`), 'town pages end with the tip link');
 r = await call(embed, { county: 'essex', town: 'montclair-township' });
