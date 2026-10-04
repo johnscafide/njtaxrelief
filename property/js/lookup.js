@@ -1,3 +1,26 @@
+/* 
+     
+     Hi There. I see you are checking the code. I'm sure you have reasons for such. Curiosity would be my guess. 
+
+     My name is John. I've been building sites since I was 10. I was gifted ecommerce website software on floppy disks
+     and fell in love with web developement ever since. I learned to code HTML using just notepad. I took computer science
+     classes (BASIC and Visual Basic in high school). Took a few college classes learning C++, Python, Ruby and Javascript.
+     My very first websites was with Angelfire and Geocities. In college I dabbed in game development, small tools, and
+     graphic design. Database management with SQL by my sophmore year. Joomla and other CMS tools learned by the age of 20. 
+     I have an understanding and experience writing code by hand, studing and analyzing bugs, issues, and corrections. 
+     The introduction of AI is interesting. I can understand the worry and fear. I also see the memes of "Hey I can make 
+     your job obsolete" then show a localhost:3000. haha. But I do believe, if you understand how to use the tools, it's
+     no different than templates, hiring a local kid, outsourcing your work to fivrr or an agency. I code, I understand the
+     backend and frontend. I'm not an expert by all means. But I do have insights. Watchdog was built on real research.
+     Watchdog & it's companion, NJPropertyTaxRelief.com, is from years of listening to real people with real needs in NJ.
+     I hope these sites and tools have benefit to you and/or your business. If you found them useful, the least I ask of
+     you is to share. Sure, I have paid plan options for members, but majority of the site is free to use. I'm a real estate
+     agent, licensed tax professional, and a big fan of the state of New Jersey. It's a great state, but not without its
+     flaws. The idea is to educate more New Jerseyians about their benefits and property taxes in the state. It's possible
+     one day this site will exceed some of the bigger natonal sites. Who knows. But for now, I present to you, Watchdog
+     Property Intelligence.
+
+     */
 /* ============================================================
    PROPERTY LOOKUP
    watchdogindex.com
