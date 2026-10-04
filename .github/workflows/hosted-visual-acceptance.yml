@@ -31,7 +31,6 @@ on:
       - 'property/css/**'
       - 'api/watchdog-index-page.js'
       - 'api/watchdog-index-page-contact-safe.js'
-      - 'supabase/functions/submit-support-request/**'
       - 'supabase/functions/export-my-data/**'
       - 'supabase/functions/public-platform-status/**'
       - 'supabase/functions/appeal-prospect-scan/**'

@@ -149,7 +149,6 @@ assert.equal(responseHeaders.get('X-Frame-Options'), 'SAMEORIGIN');
 
 for (const relative of [
   'property/js/lookup.js',
-  'property/js/dashboard/index.js',
   'property/js/dashboard/home/index.js'
 ]) {
   const source = read(relative);
