@@ -9,7 +9,7 @@ const LOGO = '/property/branding/watchdog-logo-horizontal.svg';
 const MARK = '/property/branding/watchdog-mark.svg';
 const ASSET_V = '20261004c';
 // Tip line at the bottom of town pages and /co (co/index.html has the same link).
-const TIP_URL = 'https://account.venmo.com/u/johnscafide';
+const TIP_URL = 'https://account.venmo.com/u/John-Scafide';
 
 // Inline icons, so the buttons never depend on an icon font loading.
 function svg(d, fill) { return `<svg class="ic" viewBox="0 0 24 24" width="16" height="16" aria-hidden="true" focusable="false">${fill ? `<path fill="currentColor" d="${d}"/>` : `<path fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" d="${d}"/>`}</svg>`; }
