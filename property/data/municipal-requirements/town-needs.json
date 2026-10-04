@@ -20,6 +20,10 @@
   "fire_contact": {
    "label": "Who to call for the fire certificate",
    "hint": "The fire official or bureau that issues the smoke / CO alarm certificate, with a phone number or email."
+  },
+  "correction": {
+   "label": "Correction",
+   "hint": "Something Watchdog shows for this town is wrong or out of date."
   }
  },
  "towns": [

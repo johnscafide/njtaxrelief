@@ -41,6 +41,9 @@ NEEDS = {
                  "hint": "The smoke / CO alarm certificate fee, from the fire official's form or fee sheet."},
     "fire_contact": {"label": "Who to call for the fire certificate",
                      "hint": "The fire official or bureau that issues the smoke / CO alarm certificate, with a phone number or email."},
+    # Never a missing item: the /co lookup's "Report a correction" form sends it for a live town.
+    "correction": {"label": "Correction",
+                   "hint": "Something Watchdog shows for this town is wrong or out of date."},
 }
 
 

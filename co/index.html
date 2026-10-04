@@ -105,7 +105,9 @@
   .choice span { color: var(--muted); }
   .add { display: inline-flex; align-items: center; min-height: 44px; margin-top: 10px; padding: 0 18px; border: 0; border-radius: 22px; background: var(--blue); color: #fff; font: inherit; font-weight: 600; cursor: pointer; }
   .add:hover { background: #0a2f94; }
-  .add:focus-visible, dialog button:focus-visible { outline: 2px solid var(--blue); outline-offset: 2px; }
+  .fix { display: inline-flex; align-items: center; min-height: 44px; margin-top: 4px; padding: 0; border: 0; background: none; color: var(--muted); font: inherit; font-size: 14px; text-decoration: underline; text-underline-offset: 2px; cursor: pointer; }
+  .fix:hover { color: var(--ink); }
+  .add:focus-visible, .fix:focus-visible, dialog button:focus-visible { outline: 2px solid var(--blue); outline-offset: 2px; }
   dialog { width: min(520px, calc(100vw - 32px)); max-height: calc(100vh - 32px); padding: 0; border: 0; border-radius: 16px; box-shadow: 0 12px 40px rgba(16,24,40,.25); color: var(--ink); }
   dialog::backdrop { background: rgba(16,24,40,.45); }
   .dlg { padding: 22px 22px 18px; }
@@ -116,6 +118,7 @@
   .dlg input:not([type=file]), .dlg textarea, .dlg select { display: block; width: 100%; margin-top: 5px; padding: 10px 12px; border: 1px solid #cfd6de; border-radius: 10px; font: inherit; font-weight: 400; color: var(--ink); background: #fff; }
   .dlg input[type=file] { display: block; margin-top: 6px; font: inherit; font-weight: 400; max-width: 100%; }
   .dlg textarea { min-height: 90px; resize: vertical; }
+  .dlg [hidden] { display: none; }
   .dlg .two { display: grid; grid-template-columns: 1fr 1fr; gap: 0 12px; }
   .dlg .hp { position: absolute; left: -10000px; width: 1px; height: 1px; overflow: hidden; }
   .dlg .formstatus { min-height: 22px; margin: 12px 0 0; font-size: 14px; }
@@ -159,13 +162,16 @@
   <form class="dlg" id="add-form" method="dialog" novalidate>
     <h2 id="add-title">Add CO Requirements</h2>
     <p class="sub" id="add-town"></p>
-    <label>Town document <small>(form, fee sheet or letter; PDF or photo, up to 10 MB)</small>
+    <label data-fix-only hidden>What’s wrong?
+      <textarea name="problem" maxlength="2000" placeholder="For example: the fee went up to $150 in 2026."></textarea>
+    </label>
+    <label><span data-doc-label>Town document</span> <small>(form, fee sheet or letter; PDF or photo, up to 10 MB)</small>
       <input name="file" type="file" accept="application/pdf,image/jpeg,image/png,image/webp,image/heic,image/heif,.pdf,.jpg,.jpeg,.png,.webp,.heic,.heif">
     </label>
     <label>Or link to the town's page
       <input name="source_url" type="url" inputmode="url" placeholder="https://" maxlength="1000">
     </label>
-    <label>Requirements and fees <small>(optional)</small>
+    <label data-add-only>Requirements and fees <small>(optional)</small>
       <textarea name="answer" maxlength="2000"></textarea>
     </label>
     <div class="two">
@@ -490,7 +496,7 @@
         if (mine !== seq) return;
         document.title = t.name + ' CO Requirements | Watchdog';
         trackTown(t, d.status === 'ok' ? d.co.status : d.status);
-        if (d.status === 'ok') return render(townHtml(t, d, ctx || {}));
+        if (d.status === 'ok') return render(townHtml(t, d, ctx || {}) + '<button class="fix" type="button" data-fix>Report a correction</button>');
         if (d.status === 'not_available') return render(head(t, ctx) +
           '<p>Not available yet.</p>' + addButton());
         render(head(t, ctx) + '<p class="msg">Couldn’t load this town. Try again.</p>');
@@ -557,12 +563,12 @@
   }
 
 
-  // ---------- Add CO Requirements (goes to the Back Office town-info queue) ----------
+  // ---------- Add CO Requirements / Report a correction (both go to the Back Office town-info queue) ----------
   var NEED_KEYS = ['co_required', 'co_fee', 'co_contact', 'fire_fee', 'fire_contact'];
   var EXT_TYPES = { pdf: 'application/pdf', jpg: 'image/jpeg', jpeg: 'image/jpeg', png: 'image/png', webp: 'image/webp', heic: 'image/heic', heif: 'image/heif' };
   var MAX_BYTES = 10 * 1024 * 1024;
   var dlg = document.getElementById('add-dlg'), addForm = document.getElementById('add-form');
-  var addTown = null, openedAt = 0;
+  var addTown = null, openedAt = 0, fixing = false;
   function addButton() { return '<button class="add" type="button" data-add>Add CO Requirements</button>'; }
   function fileType(file) {
     var t = String(file.type || '').toLowerCase();
@@ -580,22 +586,32 @@
     fd.append('', new Blob([file], { type: type }), file.name || 'document');
     return fetch(url, { method: 'PUT', headers: { 'x-upsert': 'false' }, body: fd }).then(function (r) { if (!r.ok) throw new Error('The upload didn’t finish. Please try again.'); });
   }
-  function openAdd(t) {
-    addTown = t; openedAt = Date.now();
-    measure('co_add_requirements_open', { town: t.name, town_code: t.code });
+  function openAdd(t, fix) {
+    addTown = t; openedAt = Date.now(); fixing = !!fix;
+    measure(fixing ? 'co_correction_open' : 'co_add_requirements_open', { town: t.name, town_code: t.code });
     addForm.reset(); formStatus('', '');
+    document.getElementById('add-title').textContent = fixing ? 'Report a correction' : 'Add CO Requirements';
+    addForm.querySelector('[data-doc-label]').textContent = fixing ? 'Town document that shows the right info' : 'Town document';
+    Array.prototype.forEach.call(addForm.querySelectorAll('[data-fix-only]'), function (el) { el.hidden = !fixing; });
+    Array.prototype.forEach.call(addForm.querySelectorAll('[data-add-only]'), function (el) { el.hidden = fixing; });
     addForm.querySelector('.send').disabled = false;
     document.getElementById('add-town').textContent = t.name + ', ' + countyLabel(t.county);
     if (dlg.showModal) dlg.showModal(); else dlg.setAttribute('open', '');
   }
   function closeAdd() { if (dlg.close) dlg.close(); else dlg.removeAttribute('open'); }
-  out.addEventListener('click', function (e) { if (e.target.closest('[data-add]') && addTown) openAdd(addTown); });
+  out.addEventListener('click', function (e) {
+    if (!addTown) return;
+    if (e.target.closest('[data-add]')) openAdd(addTown, false);
+    else if (e.target.closest('[data-fix]')) openAdd(addTown, true);
+  });
   addForm.querySelector('.cancel').addEventListener('click', closeAdd);
   addForm.addEventListener('submit', function (e) {
     e.preventDefault();
     var f = addForm.elements, t = addTown;
     var file = f.file.files && f.file.files[0] || null;
     var link = String(f.source_url.value || '').trim();
+    var problem = String(f.problem.value || '').trim();
+    if (fixing && !problem) return formStatus('Tell us what’s wrong.', 'error');
     if (!file && !link) return formStatus('Add the town’s document or a link to the town’s page.', 'error');
     if (link && !/^https:\/\/[^\s]+\.[^\s]+/i.test(link)) return formStatus('The link must start with https://.', 'error');
     var type = file ? fileType(file) : '';
@@ -605,7 +621,7 @@
     send.disabled = true;
     formStatus(file ? 'Uploading…' : 'Sending…', '');
     postNeeds({
-      action: 'start', code: t.code, needs: NEED_KEYS, answer: f.answer.value, source_url: link,
+      action: 'start', code: t.code, needs: fixing ? ['correction'] : NEED_KEYS, answer: fixing ? problem : f.answer.value, source_url: link,
       file: file ? { name: file.name, type: type, size: file.size } : null,
       name: f.name.value, email: f.email.value, role: f.role.value,
       website: f.website.value, elapsed_ms: Date.now() - openedAt
@@ -614,7 +630,7 @@
       return uploadFile(res.upload_url, file, type).then(function () { return postNeeds({ action: 'finish', id: res.id }); });
     }).then(function () {
       formStatus('Thanks, it’s in. We’ll check it before it goes live.', '');
-      measure('co_requirements_submitted', { town: t.name, town_code: t.code });
+      measure(fixing ? 'co_correction_submitted' : 'co_requirements_submitted', { town: t.name, town_code: t.code });
       setTimeout(closeAdd, 1800);
     }).catch(function (err) {
       send.disabled = false;
