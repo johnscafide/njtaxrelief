@@ -44,6 +44,18 @@
       "includeFiles": "property/data/municipal-requirements/{approvals.json,checked/*.json}",
       "maxDuration": 10
     },
+    "api/co-town-page.js": {
+      "includeFiles": "{property/data/municipal-requirements/approvals.json,property/data/municipal-requirements/checked/*.json,co/towns.json}",
+      "maxDuration": 10
+    },
+    "api/co-embed-page.js": {
+      "includeFiles": "{property/data/municipal-requirements/approvals.json,property/data/municipal-requirements/checked/*.json,co/towns.json}",
+      "maxDuration": 10
+    },
+    "api/watchdog-index-sitemap.js": {
+      "includeFiles": "{property/data/municipal-requirements/approvals.json,property/data/municipal-requirements/checked/*.json,co/towns.json}",
+      "maxDuration": 10
+    },
     "api/watchdog-town-needs.js": {
       "includeFiles": "{property/data/municipal-requirements/town-needs.json,co/towns.json}",
       "maxDuration": 10
@@ -894,7 +906,7 @@
   ],
   "headers": [
     {
-      "source": "/(.*)",
+      "source": "/((?!co/embed|api/co-embed-page).*)",
       "headers": [
         {
           "key": "X-Content-Type-Options",
@@ -919,6 +931,56 @@
         {
           "key": "Content-Security-Policy-Report-Only",
           "value": "default-src 'self'; base-uri 'self'; object-src 'none'; frame-ancestors 'self'; form-action 'self' https://checkout.paddle.com; script-src 'self' 'unsafe-inline' https://cdn.jsdelivr.net https://cdnjs.cloudflare.com https://cdn.paddle.com https://cdn.emailjs.com https://www.googletagmanager.com https://www.google-analytics.com https://www.clarity.ms https://scripts.clarity.ms https://maps.googleapis.com https://maps.gstatic.com; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com https://cdnjs.cloudflare.com; font-src 'self' data: https://fonts.gstatic.com https://cdnjs.cloudflare.com; img-src 'self' data: blob: https:; connect-src 'self' https://*.supabase.co https://*.paddle.com https://api.emailjs.com https://www.google-analytics.com https://*.googleapis.com https://*.clarity.ms https://www.clarity.ms https://geo.nj.gov https://services2.arcgis.com https://services.arcgisonline.com https://server.arcgisonline.com https://*.bing.com https://c.bing.com https://api.open-meteo.com; frame-src 'self' https://*.paddle.com https://www.google.com https://www.youtube.com https://portal.pcmintegrations.com; media-src 'self' blob: data:; worker-src 'self' blob:; manifest-src 'self'"
+        }
+      ]
+    },
+    {
+      "source": "/co/embed(.*)",
+      "headers": [
+        {
+          "key": "X-Content-Type-Options",
+          "value": "nosniff"
+        },
+        {
+          "key": "Referrer-Policy",
+          "value": "strict-origin-when-cross-origin"
+        },
+        {
+          "key": "Permissions-Policy",
+          "value": "geolocation=(self), camera=(), microphone=(self)"
+        },
+        {
+          "key": "Strict-Transport-Security",
+          "value": "max-age=31536000; includeSubDomains; preload"
+        },
+        {
+          "key": "Content-Security-Policy-Report-Only",
+          "value": "default-src 'self'; base-uri 'self'; object-src 'none'; frame-ancestors *; form-action 'self' https://checkout.paddle.com; script-src 'self' 'unsafe-inline' https://cdn.jsdelivr.net https://cdnjs.cloudflare.com https://cdn.paddle.com https://cdn.emailjs.com https://www.googletagmanager.com https://www.google-analytics.com https://www.clarity.ms https://scripts.clarity.ms https://maps.googleapis.com https://maps.gstatic.com; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com https://cdnjs.cloudflare.com; font-src 'self' data: https://fonts.gstatic.com https://cdnjs.cloudflare.com; img-src 'self' data: blob: https:; connect-src 'self' https://*.supabase.co https://*.paddle.com https://api.emailjs.com https://www.google-analytics.com https://*.googleapis.com https://*.clarity.ms https://www.clarity.ms https://geo.nj.gov https://services2.arcgis.com https://services.arcgisonline.com https://server.arcgisonline.com https://*.bing.com https://c.bing.com https://api.open-meteo.com; frame-src 'self' https://*.paddle.com https://www.google.com https://www.youtube.com https://portal.pcmintegrations.com; media-src 'self' blob: data:; worker-src 'self' blob:; manifest-src 'self'"
+        }
+      ]
+    },
+    {
+      "source": "/api/co-embed-page(.*)",
+      "headers": [
+        {
+          "key": "X-Content-Type-Options",
+          "value": "nosniff"
+        },
+        {
+          "key": "Referrer-Policy",
+          "value": "strict-origin-when-cross-origin"
+        },
+        {
+          "key": "Permissions-Policy",
+          "value": "geolocation=(self), camera=(), microphone=(self)"
+        },
+        {
+          "key": "Strict-Transport-Security",
+          "value": "max-age=31536000; includeSubDomains; preload"
+        },
+        {
+          "key": "Content-Security-Policy-Report-Only",
+          "value": "default-src 'self'; base-uri 'self'; object-src 'none'; frame-ancestors *; form-action 'self' https://checkout.paddle.com; script-src 'self' 'unsafe-inline' https://cdn.jsdelivr.net https://cdnjs.cloudflare.com https://cdn.paddle.com https://cdn.emailjs.com https://www.googletagmanager.com https://www.google-analytics.com https://www.clarity.ms https://scripts.clarity.ms https://maps.googleapis.com https://maps.gstatic.com; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com https://cdnjs.cloudflare.com; font-src 'self' data: https://fonts.gstatic.com https://cdnjs.cloudflare.com; img-src 'self' data: blob: https:; connect-src 'self' https://*.supabase.co https://*.paddle.com https://api.emailjs.com https://www.google-analytics.com https://*.googleapis.com https://*.clarity.ms https://www.clarity.ms https://geo.nj.gov https://services2.arcgis.com https://services.arcgisonline.com https://server.arcgisonline.com https://*.bing.com https://c.bing.com https://api.open-meteo.com; frame-src 'self' https://*.paddle.com https://www.google.com https://www.youtube.com https://portal.pcmintegrations.com; media-src 'self' blob: data:; worker-src 'self' blob:; manifest-src 'self'"
         }
       ]
     },

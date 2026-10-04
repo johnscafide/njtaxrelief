@@ -9,7 +9,8 @@ const require = createRequire(import.meta.url);
 const needs = JSON.parse(read('property/data/municipal-requirements/town-needs.json'));
 const migration = read('supabase/migrations/20260930210000_town_info_submissions.sql');
 const correctionMigration = read('supabase/migrations/20261004130000_town_info_submissions_corrections.sql');
-const coPage = read('co/index.html');
+// The Add / Report a correction form now lives on each town page (/co/<county>/<town>).
+const coPage = read('api/_co-pages.js') + read('co/co-town.js');
 const page = read('property/town-needs/index.html');
 const pageJs = read('property/js/town-needs.js');
 const reviewPage = read('property/backoffice/town-info/index.html');
@@ -135,8 +136,8 @@ assert.equal(t.res.statusCode, 201, 'a town not on the needs list is accepted');
 assert.deepEqual(state.rows[0].need_keys, KEYS, 'every real need is kept for it, nothing else');
 assert.equal(state.rows[0].municipality_name, unlisted.n, 'its name comes from the full town list');
 // /co "Report a correction": any town, correction only, and it must say what's wrong.
-assert.match(coPage, /data-fix>Report a correction<\/button>/, '/co has the Report a correction button');
-assert.match(coPage, /needs: fixing \? \['correction'\] : NEED_KEYS/, '/co sends the correction key');
+assert.match(coPage, /data-fix>Report a correction<\/button>/, 'town pages have the Report a correction button');
+assert.match(coPage, /needs: fixing \? \['correction'\] : NEED_KEYS/, 'town pages send the correction key');
 const liveCode = Object.keys(JSON.parse(read('property/data/municipal-requirements/approvals.json')).towns)[0];
 reset();
 t = reqRes(Object.assign({}, base, { code: liveCode, needs: ['correction', 'co_fee'], answer: 'The fee is now $150.', source_url: 'https://www.example-town.gov/fees' }));
