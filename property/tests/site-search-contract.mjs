@@ -47,8 +47,11 @@ const alarm = find((e) => e.aliases.includes('carbon monoxide') || e.aliases.inc
 
 assert.equal(co.kind, 'term');
 assert.match(co.label, /^CO - Certificate of Occupancy/, 'CO label reads "CO - Certificate of Occupancy"');
-// CO requirements live on Property Home (the town CO & fire certificate card).
-for (const e of [co, cco, alarm]) {
+// The CO entry opens the public CO Requirements by Town page.
+assert.equal(co.href, '/co', 'CO opens the CO Requirements by Town page');
+assert.ok(!co.need, 'the CO page is public, so the CO entry has no plan badge');
+// CCO and alarm certificates live on Property Home (the town CO & fire certificate card).
+for (const e of [cco, alarm]) {
   assert.equal(e.href, '/home#town-certificates', `${e.id} opens the town CO & fire certificate card on Property Home`);
   assert.ok(e.where && /^Property Home > /.test(e.where), `${e.id} says it lives on Property Home`);
 }

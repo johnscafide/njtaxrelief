@@ -1,6 +1,6 @@
 {
   "schema_version": 1,
-  "updated": "2026-10-01",
+  "updated": "2026-10-04",
   "entries": [
     {
       "id": "certificate-of-occupancy",
@@ -40,10 +40,9 @@
         "upload",
         "document"
       ],
-      "summary": "Town sign-off that a home is fit to live in. For a resale, many NJ towns require one. Property Home shows this town's rules, fees and who to call.",
-      "href": "/home#town-certificates",
-      "where": "Property Home > Closing > Town CO & fire certificate",
-      "need": "pro_plus",
+      "summary": "Town sign-off that a home is fit to live in. For a resale, many NJ towns require one. Type an address or town to see its CO rules, fees and who to call.",
+      "href": "/co",
+      "where": "CO Requirements by Town",
       "icon": "fa-house-circle-check"
     },
     {

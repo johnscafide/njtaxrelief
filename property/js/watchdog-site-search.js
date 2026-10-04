@@ -1,7 +1,7 @@
 /* Watchdog site search. One "find anything" search for the whole site:
    Ctrl+K / Cmd+K (or "/") opens a search palette that finds
    - plain-English terms and where they live in Watchdog (typing "certif"
-     suggests "CO - Certificate of Occupancy > Transactions"),
+     suggests "CO - Certificate of Occupancy > CO Requirements by Town"),
    - Watchdog pages and tools (the signed-in menu's own destinations, so plan
      gating matches the menu),
    - New Jersey addresses (the same instant parcel search as Property Lookup),
@@ -182,7 +182,7 @@
   root.__wdSiteSearch = true;
 
   /* ---------- Runtime ---------- */
-  var VERSION = '20261001a';
+  var VERSION = '20261004a';
   var doc = root.document;
   var CSS_URL = '/property/css/watchdog-site-search.css';
   var DATA_URL = '/property/data/site-search.json?v=' + VERSION;
@@ -200,7 +200,7 @@
   var AGENT_RESERVED = /^(?:agent|agents|analytics|assets|buyers|client-room|clients|contacts|desk|edit|extension|farm-map|index|leads|listing-prep|new|onboarding|open-house|portal|reports|settings|shared|sphere|team|teams|today|training|workspace)$/i;
   /* Top-level folders that live at the repository root rather than under
      /property/, so preview and local hosts must not prefix them. */
-  var ROOT_PHYSICAL = /^\/(?:transaction|towns|search|contact|move|lender|attorney|investor|client-room|open-house|nj|statistics|checkup|true-cost|alerts|agent\/(?:listing-prep|buyers|open-house))(?:[\/?#]|$)/i;
+  var ROOT_PHYSICAL = /^\/(?:transaction|co|towns|search|contact|move|lender|attorney|investor|client-room|open-house|nj|statistics|checkup|true-cost|alerts|agent\/(?:listing-prep|buyers|open-house))(?:[\/?#]|$)/i;
   var POPULAR = ['certificate of occupancy','property tax appeal','anchor','senior freeze','added assessment','town compare'];
 
   var host = String(root.location.hostname || '').toLowerCase();
