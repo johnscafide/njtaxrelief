@@ -61,7 +61,8 @@ if(GAMES_PRIVATE_FILE.test(url.pathname))return blockedDataResponse(404,'Not fou
 if(REPO_NOTES_FILE.test(url.pathname))return blockedDataResponse(404,'Not found.','public, max-age=300, s-maxage=86400');
 if(url.pathname===SALES_API_PATH&&AUTOMATION_UA.test(userAgent)){console.warn('watchdog-data-edge',JSON.stringify({event:'automation_client_blocked',path:url.pathname}));await recordEdgeSecurityEvent(request,'automation_client_blocked',url.pathname,true);return blockedDataResponse(403,'Automated bulk extraction is not permitted on this endpoint.','no-store');}
 // CO town pages work on the Watchdog host and on preview deployments (NJPropertyTaxRelief was redirected above).
-if(url.pathname.startsWith('/co/')){if(url.pathname==='/co/embed'||url.pathname==='/co/embed/'||STATIC_FILE.test(url.pathname))return next();const co=coPageRewrite(request,url);if(co)return co;}
+// Files like /co/co.css never match the page patterns, so coPageRewrite leaves them to the static checks below.
+if(url.pathname.startsWith('/co/')){if(url.pathname==='/co/embed'||url.pathname==='/co/embed/')return next();const co=coPageRewrite(request,url);if(co)return co;}
 if(host!==WATCHDOG_HOST)return next();
 if(WATCHDOG_TOOL_REDIRECTS.has(url.pathname))return redirectCanonical(request,url,WATCHDOG_TOOL_REDIRECTS.get(url.pathname));
 if(url.pathname==='/anchor-estimator.html'||url.pathname==='/anchor-estimator'){const destination=new URL('/anchor-estimator.html','https://njpropertytaxrelief.com');destination.search=url.search;return Response.redirect(destination,308);}
