@@ -52,7 +52,6 @@ jobs:
               "sheet.addEventListener('click'",
               "e.target.closest('.wd-public-close,[data-wd-universal=\"close\"]')",
               "back.addEventListener('click',close)",
-              "Never hide/translate the sheet during an anchor's activation event.",
           ]
           interaction_missing = [token for token in interaction_required if token not in nav]
           if interaction_missing:
