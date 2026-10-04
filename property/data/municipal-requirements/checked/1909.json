@@ -1,0 +1,282 @@
+{
+ "municipality_code": "1909",
+ "municipality": "Hamburg Borough",
+ "county": "SUSSEX",
+ "resale_co": {
+  "status": "required",
+  "name": "Certificate of Occupancy for sales and change of tenant (COR)",
+  "issued_by": "Construction Official (Hamburg's Construction/Building Department is run by Hardyston Township under a shared service agreement)",
+  "lead_time": "The code says the Construction Official inspects within five business days after the written application and fee are received",
+  "valid_for": "",
+  "requirements": [
+   "Inspection by the Construction Official for hazardous, unsanitary or dangerous conditions, using the NJ State Housing Code as the standard",
+   "The home must be served by an adequate sewage disposal system and potable water",
+   "All construction permits must be closed before the sale"
+  ],
+  "fees": [
+   {
+    "label": "COR, sales and change of tenant (Borough Code section 98-3 fee schedule)",
+    "amount": "$35",
+    "quote": "COR - sales and change of tenant $35",
+    "source_url": "https://ecode360.com/10215339",
+    "verified": null
+   },
+   {
+    "label": "Reinspection fee to abate",
+    "amount": "$25",
+    "quote": "Reinspection fee to abate $25",
+    "source_url": "https://ecode360.com/10215339",
+    "verified": null
+   }
+  ],
+  "how_to_apply": "No application form or web page for this certificate was found on the Borough or Hardyston websites. Call the Hardyston Building Department (handles Hamburg construction), 973-823-7020 ext. 9001, construction@hardyston.com, to ask whether a COR inspection is needed for the sale and how to apply.",
+  "application_url": "",
+  "department_url": "https://hamburgnj.org/departments/construction-department/",
+  "phone": "973-823-7020 ext. 9001",
+  "email": "construction@hardyston.com",
+  "contact_name": "Joe Butto",
+  "contact_title": "Construction Official (Hardyston Township, shared service for Hamburg)",
+  "evidence": [
+   {
+    "url": "https://ecode360.com/10215708",
+    "quote": "No owner, agent, landlord, tenant, corporation or partnership shall allow a new tenant to occupy a dwelling unit until a new certificate of occupancy has been issued for the premises by the Construction Official of the Borough.",
+    "doc_date": "1983-08-01 (adopted)",
+    "via": "page",
+    "verified": null
+   },
+   {
+    "url": "https://ecode360.com/10215710",
+    "quote": "The Construction Official or his/her designated representative shall conduct the inspection within five business days after receipt of the written application and fee from the applicant.",
+    "doc_date": "1983-08-01 (adopted)",
+    "via": "page",
+    "verified": null
+   },
+   {
+    "url": "https://ecode360.com/10215339",
+    "quote": "COR - sales and change of tenant $35",
+    "doc_date": "2026-10-04 (page fetched)",
+    "via": "page",
+    "verified": null
+   },
+   {
+    "url": "https://hamburgnj.org/departments/construction-department/",
+    "quote": "Hamburg Borough has entered a shared service agreement with Hardyston Township for the Construction/Building Department.",
+    "doc_date": "2026-10-04 (page fetched)",
+    "via": "page",
+    "verified": true
+   },
+   {
+    "url": "https://hamburgnj.org/departments/construction-department/",
+    "quote": "Sellers must make sure all construction permits on their properties have been closed.",
+    "doc_date": "2026-10-04 (page fetched)",
+    "via": "page",
+    "verified": true
+   },
+   {
+    "url": "https://hamburgnj.org/departments/construction-department/",
+    "quote": "Joe Butto Construction Official 149 Wheatsworth Road",
+    "doc_date": "2026-10-04 (page fetched)",
+    "via": "page",
+    "verified": true
+   }
+  ],
+  "confidence": "low",
+  "notes": "Borough Code Chapter 159, Article I (Certificates of Occupancy, adopted 8-1-1983) bars letting a 'new tenant' occupy a dwelling until a new CO is issued after a Housing Code inspection, and the Construction Code fee schedule (section 98-3) lists 'COR - sales and change of tenant $35' and 'COR - rental registration $50'. That suggests a resale CO exists on paper, but neither the Borough website nor Hardyston's Building Department page mentions a resale CO for Hamburg (Hardyston's page only posts resale CO forms for Franklin Borough), so confidence is low and a phone call is needed. Code text was read through ecode360. The Borough also requires a sump pump certificate before any sale (see other items). Rental-only items (landlord-tenant registration, rental COR, lead-safe inspections of pre-1978 rentals, certificate of insurance filing) are not resale requirements."
+ },
+ "fire_cert": {
+  "requirements": [
+   "Smoke alarms on each level of the premises and outside each separate sleeping area, per NFPA 72",
+   "Battery smoke alarms must be 10-year sealed units (ANSI/UL 217); hardwired alarms from original construction cannot be replaced with battery alarms, and hardwired interconnected alarms must stay that way",
+   "Carbon monoxide alarm (UL 2034) in the immediate vicinity of the sleeping areas, if the home has a fuel-burning device or attached garage",
+   "Warning label (for example 'CAUTION: MULTIPLE SOURCES OF POWER', not handwritten) within 18 inches of the main panel and meter if there is a permanent generator, solar panels or battery storage",
+   "All construction permits must be closed with the Construction Department",
+   "No portable fire extinguisher needed (the Bureau's regulations say it is no longer required)"
+  ],
+  "authorities": [
+   {
+    "name": "Hardyston Township Fire Prevention Bureau (shared service fire code agency for Hamburg Borough)",
+    "type": "municipal_fire_bureau",
+    "area_served": "Entire borough (Hardyston's Bureau also serves Hardyston, Byram, Sparta, Sussex and Wantage)",
+    "lead_time": "Fee depends on business days before the closing: more than 10 business days for the lowest fee. After you submit, the Bureau calls or emails to schedule within a few business days. Regular inspections are Tuesdays and Wednesdays 9 to 11 AM; rush inspections (less than 4 days) can be scheduled outside those windows. The certificate (inspection) is good for 6 months.",
+    "fees": [
+     {
+      "label": "Smoke/CO certificate (CSACMAPFEC), more than 10 business days before closing",
+      "amount": "$100.00",
+      "quote": "$100.00 - More than 10 business days prior to closing",
+      "source_url": "https://hardystonfireprebureaunj.tylerportico.com/payments/billsearch/miscellaneous-payments/19de44bf-9a91-401b-94ca-25d7f3d306ab",
+      "verified": null
+     },
+     {
+      "label": "4 to 10 business days before closing",
+      "amount": "$150.00",
+      "quote": "$150.00 - 4-10 business days prior to closing",
+      "source_url": "https://hardystonfireprebureaunj.tylerportico.com/payments/billsearch/miscellaneous-payments/19de44bf-9a91-401b-94ca-25d7f3d306ab",
+      "verified": null
+     },
+     {
+      "label": "Less than 4 business days before closing",
+      "amount": "$200.00",
+      "quote": "$200.00 - Less than 4 business days prior to closing.",
+      "source_url": "https://hardystonfireprebureaunj.tylerportico.com/payments/billsearch/miscellaneous-payments/19de44bf-9a91-401b-94ca-25d7f3d306ab",
+      "verified": null
+     },
+     {
+      "label": "Re-inspection after a failed inspection",
+      "amount": "$50.00",
+      "quote": "If the inspection fails, a new inspection request form must be completed and a re-inspection fee of $50.00 remitted.",
+      "source_url": "https://hardystonfireprebureaunj.tylerportico.com/payments/billsearch/miscellaneous-payments/19de44bf-9a91-401b-94ca-25d7f3d306ab",
+      "verified": null
+     }
+    ],
+    "how_to_apply": "Apply and pay online with the Hardyston Fire Prevention Bureau's 'Hamburg and Hardyston - CSACMAPFEC (Residential Smoke Cert)' form (Tyler portal). Give owner, closing date, address, block and lot, and realtor details, and choose paper or email delivery. Paper applications can be picked up at the Construction Office window, Hardyston Municipal Building, 149 Wheatsworth Road. A failed inspection needs a new request form and the $50.00 re-inspection fee.",
+    "application_url": "https://hardystonfireprebureaunj.tylerportico.com/payments/billsearch/miscellaneous-payments/19de44bf-9a91-401b-94ca-25d7f3d306ab",
+    "department_url": "https://hamburgnj.org/departments/fire-official/",
+    "phone": "973-823-7020 ext. 9356",
+    "email": "estahl@hardyston.com",
+    "contact_name": "Eric A. Stahl",
+    "contact_title": "Fire Marshal (Administrative Assistant: Sarah Bright, ext. 9453, sbright@hardyston.com)",
+    "evidence": [
+     {
+      "url": "https://hamburgnj.org/departments/fire-official/",
+      "quote": "Hamburg Borough has entered into a shared service agreement with Township of Hardyston Fire Prevention Bureau.",
+      "doc_date": "2026-10-04 (page fetched)",
+      "via": "page",
+      "verified": true
+     },
+     {
+      "url": "https://hamburgnj.org/departments/fire-official/",
+      "quote": "the owner shall obtain a certificate of smoke alarm, carbon monoxide alarm, and portable fire extinguisher compliance CSACMAPFEC, evidencing compliance with N.J.A.C. 5:70-4.19, from Hardyston Fire Prevention Bureau for Hardyston Township and Hamburg Borough",
+      "doc_date": "2026-10-04 (page fetched)",
+      "via": "page",
+      "verified": true
+     },
+     {
+      "url": "https://hamburgnj.org/departments/fire-official/",
+      "quote": "Fire Marshal Eric A. Stahl (973) 823-7020 Extension 9356",
+      "doc_date": "2026-10-04 (page fetched)",
+      "via": "page",
+      "verified": true
+     },
+     {
+      "url": "https://hamburgnj.org/departments/fire-official/",
+      "quote": "Administrative Assistant Sarah Bright (973) 823-7020 Extension 9453",
+      "doc_date": "2026-10-04 (page fetched)",
+      "via": "page",
+      "verified": true
+     },
+     {
+      "url": "https://hardystonfireprebureaunj.tylerportico.com/payments/billsearch/miscellaneous-payments/19de44bf-9a91-401b-94ca-25d7f3d306ab",
+      "quote": "Hamburg and Hardyston - CSACMAPFEC (Residential Smoke Cert)",
+      "doc_date": "2026-10-04 (page fetched)",
+      "via": "page",
+      "verified": null
+     },
+     {
+      "url": "https://hardystonfireprebureaunj.tylerportico.com/payments/billsearch/miscellaneous-payments/19de44bf-9a91-401b-94ca-25d7f3d306ab",
+      "quote": "Inspections are good for 6 months.",
+      "doc_date": "2026-10-04 (page fetched)",
+      "via": "page",
+      "verified": null
+     },
+     {
+      "url": "https://hardystonfireprebureaunj.tylerportico.com/payments/billsearch/miscellaneous-payments/19de44bf-9a91-401b-94ca-25d7f3d306ab",
+      "quote": "Upon submission one of our representatives will contact you by phone or email to schedule the inspection within a few business days.",
+      "doc_date": "2026-10-04 (page fetched)",
+      "via": "page",
+      "verified": null
+     },
+     {
+      "url": "https://hardystonfireprebureaunj.tylerportico.com/payments/billsearch/miscellaneous-payments/19de44bf-9a91-401b-94ca-25d7f3d306ab",
+      "quote": "Non-Rushed Inspections (more than 5 days) are scheduled on Tuesdays and Wednesdays between the window of 9AM-11AM",
+      "doc_date": "2026-10-04 (page fetched)",
+      "via": "page",
+      "verified": null
+     },
+     {
+      "url": "https://hardyston.com/wp-content/documents/forms/Regulations%20-%20CSACMAPFEC%20(Residential%20Smoke%20Cert).pdf",
+      "quote": "All Construction permits shall be closed with the Construction Department.",
+      "doc_date": "2026-10-04 (page fetched)",
+      "via": "pdf",
+      "verified": true
+     },
+     {
+      "url": "https://hardyston.com/wp-content/documents/forms/Regulations%20-%20CSACMAPFEC%20(Residential%20Smoke%20Cert).pdf",
+      "quote": "A portable fire extinguisher is no longer required for this inspection.",
+      "doc_date": "2026-10-04 (page fetched)",
+      "via": "pdf",
+      "verified": true
+     },
+     {
+      "url": "https://hardyston.com/directories/building-and-code-enforcement/fire-prevention-bureau/",
+      "quote": "Fire Prevention Bureau (973) 823-7020 Option 7",
+      "doc_date": "2026-10-04 (page fetched)",
+      "via": "page",
+      "verified": true
+     },
+     {
+      "url": "https://hardyston.com/directories/building-and-code-enforcement/fire-prevention-bureau/",
+      "quote": "fireprevention@hardyston.com",
+      "doc_date": "2026-10-04 (page fetched)",
+      "via": "page",
+      "verified": true
+     },
+     {
+      "url": "https://hardyston.com/directories/building-and-code-enforcement/fire-prevention-bureau/",
+      "quote": "Eric A. Stahl (973) 823-7020 Extension 9356",
+      "doc_date": "2026-10-04 (page fetched)",
+      "via": "page",
+      "verified": true
+     },
+     {
+      "url": "https://www.nj.gov/dca/dfs/pdf/fire%20directory_county%20summary/fire_code_enforcement_director.pdf",
+      "quote": "LEAID: 1909-001 Hamburg Boro SMOKE DETECTOR COMPLIANCE Name: Hardyston Twp Enf Auth. Municipal Addr: 149 Wheatsworth Rd, Suite A Hardyston NJ 07419 Fire Official Eric A Stahl Phone (973) 823-7020 ... SSA with Hardyston Twp ... Email estahl@hardyston.com",
+      "doc_date": "2026-01 (survey date 1/14/2026)",
+      "via": "state_directory",
+      "verified": null
+     },
+     {
+      "url": "https://nj.gov/dca/dfs/pdf/ANNUAL%20REGISTRY/THIRD%20QUARTER%20LEA%20REGISTRY%202026.pdf",
+      "quote": "Hardyston Township is the LEA for Hamburg Borough, Sussex Borough, Wantage Township, Sparta & Byram",
+      "doc_date": "2026-07",
+      "via": "pdf",
+      "verified": true
+     }
+    ],
+    "confidence": "high"
+   }
+  ],
+  "notes": "Hamburg's own page still names the certificate with the portable fire extinguisher (CSACMAPFEC), but the Hardyston Bureau's current regulations and online form say the extinguisher is no longer required, in line with P.L.2025, c.19 (February 2025). The Bureau's form and Hamburg page agree that Hardyston issues the certificate for Hamburg. Contact emails are from the Hamburg Fire Prevention Bureau page."
+ },
+ "other_items": [
+  {
+   "label": "Sump pump certificate (required before closing)",
+   "detail": "Borough Ordinance 17-2024 (Code Ch. 164, Art. XIII): no owner may sell a home without a Department of Public Works certificate that no sump pump or other device is connected to the sanitary sewer. The seller files the application with DPW at least 10 days before the change in ownership. Fee $25; reinspection $25 each. DPW: 973-827-7702, Clerk@hamburgnj.org.",
+   "source_url": "https://hamburgnj.org/wp-content/documents/forms/Sump%20Pump%20Inspection%20Application.pdf"
+  },
+  {
+   "label": "Final water reading",
+   "detail": "When selling, call the Water/Sewer Department at 973-827-9230 ext. 4011 two weeks before closing to set up the final water reading and sump pump inspection.",
+   "source_url": "https://hamburgnj.org/departments/water-sewer/"
+  },
+  {
+   "label": "Open construction permits",
+   "detail": "Sellers must make sure all construction permits on the property have been closed (Hardyston Building Department handles Hamburg permits).",
+   "source_url": "https://hamburgnj.org/departments/construction-department/"
+  }
+ ],
+ "open_questions": [
+  "Does the Construction Official (Hardyston shared service) actually require the $35 COR inspection for 1-2 family sales in Hamburg, or only for new tenants? How do you apply and how long does it take?",
+  "Is the Borough Code fee schedule (COR $35) still current under the Hardyston shared service?"
+ ],
+ "checked_at": "2026-10-04",
+ "verification": {
+  "fees": 6,
+  "fee_ok": 0,
+  "fee_bad": 0,
+  "fee_unchecked": 6,
+  "quotes": 21,
+  "q_ok": 13,
+  "q_bad": 0,
+  "q_unchecked": 8
+ }
+}

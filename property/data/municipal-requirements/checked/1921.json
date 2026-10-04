@@ -1,0 +1,280 @@
+{
+ "municipality_code": "1921",
+ "municipality": "Sussex Borough",
+ "county": "SUSSEX",
+ "resale_co": {
+  "status": "required",
+  "name": "Certificate of Habitability for Resale (certificate of occupancy for a new owner)",
+  "issued_by": "Hardyston Township Fire Prevention Bureau (Hardyston Fire Marshal) under a shared service agreement; the Borough Code assigns the certificate of occupancy to the Sussex Borough Zoning Officer",
+  "lead_time": "Hardyston contacts the applicant within a few business days to schedule. Sussex non-rushed inspections are Wednesdays 8 to 9 am and Thursdays 1 to 3 pm; rushed inspections can be outside those windows. The Borough Code says a certificate of occupancy is granted or denied within 15 days of a written application.",
+  "valid_for": "Inspections are good for 6 months (Hardyston application page)",
+  "requirements": [
+   "Resale inspection through the Hardyston Fire Marshal before the new owner occupies",
+   "Smoke alarms on each level and outside each sleeping area; 10-year sealed battery units unless hardwired",
+   "Carbon monoxide alarms near sleeping areas where there is a fuel-burning device or attached garage",
+   "Warning label within 18 inches of the main electrical panel and meter if the home has a generator, solar panels or battery storage",
+   "All construction permits must be closed with the Construction Department"
+  ],
+  "fees": [
+   {
+    "label": "Certificate of habitability (COH) resale, each dwelling unit, request at least 10 business days before change of occupancy (Borough Code 24-1.5i3)",
+    "amount": "$50",
+    "quote": "If request made at least 10 business days prior to change of occupancy: $50.",
+    "source_url": "https://ecode360.com/36344313",
+    "verified": null
+   },
+   {
+    "label": "COH resale, request 4 to 10 business days before change of occupancy (Borough Code)",
+    "amount": "$85",
+    "quote": "If request made at least 10 business days but more than 4 business days prior to change of occupancy: $85.",
+    "source_url": "https://ecode360.com/36344313",
+    "verified": null
+   },
+   {
+    "label": "COH resale, request less than 4 business days before change of occupancy (Borough Code)",
+    "amount": "$150",
+    "quote": "If request made less than 4 business days prior to change of occupancy: $150.",
+    "source_url": "https://ecode360.com/36344313",
+    "verified": null
+   },
+   {
+    "label": "Residential smoke/CO certificate (CSACMAPFEC), more than 10 business days before closing",
+    "amount": "$100.00",
+    "quote": "$100.00 - More than 10 business days prior to closing",
+    "source_url": "https://hardystonfireprebureaunj.tylerportico.com/payments/billsearch/miscellaneous-payments/2b74a8ef-9b79-48b3-9ca2-4111720084aa",
+    "verified": null
+   },
+   {
+    "label": "4 to 10 business days before closing",
+    "amount": "$150.00",
+    "quote": "$150.00 - 4-10 business days prior to closing",
+    "source_url": "https://hardystonfireprebureaunj.tylerportico.com/payments/billsearch/miscellaneous-payments/2b74a8ef-9b79-48b3-9ca2-4111720084aa",
+    "verified": null
+   },
+   {
+    "label": "Less than 4 business days before closing",
+    "amount": "$200.00",
+    "quote": "$200.00 - Less than 4 business days prior to closing.",
+    "source_url": "https://hardystonfireprebureaunj.tylerportico.com/payments/billsearch/miscellaneous-payments/2b74a8ef-9b79-48b3-9ca2-4111720084aa",
+    "verified": null
+   },
+   {
+    "label": "Re-inspection after a failed inspection",
+    "amount": "$50.00",
+    "quote": "a new inspection request form must be completed and a re-inspection fee of $50.00 remitted",
+    "source_url": "https://hardystonfireprebureaunj.tylerportico.com/payments/billsearch/miscellaneous-payments/2b74a8ef-9b79-48b3-9ca2-4111720084aa",
+    "verified": null
+   }
+  ],
+  "how_to_apply": "Use the Certificate of Habitability Resale link on the Borough's Zoning/Housing page, which opens the Hardyston Fire Prevention Bureau's online form (Sussex and Wantage - CSACMAPFEC). Enter owner, closing date, occupant, address and block/lot, and pay online. Paper applications can be picked up at the Hardyston Township Municipal Building Construction Office window, 149 Wheatsworth Road, Hardyston.",
+  "application_url": "https://hardystonfireprebureaunj.tylerportico.com/payments/billsearch/miscellaneous-payments/2b74a8ef-9b79-48b3-9ca2-4111720084aa",
+  "department_url": "https://www.sussexboro.com/directory/zoning/",
+  "phone": "973-875-4831",
+  "email": "zoning@sussexboro.com",
+  "contact_name": "George Hutnick",
+  "contact_title": "Zoning, Housing, Code Enforcement Officer",
+  "evidence": [
+   {
+    "url": "https://www.sussexboro.com/directory/zoning/",
+    "quote": "Accordingly, all resale inspections will be conducted through the Hardyston Fire Marshal.",
+    "doc_date": "2026-10-04 (page fetched)",
+    "via": "page",
+    "verified": true
+   },
+   {
+    "url": "https://www.sussexboro.com/directory/zoning/",
+    "quote": "Please use the link below for access to the Certificate of Habitability Resale inspection application.",
+    "doc_date": "2026-10-04 (page fetched)",
+    "via": "page",
+    "verified": true
+   },
+   {
+    "url": "https://www.sussexboro.com/directory/zoning/",
+    "quote": "George Hutnick phone: 973-875-4831 email: zoning@sussexboro.com",
+    "doc_date": "2026-10-04 (page fetched)",
+    "via": "page",
+    "verified": true
+   },
+   {
+    "url": "https://ecode360.com/36297675",
+    "quote": "In addition, a certificate of occupancy shall be obtained prior to the occupancy of any existing residential or nonresidential land or building or part thereof by a new owner or tenant, even if there is no change in the use of the land or the building or part thereof.",
+    "doc_date": "Ord. No. 2015-12 (latest listed)",
+    "via": "page",
+    "verified": null
+   },
+   {
+    "url": "https://ecode360.com/36344313",
+    "quote": "Certificate of habitability (COH) Resales - Each dwelling unit:",
+    "doc_date": "",
+    "via": "page",
+    "verified": null
+   },
+   {
+    "url": "https://hardystonfireprebureaunj.tylerportico.com/payments/billsearch/miscellaneous-payments/2b74a8ef-9b79-48b3-9ca2-4111720084aa",
+    "quote": "Inspections are good for 6 months.",
+    "doc_date": "2026-10-04 (page fetched)",
+    "via": "page",
+    "verified": null
+   }
+  ],
+  "confidence": "medium",
+  "notes": "Borough Code 12-1.6b (read through the ecode360 print view) requires a certificate of occupancy before a new owner occupies an existing building, and the fee chapter still lists Certificate of Habitability resale fees of $50/$85/$150. The Borough's Zoning/Housing page now says all resale inspections are done through the Hardyston Fire Marshal, and its Certificate of Habitability Resale link opens Hardyston's smoke/CO certificate (CSACMAPFEC) form with fees of $100/$150/$200. So in practice the resale certificate and the smoke/CO certificate appear to be one Hardyston inspection, and the posted Hardyston fees, not the older Code fees, are what is charged. The Hardyston form is a JavaScript payment page, so a script may not be able to read its text. Rental units need an annual rental certificate of occupancy ($50 per unit) and landlord registration; rental-only."
+ },
+ "fire_cert": {
+  "requirements": [
+   "Smoke alarms on each level and outside each separate sleeping area (NFPA 72); not required to be interconnected, but hardwired interconnected alarms from construction must stay that way",
+   "10-year sealed battery smoke alarms (ANSI/UL 217); A/C powered alarms from original construction may not be replaced with battery alarms",
+   "Carbon monoxide alarms (UL 2034) in the immediate vicinity of sleeping areas where there is a fuel-burning device or attached garage",
+   "Secondary power source warning label (for example \"CAUTION: MULTIPLE SOURCES OF POWER.\") within 18 inches of the main electrical panel and meter if the home has a permanent generator, solar panels or battery storage",
+   "All construction permits must be closed with the Construction Department",
+   "No portable fire extinguisher is required"
+  ],
+  "authorities": [
+   {
+    "name": "Hardyston Fire Prevention Bureau (shared service fire code agency for Sussex Borough)",
+    "type": "municipal_fire_bureau",
+    "area_served": "Entire borough",
+    "lead_time": "Fee tiers count business days before closing: more than 10 business days for the lowest fee. Sussex non-rushed inspections are Wednesdays 8 to 9 am and Thursdays 1 to 3 pm. Inspections are good for 6 months.",
+    "fees": [
+     {
+      "label": "Residential smoke/CO certificate (CSACMAPFEC), more than 10 business days before closing",
+      "amount": "$100.00",
+      "quote": "$100.00 - More than 10 business days prior to closing",
+      "source_url": "https://hardystonfireprebureaunj.tylerportico.com/payments/billsearch/miscellaneous-payments/2b74a8ef-9b79-48b3-9ca2-4111720084aa",
+      "verified": null
+     },
+     {
+      "label": "4 to 10 business days before closing",
+      "amount": "$150.00",
+      "quote": "$150.00 - 4-10 business days prior to closing",
+      "source_url": "https://hardystonfireprebureaunj.tylerportico.com/payments/billsearch/miscellaneous-payments/2b74a8ef-9b79-48b3-9ca2-4111720084aa",
+      "verified": null
+     },
+     {
+      "label": "Less than 4 business days before closing",
+      "amount": "$200.00",
+      "quote": "$200.00 - Less than 4 business days prior to closing.",
+      "source_url": "https://hardystonfireprebureaunj.tylerportico.com/payments/billsearch/miscellaneous-payments/2b74a8ef-9b79-48b3-9ca2-4111720084aa",
+      "verified": null
+     },
+     {
+      "label": "Re-inspection after a failed inspection",
+      "amount": "$50.00",
+      "quote": "a new inspection request form must be completed and a re-inspection fee of $50.00 remitted",
+      "source_url": "https://hardystonfireprebureaunj.tylerportico.com/payments/billsearch/miscellaneous-payments/2b74a8ef-9b79-48b3-9ca2-4111720084aa",
+      "verified": null
+     }
+    ],
+    "how_to_apply": "Apply and pay online through the Hardyston Fire Prevention Bureau portal (Sussex and Wantage - CSACMAPFEC form). A representative contacts you by phone or email to schedule. Paper applications are at the Hardyston Township Municipal Building Construction Office window. A failed inspection needs a new request and a $50.00 re-inspection fee.",
+    "application_url": "https://hardystonfireprebureaunj.tylerportico.com/payments/billsearch/miscellaneous-payments/2b74a8ef-9b79-48b3-9ca2-4111720084aa",
+    "department_url": "https://www.sussexboro.com/directory/fireprevention/index.shtml",
+    "phone": "973-823-7020 ext. 9356",
+    "email": "estahl@hardyston.com",
+    "contact_name": "Eric A. Stahl",
+    "contact_title": "Fire Marshal (Bureau line 973-823-7020 option 7, fireprevention@hardyston.com)",
+    "evidence": [
+     {
+      "url": "https://www.sussexboro.com/directory/fireprevention/index.shtml",
+      "quote": "Sussex Borough has entered into a shared service agreement with the Township of Hardyston Fire Prevention Bureau.",
+      "doc_date": "2026-10-04 (page fetched)",
+      "via": "page",
+      "verified": true
+     },
+     {
+      "url": "https://www.sussexboro.com/directory/fireprevention/index.shtml",
+      "quote": "Fire Marshal Eric A. Stahl Phone: 973-823-7020 ext. 9356 Email: estahl@hardyston.com",
+      "doc_date": "2026-10-04 (page fetched)",
+      "via": "page",
+      "verified": true
+     },
+     {
+      "url": "https://hardyston.com/directories/building-and-code-enforcement/fire-prevention-bureau/",
+      "quote": "Fire Prevention Bureau (973) 823-7020 Option 7 fireprevention@hardyston.com",
+      "doc_date": "2026-10-04 (page fetched)",
+      "via": "page",
+      "verified": true
+     },
+     {
+      "url": "https://hardystonfireprebureaunj.tylerportico.com/payments/billsearch/miscellaneous-payments/2b74a8ef-9b79-48b3-9ca2-4111720084aa",
+      "quote": "Sussex Non-Rushed Inspections (more than 5 days) are scheduled on Wednesdays between the window of 8AM-9AM and Thursdays between the window of 1PM-3PM.",
+      "doc_date": "2026-10-04 (page fetched)",
+      "via": "page",
+      "verified": null
+     },
+     {
+      "url": "https://hardystonfireprebureaunj.tylerportico.com/payments/billsearch/miscellaneous-payments/2b74a8ef-9b79-48b3-9ca2-4111720084aa",
+      "quote": "Upon submission one of our representatives will contact you by phone or email to schedule the inspection within a few business days.",
+      "doc_date": "2026-10-04 (page fetched)",
+      "via": "page",
+      "verified": null
+     },
+     {
+      "url": "https://hardyston.com/wp-content/documents/forms/Regulations%20-%20CSACMAPFEC%20(Residential%20Smoke%20Cert).pdf",
+      "quote": "A portable fire extinguisher is no longer required for this inspection.",
+      "doc_date": "",
+      "via": "pdf",
+      "verified": true
+     },
+     {
+      "url": "https://hardyston.com/wp-content/documents/forms/Regulations%20-%20CSACMAPFEC%20(Residential%20Smoke%20Cert).pdf",
+      "quote": "All Construction permits shall be closed with the Construction Department.",
+      "doc_date": "",
+      "via": "pdf",
+      "verified": true
+     },
+     {
+      "url": "https://nj.gov/dca/dfs/pdf/ANNUAL%20REGISTRY/THIRD%20QUARTER%20LEA%20REGISTRY%202026.pdf",
+      "quote": "M Sussex Borough",
+      "doc_date": "2026-07",
+      "via": "pdf",
+      "verified": true
+     },
+     {
+      "url": "https://nj.gov/dca/dfs/pdf/ANNUAL%20REGISTRY/THIRD%20QUARTER%20LEA%20REGISTRY%202026.pdf",
+      "quote": "Hardyston Township is the LEA for Hamburg Borough, Sussex Borough, Wantage Township, Sparta & Byram",
+      "doc_date": "2026-07",
+      "via": "pdf",
+      "verified": true
+     },
+     {
+      "url": "https://www.nj.gov/dca/dfs/pdf/fire%20directory_county%20summary/fire_code_enforcement_director.pdf",
+      "quote": "LEAID: 1921-001 Sussex Boro SMOKE DETECTOR COMPLIANCE Name: Sussex Borough Enf Auth. Municipal Addr: 2 Main St Sussex NJ 07461 Fire Official Eric A Stahl Phone (973) 875-4831",
+      "doc_date": "2025-09 (survey date 9/8/2025)",
+      "via": "state_directory",
+      "verified": null
+     }
+    ],
+    "confidence": "high"
+   }
+  ],
+  "notes": "Hardyston's posted rules say a portable fire extinguisher is no longer required, in line with P.L.2025, c.19. The fee and schedule text comes from Hardyston's online payment page (Tyler portal), which is built with JavaScript, so a script may not read it; the same rules also appear in Hardyston's posted regulations PDF. Note the inspection windows say non-rushed is \"more than 5 days\" while the fee tiers use 10 business days."
+ },
+ "other_items": [
+  {
+   "label": "Sewer discharge certificate of compliance",
+   "detail": "Before title transfers on any property with a building connected to the Borough sewer, the owner must get a certificate of compliance from the Zoning Officer (no prohibited discharges such as sump pumps or roof drains into the sanitary sewer). Inspection fee $50, paid before the inspection, on a Borough form.",
+   "source_url": "https://ecode360.com/36298039"
+  },
+  {
+   "label": "Open construction permits",
+   "detail": "All construction permits must be closed with the Construction Department (Hardyston Building Department, which runs the Borough's construction office) before the smoke/resale certificate.",
+   "source_url": "https://hardyston.com/wp-content/documents/forms/Regulations%20-%20CSACMAPFEC%20(Residential%20Smoke%20Cert).pdf"
+  }
+ ],
+ "open_questions": [
+  "Does the Zoning Officer still do a separate certificate of occupancy / habitability inspection for a new owner, or is the Hardyston smoke/CO inspection the only one?",
+  "Which fee applies to the resale certificate: the Code's $50/$85/$150 or Hardyston's posted $100/$150/$200?",
+  "How does a seller get the sewer discharge certificate of compliance ($50), and is it still being enforced? No form was found online."
+ ],
+ "checked_at": "2026-10-04",
+ "verification": {
+  "fees": 11,
+  "fee_ok": 0,
+  "fee_bad": 0,
+  "fee_unchecked": 11,
+  "quotes": 16,
+  "q_ok": 10,
+  "q_bad": 0,
+  "q_unchecked": 6
+ }
+}
