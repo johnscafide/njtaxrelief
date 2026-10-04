@@ -3291,6 +3291,12 @@ buildOpinion(hasCase, overBy, saving, target) + rows +
     if (window.WatchdogPublicNav && typeof window.WatchdogPublicNav.remember === 'function') {
       window.WatchdogPublicNav.remember(current);
     }
+    // The branded header (lookup-summary-enhancements.js) draws the lot outline
+    // map from this, so it doesn't have to query the parcel layer again.
+    window.WatchdogLookupParcel = {
+      pin: current.pin, address: current.address, block: current.block, lot: current.lot,
+      lat: current.lat, lon: current.lon, rings: current.rings
+    };
 
     recordLookup(p, geo, rate, dy, propertyZip);
     var seen = timesSeen(p.PAMS_PIN || '');

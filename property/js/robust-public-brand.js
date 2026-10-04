@@ -46,7 +46,7 @@
   function loadLookupSummaryEnhancements(){
     if(!isPropertyLanding())return;
     if(window.__WATCHDOG_LOOKUP_SUMMARY_ENHANCEMENTS__)return;
-    loadScript('watchdog-lookup-summary-enhancements','/property/js/lookup-summary-enhancements.js?v=20260825-mapless1');
+    loadScript('watchdog-lookup-summary-enhancements','/property/js/lookup-summary-enhancements.js?v=20261004-lotmap');
   }
 
   /* Transitional shared/legacy bridge. The universal menu is the canonical
