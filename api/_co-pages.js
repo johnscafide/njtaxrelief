@@ -7,7 +7,9 @@ const T = require('./_co-town');
 const { ORIGIN, SHARE_IMAGE, esc, countyLabel, fmtDate, STATUS } = T;
 const LOGO = '/property/branding/watchdog-logo-horizontal.svg';
 const MARK = '/property/branding/watchdog-mark.svg';
-const ASSET_V = '20261004b';
+const ASSET_V = '20261004c';
+// Tip line at the bottom of town pages and /co (co/index.html has the same link).
+const TIP_URL = 'https://account.venmo.com/u/johnscafide';
 
 // Inline icons, so the buttons never depend on an icon font loading.
 function svg(d, fill) { return `<svg class="ic" viewBox="0 0 24 24" width="16" height="16" aria-hidden="true" focusable="false">${fill ? `<path fill="currentColor" d="${d}"/>` : `<path fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" d="${d}"/>`}</svg>`; }
@@ -249,7 +251,8 @@ function townPage(t, opts) {
       out += `<section class="nearby"><h2>Other towns in ${esc(countyLabel(t.county))}</h2><ul class="townlist">` +
         others.map((x) => `<li><a href="${esc(x.path)}">${esc(x.name)}</a></li>`).join('') + '</ul></section>';
     }
-    out += '<p class="more"><a href="/">Look up any New Jersey property on Watchdog</a></p>';
+    out += '<p class="more"><a href="/">Look up any New Jersey property on Watchdog</a></p>' +
+      `<p class="tip"><a href="${TIP_URL}" target="_blank" rel="noopener" data-tip>Found this helpful? Show appreciation with a tip on Venmo</a></p>`;
   }
   const body = `<main ${attrs}>
 ${topBar(embed)}

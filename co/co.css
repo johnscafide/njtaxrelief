@@ -158,6 +158,11 @@ dialog::backdrop { background: rgba(16,24,40,.45); }
 .townlist a { display: inline-flex; align-items: center; min-height: 36px; }
 .townlist .off { color: var(--muted); }
 .more { margin-top: 18px; font-size: 15px; }
+/* Very small tip line at the very bottom. */
+.tip { margin: 28px 0 0; font-size: 12px; }
+.tip a { color: var(--muted); }
+.tip a:hover { color: var(--ink); }
+.home .tip { margin-top: 20px; text-align: center; }
 
 /* County pages and the "Browse by county" list on /co. */
 .countylist { display: grid; grid-template-columns: repeat(auto-fill, minmax(150px, 1fr)); gap: 2px 16px; margin: 8px 0 0; padding: 0; list-style: none; }
@@ -179,4 +184,4 @@ body.embed .home .logo { margin-bottom: 18px; }
 .embed-foot a { display: inline-flex; align-items: center; min-height: 44px; color: var(--muted); }
 @media (max-width: 640px) { body.embed .top { flex-direction: row; } body.embed .top .logo img { width: 90px; } }
 
-@media print { .top, .home, .links, .tools, .votes, .fix, .nearby, .more, .crumbs, .toast, .embed-foot { display: none !important; } .out { padding: 0; } }
+@media print { .top, .home, .links, .tools, .votes, .fix, .nearby, .more, .tip, .crumbs, .toast, .embed-foot { display: none !important; } .out { padding: 0; } }

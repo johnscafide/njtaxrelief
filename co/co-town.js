@@ -101,6 +101,11 @@
       firstParty('checklist_open');
       return;
     }
+    if (e.target.closest('[data-tip]')) {
+      measure('co_tip_click', base());
+      firstParty('tip');
+      return;
+    }
     if (e.target.closest('[data-print-now]')) {
       measure('co_checklist_print', base());
       firstParty('checklist_print', 'checklist');
