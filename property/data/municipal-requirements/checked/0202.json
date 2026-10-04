@@ -1,0 +1,236 @@
+{
+ "municipality_code": "0202",
+ "municipality": "Alpine Borough",
+ "county": "BERGEN",
+ "checked_at": "2026-10-04",
+ "resale_co": {
+  "status": "required",
+  "name": "Certificate of Continued Occupancy Resale (CCO)",
+  "issued_by": "Borough of Alpine Construction (Building) Department, Code Official/Building Inspector",
+  "lead_time": "Apply at least 20 business days before the change of occupancy; the Code Official inspects within 10 business days of a complete application. The application form says the department has 10 working days to approve or deny.",
+  "valid_for": "90 days from issuance (CCO and smoke/CO certificates, per the Borough guidelines)",
+  "requirements": [
+   "General inspection of the visible parts of the house, property and other structures for Borough ordinance, Uniform Construction Code and Uniform Fire Code violations and unsafe conditions",
+   "Smoke alarms working and maintained as required at original construction; battery-only alarms must be 10-year sealed units (effective January 1, 2019)",
+   "Carbon monoxide alarm within 10 feet of each bedroom area",
+   "Portable fire extinguisher, 2A:10B:C, no larger than 10 pounds, mounted within 10 feet of the kitchen (form still lists it)",
+   "NFPA report required on all low voltage alarm systems; someone on site who knows how to reset the alarm system",
+   "Electrical covers, handrails on stairs with more than three risers, working faucets and toilets, operable bedroom windows, egress locks without keys (no double cylinder deadbolts)",
+   "Garage fire-resistive rating maintained, gas piping strapped with shut-offs (no aluminum piping), clearance to combustibles, pool barriers, house numbers at least 4 inches",
+   "All open permits must be closed; work done without permits must be permitted and inspected before the CCO is issued",
+   "Application must be signed and notarized"
+  ],
+  "fees": [
+   {
+    "label": "CCO resale, residential, 10 or more days prior",
+    "amount": "$400.00",
+    "quote": "| 10 or more | $400.00 | $600.00 |",
+    "source_url": "https://ecode360.com/8924167",
+    "verified": null
+   },
+   {
+    "label": "CCO resale, residential, 4 to 10 days prior",
+    "amount": "$600.00",
+    "quote": "| 4 to 10 | $600.00 | $800.00 |",
+    "source_url": "https://ecode360.com/8924167",
+    "verified": null
+   },
+   {
+    "label": "CCO resale, residential, fewer than 4 days prior",
+    "amount": "$800.00",
+    "quote": "Fewer than 4 days prior $800.00 Residential",
+    "source_url": "https://www.alpinenj.gov/file/a542c1d0-c177-11f0-84b6-8526c67a8884",
+    "verified": null
+   },
+   {
+    "label": "CCO reinspection",
+    "amount": "$90",
+    "quote": "The fee for a reinspection is $90 for each reinspection request.",
+    "source_url": "https://ecode360.com/8924167",
+    "verified": null
+   },
+   {
+    "label": "Certificate of noncompliance (transfer only, occupancy prohibited until violations are corrected)",
+    "amount": "$400",
+    "quote": "The fee for a certificate of noncompliance is $400.",
+    "source_url": "https://ecode360.com/8924167",
+    "verified": null
+   }
+  ],
+  "how_to_apply": "Fill out the Borough's Application for Continued Occupancy Compliance (Construction Department), have it notarized, and drop it off with the fee at the Building Department, 100 Church Street, Alpine, as soon as the contract is signed. Office hours are Monday to Friday 9:00 am to 3:30 pm. Inspections are by appointment. If the house will be demolished or violations can only be fixed after closing, ask for a certificate of noncompliance instead (seller and buyer letters, notarized, reviewed by the Borough Attorney and Engineer).",
+  "application_url": "https://www.alpinenj.gov/file/a542c1d0-c177-11f0-84b6-8526c67a8884",
+  "department_url": "https://www.alpinenj.gov/page/building-dept",
+  "phone": "201-784-2900 ext. 222",
+  "email": "constoff@alpinenj.org",
+  "contact_name": "John Scialla",
+  "contact_title": "Construction Code Official / Building Subcode Official (technical assistant: Catherine Booth, ext. 222)",
+  "evidence": [
+   {
+    "url": "https://ecode360.com/8924167",
+    "quote": "Certificate of continued occupancy resale shall be required upon any transfer of ownership to an existing premises which is accompanied by a change in the occupancy of such premises.",
+    "doc_date": "2023-10-25 (Ord. No. 822)",
+    "via": "page",
+    "verified": null
+   },
+   {
+    "url": "https://ecode360.com/8924167",
+    "quote": "The application shall be submitted at least 20 business days prior to the proposed change of occupancy.",
+    "doc_date": "2023-10-25 (Ord. No. 822)",
+    "via": "page",
+    "verified": null
+   },
+   {
+    "url": "https://ecode360.com/8924167",
+    "quote": "Upon receiving the required completed application and fees, the Code Official/Building Inspector shall inspect the property within 10 business days.",
+    "doc_date": "2023-10-25 (Ord. No. 822)",
+    "via": "page",
+    "verified": null
+   },
+   {
+    "url": "https://ecode360.com/8924167",
+    "quote": "A certificate of noncompliance shall be required for the transfer of ownership in the event that the principal building is to be demolished or when there are outstanding issues that need to be corrected and approval can only be obtained after closing.",
+    "doc_date": "2023-10-25 (Ord. No. 822)",
+    "via": "page",
+    "verified": null
+   },
+   {
+    "url": "https://www.alpinenj.gov/file/a542c1d0-c177-11f0-84b6-8526c67a8884",
+    "quote": "CCO and Smoke / Carbon Monoxide Alarm Certificates are valid for 90 days from issuance",
+    "doc_date": "Rev. 7/16/21",
+    "via": "pdf",
+    "verified": null
+   },
+   {
+    "url": "https://www.alpinenj.gov/file/a542c1d0-c177-11f0-84b6-8526c67a8884",
+    "quote": "Application Fee $ 400.00 Residential",
+    "doc_date": "REVISED 02/01/2020",
+    "via": "pdf",
+    "verified": null
+   },
+   {
+    "url": "https://www.alpinenj.gov/page/building-dept",
+    "quote": "The Construction Official is available by appointment only or by email constoff@alpinenj.org",
+    "doc_date": "2026-10-04 (page fetched)",
+    "via": "page",
+    "verified": null
+   },
+   {
+    "url": "https://www.alpinenj.gov/page/building-dept",
+    "quote": "Building Dept. Technical Assistant",
+    "doc_date": "2026-10-04 (page fetched)",
+    "via": "page",
+    "verified": null
+   }
+  ],
+  "confidence": "high",
+  "notes": "Borough Code Section 220-18C(2) to (4), added by Ordinance 822 on October 25, 2023, was read through the ecode360 print view. The ordinance table lists the residential fees as $400.00 (10 or more days), $600.00 (4 to 10) and $800.00 for the row labeled only '4'; the Borough's application form (a scanned PDF, revised 02/01/2020) labels that last tier 'Fewer than 4 days prior'. Not submitting a completed application can bring a $1,000 fine on the owner of record plus $100 a day. Section 97-4E(4) separately lists a $400 residential fee for a construction-code certificate of continued occupancy. The application PDF is a scan, so a text check cannot read it. Alpine also has a rental registration form; rental registration is not a resale requirement."
+ },
+ "fire_cert": {
+  "requirements": [
+   "Smoke alarm on each level and outside each separate sleeping area, near the bedrooms (Borough Code 119-10)",
+   "Carbon monoxide alarm within 10 feet of each bedroom area",
+   "Battery-only smoke alarms must be 10-year sealed units",
+   "Portable fire extinguisher, 2A:10B:C, no larger than 10 pounds, mounted within 10 feet of the kitchen (form still lists it)"
+  ],
+  "authorities": [
+   {
+    "name": "Alpine Bureau of Fire Prevention (Alpine Fire Department), inspected with the Borough Code Enforcement / Building Department CCO",
+    "type": "municipal_fire_bureau",
+    "area_served": "Entire borough",
+    "lead_time": "The Borough recommends requesting the CCO and smoke/CO inspection as soon as the contract is signed. The certificate is valid for 90 days from issuance.",
+    "fees": [],
+    "how_to_apply": "The Borough's guidelines say the Alpine Code Enforcement Bureau enforces the smoke and carbon monoxide alarm certificate and that it is inspected with the CCO; drop off the Application for Continued Occupancy Compliance with fees at the Building Department. Call the Fire Official, Keith Dalton, at 201-784-2900 ext. 224 to confirm whether a separate smoke/CO fee applies.",
+    "application_url": "https://www.alpinenj.gov/file/a542c1d0-c177-11f0-84b6-8526c67a8884",
+    "department_url": "https://www.alpinenj.gov/page/alpine-fire-dept",
+    "phone": "201-784-2900 ext. 224",
+    "email": "fireofficial@alpinenj.org",
+    "contact_name": "Keith Dalton",
+    "contact_title": "Fire Official (also Zoning Officer / Fire Subcode Official)",
+    "evidence": [
+     {
+      "url": "https://ecode360.com/8922203",
+      "quote": "Before any one- or two-family residential structure is sold, leased or otherwise made subject to a change of occupancy for residential purposes, the owner shall obtain a certificate of smoke detector and carbon monoxide alarm compliance, evidencing compliance with this chapter and with the New Jersey Fire Safety Code, N.J.A.C. 5:70-4.19.",
+      "doc_date": "2003-11-17 (Ord. No. 626)",
+      "via": "page",
+      "verified": null
+     },
+     {
+      "url": "https://ecode360.com/8922203",
+      "quote": "The fees for each inspection and issuance of a certificate shall be those established by the New Jersey State Uniform Fire Code, as amended from time to time.",
+      "doc_date": "2019-10-23 (Ord. No. 789)",
+      "via": "page",
+      "verified": null
+     },
+     {
+      "url": "https://www.alpinenj.gov/file/a542c1d0-c177-11f0-84b6-8526c67a8884",
+      "quote": "The Alpine Code Enforcement Bureau will enforce the requirement of the smoke detector and carbon monoxide alarm certificate.",
+      "doc_date": "Rev. 7/16/21",
+      "via": "pdf",
+      "verified": null
+     },
+     {
+      "url": "https://www.alpinenj.gov/page/alpine-fire-dept",
+      "quote": "Fire Official, Ext. 224",
+      "doc_date": "2026-10-04 (page fetched)",
+      "via": "page",
+      "verified": null
+     },
+     {
+      "url": "https://www.nj.gov/dca/dfs/pdf/fire%20directory_county%20summary/fire_code_enforcement_director.pdf",
+      "quote": "LEAID: 0202-001 Alpine Boro SMOKE DETECTOR COMPLIANCE Name: Alpine Boro Fire Prev Enf Auth. Fire Dept Fire Official Keith P Dalton Phone (201) 784-2900",
+      "doc_date": "survey date 7/21/2025",
+      "via": "state_directory",
+      "verified": null
+     },
+     {
+      "url": "https://nj.gov/dca/dfs/pdf/ANNUAL%20REGISTRY/THIRD%20QUARTER%20LEA%20REGISTRY%202026.pdf",
+      "quote": "F Alpine Borough",
+      "doc_date": "2026-07",
+      "via": "pdf",
+      "verified": true
+     }
+    ],
+    "confidence": "medium"
+   }
+  ],
+  "notes": "The Borough code sets the smoke/CO certificate fee as the state Uniform Fire Code fee rather than its own amount, and no Borough page or form publishes a separate smoke/CO dollar amount, so no fee is listed. The Borough's guidance ties the smoke/CO inspection to the CCO application. The fire official's email fireofficial@alpinenj.org comes from the NJ DCA fire directory. The Borough form still lists a portable fire extinguisher; the state dropped it from the sale certificate in February 2025 (P.L.2025, c.19), so confirm with the Borough."
+ },
+ "other_items": [
+  {
+   "label": "Open permits",
+   "detail": "All open permits must be closed, and any work found done without permits must be permitted and inspected before the CCO is issued.",
+   "source_url": "https://www.alpinenj.gov/file/a542c1d0-c177-11f0-84b6-8526c67a8884"
+  },
+  {
+   "label": "Low voltage alarm systems",
+   "detail": "An NFPA report is required on all low voltage alarm systems at the CCO inspection.",
+   "source_url": "https://www.alpinenj.gov/file/a542c1d0-c177-11f0-84b6-8526c67a8884"
+  },
+  {
+   "label": "Advanced septic (pretreatment) system license transfer",
+   "detail": "Homes with an active sewage treatment system using advanced wastewater pretreatment need a Board of Health license; the Borough fee schedule lists a $50 realty transfer fee and a $50 late fee for applications more than 14 days after realty transfer. Septic matters go to the Alpine Health Department, 201-784-2900 ext. 219.",
+   "source_url": "https://ecode360.com/8922076"
+  },
+  {
+   "label": "Fire Official status report (optional)",
+   "detail": "On request of an owner or purchaser, the Fire Official issues a certificate listing unabated fire code violations and unpaid fees, for a $25 fee.",
+   "source_url": "https://ecode360.com/8922203"
+  }
+ ],
+ "open_questions": [
+  "Is the smoke/CO certificate covered by the CCO fee, or is there a separate state-rate fee paid to the Fire Prevention Bureau?",
+  "What is the fee for a CCO requested fewer than 4 days before closing: the ordinance row is labeled only '4'?",
+  "Does Alpine still require the portable fire extinguisher at resale after P.L.2025, c.19?",
+  "Does the CCO apply to 2-family homes at the same fee (the ordinance table names one family dwellings)?"
+ ],
+ "verification": {
+  "fees": 5,
+  "fee_ok": 0,
+  "fee_bad": 0,
+  "fee_unchecked": 5,
+  "quotes": 14,
+  "q_ok": 1,
+  "q_bad": 0,
+  "q_unchecked": 13
+ }
+}

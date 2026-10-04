@@ -1,0 +1,233 @@
+{
+ "municipality_code": "0221",
+ "municipality": "Garfield",
+ "county": "BERGEN",
+ "resale_co": {
+  "status": "required",
+  "name": "Certificate of Continuing Occupancy (Certificate of Occupancy for Resale)",
+  "issued_by": "City of Garfield Building Department (Construction Official as enforcement officer), with inspection by the Garfield Fire Prevention Bureau",
+  "lead_time": "The code gives the City up to 30 days after a complete application to inspect and issue the certificate. The City says not to schedule a closing until the C.O. is obtained.",
+  "valid_for": "",
+  "requirements": [
+   "General inspection of the visible parts of the building for imminent hazards and compliance with building, health, safety and fire codes",
+   "Approved smoke detector installed (smoke and carbon monoxide certification is done at the same time)",
+   "Seller and buyer names, current home addresses, phone numbers and emails (no business, attorney or realtor addresses)",
+   "For an estate sale, a copy of the Surrogate letter",
+   "If illegal extra units are found, separate utility services must be removed and the owner and buyer must sign a sworn statement"
+  ],
+  "fees": [
+   {
+    "label": "Certificate of occupancy for resale, 1 family",
+    "amount": "$50.00",
+    "quote": "1 family - $50.00",
+    "source_url": "https://www.garfieldnj.org/_Content/pdf/CERTIFICATE-OF-OCCUPANCY-FOR-A-RESALE.pdf",
+    "verified": true
+   },
+   {
+    "label": "Certificate of occupancy for resale, 2 family",
+    "amount": "$100.00",
+    "quote": "2 family $100.00",
+    "source_url": "https://www.garfieldnj.org/_Content/pdf/CERTIFICATE-OF-OCCUPANCY-FOR-A-RESALE.pdf",
+    "verified": true
+   },
+   {
+    "label": "Certificate of continuing occupancy, one-family home or condo unit (Code Section 105-9)",
+    "amount": "$50",
+    "quote": "For one-family homes and individual condominiums, cooperative units and apartment units | $50 |",
+    "source_url": "https://ecode360.com/10083600",
+    "verified": null
+   },
+   {
+    "label": "Certificate of continuing occupancy, two-family dwelling (Code Section 105-9)",
+    "amount": "$100",
+    "quote": "For two-family dwellings | $100 |",
+    "source_url": "https://ecode360.com/10083600",
+    "verified": null
+   }
+  ],
+  "how_to_apply": "Apply online through the City's FastTrackGov citizen portal (create an account, submit and pay), or email Elizabeth Pacyga (epacyga@garfieldnj.org) with the property address, the buyer's and seller's names, home addresses, phones and emails, and the Surrogate letter for an estate. Wait for the City's email before paying; pay the C.O. fee by check or money order to \"CITY OF GARFIELD\" and the smoke certification fee separately to \"BUREAU OF FIRE PREVENTION\".",
+  "application_url": "https://garfieldnj.portal.fasttrackgov.com/Common/ApplicationLinks.aspx",
+  "department_url": "https://www.garfieldnj.org/Departments/building-department",
+  "phone": "973-340-2000",
+  "email": "epacyga@garfieldnj.org",
+  "contact_name": "Elizabeth Pacyga",
+  "contact_title": "Named on the City's resale C.O. instructions as the person to start the process",
+  "evidence": [
+   {
+    "url": "https://www.garfieldnj.org/_Content/pdf/CERTIFICATE-OF-OCCUPANCY-FOR-A-RESALE.pdf",
+    "quote": "HOW TO OBTAIN A CERTIFICATE OF OCCUPANCY FOR RESALE",
+    "doc_date": "",
+    "via": "pdf",
+    "verified": true
+   },
+   {
+    "url": "https://www.garfieldnj.org/_Content/pdf/CERTIFICATE-OF-OCCUPANCY-FOR-A-RESALE.pdf",
+    "quote": "Please do not schedule a closing until you have obtained your C.O. Failure to comply with city ordinances may result in a $2000 fine",
+    "doc_date": "",
+    "via": "pdf",
+    "verified": true
+   },
+   {
+    "url": "https://www.garfieldnj.org/_Content/pdf/CERTIFICATE-OF-OCCUPANCY-FOR-A-RESALE.pdf",
+    "quote": "If the property is an estate, you must provide a copy of the Surrogate letter with the application.",
+    "doc_date": "",
+    "via": "pdf",
+    "verified": true
+   },
+   {
+    "url": "https://www.garfieldnj.org/Departments/fire-prevention",
+    "quote": "To apply for a Certificate of Occupancy for a new business or a resale of commercial or residential property, please contact Ms. Elizabeth Pacyga at epacyga@garfieldnj.org to initiate this process.",
+    "doc_date": "2026-10-04 (page fetched)",
+    "via": "page",
+    "verified": true
+   },
+   {
+    "url": "https://www.garfieldnj.org/Departments/building-department",
+    "quote": "We are now online! You can now apply for and pay for Dwellings Certificates, Certificate of Occupancy and Building Permits.",
+    "doc_date": "2026-10-04 (page fetched)",
+    "via": "page",
+    "verified": true
+   },
+   {
+    "url": "https://www.garfieldnj.org/Departments/building-department",
+    "quote": "Should you have any questions or concerns please contact the following: Deanna Eisenman 973-340-2000 x4040 or Robert Schultz 973-340-2000 x4043",
+    "doc_date": "2026-10-04 (page fetched)",
+    "via": "page",
+    "verified": true
+   },
+   {
+    "url": "https://ecode360.com/10083600",
+    "quote": "Prior to the rental, sale or lease of any commercial or industrial property or the sale of a residential building or the sale of any individual unit in a multiple-family dwelling involving a new occupancy or change of use, the enforcement officer shall issue a certificate of continuing occupancy in accordance with the standards set forth in",
+    "doc_date": "Code current to 2026-02-17 (Ord. No. 2942, 6-28-2022)",
+    "via": "page",
+    "verified": null
+   },
+   {
+    "url": "https://ecode360.com/10083600",
+    "quote": "No certificate of continuing occupancy may be issued to a residential building or any portion thereof unless an approved smoke detector device has been installed, as required by applicable state statute and local ordinance.",
+    "doc_date": "Code current to 2026-02-17",
+    "via": "page",
+    "verified": null
+   }
+  ],
+  "confidence": "high",
+  "notes": "Garfield Code Chapter 105 (Certificates of Continued Occupancy) was read through ecode360; Section 105-9 fees (amended 2022 and 2023) match the City's resale instruction sheet. The Fire Prevention page also names Debra Schult (dschult@garfieldnj.org) for information on C.O. and smoke/CO inspections. Garfield also has a separate Dwelling Certificate law (Chapter 128) that requires an inspection before transfer of title of a one- or two-unit dwelling; see other_items. Rental dwelling certificate inspections for 1-2 family rentals are a rental program and are mentioned only for context."
+ },
+ "fire_cert": {
+  "requirements": [
+   "Smoke alarms on each level and outside each separate sleeping area, located per NFPA 72",
+   "Battery smoke alarms must be 10-year sealed units (UL 217); hardwired alarms must stay hardwired",
+   "Carbon monoxide alarms in the immediate vicinity of sleeping areas (UL 2034), where there is a fuel-burning device or attached garage",
+   "Smoke and CO detectors within 10 feet of all bedrooms; access to the attic and basement at the inspection",
+   "Fire extinguisher (an older City smoke detector application form still lists it)"
+  ],
+  "authorities": [
+   {
+    "name": "Garfield Bureau of Fire Prevention (Garfield Fire Department)",
+    "type": "municipal_fire_bureau",
+    "area_served": "Entire city",
+    "lead_time": "Done together with the resale certificate of occupancy; the City starts processing when the complete information is received.",
+    "fees": [
+     {
+      "label": "Smoke and carbon monoxide detector certification, 1 family",
+      "amount": "$50.00",
+      "quote": "1 family - $50.00",
+      "source_url": "https://www.garfieldnj.org/_Content/pdf/CERTIFICATE-OF-OCCUPANCY-FOR-A-RESALE.pdf",
+      "verified": true
+     },
+     {
+      "label": "Smoke and carbon monoxide detector certification, 2 family",
+      "amount": "$100.00",
+      "quote": "2 family $100.00",
+      "source_url": "https://www.garfieldnj.org/_Content/pdf/CERTIFICATE-OF-OCCUPANCY-FOR-A-RESALE.pdf",
+      "verified": true
+     }
+    ],
+    "how_to_apply": "Start through the resale C.O. process (FastTrackGov portal or email epacyga@garfieldnj.org). Pay the smoke certification fee with one check or money order payable to \"BUREAU OF FIRE PREVENTION\".",
+    "application_url": "https://garfieldnj.portal.fasttrackgov.com/Common/ApplicationLinks.aspx",
+    "department_url": "https://www.garfieldnj.org/Departments/fire-prevention",
+    "phone": "973-340-2000",
+    "email": "dschult@garfieldnj.org",
+    "contact_name": "James E Kovacs",
+    "contact_title": "Fire Official (NJ DCA fire directory); Debra Schult is the Fire Prevention contact on the City page",
+    "evidence": [
+     {
+      "url": "https://www.garfieldnj.org/_Content/pdf/CERTIFICATE-OF-OCCUPANCY-FOR-A-RESALE.pdf",
+      "quote": "One (1) check or money order for your smoke certification made payable to \"BUREAU OF FIRE PREVENTION\"",
+      "doc_date": "",
+      "via": "pdf",
+      "verified": true
+     },
+     {
+      "url": "https://www.garfieldnj.org/Departments/fire-prevention",
+      "quote": "Certificate of Occupancy and Smoke Detector/Carbon Monoxide Inspections are also performed for all new business openings and all commercial and residential resales.",
+      "doc_date": "2026-10-04 (page fetched)",
+      "via": "page",
+      "verified": true
+     },
+     {
+      "url": "https://www.garfieldnj.org/Departments/fire-prevention",
+      "quote": "Please contact Ms. Debra Schult at dschult@garfieldnj.org for information.",
+      "doc_date": "2026-10-04 (page fetched)",
+      "via": "page",
+      "verified": true
+     },
+     {
+      "url": "https://www.garfieldnj.org/_Content/pdf/Dwelling-Certificate-Instruction-Sheet.pdf",
+      "quote": "Smoke Detector and Carbon Monoxide Detectors (10-year sealed battery) within",
+      "doc_date": "",
+      "via": "pdf",
+      "verified": true
+     },
+     {
+      "url": "https://www.garfieldnj.org/_Content/pdf/forms/Smoke-Detector-Application.pdf",
+      "quote": "Received more than 10 days business prior to change of occupant $35.00",
+      "doc_date": "undated older form (lists Gerald Walis, Fire Official)",
+      "via": "pdf",
+      "verified": true
+     },
+     {
+      "url": "https://www.nj.gov/dca/dfs/pdf/fire%20directory_county%20summary/fire_code_enforcement_director.pdf",
+      "quote": "LEAID: 0221-001 Garfield City SMOKE DETECTOR COMPLIANCE Name: Garfield City Fire Prev Enf Auth. Fire Dept Addr: 111 Outwater Ln Fire Official James E Kovacs Phone (973) 340-2000 Email jkovacs@garfieldnj.org",
+      "doc_date": "survey date 4/9/2026",
+      "via": "state_directory",
+      "verified": null
+     },
+     {
+      "url": "https://nj.gov/dca/dfs/pdf/ANNUAL%20REGISTRY/THIRD%20QUARTER%20LEA%20REGISTRY%202026.pdf",
+      "quote": "F Garfield City",
+      "doc_date": "2026-07",
+      "via": "pdf",
+      "verified": true
+     }
+    ],
+    "confidence": "medium"
+   }
+  ],
+  "notes": "The City's resale instruction sheet gives smoke/CO certification fees of $50.00 (1 family) and $100.00 (2 family). An older posted Smoke Detector Application form (naming former Fire Official Gerald Walis) shows tiered fees of $35.00, $70.00 and $125.00 by business days before the change of occupant and still lists a fire extinguisher; it looks outdated, so those tiers are not used here. The state dropped the extinguisher from the sale certificate in February 2025 (P.L.2025, c.19). The Dwelling Certificate fee in Code Section 128 ($60 per unit) says it includes the smoke detector certification, which may overlap with these fees; confirm with the City."
+ },
+ "other_items": [
+  {
+   "label": "Dwelling certificate before transfer of title",
+   "detail": "Garfield Code Chapter 128 requires a dwelling certificate (number of occupants and unit location) filed not more than 60 days before conveyance of a one- or two-unit dwelling, with a dwelling inspection before transfer of title, unless one was done within 11 months. The code fee is $60 per dwelling unit, which it says includes the smoke detector certification; a $60 return-visit fee applies if access is not given.",
+   "source_url": "https://ecode360.com/10083756"
+  }
+ ],
+ "open_questions": [
+  "Is the Chapter 128 dwelling certificate ($60 per unit) charged on a sale in addition to the resale C.O. and smoke certification, or is it combined?",
+  "Is the old tiered smoke detector fee ($35/$70/$125) still used, or only the flat $50/$100 on the resale sheet?",
+  "Is a fire extinguisher still checked at resale after P.L.2025, c.19?",
+  "How long is the resale C.O. valid, and what is the usual turnaround?"
+ ],
+ "checked_at": "2026-10-04",
+ "verification": {
+  "fees": 6,
+  "fee_ok": 4,
+  "fee_bad": 0,
+  "fee_unchecked": 2,
+  "quotes": 15,
+  "q_ok": 12,
+  "q_bad": 0,
+  "q_unchecked": 3
+ }
+}

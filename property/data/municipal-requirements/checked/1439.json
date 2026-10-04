@@ -1,0 +1,179 @@
+{
+ "municipality_code": "1439",
+ "municipality": "Wharton Borough",
+ "county": "MORRIS",
+ "checked_at": "2026-10-04",
+ "resale_co": {
+  "status": "required",
+  "name": "Certificate of Habitation (property sale)",
+  "issued_by": "Borough of Wharton Housing and Zoning Officer (Property Maintenance Enforcement)",
+  "lead_time": "Granted or denied within 10 days of the application. Contact the Zoning and Housing Official about two weeks before closing to set up the smoke and CO alarm test.",
+  "valid_for": "",
+  "requirements": [
+   "Inspection by the Zoning and Housing Officer for compliance with all Borough ordinances",
+   "One GFI-protected receptacle in each bathroom; GFI on receptacles within 5 feet of the kitchen sink and any other water basin",
+   "Water heater pressure valve extension directed down, at least 12 inches off the floor",
+   "All empty spaces in the main electric panel covered",
+   "Handrails on stairways with three steps or more",
+   "One smoke detector on each level, lithium batteries required",
+   "Carbon monoxide detector within 10 feet of sleeping areas, 5 feet or lower on the wall",
+   "Fire extinguisher in the kitchen, ABC type, 10 lbs or less, hung no more than 5 feet off the floor and in view (page still lists it)",
+   "Two receptacles in each room other than bathrooms; windows stay up when open; glass and screens intact; heat in all habitable rooms; doors on all bedrooms",
+   "Application lists any previously granted variances, buyer details, residents, bedrooms, bathrooms, units and off-street parking"
+  ],
+  "fees": [
+   {
+    "label": "Certificate of Habitation inspection, per dwelling unit sold (includes one reinspection)",
+    "amount": "$50",
+    "quote": "A charge of $50 per dwelling unit being sold.",
+    "source_url": "https://ecode360.com/11909740",
+    "verified": null
+   },
+   {
+    "label": "Additional fee each time a unit needs more than two inspections",
+    "amount": "$20",
+    "quote": "A charge of $20 additional fee for each unit each time it requires more than two inspections.",
+    "source_url": "https://ecode360.com/11909740",
+    "verified": null
+   },
+   {
+    "label": "Certificate of Habitation / Property Sale inspection fee (application form)",
+    "amount": "$50.00",
+    "quote": "INSPECTION FEE: $50.00 PER UNIT",
+    "source_url": "https://www.whartonnj.com/media/attachments/2025/01/09/certification-of-habitation-property-sale.pdf",
+    "verified": null
+   }
+  ],
+  "how_to_apply": "Fill out the Certificate of Habitation / Property Sale form and submit it with the fee to the Housing & Zoning Official, Borough of Wharton, 10 Robert Street, Wharton, NJ 07885 (973-361-8444 ext. 2721, lstickle@whartonnj.com). Call about two weeks before closing to book the inspection, which includes the smoke and CO alarm test.",
+  "application_url": "https://www.whartonnj.com/media/attachments/2025/01/09/certification-of-habitation-property-sale.pdf",
+  "department_url": "https://www.whartonnj.com/index.php/departments/zoning-and-housing",
+  "phone": "973-361-8444 ext. 2721",
+  "email": "lstickle@whartonnj.com",
+  "contact_name": "Leon Stickle",
+  "contact_title": "Housing and Zoning Officer / Road Opening Coordinator (Deputy: Patrick Laverty)",
+  "evidence": [
+   {
+    "url": "https://www.whartonnj.com/index.php/departments/zoning-and-housing",
+    "quote": "A Certificate of Habitation is required for every resale of residential property. It requires an inspection by the Zoning and Housing Officer.",
+    "doc_date": "2026-10-04 (page fetched)",
+    "via": "page",
+    "verified": true
+   },
+   {
+    "url": "https://www.whartonnj.com/index.php/departments/zoning-and-housing",
+    "quote": "Housing and Zoning Officer/ Road Opening Coordinator",
+    "doc_date": "2026-10-04 (page fetched)",
+    "via": "page",
+    "verified": true
+   },
+   {
+    "url": "https://ecode360.com/11909740",
+    "quote": "Such certificate of habitation shall be granted or denied within 10 days from the date of the application for same.",
+    "doc_date": "2026-10-04 (page fetched)",
+    "via": "page",
+    "verified": null
+   },
+   {
+    "url": "https://ecode360.com/11909740",
+    "quote": "Fees. The inspection fee shall include one reinspection at no charge where required. All fees shall not be refundable.",
+    "doc_date": "2026-10-04 (page fetched)",
+    "via": "page",
+    "verified": null
+   },
+   {
+    "url": "https://www.whartonnj.com/media/attachments/2025/01/09/certification-of-habitation-property-sale.pdf",
+    "quote": "CERTIFICATE OF HABITATION/PROPERTY SALE",
+    "doc_date": "2025-01-09",
+    "via": "pdf",
+    "verified": null
+   }
+  ],
+  "confidence": "high",
+  "notes": "Borough Code Section 231-25 (read through a text reader of ecode360) bars selling any dwelling unit without a certificate of habitation from the Housing Officer and sets the $50 per unit sale fee, which includes one reinspection. The application form is a scanned image (dated January 9, 2025), so its quotes cannot be machine-checked; it lists the Housing & Zoning Official's extension 2721 and email lstickle@whartonnj.com. Rental compliance/landlord registration and lead-safe certification are rental programs, not resale requirements."
+ },
+ "fire_cert": {
+  "requirements": [
+   "One smoke detector on each level of the home, lithium batteries required",
+   "Carbon monoxide detector within 10 feet of sleeping areas, 5 feet or lower on the wall",
+   "Fire extinguisher in the kitchen, ABC type, 10 lbs or less (Borough page still lists it)"
+  ],
+  "authorities": [
+   {
+    "name": "Borough of Wharton Zoning and Housing Official (smoke and CO alarm test for resale); Wharton Fire Department Bureau of Fire Prevention is the Uniform Fire Code enforcing agency",
+    "type": "municipal_fire_bureau",
+    "area_served": "Entire borough",
+    "lead_time": "Contact the Zoning and Housing Official approximately two weeks before closing.",
+    "fees": [],
+    "how_to_apply": "Contact the Zoning and Housing Official (973-361-8444 ext. 2721) about two weeks before closing to set up the smoke detector and carbon monoxide alarm test; it is done with the Certificate of Habitation inspection. No separate fee was found.",
+    "application_url": "",
+    "department_url": "https://www.whartonnj.com/index.php/departments/zoning-and-housing",
+    "phone": "973-361-8444 ext. 2721",
+    "email": "lstickle@whartonnj.com",
+    "contact_name": "Leon Stickle",
+    "contact_title": "Housing and Zoning Officer",
+    "evidence": [
+     {
+      "url": "https://www.whartonnj.com/index.php/departments/zoning-and-housing",
+      "quote": "This is required for the resale of residential property. You should contact the Zoning and Housing Official approximately two weeks prior to closing to set up an appointment for this.",
+      "doc_date": "2026-10-04 (page fetched)",
+      "via": "page",
+      "verified": true
+     },
+     {
+      "url": "https://ecode360.com/11907299",
+      "quote": "The local enforcing agency shall be the Wharton Fire Department through its Bureau of Fire Prevention, which is hereby created therein.",
+      "doc_date": "2026-10-04 (page fetched)",
+      "via": "page",
+      "verified": null
+     },
+     {
+      "url": "https://www.whartonnj.com/index.php/departments/fire-official",
+      "quote": "If you would like to schedule a fire inspection for your business, please call (973) 361-8444 X 2710 or email",
+      "doc_date": "2026-10-04 (page fetched)",
+      "via": "page",
+      "verified": true
+     },
+     {
+      "url": "https://nj.gov/dca/dfs/pdf/ANNUAL%20REGISTRY/THIRD%20QUARTER%20LEA%20REGISTRY%202026.pdf",
+      "quote": "F Wharton Borough",
+      "doc_date": "2026-07",
+      "via": "pdf",
+      "verified": true
+     },
+     {
+      "url": "https://www.nj.gov/dca/dfs/pdf/fire%20directory_county%20summary/fire_code_enforcement_director.pdf",
+      "quote": "LEAID: 1439-001 Enf Auth. Fire Dept Fire Official Richard W Cloughley Phone (973) 361-8444 Addr: 10 Roberts St Wharton NJ 07885 ... Email rcloughley@whartonnj.com",
+      "doc_date": "2026 (survey date 1/9/2026)",
+      "via": "state_directory",
+      "verified": null
+     }
+    ],
+    "confidence": "medium"
+   }
+  ],
+  "notes": "The Borough's Zoning and Housing page says the smoke detector and carbon monoxide alarm test for resale is scheduled with the Zoning and Housing Official, not the Fire Official, and the Certificate of Habitation checklist covers smoke, CO and extinguisher items. Whether a separate state-form CSACMAC is issued, and by whom, is not stated. Fire Official Richard W. Cloughley (rcloughley@whartonnj.com, 973-361-8444 x2710) handles business fire inspections. The page still lists a kitchen fire extinguisher; the state dropped it from the sale certificate in February 2025 (P.L.2025, c.19)."
+ },
+ "other_items": [
+  {
+   "label": "Prior variances",
+   "detail": "The Certificate of Habitation form asks the seller to list any previously granted variances with dates and details.",
+   "source_url": "https://www.whartonnj.com/media/attachments/2025/01/09/certification-of-habitation-property-sale.pdf"
+  }
+ ],
+ "open_questions": [
+  "Is the smoke/CO certificate issued by the Housing and Zoning Official as part of the Certificate of Habitation, or separately by the Fire Official, and is there a separate fee?",
+  "Does Wharton still require a kitchen fire extinguisher for a sale after P.L.2025, c.19?",
+  "How long is the Certificate of Habitation valid?",
+  "Are there open permit, water/sewer final reading or other requirements before closing?"
+ ],
+ "verification": {
+  "fees": 3,
+  "fee_ok": 0,
+  "fee_bad": 0,
+  "fee_unchecked": 3,
+  "quotes": 10,
+  "q_ok": 5,
+  "q_bad": 0,
+  "q_unchecked": 5
+ }
+}

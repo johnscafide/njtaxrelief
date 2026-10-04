@@ -1,0 +1,250 @@
+{
+ "municipality_code": "0209",
+ "municipality": "Demarest Borough",
+ "county": "BERGEN",
+ "resale_co": {
+  "status": "required",
+  "name": "Rental/Resale Certificate (certificate of occupancy on resale, also called continued certificate of occupancy)",
+  "issued_by": "Borough of Demarest Building Department (Construction Official)",
+  "lead_time": "The Borough says the process takes about 4 to 6 weeks, so allow ample time. The code says the certificate may be issued up to two weeks before the closing.",
+  "valid_for": "",
+  "requirements": [
+   "Complete the Rental/Resale Certificate application, pay the fees and have the home inspected before any change in occupancy",
+   "Building inspection: no visible safety problems (such as missing hand or guard rails), no illegal work done without permits, and no illegal conversions (for example one family to two family)",
+   "Fire inspection of smoke and carbon monoxide detectors is done as part of the same application (see fire certificate)",
+   "Sump pumps must discharge onto the property or the street, not into the Borough sewer",
+   "Common fail items on the Borough checklist: handrail on stairs with 4 or more risers, enclosed stair risers, working bedroom windows, house numbers 4 to 6 inches, visible hydrant, secondary power source warning label at the electric panel and meter, neat property, stove tip bracket, even walkways",
+   "The applicant must arrange removal of all household materials and garbage",
+   "The Borough advises the realtor be present for all inspections"
+  ],
+  "fees": [
+   {
+    "label": "Resale/rental certificate, building inspection",
+    "amount": "$75.00",
+    "quote": "$75.00 for Building & $40.00 for Fire Inspections",
+    "source_url": "https://www.demarestnj.gov/government/forms/construction/1942-rental-resale-certificate-application/file",
+    "verified": true
+   },
+   {
+    "label": "Total check for building and fire inspections",
+    "amount": "$115",
+    "quote": "The Borough of Demarest ($115 total)",
+    "source_url": "https://www.demarestnj.gov/government/forms/construction/1942-rental-resale-certificate-application/file",
+    "verified": true
+   },
+   {
+    "label": "Continued certificate of occupancy inspection fee (code)",
+    "amount": "$75",
+    "quote": "The fee for such inspection shall be $75 payable to the Borough of Demarest to cover administrative costs of inspection and assurance of the continued certificate of occupancy.",
+    "source_url": "https://ecode360.com/31312659",
+    "verified": null
+   },
+   {
+    "label": "Additional fee on issuance of the certificate of occupancy (code)",
+    "amount": "$35",
+    "quote": "In addition, a fee of $35 shall be remitted to the Borough of Demarest Construction Official upon verification of inspections and issuance of a certificate of occupancy.",
+    "source_url": "https://ecode360.com/31312659",
+    "verified": null
+   },
+   {
+    "label": "Reinspection, change of occupancy of a 1 or 2 household dwelling (application form, Ord. 1101-22)",
+    "amount": "$50",
+    "quote": "residential purposes by not more than two households: $50.",
+    "source_url": "https://www.demarestnj.gov/government/forms/construction/1942-rental-resale-certificate-application/file",
+    "verified": true
+   }
+  ],
+  "how_to_apply": "Fill out the Borough's Application for Rental Resale Certificate (circle Resale), and pay by check payable to The Borough of Demarest ($115 total: $75.00 building and $40.00 fire). Turn it in to the Building Department at 118 Serpentine Road, Demarest, NJ 07627 (Monday to Friday, 8:00 to 3:00, closed 1 to 2 for lunch). Questions go to Dot Haight at 201-768-3398.",
+  "application_url": "https://www.demarestnj.gov/government/forms/construction/1942-rental-resale-certificate-application/file",
+  "department_url": "https://www.demarestnj.gov/departments/construction",
+  "phone": "201-768-3398",
+  "email": "dhaight@demarestnj.gov",
+  "contact_name": "Dot Haight",
+  "contact_title": "Technical Assistant, Building Department",
+  "evidence": [
+   {
+    "url": "https://www.demarestnj.gov/departments/construction",
+    "quote": "Please be advised that in order to rent or sell your home a Rental/Resale Certificate is required.",
+    "doc_date": "2026-10-04 (page fetched)",
+    "via": "page",
+    "verified": true
+   },
+   {
+    "url": "https://www.demarestnj.gov/departments/construction",
+    "quote": "This process takes approximately 4 to 6 weeks, so allow ample time.",
+    "doc_date": "2026-10-04 (page fetched)",
+    "via": "page",
+    "verified": true
+   },
+   {
+    "url": "https://www.demarestnj.gov/departments/construction",
+    "quote": "If you have any questions, please don’t hesitate to call Dot at 201-768-3398.",
+    "doc_date": "2026-10-04 (page fetched)",
+    "via": "page",
+    "verified": true
+   },
+   {
+    "url": "https://ecode360.com/31312659",
+    "quote": "Any change in the occupancy of a residential dwelling after its sale. The certificate of occupancy may be issued up to two weeks prior to the sale closing. The certificate of occupancy must be obtained by the seller prior to the resale.",
+    "doc_date": "2026-10-04 (page fetched)",
+    "via": "page",
+    "verified": null
+   },
+   {
+    "url": "https://ecode360.com/31312659",
+    "quote": "No illegal conversions have been made, i.e., one-family to two-family or three-family homes, etc.",
+    "doc_date": "2026-10-04 (page fetched)",
+    "via": "page",
+    "verified": null
+   },
+   {
+    "url": "https://www.demarestnj.gov/government/forms/construction/1942-rental-resale-certificate-application/file",
+    "quote": "WE ADVISE THE REALTOR BE PRESENT FOR ALL INSPECTIONS",
+    "doc_date": "",
+    "via": "pdf",
+    "verified": true
+   },
+   {
+    "url": "https://www.demarestnj.gov/government/forms/construction/1942-rental-resale-certificate-application/file",
+    "quote": "The applicant must make their own arrangements for having all household materials and garbage removed.",
+    "doc_date": "",
+    "via": "pdf",
+    "verified": true
+   },
+   {
+    "url": "https://www.demarestnj.gov/government/forms/construction/1942-rental-resale-certificate-application/file",
+    "quote": "sump pumps cannot be directly connected int the borough’s sewer system.",
+    "doc_date": "",
+    "via": "pdf",
+    "verified": true
+   }
+  ],
+  "confidence": "high",
+  "notes": "Borough code Section 175-30 (read in full on ecode360) requires a certificate of occupancy for any change in occupancy of a residential dwelling after its sale, obtained by the seller, and sets a $75 inspection fee plus $35 on issuance of the certificate. The Borough's current application asks for a single $115 check ($75.00 building and $40.00 fire), which does not show the $35 issuance fee; confirm the total with the office. The application also cites Ordinance #1101-22 with a $50 fee for re-inspection on change of occupancy of a 1 or 2 household home. Contacts on the Building page: Construction Official Bobby Sherrow, (201) 768-0167 ext. 114, construction@demarestnj.gov; Technical Assistant Dot Haight, (201) 768-3398, dhaight@demarestnj.gov; Zoning Officer Michael Greco, ext. 110. The Borough adopted a new zoning code (Ord. 1180-26) in May 2026; the ecode360 page for Section 175-30 still showed the text quoted here. Rentals need landlord registration and a lead-safe certificate for homes built before 1978; those are rental-only and not part of a sale."
+ },
+ "fire_cert": {
+  "requirements": [
+   "Smoke detector on each level, including walk-up attic and basement (basement detector on the ceiling at the foot of the stairs)",
+   "Smoke detector on the ceiling within 10 feet of each sleeping area, in a common area, not inside bedrooms; extra detectors if bedrooms are in a separate area",
+   "Battery-only smoke detectors must be 10-year sealed battery units listed to ANSI/UL 217; hardwired (110V) detectors may not be replaced with battery units",
+   "Carbon monoxide detector within 10 feet of any sleeping area (not inside bedrooms); battery operated is allowed"
+  ],
+  "authorities": [
+   {
+    "name": "Demarest Borough Fire Prevention (Fire Official), inspected through the Building Department resale application",
+    "type": "municipal_fire_bureau",
+    "area_served": "Entire borough",
+    "lead_time": "Handled with the resale certificate, which the Borough says takes about 4 to 6 weeks. Fire subcode inspections are listed for Tuesday 1 to 3 pm and Friday 1 to 2 pm.",
+    "fees": [
+     {
+      "label": "Smoke detector certificate application, 1 or 2 household dwelling (code)",
+      "amount": "$40",
+      "quote": "An applicant for a smoke detector certificate upon change of occupancy of a structure used or intended for residential purposes by not more than two households shall pay an application fee of $40.",
+      "source_url": "https://ecode360.com/31312659",
+      "verified": null
+     },
+     {
+      "label": "Smoke detector certificate reinspection (code)",
+      "amount": "$40",
+      "quote": "where a reinspection is required shall pay a fee of $40 for each reinspection.",
+      "source_url": "https://ecode360.com/31312659",
+      "verified": null
+     },
+     {
+      "label": "Fire inspection portion of the resale application",
+      "amount": "$40.00",
+      "quote": "$75.00 for Building & $40.00 for Fire Inspections",
+      "source_url": "https://www.demarestnj.gov/government/forms/construction/1942-rental-resale-certificate-application/file",
+      "verified": true
+     }
+    ],
+    "how_to_apply": "Use the same Application for Rental Resale Certificate as the building inspection; the $40.00 fire fee is included in the $115 check to The Borough of Demarest. File it at the Building Department, 118 Serpentine Road, and the office schedules the fire and building inspections.",
+    "application_url": "https://www.demarestnj.gov/government/forms/construction/1942-rental-resale-certificate-application/file",
+    "department_url": "https://www.demarestnj.gov/departments/construction",
+    "phone": "201-768-3398",
+    "email": "firemusik@aol.com",
+    "contact_name": "Alan J Silverman",
+    "contact_title": "Fire Official (listed as Fire Sub-code on the Building page)",
+    "evidence": [
+     {
+      "url": "https://www.demarestnj.gov/government/forms/construction/1942-rental-resale-certificate-application/file",
+      "quote": "No certificate shall be issued for any structure unless an approved “Automatic Fire Detection System” and Carbon Monoxide Detector is installed per NFiPA-72 or 74 and N.J.A.C. 5:70-2.3.",
+      "doc_date": "",
+      "via": "pdf",
+      "verified": true
+     },
+     {
+      "url": "https://www.demarestnj.gov/government/forms/construction/1942-rental-resale-certificate-application/file",
+      "quote": "Carbon Monoxide detectors must be installed within 10 feet of any sleeping area.",
+      "doc_date": "",
+      "via": "pdf",
+      "verified": true
+     },
+     {
+      "url": "https://www.demarestnj.gov/government/forms/construction/1942-rental-resale-certificate-application/file",
+      "quote": "Inspection Date & Time Fire_____Building_________",
+      "doc_date": "",
+      "via": "pdf",
+      "verified": true
+     },
+     {
+      "url": "https://www.demarestnj.gov/departments/construction",
+      "quote": "Alan Silverman Fire Sub-code Tuesday 1-3pm and Friday 1-2pm",
+      "doc_date": "2026-10-04 (page fetched)",
+      "via": "page",
+      "verified": true
+     },
+     {
+      "url": "https://nj.gov/dca/dfs/pdf/ANNUAL%20REGISTRY/THIRD%20QUARTER%20LEA%20REGISTRY%202026.pdf",
+      "quote": "F Demarest Borough",
+      "doc_date": "2026-07",
+      "via": "pdf",
+      "verified": true
+     },
+     {
+      "url": "https://www.nj.gov/dca/dfs/pdf/fire%20directory_county%20summary/fire_code_enforcement_director.pdf",
+      "quote": "LEAID: 0209-001 Demarest Boro SMOKE DETECTOR COMPLIANCE Name: Demarest Boro Fire Prev Enf Auth. Fire Dept Fire Official Alan J Silverman Phone (201) 768-0167",
+      "doc_date": "3/2/2026 (survey date)",
+      "via": "state_directory",
+      "verified": null
+     }
+    ],
+    "confidence": "high"
+   }
+  ],
+  "notes": "The smoke and CO check is done as part of the Borough's combined Rental/Resale Certificate application, with a $40.00 fire inspection fee (code Section 175-31.1 sets $40 per application and $40 per reinspection). No tiered rush fees are published. The NJ DCA directory lists Fire Official Alan J Silverman (firemusik@aol.com, office phone (201) 768-3398); the Borough office is the practical contact. The Borough form does not list a fire extinguisher, consistent with P.L.2025, c.19."
+ },
+ "other_items": [
+  {
+   "label": "Sump pump discharge",
+   "detail": "The resale inspection checks that any sump pump empties onto the property or the street and is not tied into the Borough sewer.",
+   "source_url": "https://www.demarestnj.gov/government/forms/construction/1942-rental-resale-certificate-application/file"
+  },
+  {
+   "label": "Secondary power source label",
+   "detail": "Homes with a generator, solar panels or battery storage need a printed warning label (for example 'CAUTION: MULTIPLE SOURCES OF POWER') within 18 inches of the main electric panel and meter.",
+   "source_url": "https://www.demarestnj.gov/government/forms/construction/1942-rental-resale-certificate-application/file"
+  },
+  {
+   "label": "Open permits and illegal work",
+   "detail": "The certificate is issued only if there has been no illegal work performed without permits and inspections and no illegal conversions.",
+   "source_url": "https://ecode360.com/31312659"
+  }
+ ],
+ "open_questions": [
+  "Is the total $115, or is the $35 certificate issuance fee in Section 175-30 also charged?",
+  "How long is the resale certificate valid if the closing is delayed?",
+  "Is there an extra fee or faster scheduling for a closing sooner than 4 to 6 weeks?"
+ ],
+ "checked_at": "2026-10-04",
+ "verification": {
+  "fees": 8,
+  "fee_ok": 4,
+  "fee_bad": 0,
+  "fee_unchecked": 4,
+  "quotes": 14,
+  "q_ok": 11,
+  "q_bad": 0,
+  "q_unchecked": 3
+ }
+}

@@ -1,0 +1,193 @@
+{
+ "municipality_code": "1413",
+ "municipality": "Harding Township",
+ "county": "MORRIS",
+ "resale_co": {
+  "status": "required",
+  "name": "Construction Records Clearance Certificate (CRC), Residential (in lieu of a Certificate of Occupancy)",
+  "issued_by": "Township of Harding Construction Department",
+  "lead_time": "Submit 20 business days before closing",
+  "valid_for": "",
+  "requirements": [
+   "Application with the real estate listing (or a detailed property description for a private sale)",
+   "Answers about address display, swimming pool and pool barrier, finished basement, second kitchen and accessory dwellings",
+   "Township checks for open permits, open zoning matters, health approval and zoning approval",
+   "Well Test Sign Off Sheet if the property has a private well",
+   "Closing date is required on the application"
+  ],
+  "fees": [
+   {
+    "label": "Construction Records Clearance application, residential",
+    "amount": "$250",
+    "quote": "FEE: $250",
+    "source_url": "https://hardingnj.org/media/attachments/2026/06/11/buyer---seller-forms.pdf",
+    "verified": true
+   }
+  ],
+  "how_to_apply": "Download the Property Re-Sale Application (buyer/seller forms packet) from the Construction page, and submit it with a copy of the real estate listing and a $250.00 check payable to the Township of Harding to 21 Blue Mill Road, P.O. Box 666, New Vernon, NJ 07976, at least 20 business days before closing. Add the signed Well Test Sign Off Sheet if the home has a well.",
+  "application_url": "https://hardingnj.org/media/attachments/2026/06/11/buyer---seller-forms.pdf",
+  "department_url": "https://www.hardingnj.org/departments/construction",
+  "phone": "973-267-8000 Ext 716",
+  "email": "mfornaciari@hardingnj.org",
+  "contact_name": "Mark Fornaciari",
+  "contact_title": "Construction Official (Technical Assistants: Patricia Walker, pwalker@hardingnj.org; Nicole Ott, nott@hardingnj.org)",
+  "evidence": [
+   {
+    "url": "https://hardingnj.org/media/attachments/2026/06/11/buyer---seller-forms.pdf",
+    "quote": "This is required by the Harding Township ordinance 06-2023, in lieu of a Certiﬁcate of Occupancy.",
+    "doc_date": "2026-06-11 (file date); application dated 5/26/23",
+    "via": "pdf",
+    "verified": true
+   },
+   {
+    "url": "https://hardingnj.org/media/attachments/2026/06/11/buyer---seller-forms.pdf",
+    "quote": "The property owner or the seller's agent must submit the application 20 business days prior to the closing of the property.",
+    "doc_date": "2026-06-11",
+    "via": "pdf",
+    "verified": true
+   },
+   {
+    "url": "https://hardingnj.org/media/attachments/2026/06/11/buyer---seller-forms.pdf",
+    "quote": "$250 check made out to the \"Township of Harding\".",
+    "doc_date": "2026-06-11",
+    "via": "pdf",
+    "verified": true
+   },
+   {
+    "url": "https://hardingnj.org/media/attachments/2026/06/11/buyer---seller-forms.pdf",
+    "quote": "A copy of the real estate listing with each application",
+    "doc_date": "2026-06-11",
+    "via": "pdf",
+    "verified": true
+   },
+   {
+    "url": "https://www.hardingnj.org/departments/construction",
+    "quote": "PROPERTY RE-SALE APPLICATION",
+    "doc_date": "2026-10-04 (page fetched)",
+    "via": "page",
+    "verified": true
+   },
+   {
+    "url": "https://www.hardingnj.org/departments/construction",
+    "quote": "973-267-8000 Ext 716",
+    "doc_date": "2026-10-04 (page fetched)",
+    "via": "page",
+    "verified": true
+   }
+  ],
+  "confidence": "high",
+  "notes": "Harding does not do a resale CO inspection; it issues a Construction Records Clearance Certificate (a records review of permits, zoning and health approvals) under Township Ordinance 06-2023. The ordinance text itself was not found online. The FAQ says that if issues come up, town officials work with the seller and buyer (usually through the attorneys) on an agreement so the closing can proceed. Some quotes in the PDF use a typographic ligature (fi) and curly apostrophes."
+ },
+ "fire_cert": {
+  "requirements": [
+   "Smoke detector on each level including basements (not attic or crawl space), and outside each separate sleeping area within 10 feet of bedrooms",
+   "Carbon monoxide alarm outside each separate sleeping area",
+   "All alarms in working order; AC powered or interconnected alarms in homes built after January 1977 must be kept working",
+   "Fire extinguisher (still on the older DCA form; dropped from the state requirement in February 2025 by P.L.2025, c.19)"
+  ],
+  "authorities": [
+   {
+    "name": "NJ Department of Community Affairs, Division of Fire Safety (state-enforced; Harding Township does not do this inspection)",
+    "type": "state_dca",
+    "area_served": "Entire township",
+    "lead_time": "State fee tiers count business days between DCA's receipt and the closing date: more than ten business days for the lowest fee. Certificate must be used within 6 months (per the DCA form).",
+    "fees": [
+     {
+      "label": "State certificate of smoke detector, CO alarm and extinguisher compliance, closing more than ten business days after receipt (DCA form SD-41, rev. 10/02)",
+      "amount": "$35",
+      "quote": "If closing date above follows the date of receipt by the Division of Fire Safety by more than ten business days, the fee is $35",
+      "source_url": "https://www.nj.gov/dca/divisions/dfs/forms/bfce/certificationinlieu.pdf",
+      "verified": true
+     },
+     {
+      "label": "Received fewer than ten but more than four business days before closing",
+      "amount": "$70",
+      "quote": "if received fewer than ten but more than four business days before closing, $70",
+      "source_url": "https://www.nj.gov/dca/divisions/dfs/forms/bfce/certificationinlieu.pdf",
+      "verified": true
+     },
+     {
+      "label": "Received four business days or fewer before closing",
+      "amount": "$125",
+      "quote": "and if four business days or fewer, $125.",
+      "source_url": "https://www.nj.gov/dca/divisions/dfs/forms/bfce/certificationinlieu.pdf",
+      "verified": true
+     }
+    ],
+    "how_to_apply": "Apply to the NJ Division of Fire Safety (the Township's Construction page links to the DCA Fire Safety online portal, firesolutions.dca.nj.gov). Mail address on the DCA form: PO Box 809, Trenton, NJ 08625-0809; checks payable to Treasurer, State of New Jersey. Phone (609) 633-6132.",
+    "application_url": "https://firesolutions.dca.nj.gov/",
+    "department_url": "https://www.hardingnj.org/departments/construction",
+    "phone": "(609) 633-6132",
+    "email": "",
+    "contact_name": "Louis Kilmer",
+    "contact_title": "Fire Official of record for Harding (NJ Division of Fire Safety), per the state directory",
+    "evidence": [
+     {
+      "url": "https://hardingnj.org/media/attachments/2026/06/11/buyer---seller-forms.pdf",
+      "quote": "All inspections must be made with the State of New Jersey. (Harding Township does not perform this inspection).",
+      "doc_date": "2026-06-11",
+      "via": "pdf",
+      "verified": true
+     },
+     {
+      "url": "https://www.hardingnj.org/departments/construction",
+      "quote": "NJ SMOKE DETECTOR REGISTRATION",
+      "doc_date": "2026-10-04 (page fetched)",
+      "via": "page",
+      "verified": true
+     },
+     {
+      "url": "https://www.nj.gov/dca/divisions/dfs/forms/bfce/certificationinlieu.pdf",
+      "quote": "If the change of occupant does not occur within 6 months, a new application shall be required.",
+      "doc_date": "10/02 (form revision)",
+      "via": "pdf",
+      "verified": true
+     },
+     {
+      "url": "https://www.nj.gov/dca/dfs/pdf/fire%20directory_county%20summary/fire_code_enforcement_director.pdf",
+      "quote": "LEAID: 1413-999 Harding Twp ... Name: NJ Division Fire Safety ... Enf Auth. State Addr: PO Box 809 Trenton NJ 08625-0809 ... Fire Official Louis Kilmer Phone (609) 633-6132",
+      "doc_date": "2025-02 (survey date 2/14/2025)",
+      "via": "state_directory",
+      "verified": null
+     },
+     {
+      "url": "https://nj.gov/dca/dfs/pdf/ANNUAL%20REGISTRY/THIRD%20QUARTER%20LEA%20REGISTRY%202026.pdf",
+      "quote": "S Harding Township",
+      "doc_date": "2026-07",
+      "via": "pdf",
+      "verified": true
+     }
+    ],
+    "confidence": "medium"
+   }
+  ],
+  "notes": "Harding is a state-enforced municipality (LEA code S), so the smoke/CO certificate comes from the NJ Division of Fire Safety, not the Township. The only state fee schedule found is on DCA form SD-41 (revised 10/02, an application and certification in lieu of inspection), which may be outdated; the current state portal does not publish fees publicly. Confirm the current state fee and process with the Division of Fire Safety at (609) 633-6132."
+ },
+ "other_items": [
+  {
+   "label": "Private well test",
+   "detail": "Homes with private wells must be tested under the NJ Private Well Testing Act before transfer by a licensed lab; the signed Well Test Sign Off Sheet is added to the CRC application.",
+   "source_url": "https://hardingnj.org/media/attachments/2026/06/11/buyer---seller-forms.pdf"
+  },
+  {
+   "label": "Open permits and zoning",
+   "detail": "The CRC review checks open permits, open zoning matters, health approval and zoning approval.",
+   "source_url": "https://hardingnj.org/media/attachments/2026/06/11/buyer---seller-forms.pdf"
+  }
+ ],
+ "open_questions": [
+  "What is the current NJ Division of Fire Safety fee and process for a smoke/CO certificate in Harding (the posted DCA form dates from 2002)?",
+  "How long is the CRC valid, and what happens if open permits are found close to closing?"
+ ],
+ "checked_at": "2026-10-04",
+ "verification": {
+  "fees": 4,
+  "fee_ok": 4,
+  "fee_bad": 0,
+  "fee_unchecked": 0,
+  "quotes": 11,
+  "q_ok": 10,
+  "q_bad": 0,
+  "q_unchecked": 1
+ }
+}

@@ -107,6 +107,43 @@
    ]
   },
   {
+   "code": "0212",
+   "town": "East Rutherford Borough",
+   "county": "Bergen",
+   "live": false,
+   "needs": [
+    "co_required"
+   ]
+  },
+  {
+   "code": "0231",
+   "town": "Lodi Borough",
+   "county": "Bergen",
+   "live": false,
+   "needs": [
+    "co_fee",
+    "fire_fee"
+   ]
+  },
+  {
+   "code": "0260",
+   "town": "Teaneck Township",
+   "county": "Bergen",
+   "live": false,
+   "needs": [
+    "co_required"
+   ]
+  },
+  {
+   "code": "0261",
+   "town": "Tenafly Borough",
+   "county": "Bergen",
+   "live": false,
+   "needs": [
+    "co_required"
+   ]
+  },
+  {
    "code": "0302",
    "town": "Beverly City",
    "county": "Burlington",
@@ -610,6 +647,188 @@
    "code": "1224",
    "town": "Spotswood Borough",
    "county": "Middlesex",
+   "live": false,
+   "needs": [
+    "co_required"
+   ]
+  },
+  {
+   "code": "1405",
+   "town": "Chatham Township",
+   "county": "Morris",
+   "live": false,
+   "needs": [
+    "co_required",
+    "co_contact"
+   ]
+  },
+  {
+   "code": "1406",
+   "town": "Chester Borough",
+   "county": "Morris",
+   "live": false,
+   "needs": [
+    "co_required"
+   ]
+  },
+  {
+   "code": "1407",
+   "town": "Chester Township",
+   "county": "Morris",
+   "live": false,
+   "needs": [
+    "co_required"
+   ]
+  },
+  {
+   "code": "1411",
+   "town": "Florham Park Borough",
+   "county": "Morris",
+   "live": false,
+   "needs": [
+    "co_required"
+   ]
+  },
+  {
+   "code": "1412",
+   "town": "Hanover Township",
+   "county": "Morris",
+   "live": false,
+   "needs": [
+    "co_required"
+   ]
+  },
+  {
+   "code": "1414",
+   "town": "Jefferson Township",
+   "county": "Morris",
+   "live": false,
+   "needs": [
+    "co_required"
+   ]
+  },
+  {
+   "code": "1415",
+   "town": "Kinnelon Borough",
+   "county": "Morris",
+   "live": false,
+   "needs": [
+    "co_required"
+   ]
+  },
+  {
+   "code": "1416",
+   "town": "Lincoln Park Borough",
+   "county": "Morris",
+   "live": false,
+   "needs": [
+    "co_required"
+   ]
+  },
+  {
+   "code": "1417",
+   "town": "Madison Borough",
+   "county": "Morris",
+   "live": false,
+   "needs": [
+    "co_required"
+   ]
+  },
+  {
+   "code": "1418",
+   "town": "Mendham Borough",
+   "county": "Morris",
+   "live": false,
+   "needs": [
+    "co_required"
+   ]
+  },
+  {
+   "code": "1419",
+   "town": "Mendham Township",
+   "county": "Morris",
+   "live": false,
+   "needs": [
+    "co_required"
+   ]
+  },
+  {
+   "code": "1421",
+   "town": "Montville Township",
+   "county": "Morris",
+   "live": false,
+   "needs": [
+    "co_required"
+   ]
+  },
+  {
+   "code": "1423",
+   "town": "Morris Plains Borough",
+   "county": "Morris",
+   "live": false,
+   "needs": [
+    "co_required"
+   ]
+  },
+  {
+   "code": "1427",
+   "town": "Mount Olive Township",
+   "county": "Morris",
+   "live": false,
+   "needs": [
+    "co_required",
+    "fire_fee"
+   ]
+  },
+  {
+   "code": "1429",
+   "town": "Parsippany-Troy Hills Township",
+   "county": "Morris",
+   "live": false,
+   "needs": [
+    "co_required"
+   ]
+  },
+  {
+   "code": "1432",
+   "town": "Randolph Township",
+   "county": "Morris",
+   "live": false,
+   "needs": [
+    "co_required"
+   ]
+  },
+  {
+   "code": "1434",
+   "town": "Rockaway Borough",
+   "county": "Morris",
+   "live": false,
+   "needs": [
+    "co_required"
+   ]
+  },
+  {
+   "code": "1435",
+   "town": "Rockaway Township",
+   "county": "Morris",
+   "live": false,
+   "needs": [
+    "co_required"
+   ]
+  },
+  {
+   "code": "1436",
+   "town": "Roxbury Township",
+   "county": "Morris",
+   "live": false,
+   "needs": [
+    "co_required"
+   ]
+  },
+  {
+   "code": "1438",
+   "town": "Washington Township",
+   "county": "Morris",
    "live": false,
    "needs": [
     "co_required"

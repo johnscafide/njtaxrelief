@@ -1,0 +1,268 @@
+{
+ "municipality_code": "0254",
+ "municipality": "Rochelle Park Township",
+ "county": "BERGEN",
+ "resale_co": {
+  "status": "required",
+  "name": "Certificate of Compliance (Resale/CCO inspection)",
+  "issued_by": "Township of Rochelle Park Building Department / Code Enforcement (enforcement officer)",
+  "lead_time": "Code says the inspection is done within a reasonable time, not more than 30 days after a complete application. Allow time before closing in case a re-inspection is needed.",
+  "valid_for": "",
+  "requirements": [
+   "Handrails on inside and outside stairs with more than 3 risers",
+   "Vents for all gas appliances in good repair",
+   "Hot water heater must have a Township Building Department inspection sticker",
+   "GFCI receptacles within 5 feet of kitchen and bathroom sinks",
+   "House number visible near the front door, at least 3 1/2 inches high",
+   "No oil drippings from oil-fired units; oil tanks not in use must be removed",
+   "Sump pump must discharge outside, not into the sanitary sewer",
+   "Additions and alterations less than 5 years old must have a valid permit on file; no open permits",
+   "No visible safety issues; property maintenance violations corrected",
+   "Approved smoke detector installed (Township code)",
+   "Tax Collector certification that all property taxes are paid (required for all resale certificates)",
+   "Sidewalks and curbs inspected with the resale CCO"
+  ],
+  "fees": [
+   {
+    "label": "Certificate of compliance, sale of a one family home",
+    "amount": "$100",
+    "quote": "For the sale of a one-family homes and individual condominiums, cooperative units and apartment units: $100.",
+    "source_url": "https://ecode360.com/13727721",
+    "verified": null
+   },
+   {
+    "label": "Certificate of compliance, sale of a two family home",
+    "amount": "$200",
+    "quote": "For the sale of a two-family dwellings: $200.",
+    "source_url": "https://ecode360.com/13727721",
+    "verified": null
+   }
+  ],
+  "how_to_apply": "Apply to the Building Department (Code Enforcement), 151 West Passaic Street, on the Township form with the fee (check payable to Township of Rochelle Park; payment must accompany the application) and the Tax Collector's paid-taxes certification. Call 201-379-7104 ext. 1000 to schedule. The CCO is not released until all items pass. Apply separately to the Fire Prevention Bureau for the smoke/CO certificate.",
+  "application_url": "https://drive.google.com/open?id=1xb-Ic46oM_1hGOcZ0PutfMpPdNt9UY57",
+  "department_url": "https://rochelleparknj.gov/building-department-2/",
+  "phone": "201-379-7104 ext. 1000",
+  "email": "lruff@rochelleparknj.gov",
+  "contact_name": "James DiMaria",
+  "contact_title": "Director of Code Enforcement / Construction Official / Zoning Officer (201-379-7104 ext. 1020, jdimaria@rochelleparknj.gov); Technical Assistant Lisa Ruff",
+  "evidence": [
+   {
+    "url": "https://ecode360.com/13727721",
+    "quote": "Prior to the rental, sale or lease of any residential or commercial property or the sale of any individual unit in a multiple-family dwelling involving a new occupancy or change of use or tenancy, the enforcement officer shall issue a certificate of compliance in accordance with the standards set forth in",
+    "doc_date": "2025-12-10 (Ord. No. 1251-25)",
+    "via": "page",
+    "verified": null
+   },
+   {
+    "url": "https://ecode360.com/13727721",
+    "quote": "Prior to any rental, lease or sale of any building or any portion thereof, as set forth in",
+    "doc_date": "2025-12-10 (Ord. No. 1251-25)",
+    "via": "page",
+    "verified": null
+   },
+   {
+    "url": "https://ecode360.com/13727721",
+    "quote": "For the sale of a two-family dwellings: $200.",
+    "doc_date": "2025-12-10 (Ord. No. 1251-25)",
+    "via": "page",
+    "verified": null
+   },
+   {
+    "url": "https://drive.google.com/open?id=1xb-Ic46oM_1hGOcZ0PutfMpPdNt9UY57",
+    "quote": "RESALE/CCO INSPECTION REQUIREMENTS",
+    "doc_date": "2015-09-25 (PDF date)",
+    "via": "pdf",
+    "verified": null
+   },
+   {
+    "url": "https://drive.google.com/open?id=1xb-Ic46oM_1hGOcZ0PutfMpPdNt9UY57",
+    "quote": "The CCO cannot be released until all items pass inspection.",
+    "doc_date": "2015-09-25 (PDF date)",
+    "via": "pdf",
+    "verified": null
+   },
+   {
+    "url": "https://drive.google.com/open?id=1xb-Ic46oM_1hGOcZ0PutfMpPdNt9UY57",
+    "quote": "This form is required for all resale certificates",
+    "doc_date": "2015-09-25 (PDF date)",
+    "via": "pdf",
+    "verified": null
+   },
+   {
+    "url": "https://rochelleparknj.gov/building-department-2/",
+    "quote": "Director of Code Enforcement / Construction Official / Zoning Officer",
+    "doc_date": "2026-10-04 (page fetched)",
+    "via": "page",
+    "verified": true
+   },
+   {
+    "url": "https://rochelleparknj.gov/building-department-2/",
+    "quote": "To Schedule an inspection, please call 201-379-7104 ext. 1000",
+    "doc_date": "2026-10-04 (page fetched)",
+    "via": "page",
+    "verified": true
+   }
+  ],
+  "confidence": "high",
+  "notes": "Township Code Chapter 75 (Certificates of Compliance, amended in its entirety 12-10-2025 by Ord. No. 1251-25) was read through the ecode360 print view. The 'Home Sale Requirements' file linked from the Building Department page is a scanned 2015 Google Drive PDF; it lists a $100.00 Resale/CCO fee, but the current code sets $100 for one family and $200 for two family sales, so only the code fees are recorded. Quotes from the scanned PDF may not be machine-checkable. Lead paint inspections and landlord registration are rental items, not resale items."
+ },
+ "fire_cert": {
+  "requirements": [
+   "Smoke alarms meeting NFPA 72 for quantity, type and location, all in working order",
+   "Carbon monoxide detector(s) within ten feet of sleeping areas",
+   "Secondary power source labeled, if the home has one",
+   "No fire extinguisher required since April 2025 (still recommended)",
+   "Vacant homes must be scheduled with a property representative present"
+  ],
+  "authorities": [
+   {
+    "name": "Rochelle Park Bureau of Fire Code Enforcement (Fire Prevention Bureau)",
+    "type": "municipal_fire_bureau",
+    "area_served": "Entire township",
+    "lead_time": "Fee depends on calendar/business days between the application and the anticipated closing date. The application is valid for six months; a certificate not used within six months needs a new application.",
+    "fees": [
+     {
+      "label": "CSACMAC, all other occupancies (1 and 2 family), more than 5 calendar days before closing",
+      "amount": "$75.00",
+      "quote": "All other occupancies Greater than 5 calendar days = $75.00",
+      "source_url": "https://rochelleparknj.gov/fire-prevention/",
+      "verified": true
+     },
+     {
+      "label": "CSACMAC, less than 4 calendar days before closing",
+      "amount": "$125.00",
+      "quote": "Less than 4 calendar days = $125.00",
+      "source_url": "https://rochelleparknj.gov/fire-prevention/",
+      "verified": true
+     },
+     {
+      "label": "Re-inspection",
+      "amount": "Same as the initial fee paid ($75.00 or $125.00)",
+      "quote": "Any re-inspection fee(s) issued will be equal to the initial fee paid",
+      "source_url": "https://rochelleparknj.gov/fire-prevention/",
+      "verified": true
+     }
+    ],
+    "how_to_apply": "Complete the Home Resale Fire Inspection (CSACMAC) application and email it with the fee to Lisa Ruff (Lruff@rochelleparknj.gov). After submitting, the applicant must contact the Bureau by email or at 201-587-7750 to schedule; the Bureau no longer calls to schedule. The fee is not refundable.",
+    "application_url": "https://rochelleparknj.gov/wp-content/uploads/2026/06/REVISED-FIRE-PREVENTION-HOME-SALE-APPLICATION-6-2-2026.pdf",
+    "department_url": "https://rochelleparknj.gov/fire-prevention/",
+    "phone": "201-587-7750",
+    "email": "Lruff@rochelleparknj.gov",
+    "contact_name": "Sean Redl",
+    "contact_title": "Bureau Chief (Sredl@rochelleparknj.gov); Secretary Lisa Ruff receives applications",
+    "evidence": [
+     {
+      "url": "https://rochelleparknj.gov/fire-prevention/",
+      "quote": "How Do I File for a Home Re-sale inspection?",
+      "doc_date": "2026-10-04 (page fetched)",
+      "via": "page",
+      "verified": true
+     },
+     {
+      "url": "https://rochelleparknj.gov/fire-prevention/",
+      "quote": "Complete & return the linked CSACMAC application, here. The fee schedule is posted below.",
+      "doc_date": "2026-10-04 (page fetched)",
+      "via": "page",
+      "verified": true
+     },
+     {
+      "url": "https://rochelleparknj.gov/fire-prevention/",
+      "quote": "Please return all completed applications to Lisa Ruff at Lruff@rochelleparknj.gov",
+      "doc_date": "2026-10-04 (page fetched)",
+      "via": "page",
+      "verified": true
+     },
+     {
+      "url": "https://rochelleparknj.gov/fire-prevention/",
+      "quote": "Administrative Office: 201-587-7750",
+      "doc_date": "2026-10-04 (page fetched)",
+      "via": "page",
+      "verified": true
+     },
+     {
+      "url": "https://rochelleparknj.gov/fire-prevention/",
+      "quote": "Email: Sredl@rochelleparknj.gov",
+      "doc_date": "2026-10-04 (page fetched)",
+      "via": "page",
+      "verified": true
+     },
+     {
+      "url": "https://rochelleparknj.gov/wp-content/uploads/2026/06/REVISED-FIRE-PREVENTION-HOME-SALE-APPLICATION-6-2-2026.pdf",
+      "quote": "the requirement for a portable fire extinguisher during a CSACMAPFEC inspection is no longer required.",
+      "doc_date": "Revised 5/2026",
+      "via": "pdf",
+      "verified": null
+     },
+     {
+      "url": "https://rochelleparknj.gov/wp-content/uploads/2026/06/REVISED-FIRE-PREVENTION-HOME-SALE-APPLICATION-6-2-2026.pdf",
+      "quote": "The application is valid for six months.",
+      "doc_date": "Revised 5/2026",
+      "via": "pdf",
+      "verified": null
+     },
+     {
+      "url": "https://www.nj.gov/dca/dfs/pdf/fire%20directory_county%20summary/fire_code_enforcement_director.pdf",
+      "quote": "Fire Official Sean Redl",
+      "doc_date": "3/20/2026 (survey date)",
+      "via": "state_directory",
+      "verified": null
+     },
+     {
+      "url": "https://www.nj.gov/dca/dfs/pdf/fire%20directory_county%20summary/fire_code_enforcement_director.pdf",
+      "quote": "Rochelle Park Twp Fire Prev",
+      "doc_date": "3/20/2026 (survey date)",
+      "via": "state_directory",
+      "verified": null
+     },
+     {
+      "url": "https://nj.gov/dca/dfs/pdf/ANNUAL%20REGISTRY/THIRD%20QUARTER%20LEA%20REGISTRY%202026.pdf",
+      "quote": "F Rochelle Park Township",
+      "doc_date": "2026-07",
+      "via": "pdf",
+      "verified": true
+     }
+    ],
+    "confidence": "high"
+   }
+  ],
+  "notes": "The fire prevention web page lists fees as 'Greater than 5 calendar days = $75.00' and 'Less than 4 calendar days = $125.00'; the scanned application (revised 5/2026) says '< 4 business days $125'. Neither covers exactly 4 to 5 days, so confirm. The application PDF is scanned, so its quotes may not be machine-checkable. The fire extinguisher is no longer required (Bureau notice citing A3894, as of April 2025)."
+ },
+ "other_items": [
+  {
+   "label": "Paid taxes certification",
+   "detail": "A Tax Collector certification that all property taxes are paid is required for all resale certificates.",
+   "source_url": "https://drive.google.com/open?id=1xb-Ic46oM_1hGOcZ0PutfMpPdNt9UY57"
+  },
+  {
+   "label": "Sidewalks and curbs",
+   "detail": "The Construction Official inspects sidewalks and curbs with applications for certificates of continued occupancy on resale of a residence (Code 161-22G).",
+   "source_url": "https://drive.google.com/open?id=1xb-Ic46oM_1hGOcZ0PutfMpPdNt9UY57"
+  },
+  {
+   "label": "Oil tanks",
+   "detail": "Oil tanks not in use must be removed for the resale CCO.",
+   "source_url": "https://drive.google.com/open?id=1xb-Ic46oM_1hGOcZ0PutfMpPdNt9UY57"
+  },
+  {
+   "label": "Water heater sticker",
+   "detail": "The hot water heater must carry a Township Building Department inspection sticker.",
+   "source_url": "https://drive.google.com/open?id=1xb-Ic46oM_1hGOcZ0PutfMpPdNt9UY57"
+  }
+ ],
+ "open_questions": [
+  "Is there a current (post-2015) Building Department resale CCO application form and checklist? Only a 2015 scanned file is posted.",
+  "Which fire certificate fee applies when the application is 4 to 5 days before closing?",
+  "Is there a CCO re-inspection fee? None is published in Chapter 75."
+ ],
+ "checked_at": "2026-10-04",
+ "verification": {
+  "fees": 5,
+  "fee_ok": 3,
+  "fee_bad": 0,
+  "fee_unchecked": 2,
+  "quotes": 18,
+  "q_ok": 8,
+  "q_bad": 0,
+  "q_unchecked": 10
+ }
+}

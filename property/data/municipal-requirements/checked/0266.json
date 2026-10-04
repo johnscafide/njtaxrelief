@@ -1,0 +1,256 @@
+{
+ "municipality_code": "0266",
+ "municipality": "Washington Township",
+ "county": "BERGEN",
+ "resale_co": {
+  "status": "required",
+  "name": "Certificate of Continued Occupancy (CCO)",
+  "issued_by": "Township of Washington Building Department (Chief Construction Official)",
+  "lead_time": "Code says the Construction Official inspects within 10 days of receiving a complete application and fee.",
+  "valid_for": "",
+  "requirements": [
+   "General inspection of the visible parts of the principal building: no apparent zoning, construction or health violations and no open permits",
+   "If violations cannot be fixed before closing, the applicant certifies they will be cured by a set date and gets a temporary certificate; $100 per day fine if not cured by then",
+   "Not required if the principal building will not be occupied (submit a certification to the Construction Official)",
+   "Smoke/CO/fire extinguisher certificate is a separate inspection (see fire certificate)"
+  ],
+  "fees": [
+   {
+    "label": "Certificate of continued occupancy application, includes initial inspection and one reinspection (Township code 212-27D)",
+    "amount": "$100",
+    "quote": "The application fee for a certificate of continued occupancy is $100, which shall include the initial inspection and one additional inspection performed.",
+    "source_url": "https://ecode360.com/7974577",
+    "verified": null
+   },
+   {
+    "label": "Each later CCO inspection (Township code 212-27D)",
+    "amount": "$100",
+    "quote": "A fee of $100 will be charged to the applicant for each subsequent inspection.",
+    "source_url": "https://ecode360.com/7974577",
+    "verified": null
+   },
+   {
+    "label": "Inspection of a home for resale/tenancy change, initial inspection and first reinspection (Township code 212-9N)",
+    "amount": "$200",
+    "quote": "Initial inspection and first reinspection (if necessary): $200.",
+    "source_url": "https://ecode360.com/7974577",
+    "verified": null
+   },
+   {
+    "label": "Each additional reinspection for resale/tenancy change (Township code 212-9N)",
+    "amount": "$100",
+    "quote": "Each additional reinspection: $100.",
+    "source_url": "https://ecode360.com/7974577",
+    "verified": null
+   },
+   {
+    "label": "Temporary certificate of occupancy (Township code 212-27D)",
+    "amount": "$100",
+    "quote": "The fee for a temporary certificate of occupancy shall be $100.",
+    "source_url": "https://ecode360.com/7974577",
+    "verified": null
+   }
+  ],
+  "how_to_apply": "Contact the Building Department (Room 4, lower level; phone 201-666-0462; building@twpofwashington.us) for the CCO application form. The same office schedules the smoke detector inspection (call the Building Department, not Fire Prevention). Inspection requests are taken online or in writing, not by phone.",
+  "application_url": "",
+  "department_url": "https://www.twpofwashington.us/page/building-engineering",
+  "phone": "201-666-0462",
+  "email": "building@twpofwashington.us",
+  "contact_name": "Darius Pokoj",
+  "contact_title": "Construction Official / Building Inspector",
+  "evidence": [
+   {
+    "url": "https://www.twpofwashington.us/page/bureau-of-fire-prevention",
+    "quote": "Please remember to contact the Building Department as a Certificate of Continued Occupancy (CCO) is required prior to the sale of any house.",
+    "doc_date": "2026-10-04 (page fetched)",
+    "via": "page",
+    "verified": null
+   },
+   {
+    "url": "https://ecode360.com/31164079",
+    "quote": "A certificate of continued occupancy shall be required upon any transfer of title to an existing premises which is accompanied by a change in the occupancy of such premises",
+    "doc_date": "2011-11-01 (Ord. No. 11-15)",
+    "via": "page",
+    "verified": null
+   },
+   {
+    "url": "https://ecode360.com/31164079",
+    "quote": "Such certificate of continued occupancy shall evidence only that a general inspection of the visible parts of the principal building has been made and that there are no apparent violations of regulations or open permits.",
+    "doc_date": "2011-11-01",
+    "via": "page",
+    "verified": null
+   },
+   {
+    "url": "https://ecode360.com/31164079",
+    "quote": "Failure to properly submit a completed application for a certificate of continued occupancy upon any transfer of title to an existing premises or change in tenancy of a rental property shall result in the levying of a fine in the amount of $1,000 against the owner of record",
+    "doc_date": "2011-11-01",
+    "via": "page",
+    "verified": null
+   },
+   {
+    "url": "https://ecode360.com/7974577",
+    "quote": "For inspection of a home for the purpose of resale/tenancy change:",
+    "doc_date": "",
+    "via": "page",
+    "verified": null
+   },
+   {
+    "url": "https://www.twpofwashington.us/page/building-engineering",
+    "quote": "CONSTRUCTION OFFICIAL / BUILDING Inspector - Darius Pokoj",
+    "doc_date": "2026-10-04 (page fetched)",
+    "via": "page",
+    "verified": null
+   }
+  ],
+  "confidence": "high",
+  "notes": "The Township's Fire Prevention page says a CCO is required before the sale of any house, and Zoning Section 580-86E (read through the ecode360 print view) requires one on any transfer of title with a change in occupancy. The fee code (Chapter 212) has two conflicting entries: $100 for the CCO (Section 212-27D, including one reinspection) and $200 for 'inspection of a home for the purpose of resale/tenancy change' (Section 212-9N). Both are listed; the office should confirm which is charged. No CCO application form is posted on the Township forms page. The Building Department page also lists the zoning officer Joe Setticase (201-666-3312)."
+ },
+ "fire_cert": {
+  "requirements": [
+   "2A:10BC fire extinguisher mounted on the kitchen wall, within 10 feet of the kitchen and not behind any door (Township page still lists it)",
+   "At least one smoke detector on each level of the home",
+   "One carbon monoxide detector within 10 feet of any bedroom (plug-in or battery)"
+  ],
+  "authorities": [
+   {
+    "name": "Township of Washington Bureau of Fire Prevention (inspection scheduled through the Building Department)",
+    "type": "municipal_fire_bureau",
+    "area_served": "Entire township",
+    "lead_time": "Smoke detector inspections Tuesday and Wednesday 2:30 to 4:00 pm. Lowest fee when 10 or more days before closing.",
+    "fees": [
+     {
+      "label": "Smoke, CO and fire extinguisher compliance, 10 days or more before closing (Township page)",
+      "amount": "$45.00",
+      "quote": "10 days or more before closing $45.00",
+      "source_url": "https://www.twpofwashington.us/page/bureau-of-fire-prevention",
+      "verified": null
+     },
+     {
+      "label": "Smoke/CO re-inspection (Township page)",
+      "amount": "$50.00",
+      "quote": "Re-inspection fee $50.00",
+      "source_url": "https://www.twpofwashington.us/page/bureau-of-fire-prevention",
+      "verified": null
+     },
+     {
+      "label": "Smoke/CO/extinguisher certificate, more than 10 business days before closing (Township code 212-9N)",
+      "amount": "$45",
+      "quote": "More than 10 business days before closing: $45.",
+      "source_url": "https://ecode360.com/7974577",
+      "verified": null
+     },
+     {
+      "label": "Smoke/CO/extinguisher certificate, 4 to 10 business days before closing (Township code 212-9N)",
+      "amount": "$90",
+      "quote": "Four to 10 business days before closing: $90.",
+      "source_url": "https://ecode360.com/7974577",
+      "verified": null
+     },
+     {
+      "label": "Smoke/CO/extinguisher certificate, 3 or fewer business days before closing (Township code 212-9N)",
+      "amount": "$161",
+      "quote": "Three or fewer business days before closing: $161.",
+      "source_url": "https://ecode360.com/7974577",
+      "verified": null
+     },
+     {
+      "label": "Smoke/CO/extinguisher reinspection (Township code 212-9N)",
+      "amount": "$50",
+      "quote": "For each reinspection: $50.",
+      "source_url": "https://ecode360.com/7974577",
+      "verified": null
+     }
+    ],
+    "how_to_apply": "Call the Building Department at 201-666-0462 to schedule the smoke/CO inspection (the Township says to call the Building Department, not Fire Prevention). Have the extinguisher, smoke and CO alarms in place to avoid a re-inspection fee.",
+    "application_url": "",
+    "department_url": "https://www.twpofwashington.us/page/bureau-of-fire-prevention",
+    "phone": "201-666-0462",
+    "email": "fp@twpofwashington.us",
+    "contact_name": "Thomas Derienzo Jr",
+    "contact_title": "Fire Official (NJ DCA fire directory)",
+    "evidence": [
+     {
+      "url": "https://www.twpofwashington.us/page/bureau-of-fire-prevention",
+      "quote": "Upon sale of your home, an inspection to ensure that your home is compliant with NJ State Fire Codes with respect to Carbon Monoxide and Smoke Detector inspections must be performed prior to closing.",
+      "doc_date": "2026-10-04 (page fetched)",
+      "via": "page",
+      "verified": null
+     },
+     {
+      "url": "https://www.twpofwashington.us/page/bureau-of-fire-prevention",
+      "quote": "To schedule an inspection, please contact the Building Department at 201-666-0462.",
+      "doc_date": "2026-10-04 (page fetched)",
+      "via": "page",
+      "verified": null
+     },
+     {
+      "url": "https://www.twpofwashington.us/page/bureau-of-fire-prevention",
+      "quote": "You will need a 2A:10BC fire extinguisher mounted in the Kitchen on the wall.",
+      "doc_date": "2026-10-04 (page fetched)",
+      "via": "page",
+      "verified": null
+     },
+     {
+      "url": "https://www.twpofwashington.us/page/building-engineering",
+      "quote": "Smoke Detector Inspection: Tuesday & Wednesday 2:30 PM - 4:00 PM",
+      "doc_date": "2026-10-04 (page fetched)",
+      "via": "page",
+      "verified": null
+     },
+     {
+      "url": "https://ecode360.com/7657993",
+      "quote": "The Bureau of Fire Prevention shall conduct inspections and issue certificates of smoke, carbon monoxide detection and fire extinguisher compliance as required by N.J.A.C. 5:70-2.3, in connection with any sale, lease or other change of occupancy of the premises",
+      "doc_date": "",
+      "via": "page",
+      "verified": null
+     },
+     {
+      "url": "https://nj.gov/dca/dfs/pdf/ANNUAL%20REGISTRY/THIRD%20QUARTER%20LEA%20REGISTRY%202026.pdf",
+      "quote": "F Washington Township",
+      "doc_date": "2026-07",
+      "via": "pdf",
+      "verified": true
+     },
+     {
+      "url": "https://www.nj.gov/dca/dfs/pdf/fire%20directory_county%20summary/fire_code_enforcement_director.pdf",
+      "quote": "LEAID: 0266-001 Enf Auth. Fire Dept Fire Official Thomas Derienzo Jr Phone (201) 664-4404 Addr: 350 Hudson Ave Washington NJ 07676 ... Email fp@twpofwashington.us",
+      "doc_date": "2026-03-02 (survey date)",
+      "via": "state_directory",
+      "verified": null
+     }
+    ],
+    "confidence": "high"
+   }
+  ],
+  "notes": "The Township page lists only the 10-days-or-more fee ($45.00) and a $50.00 re-inspection fee. The fee code (Section 212-9N) adds $90 for 4 to 10 business days and $161 for 3 or fewer business days before closing; Section 212-11 (amended 9-9-2024, Ord. No. 24-13) shows a flat $75 'Smoke, Carbon Monoxide and Fire Extinguisher Compliance' fee for residential dwellings. Confirm the current amount. The Township page still requires a 2A:10BC extinguisher, which the state dropped from the sale certificate in February 2025 (P.L.2025, c.19). The LEA registry line 'F Washington Township' is in the Bergen County column (there are several Washington Townships statewide)."
+ },
+ "other_items": [
+  {
+   "label": "Open permits",
+   "detail": "The CCO inspection checks for open permits; close them before applying.",
+   "source_url": "https://ecode360.com/31164079"
+  },
+  {
+   "label": "Vacant property / not occupied",
+   "detail": "A CCO is not required when the principal building will not be occupied, but the applicant must submit a certification to the Chief Construction Official.",
+   "source_url": "https://ecode360.com/31164079"
+  }
+ ],
+ "open_questions": [
+  "Which CCO fee is charged for a home sale: $100 (Section 212-27D) or $200 (Section 212-9N)?",
+  "Which smoke/CO fee schedule is current: $45/$90/$161 by days before closing, or the flat $75 in Section 212-11?",
+  "Is the fire extinguisher still checked at resale after P.L.2025, c.19?",
+  "How long is the CCO valid, and where is the application form (none is posted online)?"
+ ],
+ "checked_at": "2026-10-04",
+ "verification": {
+  "fees": 11,
+  "fee_ok": 0,
+  "fee_bad": 0,
+  "fee_unchecked": 11,
+  "quotes": 13,
+  "q_ok": 1,
+  "q_bad": 0,
+  "q_unchecked": 12
+ }
+}

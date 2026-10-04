@@ -1,0 +1,184 @@
+{
+ "municipality_code": "1425",
+ "municipality": "Mountain Lakes Borough",
+ "county": "MORRIS",
+ "checked_at": "2026-10-04",
+ "resale_co": {
+  "status": "required",
+  "name": "Construction Records Clearance (CRC)",
+  "issued_by": "Borough of Mountain Lakes Construction Official (Construction Office)",
+  "lead_time": "Apply at least 10 business days before the change of ownership or occupancy",
+  "valid_for": "",
+  "requirements": [
+   "Records inspection only: the Construction Official certifies there are no open permits or pending violations on the property",
+   "Any open permits must get all final inspections and approvals, and the matching construction code certificates, before the CRC is issued",
+   "Exempt transfers (if no change in physical occupancy): deed corrections, ancient deeds, transfers between spouses or former spouses under a court order, new construction needing a CO, estate distributions, refinancing and home equity loans, and transfers by or to a receiver, bankruptcy trustee or assignee for creditors"
+  ],
+  "fees": [
+   {
+    "label": "Construction Record Clearance request (Borough form)",
+    "amount": "$35.00",
+    "quote": "Fee: $35.00 (cash or check payable to the Borough of Mountain Lakes)",
+    "source_url": "https://mountainlakes.gov/wp-content/uploads/2014/11/Construction-Record-Clearance-Requestfillable.pdf",
+    "verified": null
+   }
+  ],
+  "how_to_apply": "Fill out the Construction Record Clearance Request (fillable PDF on the Borough Forms Center) with owner, address, block and lot, phone and requestor name and email, and submit it with $35.00 cash or check payable to the Borough of Mountain Lakes to the Construction Office, 400 Boulevard, at least 10 business days before closing.",
+  "application_url": "https://mountainlakes.gov/wp-content/uploads/2014/11/Construction-Record-Clearance-Requestfillable.pdf",
+  "department_url": "https://mountainlakes.gov/departments/construction-office/",
+  "phone": "973-334-3131 x 2015",
+  "email": "jrutzler@mtnlakes.org",
+  "contact_name": "Jerelyn Rutzler",
+  "contact_title": "Construction Technical Assistant (Construction Code Official/Zoning Officer: Tim Braden, 973-334-3131 x 2012, tbraden@mountainlakes.gov)",
+  "evidence": [
+   {
+    "url": "https://ecode360.com/37400917",
+    "quote": "A CRC shall be required prior to the sale of any residential or commercial structure and prior to the rental of any tenant space in a commercial structure within the Borough.",
+    "doc_date": "2-22-2021 (Ord. No. 3-21)",
+    "via": "page",
+    "verified": null
+   },
+   {
+    "url": "https://ecode360.com/37400917",
+    "quote": "The owner or his authorized agent shall submit a written application and payment of fees at least 10 business days prior to the change of ownership and/or occupancy on the form provided by the Borough.",
+    "doc_date": "2-22-2021 (Ord. No. 3-21)",
+    "via": "page",
+    "verified": null
+   },
+   {
+    "url": "https://ecode360.com/37400917",
+    "quote": "A certificate issued by the Borough Construction Official certifying that there are no open permits or pending violations on the subject property.",
+    "doc_date": "2-22-2021 (Ord. No. 3-21)",
+    "via": "page",
+    "verified": null
+   },
+   {
+    "url": "https://mountainlakes.gov/wp-content/uploads/2014/11/Construction-Record-Clearance-Requestfillable.pdf",
+    "quote": "Construction Record Clearance Request",
+    "doc_date": "2026-10-04 (page fetched)",
+    "via": "pdf",
+    "verified": null
+   },
+   {
+    "url": "https://mountainlakes.gov/departments/construction-office/",
+    "quote": "All open permits must be closed out before a property can be sold.",
+    "doc_date": "2026-10-04 (page fetched)",
+    "via": "page",
+    "verified": true
+   },
+   {
+    "url": "https://mountainlakes.gov/departments/construction-office/",
+    "quote": "jrutzler@mtnlakes.org",
+    "doc_date": "2026-10-04 (page fetched)",
+    "via": "page",
+    "verified": true
+   }
+  ],
+  "confidence": "high",
+  "notes": "Mountain Lakes does not do a full resale housing inspection. Its sale requirement is a Construction Records Clearance under Code Section 88-16 (added 2-22-2021 by Ord. No. 3-21, read through the ecode360 print view): a records check that no permits or violations are open. A buyer may not occupy until the CRC is issued, and violations can bring a fine up to $1,000. The fee amounts under Section 88-16F did not show in the print view. The fee schedule (Chapter 111) lists an 'Administrative certificate of clearance' at $50, while the Borough's request form says $35.00; confirm which applies. The CRC request form is a scanned image PDF, so its quotes cannot be machine-checked. The fee chapter also lists a lead-based paint inspection fee for rentals, which is not a resale requirement."
+ },
+ "fire_cert": {
+  "requirements": [
+   "Smoke detectors on each level of the home",
+   "Battery-only smoke detectors must have a 10-year sealed lithium battery; the form asks whether they are hardwired with battery backup",
+   "Carbon monoxide alarm on the level(s) with bedrooms, within 10 feet of the bedrooms; combination smoke/CO or plug-in units allowed",
+   "Any alarm system must be in working order; if monitored, notify the alarm company so it can be put on test mode on inspection day",
+   "Street number clearly displayed for first responders",
+   "Form title still lists fire extinguisher compliance (form still lists it), although no extinguisher item appears in its checklist"
+  ],
+  "authorities": [
+   {
+    "name": "Mountain Lakes Fire Prevention (Borough of Mountain Lakes fire official)",
+    "type": "municipal_fire_bureau",
+    "area_served": "Entire borough",
+    "lead_time": "No appointment is made until the completed application and fee are received; call 973-334-3131 ext. 2014 to schedule.",
+    "fees": [
+     {
+      "label": "Smoke detector, carbon monoxide alarm and fire extinguisher compliance inspection",
+      "amount": "$100.00",
+      "quote": "No inspection appointments shall be made until a completed application and a $100.00 fee payable to the Borough of Mountain Lakes",
+      "source_url": "https://mountainlakes.gov/wp-content/uploads/2014/11/Updated-Application-for-Smoke-Detector-Carbon-Monoxide-Alarm-and-Fire-Extinguisher-Compliance.pdf",
+      "verified": null
+     },
+     {
+      "label": "Re-inspection",
+      "amount": "$50.00",
+      "quote": "An additional $50.00 fee will be charged in the event a re-inspection is required.",
+      "source_url": "https://mountainlakes.gov/wp-content/uploads/2014/11/Updated-Application-for-Smoke-Detector-Carbon-Monoxide-Alarm-and-Fire-Extinguisher-Compliance.pdf",
+      "verified": null
+     }
+    ],
+    "how_to_apply": "Download the Application for Smoke Detector, Carbon Monoxide Alarm and Fire Extinguisher Compliance from the Borough Forms Center, fill in the property, block and lot, phones and change of occupant date, and submit it with the $100.00 fee payable to the Borough of Mountain Lakes (400 Boulevard). Then call 973-334-3131 ext. 2014 to schedule the inspection.",
+    "application_url": "https://mountainlakes.gov/wp-content/uploads/2014/11/Updated-Application-for-Smoke-Detector-Carbon-Monoxide-Alarm-and-Fire-Extinguisher-Compliance.pdf",
+    "department_url": "https://mountainlakes.gov/forms-center/",
+    "phone": "973-334-3131 ext. 2014",
+    "email": "",
+    "contact_name": "Scott Para",
+    "contact_title": "Fire Official (per NJ DCA fire directory)",
+    "evidence": [
+     {
+      "url": "https://mountainlakes.gov/wp-content/uploads/2014/11/Updated-Application-for-Smoke-Detector-Carbon-Monoxide-Alarm-and-Fire-Extinguisher-Compliance.pdf",
+      "quote": "PLEASE CALL-334-3131(EXTENSION 2014) TO SCHEDULE AN INSPECTION APPOINTMENT",
+      "doc_date": "2026-10-04 (page fetched)",
+      "via": "pdf",
+      "verified": null
+     },
+     {
+      "url": "https://mountainlakes.gov/wp-content/uploads/2014/11/Updated-Application-for-Smoke-Detector-Carbon-Monoxide-Alarm-and-Fire-Extinguisher-Compliance.pdf",
+      "quote": "A carbon monoxide alarm is required on the level (s) of the home with bedrooms.",
+      "doc_date": "2026-10-04 (page fetched)",
+      "via": "pdf",
+      "verified": null
+     },
+     {
+      "url": "https://mountainlakes.gov/forms-center/",
+      "quote": "Application for Smoke Detector, Carbon Monoxide Alarm and Fire Extinguisher Compliance",
+      "doc_date": "2026-10-04 (page fetched)",
+      "via": "page",
+      "verified": true
+     },
+     {
+      "url": "https://nj.gov/dca/dfs/pdf/ANNUAL%20REGISTRY/THIRD%20QUARTER%20LEA%20REGISTRY%202026.pdf",
+      "quote": "F Mountain Lakes Borough",
+      "doc_date": "2026-07",
+      "via": "pdf",
+      "verified": true
+     },
+     {
+      "url": "https://www.nj.gov/dca/dfs/pdf/fire%20directory_county%20summary/fire_code_enforcement_director.pdf",
+      "quote": "LEAID: 1425-001 Enf Auth. Fire Dept Fire Official Scott Para Phone (973) 334-3131",
+      "doc_date": "6/19/2025 (survey date)",
+      "via": "state_directory",
+      "verified": null
+     }
+    ],
+    "confidence": "medium"
+   }
+  ],
+  "notes": "The application (a scanned PDF, so quotes cannot be machine-checked) cites Chapter 111, Section 11-3, Subsection K of the Borough code for the $100.00 fee; the current code text of Section 111-3K only says Uniform Fire Safety Code permit fees follow N.J.A.C. 5:70-2.9(c) and a Certificate of Fire Code Status is $30, and shows no $100 smoke certificate fee, so confirm the amount. No tiered short-notice fees are published. The form title still mentions fire extinguisher compliance, which state law (P.L.2025, c.19) removed from the sale certificate in February 2025. The Borough website has no Fire Prevention page; the fire official (Scott Para, fireofficial@mtnlakes.org) comes from the NJ DCA fire directory survey of 6/19/2025, which is over a year old."
+ },
+ "other_items": [
+  {
+   "label": "Open permits",
+   "detail": "All open permits must be closed out before a property can be sold; the Construction Records Clearance confirms this.",
+   "source_url": "https://mountainlakes.gov/departments/construction-office/"
+  }
+ ],
+ "open_questions": [
+  "Is the CRC fee $35.00 (form) or $50 (fee schedule 'administrative certificate of clearance')?",
+  "Is the smoke/CO inspection fee still $100.00, and is there a rush fee?",
+  "Who is the current fire official and email (directory survey is from June 2025)?",
+  "Does the Borough still check for a fire extinguisher at resale after P.L.2025, c.19?",
+  "Is a final water/sewer meter reading needed from the Finance Office (Water and Sewer) before closing?"
+ ],
+ "verification": {
+  "fees": 3,
+  "fee_ok": 0,
+  "fee_bad": 0,
+  "fee_unchecked": 3,
+  "quotes": 11,
+  "q_ok": 4,
+  "q_bad": 0,
+  "q_unchecked": 7
+ }
+}

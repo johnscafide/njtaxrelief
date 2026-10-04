@@ -1,0 +1,176 @@
+{
+ "municipality_code": "0241",
+ "municipality": "Norwood Borough",
+ "county": "BERGEN",
+ "resale_co": {
+  "status": "required",
+  "name": "Residential Resale Certificate / Certificate of Continued Occupancy (CCO), issued as a Certificate of Zoning Compliance",
+  "issued_by": "Borough of Norwood Construction Office (Construction Code Official / Zoning Officer)",
+  "lead_time": "",
+  "valid_for": "",
+  "requirements": [
+   "Inspection showing no zoning infractions and compliance with the Zoning Ordinance for continued occupancy",
+   "General inspection of the visible parts of the building for imminent hazards",
+   "Existing property inventory (basement, first floor, second floor, other)",
+   "Smoke detector and carbon monoxide detector compliance certified on the same form",
+   "Smoke detectors on each level including the basement, in each bedroom and outside the bedrooms; 10-year sealed battery or interconnected system",
+   "Carbon monoxide detectors outside the bedroom doors (battery, plug-in or combination)"
+  ],
+  "fees": [
+   {
+    "label": "Residential Resale Certificate (CCO), including smoke and CO detector compliance",
+    "amount": "$150.00",
+    "quote": "The fee for a Residential Resale Certificate (CCO) is $150.00",
+    "source_url": "https://files-backend.assets.thrillshare.com/documents/asset/uploaded_file/5980/Bon/8d4d8ddc-399b-4466-8fab-0704e8f4db5a/Residential-Resale-Application.pdf?disposition=inline",
+    "verified": true
+   }
+  ],
+  "how_to_apply": "Download the Residential Resale Application from the Construction/Code Enforcement Forms/Applications page, fill it out and pay $150.00 by check or money order only, payable to the Borough of Norwood. Submit to the Norwood Construction Office, 455 Broadway, Norwood, NJ 07648 (201-767-7420).",
+  "application_url": "https://files-backend.assets.thrillshare.com/documents/asset/uploaded_file/5980/Bon/8d4d8ddc-399b-4466-8fab-0704e8f4db5a/Residential-Resale-Application.pdf?disposition=inline",
+  "department_url": "https://www.norwoodboro.org/page/constructioncode-enforcement",
+  "phone": "201-767-7420",
+  "email": "gtessaro@norwoodboro.org",
+  "contact_name": "Gino Tessaro",
+  "contact_title": "Construction Official / Building Subcode Official and Zoning Officer",
+  "evidence": [
+   {
+    "url": "https://ecode360.com/7950759",
+    "quote": "Any change in use, ownership, or occupancy of an existing building or structure shall require approval of a certificate of continued occupancy by the Construction Code Official.",
+    "doc_date": "2007-06-06 (Ord. No. 07:10)",
+    "via": "page",
+    "verified": null
+   },
+   {
+    "url": "https://ecode360.com/7950759",
+    "quote": "No certificate of continued occupancy may be issued as to a residential building or any portion thereof unless approved smoke detectors, fire extinguishers, and carbon monoxide detectors have been installed as required by applicable state statute and local ordinances.",
+    "doc_date": "2007-06-06 (Ord. No. 07:10)",
+    "via": "page",
+    "verified": null
+   },
+   {
+    "url": "https://files-backend.assets.thrillshare.com/documents/asset/uploaded_file/5980/Bon/8d4d8ddc-399b-4466-8fab-0704e8f4db5a/Residential-Resale-Application.pdf?disposition=inline",
+    "quote": "As of August 26, 2025",
+    "doc_date": "2025-08-26",
+    "via": "pdf",
+    "verified": true
+   },
+   {
+    "url": "https://files-backend.assets.thrillshare.com/documents/asset/uploaded_file/5980/Bon/8d4d8ddc-399b-4466-8fab-0704e8f4db5a/Residential-Resale-Application.pdf?disposition=inline",
+    "quote": "Payable By Check or Money Order ONLY",
+    "doc_date": "2025-08-26",
+    "via": "pdf",
+    "verified": true
+   },
+   {
+    "url": "https://www.norwoodboro.org/documents/departments/construction%2Fcode-enforcement/forms%2Fapplications/25496592",
+    "quote": "Residential Resale Application",
+    "doc_date": "2026-10-04 (page fetched)",
+    "via": "page",
+    "verified": null
+   },
+   {
+    "url": "https://www.norwoodboro.org/page/constructioncode-enforcement",
+    "quote": "Norwood Building Department:201-767-7420",
+    "doc_date": "2026-10-04 (page fetched)",
+    "via": "page",
+    "verified": null
+   }
+  ],
+  "confidence": "high",
+  "notes": "The Borough code (Chapter on Certificates of Continued Occupancy, Ord. No. 07:10) still lists $100 for the application and initial inspection and $25 per reinspection, but the Borough's current Residential Resale Application says the fee is $150.00 as of August 26, 2025, so the newer form fee is listed. The fee sheet and checklist pages of the application PDF have a text layer; the first page (Certificate of Zoning Compliance) is an image, so its wording was read visually. The construction fee code also lists \"CO fee residential $100.00\", which appears to be for new construction COs. Gino Tessaro's name comes from the mailto link on the department page. Annual rental registration is a rental-only program and not a resale requirement."
+ },
+ "fire_cert": {
+  "requirements": [
+   "Smoke detectors on each level including the basement, in each bedroom, and outside and near all bedroom doors (the form says within 10 feet; the checklist says within 21 feet)",
+   "Smoke detectors must be 10-year sealed battery or an interconnected system; not in the attic, crawl spaces or immediate kitchen area",
+   "Carbon monoxide detectors outside and near all bedroom doors; battery, plug-in or combination smoke/CO type"
+  ],
+  "authorities": [
+   {
+    "name": "Borough of Norwood Construction Department (smoke and CO certification is part of the Residential Resale Certificate)",
+    "type": "municipal_building_department",
+    "area_served": "Entire borough",
+    "lead_time": "",
+    "fees": [
+     {
+      "label": "Residential Resale Certificate (CCO), including smoke and CO detector compliance",
+      "amount": "$150.00",
+      "quote": "The fee for a Residential Resale Certificate (CCO) is $150.00",
+      "source_url": "https://files-backend.assets.thrillshare.com/documents/asset/uploaded_file/5980/Bon/8d4d8ddc-399b-4466-8fab-0704e8f4db5a/Residential-Resale-Application.pdf?disposition=inline",
+      "verified": true
+     }
+    ],
+    "how_to_apply": "Covered by the Residential Resale Application ($150.00, check or money order only) filed with the Construction Office, 455 Broadway.",
+    "application_url": "https://files-backend.assets.thrillshare.com/documents/asset/uploaded_file/5980/Bon/8d4d8ddc-399b-4466-8fab-0704e8f4db5a/Residential-Resale-Application.pdf?disposition=inline",
+    "department_url": "https://www.norwoodboro.org/page/constructioncode-enforcement",
+    "phone": "201-767-7420",
+    "email": "wmcguire@norwoodboro.org",
+    "contact_name": "William McGuire",
+    "contact_title": "Fire Subcode Official (Borough page); Fire Official (state directory)",
+    "evidence": [
+     {
+      "url": "https://ecode360.com/6931031",
+      "quote": "In the case of change of occupancy of any building subject to the requirements of §127-9 of this chapter, no owner shall sell, lease or otherwise permit occupancy for residential purposes of that building without first obtaining from the Norwood Construction Department a certificate evidencing compliance with the requirements of this chapter and N.J.S.A. 52:27D-198.1 and 52:27D-198.2.",
+      "doc_date": "2025-08-20 (Ord. No. 2025:10)",
+      "via": "page",
+      "verified": null
+     },
+     {
+      "url": "https://files-backend.assets.thrillshare.com/documents/asset/uploaded_file/5980/Bon/8d4d8ddc-399b-4466-8fab-0704e8f4db5a/Residential-Resale-Application.pdf?disposition=inline",
+      "quote": "Smoke Detector, Carbon Monoxide Detector Checklist for Residential Compliance",
+      "doc_date": "2025-08",
+      "via": "pdf",
+      "verified": true
+     },
+     {
+      "url": "https://files-backend.assets.thrillshare.com/documents/asset/uploaded_file/5980/Bon/8d4d8ddc-399b-4466-8fab-0704e8f4db5a/Residential-Resale-Application.pdf?disposition=inline",
+      "quote": "Smoke detectors shall be 10 yr. sealed battery-operated or an interconnected system.",
+      "doc_date": "2025-08",
+      "via": "pdf",
+      "verified": true
+     },
+     {
+      "url": "https://www.norwoodboro.org/page/constructioncode-enforcement",
+      "quote": "Fire Subcode Official: William McGuire",
+      "doc_date": "2026-10-04 (page fetched)",
+      "via": "page",
+      "verified": null
+     },
+     {
+      "url": "https://www.nj.gov/dca/dfs/pdf/fire%20directory_county%20summary/fire_code_enforcement_director.pdf",
+      "quote": "LEAID: 0241-001 Norwood Boro ... Name: Norwood Boro Fire Prev ... Enf Auth. Municipal Addr: 455 Broadway ... Fire Official William J McGuire Phone (201) 767-7420 ... Email wmcguire@norwoodboro.org",
+      "doc_date": "2026-02 (survey date 2/18/2026)",
+      "via": "state_directory",
+      "verified": null
+     },
+     {
+      "url": "https://nj.gov/dca/dfs/pdf/ANNUAL%20REGISTRY/THIRD%20QUARTER%20LEA%20REGISTRY%202026.pdf",
+      "quote": "M Norwood Borough",
+      "doc_date": "2026-07",
+      "via": "pdf",
+      "verified": true
+     }
+    ],
+    "confidence": "high"
+   }
+  ],
+  "notes": "Borough Code Section 127-10 (amended 8-20-2025 by Ord. No. 2025:10) sends the smoke/CO certificate for sales to the Norwood Construction Department, and the Borough's resale application combines it with the CCO for one $150.00 fee. The code still lets the Fire Official buy and install required smoke detectors for $40 each. The 2007 CCO chapter still mentions fire extinguishers, but the current checklist (updated 08/25) lists only smoke and CO detectors, consistent with P.L.2025, c.19."
+ },
+ "other_items": [],
+ "open_questions": [
+  "What lead time does the Construction Office need before closing, and how long is the certificate valid?",
+  "Is there a reinspection fee under the 2025 fee change (the old code said $25)?",
+  "Bedroom-door distance for detectors: the form says within 10 feet but the checklist says within 21 feet; which does the inspector apply?"
+ ],
+ "checked_at": "2026-10-04",
+ "verification": {
+  "fees": 2,
+  "fee_ok": 2,
+  "fee_bad": 0,
+  "fee_unchecked": 0,
+  "quotes": 12,
+  "q_ok": 5,
+  "q_bad": 0,
+  "q_unchecked": 7
+ }
+}

@@ -1,0 +1,230 @@
+{
+ "municipality_code": "0252",
+ "municipality": "River Edge Borough",
+ "county": "BERGEN",
+ "resale_co": {
+  "status": "required",
+  "name": "Certificate of Resale (certificate of occupancy / continued certificate of occupancy on resale of a residential dwelling)",
+  "issued_by": "Borough of River Edge Building Department (Construction Official)",
+  "lead_time": "",
+  "valid_for": "",
+  "requirements": [
+   "Seller must close out all permits before the CO inspection",
+   "Smoke detector on every level including the basement and within 10 feet of every bedroom door; type depends on the year built or altered (battery before 1977, hardwired/interconnected for later homes); detectors over 10 years old must be replaced; electric detectors cannot be replaced with battery units",
+   "Monitored smoke detection systems need an NFPA-72 test report from the monitoring company dated no more than 30 days before closing",
+   "Carbon monoxide detector on every level and on the sleeping levels of 1 and 2 family dwellings, in the hallway within 10 feet of every bedroom door",
+   "Portable fire extinguisher within 10 feet of the kitchen: 2.5 to 10 pounds, 2A-10B:C (ABC), tagged within the past year or new with receipt, mounted with top no more than 5 feet up, owner's manual present (checklist revised 08/28/2019 still lists it)",
+   "Homes with a residential sprinkler system need an inspection report from a licensed contractor",
+   "Sump pumps may not discharge into a sewer line or sink; handrails on interior and exterior stairs; no extension cords as permanent wiring",
+   "Sidewalks in disrepair must be repaired or replaced before inspection (sidewalk permit needed to replace slabs)",
+   "Common hallways and stairways in two-family houses need smoke detectors on each level"
+  ],
+  "fees": [
+   {
+    "label": "Continued certificate of occupancy (resale), Use Groups R-3, R-4 and R-5 (one- and two-family homes) (Borough code 206-2Q)",
+    "amount": "$100",
+    "quote": "Use Groups R-3, R-4 and R-5: $100.",
+    "source_url": "https://ecode360.com/11320342",
+    "verified": null
+   },
+   {
+    "label": "Certificate of continued occupancy, structure Use Group R-2, R-3, R-4 or R-5 (construction code fees, Borough code 206-2I)",
+    "amount": "$75",
+    "quote": "Structure (Use Group R-2, R-3, R-4 or R-5): $75.",
+    "source_url": "https://ecode360.com/11320342",
+    "verified": null
+   },
+   {
+    "label": "Certificate of continued occupancy, each added dwelling unit (Borough code 206-2I)",
+    "amount": "$35",
+    "quote": "Add each dwelling unit: $35.",
+    "source_url": "https://ecode360.com/11320342",
+    "verified": null
+   }
+  ],
+  "how_to_apply": "Complete the Borough's Application for Certificate of Resale (Resale of Residential Dwelling): property, closing date, single or two family, seller, buyer, contact person. Submit to the Building Department, 10 River Edge Road (office hours Monday to Friday 9:00 am to 3:00 pm; no applications accepted after 3:00 pm), with the fee from the Borough fee schedule (pay by cash or check). Questions: (201) 599-6322 or inspections@riveredgenj.org.",
+  "application_url": "https://www.riveredgenj.org/media/Borough/Forms%20and%20Permits/Building%20Forms/Certificate%20of%20Resale-Residential(1).pdf",
+  "department_url": "https://www.riveredgenj.org/departments/BuildingDepartment",
+  "phone": "201-599-6322",
+  "email": "inspections@riveredgenj.org",
+  "contact_name": "Stephen Depken",
+  "contact_title": "Construction Official/Zoning Official (sdepken@riveredgenj.org)",
+  "evidence": [
+   {
+    "url": "https://ecode360.com/11323401",
+    "quote": "No dwelling unit, including but not limited to single-family homes, two-family homes and condominium apartment/townhouse units, shall be sold unless the selling owner first obtains from the Construction Official a certificate of occupancy.",
+    "doc_date": "1998-05-18 (Ord. No. 1220)",
+    "via": "page",
+    "verified": null
+   },
+   {
+    "url": "https://ecode360.com/11323401",
+    "quote": "Prior to the transfer of title by sale of a dwelling house or unit, application for a certificate of occupancy shall be made, in writing, to the Construction Official",
+    "doc_date": "1998-10-05 (Ord. No. 1236)",
+    "via": "page",
+    "verified": null
+   },
+   {
+    "url": "https://ecode360.com/11320342",
+    "quote": "Continued certificate of occupancy (resale):",
+    "doc_date": "2025-04-10 (Ord. No. 25-8)",
+    "via": "page",
+    "verified": null
+   },
+   {
+    "url": "https://www.riveredgenj.org/media/Borough/Forms%20and%20Permits/Building%20Forms/Certificate%20of%20Resale-Residential(1).pdf",
+    "quote": "APPLICATION FOR CERTIFICATE OF RESALE RESALE OF RESIDENTIAL DWELLING",
+    "doc_date": "2024-05-17 (PDF created; checklist revised 08/28/2019)",
+    "via": "pdf",
+    "verified": null
+   },
+   {
+    "url": "https://www.riveredgenj.org/media/Borough/Forms%20and%20Permits/Building%20Forms/Certificate%20of%20Resale-Residential(1).pdf",
+    "quote": "IT IS THE RESPONSIBLITY OF THE SELLER TO CLOSE OUT ALL PERMITS PRIOR TO CO INSPECTION",
+    "doc_date": "2024-05-17",
+    "via": "pdf",
+    "verified": null
+   },
+   {
+    "url": "https://www.riveredgenj.org/departments/BuildingDepartment",
+    "quote": "Construction Official/Zoning Official Stephen Depken",
+    "doc_date": "2026-10-04 (page fetched)",
+    "via": "page",
+    "verified": true
+   },
+   {
+    "url": "https://www.riveredgenj.org/departments/BuildingDepartment",
+    "quote": "THE OFFICE WILL NOT ISSUE OR ACCEPT ANY APPLICATIONS AFTER 3:00PM",
+    "doc_date": "2026-10-04 (page fetched)",
+    "via": "page",
+    "verified": true
+   }
+  ],
+  "confidence": "high",
+  "notes": "Borough code Section 416-26 (Zoning, read through the ecode360 print view) requires the selling owner to get a certificate of occupancy from the Construction Official before any single-family, two-family or condo unit is sold. The application PDF on the Borough forms page is a scanned image (no text layer), so its quotes were read visually and may not machine-verify; it shows no fee. Two different fee entries exist in Chapter 206: $100 for a 'continued certificate of occupancy (resale)' for Use Groups R-3/R-4/R-5 (Section 206-2Q, amended 2025) and $75 per structure plus $35 per added unit under the construction code fees (Section 206-2I); call to confirm which is charged. Rental-only items (the $35 Fire Prevention Bureau rental smoke inspection, rental property registration) are not sale requirements."
+ },
+ "fire_cert": {
+  "requirements": [
+   "Smoke detectors on all levels including the basement and within 10 feet of every bedroom door, per the year the house was built or altered",
+   "Smoke detectors over 10 years old must be replaced; electric detectors may not be replaced with battery units",
+   "Carbon monoxide detector in the hallway within 10 feet of every bedroom door, on every level of 1 and 2 family dwellings",
+   "Portable fire extinguisher (2A-10B:C, 2.5 to 10 lb) within 10 feet of the kitchen, serviced within a year or new with receipt (checklist still lists it)"
+  ],
+  "authorities": [
+   {
+    "name": "River Edge Building Department (smoke/CO/extinguisher checked during the Certificate of Resale inspection); River Edge Fire Prevention Bureau handles rentals",
+    "type": "municipal_fire_bureau",
+    "area_served": "Entire borough",
+    "lead_time": "",
+    "fees": [
+     {
+      "label": "Continued certificate of occupancy (resale), Use Groups R-3, R-4 and R-5 (one- and two-family homes) (Borough code 206-2Q)",
+      "amount": "$100",
+      "quote": "Use Groups R-3, R-4 and R-5: $100.",
+      "source_url": "https://ecode360.com/11320342",
+      "verified": null
+     }
+    ],
+    "how_to_apply": "For a sale, the alarm and extinguisher items are inspected as part of the Building Department's Certificate of Resale; there is no separate fire application for sales on the Borough site.",
+    "application_url": "https://www.riveredgenj.org/media/Borough/Forms%20and%20Permits/Building%20Forms/Certificate%20of%20Resale-Residential(1).pdf",
+    "department_url": "https://www.riveredgenj.org/departments/FirePrevention",
+    "phone": "201-599-6323",
+    "email": "asilverman@riveredgenj.org",
+    "contact_name": "Alan Silverman",
+    "contact_title": "Fire Official",
+    "evidence": [
+     {
+      "url": "https://www.riveredgenj.org/departments/FirePrevention",
+      "quote": "ALL RENTALS OF 1 & 2 FAMILY NON-OWNER OCCUPIED HOMES REQUIRE AN INSPECTION BY THE FIRE PREVENTION BUREAU",
+      "doc_date": "2026-10-04 (page fetched)",
+      "via": "page",
+      "verified": true
+     },
+     {
+      "url": "https://www.riveredgenj.org/departments/FirePrevention",
+      "quote": "Alan Silverman - Fire Official",
+      "doc_date": "2026-10-04 (page fetched)",
+      "via": "page",
+      "verified": true
+     },
+     {
+      "url": "https://ecode360.com/11320566",
+      "quote": "other than owner-occupied one- and two-family dwellings",
+      "doc_date": "",
+      "via": "page",
+      "verified": null
+     },
+     {
+      "url": "https://www.riveredgenj.org/media/Borough/Forms%20and%20Permits/Building%20Forms/Certificate%20of%20Resale-Residential(1).pdf",
+      "quote": "A CARBON MONOXIDE DETECTOR IS REQUIRED ON EVERY LEVEL AND ALSO ON THE SLEEPING LEVEL(S) OF ALL 1 & 2 FAMILY DWELLINGS.",
+      "doc_date": "2024-05-17",
+      "via": "pdf",
+      "verified": null
+     },
+     {
+      "url": "https://www.riveredgenj.org/media/Borough/Forms%20and%20Permits/Building%20Forms/Certificate%20of%20Resale-Residential(1).pdf",
+      "quote": "A PORTABLE FIRE EXTINGUISHER IS REQUIRED WITHIN 10 FEET OF THE KITCHEN AREA.",
+      "doc_date": "2024-05-17",
+      "via": "pdf",
+      "verified": null
+     },
+     {
+      "url": "https://nj.gov/dca/dfs/pdf/ANNUAL%20REGISTRY/THIRD%20QUARTER%20LEA%20REGISTRY%202026.pdf",
+      "quote": "F River Edge Borough",
+      "doc_date": "2026-07",
+      "via": "pdf",
+      "verified": true
+     },
+     {
+      "url": "https://www.nj.gov/dca/dfs/pdf/fire%20directory_county%20summary/fire_code_enforcement_director.pdf",
+      "quote": "LEAID: 0252-001 Enf Auth. Fire Dept Fire Official Alan J Silverman Phone (201) 599-6323 Addr: 705 Kinderkamack Rd River Edge NJ 07661 ... Email firemusik@aol.com",
+      "doc_date": "2026-02-27 (survey date)",
+      "via": "state_directory",
+      "verified": null
+     }
+    ],
+    "confidence": "medium"
+   }
+  ],
+  "notes": "River Edge's fire code chapter says the local fire agency enforces the fire code everywhere except owner-occupied one- and two-family dwellings, and the Fire Prevention Bureau pages describe only rental inspections ($35). For sales, the Building Department's Certificate of Resale checklist covers smoke, CO and extinguisher items, so the resale certificate appears to serve as the smoke/CO certification; confirm with the Building Department whether a separate fire bureau certificate is ever needed for a sale. The checklist (revised 08/28/2019) still requires a portable fire extinguisher, which the state dropped from the sale certificate in February 2025 (P.L.2025, c.19)."
+ },
+ "other_items": [
+  {
+   "label": "Sidewalks and curbs",
+   "detail": "The Construction Code Officer inspects sidewalks and curbs with the certificate of continued occupancy on resale; damaged slabs must be repaired before inspection (sidewalk permit required).",
+   "source_url": "https://ecode360.com/11322660"
+  },
+  {
+   "label": "Open permits",
+   "detail": "The seller must close out all permits before the CO inspection.",
+   "source_url": "https://www.riveredgenj.org/media/Borough/Forms%20and%20Permits/Building%20Forms/Certificate%20of%20Resale-Residential(1).pdf"
+  },
+  {
+   "label": "Sump pump",
+   "detail": "Sump pumps may not discharge into a sewer line or sink.",
+   "source_url": "https://www.riveredgenj.org/media/Borough/Forms%20and%20Permits/Building%20Forms/Certificate%20of%20Resale-Residential(1).pdf"
+  },
+  {
+   "label": "Fire sprinkler inspection report",
+   "detail": "Homes with a residential fire suppression (sprinkler) system need an inspection report from a licensed contractor.",
+   "source_url": "https://www.riveredgenj.org/media/Borough/Forms%20and%20Permits/Building%20Forms/Certificate%20of%20Resale-Residential(1).pdf"
+  }
+ ],
+ "open_questions": [
+  "Which resale fee is charged: $100 (Section 206-2Q) or $75 plus $35 per extra unit (Section 206-2I)?",
+  "How much notice does the Building Department need, and how long is the certificate valid?",
+  "Is the portable fire extinguisher still required at resale after P.L.2025, c.19?",
+  "Is a separate Fire Prevention Bureau smoke/CO certificate ever needed for a sale, or does the Building Department's Certificate of Resale cover it?"
+ ],
+ "checked_at": "2026-10-04",
+ "verification": {
+  "fees": 4,
+  "fee_ok": 0,
+  "fee_bad": 0,
+  "fee_unchecked": 4,
+  "quotes": 14,
+  "q_ok": 5,
+  "q_bad": 0,
+  "q_unchecked": 9
+ }
+}

@@ -1,0 +1,222 @@
+{
+ "municipality_code": "1410",
+ "municipality": "East Hanover Township",
+ "county": "MORRIS",
+ "resale_co": {
+  "status": "required",
+  "name": "Residential Certificate of Compliance",
+  "issued_by": "Township of East Hanover Land Use & Construction Departments (Enforcement Officer), after the Fire Prevention Bureau certifies smoke and CO detectors",
+  "lead_time": "",
+  "valid_for": "Expires 6 months from the approved date.",
+  "requirements": [
+   "Certificate of Compliance application signed by the property owner (resale or rental/lease; single family, two-family, or single family with business use; list any past variances)",
+   "Separate Smoke Detector/Carbon Monoxide/Fire Extinguisher application and separate check to the Fire Prevention Bureau",
+   "Inspection by the Enforcement Officer for violations of Township codes and ordinances; violations must be corrected and reinspected (extra fee if more than one reinspection)",
+   "Fire Prevention Bureau documentation of smoke and carbon monoxide detectors must be presented before the certificate is issued"
+  ],
+  "fees": [
+   {
+    "label": "Residential Certificate of Compliance (resale or rental/lease)",
+    "amount": "$100",
+    "quote": "Please make checks or money order payable to the Township of East Hanover in the amount of $100 total for Certificate of Compliance.",
+    "source_url": "https://www.easthanovertownship.com/_Content/pdf/forms/Certificate-of-Compliance-Residential.pdf",
+    "verified": true
+   },
+   {
+    "label": "Certificate of continued use or occupancy, residential (Township code fee schedule, Chapter 79)",
+    "amount": "$75",
+    "quote": "Certificate of continued use or occupancy (residential): $75.",
+    "source_url": "https://ecode360.com/13425947",
+    "verified": null
+   }
+  ],
+  "how_to_apply": "Mail or drop off the Residential Certificate of Compliance packet at the Land Use & Construction Departments, 411 Ridgedale Avenue, East Hanover, NJ 07936: the Certificate of Compliance application with a $100 check or money order payable to the Township of East Hanover, plus the Smoke Detector/CO/Fire Extinguisher application with a separate check (memo: Fire Prevention Bureau). Questions: 973-888-6025.",
+  "application_url": "https://www.easthanovertownship.com/_Content/pdf/forms/Certificate-of-Compliance-Residential.pdf",
+  "department_url": "https://www.easthanovertownship.com/Departments/construction-department",
+  "phone": "973-888-6025",
+  "email": "",
+  "contact_name": "Thomas Pershouse",
+  "contact_title": "Construction Official / Building Inspector and Zoning Official",
+  "evidence": [
+   {
+    "url": "https://www.easthanovertownship.com/_Content/pdf/forms/Certificate-of-Compliance-Residential.pdf",
+    "quote": "In accordance with East Hanover Township Ordinance 119-A-5 and 26-36A(9), any real property containing a building must secure a Certificate of Compliance before sale, lease or rental of said property.",
+    "doc_date": "2025-06-12 (Rev. 06-12-25)",
+    "via": "pdf",
+    "verified": true
+   },
+   {
+    "url": "https://www.easthanovertownship.com/_Content/pdf/forms/Certificate-of-Compliance-Residential.pdf",
+    "quote": "Expires 6 months from approved date.",
+    "doc_date": "2025-06-12",
+    "via": "pdf",
+    "verified": true
+   },
+   {
+    "url": "https://www.easthanovertownship.com/_Content/pdf/forms/Certificate-of-Compliance-Residential.pdf",
+    "quote": "Applications and checks can be mailed or dropped off at the above address.",
+    "doc_date": "2025-06-12",
+    "via": "pdf",
+    "verified": true
+   },
+   {
+    "url": "https://ecode360.com/13427178",
+    "quote": "On and after the date of adoption of this chapter, it shall be a violation to sell or lease any real property containing a building unless the owner of the same has secured a certificate of compliance.",
+    "doc_date": "",
+    "via": "page",
+    "verified": null
+   },
+   {
+    "url": "https://ecode360.com/13427178",
+    "quote": "When the premises is found to be violation free and upon presentation by the owner of documentation from the Fire Prevention Bureau certifying the presence of smoke-sensitive and carbon monoxide detectors, a certificate of compliance shall be issued.",
+    "doc_date": "",
+    "via": "page",
+    "verified": null
+   },
+   {
+    "url": "https://www.easthanovertownship.com/Departments/construction-department",
+    "quote": "Construction Official / Building Inspector",
+    "doc_date": "2026-10-04 (page fetched)",
+    "via": "page",
+    "verified": true
+   }
+  ],
+  "confidence": "high",
+  "notes": "Township code Chapter 119A (Property Maintenance), Section 119A-5, read through the ecode360 print view, makes it a violation to sell or lease a building without a certificate of compliance; Section 119A-8 also bars selling property with uncorrected noticed violations without the Enforcement Officer's approval. The form (Rev. 06-12-25) charges $100; the Chapter 79 fee schedule still lists $75 for a residential certificate of continued use or occupancy. The packet gives the office phone 973-888-6025 (fax 973-428-3026); the Construction Department page lists 973-428-3026 as the Construction Office number. A certificate of compliance is not required for refinancing. Landlord registration is a rental-only item."
+ },
+ "fire_cert": {
+  "requirements": [
+   "Smoke detectors on every level (basement, first floor, second floor; not crawl spaces or unfinished attics) and in every separate sleeping area; basement detector near the bottom of the stairs",
+   "Battery smoke alarms must be 10-year sealed units (UL 217); hardwired alarms from original construction cannot be replaced with battery units; homes built in or after 1991 need hardwired interconnected alarms with battery backup inside and outside bedrooms and on each level",
+   "Carbon monoxide alarm near the sleeping areas in homes with a fuel-burning device or attached garage (battery, hardwired or plug-in, UL 2034)",
+   "ABC fire extinguisher, no larger than 10 lbs, mounted within 10 feet of the kitchen in the path of egress, top no more than 5 feet up, new or tagged by a licensed contractor, with owner's manual (Township form and code still list it)"
+  ],
+  "authorities": [
+   {
+    "name": "East Hanover Fire Department, Bureau of Fire Prevention",
+    "type": "municipal_fire_bureau",
+    "area_served": "Entire township",
+    "lead_time": "Fee is based on business days before the change of occupant: more than 10 business days for the lowest fee. If the change of occupancy does not happen within 6 months, a new application is needed.",
+    "fees": [
+     {
+      "label": "Smoke/CO/extinguisher certificate, application more than 10 business days before change of occupant",
+      "amount": "$100.00",
+      "quote": "Application received more than ten (10) business days before a change of occupant, and the fee shall be one hundred dollars ($100.00).",
+      "source_url": "https://www.easthanovertownship.com/_Content/pdf/forms/Certificate-of-Compliance-Residential.pdf",
+      "verified": true
+     },
+     {
+      "label": "Application 4 to 10 business days before change of occupant",
+      "amount": "$125.00",
+      "quote": "Application received four (4) to ten (10) business days before a change of occupant, the fee shall be one hundred and twenty-five dollars ($125.00).",
+      "source_url": "https://www.easthanovertownship.com/_Content/pdf/forms/Certificate-of-Compliance-Residential.pdf",
+      "verified": true
+     },
+     {
+      "label": "Application less than 4 days before change of occupant",
+      "amount": "$150.00",
+      "quote": "Application received less than four (4) days before a change of occupant, and the fee shall be one hundred and fifty dollars ($150.00).",
+      "source_url": "https://www.easthanovertownship.com/_Content/pdf/forms/Certificate-of-Compliance-Residential.pdf",
+      "verified": true
+     },
+     {
+      "label": "Request for certification on the same day as the settlement",
+      "amount": "$200.00",
+      "quote": "Application received for same day as the settlement; the fee shall be two hundred dollars ($200.00).",
+      "source_url": "https://www.easthanovertownship.com/_Content/pdf/forms/Certificate-of-Compliance-Residential.pdf",
+      "verified": true
+     },
+     {
+      "label": "Re-inspection (missing/outdated/non-working equipment, no one present, or cancellation under 24 hours)",
+      "amount": "$50.00",
+      "quote": "less than twenty-four (24) hours, the fee shall be fifty dollars ($50.00).",
+      "source_url": "https://www.easthanovertownship.com/_Content/pdf/forms/Certificate-of-Compliance-Residential.pdf",
+      "verified": true
+     }
+    ],
+    "how_to_apply": "Submit the Application for Certification of Smoke Detector, Carbon Monoxide Alarm & Portable Fire Extinguisher Compliance (part of the Residential Certificate of Compliance packet) with a separate check or money order payable to Township of East Hanover, memo 'Fire Prevention Bureau'. The certificate is non-transferable and the fee is not refundable.",
+    "application_url": "https://www.easthanovertownship.com/_Content/pdf/forms/Certificate-of-Compliance-Residential.pdf",
+    "department_url": "https://www.easthanovertownship.com/departments/fire-department-bureau-of-fire-prevention",
+    "phone": "973-887-6854",
+    "email": "jamesc@easthanovertownship.com",
+    "contact_name": "James C. Cavezza",
+    "contact_title": "Bureau Chief/Fire Marshal (Fire Official)",
+    "evidence": [
+     {
+      "url": "https://www.easthanovertownship.com/_Content/pdf/forms/Certificate-of-Compliance-Residential.pdf",
+      "quote": "FEE: CSACMAPFEC (Smoke Alarm Inspection) shall be based upon the amount of time before the change of occupant is expected, as per the following: § 26-36A(9)",
+      "doc_date": "2025-06-12",
+      "via": "pdf",
+      "verified": true
+     },
+     {
+      "url": "https://www.easthanovertownship.com/_Content/pdf/forms/Certificate-of-Compliance-Residential.pdf",
+      "quote": "If the change of occupancy does not occur within 6 months, a new application is required.",
+      "doc_date": "2025-06-12",
+      "via": "pdf",
+      "verified": true
+     },
+     {
+      "url": "https://ecode360.com/13420491",
+      "quote": "Request for certification on the same day as the settlement; the fee shall be $200.",
+      "doc_date": "",
+      "via": "page",
+      "verified": null
+     },
+     {
+      "url": "https://www.easthanovertownship.com/departments/fire-department-bureau-of-fire-prevention",
+      "quote": "Bureau Chief/Fire Marshal",
+      "doc_date": "2026-10-04 (page fetched)",
+      "via": "page",
+      "verified": null
+     },
+     {
+      "url": "https://nj.gov/dca/dfs/pdf/ANNUAL%20REGISTRY/THIRD%20QUARTER%20LEA%20REGISTRY%202026.pdf",
+      "quote": "F East Hanover Township",
+      "doc_date": "2026-07",
+      "via": "pdf",
+      "verified": true
+     },
+     {
+      "url": "https://www.nj.gov/dca/dfs/pdf/fire%20directory_county%20summary/fire_code_enforcement_director.pdf",
+      "quote": "LEAID: 1410-001 Enf Auth. Fire Dept Fire Official James Cavezza Phone (973) 887-6854 Addr: 323 Ridgedale Ave - PO Box 34 East Hanover NJ 07936 ... Email jamesc@easthanovertownship.com",
+      "doc_date": "2026-07-17 (survey date)",
+      "via": "state_directory",
+      "verified": null
+     }
+    ],
+    "confidence": "high"
+   }
+  ],
+  "notes": "Fees are tiered by business days before the change of occupant (Township code Section 26-36A(9) and the June 2025 form). The Township form and code still require a portable fire extinguisher, which the state dropped from the sale certificate in February 2025 (P.L.2025, c.19); confirm with the Bureau. Phone and email are from the NJ DCA fire directory; the Township fire page lists names only. Code Section 26-36A(10) also lists a $50 certificate of fire code status for a CO, CH or CA, which is for construction certificates, not resales."
+ },
+ "other_items": [
+  {
+   "label": "Uncorrected violations",
+   "detail": "Selling property with uncorrected violations that the owner was notified of requires the Enforcement Officer's prior approval (Township code 119A-8).",
+   "source_url": "https://ecode360.com/13427178"
+  },
+  {
+   "label": "Water and sewer account",
+   "detail": "A new water/sewer service application must be made and approved by the Township on any change in ownership when the owner is the customer (Township code 159-75).",
+   "source_url": "https://ecode360.com/13428393"
+  }
+ ],
+ "open_questions": [
+  "How far ahead must the Certificate of Compliance inspection be booked, and is there a short-notice fee?",
+  "Is the $100 form fee current, or the $75 listed in the Chapter 79 fee schedule?",
+  "Is the portable fire extinguisher still required at resale after P.L.2025, c.19?",
+  "Is a final water/sewer meter reading needed before closing?"
+ ],
+ "checked_at": "2026-10-04",
+ "verification": {
+  "fees": 7,
+  "fee_ok": 6,
+  "fee_bad": 0,
+  "fee_unchecked": 1,
+  "quotes": 12,
+  "q_ok": 7,
+  "q_bad": 0,
+  "q_unchecked": 5
+ }
+}

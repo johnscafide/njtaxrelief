@@ -1,0 +1,237 @@
+{
+ "municipality_code": "1404",
+ "municipality": "Chatham Borough",
+ "county": "MORRIS",
+ "checked_at": "2026-10-04",
+ "resale_co": {
+  "status": "required",
+  "name": "Residential Certificate of Continuing Occupancy (CCO)",
+  "issued_by": "Borough of Chatham, Office of the Borough Clerk (CCO inspection with the smoke/CO check)",
+  "lead_time": "CCOs take about 3 weeks to process after a complete application (the Borough page says two to three weeks, not counting the inspection). Inspections are Thursdays between 11 am and 1 pm, scheduled once permits are closed and utilities are current.",
+  "valid_for": "",
+  "requirements": [
+   "Residential CCO application (Sale) signed by the owner or authorized agent",
+   "For a sale: proof of no open permits (a 'Permit Summary' requested from the Clerk through an OPRA request)",
+   "For a sale: Tax Collector sign-off on page 2 that Lead Line Replacement fees are paid in full",
+   "Utilities Clerk sign-off that water/sewer utilities are paid in full",
+   "Inspection checklist items: street number, smoke detectors, carbon monoxide, furnace and flues, hot water heater, electric panel, secondary power source, garage door opener, temporary wiring, cover plates, sump pump, handrails, sidewalk, general safety",
+   "Certificate from the service provider if the home is on a central station police or fire alarm system"
+  ],
+  "fees": [
+   {
+    "label": "Residential CCO application",
+    "amount": "$100",
+    "quote": "Fee: $100",
+    "source_url": "https://www.chathamborough.org/applications/156-continuing-certificate-of-occupancy-permit-residential-property-application-fillable-form/file",
+    "verified": true
+   },
+   {
+    "label": "Certificate of continued occupancy (Borough Code §111-4)",
+    "amount": "$100",
+    "quote": "The fee for a certificate of continued occupancy shall be $100.",
+    "source_url": "https://ecode360.com/6792203",
+    "verified": null
+   }
+  ],
+  "how_to_apply": "Fill in the Residential CCO Application, attach the open-permit summary, Tax Collector and Utilities Clerk sign-offs and the inspection checklist, and submit it to the Borough Clerk's Office, 54 Fairmount Avenue, with $100 by check or cash payable to Borough of Chatham. The Clerk's Office schedules the Thursday inspection and issues the CCO once the signed checklist and proof of closed permits are in.",
+  "application_url": "https://www.chathamborough.org/applications/156-continuing-certificate-of-occupancy-permit-residential-property-application-fillable-form/file",
+  "department_url": "https://www.chathamborough.org/departments/construction",
+  "phone": "973-635-0674 ext.210",
+  "email": "clerkadmin@chathamborough.org",
+  "contact_name": "Hillary Singer",
+  "contact_title": "Assistant to the Borough Clerk (handles CCO inspections)",
+  "evidence": [
+   {
+    "url": "https://www.chathamborough.org/applications/156-continuing-certificate-of-occupancy-permit-residential-property-application-fillable-form/file",
+    "quote": "Residential Certificate of Continuing Occupancy (CCO) Application",
+    "doc_date": "",
+    "via": "pdf",
+    "verified": true
+   },
+   {
+    "url": "https://www.chathamborough.org/applications/156-continuing-certificate-of-occupancy-permit-residential-property-application-fillable-form/file",
+    "quote": "Fee: $100",
+    "doc_date": "",
+    "via": "pdf",
+    "verified": true
+   },
+   {
+    "url": "https://www.chathamborough.org/applications/156-continuing-certificate-of-occupancy-permit-residential-property-application-fillable-form/file",
+    "quote": "Inspections are held on Thursdays between 11am and 1pm",
+    "doc_date": "",
+    "via": "pdf",
+    "verified": true
+   },
+   {
+    "url": "https://www.chathamborough.org/applications/156-continuing-certificate-of-occupancy-permit-residential-property-application-fillable-form/file",
+    "quote": "CCOs take approximately 3 weeks to process after submission of a complete application.",
+    "doc_date": "",
+    "via": "pdf",
+    "verified": true
+   },
+   {
+    "url": "https://www.chathamborough.org/applications/156-continuing-certificate-of-occupancy-permit-residential-property-application-fillable-form/file",
+    "quote": "For Sale only, Tax Collector check on Page 2 indicating Lead Line Replacement fees paid in full.",
+    "doc_date": "",
+    "via": "pdf",
+    "verified": true
+   },
+   {
+    "url": "https://www.chathamborough.org/departments/construction",
+    "quote": "CCO inspections are handled by",
+    "doc_date": "2026-10-04 (page fetched)",
+    "via": "page",
+    "verified": true
+   },
+   {
+    "url": "https://www.chathamborough.org/departments/construction",
+    "quote": "Hillary Singer, Assistant to the Borough Clerk",
+    "doc_date": "2026-10-04 (page fetched)",
+    "via": "page",
+    "verified": true
+   },
+   {
+    "url": "https://www.chathamborough.org/departments/construction",
+    "quote": "All CCO application require ALL open permits to closed and ALL utilities to be current.",
+    "doc_date": "2026-10-04 (page fetched)",
+    "via": "page",
+    "verified": true
+   },
+   {
+    "url": "https://ecode360.com/6792203",
+    "quote": "The fee for a certificate of continued occupancy shall be $100.",
+    "doc_date": "",
+    "via": "search_snippet",
+    "verified": null
+   },
+   {
+    "url": "https://ecode360.com/44601858",
+    "quote": "Upon the sale or transfer of ownership of any dwelling, building, or structure within",
+    "doc_date": "",
+    "via": "search_snippet",
+    "verified": null
+   }
+  ],
+  "confidence": "high",
+  "notes": "The Borough's residential CCO form covers both sales and rentals and includes the smoke and CO check. The Borough Code fee (§111-4) and the lead service line section (§267-25, proof of replacement needed for a certificate of occupancy or continuing occupancy on sale) were seen only in ecode360 search results. No ordinance sentence requiring a CCO on every sale was read in full, but the Borough application and web page treat it as required for sales. Rental-only items on the form (rental registration, liability insurance, lead-safe certificate with $50 filing fee) do not apply to a sale. Construction permits for Chatham Borough are handled by the Madison Building Department."
+ },
+ "fire_cert": {
+  "requirements": [
+   "Smoke detectors with 10-year sealed batteries on each level, on the ceiling at the base of the stairs and not more than ten feet from each bedroom",
+   "Carbon monoxide detectors within ten feet of each bedroom; combination smoke/CO units allowed",
+   "Certificate from the alarm company if the home is connected to a central station alarm system",
+   "Secondary power source warning label within 18 inches of the main electrical panel and meter"
+  ],
+  "authorities": [
+   {
+    "name": "Borough of Chatham (smoke/CO check on the Clerk's CCO inspection); fire code enforcing agency: Chatham Borough Bureau of Fire Safety (Code Enforcement)",
+    "type": "municipal_fire_bureau",
+    "area_served": "Entire borough",
+    "lead_time": "Same as the CCO: about 3 weeks; inspections Thursdays 11 am to 1 pm.",
+    "fees": [
+     {
+      "label": "Smoke/CO check within the residential CCO (same fee, not an extra charge)",
+      "amount": "$100",
+      "quote": "Fee: $100",
+      "source_url": "https://www.chathamborough.org/applications/156-continuing-certificate-of-occupancy-permit-residential-property-application-fillable-form/file",
+      "verified": true
+     }
+    ],
+    "how_to_apply": "Part of the Residential CCO application filed with the Borough Clerk's Office. Fire safety questions go to the Bureau of Fire Safety, 54 Fairmount Ave (hours by appointment).",
+    "application_url": "https://www.chathamborough.org/applications/156-continuing-certificate-of-occupancy-permit-residential-property-application-fillable-form/file",
+    "department_url": "https://www.chathamborough.org/departments/fire-prevention",
+    "phone": "973-701-6815",
+    "email": "firemarshal@chathamborough.org",
+    "contact_name": "Scott Loyek",
+    "contact_title": "Fire Marshal",
+    "evidence": [
+     {
+      "url": "https://www.chathamborough.org/applications/156-continuing-certificate-of-occupancy-permit-residential-property-application-fillable-form/file",
+      "quote": "New Jersey Fire Code mandates the following when selling or renting your home:",
+      "doc_date": "",
+      "via": "pdf",
+      "verified": true
+     },
+     {
+      "url": "https://www.chathamborough.org/applications/156-continuing-certificate-of-occupancy-permit-residential-property-application-fillable-form/file",
+      "quote": "All Smoke detectors are required to have a 10-year sealed battery",
+      "doc_date": "",
+      "via": "pdf",
+      "verified": true
+     },
+     {
+      "url": "https://www.chathamborough.org/departments/fire-prevention",
+      "quote": "Scott Loyek, Fire Marshall",
+      "doc_date": "2026-10-04 (page fetched)",
+      "via": "page",
+      "verified": true
+     },
+     {
+      "url": "https://www.chathamborough.org/departments/fire-prevention",
+      "quote": "Phone: 973-701-6815",
+      "doc_date": "2026-10-04 (page fetched)",
+      "via": "page",
+      "verified": true
+     },
+     {
+      "url": "https://www.nj.gov/dca/dfs/pdf/fire%20directory_county%20summary/fire_code_enforcement_director.pdf",
+      "quote": "LEAID: 1404-001 SMOKE DETECTOR COMPLIANCE Name: Chatham Boro Code Enf Enf Auth. Municipal Addr: 54 Fairmount Av ... Fire Official Scott Loyek Phone (973) 635-0674 ... Email firemarshal@chathamborough.org",
+      "doc_date": "2025 (survey date 1/13/2025)",
+      "via": "state_directory",
+      "verified": null
+     },
+     {
+      "url": "https://nj.gov/dca/dfs/pdf/ANNUAL%20REGISTRY/THIRD%20QUARTER%20LEA%20REGISTRY%202026.pdf",
+      "quote": "M Chatham Borough",
+      "doc_date": "2026-07",
+      "via": "pdf",
+      "verified": true
+     }
+    ],
+    "confidence": "medium"
+   }
+  ],
+  "notes": "No separate smoke certificate application or fee was found; the CCO checklist has a smoke detector line with 'Certificate required? Yes / No', which suggests the Borough issues the smoke/CO certificate through the CCO inspection. The Bureau of Fire Safety also lists Fire Inspector AJ Sweetin (fireinspector@chathamborough.org). The form does not list a fire extinguisher. State law (P.L.2025, c.19, signed February 3, 2025) dropped the portable fire extinguisher from the state sale certificate."
+ },
+ "other_items": [
+  {
+   "label": "Lead water service line fees",
+   "detail": "For a sale, the Tax Collector must confirm Lead Line Replacement fees are paid in full; Borough Code §267-25 ties proof of lead service line replacement to the CCO on a sale or transfer.",
+   "source_url": "https://www.chathamborough.org/applications/156-continuing-certificate-of-occupancy-permit-residential-property-application-fillable-form/file"
+  },
+  {
+   "label": "Utilities paid",
+   "detail": "Utilities Clerk must confirm water/sewer accounts are paid in full (973-635-0674 ext. 214).",
+   "source_url": "https://www.chathamborough.org/applications/156-continuing-certificate-of-occupancy-permit-residential-property-application-fillable-form/file"
+  },
+  {
+   "label": "Open permits",
+   "detail": "Proof of no open permits (Permit Summary through an OPRA request) is required for a sale; all permits must be closed before the CCO is issued.",
+   "source_url": "https://www.chathamborough.org/applications/156-continuing-certificate-of-occupancy-permit-residential-property-application-fillable-form/file"
+  },
+  {
+   "label": "Sump pump",
+   "detail": "Sump pumps may not discharge into the sanitary sewer and must have sturdy pit covers.",
+   "source_url": "https://www.chathamborough.org/applications/156-continuing-certificate-of-occupancy-permit-residential-property-application-fillable-form/file"
+  },
+  {
+   "label": "Sidewalk",
+   "detail": "Sidewalk condition is on the CCO checklist.",
+   "source_url": "https://www.chathamborough.org/applications/156-continuing-certificate-of-occupancy-permit-residential-property-application-fillable-form/file"
+  }
+ ],
+ "open_questions": [
+  "Does the Borough issue a separate smoke/CO certificate document, or only the CCO?",
+  "How long is the CCO valid if the closing moves?"
+ ],
+ "verification": {
+  "fees": 3,
+  "fee_ok": 2,
+  "fee_bad": 0,
+  "fee_unchecked": 1,
+  "quotes": 16,
+  "q_ok": 13,
+  "q_bad": 0,
+  "q_unchecked": 3
+ }
+}

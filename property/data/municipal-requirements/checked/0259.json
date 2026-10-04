@@ -1,0 +1,202 @@
+{
+ "municipality_code": "0259",
+ "municipality": "South Hackensack Township",
+ "county": "BERGEN",
+ "resale_co": {
+  "status": "required",
+  "name": "Certificate of Inspection (COI) / Certificate of Continued Occupancy, with Zoning Permit",
+  "issued_by": "South Hackensack Township Building Department",
+  "lead_time": "Contact the Building Department at least 7 days before closing to schedule the inspections and correct any issues.",
+  "valid_for": "",
+  "requirements": [
+   "Zoning Permit",
+   "Smoke and carbon monoxide inspection",
+   "Certificate of Inspection (COI)",
+   "Portable fire extinguisher within 10 feet of the kitchen (Fire Prevention page still lists it)"
+  ],
+  "fees": [
+   {
+    "label": "Zoning Permit, owner occupied property",
+    "amount": "$25",
+    "quote": "$25 - owner occupied property",
+    "source_url": "https://southhackensacknj.org/building/cco.php",
+    "verified": true
+   },
+   {
+    "label": "Zoning Permit, non-owner occupied property",
+    "amount": "$75",
+    "quote": "$75 - non-owner occupied property",
+    "source_url": "https://southhackensacknj.org/building/cco.php",
+    "verified": true
+   },
+   {
+    "label": "Certificate of Inspection, one-family residence",
+    "amount": "$25",
+    "quote": "$25 - one-family residence",
+    "source_url": "https://southhackensacknj.org/building/cco.php",
+    "verified": true
+   },
+   {
+    "label": "Certificate of Inspection, two-family residence",
+    "amount": "$50",
+    "quote": "$50 - two-family residence",
+    "source_url": "https://southhackensacknj.org/building/cco.php",
+    "verified": true
+   },
+   {
+    "label": "Certificate of Inspection reinspection",
+    "amount": "$25",
+    "quote": "$25 - reinspect",
+    "source_url": "https://southhackensacknj.org/building/cco.php",
+    "verified": true
+   }
+  ],
+  "how_to_apply": "Contact the Building Department (227 Phillips Ave., (201) 440-1815 x106) at least 7 days before closing to apply for the Zoning Permit, the smoke and carbon monoxide inspection and the Certificate of Inspection. Inspections are by appointment; permit submittal hours are Monday to Friday 9:00am to 4:00pm.",
+  "application_url": "",
+  "department_url": "https://southhackensacknj.org/building/cco.php",
+  "phone": "(201) 440-1815 x106",
+  "email": "BuildingOfficial@southhackensacknj.org",
+  "contact_name": "Armand Marini III",
+  "contact_title": "Construction Official (Zoning Officer: Raymond DeRiso, ZoningOfficer@southhackensacknj.org)",
+  "evidence": [
+   {
+    "url": "https://southhackensacknj.org/building/cco.php",
+    "quote": "If you are selling a home in South Hackensack a Zoning Permit, Smoke & Carbon Monoxide inspection, and Certificate of Inspection (COI) are all required prior to closing.",
+    "doc_date": "2026-10-04 (page fetched)",
+    "via": "page",
+    "verified": true
+   },
+   {
+    "url": "https://southhackensacknj.org/building/cco.php",
+    "quote": "Please contact the Building Department at least 7 days prior to your closing.",
+    "doc_date": "2026-10-04 (page fetched)",
+    "via": "page",
+    "verified": true
+   },
+   {
+    "url": "https://southhackensacknj.org/building/cco.php",
+    "quote": "$50 - two-family residence",
+    "doc_date": "2026-10-04 (page fetched)",
+    "via": "page",
+    "verified": true
+   },
+   {
+    "url": "https://southhackensacknj.org/fireprevention/selling_your_home.php",
+    "quote": "Residents planning to sell homes are required to apply and receive a Certificate of Continued Occupancy from the Building Department.",
+    "doc_date": "2026-10-04 (page fetched)",
+    "via": "page",
+    "verified": true
+   },
+   {
+    "url": "https://southhackensacknj.org/building/",
+    "quote": "Issue Certificates of Continued Occupancy for resale of all properties",
+    "doc_date": "2026-10-04 (page fetched)",
+    "via": "page",
+    "verified": null
+   },
+   {
+    "url": "https://southhackensacknj.org/building/",
+    "quote": "Phone: (201) 440-1815 x106",
+    "doc_date": "2026-10-04 (page fetched)",
+    "via": "page",
+    "verified": null
+   }
+  ],
+  "confidence": "high",
+  "notes": "The Building Department's 'Property Sale: Certificate of Inspection' page lists the three items needed before closing (Zoning Permit, smoke/CO inspection and Certificate of Inspection) and their fees. The Fire Prevention page calls the same thing a Certificate of Continued Occupancy. Zoning permit fee depends on whether the home is owner occupied. No downloadable application or validity period is posted. Staff names come from the Building Department page; the Construction Official email is the generic BuildingOfficial@ address shown there."
+ },
+ "fire_cert": {
+  "requirements": [
+   "At least one smoke detector on every floor including the basement",
+   "Carbon monoxide alarm within 10 feet of all bedroom doors",
+   "Portable fire extinguisher within 10 feet of the kitchen, hung no higher than 5 feet, rated ABC, 2.5 to 10 lbs (page still lists it)"
+  ],
+  "authorities": [
+   {
+    "name": "South Hackensack Building Department with the South Hackensack Fire Prevention Bureau",
+    "type": "municipal_fire_bureau",
+    "area_served": "Entire township",
+    "lead_time": "Contact the Building Department at least 7 days before closing.",
+    "fees": [
+     {
+      "label": "Smoke and carbon monoxide detector inspection",
+      "amount": "$25",
+      "quote": "Smoke & Carbon Monoxide Detector Inspection $25",
+      "source_url": "https://southhackensacknj.org/building/cco.php",
+      "verified": true
+     }
+    ],
+    "how_to_apply": "Request the smoke and carbon monoxide inspection through the Building Department as part of the resale package (Fire Prevention Bureau performs home-sale smoke/CO/extinguisher inspections).",
+    "application_url": "",
+    "department_url": "https://southhackensacknj.org/fireprevention/selling_your_home.php",
+    "phone": "(201) 440-1815 x107",
+    "email": "fireprevention@southhackensacknj.org",
+    "contact_name": "Fred Dressel",
+    "contact_title": "Fire Official",
+    "evidence": [
+     {
+      "url": "https://southhackensacknj.org/building/cco.php",
+      "quote": "Smoke & Carbon Monoxide Detector Inspection $25",
+      "doc_date": "2026-10-04 (page fetched)",
+      "via": "page",
+      "verified": true
+     },
+     {
+      "url": "https://southhackensacknj.org/fireprevention/selling_your_home.php",
+      "quote": "This requires an inspection for smoke detectors, carbon monoxide alarms, and fire extinguishers.",
+      "doc_date": "2026-10-04 (page fetched)",
+      "via": "page",
+      "verified": true
+     },
+     {
+      "url": "https://southhackensacknj.org/fireprevention/",
+      "quote": "Inspect all homes for sale to ensure smoke detectors, carbon monoxide alarms, and fire extinguishers are installed and operating",
+      "doc_date": "2026-10-04 (page fetched)",
+      "via": "page",
+      "verified": null
+     },
+     {
+      "url": "https://nj.gov/dca/dfs/pdf/ANNUAL%20REGISTRY/THIRD%20QUARTER%20LEA%20REGISTRY%202026.pdf",
+      "quote": "F South Hackensack Township",
+      "doc_date": "2026-07",
+      "via": "pdf",
+      "verified": true
+     },
+     {
+      "url": "https://www.nj.gov/dca/dfs/pdf/fire%20directory_county%20summary/fire_code_enforcement_director.pdf",
+      "quote": "Fire Official Fredrick J Dressel IV",
+      "doc_date": "2026-05-18 (survey date)",
+      "via": "state_directory",
+      "verified": null
+     }
+    ],
+    "confidence": "high"
+   }
+  ],
+  "notes": "The township lists a flat $25 smoke and carbon monoxide inspection fee; no tiered short-notice fees are posted. The Fire Prevention pages still list a portable fire extinguisher, which P.L.2025, c.19 removed from the sale certificate in February 2025. The state directory lists Fire Official Fredrick J Dressel IV at (201) 440-1815."
+ },
+ "other_items": [
+  {
+   "label": "Zoning permit",
+   "detail": "A Zoning Permit is required for every home sale: $25 owner occupied, $75 non-owner occupied.",
+   "source_url": "https://southhackensacknj.org/building/cco.php"
+  }
+ ],
+ "open_questions": [
+  "Is there an application form (paper or online) for the resale package, or is it all by phone/in person?",
+  "How long is the Certificate of Inspection valid?",
+  "Does South Hackensack still require a fire extinguisher for sales after P.L.2025, c.19?",
+  "Is there a smoke/CO reinspection fee or a short-notice fee?"
+ ],
+ "checked_at": "2026-10-04",
+ "verification": {
+  "fees": 6,
+  "fee_ok": 6,
+  "fee_bad": 0,
+  "fee_unchecked": 0,
+  "quotes": 11,
+  "q_ok": 7,
+  "q_bad": 0,
+  "q_unchecked": 4
+ }
+}

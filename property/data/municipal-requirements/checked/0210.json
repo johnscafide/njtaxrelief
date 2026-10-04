@@ -1,0 +1,278 @@
+{
+ "municipality_code": "0210",
+ "municipality": "Dumont Borough",
+ "county": "BERGEN",
+ "resale_co": {
+  "status": "required",
+  "name": "Resale and/or Rental Certificate (Certificate of Continued Occupancy, CCO)",
+  "issued_by": "Borough of Dumont Building Department (building and fire inspections)",
+  "lead_time": "Inspections are only on Tuesdays and Thursdays between 9:00 am and 11:00 am. The base fee assumes 11 or more business days' notice; shorter notice costs more. Open permits must be closed before the resale inspection.",
+  "valid_for": "",
+  "requirements": [
+   "All open permits must be inspected and closed before the resale inspection; no unpaid fees or property maintenance violations",
+   "Furnace/boiler flue connections properly sealed at the chimney",
+   "Water heater and mechanical equipment replaced under a permit, with an inspection sticker on the unit",
+   "Sump pump must discharge outside, not into the sanitary sewer",
+   "Anti-tip brackets on kitchen stoves where the maker requires them; rigid exhaust ducts for visible hood/microwave ducts where required",
+   "Electrical outlets, switches, boxes and panels covered; no lamp cords on fixed appliances",
+   "Handrails on 4 or more risers; guards on landings 30 inches above floor or grade and on open basement stairs",
+   "Garage walls and ceilings next to the house must be sheet-rocked",
+   "Pool fences and gates compliant (gates swing out, self-close and latch, latch 54 inches above grade); hot tubs need approved latches",
+   "Lawn and bushes neatly trimmed",
+   "Bedroom and bathroom count must match the property tax record",
+   "Smoke alarm on every level, less than 10 years old, 10-year sealed battery or hardwired",
+   "Carbon monoxide alarm within 10 feet of every bedroom (battery or plug-in)",
+   "For a 1 or 2 family resale, the buyer signs a notarized basement/attic use agreement (no separate dwelling unit, no bedrooms or cooking in the basement or attic)",
+   "Someone over 18 must be home for the inspection window"
+  ],
+  "fees": [
+   {
+    "label": "Resale certificate, single family (building and fire inspections together), 11 or more business days' notice",
+    "amount": "$125",
+    "quote": "$125 - Single Family sale or rental* inspection performed with 11 or more business days' notice.",
+    "source_url": "https://www.dumontnj.gov/api/v1/files/c8614330-8ae4-11f1-adad-c167157e1ec1/download",
+    "verified": true
+   },
+   {
+    "label": "Resale certificate, two family or multi-family, 11 or more business days' notice",
+    "amount": "$135",
+    "quote": "$135 - Two Family or Multi-Family* sale inspection performed with 11 or more business days' notice.",
+    "source_url": "https://www.dumontnj.gov/api/v1/files/c8614330-8ae4-11f1-adad-c167157e1ec1/download",
+    "verified": true
+   },
+   {
+    "label": "Extra charge, inspection with 5 to 10 business days' notice",
+    "amount": "$25",
+    "quote": "Additional $25 - Inspection performed with 5-10 business days' notice.",
+    "source_url": "https://www.dumontnj.gov/api/v1/files/c8614330-8ae4-11f1-adad-c167157e1ec1/download",
+    "verified": true
+   },
+   {
+    "label": "Extra charge, inspection with 1 to 4 business days' notice",
+    "amount": "$100",
+    "quote": "Additional $100 – Inspection performed with 1-4 business days' notice.",
+    "source_url": "https://www.dumontnj.gov/api/v1/files/c8614330-8ae4-11f1-adad-c167157e1ec1/download",
+    "verified": true
+   },
+   {
+    "label": "CCO for sale, one-family (Borough code 182-2, inspection 10 or more days before closing)",
+    "amount": "$75",
+    "quote": "One-family residential: $75, payable to the Borough of Dumont, if the CCO inspection is scheduled 10 or more days' prior to the anticipated closing date.",
+    "source_url": "https://ecode360.com/9554134",
+    "verified": null
+   },
+   {
+    "label": "CCO for sale, two-family (Borough code 182-2, inspection 10 or more days before closing)",
+    "amount": "$85",
+    "quote": "Two-family residential: $85, payable to the Borough of Dumont, if the CCO inspection is scheduled 10 or more days' prior to the anticipated closing date.",
+    "source_url": "https://ecode360.com/9554134",
+    "verified": null
+   },
+   {
+    "label": "Reinspection (Borough code 182-2)",
+    "amount": "$125",
+    "quote": "Reinspection fee: $125 for each reinspection.",
+    "source_url": "https://ecode360.com/9554134",
+    "verified": null
+   }
+  ],
+  "how_to_apply": "Fill out the Borough's Resale and/or Rental Certificate Application completely (single or two family, closing date, buyer and seller, room counts, open permits) and submit it to the Building Department, 50 Washington Avenue, with a check payable to the Borough of Dumont. One payment covers both the building and the fire (smoke/CO) inspections. The Building Department then schedules the inspection for a Tuesday or Thursday morning. Check for open permits first (openpermitinquiry@dumontboro.org).",
+  "application_url": "https://www.dumontnj.gov/api/v1/files/c8614330-8ae4-11f1-adad-c167157e1ec1/download",
+  "department_url": "https://www.dumontnj.gov/building-department",
+  "phone": "201-387-5034",
+  "email": "vbruno@dumontboro.org",
+  "contact_name": "Vincent Bruno",
+  "contact_title": "Construction Official",
+  "evidence": [
+   {
+    "url": "https://www.dumontnj.gov/api/v1/files/c8614330-8ae4-11f1-adad-c167157e1ec1/download",
+    "quote": "Resale and/or Rental Certificate Application",
+    "doc_date": "2026-07-28 (posted; file named 020725)",
+    "via": "pdf",
+    "verified": true
+   },
+   {
+    "url": "https://www.dumontnj.gov/api/v1/files/c8614330-8ae4-11f1-adad-c167157e1ec1/download",
+    "quote": "Please make checks payable to the Borough of Dumont. Payments include both Building and Fire inspections.",
+    "doc_date": "2026-07-28",
+    "via": "pdf",
+    "verified": true
+   },
+   {
+    "url": "https://www.dumontnj.gov/api/v1/files/c8614330-8ae4-11f1-adad-c167157e1ec1/download",
+    "quote": "Are there any open permits on the property? If so, these permits must be inspected and closed prior to the Resale/Rental inspections.",
+    "doc_date": "2026-07-28",
+    "via": "pdf",
+    "verified": true
+   },
+   {
+    "url": "https://www.dumontnj.gov/api/v1/files/c8614330-8ae4-11f1-adad-c167157e1ec1/download",
+    "quote": "One smoke detector on every level, mounted on the wall or ceiling as per the manufacturer instructions",
+    "doc_date": "2026-07-28",
+    "via": "pdf",
+    "verified": true
+   },
+   {
+    "url": "https://ecode360.com/9554134",
+    "quote": "Certificate of continued occupancy (CCO) for the sale of property:",
+    "doc_date": "2025-05-06 (Ord. No. 1653)",
+    "via": "page",
+    "verified": null
+   },
+   {
+    "url": "https://www.dumontnj.gov/building-department",
+    "quote": "Re/Sale & Rental Inspections: Tuesday & Thursday: 9:00am - 11:00am.",
+    "doc_date": "2026-10-04 (page fetched)",
+    "via": "page",
+    "verified": null
+   },
+   {
+    "url": "https://www.dumontnj.gov/building-department",
+    "quote": "DEPARTMENT PHONE:201-387-5034",
+    "doc_date": "2026-10-04 (page fetched)",
+    "via": "page",
+    "verified": null
+   },
+   {
+    "url": "https://www.dumontnj.gov/building-department",
+    "quote": "CONSTRUCTION OFFICIAL:Vincent Bruno",
+    "doc_date": "2026-10-04 (page fetched)",
+    "via": "page",
+    "verified": null
+   }
+  ],
+  "confidence": "high",
+  "notes": "The Borough's current application (posted July 28, 2026) is a combined Resale and/or Rental Certificate covering building and fire (smoke/CO) inspections for one fee. The Borough code fee schedule (Chapter 182, Section 182-2, last amended May 6, 2025 by Ord. No. 1653, read through the ecode360 print view) lists lower CCO fees ($75 one-family, $85 two-family, extra $25 or $100 for short notice) plus a separate $50 smoke detector certificate payable to the Fire Prevention Bureau; the form's higher fees ($125/$135) appear to be the current combined charge. No code section stating the resale requirement itself was found, but the fee schedule and the Borough's own application treat the CCO as required for sales. The construction official's direct line on the Building Department page is 201-387-5028. Rental-only items (lead-safe inspections for rentals, landlord matters) are not resale requirements. The Borough's main website is dumontnj.gov; older dumontboro.org/.com domains did not load."
+ },
+ "fire_cert": {
+  "requirements": [
+   "Smoke alarm on every level, less than 10 years old, with a 10-year sealed battery or hardwired",
+   "Carbon monoxide alarm within 10 feet of every bedroom (battery or plug-in accepted)",
+   "Is the alarm system monitored? (asked on the application)"
+  ],
+  "authorities": [
+   {
+    "name": "Borough of Dumont (municipal fire code enforcement; smoke/CO inspection done with the Building Department resale inspection)",
+    "type": "municipal_fire_bureau",
+    "area_served": "Entire borough",
+    "lead_time": "Inspected together with the resale certificate on Tuesday or Thursday mornings; 11 or more business days' notice for the base fee.",
+    "fees": [
+     {
+      "label": "Resale certificate, single family (building and fire inspections together), 11 or more business days' notice",
+      "amount": "$125",
+      "quote": "$125 - Single Family sale or rental* inspection performed with 11 or more business days' notice.",
+      "source_url": "https://www.dumontnj.gov/api/v1/files/c8614330-8ae4-11f1-adad-c167157e1ec1/download",
+      "verified": true
+     },
+     {
+      "label": "Resale certificate, two family or multi-family, 11 or more business days' notice",
+      "amount": "$135",
+      "quote": "$135 - Two Family or Multi-Family* sale inspection performed with 11 or more business days' notice.",
+      "source_url": "https://www.dumontnj.gov/api/v1/files/c8614330-8ae4-11f1-adad-c167157e1ec1/download",
+      "verified": true
+     },
+     {
+      "label": "Extra charge, inspection with 5 to 10 business days' notice",
+      "amount": "$25",
+      "quote": "Additional $25 - Inspection performed with 5-10 business days' notice.",
+      "source_url": "https://www.dumontnj.gov/api/v1/files/c8614330-8ae4-11f1-adad-c167157e1ec1/download",
+      "verified": true
+     },
+     {
+      "label": "Extra charge, inspection with 1 to 4 business days' notice",
+      "amount": "$100",
+      "quote": "Additional $100 – Inspection performed with 1-4 business days' notice.",
+      "source_url": "https://www.dumontnj.gov/api/v1/files/c8614330-8ae4-11f1-adad-c167157e1ec1/download",
+      "verified": true
+     },
+     {
+      "label": "Smoke detector compliance certificate (Borough code 182-2, payable to Dumont Fire Prevention Bureau)",
+      "amount": "$50",
+      "quote": "Smoke detector compliance certificate: $50, payable to Dumont Fire Prevention Bureau.",
+      "source_url": "https://ecode360.com/9554134",
+      "verified": null
+     }
+    ],
+    "how_to_apply": "Use the Borough's combined Resale and/or Rental Certificate Application; the one payment covers both the building and fire inspections.",
+    "application_url": "https://www.dumontnj.gov/api/v1/files/c8614330-8ae4-11f1-adad-c167157e1ec1/download",
+    "department_url": "https://www.dumontnj.gov/building-department",
+    "phone": "201-387-5034",
+    "email": "dgluckman@dumontboro.org",
+    "contact_name": "David H Gluckman",
+    "contact_title": "Fire Official (NJ DCA fire directory)",
+    "evidence": [
+     {
+      "url": "https://www.dumontnj.gov/api/v1/files/c8614330-8ae4-11f1-adad-c167157e1ec1/download",
+      "quote": "Payments include both Building and Fire inspections.",
+      "doc_date": "2026-07-28",
+      "via": "pdf",
+      "verified": true
+     },
+     {
+      "url": "https://www.dumontnj.gov/api/v1/files/c8614330-8ae4-11f1-adad-c167157e1ec1/download",
+      "quote": "One Carbon Monoxide Detector mounted on the wall or ceiling within 10’ of every bedroom (battery or plug-in type accepted)",
+      "doc_date": "2026-07-28",
+      "via": "pdf",
+      "verified": true
+     },
+     {
+      "url": "https://ecode360.com/9554134",
+      "quote": "Smoke detector compliance certificate: $50, payable to Dumont Fire Prevention Bureau.",
+      "doc_date": "2025-05-06 (Ord. No. 1653)",
+      "via": "page",
+      "verified": null
+     },
+     {
+      "url": "https://nj.gov/dca/dfs/pdf/ANNUAL%20REGISTRY/THIRD%20QUARTER%20LEA%20REGISTRY%202026.pdf",
+      "quote": "M Dumont Borough",
+      "doc_date": "2026-07",
+      "via": "pdf",
+      "verified": true
+     },
+     {
+      "url": "https://www.nj.gov/dca/dfs/pdf/fire%20directory_county%20summary/fire_code_enforcement_director.pdf",
+      "quote": "LEAID: 0210-001 Enf Auth. Municipal Fire Official David H Gluckman Phone (201) 310-1482 Addr: 50 Washington Avenue Dumont NJ 07628 ... Email dgluckman@dumontboro.org",
+      "doc_date": "2026-02-19 (survey date)",
+      "via": "state_directory",
+      "verified": null
+     }
+    ],
+    "confidence": "high"
+   }
+  ],
+  "notes": "Dumont is a municipal (M) fire code enforcing agency. The smoke/CO check for a sale is folded into the Building Department's combined resale certificate, so there is no separate fire application on the Borough site. The code fee schedule still lists a separate $50 smoke detector compliance certificate payable to the Fire Prevention Bureau; confirm which applies. The current form does not mention a fire extinguisher (consistent with P.L.2025, c.19). The state directory lists the fire official at (201) 310-1482 and a second number (201) 387-5041."
+ },
+ "other_items": [
+  {
+   "label": "Open permits",
+   "detail": "All open permits must be inspected and closed before the resale inspection. Questions about older permits: openpermitinquiry@dumontboro.org.",
+   "source_url": "https://www.dumontnj.gov/api/v1/files/c8614330-8ae4-11f1-adad-c167157e1ec1/download"
+  },
+  {
+   "label": "Basement/attic use agreement",
+   "detail": "For a 1 or 2 family resale the new owner signs a notarized agreement that the basement or attic will not be used as a separate dwelling unit, for bedrooms, or for cooking.",
+   "source_url": "https://www.dumontnj.gov/api/v1/files/c8614330-8ae4-11f1-adad-c167157e1ec1/download"
+  },
+  {
+   "label": "Sump pump",
+   "detail": "Sump pumps must discharge outside and cannot be connected to the sanitary sewer; checked during the resale inspection.",
+   "source_url": "https://www.dumontnj.gov/api/v1/files/c8614330-8ae4-11f1-adad-c167157e1ec1/download"
+  }
+ ],
+ "open_questions": [
+  "Which fee applies today: the application's $125 (single family) / $135 (two family) combined fee, or the code's $75 / $85 CCO plus $50 smoke certificate?",
+  "How long is the resale certificate valid after it is issued?",
+  "Is a temporary certificate available if repairs cannot be finished before closing?"
+ ],
+ "checked_at": "2026-10-04",
+ "verification": {
+  "fees": 12,
+  "fee_ok": 8,
+  "fee_bad": 0,
+  "fee_unchecked": 4,
+  "quotes": 13,
+  "q_ok": 7,
+  "q_bad": 0,
+  "q_unchecked": 6
+ }
+}

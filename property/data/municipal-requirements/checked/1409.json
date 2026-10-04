@@ -1,0 +1,213 @@
+{
+ "municipality_code": "1409",
+ "municipality": "Dover",
+ "county": "MORRIS",
+ "resale_co": {
+  "status": "required",
+  "name": "Certificate of Compliance (C of C), residential",
+  "issued_by": "Town of Dover Code Enforcement and Inspection Department",
+  "lead_time": "Apply at least 10 working days before the closing (the Town recommends applying right after attorney review). Inspections are Wednesdays 9 am to 12 pm. A final C of C takes at least three working days to process after a clean inspection and is never issued the same day.",
+  "valid_for": "A temporary C of C may be issued for 30 days when violations remain (buyer must agree in writing to fix them within 30 days)",
+  "requirements": [
+   "Complete the Certificate of Compliance Application (Residential) and pay the fee before an inspection is scheduled",
+   "Full interior and exterior property maintenance inspection, including room measurements to set sleeping capacity",
+   "All open construction permits must be inspected and approved before the C of C is issued",
+   "Checks include sidewalks, drainage, accessory structures, unlicensed vehicles, roofs, gutters, windows, stairs and railings, bathroom and dryer venting, plumbing and sump pump discharge, heating, GFCI and electrical hazards, egress, sanitation and pests",
+   "Smoke and carbon monoxide alarm certification from the Fire Inspector is required before the C of C is issued (inspected the same day)",
+   "Owners who do not live at the property must file a Non-Owner Occupied Premises form"
+  ],
+  "fees": [
+   {
+    "label": "Certificate of Compliance, detached single family dwelling",
+    "amount": "$75.00",
+    "quote": "Residential detached Single Family dwelling: ................. $75.00 per dwelling unit",
+    "source_url": "https://www.dover.nj.us/documents/Residential%20COC-Smoke_Carbon%20Alarm%20Cert-Notice-Guideline%20Packet.pdf",
+    "verified": true
+   },
+   {
+    "label": "Certificate of Compliance, two family dwelling",
+    "amount": "$75.00 for the first unit plus $35.00 per additional unit",
+    "quote": "Residential Two (2) Family or Multi-Family dwelling: ...... $75.00 for the first dwelling unit plus $35.00 per additional dwelling unit",
+    "source_url": "https://www.dover.nj.us/documents/Residential%20COC-Smoke_Carbon%20Alarm%20Cert-Notice-Guideline%20Packet.pdf",
+    "verified": true
+   },
+   {
+    "label": "Re-inspection after the first free re-inspection",
+    "amount": "$50.00",
+    "quote": "will be charged $50.00 per re-inspection visit.",
+    "source_url": "https://www.dover.nj.us/documents/Residential%20COC-Smoke_Carbon%20Alarm%20Cert-Notice-Guideline%20Packet.pdf",
+    "verified": true
+   }
+  ],
+  "how_to_apply": "Fill out the Certificate of Compliance Application - Residential (check 'Sale') and the Fire Department's smoke and CO alarm application, both in the Town's Residential C of C packet, and submit them with the fee to Code Enforcement, 100 Princeton Ave. (mail: 37 North Sussex Street), Dover, NJ 07801, (973) 366-2200 ext. 2114. Pay by cash or check. The C of C and alarm inspections are scheduled together on a Wednesday morning.",
+  "application_url": "https://www.dover.nj.us/documents/Residential%20COC-Smoke_Carbon%20Alarm%20Cert-Notice-Guideline%20Packet.pdf",
+  "department_url": "https://www.dover.nj.us/",
+  "phone": "973-366-2200 ext. 2114",
+  "email": "wisselin@dover.nj.us",
+  "contact_name": "William J. Isselin",
+  "contact_title": "Chief Code Enforcement Officer",
+  "evidence": [
+   {
+    "url": "https://dover.nj.us/FCpdf/Inspection%20Procedure%20Handout%20%28Res%29%202%2E19%2E14%2Epdf",
+    "quote": "No owner, agent, or any person shall rent or lease or sell or in any way deliver up for use, change of use or occupancy any business, building, dwelling unit, lodging unit, rooming unit, or boarding unit, until a Certificate of Compliance has been issued by the Code Official.",
+    "doc_date": "Rev 2/19/2014",
+    "via": "pdf",
+    "verified": true
+   },
+   {
+    "url": "https://dover.nj.us/FCpdf/Inspection%20Procedure%20Handout%20%28Res%29%202%2E19%2E14%2Epdf",
+    "quote": "Applications must be submitted no less than ten (10) working days prior to the anticipated closing date.",
+    "doc_date": "Rev 2/19/2014",
+    "via": "pdf",
+    "verified": true
+   },
+   {
+    "url": "https://dover.nj.us/FCpdf/Inspection%20Procedure%20Handout%20%28Res%29%202%2E19%2E14%2Epdf",
+    "quote": "A minimum of three working days is required to process a Final Certificate of Compliance.",
+    "doc_date": "Rev 2/19/2014",
+    "via": "pdf",
+    "verified": true
+   },
+   {
+    "url": "https://dover.nj.us/FCpdf/Inspection%20Procedure%20Handout%20%28Res%29%202%2E19%2E14%2Epdf",
+    "quote": "All outstanding construction permits must be inspected and approved prior to a C of C being issued.",
+    "doc_date": "Rev 2/19/2014",
+    "via": "pdf",
+    "verified": true
+   },
+   {
+    "url": "https://www.dover.nj.us/documents/Residential%20COC-Smoke_Carbon%20Alarm%20Cert-Notice-Guideline%20Packet.pdf",
+    "quote": "Certificate is requested as a result of a: Sale",
+    "doc_date": "Form Date 3/17/23",
+    "via": "pdf",
+    "verified": true
+   },
+   {
+    "url": "https://www.dover.nj.us/documents/Residential%20COC-Smoke_Carbon%20Alarm%20Cert-Notice-Guideline%20Packet.pdf",
+    "quote": "I also understand that the above fees include the cost of the initial inspection plus one (1) re-inspection.",
+    "doc_date": "Form Date 3/17/23",
+    "via": "pdf",
+    "verified": true
+   },
+   {
+    "url": "https://www.dover.nj.us/documents/Residential%20COC-Smoke_Carbon%20Alarm%20Cert-Notice-Guideline%20Packet.pdf",
+    "quote": "Please be advised that the C of C will not be issued until a Smoke and Carbon Monoxide Alarm Certification has been issued and provided to the Code Enforcement Department.",
+    "doc_date": "2026",
+    "via": "pdf",
+    "verified": true
+   }
+  ],
+  "confidence": "high",
+  "notes": "The Town's Residential C of C packet (application form dated 3/17/23 plus a 2026 notice) and the Code Enforcement procedure handout (rev 2/19/2014) require a Certificate of Compliance before any sale. The current application says extra re-inspections are $50.00 each, while the older 2014 handout says $75.00; the newer form is used here. The application also lists a $20.00 Lead Hazard Assistance Fee per unit for rental units only. Temporary C of Cs (30 days) are possible when the owner will not fix violations, with a buyer letter accepting responsibility. Rental property registration and lead-safe inspections are rental-only."
+ },
+ "fire_cert": {
+  "requirements": [
+   "Homes built before 1977: 10-year sealed lithium battery smoke detectors, one on each level including the basement (not unfinished attics) and one within 10 feet of each bedroom",
+   "Homes built 1977 to 1990: 120-volt hardwired smoke alarms with battery backup (interconnected in homes built 1984 to 1989), same locations",
+   "Homes built 1990 to present: 120-volt hardwired interconnected smoke alarms with battery backup on each level, within 10 feet of each bedroom, and inside each bedroom",
+   "One carbon monoxide alarm within 10 feet of each bedroom",
+   "All smoke detectors providing coverage must be the same type; smoke detectors over 10 years old must be replaced; fire alarm systems must be tested by a state-certified contractor with an NFPA 72 report",
+   "Homes with additions or renovations: call the fire inspector for specific requirements"
+  ],
+  "authorities": [
+   {
+    "name": "Town of Dover Fire Department, Fire Prevention Bureau",
+    "type": "municipal_fire_bureau",
+    "area_served": "Entire town",
+    "lead_time": "Since February 3, 2026 the Fire Inspector does the alarm inspection at the same date and time as the Code Enforcement C of C inspection, Wednesdays 9 am to 12 pm. The alarm certificate is issued at the inspection if the alarms pass. Re-inspections are arranged directly with the Fire Inspector.",
+    "fees": [],
+    "how_to_apply": "Fill out the Application for One & Two-Family Dwelling Certificate of Smoke and Carbon Monoxide Alarm Compliance (in the Residential C of C packet) and submit it through Code Enforcement with the C of C application. Fire Prevention Bureau: 37 North Sussex Street, Dover, NJ 07801, 973-366-3260.",
+    "application_url": "https://www.dover.nj.us/documents/Residential%20COC-Smoke_Carbon%20Alarm%20Cert-Notice-Guideline%20Packet.pdf",
+    "department_url": "https://www.dover.nj.us/",
+    "phone": "973-366-3260",
+    "email": "jsperry@dover.nj.us",
+    "contact_name": "Jon P. Sperry, Jr.",
+    "contact_title": "Fire Official",
+    "evidence": [
+     {
+      "url": "https://www.dover.nj.us/documents/Residential%20COC-Smoke_Carbon%20Alarm%20Cert-Notice-Guideline%20Packet.pdf",
+      "quote": "Application for One & Two-Family Dwelling Certificate of Smoke and Carbon Monoxide Alarm Compliance",
+      "doc_date": "2026",
+      "via": "pdf",
+      "verified": true
+     },
+     {
+      "url": "https://www.dover.nj.us/documents/Residential%20COC-Smoke_Carbon%20Alarm%20Cert-Notice-Guideline%20Packet.pdf",
+      "quote": "Please be advised that as of February 3, 2026, Code Enforcement will no longer be performing Smoke and Carbon Monoxide Alarms inspections as part of our Certificate of Compliance (C of C) process for changes in tenancy or ownership in one and two-family dwellings.",
+      "doc_date": "2026",
+      "via": "pdf",
+      "verified": true
+     },
+     {
+      "url": "https://www.dover.nj.us/documents/Residential%20COC-Smoke_Carbon%20Alarm%20Cert-Notice-Guideline%20Packet.pdf",
+      "quote": "If the Smoke and Carbon Alarms pass the inspection, the Smoke and Carbon Monoxide Alarm Certification will be issued at the time of the inspection.",
+      "doc_date": "2026",
+      "via": "pdf",
+      "verified": true
+     },
+     {
+      "url": "https://www.dover.nj.us/documents/Residential%20COC-Smoke_Carbon%20Alarm%20Cert-Notice-Guideline%20Packet.pdf",
+      "quote": "Inspections will take place on Wednesdays only from 9am – 12pm.",
+      "doc_date": "2026",
+      "via": "pdf",
+      "verified": true
+     },
+     {
+      "url": "https://nj.gov/dca/dfs/pdf/ANNUAL%20REGISTRY/THIRD%20QUARTER%20LEA%20REGISTRY%202026.pdf",
+      "quote": "F Dover Town",
+      "doc_date": "2026-07",
+      "via": "pdf",
+      "verified": true
+     },
+     {
+      "url": "https://www.nj.gov/dca/dfs/pdf/fire%20directory_county%20summary/fire_code_enforcement_director.pdf",
+      "quote": "Dover Town Enf Auth. Fire Dept Fire Official Jon P Sperry Jr Phone (973) 366-2200 Email jsperry@dover.nj.us",
+      "doc_date": "8/5/2026 (survey date)",
+      "via": "state_directory",
+      "verified": null
+     }
+    ],
+    "confidence": "high"
+   }
+  ],
+  "notes": "Since February 3, 2026 the smoke and CO alarm check is done by the Fire Department's Fire Inspector instead of Code Enforcement, scheduled at the same time as the C of C inspection. No separate fire fee is published in the packet or in the Town code (Chapter 189 Fire Prevention, Chapter 324 Smoke Detectors), so the alarm certificate may be covered by the C of C fee or billed separately; confirm with the Bureau. The alarm application and guidelines do not list a fire extinguisher, although the 2014 Code Enforcement handout mentions fire extinguishers among inspection items."
+ },
+ "other_items": [
+  {
+   "label": "Open permits",
+   "detail": "All outstanding construction permits must be inspected and approved before the C of C is issued.",
+   "source_url": "https://dover.nj.us/FCpdf/Inspection%20Procedure%20Handout%20%28Res%29%202%2E19%2E14%2Epdf"
+  },
+  {
+   "label": "Occupancy calculation",
+   "detail": "Inspectors measure every room to calculate sleeping capacity and check for overcrowding.",
+   "source_url": "https://dover.nj.us/FCpdf/Inspection%20Procedure%20Handout%20%28Res%29%202%2E19%2E14%2Epdf"
+  },
+  {
+   "label": "Non-owner occupied form",
+   "detail": "If the owner's address is not the property, a Non-Owner Occupied Premises form must be filed.",
+   "source_url": "https://www.dover.nj.us/documents/Residential%20COC-Smoke_Carbon%20Alarm%20Cert-Notice-Guideline%20Packet.pdf"
+  },
+  {
+   "label": "Sidewalks and exterior",
+   "detail": "The C of C inspection covers exterior property areas, including sidewalks, drainage, accessory structures and unlicensed vehicles.",
+   "source_url": "https://dover.nj.us/FCpdf/Inspection%20Procedure%20Handout%20%28Res%29%202%2E19%2E14%2Epdf"
+  }
+ ],
+ "open_questions": [
+  "Is there a separate Fire Department fee for the smoke and CO alarm certificate since February 2026, or is it covered by the C of C fee?",
+  "How long is a final C of C valid if the closing is delayed?",
+  "Is the re-inspection fee now $50.00 (2023 form) or $75.00 (2014 handout)?"
+ ],
+ "checked_at": "2026-10-04",
+ "verification": {
+  "fees": 3,
+  "fee_ok": 3,
+  "fee_bad": 0,
+  "fee_unchecked": 0,
+  "quotes": 13,
+  "q_ok": 12,
+  "q_bad": 0,
+  "q_unchecked": 1
+ }
+}

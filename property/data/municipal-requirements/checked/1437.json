@@ -1,0 +1,180 @@
+{
+ "municipality_code": "1437",
+ "municipality": "Victory Gardens Borough",
+ "county": "MORRIS",
+ "resale_co": {
+  "status": "required",
+  "name": "Transfer Certificate of Occupancy (Housing Certificate of Occupancy / Certificate of Continued Occupancy on resale)",
+  "issued_by": "Borough of Victory Gardens Code Enforcement Department (signed off by the Code Enforcement Officer, Fire Official, Electrical and Plumbing Subcode officials)",
+  "lead_time": "",
+  "valid_for": "",
+  "requirements": [
+   "Submit a completed Application for Inspection for Housing Certificate (Resale) with the fee before closing and title change",
+   "Book the inspection when you apply; a checklist is available from the Code Enforcement office",
+   "Someone over 18 must be present for the inspection",
+   "All permits and inspections must be completed before a Housing Certificate of Occupancy is issued",
+   "Inspection is signed by the Code Enforcement Officer, Fire Official, Electrical Subcode and Plumbing Subcode officials",
+   "A temporary certificate is possible only for renovation (property sold as-is, not occupied until permits are taken out and paid for)",
+   "The application must be hand delivered to the Borough at 337 South Salem Street"
+  ],
+  "fees": [
+   {
+    "label": "Housing certificate inspection (resale), per unit (application form)",
+    "amount": "$160.00 per unit",
+    "quote": "Cost: $160.00 per unit",
+    "source_url": "https://storage.googleapis.com/juniper-media-library/517/2025/12/Transfer-of-Ownership-CO-application.pdf",
+    "verified": null
+   },
+   {
+    "label": "Resale inspection, one family dwelling (code)",
+    "amount": "$150",
+    "quote": "One-Family Dwelling$150",
+    "source_url": "https://ecode360.com/36355908",
+    "verified": null
+   },
+   {
+    "label": "Resale inspection, two family dwelling (code)",
+    "amount": "$250",
+    "quote": "Two-Family Dwelling$250",
+    "source_url": "https://ecode360.com/36355908",
+    "verified": null
+   }
+  ],
+  "how_to_apply": "Download the Transfer Certificate of Occupancy application from the Borough's Forms, Permits, Licenses page, fill it in and hand deliver it with a check or money order payable to Borough of Victory Gardens to the Code Enforcement Department, 337 South Salem Street, Victory Gardens (Dover), NJ 07801. Schedule the inspection when you submit it. Phone (973) 366-5312, Monday to Friday 8 to 4.",
+  "application_url": "https://storage.googleapis.com/juniper-media-library/517/2025/12/Transfer-of-Ownership-CO-application.pdf",
+  "department_url": "https://victorygardensnj.gov/code-enforcement",
+  "phone": "973-366-5312",
+  "email": "clerk@victorygardensnj.gov",
+  "contact_name": "",
+  "contact_title": "Code Enforcement Department",
+  "evidence": [
+   {
+    "url": "https://victorygardensnj.gov/code-enforcement",
+    "quote": "A Transfer Certificate of Occupancy must be obtained prior to the closing and title change of real estate property in the Borough of Victory Gardens.",
+    "doc_date": "2026-10-04 (page fetched)",
+    "via": "page",
+    "verified": true
+   },
+   {
+    "url": "https://victorygardensnj.gov/code-enforcement",
+    "quote": "At the time of submission, make arrangements for an inspection appointment.",
+    "doc_date": "2026-10-04 (page fetched)",
+    "via": "page",
+    "verified": true
+   },
+   {
+    "url": "https://victorygardensnj.gov/code-enforcement",
+    "quote": "Someone over the age of 18 MUST be present on the day the inspection is scheduled.",
+    "doc_date": "2026-10-04 (page fetched)",
+    "via": "page",
+    "verified": true
+   },
+   {
+    "url": "https://storage.googleapis.com/juniper-media-library/517/2025/12/Transfer-of-Ownership-CO-application.pdf",
+    "quote": "APPLICATION FOR INSPECTION FOR HOUSING CERTIFICATE (RESALE)",
+    "doc_date": "2017-10-13",
+    "via": "pdf",
+    "verified": null
+   },
+   {
+    "url": "https://storage.googleapis.com/juniper-media-library/517/2025/12/Transfer-of-Ownership-CO-application.pdf",
+    "quote": "The Borough Code requires all residential/commercial properties in the Borough to be inspected when it is to be sold.",
+    "doc_date": "2017-10-13",
+    "via": "pdf",
+    "verified": null
+   },
+   {
+    "url": "https://storage.googleapis.com/juniper-media-library/517/2025/12/Transfer-of-Ownership-CO-application.pdf",
+    "quote": "ALL PERMITS AND INSPECTIONS MUST BE COMPLETED BEFORE A HOUSING CERTIFICATE OF OCCUPANCY WILL BE ISSUED.",
+    "doc_date": "2017-10-13",
+    "via": "pdf",
+    "verified": null
+   },
+   {
+    "url": "https://ecode360.com/36355908",
+    "quote": "Request by applicant for inspection for resale of a:",
+    "doc_date": "2026-10-04 (page fetched)",
+    "via": "page",
+    "verified": null
+   }
+  ],
+  "confidence": "high",
+  "notes": "The Code Enforcement page requires a Transfer Certificate of Occupancy before closing. The linked application (a scanned 2017 form, read visually, so a script cannot check its text) charges $160.00 per unit and is signed off by the Code Enforcement Officer, Fire Official and Electrical and Plumbing Subcode officials. Borough code Chapter 11 (1982 Code Section 8-1.5, read on ecode360) lists older resale inspection fees of $150 for a one family and $250 for a two family home; confirm which applies. The only email on the Code Enforcement page is the clerk's (clerk@victorygardensnj.gov); the 2017 form lists gardensvg@optonline.net, which may be outdated. Rental certificates of occupancy and rental licensing are rental-only."
+ },
+ "fire_cert": {
+  "requirements": [
+   "Smoke alarm and carbon monoxide alarm compliance under N.J.A.C. 5:70-2.3 (the Borough does not post its own checklist online)"
+  ],
+  "authorities": [
+   {
+    "name": "Victory Gardens Borough Fire Official (Fire Prevention), part of the Borough resale housing certificate inspection",
+    "type": "municipal_fire_bureau",
+    "area_served": "Entire borough",
+    "lead_time": "",
+    "fees": [],
+    "how_to_apply": "The resale housing certificate application includes a Fire Official sign-off; ask the Code Enforcement Department at (973) 366-5312 whether the smoke and CO certificate is done in the same inspection or needs a separate application.",
+    "application_url": "https://storage.googleapis.com/juniper-media-library/517/2025/12/Transfer-of-Ownership-CO-application.pdf",
+    "department_url": "https://victorygardensnj.gov/code-enforcement",
+    "phone": "973-366-5312",
+    "email": "bgrilletti78@gmail.com",
+    "contact_name": "Bernie Grilletti",
+    "contact_title": "Fire Official",
+    "evidence": [
+     {
+      "url": "https://storage.googleapis.com/juniper-media-library/517/2025/12/Transfer-of-Ownership-CO-application.pdf",
+      "quote": "Fire Official:",
+      "doc_date": "2017-10-13",
+      "via": "pdf",
+      "verified": null
+     },
+     {
+      "url": "https://ecode360.com/36356247",
+      "quote": "The Town of Dover will provide Victory Gardens with Fire and Emergency Services, Personnel and Resources from its main firehouse located at 37 North Sussex Street, Dover.",
+      "doc_date": "2026-10-04 (page fetched)",
+      "via": "page",
+      "verified": null
+     },
+     {
+      "url": "https://nj.gov/dca/dfs/pdf/ANNUAL%20REGISTRY/THIRD%20QUARTER%20LEA%20REGISTRY%202026.pdf",
+      "quote": "F Victory Gardens Borough",
+      "doc_date": "2026-07",
+      "via": "pdf",
+      "verified": true
+     },
+     {
+      "url": "https://www.nj.gov/dca/dfs/pdf/fire%20directory_county%20summary/fire_code_enforcement_director.pdf",
+      "quote": "Victory Gardens Borough Enf Auth. Fire Dept Fire Official Bernie Grilletti Phone (973) 366-5312 Email bgrilletti78@gmail.com",
+      "doc_date": "8/5/2026 (survey date)",
+      "via": "state_directory",
+      "verified": null
+     }
+    ],
+    "confidence": "low"
+   }
+  ],
+  "notes": "No separate smoke/CO certificate page, form or fee was found online. The NJ DCA LEA registry lists Victory Gardens as its own fire code enforcing agency (code F), and the DCA fire directory lists Fire Official Bernie Grilletti at the Borough phone (973) 366-5312. The resale housing certificate form has a Fire Official sign-off line, so the alarm check is likely part of that inspection. Borough code Chapter 14 says the Town of Dover provides fire and emergency services to Victory Gardens; it is not clear whether Dover's Fire Prevention Bureau now does the resale alarm inspections. Call to confirm."
+ },
+ "other_items": [
+  {
+   "label": "Open permits",
+   "detail": "All permits and inspections must be completed before a Housing Certificate of Occupancy is issued.",
+   "source_url": "https://storage.googleapis.com/juniper-media-library/517/2025/12/Transfer-of-Ownership-CO-application.pdf"
+  }
+ ],
+ "open_questions": [
+  "Is the resale fee $160.00 per unit (form) or $150 one family / $250 two family (code)?",
+  "Is the smoke and CO certificate issued as part of the housing certificate inspection, or separately (and by Victory Gardens or the Dover Fire Prevention Bureau)? Any separate fee?",
+  "How far ahead of closing should the application be filed, and how long is the certificate valid?"
+ ],
+ "checked_at": "2026-10-04",
+ "verification": {
+  "fees": 3,
+  "fee_ok": 0,
+  "fee_bad": 0,
+  "fee_unchecked": 3,
+  "quotes": 11,
+  "q_ok": 4,
+  "q_bad": 0,
+  "q_unchecked": 7
+ }
+}

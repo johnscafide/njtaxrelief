@@ -1,0 +1,141 @@
+{
+ "municipality_code": "0262",
+ "municipality": "Teterboro Borough",
+ "county": "BERGEN",
+ "resale_co": {
+  "status": "required",
+  "name": "Certificate of Occupancy on change of ownership (Borough Code Chapter 75)",
+  "issued_by": "Teterboro Construction Code Official",
+  "lead_time": "",
+  "valid_for": "",
+  "requirements": [
+   "General inspection of the visible parts of the building; no violations of law or pending orders of the Construction Official",
+   "Inspection and review of municipal records must show the use of the dwelling has lawfully existed"
+  ],
+  "fees": [
+   {
+    "label": "Certificate of occupancy on change of ownership, dwelling",
+    "amount": "$50",
+    "quote": "payment of a fee in the amount of $50 in the case of a dwelling",
+    "source_url": "https://ecode360.com/12523408",
+    "verified": null
+   }
+  ],
+  "how_to_apply": "Apply in writing to the Construction Code Official on the office's form; the Building Department is at 250 Hollister Road, 2nd floor. Office hours vary, so email code@teterboronj.org or call first.",
+  "application_url": "",
+  "department_url": "https://www.teterboronj.org/departments/construction",
+  "phone": "201-288-7204",
+  "email": "code@teterboronj.org",
+  "contact_name": "",
+  "contact_title": "",
+  "evidence": [
+   {
+    "url": "https://ecode360.com/12523408",
+    "quote": "In the event of reoccupancy, alteration, renovation, addition, change of use or ownership of a building, structure or dwelling, written application shall be made by the owner or his or her agent for a certificate of occupancy.",
+    "doc_date": "2019-03-12 (Ord. No. 599)",
+    "via": "page",
+    "verified": null
+   },
+   {
+    "url": "https://ecode360.com/12523408",
+    "quote": "Application for a certificate of occupancy shall be made on forms provided by the office of the Construction Official and payment of a fee in the amount of $50 in the case of a dwelling and $100 in the case of any other structure or building shall be required.",
+    "doc_date": "2019-03-12 (Ord. No. 599)",
+    "via": "page",
+    "verified": null
+   },
+   {
+    "url": "https://www.teterboronj.org/departments/construction",
+    "quote": "Our office has varied hours and for that reason we suggest you call before arriving with your submittals. Please contact us with any questions at code@teterboronj.org",
+    "doc_date": "2026-10-04 (page fetched)",
+    "via": "page",
+    "verified": true
+   }
+  ],
+  "confidence": "medium",
+  "notes": "Teterboro is almost entirely commercial and industrial with very few homes. Borough Code Chapter 75 (renamed from \"Certificates of Continued Occupancy\" by Ord. No. 599 in 2019), read through the ecode360 print view, requires a certificate of occupancy on a change of ownership of a dwelling for a $50 fee. The Borough website only describes the commercial change-of-tenancy process (Planning/Zoning Board application and Section 185-14.3), and the zoning occupancy rule in Section 185-12 excludes residential dwelling units. No residential resale form is posted. Phone is from the NJ DCA fire directory for the shared Building Department / Fire Official office at 250 Hollister Road."
+ },
+ "fire_cert": {
+  "requirements": [
+   "Smoke alarms and carbon monoxide alarms as required by N.J.A.C. 5:70-4.19 (no local checklist posted)"
+  ],
+  "authorities": [
+   {
+    "name": "Teterboro Fire Official / Construction Office (Teterboro Boro Constr Off)",
+    "type": "municipal_fire_bureau",
+    "area_served": "Entire borough",
+    "lead_time": "",
+    "fees": [],
+    "how_to_apply": "No online form. Contact the Fire Official's office at 250 Hollister Road, 2nd floor, (201) 288-7204, fire@teterboronj.org.",
+    "application_url": "",
+    "department_url": "https://www.teterboronj.org/departments/construction",
+    "phone": "201-288-7204",
+    "email": "fire@teterboronj.org",
+    "contact_name": "Robert A. Knobloch",
+    "contact_title": "Fire Official (per NJ DCA fire directory)",
+    "evidence": [
+     {
+      "url": "https://www.nj.gov/dca/dfs/pdf/fire%20directory_county%20summary/fire_code_enforcement_director.pdf",
+      "quote": "Name: Teterboro Boro Constr Off",
+      "doc_date": "2025-09 (survey date 9/26/2025)",
+      "via": "state_directory",
+      "verified": null
+     },
+     {
+      "url": "https://www.nj.gov/dca/dfs/pdf/fire%20directory_county%20summary/fire_code_enforcement_director.pdf",
+      "quote": "Fire Official Robert A. Knobloch Phone (201) 288-7204",
+      "doc_date": "2025-09 (survey date 9/26/2025)",
+      "via": "state_directory",
+      "verified": null
+     },
+     {
+      "url": "https://www.nj.gov/dca/dfs/pdf/fire%20directory_county%20summary/fire_code_enforcement_director.pdf",
+      "quote": "Email fire@teterboronj.org",
+      "doc_date": "2025-09 (survey date 9/26/2025)",
+      "via": "state_directory",
+      "verified": null
+     },
+     {
+      "url": "https://www.teterboronj.org/departments/construction",
+      "quote": "The Teterboro Building Department and Fire Official Office are located on the second floor of the Department of Public Works facility at 250 Hollister Road in Teterboro.",
+      "doc_date": "2026-10-04 (page fetched)",
+      "via": "page",
+      "verified": true
+     },
+     {
+      "url": "https://ecode360.com/12523553",
+      "quote": "R-A shall only be inspected upon sale or change in tenant.",
+      "doc_date": "2026-10-04 (page fetched)",
+      "via": "page",
+      "verified": null
+     },
+     {
+      "url": "https://nj.gov/dca/dfs/pdf/ANNUAL%20REGISTRY/THIRD%20QUARTER%20LEA%20REGISTRY%202026.pdf",
+      "quote": "M Teterboro Borough",
+      "doc_date": "2026-07",
+      "via": "pdf",
+      "verified": true
+     }
+    ],
+    "confidence": "medium"
+   }
+  ],
+  "notes": "No local smoke/CO certificate fee or form was found. Borough Code Section 103-4 sets a $25 local fire inspection fee for \"R-A Non-owner-occupied, one and two units\", inspected only upon sale or change in tenant; that applies to non-owner-occupied (rental) homes, so it is not listed as a resale fee. The state directory names the Construction Office as the smoke detector compliance office and the Fire Official as Robert A. Knobloch. The Fire Department link on the Borough site points to Hasbrouck Heights."
+ },
+ "other_items": [],
+ "open_questions": [
+  "What does the Fire Official charge for the smoke/CO certificate on a home sale, and how far ahead must it be requested?",
+  "Is there a residential application form for the Chapter 75 certificate of occupancy on change of ownership?",
+  "Does the $25 R-A fire inspection (Section 103-4) apply when a non-owner-occupied 1-2 family home is sold?"
+ ],
+ "checked_at": "2026-10-04",
+ "verification": {
+  "fees": 1,
+  "fee_ok": 0,
+  "fee_bad": 0,
+  "fee_unchecked": 1,
+  "quotes": 9,
+  "q_ok": 3,
+  "q_bad": 0,
+  "q_unchecked": 6
+ }
+}

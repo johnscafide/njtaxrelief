@@ -1,0 +1,223 @@
+{
+ "municipality_code": "0204",
+ "municipality": "Bogota Borough",
+ "county": "BERGEN",
+ "checked_at": "2026-10-04",
+ "resale_co": {
+  "status": "required",
+  "name": "Certificate of Continued Occupancy (CCO)",
+  "issued_by": "Borough of Bogota Building Department (Construction Code and Zoning Official)",
+  "lead_time": "Fees go up when the request comes in late: base fee more than 20 business days before the change of occupant, double at 10 to 20 days, triple at under 10 days.",
+  "valid_for": "A temporary certificate of occupancy (90 day maximum, not extendable) is available at half the fee plus a 120% bond for unfinished work.",
+  "requirements": [
+   "Borough CCO application, which is also the smoke detector, carbon monoxide and fire extinguisher certification form",
+   "Access to the dwelling unit, basement, attic and common areas for the inspection",
+   "New buyer or tenant names and the number of dwelling units must be listed on the application",
+   "Fire extinguisher (form still lists it)"
+  ],
+  "fees": [
+   {
+    "label": "CCO, one-family dwelling (sale or rental), request received more than 20 business days before the change of occupant",
+    "amount": "$100.00",
+    "quote": "One-family dwelling: $100.00",
+    "source_url": "https://ecode360.com/34713647",
+    "verified": null
+   },
+   {
+    "label": "CCO, two-family dwelling (sale or rental), request received more than 20 business days before the change of occupant",
+    "amount": "$150.00",
+    "quote": "Two-family dwelling: $150.00",
+    "source_url": "https://ecode360.com/34713647",
+    "verified": null
+   },
+   {
+    "label": "CCO request received 10 to 20 days before the change of occupant",
+    "amount": "$200.00 one-family, $300.00 two-family (double the base fee)",
+    "quote": "Fees for requests for a C.C.O. received ten (10) to twenty (20) days prior to the change of occupant shall be double the fees",
+    "source_url": "https://ecode360.com/34713647",
+    "verified": null
+   },
+   {
+    "label": "CCO request received less than 10 days before the change of occupant",
+    "amount": "$300.00 one-family, $450.00 two-family (triple the base fee)",
+    "quote": "Fees for requests for a C.C.O. received less than ten (10) days prior to the change of occupant shall be triple the fees",
+    "source_url": "https://ecode360.com/34713647",
+    "verified": null
+   }
+  ],
+  "how_to_apply": "Print and fill in the Borough's Certificate of Continued Occupancy (CCO) Permit Application and file it with the Building Department at Borough Hall, 375 Larch Avenue, Bogota, NJ 07603, with the fee. Apply more than 20 business days before closing to pay the base fee.",
+  "application_url": "https://www.bogotanj.gov/_files/ugd/8d609e_2346f3c07d424c37807d86013e6fad2d.pdf",
+  "department_url": "https://www.bogotanj.gov/building-department",
+  "phone": "201-342-1736 x224",
+  "email": "bldgdept@bogotaonline.org",
+  "contact_name": "Arthur Sopelsa",
+  "contact_title": "Construction Code and Zoning Official",
+  "evidence": [
+   {
+    "url": "https://www.bogotanj.gov/forms",
+    "quote": "(CCO) Permit Application",
+    "doc_date": "2026-10-04 (page fetched)",
+    "via": "page",
+    "verified": true
+   },
+   {
+    "url": "https://www.bogotanj.gov/_files/ugd/8d609e_2346f3c07d424c37807d86013e6fad2d.pdf",
+    "quote": "NO CLOSING IS TO TAKE PLACE WITHOUT THE COMPLETED CERTIFICATE OF INSPECTION!!!",
+    "doc_date": "",
+    "via": "pdf",
+    "verified": null
+   },
+   {
+    "url": "https://www.bogotanj.gov/_files/ugd/8d609e_2346f3c07d424c37807d86013e6fad2d.pdf",
+    "quote": "SMOKE DETECTOR - CARBON MONOXIDE - FIRE EXTINGUISHER CERTIFICATION",
+    "doc_date": "",
+    "via": "pdf",
+    "verified": null
+   },
+   {
+    "url": "https://ecode360.com/34713647",
+    "quote": "Fees for certificate of continuing occupancy (C.C.O.) – existing building – shall be based upon the amount of time remaining before the change of occupant is expected as follows:",
+    "doc_date": "2026-10-04 (page fetched)",
+    "via": "page",
+    "verified": null
+   },
+   {
+    "url": "https://ecode360.com/34713647",
+    "quote": "The fees for a temporary, ninety (90) day maximum, nonextendable certificate of occupancy shall be one-half (1/2) of the above fee schedule plus one hundred twenty (120%) percent bond in the sum of the unfinished work.",
+    "doc_date": "2026-10-04 (page fetched)",
+    "via": "page",
+    "verified": null
+   },
+   {
+    "url": "https://www.bogotanj.gov/building-department",
+    "quote": "Construction Code and Zoning Official",
+    "doc_date": "2026-10-04 (page fetched)",
+    "via": "page",
+    "verified": true
+   },
+   {
+    "url": "https://www.bogotanj.gov/building-department",
+    "quote": "Arthur Sopelsa",
+    "doc_date": "2026-10-04 (page fetched)",
+    "via": "page",
+    "verified": true
+   },
+   {
+    "url": "https://www.bogotanj.gov/building-department",
+    "quote": "201-342-1736 x224",
+    "doc_date": "2026-10-04 (page fetched)",
+    "via": "page",
+    "verified": true
+   }
+  ],
+  "confidence": "medium",
+  "notes": "The Borough's Building Department posts a 'Certificate of Continued Occupancy (CCO) Permit Application'; the linked PDF is a scanned Borough form titled 'Application - Smoke Detector - Carbon Monoxide - Fire Extinguisher Certification' and says no closing may take place without the completed certificate of inspection. Borough Code §9-1.3 (read through the ecode360 print view) sets C.C.O. fees for the 'Sale or rental of' one- and two-family dwellings, scaled by how early the request is made. No separate code section was found that spells out what the CCO inspection covers beyond the smoke/CO form, so the scope is unclear. The Borough is moving its website and email from bogotaonline.org to bogotanj.gov (expected by October 15, 2026); the bldgdept@bogotaonline.org address may change. Rental-only items (annual fire registration of non-owner-occupied one-family and all two-family homes under §16-3.3, R-1 $100 and R-2 $150 a year) are not resale requirements."
+ },
+ "fire_cert": {
+  "requirements": [
+   "Smoke detectors and carbon monoxide alarms checked on the Borough's combined smoke detector / carbon monoxide / fire extinguisher certification (the CCO application)",
+   "Access to the dwelling unit, basement, attic and common areas",
+   "Fire extinguisher (form still lists it)"
+  ],
+  "authorities": [
+   {
+    "name": "Borough of Bogota Building Department (smoke detector compliance on the CCO form); fire code enforcing agency: Bogota Bureau of Fire Prevention",
+    "type": "municipal_fire_bureau",
+    "area_served": "Entire borough",
+    "lead_time": "Same as the CCO: base fee more than 20 business days before the change of occupant, double at 10 to 20 days, triple at under 10 days.",
+    "fees": [
+     {
+      "label": "Smoke/CO certification on the CCO, one-family (same fee as the CCO, not an extra charge)",
+      "amount": "$100.00",
+      "quote": "One-family dwelling: $100.00",
+      "source_url": "https://ecode360.com/34713647",
+      "verified": null
+     },
+     {
+      "label": "Smoke/CO certification on the CCO, two-family (same fee as the CCO, not an extra charge)",
+      "amount": "$150.00",
+      "quote": "Two-family dwelling: $150.00",
+      "source_url": "https://ecode360.com/34713647",
+      "verified": null
+     }
+    ],
+    "how_to_apply": "File the Borough's CCO / smoke detector, carbon monoxide and fire extinguisher certification application with the Building Department at 375 Larch Avenue. Questions about alarm rules can go to the Fire Prevention Bureau at 31 Fairview Avenue.",
+    "application_url": "https://www.bogotanj.gov/_files/ugd/8d609e_2346f3c07d424c37807d86013e6fad2d.pdf",
+    "department_url": "https://www.bogotanj.gov/fire-prevention",
+    "phone": "201-646-0801",
+    "email": "fireprevention@bogotaonline.org",
+    "contact_name": "Daniel Klima",
+    "contact_title": "Fire Marshal (Fire Official)",
+    "evidence": [
+     {
+      "url": "https://www.bogotanj.gov/_files/ugd/8d609e_2346f3c07d424c37807d86013e6fad2d.pdf",
+      "quote": "SMOKE DETECTOR - CARBON MONOXIDE - FIRE EXTINGUISHER CERTIFICATION",
+      "doc_date": "",
+      "via": "pdf",
+      "verified": null
+     },
+     {
+      "url": "https://www.bogotanj.gov/fire-prevention",
+      "quote": "Daniel Klima",
+      "doc_date": "2026-10-04 (page fetched)",
+      "via": "page",
+      "verified": true
+     },
+     {
+      "url": "https://www.bogotanj.gov/fire-prevention",
+      "quote": "201-646-0801",
+      "doc_date": "2026-10-04 (page fetched)",
+      "via": "page",
+      "verified": true
+     },
+     {
+      "url": "https://ecode360.com/34716012",
+      "quote": "The local enforcing agency shall be the Bogota Bureau of Fire Prevention, which is hereby created.",
+      "doc_date": "2025-05-15 (Ord. No. 1633)",
+      "via": "page",
+      "verified": null
+     },
+     {
+      "url": "https://www.nj.gov/dca/dfs/pdf/fire%20directory_county%20summary/fire_code_enforcement_director.pdf",
+      "quote": "LEAID: 0204-001 Bogota Boro SMOKE DETECTOR COMPLIANCE Name: Bogota Boro Bldg Dept Enf Auth. Fire Dept Addr: 375 Larch Av ... Fire Official Daniel Klima Phone (201) 342-1736 ... Email dklima@bogotaonline.org",
+      "doc_date": "2026 (survey date 5/14/2026)",
+      "via": "state_directory",
+      "verified": null
+     },
+     {
+      "url": "https://nj.gov/dca/dfs/pdf/ANNUAL%20REGISTRY/THIRD%20QUARTER%20LEA%20REGISTRY%202026.pdf",
+      "quote": "F Bogota Borough",
+      "doc_date": "2026-07",
+      "via": "pdf",
+      "verified": true
+     }
+    ],
+    "confidence": "medium"
+   }
+  ],
+  "notes": "The NJ DCA fire directory lists the Bogota Borough Building Department at 375 Larch Avenue as the smoke detector compliance office, which matches the Borough's posted form. The Fire Prevention Bureau page (Fire Marshal Daniel Klima, 201-646-0801) lists only a 'Carbon Monoxide Certification' self-test form, which is an owner certification for registered rentals, not the sale certificate. No separate smoke certificate fee was found; the CCO fee appears to cover it. State law (P.L.2025, c.19, signed February 3, 2025) dropped the portable fire extinguisher from the state sale certificate. The Borough form still lists a fire extinguisher, so confirm with the office."
+ },
+ "other_items": [
+  {
+   "label": "Late-request surcharge",
+   "detail": "CCO fees double if the request comes 10 to 20 days before the change of occupant and triple if under 10 days.",
+   "source_url": "https://ecode360.com/34713647"
+  }
+ ],
+ "open_questions": [
+  "What does the Bogota CCO inspection cover besides smoke and carbon monoxide alarms (zoning, open permits, housing items)?",
+  "Is the CCO fee the only charge, or is there a separate smoke/CO certificate fee or reinspection fee?",
+  "Does the Borough still require a fire extinguisher after P.L.2025, c.19?",
+  "Typical scheduling lead time and how long the certificate stays valid."
+ ],
+ "verification": {
+  "fees": 6,
+  "fee_ok": 0,
+  "fee_bad": 0,
+  "fee_unchecked": 6,
+  "quotes": 14,
+  "q_ok": 7,
+  "q_bad": 0,
+  "q_unchecked": 7
+ }
+}

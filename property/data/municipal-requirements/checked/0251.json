@@ -1,0 +1,186 @@
+{
+ "municipality_code": "0251",
+ "municipality": "Ridgewood Village",
+ "county": "BERGEN",
+ "resale_co": {
+  "status": "not_required",
+  "name": "",
+  "issued_by": "",
+  "lead_time": "",
+  "valid_for": "",
+  "requirements": [],
+  "fees": [],
+  "how_to_apply": "No Village resale Certificate of Occupancy for a one or two family home. The Building Department FAQ says only the smoke detector / carbon monoxide certification from the Fire Prevention Bureau is required before closing (see fire certificate).",
+  "application_url": "",
+  "department_url": "https://www.ridgewoodnj.net/170/Building",
+  "phone": "201-670-5500 ext. 2281",
+  "email": "rkeeley@ridgewoodnj.net",
+  "contact_name": "Raymond Keeley",
+  "contact_title": "Director of the Building Department & Construction Official",
+  "evidence": [
+   {
+    "url": "https://www.ridgewoodnj.net/Faq.aspx?TID=16",
+    "quote": "The Building Department does not issue a CO for the resale of a one or two-family dwelling, however, a smoke detector/carbon monoxide detector certification is required from the village's fire prevention bureau before you close the title.",
+    "doc_date": "2026-10-04 (page fetched)",
+    "via": "page",
+    "verified": true
+   },
+   {
+    "url": "https://www.ridgewoodnj.net/170/Building",
+    "quote": "Director of the Building Department & Construction Official",
+    "doc_date": "2026-10-04 (page fetched)",
+    "via": "page",
+    "verified": true
+   }
+  ],
+  "confidence": "high",
+  "notes": "The Village Building Department FAQ says in writing that it does not issue a CO for the resale of a one or two family dwelling; only the Fire Prevention Bureau's smoke/CO certification is needed. The Building Department is at 131 N Maple Avenue (main line 201-670-5500 ext. 5506). Raymond Keeley's email is a mailto link on the Building page. The Village forms page also has a 'Zoning Certificate of Occupancy' form (scanned PDF, not readable); it appears to be for zoning/use changes, not resales."
+ },
+ "fire_cert": {
+  "requirements": [
+   "Smoke detector on each level, with a floor area separated by 3 or more risers counted as a separate level; basement detector on the basement ceiling (not required in an unoccupied attic)",
+   "Smoke detectors must be UL or FM approved and audible in all rooms on that level with doors closed",
+   "Carbon monoxide alarm inspection (the Village calls it a smoke detector and carbon monoxide inspection, under N.J.A.C. 5:70)",
+   "Fee is per dwelling unit, so a two family home pays for each unit"
+  ],
+  "authorities": [
+   {
+    "name": "Ridgewood Fire Department, Fire Prevention Bureau",
+    "type": "municipal_fire_bureau",
+    "area_served": "Entire village",
+    "lead_time": "Fee depends on how far before the closing the inspection is scheduled: more than 10 days for the lowest fee. The code says the inspection happens within 10 business days of receiving a prepaid application. An inspection after the closing adds a $500 penalty.",
+    "fees": [
+     {
+      "label": "Smoke/CO inspection scheduled more than 10 days before closing, per dwelling unit",
+      "amount": "$120",
+      "quote": "If scheduled more than 10 days before closing: $120",
+      "source_url": "https://www.ridgewoodnj.net/311/Fire-Prevention",
+      "verified": true
+     },
+     {
+      "label": "Scheduled less than 10 days before closing, per dwelling unit",
+      "amount": "$150",
+      "quote": "If scheduled less than 10 days before closing: $150",
+      "source_url": "https://www.ridgewoodnj.net/311/Fire-Prevention",
+      "verified": true
+     },
+     {
+      "label": "Scheduled within 3 days of closing, per dwelling unit",
+      "amount": "$200",
+      "quote": "If scheduled within 3 days of closing: $200",
+      "source_url": "https://www.ridgewoodnj.net/311/Fire-Prevention",
+      "verified": true
+     },
+     {
+      "label": "Penalty if the inspection is done after the closing (on top of the $200 fee)",
+      "amount": "$500",
+      "quote": "There will be a $500 penalty in addition to the $200 Certification Fee issued to the property owner for non-compliance of state law if this inspection is completed after the closing.",
+      "source_url": "https://www.ridgewoodnj.net/311/Fire-Prevention",
+      "verified": true
+     },
+     {
+      "label": "Credit card technology fee (in person only)",
+      "amount": "3%",
+      "quote": "all credit card transactions will incur an additional 3% technology fee charge.",
+      "source_url": "https://www.ridgewoodnj.net/311/Fire-Prevention",
+      "verified": true
+     }
+    ],
+    "how_to_apply": "Call the Inspection Office at 201-444-7898 ext. 5480, Monday to Friday 8:30 a.m. to 4:30 p.m., to schedule. Pay by cash or check payable to the Village of Ridgewood, sent to the Fire Prevention Bureau, 201 East Glen Avenue, Ridgewood, NJ 07450; credit cards are taken in person only (3% fee).",
+    "application_url": "",
+    "department_url": "https://www.ridgewoodnj.net/311/Fire-Prevention",
+    "phone": "201-444-7898 ext. 5480",
+    "email": "jyoung@ridgewoodnj.net",
+    "contact_name": "John Young",
+    "contact_title": "Fire Official",
+    "evidence": [
+     {
+      "url": "https://www.ridgewoodnj.net/311/Fire-Prevention",
+      "quote": "If you are selling or renting your home, you need a smoke detector and carbon monoxide inspection!",
+      "doc_date": "2026-10-04 (page fetched)",
+      "via": "page",
+      "verified": true
+     },
+     {
+      "url": "https://www.ridgewoodnj.net/311/Fire-Prevention",
+      "quote": "You can schedule an appointment by calling the Inspection Office at 201-444-7898 Ext. 5480, Monday through Friday, between the hours of 8:30 a.m. and 4:30 p.m.",
+      "doc_date": "2026-10-04 (page fetched)",
+      "via": "page",
+      "verified": true
+     },
+     {
+      "url": "https://www.ridgewoodnj.net/311/Fire-Prevention",
+      "quote": "The Fire Prevention Bureau accepts credit cards for in-person transactions only.",
+      "doc_date": "2026-10-04 (page fetched)",
+      "via": "page",
+      "verified": true
+     },
+     {
+      "url": "https://ecode360.com/6690353",
+      "quote": "Upon the sale of one- or two-family residence or the rental, lease or transfer of any dwelling unit, the seller, landlord or transferor is required to obtain from the Village of Ridgewood a smoke detector compliance certificate",
+      "doc_date": "2026-10-04 (page fetched)",
+      "via": "page",
+      "verified": null
+     },
+     {
+      "url": "https://ecode360.com/6690353",
+      "quote": "Within 10 business days of the receipt of said application, the designated official of the Village of Ridgewood shall inspect the premises",
+      "doc_date": "2026-10-04 (page fetched)",
+      "via": "page",
+      "verified": null
+     },
+     {
+      "url": "https://ecode360.com/6690240",
+      "quote": "Inspection requested more than 10 days after date of application $120",
+      "doc_date": "",
+      "via": "search_snippet",
+      "verified": null
+     },
+     {
+      "url": "https://nj.gov/dca/dfs/pdf/ANNUAL%20REGISTRY/THIRD%20QUARTER%20LEA%20REGISTRY%202026.pdf",
+      "quote": "F Ridgewood Village",
+      "doc_date": "2026-07",
+      "via": "pdf",
+      "verified": true
+     },
+     {
+      "url": "https://www.nj.gov/dca/dfs/pdf/fire%20directory_county%20summary/fire_code_enforcement_director.pdf",
+      "quote": "Village of Ridgewood SMOKE DETECTOR COMPLIANCE Name: Village of Ridgewood Fire Prev Fire Official John Young Phone (201) 444-7898 Email jyoung@ridgewoodnj.net",
+      "doc_date": "2/17/2026 (survey date)",
+      "via": "state_directory",
+      "verified": null
+     }
+    ],
+    "confidence": "high"
+   }
+  ],
+  "notes": "Tiered fee per dwelling unit by days before closing ($120, $150, $200), plus a $500 penalty if done after closing. Village fee code Section 149-13 (Chapter 145, Fees, amended 5-10-2023 by Ord. No. 3955) words the tiers by days after the application date instead of days before closing; amounts match. The Building page lists Fire Inspections at 201-670-5500 ext. 5480, while the Fire Prevention page uses 201-444-7898 ext. 5480. Fire official name and email come from the NJ DCA fire directory (survey 2/17/2026). No fire extinguisher is listed, consistent with P.L.2025, c.19."
+ },
+ "other_items": [
+  {
+   "label": "Monitored fire alarm registration",
+   "detail": "Homes with a monitored central station fire alarm must register it with the Ridgewood Fire Department (201-444-8822 x4112). This is ongoing, not a sale item, but buyers often ask.",
+   "source_url": "https://www.ridgewoodnj.net/311/Fire-Prevention"
+  },
+  {
+   "label": "Underground oil tank",
+   "detail": "The Village FAQ notes abandoning or removing a residential oil tank needs a permit, and lenders and insurers often want tanks removed at sale. Not a Village sale requirement.",
+   "source_url": "https://www.ridgewoodnj.net/Faq.aspx?TID=16"
+  }
+ ],
+ "open_questions": [
+  "How long is the smoke/CO certificate valid if the closing moves?",
+  "Is there a reinspection fee after a failed inspection?"
+ ],
+ "checked_at": "2026-10-04",
+ "verification": {
+  "fees": 5,
+  "fee_ok": 5,
+  "fee_bad": 0,
+  "fee_unchecked": 0,
+  "quotes": 10,
+  "q_ok": 6,
+  "q_bad": 0,
+  "q_unchecked": 4
+ }
+}

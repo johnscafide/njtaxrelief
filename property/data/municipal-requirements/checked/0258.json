@@ -1,0 +1,215 @@
+{
+ "municipality_code": "0258",
+ "municipality": "Saddle River Borough",
+ "county": "BERGEN",
+ "checked_at": "2026-10-04",
+ "resale_co": {
+  "status": "required",
+  "name": "Certificate of Continued Inspection (CCI)",
+  "issued_by": "Borough of Saddle River Construction Department (Construction Official/Building Inspector)",
+  "lead_time": "The Construction Official inspects within 10 days of a fully completed application and fee; the form says the department has ten working days to approve or deny.",
+  "valid_for": "Construction Department approval is good for 60 days from date of issue.",
+  "requirements": [
+   "General inspection of the visible parts of the premises for apparent zoning violations",
+   "Pool must have a pool fence with self-closing, self-latching gates that swing away from the pool",
+   "Application lists kitchens, baths, bedrooms and the number of families before and after the sale",
+   "If the building will not be occupied, the buyer submits a certification instead and gets the Construction Official's approval document",
+   "If violations cannot be fixed before closing, the applicant can certify a cure date and get a temporary certificate; a $50 a day fine applies if not cured by that date",
+   "No CCI is issued on resale while a tree removal violation is outstanding"
+  ],
+  "fees": [
+   {
+    "label": "Certificate of Continued Inspection application",
+    "amount": "$200",
+    "quote": "At the time the application is submitted for a certificate of continued inspection as required by this section, the applicant shall submit a fee in the amount of $200.",
+    "source_url": "https://ecode360.com/14043759",
+    "verified": null
+   },
+   {
+    "label": "Each subsequent inspection or temporary certificate",
+    "amount": "$100",
+    "quote": "A fee of $100 will be charged to the applicant for each subsequent inspection by the Construction Official/Building Inspector",
+    "source_url": "https://ecode360.com/14043759",
+    "verified": null
+   },
+   {
+    "label": "Building fee (application form)",
+    "amount": "$200.00",
+    "quote": "BUILDING FEE - $200.00",
+    "source_url": "https://saddleriver.gov/uploads/dm/12058/CCIBUILDINGUPDATED",
+    "verified": true
+   }
+  ],
+  "how_to_apply": "Download the Application for Continued Certificate of Inspection from the Building and Construction page, sign it and file it with the $200.00 fee at the Construction Department, Municipal Building, 100 East Allendale Road. Apply for the separate Fire Prevention certificate at the same time; one does not replace the other. Inspection requests can be emailed to inspections@saddleriver.gov.",
+  "application_url": "https://saddleriver.gov/uploads/dm/12058/CCIBUILDINGUPDATED",
+  "department_url": "https://saddleriver.gov/building_const",
+  "phone": "201-327-2609",
+  "email": "rsherrow@saddleriver.gov",
+  "contact_name": "Robert Sherrow",
+  "contact_title": "Construction Official (named on the application form)",
+  "evidence": [
+   {
+    "url": "https://ecode360.com/14043759",
+    "quote": "A certificate of continued inspection shall be required upon any transfer of title to an existing premises which is accompanied by a change in the occupancy of such premises.",
+    "doc_date": "2025-05-19 (Ord. No. 25-1096)",
+    "via": "page",
+    "verified": null
+   },
+   {
+    "url": "https://ecode360.com/14043759",
+    "quote": "Failure to properly submit a completed application for a certificate of continued inspection upon any transfer of title to an existing premises shall result in the levying of a fine in the amount of $1,000 against the owner of record of the premises at the time of discovery.",
+    "doc_date": "2025-05-19 (Ord. No. 25-1096)",
+    "via": "page",
+    "verified": null
+   },
+   {
+    "url": "https://saddleriver.gov/uploads/dm/12058/CCIBUILDINGUPDATED",
+    "quote": "CONSTRUCITON DEPARTMENT APPROVAL IS GOOD FOR 60 DAYS FROM DATE OF ISSUE",
+    "doc_date": "",
+    "via": "pdf",
+    "verified": true
+   },
+   {
+    "url": "https://saddleriver.gov/building_const",
+    "quote": "Building/Construction and Fire Prevention administer separate requirements, and one certificate does not replace the other.",
+    "doc_date": "2026-10-04 (page fetched)",
+    "via": "page",
+    "verified": true
+   },
+   {
+    "url": "https://ecode360.com/30377097",
+    "quote": "The Borough shall not issue a building permit, temporary certificate of occupancy or certificate of occupancy or certificate of continuing occupancy upon resale for any property for which a violation of this article has been served",
+    "doc_date": "",
+    "via": "page",
+    "verified": null
+   }
+  ],
+  "confidence": "high",
+  "notes": "Borough Code Section 96-13 (amended May 19, 2025 by Ordinance 25-1096) was read through ecode360. Not filing a completed CCI application on a transfer brings a $1,000 fine on the owner of record plus $100 a day. The Borough phone 201-327-2609 is the Municipal Building line; Robert Sherrow's email is a mailto link on the Building and Construction page. Rental rules (lead-based paint inspections at tenant turnover, ban on rentals of 31 days or less) are not resale requirements."
+ },
+ "fire_cert": {
+  "requirements": [
+   "At least one smoke detector on each level including the basement; prewired interconnected detectors must work and cannot be replaced by battery units",
+   "Detectors 10 years or older must be replaced",
+   "Carbon monoxide detectors on each level with bedrooms, within 10 feet of each bedroom",
+   "Fire alarm systems: someone must know how to silence and reset; an alarm company report from the last 6 months avoids on-site testing",
+   "Portable fire extinguisher, 5 to 10 pound ABC, minimum 2A:10B:C, mounted within 10 feet of the kitchen and serviced/tagged within 12 months or with a purchase receipt (form still lists it)",
+   "Building information sheet (solar panels, pools, gates, Knox box, sprinklers, truss roof) and emergency contacts; the inspector photographs the exterior for preplans"
+  ],
+  "authorities": [
+   {
+    "name": "Saddle River Fire Prevention Bureau",
+    "type": "municipal_fire_bureau",
+    "area_served": "Entire borough",
+    "lead_time": "The Bureau issues the certificate within 20 business days of receipt of a completed application, fee and inspection.",
+    "fees": [
+     {
+      "label": "CSACMAPFEC inspection",
+      "amount": "$200",
+      "quote": "Inspection$200",
+      "source_url": "https://ecode360.com/10637197",
+      "verified": null
+     },
+     {
+      "label": "Reinspection",
+      "amount": "$100",
+      "quote": "Reinspection$100",
+      "source_url": "https://ecode360.com/10637197",
+      "verified": null
+     },
+     {
+      "label": "Inspection fee (application form)",
+      "amount": "$200",
+      "quote": "$200 Inspection Fee",
+      "source_url": "https://saddleriver.gov/vertical/sites/%7B2E7E07BD-0A79-4A05-9B79-960D47AACDC0%7D/uploads/FIRE_PREVENTION_CCO_APPLICATON.pdf",
+      "verified": null
+     }
+    ],
+    "how_to_apply": "Fill out the Fire Prevention Bureau's Application for Smoke Detector Inspection and Certificate of Compliance completely (unsigned or incomplete forms are not accepted) and pay by check only, payable to the Borough of Saddle River. Questions: Fire Marshal at 201-327-2609 ext. 237.",
+    "application_url": "https://saddleriver.gov/vertical/sites/%7B2E7E07BD-0A79-4A05-9B79-960D47AACDC0%7D/uploads/FIRE_PREVENTION_CCO_APPLICATON.pdf",
+    "department_url": "https://saddleriver.gov/fire_prevention",
+    "phone": "201-327-2609 ext. 237",
+    "email": "santoshak@saddleriver.gov",
+    "contact_name": "Samuel Antoshak",
+    "contact_title": "Fire Official and Fire Marshal",
+    "evidence": [
+     {
+      "url": "https://ecode360.com/10637197",
+      "quote": "Before any Use Group R-3 structure is sold, leased or otherwise subject to a change of occupancy for residential purposes, the owner shall obtain a certificate of smoke alarm, carbon monoxide alarm, and portable fire extinguisher compliance (CSACMAPFEC) from the Fire Prevention Bureau.",
+      "doc_date": "2025-12-15 (Ord. No. 25-1105)",
+      "via": "page",
+      "verified": null
+     },
+     {
+      "url": "https://ecode360.com/10637197",
+      "quote": "The Fire Prevention Bureau shall inspect the premises for which a certificate has been requested and, upon a finding that the premises satisfies the requirements of this article, issue a certificate within 20 business days of the receipt of a completed application, fee and inspection.",
+      "doc_date": "2025-12-15",
+      "via": "page",
+      "verified": null
+     },
+     {
+      "url": "https://saddleriver.gov/fire_prevention",
+      "quote": "Before a qualifying home is sold, leased or changes occupancy, the owner must obtain a Fire Prevention certificate.",
+      "doc_date": "Content reviewed August 19, 2026",
+      "via": "page",
+      "verified": true
+     },
+     {
+      "url": "https://saddleriver.gov/fire_prevention",
+      "quote": "Fire Official and Fire Marshal",
+      "doc_date": "Content reviewed August 19, 2026",
+      "via": "page",
+      "verified": true
+     },
+     {
+      "url": "https://www.nj.gov/dca/dfs/pdf/fire%20directory_county%20summary/fire_code_enforcement_director.pdf",
+      "quote": "LEAID: 0258-001 Saddle River Boro SMOKE DETECTOR COMPLIANCE Name: Saddle River Boro Fire Prev Enf Auth. Municipal Fire Official Samuel T Antoshak Phone (201) 327-2609",
+      "doc_date": "survey date 3/31/2026",
+      "via": "state_directory",
+      "verified": null
+     },
+     {
+      "url": "https://nj.gov/dca/dfs/pdf/ANNUAL%20REGISTRY/THIRD%20QUARTER%20LEA%20REGISTRY%202026.pdf",
+      "quote": "M Saddle River Borough",
+      "doc_date": "2026-07",
+      "via": "pdf",
+      "verified": true
+     }
+    ],
+    "confidence": "high"
+   }
+  ],
+  "notes": "Borough Code Sections 113-6 and 113-6.1 (amended December 15, 2025 by Ordinance 25-1105) set a flat $200 inspection and $100 reinspection fee, with no tiers by days before closing. Ordinance 26-1121 (adopted June 15, 2026) changed permit and registration fees and refers to a $200 initial fee for a fire prevention continued certificate of occupancy; it did not change the residential fee. The Borough code and form still require a portable fire extinguisher (left on the counter next to the sink for the next owner, per the code) even though the state dropped it from the sale certificate in February 2025 (P.L.2025, c.19). The fire application PDF is a scan. The Fire Marshal's email is shown on the form and in the state directory."
+ },
+ "other_items": [
+  {
+   "label": "Tree removal violations",
+   "detail": "The Borough will not issue a certificate of continuing occupancy on resale while a served tree removal violation is unresolved.",
+   "source_url": "https://ecode360.com/30377097"
+  },
+  {
+   "label": "Pool fence",
+   "detail": "Pools need a fence with self-closing, self-latching gates that swing away from the pool; a failed inspection costs $100.00 to reinspect.",
+   "source_url": "https://saddleriver.gov/uploads/dm/12058/CCIBUILDINGUPDATED"
+  },
+  {
+   "label": "Address identification",
+   "detail": "Street numbers must be clearly visible from the street and clear of obstructions.",
+   "source_url": "https://ecode360.com/10637197"
+  }
+ ],
+ "open_questions": [
+  "Does Saddle River still require the portable fire extinguisher at resale after P.L.2025, c.19 (the Borough code was amended in December 2025 and still requires it)?",
+  "How long is the fire certificate valid (the code allows one certificate per six months)?"
+ ],
+ "verification": {
+  "fees": 6,
+  "fee_ok": 1,
+  "fee_bad": 0,
+  "fee_unchecked": 5,
+  "quotes": 11,
+  "q_ok": 5,
+  "q_bad": 0,
+  "q_unchecked": 6
+ }
+}

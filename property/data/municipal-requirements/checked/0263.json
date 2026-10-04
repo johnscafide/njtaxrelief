@@ -1,0 +1,246 @@
+{
+ "municipality_code": "0263",
+ "municipality": "Upper Saddle River Borough",
+ "county": "BERGEN",
+ "resale_co": {
+  "status": "required",
+  "name": "Certificate of Resale/Rental (Certificate of Continued Occupancy)",
+  "issued_by": "Borough of Upper Saddle River Building Department / Code Compliance Office (Construction Official), with sign-offs from Fire Prevention, the Board of Health and Property Maintenance/Zoning",
+  "lead_time": "The Borough packet says the process could take up to 30 days. No exemptions or conditional certificates are issued.",
+  "valid_for": "Certificate valid for 6 months (per the application form).",
+  "requirements": [
+   "Building Department review for open permits, unpaid permits or violations",
+   "Zoning Official site inspection",
+   "Fire Prevention Bureau smoke/CO alarm inspection and approval",
+   "Health Department requirements (contact them directly): wells tested by a certified lab and cesspools or non-compliant septic systems updated at realty transfer, per the Bergen County sheet in the packet",
+   "No violations of law or Construction Official orders pending, and the existing use must have lawfully existed"
+  ],
+  "fees": [
+   {
+    "label": "Certificate of continued occupancy (Code Chapter 40)",
+    "amount": "$100",
+    "quote": "The fee for the issuance of a certificate of continued occupancy shall be $100, provided that there shall be an additional fee of $50 for any required reinspection.",
+    "source_url": "https://ecode360.com/12199576",
+    "verified": null
+   },
+   {
+    "label": "Certificate of continued occupancy reinspection (Code Chapter 40)",
+    "amount": "$50",
+    "quote": "The fee for the issuance of a certificate of continued occupancy shall be $100, provided that there shall be an additional fee of $50 for any required reinspection.",
+    "source_url": "https://ecode360.com/12199576",
+    "verified": null
+   },
+   {
+    "label": "Certificate of Resale/Rental application fee (Borough packet)",
+    "amount": "$100",
+    "quote": "**Application Fee: $100**",
+    "source_url": "https://www.usrtoday.org/DocumentCenter/View/380/Certificate-of-ResaleRental-Application-PDF",
+    "verified": null
+   }
+  ],
+  "how_to_apply": "Download the Certificate of Resale or Rental Application packet from the Borough Forms page, complete the entire top section, and drop it off at the Building Department (376 West Saddle River Road; after-hours drop box by the side entrance) with two checks payable to the Borough of Upper Saddle River: $100.00 for the certificate and the separate Fire Prevention fee. The Building office distributes the packet; the Zoning Official and Fire Prevention Bureau will call to inspect. Contact the Health Department yourself.",
+  "application_url": "https://www.usrtoday.org/DocumentCenter/View/380/Certificate-of-ResaleRental-Application-PDF",
+  "department_url": "https://www.usrtoday.org/159/Building-Department",
+  "phone": "201-327-2196 ext. 231",
+  "email": "usrpermits@usrtoday.org",
+  "contact_name": "Gina DeMott",
+  "contact_title": "Technical Assistant, Building Department",
+  "evidence": [
+   {
+    "url": "https://ecode360.com/12199576",
+    "quote": "No person shall change ownership or otherwise transfer title or lease a dwelling to a new owner or tenant of such dwelling unless and until that person shall have first obtained from the Construction Official, or his/her designee, a certificate of continued occupancy.",
+    "doc_date": "Ord. No. 12-08 (10-8-2008)",
+    "via": "page",
+    "verified": null
+   },
+   {
+    "url": "https://ecode360.com/12199576",
+    "quote": "An application for a certificate of continued occupancy shall be made in writing and shall state the name and address of the owner of the dwelling and the name and address of the buyer",
+    "doc_date": "Ord. No. 12-08",
+    "via": "page",
+    "verified": null
+   },
+   {
+    "url": "https://www.usrtoday.org/DocumentCenter/View/380/Certificate-of-ResaleRental-Application-PDF",
+    "quote": "This process could take up to 30 days",
+    "doc_date": "",
+    "via": "pdf",
+    "verified": null
+   },
+   {
+    "url": "https://www.usrtoday.org/DocumentCenter/View/380/Certificate-of-ResaleRental-Application-PDF",
+    "quote": "**CERTIFICATE VALID FOR 6 MONTHS**",
+    "doc_date": "",
+    "via": "pdf",
+    "verified": null
+   },
+   {
+    "url": "https://www.usrtoday.org/DocumentCenter/View/380/Certificate-of-ResaleRental-Application-PDF",
+    "quote": "There will be NO exemptions or conditional certificates issued",
+    "doc_date": "",
+    "via": "pdf",
+    "verified": null
+   },
+   {
+    "url": "https://www.usrtoday.org/159/Building-Department",
+    "quote": "Gina DeMott Technical Assistant usrpermits@usrtoday.org Phone: 201-327-2196 Ext. 231",
+    "doc_date": "2026-10-04 (page fetched)",
+    "via": "page",
+    "verified": true
+   },
+   {
+    "url": "https://www.usrtoday.org/159/Building-Department",
+    "quote": "Edward Ferraioli Construction Official/Const. Sub eferraioli@usrtoday.org Phone: 201-327-2196 Ext. 230",
+    "doc_date": "2026-10-04 (page fetched)",
+    "via": "page",
+    "verified": true
+   }
+  ],
+  "confidence": "high",
+  "notes": "Upper Saddle River Code Chapter 40 (Certificates of Continued Occupancy) was read through the ecode360 print view. The Borough packet is a scanned image PDF (no text layer), so its quotes were read visually and automated checks will not find them; it names James J. Dougherty as Director of Code Enforcement / Construction Official, while the current Building Department page lists Edward Ferraioli as Construction Official. The packet gives Gina DeMott's number as (201) 934-3966. The packet's Health Department page names Helena Loveless (201-327-2196, info@usrtoday.org) and Bergen County Health (201-634-2726)."
+ },
+ "fire_cert": {
+  "requirements": [
+   "Smoke detectors at the base of each stairway on each level (including the basement) and outside each sleeping area within 10 feet of bedroom doors",
+   "Hardwired or interconnected alarms from original construction must stay hardwired; others may be 10-year sealed battery (UL 217) or central-station monitored",
+   "Proof of end of life is required for any device more than 7 years old",
+   "Carbon monoxide alarms (UL 2034, NFPA 720) within 10 feet outside every bedroom; battery, hardwired or plug-in",
+   "Central station systems need a certified central station test document plus a field inspection",
+   "Portable ABC fire extinguisher (Code Section 51-9 and the packet still list it)",
+   "Someone 18 or older (owner, tenant, realtor or agent) with a driver license must let the inspector in"
+  ],
+  "authorities": [
+   {
+    "name": "Upper Saddle River Bureau of Fire Prevention",
+    "type": "municipal_fire_bureau",
+    "area_served": "Entire borough",
+    "lead_time": "Regular fee applies when the application comes in at least five calendar days before the change of occupancy (code); the packet's fee sheet says more than 10 business days. Inspection dates are set by the office. The certificate is valid for six (6) months.",
+    "fees": [
+     {
+      "label": "Smoke/CO/extinguisher certificate, application received prior to five calendar days before change of occupancy (Code Section 51-9)",
+      "amount": "$70",
+      "quote": "Applications received prior to five calendar days before change of occupancy: $70.",
+      "source_url": "https://ecode360.com/8645520",
+      "verified": null
+     },
+     {
+      "label": "Smoke/CO/extinguisher certificate, four days or less notice (Code Section 51-9)",
+      "amount": "$125",
+      "quote": "Applications received with four days or less notice: $125.",
+      "source_url": "https://ecode360.com/8645520",
+      "verified": null
+     },
+     {
+      "label": "Fire Prevention application, regular inspection (Borough packet)",
+      "amount": "$70.00",
+      "quote": "$70.00- Regular Inspection",
+      "source_url": "https://www.usrtoday.org/DocumentCenter/View/380/Certificate-of-ResaleRental-Application-PDF",
+      "verified": null
+     },
+     {
+      "label": "Fire Prevention application, expedited inspection (Borough packet)",
+      "amount": "$125.00",
+      "quote": "$125.00- Expedited Inspection",
+      "source_url": "https://www.usrtoday.org/DocumentCenter/View/380/Certificate-of-ResaleRental-Application-PDF",
+      "verified": null
+     },
+     {
+      "label": "Reinspection (non-working, recalled or missing alarms, or no-shows)",
+      "amount": "$35.00",
+      "quote": "$35.00- Reinspection",
+      "source_url": "https://www.usrtoday.org/DocumentCenter/View/380/Certificate-of-ResaleRental-Application-PDF",
+      "verified": null
+     }
+    ],
+    "how_to_apply": "Fill out the Fire Prevention Application (Certificate of Smoke Detector / Carbon Monoxide Alarm Compliance) in the resale packet and include the fee check payable to the Borough of Upper Saddle River with the packet at the Building Department. The Fire Prevention Bureau then contacts you to schedule.",
+    "application_url": "https://www.usrtoday.org/DocumentCenter/View/380/Certificate-of-ResaleRental-Application-PDF",
+    "department_url": "https://www.usrtoday.org/159/Building-Department",
+    "phone": "201-327-4343",
+    "email": "usrfireofficial@usrtoday.org",
+    "contact_name": "Darryl J DeMott",
+    "contact_title": "Fire Official (NJ DCA fire directory); packet contact Gina De Mott, (201) 932-0350, fpassistant@usrtoday.org",
+    "evidence": [
+     {
+      "url": "https://ecode360.com/8645520",
+      "quote": "Before any residential structure, unit, apartment, condo, or townhouse is sold, leased, or otherwise made subject to a change of occupancy for residential purpose, the owner shall obtain a certificate of compliance from the Bureau of Fire Code Enforcement.",
+      "doc_date": "Ord. No. 2-23 (3-30-2023)",
+      "via": "page",
+      "verified": null
+     },
+     {
+      "url": "https://ecode360.com/8645520",
+      "quote": "An application shall be completed, and the property fee paid prior to the scheduling of an inspection.",
+      "doc_date": "Ord. No. 2-23",
+      "via": "page",
+      "verified": null
+     },
+     {
+      "url": "https://www.usrtoday.org/DocumentCenter/View/380/Certificate-of-ResaleRental-Application-PDF",
+      "quote": "Fee: $70 or $125 for EXPEDITED Reinspection Fee: $35",
+      "doc_date": "",
+      "via": "pdf",
+      "verified": null
+     },
+     {
+      "url": "https://www.usrtoday.org/DocumentCenter/View/380/Certificate-of-ResaleRental-Application-PDF",
+      "quote": "Requests for a CSACMAPFEC received more than 10 business days $ $75.00",
+      "doc_date": "",
+      "via": "pdf",
+      "verified": null
+     },
+     {
+      "url": "https://www.usrtoday.org/DocumentCenter/View/380/Certificate-of-ResaleRental-Application-PDF",
+      "quote": "The certificate is valid for six (6) months. With each and every change of ownership or occupancy, a new application shall be required.",
+      "doc_date": "",
+      "via": "pdf",
+      "verified": null
+     },
+     {
+      "url": "https://www.nj.gov/dca/dfs/pdf/fire%20directory_county%20summary/fire_code_enforcement_director.pdf",
+      "quote": "LEAID: 0263-001 Upper Saddle River Boro SMOKE DETECTOR COMPLIANCE Name: Upper Saddle River Boro Enf Auth. Fire Dept Addr: 376 W Saddle River Rd Fire Official Darryl J DeMott Phone (201) 327-4343 Email usrfireofficial@usrtoday.org",
+      "doc_date": "survey date 7/13/2026",
+      "via": "state_directory",
+      "verified": null
+     },
+     {
+      "url": "https://nj.gov/dca/dfs/pdf/ANNUAL%20REGISTRY/THIRD%20QUARTER%20LEA%20REGISTRY%202026.pdf",
+      "quote": "F Upper Saddle River Borough",
+      "doc_date": "2026-07",
+      "via": "pdf",
+      "verified": true
+     }
+    ],
+    "confidence": "high"
+   }
+  ],
+  "notes": "Fee sources disagree slightly: Code Section 51-9 (2023) and the packet cover sheet say $70 regular / $125 short notice (four days or less), while the packet's instruction page says $75.00 for requests more than 10 business days ahead and $125.00 for fewer than 4 business days; the $75.00 line is not used as a fee here. Both the code and the packet still require a portable fire extinguisher, which the state dropped from the sale certificate in February 2025 (P.L.2025, c.19); confirm with the Bureau. The packet is a scanned PDF read visually."
+ },
+ "other_items": [
+  {
+   "label": "Well test and septic/cesspool (Health Department)",
+   "detail": "The resale packet requires the seller to contact the Health Department; the Bergen County sheet in the packet says wells must be tested by a certified lab and cesspools or non-compliant septic systems must be updated at realty transfer.",
+   "source_url": "https://www.usrtoday.org/DocumentCenter/View/380/Certificate-of-ResaleRental-Application-PDF"
+  },
+  {
+   "label": "Open or unpaid permits and violations",
+   "detail": "The Building Department checks the address for open permits, unpaid permits or violations before the certificate is issued.",
+   "source_url": "https://www.usrtoday.org/DocumentCenter/View/380/Certificate-of-ResaleRental-Application-PDF"
+  }
+ ],
+ "open_questions": [
+  "Is the regular smoke/CO fee $70 or $75, and is the cutoff five calendar days or 10 business days?",
+  "Is the portable fire extinguisher still checked after P.L.2025, c.19?",
+  "What exactly does the Health Department require for homes on public water and sewer?"
+ ],
+ "checked_at": "2026-10-04",
+ "verification": {
+  "fees": 8,
+  "fee_ok": 0,
+  "fee_bad": 0,
+  "fee_unchecked": 8,
+  "quotes": 14,
+  "q_ok": 3,
+  "q_bad": 0,
+  "q_unchecked": 11
+ }
+}

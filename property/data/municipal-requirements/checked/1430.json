@@ -1,0 +1,248 @@
+{
+ "municipality_code": "1430",
+ "municipality": "Long Hill Township",
+ "county": "MORRIS",
+ "resale_co": {
+  "status": "required",
+  "name": "Certificate of Construction Records Clearance (CRC)",
+  "issued_by": "Township of Long Hill Construction Office (Construction Official)",
+  "lead_time": "Submit the application and fee at least 10 business days before the change of ownership (ordinance); the form charges more when filed under 7 business days.",
+  "valid_for": "",
+  "requirements": [
+   "No open construction permits on the property; if permits are open, all final inspections and approvals must be completed and UCC certificates issued first",
+   "Application lists property, closing date (required), seller/agent, block and lot and property type",
+   "Exempt (if no change in physical occupancy): deed corrections, ancient deeds, spouse/former spouse transfers, new construction with a CO, estate distributions, refinancing, receivers/trustees"
+  ],
+  "fees": [
+   {
+    "label": "Construction Records Clearance, filed more than 7 business days before closing",
+    "amount": "$50",
+    "quote": "APPLICATION FEE: $50 OVER 7 BUSINESS DAYS or $100 UNDER 7 BUSINESS DAYS",
+    "source_url": "https://www.longhillnj.gov/_Content/pdf/forms/Construction-Records-Clearance-Application.pdf",
+    "verified": null
+   },
+   {
+    "label": "Construction Records Clearance, filed under 7 business days before closing",
+    "amount": "$100",
+    "quote": "APPLICATION FEE: $50 OVER 7 BUSINESS DAYS or $100 UNDER 7 BUSINESS DAYS",
+    "source_url": "https://www.longhillnj.gov/_Content/pdf/forms/Construction-Records-Clearance-Application.pdf",
+    "verified": null
+   }
+  ],
+  "how_to_apply": "Submit the Construction Records Clearance Application to the Construction Office at Town Hall, 915 Valley Road, with exact cash or a check payable to Long Hill Township. The first point of contact is the Technical Assistant (construction@longhillnj.gov, 908-647-8000 ext. 217).",
+  "application_url": "https://www.longhillnj.gov/_Content/pdf/forms/Construction-Records-Clearance-Application.pdf",
+  "department_url": "https://www.longhillnj.gov/Departments/construction-department",
+  "phone": "908-647-8000 ext. 217",
+  "email": "construction@longhillnj.gov",
+  "contact_name": "Jeff Heiss",
+  "contact_title": "Construction Code Official / Building Subcode Official (ext. 216)",
+  "evidence": [
+   {
+    "url": "https://ecode360.com/35982748",
+    "quote": "A CRC shall be required prior to the sale of any residential or commercial structure and prior to the rental of any tenant space in a commercial structure within the Township.",
+    "doc_date": "2024-08-14 (Ord. No. 543-24)",
+    "via": "page",
+    "verified": null
+   },
+   {
+    "url": "https://ecode360.com/35982748",
+    "quote": "A CRC shall be issued if, but only if, there are no open construction permits on the premises.",
+    "doc_date": "2024-08-14 (Ord. No. 543-24)",
+    "via": "page",
+    "verified": null
+   },
+   {
+    "url": "https://ecode360.com/35982748",
+    "quote": "The owner or his authorized agent shall submit a written application and payment of fees at least 10 business days prior to the change of ownership and/or occupancy on the form available from the Construction Office.",
+    "doc_date": "2024-08-14 (Ord. No. 543-24)",
+    "via": "page",
+    "verified": null
+   },
+   {
+    "url": "https://www.longhillnj.gov/_Content/pdf/forms/Construction-Records-Clearance-Application.pdf",
+    "quote": "APPLICATION FEE: $50 OVER 7 BUSINESS DAYS or $100 UNDER 7 BUSINESS DAYS",
+    "doc_date": "2026-10-04 (page fetched)",
+    "via": "pdf",
+    "verified": null
+   },
+   {
+    "url": "https://www.longhillnj.gov/forms",
+    "quote": "Construction Records Clearance Application",
+    "doc_date": "2026-10-04 (page fetched)",
+    "via": "page",
+    "verified": null
+   }
+  ],
+  "confidence": "medium",
+  "notes": "Long Hill does not run a full resale housing inspection. Since Ordinance 543-24 (August 14, 2024), Section 29-3 requires a Construction Records Clearance certificate (a records check for open permits) before any residential sale; fees are set by resolution and the Township form charges $50 when filed more than 7 business days ahead or $100 under 7 business days. The CRC form is a scanned image PDF, so its fee quote cannot be text-matched. Section LU-105.3 applies certificates of continued occupancy only to non-residential uses, and the Planning and Zoning page says a Zoning Permit / Certificate of Continued Compliance ($75.00) is required for change of tenancy (rental), not sales. The Fire Official's sale inspection also checks sump pump discharge (see other items). Construction contact names are from the Construction Department page."
+ },
+ "fire_cert": {
+  "requirements": [
+   "Smoke alarms: basement at bottom of stairs, each floor at the stairs, and within 10 feet of any bedroom/sleeping area on each level (UL listed); battery alarms must be 10-year sealed units",
+   "Carbon monoxide alarms inside and/or outside sleeping areas, in the hallway within 10 feet of bedroom doors, and in any finished basement or recreation area",
+   "Existing hardwired or wireless interconnected fire alarm systems maintained to original level",
+   "Secondary power source label within 18 inches of the main electrical panel and meter (P.L. 2025, c.19), if applicable",
+   "Sump pump discharge not connected to the sanitary waste line",
+   "House number in numerals at least 3 inches high, matching tax records",
+   "Portable fire extinguisher no longer required for home sales (still required for rentals)"
+  ],
+  "authorities": [
+   {
+    "name": "Long Hill Township Fire Prevention (Office of the Fire Official)",
+    "type": "municipal_fire_bureau",
+    "area_served": "Entire township",
+    "lead_time": "Fee depends on business days between the completed application and closing: more than 10 business days for the lowest fee. Appointments are based on availability. Certificates are valid for 6 months from issue.",
+    "fees": [
+     {
+      "label": "Certificate of Inspection, application received more than 10 business days before closing",
+      "amount": "$100",
+      "quote": "INSPECTION REQUESTS RECEIVED 10 or more business days prior to closing/tenant turnover = $100.",
+      "source_url": "https://www.longhillnj.gov/_Content/pdf/forms/Fire-Prevention-Residential-Alarm-Inspection-Guidelines.pdf",
+      "verified": true
+     },
+     {
+      "label": "Certificate of Inspection, 4 to 10 business days before closing",
+      "amount": "$140",
+      "quote": "INSPECTION REQUESTS RECEIVED 4-10 business days prior to closing/tenant turnover = $140.",
+      "source_url": "https://www.longhillnj.gov/_Content/pdf/forms/Fire-Prevention-Residential-Alarm-Inspection-Guidelines.pdf",
+      "verified": true
+     },
+     {
+      "label": "Certificate of Inspection, 4 business days or less before closing",
+      "amount": "$211",
+      "quote": "INSPECTION REQUESTS RECEIVED 4 business days or less prior to closing/tenant turnover = $211.",
+      "source_url": "https://www.longhillnj.gov/_Content/pdf/forms/Fire-Prevention-Residential-Alarm-Inspection-Guidelines.pdf",
+      "verified": true
+     },
+     {
+      "label": "Reinspection after failed inspection (10+ day tier)",
+      "amount": "$25",
+      "quote": "Reinspection fee following an unsuccessful initial inspection = $25.",
+      "source_url": "https://www.longhillnj.gov/_Content/pdf/forms/Fire-Prevention-Residential-Alarm-Inspection-Guidelines.pdf",
+      "verified": true
+     },
+     {
+      "label": "Reinspection after failed inspection (4-10 day tier)",
+      "amount": "$50",
+      "quote": "Reinspection fee following an unsuccessful initial inspection = $50.",
+      "source_url": "https://www.longhillnj.gov/_Content/pdf/forms/Fire-Prevention-Residential-Alarm-Inspection-Guidelines.pdf",
+      "verified": true
+     },
+     {
+      "label": "Reinspection after failed inspection (4 days or less tier)",
+      "amount": "$100",
+      "quote": "Reinspection fee following an unsuccessful initial inspection = $100.",
+      "source_url": "https://www.longhillnj.gov/_Content/pdf/forms/Fire-Prevention-Residential-Alarm-Inspection-Guidelines.pdf",
+      "verified": true
+     },
+     {
+      "label": "No-show for a scheduled appointment",
+      "amount": "$50",
+      "quote": "No-show for a scheduled appointment = $50 reinspection fee",
+      "source_url": "https://www.longhillnj.gov/_Content/pdf/forms/Fire-Prevention-Residential-Alarm-Inspection-Guidelines.pdf",
+      "verified": true
+     }
+    ],
+    "how_to_apply": "Complete the 'Application for Home Sale/Change in Tenancy Certificate of Inspection' and submit it with payment to \"Township of Long Hill\", ATTN: Fire Official, 915 Valley Road, Gillette (by mail with a check, or in person with cash, check or credit card; card payments carry a convenience fee). Test all alarms before the inspection.",
+    "application_url": "https://www.longhillnj.gov/_Content/pdf/forms/Smoke-Alarm-Carbon-Monoxide-Portable-Fire-Extinguisher-and-Sump-Pump-Compliance-Application-for-Inspection.pdf",
+    "department_url": "https://www.longhillnj.gov/pages/fire-prevention",
+    "phone": "(908) 647-8000, Ext 307",
+    "email": "fireofficial@longhillnj.gov",
+    "contact_name": "Don Huber",
+    "contact_title": "Fire Official",
+    "evidence": [
+     {
+      "url": "https://www.longhillnj.gov/_Content/pdf/forms/Smoke-Alarm-Carbon-Monoxide-Portable-Fire-Extinguisher-and-Sump-Pump-Compliance-Application-for-Inspection.pdf",
+      "quote": "Change in Tenancy Certificate of Inspection",
+      "doc_date": "Rev. 07/2026",
+      "via": "pdf",
+      "verified": true
+     },
+     {
+      "url": "https://www.longhillnj.gov/_Content/pdf/forms/Smoke-Alarm-Carbon-Monoxide-Portable-Fire-Extinguisher-and-Sump-Pump-Compliance-Application-for-Inspection.pdf",
+      "quote": "- Portable fire extinguisher no longer required for home sales only -",
+      "doc_date": "Rev. 07/2026",
+      "via": "pdf",
+      "verified": true
+     },
+     {
+      "url": "https://www.longhillnj.gov/_Content/pdf/forms/Smoke-Alarm-Carbon-Monoxide-Portable-Fire-Extinguisher-and-Sump-Pump-Compliance-Application-for-Inspection.pdf",
+      "quote": "For further information or assistance, please contact the Fire Official at fireofficial@longhillnj.gov or call (908) 647-8000, Ext 307.",
+      "doc_date": "Rev. 07/2026",
+      "via": "pdf",
+      "verified": true
+     },
+     {
+      "url": "https://www.longhillnj.gov/_Content/pdf/forms/Fire-Prevention-Residential-Alarm-Inspection-Guidelines.pdf",
+      "quote": "INSPECTION REQUESTS RECEIVED 10 or more business days prior to closing/tenant turnover =",
+      "doc_date": "2026-10-04 (page fetched)",
+      "via": "pdf",
+      "verified": true
+     },
+     {
+      "url": "https://www.longhillnj.gov/_Content/pdf/forms/Fire-Prevention-Residential-Alarm-Inspection-Guidelines.pdf",
+      "quote": "Upon satisfactory completion of inspection, a certificate will be issued. Certificates are valid for 6 months from date of issue.",
+      "doc_date": "2026-10-04 (page fetched)",
+      "via": "pdf",
+      "verified": true
+     },
+     {
+      "url": "https://www.longhillnj.gov/_Content/pdf/forms/Fire-Prevention-Residential-Alarm-Inspection-Guidelines.pdf",
+      "quote": "If you have any further questions, please contact the Fire Official, Don Huber, (908) 647-8000,",
+      "doc_date": "2026-10-04 (page fetched)",
+      "via": "pdf",
+      "verified": true
+     },
+     {
+      "url": "https://nj.gov/dca/dfs/pdf/ANNUAL%20REGISTRY/THIRD%20QUARTER%20LEA%20REGISTRY%202026.pdf",
+      "quote": "M Long Hill Township",
+      "doc_date": "2026-07",
+      "via": "pdf",
+      "verified": true
+     },
+     {
+      "url": "https://www.nj.gov/dca/dfs/pdf/fire%20directory_county%20summary/fire_code_enforcement_director.pdf",
+      "quote": "Fire Official Donald M Huber",
+      "doc_date": "2026-06-03 (survey date)",
+      "via": "state_directory",
+      "verified": null
+     }
+    ],
+    "confidence": "high"
+   }
+  ],
+  "notes": "Long Hill's Fire Official runs the sale inspection (smoke, CO, secondary power label, sump pump). The current application (Rev. 07/2026) and the guidelines both show $100 / $140 / $211 tiers; the guidelines give tiered reinspection fees ($25 / $50 / $100) while the application shows a flat $25 reinspection and $50 no-show. The application and guidelines both say a portable fire extinguisher is no longer required for home sales, in line with P.L.2025, c.19. An older 'Application for Certificate for Resale of Residential Property Only - NO PERMITTED OCCUPANCY' form (Rev. 08/2024, same fee tiers) is also posted for sales where the buyer will not occupy. The NJ DCA LEA registry code for Long Hill is M; the state directory lists the township (Municipal) as enforcing agency with Fire Official Donald M Huber."
+ },
+ "other_items": [
+  {
+   "label": "Sump pump discharge check",
+   "detail": "The Fire Official's sale inspection verifies sump pump discharge lines are not connected to the sanitary waste line.",
+   "source_url": "https://www.longhillnj.gov/_Content/pdf/forms/Smoke-Alarm-Carbon-Monoxide-Portable-Fire-Extinguisher-and-Sump-Pump-Compliance-Application-for-Inspection.pdf"
+  },
+  {
+   "label": "House numbers",
+   "detail": "House numbers must be in numerals at least three inches high and match tax records (Chapter 29-2.5).",
+   "source_url": "https://www.longhillnj.gov/_Content/pdf/forms/Fire-Prevention-Residential-Alarm-Inspection-Guidelines.pdf"
+  },
+  {
+   "label": "Resale certificate without occupancy",
+   "detail": "A separate resale-only fire certificate with no permitted occupancy is available (same $100 / $140 / $211 tiers) when the buyer will not move in right away.",
+   "source_url": "https://www.longhillnj.gov/_Content/pdf/forms/re-sale-fire-inspection-form.pdf"
+  }
+ ],
+ "open_questions": [
+  "Is the CRC fee still $50 / $100 by resolution, and how long is a CRC valid?",
+  "Which reinspection fee applies: flat $25 (application) or tiered $25 / $50 / $100 (guidelines)?"
+ ],
+ "checked_at": "2026-10-04",
+ "verification": {
+  "fees": 9,
+  "fee_ok": 7,
+  "fee_bad": 0,
+  "fee_unchecked": 2,
+  "quotes": 13,
+  "q_ok": 7,
+  "q_bad": 0,
+  "q_unchecked": 6
+ }
+}

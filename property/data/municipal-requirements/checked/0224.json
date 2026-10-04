@@ -1,0 +1,227 @@
+{
+ "municipality_code": "0224",
+ "municipality": "Harrington Park Borough",
+ "county": "BERGEN",
+ "resale_co": {
+  "status": "required",
+  "name": "Rental and/or Resale Certificate (Certificate of Continued Occupancy) with Smoke Detector/Carbon Monoxide Alarm compliance",
+  "issued_by": "Borough of Harrington Park Building Department (Construction Department), with the Harrington Park Fire Prevention Bureau inspecting smoke and CO alarms",
+  "lead_time": "Borough code says the inspection is done within 21 days of a complete application; an extra $40 buys 5 day service.",
+  "valid_for": "Inspections are valid for 6 months. A temporary certificate (with escrow) may be issued for up to 90 days.",
+  "requirements": [
+   "Property used as zoned or approved (one family, two family, etc.)",
+   "No sump pump or unauthorized water connection into the sanitary sewer",
+   "All open construction permits inspected, approved and closed",
+   "Sidewalks, if installed, in good condition",
+   "No interior double-key lock on the main entry/exit door",
+   "At least one handrail on stairs with 4 or more risers",
+   "No hazardous or imminent-danger conditions on a general visual inspection",
+   "Pools need an approved barrier with gates that open out, self-close and latch",
+   "Smoke detector on each level including the basement, and within 10 feet of all bedroom doors (not in attics, crawl spaces or right by the kitchen); battery or interconnected electric",
+   "At least one carbon monoxide alarm within 10 feet of all bedroom doors (battery, plug-in or combination)",
+   "Fire extinguisher (the form title still lists it, but the checklist gives no extinguisher requirement)"
+  ],
+  "fees": [
+   {
+    "label": "Rental/resale certificate and smoke/CO inspection, one-family or condo/townhouse",
+    "amount": "$160",
+    "quote": "$160 = One-Family, Condo/Townhouse",
+    "source_url": "https://www.harringtonparknj.gov/government/forms/construction/non-construction-applications-forms/708-rental-resale-certificate-application-fillable/file",
+    "verified": true
+   },
+   {
+    "label": "Rental/resale certificate, multi-family (per apartment)",
+    "amount": "$110",
+    "quote": "$110 = Multi-Family (per apartment)",
+    "source_url": "https://www.harringtonparknj.gov/government/forms/construction/non-construction-applications-forms/708-rental-resale-certificate-application-fillable/file",
+    "verified": true
+   },
+   {
+    "label": "Expedited 5 day service (added to the fee)",
+    "amount": "$40",
+    "quote": "*Add additional $40 for 5 day service",
+    "source_url": "https://www.harringtonparknj.gov/government/forms/construction/non-construction-applications-forms/708-rental-resale-certificate-application-fillable/file",
+    "verified": true
+   }
+  ],
+  "how_to_apply": "Fill out the Borough's Rental and/or Resale Certificate & Smoke Detector/Carbon Monoxide Alarm/Fire Extinguisher Compliance application (property, buyer, seller, realtor, closing date, email required) and pay by check to the \"Borough of Harrington Park\" at the time of application. For residential properties, contact Tom Simpson (201-321-9550, tsimp07640@gmail.com) to schedule inspections. Building Department office: 85 Harriot Avenue, 201-768-2585.",
+  "application_url": "https://www.harringtonparknj.gov/government/forms/construction/non-construction-applications-forms/708-rental-resale-certificate-application-fillable/file",
+  "department_url": "https://www.harringtonparknj.gov/departments/construction",
+  "phone": "201-768-2585",
+  "email": "building@harringtonparknj.gov",
+  "contact_name": "Jody Wasson",
+  "contact_title": "Technical Assistant to the Construction Official (Construction Official: Scott Wickersheim, constructionofficial@harringtonparknj.gov)",
+  "evidence": [
+   {
+    "url": "https://www.harringtonparknj.gov/departments/construction",
+    "quote": "As of May 2024 - If you are selling or renting your property, a Residential Rental/Resale Certificate Application is required.",
+    "doc_date": "2026-10-04 (page fetched)",
+    "via": "page",
+    "verified": true
+   },
+   {
+    "url": "https://www.harringtonparknj.gov/government/forms/construction/non-construction-applications-forms/708-rental-resale-certificate-application-fillable/file",
+    "quote": "*Inspections are valid for 6 months",
+    "doc_date": "2026-08-19 (as of date on checklist)",
+    "via": "pdf",
+    "verified": true
+   },
+   {
+    "url": "https://www.harringtonparknj.gov/government/forms/construction/non-construction-applications-forms/708-rental-resale-certificate-application-fillable/file",
+    "quote": "All open construction permits are inspected, approved and closed.",
+    "doc_date": "2026-08-19",
+    "via": "pdf",
+    "verified": true
+   },
+   {
+    "url": "https://www.harringtonparknj.gov/government/forms/construction/non-construction-applications-forms/708-rental-resale-certificate-application-fillable/file",
+    "quote": "Contact Tom Simpson or Scott Wickersheim to schedule inspections.",
+    "doc_date": "2026-08-19",
+    "via": "pdf",
+    "verified": true
+   },
+   {
+    "url": "https://ecode360.com/13391613",
+    "quote": "No person shall occupy, rent, lease, transfer title, or inhabit as a tenant or tenants or occupy as an new owner any residential use until the current owner or representative of such owner (including an attorney representing the owner or prospective purchaser of such property) has applied for and secured a certificate of continued occupancy from the Construction Department of the Borough of Harrington Park.",
+    "doc_date": "2012-06-19 (Ord. No. 670)",
+    "via": "page",
+    "verified": null
+   },
+   {
+    "url": "https://ecode360.com/13391613",
+    "quote": "A certificate of smoke detector installation shall be issued by the Harrington Park Fire Prevention Bureau before a certificate of continued occupancy may be issued.",
+    "doc_date": "2012-06-19 (Ord. No. 670)",
+    "via": "page",
+    "verified": null
+   },
+   {
+    "url": "https://ecode360.com/13391613",
+    "quote": "No temporary certificate of continued occupancy shall exceed 90 days unless extenuating circumstances are shown.",
+    "doc_date": "2012-06-19",
+    "via": "page",
+    "verified": null
+   },
+   {
+    "url": "https://www.harringtonparknj.gov/departments/construction",
+    "quote": "Jody Wasson Technical Assistant to the Construction Official (TACO)",
+    "doc_date": "2026-10-04 (page fetched)",
+    "via": "page",
+    "verified": true
+   }
+  ],
+  "confidence": "high",
+  "notes": "The Borough's Building & Zoning page (2026) and its combined Rental and/or Resale Certificate application (checklist dated as of 8/19/2026) require a certificate for any sale. Borough code Chapter 118, Article II (Ord. No. 670 of 2012, read through the ecode360 print view) requires a certificate of continued occupancy for any residential change of owner. Note: Ordinance #750 (introduced January 19, 2021) on the Borough site rewrote that section to cover only residential property with more than 2 units or commercial use, but the current Borough page and form still apply to single and two family homes; the online code had not been updated. The form does not list a separate two-family fee (only one-family/condo $160 and multi-family $110 per apartment). Lead paint inspection ($20 surcharge plus $40 admin, or $175 if the Borough inspects) applies to rentals of pre-1978 buildings only, not sales."
+ },
+ "fire_cert": {
+  "requirements": [
+   "Smoke detector on each level, including the basement",
+   "Smoke detectors within 10 feet of all bedroom doors; not in attics, crawl spaces or the immediate kitchen area",
+   "Smoke detectors may be battery operated or an electric interconnected system",
+   "At least one carbon monoxide alarm within 10 feet of all bedroom doors (battery, plug-in or combination smoke/CO)",
+   "Fire extinguisher (named in the form title; form still lists it, no placement rules given)"
+  ],
+  "authorities": [
+   {
+    "name": "Harrington Park Fire Prevention Bureau (Harrington Park Fire Department), inspected with the Borough Rental/Resale Certificate",
+    "type": "municipal_fire_bureau",
+    "area_served": "Entire borough",
+    "lead_time": "Inspections by appointment; extra $40 for 5 day service. Valid 6 months.",
+    "fees": [
+     {
+      "label": "Rental/resale certificate and smoke/CO inspection, one-family or condo/townhouse",
+      "amount": "$160",
+      "quote": "$160 = One-Family, Condo/Townhouse",
+      "source_url": "https://www.harringtonparknj.gov/government/forms/construction/non-construction-applications-forms/708-rental-resale-certificate-application-fillable/file",
+      "verified": true
+     },
+     {
+      "label": "Expedited 5 day service (added to the fee)",
+      "amount": "$40",
+      "quote": "*Add additional $40 for 5 day service",
+      "source_url": "https://www.harringtonparknj.gov/government/forms/construction/non-construction-applications-forms/708-rental-resale-certificate-application-fillable/file",
+      "verified": true
+     }
+    ],
+    "how_to_apply": "Use the Borough's combined Rental and/or Resale Certificate & Smoke Detector/Carbon Monoxide Alarm/Fire Extinguisher Compliance application; contact Tom Simpson to schedule.",
+    "application_url": "https://www.harringtonparknj.gov/government/forms/construction/non-construction-applications-forms/708-rental-resale-certificate-application-fillable/file",
+    "department_url": "https://www.harringtonparknj.gov/departments/construction",
+    "phone": "201-321-9550",
+    "email": "tsimp07640@gmail.com",
+    "contact_name": "Thomas E Simpson",
+    "contact_title": "Fire Official (residential contact on the application)",
+    "evidence": [
+     {
+      "url": "https://www.harringtonparknj.gov/government/forms/construction/non-construction-applications-forms/708-rental-resale-certificate-application-fillable/file",
+      "quote": "Tom Simpson: 201-321-9550",
+      "doc_date": "2026-08-19",
+      "via": "pdf",
+      "verified": true
+     },
+     {
+      "url": "https://www.harringtonparknj.gov/government/forms/construction/non-construction-applications-forms/708-rental-resale-certificate-application-fillable/file",
+      "quote": "At least (1) carbon monoxide shall be installed outside and within 10 feet of all bedroom doors.",
+      "doc_date": "2026-08-19",
+      "via": "pdf",
+      "verified": true
+     },
+     {
+      "url": "https://www.harringtonparknj.gov/government/forms/construction/non-construction-applications-forms/708-rental-resale-certificate-application-fillable/file",
+      "quote": "Smoke detectors shall be located (1) on each level, including basement.",
+      "doc_date": "2026-08-19",
+      "via": "pdf",
+      "verified": true
+     },
+     {
+      "url": "https://nj.gov/dca/dfs/pdf/ANNUAL%20REGISTRY/THIRD%20QUARTER%20LEA%20REGISTRY%202026.pdf",
+      "quote": "F Harrington Park Borough",
+      "doc_date": "2026-07",
+      "via": "pdf",
+      "verified": true
+     },
+     {
+      "url": "https://www.nj.gov/dca/dfs/pdf/fire%20directory_county%20summary/fire_code_enforcement_director.pdf",
+      "quote": "LEAID: 0224-001 Enf Auth. Fire Dept Fire Official Thomas E Simpson Phone (201) 321-9550 Addr: 13 Kline St Harrington Park NJ 07640 ... Email tsimp07640@gmail.com",
+      "doc_date": "2026-02-19 (survey date)",
+      "via": "state_directory",
+      "verified": null
+     }
+    ],
+    "confidence": "high"
+   }
+  ],
+  "notes": "The smoke/CO compliance is part of the Borough's one combined application and fee. Borough code Chapter 153, Article II says smoke/CO inspection fees and expedited fees are set in the Borough Fee Schedule (not published online). The form title still says Fire Extinguisher Compliance, but its checklist lists only smoke and CO alarm items; the state dropped the extinguisher from the sale certificate in February 2025 (P.L.2025, c.19), so confirm with the Fire Official."
+ },
+ "other_items": [
+  {
+   "label": "Sump pump / sewer connection",
+   "detail": "No sump pump or other unauthorized water connection into the sanitary sewer; checked during the resale inspection.",
+   "source_url": "https://www.harringtonparknj.gov/government/forms/construction/non-construction-applications-forms/708-rental-resale-certificate-application-fillable/file"
+  },
+  {
+   "label": "Sidewalks",
+   "detail": "Sidewalks, if installed, must be in good condition.",
+   "source_url": "https://www.harringtonparknj.gov/government/forms/construction/non-construction-applications-forms/708-rental-resale-certificate-application-fillable/file"
+  },
+  {
+   "label": "Open permits",
+   "detail": "All open construction permits must be inspected, approved and closed.",
+   "source_url": "https://www.harringtonparknj.gov/government/forms/construction/non-construction-applications-forms/708-rental-resale-certificate-application-fillable/file"
+  }
+ ],
+ "open_questions": [
+  "What is the fee for a two-family resale (the form shows only one-family $160 and multi-family $110 per apartment)?",
+  "Does Ordinance #750 (2021, limiting the CCO to more than 2 units) still apply anywhere, given the 2024 to 2026 page and form require it for all sales?",
+  "Is a fire extinguisher still checked at resale after P.L.2025, c.19?"
+ ],
+ "checked_at": "2026-10-04",
+ "verification": {
+  "fees": 5,
+  "fee_ok": 5,
+  "fee_bad": 0,
+  "fee_unchecked": 0,
+  "quotes": 13,
+  "q_ok": 9,
+  "q_bad": 0,
+  "q_unchecked": 4
+ }
+}

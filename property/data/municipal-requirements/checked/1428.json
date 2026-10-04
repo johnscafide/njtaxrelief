@@ -1,0 +1,238 @@
+{
+ "municipality_code": "1428",
+ "municipality": "Netcong Borough",
+ "county": "MORRIS",
+ "resale_co": {
+  "status": "required",
+  "name": "Certificate of Habitability (COH)",
+  "issued_by": "Borough of Netcong Zoning Officer",
+  "lead_time": "",
+  "valid_for": "",
+  "requirements": [
+   "Written application to the Zoning Officer with owner names and addresses, a description of the dwelling and any managing agent",
+   "Fee paid in full when the application is filed",
+   "Inspection finding the dwelling safe and fit for human habitation and in line with state statutes and Borough housing and health ordinances; violations must be corrected before the certificate is issued",
+   "Combined form also covers the residential fire inspection: number of smoke detectors, CO detectors and fire extinguishers (form still lists extinguishers)"
+  ],
+  "fees": [
+   {
+    "label": "Certificate of Habitability and Residential Fire Inspection, more than 10 days ahead (combined application)",
+    "amount": "$100",
+    "quote": "$100 (more than 10 days)",
+    "source_url": "https://netcong.org/?ddownload=26731",
+    "verified": true
+   },
+   {
+    "label": "Combined application within 10 days",
+    "amount": "$160",
+    "quote": "$160 (within 10 days)",
+    "source_url": "https://netcong.org/?ddownload=26731",
+    "verified": true
+   },
+   {
+    "label": "Combined application within 4 days",
+    "amount": "$185",
+    "quote": "$185 (within 4 days)",
+    "source_url": "https://netcong.org/?ddownload=26731",
+    "verified": true
+   },
+   {
+    "label": "Certificate of habitability inspection, each dwelling unit (Code Section 127-4B)",
+    "amount": "$35",
+    "quote": "The fee for each inspection of a dwelling unit shall be $35.",
+    "source_url": "https://ecode360.com/11254761",
+    "verified": null
+   },
+   {
+    "label": "Certificate of habitability reinspection (Code)",
+    "amount": "$20",
+    "quote": "The fee for a reinspection of a dwelling unit, if required, shall be $20.",
+    "source_url": "https://ecode360.com/11254761",
+    "verified": null
+   }
+  ],
+  "how_to_apply": "Download the 'Certificate of Habitability and Residential Fire Inspection Application' from the Borough Forms page (a COH Pre-Checklist is also posted), mark it Resale, give the closing date and inspection contact, and file it with the fee at Borough Hall, 23 Maple Avenue, Netcong, NJ 07857 (973-347-0252). Contact the Zoning Department for the application.",
+  "application_url": "https://netcong.org/?ddownload=26731",
+  "department_url": "https://netcong.org/zoning-habitability/",
+  "phone": "973-347-0252",
+  "email": "",
+  "contact_name": "",
+  "contact_title": "Zoning Officer (enforcement officer for certificates of habitability)",
+  "evidence": [
+   {
+    "url": "https://ecode360.com/11254761",
+    "quote": "No person, firm or corporation shall sell a dwelling or dwelling unit or permit the same to be sold without first obtaining a certificate of habitability, nor shall any person, firm or corporation buying a dwelling or dwelling unit and intending to occupy the same, do so, without securing a certificate of habitability, as hereinafter provided.",
+    "doc_date": "Adopted 9-9-1986",
+    "via": "page",
+    "verified": null
+   },
+   {
+    "url": "https://ecode360.com/11254761",
+    "quote": "The Zoning Officer of the Borough of Netcong is hereby designated as the enforcement officer to exercise the powers prescribed by this chapter.",
+    "doc_date": "Amended 3-8-2001 by Ord. No. 2001-6",
+    "via": "page",
+    "verified": null
+   },
+   {
+    "url": "https://ecode360.com/11254761",
+    "quote": "All fees paid for the issuance of a certificate of habitability shall be nonrefundable.",
+    "doc_date": "Amended 8-9-2007 by Ord. No. 2007-14",
+    "via": "page",
+    "verified": null
+   },
+   {
+    "url": "https://netcong.org/zoning-habitability/",
+    "quote": "You are required to obtain a Certificate of Habitability when you are selling your home.",
+    "doc_date": "2026-10-04 (page fetched)",
+    "via": "page",
+    "verified": true
+   },
+   {
+    "url": "https://netcong.org/borough-forms/",
+    "quote": "No person, firm or corporation shall sell a dwelling or dwelling unit or permit the same to be sold without first obtaining a certificate of habitability (COH)",
+    "doc_date": "2026-10-04 (page fetched)",
+    "via": "page",
+    "verified": true
+   },
+   {
+    "url": "https://netcong.org/?ddownload=26731",
+    "quote": "Certificate of Habitability and Residential Fire Inspection Application",
+    "doc_date": "2026-10-04 (page fetched)",
+    "via": "pdf",
+    "verified": true
+   }
+  ],
+  "confidence": "high",
+  "notes": "Chapter 127 of the Borough Code (read through the ecode360 print view) requires a certificate of habitability for every sale and sets $35 per inspection and $20 per reinspection. The Borough's current form combines the COH with the residential smoke/CO fire inspection; its fees ($100 / $160 / $185) equal the $35 COH fee plus the fire fees in Code Section 157-8 ($65 / $125 / $150), though the form does not say so. No named zoning officer or email was found on the Borough site; for rental inspections the site gives 973-347-0252 x 106. Building permits are handled by Byram Township's construction office (shared service, 973-347-2500 x 123). Annual rental registration and inspections are rental items, not sale items."
+ },
+ "fire_cert": {
+  "requirements": [
+   "Smoke alarms located and maintained per N.J.A.C. 5:70-4.19 and NFPA 72",
+   "Carbon monoxide alarms per N.J.A.C. 5:70-4.19 and NFPA 720",
+   "Portable fire extinguisher per N.J.A.C. 5:70-4.19(e) (Borough code and form still list it)",
+   "Installed fire alarm systems may need testing and maintenance records before the certificate is issued"
+  ],
+  "authorities": [
+   {
+    "name": "Netcong Borough Bureau of Fire Prevention",
+    "type": "municipal_fire_bureau",
+    "area_served": "Entire borough",
+    "lead_time": "Fee depends on how long before the change of ownership the inspection is requested: at least 10 days for the lowest fee.",
+    "fees": [
+     {
+      "label": "Smoke alarm, CO alarm and extinguisher certificate (CSACMAPFEC), requested at least 10 days before the change of ownership (Code Section 157-8)",
+      "amount": "$65",
+      "quote": "A fee of $65 shall be paid by the owner prior to each inspection, provided the inspection is requested at least 10 days prior to the change of occupancy or ownership.",
+      "source_url": "https://ecode360.com/11255009",
+      "verified": null
+     },
+     {
+      "label": "Requested within 10 days (Code)",
+      "amount": "$125",
+      "quote": "If the inspection is requested within 10 days of the change of occupancy or ownership, a fee of $125 shall be paid.",
+      "source_url": "https://ecode360.com/11255009",
+      "verified": null
+     },
+     {
+      "label": "Requested within 4 days (Code)",
+      "amount": "$150",
+      "quote": "If the inspection is requested within four days of the change of occupancy or ownership, a fee of $150 shall be paid.",
+      "source_url": "https://ecode360.com/11255009",
+      "verified": null
+     },
+     {
+      "label": "Certificate of Habitability and Residential Fire Inspection, more than 10 days ahead (combined application)",
+      "amount": "$100",
+      "quote": "$100 (more than 10 days)",
+      "source_url": "https://netcong.org/?ddownload=26731",
+      "verified": true
+     },
+     {
+      "label": "Combined application within 10 days",
+      "amount": "$160",
+      "quote": "$160 (within 10 days)",
+      "source_url": "https://netcong.org/?ddownload=26731",
+      "verified": true
+     },
+     {
+      "label": "Combined application within 4 days",
+      "amount": "$185",
+      "quote": "$185 (within 4 days)",
+      "source_url": "https://netcong.org/?ddownload=26731",
+      "verified": true
+     }
+    ],
+    "how_to_apply": "Use the combined Certificate of Habitability and Residential Fire Inspection Application (Borough Forms page). For questions email the Fire Prevention Bureau at netcongfpb@netcong.org or call (862) 599-0155; hours vary, so ask for an appointment.",
+    "application_url": "https://netcong.org/?ddownload=26731",
+    "department_url": "https://netcong.org/netcong-fire-prevention-bureau/",
+    "phone": "(862) 599-0155",
+    "email": "netcongfpb@netcong.org",
+    "contact_name": "Mark Sylvester",
+    "contact_title": "Fire Official",
+    "evidence": [
+     {
+      "url": "https://ecode360.com/11255009",
+      "quote": "The Fire Official of the Bureau of Fire Prevention and duly appointed inspectors are hereby empowered to conduct the necessary inspections and to issue certificates of compliance as contemplated herein.",
+      "doc_date": "Added 3-14-2024 by Ord. No. 2024-4",
+      "via": "page",
+      "verified": null
+     },
+     {
+      "url": "https://ecode360.com/11255009",
+      "quote": "Violation of §157-8, Certificate of smoke alarm, carbon monoxide alarm, and portable fire extinguisher compliance. Any person violating any of the provisions of this section shall, for each offense, be subject to a fine of not less than $500.",
+      "doc_date": "Ord. No. 2024-4",
+      "via": "page",
+      "verified": null
+     },
+     {
+      "url": "https://netcong.org/netcong-fire-prevention-bureau/",
+      "quote": "Mark Sylvester – Fire Official",
+      "doc_date": "2026-10-04 (page fetched)",
+      "via": "page",
+      "verified": true
+     },
+     {
+      "url": "https://netcong.org/netcong-fire-prevention-bureau/",
+      "quote": "Feel free to email the bureau for an appointment at netcongfpb@netcong.org . You can also contact the bureau at (862) 599-0155.",
+      "doc_date": "2026-10-04 (page fetched)",
+      "via": "page",
+      "verified": true
+     },
+     {
+      "url": "https://www.nj.gov/dca/dfs/pdf/fire%20directory_county%20summary/fire_code_enforcement_director.pdf",
+      "quote": "1428 Netcong Borough LEAID: 1428-001 Netcong Boro Enf Auth. Fire Dept Fire Official Mark J Sylvester Phone (973) 347-0252 Email netcongfpb@gmail.com",
+      "doc_date": "2025-04-07 (survey date)",
+      "via": "state_directory",
+      "verified": null
+     },
+     {
+      "url": "https://nj.gov/dca/dfs/pdf/ANNUAL%20REGISTRY/THIRD%20QUARTER%20LEA%20REGISTRY%202026.pdf",
+      "quote": "F Netcong Borough",
+      "doc_date": "2026-07",
+      "via": "pdf",
+      "verified": true
+     }
+    ],
+    "confidence": "high"
+   }
+  ],
+  "notes": "Code Section 157-8 (added March 14, 2024 by Ord. 2024-4) sets the fire certificate fees. The combined Borough form's fees appear to be the COH fee plus these fire fees. The state fire directory (survey 4/7/2025) lists netcongfpb@gmail.com and (973) 347-0252 and, oddly, 'Twp of Roxbury Zoning Officer' as the smoke detector compliance name; the Borough's own page gives netcongfpb@netcong.org and (862) 599-0155, which are used here. The code and form still include a portable fire extinguisher, which state law (P.L.2025, c.19) removed from the sale certificate in February 2025."
+ },
+ "other_items": [],
+ "open_questions": [
+  "Is the combined form fee ($100 / $160 / $185) the full charge for both the COH and the fire inspection?",
+  "Who is the current Zoning Officer handling COH inspections, and what is the lead time and validity?",
+  "Does Netcong still require the portable fire extinguisher after P.L.2025, c.19?"
+ ],
+ "checked_at": "2026-10-04",
+ "verification": {
+  "fees": 11,
+  "fee_ok": 6,
+  "fee_bad": 0,
+  "fee_unchecked": 5,
+  "quotes": 12,
+  "q_ok": 6,
+  "q_bad": 0,
+  "q_unchecked": 6
+ }
+}

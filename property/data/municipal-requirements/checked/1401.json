@@ -1,0 +1,256 @@
+{
+ "municipality_code": "1401",
+ "municipality": "Boonton",
+ "county": "MORRIS",
+ "resale_co": {
+  "status": "required",
+  "name": "Certificate of Compliance (C of C, also called the 'Smoke Certificate')",
+  "issued_by": "Town of Boonton Code Enforcement / Housing (Code Official)",
+  "lead_time": "Apply at least two weeks before closing to avoid a late fee (inspection packet says no less than 10 working days); inspections are Tuesdays 9:00 AM to 11:00 AM; a final certificate takes at least 3 working days after a clean inspection.",
+  "valid_for": "Temporary C of C: violations must be corrected within 30 days",
+  "requirements": [
+   "Completed application and fee paid before an inspection is scheduled",
+   "Full interior and exterior property maintenance inspection, including room measurements for sleeping capacity",
+   "All open construction permits inspected and approved before the C of C is issued",
+   "Exterior: sidewalks, drainage, weeds, accessory structures, unlicensed vehicles, siding, roof, gutters, windows, doors",
+   "Interior: stairs, handrails and guards, bathroom venting, dryer exhaust, plumbing, heating, electrical (GFCI), means of egress, sanitation and pests",
+   "Smoke detectors (10-year sealed battery units), carbon monoxide detectors and fire extinguishers",
+   "If violations remain, a Temporary C of C may be issued with the buyer's letter agreeing to correct them within 30 days"
+  ],
+  "fees": [
+   {
+    "label": "Certificate of Compliance, residential detached single family (Housing page)",
+    "amount": "$100",
+    "quote": "Residential detached single family $100 per dwelling unit",
+    "source_url": "https://www.boonton.org/654/Housing",
+    "verified": true
+   },
+   {
+    "label": "Certificate of Compliance, two family or multi-family (Housing page)",
+    "amount": "$100 first unit + $50 each additional unit",
+    "quote": "Residential two (2) family or multi-family $100 for the first dwelling unit, plus $50 per additional dwelling unit",
+    "source_url": "https://www.boonton.org/654/Housing",
+    "verified": true
+   },
+   {
+    "label": "Late fee, request fewer than 5 business days before the sale (Housing page; the application says fewer than 4)",
+    "amount": "$75.00",
+    "quote": "For any requests received fewer than 5 business days prior to a change of occupancy or sale, a fee of $75.00 will be assessed.",
+    "source_url": "https://www.boonton.org/654/Housing",
+    "verified": true
+   },
+   {
+    "label": "Additional re-inspections after the one included re-inspection (application form)",
+    "amount": "$100.00",
+    "quote": "will be charged $100.00 per re-inspection visit",
+    "source_url": "https://www.boonton.org/DocumentCenter/View/4138/Certificate-of-Compliance-Residential",
+    "verified": true
+   }
+  ],
+  "how_to_apply": "Submit the Certificate of Compliance Application - Residential (Forms, Permits & Applications page or the SDL Portal, choosing Boonton Town not Township) with the fee to Town Hall, 100 Washington Street, Boonton, NJ 07005. Payment by cash, check or credit card. The fee includes the first inspection and one re-inspection.",
+  "application_url": "https://www.boonton.org/DocumentCenter/View/4138/Certificate-of-Compliance-Residential",
+  "department_url": "https://www.boonton.org/654/Housing",
+  "phone": "973-402-9410 ext. 625 or 626",
+  "email": "",
+  "contact_name": "",
+  "contact_title": "Housing/Zoning Department, residential properties",
+  "evidence": [
+   {
+    "url": "https://www.boonton.org/654/Housing",
+    "quote": "All properties must be registered and inspected upon a change of ownership or tenancy.",
+    "doc_date": "2026-10-04 (page fetched)",
+    "via": "page",
+    "verified": true
+   },
+   {
+    "url": "https://www.boonton.org/654/Housing",
+    "quote": "A Certificate of Compliance will be issued for every unit sold or rented. This certificate is also referred to as a \"Smoke Certificate\" and is required when closing on real estate.",
+    "doc_date": "2026-10-04 (page fetched)",
+    "via": "page",
+    "verified": true
+   },
+   {
+    "url": "https://www.boonton.org/654/Housing",
+    "quote": "Inspections are conducted every Tuesday between the hours of 9:00 AM and 11:00 AM.",
+    "doc_date": "2026-10-04 (page fetched)",
+    "via": "page",
+    "verified": true
+   },
+   {
+    "url": "https://www.boonton.org/654/Housing",
+    "quote": "Applications for a Certificate of Compliance (COC) shall be submitted at least two (2) weeks prior to your anticipated closing or rental date to avoid a late fee.",
+    "doc_date": "2026-10-04 (page fetched)",
+    "via": "page",
+    "verified": true
+   },
+   {
+    "url": "https://www.boonton.org/DocumentCenter/View/4138/Certificate-of-Compliance-Residential",
+    "quote": "For any requests received fewer than 4 business days prior to change of occupancy or sale, a fee of $75.00 will be assessed",
+    "doc_date": "Rev Date 3/7/2026",
+    "via": "pdf",
+    "verified": true
+   },
+   {
+    "url": "https://www.boonton.org/DocumentCenter/View/3776/Certificate-of-Compliance-Inspection-Packet",
+    "quote": "No owner, agent, or any person shall rent or lease or sell or in any way deliver up for use, change of use or occupancy any business, building, dwelling unit, lodging unit, rooming unit, or boarding unit, until a Certificate of Compliance has been issued by the Code Official.",
+    "doc_date": "Revised 2/26/25",
+    "via": "pdf",
+    "verified": true
+   },
+   {
+    "url": "https://www.boonton.org/DocumentCenter/View/3776/Certificate-of-Compliance-Inspection-Packet",
+    "quote": "Applications must be submitted no less than ten (10) working days prior to the anticipated closing date.",
+    "doc_date": "Revised 2/26/25",
+    "via": "pdf",
+    "verified": true
+   },
+   {
+    "url": "https://www.boonton.org/DocumentCenter/View/3776/Certificate-of-Compliance-Inspection-Packet",
+    "quote": "A minimum of three working days is required to process a Final Certificate of Compliance.",
+    "doc_date": "Revised 2/26/25",
+    "via": "pdf",
+    "verified": true
+   },
+   {
+    "url": "https://www.boonton.org/DocumentCenter/View/3776/Certificate-of-Compliance-Inspection-Packet",
+    "quote": "will be charged $75.00 per re-inspection visit",
+    "doc_date": "Revised 2/26/25",
+    "via": "pdf",
+    "verified": true
+   }
+  ],
+  "confidence": "high",
+  "notes": "This record is for the Town of Boonton (1401), not Boonton Township (1402). The pack's ordinance link (ecode360 BO1072) is the Township's code; the Town's code is ecode360 BO1912, which has no separate resale CO or smoke certificate fee (Section 130-12 lists only UFC registrations and permits). The Certificate of Compliance is run by Code Enforcement/Housing and doubles as the smoke certificate. Re-inspection fees differ: $100 on the application (Rev 3/7/2026) vs $75 in the inspection packet (Revised 2/26/25); the late fee cut-off is 5 business days on the web page vs 4 on the application. Contacts on the Housing page: Rafael Tactuk, Code Enforcement/Prop. Maint./Zoning, rtactuk@boonton.org, 973-402-9410 ext. 632 (non-residential); Matt Mondino, Annual Housing Inspector, mmondino@boonton.org, ext. 627. The inspection packet letter is signed by Patrick Laverty, Chief Code Enforcement/Zoning Officer. Rental registration, annual rental inspections and lead-safe rules are rental items, not sale items."
+ },
+ "fire_cert": {
+  "requirements": [
+   "Smoke alarms per N.J.A.C. 5:70-4.19; battery-operated units must be 10-year sealed battery units",
+   "Carbon monoxide alarms",
+   "Fire extinguishers (still listed in the inspection packet)"
+  ],
+  "authorities": [
+   {
+    "name": "Town of Boonton Code Enforcement / Housing (Certificate of Compliance, the 'Smoke Certificate'); LEA: Boonton Fire Department Bureau of Fire Prevention",
+    "type": "municipal_fire_bureau",
+    "area_served": "Entire town",
+    "lead_time": "Apply at least two weeks before closing; Tuesday 9 to 11 AM inspections; late fee for requests fewer than 5 business days before the sale.",
+    "fees": [
+     {
+      "label": "Certificate of Compliance, residential detached single family (Housing page)",
+      "amount": "$100",
+      "quote": "Residential detached single family $100 per dwelling unit",
+      "source_url": "https://www.boonton.org/654/Housing",
+      "verified": true
+     },
+     {
+      "label": "Certificate of Compliance, two family or multi-family (Housing page)",
+      "amount": "$100 first unit + $50 each additional unit",
+      "quote": "Residential two (2) family or multi-family $100 for the first dwelling unit, plus $50 per additional dwelling unit",
+      "source_url": "https://www.boonton.org/654/Housing",
+      "verified": true
+     },
+     {
+      "label": "Late fee, request fewer than 5 business days before the sale (Housing page; the application says fewer than 4)",
+      "amount": "$75.00",
+      "quote": "For any requests received fewer than 5 business days prior to a change of occupancy or sale, a fee of $75.00 will be assessed.",
+      "source_url": "https://www.boonton.org/654/Housing",
+      "verified": true
+     }
+    ],
+    "how_to_apply": "The smoke/CO certificate is the Town's Certificate of Compliance; apply with the residential Certificate of Compliance application (see resale certificate).",
+    "application_url": "https://www.boonton.org/DocumentCenter/View/4138/Certificate-of-Compliance-Residential",
+    "department_url": "https://www.boonton.org/654/Housing",
+    "phone": "973-402-9410 ext. 625 or 626",
+    "email": "jwebber@boonton.org",
+    "contact_name": "John Webber",
+    "contact_title": "Fire Official (phone 973-402-9410 ext 626)",
+    "evidence": [
+     {
+      "url": "https://www.boonton.org/654/Housing",
+      "quote": "This certificate is also referred to as a \"Smoke Certificate\" and is required when closing on real estate.",
+      "doc_date": "2026-10-04 (page fetched)",
+      "via": "page",
+      "verified": true
+     },
+     {
+      "url": "https://www.boonton.org/681/Fire-Prevention",
+      "quote": "John Webber Fire Official jwebber@boonton.org Phone: 973-402-9410 ext 626",
+      "doc_date": "2026-10-04 (page fetched)",
+      "via": "page",
+      "verified": true
+     },
+     {
+      "url": "https://www.boonton.org/681/Fire-Prevention",
+      "quote": "Joseph Morabito Fire Inspector jmorabito@boonton.org Phone: 973-402-9410 Ext. 625",
+      "doc_date": "2026-10-04 (page fetched)",
+      "via": "page",
+      "verified": true
+     },
+     {
+      "url": "https://www.boonton.org/DocumentCenter/View/3776/Certificate-of-Compliance-Inspection-Packet",
+      "quote": "EFFECTIVE JANUARY 1, 2019 ALL BATTERY OPERATED SMOKE DETECTORS MUST BE 10 YEAR SEALED BATTERY UNITS.",
+      "doc_date": "Revised 2/26/25",
+      "via": "pdf",
+      "verified": true
+     },
+     {
+      "url": "https://ecode360.com/7160345",
+      "quote": "The local enforcing agency shall be the Town of Boonton Fire Department through the Bureau of Fire Prevention, which is hereby created therein.",
+      "doc_date": "2026-10-04 (page fetched)",
+      "via": "page",
+      "verified": null
+     },
+     {
+      "url": "https://www.nj.gov/dca/dfs/pdf/fire%20directory_county%20summary/fire_code_enforcement_director.pdf",
+      "quote": "1401 Boonton Town LEAID: 1401-001 Boonton Town Enf Auth. Fire Dept Fire Official John Webber Smoke Detector Compliance Name: Boonton Town Fire Prev Addr: 100 Washington St Phone (973) 402-9410 Email jwebber@boonton.org",
+      "doc_date": "2026-01-23 (survey date)",
+      "via": "state_directory",
+      "verified": null
+     },
+     {
+      "url": "https://nj.gov/dca/dfs/pdf/ANNUAL%20REGISTRY/THIRD%20QUARTER%20LEA%20REGISTRY%202026.pdf",
+      "quote": "F Boonton Town",
+      "doc_date": "2026-07",
+      "via": "pdf",
+      "verified": true
+     }
+    ],
+    "confidence": "high"
+   }
+  ],
+  "notes": "The residential phone extensions listed on the Housing page for Certificates of Compliance (625 and 626) are the Fire Inspector's and Fire Official's extensions on the Fire Prevention page, so the fire bureau appears to do the residential inspections. The packet still lists fire extinguishers, which state law (P.L.2025, c.19) removed from the sale certificate in February 2025; confirm. The pack's LEA name said 'Boonton Township'; the July 2026 registry lists both Boonton Town and Boonton Township as F."
+ },
+ "other_items": [
+  {
+   "label": "Open construction permits",
+   "detail": "All outstanding construction permits must be inspected and approved before the Certificate of Compliance is issued. Work done without permits needs a retro permit.",
+   "source_url": "https://www.boonton.org/DocumentCenter/View/3776/Certificate-of-Compliance-Inspection-Packet"
+  },
+  {
+   "label": "Sidewalks and exterior",
+   "detail": "The inspection covers sidewalks, drainage, grass and weeds, accessory structures and the building exterior.",
+   "source_url": "https://www.boonton.org/DocumentCenter/View/3776/Certificate-of-Compliance-Inspection-Packet"
+  },
+  {
+   "label": "Temporary C of C buyer's certification",
+   "detail": "If the seller does not fix all violations, the buyer signs a certification to correct them within 30 days of the Temporary C of C.",
+   "source_url": "https://www.boonton.org/DocumentCenter/View/3783/Temporary-COC---Buyers-Certification-fillable-form"
+  }
+ ],
+ "open_questions": [
+  "Is the additional re-inspection fee $100 (application) or $75 (packet), and is the late-fee cut-off 4 or 5 business days?",
+  "Does Boonton still require a fire extinguisher after P.L.2025, c.19?",
+  "Is there a set validity period for a final Certificate of Compliance if the closing is delayed?"
+ ],
+ "checked_at": "2026-10-04",
+ "verification": {
+  "fees": 7,
+  "fee_ok": 7,
+  "fee_bad": 0,
+  "fee_unchecked": 0,
+  "quotes": 16,
+  "q_ok": 14,
+  "q_bad": 0,
+  "q_unchecked": 2
+ }
+}

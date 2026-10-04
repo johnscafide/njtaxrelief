@@ -1,0 +1,226 @@
+{
+ "municipality_code": "0226",
+ "municipality": "Haworth Borough",
+ "county": "BERGEN",
+ "resale_co": {
+  "status": "required",
+  "name": "Resale Certificate (Continued Certificate of Occupancy)",
+  "issued_by": "Borough of Haworth Building Department (Construction Official)",
+  "lead_time": "About 2 to 3 weeks; two inspections are needed (fire and building)",
+  "valid_for": "",
+  "requirements": [
+   "Smoke detectors on every level (battery units allowed in existing 1 and 2 family homes); basement detector on the basement ceiling at the foot of the stairs",
+   "Carbon monoxide detectors within 10 feet of bedrooms in the hallway (not inside bedrooms)",
+   "Hardwired systems must be interconnected",
+   "Sump pump must discharge onto the property or street, not into the Borough sewer",
+   "Pool: compliant locking gate and fencing",
+   "House number near the front door light, 4 to 6 inches high, contrasting colors",
+   "Handrails where there are 4 or more steps",
+   "Anti-tip bracket on the stove",
+   "Sidewalks, curbs and gutters in safe, even condition",
+   "No fire extinguisher needed (form notes the February 3, 2025 change)"
+  ],
+  "fees": [
+   {
+    "label": "Resale certificate application fee (single and multi-family)",
+    "amount": "$100",
+    "quote": "FEE: $100 application Fee. Check payable to: Borough of Haworth.",
+    "source_url": "https://www.haworthnj.org/vertical/sites/%7B3226EF68-541C-456F-8644-AC724E9AC52C%7D/uploads/Re_Sale_Certificate_Residential.pdf",
+    "verified": true
+   },
+   {
+    "label": "Re-inspection after a failed inspection",
+    "amount": "$25",
+    "quote": "$25 for each re-inspection after failed inspection.",
+    "source_url": "https://www.haworthnj.org/vertical/sites/%7B3226EF68-541C-456F-8644-AC724E9AC52C%7D/uploads/Re_Sale_Certificate_Residential.pdf",
+    "verified": true
+   },
+   {
+    "label": "Certificate of Continued Occupancy, residential (Borough code)",
+    "amount": "$100",
+    "quote": "Residential$100",
+    "source_url": "https://ecode360.com/35571707",
+    "verified": null
+   }
+  ],
+  "how_to_apply": "Fill out the Resale Certificate Application (Residential) with closing date, seller and buyer details and an inspection contact, and submit it with a $100 check payable to the Borough of Haworth to the Building Department, 300 Haworth Avenue (building@haworthnj.org, 201-384-8824). Both fire and building inspections are scheduled from this one application.",
+  "application_url": "https://www.haworthnj.org/vertical/sites/%7B3226EF68-541C-456F-8644-AC724E9AC52C%7D/uploads/Re_Sale_Certificate_Residential.pdf",
+  "department_url": "https://www.haworthnj.org/building",
+  "phone": "201-384-8824",
+  "email": "building@haworthnj.org",
+  "contact_name": "Robert Sherrow",
+  "contact_title": "Construction Official (Technical Assistant: Liana Piretra)",
+  "evidence": [
+   {
+    "url": "https://www.haworthnj.org/building",
+    "quote": "If you are selling your home a Re Sale Certificate Residential is required.",
+    "doc_date": "2026-10-04 (page fetched)",
+    "via": "page",
+    "verified": true
+   },
+   {
+    "url": "https://www.haworthnj.org/vertical/sites/%7B3226EF68-541C-456F-8644-AC724E9AC52C%7D/uploads/Re_Sale_Certificate_Residential.pdf",
+    "quote": "RESALE CERTIFICATE APPLICATION",
+    "doc_date": "Revised 2/25/2025",
+    "via": "pdf",
+    "verified": true
+   },
+   {
+    "url": "https://www.haworthnj.org/vertical/sites/%7B3226EF68-541C-456F-8644-AC724E9AC52C%7D/uploads/Re_Sale_Certificate_Residential.pdf",
+    "quote": "This process takes approximately 2-3 weeks.",
+    "doc_date": "Revised 2/25/2025",
+    "via": "pdf",
+    "verified": true
+   },
+   {
+    "url": "https://www.haworthnj.org/vertical/sites/%7B3226EF68-541C-456F-8644-AC724E9AC52C%7D/uploads/Re_Sale_Certificate_Residential.pdf",
+    "quote": "Two inspections are required, fire and building.",
+    "doc_date": "Revised 2/25/2025",
+    "via": "pdf",
+    "verified": true
+   },
+   {
+    "url": "https://www.haworthnj.org/vertical/sites/%7B3226EF68-541C-456F-8644-AC724E9AC52C%7D/uploads/Re_Sale_Certificate_Residential.pdf",
+    "quote": "February 3, 2025 Gov. Murphy states no fire extinguishers needed.",
+    "doc_date": "Revised 2/25/2025",
+    "via": "pdf",
+    "verified": true
+   },
+   {
+    "url": "https://ecode360.com/35571707",
+    "quote": "No person shall sell or lease any residential or commercial unit or building, or occupy or use any portion of a residential or commercial unit or building after such unit or building or portion thereof has been vacated or sold, or in which there has been a change in occupancy, until the owner/landlord shall first have applied for and secured a Continued Certificate of Occupancy therefor from the Construction Official of the Borough of Haworth.",
+    "doc_date": "2026-10-04 (page fetched)",
+    "via": "page",
+    "verified": null
+   },
+   {
+    "url": "https://www.haworthnj.org/building",
+    "quote": "Tel: (201) 384-8824",
+    "doc_date": "2026-10-04 (page fetched)",
+    "via": "page",
+    "verified": true
+   },
+   {
+    "url": "https://www.haworthnj.org/building",
+    "quote": "Rsherrow@haworthnj.org",
+    "doc_date": "2026-10-04 (page fetched)",
+    "via": "page",
+    "verified": true
+   }
+  ],
+  "confidence": "high",
+  "notes": "Borough Code 12-11.2 (Continued Certificate of Occupancy) and the fee section 12-1.5e3 were read through the ecode360 print view. The Building Department form (revised 2/25/2025) covers both the building and fire inspections for one $100 fee. The Construction Official's email is Rsherrow@haworthnj.org. The 'Re Rental' certificate and the Landlord Identity Registration are rental items, not resale items."
+ },
+ "fire_cert": {
+  "requirements": [
+   "Approved smoke detection and carbon monoxide detector installed per NFPA 72 and N.J.A.C. 5:70-2.3",
+   "Battery smoke and CO detectors are allowed in existing 1 and 2 family homes; electric systems must be interconnected",
+   "Smoke detectors on every level, within 10 feet of sleeping areas in a common area, not within 3 feet of an outside door, window or air vent",
+   "No fire extinguisher required (per the Borough's 2/25/2025 form)"
+  ],
+  "authorities": [
+   {
+    "name": "Haworth Bureau of Fire Prevention (Fire Official), inspected as part of the Borough Resale Certificate",
+    "type": "municipal_fire_bureau",
+    "area_served": "Entire borough",
+    "lead_time": "The whole resale process takes about 2 to 3 weeks.",
+    "fees": [
+     {
+      "label": "Certificate of Compliance for smoke alarms (Borough code)",
+      "amount": "$35",
+      "quote": "Supplementing N.J.S.A. 52:27D-192 et seq., shall be $35.",
+      "source_url": "https://ecode360.com/35571784",
+      "verified": null
+     }
+    ],
+    "how_to_apply": "Apply through the Building Department's Resale Certificate Application; the form says two inspections are required, fire and building. The Fire Protection Subcode/Fire Official (Alan Silverman) inspects Tuesday and Friday, 12:00 to 2:00 pm.",
+    "application_url": "https://www.haworthnj.org/vertical/sites/%7B3226EF68-541C-456F-8644-AC724E9AC52C%7D/uploads/Re_Sale_Certificate_Residential.pdf",
+    "department_url": "https://www.haworthnj.org/building",
+    "phone": "201-384-4785",
+    "email": "firemusik@aol.com",
+    "contact_name": "Alan J. Silverman",
+    "contact_title": "Fire Official",
+    "evidence": [
+     {
+      "url": "https://www.haworthnj.org/vertical/sites/%7B3226EF68-541C-456F-8644-AC724E9AC52C%7D/uploads/Re_Sale_Certificate_Residential.pdf",
+      "quote": "Resale Certificate shall not be issued for any structure unless an approved “Automatic Fire Detection System” and",
+      "doc_date": "Revised 2/25/2025",
+      "via": "pdf",
+      "verified": true
+     },
+     {
+      "url": "https://ecode360.com/35571784",
+      "quote": "The fee for inspection or reinspection and issuance of a Certificate of Compliance by the Bureau of Fire Prevention pursuant to P.L. 1991, c.92",
+      "doc_date": "2026-10-04 (page fetched)",
+      "via": "page",
+      "verified": null
+     },
+     {
+      "url": "https://www.haworthnj.org/fire",
+      "quote": "Fire Official – Alan Silverman",
+      "doc_date": "2026-10-04 (page fetched)",
+      "via": "page",
+      "verified": true
+     },
+     {
+      "url": "https://www.haworthnj.org/building",
+      "quote": "Alan Silverman, Tuesday & Friday, 12:00 – 2:00 pm",
+      "doc_date": "2026-10-04 (page fetched)",
+      "via": "page",
+      "verified": true
+     },
+     {
+      "url": "https://www.nj.gov/dca/dfs/pdf/fire%20directory_county%20summary/fire_code_enforcement_director.pdf",
+      "quote": "Fire Official Alan J Silverman",
+      "doc_date": "4/2/2026 (survey date)",
+      "via": "state_directory",
+      "verified": null
+     },
+     {
+      "url": "https://www.nj.gov/dca/dfs/pdf/fire%20directory_county%20summary/fire_code_enforcement_director.pdf",
+      "quote": "Haworth Boro Fire Prev",
+      "doc_date": "4/2/2026 (survey date)",
+      "via": "state_directory",
+      "verified": null
+     },
+     {
+      "url": "https://nj.gov/dca/dfs/pdf/ANNUAL%20REGISTRY/THIRD%20QUARTER%20LEA%20REGISTRY%202026.pdf",
+      "quote": "F Haworth Borough",
+      "doc_date": "2026-07",
+      "via": "pdf",
+      "verified": true
+     }
+    ],
+    "confidence": "medium"
+   }
+  ],
+  "notes": "In practice the smoke/CO check is one of the two inspections done under the Building Department's $100 Resale Certificate. Borough Code 14-1.9g still sets a separate $35 fee for the Bureau of Fire Prevention's smoke alarm Certificate of Compliance; it is not clear whether that is charged on top of the $100. Fire Official email firemusik@aol.com is from the NJ DCA fire directory (survey 4/2/2026); the Borough phone is 201-384-4785."
+ },
+ "other_items": [
+  {
+   "label": "Sump pump discharge",
+   "detail": "Sump pumps must empty onto the property or the street and cannot be connected to the Borough sewer; checked during the resale inspection.",
+   "source_url": "https://www.haworthnj.org/vertical/sites/%7B3226EF68-541C-456F-8644-AC724E9AC52C%7D/uploads/Re_Sale_Certificate_Residential.pdf"
+  },
+  {
+   "label": "Sidewalks and curbs",
+   "detail": "Sidewalks, curbs and gutters in front of the home must be kept in safe, even condition; checked during the resale inspection.",
+   "source_url": "https://www.haworthnj.org/vertical/sites/%7B3226EF68-541C-456F-8644-AC724E9AC52C%7D/uploads/Re_Sale_Certificate_Residential.pdf"
+  }
+ ],
+ "open_questions": [
+  "Is the $35 Bureau of Fire Prevention smoke certificate fee (Code 14-1.9g) charged in addition to the $100 Resale Certificate fee?",
+  "Is there a faster-service fee for closings less than 2 to 3 weeks out? None is published."
+ ],
+ "checked_at": "2026-10-04",
+ "verification": {
+  "fees": 4,
+  "fee_ok": 2,
+  "fee_bad": 0,
+  "fee_unchecked": 2,
+  "quotes": 15,
+  "q_ok": 11,
+  "q_bad": 0,
+  "q_unchecked": 4
+ }
+}

@@ -1,0 +1,199 @@
+{
+ "municipality_code": "1403",
+ "municipality": "Butler Borough",
+ "county": "MORRIS",
+ "resale_co": {
+  "status": "required",
+  "name": "Continued Certificate of Occupancy (CCO) for Sale of Residential Property",
+  "issued_by": "Borough of Butler Zoning Department / Enforcement Officer",
+  "lead_time": "Minimum of 7 full business days notice required for inspections. The Enforcement Officer may waive the inspection and fee if the same premises was inspected within 60 days.",
+  "valid_for": "",
+  "requirements": [
+   "Inspection for compliance with the Borough Property Maintenance Code (Chapter 180), Land Use Ordinance, NJ Housing Code and NJ smoke detector regulations",
+   "House number clearly visible, at least 2 1/4 inches high and contrasting with the background",
+   "Pools and hot tubs: 48 inch fence or wall, self-closing self-latching gates opening out with release at least 54 inches high; zoning and construction permits on file (no CCO until permits are obtained and inspected)",
+   "Smoke and carbon monoxide alarms in proper working order (smoke/CO certification done with the CCO)",
+   "Secondary power source caution label near the main panel and meter if the home has a generator, solar panels or battery storage",
+   "Survey attached if available"
+  ],
+  "fees": [
+   {
+    "label": "Residential sale CCO, per dwelling unit",
+    "amount": "$200",
+    "quote": "(Fee is $200 per residential unit) FEE MUST ACCOMPANY APPLICATION.",
+    "source_url": "https://www.butlerborough.com/FCpdf/Residential%20CCO%2Epdf",
+    "verified": true
+   }
+  ],
+  "how_to_apply": "Submit the CCO Application for Sale of Residential Property with the $200 per unit fee (cash or check payable to Borough of Butler, 1 Ace Rd; no credit cards at the counter), or apply and pay online through the Borough's E-Permits webforms. List the emails of the parties and attorneys; the approved CCO is e-mailed. Give a contact who will let the Fire Inspector in; allow at least 7 full business days for the inspection.",
+  "application_url": "https://www.butlerborough.com/FCpdf/Residential%20CCO%2Epdf",
+  "department_url": "https://www.butlerborough.com/cn/webpage.cfm?tpid=15405",
+  "phone": "973-838-7200 x224",
+  "email": "Zoning@butlerborough.com",
+  "contact_name": "",
+  "contact_title": "Zoning Department",
+  "evidence": [
+   {
+    "url": "https://www.butlerborough.com/FCpdf/Residential%20CCO%2Epdf",
+    "quote": "CCO APPLICATION for SALE of RESIDENTIAL PROPERTY",
+    "doc_date": "Rev. 7/2026",
+    "via": "pdf",
+    "verified": true
+   },
+   {
+    "url": "https://www.butlerborough.com/FCpdf/Residential%20CCO%2Epdf",
+    "quote": "(Fee is $200 per residential unit) FEE MUST ACCOMPANY APPLICATION.",
+    "doc_date": "Rev. 7/2026",
+    "via": "pdf",
+    "verified": true
+   },
+   {
+    "url": "https://www.butlerborough.com/FCpdf/Residential%20CCO%2Epdf",
+    "quote": "Minimum of 7 Full Business Days Notice Required for Inspections!",
+    "doc_date": "Rev. 7/2026",
+    "via": "pdf",
+    "verified": true
+   },
+   {
+    "url": "https://www.butlerborough.com/FCpdf/Residential%20CCO%2Epdf",
+    "quote": "Under Borough of Butler Ordinance, Chapter 143-177, a Continued Certificate of Occupancy is required.",
+    "doc_date": "Rev. 7/2026",
+    "via": "pdf",
+    "verified": true
+   },
+   {
+    "url": "https://www.butlerborough.com/documents/code%20book/butler%20borough%20code%20book.pdf",
+    "quote": "No person shall sell, occupy, or use any portion of a commercial, industrial or residential building after such building or portion thereof has been vacated or sold,",
+    "doc_date": "2024-07-16 (Ord. No. 2024-16)",
+    "via": "pdf",
+    "verified": true
+   },
+   {
+    "url": "https://www.butlerborough.com/documents/code%20book/butler%20borough%20code%20book.pdf",
+    "quote": "The Enforcement Officer may waive the inspection and fee if any inspection of the same premises has been made within 60 days.",
+    "doc_date": "2026-10-04 (page fetched)",
+    "via": "pdf",
+    "verified": true
+   },
+   {
+    "url": "https://www.butlerborough.com/cn/webpage.cfm?tpid=15405",
+    "quote": "You can now apply for a Zoning Permit or a Residential Continued Certificate of Occupancy (CCO), Sale of Home & Rental CCO Permits online.",
+    "doc_date": "2026-10-04 (page fetched)",
+    "via": "page",
+    "verified": true
+   }
+  ],
+  "confidence": "high",
+  "notes": "Butler Code Section 143-177C (amended July 16, 2024) bars selling or occupying a sold residential building until a certificate of continuing occupancy is issued. The current application (Rev. 7/2026) charges $200 per residential unit and covers the smoke/CO inspection by the Fire Inspector. The online Zoning page and Fire Prevention page link the application. No validity period is published."
+ },
+ "fire_cert": {
+  "requirements": [
+   "Hardwired interconnected smoke alarms must be kept working and may not be converted to battery alarms",
+   "All smoke alarms less than 10 years old and UL listed; new battery alarms must be sealed 10-year units",
+   "At least one smoke alarm on every level including the basement and habitable attic, plus attics/crawl spaces containing fuel-burning equipment; alarms in the hallway within 10 feet of all bedroom doors",
+   "Carbon monoxide alarms on all levels with bedrooms, within 10 feet of all bedroom doors (hardwired, plug-in or battery)",
+   "Secondary power source caution label within 18 inches of the main electrical panel and meter, if applicable",
+   "Fire extinguishers are no longer required (Borough form)"
+  ],
+  "authorities": [
+   {
+    "name": "Butler Fire Prevention Bureau (inspection done with the Borough residential sale CCO)",
+    "type": "municipal_fire_bureau",
+    "area_served": "Entire borough",
+    "lead_time": "Minimum of 7 full business days notice for inspections.",
+    "fees": [
+     {
+      "label": "Smoke/CO reinspection after a failed inspection",
+      "amount": "$25",
+      "quote": "there will be a $25 Re-Inspection Fee for each Inspection Failure regarding the Smoke and Carbon Monoxide Detectors.",
+      "source_url": "https://www.butlerborough.com/FCpdf/Residential%20CCO%2Epdf",
+      "verified": true
+     },
+     {
+      "label": "Smoke detector certification, resale (Borough fee schedule, Ord. 2000-26; the current CCO form shows only the $200 CCO fee)",
+      "amount": "$50.00",
+      "quote": "Smoke detector certification, resale [Added $50.00",
+      "source_url": "https://www.butlerborough.com/documents/code%20book/butler%20borough%20code%20book.pdf",
+      "verified": true
+     }
+    ],
+    "how_to_apply": "The smoke and CO inspection is requested on the Borough's CCO Application for Sale of Residential Property; the Fire Inspector contacts the person named on the form to set up the appointment. A $25 reinspection fee must be paid before a reinspection.",
+    "application_url": "https://www.butlerborough.com/FCpdf/Residential%20CCO%2Epdf",
+    "department_url": "https://www.butlerborough.com/cn/webpage.cfm?tpid=18523",
+    "phone": "973-838-1680",
+    "email": "mlime@butlerborough.com",
+    "contact_name": "Mark Lime",
+    "contact_title": "Fire Official",
+    "evidence": [
+     {
+      "url": "https://www.butlerborough.com/FCpdf/Residential%20CCO%2Epdf",
+      "quote": "there will be a $25 Re-Inspection Fee for each Inspection Failure regarding the Smoke and Carbon Monoxide Detectors.",
+      "doc_date": "Rev. 7/2026",
+      "via": "pdf",
+      "verified": true
+     },
+     {
+      "url": "https://www.butlerborough.com/FCpdf/Residential%20CCO%2Epdf",
+      "quote": "FIRE EXTINGUISHERS ARE NO LONGER REQUIRED.",
+      "doc_date": "Rev. 7/2026",
+      "via": "pdf",
+      "verified": true
+     },
+     {
+      "url": "https://www.butlerborough.com/documents/code%20book/butler%20borough%20code%20book.pdf",
+      "quote": "Smoke detector certification, resale [Added $50.00",
+      "doc_date": "2000-10-17 (Ord. No. 2000-26)",
+      "via": "pdf",
+      "verified": true
+     },
+     {
+      "url": "https://www.butlerborough.com/cn/webpage.cfm?tpid=18523",
+      "quote": "mlime@butlerborough.com",
+      "doc_date": "2026-10-04 (page fetched)",
+      "via": "page",
+      "verified": true
+     },
+     {
+      "url": "https://nj.gov/dca/dfs/pdf/ANNUAL%20REGISTRY/THIRD%20QUARTER%20LEA%20REGISTRY%202026.pdf",
+      "quote": "F Butler Borough",
+      "doc_date": "2026-07",
+      "via": "pdf",
+      "verified": true
+     },
+     {
+      "url": "https://www.nj.gov/dca/dfs/pdf/fire%20directory_county%20summary/fire_code_enforcement_director.pdf",
+      "quote": "Fire Official Mark W Lime",
+      "doc_date": "2026-07-31 (survey date)",
+      "via": "state_directory",
+      "verified": null
+     }
+    ],
+    "confidence": "medium"
+   }
+  ],
+  "notes": "Butler's smoke/CO check is part of the residential sale CCO: the application (Rev. 7/2026) names a Fire Inspector who schedules the inspection, says fire extinguishers are no longer required, and charges $25 for each failed smoke/CO inspection. Section 119-1 of the code book still lists a separate $50.00 'Smoke detector certification, resale' fee from 2000, and Sections 136-29J and 136-30C (Housing Standards) still require smoke/CO and fire extinguisher certificates from the Code Enforcer before a change in ownership; whether the $50 is charged on top of the $200 CCO fee is not stated. Fire Official Mark Lime also serves Pequannock Township."
+ },
+ "other_items": [
+  {
+   "label": "Pool and hot tub permits",
+   "detail": "If a pool or hot tub has no permits, the CCO will not be issued until permits are obtained and inspections pass.",
+   "source_url": "https://www.butlerborough.com/FCpdf/Residential%20CCO%2Epdf"
+  }
+ ],
+ "open_questions": [
+  "Is Butler's $50.00 resale smoke detector certification fee (code Section 119-1) still charged in addition to the $200 per unit CCO fee?",
+  "How long is the Butler residential sale CCO valid?",
+  "Are there short-notice (rush) fees for the smoke/CO inspection?"
+ ],
+ "checked_at": "2026-10-04",
+ "verification": {
+  "fees": 3,
+  "fee_ok": 3,
+  "fee_bad": 0,
+  "fee_unchecked": 0,
+  "quotes": 13,
+  "q_ok": 12,
+  "q_bad": 0,
+  "q_unchecked": 1
+ }
+}

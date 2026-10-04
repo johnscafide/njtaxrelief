@@ -1,0 +1,220 @@
+{
+ "municipality_code": "0228",
+ "municipality": "Ho-Ho-Kus Borough",
+ "county": "BERGEN",
+ "checked_at": "2026-10-04",
+ "resale_co": {
+  "status": "required",
+  "name": "Certificate of Continued Occupancy (CCO)",
+  "issued_by": "Borough of Ho-Ho-Kus Construction Code Official (with the Property Maintenance Officer and Zoning Officer); the combined application is handled through the Bureau of Fire Prevention",
+  "lead_time": "The code says to apply 25 business days before the change of ownership; the Borough inspects within 10 business days of a complete application, no more than 30 days before the change. The Borough's cover letter says certificates are issued within five business days unless there are open items.",
+  "valid_for": "One year from the date of issue",
+  "requirements": [
+   "Review of Borough files for open building or zoning permits or violations, and a check that utilities, assessor and tax files are current",
+   "General inspection of the visible parts of the building, property and equipment for violations of Borough ordinances, the NJ Construction Code and the NJ Fire Code",
+   "All open permits, violations or fees owed to the Borough must be satisfied before the CCO is issued",
+   "Smoke detector, carbon monoxide alarm and fire extinguisher compliance certificate (separate part of the same packet)",
+   "If violations cannot be fixed before closing, a temporary CCO (TCCO) may be issued with a $1,000 cash bond"
+  ],
+  "fees": [
+   {
+    "label": "CCO application fee (Borough cover letter)",
+    "amount": "$150",
+    "quote": "*CCO Application Fee: $150",
+    "source_url": "https://www.hhkborough.com/DocumentCenter/View/881/CCO-and-Smoke-Detector-Compliance-Application",
+    "verified": null
+   },
+   {
+    "label": "Certificate of continued occupancy application fee (Code Section 77-6.2A), plus $75 per resubmission",
+    "amount": "$100",
+    "quote": "The application fee for a certificate of continued occupancy shall be $100. An additional fee in the amount of $75 is required for each resubmission.",
+    "source_url": "https://ecode360.com/15602479",
+    "verified": null
+   },
+   {
+    "label": "Temporary certificate of continued occupancy (TCCO) application fee (Code Section 77-6.2B)",
+    "amount": "$200",
+    "quote": "The application fee for a TCCO shall be $200.",
+    "source_url": "https://ecode360.com/15602479",
+    "verified": null
+   },
+   {
+    "label": "Combined check for CCO and smoke detector compliance certificate",
+    "amount": "$250",
+    "quote": "One check in the amount of $250 will be accepted.",
+    "source_url": "https://www.hhkborough.com/DocumentCenter/View/881/CCO-and-Smoke-Detector-Compliance-Application",
+    "verified": null
+   }
+  ],
+  "how_to_apply": "Download the CCO and Smoke Detector Compliance Application from the Borough's Forms and Applications page. Fill out both the Application for Residential Certificate of Continued Occupancy and the smoke detector / CO / fire extinguisher compliance application (seller or seller's agent signs), and pay by check made payable to the Borough of Ho-Ho-Kus (one $250 check covers both). The forms carry the Bureau of Fire Prevention address: 333 Warren Avenue, Ho-Ho-Kus, NJ 07423, 201-652-4400 x219.",
+  "application_url": "https://www.hhkborough.com/DocumentCenter/View/881/CCO-and-Smoke-Detector-Compliance-Application",
+  "department_url": "https://www.hhkborough.com/1208/Forms-and-Applications",
+  "phone": "201-652-4400 ext. 241",
+  "email": "",
+  "contact_name": "Mark Berninger",
+  "contact_title": "Construction Code Official, Building Subcode Official",
+  "evidence": [
+   {
+    "url": "https://ecode360.com/13541569",
+    "quote": "No residential or nonresidential property may be changed in tenancy, use or ownership unless a certificate of continued occupancy has been issued by the Borough Construction Code Official on forms provided and the required fee paid for such inspection.",
+    "doc_date": "2-22-2011 (Ord. No. 978)",
+    "via": "page",
+    "verified": null
+   },
+   {
+    "url": "https://ecode360.com/13541569",
+    "quote": "Applications shall be submitted 25 business days prior to the proposed change of tenancy, use or ownership.",
+    "doc_date": "2026-10-04 (page fetched)",
+    "via": "page",
+    "verified": null
+   },
+   {
+    "url": "https://ecode360.com/13541569",
+    "quote": "A certificate of continued occupancy shall remain valid for one year from the date of issue.",
+    "doc_date": "2026-10-04 (page fetched)",
+    "via": "page",
+    "verified": null
+   },
+   {
+    "url": "https://www.hhkborough.com/DocumentCenter/View/881/CCO-and-Smoke-Detector-Compliance-Application",
+    "quote": "Prior to the closing on the sale of a residential property or a change of tenancy, the following two certificates are required by the Borough:",
+    "doc_date": "2026-10-04 (page fetched)",
+    "via": "pdf",
+    "verified": null
+   },
+   {
+    "url": "https://www.hhkborough.com/DocumentCenter/View/881/CCO-and-Smoke-Detector-Compliance-Application",
+    "quote": "Unless there are open items which need to be addressed, the above certificates are issued within five (5) business days.",
+    "doc_date": "2026-10-04 (page fetched)",
+    "via": "pdf",
+    "verified": null
+   },
+   {
+    "url": "https://www.hhkborough.com/DocumentCenter/View/881/CCO-and-Smoke-Detector-Compliance-Application",
+    "quote": "I understand that all open permits, violations or fees owed to the Borough must be satisfied before the CCO is issued.",
+    "doc_date": "2026-10-04 (page fetched)",
+    "via": "pdf",
+    "verified": null
+   },
+   {
+    "url": "https://www.hhkborough.com/Directory.aspx",
+    "quote": "Construction Code Official Building Subcode Official",
+    "doc_date": "2026-10-04 (page fetched)",
+    "via": "page",
+    "verified": true
+   }
+  ],
+  "confidence": "high",
+  "notes": "Code Chapter 77 (Sections 77-6B, 77-6.1 and 77-6.2, added by Ord. No. 978 of 2-22-2011) was read through the ecode360 print view. Failing to apply for a CCO on a change of ownership can bring a fine of up to $1,000 plus $100 per day. The posted application packet is a scanned PDF (no text layer), so its quotes cannot be machine-checked. Fees do not match: the Borough's cover letter says $150 for the CCO, while the code says $100 (plus $75 per resubmission); the cover letter is probably the current practice, so confirm. The Construction Department is at 201-652-4400 ext. 241; the Directory shows an email link for Mark Berninger that decodes to berningerm@ho-ho-kusboro.com (hidden behind an email-protection link, so not quoted). Rental-only items (lead-based paint inspections of rentals, short-term rental rules) are not resale requirements."
+ },
+ "fire_cert": {
+  "requirements": [
+   "Ten-year sealed smoke detectors (batteries cannot be removed) on every level of the home, including the basement, not required in crawl spaces or unfinished attics",
+   "Smoke detectors within 10 feet of all sleeping areas and at the bottom of stairs, on the ceiling",
+   "Carbon monoxide detectors in the hall within 10 feet of bedroom doors, on the ceiling or wall; plug-in units only if an outlet is in the hall; all detectors permanently mounted",
+   "All smoke and carbon monoxide detectors in working order",
+   "One ABC rated 10 lb. dry chemical extinguisher within 10 feet of the kitchen (form still lists it)",
+   "Seller or seller's agent signs an affidavit that the items are installed; the Borough then inspects"
+  ],
+  "authorities": [
+   {
+    "name": "Ho-Ho-Kus Bureau of Fire Prevention",
+    "type": "municipal_fire_bureau",
+    "area_served": "Entire borough",
+    "lead_time": "The Borough letter says certificates are issued within five business days unless there are open items. The code says the inspection is done within 10 to 15 days of receiving the application and fee.",
+    "fees": [
+     {
+      "label": "Certificate of Smoke Detector Compliance application fee (Borough cover letter)",
+      "amount": "$100.00",
+      "quote": "*Certificate of Smoke Detector Compliance Application Fee: $100.00",
+      "source_url": "https://www.hhkborough.com/DocumentCenter/View/881/CCO-and-Smoke-Detector-Compliance-Application",
+      "verified": null
+     },
+     {
+      "label": "Certificate of inspection, first visit $50 and $25 per later visit (Code Section 26-9D, 1991 text)",
+      "amount": "$50",
+      "quote": "The fee for the certificate of inspection shall be $50 for the first inspection visit and $25 for each inspection visit required thereafter to obtain compliance.",
+      "source_url": "https://ecode360.com/13538603",
+      "verified": null
+     }
+    ],
+    "how_to_apply": "Fill out the Application for Smoke Detector, Carbon Monoxide Detector and Fire Extinguisher Compliance in the CCO and Smoke Detector Compliance packet, check off each item, sign it, and submit it to the Bureau of Fire Prevention with a check made payable to the Borough of Ho-Ho-Kus. The Borough then inspects.",
+    "application_url": "https://www.hhkborough.com/DocumentCenter/View/881/CCO-and-Smoke-Detector-Compliance-Application",
+    "department_url": "https://www.hhkborough.com/Directory.aspx",
+    "phone": "201-652-4400 ext. 219",
+    "email": "",
+    "contact_name": "Daniel Mc Eldowney",
+    "contact_title": "Fire Official",
+    "evidence": [
+     {
+      "url": "https://ecode360.com/13538603",
+      "quote": "Upon the sale of a dwelling unit or the rental, lease or transfer of any dwelling unit, the seller, landlord, transferor, buyer, transferee or tenant is required to obtain from the Ho-Ho-Kus Bureau of Fire Prevention a certificate of inspection stating that the property is in compliance with the provisions of this chapter.",
+      "doc_date": "8-27-1991 (Ord. No. 684)",
+      "via": "page",
+      "verified": null
+     },
+     {
+      "url": "https://ecode360.com/13538603",
+      "quote": "Applications for certificates of inspection shall be submitted to the Fire Official of the Borough of Ho-Ho-Kus with the application fee prepaid.",
+      "doc_date": "2026-10-04 (page fetched)",
+      "via": "page",
+      "verified": null
+     },
+     {
+      "url": "https://www.hhkborough.com/DocumentCenter/View/881/CCO-and-Smoke-Detector-Compliance-Application",
+      "quote": "1 ABC rated 10 lb. dry chemical extinguisher is located within 10 ft. of the kitchen",
+      "doc_date": "2026-10-04 (page fetched)",
+      "via": "pdf",
+      "verified": null
+     },
+     {
+      "url": "https://www.hhkborough.com/Directory.aspx",
+      "quote": "Fire Prevention Officer 201-652-4400 Ext: 219",
+      "doc_date": "2026-10-04 (page fetched)",
+      "via": "page",
+      "verified": true
+     },
+     {
+      "url": "https://nj.gov/dca/dfs/pdf/ANNUAL%20REGISTRY/THIRD%20QUARTER%20LEA%20REGISTRY%202026.pdf",
+      "quote": "F Ho-Ho-Kus Borough",
+      "doc_date": "2026-07",
+      "via": "pdf",
+      "verified": true
+     },
+     {
+      "url": "https://www.nj.gov/dca/dfs/pdf/fire%20directory_county%20summary/fire_code_enforcement_director.pdf",
+      "quote": "LEAID: 0228-001 Enf Auth. Fire Dept Fire Official Daniel F Mc Eldowney Phone (201) 652-4400",
+      "doc_date": "2/19/2026 (survey date)",
+      "via": "state_directory",
+      "verified": null
+     }
+    ],
+    "confidence": "high"
+   }
+  ],
+  "notes": "The Borough's packet (scanned PDF, letterhead Bureau of Fire Prevention / Mr. D. McEldowney, 333 Warren Avenue, 201-652-4400 x219) lists $100.00 for the smoke detector compliance certificate; the code (Section 26-9D, 1991) still says $50 for the first visit and $25 per later visit. The packet still lists an ABC fire extinguisher, which state law (P.L.2025, c.19) removed from the sale certificate in February 2025. The Directory email link for Daniel Mc Eldowney decodes to mceldowneyd@ho-ho-kusboro.com; the NJ DCA directory lists d.mceldowney@yahoo.com. Neither is quoted because the Borough address is hidden behind an email-protection link."
+ },
+ "other_items": [
+  {
+   "label": "Open permits, violations and Borough fees",
+   "detail": "All open permits, violations or fees owed to the Borough must be satisfied before the CCO is issued; the Borough also checks that utilities, assessor and tax files are current.",
+   "source_url": "https://www.hhkborough.com/DocumentCenter/View/881/CCO-and-Smoke-Detector-Compliance-Application"
+  }
+ ],
+ "open_questions": [
+  "Is the CCO fee $150 (cover letter) or $100 (code), and the smoke/CO fee $100 (cover letter) or $50 (code)?",
+  "Is there a rush fee for short-notice inspections? None is published.",
+  "Does Ho-Ho-Kus still require the fire extinguisher at resale after P.L.2025, c.19?",
+  "Is a final water/sewer reading needed from the Water/Sewer Department at closing?"
+ ],
+ "verification": {
+  "fees": 6,
+  "fee_ok": 0,
+  "fee_bad": 0,
+  "fee_unchecked": 6,
+  "quotes": 13,
+  "q_ok": 3,
+  "q_bad": 0,
+  "q_unchecked": 10
+ }
+}

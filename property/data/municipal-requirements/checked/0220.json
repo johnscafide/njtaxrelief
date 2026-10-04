@@ -1,0 +1,238 @@
+{
+ "municipality_code": "0220",
+ "municipality": "Franklin Lakes Borough",
+ "county": "BERGEN",
+ "resale_co": {
+  "status": "required",
+  "name": "Fire Certificate on sale (Certificate of Smoke Alarm and Carbon Monoxide Alarm with resale site inspection)",
+  "issued_by": "Franklin Lakes Fire Prevention Bureau",
+  "lead_time": "Application must be submitted 30 days before the closing date. The certificate expires 90 days from approval.",
+  "valid_for": "90 days from date of approval",
+  "requirements": [
+   "Smoke alarms and carbon monoxide alarms meeting state law (see fire certificate)",
+   "All open construction permits must be closed out",
+   "No pending violations, including interior doors with keyed locks and illegal basement bedrooms",
+   "House numbers at least 3 inches high in a contrasting color, permanently fixed and clearly visible near the front door",
+   "Permanent pool fence at least 4 ft with self-latching, lockable gates",
+   "Railings on interior or exterior stairs with 4 or more risers; water heater and boiler relief pipe within 6 inches of the floor; no holes in the garage ceiling; no extension cords used as permanent wiring; appliance flue pipes in good condition and sealed",
+   "Real estate taxes must be current; property owner's professional services escrow account may not be deficient",
+   "Properties on the Abandoned/Foreclosure/Nuisance Registry must be deregistered"
+  ],
+  "fees": [
+   {
+    "label": "Fire certificate (smoke alarm and carbon monoxide alarm, resale), initial inspection",
+    "amount": "$150.00",
+    "quote": "INITIAL INSPECTION FEE $150.00",
+    "source_url": "https://www.franklinlakes.org/vertical/sites/%7B02E9C1B5-59B4-4B82-8487-CE42C675CF8A%7D/uploads/fire_new_doc.pdf",
+    "verified": true
+   },
+   {
+    "label": "Reinspection",
+    "amount": "$100.00",
+    "quote": "FEE REINSPECTION FEE $100.00",
+    "source_url": "https://www.franklinlakes.org/vertical/sites/%7B02E9C1B5-59B4-4B82-8487-CE42C675CF8A%7D/uploads/fire_new_doc.pdf",
+    "verified": true
+   },
+   {
+    "label": "Fire certificate inspection, initial (Borough Code 259-7B(4))",
+    "amount": "$150",
+    "quote": "Initial inspection: $150.",
+    "source_url": "https://ecode360.com/7171383",
+    "verified": null
+   }
+  ],
+  "how_to_apply": "Download the Application for Smoke Alarm & Carbon Monoxide Alarm (Residential-Resale/Rental/Change of Occupant) from the Borough Forms page (Fire Prevention Bureau section), complete it and submit it with the fee at least 30 days before closing to the Fire Prevention Bureau, 480 DeKorte Drive. Fees and all documents must be processed before the inspection is scheduled. Office hours are by appointment; leave a voicemail or email.",
+  "application_url": "https://www.franklinlakes.org/vertical/sites/%7B02E9C1B5-59B4-4B82-8487-CE42C675CF8A%7D/uploads/fire_new_doc.pdf",
+  "department_url": "https://www.franklinlakes.org/fp",
+  "phone": "201-891-4000 ext. 1218",
+  "email": "bcomitto@franklinlakes.org",
+  "contact_name": "Brian Comitto",
+  "contact_title": "Fire Official (Fire Prevention Secretary: Melodie Petrosino, ext. 1219)",
+  "evidence": [
+   {
+    "url": "https://ecode360.com/7171383",
+    "quote": "Before any residential dwelling is sold, leased, or otherwise made subject to a change of occupancy, the owner shall obtain a fire certificate.",
+    "doc_date": "2023-11-21 (Ord. No. 1928)",
+    "via": "page",
+    "verified": null
+   },
+   {
+    "url": "https://ecode360.com/7171383",
+    "quote": "There are no open construction permits;",
+    "doc_date": "2023-11-21 (Ord. No. 1928)",
+    "via": "page",
+    "verified": null
+   },
+   {
+    "url": "https://ecode360.com/7171383",
+    "quote": "The property is in compliance with the requirements of Chapter 335, Numbering of Buildings;",
+    "doc_date": "2023-11-21 (Ord. No. 1928)",
+    "via": "page",
+    "verified": null
+   },
+   {
+    "url": "https://www.franklinlakes.org/vertical/sites/%7B02E9C1B5-59B4-4B82-8487-CE42C675CF8A%7D/uploads/fire_new_doc.pdf",
+    "quote": "MUST SUPPLY APPLICATION 30 DAYS BEFORE CLOSING DATE",
+    "doc_date": "2025-05 (revised 05/2025)",
+    "via": "pdf",
+    "verified": true
+   },
+   {
+    "url": "https://www.franklinlakes.org/vertical/sites/%7B02E9C1B5-59B4-4B82-8487-CE42C675CF8A%7D/uploads/fire_new_doc.pdf",
+    "quote": "THIS DOCUMENT VALID ONLY IF ALL REAL ESTATE TAXES ARE CURRENT EXPIRES 90 DAYS FROM DATE OF APPROVAL",
+    "doc_date": "2025-05",
+    "via": "pdf",
+    "verified": true
+   },
+   {
+    "url": "https://www.franklinlakes.org/vertical/sites/%7B02E9C1B5-59B4-4B82-8487-CE42C675CF8A%7D/uploads/fire_new_doc.pdf",
+    "quote": "A SITE INSPECTION IS REQUIRED FOR THE FOLLOWING:",
+    "doc_date": "2025-05",
+    "via": "pdf",
+    "verified": true
+   },
+   {
+    "url": "https://www.franklinlakes.org/forms",
+    "quote": "Certificate of smoke alarm & Carbon monoxide alarm for resale/rental",
+    "doc_date": "2026-10-04 (page fetched)",
+    "via": "page",
+    "verified": true
+   },
+   {
+    "url": "https://www.franklinlakes.org/fp",
+    "quote": "Brian Comitto Fire Official 201-891-4000, ext 1218",
+    "doc_date": "2026-10-04 (page fetched)",
+    "via": "page",
+    "verified": true
+   }
+  ],
+  "confidence": "medium",
+  "notes": "Franklin Lakes has no separate building-department resale CO that we could find. Instead, Borough Code Article VII of Chapter 259 (Ord. No. 1928, November 21, 2023) requires a \"fire certificate\" before any home is sold. It covers the smoke/CO alarms plus open permits, violations such as keyed interior door locks and illegal basement bedrooms, house numbering, pool fences, working utilities and structural issues. It is issued by the Fire Prevention Bureau on the same application and fee as the smoke/CO certificate, so this one certificate serves as both the resale certificate and the fire certificate. Code text was read through the ecode360 print view. The older Article III (Section 259-29) still lists a $75 smoke detector compliance fee; the newer Section 259-7B(4) and the 2025 form say $150, which is the current fee."
+ },
+ "fire_cert": {
+  "requirements": [
+   "Pre-1978 homes: at least 10 year sealed battery smoke alarms on each level and within 10 feet of all sleeping areas",
+   "1978 to 1983: hardwired alarms on each level and within 10 feet of sleeping areas; 1984 to 1990: interconnected hardwired alarms with battery backup; 1991 to present: interconnected hardwired alarms with battery backup on each level and in all bedrooms",
+   "Hardwired alarms may not be replaced with battery alarms; smoke alarms older than 10 years must be replaced",
+   "Low voltage fire alarm systems need an NFPA 72 inspection report and proof of monitoring before the inspection is scheduled",
+   "Carbon monoxide alarms within 10 feet of all sleeping areas, battery, hardwired or plug-in, listed to UL 2034, within the manufacturer's life span"
+  ],
+  "authorities": [
+   {
+    "name": "Franklin Lakes Fire Prevention Bureau",
+    "type": "municipal_fire_bureau",
+    "area_served": "Entire borough",
+    "lead_time": "Submit the application 30 days before closing; certificate expires 90 days from approval.",
+    "fees": [
+     {
+      "label": "Fire certificate (smoke alarm and carbon monoxide alarm, resale), initial inspection",
+      "amount": "$150.00",
+      "quote": "INITIAL INSPECTION FEE $150.00",
+      "source_url": "https://www.franklinlakes.org/vertical/sites/%7B02E9C1B5-59B4-4B82-8487-CE42C675CF8A%7D/uploads/fire_new_doc.pdf",
+      "verified": true
+     },
+     {
+      "label": "Reinspection",
+      "amount": "$100.00",
+      "quote": "FEE REINSPECTION FEE $100.00",
+      "source_url": "https://www.franklinlakes.org/vertical/sites/%7B02E9C1B5-59B4-4B82-8487-CE42C675CF8A%7D/uploads/fire_new_doc.pdf",
+      "verified": true
+     }
+    ],
+    "how_to_apply": "Same application as the resale fire certificate: Application for Smoke Alarm & Carbon Monoxide Alarm on the Borough Forms page, filed with the fee at the Fire Prevention Bureau, 480 DeKorte Drive, Franklin Lakes.",
+    "application_url": "https://www.franklinlakes.org/vertical/sites/%7B02E9C1B5-59B4-4B82-8487-CE42C675CF8A%7D/uploads/fire_new_doc.pdf",
+    "department_url": "https://www.franklinlakes.org/fp",
+    "phone": "201-891-4000 ext. 1218",
+    "email": "bcomitto@franklinlakes.org",
+    "contact_name": "Brian Comitto",
+    "contact_title": "Fire Official",
+    "evidence": [
+     {
+      "url": "https://www.franklinlakes.org/vertical/sites/%7B02E9C1B5-59B4-4B82-8487-CE42C675CF8A%7D/uploads/fire_new_doc.pdf",
+      "quote": "Before any sale, lease, or change of occupancy for residential purposes can occur the owner shall obtain a certificate of smoke alarm and carbon monoxide alarm (CSACMA) from the Franklin Lakes Bureau of Fire Prevention.",
+      "doc_date": "2025-05",
+      "via": "pdf",
+      "verified": true
+     },
+     {
+      "url": "https://www.franklinlakes.org/vertical/sites/%7B02E9C1B5-59B4-4B82-8487-CE42C675CF8A%7D/uploads/fire_new_doc.pdf",
+      "quote": "*Replacing electric hardwires smoke detectors with battery operated smoke detectors is prohibited.",
+      "doc_date": "2025-05",
+      "via": "pdf",
+      "verified": true
+     },
+     {
+      "url": "https://ecode360.com/7171383",
+      "quote": "Upon the sale of any premises containing residential dwelling units or the rental, lease or transfer of any residential dwelling unit, the seller, landlord or transferor is required to obtain from the Borough of Franklin Lakes a smoke detector compliance certificate certifying that the property is in compliance with the provisions of this article.",
+      "doc_date": "2026-10-04 (page fetched)",
+      "via": "page",
+      "verified": null
+     },
+     {
+      "url": "https://www.franklinlakes.org/fp",
+      "quote": "Melodie Petrosino Fire Prevention Secretary 201-891-4000, ext 1219",
+      "doc_date": "2026-10-04 (page fetched)",
+      "via": "page",
+      "verified": true
+     },
+     {
+      "url": "https://www.nj.gov/dca/dfs/pdf/fire%20directory_county%20summary/fire_code_enforcement_director.pdf",
+      "quote": "Fire Official Brian M Comitto Phone (201) 891-0048",
+      "doc_date": "2026-02 (survey date 2/19/2026)",
+      "via": "state_directory",
+      "verified": null
+     },
+     {
+      "url": "https://www.nj.gov/dca/dfs/pdf/fire%20directory_county%20summary/fire_code_enforcement_director.pdf",
+      "quote": "Email bcomitto@franklinlakes.org",
+      "doc_date": "2026-02 (survey date 2/19/2026)",
+      "via": "state_directory",
+      "verified": null
+     },
+     {
+      "url": "https://nj.gov/dca/dfs/pdf/ANNUAL%20REGISTRY/THIRD%20QUARTER%20LEA%20REGISTRY%202026.pdf",
+      "quote": "F Franklin Lakes Borough",
+      "doc_date": "2026-07",
+      "via": "pdf",
+      "verified": true
+     }
+    ],
+    "confidence": "high"
+   }
+  ],
+  "notes": "The Borough form (revised 05/2025) does not list a fire extinguisher, but Borough Code Section 259-42A still says the fire certificate requires compliance with state law for \"portable fire extinguishers\"; state law (P.L.2025, c.19) dropped the extinguisher from the sale certificate in February 2025. The Fire Prevention page lists inspectors Don DeVera and Khaleel Thomas. The fire official email is from the NJ DCA fire directory; the state directory lists phone (201) 891-0048, while the Borough page uses 201-891-4000 ext. 1218."
+ },
+ "other_items": [
+  {
+   "label": "Open permits",
+   "detail": "All open construction permits must be closed out before the fire certificate is issued.",
+   "source_url": "https://www.franklinlakes.org/vertical/sites/%7B02E9C1B5-59B4-4B82-8487-CE42C675CF8A%7D/uploads/fire_new_doc.pdf"
+  },
+  {
+   "label": "Real estate taxes",
+   "detail": "The certificate is valid only if all real estate taxes are current.",
+   "source_url": "https://www.franklinlakes.org/vertical/sites/%7B02E9C1B5-59B4-4B82-8487-CE42C675CF8A%7D/uploads/fire_new_doc.pdf"
+  },
+  {
+   "label": "Abandoned/foreclosure/nuisance registry",
+   "detail": "Properties listed on the registry must be deregistered or yearly fees continue.",
+   "source_url": "https://www.franklinlakes.org/vertical/sites/%7B02E9C1B5-59B4-4B82-8487-CE42C675CF8A%7D/uploads/fire_new_doc.pdf"
+  }
+ ],
+ "open_questions": [
+  "Is the Section 259-29 $75 smoke detector fee still charged anywhere, or fully replaced by the $150 fire certificate fee?",
+  "Does the Building/Code Enforcement office require anything separate at resale (for example a zoning or CO check)?",
+  "Is a fire extinguisher still checked at resale after P.L.2025, c.19?"
+ ],
+ "checked_at": "2026-10-04",
+ "verification": {
+  "fees": 5,
+  "fee_ok": 4,
+  "fee_bad": 0,
+  "fee_unchecked": 1,
+  "quotes": 15,
+  "q_ok": 9,
+  "q_bad": 0,
+  "q_unchecked": 6
+ }
+}

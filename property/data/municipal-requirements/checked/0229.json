@@ -1,0 +1,278 @@
+{
+ "municipality_code": "0229",
+ "municipality": "Leonia Borough",
+ "county": "BERGEN",
+ "resale_co": {
+  "status": "required",
+  "name": "Certificate of Resale/Rental Occupancy (CRO, also called CCO)",
+  "issued_by": "Borough of Leonia Building Department (Public Officer / property maintenance inspection)",
+  "lead_time": "Fees must be paid before the inspection to lock in the date; the fee is lower the further ahead the inspection is scheduled (15 days or more for the lowest fee).",
+  "valid_for": "",
+  "requirements": [
+   "Online CRO application with the new owner's details and the closing date",
+   "All open permits must have a final inspection before a CRO inspection can be scheduled (Building Department guidance)",
+   "Separate Certificate of Smoke Alarm, Carbon Monoxide Alarm and Secondary Power Supply Identification Label compliance with its own inspection and fee",
+   "Secondary power supply (generator, solar, battery) must be identified on the application; at least one option must be checked",
+   "Owner certifies the house meets zoning and that no rubbish, debris or bulk garbage will be left before the new occupancy",
+   "Resale-only certificates (buyer not occupying) need a notarized letter from the purchaser's attorney"
+  ],
+  "fees": [
+   {
+    "label": "CRO inspection scheduled within 7 days (current online form)",
+    "amount": "$150",
+    "quote": "Within 7 days: $150",
+    "source_url": "https://main.govpilot.com/web/public/2b087029-724_Residential-CCO-Application-leonia?uid=7020&ust=NJ&pu=1&id=0",
+    "verified": true
+   },
+   {
+    "label": "CRO inspection scheduled within 14 days (current online form)",
+    "amount": "$125",
+    "quote": "Within 14 days: $125",
+    "source_url": "https://main.govpilot.com/web/public/2b087029-724_Residential-CCO-Application-leonia?uid=7020&ust=NJ&pu=1&id=0",
+    "verified": true
+   },
+   {
+    "label": "CRO inspection scheduled 15 days or more ahead (current online form)",
+    "amount": "$100",
+    "quote": "15 days or greater: $100",
+    "source_url": "https://main.govpilot.com/web/public/2b087029-724_Residential-CCO-Application-leonia?uid=7020&ust=NJ&pu=1&id=0",
+    "verified": true
+   },
+   {
+    "label": "CRO reinspection (current online form)",
+    "amount": "$50",
+    "quote": "Reinspection fee: $50",
+    "source_url": "https://main.govpilot.com/web/public/2b087029-724_Residential-CCO-Application-leonia?uid=7020&ust=NJ&pu=1&id=0",
+    "verified": true
+   },
+   {
+    "label": "Certificate of sale/rental occupancy, inspection fee three weeks before inspection date (Code Section 123-23F; lower than the current form)",
+    "amount": "$50",
+    "quote": "Inspection fee three weeks prior to inspection date: $50.",
+    "source_url": "https://ecode360.com/9250935",
+    "verified": null
+   },
+   {
+    "label": "Certificate of sale/rental occupancy, two weeks before (Code)",
+    "amount": "$75",
+    "quote": "Inspection fee two weeks prior to inspection date: $75.",
+    "source_url": "https://ecode360.com/9250935",
+    "verified": null
+   },
+   {
+    "label": "Certificate of sale/rental occupancy, one week before (Code)",
+    "amount": "$100",
+    "quote": "Inspection fee one week prior to inspection date: $100.",
+    "source_url": "https://ecode360.com/9250935",
+    "verified": null
+   }
+  ],
+  "how_to_apply": "Apply online with the Borough's Residential CCO (CRO) application on GovPilot, linked from the 'Certificate of Resale/Rental (CRO/CCO)' page, and pay the Borough of Leonia (two separate payments: CRO and smoke/CO). To schedule, come to the Building Department, 312 Broad Ave, Leonia, NJ 07605, or call 201-592-5780 ext. 253.",
+  "application_url": "https://main.govpilot.com/web/public/2b087029-724_Residential-CCO-Application-leonia?uid=7020&ust=NJ&pu=1&id=0",
+  "department_url": "https://www.leonianj.gov/borough-government/borough-departments/building-department",
+  "phone": "201-592-5780 x 253",
+  "email": "JPLee@leonianj.gov",
+  "contact_name": "J.P. Lee",
+  "contact_title": "Technical Assistant, Building Department",
+  "evidence": [
+   {
+    "url": "https://www.leonianj.gov/borough-government/borough-departments/building-department",
+    "quote": "Certificate of Resale/Rental: If there is a change of occupancy whether by resale or rental you are required to submit a CRO application, along with the proper fee, to the Building Department.",
+    "doc_date": "2026-10-04 (page fetched)",
+    "via": "page",
+    "verified": null
+   },
+   {
+    "url": "https://www.leonianj.gov/borough-government/borough-departments/building-department",
+    "quote": "Effective March 4, 2025, two inspections will be required when selling or renting one- and two-family dwellings including coops, condos and townhomes.",
+    "doc_date": "2026-10-04 (page fetched)",
+    "via": "page",
+    "verified": null
+   },
+   {
+    "url": "https://main.govpilot.com/web/public/2b087029-724_Residential-CCO-Application-leonia?uid=7020&ust=NJ&pu=1&id=0",
+    "quote": "FEES - Fees must be paid prior to the inspection to lock in the inspection date. (2 checks)",
+    "doc_date": "2026-08-17 (published time shown by reader)",
+    "via": "page",
+    "verified": true
+   },
+   {
+    "url": "https://main.govpilot.com/web/public/2b087029-724_Residential-CCO-Application-leonia?uid=7020&ust=NJ&pu=1&id=0",
+    "quote": "If you would like to schedule your CRO inspection, please contact the Borough of Leonia Building Department. You can do this by coming in person at 312 Broad Ave, Leonia, NJ 07605, or by calling 201-592-5780 EXT 253.",
+    "doc_date": "2026-10-04 (page fetched)",
+    "via": "page",
+    "verified": true
+   },
+   {
+    "url": "https://ecode360.com/9252039",
+    "quote": "Resale only certificates may be issued provided that a notarized letter is received from a purchaser's attorney that the dwelling will not be occupied until an inspection certificate pursuant to this chapter or a certificate of occupancy has been issued.",
+    "doc_date": "Amended 8-18-2025 by Ord. No. 2025-17",
+    "via": "page",
+    "verified": null
+   },
+   {
+    "url": "https://www.leonianj.gov/borough-government/borough-departments/building-department",
+    "quote": "Mark Moeller Construction Official & Building Inspector",
+    "doc_date": "2026-10-04 (page fetched)",
+    "via": "page",
+    "verified": null
+   }
+  ],
+  "confidence": "high",
+  "notes": "The Building Department page and the current GovPilot form (published August 2026) say a CRO is required on resale. The fee table on the form shows the same three tiers for the CRO inspection and the smoke/CO inspection ($150 / $125 / $100, reinspection $50), which are higher than the CRO tiers still printed in the Borough Code fee schedule (Section 123-23F(12), zoning/land use fees: $50 / $75 / $100, read through the ecode360 print view); the form is newer. Code Section 212-32 (Property Maintenance, amended through Ordinance 2025-17) frames the inspection certificate around new occupants and allows resale-only certificates. The Borough's 2026 CRO Guidelines PDF and CSACMAC requirements PDF could not be read (site blocks automated download; text not extractable). Construction Official Mark Moeller: mmoeller@leonianj.gov, 201-592-5780 x255. Rental-only items (lead-safe certification for rentals, landlord registration) are not sale requirements."
+ },
+ "fire_cert": {
+  "requirements": [
+   "Smoke alarms and carbon monoxide alarms per N.J.A.C. 5:70-4.19 (see the Borough's CSACMAC requirements sheet)",
+   "Secondary power supply identification label where a generator, solar or battery system exists (listed on the Borough form)",
+   "No fire extinguisher: the Borough says the fire extinguisher requirement has been removed"
+  ],
+  "authorities": [
+   {
+    "name": "Leonia Fire Prevention Bureau",
+    "type": "municipal_fire_bureau",
+    "area_served": "Entire borough",
+    "lead_time": "Fee depends on how far ahead the inspection is scheduled (code: more than 10 business days for the lowest fee; current form: 15 days or more).",
+    "fees": [
+     {
+      "label": "Smoke & CO certification inspection within 7 days (current online form)",
+      "amount": "$150",
+      "quote": "Within 7 days: $150",
+      "source_url": "https://main.govpilot.com/web/public/2b087029-724_Residential-CCO-Application-leonia?uid=7020&ust=NJ&pu=1&id=0",
+      "verified": true
+     },
+     {
+      "label": "Smoke & CO certification inspection within 14 days (current online form)",
+      "amount": "$125",
+      "quote": "Within 14 days: $125",
+      "source_url": "https://main.govpilot.com/web/public/2b087029-724_Residential-CCO-Application-leonia?uid=7020&ust=NJ&pu=1&id=0",
+      "verified": true
+     },
+     {
+      "label": "Smoke & CO certification inspection 15 days or more ahead (current online form)",
+      "amount": "$100",
+      "quote": "15 days or greater: $100",
+      "source_url": "https://main.govpilot.com/web/public/2b087029-724_Residential-CCO-Application-leonia?uid=7020&ust=NJ&pu=1&id=0",
+      "verified": true
+     },
+     {
+      "label": "Certificate of smoke alarm and CO alarm compliance, more than 10 business days before inspection (Code Section 136-13)",
+      "amount": "$100",
+      "quote": "Requests made more than 10 business days prior to inspection: $100.",
+      "source_url": "https://ecode360.com/9251166",
+      "verified": null
+     },
+     {
+      "label": "Four to 10 business days before inspection (Code)",
+      "amount": "$125",
+      "quote": "Requests made four to 10 business days prior to inspection: $125.",
+      "source_url": "https://ecode360.com/9251166",
+      "verified": null
+     },
+     {
+      "label": "Fewer than four business days before inspection (Code)",
+      "amount": "$150",
+      "quote": "Requests made fewer than four business days prior to inspection: $150.",
+      "source_url": "https://ecode360.com/9251166",
+      "verified": null
+     },
+     {
+      "label": "Reinspection per occurrence (Code)",
+      "amount": "$50",
+      "quote": "Reinspection fee per occurrence: $50.",
+      "source_url": "https://ecode360.com/9251166",
+      "verified": null
+     }
+    ],
+    "how_to_apply": "Requested on the same online Residential CCO (CRO) application, with a separate payment for the smoke/CO inspection. Questions to the Fire Prevention Bureau, Borough Hall, 312 Broad Avenue, 2nd floor.",
+    "application_url": "https://main.govpilot.com/web/public/2b087029-724_Residential-CCO-Application-leonia?uid=7020&ust=NJ&pu=1&id=0",
+    "department_url": "https://www.leonianj.gov/borough-government/borough-departments/fire-prevention-bureau",
+    "phone": "201-592-5780 x254",
+    "email": "dhaenelt@leonianj.gov",
+    "contact_name": "David A. Haenelt",
+    "contact_title": "Fire Marshal",
+    "evidence": [
+     {
+      "url": "https://main.govpilot.com/web/public/2b087029-724_Residential-CCO-Application-leonia?uid=7020&ust=NJ&pu=1&id=0",
+      "quote": "Note: Two inspections are required when selling or renting one- and two-family dwellings, including co-ops, condominiums, and townhomes.",
+      "doc_date": "2026-10-04 (page fetched)",
+      "via": "page",
+      "verified": true
+     },
+     {
+      "url": "https://main.govpilot.com/web/public/2b087029-724_Residential-CCO-Application-leonia?uid=7020&ust=NJ&pu=1&id=0",
+      "quote": "The fire extinguisher requirement has been removed.",
+      "doc_date": "2026-10-04 (page fetched)",
+      "via": "page",
+      "verified": true
+     },
+     {
+      "url": "https://www.leonianj.gov/borough-government/borough-departments/building-department",
+      "quote": "In addition to the CRO inspection, you will be required to obtain a Certificate of Smoke Alarm and Carbon Monoxide Alarm Compliance.",
+      "doc_date": "2026-10-04 (page fetched)",
+      "via": "page",
+      "verified": null
+     },
+     {
+      "url": "https://ecode360.com/9251166",
+      "quote": "Penalty for failure to obtain a certificate of smoke alarm and carbon monoxide alarm compliance: $500.",
+      "doc_date": "Amended 3-3-2025 by Ord. No. 2025-04",
+      "via": "page",
+      "verified": null
+     },
+     {
+      "url": "https://www.leonianj.gov/borough-government/borough-departments/fire-prevention-bureau",
+      "quote": "David A. Haenelt Fire Marshal",
+      "doc_date": "2026-10-04 (page fetched)",
+      "via": "page",
+      "verified": null
+     },
+     {
+      "url": "https://www.nj.gov/dca/dfs/pdf/fire%20directory_county%20summary/fire_code_enforcement_director.pdf",
+      "quote": "0229 Leonia Borough LEAID: 0229-001 Leonia Boro Fire Prev Enf Auth. Municipal Fire Official Dave Haenelt Phone (201) 592-5780 Email dhaenelt@leonianj.gov",
+      "doc_date": "2026-04-09 (survey date)",
+      "via": "state_directory",
+      "verified": null
+     },
+     {
+      "url": "https://nj.gov/dca/dfs/pdf/ANNUAL%20REGISTRY/THIRD%20QUARTER%20LEA%20REGISTRY%202026.pdf",
+      "quote": "F Leonia Borough",
+      "doc_date": "2026-07",
+      "via": "pdf",
+      "verified": true
+     }
+    ],
+    "confidence": "high"
+   }
+  ],
+  "notes": "Since March 4, 2025 Leonia runs the smoke/CO certificate as a second inspection with its own fee alongside the CRO. The current GovPilot form shows $150 / $125 / $100 by lead time, while Code Section 136-13 (amended March 3, 2025 by Ord. 2025-04) has the same amounts but different cut-offs (more than 10 business days $100, 4 to 10 business days $125, fewer than 4 business days $150); confirm which cut-offs are used. The Borough says the fire extinguisher is no longer required, matching P.L.2025, c.19. Fire Inspector Robert Chace: rcchace@leonianj.gov, 201-592-5780 x262. The state directory lists Leonia's enforcing agency as Municipal while the LEA registry code is F."
+ },
+ "other_items": [
+  {
+   "label": "Open permits",
+   "detail": "All open permits must have a final inspection before a CRO inspection can be scheduled.",
+   "source_url": "https://www.leonianj.gov/borough-government/borough-departments/building-department"
+  },
+  {
+   "label": "Water service line",
+   "detail": "SUEZ asks owners to confirm a water meter is installed and that there is no lead service line; contact SUEZ directly if so (request, not a sale condition).",
+   "source_url": "https://www.leonianj.gov/borough-government/borough-departments/building-department"
+  }
+ ],
+ "open_questions": [
+  "Which day cut-offs apply to the smoke/CO fee: the GovPilot form (within 7 days $150, within 14 days $125, 15+ days $100) or Code Section 136-13 (business-day tiers of more than 10, 4 to 10 and fewer than 4)?",
+  "Is the CRO fee on the form ($100 to $150) now the official fee, given the Code still lists $50 / $75 / $100?",
+  "How long is a CRO valid if the closing moves?"
+ ],
+ "checked_at": "2026-10-04",
+ "verification": {
+  "fees": 14,
+  "fee_ok": 7,
+  "fee_bad": 0,
+  "fee_unchecked": 7,
+  "quotes": 13,
+  "q_ok": 5,
+  "q_bad": 0,
+  "q_unchecked": 8
+ }
+}

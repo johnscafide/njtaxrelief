@@ -1,0 +1,214 @@
+{
+ "municipality_code": "0246",
+ "municipality": "Paramus Borough",
+ "county": "BERGEN",
+ "checked_at": "2026-10-04",
+ "resale_co": {
+  "status": "required",
+  "name": "Certificate of Compliance for Residential Resale (Continued Certificate of Compliance)",
+  "issued_by": "Borough of Paramus Building Department (Construction Code Official), with the Fire Official or designee for smoke alarms",
+  "lead_time": "All open construction permits must be closed at least one week before the resale inspection is scheduled. Inspections are Monday to Friday, 9:00 am to 12:00 pm.",
+  "valid_for": "",
+  "requirements": [
+   "All open construction permits closed out at least one week before scheduling",
+   "Zoning conformance and no clear-water discharge (sump, roof, yard drainage) into the public sewer (Borough Code §363-5G)",
+   "Smoke alarms on each level and near bedrooms; ten-year sealed battery alarms where hardwired were not required; hardwired alarms may not be replaced with battery units",
+   "Carbon monoxide detectors near all bedrooms and sleeping areas (UL 2034)",
+   "Secondary power source label (generator, solar, battery storage) within 18 inches of the main panel and meter",
+   "House address displayed; Borough-issued garbage and recycling containers on the property; pools fenced",
+   "Work done without permits must be permitted and inspected before the certificate is issued"
+  ],
+  "fees": [
+   {
+    "label": "Certificate of Compliance for residential resale",
+    "amount": "$100",
+    "quote": "an application may be submitted along with a fee of $100 for the sale of a home",
+    "source_url": "https://www.paramusborough.gov/187/Certificate-of-Occupancy",
+    "verified": true
+   },
+   {
+    "label": "Certificate of compliance, inspection and issuance (Borough Code §197-3)",
+    "amount": "$100",
+    "quote": "The applicant shall pay the sum of $100 to the Borough of Paramus to cover the administrative costs of inspections and issuance of the certificate of compliance.",
+    "source_url": "https://ecode360.com/8540928",
+    "verified": null
+   }
+  ],
+  "how_to_apply": "Confirm with the Building Department that all prior permits are closed, then apply online through the SDL portal or fill out the PDF Residential Resale Application and submit it with the $100 fee. The Borough then calls to schedule the inspection. The certificate is emailed or picked up at the Building Department, One Jockish Square.",
+  "application_url": "https://www.paramusborough.org/DocumentCenter/View/3393/Continued-Certificate-of-Occupancy-Residental-Resale",
+  "department_url": "https://www.paramusborough.gov/187/Certificate-of-Occupancy",
+  "phone": "(201) 265-2100 Ext. 2230",
+  "email": "Building@paramusborough.gov",
+  "contact_name": "",
+  "contact_title": "",
+  "evidence": [
+   {
+    "url": "https://www.paramusborough.gov/187/Certificate-of-Occupancy",
+    "quote": "An application for Certificate of Compliance is required for selling or renting a home in Paramus.",
+    "doc_date": "2026-10-04 (page fetched)",
+    "via": "page",
+    "verified": true
+   },
+   {
+    "url": "https://www.paramusborough.gov/187/Certificate-of-Occupancy",
+    "quote": "Sellers please note that this Certificate is mandatory for real estate closings.",
+    "doc_date": "2026-10-04 (page fetched)",
+    "via": "page",
+    "verified": true
+   },
+   {
+    "url": "https://www.paramusborough.gov/187/Certificate-of-Occupancy",
+    "quote": "Inspections are daily from 9:00 am – 12:00 pm.",
+    "doc_date": "2026-10-04 (page fetched)",
+    "via": "page",
+    "verified": true
+   },
+   {
+    "url": "https://www.paramusborough.gov/187/Certificate-of-Occupancy",
+    "quote": "The Inspector will confirm the location of smoke/carbon monoxide detectors and fire extinguisher.",
+    "doc_date": "2026-10-04 (page fetched)",
+    "via": "page",
+    "verified": true
+   },
+   {
+    "url": "https://www.paramusborough.org/DocumentCenter/View/1495/Certificate-of-Compliance-for-Residental-Resale",
+    "quote": "All open construction permits MUST be closed out at least one week prior to scheduling the Resale/Tenancy of the home",
+    "doc_date": "2025-06-12 (revised)",
+    "via": "pdf",
+    "verified": true
+   },
+   {
+    "url": "https://www.paramusborough.org/DocumentCenter/View/3393/Continued-Certificate-of-Occupancy-Residental-Resale",
+    "quote": "Building@paramusborough.gov",
+    "doc_date": "2022-08-29 (created)",
+    "via": "pdf",
+    "verified": true
+   },
+   {
+    "url": "https://ecode360.com/8540928",
+    "quote": "Prior to the resale of all residential properties within the Borough of Paramus, a certificate of compliance from the Building Department shall be required.",
+    "doc_date": "2024-02-20 (Ord. No. 2024-04)",
+    "via": "page",
+    "verified": null
+   },
+   {
+    "url": "https://ecode360.com/8548123",
+    "quote": "Inspection and issuance fee: $100.",
+    "doc_date": "2025-06-12 (Ord. No. 2025-18)",
+    "via": "page",
+    "verified": null
+   }
+  ],
+  "confidence": "high",
+  "notes": "Borough Code chapter 197 (Ord. No. 2024-04) was read through the ecode360 print view; Appendix §A460-14 repeats the $100 fee. The $300 'continued certificate of occupancy' in the same chapter applies to new commercial tenants, not home sales. Residential tenancy certificates ($100) and the lead-based paint inspection program for rentals are rental-only. The web page still says the inspector confirms a fire extinguisher, but the June 12, 2025 guidelines say fire extinguishers are no longer required, only recommended. Building Department hours 8:30 a.m. to 4:30 p.m."
+ },
+ "fire_cert": {
+  "requirements": [
+   "Smoke alarms located per NFPA 72, at least one on each level and in the immediate vicinity of all bedrooms",
+   "Hardwired alarms from original construction may not be replaced with battery units; elsewhere use ten-year sealed battery alarms (ANSI/UL 217)",
+   "Carbon monoxide detectors near all bedrooms and sleeping areas (UL 2034, NFPA 720)",
+   "If smoke alarms are tied to a burglar alarm, call the alarm company 15 minutes before the inspector arrives and know the reset code",
+   "Secondary power source label within 18 inches of the main electrical panel and meter",
+   "Fire extinguisher no longer required, only recommended (Borough guidelines revised 06/12/25)"
+  ],
+  "authorities": [
+   {
+    "name": "Borough of Paramus Building Department with the Paramus Fire Prevention Bureau (smoke/CO check is part of the resale Certificate of Compliance)",
+    "type": "municipal_fire_bureau",
+    "area_served": "Entire borough",
+    "lead_time": "Inspections Monday to Friday, 9:00 am to 12:00 pm, scheduled after the application and fee are received.",
+    "fees": [
+     {
+      "label": "Smoke/CO check within the resale Certificate of Compliance (same fee, not an extra charge)",
+      "amount": "$100",
+      "quote": "an application may be submitted along with a fee of $100 for the sale of a home",
+      "source_url": "https://www.paramusborough.gov/187/Certificate-of-Occupancy",
+      "verified": true
+     }
+    ],
+    "how_to_apply": "Included in the Residential Resale Certificate of Compliance application to the Building Department (SDL portal or PDF form).",
+    "application_url": "https://www.paramusborough.org/DocumentCenter/View/3393/Continued-Certificate-of-Occupancy-Residental-Resale",
+    "department_url": "https://www.paramusborough.gov/187/Certificate-of-Occupancy",
+    "phone": "(201) 265-2100",
+    "email": "dperez@paramusborough.org",
+    "contact_name": "Daniel Perez",
+    "contact_title": "Fire Official (NJ DCA directory)",
+    "evidence": [
+     {
+      "url": "https://ecode360.com/8540928",
+      "quote": "Also, the Fire Official or designee shall inspect property for conformance with New Jersey P.L. 1991, c. 92, Smoke-Sensitive Alarm Devices.",
+      "doc_date": "2026-10-04 (page fetched)",
+      "via": "page",
+      "verified": null
+     },
+     {
+      "url": "https://www.paramusborough.org/DocumentCenter/View/1495/Certificate-of-Compliance-for-Residental-Resale",
+      "quote": "GUIDELINES FOR SMOKE ALARMS, CARBON MONOXIDE DETECTORS",
+      "doc_date": "2025-06-12 (revised)",
+      "via": "pdf",
+      "verified": true
+     },
+     {
+      "url": "https://www.paramusborough.org/DocumentCenter/View/1495/Certificate-of-Compliance-for-Residental-Resale",
+      "quote": "Although no longer required Fire Extinguishers are recommended",
+      "doc_date": "2025-06-12 (revised)",
+      "via": "pdf",
+      "verified": true
+     },
+     {
+      "url": "https://www.nj.gov/dca/dfs/pdf/fire%20directory_county%20summary/fire_code_enforcement_director.pdf",
+      "quote": "LEAID: 0246-001 Paramus Boro SMOKE DETECTOR COMPLIANCE Name: Paramus Boro Fire Prev Enf Auth. Municipal Addr: 1 Jockish Sq ... Fire Official Daniel Perez Phone (201) 265-2100 ... Email dperez@paramusborough.org",
+      "doc_date": "2026 (survey date 2/19/2026)",
+      "via": "state_directory",
+      "verified": null
+     },
+     {
+      "url": "https://nj.gov/dca/dfs/pdf/ANNUAL%20REGISTRY/THIRD%20QUARTER%20LEA%20REGISTRY%202026.pdf",
+      "quote": "M Paramus Borough",
+      "doc_date": "2026-07",
+      "via": "pdf",
+      "verified": true
+     }
+    ],
+    "confidence": "high"
+   }
+  ],
+  "notes": "No separate smoke certificate fee was found; the Borough runs the smoke/CO inspection inside the $100 resale Certificate of Compliance. The DCA directory lists Daniel Perez as Fire Official at (201) 265-2100 (ext 622 appears in the listing). State law (P.L.2025, c.19, signed February 3, 2025) dropped the portable fire extinguisher from the state sale certificate. Paramus's own guidelines already reflect this."
+ },
+ "other_items": [
+  {
+   "label": "Open permits",
+   "detail": "All open construction permits must be closed at least one week before the resale inspection; unpermitted work must be permitted and inspected first.",
+   "source_url": "https://www.paramusborough.org/DocumentCenter/View/1495/Certificate-of-Compliance-for-Residental-Resale"
+  },
+  {
+   "label": "Clear-water discharge into sewer",
+   "detail": "The resale inspection checks conformance with Borough Code §363-5 Subsection G, which bars discharging sump, roof, yard or groundwater into the public sewer.",
+   "source_url": "https://ecode360.com/8542937"
+  },
+  {
+   "label": "Garbage and recycling containers",
+   "detail": "Borough-issued containers with matching serial numbers must be on the property; missing ones must be bought at DPW before the inspection.",
+   "source_url": "https://www.paramusborough.org/DocumentCenter/View/1495/Certificate-of-Compliance-for-Residental-Resale"
+  },
+  {
+   "label": "Secondary power source label",
+   "detail": "Homes with generators, solar or battery storage need a permanent 'CAUTION: MULTIPLE SOURCES OF POWER' type label near the panel and meter.",
+   "source_url": "https://www.paramusborough.org/DocumentCenter/View/1495/Certificate-of-Compliance-for-Residental-Resale"
+  }
+ ],
+ "open_questions": [
+  "How long is the Certificate of Compliance valid if the closing is delayed?",
+  "Typical wait between application and inspection."
+ ],
+ "verification": {
+  "fees": 3,
+  "fee_ok": 2,
+  "fee_bad": 0,
+  "fee_unchecked": 1,
+  "quotes": 13,
+  "q_ok": 9,
+  "q_bad": 0,
+  "q_unchecked": 4
+ }
+}
