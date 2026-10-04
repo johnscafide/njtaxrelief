@@ -7,7 +7,7 @@ const T = require('./_co-town');
 const { ORIGIN, SHARE_IMAGE, esc, countyLabel, fmtDate, STATUS } = T;
 const LOGO = '/property/branding/watchdog-logo-horizontal.svg';
 const MARK = '/property/branding/watchdog-mark.svg';
-const ASSET_V = '20261004';
+const ASSET_V = '20261004b';
 
 // Inline icons, so the buttons never depend on an icon font loading.
 function svg(d, fill) { return `<svg class="ic" viewBox="0 0 24 24" width="16" height="16" aria-hidden="true" focusable="false">${fill ? `<path fill="currentColor" d="${d}"/>` : `<path fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" d="${d}"/>`}</svg>`; }
@@ -20,8 +20,8 @@ const ICON = {
   print: svg('M6 9V3h12v6M6 18H4a2 2 0 0 1-2-2v-5a2 2 0 0 1 2-2h16a2 2 0 0 1 2 2v5a2 2 0 0 1-2 2h-2M6 14h12v7H6z'),
   copy: svg('M9 9h11v11H9zM5 15H4V4h11v1'),
   back: svg('M19 12H5m0 0l6-6m-6 6l6 6'),
-  up: svg('M7 10v11H3V10h4zm0 0l4-8c1.7 0 3 1.3 3 3v3h5.2a2 2 0 0 1 2 2.3l-1.3 8A2 2 0 0 1 17.9 21H7'),
-  down: svg('M17 14V3h4v11h-4zm0 0l-4 8c-1.7 0-3-1.3-3-3v-3H4.8a2 2 0 0 1-2-2.3l1.3-8A2 2 0 0 1 6.1 3H17')
+  up: svg('M12 4l7.5 8.5H15V20H9v-7.5H4.5z'),
+  down: svg('M12 20l-7.5-8.5H9V4h6v7.5h4.5z')
 };
 
 // ---------- small pieces ----------
@@ -47,7 +47,7 @@ function shareUrl(t, medium, content) {
 function facts(d) {
   const co = d.co, fire = d.fire;
   const st = STATUS[co.status];
-  let html = `<section class="part"><h2>Certificate of Occupancy</h2><span class="status ${st[0]}">${st[1]}</span>` +
+  let html = `<div class="cols"><section class="part"><h2>Certificate of Occupancy</h2><span class="status ${st[0]}">${st[1]}</span>` +
     (co.status === 'not_found' ? '<div><button class="add" type="button" data-add>Add CO Requirements</button></div>' : '') +
     '<dl class="facts">' +
     fact('Certificate', esc(co.name)) +
@@ -67,7 +67,7 @@ function facts(d) {
       '<dl class="facts">' + fact('Fees', feeTable(a.fees)) + fact('Timing', esc(a.lead_time)) + fact('Phone', esc(a.phone)) + '</dl>' +
       links(a.application_url, a.department_url) + '</div>';
   });
-  html += '</section>';
+  html += '</section></div>';
 
   const when = fmtDate(d.checked_at);
   html += '<div class="fine">' + (when ? `Last checked ${esc(when)}` : '') +
@@ -89,11 +89,13 @@ function shareRow(t, embed) {
     '</div>';
 }
 
+// Reddit-style: up arrow, score (helpful minus not helpful), down arrow. Sits next to the town name.
 function votes() {
-  return '<div class="helpful" data-votes><p id="helpful-q">Was this helpful?</p>' +
-    '<button class="vote" type="button" data-vote="1" aria-pressed="false" aria-label="Yes, this was helpful">' + ICON.up + '<span data-count="up"></span></button>' +
-    '<button class="vote" type="button" data-vote="-1" aria-pressed="false" aria-label="No, this wasn’t helpful">' + ICON.down + '<span data-count="down"></span></button>' +
-    '<p class="thanks" data-thanks role="status" aria-live="polite"></p></div>';
+  return '<div class="votes" data-votes role="group" aria-label="Was this helpful?">' +
+    '<button class="vote up" type="button" data-vote="1" aria-pressed="false" aria-label="Helpful">' + ICON.up + '</button>' +
+    '<span class="score" data-score aria-live="polite"></span>' +
+    '<button class="vote down" type="button" data-vote="-1" aria-pressed="false" aria-label="Not helpful">' + ICON.down + '</button>' +
+    '</div>';
 }
 
 const DIALOG = `<dialog id="add-dlg" aria-labelledby="add-title">
@@ -234,9 +236,9 @@ function townPage(t, opts) {
   if (city && lower(city) !== lower(t.name) && !lower(t.name).startsWith(lower(city))) meta += ` · Mailing address: ${esc(city)}`;
   meta += '<span data-helpful-summary></span>';
   const attrs = `data-co-town data-code="${t.code}" data-name="${esc(t.name)}" data-county="${esc(countyLabel(t.county))}" data-status="${d ? d.co.status : 'not_available'}" data-url="${esc(ORIGIN + t.path)}" data-surface="${embed ? 'embed' : 'page'}"`;
-  let out = (embed ? '' : crumbs(t)) + `<h1 class="town">${esc(t.name)}</h1><p class="meta">${meta}</p>`;
+  let out = (embed ? '' : crumbs(t)) + `<div class="head"><div><h1 class="town">${esc(t.name)}</h1><p class="meta">${meta}</p></div>${d ? votes() : ''}</div>`;
   if (d) {
-    out += shareRow(t, embed) + facts(d) + votes() + '<button class="fix" type="button" data-fix>Report a correction</button>';
+    out += shareRow(t, embed) + facts(d) + '<button class="fix" type="button" data-fix>Report a correction</button>';
   } else {
     out += '<p>Not available yet.</p><button class="add" type="button" data-add>Add CO Requirements</button>';
   }
