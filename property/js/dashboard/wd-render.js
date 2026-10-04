@@ -21,13 +21,6 @@
      Property Intelligence.
 
      */
-/* ==========================================================================
-   Watchdog Dashboard board renderer. Reads WD state from wd-core.js; never
-   fetches. Layout: search + greeting, four summary cards, the property list
-   with a details card, and a side column with the calendar and activity.
-   Each region repaints only when its markup changes, so focus, the search
-   box and scroll position survive the secondary data arriving.
-   ========================================================================== */
 (function(w,d){
 'use strict';
 function start(){
@@ -37,7 +30,6 @@ function start(){
   var ui={pin:'',sort:'review',all:false,calY:today.getFullYear(),calM:today.getMonth(),day:'',feed:'all'};
   var LIST_LIMIT=5,WEEKS=17,DAY=86400000;
 
-  /* Clean public routes on WatchdogIndex; /property/... on the legacy host. */
   function route(path){
     var rt=w.NJPTRSupabaseRuntime,prefix=rt&&typeof rt.routePrefix==='string'?rt.routePrefix:((location.hostname==='watchdogindex.com'||location.hostname==='www.watchdogindex.com')?'':'/property');
     path=String(path||'/');if(path.charAt(0)!=='/')path='/'+path;
@@ -48,7 +40,6 @@ function start(){
   function dateKey(dt){return dt.getFullYear()+'-'+String(dt.getMonth()+1).padStart(2,'0')+'-'+String(dt.getDate()).padStart(2,'0');}
   function place(p){return [H.titleCase(p.town),p.county?H.titleCase(p.county)+' County':''].filter(Boolean).join(', ')||'New Jersey';}
 
-  /* One status per property, from the shared category logic in wd-core. */
   function statusOf(p){
     var g=WD.gapFor(p),s=S.scores[p.pams_pin];
     if(!g&&!(s&&s.score!=null))return{key:'none',label:'Not rated yet',short:'Not rated'};
@@ -60,7 +51,6 @@ function start(){
   function scoreOf(p){var s=S.scores[p.pams_pin];return s&&s.score!=null?Math.round(s.score):null;}
   function counts(props){var c={review:0,watch:0,good:0,none:0};props.forEach(function(p){c[statusOf(p).key]+=1;});return c;}
 
-  /* ---------------------------------------------------------------- top -- */
   function greetingWord(){var h=new Date().getHours();return h<12?'Good morning':h<17?'Good afternoon':'Good evening';}
   function greeting(){
     var name=String(WD.userName()||'').trim().split(/\s+/)[0]||'';
@@ -77,7 +67,6 @@ function start(){
   }
   function paintTop(){
     var slot=H.el('wdd-search-slot');
-    // The search box is built once so a repaint never wipes what someone is typing.
     if(slot&&!slot.querySelector('#wdd-command')){
       slot.innerHTML=
         '<form class="wdd-search" id="wdd-command" role="search">'+
@@ -93,8 +82,6 @@ function start(){
     setHTML('wdd-greet-line',summaryLine());
   }
 
-  /* -------------------------------------------------------------- cards -- */
-  // Background art: shield (score), house (changes), magnifier (status), map pin (value).
   var DECO={
     shield:'<svg class="wdd-deco wdd-deco--shield" viewBox="0 0 100 116" aria-hidden="true" focusable="false"><path d="M50 2 94 18v34c0 30-19 52-44 62C25 104 6 82 6 52V18Z" stroke="none"/><path d="m30 58 14 14 28-30" fill="none" stroke-width="7" stroke-linecap="round" stroke-linejoin="round"/></svg>',
     house:'<svg class="wdd-deco wdd-deco--house" viewBox="0 0 100 92" aria-hidden="true" focusable="false"><path d="M50 4 96 42h-12v46H62V62H38v26H16V42H4Z"/></svg>',
@@ -164,7 +151,6 @@ function start(){
       return near?'<b>'+esc(shortDate(weeks[peak].from+DAY))+'</b>':'<span>'+esc(shortDate(weeks[i].from+DAY))+'</span>';
     });
     if(peak>-1&&labelIdx.every(function(i){return Math.abs(i-peak)>1;})){
-      // Keep the peak's date visible even when it falls between the axis ticks.
       var slot=Math.round(peak/4);axis[Math.max(0,Math.min(4,slot))]='<b>'+esc(shortDate(weeks[peak].from+DAY))+'</b>';
     }
     return '<article class="wdd-card wdd-card--changes">'+DECO.house+
@@ -203,7 +189,6 @@ function start(){
     setHTML('wdd-signals',scoreCard(props)+changesCard(props)+statusCard(props)+valueCard());
   }
 
-  /* --------------------------------------------------------- list+detail -- */
   var RANK={review:0,watch:1,good:2,none:3};
   function sortedProps(){
     var props=WD.filtered().slice();
@@ -275,11 +260,6 @@ function start(){
     '</div>');
   }
 
-  /* --------------------------------------------------------------- side -- */
-  // Appeal calendar baselines mirror appeal-deadline-rules.json: Burlington,
-  // Gloucester and Monmouth use the January 15 baseline, other counties
-  // April 1. Per its display_policy: statutory baseline only, no countdown,
-  // and always verify against the assessment notice.
   var APPEAL_ALT_COUNTIES=['BURLINGTON','GLOUCESTER','MONMOUTH'];
   function countyKey(c){return String(c||'').trim().toUpperCase().replace(/\s+COUNTY$/,'');}
   function nextBaseline(month,day){var now=new Date(),y=now.getFullYear();if(now>new Date(y,month-1,day,23,59,59))y+=1;return new Date(y,month-1,day);}
@@ -353,7 +333,6 @@ function start(){
     setHTML('wdd-foot','<b>Decision-support data.</b> Market estimates and gap figures are not appraisals or legal conclusions. A gap does not establish appeal eligibility or success. Verify filing decisions against original county and municipal records.');
   }
 
-  /* ------------------------------------------------------------ actions -- */
   function exportCsv(){
     var st=WD.stats(),out=[['Watchdog portfolio export',new Date().toISOString()],[],['Metric','Value'],['Properties',st.count],['Watchdog Score',st.score==null?'':st.score.toFixed(1)],['Market estimate',Math.round(st.value)],['Assessed total',Math.round(st.assessed)],['Annual tax',Math.round(st.tax)],['Above evidence',st.over],['Annual gap estimate',Math.round(st.atStake)],[],['Address','Town','County','Assessed','Market estimate','Gap %','Annual gap estimate','Annual tax','Watchdog Score']];
     WD.filtered().forEach(function(p){var g=WD.gapFor(p),s=S.scores[p.pams_pin];out.push([p.address||'',p.town||'',p.county||'',p.assessed||'',p.watchdog_value||'',g?g.pct.toFixed(2):'',g&&g.dollars?Math.round(g.dollars):'',p.last_year_tax||'',s?Math.round(s.score):'']);});
@@ -375,8 +354,6 @@ function start(){
     try{recognition.start();}catch(_err){button.classList.remove('is-listening');voiceRecognition=null;}
   }
   function refocus(selector){w.setTimeout(function(){var el=d.querySelector(selector);if(el)el.focus({preventScroll:true});},0);}
-  /* "Why Watchdog?" opens the plain-English evidence drawer (watchdog-why.js),
-     loaded on first use so the dashboard does not pay for it up front. */
   function openWhy(btn){
     var opts={pamsPin:btn.getAttribute('data-why-pin')||'',address:btn.getAttribute('data-why-address')||'',surface:'dashboard'};
     if(w.WatchdogWhy){w.WatchdogWhy.open(opts);return;}
@@ -390,7 +367,6 @@ function start(){
     if(pick){
       ui.pin=pick.getAttribute('data-select-pin')||'';
       var inList=!!pick.closest('#wdd-positions'),inBars=!!pick.closest('.wdd-bars');
-      // A pick from the chart may be hidden in the collapsed list; open it.
       if(inBars&&sortedProps().map(function(p){return String(p.pams_pin||'');}).indexOf(ui.pin)>=LIST_LIMIT)ui.all=true;
       paintList();paintDetail();paintCards();bridge();
       var sel='[data-select-pin="'+ui.pin.replace(/["\\]/g,'\\$&')+'"]';
@@ -423,9 +399,6 @@ function start(){
   function onKeydown(ev){
     if((ev.metaKey||ev.ctrlKey)&&String(ev.key).toLowerCase()==='k'){var input=H.el('wdd-command-input');if(input){ev.preventDefault();input.focus();}}
   }
-  // Color bridge: on the two-column layout the selected row and the details
-  // card share one sky tint, joined across the gap so they read as one unit.
-  // Only drawn when the row sits fully beside the card; otherwise plain rows.
   var bridgeFrame=0;
   function bridge(){
     w.cancelAnimationFrame(bridgeFrame);

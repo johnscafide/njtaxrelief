@@ -21,22 +21,12 @@
      Property Intelligence.
 
      */
-/* Watchdog universal navigation + profile menu.
-   One canonical source for destinations, entitlement gating, account menu copy
-   AND the main navigation drawer itself. Every Watchdog page that shows a menu
-   uses the drawer rendered here (the same one the property index uses), so a
-   change to items() or publicDrawerHtml() updates the menu on every page.
-   Pages open it with WatchdogUniversalMenu.open() or any element carrying
-   data-wd-universal="open-menu". */
 (function(){
   'use strict';
   if(window.__WATCHDOG_UNIVERSAL_MENU__) return;
   window.__WATCHDOG_UNIVERSAL_MENU__ = true;
 
   var VERSION = '20261001a';
-  /* CSS has a longer browser/CDN cache lifetime than this runtime. Keep a
-     separate asset revision so interaction fixes can invalidate cached chrome
-     immediately without coupling that cache key to the menu data contract. */
   var CSS_VERSION = '20261001a';
   var URL = 'https://uvkvaxljhhngydvlrzom.supabase.co';
   var KEY = 'sb_publishable_MYX59qCbK3d-21zDfJqkNw_fvmfnexa';
@@ -84,11 +74,6 @@
     var rank = {standard:0,agent:1,pro:2,pro_plus:3,teams:4,developer:5};
     return rank[actualPlan()] >= rank[plan(required)];
   }
-  /* "My work" holds the professional tools (Agent Desk, clients, farm,
-     marketing, research). Only paying members open it: Agent, Pro, Pro+,
-     Teams and developers. Everyone else (signed out, a free account, or an
-     agent profile without a paid plan) sees the tab locked, with a short note
-     on how to unlock it, and none of the professional destinations. */
   function workUnlocked(){
     return !!state.user && state.ready && can('agent');
   }
@@ -124,7 +109,6 @@
     return m ? m[1] : 'lookup';
   }
 
-  /* Normalizes a clean, /property/ or .html path to its public clean path. */
   function publicPath(p){
     p = String(p || '/').split('#')[0].split('?')[0];
     if(p === '/property' || p.indexOf('/property/') === 0) p = p.slice('/property'.length) || '/';
@@ -132,12 +116,6 @@
     if(p.length > 1) p = p.replace(/\/+$/,'');
     return p || '/';
   }
-  /* Watchdog information architecture, agent side (see
-     property/docs/watchdog-information-architecture.md). The five areas are the
-     Agent Desk sections and the future agent app tab bar. Each area owns the
-     tool pages in `paths`, so a tool page lights up its area in the menu. These
-     labels are the canonical nav labels: the Agent Desk rail, the app-shell
-     page header and the agent workspace breadcrumb use the same words. */
   var AGENT_AREAS = [
     {key:'agent-desk',section:'home',label:'Agent Desk',icon:'fa-briefcase',hint:'Who to call today and what is due',paths:['/agent-desk','/agent/training']},
     {key:'clients',section:'clients',label:'Clients',icon:'fa-user-group',hint:'Contacts, sphere and deals',paths:['/agent/contacts','/agent/listing-prep','/agent/buyers','/agent/open-house','/transaction','/client-room','/true-cost']},
@@ -145,8 +123,6 @@
     {key:'marketing',section:'marketing',label:'Marketing',icon:'fa-bullhorn',hint:'Mailers, email updates and reports',paths:['/marketing-studio','/newsletter-studio','/report-builder','/report-studio','/marketing-plan','/growth']},
     {key:'research',section:'research',label:'Research',icon:'fa-magnifying-glass',hint:'Homes, towns and public data',paths:['/scan','/data-workbench','/data-center','/workbench']}
   ];
-  /* Which agent area a page belongs to. On the desk itself the hash names the
-     section; #deals is the retired sixth section, now part of Clients. */
   function agentAreaFor(path,hash){
     path = publicPath(path);
     var i, j;
@@ -165,8 +141,6 @@
     return '';
   }
   function onDesk(){ return publicPath(location.pathname) === '/agent-desk'; }
-  /* Areas open their Agent Desk section. On the desk a hash link switches the
-     section in place; elsewhere it opens the desk on that section. */
   function areaHref(area){
     var hash = area.section === 'home' ? (onDesk() ? '#home' : '') : '#' + area.section;
     return route('/agent-desk') + hash;
@@ -185,26 +159,17 @@
       {key:'games',href:route('/games'),icon:'fa-puzzle-piece',label:'Games'}
     ];
     if(state.ready && isAgent() && workUnlocked()){
-      /* Paying agents get their five Agent Desk areas. Transactions, Data Workbench,
-         Data Center and the Appeal Scanner live inside Clients and Research. */
       AGENT_AREAS.forEach(function(area){ out.push({key:area.key,href:areaHref(area),icon:area.icon,label:area.label}); });
     } else {
       if(state.ready && can('pro_plus')) out.push({key:'scan',href:route('/scan'),icon:'fa-magnifying-glass-chart',label:'Appeal Scanner'});
       if(state.ready && can('agent')) out.push({key:'transaction',href:'/transaction/',icon:'fa-file-signature',label:'Transactions'});
       if(state.ready && can('agent')) out.push({key:'data-workbench',href:route('/data-workbench'),icon:'fa-table-list',label:'Data Workbench'});
-      /* NJW-98: the public Data Center transparency surface is discoverable for
-         every visitor. Private execution stays enforced inside Data Center. */
       out.push({key:'data-center',href:route('/data-center'),icon:'fa-database',label:'Data Center'});
       out.push({key:'pro',href:route('/pro'),icon:'fa-tags',label:'Plans & Pricing'});
     }
     out.push({key:'account',href:route('/account'),icon:'fa-user-gear',label:'Account'});
     return out;
   }
-  /* Two "lenses" keep homeowners from wading through professional tools they
-     cannot use. items() stays the single entitlement-filtered source of
-     destinations; META only says which lens (and group) a destination belongs
-     to and adds a one-line plain-English hint under the label. The first five
-     home destinations are the homeowner app tab bar; "learn" rows sit below. */
   var META = {
     'dashboard':{lens:'home',hint:'Your daily overview'},
     'lookup':{lens:'home',hint:'Search any New Jersey address'},
@@ -223,16 +188,10 @@
     'account':{lens:'both',hint:'Profile, plan and billing'}
   };
   AGENT_AREAS.forEach(function(area){ META[area.key] = {lens:'work',hint:area.hint}; });
-  /* The public Data Center (NJW-98) stays discoverable for every visitor, so
-     while My work is locked it sits under Learn and compare instead. */
   function metaFor(key){
     if(key === 'data-center' && !workUnlocked()) return {lens:'home',group:'learn',hint:META[key].hint};
     return META[key] || {lens:'home',hint:''};
   }
-  /* Professional tools the viewer cannot open yet. They appear only in the
-     "My work" lens with the plan they need, so pros can discover them and
-     homeowners never see them in their own lens. Agents find these tools
-     inside their Agent Desk areas instead. */
   function lockedItems(){
     if(!workUnlocked() || isAgent()) return [];
     var have = {};
@@ -259,7 +218,6 @@
   }
   function setLens(lens){
     lens = lens === 'work' ? 'work' : 'home';
-    /* A locked My work tab only shows how to unlock it; never remember it. */
     if(workUnlocked() || lens === 'home'){ try{ localStorage.setItem(LENS_KEY,lens); }catch(_){} }
     var sheet = document.getElementById('wd-main-sheet');
     if(!sheet) return;
@@ -322,8 +280,6 @@
       '<span class="wd-universal-plan-promo-cta">' + promo.cta + ' <i class="fas fa-arrow-right"></i></span>' +
     '</a>';
   }
-  /* The one destination that shows as current. Agent tool pages light up their
-     Agent Desk area (Farm Map -> Farm); everything else matches its page key. */
   function activeKey(){
     var area = agentAreaFor(location.pathname,location.hash);
     if(area && isAgent() && workUnlocked()) return area;
@@ -361,8 +317,6 @@
       '<div class="wd-universal-nav-rule"></div>' +
       account.map(function(item){ return navLinkHtml(item,page); }).join('');
   }
-  /* What a locked My work tab shows: what it is and how to unlock it, with
-     no professional destinations listed. */
   function workLockedHtml(){
     return '<div class="wd-universal-work-locked wd-universal-lens-work" data-wd-work-locked="true">' +
       '<span class="wd-universal-work-locked-icon"><i class="fas fa-lock" aria-hidden="true"></i></span>' +
@@ -388,14 +342,11 @@
   function publicDrawerHtml(){
     var footer = state.user ? '' : '<div class="wd-universal-nav-foot"><button type="button" data-wd-universal="signin"><i class="fas fa-right-to-bracket"></i><span>Sign in</span></button></div>';
     var lens = defaultLens();
-    /* Site search (watchdog-site-search.js) opens from any [data-wd-search="open"]. */
     return '<div class="wd-universal-nav-head">' + brandHtml() + '<button class="wd-public-close wd-universal-close" type="button" data-wd-universal="close" aria-label="Close navigation"><i class="fas fa-xmark"></i></button></div>' +
       '<button type="button" class="wd-universal-search" data-wd-search="open"><i class="fas fa-magnifying-glass" aria-hidden="true"></i><span>Search Watchdog</span><small>Pages, terms, addresses</small></button>' +
       lensTabsHtml(lens) +
       '<nav class="wd-universal-nav-links" data-lens="' + lens + '" aria-label="Watchdog navigation">' + navLinksHtml() + '</nav>' + footer;
   }
-  /* Pages that do not ship the public header markup still get the exact same
-     drawer: mount the backdrop + sheet once, at the end of <body>. */
   function ensureDrawer(){
     if(!document.body) return null;
     var back = document.getElementById('wd-public-backdrop');
@@ -416,16 +367,6 @@
     }
     return sheet;
   }
-  /* Idempotent render for every piece of shared chrome. The old check, which
-     compared innerHTML with the source string, was always true (browsers serialize markup
-     differently from the source string, and other runtimes such as the ANCHOR
-     profile row add to it), so each refresh rewrote the profile, the observer
-     on that node queued another refresh, and the menu re-rendered about 60
-     times a second. Now a node is rewritten only when the markup this runtime
-     wants changed, or when another script replaced our content (our first
-     child is gone). Rows other runtimes add inside are left alone, and the
-     mutation records of our own write are dropped so the target observers
-     cannot feed a loop. */
   function renderChrome(node,html){
     if(!node) return false;
     var mine = node.__wdUniversalFirst;
@@ -441,10 +382,6 @@
     var sheet = ensureDrawer();
     if(!sheet) return;
     sheet.classList.add('wd-universal-public-nav');
-    /* Never rewrite the drawer while it is open. Replacing innerHTML mid-tap
-       destroys the anchor before the browser finishes the activation event,
-       which silently swallows the navigation (always on WebKit/iOS,
-       intermittently on Chromium). public-nav.js re-runs refresh() on close. */
     if(sheet.classList.contains('open')) return;
     var html = publicDrawerHtml();
     renderChrome(sheet,html);
@@ -518,8 +455,6 @@
     if(!modal){ modal = document.createElement('section'); modal.id = 'wd-universal-invite'; modal.className = 'wd-universal-invite'; document.body.appendChild(modal); }
     return {shade:shade,modal:modal};
   }
-  // Tracked member referral link: the signup attribution trigger credits the inviter
-  // when a new account's first visit carries these tags. Same format everywhere.
   var REFERRAL_ROOT = 'https://www.watchdogindex.com/?utm_source=watchdog_referral&utm_medium=member&utm_campaign=';
   function inviteLink(){ return state.referral || null; }
   function loadReferral(){
@@ -532,10 +467,6 @@
       return state.referral;
     }).catch(function(){ return null; });
   }
-  /* Invite credit that does not depend on analytics cookies. When someone
-     arrives through a member invite link we keep only the invite code (no
-     visitor or session tracking), and once they sign in with a brand-new
-     account the server credits the inviter. */
   var INVITE_KEY = 'wd_invite_code_v1';
   function captureInvite(){
     try{
@@ -544,7 +475,7 @@
       if(!code && String(q.get('utm_source') || '').toLowerCase() === 'watchdog_referral' && String(q.get('utm_medium') || '').toLowerCase() === 'member') code = q.get('utm_campaign') || '';
       code = String(code).toUpperCase().replace(/[^A-Z0-9]/g,'');
       if(!/^[A-Z0-9]{10,16}$/.test(code)) return;
-      if(localStorage.getItem(INVITE_KEY)) return; /* first invite wins */
+      if(localStorage.getItem(INVITE_KEY)) return; 
       localStorage.setItem(INVITE_KEY,JSON.stringify({code:code,at:Date.now()}));
     }catch(_){}
   }
@@ -556,7 +487,6 @@
     var drop = function(){ try{ localStorage.removeItem(INVITE_KEY); }catch(_){} };
     if(Date.now() - Number(saved.at || 0) > 30 * 86400000){ drop(); return; }
     var created = Date.parse(state.user.created_at || '');
-    /* Existing accounts cannot be credited; forget the code. */
     if(Number.isFinite(created) && Date.now() - created > 14 * 86400000){ drop(); return; }
     Promise.resolve(db.rpc('claim_my_watchdog_referral',{p_code:saved.code})).then(function(r){
       if(r && !r.error) drop();
@@ -602,12 +532,8 @@
     if(document.body) document.body.classList.remove('wd-public-menu-open','wd-profile-menu-open');
     if(wasOpen && lastFocus && lastFocus.focus) lastFocus.focus();
     lastFocus = null;
-    /* Rendering is skipped while the drawer is open; catch up now. */
     queue();
   }
-  /* Open the one shared Watchdog drawer. Public pages delegate to
-     WatchdogPublicNav (it also owns the public profile sheet); every other page
-     uses this built-in controller so no page needs its own drawer. */
   function openMenu(){
     var sheet = ensureDrawer();
     if(!sheet) return;
@@ -677,9 +603,6 @@
     function attachTargetObservers(){
     ['wd6-profile','hm27-profile-pop'].forEach(function(id){ watchTarget(document.getElementById(id)); });
   }
-  /* Static navigation links (breadcrumbs, back links) carry clean public
-     paths. Preview and local hosts serve pages under /property, so rewrite them
-     there once; on WatchdogIndex the clean path already works. */
   function localizeRouteLinks(){
     if(cleanHost) return;
     document.querySelectorAll('a[data-wd-route]').forEach(function(a){
@@ -687,7 +610,6 @@
       var raw = a.getAttribute('href') || '/';
       var hash = raw.indexOf('#') >= 0 ? raw.slice(raw.indexOf('#')) : '';
       var path = raw.split('#')[0];
-      /* Root-level static pages (/agent/*, /transaction) are served as-is. */
       if(!/^\/(agent|transaction|client-room)(\/|$)/.test(path)) a.setAttribute('href',route(path) + hash);
       a.dataset.wdRouted = '1';
     });
@@ -778,8 +700,6 @@
     if(sheet && sheet.classList.contains('open') && !window.WatchdogPublicNav) closePublic();
   });
   document.addEventListener('njptr:plan-change',loadAuth);
-  /* Area links on the Agent Desk only change the hash: close the drawer and
-     move the current-area highlight with it. */
   window.addEventListener('hashchange',function(){
     var sheet = document.getElementById('wd-main-sheet');
     if(sheet && sheet.classList.contains('open')) closePublic();
@@ -787,8 +707,6 @@
   });
   document.addEventListener('watchdog:developer-confirmed',loadAuth);
 
-  /* Pages the clean-route adapter does not serve (direct /property/ URLs and
-     root static pages) still get the developer-only site editor loader. */
   function ensureSiteEditorLoader(){
     if(window.__WD_SITE_EDITOR_LOADER__ || document.querySelector('script[src*="site-editor-loader.js"]')) return;
     var script = document.createElement('script');
@@ -827,7 +745,5 @@
   else boot();
 })();
 
-/* Universal glass top bar (idempotent; the page server may already load it). */
 (function(){try{if(window.__wdGlassHeader||document.querySelector('script[src^="/property/js/watchdog-glass-header.js"]'))return;var s=document.createElement('script');s.src='/property/js/watchdog-glass-header.js';s.defer=true;(document.head||document.documentElement).appendChild(s);}catch(_){}})();
-/* Site search, Ctrl/Cmd+K (idempotent; the page server may already load it). */
 (function(){try{if(window.__wdSiteSearch||document.querySelector('script[src^="/property/js/watchdog-site-search.js"]'))return;var s=document.createElement('script');s.src='/property/js/watchdog-site-search.js';s.defer=true;(document.head||document.documentElement).appendChild(s);}catch(_){}})();

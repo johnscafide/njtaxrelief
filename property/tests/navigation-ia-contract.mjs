@@ -297,7 +297,7 @@ assert.doesNotMatch(crumbCss, /radial-gradient|border-left/, 'No decorative circ
 const shellCss = read('property/css/app-shell-2027.css');
 const menuCss = read('property/css/watchdog-universal-menu.css');
 const consentCss = read('property/css/watchdog-consent.css');
-const floor = shellCss.slice(shellCss.indexOf('Readability floor for the shared app header'));
+const floor = shellCss.slice(shellCss.indexOf('.wdx-brand{min-height:44px;min-width:44px}'));
 assert.ok(floor.length > 100, 'App shell must end with the readability floor block');
 for (const rule of ['.wdx-brand{min-height:44px;min-width:44px}', '.wdx-brand-copy small,body.wdx-modern .wd4-brand-copy small{font-size:12px', '.wdx-date span,.wdx-weather span{font-size:12px}', 'font-size:12px;line-height:1}', '.wdx-icon,.wdx-user{min-width:44px;min-height:44px}', '.wdx-btn{min-height:44px;font-size:13px}', 'body.wdx-modern .wd6-x{width:44px;height:44px}']) {
   assert.ok(floor.includes(rule), `App shell floor is missing ${rule}`);

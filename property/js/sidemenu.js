@@ -77,10 +77,6 @@
     paintToggle();
   }
 
-  /* The Agent Desk used to open as a separate "Agent Control Center" popup
-     window from the retired sidebar. It is now the agent's in-app front door
-     (see property/docs/watchdog-information-architecture.md), so this legacy
-     hook simply goes to it. */
   function openAgentControl(event) {
     if (event) event.preventDefault();
     var host = String(location.hostname || '').toLowerCase();

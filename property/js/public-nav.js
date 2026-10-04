@@ -21,16 +21,9 @@
      Property Intelligence.
 
      */
-/* Watchdog public navigation bridge.
-   The universal menu owns all menu/profile markup and auth state. This file only
-   opens/closes the public sheets, stores recent-property context, and boots the
-   small set of public-page enhancements that are actually needed. */
 (function(){
   'use strict';
 
-  /* Keep third-party/resource failures from escalating into the lookup page's
-     customer-facing fatal banner. This is an error-boundary contract only; it
-     does not own or mutate any navigation/profile markup. */
   window.addEventListener('error',function(e){
     var resourceFailure=e&&e.target&&e.target!==window;
     var opaqueCrossOrigin=e&&e.message==='Script error.'&&(!e.filename||Number(e.lineno||0)===0);
@@ -50,9 +43,6 @@
     return path==='/property'||path==='/property/index.html'||root;
   }
 
-  /* /scripts.js may still be present on legacy mirrors. Suppress the historical
-     NJPropertyTaxRelief rebate UI there; the canonical Watchdog root removes the
-     legacy script entirely in the server-side asset diet. */
   function suppressLegacyIndexUi(){
     if(!isPropertyIndex())return;
     document.documentElement.classList.add('wd-index-lean-runtime');
@@ -82,9 +72,6 @@
     (document.head||document.documentElement).appendChild(s);
   }
 
-  /* The index CSS is intentionally long-lived in browser cache. Keep the
-     score-corner placement in this revalidated bridge so a normal reload picks
-     up this small layout correction even when an older CSS response is cached. */
   function ensureIndexScorePlacementContract(){
     if(!isPropertyIndex()||q('wd-index-score-placement-contract'))return;
     var s=document.createElement('style');
@@ -100,9 +87,6 @@
       sheet.addEventListener('click',function(e){
         var closer=e.target&&e.target.closest&&e.target.closest('.wd-public-close,[data-wd-universal="close"]');
         if(closer){e.preventDefault();close();return;}
-        /* Never hide/translate the sheet during an anchor's activation event.
-           Chromium tolerates that pattern, but WebKit/iOS can cancel or lose the
-           navigation when the tapped target disappears before activation ends. */
       });
     });
     var back=q('wd-public-backdrop');
@@ -138,8 +122,6 @@
     if(document.body){document.body.classList.remove('wd-public-menu-open','wd-profile-menu-open');}
     if(restoreFocus!==false&&lastFocus&&lastFocus.focus)lastFocus.focus();
     lastFocus=null;
-    /* The universal menu skips rendering while a sheet is open, so apply any
-       auth/plan changes that landed during that window now that it is closed. */
     if(window.WatchdogUniversalMenu&&typeof window.WatchdogUniversalMenu.refresh==='function'){
       window.WatchdogUniversalMenu.refresh();
     }
@@ -188,12 +170,8 @@
     var s=document.createElement('script');s.id=id;s.src=src;s.defer=true;document.head.appendChild(s);
   }
 
-  /* Keep the index surface lean: each runtime here owns one visible concern. */
   function loadIndexEnhancements(){
     if(!isPropertyIndex())return;
-    /* Feed home (data-wd-home-feed): keep only what the header, both menus,
-       the property search/overlay and the NJPTR ANCHOR handoff need. The old
-       landing sections are gone, so their runtimes are not loaded. */
     if(document.documentElement.getAttribute('data-wd-home-feed')==='1'){
       ensureStylesheet('wd-anchor-home-funnel-style','/property/css/anchor-home-funnel.css');
       loadScript('wd-showcase-script','/property/js/landing-showcase.js');
@@ -237,8 +215,6 @@
     handoff();
   }
 
-  /* Keep the sales request scoping optimization, but leave it separate from
-     navigation state. This has no DOM or pointer-event behavior. */
   function scopeVerifiedSales(){
     if(window.__watchdogSalesFetchScoped)return;
     window.__watchdogSalesFetchScoped=true;
@@ -263,10 +239,6 @@
     };
   }
 
-  /* One header layout on every public page: menu on the left, logo in the
-     middle, account (and any icons added next to it, like ANCHOR apps) on the
-     right. The homepage showcase does the same; without it, extra icons pushed
-     "Sign in" onto a second row. */
   function groupNav(){
     var nav=document.querySelector('#wd-nav .wd-nav-in');if(!nav||nav.querySelector(':scope>.wd-right'))return;
     var menu=q('wd-menu-trigger'),logo=nav.querySelector(':scope>.wd-logo');if(!logo)return;
@@ -293,7 +265,5 @@
   window.WatchdogPublicNav={open:open,close:close,setUser:setUser,remember:remember,signIn:signIn,signOut:signOut};
   if(document.readyState==='loading')document.addEventListener('DOMContentLoaded',init,{once:true});else init();
 })();
-/* Universal glass top bar (idempotent; the page server may already load it). */
 (function(){try{if(window.__wdGlassHeader||document.querySelector('script[src^="/property/js/watchdog-glass-header.js"]'))return;var s=document.createElement('script');s.src='/property/js/watchdog-glass-header.js';s.defer=true;(document.head||document.documentElement).appendChild(s);}catch(_){}})();
-/* Site search, Ctrl/Cmd+K (idempotent; the page server may already load it). */
 (function(){try{if(window.__wdSiteSearch||document.querySelector('script[src^="/property/js/watchdog-site-search.js"]'))return;var s=document.createElement('script');s.src='/property/js/watchdog-site-search.js';s.defer=true;(document.head||document.documentElement).appendChild(s);}catch(_){}})();

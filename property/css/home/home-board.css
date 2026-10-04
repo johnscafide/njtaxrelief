@@ -21,12 +21,6 @@
      Property Intelligence.
 
      */
-/* ==========================================================================
-   Property Home in the Watchdog board design (pairs with home-board.js).
-   Shares the dashboard board palette. Home injects many !important rules at
-   runtime, so these selectors are scoped to html body.hb-board #hm-body and use
-   !important only where a runtime rule would otherwise win.
-   ========================================================================== */
 html body.hm-dashboard-page{
   --hb-bg:#f3f1ec;
   --hb-surface:#fbfaf7;
@@ -51,12 +45,10 @@ html body.hm-dashboard-page.hb-board #hm-main,
 html body.hm-dashboard-page.hb-board .db-workspace{background:var(--hb-bg)!important}
 html body.hb-board #hm-body .hm-wrap{word-spacing:.06em}
 
-/* Property header band: warm page instead of a full navy band. */
 html body.hb-board #hm-body .hm-hero{background:var(--hb-bg)!important;color:var(--hb-ink)}
 html body.hb-board #hm-body .hm-hero .hm-id,
 html body.hb-board #hm-body .hm-hero .hm-shot{border-radius:var(--hb-radius)!important;box-shadow:none!important;border:1px solid var(--hb-line)!important}
 
-/* Summary cards (the four scorecards) */
 html body.hb-board #hm-body .hb-cards{display:grid!important;grid-template-columns:repeat(4,minmax(0,1fr))!important;gap:16px!important;margin:6px 0 16px!important}
 html body.hb-board #hm-body .hb-card{position:relative!important;isolation:isolate;overflow:hidden!important;display:flex!important;flex-direction:column!important;border:0!important;border-radius:var(--hb-radius)!important;box-shadow:none!important;padding:0!important;transform:none!important;color:var(--hb-ink)}
 html body.hb-board #hm-body .hb-card:hover{box-shadow:0 10px 26px rgba(14,34,72,.10)!important}
@@ -87,13 +79,11 @@ html body.hb-board #hm-body .hb-card--score .hb-why{background:rgba(255,255,255,
 html body.hb-board #hm-body .hb-card .hb-why:hover,html body.hb-board #hm-body .hb-card .hb-why:focus-visible{background:var(--hb-navy)!important;color:#fff!important}
 html body.hb-board #hm-body .hb-card--score .hb-why:hover,html body.hb-board #hm-body .hb-card--score .hb-why:focus-visible{background:#fff!important;color:var(--hb-navy)!important}
 
-/* Figure strip under the cards */
 html body.hb-board #hm-body .hb-figs{border:0!important;border-radius:var(--hb-radius)!important;background:#fff!important;box-shadow:none!important;padding:6px!important;gap:6px!important}
 html body.hb-board #hm-body .hb-figs .dm{border:0!important;border-radius:18px!important;background:var(--hb-surface)!important;padding:14px 16px!important}
 html body.hb-board #hm-body .hb-figs .dm dt{color:var(--hb-muted)!important}
 html body.hb-board #hm-body .hb-figs .dm dd{color:var(--hb-ink)!important}
 
-/* Section links */
 html body.hb-board #hm-body .hb-nav{box-sizing:border-box;width:100%;max-width:100%;min-width:0;grid-column:1/-1;position:sticky;top:86px;z-index:40;display:flex;gap:8px;overflow-x:auto;margin:18px 0 18px;padding:10px 0;background:linear-gradient(var(--hb-bg) 78%,rgba(243,241,236,0))!important;border:0!important;box-shadow:none!important;border-radius:0!important;scrollbar-width:none}
 html body.hb-board #hm-body .hb-nav::-webkit-scrollbar{display:none}
 html body.hb-board #hm-body .hb-nav button{flex:none;display:inline-flex;align-items:center;gap:8px;min-height:42px;padding:0 16px;border:1px solid var(--hb-line);border-radius:999px;background:#fff;color:var(--hb-ink);font:600 13px var(--hb-display);word-spacing:.06em;cursor:pointer}
@@ -102,11 +92,9 @@ html body.hb-board #hm-body .hb-nav button.is-on{background:var(--hb-navy);borde
 html body.hb-board #hm-body .hb-nav button:focus-visible{outline:3px solid var(--hb-blue-bright);outline-offset:2px}
 html body.hb-board #hm-body #wd-home-voice-entry,html body.hb-board #hm-body .hm-wrap>.ai,html body.hb-board #hm-body #hm-current-tax-evidence,html body.hb-board #hm-body .hb-group,html body.hb-board #hm-body #wd-property-data-graph{scroll-margin-top:150px}
 
-/* Tax evidence and other white panels */
 html body.hb-board #hm-body #hm-current-tax-evidence{border:0!important;border-radius:var(--hb-radius)!important;box-shadow:none!important;background:#fff!important}
 html body.hb-board #hm-body #hm-current-tax-evidence .hm-tax-item{border-radius:18px!important;background:var(--hb-surface)!important;border-color:var(--hb-line)!important}
 
-/* Explore your property: grouped sections */
 html body.hb-board #hm-body .hm-explore-card{border:0!important;border-radius:var(--hb-radius)!important;box-shadow:none!important;background:transparent!important;padding:0!important}
 html body.hb-board #hm-body .hm-explore-card>.hm-secbar{padding:4px 2px 6px!important;border:0!important;background:transparent!important}
 html body.hb-board #hm-body .hb-group{display:grid;gap:8px;margin:18px 0 26px}
@@ -122,7 +110,6 @@ html body.hb-board #hm-body .hb-group>.sec2.open{border-color:var(--hb-sky-deep)
 html body.hb-board #hm-body .hb-group>.sec2>.sec2-h{padding:16px 18px!important;background:transparent!important}
 html body.hb-board #hm-body .hb-group>.sec2>.sec2-b{padding:0 18px 22px!important}
 
-/* Actions under the report */
 html body.hb-board #hm-body .hm-acts .db-btn{border-radius:999px!important;background:var(--hb-navy)!important;border-color:var(--hb-navy)!important}
 
 @media (max-width:1100px){
@@ -135,9 +122,6 @@ html body.hb-board #hm-body .hm-acts .db-btn{border-radius:999px!important;backg
   html body.hb-board #hm-body .hb-group>.sec2>.sec2-h{padding:14px!important}
   html body.hb-board #hm-body .hb-group>.sec2>.sec2-b{padding:0 14px 18px!important}
 }
-/* Phone top bar: keep the weather, alerts and profile group on the first row so
-   it never wraps down over the property picker. The square Watchdog mark stands in
-   for the wordmark on narrow screens, and the weather keeps only its icon under 360px. */
 @media (max-width:760px){
   html body.hb-board .hm27-topbar .hm27-top-in{flex-wrap:nowrap!important;gap:8px!important}
   html body.hb-board .hm27-topbar .hm27-brand-side{flex:0 1 auto!important;min-width:0!important;gap:10px!important}

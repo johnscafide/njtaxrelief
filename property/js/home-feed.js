@@ -21,12 +21,6 @@
      Property Intelligence.
 
      */
-/* Watchdog home feed (the reimagined Watchdog home page).
-   Reads /api/watchdog-home-feed for one town and renders the summary tiles,
-   the Watchdog Intelligence Brief, the feed cards, the map and the rail.
-   The property search, the overlay, both menus and the footer are owned by
-   lookup.js and the shared navigation runtimes; this file never touches them,
-   it only calls plLookup() when someone opens a property from a card. */
 (function () {
   'use strict';
   if (window.__WATCHDOG_HOME_FEED__) return;
@@ -72,7 +66,6 @@
     wxFor: ''
   };
 
-  /* ---------- small helpers ---------- */
   function $(id) { return document.getElementById(id); }
   function esc(value) {
     return String(value == null ? '' : value).replace(/[&<>"']/g, function (c) {
@@ -128,7 +121,6 @@
     return (d < 0.1 ? 'Under 0.1' : d.toFixed(1)) + ' mi away';
   }
   function icon(name) { return '<i class="fas fa-' + name + '" aria-hidden="true"></i>'; }
-  /* Static cards live as <template>s in the page so their copy stays in HTML. */
   function tpl(id) { var t = document.getElementById(id); return t ? t.innerHTML : ''; }
   function blockLot(pin) {
     var parts = String(pin || '').split('_');
@@ -136,7 +128,6 @@
   }
   function townName() { return state.feed && state.feed.town ? state.feed.town.name : ''; }
 
-  /* ---------- deadlines (statewide calendar) ---------- */
   function deadlines(now) {
     var list = [];
     var y = now.getFullYear();
@@ -160,8 +151,6 @@
       });
   }
 
-  /* "Coming up" lives in the left feed menu on wide desktops and in the right
-     rail otherwise; CSS shows one copy. */
   function renderUpcoming() {
     var html = deadlines(new Date()).slice(0, 4).map(function (d) {
       return '<li><span class="wdh-date' + (d.soon ? ' is-soon' : '') + '"><span class="wdh-date-m">' + SHORT[d.date.getMonth()] + '</span><span class="wdh-date-d">' + d.date.getDate() + '</span></span>' +
@@ -170,7 +159,6 @@
     Array.prototype.forEach.call(document.querySelectorAll('[data-wdh-upcoming]'), function (host) { host.innerHTML = html; });
   }
 
-  /* ---------- auth + saved home ---------- */
   function client() {
     try {
       if (window.NJPTRSupabaseRuntime && typeof window.NJPTRSupabaseRuntime.createClient === 'function') {
@@ -233,7 +221,6 @@
     }).catch(function () { return null; }), 6000);
   }
 
-  /* ---------- towns (picker) ---------- */
   function loadTowns() {
     if (state.townsPromise) return state.townsPromise;
     state.townsPromise = fetch(TOWNS_URL, { credentials: 'same-origin' })
@@ -286,7 +273,6 @@
       return '<li><button type="button" class="wdh-picker-item" data-town="' + esc(t.code) + '"><span>' + esc(t.name) + '</span><small>' + esc(t.county) + ' County</small></button></li>';
     }).join('') + (hits.length > 60 ? '<li class="wdh-picker-empty">Keep typing to narrow ' + hits.length + ' towns.</li>' : '');
   }
-  /* Nearest town centroid to a device position, or null when outside New Jersey. */
   function nearestTown(pos) {
     return loadTowns().then(function (towns) {
       var here = { lat: pos.coords.latitude, lon: pos.coords.longitude };
@@ -295,7 +281,6 @@
         var d = miles(here, t);
         if (d != null && d < bestD) { bestD = d; best = t; }
       });
-      /* 12 miles covers the edge of New Jersey's largest townships from their center. */
       return best && bestD < 12 ? best : null;
     });
   }
@@ -313,8 +298,6 @@
       if (button) { button.disabled = false; button.innerHTML = icon('location-crosshairs') + 'Location permission was not granted'; }
     }, { timeout: 8000, maximumAge: 600000 });
   }
-  /* Phones show only a pin for the town: tapping it uses the phone's location.
-     If location is off, denied or outside New Jersey, the town list opens instead. */
   function locateFromPin() {
     var pin = $('wdh-where-pin');
     if (!navigator.geolocation) { openPicker(); return; }
@@ -334,13 +317,10 @@
     load(code, 'choice');
   }
 
-  /* ---------- feed fetch ---------- */
   function setLoading() {
     root.setAttribute('data-state', 'loading');
     root.setAttribute('aria-busy', 'true');
   }
-  /* "refresh" means a remembered copy is already on screen: keep it if the
-     network is slow or fails, and swap in fresh data when it arrives. */
   function load(code, reason) {
     var id = ++state.requestId;
     var refreshing = reason === 'refresh' && !!state.feed;
@@ -366,13 +346,11 @@
       });
   }
 
-  /* The last feed this browser saw for a town, if it is under 12 hours old. */
   function rememberedFeed(code) {
     var saved = code ? store(KEY_FEED + code) : null;
     return saved && saved.feed && saved.feed.town && saved.feed.town.code === code && Date.now() - saved.at < 12 * 3600 * 1000 ? saved.feed : null;
   }
 
-  /* ---------- rendering ---------- */
   function greeting() {
     var h = new Date().getHours();
     var part = h < 5 ? 'Good evening' : h < 12 ? 'Good morning' : h < 17 ? 'Good afternoon' : 'Good evening';
@@ -384,13 +362,10 @@
     var feed = state.feed, town = feed && feed.town;
     var title = $('wdh-hero-title'), sub = $('wdh-hero-sub');
     if (title) title.textContent = state.user ? greeting() : town ? "What's happening in " + town.name : "What's happening around your home";
-    /* The intro line only helps before a town is picked; with a town the feed speaks for itself. */
     if (sub) sub.hidden = !!town;
     renderWhere();
   }
 
-  /* The quiet line between the hero and the feed: the date on the left, the
-     weather and "town (change)" on the right. */
   function renderWhere() {
     var now = new Date(), town = state.feed && state.feed.town;
     var date = $('wdh-where-date'), where = $('wdh-where-town'), change = $('wdh-town-change');
@@ -400,9 +375,6 @@
     if (town) loadWeather(town.code);
   }
 
-  /* "Sunny 77°" from /api/watchdog-town-weather. It loads after the feed and never
-     holds it up; a reading under 20 minutes old is reused, and one under 3
-     hours old shows while a fresh one loads. */
   function renderWeather(wx) {
     var box = $('wdh-wx'), text = $('wdh-wx-text'), ico = $('wdh-wx-icon'), sep = $('wdh-where-sep');
     var ok = !!(wx && wx.text && isFinite(wx.temp));
@@ -438,8 +410,6 @@
     return !!(p && p.available && state.seen && state.seen.permits && state.seen.permits !== p.dataThrough);
   }
 
-  /* Thin summary chips: a colored icon and "22 Home sales". The detail line
-     ("Sold in May 2026") is the tooltip and part of the spoken label. */
   function tile(tab, tone, iconName, value, label, sub, isNew) {
     return '<button type="button" class="wdh-tile is-' + tone + '" data-go="' + tab + '" title="' + esc(sub) + '" aria-label="' + esc(value + ' ' + label + '. ' + sub) + '">' +
       '<span class="wdh-tile-ico" aria-hidden="true">' + icon(iconName) + '</span>' +
@@ -496,19 +466,16 @@
   }
   function signed(value) { var n = num(value); return n == null ? '' : (n >= 0 ? '+' : '−') + pct(n); }
 
-  /* ---------- local reporters (stored hourly; served with the feed) ---------- */
   function newsSource(id) {
     var news = state.feed && state.feed.news;
     var list = news && news.sources ? news.sources : [];
     return list.filter(function (s) { return s.id === id; })[0] || { id: id, name: id, badge: '', site: '' };
   }
-  /* A YouTube channel's item is the video itself: play button, "Video by", Watch. */
   function isVideoSource(src) { return src && src.kind === 'video'; }
   function newsItems() {
     var news = state.feed && state.feed.news;
     return news && news.available && Array.isArray(news.items) ? news.items : [];
   }
-  /* Same keys as api/_local-news.js: "303 white horse pike", "53 route 73". */
   var STREET_TYPES = { road: 'rd', rd: 'rd', pike: 'pike', avenue: 'ave', ave: 'ave', street: 'st', st: 'st', boulevard: 'blvd', blvd: 'blvd', drive: 'dr', dr: 'dr', lane: 'ln', ln: 'ln', highway: 'hwy', hwy: 'hwy', parkway: 'pkwy', pkwy: 'pkwy', way: 'way', court: 'ct', ct: 'ct', place: 'pl', pl: 'pl', circle: 'cir', cir: 'cir', terrace: 'ter', ter: 'ter' };
   function addressKey(address) {
     var text = String(address || '').trim();
@@ -525,7 +492,6 @@
     return news.filter(function (n) { return (n.addresses || []).indexOf(key) !== -1; })[0] || null;
   }
 
-  /* ---------- Watchdog Intelligence Brief ---------- */
   function weekItems() {
     var feed = state.feed, out = [];
     if (!feed || !feed.town) return out;
@@ -562,14 +528,12 @@
     host.hidden = false;
     var meta = $('wdh-week-meta');
     if (meta) meta.textContent = townName() + ' in 30 seconds';
-    /* Phones show the first point and a "Show more" toggle; wider screens show everything. */
     var more = $('wdh-week-more');
     if (more) {
       more.hidden = items.length < 2;
       more.setAttribute('aria-expanded', state.briefOpen ? 'true' : 'false');
       host.classList.toggle('is-open', !!state.briefOpen);
     }
-    // content-architecture: dynamic. Each sentence is computed from this town's feed data (sales, permits, tax rate, deadlines, local news).
     list.innerHTML = items.map(function (html, i) { return '<li><span class="wdh-num" aria-hidden="true">' + (i + 1) + '</span><span>' + html + '</span></li>'; }).join('');
     var listen = $('wdh-listen');
     if (listen) listen.hidden = !('speechSynthesis' in window && typeof window.SpeechSynthesisUtterance === 'function');
@@ -588,16 +552,12 @@
     synth.speak(u);
   }
 
-  /* Visible within the selected radius (only when we know where home is). */
   function inRadius(item) {
     if (state.radius === 'town' || !state.home || state.home.lat == null) return true;
     var d = miles(state.home, item);
     return d != null && d <= Number(state.radius);
   }
 
-  /* Address-centered NJOGIS light map, the site's standard property preview.
-     free-imagery-grid-runtime.js swaps NJ aerial thumbnails for this map
-     everywhere, so the feed asks for the map directly. */
   function previewUrl(item) {
     if (!item || item.lat == null || item.lon == null) return '';
     var dy = 0.0022, dx = dy * (480 / 360) / Math.max(0.45, Math.cos(item.lat * Math.PI / 180));
@@ -608,13 +568,6 @@
     return 'https://maps.nj.gov/arcgis/rest/services/Basemap/LtGray_NJ_WM/MapServer/export?' + params;
   }
 
-  /* ---------- quick-read feed cards ----------
-     Every card reads in a glance: one line for what, when and how far, a
-     headline, one line of key facts and one picture. The headline opens the
-     detail (the property overlay or the reporter's story) and the whole card
-     is its tap target. Longer explanations live behind those taps. */
-  /* Post-style header: badge, label, then when and how far. Phones stack the
-     label over the details, like the author and time on a social post. */
   function metaRow(badge, label, parts, warn) {
     var sub = parts.filter(Boolean).map(function (part, i) { return (i ? '<span class="wdh-dot" aria-hidden="true">&middot;</span>' : '') + '<span class="wdh-meta">' + esc(part) + '</span>'; }).join('');
     return '<div class="wdh-krow wdh-post-head">' + badge + '<span class="wdh-post-text"><span class="wdh-kicker' + (warn ? ' is-warn' : '') + '">' + esc(label) + '</span>' +
@@ -629,13 +582,11 @@
   function mapMedia(item, label) {
     var url = previewUrl(item);
     if (!url) return '';
-    // content-architecture: dynamic. The map image and its label come from this record's coordinates and address.
     return '<div class="wdh-fc-media is-map"><img src="' + esc(url) + '" alt="Map of ' + esc(label) + '" loading="lazy" width="480" height="360" onerror="this.parentNode.remove()"><span class="wdh-fc-pin" aria-hidden="true"></span></div>';
   }
   function photoMedia(item, src) {
     var url = item.image || (item.video ? item.video.thumb : '');
     if (!url) return '';
-    // content-architecture: dynamic. The reporter's own photo, alt text and credit for this story.
     var videoOnly = item.video && (!item.image || isVideoSource(src));
     return '<div class="wdh-fc-media is-photo"><img src="' + esc(url) + '" alt="' + esc(item.imageAlt || item.title) + '" loading="lazy" referrerpolicy="no-referrer" onerror="this.parentNode.remove()">' +
       (videoOnly ? '<span class="wdh-fc-play" aria-hidden="true">' + icon('play') + '</span>' : '') +
@@ -648,7 +599,6 @@
   }
   function feedCard(o) {
     var media = o.media || '';
-    // content-architecture: dynamic. Layout shell for one feed item; every part is computed from that item's record.
     return '<article class="wdh-card wdh-feed-card wdh-fc' + (media ? (media.indexOf('is-photo') !== -1 ? ' has-photo' : ' has-map') : ' no-media') + (o.cls ? ' ' + o.cls : '') + '" data-tabs="' + o.tabs + '"' + (o.extraOnly ? ' data-feed-extra="1"' : '') + '>' +
       '<div class="wdh-fc-main">' + o.meta + '<h3 class="wdh-h3 wdh-fc-title">' + o.title + '</h3>' +
       (o.facts && o.facts.filter(Boolean).length ? '<p class="wdh-fc-facts">' + o.facts.filter(Boolean).map(function (f) { return '<span>' + f + '</span>'; }).join('') + '</p>' : '') +
@@ -659,7 +609,6 @@
 
   function coverageRow(story) {
     var src = newsSource(story.source);
-    // content-architecture: dynamic. A local reporter's story about this exact address, credited and linked.
     return '<a class="wdh-cov" href="' + esc(story.url) + '" target="_blank" rel="noopener">' +
       (story.image ? '<img src="' + esc(story.image) + '" alt="" loading="lazy" referrerpolicy="no-referrer" onerror="this.remove()">' : '') +
       '<span class="wdh-cov-text"><span class="wdh-cov-src">' + sourceBadge(src) + (isVideoSource(src) ? 'Video by ' : 'Also covered by ') + esc(src.name) + '</span><span class="wdh-cov-title">' + esc(story.title) + '</span></span>' +
@@ -737,7 +686,6 @@
       extraOnly: extraOnly,
       cls: 'wdh-news',
       meta: metaRow(sourceBadge(src), src.name, [shortDay(story.date), story.video ? 'Video' : '']),
-      // content-architecture: dynamic. The reporter's own headline, linked to their story.
       title: '<a class="wdh-fc-link" href="' + esc(story.url) + '" target="_blank" rel="noopener">' + esc(story.title) + '</a>',
       media: photoMedia(story, src),
       source: isVideoSource(src) ? sourceLine('Video by ' + src.name, 'circle-play') : sourceLine('Story by ' + src.name, 'newspaper'),
@@ -819,7 +767,6 @@
       if (i !== 0 && i !== last && i % 3 !== 0) return '';
       return '<text class="wdh-c-axis wdh-c-mid" x="' + x(i).toFixed(1) + '" y="' + (H - 4) + '">' + p[0] + '</text>';
     }).join('');
-    // content-architecture: dynamic. Screen-reader summary of the chart, built from the town's tax-rate series.
     var summary = 'General tax rate from ' + pts[0][0] + ' to ' + pts[last][0] + ': from ' + vals[0].toFixed(3) + ' to ' + vals[last].toFixed(3) + '.';
     return '<svg class="wdh-chart" viewBox="0 0 ' + W + ' ' + H + '" role="img" aria-label="' + esc(summary) + '">' + grid +
       '<polyline class="wdh-c-line" points="' + line + '"></polyline>' + dots + labels + hits + years + '</svg>';
@@ -865,8 +812,6 @@
 
   function gamesCard() { return tpl('wdh-tpl-games'); }
 
-  /* Games card: this browser's progress (the same localStorage the games use)
-     and a one-line peek at today's real puzzle from /api/watchdog-games. */
   var GAME_IDS = ['pin-drop', 'sold', 'blocks', 'town-shapes', 'lineup', 'fair-or-unfair'];
   var GAME_LAUNCH = '2026-10-01';
   var SIX_TRY_POINTS = [100, 85, 70, 55, 40, 25];
@@ -969,8 +914,6 @@
     var permits = feed.permits && feed.permits.available ? feed.permits.items.filter(inRadius) : [];
     var sales = feed.sales && feed.sales.available ? feed.sales.items.filter(inRadius) : [];
     var radiusEmpty = state.radius !== 'town' && !permits.length && !sales.length;
-    /* A reporter's story about a permit's exact address rides on that permit
-       card; the rest are their own cards (three in "For you", all in "News"). */
     var news = newsItems(), stories = {}, used = {};
     permits.forEach(function (p, i) { var story = storyFor(p, news); if (story && !used[story.id]) { stories[i] = story; used[story.id] = true; } });
     var loose = news.filter(function (n) { return !used[n.id]; });
@@ -1008,7 +951,6 @@
   function applyTab() {
     var host = $('wdh-cards');
     if (!host) return;
-    /* On phones the Brief sits inside the feed, so CSS hides it outside "For you". */
     root.setAttribute('data-tab', state.tab);
     var shown = 0;
     Array.prototype.forEach.call(host.children, function (card) {
@@ -1054,13 +996,10 @@
     card.hidden = false;
   }
 
-  /* ---------- map ---------- */
   function markerIcon(kind) {
     return window.L.divIcon({ className: 'wdh-mk-wrap', html: '<span class="wdh-mk wdh-mk-' + kind + '"></span>', iconSize: [18, 18], iconAnchor: [9, 9], popupAnchor: [0, -8] });
   }
 
-  /* Quick facts for one map pin. The same card shows on hover (no button)
-     and in the tap/click popup (with "Open property"). */
   function pinCard(kind, item, withButton) {
     var label, title, value, facts, address = '';
     if (kind === 'sale') {
@@ -1082,7 +1021,6 @@
       facts = [item.tax ? money(item.tax) + ' tax last year' : ''];
     }
     var dist = kind !== 'home' ? distanceText(item) : '';
-    // content-architecture: dynamic. Every value below comes from this pin's sale, permit or saved-home record.
     return '<div class="wdh-pin">' +
       '<span class="wdh-pin-main"><span class="wdh-pin-k wdh-pin-k-' + kind + '">' + esc(label) + '</span>' +
       '<b class="wdh-pin-t">' + esc(title) + '</b>' +
@@ -1092,9 +1030,6 @@
       (withButton && address ? '<button type="button" class="wdh-pop-open" data-open="' + esc(address) + '">Open property</button>' : '') +
       '</div>';
   }
-  /* The hover card lives on <body>, not inside the small map, so it is never
-     clipped by the map edge. Pointer devices get it on hover; keyboard users
-     get it on focus. Tapping or clicking a pin still opens the popup. */
   var canHover = !!(window.matchMedia && window.matchMedia('(hover: hover) and (pointer: fine)').matches);
   var hoverEl = null;
   function showHover(marker, html) {
@@ -1155,8 +1090,6 @@
       if (!state.map) {
         state.map = L.map('wdh-map', { scrollWheelZoom: false, zoomControl: true, attributionControl: true });
         state.map.on('movestart zoomstart', hideHover);
-        /* Esri light gray canvas, same tile host as the site's aerial layer
-           (the CARTO raster URLs used elsewhere now require an API key). */
         L.tileLayer('https://server.arcgisonline.com/ArcGIS/rest/services/Canvas/World_Light_Gray_Base/MapServer/tile/{z}/{y}/{x}', {
           maxZoom: 16, attribution: 'Tiles &copy; Esri, HERE, Garmin, &copy; OpenStreetMap contributors'
         }).addTo(state.map);
@@ -1166,7 +1099,6 @@
       }
       if (state.mapLayer) state.map.removeLayer(state.mapLayer);
       var group = L.featureGroup();
-      /* No marker "title": the hover card replaces the browser's plain tooltip. */
       sales.forEach(function (i) {
         pinMarker('sale', i, [i.lat, i.lon], { icon: markerIcon('sale'), keyboard: true }, 'Home sale: ' + i.address).addTo(group);
       });
@@ -1197,8 +1129,6 @@
     });
   }
 
-  /* Wide desktop: the left menu and right rail stay put under the site header
-     (and the sticky search bar when it shows) while only the feed scrolls. */
   var stickyFrame = 0;
   function syncStickyTop() {
     stickyFrame = 0;
@@ -1217,7 +1147,6 @@
   window.addEventListener('scroll', queueStickyTop, { passive: true });
   window.addEventListener('resize', queueStickyTop);
 
-  /* Left feed menu (wide desktop): the signed-in person's saved places. */
   function renderPlaces() {
     var list = $('wdh-places-list'), empty = $('wdh-places-empty');
     if (!list || !empty) return;
@@ -1268,7 +1197,6 @@
     store(KEY_SEEN + feed.town.code, next);
   }
 
-  /* ---------- actions ---------- */
   function openProperty(address) {
     var input = $('pl-addr');
     if (!input || typeof window.plLookup !== 'function') { window.location.href = '/?address=' + encodeURIComponent(address); return; }
@@ -1308,7 +1236,6 @@
     if ((el = target.closest('#wdh-tabs .wdh-tab, #wdh-feednav .wdh-nav-item'))) {
       state.tab = el.getAttribute('data-tab') || 'all';
       applyTab();
-      /* From the left menu, jump back to the top of the feed. */
       if (el.classList.contains('wdh-nav-item')) { var top = $('wdh-cards'); if (top && top.getBoundingClientRect().top < 0) top.scrollIntoView({ behavior: 'smooth', block: 'start' }); }
       return;
     }
@@ -1352,7 +1279,6 @@
     else if (!event.shiftKey && document.activeElement === last) { event.preventDefault(); first.focus(); }
   });
 
-  /* ---------- boot ---------- */
   function initialTown() {
     var param = '';
     try { param = String(new URLSearchParams(window.location.search).get('town') || '').replace(/\D/g, '').slice(0, 4); } catch (_error) {}
@@ -1366,7 +1292,6 @@
     syncStickyTop();
     renderWhere();
     renderUpcoming();
-    /* Paint the remembered feed right away, then refresh it from the network. */
     var guess = initialTown() || store(KEY_LAST);
     var remembered = rememberedFeed(typeof guess === 'string' ? guess : '');
     if (remembered) {

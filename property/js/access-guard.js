@@ -55,7 +55,6 @@
       client = window.NJPTRSupabaseRuntime.createClient();
       return client;
     }
-    // The auth library comes from a CDN; when it is blocked or offline there is no client to return.
     if (!window.supabase || typeof window.supabase.createClient !== 'function') return null;
     client = window.supabase.createClient(FALLBACK_URL, FALLBACK_KEY, { auth: {
       persistSession: true, autoRefreshToken: true, detectSessionInUrl: true,
@@ -64,9 +63,6 @@
     return client;
   }
 
-  // A redirect away (sign in, plan, training) rejects njptrAccessReady so pages
-  // stop loading their data. The page is already leaving, so that rejection is
-  // expected, not a crash: keep it out of the browser's uncaught-error reports.
   function leaving(error) {
     if (error && typeof error === 'object') {
       try { error.watchdogAccessRedirect = true; } catch (_error) {}

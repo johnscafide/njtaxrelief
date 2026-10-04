@@ -21,12 +21,6 @@
      Property Intelligence.
 
      */
-/* ==========================================================================
-   Watchdog Dashboard board: the loader scene and the dashboard layout.
-   One stylesheet, scoped to the dashboard page. The shared app shell
-   (app-shell-2027.css) still owns the top bar and navigation drawer.
-   ========================================================================== */
-/* Shared by the dashboard and Property Pulse. */
 html body[data-sidebar-page="dashboard"],
 html body[data-sidebar-page="pulse"]{
   --b-bg:#f3f1ec;
@@ -63,12 +57,8 @@ html body[data-sidebar-page="pulse"]{
 body[data-sidebar-page="dashboard"] .wdx-pagebar,body[data-sidebar-page="pulse"] .wdx-pagebar{display:none!important}
 body[data-sidebar-page="dashboard"] .wdx-topbar,body[data-sidebar-page="pulse"] .wdx-topbar{background:rgba(251,250,247,.94);border-bottom-color:var(--b-line)}
 
-/* --------------------------------------------------------------------------
-   Loader scene
-   -------------------------------------------------------------------------- */
 .wdd-boot{position:fixed;inset:0;z-index:2000;display:grid;place-items:center;padding:24px 16px;background:radial-gradient(120% 90% at 50% 38%,#fcfbf8 0%,#f3f1ec 58%,#ebe7df 100%);color:#16140f;font-family:"Plus Jakarta Sans",Inter,system-ui,sans-serif;opacity:1;transition:opacity .26s ease}
 .wdd-boot[hidden]{display:none}
-/* The shared menu backdrop fades from open to closed as the page boots; snap it shut while the loader is up. */
 body:has(#wdd-boot:not([hidden])) .wd-public-backdrop:not(.open){transition:none!important}
 .wdd-boot.is-leaving{opacity:0;pointer-events:none}
 .wdd-boot-static{position:static;min-height:70vh}
@@ -98,9 +88,6 @@ body:has(#wdd-boot:not([hidden])) .wd-public-backdrop:not(.open){transition:none
 @media (max-width:360px){.wdd-boot-scene{--dog:176px}}
 @media (prefers-reduced-motion:reduce){.wdd-boot{transition:none}.wdd-boot-sprite{animation:none!important}}
 
-/* --------------------------------------------------------------------------
-   Page frame
-   -------------------------------------------------------------------------- */
 .wdd-app{width:100%;max-width:1520px;margin:0 auto;padding:26px 30px 56px;overflow-x:clip;font-family:var(--b-body);word-spacing:.1em}
 .wdd-app[hidden]{display:none}
 .wdd-board{display:grid;grid-template-columns:minmax(0,1fr) 336px;gap:30px;align-items:start}
@@ -111,7 +98,6 @@ body:has(#wdd-boot:not([hidden])) .wd-public-backdrop:not(.open){transition:none
 .wdd-app :focus-visible{outline:3px solid var(--b-blue-bright);outline-offset:2px}
 .wdd-sr{position:absolute!important;width:1px;height:1px;padding:0;margin:-1px;overflow:hidden;clip:rect(0,0,0,0);white-space:nowrap;border:0}
 
-/* Search + greeting */
 .wdd-top{display:grid;grid-template-columns:minmax(0,1fr);gap:22px;min-width:0}
 .wdd-top-row{display:flex;align-items:center;gap:12px}
 .wdd-top-search{flex:1;min-width:0}
@@ -130,7 +116,6 @@ body:has(#wdd-boot:not([hidden])) .wd-public-backdrop:not(.open){transition:none
 .wdd-greet p{margin:10px 0 0;max-width:680px;font-size:15px;line-height:1.55;color:var(--b-muted)}
 .wdd-greet p b{color:var(--b-ink-2);font-weight:600}
 
-/* Summary cards */
 .wdd-cards{display:grid;grid-template-columns:repeat(12,minmax(0,1fr));gap:16px}
 .wdd-card{position:relative;isolation:isolate;overflow:hidden;min-width:0;border-radius:var(--b-radius);padding:20px 22px;color:var(--b-ink)}
 .wdd-card>*{position:relative;z-index:1}
@@ -162,7 +147,6 @@ body:has(#wdd-boot:not([hidden])) .wd-public-backdrop:not(.open){transition:none
 .wdd-stat.is-lead b{padding-bottom:6px;border-bottom:2px solid var(--b-ink);justify-self:start}
 .wdd-card-note{margin:12px 0 0;font-size:13px;line-height:1.45;color:rgba(22,20,15,.72)}
 
-/* Score bars */
 .wdd-bars-wrap{position:relative;margin-top:16px}
 .wdd-bars{position:relative;display:flex;align-items:flex-end;gap:2px;height:118px;padding:0 2px}
 .wdd-bar{flex:1 1 0;min-width:0;height:100%;display:flex;align-items:flex-end;justify-content:center;padding:0;border:0;background:transparent;cursor:pointer;border-radius:8px}
@@ -174,7 +158,6 @@ body:has(#wdd-boot:not([hidden])) .wd-public-backdrop:not(.open){transition:none
 .wdd-peer-line span{position:absolute;right:0;bottom:3px;padding:1px 7px;border-radius:999px;background:rgba(255,255,255,.7);font-size:12px;font-weight:600;white-space:nowrap}
 .wdd-axis{display:flex;justify-content:space-between;gap:10px;margin-top:8px;font-size:12px;color:rgba(22,20,15,.66)}
 
-/* Change line chart */
 .wdd-line{display:block;width:100%;height:132px;margin-top:10px;overflow:visible}
 .wdd-line-path{fill:none;stroke:var(--b-blue);stroke-width:2;stroke-linecap:round;stroke-linejoin:round}
 .wdd-line-base{stroke:rgba(22,20,15,.16);stroke-width:1}
@@ -183,7 +166,6 @@ body:has(#wdd-boot:not([hidden])) .wd-public-backdrop:not(.open){transition:none
 .wdd-line-axis{display:flex;justify-content:space-between;margin-top:6px;font-size:12px;color:rgba(22,20,15,.66)}
 .wdd-line-axis b{color:var(--b-ink)}
 
-/* Decorations */
 .wdd-deco--shield{right:-30px;top:64px;width:130px;fill:var(--b-blue);stroke:var(--b-blue-bright);opacity:.55}
 .wdd-deco--house{right:18px;top:86px;width:110px;fill:var(--b-sky-deep)}
 .wdd-deco--magnifier{right:22px;bottom:-10px;width:130px;fill:none;stroke:var(--b-teal-deep)}
@@ -191,7 +173,6 @@ body:has(#wdd-boot:not([hidden])) .wd-public-backdrop:not(.open){transition:none
 .wdd-deco--pin circle{fill:var(--b-sand)}
 .wdd-card--status .wdd-stats,.wdd-card--value .wdd-stats,.wdd-card--status .wdd-card-note,.wdd-card--value .wdd-card-note{max-width:calc(100% - 120px)}
 
-/* Lower section: list + details */
 .wdd-lower{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1.08fr);gap:22px;align-items:start}
 .wdd-section-head{display:flex;align-items:center;justify-content:space-between;gap:12px;min-height:44px;margin-bottom:10px}
 .wdd-section-head h2{margin:0;font:600 20px/1.2 var(--b-display);letter-spacing:-.01em}
@@ -248,7 +229,6 @@ body:has(#wdd-boot:not([hidden])) .wd-public-backdrop:not(.open){transition:none
 .wdd-detail-gate{margin:14px 0 0;padding:12px 14px;border-radius:16px;background:rgba(255,255,255,.55);font-size:13px;line-height:1.45}
 .wdd-detail-gate a{font-weight:700}
 
-/* Side: calendar, timeline, sponsor */
 .wdd-cal{padding:4px 2px 0}
 .wdd-cal-head{display:flex;align-items:center;justify-content:space-between;gap:8px;margin-bottom:10px}
 .wdd-cal-nav{width:44px;height:44px;display:grid;place-items:center;border:0;border-radius:50%;background:transparent;cursor:pointer;font-size:15px}
@@ -295,7 +275,6 @@ body:has(#wdd-boot:not([hidden])) .wd-public-backdrop:not(.open){transition:none
 .wdd-foot{max-width:1460px;margin:34px auto 0;padding-top:18px;border-top:1px solid var(--b-line);font-size:12px;line-height:1.55;color:var(--b-muted)}
 .wdd-foot b{color:var(--b-ink-2)}
 
-/* Ask Watchdog button, Intelligence drawer, toast */
 .wdd-pull{flex:none;display:inline-flex;align-items:center;justify-content:center;gap:9px;height:56px;padding:0 22px;border:0;border-radius:999px;background:var(--b-ink,#0e2248);color:#fff;font:700 14px var(--b-body,Inter,sans-serif);word-spacing:.1em;cursor:pointer}
 .wdd-pull[hidden]{display:none}
 .wdd-pull:hover{background:#1456a0}
@@ -314,10 +293,6 @@ body:has(#wdd-boot:not([hidden])) .wd-public-backdrop:not(.open){transition:none
 .wdd-toast{position:fixed;left:50%;bottom:28px;z-index:1900;max-width:calc(100vw - 32px);padding:12px 18px;border-radius:999px;background:#16140f;color:#fff;font:600 14px Inter,sans-serif;opacity:0;transform:translate(-50%,10px);pointer-events:none;transition:opacity .18s ease,transform .18s ease}
 .wdd-toast.is-on{opacity:1;transform:translate(-50%,0)}
 
-/* Color bridge: the selected row flows across the gap into the details card
-   (same sky tint), with soft inner corners where it meets the card. The JS
-   only adds .has-bridge on the two-column layout when the row sits beside
-   the card. */
 .wdd-lower.has-bridge .wdd-detail{position:relative;z-index:1}
 .wdd-lower.has-bridge .wdd-row.is-selected{position:relative;border-top-right-radius:0;border-bottom-right-radius:0;transition:none}
 .wdd-lower.has-bridge .wdd-row.is-selected::after{content:"";position:absolute;top:0;bottom:0;left:100%;width:calc(22px + var(--b-radius));background:var(--b-sky);pointer-events:none}
@@ -327,9 +302,6 @@ body:has(#wdd-boot:not([hidden])) .wd-public-backdrop:not(.open){transition:none
 .wdd-lower.bridge-bottom{--wdd-fillet-bottom:radial-gradient(circle at 0 100%,transparent 9.5px,var(--b-sky) 10px)}
 @media print{.wdd-lower.has-bridge .wdd-row.is-selected::before,.wdd-lower.has-bridge .wdd-row.is-selected::after{display:none}}
 
-/* --------------------------------------------------------------------------
-   Responsive
-   -------------------------------------------------------------------------- */
 @media (max-width:1240px){
   .wdd-board{grid-template-columns:minmax(0,1fr)}
   .wdd-board-side{position:static;grid-template-columns:minmax(0,1fr) minmax(0,1fr);gap:22px 30px;align-items:start}

@@ -123,7 +123,6 @@
 </script>
 </head>
 <body data-wd-home-feed="1">
-<!-- SITE NAV -->
 <header class="wd-nav" id="wd-nav">
   <div class="wd-nav-in">
     <button class="wd-public-trigger" id="wd-menu-trigger" type="button" onclick="WatchdogPublicNav.open('main')" aria-label="Open Watchdog menu">
@@ -141,7 +140,7 @@
 </header>
 
 <div class="wd-public-backdrop" id="wd-public-backdrop" onclick="WatchdogPublicNav.close()"></div>
-<aside class="wd-public-sheet" id="wd-main-sheet" aria-hidden="true" aria-label="Watchdog navigation"><!-- Filled by /property/js/watchdog-universal-menu.js: the one shared Watchdog menu. --></aside>
+<aside class="wd-public-sheet" id="wd-main-sheet" aria-hidden="true" aria-label="Watchdog navigation"></aside>
 <aside class="wd-public-sheet right" id="wd-profile-sheet" aria-hidden="true" aria-label="Watchdog account">
   <div class="wd-public-sheet-head"><b>Your Watchdog</b><button class="wd-public-close" type="button" onclick="WatchdogPublicNav.close()" aria-label="Close account menu"><i class="fas fa-xmark"></i></button></div>
   <div id="wd-profile-content"></div>
@@ -149,9 +148,6 @@
 
 <div class="pl-toast" id="pl-toast"></div>
 
-<!-- ============================================================
-     MODAL OVERLAY
-     ============================================================ -->
 <div class="plm-backdrop" id="plm-backdrop" onclick="plCloseModal()"></div>
 <div class="plm" id="plm" role="dialog" aria-modal="true" aria-label="Property details">
   <div class="plm-bar">
@@ -199,11 +195,7 @@
   </div>
 </div>
 
-<!-- ============================================================
-     HERO
-     ============================================================ -->
 
-<!-- STICKY SEARCH -->
 <div class="ssearch" id="ssearch">
   <div class="ssearch-in">
     <a class="ssearch-brand" href="/property/"><i class="fas fa-dog"></i><span>Watchdog</span></a>
@@ -220,9 +212,6 @@
   </div>
 </div>
 
-<!-- ============================================================
-     HERO: greeting + the same property search that opens the overlay
-     ============================================================ -->
 <div class="pl-hero wdh-hero">
   <div class="pl-hero-bg"></div>
   <div class="pl-hero-wash"></div>
@@ -249,16 +238,11 @@
   </div>
 </div>
 
-<!-- NEIGHBORHOOD VIEW -->
 <div class="pl-hood" id="pl-hood"></div>
 
-<!-- ============================================================
-     HOME FEED (filled by /property/js/home-feed.js from /api/watchdog-home-feed)
-     ============================================================ -->
 <main class="wdh" id="wdh" data-state="loading" data-tab="all" aria-labelledby="wdh-feed-title">
   <p class="wdh-where" id="wdh-where"><span class="wdh-where-date" id="wdh-where-date"></span> <span class="wdh-where-end"><span class="wdh-wx" id="wdh-wx" hidden><i class="fas fa-cloud-sun" id="wdh-wx-icon" aria-hidden="true"></i><span id="wdh-wx-text"></span></span> <span class="wdh-where-sep" id="wdh-where-sep" aria-hidden="true" hidden>&middot;</span> <span class="wdh-where-place"><span id="wdh-where-town">New Jersey</span>&nbsp;<button type="button" class="wdh-where-change" id="wdh-town-change" aria-haspopup="dialog" aria-controls="wdh-picker" aria-label="Change town">(change)</button></span><button type="button" class="wdh-where-pin" id="wdh-where-pin" aria-label="Use my phone's location to pick my town"><i class="fas fa-location-dot" aria-hidden="true"></i></button></span></p>
   <div class="wdh-shell">
-    <!-- Wide desktop only: the feed's own menu (not the site menu). It stays put while the feed scrolls. -->
     <aside class="wdh-left" aria-label="Feed menu">
       <nav class="wdh-left-card wdh-feednav" id="wdh-feednav" aria-label="Feed sections">
         <button type="button" class="wdh-nav-item is-on" data-tab="all" aria-pressed="true"><i class="fas fa-house" aria-hidden="true"></i><span>For you</span></button>
@@ -320,7 +304,6 @@
           <div class="wdh-card wdh-skel wdh-skel-card" aria-hidden="true"></div>
           <div class="wdh-card wdh-skel wdh-skel-card" aria-hidden="true"></div>
         </div>
-        <!-- Static feed cards. home-feed.js clones these so their copy stays in HTML. -->
         <template id="wdh-tpl-claim-out">
           <article class="wdh-card wdh-feed-card wdh-fc no-media" data-tabs="home">
             <div class="wdh-fc-main">
@@ -495,7 +478,6 @@
   </div>
 </main>
 
-<!-- TOWN PICKER -->
 <div class="wdh-picker" id="wdh-picker" role="dialog" aria-modal="true" aria-labelledby="wdh-picker-title" hidden>
   <div class="wdh-picker-backdrop" data-wdh-close></div>
   <div class="wdh-picker-panel">
@@ -510,7 +492,6 @@
   </div>
 </div>
 
-<!-- EXPLORE NEW JERSEY: crawlable county directory -->
 <section class="wdh-explore" aria-labelledby="wdh-explore-title">
   <div class="wdh-explore-in">
     <p class="wdh-kicker">Explore New Jersey</p>
@@ -544,7 +525,6 @@
 </section>
 
 
-<!-- FAQ TEASER -->
 <section class="landing-faq" aria-labelledby="landing-faq-title">
   <h2 id="landing-faq-title">Your questions</h2>
     <div class="landing-faq-grid">
@@ -592,7 +572,6 @@
 .faq-teaser-btn i{font-size:12px;}
 </style>
 
-<!-- BROKERAGE ATTRIBUTION -->
 <section class="section" style="padding-top:30px;padding-bottom:6px;">
   <div class="section-inner">
     <div class="pl-brokerband">
@@ -607,16 +586,8 @@
   </div>
 </section>
 
-<!-- ============================================================
-     WATCHDOG FOOTER
-     Self-contained HTML and CSS
-     ============================================================ -->
 
 <style>
-    /*
-     * Everything is scoped beneath #wd-property-footer.
-     * This prevents /styles.css from changing the footer layout.
-     */
 
     #wd-property-footer {
         --wdf-teal: #078486;
@@ -668,9 +639,6 @@
         width: 100%;
     }
 
-    /*
-     * Main four-column layout
-     */
     #wd-property-footer .wdf-grid {
         align-items: start;
         background: transparent;
@@ -686,9 +654,6 @@
         width: 100%;
     }
 
-    /*
-     * Navigation columns
-     */
     #wd-property-footer .wdf-column {
         align-items: flex-start;
         background: transparent;
@@ -776,9 +741,6 @@
         width: 18px;
     }
 
-    /*
-     * Social icons
-     */
     #wd-property-footer .wdf-social {
         align-items: center;
         background: transparent;
@@ -830,9 +792,6 @@
         width: auto;
     }
 
-    /*
-     * Branding and legal column
-     */
     #wd-property-footer .wdf-brand {
         background: transparent;
         border: 0;
@@ -978,9 +937,6 @@
         text-underline-offset: 3px;
     }
 
-    /*
-     * Legal links
-     */
     #wd-property-footer .wdf-legal-links {
         align-items: center;
         background: transparent;
@@ -1010,9 +966,6 @@
         text-underline-offset: 3px;
     }
 
-    /*
-     * Fair Housing notice
-     */
     #wd-property-footer .wdf-housing {
         align-items: flex-start;
         background: var(--wdf-soft-bg);
@@ -1047,9 +1000,6 @@
         text-transform: uppercase;
     }
 
-    /*
-     * Copyright bar
-     */
     #wd-property-footer .wdf-bottom {
         align-items: center;
         background: transparent;
@@ -1103,9 +1053,6 @@
         text-underline-offset: 3px;
     }
 
-    /*
-     * Tablet
-     */
     @media (max-width: 1120px) {
         #wd-property-footer .wdf-grid {
             grid-template-columns: repeat(3, minmax(170px, 1fr));
@@ -1120,9 +1067,6 @@
         }
     }
 
-    /*
-     * Small tablet
-     */
     @media (max-width: 760px) {
         #wd-property-footer {
             padding: 45px 22px 24px;
@@ -1148,9 +1092,6 @@
         }
     }
 
-    /*
-     * Mobile
-     */
     @media (max-width: 540px) {
         #wd-property-footer {
             padding-left: 20px;
@@ -1200,7 +1141,6 @@
 
         <div class="wdf-grid">
 
-            <!-- TAX RELIEF -->
             <div
                 class="wdf-column"
                 role="navigation"
@@ -1240,7 +1180,6 @@
                 </a>
             </div>
 
-            <!-- HOMEOWNER TOOLS -->
             <div
                 class="wdf-column"
                 role="navigation"
@@ -1288,7 +1227,6 @@
                 </a>
             </div>
 
-            <!-- SOUTH JERSEY AND CONTACT -->
             <div>
                 <div
                     class="wdf-column"
@@ -1366,7 +1304,6 @@
                             ></i>
                         </a>
 
-                        <!-- Replace # with your Facebook URL -->
                         <a
                             href="#"
                             class="wdf-social-link"
@@ -1378,7 +1315,6 @@
                             ></i>
                         </a>
 
-                        <!-- Replace # with your Instagram URL -->
                         <a
                             href="#"
                             class="wdf-social-link"
@@ -1393,7 +1329,6 @@
                 </div>
             </div>
 
-            <!-- BRANDING AND DISCLOSURES -->
             <div class="wdf-brand">
 
                 <a href="/property/" class="wdf-logo">
@@ -1508,7 +1443,6 @@
 
         </div>
 
-        <!-- COPYRIGHT -->
         <div class="wdf-bottom">
             <p class="wdf-copyright">
                 Copyright &copy;

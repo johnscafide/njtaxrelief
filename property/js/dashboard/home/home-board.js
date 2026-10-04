@@ -21,20 +21,6 @@
      Property Intelligence.
 
      */
-/* ==========================================================================
-   home-board.js — Property Home in the Watchdog board design.
-   Presentation only: property/js/home.js renders the report; this layer
-   arranges what it rendered, and never fetches or changes a number.
-   - The four scorecards move under the property header as board cards, with
-     a source line and a "Why this?" link. That link keeps the marker id, so
-     marker-intelligence.js still shows the hover explanation and the click
-     still opens the full marker detail page.
-   - A pinned row of section links jumps to Intelligence, tax evidence, the
-     analysis groups and the evidence graph.
-   - The "Explore your property" sections are grouped under plain headings.
-   Every pass is idempotent, so a property switch (which re-renders
-   #hm-body) simply gets arranged again.
-   ========================================================================== */
 (function (w, d) {
   'use strict';
   if (w.__WD_HOME_BOARD__) return;
@@ -61,8 +47,6 @@
     });
   }
 
-  /* Source names mirror marker-intelligence.js so the card line and the hover
-     explanation always name the same source. */
   function sourceName(m) {
     var s = String(m && m.source_id || '');
     if (s === 'nj-parcels-modiv') return 'NJ parcel / MOD-IV public record';
@@ -105,7 +89,6 @@
         }
       });
     }
-    // The marker registry loads after first paint, so refresh the source names.
     Array.prototype.forEach.call(cards.querySelectorAll('.hb-card'), function (card) {
       var src = card.querySelector('.hb-src'), text = 'Source: ' + sourceFor(card.getAttribute('data-marker-id') || '');
       if (src && src.textContent !== text) src.textContent = text;
@@ -233,7 +216,6 @@
     if (!body) return;
     if (w.MutationObserver) new MutationObserver(schedule).observe(body, { childList: true, subtree: true });
     schedule();
-    // Pick up source names once the marker registry has loaded.
     [1500, 4000].forEach(function (ms) { w.setTimeout(schedule, ms); });
   }
   if (d.readyState === 'loading') d.addEventListener('DOMContentLoaded', boot, { once: true }); else boot();

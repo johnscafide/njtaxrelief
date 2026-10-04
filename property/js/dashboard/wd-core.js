@@ -21,19 +21,10 @@
      Property Intelligence.
 
      */
-/* ==========================================================================
-   wd-core.js — the only place that talks to Supabase or holds state.
-   Fires 'wd:ready' as soon as saved properties are in; secondary data fills
-   in after first paint. No observers, no polling.
-   Weather, notifications and the account menu belong to app-shell-2027.js.
-   ========================================================================== */
 (function (w, d) {
   'use strict';
   if (w.WD) return;
 
-  /* Supabase configuration belongs to the shared Watchdog runtime. Keeping
-     this page on that client preserves preview/production switching, PKCE,
-     onboarding and key rotation in one place. */
   var H = {
     esc: function (v) {
       return String(v == null ? '' : v).replace(/[&<>"']/g, function (c) {
@@ -88,9 +79,6 @@
     return { pct: (assessed / value - 1) * 100, over: over, dollars: rate != null && rate > 0 ? (over * rate) / 100 : null };
   }
   function categoryFor(p) { var g = gapFor(p), s = S.scores[p.pams_pin]; if (g && g.pct >= 15) return 'bad'; if (g && g.pct >= 5) return 'warn'; if (s && s.score != null && s.score < 45) return 'bad'; if (s && s.score != null && s.score < 65) return 'warn'; return 'ok'; }
-  // One score verdict for the whole dashboard. The KPI card, the hero score
-  // panel and anything else that labels a Watchdog Score should call this so
-  // the same number never reads two different ways.
   function verdict(score) {
     if (score == null || !Number.isFinite(Number(score))) return { label: 'Not scored yet', tone: '' };
     score = Number(score);

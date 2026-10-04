@@ -43,7 +43,6 @@
 <body data-sidebar-page="agent-desk" data-plan-auto="true" class="adh-page wdx-agent-workspace">
   <main class="ad27 adh" id="ad-main">
     <div class="ad-shell adh-app" id="ad-app" hidden>
-      <!-- One app for agents: five areas (the same five the Watchdog menu and the agent app tab bar use), and every tool opens inside the desk. agent-hub.js adds the area switching; without it every area shows in order. See property/docs/watchdog-information-architecture.md. -->
       <nav class="adh-rail" id="adh-rail" aria-label="Agent Desk sections">
         <div class="adh-rail-brand"><span class="adh-mark" aria-hidden="true"><i class="fas fa-briefcase"></i></span><span><b>Agent Desk</b><small>Everything for your business</small></span></div>
         <div class="adh-nav-list">
@@ -61,7 +60,6 @@
       </nav>
 
       <div class="adh-stage">
-        <!-- TODAY (section key "home") -->
         <section class="adh-view" id="adh-home" data-adh-view="home" aria-labelledby="adh-home-title">
           <header class="adh-head">
             <div>
@@ -71,7 +69,6 @@
             </div>
           </header>
 
-          <!-- First-visit welcome. Stays until the agent hides it; while it shows, the quick-start row and the older first-run card step aside. -->
           <section class="adh-welcome" id="adh-welcome" aria-labelledby="adh-welcome-title">
             <div class="adh-welcome-copy">
               <p class="adh-eyebrow">Welcome to your Agent Desk</p>
@@ -144,7 +141,6 @@
           <p class="adh-footnote"><i class="fas fa-graduation-cap" aria-hidden="true"></i> New to the desk? <button type="button" class="adh-linkbtn" data-adh-tour>Take the 1-minute tour</button> or <a href="/agent/training" data-adh-tool="training">watch the how-tos</a>.</p>
         </section>
 
-        <!-- CLIENTS -->
         <section class="adh-view" id="adh-clients" data-adh-view="clients" aria-labelledby="adh-clients-title">
           <header class="adh-head"><div><p class="adh-eyebrow">Clients</p><h1 id="adh-clients-title">Your people, their homes and their deals</h1><p class="adh-lede">Add past clients and your sphere once and Watchdog watches their homes for you. Every deal you work, from listing prep to the closing table, lives here too.</p></div></header>
           <h2 class="adh-group-title" id="adh-people-title">Your people</h2>
@@ -193,7 +189,6 @@
           </section>
         </section>
 
-        <!-- FARM -->
         <section class="adh-view" id="adh-farm" data-adh-view="farm" aria-labelledby="adh-farm-title">
           <header class="adh-head"><div><p class="adh-eyebrow">Farm</p><h1 id="adh-farm-title">Own a neighborhood</h1><p class="adh-lede">Choose the area you want to be known in. Watchdog keeps the list of homes fresh and flags changes worth a note.</p></div></header>
           <div class="adh-tools">
@@ -237,7 +232,6 @@
           </div>
         </section>
 
-        <!-- MARKETING -->
         <section class="adh-view" id="adh-marketing" data-adh-view="marketing" aria-labelledby="adh-marketing-title">
           <header class="adh-head"><div><p class="adh-eyebrow">Marketing</p><h1 id="adh-marketing-title">Stay top of mind</h1><p class="adh-lede">Mail, email and reports built from real property data, plus your own agent page. See what is working at the bottom.</p></div></header>
           <div class="adh-tools">
@@ -265,7 +259,6 @@
           </section>
         </section>
 
-        <!-- RESEARCH -->
         <section class="adh-view" id="adh-research" data-adh-view="research" aria-labelledby="adh-research-title">
           <header class="adh-head"><div><p class="adh-eyebrow">Research</p><h1 id="adh-research-title">Know the home before you call</h1><p class="adh-lede">Taxes, assessments, fairness and town data for any New Jersey property, with the source for every number.</p></div></header>
           <div class="adh-tools">
@@ -290,7 +283,6 @@
           </section>
         </section>
 
-        <!-- Tools open here, inside the desk. -->
         <section class="adh-frame" id="adh-frame" hidden aria-labelledby="adh-frame-title">
           <header class="adh-frame-bar">
             <button class="adh-frame-back" id="adh-frame-back" type="button"><i class="fas fa-arrow-left" aria-hidden="true"></i><span id="adh-frame-back-label">Back</span></button>

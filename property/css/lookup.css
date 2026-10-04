@@ -31,7 +31,6 @@
 @import url("/property/css/lookup/08-search-corrections-v2.css");
 @import url("/property/css/lookup/09-search-corrections-v3.css");
 
-/* NJW-101 main search input focus normalization */
 .pl-input:focus,
 #pl-addr:focus {
   outline: none !important;
@@ -41,15 +40,10 @@
   outline: none !important;
 }
 
-/* NJW-117 follow-up: recently viewed should sit on the same off-white page paper. */
 .wd-recent-landing {
   background: var(--bg) !important;
 }
 
-/* Index hero only: use the reliable white Watchdog lockup while the navigation
-   sits over the hero photo. Keep the mark compact enough to leave clear visual
-   separation before the hero headline. Once the nav becomes solid/white, the
-   shared brand layer resumes control and uses the standard blue-text logo. */
 body:not(.nav-solid) .wd-nav:not(.solid) .wd-logo {
   width: 250px !important;
   height: 64px !important;
@@ -80,9 +74,6 @@ body:not(.nav-solid) .wd-nav:not(.solid) .wd-logo {
   }
 }
 
-/* Anonymous lookup: do not let these two account-gate cards sit on top of
-   sponsored placements or other free sections. The underlying analysis stays
-   gated because lookup.js only renders it for signed-in users. */
 .gated[data-gate="hood"],
 .gated[data-gate="tradeup"] {
   display: none !important;
