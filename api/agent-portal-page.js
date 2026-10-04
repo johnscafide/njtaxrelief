@@ -25,7 +25,7 @@ function origins() {
 async function staticPage() {
   for (const origin of origins()) {
     try {
-      const r = await fetch(`${origin}/property/agent/index.html`, { headers: { Accept: 'text/html', 'User-Agent': 'WatchdogAgentPortalPreview/1.0' }, signal: AbortSignal.timeout(5000) });
+      const r = await fetch(`${origin}/property/agent/index.html`, { headers: { Accept: 'text/html', 'User-Agent': 'WatchdogAgentPortalPreview/1.0', ...(process.env.WATCHDOG_INTERNAL_FETCH_KEY ? { 'x-watchdog-internal-fetch': process.env.WATCHDOG_INTERNAL_FETCH_KEY } : {}) }, signal: AbortSignal.timeout(5000) });
       if (!r.ok) continue;
       const html = await r.text();
       if (/<\/head>/i.test(html) && html.includes('id="portal"')) return html;

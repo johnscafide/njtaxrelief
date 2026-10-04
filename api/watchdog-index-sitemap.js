@@ -211,7 +211,7 @@ async function fetchSource(pathname) {
       const response = await fetch(`${origin}${pathname}`, {
         method: 'GET',
         redirect: 'follow',
-        headers: { 'User-Agent': 'WatchdogIndexSitemap/1.0', Accept: 'application/xml,text/xml;q=0.9,*/*;q=0.2' },
+        headers: { 'User-Agent': 'WatchdogIndexSitemap/1.0', Accept: 'application/xml,text/xml;q=0.9,*/*;q=0.2', ...(process.env.WATCHDOG_INTERNAL_FETCH_KEY ? { 'x-watchdog-internal-fetch': process.env.WATCHDOG_INTERNAL_FETCH_KEY } : {}) },
         signal: AbortSignal.timeout(5000)
       });
       if (response.ok) return await response.text();

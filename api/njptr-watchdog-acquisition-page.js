@@ -43,7 +43,7 @@ module.exports=async function handler(req,res){
   const source=PAGE_MAP.get(pathname);
   if(!source){res.statusCode=404;res.setHeader('Cache-Control','no-store');return res.end('Not found');}
   try{
-    const upstream=await fetch(new URL(source,UPSTREAM_ORIGIN),{headers:{'user-agent':'WatchdogNJPTRAcquisition/1.0'},redirect:'follow'});
+    const upstream=await fetch(new URL(source,UPSTREAM_ORIGIN),{headers:{'user-agent':'WatchdogNJPTRAcquisition/1.0',...(process.env.WATCHDOG_INTERNAL_FETCH_KEY ? { 'x-watchdog-internal-fetch': process.env.WATCHDOG_INTERNAL_FETCH_KEY } : {})},redirect:'follow'});
     const body=await upstream.text();
     if(!upstream.ok||!/<html[\s>]/i.test(body)){throw new Error('legacy source unavailable '+upstream.status);}
     const html=inject(body,pathname);

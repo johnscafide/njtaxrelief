@@ -110,7 +110,7 @@ function installEntityGraph(input) {
 
 function installRootSocialMetadata(input) {
   let html = String(input || '');
-  const image = 'https://www.watchdogindex.com/watchdog-social-share.jpg';
+  const image = 'https://www.watchdogindex.com/watchdog-social-share-20260913-v3.jpg';
   const title = 'Watchdog | New Jersey Property Intelligence';
   const description = 'Search New Jersey property data and signals in one place. See Watchdog Score, taxes, assessments, and property intelligence.';
 
@@ -127,8 +127,8 @@ function installRootSocialMetadata(input) {
     `<meta property="og:image" content="${image}">`,
     `<meta property="og:image:secure_url" content="${image}">`,
     '<meta property="og:image:type" content="image/jpeg">',
-    '<meta property="og:image:width" content="600">',
-    '<meta property="og:image:height" content="315">',
+    '<meta property="og:image:width" content="1200">',
+    '<meta property="og:image:height" content="630">',
     '<meta property="og:image:alt" content="Watchdog property intelligence for New Jersey">',
     `<meta name="twitter:image" content="${image}">`,
     '<meta name="twitter:image:alt" content="Watchdog property intelligence for New Jersey">'
@@ -297,6 +297,7 @@ module.exports = async function handler(req, res) {
       headers: {
         'user-agent': 'WatchdogContactRouteGuard/1.0',
         'x-watchdog-internal-route': 'canonical-contact-policy',
+        ...(process.env.WATCHDOG_INTERNAL_FETCH_KEY ? { 'x-watchdog-internal-fetch': process.env.WATCHDOG_INTERNAL_FETCH_KEY } : {}),
         ...(isPrivateAppPath(publicPath) ? { 'cache-control': 'no-cache', pragma: 'no-cache' } : {})
       },
       cache: isPrivateAppPath(publicPath) ? 'no-store' : 'default',

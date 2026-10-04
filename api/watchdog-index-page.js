@@ -319,6 +319,7 @@ async function fetchSource(publicPath) {
           redirect: 'follow',
           headers: {
             'User-Agent': 'WatchdogIndexRouteAdapter/1.0',
+            ...(process.env.WATCHDOG_INTERNAL_FETCH_KEY ? { 'x-watchdog-internal-fetch': process.env.WATCHDOG_INTERNAL_FETCH_KEY } : {}),
             Accept: 'text/html,application/xhtml+xml'
           },
           signal: AbortSignal.timeout(6000)
