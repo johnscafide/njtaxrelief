@@ -1,0 +1,41 @@
+name: CO source check
+
+# Weekly: re-open every source page cited by the published CO and fire certificate data
+# and check each fee and quote is still there. Report only; it never fails on findings.
+on:
+  schedule:
+    - cron: '23 11 * * 1'
+  workflow_dispatch:
+  pull_request:
+    paths:
+      - property/scripts/audit_checked_municipal_sources.py
+      - .github/workflows/co-source-audit.yml
+
+permissions:
+  contents: read
+
+jobs:
+  audit:
+    runs-on: ubuntu-latest
+    timeout-minutes: 45
+    steps:
+      - uses: actions/checkout@v4
+      - name: Install PDF text tools
+        run: sudo apt-get update -q && sudo apt-get install -y -q poppler-utils
+      - name: Self-test
+        run: python3 property/scripts/audit_checked_municipal_sources.py --self-test
+      - name: Check every town's sources
+        if: github.event_name != 'pull_request'
+        run: |
+          python3 property/scripts/audit_checked_municipal_sources.py \
+            --out co-source-audit.json --summary co-source-audit.md > /dev/null
+          cat co-source-audit.md >> "$GITHUB_STEP_SUMMARY"
+      - name: Save the report
+        if: github.event_name != 'pull_request'
+        uses: actions/upload-artifact@v4
+        with:
+          name: co-source-audit
+          path: |
+            co-source-audit.json
+            co-source-audit.md
+          retention-days: 90
