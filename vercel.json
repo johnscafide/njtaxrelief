@@ -935,6 +935,25 @@
       ]
     },
     {
+      "source": "/((?!co/embed|api/co-embed-page).*)",
+      "has": [
+        {
+          "type": "host",
+          "value": "www.watchdogindex.com"
+        }
+      ],
+      "headers": [
+        {
+          "key": "X-Built-By",
+          "value": "John, in New Jersey"
+        },
+        {
+          "key": "X-Watchdog-Clue",
+          "value": "Clue 3 of 3. You sniffed out the headers. Your treat is waiting at /treat"
+        }
+      ]
+    },
+    {
       "source": "/co/embed(.*)",
       "headers": [
         {

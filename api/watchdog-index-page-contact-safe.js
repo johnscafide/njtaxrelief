@@ -19,6 +19,7 @@ const SITE_SEARCH_TAGS = '<link rel="stylesheet" href="/property/css/watchdog-si
 const SITE_SEARCH_OFF_PATH = /^\/(?:transaction\/shared|client-room|public-report|open-house|offline)(?:\/|$)/i;
 const SITE_SEARCH_AGENT_PORTAL = /^\/agent\/([a-z0-9][a-z0-9-]{1,38}[a-z0-9])$/i;
 const SITE_SEARCH_AGENT_RESERVED = /^(?:agent|agents|analytics|assets|buyers|client-room|clients|contacts|desk|edit|extension|farm-map|index|leads|listing-prep|new|onboarding|open-house|portal|reports|settings|shared|sphere|team|teams|today|training|workspace)$/i;
+const EASTER_EGGS_SCRIPT = '<script src="/property/js/watchdog-easter-eggs.js?v=20261004a" data-watchdog-easter-eggs="1" defer></script>';
 const AI_REFERRAL_SCRIPT = '<script src="/property/js/ai-referral-analytics.js" data-watchdog-ai-referral-runtime="1" defer></script>';
 const AI_REFERRAL_PRIVATE_PREFIXES = ['/account','/agent','/agent-control','/agent-desk','/transaction','/analytics','/backoffice','/compare','/dashboard','/data-center','/data-workbench','/developer','/developer-data','/diagnostics','/farm-builder','/growth','/home','/insights/admin','/integrations','/intelligence','/logs','/marketing-studio','/newsletter-studio','/onboarding','/report-builder','/watchlist','/whitepapers','/workbench'];
 const ENTITY_GRAPH_ID = 'watchdog-entity-graph';
@@ -249,6 +250,12 @@ function installSiteEditorLoader(input) {
   return html.replace(/<\/body>/i, `${SITE_EDITOR_LOADER_SCRIPT}\n</body>`);
 }
 
+function installEasterEggs(input) {
+  const html = String(input || '');
+  if (/watchdog-easter-eggs\.js/i.test(html) || !/<\/body>/i.test(html)) return html;
+  return html.replace(/<\/body>/i, `${EASTER_EGGS_SCRIPT}\n</body>`);
+}
+
 function copySafeHeaders(upstream, res, publicPath) {
   const contentType = upstream.headers.get('content-type');
   const cacheControl = upstream.headers.get('cache-control');
@@ -272,7 +279,7 @@ function render404(req, res) {
   res.setHeader('X-Robots-Tag', 'noindex, nofollow,noarchive');
   res.setHeader('X-Watchdog-Route-Guard', 'branded-404');
   if (req.method === 'HEAD') return res.end();
-  return res.end(WATCHDOG_404);
+  return res.end(installEasterEggs(WATCHDOG_404));
 }
 
 module.exports = async function handler(req, res) {
@@ -317,6 +324,7 @@ module.exports = async function handler(req, res) {
     safeBody = installSiteEditorLoader(safeBody);
     safeBody = installGlassHeader(safeBody);
     safeBody = installSiteSearch(safeBody, publicPath);
+    safeBody = installEasterEggs(safeBody);
     if (publicPath === '/') {
       safeBody = installEntityGraph(safeBody);
       safeBody = installRootSocialMetadata(safeBody);

@@ -1,0 +1,69 @@
+/* 
+     
+     Hi There. I see you are checking the code. I'm sure you have reasons for such. Curiosity would be my guess. 
+
+     My name is John. I've been building sites since I was 10. I was gifted ecommerce website software on floppy disks
+     and fell in love with web developement ever since. I learned to code HTML using just notepad. I took computer science
+     classes (BASIC and Visual Basic in high school). Took a few college classes learning C++, Python, Ruby and Javascript.
+     My very first websites was with Angelfire and Geocities. In college I dabbed in game development, small tools, and
+     graphic design. Database management with SQL by my sophmore year. Joomla and other CMS tools learned by the age of 20. 
+     I have an understanding and experience writing code by hand, studing and analyzing bugs, issues, and corrections. 
+     The introduction of AI is interesting. I can understand the worry and fear. I also see the memes of "Hey I can make 
+     your job obsolete" then show a localhost:3000. haha. But I do believe, if you understand how to use the tools, it's
+     no different than templates, hiring a local kid, outsourcing your work to fivrr or an agency. I code, I understand the
+     backend and frontend. I'm not an expert by all means. But I do have insights. Watchdog was built on real research.
+     Watchdog & it's companion, NJPropertyTaxRelief.com, is from years of listening to real people with real needs in NJ.
+     I hope these sites and tools have benefit to you and/or your business. If you found them useful, the least I ask of
+     you is to share. Sure, I have paid plan options for members, but majority of the site is free to use. I'm a real estate
+     agent, licensed tax professional, and a big fan of the state of New Jersey. It's a great state, but not without its
+     flaws. The idea is to educate more New Jerseyians about their benefits and property taxes in the state. It's possible
+     one day this site will exceed some of the bigger natonal sites. Who knows. But for now, I present to you, Watchdog
+     Property Intelligence.
+
+     */
+:root{--watchdog-clue-2:"Good nose. Clue 2 of 3: every Watchdog page whispers something in its response headers. Open the Network tab and sniff around."}
+
+.wd-egg-chase{--dog:230px;--ground:18px;position:fixed;left:0;right:0;bottom:0;height:calc(var(--dog) * .9 + 120px);z-index:2147483000;pointer-events:none;overflow:hidden;opacity:1;transition:opacity .35s ease}
+.wd-egg-chase.is-leaving{opacity:0}
+.wd-egg-dog{position:absolute;left:0;bottom:calc(var(--ground) - var(--dog) * .6667 * .0725);width:var(--dog);height:calc(var(--dog) * .6667);will-change:transform}
+.wd-egg-sprite{position:absolute;inset:0;background:url('/property/assets/beagle/watchdog-beagle-frames.webp') 0 0/400% 100% no-repeat}
+.wd-egg-dog[data-frame="b"] .wd-egg-sprite{background-position:33.3333% 0}
+.wd-egg-dog[data-frame="leap"] .wd-egg-sprite{background-position:66.6667% 0}
+.wd-egg-dog[data-frame="front"] .wd-egg-sprite{background-position:100% 0}
+.wd-egg-shadow{position:absolute;left:11%;width:72%;bottom:calc(7.25% - 7px);height:14px;border-radius:50%;background:radial-gradient(closest-side,rgba(70,52,30,.28),rgba(70,52,30,0))}
+.wd-egg-treat{position:absolute;left:0;bottom:var(--ground);width:calc(var(--dog) * .14);line-height:0;z-index:2;will-change:transform;filter:drop-shadow(0 2px 1.5px rgba(70,52,30,.28))}
+.wd-egg-treat svg{display:block;width:100%;height:auto;overflow:visible}
+.wd-egg-bubble{position:absolute;left:50%;bottom:calc(var(--dog) * .62 + 24px);transform:translate(-50%,8px) scale(.9);padding:8px 14px;border-radius:14px;background:#16140f;color:#fff;font:700 15px/1.2 "Plus Jakarta Sans",Inter,system-ui,sans-serif;white-space:nowrap;opacity:0;transition:opacity .2s ease,transform .2s ease;box-shadow:0 6px 18px rgba(22,20,15,.18)}
+.wd-egg-bubble::after{content:"";position:absolute;left:50%;bottom:-6px;width:12px;height:12px;background:#16140f;transform:translateX(-50%) rotate(45deg);border-radius:2px}
+.wd-egg-bubble.is-on{opacity:1;transform:translate(-50%,0) scale(1)}
+.wd-egg-chase.is-still .wd-egg-dog{left:50%;transform:translateX(-50%)}
+.wd-egg-chase.is-still .wd-egg-treat{display:none}
+.wd-egg-chase.is-still .wd-egg-bubble{left:50%}
+@media (max-width:640px){.wd-egg-chase{--dog:170px;--ground:14px}}
+
+html.wd-1999 body{background-color:#fffbe0!important;background-image:radial-gradient(#ff66cc 1.5px,transparent 2px),radial-gradient(#3399ff 1.5px,transparent 2px)!important;background-size:46px 46px,73px 73px!important;background-position:0 0,23px 31px!important;color:#000!important;padding-top:34px!important;padding-bottom:64px!important}
+html.wd-1999 body *:not(#wd-1999):not(#wd-1999 *):not(svg):not(svg *):not(i):not([class*="fa-"]){font-family:"Times New Roman",Times,serif!important;letter-spacing:0!important}
+html.wd-1999 body h1:not(#wd-1999 *),html.wd-1999 body h2:not(#wd-1999 *),html.wd-1999 body h3:not(#wd-1999 *){font-family:"Comic Sans MS","Comic Sans","Chalkboard SE",cursive!important;color:#ff00ff!important;-webkit-text-fill-color:#ff00ff!important;text-shadow:2px 2px 0 #00e5ff!important;background:none!important}
+html.wd-1999 body a:not(#wd-1999 *){color:#0000ee!important;-webkit-text-fill-color:#0000ee!important;text-decoration:underline!important}
+html.wd-1999 body a:not(#wd-1999 *):visited{color:#551a8b!important;-webkit-text-fill-color:#551a8b!important}
+html.wd-1999 body button:not(#wd-1999 *){border-radius:0!important;border:2px outset #dfdfdf!important;background:#c0c0c0!important;color:#000!important;-webkit-text-fill-color:#000!important;box-shadow:none!important}
+html.wd-1999 body img:not(#wd-1999 *){border:2px ridge #c0c0c0}
+#wd-1999{font-family:"Times New Roman",Times,serif}
+#wd-1999 .wd-1999-top{position:fixed;top:0;left:0;right:0;height:34px;z-index:2147482000;background:#000;border-bottom:3px ridge #c0c0c0;overflow:hidden;display:flex;align-items:center}
+#wd-1999 .wd-1999-marquee{white-space:nowrap;overflow:hidden;width:100%}
+#wd-1999 .wd-1999-marquee span{display:inline-block;padding-left:100%;font:700 16px/34px "Comic Sans MS","Comic Sans","Chalkboard SE",cursive;color:#00ff00;animation:wd-1999-scroll 22s linear infinite}
+#wd-1999 .wd-1999-construction{position:fixed;right:12px;bottom:84px;z-index:2147482000;display:flex;flex-direction:column;align-items:center;gap:4px;padding:8px 10px;background:#ffff00;border:3px outset #c0c0c0;box-shadow:4px 4px 0 #000;transform:rotate(3deg)}
+#wd-1999 .wd-1999-construction strong{font:900 13px/1.1 Arial,Helvetica,sans-serif;color:#000;letter-spacing:.04em}
+#wd-1999 .wd-1999-tape{display:block;width:150px;height:12px;background:repeating-linear-gradient(-45deg,#000 0 10px,#ffcc00 10px 20px);background-size:28.28px 12px;animation:wd-1999-tape 1s linear infinite}
+#wd-1999 .wd-1999-bar{position:fixed;left:0;right:0;bottom:0;z-index:2147482000;display:flex;flex-wrap:wrap;align-items:center;justify-content:center;gap:10px 22px;padding:10px 12px;background:#c0c0c0;border-top:3px outset #fff;color:#000;font:16px/1.3 "Times New Roman",Times,serif}
+#wd-1999 .wd-1999-counter b{display:inline-block;min-width:16px;margin:0 1px;padding:2px 3px;background:#000;color:#39ff14;font:700 16px/1 "Courier New",Courier,monospace;text-align:center;border:1px inset #555}
+#wd-1999 .wd-1999-ring a{color:#0000ee;text-decoration:underline}
+#wd-1999 .wd-1999-ring a:visited{color:#551a8b}
+#wd-1999 .wd-1999-exit{min-height:44px;padding:0 16px;background:#c0c0c0;border:3px outset #fff;border-radius:0;color:#000;font:700 15px "Times New Roman",Times,serif;cursor:pointer}
+#wd-1999 .wd-1999-exit:active{border-style:inset}
+#wd-1999 .wd-1999-exit:focus-visible,#wd-1999 .wd-1999-ring a:focus-visible{outline:3px dotted #000;outline-offset:2px}
+@keyframes wd-1999-scroll{from{transform:translateX(0)}to{transform:translateX(-100%)}}
+@keyframes wd-1999-tape{to{background-position:28.28px 0}}
+@media (max-width:640px){#wd-1999 .wd-1999-construction{bottom:142px;right:6px;transform:rotate(3deg) scale(.8);transform-origin:right bottom}#wd-1999 .wd-1999-tape{width:110px}html.wd-1999 body{padding-bottom:120px!important}}
+@media (prefers-reduced-motion:reduce){#wd-1999 .wd-1999-marquee span{animation:none;padding-left:12px}#wd-1999 .wd-1999-tape{animation:none}.wd-egg-chase{transition:none}}
+@media print{.wd-egg-chase,#wd-1999{display:none!important}}
