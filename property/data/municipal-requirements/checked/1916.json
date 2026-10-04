@@ -86,25 +86,25 @@
     "lead_time": "State fee tiers count business days between the Division's receipt and the closing date: more than ten business days for the lowest fee. If the change of occupant does not happen within 6 months, a new application is needed (per the DCA form).",
     "fees": [
      {
-      "label": "State smoke/CO certificate, closing more than ten business days after receipt (DCA form, rev. 10/02)",
-      "amount": "$35",
-      "quote": "If closing date above follows the date of receipt by the Division of Fire Safety by more than ten business days, the fee is $35",
-      "source_url": "https://www.nj.gov/dca/divisions/dfs/forms/bfce/certificationinlieu.pdf",
-      "verified": true
+      "label": "State smoke/CO certificate, applied more than 10 business days before closing",
+      "amount": "$45",
+      "quote": "If you are applying for a certificate more than ten business days from the closing date the fee is $45 dollars",
+      "source_url": "https://firesolutions.dca.nj.gov/ultra-fire-home/smoke-application-create/",
+      "verified": null
      },
      {
-      "label": "Received fewer than ten but more than four business days before closing",
-      "amount": "$70",
-      "quote": "if received fewer than ten but more than four business days before closing, $70",
-      "source_url": "https://www.nj.gov/dca/divisions/dfs/forms/bfce/certificationinlieu.pdf",
-      "verified": true
+      "label": "State smoke/CO certificate, applied 4 to 10 business days before closing",
+      "amount": "$90",
+      "quote": "if applying 4 to 10 business days from the closing date the fee is $90",
+      "source_url": "https://firesolutions.dca.nj.gov/ultra-fire-home/smoke-application-create/",
+      "verified": null
      },
      {
-      "label": "Received four business days or fewer before closing",
-      "amount": "$125",
-      "quote": "and if four business days or fewer, $125.",
-      "source_url": "https://www.nj.gov/dca/divisions/dfs/forms/bfce/certificationinlieu.pdf",
-      "verified": true
+      "label": "State smoke/CO certificate, closing less than 4 business days away",
+      "amount": "$161",
+      "quote": "if the closing date is less than four business days the fee is $161.",
+      "source_url": "https://firesolutions.dca.nj.gov/ultra-fire-home/smoke-application-create/",
+      "verified": null
      }
     ],
     "how_to_apply": "Apply online through the NJ DCA Fire Safety Service Portal (firesolutions.dca.nj.gov): choose Apply for an Application, then Apply for Smoke Certification, fill in the data and pay. Help: BFCECodeAdmin@dca.nj.gov or 609-633-6132. The older DCA paper form goes to PO Box 809, Trenton, NJ 08625-0809 with a check payable to Treasurer, State of New Jersey.",
@@ -154,7 +154,7 @@
     "confidence": "medium"
    }
   ],
-  "notes": "Ogdensburg is state-enforced (LEA code S), so the smoke/CO certificate comes from the NJ Division of Fire Safety, not the Borough; the Borough fire chapter and website say nothing about it. The state directory entry is old (survey 2/1/2019) and lists the smoke compliance office as the Ogdensburg Building Department, 14 Highland Avenue, (973) 827-3860, which may be outdated. The only state fee schedule found is on the DCA paper form (revised 10/02), which may be out of date; the portal does not publish fees publicly. That form still lists a fire extinguisher, which state law (P.L.2025, c.19) removed in February 2025. Confirm current fees and process with the Division of Fire Safety."
+  "notes": "Ogdensburg is state-enforced (LEA code S), so the smoke/CO certificate comes from the NJ Division of Fire Safety, not the Borough; the Borough fire chapter and website say nothing about it. The state directory entry is old (survey 2/1/2019) and lists the smoke compliance office as the Ogdensburg Building Department, 14 Highland Avenue, (973) 827-3860, which may be outdated. The only state fee schedule found is on the DCA paper form (revised 10/02), which may be out of date; the portal does not publish fees publicly. That form still lists a fire extinguisher, which state law (P.L.2025, c.19) removed in February 2025. Confirm current fees and process with the Division of Fire Safety. Update: the NJ DCA Fire Safety portal lists the current state fees of $45 / $90 / $161 (more than 10, 4 to 10, and under 4 business days before closing). The $35 / $70 / $125 on the older DCA paper form are out of date."
  },
  "other_items": [
   {

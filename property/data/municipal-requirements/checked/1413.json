@@ -93,25 +93,25 @@
     "lead_time": "State fee tiers count business days between DCA's receipt and the closing date: more than ten business days for the lowest fee. Certificate must be used within 6 months (per the DCA form).",
     "fees": [
      {
-      "label": "State certificate of smoke detector, CO alarm and extinguisher compliance, closing more than ten business days after receipt (DCA form SD-41, rev. 10/02)",
-      "amount": "$35",
-      "quote": "If closing date above follows the date of receipt by the Division of Fire Safety by more than ten business days, the fee is $35",
-      "source_url": "https://www.nj.gov/dca/divisions/dfs/forms/bfce/certificationinlieu.pdf",
-      "verified": true
+      "label": "State smoke/CO certificate, applied more than 10 business days before closing",
+      "amount": "$45",
+      "quote": "If you are applying for a certificate more than ten business days from the closing date the fee is $45 dollars",
+      "source_url": "https://firesolutions.dca.nj.gov/ultra-fire-home/smoke-application-create/",
+      "verified": null
      },
      {
-      "label": "Received fewer than ten but more than four business days before closing",
-      "amount": "$70",
-      "quote": "if received fewer than ten but more than four business days before closing, $70",
-      "source_url": "https://www.nj.gov/dca/divisions/dfs/forms/bfce/certificationinlieu.pdf",
-      "verified": true
+      "label": "State smoke/CO certificate, applied 4 to 10 business days before closing",
+      "amount": "$90",
+      "quote": "if applying 4 to 10 business days from the closing date the fee is $90",
+      "source_url": "https://firesolutions.dca.nj.gov/ultra-fire-home/smoke-application-create/",
+      "verified": null
      },
      {
-      "label": "Received four business days or fewer before closing",
-      "amount": "$125",
-      "quote": "and if four business days or fewer, $125.",
-      "source_url": "https://www.nj.gov/dca/divisions/dfs/forms/bfce/certificationinlieu.pdf",
-      "verified": true
+      "label": "State smoke/CO certificate, closing less than 4 business days away",
+      "amount": "$161",
+      "quote": "if the closing date is less than four business days the fee is $161.",
+      "source_url": "https://firesolutions.dca.nj.gov/ultra-fire-home/smoke-application-create/",
+      "verified": null
      }
     ],
     "how_to_apply": "Apply to the NJ Division of Fire Safety (the Township's Construction page links to the DCA Fire Safety online portal, firesolutions.dca.nj.gov). Mail address on the DCA form: PO Box 809, Trenton, NJ 08625-0809; checks payable to Treasurer, State of New Jersey. Phone (609) 633-6132.",
@@ -161,7 +161,7 @@
     "confidence": "medium"
    }
   ],
-  "notes": "Harding is a state-enforced municipality (LEA code S), so the smoke/CO certificate comes from the NJ Division of Fire Safety, not the Township. The only state fee schedule found is on DCA form SD-41 (revised 10/02, an application and certification in lieu of inspection), which may be outdated; the current state portal does not publish fees publicly. Confirm the current state fee and process with the Division of Fire Safety at (609) 633-6132."
+  "notes": "Harding is a state-enforced municipality (LEA code S), so the smoke/CO certificate comes from the NJ Division of Fire Safety, not the Township. The only state fee schedule found is on DCA form SD-41 (revised 10/02, an application and certification in lieu of inspection), which may be outdated; the current state portal does not publish fees publicly. Confirm the current state fee and process with the Division of Fire Safety at (609) 633-6132. Update: the NJ DCA Fire Safety portal lists the current state fees of $45 / $90 / $161 (more than 10, 4 to 10, and under 4 business days before closing). The $35 / $70 / $125 on the older DCA paper form are out of date."
  },
  "other_items": [
   {
