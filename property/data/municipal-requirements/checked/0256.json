@@ -1,0 +1,216 @@
+{
+ "municipality_code": "0256",
+ "municipality": "Rutherford Borough",
+ "county": "BERGEN",
+ "checked_at": "2026-10-04",
+ "resale_co": {
+  "status": "required",
+  "name": "Residential Certificate of Zoning Compliance (CZC), previously called Certificate of Occupancy",
+  "issued_by": "Borough of Rutherford Construction Official (Building and Zoning Department)",
+  "lead_time": "Inspections are scheduled after the form is received; the certificate is issued no sooner than 48 hours after all inspections pass (the form says 24 hours). The CZC inspection is not scheduled until all open permits are closed.",
+  "valid_for": "",
+  "requirements": [
+   "Open or outstanding permits must have final inspections and be closed before the CZC inspection is scheduled",
+   "Street numbers at least 3 inches high with a 1/2 inch stroke, visible from the street",
+   "Garages, fences, sheds and walls in good repair; sidewalks, stairs, driveways and walkways free of hazards",
+   "Attached garage fire rating maintained, holes patched, and a listed self-closing device on any door into the house",
+   "No sump pump may discharge to the sewer",
+   "Pressure relief discharge pipe on heating units and water heaters, full size, ending no more than 6 inches off the floor",
+   "Clearances around fuel burning appliances; roof sound and leaders discharging away from the foundation",
+   "Smoke and carbon monoxide alarms (checked during the CZC inspection; see fire certificate)",
+   "Transfer of Title Certificate instead of a CZC only if the home will not be occupied after purchase, with a letter from the buyer's attorney"
+  ],
+  "fees": [
+   {
+    "label": "Residential Certificate of Zoning Compliance (1 or 2 family, condo, co-op)",
+    "amount": "$100",
+    "quote": "For a residential Certificate of Zoning Compliance certificate (previously Certificate of Occupancy) please fill out the following form and submit with $100 payment",
+    "source_url": "https://www.rutherfordboronj.com/building-page-list/308-certificate-of-zoning-compliance",
+    "verified": true
+   },
+   {
+    "label": "Certificate of occupancy for resale, R-2, R-3, R-4 and R-5 uses (Code Section 22-6A(1)(a))",
+    "amount": "$100 per dwelling unit",
+    "quote": "For R-2, R-3, R-4 and R-5 uses: $100 per dwelling unit.",
+    "source_url": "https://ecode360.com/11343417",
+    "verified": null
+   }
+  ],
+  "how_to_apply": "Fill out the Residential Certificate of Zoning Compliance Application and Requirements (Includes Transfer of Title) and submit it with a $100 check (or exact cash) payable to the Borough of Rutherford at the Building and Zoning office, Borough Hall, 176 Park Avenue, Main Level. Inspections are then scheduled; call 201-460-3042 to schedule the zoning inspection and 201-460-3010 about open permits. Choose pick-up or email delivery of the certificate on the form.",
+  "application_url": "https://www.rutherfordboronj.com/government/forms/construction/1180-residential-certificate-of-zoning-compliance-application-including-transfer-of-title/file",
+  "department_url": "https://www.rutherfordboronj.com/departments/building",
+  "phone": "201-460-3042",
+  "email": "zoning@rutherfordboronj.com",
+  "contact_name": "Thomas Delia",
+  "contact_title": "Zoning Officer (Construction Official: Chris Salviano)",
+  "evidence": [
+   {
+    "url": "https://ecode360.com/11349902",
+    "quote": "A certificate of zoning compliance shall be applied for and obtained prior to the use or occupancy of the whole or any part of any building:",
+    "doc_date": "12-13-2021 (Ord. No. 3587-21)",
+    "via": "page",
+    "verified": null
+   },
+   {
+    "url": "https://ecode360.com/11349902",
+    "quote": "Undergoing a change in ownership.",
+    "doc_date": "12-13-2021 (Ord. No. 3587-21)",
+    "via": "page",
+    "verified": null
+   },
+   {
+    "url": "https://www.rutherfordboronj.com/building-page-list/308-certificate-of-zoning-compliance",
+    "quote": "Once all inspections have passed the Certificate will be issued no sooner than 48 hours after sign-off.",
+    "doc_date": "2026-10-04 (page fetched)",
+    "via": "page",
+    "verified": true
+   },
+   {
+    "url": "https://www.rutherfordboronj.com/government/forms/construction/1180-residential-certificate-of-zoning-compliance-application-including-transfer-of-title/file",
+    "quote": "Residents who are selling their home should call the office ahead of time at 201-460-3010 to ensure this is taken care of.",
+    "doc_date": "Feb 2026",
+    "via": "pdf",
+    "verified": true
+   },
+   {
+    "url": "https://www.rutherfordboronj.com/government/forms/construction/1180-residential-certificate-of-zoning-compliance-application-including-transfer-of-title/file",
+    "quote": "Transfer of Title Certificate: Only issued if home will not be occupied after purchase (i.e. the owner will undergo major renovations).",
+    "doc_date": "Feb 2026",
+    "via": "pdf",
+    "verified": true
+   },
+   {
+    "url": "https://www.rutherfordboronj.com/departments/building",
+    "quote": "201-460-3042 to schedule your zoning inspection.",
+    "doc_date": "2026-10-04 (page fetched)",
+    "via": "page",
+    "verified": true
+   },
+   {
+    "url": "https://www.rutherfordboronj.com/departments/building",
+    "quote": "zoning@rutherfordboronj.com",
+    "doc_date": "2026-10-04 (page fetched)",
+    "via": "page",
+    "verified": true
+   }
+  ],
+  "confidence": "high",
+  "notes": "Code Section 131-44 (amended 12-13-2021 by Ord. No. 3587-21, read through the ecode360 print view) requires a certificate of zoning compliance before occupancy of a building undergoing a change in ownership. Sections 131-45 and 131-46 allow a conditional CZC (violations fixed within about 30 days, buyer countersigns) or a deferral (no occupancy until repairs) for 1 and 2 family homes being transferred. Section 22-6A also lists a $125 'certificate of continued occupancy (i.e., V.A., FHA, etc.)'. The form's footer email is misspelled (zoning@rutherordboronj.com); the department page shows zoning@rutherfordboronj.com. 3-family and larger homes also need a Bureau of Fire Safety inspection (201-460-3011). Rental-only items (lead-safe certification for pre-1978 rentals through LEW Environmental, short-term rental prohibition) are not resale requirements."
+ },
+ "fire_cert": {
+  "requirements": [
+   "Smoke alarms on each level and outside/in the vicinity of each separate sleeping area, per NFPA 72 (interconnection not required)",
+   "Ten-year sealed battery smoke alarms listed to ANSI/UL 217; hardwired alarms from original construction or rehabilitation may not be replaced with battery alarms",
+   "Carbon monoxide alarms within 10 feet of the sleeping areas in homes with a fuel burning device or attached garage (battery, hardwired or plug-in, UL 2034, NFPA 720)",
+   "Ten-year sealed battery combination smoke and CO alarms are permitted"
+  ],
+  "authorities": [
+   {
+    "name": "Borough of Rutherford Building and Zoning Department (smoke/CO checked during the Certificate of Zoning Compliance inspection); fire code enforcing agency: Rutherford Bureau of Fire Safety",
+    "type": "municipal_building_department",
+    "area_served": "Entire borough",
+    "lead_time": "Same as the Certificate of Zoning Compliance: certificate issued no sooner than 48 hours after all inspections pass.",
+    "fees": [],
+    "how_to_apply": "No separate smoke/CO application was found for 1 and 2 family homes. The smoke and carbon monoxide alarm requirements are printed in the Residential Certificate of Zoning Compliance packet, and the inspector's sheet has an SD/CO line, so the check appears to be part of the $100 CZC. 3-family and larger homes are inspected by the Bureau of Fire Safety (201-460-3011).",
+    "application_url": "https://www.rutherfordboronj.com/government/forms/construction/1180-residential-certificate-of-zoning-compliance-application-including-transfer-of-title/file",
+    "department_url": "https://www.rutherfordboronj.com/departments/fire-safety",
+    "phone": "201-460-3011",
+    "email": "firesafety@rutherfordboronj.com",
+    "contact_name": "Paul T. Dansbach",
+    "contact_title": "Fire Marshal",
+    "evidence": [
+     {
+      "url": "https://www.rutherfordboronj.com/government/forms/construction/1180-residential-certificate-of-zoning-compliance-application-including-transfer-of-title/file",
+      "quote": "Smoke & Carbon Monoxide Alarm Requirements",
+      "doc_date": "Feb 2026",
+      "via": "pdf",
+      "verified": true
+     },
+     {
+      "url": "https://www.rutherfordboronj.com/government/forms/construction/1180-residential-certificate-of-zoning-compliance-application-including-transfer-of-title/file",
+      "quote": "Open permits SD/CO",
+      "doc_date": "Feb 2026",
+      "via": "pdf",
+      "verified": true
+     },
+     {
+      "url": "https://www.rutherfordboronj.com/government/forms/construction/1180-residential-certificate-of-zoning-compliance-application-including-transfer-of-title/file",
+      "quote": "Please note that all 3-family and above are subject to an inspection by the Bureau of Fire Safety.",
+      "doc_date": "Feb 2026",
+      "via": "pdf",
+      "verified": true
+     },
+     {
+      "url": "https://www.rutherfordboronj.com/departments/fire-safety",
+      "quote": "firesafety@rutherfordboronj.com",
+      "doc_date": "2026-10-04 (page fetched)",
+      "via": "page",
+      "verified": true
+     },
+     {
+      "url": "https://www.rutherfordboronj.com/departments/fire-safety",
+      "quote": "Paul T. Dansbach Fire Marshal",
+      "doc_date": "2026-10-04 (page fetched)",
+      "via": "page",
+      "verified": true
+     },
+     {
+      "url": "https://ecode360.com/11343827",
+      "quote": "Editor's Note: Former §34A-13, Smoke and carbon monoxide detectors, as amended, was repealed 10-26-2020 by Ord. No. 3536-20.",
+      "doc_date": "10-26-2020 (Ord. No. 3536-20)",
+      "via": "page",
+      "verified": null
+     },
+     {
+      "url": "https://nj.gov/dca/dfs/pdf/ANNUAL%20REGISTRY/THIRD%20QUARTER%20LEA%20REGISTRY%202026.pdf",
+      "quote": "M Rutherford Borough",
+      "doc_date": "2026-07",
+      "via": "pdf",
+      "verified": true
+     },
+     {
+      "url": "https://www.nj.gov/dca/dfs/pdf/fire%20directory_county%20summary/fire_code_enforcement_director.pdf",
+      "quote": "LEAID: 0256-001 Enf Auth. Municipal Fire Official Paul T Dansbach Phone (201) 460-3011",
+      "doc_date": "5/14/2026 (survey date)",
+      "via": "state_directory",
+      "verified": null
+     }
+    ],
+    "confidence": "medium"
+   }
+  ],
+  "notes": "Rutherford's fire code enforcing agency is the municipal Bureau of Fire Safety (LEA type M), but its page says its main job is commercial and multi-family buildings. The local smoke/CO detector section of the fire code (former Section 34A-13) was repealed in 2020. For 1 and 2 family resales the only smoke/CO material found is inside the Building and Zoning Department's CZC packet, and the inspector's sheet has an SD/CO line, so the smoke/CO check looks bundled into the $100 CZC. No separate smoke/CO fee was found. The Borough's packet does not list a fire extinguisher, consistent with P.L.2025, c.19. Confirm by phone who signs the smoke/CO certificate (Building and Zoning or the Bureau of Fire Safety) and whether a separate fee applies."
+ },
+ "other_items": [
+  {
+   "label": "Open permits",
+   "detail": "All open or outstanding construction permits must be finaled and closed before the CZC inspection is scheduled; sellers are asked to call 201-460-3010 ahead of time.",
+   "source_url": "https://www.rutherfordboronj.com/government/forms/construction/1180-residential-certificate-of-zoning-compliance-application-including-transfer-of-title/file"
+  },
+  {
+   "label": "Sump pump not to sewer",
+   "detail": "The CZC checklist says no sump pump may discharge to the sewer.",
+   "source_url": "https://www.rutherfordboronj.com/government/forms/construction/1180-residential-certificate-of-zoning-compliance-application-including-transfer-of-title/file"
+  },
+  {
+   "label": "Sidewalks, stairs, driveways and walkways",
+   "detail": "Checked during the CZC inspection; must be in good repair and free of tripping hazards.",
+   "source_url": "https://www.rutherfordboronj.com/government/forms/construction/1180-residential-certificate-of-zoning-compliance-application-including-transfer-of-title/file"
+  }
+ ],
+ "open_questions": [
+  "Is the smoke/CO certificate for a 1 or 2 family resale issued by the Building and Zoning office as part of the CZC, or separately by the Bureau of Fire Safety, and is there a separate fee?",
+  "Is the certificate issued 24 hours (form) or 48 hours (web page) after a passed inspection, and how far ahead are inspections booked?",
+  "How long is the CZC valid before closing?"
+ ],
+ "verification": {
+  "fees": 2,
+  "fee_ok": 1,
+  "fee_bad": 0,
+  "fee_unchecked": 1,
+  "quotes": 15,
+  "q_ok": 11,
+  "q_bad": 0,
+  "q_unchecked": 4
+ }
+}

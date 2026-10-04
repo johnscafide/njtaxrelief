@@ -1,0 +1,223 @@
+{
+ "municipality_code": "0269",
+ "municipality": "Wood-Ridge Borough",
+ "county": "BERGEN",
+ "resale_co": {
+  "status": "required",
+  "name": "Certificate of Continued Occupancy - Residential (Certificate of Zoning, Smoke Detector, Carbon Monoxide, Fire Extinguisher Compliance)",
+  "issued_by": "Borough of Wood-Ridge Zoning Official and Fire Prevention Official (one combined application)",
+  "lead_time": "",
+  "valid_for": "",
+  "requirements": [
+   "No open permits; owner certifies permits were issued for all alterations",
+   "Room inventory by floor, which the Zoning Officer compares with tax records, permits and variances",
+   "Smoke detector on each floor including the basement (and finished attic), within 10 feet of each bedroom, attached with screws",
+   "Carbon monoxide detector within 10 feet of each bedroom",
+   "ABC fire extinguisher (at least 2A:10B:C, no more than 10 lbs) in or within 10 feet of the kitchen (form still lists it)",
+   "Certification of Payment of Taxes signed by the Wood-Ridge Tax Collector",
+   "Payment by cash or check to the Borough of Wood-Ridge; credit cards not accepted"
+  ],
+  "fees": [
+   {
+    "label": "Single family",
+    "amount": "$75",
+    "quote": "Single Family $75",
+    "source_url": "https://www.woodridgenj.gov/_Content/pdf/forms/CO-CERTIFICATE-RESIDENTIAL.pdf",
+    "verified": true
+   },
+   {
+    "label": "Two family",
+    "amount": "$100",
+    "quote": "Two Family $100",
+    "source_url": "https://www.woodridgenj.gov/_Content/pdf/forms/CO-CERTIFICATE-RESIDENTIAL.pdf",
+    "verified": true
+   },
+   {
+    "label": "Owner-occupied transfer of one-family dwelling (Borough code)",
+    "amount": "$75",
+    "quote": "Owner-occupied transfer of one-family residential dwelling: $75.",
+    "source_url": "https://ecode360.com/28840411",
+    "verified": null
+   },
+   {
+    "label": "Owner-occupied transfer of two-family dwelling (Borough code)",
+    "amount": "$100",
+    "quote": "Owner-occupied transfer of two-family residential dwelling: $100.",
+    "source_url": "https://ecode360.com/28840411",
+    "verified": null
+   }
+  ],
+  "how_to_apply": "Fill out the Certificate of Continued Occupancy / Zoning Compliance - Residential application (seller, buyer, attorneys, realtor and a room inventory), attach the Certification of Payment of Taxes signed by the Tax Collector, and file it with cash or a check to the Borough of Wood-Ridge at the Construction Code Office, Municipal Building, 85 Humboldt Street, second floor. Call 201-939-5188 for inspections.",
+  "application_url": "https://www.woodridgenj.gov/_Content/pdf/forms/CO-CERTIFICATE-RESIDENTIAL.pdf",
+  "department_url": "https://www.woodridgenj.gov/Departments/construction-department",
+  "phone": "201-939-5188",
+  "email": "construction@woodridgenj.gov",
+  "contact_name": "Rich Pronti",
+  "contact_title": "Zoning Officer (Construction Code Official: Chris Cunningham)",
+  "evidence": [
+   {
+    "url": "https://www.woodridgenj.gov/_Content/pdf/forms/CO-CERTIFICATE-RESIDENTIAL.pdf",
+    "quote": "The seller is required by order of Borough Ordinance #530-88 and N.J.A.C. 570-4.19 to obtain",
+    "doc_date": "2026-10-04 (page fetched)",
+    "via": "pdf",
+    "verified": true
+   },
+   {
+    "url": "https://www.woodridgenj.gov/_Content/pdf/forms/CO-CERTIFICATE-RESIDENTIAL.pdf",
+    "quote": "these documents prior to the sale or rental of any residential unit structure.",
+    "doc_date": "2026-10-04 (page fetched)",
+    "via": "pdf",
+    "verified": true
+   },
+   {
+    "url": "https://www.woodridgenj.gov/_Content/pdf/forms/CO-CERTIFICATE-RESIDENTIAL.pdf",
+    "quote": "CERTIFICATE OF CONTINUED OCCUPANCY ~ RESIDENTIAL",
+    "doc_date": "2026-10-04 (page fetched)",
+    "via": "pdf",
+    "verified": true
+   },
+   {
+    "url": "https://www.woodridgenj.gov/_Content/pdf/forms/CO-CERTIFICATE-RESIDENTIAL.pdf",
+    "quote": "No open permits exist for the property",
+    "doc_date": "2026-10-04 (page fetched)",
+    "via": "pdf",
+    "verified": true
+   },
+   {
+    "url": "https://www.woodridgenj.gov/_Content/pdf/forms/CO-CERTIFICATE-RESIDENTIAL.pdf",
+    "quote": "And (2) the attached Certification of Payment of Taxes form filled out and signed by the Wood Ridge Tax Collector",
+    "doc_date": "2026-10-04 (page fetched)",
+    "via": "pdf",
+    "verified": true
+   },
+   {
+    "url": "https://ecode360.com/28840411",
+    "quote": "Owner-occupied transfer of one-family residential dwelling: $75.",
+    "doc_date": "2012-12-04 (Ord. No. 2012-15)",
+    "via": "page",
+    "verified": null
+   },
+   {
+    "url": "https://www.woodridgenj.gov/forms",
+    "quote": "Certificate of Continued Occupancy/Zoning Compliance - Residential",
+    "doc_date": "2026-10-04 (page fetched)",
+    "via": "page",
+    "verified": null
+   },
+   {
+    "url": "https://www.woodridgenj.gov/Departments/construction-department",
+    "quote": "Please call 201-939-5188 to schedule your inspection.",
+    "doc_date": "2026-10-04 (page fetched)",
+    "via": "page",
+    "verified": true
+   },
+   {
+    "url": "https://www.woodridgenj.gov/Departments/construction-department",
+    "quote": "construction@woodridgenj.gov",
+    "doc_date": "2026-10-04 (page fetched)",
+    "via": "page",
+    "verified": null
+   }
+  ],
+  "confidence": "high",
+  "notes": "The njwoodridge.org site now redirects to woodridgenj.gov and its pages load by script, so they were read through a text reader. Borough Code 530-88 was read through the ecode360 print view; it sets the CCO fees but its wording (530-88A) only clearly requires a CCO before reoccupancy of a vacated building 'other than an owner-occupied residential structure.' The Borough's residential form says the seller must get the certificate before any sale or rental, so it is treated as required. The form also covers the smoke/CO certificate (see fire certificate). No phone or email for the Zoning Officer specifically is posted; the Construction Office line and email are used."
+ },
+ "fire_cert": {
+  "requirements": [
+   "Smoke detector on each floor including the basement (and finished attic), within 10 feet of each bedroom on that floor",
+   "Carbon monoxide detector within 10 feet of each bedroom",
+   "Detectors attached to the ceiling or wall with screws; double-sided tape is not acceptable",
+   "ABC fire extinguisher at least 2A:10B:C, no more than 10 lbs, in or within 10 feet of the kitchen (form still lists it)"
+  ],
+  "authorities": [
+   {
+    "name": "Wood-Ridge Fire Prevention Bureau (smoke/CO inspected under the Borough's combined Certificate of Continued Occupancy - Residential)",
+    "type": "municipal_fire_bureau",
+    "area_served": "Entire borough",
+    "lead_time": "",
+    "fees": [],
+    "how_to_apply": "Use the Borough's Certificate of Continued Occupancy - Residential application; it is a combined zoning and smoke/CO/fire extinguisher application signed off by the Zoning Official and the Fire Prevention Official. No separate smoke certificate fee is published.",
+    "application_url": "https://www.woodridgenj.gov/_Content/pdf/forms/CO-CERTIFICATE-RESIDENTIAL.pdf",
+    "department_url": "https://www.woodridgenj.gov/Departments/fire-prevention-bureau",
+    "phone": "(201) 460-0282",
+    "email": "jkurz@njwoodridge.org",
+    "contact_name": "John J. Kurz",
+    "contact_title": "Fire Official",
+    "evidence": [
+     {
+      "url": "https://www.woodridgenj.gov/_Content/pdf/forms/CO-CERTIFICATE-RESIDENTIAL.pdf",
+      "quote": "Certificate of Zoning, Smoke Detector, Carbon Monoxide, Fire Extinguisher",
+      "doc_date": "2026-10-04 (page fetched)",
+      "via": "pdf",
+      "verified": true
+     },
+     {
+      "url": "https://www.woodridgenj.gov/_Content/pdf/forms/CO-CERTIFICATE-RESIDENTIAL.pdf",
+      "quote": "Wood Ridge Fire Prevention Official",
+      "doc_date": "2026-10-04 (page fetched)",
+      "via": "pdf",
+      "verified": true
+     },
+     {
+      "url": "https://www.woodridgenj.gov/Departments/fire-prevention-bureau",
+      "quote": "The Fire Prevention Bureau is headed by Fire Official John Kurz.",
+      "doc_date": "2026-10-04 (page fetched)",
+      "via": "page",
+      "verified": true
+     },
+     {
+      "url": "https://www.nj.gov/dca/dfs/pdf/fire%20directory_county%20summary/fire_code_enforcement_director.pdf",
+      "quote": "Fire Official John J Kurz",
+      "doc_date": "2/27/2026 (survey date)",
+      "via": "state_directory",
+      "verified": null
+     },
+     {
+      "url": "https://www.nj.gov/dca/dfs/pdf/fire%20directory_county%20summary/fire_code_enforcement_director.pdf",
+      "quote": "Wood-Ridge Boro Fire Prev",
+      "doc_date": "2/27/2026 (survey date)",
+      "via": "state_directory",
+      "verified": null
+     },
+     {
+      "url": "https://nj.gov/dca/dfs/pdf/ANNUAL%20REGISTRY/THIRD%20QUARTER%20LEA%20REGISTRY%202026.pdf",
+      "quote": "F Wood-Ridge Borough",
+      "doc_date": "2026-07",
+      "via": "pdf",
+      "verified": true
+     }
+    ],
+    "confidence": "medium"
+   }
+  ],
+  "notes": "Wood-Ridge folds the smoke/CO certificate into its residential CCO application ($75 single family, $100 two family). No separate fire fee or days-before-closing tiers are published. The form still requires a fire extinguisher, which the state dropped from the sale certificate in February 2025 (P.L.2025, c.19). Fire Official phone and email are from the NJ DCA fire directory (survey 2/27/2026); the email uses the old njwoodridge.org domain."
+ },
+ "other_items": [
+  {
+   "label": "Paid taxes",
+   "detail": "The CCO application must include a Certification of Payment of Taxes signed by the Wood-Ridge Tax Collector.",
+   "source_url": "https://www.woodridgenj.gov/_Content/pdf/forms/CO-CERTIFICATE-RESIDENTIAL.pdf"
+  },
+  {
+   "label": "Open permits",
+   "detail": "No open permits may exist for the property; the owner certifies that permits were issued for all alterations.",
+   "source_url": "https://www.woodridgenj.gov/_Content/pdf/forms/CO-CERTIFICATE-RESIDENTIAL.pdf"
+  }
+ ],
+ "open_questions": [
+  "Does Wood-Ridge still require the fire extinguisher at resale after P.L.2025, c.19?",
+  "How far ahead of closing should the CCO be requested, and is there a re-inspection or rush fee? None is published.",
+  "Is there a separate Fire Prevention Bureau fee for the smoke/CO part of the CCO?"
+ ],
+ "checked_at": "2026-10-04",
+ "verification": {
+  "fees": 4,
+  "fee_ok": 2,
+  "fee_bad": 0,
+  "fee_unchecked": 2,
+  "quotes": 15,
+  "q_ok": 10,
+  "q_bad": 0,
+  "q_unchecked": 5
+ }
+}

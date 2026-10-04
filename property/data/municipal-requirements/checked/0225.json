@@ -1,0 +1,183 @@
+{
+ "municipality_code": "0225",
+ "municipality": "Hasbrouck Heights Borough",
+ "county": "BERGEN",
+ "checked_at": "2026-10-04",
+ "resale_co": {
+  "status": "required",
+  "name": "Certificate of Occupancy for sale (certificate of continued occupancy / zoning certificate of compliance)",
+  "issued_by": "Borough of Hasbrouck Heights Building Department (Construction and Code Enforcement); inspections by the Fire Chief",
+  "lead_time": "Allow two weeks for processing",
+  "valid_for": "",
+  "requirements": [
+   "CO form from the Building Department, 320 Boulevard, with buyer and seller information including the buyer's phone number",
+   "Inspection done by the Heights Fire Chief (Rob Knobloch)",
+   "Zoning certificate of compliance on a change in ownership: the premises must conform to zoning (or a variance or lawful nonconforming use), meet Planning Board / Board of Adjustment conditions and the Property Maintenance Code",
+   "Owner-occupied single-family homes sold to an owner-occupant are reviewed only for zoning conformity"
+  ],
+  "fees": [
+   {
+    "label": "Certificate of Occupancy for sale, one family",
+    "amount": "$50.00",
+    "quote": "Fees are as follows: $50.00 for one family, $75.00 for two family.",
+    "source_url": "https://hasbrouck-heightsnj.org/pages/construction-code-enforcement",
+    "verified": true
+   },
+   {
+    "label": "Certificate of Occupancy for sale, two family",
+    "amount": "$75.00",
+    "quote": "Fees are as follows: $50.00 for one family, $75.00 for two family.",
+    "source_url": "https://hasbrouck-heightsnj.org/pages/construction-code-enforcement",
+    "verified": true
+   },
+   {
+    "label": "Certificate of continued occupancy, single-family dwelling (Borough Code 133-12)",
+    "amount": "$50",
+    "quote": "For a certificate of continued occupancy for a single-family dwelling, the sum of $50.",
+    "source_url": "https://ecode360.com/10374053",
+    "verified": null
+   },
+   {
+    "label": "Certificate of continued occupancy, two-family dwelling (Borough Code 133-12)",
+    "amount": "$75",
+    "quote": "For a certificate of continued occupancy for a two-family dwelling, the sum of $75.",
+    "source_url": "https://ecode360.com/10374053",
+    "verified": null
+   }
+  ],
+  "how_to_apply": "Get the residential CO form at the Building Department, 320 Boulevard, Hasbrouck Heights (Monday to Friday 9:00 a.m. to 4:30 p.m.; summer hours 8:00 a.m. to 3:30 p.m.). Include buyer and seller information and the buyer's phone number, pay the fee, and allow two weeks. The Fire Chief does the inspection.",
+  "application_url": "",
+  "department_url": "https://hasbrouck-heightsnj.org/pages/construction-code-enforcement",
+  "phone": "201-288-2143",
+  "email": "",
+  "contact_name": "Chris Cunningham",
+  "contact_title": "Construction Official and Zoning Officer",
+  "evidence": [
+   {
+    "url": "https://hasbrouck-heightsnj.org/pages/construction-code-enforcement",
+    "quote": "Yes, we require a CO for the sale of a residential home as well as the sale of a commercial property.",
+    "doc_date": "2026-10-04 (page fetched)",
+    "via": "page",
+    "verified": true
+   },
+   {
+    "url": "https://hasbrouck-heightsnj.org/pages/construction-code-enforcement",
+    "quote": "The CO form for a residential home can be obtained at the Building Dept, 320 Boulevard.",
+    "doc_date": "2026-10-04 (page fetched)",
+    "via": "page",
+    "verified": true
+   },
+   {
+    "url": "https://hasbrouck-heightsnj.org/pages/construction-code-enforcement",
+    "quote": "Allow two weeks for processing. Rob Knobloch, Heights Fire Chief, does the inspections.",
+    "doc_date": "2026-10-04 (page fetched)",
+    "via": "page",
+    "verified": true
+   },
+   {
+    "url": "https://hasbrouck-heightsnj.org/pages/construction-code-enforcement",
+    "quote": "Chris Cunningham, Construction Official",
+    "doc_date": "2026-10-04 (page fetched)",
+    "via": "page",
+    "verified": true
+   },
+   {
+    "url": "https://ecode360.com/10376737",
+    "quote": "a zoning certificate of compliance shall be required for the continued occupancy of any premises or part thereof: upon every change of use from one classification under the Zoning Chapter to another classification; upon any change in occupancy; or upon any change in ownership of the subject premises.",
+    "doc_date": "2026-10-04 (page fetched)",
+    "via": "page",
+    "verified": null
+   }
+  ],
+  "confidence": "high",
+  "notes": "The Building Department FAQ says a CO is required for the sale of a residential home, $50.00 one family and $75.00 two family, with inspections by Fire Chief Rob Knobloch (who is also the Fire Official). The Borough Code matches: Section 133-12A(11) sets certificate of continued occupancy fees of $50 (single-family) and $75 (two-family), and Section 275-39 requires a zoning certificate of compliance on any change in ownership, with the same $50 / $75 fees listed in Section 133-30C. It appears to be one certificate and one fee, but confirm that the zoning certificate and the CO are not billed separately. Ordinance text was read through a text reader of ecode360. Landlord registration (Chapter 212) is a rental program, not a resale requirement."
+ },
+ "fire_cert": {
+  "requirements": [
+   "Smoke alarms on each level and outside each sleeping area, and carbon monoxide alarms near sleeping areas, as required by N.J.A.C. 5:70-2.3 (no Borough checklist found online)",
+   "The Borough's sale CO inspection is done by the Fire Chief / Fire Official"
+  ],
+  "authorities": [
+   {
+    "name": "Hasbrouck Heights Fire Prevention Bureau (Fire Department)",
+    "type": "municipal_fire_bureau",
+    "area_served": "Entire borough",
+    "lead_time": "Allow two weeks for the sale CO, which the Fire Chief inspects",
+    "fees": [],
+    "how_to_apply": "No separate smoke/CO certificate application or fee was found online. The Building Department's sale CO is inspected by the Fire Chief; call the Fire Prevention Bureau (201-288-4110) to confirm whether the smoke/CO certificate is issued with the CO or needs its own application.",
+    "application_url": "",
+    "department_url": "https://hasbrouck-heightsnj.org/pages/fire-prevention",
+    "phone": "201-288-4110",
+    "email": "rknobloch@hasbrouck-heightsnj.org",
+    "contact_name": "Robert Knobloch",
+    "contact_title": "Fire Official (secretary: Nancy Halloran)",
+    "evidence": [
+     {
+      "url": "https://hasbrouck-heightsnj.org/pages/fire-prevention",
+      "quote": "Fire Prevention Office Hours:",
+      "doc_date": "2026-10-04 (page fetched)",
+      "via": "page",
+      "verified": true
+     },
+     {
+      "url": "https://ecode360.com/10374368",
+      "quote": "The local enforcing agency shall be the Fire Prevention Bureau of the Fire Department of the Borough of Hasbrouck Heights.",
+      "doc_date": "2026-10-04 (page fetched)",
+      "via": "page",
+      "verified": null
+     },
+     {
+      "url": "https://hasbrouck-heightsnj.org/pages/construction-code-enforcement",
+      "quote": "Allow two weeks for processing. Rob Knobloch, Heights Fire Chief, does the inspections.",
+      "doc_date": "2026-10-04 (page fetched)",
+      "via": "page",
+      "verified": true
+     },
+     {
+      "url": "https://nj.gov/dca/dfs/pdf/ANNUAL%20REGISTRY/THIRD%20QUARTER%20LEA%20REGISTRY%202026.pdf",
+      "quote": "F Hasbrouck Heights Borough",
+      "doc_date": "2026-07",
+      "via": "pdf",
+      "verified": true
+     },
+     {
+      "url": "https://www.nj.gov/dca/dfs/pdf/fire%20directory_county%20summary/fire_code_enforcement_director.pdf",
+      "quote": "LEAID: 0225-001 Enf Auth. Fire Dept Fire Official Robert Knobloch Phone (201) 288-4110 Addr: 210 Boulevard Hasbrouck Hgts NJ 07604 ... Email rknobloch@hasbrouck-heightsnj.org",
+      "doc_date": "2026 (survey date 9/26/2025)",
+      "via": "state_directory",
+      "verified": null
+     }
+    ],
+    "confidence": "medium"
+   }
+  ],
+  "notes": "The Fire Prevention page lists the Bureau phone (201-288-4110), Fire Official Robert Knobloch and secretary Nancy Halloran, with office hours Monday through Friday 9 a.m. to noon and 1 p.m. to 4:30 p.m. No separate smoke/CO certificate fee was found in the Borough Code (Chapter 139 adopts state permit fees; Chapter 133-15 covers other fire fees). Because the Fire Chief inspects for the sale CO, the smoke/CO check is likely part of that inspection, but this is not stated in writing. The email comes from the state fire directory."
+ },
+ "other_items": [
+  {
+   "label": "Zoning certificate of compliance",
+   "detail": "Borough Code Section 275-39 requires a zoning certificate of compliance on any change in ownership; fees in Section 133-30C are $50 (single-family) and $75 (two-family).",
+   "source_url": "https://ecode360.com/10376737"
+  },
+  {
+   "label": "Open permit search",
+   "detail": "To get a list of open or closed permits on a property, submit an OPRA request to the Borough Clerk; the response normally takes about 7 business days.",
+   "source_url": "https://hasbrouck-heightsnj.org/pages/construction-code-enforcement"
+  }
+ ],
+ "open_questions": [
+  "Is the smoke/CO certificate issued as part of the Building Department sale CO, or is there a separate Fire Prevention application and fee?",
+  "Are the zoning certificate of compliance and the certificate of continued occupancy one combined $50 / $75 fee or two separate fees?",
+  "How long is the CO valid, and is there a reinspection fee?"
+ ],
+ "verification": {
+  "fees": 4,
+  "fee_ok": 2,
+  "fee_bad": 0,
+  "fee_unchecked": 2,
+  "quotes": 10,
+  "q_ok": 7,
+  "q_bad": 0,
+  "q_unchecked": 3
+ }
+}

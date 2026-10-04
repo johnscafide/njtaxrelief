@@ -1,0 +1,262 @@
+{
+ "municipality_code": "1426",
+ "municipality": "Mount Arlington Borough",
+ "county": "MORRIS",
+ "resale_co": {
+  "status": "required",
+  "name": "Certificate of Habitability (COH)",
+  "issued_by": "Borough of Mount Arlington Zoning Officer",
+  "lead_time": "Apply at least 30 days before the transfer of title. Applications within 7 business days of closing pay an extra $100 expediting fee.",
+  "valid_for": "",
+  "requirements": [
+   "Compliance with Borough zoning, the well certification ordinance and the Property Maintenance chapter",
+   "Defects affecting habitability must be corrected before the transfer of title",
+   "No open permits; violations need permits before a re-inspection",
+   "Application lists bedrooms, bathrooms, kitchens, outbuildings, sewer/water/private well and finished or unfinished basement",
+   "Well certification for private wells used for non-potable water or irrigation",
+   "Owner certifies no improvements were installed without approved permits",
+   "Payment by cash or check only, no credit cards"
+  ],
+  "fees": [
+   {
+    "label": "Certificate of Habitability",
+    "amount": "$60.00",
+    "quote": "Certificate of Habitability – $60.00 unless within 7 business days of closing, then an additional $100 expedition fee shall also be required.",
+    "source_url": "https://mountarlingtonnj.org/departments/construction/",
+    "verified": true
+   },
+   {
+    "label": "Expediting fee, application within 7 business days of closing (added to the $60)",
+    "amount": "$100",
+    "quote": "Certificate of Habitability – $60.00 unless within 7 business days of closing, then an additional $100 expedition fee shall also be required.",
+    "source_url": "https://mountarlingtonnj.org/departments/construction/",
+    "verified": true
+   }
+  ],
+  "how_to_apply": "Fill out the Certificate of Habitability Application (mark Resale and give the closing date) and submit it with the fee (cash or check) to the Zoning Department, 419 Howard Blvd., at least 30 days before closing. Call 973-398-6832 ext. 114 or email kappleby@mtarlingtonboro.com. The Zoning Officer sets an inspection appointment.",
+  "application_url": "https://mountarlingtonnj.org/wp-content/uploads/2022/09/COH.pdf",
+  "department_url": "https://mountarlingtonnj.org/departments/construction/",
+  "phone": "973-398-6832 ext. 114",
+  "email": "kappleby@mtarlingtonboro.com",
+  "contact_name": "Kathy Appleby",
+  "contact_title": "Zoning Officer, Technical Assistant, LUB Secretary",
+  "evidence": [
+   {
+    "url": "https://ecode360.com/35500833",
+    "quote": "A certificate of habitability shall be required to be obtained by the owner for any residential use prior to the rental, lease, or transfer of title involving a new occupant, tenant or owner of said property.",
+    "doc_date": "2010-12-14 (Ord. No. 13-10)",
+    "via": "page",
+    "verified": null
+   },
+   {
+    "url": "https://ecode360.com/35500833",
+    "quote": "The owner shall submit the application no less than 30 days prior to the rental, lease, or transfer of said property title.",
+    "doc_date": "2026-10-04 (page fetched)",
+    "via": "page",
+    "verified": null
+   },
+   {
+    "url": "https://ecode360.com/35500833",
+    "quote": "The Zoning Officer shall not issue a certificate of habitability for a property which has an open permit.",
+    "doc_date": "2026-10-04 (page fetched)",
+    "via": "page",
+    "verified": null
+   },
+   {
+    "url": "https://mountarlingtonnj.org/departments/construction/",
+    "quote": "Certificate of Habitability – $60.00 unless within 7 business days of closing, then an additional $100 expedition fee shall also be required.",
+    "doc_date": "2026-10-04 (page fetched)",
+    "via": "page",
+    "verified": true
+   },
+   {
+    "url": "https://mountarlingtonnj.org/wp-content/uploads/2022/09/COH.pdf",
+    "quote": "CERTIFICATE OF HABITABILITY APPLICATION",
+    "doc_date": "2026-10-04 (page fetched)",
+    "via": "pdf",
+    "verified": true
+   },
+   {
+    "url": "https://mountarlingtonnj.org/wp-content/uploads/2022/09/COH.pdf",
+    "quote": "Description of Dwelling: Rental:_______ Resale: ______ Closing/Rental Date:______________",
+    "doc_date": "2026-10-04 (page fetched)",
+    "via": "pdf",
+    "verified": true
+   },
+   {
+    "url": "https://mountarlingtonnj.org/departments/construction/",
+    "quote": "kappleby@mtarlingtonboro.com",
+    "doc_date": "2026-10-04 (page fetched)",
+    "via": "page",
+    "verified": true
+   },
+   {
+    "url": "https://mountarlingtonnj.org/departments/construction/",
+    "quote": "*All payments must be cash or check, no credit card.*",
+    "doc_date": "2026-10-04 (page fetched)",
+    "via": "page",
+    "verified": true
+   }
+  ],
+  "confidence": "high",
+  "notes": "Borough Code Chapter 134 (Certificate of Habitability) was read through the ecode360 print view. The COH application form names Thomas Mahoney as Zoning Officer, but the current Construction Department page lists Kathy Appleby as Zoning Officer; the page is used for the contact. If violations are not fixed before the transfer, the code makes the buyer responsible to correct them. Construction Official: Rob Rosendale, 973-398-6832 x122, rrosendale@mtarlingtonboro.com."
+ },
+ "fire_cert": {
+  "requirements": [
+   "Smoke detector on each level, including basements (not attics or crawl spaces)",
+   "Smoke detector and carbon monoxide alarm outside each separate sleeping area, within 10 feet of bedrooms",
+   "All smoke detectors and CO alarms in working order; battery units allowed and interconnection not required (AC or interconnected alarms in homes built after January 1977 must be kept working)",
+   "Fire extinguisher of the correct size, mounted, within 10 feet of the kitchen (form still lists it)",
+   "Owner or authorized representative does the inspection and signs a notarized certification in lieu of inspection"
+  ],
+  "authorities": [
+   {
+    "name": "Borough of Mount Arlington Construction Department (Certification in Lieu of Inspection for smoke/CO)",
+    "type": "municipal_fire_bureau",
+    "area_served": "Entire borough",
+    "lead_time": "Fee depends on business days between receipt and closing: more than 10 business days for the lowest fee. If the change of occupant does not happen within 6 months, a new application is needed.",
+    "fees": [
+     {
+      "label": "Smoke/CO certification, received more than 10 business days before closing",
+      "amount": "$35.00",
+      "quote": "the fee is $35.00; if received fewer than ten (10) but more than four (4) business days before closing,",
+      "source_url": "https://mountarlingtonnj.org/wp-content/uploads/2022/09/SMOKE-CERT.pdf",
+      "verified": true
+     },
+     {
+      "label": "Received fewer than 10 but more than 4 business days before closing",
+      "amount": "$70.00",
+      "quote": "$70.00; and if four (4) business days or fewer; $140.00.",
+      "source_url": "https://mountarlingtonnj.org/wp-content/uploads/2022/09/SMOKE-CERT.pdf",
+      "verified": true
+     },
+     {
+      "label": "Received 4 business days or fewer before closing",
+      "amount": "$140.00",
+      "quote": "$70.00; and if four (4) business days or fewer; $140.00.",
+      "source_url": "https://mountarlingtonnj.org/wp-content/uploads/2022/09/SMOKE-CERT.pdf",
+      "verified": true
+     }
+    ],
+    "how_to_apply": "Complete the Application and Certification in Lieu of Inspection (owner or authorized representative checks every box after inspecting the home), have it notarized, and submit it with a check or money order payable to the Borough of Mount Arlington to 419 Howard Blvd (973-398-6832 ext. 114, kappleby@mtarlingtonboro.com). The certificate is not transferable and the fee is not refundable.",
+    "application_url": "https://mountarlingtonnj.org/wp-content/uploads/2022/09/SMOKE-CERT.pdf",
+    "department_url": "https://mountarlingtonnj.org/departments/construction/",
+    "phone": "973-398-6832 ext. 114",
+    "email": "kappleby@mtarlingtonboro.com",
+    "contact_name": "Kathy Appleby",
+    "contact_title": "Zoning Officer / Technical Assistant, Construction Department",
+    "evidence": [
+     {
+      "url": "https://mountarlingtonnj.org/wp-content/uploads/2022/09/SMOKE-CERT.pdf",
+      "quote": "Application and Certification in Lieu of Inspection for",
+      "doc_date": "2026-10-04 (page fetched)",
+      "via": "pdf",
+      "verified": true
+     },
+     {
+      "url": "https://mountarlingtonnj.org/wp-content/uploads/2022/09/SMOKE-CERT.pdf",
+      "quote": "An inspection shall be conducted by the owner or an authorized representative of the owner;",
+      "doc_date": "2026-10-04 (page fetched)",
+      "via": "pdf",
+      "verified": true
+     },
+     {
+      "url": "https://mountarlingtonnj.org/wp-content/uploads/2022/09/SMOKE-CERT.pdf",
+      "quote": "****THIS FORM MUST BE NOTORIZED****",
+      "doc_date": "2026-10-04 (page fetched)",
+      "via": "pdf",
+      "verified": true
+     },
+     {
+      "url": "https://mountarlingtonnj.org/wp-content/uploads/2022/09/SMOKE-CERT.pdf",
+      "quote": "refundable. If change of occupant does not occur within 6 months, a new application shall be required.",
+      "doc_date": "2026-10-04 (page fetched)",
+      "via": "pdf",
+      "verified": true
+     },
+     {
+      "url": "https://mountarlingtonnj.org/departments/construction/",
+      "quote": "Compliance. – The fees are $35 ; ten (10) business days or more from closing date; fewer than ten (10) business days but more than four (4) business days before closing, $70.00 If fewer than four (4) business days or fewer; $140.",
+      "doc_date": "2026-10-04 (page fetched)",
+      "via": "page",
+      "verified": true
+     },
+     {
+      "url": "https://ecode360.com/35500166",
+      "quote": "Pursuant to N.J.S.A. 52:27D-198.1 et seq., a fee of $35 shall be paid by the owner prior to each inspection.",
+      "doc_date": "2026-10-04 (page fetched)",
+      "via": "page",
+      "verified": null
+     }
+    ],
+    "confidence": "high"
+   },
+   {
+    "name": "NJ Division of Fire Safety, Bureau of Fire Code Enforcement (State LEA for Mount Arlington)",
+    "type": "state_dca",
+    "area_served": "Entire borough (State is the fire code enforcing agency)",
+    "lead_time": "",
+    "fees": [],
+    "how_to_apply": "The state fire directory lists the NJ Division of Fire Safety as the smoke detector compliance office for Mount Arlington. In practice the Borough runs its own notarized self-certification; contact the Borough first.",
+    "application_url": "",
+    "department_url": "https://www.nj.gov/dca/dfs/offices/bfce.shtml",
+    "phone": "(609) 633-6132",
+    "email": "",
+    "contact_name": "Louis Kilmer",
+    "contact_title": "Fire Official, NJ Division of Fire Safety",
+    "evidence": [
+     {
+      "url": "https://nj.gov/dca/dfs/pdf/ANNUAL%20REGISTRY/THIRD%20QUARTER%20LEA%20REGISTRY%202026.pdf",
+      "quote": "S Mount Arlington Borough",
+      "doc_date": "2026-07",
+      "via": "pdf",
+      "verified": true
+     },
+     {
+      "url": "https://www.nj.gov/dca/dfs/pdf/fire%20directory_county%20summary/fire_code_enforcement_director.pdf",
+      "quote": "Mt Arlington Boro SMOKE DETECTOR COMPLIANCE Name: NJ Division Fire Safety",
+      "doc_date": "6/16/2025 (survey date)",
+      "via": "state_directory",
+      "verified": null
+     },
+     {
+      "url": "https://www.nj.gov/dca/dfs/pdf/fire%20directory_county%20summary/fire_code_enforcement_director.pdf",
+      "quote": "Fire Official Louis Kilmer Phone (609) 633-6132",
+      "doc_date": "6/16/2025 (survey date)",
+      "via": "state_directory",
+      "verified": null
+     }
+    ],
+    "confidence": "low"
+   }
+  ],
+  "notes": "Mount Arlington is State-enforced (S) in the July 2026 LEA registry, and the DCA directory lists the NJ Division of Fire Safety for smoke detector compliance. The Borough itself accepts a notarized owner Certification in Lieu of Inspection with fees of $35 / $70 / $140 (Borough page, form and Code 91-10). The form notes it is completely unrelated to the Certificate of Habitability inspection; the Zoning Officer does not test detectors. The form still requires a fire extinguisher, which the state dropped from the sale certificate in February 2025 (P.L.2025, c.19). The page wording ('ten (10) business days or more') and the form wording ('more than ten (10) business days') differ slightly at exactly 10 days."
+ },
+ "other_items": [
+  {
+   "label": "Private well certification",
+   "detail": "The Certificate of Habitability checks the Borough's well certification ordinance; the application asks for a well certification for private wells used for non-potable water or irrigation.",
+   "source_url": "https://mountarlingtonnj.org/wp-content/uploads/2022/09/COH.pdf"
+  },
+  {
+   "label": "Open permits",
+   "detail": "No Certificate of Habitability is issued while the property has an open permit.",
+   "source_url": "https://ecode360.com/35500833"
+  }
+ ],
+ "open_questions": [
+  "Does the Borough still require the fire extinguisher on the smoke/CO self-certification after P.L.2025, c.19?",
+  "Does the state Division of Fire Safety also need to issue anything, or is the Borough's notarized self-certification the only smoke/CO document needed?"
+ ],
+ "checked_at": "2026-10-04",
+ "verification": {
+  "fees": 5,
+  "fee_ok": 5,
+  "fee_bad": 0,
+  "fee_unchecked": 0,
+  "quotes": 17,
+  "q_ok": 11,
+  "q_bad": 0,
+  "q_unchecked": 6
+ }
+}

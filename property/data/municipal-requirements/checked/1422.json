@@ -1,0 +1,210 @@
+{
+ "municipality_code": "1422",
+ "municipality": "Morris Township",
+ "county": "MORRIS",
+ "resale_co": {
+  "status": "required",
+  "name": "Certificate of Habitability (CH)",
+  "issued_by": "Township of Morris Building Department (Uniform Construction Code Enforcing Agency)",
+  "lead_time": "Payment must be made at the office before the CH inspection is done.",
+  "valid_for": "90 days from issuance; may be extended 30 days by the construction code official for good cause.",
+  "requirements": [
+   "No open permits; a CH will not be issued if permitted work has not been inspected and closed (condo association permits need a buyer's attorney letter)",
+   "Smoke and carbon monoxide alarm compliance under N.J.A.C. 5:70-2.3 and 5:70-4.19 is checked as part of the CH inspection",
+   "Battery smoke alarms must be 10-year sealed; AC-powered alarms must work and be no more than 10 years old; required low-voltage alarm systems need technician certification and monitoring account details",
+   "Water heaters, heating and AC equipment must have been permitted and inspected",
+   "GFCI outlets working, handrails in place, no extension cords as permanent wiring, stairs in good shape, panel covers secure, no exposed wiring, no broken glass",
+   "Holes in attached-garage sheetrock sealed or repaired",
+   "No garbage disposal in the kitchen (Township ordinance 37-3)",
+   "Pool and fence must meet code with a latching gate",
+   "House must match tax records; house numbers visible from the street",
+   "Homes with a well or septic system need a report for each at the CH inspection"
+  ],
+  "fees": [
+   {
+    "label": "Certificate of Habitability (CH) inspection, 1 family or 2+ family",
+    "amount": "$130",
+    "quote": "INSPECTION FEE: $130",
+    "source_url": "https://www.morristwp.com/DocumentCenter/View/10843/CH-APPLICATION",
+    "verified": true
+   },
+   {
+    "label": "Certificate of continued occupancy, municipal ordinance fee (Township code 216-3A(7))",
+    "amount": "$130",
+    "quote": "Certificate of continued occupancy: $130.",
+    "source_url": "https://ecode360.com/28446518",
+    "verified": null
+   }
+  ],
+  "how_to_apply": "Fill out the Township's Application Form for CH Inspection (block, lot, owner, responsible person, closing date, 1 family or 2+ family) and pay the $130 inspection fee at the Building Department, 50 Woodland Avenue (check payable to Township of Morris, cash, or credit card in office only). Payment is required before the inspection. Submit a copy of the MLS listing if possible. Phone 973-326-7445 / 973-326-7446.",
+  "application_url": "https://www.morristwp.com/DocumentCenter/View/10843/CH-APPLICATION",
+  "department_url": "https://www.morristwp.com/121/Building",
+  "phone": "973-326-7445",
+  "email": "inspections@morristwp.com",
+  "contact_name": "Ron Auth",
+  "contact_title": "Construction Code Official (rauth@Morristwp.com)",
+  "evidence": [
+   {
+    "url": "https://ecode360.com/28454086",
+    "quote": "It shall hereafter be unlawful for a property owner to transfer title and/or possession to any residential real property in the Township of Morris without having first obtained a certificate of habitability prior to the sale, lease or occupancy of such premises.",
+    "doc_date": "2022-11-09 (Ord. No. 22-22)",
+    "via": "page",
+    "verified": null
+   },
+   {
+    "url": "https://ecode360.com/28454086",
+    "quote": "A certificate of habitability shall be valid for 90 days from date of issuance.",
+    "doc_date": "2022-11-09",
+    "via": "page",
+    "verified": null
+   },
+   {
+    "url": "https://www.morristwp.com/DocumentCenter/View/10843/CH-APPLICATION",
+    "quote": "PAYMENT FOR THIS INSPECTION IS REQUIRED AT THE OFFICE",
+    "doc_date": "2026-10-04 (page fetched)",
+    "via": "pdf",
+    "verified": true
+   },
+   {
+    "url": "https://www.morristwp.com/DocumentCenter/View/10843/CH-APPLICATION",
+    "quote": "PHONE: 973-326-7445 / 973-326-7446",
+    "doc_date": "2026-10-04 (page fetched)",
+    "via": "pdf",
+    "verified": true
+   },
+   {
+    "url": "https://www.morristwp.com/DocumentCenter/View/9647/REQUIREMENTS-FOR-CH-INSPECTION-11822",
+    "quote": "A CH Certificate will not be issued if the property has open permits and inspections for work/improvements performed on the property.",
+    "doc_date": "2026-07-10 (posted)",
+    "via": "pdf",
+    "verified": true
+   },
+   {
+    "url": "https://www.morristwp.com/121/Building",
+    "quote": "If you are planning to make repairs or sell your home, please click this link(pg. 4) to view the following items that require a permit under the uniform construction code.",
+    "doc_date": "2026-10-04 (page fetched)",
+    "via": "page",
+    "verified": true
+   },
+   {
+    "url": "https://www.morristwp.com/121/Building",
+    "quote": "Construction Code Official",
+    "doc_date": "2026-10-04 (page fetched)",
+    "via": "page",
+    "verified": true
+   }
+  ],
+  "confidence": "high",
+  "notes": "Township code Chapter 398, Article I (amended Nov. 9, 2022 by Ord. No. 22-22, read through the ecode360 print view) requires a Certificate of Habitability before any residential sale, lease or occupancy; the CH must show compliance with the Uniform Fire Safety Act. The Building Department page also lists Ronald Mosca as Fire Subcode Official and Acting Construction Code Official. Cancellations go to inspections@morristwp.com. Lead-based paint inspections in Section 216-7 apply to rentals."
+ },
+ "fire_cert": {
+  "requirements": [
+   "Smoke alarms on each level and outside each separate sleeping area (2 alarms if sleeping areas are on opposite sides of the same level)",
+   "Battery smoke alarms must be 10-year sealed (UL 217); AC-powered alarms from construction cannot be replaced with battery units and must be replaced if over 10 years old",
+   "Required low-voltage alarm systems: technician certification plus monitoring company contact, account number and password for the inspector",
+   "Carbon monoxide alarm in the immediate vicinity of the sleeping areas in homes with a fuel-burning device or attached garage (battery, hardwired or plug-in, UL 2034)"
+  ],
+  "authorities": [
+   {
+    "name": "Township of Morris Building Department (smoke/CO compliance checked in the Certificate of Habitability inspection); Morris Township Fire Department is the fire code LEA",
+    "type": "municipal_fire_bureau",
+    "area_served": "Entire township",
+    "lead_time": "Done with the CH inspection; pay before the inspection.",
+    "fees": [
+     {
+      "label": "Certificate of Habitability (CH) inspection, 1 family or 2+ family",
+      "amount": "$130",
+      "quote": "INSPECTION FEE: $130",
+      "source_url": "https://www.morristwp.com/DocumentCenter/View/10843/CH-APPLICATION",
+      "verified": true
+     }
+    ],
+    "how_to_apply": "Apply for the Certificate of Habitability at the Building Department; the CH inspection covers the smoke alarm and CO alarm certificate required by N.J.A.C. 5:70-2.3. The Fire Department's free smoke detector program is not available for sales.",
+    "application_url": "https://www.morristwp.com/DocumentCenter/View/10843/CH-APPLICATION",
+    "department_url": "https://www.morristwp.com/121/Building",
+    "phone": "973-326-7445",
+    "email": "inspections@morristwp.com",
+    "contact_name": "Michael B Nunn",
+    "contact_title": "Fire Official (NJ DCA fire directory); Fire Subcode Official on the Building page is Ronald Mosca",
+    "evidence": [
+     {
+      "url": "https://www.morristwp.com/DocumentCenter/View/9647/REQUIREMENTS-FOR-CH-INSPECTION-11822",
+      "quote": "Before any one and two family or attached single family structure is sold, leased or otherwise made subject to a change of occupancy for residential purposed, the owner shall obtain a certificate of smoke alarm, carbon monoxide alarm, evidencing proper compliance with N.J.A.C. 5:704.19",
+      "doc_date": "2026-07-10",
+      "via": "pdf",
+      "verified": true
+     },
+     {
+      "url": "https://www.morristwp.com/DocumentCenter/View/9647/REQUIREMENTS-FOR-CH-INSPECTION-11822",
+      "quote": "BATTERY POWERED SMOKE ALARMS ARE WORKING PROPERLY, 10 YEAR SEALED BATTERY",
+      "doc_date": "2026-07-10",
+      "via": "pdf",
+      "verified": true
+     },
+     {
+      "url": "https://www.morristwp.com/145/Smoke-Detectors",
+      "quote": "Please Note: This program is not available for change of occupancy or for the sale of homes.",
+      "doc_date": "2026-10-04 (page fetched)",
+      "via": "page",
+      "verified": true
+     },
+     {
+      "url": "https://ecode360.com/28454086",
+      "quote": "including but not limited to compliance with the Uniform Fire Safety Act (N.J.S.A. 52:27D-192).",
+      "doc_date": "2022-11-09",
+      "via": "page",
+      "verified": null
+     },
+     {
+      "url": "https://nj.gov/dca/dfs/pdf/ANNUAL%20REGISTRY/THIRD%20QUARTER%20LEA%20REGISTRY%202026.pdf",
+      "quote": "F Morris Township",
+      "doc_date": "2026-07",
+      "via": "pdf",
+      "verified": true
+     },
+     {
+      "url": "https://www.nj.gov/dca/dfs/pdf/fire%20directory_county%20summary/fire_code_enforcement_director.pdf",
+      "quote": "LEAID: 1422-001 Enf Auth. Fire Dept Fire Official Michael B Nunn Phone (973) 326-7464 Addr: PO Box 7603 Convent Station NJ 07961-7603 ... Email mnunn@morristwp.com",
+      "doc_date": "2026-05-26 (survey date)",
+      "via": "state_directory",
+      "verified": null
+     }
+    ],
+    "confidence": "medium"
+   }
+  ],
+  "notes": "The Township's CH requirements sheet quotes N.J.A.C. 5:70-2.3 and checks smoke and CO alarms as part of the CH inspection, so the CH appears to serve as the smoke/CO certificate for sales; no separate fire bureau application or fee for sales is posted. The Township's CH documents do not mention a portable fire extinguisher (consistent with P.L.2025, c.19). The NJ DCA directory lists Fire Official Michael B Nunn, (973) 326-7464, mnunn@morristwp.com, and a smoke detector compliance phone of (973) 326-7446. Confirm with the Building Department that no separate Fire Prevention certificate is required."
+ },
+ "other_items": [
+  {
+   "label": "Well and septic reports",
+   "detail": "If the house has a well or septic system, a report for each is required at the time of the CH inspection.",
+   "source_url": "https://www.morristwp.com/DocumentCenter/View/9647/REQUIREMENTS-FOR-CH-INSPECTION-11822"
+  },
+  {
+   "label": "Open permits",
+   "detail": "A CH will not be issued with open permits; unpermitted work (water heater, furnace, AC, finished basement, decks, generators, oil tank removal, etc.) needs permits before the CH.",
+   "source_url": "https://www.morristwp.com/DocumentCenter/View/9647/REQUIREMENTS-FOR-CH-INSPECTION-11822"
+  },
+  {
+   "label": "Garbage disposal",
+   "detail": "Garbage disposals are not allowed under Morris Township Ordinance 37-3; checked at the CH inspection.",
+   "source_url": "https://www.morristwp.com/DocumentCenter/View/9647/REQUIREMENTS-FOR-CH-INSPECTION-11822"
+  }
+ ],
+ "open_questions": [
+  "Is a separate Fire Prevention smoke/CO certificate ever required for a sale, or does the CH inspection cover it?",
+  "How far ahead should the CH inspection be booked, and are there short-notice or reinspection fees?"
+ ],
+ "checked_at": "2026-10-04",
+ "verification": {
+  "fees": 3,
+  "fee_ok": 2,
+  "fee_bad": 0,
+  "fee_unchecked": 1,
+  "quotes": 13,
+  "q_ok": 9,
+  "q_bad": 0,
+  "q_unchecked": 4
+ }
+}

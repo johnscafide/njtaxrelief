@@ -1,0 +1,217 @@
+{
+ "municipality_code": "0236",
+ "municipality": "Montvale Borough",
+ "county": "BERGEN",
+ "resale_co": {
+  "status": "required",
+  "name": "New Tenant / Resale Certificate",
+  "issued_by": "Borough of Montvale Building Department - Code Enforcement (Construction Official)",
+  "lead_time": "Inspections are Tuesday and Thursday, 9 am to 12. No published processing time; apply early to avoid closing delays.",
+  "valid_for": "",
+  "requirements": [
+   "All construction, electrical and plumbing permits inspected and properly closed",
+   "Outstanding Zoning or Property Maintenance violations resolved",
+   "Sump pump must not discharge into the sanitary sewer; it must drain outdoors without impacting neighbors",
+   "A current certified property survey showing current uses and structures (one/two family homes)",
+   "Use of the home (single-family, two-family, etc.) is verified",
+   "Inspection items: sealed flue connections, relief valves properly piped, plumbing fixtures working, outlets/switches/panels covered, pools properly fenced, rails on interior stairs of more than two risers, exterior rails secured",
+   "Real estate taxes must be current for the certificate to be valid",
+   "Separate Smoke Detector / Carbon Monoxide certificate from Fire Prevention"
+  ],
+  "fees": [
+   {
+    "label": "New Tenant / Resale Certificate inspection, residential property",
+    "amount": "$150.00",
+    "quote": "New Tenant / Resale Certificate inspection for Residential property: $150.00",
+    "source_url": "https://media-002-us.cdn.govstack.com/montvalenj-us/media/fo3hd2au/cco-application-oct-2022-1.pdf",
+    "verified": true
+   }
+  ],
+  "how_to_apply": "Fill out the New Tenant / Resale Certificate application (Building and Construction page) with a copy of the latest plot survey and pay $150.00 by cash or check payable to the Borough of Montvale at Borough Hall, 12 DePiero Drive. Questions: 201-391-5732.",
+  "application_url": "https://media-002-us.cdn.govstack.com/montvalenj-us/media/fo3hd2au/cco-application-oct-2022-1.pdf",
+  "department_url": "https://www.montvalenj.gov/departments/building-and-construction/",
+  "phone": "(201) 391-5732",
+  "email": "cgruber@montvalenj.gov",
+  "contact_name": "Christopher Gruber",
+  "contact_title": "Construction Officer / Zoning Officer / Facilities Manager",
+  "evidence": [
+   {
+    "url": "https://www.montvalenj.gov/departments/building-and-construction/",
+    "quote": "If you are selling or renting a house, condominium, or townhouse, New Jersey State Law requires the property owner to obtain:",
+    "doc_date": "2026-10-04 (page fetched)",
+    "via": "page",
+    "verified": true
+   },
+   {
+    "url": "https://www.montvalenj.gov/departments/building-and-construction/",
+    "quote": "A New Tenant/Resale Certificate",
+    "doc_date": "2026-10-04 (page fetched)",
+    "via": "page",
+    "verified": true
+   },
+   {
+    "url": "https://www.montvalenj.gov/departments/building-and-construction/",
+    "quote": "Ensure all construction, electrical, and plumbing permits have been inspected and properly closed.",
+    "doc_date": "2026-10-04 (page fetched)",
+    "via": "page",
+    "verified": true
+   },
+   {
+    "url": "https://www.montvalenj.gov/departments/building-and-construction/",
+    "quote": "A current property survey is required.",
+    "doc_date": "2026-10-04 (page fetched)",
+    "via": "page",
+    "verified": true
+   },
+   {
+    "url": "https://media-002-us.cdn.govstack.com/montvalenj-us/media/fo3hd2au/cco-application-oct-2022-1.pdf",
+    "quote": "The re-sale or rental of a home in the Borough of Montvale requires a New Tenant / Resale Certificate and a Smoke Detector/Carbon Monoxide Alarm inspection",
+    "doc_date": "October 2022 (file name)",
+    "via": "pdf",
+    "verified": true
+   },
+   {
+    "url": "https://media-002-us.cdn.govstack.com/montvalenj-us/media/fo3hd2au/cco-application-oct-2022-1.pdf",
+    "quote": "THIS DOCUMENT VALID ONLY IF ALL REAL ESTATE TAXES ARE CURRENT",
+    "doc_date": "October 2022 (file name)",
+    "via": "pdf",
+    "verified": true
+   },
+   {
+    "url": "https://media-002-us.cdn.govstack.com/montvalenj-us/media/fo3hd2au/cco-application-oct-2022-1.pdf",
+    "quote": "Inspection time is 9 am to 12 am Tuesday and Thursday",
+    "doc_date": "October 2022 (file name)",
+    "via": "pdf",
+    "verified": true
+   }
+  ],
+  "confidence": "high",
+  "notes": "The Borough's Building and Construction page and the New Tenant / Resale Certificate application (file named Oct 2022) both say a resale needs this certificate plus the smoke/CO certificate. The form says inspections are 9 am to \"12 am\" on Tuesday and Thursday, which presumably means noon. Commercial rates on the same form ($250 under 10,000 sq. ft., $500 over) do not apply to homes. The Borough code section for this certificate was not checked."
+ },
+ "fire_cert": {
+  "requirements": [
+   "Smoke alarm on each level including the basement, within 10 feet of each sleeping area entrance or inside each sleeping area, and in the main living area (living room or near the stairs to the upper level)",
+   "Two-family homes also need smoke alarms in common stairwells and hallways, outside each doorway, and at the front of the basement stairs",
+   "Smoke alarms replaced when they fail testing or are more than 10 years from manufacture",
+   "CO alarm on each level with bedrooms (ceiling or wall); not in kitchens, bathrooms, or near forced-air ducts or furnaces; 10-year sealed combination units are acceptable",
+   "Homes with a fire alarm control panel need a test report from an approved company sent to the Fire Prevention Bureau"
+  ],
+  "authorities": [
+   {
+    "name": "Montvale Fire Prevention Bureau (Borough of Montvale)",
+    "type": "municipal_fire_bureau",
+    "area_served": "Entire borough",
+    "lead_time": "Payment is required to schedule an inspection. Certificate valid six months from the inspection date. No published tiered fee.",
+    "fees": [
+     {
+      "label": "Certificate of Smoke Alarm and Carbon Monoxide Alarm Compliance",
+      "amount": "$100.00",
+      "quote": "Request for a Certificate of Smoke Alarm & Carbon Monoxide Alarm: $100.00",
+      "source_url": "https://media-002-us.cdn.govstack.com/montvalenj-us/media/xh5ed52z/fire-prevention-change-of-occupant-req-app.pdf",
+      "verified": true
+     },
+     {
+      "label": "Reinspection, if required by the Fire Official",
+      "amount": "$50.00",
+      "quote": "Request for re-inspection, if required by Fire Official: $50.00",
+      "source_url": "https://media-002-us.cdn.govstack.com/montvalenj-us/media/xh5ed52z/fire-prevention-change-of-occupant-req-app.pdf",
+      "verified": true
+     }
+    ],
+    "how_to_apply": "Fill out the Fire Prevention Change of Occupant application and mail it or hand it in to the Fire Prevention Office at Borough Hall, 12 DePiero Drive, 2nd Floor, during business hours with cash or a check payable to the Borough of Montvale. A home with a fire alarm panel needs a test report from an approved company sent to the Bureau.",
+    "application_url": "https://media-002-us.cdn.govstack.com/montvalenj-us/media/xh5ed52z/fire-prevention-change-of-occupant-req-app.pdf",
+    "department_url": "https://www.montvalenj.gov/departments/fire-prevention/",
+    "phone": "(201) 391-5700 x258",
+    "email": "jkurz@montvalenj.gov",
+    "contact_name": "John Kurz",
+    "contact_title": "Fire Official (Deputy Fire Official Michael Halzack, x256, mhalzack@montvalenj.gov)",
+    "evidence": [
+     {
+      "url": "https://media-002-us.cdn.govstack.com/montvalenj-us/media/xh5ed52z/fire-prevention-change-of-occupant-req-app.pdf",
+      "quote": "In accordance with borough code; 203-27 entitled Fees; the application fee for a certificate of smoke alarm and carbon monoxide alarm compliance (CSACMAPFEC),",
+      "doc_date": "",
+      "via": "pdf",
+      "verified": true
+     },
+     {
+      "url": "https://media-002-us.cdn.govstack.com/montvalenj-us/media/xh5ed52z/fire-prevention-change-of-occupant-req-app.pdf",
+      "quote": "Fire Prevention certificate is valid for six (6) months from date of inspection.",
+      "doc_date": "",
+      "via": "pdf",
+      "verified": true
+     },
+     {
+      "url": "https://media-002-us.cdn.govstack.com/montvalenj-us/media/xh5ed52z/fire-prevention-change-of-occupant-req-app.pdf",
+      "quote": "Payment is required to schedule an inspection.",
+      "doc_date": "",
+      "via": "pdf",
+      "verified": true
+     },
+     {
+      "url": "https://www.montvalenj.gov/departments/fire-prevention/",
+      "quote": "Fire Prevention Change Of Occupant Req. App",
+      "doc_date": "2026-10-04 (page fetched)",
+      "via": "page",
+      "verified": true
+     },
+     {
+      "url": "https://www.montvalenj.gov/departments/fire-prevention/",
+      "quote": "(201) 391-5700 x258",
+      "doc_date": "2026-10-04 (page fetched)",
+      "via": "page",
+      "verified": true
+     },
+     {
+      "url": "https://www.nj.gov/dca/dfs/pdf/fire%20directory_county%20summary/fire_code_enforcement_director.pdf",
+      "quote": "LEAID: 0236-001 Montvale Boro ... Enf Auth. Municipal ... Fire Official John J Kurz Phone (201) 391-5800 ... Email jkurz@montvaleboro.org",
+      "doc_date": "2025-09-30 (survey date)",
+      "via": "state_directory",
+      "verified": null
+     },
+     {
+      "url": "https://nj.gov/dca/dfs/pdf/ANNUAL%20REGISTRY/THIRD%20QUARTER%20LEA%20REGISTRY%202026.pdf",
+      "quote": "M Montvale Borough",
+      "doc_date": "2026-07",
+      "via": "pdf",
+      "verified": true
+     }
+    ],
+    "confidence": "high"
+   }
+  ],
+  "notes": "The Montvale application cites Borough code 203-27 for the $100.00 fee and does not list a fire extinguisher. The Borough page lists Fire Official John Kurz at (201) 391-5700 x258 with email jkurz@montvalenj.gov; the application and the state directory still show the older montvaleboro.org addresses and (201) 391-5800."
+ },
+ "other_items": [
+  {
+   "label": "Property survey",
+   "detail": "A current certified property survey showing current uses and structures must be submitted with the resale application (one/two family homes).",
+   "source_url": "https://media-002-us.cdn.govstack.com/montvalenj-us/media/fo3hd2au/cco-application-oct-2022-1.pdf"
+  },
+  {
+   "label": "Taxes current",
+   "detail": "The resale certificate is valid only if all real estate taxes are current.",
+   "source_url": "https://media-002-us.cdn.govstack.com/montvalenj-us/media/fo3hd2au/cco-application-oct-2022-1.pdf"
+  },
+  {
+   "label": "Sump pump",
+   "detail": "A sump pump must not discharge into the sanitary sewer; it must drain outdoors.",
+   "source_url": "https://www.montvalenj.gov/departments/building-and-construction/"
+  }
+ ],
+ "open_questions": [
+  "How long is the New Tenant / Resale Certificate valid?",
+  "Is there a reinspection fee or a rush fee for the building resale inspection?",
+  "Is the $150.00 fee still current (the posted form is from 2022)?"
+ ],
+ "checked_at": "2026-10-04",
+ "verification": {
+  "fees": 3,
+  "fee_ok": 3,
+  "fee_bad": 0,
+  "fee_unchecked": 0,
+  "quotes": 14,
+  "q_ok": 13,
+  "q_bad": 0,
+  "q_unchecked": 1
+ }
+}

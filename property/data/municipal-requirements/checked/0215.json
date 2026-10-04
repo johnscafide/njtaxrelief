@@ -1,0 +1,252 @@
+{
+ "municipality_code": "0215",
+ "municipality": "Englewood",
+ "county": "BERGEN",
+ "resale_co": {
+  "status": "required",
+  "name": "Certificate of Continued Occupancy (CCO) for a residential resale",
+  "issued_by": "City of Englewood Building & Code Enforcement (CCO Inspector / Chief Inspector)",
+  "lead_time": "The City calls to schedule an inspection within 10 business days of receiving a complete application; the certificate is emailed 2 business days after a passed inspection.",
+  "valid_for": "If the buyer changes 30 days after the inspection, a new application and payment are needed.",
+  "requirements": [
+   "All outstanding permits must be closed before the CCO inspection can be scheduled; applications are returned if there are open permits or violations",
+   "Inspection of walls, floors, ceilings, stairs and rails; no illegal apartments, illegally rented rooms or work done without permits",
+   "Smoke alarm on each level including the basement and outside each sleeping area (10-year sealed battery units, hardwired not replaced with battery); photoelectric if a bedroom is within 10 feet of the kitchen",
+   "Carbon monoxide alarm within 10 feet of the sleeping areas when there is a fuel-burning appliance or attached garage",
+   "ABC fire extinguisher within 10 feet of the kitchen (form still lists it)",
+   "House number at least 3 inches high in contrasting colors near the front door; no keyed deadbolt inside; bedroom egress windows open easily; handrails on 4 or more steps; bathroom fan where there is no window; water heater relief pipe within 6 inches of the floor",
+   "Central-station fire alarm systems must be tested before the inspection with a test report",
+   "Resale-only (buyer not occupying): buyer's notarized letter; bank-owned: copy of contract or notarized bank letter"
+  ],
+  "fees": [
+   {
+    "label": "CCO application, 1 and 2 family house or condo",
+    "amount": "$150",
+    "quote": "1 & 2 FAMILY HOUSE/CONDO - $150",
+    "source_url": "https://cityofenglewood.org/DocumentCenter/View/111/Certificate-of-Continued-Occupancy---Residential-Resale-PDF",
+    "verified": true
+   },
+   {
+    "label": "CCO application, 3 and 4 family house",
+    "amount": "$250",
+    "quote": "3 & 4 FAMILY HOUSE - $250",
+    "source_url": "https://cityofenglewood.org/DocumentCenter/View/111/Certificate-of-Continued-Occupancy---Residential-Resale-PDF",
+    "verified": true
+   },
+   {
+    "label": "CCO processing/inspection, one- or two-family home (City web page)",
+    "amount": "$150",
+    "quote": "The fee for processing/inspection is $150 for One- or Two-Family homes and $250 for Multi-Family homes.",
+    "source_url": "https://cityofenglewood.org/1163/Certificate-of-Continued-Occupancy-Lette",
+    "verified": true
+   }
+  ],
+  "how_to_apply": "The seller, seller's agent or seller's attorney completes the Residential Resale CCO application and brings or mails it with a check or money order payable to the City of Englewood to the Building Department, 2-10 N. Van Brunt St (2nd floor), Englewood, NJ 07631. Credit cards, fax and email are not accepted. Fees are non-refundable.",
+  "application_url": "https://cityofenglewood.org/DocumentCenter/View/111/Certificate-of-Continued-Occupancy---Residential-Resale-PDF",
+  "department_url": "https://cityofenglewood.org/1163/Certificate-of-Continued-Occupancy-Lette",
+  "phone": "201-871-6642",
+  "email": "jgriffin@cityofenglewood.org",
+  "contact_name": "Jahvia Griffin",
+  "contact_title": "CCO Inspector (direct line 201-871-6650)",
+  "evidence": [
+   {
+    "url": "https://cityofenglewood.org/1163/Certificate-of-Continued-Occupancy-Lette",
+    "quote": "The seller must receive a Certificate of Continued Occupancy (CCO) before transferring ownership.",
+    "doc_date": "2026-10-04 (page fetched)",
+    "via": "page",
+    "verified": true
+   },
+   {
+    "url": "https://cityofenglewood.org/1163/Certificate-of-Continued-Occupancy-Lette",
+    "quote": "City Of Englewood Revised General Ordinances Chapter 9 Article 6 ordinance Number 85-40 mandates issuance of a Certificate of Continued Occupancy (CCO) for residential properties sold in the City of Englewood.",
+    "doc_date": "2026-10-04 (page fetched)",
+    "via": "page",
+    "verified": true
+   },
+   {
+    "url": "https://cityofenglewood.org/1163/Certificate-of-Continued-Occupancy-Lette",
+    "quote": "Any outstanding permits that have been issued for work that has been done on the property must be closed out before a CCO inspection can be scheduled.",
+    "doc_date": "2026-10-04 (page fetched)",
+    "via": "page",
+    "verified": true
+   },
+   {
+    "url": "https://cityofenglewood.org/DocumentCenter/View/111/Certificate-of-Continued-Occupancy---Residential-Resale-PDF",
+    "quote": "YOU WILL RECEIVE A CALL TO SCHEDULE AN APPOINTMENT WITHIN (10) BUSINESS DAYS FROM THE DATE THAT THE COMPLETED APPLICATION IS RECEIVED.",
+    "doc_date": "Rev: 3/2022",
+    "via": "pdf",
+    "verified": true
+   },
+   {
+    "url": "https://cityofenglewood.org/DocumentCenter/View/111/Certificate-of-Continued-Occupancy---Residential-Resale-PDF",
+    "quote": "IF THE PROPERTY PASSES INSPECTION, THE CERTIFICATE WILL BE EMAILED (2) BUSINESS DAYS AFTER PASSING THE INSPECTION",
+    "doc_date": "Rev: 3/2022",
+    "via": "pdf",
+    "verified": true
+   },
+   {
+    "url": "https://cityofenglewood.org/DocumentCenter/View/111/Certificate-of-Continued-Occupancy---Residential-Resale-PDF",
+    "quote": "IF THE BUYER CHANGES (30) DAYS AFTER THE INSPECTION, A NEW CCO APPLICATION & PAYMENT MUST BE RESUBMITTED.",
+    "doc_date": "Rev: 3/2022",
+    "via": "pdf",
+    "verified": true
+   },
+   {
+    "url": "https://cityofenglewood.org/DocumentCenter/View/111/Certificate-of-Continued-Occupancy---Residential-Resale-PDF",
+    "quote": "(CREDIT CARDS ARE NOT ACCEPTED)",
+    "doc_date": "Rev: 3/2022",
+    "via": "pdf",
+    "verified": true
+   },
+   {
+    "url": "https://cityofenglewood.org/Directory.aspx?did=6",
+    "quote": "Jahvia Griffin CCO Inspector CCO Inspector Email Jahvia Griffin 201-871-6650",
+    "doc_date": "2026-10-04 (page fetched)",
+    "via": "page",
+    "verified": true
+   },
+   {
+    "url": "https://cityofenglewood.org/Directory.aspx?did=6",
+    "quote": "Phone Number 201-871-6642",
+    "doc_date": "2026-10-04 (page fetched)",
+    "via": "page",
+    "verified": true
+   }
+  ],
+  "confidence": "high",
+  "notes": "The City page cites Ordinance 85-40; the application form says the seller agrees to Chapter 159 of the City code. The CCO inspector's email is a mailto link in the City staff directory (Building & Code Enforcement). Other contacts there: Walter Deptuch, Construction Official, 201-871-6649; Eric Dolphy, Housing & Property Maintenance Supervisor, 201-871-6646. A separate Certificate of Rental Occupancy applies to rentals and is not a sale item."
+ },
+ "fire_cert": {
+  "requirements": [
+   "Smoke alarms on each level including the basement and outside each sleeping area; 10-year sealed battery units, or hardwired; alarms over 10 years old replaced",
+   "Carbon monoxide alarm within 10 feet of each sleeping area when there is a fuel-burning appliance or attached garage (battery, hardwired or plug-in)",
+   "Fire extinguisher 2A:10B:C, no more than 10 pounds, within 10 feet of the kitchen, mounted, serviced and tagged within 12 months or with a recent receipt (CCO form still lists it)"
+  ],
+  "authorities": [
+   {
+    "name": "City of Englewood (Building & Code Enforcement for the smoke/CO check during the CCO; Englewood Fire Department Fire Prevention is the LEA)",
+    "type": "municipal_fire_bureau",
+    "area_served": "Entire city",
+    "lead_time": "Fee depends on how many business days before the inspection the request is made: more than 10 business days for the lowest fee.",
+    "fees": [
+     {
+      "label": "Certificate of Smoke Detector and Carbon Monoxide Alarm compliance, request more than 10 business days before inspection",
+      "amount": "$150.00",
+      "quote": "Requests made more than ten (10) business days prior to inspection: $150.00",
+      "source_url": "https://ecode360.com/EN2705/laws/LF2556609.pdf",
+      "verified": true
+     },
+     {
+      "label": "Request 4 to 10 business days before inspection",
+      "amount": "$175.00",
+      "quote": "Requests made four (4) to ten (10) business days prior to inspection: $175.00",
+      "source_url": "https://ecode360.com/EN2705/laws/LF2556609.pdf",
+      "verified": true
+     },
+     {
+      "label": "Request fewer than 4 business days before inspection",
+      "amount": "$200.00",
+      "quote": "Requests made fewer than four (4) business days prior to inspection: $200.00",
+      "source_url": "https://ecode360.com/EN2705/laws/LF2556609.pdf",
+      "verified": true
+     },
+     {
+      "label": "Reinspection fee per occurrence (ordinance spells it 'Reinsertion')",
+      "amount": "$75.00",
+      "quote": "Reinsertion Fee per occurrence: $75.00",
+      "source_url": "https://ecode360.com/EN2705/laws/LF2556609.pdf",
+      "verified": true
+     }
+    ],
+    "how_to_apply": "The smoke alarm, CO alarm and extinguisher check is part of the CCO inspection by the City's Building & Code Enforcement office (2-10 North Van Brunt St). Ask the office whether the smoke certificate fee is charged in addition to the CCO fee.",
+    "application_url": "https://cityofenglewood.org/DocumentCenter/View/111/Certificate-of-Continued-Occupancy---Residential-Resale-PDF",
+    "department_url": "https://cityofenglewood.org/1163/Certificate-of-Continued-Occupancy-Lette",
+    "phone": "201-871-6642",
+    "email": "carbone@englewoodfire.com",
+    "contact_name": "Rocco Carbone",
+    "contact_title": "Fire Official (state fire directory)",
+    "evidence": [
+     {
+      "url": "https://ecode360.com/EN2705/laws/LF2556609.pdf",
+      "quote": "B. Certificate of Smoke Detector and Carbon Monoxide Alarm compliance:",
+      "doc_date": "Ordinance #25-53, adopted December 16, 2025",
+      "via": "pdf",
+      "verified": true
+     },
+     {
+      "url": "https://ecode360.com/EN2705/laws/LF2556609.pdf",
+      "quote": "Penalty for failure to obtain a Certificate of Smoke Detector and Carbon Monoxide Alarm compliance:",
+      "doc_date": "Ordinance #25-53",
+      "via": "pdf",
+      "verified": true
+     },
+     {
+      "url": "https://cityofenglewood.org/1163/Certificate-of-Continued-Occupancy-Lette",
+      "quote": "At least one operating smoke detector in place on each level of any living space on the property",
+      "doc_date": "2026-10-04 (page fetched)",
+      "via": "page",
+      "verified": true
+     },
+     {
+      "url": "https://cityofenglewood.org/DocumentCenter/View/111/Certificate-of-Continued-Occupancy---Residential-Resale-PDF",
+      "quote": "ALL INSPECTIONS SHALL COMPLY WITH THE CURRENT STATE LAWS GOVERNING SMOKE DETECTORS, CARBON MONOXIDE ALARMS & FIRE EXTINGUISHER.",
+      "doc_date": "Rev: 3/2022",
+      "via": "pdf",
+      "verified": true
+     },
+     {
+      "url": "https://cityofenglewood.org/Directory.aspx?did=6",
+      "quote": "Matthew Kansky Fire Inspector Fire Inspector Email Matthew Kansky 201-871-6656",
+      "doc_date": "2026-10-04 (page fetched)",
+      "via": "page",
+      "verified": true
+     },
+     {
+      "url": "https://www.nj.gov/dca/dfs/pdf/fire%20directory_county%20summary/fire_code_enforcement_director.pdf",
+      "quote": "0215 Englewood City LEAID: 0215-001 Enf Auth. Fire Dept Fire Official Rocco Carbone Smoke Detector Compliance Name: Englewood City Code Enf Addr: 2-10 North Van Brunt St. Phone (201) 871-6642 Email carbone@englewoodfire.com",
+      "doc_date": "2025-04-14 (survey date)",
+      "via": "state_directory",
+      "verified": null
+     },
+     {
+      "url": "https://nj.gov/dca/dfs/pdf/ANNUAL%20REGISTRY/THIRD%20QUARTER%20LEA%20REGISTRY%202026.pdf",
+      "quote": "F Englewood City",
+      "doc_date": "2026-07",
+      "via": "pdf",
+      "verified": true
+     }
+    ],
+    "confidence": "medium"
+   }
+  ],
+  "notes": "Ordinance #25-53 (amending Code Section 212-17, adopted December 16, 2025, read from the ecode360 laws PDF) sets the smoke/CO certificate fees. The state fire directory names Englewood City Code Enforcement (2-10 North Van Brunt St, (201) 871-6642) as the smoke detector compliance office, and the City's CCO inspection checks the smoke and CO alarms, so the certificate appears to come with the CCO; whether both the $150 CCO fee and the smoke fee are charged is not stated. Fire Official Rocco Carbone is at the Fire Department, 81 S. Van Brunt St, (201) 871-6693. The CCO form (Rev 3/2022) still lists a fire extinguisher, which state law (P.L.2025, c.19) removed from the sale certificate in February 2025."
+ },
+ "other_items": [
+  {
+   "label": "Open permits and violations",
+   "detail": "All open permits must be closed before the CCO inspection is scheduled; applications with outstanding permits or violations are returned.",
+   "source_url": "https://cityofenglewood.org/DocumentCenter/View/111/Certificate-of-Continued-Occupancy---Residential-Resale-PDF"
+  },
+  {
+   "label": "Illegal units",
+   "detail": "Illegal apartments or unpermitted work must be removed or legalized and pass a second inspection before the CCO is issued.",
+   "source_url": "https://cityofenglewood.org/1163/Certificate-of-Continued-Occupancy-Lette"
+  }
+ ],
+ "open_questions": [
+  "Is the smoke/CO certificate fee from Ordinance 25-53 charged on top of the $150 CCO fee, or is it included?",
+  "Does Englewood still require the fire extinguisher after P.L.2025, c.19?",
+  "Is there a CCO reinspection fee?"
+ ],
+ "checked_at": "2026-10-04",
+ "verification": {
+  "fees": 7,
+  "fee_ok": 7,
+  "fee_bad": 0,
+  "fee_unchecked": 0,
+  "quotes": 16,
+  "q_ok": 15,
+  "q_bad": 0,
+  "q_unchecked": 1
+ }
+}

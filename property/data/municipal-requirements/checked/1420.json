@@ -1,0 +1,218 @@
+{
+ "municipality_code": "1420",
+ "municipality": "Mine Hill Township",
+ "county": "MORRIS",
+ "resale_co": {
+  "status": "required",
+  "name": "Certificate of Habitability (CH), combined with the fire safety (smoke/CO) inspection",
+  "issued_by": "Mine Hill Township Zoning Department (Construction Code Official, Zoning Officer, Housing Official or Fire Marshal may issue)",
+  "lead_time": "Submit the application to the Zoning Department at least 30 days before the change in ownership (recommended). The code requires at least seven business days' notice for inspections; less notice costs an extra $50.00.",
+  "valid_for": "",
+  "requirements": [
+   "Compliance with the Township Property Maintenance code (Chapter 390)",
+   "All open construction permits and violations closed out",
+   "10-year sealed battery smoke and carbon monoxide detectors properly installed (hardwired systems stay hardwired)",
+   "House number clearly visible, at least 2 1/4 inches high and contrasting",
+   "Pools and hot tubs: 48-inch barrier, self-closing self-latching gates, and permits on file",
+   "Health Department Certificate of Completion: well decommissioning if on town water, septic inspection report if on septic",
+   "Secondary power source warning label within 18 inches of the electric panel and meter, where a generator, solar or battery system is present",
+   "Copy of a survey, if available"
+  ],
+  "fees": [
+   {
+    "label": "Certificate of habitability combined with fire safety inspection, per residential unit (Code Section 235-19)",
+    "amount": "$200.00",
+    "quote": "$200.00 per residential unit.",
+    "source_url": "https://ecode360.com/28688398",
+    "verified": null
+   },
+   {
+    "label": "Short-notice surcharge, less than seven business days (Code Section 235-19)",
+    "amount": "$50.00",
+    "quote": "Any time less than the seven days will require an additional $50.00 fee to be paid at time of application.",
+    "source_url": "https://ecode360.com/28688398",
+    "verified": null
+   },
+   {
+    "label": "Re-inspection after failure (Code Section 235-19)",
+    "amount": "$25.00",
+    "quote": "Re-inspection fee due to inspection failure is $25.00 for each inspection.",
+    "source_url": "https://ecode360.com/28688398",
+    "verified": null
+   },
+   {
+    "label": "CH application for sale of residential property (2026 application form)",
+    "amount": "$175",
+    "quote": "FEE:        $175 must accompany the application",
+    "source_url": "https://minehill.com/wp-content/uploads/2026/01/Residential-CH-2026-application-rev.pdf",
+    "verified": true
+   }
+  ],
+  "how_to_apply": "Complete the CH Application for Sale of Residential Property and submit it with the fee to the Zoning Department, Mine Hill Township, 10 Baker Street, Mine Hill, NJ 07803 (862-437-1197, Zoning@MineHill.com). Give a contact name and phone for the Township inspector to set up the appointment. Get the Health Department Certificate of Completion (973-691-0900 ext. 7330) for well or septic items. The approved CH is emailed to the addresses on the application.",
+  "application_url": "https://minehill.com/wp-content/uploads/2026/01/Residential-CH-2026-application-rev.pdf",
+  "department_url": "https://minehill.com/construction-and-zoning/",
+  "phone": "862-437-1197",
+  "email": "Zoning@MineHill.com",
+  "contact_name": "",
+  "contact_title": "",
+  "evidence": [
+   {
+    "url": "https://ecode360.com/33054127",
+    "quote": "A certificate of habitability shall be required to be obtained by the owner of any residentially occupied real estate prior to the rental or lease or transfer of title of residential property involving a new occupant, a new tenant or a new owner of said property.",
+    "doc_date": "Code printed 2026-10-03",
+    "via": "page",
+    "verified": null
+   },
+   {
+    "url": "https://ecode360.com/28688398",
+    "quote": "The fee, payable at the time of application, for a certificate of habitability combined with the fee for the fire safety inspection, shall be:",
+    "doc_date": "Amended 2-20-2025 by Ord. No. 05-25",
+    "via": "page",
+    "verified": null
+   },
+   {
+    "url": "https://minehill.com/construction-and-zoning/",
+    "quote": "The Certificate of Habitability Ordinance requires that the owner of any property that is being sold or rented obtain a Certificate of Habitability whenever there is a change in occupancy.",
+    "doc_date": "2026-10-04 (page fetched)",
+    "via": "page",
+    "verified": true
+   },
+   {
+    "url": "https://minehill.com/construction-and-zoning/",
+    "quote": "It is strongly recommended that the application is submitted to the zoning department at least 30 days prior to the change in ownership or occupancy in order for the required inspection to be scheduled and completed.",
+    "doc_date": "2026-10-04 (page fetched)",
+    "via": "page",
+    "verified": true
+   },
+   {
+    "url": "https://minehill.com/wp-content/uploads/2026/01/Residential-CH-2026-application-rev.pdf",
+    "quote": "The Certificate of Habitability Ordinance requires that the owner of any property that is being sold obtain a Certificate, which",
+    "doc_date": "2026-01 (upload folder)",
+    "via": "pdf",
+    "verified": true
+   },
+   {
+    "url": "https://minehill.com/wp-content/uploads/2026/01/Residential-CH-2026-application-rev.pdf",
+    "quote": "862-437-1197       Zoning@MineHill.com",
+    "doc_date": "2026-01",
+    "via": "pdf",
+    "verified": true
+   }
+  ],
+  "confidence": "high",
+  "notes": "Mine Hill Code Chapter 180 (Certificates of Habitability) and Section 235-19 (fees, amended 2-20-2025 by Ord. No. 05-25) were read through the ecode360 print view. The fee is a single combined fee for the certificate of habitability and the fire safety (smoke/CO) inspection. The code says $200.00 per unit, but the 2026 and 2025 application forms say $175 must accompany the application; confirm the current amount. The Construction and Zoning page still links the 2025 form; the 2026 form is newer. Annual rental fire safety inspections are a rental program."
+ },
+ "fire_cert": {
+  "requirements": [
+   "Homes with 110-volt interconnected smoke alarms must keep that system working and may not convert to battery",
+   "All smoke alarms less than 10 years old and UL listed; new battery alarms must be sealed 10-year units",
+   "Older homes: at least one battery smoke alarm on every level, including the basement and habitable attic, plus attics or crawl spaces with combustion appliances",
+   "Smoke alarms in the hallway outside bedrooms within 10 feet of all bedroom doors; basement alarm near the bottom of the stairs",
+   "Carbon monoxide alarms on all levels with bedrooms, outside bedrooms within 10 feet of the doors (hardwired, plug-in or battery)",
+   "Central station alarm systems must be tested at the inspection with someone present who can reset them",
+   "Fire extinguishers are no longer required (per the 2026 application)"
+  ],
+  "authorities": [
+   {
+    "name": "Mine Hill Township Fire Prevention (Fire Marshal), inspected as part of the Certificate of Habitability",
+    "type": "municipal_fire_bureau",
+    "area_served": "Entire township",
+    "lead_time": "At least seven business days' notice for the inspection; less notice adds $50.00.",
+    "fees": [
+     {
+      "label": "Certificate of habitability combined with fire safety inspection, per residential unit (Code Section 235-19)",
+      "amount": "$200.00",
+      "quote": "$200.00 per residential unit.",
+      "source_url": "https://ecode360.com/28688398",
+      "verified": null
+     },
+     {
+      "label": "Short-notice surcharge, less than seven business days",
+      "amount": "$50.00",
+      "quote": "Any time less than the seven days will require an additional $50.00 fee to be paid at time of application.",
+      "source_url": "https://ecode360.com/28688398",
+      "verified": null
+     }
+    ],
+    "how_to_apply": "No separate application: the smoke/CO inspection is part of the CH Application for Sale of Residential Property filed with the Zoning Department.",
+    "application_url": "https://minehill.com/wp-content/uploads/2026/01/Residential-CH-2026-application-rev.pdf",
+    "department_url": "https://minehill.com/fire-prevention/",
+    "phone": "973-366-9031",
+    "email": "firemarshal@minehill.com",
+    "contact_name": "Thomas Trapasso",
+    "contact_title": "Fire Official / Fire Marshal (NJ DCA fire directory)",
+    "evidence": [
+     {
+      "url": "https://minehill.com/wp-content/uploads/2026/01/Residential-CH-2026-application-rev.pdf",
+      "quote": "The proper Smoke/Carbon Monoxide Detectors must be in proper working order. Fire Extinguisher ARE NO",
+      "doc_date": "2026-01",
+      "via": "pdf",
+      "verified": true
+     },
+     {
+      "url": "https://minehill.com/wp-content/uploads/2026/01/Residential-CH-2026-application-rev.pdf",
+      "quote": "10-Year sealed battery smoke and carbon monoxide detectors are properly installed as outlined below.",
+      "doc_date": "2026-01",
+      "via": "pdf",
+      "verified": true
+     },
+     {
+      "url": "https://minehill.com/construction-and-zoning/",
+      "quote": "All smoke detectors should be 10 year lithium battery.",
+      "doc_date": "2026-10-04 (page fetched)",
+      "via": "page",
+      "verified": true
+     },
+     {
+      "url": "https://www.nj.gov/dca/dfs/pdf/fire%20directory_county%20summary/fire_code_enforcement_director.pdf",
+      "quote": "LEAID: 1420-001 Mine Hill Twp SMOKE DETECTOR COMPLIANCE Name: Mine Hill Fire Prev Enf Auth. Fire Dept Addr: 10 Baker St Fire Official Thomas Trapasso Phone (973) 366-9031 Email firemarshal@minehill.com",
+      "doc_date": "survey date 1/8/2026",
+      "via": "state_directory",
+      "verified": null
+     },
+     {
+      "url": "https://nj.gov/dca/dfs/pdf/ANNUAL%20REGISTRY/THIRD%20QUARTER%20LEA%20REGISTRY%202026.pdf",
+      "quote": "F Mine Hill Township",
+      "doc_date": "2026-07",
+      "via": "pdf",
+      "verified": true
+     }
+    ],
+    "confidence": "high"
+   }
+  ],
+  "notes": "Mine Hill folds the smoke/CO certification into the Certificate of Habitability; the combined fee is listed under both sections here, so do not add them together. The 2026 form says fire extinguishers are no longer required, matching P.L.2025, c.19, although the Construction and Zoning page and the older 2015 'Regulations for Residential Home Resale' sheet still mention extinguishers."
+ },
+ "other_items": [
+  {
+   "label": "Health Department Certificate of Completion (well and septic)",
+   "detail": "If the home is on town water, any old well must be decommissioned (or certified as irrigation) by a licensed well driller before the transfer; if on septic, a septic inspection report by an engineer or certified septic inspector is required. Health Department: 973-691-0900 ext. 7330.",
+   "source_url": "https://minehill.com/construction-and-zoning/"
+  },
+  {
+   "label": "Pools and hot tubs",
+   "detail": "Pool barriers and gates must meet the stated height and self-closing rules, and unpermitted pools or hot tubs must be permitted and inspected before the CH is issued.",
+   "source_url": "https://minehill.com/wp-content/uploads/2026/01/Residential-CH-2026-application-rev.pdf"
+  },
+  {
+   "label": "Secondary power source label",
+   "detail": "Homes with generators, solar panels or battery storage need a printed 'multiple sources of power' warning label within 18 inches of the electric panel and the meter.",
+   "source_url": "https://minehill.com/wp-content/uploads/2026/01/Residential-CH-2026-application-rev.pdf"
+  }
+ ],
+ "open_questions": [
+  "Is the current Certificate of Habitability fee $175 (2026 form) or $200.00 (Code Section 235-19)?",
+  "How long is the Certificate of Habitability valid if the closing is delayed?"
+ ],
+ "checked_at": "2026-10-04",
+ "verification": {
+  "fees": 6,
+  "fee_ok": 1,
+  "fee_bad": 0,
+  "fee_unchecked": 5,
+  "quotes": 11,
+  "q_ok": 8,
+  "q_bad": 0,
+  "q_unchecked": 3
+ }
+}

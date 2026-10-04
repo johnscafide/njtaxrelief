@@ -1,0 +1,235 @@
+{
+ "municipality_code": "0247",
+ "municipality": "Park Ridge Borough",
+ "county": "BERGEN",
+ "checked_at": "2026-10-04",
+ "resale_co": {
+  "status": "required",
+  "name": "Certificate of Continued Occupancy (CCO), Zoning Resale of Residential Dwelling",
+  "issued_by": "Borough of Park Ridge Zoning Office (Zoning Officer)",
+  "lead_time": "A two-week notice is required for all certificates. Both certificates are issued together and e-mailed within five business days after the inspection.",
+  "valid_for": "180 days from date of issue",
+  "requirements": [
+   "Review of Borough files for open building permits and zoning violations, and that utilities and taxes are current",
+   "Certificates will not be issued if taxes or utilities are delinquent or there are open building permits (clear these before applying)",
+   "Street numbers visible; no open-ended wires; no illegal conversions (for example one family to two-family)",
+   "Sump pump must not be connected to the sanitary sewer (Chapter 81A, no illicit connections)",
+   "Smoke detector and carbon monoxide certification from Park Ridge Fire Prevention (separate $100 check)",
+   "Submit only page 4 of the packet with two separate checks"
+  ],
+  "fees": [
+   {
+    "label": "Certificate of Continued Occupancy (zoning), residential resale",
+    "amount": "$125",
+    "quote": "The fee for the Certificate of Continued Occupancy is $125 and is payable to Borough of Park Ridge.",
+    "source_url": "https://www.parkridgeboro.com/forms-documents/forms/resident-forms/cco/1107-residential-resale-cco-zoning-fire/file",
+    "verified": true
+   }
+  ],
+  "how_to_apply": "Read the Residential Resale packet, then submit page 4 (Application for Certificate of Continued Occupancy, Zoning Resale of Residential Dwelling) with two separate checks: $125 to Borough of Park Ridge (zoning CCO) and $100 to Park Ridge Fire Prevention (fire certificate). Give at least two weeks notice. You will get a call to set up the fire prevention inspection.",
+  "application_url": "https://www.parkridgeboro.com/forms-documents/forms/resident-forms/cco/1107-residential-resale-cco-zoning-fire/file",
+  "department_url": "https://www.parkridgeboro.com/departments/cco",
+  "phone": "201-391-5673",
+  "email": "",
+  "contact_name": "Tonya Janeiro",
+  "contact_title": "Zoning Officer",
+  "evidence": [
+   {
+    "url": "https://www.parkridgeboro.com/departments/cco",
+    "quote": "The Borough of Park Ridge requires a smoke certificate and zoning certificate for the sale of your home.",
+    "doc_date": "2026-10-04 (page fetched)",
+    "via": "page",
+    "verified": true
+   },
+   {
+    "url": "https://www.parkridgeboro.com/forms-documents/forms/resident-forms/cco/1107-residential-resale-cco-zoning-fire/file",
+    "quote": "Prior to the closing on the sale of residential property, two certificates are required by the Borough.",
+    "doc_date": "9/4/25",
+    "via": "pdf",
+    "verified": true
+   },
+   {
+    "url": "https://www.parkridgeboro.com/forms-documents/forms/resident-forms/cco/1107-residential-resale-cco-zoning-fire/file",
+    "quote": "The fee for the Certificate of Continued Occupancy is $125 and is payable to Borough of Park Ridge.",
+    "doc_date": "9/4/25",
+    "via": "pdf",
+    "verified": true
+   },
+   {
+    "url": "https://www.parkridgeboro.com/forms-documents/forms/resident-forms/cco/1107-residential-resale-cco-zoning-fire/file",
+    "quote": "A two-week notice is required for all certificates.",
+    "doc_date": "9/4/25",
+    "via": "pdf",
+    "verified": true
+   },
+   {
+    "url": "https://www.parkridgeboro.com/forms-documents/forms/resident-forms/cco/1107-residential-resale-cco-zoning-fire/file",
+    "quote": "Certificates are good for 180 days from date of issue.",
+    "doc_date": "9/4/25",
+    "via": "pdf",
+    "verified": true
+   },
+   {
+    "url": "https://www.parkridgeboro.com/forms-documents/forms/resident-forms/cco/1107-residential-resale-cco-zoning-fire/file",
+    "quote": "Certificates will not be issued if taxes or utilities are delinquent or you have any open building permits.",
+    "doc_date": "9/4/25",
+    "via": "pdf",
+    "verified": true
+   },
+   {
+    "url": "https://www.parkridgeboro.com/forms-documents/forms/resident-forms/cco/1107-residential-resale-cco-zoning-fire/file",
+    "quote": "there are no illicit connections to the Borough's sewer system, i.e. sump pump.",
+    "doc_date": "9/4/25",
+    "via": "pdf",
+    "verified": true
+   },
+   {
+    "url": "https://www.parkridgeboro.com/forms-documents/forms/resident-forms/cco/1107-residential-resale-cco-zoning-fire/file",
+    "quote": "Zoning Officer - Tonya Janeiro",
+    "doc_date": "9/4/25",
+    "via": "pdf",
+    "verified": true
+   },
+   {
+    "url": "https://www.parkridgeboro.com/forms-documents/forms/resident-forms/cco/1107-residential-resale-cco-zoning-fire/file",
+    "quote": "SEPARATE CHECKS: ZONING CCO FEE: $125 / FIRE CCO FEE: $100",
+    "doc_date": "9/4/25",
+    "via": "pdf",
+    "verified": true
+   }
+  ],
+  "confidence": "high",
+  "notes": "Park Ridge requires two certificates before closing on a residential sale: a zoning Certificate of Continued Occupancy ($125, Borough of Park Ridge) and a Smoke Detector & Carbon Monoxide Certification ($100, Park Ridge Fire Prevention), paid by two separate checks. The packet is dated 9/4/25 and is a scanned/OCR document, so some words are garbled; the contact e-mail addresses in it are not readable reliably, so none is listed. Phone for the Zoning Officer is 201-391-5673; Borough Hall is (201) 573-1800."
+ },
+ "fire_cert": {
+  "requirements": [
+   "Smoke alarms: sealed 10-year lithium battery type; smoke detector outside each sleeping area and within 10 feet of bedrooms; one on each level of multi-level homes",
+   "Carbon monoxide alarm: 10-year battery or plug-in type, within 10 feet of each sleeping area (combination units are acceptable)",
+   "Hardwired systems must be fully functional and cannot be replaced with battery-only detectors",
+   "Central monitored fire alarms must be inspected by the owner's alarm company with a copy of the test report given to the Fire Official at the inspection",
+   "Fire extinguishers are no longer required (packet dated 9/4/25)"
+  ],
+  "authorities": [
+   {
+    "name": "Park Ridge Fire Prevention (Fire Official, Borough of Park Ridge)",
+    "type": "municipal_fire_bureau",
+    "area_served": "Entire municipality",
+    "lead_time": "Two-week notice required. You will receive a call to set up the inspection after the application is received; certificates are e-mailed within five business days after the inspection. No same-day reinspections.",
+    "fees": [
+     {
+      "label": "Smoke Detector & Carbon Monoxide Certification (Fire Certificate)",
+      "amount": "$100",
+      "quote": "The fee for the Fire Certificate is $100 and is payable to Park Ridge Fire Prevention.",
+      "source_url": "https://www.parkridgeboro.com/forms-documents/forms/resident-forms/cco/1107-residential-resale-cco-zoning-fire/file",
+      "verified": true
+     },
+     {
+      "label": "Fire certificate reinspection",
+      "amount": "$50",
+      "quote": "If necessary, a re-inspection fee of $50 will be charged.",
+      "source_url": "https://www.parkridgeboro.com/forms-documents/forms/resident-forms/cco/1107-residential-resale-cco-zoning-fire/file",
+      "verified": true
+     }
+    ],
+    "how_to_apply": "Submit the Residential Resale packet's page 4 with a $100 check payable to Park Ridge Fire Prevention (separate from the $125 zoning check). The Fire Official calls to schedule the inspection.",
+    "application_url": "https://www.parkridgeboro.com/forms-documents/forms/resident-forms/cco/1107-residential-resale-cco-zoning-fire/file",
+    "department_url": "https://www.parkridgeboro.com/departments/cco",
+    "phone": "201-573-1800 X 505",
+    "email": "",
+    "contact_name": "John Hansen",
+    "contact_title": "Fire Official",
+    "evidence": [
+     {
+      "url": "https://www.parkridgeboro.com/forms-documents/forms/resident-forms/cco/1107-residential-resale-cco-zoning-fire/file",
+      "quote": "The fee for the Fire Certificate is $100 and is payable to Park Ridge Fire Prevention.",
+      "doc_date": "9/4/25",
+      "via": "pdf",
+      "verified": true
+     },
+     {
+      "url": "https://www.parkridgeboro.com/forms-documents/forms/resident-forms/cco/1107-residential-resale-cco-zoning-fire/file",
+      "quote": "If necessary, a re-inspection fee of $50 will be charged.",
+      "doc_date": "9/4/25",
+      "via": "pdf",
+      "verified": true
+     },
+     {
+      "url": "https://www.parkridgeboro.com/forms-documents/forms/resident-forms/cco/1107-residential-resale-cco-zoning-fire/file",
+      "quote": "FIRE EXTINGUISHERS ARE NO LONGER REQUIRED.",
+      "doc_date": "9/4/25",
+      "via": "pdf",
+      "verified": true
+     },
+     {
+      "url": "https://www.parkridgeboro.com/forms-documents/forms/resident-forms/cco/1107-residential-resale-cco-zoning-fire/file",
+      "quote": "THE INSPECTOR WILL NOT PERFORM SAME DAY RE-INSPECTIONS",
+      "doc_date": "9/4/25",
+      "via": "pdf",
+      "verified": true
+     },
+     {
+      "url": "https://www.parkridgeboro.com/forms-documents/forms/resident-forms/cco/1107-residential-resale-cco-zoning-fire/file",
+      "quote": "Fire Official - John Hansen",
+      "doc_date": "9/4/25",
+      "via": "pdf",
+      "verified": true
+     },
+     {
+      "url": "https://www.parkridgeboro.com/forms-documents/forms/resident-forms/cco/1107-residential-resale-cco-zoning-fire/file",
+      "quote": "201-573-1800 X 505",
+      "doc_date": "9/4/25",
+      "via": "pdf",
+      "verified": true
+     },
+     {
+      "url": "https://nj.gov/dca/dfs/pdf/ANNUAL%20REGISTRY/THIRD%20QUARTER%20LEA%20REGISTRY%202026.pdf",
+      "quote": "M Park Ridge Borough",
+      "doc_date": "2026-07",
+      "via": "pdf",
+      "verified": true
+     },
+     {
+      "url": "https://www.nj.gov/dca/dfs/pdf/fire%20directory_county%20summary/fire_code_enforcement_director.pdf",
+      "quote": "Park Ridge Borough 0247 LEAID: 0247-001 Enf Auth. Municipal Fire Official John Hansen Phone (201) 391-2746 Email jotrhansen@gmail.com",
+      "doc_date": "3/31/2026 (survey date)",
+      "via": "state_directory",
+      "verified": null
+     }
+    ],
+    "confidence": "high"
+   }
+  ],
+  "notes": "Park Ridge Fire Prevention issues the smoke/CO certificate together with the zoning CCO; the fee is a flat $100 with a $50 reinspection (no tiered late fee published). The packet says fire extinguishers are no longer required, matching P.L.2025, c.19. The NJ DCA LEA registry lists Park Ridge as a municipal (M) enforcing agency; the state fire directory (survey 3/31/2026) lists Fire Official John Hansen at (201) 391-2746 with a gmail address, while the Borough packet gives 201-573-1800 X 505. The Borough also posts a Waiver of Smoke/Carbon Monoxide Detector Inspection (signed and notarized by the purchasers) for homes that will be renovated before occupancy; it still mentions a fire extinguisher and a Continuing Certificate of Occupancy from the Construction Official."
+ },
+ "other_items": [
+  {
+   "label": "Sump pump / sewer connection check",
+   "detail": "The CCO checklist requires that the sump pump not be connected to the sanitary sewer (Chapter 81A, no illicit connections).",
+   "source_url": "https://www.parkridgeboro.com/forms-documents/forms/resident-forms/cco/1107-residential-resale-cco-zoning-fire/file"
+  },
+  {
+   "label": "Taxes, utilities and open permits",
+   "detail": "Certificates are not issued if taxes or utilities are delinquent or there are open building permits; clear these before applying.",
+   "source_url": "https://www.parkridgeboro.com/forms-documents/forms/resident-forms/cco/1107-residential-resale-cco-zoning-fire/file"
+  },
+  {
+   "label": "Smoke/CO waiver for renovation purchases",
+   "detail": "Purchasers can sign a notarized Waiver of Smoke/Carbon Monoxide Detector Inspection when the home will be renovated; the home cannot be occupied until the requirements are met.",
+   "source_url": "https://www.parkridgeboro.com/forms-documents/forms/resident-forms/cco/1102-cco-waiver-fire/file"
+  }
+ ],
+ "open_questions": [
+  "What are the current e-mail addresses for the Fire Official and the Zoning Officer? The scanned packet is not legible.",
+  "Is there a reinspection fee for the zoning CCO?"
+ ],
+ "verification": {
+  "fees": 3,
+  "fee_ok": 3,
+  "fee_bad": 0,
+  "fee_unchecked": 0,
+  "quotes": 17,
+  "q_ok": 16,
+  "q_bad": 0,
+  "q_unchecked": 1
+ }
+}

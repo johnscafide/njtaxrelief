@@ -1,0 +1,208 @@
+{
+ "municipality_code": "0219",
+ "municipality": "Fort Lee Borough",
+ "county": "BERGEN",
+ "checked_at": "2026-10-04",
+ "resale_co": {
+  "status": "required",
+  "name": "Certificate of Compliance (COC) for sales (Certificate of Continued Occupancy)",
+  "issued_by": "Borough of Fort Lee Fire Prevention Bureau (enforcement officer under Borough Code Chapter 182)",
+  "lead_time": "No published lead time. The inspector will not call before arriving and exact arrival times are not given.",
+  "valid_for": "The $100 fee is waived if the same premises was inspected within 180 days (Code 182-5); no other validity period is published",
+  "requirements": [
+   "Inspection for compliance with applicable building, health, safety and fire codes (Code 182-2)",
+   "Smoke detectors and carbon monoxide detectors installed per the Bureau's affidavit (smoke detectors older than 10 years must be replaced; CO detectors older than 5 years replaced unless the maker allows longer)",
+   "Signed Smoke/CO Detector affidavit completed by the owner (realtors may not fill it out)",
+   "All open building permits closed and all taxes, penalties and fees due to the Borough paid before the COC is issued",
+   "Name and phone of the person who will meet the inspector",
+   "Signed letter stating whether the new owner will rent the one- or two-family home (non-owner-occupied homes must register with the Fire Prevention Bureau)"
+  ],
+  "fees": [
+   {
+    "label": "Sale Certificate of Compliance (COC), covers the smoke/CO inspection; one fee",
+    "amount": "$100",
+    "quote": "We accept credit cards (fee applies) and checks (payable to the Borough of Fort Lee) for $100.",
+    "source_url": "https://www.fortleenj.org/DocumentCenter/View/8398/COC-SALE-App-Affidavit-040125-PDF",
+    "verified": true
+   }
+  ],
+  "how_to_apply": "Print the Application for a SALE Certificate of Compliance (COC) packet from the Fire Prevention Bureau's Applications & Forms page, fill in every page (including the smoke/CO affidavit and the rental-intent letter) and submit it with $100 by check payable to the Borough of Fort Lee or by credit card (fee applies) to the Fire Prevention Bureau, 1365 Inwood Terrace. The Bureau schedules the inspection.",
+  "application_url": "https://www.fortleenj.org/DocumentCenter/View/8398/COC-SALE-App-Affidavit-040125-PDF",
+  "department_url": "https://www.fortleenj.org/248/Fire-Prevention-Bureau",
+  "phone": "201-592-3500 x1502",
+  "email": "S-Curry@fortleenj.org",
+  "contact_name": "Steven J. Curry",
+  "contact_title": "Fire Official",
+  "evidence": [
+   {
+    "url": "https://ecode360.com/10067065",
+    "quote": "No person shall occupy or use any portion of a commercial, industrial or residential building after such building or portion thereof has been vacated or sold, or in which there has been a change in occupancy, until the owner/landlord shall have applied for and secured a certificate of compliance therefor from the enforcement officer of the Borough of Fort Lee.",
+    "doc_date": "2026-10-04 (page fetched)",
+    "via": "page",
+    "verified": null
+   },
+   {
+    "url": "https://ecode360.com/10067065",
+    "quote": "A fee of $100 shall accompany each application; provided, however, that the enforcement officer shall waive the fee if any inspection of the same premises has been made within 180 days.",
+    "doc_date": "2026-10-04 (page fetched)",
+    "via": "page",
+    "verified": null
+   },
+   {
+    "url": "https://www.fortleenj.org/DocumentCenter/View/8398/COC-SALE-App-Affidavit-040125-PDF",
+    "quote": "Application for a SALE Certificate of Compliance (COC)",
+    "doc_date": "2025-05-20",
+    "via": "pdf",
+    "verified": true
+   },
+   {
+    "url": "https://www.fortleenj.org/DocumentCenter/View/8398/COC-SALE-App-Affidavit-040125-PDF",
+    "quote": "We accept credit cards (fee applies) and checks (payable to the Borough of Fort Lee) for $100.",
+    "doc_date": "2025-05-20",
+    "via": "pdf",
+    "verified": true
+   },
+   {
+    "url": "https://www.fortleenj.org/DocumentCenter/View/8398/COC-SALE-App-Affidavit-040125-PDF",
+    "quote": "A COC will only be issued once all open building permits are closed; and all taxes, penalties and fees due to the Borough are paid.",
+    "doc_date": "2025-05-20",
+    "via": "pdf",
+    "verified": true
+   },
+   {
+    "url": "https://www.fortleenj.org/DocumentCenter/View/8398/COC-SALE-App-Affidavit-040125-PDF",
+    "quote": "The inspector will NOT call before arriving and exact arrival times will not be given out.",
+    "doc_date": "2025-05-20",
+    "via": "pdf",
+    "verified": true
+   },
+   {
+    "url": "https://www.fortleenj.org/249/Programs-Duties",
+    "quote": "Certificate of continued Occupancy Inspections Upon sale or change of tenancy to ensure compliance with the New Jersey's Smoke and Carbon Monoxide Detector regulations.",
+    "doc_date": "2026-10-04 (page fetched)",
+    "via": "page",
+    "verified": true
+   },
+   {
+    "url": "https://www.fortleenj.org/248/Fire-Prevention-Bureau",
+    "quote": "Phone: 201-592-3500 x1502",
+    "doc_date": "2026-10-04 (page fetched)",
+    "via": "page",
+    "verified": true
+   },
+   {
+    "url": "https://www.fortleenj.org/248/Fire-Prevention-Bureau",
+    "quote": "Phone: 201-592-3500 x1018",
+    "doc_date": "2026-10-04 (page fetched)",
+    "via": "page",
+    "verified": true
+   }
+  ],
+  "confidence": "high",
+  "notes": "Fort Lee runs one combined certificate for sales: the Certificate of Compliance (COC), also called the Certificate of Continued Occupancy, issued by the Fire Prevention Bureau under Borough Code Chapter 182 (amended 2022). The same inspection covers the state smoke/CO certificate, so the $100 fee is listed here and repeated under the fire certificate for completeness; it is one payment, not two. The application packet is dated as of 5/20/25. Fire Official Steven J. Curry's direct line is 201-592-3500 x1018 and the Bureau's main line is x1502 (Monday to Friday 7am-4pm on the contact block). Rental-only items (annual $100 registration for non-owner-occupied units, Rent Leveling registration, $220 lead-safe inspection for pre-1978 rentals) are not resale requirements but come up if the buyer plans to rent."
+ },
+ "fire_cert": {
+  "requirements": [
+   "Smoke detectors on each level and within 10 feet of sleeping areas; requirements step up by year built (110V interconnected detectors, battery backup, detectors inside bedrooms for newer homes)",
+   "Battery-only smoke detectors must be 10-year sealed battery units, UL or ETL listed; detectors older than 10 years must be replaced",
+   "Carbon monoxide detectors within 10 feet of sleeping areas, on every level, outside rooms with fuel-burning appliances and near an attached garage entrance; CO detectors older than 5 years replaced unless the manufacturer allows longer",
+   "Fire extinguisher not required for one- and two-family homes (per the Bureau's 5/20/25 packet)"
+  ],
+  "authorities": [
+   {
+    "name": "Fort Lee Fire Prevention Bureau",
+    "type": "municipal_fire_bureau",
+    "area_served": "Entire municipality",
+    "lead_time": "No published lead time; the Bureau schedules the inspection after the application and fee are received.",
+    "fees": [
+     {
+      "label": "Sale Certificate of Compliance (COC) including the smoke/CO inspection (same single $100 fee as the resale certificate)",
+      "amount": "$100",
+      "quote": "We accept credit cards (fee applies) and checks (payable to the Borough of Fort Lee) for $100.",
+      "source_url": "https://www.fortleenj.org/DocumentCenter/View/8398/COC-SALE-App-Affidavit-040125-PDF",
+      "verified": true
+     }
+    ],
+    "how_to_apply": "Submit the SALE Certificate of Compliance (COC) packet with the smoke/CO affidavit and $100 to the Fire Prevention Bureau, 1365 Inwood Terrace, Fort Lee.",
+    "application_url": "https://www.fortleenj.org/DocumentCenter/View/8398/COC-SALE-App-Affidavit-040125-PDF",
+    "department_url": "https://www.fortleenj.org/248/Fire-Prevention-Bureau",
+    "phone": "201-592-3500 x1502",
+    "email": "S-Curry@fortleenj.org",
+    "contact_name": "Steven J. Curry",
+    "contact_title": "Fire Official",
+    "evidence": [
+     {
+      "url": "https://www.fortleenj.org/DocumentCenter/View/8398/COC-SALE-App-Affidavit-040125-PDF",
+      "quote": "One & Two-Family Homes and Attached Single Family Dwellings - Not Required",
+      "doc_date": "2025-05-20",
+      "via": "pdf",
+      "verified": true
+     },
+     {
+      "url": "https://www.fortleenj.org/DocumentCenter/View/8398/COC-SALE-App-Affidavit-040125-PDF",
+      "quote": "All Smoke Detectors with a manufacture date greater than 10 years must be replaced.",
+      "doc_date": "2025-05-20",
+      "via": "pdf",
+      "verified": true
+     },
+     {
+      "url": "https://www.fortleenj.org/DocumentCenter/View/8398/COC-SALE-App-Affidavit-040125-PDF",
+      "quote": "Realtors are prohibited from filling out this form.",
+      "doc_date": "2025-05-20",
+      "via": "pdf",
+      "verified": true
+     },
+     {
+      "url": "https://www.fortleenj.org/248/Fire-Prevention-Bureau",
+      "quote": "Applications for Certificate of Continued Occupancy",
+      "doc_date": "2026-10-04 (page fetched)",
+      "via": "page",
+      "verified": true
+     },
+     {
+      "url": "https://nj.gov/dca/dfs/pdf/ANNUAL%20REGISTRY/THIRD%20QUARTER%20LEA%20REGISTRY%202026.pdf",
+      "quote": "F Fort Lee Borough",
+      "doc_date": "2026-07",
+      "via": "pdf",
+      "verified": true
+     },
+     {
+      "url": "https://www.nj.gov/dca/dfs/pdf/fire%20directory_county%20summary/fire_code_enforcement_director.pdf",
+      "quote": "Fort Lee Borough 0219 LEAID: 0219-001 Enf Auth. Fire Dept Fire Official Steven J Curry Phone (201) 592-3500 Email scurry@fortleenj.org",
+      "doc_date": "3/2/2026 (survey date)",
+      "via": "state_directory",
+      "verified": null
+     }
+    ],
+    "confidence": "high"
+   }
+  ],
+  "notes": "The smoke/CO certificate is part of the Borough's sale Certificate of Compliance; there is no separate fire fee or tiered late fee published. The 5/20/25 packet already says fire extinguishers are not required for one- and two-family homes, matching P.L.2025, c.19. The NJ DCA LEA registry lists Fort Lee's fire department as the enforcing agency and the state fire directory (survey 3/2/2026) lists Fire Official Steven J Curry at (201) 592-3500."
+ },
+ "other_items": [
+  {
+   "label": "Open permits and municipal charges",
+   "detail": "The COC is only issued once all open building permits are closed and all taxes, penalties and fees due to the Borough are paid.",
+   "source_url": "https://www.fortleenj.org/DocumentCenter/View/8398/COC-SALE-App-Affidavit-040125-PDF"
+  },
+  {
+   "label": "Rental registration if the buyer will rent",
+   "detail": "If the new owner will rent a one- or two-family home, they must register with the Fire Prevention Bureau (annual $100 fee for non-owner-occupied units) and a separate rental COC is needed before a tenant moves in. Owner-occupied sales are not affected.",
+   "source_url": "https://www.fortleenj.org/DocumentCenter/View/8398/COC-SALE-App-Affidavit-040125-PDF"
+  }
+ ],
+ "open_questions": [
+  "How many business days ahead of closing should the COC be requested to get an inspection in time?",
+  "What is the reinspection fee if the first inspection fails? The packet says failed inspections are subject to additional fees but gives no amount."
+ ],
+ "verification": {
+  "fees": 2,
+  "fee_ok": 2,
+  "fee_bad": 0,
+  "fee_unchecked": 0,
+  "quotes": 15,
+  "q_ok": 12,
+  "q_bad": 0,
+  "q_unchecked": 3
+ }
+}

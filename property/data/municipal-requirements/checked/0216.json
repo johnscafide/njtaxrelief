@@ -1,0 +1,196 @@
+{
+ "municipality_code": "0216",
+ "municipality": "Englewood Cliffs Borough",
+ "county": "BERGEN",
+ "checked_at": "2026-10-04",
+ "resale_co": {
+  "status": "required",
+  "name": "Certificate of Continued Occupancy (CCO), Residential Sale",
+  "issued_by": "Borough of Englewood Cliffs Building Department (Construction Official)",
+  "lead_time": "Apply at least two weeks before closing. Requests received fewer than 4 business days before closing pay a $150.00 expedite fee.",
+  "valid_for": "If the home is not occupied within six months of issuance, the certificate expires and a new one is needed.",
+  "requirements": [
+   "Inspection of the visible parts of the house for the Property Maintenance Code and Borough building, plumbing, electrical, health, safety and fire ordinances; violations must be corrected (14 days allowed after a notice)",
+   "Smoke detectors and carbon monoxide detectors tested and working at the inspection; signed smoke/CO affidavit (owner, tenant or NJ licensed electrician); smoke detectors over 10 years old and CO detectors over 5 years old replaced",
+   "Homes with 110V (hardwired) smoke or CO detection need a written report from a NJ licensed electrician or certified alarm company; existing low voltage alarm/smoke systems must work",
+   "Minimum size 10 type ABC fire extinguisher within 10 feet of the kitchen (form still lists it)",
+   "House number at least 3 inches (6 inches if the house is more than 50 feet from the curb), contrasting and visible from the street",
+   "Notarized owner affidavit that no sump pumps, storm drains or other devices are connected to the sewer line; notarized room count per floor",
+   "All building permits closed and all taxes, penalties and fees due to the Borough paid before closing",
+   "Unit doors opening to a corridor must be self-closing and self-latching where applicable",
+   "No one may occupy the home before approval from the Fire Inspector"
+  ],
+  "fees": [
+   {
+    "label": "CCO, resale (Borough Code 9-17.2)",
+    "amount": "$100",
+    "quote": "The fee for a certificate of continued occupancy resale shall be $100, payable to the Borough of Englewood Cliffs.",
+    "source_url": "https://ecode360.com/35700600",
+    "verified": null
+   },
+   {
+    "label": "Expedite, request fewer than 4 business days before closing",
+    "amount": "$150",
+    "quote": "Requests for a CCO received fewer than four business days prior to the closing or change of occupant shall add an additional $150 to required fee.",
+    "source_url": "https://ecode360.com/35700600",
+    "verified": null
+   },
+   {
+    "label": "Second or later reinspection (Code)",
+    "amount": "$50",
+    "quote": "The fee for a second and any additional reinspection shall be $50 per inspection.",
+    "source_url": "https://ecode360.com/35700600",
+    "verified": null
+   },
+   {
+    "label": "Re-inspection after a failed inspection (application form)",
+    "amount": "$125.00",
+    "quote": "Inspections that fail are subject to an additional re-inspection fee of $125.00.",
+    "source_url": "https://englewoodcliffsnj.org/Documents/Departments/Building/Application-for-Certificate-of-Continured-Occupancy-Residential-Sale.pdf",
+    "verified": null
+   }
+  ],
+  "how_to_apply": "Download the Application for Certificate of Continued Occupancy Residential Sale from the Building page, complete all pages (room count and sump pump affidavits are notarized; smoke/CO affidavit signed by owner, tenant or licensed electrician) and submit it with a $100.00 check payable to the Borough of Englewood Cliffs at the Building Department, 482 Hudson Terrace. Permit pick-up and payment is Monday to Friday 9:00 AM to 2:00 PM. Give the name and phone of the person who will meet the inspector.",
+  "application_url": "https://englewoodcliffsnj.org/Documents/Departments/Building/Application-for-Certificate-of-Continured-Occupancy-Residential-Sale.pdf",
+  "department_url": "https://englewoodcliffsnj.org/departments/building/index.php",
+  "phone": "201-569-5252",
+  "email": "GTessaro@englewoodcliffsnj.org",
+  "contact_name": "Gino Tessaro",
+  "contact_title": "Construction Official (tech assistant: Cathy Scancarella, cscancarella@englewoodcliffsnj.org)",
+  "evidence": [
+   {
+    "url": "https://englewoodcliffsnj.org/departments/building/index.php",
+    "quote": "A Continuing Certificate of Occupancy is required on all re-sales of homes, and rental properties as well.",
+    "doc_date": "2026-10-04 (page fetched)",
+    "via": "page",
+    "verified": true
+   },
+   {
+    "url": "https://ecode360.com/35700600",
+    "quote": "Each time there is a transfer of ownership of property within the Borough of Englewood Cliffs, a purchaser of such property must obtain from the construction official of the Borough a certificate of continued occupancy",
+    "doc_date": "2025-11-12 (Ord. No. 25-07)",
+    "via": "page",
+    "verified": null
+   },
+   {
+    "url": "https://ecode360.com/35700600",
+    "quote": "If a dwelling unit is not occupied within six months of the issuance of a certificate of continued occupancy, the certificate will expire, and a new certificate must be obtained before occupancy.",
+    "doc_date": "2025-11-12 (Ord. No. 25-07)",
+    "via": "page",
+    "verified": null
+   },
+   {
+    "url": "https://englewoodcliffsnj.org/Documents/Departments/Building/Application-for-Certificate-of-Continured-Occupancy-Residential-Sale.pdf",
+    "quote": "When you sell your home, your application for Continued Certificate of Occupancy should be made at least two weeks prior to your closings.",
+    "doc_date": "REVISED 6/28/24",
+    "via": "pdf",
+    "verified": null
+   },
+   {
+    "url": "https://englewoodcliffsnj.org/Documents/Departments/Building/Application-for-Certificate-of-Continured-Occupancy-Residential-Sale.pdf",
+    "quote": "Submit a check payable to the Borough of Englewood Cliffs for $100.00.",
+    "doc_date": "REVISED 6/28/24",
+    "via": "pdf",
+    "verified": null
+   },
+   {
+    "url": "https://englewoodcliffsnj.org/departments/building/index.php",
+    "quote": "GTessaro@englewoodcliffsnj.org",
+    "doc_date": "2026-10-04 (page fetched)",
+    "via": "page",
+    "verified": true
+   }
+  ],
+  "confidence": "high",
+  "notes": "Borough Code Section 9-17 was rewritten by Ordinance 25-07 on November 12, 2025 and was read through ecode360. The Code makes the purchaser responsible for obtaining the CCO; the Borough's application is filed by the seller side. The Code's reinspection fee ($50 for a second or later reinspection) differs from the application form (revised 6/28/24), which says failed inspections carry a $125.00 re-inspection fee; the form predates the 2025 ordinance. The application PDF is a scan and its letterhead phone 201-568-9262 differs from the Borough main number 201-569-5252. Borough Code Section 11-5.2 also requires a sump pump/drain inspection at every CCO or ownership transfer. Rental CCOs ($85) and lead-safe inspections apply to rentals only."
+ },
+ "fire_cert": {
+  "requirements": [
+   "Smoke detectors by year built: pre-1977 battery units on each level and within 10 feet of sleeping areas; later homes 110V units (interconnected from 8/6/84; battery back-up and in each bedroom after 9/5/91)",
+   "Smoke detectors with a manufacture date over 10 years must be replaced; batteries changed at the time of inspection",
+   "Carbon monoxide detectors within 10 feet of all sleeping areas; CO detectors over 5 years old replaced",
+   "Hardwired (110V) systems need a written report from a NJ licensed electrician or certified alarm company; battery systems need a signed affidavit",
+   "Minimum size 10 type ABC fire extinguisher within 10 feet of the kitchen (form still lists it)"
+  ],
+  "authorities": [
+   {
+    "name": "Englewood Cliffs Building Department (smoke/CO checked as part of the CCO); Fire Prevention under the Englewood Cliffs Fire Department is the LEA",
+    "type": "municipal_fire_bureau",
+    "area_served": "Entire borough",
+    "lead_time": "With the CCO: apply at least two weeks before closing.",
+    "fees": [],
+    "how_to_apply": "The smoke/CO affidavit and electrician or alarm company report are part of the CCO Residential Sale application filed with the Building Department; no separate smoke certificate application or fee is posted.",
+    "application_url": "https://englewoodcliffsnj.org/Documents/Departments/Building/Application-for-Certificate-of-Continured-Occupancy-Residential-Sale.pdf",
+    "department_url": "https://englewoodcliffsnj.org/departments/building/index.php",
+    "phone": "201-569-5252",
+    "email": "fireofficial@englewoodcliffsnj.org",
+    "contact_name": "Joseph Cardullo",
+    "contact_title": "Fire Official (NJ DCA directory)",
+    "evidence": [
+     {
+      "url": "https://englewoodcliffsnj.org/Documents/Departments/Building/Application-for-Certificate-of-Continured-Occupancy-Residential-Sale.pdf",
+      "quote": "Smoke Detectors and Carbon Monoxide Detectors shall be tested and in working order at the time of inspection.",
+      "doc_date": "REVISED 6/28/24",
+      "via": "pdf",
+      "verified": null
+     },
+     {
+      "url": "https://ecode360.com/35700600",
+      "quote": "No certificate of continued occupancy may be issued to a residential building or any portion thereof unless approved smoke detector and carbon monoxide detectors have been installed as required by applicable State statute and local ordinance.",
+      "doc_date": "2025-11-12 (Ord. No. 25-07)",
+      "via": "page",
+      "verified": null
+     },
+     {
+      "url": "https://www.nj.gov/dca/dfs/pdf/fire%20directory_county%20summary/fire_code_enforcement_director.pdf",
+      "quote": "LEAID: 0216-001 Englewood Cliffs Boro SMOKE DETECTOR COMPLIANCE Name: Englewood Cliffs Bldg Dept Enf Auth. Fire Dept Fire Official Joseph Cardullo Phone (201) 768-4890",
+      "doc_date": "survey date 2/6/2025",
+      "via": "state_directory",
+      "verified": null
+     },
+     {
+      "url": "https://nj.gov/dca/dfs/pdf/ANNUAL%20REGISTRY/THIRD%20QUARTER%20LEA%20REGISTRY%202026.pdf",
+      "quote": "F Englewood Cliffs Borough",
+      "doc_date": "2026-07",
+      "via": "pdf",
+      "verified": true
+     }
+    ],
+    "confidence": "medium"
+   }
+  ],
+  "notes": "The NJ DCA directory names the Englewood Cliffs Building Department as the smoke detector compliance office and lists Fire Official Joseph Cardullo (fireofficial@englewoodcliffsnj.org; office phone (201) 569-5252, smoke compliance line (201) 768-4890). No separate smoke/CO certificate fee is published; it appears to be covered by the $100 CCO. The Borough form still lists a fire extinguisher (and includes a 2005 DCA extinguisher memo); the state dropped it from the sale certificate in February 2025 (P.L.2025, c.19), so confirm with the Borough."
+ },
+ "other_items": [
+  {
+   "label": "Sump pump / storm drain affidavit and inspection",
+   "detail": "At every CCO or ownership transfer the fire subcode official inspects for sump pumps or drains discharging into the sanitary sewer; the owner signs a notarized affidavit that none are connected. No CCO is issued until any such connection is removed.",
+   "source_url": "https://ecode360.com/35700252"
+  },
+  {
+   "label": "House number",
+   "detail": "No CCO is issued unless the house number meets Property Maintenance Code Section 10-7.2e (at least 3 inches, or 6 inches if more than 50 feet from the curb, contrasting and visible).",
+   "source_url": "https://englewoodcliffsnj.org/Documents/Departments/Building/Application-for-Certificate-of-Continured-Occupancy-Residential-Sale.pdf"
+  },
+  {
+   "label": "Open permits, taxes and fees",
+   "detail": "No CCO is issued before closing without closing all building permits and paying all taxes, penalties and fees due to the Borough.",
+   "source_url": "https://englewoodcliffsnj.org/Documents/Departments/Building/Application-for-Certificate-of-Continured-Occupancy-Residential-Sale.pdf"
+  }
+ ],
+ "open_questions": [
+  "Is the reinspection fee $50 (Code, November 2025) or $125.00 (application form, June 2024)?",
+  "Is there any separate smoke/CO certificate fee, or does the $100 CCO cover it?",
+  "Does the Borough still require the fire extinguisher after P.L.2025, c.19?"
+ ],
+ "verification": {
+  "fees": 4,
+  "fee_ok": 0,
+  "fee_bad": 0,
+  "fee_unchecked": 4,
+  "quotes": 10,
+  "q_ok": 3,
+  "q_bad": 0,
+  "q_unchecked": 7
+ }
+}

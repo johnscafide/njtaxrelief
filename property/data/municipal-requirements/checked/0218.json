@@ -1,0 +1,255 @@
+{
+ "municipality_code": "0218",
+ "municipality": "Fairview Borough",
+ "county": "BERGEN",
+ "checked_at": "2026-10-04",
+ "resale_co": {
+  "status": "required",
+  "name": "Certificate of Continued Occupancy (CCO), residential resale",
+  "issued_by": "Borough of Fairview Building Department (Construction Official / Zoning Officer)",
+  "lead_time": "The Borough Code says the application must be filed at least 21 calendar days before the new owner or tenant moves in. Inspections are Monday to Friday, 10 am to 12 pm, after the full paperwork and payment are in.",
+  "valid_for": "A temporary certificate may be issued if only minor violations remain, conditioned on fixing them within 45 days.",
+  "requirements": [
+   "Complete all 9 pages of the Residential Resale/Refinance CCO application, with original notarized signatures",
+   "Copy of the property survey (resales)",
+   "Smoke detectors and carbon monoxide detectors must be UL 217 approved and installed",
+   "Disclose any permits that need final inspections",
+   "Tenant affidavit: valid rental CCOs for every current tenant, or the seller must apply and pay for them",
+   "Tank affidavit: any oil tank must be properly decommissioned (permit and inspection closed) before the resale certificate is issued, or a buyer agreement or metal detector sweep provided",
+   "Buyer affidavit acknowledging the legal number of dwelling units (Ordinance 03-22, $5,000 minimum fine per added unit)",
+   "Zoning use, visible hazards and outstanding violations are checked"
+  ],
+  "fees": [
+   {
+    "label": "Residential resale CCO application",
+    "amount": "$125.00",
+    "quote": "Residential Resale and Refinance Applications are $125.00",
+    "source_url": "https://fairviewborough.com/government/forms/construction/74-residential-resale-packet/file",
+    "verified": true
+   },
+   {
+    "label": "CCO fee, change in ownership (Borough Code §11-4)",
+    "amount": "$125 per unit",
+    "quote": "Change in ownership: $125 per unit.",
+    "source_url": "https://ecode360.com/35232884",
+    "verified": null
+   }
+  ],
+  "how_to_apply": "Download the Residential Resale Packet from the Building Department's Applications page, complete every page (notarized originals, one-sided copies), attach the survey, and hand it in with payment at the Municipal Building, 59 Anderson Avenue, 3rd Floor. Pay by cash (exact change), check or money order to the Borough of Fairview; no credit cards. The office then schedules the inspection.",
+  "application_url": "https://fairviewborough.com/government/forms/construction/74-residential-resale-packet/file",
+  "department_url": "https://fairviewborough.com/departments/construction",
+  "phone": "201-943-5485",
+  "email": "nbellucci@fairviewborough.com",
+  "contact_name": "Richard Bolan",
+  "contact_title": "Construction Official / Zoning Officer (Technical Assistant: Nicole Bellucci)",
+  "evidence": [
+   {
+    "url": "https://fairviewborough.com/departments/construction",
+    "quote": "Certificates of Occupancy are required for all resales, rentals and the opening of any new or existing business.",
+    "doc_date": "2026-10-04 (page fetched)",
+    "via": "page",
+    "verified": true
+   },
+   {
+    "url": "https://fairviewborough.com/departments/construction",
+    "quote": "applications are required any time a new tenant is moving in or a property is being sold.",
+    "doc_date": "2026-10-04 (page fetched)",
+    "via": "page",
+    "verified": true
+   },
+   {
+    "url": "https://fairviewborough.com/departments/construction",
+    "quote": "Richard Bolan",
+    "doc_date": "2026-10-04 (page fetched)",
+    "via": "page",
+    "verified": true
+   },
+   {
+    "url": "https://fairviewborough.com/departments/construction",
+    "quote": "201-943-5485",
+    "doc_date": "2026-10-04 (page fetched)",
+    "via": "page",
+    "verified": true
+   },
+   {
+    "url": "https://fairviewborough.com/government/forms/construction/74-residential-resale-packet/file",
+    "quote": "Residential Resale/Refinance CCO Application Instructions",
+    "doc_date": "",
+    "via": "pdf",
+    "verified": true
+   },
+   {
+    "url": "https://fairviewborough.com/government/forms/construction/74-residential-resale-packet/file",
+    "quote": "Inspections are done Monday through Friday between 10am-12pm.",
+    "doc_date": "",
+    "via": "pdf",
+    "verified": true
+   },
+   {
+    "url": "https://fairviewborough.com/government/forms/construction/74-residential-resale-packet/file",
+    "quote": "THIS APPLICATION MUST BE SUBMITTED WITH A COPY OF THE PROPERTY SURVEY FOR RESALES",
+    "doc_date": "",
+    "via": "pdf",
+    "verified": true
+   },
+   {
+    "url": "https://ecode360.com/35232884",
+    "quote": "The application shall be filed by the current property owner no later than 21 calendar days prior to the anticipated date of occupancy by a new tenant or owner.",
+    "doc_date": "2026-10-04 (page fetched)",
+    "via": "page",
+    "verified": null
+   },
+   {
+    "url": "https://ecode360.com/35232884",
+    "quote": "Any owner, landlord or agent of any premises which is about to be sold or newly occupied shall apply in writing utilizing the forms provided by the municipality to the enforcement authority of the Borough for a certificate of continued occupancy",
+    "doc_date": "2026-10-04 (page fetched)",
+    "via": "page",
+    "verified": null
+   },
+   {
+    "url": "https://ecode360.com/35232884",
+    "quote": "No certificate of occupancy or certificate of continued occupancy shall be issued for any structure unless smoke detectors and carbon monoxide alarms are installed in such structure.",
+    "doc_date": "2026-10-04 (page fetched)",
+    "via": "page",
+    "verified": null
+   },
+   {
+    "url": "https://ecode360.com/35232884",
+    "quote": "A notice shall be included on all tax searches and added assessment searches prepared by the Tax Collector of the Borough of Fairview stating that a certificate of continued occupancy is required for a change of occupancy, sale or the vacation of any building",
+    "doc_date": "2026-10-04 (page fetched)",
+    "via": "page",
+    "verified": null
+   }
+  ],
+  "confidence": "high",
+  "notes": "Borough Code §11-4 (Certificate of Continued Occupancy) was read through the ecode360 page. The ordinance fee list also shows 'Single family/multi-family/mixed use: $100', but the current resale packet and the 'Change in ownership: $125 per unit' line both point to $125 for a sale. Transfers between immediate family members are exempt under the ordinance. Building office hours are M-F 8:30 am to 1:00 pm and 2:00 pm to 4:30 pm. Nicole Bellucci (Technical Assistant) is the email contact on the packet; Richard Bolan's email is rbolan@fairviewborough.com. Rental CCOs, the Landlord Identity Registration and the Rent Leveling rules are rental items, not resale requirements, except that the seller must cover missing rental CCOs for current tenants."
+ },
+ "fire_cert": {
+  "requirements": [
+   "Smoke detectors and carbon monoxide alarms installed (checked during the CCO inspection); CO and smoke detectors must be UL 217 approved per the packet",
+   "Carbon monoxide alarms near sleeping areas in homes with a fuel-burning appliance or attached garage (Borough Code §11-4)",
+   "Existing one and two family homes may use approved battery smoke detectors under the Borough Code"
+  ],
+  "authorities": [
+   {
+    "name": "Borough of Fairview Building Department (smoke detector compliance through the resale CCO); fire code enforcing agency: Fairview Bureau of Fire Safety",
+    "type": "municipal_fire_bureau",
+    "area_served": "Entire borough",
+    "lead_time": "Same as the CCO: file at least 21 calendar days before occupancy; inspections Monday to Friday, 10 am to 12 pm.",
+    "fees": [
+     {
+      "label": "Smoke/CO check within the resale CCO (same fee as the CCO, not an extra charge)",
+      "amount": "$125.00",
+      "quote": "Residential Resale and Refinance Applications are $125.00",
+      "source_url": "https://fairviewborough.com/government/forms/construction/74-residential-resale-packet/file",
+      "verified": true
+     }
+    ],
+    "how_to_apply": "Part of the Residential Resale CCO packet filed with the Building Department, 59 Anderson Avenue, 3rd Floor. The Bureau of Fire Safety handles fire code questions.",
+    "application_url": "https://fairviewborough.com/government/forms/construction/74-residential-resale-packet/file",
+    "department_url": "https://fairviewborough.com/departments/fire-prevention",
+    "phone": "(201) 943-3300 Ext. 256",
+    "email": "dlicameli@fairviewborough.com",
+    "contact_name": "Dennis Licameli",
+    "contact_title": "Fire Official/Fire Chief",
+    "evidence": [
+     {
+      "url": "https://fairviewborough.com/departments/fire-prevention",
+      "quote": "Dennis Licameli",
+      "doc_date": "2026-10-04 (page fetched)",
+      "via": "page",
+      "verified": true
+     },
+     {
+      "url": "https://fairviewborough.com/departments/fire-prevention",
+      "quote": "Fire Official/Fire Chief",
+      "doc_date": "2026-10-04 (page fetched)",
+      "via": "page",
+      "verified": true
+     },
+     {
+      "url": "https://fairviewborough.com/departments/fire-prevention",
+      "quote": "(201) 943-3300 Ext. 256",
+      "doc_date": "2026-10-04 (page fetched)",
+      "via": "page",
+      "verified": true
+     },
+     {
+      "url": "https://fairviewborough.com/departments/fire-prevention",
+      "quote": "Ensuring homes and businesses are equipped with properly functioning smoke & carbon monoxide detectors",
+      "doc_date": "2026-10-04 (page fetched)",
+      "via": "page",
+      "verified": true
+     },
+     {
+      "url": "https://fairviewborough.com/government/forms/construction/74-residential-resale-packet/file",
+      "quote": "CO & Smoke Detectors Must Be UL217 Approved.",
+      "doc_date": "",
+      "via": "pdf",
+      "verified": true
+     },
+     {
+      "url": "https://ecode360.com/35209080",
+      "quote": "The local enforcing agency shall be the Bureau of Fire Safety in the Borough of Fairview.",
+      "doc_date": "2026-10-04 (page fetched)",
+      "via": "page",
+      "verified": null
+     },
+     {
+      "url": "https://www.nj.gov/dca/dfs/pdf/fire%20directory_county%20summary/fire_code_enforcement_director.pdf",
+      "quote": "LEAID: 0218-001 Fairview Boro SMOKE DETECTOR COMPLIANCE Name: Fairview Boro Bldg Dept ... Enf Auth. Municipal Addr: 59 Anderson Av ... Fire Official Dennis Licameli Phone (201) 943-5485 ... Email dlicameli@fairviewborough.com",
+      "doc_date": "2026 (survey date 7/28/2026)",
+      "via": "state_directory",
+      "verified": null
+     },
+     {
+      "url": "https://nj.gov/dca/dfs/pdf/ANNUAL%20REGISTRY/THIRD%20QUARTER%20LEA%20REGISTRY%202026.pdf",
+      "quote": "M Fairview Borough",
+      "doc_date": "2026-07",
+      "via": "pdf",
+      "verified": true
+     }
+    ],
+    "confidence": "medium"
+   }
+  ],
+  "notes": "The NJ DCA directory lists the Fairview Borough Building Department (59 Anderson Ave, (201) 943-5485) for smoke detector compliance, and the Borough Code bars any CCO unless smoke and CO alarms are installed, so the smoke/CO certificate appears to be handled inside the resale CCO. No separate smoke certificate fee or form was found. The Bureau of Fire Safety also lists fire inspectors Kristian Vera (Ext. 258) and Joseph D'Angelo ((201) 943-3040). The resale packet does not list a fire extinguisher. State law (P.L.2025, c.19, signed February 3, 2025) dropped the portable fire extinguisher from the state sale certificate."
+ },
+ "other_items": [
+  {
+   "label": "Heating oil tank",
+   "detail": "Seller must certify there was never a tank, or that it was properly decommissioned; an improperly closed tank needs a permit and inspection closed before the resale certificate is issued (or a buyer agreement or licensed metal-detector sweep).",
+   "source_url": "https://fairviewborough.com/government/forms/construction/74-residential-resale-packet/file"
+  },
+  {
+   "label": "Open permits",
+   "detail": "The application asks about permits needing final inspections; outstanding violations or Construction Official orders are checked.",
+   "source_url": "https://fairviewborough.com/government/forms/construction/74-residential-resale-packet/file"
+  },
+  {
+   "label": "Rental CCOs for current tenants",
+   "detail": "Before a resale CCO is issued, valid rental CCOs must be on file for every apartment with current tenants, or the seller must apply and pay for them.",
+   "source_url": "https://ecode360.com/35232884"
+  },
+  {
+   "label": "Buyer affidavit on number of units",
+   "detail": "Buyer signs a notarized affidavit on the legal number of dwelling units; adding units later carries a minimum $5,000 fine per unit (Ordinance 03-22).",
+   "source_url": "https://fairviewborough.com/government/forms/construction/74-residential-resale-packet/file"
+  }
+ ],
+ "open_questions": [
+  "Is the resale fee $125 for both one- and two-family homes, or $125 per unit for a two-family?",
+  "Does the Building Department issue a separate smoke/CO certificate, or is it only noted on the CCO?",
+  "Typical wait from application to inspection."
+ ],
+ "verification": {
+  "fees": 3,
+  "fee_ok": 2,
+  "fee_bad": 0,
+  "fee_unchecked": 1,
+  "quotes": 19,
+  "q_ok": 13,
+  "q_bad": 0,
+  "q_unchecked": 6
+ }
+}

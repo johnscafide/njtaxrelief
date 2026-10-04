@@ -1,0 +1,246 @@
+{
+ "municipality_code": "0243",
+ "municipality": "Old Tappan Borough",
+ "county": "BERGEN",
+ "resale_co": {
+  "status": "required",
+  "name": "Rental and Resale Certificate (RRC, formerly CCO): Certificate of occupancy, resale and/or rental certificate",
+  "issued_by": "Borough of Old Tappan Building Department (Construction Official or his agent), with a fire inspection",
+  "lead_time": "Code: the Construction Official acts within 10 working days after entry is provided. Inspection times are set by the Borough; no specific time can be requested.",
+  "valid_for": "",
+  "requirements": [
+   "All open permits must be closed before the sale; check open permits before applying",
+   "Someone over 18 must be at the house until the inspectors finish; inspectors do not call ahead",
+   "Furnace/boiler flue connections sealed; replaced water heaters and mechanical equipment need a permit and an approval sticker",
+   "Sump pumps discharge outside, not to the sanitary sewer; anti-tip brackets on stoves where required; rigid visible kitchen exhaust ducts",
+   "Electrical outlets, switches, boxes and panels covered; no lamp cords on fixed appliances",
+   "Handrails on 4 or more risers; guards on landings over 30 inches and open basement stairs; garage walls/ceilings next to the house sheet-rocked",
+   "Pool gates and fencing compliant (self-closing, self-latching, latches 54 inches); lawn and bushes trimmed; no property maintenance violations",
+   "Smoke alarms on every level (under 10 years old, 10-year sealed battery or hardwired, per the house's construction era) and a CO alarm within 10 feet of every bedroom",
+   "Kitchen fire extinguisher 2A:10B:C, no more than 10 lbs, mounted within 10 feet of the kitchen (form still lists it)",
+   "Resale-only certificates (buyer not occupying) need a notarized letter from the purchaser's attorney"
+  ],
+  "fees": [
+   {
+    "label": "Residential inspection fee (application form; one check can cover building and fire inspections)",
+    "amount": "$125",
+    "quote": "$125 – Inspection Fee",
+    "source_url": "https://oldtappan.net/forms-documents/forms/department-documents/construction/66-cco-rental-and-resale-application/file",
+    "verified": true
+   },
+   {
+    "label": "Re-inspection (application form)",
+    "amount": "$50",
+    "quote": "$50 – Re-inspection (if any inspection should fail)",
+    "source_url": "https://oldtappan.net/forms-documents/forms/department-documents/construction/66-cco-rental-and-resale-application/file",
+    "verified": true
+   },
+   {
+    "label": "Certificate fee, request more than 10 business days before inspection (Code Section 100-14.6)",
+    "amount": "$50",
+    "quote": "Requests made more than 10 business days' prior to inspection: $50.",
+    "source_url": "https://ecode360.com/11278456",
+    "verified": null
+   },
+   {
+    "label": "Request 4 to 10 business days before inspection (Code)",
+    "amount": "$75",
+    "quote": "Between four to 10 business days' prior to inspection: $75.",
+    "source_url": "https://ecode360.com/11278456",
+    "verified": null
+   },
+   {
+    "label": "Request less than 4 business days before inspection (Code)",
+    "amount": "$125",
+    "quote": "Less than four business days' prior to inspection: $125.",
+    "source_url": "https://ecode360.com/11278456",
+    "verified": null
+   },
+   {
+    "label": "Reinspection if the first inspection fails (Code)",
+    "amount": "$50",
+    "quote": "Reinspection fee (if the first inspection should fail): $50.",
+    "source_url": "https://ecode360.com/11278456",
+    "verified": null
+   }
+  ],
+  "how_to_apply": "Fill out the Rental and/or Resale Certificate Application (Ordinance No. 100-14) and send it with a check payable to the Borough of Old Tappan to the Building Department, 227 Old Tappan Road, Old Tappan, NJ 07675. One check can cover both the building and fire inspections. The Technical Assistant or Borough Inspector schedules the inspection.",
+  "application_url": "https://oldtappan.net/forms-documents/forms/department-documents/construction/66-cco-rental-and-resale-application/file",
+  "department_url": "https://oldtappan.net/departments/construction",
+  "phone": "201-664-1849 ext. 19",
+  "email": "",
+  "contact_name": "Jennifer Boehm",
+  "contact_title": "Technical Assistant (Construction/Zoning Official Bob Rusch, ext. 20)",
+  "evidence": [
+   {
+    "url": "https://ecode360.com/11278456",
+    "quote": "Certificate of occupancy, resale and/or rental certificates are required before occupancy.",
+    "doc_date": "Adopted 9-5-2023 by Ord. No. 1237-23",
+    "via": "page",
+    "verified": null
+   },
+   {
+    "url": "https://ecode360.com/11278456",
+    "quote": "No person shall occupy, rent, lease, sublet, transfer title to or suffer the occupancy of, the letting of or allow any person to live in or upon, inhabit as a tenant or tenants or occupants or to occupy as a new owner or cotenants or co-owner any dwelling house or houses or dwelling units, within the confines of the Borough of Old Tappan, unless and until that person shall have first obtained from the Construction Official or his agent of the Borough of Old Tappan a certificate of occupancy, resale and/or rental certificate.",
+    "doc_date": "Ord. No. 1237-23",
+    "via": "page",
+    "verified": null
+   },
+   {
+    "url": "https://ecode360.com/11278456",
+    "quote": "The Construction Official or his agent shall comply with the request and application within 10 working days after entry is provided and, when proper, shall issue the certificate upon approval.",
+    "doc_date": "Ord. No. 1237-23",
+    "via": "page",
+    "verified": null
+   },
+   {
+    "url": "https://oldtappan.net/forms-documents/forms/department-documents/construction/66-cco-rental-and-resale-application/file",
+    "quote": "All open permits MUST be closed prior to the sale.",
+    "doc_date": "2026-10-04 (page fetched)",
+    "via": "pdf",
+    "verified": true
+   },
+   {
+    "url": "https://oldtappan.net/forms-documents/forms/department-documents/construction/66-cco-rental-and-resale-application/file",
+    "quote": "Inspections will be scheduled by the Borough Technical Assistant or Borough Inspector. No specific time can be requested...NO EXCEPTIONS.",
+    "doc_date": "2026-10-04 (page fetched)",
+    "via": "pdf",
+    "verified": true
+   },
+   {
+    "url": "https://oldtappan.net/forms-documents/forms/department-documents/construction/66-cco-rental-and-resale-application/file",
+    "quote": "Please make checks payable to the Borough of Old Tappan. One check can be made for both Building and Fire Inspections.",
+    "doc_date": "2026-10-04 (page fetched)",
+    "via": "pdf",
+    "verified": true
+   },
+   {
+    "url": "https://oldtappan.net/forms-documents/forms/department-documents/construction/66-cco-rental-and-resale-application/file",
+    "quote": "Construction/Zoning Official, Bob Rusch ext. 20",
+    "doc_date": "2026-10-04 (page fetched)",
+    "via": "pdf",
+    "verified": true
+   },
+   {
+    "url": "https://oldtappan.net/forms-documents/forms/department-documents/construction/66-cco-rental-and-resale-application/file",
+    "quote": "Technical Assistant, Jennifer Boehm ext. 19",
+    "doc_date": "2026-10-04 (page fetched)",
+    "via": "pdf",
+    "verified": true
+   }
+  ],
+  "confidence": "high",
+  "notes": "Code Article III of Chapter 100 (Sections 100-14 to 100-14.10, adopted September 5, 2023 by Ord. 1237-23) was read through the ecode360 print view. The Code fee in Section 100-14.6 is tiered ($50 / $75 / $125) while the current application form lists a flat $125 residential inspection fee; Section 100-3 also still lists an older C.C.O. fee ($50 residential if scheduled 10 or more days before closing, plus $25 or $100 for shorter notice). Confirm which applies. Staff emails on the Borough site are hidden behind email protection, so none are given; inspection requests can be made by email from the Construction page."
+ },
+ "fire_cert": {
+  "requirements": [
+   "Smoke alarms on every level including the basement, within 10 feet of bedroom doors, under 10 years old; hardwired and interconnected as required by the year the house was built",
+   "Carbon monoxide alarm within 10 feet of the bedroom doors (battery or plug-in accepted); CO alarm inside bedrooms with fuel-burning appliances",
+   "Portable fire extinguisher 2A:10B:C within 10 feet of the kitchen, mounted no higher than 5 feet, serviced/tagged within 12 months or with a receipt (form still lists it)",
+   "Monitored alarm systems: password must be available"
+  ],
+  "authorities": [
+   {
+    "name": "Borough of Old Tappan (Building Department schedules; Fire Prevention Bureau, Fire Marshal)",
+    "type": "municipal_fire_bureau",
+    "area_served": "Entire borough",
+    "lead_time": "Fire inspections are listed Wednesday and Friday 2:00pm to 4:00pm on the Building page; scheduled with the Building Department.",
+    "fees": [
+     {
+      "label": "Residential inspection fee covering building and fire inspections (application form)",
+      "amount": "$125",
+      "quote": "$125 – Inspection Fee",
+      "source_url": "https://oldtappan.net/forms-documents/forms/department-documents/construction/66-cco-rental-and-resale-application/file",
+      "verified": true
+     }
+    ],
+    "how_to_apply": "Use the same Rental and Resale application; the Building Department (201-664-1849 ext. 19) arranges the smoke and CO inspection and certificate.",
+    "application_url": "https://oldtappan.net/forms-documents/forms/department-documents/construction/66-cco-rental-and-resale-application/file",
+    "department_url": "https://oldtappan.net/departments/fire-prevention",
+    "phone": "201-664-1849 Ext. 26",
+    "email": "firemarshal@oldtappan.net",
+    "contact_name": "Evan Kutzin",
+    "contact_title": "Fire Marshal",
+    "evidence": [
+     {
+      "url": "https://oldtappan.net/departments/fire-prevention",
+      "quote": "Residents selling their homes are reminded that a Certificate of Compliance indicating smoke detector and carbon monoxide detector placement and operation is required before a home sale can be completed.",
+      "doc_date": "2026-10-04 (page fetched)",
+      "via": "page",
+      "verified": true
+     },
+     {
+      "url": "https://oldtappan.net/departments/fire-prevention",
+      "quote": "Contact the Building Department at 201-664-1849 ext. 19 to arrange an inspection and obtain this certificate.",
+      "doc_date": "2026-10-04 (page fetched)",
+      "via": "page",
+      "verified": true
+     },
+     {
+      "url": "https://oldtappan.net/departments/fire-prevention",
+      "quote": "Evan Kutzin Fire Marshal (201) 664-1849 Ext. 26",
+      "doc_date": "2026-10-04 (page fetched)",
+      "via": "page",
+      "verified": true
+     },
+     {
+      "url": "https://ecode360.com/11278456",
+      "quote": "Penalty for failure to obtain a certificate of smoke detector and carbon monoxide alarm compliance: $150.",
+      "doc_date": "2026-10-04 (page fetched)",
+      "via": "page",
+      "verified": null
+     },
+     {
+      "url": "https://www.nj.gov/dca/dfs/pdf/fire%20directory_county%20summary/fire_code_enforcement_director.pdf",
+      "quote": "0243 Old Tappan Borough LEAID: 0243-001 Old Tappan Boro Enf Auth. Municipal Fire Official Evan J Kutzin Smoke Detector Compliance Name: Old Tappan Boro Fire Prev Addr: 227 Old Tappan Rd Phone (201) 664-1849 Email firemarshal@oldtappan.net",
+      "doc_date": "2026-05-18 (survey date)",
+      "via": "state_directory",
+      "verified": null
+     },
+     {
+      "url": "https://nj.gov/dca/dfs/pdf/ANNUAL%20REGISTRY/THIRD%20QUARTER%20LEA%20REGISTRY%202026.pdf",
+      "quote": "M Old Tappan Borough",
+      "doc_date": "2026-07",
+      "via": "pdf",
+      "verified": true
+     }
+    ],
+    "confidence": "high"
+   }
+  ],
+  "notes": "The smoke/CO certificate is handled together with the Rental and Resale Certificate: the Fire Prevention page sends sellers to the Building Department, and the form says one check covers building and fire inspections. No separate tiered smoke certificate fee was found apart from a $150 penalty for not getting one (Code Section 100-3). The form still requires a fire extinguisher, which state law (P.L.2025, c.19) dropped from the sale certificate in February 2025. Fire Marshal email is from the state fire directory."
+ },
+ "other_items": [
+  {
+   "label": "Open permits",
+   "detail": "All open permits must be closed before the sale and before the resale inspection.",
+   "source_url": "https://oldtappan.net/forms-documents/forms/department-documents/construction/66-cco-rental-and-resale-application/file"
+  },
+  {
+   "label": "Pool fence and property upkeep",
+   "detail": "Pool fencing and gates must match the original approved installation and be self-closing and latching; lawn and bushes trimmed; no property maintenance violations.",
+   "source_url": "https://oldtappan.net/forms-documents/forms/department-documents/construction/66-cco-rental-and-resale-application/file"
+  },
+  {
+   "label": "Sump pump discharge",
+   "detail": "Sump pumps must discharge outside and cannot be tied to the sanitary sewer.",
+   "source_url": "https://oldtappan.net/forms-documents/forms/department-documents/construction/66-cco-rental-and-resale-application/file"
+  }
+ ],
+ "open_questions": [
+  "Which resale fee is charged: the flat $125 on the form or the Code's tiered $50 / $75 / $125 (Section 100-14.6)?",
+  "Does Old Tappan still require the portable fire extinguisher after P.L.2025, c.19?",
+  "How long is the certificate valid?"
+ ],
+ "checked_at": "2026-10-04",
+ "verification": {
+  "fees": 7,
+  "fee_ok": 3,
+  "fee_bad": 0,
+  "fee_unchecked": 4,
+  "quotes": 14,
+  "q_ok": 9,
+  "q_bad": 0,
+  "q_unchecked": 5
+ }
+}

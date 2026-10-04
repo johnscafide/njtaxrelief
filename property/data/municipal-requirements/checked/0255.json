@@ -1,0 +1,187 @@
+{
+ "municipality_code": "0255",
+ "municipality": "Rockleigh Borough",
+ "county": "BERGEN",
+ "resale_co": {
+  "status": "required",
+  "name": "Certificate of Continuing Occupancy (CCO) / Certificate of Resale/Rental Residential Property",
+  "issued_by": "Borough of Rockleigh Construction Office (Construction Official)",
+  "lead_time": "Inspections are conducted Monday through Friday between 9 a.m. and 5 p.m.",
+  "valid_for": "",
+  "requirements": [
+   "Written application by the owner or agent, saying whether the property is to be sold",
+   "General inspection showing no apparent violations and no pending violations, orders or open matters with the Construction Official",
+   "Use of the building must have existed before (no unapproved change of use)"
+  ],
+  "fees": [
+   {
+    "label": "Inspection / CCO issuance, residential resale or rental",
+    "amount": "$150.00",
+    "quote": "The fee for the inspection / CCO issuance is $150.00.",
+    "source_url": "https://rockleighnj.org/s/Application-for-Certificate-of-Resale-Rental-Residential-Property.pdf",
+    "verified": null
+   },
+   {
+    "label": "Certificate of continued occupancy letter (Borough Code Section 9-1.3)",
+    "amount": "$150",
+    "quote": "The fee for a certificate of continued occupancy letter shall be $150.",
+    "source_url": "https://ecode360.com/34754940",
+    "verified": null
+   }
+  ],
+  "how_to_apply": "Download the Application for Certificate of Resale/Rental Residential Property from the Borough's Forms & Permits page, fill in owner, buyer and inspection-day contact, and submit it to the Construction Office, 26 Rockleigh Road, Rockleigh, NJ 07647, with a $150.00 check payable to the Borough of Rockleigh.",
+  "application_url": "https://rockleighnj.org/s/Application-for-Certificate-of-Resale-Rental-Residential-Property.pdf",
+  "department_url": "https://rockleighnj.org/building",
+  "phone": "201-768-4217",
+  "email": "clerk@rockleighnj.org",
+  "contact_name": "William McGuire",
+  "contact_title": "Construction Official / Construction/Zoning Official",
+  "evidence": [
+   {
+    "url": "https://ecode360.com/34757033",
+    "quote": "Any such vacation, sale or change of use without obtaining a certificate of continuing occupancy shall constitute a violation of this Article and subject the owner or occupier to the penalties provided in § 34-57.",
+    "doc_date": "2026-10-04 (page fetched)",
+    "via": "page",
+    "verified": null
+   },
+   {
+    "url": "https://ecode360.com/34757033",
+    "quote": "The certificate of continuing occupancy shall evidence only that a general inspection has been made and that there are no apparent violations of the applicable laws or ordinances.",
+    "doc_date": "2026-10-04 (page fetched)",
+    "via": "page",
+    "verified": null
+   },
+   {
+    "url": "https://rockleighnj.org/s/Application-for-Certificate-of-Resale-Rental-Residential-Property.pdf",
+    "quote": "Application for Certificate of Resale/Rental Residential Property",
+    "doc_date": "2026-10-04 (page fetched)",
+    "via": "pdf",
+    "verified": null
+   },
+   {
+    "url": "https://rockleighnj.org/s/Application-for-Certificate-of-Resale-Rental-Residential-Property.pdf",
+    "quote": "Inspections are conducted Monday through Friday between 9 a.m. and 5 p.m.",
+    "doc_date": "",
+    "via": "pdf",
+    "verified": null
+   },
+   {
+    "url": "https://rockleighnj.org/forms",
+    "quote": "Application for Certificate of Resale/Rental Residential Property",
+    "doc_date": "2026-10-04 (page fetched)",
+    "via": "page",
+    "verified": true
+   },
+   {
+    "url": "https://rockleighnj.org/building",
+    "quote": "Construction/Zoning Official",
+    "doc_date": "2026-10-04 (page fetched)",
+    "via": "page",
+    "verified": true
+   }
+  ],
+  "confidence": "high",
+  "notes": "Borough Code Section 34-43 (Zoning, Certificate of Occupancy) requires a certificate of continuing occupancy when a building is sold, and Section 9-1.3 sets the CCO letter fee at $150 (fee section amended 9-8-2025 by Ord. No. 2025-6). Both were read through ecode360. The Borough application PDF is a scanned image, so its quotes were read visually and an automated text check will not find them. The Borough office phone (201-768-4217) and email (clerk@rockleighnj.org) are general Borough contacts. William McGuire is listed as Construction Official, Construction/Zoning Official and Fire Official; there is no separate email for him on the Borough site (the state directory lists wmcguire@rockleighnj.org)."
+ },
+ "fire_cert": {
+  "requirements": [
+   "Smoke alarm on each level and outside each separate sleeping area, near the bedrooms (Borough code)",
+   "Carbon monoxide detectors as required by N.J.S.A. 52:27D-133.3",
+   "Portable fire extinguisher (ABC type, no larger than 10 pounds, mounted within 10 feet of the kitchen) (Borough code still lists it)"
+  ],
+  "authorities": [
+   {
+    "name": "Rockleigh Fire Prevention Bureau (Borough of Rockleigh)",
+    "type": "municipal_fire_bureau",
+    "area_served": "Entire borough",
+    "lead_time": "Fee depends on business days between the application and the change of occupant: more than 10 business days for the lowest fee.",
+    "fees": [
+     {
+      "label": "Smoke detector compliance certificate, application more than 10 business days before change of occupant",
+      "amount": "$50.00",
+      "quote": "More than 10 business days prior to change of occupant: $50.00",
+      "source_url": "https://ecode360.com/34755071",
+      "verified": null
+     },
+     {
+      "label": "Application four to 10 business days before change of occupant",
+      "amount": "$100.00",
+      "quote": "Four to 10 business days prior to change of occupant: $100.00",
+      "source_url": "https://ecode360.com/34755071",
+      "verified": null
+     },
+     {
+      "label": "Application less than four business days before change of occupant",
+      "amount": "$150.00",
+      "quote": "Less than four business days prior to change of occupant: $150.00",
+      "source_url": "https://ecode360.com/34755071",
+      "verified": null
+     }
+    ],
+    "how_to_apply": "Contact the Borough office at 26 Rockleigh Road (201-768-4217). No separate smoke/CO application form is posted; it is likely handled with the CCO inspection by William McGuire, but confirm.",
+    "application_url": "",
+    "department_url": "https://rockleighnj.org/fire-prevention",
+    "phone": "(201) 768-4217",
+    "email": "wmcguire@rockleighnj.org",
+    "contact_name": "William McGuire",
+    "contact_title": "Fire Inspector/Prevention Official (Alternate Fire Inspector: Kenneth Shepard)",
+    "evidence": [
+     {
+      "url": "https://ecode360.com/34755071",
+      "quote": "In the case of change of occupancy of any building subject to the requirements of subsection 11-1.9, no owner shall sell, lease or otherwise permit occupancy for residential purposes of that building without first obtaining from the Rockleigh Fire Prevention Bureau a certificate evidencing compliance with the requirements of this chapter and N.J.S.A. 52:27D-198.1 and 52:27D-198.2.",
+      "doc_date": "2026-10-04 (page fetched)",
+      "via": "page",
+      "verified": null
+     },
+     {
+      "url": "https://ecode360.com/34755071",
+      "quote": "The fee will be based on when the application is received:",
+      "doc_date": "2026-10-04 (page fetched)",
+      "via": "page",
+      "verified": null
+     },
+     {
+      "url": "https://rockleighnj.org/fire-prevention",
+      "quote": "Fire Inspector/Prevention Official",
+      "doc_date": "2026-10-04 (page fetched)",
+      "via": "page",
+      "verified": true
+     },
+     {
+      "url": "https://www.nj.gov/dca/dfs/pdf/fire%20directory_county%20summary/fire_code_enforcement_director.pdf",
+      "quote": "LEAID: 0255-001 Rockleigh Boro ... Name: Rockleigh Boro Fire Prev ... Enf Auth. Municipal Addr: 26 Rockleigh Rd ... Fire Official William Mc Guire Phone (201) 768-4217 ... Email wmcguire@rockleighnj.org",
+      "doc_date": "2026-02 (survey date 2/18/2026)",
+      "via": "state_directory",
+      "verified": null
+     },
+     {
+      "url": "https://nj.gov/dca/dfs/pdf/ANNUAL%20REGISTRY/THIRD%20QUARTER%20LEA%20REGISTRY%202026.pdf",
+      "quote": "M Rockleigh Borough",
+      "doc_date": "2026-07",
+      "via": "pdf",
+      "verified": true
+     }
+    ],
+    "confidence": "medium"
+   }
+  ],
+  "notes": "The tiered fees come from Borough Code Section 11-1.10 (Chapter 11, Fire Protection and Prevention), read through ecode360. The Borough website does not say whether the smoke/CO certificate fee is charged on top of the $150.00 CCO fee or is included in it, so confidence is medium. The code still requires a portable fire extinguisher; the state dropped it from the sale certificate in February 2025 (P.L.2025, c.19). The code also lets the Fire Official buy and install required smoke detectors for $40.00 each."
+ },
+ "other_items": [],
+ "open_questions": [
+  "Is the smoke/CO certificate fee ($50 / $100 / $150 by timing) charged in addition to the $150.00 CCO fee, or is it covered by it?",
+  "How much lead time does the Construction Office need, and how long is the CCO valid?",
+  "Does Rockleigh still require a portable fire extinguisher after P.L.2025, c.19?"
+ ],
+ "checked_at": "2026-10-04",
+ "verification": {
+  "fees": 5,
+  "fee_ok": 0,
+  "fee_bad": 0,
+  "fee_unchecked": 5,
+  "quotes": 11,
+  "q_ok": 4,
+  "q_bad": 0,
+  "q_unchecked": 7
+ }
+}

@@ -1,0 +1,260 @@
+{
+ "municipality_code": "0244",
+ "municipality": "Oradell Borough",
+ "county": "BERGEN",
+ "checked_at": "2026-10-04",
+ "resale_co": {
+  "status": "required",
+  "name": "Resale / Rental Certificate (RRC), the Borough's Certificate of Continued Occupancy",
+  "issued_by": "Borough of Oradell Building Department (Construction Official)",
+  "lead_time": "The application form asks for 30 days advance inspection notice; the Code says file no later than 21 days before the change of ownership, and the Construction Official issues or denies within 21 calendar days. Inspections Monday to Friday 10:30am to 2:00pm.",
+  "valid_for": "",
+  "requirements": [
+   "General inspection of the visible parts of the premises for zoning compliance, health and safety, and open violations or orders",
+   "Smoke detectors on every level including the basement and within 10 feet of every bedroom door, matched to the type required when the house was built or altered; detectors over ten years old replaced with ten-year sealed battery units; electric detectors may not be replaced with battery units",
+   "Carbon monoxide alarm (UL 2034) within 10 feet of each sleeping area",
+   "Monitored smoke detection systems must work, with an NFPA-72 test report dated no more than 30 days before closing",
+   "Open or unobtained permits are fined; heating equipment and water heaters need an inspection sticker or proof of approval",
+   "Sump pump may not discharge into a sewer line, sink or new curb discharge",
+   "Anti-tip bracket on the stove if the manufacturer requires it; electrical covers; handrails on stairs with 4 or more risers",
+   "Pool barriers and gates must be code compliant; no basement or attic bedrooms without a second means of egress; only one stove in the main kitchen",
+   "No open property maintenance violations; corner shrubs trimmed to 30 inches",
+   "Damaged sidewalks and aprons (1/2 inch or more trip hazard) must be replaced in concrete or lifted; asphalt sidewalks and aprons must be replaced with concrete",
+   "Address numbers displayed at or near the front door",
+   "Two-family homes need an application for each unit"
+  ],
+  "fees": [
+   {
+    "label": "RRC, one and two family dwelling (application form)",
+    "amount": "$130",
+    "quote": "One & two family dwelling Fee:_$130, reinspection Fee: $60",
+    "source_url": "https://www.oradell.org/building-department/files/02-rrc-resale-rental-certificate-application-residential",
+    "verified": true
+   },
+   {
+    "label": "Certificate of continued occupancy resale, R-3 and R-5 one and two family (Borough Code 115-2B)",
+    "amount": "$100",
+    "quote": "R-3 and R-5 (one- and two-family dwellings): $100 for the first inspection and $60 for any other inspection thereafter.",
+    "source_url": "https://ecode360.com/9256691",
+    "verified": null
+   },
+   {
+    "label": "Reinspection, one and two family",
+    "amount": "$60",
+    "quote": "R-3 and R-5 (one- and two-family dwellings): $100 for the first inspection and $60 for any other inspection thereafter.",
+    "source_url": "https://ecode360.com/9256691",
+    "verified": null
+   },
+   {
+    "label": "Request 5 to 10 business days before closing: original fee plus half",
+    "amount": "original fee + 1/2",
+    "quote": "5 to 10 business days prior to closing or change of occupancy: The fee is the original fee + 1/2 the original fee.",
+    "source_url": "https://www.oradell.org/building-department/files/02-rrc-resale-rental-certificate-application-residential",
+    "verified": true
+   },
+   {
+    "label": "Request 4 business days or less before closing: double the original fee",
+    "amount": "2 x original fee",
+    "quote": "4 business days or less prior to closing or change of occupancy: The fee is double the original fee.",
+    "source_url": "https://www.oradell.org/building-department/files/02-rrc-resale-rental-certificate-application-residential",
+    "verified": true
+   },
+   {
+    "label": "Penalty for closing before the RRC is issued",
+    "amount": "$500",
+    "quote": "A $500. Penalty will be assessed for closing or leasing before RRC is issued.",
+    "source_url": "https://www.oradell.org/building-department/files/02-rrc-resale-rental-certificate-application-residential",
+    "verified": true
+   }
+  ],
+  "how_to_apply": "Download the RRC Resale / Rental / Certificate Application (Residential), which also contains the smoke detector and CO alarm application, and submit it with the prepaid fee (checks payable to Borough of Oradell, or exact cash) to the Building Department, Room 102, Borough Hall, 355 Kinderkamack Road. An appointment is scheduled only after a complete application and fee are in.",
+  "application_url": "https://www.oradell.org/building-department/files/02-rrc-resale-rental-certificate-application-residential",
+  "department_url": "https://www.oradell.org/building-department",
+  "phone": "201-261-8005",
+  "email": "rbob@oradell.org",
+  "contact_name": "Stephen A. Depken",
+  "contact_title": "Construction Official / Zoning Officer / Building Inspector / Property Inspector (technical assistant: Rosalia Bob)",
+  "evidence": [
+   {
+    "url": "https://ecode360.com/9256363",
+    "quote": "No person shall occupy a building or portion thereof for residential purposes after said building or portion thereof has been vacated due to the sale of said residential property or for which there has been a change in use or change in tenancy or occupancy until the owner of said premises has applied for and secured a certificate of continued occupancy.",
+    "doc_date": "1989-06-20 (Ord. No. 861)",
+    "via": "page",
+    "verified": null
+   },
+   {
+    "url": "https://ecode360.com/9256363",
+    "quote": "The application shall be filed by the current owner of the property or his agent no later than 21 days prior to the anticipated date of change of ownership, tenancy, occupancy or use.",
+    "doc_date": "1989-06-20 (Ord. No. 861)",
+    "via": "page",
+    "verified": null
+   },
+   {
+    "url": "https://www.oradell.org/building-department/files/02-rrc-resale-rental-certificate-application-residential",
+    "quote": "30 days advance inspection notice is required",
+    "doc_date": "2026-10-04 (page fetched)",
+    "via": "pdf",
+    "verified": true
+   },
+   {
+    "url": "https://www.oradell.org/building-department/files/02-rrc-resale-rental-certificate-application-residential",
+    "quote": "Inspections: Monday thru Friday 10:30am – 2:00pm",
+    "doc_date": "2026-10-04 (page fetched)",
+    "via": "pdf",
+    "verified": true
+   },
+   {
+    "url": "https://www.oradell.org/building-department",
+    "quote": "In addition, the Building Department issues permits for fences, sheds, driveways, sidewalks, aprons, curbs, garage sales, real estate signs, Certificates of Continued Occupancy, and road openings.",
+    "doc_date": "2026-10-04 (page fetched)",
+    "via": "page",
+    "verified": true
+   },
+   {
+    "url": "https://www.oradell.org/building-department",
+    "quote": "Construction Official / Zoning Officer / Building Inspector / Property Inspector",
+    "doc_date": "2026-10-04 (page fetched)",
+    "via": "page",
+    "verified": true
+   }
+  ],
+  "confidence": "high",
+  "notes": "Borough Code Chapter 85 (Certificates of Continued Occupancy) and Chapter 115 (Fees) were read through the ecode360 print view (code current through 09-24-2024). The fee in the Code for a 1-2 family CCO is $100 with $60 reinspection, while the Borough's current residential RRC form lists $130 for a one or two family dwelling with a $60 reinspection; the form combines the CCO and the smoke/CO application, so the $130 may include the smoke/CO part. Confirm the current amount. The form says the fee goes up by half for requests 5 to 10 business days before closing and doubles at 4 business days or less. Lead-based paint inspections in Section 85-2.1 apply to rental units only. Owners of non-owner-occupied 1-2 family homes must register with the Fire Prevention Bureau within 30 days of taking ownership (rental-type registration, not a resale step)."
+ },
+ "fire_cert": {
+  "requirements": [
+   "Smoke detectors on every level including the basement and within 10 feet of every bedroom door; type depends on the year built or altered",
+   "Detectors over ten years old replaced with ten-year sealed battery smoke detectors; electric detectors may not be replaced with battery-only units",
+   "Carbon monoxide alarm (UL 2034) in the hallway within 10 feet of every bedroom door",
+   "Monitored systems need an NFPA-72 test report dated no later than 30 days before closing"
+  ],
+  "authorities": [
+   {
+    "name": "Borough of Oradell Building Department (smoke detector and CO application is part of the RRC); fire code LEA is the Oradell Fire Prevention Bureau",
+    "type": "municipal_fire_bureau",
+    "area_served": "Entire borough",
+    "lead_time": "Filed with the RRC; 30 days advance inspection notice is requested.",
+    "fees": [
+     {
+      "label": "Certificate of smoke detector and carbon monoxide alarm compliance, more than 10 business days before inspection (Code 115-8)",
+      "amount": "$50",
+      "quote": "Requests made more than 10 business days prior to inspection: $50.",
+      "source_url": "https://ecode360.com/9256691",
+      "verified": null
+     },
+     {
+      "label": "4 to 10 business days before inspection",
+      "amount": "$75",
+      "quote": "Requests made four to 10 business days prior to inspection: $75.",
+      "source_url": "https://ecode360.com/9256691",
+      "verified": null
+     },
+     {
+      "label": "Fewer than 4 business days before inspection",
+      "amount": "$125",
+      "quote": "Requests made fewer than four business days prior to inspection: $125.",
+      "source_url": "https://ecode360.com/9256691",
+      "verified": null
+     },
+     {
+      "label": "Reinspection, per occurrence",
+      "amount": "$50",
+      "quote": "Reinspection fee, per occurrence: $50.",
+      "source_url": "https://ecode360.com/9256691",
+      "verified": null
+     },
+     {
+      "label": "Penalty for failure to obtain the certificate",
+      "amount": "$150",
+      "quote": "Penalty for failure to obtain a certificate of smoke detector and carbon monoxide alarm compliance: $150.",
+      "source_url": "https://ecode360.com/9256691",
+      "verified": null
+     }
+    ],
+    "how_to_apply": "Fill in the smoke detector and carbon monoxide application pages inside the Borough's residential RRC application and file it with the Building Department with the RRC fee. For fire code questions call the Fire Prevention Bureau at 201-261-8200 ext. 266.",
+    "application_url": "https://www.oradell.org/building-department/files/02-rrc-resale-rental-certificate-application-residential",
+    "department_url": "https://www.oradell.org/fire-prevention-bureau",
+    "phone": "201-261-8200 ext. 266",
+    "email": "cpetronzio@oradell.org",
+    "contact_name": "Christopher Petronzio",
+    "contact_title": "Interim Fire Marshal (Fire Official in the NJ DCA directory)",
+    "evidence": [
+     {
+      "url": "https://www.oradell.org/building-department/files/02-rrc-resale-rental-certificate-application-residential",
+      "quote": "SMOKE DETECTOR, CARBON MONOXIDE (CO) DETECTOR APPLICATION",
+      "doc_date": "2026-10-04 (page fetched)",
+      "via": "pdf",
+      "verified": true
+     },
+     {
+      "url": "https://www.oradell.org/fire-prevention-bureau",
+      "quote": "Christopher Petronzio Interim Fire Marshal (201) 261-8200 ext. 266",
+      "doc_date": "2026-10-04 (page fetched)",
+      "via": "page",
+      "verified": true
+     },
+     {
+      "url": "https://ecode360.com/9256976",
+      "quote": "The local enforcing agency shall be the Oradell Fire Prevention Bureau, which is hereby created in the Borough of Oradell.",
+      "doc_date": "",
+      "via": "page",
+      "verified": null
+     },
+     {
+      "url": "https://www.nj.gov/dca/dfs/pdf/fire%20directory_county%20summary/fire_code_enforcement_director.pdf",
+      "quote": "LEAID: 0244-001 Oradell Boro SMOKE DETECTOR COMPLIANCE Name: Oradell Boro Bldg Dept Enf Auth. Fire Dept Fire Official Christopher R Petronzio Phone (201) 261-8005",
+      "doc_date": "survey date 2/26/2026",
+      "via": "state_directory",
+      "verified": null
+     },
+     {
+      "url": "https://nj.gov/dca/dfs/pdf/ANNUAL%20REGISTRY/THIRD%20QUARTER%20LEA%20REGISTRY%202026.pdf",
+      "quote": "F Oradell Borough",
+      "doc_date": "2026-07",
+      "via": "pdf",
+      "verified": true
+     }
+    ],
+    "confidence": "medium"
+   }
+  ],
+  "notes": "The NJ DCA directory names the Oradell Building Department as the smoke detector compliance office, and the Borough's RRC form carries the smoke/CO application, so sellers deal with one office. The Fire Prevention Bureau fee schedule in Code Section 115-8E lists separate smoke/CO certificate fees ($50 / $75 / $125, $50 reinspection) and also an older line 'Smoke detector compliance inspection for one- and two-family dwellings: $50'; whether these are charged on top of the RRC fee is not stated. The fire official email cpetronzio@oradell.org is from the NJ DCA directory. The Borough form does not list a fire extinguisher."
+ },
+ "other_items": [
+  {
+   "label": "Open permits",
+   "detail": "A fine is issued for open or unobtained permits found at the RRC inspection; heating equipment and water heaters need an inspection sticker or proof of approval.",
+   "source_url": "https://www.oradell.org/building-department/files/02-rrc-resale-rental-certificate-application-residential"
+  },
+  {
+   "label": "Sidewalks and aprons",
+   "detail": "Sidewalks or aprons with a trip hazard of 1/2 inch or more must be replaced in concrete or lifted and regraded (no patching or grinding); asphalt sidewalks and aprons must be replaced with concrete.",
+   "source_url": "https://www.oradell.org/building-department/files/02-rrc-resale-rental-certificate-application-residential"
+  },
+  {
+   "label": "Sump pump discharge",
+   "detail": "A sump pump may not discharge into a sewer line, a sink or a new curb discharge.",
+   "source_url": "https://www.oradell.org/building-department/files/02-rrc-resale-rental-certificate-application-residential"
+  },
+  {
+   "label": "Lead-based paint (rentals only)",
+   "detail": "Lead-based paint inspection applies at tenant turnover of pre-1978 rental units, not to owner-occupied sales.",
+   "source_url": "https://ecode360.com/9256363"
+  }
+ ],
+ "open_questions": [
+  "Is the current 1-2 family RRC fee $130 (form) or $100 (Code 115-2B), and does it include the smoke/CO certificate?",
+  "Are the Fire Prevention Bureau smoke/CO fees in Code 115-8E charged separately from the RRC fee?",
+  "How long is the RRC valid?"
+ ],
+ "verification": {
+  "fees": 11,
+  "fee_ok": 4,
+  "fee_bad": 0,
+  "fee_unchecked": 7,
+  "quotes": 11,
+  "q_ok": 7,
+  "q_bad": 0,
+  "q_unchecked": 4
+ }
+}

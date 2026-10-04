@@ -1,0 +1,219 @@
+{
+ "municipality_code": "1431",
+ "municipality": "Pequannock Township",
+ "county": "MORRIS",
+ "resale_co": {
+  "status": "required",
+  "name": "Certificate of Construction Records Clearance (CRC)",
+  "issued_by": "Pequannock Township Construction Official",
+  "lead_time": "",
+  "valid_for": "",
+  "requirements": [
+   "No open permits or pending violations on the property",
+   "Application lists seller, approximate date of purchase, buyer, property type, whether the house number is displayed and whether it is a rental property",
+   "Exempt (if no change in physical occupancy): listed title transfers such as deed corrections and similar transfers in Section 123-6C"
+  ],
+  "fees": [
+   {
+    "label": "Certificate of construction records clearance (CRC)",
+    "amount": "$35",
+    "quote": "Certificate of construction records clearance (CRC): $35.",
+    "source_url": "https://ecode360.com/36919901",
+    "verified": null
+   }
+  ],
+  "how_to_apply": "Submit the Construction Records Clearance Certificate form to the Construction Department (530 Newark Pompton Turnpike, Pompton Plains) with the $35 fee payable to Pequannock Township. Permit history can be checked on the Township's SDL portal.",
+  "application_url": "https://www.peqtwp.org/DocumentCenter/View/3047/Construction-Records-Clearing-Certificate-PDF",
+  "department_url": "https://www.peqtwp.org/156/Construction-Department",
+  "phone": "973-835-5700, ext. 181",
+  "email": "",
+  "contact_name": "Robert J. Grant",
+  "contact_title": "Construction Official (Technical Assistant: Barbara Munnelly, ext. 182)",
+  "evidence": [
+   {
+    "url": "https://ecode360.com/36917919",
+    "quote": "A certificate issued by the Township Construction Official certifying that there are no open permits or pending violations on the subject property.",
+    "doc_date": "2026-10-04 (page fetched)",
+    "via": "page",
+    "verified": null
+   },
+   {
+    "url": "https://ecode360.com/36917919",
+    "quote": "A CRC shall be required prior to the sale of any residential or commercial structure and prior to the rental of any tenant space in a commercial structure within the Township.",
+    "doc_date": "2005-09-27 (Ord. No. 2005-16)",
+    "via": "page",
+    "verified": null
+   },
+   {
+    "url": "https://ecode360.com/36919901",
+    "quote": "Certificate of construction records clearance (CRC): $35.",
+    "doc_date": "2026-10-04 (page fetched)",
+    "via": "page",
+    "verified": null
+   },
+   {
+    "url": "https://www.peqtwp.org/DocumentCenter/View/3047/Construction-Records-Clearing-Certificate-PDF",
+    "quote": "Fee: $35 payable to Pequannock Township",
+    "doc_date": "2026-10-04 (page fetched)",
+    "via": "pdf",
+    "verified": null
+   },
+   {
+    "url": "https://www.peqtwp.org/156/Construction-Department",
+    "quote": "Construction Records Clearing Certificate (PDF)",
+    "doc_date": "2026-10-04 (page fetched)",
+    "via": "page",
+    "verified": true
+   },
+   {
+    "url": "https://www.peqtwp.org/156/Construction-Department",
+    "quote": "Phone: 973-835-5700, ext. 181",
+    "doc_date": "2026-10-04 (page fetched)",
+    "via": "page",
+    "verified": true
+   }
+  ],
+  "confidence": "medium",
+  "notes": "Pequannock does not appear to run a full resale housing inspection. Section 123-6 of the Township code requires a Construction Records Clearance certificate (no open permits or pending violations) before any residential sale, at a $35 fee (Section 152-24H). The fire certificate is separate (see below), and the Fire Safety Bureau says it will not issue the certificate while permits are open. The CRC form is a scanned image PDF. A certificate of continued occupancy ($200) applies only to nonresidential uses."
+ },
+ "fire_cert": {
+  "requirements": [
+   "House number at least three inch numerals next to the front door, five feet above the door saddle, contrasting and visible (Ordinance 88-23)",
+   "At least one smoke detector on each level including basements (unless the original CO required more); replacement battery units must be 10 year sealed UL approved",
+   "Smoke detector in the bedroom area within 10 feet of the bedrooms; hardwired/interconnected units must work and be under 10 years old",
+   "Active monitored fire alarm systems need paperwork from the alarm company before the inspection",
+   "Carbon monoxide alarm on each level with bedrooms, within 10 feet of the bedrooms, in homes with fuel-burning appliances or attached garages",
+   "Chimneys and smoke pipes properly sealed",
+   "No open permits with the Construction Department",
+   "Fire extinguisher (Township page and code still list it)"
+  ],
+  "authorities": [
+   {
+    "name": "Pequannock Township Fire Safety Bureau",
+    "type": "municipal_fire_bureau",
+    "area_served": "Entire township",
+    "lead_time": "Fee depends on business days between the request and the change of occupant: more than 10 business days for the lowest fee.",
+    "fees": [
+     {
+      "label": "CSDCMAC, request received more than 10 business days before the change of occupant",
+      "amount": "$45",
+      "quote": "Request for Certification received more than 10 business days prior to the change of occupant: $45",
+      "source_url": "https://www.peqtwp.org/169/Fire-Safety-Bureau",
+      "verified": true
+     },
+     {
+      "label": "CSDCMAC, 4 to 10 business days before the change of occupant",
+      "amount": "$90",
+      "quote": "Request for Certification received 4 to 10 business days prior to the change of occupant: $90",
+      "source_url": "https://www.peqtwp.org/169/Fire-Safety-Bureau",
+      "verified": true
+     },
+     {
+      "label": "CSDCMAC, fewer than 4 business days (Township web page)",
+      "amount": "$165",
+      "quote": "Request for Certification received fewer than 4 business days prior to the change of occupant: $165",
+      "source_url": "https://www.peqtwp.org/169/Fire-Safety-Bureau",
+      "verified": true
+     },
+     {
+      "label": "CSDCMAC, fewer than 4 business days (Township code)",
+      "amount": "$161",
+      "quote": "Request for CSACMAPFEC received fewer than four business days prior to change of occupant: $161.",
+      "source_url": "https://ecode360.com/36919901",
+      "verified": null
+     },
+     {
+      "label": "Each reinspection",
+      "amount": "$40",
+      "quote": "If any of the above mandates fail, it will result in an additional $40 fee for each additional re-inspection",
+      "source_url": "https://www.peqtwp.org/169/Fire-Safety-Bureau",
+      "verified": true
+     }
+    ],
+    "how_to_apply": "Call the Fire Safety Inspector at 973-835-5700, ext. 194 to request an inspection.",
+    "application_url": "",
+    "department_url": "https://www.peqtwp.org/169/Fire-Safety-Bureau",
+    "phone": "973-835-5700, ext. 194",
+    "email": "mlime@peqtwp.org",
+    "contact_name": "Mark Lime",
+    "contact_title": "Fire Official",
+    "evidence": [
+     {
+      "url": "https://www.peqtwp.org/169/Fire-Safety-Bureau",
+      "quote": "If you are selling your house, you will need a smoke detector and carbon monoxide alarm compliance certificate. Please contact the Fire Safety Inspector at 973-835-5700, ext. 194 in order to request an inspection.",
+      "doc_date": "2026-10-04 (page fetched)",
+      "via": "page",
+      "verified": true
+     },
+     {
+      "url": "https://www.peqtwp.org/169/Fire-Safety-Bureau",
+      "quote": "A Certificate will not be issued until all the minimum requirements have been met after an inspection is made, and there are no open permits with the Construction Department.",
+      "doc_date": "2026-10-04 (page fetched)",
+      "via": "page",
+      "verified": true
+     },
+     {
+      "url": "https://www.peqtwp.org/169/Fire-Safety-Bureau",
+      "quote": "Request for Certification received more than 10 business days prior to the change of occupant: $45",
+      "doc_date": "2026-10-04 (page fetched)",
+      "via": "page",
+      "verified": true
+     },
+     {
+      "url": "https://ecode360.com/36919901",
+      "quote": "Request for CSACMAPFEC received fewer than four business days prior to change of occupant: $161.",
+      "doc_date": "2026-10-04 (page fetched)",
+      "via": "page",
+      "verified": null
+     },
+     {
+      "url": "https://ecode360.com/36919901",
+      "quote": "If a reinspection is required, there shall be an additional fee of $40 for each reinspection.",
+      "doc_date": "2026-10-04 (page fetched)",
+      "via": "page",
+      "verified": null
+     },
+     {
+      "url": "https://nj.gov/dca/dfs/pdf/ANNUAL%20REGISTRY/THIRD%20QUARTER%20LEA%20REGISTRY%202026.pdf",
+      "quote": "M Pequannock Township",
+      "doc_date": "2026-07",
+      "via": "pdf",
+      "verified": true
+     },
+     {
+      "url": "https://www.nj.gov/dca/dfs/pdf/fire%20directory_county%20summary/fire_code_enforcement_director.pdf",
+      "quote": "Fire Official Mark W Lime",
+      "doc_date": "2026-06-03 (survey date)",
+      "via": "state_directory",
+      "verified": null
+     }
+    ],
+    "confidence": "high"
+   }
+  ],
+  "notes": "Pequannock's Fire Safety Bureau page and Section 152-28B of the code both set tiered fees ($45 / $90 / short-notice) with a $40 reinspection; the short-notice fee is $165 on the web page but $161 in the code. Both the page and the code (CSACMAPFEC title) still refer to fire extinguishers, which P.L.2025, c.19 removed from the sale certificate in February 2025. The NJ DCA LEA registry code for Pequannock is M; the state directory lists the township (Municipal) with Fire Official Mark W Lime, (973) 835-5700, mlime@peqtwp.org (he is also Butler's fire official)."
+ },
+ "other_items": [
+  {
+   "label": "House number display",
+   "detail": "Ordinance 88-23 requires 3 inch house numbers beside the front door, checked at the smoke/CO inspection.",
+   "source_url": "https://www.peqtwp.org/169/Fire-Safety-Bureau"
+  }
+ ],
+ "open_questions": [
+  "Is Pequannock's short-notice smoke/CO fee $165 (web page) or $161 (code)?",
+  "Does the Fire Safety Bureau still require a fire extinguisher for sales after P.L.2025, c.19?",
+  "How long are the CRC and the smoke/CO certificate valid?"
+ ],
+ "checked_at": "2026-10-04",
+ "verification": {
+  "fees": 6,
+  "fee_ok": 4,
+  "fee_bad": 0,
+  "fee_unchecked": 2,
+  "quotes": 13,
+  "q_ok": 6,
+  "q_bad": 0,
+  "q_unchecked": 7
+ }
+}

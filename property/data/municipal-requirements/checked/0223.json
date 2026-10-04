@@ -1,0 +1,229 @@
+{
+ "municipality_code": "0223",
+ "municipality": "Hackensack",
+ "county": "BERGEN",
+ "resale_co": {
+  "status": "required",
+  "name": "Certificate of Continued Occupancy (CCO), one and two family houses",
+  "issued_by": "City of Hackensack Department of Building, Housing and Land Use (Property Maintenance Division)",
+  "lead_time": "",
+  "valid_for": "",
+  "requirements": [
+   "Apply online with the CCO Application (one and two family houses only) and list new occupants and any garage, deck, fence, shed, pool or finished basement",
+   "Owner certifies the home and other structures meet City zoning and that no rubbish, debris or bulk garbage will be left before the new occupancy",
+   "All permits and final inspections must be verified for any construction work, including water heater or boiler replacement",
+   "Sump pumps must discharge outside the house, not into the sanitary sewer",
+   "Handrails on interior stairs of 3 or more risers or over 24 inches high, and on exterior stairs of 4 or more risers",
+   "Smoke detector on every level including basements and walk-up attics (10-year sealed battery), and carbon monoxide detectors within 10 feet of all bedrooms",
+   "Front door deadbolt may not be keyed on both sides",
+   "No open breaker slots in the main panel; junction boxes, outlet and switch covers in place",
+   "Gas valves at all appliances, unused gas lines capped, traps on all sinks",
+   "Chimney base sealed around smoke pipes; smoke pipes screwed at all joints",
+   "Relief valves on boilers and water heaters piped to within 6 inches of the floor",
+   "House numbers at least 4 inches high, visible from the street",
+   "No sleeping in kitchens, non-habitable spaces or cellars",
+   "Separate smoke and carbon monoxide inspection from the Hackensack Fire Department"
+  ],
+  "fees": [
+   {
+    "label": "Certificate of continued occupancy (resale or change in tenancy), one and two family house",
+    "amount": "$85",
+    "quote": "For Use Group R-5 (one- and two-family houses), residential: $85.",
+    "source_url": "https://ecode360.com/10194321",
+    "verified": null
+   }
+  ],
+  "how_to_apply": "Apply online with the City's CCO Application (GovPilot) for one and two family houses, using the CCO Checklist to prepare. The office is the Department of Building, Housing and Land Use, 216 Union Street, Hackensack, NJ 07601, 201-646-3920. The smoke and carbon monoxide inspection is applied for separately with the Fire Department.",
+  "application_url": "https://main.govpilot.com/web/public/03e88201-6d6_CCO-Application-hackensack?uid=6978&ust=NJ&pu=1&id=0",
+  "department_url": "https://www.hackensack.org/building-housing-and-land-use/",
+  "phone": "201-646-3920",
+  "email": "esisco@hackensack.org",
+  "contact_name": "Ernest Sisco",
+  "contact_title": "Construction Official",
+  "evidence": [
+   {
+    "url": "https://www.hackensack.org/building-housing-and-land-use/",
+    "quote": "CCO Application (One- and Two-Family Houses Only)",
+    "doc_date": "2026-10-04 (page fetched)",
+    "via": "page",
+    "verified": true
+   },
+   {
+    "url": "https://main.govpilot.com/web/public/03e88201-6d6_CCO-Application-hackensack?uid=6978&ust=NJ&pu=1&id=0",
+    "quote": "Smoke and Carbon Inspection Required Separately From Hackensack Fire Department",
+    "doc_date": "2026-10-04 (page fetched)",
+    "via": "page",
+    "verified": true
+   },
+   {
+    "url": "https://main.govpilot.com/web/public/03e88201-6d6_CCO-Application-hackensack?uid=6978&ust=NJ&pu=1&id=0",
+    "quote": "I understand that failure to comply will result in retraction of the Certificate of Continued Occupancy and a summons will be issued.",
+    "doc_date": "2026-10-04 (page fetched)",
+    "via": "page",
+    "verified": null
+   },
+   {
+    "url": "https://www.hackensack.org/fire-department/",
+    "quote": "This takes the place of a “CO” required for one and two family home sales.",
+    "doc_date": "2026-10-04 (page fetched)",
+    "via": "page",
+    "verified": true
+   },
+   {
+    "url": "https://ecode360.com/10194321",
+    "quote": "Certificates of continued occupancy (resale or change in tenancy).",
+    "doc_date": "2026-10-04 (page fetched)",
+    "via": "page",
+    "verified": null
+   }
+  ],
+  "confidence": "high",
+  "notes": "The City's fee code (read on ecode360) sets $85 for a certificate of continued occupancy on resale or change in tenancy of a one or two family house, and the Building page links the GovPilot CCO Application for one and two family houses. The GovPilot form shows an Amount Due field but no amount without starting an application. The CCO Checklist (Word file, revised 2/27/25, read by extracting its text; it says 'If any of the items listed below are not completed a CCO will not be issued.') lists common fail items and says the Property Maintenance code applies to the interior and exterior of all 1 and 2 family dwellings. The Fire Department page says a condo sale gets only the smoke and CO certificate, which takes the place of the CO required for one and two family home sales. Other Building staff: Glenn Zabransky (Property Maintenance, Asst. Zoning Officer) ext. 2007; Paula Caruso and Meredith Torcivia (Technical Assistants). No lead time or validity period is published. Rental registration and lead-based paint inspections of rentals are rental-only."
+ },
+ "fire_cert": {
+  "requirements": [
+   "Smoke detectors on every level (basement, first floor, second floor, not crawl spaces or unfinished attics) and outside each separate sleeping area; basement detector near the bottom of the basement stairs",
+   "Carbon monoxide alarms in every separate sleeping area per NFPA 720 (the CCO checklist says within 10 feet of all bedrooms)",
+   "Battery smoke detectors must be 10-year sealed battery units (per the CCO checklist)",
+   "Fire extinguisher (form still lists it under the inspector's section)"
+  ],
+  "authorities": [
+   {
+    "name": "Hackensack Fire Department, Fire Prevention Bureau",
+    "type": "municipal_fire_bureau",
+    "area_served": "Entire city",
+    "lead_time": "By appointment. The certificate is issued at the time of the inspection and is valid for 6 months. A failed inspection or no-show needs a new application and fee. Office hours 9 to 4:30, Monday to Friday.",
+    "fees": [
+     {
+      "label": "Certificate of smoke alarm, carbon monoxide alarm and portable fire extinguisher compliance (CSACMAPFEC)",
+      "amount": "$70.00",
+      "quote": "There is a $70.00 fee which may be paid by credit card and/or check made out to the Hackensack Fire Department",
+      "source_url": "https://www.hackensack.org/wp-content/uploads/2026/01/Smoke-and-Carbon-Form.pdf",
+      "verified": true
+     },
+     {
+      "label": "CSACMAPFEC application and inspection (code)",
+      "amount": "$70",
+      "quote": "shall make application to the Bureau and pay a fee of $70 and receive an inspection of same.",
+      "source_url": "https://ecode360.com/10191418",
+      "verified": null
+     },
+     {
+      "label": "Reinspection after a failure or no-show (code)",
+      "amount": "$70",
+      "quote": "Inspection failure, or a no-show of appointment, shall result in an additional fee of $70 for reinspection.",
+      "source_url": "https://ecode360.com/10191418",
+      "verified": null
+     }
+    ],
+    "how_to_apply": "Fill out the Smoke and Carbon Form (CSACMAPFEC) and book an inspection with the Fire Prevention Bureau, 205 State Street, 201-646-7685. Pay $70.00 by credit card or check to the Hackensack Fire Department. To pay online, email the completed form to fire@hackensack.org; an invoice number and payment instructions come back, and payment is made on the Fire Department payment portal.",
+    "application_url": "https://www.hackensack.org/wp-content/uploads/2026/01/Smoke-and-Carbon-Form.pdf",
+    "department_url": "https://www.hackensack.org/fire-department/",
+    "phone": "201-646-7685",
+    "email": "fire@hackensack.org",
+    "contact_name": "Chris Annunziata",
+    "contact_title": "Fire Official, Deputy Chief",
+    "evidence": [
+     {
+      "url": "https://www.hackensack.org/wp-content/uploads/2026/01/Smoke-and-Carbon-Form.pdf",
+      "quote": "CERTIFICATES ARE VALID FOR 6 MONTHS",
+      "doc_date": "",
+      "via": "pdf",
+      "verified": true
+     },
+     {
+      "url": "https://www.hackensack.org/wp-content/uploads/2026/01/Smoke-and-Carbon-Form.pdf",
+      "quote": "CERTIFICATE WILL BE ISSUED AT THE TIME OF THE INSPECTION",
+      "doc_date": "",
+      "via": "pdf",
+      "verified": true
+     },
+     {
+      "url": "https://www.hackensack.org/wp-content/uploads/2026/01/Smoke-and-Carbon-Form.pdf",
+      "quote": "If you would like to pay on-line please complete and email form to fire@hackensack.org.",
+      "doc_date": "",
+      "via": "pdf",
+      "verified": true
+     },
+     {
+      "url": "https://www.hackensack.org/wp-content/uploads/2026/01/Smoke-and-Carbon-Form.pdf",
+      "quote": "Fire Extinguisher present__________",
+      "doc_date": "",
+      "via": "pdf",
+      "verified": true
+     },
+     {
+      "url": "https://www.hackensack.org/fire-department/",
+      "quote": "The Fire Prevention Bureau headed by the Fire Official, Deputy Chief Chris Annunziata is staffed with 4 full time and 8 part time licensed inspectors.",
+      "doc_date": "2026-10-04 (page fetched)",
+      "via": "page",
+      "verified": true
+     },
+     {
+      "url": "https://www.hackensack.org/fire-department/",
+      "quote": "Click Here to Make Your Registration, Permit, or Smoke CO Payment",
+      "doc_date": "2026-10-04 (page fetched)",
+      "via": "page",
+      "verified": true
+     },
+     {
+      "url": "https://ecode360.com/10191418",
+      "quote": "Fees are nonrefundable.",
+      "doc_date": "2026-10-04 (page fetched)",
+      "via": "page",
+      "verified": null
+     },
+     {
+      "url": "https://nj.gov/dca/dfs/pdf/ANNUAL%20REGISTRY/THIRD%20QUARTER%20LEA%20REGISTRY%202026.pdf",
+      "quote": "F Hackensack City",
+      "doc_date": "2026-07",
+      "via": "pdf",
+      "verified": true
+     },
+     {
+      "url": "https://www.nj.gov/dca/dfs/pdf/fire%20directory_county%20summary/fire_code_enforcement_director.pdf",
+      "quote": "Hackensack City Fire Official Chris G Annunziata Phone (201) 646-7685 Email cannunziata@hackensack.org",
+      "doc_date": "3/25/2026 (survey date)",
+      "via": "state_directory",
+      "verified": null
+     }
+    ],
+    "confidence": "high"
+   }
+  ],
+  "notes": "One flat $70 fee (no tiers by days before closing), set in the City fire code and on the Fire Department form; reinspection or no-show is another $70. The certificate is valid for 6 months. The form's inspector section still has a 'Fire Extinguisher present' line although P.L.2025, c.19 removed the extinguisher from the state sale certificate in February 2025; confirm with the Bureau. The fire code also adds a $100 surcharge for permit inspections done when the Bureau is closed; it is not clear that applies to smoke certificates. Fire Official email from the NJ DCA directory: cannunziata@hackensack.org."
+ },
+ "other_items": [
+  {
+   "label": "Open permits",
+   "detail": "The owner must verify all permits and final inspections for any construction work, including water heater or boiler replacements, or the CCO will not be issued.",
+   "source_url": "https://www.hackensack.org/wp-content/uploads/2025/01/CCO-Checklist.doc"
+  },
+  {
+   "label": "Sump pump discharge",
+   "detail": "Sump pumps must discharge outside and may not be connected to the sanitary sewer.",
+   "source_url": "https://www.hackensack.org/wp-content/uploads/2025/01/CCO-Checklist.doc"
+  },
+  {
+   "label": "Zoning certification and debris",
+   "detail": "The owner certifies on the CCO application that all structures meet zoning and that no rubbish or bulk garbage will be left before the new occupancy.",
+   "source_url": "https://main.govpilot.com/web/public/03e88201-6d6_CCO-Application-hackensack?uid=6978&ust=NJ&pu=1&id=0"
+  }
+ ],
+ "open_questions": [
+  "How far ahead should the CCO be requested, and how long is it valid?",
+  "Does the City still require a fire extinguisher at the smoke/CO inspection after P.L.2025, c.19?",
+  "Does the CCO cover two-family homes with a separate fee per unit?"
+ ],
+ "checked_at": "2026-10-04",
+ "verification": {
+  "fees": 4,
+  "fee_ok": 1,
+  "fee_bad": 0,
+  "fee_unchecked": 3,
+  "quotes": 14,
+  "q_ok": 10,
+  "q_bad": 0,
+  "q_unchecked": 4
+ }
+}

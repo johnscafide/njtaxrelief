@@ -1,0 +1,211 @@
+{
+ "municipality_code": "0248",
+ "municipality": "Ramsey Borough",
+ "county": "BERGEN",
+ "resale_co": {
+  "status": "required",
+  "name": "Certificate of Inspection on sale of a dwelling (Borough Code Section 13-2)",
+  "issued_by": "Ramsey Construction Code Department (Construction Code Official)",
+  "lead_time": "",
+  "valid_for": "",
+  "requirements": [
+   "Dwelling's electrical, plumbing, heating, sanitary and structural systems must be in safe condition under the Uniform Construction Code",
+   "Seller corrects apparent code violations that arose since the last certificate of occupancy or certificate of inspection before the sale",
+   "Instead of a Borough inspection, the seller may have the Construction Code Official rely on a home inspection or engineering report obtained for the sale (no fee in that case)",
+   "A buyer may get a conditional certificate by signing an affidavit to correct violations within six months of purchase"
+  ],
+  "fees": [
+   {
+    "label": "Certificate of inspection on sale",
+    "amount": "$50",
+    "quote": "The fee for the certificate of inspection shall be $50",
+    "source_url": "https://ecode360.com/13228792",
+    "verified": null
+   },
+   {
+    "label": "Certificate of inspection when the smoke detector certificate fee has also been paid",
+    "amount": "$25",
+    "quote": "the fee for the certificate of inspection under this section shall be $25.",
+    "source_url": "https://ecode360.com/13228792",
+    "verified": null
+   }
+  ],
+  "how_to_apply": "Contact the Building Department (Construction Code Official), 33 N Central Avenue, 2nd floor, 201-825-3400 ext. 251. No resale application form is posted online; ask whether the Borough will accept a home inspection report in place of its own inspection.",
+  "application_url": "",
+  "department_url": "https://www.ramseynj.com/153/Building-Department",
+  "phone": "201-825-3400 ext. 251",
+  "email": "jdougherty@ramseynj.com",
+  "contact_name": "Jim Dougherty",
+  "contact_title": "Construction Official/Building Subcode",
+  "evidence": [
+   {
+    "url": "https://ecode360.com/13228792",
+    "quote": "Upon the sale of a dwelling or upon the completion or rehabilitation work to the dwelling funded by the Borough, County of Bergen, State of New Jersey, or federal government, the seller shall obtain from the Borough's Construction Code Department a Certificate of Inspection stating that the dwelling is in compliance with the State of New Jersey Uniform Construction Code provisions with regard to the safe condition of the dwelling's electrical, plumbing, heating, sanitary and structural systems.",
+    "doc_date": "2026-10-04 (page fetched; Ord. No. 1135)",
+    "via": "page",
+    "verified": null
+   },
+   {
+    "url": "https://ecode360.com/13228792",
+    "quote": "There shall be no fee for the certificate of inspection when a home inspection report is furnished to the Construction Code Official as provided for in Subsection 13-2.3.",
+    "doc_date": "Ord. No. 1135",
+    "via": "page",
+    "verified": null
+   },
+   {
+    "url": "https://ecode360.com/13228792",
+    "quote": "A continued certificate of occupancy shall be required for a change of ownership of a commercial structure.",
+    "doc_date": "2026-10-04 (page fetched)",
+    "via": "page",
+    "verified": null
+   },
+   {
+    "url": "https://www.ramseynj.com/153/Building-Department",
+    "quote": "Jim Dougherty Construction Official/Building Subcode",
+    "doc_date": "2026-10-04 (page fetched)",
+    "via": "page",
+    "verified": true
+   },
+   {
+    "url": "https://www.ramseynj.com/153/Building-Department",
+    "quote": "Phone: 201-825-3400, ext. 251",
+    "doc_date": "2026-10-04 (page fetched)",
+    "via": "page",
+    "verified": true
+   }
+  ],
+  "confidence": "medium",
+  "notes": "Borough Code Section 13-2 (Ord. No. 1135), read through the ecode360 print view, requires the seller to get a Certificate of Inspection from the Construction Code Department on the sale of a dwelling, with a $50 fee ($25 if the smoke detector certificate fee was also paid; free if a home inspection report is accepted). The Borough website does not mention this certificate or post a form, so confirm whether it is still enforced in practice. The separate certificate of continued occupancy ($200 under Section 13-17.1) applies to change of ownership of a commercial structure, not homes. The Inspections page warns that missing final certificates of occupancy or approval for past permits will hold up a sale."
+ },
+ "fire_cert": {
+  "requirements": [
+   "Smoke detectors at the base of each stairway on each level including the basement, and outside each sleeping area within 10 feet of each bedroom door",
+   "Hardwired or low-voltage detectors required at original construction or renovation must be kept; otherwise 10-year sealed lithium battery alarms (ANSI/UL 217)",
+   "Detectors with no date, or more than 10 years past the manufacture date, must be replaced",
+   "Carbon monoxide alarms (UL 2034, NFPA 720) within 10 feet outside every bedroom; battery, hardwired or plug-in",
+   "Low-voltage systems need a certified NFPA 72 fire alarm test report submitted before the inspection"
+  ],
+  "authorities": [
+   {
+    "name": "Ramsey Bureau of Fire Prevention",
+    "type": "municipal_fire_bureau",
+    "area_served": "Entire borough",
+    "lead_time": "Fee depends on business days before the expected change of ownership; more than 10 business days for the lowest fee. Inspections Tuesdays and Thursdays, 9:00 to 11:00 am.",
+    "fees": [
+     {
+      "label": "Smoke/CO certificate, application received more than 10 business days ahead",
+      "amount": "$50.00",
+      "quote": "Applications received more than 10 business days $50.00",
+      "source_url": "https://www.ramseynj.com/DocumentCenter/View/5704/Fire-Prevention-Smoke-Detector-Inspection-Application-",
+      "verified": true
+     },
+     {
+      "label": "Application received 4 to 10 business days ahead",
+      "amount": "$70.00",
+      "quote": "Applications received 4 to 10 business days $70.00",
+      "source_url": "https://www.ramseynj.com/DocumentCenter/View/5704/Fire-Prevention-Smoke-Detector-Inspection-Application-",
+      "verified": true
+     },
+     {
+      "label": "Application received fewer than 4 business days ahead",
+      "amount": "$125.00",
+      "quote": "Applications received fewer than 4 business days $125.00",
+      "source_url": "https://www.ramseynj.com/DocumentCenter/View/5704/Fire-Prevention-Smoke-Detector-Inspection-Application-",
+      "verified": true
+     },
+     {
+      "label": "Reinspection (non-working, recalled or missing alarms, or no-show)",
+      "amount": "$35.00",
+      "quote": "charged an additional fee of $35.00 for a re-inspection.",
+      "source_url": "https://www.ramseynj.com/DocumentCenter/View/5704/Fire-Prevention-Smoke-Detector-Inspection-Application-",
+      "verified": true
+     }
+    ],
+    "how_to_apply": "Complete the Fire Prevention Smoke Detector Inspection Application (Forms, Permits, Licenses & Publications page) and send it to Kelly at kdispoto@ramseynj.com. Pay by check or money order to \"Borough of Ramsey\" or by credit card through the Borough's Municipay link.",
+    "application_url": "https://www.ramseynj.com/DocumentCenter/View/5704/Fire-Prevention-Smoke-Detector-Inspection-Application-",
+    "department_url": "https://www.ramseynj.com/238/Bureau-of-Fire-Prevention",
+    "phone": "201-825-3400 ext. 252",
+    "email": "kdispoto@ramseynj.com",
+    "contact_name": "Darryl DeMott",
+    "contact_title": "Fire Official (ddemott@ramseynj.com, ext. 256); applications go to Kelly at kdispoto@ramseynj.com",
+    "evidence": [
+     {
+      "url": "https://www.ramseynj.com/DocumentCenter/View/5704/Fire-Prevention-Smoke-Detector-Inspection-Application-",
+      "quote": "PLEASE CONTACT KELLY AT kdispoto@ramseynj.com",
+      "doc_date": "2025-05-14",
+      "via": "pdf",
+      "verified": true
+     },
+     {
+      "url": "https://www.ramseynj.com/DocumentCenter/View/5704/Fire-Prevention-Smoke-Detector-Inspection-Application-",
+      "quote": "**Inspections performed on Tuesdays & Thursdays between 9:00am & 11:00am**",
+      "doc_date": "2025-05-14",
+      "via": "pdf",
+      "verified": true
+     },
+     {
+      "url": "https://www.ramseynj.com/DocumentCenter/View/5704/Fire-Prevention-Smoke-Detector-Inspection-Application-",
+      "quote": "Before any one- and two- family or attached single family structure is sold, leased or otherwise made subject to a change of occupancy for residential purposes, the owner shall obtain a certificate of smoke alarm and carbon monoxide alarm compliance (CSACMC), evidencing compliance with N.J.A.C. 5:70-4.19 and N.J.S.A. 52:27D-198.1.",
+      "doc_date": "2025-05-14",
+      "via": "pdf",
+      "verified": true
+     },
+     {
+      "url": "https://ecode360.com/13229057",
+      "quote": "Requests for a CSDCMAC received more than 10 business days: $50.",
+      "doc_date": "Ord. No. 12-2004",
+      "via": "page",
+      "verified": null
+     },
+     {
+      "url": "https://www.ramseynj.com/238/Bureau-of-Fire-Prevention",
+      "quote": "Darryl DeMott Fire Official",
+      "doc_date": "2026-10-04 (page fetched)",
+      "via": "page",
+      "verified": true
+     },
+     {
+      "url": "https://www.ramseynj.com/238/Bureau-of-Fire-Prevention",
+      "quote": "Phone: 201-825-3400, ext. 256",
+      "doc_date": "2026-10-04 (page fetched)",
+      "via": "page",
+      "verified": true
+     },
+     {
+      "url": "https://www.nj.gov/dca/dfs/pdf/fire%20directory_county%20summary/fire_code_enforcement_director.pdf",
+      "quote": "Fire Official Darryl J DeMott Phone (201) 825-3400",
+      "doc_date": "2026-03 (survey date 3/25/2026)",
+      "via": "state_directory",
+      "verified": null
+     },
+     {
+      "url": "https://nj.gov/dca/dfs/pdf/ANNUAL%20REGISTRY/THIRD%20QUARTER%20LEA%20REGISTRY%202026.pdf",
+      "quote": "M Ramsey Borough",
+      "doc_date": "2026-07",
+      "via": "pdf",
+      "verified": true
+     }
+    ],
+    "confidence": "high"
+   }
+  ],
+  "notes": "The application (May 2025) and Borough Code Section 14-5.5 agree on $50 / $70 / $125 plus $35 reinspection. No fire extinguisher is listed. The LEA registry code for Ramsey is M (multiple); the state directory lists the Ramsey Boro Fire Prev office at 33 North Central Av as the smoke detector compliance office."
+ },
+ "other_items": [],
+ "open_questions": [
+  "Does the Construction Code Department still issue the Section 13-2 Certificate of Inspection on every home sale, and is there a form?",
+  "Will the Borough accept a buyer's home inspection report in place of its own inspection (no fee)?",
+  "How long is the smoke/CO certificate valid?"
+ ],
+ "checked_at": "2026-10-04",
+ "verification": {
+  "fees": 6,
+  "fee_ok": 4,
+  "fee_bad": 0,
+  "fee_unchecked": 2,
+  "quotes": 13,
+  "q_ok": 8,
+  "q_bad": 0,
+  "q_unchecked": 5
+ }
+}

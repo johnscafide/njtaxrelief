@@ -8,6 +8,8 @@ const read = (p) => fs.readFileSync(p, 'utf8');
 const require = createRequire(import.meta.url);
 const needs = JSON.parse(read('property/data/municipal-requirements/town-needs.json'));
 const migration = read('supabase/migrations/20260930210000_town_info_submissions.sql');
+const correctionMigration = read('supabase/migrations/20261004130000_town_info_submissions_corrections.sql');
+const coPage = read('co/index.html');
 const page = read('property/town-needs/index.html');
 const pageJs = read('property/js/town-needs.js');
 const reviewPage = read('property/backoffice/town-info/index.html');
@@ -15,7 +17,7 @@ const vercel = JSON.parse(read('vercel.json'));
 
 // ---------- data ----------
 const KEYS = ['co_required', 'co_fee', 'co_contact', 'fire_fee', 'fire_contact'];
-assert.deepEqual(Object.keys(needs.needs), KEYS, 'need keys');
+assert.deepEqual(Object.keys(needs.needs), KEYS.concat(['correction']), 'need keys, plus correction for /co');
 assert.ok(needs.towns.length > 0, 'there are towns to list');
 for (const t of needs.towns) {
   assert.match(t.code, /^\d{4}$/, `${t.town}: code`);
@@ -31,6 +33,8 @@ assert.match(migration, /check \(source_url is not null or file_path is not null
 assert.match(migration, /\('town-info-submissions', 'town-info-submissions', false, 10485760/, 'uploads stay private, 10 MB');
 assert.match(migration, /\('town-info-evidence', 'town-info-evidence', true, 10485760/, 'approved files go to a public evidence bucket');
 for (const k of KEYS) assert.ok(migration.includes(`'${k}'`), `migration allows ${k}`);
+for (const k of KEYS.concat(['correction'])) assert.ok(correctionMigration.includes(`'${k}'`), `corrections migration keeps ${k}`);
+assert.match(correctionMigration, /drop constraint if exists town_info_submissions_need_keys_check/, 'replaces the need key check by name');
 
 // ---------- routing ----------
 assert.ok(vercel.rewrites.some((r) => r.source === '/backoffice/town-info' && r.destination === '/property/backoffice/town-info/index.html'), 'review page route');
@@ -130,6 +134,25 @@ await submit(t.req, t.res);
 assert.equal(t.res.statusCode, 201, 'a town not on the needs list is accepted');
 assert.deepEqual(state.rows[0].need_keys, KEYS, 'every real need is kept for it, nothing else');
 assert.equal(state.rows[0].municipality_name, unlisted.n, 'its name comes from the full town list');
+// /co "Report a correction": any town, correction only, and it must say what's wrong.
+assert.match(coPage, /data-fix>Report a correction<\/button>/, '/co has the Report a correction button');
+assert.match(coPage, /needs: fixing \? \['correction'\] : NEED_KEYS/, '/co sends the correction key');
+const liveCode = Object.keys(JSON.parse(read('property/data/municipal-requirements/approvals.json')).towns)[0];
+reset();
+t = reqRes(Object.assign({}, base, { code: liveCode, needs: ['correction', 'co_fee'], answer: 'The fee is now $150.', source_url: 'https://www.example-town.gov/fees' }));
+await submit(t.req, t.res);
+assert.equal(t.res.statusCode, 201, 'a correction for a live town is accepted');
+assert.deepEqual(state.rows[0].need_keys, ['correction'], 'a correction stands alone');
+assert.equal(state.rows[0].answer, 'The fee is now $150.');
+reset();
+t = reqRes(Object.assign({}, base, { code: liveCode, needs: ['correction'], answer: '  ', source_url: 'https://www.example-town.gov/fees' }));
+await submit(t.req, t.res);
+assert.equal(t.res.statusCode, 422, 'a correction has to say what is wrong');
+reset();
+t = reqRes(Object.assign({}, base, { code: liveCode, needs: ['correction'], answer: 'Wrong phone.' }));
+await submit(t.req, t.res);
+assert.equal(t.res.statusCode, 422, 'a correction still needs a document or link');
+
 reset();
 t = reqRes(Object.assign({}, base, { code: '9999', source_url: 'https://x.gov/y' }));
 await submit(t.req, t.res);

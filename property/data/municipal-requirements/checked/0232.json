@@ -1,0 +1,219 @@
+{
+ "municipality_code": "0232",
+ "municipality": "Lyndhurst Township",
+ "county": "BERGEN",
+ "checked_at": "2026-10-04",
+ "resale_co": {
+  "status": "required",
+  "name": "Resale Certificate (Certificate of Continued Occupancy)",
+  "issued_by": "Township of Lyndhurst Construction / Building Department",
+  "lead_time": "",
+  "valid_for": "",
+  "requirements": [
+   "Application for Resale Certificate listing seller, buyer, sale price and closing date",
+   "Room-by-room breakdown is filled out by the Tax Assessor before the inspection and compared with the assessor's record",
+   "Inspector checks open permits, the number of families, smoke detectors and carbon monoxide detectors",
+   "Proof that the lead water service pipe has been replaced (or that the property is excluded) before a Certificate of Occupancy, Certificate of Code Compliance and smoke/CO certificates are issued on a sale"
+  ],
+  "fees": [
+   {
+    "label": "Certificate of continued occupancy, one family",
+    "amount": "$100",
+    "quote": "(1)One family$100",
+    "source_url": "https://ecode360.com/34769770",
+    "verified": null
+   },
+   {
+    "label": "Certificate of continued occupancy, two family",
+    "amount": "$150",
+    "quote": "(2)Two family$150",
+    "source_url": "https://ecode360.com/34769770",
+    "verified": null
+   }
+  ],
+  "how_to_apply": "Download the Application for Resale Certificate (CO Application) from the Township Forms page, Construction Department section, and file it with the Building/Construction Department at Town Hall, 367 Valley Brook Avenue. The Tax Assessor completes the room breakdown before the inspection. Apply for the separate smoke/CO certificate with the Bureau of Fire Prevention.",
+  "application_url": "https://www.lyndhurstnj.org/_Content/pdf/forms/Construction/CO-Application.pdf",
+  "department_url": "https://www.lyndhurstnj.org/Departments/construction-department",
+  "phone": "201-804-2490, ex. 2550",
+  "email": "",
+  "contact_name": "",
+  "contact_title": "",
+  "evidence": [
+   {
+    "url": "https://www.lyndhurstnj.org/forms",
+    "quote": "CO Application",
+    "doc_date": "2026-10-04 (page fetched)",
+    "via": "page",
+    "verified": null
+   },
+   {
+    "url": "https://www.lyndhurstnj.org/_Content/pdf/forms/Construction/CO-Application.pdf",
+    "quote": "APPLICATION FOR RESALE CERTIFICATE",
+    "doc_date": "",
+    "via": "pdf",
+    "verified": null
+   },
+   {
+    "url": "https://www.lyndhurstnj.org/_Content/pdf/forms/Construction/CO-Application.pdf",
+    "quote": "TO BE FILLED OUT BY ASSESSOR BEFORE INSPECTION",
+    "doc_date": "",
+    "via": "pdf",
+    "verified": null
+   },
+   {
+    "url": "https://ecode360.com/34769770",
+    "quote": "(j)Certificate of continued occupancy:",
+    "doc_date": "2026-10-04 (page fetched)",
+    "via": "page",
+    "verified": null
+   },
+   {
+    "url": "https://ecode360.com/44786227",
+    "quote": "Upon the sale or transfer of ownership of any premises, the owner must provide proof that the lead service pipe has been replaced ... in order to secure a Certificate of Occupancy, Certificate of Code Compliance, and Smoke and Carbon Monoxide Detector Certificates.",
+    "doc_date": "2026-10-04 (page fetched)",
+    "via": "page",
+    "verified": null
+   },
+   {
+    "url": "https://www.lyndhurstnj.org/Directory",
+    "quote": "201-804-2490, ex. 2550",
+    "doc_date": "2026-10-04 (page fetched)",
+    "via": "page",
+    "verified": null
+   }
+  ],
+  "confidence": "medium",
+  "notes": "Lyndhurst posts an 'Application for Resale Certificate' (CO Application, a scanned form) under its Construction Department forms, and Township Code chapter 8 lists certificate of continued occupancy fees for one and two family homes. Section 12-1.33.5 (lead service pipe replacement) ties the Certificate of Occupancy, Certificate of Code Compliance and smoke/CO certificates to a sale or transfer. No ordinance text was found that states in one sentence that a CCO is required for every resale, and the posted form shows no fee or lead time. The ecode360 fee text was read through the code library page (citation is the chapter page). The Building Department directory line is 201-804-2490, ex. 2550; no named staff or email is posted. The multiple-dwelling rental certificate of occupancy ($25 per unit, §8-4.9) is rental only."
+ },
+ "fire_cert": {
+  "requirements": [
+   "Ten-year sealed battery single station smoke alarms listed to ANSI/UL 217; A/C-powered alarms from original construction may not be replaced with battery alarms",
+   "Smoke detectors on every level (basement, first floor, second floor) excluding crawl spaces and unfinished attics, and outside sleeping areas",
+   "Carbon monoxide alarm outside each sleeping area; two needed if bedrooms are on different levels or wings",
+   "Minimum alarm type depends on when the house was built or renovated (form has a year-by-year table)"
+  ],
+  "authorities": [
+   {
+    "name": "Lyndhurst Bureau of Fire Prevention",
+    "type": "municipal_fire_bureau",
+    "area_served": "Entire township",
+    "lead_time": "Fee depends on business days between payment and the inspection date: more than 10 business days for the lowest fee.",
+    "fees": [
+     {
+      "label": "Smoke/CO certificate, inspection scheduled more than 10 business days after payment",
+      "amount": "$45.00",
+      "quote": "Inspection Scheduled more than 10 business days after payment received $45.00",
+      "source_url": "https://www.lyndhurstnj.org/_Content/pdf/forms/Certificate-of-Smoke-Detector-Carbon-Monoxide-Alarm-Compliance.pdf",
+      "verified": true
+     },
+     {
+      "label": "Smoke/CO certificate, inspection scheduled 4 to 10 business days after payment",
+      "amount": "$90.00",
+      "quote": "Inspection scheduled four to 10 business days after payment received $90.00",
+      "source_url": "https://www.lyndhurstnj.org/_Content/pdf/forms/Certificate-of-Smoke-Detector-Carbon-Monoxide-Alarm-Compliance.pdf",
+      "verified": true
+     },
+     {
+      "label": "Smoke/CO certificate, inspection scheduled fewer than 4 business days after payment",
+      "amount": "$161.00",
+      "quote": "Inspection scheduled fewer than four business days after payment received $161.00",
+      "source_url": "https://www.lyndhurstnj.org/_Content/pdf/forms/Certificate-of-Smoke-Detector-Carbon-Monoxide-Alarm-Compliance.pdf",
+      "verified": true
+     }
+    ],
+    "how_to_apply": "Fill in the Certificate of Smoke Detector & Carbon Monoxide Alarm Compliance form (property, closing date, seller and agent, and the email address the certificate should go to) and send it with a check payable to Township of Lyndhurst to the Bureau of Fire Prevention, 253 Stuyvesant Ave.",
+    "application_url": "https://www.lyndhurstnj.org/_Content/pdf/forms/Certificate-of-Smoke-Detector-Carbon-Monoxide-Alarm-Compliance.pdf",
+    "department_url": "https://www.lyndhurstnj.org/Departments/fire-prevention",
+    "phone": "(201) 933-3079",
+    "email": "robertf@lyndhurstnj.org",
+    "contact_name": "Robert Ferrara",
+    "contact_title": "Fire Official",
+    "evidence": [
+     {
+      "url": "https://www.lyndhurstnj.org/_Content/pdf/forms/Certificate-of-Smoke-Detector-Carbon-Monoxide-Alarm-Compliance.pdf",
+      "quote": "before any one or two-family dwelling is sold, leased, or otherwise made subject to change in occupancy for residential purposes, the owner shall obtain a certificate of compliance from the Lyndhurst Bureau of Fire Prevention.",
+      "doc_date": "",
+      "via": "pdf",
+      "verified": true
+     },
+     {
+      "url": "https://www.lyndhurstnj.org/_Content/pdf/forms/Certificate-of-Smoke-Detector-Carbon-Monoxide-Alarm-Compliance.pdf",
+      "quote": "Failure to obtain this certificate prior to a change in occupancy shall result in a $200.00 fine.",
+      "doc_date": "",
+      "via": "pdf",
+      "verified": true
+     },
+     {
+      "url": "https://www.lyndhurstnj.org/_Content/pdf/forms/Certificate-of-Smoke-Detector-Carbon-Monoxide-Alarm-Compliance.pdf",
+      "quote": "253 Stuyvesant Ave. Lyndhurst, New Jersey 07071",
+      "doc_date": "",
+      "via": "pdf",
+      "verified": true
+     },
+     {
+      "url": "https://www.lyndhurstnj.org/_Content/pdf/forms/Certificate-of-Smoke-Detector-Carbon-Monoxide-Alarm-Compliance.pdf",
+      "quote": "Email: robertf@lyndhurstnj.org",
+      "doc_date": "",
+      "via": "pdf",
+      "verified": true
+     },
+     {
+      "url": "https://www.lyndhurstnj.org/Directory",
+      "quote": "201-933-3079",
+      "doc_date": "2026-10-04 (page fetched)",
+      "via": "page",
+      "verified": null
+     },
+     {
+      "url": "https://www.nj.gov/dca/dfs/pdf/fire%20directory_county%20summary/fire_code_enforcement_director.pdf",
+      "quote": "LEAID: 0232-001 Lyndhurst Twp SMOKE DETECTOR COMPLIANCE Name: Lyndhurst Fire Prevention Enf Auth. Municipal Addr: 253 Stuyvesant Av ... Fire Official Robert Ferrara Phone (201) 933-3079 ... Email robertf@lyndhurstnj.org",
+      "doc_date": "2026 (survey date 7/28/2026)",
+      "via": "state_directory",
+      "verified": null
+     },
+     {
+      "url": "https://nj.gov/dca/dfs/pdf/ANNUAL%20REGISTRY/THIRD%20QUARTER%20LEA%20REGISTRY%202026.pdf",
+      "quote": "M Lyndhurst Township",
+      "doc_date": "2026-07",
+      "via": "pdf",
+      "verified": true
+     }
+    ],
+    "confidence": "high"
+   }
+  ],
+  "notes": "The Bureau's form does not list a fire extinguisher. State law (P.L.2025, c.19, signed February 3, 2025) dropped the portable fire extinguisher from the state sale certificate. The form gives fax (201) 933-3091. The Township directory lists Fire Prevention at 201-933-3079. Robert Ferrara is named Fire Official in the NJ DCA directory; the form names his email but not his title."
+ },
+ "other_items": [
+  {
+   "label": "Lead water service pipe",
+   "detail": "On a sale or transfer, the owner must show the lead service pipe was replaced (or the property is excluded) to get the Certificate of Occupancy, Certificate of Code Compliance and smoke/CO certificates.",
+   "source_url": "https://ecode360.com/44786227"
+  },
+  {
+   "label": "Assessor room check",
+   "detail": "The Tax Assessor fills in the present and past room breakdown on the resale application before the inspection.",
+   "source_url": "https://www.lyndhurstnj.org/_Content/pdf/forms/Construction/CO-Application.pdf"
+  },
+  {
+   "label": "Open permits",
+   "detail": "The resale inspector records open permits on the application.",
+   "source_url": "https://www.lyndhurstnj.org/_Content/pdf/forms/Construction/CO-Application.pdf"
+  }
+ ],
+ "open_questions": [
+  "Confirm the resale certificate fee actually charged for a one or two family sale ($100 / $150 per the code) and the lead time.",
+  "Who in the Building Department handles resale certificates (name and email)?",
+  "How long is the resale certificate valid, and is a temporary certificate available?"
+ ],
+ "verification": {
+  "fees": 5,
+  "fee_ok": 3,
+  "fee_bad": 0,
+  "fee_unchecked": 2,
+  "quotes": 13,
+  "q_ok": 5,
+  "q_bad": 0,
+  "q_unchecked": 8
+ }
+}

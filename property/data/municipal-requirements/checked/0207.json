@@ -1,0 +1,230 @@
+{
+ "municipality_code": "0207",
+ "municipality": "Closter Borough",
+ "county": "BERGEN",
+ "resale_co": {
+  "status": "required",
+  "name": "Residential Certificate of Continued Occupancy (RCCO)",
+  "issued_by": "Borough of Closter Building Department (Code Enforcement Bureau / Construction Code Official)",
+  "lead_time": "The code gives the Borough up to 21 days after a complete application to issue the certificate or a written denial. Construction Official inspections are Monday to Friday, 8:30 AM to 11:30 AM.",
+  "valid_for": "A temporary certificate of continued occupancy (with escrow held by the attorneys) may be issued for up to 90 days unless extenuating circumstances are shown.",
+  "requirements": [
+   "Smoke detector certificate from the Closter Fire Prevention Bureau, and carbon monoxide detectors properly installed, before the RCCO is issued",
+   "Abate zoning and property maintenance violations",
+   "Finalize and close out open construction permits",
+   "Signature page of the purchase and sale contract showing all parties on the new deed (resales only)",
+   "Abate hazardous or unsightly conditions, including Borough sidewalks, private walkways, gutters, downspouts, windows, cladding, wiring, venting, surface water, fencing and pool barriers, and handrails on stairs with 3 or more risers",
+   "Disconnect or reroute sump pumps from the Borough sanitary sewer (construction permit required)",
+   "Remove double-key locks on the primary exterior door",
+   "Display the street address in numbers on the front of the house",
+   "Lead-safe or lead-free paint certificate only for rental units built before 1978 (not required for a sale)"
+  ],
+  "fees": [
+   {
+    "label": "RCCO inspection, one dwelling unit",
+    "amount": "$100.00",
+    "quote": "RCCO INSPECTION FEE: $100.00 for (1) dwelling unit ($40.00 for each additional unit);",
+    "source_url": "https://core-docs.s3.us-east-1.amazonaws.com/documents/asset/uploaded_file/4528/BOC/5334162/RCCO___Lead_Paint_Instructions.pdf",
+    "verified": true
+   },
+   {
+    "label": "RCCO inspection, each additional dwelling unit (for example a 2 family)",
+    "amount": "$40.00",
+    "quote": "Each Additional Dwelling Unit =      $40.00",
+    "source_url": "https://core-docs.s3.us-east-1.amazonaws.com/documents/asset/uploaded_file/4528/BOC/3875048/RCCO___Lead_Paint.pdf",
+    "verified": true
+   }
+  ],
+  "how_to_apply": "Submit the Residential Certificate of Continued Occupancy (RCCO) & Lead Paint Application (form BOC-3) with the fee to the Code Enforcement Bureau, 295 Closter Dock Road, Closter, NJ 07624, checking 'Change of Ownership (RESALE)'. Include the signature page of the sale contract. Then schedule the inspection with the Construction Official at (201) 784-0600 ext. 441 or construction@closternj.us. Separately schedule the smoke/CO inspection with the Fire Marshal.",
+  "application_url": "https://core-docs.s3.us-east-1.amazonaws.com/documents/asset/uploaded_file/4528/BOC/3875048/RCCO___Lead_Paint.pdf",
+  "department_url": "https://www.closterboro.com/page/building-department-copy",
+  "phone": "201-784-0600 ext. 441",
+  "email": "construction@closternj.us",
+  "contact_name": "",
+  "contact_title": "",
+  "evidence": [
+   {
+    "url": "https://core-docs.s3.us-east-1.amazonaws.com/documents/asset/uploaded_file/4528/BOC/5334162/RCCO___Lead_Paint_Instructions.pdf",
+    "quote": "A RESIDENTIAL CERTIFICATE OF CONTINUED OCCUPANCY IS REQUIRED PRIOR TO THE RENTAL OR RESALE OF 1-, 2- AND MULTIPLE-FAMILY DWELLING UNITS.",
+    "doc_date": "rev. 2/24/2025",
+    "via": "pdf",
+    "verified": true
+   },
+   {
+    "url": "https://core-docs.s3.us-east-1.amazonaws.com/documents/asset/uploaded_file/4528/BOC/5334162/RCCO___Lead_Paint_Instructions.pdf",
+    "quote": "provide signature page of purchase and sale contract indicating all parties appearing on new deed (resales only);",
+    "doc_date": "rev. 2/24/2025",
+    "via": "pdf",
+    "verified": true
+   },
+   {
+    "url": "https://core-docs.s3.us-east-1.amazonaws.com/documents/asset/uploaded_file/4528/BOC/5334162/RCCO___Lead_Paint_Instructions.pdf",
+    "quote": "disconnect/reroute sump pumps from Borough's sanitary sewer system (Construction Permit required);",
+    "doc_date": "rev. 2/24/2025",
+    "via": "pdf",
+    "verified": true
+   },
+   {
+    "url": "https://core-docs.s3.us-east-1.amazonaws.com/documents/asset/uploaded_file/4528/BOC/3875048/RCCO___Lead_Paint.pdf",
+    "quote": "(1) Dwelling Unit =                  $100.00",
+    "doc_date": "rev. 4/10/2024",
+    "via": "pdf",
+    "verified": true
+   },
+   {
+    "url": "https://www.closterboro.com/page/building-department-copy",
+    "quote": "Renting or selling a dwelling unit (house or apartment) requires the filing of a Residential Certificate of Continued Occupancy (RCCO) & Lead Paint Application which entail inspections by both the Department and Fire Marshal.",
+    "doc_date": "2026-10-04 (page fetched)",
+    "via": "page",
+    "verified": null
+   },
+   {
+    "url": "https://www.closterboro.com/page/building-department-copy",
+    "quote": "Currently, there is no requirement of such when selling a dwelling unit.",
+    "doc_date": "2026-10-04 (page fetched)",
+    "via": "page",
+    "verified": null
+   },
+   {
+    "url": "https://ecode360.com/7048411",
+    "quote": "No person shall occupy, rent, lease, transfer title, or inhabit as a tenant or tenants or occupy as a new owner of any residential use unless and until the current owner or representative of such owner has applied for and secured a certificate of continued occupancy from the Building Department of the Borough of Closter.",
+    "doc_date": "Code current to 2025-12-10 (Ord. No. 2003:898)",
+    "via": "page",
+    "verified": null
+   },
+   {
+    "url": "https://ecode360.com/7048411",
+    "quote": "A certificate of smoke detector installation shall be issued by the Closter Fire Prevention Bureau before a certificate of continued occupancy may be issued.",
+    "doc_date": "Code current to 2025-12-10",
+    "via": "page",
+    "verified": null
+   },
+   {
+    "url": "https://ecode360.com/7048411",
+    "quote": "The term of temporary certificate will not exceed 90 days unless extenuating circumstances can be shown.",
+    "doc_date": "Code current to 2025-12-10",
+    "via": "page",
+    "verified": null
+   }
+  ],
+  "confidence": "high",
+  "notes": "Closter Code Chapter 87 (Business and Residential Certificates of Occupancy) was read in full through ecode360. Section 87-10 points to Chapter A301 (Fees and Deposits) for the fee, which was not checked; the fees above come from the Borough's current instruction sheet (rev. 2/24/2025) and application (rev. 4/10/2024). The closterboro.com site uses a bot challenge, so automated checks of the town page may fail; the PDFs are hosted on the Borough's document storage (core-docs S3) linked from the Building Department page. Lead-safe paint inspection ($220.00 per unit, or $50.00 filing fee for a third-party certificate) applies only to rentals of pre-1978 units; the Borough page says it is not required when selling."
+ },
+ "fire_cert": {
+  "requirements": [
+   "Smoke detectors: one per floor including the basement, and one within 10 feet of all bedrooms",
+   "Carbon monoxide units: one within 10 feet of all bedrooms",
+   "Inspection must be done before the closing"
+  ],
+  "authorities": [
+   {
+    "name": "Closter Fire Prevention Bureau (Borough of Closter)",
+    "type": "municipal_fire_bureau",
+    "area_served": "Entire borough",
+    "lead_time": "Inspections are only on Saturday mornings and must be scheduled at least two weeks in advance. The bureau is part time; calls are normally returned within 24 hours.",
+    "fees": [
+     {
+      "label": "Smoke and carbon monoxide detector inspection for a home sale",
+      "amount": "$50.00",
+      "quote": "A fee of $50.00 is due upon completion of the inspection.",
+      "source_url": "https://www.closterboro.com/page/fire-prevention-bureau",
+      "verified": null
+     }
+    ],
+    "how_to_apply": "Call the Fire Prevention Bureau at 201-768-3698 (leave a voicemail) or email fireprev@closternj.us at least two weeks ahead to book a Saturday morning inspection. Pay $50.00 at the inspection by check or money order payable to \"Borough of Closter\".",
+    "application_url": "",
+    "department_url": "https://www.closterboro.com/page/fire-prevention-bureau",
+    "phone": "201-768-3698",
+    "email": "fireprev@closternj.us",
+    "contact_name": "Kevin Whitney",
+    "contact_title": "Fire Marshal",
+    "evidence": [
+     {
+      "url": "https://www.closterboro.com/page/fire-prevention-bureau",
+      "quote": "Inspections are conducted only on Saturday mornings. All requests must be scheduled at least two weeks in advance.",
+      "doc_date": "2026-10-04 (page fetched)",
+      "via": "page",
+      "verified": null
+     },
+     {
+      "url": "https://www.closterboro.com/page/fire-prevention-bureau",
+      "quote": "All checks or money orders shall be made payable to the \"Borough of Closter\"",
+      "doc_date": "2026-10-04 (page fetched)",
+      "via": "page",
+      "verified": null
+     },
+     {
+      "url": "https://www.closterboro.com/page/fire-prevention-bureau",
+      "quote": "Kevin Whitney - Fire Marshal Phone 201-768-3698 Email fireprev@closternj.us",
+      "doc_date": "2026-10-04 (page fetched)",
+      "via": "page",
+      "verified": null
+     },
+     {
+      "url": "https://core-docs.s3.us-east-1.amazonaws.com/documents/asset/uploaded_file/4528/BOC/5334162/RCCO___Lead_Paint_Instructions.pdf",
+      "quote": "INSPECTION FEE: $50.00;",
+      "doc_date": "rev. 2/24/2025",
+      "via": "pdf",
+      "verified": true
+     },
+     {
+      "url": "https://core-docs.s3.us-east-1.amazonaws.com/documents/asset/uploaded_file/4528/BOC/5334162/RCCO___Lead_Paint_Instructions.pdf",
+      "quote": "smoke detectors (1 per floor including basement and 1 within 10' of all bedrooms);",
+      "doc_date": "rev. 2/24/2025",
+      "via": "pdf",
+      "verified": true
+     },
+     {
+      "url": "https://www.nj.gov/dca/dfs/pdf/fire%20directory_county%20summary/fire_code_enforcement_director.pdf",
+      "quote": "LEAID: 0207-001 Closter Boro SMOKE DETECTOR COMPLIANCE Name: Closter Boro Fire Prev Enf Auth. Municipal Addr: 295 Closter Dock Road Fire Official Kevin Whitney Phone (201) 768-3698 Email fireprev@closterboro.com",
+      "doc_date": "survey date 2/18/2026",
+      "via": "state_directory",
+      "verified": null
+     },
+     {
+      "url": "https://nj.gov/dca/dfs/pdf/ANNUAL%20REGISTRY/THIRD%20QUARTER%20LEA%20REGISTRY%202026.pdf",
+      "quote": "M Closter Borough",
+      "doc_date": "2026-07",
+      "via": "pdf",
+      "verified": true
+     }
+    ],
+    "confidence": "high"
+   }
+  ],
+  "notes": "The Borough's current instruction sheet (rev. 2/24/2025) no longer lists a fire extinguisher, matching the 2025 state change (P.L.2025, c.19); an older search-indexed version did list one. The state fire directory gives the email as fireprev@closterboro.com, while the Borough page uses fireprev@closternj.us. No short-notice fee tiers are published; the fee is a flat $50.00 paid at the inspection."
+ },
+ "other_items": [
+  {
+   "label": "Sump pump disconnection",
+   "detail": "Sump pumps must be disconnected or rerouted from the Borough sanitary sewer before the RCCO is issued (construction permit required).",
+   "source_url": "https://core-docs.s3.us-east-1.amazonaws.com/documents/asset/uploaded_file/4528/BOC/5334162/RCCO___Lead_Paint_Instructions.pdf"
+  },
+  {
+   "label": "Sidewalks and exterior conditions",
+   "detail": "The RCCO inspection requires hazardous or unsightly conditions to be fixed, including Borough sidewalks, walkways, gutters and pool barriers.",
+   "source_url": "https://core-docs.s3.us-east-1.amazonaws.com/documents/asset/uploaded_file/4528/BOC/5334162/RCCO___Lead_Paint_Instructions.pdf"
+  },
+  {
+   "label": "Open permits and violations",
+   "detail": "Open construction permits must be closed and zoning and property maintenance violations abated before the RCCO is issued.",
+   "source_url": "https://ecode360.com/7048411"
+  }
+ ],
+ "open_questions": [
+  "How far ahead should the RCCO application be filed to get the Building Department inspection before closing?",
+  "Is there a reinspection fee for the RCCO or the smoke/CO inspection?",
+  "Does Chapter A301 (Fees and Deposits) still match the $100.00 / $40.00 RCCO fees on the form?"
+ ],
+ "checked_at": "2026-10-04",
+ "verification": {
+  "fees": 3,
+  "fee_ok": 2,
+  "fee_bad": 0,
+  "fee_unchecked": 1,
+  "quotes": 16,
+  "q_ok": 7,
+  "q_bad": 0,
+  "q_unchecked": 9
+ }
+}

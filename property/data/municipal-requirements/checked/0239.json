@@ -1,0 +1,194 @@
+{
+ "municipality_code": "0239",
+ "municipality": "North Arlington Borough",
+ "county": "BERGEN",
+ "checked_at": "2026-10-04",
+ "resale_co": {
+  "status": "required",
+  "name": "Certificate of Occupancy (certificate of inspection permitting occupancy) for sale",
+  "issued_by": "Borough of North Arlington Construction Official (Construction Department)",
+  "lead_time": "",
+  "valid_for": "",
+  "requirements": [
+   "Inspection by the Construction Code Official or agent for compliance with Borough ordinances before any transfer of title or new occupancy",
+   "Smoke detector compliance (CSDC) from the Fire Official; no certificate of occupancy is issued until smoke detector rules are met",
+   "Carbon monoxide alarm required before a certificate of continuing occupancy issues",
+   "Request form lists closing date, open permits, seller and buyer names and phones, and a Use of Building Affidavit",
+   "Title may transfer after the application is filed, but no one may occupy until listed corrections are completed"
+  ],
+  "fees": [
+   {
+    "label": "Certificate of Occupancy, one family (Construction Department page, as of July 1, 2015)",
+    "amount": "$75.00",
+    "quote": "As of July 1, 2015 costs are $75.00 for one family or per apartment, $125 for a two family home, $175 for a three family, and $225 for a four family.",
+    "source_url": "https://www.northarlington.org/Departments/construction-department",
+    "verified": true
+   },
+   {
+    "label": "Certificate of Occupancy, two family (Construction Department page)",
+    "amount": "$125",
+    "quote": "As of July 1, 2015 costs are $75.00 for one family or per apartment, $125 for a two family home, $175 for a three family, and $225 for a four family.",
+    "source_url": "https://www.northarlington.org/Departments/construction-department",
+    "verified": true
+   },
+   {
+    "label": "Certificate of continued occupancy, R-3/R-4/R-5, co-ops and condos, per dwelling unit (Borough Code 122-3I)",
+    "amount": "$125",
+    "quote": "R-3, R-4, R-5 uses, co-operative apartments and condominiums: $125 per dwelling unit.",
+    "source_url": "https://ecode360.com/11265128",
+    "verified": null
+   }
+  ],
+  "how_to_apply": "Fill out the Request for Certificate of Occupancy (Residential) form (closing date, open permits, seller and buyer contacts, fee, pickup or mail) and submit it with payment (check or cash) to the Construction Official, Borough of North Arlington, 214 Ridge Road, North Arlington, NJ 07031. Fees vary; the Department says to call or stop in for exact amounts.",
+  "application_url": "https://www.northarlington.org/_Content/pdf/forms/Certificate-Occupancy-Forms.pdf",
+  "department_url": "https://www.northarlington.org/Departments/construction-department",
+  "phone": "201-991-6060",
+  "email": "",
+  "contact_name": "Robert A. Kairys",
+  "contact_title": "Construction Official (also the Fire Official)",
+  "evidence": [
+   {
+    "url": "https://www.northarlington.org/Departments/construction-department",
+    "quote": "A Certificate of Occupancy is required with a sale or ownership change of a property, each time you rent an apartment or business space.",
+    "doc_date": "2026-10-04 (page fetched)",
+    "via": "page",
+    "verified": true
+   },
+   {
+    "url": "https://www.northarlington.org/Departments/construction-department",
+    "quote": "Fees are established depending on several variables. Please call or stop in for exact amounts.",
+    "doc_date": "2026-10-04 (page fetched)",
+    "via": "page",
+    "verified": true
+   },
+   {
+    "url": "https://www.northarlington.org/_Content/pdf/forms/Certificate-Occupancy-Forms.pdf",
+    "quote": "REQUEST FOR CERTIFICATE OF OCCUPANCY",
+    "doc_date": "2026-10-04 (page fetched)",
+    "via": "pdf",
+    "verified": true
+   },
+   {
+    "url": "https://www.northarlington.org/_Content/pdf/forms/Certificate-Occupancy-Forms.pdf",
+    "quote": "Telephone: (201) 991-6060",
+    "doc_date": "2026-10-04 (page fetched)",
+    "via": "pdf",
+    "verified": true
+   },
+   {
+    "url": "https://ecode360.com/11265146",
+    "quote": "Transfers of title may take place after application of a certificate of inspection for occupancy, but no occupancy shall be permitted until all items designated for correction by the Construction Code Official or his/her agent are made and completed, except as hereinafter provided.",
+    "doc_date": "1983-06-14 (Ord. No. 1269)",
+    "via": "page",
+    "verified": null
+   }
+  ],
+  "confidence": "high",
+  "notes": "The Construction Department page states a CO is required on a sale or ownership change and lists 2015 fees ($75.00 one family, $125 two family). The Borough Code fee section (122-3, last amended 2015 by Ord. 2148 and 2160) lists a certificate of continued occupancy fee of $125 per dwelling unit for R-3/R-4/R-5 uses, which does not match the page's $75 one-family fee; confirm the current fee. Chapter 122, Article II (certificate of inspection permitting occupancy) and Chapter 165 were read through a text reader of ecode360. A separate Rental CO application and Landlord Registration exist for rentals; those are not resale requirements. The Construction Official and the Fire Official are the same person (Robert A. Kairys)."
+ },
+ "fire_cert": {
+  "requirements": [
+   "Smoke alarm on each level and outside each sleeping area near the bedrooms (Borough Code 165-22); battery smoke alarms are accepted under the Borough Code, but state rules require 10-year sealed battery units",
+   "At least one carbon monoxide alarm inside each dwelling unit; battery units accepted",
+   "No dwelling may be sold or have its occupancy changed until it complies"
+  ],
+  "authorities": [
+   {
+    "name": "North Arlington Fire Official (Fire Prevention / Construction Department)",
+    "type": "municipal_fire_bureau",
+    "area_served": "Entire borough",
+    "lead_time": "",
+    "fees": [
+     {
+      "label": "Certification of smoke detector compliance (CSDC), per dwelling unit per inspection",
+      "amount": "$50",
+      "quote": "The fee for smoke detector inspection as aforesaid shall be $50 per dwelling unit per inspection, which has been determined to be the estimated actual cost to the Borough of North Arlington for the administration of this program.",
+      "source_url": "https://ecode360.com/11265465",
+      "verified": null
+     }
+    ],
+    "how_to_apply": "Before the sale, the owner applies in writing to the Fire Official for a CSDC on the Borough form, available from the Building Department (214 Ridge Road), with the $50 fee.",
+    "application_url": "",
+    "department_url": "https://www.northarlington.org/Departments/construction-department",
+    "phone": "201-955-5655",
+    "email": "rkairys@northarlington.org",
+    "contact_name": "Robert A. Kairys",
+    "contact_title": "Fire Official (also Construction Official)",
+    "evidence": [
+     {
+      "url": "https://ecode360.com/11265465",
+      "quote": "Prior to the sale of any dwelling unit located in the Borough of North Arlington to which this article applies, the owner thereof shall apply, in writing, to the Fire Official for a CSDC (certification of smoke detector compliance).",
+      "doc_date": "2026-10-04 (page fetched)",
+      "via": "page",
+      "verified": null
+     },
+     {
+      "url": "https://ecode360.com/11265465",
+      "quote": "No certificate of occupancy shall be issued by the Construction Official for a dwelling unit unless and until the applicant therefor shall have first complied with all the terms and conditions of this article.",
+      "doc_date": "2026-10-04 (page fetched)",
+      "via": "page",
+      "verified": null
+     },
+     {
+      "url": "https://ecode360.com/11265503",
+      "quote": "In any case where a certificate of continuing occupancy is required for any residential structure or dwelling unit pursuant to the Uniform Construction Code, no such certificate shall issue unless and until the enforcement officer has determined to his/her satisfaction that the structure or unit is equipped with a sensor device or devices as required by",
+      "doc_date": "2026-10-04 (page fetched)",
+      "via": "page",
+      "verified": null
+     },
+     {
+      "url": "https://www.northarlington.org/Departments/construction-department",
+      "quote": "Construction Code Official, Fire Sub-Code Official, Fire Official Monday-Friday 8:30am-4pm",
+      "doc_date": "2026-10-04 (page fetched)",
+      "via": "page",
+      "verified": true
+     },
+     {
+      "url": "https://nj.gov/dca/dfs/pdf/ANNUAL%20REGISTRY/THIRD%20QUARTER%20LEA%20REGISTRY%202026.pdf",
+      "quote": "F North Arlington Borough",
+      "doc_date": "2026-07",
+      "via": "pdf",
+      "verified": true
+     },
+     {
+      "url": "https://www.nj.gov/dca/dfs/pdf/fire%20directory_county%20summary/fire_code_enforcement_director.pdf",
+      "quote": "LEAID: 0239-001 Enf Auth. Fire Dept Fire Official Robert A Kairys Phone (201) 955-5655 Addr: 214 Ridge Rd North Arlington NJ 07031 ... Email rkairys@northarlington.org",
+      "doc_date": "2026 (survey date 5/8/2025)",
+      "via": "state_directory",
+      "verified": null
+     }
+    ],
+    "confidence": "medium"
+   }
+  ],
+  "notes": "The $50 smoke detector fee comes from Borough Code Chapter 165, Article III (read through a text reader of ecode360); no fee tiers by days before closing were found and no smoke/CO page exists on the Borough website. The Borough Code text predates the state's 10-year sealed battery rule and the 2025 extinguisher change; no extinguisher requirement was found in the Borough's smoke detector article. The phone and email come from the state fire directory; the Borough main number is 201-991-6060."
+ },
+ "other_items": [
+  {
+   "label": "Open permits",
+   "detail": "The residential CO request form asks about open permits; resolve them with the Construction Department before closing.",
+   "source_url": "https://www.northarlington.org/_Content/pdf/forms/Certificate-Occupancy-Forms.pdf"
+  },
+  {
+   "label": "Use of Building Affidavit",
+   "detail": "The residential CO request form records whether a Use of Building Affidavit was received.",
+   "source_url": "https://www.northarlington.org/_Content/pdf/forms/Certificate-Occupancy-Forms.pdf"
+  }
+ ],
+ "open_questions": [
+  "Is the current 1-family resale CO fee $75 (Construction Department page) or $125 (Borough Code 122-3)?",
+  "Is the $50 smoke detector (CSDC) fee charged on top of the CO fee, and are there faster-service fee tiers?",
+  "What is the usual lead time for the CO and CSDC inspections, and how long are they valid?",
+  "What does the Use of Building Affidavit require?"
+ ],
+ "verification": {
+  "fees": 4,
+  "fee_ok": 2,
+  "fee_bad": 0,
+  "fee_unchecked": 2,
+  "quotes": 11,
+  "q_ok": 6,
+  "q_bad": 0,
+  "q_unchecked": 5
+ }
+}

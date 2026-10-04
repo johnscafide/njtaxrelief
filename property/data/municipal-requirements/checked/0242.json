@@ -1,0 +1,226 @@
+{
+ "municipality_code": "0242",
+ "municipality": "Oakland Borough",
+ "county": "BERGEN",
+ "checked_at": "2026-10-04",
+ "resale_co": {
+  "status": "required",
+  "name": "Certificate of Approval for Occupancy (CAO), formerly called CCO",
+  "issued_by": "Borough of Oakland Fire Prevention Bureau / Code Enforcement Department, with Board of Health, Building Department and Code Enforcement sign-offs",
+  "lead_time": "Submit at least 30 days before closing; can be filed as soon as the house has a buyer",
+  "valid_for": "The application is valid for 6 months from the application date; approvals expire 90 days from the signature date. After the fire certificate is issued the applicant has 90 days to complete the CAO ($30 for a 30-day extension).",
+  "requirements": [
+   "Complete application (owner, buyer or realtor), with a secondary mailing address, phone and email for the buyer and phone and email for the seller",
+   "All open building permits and property maintenance violations must be closed before the CAO (and before a fire inspection can be set up)",
+   "Board of Health sign-off: septic reports, sewer information, well water reports; cesspools must be upgraded at realty transfer",
+   "Fire certificate (smoke alarms, CO alarms, fire extinguisher, house numbers)",
+   "Building inspection only if the fire inspector sees a construction code concern (for example water heater and boiler relief pipes within 6 inches of the floor, holes in garage ceiling, extension cords used as permanent wiring)"
+  ],
+  "fees": [
+   {
+    "label": "Certificate of Approval for Occupancy, sale of single or two family home (includes realtor sign fee and Board of Health review fee)",
+    "amount": "$115",
+    "quote": "Certificate of Approval for Occupancy = $115",
+    "source_url": "https://www.oakland-nj.gov/1241/Certificate-of-Approval-for-Occupancy-an",
+    "verified": true
+   },
+   {
+    "label": "CAO extension, 30 days",
+    "amount": "$30",
+    "quote": "Residential Certificate of Approval for Occupancy Extension Fee: $30 for 30 days",
+    "source_url": "https://www.oakland-nj.gov/DocumentCenter/View/1123/Residential-Certificate-of-Approval-for-Occupancy-and-Fire-Certificate-Informational-Packet-for-Resale",
+    "verified": true
+   }
+  ],
+  "how_to_apply": "Fill out the Application for Certificate of Approval for Occupancy (CAO) and Fire Certificate for Resale of a Single and Two Family Dwelling and return it with the fees to the Fire Prevention office (1 Municipal Plaza, Oakland). Pay by check made out to 'Oakland Borough' or exact cash. The Fire Prevention page also says a CAO can be applied for online through the Borough's GovPilot portal. Choose whether the CAO is mailed, emailed or picked up.",
+  "application_url": "https://www.oakland-nj.gov/DocumentCenter/View/1122/Residential-Certificate-of-Approval-for-Occupancy-and-Fire-Certificate-Application-for-Resale",
+  "department_url": "https://www.oakland-nj.gov/1241/Certificate-of-Approval-for-Occupancy-an",
+  "phone": "201-337-8111 ext. 2025",
+  "email": "fireassistant@oakland-nj.gov",
+  "contact_name": "",
+  "contact_title": "Fire Prevention office",
+  "evidence": [
+   {
+    "url": "https://www.oakland-nj.gov/DocumentCenter/View/1122/Residential-Certificate-of-Approval-for-Occupancy-and-Fire-Certificate-Application-for-Resale",
+    "quote": "APPLICATION FOR CERTIFICATE OF APPROVAL FOR OCCUPANCY (CAO) AND FIRE CERTIFICATE FOR RESALE OF A SINGLE AND TWO FAMILY DWELLING",
+    "doc_date": "2026-10-04 (page fetched)",
+    "via": "pdf",
+    "verified": true
+   },
+   {
+    "url": "https://www.oakland-nj.gov/DocumentCenter/View/1122/Residential-Certificate-of-Approval-for-Occupancy-and-Fire-Certificate-Application-for-Resale",
+    "quote": "MUST SUPPLY APPLICATION 30 DAYS BEFORE CLOSING DATE",
+    "doc_date": "2026-10-04 (page fetched)",
+    "via": "pdf",
+    "verified": true
+   },
+   {
+    "url": "https://www.oakland-nj.gov/DocumentCenter/View/1122/Residential-Certificate-of-Approval-for-Occupancy-and-Fire-Certificate-Application-for-Resale",
+    "quote": "THIS APPLICATION IS VALID FOR 6 MONTHS FROM APPLICATION DATE; APPROVALS BELOW EXPIRE 90 DAYS FROM SIGNATURE DATE.",
+    "doc_date": "2026-10-04 (page fetched)",
+    "via": "pdf",
+    "verified": true
+   },
+   {
+    "url": "https://www.oakland-nj.gov/DocumentCenter/View/1123/Residential-Certificate-of-Approval-for-Occupancy-and-Fire-Certificate-Informational-Packet-for-Resale",
+    "quote": "All violations and permits must be closed out before a CAO will be issued.",
+    "doc_date": "2026-10-04 (page fetched)",
+    "via": "pdf",
+    "verified": true
+   },
+   {
+    "url": "https://www.oakland-nj.gov/DocumentCenter/View/1123/Residential-Certificate-of-Approval-for-Occupancy-and-Fire-Certificate-Informational-Packet-for-Resale",
+    "quote": "Board of Health must sign off before a CAO can be granted for the property.",
+    "doc_date": "2026-10-04 (page fetched)",
+    "via": "pdf",
+    "verified": true
+   },
+   {
+    "url": "https://www.oakland-nj.gov/1241/Certificate-of-Approval-for-Occupancy-an",
+    "quote": "Sale of Single or Two Family Home:",
+    "doc_date": "2026-10-04 (page fetched)",
+    "via": "page",
+    "verified": true
+   },
+   {
+    "url": "https://www.oakland-nj.gov/1246/Fire-Prevention",
+    "quote": "To apply for a CAO, please visit the GovPilot portal here and submit an application online.",
+    "doc_date": "2026-10-04 (page fetched)",
+    "via": "page",
+    "verified": true
+   },
+   {
+    "url": "https://ecode360.com/35188097",
+    "quote": "Change of occupancy/resales of single- and two-family homes.",
+    "doc_date": "10-22-2024 (Ord. No. 24-Code-951)",
+    "via": "page",
+    "verified": null
+   }
+  ],
+  "confidence": "high",
+  "notes": "Oakland combines the resale certificate (CAO) and the fire certificate in one application run by the Fire Prevention office. The fire certificate is for settlement purposes only; the full CAO is needed for occupancy. Borough code Section 11-1.8b (amended 10-22-2024 by Ord. No. 24-Code-951) has a fee heading for change of occupancy/resales of single- and two-family homes, but the amounts under it did not show in the ecode360 print view, so the fees here come from the Borough's web page and packet. The Fire Prevention page links to a GovPilot portal for online CAO applications but the link URL was not on the page, so the PDF application is listed. Office emails are taken from email-protection links on the Fire Prevention page (fireassistant@oakland-nj.gov for the office, fireofficial@oakland-nj.gov for the Fire Official). Rental-only items (lead-safe certificate for pre-1978 rentals, $20 lead paint fee for tenant changes, CAO for tenant changes) are not resale requirements."
+ },
+ "fire_cert": {
+  "requirements": [
+   "Smoke detectors on each level, including the basement, and within 10 feet of each separate sleeping area; hardwired or 10-year sealed battery; any detector older than 10 years must be replaced",
+   "Hardwired alarms from original construction stay hardwired (no battery-only replacement)",
+   "Carbon monoxide detectors within 10 feet of each separate sleeping area (battery, hardwired or plug-in, UL 2034)",
+   "Low voltage (monitored) alarm systems not part of original construction must have been tested in the year of sale with an NFPA 72 report",
+   "One fire extinguisher, 2A:10B:C, no more than 10 lbs, within 10 feet of the kitchen in the exit path, top no more than 5 feet above the floor, serviced and tagged in the past 12 months or with a recent purchase receipt (form still lists it)",
+   "House numbers in a contrasting color, 3 inches high, permanently affixed and clearly visible near the front door",
+   "All building permits and property maintenance violations closed before the fire inspection is scheduled"
+  ],
+  "authorities": [
+   {
+    "name": "Oakland Fire Prevention Bureau",
+    "type": "municipal_fire_bureau",
+    "area_served": "Entire borough",
+    "lead_time": "Apply at least 30 days before closing (same application as the CAO). An expedite fee is available. The office is open Monday to Friday, 8 am to 4 pm.",
+    "fees": [
+     {
+      "label": "Fire certificate, sale of single or two family home",
+      "amount": "$85",
+      "quote": "Fire Certificate = $85",
+      "source_url": "https://www.oakland-nj.gov/1241/Certificate-of-Approval-for-Occupancy-an",
+      "verified": true
+     },
+     {
+      "label": "Expedite fee",
+      "amount": "$50",
+      "quote": "Expedite Fee = $50",
+      "source_url": "https://www.oakland-nj.gov/1241/Certificate-of-Approval-for-Occupancy-an",
+      "verified": true
+     },
+     {
+      "label": "Re-inspection fee",
+      "amount": "$50",
+      "quote": "Re-Inspection Fee = $50",
+      "source_url": "https://www.oakland-nj.gov/1241/Certificate-of-Approval-for-Occupancy-an",
+      "verified": true
+     }
+    ],
+    "how_to_apply": "Use the combined CAO and Fire Certificate application (PDF, or the GovPilot portal mentioned on the Fire Prevention page) and pay by check to 'Oakland Borough' or exact cash. The office schedules the fire inspection once open permits and violations are cleared.",
+    "application_url": "https://www.oakland-nj.gov/DocumentCenter/View/1122/Residential-Certificate-of-Approval-for-Occupancy-and-Fire-Certificate-Application-for-Resale",
+    "department_url": "https://www.oakland-nj.gov/1246/Fire-Prevention",
+    "phone": "201-337-8111 ext. 2025",
+    "email": "fireassistant@oakland-nj.gov",
+    "contact_name": "Denny Knubel",
+    "contact_title": "Fire Official",
+    "evidence": [
+     {
+      "url": "https://www.oakland-nj.gov/1246/Fire-Prevention",
+      "quote": "The Fire Prevention office is open Monday through Friday from 8 am to 4 pm.",
+      "doc_date": "2026-10-04 (page fetched)",
+      "via": "page",
+      "verified": true
+     },
+     {
+      "url": "https://www.oakland-nj.gov/1246/Fire-Prevention",
+      "quote": "Denny Knubel - 201-337-8111, ext. 2025",
+      "doc_date": "2026-10-04 (page fetched)",
+      "via": "page",
+      "verified": true
+     },
+     {
+      "url": "https://www.oakland-nj.gov/1246/Fire-Prevention",
+      "quote": "At least one portable fire extinguisher shall be installed in all one- and two-family dwellings upon change of occupancy.",
+      "doc_date": "2026-10-04 (page fetched)",
+      "via": "page",
+      "verified": true
+     },
+     {
+      "url": "https://www.oakland-nj.gov/DocumentCenter/View/1123/Residential-Certificate-of-Approval-for-Occupancy-and-Fire-Certificate-Informational-Packet-for-Resale",
+      "quote": "Residential Fire Certificate Expedite Fee: $50",
+      "doc_date": "2026-10-04 (page fetched)",
+      "via": "pdf",
+      "verified": true
+     },
+     {
+      "url": "https://nj.gov/dca/dfs/pdf/ANNUAL%20REGISTRY/THIRD%20QUARTER%20LEA%20REGISTRY%202026.pdf",
+      "quote": "F Oakland Borough",
+      "doc_date": "2026-07",
+      "via": "pdf",
+      "verified": true
+     },
+     {
+      "url": "https://www.nj.gov/dca/dfs/pdf/fire%20directory_county%20summary/fire_code_enforcement_director.pdf",
+      "quote": "LEAID: 0242-001 Enf Auth. Fire Dept Fire Official Denny G Knubel Phone (201) 337-8111",
+      "doc_date": "2/18/2026 (survey date)",
+      "via": "state_directory",
+      "verified": null
+     }
+    ],
+    "confidence": "high"
+   }
+  ],
+  "notes": "The fire certificate is part of the combined CAO application. The Borough page and packet still list a portable fire extinguisher (citing N.J.A.C. 5:70-4.19(e)), which state law (P.L.2025, c.19) removed from the sale certificate in February 2025; confirm with the office. The packet says the fire certificate is for settlement purposes only and does not allow occupancy. Fire Official email from the page: fireofficial@oakland-nj.gov (email-protection link, not quoted)."
+ },
+ "other_items": [
+  {
+   "label": "Board of Health sign-off (septic, cesspool, sewer, well)",
+   "detail": "The application goes to the Board of Health, which must sign off before the CAO. It reviews septic reports, sewer information and well water reports. Cesspools must be upgraded at realty transfer (2012 septic code), and homes on a well need a Private Well Testing Act test at realty transfer with results sent to health@oakland-nj.org and septics@co.bergen.nj.us.",
+   "source_url": "https://www.oakland-nj.gov/DocumentCenter/View/1123/Residential-Certificate-of-Approval-for-Occupancy-and-Fire-Certificate-Informational-Packet-for-Resale"
+  },
+  {
+   "label": "Open permits and property maintenance violations",
+   "detail": "All building permits and property maintenance violations must be closed before the fire inspection and before the CAO is issued.",
+   "source_url": "https://www.oakland-nj.gov/DocumentCenter/View/1123/Residential-Certificate-of-Approval-for-Occupancy-and-Fire-Certificate-Informational-Packet-for-Resale"
+  }
+ ],
+ "open_questions": [
+  "What is the direct link to the Borough's GovPilot CAO application?",
+  "How fast is an expedited fire inspection, and when does the $50 expedite fee apply?",
+  "Does Oakland still require the fire extinguisher at resale after P.L.2025, c.19?",
+  "What are the code amounts under Section 11-1.8b, and do they match the $115 / $85 on the web page?"
+ ],
+ "verification": {
+  "fees": 5,
+  "fee_ok": 5,
+  "fee_bad": 0,
+  "fee_unchecked": 0,
+  "quotes": 14,
+  "q_ok": 12,
+  "q_bad": 0,
+  "q_unchecked": 2
+ }
+}

@@ -1,0 +1,252 @@
+{
+ "municipality_code": "0206",
+ "municipality": "Cliffside Park Borough",
+ "county": "BERGEN",
+ "resale_co": {
+  "status": "required",
+  "name": "Certificate of Continued Occupancy (CCO) for sale",
+  "issued_by": "Borough of Cliffside Park Fire Prevention Bureau (handles all CCO documents; shares the 2nd floor office with the Building Department)",
+  "lead_time": "Inspections must be requested at least a week before the closing or move-in date. Inspections are Tuesdays and Thursdays only, 10 AM to 12 PM or 1 PM to 3 PM, with a 2 hour window.",
+  "valid_for": "",
+  "requirements": [
+   "Survey of the property is required for 1 or 2 family homes (not for condominiums); without it no CCO is issued",
+   "Two separate payments by check or money order (no cash, no credit cards): $50.00 CCO fee to the Borough and $75.00 inspection fee to Cliffside Park Fire Prevention",
+   "Smoke and carbon monoxide detectors on each level within 10 feet of each bedroom; battery smoke detectors must be 10 year sealed and hardwired detectors must be under 10 years old",
+   "Fire extinguisher (under 10 pounds) mounted in the kitchen for 1 and 2 family homes (form still lists it)",
+   "Basement may not be used as a dwelling unit, only as a recreation and family room",
+   "One inspector does the CCO and smoke/CO inspection together; paperwork is handed over at the end of the inspection"
+  ],
+  "fees": [
+   {
+    "label": "Certificate of Continued Occupancy, 1 or 2 family dwelling",
+    "amount": "$50.00",
+    "quote": "1 or 2 family dwelling $50.00",
+    "source_url": "https://www.cliffsideparknj.gov/Sale%20CCO%20New.pdf",
+    "verified": null
+   },
+   {
+    "label": "Certificate of Continued Occupancy, condo/co-op",
+    "amount": "$50.00",
+    "quote": "Condo/Co-Op $50.00",
+    "source_url": "https://www.cliffsideparknj.gov/Sale%20CCO%20New.pdf",
+    "verified": null
+   },
+   {
+    "label": "Certificate of Continued Occupancy (Borough fee schedule, Section 11-1.4)",
+    "amount": "$50.00",
+    "quote": "Certificate of Continued Occupancy $50.00",
+    "source_url": "https://ecode360.com/35162510",
+    "verified": null
+   },
+   {
+    "label": "Smoke and carbon monoxide inspection fee (sale), payable to Cliffside Park Fire Prevention",
+    "amount": "$75.00",
+    "quote": "$75.00 Inspection Fee",
+    "source_url": "https://www.cliffsideparknj.gov/Sale%20CCO%20New.pdf",
+    "verified": null
+   }
+  ],
+  "how_to_apply": "Fill out the one page Certificate of Continued Occupancy form (Sale) from the Building Department's Applications and Permits page and bring it, with a property survey and two checks (one to \"Borough of Cliffside Park\" for the CCO, one to \"Cliffside Park Fire Prevention\" for the inspection), to the Fire Prevention Bureau, Municipal Complex, 525 Palisade Avenue, 2nd floor. All fees must be paid before the inspection is scheduled.",
+  "application_url": "https://www.cliffsideparknj.gov/Sale%20CCO%20New.pdf",
+  "department_url": "https://www.cliffsideparknj.gov/departments/fire_prevention_bureau.php",
+  "phone": "201-313-2062",
+  "email": "pleone@cliffsideparknj.gov",
+  "contact_name": "Pamela Petermann",
+  "contact_title": "Secretary, Fire Prevention Bureau (Fire Official and Code Enforcement: Gregory Yfantis, 201-313-2063, gyfantis@cliffsideparknj.gov)",
+  "evidence": [
+   {
+    "url": "https://www.cliffsideparknj.gov/departments/building_department/index.php",
+    "quote": "Certificate of Occupancy – Required for sale of property.",
+    "doc_date": "2026-10-04 (page fetched)",
+    "via": "page",
+    "verified": true
+   },
+   {
+    "url": "https://www.cliffsideparknj.gov/departments/building_department/applications_and_permits.php",
+    "quote": "Certificate of Continued Occupancy – SALE",
+    "doc_date": "2026-10-04 (page fetched)",
+    "via": "page",
+    "verified": true
+   },
+   {
+    "url": "https://www.cliffsideparknj.gov/Sale%20CCO%20New.pdf",
+    "quote": "For a SALE of property in Cliffside Park you need:",
+    "doc_date": "2024-10-31",
+    "via": "pdf",
+    "verified": null
+   },
+   {
+    "url": "https://www.cliffsideparknj.gov/Sale%20CCO%20New.pdf",
+    "quote": "THERE ARE TWO SEPARATE FEES FOR A SALE MUST BE SEPARATE CHECKS or MONEY ORDER FOR EACH DEPARTMENT",
+    "doc_date": "2024-10-31",
+    "via": "pdf",
+    "verified": null
+   },
+   {
+    "url": "https://www.cliffsideparknj.gov/Sale%20CCO%20New.pdf",
+    "quote": "Apply for a CCO (Certificate of Continued Occupancy) in the Fire Prevention Bureau:",
+    "doc_date": "2024-10-31",
+    "via": "pdf",
+    "verified": null
+   },
+   {
+    "url": "https://www.cliffsideparknj.gov/Sale%20CCO%20New.pdf",
+    "quote": "A survey is required for 1 or 2 family homes & commercial buildings",
+    "doc_date": "2024-10-31",
+    "via": "pdf",
+    "verified": null
+   },
+   {
+    "url": "https://www.cliffsideparknj.gov/Sale%20CCO%20New.pdf",
+    "quote": "CCO INSPECTIONS MUST BE MADE AT LEAST A WEEK IN ADVANCE FROM CLOSING OR MOVE IN DATE",
+    "doc_date": "2024-10-31",
+    "via": "pdf",
+    "verified": null
+   },
+   {
+    "url": "https://www.cliffsideparknj.gov/Sale%20CCO%20New.pdf",
+    "quote": "The Fire Prevention Bureau handles all CCO documents.",
+    "doc_date": "2024-10-31",
+    "via": "pdf",
+    "verified": null
+   },
+   {
+    "url": "https://ecode360.com/35162510",
+    "quote": "No person, firm, partnership or corporation shall sell, rent, lease, suffer or allow any person or persons, firms, partnerships or corporations to live in or inhabit as a tenant or lessee any house, apartment or other structure, including modular unit, unless the person, firm, partnership or corporation shall first obtain from the Borough an occupancy permit or continued certificate of occupancy in accordance with this chapter;",
+    "doc_date": "2026-10-04 (page fetched)",
+    "via": "page",
+    "verified": null
+   },
+   {
+    "url": "https://www.cliffsideparknj.gov/departments/fire_prevention_bureau.php",
+    "quote": "Secretary Pamela Petermann 201-313-2062 pleone@cliffsideparknj.gov",
+    "doc_date": "2026-10-04 (page fetched)",
+    "via": "page",
+    "verified": true
+   },
+   {
+    "url": "https://www.cliffsideparknj.gov/departments/fire_prevention_bureau.php",
+    "quote": "Fire Official & Code Enforcement Gregory Yfantis 201-313-2063 gyfantis@cliffsideparknj.gov",
+    "doc_date": "2026-10-04 (page fetched)",
+    "via": "page",
+    "verified": true
+   }
+  ],
+  "confidence": "high",
+  "notes": "The sale packet (\"Sale CCO New.pdf\", created October 31, 2024) is a scanned image PDF, so its quotes were read visually and may not be machine-searchable. It lists $50.00 for 1 or 2 family homes and condo/co-op, $100.00 for multiple family and commercial. Borough Code Section 11-10.2 (read through the ecode360 print view) requires an occupancy permit or continued certificate of occupancy before a house is sold or occupied, and the fee schedule in Section 11-1.4 lists Certificate of Continued Occupancy $50.00. The Building Department page lists Greg Yfantis as Construction Code Official and the department phone as 201-313-2042. The rental CCO is a separate form and not a sale requirement."
+ },
+ "fire_cert": {
+  "requirements": [
+   "Smoke and carbon monoxide detectors on each level within 10 feet of each bedroom (common hallway)",
+   "All battery smoke detectors must be 10 year sealed; hardwired smoke detectors must be under 10 years old",
+   "Fire extinguisher (under 10 pounds) mounted in the kitchen (form still lists it)"
+  ],
+  "authorities": [
+   {
+    "name": "Cliffside Park Fire Prevention Bureau",
+    "type": "municipal_fire_bureau",
+    "area_served": "Entire borough",
+    "lead_time": "Request at least a week before closing. Inspections Tuesdays and Thursdays, 10 AM to 12 PM or 1 PM to 3 PM. The smoke/CO inspection is done at the same visit as the CCO inspection.",
+    "fees": [
+     {
+      "label": "Smoke and carbon monoxide inspection fee (sale), payable to Cliffside Park Fire Prevention",
+      "amount": "$75.00",
+      "quote": "$75.00 Inspection Fee",
+      "source_url": "https://www.cliffsideparknj.gov/Sale%20CCO%20New.pdf",
+      "verified": null
+     }
+    ],
+    "how_to_apply": "Applied for together with the sale CCO: there is no separate Fire Prevention paperwork. Pay the $75.00 inspection fee by check or money order to \"Cliffside Park Fire Prevention\" at the Fire Prevention Bureau, 525 Palisade Avenue, 2nd floor.",
+    "application_url": "https://www.cliffsideparknj.gov/Sale%20CCO%20New.pdf",
+    "department_url": "https://www.cliffsideparknj.gov/departments/fire_prevention_bureau.php",
+    "phone": "201-313-2062",
+    "email": "gyfantis@cliffsideparknj.gov",
+    "contact_name": "Gregory Yfantis",
+    "contact_title": "Fire Official & Code Enforcement",
+    "evidence": [
+     {
+      "url": "https://www.cliffsideparknj.gov/Sale%20CCO%20New.pdf",
+      "quote": "There is NO PAPERWORK for Fire Prevention, this is the only form you need to fill out.",
+      "doc_date": "2024-10-31",
+      "via": "pdf",
+      "verified": null
+     },
+     {
+      "url": "https://www.cliffsideparknj.gov/Sale%20CCO%20New.pdf",
+      "quote": "2nd Check Payable to: \"Cliffside Park Fire Prevention\"",
+      "doc_date": "2024-10-31",
+      "via": "pdf",
+      "verified": null
+     },
+     {
+      "url": "https://www.cliffsideparknj.gov/Sale%20CCO%20New.pdf",
+      "quote": "ALL SMOKE DETECTORS MUST BE 10 YEAR SEALED BATTERY",
+      "doc_date": "2024-10-31",
+      "via": "pdf",
+      "verified": null
+     },
+     {
+      "url": "https://www.cliffsideparknj.gov/Sale%20CCO%20New.pdf",
+      "quote": "Fire Extinguisher mounted (under 10 Pounds) in the Kitchen",
+      "doc_date": "2024-10-31",
+      "via": "pdf",
+      "verified": null
+     },
+     {
+      "url": "https://www.cliffsideparknj.gov/departments/fire_prevention_bureau.php",
+      "quote": "Fire Official & Code Enforcement Gregory Yfantis 201-313-2063 gyfantis@cliffsideparknj.gov",
+      "doc_date": "2026-10-04 (page fetched)",
+      "via": "page",
+      "verified": true
+     },
+     {
+      "url": "https://www.nj.gov/dca/dfs/pdf/fire%20directory_county%20summary/fire_code_enforcement_director.pdf",
+      "quote": "Name: Cliffside Park Fire Prev",
+      "doc_date": "2026-02 (survey date 2/26/2026)",
+      "via": "state_directory",
+      "verified": null
+     },
+     {
+      "url": "https://www.nj.gov/dca/dfs/pdf/fire%20directory_county%20summary/fire_code_enforcement_director.pdf",
+      "quote": "Email gyfantis@cliffsideparknj.gov",
+      "doc_date": "2026-02 (survey date 2/26/2026)",
+      "via": "state_directory",
+      "verified": null
+     },
+     {
+      "url": "https://nj.gov/dca/dfs/pdf/ANNUAL%20REGISTRY/THIRD%20QUARTER%20LEA%20REGISTRY%202026.pdf",
+      "quote": "F Cliffside Park Borough",
+      "doc_date": "2026-07",
+      "via": "pdf",
+      "verified": true
+     }
+    ],
+    "confidence": "high"
+   }
+  ],
+  "notes": "Cliffside Park uses one inspection for the sale CCO and the smoke/CO certificate, with two separate checks. The packet says buildings with more than 4 units pay a higher inspection fee (ask). The state directory lists the smoke detector compliance phone as (201) 313-0205 and the fire official's phone as (201) 313-2063. The form still lists a kitchen fire extinguisher, which state law (P.L.2025, c.19) dropped from the sale certificate in February 2025; confirm with the Bureau."
+ },
+ "other_items": [
+  {
+   "label": "Property survey",
+   "detail": "A survey of the property must be submitted with the sale CCO application for 1 or 2 family homes (not condominiums).",
+   "source_url": "https://www.cliffsideparknj.gov/Sale%20CCO%20New.pdf"
+  }
+ ],
+ "open_questions": [
+  "Does the Bureau still require the kitchen fire extinguisher after P.L.2025, c.19?",
+  "How long is the CCO / smoke certificate valid if the closing is delayed?",
+  "Is there a reinspection fee if the first inspection fails?"
+ ],
+ "checked_at": "2026-10-04",
+ "verification": {
+  "fees": 5,
+  "fee_ok": 0,
+  "fee_bad": 0,
+  "fee_unchecked": 5,
+  "quotes": 19,
+  "q_ok": 6,
+  "q_bad": 0,
+  "q_unchecked": 13
+ }
+}

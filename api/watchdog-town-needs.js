@@ -100,9 +100,12 @@ async function start(req, res, c, hash, body) {
   const code = clean(body.code, 4);
   const town = TOWNS.get(code) || ALL_TOWNS.get(code);
   if (!town) return res.status(422).json({ error: 'Pick a town from the list.' });
-  const needKeys = Array.from(new Set((Array.isArray(body.needs) ? body.needs : []).map((k) => clean(k, 20)))).filter((k) => town.needs.includes(k));
+  const asked = Array.from(new Set((Array.isArray(body.needs) ? body.needs : []).map((k) => clean(k, 20))));
+  // A correction (from /co's "Report a correction") can be sent for any town and stands alone.
+  const needKeys = asked.includes('correction') ? ['correction'] : asked.filter((k) => k !== 'correction' && town.needs.includes(k));
   if (!needKeys.length) return res.status(422).json({ error: 'Pick at least one item you can help with.' });
   const answer = String(body.answer == null ? '' : body.answer).trim().slice(0, 2000);
+  if (needKeys[0] === 'correction' && !answer) return res.status(422).json({ error: 'Tell us what’s wrong.' });
   const sourceUrl = httpsUrl(body.source_url);
   if (sourceUrl === null) return res.status(422).json({ error: 'The link must be a full web address that starts with https://.' });
   let file = null;

@@ -1,0 +1,216 @@
+{
+ "municipality_code": "0267",
+ "municipality": "Westwood Borough",
+ "county": "BERGEN",
+ "checked_at": "2026-10-04",
+ "resale_co": {
+  "status": "required",
+  "name": "Zoning Certificate of Compliance for Residential Sale and Rental (CCO), combined with the Smoke Alarm and Carbon Monoxide Detector application",
+  "issued_by": "Borough of Westwood Office of Construction & Zoning (Building Department)",
+  "lead_time": "Fee depends on how far away the closing is when the form is submitted: over 2 weeks for the lower fee. The inspection is not scheduled until payment is received.",
+  "valid_for": "",
+  "requirements": [
+   "Physical safety inspection plus a block and lot file review to confirm the home is used as designed under zoning (for example one-family vs. two-family status)",
+   "Exterior: level sidewalks and walkways with no trip hazards; no debris or overgrowth; pool barrier with proper height and self-closing, outward-opening gate with lock 54 inches high; garage door opener plugged directly into an outlet",
+   "Interior: all utilities on; no keyed bedroom locks; thumb-turn deadbolts inside; working GFCI outlets; sound fireplace firebox; furnace emergency switch at top of basement stairs; secure boiler/water heater flue; relief valve pipe within 6 inches of the floor; leak-free aboveground oil tanks; handrails on stairs with more than 4 risers and guards over 30 inches",
+   "Smoke and carbon monoxide alarms to the Borough checklist (see fire certificate)",
+   "Sump pumps must discharge to a storm sewer or street gutter line, not the sanitary sewer, roadway or sidewalk",
+   "House numbers clearly visible from the street",
+   "All building permits must be closed; the CCO inspection will not be scheduled with any open permits",
+   "Rentals must attach a Lead Safe or Lead Free certificate"
+  ],
+  "fees": [
+   {
+    "label": "Zoning certificate of compliance / smoke and CO inspection, closing more than 2 weeks away",
+    "amount": "$100.00",
+    "quote": "If closing date (move in date for rental) is OVER 2 weeks away from date form is being submitted, please pay $100.00.",
+    "source_url": "https://www.westwoodnj.gov/DocumentCenter/View/2800/Zoning-Certificate-of-Compliance-for-Residential-Sale-and-Rental-CCO--pdf",
+    "verified": true
+   },
+   {
+    "label": "Closing less than 2 weeks away",
+    "amount": "$150.00",
+    "quote": "If closing date (move in date for rental) is LESS than 2 weeks away from date form is being submitted, please pay $150.00.",
+    "source_url": "https://www.westwoodnj.gov/DocumentCenter/View/2800/Zoning-Certificate-of-Compliance-for-Residential-Sale-and-Rental-CCO--pdf",
+    "verified": true
+   },
+   {
+    "label": "Re-inspection",
+    "amount": "$50.00",
+    "quote": "Re-Inspection Date: _________ FEE: $ 50.00",
+    "source_url": "https://www.westwoodnj.gov/DocumentCenter/View/2800/Zoning-Certificate-of-Compliance-for-Residential-Sale-and-Rental-CCO--pdf",
+    "verified": true
+   }
+  ],
+  "how_to_apply": "Fill out the Zoning Certificate of Compliance Application / Smoke Alarm and Carbon Monoxide Detector Application and submit it with a check or money order payable to Borough of Westwood to the Westwood Building Department, 101 Washington Avenue, Westwood, NJ 07675. The application cannot be processed or the inspection scheduled without payment.",
+  "application_url": "https://www.westwoodnj.gov/DocumentCenter/View/2800/Zoning-Certificate-of-Compliance-for-Residential-Sale-and-Rental-CCO--pdf",
+  "department_url": "https://www.westwoodnj.gov/",
+  "phone": "201-664-5900",
+  "email": "",
+  "contact_name": "Armand Marini",
+  "contact_title": "Zoning Officer (ext. 305 at 201-664-7100; amarini@westwoodnj.gov)",
+  "evidence": [
+   {
+    "url": "https://www.westwoodnj.gov/DocumentCenter/View/2800/Zoning-Certificate-of-Compliance-for-Residential-Sale-and-Rental-CCO--pdf",
+    "quote": "If you are selling your home or have a new tenant moving into your rental property, this is the form you need!",
+    "doc_date": "JZ 3/26",
+    "via": "pdf",
+    "verified": true
+   },
+   {
+    "url": "https://www.westwoodnj.gov/DocumentCenter/View/2800/Zoning-Certificate-of-Compliance-for-Residential-Sale-and-Rental-CCO--pdf",
+    "quote": "*NOTE: we cannot process your application or schedule the inspection without payment",
+    "doc_date": "JZ 3/26",
+    "via": "pdf",
+    "verified": true
+   },
+   {
+    "url": "https://www.westwoodnj.gov/DocumentCenter/View/2800/Zoning-Certificate-of-Compliance-for-Residential-Sale-and-Rental-CCO--pdf",
+    "quote": "CCO inspection WILL NOT be scheduled with ANY open permits.",
+    "doc_date": "JZ 3/26",
+    "via": "pdf",
+    "verified": true
+   },
+   {
+    "url": "https://www.westwoodnj.gov/DocumentCenter/View/2800/Zoning-Certificate-of-Compliance-for-Residential-Sale-and-Rental-CCO--pdf",
+    "quote": "If you have any further questions, please call the Building Department at (201) 664-5900",
+    "doc_date": "JZ 3/26",
+    "via": "pdf",
+    "verified": true
+   },
+   {
+    "url": "https://www.westwoodnj.gov/",
+    "quote": "Forms for Residential Sale or Rental",
+    "doc_date": "2026-10-04 (page fetched)",
+    "via": "page",
+    "verified": true
+   },
+   {
+    "url": "https://www.westwoodnj.gov/250/Zoning-Office",
+    "quote": "Zoning Officer",
+    "doc_date": "2026-10-04 (page fetched)",
+    "via": "page",
+    "verified": true
+   },
+   {
+    "url": "https://ecode360.com/13846898",
+    "quote": "Certificate for resale of residential and commercial property",
+    "doc_date": "2026-10-04 (page fetched)",
+    "via": "page",
+    "verified": null
+   }
+  ],
+  "confidence": "high",
+  "notes": "The Borough's 'Forms for Residential Sale or Rental' link opens the combined Zoning Certificate of Compliance (CCO) and smoke/CO application (form dated JZ 3/26). The Borough Code fee schedule (Chapter 129, read through a text reader of ecode360) lists 'Certificate for resale of residential and commercial property' at $100 with 2 weeks' notice, $150 with less than 2 weeks' notice, and a $50 house resale reinspection, matching the form. Zoning Officer Armand Marini's email and extension come from the Zoning Office page. Lead-safe certificates apply to rentals only."
+ },
+ "fire_cert": {
+  "requirements": [
+   "Smoke alarms per build date: before 1977 sealed 10-year battery alarms on all levels; 1977 to 1978 electric on sleeping levels; 1978 to 1983 electric on sleeping and basement levels; 1983 to 1984 electric on all levels; 1984 to 1991 electric and interconnected; March 1991 to now electric, interconnected, with battery backup on all levels and inside each bedroom",
+   "Battery alarms must be 10-year sealed; hardwired alarms cannot be replaced with battery alarms; no alarm older than 10 years; UL listed with a test button; not painted",
+   "Smoke alarm near every bedroom door; basement and non-sleeping levels near the stairway up; two-family common halls and stairs need an alarm at each landing",
+   "Carbon monoxide alarm on each sleeping level, in the hallway near every bedroom door, in homes with fuel-burning appliances or an attached garage",
+   "Central station monitored systems need certification from a licensed NJ fire protection contractor before the Borough inspection"
+  ],
+  "authorities": [
+   {
+    "name": "Westwood Fire Prevention Bureau (Fire Inspector), through the Building Department's combined CCO application",
+    "type": "municipal_fire_bureau",
+    "area_served": "Entire borough",
+    "lead_time": "Same as the CCO: lower fee when the closing is more than 2 weeks away. The Borough Code says the inspection is made within 10 business days of the application.",
+    "fees": [
+     {
+      "label": "Smoke detector compliance certificate (Borough Code 166, waived when done with the CO inspection)",
+      "amount": "$25",
+      "quote": "The fee for the smoke detector compliance certificate shall be $25.",
+      "source_url": "https://ecode360.com/13847160",
+      "verified": null
+     }
+    ],
+    "how_to_apply": "Use the combined Zoning Certificate of Compliance / Smoke Alarm and Carbon Monoxide Detector Application filed with the Building Department; the Borough Code says applications go to the Building Department with a copy to the Fire Prevention Bureau, and the separate $25 smoke fee is waived when done with the CO inspection.",
+    "application_url": "https://www.westwoodnj.gov/DocumentCenter/View/2800/Zoning-Certificate-of-Compliance-for-Residential-Sale-and-Rental-CCO--pdf",
+    "department_url": "https://www.westwoodnj.gov/167/Fire-Prevention-Bureau",
+    "phone": "201-664-7100 ext. 308",
+    "email": "dblankenbush@westwoodnj.gov",
+    "contact_name": "Darren Blankenbush",
+    "contact_title": "Fire Marshal / OEM Coordinator",
+    "evidence": [
+     {
+      "url": "https://www.westwoodnj.gov/167/Fire-Prevention-Bureau",
+      "quote": "Conduct required residential smoke and carbon monoxide detector inspections for all home sales as required under the NJ Uniform Fire Code.",
+      "doc_date": "2026-10-04 (page fetched)",
+      "via": "page",
+      "verified": true
+     },
+     {
+      "url": "https://www.westwoodnj.gov/167/Fire-Prevention-Bureau",
+      "quote": "Fire Marshal / OEM Coordinator",
+      "doc_date": "2026-10-04 (page fetched)",
+      "via": "page",
+      "verified": true
+     },
+     {
+      "url": "https://ecode360.com/13847160",
+      "quote": "Upon the sale of a one- or two-family residence, or the rental, lease or transfer of any dwelling unit, the seller, landlord or transferor is required to obtain from the Borough of Westwood a smoke detector compliance certificate complying with the provisions of this article.",
+      "doc_date": "2026-10-04 (page fetched)",
+      "via": "page",
+      "verified": null
+     },
+     {
+      "url": "https://ecode360.com/13847160",
+      "quote": "If application is made in conjunction with the certificate of occupancy inspection, the fee shall be waived.",
+      "doc_date": "2026-10-04 (page fetched)",
+      "via": "page",
+      "verified": null
+     },
+     {
+      "url": "https://nj.gov/dca/dfs/pdf/ANNUAL%20REGISTRY/THIRD%20QUARTER%20LEA%20REGISTRY%202026.pdf",
+      "quote": "F Westwood Borough",
+      "doc_date": "2026-07",
+      "via": "pdf",
+      "verified": true
+     },
+     {
+      "url": "https://www.nj.gov/dca/dfs/pdf/fire%20directory_county%20summary/fire_code_enforcement_director.pdf",
+      "quote": "LEAID: 0267-001 Enf Auth. Fire Dept Fire Official Darren Blankenbush Phone (201) 664-7100 Addr: 101 Washington Av Westwood NJ 07675 ... Email dblankenbush@westwoodnj.gov",
+      "doc_date": "2026 (survey date 7/28/2026)",
+      "via": "state_directory",
+      "verified": null
+     }
+    ],
+    "confidence": "high"
+   }
+  ],
+  "notes": "In practice the smoke/CO inspection is part of the Building Department's combined CCO application ($100 / $150). The older Borough Code smoke detector article (Chapter 166, Article IV) sets a $25 certificate fee that is waived when filed with the CO inspection, so most sellers pay only the CCO fee. The Westwood form does not list a fire extinguisher."
+ },
+ "other_items": [
+  {
+   "label": "Open building permits",
+   "detail": "All building permits must be closed by scheduling final inspections; the CCO inspection will not be scheduled and certificates will not be issued with open permits.",
+   "source_url": "https://www.westwoodnj.gov/DocumentCenter/View/2800/Zoning-Certificate-of-Compliance-for-Residential-Sale-and-Rental-CCO--pdf"
+  },
+  {
+   "label": "Sump pump discharge",
+   "detail": "Sump pumps must discharge to a storm sewer or the street gutter line, not the sanitary sewer, roadway or sidewalk.",
+   "source_url": "https://www.westwoodnj.gov/DocumentCenter/View/2800/Zoning-Certificate-of-Compliance-for-Residential-Sale-and-Rental-CCO--pdf"
+  },
+  {
+   "label": "Sidewalks",
+   "detail": "Sidewalks and walkways must be even, free of trip hazards and in good repair for the CCO inspection.",
+   "source_url": "https://www.westwoodnj.gov/DocumentCenter/View/2800/Zoning-Certificate-of-Compliance-for-Residential-Sale-and-Rental-CCO--pdf"
+  }
+ ],
+ "open_questions": [
+  "How long is the Westwood CCO valid after issuance?",
+  "Is the 2-week fee cutoff counted in calendar days or business days?"
+ ],
+ "verification": {
+  "fees": 4,
+  "fee_ok": 3,
+  "fee_bad": 0,
+  "fee_unchecked": 1,
+  "quotes": 13,
+  "q_ok": 9,
+  "q_bad": 0,
+  "q_unchecked": 4
+ }
+}

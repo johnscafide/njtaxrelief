@@ -1,0 +1,195 @@
+{
+ "municipality_code": "0265",
+ "municipality": "Wallington Borough",
+ "county": "BERGEN",
+ "resale_co": {
+  "status": "required",
+  "name": "Certificate of Continued Occupancy (CCO)",
+  "issued_by": "Borough of Wallington Code Enforcement Officer",
+  "lead_time": "By code, the certificate is issued or rejected within 10 business days after the application is received.",
+  "valid_for": "60 days after issuance, and good for one transfer only",
+  "requirements": [
+   "No sale or transfer of title of any structure or unit until a certificate of continued occupancy is obtained",
+   "Inspection by the Code Enforcement Officer (the Tax Assessor may come along to update property records) to confirm the home complies with all Borough ordinances",
+   "The certificate states the property may continue to be used as before and lists the number and designation of the units",
+   "Not required for new construction if the original CO was issued within 18 months of the transfer",
+   "Existing lawful tenants may stay, but the transfer cannot close until the CCO is obtained"
+  ],
+  "fees": [
+   {
+    "label": "Certificate of continued occupancy, transfer, per unit",
+    "amount": "$25",
+    "quote": "The fee for a certificate of continued occupancy shall be $25 per unit for the transfer of any residential dwelling, business, commercial or industrial unit or building",
+    "source_url": "https://ecode360.com/15121364",
+    "verified": null
+   }
+  ],
+  "how_to_apply": "Apply to the Borough Code Enforcement Officer and pay the fee with the application. Code Enforcement: 973-777-0318 ext. 207, codeenforcement@wallingtonnj.org, Municipal Building, 159-161 Maple Ave, Wallington, NJ 07057. No application form is posted online; call or email for it.",
+  "application_url": "",
+  "department_url": "https://www.wallingtonnj.org/1419/Property-Maintenance-Code-Enforcement",
+  "phone": "973-777-0318 ext. 207",
+  "email": "codeenforcement@wallingtonnj.org",
+  "contact_name": "",
+  "contact_title": "Code Enforcement",
+  "evidence": [
+   {
+    "url": "https://ecode360.com/15121364",
+    "quote": "No person, persons or organization of persons shall sell or transfer title to any structure or unit in a structure or relet or release any structure, portion of a structure or unit in a structure until such person, persons or organization of persons shall have first obtained a certificate of continued occupancy",
+    "doc_date": "2026-10-04 (page fetched)",
+    "via": "page",
+    "verified": null
+   },
+   {
+    "url": "https://ecode360.com/15121364",
+    "quote": "Before a certificate of continued occupancy shall be issued, the Code Enforcement Officer or his designee shall make an inspection of the premises",
+    "doc_date": "2026-10-04 (page fetched)",
+    "via": "page",
+    "verified": null
+   },
+   {
+    "url": "https://ecode360.com/15121364",
+    "quote": "the certificate will either be issued or rejected within 10 business days of the receipt of the application.",
+    "doc_date": "2026-10-04 (page fetched)",
+    "via": "page",
+    "verified": null
+   },
+   {
+    "url": "https://ecode360.com/15121364",
+    "quote": "A certificate of continued occupancy shall be valid for a period of 60 days after issuance but shall only be valid for one transfer of the subject property.",
+    "doc_date": "2026-10-04 (page fetched)",
+    "via": "page",
+    "verified": null
+   },
+   {
+    "url": "https://www.wallingtonnj.org/1389/Property-Maintenance",
+    "quote": "Code Enforcement 973-777-0318 Ext. 207",
+    "doc_date": "2026-10-04 (page fetched)",
+    "via": "page",
+    "verified": true
+   }
+  ],
+  "confidence": "high",
+  "notes": "Borough code Chapter 178, Certificates of Continued Occupancy (Ord. No. 95-10, read in full on ecode360), requires a CCO before any sale or transfer of title and sets a $25 per unit fee; the code may be out of date on the fee, and no CCO form or fee sheet is posted on the Borough website, so confirm the current fee and form with Code Enforcement. The Property Maintenance / Code Enforcement page lists Nick Melfi (Building Inspector and Construction Official), 973-777-0318 ext. 210, nmelfi@wallingtonnj.org. The Building Department office hours are listed as Tuesday and Thursday 7:30 to 9:30 am. Landlord registration, lead paint testing (Chapter 246) and short-term rental rules are rental items, not sale requirements."
+ },
+ "fire_cert": {
+  "requirements": [
+   "Smoke detector on each level of the dwelling, including basements (not attics or crawl spaces)",
+   "Smoke detector and carbon monoxide alarm outside each separate sleeping area, within 10 feet of all bedrooms",
+   "At least one carbon monoxide detector on each level of the building"
+  ],
+  "authorities": [
+   {
+    "name": "Wallington Fire Department, Bureau of Fire Prevention (Bureau of Fire Safety)",
+    "type": "municipal_fire_bureau",
+    "area_served": "Entire borough",
+    "lead_time": "Expedited inspections cost extra: within 4 business days of the request or within 5 to 7 business days.",
+    "fees": [
+     {
+      "label": "Smoke detector / CO certificate of compliance before sale (code)",
+      "amount": "$75",
+      "quote": "Prior to sale of any such property, it shall be inspected for compliance with this section, whereupon a certificate of compliance will be issued. The fee for this inspection shall be $75.",
+      "source_url": "https://ecode360.com/15121584",
+      "verified": null
+     },
+     {
+      "label": "Reinspection after violations (first reinspection free)",
+      "amount": "$50",
+      "quote": "the building owner or occupant will be charged an additional $50 per reinspection, except for the first reinspection, for which there shall be no fee.",
+      "source_url": "https://ecode360.com/15121584",
+      "verified": null
+     },
+     {
+      "label": "Expedited inspection within 4 business days of request (added fee)",
+      "amount": "$100",
+      "quote": "Within 4 business days of request | $100",
+      "source_url": "https://ecode360.com/15121584",
+      "verified": null
+     },
+     {
+      "label": "Expedited inspection within 5 to 7 business days of request (added fee)",
+      "amount": "$50",
+      "quote": "Within 5 to 7 business days of request | $50",
+      "source_url": "https://ecode360.com/15121584",
+      "verified": null
+     }
+    ],
+    "how_to_apply": "Contact the Fire Official at the Bureau of Fire Prevention, 973-777-0318 ext. 215 (email wfd207fo@aol.com), to request the inspection and pay the fee. No online form is posted.",
+    "application_url": "",
+    "department_url": "https://www.wallingtonnj.org/1390/Fire-Prevention",
+    "phone": "973-777-0318 ext. 215",
+    "email": "wfd207fo@aol.com",
+    "contact_name": "Edward Tanderis",
+    "contact_title": "Fire Official",
+    "evidence": [
+     {
+      "url": "https://ecode360.com/15121584",
+      "quote": "Any property containing two or more dwelling units must have at least one smoke detector on each level of the dwelling, including basements, excluding attic or crawl space, and a smoke detector and carbon monoxide alarm outside each separate sleeping area within 10 feet of all bedrooms.",
+      "doc_date": "2026-10-04 (page fetched)",
+      "via": "page",
+      "verified": null
+     },
+     {
+      "url": "https://ecode360.com/15121584",
+      "quote": "Any dwelling unit must have at least one carbon monoxide detector in each level of the building.",
+      "doc_date": "2026-10-04 (page fetched)",
+      "via": "page",
+      "verified": null
+     },
+     {
+      "url": "https://ecode360.com/15121584",
+      "quote": "The local enforcing agency shall be the Municipal Fire Department.",
+      "doc_date": "2026-10-04 (page fetched)",
+      "via": "page",
+      "verified": null
+     },
+     {
+      "url": "https://www.wallingtonnj.org/1390/Fire-Prevention",
+      "quote": "Edward Tanderis (973) 777-0318 ext. 215",
+      "doc_date": "2026-10-04 (page fetched)",
+      "via": "page",
+      "verified": true
+     },
+     {
+      "url": "https://nj.gov/dca/dfs/pdf/ANNUAL%20REGISTRY/THIRD%20QUARTER%20LEA%20REGISTRY%202026.pdf",
+      "quote": "F Wallington Borough",
+      "doc_date": "2026-07",
+      "via": "pdf",
+      "verified": true
+     },
+     {
+      "url": "https://www.nj.gov/dca/dfs/pdf/fire%20directory_county%20summary/fire_code_enforcement_director.pdf",
+      "quote": "Wallington Borough Enf Auth. Fire Dept Fire Official Edward J Tanderis Phone (973) 777-0318 Email WFD207FO@aol.com",
+      "doc_date": "8/12/2025 (survey date)",
+      "via": "state_directory",
+      "verified": null
+     }
+    ],
+    "confidence": "medium"
+   }
+  ],
+  "notes": "Borough fire prevention code Chapter 212 (read on ecode360; last amended 5-27-2021 by Ord. No. 2021-011) sets a $75 certificate of compliance fee for the smoke detector inspection before sale and a separate $75 for the carbon monoxide inspection before sale. It is unclear whether one $75 covers both or the Borough charges $75 for each, so confidence is medium. The smoke detector paragraph is written for properties with two or more units; single family homes still need the state certificate. Expedite fees: $100 within 4 business days, $50 within 5 to 7 business days. The Fire Prevention page lists Edward Tanderis at (973) 777-0318 ext. 215 with a mailto link to wfd207fo@aol.com. No fire extinguisher is mentioned in the code, consistent with P.L.2025, c.19."
+ },
+ "other_items": [
+  {
+   "label": "Tax assessor visit",
+   "detail": "The Tax Assessor or a designee may come along on the CCO inspection to update property record cards.",
+   "source_url": "https://ecode360.com/15121364"
+  }
+ ],
+ "open_questions": [
+  "What is the current CCO fee (code says $25 per unit) and is there an application form?",
+  "Is the smoke detector and CO certificate one $75 fee or $75 for each inspection?",
+  "Can the CCO and fire inspections be scheduled together, and how far ahead of closing?"
+ ],
+ "checked_at": "2026-10-04",
+ "verification": {
+  "fees": 5,
+  "fee_ok": 0,
+  "fee_bad": 0,
+  "fee_unchecked": 5,
+  "quotes": 11,
+  "q_ok": 3,
+  "q_bad": 0,
+  "q_unchecked": 8
+ }
+}

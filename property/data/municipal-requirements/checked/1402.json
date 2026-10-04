@@ -1,0 +1,163 @@
+{
+ "municipality_code": "1402",
+ "municipality": "Boonton Township",
+ "county": "MORRIS",
+ "checked_at": "2026-10-04",
+ "resale_co": {
+  "status": "not_required",
+  "name": "",
+  "issued_by": "",
+  "lead_time": "",
+  "valid_for": "",
+  "requirements": [],
+  "fees": [],
+  "how_to_apply": "No Township resale Certificate of Occupancy. The Township only requires the smoke detector / carbon monoxide alarm / fire extinguisher inspection before closing (see fire certificate).",
+  "application_url": "",
+  "department_url": "https://www.boontontownship.com/construction-department",
+  "phone": "973-402-4002 ext. 1107",
+  "email": "",
+  "contact_name": "",
+  "contact_title": "Township Clerk's Office (schedules the smoke detector inspection); construction permits and inspections are handled by the Township of Montville, 973-331-3318",
+  "evidence": [
+   {
+    "url": "https://www.boontontownship.com/construction-department",
+    "quote": "A Certificate of Occupancy is not required when selling your home, but a smoke detector/carbon monoxide alarm inspection is required.",
+    "doc_date": "2026-10-04 (page fetched)",
+    "via": "page",
+    "verified": true
+   },
+   {
+    "url": "https://www.boontontownship.com/construction-department",
+    "quote": "Please note effective January 2019 - ALL BUILDING INSPECTION SERVICES and PERMITS are provided by the Township of Montville through a shared services agreement.",
+    "doc_date": "2026-10-04 (page fetched)",
+    "via": "page",
+    "verified": true
+   }
+  ],
+  "confidence": "high",
+  "notes": "The Township's Construction Department page says in writing that a Certificate of Occupancy is not required when selling a home and that only the smoke detector / CO alarm inspection is required. Building permits and inspections are provided by the Township of Montville under a shared services agreement (973-331-3318), but smoke detector inspections, health (septic and well) and zoning permits stay with Boonton Township. Short-term rental rules (Chapter 114A) are not resale requirements."
+ },
+ "fire_cert": {
+  "requirements": [
+   "Smoke detector on each level of the dwelling, including basements (not attics or crawl spaces)",
+   "Smoke detector and carbon monoxide alarm outside each separate sleeping area, within 10 feet of bedrooms",
+   "All smoke detectors and carbon monoxide alarms in working order",
+   "One portable fire extinguisher within 10 feet of the kitchen, not more than 5 feet above the floor (page still lists it)",
+   "A person over 18 must be present for the inspection; payment must be received before the inspection date"
+  ],
+  "authorities": [
+   {
+    "name": "Boonton Township Fire Prevention (Fire Official), scheduled through the Township Clerk's Office",
+    "type": "municipal_fire_bureau",
+    "area_served": "Entire township",
+    "lead_time": "Fee depends on business days before the change of occupant: more than 10 business days for the lowest fee. The certificate stays valid for 6 months.",
+    "fees": [
+     {
+      "label": "Smoke/CO alarm and extinguisher certificate, more than 10 business days before the change of occupant",
+      "amount": "$45.00",
+      "quote": "Requests received more than 10 business days before the change of occupant - $45.00",
+      "source_url": "https://www.boontontownship.com/FireCompliance",
+      "verified": true
+     },
+     {
+      "label": "4 to 10 business days before the change of occupant",
+      "amount": "$90.00",
+      "quote": "Requests received 4 to 10 business days before the change of occupant - $90.00",
+      "source_url": "https://www.boontontownship.com/FireCompliance",
+      "verified": true
+     },
+     {
+      "label": "Fewer than 4 business days before the change of occupant",
+      "amount": "$161.00",
+      "quote": "Requests received fewer than 4 business days before the change of occupant - $161.00",
+      "source_url": "https://www.boontontownship.com/FireCompliance",
+      "verified": true
+     },
+     {
+      "label": "Third re-inspection after two failed inspections",
+      "amount": "$45.00",
+      "quote": "For the 3rd re-inspection of a property after having failed the 2 prior inspections, an additional fee in the amount of - $45.00",
+      "source_url": "https://www.boontontownship.com/FireCompliance",
+      "verified": true
+     }
+    ],
+    "how_to_apply": "Fill out the online Application for Smoke Detector, Carbon Monoxide Alarm and Fire Extinguisher Compliance (Boonton Township residents only) or hand deliver the application to the Municipal Building, 155 Powerville Road. The Construction Department page says to call the Clerk's Office at 973-402-4002 ext. 1107, but residents must come in to schedule; inspections cannot be scheduled over the phone. Payment must be received before the inspection date.",
+    "application_url": "https://www.boontontownship.com/FireCompliance",
+    "department_url": "https://www.boontontownship.com/fire-department",
+    "phone": "973-402-4017",
+    "email": "spara@boontontownship.com",
+    "contact_name": "Scott Para",
+    "contact_title": "Fire Official & OEM Coordinator",
+    "evidence": [
+     {
+      "url": "https://www.boontontownship.com/FireCompliance",
+      "quote": "Once issued the certification shall remain valid for 6 months.",
+      "doc_date": "Revised 11/14/2022",
+      "via": "page",
+      "verified": true
+     },
+     {
+      "url": "https://www.boontontownship.com/FireCompliance",
+      "quote": "PAYMENT MUST BE RECEIVED PRIOR TO INSPECTION DATE AS PER TOWNSHIP OF BOONTON ORDINANCE #661",
+      "doc_date": "Revised 11/14/2022",
+      "via": "page",
+      "verified": true
+     },
+     {
+      "url": "https://www.boontontownship.com/construction-department",
+      "quote": "Residents need to come in to schedule smoke detector inspections for they cannot be scheduled over the phone.",
+      "doc_date": "2026-10-04 (page fetched)",
+      "via": "page",
+      "verified": true
+     },
+     {
+      "url": "https://www.boontontownship.com/fire-department",
+      "quote": "Email: spara@boontontownship.com",
+      "doc_date": "2026-10-04 (page fetched)",
+      "via": "page",
+      "verified": true
+     },
+     {
+      "url": "https://ecode360.com/8467224",
+      "quote": "Before any one- or two-family or attached single-family dwellings are sold, leased, or otherwise made subject to a change of occupancy for residential purposes, the owner shall obtain a certificate of smoke alarm, carbon monoxide alarm, and portable fire extinguisher compliance.",
+      "doc_date": "2026-06-08 (Ord. No. 964)",
+      "via": "page",
+      "verified": null
+     },
+     {
+      "url": "https://www.nj.gov/dca/dfs/pdf/fire%20directory_county%20summary/fire_code_enforcement_director.pdf",
+      "quote": "LEAID: 1402-001 Boonton Twp SMOKE DETECTOR COMPLIANCE Name: Boonton Twp Fire Prev Enf Auth. Fire Dept Fire Official Scott Para Phone (973) 402-4017",
+      "doc_date": "survey date 2/6/2026",
+      "via": "state_directory",
+      "verified": null
+     },
+     {
+      "url": "https://nj.gov/dca/dfs/pdf/ANNUAL%20REGISTRY/THIRD%20QUARTER%20LEA%20REGISTRY%202026.pdf",
+      "quote": "F Boonton Township",
+      "doc_date": "2026-07",
+      "via": "pdf",
+      "verified": true
+     }
+    ],
+    "confidence": "high"
+   }
+  ],
+  "notes": "Township Code Section 88 (amended June 8, 2026 by Ordinance 964) calls the certificate a CSACMASPSIL (smoke alarm, carbon monoxide alarm and secondary power source identification label) and adopts the state fee schedule in N.J.A.C. 5:70-2.9(d); the Township's application page (revised 11/14/2022) lists $45.00 / $90.00 / $161.00. The same code sentence still names the portable fire extinguisher certificate, and the Township page still requires an extinguisher, although the state dropped it from the sale certificate in February 2025 (P.L.2025, c.19). Instructions PDF: https://www.boontontownship.com/media/Departments/construction/SMOKE_INSTRUCTIONS.pdf."
+ },
+ "other_items": [],
+ "open_questions": [
+  "Since Ordinance 964 (June 2026) adopts the state fee schedule, are the posted $45 / $90 / $161 fees still current?",
+  "Does the Township still require the portable fire extinguisher after P.L.2025, c.19, and does it now check for the secondary power source identification label?",
+  "Are there any septic or well items tied to a sale (septic and well matters stay with the Township Health Department)?"
+ ],
+ "verification": {
+  "fees": 4,
+  "fee_ok": 4,
+  "fee_bad": 0,
+  "fee_unchecked": 0,
+  "quotes": 9,
+  "q_ok": 7,
+  "q_bad": 0,
+  "q_unchecked": 2
+ }
+}

@@ -1,0 +1,297 @@
+{
+ "municipality_code": "0208",
+ "municipality": "Cresskill Borough",
+ "county": "BERGEN",
+ "resale_co": {
+  "status": "required",
+  "name": "Residential Resale/Rental Certificate (inspection certificate for resale)",
+  "issued_by": "Borough of Cresskill Building Department (Construction Official)",
+  "lead_time": "Code says the inspection is done within 10 days after the written request and payment, and the certificate is issued or denied within 10 working days after entry. Fees go up for requests made 10 or fewer business days before the inspection.",
+  "valid_for": "",
+  "requirements": [
+   "Written application to the Construction Official with seller, buyer, closing date and room details",
+   "All open permits must be inspected and closed before the resale inspection can be scheduled",
+   "Visual inspection for flue connections, permitted water heaters and mechanical equipment, sump pumps not tied to the sanitary sewer, stove anti-tip brackets, rigid kitchen exhaust ducts, covered outlets and panels, no lamp cords on fixed appliances",
+   "Handrails on four or more risers, guards on landings 30 inches above grade and open basement stairs, garage walls and ceilings next to the house sheetrocked",
+   "Pool gates and fencing self-closing and latching (latches 54 inches above grade); lawn and bushes neatly trimmed",
+   "Real estate sign needs a sign permit (asked on the application)",
+   "Monitored alarm: have the password or someone on site to turn it off",
+   "Separate smoke/CO certificate from the Fire Prevention Division (one check can cover both)"
+  ],
+  "fees": [
+   {
+    "label": "Resale/rental certificate, request more than 10 business days before inspection (application form; office says one check can cover building and fire inspections)",
+    "amount": "$200",
+    "quote": "Requests made more than 10 business days prior to inspection: $200",
+    "source_url": "https://www.cresskillboro.com/index.php/government/forms/construction/848-residential-resale-rental-certificate-application/file",
+    "verified": true
+   },
+   {
+    "label": "Request 4 to 10 business days before inspection (application form)",
+    "amount": "$250",
+    "quote": "Between 4-10 business days prior to inspection: $250",
+    "source_url": "https://www.cresskillboro.com/index.php/government/forms/construction/848-residential-resale-rental-certificate-application/file",
+    "verified": true
+   },
+   {
+    "label": "Request less than 4 business days before inspection (application form)",
+    "amount": "$300",
+    "quote": "Less than 4 business days prior to inspection: $300",
+    "source_url": "https://www.cresskillboro.com/index.php/government/forms/construction/848-residential-resale-rental-certificate-application/file",
+    "verified": true
+   },
+   {
+    "label": "Reinspection if the first inspection fails (application form)",
+    "amount": "$50",
+    "quote": "Re-inspection fee (if the first inspection should fail): $50",
+    "source_url": "https://www.cresskillboro.com/index.php/government/forms/construction/848-residential-resale-rental-certificate-application/file",
+    "verified": true
+   },
+   {
+    "label": "Certificate for resale/rental, request more than 10 business days before inspection (Code 207-31, amended 3-5-2025)",
+    "amount": "$100",
+    "quote": "Requests made more than 10 business days prior to inspection: $100.",
+    "source_url": "https://ecode360.com/41836230",
+    "verified": null
+   },
+   {
+    "label": "Code 207-31, request 4 to 10 business days before inspection",
+    "amount": "$125",
+    "quote": "Requests made four to 10 business days prior to inspection: $125.",
+    "source_url": "https://ecode360.com/41836230",
+    "verified": null
+   },
+   {
+    "label": "Code 207-31, request fewer than 4 business days before inspection",
+    "amount": "$150",
+    "quote": "Requests made fewer than four business days prior to inspection: $150.",
+    "source_url": "https://ecode360.com/41836230",
+    "verified": null
+   }
+  ],
+  "how_to_apply": "Fill out the Residential Resale/Rental Certificate Application (Building Department forms page) and submit it with a check payable to Borough of Cresskill to Borough Hall, 67 Union Avenue. One check can cover both the building and fire inspections. Close any open permits first. Building inspection times are set by the office.",
+  "application_url": "https://www.cresskillboro.com/index.php/government/forms/construction/848-residential-resale-rental-certificate-application/file",
+  "department_url": "https://www.cresskillboro.com/index.php/departments/construction",
+  "phone": "201-569-7775",
+  "email": "bldgdept@cresskillboro.org",
+  "contact_name": "Linda Ziccarelli",
+  "contact_title": "Certificate Coordinator (application form; email lziccarelli@cresskillboro.org, phone (201) 569-5400). Construction Official and Zoning Officer: Bob Rusch",
+  "evidence": [
+   {
+    "url": "https://ecode360.com/41836230",
+    "quote": "No property owner and/or landlord shall authorize resale occupancy or rent, leave, sublet, or permit residual stay, pursuant to a tenancy or a use and occupancy, transfer title to a new owner, new co-tenants, or a new co-owner, in any new or previously constructed residential dwelling unit or structure within the Borough of Cresskill unless that person or entity shall have first obtained either a certificate of occupancy, or resale and/or rental certificate.",
+    "doc_date": "2026-10-04 (page fetched)",
+    "via": "page",
+    "verified": null
+   },
+   {
+    "url": "https://ecode360.com/41836230",
+    "quote": "Every property owner or landlord as a condition to resale or rental, shall request and obtain from the construction official, an \"inspection certificate\" and not a certificate of occupancy.",
+    "doc_date": "2026-10-04 (page fetched)",
+    "via": "page",
+    "verified": null
+   },
+   {
+    "url": "https://ecode360.com/41836230",
+    "quote": "Permits and approvals are required for any recent construction and all open permits must be deemed \"closed\" before an inspection certificate inspection may be scheduled.",
+    "doc_date": "2026-10-04 (page fetched)",
+    "via": "page",
+    "verified": null
+   },
+   {
+    "url": "https://ecode360.com/41836230",
+    "quote": "An inspection is required for the issuance of the \"inspection certificate\" which shall be conducted within 10 days after receipt of the written request and payment of fees by the owner or landlord.",
+    "doc_date": "2026-10-04 (page fetched)",
+    "via": "page",
+    "verified": null
+   },
+   {
+    "url": "https://ecode360.com/41836230",
+    "quote": "Requests made more than 10 business days prior to inspection: $50.",
+    "doc_date": "2026-10-04 (page fetched; older fee text in 207-28C)",
+    "via": "page",
+    "verified": null
+   },
+   {
+    "url": "https://www.cresskillboro.com/index.php/government/forms/construction/848-residential-resale-rental-certificate-application/file",
+    "quote": "Please make checks payable to Borough of Cresskill. One check can be made for both Building and Fire inspections.",
+    "doc_date": "",
+    "via": "pdf",
+    "verified": true
+   },
+   {
+    "url": "https://www.cresskillboro.com/index.php/government/forms/construction/848-residential-resale-rental-certificate-application/file",
+    "quote": "Certificate Coordinator, Linda Ziccarelli",
+    "doc_date": "",
+    "via": "pdf",
+    "verified": true
+   },
+   {
+    "url": "https://www.cresskillboro.com/index.php/departments/construction",
+    "quote": "Construction Official/Zoning Officer",
+    "doc_date": "2026-10-04 (page fetched)",
+    "via": "page",
+    "verified": true
+   },
+   {
+    "url": "https://www.cresskillboro.com/government/forms/construction",
+    "quote": "Residential Resale Rental Certificate Application",
+    "doc_date": "2026-10-04 (page fetched)",
+    "via": "page",
+    "verified": true
+   }
+  ],
+  "confidence": "high",
+  "notes": "Chapter 207, Article III of the Borough code (read in full through the ecode360 print view) requires a resale/rental inspection certificate from the Construction Official before title transfer. The code has two fee lists: 207-28C ($50 / $75 / $125, reinspection $50) and 207-31 as amended 3-5-2025 by Ord. 25-04-1660 ($100 / $125 / $150, reinspection $50, with fees paid to the treasury for the Fire Prevention Bureau). The current application form shows $200 / $250 / $300 and says one check can cover both building and fire inspections, so the form amounts appear to be the combined building plus fire fee (for example $100 + $100). Confirm the split with the office. The 207-28C list is shown only as evidence, not as a current fee. Rental-only items (landlord registration, lead-safe inspection for pre-1978 rentals, $220 lead inspection fee) are not resale requirements."
+ },
+ "fire_cert": {
+  "requirements": [
+   "Smoke alarm on every level including the basement (not needed in an unfinished attic); on sleeping floors within 10 feet of all bedroom doors",
+   "Alarm type depends on when the home was built or renovated (battery on all levels before 1977 up to hardwired, interconnected with battery backup in every bedroom since March 1991); electric alarms cannot be replaced with battery alarms",
+   "Any smoke alarm more than 10 years old must be replaced; alarms must be properly mounted (no Velcro or tape)",
+   "Two-family homes: smoke alarm at each landing of common halls and stairways",
+   "CO alarm within 10 feet of all bedroom doors in homes with fuel-burning appliances, fireplaces or attached garages (UL 2034, NFPA 720); stand-alone CO alarms are treated as expired after 5 to 7 years unless documentation shows a longer life",
+   "Low-voltage fire alarm systems are not tested by the Division; an NFPA 72 report from an approved contractor, no more than 30 days old, is required"
+  ],
+  "authorities": [
+   {
+    "name": "Cresskill Fire Department, Division of Fire Prevention",
+    "type": "municipal_fire_bureau",
+    "area_served": "Entire borough",
+    "lead_time": "Fee depends on business days between the request and the inspection (more than 10 business days for the lowest fee). Inspections Monday to Friday 9:30 to 11:30 am; certificates ready after 12:00 pm the next business day. Certificate valid 6 months.",
+    "fees": [
+     {
+      "label": "Smoke and CO certificate, request more than 10 business days before inspection (Code 128-12, amended 3-5-2025)",
+      "amount": "$100",
+      "quote": "Requests made more than 10 business days prior to inspection: $100.",
+      "source_url": "https://ecode360.com/6269071",
+      "verified": null
+     },
+     {
+      "label": "Request 4 to 10 business days before inspection",
+      "amount": "$125",
+      "quote": "Requests made four to 10 business days prior to inspection: $125.",
+      "source_url": "https://ecode360.com/6269071",
+      "verified": null
+     },
+     {
+      "label": "Request fewer than 4 business days before inspection",
+      "amount": "$150",
+      "quote": "Requests made fewer than four business days prior to inspection: $150.",
+      "source_url": "https://ecode360.com/6269071",
+      "verified": null
+     },
+     {
+      "label": "Reinspection, per occurrence",
+      "amount": "$50",
+      "quote": "Reinspection fee per occurrence: $50.",
+      "source_url": "https://ecode360.com/6269071",
+      "verified": null
+     },
+     {
+      "label": "Penalty for failing to get the certificate",
+      "amount": "$500",
+      "quote": "Penalty for failure to obtain a certificate of smoke detector and carbon monoxide alarm compliance: $500.",
+      "source_url": "https://ecode360.com/6269071",
+      "verified": null
+     }
+    ],
+    "how_to_apply": "Fill out the Smoke Detector & Carbon Monoxide Alarm Compliance Certificate Application (page 2 of the resale/rental packet) and pay by cash, check or online payment. Someone must be present during the inspection window. If the home has a monitored alarm system as the primary system, bring an NFPA 72 inspection report dated within 30 days.",
+    "application_url": "https://www.cresskillboro.com/index.php/government/forms/construction/848-residential-resale-rental-certificate-application/file",
+    "department_url": "https://www.cresskillboro.com/index.php/departments/fire-prevention",
+    "phone": "(201) 568-0030",
+    "email": "DHaenelt@cresskillboro.org",
+    "contact_name": "David Haenelt",
+    "contact_title": "Fire Marshal (Fire Official); ext. 705",
+    "evidence": [
+     {
+      "url": "https://www.cresskillboro.com/index.php/government/forms/fire-prevention/1222-cresskill-smoke-co-requirements/file",
+      "quote": "A Certificate of Smoke Alarm and Carbon Monoxide Alarm (CSACMAC) is required before any residential unit is sold, leased or otherwise made subject to change of occupancy for residential purposes.",
+      "doc_date": "February 2025",
+      "via": "pdf",
+      "verified": true
+     },
+     {
+      "url": "https://www.cresskillboro.com/index.php/government/forms/fire-prevention/1222-cresskill-smoke-co-requirements/file",
+      "quote": "The CSDCMAC will remain valid for a period of six (6) months from the date of issue unless the occupancy or ownership of the dwelling changes in the interim.",
+      "doc_date": "February 2025",
+      "via": "pdf",
+      "verified": true
+     },
+     {
+      "url": "https://www.cresskillboro.com/index.php/government/forms/fire-prevention/1222-cresskill-smoke-co-requirements/file",
+      "quote": "Requests made more than ten (10) business days prior to the requested inspection: $50.00",
+      "doc_date": "February 2025",
+      "via": "pdf",
+      "verified": true
+     },
+     {
+      "url": "https://www.cresskillboro.com/index.php/government/forms/construction/848-residential-resale-rental-certificate-application/file",
+      "quote": "Fire inspections can be scheduled Monday-Friday between 9:3oam-11:3oam",
+      "doc_date": "",
+      "via": "pdf",
+      "verified": true
+     },
+     {
+      "url": "https://ecode360.com/6269071",
+      "quote": "Certificate of smoke detector and carbon monoxide alarm compliance:",
+      "doc_date": "2025-03-05 (Ord. No. 25-03-1659)",
+      "via": "page",
+      "verified": null
+     },
+     {
+      "url": "https://www.cresskillboro.com/index.php/departments/fire-prevention",
+      "quote": "Fire Marshal",
+      "doc_date": "2026-10-04 (page fetched)",
+      "via": "page",
+      "verified": true
+     },
+     {
+      "url": "https://www.nj.gov/dca/dfs/pdf/fire%20directory_county%20summary/fire_code_enforcement_director.pdf",
+      "quote": "LEAID: 0208-001 Cresskill Boro ... Enf Auth. Fire Dept ... Fire Official David A Haenelt Phone (201) 569-5400 ... Email dhaenelt@cresskillboro.org",
+      "doc_date": "2026-07-28 (survey date)",
+      "via": "state_directory",
+      "verified": null
+     },
+     {
+      "url": "https://nj.gov/dca/dfs/pdf/ANNUAL%20REGISTRY/THIRD%20QUARTER%20LEA%20REGISTRY%202026.pdf",
+      "quote": "F Cresskill Borough",
+      "doc_date": "2026-07",
+      "via": "pdf",
+      "verified": true
+     }
+    ],
+    "confidence": "high"
+   }
+  ],
+  "notes": "The Borough code (128-12, amended 3-5-2025 by Ord. 25-03-1659) sets $100 / $125 / $150 and a $50 reinspection fee. The Division's procedure sheet dated February 2025 still shows $50 / $75 / $125, so it appears out of date; confirm with the Division. The Cresskill handout does not list a fire extinguisher. The state fire directory gives (201) 569-5400 for the fire official; the Borough fire prevention page lists (201) 568-0030 ext. 705 for Fire Marshal David Haenelt and Inspector William Oliver at ext. 702 (Woliver@cresskillboro.org)."
+ },
+ "other_items": [
+  {
+   "label": "Open permits",
+   "detail": "All open permits must be inspected and closed before the resale inspection can be scheduled.",
+   "source_url": "https://ecode360.com/41836230"
+  },
+  {
+   "label": "Real estate sign permit",
+   "detail": "The resale application asks whether a real estate sign is on the property; if so a sign permit or permit number is needed.",
+   "source_url": "https://www.cresskillboro.com/index.php/government/forms/construction/848-residential-resale-rental-certificate-application/file"
+  }
+ ],
+ "open_questions": [
+  "Is the $200 / $250 / $300 on the application the combined building and fire fee, and what is the current building-only resale fee?",
+  "How long is the building resale/rental certificate valid? The code does not say.",
+  "Does the Fire Prevention Division now charge the $100 / $125 / $150 code fees rather than the $50 / $75 / $125 on its February 2025 handout?"
+ ],
+ "checked_at": "2026-10-04",
+ "verification": {
+  "fees": 12,
+  "fee_ok": 4,
+  "fee_bad": 0,
+  "fee_unchecked": 8,
+  "quotes": 17,
+  "q_ok": 10,
+  "q_bad": 0,
+  "q_unchecked": 7
+ }
+}

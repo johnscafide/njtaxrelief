@@ -1,0 +1,200 @@
+{
+ "municipality_code": "0237",
+ "municipality": "Moonachie Borough",
+ "county": "BERGEN",
+ "resale_co": {
+  "status": "required",
+  "name": "Certificate of Continued Occupancy (CCO)",
+  "issued_by": "Borough of Moonachie Building Department (Construction Official)",
+  "lead_time": "By code, the certificate is issued within six business days after the Construction Official receives the application.",
+  "valid_for": "",
+  "requirements": [
+   "Seller must get a Certificate of Continued Occupancy from the Construction Official on every transfer of a one to four family home",
+   "The certificate confirms the home may keep its current use and that the use is permitted in the zone (or is a valid nonconforming use or approved by variance)",
+   "Inspection of the premises by the Construction Official before the certificate is issued",
+   "Use the Borough's Residential certificate application (UCC F270) and check Certificate of Continued Occupancy"
+  ],
+  "fees": [
+   {
+    "label": "Residential certificate application (CO, CCO, temporary CO), per inspection",
+    "amount": "$150",
+    "quote": "Fee: $150 per inspection",
+    "source_url": "https://www.moonachie.us/DocumentCenter/View/806/Residential-CO",
+    "verified": true
+   },
+   {
+    "label": "Certificate of Continued Occupancy on transfer of a 1 to 4 family home (code)",
+    "amount": "$25",
+    "quote": "The fee for a Certificate of Continued Occupancy shall be $25 payable to the Borough of Moonachie.",
+    "source_url": "https://ecode360.com/36301429",
+    "verified": null
+   }
+  ],
+  "how_to_apply": "Fill out the Borough's Residential certificate application, check Certificate of Continued Occupancy, and submit it with a check payable to Borough of Moonachie to the Building Department, 70 Moonachie Road, Moonachie, NJ 07074 (phone 201-641-1857). The Construction Official inspects and issues the certificate.",
+  "application_url": "https://www.moonachie.us/DocumentCenter/View/806/Residential-CO",
+  "department_url": "https://www.moonachie.us/208/Building-Department",
+  "phone": "201-641-1857",
+  "email": "",
+  "contact_name": "Gino Tessaro",
+  "contact_title": "Construction Official",
+  "evidence": [
+   {
+    "url": "https://ecode360.com/36301429",
+    "quote": "a seller of such property must obtain from the Construction Official a Certificate of Continued Occupancy certifying that the property may be continued to be used as it is currently being used",
+    "doc_date": "2026-10-04 (page fetched)",
+    "via": "page",
+    "verified": null
+   },
+   {
+    "url": "https://ecode360.com/36301429",
+    "quote": "Before a Certificate of Continued Occupancy shall be issued, the Construction Official shall make an inspection of the premises to determine whether the certificate may or may not be issued.",
+    "doc_date": "2026-10-04 (page fetched)",
+    "via": "page",
+    "verified": null
+   },
+   {
+    "url": "https://ecode360.com/36301429",
+    "quote": "the certificate indicating whether the present use may or may not be continued shall be issued within six business days of the receipt of the application.",
+    "doc_date": "2026-10-04 (page fetched)",
+    "via": "page",
+    "verified": null
+   },
+   {
+    "url": "https://www.moonachie.us/DocumentCenter/View/806/Residential-CO",
+    "quote": "CERTIFICATE OF CONTINUED OCCUPANCY",
+    "doc_date": "",
+    "via": "pdf",
+    "verified": true
+   },
+   {
+    "url": "https://www.moonachie.us/DocumentCenter/View/806/Residential-CO",
+    "quote": "Please make checks payable to: Borough of Moonachie",
+    "doc_date": "",
+    "via": "pdf",
+    "verified": true
+   },
+   {
+    "url": "https://www.moonachie.us/208/Building-Department",
+    "quote": "Gino Tessaro, Construction Official",
+    "doc_date": "2026-10-04 (page fetched)",
+    "via": "page",
+    "verified": true
+   }
+  ],
+  "confidence": "high",
+  "notes": "Borough code Chapter 10 (Ord. #87-6, read in full on ecode360) requires the seller of a one to four family home to get a Certificate of Continued Occupancy from the Construction Official on every transfer of ownership, and sets a $25 fee. The Borough's current Residential certificate application (UCC F270 form) lists Certificate of Continued Occupancy as an option and says 'Fee: $150 per inspection'. The fee schedule in Chapter 10 also lists a $150 'Certificate of compliance for rentals or resale certificate' (labeled residential new construction or rehabilitation) and $100 per subcode for an applicant-requested UCC CCO. Which fee applies to an ordinary resale is unclear, so confirm with the office. The Building page lists phone 201-641-1857 and a Building Assistant (the department directory names Jessica Doneman); no email is posted. The code says the purchaser can be cited if no CCO is obtained."
+ },
+ "fire_cert": {
+  "requirements": [
+   "Smoke detector on every floor of the home, including basements, hallways and all habitable floors",
+   "Hallways more than 20 feet long need two detectors",
+   "Carbon monoxide alarm (the form records the number present)",
+   "The form also asks about sump pumps and open permits"
+  ],
+  "authorities": [
+   {
+    "name": "Moonachie Fire Prevention (Moonachie Fire Department Fire Prevention Bureau)",
+    "type": "municipal_fire_bureau",
+    "area_served": "Entire borough",
+    "lead_time": "Fee depends on how many business days before the certificate is needed: more than 10 business days for the lowest fee.",
+    "fees": [
+     {
+      "label": "Certificate of compliance, requested more than 10 business days ahead",
+      "amount": "$45.00",
+      "quote": "Request for certificate more than 10 business days :           $45.00",
+      "source_url": "https://www.moonachie.us/DocumentCenter/View/801/Residential-Fire-Prevention-Inspection",
+      "verified": true
+     },
+     {
+      "label": "Certificate of compliance, requested 4 to 10 business days ahead",
+      "amount": "$90.00",
+      "quote": "Request for certificate 4 to 10 business days:                 $90.00",
+      "source_url": "https://www.moonachie.us/DocumentCenter/View/801/Residential-Fire-Prevention-Inspection",
+      "verified": true
+     },
+     {
+      "label": "Certificate of compliance, requested less than 4 business days ahead",
+      "amount": "$161.00",
+      "quote": "Request for certificate Less than 4 business days:            $161.00",
+      "source_url": "https://www.moonachie.us/DocumentCenter/View/801/Residential-Fire-Prevention-Inspection",
+      "verified": true
+     }
+    ],
+    "how_to_apply": "The seller fills out the Home Re-sales Certificate of Compliance form (Residential Fire Prevention Inspection) and pays by check payable to Moonachie Fire Prevention. Submit it to Moonachie Fire Prevention, 70 Moonachie Road, Moonachie, NJ 07074, 201-641-1857.",
+    "application_url": "https://www.moonachie.us/DocumentCenter/View/801/Residential-Fire-Prevention-Inspection",
+    "department_url": "https://www.moonachie.us/204/Fire-Department",
+    "phone": "201-641-1857",
+    "email": "fodressel@moonachie.us",
+    "contact_name": "Frederick Dressel IV",
+    "contact_title": "Fire Official",
+    "evidence": [
+     {
+      "url": "https://www.moonachie.us/DocumentCenter/View/801/Residential-Fire-Prevention-Inspection",
+      "quote": "This application/certificate is to be filled in and paid for by the seller of the property.",
+      "doc_date": "",
+      "via": "pdf",
+      "verified": true
+     },
+     {
+      "url": "https://www.moonachie.us/DocumentCenter/View/801/Residential-Fire-Prevention-Inspection",
+      "quote": "Please make checks payable to: Moonachie Fire Prevention",
+      "doc_date": "",
+      "via": "pdf",
+      "verified": true
+     },
+     {
+      "url": "https://www.moonachie.us/DocumentCenter/View/801/Residential-Fire-Prevention-Inspection",
+      "quote": "HALLWAYS THAT ARE MORE THAN TWENTY FEET IN LENGTH MUST HAVE TWO (2) DETECTORS.",
+      "doc_date": "",
+      "via": "pdf",
+      "verified": true
+     },
+     {
+      "url": "https://nj.gov/dca/dfs/pdf/ANNUAL%20REGISTRY/THIRD%20QUARTER%20LEA%20REGISTRY%202026.pdf",
+      "quote": "F Moonachie Borough",
+      "doc_date": "2026-07",
+      "via": "pdf",
+      "verified": true
+     },
+     {
+      "url": "https://www.nj.gov/dca/dfs/pdf/fire%20directory_county%20summary/fire_code_enforcement_director.pdf",
+      "quote": "LEAID Moonachie Boro SMOKE DETECTOR COMPLIANCE Name: Moonachie Boro Fire Prev Enf Auth. Fire Dept Addr: 70 Moonachie Rd Email fodressel@moonachie.us",
+      "doc_date": "2/19/2026 (survey date)",
+      "via": "state_directory",
+      "verified": null
+     }
+    ],
+    "confidence": "high"
+   }
+  ],
+  "notes": "Tiered fee by business days before the certificate is needed ($45.00, $90.00, $161.00). The Fire Prevention form does not list a fire extinguisher, consistent with P.L.2025, c.19. The fire official name and email come from the NJ DCA fire directory (survey 2/19/2026); the form gives the shared Borough phone 201-641-1857. Validity period is not stated."
+ },
+ "other_items": [
+  {
+   "label": "Zoning use confirmation",
+   "detail": "The CCO certifies that the current use (one, two, three or four family) is permitted in the zone, a valid nonconforming use, or allowed by variance.",
+   "source_url": "https://ecode360.com/36301429"
+  },
+  {
+   "label": "Open permits and sump pump",
+   "detail": "The fire certificate form asks whether there is a sump pump and any open permits.",
+   "source_url": "https://www.moonachie.us/DocumentCenter/View/801/Residential-Fire-Prevention-Inspection"
+  }
+ ],
+ "open_questions": [
+  "Which CCO fee applies to a resale: $150 per inspection on the form, $25 in the code, or $150 for a 'resale certificate'?",
+  "How long are the CCO and the fire certificate valid?",
+  "Is there a reinspection fee for a failed smoke/CO inspection?"
+ ],
+ "checked_at": "2026-10-04",
+ "verification": {
+  "fees": 5,
+  "fee_ok": 4,
+  "fee_bad": 0,
+  "fee_unchecked": 1,
+  "quotes": 11,
+  "q_ok": 7,
+  "q_bad": 0,
+  "q_unchecked": 4
+ }
+}

@@ -1,0 +1,209 @@
+{
+ "municipality_code": "0211",
+ "municipality": "Elmwood Park Borough",
+ "county": "BERGEN",
+ "resale_co": {
+  "status": "required",
+  "name": "Certificate of Continuing Occupancy (CCO), called a Certificate of Re-Occupancy on the Building Department page",
+  "issued_by": "Borough of Elmwood Park Zoning Enforcement Officer (Building Department)",
+  "lead_time": "",
+  "valid_for": "",
+  "requirements": [
+   "Apply on the Enforcement Officer's form and pay the fee; the Enforcement Officer then inspects for compliance with building, health, safety and fire codes and Borough ordinances",
+   "No new occupancy until any violations found are corrected",
+   "No CO or CCO is issued on a transfer of title while there are housing code violations; work done without required permits and approvals must be removed to the Construction Official's satisfaction",
+   "Smoke detector, carbon monoxide detector and fire extinguisher certificate from the Fire Prevention Bureau is a separate requirement (see fire certificate)"
+  ],
+  "fees": [
+   {
+    "label": "Certificate of Continuing Occupancy, residential single-family dwelling",
+    "amount": "$100",
+    "quote": "$100 shall be paid for residential single-family dwellings.",
+    "source_url": "https://ecode360.com/35182540",
+    "verified": null
+   },
+   {
+    "label": "Certificate of Continuing Occupancy, commercial multi-family or industrial",
+    "amount": "$275",
+    "quote": "A fee of $275 shall be paid for commercial multi-family or industrial properties.",
+    "source_url": "https://ecode360.com/35182540",
+    "verified": null
+   }
+  ],
+  "how_to_apply": "Apply to the Building Department (Zoning Enforcement Officer) at the Municipal Building, 182 Market Street, on the form the Enforcement Officer provides, and pay the fee. The Officer inspects the home and issues the certificate if no violations are found. The fee and inspection may be waived if the same home was inspected within the last 60 days with no physical change.",
+  "application_url": "",
+  "department_url": "https://www.elmwoodparknj.us/building-department",
+  "phone": "201-796-1457 x8802",
+  "email": "",
+  "contact_name": "James DePadova",
+  "contact_title": "Zoning Officer (named in search results for the Building Department page; not confirmed on a fetched page)",
+  "evidence": [
+   {
+    "url": "https://ecode360.com/35182540",
+    "quote": "No person shall occupy or use any portion of a commercial, industrial or residential building after such building or portion thereof has been vacated or sold, or for which there has been a change in use or a change in occupancy, until the owner/landlord shall have applied for and secured a Certificate of Continuing Occupancy from the Zoning Enforcement Officer of the Borough of Elmwood Park.",
+    "doc_date": "Ord. No. 2015-08 (latest amendment listed)",
+    "via": "page",
+    "verified": null
+   },
+   {
+    "url": "https://ecode360.com/35182540",
+    "quote": "The Enforcement Officer shall issue a Certificate of Continuing Occupancy upon his inspection and satisfaction that no violation of the aforementioned codes, regulations, ordinances and statutes exist.",
+    "doc_date": "Ord. No. 2015-08",
+    "via": "page",
+    "verified": null
+   },
+   {
+    "url": "https://ecode360.com/35182540",
+    "quote": "The Enforcement Officer may waive the inspection and the above fee if an inspection of the same premises has been made within 60 days, and there has been no physical change to the property.",
+    "doc_date": "Ord. No. 2015-08",
+    "via": "page",
+    "verified": null
+   },
+   {
+    "url": "https://ecode360.com/35179182",
+    "quote": "In no event shall a certificate of occupancy or continued certificate of occupancy or conditional certificate of occupancy be issued upon the transfer of title of any property if there are any violations of the above sections.",
+    "doc_date": "2026-10-04 (page fetched)",
+    "via": "page",
+    "verified": null
+   },
+   {
+    "url": "https://www.elmwoodparknj.us/building-department",
+    "quote": "Certificate of Re-Occupancy is required every time a new tenant moves in, and when a property is sold/purchased.",
+    "doc_date": "2026-10-04 (search result)",
+    "via": "search_snippet",
+    "verified": null
+   }
+  ],
+  "confidence": "high",
+  "notes": "Borough Code Section 34-58.3 was read in full through ecode360. The code fee language covers residential single-family dwellings at $100 and commercial multi-family or industrial at $275; it does not clearly say which fee applies to a two-family home, so confirm with the Building Department. The Borough website (elmwoodparknj.us) could not be reached during this check (connection refused), so the Building Department wording, phone (201-796-1457 x8802), hours and the Zoning Officer name (James DePadova) come only from search-result snippets of that page. Rental-only items (rental unit fire inspections, annual registration of non-owner-occupied 1 and 2 family dwellings) are not resale requirements."
+ },
+ "fire_cert": {
+  "requirements": [
+   "Smoke detector on each level, including the basement ceiling; 10-year sealed battery single station alarms listed to ANSI/UL 217, and hardwired (A/C) alarms from original construction may not be replaced with battery alarms",
+   "Carbon monoxide alarm in the immediate vicinity of sleeping areas (battery, hard-wired or plug-in, UL 2034), unless the building has no fuel-burning device and no attached garage",
+   "Portable fire extinguisher installed and maintained per N.J.A.C. 5:70 (Borough code still lists it)"
+  ],
+  "authorities": [
+   {
+    "name": "Elmwood Park Fire Prevention Bureau",
+    "type": "municipal_fire_bureau",
+    "area_served": "Entire borough",
+    "lead_time": "Fee must be prepaid with the application; the Fire Official then schedules the inspection. After a failure the owner has five days to correct (three days after a second failure). No published rush tiers.",
+    "fees": [
+     {
+      "label": "Smoke detector, carbon monoxide detector and portable fire extinguisher certificate of inspection, single-family sale",
+      "amount": "$100",
+      "quote": "Single-family residential sale inspection fee: $100.",
+      "source_url": "https://ecode360.com/35179434",
+      "verified": null
+     },
+     {
+      "label": "Same certificate, two-family sale",
+      "amount": "$125",
+      "quote": "Two-family residential sale inspection fee: $125.",
+      "source_url": "https://ecode360.com/35179434",
+      "verified": null
+     },
+     {
+      "label": "Reinspection after a first failure (may be imposed)",
+      "amount": "$25",
+      "quote": "Should the inspection reveal a failure five days shall be given to correct the violations and a reinsertion fee of $25 may be imposed and the fee shall be paid before the reinsertion.",
+      "source_url": "https://ecode360.com/35179434",
+      "verified": null
+     },
+     {
+      "label": "Reinspection after a second failure",
+      "amount": "$60",
+      "quote": "Should the reinspection reveal a second failure three days shall be given to correct the violations and a reinspection fee of $60 shall be imposed and paid before the reinsertion.",
+      "source_url": "https://ecode360.com/35179434",
+      "verified": null
+     },
+     {
+      "label": "No-show fee (no one at the home to let the inspector in)",
+      "amount": "$25",
+      "quote": "Should no one be at the residence to allow the inspector in for inspection, a no-show fee of $25 shall be imposed and paid before a new inspection date is given.",
+      "source_url": "https://ecode360.com/35179434",
+      "verified": null
+     }
+    ],
+    "how_to_apply": "Apply to the Elmwood Park Fire Prevention Bureau, Municipal Building, 182 Market Street, Elmwood Park, NJ 07407, with the fee prepaid. The Bureau office hours are Monday to Friday, 8:30am to 1pm (per search results for the Bureau page).",
+    "application_url": "",
+    "department_url": "https://elmwoodparknj.us/borough-directory/118-departments-offices/fire-prevention-bureau",
+    "phone": "(201) 796-1795",
+    "email": "SKochik@elmwoodparknj.us",
+    "contact_name": "Steven A Kochik",
+    "contact_title": "Fire Official",
+    "evidence": [
+     {
+      "url": "https://ecode360.com/35179434",
+      "quote": "Upon the sale of a one- or two-family residence or the rental, lease or transfer of any dwelling unit, the seller, landlord or transferor is required to obtain from the Elmwood Park Fire Prevention Bureau, a smoke detector and carbon monoxide detector and portable fire extinguisher certificate of inspection, certifying that the smoke detectors and carbon monoxide detectors and fire extinguishers are in compliance with the provisions of the New Jersey Uniform Fire Code.",
+      "doc_date": "2026-10-04 (page fetched)",
+      "via": "page",
+      "verified": null
+     },
+     {
+      "url": "https://ecode360.com/35179434",
+      "quote": "Applications for the smoke detector and carbon monoxide detector and portable fire extinguisher certificate of inspection shall be made to the Elmwood Park Fire Prevention Bureau, 182 Market Street, Elmwood Park, New Jersey 07407, with the application fee prepaid after the receipt of said application, the Fire Official shall have the premises inspected to determine whether the same complies with the terms of the New Jersey Uniform Fire Code.",
+      "doc_date": "2026-10-04 (page fetched)",
+      "via": "page",
+      "verified": null
+     },
+     {
+      "url": "https://ecode360.com/35179434",
+      "quote": "Portable fire extinguishers shall be installed and maintained in accordance with N.J.A.C. 5:70.",
+      "doc_date": "2026-10-04 (page fetched)",
+      "via": "page",
+      "verified": null
+     },
+     {
+      "url": "https://elmwoodparknj.us/borough-directory/118-departments-offices/fire-prevention-bureau",
+      "quote": "The Fire Prevention Bureau is located at the Municipal Building, 182 Market Street, Elmwood Park, NJ 07407, with phone number 201-796-1457 x8815",
+      "doc_date": "2026-10-04 (search result)",
+      "via": "search_snippet",
+      "verified": null
+     },
+     {
+      "url": "https://www.nj.gov/dca/dfs/pdf/fire%20directory_county%20summary/fire_code_enforcement_director.pdf",
+      "quote": "LEAID: 0211-001 Elmwood Park Boro ... Enf Auth. Fire Dept ... Fire Official Steven A Kochik Phone (201) 796-1795 ... Email SKochik@elmwoodparknj.us",
+      "doc_date": "2026-03 (survey date 3/2/2026)",
+      "via": "state_directory",
+      "verified": null
+     },
+     {
+      "url": "https://nj.gov/dca/dfs/pdf/ANNUAL%20REGISTRY/THIRD%20QUARTER%20LEA%20REGISTRY%202026.pdf",
+      "quote": "F Elmwood Park Borough",
+      "doc_date": "2026-07",
+      "via": "pdf",
+      "verified": true
+     }
+    ],
+    "confidence": "high"
+   }
+  ],
+  "notes": "Fees are from Borough Code Section 14-1.10 (Chapter 14, Fire Prevention), read in full through ecode360; the code text says \"reinsertion\" where it means reinspection. The state fire directory lists the Fire Official's line as (201) 796-1795; search results for the Borough's Bureau page give 201-796-1457 x8815. The code still requires a portable fire extinguisher; the state dropped it from the sale certificate in February 2025 (P.L.2025, c.19), so confirm with the Bureau. Other sale fees in the code: three-family $150, four-family $175, five-family $200; rental unit inspection $100 per unit."
+ },
+ "other_items": [
+  {
+   "label": "Illegal or unpermitted work",
+   "detail": "To get a CO or CCO for a transfer of title, any work done without required permits and approvals must be removed to the Construction Official's satisfaction, and no CCO is issued while housing code violations exist.",
+   "source_url": "https://ecode360.com/35179182"
+  }
+ ],
+ "open_questions": [
+  "Which CCO fee applies to a two-family home: the $100 residential fee or the $275 multi-family fee?",
+  "What is the current CCO lead time, and how long is the CCO valid?",
+  "Is the CCO application available online, and can it be filed together with the fire certificate?",
+  "Does the Fire Prevention Bureau still require a portable fire extinguisher after P.L.2025, c.19?"
+ ],
+ "checked_at": "2026-10-04",
+ "verification": {
+  "fees": 7,
+  "fee_ok": 0,
+  "fee_bad": 0,
+  "fee_unchecked": 7,
+  "quotes": 11,
+  "q_ok": 1,
+  "q_bad": 0,
+  "q_unchecked": 10
+ }
+}

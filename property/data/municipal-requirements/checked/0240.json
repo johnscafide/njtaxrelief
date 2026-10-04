@@ -1,0 +1,258 @@
+{
+ "municipality_code": "0240",
+ "municipality": "Northvale Borough",
+ "county": "BERGEN",
+ "resale_co": {
+  "status": "required",
+  "name": "Residential Occupancy Approval (ROA) / Certificate of Continued Occupancy (CCO)",
+  "issued_by": "Borough of Northvale Fire Prevention Bureau / Building Department (Code Compliance Official)",
+  "lead_time": "File and schedule the inspection at least 21 business days before the certificate is needed (the form says at least 21 days)",
+  "valid_for": "",
+  "requirements": [
+   "Property used as zoned or approved (one family, two family, etc.); three family or more needs legal proof",
+   "No sump pump or other unauthorized water connection into the sanitary sewer",
+   "All open construction permits inspected, approved and closed",
+   "Sidewalks, if installed, in good condition",
+   "No interior double key lock on the primary exit/entrance door",
+   "At least one handrail on stairs with 4 or more risers",
+   "No hazardous items or imminent dangers on a general visual inspection",
+   "Pools need an approved barrier (fence) and gates that open out, self-close and latch",
+   "Flue connections properly sealed; no violations of the Property Maintenance chapter",
+   "Smoke detector and carbon monoxide alarm certificate is issued with the ROA"
+  ],
+  "fees": [
+   {
+    "label": "Certificate of Residential Occupancy Approval (fee on the Borough form)",
+    "amount": "$100.00",
+    "quote": "FEE: $100.00",
+    "source_url": "https://www.boroughofnorthvale.com/_files/ugd/6818fc_ba08137c76c348319a937c10b4d256af.pdf",
+    "verified": null
+   },
+   {
+    "label": "CCO on sale of the property (Borough code)",
+    "amount": "$50",
+    "quote": "A fee of $50 shall be paid at the time of filing an application for a CCO in the event of a sale of the property.",
+    "source_url": "https://ecode360.com/12515154",
+    "verified": null
+   }
+  ],
+  "how_to_apply": "Download the Residential Occupancy Approval packet from the Fire Prevention page, answer all questions on the Application for Certificate of Residential Occupancy Approval and the Smoke Detector and Carbon Monoxide Alarm Compliance application, and submit them with the fees to the Fire Prevention Bureau/Building Department, 116 Paris Avenue (201-767-3330 ext. 213, building@northvalenj.org). Call to set the inspection appointment at least 21 days before you need the certificate and give a name and phone number for access. Any violations must be fixed before a certificate is issued.",
+  "application_url": "https://www.boroughofnorthvale.com/_files/ugd/6818fc_ba08137c76c348319a937c10b4d256af.pdf",
+  "department_url": "https://www.boroughofnorthvale.com/fire-prevention",
+  "phone": "201-767-3330 ext. 213",
+  "email": "building@northvalenj.org",
+  "contact_name": "Richard Hess",
+  "contact_title": "Construction Code Official (Technical Assistant: Julia Martino, ext. 213)",
+  "evidence": [
+   {
+    "url": "https://www.boroughofnorthvale.com/fire-prevention",
+    "quote": "Residents planning to sell homes are required to apply for and",
+    "doc_date": "2026-10-04 (page fetched)",
+    "via": "page",
+    "verified": true
+   },
+   {
+    "url": "https://www.boroughofnorthvale.com/fire-prevention",
+    "quote": "Please apply and schedule an inspection in ample time before",
+    "doc_date": "2026-10-04 (page fetched)",
+    "via": "page",
+    "verified": true
+   },
+   {
+    "url": "https://ecode360.com/12515154",
+    "quote": "From the effective date of this article, no residential premises, property or land used or portion thereof shall be sold, relet, rerented or otherwise occupied by a new owner, tenant or subtenant without the issuance, pursuant to the proper application therefor, and an inspection of and then issuance of a certificate of continued occupancy (CCO).",
+    "doc_date": "1996-07-10 (Ord. No. 702-96)",
+    "via": "page",
+    "verified": null
+   },
+   {
+    "url": "https://ecode360.com/12515154",
+    "quote": "Applicants must file an application and schedule an inspection at least 21 business days before the certificate will be required.",
+    "doc_date": "2026-10-04 (page fetched)",
+    "via": "page",
+    "verified": null
+   },
+   {
+    "url": "https://ecode360.com/12515154",
+    "quote": "A fee of $50 shall be paid at the time of filing an application for a CCO in the event of a sale of the property.",
+    "doc_date": "2026-10-04 (page fetched)",
+    "via": "page",
+    "verified": null
+   },
+   {
+    "url": "https://www.boroughofnorthvale.com/_files/ugd/6818fc_ba08137c76c348319a937c10b4d256af.pdf",
+    "quote": "INSTRUCTIONS FOR FILING FOR A RESIDENTIAL OCCUPANCY APPROVAL",
+    "doc_date": "2026-10-04 (page fetched)",
+    "via": "pdf",
+    "verified": null
+   },
+   {
+    "url": "https://www.boroughofnorthvale.com/_files/ugd/6818fc_ba08137c76c348319a937c10b4d256af.pdf",
+    "quote": "NO CERTIFICATE WILL BE ISSUED UNTIL ALL ITEMS HAVE PASSED INSPECTION",
+    "doc_date": "2026-10-04 (page fetched)",
+    "via": "pdf",
+    "verified": null
+   },
+   {
+    "url": "https://www.boroughofnorthvale.com/building-department",
+    "quote": "Richard Hess",
+    "doc_date": "2026-10-04 (page fetched)",
+    "via": "page",
+    "verified": true
+   },
+   {
+    "url": "https://www.boroughofnorthvale.com/building-department",
+    "quote": "201-767-3330 ext 213",
+    "doc_date": "2026-10-04 (page fetched)",
+    "via": "page",
+    "verified": true
+   }
+  ],
+  "confidence": "high",
+  "notes": "Borough Code Chapter 80, Article III (Certificates of Continued Occupancy for Residential Units) was read through the ecode360 print view. The Borough's posted Residential Occupancy Approval packet (a scanned PDF, so quotes from it may not be machine-checkable) shows a $100.00 fee, while the code still says $50 for a CCO on sale; confirm the current amount. The packet header is the Fire Prevention Bureau but its contact is the Building Department (ext. 213, building@northvalenj.org). The packet also includes a lead-based paint visual inspection application (pre-1978 rentals only), a $10 Borough Clerk landlord page and a rental registration statement; those are rental items, not resale items."
+ },
+ "fire_cert": {
+  "requirements": [
+   "At least one 10-year sealed battery smoke detector on each level and outside bedrooms",
+   "Carbon monoxide alarm within 10 feet of all bedroom doors",
+   "Portable fire extinguisher only listed for rentals (within 10 feet of the kitchen, hung no higher than 5 feet, ABC rated, 2.5 to 10 lbs)"
+  ],
+  "authorities": [
+   {
+    "name": "Northvale Fire Prevention Bureau (Certificate of Smoke Detector and Carbon Monoxide Alarm Compliance, issued with the Residential Occupancy Approval)",
+    "type": "municipal_fire_bureau",
+    "area_served": "Entire borough",
+    "lead_time": "Schedule at least 21 days before the certificate is needed. A temporary 60-day nonextendable certificate may be issued after the first inspection.",
+    "fees": [
+     {
+      "label": "Smoke detector and CO alarm certificate, one and two family",
+      "amount": "$75",
+      "quote": "The fee for a certificate of smoke detector and carbon monoxide alarm compliance shall be $75, due when the application is submitted, for all one- and two-family houses, and $50 for single apartments.",
+      "source_url": "https://ecode360.com/12515154",
+      "verified": null
+     },
+     {
+      "label": "Temporary 60-day nonextendable certificate",
+      "amount": "$25",
+      "quote": "The enforcing authority may issue a temporary sixty-day nonextendable certificate after the initial inspection has been conducted. The fee shall be $25.",
+      "source_url": "https://ecode360.com/12515154",
+      "verified": null
+     }
+    ],
+    "how_to_apply": "Fill out the Application for Certificate Smoke Detector and Carbon Monoxide Alarm Compliance in the Residential Occupancy Approval packet (closing date, owner/agent, block and lot) and submit it with the ROA application and fees. The smoke/CO certificate is issued with the Residential Occupancy Approval.",
+    "application_url": "https://www.boroughofnorthvale.com/_files/ugd/6818fc_ba08137c76c348319a937c10b4d256af.pdf",
+    "department_url": "https://www.boroughofnorthvale.com/fire-prevention",
+    "phone": "201-767-3330 ext. 214",
+    "email": "fireprevention@northvalenj.org",
+    "contact_name": "Charles Thomas",
+    "contact_title": "Fire Official",
+    "evidence": [
+     {
+      "url": "https://www.boroughofnorthvale.com/fire-prevention",
+      "quote": "The Fire Prevention Bureau inspects all homes for sale to ensure smoke detectors, and carbon monoxide alarms.",
+      "doc_date": "2026-10-04 (page fetched)",
+      "via": "page",
+      "verified": true
+     },
+     {
+      "url": "https://www.boroughofnorthvale.com/fire-prevention",
+      "quote": "The minimum requirement is one ten year sealed, battery-",
+      "doc_date": "2026-10-04 (page fetched)",
+      "via": "page",
+      "verified": true
+     },
+     {
+      "url": "https://www.boroughofnorthvale.com/fire-prevention",
+      "quote": "fireprevention@northvalenj.org",
+      "doc_date": "2026-10-04 (page fetched)",
+      "via": "page",
+      "verified": true
+     },
+     {
+      "url": "https://www.boroughofnorthvale.com/fire-prevention",
+      "quote": "Charles Thomas – Fire Official",
+      "doc_date": "2026-10-04 (page fetched)",
+      "via": "page",
+      "verified": true
+     },
+     {
+      "url": "https://ecode360.com/12515154",
+      "quote": "No person shall occupy or use any building or portion thereof for residential purposes after such building or portion thereof has been vacated due to the sale of such residential property or for which there has been a change in use or a change in occupancy or tenancy until the current owner of such premises has applied for and secured a certificate of smoke detector and carbon monoxide alarm compliance (\"CSDCMAC\") from the enforcement authority of the Borough of Northvale.",
+      "doc_date": "2026-10-04 (page fetched)",
+      "via": "page",
+      "verified": null
+     },
+     {
+      "url": "https://www.boroughofnorthvale.com/_files/ugd/6818fc_ba08137c76c348319a937c10b4d256af.pdf",
+      "quote": "NOTE: THE CERTIFICATE OF SMOKE DETECTOR AND CARBON MONOXIDE ALARM COMPLIANCE WILL BE ISSUED WITH THE RESIDENTIAL OCCUPANCY APPROVAL.",
+      "doc_date": "2026-10-04 (page fetched)",
+      "via": "pdf",
+      "verified": null
+     },
+     {
+      "url": "https://www.boroughofnorthvale.com/_files/ugd/6818fc_ba08137c76c348319a937c10b4d256af.pdf",
+      "quote": "ONE AND TWO FAMILY - $75.00",
+      "doc_date": "2026-10-04 (page fetched)",
+      "via": "pdf",
+      "verified": null
+     },
+     {
+      "url": "https://www.nj.gov/dca/dfs/pdf/fire%20directory_county%20summary/fire_code_enforcement_director.pdf",
+      "quote": "Fire Official Charles Thomas",
+      "doc_date": "4/2/2026 (survey date)",
+      "via": "state_directory",
+      "verified": null
+     },
+     {
+      "url": "https://www.nj.gov/dca/dfs/pdf/fire%20directory_county%20summary/fire_code_enforcement_director.pdf",
+      "quote": "Northvale Boro Fire Prev",
+      "doc_date": "4/2/2026 (survey date)",
+      "via": "state_directory",
+      "verified": null
+     },
+     {
+      "url": "https://nj.gov/dca/dfs/pdf/ANNUAL%20REGISTRY/THIRD%20QUARTER%20LEA%20REGISTRY%202026.pdf",
+      "quote": "M Northvale Borough",
+      "doc_date": "2026-07",
+      "via": "pdf",
+      "verified": true
+     }
+    ],
+    "confidence": "high"
+   }
+  ],
+  "notes": "Borough Code Chapter 80, Article II sets the $75 one and two family smoke/CO certificate fee; the scanned Borough form shows the same $75.00. No days-before-closing fee tiers are published. The Fire Prevention page says the Bureau inspects homes for sale for smoke and CO alarms; its heading still mentions a fire extinguisher, but the text applies the extinguisher only to rentals (the state dropped it from the sale certificate in February 2025, P.L.2025, c.19). The LEA registry lists Northvale as M (Municipality)."
+ },
+ "other_items": [
+  {
+   "label": "Sump pump / sewer connection",
+   "detail": "The resale inspection checks that no sump pump or unauthorized water connection drains into the sanitary sewer.",
+   "source_url": "https://ecode360.com/12515154"
+  },
+  {
+   "label": "Open permits",
+   "detail": "All open construction permits must be inspected, approved and closed for the Residential Occupancy Approval.",
+   "source_url": "https://www.boroughofnorthvale.com/_files/ugd/6818fc_ba08137c76c348319a937c10b4d256af.pdf"
+  },
+  {
+   "label": "Sidewalks",
+   "detail": "Sidewalks, if installed, must be in good condition for the Residential Occupancy Approval.",
+   "source_url": "https://www.boroughofnorthvale.com/_files/ugd/6818fc_ba08137c76c348319a937c10b4d256af.pdf"
+  }
+ ],
+ "open_questions": [
+  "Is the resale CCO/ROA fee $100 (Borough form) or $50 (Borough code 80-19)?",
+  "Are the $100 ROA fee and the $75 smoke/CO certificate fee both charged on a sale?"
+ ],
+ "checked_at": "2026-10-04",
+ "verification": {
+  "fees": 4,
+  "fee_ok": 0,
+  "fee_bad": 0,
+  "fee_unchecked": 4,
+  "quotes": 19,
+  "q_ok": 9,
+  "q_bad": 0,
+  "q_unchecked": 10
+ }
+}

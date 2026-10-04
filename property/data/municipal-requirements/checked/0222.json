@@ -1,0 +1,242 @@
+{
+ "municipality_code": "0222",
+ "municipality": "Glen Rock Borough",
+ "county": "BERGEN",
+ "resale_co": {
+  "status": "required",
+  "name": "Certificate of Continued Occupancy (CCO) for residential resale",
+  "issued_by": "Borough of Glen Rock Building Department (Code Enforcement Bureau), with Fire Prevention sign-off",
+  "lead_time": "Apply at least 30 days before closing or reoccupancy. The certificate is not issued until Fire Prevention gives final approval.",
+  "valid_for": "",
+  "requirements": [
+   "Application and fee to the Building Department (third floor, Municipal Building, 1 Harding Plaza)",
+   "Records review: all construction permits must be properly inspected and closed",
+   "Visible inspection of the house by the Building Department for code violations affecting occupant safety",
+   "Separate Fire Prevention smoke/CO inspection; certificate not issued until Fire Prevention approves",
+   "DPW inspects the public sidewalks, as applicable",
+   "Common failures: double-cylinder deadbolts with removable interior key on a primary exit door, vinyl dryer or kitchen exhaust connectors, extension cords for sump pumps or garage door openers",
+   "Permits are required for water heaters, heating systems, water softeners, lawn irrigation, electric wiring, EV chargers, patios and decks"
+  ],
+  "fees": [
+   {
+    "label": "CCO for resale",
+    "amount": "$100.00",
+    "quote": "RESALES: $100.00 fee (cash/check payable to Borough of Glen Rock)",
+    "source_url": "https://glenrocknj.net/government/forms/construction/1585-residential-resale-packet/file",
+    "verified": true
+   },
+   {
+    "label": "Certificate of continued occupancy, single-family dwelling (Ordinance 1879, Section 101-12, local certificate fees)",
+    "amount": "$100",
+    "quote": "Single-family dwellings $100",
+    "source_url": "https://glenrocknj.net/government/forms/construction/913-building-fees/file",
+    "verified": true
+   },
+   {
+    "label": "Temporary certificate of continued occupancy, per dwelling unit (Ordinance 1879)",
+    "amount": "$100",
+    "quote": "Temporary certificate of continued occupancy, per dwelling unit $100",
+    "source_url": "https://glenrocknj.net/government/forms/construction/913-building-fees/file",
+    "verified": true
+   }
+  ],
+  "how_to_apply": "Fill out the CCO application in the Residential Resale Packet and hand it in with the $100.00 fee (cash or check payable to Borough of Glen Rock) to the Building Department at least 30 days before closing. Forms can be dropped off at the Building Department, put in the drop box in front of Borough Hall, or mailed to Borough Hall, 1 Harding Plaza, Glen Rock, NJ 07452. Fill out the Fire Prevention CCO application in the same packet at least 10 days before closing.",
+  "application_url": "https://glenrocknj.net/government/forms/construction/1585-residential-resale-packet/file",
+  "department_url": "https://glenrocknj.net/departments/construction",
+  "phone": "201-670-3965, option 1",
+  "email": "building@glenrocknj.net",
+  "contact_name": "Dave Nizborski",
+  "contact_title": "Construction Official (dnizborski@glenrocknj.net)",
+  "evidence": [
+   {
+    "url": "https://glenrocknj.net/government/forms/construction/1585-residential-resale-packet/file",
+    "quote": "all Glen Rock property owners who sell or rent their dwellings are required to obtain a borough issued CCO Certificate prior to closing and/or allowing occupancy of such dwellings.",
+    "doc_date": "January 2026",
+    "via": "pdf",
+    "verified": true
+   },
+   {
+    "url": "https://glenrocknj.net/government/forms/construction/1585-residential-resale-packet/file",
+    "quote": "At least 30 days prior to closing or reoccupancy, the property owner or the agent acting on their behalf are required to make an application to the Glen Rock Building Department",
+    "doc_date": "January 2026",
+    "via": "pdf",
+    "verified": true
+   },
+   {
+    "url": "https://glenrocknj.net/government/forms/construction/1585-residential-resale-packet/file",
+    "quote": "Fire Prevention will do their own inspection. Certificate will not be issued until final approval from Fire Prevention.",
+    "doc_date": "January 2026",
+    "via": "pdf",
+    "verified": true
+   },
+   {
+    "url": "https://glenrocknj.net/government/forms/construction/1585-residential-resale-packet/file",
+    "quote": "The Department of Public Works will perform an inspection of the dwelling public sidewalks, as applicable.",
+    "doc_date": "January 2026",
+    "via": "pdf",
+    "verified": true
+   },
+   {
+    "url": "https://glenrocknj.net/government/forms/construction/913-building-fees/file",
+    "quote": "Residential resale, reoccupancy or rental.",
+    "doc_date": "",
+    "via": "pdf",
+    "verified": true
+   },
+   {
+    "url": "https://glenrocknj.net/departments/construction",
+    "quote": "Forms can be dropped off to the Building Department, at the drop box in front of Borough Hall, or be mailed to Borough Hall, 1 Harding Plaza, Glen Rock, NJ 07452",
+    "doc_date": "2026-10-04 (page fetched)",
+    "via": "page",
+    "verified": true
+   },
+   {
+    "url": "https://glenrocknj.net/departments/construction",
+    "quote": "Construction Official",
+    "doc_date": "2026-10-04 (page fetched)",
+    "via": "page",
+    "verified": true
+   },
+   {
+    "url": "https://glenrocknj.net/government/forms/construction",
+    "quote": "Residential Resale Packet",
+    "doc_date": "2026-10-04 (page fetched)",
+    "via": "page",
+    "verified": true
+   }
+  ],
+  "confidence": "high",
+  "notes": "The Residential Resale Packet (procedure sheet revised January 2026) is a scanned PDF; quotes come from its text layer. Ordinance 1879 (Section 101-12, Building Department fees) lists a CCO for residential resale, reoccupancy or rental issued under Chapter 230, Section 230-96B(2), at $100 per dwelling unit, and a single-family CCO at $100 under local certificate fees (other than single-family: $100 plus $100 per additional unit). The ordinance date is not shown on the posted copy. Rentals also need landlord registration and a lead-safe certificate ($120 for rentals with lead inspection); that is rental-only."
+ },
+ "fire_cert": {
+  "requirements": [
+   "Single family: UL-listed 10-year sealed battery smoke alarms (no battery compartment) on each level including the basement, within 10 feet of each sleeping area entrance or inside each sleeping area, and in each bedroom",
+   "Two family: on each level including the basement, near sleeping areas, in the main living area, in common stairwells and hallways, outside each doorway, and at the front of the basement stairs",
+   "Hardwired (AC) smoke alarms from original construction or rehabilitation cannot be replaced with battery-only alarms; all detectors must be less than 10 years old",
+   "CO alarm within 10 feet of each sleeping area entrance or inside each sleeping area; CO detectors older than 5 years (manufacture date) must be replaced",
+   "Portable fire extinguisher 2A:10B:C under 10 pounds within 10 feet of the kitchen, with its bracket, dated within 12 months or tagged (form still lists it)",
+   "Secondary power source label (\"CAUTION: MULTIPLE SOURCES OF POWER\") within 18 inches of the main panel and the meter, if the home has a generator, solar panels or battery storage",
+   "Legible house numbers visible from the street; front-door deadbolts must be keyless on the inside",
+   "Monitored or low-voltage systems must be tested with an NFPA 72 report and monitoring kept active"
+  ],
+  "authorities": [
+   {
+    "name": "Glen Rock Fire Prevention Bureau",
+    "type": "municipal_fire_bureau",
+    "area_served": "Entire borough",
+    "lead_time": "Submit the Fire Prevention CCO application no less than 10 days before the closing date. Fee is based on days before closing: 10 days or more for the lowest fee.",
+    "fees": [
+     {
+      "label": "Smoke/CO inspection for CCO, 10 days or more before closing",
+      "amount": "$100",
+      "quote": "day or More: $100",
+      "source_url": "https://glenrocknj.net/government/forms/construction/1585-residential-resale-packet/file",
+      "verified": true
+     },
+     {
+      "label": "10 to 4 days before closing",
+      "amount": "$125",
+      "quote": "10 to 4 days: $125",
+      "source_url": "https://glenrocknj.net/government/forms/construction/1585-residential-resale-packet/file",
+      "verified": true
+     },
+     {
+      "label": "3 days or less before closing",
+      "amount": "$175",
+      "quote": "3 Days or Less: $175",
+      "source_url": "https://glenrocknj.net/government/forms/construction/1585-residential-resale-packet/file",
+      "verified": true
+     },
+     {
+      "label": "Reinspection",
+      "amount": "$50",
+      "quote": "Re-Inspection Fee: $50",
+      "source_url": "https://glenrocknj.net/government/forms/construction/1585-residential-resale-packet/file",
+      "verified": true
+     }
+    ],
+    "how_to_apply": "Fill out the Glen Rock Fire Prevention Application - Certificate of Continued Occupancy - Residential (in the Residential Resale Packet) with seller, attorney and contact details, and submit it no less than 10 days before closing. Office hours Monday to Friday 8 to 11 am. Low-voltage or central station systems must be tested and certified by the alarm company or a NJ licensed electrician on an NFPA 72 form.",
+    "application_url": "https://glenrocknj.net/government/forms/construction/1585-residential-resale-packet/file",
+    "department_url": "https://glenrocknj.net/departments/fire-prevention",
+    "phone": "201-670-3986",
+    "email": "fireprevention@glenrocknj.net",
+    "contact_name": "Kyle Ladewig",
+    "contact_title": "Fire Official (kladewig@glenrocknj.net); Administrative Assistant: Barbara Shuart",
+    "evidence": [
+     {
+      "url": "https://glenrocknj.net/government/forms/construction/1585-residential-resale-packet/file",
+      "quote": "FORM MUST BE SUBMITTED NO LESS THAN 10 DAYS PRIOR TO CLOSING DATE",
+      "doc_date": "",
+      "via": "pdf",
+      "verified": true
+     },
+     {
+      "url": "https://glenrocknj.net/government/forms/construction/1585-residential-resale-packet/file",
+      "quote": "GLEN ROCK FIRE PREVENTION WILL NOT test Low Voltage, Central Station fire alarm systems.",
+      "doc_date": "",
+      "via": "pdf",
+      "verified": true
+     },
+     {
+      "url": "https://glenrocknj.net/departments/fire-prevention",
+      "quote": "Monday - Friday: 8:00 am - 11:00 am",
+      "doc_date": "2026-10-04 (page fetched)",
+      "via": "page",
+      "verified": true
+     },
+     {
+      "url": "https://glenrocknj.net/departments/fire-prevention",
+      "quote": "Fire Official",
+      "doc_date": "2026-10-04 (page fetched)",
+      "via": "page",
+      "verified": true
+     },
+     {
+      "url": "https://www.nj.gov/dca/dfs/pdf/fire%20directory_county%20summary/fire_code_enforcement_director.pdf",
+      "quote": "LEAID: 0222-001 Glen Rock Boro Fire Prev ... Enf Auth. Fire Dept ... Fire Official Kyle Ladewig Phone (201) 670-3986 ... Email kladewig@glenrocknj.net",
+      "doc_date": "2026-02-19 (survey date)",
+      "via": "state_directory",
+      "verified": null
+     },
+     {
+      "url": "https://nj.gov/dca/dfs/pdf/ANNUAL%20REGISTRY/THIRD%20QUARTER%20LEA%20REGISTRY%202026.pdf",
+      "quote": "F Glen Rock Borough",
+      "doc_date": "2026-07",
+      "via": "pdf",
+      "verified": true
+     }
+    ],
+    "confidence": "high"
+   }
+  ],
+  "notes": "Fees and requirements come from the Fire Prevention pages of the Residential Resale Packet (scanned; quoted from its text layer, where the first fee tier reads \"IO day or More: $100\"). The requirements page carries a 2025 form date and still lists a portable fire extinguisher, which state law (P.L.2025, c.19) removed from the sale certificate in February 2025; confirm with the Bureau."
+ },
+ "other_items": [
+  {
+   "label": "Sidewalk inspection",
+   "detail": "DPW inspects the public sidewalks for resales and rentals; sidewalk repairs need a DPW permit. DPW: 201-670-3980, 473 Doremus Avenue.",
+   "source_url": "https://glenrocknj.net/government/forms/construction/1585-residential-resale-packet/file"
+  },
+  {
+   "label": "Open permits",
+   "detail": "All construction permits must be properly inspected and closed before the CCO is issued.",
+   "source_url": "https://glenrocknj.net/government/forms/construction/1585-residential-resale-packet/file"
+  }
+ ],
+ "open_questions": [
+  "Does Glen Rock Fire Prevention still require the portable fire extinguisher after P.L.2025, c.19?",
+  "How long is the CCO valid once issued?",
+  "Is there a separate fee for the DPW sidewalk inspection?"
+ ],
+ "checked_at": "2026-10-04",
+ "verification": {
+  "fees": 7,
+  "fee_ok": 7,
+  "fee_bad": 0,
+  "fee_unchecked": 0,
+  "quotes": 14,
+  "q_ok": 13,
+  "q_bad": 0,
+  "q_unchecked": 1
+ }
+}

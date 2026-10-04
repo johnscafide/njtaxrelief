@@ -1,0 +1,247 @@
+{
+ "municipality_code": "0205",
+ "municipality": "Carlstadt Borough",
+ "county": "BERGEN",
+ "checked_at": "2026-10-04",
+ "resale_co": {
+  "status": "required",
+  "name": "Certificate of Zoning & Property Maintenance Compliance (Certificate of Zoning Compliance on change of ownership)",
+  "issued_by": "Borough of Carlstadt Zoning Department (Zoning Officer / zoning code enforcement official)",
+  "lead_time": "Payment and application must be received before the inspection is scheduled. No published turnaround time.",
+  "valid_for": "",
+  "requirements": [
+   "On-site inspection by a Zoning Inspector under Borough Ordinance 95-3 (zoning and property maintenance)",
+   "Required on the change of ownership of any residential property, whether one-, two- or multi-family",
+   "Complete and submit the Supplemental Information for Residential Certificate of Zoning Compliance with the application",
+   "Separate smoke detector / carbon monoxide alarm inspection by the Carlstadt Bureau of Fire Safety (separate fee)",
+   "For dwellings built before 1978, the residential supplement asks for a lead dust wipe test report from a licensed lead evaluation contractor (the form ties this to the lead-safe rental law; confirm whether it applies to an owner-occupied sale)"
+  ],
+  "fees": [
+   {
+    "label": "Certificate of zoning compliance, on-site inspection per residential unit",
+    "amount": "$75.00",
+    "quote": "$75.00 Per Residential Unit / Commercial Use",
+    "source_url": "https://www.carlstadtnj.us/_Content/pdf/forms/Commercial-Residential-Zoning-Compliance.pdf",
+    "verified": true
+   },
+   {
+    "label": "Certificate of zoning compliance, reinspection per unit",
+    "amount": "$50.00",
+    "quote": "$50.00 Reinspection Fee per Unit / Use",
+    "source_url": "https://www.carlstadtnj.us/_Content/pdf/forms/Commercial-Residential-Zoning-Compliance.pdf",
+    "verified": true
+   },
+   {
+    "label": "Certificate of zoning compliance, additional copies of certificate",
+    "amount": "$15",
+    "quote": "Additional copies of certificate $15",
+    "source_url": "https://ecode360.com/27116954",
+    "verified": null
+   }
+  ],
+  "how_to_apply": "Fill out the Application For Residential and Commercial Certificate of Zoning & Property Maintenance Compliance (with the residential supplement) and return it with the $75 fee per unit to the Zoning Office, 500 Madison Street. Checks payable to Borough of Carlstadt. The inspection is scheduled after payment and application are received.",
+  "application_url": "https://www.carlstadtnj.us/_Content/pdf/forms/Commercial-Residential-Zoning-Compliance.pdf",
+  "department_url": "https://www.carlstadtnj.us/forms",
+  "phone": "(201) 939-2304",
+  "email": "ZoningDept@CarlstadtNJ.us",
+  "contact_name": "Frank Recanati",
+  "contact_title": "Zoning Officer",
+  "evidence": [
+   {
+    "url": "https://ecode360.com/27311689",
+    "quote": "Upon the change of ownership of any residential property regardless of whether the property is designated as a one- or two- or multi-family dwelling in the tax records or the assessment records of the Borough.",
+    "doc_date": "2026-10-04 (page fetched)",
+    "via": "page",
+    "verified": null
+   },
+   {
+    "url": "https://ecode360.com/27311689",
+    "quote": "A certificate of zoning compliance shall not be issued without an on-site inspection being performed by the zoning code enforcement official or his/her designated subordinate.",
+    "doc_date": "2026-10-04 (page fetched)",
+    "via": "page",
+    "verified": null
+   },
+   {
+    "url": "https://ecode360.com/27116954",
+    "quote": "On-site inspection, per dwelling or premises $75",
+    "doc_date": "2026-10-04 (page fetched)",
+    "via": "page",
+    "verified": null
+   },
+   {
+    "url": "https://www.carlstadtnj.us/_Content/pdf/forms/Commercial-Residential-Zoning-Compliance.pdf",
+    "quote": "Application For Residential and Commercial Certificate of Zoning & Property Maintenance Compliance",
+    "doc_date": "v.2025",
+    "via": "pdf",
+    "verified": true
+   },
+   {
+    "url": "https://www.carlstadtnj.us/_Content/pdf/forms/Commercial-Residential-Zoning-Compliance.pdf",
+    "quote": "An inspection will be conducted by a Zoning Inspector in compliance with Borough Ordinance 95-3.",
+    "doc_date": "v.2025",
+    "via": "pdf",
+    "verified": true
+   },
+   {
+    "url": "https://www.carlstadtnj.us/_Content/pdf/forms/Commercial-Residential-Zoning-Compliance.pdf",
+    "quote": "$75.00 Per Residential Unit / Commercial Use",
+    "doc_date": "v.2025",
+    "via": "pdf",
+    "verified": true
+   },
+   {
+    "url": "https://www.carlstadtnj.us/_Content/pdf/forms/Commercial-Residential-Zoning-Compliance.pdf",
+    "quote": "Zoning Officer Frank Recanati",
+    "doc_date": "v.2025",
+    "via": "pdf",
+    "verified": true
+   },
+   {
+    "url": "https://www.carlstadtnj.us/_Content/pdf/forms/Commercial-Residential-Zoning-Compliance.pdf",
+    "quote": "Phone: (201) 939-2304",
+    "doc_date": "v.2025",
+    "via": "pdf",
+    "verified": true
+   },
+   {
+    "url": "https://www.carlstadtnj.us/_Content/pdf/forms/Commercial-Residential-Zoning-Compliance.pdf",
+    "quote": "If your dwelling was build prior to 1978, a Wipe Test will have to be conducted by a Licensed Lead Evaluation Contractor",
+    "doc_date": "v.2025",
+    "via": "pdf",
+    "verified": true
+   }
+  ],
+  "confidence": "high",
+  "notes": "Borough Code 21-25.2 requires a certificate of zoning compliance, with an on-site inspection, on the change of ownership of any residential property. The Borough form calls it a Certificate of Zoning & Property Maintenance Compliance (form v.2025) with a $75 fee per residential unit and $50 reinspection; the code fee schedule (4-9.5) matches ($75 inspection, $50 reinspection, $15 extra copies). The ordinance text was read through the ecode360 print view. No validity period or turnaround time is published. The residential supplement also has a lead paint section that reads as a lead-safe rental requirement but asks for a wipe test for any pre-1978 dwelling; confirm with the Zoning Office for an owner-occupied sale."
+ },
+ "fire_cert": {
+  "requirements": [
+   "Smoke alarm on every level and within 10 feet of every bedroom door; hardwired alarms may not be replaced with battery-operated ones",
+   "Alarm type depends on the year the house was built or renovated (sealed battery alarms for pre-1977 homes, electric/interconnected alarms for newer homes, per the Bureau's table)",
+   "Carbon monoxide alarm within 10 feet of every bedroom door in homes with a fuel-burning device or an attached garage (listed to UL-2034)",
+   "Central station / low voltage fire alarm systems must be tested and certified by the alarm company on an NFPA form; the Bureau will not test them",
+   "Owner or authorized agent must be present at the inspection",
+   "Portable fire extinguisher (still mentioned on the Borough's zoning supplement form, although state law dropped it from the sale certificate in February 2025)"
+  ],
+  "authorities": [
+   {
+    "name": "Carlstadt Fire Department, Bureau of Fire Safety",
+    "type": "municipal_fire_bureau",
+    "area_served": "Entire municipality",
+    "lead_time": "Payment and application must be received before the inspection is scheduled. Certificates are e-mailed at the time of inspection.",
+    "fees": [
+     {
+      "label": "Smoke detector and carbon monoxide alarm compliance inspection (application fee, non-refundable)",
+      "amount": "$75.00",
+      "quote": "$75.00 APPLICATION FEE NON-REFUNDABLE",
+      "source_url": "https://www.carlstadtnj.us/_Content/pdf/forms/Residential-fire-safety-certificate.pdf",
+      "verified": true
+     }
+    ],
+    "how_to_apply": "Complete the Application For Smoke Detector & Carbon Monoxide Alarm Compliance Inspection and submit it with the $75.00 fee (cash, check or money order payable to Borough of Carlstadt) to the Bureau of Fire Safety, 500 Madison Street. The inspection is scheduled after payment is received. Certificates are valid for six months and are not transferable.",
+    "application_url": "https://www.carlstadtnj.us/_Content/pdf/forms/Residential-fire-safety-certificate.pdf",
+    "department_url": "https://www.carlstadtnj.us/departments/fire-department",
+    "phone": "(201) 460-3942",
+    "email": "firesafety@carlstadtnj.us",
+    "contact_name": "Anthony M. Silleto III",
+    "contact_title": "Fire Official",
+    "evidence": [
+     {
+      "url": "https://www.carlstadtnj.us/_Content/pdf/forms/Residential-fire-safety-certificate.pdf",
+      "quote": "the owner shall obtain a Certificate of Smoke Detector & Carbon Monoxide Alarm Compliance, evidencing compliance with NJAC 5:70-4.19 from the Carlstadt Fire Department Bureau of Fire Safety.",
+      "doc_date": "",
+      "via": "pdf",
+      "verified": true
+     },
+     {
+      "url": "https://www.carlstadtnj.us/_Content/pdf/forms/Residential-fire-safety-certificate.pdf",
+      "quote": "Any certificates issued are valid for six (6) months and are non-transferable.",
+      "doc_date": "",
+      "via": "pdf",
+      "verified": true
+     },
+     {
+      "url": "https://www.carlstadtnj.us/_Content/pdf/forms/Residential-fire-safety-certificate.pdf",
+      "quote": "All certificates will be E-Mailed at time of inspection",
+      "doc_date": "",
+      "via": "pdf",
+      "verified": true
+     },
+     {
+      "url": "https://www.carlstadtnj.us/_Content/pdf/forms/Residential-fire-safety-certificate.pdf",
+      "quote": "PAYMENT & APPLICATION MUST BE RECEIVED PRIOR TO SCHEDULING INSPECTION",
+      "doc_date": "",
+      "via": "pdf",
+      "verified": true
+     },
+     {
+      "url": "https://www.carlstadtnj.us/_Content/pdf/forms/Residential-fire-safety-certificate.pdf",
+      "quote": "$75.00 APPLICATION FEE NON-REFUNDABLE",
+      "doc_date": "",
+      "via": "pdf",
+      "verified": true
+     },
+     {
+      "url": "https://www.carlstadtnj.us/_Content/pdf/forms/Residential-fire-safety-certificate.pdf",
+      "quote": "Fire Official Anthony M. Silleto III",
+      "doc_date": "",
+      "via": "pdf",
+      "verified": true
+     },
+     {
+      "url": "https://ecode360.com/27116944",
+      "quote": "Smoke Detector and Carbon Monoxide Inspection Certificate: $75.",
+      "doc_date": "2026-10-04 (page fetched)",
+      "via": "page",
+      "verified": null
+     },
+     {
+      "url": "https://www.carlstadtnj.us/_Content/pdf/forms/Commercial-Residential-Zoning-Compliance.pdf",
+      "quote": "New Jersey State Fire Codes require that all residential units be inspected for compliance with Smoke Detector, Carbon Monoxide Alarm, and Fire Extinguisher laws.",
+      "doc_date": "v.2025",
+      "via": "pdf",
+      "verified": true
+     },
+     {
+      "url": "https://nj.gov/dca/dfs/pdf/ANNUAL%20REGISTRY/THIRD%20QUARTER%20LEA%20REGISTRY%202026.pdf",
+      "quote": "F Carlstadt Borough",
+      "doc_date": "2026-07",
+      "via": "pdf",
+      "verified": true
+     },
+     {
+      "url": "https://www.nj.gov/dca/dfs/pdf/fire%20directory_county%20summary/fire_code_enforcement_director.pdf",
+      "quote": "Carlstadt Borough 0205 LEAID: 0205-001 Enf Auth. Fire Dept Fire Official Anthony M Silleto III Phone (201) 460-3942 Email firesafety@carlstadtnj.us",
+      "doc_date": "5/18/2026 (survey date)",
+      "via": "state_directory",
+      "verified": null
+     }
+    ],
+    "confidence": "high"
+   }
+  ],
+  "notes": "The Carlstadt Fire Department Bureau of Fire Safety issues the smoke/CO certificate for one- and two-family resales for a flat $75.00 non-refundable fee (also set in Borough Code 4-7.3, amended by Ord. 22-14). No tiered late fee is published. The Bureau's own application does not list a fire extinguisher, but the Zoning Department's residential supplement still mentions fire extinguisher laws; the state dropped the extinguisher from the sale certificate in February 2025 (P.L.2025, c.19). The NJ DCA LEA registry lists the Carlstadt Fire Department as the enforcing agency, and the state fire directory (survey 5/18/2026) matches the Fire Official and contact shown on the form. The form lists www.carlstadtfd.org/firesafety as a web address; it was not checked."
+ },
+ "other_items": [
+  {
+   "label": "Lead dust wipe test (pre-1978, confirm)",
+   "detail": "The residential supplement to the zoning compliance application asks for a lead dust wipe test by a licensed lead evaluation contractor for dwellings built before 1978. The section is written around the state lead-safe rental law, so confirm whether the Zoning Office requires it for an owner-occupied sale.",
+   "source_url": "https://www.carlstadtnj.us/_Content/pdf/forms/Commercial-Residential-Zoning-Compliance.pdf"
+  }
+ ],
+ "open_questions": [
+  "Does the Zoning Office require the pre-1978 lead wipe test for an owner-occupied (non-rental) sale, or only for rentals?",
+  "How long is the Certificate of Zoning & Property Maintenance Compliance valid, and how many days ahead of closing should it be requested?",
+  "Is there any late or expedited fee for the smoke/CO certificate, and does the Bureau still check for a fire extinguisher?"
+ ],
+ "verification": {
+  "fees": 4,
+  "fee_ok": 3,
+  "fee_bad": 0,
+  "fee_unchecked": 1,
+  "quotes": 19,
+  "q_ok": 14,
+  "q_bad": 0,
+  "q_unchecked": 5
+ }
+}

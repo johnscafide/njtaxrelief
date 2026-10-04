@@ -1,0 +1,198 @@
+{
+ "municipality_code": "0230",
+ "municipality": "Little Ferry Borough",
+ "county": "BERGEN",
+ "checked_at": "2026-10-04",
+ "resale_co": {
+  "status": "required",
+  "name": "Certificate of Resale (Certificate of Continued Occupancy / CCO)",
+  "issued_by": "Borough of Little Ferry Building Department (Construction Official)",
+  "lead_time": "",
+  "valid_for": "",
+  "requirements": [
+   "Inspection of the unit by the Building Department; nobody may occupy the home before Building Department approval",
+   "All open building permits must be closed, and all taxes, penalties and fees due to the Borough must be paid; the Tax Office signs off that taxes are current",
+   "Buyer signs a notarized Certificate in Lieu of Oath stating the number of dwelling units (no illegal units; basement may not be used as a dwelling or sleeping area; short-term rentals prohibited)",
+   "Owner (not the realtor) signs the Smoke/CO Detectors, Fire Door and Fire Extinguisher Affidavit",
+   "Smoke detectors as required for the year built, on every level and near sleeping areas; detectors over 10 years old replaced; battery-only units must be 10-year sealed",
+   "Carbon monoxide detectors within 10 feet of sleeping areas, on every level, outside any room with a fuel-burning appliance and near an attached garage entrance; CO detectors over 5 years old replaced unless the manufacturer allows longer",
+   "ABC fire extinguisher rated at least 2A:10B:C within 10 feet of the kitchen, top no more than 5 feet above the floor (form still lists it)",
+   "Buyer fills out the Police Department emergency contact form",
+   "Construction Official certifies whether there are open permits"
+  ],
+  "fees": [
+   {
+    "label": "Certificate of Resale, per unit",
+    "amount": "$100",
+    "quote": "Submit a check payable to the Borough of Little Ferry for $100/unit for Resale, Inspections that fail are subject to additional fees.",
+    "source_url": "https://www.littleferrynj.org/filestorage/121/137/Certificate_of_Resale_-_8-21-25.pdf",
+    "verified": null
+   },
+   {
+    "label": "Resale certificate, per dwelling unit (Borough Code 13-1.6)",
+    "amount": "$100",
+    "quote": "Fee for certificate of compliance for rentals or resale certificate$100 per dwelling unit",
+    "source_url": "https://ecode360.com/34742970",
+    "verified": null
+   }
+  ],
+  "how_to_apply": "Download the Application for a Certificate of Resale from the Building Department page, fill out every page (owner affidavit, buyer's notarized Certificate in Lieu of Oath, Tax Office sign-off, Police emergency contact form) and submit it with a check for $100 per unit payable to the Borough of Little Ferry at Borough Hall, 215-217 Liberty Street (Monday to Friday 8:30am to 4:30pm). Give the name and phone of the person who will meet the inspector. Permit and inspection requests also run through the SDL Portal linked on the Building Department page.",
+  "application_url": "https://www.littleferrynj.org/filestorage/121/137/Certificate_of_Resale_-_8-21-25.pdf",
+  "department_url": "https://www.littleferrynj.org/content/121/137/default.aspx",
+  "phone": "201-641-9234 ext. 664",
+  "email": "k-dalton@littleferrynj.org",
+  "contact_name": "Keith Dalton",
+  "contact_title": "Construction Code Official (technical assistant: Bertha Sneyer, 201-641-2942, b-sneyer@littleferrynj.org)",
+  "evidence": [
+   {
+    "url": "https://www.littleferrynj.org/filestorage/121/137/Certificate_of_Resale_-_8-21-25.pdf",
+    "quote": "Application for a Certificate of RESALE Borough Ordinance No. 1605-19-23 Ordinance No.1272-04-09",
+    "doc_date": "8-21-25 (file name)",
+    "via": "pdf",
+    "verified": null
+   },
+   {
+    "url": "https://www.littleferrynj.org/filestorage/121/137/Certificate_of_Resale_-_8-21-25.pdf",
+    "quote": "No one is permitted to occupy the premises prior to approval from the Building Department.",
+    "doc_date": "8-21-25 (file name)",
+    "via": "pdf",
+    "verified": null
+   },
+   {
+    "url": "https://www.littleferrynj.org/filestorage/121/137/Certificate_of_Resale_-_8-21-25.pdf",
+    "quote": "A CCO will only be issued once all open building permits are closed; and all taxes, penalties and/or fees due to the Borough are paid.",
+    "doc_date": "8-21-25 (file name)",
+    "via": "pdf",
+    "verified": null
+   },
+   {
+    "url": "https://www.littleferrynj.org/content/121/137/default.aspx",
+    "quote": "Construction Code Official: Keith Dalton Phone:(201) 641-9234 x664",
+    "doc_date": "2026-10-04 (page fetched)",
+    "via": "page",
+    "verified": true
+   },
+   {
+    "url": "https://ecode360.com/34742970",
+    "quote": "Fee for certificate of compliance for rentals or resale certificate$100 per dwelling unit",
+    "doc_date": "",
+    "via": "page",
+    "verified": null
+   }
+  ],
+  "confidence": "high",
+  "notes": "The Borough's Certificate of Resale application (scanned PDF dated 8-21-25 in its file name, citing Ordinances 1605-19-23 and 1272-04-09) is the main source; it is an image scan, so a text check cannot read it. The ordinance text that creates the resale certificate was not found in the online code (the ecode360 code shows only the $100 fee in Section 13-1.6 and rental CCO rules in Chapter 35). No timing, lead time or validity period is published. A separate Certificate of Rental application exists for rentals; rental CCO rules are not resale requirements."
+ },
+ "fire_cert": {
+  "requirements": [
+   "Smoke detectors placed according to the year the house was built (battery 10-year sealed units allowed for pre-1977 homes; 110V interconnected units for newer homes), on each level and within 10 feet of sleeping rooms",
+   "Smoke detectors with a manufacture date over 10 years must be replaced",
+   "Carbon monoxide detectors within 10 feet of sleeping areas, on every level, outside rooms with fuel-burning appliances and near an attached garage entrance",
+   "ABC fire extinguisher rated at least 2A:10B:C within 10 feet of the kitchen (form still lists it)",
+   "Owner or building management (not the realtor) signs the Smoke/CO Detectors, Fire Door and Fire Extinguisher Affidavit"
+  ],
+  "authorities": [
+   {
+    "name": "Borough of Little Ferry Building Department (smoke/CO checked as part of the Certificate of Resale)",
+    "type": "municipal_fire_bureau",
+    "area_served": "Entire borough",
+    "lead_time": "",
+    "fees": [],
+    "how_to_apply": "The smoke, CO and extinguisher requirements and the owner affidavit are pages of the Certificate of Resale application filed with the Building Department.",
+    "application_url": "https://www.littleferrynj.org/filestorage/121/137/Certificate_of_Resale_-_8-21-25.pdf",
+    "department_url": "https://www.littleferrynj.org/content/121/137/default.aspx",
+    "phone": "201-641-9234 ext. 664",
+    "email": "k-dalton@littleferrynj.org",
+    "contact_name": "Keith Dalton",
+    "contact_title": "Construction Code Official",
+    "evidence": [
+     {
+      "url": "https://www.littleferrynj.org/filestorage/121/137/Certificate_of_Resale_-_8-21-25.pdf",
+      "quote": "Smoke/Carbon Dioxide (CO) Detectors / Fire Door / Fire Extinguisher Requirements",
+      "doc_date": "8-21-25 (file name)",
+      "via": "pdf",
+      "verified": null
+     },
+     {
+      "url": "https://www.littleferrynj.org/filestorage/121/137/Certificate_of_Resale_-_8-21-25.pdf",
+      "quote": "Note: This form must be completed by the OWNER or BUILDING MANAGEMENT. Realtors are prohibited from filling out this form.",
+      "doc_date": "8-21-25 (file name)",
+      "via": "pdf",
+      "verified": null
+     }
+    ],
+    "confidence": "medium"
+   },
+   {
+    "name": "NJ Division of Fire Safety (listed in the NJ DCA directory as the smoke detector compliance office for Little Ferry)",
+    "type": "state",
+    "area_served": "Entire borough (per state directory)",
+    "lead_time": "",
+    "fees": [],
+    "how_to_apply": "Call the number listed in the state directory, (609) 633-6132, to confirm whether a state-issued certificate is needed in addition to the Borough's resale inspection.",
+    "application_url": "",
+    "department_url": "https://www.nj.gov/dca/dfs/",
+    "phone": "609-633-6132",
+    "email": "",
+    "contact_name": "",
+    "contact_title": "",
+    "evidence": [
+     {
+      "url": "https://www.nj.gov/dca/dfs/pdf/fire%20directory_county%20summary/fire_code_enforcement_director.pdf",
+      "quote": "LEAID: 0230-001 Little Ferry Boro SMOKE DETECTOR COMPLIANCE Name: NJ Division Fire Safety Enf Auth. Municipal Addr: PO Box 809 Trenton NJ 08625-0809 Fire Official William R Holley Phone (609) 633-6132",
+      "doc_date": "survey date 2/27/2026",
+      "via": "state_directory",
+      "verified": null
+     },
+     {
+      "url": "https://nj.gov/dca/dfs/pdf/ANNUAL%20REGISTRY/THIRD%20QUARTER%20LEA%20REGISTRY%202026.pdf",
+      "quote": "M Little Ferry Borough",
+      "doc_date": "2026-07",
+      "via": "pdf",
+      "verified": true
+     }
+    ],
+    "confidence": "low"
+   }
+  ],
+  "notes": "Little Ferry's code (Section 20-1) makes the Fire Department's Bureau of Fire Prevention the local fire code agency, but it does not cover owner-occupied 1-2 family homes, and no Borough page offers a separate smoke/CO certificate application. The Borough's resale application includes the smoke/CO/extinguisher checklist and owner affidavit. The NJ DCA fire directory (survey 2/27/2026) lists the local fire official as William R Holley, (201) 641-9234, wrhdpw1@gmail.com, but names the NJ Division of Fire Safety as the smoke detector compliance office, which conflicts with the Borough form. The Borough form still lists a fire extinguisher; the state dropped it from the sale certificate in February 2025 (P.L.2025, c.19)."
+ },
+ "other_items": [
+  {
+   "label": "Taxes and Borough fees current",
+   "detail": "The Tax Office must sign that taxes are current, and all taxes, penalties and fees due to the Borough must be paid before the CCO is issued.",
+   "source_url": "https://www.littleferrynj.org/filestorage/121/137/Certificate_of_Resale_-_8-21-25.pdf"
+  },
+  {
+   "label": "Open permits",
+   "detail": "The Construction Official certifies whether there are open permits; all must be closed before the CCO is issued.",
+   "source_url": "https://www.littleferrynj.org/filestorage/121/137/Certificate_of_Resale_-_8-21-25.pdf"
+  },
+  {
+   "label": "Buyer's Certificate in Lieu of Oath (unit count)",
+   "detail": "The buyer signs a notarized statement of how many dwelling units the house has, agreeing not to rent part of a single-family home or convert it without telling the Construction Department.",
+   "source_url": "https://www.littleferrynj.org/filestorage/121/137/Certificate_of_Resale_-_8-21-25.pdf"
+  },
+  {
+   "label": "Police emergency contact form",
+   "detail": "The buyer fills out the Police Department emergency contact form included in the resale packet.",
+   "source_url": "https://www.littleferrynj.org/filestorage/121/137/Certificate_of_Resale_-_8-21-25.pdf"
+  }
+ ],
+ "open_questions": [
+  "Does the NJ Division of Fire Safety issue a separate smoke/CO certificate for Little Ferry sales, or does the Borough's resale inspection cover it?",
+  "How far ahead of closing should the resale application be filed, and how long is the certificate valid?",
+  "What is the reinspection fee after a failed inspection?",
+  "Does Little Ferry still require the fire extinguisher after P.L.2025, c.19?"
+ ],
+ "verification": {
+  "fees": 2,
+  "fee_ok": 0,
+  "fee_bad": 0,
+  "fee_unchecked": 2,
+  "quotes": 9,
+  "q_ok": 2,
+  "q_bad": 0,
+  "q_unchecked": 7
+ }
+}

@@ -1,0 +1,221 @@
+{
+ "municipality_code": "0235",
+ "municipality": "Midland Park Borough",
+ "county": "BERGEN",
+ "resale_co": {
+  "status": "required",
+  "name": "Resale Certificate (Certificate of Continued Occupancy, Residential)",
+  "issued_by": "Borough of Midland Park Building Department (Construction/Zoning Official)",
+  "lead_time": "The application must be submitted at least 20 days before the closing date. The Construction/Zoning Official calls the seller to schedule the inspection.",
+  "valid_for": "The Resale Certificate expires ninety (90) days from issuance (Ordinance #10-16).",
+  "requirements": [
+   "All construction permits closed out before the inspection",
+   "Legible house numbers clearly visible from the street",
+   "Sump pumps not piped into the sanitary sewer and discharged properly",
+   "Boilers, hot water heaters and water softeners installed with required permits",
+   "Front door dead bolts keyless on the interior side",
+   "Damaged or uneven public sidewalks and aprons must be replaced (permit required)",
+   "Smoke Detector Certificate of Compliance applied for at the same time"
+  ],
+  "fees": [
+   {
+    "label": "Resale certificate, single-family home",
+    "amount": "$100",
+    "quote": "The fee is $100 for a single-family home or $150 for a two-family home.",
+    "source_url": "https://www.midlandparknj.gov/1559/Selling-Your-House",
+    "verified": true
+   },
+   {
+    "label": "Resale certificate, two-family home",
+    "amount": "$150",
+    "quote": "The fee is $100 for a single-family home or $150 for a two-family home.",
+    "source_url": "https://www.midlandparknj.gov/1559/Selling-Your-House",
+    "verified": true
+   },
+   {
+    "label": "Resale certificate re-inspection, if needed",
+    "amount": "$50.00",
+    "quote": "re-inspection will take place, if needed, for a $50.00 fee.",
+    "source_url": "https://www.midlandparknj.org/sites/g/files/vyhlif896/f/pages/building_dept_cco_new.pdf",
+    "verified": true
+   }
+  ],
+  "how_to_apply": "Fill out the Application for a Resale Certificate and the Smoke Detector Certificate of Compliance application (on the Selling Your House page or at the Borough Hall front desk) and submit both at least 20 days before closing. Payments can be combined in one check to the Borough of Midland Park. Mail the forms and payment or drop them in the \"Tax Payments\" mailbox at 280 Godwin Avenue marked \"Attn: Resale Processing\". The Zoning and Fire Prevention inspectors then call to schedule.",
+  "application_url": "https://www.midlandparknj.gov/DocumentCenter/View/494/Application---Resale-Certificate",
+  "department_url": "https://www.midlandparknj.gov/1559/Selling-Your-House",
+  "phone": "201-445-5720",
+  "email": "lkrantz@midlandparknj.gov",
+  "contact_name": "",
+  "contact_title": "",
+  "evidence": [
+   {
+    "url": "https://www.midlandparknj.gov/1559/Selling-Your-House",
+    "quote": "When selling your home in Midland Park, you will need to complete both the Application for a Resale Certificate and the Application for Smoke Detector Certificate of Compliance.",
+    "doc_date": "2026-10-04 (page fetched)",
+    "via": "page",
+    "verified": true
+   },
+   {
+    "url": "https://www.midlandparknj.gov/1559/Selling-Your-House",
+    "quote": "Both applications MUST be submitted AT LEAST 20 DAYS PRIOR to the closing date.",
+    "doc_date": "2026-10-04 (page fetched)",
+    "via": "page",
+    "verified": true
+   },
+   {
+    "url": "https://www.midlandparknj.gov/1559/Selling-Your-House",
+    "quote": "If you have questions about this process, you can call the Borough at 201-445-5720",
+    "doc_date": "2026-10-04 (page fetched)",
+    "via": "page",
+    "verified": true
+   },
+   {
+    "url": "https://www.midlandparknj.org/sites/g/files/vyhlif896/f/pages/building_dept_cco_new.pdf",
+    "quote": "A Certificate of Occupancy shall expire ninety (90) days from issuance",
+    "doc_date": "CCO Form (2/13/23)",
+    "via": "pdf",
+    "verified": true
+   },
+   {
+    "url": "https://www.midlandparknj.org/sites/g/files/vyhlif896/f/pages/building_dept_cco_new.pdf",
+    "quote": "Public sidewalks & aprons will be required to be replaced if damaged or uneven (permit required).",
+    "doc_date": "CCO Form (2/13/23)",
+    "via": "pdf",
+    "verified": true
+   },
+   {
+    "url": "https://www.midlandparknj.org/sites/g/files/vyhlif896/f/pages/building_dept_cco_new.pdf",
+    "quote": "Building Department: 201-445-5720 ext. 8279",
+    "doc_date": "CCO Form (2/13/23)",
+    "via": "pdf",
+    "verified": true
+   },
+   {
+    "url": "https://www.midlandparknj.gov/DocumentCenter/View/494/Application---Resale-Certificate",
+    "quote": "A Resale Certificate shall expire ninety (90) days from issuance - Ordinance #10-16",
+    "doc_date": "CCO Form (7/31/24)",
+    "via": "pdf",
+    "verified": null
+   }
+  ],
+  "confidence": "high",
+  "notes": "The current Resale Certificate application (CCO Form 7/31/24) is a scanned image PDF, so automated text checks will not find its wording; it was read visually and matches the older text version of the form (CCO Form 2/13/23) on the old midlandparknj.org site, including the $100 / $150 fees, the $50.00 re-inspection fee and the 90-day expiry. The form cites General Ordinance #10-6.2b; the ordinance text was not read. Cancelling a resale or smoke alarm inspection gives only a 50% refund, if approved by the governing body. The resale contact email (lkrantz@midlandparknj.gov) is an obfuscated mailto link on the Selling Your House page. Rental smoke detector certificates (change of tenancy) are a rental item."
+ },
+ "fire_cert": {
+  "requirements": [
+   "Smoke detectors on every level, including the basement",
+   "Smoke and carbon monoxide detectors within 10 feet of all sleeping areas",
+   "All detectors in working order",
+   "Smoke detectors UL approved with a 10-year sealed battery"
+  ],
+  "authorities": [
+   {
+    "name": "Midland Park Fire Prevention Bureau (Borough of Midland Park)",
+    "type": "municipal_fire_bureau",
+    "area_served": "Entire borough",
+    "lead_time": "Submit at least 20 days before closing together with the resale application; the Fire Prevention inspector calls to schedule. The certificate expires six (6) months after issuance.",
+    "fees": [
+     {
+      "label": "Smoke Detector Certificate of Compliance",
+      "amount": "$50",
+      "quote": "Smoke Detector Certificate of Compliance Fee $50",
+      "source_url": "https://www.midlandparknj.gov/1559/Selling-Your-House",
+      "verified": true
+     },
+     {
+      "label": "Smoke detector re-inspection, if needed",
+      "amount": "$25",
+      "quote": "If needed, a re-inspection will be performed for $25",
+      "source_url": "https://www.midlandparknj.gov/DocumentCenter/View/493/Smoke-Detector-Application",
+      "verified": true
+     }
+    ],
+    "how_to_apply": "Submit the Application for Smoke Detector Certificate of Compliance with the $50 fee (check to the Borough of Midland Park, can be combined with the resale fee) by mail or in the \"Tax Payments\" mailbox at Borough Hall, 280 Godwin Avenue, marked \"Attn: Resale Processing\".",
+    "application_url": "https://www.midlandparknj.gov/DocumentCenter/View/493/Smoke-Detector-Application",
+    "department_url": "https://www.midlandparknj.gov/1559/Selling-Your-House",
+    "phone": "201-445-2044",
+    "email": "ddemott@midlandparknj.gov",
+    "contact_name": "Darryl Demott",
+    "contact_title": "Fire Official (NJ DCA fire directory)",
+    "evidence": [
+     {
+      "url": "https://www.midlandparknj.gov/DocumentCenter/View/493/Smoke-Detector-Application",
+      "quote": "A Certificate of Compliance will expire six (6) months after issuance",
+      "doc_date": "Smoke Detector Form (04/10/25)",
+      "via": "pdf",
+      "verified": true
+     },
+     {
+      "url": "https://www.midlandparknj.gov/DocumentCenter/View/493/Smoke-Detector-Application",
+      "quote": "All Smoke Detectors must be UL approved and have a 10 year sealed battery",
+      "doc_date": "Smoke Detector Form (04/10/25)",
+      "via": "pdf",
+      "verified": true
+     },
+     {
+      "url": "https://www.midlandparknj.gov/DocumentCenter/View/493/Smoke-Detector-Application",
+      "quote": "Smoke detectors and Carbon Monoxide detectors are located within 10 feet of all sleeping areas",
+      "doc_date": "Smoke Detector Form (04/10/25)",
+      "via": "pdf",
+      "verified": true
+     },
+     {
+      "url": "https://www.midlandparknj.gov/1559/Selling-Your-House",
+      "quote": "Once the applications and associated fees are submitted, both inspectors (Zoning and Fire Prevention) will contact you to schedule their inspections.",
+      "doc_date": "2026-10-04 (page fetched)",
+      "via": "page",
+      "verified": true
+     },
+     {
+      "url": "https://www.nj.gov/dca/dfs/pdf/fire%20directory_county%20summary/fire_code_enforcement_director.pdf",
+      "quote": "LEAID: 0235-001 Midland Park Boro SMOKE DETECTOR COMPLIANCE Name: Midland Park Boro Fire Prev Enf Auth. Municipal Addr: 280 Godwin Av Fire Official Darryl Demott Phone (201) 445-2044 Email ddemott@midlandparknj.gov",
+      "doc_date": "survey date 2/19/2026",
+      "via": "state_directory",
+      "verified": null
+     },
+     {
+      "url": "https://nj.gov/dca/dfs/pdf/ANNUAL%20REGISTRY/THIRD%20QUARTER%20LEA%20REGISTRY%202026.pdf",
+      "quote": "M Midland Park Borough",
+      "doc_date": "2026-07",
+      "via": "pdf",
+      "verified": true
+     }
+    ],
+    "confidence": "high"
+   }
+  ],
+  "notes": "The April 2025 smoke detector form does not list a fire extinguisher, in line with P.L.2025, c.19. No short-notice fee tiers are published; the fee is a flat $50. The Borough page lists the Fire Official in a professionals list (search result shows phone 551-600-8291), but that page could not be fetched; the phone and email used here are from the NJ DCA fire directory."
+ },
+ "other_items": [
+  {
+   "label": "Sidewalks and aprons",
+   "detail": "Damaged or uneven public sidewalks and driveway aprons must be replaced (permit required) as part of the resale inspection.",
+   "source_url": "https://www.midlandparknj.org/sites/g/files/vyhlif896/f/pages/building_dept_cco_new.pdf"
+  },
+  {
+   "label": "Sump pump discharge",
+   "detail": "Sump pumps may not be piped into the sanitary sewer and must discharge properly.",
+   "source_url": "https://www.midlandparknj.org/sites/g/files/vyhlif896/f/pages/building_dept_cco_new.pdf"
+  },
+  {
+   "label": "Open permits and equipment permits",
+   "detail": "All construction permits must be closed, and boilers, water heaters and water softeners must have had the required permits.",
+   "source_url": "https://www.midlandparknj.org/sites/g/files/vyhlif896/f/pages/building_dept_cco_new.pdf"
+  }
+ ],
+ "open_questions": [
+  "Is there a rush fee or a way to get inspections inside the 20-day window?",
+  "What is the best direct number for the Fire Prevention Bureau (201-445-2044 per the state directory, or 551-600-8291 per a Borough page in search results)?"
+ ],
+ "checked_at": "2026-10-04",
+ "verification": {
+  "fees": 5,
+  "fee_ok": 5,
+  "fee_bad": 0,
+  "fee_unchecked": 0,
+  "quotes": 13,
+  "q_ok": 11,
+  "q_bad": 0,
+  "q_unchecked": 2
+ }
+}

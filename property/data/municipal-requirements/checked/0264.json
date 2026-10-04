@@ -1,0 +1,252 @@
+{
+ "municipality_code": "0264",
+ "municipality": "Waldwick Borough",
+ "county": "BERGEN",
+ "resale_co": {
+  "status": "required",
+  "name": "Certificate of Compliance (COC), Home Re-Sale or Rental",
+  "issued_by": "Borough of Waldwick Building Department (Construction Department)",
+  "lead_time": "Fee depends on how soon the inspection is needed (more than 14 days out is cheapest). The FAQ suggests applying 2 to 3 weeks before closing. Inspections by appointment, Monday to Friday 10 AM to 12 PM (FAQ). Certificate issued on site at the inspection.",
+  "valid_for": "Six (6) months or until another change in occupancy, whichever comes first",
+  "requirements": [
+   "Handrails on steps of four risers or more",
+   "Sump pump connections removed from sewer piping",
+   "All open permits closed; newly installed furnace, water heater, roof, siding, finished basement, electrical or plumbing work must have had permits",
+   "Sidewalks in good condition",
+   "Garages converted without permit or approval must be returned to usable garage (written proof required)",
+   "Smoke alarms on each floor and CO alarm within 10 feet of sleeping areas; the department witnesses the owner's test of all smoke detectors",
+   "Portable fire extinguisher within 10 feet of the kitchen (Building page and FAQ still list it)",
+   "Final water meter reading and final water bill before closing"
+  ],
+  "fees": [
+   {
+    "label": "COC inspection, more than 14 days out",
+    "amount": "$55.00",
+    "quote": "More than fourteen (14) days: $55.00",
+    "source_url": "https://www.waldwicknj.gov/media/departments/building/COC%20Inspections.pdf",
+    "verified": true
+   },
+   {
+    "label": "COC inspection within 14 days (11 to 14 days)",
+    "amount": "$75.00",
+    "quote": "Within fourteen (14) days: $75.00",
+    "source_url": "https://www.waldwicknj.gov/media/departments/building/COC%20Inspections.pdf",
+    "verified": true
+   },
+   {
+    "label": "COC inspection within 10 days (4 to 10 days)",
+    "amount": "$150.00",
+    "quote": "Within ten (10) days: $150.00",
+    "source_url": "https://www.waldwicknj.gov/media/departments/building/COC%20Inspections.pdf",
+    "verified": true
+   },
+   {
+    "label": "COC inspection within 3 days",
+    "amount": "$200.00",
+    "quote": "Within three (3) days: $200.00",
+    "source_url": "https://www.waldwicknj.gov/media/departments/building/COC%20Inspections.pdf",
+    "verified": true
+   },
+   {
+    "label": "Reinspection after a failure or a no-show",
+    "amount": "$15.00",
+    "quote": "A Re-inspection fee of $15.00 will apply to COC Failure and no show appointments.",
+    "source_url": "https://www.waldwicknj.gov/media/departments/building/COC%20Inspections.pdf",
+    "verified": true
+   }
+  ],
+  "how_to_apply": "Fill out the Certificate of Compliance Home Re-Sale or Rental Application (page 2 of the COC Inspections PDF on the Building page) and pay by check (no cash) at the Building Department, 63 Franklin Turnpike. Call (201) 652-5300 x240 for the final water bill.",
+  "application_url": "https://www.waldwicknj.gov/media/departments/building/COC%20Inspections.pdf",
+  "department_url": "https://www.waldwicknj.gov/departments/Building",
+  "phone": "201-652-5300 ext:233",
+  "email": "jmysliwiec@waldwicknj.gov",
+  "contact_name": "Joseph G. Mysliwiec",
+  "contact_title": "Construction Official, Zoning Official (Technical Assistant: Nancy Koch, ext:232, nkoch@waldwicknj.gov)",
+  "evidence": [
+   {
+    "url": "https://www.waldwicknj.gov/departments/Building",
+    "quote": "State law requires an inspection of the smoke alarm(s), carbon monoxide alarm(s) and portable fire extinguisher(s) before the sale, transfer or rental of residential property can occur",
+    "doc_date": "2026-10-04 (page fetched)",
+    "via": "page",
+    "verified": true
+   },
+   {
+    "url": "https://www.waldwicknj.gov/media/departments/building/COC%20Inspections.pdf",
+    "quote": "Certificates are issued on site at the time of inspection and are valid for six (6) months or until another change in occupancy occurs, whichever comes first.",
+    "doc_date": "",
+    "via": "pdf",
+    "verified": true
+   },
+   {
+    "url": "https://www.waldwicknj.gov/media/departments/building/COC%20Inspections.pdf",
+    "quote": "HOME RE-SALE OR RENTAL APPLICATION",
+    "doc_date": "",
+    "via": "pdf",
+    "verified": true
+   },
+   {
+    "url": "https://www.waldwicknj.gov/media/departments/building/COC%20Inspections.pdf",
+    "quote": "Sump pump connections are to be removed from sewer piping.",
+    "doc_date": "",
+    "via": "pdf",
+    "verified": true
+   },
+   {
+    "url": "https://www.waldwicknj.gov/media/departments/building/COC%20Inspections.pdf",
+    "quote": "COC inspections within 3 days, $200.00, 4-10 days: $150.00, 11-14 days $75.00",
+    "doc_date": "",
+    "via": "pdf",
+    "verified": true
+   },
+   {
+    "url": "https://www.waldwicknj.gov/departments/Building/BuildingFAQs",
+    "quote": "We recommend that the homeowner (or agent) visit the Building Department 2-3 weeks before the closing date to apply for a COC.",
+    "doc_date": "2026-10-04 (page fetched)",
+    "via": "page",
+    "verified": true
+   },
+   {
+    "url": "https://www.waldwicknj.gov/departments/Building",
+    "quote": "Construction Official, Zoning Official",
+    "doc_date": "2026-10-04 (page fetched)",
+    "via": "page",
+    "verified": true
+   }
+  ],
+  "confidence": "high",
+  "notes": "Waldwick runs one Certificate of Compliance through the Building Department that covers the state smoke/CO certificate plus local items (handrails, sump pumps, open permits, sidewalks, garage conversions). The Building FAQ still says the fee is $50, which is older than the $55.00 base fee on the current COC form. The Borough code section for this certificate was not checked."
+ },
+ "fire_cert": {
+  "requirements": [
+   "Smoke alarms on each floor; 10-year sealed battery single station alarms (ANSI/UL 217) where battery alarms are used; AC alarms from original construction or rehabilitation may not be replaced with battery alarms",
+   "CO alarm within 10 feet of sleeping areas",
+   "Portable fire extinguisher (Building page and FAQ still list it; FAQ says within 10 feet of the kitchen)",
+   "Owner or representative performs the test of every smoke detector while the department watches"
+  ],
+  "authorities": [
+   {
+    "name": "Borough of Waldwick Building Department (Certificate of Compliance); Waldwick Fire Prevention Bureau is the fire code agency",
+    "type": "municipal_fire_bureau",
+    "area_served": "Entire borough",
+    "lead_time": "More than 14 days out for the lowest fee. Certificate issued on site, valid six months.",
+    "fees": [
+     {
+      "label": "COC inspection, more than 14 days out",
+      "amount": "$55.00",
+      "quote": "More than fourteen (14) days: $55.00",
+      "source_url": "https://www.waldwicknj.gov/media/departments/building/COC%20Inspections.pdf",
+      "verified": true
+     },
+     {
+      "label": "COC inspection within 14 days (11 to 14 days)",
+      "amount": "$75.00",
+      "quote": "Within fourteen (14) days: $75.00",
+      "source_url": "https://www.waldwicknj.gov/media/departments/building/COC%20Inspections.pdf",
+      "verified": true
+     },
+     {
+      "label": "COC inspection within 10 days (4 to 10 days)",
+      "amount": "$150.00",
+      "quote": "Within ten (10) days: $150.00",
+      "source_url": "https://www.waldwicknj.gov/media/departments/building/COC%20Inspections.pdf",
+      "verified": true
+     },
+     {
+      "label": "COC inspection within 3 days",
+      "amount": "$200.00",
+      "quote": "Within three (3) days: $200.00",
+      "source_url": "https://www.waldwicknj.gov/media/departments/building/COC%20Inspections.pdf",
+      "verified": true
+     },
+     {
+      "label": "Reinspection after a failure or a no-show",
+      "amount": "$15.00",
+      "quote": "A Re-inspection fee of $15.00 will apply to COC Failure and no show appointments.",
+      "source_url": "https://www.waldwicknj.gov/media/departments/building/COC%20Inspections.pdf",
+      "verified": true
+     }
+    ],
+    "how_to_apply": "Smoke and CO alarms are checked in the Building Department's COC inspection; use the COC application and pay by check. Owner or representative must test all detectors while the inspector watches. Have the alarm specifications and installation instructions on hand.",
+    "application_url": "https://www.waldwicknj.gov/media/departments/building/COC%20Inspections.pdf",
+    "department_url": "https://www.waldwicknj.gov/departments/Building",
+    "phone": "201-652-5300",
+    "email": "",
+    "contact_name": "",
+    "contact_title": "Building Department; Fire Official James O'Connell (201-652-5300 x249) leads the Fire Prevention Bureau",
+    "evidence": [
+     {
+      "url": "https://www.waldwicknj.gov/media/departments/building/COC%20Inspections.pdf",
+      "quote": "State law requires and inspection of the smoke alarm(s) and carbon monoxide alarm(s) before the sale, transfer or rental of residential property can occur",
+      "doc_date": "",
+      "via": "pdf",
+      "verified": true
+     },
+     {
+      "url": "https://www.waldwicknj.gov/media/departments/building/COC%20Inspections.pdf",
+      "quote": "This Department is required to witness the test of all smoke detectors within the home.",
+      "doc_date": "",
+      "via": "pdf",
+      "verified": true
+     },
+     {
+      "url": "https://www.waldwicknj.gov/media/departments/building/Fire_Prevention_Bureau.pdf",
+      "quote": "James O'Connell, Fire Official",
+      "doc_date": "",
+      "via": "pdf",
+      "verified": true
+     },
+     {
+      "url": "https://www.waldwicknj.gov/media/departments/building/Fire_Prevention_Bureau.pdf",
+      "quote": "other than those structures which are owner occupied one-and two-family dwellings.",
+      "doc_date": "",
+      "via": "pdf",
+      "verified": true
+     },
+     {
+      "url": "https://www.nj.gov/dca/dfs/pdf/fire%20directory_county%20summary/fire_code_enforcement_director.pdf",
+      "quote": "LEAID: 0264-001 Waldwick Boro ... SMOKE DETECTOR COMPLIANCE Name: Waldwick Boro Bldg Dept Addr: 63 Franklin Tpk ... Fire Official Jim O'Connell Phone (201) 652-5300 ... Email joconnell@waldwicknj.gov",
+      "doc_date": "2026-04-10 (survey date)",
+      "via": "state_directory",
+      "verified": null
+     },
+     {
+      "url": "https://nj.gov/dca/dfs/pdf/ANNUAL%20REGISTRY/THIRD%20QUARTER%20LEA%20REGISTRY%202026.pdf",
+      "quote": "F Waldwick Borough",
+      "doc_date": "2026-07",
+      "via": "pdf",
+      "verified": true
+     }
+    ],
+    "confidence": "high"
+   }
+  ],
+  "notes": "The state directory lists the Waldwick Building Department as the smoke detector compliance office, and the COC form is the Building Department's. The Fire Prevention Bureau sheet gives joconnell@waldwicknj.org; the state directory gives joconnell@waldwicknj.gov. The Building page and FAQ still mention a portable fire extinguisher, which state law (P.L.2025, c.19) removed from the sale certificate in February 2025; confirm with the department."
+ },
+ "other_items": [
+  {
+   "label": "Final water reading",
+   "detail": "Final water meter reading is due before closing; call (201) 652-5300 x240 for the final water bill.",
+   "source_url": "https://www.waldwicknj.gov/media/departments/building/COC%20Inspections.pdf"
+  },
+  {
+   "label": "Sidewalks and sump pump",
+   "detail": "Sidewalks must be in good condition and sump pump connections must be removed from sewer piping before the COC is issued.",
+   "source_url": "https://www.waldwicknj.gov/media/departments/building/COC%20Inspections.pdf"
+  }
+ ],
+ "open_questions": [
+  "Does Waldwick still require the portable fire extinguisher after P.L.2025, c.19?",
+  "Which fee applies for an inspection exactly 4 to 10 days out versus 11 to 14 days (the form lists both \"within\" and day-range wording)?"
+ ],
+ "checked_at": "2026-10-04",
+ "verification": {
+  "fees": 10,
+  "fee_ok": 10,
+  "fee_bad": 0,
+  "fee_unchecked": 0,
+  "quotes": 13,
+  "q_ok": 12,
+  "q_bad": 0,
+  "q_unchecked": 1
+ }
+}
