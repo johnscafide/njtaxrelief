@@ -46,11 +46,12 @@
   var AD_RUNTIME_URL = '/property/js/watchdog-ad-pixels.js';
   var CSS_URL = '/property/css/watchdog-consent.css';
   var CONTACT_POLICY_URL = '/property/js/contact-routing-policy.js';
-  /* Temporary: the cookie banner is hidden on the ANCHOR/PAS-1 application pages so it
-     doesn't cover the start of the application. To bring it back, set this to [].
+  /* The cookie banner is hidden on the ANCHOR/PAS-1 application pages (so it doesn't cover
+     the start of the application) and on the free CO lookup (/co and its town pages).
+     A prefix ending in "/" also matches the path without it (/co/ covers /co).
      Hiding the banner never turns optional cookies on: they stay off until the visitor
      chooses, and Cookie settings in the footer still works. */
-  var HIDE_BANNER_PATHS = ['/anchor/application'];
+  var HIDE_BANNER_PATHS = ['/anchor/application', '/co/'];
   var stored = readStored();
   var lastFocus = null;
   var analyticsLoadQueued = false;
@@ -266,7 +267,7 @@
   }
   function bannerHiddenHere(){
     var path=String(location.pathname||'').replace(/^\/property(?=\/)/,'');
-    return HIDE_BANNER_PATHS.some(function(prefix){return path===prefix||path.indexOf(prefix)===0;});
+    return HIDE_BANNER_PATHS.some(function(prefix){return path===prefix||path===prefix.replace(/\/$/,'')||path.indexOf(prefix)===0;});
   }
   function ensureBanner(){
     if(bannerHiddenHere() || !needsChoice() || document.getElementById('wd-cookie-banner')) return;
