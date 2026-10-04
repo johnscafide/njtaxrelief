@@ -42,7 +42,7 @@ function installWelcome(){
   var callout=q('.wd-callout.neutral',welcome),readiness=q('#wd-readiness-copy');
   if(callout&&readiness){callout.classList.add('wd-readiness-callout');callout.replaceChildren.apply(callout,Array.from(readiness.childNodes).map(function(node){return node.cloneNode(true);}));}
   var start=q('[data-next]',welcome);
-  function syncStart(){if(!start)return;var boxes=qa('[data-readiness]',welcome);start.disabled=!boxes.length||boxes.some(function(box){return!box.checked;});}
+  function syncStart(){if(!start)return;var boxes=qa('[data-readiness]',welcome);boxes.forEach(function(box){var row=box.closest('label');if(row)row.classList.toggle('is-checked',box.checked);});var done=!!boxes.length&&!boxes.some(function(box){return!box.checked;});start.disabled=!done;var note=q('[data-readiness-required]',welcome);if(note){note.classList.toggle('is-done',done);note.textContent=done?'All 4 boxes are checked. You\'re ready to start.':'ALL 4 boxes below must be checked before you can start your application.';}}
   welcome.addEventListener('change',function(ev){if(ev.target.matches('[data-readiness]'))syncStart();});
   syncStart();
   var trust=qa('.wd-app-rail-trust > div');
@@ -132,7 +132,7 @@ function installPreview(){
 }
 function installReviewEmphasis(){var checkbox=q('#wd-review-confirm');if(!checkbox)return;var row=checkbox.closest('.wd-check-row');if(row)row.classList.add('wd-review-confirm-row');}
 function installCompletionLinks(){syncPropertyCta();form.addEventListener('input',syncPropertyCta,true);form.addEventListener('change',syncPropertyCta,true);new MutationObserver(syncPropertyCta).observe(form,{subtree:true,attributes:true,attributeFilter:['class']});}
-function loadStyles(){if(q('link[data-anchor-enhancements]'))return;var link=document.createElement('link');link.rel='stylesheet';link.href='/property/css/anchor-application-2025-enhancements.css';link.dataset.anchorEnhancements='1';document.head.appendChild(link);}
+function loadStyles(){if(q('link[data-anchor-enhancements]'))return;var link=document.createElement('link');link.rel='stylesheet';link.href='/property/css/anchor-application-2025-enhancements.css?v=20261004a';link.dataset.anchorEnhancements='1';document.head.appendChild(link);}
 async function loadPartial(){var response=await fetch('/property/partials/anchor-application-2025-enhancements.html',{credentials:'same-origin'});if(!response.ok)throw new Error('Anchor application enhancement partial unavailable.');var host=document.createElement('div');host.hidden=true;host.dataset.anchorEnhancementHost='1';host.innerHTML=await response.text();document.body.appendChild(host);}
 function loadEstimateBridge(){if(q('script[data-anchor-estimate-bridge]'))return;var script=document.createElement('script');script.src='/property/js/anchor-application-estimate-bridge.js';script.async=false;script.dataset.anchorEstimateBridge='1';document.body.appendChild(script);}
 function loadGrowth(){if(q('script[data-anchor-growth]'))return;var script=document.createElement('script');script.src='/property/js/anchor-application-2025-growth.js';script.async=false;script.dataset.anchorGrowth='1';document.body.appendChild(script);}
