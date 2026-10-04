@@ -28,8 +28,7 @@
   try { if (w.top !== w.self) return; } catch (_) { return; }
 
   var CSS_HREF = '/property/css/watchdog-easter-eggs.css?v=20261004a';
-  var SPRITE = '/property/assets/beagle/watchdog-beagle-frames.webp';
-  var STORY = "Hi There. I see you are checking the code. I'm sure you have reasons for such. Curiosity would be my guess. \n\nMy name is John. I've been building sites since I was 10. I was gifted ecommerce website software on floppy disks\nand fell in love with web developement ever since. I learned to code HTML using just notepad. I took computer science\nclasses (BASIC and Visual Basic in high school). Took a few college classes learning C++, Python, Ruby and Javascript.\nMy very first websites was with Angelfire and Geocities. In college I dabbed in game development, small tools, and\ngraphic design. Database management with SQL by my sophmore year. Joomla and other CMS tools learned by the age of 20. \nI have an understanding and experience writing code by hand, studing and analyzing bugs, issues, and corrections. \nThe introduction of AI is interesting. I can understand the worry and fear. I also see the memes of \"Hey I can make \nyour job obsolete\" then show a localhost:3000. haha. But I do believe, if you understand how to use the tools, it's\nno different than templates, hiring a local kid, outsourcing your work to fivrr or an agency. I code, I understand the\nbackend and frontend. I'm not an expert by all means. But I do have insights. Watchdog was built on real research.\nWatchdog & it's companion, NJPropertyTaxRelief.com, is from years of listening to real people with real needs in NJ.\nI hope these sites and tools have benefit to you and/or your business. If you found them useful, the least I ask of\nyou is to share. Sure, I have paid plan options for members, but majority of the site is free to use. I'm a real estate\nagent, licensed tax professional, and a big fan of the state of New Jersey. It's a great state, but not without its\nflaws. The idea is to educate more New Jerseyians about their benefits and property taxes in the state. It's possible\none day this site will exceed some of the bigger natonal sites. Who knows. But for now, I present to you, Watchdog\nProperty Intelligence.";
+  var PARTIAL_URL = '/property/partials/watchdog-easter-eggs.html?v=20261004a';
   var BEAGLE = [
     '                               ___',
     '                            .-\'   \'-.',
@@ -43,7 +42,6 @@
     '            |  |        |   |',
     '            |__|        |___|'
   ].join('\n');
-  var TREAT_SVG = '<svg viewBox="0 0 64 30" focusable="false" aria-hidden="true"><defs><linearGradient id="wd-egg-treat-fill" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#f1d09b"/><stop offset=".55" stop-color="#dba862"/><stop offset="1" stop-color="#b5783a"/></linearGradient></defs><path fill="url(#wd-egg-treat-fill)" stroke="#8a531f" stroke-width="1.1" stroke-linejoin="round" d="M12.5 4.2c3.2 0 5.3 2 5.9 4.4h27.2c.6-2.4 2.7-4.4 5.9-4.4 3.8 0 6.5 2.7 6.5 5.6 0 1.6-.8 2.9-1.9 3.8 1.2 1 1.9 2.4 1.9 4 0 3.2-2.8 5.9-6.5 5.9-3.3 0-5.4-2.1-5.9-4.6H18.4c-.5 2.5-2.6 4.6-5.9 4.6C8.8 23.5 6 20.8 6 17.6c0-1.6.7-3 1.9-4C6.8 12.7 6 11.4 6 9.8c0-2.9 2.7-5.6 6.5-5.6Z"/><path fill="#fff4dc" opacity=".6" d="M12.3 6.1c-2.3.1-4 1.7-4 3.4 0 .5.1.9.4 1.3.6-1.9 2.4-3.3 4.9-3.4 1.2 0 2.2.3 3 .8-.8-1.3-2.4-2.2-4.3-2.1Zm8 4.4h23.4c-.9.6-2 .9-3.4.9H23.7c-1.4 0-2.5-.3-3.4-.9Z"/><g fill="#7d4617" opacity=".55"><circle cx="24" cy="15.4" r=".9"/><circle cx="30.5" cy="17.2" r=".8"/><circle cx="36.5" cy="14.9" r=".9"/><circle cx="42" cy="17.4" r=".7"/><circle cx="12.2" cy="16.8" r=".8"/><circle cx="51.6" cy="11.2" r=".8"/></g></svg>';
 
   function reducedMotion() {
     return !!(w.matchMedia && w.matchMedia('(prefers-reduced-motion: reduce)').matches);
@@ -71,6 +69,21 @@
     (d.head || d.documentElement).appendChild(link);
   }
 
+  var partial = null;
+  function parts() {
+    if (!partial) {
+      partial = w.fetch(PARTIAL_URL, { credentials: 'same-origin' })
+        .then(function (r) { if (!r.ok) throw new Error('partial'); return r.text(); })
+        .then(function (text) { return new DOMParser().parseFromString(text, 'text/html'); })
+        .catch(function (error) { partial = null; throw error; });
+    }
+    return partial;
+  }
+  function part(doc, id) {
+    var tpl = doc.getElementById(id);
+    return tpl ? d.importNode(tpl.content, true) : null;
+  }
+
   function greet() {
     if (!w.console || typeof w.console.log !== 'function') return;
     var mono = 'font-family:Menlo,Consolas,monospace;font-size:12px;line-height:1.25;color:#8a531f';
@@ -87,9 +100,14 @@
   var api = w.watchdog && typeof w.watchdog === 'object' ? w.watchdog : {};
   api.disk2 = function () {
     console.log('%cReading Disk 2 of 3...', 'font:600 13px/1.6 Menlo,Consolas,monospace;color:#0b6e6e');
-    console.log('%c' + STORY, 'font:500 13px/1.6 Inter,system-ui,sans-serif;color:#16140f');
-    console.log('%cInsert Disk 3 of 3 to finish setup...  type  watchdog.disk3()', 'font:600 13px/1.6 Menlo,Consolas,monospace;color:#0b6e6e');
-    return 'Disk 2 of 3 OK';
+    parts().then(function (doc) {
+      var story = part(doc, 'wd-egg-story');
+      console.log('%c' + (story ? story.textContent.trim() : ''), 'font:500 13px/1.6 Inter,system-ui,sans-serif;color:#16140f');
+      console.log('%cInsert Disk 3 of 3 to finish setup...  type  watchdog.disk3()', 'font:600 13px/1.6 Menlo,Consolas,monospace;color:#0b6e6e');
+    }, function () {
+      console.log('%cDisk 2 of 3 could not be read. Try again in a moment.', 'font:600 13px/1.6 Menlo,Consolas,monospace;color:#8a531f');
+    });
+    return 'Reading Disk 2 of 3...';
   };
   api.disk3 = function () {
     console.log('%cSetup complete. Watchdog Property Intelligence has been installed.\nIf it helped you, the least you can do is share it. Press any key to continue.', 'font:600 13px/1.6 Menlo,Consolas,monospace;color:#0b6e6e');
@@ -104,10 +122,15 @@
     if (chasing || !d.body) return;
     chasing = true;
     loadCss();
-    var stage = d.createElement('div');
-    stage.className = 'wd-egg-chase';
-    stage.setAttribute('aria-hidden', 'true');
-    stage.innerHTML = '<span class="wd-egg-treat">' + TREAT_SVG + '</span><span class="wd-egg-dog" data-frame="a"><span class="wd-egg-shadow"></span><span class="wd-egg-sprite"></span></span><span class="wd-egg-bubble">Good girl.</span>';
+    parts().then(function (doc) {
+      var frag = part(doc, 'wd-egg-chase');
+      var stage = frag && frag.querySelector('.wd-egg-chase');
+      if (!stage || !d.body) { chasing = false; return; }
+      play(stage);
+    }, function () { chasing = false; });
+  }
+
+  function play(stage) {
     d.body.appendChild(stage);
     var dog = stage.querySelector('.wd-egg-dog');
     var treat = stage.querySelector('.wd-egg-treat');
@@ -278,23 +301,27 @@
     if (old) return;
     var visits = parseInt(read('localStorage', 'watchdog:1999-visits') || '0', 10) + 1;
     write('localStorage', 'watchdog:1999-visits', String(visits));
-    var digits = ('000000' + visits).slice(-6).split('').map(function (n) { return '<b>' + n + '</b>'; }).join('');
     var here = w.location.pathname.replace(/\/+$/, '') || '/';
     var i = WEBRING.indexOf(here);
     var prev = WEBRING[(i < 0 ? 0 : i - 1 + WEBRING.length) % WEBRING.length];
     var next = WEBRING[(i < 0 ? 1 : i + 1) % WEBRING.length];
-    var box = d.createElement('div');
-    box.id = 'wd-1999';
-    box.innerHTML =
-      '<div class="wd-1999-top"><div class="wd-1999-marquee"><span>~*~ Welcome to Watchdog&#39;s Home Page!!! ~*~ Best viewed in Netscape Navigator 4.0 at 800x600 ~*~ Built by hand in New Jersey ~*~ You are now surfing the World Wide Web ~*~</span></div></div>' +
-      '<div class="wd-1999-construction" role="note"><span class="wd-1999-tape"></span><strong>UNDER CONSTRUCTION</strong><span class="wd-1999-tape"></span></div>' +
-      '<div class="wd-1999-bar">' +
-        '<span class="wd-1999-counter" aria-label="You have visited ' + visits + ' times in 1999 mode">Visitor counter: ' + digits + '</span>' +
-        '<span class="wd-1999-ring"><a href="' + prev + '">&laquo; Prev</a> | NJ Property Webring | <a href="' + next + '">Next &raquo;</a></span>' +
-        '<button type="button" class="wd-1999-exit">Back to 2026</button>' +
-      '</div>';
-    d.body.appendChild(box);
-    box.querySelector('.wd-1999-exit').addEventListener('click', function () { setRetro(false); });
+    parts().then(function (doc) {
+      if (d.getElementById('wd-1999') || !root.classList.contains('wd-1999')) return;
+      var frag = part(doc, 'wd-egg-1999');
+      var box = frag && frag.querySelector('#wd-1999');
+      if (!box || !d.body) return;
+      var digitBox = box.querySelector('.wd-1999-digits');
+      ('000000' + visits).slice(-6).split('').forEach(function (n) {
+        var b = d.createElement('b');
+        b.textContent = n;
+        digitBox.appendChild(b);
+      });
+      box.querySelector('.wd-1999-counter').setAttribute('aria-label', 'You have visited ' + visits + ' times in 1999 mode');
+      box.querySelector('.wd-1999-prev').setAttribute('href', prev);
+      box.querySelector('.wd-1999-next').setAttribute('href', next);
+      d.body.appendChild(box);
+      box.querySelector('.wd-1999-exit').addEventListener('click', function () { setRetro(false); });
+    }, function () {});
   }
 
   function start() {
