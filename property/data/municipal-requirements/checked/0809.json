@@ -2,7 +2,7 @@
  "municipality_code": "0809",
  "municipality": "Logan Township",
  "county": "GLOUCESTER",
- "checked_at": "2026-09-30",
+ "checked_at": "2026-10-04",
  "resale_co": {
   "status": "required",
   "name": "Certificate of Occupancy for change of occupancy / change of ownership (Change of Owner/Occupancy Inspection)",
@@ -10,9 +10,38 @@
   "lead_time": "",
   "valid_for": "",
   "requirements": [],
-  "fees": [],
-  "how_to_apply": "Apply to the Construction Official on the township's form. Change of Owner/Occupancy inspections are reported to be held Monday to Thursday, 12:00 pm to 2:00 pm. Call the Construction Department to confirm the current form and fee.",
-  "application_url": "",
+  "fees": [
+   {
+    "label": "Initial inspection",
+    "amount": "$75",
+    "quote": "TYPE: Initial Inspection $75.00 Less Than 48 Hour Inspection $150.00 Re-Inspection $50.00 TCO Inspection $30.00",
+    "source_url": "https://uvkvaxljhhngydvlrzom.supabase.co/storage/v1/object/public/town-info-evidence/0809/622ccd21-2fe0-471c-a95e-3dce149525df/Change-Of-Owner-Occupancy-Application-2024.pdf",
+    "verified": true
+   },
+   {
+    "label": "Inspection with less than 48 hours notice",
+    "amount": "$150",
+    "quote": "TYPE: Initial Inspection $75.00 Less Than 48 Hour Inspection $150.00 Re-Inspection $50.00 TCO Inspection $30.00",
+    "source_url": "https://uvkvaxljhhngydvlrzom.supabase.co/storage/v1/object/public/town-info-evidence/0809/622ccd21-2fe0-471c-a95e-3dce149525df/Change-Of-Owner-Occupancy-Application-2024.pdf",
+    "verified": true
+   },
+   {
+    "label": "Re-inspection",
+    "amount": "$50",
+    "quote": "TYPE: Initial Inspection $75.00 Less Than 48 Hour Inspection $150.00 Re-Inspection $50.00 TCO Inspection $30.00",
+    "source_url": "https://uvkvaxljhhngydvlrzom.supabase.co/storage/v1/object/public/town-info-evidence/0809/622ccd21-2fe0-471c-a95e-3dce149525df/Change-Of-Owner-Occupancy-Application-2024.pdf",
+    "verified": true
+   },
+   {
+    "label": "Temporary CO (TCO) inspection",
+    "amount": "$30",
+    "quote": "TYPE: Initial Inspection $75.00 Less Than 48 Hour Inspection $150.00 Re-Inspection $50.00 TCO Inspection $30.00",
+    "source_url": "https://uvkvaxljhhngydvlrzom.supabase.co/storage/v1/object/public/town-info-evidence/0809/622ccd21-2fe0-471c-a95e-3dce149525df/Change-Of-Owner-Occupancy-Application-2024.pdf",
+    "verified": true
+   }
+  ],
+  "how_to_apply": "Fill out the township's Change of Owner/Occupancy Inspection Application (Chapter 119-2, rev. 04/24) and send it to the Construction Department with the fee. Checks are payable to Logan Township. Book at least 48 hours ahead to avoid the $150 rush fee. Change of Owner/Occupancy inspections are reported to be held Monday to Thursday, 12:00 pm to 2:00 pm.",
+  "application_url": "https://uvkvaxljhhngydvlrzom.supabase.co/storage/v1/object/public/town-info-evidence/0809/622ccd21-2fe0-471c-a95e-3dce149525df/Change-Of-Owner-Occupancy-Application-2024.pdf",
   "department_url": "https://www.logan-twp.org/departments/construction-and-code-enforcement/",
   "phone": "856-467-3424 ext. 5",
   "email": "",
@@ -37,10 +66,17 @@
     "doc_date": "",
     "via": "search_snippet",
     "verified": null
+   },
+   {
+    "url": "https://uvkvaxljhhngydvlrzom.supabase.co/storage/v1/object/public/town-info-evidence/0809/622ccd21-2fe0-471c-a95e-3dce149525df/Change-Of-Owner-Occupancy-Application-2024.pdf",
+    "quote": "Township of Logan (COO) Change of Owner/Occupancy Inspection Application (Chapter 119-2) PO Box 314; 125 Main St., Bridgeport NJ 08014 (856) 467-3424 Please make checks payable to Logan Township (rev. 04/24)",
+    "doc_date": "2024-04 (form rev. 04/24)",
+    "via": "document",
+    "verified": true
    }
   ],
   "confidence": "low",
-  "notes": "The township website (logan-twp.org) is behind a bot check (captcha) for both curl and the fetch tool, and ecode360 cannot be opened. All three evidence quotes above were seen only as text inside search-tool results, not on the pages themselves, so the exact wording must be re-verified before quoting to clients. Search results for the department page also listed: Construction Official and Municipal Housing Inspector Ron Snyder; Code Enforcement Andre Butler, ext. 3030; fax 856-467-9260; municipal complex at 125 Main Street, Bridgeport, NJ 08014."
+  "notes": "The township website (logan-twp.org) is behind a bot check (captcha) for both curl and the fetch tool, and ecode360 cannot be opened. All three evidence quotes above were seen only as text inside search-tool results, not on the pages themselves, so the exact wording must be re-verified before quoting to clients. Search results for the department page also listed: Construction Official and Municipal Housing Inspector Ron Snyder; Code Enforcement Andre Butler, ext. 3030; fax 856-467-9260; municipal complex at 125 Main Street, Bridgeport, NJ 08014. Fees added 2026-10-04 from the township's own Change of Owner/Occupancy application form (rev. 04/24), sent in by a real estate agent through the town info form and approved in the back office; the fee line and header were read directly from the PDF."
  },
  "fire_cert": {
   "requirements": [],
