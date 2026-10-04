@@ -5,8 +5,8 @@ body{padding-bottom:88px}
 .wd-readiness-list label.is-checked{border-color:#3aa76d;background:#effaf3}
 .wd-readiness-list label:focus-within{outline:3px solid rgba(8,127,130,.35);outline-offset:2px}
 .wd-readiness-list input{width:22px;height:22px;margin-top:1px;accent-color:#087f82;flex:0 0 auto}
-.wd-readiness-required{margin:0 0 12px;padding:10px 12px;border-left:4px solid #c81e1e;border-radius:6px;background:#fdecec;color:#b91c1c;font:700 14px/1.4 "Plus Jakarta Sans",sans-serif}
-.wd-readiness-required.is-done{border-left-color:#3aa76d;background:#effaf3;color:#1f7a4a}
+.wd-readiness-required{margin:0 0 12px;padding:10px 12px;border-radius:6px;background:#fdecec;color:#b91c1c;font:700 14px/1.4 "Plus Jakarta Sans",sans-serif}
+.wd-readiness-required.is-done{background:#effaf3;color:#1f7a4a}
 @media(prefers-reduced-motion:reduce){.wd-readiness-list label{transition:none}}
 .wd-readiness-list span{display:grid;gap:2px}
 .wd-readiness-list b{font:700 14px/1.3 "Plus Jakarta Sans",sans-serif;color:#10294b}
