@@ -1,0 +1,220 @@
+{
+ "municipality_code": "1919",
+ "municipality": "Stanhope Borough",
+ "county": "SUSSEX",
+ "resale_co": {
+  "status": "required",
+  "name": "Certificate of Habitability (resale inspection)",
+  "issued_by": "Borough of Stanhope Construction Department (Housing Officer under Code Chapter 95)",
+  "lead_time": "The Code says the inspection is made no more than 20 days after the application is received. Inspections are by appointment on Wednesday evenings (5 to 7 pm) and Saturday mornings (9 am to 12 noon).",
+  "valid_for": "",
+  "requirements": [
+   "Certificate of Habitability inspection before closing; no new owner may occupy until it is issued",
+   "Smoke detector on each floor, including the basement",
+   "At least one carbon monoxide detector outside a bedroom",
+   "ABC type fire extinguisher no larger than 10 lbs within 10 feet of the kitchen area (form still lists it)",
+   "All partitions put up by the current or a past owner must be removed before the certificate is issued",
+   "Condominiums must provide a copy of the listing showing the number of bedrooms",
+   "Application lists property location, block and lot, number of bedrooms, owner, agent, buyer's name and address, and tentative closing date"
+  ],
+  "fees": [
+   {
+    "label": "Certificate of Habitability resale inspection (each resale)",
+    "amount": "$125.00",
+    "quote": "The cost for the inspections is $125.00 (Checks made payable to Stanhope Borough.)",
+    "source_url": "https://stanhopenj.gov/departments-and-services/municipal-departments/construction-department/",
+    "verified": true
+   },
+   {
+    "label": "Certificate of habitability, resale (Code Chapter 82 fee schedule)",
+    "amount": "$125",
+    "quote": "Certificate of habitability, resale $125",
+    "source_url": "https://ecode360.com/10120324",
+    "verified": null
+   }
+  ],
+  "how_to_apply": "Download the Resale Inspection Application (Application for Certificate of Habitability, Resale) from the Construction Department page, fill it in and return it with a $125.00 check payable to Borough of Stanhope to the Construction Department, 77 Main Street, Stanhope, NJ 07874. The office then schedules the inspection (Wednesday evenings or Saturday mornings).",
+  "application_url": "https://stanhopenj.gov/wp-content/uploads/2022/07/Resale-Smoke-Cert.pdf",
+  "department_url": "https://stanhopenj.gov/departments-and-services/municipal-departments/construction-department/",
+  "phone": "973-347-0159 ext. 20",
+  "email": "construction@stanhopenj.gov",
+  "contact_name": "Thomas Pershouse",
+  "contact_title": "Construction Official",
+  "evidence": [
+   {
+    "url": "https://stanhopenj.gov/departments-and-services/municipal-departments/construction-department/",
+    "quote": "All properties being sold must have a Certificate of Habitability Inspection conducted prior to the closing.",
+    "doc_date": "2026-10-04 (page fetched)",
+    "via": "page",
+    "verified": true
+   },
+   {
+    "url": "https://stanhopenj.gov/departments-and-services/municipal-departments/construction-department/",
+    "quote": "All condominium resale applications must include a copy of the realtors listing.",
+    "doc_date": "2026-10-04 (page fetched)",
+    "via": "page",
+    "verified": true
+   },
+   {
+    "url": "https://stanhopenj.gov/departments-and-services/municipal-departments/construction-department/",
+    "quote": "Inspections are done on Wednesday evenings and Saturday mornings by appointment.",
+    "doc_date": "2026-10-04 (page fetched)",
+    "via": "page",
+    "verified": true
+   },
+   {
+    "url": "https://stanhopenj.gov/departments-and-services/municipal-departments/construction-department/",
+    "quote": "Construction Official, Thomas Pershouse",
+    "doc_date": "2026-10-04 (page fetched)",
+    "via": "page",
+    "verified": true
+   },
+   {
+    "url": "https://stanhopenj.gov/departments-and-services/municipal-departments/construction-department/",
+    "quote": "973-347-0159 x-20",
+    "doc_date": "2026-10-04 (page fetched)",
+    "via": "page",
+    "verified": true
+   },
+   {
+    "url": "https://ecode360.com/10120475",
+    "quote": "Resale properties. No existing building or part thereof shall be occupied by a new owner or new renter until such time as a certificate of habitability shall have been issued under the terms of this chapter by the Housing Officer.",
+    "doc_date": "1989-10-31 (Ord. No. 1989-22)",
+    "via": "page",
+    "verified": null
+   },
+   {
+    "url": "https://ecode360.com/10120475",
+    "quote": "the Housing Officer or his designee shall cause an inspection to be made of the building",
+    "doc_date": "1990-10-30 (Ord. No. 1990-22)",
+    "via": "page",
+    "verified": null
+   },
+   {
+    "url": "https://stanhopenj.gov/wp-content/uploads/2022/07/Resale-Smoke-Cert.pdf",
+    "quote": "FEE: $125.00 EACH RESALE",
+    "doc_date": "2022-07 (upload date)",
+    "via": "pdf",
+    "verified": null
+   },
+   {
+    "url": "https://stanhopenj.gov/wp-content/uploads/2022/07/Resale-Smoke-Cert.pdf",
+    "quote": "ALL PARTITIONS EITHER PUT UP BY CURRENT OWNER OR PAST OWNER MUST BE REMOVED PRIOR TO CERTIFICATE BEING ISSUED.",
+    "doc_date": "2022-07 (upload date)",
+    "via": "pdf",
+    "verified": null
+   }
+  ],
+  "confidence": "high",
+  "notes": "Code Chapter 95 (Housing Standards), Section 95-9, was read through the ecode360 print view. It says the seller furnishes the certificate to the buyer, but a buyer may file a sworn statement waiving this and take on the duty to get the certificate before moving in. The Tax Search Officer is supposed to notify buyers of this rule with the tax search. A $5 penalty applies for each cancelled inspection after the first. The certificate states that unexposed structural, electrical and plumbing work was not inspected. The application PDF is a scan, so its quotes cannot be checked by script. The same inspection covers the smoke/CO check (see fire certificate). Rental properties need a separate annual Certificate of Habitability ($35) and landlord registration; those are rental-only."
+ },
+ "fire_cert": {
+  "requirements": [
+   "Smoke detector on each floor, including the basement",
+   "At least one carbon monoxide detector outside a bedroom",
+   "ABC type fire extinguisher no larger than 10 lbs within 10 feet of the kitchen area (form still lists it)"
+  ],
+  "authorities": [
+   {
+    "name": "Borough of Stanhope Construction Department (Certificate of Habitability resale inspection; fire code enforcing agency is the Sussex County Fire Marshal)",
+    "type": "municipal_building_department",
+    "area_served": "Entire borough",
+    "lead_time": "Inspections by appointment on Wednesday evenings and Saturday mornings. No rush-fee tiers are published.",
+    "fees": [
+     {
+      "label": "Certificate of Habitability resale inspection, which includes the smoke/CO/extinguisher check",
+      "amount": "$125.00",
+      "quote": "The cost for the inspections is $125.00 (Checks made payable to Stanhope Borough.)",
+      "source_url": "https://stanhopenj.gov/departments-and-services/municipal-departments/construction-department/",
+      "verified": true
+     }
+    ],
+    "how_to_apply": "Use the same Resale Inspection Application as the Certificate of Habitability; there is no separate Borough smoke certificate form. Mail or drop off at the Construction Department, 77 Main Street, with a check payable to Borough of Stanhope.",
+    "application_url": "https://stanhopenj.gov/wp-content/uploads/2022/07/Resale-Smoke-Cert.pdf",
+    "department_url": "https://stanhopenj.gov/departments-and-services/municipal-departments/construction-department/",
+    "phone": "973-347-0159 ext. 20",
+    "email": "construction@stanhopenj.gov",
+    "contact_name": "Thomas Pershouse",
+    "contact_title": "Construction Official",
+    "evidence": [
+     {
+      "url": "https://stanhopenj.gov/departments-and-services/municipal-departments/construction-department/",
+      "quote": "Click Here for the Resale Inspection Application",
+      "doc_date": "2026-10-04 (page fetched)",
+      "via": "page",
+      "verified": true
+     },
+     {
+      "url": "https://stanhopenj.gov/departments-and-services/municipal-departments/construction-department/",
+      "quote": "Where to Locate Smoke and CO Detectors",
+      "doc_date": "2026-10-04 (page fetched)",
+      "via": "page",
+      "verified": true
+     },
+     {
+      "url": "https://stanhopenj.gov/wp-content/uploads/2022/07/Resale-Smoke-Cert.pdf",
+      "quote": "SMOKE DETECTOR ON EACH FLOOR, INCLUDING BASEMENT",
+      "doc_date": "2022-07 (upload date)",
+      "via": "pdf",
+      "verified": null
+     },
+     {
+      "url": "https://stanhopenj.gov/wp-content/uploads/2022/07/Resale-Smoke-Cert.pdf",
+      "quote": "ABC TYPE FIRE EXTINGUISHER NO LARGER THAN 10LBS WITHIN 10FT OF KITCHEN AREA.",
+      "doc_date": "2022-07 (upload date)",
+      "via": "pdf",
+      "verified": null
+     },
+     {
+      "url": "https://nj.gov/dca/dfs/pdf/ANNUAL%20REGISTRY/THIRD%20QUARTER%20LEA%20REGISTRY%202026.pdf",
+      "quote": "C Stanhope Borough",
+      "doc_date": "2026-07",
+      "via": "pdf",
+      "verified": true
+     },
+     {
+      "url": "https://www.nj.gov/dca/dfs/pdf/fire%20directory_county%20summary/fire_code_enforcement_director.pdf",
+      "quote": "LEAID: 1919-001 Stanhope Boro SMOKE DETECTOR COMPLIANCE Name: Stanhope Borough Enf Auth. County Addr: 77 Main St Stanhope NJ 07874 Fire Official Mark Snook Phone (201) 347-0159",
+      "doc_date": "2026-01 (survey date 1/21/2026)",
+      "via": "state_directory",
+      "verified": null
+     },
+     {
+      "url": "https://www.nj.gov/dca/dfs/pdf/fire%20directory_county%20summary/fire_code_enforcement_director.pdf",
+      "quote": "Email msnook@sussexcountysheriff.com",
+      "doc_date": "2026-01 (survey date 1/21/2026)",
+      "via": "state_directory",
+      "verified": null
+     }
+    ],
+    "confidence": "medium"
+   }
+  ],
+  "notes": "The July 2026 LEA registry lists the County (Sussex County Fire Marshal, Mark Snook, (973) 579-0380) as Stanhope's fire code enforcing agency, but the state fire directory names Stanhope Borough at 77 Main St as the smoke detector compliance office, and the Borough's own resale Certificate of Habitability checks smoke detectors, CO detectors and the extinguisher. The directory's (201) 347-0159 number looks like a typo for the Borough's 973-347-0159. The Borough form still lists a fire extinguisher, which the state dropped from the sale certificate in February 2025 (P.L.2025, c.19). Confirm whether the Borough's certificate is accepted as the state smoke/CO certificate or whether a separate one from the County Fire Marshal is needed."
+ },
+ "other_items": [
+  {
+   "label": "Final water and sewer reading",
+   "detail": "The Water and Sewer Department posts a House Closing Data Sheet / Final Water Reading Request form for closings (Billing Clerk Tammy Minniti, 973-347-0159 ext. 10).",
+   "source_url": "https://stanhopenj.gov/departments-and-services/municipal-departments/water-and-sewer/"
+  }
+ ],
+ "open_questions": [
+  "Who is the Borough's Housing Officer that signs the Certificate of Habitability, and what is the usual wait for an inspection slot?",
+  "Does the Borough still require the fire extinguisher at resale after P.L.2025, c.19?",
+  "Is the Borough's Certificate of Habitability accepted as the state smoke/CO certificate, or must the seller also apply to the Sussex County Fire Marshal?",
+  "Is there a reinspection fee or a rush fee? None is published.",
+  "How long is the certificate valid if the closing is delayed?"
+ ],
+ "checked_at": "2026-10-04",
+ "verification": {
+  "fees": 3,
+  "fee_ok": 2,
+  "fee_bad": 0,
+  "fee_unchecked": 1,
+  "quotes": 16,
+  "q_ok": 8,
+  "q_bad": 0,
+  "q_unchecked": 8
+ }
+}

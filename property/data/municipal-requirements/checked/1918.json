@@ -1,0 +1,213 @@
+{
+ "municipality_code": "1918",
+ "municipality": "Sparta Township",
+ "county": "SUSSEX",
+ "checked_at": "2026-10-04",
+ "resale_co": {
+  "status": "not_required",
+  "name": "",
+  "issued_by": "",
+  "lead_time": "",
+  "valid_for": "",
+  "requirements": [],
+  "fees": [],
+  "how_to_apply": "No Township resale Certificate of Continued Occupancy. The Building Department's FAQ says the Township does not require a CCO on the resale of a home; only the smoke detector certification is required (see fire certificate). All building permits must be closed before the smoke certification is released.",
+  "application_url": "",
+  "department_url": "https://www.spartanj.org/190/Building",
+  "phone": "973-729-9888",
+  "email": "construction@spartanj.org",
+  "contact_name": "Michael Wallace",
+  "contact_title": "Construction Official / Electrical Subcode",
+  "evidence": [
+   {
+    "url": "https://www.spartanj.org/Faq.aspx?QID=69",
+    "quote": "We do not require a Certificate of Continued Occupancy (CCO) on the resale of a home. A Smoke Detector Certification is required and is performed by the Fire Prevention Department",
+    "doc_date": "2026-10-04 (page fetched)",
+    "via": "page",
+    "verified": null
+   },
+   {
+    "url": "https://www.spartanj.org/Faq.aspx?QID=69",
+    "quote": "No. As long as the tank is still being used and it is not leaking it may remain in place.",
+    "doc_date": "2026-10-04 (page fetched)",
+    "via": "page",
+    "verified": null
+   },
+   {
+    "url": "https://www.spartanj.org/190/Building",
+    "quote": "Construction Official / Electrical Subcode",
+    "doc_date": "2026-10-04 (page fetched)",
+    "via": "page",
+    "verified": true
+   }
+  ],
+  "confidence": "high",
+  "notes": "The Building Department FAQ answers 'Does Sparta Township require an inspection on the resale of a home?' with 'No.' The FAQ also says the Township will not make a seller remove a working, non-leaking underground oil tank, and will not make a seller bring an existing house up to current code. Building Department: 65 Main Street, Sparta, 973-729-9888, construction@spartanj.org; Construction Official Michael Wallace, 973-726-3617 (Michael.Wallace@spartanj.org, from the page's mailto link)."
+ },
+ "fire_cert": {
+  "requirements": [
+   "All construction permits must be closed with the Construction Department (Building Department approval is needed before the smoke certification is scheduled)",
+   "Smoke alarms on each level and outside each separate sleeping area; 10 year sealed battery units, and AC powered alarms from original construction may not be replaced with battery alarms",
+   "Carbon monoxide alarm in the immediate vicinity of the sleeping areas, in homes with a fuel-burning device or attached garage",
+   "Secondary power source warning label within 18 inches of the main electrical panel and electrical meter (generators, solar, battery storage)",
+   "Fire extinguisher: Hardyston's regulations say it is no longer required, but Sparta's own Smoke Certifications page still says one must be mounted in the kitchen"
+  ],
+  "authorities": [
+   {
+    "name": "Hardyston Township Fire Prevention Bureau (Sparta's fire code enforcing agency under a shared service agreement)",
+    "type": "municipal_fire_bureau",
+    "area_served": "Entire township (the Bureau also serves Byram, Hardyston, Hamburg, Sussex and Wantage)",
+    "lead_time": "Fee depends on business days before closing: more than 10 business days for the lowest fee. Inspections are good for 6 months. Sparta non-rushed inspections are Tuesdays 1PM to 3PM and Thursdays 8:30AM to 10:30AM; rushed inspections can be outside those windows. The Bureau contacts you within a few business days to schedule.",
+    "fees": [
+     {
+      "label": "Smoke/CO certificate (CSACMAPFEC), more than 10 business days before closing",
+      "amount": "$100.00",
+      "quote": "$100.00 - More than 10 business days prior to closing",
+      "source_url": "https://hardystonfireprebureaunj.tylerportico.com/payments/billsearch/miscellaneous-payments/5f651803-c7be-4f3f-beb6-41a7a004f5b1",
+      "verified": null
+     },
+     {
+      "label": "4 to 10 business days before closing",
+      "amount": "$150.00",
+      "quote": "$150.00 - 4-10 business days prior to closing",
+      "source_url": "https://hardystonfireprebureaunj.tylerportico.com/payments/billsearch/miscellaneous-payments/5f651803-c7be-4f3f-beb6-41a7a004f5b1",
+      "verified": null
+     },
+     {
+      "label": "Less than 4 business days before closing",
+      "amount": "$200.00",
+      "quote": "$200.00 - Less than 4 business days prior to closing.",
+      "source_url": "https://hardystonfireprebureaunj.tylerportico.com/payments/billsearch/miscellaneous-payments/5f651803-c7be-4f3f-beb6-41a7a004f5b1",
+      "verified": null
+     },
+     {
+      "label": "Re-inspection after a failed inspection (new request form needed)",
+      "amount": "$50.00",
+      "quote": "If the inspection fails, a new inspection request form must be completed and a re-inspection fee of $50.00 remitted.",
+      "source_url": "https://hardystonfireprebureaunj.tylerportico.com/payments/billsearch/miscellaneous-payments/5f651803-c7be-4f3f-beb6-41a7a004f5b1",
+      "verified": null
+     }
+    ],
+    "how_to_apply": "Apply and pay online with the 'Byram and Sparta - CSACMAPFEC (Residential Smoke Cert)' form on the Hardyston Fire Prevention Bureau's payment portal, linked from Hardyston's CSACMAPFEC page (owner, closing date, block and lot, listing agent, rental or for sale by owner). Paper applications can be picked up at the Hardyston Township Municipal Building Construction Office window, 149 Wheatsworth Road, Hardyston. Phone (973) 823-7020 Option 7, fireprevention@hardyston.com.",
+    "application_url": "https://hardystonfireprebureaunj.tylerportico.com/payments/billsearch/miscellaneous-payments/5f651803-c7be-4f3f-beb6-41a7a004f5b1",
+    "department_url": "https://hardyston.com/directories/fire-prevention-bureau/",
+    "phone": "(973) 823-7020 Option 7",
+    "email": "fireprevention@hardyston.com",
+    "contact_name": "Eric A. Stahl",
+    "contact_title": "Fire Marshal (Hardyston Fire Prevention Bureau), (973) 823-7020 Extension 9356, estahl@hardyston.com",
+    "evidence": [
+     {
+      "url": "https://www.spartanj.org/261/Fire-Marshal-Fire-Prevention",
+      "quote": "Sparta Township has entered into a shared service agreement with the Township of Hardyston Fire Prevention Bureau.",
+      "doc_date": "2026-10-04 (page fetched)",
+      "via": "page",
+      "verified": true
+     },
+     {
+      "url": "https://www.spartanj.org/193/Smoke-Certifications",
+      "quote": "All Building Permits must be closed in order for the smoke certification to be released before the change in occupancy.",
+      "doc_date": "2026-10-04 (page fetched)",
+      "via": "page",
+      "verified": true
+     },
+     {
+      "url": "https://www.spartanj.org/193/Smoke-Certifications",
+      "quote": "A carbon monoxide detector is required in the vicinity of the bedrooms and a fire extinguisher must be mounted in the kitchen area. For scheduling call the Fire Marshall's office at 973-729-4227.",
+      "doc_date": "2026-10-04 (page fetched)",
+      "via": "page",
+      "verified": true
+     },
+     {
+      "url": "https://hardyston.com/directories/fire-prevention-bureau/",
+      "quote": "Byram Township, Hardyston Township, Hamburg Borough, Sparta Township, Sussex Borough, Wantage Township",
+      "doc_date": "2026-10-04 (page fetched)",
+      "via": "page",
+      "verified": true
+     },
+     {
+      "url": "https://hardyston.com/directories/fire-prevention-bureau/",
+      "quote": "Fire Marshal Eric A. Stahl (973) 823-7020 Extension 9356",
+      "doc_date": "2026-10-04 (page fetched)",
+      "via": "page",
+      "verified": true
+     },
+     {
+      "url": "https://hardystonfireprebureaunj.tylerportico.com/payments/billsearch/miscellaneous-payments/5f651803-c7be-4f3f-beb6-41a7a004f5b1",
+      "quote": "Inspections are good for 6 months.",
+      "doc_date": "2026-10-04 (page fetched)",
+      "via": "page",
+      "verified": null
+     },
+     {
+      "url": "https://hardystonfireprebureaunj.tylerportico.com/payments/billsearch/miscellaneous-payments/5f651803-c7be-4f3f-beb6-41a7a004f5b1",
+      "quote": "Sparta Non-Rushed Inspections (more than 5 days) are scheduled on Tuesdays between the window of 1PM-3PM and Thursdays between the window of 8:30AM-10:30AM.",
+      "doc_date": "2026-10-04 (page fetched)",
+      "via": "page",
+      "verified": null
+     },
+     {
+      "url": "https://hardyston.com/wp-content/documents/forms/Regulations%20-%20CSACMAPFEC%20(Residential%20Smoke%20Cert).pdf",
+      "quote": "A portable fire extinguisher is no longer required for this inspection.",
+      "doc_date": "",
+      "via": "pdf",
+      "verified": true
+     },
+     {
+      "url": "https://hardyston.com/wp-content/documents/forms/Regulations%20-%20CSACMAPFEC%20(Residential%20Smoke%20Cert).pdf",
+      "quote": "All Construction permits shall be closed with the Construction Department.",
+      "doc_date": "",
+      "via": "pdf",
+      "verified": true
+     },
+     {
+      "url": "https://www.nj.gov/dca/dfs/pdf/fire%20directory_county%20summary/fire_code_enforcement_director.pdf",
+      "quote": "LEAID: 1918-001 Sparta Twp ... Name: Sparta Twp Fire Prev ... Enf Auth. Fire Dept Addr: 65 Main St Sparta NJ 07871 ... Fire Official Eric Stahl Phone (973) 503-8021 ... Phone (973) 729-4227 ... Email estahl@hardyston.com",
+      "doc_date": "2025-01 (survey date 1/29/2025)",
+      "via": "state_directory",
+      "verified": null
+     },
+     {
+      "url": "https://nj.gov/dca/dfs/pdf/ANNUAL%20REGISTRY/THIRD%20QUARTER%20LEA%20REGISTRY%202026.pdf",
+      "quote": "Hardyston Township is the LEA for Hamburg Borough, Sussex Borough, Wantage Township, Sparta & Byram",
+      "doc_date": "2026-07",
+      "via": "pdf",
+      "verified": true
+     }
+    ],
+    "confidence": "high"
+   }
+  ],
+  "notes": "Sparta's own Smoke Certifications page is out of date: it still gives the old Sparta Fire Marshal number 973-729-4227 and says a kitchen fire extinguisher is required. The Hardyston Fire Prevention Bureau, which now handles Sparta, says the extinguisher is no longer required (P.L.2025, c.19, February 2025) and takes requests through its online portal and (973) 823-7020 Option 7. The online form fees are not in a Sparta ordinance found online; the portal page is built with JavaScript, so its quotes may not machine-verify. The LEA registry lists Sparta as code M with Hardyston as its LEA."
+ },
+ "other_items": [
+  {
+   "label": "Open building permits",
+   "detail": "All building permits must be closed, and Building Department approval given, before the smoke certification is scheduled and released.",
+   "source_url": "https://www.spartanj.org/193/Smoke-Certifications"
+  },
+  {
+   "label": "Final water/sewer read (Township utility customers)",
+   "detail": "Sellers on the Township water and sewer utility submit the online 'Final Read Request - New Account Setup' form with the closing date, seller, buyer and both attorneys' contacts; the buyer emails utilities@spartanj.org for final account setup. No fee is shown on the form.",
+   "source_url": "https://www.spartanj.org/FormCenter/Water-Department-13/Final-Read-Request-New-Account-Setup-60"
+  },
+  {
+   "label": "Underground oil tank",
+   "detail": "The Township does not require removal of a working, non-leaking underground oil tank at sale; any removal is a matter between buyer and seller.",
+   "source_url": "https://www.spartanj.org/Faq.aspx?QID=69"
+  }
+ ],
+ "open_questions": [
+  "Are the Hardyston portal fees ($100 / $150 / $200, $50 re-inspection) adopted in a Sparta or Hardyston fee ordinance? None was found online.",
+  "Confirm the Sparta Smoke Certifications page's old phone number (973-729-4227) is no longer used and that no extinguisher is checked."
+ ],
+ "verification": {
+  "fees": 4,
+  "fee_ok": 0,
+  "fee_bad": 0,
+  "fee_unchecked": 4,
+  "quotes": 14,
+  "q_ok": 9,
+  "q_bad": 0,
+  "q_unchecked": 5
+ }
+}

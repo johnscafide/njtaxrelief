@@ -1,0 +1,290 @@
+{
+ "municipality_code": "1922",
+ "municipality": "Vernon Township",
+ "county": "SUSSEX",
+ "resale_co": {
+  "status": "required",
+  "name": "Residential Dwelling Re-occupancy Inspection / Re-occupancy Certificate",
+  "issued_by": "Vernon Township Department of Fire Prevention (Fire Prevention Bureau)",
+  "lead_time": "Fee tiers count business days between the Fire Prevention Bureau's receipt of the application and the closing; more than 10 business days for the lowest fee. Mailed applications count from the day the Bureau receives them. The inspection is scheduled once the completed application and fee are received.",
+  "valid_for": "",
+  "requirements": [
+   "Re-occupancy inspection before a 1 or 2 family dwelling is sold, leased or changes occupancy (Code Section 250-21)",
+   "Working smoke detectors on each level and outside each separate sleeping area; battery units must be 10-year sealed; hardwired units must be replaced with hardwired",
+   "Carbon monoxide alarms within 10 feet of a bedroom on each level",
+   "At least one portable fire extinguisher, no more than 10 lbs, labeled 2A10BC, within 10 feet of the kitchen (Township page still lists it)",
+   "Property maintenance and compliance with Township ordinances",
+   "Structure must match Tax Assessor and Building Department records; open permits must be inspected and closed",
+   "Construction Records Clearance Application filed with the Building Department",
+   "Vacant and Abandoned Residential Properties Approval Sheet signed by the Zoning Officer or the Clerk's office, for every re-occupancy request"
+  ],
+  "fees": [
+   {
+    "label": "Re-occupancy and smoke detector certificate, request received more than 10 business days before the change of occupancy",
+    "amount": "$100.00",
+    "quote": "$100.00—request received more than 10 business days prior to the change of occupancy",
+    "source_url": "https://www.vernontwp.com/index.php/services/reoccupancy-inspections",
+    "verified": true
+   },
+   {
+    "label": "Request received 5 to 10 business days before the change of occupancy",
+    "amount": "$150.00",
+    "quote": "$150.00—request received five to 10 business days prior to the change of occupancy",
+    "source_url": "https://www.vernontwp.com/index.php/services/reoccupancy-inspections",
+    "verified": true
+   },
+   {
+    "label": "Request received 4 business days or less before the change of occupancy",
+    "amount": "$200.00",
+    "quote": "$200.00—request received four business days or less prior to the change of occupancy",
+    "source_url": "https://www.vernontwp.com/index.php/services/reoccupancy-inspections",
+    "verified": true
+   },
+   {
+    "label": "Re-occupancy checklist review and inspection (Code fee quoted on the Township page)",
+    "amount": "$25",
+    "quote": "A fee of $25 per application is hereby established for the purpose of reoccupancy checklist review and inspection by Township personnel for all real property reoccupancy transactions in the Township of Vernon by sale, lease or otherwise.",
+    "source_url": "https://www.vernontwp.com/index.php/services/fire-inspections",
+    "verified": true
+   },
+   {
+    "label": "Construction Records Clearance, request more than 10 calendar days before closing",
+    "amount": "$40.00",
+    "quote": "$40.00 Requests received more than 10 calendar days from closing",
+    "source_url": "https://www.vernontwp.com/images/Construction_Records_Clearance_Form.pdf",
+    "verified": null
+   },
+   {
+    "label": "Construction Records Clearance, request within 10 calendar days of closing",
+    "amount": "$75.00",
+    "quote": "$75.00 Requests received within 10 calendar days of closing",
+    "source_url": "https://www.vernontwp.com/images/Construction_Records_Clearance_Form.pdf",
+    "verified": null
+   },
+   {
+    "label": "Construction Records Clearance, request within 4 calendar days of closing",
+    "amount": "$125.00",
+    "quote": "$125.00 Requests received within 4 calendars days of closing",
+    "source_url": "https://www.vernontwp.com/images/Construction_Records_Clearance_Form.pdf",
+    "verified": null
+   }
+  ],
+  "how_to_apply": "Fill in three forms completely: the Re-occupancy & Smoke Detector Certification Application (Fire Prevention), the Construction Records Clearance Application (Building Department) and the Vacant & Abandoned Residential Properties Approval Sheet (signed by the Zoning Officer or Clerk). Drop them off or mail them with payment to Vernon Township, 21 Church Street, Vernon, NJ 07462. Fire Prevention takes exact cash, check or money order payable to Vernon Township. An after-hours drop box is at the rear of the building by the police station (no cash). Fire Prevention then schedules the inspection.",
+  "application_url": "https://www.vernontwp.com/images/FP_Reoccup_Applic_7312026.pdf",
+  "department_url": "https://www.vernontwp.com/index.php/services/reoccupancy-inspections",
+  "phone": "973-764-4055 ext. 2272",
+  "email": "firemarshal@vernontwp.com",
+  "contact_name": "Tom VanLeuven",
+  "contact_title": "Fire Marshal (ext. 2271)",
+  "evidence": [
+   {
+    "url": "https://www.vernontwp.com/index.php/services/reoccupancy-inspections",
+    "quote": "Pursuant to §250-21 of the Vernon Township Code, before a 1- or 2-family residential dwelling is sold, leased or a change of occupancy occurs, the dwelling must be inspected.",
+    "doc_date": "2026-10-04 (page fetched)",
+    "via": "page",
+    "verified": true
+   },
+   {
+    "url": "https://www.vernontwp.com/index.php/services/reoccupancy-inspections",
+    "quote": "Inspections are carried out by the Vernon Township Fire Prevention Department.",
+    "doc_date": "2026-10-04 (page fetched)",
+    "via": "page",
+    "verified": true
+   },
+   {
+    "url": "https://www.vernontwp.com/index.php/services/reoccupancy-inspections",
+    "quote": "to ensure that the structure is consistent with tax assessor and building department records and that any open permits are inspected and closed",
+    "doc_date": "2026-10-04 (page fetched)",
+    "via": "page",
+    "verified": true
+   },
+   {
+    "url": "https://www.vernontwp.com/index.php/government/departments/fire-prevention",
+    "quote": "You need a re-occupancy certificate to close.",
+    "doc_date": "2026-10-04 (page fetched)",
+    "via": "page",
+    "verified": true
+   },
+   {
+    "url": "https://www.vernontwp.com/index.php/government/departments/fire-prevention",
+    "quote": "You will need to complete the Residential Reoccupancy Inspection Application , Construction Records Clearance Application and the Vacant & Abandoned Residential Property .",
+    "doc_date": "2026-10-04 (page fetched)",
+    "via": "page",
+    "verified": true
+   },
+   {
+    "url": "https://www.vernontwp.com/index.php/government/departments/fire-prevention",
+    "quote": "Yes the vacant and abandoned list needs to be completed and signed off by the Clerk or Zoning Officer for all re-occupancy requests",
+    "doc_date": "2026-10-04 (page fetched)",
+    "via": "page",
+    "verified": true
+   },
+   {
+    "url": "https://www.vernontwp.com/index.php/government/departments/fire-prevention",
+    "quote": "If you are mailing it in, it’s calculated from the date the Fire Prevention Bureau receives it from the Post Office",
+    "doc_date": "2026-10-04 (page fetched)",
+    "via": "page",
+    "verified": true
+   },
+   {
+    "url": "https://www.vernontwp.com/index.php/government/departments/fire-prevention",
+    "quote": "Tom VanLeuven Fire Marshal firemarshal@vernontwp.com Phone: 973.764.4055, ext. 2271",
+    "doc_date": "2026-10-04 (page fetched)",
+    "via": "page",
+    "verified": true
+   },
+   {
+    "url": "https://www.vernontwp.com/images/FP_Reoccup_Applic_7312026.pdf",
+    "quote": "VERNON TOWNSHIP RE-OCCUPANCY & SMOKE DETECTOR CERTIFICATION APPLICATION",
+    "doc_date": "2026-07-31 (PDF created)",
+    "via": "pdf",
+    "verified": null
+   },
+   {
+    "url": "https://www.vernontwp.com/images/Construction_Records_Clearance_Form.pdf",
+    "quote": "Construction Records Clearance Application – Residential",
+    "doc_date": "2026-02-26 (PDF created)",
+    "via": "pdf",
+    "verified": null
+   },
+   {
+    "url": "https://vernontwp.com/images/Vacant__Abandoned_Residential_Property.pdf",
+    "quote": "This sheet must be signed by the zoning officer or the clerk's office before scheduling a re-occupancy and smoke detector inspection.",
+    "doc_date": "",
+    "via": "pdf",
+    "verified": null
+   }
+  ],
+  "confidence": "high",
+  "notes": "Vernon combines the town re-occupancy inspection and the state smoke/CO certificate in one Fire Prevention inspection. The FAQ fee tiers are worded slightly differently from the page and form ($100 if closing is 11 or more business days from receipt, $150 for 5 to 10, $200 for 4 or less). The $25 re-occupancy checklist fee is quoted from the Code on the Fire Inspections page; it is not clear whether it is included in the $100 to $200 total shown on the form. The Construction Records Clearance tiers use calendar days, not business days. A failed or missed inspection means paying the fee again. The application PDFs are scans, so their quotes cannot be checked by script. A change of tenant also needs the long-term rental registration; rental-only. Lake community associations (for example Highland Lakes) may have their own rules; those are not Township requirements."
+ },
+ "fire_cert": {
+  "requirements": [
+   "Smoke detectors on each level of the premises and outside each separate sleeping area",
+   "Battery smoke and CO detectors must be 10-year sealed (tamper resistant); hardwired detectors must be replaced with hardwired",
+   "Carbon monoxide alarms within 10 feet of a bedroom on each level",
+   "Smoke and CO detectors in condo lofts",
+   "At least one portable fire extinguisher, no more than 10 lbs, 2A10BC label, within 10 feet of the kitchen (Township page still lists it)"
+  ],
+  "authorities": [
+   {
+    "name": "Vernon Township Department of Fire Prevention (Fire Prevention Bureau)",
+    "type": "municipal_fire_bureau",
+    "area_served": "Entire township",
+    "lead_time": "Fee depends on business days between the Bureau's receipt of the application and the change of occupancy; more than 10 business days for the lowest fee.",
+    "fees": [
+     {
+      "label": "Re-occupancy and smoke detector certificate, request received more than 10 business days before the change of occupancy",
+      "amount": "$100.00",
+      "quote": "$100.00—request received more than 10 business days prior to the change of occupancy",
+      "source_url": "https://www.vernontwp.com/index.php/services/reoccupancy-inspections",
+      "verified": true
+     },
+     {
+      "label": "Request received 5 to 10 business days before the change of occupancy",
+      "amount": "$150.00",
+      "quote": "$150.00—request received five to 10 business days prior to the change of occupancy",
+      "source_url": "https://www.vernontwp.com/index.php/services/reoccupancy-inspections",
+      "verified": true
+     },
+     {
+      "label": "Request received 4 business days or less before the change of occupancy",
+      "amount": "$200.00",
+      "quote": "$200.00—request received four business days or less prior to the change of occupancy",
+      "source_url": "https://www.vernontwp.com/index.php/services/reoccupancy-inspections",
+      "verified": true
+     }
+    ],
+    "how_to_apply": "Same combined Re-occupancy & Smoke Detector Certification Application as the re-occupancy certificate, filed with the Construction Records Clearance Application and the signed Vacant & Abandoned sheet at 21 Church Street, Vernon. Pay by exact cash, check or money order to Vernon Township.",
+    "application_url": "https://www.vernontwp.com/images/FP_Reoccup_Applic_7312026.pdf",
+    "department_url": "https://www.vernontwp.com/index.php/government/departments/fire-prevention",
+    "phone": "973-764-4055 ext. 2271",
+    "email": "firemarshal@vernontwp.com",
+    "contact_name": "Tom VanLeuven",
+    "contact_title": "Fire Marshal",
+    "evidence": [
+     {
+      "url": "https://www.vernontwp.com/index.php/government/departments/fire-prevention",
+      "quote": "conducts reoccupancy and smoke detector inspections when a home is sold, leased or a change of occupancy occurs",
+      "doc_date": "2026-10-04 (page fetched)",
+      "via": "page",
+      "verified": true
+     },
+     {
+      "url": "https://www.vernontwp.com/index.php/services/reoccupancy-inspections",
+      "quote": "Upon a successful inspection, the property owner will be issued a certificate of smoke detector and carbon monoxide alarm compliance.",
+      "doc_date": "2026-10-04 (page fetched)",
+      "via": "page",
+      "verified": true
+     },
+     {
+      "url": "https://www.vernontwp.com/index.php/services/reoccupancy-inspections",
+      "quote": "Failure to obtain this certification prior to a change of occupancy may result in a financial penalty being assessed against the seller/lessor.",
+      "doc_date": "2026-10-04 (page fetched)",
+      "via": "page",
+      "verified": true
+     },
+     {
+      "url": "https://www.vernontwp.com/index.php/government/departments/fire-prevention",
+      "quote": "It has to be a 10 year seal which is a tamper resistant battery.",
+      "doc_date": "2026-10-04 (page fetched)",
+      "via": "page",
+      "verified": true
+     },
+     {
+      "url": "https://www.vernontwp.com/index.php/services/fire-inspections",
+      "quote": "This inspection is conducted by the Vernon Township Department of Fire Prevention at the same time it conducts the requisite residential dwelling reoccupancy inspection .",
+      "doc_date": "2026-10-04 (page fetched)",
+      "via": "page",
+      "verified": true
+     },
+     {
+      "url": "https://nj.gov/dca/dfs/pdf/ANNUAL%20REGISTRY/THIRD%20QUARTER%20LEA%20REGISTRY%202026.pdf",
+      "quote": "M Vernon Township",
+      "doc_date": "2026-07",
+      "via": "pdf",
+      "verified": true
+     },
+     {
+      "url": "https://www.nj.gov/dca/dfs/pdf/fire%20directory_county%20summary/fire_code_enforcement_director.pdf",
+      "quote": "LEAID: 1922-001 Vernon Twp SMOKE DETECTOR COMPLIANCE Name: Vernon Twp Fire Prev Enf Auth. Municipal Addr: 21 Church St - Box 340 Vernon NJ 07462 Fire Official Tom VanLeuven Phone (973) 764-4055",
+      "doc_date": "2026-06 (survey date 6/4/2026)",
+      "via": "state_directory",
+      "verified": null
+     }
+    ],
+    "confidence": "high"
+   }
+  ],
+  "notes": "The Township's re-occupancy page still requires a portable fire extinguisher, which the state dropped from the sale certificate in February 2025 (P.L.2025, c.19); confirm with the Bureau. The state directory marks Tom VanLeuven as \"(temp interim)\"; the Township page lists him as Fire Marshal."
+ },
+ "other_items": [
+  {
+   "label": "Construction Records Clearance",
+   "detail": "Building Department review of permit records for the sale (asks about address display, pool, pool fence, finished basement and second kitchen). Fee $40.00 more than 10 calendar days before closing, $75.00 within 10 days, $125.00 within 4 days. Submit with payment to Vernon Building Department, 21 Church Street.",
+   "source_url": "https://www.vernontwp.com/images/Construction_Records_Clearance_Form.pdf"
+  },
+  {
+   "label": "Vacant and abandoned property sign-off",
+   "detail": "The Vacant and Abandoned Residential Properties Approval Sheet must be signed by the Zoning Officer or the Clerk's office before the re-occupancy inspection is scheduled, even if the home is not vacant.",
+   "source_url": "https://vernontwp.com/images/Vacant__Abandoned_Residential_Property.pdf"
+  }
+ ],
+ "open_questions": [
+  "Is the $25 re-occupancy checklist fee charged on top of the $100 to $200 inspection fee, or included in it?",
+  "Does the Township still require the fire extinguisher after P.L.2025, c.19?",
+  "How long is the re-occupancy certificate valid if the closing moves?",
+  "Is there a separate reinspection fee, or is the full fee paid again after a failed inspection (the FAQ says the fee is paid again)?"
+ ],
+ "checked_at": "2026-10-04",
+ "verification": {
+  "fees": 10,
+  "fee_ok": 7,
+  "fee_bad": 0,
+  "fee_unchecked": 3,
+  "quotes": 18,
+  "q_ok": 14,
+  "q_bad": 0,
+  "q_unchecked": 4
+ }
+}

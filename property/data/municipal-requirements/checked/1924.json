@@ -1,0 +1,237 @@
+{
+ "municipality_code": "1924",
+ "municipality": "Wantage Township",
+ "county": "SUSSEX",
+ "resale_co": {
+  "status": "required",
+  "name": "Continued Certificate of Habitability (resale)",
+  "issued_by": "Wantage Township (historically the zoning/code enforcement office); the current Township site sends resale smoke/CO inspections to the Hardyston Fire Prevention Bureau",
+  "lead_time": "",
+  "valid_for": "",
+  "requirements": [
+   "Visual safety inspection (older Township checklist): no work done without permits",
+   "Working smoke detectors on each level, including basement and walk-up attic; CO detector in the common area outside bedrooms",
+   "Fire extinguisher within 10 feet of the kitchen, mounted (older checklist still lists it)",
+   "Relief valve pipes on water heater and boiler within 6 inches of the floor; handrails/guardrails for more than four steps",
+   "Switch and outlet covers in place, no exposed wiring or open boxes, electric panel with no openings; GFIs working where originally installed",
+   "Sound stairs, no holes in attached garage walls or ceilings, working toilets and faucets, hot water at least 110 degrees",
+   "Proper venting of furnace/boiler and water heater, metal or UL listed foil dryer vents, bathroom ventilation",
+   "No broken windows, illegal conversions or illegal living areas; working septic and well/water",
+   "House number 4 to 8 inches high"
+  ],
+  "fees": [
+   {
+    "label": "Certificate of Habitability, resales, each dwelling unit, request at least 10 business days before change of occupancy (Township Code 21-4 fee table)",
+    "amount": "$80",
+    "quote": "If request made at least 10 business days prior to change of occupancy $80",
+    "source_url": "https://ecode360.com/36051528",
+    "verified": null
+   },
+   {
+    "label": "Request less than 10 but more than 4 business days before change of occupancy (Code)",
+    "amount": "$85",
+    "quote": "If request made less than 10 business days but more than 4 business days prior to change of occupancy $85",
+    "source_url": "https://ecode360.com/36051528",
+    "verified": null
+   },
+   {
+    "label": "Request less than 4 business days before change of occupancy (Code)",
+    "amount": "$150",
+    "quote": "If request made less than 4 business days prior to change of occupancy $150",
+    "source_url": "https://ecode360.com/36051528",
+    "verified": null
+   }
+  ],
+  "how_to_apply": "The Township's live Forms and Fire Prevention pages link only to the Hardyston Fire Prevention Bureau's online CSACMAPFEC form (Sussex and Wantage) for resales; no current Township Certificate of Habitability application is linked. Call the Zoning Office (973-875-7195, option 7) to confirm whether a separate Continued Certificate of Habitability inspection is still done.",
+  "application_url": "https://hardystonfireprebureaunj.tylerportico.com/payments/billsearch/miscellaneous-payments/2b74a8ef-9b79-48b3-9ca2-4111720084aa",
+  "department_url": "https://wantagetwp.com/departments/zoning/",
+  "phone": "973-875-7195 (option 7)",
+  "email": "andrew@wantagetwp-nj.org",
+  "contact_name": "Andrew Coccio",
+  "contact_title": "Zoning/Code Enforcer",
+  "evidence": [
+   {
+    "url": "https://wantagetwp.com/forms/ContinuedCertificateofHabitabilityVisualInspectionList.pdf",
+    "quote": "A Continued Certificate of Habitability is required on all re-sales, rentals, and/or changes or tenancy.",
+    "doc_date": "2014-08-01 (file date; no longer linked from the Forms page)",
+    "via": "pdf",
+    "verified": true
+   },
+   {
+    "url": "https://wantagetwp.com/forms/ContinuedCertificateofHabitabilityVisualInspectionList.pdf",
+    "quote": "THIS IS A VISUAL SAFETY INSPECTION AND IS IN NO WAY A HOME INSPECTION.",
+    "doc_date": "2014-08-01 (file date)",
+    "via": "pdf",
+    "verified": true
+   },
+   {
+    "url": "https://ecode360.com/36051528",
+    "quote": "Certificate of Habitability -Resales: Each Dwelling Unit:",
+    "doc_date": "amended 5-8-2025 by Ord. No. 2025-12",
+    "via": "page",
+    "verified": null
+   },
+   {
+    "url": "https://wantagetwp.com/departments/zoning/",
+    "quote": "Zoning/Code Enforcer Andrew Coccio Phone: 973-875-7195 (option #7)",
+    "doc_date": "2026-10-04 (page fetched)",
+    "via": "page",
+    "verified": true
+   }
+  ],
+  "confidence": "low",
+  "notes": "Evidence is mixed. The Township Code fee chapter (Chapter 21, read through the ecode360 print view, last amended 5-8-2025 by Ord. No. 2025-12) still lists Certificate of Habitability resale fees of $80/$85/$150, and a Township PDF checklist (file dated 2014) says a Continued Certificate of Habitability is required on all re-sales. But no Code section creating the requirement was found in Chapter 8 (Building and Housing) or the Board of Health chapters, the checklist and an old COH form are no longer linked on the live Forms page (the COH form link returns 404), and the live site sends resale smoke/CO inspections to the Hardyston Fire Prevention Bureau. Neighboring Sussex Borough has moved its resale Certificate of Habitability to Hardyston, and Wantage may have done the same. Note the Code's first fee tier ($80) is lower than the middle tier ($85) as written. Rental units need a Certificate of Registration ($80 per unit) and Board of Health septic/water certificates (Chapter BH10); those are rental-only."
+ },
+ "fire_cert": {
+  "requirements": [
+   "Smoke alarms on each level and outside each separate sleeping area (NFPA 72); hardwired interconnected alarms from construction must stay that way",
+   "10-year sealed battery smoke alarms (ANSI/UL 217); A/C powered alarms from original construction may not be replaced with battery alarms",
+   "Carbon monoxide alarms (UL 2034) in the immediate vicinity of sleeping areas where there is a fuel-burning device or attached garage",
+   "Secondary power source warning label within 18 inches of the main electrical panel and meter if the home has a permanent generator, solar panels or battery storage",
+   "All construction permits must be closed with the Construction Department",
+   "No portable fire extinguisher is required"
+  ],
+  "authorities": [
+   {
+    "name": "Hardyston Fire Prevention Bureau (shared service fire code agency for Wantage Township)",
+    "type": "municipal_fire_bureau",
+    "area_served": "Entire township",
+    "lead_time": "Fee tiers count business days before closing: more than 10 business days for the lowest fee. Wantage non-rushed inspections are Tuesdays 8 to 9 am and Thursdays 1 to 3 pm. Inspections are good for 6 months.",
+    "fees": [
+     {
+      "label": "Residential smoke/CO certificate (CSACMAPFEC), more than 10 business days before closing",
+      "amount": "$100.00",
+      "quote": "$100.00 - More than 10 business days prior to closing",
+      "source_url": "https://hardystonfireprebureaunj.tylerportico.com/payments/billsearch/miscellaneous-payments/2b74a8ef-9b79-48b3-9ca2-4111720084aa",
+      "verified": null
+     },
+     {
+      "label": "4 to 10 business days before closing",
+      "amount": "$150.00",
+      "quote": "$150.00 - 4-10 business days prior to closing",
+      "source_url": "https://hardystonfireprebureaunj.tylerportico.com/payments/billsearch/miscellaneous-payments/2b74a8ef-9b79-48b3-9ca2-4111720084aa",
+      "verified": null
+     },
+     {
+      "label": "Less than 4 business days before closing",
+      "amount": "$200.00",
+      "quote": "$200.00 - Less than 4 business days prior to closing.",
+      "source_url": "https://hardystonfireprebureaunj.tylerportico.com/payments/billsearch/miscellaneous-payments/2b74a8ef-9b79-48b3-9ca2-4111720084aa",
+      "verified": null
+     },
+     {
+      "label": "Re-inspection after a failed inspection",
+      "amount": "$50.00",
+      "quote": "a new inspection request form must be completed and a re-inspection fee of $50.00 remitted",
+      "source_url": "https://hardystonfireprebureaunj.tylerportico.com/payments/billsearch/miscellaneous-payments/2b74a8ef-9b79-48b3-9ca2-4111720084aa",
+      "verified": null
+     }
+    ],
+    "how_to_apply": "Apply and pay online through the Hardyston Fire Prevention Bureau portal (Sussex and Wantage - CSACMAPFEC form), linked from Wantage's Fire Prevention and Forms pages. A representative contacts you to schedule within a few business days. Paper applications are at the Hardyston Township Municipal Building Construction Office window, 149 Wheatsworth Road. Online payments add a processing fee.",
+    "application_url": "https://hardystonfireprebureaunj.tylerportico.com/payments/billsearch/miscellaneous-payments/2b74a8ef-9b79-48b3-9ca2-4111720084aa",
+    "department_url": "https://wantagetwp.com/departments/fireprevention/",
+    "phone": "973-823-7020 ext. 9356",
+    "email": "estahl@hardyston.com",
+    "contact_name": "Eric A. Stahl",
+    "contact_title": "Fire Marshal (Bureau line 973-823-7020 option 7, fireprevention@hardyston.com)",
+    "evidence": [
+     {
+      "url": "https://wantagetwp.com/departments/fireprevention/",
+      "quote": "Wantage Township has entered into a shared service agreement with the Township of Hardyston Fire Prevention Bureau.",
+      "doc_date": "2026-10-04 (page fetched)",
+      "via": "page",
+      "verified": true
+     },
+     {
+      "url": "https://wantagetwp.com/departments/fireprevention/",
+      "quote": "from Hardyston Fire Prevention Bureau for Wantage Township.",
+      "doc_date": "2026-10-04 (page fetched)",
+      "via": "page",
+      "verified": true
+     },
+     {
+      "url": "https://wantagetwp.com/departments/fireprevention/",
+      "quote": "Fire Marshal Eric A. Stahl Phone: 973-823-7020 ext. 9356 Email: estahl@hardyston.com",
+      "doc_date": "2026-10-04 (page fetched)",
+      "via": "page",
+      "verified": true
+     },
+     {
+      "url": "https://hardystonfireprebureaunj.tylerportico.com/payments/billsearch/miscellaneous-payments/2b74a8ef-9b79-48b3-9ca2-4111720084aa",
+      "quote": "Wantage Non-Rushed Inspections (more than 5 days) are scheduled on Tuesdays between the window of 8AM-9AM and Thursdays between the window of 1PM-3PM.",
+      "doc_date": "2026-10-04 (page fetched)",
+      "via": "page",
+      "verified": null
+     },
+     {
+      "url": "https://hardystonfireprebureaunj.tylerportico.com/payments/billsearch/miscellaneous-payments/2b74a8ef-9b79-48b3-9ca2-4111720084aa",
+      "quote": "Inspections are good for 6 months.",
+      "doc_date": "2026-10-04 (page fetched)",
+      "via": "page",
+      "verified": null
+     },
+     {
+      "url": "https://hardyston.com/wp-content/documents/forms/Regulations%20-%20CSACMAPFEC%20(Residential%20Smoke%20Cert).pdf",
+      "quote": "A portable fire extinguisher is no longer required for this inspection.",
+      "doc_date": "",
+      "via": "pdf",
+      "verified": true
+     },
+     {
+      "url": "https://hardyston.com/directories/building-and-code-enforcement/fire-prevention-bureau/",
+      "quote": "Fire Prevention Bureau (973) 823-7020 Option 7 fireprevention@hardyston.com",
+      "doc_date": "2026-10-04 (page fetched)",
+      "via": "page",
+      "verified": true
+     },
+     {
+      "url": "https://nj.gov/dca/dfs/pdf/ANNUAL%20REGISTRY/THIRD%20QUARTER%20LEA%20REGISTRY%202026.pdf",
+      "quote": "M Wantage Township",
+      "doc_date": "2026-07",
+      "via": "pdf",
+      "verified": true
+     },
+     {
+      "url": "https://nj.gov/dca/dfs/pdf/ANNUAL%20REGISTRY/THIRD%20QUARTER%20LEA%20REGISTRY%202026.pdf",
+      "quote": "Hardyston Township is the LEA for Hamburg Borough, Sussex Borough, Wantage Township, Sparta & Byram",
+      "doc_date": "2026-07",
+      "via": "pdf",
+      "verified": true
+     },
+     {
+      "url": "https://www.nj.gov/dca/dfs/pdf/fire%20directory_county%20summary/fire_code_enforcement_director.pdf",
+      "quote": "LEAID: 1924-001 Wantage Twp SMOKE DETECTOR COMPLIANCE Name: Wantage Twp Constr Enf Auth. Municipal Addr: 888 State Highway 23 Wantage NJ 07461 Fire Official Eric A Stahl Phone (973) 823-7020",
+      "doc_date": "2026-07 (survey date 7/28/2026)",
+      "via": "state_directory",
+      "verified": null
+     }
+    ],
+    "confidence": "high"
+   }
+  ],
+  "notes": "Hardyston's posted rules say a portable fire extinguisher is no longer required, in line with P.L.2025, c.19, even though the older Wantage checklist lists one. The fee and schedule text comes from Hardyston's online payment page (Tyler portal), which is built with JavaScript, so a script may not read it; the same rules also appear in Hardyston's regulations PDF. The Wantage construction office is also run by Hardyston under a shared service agreement (checks payable to Hardyston Township; construction@hardyston.com, 973-875-7195 option 6)."
+ },
+ "other_items": [
+  {
+   "label": "Open construction permits",
+   "detail": "All construction permits must be closed with the Construction Department before the smoke/CO certificate. Wantage's construction office is run by Hardyston Township under a shared service agreement (973-875-7195 option 6, construction@hardyston.com).",
+   "source_url": "https://hardyston.com/wp-content/documents/forms/Regulations%20-%20CSACMAPFEC%20(Residential%20Smoke%20Cert).pdf"
+  }
+ ],
+ "open_questions": [
+  "Does Wantage still require a separate Continued Certificate of Habitability inspection for resales, or is the Hardyston smoke/CO certificate now the only Township item?",
+  "If a Certificate of Habitability is still required, who inspects, what form is used, and are the Code fees ($80/$85/$150) still charged?",
+  "Is a septic or well certification required by the Township at sale (the Board of Health chapter covers rentals only)?"
+ ],
+ "checked_at": "2026-10-04",
+ "verification": {
+  "fees": 7,
+  "fee_ok": 0,
+  "fee_bad": 0,
+  "fee_unchecked": 7,
+  "quotes": 14,
+  "q_ok": 10,
+  "q_bad": 0,
+  "q_unchecked": 4
+ }
+}

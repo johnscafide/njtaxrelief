@@ -31,7 +31,7 @@ import re
 ROOT = pathlib.Path(__file__).resolve().parents[2]
 DATA = ROOT / "property/data/municipal-requirements"
 SKIP_LINK = re.compile(r"/MyAccount(?:/|$|\?)|/Identity/Account/|cpauthentication\.civicplus\.com|ForgotPassword|/newsflash/", re.I)
-AUTH_TYPE = {"municipal_fire_bureau": "town fire bureau", "fire_district": "fire district", "state_dca": "NJ DCA, state", "unknown": ""}
+AUTH_TYPE = {"municipal_fire_bureau": "town fire bureau", "fire_district": "fire district", "state_dca": "NJ DCA, state", "county_fire_marshal": "county fire marshal", "unknown": ""}
 DIR_AGENCY = {"District": "fire district", "Municipal": "town", "State": "NJ DCA, state", "County": "county fire marshal"}
 MIGRATIONS = ROOT / "supabase/migrations"
 MIGRATION_GLOB = "*_checked_municipal_requirements_*.sql"

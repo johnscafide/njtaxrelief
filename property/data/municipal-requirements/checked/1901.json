@@ -1,0 +1,203 @@
+{
+ "municipality_code": "1901",
+ "municipality": "Andover Borough",
+ "county": "SUSSEX",
+ "resale_co": {
+  "status": "required",
+  "name": "Certificate of occupancy (Housing Standards, Chapter 84 of the Borough Code)",
+  "issued_by": "Borough of Andover Enforcement Officer (Construction Official or Sussex County Department of Health officer, per Section 84-1)",
+  "lead_time": "",
+  "valid_for": "",
+  "requirements": [
+   "Inspection by the Enforcement Officer to confirm the dwelling meets the Borough's housing code (New Jersey State Housing Code as adopted)",
+   "Certificate states the maximum number of persons allowed to occupy the dwelling",
+   "Smoke and carbon monoxide certificate is a separate Borough requirement before a sale (see fire certificate)"
+  ],
+  "fees": [],
+  "how_to_apply": "The Borough code requires a new certificate of occupancy before a dwelling is occupied by new people, but the Borough website does not describe any resale certificate of occupancy process, form or fee. Call Code Enforcement at (973) 786-6688 ext. 4 to ask whether this is enforced on sales of 1 and 2 family homes.",
+  "application_url": "",
+  "department_url": "https://www.andoverboroughnj.org/construction-inspections",
+  "phone": "973-786-6688 ext. 4",
+  "email": "codeenforcement@andoverboroughnj.org",
+  "contact_name": "",
+  "contact_title": "Andover Borough Code Enforcement (Construction Inspections)",
+  "evidence": [
+   {
+    "url": "https://ecode360.com/8925373",
+    "quote": "No person shall occupy as owner or lease or rent to another for occupancy or permit the occupancy of any building or building unit in the Borough of Andover until a certificate of occupancy has been applied for and obtained.",
+    "doc_date": "1986-06-09 (Ord. No. 226)",
+    "via": "page",
+    "verified": null
+   },
+   {
+    "url": "https://ecode360.com/8925373",
+    "quote": "Prior to the issuance of any such certificate of occupancy, the Enforcement Officer shall inspect the building or building unit to ascertain that all requirements of this code are satisfied.",
+    "doc_date": "1986-06-09 (Ord. No. 226)",
+    "via": "page",
+    "verified": null
+   },
+   {
+    "url": "https://ecode360.com/8925373",
+    "quote": "Each certificate of occupancy shall expire and be rendered null and void upon the termination of the occupancy of the dwelling or dwelling unit by the person to whom it was issued and the members of his immediate family, and that dwelling or dwelling unit shall not again be occupied by any other persons until a new certificate of occupancy has been applied for and obtained.",
+    "doc_date": "1986-06-09 (Ord. No. 226)",
+    "via": "page",
+    "verified": null
+   },
+   {
+    "url": "https://ecode360.com/8925373",
+    "quote": "Fees payable to the Borough of Andover upon application for the issuance of a certificate of occupancy shall be those prescribed by the fee schedule of the Code of the Borough of Andover.",
+    "doc_date": "1986-06-09",
+    "via": "page",
+    "verified": null
+   },
+   {
+    "url": "https://www.andoverboroughnj.org/construction-inspections/page/smoke-detector-inspections-application-process-residential-units",
+    "quote": "or call (973)786-6688, ext. 4 or codeenforcement [at] andoverboroughnj.org (contact via email).",
+    "doc_date": "2026-10-04 (page fetched)",
+    "via": "page",
+    "verified": null
+   }
+  ],
+  "confidence": "low",
+  "notes": "Chapter 84 (Housing Standards, adopted 1970, amended 1986) was read in full through the ecode360 print view. It says no one may occupy a dwelling, as owner or tenant, until a certificate of occupancy is obtained, and that each certificate ends when the occupant leaves, so on paper every new occupancy (including after a sale) needs a new certificate. However, the Fees chapter (Chapter 66, read in full) lists no fee for this certificate, and the Borough website only describes the smoke/CO inspection as the sale requirement. Treat this as an old ordinance that may not be enforced; confirm by phone. Rental-only programs (Chapter 88 lead-based paint inspections of rental units, Chapter 89 rental liability insurance) are not resale requirements."
+ },
+ "fire_cert": {
+  "requirements": [
+   "Smoke alarms on each level, including basements, and outside each separate sleeping area (within 10 feet of each bedroom), all in working order",
+   "Smoke alarms listed to ANSI/UL 217; battery-only alarms must be 10-year sealed lithium units; AC-powered alarms from original construction may not be replaced with battery alarms",
+   "Smoke alarms older than 10 years (including AC-powered) must be replaced",
+   "Carbon monoxide alarm (UL 2034) in the immediate vicinity of each sleeping area, unless there is no attached garage and no fuel-burning appliance",
+   "If the home has a secondary power source (permanent generator, solar panels or battery storage), warning labels within 18 inches of the main electrical panel and the electric meter",
+   "Fire extinguisher in the kitchen (still mentioned on the Borough web page, but not on the November 2025 application form)"
+  ],
+  "authorities": [
+   {
+    "name": "Andover Borough (Code Enforcement / Housing office) smoke and carbon monoxide certification; fire code enforcing agency is the Sussex County Fire Marshal under a shared services agreement",
+    "type": "municipal_fire_bureau",
+    "area_served": "Entire borough",
+    "lead_time": "Inspectors are available by appointment only and need at least 48 hours' notice. The certificate expires in 6 months and cannot be transferred.",
+    "fees": [
+     {
+      "label": "Smoke and carbon monoxide certification, per dwelling",
+      "amount": "$75",
+      "quote": "Per Dwelling :$75",
+      "source_url": "https://www.andoverboroughnj.org/media/1761",
+      "verified": null
+     },
+     {
+      "label": "Re-inspection after a failed inspection",
+      "amount": "$40",
+      "quote": "Re-Inspection for Failure: $40",
+      "source_url": "https://www.andoverboroughnj.org/media/1761",
+      "verified": null
+     },
+     {
+      "label": "CSACMAPFEC fee (Borough code Section 66-4H)",
+      "amount": "$75",
+      "quote": "The fees for the issuance of a certificate of smoke alarm, carbon monoxide alarm and portable fire extinguisher compliance (CSACMAPFEC) pursuant to N.J.A.C. 5:70-2.3 shall be $75.",
+      "source_url": "https://ecode360.com/8925027",
+      "verified": null
+     }
+    ],
+    "how_to_apply": "Download the Borough's application for one and two family dwelling certification of smoke detector and carbon monoxide detector compliance, complete Part I, and return it to the Borough of Andover, 137 Main Street, Andover, NJ 07821 with the fee payable to Andover Borough. The fee must be paid before the inspection. Questions: (973) 786-6688 ext. 4 or codeenforcement@andoverboroughnj.org.",
+    "application_url": "https://www.andoverboroughnj.org/media/1761",
+    "department_url": "https://www.andoverboroughnj.org/construction-inspections/page/smoke-detector-inspections-application-process-residential-units",
+    "phone": "973-786-6688 ext. 4",
+    "email": "codeenforcement@andoverboroughnj.org",
+    "contact_name": "",
+    "contact_title": "Andover Borough Code Enforcement",
+    "evidence": [
+     {
+      "url": "https://www.andoverboroughnj.org/construction-inspections/page/smoke-detector-inspections-application-process-residential-units",
+      "quote": "Prior to selling a home or changing of tenants, a Certification of Smoke Detector & Carbon Monoxide Alarm Compliance Inspection must be performed.",
+      "doc_date": "2026-10-04 (page fetched)",
+      "via": "page",
+      "verified": null
+     },
+     {
+      "url": "https://www.andoverboroughnj.org/construction-inspections/page/smoke-detector-inspections-application-process-residential-units",
+      "quote": "The fee for the inspection must be paid prior to the inspection.",
+      "doc_date": "2026-10-04 (page fetched)",
+      "via": "page",
+      "verified": null
+     },
+     {
+      "url": "https://www.andoverboroughnj.org/construction-inspections/page/smoke-detector-inspections-application-process-residential-units",
+      "quote": "Inspectors are available by appointment only and require at minimum 48 hours’ notice.",
+      "doc_date": "2026-10-04 (page fetched)",
+      "via": "page",
+      "verified": null
+     },
+     {
+      "url": "https://www.andoverboroughnj.org/construction-inspections/page/smoke-detector-inspections-application-process-residential-units",
+      "quote": "A new law also requires a fire extinguisher be installed in the kitchen.",
+      "doc_date": "2026-10-04 (page fetched)",
+      "via": "page",
+      "verified": null
+     },
+     {
+      "url": "https://www.andoverboroughnj.org/media/1761",
+      "quote": "APPLICATION FOR ONE & TWO FAMILY DWELLING CERTIFICATION",
+      "doc_date": "2025-11-17 (PDF published)",
+      "via": "pdf",
+      "verified": null
+     },
+     {
+      "url": "https://www.andoverboroughnj.org/media/1761",
+      "quote": "FIRE OFFICIAL (EXPIRES IN 6 MONTHS. NON-TRANSFERABLE)",
+      "doc_date": "2025-11-17 (PDF published)",
+      "via": "pdf",
+      "verified": null
+     },
+     {
+      "url": "https://ecode360.com/8925027",
+      "quote": "The fee for reinspection shall be $40. The same fee shall apply for each additional reinspection. The property owner is responsible for applying for each inspection.",
+      "doc_date": "2024-08-12 (Ord. No. 2024-13)",
+      "via": "page",
+      "verified": null
+     },
+     {
+      "url": "https://ecode360.com/8925128",
+      "quote": "The local enforcing agency shall be the Sussex County Fire Marshal based on the terms of a shared services agreement",
+      "doc_date": "2026-10-04 (page fetched)",
+      "via": "page",
+      "verified": null
+     },
+     {
+      "url": "https://nj.gov/dca/dfs/pdf/ANNUAL%20REGISTRY/THIRD%20QUARTER%20LEA%20REGISTRY%202026.pdf",
+      "quote": "C Andover Borough",
+      "doc_date": "2026-07",
+      "via": "pdf",
+      "verified": true
+     },
+     {
+      "url": "https://www.nj.gov/dca/dfs/pdf/fire%20directory_county%20summary/fire_code_enforcement_director.pdf",
+      "quote": "LEAID: 1901-001 Andover Boro SMOKE DETECTOR COMPLIANCE Name: Andover Boro Housing Dept Enf Auth. County Addr: 137 Main St - Box 630 Andover NJ 07821 Fire Official Mark Snook Phone (973) 786-6688",
+      "doc_date": "2026-01 (survey date 1/12/2026)",
+      "via": "state_directory",
+      "verified": null
+     }
+    ],
+    "confidence": "high"
+   }
+  ],
+  "notes": "The Borough itself takes the application and fee and performs the inspection; the application is signed by the fire official. The NJ DCA fire directory lists the smoke detector compliance office as the Andover Boro Housing Dept, (973) 786-6688, and the fire official as Mark Snook (Sussex County, (973) 579-0380, msnook@sussexcountysheriff.com). The Borough web page still says a fire extinguisher is required in the kitchen, but the current application form (November 2025) does not list one, and state law (P.L.2025, c.19) removed the extinguisher from the sale certificate in February 2025; confirm with the office. The Borough's web pages and PDF sit behind a bot check, so they were read through a text reader; quotes are copied from that text. The application form link on the Borough page points to an older file (media/251) that could not be opened; the November 2025 form is media/1761."
+ },
+ "other_items": [],
+ "open_questions": [
+  "Does the Borough actually require a certificate of occupancy (Chapter 84) when a 1 or 2 family home is sold, or only the smoke/CO certificate? If so, what is the fee and who inspects?",
+  "Does the Borough still expect a kitchen fire extinguisher at the smoke/CO inspection after P.L.2025, c.19? The web page says yes, the current form does not mention one.",
+  "Is there a faster or higher fee for short-notice inspections? Only a flat $75 fee is published."
+ ],
+ "checked_at": "2026-10-04",
+ "verification": {
+  "fees": 3,
+  "fee_ok": 0,
+  "fee_bad": 0,
+  "fee_unchecked": 3,
+  "quotes": 15,
+  "q_ok": 1,
+  "q_bad": 0,
+  "q_unchecked": 14
+ }
+}

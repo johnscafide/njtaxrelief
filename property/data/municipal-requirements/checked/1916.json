@@ -1,0 +1,181 @@
+{
+ "municipality_code": "1916",
+ "municipality": "Ogdensburg Borough",
+ "county": "SUSSEX",
+ "checked_at": "2026-10-04",
+ "resale_co": {
+  "status": "required",
+  "name": "Certificate of Inspection Permitting Occupancy (Borough code, Building and Housing chapter)",
+  "issued_by": "Borough Construction Official or his agent (per the Borough code); the Borough's construction code is enforced by the NJ DCA Northern Regional Office",
+  "lead_time": "",
+  "valid_for": "",
+  "requirements": [
+   "Apply in writing to the Construction Official before the rental, transfer of title or occupancy of any dwelling house or dwelling unit",
+   "Inspection for compliance with all Borough ordinances, rules and regulations on use and occupancy of dwellings",
+   "Title may transfer after the application is filed, but no one may occupy the home until all items marked for correction are completed",
+   "Owner or agent must give a reasonable time for the inspection and have someone present to provide entry"
+  ],
+  "fees": [
+   {
+    "label": "Certificate of inspection permitting occupancy",
+    "amount": "$50",
+    "quote": "The fee for issuance of such certificate as provided for herein shall be $50.",
+    "source_url": "https://ecode360.com/36213494",
+    "verified": null
+   }
+  ],
+  "how_to_apply": "The Borough code says to apply in writing to the Construction Official. The Borough website gives no application form or process for this certificate, and construction code services are run by the NJ DCA Northern Regional Office (NRO.inspectionrequests@dca.nj.gov, 908-713-0722). Call the Borough office at 973-827-3444 to confirm who handles it and how to apply.",
+  "application_url": "",
+  "department_url": "https://ogdensburgnj.org/building-department-state-of-nj/",
+  "phone": "973-827-3444",
+  "email": "zoning@ogdensburgnj.gov",
+  "contact_name": "Joseph Setticase",
+  "contact_title": "Zoning Officer/Code Enforcement Officer",
+  "evidence": [
+   {
+    "url": "https://ecode360.com/36213494",
+    "quote": "Transfers of title may take place after application of a certificate of inspection for occupancy",
+    "doc_date": "1988 (Ord. No. 5-88)",
+    "via": "page",
+    "verified": null
+   },
+   {
+    "url": "https://ecode360.com/36213494",
+    "quote": "Prior to the rental, transfer of title or occupancy of any dwelling house or houses or any dwelling unit or units provided for in this section, application for certificate of inspection permitting occupancy shall be made in writing to the Construction Official or his agent of the Borough",
+    "doc_date": "1988 (Ord. No. 5-88)",
+    "via": "page",
+    "verified": null
+   },
+   {
+    "url": "https://ecode360.com/36213494",
+    "quote": "hereby relinquishes its jurisdiction of the administration and enforcement of the Uniform Construction Code and hereby transfers jurisdiction for the administration and enforcement of the Uniform Construction Code to the Department of Community Affairs of the State of New Jersey.",
+    "doc_date": "2012-02-27 (Ord. No. 1-12)",
+    "via": "page",
+    "verified": null
+   },
+   {
+    "url": "https://ogdensburgnj.org/building-department-state-of-nj/",
+    "quote": "All inspections requests must be made in writing by scanning the QR for the form site or following the link below.",
+    "doc_date": "2025-08-15 (effective date on page)",
+    "via": "page",
+    "verified": true
+   },
+   {
+    "url": "https://ogdensburgnj.org/departments/zoning-department/",
+    "quote": "Zoning Officer/Code Enforcement Officer Joseph Setticase",
+    "doc_date": "2026-10-04 (page fetched)",
+    "via": "page",
+    "verified": true
+   }
+  ],
+  "confidence": "medium",
+  "notes": "Borough code Section 11-5 (1976 Code Section 8-1.11, Ord. No. 5-88), read through the ecode360 library, requires a certificate of inspection permitting occupancy from the Construction Official before any transfer of title, rental or new occupancy of a dwelling, and makes real estate brokers and agents who take part in a violating transaction liable too. In 2012 (Ord. No. 1-12) the Borough handed construction code enforcement to the NJ DCA, and the Borough website does not mention this certificate, so it is unclear whether it is still issued or who issues it. Marked required because the code says so, with medium confidence; confirm by phone. The Zoning Officer's hours are Saturday 8 AM to 10 AM by appointment (email zoning@ogdensburgnj.gov)."
+ },
+ "fire_cert": {
+  "requirements": [
+   "Smoke detector on each level of the dwelling, including basements, excluding attic or crawl space (DCA form)",
+   "Smoke detector and carbon monoxide alarm outside each separate sleeping area, within 10 feet of bedrooms (DCA form)",
+   "All smoke detectors and CO alarms in working order; AC powered or interconnected alarms in homes built after January 1977 must be kept working (DCA form)",
+   "Fire extinguisher (form still lists it; dropped from the state requirement in February 2025 by P.L.2025, c.19)"
+  ],
+  "authorities": [
+   {
+    "name": "NJ Department of Community Affairs, Division of Fire Safety, Bureau of Fire Code Enforcement (state-enforced; State LEA for Ogdensburg)",
+    "type": "state_dca",
+    "area_served": "Entire borough",
+    "lead_time": "State fee tiers count business days between the Division's receipt and the closing date: more than ten business days for the lowest fee. If the change of occupant does not happen within 6 months, a new application is needed (per the DCA form).",
+    "fees": [
+     {
+      "label": "State smoke/CO certificate, closing more than ten business days after receipt (DCA form, rev. 10/02)",
+      "amount": "$35",
+      "quote": "If closing date above follows the date of receipt by the Division of Fire Safety by more than ten business days, the fee is $35",
+      "source_url": "https://www.nj.gov/dca/divisions/dfs/forms/bfce/certificationinlieu.pdf",
+      "verified": true
+     },
+     {
+      "label": "Received fewer than ten but more than four business days before closing",
+      "amount": "$70",
+      "quote": "if received fewer than ten but more than four business days before closing, $70",
+      "source_url": "https://www.nj.gov/dca/divisions/dfs/forms/bfce/certificationinlieu.pdf",
+      "verified": true
+     },
+     {
+      "label": "Received four business days or fewer before closing",
+      "amount": "$125",
+      "quote": "and if four business days or fewer, $125.",
+      "source_url": "https://www.nj.gov/dca/divisions/dfs/forms/bfce/certificationinlieu.pdf",
+      "verified": true
+     }
+    ],
+    "how_to_apply": "Apply online through the NJ DCA Fire Safety Service Portal (firesolutions.dca.nj.gov): choose Apply for an Application, then Apply for Smoke Certification, fill in the data and pay. Help: BFCECodeAdmin@dca.nj.gov or 609-633-6132. The older DCA paper form goes to PO Box 809, Trenton, NJ 08625-0809 with a check payable to Treasurer, State of New Jersey.",
+    "application_url": "https://firesolutions.dca.nj.gov/",
+    "department_url": "https://firesolutions.dca.nj.gov/ultra-fire-home/first-time-user-guide/",
+    "phone": "609-633-6132",
+    "email": "BFCECodeAdmin@dca.nj.gov",
+    "contact_name": "Louis Kilmer",
+    "contact_title": "Fire Official of record for Ogdensburg (NJ Division of Fire Safety), per the state directory",
+    "evidence": [
+     {
+      "url": "https://firesolutions.dca.nj.gov/ultra-fire-home/first-time-user-guide/",
+      "quote": "Click Apply for Smoke Certification",
+      "doc_date": "2026-10-04 (page fetched)",
+      "via": "page",
+      "verified": true
+     },
+     {
+      "url": "https://firesolutions.dca.nj.gov/ultra-fire-home/first-time-user-guide/",
+      "quote": "and residential smoke certificate inspections, please send a detailed email to",
+      "doc_date": "2026-10-04 (page fetched)",
+      "via": "page",
+      "verified": true
+     },
+     {
+      "url": "https://www.nj.gov/dca/divisions/dfs/forms/bfce/certificationinlieu.pdf",
+      "quote": "If the change of occupant does not occur within 6 months, a new application shall be required.",
+      "doc_date": "10/02 (form revision)",
+      "via": "pdf",
+      "verified": true
+     },
+     {
+      "url": "https://www.nj.gov/dca/dfs/pdf/fire%20directory_county%20summary/fire_code_enforcement_director.pdf",
+      "quote": "LEAID: 1916-999 Ogdensburg Boro ... Name: Ogdensburg Bldg Dept ... Enf Auth. State Addr: 14 Highland Av ... Fire Official Louis Kilmer Phone (973) 827-3860 ... NJ Division of Fire Safety PO Box 809 ... Phone (609) 633-6132",
+      "doc_date": "2019-02 (survey date 2/1/2019)",
+      "via": "state_directory",
+      "verified": null
+     },
+     {
+      "url": "https://nj.gov/dca/dfs/pdf/ANNUAL%20REGISTRY/THIRD%20QUARTER%20LEA%20REGISTRY%202026.pdf",
+      "quote": "S Ogdensburg Borough",
+      "doc_date": "2026-07",
+      "via": "pdf",
+      "verified": true
+     }
+    ],
+    "confidence": "medium"
+   }
+  ],
+  "notes": "Ogdensburg is state-enforced (LEA code S), so the smoke/CO certificate comes from the NJ Division of Fire Safety, not the Borough; the Borough fire chapter and website say nothing about it. The state directory entry is old (survey 2/1/2019) and lists the smoke compliance office as the Ogdensburg Building Department, 14 Highland Avenue, (973) 827-3860, which may be outdated. The only state fee schedule found is on the DCA paper form (revised 10/02), which may be out of date; the portal does not publish fees publicly. That form still lists a fire extinguisher, which state law (P.L.2025, c.19) removed in February 2025. Confirm current fees and process with the Division of Fire Safety."
+ },
+ "other_items": [
+  {
+   "label": "Final water reading",
+   "detail": "The Borough Water Billing Department (973-827-3444 x2) needs a Final Water Reading Request with the exact closing date, the seller's attorney contact and the buyer's name (required to move the account to the buyer). Call if the closing date changes or is cancelled. No fee is shown on the form.",
+   "source_url": "https://ogdensburgnj.org/wp-content/documents/forms/FINAL%20WATER%20READING%20REQUEST%20FORM.pdf"
+  }
+ ],
+ "open_questions": [
+  "Is the Borough's certificate of inspection permitting occupancy (Section 11-5, $50) still issued on resales, and by whom (NJ DCA Northern Regional Office or a Borough code officer)?",
+  "What is the current state fee for a smoke/CO certificate through the DCA portal, and the usual lead time for a state inspection in Ogdensburg?",
+  "Does the Borough Building Department (14 Highland Avenue) still take smoke certificate requests as the old state directory says?"
+ ],
+ "verification": {
+  "fees": 4,
+  "fee_ok": 3,
+  "fee_bad": 0,
+  "fee_unchecked": 1,
+  "quotes": 10,
+  "q_ok": 6,
+  "q_bad": 0,
+  "q_unchecked": 4
+ }
+}

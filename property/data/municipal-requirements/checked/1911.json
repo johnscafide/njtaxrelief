@@ -1,0 +1,272 @@
+{
+ "municipality_code": "1911",
+ "municipality": "Hardyston Township",
+ "county": "SUSSEX",
+ "resale_co": {
+  "status": "required",
+  "name": "Certificate of Continued Occupancy (CCO)",
+  "issued_by": "Hardyston Township Construction Official (Building Department)",
+  "lead_time": "Apply at least 21 calendar days before the anticipated date of occupancy",
+  "valid_for": "",
+  "requirements": [
+   "Visual inspection by the Construction Official (and subcode officials if needed) for hazardous conditions and outstanding violations of the Uniform Construction Code or Township ordinances",
+   "A current zoning permit covering the premises must be issued before the CCO",
+   "Smoke detectors must be installed (battery smoke detectors allowed in existing 1-2 family homes)",
+   "Inspections may be waived for transfers between immediate family members, or when the home is bought to be demolished and a demolition permit has been applied for"
+  ],
+  "fees": [
+   {
+    "label": "Certificate of continued use or occupancy (Code section 88-2F(7)(g))",
+    "amount": "$150",
+    "quote": "Certificates of continued use or occupancy: $150.",
+    "source_url": "https://ecode360.com/10247082",
+    "verified": null
+   },
+   {
+    "label": "Zoning permit for existing structures (Code section 88-3L(1)), needed for the CCO",
+    "amount": "$25",
+    "quote": "Zoning permit for existing structures: $25.",
+    "source_url": "https://ecode360.com/10247082",
+    "verified": null
+   },
+   {
+    "label": "Letter stating that no certificate of continued occupancy is required (Code section 88-2F(11))",
+    "amount": "$25",
+    "quote": "The fee for a letter stating that no certificate of continued occupancy is required shall be $25.",
+    "source_url": "https://ecode360.com/10247082",
+    "verified": null
+   }
+  ],
+  "how_to_apply": "The code says the owner, purchaser, tenant or occupier applies to the Construction Official on forms from the Building Department at least 21 calendar days before occupancy. No CCO form is posted online; contact the Building Department at the Hardyston Municipal Building, 149 Wheatsworth Road (Mon to Fri 8:30 am to 4:30 pm), 973-823-7020 ext. 9001, construction@hardyston.com. Permits and inspections can also be handled through the Township's Fast Track Gov portal.",
+  "application_url": "",
+  "department_url": "https://hardyston.com/?p=249",
+  "phone": "973-823-7020 ext. 9001",
+  "email": "construction@hardyston.com",
+  "contact_name": "Joe Butto",
+  "contact_title": "Construction Official",
+  "evidence": [
+   {
+    "url": "https://ecode360.com/10247010",
+    "quote": "Purpose. A certificate of continued occupancy shall be required upon the change of ownership or occupancy of any building or portion thereof in the Township of Hardyston.",
+    "doc_date": "2000-07-18 (Ord. No. 2000-14)",
+    "via": "page",
+    "verified": null
+   },
+   {
+    "url": "https://ecode360.com/10247010",
+    "quote": "The owner, purchaser, tenant or the occupier of any premises shall, prior to commencing occupancy, apply to the Township construction official for the issuance of a certificate of continued occupancy at least 21 calendar days prior to the anticipated date of occupancy upon forms obtained from the Building Department.",
+    "doc_date": "2000-07-18 (Ord. No. 2000-14)",
+    "via": "page",
+    "verified": null
+   },
+   {
+    "url": "https://ecode360.com/10247010",
+    "quote": "Upon satisfactory completion of inspections a certificate of continued occupancy may be issued upon receipt of the proper fee as set forth in this chapter and issuance of a current zoning permit covering the premises in question",
+    "doc_date": "2000-07-18",
+    "via": "page",
+    "verified": null
+   },
+   {
+    "url": "https://ecode360.com/10247082",
+    "quote": "Certificates of continued use or occupancy: $150.",
+    "doc_date": "2026-10-04 (page fetched)",
+    "via": "page",
+    "verified": null
+   },
+   {
+    "url": "https://hardyston.com/?p=249",
+    "quote": "Telephone: 973-823-7020 Ext 9001",
+    "doc_date": "2026-10-04 (page fetched)",
+    "via": "page",
+    "verified": true
+   },
+   {
+    "url": "https://hardyston.com/?p=249",
+    "quote": "General Email Inquiries: construction@hardyston.com",
+    "doc_date": "2026-10-04 (page fetched)",
+    "via": "page",
+    "verified": true
+   },
+   {
+    "url": "https://hardyston.com/?p=249",
+    "quote": "Construction Official: Joe Butto – jbutto@hardyston.com",
+    "doc_date": "2026-10-04 (page fetched)",
+    "via": "page",
+    "verified": true
+   }
+  ],
+  "confidence": "medium",
+  "notes": "Hardyston Code section 62-13 requires a Certificate of Continued Occupancy on any change of ownership or occupancy, and section 88-2 sets the fee at $150 (plus a $25 zoning permit for existing structures under section 88-3L). Code text was read through ecode360. The Township Building Department page does not mention a Hardyston CCO or post a form (it only posts resale CO forms for Franklin Borough, which Hardyston inspects under a shared service), so confirm the current process and fee by phone. Building Department staff on the page include Technical Assistant April Havrick (ahavrick@hardyston.com). Landlord identity registration is rental-only."
+ },
+ "fire_cert": {
+  "requirements": [
+   "Smoke alarms on each level of the premises and outside each separate sleeping area, per NFPA 72",
+   "Battery smoke alarms must be 10-year sealed units (ANSI/UL 217); hardwired alarms from original construction cannot be replaced with battery alarms, and hardwired interconnected alarms must stay that way",
+   "Carbon monoxide alarm (UL 2034) in the immediate vicinity of the sleeping areas, if the home has a fuel-burning device or attached garage",
+   "Warning label (for example 'CAUTION: MULTIPLE SOURCES OF POWER', not handwritten) within 18 inches of the main panel and meter if there is a permanent generator, solar panels or battery storage",
+   "All construction permits must be closed with the Construction Department",
+   "No portable fire extinguisher needed (the Bureau's regulations say it is no longer required)"
+  ],
+  "authorities": [
+   {
+    "name": "Hardyston Township Fire Prevention Bureau",
+    "type": "municipal_fire_bureau",
+    "area_served": "Entire township (the Bureau also serves Hamburg, Byram, Sparta, Sussex and Wantage)",
+    "lead_time": "Fee depends on business days before the closing: more than 10 business days for the lowest fee. After you submit, the Bureau calls or emails to schedule within a few business days. Regular inspections are Tuesdays and Wednesdays 9 to 11 AM; rush inspections (less than 4 days) can be scheduled outside those windows. The certificate (inspection) is good for 6 months.",
+    "fees": [
+     {
+      "label": "Smoke/CO certificate (CSACMAPFEC), more than 10 business days before closing",
+      "amount": "$100.00",
+      "quote": "$100.00 - More than 10 business days prior to closing",
+      "source_url": "https://hardystonfireprebureaunj.tylerportico.com/payments/billsearch/miscellaneous-payments/19de44bf-9a91-401b-94ca-25d7f3d306ab",
+      "verified": null
+     },
+     {
+      "label": "4 to 10 business days before closing",
+      "amount": "$150.00",
+      "quote": "$150.00 - 4-10 business days prior to closing",
+      "source_url": "https://hardystonfireprebureaunj.tylerportico.com/payments/billsearch/miscellaneous-payments/19de44bf-9a91-401b-94ca-25d7f3d306ab",
+      "verified": null
+     },
+     {
+      "label": "Less than 4 business days before closing",
+      "amount": "$200.00",
+      "quote": "$200.00 - Less than 4 business days prior to closing.",
+      "source_url": "https://hardystonfireprebureaunj.tylerportico.com/payments/billsearch/miscellaneous-payments/19de44bf-9a91-401b-94ca-25d7f3d306ab",
+      "verified": null
+     },
+     {
+      "label": "Re-inspection after a failed inspection",
+      "amount": "$50.00",
+      "quote": "If the inspection fails, a new inspection request form must be completed and a re-inspection fee of $50.00 remitted.",
+      "source_url": "https://hardystonfireprebureaunj.tylerportico.com/payments/billsearch/miscellaneous-payments/19de44bf-9a91-401b-94ca-25d7f3d306ab",
+      "verified": null
+     }
+    ],
+    "how_to_apply": "Apply and pay online with the Hardyston Fire Prevention Bureau's 'Hamburg and Hardyston - CSACMAPFEC (Residential Smoke Cert)' form (Tyler portal). Give owner, closing date, address, block and lot, and realtor details, and choose paper or email delivery. Paper applications can be picked up at the Construction Office window, Hardyston Municipal Building, 149 Wheatsworth Road. A failed inspection needs a new request form and the $50.00 re-inspection fee.",
+    "application_url": "https://hardystonfireprebureaunj.tylerportico.com/payments/billsearch/miscellaneous-payments/19de44bf-9a91-401b-94ca-25d7f3d306ab",
+    "department_url": "https://hardyston.com/directories/building-and-code-enforcement/fire-prevention-bureau/",
+    "phone": "973-823-7020 Option 7",
+    "email": "fireprevention@hardyston.com",
+    "contact_name": "Eric A. Stahl",
+    "contact_title": "Fire Marshal (direct: ext. 9356, estahl@hardyston.com)",
+    "evidence": [
+     {
+      "url": "https://hardyston.com/fees-applications/smoke-and-carbon-monoxide-alarm-compliance/",
+      "quote": "Hardyston – CSACMAPFEC (Residential Smoke Cert) Application",
+      "doc_date": "2026-10-04 (page fetched)",
+      "via": "page",
+      "verified": true
+     },
+     {
+      "url": "https://hardystonfireprebureaunj.tylerportico.com/payments/billsearch/miscellaneous-payments/19de44bf-9a91-401b-94ca-25d7f3d306ab",
+      "quote": "Hamburg and Hardyston - CSACMAPFEC (Residential Smoke Cert)",
+      "doc_date": "2026-10-04 (page fetched)",
+      "via": "page",
+      "verified": null
+     },
+     {
+      "url": "https://hardystonfireprebureaunj.tylerportico.com/payments/billsearch/miscellaneous-payments/19de44bf-9a91-401b-94ca-25d7f3d306ab",
+      "quote": "Inspections are good for 6 months.",
+      "doc_date": "2026-10-04 (page fetched)",
+      "via": "page",
+      "verified": null
+     },
+     {
+      "url": "https://hardystonfireprebureaunj.tylerportico.com/payments/billsearch/miscellaneous-payments/19de44bf-9a91-401b-94ca-25d7f3d306ab",
+      "quote": "Upon submission one of our representatives will contact you by phone or email to schedule the inspection within a few business days.",
+      "doc_date": "2026-10-04 (page fetched)",
+      "via": "page",
+      "verified": null
+     },
+     {
+      "url": "https://hardystonfireprebureaunj.tylerportico.com/payments/billsearch/miscellaneous-payments/19de44bf-9a91-401b-94ca-25d7f3d306ab",
+      "quote": "Non-Rushed Inspections (more than 5 days) are scheduled on Tuesdays and Wednesdays between the window of 9AM-11AM",
+      "doc_date": "2026-10-04 (page fetched)",
+      "via": "page",
+      "verified": null
+     },
+     {
+      "url": "https://hardyston.com/wp-content/documents/forms/Regulations%20-%20CSACMAPFEC%20(Residential%20Smoke%20Cert).pdf",
+      "quote": "All Construction permits shall be closed with the Construction Department.",
+      "doc_date": "2026-10-04 (page fetched)",
+      "via": "pdf",
+      "verified": true
+     },
+     {
+      "url": "https://hardyston.com/wp-content/documents/forms/Regulations%20-%20CSACMAPFEC%20(Residential%20Smoke%20Cert).pdf",
+      "quote": "A portable fire extinguisher is no longer required for this inspection.",
+      "doc_date": "2026-10-04 (page fetched)",
+      "via": "pdf",
+      "verified": true
+     },
+     {
+      "url": "https://hardyston.com/directories/building-and-code-enforcement/fire-prevention-bureau/",
+      "quote": "Fire Prevention Bureau (973) 823-7020 Option 7",
+      "doc_date": "2026-10-04 (page fetched)",
+      "via": "page",
+      "verified": true
+     },
+     {
+      "url": "https://hardyston.com/directories/building-and-code-enforcement/fire-prevention-bureau/",
+      "quote": "fireprevention@hardyston.com",
+      "doc_date": "2026-10-04 (page fetched)",
+      "via": "page",
+      "verified": true
+     },
+     {
+      "url": "https://hardyston.com/directories/building-and-code-enforcement/fire-prevention-bureau/",
+      "quote": "Eric A. Stahl (973) 823-7020 Extension 9356",
+      "doc_date": "2026-10-04 (page fetched)",
+      "via": "page",
+      "verified": true
+     },
+     {
+      "url": "https://www.nj.gov/dca/dfs/pdf/fire%20directory_county%20summary/fire_code_enforcement_director.pdf",
+      "quote": "LEAID: 1911-001 Hardyston Twp SMOKE DETECTOR COMPLIANCE Name: Hardyston Twp Fire Prev Enf Auth. Municipal Addr: 149 Wheatworth Rd - Ste A Hardyston NJ 07419 Fire Official Eric A Stahl Phone (973) 823-7020 ... Email firemarshal@hardyston.com",
+      "doc_date": "2026-06 (survey date 6/4/2026)",
+      "via": "state_directory",
+      "verified": null
+     },
+     {
+      "url": "https://nj.gov/dca/dfs/pdf/ANNUAL%20REGISTRY/THIRD%20QUARTER%20LEA%20REGISTRY%202026.pdf",
+      "quote": "M Hardyston Township",
+      "doc_date": "2026-07",
+      "via": "pdf",
+      "verified": true
+     }
+    ],
+    "confidence": "high"
+   }
+  ],
+  "notes": "The same online form and fee schedule cover Hamburg and Hardyston. The Bureau's regulations and form say a portable fire extinguisher is no longer required (P.L.2025, c.19). The state directory lists firemarshal@hardyston.com; the Township page lists fireprevention@hardyston.com for the Bureau and estahl@hardyston.com for the Fire Marshal. The CCO section of the code also says no CO or CCO is issued without smoke detectors."
+ },
+ "other_items": [
+  {
+   "label": "Zoning permit for existing structures",
+   "detail": "The Certificate of Continued Occupancy is issued only with a current zoning permit covering the premises (Code section 62-13 and 185-85); the fee for a zoning permit for existing structures is $25.",
+   "source_url": "https://ecode360.com/10247010"
+  },
+  {
+   "label": "Open construction permits",
+   "detail": "The Fire Prevention Bureau requires all construction permits to be closed with the Construction Department for the smoke/CO certificate.",
+   "source_url": "https://hardyston.com/wp-content/documents/forms/Regulations%20-%20CSACMAPFEC%20(Residential%20Smoke%20Cert).pdf"
+  }
+ ],
+ "open_questions": [
+  "Is the Certificate of Continued Occupancy (Code section 62-13, $150) still enforced for 1-2 family resales? No form or web page for it was found.",
+  "Is the zoning permit for existing structures ($25) applied for separately from the CCO, and who issues it?",
+  "How long does the CCO take to schedule and how long is it valid?"
+ ],
+ "checked_at": "2026-10-04",
+ "verification": {
+  "fees": 7,
+  "fee_ok": 0,
+  "fee_bad": 0,
+  "fee_unchecked": 7,
+  "quotes": 19,
+  "q_ok": 10,
+  "q_bad": 0,
+  "q_unchecked": 9
+ }
+}
