@@ -138,7 +138,7 @@ jobs:
           name: staging-stripe-billing-evidence
           path: billing-staging-evidence
           if-no-files-found: warn
-          retention-days: 30
+          retention-days: 14
 
       - name: Return staging enrollment to closed
         if: always()

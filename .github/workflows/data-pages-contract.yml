@@ -59,4 +59,5 @@ jobs:
         with:
           name: data-pages-evidence
           path: data-pages-evidence
+          retention-days: 7
           if-no-files-found: warn

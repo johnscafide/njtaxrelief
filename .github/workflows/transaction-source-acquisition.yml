@@ -83,7 +83,7 @@ jobs:
         with:
           name: transaction-municipal-sources-${{ github.run_id }}
           path: ${{ runner.temp }}/municipal-source-discovery.json
-          retention-days: 30
+          retention-days: 14
           if-no-files-found: warn
 
   county-record-source-discovery:
@@ -107,5 +107,5 @@ jobs:
         with:
           name: transaction-county-record-sources-${{ github.run_id }}
           path: ${{ runner.temp }}/county-record-source-discovery.json
-          retention-days: 30
+          retention-days: 14
           if-no-files-found: warn

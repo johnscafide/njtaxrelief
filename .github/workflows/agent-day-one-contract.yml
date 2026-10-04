@@ -62,4 +62,5 @@ jobs:
         with:
           name: agent-fixture-evidence
           path: agent-fixture-evidence
+          retention-days: 7
           if-no-files-found: warn

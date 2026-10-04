@@ -27,4 +27,4 @@ jobs:
           name: developer-release-gate-evidence
           path: developer-release-gate-evidence.json
           if-no-files-found: error
-          retention-days: 30
+          retention-days: 14

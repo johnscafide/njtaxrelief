@@ -28,7 +28,7 @@ jobs:
         uses: actions/upload-artifact@v4
         with:
           name: nj-authoritative-source-monitor
-          retention-days: 90
+          retention-days: 14
           path: |
             property/data/source-monitor-report.json
             property/data/source-watch-history.json

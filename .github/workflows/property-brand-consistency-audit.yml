@@ -34,4 +34,5 @@ jobs:
         with:
           name: brand-consistency-report
           path: brand-consistency-report.md
+          retention-days: 7
           if-no-files-found: warn

@@ -40,4 +40,4 @@ jobs:
           name: authenticated-release-gate-evidence
           path: release-gate-evidence.json
           if-no-files-found: warn
-          retention-days: 30
+          retention-days: 14

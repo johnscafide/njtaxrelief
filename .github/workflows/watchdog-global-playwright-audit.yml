@@ -99,4 +99,4 @@ jobs:
           name: watchdog-global-playwright-${{ github.run_id }}
           path: global-visual-audit-evidence
           if-no-files-found: warn
-          retention-days: 30
+          retention-days: 3

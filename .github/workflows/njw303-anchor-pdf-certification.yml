@@ -55,4 +55,5 @@ jobs:
         with:
           name: njw303-certified-pdf-renders
           path: artifacts/njw303-pdf-cert
+          retention-days: 7
           if-no-files-found: error
